@@ -1,4 +1,4 @@
-gforge (3.0-6+8) unstable; urgency=low
+gforge (3.0-6+9) unstable; urgency=low
 
   * [Roland] Added 20030822.sql.
   * [Roland] Added scripts to generate a /var/lib/gforge/etc/httpd.vhosts
@@ -21,8 +21,12 @@ gforge (3.0-6+8) unstable; urgency=low
   * [Roland] install-apache.sh: do not exit with an error if Apache fails
     to start, so that people without an SSL certificate will still be able
     to install.
+  * [Roland] Fixed db-upgrade.pl.  It seems Postgresql feels free to
+    change the return type of a function when it's used by a trigger, but
+    doesn't allow the user to change that return type afterwards.  Fix:
+    drop trigger and function, re-create function and trigger.
 
- -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 12:20:37 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 13:18:00 +0200
 
 gforge (3.0-6) unstable; urgency=low
 

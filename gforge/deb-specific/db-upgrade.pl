@@ -1258,11 +1258,11 @@ END;
 	$dbh->commit () ;
     }
 
+
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+31" ;
     if (is_lesser $version, $target) {
 	debug "Upgrading with 20030513.sql" ;
-
 
 	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030513.sql") } ;
 	foreach my $s (@reqlist) {
@@ -1279,6 +1279,7 @@ END;
 	$dbh->commit () ;
     }
 
+
     $version = &get_db_version ;
     $target = "3.0-1" ;
     if (is_lesser $version, $target) {
@@ -1289,13 +1290,18 @@ END;
 	$dbh->commit () ;
     }
 
+
     $version = &get_db_version ;
     $target = "3.0-7" ;
     if (is_lesser $version, $target) {
 	debug "Upgrading with 20030822.sql" ;
 
-
-	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030822.sql") } ;
+	@reqlist = (
+		    "DROP TRIGGER artifactgroup_update_trig ON artifact",
+		    "DROP FUNCTION artifactgroup_update_agg ()",
+		    @{ &parse_sql_file ("/usr/lib/gforge/db/20030822.sql") },
+		    "CREATE TRIGGER artifactgroup_update_trig AFTER UPDATE ON artifact FOR EACH ROW EXECUTE PROCEDURE artifactgroup_update_agg()",
+		    ) ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
