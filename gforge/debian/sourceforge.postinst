@@ -1,10 +1,10 @@
 #! /bin/sh
-# postinst script for gforge
+# postinst script for sourceforge
 #
 # see: dh_installdeb(1)
 
 set -e
-#set -x				# Be verbose, be very verbose.
+# set -x				# Be verbose, be very verbose.
 
 # summary of how this script can be called:
 #        * <postinst> `configure' <most-recently-configured-version>
@@ -23,14 +23,12 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+. /usr/share/debconf/confmodule
+
 case "$1" in
     configure)
-    	[ -f /usr/lib/gforge-sourceforge-transition/bin/install-db.sh ] && /usr/lib/gforge-sourceforge-transition/bin/install-db.sh dump /var/lib/sourceforge/sf_dump_for_gforge sourceforge
-	[ -f /var/lib/sourceforge/sf_dump_for_gforge ] && echo "Adjusting /var/lib/sourceforge/sf_dump_for_gforge" && perl -pi -e "s/connect - sourceforge/connect - gforge/" /var/lib/sourceforge/sf_dump_for_gforge
-    	[ -d /var/lib/sourceforge ] && echo "Renaming dir /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
-    	[ -h /var/lib/sourceforge ] && echo "Renaming symlink /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
-	[ -f /etc/sourceforge/sourceforge.conf ] && echo "Copying config file" && cp /etc/sourceforge/sourceforge.conf /etc/gforge/gforge.conf
-	[ -h /cvsroot ] && echo "Relinking symlink /cvsroot"  && rm -f /cvsroot && ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
+	db_input medium gforge/sourceforge_empty_package
+	db_stop
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
