@@ -51,13 +51,13 @@ function addProjectRepositories() {
 			$readersContent = '';
 			$passwdContent = '';
 			if(db_result($res,$i,'enable_anoncvs')) {
-				$repositoryMode = 2775;
+				$repositoryMode = 02775;
 				if (db_result($res,$i,'enable_pserver')) {
 					$readersContent = 'anonymous::anonymous';
 					$passwdContent = 'anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonymous';
 				}
 			} else {
-				$repositoryMode = 2770;
+				$repositoryMode = 02770;
 			}
 			chmod($repositoryPath, $repositoryMode);
 			writeFile($repositoryPath.'/CVSROOT/writers', $writersContent);
