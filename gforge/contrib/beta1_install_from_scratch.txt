@@ -1,0 +1,195 @@
+This is Ron's attempt to install gforge (and all its components) from scratch.
+You will notice that I use no rpm's, this is for security and ease of
+updating.  With so many components it is hard for me to keep track of what is
+what, so I start from scratch and then I see where everything is.  This is
+Redhat 8 and Gforge beta 1.  I will update this for mailman whenever I finally
+know how to do it myself.  Also, I am working on cvs/unix admin scripts, and I
+will add those in here also when they are finished.  You should still read the
+document on how to install located at
+
+http://gforge.org/docman/view.php/1/34/gforge.pdf
+
+It is being updated as of (March 6, 2003), so if something doesn't work,
+search the board.  If you find something wrong please tell me.
+
+1) Downloads
+	a) postgres 7.3.2 -- (for the database)
+		ftp://ftp.at.postgresql.org/db/www.postgresql.org/pub/source/v7.3.2/postgresql-7.3.2.tar.gz
+	b) apache 2.0.44 -- (for the webserver)
+		http://apache.towardex.com/httpd/httpd-2.0.44.tar.gz
+	c) php 4.3.1 -- (for the programming language)
+		http://www.php.net/get/php-4.3.1.tar.gz/from/us3.php.net/mirror
+	d) gzip 1.1.4 -- (for php, needed by gd library, not sure why)
+		ftp://swrinde.nde.swri.edu/pub/png/src/zlib-1.1.4.tar.gz
+	e) openssl/mod_ssl 
+		I have not installed these yet as I am still figuring how they work, my site works fine so far without them
+	f) qmail
+		When I have mailman figured out I will add that also, for now do what I did and follow
+		http://www.lifewithqmail.org/lwq.html
+	g) jabber
+		when mailman is figured out i will add this also
+	h) gforge3beta1 -- (for gforge)
+		http://gforge.org/download.php/32/pre9-b1.diff.bz2
+2) Install
+	a) su to root, move all files to /usr/local/src, then change directory to /usr/local/src
+	b) gunzip *.gz
+	c) tar xvf all the tar files (can copy and past below)
+		tar xvf postgresql-7.3.2.tar
+		tar xvf httpd-2.0.44.tar
+		tar xvf php-4.3.1.tar
+		tar xvf zlib-1.1.4
+		bzip2 -dc gforge-3.0b1.tar.bz2 | tar xvf -
+	d) cd httpd-2.0.44
+		./configure --prefix=/usr/local/apache --enable-so
+		./make
+		./make install
+		edit /usr/local/apache/conf/httpd.conf to listen to your name/ip and port
+START AFTER THIS LINE ===========================================
+#!/bin/bash
+. /etc/rc.d/init.d/functions
+case "$1" in
+        start)
+                echo "Starting httpd daemon..."
+                /usr/local/apache/bin/apachectl start
+                ;;
+
+        stop)
+                echo "Stopping httpd daemon..."
+                /usr/local/apache/bin/apachectl stop
+                ;;
+
+        restart)
+                $0 stop
+                sleep 1
+                $0 start
+                ;;
+
+        status)
+                /usr/local/apache/bin/apachectl status
+                ;;
+
+        *)
+                echo "Usage: $0 {start|stop|restart|status}"
+                exit 1
+                ;;
+esac
+END BEFORE THIS LINE=============================================
+		chmod 700 httpd 
+		If you want to make apache(httpd) start and stop on boot and shutdown add this
+		cd ../rc3.d
+		ln -s ../init.d/S68httpd
+		ln -s ../init.d/K68httpd
+		cd ../rc5.d
+		ln -s ../init.d/S68httpd
+		ln -s ../init.d/K68httpd
+	
+		You can double check that the start and stop script works by 
+		cd /etc/init.d
+		./httpd restart
+		cd ..
+	e) cd postgresql-7.3.2
+		./configure
+		gmake
+		su
+		gmake install
+		/usr/sbin/adduser postgres
+		mkdir /usr/local/pgsql/data
+		chown postgres /usr/local/pgsql/data
+		su - postgres
+		/usr/local/pgsql/bin/initdb -D /usr/local/pgsql/data
+		/usr/local/pgsql/bin/postmaster -D /usr/local/pgsql/data >logfile 2>&1 &
+		/usr/local/pgsql/bin/createdb test
+		/usr/local/pgsql/bin/psql test
+		ps wuxa | grep postmaster; and kill -9 the pid
+		cd data
+
+		edit pg_hba.conf (mine looks like this, at the bottom, I tried to use my hostname for the the ip, but it wouldn't work for some reason)
+local   all         all                                             trust
+host    all         all         192.168.1.111       255.255.255.0   trust
+host    all         all         127.0.0.1         255.255.255.255   trust
+		type exit (makes you root again)
+		cd /etc/init.d
+		create a file called postgres (here is mine)
+START AFTER THIS LINE====================================
+#!/bin/bash
+. /etc/rc.d/init.d/functions
+case "$1" in
+        start)
+                echo "Starting PostgreSQL daemon..."
+                su - postgres -c '/usr/local/pgsql/bin/pg_ctl start -W -D /usr/local/pgsql/data \
+                               -l /usr/local/pgsql/data/logfile -o "-i -h laptop.unigeek.com"'
+                ;;
+
+        stop)
+                echo "Stopping PostgreSQL daemon..."
+                /usr/local/pgsql/bin/pg_ctl stop -m smart -D /usr/local/pgsql/data
+                ;;
+
+        restart)
+                $0 stop
+                sleep 1
+                $0 start
+                ;;
+
+        status)
+                /usr/local/pgsql/bin/pg_ctl status -D /usr/local/pgsql/data
+                ;;
+
+        *)
+                echo "Usage: $0 {start|stop|restart|status}"
+                exit 1
+                ;;
+esac
+END BEFORE THIS LINE =======================================
+		chmod 700 postgres
+		If you want to make postgres start and stop on boot and shutdown add this
+		cd ../rc3.d
+		ln -s ../init.d/S67postgres
+		ln -s ../init.d/K67postgres
+		cd ../rc5.d
+		ln -s ../init.d/S67postgres
+		ln -s ../init.d/K67postgres
+	
+		You can double check that the start and stop script works by 
+		cd /etc/init.d
+		./postgres restart
+			
+	f) cd zlib-1.1.4
+		./configure
+		make test
+		make install
+		cd ..
+	g) cd php-4.3.1
+		./configure --with-apxs2=/usr/local/apache/bin/apxs
+			--with-gd
+			--with-pgsql
+			--with-jpeg-dir=/usr/lib
+			--with-zlib=/usr/local/lib
+		make
+		make install
+		cd ..
+		cp /usr/local/src/php-4.3.1/php.ini-dist /usr/local/lib/php.ini
+		You need to edit /usr/local/apache/conf/httpd.conf so php will work, add these lines
+		LoadModule php4_module modules/libphp4.so
+		AddType application/x-httpd-php .php	
+		/etc/init.d/httpd restart
+		If you want to test do this,
+		cd /usr/local/apache/htdocs
+		vi index.php (copy the following)
+		<?php
+			phpinfo();
+		?>
+		chmod 755 index.php
+		Open a broswer and goto http://myurlorip.com/index.php
+	h) follow install instructions for gforge 
+		http://gforge.org/docman/view.php/1/34/gforge.pdf
+		WARNING -- the current document is not up to date, when you add the gforge user is postgres you may need
+		to make him/her a superuser in postgres
+		* su - postgres
+		* psql -U postgres
+		* update pg_shadow set usesuper = 't' where usename = 'gforge';
+		This will allow you to update tracker statistics, I have not tried this yet, but I know it didn't
+		work before.
+3) Test
+	go to the website
+	http://gforge.org/docman/view.php/1/34/gforge.pdf
