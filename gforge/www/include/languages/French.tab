@@ -2768,6 +2768,7 @@ tracker_admin	category_name	Nom de catégorie
 tracker_admin	category_updated	Categorie mise à jour
 tracker_admin	choose_datatype	Choisissez un outil de suivi et vous pourrez en modifier les préférences, catégories, groupes, membres, et permissions
 tracker_admin	delete	Supprimer
+tracker_admin	delete_extrafieldwarning	Vous êtes sur le point de supprimer irrémédiablement ce champ supplémentaire !
 tracker_admin	delete_warning	Vous êtes sur le point de supprimer irrémédiablement cet outil de suivi et tout son contenu !
 tracker_admin	deleted	Supprimé avec succès
 tracker_admin	error_inserting	Erreur d'insertion
@@ -2822,6 +2823,8 @@ tracker_admin_build_boxes	box_sizeattr1	Taille du champ texte/Lignes de la zone 
 tracker_admin_build_boxes	box_sizeattr2	Longeur maximale du champ texte/Colonne de la zone de texte
 tracker_admin_build_boxes	box_sizerows	Les champs texte et les zones de textes ont besoin d'avoir une taille/longueur maximale et le nombre de lignes/colonnes respectivement définis.
 tracker_admin_build_boxes	box_type	Type de champ supplémentaire
+tracker_admin_build_boxes	box_type_checkbox	Cases à cocher
+tracker_admin_build_boxes	box_type_multiselect	Liste déroulante à sélection multiple
 tracker_admin_build_boxes	box_type_radio	Boutons radio
 tracker_admin_build_boxes	box_type_select	Liste déroulante
 tracker_admin_build_boxes	box_type_text	Champ texte
@@ -2832,10 +2835,13 @@ tracker_admin_build_boxes	choice_change_warning	Il n'est pas recommandé que vou
 tracker_admin_build_boxes	choice_inserted	Elément ajouté
 tracker_admin_build_boxes	choice_updated		Elément mis à jour
 tracker_admin_build_boxes	choice_warning	Une fois que vous avez ajouté un nouvel élément, il ne peut être supprimé
+tracker_admin_build_boxes	copy	Copier
+tracker_admin_build_boxes	delete	Supprimer
 tracker_admin_build_boxes	edit	Modifier
 tracker_admin_build_boxes	error_inserting_box	Erreur lors de l'ajout d'un champ
 tracker_admin_build_boxes	error_inserting_choice	Erreur lors de l'ajout d'un élément
 tracker_admin_build_boxes	error_updating	Erreur lors de la mise à jour du nom du champ
+tracker_admin_build_boxes	extrafield_deleted	Champ supplémentaire supprimé
 tracker_admin_build_boxes	no_box	Vous n'avez pas défini de champ.
 tracker_admin_build_boxes	no_choice	Vous n'avez pas défini d'élément.
 tracker_admin_build_boxes	opt_add_name	Ajouter un nouvel élément
