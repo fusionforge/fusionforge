@@ -33,8 +33,8 @@ but it does nothing
 
 HOW DO I MAKE A THEME?
 ---------------------
-A simple one is the savannah one that just change some colors
-The big work is to make new icons found in www/themes/forged/images/
+A simple theme is the savannah one that just change some colors
+The big work is to make new icons found in www/themes/savannah/images/
 
 class Theme extends Layout {
 
