@@ -1,3 +1,9 @@
+gforge-plugin-ldapextauth (4.0-1) unstable; urgency=low
+
+  * [Christian] Align version with gforge 
+
+ -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 14:00:31 +0100
+
 gforge-plugin-ldapextauth (1.0-3) unstable; urgency=low
 
   * Added Active Directory Support

@@ -1,9 +1,15 @@
+gforge-plugin-scmcvs (4.0-1) unstable; urgency=low
+
+  * [Christian] Align version with gforge 
+
+ -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:57:56 +0100
+
 gforge-plugin-scmcvs (0.1-22) unstable; urgency=low
 
   * Added dependency on cvs.
   * Added missing dirs.
 
- -- Roland Mas <lolando@debian.org>  Sun, 28 Nov 2004 15:02:23 +0100
+ -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 00:55:10 +0100
 
 gforge-plugin-scmcvs (0.1-21) unstable; urgency=low
 
