@@ -378,6 +378,7 @@ case "$1" in
 			echo cn=Replicator,$sys_ldap_base_dn
 			echo cn=SF_robot,$sys_ldap_base_dn
 		    } | sort -u # ...then uniquify that list
+		}
 		get_our_entries | ldapdelete -D "cn=admin,$sys_ldap_base_dn" -x -w"$secret" -c > /dev/null 2>&1 || true
 		;;
 	reset)
