@@ -11,8 +11,13 @@ sourceforge (2.6-0+0+) unstable; urgency=low
     are more readable (well, they are more readable to me), and work
     approximately the same way.  Added a install-skel.sh template for
     future such scripts.
+  * Put utils/include.pl utils/sql2ldif.pl utils/underworld-dummy/ssh_dump.pl
+    of 2.5 as 2.6 scripts, sql2ldif will probably have to be re-seen
+  * Added sf-2.6-complete.sql script
+  * Cleaned debian/rules 
+  * Added path in apache template
 
- -- Roland Mas <lolando@debian.org>  Fri,  2 Nov 2001 19:45:41 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Sat,  3 Nov 2001 11:09:12 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 
