@@ -152,7 +152,6 @@ if (user_isloggedin()) {
 
 require_once('www/include/BaseLanguage.class');
 
-/*
 if (!$sys_lang) {
 	$sys_lang="English";
 }
@@ -180,7 +179,6 @@ if (user_isloggedin()) {
 	$Language=new BaseLanguage();
 	$Language->loadLanguage($classname);
 }
-*/
 
 setlocale (LC_TIME, $Language->getText('system','locale'));
 $sys_strftimefmt = $Language->getText('system','strftimefmt');
