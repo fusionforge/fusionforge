@@ -165,8 +165,8 @@ load_ldap(){
 		# -r Replace existing values by default.
 		# add with -r don't modify and modify don't add so i do add and modify
 	
-		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w$secret -f $tmpldif 
-		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w$secret -f $tmpldif 
+		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif 
+		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif 
 		rm -f $tmpldif
 	else
 		echo "WARNING: Can't load ldap table without /etc/slapd.secret file"
@@ -199,8 +199,7 @@ objectCLass: organizationalUnit
 FIN
 }
 
-# Setup SF_robot Passwd
-setup_robot() {
+setup_vars() {
 	sys_ldap_base_dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
 	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
@@ -209,13 +208,18 @@ setup_robot() {
 	#echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
 	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/local.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
-	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret)
-	cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
+	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
+	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
 	#echo "=====>$cryptedpasswd"
+}
+
+# Setup SF_robot Passwd
+setup_robot() {
+    setup_vars
 
 # The first accunt is only used in a multiserver SF
 echo "Adding robot accounts"
-ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w$secret <<-FIN
+ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
 dn: cn=Replicator,$sys_ldap_base_dn
 cn: Replicator
 sn: Replicator the Robot
@@ -234,7 +238,7 @@ userPassword: {crypt}x
 FIN
 
 echo "Changing SF_robot passwd using admin account"
-	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w$secret <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
@@ -245,7 +249,7 @@ FIN
 # Test!
 #naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 echo "Changing dummy cn using SF_robot account"
-	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w$secret <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
@@ -271,12 +275,13 @@ else
 				# This initialize LDAP
 				#
 				dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
+				setup_vars
 				# This secret file comes from libpam-ldap
 				# It is probably the value asked 
 				# by slapd install. If no value is supplied
 				# it will be prompted
-				[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret)
-				[ -f /etc/ldap.secret ] || secret=""
+				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=""
+				# [ -f /etc/ldap.secret ] || secret=""
 
 				echo "Modifying /etc/ldap/slapd.conf"
 				modify_slapd $dn
@@ -285,7 +290,7 @@ else
 				echo "Modifying /etc/nsswitch.conf"
 				modify_nsswitch
 				echo "Load ldap"
-				load_ldap $dn $secret
+				load_ldap $dn "$secret"
 				# Restarting ldap 
 				/etc/init.d/slapd restart
 				echo "Setup SF_robot account"
@@ -293,8 +298,10 @@ else
 				;;
 			update)
 				dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
-				[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && load_ldap $dn $secret &>/dev/null
-				[ -f /etc/ldap.secret ] || load_ldap $dn $secret
+				setup_vars
+				load_ldap $dn "$secret"
+				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && load_ldap $dn $secret &>/dev/null
+				# [ -f /etc/ldap.secret ] || load_ldap $dn $secret
 				;;
 			purge)
 				echo "Purging /etc/ldap/slapd.conf"
@@ -311,7 +318,8 @@ else
 				ldapsearch -x -b "$naming_context" '(objectclass=*)' 
 				;;
 			clean)
-				[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) 
+			        setup_vars
+				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) 
 				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 				# This should work with SASL auth if i find how to make it work
 				# See saslpasswd, /usr/share/doc/libsasl7/sysadmin.html
@@ -321,13 +329,14 @@ else
 				for target in ou=Aliases ou=Hosts ou=Roaming ou=Group ou=cvsGroup cn=SF_robot cn=Replicator ou=People 
 				do 
 					echo "Destroying LDAP database $target, $naming_context ..."
-					ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w$secret -r "$target, $naming_context"
+					ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -r "$target, $naming_context"
 				done
 				;;
 			init)
 				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-				[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
-				[ -f /etc/ldap.secret ] || secret=""
+				setup_vars
+				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
+				# [ -f /etc/ldap.secret ] || secret=""
 				print_ldif_default $naming_context $cryptedpasswd > /tmp/ldif$$ 
 				slapadd -l /tmp/ldif$$
 				rm -f /tmp/ldif$$
