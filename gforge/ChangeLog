@@ -1,5 +1,10 @@
 2003-03-02  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	Bug #218
+	* www/snippet/submit.php: comment out links to 'Suggest New
+	Language' and 'Suggest new category', marked with a FIXME
+	now, until we can figure out where they really should go.
+
 	* www/new/index.php: valid XHTML 1.0 Transitional.
 
 	* www/include/languages/Base.tab(newe:notes_changes): use

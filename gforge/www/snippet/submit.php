@@ -87,24 +87,24 @@ if (session_loggedin()) {
 	<td><strong><?php echo $Language->getText('snippet_submit','language'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_language'); ?></a>
+		<!-- FIXME: Where should this link go to? <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_language'); ?></a> -->
 	</td>
 
 	<td><strong><?php echo $Language->getText('snippet_submit','category'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
                 <br />
-                <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_category'); ?></a>
+                <!-- FIXME: Where should this link go to? <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_category'); ?></a> -->
 	</td>
 	</tr>
- 
+
 	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','version'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="version" size="10" maxlength="15" />
 	</td></tr>
-  
+
 	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','paste_the_code_here'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<textarea name="code" rows="30" cols="85" wrap="soft"></textarea>
 	</td></tr>
- 
+
 	<tr><td colspan="2" align="center">
 		<strong><?php echo $Language->getText('snippet_submit','make_sure_all_info'); ?></strong>
 		<br />
