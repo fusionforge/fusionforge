@@ -181,7 +181,7 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
 				$return .= ' selected="selection"';
 			}
 		}
-		$return .= '>'.$vals[$i].'</option>';
+		$return .= '>'.htmlspecialchars($vals[$i]).'</option>';
 	}
 	$return .= '
 		</select>';
@@ -234,7 +234,7 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 				$checked_found=true;
 				$return .= ' selected="selected"';
 			}
-			$return .= '>'.$texts[$i].'</option>';
+			$return .= '>'.htmlspecialchars($texts[$i]).'</option>';
 		}
 	}
 	//
