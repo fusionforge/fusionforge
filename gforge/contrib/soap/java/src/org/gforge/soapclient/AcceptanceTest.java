@@ -9,7 +9,19 @@ public class AcceptanceTest {
     private static final String PASSWD = "tomtom";
 
     public void run() throws Exception {
-        Client client = new Client("192.168.10.202", "othello");
+        Client client = new Client("hal", "othello");
+
+/*
+        System.out.println("client.echoStruct() = " + client.echoStruct());
+        System.out.println("client.echoStructArray() = " + client.echoStructArray()[0]);
+        System.out.println("client.echoStructArray() = " + client.echoStructArray()[1]);
+*/
+        SiteStatsDataPoint[] stats = client.getSiteStats();
+        for (int i=0;i<stats.length; i++) {
+            System.out.println(stats[i]);
+        }
+        if (true) return;
+
 
         System.out.println("projects = " + client.getNumberOfHostedProjects());
         System.out.println("users = " + client.getNumberOfActiveUsers());
@@ -19,7 +31,6 @@ public class AcceptanceTest {
             System.out.println("projectNames = " + projectNames[i]);
         }
 
-        if (true) return;
 
         System.out.print("Testing: login/logout...");
         testLogin(client);
@@ -89,8 +100,12 @@ public class AcceptanceTest {
             // cool
         }
     }
-     public static void main(String[] args) throws Exception {
-         AcceptanceTest test = new  AcceptanceTest();
-         test.run();
+     public static void main(String[] args) {
+         try {
+             AcceptanceTest test = new  AcceptanceTest();
+             test.run();
+         } catch (Exception e) {
+             e.printStackTrace();
+         }
     }
 }

@@ -3,6 +3,8 @@ package org.gforge.soapclient;
 import org.apache.axis.Constants;
 import org.apache.axis.client.Call;
 import org.apache.axis.client.Service;
+import org.apache.axis.encoding.ser.ArrayDeserializerFactory;
+import org.apache.axis.encoding.ser.ArraySerializerFactory;
 import org.apache.axis.encoding.ser.BeanDeserializerFactory;
 import org.apache.axis.encoding.ser.BeanSerializerFactory;
 
@@ -18,6 +20,7 @@ public class Client {
     private String sessionKey;
     private String group;
 
+    private QName siteStats;
     private QName activeUsers;
     private QName publicProjectNames;
     private QName hostedProjects;
@@ -38,16 +41,25 @@ public class Client {
         hostedProjects = new QName(this.server, "getNumberOfHostedProjects");
         activeUsers = new QName(this.server, "getNumberOfActiveUsers");
         publicProjectNames = new QName(this.server, "getPublicProjectNames");
+        siteStats = new QName(this.server, "getSiteStats");
 
         this.group = initialGroup;
         this.service = new Service();
 
         Call call = (Call)service.createCall();
+        call.setEncodingStyle(Constants.URI_DEFAULT_SOAP_ENC);
         call.registerTypeMapping(Bug.class, Bug.QNAME, new BeanSerializerFactory(Bug.class, Bug.QNAME), new BeanDeserializerFactory(Bug.class, Bug.QNAME));
+        call.registerTypeMapping(SiteStatsDataPoint.class, SiteStatsDataPoint.QNAME, new BeanSerializerFactory(SiteStatsDataPoint.class, SiteStatsDataPoint.QNAME), new BeanDeserializerFactory(SiteStatsDataPoint.class, SiteStatsDataPoint.QNAME));
     }
 
     public void switchToGroup(String newGroup) {
         this.group = newGroup;
+    }
+
+    public SiteStatsDataPoint[] getSiteStats() throws ServiceException, RemoteException {
+        Call call = createCallTo(siteStats);
+        call.setReturnType(SiteStatsDataPoint.QNAME, SiteStatsDataPoint[].class);
+        return (SiteStatsDataPoint[])call.invoke(new Object[] {});
     }
 
     public int getNumberOfHostedProjects() throws ServiceException, RemoteException {
@@ -125,3 +137,96 @@ public class Client {
     }
 
 }
+/*
+Some test code for future munging
+
+private QName echoStruct;
+private QName echoStructArray;
+
+echoStruct = new QName(this.server, "echoStruct");
+echoStructArray = new QName(this.server, "echoStructArray");
+
+
+call.registerTypeMapping(SOAPStruct.class, SOAPStruct.QNAME, new BeanSerializerFactory(SOAPStruct.class, SOAPStruct.QNAME), new BeanDeserializerFactory(SOAPStruct.class, SOAPStruct.QNAME));
+call.registerTypeMapping(ArrayOfSOAPStruct.class, ArrayOfSOAPStruct.QNAME, new ArraySerializerFactory(), new ArrayDeserializerFactory());
+
+public SOAPStruct echoStruct() throws ServiceException, RemoteException, SOAPException  {
+    Call call = createCallTo(echoStruct);
+    call.setReturnType(SOAPStruct.QNAME);
+    return (SOAPStruct)call.invoke(new Object[] {});
+}
+
+public SOAPStruct[] echoStructArray() throws ServiceException, RemoteException, SOAPException {
+    Call call = createCallTo(echoStructArray);
+    call.setReturnQName(ArrayOfSOAPStruct.QNAME);
+    return (SOAPStruct[])call.invoke(new Object[] {});
+}
+
+
+
+
+package org.gforge.soapclient;
+
+import javax.xml.namespace.QName;
+
+public class SOAPStruct {
+    public static final QName QNAME = new QName("SOAPStruct");
+    public SOAPStruct() {}
+    public SOAPStruct(String in) {this.varString = in;}
+    public String getVarString() {
+        return varString;
+    }
+    public void setVarString(String varString) {
+        this.varString = varString;
+    }
+    private String varString;
+    public String toString() {
+        return "SOAPStruct: " + varString;
+    }
+}
+
+
+
+
+package org.gforge.soapclient;
+
+import javax.xml.namespace.QName;
+
+public class ArrayOfSOAPStruct {
+
+    public static final QName QNAME = new QName("ArrayOfSOAPStruct");
+
+    public SOAPStruct[] getRet() {
+        return ret;
+    }
+
+    public void setRet(SOAPStruct[] ret) {
+        this.ret = ret;
+    }
+
+    private SOAPStruct[] ret;
+
+}
+
+
+
+
+
+
+package org.gforge.soapclient;
+
+import javax.xml.namespace.QName;
+
+public class ArrayOfSiteStatsDataPoint {
+
+    public static final QName QNAME = new QName("ArrayOfSiteStatsDataPoint");
+
+    public void setSiteStats(SiteStatsDataPoint[] siteStats) {
+        this.siteStats = siteStats;
+    }
+
+    private SiteStatsDataPoint[] siteStats;
+
+}
+
+*/

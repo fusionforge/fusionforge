@@ -6,6 +6,8 @@ gforge/contrib/soap/java/lib/axis.jar -text
 gforge/contrib/soap/java/lib/commons-discovery.jar -text
 gforge/contrib/soap/java/lib/commons-logging.jar -text
 gforge/contrib/soap/java/lib/jaxrpc.jar -text
+gforge/contrib/soap/java/lib/jcommon-0.8.0.jar -text
+gforge/contrib/soap/java/lib/jfreechart-0.9.8.jar -text
 gforge/contrib/soap/java/lib/saaj.jar -text
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
 gforge/docs/images/sflogo2-105a.png -text

@@ -14,6 +14,9 @@
 		<pathelement location="${lib}/commons-logging.jar"/>
 		<pathelement location="${lib}/jaxrpc.jar"/>
 		<pathelement location="${lib}/saaj.jar"/>
+		<pathelement location="${lib}/saaj.jar"/>
+		<pathelement location="${lib}/jfreechart-0.9.8.jar"/>
+		<pathelement location="${lib}/jcommon-0.8.0.jar"/>
 		<pathelement location="${build}"/>
 	</path>
 
@@ -71,11 +74,18 @@
     </target>
 
     <target name="signsupportjars">
-        <signjar jar="${lib}/axis.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
-        <signjar jar="${lib}/saaj.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
-        <signjar jar="${lib}/commons-logging.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
-        <signjar jar="${lib}/commons-discovery.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
-        <signjar jar="${lib}/jaxrpc.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
+        <mkdir dir="tmp/"/>
+        <copy todir="tmp/">
+            <fileset dir="${lib}">
+                <include name="*.jar"/>
+            </fileset>
+        </copy>
+        <signjar jar="tmp/axis.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
+        <signjar jar="tmp/saaj.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
+        <signjar jar="tmp/commons-logging.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
+        <signjar jar="tmp/commons-discovery.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
+        <signjar jar="tmp/jaxrpc.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
+        <signjar jar="tmp/jfreechart-0.9.8.jar" alias="myself" keystore="${jnlp_staging_area}myKeyStore" storepass="password"/>
     </target>
 
 </project>

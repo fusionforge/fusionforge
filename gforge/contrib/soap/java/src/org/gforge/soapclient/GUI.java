@@ -50,7 +50,7 @@ public class GUI {
         frame.getContentPane().add(getTabbedPanel());
         frame.setJMenuBar(getMenuBar());
 
-        frame.setSize(600, 400);
+        frame.setSize(850, 600);
         int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
         int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
         frame.setLocation((screenWidth/2) - frame.getWidth()/2, (screenHeight/2) - frame.getHeight()/2);
@@ -80,10 +80,12 @@ public class GUI {
 
     private ConfigurationPanel configurationPanel = new ConfigurationPanel();
     private GeneralPanel generalPanel = new GeneralPanel();
+    private StatisticsPanel statsPanel = new StatisticsPanel();
 
     private JComponent getTabbedPanel() {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.add("General", generalPanel);
+        tabbedPane.add("Charts", statsPanel);
         tabbedPane.add("Configuration", configurationPanel);
         tabbedPane.addChangeListener(new SwitchedTabsListener());
         return tabbedPane;
