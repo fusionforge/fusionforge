@@ -1,7 +1,21 @@
+2004-04-14  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed a bug in new cronjob cvs.php. Modes must be in octal.
+
 2004-04-13  Tom Copeland <tom@infoether.com>
 	
 	* www/admin/userlist.php: Added sorting by user_name and add_date.
-	
+
+2004-04-13  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed a bug in /mail/
+	* moved inclusion of escapingUtils.php in pre.php
+	* removed an unused variable in history_parse.php
+	* new access control for cvs repositories
+	* removed chgrp -R repository from loginfo by using setgid bit
+	* improved security of cvsweb.php. It's now usable in production environment.
+	* fixed a bug in cvsweb.cgi
+
 2004-04-08  Tom Copeland <tom@infoether.com>
 
 	* www/forum/include/ForumHTML.class: SQL optimization - replaced a 'select *'
@@ -30,6 +44,23 @@
 
 	* Small mass update bug in task mgr - htmlspecialchars() would be 
 	applied again to the summary field
+
+2004-04-02  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed some escaping problems in docman admin
+
+2004-03-31  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* removed the form if there's no survey
+	* fixed localization problems in news_utils
+	* minor fixes on /my/ and project_home.php
+	* fixed localization and improved UI in /mail/, fixed cronjob
+	* fixed some UI problems and localization in /frs/
+	* disabled cache localization system if cache dir is not writable
+
+2004-03-28  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Moved constants from constants/* to constants.php
 
 2004-03-26  Sung Kim <hunkim@cs.ucsc.edu>
 	* Added status checking and updating module for the mailing list creating cronjobs
