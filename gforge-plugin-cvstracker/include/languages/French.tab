@@ -1,0 +1,20 @@
+#/**
+#  *
+#  * cvstracker message catalog (French)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 2004 (c) Guillaume Smet <guillaume-gforge@smet.org>
+#  * http://gforge.org
+#  *
+#  * @version   $Id$
+#  *
+#  */
+plugin_cvstracker	title	Liens vers les commits CVS
+plugin_cvstracker	file	Nom du fichier
+plugin_cvstracker	prevVersion	Version précédente
+plugin_cvstracker	actualVersion	Version actuelle
+plugin_cvstracker	log	Message
+plugin_cvstracker	date	Date
+plugin_cvstracker	no_commits_attached	Aucun commit attaché
+plugin_cvstracker	diffto	Différence
+plugin_cvstracker	author	Auteur
