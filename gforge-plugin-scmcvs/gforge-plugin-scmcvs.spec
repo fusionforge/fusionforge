@@ -5,7 +5,7 @@
 %{!?release:%define release 1}
 
 Summary: CVS Plugin for GForge CDE
-Name: gforge-plugin-scmcvs
+Name: gforge-plugin-%{plugin}
 Version: 4.1
 Release: %{release}
 BuildArch: noarch
