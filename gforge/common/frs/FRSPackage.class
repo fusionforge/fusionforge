@@ -166,6 +166,13 @@ class FRSPackage extends Error {
 			db_rollback();
 			return false;
 		} else {
+
+			//make groupdir if it doesn't exist
+			$groupdir = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName();
+			if (!is_dir($groupdir)) {
+				@mkdir($groupdir);
+			}
+
 			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$this->Group->getUnixName().'/'.$this->getFileName();
 			exec("/bin/mkdir $newdirlocation",$out);
 			db_commit();

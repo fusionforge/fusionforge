@@ -4,6 +4,8 @@
 	by  Alain Peyrat (aljeux)
 	* [#1060] Mass update fix for task (4.0.2)
 	by  Alain Peyrat (aljeux)
+	* [#1068] FRS Directory for group created - by Ognyan Kulev
+	* [#1069] 20041211-syncmail.php doesn't run in admin session by Ognyan Kulev
 
 2005-02-16  Tim Perdue <tim@gforge.org>
 

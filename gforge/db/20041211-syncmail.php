@@ -4,6 +4,26 @@ require_once('www/include/squal_pre.php');
 require_once('common/mail/MailingList.class');
 require_once('common/include/Group.class');
 
+//
+//	Set up this script to run as the site admin
+//
+
+$res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'");
+
+if (!$res) {
+	echo db_error();
+	exit();
+}
+
+if (db_numrows($res) == 0) {
+	// There are no Admins yet, aborting without failing
+	echo "SUCCESS\n";
+	exit();
+}
+
+$id=db_result($res,0,0);
+session_set_new($id);
+
 $res = db_query("SELECT group_id, unix_group_name 
 	FROM groups 
 	WHERE STATUS='A' ORDER BY group_id");
