@@ -49,10 +49,9 @@ class PluginManager extends Error {
 	function GetPlugins () {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
-			$sql = "SELECT * FROM plugins" ;
+			$sql = "SELECT plugin_id, plugin_name FROM plugins" ;
 			$res = db_query($sql);
 			$rows = db_numrows($res);
-
 			for ($i=0; $i<$rows; $i++) {
 				$plugin_id = db_result($res,$i,'plugin_id');
 				$this->plugins_data[$plugin_id] = db_result($res,$i,'plugin_name');
