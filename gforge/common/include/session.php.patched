@@ -11,6 +11,8 @@
   *
   */
 
+require_once('common/include/account.php');
+
 /**
  * A User object if user is logged in
  *
@@ -52,16 +54,22 @@ function session_get_session_cookie_hash($session_cookie) {
  */
 function session_check_session_cookie($session_cookie) {
 
-	list ($session_serial, $hash) = explode('-*-', $session_cookie);
-	$session_serial = base64_decode($session_serial);
-	$new_hash = md5($session_serial.$GLOBALS['sys_session_key']);
+	list ($encrypted_session_serial, $hash) = explode('-', $session_cookie);
+	$encrypted_session_serial = base64_decode($encrypted_session_serial);
+	$new_hash = md5($encrypted_session_serial.$GLOBALS['sys_session_key']);
 
 	if ($hash != $new_hash) {
 		return false;
 	}
 
-	list($user_id, $time, $ip, $user_agent) = explode('-*-', $session_serial, 4);
-	
+	$td = mcrypt_module_open($GLOBALS['sys_session_cypher'], "", $GLOBALS['sys_session_cyphermode'], "");
+	$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
+	mcrypt_generic_init($td, $GLOBALS['sys_session_key'], $iv);
+	$session_serial = mdecrypt_generic($td, $encrypted_session_serial);
+	mcrypt_generic_end($td);
+
+	list($user_id, $time, $ip, $user_agent) = explode('-', $session_serial, 4);
+
 	if (!session_check_ip($ip, $GLOBALS['REMOTE_ADDR'])) {
 		return false;
 	}
@@ -71,7 +79,7 @@ function session_check_session_cookie($session_cookie) {
 	if ($time - time() >= $GLOBALS['sys_session_expire']) {
 		return false;
 	}
-	
+
 	return $user_id;
 }
 
@@ -107,27 +115,81 @@ function session_logout() {
  *
  */
 function session_login_valid($loginname, $passwd, $allowpending=0)  {
-	global $feedback;
+	global $feedback,$Language;
 
 	if (!$loginname || !$passwd) {
-		$feedback = 'Missing Password Or users Name';
+		$feedback = $Language->getText('session','missingpasswd');
 		return false;
 	}
 
-	//get the users from the database using user_id and password
+	//  Try to get the users from the database using user_id and (MD5) user_pw
 	$res = db_query("
-		SELECT user_id,status
+		SELECT user_id,status,unix_pw
 		FROM users
 		WHERE user_name='$loginname' 
 		AND user_pw='".md5($passwd)."'
 	");
 	if (!$res || db_numrows($res) < 1) {
-		//invalid password or user_name
-		$feedback='Invalid Password or User Name';
-		return false;
+		// No user whose MD5 passwd matches the MD5 of the provided passwd
+		// Selecting by user_name only
+		$res = db_query("
+                       SELECT user_id,status,unix_pw
+                       FROM users
+	               WHERE user_name='$loginname' 
+                ");
+		if (!$res || db_numrows($res) < 1) {
+			// No user by that name
+			$feedback=$Language->getText('session','invalidpasswd');
+			return false;
+		} else {
+			// There is a user with the provided user_name, but the MD5 passwds do not match
+			// We'll have to try checking the (crypt) unix_pw
+			$usr = db_fetch_array($res);
+
+			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
+				// Even the (crypt) unix_pw does not patch
+				// This one has clearly typed a bas passwd
+				$feedback=$Language->getText('session','invalidpasswd');
+				return false;
+			}
+			// User exists, (crypt) unix_pw matches
+			// Update the (MD5) user_pw and retry authentication
+			// It should work, except for status errors
+			$res = db_query ("UPDATE users
+                                          SET user_pw='" . md5($passwd) . "'
+                                          WHERE user_id='".$usr['user_id']."'
+                                          ");
+			return session_login_valid($loginname, $passwd, $allowpending) ;
+		}
 	} else {
-		// check status of this user
+		// If we're here, then the user has typed a password matching the (MD5) user_pw
+		// Let's check whether it also matches the (crypt) unix_pw
 		$usr = db_fetch_array($res);
+
+		if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
+			// The (crypt) unix_pw does not match
+			if ($usr['unix_pw'] == '') {
+				// Empty unix_pw, we'll take the MD5 as authoritative
+				// Update the (crypt) unix_pw and retry authentication
+				// It should work, except for status errors
+				$res = db_query ("UPDATE users
+                                                  SET unix_pw='" . account_genunixpw($passwd) . "'
+                                                  WHERE user_id='".$usr['user_id']."'
+                                                  ");
+				return session_login_valid($loginname, $passwd, $allowpending) ;
+			} else {
+				// Invalidate (MD5) user_pw, refuse authentication
+				$res = db_query ("UPDATE users
+                                                  SET user_pw='OUT OF DATE'
+                                                  WHERE user_id='".$usr['user_id']."'
+                                                  ");
+				$feedback='Invalid Password Or User Name';
+				return false;
+			}
+		}
+
+		// Yay.  The provided password matches both fields in the database.
+		// Let's check the status of this user
 
 		// if allowpending (for verify.php) then allow
 		if ($allowpending && ($usr['status'] == 'P')) {
@@ -135,22 +197,22 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 		} else {
 			if ($usr['status'] == 'S') { 
 				//acount suspended
-				$feedback = 'Account Suspended';
+				$feedback = $Language->getText('session','suspended');
 				return false;
 			}
 			if ($usr['status'] == 'P') { 
 				//account pending
-				$feedback = 'Account Pending';
+				$feedback = $Language->getText('session','pending');
 				return false;
 			} 
 			if ($usr['status'] == 'D') { 
 				//account deleted
-				$feedback = 'Account Deleted';
+				$feedback = $Language->getText('session','deleted');
 				return false;
 			}
 			if ($usr['status'] != 'A') {
 				//unacceptable account flag
-				$feedback = 'Account Not Active';
+				$feedback = $Language->getText('session','notactive');
 				return false;
 			}
 		}
@@ -175,7 +237,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 function session_check_ip($oldip,$newip) {
 	$eoldip = explode(".",$oldip);
 	$enewip = explode(".",$newip);
-	
+
 	// ## require same class b subnet
 	if (($eoldip[0]!=$enewip[0])||($eoldip[1]!=$enewip[1])) {
 		return 0;
@@ -294,7 +356,7 @@ function session_set_new($user_id) {
 	$res = session_getdata($user_id);
 
 	if (!$res || db_numrows($res) < 1) {
-		exit_error("ERROR","ERROR - Cannot initialize session: ".db_error());
+		exit_error($Language->getText('global','error'),$Language->getText('session','cannotinit').": ".db_error());
 	} else {
 
 		//set up the new user object
@@ -316,7 +378,7 @@ function session_set_new($user_id) {
  */
 function session_getdata($user_id) {
 	$res=db_query("SELECT
-	
+
 		u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code
 
 		FROM users u,
@@ -405,7 +467,7 @@ function user_getid() {
  */
 function session_loggedin() {
 	global $G_SESSION;
-	
+
 	if ($G_SESSION) {
 		return $G_SESSION->isLoggedIn();
 	} else {

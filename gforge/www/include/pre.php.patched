@@ -12,10 +12,13 @@
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
 */
+if (is_file('/etc/sourceforge/custom/pre.php')){
+	require_once('/etc/sourceforge/custom/pre.php');
+} else {
 
 // Defines all of the Source Forge hosts, databases, etc.
 // This needs to be loaded first becuase the lines below depend upon it.
-require_once('/etc/local.inc');
+require ('/etc/sourceforge/local.inc');
 
 if ($HTTP_HOST != $GLOBALS['sys_default_domain']) {
 	if ($SERVER_PORT == '443') {
@@ -75,7 +78,13 @@ require_once('www/include/exit.php');
 //various html libs like button bar, themable
 require_once('www/include/html.php');
 
-$sys_datefmt = "Y-m-d H:i";
+//left-hand nav library, themable
+require_once('www/include/menu.php');
+
+//theme functions like get_themename, etc
+require_once('www/include/theme.php');
+
+//$sys_datefmt = "Y-m-d H:i";
 
 // #### Connect to db
 
@@ -123,7 +132,10 @@ if (session_loggedin()) {
 
 require_once('www/include/BaseLanguage.class');
 
-if (session_loggedin()) {
+if (!$sys_lang) {
+	$sys_lang="English";
+}
+if (user_isloggedin()) {
 	$res=$LUSER->getData();
 		$classname=db_result($res,0,'classname');
 	if ($classname) {
@@ -131,23 +143,38 @@ if (session_loggedin()) {
 		$Language->loadLanguage($classname);
 	} else {
 		$Language=new BaseLanguage();
-		$Language->loadLanguage('English');
+		$Language->loadLanguage($sys_lang);
 	}
 } else {
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
 	//if we don't support it, just use English as default
-	$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
-	$classname=db_result($res,0,'classname');
+        if ($HTTP_ACCEPT_LANGUAGE) {
+               $res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
+               $classfile=db_result($res,0,'filename');
+       }
 	if (!$classname) {
-		$classname="English";
+		$classname=$sys_lang;
 	}
 	$Language=new BaseLanguage();
 	$Language->loadLanguage($classname);
 }
 
+setlocale (LC_TIME, $Language->getText('system','locale'));
+$sys_strftimefmt = $Language->getText('system','strftimefmt');
+$sys_datefmt = $Language->getText('system','datefmt');
 
+//ob_start(ob_gzhandler);
+
+//
+//	For now, only cache English, non-logged-in pages, with no POST going on
+//
+if (!user_isloggedin() && ($Language->getLanguageId() == 1) && (count($HTTP_POST_VARS) < 1) && !session_issecure()) {
+	include_once('common/include/jpcache.php');
+}
+}
 /*
+
 
 RESERVED VARIABLES
 

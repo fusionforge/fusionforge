@@ -67,7 +67,7 @@ if ($forum_id) {
 		if (!post_message($thread_id, $is_followup_to, $subject, $body, $forum_id)) {
 			exit_error('ERROR',$feedback);
 		} else {
-			$feedback='Message Posted Successfully';
+			$feedback=$Language->getText('forum_forum','postsuccess');
 			$style='';
 			$thread_id='';
 		}
@@ -156,7 +156,7 @@ if ($forum_id) {
 		} else {
 			$public_flag='1';
 		}
-		if ($group_id==714) {
+		if ($group_id==$GLOBALS['sys_news_group']) {
 			echo '<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">';
 		} else {
 			$res=db_query("SELECT group_forum_id,forum_name ".
@@ -185,10 +185,11 @@ if ($forum_id) {
 		<TABLE BORDER="0" WIDTH="50%">
 			<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
 			<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
+			<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">
 			<TR><TD><FONT SIZE="-1">'. $forum_popup .
 				'</TD><TD><FONT SIZE="-1">'. $options_popup .
 				'</TD><TD><FONT SIZE="-1">'. $max_row_popup .
-				'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Change View">
+				'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.$Language->getText('forum_forum','changeview').'">
 			</TD></TR>
 		</TABLE></FORM>';
 	}
@@ -258,9 +259,9 @@ if ($forum_id) {
 		}
 
 		$title_arr=array();
-		$title_arr[]='Thread';
-		$title_arr[]='Author';
-		$title_arr[]='Date';
+		$title_arr[]=$Language->getText('forum_forum','thread');
+		$title_arr[]=$Language->getText('forum_forum','author');
+		$title_arr[]=$Language->getText('forum_forum','date');
 
 		$ret_val .= html_build_list_table_top ($title_arr);
 
@@ -276,7 +277,7 @@ if ($forum_id) {
 
 			$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD><A HREF="/forum/message.php?msg_id='.
 				$thread['msg_id'].'">'.
-				html_image("/images/msg.gif","12","10",array("BORDER"=>"0"));
+				html_image("images/msg.png","12","10",array("BORDER"=>"0"));
 			/*	  
 				See if this message is new or not
 				If so, highlite it in bold
@@ -346,10 +347,10 @@ if ($forum_id) {
 		echo db_error();
 
 		$title_arr=array();
-		$title_arr[]='Topic';
-		$title_arr[]='Topic Starter';
-		$title_arr[]='Replies';
-		$title_arr[]='Last Post';
+		$title_arr[]=$Language->getText('forum_forum','topic');
+		$title_arr[]=$Language->getText('forum_forum','topicstarter');
+		$title_arr[]=$Language->getText('forum_forum','replies');
+		$title_arr[]=$Language->getText('forum_forum','lastpost');
 	
 		$ret_val .= html_build_list_table_top ($title_arr);
 		$i=0;
@@ -387,7 +388,7 @@ if ($forum_id) {
 	if ($offset != 0) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE="3" STYLE="text-decoration: none"><B>
 		<A HREF="javascript:history.back()"><B>' .
-		html_image("/images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
+		html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -398,7 +399,7 @@ if ($forum_id) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE=3 STYLE="text-decoration: none"><B>
 		<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
 		<B>Next Messages ' .
-		html_image("/images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
+		html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -413,13 +414,13 @@ if ($forum_id) {
 		//
 		//	Viewing a particular thread in nested view
 		//
-		echo '<CENTER><h3>Post A Message To This Thread:</H3></CENTER>';
+		echo '<CENTER><h3>'.$Language->getText('forum_message', 'msg').'</H3></CENTER>';
 				show_post_form($forum_id,$thread_id,$msg_arr["0"][0]['msg_id'],$msg_arr["0"][0]['subject']);
 	} else {
 		//
 		//	Viewing an entire message forum in a given format
 		//
-		echo '<CENTER><h3>Start a New Thread:</H3></CENTER>';
+		echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</H3></CENTER>';
 		show_post_form($forum_id);
 	}
 

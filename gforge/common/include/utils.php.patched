@@ -13,6 +13,45 @@
 
 
 /**
+ * util_check_fileupload() - determines if a filename is appropriate for upload
+ *
+ * @param       string  The name of the file being uploaded
+ */
+function util_check_fileupload($filename) {
+
+        /* Empty file is a valid file.
+           This is because this function should be called
+           unconditionally at the top of submit action processing
+           and many forms have optional file upload. */
+        if ($filename == 'none' || $filename == '') {
+        	return true;
+        }
+
+        /* This should be enough... */
+        if (!is_uploaded_file($filename)) {
+        	return false;
+        }
+        /* This should be enough... */
+        if (!is_uploaded_file($filename)) {
+        	return false;
+        }
+        /* ... but we'd rather be paranoic */
+	if (strstr($filename, '..')) {
+		return false;
+	}
+	if (!is_file($filename)) {
+		return false;
+	}
+	if (!file_exists($filename)) {
+		return false;
+	}
+	if (dirname($filename) != '/tmp') {
+		return false;
+	}
+	return true;
+}
+
+/**
  * util_send_message() - Send email
  * This function should be used in place of the PHP mail() function
  *
@@ -23,7 +62,10 @@
  * @param		string	The addresses to blind-carbon-copy this message
  *
  */
-function util_send_message($to,$subject,$body,$from='',$BCC='') {
+function util_send_mail($to,$subject,$body,$from='',$BCC='') {
+	if (!$to) {
+		$to='noreply@'.$GLOBALS['sys_default_domain'];
+	}
 	if (!$from) {
 		$from='noreply@'.$GLOBALS['sys_default_domain'];
 	}
@@ -33,7 +75,8 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 		"\nSubject: $subject".
 		"\n\n$body";
 
-	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) ."\" | /usr/sbin/sendmail -f$from -t -i >& /dev/null &");
+	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
+	      "\" | /usr/sbin/sendmail -f'$from' -t -i >& /dev/null &");
 }
 
 /**
@@ -63,7 +106,8 @@ function util_unconvert_htmlspecialchars($string) {
 	if (strlen($string) < 1) {
 		return '';
 	} else {
-		$trans = get_html_translation_table(HTMLENTITIES, ENT_QUOTES); 
+		//$trans = get_html_translation_table(HTMLENTITIES, ENT_QUOTES); 
+		$trans = get_html_translation_table(HTML_ENTITIES); 
 		$trans = array_flip ($trans);
 		$str = strtr ($string, $trans);
 		return $str;
@@ -243,7 +287,7 @@ function show_priority_colors_key() {
 
 	for ($i=1; $i<10; $i++) {
 		echo '
-			<TD BGCOLOR="'.get_priority_color($i).'">'.$i.'</TD>';
+			<TD class="'.get_priority_color($i).'">'.$i.'</TD>';
 	}
 	echo '</tr></table>';
 }
