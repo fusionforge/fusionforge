@@ -32,7 +32,6 @@ if (!$sys_use_tracker) {
 
 
 if ($group_id && $atid) {
-
 	include('tracker.php');
 
 } elseif ($group_id) {

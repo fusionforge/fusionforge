@@ -75,11 +75,13 @@ class ArtifactBoxOptions extends Error {
 	}
 
 	/**
-	 *	create - create a new item in the database.
+	 *	create - create a new row in the table used to store the 
+	 *	choices for selection boxes.  This function is only used for 
+	 *	extra fields and boxes configured by the admin
 	 *
-	 *	@param	string	Item name.
-	 *	@param	int		User_id of assignee.
-	 *  @return id on success / false on failure.
+	 *	@param	string		Name of the choice
+	 *	@param	int		Id the box that contains the choice.
+	 *  @return 	true on success / false on failure.
 	 */
 	
 	function create($name,$id) {
@@ -108,15 +110,16 @@ class ArtifactBoxOptions extends Error {
 			return false;
 		}
 
-/*
+
 			//
 			//	Now set up our internal data structures
 			//
 			if (!$this->fetchData($id)) {
 				return false;
 			}
-*/
+
 	}
+
 
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactBoxOptions from the database.
@@ -152,6 +155,15 @@ class ArtifactBoxOptions extends Error {
 	function getID() {
 		return $this->data_array['id'];
 	}
+	
+	/**
+	 *	getBoxID - get this  artifact box id.
+	 *
+	 *	@return	int	The id #.
+	 */
+	function getBoxID() {
+		return $this->data_array['artifact_box_id'];
+	}
 
 	/**
 	 *	getName - get the name.
@@ -164,9 +176,13 @@ class ArtifactBoxOptions extends Error {
 
 
 	/**
-	 *		Update an ArtifactSelectionBox
+	 *  update - update rows in the table used to store the choices 
+	 *  for a selection box. This function is used only for extra  
+	 *  boxes and fields configured by the admin
 	 *
-	 *  @param	string	Name of the box.
+	 *  @param	string	Name of the choice in a box.
+	 *  @param	int	Id of the box 
+	 *  @param	int	id of the row
 	 *  @return	boolean	success.
 	 */
 	function update($name,$boxid,$id) {

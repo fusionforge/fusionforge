@@ -324,7 +324,7 @@ function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=tr
  * html_build_multiple_select_box() - Takes a result set, with the first column being the "id" or value
  * and the second column being the text you want displayed.
  *
- * @param		int		The result set
+ * @param		int	The result set
  * @param		string	Text to be displayed
  * @param		string	The item that should be checked
  * @param		int		The size of this box
@@ -350,7 +350,6 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 	}
 
 	$rows=db_numrows($result);
-
 	for ($i=0; $i<$rows; $i++) {
 		if ((db_result($result,$i,0) != '100') || (db_result($result,$i,0) == '100' && !$show_100)) {
 			$return .= '
@@ -365,6 +364,58 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 				}
 			}
 			$return .= '>'.$val.'-'. substr(db_result($result,$i,1),0,35). '</option>';
+		}
+	}
+	$return .= '
+		</select>';
+	return $return;
+}
+
+/**
+ * html_build_multiple_select_box_from_arrays() - Takes a result set, with the first column being the "id" or value
+ * and the second column being the text you want displayed.
+ *
+ * @param		array	id of the field  
+ * @param		array	Text to be displayed
+ * @param		string	id of the items selected
+ * @param		string	The item that should be checked
+ * @param		int		The size of this box
+ * @param		bool	Whether or not to show the '100 row'
+ */
+function html_build_multiple_select_box_from_arrays($result,$name,$fieldid,$field,$select,$checked_array,$size='8',$show_100=true) {
+	global $Language;
+	$checked_count=count($checked_array);
+	$return .='
+		<select name="'.$select.'" multiple="multiple" size="'.$size.'">';
+	if ($show_100) {
+		/*
+			Put in the default NONE box
+		*/
+		$return .= '
+		<option value="100"';
+		for ($j=0; $j<$checked_count; $j++) {
+			if ($checked_array[$j] == '100') {
+				$return .= ' selected="selected"';
+			}
+		}
+		$return .= '>'.$Language->getText('include_html','none').'</option>';
+	}
+
+	$rows=count($result);
+	for ($i=0; $i<$rows; $i++) {
+		if (( $result[$i] != '100') || ($result[$i] == '100' && !$show_100)) {
+			$return .=' 
+				<option value="'.$fieldid[$i].'"';
+			/*
+				Determine if it's checked
+			*/
+			$val=$result[$i];
+			for ($j=0; $j<$checked_count; $j++) {
+				if ($val == $checked_array[$j]) {
+					$return .= ' selected="selected"';
+				}
+			}
+			$return .= '>'.$result[$i].'-'. $name[$i].': '. $fieldid[$i].'-'.$field[$i].' </option>';
 		}
 	}
 	$return .= '

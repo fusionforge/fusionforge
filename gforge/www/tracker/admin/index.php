@@ -90,8 +90,8 @@ if ($group_id && $atid) {
 				} else {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','choice_inserted');
 				}
-				$add_opt= false;
-				$build_box= true;
+		//		$add_opt= false;
+		//		$build_box= true;
 				
 			}
 
@@ -221,6 +221,75 @@ if ($group_id && $atid) {
 					$add_canned=true;
 				}
 			}
+
+		} elseif ($copy_opt) {
+			$copy_rows=count($copyid);
+			$tracker_rows=count($selectid);
+			if ($tracker_rows > 0 && $copy_rows > 0) {
+//			for ($i=0; $i < $copy_rows; $i++) {
+//			}
+			for ($i=0; $i < $tracker_rows; $i++) {
+		//
+		// create an object for each selected type
+		//
+			$result = $ath->getBoxEntry($selectid[$i]);
+			$typeid = db_result($result,0,'group_artifact_id');
+			$athcp = new ArtifactTypeHtml($group,$typeid);
+			if (!$athcp || !is_object($athcp)) {
+				exit_error('Error','ArtifactType could not be created');
+			}
+			if ($athcp->isError()) {
+				exit_error($Language->getText('general','error').'',$athcp->getErrorMessage());
+			}
+			//
+			//  Copy choices into a field (box) for each tracker selected 
+			//
+			
+			$feedback .= 'From Tracker: ';
+			$feedback .= $athcp->getName();				
+			$feedback .= ' into Tracker: ';
+			$feedback .= $athcp->getName();
+				$ab =new ArtifactSelectionbox($athcp,$selectid[$i]);
+				$feedback .= ', Box: ';
+				$feedback .= $ab->getName();
+				$feedback .= '<br />';
+			
+				$abo = new ArtifactBoxOptions($athcp);
+			if (!$abo || !is_object($abo)) {
+				$feedback .= 'Unable to create ArtifactBoxOptions Object';
+			} elseif ($abo->isError()) {
+				$feedback .= $abo->getErrorMessage();			
+			} else {
+			for ($k=0; $k < $copy_rows; $k++) {
+				$resultch=$ath->getBoxOptionName($copyid[$k]);
+				$name=db_result($resultch,0,'box_options_name');
+				if (!$abo->create($name,$selectid[$i])) {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$abo->getErrorMessage();
+					$abo->clearError();
+					
+				}else {
+					unset ($abo);
+					$abo = new ArtifactBoxOptions($athcp);
+					if (!$abo || !is_object($abo)) {
+						$feedback .= 'Unable to create ArtifactBoxOptions Object';
+					} elseif ($abo->isError()) {
+						$feedback .= $abo->getErrorMessage();			
+					} else {
+					$feedback .= '- Copied choice:';						$feedback .= $name;
+					}
+					$feedback .= '<br />';
+					unset($ab);
+				}
+				} 
+				}
+				}
+				unset ($abo);
+				unset ($athcp);
+				$feedback .= '<br />';
+			
+			}else {
+				$feedback .= 'you are required to select both one or more choices and one or more trackers';
+			}
 		} elseif ($update_box) {
 
 			$ac = new ArtifactSelectionBox($ath,$id);
@@ -341,7 +410,6 @@ if ($group_id && $atid) {
 		$rows=db_numrows($result);
 		if ($result && $rows > 0) {
 			$title_arr=array();
-			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_id');
 			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_title');
 			
 			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');	
@@ -419,6 +487,11 @@ echo '<td>';
 		echo "<p>&nbsp;</p>";
 		$rows=db_numrows($result);
 		if ($result && $rows > 0) {
+			
+			echo	'<a href="'.$PHP_SELF.'?copy_opt=1&amp;boxid='.
+			$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">';
+			echo $Language->getText('tracker_admin_copy','copy_choices');
+			echo '</a><p>';
 			$title_arr=array();
 			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_choice_id');
 			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');
@@ -429,7 +502,7 @@ echo '<td>';
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>';
 				echo '<td>'.db_result($result, $i, 'id').'</td>'.
 					'<td><a href="'.$PHP_SELF.'?update_opt=1&amp;id='.
-					db_result($result,$i,'id').'&amp;boxid='.			
+				db_result($result,$i,'id').'&amp;boxid='.			
 					db_result($result, $i, 'artifact_box_id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 					db_result($result, $i, 'box_options_name').'</a></td>';
 				 }
@@ -505,6 +578,73 @@ echo '<td>';
 		</form></p>
 		<?php
 
+		$ath->footer(array());
+
+	} elseif ($copy_opt) {
+
+	
+//
+//  FORM TO COPY Choices configured by admin for extra_field BOXES 
+//
+		$fb= new ArtifactSelectionBox($ath,$boxid);
+		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_copy','choices_title',$fb->getName())));
+		echo "<h3>".$Language->getText('tracker_admin_copy','choices_title',$fb->getName())."</h3>";
+		
+		$result=$ath->getSelectionBoxOptions($boxid);
+		$cat_count=db_numrows($result);
+		if ($cat_count > 10) {
+			$cat_count=10;
+		}
+		echo '<table>';
+		echo '<tr>';
+		echo '<td></td><td><center><strong>';
+		echo $Language->getText('tracker_admin_copy','from_box');
+		echo '<br />';
+		echo $fb->getName();
+		echo '</center></strong></td><td></td><td><strong><center>';
+		
+		echo $Language->getText('tracker_admin_copy','into_box');
+		echo '</center></strong></tr><tr><td><strong><center>';
+		echo '</center></strong></td>';
+		echo '<td valign=top>';
+		?>
+		
+		<form action="<?php echo $PHP_SELF .'?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(); ?>" method="post" >
+		<input type="hidden" name="copy_opt" value="copy" >
+		<input type="hidden" value="$return">
+		<?php
+		echo html_build_multiple_select_box($result,'copyid[]',$checked_array,$size=$cat_count,$show_100=false);
+		echo '</td><td><strong><center>';
+		$atf = new ArtifactTypeFactory($group);
+		$at_arr =& $atf->getArtifactTypes();
+		if ($cat_count > 10) {
+			$cat_count=10;
+		}
+		for ($j=0; $j < count($at_arr); $j++) {
+		$athcp= new ArtifactTypeHtml($group,$at_arr[$j]->getID());
+		$boxresult=$athcp->getSelectionBoxes();
+		$boxct=db_numrows($boxresult);
+		for ($k=0; $k < $boxct; $k++) {
+		$id_arr[]=$at_arr[$j]->getID();
+		$name_arr[]=$at_arr[$j]->getName();
+		$field_id_arr[] = db_result($boxresult,$k,'id');
+		$field_arr[] = db_result($boxresult,$k,'selection_box_name');
+		}
+		unset ($athcp);
+			
+		}
+		echo '<td valign=top>';
+
+		$cat_count=count($id_arr);
+		echo html_build_multiple_select_box_from_arrays($id_arr,$name_arr,$field_id_arr,$field_arr,'selectid[]',$checked_array,$size=$cat_count,$show_100=false);
+		echo '</td></tr>';
+		echo '<tr><td>';
+		?>
+		<br />
+	 	<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" />
+		</td></tr></table></form>
+		
+		<?php
 		$ath->footer(array());
 
 	} elseif ($add_group) {
@@ -724,7 +864,7 @@ echo '<td>';
 
 	} elseif ($update_box) {
 //
-//  FORM TO UPDATE POP-DOWN BOXES
+//  FORM TO UPDATE POP-UP BOXES
 //
 		/*
 			Allow modification of a artifact Selection Box
@@ -762,10 +902,10 @@ echo '<td>';
 
 	} elseif ($update_opt) {
 //
-//  FORM TO UPDATE POP-DOWN CHOICES FOR A BOX
+//  FORM TO UPDATE POP-UP CHOICES FOR A BOX
 //
 		/*
-			Allow modification of a Choice for a Pop-Down Box
+			Allow modification of a Choice for a Pop-up Box
 		*/
 		$ath->adminHeader(array('title'=>$Language->getText('tracker_admin_build_boxes','opt_update_title',$ath->getName())));
 

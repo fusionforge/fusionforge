@@ -18,8 +18,6 @@ if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
 
-	include 'search-fields.php';
-
 $af = new ArtifactFactory($ath);
 if (!$af || !is_object($af)) {
 	exit_error('Error','Could Not Get Factory');
@@ -152,11 +150,8 @@ echo '<tr>';
 		for ($i=0; $i < $rows; $i++) {
 			$newrow=is_integer(($i+1)/5);
 			echo '<td><span style="font-size:smaller">'.db_result($result,$i,'selection_box_name').'</span></br \>';
-			if ($source=='custom') {
-				$choice= $value[$i];
-			} else {
-				$choice='xzxz';
-			}
+			
+			$choice=$extra_fields_choice[$i];
 			echo $ath->selectionBox(db_result($result,$i,'id'),$choice,$Language->getText('tracker_admin_build_boxes','status_any'));
 			echo '</td>';
 			if ($newrow) {
@@ -181,7 +176,7 @@ echo $ath->getBrowseInstructions();
 
 if ($art_arr && count($art_arr) > 0) {
 
-	if ($source=='custom') {
+	if ($set=='custom') {
 	//
 	// validate that any admin configured extra fields meet its selection criteria
 
@@ -194,13 +189,13 @@ if ($art_arr && count($art_arr) > 0) {
 				$resultc = $ath->getArtifactChoices($art_arr[$i]->getID());
 				$browserows = db_numrows($resultc);
 				for ($j=0; $j < $browserows; $j++) {
-					if ((db_result($resultc,$j,'choice_id') == $value[$j])|| $value[$j]=='100'){
+					if ((db_result($resultc,$j,'choice_id') == $extra_fields_choice[$j])|| $extra_fields_choice[$j]=='100'){
 						$matches=$matches+1;
 					}
 				}
 				if ($rows > $browserows && $matches == $browserows) {
 					for ($k = $browserows; $k < $rows; $k++){
-						if ((db_result($resultc,$k,'choice_id') == $value[$k]) || $value[$k] == '100') {
+						if ((db_result($resultc,$k,'choice_id') == $extra_fields_choice[$k]) || $extra_fields_choice[$k] == '100') {
 							$matches = $matches+1;
 						}
 					}

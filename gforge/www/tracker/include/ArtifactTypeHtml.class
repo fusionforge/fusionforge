@@ -74,14 +74,43 @@ class ArtifactTypeHtml extends ArtifactType {
 		echo '<strong>'.$Language->getText('tracker_artifacttype','admin_functions').': <a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker_artifacttype','add_artifact_types').'</a>';
 		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','edit_options').': '. $this->getName() .'</a></strong>';
 	}
-
-	function selectionBox ($box='option_id',$checked='xzxz',$text_100='none') {
+	/**
+	 *	buildPopUpBoxes - presents the pop-up boxes and choices  
+	 *	configured by the admin
+	 */
+	 	function buildPopUpBoxes () {
+			global $Language, $group_id;
+   			$result=$this->getSelectionBoxes(); 
+			echo "<p>&nbsp;</p>";
+   			$rows=db_numrows($result);
+			if ($result &&$rows > 0) {
+				echo '<tr>';
+				for ($i=0; $i < $rows; $i++) {
+				$newrow= is_integer($i/2);
+				echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
+				echo $this->selectionBox(db_result($result,$i,'id'));
+				echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $this->getID() . '&amp;build_box=1">('.$Language->getText('tracker','admin').')</a>';
+				if (!$newrow) {
+					echo '</tr><tr>';
+				}
+			}
+		}
+	}
+	/**
+	 *	selectionBox - this function builds pop up
+	 *	box with choices.
+	 *	
+	 *	@param		int 	The result set
+	 *	@param 		string	The item that should be checked
+	 *	@param		string	What to call the '100 row'
+	 *	@return		box and choices	
+	 */	
+	function selectionBox ($name,$checked='xzxz',$text_100='none') {
 		global $Language;
-		$this->box=$box;
 		if ($text_100 == 'none'){
 			$text_100=$Language->getText('tracker_artifacttype','none');
 		}
-		return html_build_select_box ($this->getSelectionBoxOptions($this->box),$box,$checked,true,$text_100);
+		return html_build_select_box ($this->getSelectionBoxOptions($name),'extra_fields_choice[]',$checked,true,$text_100);
 	}
 
 	function categoryBox ($name='category_id',$checked='xzxz',$text_100='none') {

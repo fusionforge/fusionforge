@@ -43,28 +43,10 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	?>
 		</td>
 	</tr>
+	
 	<?php
-//
-//	build input pop-up boxes for boxes and choices configured by ADMIN
-//
-   	$result=$ath->getSelectionBoxes(); 
-	echo "<p>&nbsp;</p>";
-   	$rows=db_numrows($result);
-	if ($result &&$rows > 0) {
-		echo '<tr>';
-		for ($i=0; $i < $rows; $i++) {
-			$newrow= is_integer($i/2);
-			echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
-			echo $ath->selectionBox(db_result($result,$i,'id','choice_id'));
-			echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;build_box=1">('.$Language->getText('tracker','admin').')</a>';
-		
-			if (!$newrow) {
-				echo '</tr><tr>';
-			}
-		}
-	}
-	?>
-	<?php
+	
+	$ath->buildPopUpBoxes();
  
 	if ($ath->userIsAdmin()) {
 		echo '<tr>
@@ -76,6 +58,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 		echo build_priority_select_box('priority');
 		echo '</td></tr>';
 	}
+	
 	?>
 	<tr>
 		<td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />

@@ -1,5 +1,6 @@
 <?php
 
+
 //
 //	get the Group object
 //
@@ -14,7 +15,6 @@ if ($group->isError()) {
 		exit_error($Language->getText('general','error'), $group->getErrorMessage());
 	}
 }
-
 //
 //	Create the ArtifactType object
 //
@@ -30,7 +30,6 @@ if ($ath->isError()) {
 		exit_error($Language->getText('general','error'), $ath->getErrorMessage());
 	}
 }
-
 switch ($func) {
 
 	case 'add' : {
@@ -39,7 +38,6 @@ switch ($func) {
 	}
 	case 'postadd' : {
 		/*
-
 			Create a new Artifact
 
 		*/
@@ -60,8 +58,17 @@ switch ($func) {
 				//
 				// Include extra fields configured by ADMIN
 				//
-				include ('add-fields.php');
-
+					
+				$result=$ath->getSelectionBoxes();
+				$rows=db_numrows($result);
+					
+				if ($result && $rows > 0) {
+					for ($i=0; $i < $rows; $i++) {
+					$ah->createExtraFields($extra_fields_choice[$i]);
+					}
+					unset ($extra_fields_choice);
+				}
+					
 				//
 				//	Attach file to this Artifact.
 				//
@@ -69,8 +76,8 @@ switch ($func) {
 					$afh=new ArtifactFileHtml($ah);
 					if (!$afh || !is_object($afh)) {
 						$feedback .= 'Could Not Create File Object';
-//						} elseif ($afh->isError()) {
-//							$feedback .= $afh->getErrorMessage();
+//					} elseif ($afh->isError()) {
+//						$feedback .= $afh->getErrorMessage();
 					} else {
 						if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
 							$feedback .= ' Could Not Attach File to Item: '.$afh->getErrorMessage();
@@ -121,12 +128,12 @@ switch ($func) {
 				}
 			}
 			unset($ah);
-		
-		
+			
+			
 		if (!$was_error) {
-			$feedback = $Language->getText('tracker','updated_successful');
+			$feedback = $Language->getText('tracker','updated_successful');			}
 		}
-		}
+		unset ($extra_fields_choice);
 		include ('browse.php');
 		break;
 	}
@@ -143,8 +150,8 @@ switch ($func) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
 			if (!$ath->userIsAdmin() && $ath->userIsTechnician()) {
-//					&& !(session_loggedin() && ($ah->getSubmittedBy() == user_getid())) 
-//					&& (session_loggedin() && ($ah->getAssignedTo() == user_getid()))) {
+//				&& !(session_loggedin() && ($ah->getSubmittedBy() == user_getid())) 
+//				&& (session_loggedin() && ($ah->getAssignedTo() == user_getid()))) {
 				$priority=$ah->getPriority();
 				$category_id=$ah->getCategoryID();
 				$artifact_group_id=$ah->getArtifactGroupID();
@@ -168,8 +175,8 @@ switch ($func) {
 				$afh=new ArtifactFileHtml($ah);
 				if (!$afh || !is_object($afh)) {
 					$feedback .= 'Could Not Create File Object';
-//					} elseif ($afh->isError()) {
-//						$feedback .= $afh->getErrorMessage();
+//				} elseif ($afh->isError()) {
+//					$feedback .= $afh->getErrorMessage();
 				} else {
 					if (!util_check_fileupload($input_file)) {
 						exit_error("Error","Invalid filename");
@@ -216,7 +223,7 @@ switch ($func) {
 //
 				}
 			}
-			
+				
 			}
 			include ('browse.php');
 		}
@@ -225,7 +232,6 @@ switch ($func) {
 	case 'postaddcomment' : {
 		/*
 			Attach a comment to an artifact
-
 			Used by non-admins
 		*/
 		$ah=new ArtifactHtml($ath,$artifact_id);
@@ -248,8 +254,7 @@ switch ($func) {
 		$ah=new ArtifactHtml($ath,$artifact_id);
 		if (!$ah || !is_object($ah)) {
 			exit_error('ERROR','Artifact Could Not Be Created');
-		} else if ($ah->isError()) {
-			exit_error('ERROR',$ah->getErrorMessage());
+		} else if ($ah->isError()) {				exit_error('ERROR',$ah->getErrorMessage());
 		} else {
 			$ah->setMonitor();
 			$feedback=$ah->getErrorMessage();
@@ -277,8 +282,7 @@ switch ($func) {
 		//
 		$ah=new ArtifactHtml($ath,$aid);
 		if (!$ah || !is_object($ah)) {
-			exit_error('ERROR','Artifact Could Not Be Created');
-		} else if ($ah->isError()) {
+			exit_error('ERROR','Artifact Could Not Be Created');			} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
 			if ($ath->userIsAdmin() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
@@ -296,5 +300,4 @@ switch ($func) {
 		break;
 	}
 }
-
 ?>

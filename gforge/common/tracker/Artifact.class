@@ -281,8 +281,13 @@ class Artifact extends Error {
 	}
 	/**
 	 *
-	 * 	createExtraFields - extend an artifact with data input in selection boxes with choices defined by ADMIN for a project
+	 * 	createExtraFields - adds a row in the table used to 
+	 *	store the id of a value for an artifact field.
+	 *	This function is only used for data that 
+	 *	applies to additional fields and boxes configured by the admin.
 	 *
+	 *	@param 	int 	id of the field that contains the data
+	 *	@return 	id on success / false on failure
 	 */
 	function createExtraFields($choice_id){
 		$this->choice_id=$choice_id;
@@ -952,8 +957,14 @@ class Artifact extends Error {
 	}
 
 	/**
-	 * 	updateExtraFields - update an artifact with data input in selection 
-	 *	boxes with choices defined by ADMIN for a project.
+	 * 	updateExtraFields - updates the id of a value in the 
+	 *	table used to store the id's of values for artifact fields. 
+	 *	This function is only used for data that 
+	 *	applies to additional fields and boxes configured by the admin.
+	 *
+	 *	@param 	int 	id of the artifact
+	 *	@param	int	id of the field that contains the data 
+	 *	@return true on success / false on failure
 	 *
 	 */
 	function updateExtraFields($id,$choice_id){
@@ -976,15 +987,18 @@ class Artifact extends Error {
 
 	/**
 	 *
-	 * 	nullExtraFields - 0 an artifact in selection boxes with choices defined 
-	 *	by ADMIN for a project to normalize for a transfer to an new artifact type
+	 *	nullExtraFields - deletes a row in the table used to	
+	 *	store the id's of values for artifact fields.  This function
+	 *	applies to additional fields and boxes configured by the admin.
 	 *
+	 *	@param 	int	id of the artifact
+	 *	@return 	true on success / false on failure
 	 */
 	function  nullExtraFields($artifact_id){
 			
-		$res=db_query("UPDATE artifact_extra_field_data
-			SET
-			artifact_id='0'
+		$res=db_query("DELETE  
+			FROM
+			artifact_extra_field_data
 			WHERE
 			artifact_id='$artifact_id'");
 	

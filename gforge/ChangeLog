@@ -1,3 +1,7 @@
+2004-08-26  Tony Pugliese <lpajp@pacbell.net>
+
+	* Nice Patch to clone categories in tracker.
+
 2004-10-05  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* jumps to login page when accessing tracker item and not logged in

@@ -29,29 +29,23 @@ $setrows=db_numrows($resultc);
 $changect=0;
 $transferct=0;
 if($result &&$rows > 0) {
-	foreach($_POST as$KEY=>$post_value) {
-	$value_array[]=$post_value;
-	}
-$post_value=implode(",",$value_array);
-}
-$post_value=explode(",",$post_value);
 	for ($i=0; $i < $rows; $i++) {
-	$value[$i]=$post_value[$i+7];
 	if ($i < $setrows) {
-		if (db_result($resultc,$i,'choice_id') != $value[$i]){
-			$ah->updateExtraFields(db_result($resultc,$i,'id'),$value[$i]);
+		if (db_result($resultc,$i,'choice_id') != $extra_fields_choice[$i]){
+			$ah->updateExtraFields(db_result($resultc,$i,'id'),$extra_fields_choice[$i]);
 			$old=(db_result($resultc,$i,'choice_id'));
 			$oldnames=$ath->getBoxOptionsName($old);
 			$ah->addHistory(db_result($result,$i,'selection_box_name'),db_result($oldnames,'0','box_options_name'));				
 			$changect=$changect+1;
 		}	
 		}else{
-			$ah->createExtraFields($value[$i]);
-		if ($value[$i] !== '100') {
+			$ah->createExtraFields($extra_fields_choice[$i]);
+		if ($extra_fields_choice[$i] !== '100') {
 			$transferct=$transferct+1;
 		}
-	}	
-}
-
+		}
+	}
+	unset ($extra_fields_choice);
+}	
 ?>
 

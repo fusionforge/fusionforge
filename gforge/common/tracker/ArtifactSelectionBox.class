@@ -77,11 +77,12 @@ class ArtifactSelectionBox extends Error {
 	}
 
 	/**
-	 *	create - create a new item in the database.
+	 *	create - create a row in the table that stores box names for a
+	 *	a tracker.  This function is only used to create rows for boxes 
+	 *	configured by the admin.
 	 *
-	 *	@param	string	Item name.
-	 *	@param	int		User_id of assignee.
-	 *  @return id on success / false on failure.
+	 *	@param	string	Name of the box.
+	 *  @return 	true on success / false on failure.
 	 */
 	function create($name) {
 		global $Language;
@@ -109,17 +110,14 @@ class ArtifactSelectionBox extends Error {
 			$this->setError(db_error());
 			return false;
 		}
-
-/*
 			//
 			//	Now set up our internal data structures
 			//
 			if (!$this->fetchData($id)) {
 				return false;
-			}
-*/
-	}
+			} 
 
+	}
 	/**
 	 *	fetchData - re-fetch the data for this ArtifactSelectionBox from the database.
 	 *
@@ -127,7 +125,9 @@ class ArtifactSelectionBox extends Error {
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
+		$this->id=$id;
 		$res=db_query("SELECT * FROM artifact_group_selection_box_list WHERE id='$id'");
+		
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('ArtifactSelectionBox: Invalid Artifact ID');
 			return false;
@@ -166,7 +166,10 @@ class ArtifactSelectionBox extends Error {
 
 
 	/**
-	 *		Update an ArtifactSelectionBox
+	 *  update - update a row in the table used to store box names 
+	 *  for a tracker.  This function is only to update rowsf
+	 *  for boxes configured by
+	 *  the admin.
 	 *
 	 *  @param	string	Name of the box.
 	 *  @return	boolean	success.
@@ -191,3 +194,4 @@ class ArtifactSelectionBox extends Error {
 }
 
 ?>
+

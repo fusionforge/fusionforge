@@ -1,5 +1,4 @@
-#/**
-#  *
+#/**#  *
 #  * Default message catalog (English)
 #  *
 #  * GForge: Breaking Down the Barriers to Open Source Development
@@ -2677,6 +2676,7 @@ tracker_admin_add_canned	no_responses	No responses set up in this group
 tracker_admin_add_canned	title	Add/Change Canned Responses to $1
 tracker_admin_add_cat	no_categories	No categories defined
 tracker_admin_add_cat	title	Add Categories to $1
+tracker_admin_copy_cat	title	Copy Categories from $1
 tracker_admin_add_group	group_add_warning	Once you add a group, it cannot be deleted
 tracker_admin_add_group	no_groups_defined	No groups defined
 tracker_admin_add_group	title	Add/Change Groups to $1
@@ -2722,6 +2722,10 @@ tracker_admin_build_boxes	choice_updated		Choice updated
 tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the artifact box name because other things are dependent upon it. When you change the box name, all related items will be changed to the new name
 tracker_admin_build_boxes	choice_change_warning	It is not recommended that you change the box choice name because other things are dependent upon it. When you change the box choice name, all related items will be changed to the new name
 tracker_admin_build_boxes	error_updating	Error updating a box name
+tracker_admin_copy	copy_choices	Click here to copy these choices to other trackers
+tracker_admin_copy	choices_title	Copy Choices from Pop-Up Box $1
+tracker_admin_copy	from_box	Copy From 
+tracker_admin_copy	into_box	Into Trackers and Boxes
 tracker_admin_choose	title	Tracker Admin
 tracker_admin_update_canned	title	Modify Canned Responses In: $1
 tracker_admin_update_cat	auto_assign_to	Auto-Assign To
