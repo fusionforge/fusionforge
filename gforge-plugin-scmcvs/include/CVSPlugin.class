@@ -74,7 +74,8 @@ class CVSPlugin extends SCM {
 <?php
 // ######################## anonymous CVS instructions
 
-	 if ($this->UsesAnonCVS ($group_id)) {
+	//if ($this->UsesAnonCVS ($group_id)) {
+	if ($project->enableAnonSCM()){
 		echo $Language->getText('plugin_scmcvs', 'anoncvs');
 		print " <p>
 		                <tt>cvs -d :pserver:anonymous@" . $this->GetGroupServer($group_id) . ":/cvsroot/".$project->getUnixName()." login</tt><br>
@@ -105,13 +106,12 @@ if (session_loggedin()) {
 	$anonymous = !$perm->isMember();
 }
  
-if ($this->UsesAnonCVS ($group_id)) {
+//if ($this->UsesAnonCVS ($group_id)) {
+if ($project->enableAnonSCM()){
 	echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
 
 	echo $Language->getText('plugin_scmcvs', 'browsetree');
-
-	echo "<p><a href=\"http://" . $this->GetGroupServer($group_id) . "/plugins/scmcvs/cgi-bin/cvsweb.cgi/".$project->getUnixName()."\">Browse</a> CVS tree</p>" ;
-
+	echo '<p><a href="'.$this->account_group_cvsweb_url($group_id).'">Browse CVS Tree</a></p>' ;
 	echo $HTML->boxBottom();
 }
 
@@ -132,40 +132,69 @@ if ($this->UsesAnonCVS ($group_id)) {
 
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
-
-		if ($params['scmradio'] == 'scmcvs') {
-			$group->setPluginUse("scmcvs", 1) ;
-			
+ 		if ($params['scmcvs_enable_anoncvs']) {
+			$group->SetUsesAnonSCM(true);
 		} else {
-			$group->setPluginUse("scmcvs", 0) ;
-		}
+			$group->SetUsesAnonSCM(false);
+ 		}
+ 		if ($params['scmcvs_enable_pserver']) {
+			$group->SetUsesPserver(true);
+		} else {
+			$group->SetUsesPserver(false);
+ 		}
+////		if ($params['scmradio'] == 'scmcvs') {
+//// THIS IS NOT THE PLACE FOR THIS //////// TODO
+			$group->setPluginUse("scmcvs", 1) ;
+////			
+////		} else {
+////			$group->setPluginUse("scmcvs", 0) ;
+////		}
 // 		if ($params['scmcvs_use_cvs']) {
 // 			$group->setPluginUse("scmcvs", 1) ;
-			
 // 		} else {
 // 			$group->setPluginUse("scmcvs", 0) ;
 // 		}
-		if ($params['scmcvs_enable_anon_cvs']) {
-			$this->SetUsesAnonCVS ($params['group_id'], true) ;
+////		if ($params['scmcvs_enable_anon_cvs']) {
+////			$this->SetUsesAnonCVS ($params['group_id'], true) ;
+////		} else {
+////			$this->SetUsesAnonCVS ($params['group_id'], false) ;
+////		}
+////		if ($params['scmcvs_cvs_server'] && $params['scmcvs_cvs_server'] != "") {
+////			$this->SetGroupServer ($params['group_id'], $params['scmcvs_cvs_server']) ;
+////		} else {
+////			$this->SetGroupServer ($params['group_id'], $this->GetDefaultServer ()) ;
+////		}
+	}
+
+	// This function is used to render checkboxes below
+	function c($v) {
+		if ($v) {
+			return 'CHECKED';
 		} else {
-			$this->SetUsesAnonCVS ($params['group_id'], false) ;
-		}
-		if ($params['scmcvs_cvs_server'] && $params['scmcvs_cvs_server'] != "") {
-			$this->SetGroupServer ($params['group_id'], $params['scmcvs_cvs_server']) ;
-		} else {
-			$this->SetGroupServer ($params['group_id'], $this->GetDefaultServer ()) ;
+			return '';
 		}
 	}
 
+	function todoornottodo() {
+	?>
+		<input type="radio" name="scmradio" value="scmcvs" <?php if ($group->usesPlugin("scmcvs")) {print '"checked"';} ?>> <strong>Use CVS</strong><br>
+		<input type="checkbox" name="scmcvs_enable_anon_cvs" value="1" <?php if ($this->UsesAnonCVS($params['group_id'])) {print '"checked"';} ?>> <strong>Allow anonymous CVS</strong><br>
+		<input type="text" name="scmcvs_cvs_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>CVS server</strong><br><br>
+	<?
+	}
+
 	function display_scm_admin_page ($params) {
+		global $Language;
 		$group =& group_get_object($params['group_id']);
-?>
-<!-- <input type="checkbox" name="scmcvs_use_cvs" value="1" <?php if ($group->usesPlugin("scmcvs")) {print '"checked"';} ?>> <strong>Use CVS</strong><br> -->
-<input type="radio" name="scmradio" value="scmcvs" <?php if ($group->usesPlugin("scmcvs")) {print '"checked"';} ?>> <strong>Use CVS</strong><br>
-<input type="checkbox" name="scmcvs_enable_anon_cvs" value="1" <?php if ($this->UsesAnonCVS($params['group_id'])) {print '"checked"';} ?>> <strong>Allow anonymous CVS</strong><br>
-<input type="text" name="scmcvs_cvs_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>CVS server</strong><br><br>
-<?php
-														      }
+	?>
+		<input type="CHECKBOX" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> >
+		<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_anonymous_cvs') ?></strong>
+		<br />
+		<input type="CHECKBOX" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?> >
+		<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_pserver') ?></strong>
+		<br />
+	<?php
+	}
 
 	function display_stats ($params) {
 		global $Language ;
@@ -186,7 +215,7 @@ if ($this->UsesAnonCVS ($group_id)) {
 		if ($commit_num || $add_num) {
 			echo '
 		<br /> &nbsp; -
-			<a href="'.account_group_cvsweb_url($group_id).'">Browse CVS</a>';
+			<a href="'.$this->account_group_cvsweb_url($group_id).'">Browse CVS</a>';
 	        }
 		
 	}
@@ -198,7 +227,12 @@ if ($this->UsesAnonCVS ($group_id)) {
 	 */
 	function account_group_cvsweb_url($group_id) {
 		$project =& group_get_object($group_id);
-		return 'http://'.$GLOBALS['sys_scm_host'].'/cgi-bin/cvsweb.cgi?cvsroot='.$project->getUnixName();
+		if ( $GLOBALS['sys_scm_single_host'] == '1' ) {
+			$scm_server = $GLOBALS['sys_scm_host'];
+		} else {
+			$scm_server = $this->GetGroupServer($group_id);
+		}
+		return 'http://'.$scm_server.'/plugins/scmcvs/cgi-bin/cvsweb.cgi?cvsroot='.$project->getUnixName();
 	}
 
 	function display_groupmenu_scm($params) {
