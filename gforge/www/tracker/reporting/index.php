@@ -1,347 +1,106 @@
 <?php
 /**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   index.php,v 1.8 2003/11/04 20:30:49 lo-lan-do Exp
-  *
-  */
-
-
+ *	GForge Reporting System
+ *  Copyright 2003 GForge LLC
+ *
+ *  THIS SOFTWARE IS PROPRIETARY
+ */
 require_once('pre.php');
+require_once('common/reporting/report_utils.php');
+require_once('common/reporting/Report.class');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
-require_once('www/project/stats/project_stats_utils.php');
-require_once('tool_reports.php');
 
-$page_title=$Language->getText('tracker_reporting','title');
-//$bar_colors=array("red","blue");
-$bar_colors=array("#F76D6D","#6D6DF7");
+$report=new Report();
+if ($report->isError()) {
+	exit_error($report->getErrorMessage());
+}
 
 $group =& group_get_object($group_id);
-exit_assert_object($group, 'Group');
+if (!$group || !is_object($group)) {
+	exit_error('Error','Error - Could Not Get Group');
+} elseif ($group->isError()) {
+	exit_error('Error',$group->getErrorMessage());
+}
+
+if (!session_loggedin()) {
+	exit_not_logged_in();
+}
 
 $perm =& $group->getPermission( session_get_user() );
-exit_assert_object($perm, 'Permission');
-
-function reporting_header($group_id) {
-	global $atid,$perm,$group_id;
-	global $Language,$HTML;
-	echo $HTML->subMenu(
-		array(
-			$Language->getText('group','short_tracker'),
-			$Language->getText('tracker','reporting'),
-			$Language->getText('tracker','admin')
-		),
-		array(
-			'/tracker/?group_id='.$group_id,
-			'/tracker/reporting/?group_id='.$group_id,
-			'/tracker/admin/?group_id='.$group_id
-			
-		)
-	);
-	if ($perm->isAdmin()) {
-		$alevel=' >= 0';
-	} else {
-		$alevel=' > 1';
-	}
-	$sql="SELECT agl.group_artifact_id,agl.name
-        	FROM artifact_group_list agl,artifact_perm ap
-        	WHERE agl.group_artifact_id=ap.group_artifact_id
-        	AND ap.user_id='". user_getid() ."'
-        	AND ap.perm_level $alevel
-        	AND agl.group_id='$group_id'";
-	$res=db_query($sql);
-
-	
-	reports_header(
-		$group_id,
-		array('aging','tech','category','group','resolution'),
-		array($Language->getText('tracker_reporting','aging_report'),$Language->getText('tracker_reporting','dist_by_technician'),$Language->getText('tracker_reporting','dist_by_category'),$Language->getText('tracker_reporting','dist_by_group'),$Language->getText('tracker_reporting','dist_by_resolution')),
-		'<strong>'.$Language->getText('tracker_reporting','artifact_type').': </strong>'
-		 .html_build_select_box($res,'atid',$atid,false)
-		 .'<br /><br />'
-	);
-}
-
-function quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2) {
-	global $bar_colors;
-	global $Language;
-
-        $group_name=array(group_getname($group_id));
-       echo site_project_header(array("title"=>$title,'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name,
-           'toptab'=>'pm'));
-        reporting_header($group_id);
-        echo "\n<h1>$title</h1>";
-
-	reports_quick_graph($subtitle1,$sql1,$sql2,$bar_colors);
-
-	echo site_project_footer(array());
+if (!$perm || !is_object($perm)) {
+	exit_error('Error','Error - Could Not Get Perm');
+} elseif ($perm->isError()) {
+	exit_error('Error',$perm->getErrorMessage());
 }
 
 
-if ($perm->isMember()) {
+//
+//	Get list of trackers this person can see
+//
+if ($perm->isArtifactAdmin()) {
+	$alevel=' >= 0';
+} else {
+	$alevel=' > 1';
+}
 
-	include_once('www/include/HTML_Graphs.php');
-	
-	if ($what) {
-		
-		$period_clause=period2sql($period,$span,"open_date");
-		
-		if ($what=="aging") {
-			
-                        $group_name=array(group_getname($group_id));
-                       site_project_header(array ("title"=>$Language->getText(
-                           'tracker_reporting','aging_report'),
-                           'group'=>$group_id,
-                           'pagename'=>'tracker_reporting',
-                           'sectionvals'=>$group_name, 'toptab'=>'pm'));
-                        reporting_header($group_id);
-                        echo "\n<h1>".$Language->getText('tracker_reporting','aging_report')."</h1>";
+$sql="SELECT agl.group_artifact_id,agl.name
+	FROM artifact_group_list agl,artifact_perm ap
+	WHERE agl.group_artifact_id=ap.group_artifact_id
+	AND ap.user_id='". user_getid() ."'
+	AND ap.perm_level $alevel
+	AND agl.group_id='$group_id'";
+$restracker=db_query($sql);
 
-			$time_now=time();
-//			echo $time_now."<p>";
+//
+//	Build list of reports
+//
+$vals[]='activity'; $labels[]='Response Time';
+$vals[]='category'; $labels[]='By Category';
+$vals[]='group'; $labels[]='By Group';
+$vals[]='resolution'; $labels[]='By Resolution';
+$vals[]='technician'; $labels[]='By Tecnician';
 
-			if (!$period || $period=="lifespan") {
-				$period="month";
-				$span=12;
-			}
 
-			if (!$span) $span=1;
-			$sub_duration=period2seconds($period, 1);
+//required params for site_project_header();
+$params['group']=$group_id;
+$params['toptab']='tracker';
+$params['pagename']='tracker';
+$params['sectionvals']=array($group->getPublicName());
 
-			for ($counter=1; $counter<=$span; $counter++) {
+echo site_project_header($params);
 
-				$start=($time_now-($counter*$sub_duration));
-				$end=($time_now-(($counter-1)*$sub_duration));
-
-				$sql="	SELECT avg((close_date-open_date)/(24*60*60)) 
-					FROM artifact
-					WHERE close_date > 0 
-					AND (open_date >= '$start' AND open_date <= '$end') 
-					AND resolution_id <> '2' 
-					AND group_artifact_id='$atid'";
-
-				$result = db_query($sql);
-
-				$names[$counter-1]=date("Y-m-d",($start))." to ".date("Y-m-d",($end));
-				$values[$counter-1]=((int)(db_result($result, 0,0)*1000))/1000;
-			}
-
-			GraphIt(
-				$names, $values,
-				$Language->getText('tracker_reporting','average_turnaround')
-			);
-
-			echo "<p>&nbsp;</p>";
-
-			for ($counter=1; $counter<=$span; $counter++) {
-
-				$start=($time_now-($counter*$sub_duration));
-				$end=($time_now-(($counter-1)*$sub_duration));
-
-				$sql="	SELECT count(*)
-					FROM artifact
-					WHERE open_date >= '$start'
-					AND open_date <= '$end'
-					AND resolution_id <> '2'
-					AND group_artifact_id='$atid'";
-
-				$result = db_query($sql);
-
-				$names[$counter-1]=date("Y-m-d",($start))." to ".date("Y-m-d",($end));
-				$values[$counter-1]=db_result($result, 0,0);
-			}
-
-			GraphIt($names, $values, $Language->getText('tracker_reporting','items_submitted'));
-
-			echo "<p>";
-
-			for ($counter=1; $counter<=$span; $counter++) {
-
-				$start=($time_now-($counter*$sub_duration));
-				$end=($time_now-(($counter-1)*$sub_duration));
-
-				$sql="	SELECT count(*)
-					FROM artifact
-					WHERE open_date <= '$end'
-					AND (close_date >= '$end' OR close_date < 1 OR close_date is null)
-					AND resolution_id <> '2'
-					AND group_artifact_id='$atid'";
-
-				$result = db_query($sql);
-
-				$names[$counter-1]=date("Y-m-d",($end));
-				$values[$counter-1]=db_result($result, 0,0);
-			}
-
-			GraphIt($names, $values, $Language->getText('tracker_reporting','items_open'));
-
-			echo "<p>&nbsp;</p>";
-
-			site_project_footer(array());
-
-		} else if ($what=="category") {
-
-			// Open
-			$sql1="
-				SELECT artifact_category.category_name AS Category,
-				       count(*) AS Count
-				FROM artifact_category,artifact 
-				WHERE artifact_category.id=artifact.category_id
-				AND artifact.status_id = '1'
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause 
-				GROUP BY Category";
-
-			// All
-			$sql2="
-				SELECT artifact_category.category_name AS Category,
-				       count(*) AS Count
-				FROM artifact_category,artifact
-				WHERE artifact_category.id=artifact.category_id
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause
-				GROUP BY Category";
-
-			quick_report(
-				$group_id,
-				$Language->getText('tracker_reporting','dist_by_category'),
-				$Language->getText('tracker_reporting','open_items_by_technician'),$sql1,
-				$Language->getText('tracker_reporting','all_by_technician'),$sql2
-			);
-
-		} else if ($what=="tech") {
-
-			// Open
-			$sql1="
-				SELECT users.user_name AS Technician, count(*) AS Count
-				FROM users,artifact
-				WHERE users.user_id=artifact.assigned_to
-				AND artifact.status_id = '1'
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause
-				GROUP BY Technician";
-
-			// All
-			$sql2="
-				SELECT users.user_name AS Technician, count(*) AS Count
-				FROM users,artifact 
-				WHERE users.user_id=artifact.assigned_to
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause
-				GROUP BY Technician";
-
-			quick_report(
-				$group_id,
-				$Language->getText('tracker_reporting','dist_by_technician'),
-				$Language->getText('tracker_reporting','open_items_by_technician'),$sql1,
-				$Language->getText('tracker_reporting','all_items_by_technician'),$sql2
-			);
-
-		} else if ($what=="group") {
-
-			// Open
-			$sql1="
-				SELECT artifact_group.group_name AS Group_Name,
-				      count(*) AS Count FROM artifact_group,artifact 
-				WHERE artifact_group.id=artifact.artifact_group_id
-				AND artifact.status_id = '1'
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause 
-				GROUP BY Group_Name";
-
-			// All
-			$sql2="
-				SELECT artifact_group.group_name AS Group_Name,
-				      count(*) AS Count FROM artifact_group,artifact
-				WHERE artifact_group.id=artifact.artifact_group_id
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause
-				GROUP BY Group_Name";
-
-			quick_report(
-				$group_id,
-				$Language->getText('tracker_reporting','dist_by_group'),
-				$Language->getText('tracker_reporting','open_by_group'),$sql1,
-				$Language->getText('tracker_reporting','all_by_group'),$sql2
-			);
-
-		} else if ($what=="resolution") {
-
-			// Open
-			$sql1="
-				SELECT artifact_resolution.resolution_name AS Resolution,
-				       count(*) AS Count
-				FROM artifact_resolution,artifact
-				WHERE artifact_resolution.id=artifact.resolution_id
-				AND artifact.status_id = '1'
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause 
-				GROUP BY Resolution";
-
-			// All
-			$sql2="
-				SELECT artifact_resolution.resolution_name AS Resolution,
-				       count(*) AS Count
-				FROM artifact_resolution,artifact
-				WHERE artifact_resolution.id=artifact.resolution_id
-				AND artifact.resolution_id <> '2'
-				AND artifact.group_artifact_id='$atid'
-				$period_clause
-				GROUP BY Resolution";
-
-			quick_report(
-				$group_id,
-				$Language->getText('tracker_reporting','dist_by_resolution'),
-				$Language->getText('tracker_reporting','open_items_by_resolution'),$sql1,
-				$Language->getText('tracker_reporting','all_by_resolution'),$sql2
-			);
-
+?>
+<h3>Project Activity</h3>
+<p>
+<form action="<?php echo $PHP_SELF; ?>" method="get">
+<input type="hidden" name="sw" value="<?php echo $sw; ?>">
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
+<table><tr>
+<td><strong>Tracker:</strong><br /><?php echo html_build_select_box($restracker,'atid',$atid,false); ?></td>
+<td><strong>Area:</strong><br /><?php echo html_build_select_box_from_arrays($vals, $labels, 'area',$area,false); ?></td>
+<td><strong>Type:</strong><br /><?php echo report_span_box('SPAN',$SPAN,true); ?></td>
+<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+<td><input type="submit" name="submit" value="Refresh"></td>
+</tr></table>
+</form>
+<p>
+<?php if ($atid) {
+		if (!$area || $area == 'activity') { 
+	?>
+	<img src="trackeract_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end&group_id=$group_id&atid=$atid"; ?>" width="640" height="480">
+	<p>
+	<?php
 		} else {
-			exit_missing_param();
+	?>
+	<img src="trackerpie_graph.php?<?php echo "SPAN=$SPAN&start=$start&end=$end&group_id=$group_id&atid=$atid&area=$area"; ?>" width="640" height="480">
+	<p>
+	<?php
+
 		}
 
-	} else {
-		/*
-			Show main page
-		*/
-
-		//required params for site_project_header();
-		$params['group'] = $group_id;
-		$params['toptab'] = 'tracker';
-		$params['title'] = $page_title;
-		$params['pagename'] = 'tracker_reporting';
-		$params['sectionvals']=array(group_getname($group_id));
-	
-		echo site_project_header($params);
-
-		reporting_header($group_id);
-
-		echo site_project_footer($params);
-
-	}
-
-} else {
-
-	// Cannot show reports
-
-	exit_permission_denied();
-
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+echo site_project_footer(array());
+
 ?>

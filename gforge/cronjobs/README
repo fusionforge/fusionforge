@@ -66,3 +66,9 @@
 # Hourly send pending massmailings, if any
 #
 47 * * * * ~/gforge3/cronjobs/massmail.php
+
+#
+#       Reporting Process
+#
+25 07 * * * ~/gforge3/cronjobs/reporting_cron.php
+

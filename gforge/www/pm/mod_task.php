@@ -17,6 +17,13 @@
 */
 
 require_once('note.php');
+require_once('common/reporting/report_utils.php');
+require_once('common/reporting/Report.class');
+
+$report=new Report();
+if ($report->isError()) {
+	exit_error('Error',$report->getErrorMessage());
+}
 
 pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 
@@ -175,7 +182,66 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 
 </table>
 </form>
+<p>
+<h3>Time Tracking</h3>
+<p>
 <?php
+$title_arr[]='Week';
+$title_arr[]='Day';
+$title_arr[]='Hours';
+$title_arr[]='Category';
+$title_arr[]='User';
+$title_arr[]=' ';
+
+echo $HTML->listTableTop ($title_arr);
+	echo '<form action="/reporting/timeadd.php" method="post" />
+	<input type="hidden" name="project_task_id" value="'.$project_task_id.'">
+	<input type="hidden" name="submit" value="1" />
+	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+		<td align="middle">'. report_weeks_box($report, 'week') .'</td>
+		<td align="middle">'. report_day_adjust_box($report, 'days_adjust') .'</td>
+		<td align="middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
+		<td align="middle">'.report_time_category_box('time_code',false).'</td>
+		<td>&nbsp;</td>
+		<td align="middle"><input type="submit" name="add" value="Add" /><input type="submit" name="cancel" value="Cancel" /></td>
+	</tr></form>';
+
+//
+//	Display Time Recorded for this task
+//
+$sql="SELECT users.realname, rep_time_tracking.report_date, rep_time_tracking.hours, rep_time_category.category_name
+	FROM users,rep_time_tracking,rep_time_category
+	WHERE 
+	users.user_id=rep_time_tracking.user_id
+	AND rep_time_tracking.time_code=rep_time_category.time_code
+	AND rep_time_tracking.project_task_id='$project_task_id'";
+
+$res=db_query($sql);
+for ($i=0; $i<db_numrows($res); $i++) {
+
+	echo '
+	<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+	<td>&nbsp;</td>
+	<td>'.date($sys_datefmt,db_result($res,$i,'report_date')).'</td>
+	<td>'.db_result($res,$i,'hours').'</td>
+	<td>'.db_result($res,$i,'category_name').'</td>
+	<td>'.db_result($res,$i,'realname').'</td>
+	<td>&nbsp;</td></tr>';
+	$total_hours += db_result($res,$i,'hours');
+	
+}
+
+echo '
+<tr '.$HTML->boxGetAltRowStyle($xi++).'>
+<td><strong>Total:</strong></td>
+<td>&nbsp;</td>
+<td>'.$total_hours.'</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td></tr>';
+$total_hours += db_result($res,$i,'hours');
+
+echo $HTML->listTableBottom();
 
 pm_footer(array());
 

@@ -12,6 +12,7 @@
  *
  * @version   $Id$
  */
+require_once ('www/tracker/include/ArtifactTypeHtml.class');
 
 class Layout extends Error {
 
@@ -492,6 +493,10 @@ if (isset($params['group']) && $params['group']) {
 			$TABS_DIRS[]='/admin/';
 			$TABS_TITLES[]=$Language->getText('menu','admin');
 		}
+		if (user_ismember($GLOBALS['sys_stats_group'])) {
+			$TABS_DIRS[]='/reporting/';
+			$TABS_TITLES[]=$Language->getText('menu','reporting');
+		}
 		if(isset($params['group']) && $params['group']) {
 			// get group info using the common result set
 			$project =& group_get_object($params['group']);
@@ -515,10 +520,15 @@ if (isset($params['group']) && $params['group']) {
 			$selected=array_search("/snippet/", $TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/people/')) {
 			$selected=array_search("/people/", $TABS_DIRS);
+		} elseif (strstr($GLOBALS['REQUEST_URI'],'/reporting/')) {
+			$selected=array_search('/reporting/',$TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/admin/') && user_ismember(1,'A')) {
-			$selected=(count($TABS_DIRS)-1);
+			$selected=array_search('/admin/',$TABS_DIRS);;
 		} else {
 			$selected=0;
+		}
+		if (!$this->COLOR_SELECTED_TAB) {
+			$this->COLOR_SELECTED_TAB= '#e0e0e0';
 		}
 		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,$this->COLOR_SELECTED_TAB,'100%');
 
