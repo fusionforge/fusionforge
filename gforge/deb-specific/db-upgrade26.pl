@@ -59,6 +59,7 @@ eval {
 	    
  	    foreach my $s (@reqlist) {
  		$query = $s ;
+		debug $query ;
   		$sth = $dbh->prepare ($query) ;
   		$sth->execute () ;
   		$sth->finish () ;
@@ -295,7 +296,9 @@ sub parse_sql_file ( $ ) {
       
     PARSELOOP: while (1) {	# Parse a request
 
-	while ( ($l eq "") or ((! $inquote) and ($l =~ /^\s*$/)) ) {
+	while ( ($l eq "")
+		or ((! $inquote) and ($l =~ /^\s*$/))
+		or ((! $inquote) and ($l =~ /^--/)) ) {
 	    $l = <F> ;
 	    if ($l) {
  		chomp $l ;
