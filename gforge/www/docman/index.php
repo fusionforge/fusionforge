@@ -57,6 +57,8 @@ if ($group_id) {
 						 ." and doc_group = '".$row['doc_group']."' ";
 				} //state 5 == 'private' 
 
+                        $query .= " order by title";
+
 			$subresult = db_query($query); 
 
 			if (!(db_numrows($subresult) < 1)) {
