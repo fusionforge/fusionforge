@@ -31,11 +31,11 @@ function menu_show_search_box($show_horizontally=false, $new_window=true) {
 
 	if ($show_horizontally) {
 		print '
-		<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+		<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="0">
 		<TR><TD>';
 	}
 
-	print '<CENTER>
+	print '	<CENTER>
 		<FONT SIZE="1">
 		<FORM action="/search/" method="POST"'.$new_window.'>
 
@@ -101,7 +101,7 @@ function menu_show_search_box($show_horizontally=false, $new_window=true) {
 		print '
 		</TD></TR></TABLE>';
 	}
-	print '</FORM></FONT>';
+	print '</FORM></FONT></CENTER>';
 }
 
 /**
@@ -294,6 +294,7 @@ function menu_loggedin($page_title) {
 		$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->getText('menu','bookmark_page'));
 		
 	}
+	$HTML->menuhtml_bottom();
 
 	$admingroup = group_get_object (1) ;
 	exit_assert_object($admingroup,'Group');
@@ -306,9 +307,7 @@ function menu_loggedin($page_title) {
 	$perm =& $newsgroup->getPermission( session_get_user() );
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
 		menu_news_admin();
-	}
-	
-	$HTML->menuhtml_bottom();
+	}       
 }
 
 function menu_notloggedin() {

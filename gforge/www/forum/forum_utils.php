@@ -38,6 +38,7 @@ function forum_header($params) {
 
 	*/
 	if ($group_id == $sys_news_group) {
+	  
 		//this is a news item, not a regular forum
 		if ($forum_id) {
 			/*
@@ -51,14 +52,14 @@ function forum_header($params) {
 			//as of may, "generic news" is not permitted - only project-specific news
 	       		if (db_result($result,0,'group_id') != $sys_news_group) {
 				$params['group']=db_result($result,0,'group_id');
-				$params['toptab']='news';
+				$params['sectionvals']=group_getname(db_result($result,0,'group_id'));
+				$params['toptab']='news';				
 				site_project_header($params);
 			} else {
 				$HTML->header($params);
 				echo '
 					<H2>'.$GLOBALS['sys_name'].' <A HREF="/news/">'.$Language->getText('forum_utils','news').'</A></H2><P>';
 			}
-
 
 			echo '<TABLE><TR><TD VALIGN="TOP">';
 			if (!$result || db_numrows($result) < 1) {
@@ -68,7 +69,7 @@ function forum_header($params) {
 				echo '
 				<B>'.$Language->getText('forum_utils','postedby').':</B> '.user_getname( db_result($result,0,'submitted_by')).'<BR>
 				<B>'.$Language->getText('forum_utils','date').':</B> '. date($sys_datefmt,db_result($result,0,'date')).'<BR>
-				<B>'.$Language->getText('forum_utils','summary').':</B><A HREF="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</A>
+				<B>'.$Language->getText('forum_utils','summary').':</B> <A HREF="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</A>
 				<P>
 				'. util_make_links( nl2br( db_result($result,0,'details')));
 

@@ -640,7 +640,6 @@ $s = ((session_issecure()) ? 's' : '' );
 		<td background=<?php echo url_image($this->imgroot . "bbar1.png"); ?> bgcolor="#7c8188"><?php echo html_image($this->imgroot . "bright1.png","17","17",array()); ?></td>
 	</tr>
 </table>
-</center>
 </div>
 
 <!-- themed page footer -->

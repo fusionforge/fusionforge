@@ -30,8 +30,10 @@ function printnode ($nodeid,$text) {
 
 	print html_image('images/ic/cfolder15.png','15','13',array());
 	print ('&nbsp; '.$text." ");
-	print ('<A href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">[Edit]</A> ');
-	print (help_button('trove_cat',$nodeid)."\n");
+	if ($nodeid != 0) {
+                print ('<A href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">[Edit]</A> ');
+                print (help_button('trove_cat',$nodeid)."\n");
+        }
 
 	$GLOBALS['depth']++;
 	$res_child = db_query("
