@@ -74,13 +74,13 @@ account_options	change_email_address	Change Email Addr
 account_options	change_password	Change Password
 account_options	edit_skills_profile	Edit My Skills Profile
 account_options	email_address		Email Addr:
-account_options	language	Language
-account_options	login_name	Login Name
-account_options	member_since	Member since
-account_options	real_name	Real Name
-account_options	timezone	Timezone
+account_options	language	Language:
+account_options	login_name	Login Name:
+account_options	member_since	Member since:
+account_options	real_name	Real Name:
+account_options	timezone	Timezone:
 account_options	title		Account Maintenance
-account_options	user_id	User Id
+account_options	user_id	User Id:
 account_options	view_developer_profile	View My Developer Profile
 account_options	welcome		Welcome
 account_register	Preferences	Preferences
@@ -833,8 +833,8 @@ general	update	Update
 general	update_successful	Updated successfully
 general	yes	Yes
 global	error	ERROR
-group	activity	Activity Percentile: 
-group	activitystat	View project activity <a href="/project/stats/?group_id=$1">statistics</a>
+group	activity	Activity Percentile:&nbsp;
+group	activitystat	View project activity <a href="/project/stats/?group_id=$1">statistics</a>.
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
@@ -853,7 +853,7 @@ group	nodescription	This project has not yet submitted a description.
 group	norelease	This Project Has Not Released Any Files
 group	project_admins	Project Admins
 group	public_area	Public Areas
-group	registered	Registered: 
+group	registered	Registered:&nbsp;
 group	short_admin	Admin
 group	short_bugs	Bugs
 group	short_cvs	CVS
@@ -965,10 +965,10 @@ my	assigneditems	My Assigned Items
 my	bookmarks	My Bookmarks
 my	monitoredfile	Monitored FileModules
 my	monitoredforum	Monitored Forums
-my	no_bookmarks	You currently do not have any bookmarks saved
-my	no_monitored_filemodules	You are not monitoring any files
+my	no_bookmarks	You currently do not have any bookmarks saved.
+my	no_monitored_filemodules	You are not monitoring any files.
 my	no_monitored_filemodules_details	<p>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.</p><p>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.</p>
-my	no_monitored_forums	You are not monitoring any forums
+my	no_monitored_forums	You are not monitoring any forums.
 my	no_monitored_forums_details	<p>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.</p><p>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.</p>
 my	no_open_tasks	You have no open tasks assigned to you.
 my	no_projects	You're not a member of any active projects
@@ -1351,24 +1351,24 @@ project_admin	edit_member_permissions	Edit Member Permissions
 project_admin	file_releases	File Releases
 project_admin	forum_admin	Forum Admin
 project_admin	group_members	Group Members
-project_admin	homepage_link	Homepage Link
+project_admin	homepage_link	Homepage Link:&nbsp;
 project_admin	mail_admin	Mail Admin
 project_admin	news_admin	News Admin
 project_admin	packages	Packages
 project_admin	project_information	Misc. Project Information
 project_admin	section	Project: $1
-project_admin	shell_server	Group shell (SSH) server
-project_admin	shell_server_group_directory	Group directory on shell server: 
-project_admin	short_description	Short Description
+project_admin	shell_server	Group shell (SSH) server:&nbsp;
+project_admin	shell_server_group_directory	Group directory on shell server:&nbsp; 
+project_admin	short_description	Short Description:&nbsp;
 project_admin	task_manager_admin	Task Manager Admin
 project_admin	title	Project Admin: $1
 project_admin	tool_admin	Tool Admin
 project_admin	tracker_admin	Tracker Admin
-project_admin	trove_categorization	Trove Categorization:
+project_admin	trove_categorization	Trove Categorization:&nbsp;
 project_admin	unix_name	Unix Name
 project_admin	user_added	User Added Successfully
 project_admin	user_removed	User Removed Successfully
-project_admin	www_directory	Project WWW directory on shell server:
+project_admin	www_directory	Project WWW directory on shell server:&nbsp;
 project_admin_database	add_new_database	Add New Database
 project_admin_database	add_new_database_info	Clicking on "create" will schedule the creation of the database, and email the	details to the project administrators
 project_admin_database	cannot_add	Cannot add database entry
@@ -1392,7 +1392,7 @@ project_admin_editgroupinfo	enable_anonymous_cvs	Enable anonymous CVS
 project_admin_editgroupinfo	enable_pserver	Enable pserver
 project_admin_editgroupinfo	group_name	Descriptive Group Name
 project_admin_editgroupinfo	group_updated	Group information updated
-project_admin_editgroupinfo	homepage_link	Homepage Link:
+project_admin_editgroupinfo	homepage_link	Homepage Link
 project_admin_editgroupinfo	new_doc	New Document Submissions
 project_admin_editgroupinfo	new_doc_info	If you wish, you can provide default email addresses to which new submissions will be sent
 project_admin_editgroupinfo	send_on_all_updates	(send on all updates)
@@ -1976,7 +1976,7 @@ survey	for_some_reason	For some reason, the Group ID or Survey ID did not make i
 survey	high	High
 survey	low	Low
 survey	permission_denied	Permission Denied
-survey	survey_not_found	Survey not found
+survey	survey_not_found	Survey not found.
 survey	survey_privacy	Survey Privacy
 survey	title	Survey
 survey_add_question	add_this_question	Add This Question.

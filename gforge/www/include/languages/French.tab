@@ -89,13 +89,13 @@ account_options	change_email_address	Changer d'adresse de courrier
 account_options	change_password	Changement de mot de passe
 account_options	edit_skills_profile	Editer mon profil de compétences
 account_options	email_address	Adresse e-mail :
-account_options	language	Langue
+account_options	language	Langue&nbsp;:
 account_options	login_name	Nom de login :
 account_options	member_since	Membre depuis le :
-account_options	real_name	Nom complet
-account_options	timezone	Fuseau horaire
+account_options	real_name	Nom complet&nbsp;:
+account_options	timezone	Fuseau horaire&nbsp;:
 account_options	title	Gestion de compte
-account_options	user_id	Identification Utilisateur
+account_options	user_id	Identification Utilisateur&nbsp;:
 account_options	view_developer_profile	Voir mon profil de développeur
 account_options	welcome	Bienvenue
 account_register	Preferences	Préférences
@@ -132,7 +132,7 @@ account_register	reset	Annuler les changements
 account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I> (Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
 account_register	timezone	Fuseau horaire :
 account_register	title	Enregistrement d'un nouvel utilisateur
-account_register	update	Mise à jour.
+account_register	update	Mise à jour
 account_shell	autorized_keys	Clés publiques CVS/SSH autorisées&nbsp;
 account_shell	edit_keys	Editer les clefs
 account_shell	shell_box	Interpréteur&nbsp;
@@ -836,8 +836,8 @@ general	update	Mettre à jour
 general	update_successful	Mis à jour avec succès
 general	yes	Oui
 global	error	ERREUR
-group	activity	Taux d'activité :
-group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activité du projet
+group	activity	Taux d'activité&nbsp;:&nbsp;
+group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activité du projet.
 group	developer_info	Equipe-Projet
 group	developers	Développeurs&nbsp;
 group	long_bugs	Gestion des bogues
@@ -856,7 +856,7 @@ group	nodescription	Ce project n'a pas encore soumis de description.
 group	norelease	Ce projet n'a pas réalisé de fichier
 group	project_admins	Administrateurs&nbsp; 
 group	public_area	Zones publiques
-group	registered	Enregistré le:
+group	registered	Enregistré le&nbsp;:&nbsp;
 group	short_admin	Administration
 group	short_bugs	Bogues
 group	short_cvs	CVS
@@ -1355,24 +1355,24 @@ project_admin	edit_member_permissions	Editer les permissions des membres
 project_admin	file_releases	Versions de fichier
 project_admin	forum_admin	Administrateur de forum
 project_admin	group_members	Membres du groupe
-project_admin	homepage_link	Lien vers la page d'accueil&nbsp;
+project_admin	homepage_link	Lien vers la page d'accueil&nbsp;:&nbsp;
 project_admin	mail_admin	Administrateur de messagerie
 project_admin	news_admin	Administrateur de News
 project_admin	packages	Paquet&nbsp;
 project_admin	project_information	Informations diverses sur le projet
 project_admin	section	Projet : $1
-project_admin	shell_server	Groupe Unix (Pour SSH)&nbsp;
-project_admin	shell_server_group_directory	Répertoire système du groupe&nbsp;
-project_admin	short_description	Description courte&nbsp; 
+project_admin	shell_server	Groupe Unix (pour SSH)&nbsp;:&nbsp;
+project_admin	shell_server_group_directory	Répertoire système du groupe&nbsp;:&nbsp;
+project_admin	short_description	Description courte&nbsp;:&nbsp;
 project_admin	task_manager_admin	Administrateur du gestionnaire de tâches
 project_admin	title	Résumé de l'administration
 project_admin	tool_admin	La boite à outils de l'administrateur
 project_admin	tracker_admin	Administrateur de traceur
-project_admin	trove_categorization	classement du projet dans l'arbre
+project_admin	trove_categorization	Classement du projet dans l'arbre&nbsp;:&nbsp;
 project_admin	unix_name	Nom Unix&nbsp;
 project_admin	user_added	Utilisateur ajouté avec succès
 project_admin	user_removed	Utilisateur supprimé avec succès
-project_admin	www_directory	Répertoire de service du site web (www)&nbsp;
+project_admin	www_directory	Répertoire de service du site web (www)&nbsp;:&nbsp;
 project_admin_database	add_new_database	Ajouter une nouvelle base de données
 project_admin_database	add_new_database_info	'Créer' programmera la création de la base de donnée, et enverra les détails aux administrateurs du projet.
 project_admin_database	cannot_add	Impossible d'ajouter une base de données
