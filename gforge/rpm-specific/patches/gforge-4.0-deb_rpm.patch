@@ -1,6 +1,6 @@
 diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
---- gforge/deb-specific/db-upgrade.pl	2004-10-31 20:12:10.000000000 +0100
-+++ gforge-rpm/deb-specific/db-upgrade.pl	2004-11-01 19:44:21.000000000 +0100
+--- gforge/deb-specific/db-upgrade.pl	2004-12-12 14:50:30.000000000 +0100
++++ gforge-rpm/deb-specific/db-upgrade.pl	2004-12-12 21:42:14.595683913 +0100
 @@ -1595,7 +1595,7 @@
      $target = "3.3.0-2+1" ;
      if (&is_lesser ($version, $target)) {
@@ -10,7 +10,7 @@ diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
  	or die "system call of 20040826_migrateforum.php failed: $?" ;
          &update_db_version ($target) ;
          &debug ("Committing.") ;
-@@ -1606,32 +1606,32 @@
+@@ -1606,7 +1606,7 @@
      $target = "3.3.0-2+2" ;
      if (&is_lesser ($version, $target)) {
          &debug ("Upgrading with migraterbac.php") ;
@@ -19,11 +19,12 @@ diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
  	or die "system call of 20040826_migraterbac.php failed: $?" ;
          &update_db_version ($target) ;
          &debug ("Committing.") ;
+@@ -1633,25 +1633,25 @@
          $dbh->commit () ;
      }
  
 -    $version = &get_db_version ;
--    $target = "3.3.0-2+3" ;
+-    $target = "3.3.0-2+4+1" ;
 -    if (&is_lesser ($version, $target)) {
 -        &debug ("Upgrading with 20041001.sql") ;
 -
@@ -42,7 +43,7 @@ diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
 -        $dbh->commit () ;
 -    }
 +#    $version = &get_db_version ;
-+#    $target = "3.3.0-2+3" ;
++#    $target = "3.3.0-2+4+1" ;
 +#    if (&is_lesser ($version, $target)) {
 +#        &debug ("Upgrading with 20041001.sql") ;
 +#
@@ -62,7 +63,7 @@ diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
 +#    }
  
      $version = &get_db_version ;
-     $target = "3.3.0-2+4" ;
+     $target = "3.3.0-2+5" ;
 @@ -1755,62 +1755,62 @@
          $dbh->commit () ;
      }
@@ -180,9 +181,9 @@ diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
 +#        $dbh->commit () ;
 +#    }
  
-     &debug ("It seems your database $action went well and smoothly.  That's cool.") ;
-     &debug ("Please enjoy using Gforge.") ;
-@@ -1843,7 +1843,7 @@
+     $version = &get_db_version ;
+     $target = "4.0.0-0+3" ;
+@@ -1887,7 +1887,7 @@
  $dbh->disconnect ;
  
  sub get_pg_version () {
