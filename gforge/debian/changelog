@@ -1,4 +1,4 @@
-gforge (3.1-12+3) unstable; urgency=low
+gforge (3.1-13) unstable; urgency=low
 
   * [Roland] Upgraded the Suggests: libphp-jpgraph to a Depends:, since
     that package has now been uploaded to Debian unstable.
@@ -7,7 +7,7 @@ gforge (3.1-12+3) unstable; urgency=low
     ignores the line instead, which resulted in gforge-cvs depending on
     nothing at all (closes: #236112).
 
- -- Roland Mas <lolando@debian.org>  Thu,  4 Mar 2004 14:24:25 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  4 Mar 2004 22:23:38 +0100
 
 gforge (3.1-12) unstable; urgency=low
 
