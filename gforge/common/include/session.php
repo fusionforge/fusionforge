@@ -102,7 +102,7 @@ function session_check_session_cookie($session_cookie) {
 	mcrypt_generic_end($td);
 
 	list($user_id, $time, $ip, $user_agent) = explode('-', $session_serial, 4);
-	
+
 	if (!session_check_ip($ip, $GLOBALS['REMOTE_ADDR'])) {
 		return false;
 	}
@@ -112,7 +112,7 @@ function session_check_session_cookie($session_cookie) {
 	if ($time - time() >= $GLOBALS['sys_session_expire']) {
 		return false;
 	}
-	
+
 	return $user_id;
 }
 
@@ -208,13 +208,13 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 			// The (crypt) unix_pw does not patch
 			// Invalidate (MD5) user_pw, refuse authentication
 			$res = db_query ("UPDATE users
-                                          SET user_pw='INVALID'
+                                          SET user_pw='OUT OF DATE'
                                           WHERE user_id='".$usr['user_id']."'
                                           ");
 			$feedback='Invalid Password Or User Name';
 			return false;
 		}
-		
+
 		// Yay.  The provided password matches both fields in the database.
 		// Let's check the status of this user
 
@@ -264,7 +264,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 function session_check_ip($oldip,$newip) {
 	$eoldip = explode(".",$oldip);
 	$enewip = explode(".",$newip);
-	
+
 	// ## require same class b subnet
 	if (($eoldip[0]!=$enewip[0])||($eoldip[1]!=$enewip[1])) {
 		return 0;
@@ -411,7 +411,7 @@ function session_set_new($user_id) {
  */
 function session_getdata($user_id) {
 	$res=db_query("SELECT
-	
+
 		u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code
 
 		FROM users u,
@@ -500,7 +500,7 @@ function user_getid() {
  */
 function user_isloggedin() {
 	global $G_SESSION;
-	
+
 	if ($G_SESSION) {
 		return $G_SESSION->isLoggedIn();
 	} else {

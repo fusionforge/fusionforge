@@ -124,7 +124,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 	// ################## ArtifactTypes
 
-	$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/tracker/?group_id='.$group_id.'">';
+	$return .= '<A href="/tracker/?group_id='.$group_id.'">';
 	$return .= html_image("images/ic/taskman16b.png",'20','20',array('alt'=>'Tracker'));
 	$return .= ' Tracker</A>';
 
@@ -143,7 +143,7 @@ function project_summary($group_id,$mode,$no_table) {
 		} else {
 			for ($j = 0; $j < $rows; $j++) {
 				$return .= '<P>
-				&nbsp;-&nbsp;<A HREF="http://'.$GLOBALS['sys_default_domain'].'/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
+				&nbsp;-&nbsp;<A HREF="/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 				'&group_id='.$group_id.'&func=browse">'. db_result($result, $j, 'name') .'</A> 
 				( <B>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</B> )<BR>'.
 				db_result($result, $j, 'description');
@@ -155,7 +155,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/forum/?group_id='.$group_id.'">';
+		$return .= '<A href="/forum/?group_id='.$group_id.'">';
 		$return .= html_image("images/ic/notes16.png","20","20",array("BORDER"=>"0","ALT"=>"Forums"));
 		$return .= '&nbsp;Forums</A>';
 
@@ -171,7 +171,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/docman/?group_id='.$group_id.'">';
+		$return .= '<A href="/docman/?group_id='.$group_id.'">';
 		$return .= html_image("images/ic/docman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Docs"));
 		$return .= '&nbsp;Doc&nbsp;Manager</A>';
 	}
@@ -182,7 +182,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/mail/?group_id='.$group_id.'">';
+		$return .= '<A href="/mail/?group_id='.$group_id.'">';
 		$return .= html_image("images/ic/mail16b.png","20","20",array("BORDER"=>"0","ALT"=>"Mail Lists"));
 		$return .= '&nbsp;Mailing&nbsp;Lists</A>';
 
@@ -197,7 +197,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/pm/?group_id='.$group_id.'">';
+		$return .= '<A href="/pm/?group_id='.$group_id.'">';
 		$return .= html_image("images/ic/taskman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Tasks"));
 		$return .= '&nbsp;Task&nbsp;Manager</A>';
 
@@ -211,7 +211,7 @@ function project_summary($group_id,$mode,$no_table) {
 			} else {
 				for ($j = 0; $j < $rows; $j++) {
 					$return .= '
-					<BR> &nbsp; - <A HREF="http://'.$GLOBALS['sys_default_domain'].'/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').
+					<BR> &nbsp; - <A HREF="/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').
 					'&group_id='.$group_id.'&func=browse">'.db_result($result, $j, 'project_name').'</A>';
 				}
 				db_free_result($result);
@@ -225,7 +225,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/survey/?group_id='.$group_id.'">';
+		$return .= '<A href="/survey/?group_id='.$group_id.'">';
 		$return .= html_image("images/ic/survey16b.png","20","20",array("BORDER"=>"0","ALT"=>"Surveys"));
 		$return .= "&nbsp;Surveys</A>";
 		if ($mode != 'compact') {
@@ -239,7 +239,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/cvs/?group_id='.$group_id.'">';
+		$return .= '<A href="/cvs/?group_id='.$group_id.'">';
 		$return .= html_image("images/ic/cvs16b.png","20","20",array("BORDER"=>"0","ALT"=>"CVS"));
 		$return .= "&nbsp;CVS&nbsp;Tree</A>";
 
@@ -256,7 +256,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '
 
 			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/project/showfiles.php?group_id='.$group_id.'">';
+		$return .= '<A href="/project/showfiles.php?group_id='.$group_id.'">';
 		$return .= html_image("images/ic/ftp16b.png","20","20",array("BORDER"=>"0","ALT"=>"FTP"));
 		$return .= "&nbsp;Released&nbsp;Files</A>";
 	}

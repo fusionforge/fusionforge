@@ -141,9 +141,9 @@ if ($type=='SITE' || $type=='COMMNTY') {
 	       ."You receive this message because you subscribed to SourceForge\r\n"
 	       ."site mailing(s). You may opt out from some of them selectively\r\n"
 	       ."by logging in to SourceForge and visiting your Account Maintenance\r\n"
-	       ."page (http://$sys_default_domain/account/), or disable them altogether\r\n"
+	       ."page (https://$sys_default_domain/account/), or disable them altogether\r\n"
 	       ."by visiting following link:\r\n"
-	       ."<http://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
+	       ."<https://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
 }
 $body = db_result($mail_res, 0, 'message');
 //$lines = explode("\n", $body);

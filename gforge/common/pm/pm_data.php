@@ -580,7 +580,7 @@ function mail_followup($project_task_id,$group_project_id,$more_addresses=false,
 		}
 		$body .= "\n\n-------------------------------------------------------".
 			"\nFor more info, visit:".
-			"\n\nhttp://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
+			"\n\nhttps://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
 				db_result($result,0,'project_task_id')."&group_id=".
 				db_result($result,0,'group_id')."&group_project_id=".db_result($result,0,'group_project_id');
 		
