@@ -207,6 +207,17 @@ Description: Collaborative development tool - mailing-lists (using Mailman)
 Package: gforge-sourceforge-transition
 Architecture: all
 Depends: sourceforge | sourceforge-db-postgresql
-Description: sourceforge to gforge data transition
+Description: Sourceforge to Gforge data transition
  This package will move data from your sourceforge package
  to your gforge package
+
+Package: sourceforge
+Architecture: all
+Depends: gforge-sourceforge-transition
+Description: Sourceforge to Gforge transition
+ Sourceforge has been renamed Gforge, and is no longer maintained.
+ This package is only here to help you upgrade to Gforge.  Once you
+ have installed this package and the one it depends on
+ (gforge-sourceforge-transition), your data have been saved, and you
+ can safely uninstall the "sourceforge" package and proceed to install
+ Gforge.  Your data will be migrated.

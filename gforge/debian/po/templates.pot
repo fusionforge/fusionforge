@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-26 10:08+0100\n"
+"POT-Creation-Date: 2004-03-02 11:21+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -531,6 +531,50 @@ msgstr ""
 msgid ""
 "The hostname of the server that will host your Gforge mailing-lists. It "
 "should not be the same as your main Gforge host."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid "Migrate to Gforge?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"The free software version of the Sourceforge software has been renamed to "
+"\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge\", "
+"and \"sourceforge\" is no longer supported or maintained.  The transition to "
+"Gforge should be rather simple, as most of the work is automated: once this "
+"package has been successfully installed, just install the \"gforge\" package "
+"and things should go smoothly."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"You still have the option not to upgrade to Gforge yet, for instance if you "
+"want to backup things beforehand.  If you refuse the upgrade, nothing will "
+"happen."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid "Sourceforge is no more"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid ""
+"Sourceforge has been renamed Gforge, and is no longer maintained as free "
+"software. This \"sourceforge\" package is only here to help you upgrade to "
+"Gforge.  Once you have installed this package and the one it depends on "
+"(gforge-sourceforge-transition), your data have been saved, and you can "
+"safely uninstall the \"sourceforge\" package and proceed to install Gforge."
 msgstr ""
 
 #. Type: boolean
