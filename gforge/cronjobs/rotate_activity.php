@@ -26,17 +26,18 @@ require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
 $today_formatted=date('Ymd',(time()-(30*60*60*24)));
+$sql='';
 
 db_begin();
 
-$sql = "DELETE FROM activity_log WHERE day < '$today_formatted'";
+$sql = "DELETE FROM activity_log WHERE day < $today_formatted";
 $err .= $sql;
 $rel = db_query($sql);
 $err .= db_error();
 
 db_commit();
 
-$err .= "Done: ".date('Ymd H:i').' - '.db_error();
+$err .= " Done: ".date('Ymd H:i').' - '.db_error();
 
 cron_entry(10,$err);
 

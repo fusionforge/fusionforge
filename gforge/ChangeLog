@@ -1,6 +1,8 @@
 2004-07-26  Christian Bayle <bayle@aist.enst.fr>
 
 	* Added css plugin hook to Layout.class
+	* fixed old bug#717 in cronjobs/rotate_activity.php thanks to Benoît
+	Sibaud
 
 2004-07-26  Tom Copeland <tom@infoether.com>
 
