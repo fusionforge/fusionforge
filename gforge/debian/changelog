@@ -5,8 +5,11 @@ sourceforge (2.5-29+) unstable; urgency=low
     LDAP expects utf-8 encoded character string (backport from 2.6)
   * [Roland] Fixed install-ftp.sh so that it actually does install stuff.
   * [Roland] Fixed a few bashisms in maintainer scripts.
+  * [Roland] Fixed LDAP entries for mailing-lists (attribute cn: is not in
+    the schema).
+  * [Roland] Fixed user in crontab (for the DNS stuff) (closes: #147434).
 
- -- Roland Mas <lolando@debian.org>  Mon, 22 Apr 2002 13:22:36 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 24 May 2002 18:18:14 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
