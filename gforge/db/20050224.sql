@@ -176,11 +176,14 @@ CREATE INDEX projectperm_useridgroupprojid ON project_perm(user_id,group_project
 
 DROP INDEX projectsumsagg_groupid;
 --MAY HAVE TO RUN db_project_sums.php cronjob first
+ALTER TABLE project_sums_agg ALTER type SET NOT NULL;
 ALTER TABLE project_sums_agg ADD CONSTRAINT project_sums_agg_pkey PRIMARY KEY (group_id,type);
 
 DROP INDEX project_task_group_project_id;
 
 DROP INDEX projecttaskartifact_artifactid;
+ALTER TABLE project_task_artifact ALTER project_task_id SET NOT NULL;
+ALTER TABLE project_task_artifact ALTER artifact_id SET NOT NULL;
 ALTER TABLE project_task_artifact ADD CONSTRAINT 
 	project_task_artifact_pkey PRIMARY KEY (project_task_id,artifact_id);
 CREATE INDEX projecttaskartifact_artidprojtaskid ON 
@@ -280,10 +283,14 @@ ALTER TABLE user_metric_history ADD CONSTRAINT
 -- TODO DROP unnecessary sequence/id
 --
 ALTER TABLE user_plugin DROP CONSTRAINT user_plugin_pkey;
+ALTER TABLE user_plugin ALTER user_id SET NOT NULL;
+ALTER TABLE user_plugin ALTER plugin_id SET NOT NULL;
 ALTER TABLE user_plugin ADD CONSTRAINT user_plugin_pkey PRIMARY KEY (user_id,plugin_id);
 
 
 DROP INDEX user_pref_user_id;
+ALTER TABLE user_preferences ALTER user_id SET NOT NULL;
+ALTER TABLE user_preferences ALTER preference_name SET NOT NULL;
 ALTER TABLE user_preferences ADD CONSTRAINT 
 	user_preferences_pkey PRIMARY KEY (user_id,preference_name);
 
