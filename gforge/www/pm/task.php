@@ -201,6 +201,38 @@ switch ($func) {
 	}
 
 	//
+	//	Show delete form
+	//
+	case 'deletetask' : {
+		if ($pg->userIsAdmin()) {
+			include 'deletetask.php';
+		} else {
+			exit_permission_denied();
+		}
+	}
+
+	//
+	//	Handle the actual delete
+	//
+	case 'deletetask' : {
+		if ($pg->userIsAdmin()) {
+			$pt= new ProjectTask($pg,$project_task_id);
+			if (!$pt || !is_object($pt)) {
+				exit_error('Error','Could Not Get ProjectTask');
+			} elseif ($pt->isError()) {
+				exit_error('Error',$pt->getErrorMessage());
+			}
+			if (!$pt->delete()) {
+				$feedback .= 'Delete failed: '.$pt->getErrorMessage();
+			} else {
+				$feedback .= 'Successfully Deleted';
+			}
+		} else {
+			exit_permission_denied();
+		}
+	}
+
+	//
 	//	Show the page surrounding the gantt chart
 	//
 	case 'ganttpage' : {
