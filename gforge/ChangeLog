@@ -1,13 +1,17 @@
+2003-02-20  Robert B. Hawkins.
+
+	* www/include/languages/Japanese.tab: New Japanese translations.
+
 2003-02-17  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/people:
 	committing Philippe Kiener's i18n of people
-	
+
 	*  www/project/admin/*.php, www/project/stats/*.php:
 	i18n
-		
+
 	* www/stats/index.php, www/stats/graphs.php,
-	www/stats/i18n.php, 
+	www/stats/i18n.php,
 	I18n of missing strings
 
 	* www/include/languages/Base.tab:
