@@ -100,6 +100,8 @@ account_register	err_passwd	You must supply a password
 account_register	err_passwd2	Passwords do not match
 account_register	err_passwd3	Invalid Password:
 account_register	err_realname	You must supply a real name
+account_register	err_firstname	You must supply a first name
+account_register	err_lastname	You must supply a last name
 account_register	err_unixname	Invalid Unix Name. 
 account_register	err_userexist	That username already exists.
 account_register	err_username	You must supply a username
@@ -114,6 +116,9 @@ account_register	partecipate_peer_ratings	Participate in peer ratings. <i>(Allow
 account_register	password	Password (min. 6 chars):
 account_register	password2	Password (repeat):
 account_register	realname	Full/Real Name:
+account_register	firstname	First Name:
+account_register	lastname	Last Name:
+account_register	country	Country:
 account_register	register	Register
 account_register	remember_me	"Remember me". <i>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>
 account_register	reset	Reset Changes
@@ -1425,6 +1430,10 @@ pm_reporting	tasks_by_technician	Tasks By Technician
 pm_reporting	title	Task Reporting System
 pm_task	create_successfully	Task Created Successfully
 project_admin	add_user	Add User
+project_admin	addfromlist	Add Users From List
+project_admin	addfromlist1	Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click "Finish" to choose the roles for the users you are adding.
+project_admin	addfromlist2	Choose the role for each user and then press &quot;Add All&quot;.
+project_admin	user_updated	User Updated Successfully
 project_admin	docmanager_admin	DocManager Admin
 project_admin	download_tarball	Download Your Nightly CVS Tree Tarball
 project_admin	edit_file_releases	Edit/Add File Releases
@@ -1448,6 +1457,7 @@ project_admin	tool_admin	Tool Admin
 project_admin	tracker_admin	Tracker Admin
 project_admin	trove_categorization	Trove Categorization:&nbsp;
 project_admin	unix_name	Unix Name
+project_admin	userrealname	Real Name
 project_admin	user_added	User Added Successfully
 project_admin	user_removed	User Removed Successfully
 project_admin	www_directory	Project WWW directory on shell server:&nbsp;
@@ -1792,6 +1802,81 @@ register_requirements	section	New Project Registration
 register_requirements	title	Services & Requirements
 register_tos	section	New Project Registration
 register_tos	title	Terms Of Service Agreement
+rbac_edit	projectpublic	Project Privileges
+rbac_edit	projectpublicnote	Notice: if the entire project is set to private, non-members cannot access the rest of the features even if you mark them as available.
+rbac_vals	projectpublic0	Private
+rbac_vals	projectpublic1	Public
+rbac_edit	scmpublic	SCM Privileges
+rbac_vals	scmpublic0	Private
+rbac_vals	scmpublic1	Public (PServer)
+rbac_edit	forumpublic	Forum Privileges
+rbac_vals	forumpublic0	Private
+rbac_vals	forumpublic1	Public
+rbac_vals	forumanon0	No Anonymous Posts
+rbac_vals	forumanon1	Allow Anonymous Posts
+rbac_edit	pmpublic	Task Manager Privileges
+rbac_vals	pmpublic0	Private
+rbac_vals	pmpublic1	Public
+rbac_edit	trackerpublic	Tracker Privileges
+rbac_vals	trackerpublic0	Private
+rbac_vals	trackerpublic1	Public
+rbac_vals	trackeranon0	No Anonymous Posts
+rbac_vals	trackeranon1	Allow Anonymous Posts
+rbac_vals	frs0	Read
+rbac_vals	frs1	Write
+rbac_vals	scm-1	No Access
+rbac_vals	scm0	Read
+rbac_vals	scm1	Write
+rbac_vals	forum-1	No Access
+rbac_vals	forum0	Read
+rbac_vals	forum1	Post
+rbac_vals	forum2	Admin
+rbac_vals	tracker-1	No Access
+rbac_vals	tracker0	Read
+rbac_vals	tracker1	Tech
+rbac_vals	tracker2	Tech &amp; Admin
+rbac_vals	tracker3	Admin Only
+rbac_vals	pm-1	No Access
+rbac_vals	pm0	Read
+rbac_vals	pm1	Tech
+rbac_vals	pm2	Tech &amp; Admin
+rbac_vals	pm3	Admin Only
+rbac_vals	docman0	Read/Post
+rbac_vals	docman1	Admin
+rbac_vals	projectadmin0	None
+rbac_vals	projectadminA	Admin
+rbac_vals	pmadmin0	None
+rbac_vals	pmadmin2	Admin
+rbac_vals	forumadmin0	None
+rbac_vals	forumadmin2	Admin
+rbac_vals	trackeradmin0	None
+rbac_vals	trackeradmin2	Admin
+rbac_edit	title1	Section
+rbac_edit	title2	Subsection
+rbac_edit	title3	Setting
+rbac_edit	docman	Document Manager
+rbac_edit	forum	Forum
+rbac_edit	frs	File Release System
+rbac_edit	pm	Task Manager
+rbac_edit	scm	SCM - Source Code Repository
+rbac_edit	tracker	Tracker
+rbac_edit	projectadmin	Project-wide Admin
+rbac_edit	forumadmin	Project-wide Forum Admin
+rbac_edit	pmadmin	Project-wide Task Manager Admin
+rbac_edit	trackeradmin	Project-wide Tracker Admin
+rbac_edit	intro	Use this page to edit your project's Roles. Note that each member has at least as much access as the Observer. For example, if the Observer can read CVS, so can any other role in the project.
+rbac_edit	observerintro	Use this page to edit the permissions and access levels of non-members of your project. Non-members includes users who are not logged in.
+rbac_edit	rolename	Role Name
+rbac_edit	pgtitle	Edit Role
+rbac_edit	newrole	New Role
+rbac_edit	observer	Edit Observer
+rbac_edit	observerusername	Observer
+rbac_edit	editroles	Edit Roles
+rbac_edit	editrole	Edit Role
+rbac_edit	addrole	Add Role
+rbac_edit	update	Update
+rbac_edit	remove	Remove
+rbac_edit	role	Role
 scm_index	anoncvs	<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>
 scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 scm_index	browseit	Browse CVS Repository
