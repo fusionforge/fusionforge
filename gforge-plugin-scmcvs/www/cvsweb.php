@@ -56,9 +56,6 @@ if ($projectName) {
 	if (!$Group || !is_object($Group) || $Group->isError()) {
 		exit_no_group();
 	}
-	if (!$Group->isProject()) {
-		exit_error('Error',$Language->getText('scm_index','error_only_projects_can_use_cvs'));
-	}
 	if (!$Group->usesSCM()) {
 		exit_error('Error',$Language->getText('scm_index','error_this_project_has_turned_off'));
 	}
