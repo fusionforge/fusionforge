@@ -32,7 +32,6 @@ XML Exports
 <li><a href="rss_sfnewreleases.php"><?php echo $GLOBALS['sys_name']; ?> New Releases</a>
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
 <a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
-<li><a href="rss_osdnnews.php">Misc SF Statistics</a></li>
 </ul>
 
 <h4>Site Information</h4>
