@@ -23,7 +23,7 @@ Source0: %{name}-%{version}.tar.bz2
 Patch1000: gforge-4.0-deb_rpm.patch
 
 AutoReqProv: off
-Requires: perl
+Requires: perl, perl-DBI, perl-DBD-Pg, perl-HTML-Parser
 Requires: httpd
 Requires: php, php-mbstring, php-pgsql
 Requires: postgresql, postgresql-server
@@ -106,7 +106,7 @@ fi
 %post
 if [ $1 -eq 1 ]; then
 	# creating the database
-	service postgresql status | grep 'is running' >/dev/null 2>&1 || service postgresql start
+	service postgresql status | grep '(pid' >/dev/null 2>&1 || service postgresql start
 	su -l postgres -s /bin/sh -c "createdb -E UNICODE %{dbname} >/dev/null 2>&1"
 	su -l postgres -s /bin/sh -c "createlang plpgsql %{dbname} >/dev/null 2>&1"
 
@@ -120,19 +120,13 @@ if [ $1 -eq 1 ]; then
 	# creating gforge database user
 	%randstr GFORGEDATABASE_PASSWORD 8
 
-	(echo "$GFORGEDATABASE_PASSWORD" ; echo "$GFORGEDATABASE_PASSWORD") | su -l postgres -s /bin/sh -c "createuser -D -a -P %{dbuser}"
+	su -l postgres -c "psql -c \"CREATE USER %{dbuser} WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" template1"
 	
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
 		service postgresql reload
 	fi
-
-	# creating the database
-	# su -l postgres -s /bin/sh -c "psql -U %{dbuser} %{dbname} < %{_datadir}/%{name}/db/%{name}.sql >/tmp/gforge.log 2>&1"
-	# %{_libdir}/gforge/lib/db-upgrade.pl
-	su %{gfuser} -c %{_libdir}/gforge/bin/db-upgrade.pl
-	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname}"
 
 	# adding "noreply" alias
 	for i in /etc/postfix/aliases /etc/mail/aliases /etc/aliases ; do
@@ -162,6 +156,10 @@ if [ $1 -eq 1 ]; then
 	# initializing configuration
 	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache
 	
+	# creating the database
+	su -l %{gfuser} -c %{_libdir}/gforge/bin/db-upgrade.pl
+	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname}"
+
 	service httpd graceful
 else
 	# Upgrade
