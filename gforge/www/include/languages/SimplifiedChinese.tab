@@ -1,47 +1,463 @@
 #/**
 #  *
-#  * Simplified Chinese message catalog
+#  * Default message catalog (English)
 #  *
 #  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
 #  * @version   $Id$
-#  * @author Hunte Swee <hunte@users.sourceforge.net>
 #  *
 #  */
-#
-# ChangeLog:
-#
-# 2000-11-11  Hunte Swee <hunte@users.sourceforge.net>
-#	* Translated from the Chinese.class(Big5)
-# 2001-02-20  Hunte Swee <hunte@users.sourceforge.net>
-#	* Change the font to BaseLanguage default
-#	* Change the language code from zh-CN to zh-cn
-#	* Add some new variables that BaseLanguage added
-#
-about_foundries	about_blurb	关于 Foundries
-menu	about_sourceforge	关于 GForge
-menu	account_maintenance	帐号维护
-menu	bookmark_page	书签
-home	breaking_down_barriers	为开放源码的发展开辟一条坦途
-menu	change_my_theme	更换外观
-menu	code_snippet_library	代码片断
-menu	compile_farm	编译工厂
-menu	contact_us	联系我们
-group	developers	开发者
-group	developer_info	开发者信息
-menu	discussion_forums	论坛
-menu	documentation	文档
+error	title	所请求的页面不存在（错误号 404）
+error	not_found	页面不存在
+error	error_creating	创建错误
+system	locale	en_US
+system	strftimefmt	%Y %B %e  %H:%M
+system	datefmt	Y-m-d H:i
+conf	content_encoding	UTF-8
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	zh-cn
+conf	language_id	23
+account	title	帐号设置
+account	updated	更新
+account_change_email	message	您申请在 $1 上更改您的email地址。 \n 请浏览这个URL来完成email地址的改变：\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 工作组
+account_change_email	section	帐号设置
+account_change_email	subject	$1 确认
+account_change_email	title	更改Email地址
+account_change_email	mailsent	<p>一封email已经送出到新的地址。 按照那封email上的指示完成email地址的改变。 </p><a href="/">[ Home ]</a> 
+account_change_email	desc	<p>为了保证我们拥有您正确的email地址，改变您的email地址，将会要求新email地址的确认。</p><p>我们需要维护每个用户的准确email地址，是为了通过这个帐号来对用户进行授权访问。当这个帐号有重要的事件需要通知时，有个确切的email地址才能使我们做到这一点。</p>  <p>提交这个表单，将会发出一个要求确认的URL到新的email地址，访问那个连接就可以完成email地址的改变。</p>
+account_change_email	invalid_email	无效的 email 地址
+account_change_email_confirm	title	确认email地址改变
+account_change_email	new_address	新的Email地址:
+account_change_email	send_confirmation	发送确认信到新的地址
+account_change_email-complete	title	Email地址改变成功
+account_change_email-complete	confirm	欢迎您, $1. 您的email地址成功的改变了。 您新的email地址现在是<strong>$2</strong>。 所有发送到 $3 的 Mail 都会被转发到这个帐号上。
+account_change_pw	confirmation	<h2>$1 密码更改确认</h2><p>祝贺您。 您已经改变了密码</p>
+account_change_pw	section	帐号设置
+account_change_pw	title	更改密码
+account_change_pw	old_password_incorrect	旧的密码不正确
+account_change_pw	not_valid_password	你必须提供有效的密码（至少6个字符）
+account_change_pw	passwords_dont_match	新密码不一致。
+account_change_pw_changed	title	更改密码成功
+account_change_pw_changed	return_to	您现在可以 $1 返回到帐号维护页面 $2。
+account_change_pw	old_password	旧密码
+account_change_pw	new_password	新密码（至少6个字符）
+account_change_pw	new_password_repeat	新密码（重复）
+account_change_pw	update	更新密码
+account_editsshkeys	section	帐号设置
+account_editsshkeys	title	编辑CVS/SSH共享密钥
+account_first	about_blurb	<p>您现在是 $1 的一个注册用户。 $1 开源软件项目的在线开发环境。</p><p>做为一个注册用户，您可以参与到整个站点的所有活动当中。您可以在项目讨论版上贴出新的消息，可以报告在 $1 当中软件的Bug，可以申请称为某个项目的开发者，甚至创建一个您自己的项目。</p><p>您最好花一些时间把<a href="/docs/site/"><b>站点文档</b></a> 都浏览一遍，以确保您可以完全的享受 $1 所提供的所有服务。</p><p>享用这个站点，也请给我们一些反馈信息，以便我们能共同使 $1 变得更好。</p><p>--$1 工作组。</p>
+account_first	title	欢迎来到$1
+account_login	deleted_account	<p>您在 $1 上的帐号已经被 $1 工作组删除。这有可能是因为以下两个原因：1）您主动要求把帐号删除；或者2）您帐号的某些动作被视为不受欢迎的（也就是说，您打破了使用您帐号的服务协定），以至您的帐号因为管理的原因被删除。如果您有任何问题或者是疑问，请发出一个<a href="/support/?group_id=1">支持请求</a>。</p><p>谢谢您的合作， <br><br>$1 工作组</p>
+account_login	iewarn	<H2><FONT COLOR="RED">Internet Explorer 用户需要升级到5.01或者更高版本，最好是带有128位SSL支持。或者使用 Netscape 4.7或更高版本</FONT></H2>
+account_login	macwarn	<H2><FONT COLOR="RED">目前本站不能很好的支持Macintosh 上的Internet Explorer。请使用Netscape 4.7或更高版本</FONT></H2>
+account_login	pending_account	<P>您的帐号正在等待email地址改变的确认。 访问您的email当中的连接就可以激活您的帐号。<P>如果您需要再次发送确认email，请点击下面，一封确认email将被送到您在注册时提供的email地址当中。	<P><A href="pending-resend.php?form_user=$1">[再次发送确认Email]</A>		<br><hr>		<p>
+account_login	title	登录站点
+account_login	cookiewarn	为了登录，你的Cookies必须是被允许的。
+account_login	loginname	登录名称:
+account_login	passwd	密码:
+account_login	usessl	登录后仍然使用SSL
+account_login	sslnotice	<p><B><FONT COLOR="RED">在提交这个表单之后，您将连接到一个SSL服务器，这样其它用户就无法看见您的密码。 </FONT></B> <small style="font-size: x-small"> （如果您奇怪为什么这个页面不是使用SSL装载进来的，请阅读下一段，谢谢） </small> <P> <B>Internet Explorer</B> 用户有时会碰到SSL问题，因而他们应该在登录之后离开SSL模式。Netscape用户可以一直停留在SSL模式当中以获得最大的安全性。想获得关于这个问题更详细的信息，请访问 <A HREF="http://www.microsoft.com/">微软</A> 的主页<P>
+account_login	login	登录
+account_login	lostpw	[忘了密码？]
+account_login	newaccount	[新帐号]
+account_lostpw	message	有人 （大概就是您本人）在 $3 站点上申请通过email确认来更改密码。如果这个人不是您，那么就忽略这封mail，当做一切都没有发生。\n\n如果是您发出找个请求确认，请访问下面的URL来改变您的密码：\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3 工作组\n
+account_lostpw	subject	$1 确认
+account_lostpw	title	忘了密码？
+account_lostpw	notify	<p>一封email已经被发送到您的地址当中。依照email上的指示来改变您的密码。</p><p><a href="/">[ Home ]</a></p>
+account_lostpw	warn	<p>嗨... 忘了密码是件很严重的事情。它不仅威胁了您的帐号的安全性，还包括项目甚至是这个站点的安全性。</p><p>点击下面的“发送遗失密码确认编码” ，我们将发送一个URL到您的email地址。在这个URL当中，有一个您帐号的128位的确认编码。访问那个URL，您就可以在线更新密码并且登录。</p>
+account_lostpw	sendhash	发送遗失密码确认编码
+account_lostpw	invalid_user	非法用户
+account_lostpw	user_dont_exist	用户不存在。
+account_lostlogin	title	遗忘密码确认
+account_lostlogin	severalconfirm	这个确认编码不只存在了一次
+account_lostlogin	invalidconfirm	非法的确认编码
+account_lostlogin	sixchars	您必须提供一个有效的密码（至少6个字符）。
+account_lostlogin	notmatch	新密码不一致。
+account_lostlogin	passwdchanged	<h2>密码更改成功</h2><p>祝贺您，您成功的重新设置了帐号密码。现在你可以通过<a href="/account/login.php">登录</a> 到站点。</p>
+account_lostlogin	welcome	<h2>忘记密码，登录</h2><p>欢迎您， $1。 您现在可以更改密码。</p>
+account_lostlogin	newpasswd	新密码（至少6个字符）
+account_lostlogin	newpasswd2	新密码（重复）
+account_lostlogin	update	更新
+account_register	title	注册新帐号
+account_register	congrat	<p>恭喜。您已经在 $1 上成功注册。 <p> 一封确认email已经发送到您的email地址，以确保您email地址的正确性。访问email当中的连接就可以激活您的帐号。
+account_register	iewarn	<H2><FONT COLOR="RED">Internet Explorer 用户需要升级到 IE5.01或者更高版本，最好是支持128位SSL，或者使用Netscape4.7或更高版本。</FONT></H2>
+account_register	macwarn	<H2><FONT COLOR="RED">目前本站不能很好的支持Macintosh 上的Internet Explorer。请使用Netscape 4.7或更高版本</FONT></H2>
+account_register	loginname	登录名称（请不要使用大写字母）：
+account_register	password	密码（至少6个字符）：
+account_register	password2	密码（重复）：
+account_register	realname	完整/真是姓名：
+account_register	language	语言选择：
+account_register	timezone	时区选择：
+account_register	emailaddr	Email 地址<span><font color="red">*</font></span> <BR><I>在帐号激活前，这个email地址将被确认。它不会在这个站点当中显示出来，你在这个站点将使用 &lt;loginname@$1&gt; 做为email地址，所有发向该地址的email会被转发到您真正的email地址当中去。</I>
+account_register	jabberaddr	Jabber 地址：
+account_register	jabberonly	自动生成的通知只发送到我的Jabber地址
+account_register	siteupdate	接受关于本站点更新的Email<i>（量非常小，并且包括安全通告，强烈推荐。）</i>
+account_register	communitymail	接收附加的公共邮件列表。 <i>(量很小)</i>
+account_register	mandatory	标记为 $1 的域是必填的。
+account_register	register	注册
+account_register	err_username	您必须提供一个用户名
+account_register	err_realname	您必须提供一个真实姓名
+account_register	err_passwd	您必须提供密码
+account_register	err_passwd2	密码不一致
+account_register	err_passwd3	无效的密码：
+account_register	err_unixname	无效的用户名 
+account_register	err_email	无效的Email地址
+account_register	err_jabber	无效的Jabber地址
+account_register	err_userexist	用户名已存在
+account_register	err_mailexist	已存在使用该email地址的用户 － 使用用户查找来恢复您的登录。
+account_register	err_badinsert	插入失败
+account_register	message_header	$1 帐号注册
+account_register	partecipate_peer_ratings	参与对等评价。 <i>（允许您使用若干指标来评价其他用户，同样您也会被其他用户评价。如果您选择参加评价，更多信息，请参看 $1 用户首页 </a>）</i>。
+account_register	remember_me	"记住我". <i>（允许访问您的个人首页 $1 personal page</a> 而不需要登录。但是在做任何改动之前，仍然需要显式的登录。）</i>
+account_register	message_body	谢谢您在 $4 站点上注册。您创建了一个名为 $1 的帐号。为了完成注册，请访问下面的URL：\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n（如果您没看见上面的URL，那可能是因为您邮件客户端的Bug。\n使用下面的连接，并且确保您把它当做一整行拷贝到浏览器的地址栏中。）\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\n享用这个站点吧。\n\n-- $4 工作组\n
+account_register	update	更新
+account_register	reset	重设
+account_register	Preferences	设置
+account_unsubscribe	all_mailings	所有 $1 的邮件列表和通知
+account_unsubscribe	site_mailings	$1 站点的邮件列表
+account_verify	title	$1 帐号确认
+account_verify	verify_blurb	<p>为了完成出测，请现在就登录。然后您的帐号就会激活成普通的登录模式。</p>
+account_verify	password	密码：
+account_verify	login		登录
+account_verify	loginname	登录名：
+account_verify	missingparam	缺少参数
+account_verify	usermandatory	您必须输入用户名。
+account_verify	invaliduser	无效用户
+account_verify	nouser	用户不存在。
+account_verify	invalidop	无效操作
+account_verify	accountactive	帐号已经激活。
+account_verify	invalidparam	无效参数
+account_verify	cannotconfirm	无法确认帐号身份 ―― 无效的确认编码（或登录名）
+account_verify	accessdenied	访问被拒绝
+account_verify	invalidcred	您输入的信用卡号与有效的帐号无对应关系。
+account_verify	cannotactivate	无法激活帐号
+account_verify	erroractivate	激活帐号过程中出错
+account_options	title		帐号维护
+account_options	welcome		欢迎
+account_options	member_since	帐号创建日期
+account_options	view_developer_profile	查看开发者个人能力
+account_options	edit_skills_profile	编辑我的个人能力
+account_options	user_id	用户编号
+account_options	login_name	登录名
+account_options	change_password	改变密码
+account_options	real_name	真实姓名
+account_options	language	语言
+account_options	timezone	时区
+account_options	email_address		Email地址：
+account_options	change_email_address	改变Email地址
+account_shell	title	Shell帐号信息
+account_shell	shell_box	Shell box
+account_shell	autorized_keys	CVS/SSH 共享认证Key
+account_shell	edit_keys	编辑Keys
+contact	about_blurb	<p>这是 <b>$1</b>的联系信息 -- 如果您对本站点上的项目有任何的问题，请将您的问题/信息发送到该项目支持/Bug管理员。你可以通过访问这些项目的首页来获取这些信息： <tt>http://$2/projects/&lt;project name&gt;</tt> 点击相应的工具。</p><p>如果您需要支持，报告Bug或者想直接和 $1 工作组联系，请访问<a href="/projects/sourceforge">$1 Master Project</a>.</p>
+contact	title	联系 $1
+common_utils	priority_colors	优先级颜色
+developer	entry_not_found	没有发现该用户的Entry
+developer	date	时间
+developer	subject	标题
+developer	body	正文
+developer	diary_and_notes	日记和笔记
+developer	no_entries	该用户没有日记和笔记
+developer	no_user_selected	没有选择用户
+developer_monitor	title	监视用户
+developer_monitor	error_inserting	监视用户日记时出错
+developer_monitor	monitoring_user	用户已被监视
+developer_monitor	monitoring_user_expl	<p>当用户增加日记条目时，您将收到该日记的内容。</p><p>如果不想监视，只要简单的点一下<strong>Monitor user</strong> 连接</p>
+developer_monitor	monitoring_user_off	监视行为已被关闭
+developer_monitor	monitoring_user_off_expl	你将不再获得任何关于该用户更新的email
+developer_monitor_choose_user	title	请先选择用户
+developer_monitor_choose_user	body	错误 － 先选择某个用户
+developer_rate	title	用户评价页面
+developer_rate	ratings_recorded	评价记录
+developer_rate	ratings_recorded_body	您可以重新评价某个人。只需要回到他们的评价页面，重新提交信息即可。
+developer_rate	cannot_rate_yourself	您不能评价自己
+developer_rate	invalid_rating_value	错误 ― 无效的评价值
+developer_rate	turned_off_title	评价功能被关闭
+developer_rate	turned_off_body	您选择不参与相互评价系统
+docman	submit_new	提交新的文档
+docman	view_doc	查看文档
+docman	admin	管理
+docman	error_no_docs	该项目没有可见的文档
+docman	error_invalid_file_attack	Invalid file attack attempt $1
+docman	error_no_groups_defined	没有定义文档分组
+docman	description	描述
+docman	turned_off	项目关闭了文档管理功能
+docman_admin	section	项目： $1
+docman_admin	title	文档管理：管理
+docman_admin	add_edit_docgroups	增加/编辑文档分组
+docman_admin_docedit	section	文档管理员
+docman_admin_docedit	title	编辑文档
+docman_admin_editdocs	section	文档管理员管理
+docman_admin_editdocs	title	编辑文档
+docman_admin_editdocs	state	状态
+docman_admin_editdocs	upload	可选项：上传新的文件
+docman_admin_editdocs	doc_contents	文档内容
+docman_admin_addgroups	section	文档管理员管理
+docman_admin_addgroups	title	增加文档分组
+docman_admin_editgroups	section	文档管理员管理
+docman_admin_editgroups	title	编辑文档分组
+docman_admin_editgroups	new_group_name	新分组名称
+docman_admin_editgroups	add_group	增加新分组
+docman_admin_editgroups	edit_group	编辑分组
+docman_admin_editgroups	description	分组名称将被用作标题，所以它应该相应的格式化。
+docman_admin_groupedit	section	文档管理员管理
+docman_admin_groupedit	title	重命名文档分组
+docman_admin_editgroups	group_name	分组名称
+docman_admin_editgroups	group_id	编号
+docman_display_doc	section	项目： $1 
+docman_display_doc	title	项目管理： 显示文档
+docman_display_doc	all_languages	所有语言
+docman_new	section	项目： $1 
+docman_new	title	文档管理：提交新文档
+docman_new	intro	<strong>文档标题</strong>:  引用文档中相关的简单标题（例如：如何使用下载服务器）<br /><strong>描述：</strong>放在该标题下的简单描述。
+docman_new	doc_title	文档标题
+docman_new	description	描述
+docman_new	upload_file	上传文件
+docman_new	language	语言
+docman_new	group	文档所属的分组：
+docman_new	submit	提交信息
+docman_new	file	文件
+docman_new	state	状态
+docman_new	error_blank_document	获取空白文档错误
+docman_new	submitted_successfully	文档提交成功
+docman_new	no_valid_group	没有选择有效的文档分组
+docman_display_doc	no_document_data_title	无文档数据
+docman_display_doc	no_document_data_text	没有文档可显示 ― 无效或未激活的文档编号
+docman_common	error_min_title_length	标题不少于5个字符
+docman_common	error_min_desc_length	文档描述不少于10个字符
+docman_common	no_docs	没有发现文档
+docman_common_docgroup	name_required	文档分组：请输入名字
+docman_common_docgroup	invalid_id	文档分组：无效的分组编号
+docman_common_doc	invalid_docid	文档：无效的文档编号
+exit	exiting_with_error	出错退出
+exit	choose_a_group	出错 - 请选择分组
+exit	choose_group_title	出错 - 没有选择分组编号
+exit	choose_group_body	没有选择分组编号
+exit	missing_parameters_title	出错 - 缺少参数
+exit	missing_parameters_body	出错 - 缺少必须的参数
+forum	section	项目： $1
+forum	title	论坛
+forum	choose	<p>选择一个论坛进行浏览，查找和发表信息。<p>
+forum	html	HTML标记将当做普通文本在您的文章当中显示
+forum	error_no_forums_found	$1 没有论坛
+forum	forums_for	 $1 的论坛
+forum	error_no_valid_group_object	论坛:: 无效的Group 对象
+forum	forum	论坛
+forum	error_no_valid_forum_object	$1:: 无效的Forum 对象
+forum	error_invalid_group_forum_id	$1:: 无效的group_forum_id
+forum	error_forum_not_found	没有找到论坛
+forum_common	error_adding_forum	添加论坛出错
+forum_common	error_save_when_logged_in	只有登录后才能保存位置
+forum_common	error_min_name_length	论坛名称不小于3个字符
+forum_common	error_min_desc_length	论坛描述不小于10个字符
+forum_common	error_set_monitor	只有登录后才能监视
+forum_common	error_unable_to_add_monitor	无法添加监视
+forum_common	welcome_to	欢迎来到 $1
+forum_common_forummessage	no_valid_forum_object	论坛信息:: 无效的Forum 对象
+forum_common_forummessage	forum_message	论坛信息
+forum_common_forummessage	error_group_forum_id	数据库中的Group_forum_id 和Forum 对象不一致
+forum_common_forummessage	error_required_fields	必须包括帖帖子标题和正文
+forum_common_forummessage	error_not_logged	发帖子之前必须登录
+forum_common_forummessage	error_posting_failed	ForumMessage::create() 张贴失败
+forum_common_forummessage	error_get_message_id	ForumMessage::create() 无法获得帖子编号
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() 无效的帖子编号
+forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() 无效的ParentMessage 对象
+forum_common_forummessage	error_getting_next_thread	无法获取下一个thread_id 
+forum_common_forummessage	error_cannot_update_parent	无法更新父帖子
+forum_common_forummessage	error_cannot_update_master_thread	目前无法更新主线Master Thread parent 
+forum_common_forum	error_save_place	Forum::savePlace() 
+forum_save	saved	论坛位置已保存。当您下次回来时，新的帖子将被加亮显示
+forum_admin	section	项目： $1 
+forum_admin	title	论坛：管理
+forum_admin	add_forum	增加论坛
+forum_admin	delete_message	删除帖子
+forum_admin	update_forum	更新论坛信息/状态
+forum_admin_addforum	section 论坛管理
+forum_admin_addforum	title	增加论坛
+forum_admin_addforum	forum_created	论坛创建成功
+forum_admin_addforum	existing_forums	论坛已存在
+forum_admin_addforum	forum_name	论坛名称
+forum_admin_addforum	forum_description	描述
+forum_admin_addforum	is_public	是否公共论坛？
+forum_admin_addforum	allow_anonymous	允许匿名发帖子？
+forum_admin_addforum	email_posts	将帖子用Email发送到：
+forum_admin_addforum	add_forum	增加该论坛
+forum_admin_delete_messages	messages_deleted	$1 帖子已删除
+forum_admin_changestatus	section 论坛管理
+forum_admin_changestatus	title	改变论坛状态
+forum_admin_changestatus	update_successful	论坛信息更新成功
+forum_admin_changestatus	no_forums_found	没发现论坛
+forum_admin_changestatus	intro	您可以在这儿调整论坛的特色。请注意私有论坛仍然能够被该项目的成员查看，但不是完全公开。forum_admin_changestatus	change_status	改变论坛状态
+forum_admin_changestatus	forum	论坛
+forum_admin_changestatus	status	状态
+forum_admin_delete	section	论坛管理
+forum_admin_delete	title	删除论坛
+forum_admin_delete_message	section 论坛管理
+forum_admin_delete_message	title	删除帖子
+forum_admin_delete_message	warning	警告！您打算永久地删除一个帖子以及所有对它的回复！！
+forum_errors	error_getting_forum	获取论坛出错
+forum_errors	error_determining_forum_id	决定论坛编号时出错
+forum_forum	section	项目： $1 
+forum_forum	title	论坛：查看论坛
+forum_forum_thread	section	论坛
+forum_forum_thread	title	查看主题
+forum_forum	thread	主题
+forum_forum	author	作者
+forum_forum	date	日期
+forum_forum	changeview	改变视图
+forum_forum	postsuccess	帖子发表成功
+forum_forum	topic	主题
+forum_forum	topicstarter	主题发起人
+forum_forum	replies	回复
+forum_forum	lastpost	最后发表时间
+forum_forum	forum	论坛
+forum_forum	threads	主题
+forum_forum	posts	帖子
+forum_forum	nested	嵌套	
+forum_forum	flat	平板
+forum_forum	threaded	主题
+forum_forum	ultimate	基本
+forum_forum	show	显示
+forum_forum	previous_messages	前一页
+forum_forum	next_messages	后一页
+forum_forum	no_forum_chosen	没有选择论坛
+forum_message	thread_view	主题视图
+forum_message	section	论坛
+forum_message	title	读帖子
+forum_message	msg	发表一个帖子到这个主题：
+forum_message	thread	创建新主题
+forum_message	post_followup	回复该帖子
+forum_message	receive_followups	通过 email 接收所有的回复
+forum_message	by	作者
+forum_message	date	日期
+forum_message	subject	标题
+forum_message	message	帖子
+forum_message	message_not_found_title	没发现帖子
+forum_message	message_not_found_body	该帖子（不再）存在
+forum_message	must_choose_message_title	必须先选择一个帖子
+forum_message	must_choose_message_body	您必须先选择一个帖子
+forum_monitor	deactivated	论坛监视停用
+forum_monitor	activated	论坛监视开始
+forum_utils	news	新闻
+forum_utils	discussionforum	讨论版：
+forum_utils	nonewsitem	错误 - 没发现新闻
+forum_utils	latest	最新新闻
+forum_utils	monitor	监视论坛
+forum_utils	stopmonitor	停止监视
+forum_utils	admin	管理
+forum_utils	saveplace	保存位置
+forum_utils	erroradd	添加论坛出错
+forum_utils	added	论坛添加成功
+forum_utils	notfound	没发现
+forum_utils	by	作者：
+forum_utils	brokenthread	中断的主题
+forum_utils	thread	主题
+forum_utils	author	作者
+forum_utils	postedby	发贴人
+forum_utils	date	日期
+forum_utils	summary	概要
+forum_utils	error	错误！
+forum_utils	noid	试图发帖子而没有指定论坛
+forum_utils	mustinclude	必须包括帖子标题和内容
+forum_utils	doublepost	看起来您打算重复发表帖子，因为它和前一个帖子拥有同样的标题和其它信息。
+forum_utils	nextfailed	获取下一个 thread_id 失败
+forum_utils	errormaster	目前无法更新Master Thread parent
+forum_utils	errorparent	无法更新父帖子
+forum_utils	errorfollowup	试图回复一个不存在的帖子
+forum_utils	errorfollowup2	回复主题时，没找到回复的编号
+forum_utils	errorpost	发表帖子出错
+forum_utils	errorinsert	无法获取insertid()
+forum_utils	posted	帖子发布成功
+forum_utils	feedbacklogin	只有登录之后才能发表帖子
+forum_utils	subject	标题：
+forum_utils	message	消息：
+forum_utils	htmltag	您帖子当中的 HTML 标记将当做普通文本显示
+forum_utils	postanon	您不是匿名用户，无法发表匿名帖子
+forum_utils	loggedin	登录
+forum_utils	postcomment	发表评论
+forum_utils	anonymously	匿名
+forum_utils	couldpostif	您只有$1 登录 $2 之后才能发表
+forum_utils	reply	回复
+forum_utils	mailmonitor	\n阅读并回复该帖子： \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\n您收到这封email是因为您选择监视这个论坛。\n要停止监视论坛，登录到$4 \n并且访问： $5
+forum_utils	mailsent	邮件发送 － 有人监视论坛
+forum_utils	mailnotsent	邮件没有发送 － 有人监视论坛
+forum_utils	mailnotsent2	邮件没有发送 － 无人监视论坛
 frs	file_download	下载
-frs	file_monitor	跟踪
+frs	file_monitor	监视
 frs	file_notes	备注
 frs	file_package	软件包
 frs	file_rel_date	日期
 frs	file_version	版本
-group	long_bugs	BUG跟踪
+frs	latest_file_releases	最新发布项目
+frs_file	error_min_name_length	FRSFile 文件名不少于3个字符
+frs_file	error_name_format	FRSFile 文件名应该是这样的格式：gforge-3.0.tar.bz2
+frs_file	error_invalid_file	FRSFile 似乎无效
+frs_file	error_already_exists	在这个项目空间当中，同样文件名的文件已存在
+frs_file	error_cannot_move	文件无法被移到永久保存位置
+frs_package	error_min_name_length	FRSPackage 名称不小于3个字符
+frs_package	error_name_format	FRSPackage::Update： 包的名称只能是字母
+frs_package	error_invalid_file	FRSFile 似乎无效
+frs_package	error_already_exists	在这个项目空间当中，同样文件名的文件已存在
+frs_package	error_cannot_move	文件无法被移到永久保存位置
+frs_package	error_set_monitor	只有登录后才能监视
+frs_release	error_min_name_length	FRSPackage 名称不小于3个字符
+frs_release	error_name_format	FRS 发布 文件名应该是这样的格式： gforge-3.0.tar.bz2
+frs_release	error_invalid_file	FRS 发布 似乎无效
+frs_release	error_already_exists	在这个项目空间当中，同样文件名的发布文件已存在
+frs_release	error_cannot_move	发布文件无法被移到永久保存位置
+frs_release	error_set_monitor	只有登录后才能监视
+frs_release	email_title	[$1 发布] $2
+frs_release	email_text	\n\n项目 "$1" ('$2') 已经  \n 发布软件包'$3'的新版本 \n您可以通过下面的地址去下载：\n $4\n\n您收到这封email是一万年您\n要求当这个软件包有新版本发布时通知您。\n 如果您不希望以后再被通知，\n 请登录到 $5 并点击如下连接：\n $6
+general	return_to	[返回到 to $1]
+general	return	返回
+general	error	出错
+general	sitename	$1
+general	footer	这里是 $1.  关于更多的信息，包括版权信息，请阅读<a href="/about.php">这一页</a>.
+general	permdenied	权限不允许
+general	permnotget	无法获得权限
+general	permexcuse	要想查看该页面，必须由这个项目的管理员赋予您权限。
+general	turned_off	该项目已经将 $1 关闭
+general	update_successful	更新成功
+general	create_successful	创建成功
+general	no_valid_group	没有选择有效的 $1 组
+general	no_valid_filename	无效的文件名
+general	no_valid_group_object	$1 无效的组对象
+general	submitted_successfully	$1 提交成功
+general	invalid_email	无效的Email地址
+general	language	语言
+general	submit_edit	提交编辑
+general	edit	编辑
+general	add	增加
+general	go	Go
+general	submit	提交
+general	yes	是
+general	no	否
+general	deleted	已删除
+general	delete	删除
+general	update	更新
+general	remove	删除
+general	cancel	取消
+general	done	完成
+general	more	更多
+general	confirm	确认
+general	error_on_update	更新时出错：
+general	error_group_id	数据库中的Group_id与Group 对象不一致
+general	error_no_valid_group_object	$1:: 没有有效的组对象
+general	error_creating	创建 $1 时出错
+general	error_getting	获取 $1 时出错
+general	error_getting_new	获取新 $1 时出错
+general	error_missing_params	缺少参数
+general	browse	浏览
+general	open	打开
+general	total	总共
+general	reset	重设
+group	developer_info	开发者信息
+group	developers	开发者
+group	long_bugs	Bug跟踪
 group	long_cvs	CVS仓库
-group	long_docman	项目文档
+group	long_docman	DocManager: 项目文档
 group	long_forum	公共论坛
 group	long_ftp	匿名FTP
 group	long_homepage	项目首页
@@ -51,14 +467,16 @@ group	long_patch	补丁管理
 group	long_pm	任务管理
 group	long_support	技术支持
 group	long_survey	调查
+group	project_admins	项目管理员
+group	public_area	公共区域
 group	short_admin	管理
-group	short_bugs	BUG
+group	short_bugs	Bugs
 group	short_cvs	CVS
 group	short_docman	文档
-group	short_files	Files
+group	short_files	文件
 group	short_forum	论坛
 group	short_homepage	首页
-group	short_mail	电子邮件
+group	short_mail	邮件列表
 group	short_main 	主要
 group	short_memberlist	开发者
 group	short_news	新闻
@@ -68,29 +486,1997 @@ group	short_summary	摘要
 group	short_support	支持
 group	short_survey	调查
 group	short_tracker	跟踪
+group	registered	已注册: 
+group	activity	活力百分比： 
+group	activitystat	查看项目活动<a href="/project/stats/?group_id=$1">统计</a>
+group	norelease	该项目没有发布任何文件
+group	nodescription	该项目还没有提交描述
+home	about_blurb	$1 为<b><a href="http://www.opensource.org">开放源代码软件</a>开发者提供全方面的免费服务</b>，包括CVS仓库, 邮件列表, BUG跟踪, 在线论坛, 任务管理, 网站空间, 项目存储及完整的备份, 并且完全是通过WEB方式来管理的。 <BR> &nbsp; <P> <B>请立即加入，并提出您的宝贵意见</B> <P> 为了充分利用 $1 所提供的服务, <A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户, 仍能浏览本站, 但无权参与本站的活动。 <P> &nbsp; <BR> <B>开始您自己的项目</B> <P> <A href="/account/register.php">先注册成为本站用户</A>, 然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A> <P> 谢谢参与，请充分享受本站提供的服务吧！
+home	breaking_down_barriers	为开放源码的发展开辟一条坦途
 home	highest_ranked_users	用户评价排行榜
-home	about_blurb	 GForge为<b><a href="http://www.opensource.org">开放源代码软件</a>开发者提供全方面的免费服务</b>，包括CVS仓库, 邮件列表, BUG跟踪, 在线论坛, 任务管理, 网站空间, 项目存储及完整的备份, 并且完全是通过WEB方式来管理的。 <BR> &nbsp; <P> <B>请立即加入，并提出您的宝贵意见</B> <P> 为了充分利用GForge所提供的服务, <A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户, 仍能浏览本站, 但无权参与本站的活动。 <P> &nbsp; <BR> <B>开始您自己的项目</B> <P> <A href="/account/register.php">先注册成为本站用户</A>, 然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A> <P> 谢谢参与，请充分享受本站提供的服务吧！
-frs	latest_file_releases	最新发布项目
-menu	login	通过SSL登录
+home	most_active_this_week	本周活力最强排行榜
+home	sfos	$1 OnSite
+home	sourceforge_statistics	$1 统计资料
+home	top_project_downloads	项目下载排行榜
+home	no_stats_available	没有统计信息
+home	hosted_projects	入住项目
+home	registered_users	注册用户
+home	none_found	没有发现
+index	welcome	欢迎
+mail	provided_by	<p>邮件列表通过一个GForge版本的<a href="http://www.list.org">GNU Mailman</a>. 感谢Mailman 和<a href="http://www.python.org">Python</a> 全体工作人员，感谢他们卓越的软件。</p>
+mail	section	项目： $1
+mail	title	邮件列表
+mail_admin	section	邮件列表
+mail_admin	title	邮件列表管理
+mail_admin_add_list	section	邮件列表管理
+mail_admin_add_list	title	增加列表
+mail_admin_change_status	section	邮件列表管理
+mail_admin_change_status	title	管理 / 更新列表
+menu	about_sourceforge	关于 $1
+menu	account_maintenance	帐号维护
+menu	bookmark_page	书签
+menu	change_my_theme	更换外观
+menu	code_snippet_library	代码片断库
+menu	compile_farm	编译工厂
+menu	contact_us	联系 $1
+menu	diary_notes	日记和笔记
+menu	discussion_forums	讨论区
+menu	documentation	文档
+menu	login	登录
+menu	login_ssl	通过 SSL 登录
 menu	logout	退出登录
-home	most_active_this_week	本周活动力最强排行榜
 menu	my_personal_page	我的首页
-menu	new_project	登记新项目
+menu	my_account	我的帐号
+menu	new_project	注册新项目
 menu	new_releases	新发布软件
-menu	new_user	新用户通过SSL注册
-menu	other_site_mirrors	其它网站镜像
+menu	new_user	通过 SSL 创建新用户
+menu	other_site_mirrors	其它站点镜像
 menu	project_admin	项目维护
-group	project_admins	项目管理员
-menu	project_help_wanted	寻求协助
+menu	project_help_wanted	寻求帮助的项目
 menu	project_summary	项目摘要
-group	public_area	公共区域
 menu	search	查找
 menu	site_status	站点状态
 menu	software_map	软件分类表
-home	sourceforge_statistics	GForge统计资料
 menu	top_projects	热点项目
-home	top_project_downloads	项目下载排行榜
-conf	content_encoding	UTF-8
-conf	default_font	verdana,arial,helvetica,sans-serif
-conf	language_code	zh-cn
-conf	language_id	23
+menu	admin	管理
+menu	submit	发布
+menu	home	首页
+menu	projectree	项目树
+menu	mypage	我的首页
+menu	code_snippet	代码片断
+menu	admin	管理
+my	about_blurb	您的个人首页包括分配给您的bug和任务列表，外加您所属的项目列表
+my	no_bookmarks	您目前没有保存任何的书签
+my	no_monitored_filemodules	<h3>您没有监视任何文件</h3><p>如果您监视了文件，新版本的发布将会通过邮件通知给您。邮件当中包含从我们的下载服务器上下载该新文件的链接</p><p>您可以通过访问一个项目的“摘要”页并点击文件部分来监视文件。</p>
+my	no_monitored_forums	<h3>您没有监视任何论坛</h3><p>如果您监视了论坛，论坛中出现新帖子时，将会通过email通知您，邮件当中嗨包括访问该帖子的连接。</p><p>您可以在某个论坛当中，点击“监视论坛”来监视该论坛。</p>
+my	no_open_tasks	目前没有未完成的任务分配给您
+my	no_projects	您目前不属于任何一个活动项目
+my	no_tracker_items_assigned	目前没有开放的跟踪项分配给您
+my	no_tracker_items_submitted	目前没有您发布的开放跟踪项
+my	title	$1 的个人首页
+my	assigneditems	分配给我的条目
+my	submitteditems	我发布的条目
+my	monitoredforum	监视的论坛
+my	monitoredfile	监视的文件
+my	tasks	我的任务
+my	survey	快速调查
+my	survey_taken	您已经参与了开发调查
+my	bookmarks	我的书签
+my	projects	我的项目
+my	pending_projects	待审批的项目 
+my	pending_projects_1	有个待审批的项目需要审查
+my	pending_projects_2	共有 $1 个待审批项目需要审查
+my	pending_projects_3	点击这里
+my	pending_news_bytes	待审批新闻
+my	pending_news_bytes_1	有个待审批的新闻需要审查
+my	pending_news_bytes_2	共有 $1 个新闻待审查
+my	pending_news_bytes_3	点击这里
+my_bookmark	return	返回
+my_bookmark_add	section	我的个人首页
+my_bookmark_add	title	增加书签
+my_bookmark_add	added_bookmark	为<strong>$1</strong>增加标题为<strong>$2</strong>的书签
+my_bookmark_add	bookmark_title	书签标题
+my_bookmark_add	bookmark_url	书签地址
+my_bookmark_add	visit_page	访问书签页
+my_bookmark_add	back	返回您的首页
+my_bookmark_delete	section	我的个人首页
+my_bookmark_delete	title	删除书签
+my_bookmark_delete	bookmark_deleted	书签已删除
+my_bookmark_edit	section	我的个人首页
+my_bookmark_edit	title	编辑书签
+my_bookmark_edit	bookmark_updated	书签已更新
+my_bookmark_edit	failed_to_update_bookmark	更新书签失败
+my_rmproject	title	退出项目
+my_rmproject	operation_not_permitted_title	操作被禁止
+my_rmproject	operation_not_permitted_text	您不能将自己从该项目删除，因为您不是该项目的管理员。您应该首先要求其他管理员重设您的管理权限。如果您是项目中唯一的管理员，请考虑到到<a href="/people/">需要帮助版面</a>贴出信息，并且准备将项目和管理权限移交给感兴趣的人员和小组。
+my_rmproject	quitting_project	退出项目
+my_rmproject	quitting_project_text	您打算把自己从当前项目中删除。请确认您的操作：
+my_diary	section	我的首页
+my_diary	title	我的日记和笔记
+my_diary	add_new_entry	增加新条目
+my_diary	summary	摘要
+my_diary	details	细节
+my_diary	submit_only_once	只能提交一次
+my_diary	is_public	是否公开？
+my_diary	is_public_expl	如果标记为公开，您的条目将被通过mail发送到监视您日记笔记的用户邮箱。
+my_diary	diary_updated	日记已更新
+my_diary	nothing_updated	没有任何东西更新
+my_diary	error_adding_item	增加新条目时出错
+my_diary	existing_entries	已有的日记和笔记条目
+my_diary	update_entry	更新一个条目
+my_diary	entry_not_found	条目不存在或者不属于您
+my_diary	item_added	新条目已增加
+my_diary	no_entries	您没有日记条目
+new	title	新发布
+news	section	项目： $1
+news	title	新闻
+news	choose	<P>选择一条新闻进行阅读，查找和发布消息<P>
+news	nonews	没有新闻
+news	nonewsfor	$1 没有新闻
+news	noitems	没有发现条目
+news_admin	section	新闻
+news_admin	title	新闻管理
+news_admin	permdenied	您必须是项目管理员或者属于 $1 新闻工作组
+news_admin	noqueued	本项目没有发现新闻
+news_admin	queued	以下新闻条目被提交：
+news_main	title	新闻
+news_submit	post_blurb	如果您是项目管理员，您可以为项目发布新闻。当项目需要帮助时，您也可以发布“需要帮助”通知。<P>所有 <B>为您的项目</B>发布的消息都将马上在您项目的摘要页面显示。 对整个社区都感兴趣的新闻，将会在 $1 新闻工作组的成员审核之后，出现在 $1 的首页上。<P>您可以包括URL，但是不需要使用HTML标记。<P>以 http:// 开头的 URLs 都会自动变成可点击的
+news_submit	section	新闻
+news_submit	title	为项目 $1 发布新闻
+news_submit	cannot	除非您是项目管理员，否则不能发布该项目的新闻
+news_submit	cannotadmin	从news项目中发布新闻是不允许的。
+news_submit	forproject	为项目
+news_submit	subject	标题
+news_submit	details	细节
+news_submit	errorinsert	插入操作出错
+news_submit	errorboth	错误 - 标题和正文都是必须的
+news_submit	newsadded	新闻已添加
+news_submit	submit	提交
+news_utils	nonews	没有发现新闻条目
+news_utils	archive	新闻存档
+news_utils	submit	提交新闻
+news_utils	readmore	阅读&nbsp;更多/评论
+people	about_blurb	<P> $1 项目寻求帮助讨论版为非商业化的项目自愿者开设的。商业性的使用是禁止的<P>寻求帮助的帖子将存活两个星期，或者被用户主动关闭。（项目管理员可能总是在过期前重复张贴）<P>通过分类目录浏览并发现需要您帮助的项目。<P>如果您是项目管理员，请登录并通过您的项目管理页来发布需要帮助的信息。<P>如果需要增加一种新的工作分类，请向支持管理员提交一个请求。<P>
+people	section	需要帮助的项目
+people	title	需要帮助的系统
+people	here_is_list_position	以下是这个项目能够提供的职位列表
+people	click_job_titles	点击职位名称来获得更详细的描述
+people	last_posts	最新的帖子
+people	more_latest_posts	更多最新的帖子
+people	category	分类
+people	short_description	短描述
+people	long_description	长描述
+people	status	状态
+people	error_inserting	错误 － 无法插入技能目录
+people	added_skill	加入到技能目录
+people	error_skill_already	错误 － 技能已经在您的目录当中
+people	must_be_loggin	请先登录
+people	must_select_a_skill	必须选择一个技能编号
+people	skill	技能
+people	level	等级
+people	experience	经验
+people	no_skill_inventory_setup_up	没有设置技能目录
+people	action	动作
+people	add_new_skill	增加新的技能
+people	add_skill	增加技能
+people	invalid_id	无效的编号
+people	no_categories_found	没有发现分类
+people	date_opened	提交日期
+people	title_array	标题
+people	project	$1 项目
+people	none_found	没有发现
+people_admin	section	寻求帮助的项目
+people_admin	title	寻求帮助管理
+people_admin_people_cat	section	寻求帮助管理
+people_admin_people_cat	title	增加工作分类
+people_admin_people_skills	section	寻求帮助管理
+people_admin_people_skills	title	增加工作技能
+people_cat	section	需要帮助
+people_cat	title	按分类排序的工作
+people_createjob	section	寻求帮助的项目
+people_createjob	title	创建新工作
+people_createjob	explains	首先填写以下各项。当点击继续时，将会展示给您这个工作所需要的技能和经验登记列表。
+people_createjob	continue	继续 >>
+people_editjob	section	寻求帮助的项目
+people_editjob	title	编辑工作
+people_editjob	error_missing	错误 － 缺少信息
+people_editjob	fill_in	请填写所有必须的项
+people_editjob	job_insert_failed	插入JOB失败
+people_editjob	job_insert_ok	工作添加成功
+people_editjob	job_update_no	工作更新失败
+people_editjob	job_update_ok	工作更新成功
+people_editjob	job_update_no_wrong_id	工作更新失败 － 错误的项目编号
+people_editjob	job_skill_update_no	工作技能更新失败
+people_editjob	job_skill_update_ok	工作技能更新成功
+people_editjob	job_skill_update_no_wrong_id	工作技能更新失败 － 错误的项目编号
+people_editjob	job_skill_delete_no	工作技能删除失败
+people_editjob	job_skill_delete_ok	工作技能删除成功
+people_editjob	job_skill_delete_no_wrong_id	工作技能删除失败 － 错误的项目编号
+people_editjob	posting_fetch_failed	无法获取帖子
+people_editjob	no_such	该项目没有这样的帖子
+people_editjob	skill_explains	<p>现在您可以编辑/改变这个帖子的技能列表。开发者可以根据您的技能要求列表来判断他们是否符合您的要求。 </p><p>您的贴子在两星期后自动关闭。</p>
+people_editjob	update_description	更新描述
+people_editjob	finished	完成
+people_editprofile	section	需要帮助的项目
+people_editprofile	update_failed	用户更新失败
+people_editprofile	update_ok	用户更新成功
+people_editprofile	title	编辑您的个人能力
+people_editprofile	error	错误 － 缺少信息
+people_editprofile	fill_all_required_fields	请填写所有必须的项
+people_editprofile	failed_to_add_skill	增加技能失败
+people_editprofile	skill_added_ok	增加技能成功
+people_editprofile	no_skills_selected	没有选择技能进行编辑
+people_editprofile	failed_update_skills	更新技能失败
+people_editprofile	fill_all_required_fields	技能 $1 更新成功
+people_editprofile	skills_edit	编辑技能
+people_editprofile	edit_skills	编辑技能
+people_editprofile	change_required_fields	改变必须的项，然后按下本页底端的“完成”按钮
+people_editprofile	cancel_skills_update	取消技能的更新
+people_editprofile	no_skills_selected_to_delete	没有选择技能进行删除
+people_editprofile	failed_delete_skills	删除技能失败
+people_editprofile	skill_delete_successfully	技能 $1 删除成功
+people_editprofile	confirm_skill_delete	确认删除该技能
+people_editprofile	confirm_delete	确认删除
+people_editprofile	about_to_delete	您正准备删除以下技能：$1
+people_editprofile	from_skills_database	这个动作无法在技能数据库中完成。
+people_editprofile	are_you_sure	您<strong>确定</strong> 您希望继续？
+people_editprofile	skill_deletion_cancelled	取消技能删除
+people_editprofile	edit_your_profile	编辑您的个人能力
+people_editprofile	user_fetch_failed	获取用户失败
+people_editprofile	no_such_user	没有这个用户
+people_editprofile	edit_public_permissions	编辑公共权限
+people_editprofile	following_options	以下选项决定别人是否可以看见您的技能。就算他们不能看见您的技能，您也可以一样的输入您的技能。
+people_editprofile	publicly_viewable	是否对公众可见
+people_editprofile	update_permission	更新权限
+people_editprofile	no_skill_types_in_database	数据库中没有技能类型(skills_data_types table)
+people_editprofile	no_skill_types_in_database_inform	数据库中没有技能类型 - inform system administrator
+people_editprofile	add_new_skill	增加新技能
+people_editprofile	you_can_enter_new_skills	您可以输入在这儿学到的新技能。请输入尽量准确的开始和结束时间。
+people_editprofile	all_fields_required	所有项都必须填写！
+people_editprofile	add_this_skill	增加这个技能
+people_editprofile	edit_delete_your_skills	编辑/删除您的技能
+people_editprofile	type	类型
+people_editprofile	profile_title	标题
+people_editprofile	start_date	开始日期
+people_editprofile	end_date	结束日期
+people_editprofile	keywords	关键词
+people_editprofile	title_max_100_chars	标题（不多于100字符）
+people_editprofile	keywords_max_255_chars	关键词（不多于255字符）
+people_help_wanted_latest	title	寻求帮助最新帖子
+people_helpwanted_latest	section	寻求帮助的项目
+people_helpwanted_latest	title	最新帖子
+people_proj	section	寻求帮助的项目
+people_proj	title	$1 中寻求帮助的项目
+people_viewjob	section	寻求帮助的项目
+people_viewjob	title	$1 需要 $2
+people_viewjob	posting_id_not_found	帖子编号没有发现
+people_viewjob	view_a_job	查看工作
+people_viewjob	fetch_failed	帖子获取失败
+people_viewjob	no_such_posting	该项目没有这个帖子
+people_viewjob	contact_info	联系信息
+people_viewjob	open_date	开始日期
+people_viewjob	for_project	为项目
+people_viewjob	required_skills	需要技能
+people_viewprofile	section	用户个人能力
+people_viewprofile	title	查看用户个人能力
+people_viewprofile	user_fetch_failed	获取用户失败
+people_viewprofile	no_such_user	没有这个用户
+people_viewprofile	set_private	用户将他/她的个人能力设置为私有
+people_viewprofile	skills_profile_for	技能能力
+pm	section	项目： $1 
+pm	title	项目/任务管理：子项目和任务
+pm	intro	选择某个子项目进行浏览/编辑/增加任务。
+pm	noprj	<H1>没有发现子项目</H1><P><B>没有设置子项目，或者您没有权限查看<P><FONT COLOR=RED>项目管理员可以通过项目管理页进行设置</FONT></B>
+pm	category	分类
+pm	start_date	开始日期
+pm	end_date	结束日期
+pm	percent_complete	完成度百分比
+pm	priority	优先级
+pm	summary	任务摘要
+pm	details	任务细节
+pm	assigned_to	分配给
+pm	dependent	依赖于任务
+pm	hours	估计小时数
+pm	status	状态
+pm	task_id	任务编号
+pm	date_note		如果您试图创建一个依赖于其它任务的新任务，而这个新任务的开始日期比那些任务的结束日期要早，系统将改变您的开始/结束日期。
+pm	view_calendar	查看日历
+pm	dependent_note			您应该只选择那些只有完成了才能开始这个任务的任务。
+pm	unassigned	没有分配
+pm	any	任何
+pm	tech_any	任何
+pm	admin	管理
+pm	cat_any	Any
+pm	no_tasks_found	没有发现匹配的任务
+pm	no_tasks_found_text	使用上面的连接增加任务
+pm_addtask	title	增加新任务
+pm_admin	title	任务管理器：管理
+pm_admin_change_status	section	任务管理器管理
+pm_admin_change_status	title	更新信息
+pm_admin_projects	section	任务管理器管理
+pm_admin_projects	title	增加子项目
+pm_admin_projects	project_inserted	项目已插入
+pm_admin_projects	add_categories_title	增加分类
+pm_admin_projects	project_inserted	项目已插入
+pm_admin_projects	category_inserted	分类已插入
+pm_admin_projects	category_updated	分类已更新
+pm_admin_projects	updated_successfully	更新成功 ";
+pm_admin_projects	add_categories_title	增加分类'
+pm_admin_projects	add_categories	增加分类到
+pm_admin_projects	id	编号
+pm_admin_projects	no_categories	没有定义分类
+pm_admin_projects	category_name	新分类名称
+pm_admin_projects	category_note	一旦您增加了一个分类，它就无法被删除
+pm_admin_projects	add_categories	增加分类
+pm_admin_projects	modify_category	更改分类
+pm_admin_projects	category_name	分类名称
+pm_admin_projects	category_note2	不建议您更改分类名称，因为其它东西依赖于它。当您修改分类名称时，所有其它相关的项都会被更改成新的名字。</font></strong>
+pm_admin_projects	add_subprojects	增加子项目
+pm_admin_projects	existing_subprojects	已存在的子项目
+pm_admin_projects	no_subprojects	该项目没有子项目
+pm_admin_projects	projects_intro	增加新的项目到项目/任务管理器。<strong>这与增加一个任务到项目不一样。</strong>
+pm_admin_projects	is_public	是否公开？
+pm_admin_projects	project_name	新项目名称
+pm_admin_projects	description	描述
+pm_admin_projects	send_updates	发送所有的更新到
+pm_admin_projects	change_project_title	更改项目/任务管理器状态
+pm_admin_projects	change_project_intro	您可以通过这个表单更改一个现有的任务。请注意私有项目仍然能够被项目成员查看到，虽然不是被完全公开。<p>
+pm_admin_projects	add_edit_categories	增加/编辑分类
+pm_admin_projects	admin_title	项目/任务管理器管理
+pm_admin_projects	add_project	增加新项目
+pm_admin_projects	add_project_intro	增加一个包括一系列任务的项目。这和创建一个新任务是不同的。
+pm_admin_projects	no_projects_found	<h2>没有发现项目</h2><p>该项目没有子项目。您可以通过上面“增加新项目”的连接来增加新的子项目。
+pm_admin_projects	edit_update	编辑/更新项目
+pm_admin_projects	project_title	标题
+pm_admin_projects	add_categories_to	增加分类到
+pm_browse_custom	section	任务管理器
+pm_browse_custom	title	浏览定制的任务
+pm_browse_my	section	项目 $1 的任务管理器
+pm_browse_my	title	浏览我的任务
+pm_browse_open	section	任务管理器
+pm_browse_open	title	浏览开放的任务
+pm_browsetask	title	浏览任务
+pm_browsetask	browse	浏览
+pm_browsetask	previous	前50
+pm_browsetask	next	后50
+pm_browsetask	overdue_tasks	* 表示逾期任务
+pm_detailtask	section	任务管理器
+pm_detailtask	title	任务细节
+pm_detailtask	submitted_by	提交人
+pm_detailtask	category	分类
+pm_detailtask	pct_complete	完成度百分比
+pm_detailtask	priority	优先级
+pm_detailtask	start_date	开始日期
+pm_detailtask	end_date	结束日期
+pm_detailtask	task_summary	任务摘要
+pm_detailtask	original_comment	初始评论
+pm_detailtask	assigned_to	分配给
+pm_detailtask	dependend_on_task	依赖于任务
+pm_detailtask	hours	小时
+pm_detailtask	status	状态
+pm_modtask	title	修改任务
+pm_modtask	submitted_by	提交人
+pm_modtask	original_comment	初始评论
+pm_modtask	add_comment	增加评论
+pm_modtask	assignee	被指定人
+pm_modtask	sort_on	排序
+pm_reporting	title	任务报表系统
+pm_reporting	aging_report	按时间报表
+pm_reporting	by_tech	按人员报表
+pm_reporting	by_subproject	按子项目报表
+pm_reporting	average_duration	已完成任务的平均时间（天）
+pm_reporting	started_tasks	已开始的任务数
+pm_reporting	not_completed	未完成的任务数
+pm_reporting	tasks_by_category	按分类统计的任务
+pm_reporting	open_tasks_by_category	按分类统计的开放任务
+pm_reporting	all_tasks_by_category	按分类统计的所有任务
+pm_reporting	not_completed	未完成的任务数
+pm_reporting	started_tasks	已开始的任务数
+pm_reporting	average_duration	已完成任务的平均时间（天）
+pm_reporting	tasks_by_technician	按人统计的任务
+pm_reporting	open_tasks_by_technician	按人统计的开放任务
+pm_reporting	all_tasks_by_technician	按人统计的所有任务
+pm_reporting	report_note	请注意，一个任务可能被分配给多个人。这些任务每次都被计算在内。</p>
+pm_projectgroup	error_min_name_length	标题不少于5个字符
+pm_projectgroup	error_min_desc_length	文档描述不少于10个字符
+pm_projectgroup	none_found	没有发现项目组
+pm_projectcategory	required_fields	项目分类：需要名字和被指定人
+pm_projecttask	circular_dependency	发现循环依赖'
+pm_projecttask	mail_notice			任务 # $1 已被更新\n\n项目: $2\n子项目: $3\n摘要: $4\n完成度: $5\n状态: $6\n\n描述: $7
+pm_projecttask	mail_followups_title	\n\n回复
+pm_projecttask	mail_followups_body	\n日期: $1\n作者: $2\n\n评论:\n$3
+pm_projecttask	mail_followups_footer	获取更多信息，请访问:
+pm_projecttask	mail_followups_subject	任务 #
+pm_include_grouphtml	project	项目
+pm_include_grouphtml	add_task	增加任务
+pm_include_grouphtml	browse_task	浏览任务
+pm_include_grouphtml	gantt_chart	甘特图
+pm_include_grouphtml	reporting	报表
+pm_include_grouphtml	admin	管理
+pm_include_grouphtml	not_started	没有开始
+pm_include_grouphtml	error_disabled	项目关闭了任务管理功能
+pm_include_taskhtml	depend_info	依赖本任务的任务
+pm_include_taskhtml	no_depend_info	没有任务依赖于本任务
+pm_include_taskhtml	no_tracker_items	没有相关的跟踪项被添加
+pm_include_taskhtml	no_comments	没有评论
+pm_include_taskhtml	no_changes	没有被改动
+pm_include_taskhtml	related_items	相关的跟踪项
+pm_include_taskhtml	tracker	跟踪
+pm_include_taskhtml	open_date	开放日期
+pm_include_taskhtml	remove_relation	移除关系
+pm_include_taskhtml	followups	回复
+pm_include_taskhtml	comment	评论
+pm_include_taskhtml	date	日期
+pm_include_taskhtml	by	作者
+pm_include_taskhtml	task_history	任务变更历史
+pm_include_taskhtml	field	域
+pm_include_taskhtml	old_value	旧的值
+pm_include_taskhtml	no_followups	没有回复
+pm_addtask	task_created_successfully	任务创建成功
+pm_addtask	task_updated_successfully	任务更新成功
+pm_addtask	task_added_relationship	增加跟踪关系成功
+pm_ganttpage	weeks	周
+pm_ganttpage	months	月
+pm_ganttpage	days	天
+pm_ganttpage	sort_on	排序
+pm_ganttpage	resolution	分辨率
+pm_ganttpage	size	大小
+pm_ganttpage	assignee	被分配人
+pm_task	create_successfully	任务创建成功
+project_admin	section	任务： $1
+project_admin	title	项目管理： $1
+project_admin	user_added	用户添加成功
+project_admin	user_removed	用户删除成功
+project_admin	project_information	项目其它信息
+project_admin	short_description	短描述
+project_admin	homepage_link	主页链接
+project_admin	shell_server	项目shell (SSH) 服务器
+project_admin	shell_server_group_directory	shell 服务器上的项目目录： 
+project_admin	www_directory	shell服务器上的www目录：
+project_admin	download_tarball	下载您的每夜CVS Tree Tarball
+project_admin	trove_categorization	Trove 分类：
+project_admin	group_members	组成员
+project_admin	add_user	增加用户
+project_admin	edit_member_permissions	编辑成员权限
+project_admin	tool_admin	工具管理员');
+project_admin	tracker_admin	跟踪管理员
+project_admin	docmanager_admin	文档管理员
+project_admin	mail_admin	邮件管理员
+project_admin	news_admin	新闻管理员
+project_admin	task_manager_admin	任务管理员
+project_admin	forum_admin	论坛管理员
+project_admin	file_releases	文件发布
+project_admin	edit_file_releases	编辑/增加文件发布
+project_admin	packages	软件包
+project_admin	unix_name	Unix名称
+project_admin_database	title	数据库信息
+project_admin_database	confirm_deletion	点击这里确认删除
+project_admin_database	confirm_delete	确认删除
+project_admin_database	add_new_database	增加新数据库
+project_admin_database	add_new_database_info	点击"创建" 将把数据库的创建放进进度表，同时把详细信息用email通知项目管理员。project_admin_database	database_type	数据库类型
+project_admin_database	db_type	数据库类型
+project_admin_database	state	状态
+project_admin_database	new_password	新密码
+project_admin_database	confirm_new	确认新密码
+project_admin_database	operations	操作
+project_admin_database	update	更新
+project_admin_database	current_databases	当前数据库
+project_admin_database	no_databases	当前项目没有分配数据库
+project_admin_database	maximum_databases_allocated	所有类型的数据库最大值都被分配了
+project_admin_database	cannot_add	无法增加数据库分类
+project_admin_database	create	创建
+project_admin_database	database_created	数据库创建已加入进度表
+project_admin_editgroupinfo	title	编辑项目信息
+project_admin_editgroupinfo	group_updated	项目信息更新
+project_admin_editgroupinfo	group_name	描述性的项目名称
+project_admin_editgroupinfo	short_description	短描述（最多255个字符，HTML标记都会当做普通文本显示）
+project_admin_editgroupinfo	homepage_link	主页链接：
+project_admin_editgroupinfo	active_features	活动的特性
+project_admin_editgroupinfo	use_mailing_lists	使用邮件列表
+project_admin_editgroupinfo	use_surveys	使用调查
+project_admin_editgroupinfo	use_forums	使用论坛
+project_admin_editgroupinfo	use_pm	使用项目/任务管理器
+project_admin_editgroupinfo	use_pm	使用CVS
+project_admin_editgroupinfo	enable_pserver	允许pserver
+project_admin_editgroupinfo	enable_anonymous_cvs	允许匿名访问CVS
+project_admin_editgroupinfo	use_news	使用新闻
+project_admin_editgroupinfo	use_docman	使用文档管理器
+project_admin_editgroupinfo	use_ftp	使用FTP
+project_admin_editgroupinfo	use_tracker	使用跟踪
+project_admin_editgroupinfo	use_frs	使用文件发布系统
+project_admin_editgroupinfo	use_stats	使用统计
+project_admin_editgroupinfo	new_doc_info	如果您愿意，您可以提供缺省的email地址，这样所有的提交都会发送到该邮箱
+project_admin_editgroupinfo	new_doc	新文档提交
+project_admin_editgroupinfo	send_on_all_updates	(发送所有更新)
+project_admin_editimages	title	编辑多媒体数据
+project_admin_editimages	error_length	错误 - 文件必须大于20字节，小鱼 256000字节
+project_admin_editimages	file_uploaded	多媒体文件已上传
+project_admin_editimages	required_fields	文件名和描述都是必须的
+project_admin_editimages	file_deleted	多媒体文件已删除
+project_admin_editimages	file_description_required	需要文件描述
+project_admin_editimages	properties_updated	多媒体文件信息已更新
+project_admin_editimages	intro	您可以存储最多不超过 $1 MB 的多媒体数据（位图或是矢量图，声音文件，3D模型）到数据库中。使用本页进行增加/删除项目多媒体数据。
+project_admin_editimages	replace	使用新文件替换(可选)
+project_admin_editimages	description	描述
+project_admin_editimages	mime_type	MIME 类型
+project_admin_editimages	add_data	增加多媒体数据
+project_admin_editimages	local_filename	本地文件名
+project_admin_editimages	description	描述
+project_admin_editimages	add_file	增加文件
+project_admin_editimages	edit	编辑
+project_admin_editimages	id	编号
+project_admin_editimages	uploaded	上传
+project_admin_editimages	name	名字
+project_admin_editimages	mime_type	MIME 类型
+project_admin_editimages	size	大小
+project_admin_editimages	dims	Dims
+project_admin_editimages	description	描述
+project_admin_editimages	del	删除
+project_admin_editpackages	title	编辑发布/发布文件
+project_admin_editpackages	qrs	QRS（快速发布系统）
+project_admin_editpackages	qrs_a_file	点击这里来 $1 快速发布文件 $2
+project_admin_editpackages	packages_info	<h3>软件包</h3><p>您可以使用软件包来把不同的文件一起成组发布，或者如果您愿意，分开发布也可以。<p><H4>一个可参考的软件包：</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>您的软件包：</H4><p><ol><li>定义您的软件包</li><li>创建软件包的新发布</li></ol><p><h3>软件包的发布</h3><p>一个软件包发布可以包含多个文件<p><H4>发布的例子:</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>您可以通过点击软件包名称旁的<strong>增加/编辑发布</strong>来创建软件包的新发布。<p>
+project_admin_editpackages	no_packages_defined	您没有定义软件包
+project_admin_editpackages	releases	发布
+project_admin_editpackages	package_name	软件包名称
+project_admin_editpackages	no_packages_status	状态
+project_admin_editpackages	add_release	增加发布
+project_admin_editpackages	edit_releases	编辑发布
+project_admin_editpackages	new_package_name	新软件包名称
+project_admin_editpackages	create_package	创建这个软件包
+project_admin_editpackages	updated_package	更新软件包
+project_admin_editpackages	added_package	增加软件包
+project_admin_editrelease	title	编辑发布
+project_admin_editrelease	release_notes_too_small	发布通知太小了
+project_admin_editrelease	changelog_too_small	更改日志太小了
+project_admin_editrelease	data_saved	数据已保存
+project_admin_editrelease	file_released	文件已发布
+project_admin_editrelease	file_deleted	文件已删除
+project_admin_editrelease	step_1	第一步：&nbsp;&nbsp; 编辑发布
+project_admin_editrelease	release_date	发布日期
+project_admin_editrelease	release_name	发布名称
+project_admin_editrelease	status	状态
+project_admin_editrelease	note	编辑本软件包本次发布的发布通知或者更改日志。这些改动将被更新到本次发布中的所有文件当中。<br />您可以分别上传发布通知和更改日志，也可以在下面贴在一起。
+project_admin_editrelease	upload_release_notes	上传发布通知
+project_admin_editrelease	upload_change_log	上传更改日志
+project_admin_editrelease	paste_release_notes	粘贴发布通知
+project_admin_editrelease	paste_changelog	粘贴更改日志
+project_admin_editrelease	preserve_preformatted	保存我预先格式化的文本
+project_admin_editrelease	submit_refresh	提交/刷新
+project_admin_editrelease	step_2	第二步：增加文件到这次发布当中</h3><p>现在，选择一个文件并且上传到系统当中。文件的大小不能超过站点管理员预先设定的值，缺省是2MB。如果您需要上传更大的文件，请与站点管理员联系。</p>
+project_admin_editrelease	add_files_note	注意：在某些浏览器中，您必须在文件上传对话框中选择文件，然后再点击"OK"，双击则无法上传文件。</strong></span>
+project_admin_editrelease	upload_new_file	上传一个新文件
+project_admin_editrelease	file_type	文件类型
+project_admin_editrelease	processor_type	处理器类型
+project_admin_editrelease	add_file	添加这个文件
+project_admin_editrelease	step_3	第三步：编辑这个发布中的文件
+project_admin_editrelease	no_files_in_release	本次发布没有文件
+project_admin_editrelease	file_list_note	一旦您添加了文件到发布当中，您<strong>必须</strong>用正确的信息更新每个文件，否则它们不会正确地显示在您的下载摘要页当中。
+project_admin_editrelease	filename_release	文件名<br />发布
+project_admin_editrelease	processor_update	处理器<br />发布日期
+project_admin_editrelease	file_type_update	文件类型<br />更新
+project_admin_editrelease	update_refresh	更新/刷新
+project_admin_editrelease	delete_file	删除文件
+project_admin_editrelease	i_am_sure	我确定
+project_admin_editrelease	file_updated	文件更新
+project_admin_history	title	历史
+project_admin_history	info	这个日志显示，谁曾经在何时对您的项目做过大的更改
+project_admin_newrelease	section	项目 $1 - 管理
+project_admin_newrelease	title	创建新发布
+project_admin_qrs	title	快速发布系统
+project_admin_qrs	required_release_name	必须定义一个发布名
+project_admin_qrs	required_package	必须选择一个软件包
+project_admin_qrs	required_file	必须选择一个文件
+project_admin_qrs	required_file_type	必须选择一个文件类型
+project_admin_qrs	required_processor_type	必须选择一个处理器类型
+project_admin_qrs	title	发布新文件版本
+project_admin_qrs	qrs_info	如果您乐意，现在可以 $1 增加文件到发布 $2 或者编辑这次发布。</p> <p>请注意文件可能不会马上显示在 $3 下载页 $4。 文件在服务器间的更新需要时间。						
+project_admin_qrs	no_file_types_available	没有可用的文件类型
+project_admin_qrs	create_new_package	或者 $1 创建新的软件包 $2
+project_admin_qrs	release_name	发布名称
+project_admin_qrs	release_date	发布日期
+project_admin_qrs	file_name	文件名
+project_admin_qrs	release_note	注意：在某些浏览器中，您必须在文件上传对话框中选择文件，然后再点击"OK"，双击则无法上传文件。
+project_admin_qrs	upload_new_file	上传一个新文件
+project_admin_qrs	file_type	文件类型
+project_admin_qrs	processor_type	处理器类型
+project_admin_qrs	release_notes	发布通知
+project_admin_qrs	changelog	更改日志
+project_admin_qrs	preserve_text	保存我的预格式化文本
+project_admin_qrs	release_file	发布文件
+project_admin_qrs	package_id	软件包编号
+project_admin_qrs	file_released	文件发布：您现在可以选择编辑发布
+project_admin_group_trove	title	项目Trove信息
+project_admin_group_trove	intro	<h3>Edit Trove Categorization</h3><p>Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select "None Selected".</p><p> IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simulteneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted.
+project_admin_group_trove	update_changes	Update All Category Changes
+project_admin_userpermedit	title	Edit Developer Permissions
+project_admin_userpermedit	undefined	Undefined
+project_admin_userpermedit	invalid_user	Invalid user
+project_admin_userpermedit	user_does_not_exist	User does not exist.
+project_admin_userpermedit	user_added	User Added Successfully
+project_admin_userpermedit	permissions_updated	Permissions Updated
+project_admin_userpermedit	editing_permissions	You are editing permissions for user $1 ($2)
+project_admin_userpermedit	developer_not_found	Developer Not Found In This Group
+project_admin_userpermedit	property	Property
+project_admin_userpermedit	value	Value
+project_admin_userpermedit	project_role	Project role
+project_admin_userpermedit	project_admin	Project Admin
+project_admin_userpermedit	release_technician	Release Technician
+project_admin_userpermedit	tracker_manager	Tracker Manager
+project_admin_userpermedit	technician	Technician
+project_admin_userpermedit	admin_tech	Admin & Tech
+project_admin_userpermedit	admin	Admin
+project_admin_userpermedit	pm	Project/Task Manager
+project_admin_userpermedit	forums	Forums
+project_admin_userpermedit	moderator	Moderator
+project_admin_userpermedit	docman	Documentation Manager
+project_admin_userpermedit	editor	Editor
+project_admin_userpermedit	admin_only	Admin Only
+project_admin_userpermedit	remove	Remove
+project_admin_userpermedit	update_permissions	Update Developer Permissions
+project_admin_userpermedit	reset_changes	Reset Changes
+project_admin_userpermedit	tracker_info	<h3>Add User To These Trackers:</h3>	<p>	You can pick and choose which trackers this user has any privileges in, or simply add the user to all trackers by checking "Add To All".</p>
+project_admin_userpermedit	add_to_tracker	Add To Tracker
+project_admin_userpermedit	add_to_all	Add To All
+project_admin_userperms	title	User Permissions List
+project_admin_userperms	rel_tech	Rel.Tech.
+project_admin_userperms	moderator	Moderator
+project_admin_userperms	editor	Editor
+project_admin_userperms	info	Click developer's name below to edit permissions
+project_admin_userperms	general	General
+project_admin_userperms	tracker_manager	Tracker<br />Manager
+project_admin_userperms	task_manager	Task<br />Manager
+project_admin_userperms	forums	Forums
+project_admin_userperms	docman	Doc.<br />Manager
+project_admin_userperms	no_developers	No Developers Found
+project_admin_vhost	title	Virtual Host Management
+project_admin_vhost	vhost_scheduled	Virtual Host scheduled for creation.
+project_admin_vhost	not_valid_hostname	Not a valid hostname - $1
+project_admin_vhost	vhost_deleted	VHOST deleted
+project_admin_vhost	info	<strong><span style="text-decoration:underline">Add New Virtual Host</span></strong><p>To add a new virtual host - simply point a <strong>CNAME</strong> for <em>yourhost.org</em> at <strong>$1.$2</strong>.  $3 does not currently host mail (i.e. cannot be an MX) or DNS</strong>.  <p>Clicking on "create" will schedule the creation of the Virtual Host.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>$4.$5</em>.
+project_admin_vhost	create	Create
+project_admin_vhost	vhost	Virtual Host
+project_admin_vhost	operations	Operations
+project_admin_vhost	no_vhosts	No VHOSTs defined
+project_admin_vhost	name	New Virtual Host <em>(e.g. vhost.org)</em>
+project_admin_vhost	delete	Delete
+project_admin_rmuser	title Remove user
+project_admin_rmuser	cancel	Cancel
+project_admin_rmuser	remove	Remove
+project_admin_rmuser	info	<h3>Removing Developer from $1</h3><p>You are about to remove developer from the $1. Please confirm your action:</p>
+project_admin_rmuser	operation_not_permitted	Operation Not Permitted
+project_admin_rmuser	cannot_remove_admin	You cannot remove $1 admin
+project_admin_showreleases	no_release	No Releases Of This Package Are Available
+project_admin_showreleases	title	Release New File Version
+project_admin_showreleases	package_name	Package Name
+project_admin_showreleases	release_name	Release Name
+project_admin_showreleases	date	Date
+project_admin_utils	permission_blurb	<strong>NOTE:</strong><dl><dt><strong>Project Admins (bold)</strong></dt><dd>can access this page and other project administration pages</dd><dt><strong>Release Technicians</strong></dt><dd>can make the file releases (any project admin also a release technician)</dd><dt><strong>Tool Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool No Permission (N/A)</strong></dt><dd>Developer doesn't have specific permission (currently equivalent to '-')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>can delete messages from the project forums</dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/remove documentation from the project.</dd></dl>
+project_admin_utils	admin	Admin
+project_admin_utils	user_permissions	User Permissions
+project_admin_utils	edit_public_info	Edit Public Info
+project_admin_utils	project_history	Project History
+project_admin_utils	vhosts	VHOSTs
+project_admin_utils	edit_release_files	Edit/Release Files
+project_admin_utils	post_jobs	Post Jobs
+project_admin_utils	edit_jobs	Edit Jobs
+project_admin_utils	multimedia_data	Edit Multimedia Data
+project_admin_utils	database_admin	Database Admin
+project_admin_utils	stats	Stats
+project_admin_utils	change_history	Group Change History
+project_admin_utils	field	Field
+project_admin_utils	old_value	Old Value
+project_admin_utils	date	Date
+project_admin_utils	by	By
+project_stats	title	Project statistics 
+project_stats	usage_statistics	Usage Statistics 
+project_stats	last_7_days	Last 7 Days
+project_stats	last_30_days	Last 30 Days
+project_stats	monthly	Monthly
+project_stats	view_reports	View Reports
+project_stats	change_stats_view	Change Stats View
+project_stats	detailed_statistics	Detailed statistics for
+project_stats	tracker	Tracker
+project_stats	tasks	Tasks
+project_stats_utils	stats_for_days Statistics for the past $1 days
+project_stats_utils	date	Date
+project_stats_utils	rank	Rank
+project_stats_utils	page_views	Page Views
+project_stats_utils	dl	D/l
+project_stats_utils	bugs	Bugs
+project_stats_utils	support	Support
+project_stats_utils	patches	Patches
+project_stats_utils	all_tracker	All Trkr
+project_stats_utils	tasks	Tasks
+project_stats_utils	CVS	CVS
+project_stats_utils	project_did_not_exits	Project did not exist on this date.
+project_stats_utils	stats_for_months	Statistics for the past $1 months.
+project_stats_utils	month	Month
+project_stats_utils	stats_all_time	Statistics for All Time
+project_stats_utils	month	Lifespan
+project_stats_utils	days	Days
+project_stats_graph	statistics	$1 Statistics $1
+project_stats_graph	page_view_days	Page Views (red) and Downloads (blue) for the past $1 days
+project_stats_graph	page_view_months	Page Views (red) and Downloads (blue) for the past $1 months
+project_stats_graph	date	Date
+project_stats_graph	views	Views (red) / Downloads (blue)
+
+project_memberlist	joining	<P>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.<br><br>
+project_memberlist	title	Project Member List
+project_memberlist	developer	Developer
+project_memberlist	username	Username
+project_memberlist	role	Role/Position
+project_memberlist	skills	Skills
+project_memberlist	view	View
+project_showfiles	section	Project: $1
+project_showfiles	title	File List
+project_shownotes	section	Project: $1
+project_shownotes	title	Release Notes
+project_home	title	Project Info
+project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
+project_home	help_wanted	HELP WANTED: This project is looking for
+project_home	help_wanted_multiple	People to fill $1 several different positions </a>
+project_home	view_members	View Members
+project_home	view_project_files	View All Project Files
+project_home	no_trackers	There are no public trackers available
+project_home	no_subprojects	There are no public subprojects available
+project_home	monitor_package	Monitor this package
+project_home	release_notes	Release Notes
+project_home	public_mailing_lists	public mailing lists
+project_home	messages_in	messages in
+project_home	forums	forums
+project_home	surveys	surveys
+project_home	tracker_open	$1 open /$2 total
+project_home	cvs_commits	<strong>$1</strong> commits, <strong>$2</strong> adds
+project_home	forum_messages	<strong>$1</strong> messages in <strong>$2</strong> forum
+project_showfiles	error_no_packages_defined_title	No File Packages
+project_showfiles	error_no_packages_defined_text	There are no file packages defined for this project.
+project_showfiles	title	Project Filelist
+project_showfiles	package	Package
+project_showfiles	release_notes	Release <br />&amp; Notes
+project_showfiles	filename	Filename
+project_showfiles	size	Size
+project_showfiles	downloads	D/L
+project_showfiles	architecture	Arch
+project_showfiles	file_type	Type
+project_showfiles	date	Date
+project_showfiles	intro	Below is a list of all files of the project.
+project_showfiles	intro2	Before downloading, you may want to read Release Notes and ChangeLog (accessible by clicking on release version).
+project_showfiles	new_release	To create a new release click here.
+project_showfiles	release_highlighted	The release you have chosen is <span style="background-color:pink">highlighted</span>.
+project_showfiles	monitor_package	Monitor this package
+project_showfiles	no_releases	No releases
+project_showfiles	project_totals	Project totals
+project_shownotes	notes	Notes:
+project_shownotes	changes	Changes:
+project_shownotes	release_name	Release Name:
+project_shownotes	title	File Release Notes and Changelog
+project_shownotes	error_release_not_found	That Release Was Not Found
+project_filemodule_monitor	stop_monitor_title	Monitoring stopped
+project_filemodule_monitor	stop_monitor_body	Monitoring Has Been Stopped
+project_filemodule_monitor	start_monitor_title	Monitoring started
+project_filemodule_monitor	start_monitor_body	Monitoring Has Been Started
+projects	section	Project: $1
+projects	title	Summary
+register	title	New Project Registration
+register	invalid_full_name	Invalid full name
+register	invalid_unix_name	Invalid unix name
+register	unix_group_name_already_taken	Unix name already taken
+register	describe_registration	Please describe your Registration Purpose in a more comprehensive manner
+register	comprehensive_description	Describe in a more comprehensive manner your project.
+register	maximum_description	Maximum length for Project Description is 255 chars
+register	no_license_chosen	You do not have chosen a license
+register	conflicting_licenses_choice	Conflicting licenses choice
+register	more_license_description	Please give more comprehensive licensing description"
+register	registration_complete	Registration complete
+register	project_submitted	Your project has been submitted to the $1 administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing $1
+register	project_information	Project Information
+register	apply_for_registration	To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory.
+register	project_full_name	</h3>1. Project full name</h3><p>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).</p>Full Name:<br/>
+register	purpose_and_summarization	2. Project Public Description</h3><p><strong></strong><p><strong> Please provide detailed, accurate description of your project and what $1 resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on $1, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>
+register	project_license	<h3>3. License</h3> <p><strong><em>If you are applying for a website-only project, please select "website-only" from the choices below and proceed.</em></strong><p>$1 was created to advance Open Source software development. To keep things simple, we are relying on the outstanding work of the <a href="http://www.opensource.org">Open Source Initiative</a> for our licensing choices. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p>Choosing a license is a serious decision. Please take some time to read the text (and our explanations) of several licenses before making a choice about your project. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
+register	license_type	Public domain</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><br/ ><strong>Your License:</strong><br />
+register	other_license	If you selected "other", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.
+register	project_description	<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
+register	project_unix_name	<h3>5. Project Unix Name</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Unix Name:<br/>
+register	i_agree	I AGREE
+register	i_disagree	I DISAGREE
+register_complete	section	New Project Registration
+register_complete	title	Registration Complete
+register_projectinfo	section	New Project Registration
+register_projectinfo	title	Project Information
+register_requirements	section	New Project Registration
+register_requirements	title	Services & Requirements
+register_tos	section	New Project Registration
+register_tos	title	Terms Of Service Agreement
+search	title	Search
+sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><font color="red"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</font>
+sendmessage	title	Send $1 A Message
+softwaremap	title	Trove
+staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
+survey	title	Surveys For $1
+survey	survey_not_found	Survey not found
+survey_admin	section	Survey Tool
+survey_admin	title	Administration
+survey_admin_add_question	section	Survey Tool Administration
+survey_admin_add_question	title	Add Survey Question
+survey_admin_add_survey	section	Survey Tool Administration
+survey_admin_add_survey	title	Add Survey
+survey_admin_edit_question	section	Survey Tool Administration
+survey_admin_edit_question	title	Edit A Survey Question
+survey_admin_edit_survey	section	Survey Tool Administration
+survey_admin_edit_survey	title	Edit Survey
+survey_admin_show_questions	section	Survey Tool Administration
+survey_admin_show_questions	title	Show Survey Questions
+survey_admin_show_results	section	Survey Tool Administration
+survey_admin_show_results	title	Show Survey Results
+survey_admin_show_results_aggregate	section	Survey Tool Administration
+survey_admin_show_results_aggregate	title	Show A Surveys Results
+survey_admin_show_results_comments	section	Survey Tool Administration
+survey_admin_show_results_comments	title	Show Survey Comments
+survey_admin_show_results_individual	section	Survey Tool Administration
+survey_admin_show_results_individual	title	Show Individual Survey Results
+survey_survey	section	Survey Tool
+survey_survey	title	Display Survey
+survey_survey_resp	section	Survey Tool
+survey_survey_resp	title	Survey Processing / Response
+themes	section	Account Preferences
+themes	title	View/Change Theme
+top	about_blurb	We track many project usage statistics on $1, and display here the top ranked projects in several categories.
+top	active_all_time	Most Active All Time
+top	active_weekly	Most Active This Week
+top	downloads	Top Downloads
+top	downloads_7_days	Top Downloads (Past 7 Days)
+top	forum_posts	Top Forum Post Counts
+top	pageviews	Top Project Pageviews - Measured by impressions of the $1 'button' logo
+top	highest_ranked_users	Highest Ranked Users
+top	title	Top Projects
+top	view_other_top_category	View Other Top Categories
+top	top_project	Top $1 project
+top	updated_daily	Updated Daily
+top	NA	N/A
+top	same	Same
+top	up	Up $1
+top	down	Down $1
+top_mostactive	rank	Rank
+top_mostactive	project_name	Project Name
+top_mostactive	percentile	Percentile
+top_mostactive	updated_daily	Updated Daily
+top_mostactive	section	Top Projects
+top_mostactive	title	Most Active Projects: $1
+top_toplist	section	Top Projects
+top_toplist	title	Top Project Lists
+top_toplist	rank	Rank
+top_toplist	project_name	Project name
+top_toplist	last_rank	Last Rank
+top_toplist	change	Change
+top_toplist	top_download_7_days	Top Downloads in the Past 7 Days
+top_toplist	download	Downloads
+top_toplist	top_weekly_pagesviews	Top Weekly Project Pageviews at *.$1 (from impressions of $2 logo)
+top_toplist	pageviews	Pageviews
+top_toplist	top_forum_post_count	Top Forum Post Counts
+top_toplist	posts	Posts
+top_toplist	top_download	Top Downloads
+top_topusers	title	Highest Ranked Users
+top_topusers	info_not_available	Information not available
+top_topusers	info_not_available_more	Information about highest ranked users is not available.
+top_topusers	rank	Rank
+top_topusers	user_name	User Name
+top_topusers	real_name	Real Name
+top_topusers	rating	Rating
+top_topusers	last_rank	Last Rank
+top_topusers	change	Change
+users	title	User Summary
+users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
+users	peerinfo2	The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
+users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.
+users	user_not_exist_title	That user does not exist.
+users	user_not_exist_text	Invalid User
+users	no_user_name	No User Name Provided
+user_home	title	Developer Profile
+user_home	skills_profile	Skills Profile
+user_home	user_id	User Id
+user_home	login_name	Login Name
+user_home	real_name	Real Name
+user_home	email	Email Addr.
+user_home	jabber_address	Jabber Address
+user_home	personal_information	Personal Information
+user_home	site_member_since	Site Member Since
+user_home	contact	Contact
+user_home	email	Your Email Address
+user_home	name	Your Name
+user_home	subject	Subject
+user_home	message	Message
+user_home	send	Send Message
+user_home	send_a_message	Send a Message to
+user_home	peer_rating	Peer Rating
+user_home	peer_rating_disabled	User chose not to participate in peer rating
+user_home	diary_notes	Diary and Notes
+user_home	diary_notes_entries	Diary/Note entries:
+user_home	diary_notes_view	View Diary & Notes
+user_home	diary_notes_monitor	Monitor this Diary
+user_home	project_info	Project Info
+user_home	no_projects	This developer is not a member of any projects.
+user_home	member_of	This developer is a member of the following groups:
+user_home	send_message_if_logged	You Could Send a Message if you were logged in
+trove	not_categorized	This project has not yet categorized itself in the
+trove	title	Trove Software Map
+trove_list	invalid_category_title	Invalid Trove Category
+trove_list	invalid_category_text	That Trove category does not exist
+trove_list	title	Software Map
+trove_list	remove_filter	Remove This Filter
+trove_list	projects	$1 projects
+trove_list	limiting_view	Now limiting view to projects in the following categories
+trove_list	number_of_projects	<strong>$1</strong> projects in result set.
+trove_list	more_than	More than <strong>$1</strong> projects in result set.
+trove_list	browse_by	Browse By:
+classgroup	acceptedproject	Your project registration for $7 has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
+classgroup	rejectedproject	Your project registration for $3 has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
+classgroup	newprojectnotification	New $1 Project Submitted\n\nProject Full Name:  $2\nSubmitted Description: $3\nLicense: $4\n\nPlease visit the following URL to approve or reject this project:\nhttp://$5/admin/approve-pending.php
+classgroup	acceptedprojecttitle	$1 Project Approved
+classgroup	rejectedprojecttitle	$1 Project Denied
+classgroup	newprojectnotificationtitle	New $1 Project Submitted
+sendmessage	error_variables	Error - some variables were not provided
+sendmessage	error_user_not_exist	Error - That user does not exist
+sendmessage	email_only_to	You can only send to addresses 
+sendmessage	message_sent	Message has been sent
+sendmessage	contact	Contact
+sendmessage	email	Your Email Address
+sendmessage	name	Your Name
+sendmessage	subject	Subject
+sendmessage	message	Message
+sendmessage	send	Send Message
+session	missingpasswd	Missing Password Or Users Name
+session	invalidpasswd	Invalid Password Or User Name
+session	suspended	Account Suspended
+session	pending	Account Pending
+session	deleted	Account Deleted
+session	notactive	Account Not Active
+session	cannotinit	ERROR - Cannot initialize session
+global	error	ERROR
+common_include_account	sixchar	Password must be at least 6 characters.
+common_include_account	nospace	There cannot be any spaces in the login name.
+common_include_account	tooshort	Name is too short. It must be at least 3 characters.
+common_include_account	toolong	Name is too long. It must be less than 15 characters.
+common_include_account	illegal	Illegal character in name.
+common_include_account	cvsreserved	Name is reserved for CVS.
+common_include_account	dnsreserved	Name is reserved for DNS purposes.
+common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.
+survey	title	Developer Survey
+image	logout	logout.png
+image	login	login.png
+image	myaccount	myaccount.png
+image	newaccount	newaccount.png
+searchbox	softwaregroup	Software/Group
+searchbox	skill	Skill
+searchbox	people	People
+searchbox	search	Search
+searchbox	forum	This forum
+searchbox	task	Tasks
+calendar	title	Project Management: Calendar
+calendar	january	January
+calendar	february	February
+calendar	march	March
+calendar	april	April
+calendar	may	May
+calendar	june	June
+calendar	july	July
+calendar	august	August
+calendar	september	September
+calendar	october	October
+calendar	november	November
+calendar	december	December
+calendar	sunday	Sunday
+calendar	monday	Monday
+calendar	tuesday	Tuesday
+calendar	wednesday	Wednesday
+calendar	thursday	Thursday
+calendar	friday	Friday
+calendar	saturday	Saturday
+calendar	view	View:
+calendar	onemonth	One Month
+calendar	threemonth	Three Month
+calendar	currentyear	Current Year
+calendar	comingyear	Coming Year
+calendar	fordate	For date:
+calendar	update	Update
+calendar	todaysdate	Today's date.
+calendar	selecteddate	Selected date (if different from today).
+calendar	task_link_title	Task Summary: $1
+calendar	task_begins	Task $1 Begins
+calendar	task_ends	Task $1 Ends
+calendar	invalidyear	Invalid year
+calendar	invalidyearexplain	Year must be between 1990 and 2020.
+calendar	invalidmonth	Invalid month
+calendar	invalidmonthexplain	Month must be between 1 and 12.
+calendar	invalidday	Invalid day
+calendar	invaliddayexplain	Day must be between 1 and 31.
+calendar	invaliddate	Invalid date
+calendar	invaliddateexplain	$1 is an invalid date.
+calendar	invalidtype	Invalid type
+calendar	invalidtypeexplain	Type is invalid.
+include_html	no_change	No Change
+include_html	none	None
+include_html	priority_medium	Medium
+include_html	priority_lowest	Lowest
+include_html	priority_highest	Highest
+include_toolreport	last_days	Last day(s)
+include_toolreport	last_weeks	Last week(s)
+include_toolreport	last_months	Last month(s)
+include_toolreport	last_years	Last year(s)
+include_toolreport	project_lifespan	Project lifespan
+include_toolreport	show	Show
+include_toolreport	no_data	No data found to report
+include_toolreport	all	All 
+include_toolreport	key	Key
+include_toolreport	open	Open 
+source	show_source	Show source
+source	source_of	Source of $1
+source	missing_file	Missing File Argument
+source	missing_file_text	A file must be specified for this page.
+source	invalid_argument	Invalid File Argument
+source	invalid_argument_text	The file argument is invalid.
+source	file_not_found	File Not Found
+source	file_not_found_text	Cannot find specified file to display.
+stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
+stats_graph	joverview_stats	OVERVIEW STATS
+stats_graph	project_stats	PROJECT STATS
+stats_graph	site_graphs	SITE GRAPHS
+stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
+stats_index	overview_stats	OVERVIEW STATS
+stats_index	project_stats	PROJECT STATS
+stats_index	site_graphs	SITE GRAPHS
+stats_index	other_statistics	Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
+stats_lastlogins	no_records	No records found","Database error: "
+stats_lastlogins	last_logins	Last Logins
+stats_lastlogins	most_recent_open	Most Recent Opened Sessions
+stats_lastlogins	date	Date
+stats_lastlogins	username	Username
+stats_lastlogins	source_ip	Source IP
+stats	overview_stats	OVERVIEW STATS
+stats	project_stats	PROJECT STATS
+stats	site_graphs	SITE GRAPHS
+stats	title	$1 Site Statistics
+stats_i18n	title	$1 I18n Statistics
+stats_i18n	language	Language
+stats_i18n	users	Users
+stats_i18n	language_distribution	Languages Distributions
+stats_i18n	total_non_english	Total Non-English
+stats_i18n	language_text	This is a list of the preferences that users have chosen in their user preferences; it does not include languages which are selected via cookies or browser preferences
+stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
+stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
+stats_index	other_statistics	Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
+stats_lastlogins	no_records	No records found","Database error: "
+stats_lastlogins	last_logins	Last Logins
+stats_lastlogins	most_recent_open	Most Recent Opened Sessions
+stats_lastlogins	date	Date
+stats_lastlogins	username	Username
+stats_lastlogins	source_ip	Source IP
+stats_projects	project_comparision	Project Statistical Comparisons
+stats_site_utils	all_projects	All Projects
+stats_site_utils	special_project_list	Special Project List
+stats_site_utils	returned_no_category	returned no category name
+stats_site_utils 	in_trove_category	Projects in trove category:
+stats_site_utils	or_special_project_list	OR enter Special Project List: 
+stats_site_utils 	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
+stats_site_utils	report	Report: 
+stats_site_utils	last_30 last_30
+stats_site_utils	all	all
+stats_site_utils	view_by	View by: 
+stats_site_utils	generate_report	Generate Report
+stats_site_utils	group_name	Group Name
+stats_site_utils	page_views	Page Views
+stats_site_utils	downloads	Downloads
+stats_site_utils	bugs	Bugs
+stats_site_utils	support	Support
+stats_site_utils	patches	Patches
+stats_site_utils	all_trkr	All Trkr
+stats_site_utils	tasks	Tasks
+stats_site_utils	cvs	CVS
+stats_site_utils	site	Site
+stats_site_utils	subdomain	Subdomain
+stats_site_utils	total	Total
+stats_site_utils	opn	Opn
+stats_site_utils	cls	Cls
+stats_site_utils	cos	CO's
+stats_site_utils	comms	Comm's
+stats_site_utils	adds	Adds
+stats_site_utils	no_valid_data	Query returned no valid data.
+stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days.
+stats_site_utils	day	Day
+stats_site_utils	site_views	Site Views
+stats_site_utils	subdomain_views	Subdomain Views
+stats_site_utils	no_data	No Data
+stats_site_utils	statistics_for_the_past_months Statistics for the past $1 months.
+stats_site_utils	month	Month
+stats_site_utils	current_statistic_all_time	Current Aggregate Statistics for All Time
+stats_site_utils	developers	Developers
+stats_site_utils	projects	Projects
+stats_user_graph	new_additions_by_day	New Additions, by Day
+stats_user_graph	new_user_projects	New Users (RED), New Projects (BLUE
+stats_user_graph	date	Date
+stats_user_graph	user_projects	Users (RED) / Projects (BLUE)
+stats_view_graph	page_views	Gforge Page Views
+stats_view_graph	total_views	Total Page Views (RED) ($1 days)
+stats_view_graph	views	Views (RED)
+stats_view_graph	date	Date
+tracker	title	Trackers
+tracker	choose	Choose a tracker and you can browse/edit/add items to it.
+tracker_add	title	Submit Tracker Item
+tracker_admin	admin	Admin
+tracker_admin	choose_datatype	Choose a data type and you can set up prefs, categories, groups, users, and permissions
+tracker_admin	section	Tracker
+tracker_admin	title	Administration
+tracker_admin	category_inserted	Category Inserted
+tracker_admin	group_inserted	Group Inserted
+tracker_admin	canned_response_inserted	Canned Response Inserted
+tracker_admin	users_added	User(s) Added
+tracker_admin	users_updated	User(s) Updated
+tracker_admin	users_deleted	User(s) Deleted
+tracker_admin	canned_response_updated	Canned Response Updated
+tracker_admin	category_updated	Category Updated
+tracker_admin	group_updated	Group Updated
+tracker_admin	tracker_updated	Tracker Updated
+tracker_admin	tracker_id	ID
+tracker_admin	tracker_title	Title
+tracker_admin	category_name	Category Name
+tracker_admin	auto_assign_to	Auto-Assign To
+tracker_admin	category_add_warning	Once you add a category, it cannot be deleted
+tracker_admin	group_name	New group Name
+tracker_admin	intro	<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming
+tracker_admin	error_inserting	Error inserting
+tracker_admin	error_updating	Error updating
+tracker_admin_add_cat	title	Add Categories to $1
+tracker_admin_add_cat	no_categories	No categories defined
+tracker_admin_add_group	title	Add/Change Groups to $1
+tracker_admin_add_group	no_groups_defined	No groups defined
+tracker_admin_add_group	group_add_warning	Once you add a group, it cannot be deleted
+tracker_admin_add_canned	no_responses	No responses set up in this group
+tracker_admin_add_canned	canned_response_info	Creating useful generic messages can save you a lot of time when handling common artifact requests.
+tracker_admin_add_canned	canned_response_title	Title
+tracker_admin_add_canned	canned_response_body	Message Body
+tracker_admin_add_canned	title	Add/Change Canned Responses to $1
+tracker_admin_add_canned	existing_responses	Existing Responses
+tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
+tracker_admin_add_users	no_developers	No Developers Found
+tracker_admin_add_users	developers_info	<p>Each tracker that you define has separate user lists and user permissions.</p><p>Simply add developers to this tracker, then update their permissions.</p><p><dl><dt><strong>Technicians</strong></dt><dd>can be assigned items</dd><dt><strong>Admins</strong></dt><dd>can make changes to items</dd></dl></p>
+tracker_admin_add_users	delete	Delete
+tracker_admin_add_users	user_name	User Name
+tracker_admin_add_users	category_permission	Permission
+tracker_admin_add_users	technician	Technician
+tracker_admin_add_users	tech_admin	Tech & Admin
+tracker_admin_add_users	admin_only	Admin Only
+tracker_admin_add_users	update_permissions	Update Developer Permissions
+tracker_admin_add_users	add_user_info	<h3>Add These Users:</h3><p>You can pick and choose users for your tracker, or simply add them all by checking "Add All Users".</p>
+tracker_admin_add_users	add_users	Add Users
+tracker_admin_add_users	add_all_users	Add All Users
+tracker_admin_update_canned	title	Modify Canned Responses In: $1
+tracker_admin_update_users	title	Add/Update Tracker User Permissions
+tracker_admin_choose	title	Tracker Admin
+tracker_admin_update_cat	title	Modify Category In: $1
+tracker_admin_update_cat	category_name	Category Name
+tracker_admin_update_cat	auto_assign_to	Auto-Assign To
+tracker_admin_update_cat	category_change_warning	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name
+tracker_admin_update_group	title	Modify A Group In: $1
+tracker_admin_update_group	warning	It is not recommended that you change the artifact group name because other things are dependent upon it. When you change the group name, all related items will be changed to the new name.				
+tracker_admin_update_type	title	Update $1
+tracker_admin_update_type	name	<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)
+tracker_admin_update_type	description	Description
+tracker_admin_update_type	publicy_available	Publicly Available
+tracker_admin_update_type	allow_anonymous	Allow non-logged-in postings
+tracker_admin_update_type	display_resolution	Display the "Resolution" box
+tracker_admin_update_type	send_submissions	Send email on new submission to address
+tracker_admin_update_type	email_all_changes	Send email on all changes
+tracker_admin_update_type	days_overdue	Days till considered overdue
+tracker_admin_update_type	pending_timeout	Days till pending tracker items time out
+tracker_admin_update_type	submit_item_form_text	Free form text for the "submit new item" page
+tracker_admin_update_type	browse_item_form_text	Free form text for the "browse items" page
+tracker_admin	add_categories	Add/Update Categories
+tracker_admin	add_categories_info	Add categories like, 'mail module','gant chart module','cvs', etc
+tracker_admin	add_groups	Add/Update Groups
+tracker_admin	add_group_infos	Add groups like, 'v1.2','unsupported','unverified', etc
+tracker_admin	add_canned_responses	Add/Update Canned Responses
+tracker_admin	add_canned_responses_info	Create/Change generic response messages for the tracker
+tracker_admin	add_permissions	Add/Update Users &amp; Permissions
+tracker_admin	add_permissions_info	Add/remove users to/from this tracker
+tracker_admin	update_preferences	Update preferences
+tracker_admin	update_preferences_info	Set up prefs like expiration times, email addresses
+tracker_browse	title	Browse $1
+tracker_detail	title	Tracker Detailed View
+tracker_reporting	title	Artifact Reporting System
+tracker_reporting	aging_report	Aging Report
+tracker_reporting	dist_by_technician	Distribution by Technician
+tracker_reporting	dist_by_category	Distribution by Category
+tracker_reporting	dist_by_group	Distribution by Group
+tracker_reporting	dist_by_resolution	Distribution by Resolution
+tracker_reporting	artifact_type	Artifact Type: 
+tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (days)
+tracker_reporting	items_submitted	Number of Items Submitted
+tracker_reporting	items_open	Number of Items Still Open
+tracker_reporting	open_items_by_technician	Open Items By Technician
+tracker_reporting	all_items_by_technician	All Items By Technician
+tracker_reporting	open_items_by_technician	Open Items By Category
+tracker_reporting	all_by_technician	All Items By Category
+tracker_reporting	open_by_group	Open By Artifact Group
+tracker_reporting	all_by_group	All Items By Artifact Group
+tracker_reporting	open_items_by_resolution	Open Items By Resolution
+tracker_reporting	all_by_resolution	All Items By Resolution
+tracker_utils	monitor		Monitor
+tracker_utils	stop_monitoring		Stop Monitoring
+tracker	title	Trackers
+tracker	choose	Choose a tracker and you can browse/edit/add items to it.
+tracker	item_created	Item Successfully Created
+tracker	updated_successful	Updated Successfully
+tracker	tracker_item	Tracker Item
+tracker	file_upload_successful	File Upload: Successful
+tracker	file_delete_upload	File Upload
+tracker	file_delete	File Delete: 
+tracker	file_delete_successful	File Delete: Successful
+tracker	comment_added	Comment Added
+tracker	reporting	Report
+tracker	resolution	Resolution
+tracker	admin	Admin
+tracker	please_login	Please $1 login $2
+tracker	insert_email	If you <strong>cannot</strong> login, then enter your email address here:
+tracker	status_any	Any
+tracker	category_any	Any
+tracker	group_any	Any
+tracker	no_trackers	No Accessible Trackers Found
+tracker	no_trackers_text	No trackers have been set up, or you cannot view them.<p><FONT COLOR=RED>The Admin for this project will have to set up data types using the $1 admin page $2</FONT></strong>
+tracker_add	submit		Submit
+tracker_add	for_project	For project
+tracker	category	Category
+tracker	item_group	Group
+tracker	assigned_to	Assigned To
+tracker	priority	Priority
+tracker	summary	Summary
+tracker	detailed_description	Detailed description
+tracker	security_note	DO NOT enter passwords or confidential information in your message!
+tracker	check_upload	Check to Upload & Attach File
+tracker	file_description	File description
+tracker	unassigned	Unassigned
+tracker	any	Any
+tracker	id	ID
+tracker	date	Date
+tracker	open_date	Open Date
+tracker	close_date	Close Date
+tracker	submitter	Submitter
+tracker	assignee	Assignee
+tracker	submitted_by	Submitted By
+tracker_browse	ascending	Ascending
+tracker_browse	descending	Descending
+tracker	status	State
+tracker	group	Group
+tracker	followups	Followup
+tracker_browse	sort_by	Order by
+tracker_browse	request_id	Request ID
+tracker_browse	previous	Previous 50
+tracker_browse	next	Next 50
+tracker_browse	check_all	Check &nbsp;all
+tracker_browse	clear_all	Clear &nbsp;all
+tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
+tracker_browse	no_change	No Change
+tracker_browse	resolution	Resolution 
+tracker_browse	canned_response	Canned Response
+tracker_browse	mass_update	Mass update
+tracker_browse	old_requests	* Denotes requests > $1 Days Old
+tracker_browse	no_items	No items found
+tracker_detail	title	Detail
+tracker_detail	build_task_relation	Build Task Relation
+tracker_detail	add_comment	Add A Comment
+tracker_detail	attached_files	Attached Files
+tracker_detail	name	Name
+tracker_detail	description	Description
+tracker_detail	download	Download
+tracker_detail	no_files_attached	No Files Currently Attached
+tracker_detail	changes	Changes
+tracker_taskmgr	build_relationships	Build Relationship Between Tracker Items and Task Manager
+tracker_taskmgr	add_relationship	Add Relationship To Selected Task
+tracker_taskmgr	add_relation_to_task	Add Relation To Existing Task.
+tracker_taskmgr	create_task	Create New Task
+tracker_taskmgr	tracker_item	Tracker Item
+tracker_taskmgr	task_manager_project	Task Manager Project
+tracker_taskmgr	task	Task
+tracker_mod	title	Modify
+tracker_mod	date_submitted	Date Submitted
+tracker_mod	date_closed	Date Closed
+tracker_mod	data_type	Data Type
+tracker_mod	canned_response	Use Canned Response
+tracker_mod	attach_comment	OR Attach A Comment
+tracker_mod	existing_files	Existing Files
+tracker_mod	delete	Delete
+tracker_mod	name	Name
+tracker_mod	description	Description
+tracker_mod	download	Download
+tracker_mod	no_files	No Files Currently Attached
+tracker_mod	changelog	Change Log
+tracker_mod	build_task_relation	Build Task Relation
+tracker_artifacthtml	date	Date
+tracker_artifacthtml	sender	Sender
+tracker_artifacthtml	no_followups	No Followups Have Been Posted
+tracker_artifacthtml	field	Field
+tracker_artifacthtml	old_value	Old Value
+tracker_artifacthtml	date	Date
+tracker_artifacthtml	by	By
+tracker_artifacthtml	no_changes	No Changes Have Been Made to This Item
+tracker_artifacthtml	message	Message
+tracker_artifacttype	none	None
+tracker_artifacttype	nobody	Nobody
+tracker_artifacttype	admin	Admin
+tracker_artifacttype	reporting	Reporting
+tracker_artifacttype	browse	Browse
+tracker_artifacttype	submit_new	Submit New
+tracker_artifacttype	admin_functions	Admin Functions
+tracker_artifacttype	add_artifact_types	Add/Browse Artifact Types
+tracker_artifacttype	edit_options	Edit/Update Options in
+tracker_artifact	private_error	Artifact: Only Group Members Can View Private ArtifactTypes
+tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
+tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
+tracker_artifact	error_summary_required	Artifact: Message Summary Is Required
+tracker_artifact	error_body_required	Artifact: Message Body Is Required'
+tracker_artifact	double_submit	You Attempted To Double-submit this item. Please avoid double-clicking.
+tracker_artifact	error_valid_email_required	SetMonitor::Valid Email Address Required
+tracker_artifact	monitoring_activated	Now Monitoring
+tracker_artifact	monitoring_deactivated	Monitoring Deactivated
+tracker_artifact	logged_in_yes	Logged In: YES
+tracker_artifact	logged_in_no	Logged In: NO
+tracker_artifact	nothing_changed	Nothing Changed - Update Cancelled
+artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
+artifact_category	required_fields	ArtifactCategory: name and assignee are Required
+tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are Required
+tracker_artifactgroup	required_field	ArtifactGroup: name is Required
+tracker_artifacttype	required_fields	ArtifactType: Name, Description, Due Period, and Status Timeout are required
+scm_index	section	Project: $1
+scm_index	title	CVS
+scm_index	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
+scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
+scm_index	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
+scm_index	history	Repository History
+scm_index	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
+scm_index	browseit	Browse CVS Repository
+scm_index	error_only_projects_can_use_cvs	Error, Only Projects Can Use CVS
+scm_index	error_this_project_has_turned_off	Error This Project Has Turned Off CVS
+scm_index	cvs_repository	CVS Repository
+scm_index	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
+scm_index	developername	developername
+scm_index	modulename	modulename
+admin	successfully_added	Successfully Added
+admin	are_you_sure_delete	Are you sure you want to delete this
+admin	delete	Delete
+admin	cancel  Cancel
+admin	successfully_deleted	Successfully Deleted.
+admin	submit_changes	Submit Changes
+admin	submit_new	Submit New
+admin	successfully_modified	successfully modified
+admin	add_new [add new]
+admin	edit	[edit]
+admin	site_admin_home Site Admin Home
+admin	yes	yes
+admin	reject	Reject
+admin	license	License:
+admin	add	Add
+admin	na	N/A
+admin	other	Other
+admin	edit	Edit
+admin	http_domain	HTTP Domain:
+admin	license_other	License Other:
+admin_add_language	add_new_language	Add New Languages
+admin_add_language	existing_language	Existing Language
+admin_add_language	add_new_language	Add New Language
+admin_add_language	name	Name:
+admin_add_language	class_filename	Class Filename:
+admin_add_language	classname	Classname:
+admin_add_language	submit	Submit
+admin_tabfiles	modify_the	Modify the $1 below:
+admin_tabfiles	language	Language
+admin_tabfiles	delete_lang	[delete]
+admin_tabfiles	edit_the_language	Edit The Language
+admin_tabfiles	language	Language
+admin_tabfiles	edit_the_langfile	Edit The $1 Language
+admin_table	edit_the	Edit The
+admin_table	table	Table
+admin_approve_pending	error_creating_group	Error creating group object
+admin_approve_pending	approving_group		Approving Group:
+admin_approve_pending	error_group_rejection	Error during group rejection
+admin_approve_pending	approving_pending_projects	Approving Pending Projects
+admin_approve_pending	none_found	None Found
+admin_approve_pending	no_pending_projects_to_approve	No Pending Projects to Approve
+admin_approve_pending	pending_projects	Pending projects:
+admin_approve_pending	edit_project_details	[Edit Project Details]
+admin_approve_pending	project_admin	Project Admin
+admin_approve_pending	view_edit_project_members	[View/Edit Project Members]
+admin_approve_pending	approve	Approve
+admin_approve_pending	manage_responses	(manage responses)
+admin_approve_pending	custom_response_title	Custom response title and text
+admin_approve_pending	add_this_custom_response	Add this custom response to canned responses	
+admin_approve_pending	home_box	Home Box:
+admin_approve_pending	other_information	Other Information
+admin_approve_pending	unix_group_name	Unix Group Name:
+admin_approve_pending	submitted_description	Submitted Description:
+admin_approve_pending	pending_reason	Pending reason:
+admin_approve_pending	admin_approve_pending	Activate
+admin_approve_pending	approve_all_on_this_page	Approve All On This Page
+admin_database	error_adding_database	Error Adding Database
+admin_database	group	Group
+admin_database	added_already_active_database	added already active database
+admin_database	unable_to_insert	Unable to insert already active database.
+admin_database	site_admin_groups_maintance	Site Admin: Groups' DB Maintenance
+admin_database	statistics_for_project_database	Statistics for Project Databases
+admin_database	type	Type
+admin_database	count	Count
+admin_database	no_databases_defined	No databases defined
+admin_database	display_database_type	Displaying Databases of Type:
+admin_database	add_an_already_active_database	Add an already active database
+admin_database	group_unix_name	Group Unix Name:
+admin_groupedit	error	Error
+admin_groupedit	error_creating_group_object	Error creating group object
+admin_groupedit	updated	Updated
+admin_groupedit	instruction_email_sent	Instruction email sent
+admin_groupedit	title	Site Admin: Group Info
+admin_groupedit	project_admin	[Project Admin]
+admin_groupedit	I	I
+admin_groupedit	A	A
+admin_groupedit	P	P
+admin_groupedit	H	H
+admin_groupedit	D	D
+admin_groupedit	incomplete	Incomplete (I)
+admin_groupedit	active	Active (A)
+admin_groupedit	pending	Pending (P)
+admin_groupedit	holding	Holding (H)
+admin_groupedit	deleted	Deleted (D)
+admin_groupedit	0	0
+admin_groupedit	1	1
+admin_groupedit	no	No
+admin_groupedit	yes	Yes
+admin_groupedit	unix_group_name	Unix Group Name:
+admin_groupedit	registration_application	Registration Application:
+admin_groupedit	new_project_instruction_email	Resend New Project Instruction Email
+admin_groupedit	update	Update
+admin_groupedit	public	Public?
+admin_groupedit	status	Status
+admin_grouplist	group_list	Group List
+admin_grouplist	group_list_for_category	Group List for Category:
+admin_grouplist	groups_that_begin_with	Groups that begin with
+admin_grouplist	group_name_click_to_edit	Group Name (click to edit)
+admin_grouplist unix_name	Unix Name
+admin_grouplist	status	Status
+admin_grouplist	public	Public?
+admin_grouplist	license	License
+admin_grouplist	members	Members
+admin_loadtabfile	title	Site Admin
+admin_loadtabfile	reload_all_language_files	(Re)Load all language files
+admin_loadtabfile	purge_loaded_data	Purge loaded data
+admin_loadtabfile	tables_loaded	Tables loaded
+admin_loadtabfile	see_translations	[see translations]
+admin_loadtabfile	see_untranslated	[see untranslated]
+admin_loadtabfile	edit_dont_work	[edit(don t work)]
+admin_loadtabfile	availaible_tables	Available Tables:
+admin_massmail_execute	receive_post	Received Post. Making Query.
+admin_massmail_execute	unrecognized_post	Unrecognized Post, cannot execute
+admin_massmail_execute	querry_complete	Query Complete. Beginning mailings to 
+admin_massmail_execute	user_id	User id:
+admin_massmail_execute	sending_to	sending to
+admin_massmail_execute	completed_successfully	COMPLETED SUCCESSFULLY
+admin_responses	title	Site Admin: Edit Rejection Responses
+admin_responses	you_cant	You can't $1 \"None\", bozo!
+admin_responses	yes_im_sure	Yes, I'm sure
+admin_responses	existing_responses	Existing Responses: 
+admin_responses	edit_response	Edited Response
+admin_responses	edit_response_other	Edit Response: 
+admin_responses	response_title	Response Title: 
+admin_responses	response_text	Response Text:
+admin_responses	go	go
+admin_responses	deleted_resposes	Deleted Response
+admin_responses	not_sure_dont_click	If you're aren't sure then why did you click 'Delete'?
+admin_responses	by_the_way	By the way, I didn't delete... just in case...
+admin_responses	add_response	Added Response
+admin_responses	create_new_response	Create New Response:
+admin_responses	create	Create
+admin_search	index	Admin Search Results
+admin_search	refusing_to_display_whole_db	Refusing to display whole DB,That would display whole DB.  Please use a CLI query if you wish to do this.
+admin_search	user_search_criteria	User search with criteria
+admin_search	matches	matches
+admin_search	id	ID
+admin_search	username	Username
+admin_search	real_name	Real Name
+admin_search	email	Email
+admin_search	member_since	Member since
+admin_search	status	Status (Web/Unix)
+admin_search	group_search_criteria	Group search with criteria
+admin_search	unix_name	UNIX Name
+admin_search	full_name	Full Name
+admin_search	registered	Registered
+admin_search	status	Status
+admin_unsubscribe	title	Site Mailings Subscription Maintenance
+admin_unsubscribe	unsubscribe_user	Unsubscribe user:
+admin_unsubscribe	you_can_unsubscribe	You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).
+admin_unsubscribe	unsubscribe	Unsubscribe
+admin_unsubscribe	mail	MAIL
+admin_unsubscribe	all	ALL
+admin_unsubscribe	admin_initiaded_mail	Admin-initiated mailings
+admin_unsubscribe	all_site_mailing	All site mailings
+admin_unsubscribe	error_unsubscribe_user	Error, Could not unsubscribe user: 
+admin_unsubscribe	user_unsubscribed	User unsubscribed
+admin_unsubscribe	subscription_maintance	Site Mailings Subscription Maintenance
+admin_unsubscribe	use_fields_bellow	Use field below to find users which match given pattern with the $1 username, real name, or email address (substring match is preformed, use '%' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).
+admin_unsubscribe	show_user_matching	Show users matching pattern
+admin_unsubscribe	user_id	user_id
+admin_unsubscribe	username	Username
+admin_unsubscribe	real_name	Real Name
+admin_unsubscribe	email	Email
+admin_unsubscribe	site_mail	Site Mail.
+admin_unsubscribe	comm_mail	Comm. Mail.
+admin_useredit	no_unix_account	No Unix account (N)
+admin_useredit	active	Active (A)
+admin_useredit	suspended	Suspended (S)
+admin_useredit	deleted	Deleted (D)
+admin_useredit	could_not_complete_operation	Could Not Complete Operation
+admin_useredit	updated	Updated
+admin_useredit	title	Site Admin: User Info
+admin_useredit	account_info	Account Information
+admin_useredit	user_id	User ID:
+admin_useredit	user_name	User name:
+admin_useredit	real_name	Real name
+admin_useredit	web_account_status	Web account status
+admin_useredit	pending	Pending (P)
+admin_useredit	active	Active (A)
+admin_useredit	suspended	Suspended (S)
+admin_useredit	deleted	Deleted (D)
+admin_useredit	unix_account_status	Unix Account Status
+admin_useredit	unix_shell	Unix Shell:
+admin_useredit	email	Email:
+admin_useredit	current_confirm_bash	Current confirm hash:
+admin_useredit	update	Update
+admin_useredit	this_page_allows	This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below).
+admin_useredit	unix_status_updated_mirroring	Unix status updated mirroring web status, unless it has value 'No unix account (N)'
+admin_useredit	group_memerbership	Groups Membership
+admin_useredit	name	Name
+admin_useredit	unix_name Unix Name
+admin_useredit	operations	Operations
+admin_useredit	project_admin	Project Admin
+admin_useredit	membership_permissions	Member Permissions
+admin_vhost	error_adding_vhost	Error adding VHOST: 
+admin_vhost	virtual_host	Virtual Host
+admin_vhost	scheduled_for_creation	scheduled for creation on group
+admin_vhost	the_provided_group	The provided group name does not exist
+admin_vhost	error_updating_vhost	Error updating VHOST entry: 
+admin_vhost	virtual_host_entry_updated	Virtual Host entry updated.
+admin_vhost	title	Site Admin
+admin_vhost	virtual_host_administration	Virtual Host Administration
+admin_vhost	add_virtual_host	Add Virtual Host
+admin_vhost	group_unix_name	Group Unix Name
+admin_vhost	virtual_host_name	Virtual Host Name
+admin_vhost	add_virtual_host	Add Virtual Host
+admin_vhost	tweak_directories	Tweak Directories
+admin_vhost	virtual_host	Virtual Host:
+admin_vhost	get_info	Get Info
+admin_vhost	update_record	Update Record:
+admin_vhost	vhost_id	VHOST ID
+admin_vhost	vhost_name	VHOST Name
+admin_vhost	group	Group
+admin_vhost	htdocs_dir	Htdocs Dir
+admin_vhost	cgi_dir	CGI Dir
+admin_vhost	operations	Operations
+admin_vhost	update	Update
+admin_vhost	no_such_host	No such VHOST:
+admin_trove_cat_list	edit	Edit
+admin_trove_cat_list	title	Site Admin: Trove - Category List
+admin_trove_cat_list	browse_trove_tree	Browse Trove Tree
+admin_userlist	userlist	: User List
+admin_userlist	user_updated	User updated to $1 status
+admin_userlist	key	Key
+admin_userlist	active	Active
+admin_userlist	deleted	Deleted
+admin_userlist	suspended	Suspended
+admin_userlist	pending	(*)Pending
+admin_userlist	devprofile	DevProfile
+admin_userlist	activate	Activate
+admin_userlist	delete	Delete
+admin_userlist	suspend	Suspend
+admin_userlist	user_list_for_group	User list for group:
+admin_userlist	all_groups	All Groups
+admin_userlist	submit	Submit
+admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
+admin_trove_cat_edit	cant_delete_has_subcategories	Can't delete, That trove cat has sub categories
+admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
+admin_trove_cat_edit	no_such_category	No Such Category, That trove cat does not exist
+admin_trove_cat_edit	title	Site Admin: Trove - Edit Category
+admin_trove_cat_edit	edit_trove_category	Edit Trove Category
+admin_trove_cat_edit	parent_category	Parent Category:
+admin_trove_cat_edit	new_category_short_name	New category short name (no spaces, unix-like)
+admin_trove_cat_edit	new_category_full_name	New category full name (VARCHAR 80)
+admin_trove_cat_edit	new_category_description	New category description (VARCHAR 255)
+admin_trove_cat_edit	update	Update
+admin_trove_cat_edit	delete	Delete
+admin_trove_cat_add	error_in_trove_openration Error	In Trove Operation
+admin_trove_cat_add	title	Site Admin: Trove - Add Node
+admin_trove_cat_add	add_new_trove_category	Add New Trove Category
+admin_trove_cat_add	parent_category	Parent Category
+admin_trove_cat_add	new_category_short_name	New category short name (no spaces, unix-like)
+admin_trove_cat_add	new_category_full_name	New category full name (VARCHAR 80)
+admin_trove_cat_add	new_category_description	New category description (VARCHAR 255)
+admin_trove_cat_add	add	Add
+admin_index	title	Site Admin
+admin_index	user_maintaince	User Maintenance
+admin_index	display_full_user_list	Display Full User List/Edit Users
+admin_index	display_user_beginning_with	Display Users Beginning with :
+admin_index	get	get
+admin_index	group_maintaince	Group Maintenance
+admin_index	display_full_group	Display Full Group List/Edit Groups
+admin_index	display_groups_beginning_with	Display Groups Beginning with :
+admin_index	register_new_project	Register New Project
+admin_index	groups_with	Groups with
+admin_index	pending_status	 (pending) Status
+admin_index	new_project_approval	(New Project Approval)
+admin_index	groups_with	Groups with
+admin_index	deleted_status	(deleted) Status
+admin_index	private_groups	Private Groups
+admin_index	news	News
+admin_index	approve_reject	Approve/Reject
+admin_index	front_page_news	Front-page news
+admin_index	stats	Stats
+admin_index	site_wide_stats	Site-Wide Stats
+admin_index	trove_project_tree	Trove Project Tree
+admin_index	display_trove_map	Display Trove Map
+admin_index	add_to_trove_map	Add to the Trove Map
+admin_index	site_utilities	Site Utilities
+admin_index	mail_engine	Mail Engine for $1 Subscribers
+admin_index	site_mailing_maintaince	Site Mailings Maintenance
+admin_index	add_delete_edit_laguage	Add, Delete, or Edit Supported Languages
+admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
+admin_index	add_edit_delete_processors	Add, Delete, or Edit Processors
+admin_index	add_edit_delete_themes	Add, Delete, or Edit Themes
+admin_index	translation_file_tool	Translation file tool
+admin_index	virtual_host_admin_tool	Virtual Host Admin Tool
+admin_index	project_database_administration	Project Database Administration
+admin_massmail	missing_parameter_select_target	Missing parameter, You must select target audience for mailing
+admin_massmail	missing_parameter_empty_message	Missing parameter, You are trying to send empty message
+admin_massmail	missing_parameter_proper_subject	Missing parameter, You must give proper subject to the mailing
+admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
+admin_massmail	title	Administrative Mass Mail Engine
+admin_massmail	mailing_successfully_scheduled	Mailing successfully scheduled for delivery
+admin_massmail	mail_engine_for	Mail Engine for $1 Subscribers
+admin_massmail	active_deliveries	Active deliveries
+admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
+admin_massmail	select	(select)
+admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
+admin_massmail 	subscribers_to_additional_community Subscribers to "Additional Community Mailings"
+admin_massmail	all_project_developers	All Project Developers
+admin_massmail	all_project_admins	All Project Admins
+admin_massmail	all_users	All Users
+admin_massmail	developers_test	Developers (test)
+admin_massmail	subject	Subject
+admin_massmail	text_of_message	Text of Message
+admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
+admin_massmail	schedule_for_mailing	Schedule for Mailing
+admin_massmail	id	ID
+admin_massmail	type	Type
+admin_massmail	subject	Subject
+admin_massmail	date	Date
+admin_massmail	last_user_id_mailed	Last user_id mailed
+admin_massmail	active_deliveries	Active Deliveries
+survey	title	Survey
+survey	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
+survey	permission_denied	Permission Denied
+survey	low	Low
+survey	high	High
+survey	survey_privacy	Survey Privacy
+survey_add_question	title	Add A Question
+survey_add_question	question_added	Question Added
+survey_add_question	error_insert_question	Error inserting question
+survey_add_question	add_this_question	Add This Question.
+survey_add_question	show_existing_questions	Show Existing Questions.
+survey_add_question	question	Question
+survey_add_question	question_type	Question type
+survey_add_survey	title	Add A Survey
+survey_add_survey	title_is_required	Survey title is required
+survey_add_survey	survey_inserted	Survey Inserted
+survey_add_survey	error_in_insert	Error in Survey Insert
+survey_add_survey	name_of_survey	Name Of Survey:
+survey_add_survey	list_questions_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
+survey_add_survey	yes	Yes
+survey_add_survey	no	No
+survey_add_survey	add_this_survey	Add This Survey
+survey_add_survey	show_existing_question	Show Existing Questions
+survey_add_survey	existing_surveys	Existing Surveys
+survey_add_survey	is_active	Is Active?
+survey_admin_utils	found	$1 surveys found
+survey_admin_utils	survey_id	Survey Id
+survey_admin_utils	group_id	Group Id
+survey_admin_utils	survey_title	Title of survey
+survey_admin_utils	survey_questions	Survey questions
+
+survey_edit_question	title	Edit A Question
+survey_edit_question	permission_denied	Permission Denied
+survey_edit_question	update_failed	UPDATE FAILED
+survey_edit_question	update_successful	UPDATE SUCCESSFUL
+survey_edit_question	error_finding_question	Error finding question
+survey_edit_question	editing_question	Editing Question
+survey_edit_question	warning_change_after_response	WARNING! It is a bad idea to change a question after responses to it have been submitted
+survey_edit_question	if_you_change_after	If you change a question after responses have been posted, your results pages may be misleading
+survey_edit_question	question	Question
+survey_edit_question	question_type	Question Type
+survey_edit_question	submit_changes	Submit Changes
+survey_edit_question	show_existing_question	Show Existing Questions
+survey_edit	tilte	Edit A Survey
+survey_edit	permission_denied	Permission Denied
+survey_edit	survey_title_required	UPDATE FAILED: Survey Title Required
+survey_edit	survey_question_required	UPDATE FAILED: Survey Questions Required
+survey_edit	missing_date	UPDATE FAILED: Missing Data
+survey_edit	update_failed	UPDATE FAILED
+survey_edit	update_successful	UPDATE SUCCESSFUL
+survey_edit	warning_survey_after_response	WARNING! It is a bad idea to edit a survey after responses have been posted
+survey_edit	change_after_already_response	If you change a survey after you already have responses, your results pages could be misleading or messed up
+survey_edit	name_off_survey	Name of Survey
+survey_edit	question	Questions
+survey_edit	list_question_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view	the question id's. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7
+survey_edit	is_active	Is Active
+survey_edit	yes	Yes
+survey_edit	no	No
+survey_edit	submit_changes	Submit Changes
+survey_edit	show_existing_questions	Show Existing Questions
+survey_edit	existing_surveys	Existing Surveys
+survey_utils	error_this_group_has_turned_off	Error, This Group Has Turned Off Surveys
+survey_utils	add_survey	Add Survey
+survey_utils	edit_survey	Edit Survey
+survey_utils	add_question	Add Questions
+survey_utils	edit_questions	Edit Questions
+survey_utils	show_results	Show Results
+survey_utils	admin	Admin
+survey_resp	title	Survey Complete
+survey_resp	error_some_reason	Error - For some reason group_id and/or survey_id did not make it he
+survey_resp	you_nedd_to_be_logged_in	You need to be logged in
+survey_resp	unfortunately_you_have_to_be	Unfortunately, you have to be logged in to participate in surveys.
+survey_resp	thank_you	Thank you for taking time to complete this survey.
+survey_resp	regards	Regards
+survey_resp	the_crew	The $1 Crew
+survey_resp	error	Error
+survey_rating_resp	title	Voting
+survey_rating_resp	you_must_be_logged_in	You must be logged in to vote
+survey_rating_resp	error	ERROR
+survey_rating_resp	error_in_insert	Error in insert
+survey_rating_resp	vote_reg	Vote registered
+survey_rating_resp	vote_regsitered	Vote Registered
+survey_rating_resp	click_to_resturn	Click to return to previous page
+survey_rating_resp	if_you_vote_again	If you vote again, your old vote will be erased.
+survey_rating_resp	error_missing	ERROR!!! MISSING PARAMS
+survey_privacy	title	Survey
+survey_privacy	survey_privacy	Survey Privacy
+survey_privacy	the_privacy_information	<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
+survey_privacy	the_team	The $1 Team
+survey_index	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
+survey_index	title	Survey
+survey_index	survey_id	Survey ID
+survey_index	survey_title	Survey Title
+survey_index	this_group_has	This Group Has No Active Surveys
+survey_admin_index	title	Survey Administration
+survey_admin_index	permission_denied	Permission Denied
+survey_admin_index	add_survey	Add Surveys
+survey_admin_index	edir_existing_survey	Edit Existing Surveys
+survey_admin_index	add_question	Add Questions
+survey_admin_index	edit_existing_question	Edit Existing Questions
+survey_admin_index	show_results	Show Survey Results
+survey_admin_index	its_simple_to_create	<p>It's simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: $1 where XX is the survey number
+survey_admin_index	you_can_now_activate	You can now activate/deactivate surveys on the $1 Edit Existing Surveys $2 page
+survey_show_result_comment	title	Survey Aggregate Results
+survey_show_result_comment	permission_denied	Permission Denied
+survey_show_result_comment	found	Found
+survey_show_result_comment	question	Question:
+survey_show_results_csv	permission_denied	Permission Denied
+survey_show_questions	title	Survey Questions
+survey_show_questions	permission_denied	Permission Denied
+survey_show_questions	you_may_use_any_of_these	You may use any of these questions on your surveys
+survey_show_questions	note_use_these_questions_id	NOTE: use these question_id's when you create a new survey
+survey_show_questions	found	$1 questions found
+survey_show_results_aggregate	title	Survey Aggregate Results
+survey_show_results_aggregate	permission_denied	Permission Denied
+survey_show_results_aggregate	error	error
+survey_show_results_aggregate	responses	Responses
+survey_show_results_aggregate	average	Average
+survey_show_results_aggregate	view_comments	View Comments
+survey_show_results_aggregate	yes_no	Yes / No
+survey_show_results_aggregate	yes	Yes
+survey_show_results_aggregate	no	No
+survey_show_results_aggregate	view_comments	View Comments
+survey_show_results_individual	title	Results
+survey_show_results_individual	permission_denied	Permission Denied
+survey_show_results_individual	yes_no	Yes / No
+survey_show_results	title	Survey Results
+survey_show_results	permission_denied	Permission Denied
+survey_show_results	found	Found
+survey_show_results	view_aggregate_responses	View Aggregate Responses
+new	title	New File Releases
+new	no_new_release_found	No new releases found.
+new	released_by	Released by:
+new	module	Module:
+new	version	Version:
+new	this_project_has_not	This project has not submitted a description
+new	download	Download
+new	projects_total	Project Total:
+new	notes_changes	Notes &amp; Changes
+new	newer_releases	Newer Releases
+new	older_releases	Older Releases
+add_snippet	title	Submit A New Snippet
+add_snippet	error_snippet_id_missing	Error - snippet_package_version_id missing
+add_snippet	error_only_creator_can_add	Error - Only the creator of a package version can add snippets to it.
+add_snippet	error_snippet_doesnt_exist	Error - That snippet doesn't exist.
+add_snippet	back_to_add_page	Back To Add Page
+add_snippet	error_snippet_already_added	Error - That snippet was already added to this package.
+add_snippet	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+add_snippet	snippet_version_added_successfully	Snippet Version Added Successfully.
+add_snippet	error_go_back_and_fill_all	Error - Go back and fill in all the information
+add_snippet	package	Package:
+add_snippet	you_can_use_this_form	You can use this form repeatedly to keep adding snippets to your package.</p><p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.
+add_snippet	add_this_snippet_version_id	Add This Snippet Version ID:
+add_snippet	make_sure_all_info	Make sure all info is complete and accurate
+add_snippet	submit	SUBMIT
+add_snippet	no_snippets_in_this_package	No Snippets Are In This Package Yet
+add_snippet	snippets_in_this_package	Snippets In This Package
+snippet_addversion	error_snippet_doesnt_exist	Error, Error - snippet doesn't exist
+snippet_addversion	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_addversion	snippet_version_added_successfully	Snippet Version Added Successfully.
+snippet_addversion	error_go_back_and_fill_in_all	Error - Go back and fill in all the information
+snippet_addversion	title	Submit A New Snippet Version
+snippet_addversion	if_you_have_modified_a_version	If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.
+snippet_addversion	version	Version:
+snippet_addversion	changes	Changes:
+snippet_addversion	paste_the_code_here	Paste the Code Here:
+snippet_addversion	make_sure_all_info_is_complete	Make sure all info is complete and accurate
+snippet_addversion	submit	SUBMIT
+snippet_addversion	error_snippet_package_doesnt_exist	Error, Error - snippet_package doesn't exist
+snippet_addversion	error_doing_snippet_package_version_insert	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_addversion	title_submit_a_new_snippet_package	Submit A New Snippet Package
+snippet_addversion	snippet_package_version_added_successfully	Snippet Package Version Added Successfully.
+snippet_addversion	title_add_snippet_to_package	Add Snippets to Package
+snippet_addversion	important	IMPORTANT!
+snippet_addversion	if_new_window_opened	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_addversion	link_add_snippets_to_package	Add Snippets To Package
+snippet_addversion	browse_the_library	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
+snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
+snippet_addversion	if_you_have_modified	If you have modified a version of a package and you feel it is significant enough to share with others, please do so.
+snippet_addversion	error_url_or_form	Error, Error - was the URL or form mangled??	
+snippet_browse	title	Snippet Library
+snippet_browse	snippets_by_language	Snippets by language: $1
+snippet_browse	snippet_by_category	Snippets by category: $1
+snippet_browse	error_bad_url	Error, Error - bad url?
+snippet_browse	no_snippets_found	No snippets found
+snippet_browse	snippet_id	Snippet ID
+snippet_browse	snippet_title	Title
+snippet_browse	creator	Creator
+snippet_browse	packages_of_snippets	Packages Of Snippets
+snippet_browse	snippets	Snippets
+snippet_delete	title	Delete Snippets
+snippet_delete	error_only_the_creator	Error - Only the creator of a package version can delete snippets from it.
+snippet_delete	that_snippet_doesnt_exist	Error - That snippet doesn't exist in this package.
+snippet_delete	item_removed_from	Item Removed From Package
+snippet_delete	snippet_removed	Snippet Removed
+snippet_delete	error_only_creator_of_package_version_can_delete	Error - Only the creator of a package version can delete it.
+snippet_delete	package_removed	Package Removed
+snippet_delete	error_mangled_url	Error, Error - mangled URL?
+snippet_detail	title	Snippet Library
+snippet_detail	error_no_version_found	Error - no versions found
+snippet_detail	version_of_this_snippet	Versions Of This Snippet:
+snippet_detail	snippet_id	Snippet ID
+snippet_detail	download_version	Download Version
+snippet_detail	date_posted	Date Posted
+snippet_detail	author	Author
+snippet_detail	delete	Delete
+snippet_detail	changes_since_last_version	Changes since last version:
+snippet_detail	download_a_raw_text	Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;
+snippet_detail	latest_snippet_version	Latest Snippet Version:
+snippet_detail	submit_a_new_snippet	Submit a new version
+snippet_detail	you_can_submit_a_new	You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.
+snippet_detail	version_of_this_package	Versions Of This Package:
+snippet_detail	package_version	Package Version
+snippet_detail	edit_del	Edit/Del
+snippet_detail	latest_package_version	Latest Package Version:
+snippet_detail	submit_a_new_version	Submit a new version
+snippet_detail	you_can_submit_a_new_version_of_package	You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.
+snippet_detail	error_was_the_url_mangled	Error, Error - was the URL mangled?
+snippet_download	nothing_in_here	nothing in here
+snippet_download	error	Error
+snippet_index	title	Snippet Library
+snippet_package	error_doing_snippet_package_insert	ERROR DOING SNIPPET PACKAGE INSERT!
+snippet_package	title	Submit A New Snippet Package
+snippet_package	snippet_package_added_successfull	Snippet Package Added Successfully. 
+snippet_package	error_doing_snippet_package_version	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_package	title_new_snippet_package	Submit A New Snippet Package
+snippet_package	snippet_version_added_successfull	Snippet Pacakge Version Added Successfully.
+snippet_package	add_snippet_to_package	Add Snippets to Package
+snippet_package	important	IMPORTANT!
+snippet_package	if_a_new_window	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_package	add_snippet_to	Add Snippets To Package
+snippet_package	browse_the_libary	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
+snippet_package	error_go_back_and_fill	Error, Error - Go back and fill in all the information
+snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+snippet_package	snippet_title	Title:
+snippet_package	description	Description:
+snippet_package	suggest_a_language	Suggest a Language
+snippet_package	suggest_a_category	Suggest a Category
+snippet_package	make_sure_all_info	Make sure all info is complete and accurate
+snippet_package	submit	SUBMIT
+snippet_package	category	Category
+snippet_package	language	Language
+snippet_package	version	Version
+snippet_utils	browse	Browse
+snippet_utils	choose_one	Choose One
+snippet_utils	unix_admin	UNIX Admin
+snippet_utils	html_manipulation	HTML Manipulation
+snippet_utils	bbs_systems	BBS Systems
+snippet_utils	auctions	Auctions
+snippet_utils	calendars	Calendars
+snippet_utils	database_manipulation	Database Manipulation
+snippet_utils	searching	Searching
+snippet_utils	file_management	File Management
+snippet_utils	games	Games
+snippet_utils	voting	Voting
+snippet_utils	shopping_carts	Shopping Carts
+snippet_utils	other	Other
+snippet_utils	math_functions	Math Functions
+snippet_utils	function	Function
+snippet_utils	full_script	Full Script
+snippet_utils	sample_code	Sample Code (HOWTO)
+snippet_utils	readme	README
+snippet_utils	class	Class
+snippet_utils	website_only	WebSite Only
+snippet_utils	other_language	Other Language
+snippet_utils	submit_a_new_snippet	Submit A New Snippet
+snippet_utils	create_a_package	Create A Package
+snippet_utils	snippet_in_this_package	Snippets In This Package:
+snippet_utils	snippet_id	Snippet ID
+snippet_utils	download_version	Download Version
+snippet_utils	snippet_title	Title
+snippet_utils	author	Author
+snippet_utils	no_snippets_are_in_this_package	No Snippets Are In This Package Yet
+snippet_utils	category	Category:
+snippet_utils	language	Language:
+snippet_utils	description	Description:
+snippet_utils	type	Type:
+snippet_utils	category	Category:
+snippet_utils	license	License:
+snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
+snippet_submit	snippet_added_successfull	Snippet Added Successfully.
+snippet_submit	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_submit	snippet_version_added_successfully	Snippet Version Added Successfully
+snippet_submit	error_go_back_and_fill	Error, Error - Go back and fill in all the information
+snippet_submit	submit_a_new_snippet	Submit A New Snippet
+snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
+snippet_submit	suggest_a_language	Suggest a Language
+snippet_submit	suggest_a_category	Suggest a Category
+snippet_submit	paste_the_code_here	Paste the Code Here
+snippet_submit	make_sure_all_info	Make sure all info is complete and accurate
+snippet_submit	submit	SUBMIT
+snippet_submit	type	Script Type
+snippet_submit	license	License
+snippet_submit	description	Description
+snippet_submit	snippet_title	Title
+snippet_submit	category	Category
+snippet_submit	version	Version
+snippet_submit	language	Language
+snippet_caching	intro	<p>The purpose of this archive is to let you share your code snippets, scripts,	and functions with the Open Source Software Community.</p><p>You can create a "new snippet", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>	<p>You can browse the snippet library quickly:</p>
+snippet_caching	browse_by_category	Browse by Category
+snippet_caching	browse_by_language	Browse by Language
+help	title	Welcome to
+help	page_information	Page Information
+help	title	Welcome to $1
+help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
+help_tracker	status	This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'.
+help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
+help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
+help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
+help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which
+one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
+help_tracker	data_type	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
+help_tracker	resolution	The resolution option represents a tracker items resolution if any.
+help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
+help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
+help_tracker	comment	The comment textarea allows you to attach a comment to a tracker item when a canned response isn't appropriate.
+help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
+help_tracker	monitor	You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!
+help_tracker	unknown_help_request	未知的帮助请求:
+help_tracker	close_window	关闭窗口
+help_trove_cat	no_such_category	没有这种分类
+help_trove_cat	full_category_name	完整的分类名称
+help_trove_cat	short_name	短名称
+help_trove_cat	description	描述
