@@ -66,8 +66,16 @@ function frs_header($params) {
 	site_project_header($params);
 
 	echo ($HTML->subMenu(
-		array($Language->getText('project_admin_utils','admin')),
-		array('/frs/admin/?group_id='.$group_id)));
+		array(
+			$Language->getText('group','short_files'),
+			$Language->getText('project_admin_utils','admin')
+		),
+		array(
+			'/frs/?group_id='.$group_id,
+			'/frs/admin/?group_id='.$group_id
+		)
+		)
+	);
 
 }
 
