@@ -32,7 +32,7 @@
 		</para>
 		<orderedlist>
 			<listitem><para>Linux Operating System</para></listitem>
-			<listitem><para><ulink url="http://www.postgresql.org/">PostgreSQL</ulink> 7.1 or later</para></listitem>
+			<listitem><para><ulink url="http://www.postgresql.org/">PostgreSQL</ulink> 7.3 or later</para></listitem>
 			<listitem><para><ulink url="http://www.apache.org/">Apache</ulink> 1.3.22 or later</para></listitem>
 			<listitem><para><ulink url="http://www.openssl.org/">openssl</ulink> 0.9.4 or later</para></listitem>
 			<listitem><para><ulink url="http://www.openssl.org/">mod_ssl</ulink> 2.4.10 or later (included in Apache 2.0 and later)</para></listitem>
@@ -87,34 +87,43 @@
 	<section>
 		<title>Installation</title>
 		<section>
-			<title>Installing the software</title>
-			<note>
-				<title>Note for Debian users</title>
-				<para>
-					You can simply add lines found at <ulink url="http://people.debian.org/~bayle/"/> or <ulink url="http://people.debian.org/~lolando/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install gforge</command> to install a working GForge system, thanks to Christian Bayle and Roland Mas.
-				</para>
-				<para>
-					Note that Gforge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. From scratch install snapshot are also available for a guided installation.
-				</para>
-			</note>
+			<title>Overview</title>
+			<para>GForge has a lot of different pieces touching a lot of different components in the system. Cronjobs are required to maintain the system, touching lots of files on a daily and hourly basis, including <filename>/etc/*</filename> system files.</para>
+			<para>The plugins that now manage the CVS and SVN functionality have made installation slightly harder because even more files have to be moved into place during installation.</para>
+			<para>The manual installation of GForge is documented below. Be sure to follow each step carefully, check the forums for frequently asked questions, and ask your Apache, Mailman, and PostgreSQL installation questions in the corresponding mailing lists rather than on the GForge forums where little help is available.</para>
+		</section>
+		<section>
+			<title>Installing on Debian</title>
 			<para>
-				To install GForge, follow these steps:
+				You can simply add lines found at <ulink url="http://people.debian.org/~bayle/"/> or <ulink url="http://roland.mas.free.fr/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install gforge</command> to install a working GForge system, thanks to Christian Bayle and Roland Mas.
 			</para>
-			<orderedlist>
-				<listitem><para>Login as <literal>root</literal> user</para></listitem>
-				<listitem><para>cd to <filename class="directory">/usr/share/</filename></para></listitem>
-				<listitem><para>Extract the content of the GForge tarball to the current directory:
-					<command>
-						bzip2 -dc gforge.tar.bz2 | tar xvf -
-					</command></para>
-				</listitem>
-			</orderedlist>
+			<para>
+				Note that GForge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. From scratch install snapshot are also available for a guided installation.
+			</para>
+		</section>
+		<section>
+			<title>Installing on RPM-based systems</title>
+			<para>Guillaume Smet makes <ulink url="http://people.openwide.fr/~gsmet/gforge/rpm/">RPM packages for installing GForge</ulink>. If you are using Fedora Core or Red Hat Enterprise Linux, you may want to try them.</para>
+		</section>
+		<section>
+			<title>Installing the software</title>
+			<para>
+				To install GForge, follow these steps (as root):
+			</para>
+<screen>
+cd /var/www
+bzip2 -dc gforge-4.1.tar.bz2 | tar xvf -
+ln -s gforge-4.1 gforge
+mkdir mailman uploads jpgraph localizationcache
+chown -R apache:apache .     # adjust for your Apache user
+</screen>
 		</section>
 		<section>
 			<title>Configuring the Web Server</title>
 			<orderedlist>
 				<listitem>
-					<para>Open <filename>/etc/httpd/conf/httpd.conf</filename> or better create a <filename>gforge.conf</filename> file in <filename class="directory">/etc/httpd/conf.d/</filename>.</para>
+					<para>Open <filename>/etc/httpd/conf/httpd.conf</filename> or better create a <filename>gforge.conf</filename> file in <filename class="directory">/etc/httpd/conf.d/</filename>.  These files and directories may have different names depending on distribution.</para>
+					<para>You may want to copy <filename>etc/gforge-httpd.conf.example</filename> to <filename>/etc/httpd/conf.d/gforge.conf</filename> and edit it, instead of entering manually the examples below.</para>
 				</listitem>
 				<listitem><para>Create the primary virtual host and fill the rest of the directives in it:</para>
 <programlisting><![CDATA[
@@ -131,13 +140,13 @@ ServerAdmin webmaster@gforge.company.com
 				<listitem>
 					<para>Change the <literal>DocumentRoot</literal> to point to the <filename class="directory">www</filename> directory:</para>
 <programlisting>
-DocumentRoot "/usr/share/gforge/www"
+DocumentRoot "/var/www/gforge/www"
 </programlisting>
 				</listitem>
 				<listitem>
 					<para>Create a <literal>Directory</literal> directive following the <literal>DocumentRoot</literal> as follows:</para>
 <programlisting><![CDATA[
-<Directory "/usr/share/gforge/www">
+<Directory "/var/www/gforge/www">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -321,7 +330,7 @@ $ createlang plpgsql gforge
 					<para>Now it's time to install the database. The steps are:</para>
 					<orderedlist>
 						<listitem>
-							<para>cd to <filename class="directory">/usr/share/gforge/db</filename></para>
+							<para>cd to <filename class="directory">/var/www/gforge/db</filename></para>
 						</listitem>
 						<listitem>
 <screen><![CDATA[
@@ -355,17 +364,19 @@ local all md5
 		<section>
 			<title>Upgrading database in existing install</title>
 			<para>You will upgrade your database from a prior version by applying each database schema change, in order, and applying it only once.  Only apply the schema changes in the <filename class="directory">db/</filename> folder that are dated <emphasis>after</emphasis> your existing installation.</para>
-			<para>There may also be migration scripts that have to be run.  In the <filename class="directory">db/</filename> folder, looked for <filename>migrate-*.php</filename> scripts and run them.</para>
+			<para>There may also be migration scripts that have to be run.  In the <filename class="directory">db/</filename> folder, look for php scripts and run them.</para>
 			<warning>
 				<para>You have to apply database schema changes and to run migration scripts in the right order.</para>
 			</warning>
 		</section>
 		<section>
 			<title>Configuring PHP</title>
-			<para>
-				Verify the version of PHP installed on your system: <command>php -v</command>
-			</para>
+			<para>The cronjobs require PHP CLI or PHP CGI to be installed and the <filename>php.ini</filename> file to be properly configured with your <varname>include_path</varname>.  In some systems, one configuration is used for mod_php and PHP CLI (e.g. <filename>/etc/php.ini</filename> in Fedora Core).  In others, there are separate configurations (e.g. <filename>/etc/php4/apache/php.ini</filename> and <filename>/etc/php4/cli/php.ini</filename> in Debian). In the latter case, both configuration files should have correct <literal>include_path</literal>.  Check what <filename>php.ini</filename> is used by PHP CLI by running <command>php4 -i | fgrep php.ini</command>.</para>
+			<para>In addition, you may have to symlink <filename>/usr/bin/php</filename> to <filename>/usr/bin/php4</filename>, which is where the cronjobs expect your PHP CLI to be located.</para>
 			<orderedlist>
+				<listitem>
+					<para>Verify the version of PHP installed on your system: <command>php -v</command></para>
+				</listitem>
 				<listitem><para>Open <filename>/etc/php.ini</filename>.</para></listitem>
 				<listitem>
 					<para>If the PHP version you're using is 4.2.0 or later, enable the <literal>register_globals</literal> variable:</para>
@@ -388,7 +399,7 @@ magic_quotes_gpc = On
 				<listitem>
 					<para>and configure the <literal>include_path</literal> directive as follows (on one line):</para>
 <programlisting>
-include_path=".:/usr/share/gforge:/usr/share/gforge/www/include:/etc/gforge"
+include_path=".:/var/www/gforge:/var/www/gforge/www/include:/etc/gforge"
 </programlisting>
 				</listitem>
 			</orderedlist>
@@ -398,12 +409,13 @@ include_path=".:/usr/share/gforge:/usr/share/gforge/www/include:/etc/gforge"
 					<title>gforge.conf vhost configuration</title>
 <programlisting><![CDATA[
 <VirtualHost *>
-	DocumentRoot /usr/share/gforge/www
+	DocumentRoot /var/www/gforge/www
 	ServerName gforge.company.com
 	ErrorDocument 404 /404.php
-	php_value include_path ".:/usr/share/gforge/:/usr/share/gforge/www/include/:/etc/gforge/"
-	php_value register_globals On
-	php_value magic_quotes_gpc On
+	php_value include_path ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gforge/"
+	php_flag register_globals On
+	php_flag magic_quotes_gpc On
+	php_flag file_uploads On
 	AddDefaultCharset UTF-8
 	AcceptPathInfo On
 	<Location /projects>
@@ -415,6 +427,12 @@ include_path=".:/usr/share/gforge:/usr/share/gforge/www/include:/etc/gforge"
 </VirtualHost>
 ]]></programlisting>
 				</example>
+			</note>
+			<note>
+				<para>To run scripts in command line, you need to invoke the PHP interpreter with the <literal>-f</literal> flag, e.g.:</para>
+<screen>
+# php -f cronjobs/mailing_lists_create.php
+</screen>
 			</note>
 		</section>
 		<section>
@@ -493,7 +511,7 @@ DirectoryIndex index.php cvsweb.cgi index.html index.htm
 					<para>Create a directory <filename class="directory">/etc/gforge</filename></para>
 				</listitem>
 				<listitem>
-					<para>Copy the file <filename>local.inc.example</filename> from <filename class="directory">/usr/share/gforge/etc/</filename> to <filename class="directory">/etc/gforge/</filename> </para>
+					<para>Copy the file <filename>local.inc.example</filename> from <filename class="directory">/var/www/gforge/etc/</filename> to <filename class="directory">/etc/gforge/</filename> </para>
 				</listitem>
 				<listitem>
 					<para>Open <filename>/etc/gforge/local.inc</filename>, configuring the following basic parameters:</para>
@@ -514,7 +532,7 @@ $sys_server="postgres"
 						</listitem>
 						<listitem>
 							<para>Change the value of the <varname>$sys_urlroot</varname> to:</para>
-<programlisting>$sys_urlroot="/usr/share/gforge/www/";</programlisting>
+<programlisting>$sys_urlroot="/var/www/gforge/www/";</programlisting>
 						</listitem>
 						<listitem>
 							<para>The directives <varname>$sys_default_domain</varname> and <varname>$sys_fallback_domain</varname> should contain the domain of your server, e.g. <literal>gforge.org</literal>.</para>
@@ -528,10 +546,23 @@ $sys_server="postgres"
 		</section>
 		<section>
 			<title>Configuring GNU Mailman</title>
-			<para>GNU Mailman is used to help manage the GForge mailing lists.  To install it:</para>
-			<para>Install a GNU Mailman package or compile it</para>
-			<para><command>su</command> to <literal>root</literal> and set the Mailman password</para>
-			<para>Create in <filename>httpd.conf</filename> virtual host for Mailman, adjusting <literal>ScriptAlias</literal> and <literal>Alias</literal> directives:</para>
+			<para>GNU Mailman is used to help manage the GForge mailing lists.  Mailman is frequently installed in <filename class="directory">/var/mailman/</filename> and the sample vhost shown below will work with this setup without any changes.</para>
+			<para>Cronjobs for Mailman are located in <filename>cronjobs/mail/*</filename>.</para>
+			<para><filename>cronjobs/mail/mailing_lists_create.php</filename> is used obviously to create new mailing lists. You may have to edit the file to change the location of the mailman <filename class="directory">bin/</filename> directory.</para>
+			<para>For all problems with mailman installation and use, contact the mailman mailing lists for help.</para>
+			<para>To install it:</para>
+			<orderedlist>
+				<listitem>
+					<para>Install a GNU Mailman package or compile it</para>
+				</listitem>
+				<listitem>
+					<para><command>su</command> to <literal>root</literal> and set the Mailman password by using the <command>mmsitepass</command> command</para>
+				</listitem>
+				<listitem>
+					<para>Create directory <filename class="directory">/var/www/mailman/</filename>.</para>
+				</listitem>
+				<listitem>
+					<para>Create in <filename>httpd.conf</filename> virtual host for Mailman, adjusting <literal>ScriptAlias</literal> and <literal>Alias</literal> directives:</para>
 <programlisting><![CDATA[
 <VirtualHost 192.168.1.1>
 ServerName lists.gforge.company.com
@@ -542,13 +573,17 @@ ScriptAlias   /mailman/ /var/mailman/cgi-bin/
 Alias /pipermail/ /var/mailman/archives/public/
 </VirtualHost>
 ]]></programlisting>
-			<para>Run the script <command>gforge/cronjobs/mail/mailing_lists_create.php</command>; this creates any lists that are already in the database.  Note that to run the script you need to invoke the PHP interpreter with the <literal>-f</literal> flag, i.e.:</para>
-<screen>
-# php -f mailing_lists_create.php
-</screen>
+				</listitem>
+				<listitem>
+					<para>Run the script <filename>gforge/cronjobs/mail/mailing_lists_create.php</filename> (with <command>php -f</command>). This creates any lists that are already in the database.</para>
+				</listitem>
+			</orderedlist>
 		</section>
 		<section>
 			<title>Configuring CVS</title>
+			<note>
+				<para>Since GForge 4.0, CVS is integrated by plugin.  Look at the plugins section below for more information.</para>
+			</note>
 			<para>GForge uses CVS via <literal>pserver</literal> for anonymous read only access and <literal>ext</literal> for developers to commit to the repositories.  To set it up:</para>
 			<para>Download and install the latest CVS package for your distribution.</para>
 			<para>Ensure the following info is in <filename>/etc/services</filename>:</para>
@@ -589,7 +624,6 @@ service cvspserver
 # cp /etc/shadow /etc/shadow.org
 # cp /etc/passwd /etc/passwd.org
 # cp /etc/group /etc/group.org
-# mkdir /cvsroot
 </screen>
 			<warning>
 				<para>
@@ -599,7 +633,7 @@ service cvspserver
 			<screen>
 # crontab cronjobs/crontab.in
 </screen>
-			<para>Now edit the paths to the cron scripts by setting the value of <literal>$GFORGE</literal>:</para>
+			<para>Now edit the paths to the cron scripts by setting the value of <varname>GFORGE</varname> and <varname>PHP</varname> variables:</para>
 			<screen>
 # crontab -e
 </screen>
@@ -614,10 +648,16 @@ service cvspserver
 			<para>
 				PHP must be compiled with <literal>--with-gd</literal>, or appropriate package must be installed.  Extra fonts for JPGraph are not necessary.  Be sure your <filename>/etc/gforge/local.inc</filename> file contains the proper path to the <filename class="directory">jpgraph/src/</filename> directory.
 			</para>
+			<para>Manual installation can be done like this:</para>
+<screen>
+# tar -xzf jpgraph-1.17.tar.gz
+# mkdir /var/www/jpgraph
+# mv jpgraph-1.17/src/* /var/www/jpgraph
+</screen>
 			<para>
 				When you get your preferred version of JPGraph installed, you will have to edit one setting in <filename>jpgraph.php</filename>:
 			</para>
-			<programlisting>
+<programlisting>
 DEFINE("USE_CACHE", false);
 </programlisting>
 			<warning>
@@ -703,6 +743,128 @@ gforge=> INSERT INTO user_group (user_id,group_id,admin_flags) VALUES (102,1,'A'
 		<note>
 			<para>From GForge 4.0, plugins are necessary as source code management is now provided by plugins (SCM* plugins).</para>
 		</note>
-		<para>For each plugin you can find an INSTALL file in the plugin tarball.</para>
+		<para>For each plugin you can find an <filename>INSTALL</filename> file in the plugin tarball.</para>
+		<section>
+			<title>CVS</title>
+			<section>
+				<title>Overview</title>
+				<para>CVS is now managed via the scmcvs plugin which is included in the <filename class="directory">plugins/</filename> directory in the tarball downloaded from gforge.org. Most of the files in scmcvs are intended for auto-installation on Debian systems and <emphasis role="strong">do not apply</emphasis> to the majority of users. The scmcvs plugin is activated by default in the <filename>gforge.sql</filename> database and all that you have to do is move the <filename>scmcvs/etc/plugins/*</filename> files to <filename>/etc/gforge/plugins/*</filename> and possibly modify the files slightly. In addition, the <filename>scmcvs/www/*</filename> files should be placed in <filename>gforge/www/plugins/scmcvs/*</filename>.</para>
+				<para>Cronjobs for CVS are included in <filename>cronjobs/crontab.in</filename>, but are commented out by default for your security. <filename>cronjobs/cvs-cron/*</filename> contains the files that are executed hourly to build permissions and create blank cvs trees. Make sure these files are executed as root, and have proper execution bits set.  Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system.</para>
+			</section>
+			<section>
+				<title>Installation</title>
+<programlisting>
+#Create default location for CVS repositories
+mkdir /cvsroot
+
+# Optional - Set up basic index.php file for CVS vhost if desired
+mkdir /var/www/cvs
+cp /var/www/gforge/cronjobs/cvs-cron/www/* /var/www/cvs/
+
+#copy the scmcvs plugin config to /etc/gforge/
+cp -R /var/www/gforge/plugins/scmcvs/etc/plugins/ /etc/gforge/
+
+#make sure the cvs crons are executable
+cd /var/www/gforge/cronjobs/cvs-cron/
+chmod 755 *.php *.sh
+</programlisting>
+				<para>You will likely have to edit <filename>/etc/gforge/plugins/scmcvs/cvsweb.conf</filename> to change the cvsroot location:</para>
+<screen>
+'gforge'  => ['GForge-CVS',       '/home/chroot/cvsroot/'],
+</screen>
+			</section>
+		</section>
+		<section>
+			<title>SVN</title>
+			<section>
+				<title>Overview</title>
+				<para>SVN is also managed via plugin &ndash; the scmsvn plugin is included and activated by default in GForge. As with scmcvs, you have to move the <filename>scmcvs/etc/plugins/*</filename> files to <filename>/etc/gforge/plugins/*</filename> and may have to make minor modifications for your specific setup.</para>
+				<para>There are two ways to manage SVN &ndash; one is to have SVN over DAV and the other is to have SVN over SSH just as you do with CVS. If you choose to use DAV, you will need the <filename class="libraryfile">mod_auth_gforge</filename> library compiled and installed in your apache and the appropriate virtual host settings in your <filename>httpd.conf</filename>. <filename class="libraryfile">mod_auth_gforge</filename> is available from gforge.org. The cronjobs to manage SVN are in <filename class="directory">cronjobs/dav-svn/</filename> and so are sample <filename>httpd.conf</filename> virtual host settings. Each of these cronjobs has configuration parameters which you may have to edit manually for your specific system.</para>
+				<para>Configuring svnserv for svn-over-ssh:
+					<itemizedlist>
+						<listitem>
+							<para><ulink url="http://svnbook.red-bean.com/en/1.0/ch06s03.html" /></para>
+						</listitem>
+						<listitem>
+							<para><ulink url="http://www.logemann.org/day/archives/000099.html" /></para>
+						</listitem>
+						<listitem>
+							<para><ulink url="http://bitworking.org/news/Getting_subversion_svn_ssh____to_work_with_PuTTY" /></para>
+						</listitem>
+					</itemizedlist>
+				</para>
+			</section>
+			<section>
+				<title>Installation</title>
+<programlisting>
+#Create default location for SVN repositories
+mkdir /var/svn
+
+# Optional - Set up some basic files for SVN-over-DAV only
+mkdir /var/www/svn
+cp /var/www/gforge/cronjobs/dav-svn/www/* /var/www/svn/
+
+#copy the scmsvn config files to /etc/gforge/
+cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
+</programlisting>
+			</section>
+		</section>
+		<section>
+			<title>CVSTracker Overview</title>
+			<para>The cvstracker plugin allows for some integration between CVS commits and the bug tracker and task manager. So, for example, when you commit, you can reference bug and task IDs in your commit message and have the commit linked to the corresponding bug and task.</para>
+			<para>See the <filename>plugins/cvstracker/README</filename> file for details. This plugin is enabled by default in the <filename>gforge.sql</filename> database file. As with the other plugins, you may manually place the config files in <filename class="directory">/etc/gforge/plugins/cvstracker/</filename> and uncomment the cronjob in <filename>crontab.in</filename>.</para>
+			<para>You will also have to copy the <filename>newcommit.php</filename> file to your gforge <filename class="directory">www/plugins/cvstracker/</filename> dir</para>
+		</section>
+		<section>
+			<title>Installation</title>
+<programlisting>
+#copy the cvstracker config files to /etc/gforge/
+cd /var/www/gforge/plugins/cvstracker/
+cp -R etc/plugins/cvstracker/ /etc/gforge/plugins/
+cp -R www/ /var/www/gforge/www/plugins/cvstracker/
+</programlisting>
+		</section>
 	</section>
+	<section>
+		<title>Most common problems</title>
+		<para>Q: I get a blank page when I visit http://gforge.company.com/</para>
+		<para>A: Most often you are missing the php-pgsql library that lets PHP talk to the postgres database. Find a php-pgsql RPM or recompile php to have pgql support.</para>
+		<para>If you're sure you have php-pgsql support, you can edit common/include/database.php and remove the @ symbol from this line:</para>
+<programlisting>
+$conn = @pg_connect( 
+</programlisting>
+		<para>So that it looks like:</para>
+<programlisting>
+$conn = pg_connect(
+</programlisting>
+		<para>This will let debug output dump to the screen and may let you find the problem. Search the forums for more solutions.</para>
+
+		<para>Q: <quote>Error Occurred In the Logger</quote> or other database permission problems</para>
+		<para>A: As stated in the installation instructions, the database must be created, owned, and accessed by the gforge user. This user is the only one who will have total acess to all the tables. Any other user would have to be specifically granted permissions with the GRANT commands in postgres.</para>
+
+		<para>Q: Reporting or time tracking doesn't work</para>
+
+		<para>A: Go to the reporting tab and scroll down so you can choose <quote>Initialize/Rebuild Reporting Tables</quote></para>
+
+		<para>You may also be missing GD support or be missing JPGraph or have it installed improperly. The <filename class="directory">jpgraph/src/</filename> directory should be specified accurately in your <filename class="directory">local.inc</filename> file, and you should include a <filename>/</filename> at the end of the path specified. In addition, you should modify <filename>jpgraph.php</filename> to set <literal>USE_CACHE=false</literal>.</para>
+
+		<para>Q: How do I upgrade my database?</para>
+		<para>A: As stated above, you must apply the changes that are listed in date order in the <filename class="directory">db/</filename> directory to your database. Only the changes that are not already in your old <filename class="directory">db/</filename> directory should be applied, and they should be applied and checked <emphasis>in order</emphasis>.</para>
+
+		<para>Q: I'm getting an error about BaseLanguage.class not being found.</para>
+		<para>A: Make sure your localization path is correctly specified in the local.inc file and that it is readable <emphasis>and</emphasis> writable by the apache user.</para>
+
+		<para>Q: When I click on <quote>/projects/</quote> or <quote>/users/</quote> links, I get the source code instead of the page I expected.</para>
+		<para>A: As shown in the example <filename>httpd.conf</filename> files above, you may have to switch to using the <literal>&lt;Files&gt;</literal> or <literal>&lt;Location&gt;</literal> directives depending on your server version.</para>
+
+		<para>Q: How do I backup GForge?</para>
+		<para>A: The only proper way to backup the gforge database is with <command>pg_dump</command>.  Any attempt to backup the filesystem while pgsql is running will result in a useless and corrupt backup. You can backup CVS trees using <command>tar</command> as long as they are not actively and heavily used during the backup. Mailman and the FRS uploads dir can also be backed up with <command>tar</command>.</para>
+
+		<para>Q: Any time i enter an apostrophe in a text box, i get a parse error</para>
+		<para>A: As stated in the instructions above, you should have <literal>magic_quotes_gpc=On</literal> in your <filename>php.ini</filename> file.</para>
+
+		<para>Q: Large uploads into FRS or the doc manager fail.</para>
+		<para>A: Apache and the <filename>php.ini</filename> file need to have upload limits and possibly memory limits increased.</para>
+	</section>
+
 </article>
