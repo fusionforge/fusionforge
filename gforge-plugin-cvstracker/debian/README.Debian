@@ -1,0 +1,6 @@
+gforge-plugin-cvstracker for Debian
+----------------------------------------
+
+This is a package for linking CVS commit log info to Trackers and Tasks.
+
+ -- Francisco Gimeno <kikov@kikov.org>, Mon, 19 Jul 2004 16:31:00 +0100

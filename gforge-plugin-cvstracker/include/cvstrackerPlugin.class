@@ -1,0 +1,216 @@
+<?php
+/**
+ * GForge Plugin CVSTracker Class
+ *
+ * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
+ * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
+ *
+ * @version $Id$
+ * This file is part of GForge-plugin-cvstracker
+ *
+ * GForge-plugin-cvstracker is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * GForge-plugin-cvstracker is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied
+ * warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ * See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge-plugin-cvstracker; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ *
+ */
+/**
+ * The cvstrackerPlugin class. It implements the Hooks for the presentation
+ *  of table in tracker and task in detailed mode.
+ *
+ */
+
+class cvstrackerPlugin extends Plugin {
+	function cvstrackerPlugin () {
+		$this->Plugin() ;
+		$this->name = "cvstracker" ;
+		$this->text = "Cvs 2 Tracker";
+		$this->hooks[] = "groupisactivecheckbox";
+		$this->hooks[] = "groupisactivecheckboxpost";
+		$this->hooks[] = "artifact_extra_detail";
+		$this->hooks[] = "task_extra_detail";
+	}
+
+	/**
+	* It display a table with commit related to this tracker or task_extra_detail
+	*
+	* @param   string   $Query Query to be executed to get the commit entries.
+	* @param   integer  $group_id Group_id of the actual Group_id
+	*
+	*/
+	function getCommitEntries($Query,$group_id) {
+		global $Language;
+
+		$group = &group_get_object($group_id);
+		echo "<tr><td colspan='2'>";
+		echo "<p><h4>".$Language->getText('plugin_cvstracker','title')."</h4>";
+
+		$title_arr=$this->getTitleArr();
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+		$DBResult = db_query($Query);
+		$Rows= db_numrows($DBResult);
+		if ($Rows > 0) {
+			for ($i=0; $i<$Rows; $i++) {
+				$Row = db_fetch_array($DBResult);
+
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				'<td>'. $this->getFileLink($group->getUnixName(),
+						$Row['file']). '</td>'.
+				'<td>'. htmlspecialchars($Row['cvs_date']).'</td>'.
+				'<td>'. $this->getDiffLink($group->getUnixName(),
+						$Row['file'],
+						$Row['prev_version'],
+						$Row['actual_version']).'</td>'.
+				'<td>'. $this->getActualVersionLink($group->getUnixName(),
+					$Row['file'], $Row['actual_version']).
+				'</td>
+				<td>'. htmlspecialchars($Row['log_text']).'</td>
+				<td><a href="/users/'. $Row['author'].'">'.
+					$Row['author'].'</a></td>
+				</tr>';
+			}
+		} else {
+			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).
+			'><td colspan="6">'.
+			$Language->getText('plugin_cvstracker',
+				'no_commits_attached').'</td></tr>';
+		}
+		echo $GLOBALS['HTML']->listTableBottom();
+	}
+
+	/**
+	* Return an array with titles of Box to display the entries
+	*
+	* @return   Array  The array containing the titles
+	*
+	*/
+	function getTitleArr() {
+		global $Language;
+		$title_arr=array();
+		$title_arr[]=$Language->getText('plugin_cvstracker','file');
+		$title_arr[]=$Language->getText('plugin_cvstracker','date');
+		$title_arr[]=$Language->getText('plugin_cvstracker','prevVersion');
+		$title_arr[]=$Language->getText('plugin_cvstracker','actualVersion');
+		$title_arr[]=$Language->getText('plugin_cvstracker','log');
+		$title_arr[]=$Language->getText('plugin_cvstracker','author');
+		return $title_arr;
+	}
+
+	/**
+	* Return a link to the File in cvsweb
+	*
+	* @param    String  $GroupName is the Name of the project
+	* @param    String  $FileName  is the FileName ( with path )
+	*
+	* @return   String  The string containing a link to the File in the cvsweb
+	*
+	*/
+	function getFileLink($GroupName, $FileName) {
+		global $sys_default_domain;
+		return "<a href=\"http://".$sys_default_domain."/plugins/scmcvs/cgi-bin/cvsweb.cgi/".
+			$GroupName."/".$FileName."\">".$FileName."</a>";
+	}
+
+	/**
+	* Return a link to the File in cvsweb in the specified Version
+	*
+	* @param    String  $GroupName is the Name of the project
+	* @param    String  $FileName  is the FileName ( with path )
+	* @param    String  $Version   the version to retrieve
+	*
+	* @return   String  The string containing a link to the File in the cvsweb
+	*
+	*/
+	function getActualVersionLink($GroupName, $FileName, $Version) {
+		global $sys_default_domain;
+		return "<a href=\"http://".$sys_default_domain."/plugins/scmcvs/cgi-bin/cvsweb.cgi/".
+			$GroupName."/".$FileName."?rev=".$Version."&contenttype=text/x-cvsweb-markup\">".
+			$Version."</a>";
+	}
+
+	/**
+	* Return a link to the diff between two versions of a File in cvsweb
+	*
+	* @param    String  $GroupName is the Name of the project
+	* @param    String  $FileName  is the FileName ( with path )
+	* @param    String  $PrevVersion   First version to retrieve
+	* @param    String  $ActualVersion Second version to retrieve
+	*
+	* @return   String  The string containing a link to the File in the cvsweb
+	*
+	*/
+	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
+		global $sys_default_domain,$Language;
+		return "<a href=\"http://".$sys_default_domain."/plugins/scmcvs/cgi-bin/cvsweb.cgi/".
+			$GroupName."/".$FileName."?r1=".$PrevVersion."&r2=".
+			$ActualVersion."&contenttype=text/x-cvsweb-markup\">".
+			$Language->getText('plugin_cvstracker','diffto')." ".$PrevVersion."</a>";
+	}
+
+	/**
+	* The function to be called for a Hook
+	*
+	* @param    String  $hookname  The name of the hookname that has been happened
+	* @param    String  $params    The params of the Hook
+	*
+	*/
+	function CallHook ($hookname, $params) {
+		global $group_id,$Language, $G_SESSION, $HTML, $use_cvstrackerplugin,$aid ;
+		if ($hookname == "groupisactivecheckbox") {
+			//Check if the group is active
+			$group = &group_get_object($group_id);
+			echo "<tr>";
+			echo "<td>";
+			echo ' <input type="CHECKBOX" name="use_cvstrackerplugin" value="1" ';
+			// Checked or Unchecked?
+			if ( $group->usesPlugin ( $this->name ) ) {
+				echo "CHECKED";
+			}
+			echo "><br/>";
+			echo "</td>";
+			echo "<td>";
+			echo "<strong>Use ".$this->text." Plugin</strong>";
+			echo "</td>";
+			echo "</tr>";
+		} elseif ($hookname == "groupisactivecheckboxpost") {
+			$group = &group_get_object($group_id);
+			if ( $use_cvstrackerplugin == 1 ) {
+				$group->setPluginUse ( $this->name );
+			} else {
+				$group->setPluginUse ( $this->name, false );
+			}
+		} elseif ($hookname == "artifact_extra_detail") {
+			$Query="SELECT * FROM plugin_cvstracker_data_master,".
+				"plugin_cvstracker_data_artifact".
+				" WHERE plugin_cvstracker_data_artifact.group_artifact_id='$aid' ".
+				" AND plugin_cvstracker_data_master.holder_id=".
+				" plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
+			$this->getCommitEntries($Query, $group_id);
+		} elseif ($hookname == "task_extra_detail") {
+			$Query="SELECT * FROM plugin_cvstracker_data_master,".
+				"plugin_cvstracker_data_artifact".
+				" WHERE plugin_cvstracker_data_artifact.project_task_id='".
+				$params['task_id']."' ".
+				" AND plugin_cvstracker_data_master.holder_id=".
+				" plugin_cvstracker_data_artifact.id ORDER BY cvs_date";
+			$this->getCommitEntries($Query, $group_id);
+		}
+	}
+}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

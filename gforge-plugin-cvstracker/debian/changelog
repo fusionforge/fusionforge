@@ -1,0 +1,13 @@
+gforge-plugin-cvstracker (0.1-2) unstable; urgency=low
+
+  * Added cronfile
+  * Added config creation
+
+ -- Francisco Gimeno <kikov@kikov.org>  Thu, 29 Jul 2004 00:17:49 +0200
+
+gforge-plugin-cvstracker (0.1-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Francisco Gimeno <kikov@kikov.org>  Mon, 19 Jul 2004 17:40:17 +0200
+
