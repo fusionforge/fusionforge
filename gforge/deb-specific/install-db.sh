@@ -66,11 +66,6 @@ EOF
 		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 		rm -f $cur
 	    fi
-	    # Set the password for the user
-            db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
-	    su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
-update pg_shadow set passwd='$db_passwd' where usename='gforge' ;
-EOF
 	    # Remove old password file
 	    if [ -e /var/lib/postgres/data/gforge_passwd ] ; then
 		rm -f /var/lib/postgres/data/gforge_passwd
@@ -80,26 +75,47 @@ EOF
 	;;
     configure)
 	# Create the appropriate database user
+	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser gforge" 1> $tmp1 2> $tmp2 \
-	    && [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
-	    || grep -q '^ERROR:  CREATE USER: user name "gforge" already exists$' $tmp2 ; then
-	    # Creation OK or user already existing -- no problem here
-	    echo -n ""
-	    rm -f $tmp1 $tmp2
+	if dpkg --compare-versions $pg_version lt 7.3 ; then
+	    if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser gforge" 1> $tmp1 2> $tmp2 \
+		&& [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
+		|| grep -q '^ERROR:  CREATE USER: user name "gforge" already exists$' $tmp2 ; then
+	        # Creation OK or user already existing -- no problem here
+		rm -f $tmp1 $tmp2
+	    else
+		echo "Cannot create PostgreSQL user...  This shouldn't have happened."
+		echo "Maybe a problem in your PostgreSQL configuration?"
+		echo "Please report a bug to the Debian bug tracking system"
+		echo "Please include the following output:"
+		echo "createuser's STDOUT:"
+		cat $tmp1
+		echo "createuser's STDERR:"
+		cat $tmp2
+		rm -f $tmp1 $tmp2
+		exit 1
+	    fi
 	else
-	    echo "Cannot create PostgreSQL user...  This shouldn't have happened."
-	    echo "Maybe a problem in your PostgreSQL configuration?"
-	    echo "Please report a bug to the Debian bug tracking system"
-	    echo "Please include the following output:"
-	    echo "createuser's STDOUT:"
-	    cat $tmp1
-	    echo "createuser's STDERR:"
-	    cat $tmp2
-	    rm -f $tmp1 $tmp2
-	    exit 1
+	    db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
+	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
+CREATE USER gforge WITH PASSWORD '$db_passwd' ;
+EOF
+		then
+		rm -f $tmp1 $tmp2
+	    else
+		echo "Cannot create PostgreSQL user...  This shouldn't have happened."
+		echo "Maybe a problem in your PostgreSQL configuration?"
+		echo "Please report a bug to the Debian bug tracking system"
+		echo "Please include the following output:"
+		echo "CREATE USER's STDOUT:"
+		cat $tmp1
+		echo "CREATE USER's STDERR:"
+		cat $tmp2
+		rm -f $tmp1 $tmp2
+		exit 1
+	    fi
 	fi
 
         # Create the appropriate database
