@@ -118,7 +118,7 @@ if (db_numrows($res_admin) > 0) {
 <span class="develtitle"><?php echo $Language->getText('group','developers'); ?>:</span><br />
 <?php
 //count of developers on this project
-$res_count = db_query("SELECT count(*) FROM user_group WHERE group_id='$group_id'");
+$res_count = db_query("select count(users.user_id) from user_group, users where user_group.group_id='$group_id' and users.user_id=user_group.user_id and users.status='A'");
 print db_result($res_count,0,'count');
 
 ?>
