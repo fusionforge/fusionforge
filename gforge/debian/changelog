@@ -57,13 +57,18 @@ sourceforge (2.5-10+14+) unstable; urgency=low
   * Added fileforge.pl, a setuid Perl script to move files around securely
     (without needing to grant www-data read/write permission on
     $user/incoming/ directories).  Not using it yet, needs more testing.
-  * Splited update-dns.sh in update-dns.sh and update-cvs.sh
-    and related modification in prerm and postinst, purge is now done
-    for cvs, but i don't use update-inetd that doesn't restore old config.
-    probably cvs maintainer should be contacted to have a friendly sourceforge
-    config, because cvs config break sourceforge cvs config
+  * [Christian] Splited install-dns.sh in install-dns.sh and
+    install-cvs.sh and related modification in prerm and postinst, purge
+    is now done for cvs, but i don't use update-inetd that doesn't restore
+    old config.  probably cvs maintainer should be contacted to have a
+    friendly sourceforge config, because cvs config break sourceforge cvs
+    config
+  * Migrated install-cvs.sh to update-inetd (using appropriate
+    --comment-chars tricks).
+  * Fixed top of page background (looked nice on Forged Metal theme, but
+    not with any other theme).
 
- -- Christian Bayle <bayle@aist.enst.fr>  Mon, 22 Oct 2001 22:24:46 +0200
+ -- 
 
 sourceforge (2.5-10) unstable; urgency=low
 
