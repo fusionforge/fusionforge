@@ -98,7 +98,7 @@ class MailingListFactory extends Error {
 		$perm = & $this->Group->getPermission(session_get_user());
 		if ($perm && is_object($perm) && $perm->isMember()) {
 			$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;
-			if($admin && MailingList::userIsAdmin($this->Group)) {
+			if($admin && MailingList::userCanAdminMailingLists($this->Group)) {
 				$public_flag .= ', '.MAIL__MAILING_LIST_IS_DELETED;
 			}
 		}

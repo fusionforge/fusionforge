@@ -122,7 +122,7 @@ class MailingList extends Error {
 		//
 		if (!$creator_id) {
 			$creator_id=user_getid();
-			if(! $this->userIsAdmin($this->Group)) {
+			if(! $this->userCanAdminMailingLists($this->Group)) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
@@ -218,7 +218,7 @@ class MailingList extends Error {
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC) {
 		global $Language;
 		
-		if(! $this->userIsAdmin($this->Group)) {
+		if(! $this->userCanAdminMailingLists($this->Group)) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -340,14 +340,14 @@ class MailingList extends Error {
 	}
 
 	/**
-	 * userCanAdminMailingList - use this function to know if the user can administrate mailing lists
+	 * userCanAdminMailingLists - use this function to know if the user can administrate mailing lists
 	 *
 	 * This is a static method. Currently the user must be a project or a sitewide admin to administrate the mailing lists
 	 *
 	 * @param object $Group group object
 	 * @return boolean true if the user can administrate mailing lists
 	 */
-	function userIsAdmin(& $Group) {
+	function userCanAdminMailingLists(& $Group) {
 		$perm = & $Group->getPermission(session_get_user());
 		if (!$perm || !is_object($perm)) {
 			return false;
