@@ -16,7 +16,7 @@ class CVSPlugin extends SCM {
 //		$this->hooks[] = "group_approved";
 		$this->hooks[] = "cssstyle";
 
-		require_once('/etc/gforge/plugins/scmcvs/config.php') ;
+		require_once('plugins/scmcvs/config.php') ;
 
 		//$this->default_cvs_server = $default_cvs_server ;
 		//$this->this_server = $this_server ;
