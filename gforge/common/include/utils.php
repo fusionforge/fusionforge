@@ -85,6 +85,8 @@ function util_check_fileupload($filename) {
  */
 function util_send_message($to,$subject,$body,$from='',$BCC='') {
 	global $Language;
+	global $sys_sendmail_path;
+
 	if (!$to) {
 		$to='noreply@'.$GLOBALS['sys_default_domain'];
 	}
@@ -98,8 +100,13 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 		"\nContent-type: text/plain; charset=".$Language->getText('conf','content_encoding').
 		"\n\n$body";
 
+	if (!$sys_sendmail_path){
+		$sys_sendmail_path="/usr/sbin/sendmail";
+	}
 	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
-		  "\" | /usr/sbin/sendmail -f'$from' -t -i > /dev/null 2>&1 &");
+		  "\" | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");
+
+
 }
 
 function util_send_jabber($to,$subject,$body) {
