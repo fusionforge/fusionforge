@@ -546,6 +546,7 @@ common_include_account	toolong	Name is too long. It must be less than 15 charact
 common_include_account	tooshort	Name is too short. It must be at least 3 characters.
 common_utils	priority_colors	Priority Colors
 conf	content_encoding	UTF-8
+conf	mail_charset	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
