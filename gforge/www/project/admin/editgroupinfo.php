@@ -79,7 +79,7 @@ $images_res = db_query("
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
 <p>Descriptive Group Name:
-<br /><input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>"></p>
+<br /><input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" maxlength="40"></p>
 
 <p>Short Description (255 Character Max, HTML will be stripped from this description):
 <br /><textarea cols="80" rows="3" wrap="virtual" name="form_shortdesc">
