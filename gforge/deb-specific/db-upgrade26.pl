@@ -31,6 +31,8 @@ debug "Do not worry unless told otherwise." ;
 
 &db_connect ;
 
+debug "Connected to the database OK." ;
+
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
@@ -39,6 +41,7 @@ eval {
     # Do we have at least the basic schema?
 
     $query = "SELECT count(*) from pg_class where relname = 'groups'";
+    debug $query ;
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     @array = $sth->fetchrow_array () ;
@@ -50,25 +53,25 @@ eval {
 	$action = "installation" ;
 	debug "Creating initial Sourceforge database from files." ;
 
-#	my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
+	my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
 #	my @filelist = qw{ /usr/lib/sourceforge/db/SourceForge.sql
 #			       /usr/lib/sourceforge/db/trove_defaults.sql
 #			       /usr/lib/sourceforge/db/init-extra.sql } ;
 	# TODO: user_rating.sql
 			      
-#	foreach my $file (@filelist) {
-#	    debug "Processing $file" ;
-#	    @reqlist = @{ &parse_sql_file ($file) } ;
-#	    
-# 	    foreach my $s (@reqlist) {
-# 		$query = $s ;
-#		debug $query ;
-#  		$sth = $dbh->prepare ($query) ;
-#  		$sth->execute () ;
-#  		$sth->finish () ;
-# 	    }
-# 	}
-#	@reqlist = () ;
+	foreach my $file (@filelist) {
+	    debug "Processing $file" ;
+	    @reqlist = @{ &parse_sql_file ($file) } ;
+	    
+ 	    foreach my $s (@reqlist) {
+ 		$query = $s ;
+		debug $query ;
+  		$sth = $dbh->prepare ($query) ;
+  		$sth->execute () ;
+  		$sth->finish () ;
+ 	    }
+ 	}
+	@reqlist = () ;
 
 	debug "Adding local data." ;
 
@@ -135,6 +138,7 @@ eval {
 
  	foreach my $s (@reqlist) {
  	    $query = $s ;
+	    debug $query ;
  	    $sth = $dbh->prepare ($query) ;
  	    $sth->execute () ;
  	    $sth->finish () ;
@@ -166,6 +170,7 @@ eval {
 
  	foreach my $s (@reqlist) {
  	    $query = $s ;
+	    debug $query ;
  	    $sth = $dbh->prepare ($query) ;
  	    $sth->execute () ;
  	    $sth->finish () ;
@@ -311,8 +316,9 @@ sub parse_sql_file ( $ ) {
     # my $n = 0 ;
     
   STATE_LOOP: while ($state != $states{DONE}) { # State machine main loop
+      debug "State = $state" ;
     STATE_SWITCH: {		# State machine step processing
-	$state = $states{INIT} && do {
+	$state == $states{INIT} && do {
 	    $par_level = 0 ;
 	    $l = $sql = $chunk = $rest = "" ;	 
 	    @sql_list = () ;
@@ -323,9 +329,10 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of INIT state
 	
-	$state = $states{SCAN} && do {
+	$state == $states{SCAN} && do {
 	  SCAN_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
+		  debug "SCAN -- \$l = <$l>" ;
 		  $l = <F> ;
 		  unless ($l) {
 		      debug "Detected end of file." ;
@@ -347,6 +354,7 @@ sub parse_sql_file ( $ ) {
 		} ;
 	      
 	      ( 1 ) && do {
+		  debug "SCAN -- \$l = <$l>" ;
 		  $sql = "" ;
 
 		  $state = $states{SQL_SCAN} ;
@@ -358,9 +366,10 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of SCAN state
 	
-	$state = $states{SQL_SCAN} && do {
+	$state == $states{SQL_SCAN} && do {
 	  SQL_SCAN_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
+		  debug "SQLSCAN -- \$l = <$l>" ;
 		  $l = <F> ;
 		  unless ($l) {
 		      debug "End of file detected during an SQL statement." ;
@@ -375,6 +384,7 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ( 1 ) && do {
+		  debug "SQLSCAN -- \$l = <$l>" ;
 		  ($chunk, $rest) = ($l =~ /^([^()\';-]*)(.*)/) ;
 		  $sql .= $chunk ;
 		  
@@ -387,7 +397,7 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of SQL_SCAN state
 	
-	$state = $states{IN_SQL} && do {
+	$state == $states{IN_SQL} && do {
 	  IN_SQL_STATE_SWITCH: {
 	      ($rest =~ /^\(/) && do {
 		  $par_level += 1 ;
@@ -466,9 +476,10 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of IN_SQL state
 
-	$state = $states{END_SQL} && do {
+	$state == $states{END_SQL} && do {
 	  END_SQL_STATE_SWITCH: {
-	      ($sql =~ /\s*/) && do {
+	      ($sql =~ /^\s*$/) && do {
+		  debug "END_SQL -- \$sql = <$sql>" ;
 		  debug "Empty request." ;
 		  $sql = "" ;
 		  $l = $rest ;
@@ -478,7 +489,8 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ( 1 ) && do {
-		  push @sql_list ;
+		  debug "END_SQL -- \$sql = <$sql>" ;
+		  push @sql_list, $sql ;
 		  $sql = "" ;
 		  $l = $rest ;
 
@@ -490,7 +502,7 @@ sub parse_sql_file ( $ ) {
 	      last STATE_SWITCH ;
 	} ;			# End of END_SQL state
 
-	$state = $states{QUOTE_SCAN} && do {
+	$state == $states{QUOTE_SCAN} && do {
 	  QUOTE_SCAN_STATE_SWITCH: {
 	      ($l eq "") && do {
 		  $sql .= "\n" ;
@@ -517,7 +529,7 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of QUOTE_SCAN state
 	
-	$state = $states{IN_QUOTE} && do {
+	$state == $states{IN_QUOTE} && do {
 	  IN_QUOTE_STATE_SWITCH: {
 	      ($rest =~ /^\'/) && do {
 		  $sql .= '\'' ;
@@ -558,7 +570,7 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of IN_QUOTE state
 
-	$state = $states{START_COPY} && do {
+	$state == $states{START_COPY} && do {
 	  START_COPY_STATE_SWITCH: {
 	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) && do {
 		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s+from\s+stdin\s*;(.*)/i) ;
@@ -598,7 +610,7 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of START_COPY state
 
-	$state = $states{IN_COPY} && do {
+	$state == $states{IN_COPY} && do {
 	  IN_COPY_SWITCH: {
 	      ($l =~ /^\\\.$/) && do {
 		  $l = $copy_rest ;
@@ -630,13 +642,13 @@ sub parse_sql_file ( $ ) {
 	    last STATE_SWITCH ;
 	} ;			# End of IN_COPY state
 
-	$state = $states{DONE} && do {
+	$state == $states{DONE} && do {
 	    debug "End of file detected." ;
 
 	    last STATE_SWITCH ;
 	} ;			# End of DONE state
 
-	$state = $states{ERROR} && do {
+	$state == $states{ERROR} && do {
 	    debug "Reached the ERROR state.  Dying." ;
 	    die "State machine is buggy." ;
 	    
