@@ -108,10 +108,10 @@ BEGIN
 END;
 ' LANGUAGE 'plpgsql';
 
-CREATE TRIGGER projectgrouplist_insert_trig AFTER INSERT ON artifact_group_list
+CREATE TRIGGER projectgrouplist_insert_trig AFTER INSERT ON project_group_list
 FOR EACH ROW EXECUTE PROCEDURE projectgrouplist_insert_agg ();
 
 
-CREATE TRIGGER projectgroup_update_trig AFTER UPDATE ON artifact
+CREATE TRIGGER projectgroup_update_trig AFTER UPDATE ON project_task
 FOR EACH ROW EXECUTE PROCEDURE projectgroup_update_agg ();
 
