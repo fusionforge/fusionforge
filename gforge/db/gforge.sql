@@ -620,7 +620,8 @@ CREATE SEQUENCE project_dependencies_pk_seq
 CREATE TABLE project_dependencies (
     project_depend_id integer DEFAULT nextval('project_dependencies_pk_seq'::text) NOT NULL,
     project_task_id integer DEFAULT 0 NOT NULL,
-    is_dependent_on_task_id integer DEFAULT 0 NOT NULL
+    is_dependent_on_task_id integer DEFAULT 0 NOT NULL,
+    link_type character(2) DEFAULT 'SS'::bpchar
 );
 
 
@@ -734,7 +735,9 @@ CREATE TABLE project_task (
     end_date integer DEFAULT 0 NOT NULL,
     created_by integer DEFAULT 0 NOT NULL,
     status_id integer DEFAULT 0 NOT NULL,
-    category_id integer
+    category_id integer,
+    duration integer DEFAULT 0,
+    parent_id integer DEFAULT 0
 );
 
 
@@ -2088,16 +2091,6 @@ CREATE TABLE project_group_doccat (
 
 
 
-CREATE VIEW project_depend_vw AS
-    SELECT pt.project_task_id, pd.is_dependent_on_task_id, pt.end_date, pt.start_date FROM (project_task pt NATURAL JOIN project_dependencies pd);
-
-
-
-CREATE VIEW project_dependon_vw AS
-    SELECT pd.project_task_id, pd.is_dependent_on_task_id, pt.end_date, pt.start_date FROM (project_task pt FULL JOIN project_dependencies pd ON ((pd.is_dependent_on_task_id = pt.project_task_id)));
-
-
-
 CREATE VIEW project_history_user_vw AS
     SELECT users.realname, users.email, users.user_name, project_history.project_history_id, project_history.project_task_id, project_history.field_name, project_history.old_value, project_history.mod_by, project_history.mod_date FROM users, project_history WHERE (project_history.mod_by = users.user_id);
 
@@ -2232,11 +2225,6 @@ CREATE VIEW docdata_vw AS
 
 CREATE VIEW artifact_group_list_vw AS
     SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.use_resolution, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, aca.count, aca.open_count FROM (artifact_group_list agl LEFT JOIN artifact_counts_agg aca USING (group_artifact_id));
-
-
-
-CREATE VIEW project_task_vw AS
-    SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
 
 
 
@@ -2691,6 +2679,28 @@ CREATE VIEW nss_usergroups AS
 
 
 
+CREATE VIEW project_task_vw AS
+    SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_task.duration, project_task.parent_id, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
+
+
+
+CREATE VIEW project_depend_vw AS
+    SELECT pt.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date FROM (project_task pt NATURAL JOIN project_dependencies pd);
+
+
+
+CREATE VIEW project_dependon_vw AS
+    SELECT pd.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date FROM (project_task pt FULL JOIN project_dependencies pd ON ((pd.is_dependent_on_task_id = pt.project_task_id)));
+
+
+
+CREATE TABLE project_task_external_order (
+    project_task_id integer NOT NULL,
+    external_id integer NOT NULL
+);
+
+
+
 COPY canned_responses (response_id, response_title, response_text) FROM stdin;
 \.
 
@@ -2896,7 +2906,7 @@ COPY project_assigned_to (project_assigned_id, project_task_id, assigned_to_id) 
 
 
 
-COPY project_dependencies (project_depend_id, project_task_id, is_dependent_on_task_id) FROM stdin;
+COPY project_dependencies (project_depend_id, project_task_id, is_dependent_on_task_id, link_type) FROM stdin;
 \.
 
 
@@ -2930,8 +2940,8 @@ COPY project_status (status_id, status_name) FROM stdin;
 
 
 
-COPY project_task (project_task_id, group_project_id, summary, details, percent_complete, priority, hours, start_date, end_date, created_by, status_id, category_id) FROM stdin;
-1	1			0	0	0	0	0	100	1	100
+COPY project_task (project_task_id, group_project_id, summary, details, percent_complete, priority, hours, start_date, end_date, created_by, status_id, category_id, duration, parent_id) FROM stdin;
+1	1			0	0	0	0	0	100	1	100	0	0
 \.
 
 
@@ -4186,6 +4196,11 @@ COPY project_counts_agg (group_project_id, count, open_count) FROM stdin;
 
 
 
+COPY project_task_external_order (project_task_id, external_id) FROM stdin;
+\.
+
+
+
 CREATE INDEX db_images_group ON db_images USING btree (group_id);
 
 
@@ -4802,6 +4817,10 @@ CREATE INDEX rolesetting_roleidsectionid ON role_setting USING btree (role_id, s
 
 
 
+CREATE INDEX projecttaskexternal_projtaskid ON project_task_external_order USING btree (project_task_id, external_id);
+
+
+
 ALTER TABLE ONLY canned_responses
     ADD CONSTRAINT canned_responses_pkey PRIMARY KEY (response_id);
 
@@ -5279,6 +5298,11 @@ ALTER TABLE ONLY role_setting
 
 ALTER TABLE ONLY user_group
     ADD CONSTRAINT usergroup_roleid FOREIGN KEY (role_id) REFERENCES role(role_id) MATCH FULL;
+
+
+
+ALTER TABLE ONLY project_task_external_order
+    ADD CONSTRAINT "$1" FOREIGN KEY (project_task_id) REFERENCES project_task(project_task_id) MATCH FULL ON DELETE CASCADE;
 
 
 
