@@ -38,7 +38,6 @@ URL: http://www.gforge.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Patch1000: gforge-4.0-deb_rpm.patch
-Patch1001: gforge-4.1-project_task_sql.patch
 
 AutoReqProv: off
 Requires: /bin/sh, /bin/bash
@@ -77,7 +76,6 @@ web-based administration.
 %prep
 %setup
 %patch1000 -p1
-%patch1001 -p1
 
 %build
 
@@ -128,7 +126,7 @@ install -m 644 rpm-specific/conf/vhost.conf $HTTPD_CONF_DIR/conf.d/gforge.conf
 # configuring GForge
 mkdir -p $GFORGE_CONF_DIR
 install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
-install -m 750 rpm-specific/scripts/refresh.sh $GFORGE_CONF_DIR/
+install -m 750 rpm-specific/scripts/gforge-config %{_sbindir}/
 mkdir -p $GFORGE_CONF_DIR/languages-local
 if ls rpm-specific/languages/*.tab &> /dev/null; then
 	cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
@@ -143,7 +141,7 @@ install -m 664 rpm-specific/cron.d/gforge $CROND_DIR/
 %startpostgresql
 if su -l postgres -s /bin/sh -c 'psql template1 -c "SHOW tcpip_socket;"' | grep " off" &> /dev/null; then
 	echo "###"
-	echo "# You should set tcpip_socket=true in your /var/lib/pgsql/data/postgresql.conf"
+	echo "# You should set tcpip_socket = true in your /var/lib/pgsql/data/postgresql.conf"
 	echo "# before installing GForge and restart PostgreSQL."
 	echo "# Then you should be able to install GForge RPM."
 	echo "###"
@@ -253,7 +251,7 @@ fi
 %doc AUTHORS AUTHORS.sourceforge COPYING ChangeLog INSTALL README*
 %doc docs/*
 %attr(0660, apache, gforge) %config(noreplace) %{_sysconfdir}/gforge/gforge.conf
-%attr(0750, root, root) %{_sysconfdir}/gforge/refresh.sh
+%attr(0750, root, root) %{_sbindir}/gforge-config
 %attr(0640, apache, apache) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
 %attr(0664, root, root) %config(noreplace) %{_sysconfdir}/cron.d/gforge
 %attr(0775, apache, apache) %dir /var/lib/gforge/upload
@@ -265,6 +263,9 @@ fi
 /var/lib/gforge/scmtarballs
 
 %changelog
+* Thu Mar 03 2005 Guillaume Smet <guillaume-gforge@smet.org>
+- removed useless stuff thanks to Christian's work on db-upgrade.pl
+- s/refresh.sh/gforge-config to improve consistency with debian packaging
 * Sun Feb 20 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - added a dependency on gforge-lib-jpgraph
 - added gforge-4.1-project_task_sql.patch
