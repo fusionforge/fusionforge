@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp codebase="http://infoether.com/~tom/gforge/soapclient" href="http://infoether.com/~tom/gforge/soapclient/gforgesoapclient.jnlp">
+    <information>
+        <title>GForge SOAP Client</title>
+        <vendor>Tom Copeland</vendor>
+        <description>A Java SOAP client for GForge</description>
+        <description kind="short">A Java SOAP client for GForge.</description>
+        <homepage href="http://gforge.org/projects/gforge/"/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <offline-allowed/>
+    <resources>
+        <j2se version="1.4+"/>
+        <jar href="gforge-soap-client-0.1.jar"/>
+        <jar href="axis.jar"/>
+        <jar href="commons-discovery.jar"/>
+        <jar href="commons-logging.jar"/>
+        <jar href="jaxrpc.jar"/>
+        <jar href="saaj.jar"/>
+    </resources>
+    <application-desc main-class="org.gforge.soapclient.GUI"/>
+</jnlp>
