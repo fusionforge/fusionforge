@@ -1800,7 +1800,7 @@ class Group extends Error {
 			$idadmin_group = db_result($admin_group,0,'user_id');
 		}
 		if (!$mlist->create('commits','cvs commits',1,$idadmin_group)) {
-			$this->setError('MailingList:'.$pg->getErrorMessage());
+			$this->setError('MailingList: '.$mlist->getErrorMessage());
 			db_rollback();
 			return false;
 		}
