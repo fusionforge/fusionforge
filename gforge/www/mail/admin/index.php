@@ -60,7 +60,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 					} else {
 						$feedback .= " List Added ";
 					}
-			
+
 					// get email addr
 					$res_email = db_query("SELECT email FROM users WHERE user_id='".user_getid()."'");
 					if (db_numrows($res_email) < 1) {
@@ -82,7 +82,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 					. " -- the ".$GLOBALS['sys_name']." staff\n";
 
 					mail ($row_email['email'],$GLOBALS['sys_name']." New Mailing List",$message,"From: admin@$GLOBALS[sys_default_domain]");
- 
+
 					$feedback .= " Email sent with details to: $row_email[email] ";
 				}
 			} else {
@@ -107,7 +107,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			}
 		}
 
-	} 
+	}
 
 	if ($add_list) {
 		/*
@@ -124,12 +124,11 @@ if ($group_id && user_ismember($group_id,'A')) {
 		$result=db_query("SELECT list_name FROM mail_group_list WHERE group_id='$group_id'");
 		ShowResultSet($result,'Existing Mailing Lists');
 
-		echo 	'<p>
-			<form method="post" action="'.$PHP_SELF.'">
+		echo 	'<form method="post" action="'.$PHP_SELF.'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_list" value="y" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
-			<strong>Mailing List Name:</strong><br />
+			<p><strong>Mailing List Name:</strong><br />
 			<strong>'.group_getunixname($group_id).'-<input type="text" name="list_name" value="" size="10" maxlength="12" />@'.$GLOBALS['sys_lists_host'].'</strong><br /></p>
 			<p>
 			<strong>Is Public?</strong><br />
@@ -141,7 +140,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			<strong><span style="color:red">Once created, this list will ALWAYS be attached to your project
 			and cannot be deleted!</span></strong></p>
 			<p>
-			<input type="submit" name="submit" value="Add This List"></p>
+			<input type="submit" name="submit" value="Add This List" /></p>
 			</form>';
 
 		mail_footer(array());
@@ -154,7 +153,8 @@ if ($group_id && user_ismember($group_id,'A')) {
 
 		$sql="SELECT list_name,group_list_id,is_public,description ".
 			"FROM mail_group_list ".
-			"WHERE group_id='$group_id'";
+			"WHERE group_id='$group_id'".
+			"ORDER BY list_name";
 		$result=db_query($sql);
 		$rows=db_numrows($result);
 
@@ -171,38 +171,39 @@ if ($group_id && user_ismember($group_id,'A')) {
 			$title_arr=array();
 			$title_arr[]='List';
 			$title_arr[]='Status';
-			$title_arr[]='Update';
-			$title_arr[]='List Admin';
+			$title_arr[]='';
+			$title_arr[]='';
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'list_name').'</td>';
-				echo '
+				echo '<td colspan="3">
 					<form action="'.$PHP_SELF.'" method="post">
 					<input type="hidden" name="post_changes" value="y" />
 					<input type="hidden" name="change_status" value="y" />
 					<input type="hidden" name="group_list_id" value="'.db_result($result,$i,'group_list_id').'" />
 					<input type="hidden" name="group_id" value="'.$group_id.'" />
+					<table width="100%"><tr>
 					<td>
 						<div style="font-size:smaller">
 						<strong>Is Public?</strong><br />
-						<input type="radio" name="is_public" value="1"'.((db_result($result,$i,'is_public')=='1')?' checked=\"checked\"':'').' /> Yes<br />
-						<input type="radio" name="is_public" value="0"'.((db_result($result,$i,'is_public')=='0')?' checked=\"checked\"':'').' /> No<br />
-						<input type="radio" name="is_public" value="9"'.((db_result($result,$i,'is_public')=='9')?' checked=\"checked\"':'').' /> Deleted<br />
-					</div></td><td>
+						<input type="radio" name="is_public" value="1"'.((db_result($result,$i,'is_public')=='1')?' checked="checked"':'').' /> Yes<br />
+						<input type="radio" name="is_public" value="0"'.((db_result($result,$i,'is_public')=='0')?' checked="checked"':'').' /> No<br />
+						<input type="radio" name="is_public" value="9"'.((db_result($result,$i,'is_public')=='9')?' checked="checked"':'').' /> Deleted<br />
+					</div></td><td align="right">
 						<div style="font-size:smaller">
 						<input type="submit" name="submit" value="Update" /></div>
 					</td>
-					<td><a href="https://'. $GLOBALS['sys_lists_host'] .'/mailman/admin/'
+					<td align="center"><a href="https://'. $GLOBALS['sys_lists_host'] .'/mailman/admin/'
 					.db_result($result,$i,'list_name').'">[Administrate this list in GNU Mailman]</a>
 				       </td></tr>
 				       <tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3">
 				       		<strong>Description:</strong><br />
 						<input type="text" name="description" value="'.
 						db_result($result,$i,'description') .'" size="40" maxlength="80" /><br />
-					</td></tr></form>';
+					</td></tr></table></form></td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -214,15 +215,16 @@ if ($group_id && user_ismember($group_id,'A')) {
 
 	} else {
 		/*
-			Show main page for choosing 
+			Show main page for choosing
 			either moderotor or delete
 		*/
 		mail_header(array('title'=>'Mailing List Administration','pagename'=>'mail_admin'));
 
 		echo '
 			<p>
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&add_list=1">Add Mailing List</a><br />
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&change_status=1">Administrate/Update Lists</a>';
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;add_list=1">Add Mailing List</a><br />
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;change_status=1">Administrate/Update Lists</a>
+			</p>';
 		mail_footer(array());
 	}
 

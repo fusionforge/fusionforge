@@ -504,7 +504,7 @@ home	hosted_projects	Hosted Projects
 home	registered_users	Registered Users
 home	none_found	None Found
 index	welcome	Welcome
-mail	provided_by	<P>Mailing lists provided via a GForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
+mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http://www.list.org">GNU Mailman</a>.  Thanks to the Mailman and <a href="http://www.python.org">Python</a> crews for excellent software.</p>
 mail	section	Project: $1
 mail	title	Mailing Lists
 mail_admin	section	Mailing Lists

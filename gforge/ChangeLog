@@ -1,37 +1,50 @@
+2003-02-23  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/mail/admin/index.php: valid XHTML 1.0 Transitional.
+	($change_status): order lists alphabetically.
+
+	* www/mail/mail_utils.php: fix errors when no group id specified.
+	Better error checking.
+
+	* www/mail/index.php: valid XHTML 1.0 Transitional.
+
+	* www/include/languages/Base.tab(mail:provided_by): XHTML-ise.
+
+
 2003-02-23  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/account/change_email.php, www/account/change_email-complete.php,
-	www/account/change_pw.php, www/account/first.php, www/account/lostpw.php,	
+	www/account/change_pw.php, www/account/first.php, www/account/lostpw.php,
 	www/account/index.php:
 	finished i18n
-	
+
 	* www/include/languages/Base.tab:
 	added missing strings for /account/
-	
+
 	* www/include/languages/Italian.tab:
 	translation of new strings for /account/
-	
+
 2003-02-22  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/new/index.php, www/include/languages/Base.tab:
 	Committing Reiner Jung's i18n of /new/
-	
+
 	* www/include/languages/Italian.tab:
 	l10n of new strings for /new/
-	
+
 2003-02-21  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/vote_function.php:
 	i18n of survey
-	
+
 	* www/survey/*:
 	committing Reiner Jung's i18n of survey
 	some modifications added
-	
+
 	* www/include/languages/Base.tab,
 	www/include/languages/Italian.tab:
 	converted spaces to tabs
-	
+
 	* www/survey/admin/survey_utils.php:
 	added new file
 
