@@ -76,7 +76,7 @@ EOF
 	fi
 
 	# Install/upgrade the database contents (tables and data)
-	#/usr/lib/sourceforge/bin/db-upgrade.pl
+	/usr/lib/sourceforge/bin/db-upgrade26.pl
 	;;
     purge)
         if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf
