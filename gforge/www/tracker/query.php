@@ -42,6 +42,7 @@ if ($submit) {
 			$feedback .= 'Successfully Created';
 		}
 		$aq->makeDefault();
+		$query_id=$aq->getID();
 	//	
 /*
 	// Make the displayed query the default
@@ -70,6 +71,7 @@ if ($submit) {
 			$feedback .= 'Query Updated';
 		}
 		$aq->makeDefault();
+		$query_id=$aq->getID();
 	//
 	//	Just load the query
 	//
@@ -92,6 +94,7 @@ if ($submit) {
 		} else {
 			$feedback .= 'Query Deleted';
 		}
+		$query_id=0;
 	}	
 } else {
 	$user=session_get_user();
@@ -196,9 +199,13 @@ echo '<html>
 	<tr>
 		<td><span style="font-size:">
 		<input type="radio" name="query_action" value="1">'.$Language->getText('tracker','query_name').'<br />
-		<input type="radio" name="query_action" value="4">'.$Language->getText('tracker','query_load').'<br />
+		<input type="radio" name="query_action" value="4">'.$Language->getText('tracker','query_load').'<br />';
+	if ($query_id) {
+		echo '
 		<input type="radio" name="query_action" value="3" checked>'.$Language->getText('tracker','query_update').'<br />
-		<input type="radio" name="query_action" value="5">'.$Language->getText('tracker','query_delete').'</span>
+		<input type="radio" name="query_action" value="5">'.$Language->getText('tracker','query_delete').'</span>';
+	}
+	echo '
 		</td>
 		<td valign="top"><span style="font-size:">
 		<input type="text" name="query_name" value="'.$aq->getName().'" size="20" maxlength="30" /></span></td>
