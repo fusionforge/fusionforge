@@ -1,3 +1,13 @@
+gforge (3.3.0-2woody2) stable; urgency=low
+
+  * [Christian] Added new sql upgrade (2004*.sql)
+  * [Christian] Stable backbort
+  * [Christian] Added = ${Source-Version} for gforge-mta-postfix
+  * [Christian] Make db-upgrade able to run with default pg_hba.conf
+  * [Christian] Make vhost scripts work default pg_hba.conf 
+
+ -- Christian Bayle <bayle@debian.org>  Sun, 28 Mar 2004 00:59:12 +0100
+
 gforge (3.2.1-4) experimental; urgency=low
 
   * [Christian] Now use setup script (wrapped in gforge-config)
