@@ -49,7 +49,7 @@ forward_for_sourceforge:
   domains = users.$domain_name
   driver = aliasfile
   file_transport = address_file
-  query = \"ldap:///uid=\$local_part,ou=People,{ldap_base_dn}?x-forward-email\"
+  query = \"ldap:///uid=\$local_part,ou=People,$sys_ldap_base_dn?x-forward-email\"
   search_type = ldap
   user = nobody
   group = nogroup
