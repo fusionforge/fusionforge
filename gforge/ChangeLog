@@ -1,3 +1,15 @@
+2005-03-04  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed tracker soap stuff based on [#1090] Tracker wrapper for Soap
+	by Steve Hawkins
+	* fixed more typos in French translation
+
+2005-03-04  Thales <guillaume.smet@openwide.fr>
+
+	* added plugin hooks for SSO with SiteMinder
+	* improved the plugin generation shell script
+	* fixed ldapextauth RPM packaging to follow new etc/ structure of the plugin
+
 2005-03-03  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* commited work based on [#805] Runnable CVS history scripts by Hidenari Miwa
