@@ -125,7 +125,7 @@ if(session_loggedin()) {
 }
  
 echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
-echo $this->display_stats(array('group_id'=>$group_id)).'<p>';
+echo $this->display_detailed_stats(array('group_id'=>$group_id)).'<p>';
 if ($displayCvsBrowser){
 	echo $Language->getText('plugin_scmcvs', 'browsetree');
 	echo '<p><a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a></p>' ;
@@ -203,6 +203,48 @@ echo $HTML->boxBottom();
 			$add_num=0;
 		}
 		echo ' (CVS: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
+	}
+	
+	function display_detailed_stats ($params) {
+		global $Language, $HTML;
+		$group_id = $params['group_id'] ;
+		
+		$result = db_query('
+			SELECT u.realname, u.user_name, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
+			FROM stats_cvs_user s, users u
+			WHERE group_id=\''.$group_id.'\' AND s.user_id=u.user_id AND (commits>0 OR adds >0)
+			GROUP BY group_id, realname, user_name
+			ORDER BY combined DESC, realname;
+		');
+		
+		if (db_numrows($result) > 0) {
+			$tableHeaders = array(
+				$Language->getText('plugin_scmcvs', 'realname'),
+				$Language->getText('plugin_scmcvs', 'adds'),
+				$Language->getText('plugin_scmcvs', 'commits')
+			);
+			echo $HTML->listTableTop($tableHeaders);
+
+			$i = 0;
+			$total = array('adds' => 0, 'commits' => 0);
+
+			while($data = db_fetch_array($result)) {
+				echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+				echo '<td width="50%"><a href="/users/'.$data['user_name'].'/">'.$data['realname'].'</a></td>'.
+					'<td width="25%" align="right">'.$data['adds']. '</td>'.
+					'<td width="25%" align="right">'.$data['commits'].'</td></tr>';
+				$total['adds'] += $data['adds'];
+				$total['commits'] += $data['commits'];
+				$i++;
+			}
+			echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>';
+			echo '<td width="50%"><strong>'.$Language->getText('plugin_scmcvs', 'total').':</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$total['adds']. '</strong></td>'.
+				'<td width="25%" align="right"><strong>'.$total['commits'].'</strong></td>';
+			echo '</tr>';
+			echo $HTML->listTableBottom();
+			echo '<hr size="1" />';
+		}
 	}
 
 	/**

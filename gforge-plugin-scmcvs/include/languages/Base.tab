@@ -19,3 +19,7 @@ plugin_scmcvs	enable_anonymous_cvs	Enable Anonymous Access
 plugin_scmcvs	enable_pserver	Enable pserver
 plugin_scmcvs	server	Server:
 plugin_scmcvs	cvs_commits	<strong>$1</strong> commits, <strong>$2</strong> adds
+plugin_scmcvs	adds	Adds
+plugin_scmcvs	commits	Commits
+plugin_scmcvs	realname	Name
+plugin_scmcvs	total	Total
