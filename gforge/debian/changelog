@@ -23,9 +23,10 @@ sourceforge (2.5-29+) unstable; urgency=low
     wrong in the case of foundries.
   * [Roland] Fixed POSIXness of maintainer scripts (closes: #150410).
   * [Roland] Added missing languages (closes: #150301).
-  * [Christian] Added support for ssh-nonfree 
+  * [Christian] Added support for ssh-nonfree
+  * [Christian] Hope I solved a postrm bug that made uninstall fail
 
- -- Christian Bayle <bayle@debian.org>  Mon, 24 Jun 2002 10:50:59 +0200
+ -- Christian Bayle <bayle@debian.org>  Sat, 29 Jun 2002 00:57:23 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
