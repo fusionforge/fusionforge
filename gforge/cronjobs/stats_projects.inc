@@ -85,8 +85,8 @@ LEFT JOIN (
     FROM forum_group_list, forum
     WHERE 
 		forum_group_list.group_forum_id = forum.group_forum_id 
-        AND forum.date > '$day_begin' 
-		AND forum.date < '$day_end' 
+        AND forum.post_date > '$day_begin' 
+		AND forum.post_date < '$day_end' 
 	GROUP BY forum_group_list.group_id
 	) fmcount USING (group_id)
 
@@ -98,8 +98,8 @@ LEFT JOIN (
     FROM forum_group_list, forum
     WHERE 
 		forum_group_list.group_forum_id = forum.group_forum_id 
-        AND forum.date > '$day_begin' 
-		AND forum.date < '$day_end'
+        AND forum.post_date > '$day_begin' 
+		AND forum.post_date < '$day_end'
     GROUP BY group_id
 	) fucount USING (group_id)
 
