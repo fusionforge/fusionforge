@@ -199,6 +199,23 @@ admin_add_language	classname	Classname:
 admin_add_language	existing_language	Existing Language
 admin_add_language	name	Name:
 admin_add_language	submit	Submit
+admin_admin_table	add_new	add new
+admin_admin_table	cant_delete_language	You can't delete the language $1 since it's currently referenced in a user profile.
+admin_admin_table	cant_delete_license	You can't delete the license $1 since it's currently referenced in a project.
+admin_admin_table	cant_delete_processor	You can't delete the processor $1 since it's currently referenced in a file release.
+admin_admin_table	create_new_below	Create a new $1 below:
+admin_admin_table	delete_confirm	Are you sure you want to delete this $1?
+admin_admin_table	modify_below	Modify the $1 below:
+admin_admin_table	site_admin_home	Site Admin Home
+admin_admin_table	successfully_added	$1 successfully added.
+admin_admin_table	successfully_deleted	$1 successfully deleted.
+admin_admin_table	successfully_modified	$1 successfully modified.
+admin_admin_table	title	Edit the $1s Table
+admin_admin_table	unit_file_type	File type
+admin_admin_table	unit_license	License
+admin_admin_table	unit_processor	Processor
+admin_admin_table	unit_supported_language	Supported language
+admin_admin_table	unit_theme	Theme
 admin_approve_pending	add_this_custom_response	Add this custom response to canned responses	
 admin_approve_pending	admin_approve_pending	Activate
 admin_approve_pending	approve	Approve

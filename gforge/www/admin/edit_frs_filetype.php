@@ -24,7 +24,7 @@
  */
 
 
-$unit        = 'file type';
+$unit        = 'file_type';
 $table       = 'frs_filetype';
 $primary_key = 'type_id';
 

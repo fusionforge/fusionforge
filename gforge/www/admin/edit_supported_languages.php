@@ -12,7 +12,7 @@
   */
 
 
-$unit        = 'supported language';
+$unit        = 'supported_language';
 $table       = 'supported_languages';
 $primary_key = 'language_id';
 

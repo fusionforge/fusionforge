@@ -215,6 +215,23 @@ admin_add_language	classname	Nom de classe :
 admin_add_language	existing_language	Langue existante
 admin_add_language	name	Nom :
 admin_add_language	submit	Valider
+admin_admin_table	add_new	ajouter nouveau
+admin_admin_table	cant_delete_language	Vous ne pouvez pas supprimer la langue $1 car elle est actuellement référencée dans un profil utilisateur.
+admin_admin_table	cant_delete_license	Vous ne pouvez pas supprimer la licence $1 car elle est actuellement référencée dans un projet.
+admin_admin_table	cant_delete_processor	Vous ne pouvez pas supprimer le processeur $1 car il est actuellement référencé dans une version de fichier.
+admin_admin_table	create_new_below	Créer un(e) nouveau(elle) $1 ci-dessous :
+admin_admin_table	delete_confirm	Etes-vous sûr de vouloir supprimer ce(tte) $1 ?
+admin_admin_table	modify_below	Modifier le(la) $1 ci-dessous :
+admin_admin_table	site_admin_home	Accueil de l'administration du site
+admin_admin_table	successfully_added	$1 ajouté(e) avec succès.
+admin_admin_table	successfully_deleted	$1 supprimé(e) avec succès.
+admin_admin_table	successfully_modified	$1 modifié(e) avec succès.
+admin_admin_table	title	Modifier la table : $1
+admin_admin_table	unit_file_type	Type de fichier
+admin_admin_table	unit_license	Licence
+admin_admin_table	unit_processor	Processeur
+admin_admin_table	unit_supported_language	Langue supportée
+admin_admin_table	unit_theme	Thème
 admin_approve_pending	add_this_custom_response	Ajouter cette réponse personnalisée aux réponses types
 admin_approve_pending	admin_approve_pending	Activer
 admin_approve_pending	approve	Approuver
