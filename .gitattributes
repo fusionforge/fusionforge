@@ -143,6 +143,7 @@ gforge/www/themes/osx/images/ic/home16b.png -text
 gforge/www/themes/osx/images/ic/index.png -text
 gforge/www/themes/osx/images/ic/mail16b.png -text
 gforge/www/themes/osx/images/ic/mail16d.png -text
+gforge/www/themes/osx/images/ic/mail16w.png -text
 gforge/www/themes/osx/images/ic/manual16c.png -text
 gforge/www/themes/osx/images/ic/msg.png -text
 gforge/www/themes/osx/images/ic/ofolder15.png -text
@@ -155,6 +156,8 @@ gforge/www/themes/osx/images/ic/tracker20g.png -text
 gforge/www/themes/osx/images/ic/tracker20w.png -text
 gforge/www/themes/osx/images/ic/trash-x.png -text
 gforge/www/themes/osx/images/ic/trash.png -text
+gforge/www/themes/osx/images/ic/write16w.png -text
+gforge/www/themes/osx/images/ic/xmail16w.png -text
 gforge/www/themes/osx/images/logo.png -text
 gforge/www/themes/osx/images/logohover.png -text
 gforge/www/themes/osx/images/point1.png -text
