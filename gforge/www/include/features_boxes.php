@@ -35,11 +35,10 @@ function show_top_downloads() {
 		SELECT groups.group_id,
 		groups.group_name,
 		groups.unix_group_name,
-		frs_dlstats_group_agg.downloads 
-		FROM frs_dlstats_group_agg,groups 
-		WHERE month='$month' 
-		AND day='$day'
-		AND frs_dlstats_group_agg.group_id=groups.group_id 
+		frs_dlstats_grouptotal_agg.downloads 
+		FROM frs_dlstats_grouptotal_agg,groups 
+		WHERE 
+		frs_dlstats_grouptotal_agg.group_id=groups.group_id 
 		ORDER BY downloads DESC
 	", 10, 0, SYS_DB_STATS);
 //	echo db_error();
