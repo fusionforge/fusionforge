@@ -111,12 +111,35 @@ account_options	timezone	Timezone
 account_options	email_address		Indirizzo e-mail
 account_options	change_email_address	Cambia indirizzo e-mail
 account_options	intro	Qui puoi modificare le tue opzioni utente. Puoi anche visualizzare il tuo profile e le tue quotazioni
+common_utils	priority_colors	Colori di priorit&agrave;
 cvs	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
 cvs	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 cvs	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
 cvs	history	Repository History
 cvs	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
 cvs	browseit	Browse CVS Repository
+developer	entry_not_found	Elemento non trovato per questo utente
+developer	date	Data
+developer	subject	Soggetto
+developer	body	Contenuto
+developer	diary_and_notes	Diario e note per
+developer	no_entries	Questo utente non ha elementi nel diario
+developer	no_user_selected	Nessun elemento selezionato
+developer_monitor	title	Monitorizza un utente
+developer_monitor	error_inserting	Error inserting into user_diary_monitor
+developer_monitor	monitoring_user	L'utente viene monitorizzato
+developer_monitor	monitoring_user_expl	<p>Ti verranno inviate per email gli elementi del diario.</p><p>Per disabilitare la monitorizzazione, &egrave; sufficiente cliccare <strong>Monitorizza utente</strong>
+developer_monitor	monitoring_user_off	Monitorizzazione disabilitata
+developer_monitor	monitoring_user_off_expl	Non riceverai pi&ugrave; email da questo utente
+developer_monitor_choose_user	title	Selezionare un utente
+developer_monitor_choose_user	body	Errore - Selezionare un utente da monitorare
+developer_rate	title	Pagina quotazione utente 
+developer_rate	ratings_recorded	Quotazioni registrate
+developer_rate	ratings_recorded_body	Puoi riquotare l'utente tornando a questa pagina
+developer_rate	cannot_rate_yourself	Non puoi quotare te stesso
+developer_rate	invalid_rating_value	ERRORE - Valore non ammesso
+developer_rate	turned_off_title	Quotazioni disabilitate
+developer_rate	turned_off_body	Hai deciso di non partecipare alle quotazioni
 docman	submit_new	Inserisci nuova documentazione
 docman	view_doc	Visualizza documentazione
 docman	admin	Amministra
@@ -277,7 +300,8 @@ frs	file_package	Package
 frs	file_rel_date	Data
 frs	file_version	Versione
 frs	latest_file_releases	Ultimi rilasci
-general	return	[Ritorna  a 1]
+frs	file_monitor	Monitorizza
+general	return	[Ritorna  a $1]
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Could not get permission
 general	update_successful	Aggiornato con successo
@@ -299,8 +323,11 @@ general	yes	S&igrave;
 general	no	No
 general	deleted	Cancellato
 general	update	Aggiorna
+general	remove	Rimuovi
+general	cancel	Annulla
 general	submit	Invia
 general	error	Errore
+general	more	Altri
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	CVS Repository
@@ -328,13 +355,17 @@ group	short_survey	Sondaggi
 group	short_tracker	Tracker
 group	registered	Registrato: 
 group	activity	Percentuale di attivit&agrave;: 
-group	activitystat	View project activity <a href="/project/stats/?group_id=$1">statistics</a>
+group	activitystat	Visualizza <a href="/project/stats/?group_id=$1">statistiche</a> di attivit&agrave; del progetto
 group	norelease	Questo progetto non ha rilasciato file
 group	nodescription	Non &egrave; stata ancora inserta una descrizione per questo progetto.
 home	highest_ranked_users	Utenti pi&ugrave; quotati
 home	most_active_this_week	Progetti pi&ugrave; attivi
 home	sourceforge_statistics	Statistiche $1 
 home	top_project_downloads	Maggiori download
+home	no_stats_available	Statistiche non disponibili
+home	hosted_projects	Progetti ospitati
+home	registered_users	Utenti registrati
+home	none_found	Non trovato
 mail	provided_by	<P>Mailing lists provided via a SourceForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
 menu	bookmark_page	Bookmark Page
 menu	contact_us	Contact $1
@@ -357,6 +388,7 @@ menu	admin	Amministrazione
 menu	account_maintenance	Opzioni Utente
 my	about_blurb	La tua pagina personale contiene un elenco di bug, attivita che ti sono stati assegnati, inoltre l'elenco dei progetti ai quali partecipi.
 my	no_bookmarks	Non ci sono segnalibri salvati
+
 my	no_monitored_filemodules	<H3>Non stai monitorando nessun file</H3><P>Quando monitorizzi un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
 my	no_monitored_forums	<H3>Non stai monitorando nessun forum</H3><P>Quando monitorizzi un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare il monitoraggio di forum cliccando su &quot;Monitorizza Forum&quot;
 my	no_open_tasks	Non ci sono attivit&agrave; aperte assegnate a te.
@@ -379,6 +411,34 @@ my	pending_projects_3	Premere qui
 my	pending_news_bytes_1	C'e' una news in attesa di approvazione
 my	pending_news_bytes_2	Ci sono  $1 news in attesa di approvazione
 my	pending_news_bytes_3	Premere qui.
+my_bookmark	return	Ritorna
+my_bookmark_add	section	Pagina Personale
+my_bookmark_add	title	Aggiungi segnalibro
+my_bookmark_add	added_bookmark	Aggiunto segnalibro per <strong>$1</strong> con il titolo <strong>$2</strong>
+my_bookmark_add	bookmark_title	Titolo segnalibro
+my_bookmark_add	bookmark_url	URL segnalibro
+my_bookmark_add	visit_page	Vai alla pagina segnata
+my_bookmark_add	back	Torna alla homepage
+my_bookmark_delete	title	Cancella segnalibro
+my_bookmark_delete	bookmark_deleted	Segnalibro cancellato
+my_rmproject	operation_not_permitted_title	Operazione non permessa
+my_rmproject	operation_not_permitted_text	Impossibile eliminarti da questo progetto perch&eacute; sei un amministratore del progetto. Dovresti prima chiedere ad altri amministratori di eliminare i tuoi privilegi di amministratore. Se sei l'unico amministratore, puoi chiedere in <a href="/people/">Progetti in cerca di aiuto </a>.
+my_rmproject	quitting_project	Eliminazione da progetto
+my_rmproject	quitting_project_text	Stai per eliminarti dal progetto. Conferma:
+my_diary	add_new_entry	Aggiungi nuova nota
+my_diary	summary	Sommario
+my_diary	details	Dettaglio
+my_diary	submit_only_once	INSERIRE SOLO UNA VOLTA
+my_diary	is_public	Pubblico?
+my_diary	is_public_expl	Se marcato come publico, la nota verr&agrave; inviata a tutti gli utenti che monitorizzano la nota.
+my_diary	diary_updated	Diaro aggiornato 
+my_diary	nothing_updated	Nulla da aggiornato
+my_diary	error_adding_item	Errore nell'aggiornamento dell'elemento
+my_diary	existing_entries	Note e Diario esistenti
+my_diary	update_entry	Aggiorna un elemento
+my_diary	entry_not_found	Elemento non trovato o non &egrave; di tua pertinenza
+my_diary	item_added	Elemento aggiunto
+my_diary	no_entries	Non ci sono elementi del diario
 news	choose	<P>Seleziona una news e può visualizzare, ricercare e inviare messaggi.<P>
 news	nonews	Nessuna news
 news	nonewsfor	Nessuna news per $1
@@ -398,6 +458,20 @@ news_utils	nonews	Nessuna news trovata
 news_utils	archive	Archivio News
 news_utils	submit	Invia per 
 news_utils	readmore	<NOBR>Leggi/Scrivi messaggio</NOBR>
+project_home	title	Informazioni progetto
+project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
+project_home	help_wanted	AIUTO RICHIESTO: Questo progetto sta cercando
+project_home	help_wanted_multiple	persone che occupano $1 posizioni diverse</a>
+project_home	view_members	Visualizza membri
+project_home	view_project_files	Visualizza tutti i file
+project_home	no_trackers	Non ci sono tracker pubblici
+project_home	no_subprojects	Non ci sono sottoprogetti pubblici
+project_home	monitor_package	Monitor this package
+project_home	release_notes	Release Notes
+project_home	public_mailing_lists	mailing list pubbliche
+project_home	messages_in	messaggi in
+project_home	forums	forum
+project_home	surveys	sondaggi
 project_memberlist	joining	<P>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.<br><br>
 sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p>Fill it out accurately and completely or the receiver may not be able to respond.<P><FONT COLOR="RED"><B>IF YOU ARE WRITING FOR HELP:</B> Did you read the site documentation? Did you include your <B>user_id</B> and <B>user_name?</B> If you are writing about a project, include your <B>project id</B> (<B>group_id</B>) and <B>Project Name</B>.</FONT>
 users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.

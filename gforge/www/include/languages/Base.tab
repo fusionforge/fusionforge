@@ -127,6 +127,7 @@ account_options	email_address		Email Addr:
 account_options	change_email_address	Change Email Addr
 contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/sourceforge">$1 Master Project</a>.</p>
 contact	title	Contact $1
+common_utils	priority_colors	Priority Colors
 cvs	section	Project: $1
 cvs	title	CVS
 cvs	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
@@ -135,6 +136,28 @@ cvs	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can
 cvs	history	Repository History
 cvs	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
 cvs	browseit	Browse CVS Repository
+developer	entry_not_found	Entry Not Found For This User
+developer	date	Date
+developer	subject	Subject
+developer	body	Body
+developer	diary_and_notes	Diary And Notes For
+developer	no_entries	This User Has No Diary Entries
+developer	no_user_selected	No User Selected
+developer_monitor	title	Monitor a User
+developer_monitor	error_inserting	Error inserting into user_diary_monitor
+developer_monitor	monitoring_user	User is now being monitored
+developer_monitor	monitoring_user_expl	<p>You will now be emailed this user's diary entries.</p><p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.
+developer_monitor	monitoring_user_off	Monitoring has been turned off
+developer_monitor	monitoring_user_off_expl	You will not receive any more emails from this user
+developer_monitor_choose_user	title	Choose a User first
+developer_monitor_choose_user	body	Error - Choose a User To Monitor First
+developer_rate	title	User Ratings Page
+developer_rate	ratings_recorded	Ratings Recorded
+developer_rate	ratings_recorded_body	You can re-rate this person by simply returning to their ratings page and re-submitting the info.
+developer_rate	cannot_rate_yourself	You can't rate yourself
+developer_rate	invalid_rating_value	ERROR - invalid rating value	
+developer_rate	turned_off_title	Ratings turned off
+developer_rate	turned_off_body	You chose not to participate in the peer rating system
 docman	submit_new	Submit new documentation
 docman	view_doc	View Documentation
 docman	admin	Admin
@@ -178,6 +201,13 @@ docman_new	submit	Submit Information
 docman_new	file	File
 docman_new	state	State
 docman_new	error_blank_document	Error getting blank document
+exit	exiting_with_error	Exiting with error
+exit	choose_a_group	Error - Choose A group
+exit	choose_group_text	ERROR - No group_id was chosen.
+exit	choose_group_body	No group Id was chosen
+exit	missing_parameters_title	Error - missing parameters
+exit	missing_parameters_body	Error - missing required parameters
+
 forum	section	Project: $1
 forum	title	Forums
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
@@ -335,7 +365,8 @@ frs	file_package	Package
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
-general	return	[Return to $1]
+general	return_to	[Return to $1]
+general	return	Return
 general	error	Error
 general	sitename	$1
 general	footer	This is $1.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
@@ -360,6 +391,9 @@ general	yes	Yes
 general	no	No
 general	deleted	Deleted
 general	update	Update
+general	remove	Remove
+general	cancel	Cancel
+general	more	More
 general	error_on_update	Error On Update: 
 general	error_group_id	Group_id in db result does not match Group Object
 general	error_no_valid_group_object	$1:: No Valid Group Object
@@ -411,6 +445,10 @@ home	most_active_this_week	Most Active This Week
 home	sfos	$1 OnSite
 home	sourceforge_statistics	$1 Statistics
 home	top_project_downloads	Top Project Downloads
+home	no_stats_available	No Stats Available
+home	hosted_projects	Hosted Projects
+home	registered_users	Registered Users
+home	none_found	None Found
 mail	provided_by	<P>Mailing lists provided via a GForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
 mail	section	Project: $1
 mail	title	Mailing Lists
@@ -479,14 +517,40 @@ my	pending_news_bytes	Pending News Bytes
 my	pending_news_bytes_1	There is one pending project awaiting review
 my	pending_news_bytes_2	There are $1 news bytes awaiting review
 my	pending_news_bytes_3	Click here.
+my_bookmark	return	Return
 my_bookmark_add	section	My Personal Page
 my_bookmark_add	title	Add Bookmark
+my_bookmark_add	added_bookmark Added bookmark for <strong>$1</strong> with title <strong>$2</strong>
+my_bookmark_add	bookmark_title	Bookmark Title
+my_bookmark_add	bookmark_url	Bookmark URL
+my_bookmark_add	visit_page	Visit the bookmarked page
+my_bookmark_add	back	Back to your homepage
 my_bookmark_delete	section	My Personal Page
 my_bookmark_delete	title	Delete Bookmark
+my_bookmark_delete	bookmark_deleted	Bookmark deleted
 my_bookmark_edit	section	My Personal Page
 my_bookmark_edit	title	Edit Bookmark
+my_rmproject	title	Quitting Project
+my_rmproject	operation_not_permitted_title	Operation Not Permitted
+my_rmproject	operation_not_permitted_text	You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="/people/">Help Wanted Board</a> and be ready to pass admin privilege to interested party.
+my_rmproject	quitting_project	Quitting Project
+my_rmproject	quitting_project_text	You are about to remove yourself from the project. Please confirm your action:
 my_diary	section	My Personal Page
-my_diary	title	Diary And Notes
+my_diary	title	My Diary And Notes
+my_diary	add_new_entry	Add A New Entry
+my_diary	summary	Summary
+my_diary	details	Details
+my_diary	submit_only_once	SUBMIT ONLY ONCE
+my_diary	is_public	Is Public
+my_diary	is_public_expl	If marked as public, your entry will be mailed to any monitoring users when it is first submitted.
+my_diary	diary_updated	Diary Updated
+my_diary	nothing_updated	Nothing Updated
+my_diary	error_adding_item	Error Adding Item 
+my_diary	existing_entries	Existing Diary And Note Entries
+my_diary	update_entry	Update An Entry
+my_diary	entry_not_found	Entry not found or does not belong to you
+my_diary	item_added	Item Added
+my_diary	no_entries	You Have No Diary Entries
 new	title	New Releases
 news	section	Project: $1
 news	title	News
@@ -593,6 +657,20 @@ project_showfiles	section	Project: $1
 project_showfiles	title	File List
 project_shownotes	section	Project: $1
 project_shownotes	title	Release Notes
+project_home	title	Project Info
+project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
+project_home	help_wanted	HELP WANTED: This project is looking for
+project_home	help_wanted_multiple	People to fill $1 several different positions </a>
+project_home	view_members	View Members
+project_home	view_project_files	View All Project Files
+project_home	no_trackers	There are no public trackers available
+project_home	no_subprojects	There are no public subprojects available
+project_home	monitor_package	Monitor this package
+project_home	release_notes	Release Notes
+project_home	public_mailing_lists	public mailing lists
+project_home	messages_in	messages in
+project_home	forums	forums
+project_home	surveys	surveys
 projects	section	Project: $1
 projects	title	Summary
 register	title	New Project Registration
