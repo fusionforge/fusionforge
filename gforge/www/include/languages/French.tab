@@ -1782,7 +1782,7 @@ project_home	forum_messages_only_one_forum	<strong>$1</strong> messages dans <st
 project_home	forums	Forums
 project_home	help_wanted	NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche des
 project_home	help_wanted_multiple	Pour remplir plusieurs fonctions dans $1
-project_home	holding_note	NOTE : Cette valeur est maintenue par l'équipe de $1. Nous ne sommes pas le site officiel de ce produit. Un information supplémentaire sur le copyright peut être trouvée surmay be found sur la page d'accueil de ce projet.
+project_home	holding_note	NOTE : Ce projet est maintenu par l'équipe de $1. Nous ne sommes pas le site officiel de ce produit. Une information supplémentaire sur le copyright peut être trouvée sur la page d'accueil de ce projet.
 project_home	messages_in	message(s) dans
 project_home	monitor_package	Suivre ce paquet
 project_home	no_subprojects	Il n'y a pas de sous-projet public
@@ -1795,7 +1795,7 @@ project_home	tracker_open	<strong>$1</strong> ouvert(s) sur un total de <strong>
 project_home	view_members	Voir les membres
 project_home	view_project_files	Voir tous les fichiers du projet
 project_memberlist	developer	Développeur
-project_memberlist	joining	<P>Si vous désirez contribuer à ce projet
+project_memberlist	joining	<p>Si vous désirez contribuer à ce projet en devenant développeur, contactez l'un des administrateurs du projet signalés en gras dans la liste ci-dessous.</p>
 project_memberlist	role	Rôle / Fonction
 project_memberlist	skills	Compétences
 project_memberlist	title	Liste des membres du projet
