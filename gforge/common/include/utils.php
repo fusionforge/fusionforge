@@ -15,27 +15,27 @@
 /**
  * util_check_fileupload() - determines if a filename is appropriate for upload
  *
- * @param       string  The name of the file being uploaded
+ * @param	   string  The name of the file being uploaded
  */
 function util_check_fileupload($filename) {
 
-        /* Empty file is a valid file.
-           This is because this function should be called
-           unconditionally at the top of submit action processing
-           and many forms have optional file upload. */
-        if ($filename == 'none' || $filename == '') {
-        	return true;
-        }
+	/* Empty file is a valid file.
+	This is because this function should be called
+	unconditionally at the top of submit action processing
+	and many forms have optional file upload. */
+	if ($filename == 'none' || $filename == '') {
+		return true;
+	}
 
-        /* This should be enough... */
-        if (!is_uploaded_file($filename)) {
-        	return false;
-        }
-        /* This should be enough... */
-        if (!is_uploaded_file($filename)) {
-        	return false;
-        }
-        /* ... but we'd rather be paranoic */
+	/* This should be enough... */
+	if (!is_uploaded_file($filename)) {
+		return false;
+	}
+	/* This should be enough... */
+	if (!is_uploaded_file($filename)) {
+		return false;
+	}
+	/* ... but we'd rather be paranoic */
 	if (strstr($filename, '..')) {
 		return false;
 	}
@@ -79,7 +79,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 		"\n\n$body";
 
 	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
-	      "\" | /usr/sbin/sendmail -f'$from' -t -i >& /dev/null &");
+		  "\" | /usr/sbin/sendmail -f'$from' -t -i >& /dev/null &");
 }
 
 function util_send_jabber($to,$subject,$body) {
@@ -613,11 +613,11 @@ function validate_email ($address) {
  *
  */
 function util_is_valid_filename ($file) {
-    //bad char test
-    $invalidchars = eregi_replace("[-A-Z0-9\.]","",$file);
+	//bad char test
+	$invalidchars = eregi_replace("[-A-Z0-9_\.]","",$file);
 
-    if (!empty($invalidchars)) {
-        return false;
+	if (!empty($invalidchars)) {
+		return false;
 	} else {
 		if (strstr($file,'..')) {
 			return false;
