@@ -1504,7 +1504,7 @@ pm_include_grouphtml	admin	Administration
 pm_include_grouphtml	browse_task	Afficher les tâches
 pm_include_grouphtml	downloadcsv	Télécharger un export au format CSV
 pm_include_grouphtml	error_disabled	Ce projet a désactivé le gestionnaire de tâches.
-pm_include_grouphtml	gantt_chart	Diagramme de Gant
+pm_include_grouphtml	gantt_chart	Diagramme de Gantt
 pm_include_grouphtml	not_started	Non débuté
 pm_include_grouphtml	project	Projet
 pm_include_grouphtml	reporting	Rapports d'activité
