@@ -35,5 +35,7 @@ sub uncomment ( $$ ) {
 
 uncomment "dump-2.6", "tmpfile-2.6" ;
 sort_sql "tmpfile-2.6", "schema-2.6.sorted" ;
+unlink "tmpfile-2.6" ;
 uncomment "dump-2.6-from-2.5", "tmpfile-2.6-from-2.5" ;
 sort_sql "tmpfile-2.6-from-2.5", "schema-2.6-from-2.5.sorted" ;
+unlink "tmpfile-2.6-from-2.5" ;
