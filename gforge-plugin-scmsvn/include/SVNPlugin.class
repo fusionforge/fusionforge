@@ -31,10 +31,11 @@ class SVNPlugin extends SCM {
 		$this->name = "scmsvn";
 		$this->text = "SVN";
 		$this->hooks[] = "scm_page";
-		$this->hooks[] = "scm_admin_update";
+/*		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
 		$this->hooks[] = "group_approved";
+*/
 		$this->hooks[] = "scm_plugin";
 
 		require_once('/etc/gforge/plugins/scmsvn/config.php') ;
@@ -241,7 +242,7 @@ if ($project->enableAnonSCM()) {
 		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
 		
 	}
-*/	
+
 	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
 		
@@ -258,7 +259,7 @@ if ($project->enableAnonSCM()) {
 		}
 		return true;
 	}
-/*
+
 	function GetDefaultServer () {
 		return $this->default_svn_server ;
 	}
