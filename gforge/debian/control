@@ -7,7 +7,6 @@ Standards-Version: 3.5.7
 
 Package: gforge
 Architecture: all
-Pre-Depends: gforge-sourceforge-transition
 Depends: debconf (>= 0.5.00), gforge-common (= ${Source-Version}), gforge-web-apache | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim | gforge-mta, gforge-shell-ldap | gforge-shell, gforge-cvs, gforge-ftp-proftpd | gforge-ftp, gforge-ldap-openldap | gforge-ldap, gforge-dns-bind9 | gforge-dns, gforge-lists-mailman | gforge-lists
 Description: Collaborative development tool - meta-package
  GForge provides many tools to help collaboration in a
@@ -22,8 +21,6 @@ Package: gforge-common
 Architecture: all
 Depends: debconf (>= 0.5.00)
 Replaces: sourceforge-common (>> 2.6-0+11)
-Provides: gforge-sourceforge-transition
-Conflicts: gforge-sourceforge-transition
 Description: Collaborative development tool - shared files
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
@@ -191,6 +188,5 @@ Description: Collaborative development tool - mailing-lists (using Mailman)
 Package: gforge-sourceforge-transition
 Architecture: all
 Depends: sourceforge-common, sourceforge-db-postgresql
-Provides: gforge-sourceforge-transition
-Description: gforge to sourceforge data transition
+Description: sourceforge to gforge data transition
  This package will move data from your sourceforge package to your gforge package

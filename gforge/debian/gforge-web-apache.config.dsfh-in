@@ -8,11 +8,11 @@
 
 #DSFHELPER:host-variables#
 #DSFHELPER:common-variables#
-#DSFHELPER:cvshost-variables#
-#DSFHELPER:users-variables#
-#DSFHELPER:lists-variables#
-#DSFHELPER:downloadhost-variables#
-#DSFHELPER:shellhost-variables#
-#DSFHELPER:dbpasswd-variables#
-#DSFHELPER:ldap-variables#
-#DSFHELPER:dbhost-variables#
+# [Disabled] DSFHELPER:cvshost-variables#
+# [Disabled] DSFHELPER:users-variables#
+# [Disabled] DSFHELPER:lists-variables#
+# [Disabled] DSFHELPER:downloadhost-variables#
+# [Disabled] DSFHELPER:shellhost-variables#
+# [Disabled] DSFHELPER:dbpasswd-variables#
+# [Disabled] DSFHELPER:ldap-variables#
+# [Disabled] DSFHELPER:dbhost-variables#

@@ -6,7 +6,7 @@
 #DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:create-random-pw#
 #DSFHELPER:common-variables#
-# [Disabled] DSFHELPER:dbhost-variables#
+#DSFHELPER:dbhost-variables#
 #DSFHELPER:dbpasswd-variables#
 
 db_input low gforge/shared/admin_login || true

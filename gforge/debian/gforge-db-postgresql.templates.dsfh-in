@@ -1,5 +1,7 @@
 #DSFHELPER:replace-files#
+
 #DSFHELPER:common-variables#
+
 #DSFHELPER:cvshost-variables#
 
 Template: gforge/shared/shell_host
@@ -8,6 +10,7 @@ Description: Your shell server
  The hostname of the server that will host your Sourceforge shell accounts
 
 #DSFHELPER:users-variables#
+
 #DSFHELPER:lists-variables#
 
 Template: gforge/shared/download_host
@@ -94,3 +97,5 @@ Description-fr: Liste de compétences
  dans différents domaines.  Cette liste est la liste initiale de ces domaines.
  Veuillez entrer les noms de ces domaines de compétence séparés par des
  points-virgules `;'.
+
+#DSFHELPER:dbhost-variables#
