@@ -78,7 +78,6 @@ $title_arr[]=$Language->getText('pm','summary');
 $title_arr[]=$Language->getText('pm','start_date');
 $title_arr[]=$Language->getText('pm','end_date');
 $title_arr[]=$Language->getText('pm','percent_complete');
-$title_arr[]=$Language->getText('pm','priority');
 
 $order_col_arr=array();
 $order_col_arr[]='project_task_id';
@@ -86,7 +85,6 @@ $order_col_arr[]='summary';
 $order_col_arr[]='start_date';
 $order_col_arr[]='end_date';
 $order_col_arr[]='percent_complete';
-$order_col_arr[]='priority';
 $order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order',$_order,false);
 
 /*
@@ -146,8 +144,7 @@ if ($rows < 1) {
 			'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
 			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
 				date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
-			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td>'.
-			'<td>'. $pt_arr[$i]->getPriority() .'</td></tr>';
+			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
 
 	}
 
