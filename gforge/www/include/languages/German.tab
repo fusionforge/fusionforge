@@ -47,7 +47,7 @@ account_change_pw	new_password_repeat	Neues Passwort (Wiederholung)
 account_change_pw	not_valid_password	Sie müssen ein gültiges Passwort (mind. 6 Buchstaben) eingeben.
 account_change_pw	old_password	Altes Passwort
 account_change_pw	old_password_incorrect	Altes Passwort ist falsch
-account_change_pw	passwords_dont_match	Die neuen Passworte sind nicht gleich.
+account_change_pw	passwords_dont_match	Die neuen Passwörter sind nicht gleich.
 account_change_pw	section	Account-Einstellungen
 account_change_pw	title	Ändere Passwort
 account_change_pw	update	Aktualisiere Passwort
@@ -73,7 +73,7 @@ account_login	usessl	Bleibe im SSL-Modus nach der Anmeldung
 account_lostlogin	invalidconfirm	Ungültiger Hash-Wert der Bestätigung
 account_lostlogin	newpasswd	Neues Passwort (mind. 6 Buchstaben)
 account_lostlogin	newpasswd2	Neues Passwort (Wiederholung)
-account_lostlogin	notmatch	Die neuen Passworte sind nicht identisch.
+account_lostlogin	notmatch	Die neuen Passwörter sind nicht identisch.
 account_lostlogin	passwdchanged	<h2>Passwort geändert</h2><p>Gratulation, Sie haben Ihr Account-Passwort geändert. Sie können sich jetzt an der Site <a href="/account/login.php">anmelden</a>.</p>
 account_lostlogin	severalconfirm	Dieser Bestätigungs-Hash-Wert existiert mehr als einmal.
 account_lostlogin	sixchars	Sie müssen ein gültiges Passwort eingeben (mind. 6 Buchstaben).
@@ -81,7 +81,7 @@ account_lostlogin	title	Passwort-Bestätigung vergessen
 account_lostlogin	update	Aktualisierung
 account_lostlogin	welcome	<h2>Anmeldung trotz vergessenem Passwort</h2><p>Willkommen, $1. Sie können jetzt Ihr Passwort ändern.</p>
 account_lostpw	invalid_user	Ungültiger Benutzer
-account_lostpw	message	Jemand (vermutlich Sie) hat auf der $3 Site einen\nPasswortwechsel per EMailüberprüfung angefordert. Falls Sie das nicht waren,\nignorieren Sie diese Nachricht und nichts wird passieren.\n\nFalls Sie diese Überprüfung angefordert haben, besuchen Sie den folgenden Link,\num Ihr Passwort zu ändern:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- Die $3 Leitung\n
+account_lostpw	message	Jemand (vermutlich Sie) hat auf der $3 Site einen\nPasswortwechsel per EMail-Überprüfung angefordert. Falls Sie das nicht waren,\nignorieren Sie diese Nachricht und nichts wird passieren.\n\nFalls Sie diese Überprüfung angefordert haben, besuchen Sie den folgenden Link,\num Ihr Passwort zu ändern:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- Die $3 Leitung\n
 account_lostpw	notify	<p>Es wurde eine EMail an die Adresse gesendet, die Sie bei uns gespeichert haben. Folgen Sie den Anweisungen in dieser EMail, um das Account-Passwort zu ändern.</p><p><a href="/">[ Startseite ]</a></p>
 account_lostpw	sendhash	Sende vergessenen Passwort-Hash
 account_lostpw	subject	$1 Überprüfung
@@ -104,15 +104,15 @@ account_options	welcome		Willkommen
 account_register	Preferences	Einstellungen
 account_register	communitymail	Erhalte außerplanmäßige Community-Mailings. <i>(Sehr wenige.)</i>
 account_register	congrat	<p>Gratulation. Sie haben sich auf $1 registrieren lassen.</p><p> Ihnen wurde eine Bestätigungs-EMail zugesendet, um Ihre EMail-Adresse zu überprüfen. Das Besuchen des Links, der in dieser EMail steht, wird Ihren Account aktivieren.
-account_register	emailaddr	EMail-Adresse:<span><font color="red">*</font></span> <BR><I>Diese EMail-Adresse wird überprüft, bevor der Account aktiviert wird. Das wird nicht auf dieser Web-Site angezeigt. Sie werden einen Mail-Weiterleitungsaccount (<anmeldename@$1>) erhalten, der auf diese EMail-Adresse weitergeleitet wird.</i>
+account_register	emailaddr	EMail-Adresse:<span><font color="red">*</font></span> <BR><I>Diese EMail-Adresse wird überprüft, bevor der Account aktiviert wird. Das wird nicht auf dieser Web-Site angezeigt. Sie werden einen Mail-Weiterleitungs-Account (<anmeldename@$1>) erhalten, der auf diese EMail-Adresse weitergeleitet wird.</i>
 account_register	err_badinsert	Eingabe fehlgeschlagen 
 account_register	err_email	Ungültige EMail-Adresse
 account_register	err_jabber	Ungültige Jabber-Adresse
 account_register	err_mailexist	Ein Benutzer mit dieser EMail-Adresse existiert bereits - benutzen Sie die Personen-Suche,um Ihren Ihren Anmeldenamen wiederzufinden.
 account_register	err_passwd	Sie müssen ein Passwort eingeben
-account_register	err_passwd2	Die Passworte sind nicht identisch
+account_register	err_passwd2	Die Passwörter sind nicht identisch
 account_register	err_passwd3	Ungültiges Passwort:
-account_register	err_realname	Sie müssen einen einen realen Namen eingeben
+account_register	err_realname	Sie müssen einen realen Namen eingeben
 account_register	err_unixname	Ungültiger Unix-Name. 
 account_register	err_userexist	Dieser Benutzername existiert bereits.
 account_register	err_username	Sie müssen einen Benutzernamen eingeben
@@ -125,7 +125,7 @@ account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer für Macintosh 
 account_register	mandatory	Felder die mit $1 markiert sind, müssen zwingend ausgefüllt werden.
 account_register	message_body	Wir danken Ihnen für Ihre Registrierung auf der $4 Web-Site. Sie haben\neinen Account mit dem Benutzernamen $1 angelegt. Um Ihre\nRegistrierung zu vervollständigen, besuchen Sie bitte den folgenden Link: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Falls Sie oben keinen Link sehen, ist möglicherweise Ihr Mailprogramm fehlerhaft.\nKopieren Sie den unten stehenden Link als _eine Zeile_ in die Adressleiste Ihres Browsers.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nViel Spaß mit der Site.\n\n-- Die $4 Leitung\n
 account_register	message_header	$1 Account-Registrierung
-account_register	partecipate_peer_ratings	Sie nehmen  am Mitgliederbewertungsverfahren teil. <i>(Es erlaubt Ihnen, andere Benutzer über verschiedene Kriterien zu bewerten, ebenso wie diese Sie bewerten können. Weitere Informationen können Sie auf Ihrer $1 Benutzerseite nachlesen </a>, falls Sie die Teilnahme am Bewertungsverfahren ausgewählt haben)</i>.
+account_register	partecipate_peer_ratings	Sie nehmen am Mitgliederbewertungsverfahren teil. <i>(Es erlaubt Ihnen, andere Benutzer über verschiedene Kriterien zu bewerten, ebenso wie diese Sie bewerten können. Weitere Informationen können Sie auf Ihrer $1 Benutzerseite nachlesen </a>, falls Sie die Teilnahme am Bewertungsverfahren ausgewählt haben)</i>.
 account_register	password	Passwort (mind. 6 Buchstaben):
 account_register	password2	Passwort (Wiederholung):
 account_register	realname	voller/realer Name:
@@ -138,7 +138,7 @@ account_register	title	Neue Account-Registrierung
 account_register	update	Aktualisierung
 account_shell	autorized_keys	gemeinsam benutzte, authorisierte CVS/SSH Schlüssel
 account_shell	edit_keys	Bearbeite Schlüssel
-account_shell	shell_box	Kommandozeilenbox
+account_shell	shell_box	Kommandozeilen-Box
 account_shell	title	Kommandozeilen-Account Information
 account_unsubscribe	all_mailings	alle $1 Mailings und Benachrichtigungen
 account_unsubscribe	site_mailings	$1 Web-Site Mailings
@@ -153,12 +153,12 @@ account_verify	invalidparam	Ungültiger Parameter
 account_verify	invaliduser	Ungültiger Benutzer
 account_verify	login		Anmeldung
 account_verify	loginname	Anmelde-Name:
-account_verify	missingparam	Fehlende Paramater
+account_verify	missingparam	Fehlende Parameter
 account_verify	nouser	Benutzer existiert nicht.
 account_verify	password	Passwort:
 account_verify	title	$1 Account-Überprüfung
 account_verify	usermandatory	Sie müssen einen Benutzernamen eingeben.
-account_verify	verify_blurb	<p>Melden Sie sich jetzt an, um Ihre Registrierung zu vervollständigen. Ihr Account dann für normale Anmeldungen aktiviert sein.</p>
+account_verify	verify_blurb	<p>Melden Sie sich jetzt an, um Ihre Registrierung zu vervollständigen. Ihr Account wird dann für normale Anmeldungen aktiviert sein.</p>
 add_snippet	add_this_snippet_version_id	Füge diese Code-Schnipsel Version (ID) hinzu:
 add_snippet	back_to_add_page	Zurück zur "Hinzufügen"-Seite
 add_snippet	error_doing_snippet_version_insert	FEHLER BEIM CODE-STÜCK EINFÜGEN!
@@ -189,7 +189,7 @@ admin	reject	Ablehnen
 admin	site_admin_home	Site Admin Startseite
 admin	submit_changes	Änderungen abschicken
 admin	submit_new	Neues abschicken
-admin	successfully_added	erfolgreich Hinzugefügt
+admin	successfully_added	erfolgreich hinzugefügt
 admin	successfully_deleted	erfolgreich gelöscht.
 admin	successfully_modified	erfolgreich bearbeitet
 admin	yes	Ja
@@ -207,7 +207,7 @@ admin_approve_pending	approving_group		Genehmigungsgruppe:
 admin_approve_pending	approving_pending_projects	Wartende Projekte genehmigen
 admin_approve_pending	custom_response_title	Bearbeite Antwort-Titel und -Text
 admin_approve_pending	edit_project_details	[Bearbeite Projekt-Details]
-admin_approve_pending	error_creating_group	Fehler beim erstellen des Gruppen-Objektes
+admin_approve_pending	error_creating_group	Fehler beim Erstellen des Gruppen-Objektes
 admin_approve_pending	error_group_rejection	Fehler bei der Ablehnung der Gruppe
 admin_approve_pending	home_box	Home-Bereich:
 admin_approve_pending	manage_responses	(Antworten verwalten)
@@ -228,7 +228,7 @@ admin_database	error_adding_database	Fehler beim Hinzufügen der Datenbank
 admin_database	group	Gruppe
 admin_database	group_unix_name	Gruppen-Unix-Name:
 admin_database	no_databases_defined	Keine Datenbanken definiert
-admin_database	site_admin_groups_maintance	Site Admin: Grupen-DB Verwaltung
+admin_database	site_admin_groups_maintance	Site Admin: Gruppen-DB Verwaltung
 admin_database	statistics_for_project_database	Statistiken für Projekt-Datenbanken
 admin_database	type	Typ
 admin_database	unable_to_insert	Es war nicht möglich, die bereits aktive Datenbank einzufügen.
@@ -250,10 +250,10 @@ admin_groupedit	unix_group_name	Unix-Gruppen-Name:
 admin_groupedit	update	Aktualisieren
 admin_groupedit	updated	Aktualisiert
 admin_groupedit	yes	Ja
-admin_grouplist	group_list	Grupenliste
+admin_grouplist	group_list	Gruppenliste
 admin_grouplist	group_list_for_category	Gruppenliste für die Kategorie:
 admin_grouplist	group_name_click_to_edit	Gruppen-Name (anklicken zum Bearbeiten)
-admin_grouplist	groups_that_begin_with	Gruppen die anfangen mit
+admin_grouplist	groups_that_begin_with	Gruppen, die anfangen mit
 admin_grouplist	license	Lizenz
 admin_grouplist	members	Mitglieder
 admin_grouplist	public	Öffentlich?
@@ -267,9 +267,9 @@ admin_index	approve_reject	Genehmigen/Ablehnen
 admin_index	deleted_status	(gelöscht) Status
 admin_index	display_full_group	Zeige vollständige Gruppenliste/Bearbeite Gruppen
 admin_index	display_full_user_list	Zeige vollständige Benutzerliste/Bearbeite Benutzer
-admin_index	display_groups_beginning_with	Zeige Gruppen die anfangen mit :
+admin_index	display_groups_beginning_with	Zeige Gruppen, die anfangen mit :
 admin_index	display_trove_map	Zeige generierte Projekt-Karte
-admin_index	display_user_beginning_with	Zeige Benutzer die anfangen mit :
+admin_index	display_user_beginning_with	Zeige Benutzer, die anfangen mit :
 admin_index	front_page_news	von Titelseiten Neuigkeiten
 admin_index	get	abrufen
 admin_index	group_maintaince	Gruppen-Verwaltung
@@ -306,13 +306,13 @@ admin_massmail	all_users	Alle Benutzer
 admin_massmail	be_verry_carefull	Seien Sie <span style="color:red"><strong>SEHR</strong></span> vorsichtig mit diesem Formular, weil durch das Abschicken vielen Benutzern eine EMail gesendet wird.
 admin_massmail	date	Datum
 admin_massmail	developers_test	Entwickler (test)
-admin_massmail	error_scheduling_mailing	Fehler beim Vorbereiten des Mailings, Konnte Mailing nicht vorbereiten, Datenbankfehler:
+admin_massmail	error_scheduling_mailing	Fehler beim Vorbereiten des Mailings. Konnte Mailing nicht vorbereiten, Datenbankfehler:
 admin_massmail	last_user_id_mailed	zuletzt angemailte user_id
 admin_massmail	mail_engine_for	Mailserver-Formular (Engine) für $1 Abonnenten
 admin_massmail	mailing_successfully_scheduled	Mailing erfolgreich für Auslieferung vorbereitet
-admin_massmail	missing_parameter_empty_message	Parameter fehlt, Sie versuchen eine leere Nachricht zu verschicken.
-admin_massmail	missing_parameter_proper_subject	Parameter fehlt, Sie müssen dem Mailing einen passenden Betreff geben.
-admin_massmail	missing_parameter_select_target	Parameter fehlt, Sie müssen einen Empfängerkreis für das Mailing auswählen.
+admin_massmail	missing_parameter_empty_message	Parameter fehlt. Sie versuchen, eine leere Nachricht zu verschicken.
+admin_massmail	missing_parameter_proper_subject	Parameter fehlt. Sie müssen dem Mailing einen passenden Betreff geben.
+admin_massmail	missing_parameter_select_target	Parameter fehlt. Sie müssen einen Empfängerkreis für das Mailing auswählen.
 admin_massmail	schedule_for_mailing	Vorbereiten zum Abschicken
 admin_massmail	select	(auswählen)
 admin_massmail	subject	Betreff
@@ -336,7 +336,7 @@ admin_responses	deleted_resposes	Gelöschte Antworten
 admin_responses	edit_response	Bearbeitete Antwort
 admin_responses	edit_response_other	Bearbeitete Antwort
 admin_responses	existing_responses	Existierende Antworten: 
-admin_responses	go	Los
+admin_responses	go	Los!
 admin_responses	not_sure_dont_click	Wenn Sie nicht sicher sind, warum haben Sie dann 'Löschen' angeklickt?
 admin_responses	response_text	Antwort-Text:
 admin_responses	response_title	Antwort-Titel: 
@@ -351,7 +351,7 @@ admin_search	index	Admin Such-Ergebnisse
 admin_search	matches	Übereinstimmungen
 admin_search	member_since	Mitglied seit
 admin_search	real_name	Realer Name
-admin_search	refusing_to_display_whole_db	Das Anzeigen der gesamten DB wird abgelehnt, das würde die gesamte Datenbank anzeigen.  Bitte benutzen Sie eine CLI-Abfrage, wenn Sie das tun wollen.
+admin_search	refusing_to_display_whole_db	Das Anzeigen der gesamten DB wird abgelehnt. Dies würde die gesamte Datenbank anzeigen.  Bitte benutzen Sie eine CLI-Abfrage, wenn Sie das tun wollen.
 admin_search	registered	Registrierung
 admin_search	user_search_criteria	Benutzer-Suche mit Kriterien
 admin_search	username	Benutzername
@@ -366,7 +366,7 @@ admin_trove_cat_add	add	Hinzufügen
 admin_trove_cat_add	add_new_trove_category	Füge neue Projekt-Kategorie hinzu
 admin_trove_cat_add	error_in_trove_openration	Fehler bei Operation im Projekt-Katalog
 admin_trove_cat_add	new_category_description	Beschreibung der neuen Kategorie (VARCHAR 255)
-admin_trove_cat_add	new_category_full_name	voller Name der neuen Kategorie (VARCHAR 80)
+admin_trove_cat_add	new_category_full_name	Vollständiger Name der neuen Kategorie (VARCHAR 80)
 admin_trove_cat_add	new_category_short_name	Kurzname der neuen Kategorie (keine Leerzeichen, nach Unix-Art)
 admin_trove_cat_add	parent_category	Übergeordnete Kategorie
 admin_trove_cat_add	title	Site Admin: Projekt-Katalog - Kategorie hinzufügen
@@ -374,12 +374,12 @@ admin_trove_cat_edit	cant_delete_has_subcategories	Kann nicht löschen, diese Ka
 admin_trove_cat_edit	delete	Löschen
 admin_trove_cat_edit	edit_trove_category	Bearbeite Katalog-Kategorie
 admin_trove_cat_edit	error_in_trove_operation	Fehler bei Katalog-Operation
-admin_trove_cat_edit	error_in_trove_operation_cant_delete	Fehler bei Katalog-Operation, kann keine Kategorie löchen, die als Default in local.inc definiert ist.
-admin_trove_cat_edit	error_trove_equal_parent	Fehler! Übergeordnete Kategorie kann nicht die Gleiche sein, wie die Aktuelle.
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Fehler bei Katalog-Operation, kann keine Kategorie löschen, die als Default in local.inc definiert ist.
+admin_trove_cat_edit	error_trove_equal_parent	Fehler! Übergeordnete und aktuelle Kategorie dürfen nicht gleich sein.
 admin_trove_cat_edit	new_category_description	Beschreibung der neuen Kategorie (VARCHAR 255)
-admin_trove_cat_edit	new_category_full_name	voller Name der neuen Kategorie (VARCHAR 80)
+admin_trove_cat_edit	new_category_full_name	Vollständiger Name der neuen Kategorie (VARCHAR 80)
 admin_trove_cat_edit	new_category_short_name	Kurzname der neuen Kategorie (keine Leerzeichen, nach Unix-Art)
-admin_trove_cat_edit	no_such_category	Keine solche Kategorie, diese Katalog-Kategorie existiert nicht.
+admin_trove_cat_edit	no_such_category	Keine solche Kategorie. Diese Katalog-Kategorie existiert nicht.
 admin_trove_cat_edit	parent_category	Übergeordnete Kategorie:
 admin_trove_cat_edit	title	Site Admin: Katalog - Bearbeite Kategorie
 admin_trove_cat_edit	update	Aktualisieren
@@ -421,7 +421,7 @@ admin_useredit	real_name	Realer Name
 admin_useredit	suspended	Gesperrt (S)
 admin_useredit	this_page_allows	Diese Seite erlaubt ausschließlich direkte Eigenschaften des Benutzer-Objektes zu ändern. Um Eigenschaften des Benutzers bezüglich einer speziellen Gruppe zu ändern, besuchen Sie die Admin-Seite dieser Gruppe (unten).
 admin_useredit	title	Site Admin: Benutzer-Info
-admin_useredit	unix_status_updated_mirroring	Der Unix Status ist gleich dem Web-Status, außer es hat den Wert 'Kein Unix Account (N)'
+admin_useredit	unix_status_updated_mirroring	Der Unix Status ist gleich dem Web-Status, außer er hat den Wert 'Kein Unix Account (N)'
 admin_useredit	update	Aktualisieren
 admin_useredit	updated	Aktualisiert
 admin_useredit	user_id	Benutzer-ID:
@@ -504,12 +504,12 @@ calendar	tuesday	Dienstag
 calendar	update	Aktualisieren
 calendar	view	Ansehen:
 calendar	wednesday	Mittwoch
-classgroup	acceptedproject	Ihre Projekt-Registrierung für $7 wurde genehmigt.\n\nVoller Name des Projektes:  $1\nUnix-Name des Projektes:  $2\nCVS-Server:         cvs.$2.$3\nShell/Web-Server:   $2.$3\n\nIhr DNS wird bis zu einem Tag benötigen, bis es für Ihre Site funktioniert.\nWährend Sie auf Ihre DNS-Auflösung warten, möchten Sie sich vielleicht an Ihrer Shell \n$4 anmelden und Ihr CVS auf $5 umstellen.\n\nFalls nach 6 Stunden Ihre Shell-/CVS-Accounts immer noch nicht funktionieren, öffnen Sie bitten ein Support-Ticket damit wir einen Blick auf das Problem werfen können.\nBitte beachten Sie, dass alle Shell-/CVS-Accounts für Telnet geschlossen sind und nur mit SSH1 funktionieren.\n\nIhre Website ist über Ihren Shell-Account zugänglich. Bitte lesen Sie\ndie Site-Dokumentation (siehe Link unten) über korrekte Verwendung, verfügbare\nServices und die Verzeichnisstruktur des Accounts.\n\nWenn Sie Ihre eigenei\nProjekt-Seite auf $7 besuchen, während Sie angemeldet sind, finden Sie eine\n\nzusätzlichen Menüpunkt auf der linken Seite mit der Bezeichnung 'Projekt-Admin'.\n\nWir empfehlen Ihnen dringend , dass Sie jetzt $7 besuchen und eine öffentlichei\nBeschreibung für Ihr Projekt erstellen. Das können Sie tun, wenn Sie Ihre Projektseite besuchen, während Sie angemeldet/eingeloggt sind, und Sie 'Projekt-Admin' von den Menüsi\nauf der linken Seite auswählen (oder durch besuchen von http://$3/project/admin/?group_id=$6\nnach dem Anmelden).\n\nIhr Projekt wird auch nicht in unserem Software Katalog (Liste der gehosteten Projekte auf $7) aufgeführt, bis Sie Ihr Projekt dafür kategorisieren. Damit Leute Ihr Projekt finden können, sollten Sie das jetzt tun.i\nBesuchen Sie Ihr Projekt während Sie angemeldet sind und wählen Sie 'Project Admin' von den\nMenüs auf der linken Seite.\n\nGenießen Sie das System und erzählen Sie anderen über $7. Lassen Sie es uns wissen,\nwenn dort irgend etwas ist, wobei wir Ihnen helfen können.\n\n-- Die $7 Mannschaft
+classgroup	acceptedproject	Ihre Projekt-Registrierung für $7 wurde genehmigt.\n\nVollständiger Name des Projektes:  $1\nUnix-Name des Projektes:  $2\nCVS-Server:         cvs.$2.$3\nShell/Web-Server:   $2.$3\n\nIhr DNS wird bis zu einem Tag benötigen, bis es für Ihre Site funktioniert.\nWährend Sie auf Ihre DNS-Auflösung warten, möchten Sie sich vielleicht an Ihrer Shell \n$4 anmelden und Ihr CVS auf $5 umstellen.\n\nFalls nach 6 Stunden Ihre Shell-/CVS-Accounts immer noch nicht funktionieren, öffnen Sie bitten ein Support-Ticket damit wir einen Blick auf das Problem werfen können.\nBitte beachten Sie, dass alle Shell-/CVS-Accounts für Telnet geschlossen sind und nur mit SSH1 funktionieren.\n\nIhre Website ist über Ihren Shell-Account zugänglich. Bitte lesen Sie\ndie Site-Dokumentation (siehe Link unten) über korrekte Verwendung, verfügbare\nServices und die Verzeichnisstruktur des Accounts.\n\nWenn Sie Ihre eigenei\nProjekt-Seite auf $7 besuchen, während Sie angemeldet sind, finden Sie eine\n\nzusätzlichen Menüpunkt auf der linken Seite mit der Bezeichnung 'Projekt-Admin'.\n\nWir empfehlen Ihnen dringend , dass Sie jetzt $7 besuchen und eine öffentlichei\nBeschreibung für Ihr Projekt erstellen. Das können Sie tun, wenn Sie Ihre Projektseite besuchen, während Sie angemeldet/eingeloggt sind, und Sie 'Projekt-Admin' von den Menüsi\nauf der linken Seite auswählen (oder durch besuchen von http://$3/project/admin/?group_id=$6\nnach dem Anmelden).\n\nIhr Projekt wird auch nicht in unserem Software Katalog (Liste der gehosteten Projekte auf $7) aufgeführt, bis Sie Ihr Projekt dafür kategorisieren. Damit Leute Ihr Projekt finden können, sollten Sie das jetzt tun.i\nBesuchen Sie Ihr Projekt während Sie angemeldet sind und wählen Sie 'Project Admin' von den\nMenüs auf der linken Seite.\n\nGenießen Sie das System und erzählen Sie anderen über $7. Lassen Sie es uns wissen,\nwenn dort irgend etwas ist, wobei wir Ihnen helfen können.\n\n-- Die $7 Mannschaft
 classgroup	acceptedprojecttitle	$1 Projekt genehmigt
-classgroup	newprojectnotification	Ein neues $1 Projekt wurde vorgeschlagen/angemeldet\n\nVoller Name des Projektes:  $2\nVorgeschlagene Beschreibung: $3\nLizenz: $4\n\nBitte besuchen Sie die folgende URL, um dieses Projekt zu genehmigen oder abzuweisen:\nhttp://$5/admin/approve-pending.php
-classgroup	newprojectnotification_submitter	Ein neues $1 Projekt wurde angemeldet/vorgeschlagen\n\nVoller Name des Projektes:  $2\nAngegebene Beschreibung: $3\nLizenz: $4\n\nDas $1-Admin-Team wird jetzt Ihre Projekt-Anmeldung überprüfen. Sie werden  über deren Entscheidung benachrichtigt.
+classgroup	newprojectnotification	Ein neues $1 Projekt wurde vorgeschlagen/angemeldet\n\nVollständiger Name des Projektes:  $2\nVorgeschlagene Beschreibung: $3\nLizenz: $4\n\nBitte besuchen Sie die folgende URL, um dieses Projekt zu genehmigen oder abzuweisen:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification_submitter	Ein neues $1 Projekt wurde angemeldet/vorgeschlagen\n\nVollständiger Name des Projektes:  $2\nAngegebene Beschreibung: $3\nLizenz: $4\n\nDas $1-Admin-Team wird jetzt Ihre Projekt-Anmeldung überprüfen. Sie werden über deren Entscheidung benachrichtigt.
 classgroup	newprojectnotificationtitle	Neues $1 Projekt vorgeschlagen
-classgroup	rejectedproject	Ihre Projekt-Registrierung für $3 wurde verweigert.\n\nVoller Projekt-Name:  $1nUnix-Name des Projektes:  $2\n\nGünde für die negative Entscheidung:\n\n
+classgroup	rejectedproject	Ihre Projekt-Registrierung für $3 wurde verweigert.\n\nVollständiger Projekt-Name:  $1nUnix-Name des Projektes:  $2\n\nGünde für die negative Entscheidung:\n\n
 classgroup	rejectedprojecttitle	$1 Projekt abgelehnt
 common	login	Anmelden
 common	logout	Abmelden
@@ -546,12 +546,12 @@ developer_monitor_choose_user	title	Wählen Sie zuerst einen Benutzer
 developer_rate	cannot_rate_yourself	Sie können sich nicht selbst bewerten
 developer_rate	invalid_rating_value	FEHLER - ungültiger Wert	
 developer_rate	ratings_recorded	Bewertungen aufgenommen
-developer_rate	ratings_recorded_body	Sie können diese Person noch einmal (anders) bewerten indem Sie einfach wieder deren Berwertungs-Seite aufrufen und die Information noch einmal übermitteln.
+developer_rate	ratings_recorded_body	Sie können diese Person noch einmal (anders) bewerten, indem Sie einfach wieder deren Berwertungs-Seite aufrufen und die Information noch einmal übermitteln.
 developer_rate	title	Benutzer-Bewertung
 developer_rate	turned_off_body	Sie hatten die Teilnahme am Bewertungssystem nicht ausgewählt
 developer_rate	turned_off_title	Bewertungen ausgeschaltet
 docman	description	Beschreibung
-docman	error_no_docs	Dieses Projekt hat keine (sichtbare) Doku
+docman	error_no_docs	Dieses Projekt hat keine (sichtbare) Dokumentation
 docman	error_no_groups_defined	Keine Dokumenten-Gruppe definiert
 docman	submit_new	Neue Dokumentation übermitteln
 docman	turned_off	Bei diesem Projekt wurde der Doku-Manager ausgeschaltet
@@ -601,12 +601,12 @@ docman_new	section	Projekt: $1
 docman_new	state	Stand
 docman_new	submit	Informationen abschicken
 docman_new	submitted_successfully	Dokument erfolgreich übermittelt
-docman_new	title	Dokumenten-Manager: Übermittle Neue Dokumentation
+docman_new	title	Dokumenten-Manager: Übermittle neue Dokumentation
 docman_new	upload_file	Datei hochladen	
 error	not_found	SEITE NICHT GEFUNDEN
 error	title	Angeforderte Seite nicht gefunden (Fehler 404)
 exit	choose_a_group	Fehler - Wähle eine Gruppe
-exit	choose_group_body	Es wurde keine Gruppen-ID gwählt
+exit	choose_group_body	Es wurde keine Gruppen-ID gewählt
 exit	choose_group_title	FEHLER - Es wurde keine Gruppen-ID gewählt
 exit	exiting_with_error	Beendigung mit Fehler
 exit	missing_parameters_body	Fehler - es fehlen benötigte Parameter
@@ -634,24 +634,24 @@ forum_admin_addforum	forum_created	Forum erfolgreich angelegt
 forum_admin_addforum	forum_description	Beschreibung
 forum_admin_addforum	forum_name	Name des Forums
 forum_admin_addforum	is_public	Ist es öffentlich?
-forum_admin_addforum	section	Forums-Administration
+forum_admin_addforum	section	Foren-Administration
 forum_admin_addforum	title	Forum hinzufügen
 forum_admin_changestatus	change_status	Ändere Foren-Status
 forum_admin_changestatus	intro	Sie können hier Foren-Merkmale einstellen. Bitte beachten Sie, dass private Foren von Mitgliedern Ihres Projektes weiterhin gelesen werden können, aber nicht von der allgemeinen Öffentlichkeit.
 forum_admin_changestatus	no_forums_found	Keine Foren gefunden
-forum_admin_changestatus	section	Forums-Administration
-forum_admin_changestatus	title	Ändere den Forums-Status
-forum_admin_changestatus	update_successful	Forums-Info erfolgreich aktualisiert
-forum_admin_delete	section	Forums-Administration
+forum_admin_changestatus	section	Foren-Administration
+forum_admin_changestatus	title	Ändere den Foren-Status
+forum_admin_changestatus	update_successful	Foren-Info erfolgreich aktualisiert
+forum_admin_delete	section	Foren-Administration
 forum_admin_delete	title	Lösche Forum
 forum_admin_delete_message	enter_message_id	Geben Sie eine Nachrichten-ID ein
-forum_admin_delete_message	section	Forums-Administration
+forum_admin_delete_message	section	Foren-Administration
 forum_admin_delete_message	title	Lösche eine Nachricht
 forum_admin_delete_message	warning	WARNUNG! Sie sind dabei, eine Nachricht und ihre Antworten für immer zu löschen!!
 forum_admin_delete_messages	messages_deleted	$1 Nachrichten gelöscht
 forum_common	error_adding_forum	Fehler beim Anlegen eines Forums
-forum_common	error_min_desc_length	Die Forums-Beschreibung muss mindestens 10 Buchstaben lang sein
-forum_common	error_min_name_length	Der Forums-Name muss mindestens 3 Buchstaben lang sein
+forum_common	error_min_desc_length	Die Foren-Beschreibung muss mindestens 10 Buchstaben lang sein
+forum_common	error_min_name_length	Der Foren-Name muss mindestens 3 Buchstaben lang sein
 forum_common	error_save_when_logged_in	Sie können nur speichern, wenn Sie auch angemeldet sind.
 forum_common	error_set_monitor	Sie können nur Foren beobachten/überwachen, wenn Sie angemeldet sind.
 forum_common	error_unable_to_add_monitor	Konnte Überwachung nicht hinzufügen
@@ -665,11 +665,11 @@ forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Ung
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() kein gültiges Vorgänger-Nachrichten-Objekt
 forum_common_forummessage	error_not_logged	Sie müssen angemeldet sein, wenn Sie Nachrichten posten wollen.
 forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting fehlgeschlagen 
-forum_common_forummessage	error_required_fields	Die Nachricht muss eine Hauptteil (Body) und einen Betreff beinhalten
-forum_common_forummessage	forum_message	Forums-Nachricht
+forum_common_forummessage	error_required_fields	Die Nachricht muss einen Hauptteil (Body) und einen Betreff beinhalten
+forum_common_forummessage	forum_message	Foren-Nachricht
 forum_common_forummessage	no_valid_forum_object	ForumMessage:: Kein gültiges Foren-Objekt
 forum_errors	error_determining_forum_id	Fehler bei der Ermittlung von 'forum_id'
-forum_errors	error_getting_forum	Fehler beim Erhalten des Forums
+forum_errors	error_getting_forum	Fehler beim Einlesen des Forums
 forum_forum	author	Autor
 forum_forum	changeview	Wechsel der Ansicht
 forum_forum	date	Datum
@@ -725,7 +725,7 @@ forum_utils	erroradd	Fehler beim Hinzufügen eines Forums
 forum_utils	errorfollowup	Versuch auf eine Nachricht zu antworten, die nicht existiert.
 forum_utils	errorpost	Das Einstellen der Nachricht ist gescheitert
 forum_utils	feedbacklogin	Sie könnten eine Nachricht abschicken, wenn Sie angemeldet wären.
-forum_utils	htmltag	HTML tags werden in Ihrer Nachricht als Text angezeigt
+forum_utils	htmltag	HTML-Tags werden in Ihrer Nachricht als Text angezeigt
 forum_utils	latest	Letzte Neuigkeiten
 forum_utils	loggedin	Angemeldet:
 forum_utils	mailnotsent	E-Mail nicht verschickt - Abonnenten
@@ -736,19 +736,19 @@ forum_utils	monitor	Überwache Forum
 forum_utils	news	Neuigkeiten
 forum_utils	nonewsitem	Fehler - diese Nachricht wurde nicht gefunden
 forum_utils	notfound	Nicht gefunden
-forum_utils	postanon	Sie posten anonym, da sie nicht angemeldet sind
+forum_utils	postanon	Sie posten anonym, da Sie nicht angemeldet sind
 forum_utils	postcomment	Poste Kommentar
 forum_utils	posted	Nachricht veröffentlicht
 forum_utils	postedby	Veröffentlicht von
 forum_utils	reply	antworten
-forum_utils	subject Betreff:
+forum_utils	subject	Betreff:
 forum_utils	summary	Zusammenfassung
 frs	file_download	Downloaden
 frs	file_monitor	Überwachen
 frs	file_notes	Anmerkungen
 frs	file_package	Paket
 frs	file_rel_date	Datum
-frs	latest_file_releases	Letzte Dateireleases
+frs	latest_file_releases	Letzte Datei-Releases
 general	add	Hinzufügen
 general	browse	Durchsuchen
 general	cancel	Abbrechen
@@ -788,7 +788,7 @@ group	long_scm	SCM-Baum
 group	long_docman	DocManager: Projekt-Dokumentation
 group	long_forum	Öffentliche Foren
 group	long_ftp	Anonymer FTP-Zugriff
-group	long_homepage	Projekthomepage
+group	long_homepage	Projekt-Homepage
 group	long_mail	Mailinglisten
 group	long_news	Letzte Neuigkeiten
 group	long_patch	Patch-Verwaltung
@@ -816,7 +816,7 @@ help_trove_cat	full_category_name	Vollständiger Kategoriename
 help_trove_cat	short_name	Kurzname
 home	about_blurb	  GForge ist ein <b>freier Dienst</b> für <a href="http://www.opensource.org">Open Source</a> Entwickler und bietet einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking, Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte Dateiarchivierung, Backups und vollständige Verwaltung per Web-Interface.  <br>   <p> <b>Feedback und Teilnahme an der Site</b> <p> Um GForge bestmöglich zu nutzen, sollten Sie sich <a href="/account/register.php">als Benutzer anmelden</a>. Mit einem Benutzeraccount können Sie am vollen Spektrum der Website teilhaben. Natürlich können Sie GForge auch ohne Registrierung nutzen, haben dann allerdings nicht auf alle Bereiche vollen Zugriff. <p>   <br> <b>Starten Sie Ihr eigenes Projekt</b> <p> <a href="/account/register.php">Melden Sie sich als Benutzer an</a>, <a href="/account/login.php">loggen Sie sich ein</a> und <a href="/register/">registrieren Sie Ihr Projekt</a>! <p> Vielen Dank. Sie machen eine einfache Webseite sehr glücklich. 
 home	about_blurb	  GForge ist ein <b>freier Dienst</b> für <a href="http://www.opensource.org">Open Source</a> Entwickler und bietet einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking, Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte Dateiarchivierung, Backups und vollständige Verwaltung per Web-Interface.  <br>   <p> <b>Feedback und Teilnahme an der Site</b> <p> Um GForge bestmöglich zu nutzen, sollten Sie sich <a href="/account/register.php">als Benutzer anmelden</a>. Mit einem Benutzeraccount können Sie am vollen Spektrum der Website teilhaben. Natürlich können Sie GForge auch ohne Registrierung nutzen, haben dann allerdings nicht auf alle Bereiche vollen Zugriff. <p>   <br> <b>Starten Sie Ihr eigenes Projekt</b> <p> <a href="/account/register.php">Melden Sie sich als Benutzer an</a>, <a href="/account/login.php">loggen Sie sich ein</a> und <a href="/register/">registrieren Sie Ihr Projekt</a>! <p> Vielen Dank. Sie machen eine einfache Webseite sehr glücklich. 
-home	breaking_down_barriers	Wir reissen die Hindernisse zur Open-Source-Entwicklung nieder
+home	breaking_down_barriers	Wir reißen die Hindernisse zur Open-Source-Entwicklung nieder
 home	gforge_statistics	GForge Statistiken
 home	highest_ranked_users	Am höchsten eingestufte Benutzer
 home	hosted_projects	Registrierte Projekte
@@ -865,13 +865,13 @@ menu	other_site_mirrors	Mirrors
 menu	project_admin	Projektadministrator
 menu	project_help_wanted	Projekthilfe gesucht
 menu	project_summary	Projektübersicht
-menu	projectree	Projekt Baum
+menu	projectree	Projektbaum
 menu	register_project	Registriere Projekt
 menu	search	Suche
-menu	software_map	Softwarekarte
+menu	software_map	Software-Karte
 menu	submit	Erstellen
 menu	top_projects	Top-Projekte
-my	about_blurb	Ihre personalisierte Seite enthält Buglisten und Aufgaben, die Ihnen zugeordnet sind, sowie eine Liste der Gruppen in denen Sie Mitglied sind.
+my	about_blurb	Ihre personalisierte Seite enthält Buglisten und Aufgaben, die Ihnen zugeordnet sind, sowie eine Liste der Gruppen, in denen Sie Mitglied sind.
 my	assigneditems	Mir zugeordnete Elemente
 my	bookmarks	Meine Bookmarks
 my	monitoredfile	Überwachte Dateimodule
@@ -882,9 +882,9 @@ my	no_monitored_filemodules_details	<p>Wenn Sie Dateien überwachen, bekommen Si
 my	no_monitored_forums	Sie beobachten keine Foren.
 my	no_monitored_forums_details	<p>Wenn Sie Foren beobachten, werden Sie bei neuen Nachrichten über eine EMail benachrichtigt, die einen Link zu der neuen Nachricht enthält.</p><p>Sie können Foren beobachten, indem Sie "Überwache Forum" im jeweiligen Diskussionsforum anklicken.</p>
 my	no_open_tasks	Sie haben keine offenen Aufgaben, die Ihnen zugeordnet sind.
-my	no_projects	Sie sind in keinem aktiven Projekt Mitglied.
-my	no_tracker_items_assigned	Sie haben keine offenen Tracker Elemente, die Ihnen zugeordnet sind.
-my	no_tracker_items_submitted	Sie haben keine offenen Tracker Elemente, die von Ihnen übermittelt wurden.
+my	no_projects	Sie sind kein Mitglied eines aktiven Projekts.
+my	no_tracker_items_assigned	Sie haben keine offenen Tracker-Elemente, die Ihnen zugeordnet sind.
+my	no_tracker_items_submitted	Sie haben keine offenen Tracker-Elemente, die von Ihnen übermittelt wurden.
 my	pending_news_bytes_3	Klicken Sie hier.
 my	projects	Meine Projekte
 my	submitteditems	Meine übermittelten Elemente
@@ -998,8 +998,8 @@ pm_include_taskhtml	date	Datum
 pm_include_taskhtml	depend_info	Diese Aufgabe hängt von dieser Aufgabe ab
 pm_include_taskhtml	field	Feld
 pm_include_taskhtml	no_changes	Es wurden keine Änderungen gemacht
-pm_include_taskhtml	no_comments	Es wurden keine Kommentare gemacht
-pm_include_taskhtml	no_depend_info	Keine anderen Aufgaben sind von dieser Aufgabe abhägig
+pm_include_taskhtml	no_comments	Es wurden keine Kommentare abgegeben
+pm_include_taskhtml	no_depend_info	Von dieser Aufgabe hängen keine anderen Aufgaben ab
 pm_include_taskhtml	old_value	Alter Wert
 pm_include_taskhtml	open_date	Startdatum
 pm_include_taskhtml	remove_relation	Entferne Beziehung
@@ -1015,10 +1015,10 @@ project_admin	section	Projekt: $1
 project_admin	shell_server	Group shell (SSH) server: 
 project_admin	shell_server_group_directory	Gruppenverzeichnis auf dem Shell-Server:  
 project_admin	short_description	Kurze Beschreibung: 
-project_admin	trove_categorization	Trove Categorization: 
+project_admin	trove_categorization	Suchkriterien: 
 project_admin	user_added	Benutzer erfolgreich hinzugefügt
 project_admin	user_removed	Benutzer erfolgreich gelöscht
-project_admin	www_directory	Project WWW directory on shell server: 
+project_admin	www_directory	WWW-Verzeichnis des Projekts auf dem Shell-Server: 
 project_admin_database	create	Erstelle
 project_admin_database	new_password	Neues Passwort
 project_admin_database	operations	Operationen
@@ -1038,7 +1038,7 @@ project_admin_editgroupinfo	use_surveys	Benutze Umfragen
 project_admin_editgroupinfo	use_tracker	Benutze Tracker
 project_admin_editimages	description	Beschreibung
 project_admin_editrelease	step_1	Step 1:   Edit Release
-project_admin_userpermedit	admin_tech	Admin  Tech
+project_admin_userpermedit	admin_tech	Admin Tech
 project_admin_userpermedit	not_available	Nicht verfügbar
 project_admin_userpermedit	project_admin	Projekt Administrator
 project_admin_userpermedit	remove	Entfernen
@@ -1096,7 +1096,7 @@ project_stats_utils	date	Datum
 project_stats_utils	days	Tage
 project_stats_utils	month	Lebensdauer
 project_stats_utils	page_views	Seitenabrufe
-project_stats_utils	project_did_not_exits	Projelt existierte zu diesem Zeitpunkt nicht.
+project_stats_utils	project_did_not_exits	Projekt existierte zu diesem Zeitpunkt nicht.
 project_stats_utils	stats_all_time	Statistiken für die gesamte Zeit
 project_stats_utils	stats_for_days	Statistiken für die letzten $1 Tage
 project_stats_utils	stats_for_months	Statistiken für die letzten $1 Monate
@@ -1108,37 +1108,37 @@ register	i_agree	ICH STIMME ZU
 register	i_disagree	ICH STIMME NICHT ZU
 register	invalid_full_name	Ungültiger ausführlicher Name
 register	invalid_unix_name	Ungültiger Unixname
-register	license_type	Public domain</a><li>Nur Webseite<li>Andere/Proprietäre Lizens</ul><p><strong>Lizens für dieses Projekt</strong><br/ ><strong>Ihre Lizens:</strong><br />
+register	license_type	Public domain</a><li>Nur Webseite<li>Andere/Proprietäre Lizenz</ul><p><strong>Lizenz für dieses Projekt</strong><br/ ><strong>Ihre Lizenz:</strong><br />
 register	maximum_description	Maximale Länge für die Projektbeschreibung ist 255 Zeichen
 register	no_license_chosen	Sie haben keine Lizenz ausgewählt
 register	no_vcs_choosen	Keine gültige Versionsverwaltung ausgewählt.
 register	project_description	<h3>4. Öffentliche Projektbeschreibung</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
 register	project_full_name	<h3>1. Vollständiger Projektname</h3><p>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).</p>Full Name:<br/>
 register	project_information	Projektinformation
-register	project_license	<h3>3. Lizens</h3> <p><strong><em>If you are applying for a website-only project, please select "website-only" from the choices below and proceed.</em></strong><p>$1 was created to advance Open Source software development. To keep things simple, we are relying on the outstanding work of the <a href="http://www.opensource.org">Open Source Initiative</a> for our licensing choices. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p>Choosing a license is a serious decision. Please take some time to read the text (and our explanations) of several licenses before making a choice about your project. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
-register	project_unix_name	<h3>5. Unix Projektname</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Unix Name:<br/>
+register	project_license	<h3>3. Lizenz</h3> <p><strong><em>If you are applying for a website-only project, please select "website-only" from the choices below and proceed.</em></strong><p>$1 was created to advance Open Source software development. To keep things simple, we are relying on the outstanding work of the <a href="http://www.opensource.org">Open Source Initiative</a> for our licensing choices. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p>Choosing a license is a serious decision. Please take some time to read the text (and our explanations) of several licenses before making a choice about your project. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
+register	project_unix_name	<h3>5. Unix-Projektname</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Unix Name:<br/>
 register	purpose_and_summarization	<h3>2. Ziel des Projekts und Zusammenfassung</h3><p><strong></strong><p><strong> Please provide detailed, accurate description of your project and what $1 resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on $1, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>
-register	registration_complete	Registration vollständig
-register	title	Neue Projekt Registration
-register	unix_group_name_already_taken	Unix name bereits in Benutzung
-register_complete	section	Neue Projekt Registration
-register_complete	title	Registration vollständig
-register_projectinfo	section	Neue Projekt Registration
-register_projectinfo	title	Projekt Information
-register_requirements	section	Neue Projekt Registration
-register_requirements	title	Services  Requirements
-register_tos	section	Neue Projekt Registration
-scm_index	browseit	Durchsuche CVS Repository
+register	registration_complete	Registrierung abgeschlossen
+register	title	Neue Projekt-Registrierung
+register	unix_group_name_already_taken	Unix-Name bereits verwendet
+register_complete	section	Neue Projekt-Registrierung
+register_complete	title	Registrierung vollständig
+register_projectinfo	section	Neue Projekt-Registrierung
+register_projectinfo	title	Projekt-Information
+register_requirements	section	Neue Projekt-Registrierung
+register_requirements	title	Dienste  Anforderungen
+register_tos	section	Neue Projekt-Registrierung
+scm_index	browseit	Durchsuche CVS-Repository
 scm_index	developername	Entwicklername
 scm_index	modulename	Modulname
-scm_index	nohistory	Für dieses Projekt existiert keine CVS Geschichte.
+scm_index	nohistory	Für dieses Projekt existiert keine CVS-Geschichte.
 searchbox	forum	Dieses Forum
 searchbox	people	Personen
 searchbox	search	Suche
 searchbox	skill	Fähigkeiten
 searchbox	task	Aufgaben
 sendmessage	contact	Kontakt
-sendmessage	email	Ihre E-Mail Adresse
+sendmessage	email	Ihre E-Mail-Adresse
 sendmessage	error_user_not_exist	Fehler - dieser Benutzer existiert nicht
 sendmessage	message	Nachricht
 sendmessage	message_sent	Nachricht wurde verschickt
@@ -1150,7 +1150,7 @@ session	cannotinit	FEHLER - Kann Session nicht initialisieren
 session	deleted	Account gelöscht
 session	invalidpasswd	Ungültiges Passwort oder Benutzername
 session	missingpasswd	Fehlendes Passwort oder Benutzername
-session	notactive	Acount nicht aktiv
+session	notactive	Account nicht aktiv
 session	suspended	Account suspendiert
 snippet_addversion	changes	Änderungen:
 snippet_addversion	important	WICHTIG!
@@ -1173,9 +1173,9 @@ top_mostactive	project_name	Projektname
 top_mostactive	section	Top Projekte
 top_mostactive	title	Aktivsten Projekte: $1
 top_mostactive	updated_daily	Täglich aktualisiert
-top_toplist	last_rank	Letzter Rank
+top_toplist	last_rank	Aktueller Rang
 top_toplist	project_name	Projektname
-top_toplist	section	Topprojekte
+top_toplist	section	Top-Projekte
 top_topusers	real_name	Name
 top_topusers	user_name	Benutzername
 tracker	any	Egal
@@ -1210,7 +1210,7 @@ tracker	unassigned	Nicht zugeordnet
 tracker	updated_successful	Erfolgreich aktualisiert
 tracker_add	for_project	Für Projekt
 tracker_add	submit	Abschicken
-tracker_admin	add_permissions	Add/Update Users  Permissions
+tracker_admin	add_permissions	Benutzerrechte hinzufügen / löschen
 tracker_admin	category_inserted	Kategorie eingefügt
 tracker_admin	category_name	Name der Kategorie
 tracker_admin	category_updated	Kategorie aktualisiert
@@ -1240,13 +1240,13 @@ tracker_admin_update_group	title	Modifiziere eine Gruppe f": $1
 tracker_admin_update_type	allow_anonymous	Erlaube anonyme Beiträge
 tracker_admin_update_type	days_overdue	Tage bis überfällig angenommen
 tracker_admin_update_type	description	Beschreibung
-tracker_admin_update_type	display_resolution	Zeige "Lösungs" box
+tracker_admin_update_type	display_resolution	Zeige "Lösungs"-Box
 tracker_admin_update_type	email_all_changes	Schicke E-Mail bei allen Änderungen
 tracker_admin_update_type	publicy_available	Öffentlich sichtbar
 tracker_admin_update_type	send_submissions	Schicke E-Mail bei Neueinträgen an
 tracker_admin_update_type	title	Aktualisiere $1
-tracker_artifact	error_body_required	Artifact: Message Body Is Required
-tracker_artifact	error_summary_required	Artifact: Zusammenfassung der Nachricht wird benötigt
+tracker_artifact	error_body_required	Artefakt: Rumpf der Nachricht erforderlich
+tracker_artifact	error_summary_required	Artefakt: Zusammenfassung der Nachricht wird benötigt
 tracker_artifact	logged_in_no	Angemeldet: NEIN
 tracker_artifact	logged_in_yes	Angemeldet: JA
 tracker_artifact	nothing_changed	Keine Änderungen - Aktualisierung abgebrochen
@@ -1283,7 +1283,7 @@ tracker_detail	attached_files	Angehangene Dateien
 tracker_detail	build_task_relation	Erstelle Aufgabenzusammenhang
 tracker_detail	changes	Änderungen
 tracker_detail	description	Beschreibung
-tracker_detail	no_files_attached	Keine Dateien momentan beigef"gt
+tracker_detail	no_files_attached	Momentan keine Dateien angehängt
 tracker_mod	date_closed	Datum geschlossen
 tracker_mod	date_submitted	Datum abgeschickt
 tracker_mod	delete	Löschen
@@ -1293,17 +1293,17 @@ tracker_taskmgr	task	Aufgabe
 trove_list	projects	$1 Projekte
 user_home	contact	Kontakt
 user_home	diary_notes	Tagebuch und Notizen
-user_home	diary_notes_entries	Tagebuch/Notizen Einträge:
+user_home	diary_notes_entries	Tagebuch/Notiz-Einträge:
 user_home	diary_notes_monitor	Beobachte dieses Tagebuch
 user_home	diary_notes_view	Zeige Tagebuch/Notizen
-user_home	email	E-Mail Adresse
+user_home	email	E-Mail-Adresse
 user_home	member_of	Dieser Entwickler ist Mitglied bei den folgenden Projekten:
 user_home	message	Nachricht
 user_home	name	Ihr Name
 user_home	no_projects	Dieser Entwickler ist kein Mitglied bei einem Projekt.
 user_home	peer_rating_disabled	Benutzer wollte nicht am Peer-Rating teilnehmen
 user_home	personal_information	Persönliche Information
-user_home	project_info	Projekt Info
+user_home	project_info	Projekt-Info
 user_home	real_name	Echter Name
 user_home	send	Schicke Nachricht
 user_home	send_a_message	Schicke Nachricht an 
