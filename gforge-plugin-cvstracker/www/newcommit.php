@@ -17,13 +17,14 @@
  *
  */
 require_once('squal_pre.php');
-require_once('plugins/cvstracker/cvstracker.conf');
+require_once('plugins/cvstracker/config.php');
 
 /**
  * Getting POST variables
  * UserName, Repository, Path, FileName, PrevVersion, ActualVersion, Log,
  * ArtifactNumbers and TaskNumbers
  */
+$Config = array();
 $Config['UserName']        = $_POST['UserName'];
 $Config['Repository']      = $_POST['Repository'];
 $Config['Path']            = $_POST['Path'];
@@ -95,7 +96,7 @@ function parseConfig($Config)
  */
 function addArtifactLog($Config, $GroupId, $Num)
 {
-	$Result = array();
+	$return = array();
 	$Query = "SELECT * from artifact,artifact_group_list WHERE ".
 		"artifact.group_artifact_id=artifact_group_list.group_artifact_id ".
 		"AND artifact_group_list.group_id=".
@@ -103,7 +104,7 @@ function addArtifactLog($Config, $GroupId, $Num)
 	$Result = db_query($Query);
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
-		$Result['Error'] .= "Artifact ".$Num." Not Found.";
+		$return['Error'] .= "Artifact ".$Num." Not Found.";
 	}
 
 	if ($Rows == 1) {
@@ -114,7 +115,7 @@ function addArtifactLog($Config, $GroupId, $Num)
 		$DBRes = db_query($Query);
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
-			$Result['Error']='Problems with Artifact $Num';
+			$return['Error']='Problems with Artifact $Num: '.db_error($DBRes);
 			db_rollback();
 		} else {
 			$Query = "INSERT INTO plugin_cvstracker_data_master ".
@@ -134,9 +135,9 @@ function addArtifactLog($Config, $GroupId, $Num)
 
 	}
 	if ($Rows > 1) {
-		$Result['Error'] .= "Unknown problem adding Tracker:$Num.";
+		$return['Error'] .= "Unknown problem adding Tracker:$Num.";
 	}
-	return $Result;
+	return $return;
 }
 
 /**
@@ -150,6 +151,7 @@ function addArtifactLog($Config, $GroupId, $Num)
  */
 function addTaskLog($Config, $GroupId, $Num)
 {
+	$return = array();
 	$Query = "SELECT * from project_task,project_group_list WHERE ".
 		"project_task.group_project_id=".
 		"project_group_list.group_project_id ".
@@ -159,7 +161,7 @@ function addTaskLog($Config, $GroupId, $Num)
 	$Result = db_query($Query);
 	$Rows = db_numrows($Result);
 	if ($Rows == 0) {
-		$Result['Error'] .= "Task:$Num Not Found.";
+		$return['Error'] .= "Task:$Num Not Found.";
 	}
 	if ($Rows == 1) {
 		db_begin();
@@ -169,7 +171,7 @@ function addTaskLog($Config, $GroupId, $Num)
 		$DBRes = db_query($Query);
 		$HolderID= db_insertid($DBRes,'plugin_cvstracker_data_artifact','id');
 		if (!$DBRes || !$HolderID) {
-			$Result['Error']='Problems with Task $Num';
+			$return['Error']='Problems with Task $Num: '.db_error($DBRes);
 			db_rollback();
 		} else {
 			$Query = "INSERT INTO plugin_cvstracker_data_master ".
@@ -188,9 +190,9 @@ function addTaskLog($Config, $GroupId, $Num)
 		}
 	}
 	if ($Rows > 1) {
-		$Result['Error'] .= "Unknown problem adding Task:$Num.";
+		$return['Error'] .= "Unknown problem adding Task:$Num.";
 	}
-	return $Result;
+	return $return;
 }
 
 $Result = parseConfig($Config);
