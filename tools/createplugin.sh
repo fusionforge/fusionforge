@@ -19,6 +19,8 @@ else
 		mkdir $plugdir
 		mkdir $plugdir/bin
 		mkdir $plugdir/etc
+		mkdir $plugdir/etc/plugins
+		mkdir $plugdir/etc/plugins/$minus
 		mkdir $plugdir/debian
 		mkdir $plugdir/include
 		mkdir $plugdir/include/languages
@@ -538,9 +540,16 @@ print STDOUT "\$world on STDOUT!\n" ;
 print STDERR "\$world on STDERR!\n" ;
 FIN
 
-echo Creating $plugdir/etc/$minus.conf
-cat > $plugdir/etc/$minus.conf <<FIN
+echo Creating $plugdir/etc/plugins/$minus/$minus.conf
+cat > $plugdir/etc/plugins/$minus/$minus.conf <<FIN
 \$world = 'Earth' ;
+FIN
+
+echo Creating $plugdir/etc/plugins/$minus/config.php
+cat > $plugdir/etc/plugins/$minus/config.php <<FIN
+<?php
+\$world = 'Earth';
+?>
 FIN
 
 echo Creating $plugdir/httpd.conf
@@ -972,9 +981,9 @@ echo Creating $plugdir/include/$minus-init.php
 cat > $plugdir/include/$minus-init.php <<FIN
 <?php
 
-require_once ('/usr/lib/gforge/plugins/$minus/include/${fullname}Plugin.class') ;
+require_once (\$GLOBALS['sys_plugins_path'].'/$minus/include/${fullname}Plugin.class') ;
 
-\$${fullname}PluginObject = new ${fullname}Plugin ;
+\$${fullname}PluginObject = new ${fullname}Plugin() ;
 
 register_plugin (\$${fullname}PluginObject) ;
 
