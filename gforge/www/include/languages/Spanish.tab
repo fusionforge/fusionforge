@@ -217,6 +217,7 @@ admin_approve_pending	approve	Aprobar
 admin_approve_pending	approve_all_on_this_page	Aprobar todo lo de esta página
 admin_approve_pending	approving_group	Aprobando Grupo:
 admin_approve_pending	approving_pending_projects	Aprobando los Projectos Pendientes
+admin_approve_pending	canned_responses	Usar plantilla de Respuesta
 admin_approve_pending	custom_response_title	Título y Texto de Respuestas Habituales
 admin_approve_pending	edit_project_details	[Editar Detalles de Proyectos]
 admin_approve_pending	error_creating_group	Error creando el objeto grupo
@@ -527,6 +528,7 @@ calendar	june	junio
 calendar	march	marzo
 calendar	may	mayo
 calendar	monday	lunes
+calendar	monthdatefmt	m-Y
 calendar	november	noviembre
 calendar	october	octubre
 calendar	onemonth	Un mes
@@ -896,6 +898,7 @@ general	sitename	$1
 general	submit	Enviar
 general	submit_edit	Enviar lo editado
 general	submitted_successfully	$1 fue enviado con éxito.
+general	to	hasta
 general	total	total
 general	turned_off	Este proyecto no se usa $1.
 general	update	Actualizar
@@ -1480,17 +1483,20 @@ project_admin	add_user	Añade usuario
 project_admin	addfromlist	Añadir usuarios desde lista
 project_admin	addfromlist1	Marque la caja al lado de usuario o usuarios que desea añadir. Su elección será recordada si hace click en una de las letras de abajo. Cuando acabe, haga click en "Terminar" para elegir los roles de los usuarios que está añadiendo.
 project_admin	addfromlist2	Elija el rol de cada usuario y presione &quot;Añadir todos&quot;.
+project_admin	choose_first_letter	<p>Elija la <strong>Primera Letra</strong> del nombre de la persona que desea añadir.</p>
 project_admin	docmanager_admin	Administración de Documentos
 project_admin	download_tarball	Descarga el tar nocturno del árbol CVS
 project_admin	edit_file_releases	Añadir/Editar Publicaciones
 project_admin	edit_member_permissions	Edita los Permisos del Miembro
 project_admin	file_releases	Publicación de Ficheros
+project_admin	finish	Finalizar
 project_admin	forum_admin	Administración de Foros
 project_admin	frs_admin	Administración de Ficheros
 project_admin	group_members	Miembros del Grupo
 project_admin	homepage_link	Enlace a la Página Inicial:
 project_admin	mail_admin	Administración de Correos
 project_admin	news_admin	Administración de Noticias
+project_admin	no_matching_user	<p>Ningún usuario encontrado</p>
 project_admin	packages	Paquetes
 project_admin	plugins_admin	Administración de Plugins (añadidos)
 project_admin	project_information	Información del Projecto Varia
@@ -2517,6 +2523,7 @@ survey_utils	error_this_group_has_turned_off	Error, este Grupo ha desactivado la
 survey_utils	show_results	Mostrar Resultados
 system	datefmt	Y-m-d H:i
 system	locale	es_ES
+system	shortdatefmt	d-m-Y
 system	strftimefmt	%H:%M %e %B %Y
 themes	section	Preferencias de cuenta
 themes	title	Ver/Cambiar Tema
@@ -2629,19 +2636,19 @@ tracker_admin	category_inserted	Categoría Insertada
 tracker_admin	category_name	Nombre de Categoría
 tracker_admin	category_updated	Categoría Actualizada
 tracker_admin	choose_datatype	Escoje un tipo de datos para introducir preferencias, categorías, grupos, usuarios y permisos
-#TO_TRANSLATE#tracker_admin	delete	Delete.
-#TO_TRANSLATE#tracker_admin	delete_warning	You are about to permanently and irretrievably delete this tracker and all its contents!
-#TO_TRANSLATE#tracker_admin	deleted	Successfully Deleted.
+tracker_admin	delete	Eliminar.
+tracker_admin	delete_warning	Está a punto de borrar permanentemente e irrevocablemente este registro y todo su contenido.
+tracker_admin	deleted	Eliminado con éxito.
 tracker_admin	error_inserting	Error al insertar
 tracker_admin	error_updating	Error al actualizar
 tracker_admin	group_inserted	Grupo Insertado
 tracker_admin	group_name	Nuevo Nombre de grupo
 tracker_admin	group_updated	Grupo Actualizado
 tracker_admin	intro	<h3>Crear nuevo Registro</h3><p>Puede utilizar este sistema para registrar clases de datos, ya que cada registro incluye separadamente usuario, grupo, categoría y lista de permisos. Puede cambiar fácilmente items entre registros si es necesario.</p><p>Los Registros pueden agruparse en "Tipos de Registros" y un dato individual es un "Registro".Por ejemplo: "Bugs" es un Tipo de Registros, y el informe de un bug es un Registro. Puede crear tantos "Tipos de Registros" como desee, pero recuerde que necesita crear categorías, grupos y permisos para cada tipo, con el consiguiente consumo de tiempo
-#TO_TRANSLATE#tracker_admin	permanently_delete_info	Permanently delete this tracker.
-#TO_TRANSLATE#tracker_admin	really_sure	I'm Really Sure.
+tracker_admin	permanently_delete_info	Borrar permanentemente este registro.
+tracker_admin	really_sure	Estoy completamente seguro.
 tracker_admin	section	Registro
-#TO_TRANSLATE#tracker_admin	sure	I'm Sure.
+tracker_admin	sure	Estoy seguro.
 tracker_admin	title	Administración
 tracker_admin	tracker_id	ID
 tracker_admin	tracker_title	Título
