@@ -2,7 +2,7 @@ Source: gforge
 Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
-Build-Depends-Indep: debhelper (>= 4.0), sharutils, docbook-to-man
+Build-Depends-Indep: debhelper (>= 4.1.16), sharutils, docbook-to-man
 Standards-Version: 3.5.10
 
 Package: gforge

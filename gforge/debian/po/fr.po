@@ -1,0 +1,372 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2003-07-04 23:56+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9
+#, fuzzy
+msgid "Your shell server"
+msgstr "Votre serveur de telechargement"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9
+#, fuzzy
+msgid "The hostname of the server that will host your Gforge shell accounts"
+msgstr ""
+"Le nom du serveur qui hébergera vos paquetages Gforge. Ce nom ne devrait pas "
+"être identique au nom de votre serveur SF principal."
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:18
+msgid "Your download server"
+msgstr "Votre serveur de telechargement"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:18
+#, fuzzy
+msgid ""
+"The hostname of the server that will host your Gforge packages.  It should "
+"not be the same as your main SF host."
+msgstr ""
+"Le nom du serveur qui hébergera vos paquetages Gforge. Ce nom ne devrait pas "
+"être identique au nom de votre serveur SF principal."
+
+#. Default
+#: ../gforge-db-postgresql.templates.dsfh-in:26
+#: ../gforge-dns-bind9.templates.dsfh-in:23
+msgid "admin"
+msgstr "admin"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:27
+#: ../gforge-dns-bind9.templates.dsfh-in:24
+msgid "The Gforge administrator login"
+msgstr "Le nom du compte de l'administrateur"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:27
+#: ../gforge-dns-bind9.templates.dsfh-in:24
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects."
+msgstr ""
+"Ce compte Gforge a tous les privilèges sur le système Gforge. Il sert entre "
+"autres à approuver la création de projets."
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:33
+msgid "Your IP address"
+msgstr "Votre adresse IP"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:33
+msgid ""
+"The IP address of the server that will host your Gforge installation. This "
+"is needed for the Apache virtualhosting configuration."
+msgstr ""
+"L'adresse IP du serveur qui hébergera votre installation de Gforge. Cette "
+"information est requise pour la configuration des hôtes virtuels d'Apache."
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:39
+#: ../gforge-dns-bind9.templates.dsfh-in:30
+msgid "The Gforge administrator password"
+msgstr "Mot de passe de l'administrateur"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:39
+#: ../gforge-dns-bind9.templates.dsfh-in:30
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects.  Please type a password here."
+msgstr ""
+"Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le "
+"saisir ici."
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:46
+#: ../gforge-dns-bind9.templates.dsfh-in:37
+msgid "The Gforge administrator password - again"
+msgstr "Mot de passe administrateur - confirmation"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:46
+#: ../gforge-dns-bind9.templates.dsfh-in:80
+msgid "Please re-type the password for confirmation."
+msgstr "Veuillez saisir le mot de passe de nouveau, pour confirmation."
+
+#. Default
+#: ../gforge-db-postgresql.templates.dsfh-in:51
+#: ../gforge-dns-bind9.templates.dsfh-in:42
+msgid "Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
+msgstr "Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:52
+#: ../gforge-dns-bind9.templates.dsfh-in:43
+msgid "The initial list of skills"
+msgstr "Liste de compétences"
+
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:52
+#: ../gforge-dns-bind9.templates.dsfh-in:43
+msgid ""
+"Gforge allows users to define a list of their skills, to be chosen amongst "
+"those present in the database.  This list is the initial list of skills that "
+"will enter the database.  Please enter the skill names separated by semi-"
+"colons `;'."
+msgstr ""
+"Les utilisateurs de Gforge peuvent afficher leurs niveaux de compétence dans "
+"différents domaines.  Cette liste est la liste initiale de ces domaines. "
+"Veuillez entrer les noms de ces domaines de compétence séparés par des "
+"points-virgules `;'."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:12
+msgid "Password used for the database"
+msgstr "Mot de passe utilisé pour la base de données"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:12
+msgid ""
+"The connecton to the DB system requires a password.  Please choose a "
+"password here."
+msgstr ""
+"La connexion à la base de données doit être authentifiée par un mot de "
+"passe.  Veuillez le choisir ici."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:18
+msgid "Password used for the database - again"
+msgstr "Mot de passe pour la base de données - confirmation"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:51
+msgid "The LDAP base DN"
+msgstr "Le nom du répertoire LDAP (DN)"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:51
+msgid ""
+"The DN is used to refer to the LDAP directory unambiguously.  You could use, "
+"for instance, \"dc=gforge,dc=example,dc=com\""
+msgstr ""
+"Le nom DN est utilisé pour identifier l'annuaire LDAP de manière unique. Par "
+"exemple, vous pourriez utiliser le DN \"dc=gforge,dc=exemple,dc=com\"."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:57
+msgid "The LDAP host"
+msgstr "Le serveur LDAP"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:57
+msgid "The hostname of the LDAP server."
+msgstr "Le nom d'hôte de votre serveur LDAP."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid "Do you want mail to ${noreply} to be deleted?"
+msgstr "Supprimer les e-mails pour ${noreply} ?"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid ""
+"Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
+"even some e-mail to that address too."
+msgstr ""
+"Gforge envoie fréquemment des e-mails depuis (et vers) l'adresse \"${noreply}"
+"\"."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid ""
+"It is advised that you let the package direct e-mail to that address to a "
+"black hole (/dev/null), unless you have another use for that address."
+msgstr ""
+"Il est conseillé de rediriger les e-mails vers cette adresse vers un trou "
+"noir, sauf si vous avez un autre usage pour cette adresse."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid "Answering \"yes\" here will perform that redirection."
+msgstr "Répondre \"oui\" ici mettra en place cette redirection."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:74
+msgid "LDAP password used to add users from the web"
+msgstr "Mot de passe LDAP pour l'ajout d'utilisateurs"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:74
+msgid ""
+"In order to add users into the LDAP directory from the web, you need to "
+"provide a password."
+msgstr ""
+"Vous avez besoin d'un mot de passe pour ajouter des utilisateurs à "
+"l'annuaire LDAP depuis le web.  Veuillez le saisir ici."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:80
+msgid "LDAP password - again"
+msgstr "Mot de passe LDAP - confirmation"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+msgid "Generate an SSL certificate"
+msgstr "N'oubliez pas de générer un certificat SSL"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+msgid ""
+"You need a valid SSL/TLS certificate to run Gforge. If you don't already "
+"have one, you'll have to run the \"mod-ssl-makecert\" command to generate "
+"one, and restart Apache afterwards."
+msgstr ""
+"Gforge a besoin d'un certificat de cryptographie SSL/TLS pour fonctionner.  "
+"Si vous n'en avez pas déjà un, vous devrez vous en fabriquer un à l'aide de "
+"la commande \"mod-ssl-makecert\". N'oubliez pas de redémarrer Apache par la "
+"suite."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+msgid ""
+"Please note you will not be able to start Apache if you have no such "
+"certificate."
+msgstr ""
+"NB : vous ne pourrez pas démarrer Apache si vous n'avez pas de certificat."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:96
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid "Gforge requires appropriate PAM-LDAP configuration"
+msgstr "Gforge a besoin d'une configuration PAM-LDAP correcte"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:96
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid ""
+"Gforge requires the libpam-ldap package to be configured appropriately.  You "
+"might need to \"dpkg-reconfigure libpam-ldap\" in order to fix incorrect "
+"parameters."
+msgstr ""
+"Gforge repose sur PAM-LDAP, et a donc besoin d'une configuration appropriée "
+"de cette bibliothèque.  Il se peut que vous ayez besoin d'utiliser \"dpkg-"
+"reconfigure libpam-ldap\" pour corriger des paramètres incorrects."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:96
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid ""
+"Known good values are: LDAP protocol version=3, make root database "
+"admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
+"for passwords=crypt.  Make sure that you type the same password for the "
+"libpam-ldap root password and the Gforge LDAP password."
+msgstr ""
+"Un jeu de paramètrs réputés corrects est le suivant: LDAP protocol version="
+"\"3\", make root database admin=\"yes\", root login account=\"cn=admin,"
+"dc=<votre-dc>\", crypt to use for passwords=\"crypt\".  En outre, vous "
+"devrez utiliser le même mot de passe pour le compte administrateur de libpam-"
+"ldap et pour le mot de passe LDAP de Gforge."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:109
+#, fuzzy
+msgid "Do you want a simple DNS setup?"
+msgstr "Voulez-vous mettre à jour ${file} ?"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:109
+msgid ""
+"You can have a simple DNS setup wich uses wildcards to map all project web-"
+"hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
+"or a complex setup wich allows you to have many servers as project web "
+"servers or CVS servers."
+msgstr ""
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:109
+msgid ""
+"Even though you have a simple DNS setup, you can still have seperate boxes "
+"for your project servers, it just assumes you have all the project web dirs "
+"on the same server and a single server for CVS."
+msgstr ""
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:123
+msgid "Do you want ${file} to be updated?"
+msgstr "Voulez-vous mettre à jour ${file} ?"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:123
+msgid ""
+"In order for Gforge to be fully deinstalled, some changes must be made to "
+"the ${file} file."
+msgstr ""
+"Pour désinstaller complètement Gforge, des modifications doivent être "
+"apportées au fichier ${file}."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:123
+msgid ""
+"I can either do them for you (and backup the current version in ${file}."
+"gforge-old), or write the changes to another file (${file}.gforge-new) and "
+"let you propagate the changes to ${file} yourself."
+msgstr ""
+"Je peux soit les faire automatiquement (en sauvegardant la version actuelle "
+"dans ${file}.gforge-old, soit écrire les modifications proposées dans "
+"${file}.gforge-new, et vous laisser propager ces modifications vers ${file} "
+"à votre guise."
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:123
+msgid "Shall I modify the ${file} automatically?"
+msgstr "Dois-je modifier ${file} automatiquement ?"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:136
+msgid "Please check ${file}"
+msgstr "Veuillez vérifier ${file}"
+
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:136
+msgid ""
+"You have chosen not to let the Gforge package update the ${file} file.  Very "
+"well, I have not changed it.  Instead, I have written the suggested changes "
+"into ${file}.gforge-new. Please check this file and apply the appropriate "
+"changes to ${file}."
+msgstr ""
+"Vous avez choisi de ne pas laisser le paquet Gforge modifier le fichier "
+"${file}.  Conformément à ce choix, les modifications ont été sauvegardées "
+"dans ${file}.gforge-new.  Veuillez vérifier ce fichier et appliquer les "
+"changements adéquats à ${file}, le cas échéant."

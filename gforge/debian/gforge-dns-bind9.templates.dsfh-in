@@ -9,83 +9,58 @@
 
 Template: gforge/shared/db_password
 Type: password
-Description: Password used for the database
+_Description: Password used for the database
  The connecton to the DB system requires a password.  Please choose a
  password here.
-Description-fr.UTF-8: Mot de passe utilisé pour la base de données
- La connexion à la base de données doit être authentifiée par un mot de
- passe.  Veuillez le choisir ici.
 
 Template: gforge/shared/db_password_confirm
 Type: password
-Description: Password used for the database - again
+_Description: Password used for the database - again
  Please re-type the password for confirmation.
-Description-fr.UTF-8: Mot de passe pour la base de données - confirmation
- Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/admin_login
 Type: string
-Default: admin
-Default-fr.UTF-8: admin
-Description: The Gforge administrator login
+_Default: admin
+_Description: The Gforge administrator login
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.
-Description-fr.UTF-8: Le nom du compte de l'administrateur
- Ce compte Gforge a tous les privilèges sur le système Gforge.
- Il sert entre autres à approuver la création de projets.
 
 Template: gforge/shared/admin_password
 Type: password
-Description: The Gforge administrator password
+_Description: The Gforge administrator password
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.  Please
  type a password here.
-Description-fr.UTF-8: Mot de passe de l'administrateur
- Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le
- saisir ici.
 
 Template: gforge/shared/admin_password_confirm
 Type: password
-Description: The Gforge administrator password - again
+_Description: The Gforge administrator password - again
  Please re-type the password for confirmation.
-Description-fr.UTF-8: Mot de passe administrateur - confirmation
- Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/skill_list
 Type: string
-Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-Default-fr.UTF-8: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-Description: The initial list of skills
+_Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+_Description: The initial list of skills
  Gforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of
  skills that will enter the database.  Please enter the skill names
  separated by semi-colons `;'.
-Description-fr.UTF-8: Liste de compétences
- Les utilisateurs de Gforge peuvent afficher leurs niveaux de compétence
- dans différents domaines.  Cette liste est la liste initiale de ces domaines.
- Veuillez entrer les noms de ces domaines de compétence séparés par des
- points-virgules `;'.
 
 Template: gforge/shared/ldap_base_dn
 Type: string
-Description: The LDAP base DN
+_Description: The LDAP base DN
  The DN is used to refer to the LDAP directory unambiguously.  You could use,
  for instance, "dc=gforge,dc=example,dc=com"
-Description-fr.UTF-8: Le nom du répertoire LDAP (DN)
- Le nom DN est utilisé pour identifier l'annuaire LDAP de manière unique.
- Par exemple, vous pourriez utiliser le DN "dc=gforge,dc=exemple,dc=com".
 
 Template: gforge/shared/ldap_host
 Type: string
-Description: The LDAP host
+_Description: The LDAP host
  The hostname of the LDAP server.
-Description-fr.UTF-8: Le serveur LDAP
- Le nom d'hôte de votre serveur LDAP.
 
 Template: gforge/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
-Description: Do you want mail to ${noreply} to be deleted?
+_Description: Do you want mail to ${noreply} to be deleted?
  Gforge sends plenty of e-mail from the "${noreply}" address,
  and maybe even some e-mail to that address too.
  .
@@ -93,34 +68,21 @@ Description: Do you want mail to ${noreply} to be deleted?
  black hole (/dev/null), unless you have another use for that address.
  .
  Answering "yes" here will perform that redirection.
-Description-fr.UTF-8: Supprimer les e-mails pour ${noreply} ?
- Gforge envoie fréquemment des e-mails depuis (et vers) l'adresse
- "${noreply}".
- .
- Il est conseillé de rediriger les e-mails vers cette adresse vers un trou
- noir, sauf si vous avez un autre usage pour cette adresse.
- .
- Répondre "oui" ici mettra en place cette redirection.
 
 Template: gforge/shared/ldap_web_add_password
 Type: password
-Description: LDAP password used to add users from the web
+_Description: LDAP password used to add users from the web
  In order to add users into the LDAP directory from the web, you need to
  provide a password.
-Description-fr.UTF-8: Mot de passe LDAP pour l'ajout d'utilisateurs
- Vous avez besoin d'un mot de passe pour ajouter des utilisateurs à
- l'annuaire LDAP depuis le web.  Veuillez le saisir ici.
 
 Template: gforge/shared/ldap_web_add_password_confirm
 Type: password
-Description: LDAP password - again
+_Description: LDAP password - again
  Please re-type the password for confirmation.
-Description-fr.UTF-8: Mot de passe LDAP - confirmation
- Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/mod_ssl_cert
 Type: note
-Description: Generate an SSL certificate
+_Description: Generate an SSL certificate
  You need a valid SSL/TLS certificate to run Gforge.
  If you don't already have one, you'll have to run the
  "mod-ssl-makecert" command to generate one, and restart Apache
@@ -128,18 +90,10 @@ Description: Generate an SSL certificate
  .
  Please note you will not be able to start Apache if you have no
  such certificate.
-Description-fr.UTF-8: N'oubliez pas de générer un certificat SSL
- Gforge a besoin d'un certificat de cryptographie SSL/TLS
- pour fonctionner.  Si vous n'en avez pas déjà un, vous devrez
- vous en fabriquer un à l'aide de la commande "mod-ssl-makecert".
- N'oubliez pas de redémarrer Apache par la suite.
- .
- NB : vous ne pourrez pas démarrer Apache si vous n'avez pas de
- certificat.
 
 Template: gforge/shared/pam_ldap_config
 Type: note
-Description: Gforge requires appropriate PAM-LDAP configuration
+_Description: Gforge requires appropriate PAM-LDAP configuration
  Gforge requires the libpam-ldap package to be configured
  appropriately.  You might need to "dpkg-reconfigure libpam-ldap" in
  order to fix incorrect parameters.
@@ -148,23 +102,11 @@ Description: Gforge requires appropriate PAM-LDAP configuration
  admin=yes, root login account="cn=admin,dc=<your-dc-here>", crypt to
  use for passwords=crypt.  Make sure that you type the same password
  for the libpam-ldap root password and the Gforge LDAP password.
-Description-fr.UTF-8: Gforge a besoin d'une configuration PAM-LDAP correcte
- Gforge repose sur PAM-LDAP, et a donc besoin d'une configuration
- appropriée de cette bibliothèque.  Il se peut que vous ayez besoin
- d'utiliser "dpkg-reconfigure libpam-ldap" pour corriger des
- paramètres incorrects.
- .
- Un jeu de paramètrs réputés corrects est le suivant: LDAP protocol
- version="3", make root database admin="yes", root login
- account="cn=admin,dc=<votre-dc>", crypt to use for
- passwords="crypt".  En outre, vous devrez utiliser le même mot de
- passe pour le compte administrateur de libpam-ldap et pour le mot de
- passe LDAP de Gforge.
 
 Template: gforge/shared/simple_dns
 Type: boolean
 Default: false
-Description: Do you want a simple DNS setup?
+_Description: Do you want a simple DNS setup?
  You can have a simple DNS setup wich uses wildcards to map all
  project web-hosts to a single IP, and direct all the cvs-hosts
  to a single CVS server, or a complex setup wich allows you to
@@ -178,7 +120,7 @@ Description: Do you want a simple DNS setup?
 Template: gforge/shared/replace_file_remove
 Type: boolean
 Default: false
-Description: Do you want ${file} to be updated?
+_Description: Do you want ${file} to be updated?
  In order for Gforge to be fully deinstalled, some changes must
  be made to the ${file} file.
  .
@@ -188,28 +130,12 @@ Description: Do you want ${file} to be updated?
  ${file} yourself.
  .
  Shall I modify the ${file} automatically?
-Description-fr.UTF-8: Voulez-vous mettre à jour ${file} ?
- Pour désinstaller complètement Gforge, des modifications
- doivent être apportées au fichier ${file}.
- .
- Je peux soit les faire automatiquement (en sauvegardant la version
- actuelle dans ${file}.gforge-old, soit écrire les modifications
- proposées dans ${file}.gforge-new, et vous laisser propager
- ces modifications vers ${file} à votre guise.
- .
- Dois-je modifier ${file} automatiquement ?
 
 Template: gforge/shared/file_changed
 Type: note
-Description: Please check ${file}
+_Description: Please check ${file}
  You have chosen not to let the Gforge package update the
  ${file} file.  Very well, I have not changed it.  Instead,
  I have written the suggested changes into ${file}.gforge-new.
  Please check this file and apply the appropriate changes
  to ${file}.
-Description-fr.UTF-8: Veuillez vérifier ${file}
- Vous avez choisi de ne pas laisser le paquet Gforge modifier
- le fichier ${file}.  Conformément à ce choix, les modifications ont
- été sauvegardées dans ${file}.gforge-new.  Veuillez vérifier
- ce fichier et appliquer les changements adéquats à ${file},
- le cas échéant.

@@ -1,8 +1,10 @@
 gforge (3.0-1+) unstable; urgency=low
 
-  * 
+  * [Roland] Applied patch provided by Denis Barbier <barbier@debian.org>
+    and the French l10 team, to switch the Debconf templates to po-debconf
+    (closes: #199939).  Many thanks, guys!
 
- -- Roland Mas <lolando@debian.org>  Thu,  3 Jul 2003 21:37:53 +0200
+ -- Roland Mas <lolando@debian.org>  Mon,  7 Jul 2003 21:28:41 +0200
 
 gforge (3.0-1) unstable; urgency=low
 
