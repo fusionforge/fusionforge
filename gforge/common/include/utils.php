@@ -466,7 +466,7 @@ function show_priority_colors_key() {
 
 		<table border="0"><tr>';
 
-	for ($i=1; $i<10; $i++) {
+	for ($i=1; $i<6; $i++) {
 		echo '
 			<td bgcolor="'.html_get_priority_color($i).'">'.$i.'</td>';
 	}
