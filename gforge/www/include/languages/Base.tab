@@ -1261,6 +1261,11 @@ pm_browse_my	section	Project $1 Task Manager
 pm_browse_my	title	Browse My Tasks
 pm_browse_open	section	Task Manager
 pm_browse_open	title	Browse Open Tasks
+pm_browsetask	admin_mass_update	<strong>Admin:</strong> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
+pm_browsetask	check_all	Check &nbsp;all
+pm_browsetask	clear_all	Clear &nbsp;all
+pm_browsetask	mass_update	Mass update
+pm_browsetask	no_change	No Change
 pm_browsetask	browse	Browse
 pm_browsetask	next	next 50
 pm_browsetask	overdue_tasks	* Denotes overdue tasks
@@ -1276,7 +1281,7 @@ pm_detailtask	pct_complete	Percent Complete
 pm_detailtask	priority	Priority
 pm_detailtask	section	Task Manager
 pm_detailtask	start_date	Start Date
-pm_detailtask	status	Status
+pm_detailtask	status	otatuse
 pm_detailtask	submitted_by	Submitted By
 pm_detailtask	task_summary	Task Summary
 pm_detailtask	title	Task Detail
