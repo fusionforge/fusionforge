@@ -1,5 +1,9 @@
 <?php
 
+if (!file_exists($sys_path_to_jpgraph.'jpgraph.php')) {
+	exit_error('Error', 'Package JPGraph not installed');
+}
+
 require_once($sys_path_to_jpgraph.'jpgraph.php');
 require_once($sys_path_to_jpgraph.'jpgraph_gantt.php');
 require_once('common/pm/ProjectTaskFactory.class');
@@ -105,5 +109,10 @@ $graph->Add( $todayline);
 
 // Display the Gantt chart
 $graph->Stroke();
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

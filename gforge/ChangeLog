@@ -1,5 +1,8 @@
 2003-10-21  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/pm/gantt.php: Exit with a (more) helpful message if the
+	JPGraph package is not installed.
+
 	* www/include/languages/French.tab: Couple of minor fixes.
 
 	* www/docman/include/doc_utils.php: "All languages" in language
