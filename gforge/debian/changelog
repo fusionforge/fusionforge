@@ -1,3 +1,12 @@
+sourceforge (2.6-0+4) unstable; urgency=low
+
+  * [Roland] Updated Standards-Version to 3.5.6.0.
+  * [Roland] Made the package arch-independent.
+  * [Roland] Updated debian/TODO a bit.
+  * [Roland] Fixed a few minor bugs in my/index.php.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 14 Dec 2001 18:51:06 +0100
+
 sourceforge (2.6-0+3) unstable; urgency=low
 
   * [Christian] Added proper chmod for cp -r www and common
