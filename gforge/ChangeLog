@@ -3,7 +3,7 @@
 	added link to user's page. 
 	* Layout.class - added a createLinkToUserHome() function
 	* SQL optimization: Replaced a 'select *' with a 'select count(*)'
-	in Artifact.class.  
+	in Artifact.class.  Ditto in User.class.
 
 2004-03-11  Tom Copeland <tom@infoether.com>
 	* SQL optimization: Replaced a 'select *' with a 'select count(*)'
