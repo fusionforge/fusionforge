@@ -31,6 +31,7 @@ case "$1" in
 	if getent passwd sourceforge > /dev/null 2>&1 ; then
 	    [ ! -f /var/lib/gforge/reowned ] && find /var/lib/gforge/ -user sourceforge -exec chown gforge {} \; && find /var/lib/gforge/ -group sourceforge -exec chgrp gforge {} \; && touch /var/lib/gforge/reowned
 	fi
+	[ -d /var/lib/gforge/etc ] && chown gforge /var/lib/gforge/etc
 
 	/usr/sbin/gforge-config
     ;;
