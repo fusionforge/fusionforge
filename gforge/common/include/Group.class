@@ -895,12 +895,13 @@ class Group extends Error {
 		$booleanparam = $booleanparam ? 1 : 0 ;
 		$sql = "UPDATE groups SET enable_anonscm = $booleanparam WHERE group_id = ".$this->getID() ;
 		$res = db_query($sql);
-		if ($res) $this->data_array['enable_anonscm']=$booleanparam;
-		//if (!$this->fetchData($this->getID())) {
-		//	db_rollback();
-		//	return false;
-		//}
-		db_commit () ;
+		if ($res) {
+			$this->data_array['enable_anonscm']=$booleanparam;
+			db_commit () ;
+		} else {
+			db_rollback ();
+			return false;
+		}
 	}
 
 	/**
@@ -921,12 +922,13 @@ class Group extends Error {
 		$booleanparam = $booleanparam ? 1 : 0 ;
 		$sql = "UPDATE groups SET enable_pserver = $booleanparam WHERE group_id = ".$this->getID() ;
 		$res = db_query($sql);
-		if ($res) $this->data_array['enable_pserver']=$booleanparam;
-		//if (!$this->fetchData($this->getID())) {
-		//	db_rollback();
-		//	return false;
-		//}
-		db_commit () ;
+		if ($res) {
+			$this->data_array['enable_pserver']=$booleanparam;
+			db_commit () ;
+		} else {
+			db_rollback();
+			return false;
+		}
 	}
 
 	/**
