@@ -99,14 +99,14 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			SELECT artifact_id,$efe_id,$catbox_id FROM artifact 
 			WHERE category_id='$cat_id'");
 		if (!$res2) {
-			echo echo "Could Not Insert AEFD for category " . db_error();
+			echo "Could Not Insert AEFD for category " . db_error();
 			db_rollback();
 			exit;
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$cat_name',field_name='Category'
 			WHERE old_value='$catbox_id' AND field_name='category_id'");
 		if (!$res3) {
-			echo echo "Could Not update history category " . db_error();
+			echo "Could Not update history category " . db_error();
 			db_rollback();
 			exit;
 		}
@@ -140,14 +140,14 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			SELECT artifact_id,$efe_id,$groupbox_id FROM artifact 
 			WHERE artifact_group_id='$artgroup_id'");
 		if (!$res2) {
-			echo echo "Could Not Insert AEFD for artifactgroup " . db_error();
+			echo "Could Not Insert AEFD for artifactgroup " . db_error();
 			db_rollback();
 			exit;
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$group_name',field_name='Group'
 			WHERE old_value='$groupbox_id' AND field_name='artifact_group_id'");
 		if (!$res3) {
-			echo echo "Could Not update history artifactgroup " . db_error();
+			echo "Could Not update history artifactgroup " . db_error();
 			db_rollback();
 			exit;
 		}
@@ -189,7 +189,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		$res3=db_query("UPDATE artifact_history SET old_value='$resolution_name',field_name='Resolution'
 			WHERE old_value='$resolutionbox_id' AND field_name='resolution_id'");
 		if (!$res3) {
-			echo echo "Could Not update history resolution " . db_error();
+			echo "Could Not update history resolution " . db_error();
 			db_rollback();
 			exit;
 		}
