@@ -54,6 +54,7 @@ function show_top_downloads() {
 		return $Language->getText('home','no_stats_available');
 	}
 	// print each one
+	$return = "";
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0)
 			$return .= "(" . number_format($row_topdown['downloads']) . ") <a href=\"/projects/$row_topdown[unix_group_name]/\">"
