@@ -102,6 +102,7 @@ mkdir -p $GFORGE_CONF_DIR/languages-local
 if [ -f rpm-specific/languages/*.tab ]; then
 	cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
 fi
+cp -rp rpm-specific/custom $GFORGE_CONF_DIR
 
 # setting crontab
 mkdir -p $CROND_DIR
@@ -217,6 +218,7 @@ fi
 %{_datadir}/gforge
 %{_libdir}/gforge
 %{_sysconfdir}/gforge/languages-local
+%{_sysconfdir}/gforge/custom
 /var/lib/gforge/scmtarballs
 
 %changelog

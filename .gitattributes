@@ -33,6 +33,7 @@ gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
+gforge/rpm-specific/custom/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge/rpm-specific/scripts/refresh.sh -text svneol=unset#application/octet-stream
 gforge/www/images/blank.png -text
