@@ -144,7 +144,7 @@ class ForumHTML extends Error {
 		in the format appropriate for the nested messages
 
 		*/
-		global $sys_datefmt,$Language;
+		global $sys_datefmt,$Language,$HTML;
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
@@ -156,7 +156,7 @@ class ForumHTML extends Error {
 		$ret_val = '
 		<table border="0">
 			<tr>
-				<td bgcolor="#dddddd" nowrap="nowrap">'.$Language->getText('forum_utils','by').' <a href="/users/'.
+				<td bgcolor="'.$HTML->COLOR_LTBACK1.'" nowrap="nowrap">'.$Language->getText('forum_utils','by').' <a href="/users/'.
 					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
 					'<br /><a href="/forum/message.php?msg_id='.
