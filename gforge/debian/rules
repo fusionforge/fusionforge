@@ -14,7 +14,7 @@ remove-binary-files:
 	# Remove files in contrib, especially binaries that break dpkg-source
 	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
 	# Also a few images
-	rm www/themes/gforge/images/es_*
+	rm -f www/themes/gforge/images/es_*
 
 configure: configure-stamp debian/po/templates.pot
 configure-stamp: remove-binary-files
