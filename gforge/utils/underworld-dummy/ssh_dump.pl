@@ -6,23 +6,20 @@
 #
 use DBI;
 
-require("../include.pl");  # Include all the predefined functions
+require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
 
 my $ssh_array = ();
 
 &db_connect;
 
 # Dump the Table information
-$query = "SELECT user_name,authorized_keys FROM users WHERE authorized_keys != \"\"";
+$query = "SELECT user_name,unix_uid,authorized_keys FROM users WHERE authorized_keys != ''";
 $c = $dbh->prepare($query);
 $c->execute();
-while(my ($username, $ssh_key) = $c->fetchrow()) {
-
-	$new_list = "$username:$ssh_key\n";
-
+while(my ($username, $unix_uid, $ssh_key) = $c->fetchrow()) {
+	$new_list = "$username:$unix_uid:$ssh_key\n";
 	push @ssh_array, $new_list;
 }
 
-
 # Now write out the files
-write_array_file($file_dir."ssh_dump", @ssh_array);
+write_array_file($file_dir."dumps/ssh_dump", @ssh_array);

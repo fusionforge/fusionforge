@@ -19,7 +19,7 @@ Visiting the link sent to you in this email will activate your account.
 email will be sent to the email address you provided in registration.
 
 <P><A href="pending-resend.php?form_user=<?php print $form_user; ?>">[Resend Confirmation Email]</A>
-<BR><A href="/">[Return to SourceForge]</A>
+<BR><A href="/">[Return to <?php echo $GLOBALS["sys_name"]; ?>]</A>
  
 <?php
 $HTML->footer(array());

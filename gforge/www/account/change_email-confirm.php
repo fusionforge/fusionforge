@@ -17,12 +17,12 @@ $row_user = db_fetch_array($res_user);
 db_query("UPDATE users SET confirm_hash='$confirm_hash',email_new='$form_newemail' "
 	. "WHERE user_id=$row_user[user_id]");
 
-$message = "You have requested a change of email address on SourceForge.\n"
+$message = "You have requested a change of email address on $GLOBALS[sys_name].\n"
 	. "Please visit the following URL to complete the email change:\n\n"
 	. "https://$GLOBALS[HTTP_HOST]/account/change_email-complete.php?confirm_hash=$confirm_hash\n\n"
-	. " -- the SourceForge staff\n";
+	. " -- the $GLOBALS[sys_name] staff\n";
 
-mail ($form_newemail,"SourceForge Verification",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+mail ($form_newemail,"$GLOBALS[sys_name] Verification",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 
 site_user_header(array('title'=>"Email Change Confirmation"));
 ?>
@@ -32,7 +32,7 @@ site_user_header(array('title'=>"Email Change Confirmation"));
 <P>An email has been sent to the new address. Follow
 the instructions in the email to complete the email change.
 
-<P><A href="/">[ Home ]</A>
+<P><A href="/">[Return to <?php echo $GLOBALS["sys_name"]; ?>]</A>
 
 <?php
 site_user_footer(array());

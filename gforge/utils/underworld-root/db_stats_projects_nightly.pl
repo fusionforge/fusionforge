@@ -7,7 +7,7 @@ use DBI;
 use Time::Local;
 use POSIX qw( strftime );
 
-require("../include.pl");
+require("/usr/lib/sourceforge/utils/include.pl");
 $dbh = &db_connect();
 
 my ($sql, $rel);

@@ -99,6 +99,10 @@ function html_get_language_popup ($Language,$title='language_id',$selected='xzxz
 
 function html_get_timezone_popup ($title='timezone',$selected='xzxzxzx') {
 	global $TZs;
+	if ($selected == 'xzxzxzx') {
+	  $r = file ('/etc/timezone');
+	  $selected = str_replace ("\n", '', $r[0]);
+	}
 	return html_build_select_box_from_arrays ($TZs,$TZs,$title,$selected,false);
 }
 
@@ -386,7 +390,7 @@ function site_project_header($params) {
 		session_require(array('group'=>$group_id));
 	}
 
-	//for dead projects must be member of alexandria project
+	//for dead projects must be member of admin project
 	if (!$project->isActive()) {
 		//only SF group can view non-active, non-holding groups
 		session_require(array('group'=>'1'));
@@ -417,7 +421,7 @@ function site_project_footer($params) {
 	@result text - echos HTML to the screen directly
 */
 function site_user_header($params) {
-	GLOBAL $HTML;
+	GLOBAL $HTML, $Language;
 
 	/*
 		Check to see if active user
@@ -427,7 +431,7 @@ function site_user_header($params) {
 	echo html_feedback_top($GLOBALS['feedback']);
 	echo '
 	<P>
-	<A HREF="/my/">My Personal Page</A> | <A HREF="/my/diary.php">Diary &amp; Notes</A> | <A HREF="/account/">Account Options</A>
+	<A HREF="/my/">'.$Language->MY_PERSONAL_PAGE.'</A> | <A HREF="/my/diary.php">'.$Language->DIARY.'</A> | <A HREF="/account/">'.$Language->ACCOUNT_MAINTENANCE.'</A>
 	<P>';
 
 }

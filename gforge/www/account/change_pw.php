@@ -57,7 +57,7 @@ function register_valid()	{
 if (register_valid()) {
 	site_user_header(array(title=>"Successfully Changed Password"));
 	?>
-	<p><b>SourceForge Change Confirmation</b>
+	<p><b><?php echo $GLOBALS["sys_name"]; ?> Change Confirmation</b>
 	<p>
 	Congratulations. You have changed your password.
 	This change is immediate on the web site, but will not take
@@ -66,16 +66,16 @@ if (register_valid()) {
 	<p>You should now <a href="/account/">Return to UserPrefs</a>.
 	<?php
 } else { // not valid registration, or first time to page
-	site_user_header(array(title=>"Change Password"));
+	site_user_header(array(title=>"$Language->PASSWORD $Language->CHANGE"));
 	?>
-	<p><b>SourceForge Password Change</b>
+	<p><b><?php echo "$GLOBALS[sys_name] $Language->PASSWORD $Language->CHANGE"; ?></b>
 	<?php if ($register_error) print "<p>$register_error"; ?>
 	<form action="change_pw.php" method="post">
-	<p>Old Password:
+	<p><?php echo "$Language->OLD $Language->PASSWORD"; ?>:
 	<br><input type="password" name="form_oldpw">
-	<p>New Password:
+	<p><?php echo "$Language->NEW $Language->PASSWORD"; ?>:
 	<br><input type="password" name="form_pw">
-	<p>New Password (repeat):
+	<p><?php echo "$Language->NEW $Language->PASSWORD"; ?> (repeat):
 	<br><input type="password" name="form_pw2">
 	<p><input type="submit" name="Update" value="Update">
 	</form>

@@ -27,7 +27,7 @@ function send_new_project_email($group_id) {
 	// send one email per admin
 while ($row_admins = db_fetch_array($res_admins)) {
 	$message = 
-'Your project registration for SourceForge has been approved. 
+'Your project registration for '.$GLOBALS[sys_name].' has been approved. 
 
 Project Full Name:  '.$row_grp['group_name'].'
 Project Unix Name:  '.$row_grp['unix_group_name'].'
@@ -48,11 +48,11 @@ Your web site is accessible through your shell account. Directory
 information will be displayed immediately after logging in.
 
 Please take some time to read the site documentation about project
-administration. If you visit your own project page in SourceForge
+administration. If you visit your own project page in '.$GLOBALS[sys_name].'
 while logged in, you will find additional menu functions to your left
 labeled "Project Administrator". 
 
-We highly suggest that you now visit SourceForge and create a public
+We highly suggest that you now visit '.$GLOBALS[sys_name].' and create a public
 description for your project. This can be done by visiting your project
 page while logged in, and selecting \'Project Admin\' from the menus
 on the left.
@@ -63,12 +63,12 @@ people can find your project, you should do this now. Visit your project
 while logged in, and select \'Project Admin\' from the menus on the
 left.
 
-Enjoy the system, and please tell others about SourceForge. Let us know
+Enjoy the system, and please tell others about '.$GLOBALS[sys_name].'. Let us know
 if there is anything we can do to help you.
 
- -- the SourceForge crew';
+ -- the '.$GLOBALS[sys_name].' crew';
 	
-	mail($row_admins['email'],"SourceForge Project Approved",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+	mail($row_admins['email'],"$GLOBALS[sys_name] Project Approved",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 
 }
 
@@ -90,7 +90,7 @@ function send_project_rejection($group_id, $response_id, $message="zxcv")
 		$response = db_result(db_query("SELECT response_text FROM canned_responses WHERE response_id='$response_id'"),0,"response_text");
 	}
 
-	mail($email, "SourceForge Project Denied", $response, "From: noreply@sourceforge.net");
+	mail($email, "$GLOBALS[sys_name] Project Denied", $response, "From: noreply@sourceforge.net");
 
 	return true;
 }

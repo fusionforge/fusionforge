@@ -4,26 +4,42 @@
 // Copyright 1999-2000 (c) The SourceForge Crew
 // http://sourceforge.net
 //
-// $Id$
 
 
 /*
-
 	Tim Perdue, September 7, 2000
+	*Base class for adding multilingual support to SF.net
 
-
-	Base class for adding multilingual support to SF.net
-
-	Contains variables which can be overridden optionally by other
+	*Contains variables which can be overridden optionally by other
 	language files.
 
-	Base language is english - an english class will extend this one,
+	*Base language is english - an english class will extend this one,
 	but won't override anything
 
-	As new languages are added, they can override what they wish, and 
+	*As new languages are added, they can override what they wish, and 
 		as we extend our class, other languages can follow suit
 		as they are translated without holding up our progress
 
+	Soon-Son Kwon, June 11, 2002
+	*Added more strings
+
+	Soon-Son Kwon, June 12, 2002
+	*Added more strings
+
+	Soon-Son Kwon, June 13, 2002
+	*Added more strings
+
+	Soon-Son Kwon, June 14, 2002
+	*Added more strings
+
+	Soon-Son Kwon, June 16, 2002
+	*Added more strings
+
+	Soon-Son Kwon, June 20, 2002
+	*Added more strings including project registration process
+
+	Soon-Son Kwon, July 3, 2002
+	*Added string for snippet library
 */
 
 class BaseLanguage {
@@ -53,6 +69,7 @@ class BaseLanguage {
 	var $NEW_USER='New User via SSL';
 	var $NEW_PROJECT='Register New Project';
 	var $ACCOUNT_MAINTENANCE='Account Maintenance';
+	var $DIARY='Diary & Notes';
 	var $CHANGE_MY_THEME='Change My Theme';
 	var $MY_PERSONAL_PAGE='My Personal Page';
 	var $BOOKMARK_PAGE='Bookmark Page';
@@ -69,10 +86,10 @@ class BaseLanguage {
 	var $PROJECT_HELP_WANTED='Project Help Wanted';
 	var $TOP_PROJECTS='Top Projects';
 	var $COMPILE_FARM='Compile Farm';
-	var $CONTACT_US='Contact SourceForge';
+	var $CONTACT_US='Contact US';
 
         // 2000-11-24
- 	var $ABOUT_SOURCEFORGE='About SourceForge';
+ 	var $ABOUT_SOURCEFORGE='About US';
  	var $ABOUT_FOUNDRIES='About Foundries';
 
 	//tool short names as in HTML_TABS()
@@ -119,14 +136,14 @@ class BaseLanguage {
 	var $GROUP_LONG_NEWS='Latest News';	
 	var $GROUP_LONG_CVS='CVS Repository';
 	var $GROUP_LONG_FTP='Anonymous FTP Space';
-	var $GROUP_LONG_FOUNDRIES='SourceForge Development Foundries';
+	var $GROUP_LONG_FOUNDRIES='Development Foundries';
 
 
 	//
 	// New strings for home page added 10/1
 	//
 	var $BREAKING_DOWN_BARRIERS='Breaking Down the Barriers to Open Source Development';
-	var $SOURCEFORGE_STATISTICS='SourceForge Statistics';
+	var $SOURCEFORGE_STATISTICS='Statistics';
 	var $TOP_PROJECT_DOWNLOADS='Top Project Downloads';
 	var $HIGHEST_RANKED_USERS='Highest Ranked Users';
 	var $MOST_ACTIVE_THIS_WEEK='Most Active This Week';
@@ -138,19 +155,17 @@ class BaseLanguage {
 
 	var $HOME_PAGE_ABOUT_BLURB='
 
-SourceForge is a <B>free service to
+This site is a <B>free service to
 <A href="http://www.opensource.org">Open Source</A> developers</B> offering
 easy access to the best in CVS, mailing lists, bug tracking, message boards/forums,
 task management, site hosting, permanent file archival, full backups,
 and total web-based administration. 
-<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ more ]</font></A>
-<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
 <BR>
 &nbsp;
 <P>
 <B>Site Feedback and Participation</B>
 <P>
-In order to get the most out of SourceForge, you\'ll need
+In order to get the most out of this site, you\'ll need
 to <A href="/account/register.php">register as a
 site user</A>. This will allow you to participate fully in all we have to
 offer. You may of course browse the site without registering, but will
@@ -165,6 +180,357 @@ then <A HREF="/account/login.php">Login</A> and finally,
 <A HREF="/register/">Register Your Project.</A>
 Thanks... and enjoy the site.';
 
+	// New strings added on 2002/06/10 by Soon-Son Kwon
+	var $FOOTER='
+<font face="arial, helvetica" size="1" color="#cccccc">
+This site runs Debian-SF.  For more about it, including copyri
+ght info, see <a href="/about.php">this page</a>.
+</font>';
+
+	var $IEWARN='<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>';
+	var $MACWARN='<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>';
+	var $ACCOUNTLOGIN='Site Login';
+	var $COOKIEWARN='Cookies must be enabled past this point.';
+	var $USESSL='Stay in SSL mode after login';
+	var $SSLNOTICE='<p><B><FONT COLOR="RED">You will be connected with an SSL server when you submit this form and your password will not be visible to other users.</FONT></B> <small style="font-size: x-small"> (If you wonder why very this page is not loaded via SSL, please read next paragraph. Thank you.) </small> <P> <B>Internet Explorer</B> users will have intermittent SSL problems, so they should leave SSL after login. Netscape users should stay in SSL mode permanently for maximum security.  Visit <A HREF="http://www.microsoft.com/">Microsoft</A> for more information about this known problem.  <P>';
+
+	// New strings added on 2002/06/11 by Soon-Son Kwon
+	var $FIRSTBLURB='
+<B><P>Welcome!</P></B>
+<P>You are now a registered user of this site, the online development environment for Open Source projects.
+<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software here, sign on as a project developer, or even start your own project.
+<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of this site.
+<P>Enjoy the site, and please provide us with feedback on ways that we can improve here. ';
+
+	var $ANONCVS='<P><B>Anonymous CVS Access</B> <P>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.';
+	var $ANONCVSUP='Updates from within the module\'s directory do not need the -d parameter.';
+	var $DEVCVS='<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.';
+	var $CVSHISTORY='Repository History';
+	var $BROWSETREE='<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.';
+	var $BROWSEIT='Browse CVS Repository';
+
+	var $ACCOUNTREGISTER_title='New Account Registration';
+	var $ACCOUNTREGISTER_congrat='<p>Congratulations. You have registered on here.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+	var $ACCOUNTREGISTER_loginname='Login Name (do not use uppercase letters) *:';
+	var $ACCOUNTREGISTER_password='Password (min. 6 chars) *:';
+	var $ACCOUNTREGISTER_password2='Password (repeat) *:';
+	var $ACCOUNTREGISTER_realname='Full/Real Name *:';
+	var $ACCOUNTREGISTER_language='Language Choice:';
+	var $ACCOUNTREGISTER_timezone='Timezone:';
+	var $ACCOUNTREGISTER_emailaddr='Email Address *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@users.';
+	var $ACCOUNTREGISTER_emailaddr2='&gt; that will forward to this address.</I>';
+	var $ACCOUNTREGISTER_siteupdate='Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>';
+	var $ACCOUNTREGISTER_communitymail='Receive additional community mailings. <I>(Low traffic.)</I>';
+	var $ACCOUNTREGISTER_register='Register';
+
+	var $USERS_PEERINFO1='If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.';
+	var $USERS_PEERINFO2='The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user\'s rank compared to all ranked users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.  </ul>';
+
+	// New strings added on 2002/06/12 by Soon-Son Kwon
+	var $MY_about_blurb='Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.';
+	var $MY_no_bookmarks='You currently do not have any bookmarks saved';
+	var $MY_no_monitored_filemodules='You are not monitoring any files.<P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project\'s &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp';
+	var $MY_no_monitored_forums='You are not monitoring any forums.<P>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.<P>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.<BR>&nbsp;';
+	var $MY_no_survey='Survey Not Found';
+	var $MY_no_open_bugs='No Open Bugs assigned to you or were submitted by you.';
+	var $MY_no_open_request='No Open Support Requests are assigned to you or were submitted by you.';
+	var $MY_no_task='You have no open tasks assigned to you.';
+	var $MY_no_projects='You\'re not a member of any active projects';
+
+	var $DIARY_add='Add a New Entry';
+	var $DIARY_update='Update an Entry';
+	var $DIARY_public='Is Public';
+	var $DIARY_mark_public='If marked as public, your entry will be mailed to any monitoring users when it is first submitted.';
+	var $DIARY_list_title='Existing Diary And Note Entries';
+	var $DIARY_noentry='You Have No Diary Entries';
+
+	var $ACCOUNT_welcome='
+		<p>Welcome!
+		<p>You can view/change all of your account features from here. You may also wish to view your developer/consultant profiles and ratings.';
+
+	var $ACCOUNT_rememberme='
+		"Remember me".
+		<I>(Allows to access your <a href="/my/">personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</I>';
+
+	var $MEMBER_SINCE='Site Member Since';
+	var $USER_ID='User ID';
+	var $LOGIN_NAME='Login Name';
+	var $PASSWORD='Password';
+	var $TIMEZONE='Timezone';
+	var $LANGUAGE='Language';
+	var $REALNAME='Real Name';
+	var $EMAILADDR='Email Address';
+
+	var $ACCOUNT_LOSTPW_title='Lost Account Password';
+	var $ACCOUNT_LOSTPW_desc='
+		<P><B>Lost Your Password?</B>
+		<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. 
+		<P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.';
+
+	// New strings added on 2002/06/13 by Soon-Son Kwon
+	var $CHANGE='Change';
+	var $EDIT='Edit';
+	var $OLD='Old';
+	var $NEW='New';
+
+	var $CHANGEEMAIL_desc='<P>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.  <P>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.  <P>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.';
+
+	var $FORUM_CHOOSE='<p>Choose a forum and you can browse, search, and post messages.<p>';
+
+	// New strings added on 2002/06/14 by Soon-Son Kwon
+	var $ABOUT_BLURB=' 
+This site runs Debian Sourceforge, a derivative of the code that runs the <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  The information present on this page is only authoritative for Debian Sourceforge, please refer to <a href="http://www.sourceforge.net/">Sourceforge.net</a> for information on their code.
+<br><br><b>People</b><br>The Sourceforge <a href="staff.php">staff</a> has worked hard to make Sourceforge a reality, here\'s your chance to meet the people behind the site.
+<br><br><b>Thanks</b><br>We owe a lot of thanks to the people that wrote the software that runs Sourceforge.  We\'d also like to give <a href="thanks.php">Kudos</a> to the following people and organizations for helping make Sourceforge happen.
+<br><br><b>More Information</b><br>If you have further questions, please contact the <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">Debian Sourceforge users mailing-list</a>.  You might also have a look at the <a href="http://savannah.gnu.org/projects/debian-sf/">project page</a> for Debian Sourceforge on Savannah (another Sourceforge derivative, run and hosted by the GNU project and the FSF).
+<br><br><b>Copyrights</b><br>The code behind Sourceforge was originally written by folks at VA Linux Systems (now called "VA Software") and released under the GNU General Public License.  It is thus mostly copyrighted by them.
+<br>The code behind this site, on the other hand, is Debian Sourceforge, a derivative of the original Sourceforge code, adapted for Debian systems.  The "visible" changes are mostly fixes for bugs and typos, but much work has also been done to provide a package: Debian Sourceforge is easy to setup and run, you only need a system running Debian.  Debian Sourceforge has been done by Christian Bayle and Roland Mas, with contributions from various people.
+<br><br><br><b>Trademarks and suchlikes</b><br>VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.  Linux is a registered trademark of Linus Torvalds.  All other trademarks and copyrights on this page are property of their respective owners.  Content owned by VA Linux Systems is copyright 1999-2001 VA Linux Systems, Inc.  All rights reserved.<br><br>';
+
+	var $PROJECTNEEDHELP_blurb='
+<H3>Projects Needing Help</H3>
+<P>The Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.
+<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)
+<P>Browse through the category menu to find projects looking for your help.
+<P>If you\'re a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>';
+		
+	// New strings added on 2002/06/16 by Soon-Son Kwon
+	var $SENDMESSAGE_blurb='In an attempt to reduce spam, we are using this form to send email.<p>Fill it out accurately and completely or the receiver may not be able to respond.<P><FONT COLOR="RED"><B>IF YOU ARE WRITING FOR HELP:</B> Did you read the site documentation? Did you include your <B>user_id</B> and <B>user_name?</B> If you are writing about a project, include your <B>project id</B> (<B>group_id</B>) and <B>Project Name</B>.</FONT>';
+
+	// New strings added on 2002/06/20 by Soon-Son Kwon
+	var $REGISTER_start='
+<p>
+Welcome to Debian Sourceforge.  You are going to create a project,
+with which you will then be able to use all the Sourceforge tools.
+</p>
+		
+<p><B>The Process</B>
+		
+<P>
+Registering a project with Sourceforge is an easy process, but we
+do require a lot of information in order to automate things as much as
+possible. The entire process should take about 10 minutes.
+				
+<P>
+During signup, we will present you with some legal documents regarding
+your account with us. Please do not ignore these; they are very
+important to you and your project.
+				
+<p>&nbsp;
+<BR><H3 align=center><a href="requirements.php">Step 1: Services and Requirements</a></H3>
+</p>';
+
+	var $REGISTER_step1='
+<H2>Step 1: SourceForge Services & Requirements (Service Specific Rules)</H2>
+
+<p>
+We are now offering a full suite of services for Sourceforge projects. If
+you haven\'t already, please be sure to browse the most recent revision of
+the Sourceforge Services.
+</p>
+
+<p>
+<b>Use of Project Account</b>
+</p>
+
+<p>
+The space given to you on the original Sourceforge servers is given
+for the expressed purpose of Open Source development or, in the case
+of web sites, the advancement of Open Source.  The space given to you
+on this server, on the other hand, is given for the expressed purpose
+of whatever the local Sourceforge maintainer has decided.
+</p>
+
+<p>
+<b>Creative Freedom</b>
+</p>
+
+<p>
+It is the intent of the Sourceforge software to allow you creative
+freedom on your project.  However, for the legal protection of this
+site and yours there might be limits imposed by the local Sourceforge
+administrator.  Details about these restrictions are described in the
+Terms of Service.
+</p>
+
+<p>
+<b>Advertisements</b>
+</p>
+
+<p>
+You may not place any revenue-generating advertisements on a site
+hosted at sourceforge.net.  Contact the local Sourceforge
+administrator about the present site.
+</p>
+
+<p>
+<b>Sourceforge Link</b>
+</p>
+
+<p>
+If you host a web site at this Sourceforge site, you might want to
+place one of our approved graphic images on your site with a link back
+to the Sourceforge site.  The graphic may either link to the main
+Sourceforge site or to your project page on the site.  For information
+about how to insert a SourceForge logo which will track your
+pageviews, please read the Sourceforge documentation.  Again, this
+condition is subject to the will of the local Sourceforge
+administrator.
+</p>
+
+<p>
+<b>Open Source/Rights to Code</b>
+</p>
+
+<p>
+You will be presented with a choice of licenses for your project.
+Some of them are Open Source approved, some are not.  The ones that
+are Open Source approved also allow us to make your code available to
+the general public: although you may choose to stop hosting your
+project with us, the nature of these licenses will allow us to
+continue to make your code available.  It is therefore advised to
+think twice before you choose a license, especially if you choose one
+the local Sourceforge administrator might have added to the default
+ones.
+</p>
+
+<p>
+If you wish to use another license that is not currently listed, let
+the local Sourceforge administrator know and he will review these
+requests on a case-by-case basis.
+</p>
+
+<p>
+It is the intent of the software to provide a permanent home for all
+versions of your code.  The Sourceforge administrator does reserve the
+right, however, to terminate your project if there is due cause, in
+accordance with the Terms of Service.
+</p>';
+	var $REGISTER_step2_title='Step 2: Terms of Service Agreement';
+	var $REGISTER_step2_bottom='
+<P align=center>By clicking below, you acknowledge that you have read
+and understand the Terms of Service agreement. Clicking "I AGREE" will
+constitute your legal signature on this document.
+<P><H3 align=center><A href="basicinfo.php">[I AGREE]</A>
+&nbsp;&nbsp;<A href="/">[I DISAGREE]</A></H3>';
+	var $REGISTER_step3='
+<H2>Step 3: SourceForge Project Registration</H2>
+
+<p>We now need a short description of your project. This description
+needs to contain the purpose of the project and a summarization of your
+goals.
+
+<p>
+If the local Sourceforge administrator approves your project account,
+the account is to be used purely to meet the goals set forth in this
+statement.  Use of the project account for anything other than the
+purposes and goals in this statement is probably prohibited by local
+policy.  If you need to change this statement at any time, please
+inform a staff member and he will assist you in getting a new
+statement approved.
+
+<P>
+<B>Project Purpose and Summarization</B>
+<P>
+<FONT COLOR="RED"><B>REQUIRED:</B> Provide detailed, accurate description</FONT>
+<P>';
+	var $REGISTER_step4_title='Step 4: Project Name';
+	var $REGISTER_step4="
+<P><B>Project Name</B>
+
+<P>We now need some basic technical information for your project.
+There are two types of names that will be associated with this project.
+
+<P>The \"Full Name\" is descriptive, has no real name restrictions (except
+a 40 character limit), and
+can be changed. The \"Unix Name\" has several restrictions because it is
+used in so many places around the site. They are:
+
+<UL>
+<LI>Cannot match the unix name of any other project
+<LI>Must be between 3 and 15 characters in length
+<LI>Can only contain characters, numbers, and dashes
+<LI>Must be a valid unix username
+<LI>Cannot match one of our reserved domains
+<LI>Unix name will never change for this project
+</UL>
+
+<P>Your unix name is important, however, because it will be used for
+many things, including:";
+	var $REGISTER_step4_warn='Do Not Back Arrow After This Point';
+	var $REGISTER_step5_title='Step 5: License';
+	var $REGISTER_step5='
+<P><B><I>If you are applying for a website-only project, please
+select "website-only" from the choices below and proceed.</I></B>
+
+<P>
+SourceForge was created to advance Open Source software development.
+To keep things simple, the original SourceForge crew are relying on
+the outstanding work of the <A href="http://www.opensource.org">Open
+Source Initiative</A> for their licensing choices.
+
+<p>Local policy may require the availability of other licenses,
+though.  This should be handled by the local Sourceforge
+administrator.  If you wish to use a license that is not listed here,
+please let the administrator know why you wish to use another license.
+
+<P>Choosing a license is a serious decision. Please take some time to
+read the text (and our explanations) of several licenses before making
+a choice abour your project.
+
+<P>For many legal reasons, you may not change a project\'s license once
+it has been set. If you feel that you have a special case and legal
+capability to do this, we will work with you on a case-by-case basis.
+
+<P><B>Licenses</B>
+
+<UL>
+<LI><A href="http://www.opensource.org/licenses/gpl-license.html" target="_blank">GNU General Public License</A>
+<LI><A href="http://www.opensource.org/licenses/lgpl-license.html" target="_blank">GNU Library or \'Lesser\' Public License</A>
+<LI><A href="http://www.opensource.org/licenses/bsd-license.html" target="_blank">BSD License</A>
+<LI><A href="http://www.opensource.org/licenses/mit-license.html" target="_blank">MIT License</A>
+<LI><A href="http://www.opensource.org/licenses/artistic-license.html" target="_blank">Artistic License</A>
+<LI><A href="http://www.mozilla.org/MPL/MPL-1.0.html" target="_blank">Mozilla Public License 1.0</A>
+<LI><A href="http://www.troll.no/qpl" target="_blank">Q Public License</A>
+<LI><A href="http://www.research.ibm.com/jikes/license/license3.htm" target="_blank">IBM Public License 1.0</A>
+<LI><A href="http://cvw.mitre.org/cvw/licenses/source/license.html" target="_blank">Collaborative Virtual Workspace License</A>
+<LI><A href="http://www.risource.org/RPL/RPL-1.0A.shtml" target="_blank">Ricoh Source Code Public License 1.0</A>
+<LI><A href="http://www.python.org/doc/Copyright.html" target="_blank">Python License</A>
+<LI><A href="http://www.opensource.org/licenses/zlib-license.html" target="_blank">zlib/libpng License</A>
+<LI><A href="http://www.sourceforge.net/register/publicdomain.txt" target="_blank">Public Domain</A>
+</UL>
+
+<P><B>License for This Project</B>';
+	var $REGISTER_step6_title='Step 6: Category';
+	var $REGISTER_step6='
+<P><B>Project Category</B>
+
+<P>So that visitors to the site can find your project, you should select
+categories that is most appropriate to your project\'s purpose.
+
+<P>Your project will not be visible in the Trove software map until
+(1) it is approved and (2) you have manually categorized your project in
+your project administration screens.
+
+<P>After project approval, please immediately categorize your project
+following the instructions in the email you will receive.';
+	var $REGISTER_step6_finish='Finish Registration';
+
+	var $SNIPPETFRONT='
+<P>
+The purpose of this archive is to let you share your code snippets, scripts,
+and functions with the Open Source Software Community.
+<P>
+You can create a "new snippet", then post additional versions of that
+snippet quickly and easily.
+<P>
+Once you have snippets posted, you can then create a "Package" of snippets.
+That package can contain multiple, specific versions of other snippets.
+<P>
+<H3>Browse Snippets</H3>
+<P>
+You can browse the snippet library quickly:
+<BR>';
 	/*
 		returns database result
 		of supported languages
