@@ -1,3 +1,7 @@
+2004-10-20  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed default priority level and priority colors box
+
 2004-10-17  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* made cron manager usable by adding pagination
