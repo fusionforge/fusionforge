@@ -1,0 +1,18 @@
+###
+# Ask the user whether they want to upgrade from sourceforge to gforge
+# Exit if they don't
+###
+
+template=gforge/migrate_from_sourceforge
+
+db_input high $template || true
+case "$RET" in
+    "true")
+	echo "Very well.  Upgrading to Gforge."
+	;;
+    "false")
+	echo "Not upgrading to Gforge."
+	echo "Nothing should have happened yet, and you can continue using Sourceforge."
+	exit 1
+	;;
+esac

@@ -1,3 +1,30 @@
+2004-03-28  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* utils/ldap/sql2ldif.pl: Disable shell access for suspended and
+	deleted accounts, and enable e-mail forwarding for accounts even
+	if they don't belong to any group yet.
+
+2004-03-18  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/docman/index.php: Sort documents by doc_group first, then
+	title inside a doc_group.
+
+2004-03-03  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/languages/Catalan.tab: Catalan update by Jordi
+	Mallach <jordi@debian.org>.
+
+	* www/include/BaseLanguage.class: Trim the last part of the *.tab
+	lines, instead of just right-trimming it.  This makes it possible
+	to have pretty aligned third columns in these files without
+	causing bugs.
+
+	* www/docman/include/doc_utils.php: If the user did select "All
+	languages", then keep that choice the default selection.
+
+	* www/my/index.php: Sort a few lists by alphabetic order.
+	* common/forum/ForumsForUser.class: Ditto.
+
 2003-11-04  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/notepad.php, www/include/note.php: New files.  *
