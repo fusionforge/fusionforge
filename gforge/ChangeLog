@@ -1,3 +1,8 @@
+2005-01-15  Tim Perdue <tim@gforge.org>
+
+	* added link and page to allow a person to request membership in a project
+	* added logic to project admin page to approve/reject requests
+
 2004-12-12  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* improved french localization of scmcvs plugin

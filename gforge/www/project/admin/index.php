@@ -33,6 +33,7 @@ require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('www/include/role_utils.php');
 require_once('common/include/account.php');
+require_once('common/include/GroupJoinRequest.class');
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
@@ -82,6 +83,35 @@ if ($submit) {
 			$feedback .= 'Foo'.$group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_updated');
+		}
+	} elseif ($acceptpending) {
+		/*
+			add user to this project
+		*/
+		if (!$group->addUser($form_unix_name,$role_id)) {
+			$feedback .= $group->getErrorMessage();
+		} else {
+			$gjr=new GroupJoinRequest($group,$form_userid);
+			if (!$gjr || !is_object($gjr) || $gjr->isError()) {
+				$feedback .= 'Error Getting GroupJoinRequest';
+			} else {
+				$gjr->delete(true);
+			}
+			$feedback = $Language->getText('project_admin','user_added');
+		}
+	} elseif ($rejectpending) {
+		/*
+			reject adding user to this project
+		*/
+		$gjr=new GroupJoinRequest($group,$form_userid);
+		if (!$gjr || !is_object($gjr) || $gjr->isError()) {
+			$feedback .= 'Error Getting GroupJoinRequest';
+		} else {
+			if (!$gjr->reject()) {
+				exit_error('Error',$gjr->getErrorMessage());
+			} else {
+				$feedback .= 'Rejected';
+			}
 		}
 	}
 }
@@ -220,6 +250,33 @@ while ($row_memb=db_fetch_array($res_memb)) {
 &nbsp;
 </td>-->
 <?php 
+//
+//	Pending requests
+//
+echo $HTML->boxMiddle($Language->getText('project_joinrequest','pending'));
+$reqs =& get_group_join_requests($group);
+if (count($reqs) < 1) {
+	echo $Language->getText('project_joinrequest','nonepending');
+} else {
+	for ($i=0; $i<count($reqs); $i++) {
+		$user =& user_get_object($reqs[$i]->getUserId());
+		if (!$user || !is_object($user)) {
+			echo "Invalid User";
+		}
+		?>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+		<input type="hidden" name="submit" value="y" />
+		<input type="hidden" name="form_userid" value="<?php echo $user->getId(); ?>" />
+		<tr><td><input type="hidden" name="form_unix_name" value="<?php echo $user->getUnixName(); ?>" /><?php echo $user->getRealName(); ?></td>
+		<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?></td>
+			<td><input type="submit" name="acceptpending" value="<?php echo $Language->getText('project_admin','acceptpending') ?>" />
+			<input type="submit" name="rejectpending" value="<?php echo $Language->getText('project_admin','rejectpending') ?>" /></td>
+			</tr></form>
+		
+		<?php
+	}
+}
+
 
 //
 //	RBAC Editing Functions
