@@ -118,17 +118,31 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 <?php
 echo $HTML->boxMiddle($Language->getText('project_admin','tool_admin').'');
 
-?>
+if($sys_use_tracker) { ?>
+	<a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','tracker_admin') ?></a><br />
+<?php }
+if($sys_use_docman) { ?>
+	<a href="/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','docmanager_admin') ?></a><br />
+<?php }
+if($sys_use_mail) { ?>
+	<a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','mail_admin') ?></a><br />
+<?php }
+if($sys_use_news) { ?>
+	<a href="/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','news_admin') ?></a><br />
+<?php }
+if($sys_use_pm) { ?>
+	<a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','task_manager_admin') ?></a><br />
+<?php }
+if($sys_use_forum) { ?>
+	<a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','forum_admin') ?></a><br />
+<?php }
+if($sys_use_frs) { ?>
+	<a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','frs_admin') ?></a><br />
+<?php }
+if($sys_use_scm) { ?>
+	<a href="/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','scm_admin') ?></a><br />
+<?php }
 
-<a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','tracker_admin') ?></a><br />
-<a href="/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','docmanager_admin') ?></a><br />
-<a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','mail_admin') ?></a><br />
-<a href="/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','news_admin') ?></a><br />
-<a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','task_manager_admin') ?></a><br />
-<a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','forum_admin') ?></a><br />
-<a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','frs_admin') ?></a><br />
-<a href="/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','scm_admin') ?></a><br />
-<?php
 $hook_params = array () ;
 $hook_params['group_id'] = $group_id ;
 plugin_hook ("project_admin_plugins", $hook_params) ;
