@@ -28,6 +28,9 @@
 require_once('pre.php');    
 require_once('www/scm/scm_utils.php');    
 
+if (!$group_id) {
+        exit_no_group();
+}
 scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$group_id));
 
 $hook_params = array () ;
