@@ -182,7 +182,6 @@ class ProjectTask extends Error {
 				db_rollback();
 				return false;
 			} elseif (!$this->setAssignedTo($assigned_arr)) {
-				print_r($assigned_arr);
 				db_rollback();
 				return false;
 			} else {
