@@ -71,7 +71,7 @@ if ($step2) {
 
 	// For every file selected add that file to this release
 	for($x=0;$x<count($file_list);$x++) {
-		$frs->frsAddFile(time(), $file_list[$x], $group_unix_name, $user_unix_name, filesize("$user_imcoming_dir/$file_list[$x]"), time(), $release_id, $package_id, $type_id, $proc_id);
+		$frs->frsAddFile(time(), $file_list[$x], $group_unix_name, $user_unix_name, filesize("$user_incoming_dir/$file_list[$x]"), time(), $release_id, $package_id, $type_id, $proc_id);
 		if( !$frs->isError() ) {
 			$feedback .= " File(s) Added ";
 		}
