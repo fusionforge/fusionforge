@@ -1,3 +1,11 @@
+2003-01-13 Reinhard Spisser (reinhard@spisser.it)
+
+	* www/docman/*: fully localized
+	
+	* www/include/languages/Base.tab: added missing strings
+
+	* www/include/language/Italian.tab: Italian Docman Localization
+
 2003-01-13 Tom Copeland (tom@infoether.com)
 
 	* www/survey/admin/add_survey.php: Survey title is now a required field.
