@@ -8,38 +8,38 @@
 
 require "pre.php";    
 
-if ($type == 'downloads_week') {
+if ($GLOBALS[type] == 'downloads_week') {
 	$rankfield = 'downloads_week';
-	$title = 'Top Downloads in the Past 7 Days';
-	$column1 = 'Downloads';
+	$title = $Language->getText('top_toplist','top_download_7_days');
+	$column1 = $Language->getText('top_toplist','download');
 }
-else if ($type == 'pageviews_proj') {
+else if ($GLOBALS[type] == 'pageviews_proj') {
 	$rankfield = 'pageviews_proj';
-	$title = 'Top Weekly Project Pageviews at *.'.$GLOBALS['sys_default_domain'].' (from impressions of SF logo)';
-	$column1 = 'Pageviews';
+	$title = $Language->getText('top_toplist','top_weekly_pagesviews',array($GLOBALS['sys_default_domain'],$GLOBALS['sys_name']));
+	$column1 = $Language->getText('top_toplist','pageviews');
 }
-else if ($type == 'forumposts_week') {
+else if ($GLOBALS[type] == 'forumposts_week') {
 	$rankfield = 'forumposts_week';
-	$title = 'Top Forum Post Counts';
-	$column1 = 'Posts';
+	$title = $Language->getText('top_toplist','top_forum_post_count');
+	$column1 = $Language->getText('top_toplist','posts');
 }
 // default to downloads
 else {
 	$rankfield = 'downloads_all';
-	$title = 'Top Downloads';
-	$column1 = 'Downloads';
+	$title = $Language->getText('top_toplist','top_download');
+	$column1 = $Language->getText('top_toplist','download');
 }
 
 
 $HTML->header(array('title'=>$title));
 
 print '<p><strong><FONT size="+1">'.$title.'</FONT></strong>
-<br /><em>(Updated Daily)</em>
+<br /><em>('.$Language->getText('top','updated_daily').')</em>
 
-<p><a href="/top/">[View Other Top Categories]</a>
-';
+<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a>';
 
-$arr=array('Rank','Project Name',"$column1",'Last Rank','Change');
+$arr=array($Language->getText('top_toplist','rank'),$Language->getText('top_toplist','project_name'),"$column1",$Language->getText('top_toplist','last_rank'),
+					$Language->getText('top_toplist','change'));
 
 echo $HTML->listTableTop($arr);
 
@@ -65,16 +65,16 @@ while ($row_top = db_fetch_array($res_top)) {
 	// calculate change
 	$diff = $row_top["rank_$rankfield"."_old"] - $row_top["rank_$rankfield"];
 	if (($row_top["rank_$rankfield"."_old"] == 0) || ($row_top["rank_$rankfield"] == 0)) {
-		print "N/A";
+		print $Language->getText('top','NA');
 	}
 	else if ($diff == 0) {
-		print "Same";
+		print $Language->getText('top','same');
 	}
 	else if ($diff > 0) {
-		print "<FONT color=\"#009900\">Up $diff</FONT>";
+		print "<FONT color=\"#009900\">".$Language->getText('top','up',$diff)."</FONT>";
 	}
 	else if ($diff < 0) {
-		print "<FONT color=\"#CC0000\">Down ".(0-$diff)."</FONT>";
+		print "<FONT color=\"#CC0000\">".$Language->getText('top','down',(0-$diff))."</FONT>";
 	}
 
 	print '&nbsp;&nbsp;&nbsp;</td></tr>

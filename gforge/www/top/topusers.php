@@ -35,29 +35,22 @@ $res_top = db_query("
 
 if (!$res_top || db_numrows($res_top)<1) {
 	exit_error(
-		'Information not available',
-		'Information about highest ranked users is not available. '
+		$Language->getText('top_topusers','info_not_available'),
+		$Language->getText('top_topusers','info_not_available_more').' '
 		.db_error()
 	);
 }
 
-$HTML->header(array('title'=>'Highest Ranked Users'));
+$HTML->header(array('title'=>$Language->getText('top_topusers','title')));
 
-print '<h1>Highest Ranked Users</h1>
-<br /><em>(Updated Daily)</em>
+print '<h1>'.$Language->getText('top_topusers','title').'</h1>
+<br /><em>('.$Language->getText('top','updated_daily').')</em>
 
-<p><a href="/top/">[View Other Top Categories]</a>
+<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a>
 
-<p><table width="100%" cellpadding=0 cellspacing=0 border=0>
-<tr valign="top">
-<td><strong>Rank</strong></td>
-<td><strong>User Name<br />&nbsp;</strong></td>
-<td><strong>Real Name<br />&nbsp;</strong></td>
-<td align="right"><strong>Rating</strong></td>
-<td align="right"><strong>Last Rank</strong></td>
-<td align="right"><strong>Change</strong>&nbsp;&nbsp;&nbsp;</td></tr>
-';
-$arr=array('Rank','User Name','Real Name','Rating','Last Rank','Change');
+<p>';
+$arr=array($Language->getText('top','rank'),$Language->getText('top','user_name'),$Language->getText('top','real_name'),$Language->getText('top','rating'),
+					$Language->getText('top','last_rank'),$Language->getText('top','change'));
 echo $HTML->listTableTop($arr);
 
 while ($row_top = db_fetch_array($res_top)) {
@@ -74,16 +67,16 @@ while ($row_top = db_fetch_array($res_top)) {
 	// calculate change
 	$diff = $row_top["old_ranking"] - $row_top["ranking"];
 	if (!$row_top["old_ranking"] || !$row_top["ranking"]) {
-		print "N/A";
+		print $Language->getText('top','NA');
 	}
 	else if ($diff == 0) {
-		print "Same";
+		print $Language->getText('top','same');
 	}
 	else if ($diff > 0) {
-		print "<FONT color=\"#009900\">Up $diff</FONT>";
+		print "<FONT color=\"#009900\">".$Language->getText('top','up',$diff)."</FONT>";
 	}
 	else if ($diff < 0) {
-		print "<FONT color=\"#CC0000\">Down ".(0-$diff)."</FONT>";
+		print "<FONT color=\"#CC0000\">".$Language->getText('top','down',(0-$diff))."</FONT>";
 	}
 
 	print '&nbsp;&nbsp;&nbsp;</td></tr>

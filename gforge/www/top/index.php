@@ -18,27 +18,25 @@
 
 require_once('pre.php');
 
-$HTML->header(array('title'=>'Top Project Listings'));
+$HTML->header(array('title'=>$Language->getText('top','title')));
 ?>
 
-<p><strong>Top <?php echo $GLOBALS['sys_name']?>  Projects</strong></P>
+<p><strong><?php echo $Language->getText('top','top_project',$GLOBALS['sys_name']); ?></strong></P>
 
-<p>We track many project usage statistics on <?php echo $GLOBALS['sys_name']?>, and display here
-the top ranked projects in several categories.
-
+<p><?php echo $Language->getText('top','about_blurb',$GLOBALS['sys_name']); ?>
 <ul>
-<li><a href="mostactive.php?type=week">Most Active This Week</a>
-<li><a href="mostactive.php">Most Active All Time</a>
+<li><a href="mostactive.php?type=week"><?php echo $Language->getText('top','active_weekly'); ?></a>
+<li><a href="mostactive.php"><?php echo $Language->getText('top','active_all_time'); ?></a>
 <br />&nbsp;
-<li><a href="toplist.php?type=downloads">Top Downloads</a>
-<li><a href="toplist.php?type=downloads_week">Top Downloads (Past 7 Days)</a>
+<li><a href="toplist.php?type=downloads"><?php echo $Language->getText('top','downloads'); ?></a>
+<li><a href="toplist.php?type=downloads_week"><?php echo $Language->getText('top','downloads_7_days'); ?></a>
 <br />&nbsp;
-<li><a href="toplist.php?type=pageviews_proj">Top Project Pageviews</a> -
 Measured by impressions of the <?php echo $GLOBALS['sys_name']?> 'button' logo
+<li><a href="toplist.php?type=pageviews_proj"><?php echo $Language->getText('top','pageviews',$GLOBALS['sys_name']); ?></a> 
 <br />&nbsp;
-<li><a href="toplist.php?type=forumposts_week">Top Forum Post Counts</a>
+<li><a href="toplist.php?type=forumposts_week"><?php echo $Language->getText('top','forum_posts'); ?></a>
 <br />&nbsp;
-<li><a href="topusers.php">Highest Ranked Users</a>
+<li><a href="topusers.php"><?php echo $Language->getText('top','highest_ranked_users'); ?></a>
 </ul>
 
 <?php
