@@ -22,34 +22,69 @@ $svn='/var/svn';
 //	Whether to separate directories by first letter like /m/mygroup /a/apple
 $first_letter = false;
 
+// Whether to have all projects in a single repository
+$one_repository = false;
+
+//if everything is in one repository, we need a working checkout to use
+$repos_co = '/var/svn-co';
+
+//type of repository, whether filepassthru or bdb
+$repos_type = '';
+
 /*
 	This script create the gforge dav/svn/docman repositories
 */
 
-echo "Creating Groups at ". $svn."\n";
+$err .= "Creating Groups at ". $svn."\n";
 
 $res = db_query("SELECT is_public,enable_anonscm,unix_group_name 
-	FROM groups WHERE status != 'P';");
+	FROM groups, plugins, group_plugin 
+	WHERE groups.status != 'P' 
+	AND groups.group_id=group_plugin.group_id
+	AND group_plugin.plugin_id=plugins.plugin_id
+	AND plugins.plugin_name='scmsvn'");
 
 if (!$res) {
-	echo "Error!\n";
+	$err .=  "Error! Database Query Failed: ".db_error();
+	echo $err;
+	exit;
 }
 
-system("[ ! -d ".$svn." ] && mkdir $svn"); 
+//
+//	If using a single large repository, create the checkout if necessary
+//
+if ($one_repository && !is_dir($repos_co)) {
+	$err .= "Error! Checkout Repository Does Not Exist!";
+	echo $err;
+	exit;
+} elseif (!is_dir($svn)) {
+	passthru ("mkdir $svn");
+}
 
 while ( $row =& db_fetch_array($res) ) {
-	echo "Name:".$row["unix_group_name"]." \n";
-	if ($first_letter) {
-		//
-		//	Create the docman repository for versioning of docs
-		//
-		system ("[ ! -d $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]." ] && mkdir -p $svn/".$row["unix_group_name"][0]."/ && $svn_path/svnadmin create $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
- 		svn_hooks("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
- 		addsvnmail("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"],$row["unix_group_name"]);
+	if ($one_repository) {
+		if ($first_letter) {
+			//
+			//	Create the repository
+			//
+			passthru ("[ ! -d $repos_co/".$row["unix_group_name"][0]."/ ] && mkdir -p $repos_co/".$row["unix_group_name"][0]."/ && $svn_path/svn add $repos_co/".$row["unix_group_name"][0]."/");
+			passthru ("[ ! -d $repos_co/".$row["unix_group_name"][0]."/".$row["unix_group_name"]."/ ] && mkdir -p $repos_co/".$row["unix_group_name"][0]."/".$row["unix_group_name"]."/ && $svn_path/svn add $repos_co/".$row["unix_group_name"][0]."/".$row["unix_group_name"]."/");
+		} else {
+			passthru ("[ ! -d $repos_co/".$row["unix_group_name"]." ] && mkdir -p $repos_co/".$row["unix_group_name"]."/ && $svn_path/svn add $repos_co/".$row["unix_group_name"]);
+		}
 	} else {
-		system ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $svn/".$row["unix_group_name"]);
-		svn_hooks("$svn/".$row["unix_group_name"]);
-		addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
+		if ($first_letter) {
+			//
+			//	Create the repository
+			//
+			passthru ("[ ! -d $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]." ] && mkdir -p $svn/".$row["unix_group_name"][0]."/ && $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
+ 			svn_hooks("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"]);
+ 			addsvnmail("$svn/".$row["unix_group_name"][0]."/".$row["unix_group_name"],$row["unix_group_name"]);
+		} else {
+			passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
+			svn_hooks("$svn/".$row["unix_group_name"]);
+			addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
+		}
 	}
 }
 
@@ -103,6 +138,9 @@ function writeFile($filePath, $content) {
 	fclose($file);
 }
 
+if ($one_repository) {
+	passthru ("$svn_path/svn commit -m\"\"");
+}
 system("chown $file_owner -R $svn");
 system("cd $svn/ ; find -type d -exec chmod 700 {} \;");
 system("cd $svn/ ; find -type f -exec chmod 600 {} \;");
