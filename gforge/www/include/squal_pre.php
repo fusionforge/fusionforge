@@ -20,7 +20,7 @@
 
 */
 
-require ('/etc/local.inc');
+require ('/etc/sourceforge/local.inc');
 require('database.php');
 require('session.php');
 require('Error.class');

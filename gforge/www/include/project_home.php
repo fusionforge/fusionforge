@@ -33,7 +33,7 @@ $res_admin = db_query("SELECT users.user_id AS user_id,users.user_name AS user_n
 	. "user_group.admin_flags = 'A'");
 
 if ($project->getStatus() == 'H') {
-	print "<P>NOTE: This project entry is maintained by the SourceForge staff. We are not "
+	print "<P>NOTE: This project entry is maintained by the $GLOBALS[sys_name] staff. We are not "
 		. "the official site "
 		. "for this product. Additional copyright information may be found on this project's homepage.\n";
 }
@@ -332,7 +332,7 @@ if ($project->usesCVS()) {
 
 if ($project->isActive()) {
 	print '<HR SIZE="1" NoShade>';
-	print "<A href=\"ftp://" . $project->getUnixName() . ".sourceforge.net/pub/". $project->getUnixName() ."/\">";
+	print "<A href=\"ftp://" . $project->getUnixName() . "." . $GLOBALS['sys_default_domain'] . "/pub/". $project->getUnixName() ."/\">";
 	print html_image("images/ic/ftp16b.png",'20','20',array('alt'=>$Language->GROUP_LONG_FTP));
 	print $Language->GROUP_LONG_FTP."</A>";
 }

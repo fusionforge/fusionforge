@@ -10,7 +10,7 @@
 ########################
 # global configuration #
 ########################
-$config{'database_include'} 	= '/etc/local.inc';		# database include file
+$config{'database_include'} 	= '/etc/sourceforge/database.inc';		# database include file
 $config{'lock_file'}		= '/tmp/sf-backend';		# lockfile location
 $config{'log_file'}		= '/home/dummy/backend.log';	# logfile location
 $config{'group_dir_prefix'} 	= '/home/groups';		# prefix for group directories

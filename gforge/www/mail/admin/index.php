@@ -24,7 +24,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			$new_list_name=strtolower(group_getunixname($group_id).'-'.$list_name);
 
 			//see if that's a valid email address
-			if (validate_email($new_list_name.'@lists.sourceforge.net')) {
+			if (validate_email($new_list_name.'@'.$GLOBALS['sys_lists_host'])) {
 
 				$result=db_query("SELECT * FROM mail_group_list WHERE lower(list_name)='$new_list_name'");
 
@@ -60,7 +60,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 					$row_email = db_fetch_array($res_email);
 
 					// mail password to admin
-					$message = "A mailing list will be created on SourceForge in 6-24 hours \n"
+					$message = "A mailing list will be created on $GLOBALS[sys_name] in 6-24 hours \n"
 					. "and you are the list administrator.\n\n"
 					. "This list is: $new_list_name@" .$GLOBALS['sys_lists_host'] ."\n\n"
 					. "Your mailing list info is at:\n"
@@ -69,10 +69,10 @@ if ($group_id && user_ismember($group_id,'A')) {
 					. "http://".$GLOBALS['sys_lists_host']."/mailman/admin/$new_list_name\n\n"
 					. "Your list password is: $list_password\n"
 					. "You are encouraged to change this password as soon as possible.\n\n"
-					. "Thank you for registering your project with SourceForge.\n\n"
-					. " -- the SourceForge staff\n";
+					. "Thank you for registering your project with $GLOBALS[sys_name].\n\n"
+					. " -- the $GLOBALS[sys_name] staff\n";
 
-					mail ($row_email['email'],"SourceForge New Mailing List",$message,"From: admin@$GLOBALS[sys_default_domain]");
+					mail ($row_email['email'],"$GLOBALS[sys_name] New Mailing List",$message,"From: admin@$GLOBALS[sys_default_domain]");
  
 					$feedback .= " Email sent with details to: $row_email[email] ";
 				}
@@ -122,7 +122,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			<INPUT TYPE="HIDDEN" NAME="add_list" VALUE="y">
 			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
 			<B>Mailing List Name:</B><BR>
-			<B>'.group_getunixname($group_id).'-<INPUT TYPE="TEXT" NAME="list_name" VALUE="" SIZE="10" MAXLENGTH="12">@lists.sourceforge.net</B><BR>
+			<B>'.group_getunixname($group_id).'-<INPUT TYPE="TEXT" NAME="list_name" VALUE="" SIZE="10" MAXLENGTH="12">@'.$GLOBALS['sys_lists_host'].'</B><BR>
 			<P>
 			<B>Is Public?</B><BR>
 			<INPUT TYPE="RADIO" NAME="is_public" VALUE="1" CHECKED> Yes<BR>
@@ -161,7 +161,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			<H2>Update Mailing Lists</H2>
 			<P>
 			You can administrate lists from here. Please note that private lists
-			can still be viewed by members of your project, but are not listed on SourceForge.<P>';
+			can still be viewed by members of your project, but are not listed on '.$GLOBALS[sys_name].'.<P>';
 
 			$title_arr=array();
 			$title_arr[]='List';

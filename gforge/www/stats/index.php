@@ -11,7 +11,7 @@ require('site_stats_utils.php');
    // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>"SourceForge Site Statistics "));
+$HTML->header(array('title'=>" Site Statistics "));
 
 //
 // BEGIN PAGE CONTENT CODE

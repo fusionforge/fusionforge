@@ -9,6 +9,12 @@
 require('pre.php');
 require('../forum/forum_utils.php');
 
+global $group_id;
+
+if (!$group_id) {
+	$group_id = $GLOBALS['sys_news_group'];
+}
+
 news_header(array('title'=>'News'));
 
 echo '<H3>News</H3>

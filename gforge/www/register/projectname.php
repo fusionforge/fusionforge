@@ -44,32 +44,10 @@ if ($insert_purpose && $form_purpose) {
 
 $HTML->header(array('title'=>'Project Name'));
 
+echo "<H2>".$Language->REGISTER_step4_title."</H2>";
+echo $Language->REGISTER_step4;
+
 ?>
-
-<H2>Step 4: Project Name</H2>
-
-
-<P><B>Project Name</B>
-
-<P>We now need some basic technical information for your project.
-There are two types of names that will be associated with this project.
-
-<P>The "Full Name" is descriptive, has no real name restrictions (except
-a 40 character limit), and
-can be changed. The "Unix Name" has several restrictions because it is
-used in so many places around the site. They are:
-
-<UL>
-<LI>Cannot match the unix name of any other project
-<LI>Must be between 3 and 15 characters in length
-<LI>Can only contain characters, numbers, and dashes
-<LI>Must be a valid unix username
-<LI>Cannot match one of our reserved domains
-<LI>Unix name will never change for this project
-</UL>
-
-<P>Your unix name is important, however, because it will be used for
-many things, including:
 
 <UL>
 <LI>A web site at unixname.<?php echo $GLOBALS['sys_default_domain']; ?> 
@@ -94,8 +72,8 @@ Full Name:
 <BR>
 <INPUT type=text maxlength="15" SIZE="15" name="form_unix_name">
 <P>
-<H2><FONT COLOR="RED">Do Not Back Arrow After This Point</FONT></H2>
-<INPUT type=submit name="Submit" value="Step 5: License">
+<H2><FONT COLOR="RED"><?php echo $Language->REGISTER_step4_warn; ?></FONT></H2>
+<INPUT type=submit name="Submit" value="<?php echo $Language->REGISTER_step5_title; ?>">
 </FORM>
 </FONT>
 

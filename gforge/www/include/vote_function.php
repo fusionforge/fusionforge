@@ -102,6 +102,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 */
 
 function show_survey ($group_id,$survey_id) {
+global $Language;
 
 ?>
 <FORM ACTION="/survey/survey_resp.php" METHOD="POST">
@@ -113,7 +114,7 @@ function show_survey ($group_id,$survey_id) {
 	Select this survey from the database
 */
 
-$sql="SELECT * FROM surveys WHERE survey_id='$survey_id'";
+$sql="SELECT * FROM surveys WHERE survey_id='$survey_id' and group_id = '$group_id'";
 
 $result=db_query($sql);
 
@@ -246,9 +247,7 @@ if (db_numrows($result) > 0) {
 	<?php
 
 } else {
-	echo "<TR><TD COLSPAN='2'>";
-	echo "<H3>Survey Not Found</H3>";
-	echo "</TD></TR>";
+	echo "<TR><TD COLSPAN='2'>".$Language->MY_no_survey."</TD></TR>";
 }
 
 }

@@ -36,8 +36,7 @@ if ($group_id) {
 		exit;
 	}
 
-	echo '<H3>Discussion Forums</H3>
-		<P>Choose a forum and you can browse, search, and post messages.<P>';
+	echo '<H3>'.$Language->DISCUSSION_FORUMS.'</H3>'.$Language->FORUM_CHOOSE;
 
 	/*
 		Put the result set (list of forums for this group) into a column with folders
