@@ -1,5 +1,8 @@
 2003-02-15  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/themes/kde/Theme.class(listTableTop): remove reference
+	to unneeded clear.png.
+
 	* INSTALL: mention AcceptPathInfo on if using Apache 2.
 
 2003-02-13  Roland Mas  <lolando@debian.org>
