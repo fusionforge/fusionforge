@@ -45,7 +45,6 @@ require_once('common/tracker/ArtifactMessage.class');
 				}
 				$data =& db_fetch_array($res);
 			}
-			$Group =& group_get_object($data["group_id"]);
 			$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
 			$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
 		}
