@@ -130,7 +130,7 @@ function show_newest_projects() {
 			}
 		}
 	}
-	// TODO: Add more link to show all project
+	/// TODO: Add more link to show all project
 	//$return .= '<div align="center"><a href="/top/projlist.php">[ '.$Language->getText('general','more').' ]</a></div>';
 	return $return;
 }
