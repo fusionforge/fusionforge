@@ -6,10 +6,11 @@ sourceforge (2.6-0+11) unstable; urgency=low
     DELETE FROM themes WHERE dirname LIKE 'savannah_%'; BUG #124 CLOSED
   * [Christian] changed Layout.class with div align=center BUG #120 CLOSED
   * [Christian] removed link to docman BUG #122 CLOSED
-  * [Christian] $sys_name is now used for imported savannah themes 
+  * [Christian] $sys_name is now used for imported savannah themes
     BUG #129 CLOSED
+  * [Christian/Roland] added darkslate savannah theme
 
- -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 15:20:01 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 17:15:57 +0200
 
 sourceforge (2.6-0+10) unstable; urgency=low
 
