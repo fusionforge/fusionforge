@@ -196,7 +196,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 						<div style="font-size:smaller">
 						<input type="submit" name="submit" value="Update" /></div>
 					</td>
-					<td align="center"><a href="https://'. $GLOBALS['sys_lists_host'] .'/mailman/admin/'
+					<td align="center"><a href="http://'. $GLOBALS['sys_lists_host'] .'/mailman/admin/'
 					.db_result($result,$i,'list_name').'">[Administrate this list in GNU Mailman]</a>
 				       </td></tr>
 				       <tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3">
