@@ -69,7 +69,7 @@ Description: Collaborative development tool - database (using PostgreSQL)
 
 Package: gforge-mta-exim4
 Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32), exim4, exim4-daemon-heavy
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, debianutils (>= 1.7), debconf (>= 1.0.32), exim4, exim4-daemon-heavy
 Replaces: sourceforge-mta-exim (>> 2.6-0+11)
 Provides: gforge-mta
 Conflicts: gforge-mta

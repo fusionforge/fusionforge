@@ -1,4 +1,4 @@
-gforge (3.3.0-49) unstable; urgency=low
+gforge (3.3.0-50) unstable; urgency=low
 
   * [Christian] Added a call to migrateform.php and migraterbac.php in
     db-upgrade
@@ -14,11 +14,15 @@ gforge (3.3.0-49) unstable; urgency=low
   * [Hal] Maded changes to support apache2
   * [Roland] Added pgsql.class for nss-pgsql interaction (rather than
     LDAP).
-  * [Roland] Started removing LDAP dependency (to be replaced with direct
-    PostgreSQL lookups).  Done: NSS, e-mail forwarding for users.  TODO:
-    mailing-lists, probably PAM.
+  * [Roland] Removing LDAP dependency, to be replaced with direct
+    PostgreSQL lookups, is partially done.
+  * [Roland] LDAP -> PGSQL: Database views in place.
+  * [Roland] LDAP -> PGSQL: NSS done.
+  * [Roland] LDAP -> PGSQL: Exim4 for email forwarding done.
+  * [Roland] LDAP -> PGSQL: Exim4 for mailing-lists done.
+  * [Roland] LDAP -> PGSQL: TODO Postfix.
 
- -- Roland Mas <lolando@debian.org>  Tue, 26 Oct 2004 22:51:45 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 31 Oct 2004 13:39:23 +0100
 
 gforge (3.3.0-12) unstable; urgency=low
 

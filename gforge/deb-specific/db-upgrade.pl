@@ -1778,6 +1778,39 @@ END;
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "4.0.0-0+2" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20041031.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041031.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &debug ("Granting read access permissions to NSS") ;
+
+        @reqlist = ( "GRANT SELECT ON mta_users TO gforge_mta",
+		     "GRANT SELECT ON mta_lists TO gforge_mta",
+		    ) ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
 
     &debug ("It seems your database $action went well and smoothly.  That's cool.") ;
     &debug ("Please enjoy using Gforge.") ;

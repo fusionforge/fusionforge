@@ -19,6 +19,8 @@ else
     target=$1
 fi
 
+export LC_ALL=C
+
 case "$target" in
     default)
 	echo "Usage: $0 {configure-files|configure|purge|purge-files|dump|restore}"
@@ -85,7 +87,7 @@ EOF
 	    rm -f $cur
 	    
 	    cur=$(mktemp /tmp/$pattern)
-	    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\nhost $db_name gforge_mta $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
 	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 	    rm -f $cur
 
@@ -143,6 +145,23 @@ EOF
 	    fi
 	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
 CREATE USER gforge_nss WITH PASSWORD '' ;
+EOF
+		then
+		rm -f $tmp1 $tmp2
+	    else
+		echo "Cannot create PostgreSQL user...  This shouldn't have happened."
+		echo "Maybe a problem in your PostgreSQL configuration?"
+		echo "Please report a bug to the Debian bug tracking system"
+		echo "Please include the following output:"
+		echo "CREATE USER's STDOUT:"
+		cat $tmp1
+		echo "CREATE USER's STDERR:"
+		cat $tmp2
+		rm -f $tmp1 $tmp2
+		exit 1
+	    fi
+	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
+CREATE USER gforge_mta WITH PASSWORD '' ;
 EOF
 		then
 		rm -f $tmp1 $tmp2

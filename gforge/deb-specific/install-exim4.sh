@@ -74,8 +74,9 @@ $seen_gf_domains = 0;
 while (($l = <>) !~ /^\s*domainlist\s*local_domains/) {
   print $l;
   $seen_gf_domains = 1 if ($l =~ /\s*GFORGE_DOMAINS=/);
+  $seen_pg_servers = 1 if ($l =~ m,hide pgsql_servers = $sys_dbhost.*/gforge_mta,);
 };
-# hide pgsql_servers = "localhost/gforge/some_user/some_password"
+print "hide pgsql_servers = $sys_dbhost/$sys_dbname/gforge_mta/\n" unless $seen_pg_servers;
 print "GFORGE_DOMAINS=users.$domain_name:$sys_lists_host\n" unless $seen_gf_domains;
 chomp $l;
 $l .= ":GFORGE_DOMAINS" unless ($l =~ /^[^#]*GFORGE_DOMAINS/);
@@ -97,12 +98,11 @@ my $gf_block = "# BEGIN GFORGE BLOCK -- DO NOT EDIT #
 # keep it in the Directors Configuration section (between the second and the
 # third occurences of a line containing only the word \"end\")
 
-hide pgsql_servers = $db_host/$db_name/gforge_nss/''
 forward_for_gforge:
   domains = users.$domain_name
   driver = redirect
   file_transport = address_file
-  data = \${lookup pgsql {select email from users where user_name=\'\$local_part\'}}
+  data = \${lookup pgsql {select email from mta_users where login=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -110,7 +110,7 @@ forward_for_gforge_lists:
   domains = $sys_lists_host
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListPostaddress}}
+  data = \${lookup pgsql {select post_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -119,7 +119,7 @@ forward_for_gforge_lists_owner:
   local_part_suffix = -owner
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListOwnerAddress}}
+  data = \${lookup pgsql {select owner_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -128,7 +128,7 @@ forward_for_gforge_lists_request:
   local_part_suffix = -request
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListRequestAddress}}
+  data = \${lookup pgsql {select request_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -137,7 +137,7 @@ forward_for_gforge_lists_admin:
   local_part_suffix = -admin
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListAdminAddress}}
+  data = \${lookup pgsql {select admin_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -146,7 +146,7 @@ forward_for_gforge_lists_bounces:
   local_part_suffix = -bounces
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListBouncesAddress}}
+  data = \${lookup pgsql {select bounces_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -155,7 +155,7 @@ forward_for_gforge_lists_confirm:
   local_part_suffix = -confirm
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListConfirmAddress}}
+  data = \${lookup pgsql {select confirm_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -164,7 +164,7 @@ forward_for_gforge_lists_join:
   local_part_suffix = -join
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListJoinAddress}}
+  data = \${lookup pgsql {select join_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -173,7 +173,7 @@ forward_for_gforge_lists_leave:
   local_part_suffix = -leave
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListLeaveAddress}}
+  data = \${lookup pgsql {select leave_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -182,7 +182,7 @@ forward_for_gforge_lists_subscribe:
   local_part_suffix = -subscribe
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListSubscribeAddress}}
+  data = \${lookup pgsql {select subscribe_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 
@@ -191,7 +191,7 @@ forward_for_gforge_lists_unsubscribe:
   local_part_suffix = -unsubscribe
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup ldap {ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListUnsubscribeAddress}}
+  data = \${lookup pgsql {select unsubscribe_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
   user = nobody
   group = nogroup
 # END GFORGE BLOCK #
@@ -244,6 +244,7 @@ while (<>) { print; };
 
   configure)
     [ -x /usr/bin/newaliases ] && newaliases
+    invoke-rc.d exim4 restart
   ;;
 
   purge-files)
