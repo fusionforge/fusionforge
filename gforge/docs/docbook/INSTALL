@@ -55,4 +55,4 @@ All these steps are automated in the Makefile by using sudo:
 
   $ make debianhtml
   $ make debianpdf
-  $ make debian      # run both debianhtml and debianpdf
+  $ make debian      # runs both debianhtml and debianpdf
