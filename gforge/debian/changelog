@@ -2,8 +2,9 @@ sourceforge (2.5-27+) unstable; urgency=low
 
   * [Roland] Fixed problem with Apache-SSL: the config file is
     /etc/apache-ssl/httpd.conf, not /etc/apache/httpd.conf.
+  * [Christian] Removed ou=People for admin in local.inc.template
 
- --
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Mar 2002 13:59:36 +0100
 
 sourceforge (2.5-27) unstable; urgency=low
 
