@@ -45,7 +45,7 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 #
-# $FreeBSD: projects/cvsweb/cvsweb.cgi,v 1.259 2004/05/08 14:13:40 scop Exp $
+# $FreeBSD: projects/cvsweb/cvsweb.cgi,v 1.272 2004/08/20 18:28:44 scop Exp $
 # $Id$
 # $Idaemons: /home/cvs/cvsweb/cvsweb.cgi,v 1.84 2001/10/07 20:50:10 knu Exp $
 #
@@ -69,15 +69,14 @@ use vars qw (
   @revisions %state %difflines %log %branchpoint @revorder $keywordsubstitution
   $prcgi @prcategories $re_prcategories $prkeyword $re_prkeyword $mancgi
   $doCheckout $scriptname $scriptwhere
-  $where $pathinfo $Browser $nofilelinks $maycompress
-  @stickyvars %funcline_regexp
+  $where $Browser $nofilelinks $maycompress @stickyvars %funcline_regexp
   $is_links $is_lynx $is_w3m $is_msie $is_mozilla3 $is_textbased
   %input $query $barequery $sortby $bydate $byrev $byauthor
   $bylog $byfile $defaultDiffType $logsort $cvstree $cvsroot
   $charset $output_filter
   @command_path %CMD $allow_compress $backicon $diricon $fileicon $graphicon
-  $fullname $newname $cvstreedefault $logo $defaulttitle $address $binfileicon
-  $long_intro $short_instruction $shortLogLen $show_author
+  $fullname $cvstreedefault $logo $defaulttitle $address $binfileicon
+  $long_intro $short_instruction $shortLogLen $show_author $authorurl_pattern
   $tablepadding $hr_breakable $showfunc $hr_ignwhite $hr_ignkeysubst
   $inputTextSize $mime_types $allow_annotate $allow_markup
   $allow_log_extra $allow_dir_extra $allow_source_extra
@@ -105,7 +104,7 @@ use URI::Escape           qw(uri_escape uri_unescape);
 use constant VALID_PATH   => qr/^([[:^cntrl:]]+)$/o;
 use constant VALID_TAG1   => qr/^([a-zA-Z][[:graph:]]*)$/o;
 use constant VALID_TAG2   => qr/^([^\$,.:;@]+)$/o;
-use constant CVSWEBMARKUP => qr/^text\/(x-cvsweb|vnd\.viewcvs)-markup$/io;
+use constant CVSWEBMARKUP => qr{^text/(x-cvsweb|vnd\.viewcvs)-markup$}io;
 use constant LOG_FILESEPR => qr/^={77}$/o;
 use constant LOG_REVSEPR  => qr/^-{28}$/o;
 
@@ -120,7 +119,7 @@ use constant HAS_EDIFF    => eval { require String::Ediff;  };
 
 BEGIN
 {
-  $VERSION = '3.0.1';
+  $VERSION = '3.0.2';
 
   $HTML_DOCTYPE =
     '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" ' .
@@ -156,7 +155,7 @@ sub spacedHtmlText($;$);
 sub link($$);
 sub revcmp($$);
 sub fatal($$@);
-sub redirect($);
+sub redirect($;$);
 sub safeglob($);
 sub search_path($);
 sub getEnscriptHL($);
@@ -192,14 +191,14 @@ sub display_link($$;$$);
 sub graph_link($;$);
 sub history_link($$;$);
 sub toggleQuery($;$);
-sub urlencode($);
 sub htmlquote($);
 sub htmlunquote($);
-sub hrefquote($);
+sub uri_escape_path($);
 sub http_header(;$$);
 sub html_header($;$);
 sub html_footer();
 sub link_tags($);
+sub urlize_author($);
 sub forbidden($);
 sub startproc(@);
 sub runproc(@);
@@ -214,7 +213,6 @@ my ($mydir) = (dirname($0) =~ /(.*)/);    # untaint
 
 # == EDIT this ==
 # Locations to search for user configuration, in order:
-#for (catfile($mydir, 'cvsweb.conf'), '/etc/cvsweb.conf') {
 for ('/etc/gforge/plugins/scmcvs/cvsweb.conf') {
   if (-r $_) {
     $config = $_;
@@ -238,7 +236,7 @@ $allow_log_extra      = 1;
   %MTYPES = %tags = %alltags = %fileinfo = %DIFF_COMMANDS = ();
 
 $cvstreedefault = $logo = $defaulttitle =
-  $address = $long_intro = $short_instruction = $shortLogLen = $show_author =
+  $address = $long_intro = $short_instruction = $shortLogLen = $show_author = $authorurl_pattern =
   $tablepadding = $hr_breakable = $showfunc = $hr_ignwhite =
   $hr_ignkeysubst = $inputTextSize = $mime_types = $allow_annotate =
   $allow_markup = $use_java_script = $edit_option_form =
@@ -284,7 +282,8 @@ $cvstreedefault = $logo = $defaulttitle =
 
 ##### End of configuration variables #####
 
-if ($ENV{PATH_INFO}) {
+my $pathinfo = '';
+if (defined($ENV{PATH_INFO}) && $ENV{PATH_INFO} ne '') {
   ($pathinfo) = ($ENV{PATH_INFO} =~ VALID_PATH)
     or fatal('500 Internal Error',
              'Illegal PATH_INFO in environment: <code>%s</code>',
@@ -297,27 +296,28 @@ if ($ENV{SCRIPT_NAME}) {
              $ENV{SCRIPT_NAME});
 }
 
-$pathinfo      = '' unless defined($pathinfo);
 $scriptname    = '' unless defined($scriptname);
 
 $where         =  $pathinfo;
-$doCheckout    =  ($where =~ m|^/$CheckoutMagic/|o);
-$where         =~ s|^/$CheckoutMagic/|/|o;
+$doCheckout    =  $where =~ s|^/$CheckoutMagic/|/|o;
 $where         =~ s|^/||;
-$scriptname    =~ s|^/+|/|;
+$scriptname    =~ s|^/*|/|;
 
 if(!defined($ENV{'PHP_WRAPPER'})) {
 # Let's workaround thttpd's stupidity..
-if ($ENV{'SERVER_SOFTWARE'} =~ m|thttpd| && $scriptname =~ m|/$|) {
+if ($scriptname =~ m|/$|) {
   $pathinfo .= '/';
   my $re = quotemeta $pathinfo;
   $scriptname =~ s/$re$//;
 }
 }
 
-$scriptwhere  = $scriptname;
-$scriptwhere .= '/' . urlencode($where) if ($where);
-$where = '/' if ($where eq '');
+# $scriptname : the URI escaped path to this script
+# $where      : the path in the CVS repository (without leading /, or only /)
+# $scriptwhere: the URI escaped $scriptname + '/' + $where
+$scriptname   = uri_escape_path($scriptname);
+$scriptwhere  = join('/', $scriptname, uri_escape_path($where));
+$where        = '/' if ($where eq '');
 
 # In text-based browsers, it's very annoying to have two links per file;
 # skip linking the image for them.
@@ -470,7 +470,7 @@ if (defined($t)) {
 }
 $t = $query{'content-type'};
 if (defined($t)) {
-  ($input{'content-type'}) = ($t =~ /^([-0-9A-Za-z]+\/[-0-9A-Za-z\.]+)$/)
+  ($input{'content-type'}) = ($t =~ m|^([-0-9A-Za-z]+/[-0-9A-Za-z\.]+)$|)
     or fatal('500 Internal Error',
              'Unsupported content type: <code>%s</code>', $t);
 }
@@ -648,7 +648,7 @@ foreach my $k (keys %ICONS) {
   if ($ipath) {
     ${"${k}icon"} =
       sprintf('<img src="%s" alt="%s" border="0" width="%d" height="%d" />',
-              hrefquote($ipath), htmlquote($itxt), $iwidth, $iheight);
+              htmlquote($ipath), htmlquote($itxt), $iwidth, $iheight);
   } else {
     ${"${k}icon"} = $itxt;
   }
@@ -672,29 +672,25 @@ $prcgi           .= '%s' if defined($prcgi) && $prcgi !~ /%s/;
 $fullname         = catfile($cvsroot, $where);
 
 my $rewrite = 0;
-
 if ($pathinfo =~ m|//|) {
   $pathinfo =~ y|/|/|s;
   $rewrite = 1;
 }
-
 if (-d $fullname) {
   if ($pathinfo !~ m|/$|) {
     $pathinfo .= '/';
     $rewrite   = 1;
   }
-} else {
-  if ($pathinfo =~ m|/$|) {
-    chop $pathinfo;
-    $rewrite = 1;
-  }
+} elsif ($pathinfo =~ m|/$|) {
+  chop $pathinfo;
+  $rewrite = 1;
 }
-
 if ($rewrite) {
-  redirect($scriptname . urlencode($pathinfo) . $query);
+  redirect($scriptname . uri_escape_path($pathinfo) . $query, 1);
 }
-
 undef $rewrite;
+
+undef $pathinfo;
 
 if (!-d $cvsroot) {
   fatal("500 Internal Error",
@@ -865,7 +861,7 @@ if (-d $fullname) {
   }
 
   if ($use_descriptions &&
-      open(DESC, '<', catfile($cvsroot, 'CVSROOT', 'descriptions'))) {
+      open(DESC, catfile($cvsroot, 'CVSROOT', 'descriptions'))) {
     while (<DESC>) {
       chomp;
       my ($dir, $description) = /(\S+)\s+(.*)/;
@@ -880,6 +876,7 @@ if (-d $fullname) {
   if ($where eq '/') {
     chooseMirror();
     chooseCVSRoot();
+
   } else {
     print '<p>Current directory: <b>', clickablePath($where, 0), '</b>';
     if ($cvshistory_url) {
@@ -889,14 +886,13 @@ if (-d $fullname) {
     print "</p>\n";
     print "<p>Current tag: <b>", htmlquote($input{only_with_tag}), "</b></p>\n"
       if $input{only_with_tag};
-
   }
 
   print "<hr />\n";
 
   my $infocols = 1;
 
-  printf(<<EOF, htmlquote("Index of $where"));
+  printf(<<EOF, 'Directory index of ' . htmlquote($where));
 <table class="dir" width="100%%" cellspacing="0" cellpadding="$tablepadding" summary="%s">
 <tr>
 EOF
@@ -989,9 +985,6 @@ EOF
   # Sort without the Attic/ pathname.
   # place directories first
 
-  my $attic;
-  my $url;
-  my $fileurl;
   my $filesexists;
   my $filesfound;
 
@@ -1011,11 +1004,10 @@ EOF
     # Ignore non-readable files and directories?
     next if ($input{hidenonreadable} && (! -r _ || ($isdir && ! -x _)));
 
+    my $attic = '';
     if ($file =~ s|^Attic/||) {
       $attic = ' <span class="attic">(in the Attic) ' .
         $hideAtticToggleLink . '</span>';
-    } else {
-      $attic = '';
     }
 
     if ($file eq updir() || $isdir) {
@@ -1026,24 +1018,15 @@ EOF
         ($dirrow % 2) ? 'even' : 'odd';
 
       if ($file eq updir()) {
-        $url = "../$query";
-        if ($nofilelinks) {
-          print $backicon;
-        } else {
-          print &link($backicon, $url);
-        }
+        my $url = "../$query";
+        print $nofilelinks ? $backicon : &link($backicon, $url);
         print '&nbsp;', &link("Parent Directory", $url);
+
       } else {
-        $url = './' . urlencode($file) . "/$query";
-        print '<a name="', hrefquote($file), '"></a>';
-
-        if ($nofilelinks) {
-          print $diricon;
-        } else {
-          print &link($diricon, $url);
-        }
+        my $url = './' . uri_escape_path($file) . "/$query";
+        print '<a name="', htmlquote($file), '"></a>';
+        print $nofilelinks ? $diricon : &link($diricon, $url);
         print '&nbsp;', &link(htmlquote("$file/"), $url), $attic;
-
         if ($file eq "Attic") {
           print ' <span class="attic">',
             &link('[show]',
@@ -1056,7 +1039,7 @@ EOF
       if ($filename) {
         print "</td>\n<td>&nbsp;</td>\n<td class=\"age\">";
         print readableTime(time() - $date, 0) if $date;
-        print "</td>\n<td class=\"author\">", htmlquote($author)
+        print "</td>\n<td class=\"author\">", urlize_author(htmlquote($author))
           if $show_author;
         print "</td>\n<td class=\"log\">";
         $filename =~ s%^[^/]+/%%;
@@ -1093,8 +1076,8 @@ EOF
 
     } elsif ($file =~ s/,v$//) {
 
-      $fileurl   = ($attic ? 'Attic/' : '') . urlencode($file);
-      $url       = './' . $fileurl . $query;
+      my $fileurl = ($attic ? 'Attic/' : '') . uri_escape_path($file);
+      my $url     = './' . $fileurl . $query;
       $filesexists++;
       next if (!defined($fileinfo{$file}));
       my ($rev, $date, $log, $author, $filename, $keywordsubst) =
@@ -1106,17 +1089,13 @@ EOF
       printf '<td class="file"%s>', $allow_cvsgraph ? '' : ' colspan="2"';
 
       my $icon = $isbinary ? $binfileicon : $fileicon;
-      if ($nofilelinks) {
-        print $icon;
-      } else {
-        print &link($icon, $url);
-      }
+      print $nofilelinks ? $icon : &link($icon, $url);
       print '&nbsp;', &link(htmlquote($file), $url), $attic;
       print '</td><td class="graph">', graph_link($fileurl) if $allow_cvsgraph;
       print "</td>\n<td width=\"30\">", display_link($fileurl, $rev);
       print "</td>\n<td class=\"age\">";
       print readableTime(time() - $date, 0) if $date;
-      print "</td>\n<td class=\"author\">", htmlquote($author) if $show_author;
+      print "</td>\n<td class=\"author\">", urlize_author(htmlquote($author)) if $show_author;
       print "</td>\n<td class=\"log\">";
 
       if ($log) {
@@ -1207,6 +1186,7 @@ EOF
         '<div style="text-align: center">Download this directory in ';
       # Mangle the filename so browsers show a reasonable filename to download.
       my @types = ();
+      $basefile = uri_escape($basefile);
       push(@types, &link('tarball', "$basefile.tar.gz$q")) if $havetar;
       push(@types, &link('zip archive', "$basefile.zip$q")) if $havezip;
       print join(' or ', @types), "</div>\n";
@@ -1215,11 +1195,8 @@ EOF
 
   if ($edit_option_form || defined($input{options})) {
 
-    my $formwhere = $scriptwhere;
-    $formwhere =~ s|Attic/?$|| if $input{hideattic};
-
     print <<EOF;
-<form method="get" action="${formwhere}">
+<form method="get" action="./">
 <fieldset>
 <legend>General options</legend>
 <input type="hidden" name="copt" value="1" />
@@ -1228,7 +1205,7 @@ EOF
       print "<input type=\"hidden\" name=\"cvsroot\" value=\"$cvstree\" />\n";
     }
     print <<EOF;
-<table>
+<table summary="General options">
 <tr>
 <td class="opt-label">
 <label for="sortby" accesskey="F">Sort files by:</label>
@@ -1359,19 +1336,18 @@ elsif (-f $fullname . ',v') {
           $input{r2}, $input{tr2}, $input{f});
   gzipclose();
   exit;
-} elsif (($newname = $fullname) =~ s|/([^/]+)$|/Attic/$1|
-  && -f $newname . ",v")
-{
 
+} elsif (do { (my $tmp = $fullname) =~ s|/([^/]+)$|/Attic/$1|; -f "$tmp,v" }) {
   # The file has been removed and is in the Attic.
   # Send a redirect pointing to the file in the Attic.
   (my $newplace = $scriptwhere) =~ s|/([^/]+)$|/Attic/$1|;
   if ($ENV{QUERY_STRING} ne "") {
-    redirect("${newplace}?$ENV{QUERY_STRING}");
+    redirect("$newplace?$ENV{QUERY_STRING}");
   } else {
     redirect($newplace);
   }
   exit;
+
 } elsif (0 && (my @files = &safeglob($fullname . ",v"))) {
   http_header("text/plain");
   print "You matched the following files:\n";
@@ -1380,23 +1356,25 @@ elsif (-f $fullname . ',v') {
   # Find the tags from each file
   # Display a form offering diffs between said tags
 } else {
-  my $fh = do { local (*FH); };
-  my $module;
 
   # Assume it's a module name with a potential path following it.
-  my $xtra = (($module = $where) =~ s|/.*||) ? $& : '';
+  my $module;
+  my $xtra = (($module = $where) =~ s|(/.*)||) ? $1 : '';
 
   # Is there an indexed version of modules?
-  if (open($fh, "< $cvsroot/CVSROOT/modules")) {
+  my $fh = do { local (*FH); };
+  if (open($fh, catfile($cvsroot, 'CVSROOT', 'modules'))) {
     while (<$fh>) {
       if (/^(\S+)\s+(\S+)/o
           && $module eq $1
-          && -d "$cvsroot/$2"
-          && $module ne $2)
+          && $module ne $2
+          && -d "$cvsroot/$2")
       {
+        close($fh);
         redirect("$scriptname/$2$xtra$query");
       }
     }
+    close($fh);
   }
   fatal("404 Not Found", '%s: no such file or directory', $where);
 }
@@ -1495,7 +1473,7 @@ sub findLastModifiedSubdirs(@)
 sub htmlify_sub(&$)
 {
   (my $proc, local $_) = @_;
-  my @a = split (m`(<a [^>]+>[^<]*</a>)`i);
+  my @a = split(m|(<a [^>]+>[^<]*</a>)|i);
   my $linked;
   my $result = '';
 
@@ -1525,9 +1503,9 @@ sub htmlify($;$)
   # get e-mails as link
   $_ = htmlify_sub {
     s<
-      [\w+=\-.!]+@[\w\-]+(\.[\w\-]+)+
+      ([\w+=\-.!]+@[\w\-]+(?:\.[\w\-]+)+)
      ><
-       &link($&, "mailto:$&")
+       &link($1, "mailto:$1")
      >egix;
   } $_;
 
@@ -1581,7 +1559,7 @@ sub htmlify($;$)
          }{
             my($text, $name, $section) = ($1, $2, defined($3) ? $3 : $4);
             ($name =~ /[A-Za-z]/ && $name !~ /\.(:|$)/)
-             ? &link($text, sprintf($mancgi, $section, $name))
+             ? &link($text, sprintf($mancgi, $section, uri_escape($name)))
               : $text;
          }egx;
       } $_;
@@ -1604,7 +1582,7 @@ sub spacedHtmlText($;$)
   if (defined($ts)) {
 
     # Expand tabs
-    1 while s/\t+/' ' x (length($&) * $ts - length($`) % $ts)/e;
+    1 while s/(.*)(\t+)/' ' x (length($2) * $ts - length($1) % $ts)/e;
   }
 
   # replace <tab> and <space> (\001 is to protect us from htmlify)
@@ -1631,11 +1609,7 @@ sub spacedHtmlText($;$)
 sub link($$)
 {
   my ($name, $url) = @_;
-
-  $url =~ s/:/sprintf("%%%02x", ord($&))/eg
-    if $url =~ /^[^a-z]/;    # relative
-
-  sprintf '<a href="%s">%s</a>', hrefquote($url), $name;
+  return sprintf('<a href="%s">%s</a>', htmlquote($url), $name);
 }
 
 
@@ -1646,14 +1620,12 @@ sub revcmp($$)
   # make no comparison for a tag or a branch
   return 0 if $rev1 =~ /[^\d.]/ || $rev2 =~ /[^\d.]/;
 
-  my (@r1) = split (/\./, $rev1);
-  my (@r2) = split (/\./, $rev2);
+  my (@r1) = split(/\./, $rev1);
+  my (@r2) = split(/\./, $rev2);
   my ($a, $b);
 
-  while (($a = shift (@r1)) && ($b = shift (@r2))) {
-    if ($a != $b) {
-      return $a <=> $b;
-    }
+  while (($a = shift(@r1)) && ($b = shift(@r2))) {
+    return $a <=> $b unless ($a == $b);
   }
   if (@r1) { return  1; }
   if (@r2) { return -1; }
@@ -1673,12 +1645,23 @@ sub fatal($$@)
 }
 
 
-sub redirect($)
+#
+# Sends a redirect to the given URL.
+#
+sub redirect($;$)
 {
-  my ($url) = @_;
-  print "Status: 301 Moved\r\n", "Location: $url\r\n";
-  html_header('Moved');
-  print "<p>This document is located ", &link('here', $url), "</p>\n";
+  my ($url, $permanent) = @_;
+  my ($status, $text);
+  if ($permanent) {
+    $status = '301';
+    $text   = 'Moved Permanently';
+  } else {
+    $status = '302';
+    $text   = 'Found';
+  }
+  print "Status: $status $text\r\n", "Location: $url\r\n";
+  html_header($text);
+  print "<p>This document has moved ", &link('here', $url), ".</p>\n";
   html_footer();
   exit(1);
 }
@@ -1838,8 +1821,8 @@ sub openOutputFilter()
 sub doAnnotate($)
 {
   my ($rev) = @_;
-  (my $pathname = $where) =~ s/(Attic\/)?[^\/]*$//;
-  (my $filename = $where) =~ s/^.*\///;
+  (my $pathname = $where) =~ s|((?<=/)Attic/)?[^/]*$||;
+  (my $filename = $where) =~ s|^.*/||;
 
   # This annotate version is based on the cvs annotate-demo Perl script by
   # Cyclic Software.  It was written by Cyclic Software,
@@ -1965,15 +1948,11 @@ EOF
         $revprint = sprintf('%-8s', '');
       } else {
         $revprint = sprintf('%-8s', $lrev);
-        $revprint =~ s`\S+`&link($&, "$scriptwhere$query#rev$&")`e;    # `
+        $revprint =~ s|(\S+)|&link($1, uri_escape($filename)."$query#rev$1")|e;
         $oldLusr = '';
       }
 
-      if ($lusr eq $oldLusr) {
-        $usrprint = '';
-      } else {
-        $usrprint = $lusr;
-      }
+      $usrprint = ($lusr eq $oldLusr) ? '' : $lusr;
       $oldLrev = $lrev;
       $oldLusr = $lusr;
 
@@ -2144,9 +2123,8 @@ sub cvswebMarkup($$$$$$;$)
 {
   my ($filehandle, $fullname, $rev, $isbin, $mimetype, $logged, $mod) = @_;
 
-  (my $pathname = $where) =~ s/(Attic\/)?[^\/]*$//;
-  (my $filename = $where) =~ s/^.*\///;
-  my $fileurl   = urlencode($filename);
+  (my $pathname = $where) =~ s|((?<=/)Attic/)?[^/]*$||;
+  (my $filename = $where) =~ s|^.*/||;
 
   navigateHeader($scriptwhere, $pathname, $filename, $rev, 'view', $mod);
 
@@ -2166,14 +2144,14 @@ EOF
       if $input{only_with_tag};
   }
   print "</div>\n<hr />";
-  my $url = download_url($fileurl, $rev, $mimetype);
+  my $url = download_url(uri_escape($filename), $rev, $mimetype);
 
   if ($mimetype =~ m|^image/|i) {
     printf '<img src="%s" alt="%s" /><br />',
-      hrefquote("$url$barequery"), htmlquote($filename);
+      $url . $barequery, htmlquote($filename);
   } elsif (lc($mimetype) eq 'application/pdf') {
     printf '<embed src="%s" width="100%%" height="100%%" /><br />',
-      hrefquote("$url$barequery");
+      $url . $barequery;
   } else {
 
     print "<pre>\n";
@@ -2364,7 +2342,7 @@ sub doDiff($$$$$$)
     my $hl = 'diff';
     $hl .= $1 if ($1 eq 'u' || $1 eq 's');
     (my $where_nd = $where)       =~ s/\.diff$//;
-    (my $pathname = $where_nd)    =~ s|(Attic\/)?[^/]*$||;
+    (my $pathname = $where_nd)    =~ s|((?<=/)Attic/)?[^/]*$||;
     (my $filename = $where_nd)    =~ s|^.*/||;
     (my $swhere   = $scriptwhere) =~ s|\.diff$||;
     navigateHeader($swhere, $pathname, $filename, $rev2, 'diff');
@@ -2712,7 +2690,7 @@ sub readLog($;$)
     last logentry if (!defined($_));    # EOF
     if (/^revision (\d+(?:\.\d+)+)/) {
       $rev = $1;
-      unshift (@allrevisions, $rev);
+      unshift(@allrevisions, $rev);
     } elsif ($_ =~ LOG_FILESEPR || $_ =~ LOG_REVSEPR) {
       next logentry;
     } else {
@@ -2849,7 +2827,7 @@ sub readLog($;$)
     next if ($onlyonbranch
              && $br ne $onlyonbranch
              && $_  ne $onlybranchpoint);
-    unshift (@revisions, $_);
+    unshift(@revisions, $_);
   }
 
   if ($logsort eq "date") {
@@ -2904,29 +2882,31 @@ sub printLog($$$;$$)
   (my $br  = $_)  =~ s/\.\d+$//;
   (my $brp = $br) =~ s/\.?\d+$//;
 
-  my $isDead = ($state{$_} eq 'dead');
-
-  (my $filename = $where) =~ s/^.*\///;
-  my $fileurl   = urlencode($filename);
-
   print "<a name=\"rev$_\"></a>";
   if (defined($revsym{$_})) {
-    foreach my $sym (split (", ", $revsym{$_})) {
-      print '<a name="', hrefquote($sym), '"></a>';
+    foreach my $sym (split(", ", $revsym{$_})) {
+      print '<a name="', htmlquote($sym), '"></a>';
     }
   }
   if ($revsym{$br} && !defined($nameprinted{$br})) {
-    foreach my $sym (split (", ", $revsym{$br})) {
-      print '<a name="', hrefquote($sym), '"></a>';
+    foreach my $sym (split(", ", $revsym{$br})) {
+      print '<a name="', htmlquote($sym), '"></a>';
     }
     $nameprinted{$br} = 1;
   }
 
-  printf "\n Revision <b>%s</b>", htmlquote($_);
+  print "\n Revision <b>$_</b>";
   if (/^1\.1\.1\.\d+$/) {
     print " <i>(vendor branch)</i>";
   }
+
+  (my $filename = $where) =~ s|^.*/||;
+  my $fileurl   = uri_escape($filename);
+  undef $filename;
+
+  my $isDead = ($state{$_} eq 'dead');
   if (!$isDead) {
+
     print ': ', download_link($fileurl, $_, 'download', $mimetype);
 
     my @vlinks = ();
@@ -2934,12 +2914,10 @@ sub printLog($$$;$$)
       unless $isbin;
     push(@vlinks, display_link($fileurl, $_, 'markup', 'text/x-cvsweb-markup'))
       if ($allow_markup && $inlogview && (!$isbin || viewable($mimetype)));
-    if (!$isbin) {
+    if (!$isbin && $allow_annotate) {
       push(@vlinks,
            &link('annotated',
-                 sprintf('%s/%s?annotate=%s%s',
-                         $scriptname, urlencode($where), $_, $barequery)))
-        if $allow_annotate;
+                 sprintf('%s?annotate=%s%s', $fileurl, $_, $barequery)));
     }
     print ' - view: ', join(', ', @vlinks) if @vlinks;
     undef @vlinks;
@@ -2951,7 +2929,7 @@ sub printLog($$$;$$)
       } else {
         print &link('select&nbsp;for&nbsp;diffs',
                     sprintf('%s?r1=%s%s#rev%s',
-                            $scriptwhere, $_, $barequery, $_));
+                            $fileurl, $_, $barequery, $_));
       }
     }
     print ' - ', graph_link('', 'revision graph')
@@ -2976,7 +2954,7 @@ sub printLog($$$;$$)
 
   # Find the previous revision
   my $prev;
-  my @prevrev = split (/\./, $_);
+  my @prevrev = split(/\./, $_);
   do {
     if (--$prevrev[$#prevrev] <= 0) {
 
@@ -3001,7 +2979,7 @@ sub printLog($$$;$$)
     if ($prev) {
       $diffrev{$prev} = 1;
       my $url =
-        sprintf('%s.diff?r1=%s;r2=%s%s', $scriptwhere, $prev, $_, $barequery);
+        sprintf('%s.diff?r1=%s;r2=%s%s', $fileurl, $prev, $_, $barequery);
       if (my @dlinks = getDiffLinks($url, $mimetype, $isbin)) {
         print $diff, ' to previous ', $prev, ': ', join(', ', @dlinks);
         $diff = ''; $printed = 1;
@@ -3016,7 +2994,7 @@ sub printLog($$$;$$)
       && !defined($diffrev{$brp}))
     {
       my $url =
-        sprintf('%s.diff?r1=%s;r2=%s%s', $scriptwhere, $brp, $_, $barequery);
+        sprintf('%s.diff?r1=%s;r2=%s%s', $fileurl, $brp, $_, $barequery);
       if (my @dlinks = getDiffLinks($url, $mimetype, $isbin)) {
         print $diff, ' to branchpoint ', $brp, ': ', join(', ', @dlinks);
         $diff = ''; $printed = 1;
@@ -3033,10 +3011,10 @@ sub printLog($$$;$$)
 
       for ($i = 0; $i < $#revorder && $revorder[$i] ne $_; $i++) {
       }
-      my @tmp2 = split (/\./, $_);
+      my @tmp2 = split(/\./, $_);
       for ($nextmain = ""; $i > 0; $i--) {
         my $next = $revorder[$i - 1];
-        my @tmp1 = split (/\./, $next);
+        my @tmp1 = split(/\./, $next);
 
         if (@tmp1 < @tmp2) {
           $nextmain = $next;
@@ -3054,7 +3032,7 @@ sub printLog($$$;$$)
       if (!defined($diffrev{$nextmain})) {
         $diffrev{$nextmain} = 1;
         my $url = sprintf('%s.diff?r1=%s;r2=%s%s',
-          $scriptwhere, $nextmain, $_, $barequery);
+          $fileurl, $nextmain, $_, $barequery);
         if (my @dlinks = getDiffLinks($url, $mimetype, $isbin)) {
           print $diff, ' next main ', $nextmain, ': ', join(', ', @dlinks);
           $diff = ''; $printed = 1;
@@ -3067,7 +3045,7 @@ sub printLog($$$;$$)
     if (defined($input{r1}) && !defined($diffrev{$input{r1}})) {
       $diffrev{$input{r1}} = 1;
       my $url = sprintf('%s.diff?r1=%s;r2=%s%s',
-        $scriptwhere, $input{r1}, $_, $barequery);
+        $fileurl, $input{r1}, $_, $barequery);
       if (my @dlinks = getDiffLinks($url, $mimetype, $isbin)) {
         print $diff, ' to selected ', $input{r1}, ': ', join(', ', @dlinks);
         $diff = ''; $printed = 1;
@@ -3107,9 +3085,7 @@ sub doGraphView()
 EOF
 
   # Remove any pre-existing tag/branch names from branch links.
-  (my $bquery = $barequery) =~ s/[;&]+only_with_tag=.*?(?=[;&]|$)//g;
-  $bquery = hrefquote($bquery);
-  my $qquery = hrefquote($barequery);
+  (my $notag_query = $barequery) =~ s/;+only_with_tag=.*?(?=;|$)//g;
 
   my @graph_cmd =
     ($CMD{cvsgraph},
@@ -3118,10 +3094,10 @@ EOF
      '-i',
      '-M', $mapname,
      '-x', 'x',
-     "-Omap_branch_href=\"href=\\\"./?only_with_tag=%(%t%)$bquery\\\"\"",
-     "-Omap_rev_href=\"href=\\\"?rev=%(%R%)$qquery\\\"\"",
+     "-Omap_branch_href=\"href=\\\"./?only_with_tag=%(%t%)$notag_query\\\"\"",
+     "-Omap_rev_href=\"href=\\\"?rev=%(%R%)$barequery\\\"\"",
      "-Omap_diff_href=\"href=\\\"%(%F%).diff" .
-     "?r1=%(%P%);r2=%(%R%)$qquery\\\"\"",
+     "?r1=%(%P%);r2=%(%R%)$barequery\\\"\"",
      );
   push(@graph_cmd, '-c', $cvsgraph_config) if $cvsgraph_config;
   push(@graph_cmd, $filename . ',v');
@@ -3181,21 +3157,24 @@ sub doLog($)
 
   html_header("CVS log for $where");
 
-  (my $upwhere  = $where) =~ s|(Attic/)?[^/]+$||;
+  my $upwhere = $where;
   (my $filename = $where) =~ s|^.*/||;
-  my $backurl = $scriptname . "/" . urlencode($upwhere) . $query;
+  my $backurl = "./$query#" . uri_escape($filename);
+  if ($where =~ m|^(.*?)((?<=/)Attic/)?[^/]+$|) {
+    $upwhere = $1;
+    $backurl = ".$backurl" if $2; # skip over Attic
+  }
 
   my $isbin = $keywordsubstitution =~ /b/;
   my $mimetype = getMimeType($filename, $isbin);
 
   print "<p>\n ";
-  print &link($backicon, "$backurl#$filename"), " <b>Up to ",
+  print &link($backicon, $backurl), " <b>Up to ",
     &clickablePath($upwhere, 1), "</b>\n</p>\n";
   print "<p>\n ";
   print &link('Request diff between arbitrary revisions', '#diff');
-  if ($allow_cvsgraph) {
-    print ' - ', &graph_link('', 'Display revisions graphically');
-  }
+  print ' - ', &graph_link('', 'Display revisions graphically')
+    if $allow_cvsgraph;
   if ($cvshistory_url) {
     (my $d = $upwhere) =~ s|/+$||;
     print ' - ', history_link($d, $filename);
@@ -3378,8 +3357,8 @@ sub flush_diff_rows($$$$)
     for (my $j = 0; $j < $leftRow; $j++) {
       printf(<<EOF, spacedHtmlText(@$leftColRef[$j]));
 <tr>
- <td class="diff-removed">&nbsp;%s</td>
- <td class="diff-empty">&nbsp;</td>
+ <td class="diff diff-removed">&nbsp;%s</td>
+ <td class="diff diff-empty">&nbsp;</td>
 </tr>
 EOF
     }
@@ -3406,7 +3385,7 @@ EOF
         my $l_culx = $l_cul - 1; # not includes "\n"
         if ($j < $lb1) {
           $line = spacedHtmlText($line);
-          push(@left_html, "<td class=\"diff-changed\">$line</td>");
+          push(@left_html, "<td class=\"diff diff-changed\">$line</td>");
         } elsif ($lb1 == $j) {
           my $html_line;
           while ($lb1 == $j) {
@@ -3414,14 +3393,14 @@ EOF
 
             $line =~ /^(.*)(.{$begin_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-unchanged">';
+              '</span><span class="diff diff-unchanged">';
             $line = $2;
             last if ($j != $le1);
 
             my $end_char = $l_culx - $e1;
             $line =~ /^(.*)(.{$end_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-changed">';
+              '</span><span class="diff diff-changed">';
             $line = $2;
 
             $idx++;
@@ -3441,15 +3420,15 @@ EOF
             }
           }
           push(@left_html,
-               sprintf('<td><span class="%s">%s%s</span></td>',
-                       'diff-changed', $html_line, spacedHtmlText($line)));
+               sprintf('<td><span class="diff diff-changed">%s%s</span></td>',
+                       $html_line, spacedHtmlText($line)));
         } elsif ($le1 == $j) {
           my $html_line;
           while ($le1 == $j) {
             my $end_char = $l_culx - $e1;
             $line =~ /^(.*)(.{$end_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-changed">';
+              '</span><span class="diff diff-changed">';
             $line = $2;
 
             $idx++;
@@ -3474,15 +3453,15 @@ EOF
 
             $line =~ /^(.*)(.{$begin_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-unchanged">';
+              '</span><span class="diff diff-unchanged">';
             $line = $2;
           }
           push(@left_html,
-               sprintf('<td><span class="%s">%s%s</span></td>',
-                       'diff-unchanged', $html_line, spacedHtmlText($line)));
+              sprintf('<td><span class="diff diff-unchanged">%s%s</span></td>',
+                      $html_line, spacedHtmlText($line)));
         } else {
           $line = spacedHtmlText($line);
-          push(@left_html, "<td class=\"diff-unchanged\">$line</td>");
+          push(@left_html, "<td class=\"diff diff-unchanged\">$line</td>");
         }
       }
       ($idx, $b1, $e1, $lb1, $le1, $b2, $e2, $lb2, $le2) =
@@ -3498,7 +3477,7 @@ EOF
         my $r_culx = $r_cul - 1; # not includes "\n"
         if ($j < $lb2) {
           $line = spacedHtmlText($line);
-          push(@right_html, "<td class=\"diff-changed\">$line</td>");
+          push(@right_html, "<td class=\"diff diff-changed\">$line</td>");
         } elsif ($lb2 == $j) {
           my $html_line;
           while ($lb2 == $j) {
@@ -3506,7 +3485,7 @@ EOF
 
             $line =~ /^(.*)(.{$begin_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-unchanged">';
+              '</span><span class="diff diff-unchanged">';
             $line = $2;
 
             last if ($j != $le2);
@@ -3514,7 +3493,7 @@ EOF
             my $end_char = $r_culx - $e2;
             $line =~ /^(.*)(.{$end_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-changed">';
+              '</span><span class="diff diff-changed">';
             $line = $2;
 
             $idx++;
@@ -3534,15 +3513,15 @@ EOF
             }
           }
           push(@right_html,
-               sprintf('<td><span class="%s">%s%s</span></td>',
-                       'diff-changed', $html_line, spacedHtmlText($line)));
+               sprintf('<td><span class="diff diff-changed">%s%s</span></td>',
+                       $html_line, spacedHtmlText($line)));
         } elsif ($le2 == $j) {
           my $html_line;
           while ($le2 == $j) {
             my $end_char = $r_culx - $e2;
             $line =~ /^(.*)(.{$end_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-changed">';
+              '</span><span class="diff diff-changed">';
             $line = $2;
 
             $idx++;
@@ -3566,15 +3545,16 @@ EOF
             my $begin_char = $r_culx - $b2;
             $line =~ /^(.*)(.{$begin_char})$/;
             $html_line .= spacedHtmlText($1) .
-              '</span><span class="diff-unchanged">';
+              '</span><span class="diff diff-unchanged">';
             $line = $2;
           }
           push(@right_html,
-               sprintf('<td nowrap="nowrap"><span class="%s">%s%s</span></td>',
-                       'diff-unchanged', $html_line, spacedHtmlText($line)));
+               sprintf('<td nowrap="nowrap"><span class="diff diff-unchanged"'.
+                       '>%s%s</span></td>',
+                       $html_line, spacedHtmlText($line)));
         } else {
           $line = spacedHtmlText ($line);
-          push @right_html, "<td class=\"diff-unchanged\">$line</td>";
+          push @right_html, "<td class=\"diff diff-unchanged\">$line</td>";
         }
       }
       for (my $j = 0; $j < $leftRow || $j < $rightRow ; $j++) { # dump out both cols
@@ -3582,12 +3562,12 @@ EOF
         if ($j < $leftRow) {
           print $left_html[$j];
         } else {
-          print '<td class="diff-changed-missing">&nbsp;</td>';
+          print '<td class="diff diff-changed-missing">&nbsp;</td>';
         }
         if ($j < $rightRow) {
           print $right_html[$j];
         } else {
-          print '<td class="diff-changed-missing">&nbsp;</td>';
+          print '<td class="diff diff-changed-missing">&nbsp;</td>';
         }
         print "</tr>\n";
       }
@@ -3595,18 +3575,18 @@ EOF
       for (my $j = 0; $j < $leftRow || $j < $rightRow; $j++) { # dump both cols
         print "<tr>\n";
         if ($j < $leftRow) {
-          print '<td class="diff-changed">&nbsp;' .
+          print '<td class="diff diff-changed">&nbsp;' .
             spacedHtmlText(@$leftColRef[$j]) . '</td>';
         } else {
-          print '<td class="diff-changed-missing">&nbsp;</td>';
+          print '<td class="diff diff-changed-missing">&nbsp;</td>';
         }
         print "\n";
 
         if ($j < $rightRow) {
-          print '<td class="diff-changed">&nbsp;' .
+          print '<td class="diff diff-changed">&nbsp;' .
             spacedHtmlText(@$rightColRef[$j]) . '</td>';
         } else {
-          print '<td class="diff-changed-missing">&nbsp;</td>';
+          print '<td class="diff diff-changed-missing">&nbsp;</td>';
         }
         print "\n</tr>\n";
       }
@@ -3615,17 +3595,16 @@ EOF
 }
 
 
-##
-# Function to generate Human readable diff-files
-# human_readable_diff(String revision_to_return_to);
-##
+#
+# Generates "human readable", HTMLified diffs.
+#
 sub human_readable_diff($$)
 {
   my ($fh, $rev) = @_;
 
   (my $where_nd       = $where)       =~ s|\.diff$||;
   (my $filename       = $where_nd)    =~ s|^.*/||;
-  (my $pathname       = $where_nd)    =~ s|(Attic/)?[^/]*$||;
+  (my $pathname       = $where_nd)    =~ s|((?<=/)Attic/)?[^/]*$||;
   (my $scriptwhere_nd = $scriptwhere) =~ s|\.diff$||;
 
   navigateHeader($scriptwhere_nd, $pathname, $filename, $rev, 'diff');
@@ -3728,8 +3707,8 @@ EOF
           $_ = spacedHtmlText($rest, $d{tabstop});
           printf(<<EOF, $_);
 <tr>
- <td class="diff-empty">&nbsp;</td>
- <td class="diff-added">&nbsp;%s</td>
+ <td class="diff diff-empty">&nbsp;</td>
+ <td class="diff diff-added">&nbsp;%s</td>
 </tr>
 EOF
         } else {    # we got minus before
@@ -3744,8 +3723,8 @@ EOF
         $_ = spacedHtmlText($rest, $d{tabstop});
         printf(<<EOF, $_, $_);
 <tr>
- <td class="diff-same">&nbsp;%s</td>
- <td class="diff-same">&nbsp;%s</td>
+ <td class="diff diff-same">&nbsp;%s</td>
+ <td class="diff diff-same">&nbsp;%s</td>
 </tr>
 EOF
         $state    = "dump";
@@ -3764,7 +3743,7 @@ EOF
 <tr>
  <td colspan="2">&nbsp;</td>
 </tr>
-<tr class="diff-empty">
+<tr class="diff diff-empty">
  <td colspan="2" align="center"><b>- No viewable change -</b></td>
 </tr>
 EOF
@@ -3785,13 +3764,13 @@ EOF
 </div>
 <table style="float: right; border: thin outset" cellspacing="0" cellpadding="1" title="Legend" summary="Legend">
  <tr>
-  <td align="center" class="diff-removed">Removed from v.%s</td>
-  <td class="diff-empty">&nbsp;</td>
- </tr><tr class="diff-changed">
+  <td align="center" class="diff diff-removed">Removed from v.%s</td>
+  <td class="diff diff-empty">&nbsp;</td>
+ </tr><tr class="diff diff-changed">
   <td align="center" colspan="2">changed lines</td>
  </tr><tr>
-  <td class="diff-empty">&nbsp;</td>
-  <td align="center" class="diff-added">Added in v.%s</td>
+  <td class="diff diff-empty">&nbsp;</td>
+  <td align="center" class="diff diff-added">Added in v.%s</td>
  </tr>
 </table>
 </form>
@@ -3830,11 +3809,15 @@ sub doEnscript($$$;$)
 }
 
 
+#
+# The passed in $path and $filename should not be URI escaped, and $swhere
+# *should* be.
+#
 sub navigateHeader($$$$$;$)
 {
   my ($swhere, $path, $filename, $rev, $title, $moddate) = @_;
   $swhere = "" if ($swhere eq $scriptwhere);
-  $swhere = './' . urlencode($filename) if ($swhere eq "");
+  $swhere = './' . uri_escape($filename) if ($swhere eq "");
 
   my $qfile = htmlquote($filename);
   my $qpath = htmlquote($path);
@@ -3850,7 +3833,7 @@ $HTML_DOCTYPE
 <title>$qpath$qfile - $title$trev</title>
 $HTML_META$CSS</head>
 <body class="src">
-<table class="navigate-header" width="100%">
+<table class="navigate-header" width="100%" summary="Navigation">
  <tr>
   <td>
 EOF
@@ -3936,13 +3919,12 @@ sub readableTime($$)
 }
 
 
-##
-# clickablePath(String pathname, boolean last_item_clickable)
 #
-# returns a html-ified path whereas each directory is a link for
-# faster navigation. last_item_clickable controls whether the
-# basename (last directory/file) is a link as well
-##
+# Returns a htmlified path where each directory is a link for faster
+# navigation.  $clickLast controls whether the basename
+# (last directory/file) is a link as well.  The passed in $pathname should
+# *not* be URI escaped.
+#
 sub clickablePath($$)
 {
   my ($pathname, $clickLast) = @_;
@@ -3957,7 +3939,7 @@ sub clickablePath($$)
   my $wherepath = '';
   my ($lastslash) = $pathname =~ m|/$|;
 
-  foreach (split (/\//, $pathname)) {
+  foreach (split(m|/|, $pathname)) {
     $retval .= ' / ';
     $wherepath .= "/$_";
     my $last = "$wherepath/" eq "/$pathname" || $wherepath eq "/$pathname";
@@ -3965,7 +3947,7 @@ sub clickablePath($$)
     if ($clickLast || !$last) {
       $retval .= &link(htmlquote($_),
                        join ('',
-                             $scriptname, urlencode($wherepath),
+                             $scriptname, uri_escape_path($wherepath),
                              (!$last || $lastslash ? '/' : ''), $query,
                              (!$last || $lastslash ? "#dirlist" : "")));
     } else {    # do not make a link to the current dir
@@ -3978,7 +3960,7 @@ sub clickablePath($$)
 
 sub chooseCVSRoot()
 {
-  print "<form method=\"get\" action=\"${scriptwhere}\">\n<p>\n";
+  print "<form method=\"get\" action=\"$scriptwhere\">\n<p>\n";
   if (2 <= @CVSROOT) {
     foreach my $k (keys %input) {
       printf("<input type=\"hidden\" name=\"%s\" value=\"%s\" />\n",
@@ -4107,6 +4089,8 @@ sub fileSortCmp()
 
 #
 # Returns a URL to download the selected revision.
+# Expects the passed in URL to be URI escaped, relative, and without a query
+# string.
 #
 sub download_url($$;$)
 {
@@ -4117,7 +4101,7 @@ sub download_url($$;$)
   if (!defined($mimetype) || $mimetype !~ CVSWEBMARKUP) {
     my $path = $where;
     $path =~ s|[^/]+$||;
-    $url = "$scriptname/$CheckoutMagic/${path}$url";
+    $url = "$scriptname/$CheckoutMagic/$path$url";
   }
   $url .= '?rev=' . uri_escape($revision);
   $url .= ';content-type=' . uri_escape($mimetype) if $mimetype;
@@ -4127,17 +4111,20 @@ sub download_url($$;$)
 
 #
 # Returns a link to download the selected revision.
+# Expects the passed in URL to be URI escaped, relative,
+# and without a query string.
 #
 sub download_link($$$;$)
 {
   my ($url, $revision, $textlink, $mimetype) = @_;
-  my $fullurl = download_url($url, $revision, $mimetype);
   return sprintf('<a href="%s" class="download-link">%s</a>',
-                 hrefquote("$fullurl$barequery"), htmlquote($textlink));
+                 download_url($url, $revision, $mimetype) . $barequery,
+                 htmlquote($textlink));
 }
 
 #
 # Returns a URL to display the selected revision.
+# Expects the passed in URL to be URI escaped, and without a query string.
 #
 sub display_url($$;$)
 {
@@ -4149,22 +4136,26 @@ sub display_url($$;$)
 
 #
 # Returns a link to display the selected revision.
+# Expects the passed in URL to be URI escaped, and without a query string.
 #
 sub display_link($$;$$)
 {
   my ($url, $revision, $textlink, $mtype) = @_;
   $textlink = $revision unless defined($textlink);
   return sprintf('<a href="%s" class="display-link">%s</a>',
-                 hrefquote(display_url($url, $revision, $mtype) . $barequery),
+                 display_url($url, $revision, $mtype) . $barequery,
                  htmlquote($textlink));
 }
 
+#
+# Expects the passed in URL to be URI escaped, and without a query string.
+# The passed in link text should be already HTML escaped as appropriate.
+#
 sub graph_link($;$)
 {
   my ($url, $text) = @_;
   $text ||= $graphicon;
-  return sprintf('<a href="%s?graph=1%s">%s</a>',
-                 hrefquote($url), hrefquote($barequery), $text);
+  return sprintf('<a href="%s?graph=1%s">%s</a>', $url, $barequery, $text);
 }
 
 #
@@ -4214,13 +4205,6 @@ sub toggleQuery($;$)
   return "";
 }
 
-sub urlencode($)
-{
-  local ($_) = @_;
-  s/[\000-+{-\377]/sprintf("%%%02x", ord($&))/ge;
-  return $_;
-}
-
 sub htmlquote($)
 {
   local ($_) = @_;
@@ -4243,13 +4227,9 @@ sub htmlunquote($)
   return $_;
 }
 
-sub hrefquote($)
+sub uri_escape_path($)
 {
-  local ($_) = @_;
-
-  y/ /+/;
-
-  htmlquote($_);
+  return join('/', map(uri_escape($_), split(m|/+|, shift, -1)));
 }
 
 sub http_header(;$$)
@@ -4333,13 +4313,12 @@ if(!defined($ENV{'PHP_WRAPPER'})) {
 sub link_tags($)
 {
   my ($tags) = @_;
-  my ($ret)  = "";
-  my ($fileurl, $filename);
 
-  ($filename = $where) =~ s/^.*\///;
-  $fileurl = './' . urlencode($filename);
+  (my $filename = $where) =~ s|^.*/||;
+  my $fileurl = './' . uri_escape($filename);
 
-  foreach my $sym (split (", ", $tags)) {
+  my $ret = "";
+  foreach my $sym (split(", ", $tags)) {
     $ret .= ",\n" if ($ret ne "");
     $ret .= &link(htmlquote($sym),
                   $fileurl . toggleQuery('only_with_tag', $sym));
@@ -4347,6 +4326,16 @@ sub link_tags($)
   return $ret;
 }
 
+sub urlize_author($)
+{
+  my ($author) = @_;
+  if(defined($authorurl_pattern) && $authorurl_pattern && $author ne 'root') {
+  	my $authorurl = $authorurl_pattern;
+    $authorurl =~ s|:AUTHOR:|$author|g;
+    $author = $authorurl;
+  }
+  return $author;
+}
 
 #
 # See if a file/dir is listed in the config file's @ForbiddenFiles list.
