@@ -1,11 +1,11 @@
-local_domains = localhost:users.DOMAIN_NAME:lists.DOMAIN_NAME
+local_domains = localhost:users.{domain_name}:lists.{domain_name}
 hide pgsql_servers = "localhost/sourceforge/some_user/some_password"
 
 #Mail director
 #------------
 
 forward_for_sourceforge:
-  domains = users.DOMAIN_NAME
+  domains = users.{domain_name}
   driver = aliasfile
   file_transport = address_file
   query = "select email from users where user_name = '$local_part'"
@@ -17,7 +17,7 @@ forward_for_sourceforge:
 #ML directors
 #------------
 forward_for_lists:
-  domains = lists.DOMAIN_NAME
+  domains = lists.{domain_name}
   driver = aliasfile
   file_transport = address_file
   pipe_transport = address_pipe
@@ -28,7 +28,7 @@ forward_for_lists:
   group=root
 
 forward_for_lists_admin:
-  domains = lists.DOMAIN_NAME
+  domains = lists.{domain_name}
   driver = aliasfile
   file_transport = address_file
   pipe_transport = address_pipe
@@ -41,7 +41,7 @@ forward_for_lists_admin:
   group=root
 
 forward_for_lists_request:
-  domains = lists.DOMAIN_NAME
+  domains = lists.{domain_name}
   driver = aliasfile
   file_transport = address_file
   pipe_transport = address_pipe
