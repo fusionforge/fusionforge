@@ -5,6 +5,8 @@
 	on my workstation it resulted in about a 20% speedup; should be better
 	than that on large databases or setups where the application server
 	and database server are on separate machines.
+	* www/include/snippet_caching.php: Removed this page
+	and moved the code into www/snippet/index.php.
 
 2004-05-09  Christian Bayle <bayle@debian.org>
 
