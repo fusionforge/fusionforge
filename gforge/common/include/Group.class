@@ -251,88 +251,117 @@ class Group extends Error {
 	 *  @param	string	The purpose of the group.
 	 */
 	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $scm_box='cvs1') {
+		global $Language;
 
 		// $user is ignored - anyone can create pending group
 
 		if ($this->getID()!=0) {
 			$this->setError("Group::create: Group object already exists");
 			return false;
-		}
-
-		srand((double)microtime()*1000000);
-		$random_num = rand(0,1000000);
-
-		db_begin();
-
-		$res = db_query("
-			INSERT INTO groups (
-				group_name,
-				is_public,
-				unix_group_name,
-				short_description,
-				http_domain,
-				homepage,
-				status,
-				unix_box,
-				scm_box,
-				license,
-				register_purpose,
-				register_time,
-				license_other,
-				rand_hash
-			)
-			VALUES (
-				'".htmlspecialchars($full_name)."',
-				1,
-				'$unix_name',
-				'".htmlspecialchars($description)."',
-				'$unix_name.".$GLOBALS['sys_default_domain']."',
-				'$unix_name.".$GLOBALS['sys_default_domain']."',
-				'P',
-				'$unix_box',
-				'$scm_box',
-				'$license',
-				'".htmlspecialchars($purpose)."',
-				".time().",
-				'".htmlspecialchars($license_other)."',
-				'".md5($random_num)."'
-			)
-		");
-
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ERROR: Could not create group: '.db_error());
-			db_rollback();
+		} else if (strlen($full_name)<3) {
+			$this->setError($Language->getText('register','invalid_full_name'));
 			return false;
-		}
-
-		$id = db_insertid($res, 'groups', 'group_id');
-		if (!$id) {
-			$this->setError('ERROR: Could not get group id: '.db_error());
-			db_rollback();
+		} else if (!account_groupnamevalid($unix_name)) {
+			$this->setError($Language->getText('register','invalid_unix_name'));
 			return false;
-		}
-
-		//
-		// Now, make the user an admin
-		//
-		$sql="INSERT INTO user_group ( user_id, group_id, admin_flags,
-			cvs_flags, artifact_flags, forum_flags, role_id)
-			VALUES ( ".$user->getID().", '$id', 'A', 1, 2, 2, 1)";
-
-		$res=db_query($sql);
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('ERROR: Could not add admin to newly created group: '.db_error());
-			db_rollback();
+		} else if (db_numrows(db_query("SELECT group_id FROM groups WHERE unix_group_name='$unix_name'")) > 0) {
+			$this->setError($Language->getText('register','unix_group_name_already_taken'));
 			return false;
-		}
-
-		if (!$this->fetchData($id)) {
-			db_rollback();
+		} else if (strlen($purpose)<20) {
+			$this->setError($Language->getText('register','describe_registration'));
 			return false;
+		} else if (strlen($description)<10) {
+			$this->setError($Language->getText('register','comprehensive_description'));
+			return false;
+		} else if (strlen($description)>255) {
+			$this->setError($Language->getText('register','maximum_description'));
+			return false;
+		} else if (!$license) {
+			$this->setError($Language->getText('register','no_license_chosen'));
+			return false;
+		} else if ($license!=GROUP_LICENSE_OTHER && $license_other) {
+			$this->setError($Language->getText('register','conflicting_licenses_choice'));
+			return false;
+		} else if ($license==GROUP_LICENSE_OTHER && strlen($license_other)<50) {
+			$this->setError($Language->getText('register','more_license_description'));
+			return false;
+		} else {
+
+			srand((double)microtime()*1000000);
+			$random_num = rand(0,1000000);
+	
+			db_begin();
+	
+			$res = db_query("
+				INSERT INTO groups (
+					group_name,
+					is_public,
+					unix_group_name,
+					short_description,
+					http_domain,
+					homepage,
+					status,
+					unix_box,
+					scm_box,
+					license,
+					register_purpose,
+					register_time,
+					license_other,
+					rand_hash
+				)
+				VALUES (
+					'".htmlspecialchars($full_name)."',
+					1,
+					'$unix_name',
+					'".htmlspecialchars($description)."',
+					'$unix_name.".$GLOBALS['sys_default_domain']."',
+					'$unix_name.".$GLOBALS['sys_default_domain']."',
+					'P',
+					'$unix_box',
+					'$scm_box',
+					'$license',
+					'".htmlspecialchars($purpose)."',
+					".time().",
+					'".htmlspecialchars($license_other)."',
+					'".md5($random_num)."'
+				)
+			");
+	
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError('ERROR: Could not create group: '.db_error());
+				db_rollback();
+				return false;
+			}
+	
+			$id = db_insertid($res, 'groups', 'group_id');
+			if (!$id) {
+				$this->setError('ERROR: Could not get group id: '.db_error());
+				db_rollback();
+				return false;
+			}
+	
+			//
+			// Now, make the user an admin
+			//
+			$sql="INSERT INTO user_group ( user_id, group_id, admin_flags,
+				cvs_flags, artifact_flags, forum_flags, role_id)
+				VALUES ( ".$user->getID().", '$id', 'A', 1, 2, 2, 1)";
+	
+			$res=db_query($sql);
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError('ERROR: Could not add admin to newly created group: '.db_error());
+				db_rollback();
+				return false;
+			}
+	
+			if (!$this->fetchData($id)) {
+				db_rollback();
+				return false;
+			}
+			db_commit();
+			$this->sendNewProjectNotificationEmail();
+			return true;
 		}
-		db_commit();
-		$this->sendNewProjectNotificationEmail();
-		return true;
 	}
 
 

@@ -1,3 +1,8 @@
+2004-09-20  Christian Bayle <bayle@aist.enst.fr>
+	
+	* Moved some of the ./www/register/projectinfo.php register logic to
+	Group.class
+
 2004-09-18  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* removed typos from Base.tab introduced by tracker boxes patch

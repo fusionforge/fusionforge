@@ -41,29 +41,8 @@ if ($submit) {
 	$license_other = trim($license_other);
 	$description = trim($description);
 	$unix_name = strtolower($unix_name);
-	/*
-		Fierce validation
-	*/
 
-	if (strlen($full_name)<3) {
-		$feedback .= $Language->getText('register','invalid_full_name');
-	} else if (!account_groupnamevalid($unix_name)) {
-		$feedback .= $Language->getText('register','invalid_unix_name');
-	} else if (db_numrows(db_query("SELECT group_id FROM groups WHERE unix_group_name='$unix_name'")) > 0) {
-		$feedback .= $Language->getText('register','unix_group_name_already_taken');
-	} else if (strlen($purpose)<20) {
-		$feedback .= $Language->getText('register','describe_registration');
-	} else if (strlen($description)<10) {
-		$feedback .= $Language->getText('register','comprehensive_description');
-	} else if (strlen($description)>255) {
-		$feedback .= $Language->getText('register','maximum_description');
-	} else if (!$license) {
-		$feedback .= $Language->getText('register','no_license_chosen');
-	} else if ($license!=GROUP_LICENSE_OTHER && $license_other) {
-		$feedback .= $Language->getText('register','conflicting_licenses_choice');
-	} else if ($license==GROUP_LICENSE_OTHER && strlen($license_other)<50) {
-		$feedback .= $Language->getText('register','more_license_description');
-	} else if ($sys_use_scm && !$scm) {
+	if ($sys_use_scm && !$scm) {
 		$feedback .= $Language->getText('register','scm_not_selected');
 	} else {
 		$group = new Group();
@@ -77,20 +56,19 @@ if ($submit) {
 			$license_other,
 			$purpose
 		);
-
 		$res = $res && $group->setPluginUse($scm,true);
 		if (!$res) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$HTML->header(array('title'=>$Language->getText('register','registration_complete'),'pagename'=>'register_complete'));
-
+	
 			?>
-
+	
 			<p><?php echo $Language->getText('register','project_submitted',array($GLOBALS['sys_name']))?>
 			</p>
-
+	
 			<?php
-
+	
 			$HTML->footer(array());
 			exit();
 		}
