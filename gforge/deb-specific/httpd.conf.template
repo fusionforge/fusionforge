@@ -252,7 +252,7 @@ Include /etc/gforge/httpd.common
     allow from all
   </Location>
 
-  RedirectMatch permanent ^/$ https://{lists_host}/cgi-bin/mailman/listinfo
+  RedirectMatch permanent ^/$ https://{lists_host}/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
   CustomLog "|{cronolog_path} /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
