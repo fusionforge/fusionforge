@@ -1,23 +1,38 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: editreleases.php,v 1.50 2000/12/13 18:59:36 dbrogdon Exp $
+/**
+  *
+  * Project Admin: Edit Releases of Packages
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: editreleases.php,v 1.56 2001/07/09 21:46:15 pfalcon Exp $
+  *
+  */
+
 
 /* Updated rewrite of the File Release System to clean up the UI 
  * a little and incorporate FRS.class.		-Darrell
  */
 
-require ('pre.php');    
-require ('frs.class');
-require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
-session_require(array('group'=>$group_id));
-$project=&group_get_object($group_id);
-if (!$project->userIsReleaseTechnician()) exit_permission_denied();
+require_once('pre.php');    
+require_once('frs.class');
+require_once('www/project/admin/project_admin_utils.php');
 
-project_admin_header(array('title'=>'Release New File Version','group'=>$group_id));
+session_require(array('group'=>$group_id));
+
+$project =& group_get_object($group_id);
+
+exit_assert_object($project,'Project');
+
+$perm =& $project->getPermission(session_get_user());
+
+if (!$perm->isReleaseTechnician()) {
+	exit_permission_denied();
+}
+
+project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
 
 // Create a new FRS object
 $frs = new FRS($group_id);
@@ -27,7 +42,15 @@ $frs = new FRS($group_id);
  */
 
 // Edit release info
-if ($step1) {	
+if ($step1) {
+	if (!util_check_fileupload($uploaded_notes)
+	    || !util_check_fileupload($uploaded_changes)) {
+		$feedback .= ' Invalid filename';
+		project_admin_footer(array());
+		exit();
+
+	}
+
 	$exec_changes = true;
 
 	// Check for uploaded release notes
@@ -37,7 +60,7 @@ if ($step1) {
 			$feedback .= " Release Notes Are Either Too Small Or Too Large ";
 			$exec_changes = false;
 		}
-    } else {
+	} else {
 		$notes = $release_notes;
 	}
 
@@ -65,9 +88,7 @@ if ($step1) {
 // Add file(s) to the release
 if ($step2) {	
 	$group_unix_name=group_getunixname($group_id);
-	$user_unix_name=user_getname();
-	$project_files_dir=ereg_replace("<GROUP>",$group_unix_name,$FTPFILES_DIR);
-	$user_incoming_dir=ereg_replace("<USER>",$user_unix_name,$FTPINCOMING_DIR);
+	$project_files_dir=$FTPFILES_DIR . '/' . $group_unix_name;
 
 	// For every file selected add that file to this release
 	for($x=0;$x<count($file_list);$x++) {

@@ -1,13 +1,22 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: qrs.php,v 1.4 2000/11/28 20:06:14 dbrogdon Exp $
+/**
+  *
+  * Project Admin: Quick Release System (QRS)
+  *
+  * This page allows one-step release of a file.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: qrs.php,v 1.17 2001/07/09 21:26:28 pfalcon Exp $
+  *
+  */
 
-require ('pre.php');    
-require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
+
+require_once('pre.php');    
+require_once('www/project/admin/project_admin_utils.php');
+require_once('frs.class');
 
 /*
 	Quick file release system , Darrell Brogdon, SourceForge, Aug, 2000
@@ -15,13 +24,28 @@ require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
 	With much code horked from editreleases.php
 */
 
-session_require(array('group'=>$group_id,'admin_flags'=>'A'));
-project_admin_header(array('title'=>'Release New File Version','group'=>$group_id));
+session_require(array('group'=>$group_id));
+
+$project =& group_get_object($group_id);
+
+exit_assert_object($project, 'Project');
+
+$perm =& $project->getPermission(session_get_user());
+
+if (!$perm->isReleaseTechnician()) {
+	exit_permission_denied();
+}
+
+project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 
 if( $submit ) {
-	if (!$release_name) {
-		$feedback .= ' Must must define a release name. ';
+	if (!util_check_fileupload($userfile)) {
+		$feedback .= ' Invalid filename';
+	} else if (!$release_name) {
+		$feedback .= ' Must define a release name. ';
 		echo db_error();
+	} else 	if (!$package_id) {
+		$feedback .= ' Must select a package. ';
 	} else {
 		//create a new release of this package
 
@@ -31,33 +55,17 @@ if( $submit ) {
 		  $feedback .= ' | Package Doesn\'t Exist Or Isn\'t Yours ';
 		  echo db_error();
 		} else {
-		  // package_id was fine - now insert the release (if need be)
-		  // see if a release by this name exists and belongs to this project
-		  $sql="SELECT frs_release.release_id FROM frs_package,frs_release ".
-		    "WHERE frs_package.group_id=$group_id ".
-		    "AND frs_release.package_id=frs_package.package_id ".
-		    "AND frs_release.name='$release_name' ".
-		    "ORDER BY frs_release.release_id ASC" ;
-		  // echo "\nSQL = $sql <br>\n" ;
-		  $res1=db_query($sql);
-		  // echo "res1 = $res1 <br>\n" ;
-		  // echo "numrows = " . db_numrows($res1) . " <br>\n" ;
-		  if (!$res1 || db_numrows($res1) < 1) {  // Release does not already exist
-		    $res=db_query("INSERT INTO frs_release (package_id,name,notes,changes,status_id,release_date,released_by) ".
-				  "VALUES ('$package_id','$release_name','$release_notes','$release_changes','$status_id','". time() ."','". user_getid() ."')");
-		    if (!$res) {
-		      $feedback .= ' | Adding Release Failed ';
-		      echo db_error();
-		      //insert failed - go back to definition screen
-		    } else {
-		      //release added - now show the detail page for this new release
-		      $release_id=db_insertid($res,'frs_release','release_id');
-		      $feedback .= ' Added Release <BR>';
-		    }
-		  } else { // A release already exists by the same name in the same project
-		    $row = db_fetch_array($res1) ;
-		    $release_id = $row[release_id] ;
-		    $feedback .= ' Not Adding (Already Existing) Release | ';
+		  //package_id was fine - now insert the release
+		  $res=db_query("INSERT INTO frs_release (package_id,name,notes,changes,status_id,preformatted,release_date,released_by) ".
+				"VALUES ('$package_id','$release_name','$release_notes','$release_changes','$status_id','$preformatted','". time() ."','". user_getid() ."')");
+		  if (!$res) {
+		    $feedback .= ' | Adding Release Failed ';
+		    echo db_error();
+		    //insert failed - go back to definition screen
+		  } else {
+		    //release added - now show the detail page for this new release
+		    $release_id=db_insertid($res,'frs_release','release_id');
+		    $feedback .= ' Added Release <BR>';
 		  }
 		}
 
@@ -148,6 +156,20 @@ if( $submit ) {
 							if (!$res) {
 								$feedback .= " | Couldn't Add FileName: $file_name ";
 								echo db_error();
+							} else {
+								// Finally, send out email notification
+								$frs = new FRS($group_id);
+						                $frs->frsSendNotice($group_id, $release_id, $package_id);
+						                if( !$frs->isError() ) {
+					                                $feedback .= '<br>Email Notice Sent';
+								}
+								?>
+								<p>
+								Please note that file(s) may not appear immediately
+								on the <a href="/project/showfiles.php?group_id=<?php echo $group_id;?>">
+								download page</a>. Allow several hours for propogation.
+								</p>
+								<?php
 							}
 						} else {
 							$feedback .= " | FileName Invalid Or Does Not Exist: $file_name ";
@@ -174,13 +196,14 @@ if( $submit ) {
 		</TD>
 		<TD>
 <?php
-	$sql="SELECT * FROM frs_package WHERE group_id='$group_id'";
+	$sql="SELECT * FROM frs_package WHERE group_id='$group_id' AND status_id='1'";
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
 		echo '<H4>No File Types Available</H4>';
 	} else {
 		echo '<SELECT NAME="package_id">';
+		echo '<OPTION VALUE="">(select)</OPTION>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '<OPTION VALUE="' . db_result($res,$i,'package_id') . '">' . db_result($res,$i,'name') . '</OPTION>';
 		}
@@ -227,7 +250,7 @@ if( $submit ) {
 	if(is_dir($user_incoming_dir)){
 	$dirhandle = opendir($user_incoming_dir);
 
-	echo '<SELECT NAME="file_name">\n';
+	echo '<SELECT NAME="file_name">';
 	echo '	<OPTION VALUE="qrs_newfile">Select a file</OPTION>';
 	//iterate and show the files in the upload directory
 	while ($file = readdir($dirhandle)) {
@@ -287,6 +310,8 @@ if( $submit ) {
 	<TR>
 		<TD COLSPAN="2" ALIGN="CENTER">
 			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
+			<input type="checkbox" name="preformatted" value="1" <?php echo ((db_result($result,0,'preformatted'))?'checked':''); ?>> Preserve my pre-formatted text.
+			<p>
 			<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Release File">
 		</TD>
 	</TR>

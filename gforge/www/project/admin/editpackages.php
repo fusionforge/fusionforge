@@ -1,18 +1,31 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: editpackages.php,v 1.16 2000/12/12 18:50:17 dbrogdon Exp $
+/**
+  *
+  * Project Admin: Edit Packages
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: editpackages.php,v 1.22 2001/05/22 19:48:40 pfalcon Exp $
+  *
+  */
 
-require ('pre.php');    
-require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
+require_once('pre.php');    
+require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>$group_id));
-$project=&group_get_object($group_id);
-if (!$project->userIsReleaseTechnician()) exit_permission_denied();
-$is_admin=$project->userIsAdmin();
+$project =& group_get_object($group_id);
+
+exit_assert_object($project,'Project');
+
+$perm =& $project->getPermission(session_get_user());
+
+if (!$perm->isReleaseTechnician()) {
+    exit_permission_denied();
+}
+
+$is_admin=$perm->isAdmin();
 
 /*
 
@@ -39,9 +52,9 @@ if ($is_admin && $submit) {
 	} else if ($func=='update_package' && $package_id && $package_name && $status_id) {
 		if ($status_id != 1) {
 			//if hiding a package, refuse if it has releases under it
-			$res=db_query("SELECT * FROM frs_release WHERE package_id='$package_id'");
+			$res=db_query("SELECT * FROM frs_release WHERE package_id='$package_id' AND status_id=1");
 			if (db_numrows($res) > 0) {
-				$feedback .= ' Sorry - you cannot delete a package that still contains file releases ';
+				$feedback .= ' Sorry - you cannot hide a package that contains active releases ';
 				$status_id=1;
 			}
 		}
@@ -55,7 +68,7 @@ if ($is_admin && $submit) {
 }
 
 
-project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group_id));
+project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
 
 echo '<h3>QRS:</h3>';
 echo 'Click here for to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
@@ -77,7 +90,7 @@ Start by defining your packages, then you can upload files with FTP to the <B>in
 <B><a href=ftp://$user_unix_name@$sys_upload_host/incoming/>$sys_upload_host</a></B>. Once you have the files uploaded, you can then <B>create releases</B> 
 of your packages.
 <P>
-Once you have have packages defined, you can start creating new <B>releases of packages.</B>
+Once you have packages defined, you can start creating new <B>releases of packages.</B>
 <P>
 <H3>Releases of Packages</H3>
 <P>
@@ -103,7 +116,7 @@ You can create new releases of packages by clicking on <B>Add/Edit Releases</B> 
 $res=db_query("SELECT status_id,package_id,name AS package_name FROM frs_package WHERE group_id='$group_id'");
 $rows=db_numrows($res);
 if (!$res || $rows < 1) {
-	echo '<h4>You Have No Packges Defined</h4>';
+	echo '<h4>You Have No Packages Defined</h4>';
 } else {
 	$title_arr=array();
 	$title_arr[]='Releases';
