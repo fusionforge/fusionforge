@@ -39,7 +39,22 @@ if( $submit ) {
 	} else 	if (!$package_id) {
 		$feedback .= $Language->getText('project_admin_qrs','required_package');
 	} else 	if (!$userfile || $userfile == 'none') {
+	    // Check errors
+	    switch($_FILES['userfile']['error']) {
+	    case UPLOAD_ERR_INI_SIZE:
+	    case UPLOAD_ERR_FORM_SIZE:
+	        $feedback .= $Language->getText('project_admin_qrs','exceed_file_size');
+		break;
+	    case UPLOAD_ERR_PARTIAL:
+		$feedback .= $Language->getText('project_admin_qrs','partial_file');
+		break;
+	    case UPLOAD_ERR_NO_FILE:
 		$feedback .= $Language->getText('project_admin_qrs','required_file');
+		break;
+	    default:
+		$feedback .= $Language->getText('project_admin_qrs','unknown_file_error');
+		break;
+	    }
 	} else 	if (!$type_id || $type_id == "100") {
 		$feedback .= $Language->getText('project_admin_qrs','required_file_type');
 	} else 	if (!$processor_id || $processor_id == "100")  {
@@ -170,7 +185,8 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 			<h4><?php echo $Language->getText('project_admin_qrs','file_name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
-		<span style="color:red"><strong><?php echo $Language->getText('project_admin_qrs','release_note') ?></strong></span><br />
+		<span style="color:red"><strong>
+		<?php echo $Language->getText('project_admin_qrs','release_note').' ('.$Language->getText('project_admin_qrs','maximum_file_size').' '. ini_get('upload_max_filesize')?>)</strong></span><br />
 		<?php echo $Language->getText('project_admin_qrs','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
 		</td>
 	</tr>
