@@ -1,11 +1,15 @@
-gforge (3.1-15+1) unstable; urgency=low
+gforge (3.1-16) unstable; urgency=low
 
   * [Roland] Fix for create-mailing-lists.pl and fix-mailing-lists.pl from
     Matt Hope <dopey@debian.org>: no need to get the previous config
     before reinjecting it, and it even used to break some versions of
     Mailman.
+  * [Roland] Force register_globals to On (closes: #2511886).
+  * [Roland] Fix ScriptAlias for Mailman's CGI scripts (closes: #244678).
+  * [Roland] Added Catalan translations for Debconf templates from Debian
+    L10n Catalan Team (closes: #250126).
 
- -- Roland Mas <lolando@debian.org>  Sun,  4 Apr 2004 16:10:53 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 27 May 2004 23:29:37 +0200
 
 gforge (3.1-15) unstable; urgency=low
 
