@@ -359,7 +359,7 @@ function pm_data_create_task ($group_project_id,$start_month,$start_day,$start_y
 			$feedback .= ' ERROR inserting assigned to ';
 			return false;
 		}
-		mail_followup($project_task_id,$group_project_id,1);
+		mail_followup($project_task_id,$group_project_id,false,1);
 		db_commit();
 		return $project_task_id;
 	}

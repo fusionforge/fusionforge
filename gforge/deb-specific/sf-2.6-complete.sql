@@ -2888,6 +2888,11 @@ COPY "doc_groups"  FROM stdin;
 
 
 COPY "doc_states"  FROM stdin;
+1	active
+2	deleted
+3	pending
+4	hidden
+5	private
 \.
 --
 -- Data for TOC Entry ID 479 (OID 18996)
