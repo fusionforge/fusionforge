@@ -56,19 +56,19 @@ site_admin_header(array('title'=>"Site Admin"));
 
 <form name="mload" method="post" action="<?php echo $PHP_SELF; ?>">
 
-<input type="submit" name="loadall" value="<? echo "(Re)Load all language files"; ?>" />
-<input type="submit" name="purgeall" value="<? echo "Purge loaded data"; ?>" />
+<input type="submit" name="loadall" value="<?php echo "(Re)Load all language files"; ?>" />
+<input type="submit" name="purgeall" value="<?php echo "Purge loaded data"; ?>" />
 
 </form>
 
 <p>
 
-<?
+<?php
 $result=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
 if (db_numrows($result)>0) {
 ?>
 	<h3 style="color:red">Tables loaded:</h3>
-<?
+<?php
 	echo "<table border=\"0\">";
 	$maxtrans=0;
 	for ($i=0; $i<db_numrows($result) ; $i++) {
@@ -83,13 +83,13 @@ if (db_numrows($result)>0) {
 		printf("<td>(%d)</td><td>[%3.2f",$howmany,$rate);
 		echo "%]</td>"
 ?>
-<td><a href=/admin/seetabfiles.php?lang=<? echo "$language_id"; ?>>[see translations]</a>
+<td><a href=/admin/seetabfiles.php?lang=<?php echo "$language_id"; ?>>[see translations]</a>
 </td>
-<td><a href=/admin/notranstabfiles.php?lang=<? echo "$language_id"; ?>>[see untranslated]</a>
+<td><a href=/admin/notranstabfiles.php?lang=<?php echo "$language_id"; ?>>[see untranslated]</a>
 </td>
-<td><a href=/admin/edittabfiles.php?lang=<? echo "$language_id"; ?>>[edit(don t work)]</a>
+<td><a href=/admin/edittabfiles.php?lang=<?php echo "$language_id"; ?>>[edit(don t work)]</a>
 </td>
-<?
+<?php
 		echo "</tr>";
 	}
 	echo "\n</table>";
@@ -97,7 +97,7 @@ if (db_numrows($result)>0) {
 ?>
 	<h3 style="color:red">Available Tables:</h3>
 		<table border="0">
-<?
+<?php
 	$rep= $sys_urlroot . 'include/languages/';
 	//chdir($rep);
 	$dir = opendir("$rep");
