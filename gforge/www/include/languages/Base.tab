@@ -135,24 +135,48 @@ cvs	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can
 cvs	history	Repository History
 cvs	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
 cvs	browseit	Browse CVS Repository
-docman	section	Project: $1
-docman	title	Document Manager
+docman	submit_new	Submit new documentation
+docman	view_doc	View Documentation
+docman	admin	Admin
+docman	error_no_docs	This project has no visible documents
+docman	error_invalid_file_attack	Invalid file attack attempt $1
+docman	error_no_groups_defined	No Document Groups defined
+docman	description	Description
 docman_admin	section	$1
 docman_admin	title	Document Manager: Administration
+docman_admin	add_edit_docgroups	Add/Edit Document Groups
 docman_admin_docedit	section	Document Manager
 docman_admin_docedit	title	Edit Document
 docman_admin_editdocs	section	Document Manager Administration
 docman_admin_editdocs	title	Edit Docs
+docman_admin_editdocs	state	State
+docman_admin_editdocs	upload	OPTIONAL: Upload new file
+docman_admin_editdocs	doc_contents	Document Contents
+docman_admin_addgroups	title	Aggiungi gruppi di documenti
 docman_admin_editgroups	section	Document Manager Administration
 docman_admin_editgroups	title	Edit Groups
-docman_admin_groupdelete	section	Document Manager Administration
-docman_admin_groupdelete	title	Delete Document Group
+docman_admin_editgroups	new_group_name	New Group Name
+docman_admin_editgroups	add_group	Add a group
+docman_admin_editgroups	edit_group	Edit a group
+docman_admin_editgroups	description	Group name will be used as a title, so if it should be formatted correspondingly.
 docman_admin_groupedit	section	Document Manager Administration
 docman_admin_groupedit	title	Rename Document Group
+docman_admin_groupedit	group_name	Group Name
 docman_display_doc	section	Project: $1 
 docman_display_doc	title	Document Manager: Display Document
+docman_display_doc	all_languages	All Languages
 docman_new	section	Project: $1 
 docman_new	title	Document Manager: Submit New Documentation
+docman_new	intro	<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.
+docman_new	doc_title	Document Title
+docman_new	description	Description
+docman_new	upload_file	Upload File	
+docman_new	language	Language
+docman_new	group	Group that document belongs in:
+docman_new	submit	Submit Information
+docman_new	file	File
+docman_new	state	State
+docman_new	error_blank_document	Error getting blank document
 forum	section	Project: $1
 forum	title	Forums
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
@@ -234,11 +258,21 @@ frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
 general	return	[Return to $1]
+general	error	Error
 general	sitename	$1
 general	footer	This is $1.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
 general	permdenied	Permission Denied.
 general	permnotget	Could not get permission
 general	permexcuse	This project's administrator will have to grant you permission to view this page.
+general	turned_off	This Project Has Turned Off The $1
+general	update_successful	Updated successfully
+general	create_successful	Created successfully
+general	no_valid_group	No Valid $1 Group was selected
+general	no_valid_filename	No valid Filename
+general	submitted_successfully	$1 Submitted Successfully
+general	language	Language
+general	submit_edit	Submit Edit
+general	edit	Edit
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
@@ -609,6 +643,8 @@ searchbox	softwaregroup	Software/Group
 searchbox	skill	Skill
 searchbox	people	People
 searchbox	search	Search
+searchbox	forum	This forum
+searchbox	task	Tasks
 calendar	title	Project Management: Calendar
 calendar	january	January
 calendar	february	February

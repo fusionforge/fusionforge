@@ -99,7 +99,7 @@ account_verify	accessdenied	Access denied
 account_verify	invalidcred	Credentials you entered do not correspond to valid account.
 account_verify	cannotactivate	Could not activate account
 account_verify	erroractivate	Error while activiting account
-account_options	title		Opzioni Utente
+account_options	title	Opzioni Utente
 account_options	welcome		Benvenuto
 account_options	member_since	Data registrazione:
 account_options	view_developer_profile	Visualizza il mio profilo
@@ -119,8 +119,46 @@ cvs	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can
 cvs	history	Repository History
 cvs	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
 cvs	browseit	Browse CVS Repository
+docman	submit_new	Inserisci nuova documentazione
+docman	view_doc	Visualizza documentazione
+docman	admin	Amministra
+docman	error_no_docs	Questo progetto non ha documenti visibili
+docman	description	Descrizione
+docman	error_no_groups_defined	Nessun gruppo di documenti definito
+docman_admin	section	$1
+docman_admin	title	Document Manager: Amministrazione
+docman_admin	add_edit_docgroups	Aggiungi/Modifica gruppi di documenti
+docman_admin_docedit	section	Document Manager
+docman_admin_docedit	title	Edit Document
+docman_admin_editdocs	section	Document Manager Administration
+docman_admin_editdocs	title	Modifica documenti
+docman_admin_editdocs	state	Stato
+docman_admin_editdocs	upload	OPZIONALE: Invia nuovo file
+docman_admin_editdocs	doc_contents	Contenuto Documenti
+docman_admin_editgroups	section	Document Manager Administration
+docman_admin_editgroups	title	Modifica gruppi
+docman_admin_editgroups	new_group_name	Nuovo nome del gruppo
+docman_admin_editgroups	add_group	Aggiungi un gruppo
+docman_admin_editgroups	edit_group	Modifica un gruppo
+docman_admin_editgroups	description	Il nome del gruppo sar&agrave; utilizzato come titolo.
+docman_admin_groupdelete	section	Document Manager Administration
+docman_admin_groupdelete	title	Delete Document Group
+docman_admin_groupedit	section	Document Manager Administration
+docman_admin_groupedit	title	Rename Document Group
+docman_display_doc	section	Progetto: $1 
+docman_display_doc	title	Document Manager: Visualizza documenti
+docman_display_doc	all_languages	Tutte
+docman_new	section	Progetto: $1 
+docman_new	title	Document Manager: Inserisci nuova documentazione
+docman_new	intro	<strong>Titolo del documento</strong>:  si riferisce al nome breve del titolo del documento (ad esempio, come usare il server per i file)<br /><strong>Descrizione:</strong> Una descrizione breve da visualizzare sotto il titolo.
+docman_new	doc_title	Titolo del documento
+docman_new	description	Descrizione
+docman_new	upload_file	Invia file	
+docman_new	language	Lingua
+docman_new	group	Gruppo al quale appartiene il documento:
+docman_new	submit	Invia Informazioni
 forum	title	Forum
-forum	choose	<p>Seleziona un forum e puoi scorrere, cercare e inserire messaggi..<p>
+forum	choose	<p>Seleziona un forum e puoi scorrere, cercare e inserire messaggi.<p>
 forum_forum	thread	Argomento
 forum_forum	author	Autore
 forum_forum	date	Data
@@ -159,7 +197,18 @@ frs	latest_file_releases	Ultimi rilasci
 general	return	[Return to $1]
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Could not get permission
+general	update_successful	Aggiornato con successo
+general	create_successful	Creato con successo
 general	permexcuse	Non hai il permesso di visualizzare questa pagina.
+general	turned_off	Questo progetto ha disabilitato il $1
+general	update_successful	Aggiornato con successo
+general	create_successful	Creato con successo
+general	no_valid_group	Non &egrave; stato selezionato un gruppo valido $1
+general	no_valid_filename	Nome file non valido
+general	submitted_successfully	$1 inserito con successo
+general	language	Lingua
+general	submit_edit	Invia Modifiche
+general	edit	Modifica
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	CVS Repository
@@ -197,6 +246,7 @@ home	top_project_downloads	Maggiori download
 mail	provided_by	<P>Mailing lists provided via a SourceForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
 menu	bookmark_page	Bookmark Page
 menu	contact_us	Contact $1
+menu	change_my_theme	Cambia tema
 menu	diary_notes	Diario &amp; Note
 menu	login	Connetti con SSL
 menu	logout	Disconnetti
@@ -212,9 +262,10 @@ menu	projectree	Categorie progetti
 menu	mypage	Pagina&nbsp;Personale
 menu	code_snippet	Frammenti di codice
 menu	admin	Amministrazione
+menu	account_maintenance	Opzioni Utente
 my	about_blurb	La tua pagina personale contiene un elenco di bug, attivita che ti sono stati assegnati, inoltre l'elenco dei progetti ai quali partecipi.
 my	no_bookmarks	Non ci sono segnalibri salvati
-my	no_monitored_filemodules	<H3>Non stai monitorando nessun file</H3><P>Quando monitorizzi un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommarioe&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
+my	no_monitored_filemodules	<H3>Non stai monitorando nessun file</H3><P>Quando monitorizzi un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
 my	no_monitored_forums	<H3>Non stai monitorando nessun forum</H3><P>Quando monitorizzi un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare il monitoraggio di forum cliccando su &quot;Monitorizza Forum&quot;
 my	no_open_tasks	Non ci sono attivit&agrave; aperte assegnate a te.
 my	no_projects	Non sei membro di nessun progetto attivo
@@ -226,7 +277,7 @@ my	submitteditems	Elementi inseriti da me
 my	monitoredforum	Forum monitorati
 my	monitoredfile	File monitorati
 my	tasks	Mie attivit&agrave;
-my	survey	Sondaggi veloci
+my	survey	Sondaggi
 my	bookmarks	Miei Segnalibri
 my	projects	Miei progetti
 my	pending_projects	Progetti in attesa di approvazione.
@@ -322,3 +373,10 @@ calendar	invaliddate	Data non valida
 calendar	invaliddateexplain	$1 non &egrave; una data valida.
 calendar	invalidtype	"Type" non valida
 calendar	invalidtypeexplain	Il "type" &egrave; invalida.
+searchbox	softwaregroup	Software/Gruppo
+searchbox	skill	Competenza
+searchbox	people	Persone
+searchbox	search	Ricerca
+searchbox	forum	Questo forum
+searchbox	task	Attivit&agrave;
+survey	survey_not_found	Sondaggio non trovato
