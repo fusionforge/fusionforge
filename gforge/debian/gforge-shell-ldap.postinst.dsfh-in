@@ -28,6 +28,8 @@ set -e
 #DSFHELPER:replace-files#
 case "$1" in
     configure)
+	/usr/sbin/gforge-config
+
         # Patch Slapd configuration files
 	/usr/lib/gforge/bin/install-ldap.sh configure-files
 	propose_update_install /etc/libnss-ldap.conf

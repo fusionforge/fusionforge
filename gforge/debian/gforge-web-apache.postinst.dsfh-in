@@ -26,12 +26,9 @@ set -e
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:replace-files#
-#DSFHELPER:handle-mainconffile#
 
 case "$1" in
     configure)
-	vars="system_name domain_name server_admin db_password shell_host users_host cvs_host lists_host download_host admin_login ip_address admin_password newsadmin_groupid statsadmin_groupid peerrating_groupid skill_list"
-	update_mainconffile $vars
         /usr/sbin/gforge-config
 
         # Patch Apache configuration files

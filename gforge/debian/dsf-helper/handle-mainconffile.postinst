@@ -3,23 +3,32 @@
 ###
 mainconffile=/etc/gforge/gforge.conf
 # Update it for the variables received as parameters
-update_mainconffile () {
-    for i in $@ ; do
-        if ! grep -q "^$i=" $mainconffile ; then
-            db_get gforge/shared/$i
-            echo "$i=$RET" >> $mainconffile
-        fi
-    done
-
-}
-update_onevar_mainconfile () {
-	if ! grep -q "^$1=" $mainconffile ; then
-		echo "$1=$2" >> $mainconffile
-	fi
-}
 create_mainconffile () {
     if [ ! -e $mainconffile ] ; then
         touch $mainconffile
         chmod 600 $mainconffile
+    fi
+}
+update_mainconffile () {
+    for key in $@ ; do
+	db_get gforge/shared/$key
+	val=$RET
+	update_onevar_mainconffile $key $val
+    done
+}
+update_onevar_mainconfile () {
+    key=$1
+    val=$2
+    if grep -q "^$key=" $mainconffile ; then
+	perl -pi -e "s/^$key=.*/$key=$val/" $mainconffile
+    else
+	echo "$key=$val" >> $mainconffile
+    fi
+}
+add_onevar_mainconfile () {
+    key=$1
+    val=$2
+    if ! grep -q "^$key=" $mainconffile ; then
+	echo "$key=$val" >> $mainconffile
     fi
 }

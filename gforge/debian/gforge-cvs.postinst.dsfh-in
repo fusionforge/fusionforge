@@ -25,11 +25,8 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-	vars="system_name domain_name server_admin cvs_host"
-        update_mainconffile $vars
 	/usr/sbin/gforge-config
 
         # Setup our CVS

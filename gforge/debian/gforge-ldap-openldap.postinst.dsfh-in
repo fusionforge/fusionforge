@@ -26,11 +26,8 @@ set -e
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:replace-files#
-#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-	vars="ldap_host ldap_base_dn ldap_web_add_password"
-        update_mainconffile $vars
 	/usr/sbin/gforge-config
 
         # Patch Slapd configuration files

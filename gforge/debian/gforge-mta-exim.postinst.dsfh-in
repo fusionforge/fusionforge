@@ -26,11 +26,9 @@ set -e
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:replace-files#
-#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-	vars="server_admin noreply_to_bitbucket users_host lists_host ip_address"
-        update_mainconffile $vars
+
 	/usr/sbin/gforge-config
         # Patch Exim configuration files
 	/usr/lib/gforge/bin/install-exim.sh configure-files
