@@ -4,8 +4,9 @@ sourceforge (2.6-0+6+) unstable; urgency=low
   * [Roland] Added dpkg-like stuff to ask whether to replace a config file
     before doing it.  Only for installation of /etc/apache/httpd.conf for
     now (more will follow).
+  * [Christian] Changed to use cvsweb 
 
- -- Roland Mas <lolando@debian.org>  Sat, 16 Feb 2002 17:35:41 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Wed, 20 Feb 2002 18:29:01 +0100
 
 sourceforge (2.6-0+6) unstable; urgency=low
 
