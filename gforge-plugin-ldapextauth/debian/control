@@ -1,0 +1,11 @@
+Source: gforge-plugin-ldapextauth
+Section: devel
+Priority: optional
+Maintainer: Roland Mas <lolando@debian.org>
+Build-Depends-Indep: debhelper (>> 4.0.0)
+Standards-Version: 3.5.8
+
+Package: gforge-plugin-ldapextauth
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache | gforge-web
+Description: A Gforge plugin to authenticate from an external LDAP directory
