@@ -1,3 +1,7 @@
+2003-11-04  Tim Perdue <tim @ perdue.net>
+
+	* www/pm added "mass update" for task manager
+
 2003-11-04  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/notepad.php, www/include/note.php: New files.  *
