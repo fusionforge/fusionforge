@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-	/usr/lib/sourceforge/bin/sf-register-plugin helloworld "Hello world"
+	/usr/lib/sourceforge/bin/sf-unregister-plugin helloworld
 	invoke-rc.d apache reload
         ;;
     failed-upgrade)
