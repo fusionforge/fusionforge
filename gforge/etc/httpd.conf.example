@@ -22,7 +22,7 @@ UseCanonicalName Off
   allow from all
   php_admin_value include_path "/path/to/gforge/etc/custom:/path/to/gforge:/path/to/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
-  php_admin_value register_globals "On"
+  php_flag register_globals "On"
 </Directory>
 
 # HTTP
@@ -56,18 +56,18 @@ UseCanonicalName Off
 	# 404 Error document
 	ErrorDocument 404 /404.php
 	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+	CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
 
 	# GForge without the DNS delegation
 	# Project home pages are in a virtual /www/<group> location
-	AliasMatch ^/www/([^/]*)/(.*) /home/groups/$1/htdocs/$2
-	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /home/groups/$1/cgi-bin/$2
-	<Directory /home/groups>
-		Options Indexes FollowSymlinks
-		AllowOverride All
-		order allow,deny
-		allow from all
-	</Directory>
+#	AliasMatch ^/www/([^/]*)/(.*) /home/groups/$1/htdocs/$2
+#	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /home/groups/$1/cgi-bin/$2
+#	<Directory /home/groups>
+#		Options Indexes FollowSymlinks
+#		AllowOverride All
+#		order allow,deny
+#		allow from all
+#	</Directory>
 
 	# Ensure that we don't try to use SSL on SSL Servers
 	<IfModule apache_ssl.c>
@@ -106,7 +106,7 @@ UseCanonicalName Off
 	# 404 Error document
 	ErrorDocument 404 /404.php
 	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+	CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
 
 	<IfModule mod_ssl.c>
 		SSLEngine on
@@ -128,13 +128,64 @@ UseCanonicalName Off
 </VirtualHost>
 
 #
+# SCM host
+#
+<Directory /path/to/gforge/scm>
+  Options Indexes FollowSymlinks
+  AllowOverride All
+  order allow,deny
+  allow from all
+  php_admin_value include_path "/path/to/gforge/etc/custom:/path/to/gforge:/path/to/gforge/www/include:."
+  php_admin_value default_charset "UTF-8"
+</Directory>
+
+# SCM HTTP vhost
+<VirtualHost 10.GF.OR.GE:80>
+  ServerName cvs.gforge.company.com
+  DocumentRoot /path/to/gforge/scm
+  Alias /images/ /path/to/gforge/www/images/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+# SCM HTTP SSL vhost
+<VirtualHost 10.GF.OR.GE:443>
+  ServerName cvs.gforge.company.com
+  DocumentRoot /path/to/gforge/scm
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
+
+  <IfModule mod_ssl.c>
+    SSLEngine on
+    SSLCertificateFile /etc/apache/ssl.crt/server.crt
+    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    <Files ~ "\.(cgi|shtml)$">
+      SSLOptions +StdEnvVars
+    </Files>
+    <Directory "/usr/lib/cgi-bin">
+      SSLOptions +StdEnvVars
+    </Directory>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <IfModule apache_ssl.c>
+    SSLEnable
+  </IfModule>
+
+</VirtualHost>
+
+#
 # Download host
 #
 <VirtualHost 10.GF.OR.GE:80>
   ServerName download.gforge.company.com
-  DocumentRoot /var/lib/gforge/download
+  DocumentRoot /path/to/var/lib/gforge/download
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -165,7 +216,7 @@ UseCanonicalName Off
 
   RedirectMatch permanent ^/$ http://lists.gforge.company.com/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -210,7 +261,7 @@ UseCanonicalName Off
 
   RedirectMatch permanent ^/$ https://lists.gforge.company.com/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 #
@@ -230,7 +281,7 @@ UseCanonicalName Off
                allow from all
        </Directory>
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /path/to/var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
