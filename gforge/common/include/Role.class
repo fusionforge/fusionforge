@@ -45,7 +45,7 @@ class Role extends Error {
 	'pm'=>array('-1','0','1','2','3'));
 
 	var $defaults=array(
-		'Admin'=>array( 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'3', 'pmadmin'=>'2', 'pm'=>'3' ),
+		'Admin'=>array( 'projectadmin'=>'A', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2' ),
 		'Senior Developer'=>array( 'projectadmin'=>'0', 'frs'=>'1', 'scm'=>'1', 'docman'=>'1', 'forumadmin'=>'2', 'forum'=>'2', 'trackeradmin'=>'2', 'tracker'=>'2', 'pmadmin'=>'2', 'pm'=>'2' ),
 		'Junior Developer'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'1', 'docman'=>'0', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'1', 'pmadmin'=>'0', 'pm'=>'1' ),
 		'Doc Writer'=>array( 'projectadmin'=>'0', 'frs'=>'0', 'scm'=>'0', 'docman'=>'1', 'forumadmin'=>'0', 'forum'=>'1', 'trackeradmin'=>'0', 'tracker'=>'0', 'pmadmin'=>'0', 'pm'=>'0' ),
