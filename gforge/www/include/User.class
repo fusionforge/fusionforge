@@ -663,7 +663,7 @@ function user_getname($user_id = false) {
 		if (user_isloggedin()) {
 			$user=&user_get_object(user_getid());
 			if ($user) {
-			//	return $user->getUnixName();
+				return $user->getUnixName();
 			} else {
 				return 'Error getting user';
 			}
