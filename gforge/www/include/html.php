@@ -119,6 +119,18 @@ function html_image($src,$width,$height,$args,$display=1) {
 }
 
 /**
+ * url_image() - Build an image url of an image contained in $src
+ *
+ * @param		string	The source location of the image
+ */
+function url_image($src) {
+	global $sys_images_url;
+	global $sys_theme;
+	$s = ((session_issecure()) ? 's' : '' );
+	return ('"http'. $s .':' . $sys_images_url . 'themes/' . $sys_theme . '/images/' . $src .'"');
+}
+
+/**
  * html_get_language_popup() - Pop up box of supported languages
  *
  * @param		object	BaseLanguage object
