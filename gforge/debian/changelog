@@ -98,8 +98,15 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     trove map.
   * [Christian] you can now have a customized pre.php in 
     /etc/sourceforge/custom/pre.php
+  * [Roland] Changed the authentication system: the authoritative password
+    field is now unix_pw, even for authenticating web sessions.  We keep
+    user_pw for better performance when looking up the user entry in the
+    database, but it is just a cached value that is recomputed from the
+    unix_pw when needed.  This allows for better integration with existing
+    systems (for instance, if you want to inject some existing accounts
+    into the database...).
 
- -- Christian Bayle <bayle@debian.org>  Thu,  7 Nov 2002 15:57:12 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  8 Nov 2002 21:38:45 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

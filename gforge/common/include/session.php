@@ -156,24 +156,67 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	global $feedback;
 
 	if (!$loginname || !$passwd) {
-		$feedback = 'Missing Password Or users Name';
+		$feedback = 'Missing Password Or Users Name';
 		return false;
 	}
 
-	//get the users from the database using user_id and password
+	//  Try to get the users from the database using user_id and (MD5) user_pw
 	$res = db_query("
-		SELECT user_id,status
+		SELECT user_id,status,unix_pw
 		FROM users
 		WHERE user_name='$loginname' 
 		AND user_pw='".md5($passwd)."'
 	");
 	if (!$res || db_numrows($res) < 1) {
-		//invalid password or user_name
-		$feedback='Invalid Password or User Name';
-		return false;
+		// No user whose MD5 passwd matches the MD5 of the provided passwd
+		// Selecting by user_name only
+		$res = db_query("
+                       SELECT user_id,status,unix_pw
+                       FROM users
+	               WHERE user_name='$loginname' 
+                ");
+		if (!$res || db_numrows($res) < 1) {
+			// No user by that name
+			$feedback='Invalid Password Or User Name';
+			return false;
+		} else {
+			// There is a user with the provided user_name, but the MD5 passwds do not match
+			// We'll have to try checking the (crypt) unix_pw
+			$usr = db_fetch_array($res);
+
+			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
+				// Even the (crypt) unix_pw does not patch
+				// This one has clearly typed a bas passwd
+				$feedback='Invalid Password Or User Name';
+				return false;
+			} 
+			// User exists, (crypt) unix_pw matches
+			// Update the (MD5) user_pw and retry authentication
+			// It should work, except for status errors
+			$res = db_query ("UPDATE users
+                                          SET user_pw='" . md5($passwd) . "'
+                                          WHERE user_id='".$usr['user_id']."'
+                                          ");
+			return session_login_valid($loginname, $passwd, $allowpending) ;
+		}
 	} else {
-		// check status of this user
+		// If we're here, then the user has typed a password matching the (MD5) user_pw
+		// Let's check whether it also matches the (crypt) unix_pw
 		$usr = db_fetch_array($res);
+
+		if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
+			// The (crypt) unix_pw does not patch
+			// Invalidate (MD5) user_pw, refuse authentication
+			$res = db_query ("UPDATE users
+                                          SET user_pw='INVALID'
+                                          WHERE user_id='".$usr['user_id']."'
+                                          ");
+			$feedback='Invalid Password Or User Name';
+			return false;
+		}
+		
+		// Yay.  The provided password matches both fields in the database.
+		// Let's check the status of this user
 
 		// if allowpending (for verify.php) then allow
 		if ($allowpending && ($usr['status'] == 'P')) {
