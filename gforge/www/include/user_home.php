@@ -113,28 +113,12 @@ if (db_numrows($res_cat) < 1) {
 $HTML->box1_bottom(); ?>
 
 </TD><TD>
-If you are familiar with this user, please take a moment to rate him/her
-on the following criteria. Keep in mind, that your rating will be visible to
-the user and others.
-<P>
-The SourceForge Peer Rating system is based on concepts from 
-<A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
+<?php echo $Language->USERS_PEERINFO1; ?>
 	<CENTER>
         <?php echo vote_show_user_rate_box ($user_id); ?>
 	</CENTER>
 <P>
-The Peer Rating box shows all rating averages
-(and response levels) for each individual criteria. Due to the math and
-processing required to do otherwise, these numbers incoporate responses from
-both "trusted" and "non-trusted" users.
-<ul>
-<li> The "Sitewide Rank" field shows the user's rank compared to all ranked
-SourceForge users. 
-<li>The "Aggregate Score" shows an average, weighted overall score, based on
-trusted-responses only. 
-<li>The "Personal Importance" field shows the weight that users ratings of
-other developers will be given (between 1 and 1.5) -- higher rated user's
-responses are given more weight.  
+<?php echo $Language->USERS_PEERINFO2; ?>
 </ul>
 </TD></TR>
 </TABLE>

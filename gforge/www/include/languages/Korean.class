@@ -23,7 +23,7 @@
 	*added more strings including .../www/account/login.php
 
 	Soon-Son Kwon, 2002/06/11
-	*added more strings .../www/account/first.php
+	*added more strings
 */
 
 class Korean extends BaseLanguage {
@@ -209,6 +209,8 @@ Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
 	$this->ACCOUNTREGISTER_communitymail='커뮤니티 관련 메일 받기. <I>(트래픽 별로 없음.)</I>';
 	$this->ACCOUNTREGISTER_register='등록하기';
 
+	$this->USERS_PEERINFO1='만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오. <p> 이 Peer Rating System은 <A HREF="http://www.advogato.com">Advogato</A>에서 힌트를 얻은 것이며, 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.';
+	$this->USERS_PEERINFO2='Peer Rating 박스는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다. <ul><li>"전체 순위" 필드는 이곳의 모든 사용자와 비교한 순위를 나타냅니다. <li>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다. <li>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다. </ul></i></p>';
 
 	}
 }
