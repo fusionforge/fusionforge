@@ -57,6 +57,7 @@ case "$1" in
 	propose_update_install /etc/php4/cgi/php.ini
 
         # Setup our Apache
+	[ -f /var/lib/gforge/etc/httpd.vhosts ] && chown gforge:gforge /var/lib/gforge/etc/httpd.vhosts
 	/usr/lib/gforge/bin/install-apache.sh configure
 
 	# If you want to work with sourceforge-web-apache at the same time
