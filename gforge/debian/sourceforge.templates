@@ -25,6 +25,15 @@ Description-fr: Votre serveur de listes de diffusion
  Le nom du serveur qui hébergera vos listes de diffusion de Sourceforge.
  Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
 
+Template: sourceforge/download_host
+Type: string
+Description: Your download server
+ The hostname of the server that will host your Sourceforge packages. 
+ It should not be the same as your main SF host.
+Description-fr: Votre serveur de telechargement
+ Le nom du serveur qui hébergera vos paquetages Sourceforge.
+ Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
+
 Template: sourceforge/ip_address
 Type: string
 Description: Your IP address

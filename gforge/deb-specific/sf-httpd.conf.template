@@ -51,6 +51,11 @@ NameVirtualHost {ip_address}
 </VirtualHost>
 
 <VirtualHost {ip_address}>
+  ServerName {download_host}
+  DocumentRoot /var/lib/sourceforge/download
+</VirtualHost>
+
+<VirtualHost {ip_address}>
   ServerName {lists_host}
   AddHandler cgi-script .cgi
 

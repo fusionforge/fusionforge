@@ -62,14 +62,14 @@ int main (int argc, char** argv) {
   } /* if */
   else {
     /* set source */
-    src_file = (char *) malloc(strlen(src_dir_root) + strlen(src_dir_incoming) + strlen(argv[1]) + 1 );
+    src_file = (char *) malloc(strlen(src_dir_root) + strlen(src_dir_incoming) + strlen(argv[1]) +  strlen(argv[2]) + 1 );
     strcpy(src_file, src_dir_root);
     strcat(src_file, argv[2]);
     strcat(src_file, src_dir_incoming);
     strcat(src_file, argv[1]);
 
     /* set destination */
-    dest_file = (char *) malloc(strlen(dest_dir_root) + strlen(dest_dir_download) + strlen(argv[2]) + 1);
+    dest_file = (char *) malloc(strlen(dest_dir_root) + strlen(dest_dir_download) + strlen(argv[3]) + 1);
     strcpy(dest_file, dest_dir_root);
     strcat(dest_file, argv[3]);
     strcat(dest_file, dest_dir_download);

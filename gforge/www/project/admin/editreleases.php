@@ -64,15 +64,14 @@ if ($step1) {
 
 // Add file(s) to the release
 if ($step2) {	
-	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);
-	$project_files_dir=$FTPFILES_DIR.$group_unix_name;
+	$user_unix_name=user_getname();
+	$project_files_dir=ereg_replace("<GROUP>",$group_unix_name,$FTPFILES_DIR);
+	$user_incoming_dir=ereg_replace("<USER>",$user_unix_name,$FTPINCOMING_DIR);
 
 	// For every file selected add that file to this release
 	for($x=0;$x<count($file_list);$x++) {
-		$frs->frsMoveFile($file_list[$x], $group_unix_name, time(), $FTPINCOMING_DIR, $release_id);
-		$frs->frsVerifyFileMoved("$project_files_dir/$file_list[$x]");
-		$frs->frsAddFile(time(), $file_list[$x], filesize("$project_files_dir/$file_list[$x]"), time(), $release_id, $package_id);
+		$frs->frsAddFile(time(), $file_list[$x], $group_unix_name, $user_unix_name, filesize("$project_files_dir/$file_list[$x]"), time(), $release_id, $package_id, $type_id, $proc_id);
 		if( !$frs->isError() ) {
 			$feedback .= " File(s) Added ";
 		}
@@ -248,9 +247,9 @@ Edit Existing Release
 <input type="hidden" name="release_id" value="<?php echo $release_id; ?>">
 <input type="hidden" name="step2" value="1">
 
-Next, choose your files from the list below. Choose <b>ONLY YOUR</b> files. If you choose someone else's files, 
-they will not be able to access them and they will be rightfully upset.<br>
-You can upload new files using FTP to <b>upload.sourceforge.net</b> in the <b>incoming</b> directory. 
+<?php $user_unix_name=user_getname(); ?>
+Next, choose your files from the list below.<br>
+You can upload new files using FTP to <b><?php echo "<a href=ftp://$user_unix_name@$sys_upload_host/incoming/>$sys_upload_host</a>"; ?></b> with the username <b><?php echo $user_unix_name ; ?></b> and your password in the <b>incoming</b> directory. 
 When you are done uploading, just hit the refresh button to see the new files.
 <br><br>
 <table border="0" cellpadding="3" cellspacing="3">
@@ -259,7 +258,10 @@ When you are done uploading, just hit the refresh button to see the new files.
 <?php
 	$atleastone = 0;
 	$counter = 0;
-	$dirhandle = opendir($FTPINCOMING_DIR);
+	$user_incoming_dir=ereg_replace("<USER>",user_getname(),$FTPINCOMING_DIR);
+	//echo "<b>$user_incoming_dir</b>";
+	if(is_dir($user_incoming_dir)){
+	$dirhandle = opendir($user_incoming_dir);
 	
 	// Iterate through each file in the upload dir and display it with a checkbox
 	while ($file = readdir($dirhandle)) {
@@ -276,6 +278,7 @@ When you are done uploading, just hit the refresh button to see the new files.
 
 			print("	<input type='checkbox' name='file_list[]' value='$file'>$file<BR>\n");
 		}
+	}
 	}
 
 	// If there aren't any files in the upload dir then say so

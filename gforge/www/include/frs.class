@@ -82,17 +82,19 @@ class FRS extends Error {
 	 * @param $post_date int THe post date
 	 * @returns True on success, False on error
 	 */
-	function frsAddFile($release_time, $filename, $file_size, $post_date, $release_id, $package_id, $type_id, $proc_id)
+	function frsAddFile($release_time, $filename, $group_unix_name, $user_unix_name, $file_size, $post_date, $release_id, $package_id, $type_id, $proc_id)
 	{
 		if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError(' FRS Add File Failed: ' . $this->getErrorMessage());
 			return false;
 		}
 
+		//exec is crunching var
+		$file=$filename;
 		//move the file to a its project page using a setuid program
-		exec ("/usr/local/bin/fileforge $filename ".$group_unix_name, $exec_res);
+		exec ("/usr/lib/sourceforge/bin/fileforge $file $user_unix_name $group_unix_name 2>&1", $exec_res);
 		if ($exec_res[0]) {
-			$this->setError("FRS Add File Failed: $exec_res[0], $exec_res[1]");
+			$this->setError("FRS Add File Failed:<br>$exec_res[0]<br>$exec_res[1]<br>$exec_res[2]");
 			return false;
 		}
 
@@ -719,25 +721,6 @@ class FRS extends Error {
 	}
 
 	// }}}
-	// {{{ frsVerifyFileMoved
-
-	/**
-	 * Verify that a file has actually moved from the temp upload location 
-	 * to the projects dir.
-	 *
-	 * @param $file_location String Location of the file in question.
-	 */
-	function frsVerifyFileMoved($file_location)
-	{
-		if( !file_exists($file_location) ) {
-			$this->setError($this->getErrorMessage() . " | Move File Failed ");
-			return false;
-		}
-
-		return true;
-	}
-
-	// }}}
 	// {{{ frsCreatePackage
 
 	/**
@@ -845,36 +828,6 @@ class FRS extends Error {
 	}
 
 	// }}}
-	// {{{ frsMoveFile
-
-	/**
-	 * Move a file from the FTP upload dir to a projects dir
-	 *
-	 * @param $file	String The name of the file
-	 * @param $group_unix_name String The name of the group
-	 * @param $now Int The date/time of the move
-	 * @param $FTPINCOMING_DIR The FTP upload dir.  This is probably not needed.
-	 * @param $release_id Int The ID of the release
-	 */
-	function frsMoveFile($file, $group_unix_name, $now, $FTPINCOMING_DIR, $release_id)
-	{
-		clearstatcache();
-		if (is_file("$FTPINCOMING_DIR/$file") && file_exists("$FTPINCOMING_DIR/$file")) {
-			//move the file to a its project page using a setuid program
-			exec ("/usr/local/bin/fileforge $file $group_unix_name", $exec_res);
-			if ($exec_res[0]) {
-				$this->setError("FRS Move File Failed: $exec_res[0],$exec_res[1]");
-				return false;
-			}
-		} else {
-			$this->setError("| FRS Move File Failed: File Name Invalid Or Does Not Exist: $FTPINCOMING_DIR/$file ");
-			return false;
-		}
-
-		return true;
-	}
-
-	//}}}
 	//{{{ frsResolveRelease
 
 	/**

@@ -58,7 +58,9 @@ if( $submit ) {
 			Fifth insert it into the database
 		*/
 		$group_unix_name=group_getunixname($group_id);
-		$project_files_dir=$FTPFILES_DIR.$group_unix_name;
+		$project_files_dir=ereg_replace("<GROUP>",$group_unix_name,$FTPFILES_DIR);
+		$user_unix_name=user_getname();
+		$user_incoming_dir=ereg_replace("<USER>",$user_unix_name,$FTPINCOMING_DIR);
 
 		if ($file_name) {
 			// Check to see if the user uploaded a file instead of selecting an existing one.
@@ -69,7 +71,7 @@ if( $submit ) {
 				if (is_file($userfile) && file_exists($userfile)) {
 					$new_userfile = explode("tmp/", $userfile);
 					$userfile = $new_userfile[1];
-					exec ("/usr/local/bin/tmpfilemove $userfile $userfile_name",$exec_res);
+					exec ("/usr/lib/sourceforge/bin/tmpfilemove $userfile $userfile_name $user_unix_name 2>&1",$exec_res);
 					if ($exec_res[0]) {
 						echo '<H3>' . $exec_res[0],$exec_res[1] . '</H3><P>';
 					}
@@ -103,11 +105,11 @@ if( $submit ) {
 							move the file to the project's fileserver directory
 						*/
 						clearstatcache();
-						if (is_file($FTPINCOMING_DIR.'/'.$file_name) && file_exists($FTPINCOMING_DIR.'/'.$file_name)) {
+						if (is_file($user_incoming_dir.'/'.$file_name) && file_exists($user_incoming_dir.'/'.$file_name)) {
 							//move the file to a its project page using a setuid program
-							exec ("/usr/local/bin/fileforge $file_name ".$group_unix_name,$exec_res);
+							exec ("/usr/lib/sourceforge/bin/fileforge $file_name $user_unix_name $group_unix_name 2>&1",$exec_res);
 							if ($exec_res[0]) {
-								echo '<h3>'.$exec_res[0],$exec_res[1].'</H3><P>';
+								echo '<h3>'.$exec_res[0],$exec_res[1],$exec_res[2].'</H3><P>';
 							}
 							//add the file to the database
 							$res=db_query("INSERT INTO frs_file ".
@@ -191,7 +193,11 @@ if( $submit ) {
 		<TD>
 <font color="red"><b>NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</b></font><br>
 <?php
-	$dirhandle = opendir($FTPINCOMING_DIR);
+	
+	$user_unix_name=user_getname();
+	$user_incoming_dir=ereg_replace("<USER>",$user_unix_name,$FTPINCOMING_DIR);
+	if(is_dir($user_incoming_dir)){
+	$dirhandle = opendir($user_incoming_dir);
 
 	echo '<SELECT NAME="file_name">\n';
 	echo '	<OPTION VALUE="qrs_newfile">Select a file</OPTION>';
@@ -201,6 +207,7 @@ if( $submit ) {
 			$atleastone = 1;
 			print '<OPTION value="'.$file.'">'.$file.'</OPTION>';
 		}
+	}
 	}
 	echo '</SELECT> Or, upload a new file: <input type="file" name="userfile"  size="30">';
 	if (!$atleastone) {

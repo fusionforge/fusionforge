@@ -35,6 +35,9 @@ $sys_cvs_host = "{cvs_host}";
 // Machine used for downloading sources/packages
 $sys_download_host = "download.{domain_name}";
  
+// Machine used for downloading sources/packages
+$sys_upload_host = "upload.{domain_name}";
+
 // Machine(s) that host users' shell accounts
 //  N.B. to the SourceForge Crew: What's the difference between the user
 // host and the shell host?  They are clearly two different hostnames
@@ -87,11 +90,12 @@ $sys_ldap_passwd="{ldap_web_add_password}";
 // note that password NOT stored here
 $sys_ldap_admin_dn="cn=admin,ou=People,{ldap_base_dn}";
  
+// If you change something here don't forget to update fileforge
 // Where files are placed when uploaded
-$FTPINCOMING_DIR = "/var/lib/sourceforge/ftp/incoming";
+$FTPINCOMING_DIR = "/var/lib/sourceforge/chroot/home/users/<USER>/incoming";
 
 // Where the released files are located
-$FTPFILES_DIR = "/var/lib/sourceforge/download";
+$FTPFILES_DIR = "/var/lib/sourceforge/download/<GROUP>";
  
 // Where the SourceForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME

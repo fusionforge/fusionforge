@@ -33,9 +33,11 @@ sourceforge (2.5-10+11) unstable; urgency=low
   * Fixed possible infinite loop in cronjobs/calculate_user_metric.php.
   * [Christian] backport of 2_6_1 docman for better language support
   * [Christian] Fixed install-ldap loss of robot password
-  * [Christian] Started FTP setup 
+  * [Christian] Started FTP setup
+  * [Christian] Download server added
+  * [Christian] File Release FRS support added (closes: #108173)
 
- -- Christian Bayle <bayle@aist.enst.fr>  Sat, 15 Sep 2001 23:41:59 +0200
+ -- Christian Bayle <bayle@aist.enst.fr>  Sun, 16 Sep 2001 22:09:35 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 

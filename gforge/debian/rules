@@ -17,6 +17,8 @@ configure-stamp:
 
 build: configure-stamp build-stamp
 	gcc -o  utils/cvssh utils/grap.c
+	gcc -o  utils/fileforge utils/fileforge.c
+	gcc -o  utils/tmpfilemove utils/tmpfilemove.c
 build-stamp:
 	dh_testdir
 
@@ -33,6 +35,8 @@ clean:
 	dh_testroot
 	rm -f build-stamp configure-stamp
 	rm -f utils/cvssh
+	rm -f utils/fileforge
+	rm -f utils/tmpfilemove
 	rm -f cvssh.1
 
 	# Add here commands to clean up after the build process.
@@ -110,6 +114,10 @@ install: build
 	install utils/new_parse.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 utils/cvssh $(CURDIR)/debian/sourceforge/bin/cvssh 
+
+	# FRS stuff
+	install -m 4755 utils/fileforge $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/fileforge 
+	install -m 4755 utils/tmpfilemove $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/tmpfilemove 
 
 	# SSH and CVS in one
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
