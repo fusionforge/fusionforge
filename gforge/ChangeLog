@@ -1,3 +1,8 @@
+2003-01-05  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* Removed uuencoded image files.  They are not needed anymore
+	after a new upstream release.
+
 2003-01-04  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/pm/calendar.php: show tasks in calendar.
