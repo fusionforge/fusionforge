@@ -19,7 +19,7 @@ class Theme extends Layout {
 		$this->Layout();
 
 		// The root location for images
-		$this->imgroot = '/themes/savannah/images/';
+		$this->imgroot = 'themes/savannah/images/';
 
 		// The content background color
 		//$this->COLOR_CONTENT_BACK= '#FFFFFF';
