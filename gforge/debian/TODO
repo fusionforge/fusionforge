@@ -13,8 +13,6 @@ here have been transferred onto the Savannah project, at
 
 * [CB] Find how to use libnss-lwres.  [RM] ???
 
-* [CB] Repair /admin/useredit.php.  [RM] Works for me.
-
 * [CB] Repair /admin/editpackages.php (Create FTP_INCOMING in
   /var/lib/sourceforge/ftp)  [RM] Is this still current?
 
@@ -22,6 +20,13 @@ here have been transferred onto the Savannah project, at
   matter of data.  Has to wait for smooth DB upgrade.
 
 * [RM] Decide on whether to use a chroot or not.
+
+* [RM] Implement a (more) secure way of moving the files from the
+  incoming dir to the published location.  Probably involves a
+  root:root setuid program that checks the availability of some secret
+  that's only given to a restricted set of PHP files (for instance,
+  the correct database password), and changing said incoming dirs to
+  user:user, perms 755.
 
 # Local variables:
 # mode: indented-text
