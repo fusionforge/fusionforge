@@ -11,6 +11,8 @@
 	if you are not logged in
 	* Removed unwanted translation in admin/groupedit.php as remarked by
 	Jeff Fynboh (jfynboh) in patch #290
+	* Applied Paul Kneeland (paulkneeland) patch about trove #277
+	please test
 
 2003-04-06  Ryan T. Sammartino  <ryants@shaw.ca>
 

@@ -62,9 +62,23 @@ site_admin_header(array('title'=>$Language->getText('admin_trove_cat_add','title
 <?php
 
 // generate list of possible parents
-$res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
-while ($row_cat = db_fetch_array($res_cat)) {
-	print ('<option value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."</option>\n");
+// <paul@zootweb.com> 4/2/2003 - If we were given a parent trove use it
+// in the "Parent Category" box otherwise give them the complete list.
+if (isset($parent_trove_cat_id)) {
+	if ($parent_trove_cat_id == 0) {
+		print ('<option value="0">root</option>\n');
+	} else {
+		$res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat WHERE trove_cat_id=$parent_trove_cat_id");
+		while ($row_cat = db_fetch_array($res_cat)) {
+			print ('<option value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."</option>\n");
+		}
+	}
+} else {
+	print ('<option value="0">root</option>\n');
+	$res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
+	while ($row_cat = db_fetch_array($res_cat)) {
+		print ('<option value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."</option>\n");
+	}
 }
 
 ?>

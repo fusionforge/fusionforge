@@ -31,10 +31,13 @@ function printnode ($nodeid,$text) {
 
 	print html_image('ic/cfolder15.png','15','13',array());
 	print ('&nbsp; '.$text." ");
-	if ($nodeid != 0) {
-                print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','edit').']</a> ');
-                print (help_button('trove_cat',$nodeid)."\n");
-        }
+	if ($nodeid == 0) {
+		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','add').']</a> ');
+	} else {
+		print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','edit').']</a> ');
+		print ('<a href="trove_cat_add.php?parent_trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','add').']</a> ');
+		print (help_button('trove_cat',$nodeid)."\n");
+	}
 
 	$GLOBALS['depth']++;
 	$res_child = db_query("

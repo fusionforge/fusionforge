@@ -360,6 +360,7 @@ admin_trove_cat_add	title	Site Admin: Trove - Add Node
 admin_trove_cat_edit	cant_delete_has_subcategories	Can't delete, That trove cat has sub categories
 admin_trove_cat_edit	delete	Delete
 admin_trove_cat_edit	edit_trove_category	Edit Trove Category
+admin_trove_cat_edit	error_trove_equal_parent	Error Parent Category can not be same as current
 admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
 admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
 admin_trove_cat_edit	new_category_description	New category description (VARCHAR 255)
@@ -371,6 +372,7 @@ admin_trove_cat_edit	title	Site Admin: Trove - Edit Category
 admin_trove_cat_edit	update	Update
 admin_trove_cat_list	browse_trove_tree	Browse Trove Tree
 admin_trove_cat_list	edit	Edit
+admin_trove_cat_list	add	Add
 admin_trove_cat_list	title	Site Admin: Trove - Category List
 admin_unsubscribe	admin_initiaded_mail	Admin-initiated mailings
 admin_unsubscribe	all	ALL
