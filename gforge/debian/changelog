@@ -1,4 +1,4 @@
-sourceforge (2.5-10+16) unstable; urgency=low
+sourceforge (2.5-10+16+) unstable; urgency=low
 
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
@@ -75,12 +75,24 @@ sourceforge (2.5-10+16) unstable; urgency=low
   * www/include/cache.php: Removed warning when the page is not cached.
   * debian/sourceforge.prerm: Fixed uninstall-time bugs (deluser could
     fail, and the FTP root directory could be non-empty).
-  * debian/sourceforge.config: Hopefully fixed the empty db_passwd bug
-    (#116009).
-  * debian/sourceforge.templates: The default is no longer a web-only
-    installation.
+  * debian/sourceforge.config: Eventually fixed the empty db_passwd bug
+    (closes: #116009).
+  * Removed the web-only installation.  All the services work, and there
+    is no need for a stripped-down version (which would be full of broken
+    links and non-working features).
+  * debian/control: Replaced Recommends: with Depends: now that the
+    web-only installation is no more.  Removed cvsweb, too, since we
+    provide our own version.
+  * deb-specific/database.inc.template, deb-specific/local.inc.template,
+    deb-specific/sf-httpd.secrets.template: Took the LDAP password out of
+    the reach of unallowed users (same trick we used for the database
+    password).
+  * deb-specific/install-ldap.sh: Rewrote the way the LDAP password was
+    handled.
+  * Added a debconf note concerning the way libpam-ldap has to be
+    configured.
 
- -- Roland Mas <lolando@debian.org>  Wed, 31 Oct 2001 19:53:34 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  1 Nov 2001 13:25:06 +0100
 
 sourceforge (2.5-10) unstable; urgency=low
 
