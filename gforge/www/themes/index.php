@@ -3,6 +3,8 @@
  * GForge Web Theme Control Page
  *
  * Copyright 2002 (c) GFORGE LLC
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
  *
  * @version   $Id$
  */
@@ -10,6 +12,7 @@
 
 require_once('pre.php');
 
+require "pre.php";    
 session_require(array('isloggedin'=>'1'));
 
 $u =& session_get_user();

@@ -21,7 +21,7 @@ if ($#ARGV < 0) {
 
 $plugin_name = $ARGV [0] ;
 
-if ($pluginname =~ /[^a-z]/) {
+if ($plugin_name =~ /[^a-z]/) {
     debug "Error: the plugin name must contain only [a-z] characters" ;
     exit 1 ;
 }

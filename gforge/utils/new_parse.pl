@@ -50,7 +50,7 @@ while ($ln = pop(@userdump_array)) {
 	($uid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
 	$uid += $uid_add;
 	$username =~ tr/A-Z/a-z/;
-	$user_exists = (-d $homedir_prefix . $username);
+	$user_exists = (-d $homedir_prefix . $username || -f "/var/lib/sourceforge/tmp/$username.tar.gz");
 	
 	if ($status eq 'A' && $user_exists) {
 		update_user($uid, $username, $realname, $shell, $passwd);
@@ -62,7 +62,7 @@ while ($ln = pop(@userdump_array)) {
 		delete_user($username);
 	
 	} elsif ($status eq 'D' && !$user_exists) {
-		print("Error trying to delete user: $username\n");
+		#print("Error trying to delete user: $username\n");
 		
 	} elsif ($status eq 'S' && $user_exists) {
 		suspend_user($username);
@@ -202,12 +202,17 @@ sub update_user {
 # User Deletion Function
 #############################
 sub delete_user {
-	my ($username, $junk, $uid, $gid, $realname, $homedir, $shell, $counter);
-	my $this_user = shift(@_);
+	#my ($username, $junk, $uid, $gid, $realname, $homedir, $shell, $counter);
+	my $username = shift(@_);
 	
-	print("Deleting User : $this_user\n");
-	system("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
-	system("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
+	my $alreadydone=(-f "/var/lib/sourceforge/tmp/$username.tar.gz");
+	if (!$alreadydone){
+	print("Deleting User : $username\n");
+		print("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
+		system("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username");
+		print("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
+		system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username");
+	}
 }
 
 #############################
