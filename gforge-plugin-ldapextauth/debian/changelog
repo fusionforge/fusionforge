@@ -1,6 +1,6 @@
-gforge-plugin-ldapextauth (0.1-1) experimental; urgency=low
+gforge-plugin-ldapextauth (1.0-0) experimental; urgency=low
 
-  * First release of the external LDAP authentication plugin.
+  * First real release of an external LDAP authentication plugin.
 
- -- Roland Mas <lolando@debian.org>  Sun, 18 Jan 2004 22:44:46 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 18 Apr 2004 17:42:42 +0200
 

@@ -13,4 +13,5 @@ Description: A Gforge plugin to authenticate from an external LDAP directory
  authenticate the users.  When they first try to log in, their
  login-name and password are checked against the LDAP tree.  If they
  match, the user is transparently inserted into the Gforge database
- and authentication proceeds normally from then on.
+ and authentication proceeds normally from then on.  Password changes
+ are also taken into account.

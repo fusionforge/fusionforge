@@ -1,8 +1,9 @@
-This package was debianized by Roland Mas <lolando@debian.org> on
-Sun, 14 Dec 2003 21:52:12 +0100
+This package was first debianized by Roland Mas <lolando@debian.org>
+on Sun, 14 Dec 2003 21:52:12 +0100.
 
 Upstream Author: Roland Mas <lolando@debian.org> (Based on an idea and
-preliminary code by Joseph Bironas <j.bironas@niteo.com>).
+preliminary code by Joseph Bironas <j.bironas@niteo.com>).  Later
+refined by same Roland Mas under contract for Gforge Group, LLC.
 
 Copyright:
 

@@ -50,7 +50,7 @@ eval {
     $dbh->commit () ;
     
     $version = &get_db_version ;
-    $target = "0.1" ;
+    $target = "1.0" ;
     if (is_lesser $version, $target) {
 	my @filelist = (
 			# "/usr/lib/gforge/plugins/$pluginname/lib/$pluginname-init.sql",
