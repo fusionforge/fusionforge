@@ -52,7 +52,7 @@ account_change_email	subject	$1 확인
 account_change_email	title	이메일 주소 변경
 account_change_email	mailsent	<P>새로 입력하신 이메일 주소로 메일이 전송되었습니다. 이메일 주소 변경을 완료하시려면 지금 보내드린 이메일 내용을 잘 읽어 보시기 바랍니다. <P><A href="/">[ 홈으로 되돌아가기 ]</A>
 account_change_email	desc	<P>이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로부터 확인하는 절차를 밟아야 합니다. <P>제공되는 서비스의 성격상 정확한 이메일 주소를 유지할 필요가 있습니다. 쉘 계정 접속이나 프로젝트 관리 등의 중요한 이슈 사항들에 대해서 항상 사용자 여러분과 연락이 가능하도록 보장하는 것은 중요한 일입니다. <P>아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL이 해당 메일 주소로 배달되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니다.
-account_change_pw	confirmation	<h2>$1 비밀번호 변경 확인</h2>	<p>	축하합니다. 비밀번호가 변경되었습니다.	</p>
+account_change_pw	confirmation	<h2>$1 비밀번호 변경 확인</h2>	<p>	축하합니다. 비밀번호가 변경되었습니다.</p>
 account_change_pw	section	사용자 등록 정보
 account_change_pw	title	비밀번호 변경
 account_editsshkeys	section	사용자 등록 정보

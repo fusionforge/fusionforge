@@ -1,3 +1,8 @@
+2003-09-21  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/languages/Base.tab and other *.tab files: Fixed a
+	few strings appearing in the project registration pages.
+
 2003-09-18
 
 	* [Christian] Applied Antoine Nivard suggestion to correct [ #505 ]

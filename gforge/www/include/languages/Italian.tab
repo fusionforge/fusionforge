@@ -46,7 +46,7 @@ account_change_email	title	Cambio indirizzo email
 account_change_email-complete	title	Cambio indirizzo email completato
 account_change_email-complete	confirm	Benvenuto, $1. Il cambio del tuo indirizzo email &egrave; compeltato. Il tuo nuovo indirizzo email &egrave; <strong>$2</strong>. Mail inviata a $3 sar&agrave; rediretta su questo indirizzo.
 account_change_pw	title	Cambia Password
-account_change_pw	confirmation	<h2>$1 Conferma di cambio password</h2>	<p>	Congratulazioni, la password &egrave; stata cambiata.	</p>
+account_change_pw	confirmation	<h2>$1 Conferma di cambio password</h2>	<p>	Congratulazioni, la password &egrave; stata cambiata.</p>
 account_change_pw	old_password_incorrect	La vecchia password non &egrave; corretta
 account_change_pw	not_valid_password	La nuova password non &egrave; valida (deve avere una lunghezza di almeno 6 caratteri).
 account_change_pw	passwords_dont_match	Le nuove password non corrispondono
@@ -888,8 +888,8 @@ register	registration_complete	Registrazione completata
 register	project_submitted	Il progetto &egrave; stato sottoposto agli amministratori di $1. Entro 72 riceverai notifica della loro decisione e ulteriori istruzioni.</p><p>Grazie per aver scelto $1
 register	project_information	Informazioni progetto
 register	apply_for_registration	Per registrare un progetto, compila i campi del form. Leggi attentamente le descrizioni e fornisci informazioni complete. Tutti i campi sono obbligatori.
-register	project_full_name	</h3>1. Nome completo del progetto</h3><p>Inizia col dare un nome al progetto. Il "Nome completo" &egrave; descrittivo e non ha restrizioni, eccetto una lunghezza massima di 40 caratteri.</p>Nome completo:<br/>
-register	purpose_and_summarization	2. Sommario e obiettivo del progetto</h3><p><strong></strong><p><strong> Inserisci una descrizione dettagliata e accurata del tuo progetto e quali risorse di $1 userai. Questa descrizione sar&agrave; la base per la scelta di approvare o rifiutare il tuo progetto su $1 e in futuro se utilizzi le risorse nel modo dovuto. La descrizione non sar&agrave; utilizzata come descrizione pubblica del progetto. Deve essere scritta in inglese.</strong>
+register	project_full_name	<h3>1. Nome completo del progetto</h3><p>Inizia col dare un nome al progetto. Il "Nome completo" &egrave; descrittivo e non ha restrizioni, eccetto una lunghezza massima di 40 caratteri.</p>Nome completo:<br/>
+register	purpose_and_summarization	<h3>2. Sommario e obiettivo del progetto</h3><p><strong></strong><p><strong> Inserisci una descrizione dettagliata e accurata del tuo progetto e quali risorse di $1 userai. Questa descrizione sar&agrave; la base per la scelta di approvare o rifiutare il tuo progetto su $1 e in futuro se utilizzi le risorse nel modo dovuto. La descrizione non sar&agrave; utilizzata come descrizione pubblica del progetto. Deve essere scritta in inglese.</strong>
 register	license_type	Publico domino</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>Licenza per questo progetto: </strong><br />
 register	other_license	Se hai selezionato "altri", inserisci una descrizione della licenza. Considera che altre licenze potrebbero non venir approvate e potrebbe passare pi&ugrave; tempo visto che dovremo controllare se la licenza è compatibile con l'ambiente OpenSource.
 register	project_description	<h3>4. Descrizione pubblica del progetto</h3><p>Questa è la descrizione del tuo progetto che sarà visualizzata nel sommario del progetto, nei risultati della ricerca, ecc. Non dovrebbe essere così lungo come la descrizione dell'obiettivo del progetto (passo 2). La lunghezza massima è di 255 caratteri.
