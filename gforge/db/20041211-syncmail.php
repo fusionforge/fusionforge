@@ -21,9 +21,10 @@ for ($i=0; $i<count($arr); $i++) {
 
 		$group_admin = db_result($res,0,'user_id');
 
-		// $mailing_list = new MailingList($group);
-		// $mailing_list->create($group_name.'-commits', 'cvs commits', 1,$group_admin);
 		echo "Will create mailing list for <b>".$group_name."-commits</b><br>\n";
+		$mailing_list = new MailingList($group);
+		$mailing_list->create($group_name.'-commits', 'cvs commits', 1,$group_admin);
+		echo $mailing_list->getErrorMessage();
 	}
 }
 
