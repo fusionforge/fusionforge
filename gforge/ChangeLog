@@ -1,3 +1,8 @@
+2003-09-30  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* common/include/User.class: Use default system theme for users
+	who haven't chosen one yet (patch #531 from Francisco Gimeno).
+
 2003-09-23  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* common/include/User.class: Removed empty lines in SSH authorized

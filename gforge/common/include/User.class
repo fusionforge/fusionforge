@@ -1089,10 +1089,12 @@ class User extends Error {
 	 *	@return	int	The theme_id.
 	 */
 	function getThemeID() {
+		global $sys_theme;
 		if (!$this->theme_id) {
 			$res=db_query("SELECT * FROM theme_prefs WHERE user_id='".$this->getID()."'");
 			if (!$res || db_numrows($res) < 1) {
-				$this->theme_id=1;
+				$res=db_query("SELECT theme_id FROM themes WHERE dirname='$sys_theme'");
+				$this->theme_id=db_result($res,0,'theme_id');
 			} else {
 				$this->theme_id=db_result($res,0,'user_theme');
 			}
