@@ -114,13 +114,17 @@ if ($project->enableAnonCVS() || !$anonymous) {
 	echo $Language->getText('scm_index', 'browsetree');
 ?>
 		<UL>
-		<li><a href=<?php print account_group_cvsweb_url($project->getUnixName()); ?> >
+		<LI><a href=<?php print account_group_cvsweb_url($project->getUnixName()); ?> >
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?>(cvsweb)</b></a>
 		</UL>
 
 		<UL>
-		<li><a href=/scm/controller.php?group_id=<?php echo $group_id; ?> >
-			<b><?php echo $Language->getText('scm_index', 'browseit'); ?>(php)</b></a>
+		<LI>Ronald Petty contrib<BR><a href=/scm/controller.php?group_id=<?php echo $group_id; ?> >
+			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (php)</b></a>
+		</UL>
+		<UL>
+		<LI>Dracos Moinescu contrib<BR><a href="/scm/controlleroo.php?group_id=<?php echo $group_id; ?>&hide_attic=0" >
+			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (php OO)</b></a>
 		</UL>
 <?php
 }

@@ -1,6 +1,7 @@
-2003-06-09 Christian Bayle	<bayle@debian.org>
+2003-06-10 Christian Bayle	<bayle@debian.org>
 
 	* Added Ronald Petty cvs browser as an alternate cvs browser
+	* Added Dracos Moinescu cvs browser as an alternate cvs browser
 
 2003-06-09  Roland Mas  <99.roland.mas@aist.enst.fr>
 

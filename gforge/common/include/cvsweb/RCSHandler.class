@@ -1,0 +1,334 @@
+<?php
+class RCSHandler extends FileHandler
+{
+    var $__LOG = "";
+
+    function getRCSLog($RCSFILE,$REV="all")
+    {
+	$rev = "";
+	if($REV != "all")
+	    $rev = "-r$REV";
+	
+	$file = $this->generateTemp();	
+	$cmd = "rlog $rev $RCSFILE > $file";
+	if(false === ($result = system($cmd)))
+	{
+	    $this->setError("Could not execute '$cmd'");
+	    return false;
+	}
+	
+	if(false === ($log = $this->readContents($file)))
+	    return false;
+	
+	$this->__LOG = $log;
+	
+	if(!$this->deleteFile($file))
+	    return false;
+
+	return true;
+    }
+    
+    function handleRCSLog()
+    {
+	if($this->__LOG == "")
+	{
+	    $this->setError("Get RCSLog (getRCSLog(\$RCSFILE)) before handling");
+	    return false;
+	}
+    	
+	$nfo = explode("----------------------------\n",$this->__LOG);
+	
+	$revisions = array();
+
+	for($i=1;$i<count($nfo);$i++)
+	{
+	    $rev = array();
+	    $revision = array();
+	    $info = array();
+	    
+	    $rev = explode("\n",$nfo[$i]);
+	    $info = explode(";",$rev[1]);
+
+	    $revision['REV'] = trim(substr($rev[0],9));
+	    $revision['DATE'] = trim(substr($info[0],6));
+    	    $revision['AUTHOR'] = trim(substr($info[1],10));
+	    $revision['BRANCH'] = "MAIN";
+	    $revision['LOG'] = "";
+	    
+	    $beginAt = 2;
+	    if(substr($rev[2],0,9) == "branches:")
+	    {
+		$revision['BRANCH'] = substr(substr($rev[2],10),0,-1);
+		$beginAt = 3;
+	    }
+	    
+	    $count = count($rev);
+	    for($j=$beginAt;$j<$count-1;$j++)
+	    {	
+		if(substr($rev[$j],40,5) != "=====")
+		    $revision['LOG'] .= $rev[$j];
+		if($j+2 < $count)
+		    $revision['LOG'] .= "\n";
+	    }
+	    $revisions[$revision['REV']] = $revision;
+	}
+	//krsort($revisions);
+	
+	return $revisions;
+    }
+
+    function getRevisionInfo($RCSFILE,$REV="")
+    {
+	if(false === $this->getRCSLog($RCSFILE,$REV))
+	    return false;
+	
+	if(false === ($revisions = $this->handleRCSLog()))
+	    return false;
+	
+	if($REV == "")
+	{
+	    $keys = array_keys($revisions);
+	    $REV = $keys[0];
+	}
+	
+	return $revisions[$REV];
+    }
+
+    function getRCSContent($RCSFILE,$REV="")
+    {
+	$file = $this->generateTemp();
+	$cmd = "co -r$REV -p $RCSFILE > $file";
+	if(false === ($result = system($cmd)))
+	{
+	    $this->setError("Could not execute '$cmd'");
+	    return false;
+	}
+	
+	if(false === ($content = $this->readContents($file)))
+	    return false;
+	
+	if(!$this->deleteFile($file))
+	    return false;
+
+
+	$content = str_replace("<","&lt;",$content);
+	$content = str_replace(">","&gt;",$content);
+	return $content;	
+    }
+    
+    function doDiff($RCSFILE,$REV1,$MODE="SC",$REV2="")
+    {
+	$file = $this->generateTemp();
+
+	$cmd = "rcsdiff -r$REV1 -r$REV2 -t %option% $RCSFILE > $file";
+
+	switch($MODE)
+	{
+	    case "SC":
+		$option = "";
+		$command = str_replace("%option%",$option,$cmd);
+		break;
+	    case "LC":
+		$option = "--side-by-side --width=120";
+		$command = str_replace("%option%",$option,$cmd);
+		break;
+	    case "U":
+		$option = "-u";
+		$command = str_replace("%option%",$option,$cmd);
+		break;
+	    default:
+		$option = "";
+		$command = str_replace("%option%",$option,$cmd);
+	}
+    
+	if(false === ($result = system($command)))
+	{
+	    $this->setError("Could not execute '$command'");
+	    return false;
+	}
+
+	if(false === ($DIFF = $this->readContents($file)))
+	    return false;
+	    
+	if(!$this->deleteFile($file))
+	    return false;
+	
+	switch($MODE)
+	{
+	    case "SC":
+		$DIFF = $this->shortDiff($DIFF);
+		$DIFF = "<i>Left colomn: </i><b>Revision $REV1</b> ||| <i>Right colomn: </i><b>Revision $REV2</b><br>".$DIFF;
+		break;
+	    case "LC":
+		$DIFF = $this->longDiff($DIFF,120);
+		$DIFF = "<i>Left colomn: </i><b>Revision $REV1</b> ||| <i>Right colomn: </i><b>Revision $REV2</b><br>".$DIFF;
+		break;
+	    case "U":
+		$DIFF = str_replace("\n","<br>",$DIFF);
+		break;
+	    default:
+		$DIFF = $this->shortDiff($DIFF);
+	}
+	
+	return $DIFF;
+    }
+    
+    function shortDiff($DIFF)
+    {
+	$diffChars = array("a","c","d");
+	$colors = array(
+	    "a" => array("#F0F0F0","#00FF00"),
+	    "d" => array("#FF0000","#F0F0F0"),
+	    "c" => array("#FFFF00","#FFFF00")
+	);
+	
+	$CONTENT = "
+	    <table cellpadding=\"1\" cellspacing=\"0\" border=\"0\" width=\"100%\">
+	";
+	$lines = explode("\n",$DIFF);
+	$i = 0;
+	while($i<count($lines)-1)
+	{
+	    $tr = "<tr><td width=\"50%\" bgcolor=\"%bgc1%\" valign=\"top\">%left%</td><td width=\"1\" bgcolor=\"#000000\"></td><td width=\"50%\" bgcolor=\"%bgc2%\" valign=\"top\">%right%</td></tr>";
+	    $firstChar = substr($lines[$i],0,1);
+	    if(is_numeric($firstChar))
+	    {
+		foreach($diffChars AS $k=>$vDiff)
+		{
+		    $position = strpos($lines[$i],$vDiff);
+		    if($position !== false)
+			break;
+		}
+		$diffTerms = explode($vDiff,$lines[$i]);	
+		$leftTerm = $diffTerms[0];
+		$rightTerm = $diffTerms[1];
+		
+		$LEFT = "";
+		$leftItems = explode(",",$leftTerm);
+		if($vDiff == "c" || $vDiff == "d")
+		{
+		    $nrLeft = count($leftItems);
+		    if($nrLeft == 1)
+		    {
+			$i++;
+			$LEFT .= substr($lines[$i],1,60);
+			$i++;
+		    }
+		    else
+		    {
+			$i++;
+			$numLines = $leftItems[1] - $leftItems[0];
+			for($j=$i;$j<=$i+$numLines;$j++)
+			{
+			    $LEFT .= substr($lines[$j],1,60)."<br>";
+		        }
+			$i+= $numLines+1;
+		    }
+		    $LEFT = str_replace("<","&lt;",$LEFT);
+		    $LEFT = str_replace(">","&gt;",$LEFT);
+		}
+		
+		$RIGHT = "";
+		$rightItems = explode(",",$rightTerm);
+		if($vDiff == "c" || $vDiff == "a")
+		{
+		    $nrRight = count($rightItems);
+		    if($nrRight == 1)
+		    {
+			$i++;
+			$RIGHT .= substr($lines[$i],1,60);
+			$i++;
+		    }
+		    else
+		    {
+			$i++;
+			$numLines = $rightItems[1] - $rightItems[0];
+			for($j=$i;$j<=$i+$numLines;$j++)
+			{
+			    $RIGHT .= substr($lines[$j],1,60)."<br>";
+			}
+			$i += $numLines;
+		    }
+		    $RIGHT = str_replace("<","&lt;",$RIGHT);
+		    $RIGHT = str_replace(">","&gt;",$RIGHT);
+		}
+		
+		$trLines = $tr;
+		$trLines = str_replace("%bgc1%","#FF6600",$trLines);
+		$trLines = str_replace("%bgc2%","#FF6600",$trLines);
+		$trLines = str_replace("%left%","<b>Line: ".$leftItems[0]."</b>",$trLines);
+		$trLines = str_replace("%right%","<b>Line: ".$rightItems[0]."</b>",$trLines);
+		
+		$trColor = array();
+		$trColor = $colors[$vDiff];
+		$tr = str_replace("%bgc1%",$trColor[0],$tr);
+		$tr = str_replace("%bgc2%",$trColor[1],$tr);
+		$tr = str_replace("%left%",str_replace(" ","&nbsp;",$LEFT),$tr);
+		$tr = str_replace("%right%",str_replace(" ","&nbsp;",$RIGHT),$tr);
+		$CONTENT .= $trLines.$tr;
+	    }
+	    else
+	    {	$i++;}
+	}
+	$CONTENT .= "</table>";
+	return $CONTENT;
+    }
+    
+    function longDiff($DIFF,$WIDTH)
+    {
+	$colors = array(
+	    ">" => array("#F0F0F0","#00FF00"),
+	    "<" => array("#FF0000","#F0F0F0"),
+	    "|" => array("#FFFF00","#FFFF00"),
+	    " " => array("#F0F0F0","#F0F0F0")
+	);
+	
+	$CONTENT = "
+	    <table cellpadding=\"1\" cellspacing=\"0\" border=\"0\" width=\"100%\">
+	";
+	$lines = explode("\n",$DIFF);
+	$i = 1;
+	$charPos = $WIDTH/2 - 1;// (!) $WIDTH % 2 == 0
+	while($i<count($lines)-1)
+	{
+	    if($lines[$i] != "")
+	    {
+		$tr = "<tr><td width=\"50%\" bgcolor=\"%bgc1%\" valign=\"top\">%left%</td><td width=\"1\" bgcolor=\"#000000\"></td><td width=\"50%\" bgcolor=\"%bgc2%\" valign=\"top\">%right%</td></tr>";
+		$diffChar = substr($lines[$i],$charPos,1);
+		$LEFT = substr($lines[$i],0,$charPos);
+		$LEFT = str_replace("<","&lt;",$LEFT);
+		$LEFT = str_replace(">","&gt;",$LEFT);
+		$RIGHT = substr($lines[$i],$charPos+1);
+		$RIGHT = str_replace("<","&lt;",$RIGHT);
+		$RIGHT = str_replace(">","&gt;",$RIGHT);
+
+		$trColor = array();
+		$trColor = $colors[$diffChar];
+		$tr = str_replace("%bgc1%",$trColor[0],$tr);
+		$tr = str_replace("%bgc2%",$trColor[1],$tr);
+		$tr = str_replace("%left%",str_replace(" ","&nbsp;",$LEFT),$tr);
+		$tr = str_replace("%right%",str_replace(" ","&nbsp;",$RIGHT),$tr);
+		$CONTENT .= $tr;
+	    }
+	    else
+	    {
+		$tr = "<tr><td width=\"50%\" bgcolor=\"%bgc1%\" valign=\"top\">%left%</td><td width=\"1\" bgcolor==\"#000000\">&nbsp;</td><td width=\"50%\" bgcolor=\"%bgc2%\" valign=\"top\">%right%</td></tr>";
+		$diffChar = " ";
+		$LEFT = " ";
+		$RIGHT = " ";
+
+		$trColor = array();
+		$trColor = $colors[$diffChar];
+		$tr = str_replace("%bgc1%",$trColor[0],$tr);
+		$tr = str_replace("%bgc2%",$trColor[1],$tr);
+		$tr = str_replace("%left%",str_replace(" ","&nbsp;",$LEFT),$tr);
+		$tr = str_replace("%right%",str_replace(" ","&nbsp;",$RIGHT),$tr);
+		$CONTENT .= $tr;
+	    }
+	    $i++;
+	}
+	$CONTENT .= "</table>";
+	return $CONTENT;
+    }
+}
+?>

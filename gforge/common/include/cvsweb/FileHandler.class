@@ -1,0 +1,71 @@
+<?php
+class FileHandler extends ErrorHandler
+{
+    var $__FILE_HANDLER = null;
+    var $__FILE_NAME = "";
+    
+    function openFile($FILENAME,$MODE="r+")
+    {
+	$this->__FILE_NAME = $FILENAME;
+	if(false === ($result = fopen($FILENAME,$MODE)))
+	{
+	    $this->setError("Could not open '$FILENAME'");
+	    return false;
+	}
+	$this->__FILE_HANDLER = $result;
+	return true;
+    }
+    
+    function closeFile()
+    {
+	fclose($this->__FILE_HANDLER);
+	$this->__FILE_HANDLER = null;
+    }
+    
+    function readContents($FILENAME,$OVERWRITE=false)
+    {
+	if($this->__FILE_HANDLER && !$OVERWRITE)
+	{
+	    $this->setError("Another file was opened before: $this->__FILE_NAME");
+	    return false;
+	}
+	
+	$this->openFile($FILENAME);
+	$CONTENTS = fread($this->__FILE_HANDLER,filesize($FILENAME));
+	$this->closeFile();
+	
+	return $CONTENTS;
+    }
+    
+    function generateTemp($DIR="/tmp")
+    {
+	list($msec,$sec) = explode(" ",microtime());
+	$srand = (float)$msec * 100000 + (float)$sec;
+	srand($srand);
+	$temp = $DIR."/".MD5(rand());
+	return $temp;
+    }
+    
+    function deleteFile($FILENAME)
+    {
+	if(!unlink($FILENAME))
+	{
+	    $this->setError("Could not delete '$FILENAME'");
+	    return false;
+	}
+	return true;
+    }
+    
+    function getFileType($FILENAME)
+    {
+	if(is_dir($FILENAME))
+	    return 1;
+	if(is_file($FILENAME))
+	    return 2;
+	return 0;
+    }
+    
+    function getBasename($FILENAME)
+    {	return basename($FILENAME);}
+}
+?>

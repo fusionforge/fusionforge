@@ -790,7 +790,37 @@ class Group extends Error {
 	}
 
 
-
+	/**
+	 * getGroupAdmins() - Get group admin list
+	 *
+	 */
+	function getGroupAdmins() {
+		    // this function gets all group admins in order to send Jabber and mail messages
+		    $q = "SELECT user_id FROM user_group WHERE admin_flags = 'A' AND group_id = ".$this->getID();
+		    //echo($q."<br/>");
+		    $res = db_query($q);
+		    $users = array();
+		    for($i=0;$i<db_numrows($res);$i++)
+			array_push($users,db_result($res,$i,'user_id'));
+		    return implode(",",$users);
+	}
+		
+	/**
+	 * getMemberRole() - Get member role
+	 *
+	 * @param	   int	 The user ID
+	 *
+	 */
+	function getMemberRole($user_id) {
+		    $q = "SELECT member_role FROM user_group WHERE user_id = $user_id AND group_id = ".$this->getID();
+		    $res = db_query($q);
+		    if(db_numrows($res))
+		    {
+			return db_result($res,0,'member_role');
+		    }
+		    return 0;
+	}
+		
 	/*
 
 		Common Group preferences for tools
@@ -1649,6 +1679,7 @@ function &group_get_result($group_id=0) {
 		return 0;
 	}
 }
+
 
 // Local Variables:
 // mode: php
