@@ -10,8 +10,8 @@ allor: orig origcvs origsvn        # Build gforge and svn and cvs orig tarballs 
 cleanor:                           # Clean all gforge orig tarballs #
 	rm -f gforge*orig.tar.gz
 allgf: cleangf build               # Build gforge #
-allcvs: cleancvs buildcvs          # Build cvs plugins #
-allsvn: cleansvn buildsvn          # Build svn plugins #
+allcvs: origcvs cleancvs buildcvs  # Build cvs plugins #
+allsvn: origsvn cleansvn buildsvn  # Build svn plugins #
 allup: upload uploadcvs uploadsvn  # Upload all using dput and optional where=<server> #
 
 dchcmd=dch -i
@@ -56,7 +56,8 @@ buildcvs:               # Build debian gforge-plugin-scmcvs package             
 	rm -rf gforge-plugin-scmcvs-$(cvsversion)
 uploadcvs:              # Upload gforge-plugin-scmcvs on where=<server> using dput   #
 	dput $(where) gforge-plugin-scmcvs*changes
-origcvs:                # Make gforge-plugin-scmcvs orig file                        #
+origcvs: gforge-plugin-scmcvs_$(cvsversion).orig.tar.gz               # Make gforge-plugin-scmcvs orig file                        #
+gforge-plugin-scmcvs_$(cvsversion).orig.tar.gz:
 	cd gforge-plugin-scmcvs ; debclean; find . -type f | grep -v '/CVS/' | grep -v rpm-specific | grep -v contrib | cpio -pdumvB ../gforge-plugin-scmcvs-$(cvsversion)
 	tar cvzf gforge-plugin-scmcvs_$(cvsversion).orig.tar.gz gforge-plugin-scmcvs-$(cvsversion)
 	rm -rf gforge-plugin-scmcvs-$(cvsversion)
@@ -73,7 +74,8 @@ buildsvn:               # Build debian gforge-plugin-scmsvn package             
 	rm -rf gforge-plugin-scmsvn-$(svnversion)
 uploadsvn:              # Upload gforge-plugin-scmsvn on where=<server> using dput   #
 	dput $(where) gforge-plugin-scmsvn*changes
-origsvn:                # Make gforge-plugin-scmsvn orig file                        #
+origsvn: gforge-plugin-scmsvn_$(svnversion).orig.tar.gz               # Make gforge-plugin-scmsvn orig file                        #
+gforge-plugin-scmsvn_$(svnversion).orig.tar.gz:
 	cd gforge-plugin-scmsvn ; debclean; find . -type f | grep -v '/CVS/' | grep -v rpm-specific | grep -v contrib | cpio -pdumvB ../gforge-plugin-scmsvn-$(svnversion)
 	tar cvzf gforge-plugin-scmsvn_$(svnversion).orig.tar.gz gforge-plugin-scmsvn-$(svnversion)
 	rm -rf gforge-plugin-scmsvn-$(svnversion)
