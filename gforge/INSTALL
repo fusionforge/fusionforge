@@ -224,6 +224,11 @@ mkdir scmtarballs
 mkdir scmsnapshots
 mkdir localizationcache
 
+#project vhost space
+mkdir homedirs
+mkdir /home/groups
+ln -s /home/groups homedirs/groups
+
 #Create default location for SVN repositories
 mkdir /var/svn
 
@@ -280,7 +285,8 @@ chown -R apache:apache /var/www
 
 The following will provide an example httpd.conf for apache:
 
-cp etc/gforge/gforge-httpd.conf.example /etc/gforge/httpd.conf
+cd /var/www
+cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
 
 Now edit that file to change the hostnames to match your setup.
 

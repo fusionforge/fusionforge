@@ -292,14 +292,14 @@ class Group extends Error {
 		} else if (db_numrows(db_query("SELECT group_id FROM groups WHERE unix_group_name='$unix_name'")) > 0) {
 			$this->setError($Language->getText('register','unix_group_name_already_taken'));
 			return false;
-		} else if (strlen($purpose)<20) {
+		} else if (strlen($purpose)<10) {
+			$this->setError($Language->getText('register','describe_registration'));
+			return false;
+		} else if (strlen($purpose)>1500) {
 			$this->setError($Language->getText('register','describe_registration'));
 			return false;
 		} else if (strlen($description)<10) {
 			$this->setError($Language->getText('register','comprehensive_description'));
-			return false;
-		} else if (strlen($description)>255) {
-			$this->setError($Language->getText('register','maximum_description'));
 			return false;
 		} else if (!$license) {
 			$this->setError($Language->getText('register','no_license_chosen'));
@@ -1280,6 +1280,13 @@ class Group extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
+		if ($this->getID() == $GLOBALS['sys_news_group'] ||
+			$this->getID() == 1 ||
+			$this->getID() == $GLOBALS['sys_stats_group'] ||
+			$this->getID() == $GLOBALS['sys_peer_rating_group']) {
+			$this->setError('Cannot Delete System Group');
+			return false;
+		}
 		$perm =& $this->getPermission( session_get_user() );
 		if (!$perm || !is_object($perm)) {
 			$this->setPermissionDeniedError();
@@ -1369,16 +1376,6 @@ class Group extends Error {
 		$res=db_query("DELETE FROM news_bytes WHERE group_id='".$this->getID()."'");
 
 		//
-		//	Delete reporting
-		//
-		$res=db_query("DELETE FROM rep_group_act_weekly WHERE group_id='".$this->getID()."'");
-//echo 'rep_group_act_weekly'.db_error();
-		$res=db_query("DELETE FROM rep_group_act_monthly WHERE group_id='".$this->getID()."'");
-//echo 'rep_group_act_monthly'.db_error();
-		$res=db_query("DELETE FROM rep_group_act_daily WHERE group_id='".$this->getID()."'");
-//echo 'rep_group_act_daily'.db_error();
-		
-		//
 		//	Delete docs
 		//
 		$res=db_query("DELETE FROM doc_data WHERE group_id='".$this->getID()."'");
@@ -1440,6 +1437,11 @@ class Group extends Error {
 //echo 'MailingListFactory'.db_error();
 		}
 		//
+		//	Delete trove
+		//
+		$res=db_query("DELETE FROM trove_group_link WHERE group_id='".$this->getID()."'");
+		$res=db_query("DELETE FROM trove_agg WHERE group_id='".$this->getID()."'");
+		//
 		//	Delete counters
 		//
 		$res=db_query("DELETE FROM project_sums_agg WHERE group_id='".$this->getID()."'");
@@ -1454,8 +1456,18 @@ class Group extends Error {
 		if (!$res) {
 			return false;
 		}
+		unset($this->data_array);
 		exec('/bin/rm -rf '.$GLOBALS['sys_upload_dir'].'/'.$this->getUnixName().'/');
 		exec('/bin/rm -rf '.$GLOBALS['sys_ftp_upload_dir'].'/'.$this->getUnixName().'/');
+		//
+		//	Delete reporting
+		//
+		$res=db_query("DELETE FROM rep_group_act_weekly WHERE group_id='".$this->getID()."'");
+//echo 'rep_group_act_weekly'.db_error();
+		$res=db_query("DELETE FROM rep_group_act_monthly WHERE group_id='".$this->getID()."'");
+//echo 'rep_group_act_monthly'.db_error();
+		$res=db_query("DELETE FROM rep_group_act_daily WHERE group_id='".$this->getID()."'");
+//echo 'rep_group_act_daily'.db_error();
 		return true;
 
 	}
