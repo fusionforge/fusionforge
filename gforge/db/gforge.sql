@@ -728,7 +728,7 @@ CREATE TABLE project_task (
     summary text DEFAULT ''::text NOT NULL,
     details text DEFAULT ''::text NOT NULL,
     percent_complete integer DEFAULT 0 NOT NULL,
-    priority integer DEFAULT 0 NOT NULL,
+    priority integer DEFAULT 3 NOT NULL,
     hours double precision DEFAULT 0::double precision NOT NULL,
     start_date integer DEFAULT 0 NOT NULL,
     end_date integer DEFAULT 0 NOT NULL,
@@ -1439,7 +1439,7 @@ CREATE TABLE artifact (
     category_id integer DEFAULT 100 NOT NULL,
     artifact_group_id integer DEFAULT 0 NOT NULL,
     resolution_id integer DEFAULT 100 NOT NULL,
-    priority integer DEFAULT 5 NOT NULL,
+    priority integer DEFAULT 3 NOT NULL,
     submitted_by integer DEFAULT 100 NOT NULL,
     assigned_to integer DEFAULT 100 NOT NULL,
     open_date integer DEFAULT 0 NOT NULL,
@@ -2515,10 +2515,13 @@ CREATE SEQUENCE artifact_group_selection_box_list_id_seq
 
 
 
-CREATE TABLE artifact_group_selection_box_list (
-    id integer DEFAULT nextval('"artifact_group_selection_box_list_id_seq"'::text) NOT NULL,
+CREATE TABLE artifact_extra_field_list (
+    extra_field_id integer DEFAULT nextval('"artifact_group_selection_box_list_id_seq"'::text) NOT NULL,
     group_artifact_id integer NOT NULL,
-    selection_box_name text NOT NULL
+    field_name text NOT NULL,
+    field_type integer DEFAULT 1,
+    attribute1 integer DEFAULT 0,
+    attribute2 integer DEFAULT 0
 );
 
 
@@ -2531,10 +2534,10 @@ CREATE SEQUENCE artifact_group_selection_box_options_id_seq
 
 
 
-CREATE TABLE artifact_group_selection_box_options (
-    id integer DEFAULT nextval('"artifact_group_selection_box_options_id_seq"'::text) NOT NULL,
-    artifact_box_id integer NOT NULL,
-    box_options_name text NOT NULL
+CREATE TABLE artifact_extra_field_elements (
+    element_id integer DEFAULT nextval('"artifact_group_selection_box_options_id_seq"'::text) NOT NULL,
+    extra_field_id integer NOT NULL,
+    element_name text NOT NULL
 );
 
 
@@ -2548,9 +2551,10 @@ CREATE SEQUENCE artifact_extra_field_data_id_seq
 
 
 CREATE TABLE artifact_extra_field_data (
-    id integer DEFAULT nextval('"artifact_extra_field_data_id_seq"'::text) NOT NULL,
+    data_id integer DEFAULT nextval('"artifact_extra_field_data_id_seq"'::text) NOT NULL,
     artifact_id integer NOT NULL,
-    choice_id integer NOT NULL
+    field_data text,
+    extra_field_id integer DEFAULT 0
 );
 
 
@@ -2666,6 +2670,26 @@ BEGIN
 END;
 '
     LANGUAGE plpgsql;
+
+
+
+CREATE VIEW nss_passwd AS
+    (SELECT (users.unix_uid + 20000) AS uid, (users.unix_uid + 20000) AS gid, users.user_name AS login, users.unix_pw AS passwd, users.realname AS gecos, users.shell, ('/var/lib/gforge/chroot/home/users/'::text || users.user_name) AS homedir FROM users WHERE (users.status = 'A'::bpchar) UNION SELECT (groups.group_id + 50000) AS uid, (groups.group_id + 20000) AS gid, ('anoncvs_'::text || (groups.unix_group_name)::text) AS login, 'x'::bpchar AS passwd, groups.group_name AS gecos, '/bin/false' AS shell, ('/var/lib/gforge/chroot/home/groups'::text || (groups.group_name)::text) AS homedir FROM groups) UNION SELECT 9999 AS uid, 9999 AS gid, 'gforge_scm' AS login, 'x'::bpchar AS passwd, 'Gforge SCM user' AS gecos, '/bin/false' AS shell, '/var/lib/gforge/chroot/home' AS homedir;
+
+
+
+CREATE VIEW nss_shadow AS
+    SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::bpchar AS expired, 'n'::bpchar AS pwchange FROM users WHERE (users.status = 'A'::bpchar);
+
+
+
+CREATE VIEW nss_groups AS
+    SELECT (groups.group_id + 10000) AS gid, groups.unix_group_name AS name, groups.group_name AS descr, 'x'::bpchar AS passwd FROM groups UNION SELECT (users.unix_uid + 20000) AS gid, users.user_name AS name, users.lastname AS descr, 'x'::bpchar AS passwd FROM users;
+
+
+
+CREATE VIEW nss_usergroups AS
+    SELECT (user_group.group_id + 10000) AS gid, (users.unix_uid + 20000) AS uid FROM user_group, users WHERE (user_group.user_id = users.user_id) UNION SELECT (users.unix_uid + 20000) AS gid, (users.unix_uid + 20000) AS uid FROM users;
 
 
 
@@ -3568,6 +3592,7 @@ COPY group_cvs_history (id, group_id, user_name, cvs_commits, cvs_commits_wk, cv
 COPY themes (theme_id, dirname, fullname, enabled) FROM stdin;
 1	gforge	Default Theme	t
 2	osx	OSX	t
+4	ultralite	Ultra-Lite Text-only Theme	t
 \.
 
 
@@ -4136,23 +4161,23 @@ COPY role_setting (role_id, section_name, ref_id, value) FROM stdin;
 
 
 
-COPY artifact_group_selection_box_list (id, group_artifact_id, selection_box_name) FROM stdin;
+COPY artifact_extra_field_list (extra_field_id, group_artifact_id, field_name, field_type, attribute1, attribute2) FROM stdin;
 \.
 
 
 
-COPY artifact_group_selection_box_options (id, artifact_box_id, box_options_name) FROM stdin;
+COPY artifact_extra_field_elements (element_id, extra_field_id, element_name) FROM stdin;
 \.
 
 
 
-COPY artifact_extra_field_data (id, artifact_id, choice_id) FROM stdin;
+COPY artifact_extra_field_data (data_id, artifact_id, field_data, extra_field_id) FROM stdin;
 \.
 
 
 
 COPY project_counts_agg (group_project_id, count, open_count) FROM stdin;
-1	1	0
+1	1	1
 \.
 
 
@@ -5193,18 +5218,18 @@ ALTER TABLE ONLY forum_perm
 
 
 
-ALTER TABLE ONLY artifact_group_selection_box_list
-    ADD CONSTRAINT artifact_group_selection_box_list_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY artifact_extra_field_list
+    ADD CONSTRAINT artifact_group_selection_box_list_pkey PRIMARY KEY (extra_field_id);
 
 
 
-ALTER TABLE ONLY artifact_group_selection_box_options
-    ADD CONSTRAINT artifact_group_selection_box_options_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY artifact_extra_field_elements
+    ADD CONSTRAINT artifact_group_selection_box_options_pkey PRIMARY KEY (element_id);
 
 
 
 ALTER TABLE ONLY artifact_extra_field_data
-    ADD CONSTRAINT artifact_extra_field_data_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT artifact_extra_field_data_pkey PRIMARY KEY (data_id);
 
 
 
@@ -7306,6 +7331,10 @@ CREATE RULE frs_dlstats_file_rule AS ON INSERT TO frs_dlstats_file DO UPDATE frs
 
 
 
+CREATE RULE projecttask_insert_agg AS ON INSERT TO project_task DO UPDATE project_counts_agg SET count = (project_counts_agg.count + 1), open_count = (project_counts_agg.open_count + 1) WHERE (project_counts_agg.group_project_id = new.group_project_id);
+
+
+
 SELECT pg_catalog.setval('canned_responses_pk_seq', 1, false);
 
 
@@ -7614,7 +7643,7 @@ SELECT pg_catalog.setval('group_cvs_history_id_seq', 1, false);
 
 
 
-SELECT pg_catalog.setval('themes_theme_id_seq', 3, true);
+SELECT pg_catalog.setval('themes_theme_id_seq', 4, true);
 
 
 

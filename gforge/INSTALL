@@ -73,7 +73,7 @@ and enter the password for the user.
 
 [root]# su - gforge
 [gforge]# createdb gforge
-[gforge]# psql gforge < db/gforge3.sql > import.log
+[gforge]# psql gforge < db/gforge.sql > import.log
 
 Be sure to watch for any errors during import and check the 
 import.log file.

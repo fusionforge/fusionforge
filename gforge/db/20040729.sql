@@ -1,5 +1,18 @@
+--
+--
+--	WARNING - modifying on 10-22-2004 since the 0729 version was incomplete
+--
+--
+
+
+INSERT INTO plugins (plugin_name,plugin_desc) values 
+	('scmcvs','CVS Plugin');
+
 -- Subscribe groups that use SCM to scmcvs plugin
+DELETE FROM group_plugin 
+	WHERE plugin_id=(SELECT plugin_id FROM plugins WHERE plugin_name='scmcvs');
+
 INSERT INTO group_plugin (group_id,plugin_id) 
-	(SELECT group_id,plugin_id FROM groups,plugins 
-	WHERE use_scm=1 AND group_id NOT IN (SELECT group_id 
-	FROM group_plugin) AND plugin_name='scmcvs');
+	(SELECT group_id,(SELECT plugin_id FROM plugins WHERE plugin_name='scmcvs') 
+	FROM groups
+	WHERE status != 'P');

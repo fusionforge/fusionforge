@@ -1,3 +1,8 @@
+2004-10-22  Tim Perdue <tim@gforge.org>
+
+	* Changed db/gforge3.sql to db/gforge.sql - gforge.sql is 
+	current snapshot as of 2004-10-22
+
 2004-10-22  Tom Copeland <tom@infoether.com>
 
 	* www/news/submit.php - Fixed bug [#918] news description 

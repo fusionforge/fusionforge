@@ -1,42 +1,35 @@
 <!-- whole page table -->
 <table width="100%" cellpadding="5" cellspacing="0" border="0">
 <tr><td width="65%" valign="top">
-<h3>Welcome to the GForge Project!</h3>
+<h3>GForge helps you manage the entire development life cycle</h3>
 <p>
-GForge is an Open Source collaborative software development tool, which allows you to organize
-and manage any number of software development projects. It's perfect for managing
-large teams of software engineers and/or engineers scattered among multiple locations.
+GForge has tools to help your team collaborate, like message forums 
+and mailing lists; tools to create and control access to Source Code 
+Management repositories like CVS and Subversion. GForge automatically 
+creates a repository and controls access to it depending on the role 
+settings of the project.
 </p>
 <p>
-GForge is complete with Source Code Management integration (CVS, Subversion), Forums, 
-Mailing Lists, Trackers for Bugs, Patches, Feature Requests, and end-user Support as well as
-task management with Gantt charting.
+Additional Tools:<br />
+<ul>
+	<li>Manage File Releases</li>
+	<li>Document Management</li>
+	<li>News announcements</li>
+	<li>Surveys for users and admins</li>
+	<li>Issue tracking with "unlimited" numbers of categories, text fields, etc</li>
+	<li>Task management</li>
+</ul>
 </p>
 <h3>Professional Services</h3>
 <p>
-You can support the GForge project by: 
+The GForge project is supported and mainted by the GForgeGroup: 
 <ul>
-	<li>Having us professionally install GForge on your server.</li>
-	<li>Having us customize GForge to suit your needs.</li>
-	<li>Having us support, upgrade, and maintain your installation.</li>
-	<li>Sponsoring development of new features.</li>
-	<li>See the <a href="http://gforgegroup.com/"><strong>GForge Group Professional Services</strong></a> for more info.</li>
+	<li>Installation</li>
+	<li>Support</li>
+	<li>Online Training</li>
+	<li>Integration into your network, with LDAP authentication
+	<li>See <a href="http://gforgegroup.com/"><strong>GForge Group Professional Services</strong></a> for more info.</li>
 </ul>
-<p>
-<strong>Track Bugs, Patches, Feature Requests, and Support Requests</strong>
-</p>
-<p>
-<a href="http://gforge.org/tracker/?atid=101&amp;group_id=5&amp;func=browse"><img src="/images/gforge.jpg" width="450" height="268" border="0" alt="" /></a>
-</p>
-<p>
-<strong>New Project Management Tools:</strong>
-</p>
-<p>
-The new Project Manager allows you to create task lists, constraints, and track the
-progress of your project. The data can then be plotted in a standard Gantt chart.
-</p>
-<p>
-<a href="http://gforge.org/pm/task.php?group_id=5&amp;group_project_id=2&amp;func=ganttpage"><img src="/images/gantt.png" width="447" height="230" border="0" alt="" /></a>
 </p>
 
 <?php
@@ -49,13 +42,13 @@ echo $HTML->boxBottom();
 
 <td width="35%" valign="top">
 <?php
-//echo $HTML->boxTop('Ad');
-//echo '<center><a target="_blank" href="/redir_ad.php"><img src="bugopolis.gif" border="0"></a></center>';
-echo $HTML->boxTop('Getting GForge');
+echo $HTML->boxTop('Ad');
+echo '<center><a target="_blank" href="http://gforgegroup.com/training/"><img src="/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150"></a></center>';
+echo $HTML->boxMiddle('Getting GForge');
 
 ?>
 <strong>Download:</strong><br />
-<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge3.3</a><br />
+<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge4.0</a><br />
 <a href="http://postgresql.org/">PostgreSQL</a><br />
 <a href="http://www.php.net/">PHP 4.x</a><br />
 <a href="http://www.apache.org/">Apache</a><br />
