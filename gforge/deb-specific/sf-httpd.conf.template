@@ -54,6 +54,12 @@ NameVirtualHost {ip_address}
   ServerName {lists_host}
   AddHandler cgi-script .cgi
   ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+  Alias /doc/mailman/images /usr/share/doc/mailman/images
+  <Location /doc/mailman/images>
+    order allow,deny
+    allow from all
+  </Location>
+  RedirectMatch permanent /$ http://{lists_host}/cgi-bin/mailman/listinfo
 </VirtualHost>
 
 <VirtualHost {ip_address}:443>
