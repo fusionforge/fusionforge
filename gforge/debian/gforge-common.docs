@@ -1,8 +1,8 @@
 README
 AUTHORS
-README.Custom
-README.Themes
-README.Plugins
+docs/README.Custom
+docs/README.Themes
+docs/README.Plugins
 debian/README.Debian
 debian/README.Maintainer
 debian/README.Multipack
