@@ -118,13 +118,13 @@ class ArtifactFile extends Error {
 			$filesize = strlen($bin_data);
 		}
 
+		db_begin();
+
 		$res=db_query("INSERT INTO artifact_file
 			(artifact_id,description,bin_data,filename,filesize,filetype,adddate,submitted_by)
 			VALUES 
 			('".$this->Artifact->getID()."','$description','". base64_encode($bin_data) ."','$filename',
 			'$filesize','$filetype','". time() ."','$userid')"); 
-
-		db_begin();
 
 		$id=db_insertid($res,'artifact_file','id');
 

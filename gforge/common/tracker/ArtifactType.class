@@ -255,10 +255,11 @@ class ArtifactType extends Error {
 			'".htmlspecialchars($submit_instructions)."',
 			'".htmlspecialchars($browse_instructions)."',
 			'$datatype')";
-		//echo $sql;
+		
+		db_begin();
+		
 		$res = db_query($sql);
 
-		db_begin();
 		$id = db_insertid($res,'artifact_group_list','group_artifact_id');
 		
 		if (!$res || !$id) {
