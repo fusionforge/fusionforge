@@ -204,14 +204,15 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'group_project
 </table>
 </form>
 <p>
-<h3>Time Tracking</h3>
+<h3><?php echo $Language->getText('pm_modtask', 'time_tracking'); ?></h3>
 <p>
 <?php
-$title_arr[]='Week';
-$title_arr[]='Day';
-$title_arr[]='Hours';
-$title_arr[]='Category';
-$title_arr[]='User';
+$title_arr = array();
+$title_arr[]=$Language->getText('pm', 'week');
+$title_arr[]=$Language->getText('pm', 'day');
+$title_arr[]=$Language->getText('pm', 'hours');
+$title_arr[]=$Language->getText('pm', 'category');
+$title_arr[]=$Language->getText('pm', 'user');
 $title_arr[]=' ';
 
 echo $HTML->listTableTop ($title_arr);
@@ -224,7 +225,7 @@ echo $HTML->listTableTop ($title_arr);
 		<td align="middle"><input type="text" name="hours" value="" size="3" maxlength="3" /></td>
 		<td align="middle">'.report_time_category_box('time_code',false).'</td>
 		<td>&nbsp;</td>
-		<td align="middle"><input type="submit" name="add" value="Add" /><input type="submit" name="cancel" value="Cancel" /></td>
+		<td align="middle"><input type="submit" name="add" value="'.$Language->getText('general','add').'" /><input type="submit" name="cancel" value="'.$Language->getText('general','cancel').'" /></td>
 	</tr></form>';
 
 //
@@ -254,7 +255,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 
 echo '
 <tr '.$HTML->boxGetAltRowStyle($xi++).'>
-<td><strong>Total:</strong></td>
+<td><strong>'.$Language->getText('pm', 'total').':</strong></td>
 <td>&nbsp;</td>
 <td>'.$total_hours.'</td>
 <td>&nbsp;</td>

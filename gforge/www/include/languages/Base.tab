@@ -1369,6 +1369,7 @@ pm	cat_any	Any
 pm	cat_none	None
 pm	category	Category
 pm	date_note		The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.
+pm	day	Day
 pm	dependent	Dependent on Task
 pm	dependent_note			You should choose only tasks which must be completed before this task can start.
 pm	details	Task Details
@@ -1388,11 +1389,14 @@ pm	summary	Task Summary
 pm	task_id	Task Id
 pm	tech_any	Any
 pm	title	Project/Task Manager: Subprojects And Tasks
+pm	total	Total
 pm	unassigned	Unassigned
+pm	user	User
 pm	view_calendar	View Calendar
 pm	view_type	Detail View
 pm	view_type_summary	Summary
 pm	view_type_detail	Detailed
+pm	week	Week
 pm_addtask	task_added_relationship	Successfully Added Tracker Relationship
 pm_addtask	task_created_successfully	Task Created Successfully
 pm_addtask	task_updated_successfully	Task Updated Successfully
@@ -1517,6 +1521,7 @@ pm_modtask	assignee	Assignee
 pm_modtask	original_comment	Original Comment
 pm_modtask	sort_on	Sort On
 pm_modtask	submitted_by	Submitted By
+pm_modtask	time_tracking	Time tracking
 pm_modtask	title	Modify Task
 pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
 pm_projectgroup	error_min_desc_length	Document Description Must Be At Least 10 Characters

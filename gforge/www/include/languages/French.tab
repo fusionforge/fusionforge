@@ -1384,6 +1384,7 @@ pm	cat_any	Toutes
 pm	cat_none	Aucune
 pm	category	Catégorie
 pm	date_note	
+pm	day	Jour
 pm	dependent	Dépendant de la tâche
 pm	dependent_note	
 pm	details	Détails&nbsp;
@@ -1403,11 +1404,14 @@ pm	summary	Tâche
 pm	task_id	Numéro
 pm	tech_any	Tous
 pm	title	Gestion de projet : sous-projets et tâches
+pm	total	Total&nbsp;
 pm	unassigned	Non assignée
+pm	user	Utilisateur
 pm	view_calendar	Voir le calendrier
 pm	view_type	Vue détaillée
 pm	view_type_detail	Détail
 pm	view_type_summary	Résumé
+pm	week	Semaine
 pm_addtask	task_added_relationship	La relation a été ajoutée avec succés
 pm_addtask	task_created_successfully	Tâche créée avec succès
 pm_addtask	task_updated_successfully	Tâche mise à jour avec succès
@@ -1535,6 +1539,7 @@ pm_modtask	assignee	Responsable
 pm_modtask	original_comment	Commentaire initial
 pm_modtask	sort_on	Trier par
 pm_modtask	submitted_by	Demandée par
+pm_modtask	time_tracking	Suivi du temps
 pm_modtask	title	Modification d'une tâche
 pm_projectcategory	required_fields	Catégorie de projet : il faut un nom et un responsable.
 pm_projectgroup	error_min_desc_length	La description du document doit avoir au moins 10 caractères
