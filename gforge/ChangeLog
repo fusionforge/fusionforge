@@ -1,5 +1,10 @@
 2003-10-05  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/languages/Korean.tab, SimplifiedChinese.tab: Removed
+	English strings.  They are unneeded, and since they're quite
+	possibly outdated they can even be harmful since they override the
+	default (up-to-date) English version.
+
 	* www/include/languages/Esperanto.tab, Spanish.tab: Replaced HTML
 	escape codes with proper UTF-8 encoded characters.
 
