@@ -92,8 +92,8 @@ if (db_numrows($result) > 0) {
 
 	$headerMapping = array(
 	'realname' => array("Name", 'width="60%"'),
-	'adds' 	=> array("Adds", 'width="13%"'),
-	'commits' => array("Commits", 'width="13%"')
+	'adds' 	=> array("Adds", 'width="20%"'),
+	'commits' => array("Commits", 'width="20%"')
 	);
 	ShowResultSet($result,'', false, true, $headerMapping, array('combined'));
 }

@@ -655,7 +655,11 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 			}
 			$colsToKeep[] = $i;
 			if(isset($headerMapping[$fieldName])) {
-				$headersCellData[] = array($headerMapping[$fieldName]);
+				if(is_array($headerMapping[$fieldName])) {
+					$headersCellData[] = $headerMapping[$fieldName];
+				} else {
+					$headersCellData[] = array($headerMapping[$fieldName]);
+				}
 			}
 			else {
 				$headersCellData[] = array($fieldName);
