@@ -1,8 +1,27 @@
-sourceforge (2.5-28+) unstable; urgency=low
+sourceforge (2.5-29) unstable; urgency=low
 
-  * 
+  * [Roland] Moved to main.  I promise the only changes in this package
+    are this changelog entry and the Section: field of debian/control.
+  * Note to ftpmasters, #1: there's no crypto code in this package, only
+    dependencies.  I'm not sure you need to notify the BXA or anything.
+  * Note to ftpmasters, #2: this package depends on libdbd-pg-perl, which
+    is currently in queue/new.  Take care not to process sourceforge
+    before libdbd-pg-perl.
+  * Note to ftpmasters, #3: this package also has a dependency on
+    libapache-mod-ssl | apache-ssl.  At the time of writing, only
+    apache-ssl has transitioned to main, but the package is still
+    installable without any non-US-only component.  My interpretation is
+    that this is enough to allow the transition.  If not, well, I'll bug
+    the libapache-mod-ssl maintainer so that he goes through this
+    transition.
+  * Note to ftpmasters, #4: I chose the "devel" subsection because I felt
+    it was most appropriate.  "web" would be inaccurate (mailing-lists and
+    CVS are not web stuff).  In a quick survey on IRC, no really
+    convincing arguments were put up for (or against) either.
+  * Note to ftpmasters, #5: "Thank you for your contribution to Debian"
+    yourself.  You do a great job.  Thanks a lot guys.
 
- --
+ -- Roland Mas <lolando@debian.org>  Tue,  9 Apr 2002 19:38:46 +0200
 
 sourceforge (2.5-28) unstable; urgency=low
 

@@ -1,5 +1,5 @@
 Source: sourceforge
-Section: non-US
+Section: devel
 Priority: extra
 Maintainer: Roland Mas <lolando@debian.org>
 Build-Depends-Indep: debhelper (>= 3.0), sharutils, docbook-to-man
