@@ -142,7 +142,7 @@ developer	no_user_selected	No User Selected
 developer_monitor	title	Monitor a User
 developer_monitor	error_inserting	Error inserting into user_diary_monitor
 developer_monitor	monitoring_user	User is now being monitored
-developer_monitor	monitoring_user_expl	<p>You will now be emailed this user's diary entries.</p><p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.
+developer_monitor	monitoring_user_expl	<p>You will now be emailed this user's diary entries.</p><p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.</p>
 developer_monitor	monitoring_user_off	Monitoring has been turned off
 developer_monitor	monitoring_user_off_expl	You will not receive any more emails from this user
 developer_monitor_choose_user	title	Choose a User first
