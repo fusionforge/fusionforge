@@ -1,3 +1,9 @@
+2003-01-28 Reinhard Spisser <reinhard@spisser.it>
+
+	* www/register/projectinfo.php, www/include/languages/Base.tab,
+	www/include/languages/Italian.tab: 
+	Localization
+
 2003-01-28 Tom Copeland <tom@infoether.com>
 
 	* www/soap/*: Added new operations to support authentication and
