@@ -1,3 +1,7 @@
+2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* common/frs/FRSRelease.class(create): yet another pg_atoi fix.
+
 2003-01-10  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/themes/osx/Theme.class: valid XHTML 1.0 Transitional.

@@ -84,6 +84,12 @@ class FRSRelease extends Error {
 			return false;
 		}
 
+		if ($preformatted) {
+			$preformatted = 1;
+		} else {
+			$preformatted = 0;
+		}
+
 		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
@@ -215,7 +221,7 @@ class FRSRelease extends Error {
 	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
-		
+
 		$date = date('Y-m-d H:i',time());
 
 		$subject = '['.$this->FRSPackage->Group->getUnixName().' Release] '.$this->FRSPackage->getName();
@@ -266,7 +272,7 @@ class FRSRelease extends Error {
 			return false;
 		}
 
-		$res=db_query("UPDATE frs_release 
+		$res=db_query("UPDATE frs_release
 			SET
 			name='$name',
 			status_id='$status',
