@@ -4,7 +4,7 @@
 # see: dh_installdeb(1)
 
 set -e
-#set -x				# Be verbose, be very verbose.
+# set -x				# Be verbose, be very verbose.
 
 # summary of how this script can be called:
 #        * <postinst> `configure' <most-recently-configured-version>
@@ -23,14 +23,23 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
 case "$1" in
     configure)
-    	[ -f /usr/lib/gforge-sourceforge-transition/bin/install-db.sh ] && /usr/lib/gforge-sourceforge-transition/bin/install-db.sh dump /var/lib/sourceforge/sf_dump_for_gforge sourceforge
-	[ -f /var/lib/sourceforge/sf_dump_for_gforge ] && echo "Adjusting /var/lib/sourceforge/sf_dump_for_gforge" && perl -pi -e "s/connect - sourceforge/connect - gforge/" /var/lib/sourceforge/sf_dump_for_gforge
-    	[ -d /var/lib/sourceforge ] && echo "Renaming dir /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
-    	[ -h /var/lib/sourceforge ] && echo "Renaming symlink /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
-	[ -f /etc/sourceforge/sourceforge.conf ] && echo "Copying config file" && cp /etc/sourceforge/sourceforge.conf /etc/gforge/gforge.conf
-	[ -h /cvsroot ] && echo "Relinking symlink /cvsroot"  && rm -f /cvsroot && ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
+
+	/usr/sbin/gforge-config
+        # Patch Exim configuration files
+	/usr/lib/gforge/bin/install-exim4.sh configure-files
+	propose_update_install /etc/aliases
+	propose_update_install /etc/exim4/exim4.conf
+	propose_update_install /etc/exim4/exim4.conf.template
+	propose_update_install /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+
+	# Clean debconf after ourselves
+	db_stop
+	
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
