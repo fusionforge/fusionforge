@@ -76,6 +76,7 @@ sys_use_project_vhost=true
 sys_use_project_database=false
 sys_use_project_multimedia=false
 sys_project_reg_restricted=true
+sys_user_reg_restricted=true
 sys_localization_enable_caching=true
 sys_localization_cache_path=/path/to/localization/cache/
 sys_localization_enable_timestamp_checking=true
