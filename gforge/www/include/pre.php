@@ -112,7 +112,8 @@ if (session_loggedin()) {
 //
 //	Include user Theme
 //
-if ($sys_theme=='') {
+//if ($sys_theme=='') {
+if (!is_file($sys_themeroot.$sys_theme.'/Theme.class')) {
     // to avoid error at first execution
     $sys_theme='gforge';
 }
