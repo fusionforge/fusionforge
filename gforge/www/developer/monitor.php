@@ -26,10 +26,10 @@ if (session_loggedin()) {
 			If they are NOT, then insert a row into the db
 		*/
 
-		$HTML->header (array('title'=>'Monitor a User'));
+		$HTML->header (array('title'=>$Language->getText('developer_monitor','title')));
 
 		echo '
-			<h2>Monitor a User</h2>';
+			<h2>'.$Language->getText('developer_monitor','title').'</h2>';
 
 		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 
@@ -45,25 +45,25 @@ if (session_loggedin()) {
 			$result = db_query($sql);
 
 			if (!$result) {
-				echo "<span style="color:red">Error inserting into user_diary_monitor</span>";
+				echo "<span style=\"color:red\">".$Language->getText('developer_monitor','error_inserting')."</span>";
 			} else {
-				echo "<h3 style="color:red">User is now being monitored</h3>";
-				echo "<p>You will now be emailed this user's diary entries.</p>";
-				echo "<p>To turn off monitoring, simply click the <strong>Monitor user</strong> link again.</p>";
+				echo "<h3 style=\"color:red\">".$Language->getText('developer_monitor','monitoring_user')."</h3>";
+				echo $Language->getText('developer_monitor','monitoring_user_expl');
 			}
 
 		} else {
 
 			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 			$result = db_query($sql);
-			echo "<h3 style="color:red">Monitoring has been turned off</h3>";
-			echo "<p>You will not receive any more emails from this user.</p>";
+			echo "<h3 style=\"color:red\">".$Language->getText('developer_monitor','monitoring_user_off')."</h3>";
+			echo $Language->getText('developer_monitor','monitoring_user_off_expl');
+	
 		}
 		$HTML->footer (array());
 	} else {
-		$HTML->header (array('title'=>'Choose a user First'));
+		$HTML->header (array('title'=>$Language->getText('developer_monitor_choose_user','title')));
 		echo '
-			<h1>Error - Choose a User To Monitor First</h1>';
+			<h1>'.$Language->getText('developer_monitor_choose_user','body').'</h1>';
 		$HTML->footer (array());
 	} 
 
