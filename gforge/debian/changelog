@@ -1,3 +1,10 @@
+gforge (3.2.1-0+) experimental; urgency=low
+
+  * [Roland] New upstream release.  Debian packaging still experimental at
+    that stage.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 16 Jan 2004 22:37:44 +0100
+
 gforge (3.1-6+) unstable; urgency=low
 
   * [Roland] Upgrade database schema using 20031105.sql and 20031124.sql.
