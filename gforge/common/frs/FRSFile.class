@@ -321,15 +321,32 @@ class FRSFile extends Error {
 	 *	@param	int	The type_id of this file from the frs-file-types table.
 	 *	@param	int	The processor_id of this file from the frs-processor-types table.
 	 *	@param	int	The release_date of this file in unix time (seconds).
+	 *	@param	int	The package_id of the package the release of this file belongs to.
 	 *	@param	int	The release_id of the release this file belongs to.
 	 *	@return	boolean success.
 	 */
-	function update($type_id,$processor_id,$release_time,$release_id) {
+	function update($type_id,$processor_id,$release_time,$package_id,$release_id) {
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
 			$this->setPermissionDeniedError();
 			return false;
+		}
+
+		// Does the new package id value really correspond to a package of this group?
+		$frsp = new FRSPackage($this->FRSRelease->FRSPackage->Group,$package_id);
+		if (!$frsp || !is_object($frsp)) {
+			exit_error('Error','Could Not Get New FRSPackage');
+		} elseif ($frsp->isError()) {
+			exit_error('Error',$frsp->getErrorMessage());
+		}
+
+		// Does the new release id value really correspond to a release of the new package?
+		$frsr = new FRSRelease($frsp,$release_id);
+		if (!$frsr || !is_object($frsr)) {
+			exit_error('Error','Could Not Get New FRSRelease');
+		} elseif ($frsr->isError()) {
+			exit_error('Error',$frsr->getErrorMessage());
 		}
 
 		$res=db_query("UPDATE frs_file SET
@@ -345,9 +362,7 @@ class FRSFile extends Error {
 		}
 
 		return true;
-
 	}
-
 }
 
 ?>
