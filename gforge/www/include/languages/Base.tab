@@ -1282,7 +1282,7 @@ pm_detailtask	pct_complete	Percent Complete
 pm_detailtask	priority	Priority
 pm_detailtask	section	Task Manager
 pm_detailtask	start_date	Start Date
-pm_detailtask	status	otatuse
+pm_detailtask	status	Status
 pm_detailtask	submitted_by	Submitted By
 pm_detailtask	task_summary	Task Summary
 pm_detailtask	title	Task Detail
