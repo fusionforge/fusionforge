@@ -2,10 +2,12 @@ sourceforge (2.6-0+12+) unstable; urgency=low
 
   * [Christian] Added a dump and restore option to install-db.sh
   * [Christian] Added themeable main page support
-  * [Christian] Rewritting of trove_getcatlisting function to 
+  * [Christian] Rewritting of trove_getcatlisting function to
     return a string instead of direct printing
+  * [Christian] you can choose default language in local.inc with
+    e.g. $sys_lang='French';
 
- -- Christian Bayle <bayle@debian.org>  Mon,  8 Jul 2002 22:38:47 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri, 12 Jul 2002 18:37:56 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 

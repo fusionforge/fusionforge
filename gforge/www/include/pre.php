@@ -149,6 +149,9 @@ if (user_isloggedin()) {
 
 require_once('www/include/BaseLanguage.class');
 
+if (!$sys_lang) {
+	$sys_lang="English";
+}
 if (user_isloggedin()) {
 	$res=$LUSER->getData();
 		$classname=db_result($res,0,'classname');
@@ -157,7 +160,7 @@ if (user_isloggedin()) {
 		$Language->loadLanguage($classname);
 	} else {
 		$Language=new BaseLanguage();
-		$Language->loadLanguage('English');
+		$Language->loadLanguage($sys_lang);
 	}
 } else {
 	//if you aren't logged in, check your browser settings 
@@ -166,7 +169,7 @@ if (user_isloggedin()) {
 	$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
 	$classname=db_result($res,0,'classname');
 	if (!$classname) {
-		$classname="English";
+		$classname=$sys_lang;
 	}
 	$Language=new BaseLanguage();
 	$Language->loadLanguage($classname);
