@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 # 
 # $Id$
 #
@@ -85,7 +85,12 @@ EOF
 	
 	# Install/upgrade the database contents (tables and data)
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
-	/usr/lib/gforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE:
+	/usr/lib/gforge/bin/db-upgrade.pl 2>&1  | grep -v ^NOTICE:
+	p=${PIPESTATUS[0]}
+	if [ $p != 0 ] ; then
+	    exit $p
+	fi
+	
 	;;
     purge-files)
 	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
