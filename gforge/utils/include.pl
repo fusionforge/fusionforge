@@ -11,6 +11,7 @@ $db_include	=	"/etc/gforge/local.pl";	# Local Include file for database username
 $dummy_uid      =       getpwnam('scm-gforge');                  # UserID of the dummy user that will own group's files
 $date           =       int(time()/3600/24);    # Get the number of days since 1/1/1970 for /etc/shadow
 
+require $db_include;
 ##################################
 # Configuration parsing Functions
 ##################################
