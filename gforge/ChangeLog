@@ -4,6 +4,9 @@
 	* fixed some missing references in /my/ page
 	* improved error handling in BaseLanguage.class and in
 	PluginManager.class
+	* finally fixed the default priority problem
+	* fixed typos and wrong translations related to project manager
+	in French translation
 
 2004-10-26  Tim Perdue <tim@gforge.org>
 
