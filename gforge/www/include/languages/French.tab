@@ -50,7 +50,7 @@ account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté
 account_login	pending_account	<p>Votre compte est en attente de confirmation.  Un e-mail vous a été envoyé, contenant un lien vers la page qui activera votre compte.<p>Si vous avez besoin d'un nouvel envoi de ce message, cliquez ci-dessous et il vous sera renvoyé à l'adresse que vous avez donnée pendant la phase d'enregistrement.<p><a href="pending-resend.php?form_user=$1">[Renvoyer le message de confirmation]</a><br><hr><p>
 account_login	title	Connexion
 account_login	cookiewarn	Les Cookies doivent être activés aprés ce point.
-account_login	loginname	Non de Login:
+account_login	loginname	Nom de Login:
 account_login	passwd	Mot de passe:
 account_login	usessl	Rester en mode SSL aprés la connexion
 account_login	sslnotice	<p><B><FONT COLOR="RED">Vous allez être connecté avec un serveur SSL quand vous allez soumettre ce formulaire et votre mot de passe ne sera pas visible aux autres utilisateurs.</FONT></B> <small style="font-size: x-small"> (Si vous vous demandez pourquoi cette page n'est pas chargée en SSL, lisez le paragraphe suivant. Merci.) </small> <P> Les utilisateurs de <B>Internet Explorer</B> ont des problèmes intermittents avec SSL, aussi il est préférable de quitter le mode SSL aprés le login. Les utilisateurs de Netscape doivent rester en SSL pour un maximum de sécurité.  Visitez <A HREF="http://www.microsoft.com/">Microsoft</A> pour plus d'information au sujet de ce problème connu.  <P>
