@@ -152,7 +152,7 @@ if ($art_arr && count($art_arr) > 0) {
 	$rows=count($art_arr);
 	for ($i=0; $i < $rows; $i++) {
 		$comment_count = db_numrows($art_arr[$i]->getMessages());
-		if ($comment_count > 1) {
+		if ($comment_count == 0 || $comment_count > 1) {
 			$comment_msg = "$comment_count ".$Language->getText('tracker','comments');
 		} else {
 			$comment_msg = "$comment_count ".$Language->getText('tracker','comment');
