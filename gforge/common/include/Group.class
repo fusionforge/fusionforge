@@ -1507,7 +1507,9 @@ class Group extends Error {
           //               WHERE user_name='admin';");
 	  $res = db_query("SELECT users.email AS admin_email
 	 			FROM users,user_group
-				WHERE group_id=1 AND users.user_id=user_group.user_id;");
+				WHERE group_id=1 
+				AND user_group.admin_flags='A'
+				AND users.user_id=user_group.user_id;");
 
 	  if (db_numrows($res) < 1) {
 	    $this->setError("There is no administrator to send the mail.");
