@@ -20,8 +20,8 @@ $HTML->header(array('title'=>'Welcome','pagename'=>'home'));
 
 // Main page content is now themeable;
 // Default is index_std.php;
-//include ($HTML->rootindex);
-include ('index_std.php');
+include ($HTML->rootindex);
+//include ('index_std.php');
 
 $HTML->footer(array());
 
