@@ -168,9 +168,16 @@ case "$1" in
 	    			/usr/sbin/modules-config $flavour enable mod_env
 	    			/usr/sbin/modules-config $flavour enable mod_vhost_alias
 
-				if [ -d /etc/$flavour/conf.d ] ; then
-					[ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && ln -s /etc/gforge/httpd.conf /etc/$flavour/conf.d/gforge.httpd.conf
+				set -x
+				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
+				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 
+					echo Removing symlink
+					rm -f /etc/$flavour/conf.d/gforge.httpd.conf
 				fi
+				if [ -d /etc/$flavour/conf.d ] ; then
+					[ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && ln -s $GFORGE_ETC_LIST /etc/$flavour/conf.d/gforge.httpd.conf
+				fi
+				set +x
 			fi
 			if [ -x /usr/sbin/$flavour ]; then
 				invoke-rc.d $flavour restart || true

@@ -39,7 +39,7 @@ computedefault(){
 	DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTcgidir=$CGIDIR
-	DEFAULTcronolog_path=`type cronolog | cut -d' ' -f3`
+	DEFAULTcronolog_path=`which cronolog || echo /usr/bin/cronolog`
 	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
 	DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
 	DEFAULTgforge_chroot=$CHROOT
@@ -185,7 +185,7 @@ doapache() {
 	APACHECONF=/etc/apache/httpd.conf
 	GFORGE_ETC_SEARCH=$HTTPDCONF
 	export GFORGE_ETC_SEARCH
-	if [ -f $APACHECONF ] ; then
+	if [ -f $APACHECONF -a -f $BINDIR/install-apache.sh ] ; then
 		if [ ! -f /etc/apache/conf.d/gforge.httpd.conf ] ; then
 			if ! grep -q "^Include $GFORGE_ETC_SEARCH" $APACHECONF ; then
 				$BINDIR/install-apache.sh setup
@@ -193,7 +193,17 @@ doapache() {
 				echo "Found Include $GFORGE_ETC_SEARCH in $APACHECONF"
 			fi
 		else
-			echo "Found /etc/apache/conf.d/gforge.httpd.conf"
+			LINK=`ls -l /etc/apache/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
+			if [ "$LINK" != "$GFORGE_ETC_SEARCH" ] ; then
+				echo Need to readjust Symlink
+				$BINDIR/install-apache.sh setup
+			fi
+			if ! grep -q "^Include $GFORGE_ETC_SEARCH" $APACHECONF ; then
+				echo "Found /etc/apache/conf.d/gforge.httpd.conf"
+			else 
+				# There is a link and an include
+				$BINDIR/install-apache.sh setup
+			fi
 		fi
 	fi
 }

@@ -1,3 +1,10 @@
+2004-04-08
+	
+	* Better management of symlink in apache config (install-apache.sh and
+	setup)
+	* sys_localinc variable has now priority on all others local.inc
+	(pre.php). This allow to make easy multiple gforge config on the same box
+
 2004-04-06  Tom Copeland <tom@infoether.com>
 
 	* www/include/languages/Base.tab: Fixed stats_user_graph typo.
