@@ -150,17 +150,17 @@ class Layout extends Error {
 	A:hover { text-decoration:underline; color:#FF0000 }
 
 	.titlebar { color: #000000; text-decoration: none; font-weight: bold; }
-	A.tablink { color: #000000; text-decoration: none; font-weight: bold; font-size: <?php echo $font_smaller; ?>; }
+	A.tablink { color: #000000; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	A.tablink:visited { color: #000000; text-decoration: none; font-weight: bold; font-size: <?php
-		echo $font_smaller; ?>; }
+		echo $this->FONTSIZE_SMALLER; ?>; }
 	A.tablink:hover { text-decoration: none; color: #000000; font-weight: bold; font-size: <?php
-		echo $font_smaller; ?>; }
+		echo $this->FONTSIZE_SMALLER; ?>; }
 	A.tabsellink { color: #000000; text-decoration: none; font-weight: bold; font-size: <?php
-		echo $font_smaller; ?>; }
+		echo $this->FONTSIZE_SMALLER; ?>; }
 	A.tabsellink:visited { color: #000000; text-decoration: none; font-weight: bold; font-size: <?php
-		echo $font_smaller; ?>; }
+		echo $this->FONTSIZE_SMALLER; ?>; }
 	A.tabsellink:hover { text-decoration: none; color: #000000; font-weight: bold; font-size: <?php
-		echo $font_smaller; ?>; }
+		echo $this->FONTSIZE_SMALLER; ?>; }
 	-->
 </style>
 

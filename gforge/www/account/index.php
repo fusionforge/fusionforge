@@ -66,7 +66,7 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 <UL>
 <LI><A href="/users/<?php print $u->getUnixName(); ?>/"><B><?php echo $Language->getText('account_options', 'view_developer_profile'); ?></B></A>
 <LI><A HREF="/people/editprofile.php"><B><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></B></A>
-<!-- <LI><A HREF="/themes/"><B>Change My Theme</B></A> -->
+<LI><A HREF="/themes/"><B>Change My Theme</B></A>
 </UL>
 <?php echo $HTML->boxBottom(); ?>
 

@@ -43,7 +43,6 @@ require_once('common/include/Error.class');
 // HTML layout class, may be overriden by the Theme class
 require_once('www/include/Layout.class');
 
-$HTML = new Layout();
 
 //various html utilities
 require_once('common/include/utils.php');
@@ -100,7 +99,15 @@ require_once('www/include/logger.php');
 if (session_loggedin()) {
 	//set up the user's timezone if they are logged in
 	$LUSER =& session_get_user();
+	$LUSER->setUpTheme();
 }
+
+//
+//	Include user Theme
+//
+require_once($sys_themeroot.$sys_theme.'/Theme.class');
+
+$HTML=new Theme();
 
 /*
 

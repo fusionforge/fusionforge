@@ -122,6 +122,9 @@ class User extends Error {
 	 */
 	var $user_pref;
 
+	var $theme;
+	var $theme_id;
+
 	/**
 	 *	User($id,$res) - CONSTRUCTOR - GENERALLY DON'T USE THIS
 	 *
@@ -728,40 +731,6 @@ class User extends Error {
 	}
 
 	/**
-	 *	getAuthorizedKeys()
-	 *
-	 *	@return this user's SSH authorized (public) keys
-	 */
-	function getAuthorizedKeys() {
-		return ereg_replace("###", "\n", $this->data_array['authorized_keys']);
-	}
-
-	/**
-	 *	setAuthorizedKeys()
-	 *
-	 *	@param	string	The users public keys
-	 *	@sets this user's SSH authorized (public) keys
-	 */
-	function setAuthorizedKeys($keys) {
-		$keys = trim($keys);
-		$keys = ereg_replace("(\r\n)|(\n)", "###", $keys);
-
-		$res=db_query("
-			UPDATE users 
-			SET authorized_keys='$keys'
-			WHERE user_id='".$this->getID()."'
-		");
-
-		if (!$res) {
-			$this->setError('ERROR - Could Not Update User SSH Keys: '.db_error());
-			return false;
-		} else {
-			$this->data_array['authorized_keys']=$keys;
-			return true;
-		}
-	}
-
-	/**
 	 *	getJabberAddress()
 	 *
 	 *	@return this user's jabber address
@@ -1051,6 +1020,36 @@ class User extends Error {
 		return $res1 && $res2 && $res3;
 	}
 
+	function getThemeID() {
+		if (!$this->theme_id) {
+			$res=db_query("SELECT * FROM theme_prefs WHERE user_id='".$this->getID()."'");
+			if (!$res || db_numrows($res) < 1) {
+				$this->theme_id=1;
+			} else {
+				$this->theme_id=db_result($res,0,'user_theme');
+			}
+		}
+		return $this->theme_id;
+	}
+
+	function setThemeID($id) {
+        db_query("DELETE FROM theme_prefs WHERE user_id='".$this->getID()."'");
+        $result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES ('".$this->getID()."','$id')");
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError('Error inserting theme_pre: '.db_error());
+		} else {
+			return true;
+		}
+	}
+
+	function setUpTheme() {
+		if (!$this->theme) {
+			$res=db_query("SELECT * FROM themes WHERE theme_id='".$this->getThemeID()."'");
+			$this->theme=db_result($res,0,'dirname');
+			$GLOBALS['sys_theme']=db_result($res,0,'dirname');
+		}
+		return $this->theme;
+	}
 }
 
 /*
