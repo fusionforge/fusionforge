@@ -1,9 +1,9 @@
-sourceforge (2.5-32+) unstable; urgency=low
+sourceforge (2.5-33) unstable; urgency=low
 
   * [Roland] Fixed the fix in db-upgrade.pl, which caused an error to
     occur when upgrading (closes: #159277).
 
- --
+ -- Roland Mas <lolando@debian.org>  Tue,  3 Sep 2002 13:38:06 +0200
 
 sourceforge (2.5-32) unstable; urgency=low
 
