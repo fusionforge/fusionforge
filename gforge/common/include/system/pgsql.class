@@ -165,7 +165,7 @@ class pgsql extends System {
 					AND
 						users.status = 'A'
 					AND
-						groups.enable_anonscm = 1)
+						user_group.cvs_flags > 0)
 				";
 				$res4=db_query($query);
 	                	if (!$res4) {
@@ -355,7 +355,7 @@ class pgsql extends System {
 					AND
 						users.status = 'A'
 					AND
-						groups.enable_anonscm = 1);
+						user_group.cvs_flags > 0);
 				";
 				$res6=db_query($query);
 	                	if (!$res6) {
@@ -452,7 +452,7 @@ class pgsql extends System {
 			AND
 				users.status = 'A'
 			AND
-				groups.enable_anonscm = 1);
+				user_group.cvs_flags > 0)
 		";
 		$res1=db_query($query);
 		if (!$res1) {

@@ -179,6 +179,20 @@ class System extends Error {
 	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
 		return true;
 	}
+	/**
+ 	* sysGroupUpdateUser() - Remove a user from a group
+ 	*
+ 	* @param		int		The ID of the group from which to remove the user
+ 	* @param		int		The ID of the user to remove
+ 	* @param		bool	Only remove user from CVS group
+ 	* @returns true on success/false on error
+ 	*
+ 	*/
+	function sysGroupUpdateUser($group_id,$user_id,$cvs_only=0) {
+		$this->sysGroupRemoveUser($group_id,$user_id,$cvs_only=0);
+		$this->sysGroupAddUser($group_id,$user_id,$cvs_only=0);
+		return true;
+	}
 }
 
 // Local Variables:
