@@ -13,7 +13,7 @@
   *
   */
 
-require_once('pre.php');    
+require_once('pre.php');
 require_once('common/include/account.php');
 
 if (!$confirm_hash) {
@@ -41,7 +41,7 @@ site_header(array('title'=>"Unsubscription Complete"));
 if ($all) {
 	$what = $Language->getText('account_unsubscribe', 'all_mailings', array($GLOBALS['sys_name']));
 } else {
-	$what = $Language->getText('account_unsubscribe', 'site_mailings', array($GLOBALS['sys_name']);
+	$what = $Language->getText('account_unsubscribe', 'site_mailings', array($GLOBALS['sys_name']));
 }
 ?>
 

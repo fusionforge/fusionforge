@@ -1,5 +1,21 @@
 2003-01-19  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/account/unsubscribe.php: fix syntax error.
+
+	* www/account/editsshkeys.php: valid XHTML 1.0 Transitional.
+
+	* www/account/login.php: ditto.
+
+	* www/account/lostlogin.php: ditto.
+
+	* www/account/lostpw.php: ditto.
+
+	* www/account/verify.php: ditto.
+
+	* www/include/languages/Base.tab: XHTML-ise account/ strings.
+
+	* www/include/languages/Spanish.tab: ditto.
+
 	* INSTALL: it is possible to install gforge without having to edit
 	/etc/php.ini: add instructions for people who do not like to edit
 	their php.ini file.  Also reformat paragraphs so that they wrap at

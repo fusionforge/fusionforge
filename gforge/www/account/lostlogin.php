@@ -13,7 +13,7 @@
   *
   */
 
-require_once('pre.php');    
+require_once('pre.php');
 require_once('common/include/account.php');
 
 if (!$confirm_hash) {
@@ -21,7 +21,7 @@ if (!$confirm_hash) {
 }
 // Remove noise from hash produced by buggy mail clients
 $confirm_hash = html_clean_hash_string($confirm_hash);
-		
+
 $res_user = db_query("SELECT * FROM users WHERE confirm_hash='$confirm_hash'");
 if (db_numrows($res_user) > 1) {
 	exit_error(
@@ -55,10 +55,10 @@ if ($submit) {
 	}
 
         if ($u->setPasswd($passwd)) {
-	
+
 		// Invalidate confirm hash
 		$u->setNewEmailAndHash('', 0);
-		
+
 		$HTML->header(array('title'=>"Password changed"));
 		echo $Language->getText('account_lostlogin','passwdchanged');
 		$HTML->footer(array());
@@ -78,7 +78,7 @@ echo $Language->getText('account_lostlogin','welcome',$u->getUnixName());
 <p><?php echo $Language->getText('account_lostlogin','newpasswd2'); ?>:
 <br /><input type="password" name="passwd2" />
 <input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>" /></p>
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_lostlogin','update'); ?>" />
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_lostlogin','update'); ?>" /></p>
 </form>
 
 <?php

@@ -53,17 +53,18 @@ $HTML->header(array('title'=>"Lost Account Password",'pagename'=>'account_lostpw
 echo $Language->getText('account_lostpw','warn');
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
 <br />
-<input type="text" name="loginname">
+<input type="text" name="loginname" />
 <br />
 <br />
-<input type="submit" name="submit" value="<?php echo $Language->getText('account_lostpw','sendhash'); ?>">
+<input type="submit" name="submit" value="<?php echo $Language->getText('account_lostpw','sendhash'); ?>" />
+</p>
 </form>
 
-<p><a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></a>
+<p><a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></a></p>
 
 <?php
 

@@ -27,7 +27,7 @@ if ($submit) {
 	}
 	session_redirect("/account/");
 
-} else { 
+} else {
 	// not valid registration, or first time to page
 	site_user_header(array(title=>"Change Authorized Keys",'pagename'=>'account_editsshkeys'));
 
@@ -54,7 +54,7 @@ After submitting, verify that the number of keys in your file is what you expect
 <textarea rows="10" cols="60" name="authorized_keys">
 <?php echo $u->getAuthorizedKeys(); ?>
 </textarea></p>
-<p><input type="submit" name="submit" value="Update" />
+<p><input type="submit" name="submit" value="Update" /></p>
 </form>
 
 	<?php

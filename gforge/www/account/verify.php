@@ -72,18 +72,18 @@ $HTML->header(array('title'=>'Login','pagename'=>'account_verify','titlevals'=>a
 echo $Language->getText('account_verify', 'verify_blurb');
 
 if ($GLOBALS['error_msg']) {
-	print '<p><FONT color="#FF0000">'.$GLOBALS['error_msg'].'</FONT>';
+	print '<p><font color="#FF0000">'.$GLOBALS['error_msg'].'</font>';
 }
 ?>
 
-<form action="<?php echo $PHP_SELF; ?>" method="POST">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 
 <p><?php echo $Language->getText('account_verify', 'loginname'); ?>
-<br /><input type="text" name="loginname">
+<br /><input type="text" name="loginname" /></p>
 <p><?php echo $Language->getText('account_verify', 'password'); ?>
-<br /><input type="password" name="passwd">
-<input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>">
-<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_verify', 'login'); ?>">
+<br /><input type="password" name="passwd" /></p>
+<input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>" />
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_verify', 'login'); ?>" /></p>
 </form>
 
 <?php

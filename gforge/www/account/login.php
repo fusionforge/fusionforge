@@ -75,19 +75,22 @@ if ($login && !$success) {
 ?>
 	
 <p>
-<span style="color:red"><strong><?php echo $Language->getText('account_login', 'cookiewarn'); ?></strong></span></p>
-<p>
+<span style="color:red"><strong><?php echo $Language->getText('account_login', 'cookiewarn'); ?></strong></span>
+</p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
-<input type="hidden" name="return_to" value="<?php echo $return_to; ?>" /></p>
+<input type="hidden" name="return_to" value="<?php echo $return_to; ?>" />
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
-<br /><input type="text" name="form_loginname" value="<?php echo $form_loginname; ?>" /></p>
+<br /><input type="text" name="form_loginname" value="<?php echo $form_loginname; ?>" />
+</p>
 <p>
 <?php echo $Language->getText('account_login', 'passwd'); ?>
-<br /><input type="password" name="form_pw"></p>
+<br /><input type="password" name="form_pw" />
+</p>
 <p>
 <input type="submit" name="login" value="<?php echo $Language->getText('account_login', 'login'); ?>" />
-</form></p>
+</p>
+</form>
 <p>
 <a href="lostpw.php"><?php echo $Language->getText('account_login', 'lostpw'); ?></a></p>
 <p>
