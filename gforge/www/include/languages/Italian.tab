@@ -10,14 +10,17 @@
 #  *		Translation from Base.tab
 #  * 2003-01-04 rspisser <reinhard@spisser.it>
 #  * 		removed all not used entries
-#	* 2003-01-17 rspisser <reinhard@spisser.it>
+#  * 2003-01-17 rspisser <reinhard@spisser.it>
 #  *		adding localization strings for forums
-#	* 2003-01-21 rspisser <reinhard@spisser.it>
-#	*		adding localization strings for my, diary, project_homepage
-#	* 2003-01-25 rspisser <reinhard@spisser.it>
+#  * 2003-01-21 rspisser <reinhard@spisser.it>
+#  *		adding localization strings for my, diary, project_homepage
+#  * 2003-01-25 rspisser <reinhard@spisser.it>
 #  *		adding localization strings for pm
 #  * 2003-02-04 rspisser <reinhard@spisser.it>
 #  *		localization of the tracker
+#  * 2003-11-13 rspisser <reinhard@spisser.it>
+#  *            removed double strings, removed not translated strings,
+# 
 #  */
 #
 error	title	Pagina richiesta non trovata (Errore 404)
@@ -31,6 +34,7 @@ conf	mail_charset	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
+account	title	Preferenze utente
 account	updated	Aggiornato
 account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nVisitare la seguente URL per completare il cambio di indirizzo email:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- il team $1
 account_change_email	subject	$1 verifica
@@ -189,7 +193,6 @@ docman_admin_editdocs	title	Modifica documenti
 docman_admin_editdocs	state	Stato
 docman_admin_editdocs	upload	OPZIONALE: Invia nuovo file
 docman_admin_editdocs	doc_contents	Contenuto Documenti
-docman_admin_addgroups	title	Aggiungi gruppi di documenti
 docman_admin_editgroups	title	Modifica gruppi
 docman_admin_editgroups	new_group_name	Nuovo nome del gruppo
 docman_admin_editgroups	add_group	Aggiungi un gruppo
@@ -272,8 +275,8 @@ forum_admin_delete_message	section	Amministrazione forum
 forum_admin_delete_message	title	Cancella un messaggio
 forum_admin_delete_message	warning	ATTENZIONE! Stai per cancellare in modo permanente il messaggio e tutte le risposte!!
 forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da cancellare
-forum_common	error_adding_forum	Error Adding Forum
-forum_common	error_invalid_group_forum_id	Forum: Invalid group_forum_id
+forum_common	error_adding_forum	Errore nella creazione del forum
+forum_common	error_invalid_group_forum_id	Forum: group_forum_id non valido
 forum_common	error_save_when_logged_in	Si pu&ograve; salvare la posizione solo quando si &egrave; loggati
 forum_common	error_min_name_length	Il nome del forum deve essere almeno di 3 caratteri
 forum_common	error_min_desc_length	La descrizione del forum deve essere almeno di 10 caratteri
@@ -357,8 +360,6 @@ frs_file	error_cannot_move	Il file non pu&ograve; essere spostato nella director
 general	return	[Ritorna  a $1]
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Impossibile recuparare il permesso
-general	update_successful	Aggiornato con successo
-general	create_successful	Creato con successo
 general	permexcuse	Non hai il permesso di visualizzare questa pagina.
 general	turned_off	Questo progetto ha disabilitato il $1
 general	update_successful	Aggiornato con successo
@@ -435,7 +436,6 @@ menu	new_project	Registra progetto nuovo
 menu	new_user	Nuovo utente via
 menu	project_help_wanted	Progetti in cerca di aiuto	
 menu	search	Ricerca
-menu	admin	Amministrazione
 menu	submit	Invia
 menu	home	Homepage
 menu	projectree	Categorie progetti
@@ -492,7 +492,7 @@ my_diary	submit_only_once	INSERIRE SOLO UNA VOLTA
 my_diary	is_public	Pubblico?
 my_diary	is_public_expl	Se marcato come publico, la nota verr&agrave; inviata a tutti gli utenti che richiedono la notifica della nota.
 my_diary	diary_updated	Diaro aggiornato 
-my_diary	nothing_updated	Nulla da aggiornato
+my_diary	nothing_updated	Nulla da aggiornare
 my_diary	error_adding_item	Errore nell'aggiornamento dell'elemento
 my_diary	existing_entries	Note e Diario esistenti
 my_diary	update_entry	Aggiorna un elemento
@@ -534,7 +534,7 @@ pm	hours	Ore stimate
 pm	status	Stato
 pm	view_calendar	Visualizza calendario
 pm	date_note		La data inizio e fine dell'attivit&agrave; devono essere superiori alle date di inizio delle attivit&agrave; dalle quali dipende <br/>altrimenti il sistema modificher&agrave; automaticamente le date.
-pm	task_id	Id attivit&agrave;
+pm	task_id	Id attivita'
 pm	dependent_note			Scegliere solo attivit&agrave; che devono essere completate prima che questa attivit&agrave; parte.
 pm	unassigned	Non assegn.
 pm	any	Tutti
@@ -556,7 +556,6 @@ pm_admin_projects	section	Amministrazione attivit&agrave;
 pm_admin_projects	title	Aggiungi sottoprogetti
 pm_admin_projects	project_inserted	Progetto inserito
 pm_admin_projects	add_categories_title	Aggiungi categorie
-pm_admin_projects	project_inserted	Progetto inserito
 pm_admin_projects	category_inserted	Categoria inserita
 pm_admin_projects	category_updated	Categoria aggiornata
 pm_admin_projects	updated_successfully	Updated Successfully
@@ -565,9 +564,7 @@ pm_admin_projects	id	Id
 pm_admin_projects	no_categories	Nessuna categoria definita
 pm_admin_projects	category_name	Nuovo nome categoria
 pm_admin_projects	category_note	Una volta inserita una categoria non pu&ograve; pi&ugrave; essere cancellata.
-pm_admin_projects	add_categories	Aggiungi categorie
 pm_admin_projects	modify_category	Modifica una categoria in
-pm_admin_projects	category_name	Nome categoria
 pm_admin_projects	category_note2	Non &egrave; consigliato cambiare la categoria perch&egrave; altri elementi dipendono da questa categoria. Quando si cambia una categoria, tutti gli elementi relazionati verranno assegnati automaticamente al nuovo nome della nuova categoria.</font></strong>
 pm_admin_projects	add_subprojects	Aggiungi progetti
 pm_admin_projects	existing_subprojects	Sottoprogetti esistenti
@@ -617,8 +614,6 @@ pm_reporting	aging_report	Aging Report
 pm_reporting	by_tech	Report per tecnico
 pm_reporting	by_subproject	Report per sottoprogetto
 pm_reporting	average_duration	Durata media per attivit&agrave; chiuse (giorni)
-pm_reporting	started_tasks	Numero di attivit&agrave; iniziate
-pm_reporting	not_completed	Numero di attivit&agrave; non ancora completate
 pm_reporting	tasks_by_category	Attivit&agrave; per categoria
 pm_reporting	open_tasks_by_category	Attivit&agrave; aperte per categoria
 pm_reporting	all_tasks_by_category	Tutte le attivit&agrave; per categoria
@@ -739,7 +734,6 @@ user_home	jabber_address	Indirizzo jabber:
 user_home	personal_information	Informazioni utente
 user_home	site_member_since	Registrato il:
 user_home	contact	Contatto
-user_home	email	Il tuo indirizzo email
 user_home	name	Il tuo nome
 user_home	subject	Soggetto
 user_home	message	Messaggio
@@ -766,7 +760,7 @@ trove_list	limiting_view	Filtro impostato sulle seguenti categorie
 trove_list	number_of_projects	<strong>$1</strong> progetti
 trove_list	more_than	Pi&ugrave; di <strong>$1</strong> progetti
 trove_list	browse_by	Visualizza per
-classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto: $1\nUnix Name del progetto: $2\nServer CVS:      cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nMentre aspetti che il DNS per il tuo sito venga risolto, pouoi provare a loggarti a \n$4 e impostare il CVS a $5\n\nSe dopo 6 ore il tuo account shell/CVS non funziona ancora,\napri un ticket di supporto.\nNota che tutti gli account di shell/CVS funzionano solo con SSH1 (e non con telnet).\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
+classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto: $1\nNome unix del progetto: $2\nServer CVS:      cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nMentre aspetti che il DNS per il tuo sito venga risolto, puoi provare a loggarti a \n$4 e impostare il CVS a $5\n\nSe dopo 6 ore il tuo account shell/CVS non funziona ancora,\napri un ticket di supporto.\nNota che tutti gli account di shell/CVS funzionano solo con SSH1 (e non con telnet).\n\nIl sito sar&agrave; accessibile tramite il tuo account. Leggi la documentazione del sito (vedi link in basso) sull'utilizzo, servizi disponibili.\n Quando visiterai la tua pagina del progetto, troverai una funzionalit&agrave; aggiuntiva \'Amministrazione Progetto\'. Ti suggeriamo ti visitare $7 e di creare una descrizione\n pubblica per il tuo progetto. Questo pu&egrave; essere fatto visitando il tuo progetto\n e selezionando \'Amministrazione Progetto\' dal menu (oppure visitando https://$3/project/admin/?group_id=$6\ndopo la login).\n\nIl tuo progetto non sar&agrave; visualizzato nella mappa dei progetti fintanto che non verr&agrave; categorizzata nella amministrazione progetto.\n Per fare in modo che le persone potranno trovare il tuo progetto, dovresti farlo subito.\nVisita il tuo progetto mentre sei loggato e seleziona \'Amministrazione Progetto\' dal menu.\nPer ogni problema, invia una mail a noi.\n\n-- il team  $7 
 classgroup	rejectedproject	Il tuo progetto $3 &egrave; stato rifiutato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\n\nRagioni per il rifiuto:\n\n
 classgroup	newprojectnotification	Nuovo progetto $1 inserito\n\nNome progetto:  $2\nDescrizione: $3\nLicenza: $4\n\nCollegati all'URL \nhttp://$5/admin/approve-pending.php per approvare o rifiutare il progetto.
 classgroup	acceptedprojecttitle	Progetto $1 approvato
@@ -788,7 +782,7 @@ session	suspended	Utente sospeso
 session	pending	Utente in attesa di attivazione
 session	deleted	Utente cancellato
 session	notactive	Utente non attivo
-global	error	ERROR
+global	error	ERRORE
 common	login	Connetti
 common	logout	Scollega
 common	myaccount	Mio Account
@@ -797,12 +791,11 @@ common_include_account	sixchar	La lunghezza della password deve essere di almeno
 common_include_account	nospace	Nel nome login non possono esserci spazi
 common_include_account	tooshort	Nome troppo corto, la lunghezza minima &egrave; di 3 caratteri.
 common_include_account	toolong	Nome troppo lungo, la lunghezza massima &egrave; di 15 caratteri.
-common_include_account	illegal	Illegal character in name.
+common_include_account	illegal	Carattere illegale nel nome.
 common_include_account	cvsreserved	Il nome &egrave; riservato per CVS.
 common_include_account	dnsreserved	Il nome &egrave; riservato per DNS.
 common_include_account	nounderscore	Il nome del gruppo non pu&ograve; contenere caratteri sottolineato (_)
 calendar	title	Calendario
-calendar	view	Visualizza
 calendar	january	gennaio
 calendar	february	febbraio
 calendar	march	marzo
@@ -902,11 +895,8 @@ register_projectinfo	section	Registrazione nuovo progetto
 register_projectinfo	title	Informazioni progetto
 register_requirements	section	Registrazione nuovo progetto
 register_requirements	title	Servizi e Requirements
-register_tos	section	Registrazione nuovo progetto
-register_tos	title	Terms Of Service Agreement
 tracker_utils	monitor		Notifica
 tracker_utils	stop_monitoring		Fine notifica
-tracker	title	Tracker
 tracker	title	Tracker
 tracker	choose	Seleziona un tracker e puoi visualizzare/aggiungere o modificare elementi.
 tracker	item_created	Elemento creato con successo
@@ -1000,7 +990,6 @@ tracker_artifacthtml	sender	Autore
 tracker_artifacthtml	no_followups	Non sono stati inseriti commenti
 tracker_artifacthtml	field	Campo
 tracker_artifacthtml	old_value	Valore precedente
-tracker_artifacthtml	date	Data
 tracker_artifacthtml	by	Da:
 tracker_artifacthtml	no_changes	Non sono stati effettuati cambiamenti
 tracker_artifacthtml	message	Messaggio
@@ -1099,15 +1088,14 @@ tracker_reporting	items_submitted	Numero elementi inseriti
 tracker_reporting	items_open	Numero elementi ancora aperti
 tracker_reporting	open_items_by_technician	Elementi aperti per tecnico
 tracker_reporting	all_items_by_technician	Tutti gli elementi per tecnico
-tracker_reporting	open_items_by_technician	Elementi aperti per categoria
 tracker_reporting	all_by_technician	Tutti gli elementi per categoria
 tracker_reporting	open_by_group	Elementi aperti per gruppo
 tracker_reporting	all_by_group	Tutti gli elementi per gruppo
 tracker_reporting	open_items_by_resolution	Elementi aperti per risoluzione
 tracker_reporting	all_by_resolution	Tutti gli elementi per risoluzione
 tracker_artifact	private_error	Solo membri del gruppo possono vedere elementi privati
-tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
-tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
+tracker_artifact	error_admin_modify	Artifact: Solo amministratori possono modificare ArtifactTypes privati
+tracker_artifact	error_no_anonymous	Artifact: Questo tipo di artifact non permette inserimenti come anonimo. 
 tracker_artifact	error_summary_required	Il sommario &egrave; obbligatorio
 tracker_artifact	error_body_required	Il contenuto &egrave; obbligatorio
 tracker_artifact	double_submit	Stai cercando di inserire due volte lo stesso messaggio. 
@@ -1123,7 +1111,7 @@ tracker_artifactfile	required_fields	Nome file, tipo, dimensione e data sono cam
 tracker_artifactgroup	required_field	Nome &egrave; un campo obbligatorio
 tracker_artifacttype	required_fields	Nome, descrizione, fuori tempo e tempo scaduto sono campi obbligatori
 stats	title	Statistiche del sito su $1
-stats_i18n	title	$1 I18n Statistics
+stats_i18n	title	Statistiche di internazionalizzazione di $1
 stats_i18n	language	Lingua
 stats_i18n	users	Utenti
 stats_i18n	language_distribution	Distribuzione delle lingue
@@ -1146,22 +1134,19 @@ stats_lastlogins	username	Nome utente
 stats_lastlogins	source_ip	Indirizzo IP
 stats_projects	project_comparision	Comparazioni statistiche dei progetti
 stats_site_utils	all_projects	Tutti i progetti
-stats_site_utils	special_project_list	Special Project List
-stats_site_utils	returned_no_category	returned no category name
-stats_site_utils	in_trove_category	Projects in trove category:
-stats_site_utils	or_special_project_list	OR enter Special Project List: 
-stats_site_utils	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
+stats_site_utils	special_project_list	Lista dei progetti speciali
+stats_site_utils	returned_no_category	non ha ritornato alcun nome categoria
+stats_site_utils	in_trove_category	Progetti nelle categorie trove:
+stats_site_utils	or_special_project_list	OPPURE inserisci Lista dei progetti speciali: 
+stats_site_utils	comma_seperated_group_id	<strong>separato da virgola</strong> group_id\'s)
 stats_site_utils	report	Report: 
 stats_site_utils	last_30	ultimi 30
 stats_site_utils	all	tutti
 stats_site_utils	view_by	Visualizza per: 
 stats_site_utils	generate_report	Genera Report
-stats_site_utils	group_name	Group Name
-stats_site_utils	page_views	Page Views
-stats_site_utils	downloads	Downloads
-stats_site_utils	bugs	Bug
-stats_site_utils	support	Support
-stats_site_utils	patches	Patch
+stats_site_utils	group_name	Nome gruppo
+stats_site_utils	page_views	Pagine visitate
+stats_site_utils	downloads	Download
 stats_site_utils	all_trkr	Tutti i tracker
 stats_site_utils	tasks	Attivit&agrave;
 stats_site_utils	cvs	CVS
@@ -1173,14 +1158,14 @@ stats_site_utils	cls	Cls
 stats_site_utils	cos	CO's
 stats_site_utils	comms	Comm's
 stats_site_utils	adds	Aggiunte
-stats_site_utils	no_valid_data	Query returned no valid data.
-stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days.
+stats_site_utils	no_valid_data	La query non ha restituito dati validi.
+stats_site_utils	statistics_for_the_past_days	Statistiche per i $1 giorni passati.
 stats_site_utils	day	Giorno
 stats_site_utils	site_views	Viste del sito
 stats_site_utils	subdomain_views	Vista per sottodomino
 stats_site_utils	no_data	Nessun dato
 stats_site_utils	statistics_for_the_past_months	Statistiche per gli ultimi $1 mesi
-stats_site_utils	month	Month
+stats_site_utils	month	Mese
 stats_site_utils	current_statistic_all_time	Statistiche aggregate 
 stats_site_utils	developers	Sviluppatori
 stats_site_utils	projects	Progetti
@@ -1212,10 +1197,8 @@ top_mostactive	rank	Posizione
 top_mostactive	project_name	Nome Progetto
 top_mostactive	percentile	Percentuale
 top_mostactive	section	Progetti principali
-top_mostactive	title	Most Active Projects: $1
+top_mostactive	title	Progetti più attivi: $1
 top_mostactive	updated_daily	Aggiornato giornalmente
-top_toplist	section	Top Projects
-top_toplist	title	Top Project Lists
 top_toplist	rank	Posizione
 top_toplist	project_name	Nome progetto
 top_toplist	last_rank	Posizione precedente
@@ -1224,7 +1207,6 @@ top_toplist	top_download_7_days	Maggiori download negli ultimi 7 giorni
 top_toplist	download	Download
 top_toplist	top_weekly_pagesviews	Top Weekly Project Pageviews at *.$1 (from impressions of $2 logo)
 top_toplist	pageviews	Viste delle pagine
-top_toplist	top_forum_post_count	Top Forum Post Counts
 top_toplist	posts	Messaggi inseriti
 top_toplist	top_download	Download principali
 top_topusers	title	Utenti pi&ugrave; quotati
@@ -1238,7 +1220,7 @@ top_topusers	last_rank	Ultima posizione
 top_topusers	change	Cambio
 scm_index	anoncvs	<P><B>Accesso anonimo a CVS </B> <P>&Egrave; possibile fare il checkout anonimo di questo repository tramite il metodo pserver seguendo le istruzioni. Il modulo da utilizzare deve essere inserito come <I>nomemodulo</I>. Quando viene richiesta una password per l'utente <I>anonymous</I>, premere INVIO.
 scm_index	anoncvsup	Non &egrave; necessario utilizzare il parametro -d quando si fanno gli update da una sottodirectory.
-scm_index	devcvs	<P><B>Accesso SSH al CVS</B> <P>Solo sviluppatori possono accedere al repository CVS tramite SSH. SSH1 deve essere installato sulla macchina locale. Sostituire<I>modulename</I> e<I>developername</I> con i nomi appropriati. Quando viene richiesta la password, inserire la propria password di accesso.
+scm_index	devcvs	<P><B>Accesso SSH al CVS</B> <P>Solo sviluppatori possono accedere al repository CVS tramite SSH. SSH1 deve essere installato sulla macchina locale. Sostituire<I>nomemodulo</I> e<I>sviluppatore</I> con i nomi appropriati. Quando viene richiesta la password, inserire la propria password di accesso.
 scm_index	history	Storia del repository CVS
 scm_index	browsetree	<HR><B>Visualizza il repository CVS </B> <P>Visualizzare il repository CVS d&agrave; la possibilit&agrave; di vedere lo stato attuale del codice sviluppato. &Egrave; possibile visualizzare l'intera storia di ogni singolo file.
 scm_index	browseit	Visualizza repositoriy CVS
@@ -1257,8 +1239,6 @@ admin	submit_changes	Invia modifiche
 admin	submit_new	Invia
 admin	successfully_modified	modificato con successo
 admin	add_new	[aggiungi nuovo]
-admin	edit	[modifica]
-admin	site_admin_home	Site Admin Home
 admin	yes	s&igrave;
 admin	reject	Rigetta
 admin	license	Licenza:
@@ -1268,25 +1248,10 @@ admin	other	Altri
 admin	edit	Modifica
 admin	http_domain	Dominio HTTP
 admin	license_other	Licenza diversa
-admin_add_language	add_new_language	Add New Languages
-admin_add_language	existing_language	Existing Language
-admin_add_language	add_new_language	Add New Language
-admin_add_language	name	Name:
-admin_add_language	class_filename	Class Filename:
-admin_add_language	classname	Classname:
-admin_add_language	submit	Submit
-admin_tabfiles	modify_the	Modify the $1 below:
-admin_tabfiles	language	Language
-admin_tabfiles	delete_lang	[delete]
-admin_tabfiles	edit_the_language	Edit The Language
-admin_tabfiles	language	Language
-admin_tabfiles	edit_the_langfile	Edit The $1 Language
-admin_table	edit_the	Edit The
-admin_table	table	Table
-admin_approve_pending	error_creating_group	Error creating group object
-admin_approve_pending	approving_group		Approvazione gruppo
-admin_approve_pending	error_group_rejection	Error during group rejection
-admin_approve_pending	approving_pending_projects	Approvazione progetto in attesa
+admin_approve_pending	approving_group	Approvazione Gruppo:
+admin_approve_pending	approve_pending_projects	Approvazione progetti pendenti	
+admin_approve_pending	error_creating_group	Errore nella creazione dell'oggetto gruppo	
+admin_approve_pending	error_group_rejection	Errore durante la fase di rigettazione del gruppo	
 admin_approve_pending	none_found	Nessun progetto trovato
 admin_approve_pending	no_pending_projects_to_approve	Non ci sono progetti in attesa di approvazione
 admin_approve_pending	pending_projects	Progetti in attesa di approvazione:
@@ -1304,20 +1269,18 @@ admin_approve_pending	submitted_description	Descrizione:
 admin_approve_pending	pending_reason	Ragioni per l'attesa
 admin_approve_pending	admin_approve_pending	Attiva
 admin_approve_pending	approve_all_on_this_page	Approva tutto
-admin_database	error_adding_database	Error Adding Database
-admin_database	group	Group
-admin_database	added_already_active_database	added already active database
-admin_database	unable_to_insert	Unable to insert already active database.
-admin_database	site_admin_groups_maintance	Site Admin: Groups' DB Maintenance
-admin_database	statistics_for_project_database	Statistics for Project Databases
+admin_database	added_already_active_database	aggiunto database già attivo
+admin_database	count	Numero	
+admin_database	display_database_type	Visualizzazione di database del tipo:	
+admin_database	error_adding_database	Errore nell'aggiunta del database	
 admin_database	type	Tipo
-admin_database	count	Count
 admin_database	no_databases_defined	Nessun database definito
-admin_database	display_database_type	Displaying Databases of Type:
 admin_database	add_an_already_active_database	Aggiungi un database gi&agrave; attivo
 admin_database	group_unix_name	Nome unix del gruppo
+admin_database	group	Gruppo
+admin_database	site_admin_groups_maintenance	Amministrazione sito: Manutenzione dei database del gruppo	
+admin_database	unable_to_insert	Impossibile inserire un database gi&agrave; attivo
 admin_groupedit	error	Errore
-admin_groupedit	error_creating_group_object	Error creating group object
 admin_groupedit	updated	Aggiornato
 admin_groupedit	instruction_email_sent	Inviata email di istruzioni
 admin_groupedit	title	Site Admin: Group Info
@@ -1337,7 +1300,7 @@ admin_groupedit	1	1
 admin_groupedit	no	no
 admin_groupedit	yes	S&igrave;
 admin_groupedit	unix_group_name	Nome unix:
-admin_groupedit	registration_application	Registration Application:
+admin_groupedit	registration_application	Registration Applicazione:
 admin_groupedit	new_project_instruction_email	Invia email con istruzioni per il progetto
 admin_groupedit	update	Aggiorna
 admin_groupedit	public	Pubblico?
@@ -1351,7 +1314,7 @@ admin_grouplist	status	Stato
 admin_grouplist	public	Pubblico?
 admin_grouplist	license	Licenza
 admin_grouplist	members	Membri
-admin_loadtabfile	title	Site Admin
+admin_loadtabfile	title	Ammministrazione sito
 admin_loadtabfile	reload_all_language_files	Ricarica tutti i file
 admin_loadtabfile	purge_loaded_data	Svuota dati caricati
 admin_loadtabfile	tables_loaded	Tabelle caricate
@@ -1359,6 +1322,29 @@ admin_loadtabfile	see_translations	[vedi traduzioni]
 admin_loadtabfile	see_untranslated	[vedi non tradotti]
 admin_loadtabfile	edit_dont_work	[modifca (non funziona)]
 admin_loadtabfile	availaible_tables	Tabelle disponibili:
+admin_massmail	active_deliveries	Esecuzioni attive	
+admin_massmail	all_project_admins	Tutti gli amministratori del progetto
+admin_massmail	all_project_developers	Tutti gli sviluppatori del progetto
+admin_massmail	all_users	Tutti gli utenti
+admin_massmail	be_very_carefull	Fai <span style="color:red"><strong>MOLTA</strong></span> attenzione con questo form, perch&egrave; il suo inserimento invier&agrave; mail a molti utenti.
+admin_massmail	date	Data
+admin_massmail	developers_test	Sviluppatori (test)
+admin_massmail	error_scheduling_mailing	Errore nella schedulazione della posta. Errore nel database.
+admin_massmail	id	ID
+admin_massmail	last_user_id_mailed	Ultimo user_id al quale &egrave; stata inviata la mail
+admin_massmail	mail_engine_for	Motore di mail per gli abbonati a $1
+admin_massmail	mailing_successfully_scheduled	Invio e-mail schedulata con successo
+admin_massmail	missing_parameter_empty_message	Parametro mancante, messaggio vuoto
+admin_massmail	missing_parameter_proper_subject	Parametro_mancante, oggetto vuoto
+admin_massmail	missing_parameter_select_target	Parametro mancante, non &egrave; stato selezionato un destinatario
+admin_massmail	schedule_for_mailing	Schedulazione per invio
+admin_massmail	subject	Oggetto
+admin_massmail	subscribers_to_site_updates	Abbonati a "Aggiornamenti sito"
+admin_massmail	text_of_message	Testo del messaggio
+admin_massmail	title	Amministrazione Motore di mail
+admin_massmail	type	Tipo
+admin_massmail	will_be_append	(sar&agrave; aggiunta informazione su come disiscriversi, se applicabile).
+poo
 admin_massmail_execute	receive_post	Ricevuto richiesta. Sto effettuando la query.
 admin_massmail_execute	unrecognized_post	Richiesta sconosciuta
 admin_massmail_execute	querry_complete	Query completa, inizio mailing a 
@@ -1394,20 +1380,6 @@ admin_search	group_search_criteria	Ricerca gruppo con criterio
 admin_search	unix_name	Nome UNIX
 admin_search	full_name	Nome completo
 admin_search	registered	Registrato
-admin_search	status	Stato
-admin_unsubscribe	title	Site Mailings Subscription Maintenance
-admin_unsubscribe	unsubscribe_user	Unsubscribe user:
-admin_unsubscribe	you_can_unsubscribe	You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).
-admin_unsubscribe	unsubscribe	Unsubscribe
-admin_unsubscribe	mail	MAIL
-admin_unsubscribe	all	ALL
-admin_unsubscribe	admin_initiaded_mail	Admin-initiated mailings
-admin_unsubscribe	all_site_mailing	All site mailings
-admin_unsubscribe	error_unsubscribe_user	Error, Could not unsubscribe user: 
-admin_unsubscribe	user_unsubscribed	User unsubscribed
-admin_unsubscribe	subscription_maintance	Site Mailings Subscription Maintenance
-admin_unsubscribe	use_fields_bellow	Use field below to find users which match given pattern with the $1 username, real name, or email address (substring match is preformed, use '%' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).
-admin_unsubscribe	show_user_matching	Show users matching pattern
 admin_unsubscribe	user_id	id utente
 admin_unsubscribe	username	utente
 admin_unsubscribe	real_name	Nome
@@ -1417,7 +1389,6 @@ admin_unsubscribe	comm_mail	Mail commerciale
 admin_useredit	no_unix_account	Nessun account UNIX (N)
 admin_useredit	active	Attivo (A)
 admin_useredit	suspended	Sospeso (S)
-admin_useredit	deleted	Cancellato (D)
 admin_useredit	could_not_complete_operation	Impossibile completare l'operazione
 admin_useredit	updated	Aggiornato
 admin_useredit	title	Amministrazione sito: informazione utente
@@ -1427,9 +1398,6 @@ admin_useredit	user_name	Nome utente:
 admin_useredit	real_name	Nome reale:
 admin_useredit	web_account_status	Stato account Web:
 admin_useredit	pending	In attesa di approvazione (P)
-admin_useredit	active	attivo (A)
-admin_useredit	suspended	sospeso (S)
-admin_useredit	deleted	cancellato (D)
 admin_useredit	unix_account_status	Stato account Unix
 admin_useredit	unix_shell	Shell unix:
 admin_useredit	email	Email:
@@ -1443,36 +1411,10 @@ admin_useredit	unix_name	Nome unix
 admin_useredit	operations	Operations
 admin_useredit	project_admin	Amministrazione progetto
 admin_useredit	membership_permissions	Permessi dei membri
-admin_vhost	error_adding_vhost	Error adding VHOST: 
-admin_vhost	virtual_host	Virtual Host
-admin_vhost	scheduled_for_creation	scheduled for creation on group
-admin_vhost	the_provided_group	The provided group name does not exist
-admin_vhost	error_updating_vhost	Error updating VHOST entry: 
-admin_vhost	virtual_host_entry_updated	Virtual Host entry updated.
-admin_vhost	title	Site Admin
-admin_vhost	virtual_host_administration	Virtual Host Administration
-admin_vhost	add_virtual_host	Add Virtual Host
-admin_vhost	group_unix_name	Group Unix Name
-admin_vhost	virtual_host_name	Virtual Host Name
-admin_vhost	add_virtual_host	Add Virtual Host
-admin_vhost	tweak_directories	Tweak Directories
-admin_vhost	virtual_host	Virtual Host:
-admin_vhost	get_info	Get Info
-admin_vhost	update_record	Update Record:
-admin_vhost	vhost_id	VHOST ID
-admin_vhost	vhost_name	VHOST Name
-admin_vhost	group	Group
-admin_vhost	htdocs_dir	Htdocs Dir
-admin_vhost	cgi_dir	CGI Dir
-admin_vhost	operations	Operations
-admin_vhost	update	Update
-admin_vhost	no_such_host	No such VHOST:
 admin_trove_cat_list	edit	Modifica
 admin_trove_cat_list	title	Amministrazione sito: Trove - Lista delle categorie
 admin_trove_cat_list	browse_trove_tree	Visualizza albero Trove
-admin_userlist	userlist	: User List
-admin_userlist	user_updated	User updated to $1 status
-admin_userlist	key	Key
+admin_userlist	key	Chiave
 admin_userlist	active	Attivo
 admin_userlist	deleted	Cancellato
 admin_userlist	suspended	Sospeso
@@ -1484,27 +1426,14 @@ admin_userlist	suspend	Sospendi
 admin_userlist	user_list_for_group	Elenca utenti per gruppo
 admin_userlist	all_groups	Tutti i gruppi
 admin_userlist	submit	Invia
-admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
-admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
-admin_trove_cat_edit	cant_delete_has_subcategories	Can't delete, That trove cat has sub categories
-admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
-admin_trove_cat_edit	no_such_category	No Such Category, That trove cat does not exist
-admin_trove_cat_edit	title	Amministrazione site: Trove - Modifica categoria
-admin_trove_cat_edit	edit_trove_category	Modifica categoria trove
-admin_trove_cat_edit	parent_category	Categoria padre
-admin_trove_cat_edit	new_category_short_name	Nome breve categoria (nessuno spazio, simile allo nome unix)
-admin_trove_cat_edit	new_category_full_name	Nome completo categoria (VARCHAR 80)
-admin_trove_cat_edit	new_category_description	Descrizione categoria (VARCHAR 255)
 admin_trove_cat_edit	update	Aggiorna
 admin_trove_cat_edit	delete	Cancella
-admin_trove_cat_add	error_in_trove_openration	Error	In Trove Operation
-admin_trove_cat_add	title	Amministrazione Sito: Trove - Add Node
-admin_trove_cat_add	add_new_trove_category	Add New Trove Category
 admin_trove_cat_add	parent_category	Categoria padre
 admin_trove_cat_add	new_category_short_name	Nome breve categoria (nessuno spazio, simile allo nome unix)
 admin_trove_cat_add	new_category_full_name	Nome completo categoria (VARCHAR 80)
 admin_trove_cat_add	new_category_description	Descrizione categoria (VARCHAR 255)
 admin_trove_cat_add	add	Aggiungi
+admin_index	site_mailing_maintenance	Manutenzione del mailing del sito
 admin_index	title	Amministrazione sito
 admin_index	user_maintaince	Manutenzione utenti
 admin_index	display_full_user_list	Visualizza elenco completo degli utenti
@@ -1531,7 +1460,6 @@ admin_index	display_trove_map	Visualizza mappa Trove
 admin_index	add_to_trove_map	Aggiungi alla mappa Trove
 admin_index	site_utilities	Utility 
 admin_index	mail_engine	Engine di mail per utenti sottoscritti a $1 
-admin_index	site_mailing_maintaince	Site Mailings Maintenance
 admin_index	add_delete_edit_laguage	Gestisci lingue supportate
 admin_index	add_delete_edit_file_types	Gestisci tipi file supportati
 admin_index	add_edit_delete_processors	Gestisci processori
@@ -1539,31 +1467,7 @@ admin_index	add_edit_delete_themes	Gestisci temi
 admin_index	translation_file_tool	Strumento per la traduzione 
 admin_index	virtual_host_admin_tool	Strumento per l'amministrazione dei virtual host
 admin_index	project_database_administration	Amministrazione database per i progetti
-admin_massmail	missing_parameter_select_target	Missing parameter, You must select target audience for mailing
-admin_massmail	missing_parameter_empty_message	Missing parameter, You are trying to send empty message
-admin_massmail	missing_parameter_proper_subject	Missing parameter, You must give proper subject to the mailing
-admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
-admin_massmail	title	Administrative Mass Mail Engine
-admin_massmail	mailing_successfully_scheduled	Mailing successfully scheduled for delivery
-admin_massmail	mail_engine_for	Mail Engine for $1 Subscribers
-admin_massmail	active_deliveries	Active deliveries
-admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
 admin_massmail	select	(seleziona)
-admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
-admin_massmail	subscribers_to_additional_community	Subscribers to "Additional Community Mailings"
-admin_massmail	all_project_developers	All Project Developers
-admin_massmail	all_project_admins	All Project Admins
-admin_massmail	all_users	All Users
-admin_massmail	developers_test	Developers (test)
-admin_massmail	subject	Subject
-admin_massmail	text_of_message	Text of Message
-admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
-admin_massmail	schedule_for_mailing	Schedule for Mailing
-admin_massmail	id	ID
-admin_massmail	type	Type
-admin_massmail	subject	Subject
-admin_massmail	date	Date
-admin_massmail	last_user_id_mailed	Last user_id mailed
 project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>possono accedere a questa pagina e altre pagine per l'amministrazione del progetto</dd><dt><strong>Tecnici per il rilascio</strong></dt><dd>possono rilasciare file (tutti gli amministratori di progetti sono tecnici del rilascio)</dd><dt><strong>Tecnici degli strumenti (T)</strong></dt><dd>a loro possono essere assegnati bug/attivit&agrave;/patch, etc</dd><dt><strong>Amministratori di strumenti (A)</strong></dt><dd>possono effettuare cambiamenti a bug/attivit&agrave;, etc e amministrare il progetto </dd><dt><strong>Nessun permesso sullo strumento(N/A)</strong></dt><dd>Lo sviluppatore non ha permessi sullo strumento </dd><dt><strong>Moderatori</strong> (forums)</dt><dd>possono cancellar i messaggi dai forum</dd><dt><strong>Editor</strong> (Gestore progetti)</dt><dd>possono aggiornare/modifica/eliminare la documentazione del progetto.</dd></dl>
 project_admin_utils	admin	Amministra
 project_admin_utils	user_permissions	Permessi utente
@@ -1633,8 +1537,7 @@ project_admin_editgroupinfo	active_features	Funzionalit&agrave; attive;
 project_admin_editgroupinfo	use_mailing_lists	Usa Mailing Lists
 project_admin_editgroupinfo	use_surveys	Usa sondaggi
 project_admin_editgroupinfo	use_forums	Usa Forum
-project_admin_editgroupinfo	use_pm	Usa Attivit&agrave;
-project_admin_editgroupinfo	use_pm	Usa CVS
+project_admin_editgroupinfo	use_pm	Usa gestore attivit&agrave;
 project_admin_editgroupinfo	enable_pserver	Abilita pserver
 project_admin_editgroupinfo	enable_anonymous_cvs	Abilita CVS anonimo
 project_admin_editgroupinfo	use_news	Usa News
@@ -1660,7 +1563,6 @@ project_admin_editpackages	new_package_name	Nuovo nome package
 project_admin_editpackages	create_package	Crea package
 project_admin_editpackages	updated_package	Package aggiornato
 project_admin_editpackages	added_package	Package aggiunto
-project_admin_qrs	title	Quick Release System
 project_admin_qrs	required_release_name	&Egrave; necessario definire un nome di rilascio
 project_admin_qrs	required_package	Egrave; necessario selezionare un package
 project_admin_qrs	required_file	Egrave; necessario selezionare un file.
@@ -1725,8 +1627,6 @@ project_admin_editimages	file_description_required	File description is required
 project_admin_editimages	properties_updated	Propriet&agrave; aggiornate
 project_admin_editimages	intro	Si possono memorizzare nel database fino a $1 MB di dati multimediali (immagini bitmap e vettoriali, suoni, modelli tridimensionali).
 project_admin_editimages	replace	Sostituisci con nuovo file (opzionale)
-project_admin_editimages	description	Descrizione
-project_admin_editimages	mime_type	MIME Type
 project_admin_editimages	add_data	Aggiungi dati multimediali
 project_admin_editimages	local_filename	Local filename
 project_admin_editimages	add_file	Aggiungi file
@@ -1734,7 +1634,6 @@ project_admin_editimages	edit	Modifica
 project_admin_editimages	id	ID
 project_admin_editimages	uploaded	Inserito
 project_admin_editimages	name	Nome
-project_admin_editimages	mime_type	MIME Type
 project_admin_editimages	size	Dimensioni
 project_admin_editimages	dims	Dims
 project_admin_editimages	description	Descrizione
@@ -1830,7 +1729,6 @@ project_stats_utils	project_did_not_exits	Il progetto non esisteva in quella dat
 project_stats_utils	stats_for_months	Statistiche per gli ultimi $1 mesi
 project_stats_utils	month	Mese
 project_stats_utils	stats_all_time	Statistiche per l'intera durata del progetto
-project_stats_utils	month	Durate
 project_stats_utils	days	Giorni
 project_stats_graph	statistics	$1 statistiche sul progetto: $1
 project_stats_graph	page_view_days	Pagine visualizzate (rosso) e download (blu) per gli ultimi $1 giorni
@@ -1897,7 +1795,6 @@ people_editjob	no_such	Nessuna posizione disponibile per il progetto
 people_editjob	skill_explains	<p>&Egrave; possibile cambiare l'elenco delle competenze necessarie per questa posizione. </p><p>Tutte le posizioni verranno chiuse automaticamente dopo due settimane.</p>
 people_editjob	update_description	Aggiorna descrizioni
 people_editjob	finished	Finito
-people_editjob	title	Modifica posizione
 people_editprofile	section	Progetti in ricerca d'aiuto
 people_editprofile	update_failed	Aggiornamento utente fallito
 people_editprofile	update_ok	Aggiornamento utente eseguito
@@ -1908,7 +1805,6 @@ people_editprofile	failed_to_add_skill	Aggiunta competenza fallita
 people_editprofile	skill_added_ok	Competenza aggiunta
 people_editprofile	no_skills_selected	Nessuna competenza selezionata
 people_editprofile	failed_update_skills	Aggiornamento competenze fallita
-people_editprofile	fill_all_required_fields	Riempire tutti i campi obbligatori
 people_editprofile	skills_edit	Modifica comptetenze
 people_editprofile	edit_skills	Modifica posizione
 people_editprofile	change_required_fields	Cambia i campi richiesti e premi "Invia" alla fine della pagina
@@ -1923,10 +1819,9 @@ people_editprofile	from_skills_database	dal database delle competenze. Questa op
 people_editprofile	are_you_sure	Sei <strong>sicuro</strong> di voler continuare?
 people_editprofile	skill_deletion_cancelled	Cancellazione competenza annullata
 people_editprofile	edit_your_profile	Modifica il profilo
-people_editprofile	user_fetch_failed	User fetch FAILED
 people_editprofile	no_such_user	L'utente non esiste
 people_editprofile	edit_public_permissions	Modifica permessi pubblici
-people_editprofile	following_options	Le segeunti opzioni determinano se altri possono vedere le tue competenze. 
+people_editprofile	following_options	Le seguenti opzioni determinano se altri possono vedere le tue competenze. 
 people_editprofile	publicly_viewable	Visibile da tutti
 people_editprofile	update_permission	Aggiorna permessi
 people_editprofile	no_skill_types_in_database	Nessun tipo competenze disponibile nel database (tabella skills_data_types)
@@ -1951,7 +1846,6 @@ people_proj	title	Progetti in ricerca di aiuto
 people_viewjob	section	Progetti in ricerca di aiuto
 people_viewjob	title	$1 cercato per $2
 people_viewjob	posting_id_not_found	ID non trovato
-people_viewjob	view_a_job	Visualizza una posizione
 people_viewjob	no_such_posting	Questa posizione non &egrave; disponibile per questo progetto
 people_viewjob	view_a_job	Visualizza posizione
 people_viewjob	contact_info	Informazioni sul contatto
@@ -2065,7 +1959,7 @@ survey_admin_index	edit_existing_question	Modifica domande esistenti
 survey_admin_index	show_results	Visualizza risultati sondaggi
 survey_admin_index	its_simple_to_create	<p>&Egrave; semplice aggiiungere un sondaggio.<ol><li>Crea domande e commenti utilizzando i form.</li><li>Crea un sondaggio, elenca le domande (seleziona dal <strong>tuo</strong> elenco di domande).</li><li>Linka al sondaggio usando il formato: $1 dove XX &egrave; il numero del sondaggio
 survey_admin_index	you_can_now_activate	&Egrave; adesso possibile attivare/disattivare i sondaggi sulla pagina di $1 Modifica sondaggi esistenti $2
-survey_show_result_comment	title	RisuSurvey Risultati aggregati
+survey_show_result_comment	title	Risultati aggregati dei sondaggi
 survey_show_result_comment	permission_denied	Utente non autorizzato
 survey_show_result_comment	found	Trovato
 survey_show_result_comment	question	Domanda
@@ -2122,7 +2016,6 @@ snippet_addversion	error_snippet_doesnt_exist	Error, Errore - il frammento non e
 snippet_addversion	error_doing_snippet_version_insert	ERRORE NELL'INSERMENTO DELLA VERSIONE DEL FRAMMENTO
 snippet_addversion	snippet_version_added_successfully	Versione del frammento aggiunto
 snippet_addversion	error_go_back_and_fill_in_all	Errore - Torna indietro e riempi tutti i campi
-snippet_addversion	title	Inserisci una nuova versione di un frammento	
 snippet_addversion	if_you_have_modified_a_version	Se hai modificato una versione di un frammento e pensi che valga la pena di condividere queste modifiche, aggiungi una nuova versione.
 snippet_addversion	version	Versione
 snippet_addversion	changes	Cambiamenti
@@ -2234,7 +2127,6 @@ snippet_utils	download_version	Scarica versione
 snippet_utils	snippet_title	Titolo
 snippet_utils	author	Autore
 snippet_utils	no_snippets_are_in_this_package	Nessun frammento nel package
-snippet_utils	category	Categoria
 snippet_utils	language	Linguaggio:
 snippet_utils	description	Descrizione
 snippet_utils	type	Tipo
@@ -2264,39 +2156,11 @@ snippet_add_snippet_to_package	section	Raccolta di frammenti di codice
 snippet_add_snippet_to_package	title	Add Snippet To Package
 snippet_addversion	section	Raccolta di frammenti di codice
 snippet_addversion	title	Post A New Version
-snippet_browse	section	Raccolta di frammenti di codice
-snippet_browse	title	Browse Snippets
-snippet_delete	section	Raccolta di frammenti di codice
-snippet_delete	title	Delete A Snippet
-snippet_detail	section	Raccolta di frammenti di codice
-snippet_detail	title	View Snippet Detail
-snippet_package	section	Raccolta di frammenti di codice
-snippet_package	title	Create Snippet Package
 snippet_submit	section	Raccolta di frammenti di codice
 snippet_submit	title	Inserisci frammento
 snippet_caching	intro	<p>L'obiettivo di questo archivio &egrave; quello di poter condividere frammenti di codice, script e funzioni .</p><p>Puoi creare un nuovo frammento e poi aggiungere versioni aggiuntive dello stesso frammento.</p><p>Una volta creati i frammenti, possono essere raggruppati in "package" di frammenti. Il package pu&ograve; contenere pi&ugrave; versioni dello stesso frammento.</p><p>&nbsp;</p><h3>Visualizza frammenti</h3>	<p>Puoi visualizzare i frammenti:</p>
 snippet_caching	browse_by_category	Visualizza per categoria
 snippet_caching	browse_by_language	Visualizza per linguaggio
-help	page_information	Page Information
-help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
-help_tracker	status	This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'.
-help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
-help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
-help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
-help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
-help_tracker	data_type	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
-help_tracker	resolution	The resolution option represents a tracker items resolution if any.
-help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
-help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
-help_tracker	comment	The comment textarea allows you to attach a comment to a tracker item when a canned response isn't appropriate.
-help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
-help_tracker	monitor	You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!
-help_tracker	unknown_help_request	UNKNOWN HELP REQUEST:
-help_tracker	close_window	Close Window
-help_trove_cat	no_such_category	No such trove category
-help_trove_cat	full_category_name	Full Category Name
-help_trove_cat	short_name	Short Name
-help_trove_cat	description	Description
 account_lostlogin	title	Conferma di password persa
 account_lostpw	title	Persa la password?
 account_register	iewarn	<H2><FONT COLOR="RED">Utenti di Internet Explorer devono effettuare l'aggiornamento alla versione 5.01 o maggiore, preferibilmente con SSL a 128-bit SSL oppure usare 4.7 o maggiore</FONT></H2>
@@ -2311,3 +2175,59 @@ contact	about_blurb	<p>Questa &egrave; la pagina di contatti per <b>$1</b> -- se
 contact	title	Contatta $1
 docman	error_invalid_file_attack	Errore: attacco file non valido $1
 docman_admin_addgroups	section	Amministrazione document Manager
+admin_tabfiles	delete_lang	[cancella]
+admin_tabfiles	edit_the_langfile	Modifica la linga $1
+admin_tabfiles	language	Lingua
+admin_tabfiles	modify_the	Mofifica $1:
+admin_table	edit_the	Modifica la
+admin_table	table	Tabella
+admin_trove_cat_add	add_new_trove_category	Aggiungi nuova categoria trove
+admin_trove_cat_add	title	Amministrazione sito: Trove - Aggiungi nodo	
+admin_trove_cat_add	edit_trove_category	Modifica categoria trove
+admin_trove_cat_add	cant_delete_has_subcategories	Impossibile cancellare, la categoria ha sottocategorie
+admin_trove_cat_add	error_in_trove_operation	Erorre nella operazione
+admin_trove_cat_add	error_in_trove_operation_cant_delete	Erorre nella operazione, impossibile cancellare categorie definita come default in local.inc
+admin_trove_cat_add	new_category_description	Descrizione nuova categoria (VARCHAR 255)	
+admin_trove_cat_add	new_category_full_name	Nome completo nuova categoria (VARCHAR 80)	
+admin_trove_cat_add	new_category_short_name	Nome corto nuova categoria (nessuno spazio, simili ai nomi unix)
+admin_trove_cat_add	no_such_category	Questa categoria non esiste
+admin_trove_cat_add	parent_category	Categoria padre
+admin_trove_cat_add	title	Amministrazione sito: Trove - modifica categoria
+admin_unsubscribe	admin_initiaded_mail	Mailing iniziati da amministratori
+admin_unsubscribe	all	TUTTI
+admin_unsubscribe	all_site_mailing	Tutti i mailing
+admin_unsubscribe	error_unsubscribe_user	Errore, impossibile eliminare abbonamento
+admin_unsubscribe	mail	MAIL
+admin_unsubscribe	show_user_matching	visualizza utenti utilizzando una espressione regolare
+admin_unsubscribe	
+admin_unsubscribe	subscription_maintenance	Manutenzione degli abbonamenti ai mailing del sito
+admin_unsubscribe	title	Manutenzione degli abbonamenti ai mailing del sito
+admin_unsubscribe	unsubscribe	Disdici abbonamento
+admin_unsubscribe	unsubscribe_user	Disdici abbonamento per utente specifico
+admin_unsubscribe	use_fields_below	Utilizza i campi seguenti per trovare gli utenti che corrispondono al pattern con lo username, nome vero o e-mail. Viene effettuata una ricerca per sottostringe, utilizza '%' all'interno del pattern per specifare 0 o più caratteri. Seleziona il nome dell\'utente per  eliminarlo dalla sottoscrizione.	
+admin_unsubscribe	user_unsubscribed	Utente eliminato dal abbonamenteo	
+admin_unsubscribe	you_can_unsubscribe	Puoi eliminare gli utenti abbonati sia per i mailing degli amministratori che per quelli automatici, come i forum e le notifiche di nuovi rilasci di file.
+admin_useredit	deleted	Cancellato (D)
+admin_userlist	user_updated	Utente aggiornato allo stato $1
+admin_userlist	userlist	: Elenco utenti
+admin_vhost	add_virtual_host	Aggiungi host virtuale
+admin_vhost	cgi_dir	CGI Dir
+admin_vhost	error_adding_vhost	Errore nell'aggiunta del VHOST: 
+admin_vhost	error_updating_vhost	Errore nell'aggiornamento del VHOST: 
+admin_vhost	get_info	Ricava informazioni
+admin_vhost	group	Gruppo
+admin_vhost	group_unix_name	Nome unix del gruppo
+admin_vhost	htdocs_dir	Directory Htdocs 
+admin_vhost	no_such_host	Nessun VHOST trovato con queste caratteristiche:
+admin_vhost	operations	Operazioni
+admin_vhost	scheduled_for_creation	schedulate per la creazione sul gruppo
+admin_vhost	the_provided_group	Il nome grupo inserito non esiste
+admin_vhost	title	Amministrazione sito
+admin_vhost	update	Aggiorna
+admin_vhost	update_record	Aggiorna record:
+admin_vhost	vhost_id	ID VHOST 
+admin_vhost	vhost_name	Nome VHOST
+admin_vhost	virtual_host	Host virtuale:
+admin_vhost	virtual_host_administration	Amministrazione host virtuale
+admin_vhost	virtual_host_entry_updated	Aggiornato host virutale
+admin_vhost	virtual_host_name	Nome del host virtuale
