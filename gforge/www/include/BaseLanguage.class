@@ -54,6 +54,11 @@ class BaseLanguage {
 		if (file_exists ($fname)) {
 			$this->loadLanguageFile($fname) ;
 		}
+		//Customization by theme
+		$ftname = '/etc/sourceforge/languages-local/'.$GLOBALS['sys_theme'].'/'.$lang.'.tab' ;
+		if (file_exists ($ftname)) {
+			$this->loadLanguageFile($ftname) ;
+		}
 		$this->lang = $lang ;
 	}
 
