@@ -1,6 +1,5 @@
 <?php
 /**
-<<<<<<< index.php
  * GForge SCM Frontend
  *
  * Copyright 2004 (c) Roland Mas, GForge LLC
