@@ -134,6 +134,37 @@ Include /etc/gforge/httpd.common
   </IfModule>
 </VirtualHost>
 
+<VirtualHost {ip_address}:443>
+  ServerName {cvs_host}
+
+  <IfModule mod_ssl.c>
+    SSLEngine on
+    SSLCertificateFile /etc/apache/ssl.crt/server.crt
+    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    <Files ~ "\.(cgi|shtml)$">
+      SSLOptions +StdEnvVars
+    </Files>
+    <Directory "/usr/lib/cgi-bin">
+      SSLOptions +StdEnvVars
+    </Directory>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <IfModule apache_ssl.c>
+    SSLEnable
+  </IfModule>
+
+  DocumentRoot /usr/share/gforge/cvs
+  ScriptAlias /cgi-bin/ /usr/lib/gforge/cgi-bin/
+  # Alias /cvstarballs/ /var/lib/gforge/cvstarballs/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
 #
 # Download host
 #
