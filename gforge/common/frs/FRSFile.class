@@ -110,7 +110,7 @@ class FRSFile extends Error {
 			AND frs_file.filename='$name'
 			AND frs_package.group_id='".$this->FRSRelease->FRSPackage->Group->getId()."'");
 		if (!$resfile || db_numrows($resfile) > 0) {
-			$this->setError('That Filename already exists in this projectspace '.db_error());
+			$this->setError('That filename already exists in this project space '.db_error());
 			return false;
 		}
 
