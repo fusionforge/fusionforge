@@ -17,7 +17,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah-
 echo notepad_func();
 
 ?>
-	<h2>[ #<?php echo $ah->getID(); ?> ] <?php echo $ah->getSummary(); ?></h2>
+	<h2>[#<?php echo $ah->getID(); ?>] <?php echo $ah->getSummary(); ?></h2>
 
 	<table width="100%">
 <?php

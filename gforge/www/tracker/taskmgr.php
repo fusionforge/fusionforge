@@ -67,7 +67,7 @@ if ($add_to_task) {
 		<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
 		<p>
 		<form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
-		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
+		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'<p>
 		<strong>'.$Language->getText('tracker_taskmgr','task_manager_project').':</strong><br />';
 	echo $pg->getName().'
 		<input type="hidden" name="group_project_id" value="'.$pg->getID().'">
@@ -117,7 +117,7 @@ if ($add_to_task) {
 
 	echo '<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
 		<p><form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
-		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
+		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [#'.$a->getID().'] '.$a->getSummary().'<p>
 		<strong>'.$Language->getText('tracker_taskmgr','task_manager_project').':</strong><br />
 		<select name="group_project_id">';
 	for ($i=0; $i<count($pg_arr); $i++) {

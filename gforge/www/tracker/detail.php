@@ -16,7 +16,7 @@ echo $ath->header(array ('title'=>$Language->getText('tracker_detail','title').'
 echo notepad_func();
 
 ?>
-	<h2>[ #<?php echo $ah->getID(); ?> ] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h2>
+	<h2>[#<?php echo $ah->getID(); ?>] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h2>
 
 	<table cellpadding="0" width="100%">
 <?php
