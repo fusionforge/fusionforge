@@ -1,4 +1,4 @@
-sourceforge (2.6-0+11+) unstable; urgency=low
+sourceforge (2.6-0+12) unstable; urgency=low
 
   * [Roland] Added support for local overloading of the default
     translation files.  See README.Custom for details.
@@ -38,9 +38,9 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Christian] added checks in sourceforge-config
   * [Christian] install/desinstall cycle support for common, web-apache,
     db-postgress
-  * [Christian] Added ssh-nonfree support 
+  * [Christian] Added ssh-nonfree support
 
- -- Christian Bayle <bayle@debian.org>  Fri, 21 Jun 2002 11:07:27 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 26 Jun 2002 14:35:22 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
