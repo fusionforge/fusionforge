@@ -215,7 +215,7 @@ class Group extends Error {
 
 			if (!$perm || !is_object($perm) || !$perm->isMember()) {
 				// cannot use $Language as it is not created yet
-				$this->setError('Permission denied');
+				$this->setError('Permission denied', ERROR__PERMISSION_DENIED_ERROR);
 				return false;
 			}
 		}
