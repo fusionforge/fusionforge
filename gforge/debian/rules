@@ -2,6 +2,7 @@
 # debian/rules that uses debhelper.
 # GNU copyright 1997 to 1999 by Joey Hess (sample file)
 # Copyright 2000 to 2002 by Roland Mas and Christian Bayle for the Sourceforge package
+# Copyright 2002 to 2003 by Roland Mas and Christian Bayle for the Gforge package
 
 # Uncomment this to turn on verbose mode.
 #export DH_VERBOSE=1
@@ -76,7 +77,7 @@ install: build
 	#cp $(CURDIR)/www/project/admin/qrs.php.debian $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/project/admin/qrs.php
 	cp -r common $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name CVS -type d | xargs rm -rf
-	find $(CURDIR)/debian/gforge-web-apache -name \*.uu -type f | xargs rm
+	find $(CURDIR)/debian/gforge-web-apache -name \*.uu -type f | xargs rm -f
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type f -exec chmod 0644 {} \;
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/common -type d -exec chmod 0755 {} \;
