@@ -22,10 +22,8 @@ use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
     $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
     $skill_list/ ;
 
-sub is_lesser ( $$ ) ;
-sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
-sub parse_sql_file ( $ ) ;
+sub convert_column_to_charset ( $$$$$ ) ;
 
 require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
 require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
@@ -40,1120 +38,708 @@ debug "Do not worry unless told otherwise." ;
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
-    my ($sth, @array, $version, $action, $path, $target) ;
-
-    # Do we have at least the basic schema?
-
-    $query = "SELECT count(*) from pg_class where relname = 'groups' and relkind = 'r'";
-    # debug $query ;
-    $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    # Create Sourceforge database
-
-    if ($array [0] == 0) {	# No 'groups' table
-	# Installing SF 2.6 from scratch
-	$action = "installation" ;
-	debug "Creating initial Sourceforge database from files." ;
-
-	&create_metadata_table ("2.5.9999") ;
-
-	$query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-	if ($array[0] == 0) {
-	    debug "Updating debian_meta_data table." ;
-	    $query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', 'scratch-to-2.6')" ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	debug "Committing." ;
-	$dbh->commit () ;
-
-    } else {			# A 'groups' table exists
-	$action = "upgrade" ;
-
-	$query = "SELECT count(*) from pg_class where relname = 'debian_meta_data' and relkind = 'r'";
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-
-	if ($array[0] == 0) {	# No 'debian_meta_data' table
-	    # If we're here, we're upgrading from 2.5-7 or earlier
-	    # We therefore need to create the table
-	    &create_metadata_table ("2.5-7+just+before+8") ;
-	}
-
-	$version = &get_db_version ;
-	if (is_lesser $version, "2.5.9999") {
-	    debug "Found an old (2.5) database, will upgrade to 2.6" ;
-
-	    $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    @array = $sth->fetchrow_array () ;
-	    $sth->finish () ;
-
-	    if ($array[0] == 0) {
-		# debug "Updating debian_meta_data table." ;
-		$query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', '2.5-to-2.6')" ;
-		# debug $query ;
-		$sth = $dbh->prepare ($query) ;
-		$sth->execute () ;
-		$sth->finish () ;
-		debug "Committing." ;
-		$dbh->commit () ;
-	    }
-	}
-    }
-
-    $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
-    # debug $query ;
-    $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array[0] == 0) {
-	$path = "" ;
-    } else {
-	$query = "SELECT value from debian_meta_data where key = 'current-path'";
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-
-	$path = $array[0] ;
-    }
-
-  PATH_SWITCH: {
-      ($path eq 'scratch-to-2.6') && do {
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.1+global+data+done" ;
-	  if (is_lesser $version, $target) {
-	      my @filelist = qw{ /usr/lib/gforge/db/sf-2.6-complete.sql } ;
-	      # TODO: user_rating.sql
-
-	      foreach my $file (@filelist) {
-		  debug "Processing $file" ;
-		  @reqlist = @{ &parse_sql_file ($file) } ;
-
-		  foreach my $s (@reqlist) {
-		      $query = $s ;
-		      # debug $query ;
-		      $sth = $dbh->prepare ($query) ;
-		      $sth->execute () ;
-		      $sth->finish () ;
-		  }
-	      }
-	      @reqlist = () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.2+local+data+done" ;
-	  if (is_lesser $version, $target) {
-	      debug "Adding local data." ;
-
-	      do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
-
-	      my ($login, $pwd, $md5pwd, $email, $noreplymail, $date) ;
-
-	      $login = $admin_login ;
-	      $pwd = $admin_password ;
-	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
-	      chomp $md5pwd ;
-	      $md5pwd =~ s/(.{32}) .*/$1/ ;
-	      $email = $server_admin ;
-	      $noreplymail="noreply\@$domain_name" ;
-	      $date = time () ;
-
-	      @reqlist = (
-			  "UPDATE groups SET homepage = '$domain_name/admin/' where group_id = 1",
-			  "UPDATE groups SET homepage = '$domain_name/news/' where group_id = 2",
-			  "UPDATE groups SET homepage = '$domain_name/stats/' where group_id = 3",
-			  "UPDATE groups SET homepage = '$domain_name/peerrating/' where group_id = 4",
-			  "UPDATE users SET email = '$noreplymail' where user_id = 100",
-			  "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'shell',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
-			  "SELECT setval ('\"users_pk_seq\"', 102, 'f')",
-			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
-			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 2, 'A')",
-			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 3, 'A')",
-			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 4, 'A')"
-			  ) ;
-
-	      foreach my $s (@reqlist) {
-		  $query = $s ;
-		  # debug $query ;
-		  $sth = $dbh->prepare ($query) ;
-		  $sth->execute () ;
-		  $sth->finish () ;
-	      }
-	      @reqlist = () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.3+skills+done" ;
-	  if (is_lesser $version, $target) {
-	      debug "Inserting skills." ;
-
-	      foreach my $skill (split /;/, $skill_list) {
-		  push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
-	      }
-
-	      foreach my $s (@reqlist) {
-		  $query = $s ;
-		  # debug $query ;
-		  $sth = $dbh->prepare ($query) ;
-		  $sth->execute () ;
-		  $sth->finish () ;
-	      }
-	      @reqlist = () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.6-0+checkpoint+1" ;
-	  if (is_lesser $version, $target) {
-	      debug "Updating debian_meta_data table." ;
-	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
-	      # debug $query ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  last PATH_SWITCH ;
-      } ;
-
-      ($path eq '2.5-to-2.6') && do {
-
-	  $version = &get_db_version ;
-	  $target = "2.5-8" ;
-	  if (is_lesser $version, $target) {
-	      debug "Adding row to people_job_category." ;
-	      $query = "INSERT INTO people_job_category VALUES (100, 'Undefined', 0)" ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5-25" ;
-	  if (is_lesser $version, $target) {
-	      debug "Adding row to supported_languages." ;
-	      $query = "INSERT INTO supported_languages VALUES (15, 'Korean', 'Korean.class', 'Korean', 'kr')" ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5-27" ;
-	  if (is_lesser $version, $target) {
-	      debug "Fixing unix_box entries." ;
-
-	      $query = "update groups set unix_box = 'shell'" ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      $query = "update users set unix_box = 'shell'" ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      debug "Also fixing a few sequences." ;
-
-	      &bump_sequence_to ("bug_pk_seq", 100) ;
-	      &bump_sequence_to ("project_task_pk_seq", 100) ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
- 	  $version = &get_db_version ;
- 	  $target = "2.5-30" ;
- 	  if (is_lesser $version, $target) {
- 	      debug "Adding rows to supported_languages." ;
-	      @reqlist = (
-			  "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian','bg')",
-			  "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek','el')",
-			  "INSERT INTO supported_languages VALUES (18,'Indonesian','Indonesian.class','Indonesian','id')",
-			  "INSERT INTO supported_languages VALUES (19,'Portuguese (Brazillian)','PortugueseBrazillian.class','PortugueseBrazillian', 'br')",
-			  "INSERT INTO supported_languages VALUES (20,'Polish','Polish.class','Polish','pl')",
-			  "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese', 'pt')",
-			  "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian','ru')"
-			  ) ;
-
-	      foreach my $s (@reqlist) {
-		  $query = $s ;
-		  # debug $query ;
-		  $sth = $dbh->prepare ($query) ;
-		  $sth->execute () ;
-		  $sth->finish () ;
-	      }
-	      @reqlist = () ;
-
- 	      &update_db_version ($target) ;
- 	      debug "Committing." ;
- 	      $dbh->commit () ;
- 	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5-32" ;
-	  if (is_lesser $version, $target) {
-	      debug "Fixing unix_uid entries." ;
-
-	      $query = "UPDATE users SET unix_uid = nextval ('unix_uid_seq') WHERE unix_status != 'N' AND status != 'P' AND unix_uid = 0" ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.1+temp+data+dropped" ;
-	  if (is_lesser $version, $target) {
-	      debug "Preparing to upgrade your database - dropping temporary tables" ;
-
-	      my @tables = qw/ user_metric_tmp1_1 user_metric_tmp1_2
-		  user_metric_tmp1_3 user_metric_tmp1_4
-		  user_metric_tmp1_5 user_metric_tmp1_6
-		  user_metric_tmp1_7 user_metric_tmp1_8 user_metric1
-		  user_metric2 user_metric3 user_metric4 user_metric5
-		  user_metric6 user_metric7 user_metric8
-		  project_counts_tmp project_metric_tmp
-		  project_metric_tmp1 project_counts_weekly_tmp
-		  project_metric_weekly_tmp project_metric_weekly_tmp1
-		  / ;
-
-	      my @sequences = qw/ user_metric1_ranking_seq
-		  user_metric2_ranking_seq user_metric3_ranking_seq
-		  user_metric4_ranking_seq user_metric5_ranking_seq
-		  user_metric6_ranking_seq user_metric7_ranking_seq
-		  user_metric8_ranking_seq project_metric_weekly_seq
-		  trove_treesum_trove_treesum_seq
-		  project_metric_tmp1_pk_seq / ;
-
-	      my @indexes = qw/ idx_project_metric_group
-		  idx_project_metric_weekly_group
-		  user_metric_history_date_userid / ;
-
-	      foreach my $table (@tables) {
-		  &drop_table_if_exists ($table) ;
-	      }
-
-	      foreach my $sequence (@sequences) {
-		  &drop_sequence_if_exists ($sequence) ;
-	      }
-
-	      foreach my $index (@indexes) {
-		  &drop_index_if_exists ($index) ;
-	      }
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.2+data+upgraded" ;
-	  if (is_lesser $version, $target) {
-	      debug "Upgrading your database scheme from 2.5" ;
-
-	      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/sf2.5-to-sf2.6.sql") } ;
-	      foreach my $s (@reqlist) {
-		  $query = $s ;
-		  # debug $query ;
-		  $sth = $dbh->prepare ($query) ;
-		  $sth->execute () ;
-		  $sth->finish () ;
-	      }
-	      @reqlist = () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.3+artifact+transcoded" ;
-	  if (is_lesser $version, $target) {
-	      debug "Transcoding the artifact data fields" ;
-
-	      $query = "SELECT id,bin_data FROM artifact_file ORDER BY id ASC" ;
-	      # debug $query ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      while (@array = $sth->fetchrow_array) {
-		  my $query2 = "UPDATE artifact_file SET bin_data='" ;
-		  $query2 .= encode_base64 (decode_entities ($array [1])) ;
-		  $query2 .= "' WHERE id=" ;
-		  $query2 .= $array [0] ;
-		  $query2 .= "" ;
-		  # debug $query2 ;
-		  my $sth2 =$dbh->prepare ($query2) ;
-		  $sth2->execute () ;
-		  $sth2->finish () ;
-	      }
-	      $sth->finish () ;
-
-	      @reqlist = () ;
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.5.9999.4+groups+inserted" ;
-	  if (is_lesser $version, $target) {
-	      debug "Inserting missing groups" ;
-
-	      @reqlist = (
-			  "INSERT INTO groups (group_name, homepage,
-                           is_public, status, unix_group_name,
-                           unix_box, http_domain, short_description,
-                           cvs_box, license, register_purpose,
-                           license_other, register_time, rand_hash,
-                           use_mail, use_survey, use_forum, use_pm,
-                           use_cvs, use_news, type, use_docman,
-                           new_task_address, send_all_tasks,
-                           use_pm_depend_box)
-       	                   VALUES ('Stats', '$domain_name/top/', 0,
-       	    	           'A', 'stats', 'shell', NULL, NULL, 'cvs',
-       	    	           'website', NULL, NULL, 0, NULL, 1, 0, 0, 0, 0,
-       	    	           1, 1, 1, '', 0, 0)",
-			  "INSERT INTO groups (group_name, homepage,
-                           is_public, status, unix_group_name,
-                           unix_box, http_domain, short_description,
-                           cvs_box, license, register_purpose,
-                           license_other, register_time, rand_hash,
-                           use_mail, use_survey, use_forum, use_pm,
-                           use_cvs, use_news, type, use_docman,
-                           new_task_address, send_all_tasks,
-                           use_pm_depend_box)
-                           VALUES ('Peer Ratings', '$domain_name/people/', 0,
-                           'A', 'peerrating', 'shell', NULL, NULL, 'cvs1',
-                           'website', NULL, NULL, 0, NULL, 1, 0, 0, 0, 0,
-                           1, 1, 0, '', 0, 0)"
-			  ) ;
-
-	      foreach my $s (@reqlist) {
-		  $query = $s ;
-		  # debug $query ;
-		  $sth = $dbh->prepare ($query) ;
-		  $sth->execute () ;
-		  $sth->finish () ;
-	      }
-	      @reqlist = () ;
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  $version = &get_db_version ;
-	  $target = "2.6-0+checkpoint+1" ;
-	  if (is_lesser $version, $target) {
-	      debug "Database has successfully been converted." ;
-	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
-	      # debug $query ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      &update_db_version ($target) ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-	  last PATH_SWITCH ;
-      } ;
-  } # PATH_SWITCH
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+2" ;
-    if (is_lesser $version, $target) {
-	debug "Updating permissions on system groups." ;
-	$query = "UPDATE groups SET group_name='Site Admin', is_public=1 WHERE group_id=1" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-	$query = "UPDATE groups SET group_name='Site News Admin', is_public=1 WHERE group_id=$sys_news_group" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+3" ;
-    if (is_lesser $version, $target) {
-	debug "Creating table group_cvs_history." ;
-	$query = "CREATE TABLE group_cvs_history (
-            id integer DEFAULT nextval('group_cvs_history_pk_seq'::text) NOT NULL,
-            group_id integer DEFAULT '0' NOT NULL,
-            user_name character varying(80) DEFAULT '' NOT NULL,
-            cvs_commits integer DEFAULT '0' NOT NULL,
-            cvs_commits_wk integer DEFAULT '0' NOT NULL,
-            cvs_adds integer DEFAULT '0' NOT NULL,
-            cvs_adds_wk integer DEFAULT '0' NOT NULL,
-            PRIMARY KEY (id))";
-    	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+4" ;
-    if (is_lesser $version, $target) {
-	debug "Registering Savannah themes." ;
-
-	$query = "SELECT max(theme_id) FROM themes" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-	my $maxid = $array [0] ;
-
-	&bump_sequence_to ("themes_pk_seq", $maxid) ;
-
-	@reqlist = (
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_reverse', 'Savannah Reverse')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_sad', 'Savannah Sad')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_savannah', 'Savannah Original')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_slashd', 'Savannah SlashDot')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_startrek', 'Savannah StarTrek')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_transparent', 'Savannah Transparent')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_water', 'Savannah Water')",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_www.gnu.org', 'Savannah www.gnu.org')"
-		    ) ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+5" ;
-    if (is_lesser $version, $target) {
-	debug "Registering yet another Savannah theme." ;
-
-	$query = "INSERT INTO themes (dirname, fullname) VALUES ('savannah_darkslate', 'Savannah Dark Slate')";
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+6" ;
-    if (is_lesser $version, $target) {
-	debug "Updating language codes." ;
-
-	@reqlist = (
-		    "UPDATE supported_languages SET language_code='en' where classname='English'",
-		    "UPDATE supported_languages SET language_code='ja' where classname='Japanese'",
-		    "UPDATE supported_languages SET language_code='iw' where classname='Hebrew'",
-		    "UPDATE supported_languages SET language_code='es' where classname='Spanish'",
-		    "UPDATE supported_languages SET language_code='th' where classname='Thai'",
-		    "UPDATE supported_languages SET language_code='de' where classname='German'",
-		    "UPDATE supported_languages SET language_code='it' where classname='Italian'",
-		    "UPDATE supported_languages SET language_code='no' where classname='Norwegian'",
-		    "UPDATE supported_languages SET language_code='sv' where classname='Swedish'",
-		    "UPDATE supported_languages SET language_code='zh' where classname='Chinese'",
-		    "UPDATE supported_languages SET language_code='nl' where classname='Dutch'",
-		    "UPDATE supported_languages SET language_code='eo' where classname='Esperanto'",
-		    "UPDATE supported_languages SET language_code='ca' where classname='Catalan'",
-		    "UPDATE supported_languages SET language_code='ko' where classname='Korean'",
-		    "UPDATE supported_languages SET language_code='bg' where classname='Bulgarian'",
-		    "UPDATE supported_languages SET language_code='el' where classname='Greek'",
-		    "UPDATE supported_languages SET language_code='id' where classname='Indonesian'",
-		    "UPDATE supported_languages SET language_code='pt' where classname='Portuguese (Brazillian)'",
-		    "UPDATE supported_languages SET language_code='pl' where classname='Polish'",
-		    "UPDATE supported_languages SET language_code='pt' where classname='Portuguese'",
-		    "UPDATE supported_languages SET language_code='ru' where classname='Russian'",
-		    "UPDATE supported_languages SET language_code='fr' where classname='French'"
-		    ) ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+7" ;
-    if (is_lesser $version, $target) {
-	debug "Fixing artifact-related views." ;
-
-	&drop_view_if_exists ("artifact_file_user_vw") ;
-	&drop_view_if_exists ("artifact_history_user_vw") ;
-	&drop_view_if_exists ("artifact_message_user_vw") ;
-	&drop_view_if_exists ("artifactperm_artgrouplist_vw") ;
-	&drop_view_if_exists ("artifactperm_user_vw") ;
-	&drop_view_if_exists ("artifact_vw") ;
-
-	@reqlist = (
-		    "CREATE VIEW artifact_file_user_vw as SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, af.adddate, af.submitted_by, users.user_name, users.realname FROM artifact_file af, users WHERE (af.submitted_by = users.user_id)",
-		    "CREATE VIEW artifact_history_user_vw as SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name FROM artifact_history ah, users WHERE (ah.mod_by = users.user_id)",
-		    "CREATE VIEW artifact_message_user_vw as SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, users.user_id, users.email, users.user_name, users.realname FROM artifact_message am, users WHERE (am.submitted_by = users.user_id)",
-		    "CREATE VIEW artifactperm_artgrouplist_vw as SELECT agl.group_artifact_id, agl.name, agl.description, agl.group_id, ap.user_id, ap.perm_level FROM artifact_perm ap, artifact_group_list agl WHERE (ap.group_artifact_id = agl.group_artifact_id)",
-		    "CREATE VIEW artifactperm_user_vw as SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname FROM artifact_perm ap, users WHERE (users.user_id = ap.user_id)",
-		    "CREATE VIEW artifact_vw as SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name FROM users u, users u2, artifact, artifact_status, artifact_category, artifact_group, artifact_resolution WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id))"
-		    ) ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+8" ;
-    if (is_lesser $version, $target) {
-	debug "Adding integrity constraints between the Trove map tables." ;
-
-	@reqlist = (
-		    "ALTER TABLE trove_group_link ADD CONSTRAINT tgl_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
-		    "ALTER TABLE trove_group_link ADD CONSTRAINT tgl_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
-		    "ALTER TABLE trove_agg ADD CONSTRAINT trove_agg_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
-		    "ALTER TABLE trove_agg ADD CONSTRAINT trove_agg_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
-		    "DELETE FROM trove_treesums WHERE trove_cat_id NOT IN (SELECT trove_cat_id FROM trove_cat)",
-		    "ALTER TABLE trove_treesums ADD CONSTRAINT trove_treesums_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
-		    ) ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+9" ;
-    if (is_lesser $version, $target) {
-	debug "Adding extra fields to the groups table." ;
-
-	@reqlist = (
-		    "ALTER TABLE groups ADD COLUMN use_ftp integer",
-		    "ALTER TABLE groups ALTER COLUMN use_ftp SET DEFAULT 1",
-		    "UPDATE groups SET use_ftp = 1",
-		    "ALTER TABLE groups ADD COLUMN use_tracker integer",
-		    "ALTER TABLE groups ALTER COLUMN use_tracker SET DEFAULT 1",
-		    "UPDATE groups SET use_tracker = 1",
-		    "ALTER TABLE groups ADD COLUMN use_frs integer",
-		    "ALTER TABLE groups ALTER COLUMN use_frs SET DEFAULT 1",
-		    "UPDATE groups SET use_frs = 1",
-		    "ALTER TABLE groups ADD COLUMN use_stats integer",
-		    "ALTER TABLE groups ALTER COLUMN use_stats SET DEFAULT 1",
-		    "UPDATE groups SET use_stats = 1",
-		    "ALTER TABLE groups ADD COLUMN enable_pserver integer",
-		    "ALTER TABLE groups ALTER COLUMN enable_pserver SET DEFAULT 1",
-		    "UPDATE groups SET enable_pserver = 1",
-		    "ALTER TABLE groups ADD COLUMN enable_anoncvs integer",
-		    "ALTER TABLE groups ALTER COLUMN enable_anoncvs SET DEFAULT 1",
-		    "UPDATE groups SET enable_anoncvs = 1",
-		    ) ;
-	foreach my $s (@reqlist) {
-	    $query = $s ;
-	    # debug $query ;
-	    $sth = $dbh->prepare ($query) ;
-	    $sth->execute () ;
-	    $sth->finish () ;
-	}
-	@reqlist = () ;
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+10" ;
-    if (is_lesser $version, $target) {
- 	debug "Updating supported_languages table." ;
-	
-	my $pg_version = &get_pg_version ;
-
-	if (is_lesser $pg_version, "7.3") {
-	    @reqlist = (
-			"ALTER TABLE supported_languages RENAME TO supported_languages_old",
-			"CREATE TABLE supported_languages (language_id integer DEFAULT nextval('supported_languages_pk_seq'::text) NOT NULL, name text, filename text, classname text, language_code character(5))",
-			"INSERT INTO supported_languages SELECT * FROM supported_languages_old",
-			"DROP TABLE supported_languages_old",
-			"ALTER TABLE supported_languages ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id)",
-			"ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL",
-			"ALTER TABLE doc_data ADD CONSTRAINT docdata_languageid_fk FOREIGN KEY (language_id) REFERENCES supported_languages(language_id) MATCH FULL",
-			"UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
-			) ;
-	} else {
-	    @reqlist = (
-			"ALTER TABLE supported_languages RENAME COLUMN language_code TO language_code_old",
-			"ALTER TABLE supported_languages ADD COLUMN language_code character(5)",
-			"UPDATE supported_languages SET language_code = language_code_old",
-			"ALTER TABLE supported_languages DROP COLUMN language_code_old",
-			"UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
-			) ;
-	}
- 	foreach my $s (@reqlist) {
- 	    $query = $s ;
- 	    # debug $query ;
- 	    $sth = $dbh->prepare ($query) ;
- 	    $sth->execute () ;
- 	    $sth->finish () ;
- 	}
- 	@reqlist = () ;
- 	&update_db_version ($target) ;
- 	debug "Committing." ;
- 	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+11" ;
-    if (is_lesser $version, $target) {
- 	debug "Adding tables for the plugin subsystem." ;
-
- 	@reqlist = (
-		    "CREATE SEQUENCE plugins_pk_seq",
-		    "CREATE TABLE plugins (plugin_id integer DEFAULT nextval('plugins_pk_seq'::text) NOT NULL, plugin_name varchar(32) UNIQUE NOT NULL, plugin_desc text, CONSTRAINT plugins_pkey PRIMARY KEY (plugin_id))",
-		    "CREATE SEQUENCE group_plugin_pk_seq",
-		    "CREATE TABLE group_plugin (group_plugin_id integer DEFAULT nextval('group_plugin_pk_seq'::text) NOT NULL, group_id integer, plugin_id integer, CONSTRAINT group_plugin_pkey PRIMARY KEY (group_plugin_id), CONSTRAINT group_plugin_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL, CONSTRAINT group_plugin_plugin_id_fk FOREIGN KEY (plugin_id) REFERENCES plugins(plugin_id) MATCH FULL)",
-		    "CREATE SEQUENCE user_plugin_pk_seq",
-		    "CREATE TABLE user_plugin (user_plugin_id integer DEFAULT nextval('user_plugin_pk_seq'::text) NOT NULL, user_id integer, plugin_id integer, CONSTRAINT user_plugin_pkey PRIMARY KEY (user_plugin_id), CONSTRAINT user_plugin_user_id_fk FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL, CONSTRAINT user_plugin_plugin_id_fk FOREIGN KEY (plugin_id) REFERENCES plugins(plugin_id) MATCH FULL)",
- 		    ) ;
- 	foreach my $s (@reqlist) {
- 	    $query = $s ;
- 	    # debug $query ;
- 	    $sth = $dbh->prepare ($query) ;
- 	    $sth->execute () ;
- 	    $sth->finish () ;
- 	}
- 	@reqlist = () ;
- 	&update_db_version ($target) ;
- 	debug "Committing." ;
- 	$dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+12" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021125.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021125.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+13" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021212.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021212.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+14" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021213.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021213.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+15" ;
-    if (is_lesser $version, $target) {
-      debug "Transcoding documentation data fields" ;
-      $query = "SELECT docid,data FROM doc_data ORDER BY docid ASC" ;
-      # debug $query ;
-      $sth = $dbh->prepare ($query) ;
-      $sth->execute () ;
-      while (@array = $sth->fetchrow_array) {
-	  my $query2 = "UPDATE doc_data SET data='" ;
-	  $query2 .= encode_base64 (decode_entities ($array [1])) ;
-	  $query2 .= "', filename='file".$array [0].".html'";
-	  $query2 .= ", filetype='text/html'"; 
-	  $query2 .= " WHERE docid=" ;
-	  $query2 .= $array [0] ;
-	  $query2 .= "" ;
-	  # debug $query2 ;
-	  my $sth2 =$dbh->prepare ($query2) ;
-	  $sth2->execute () ;
-	  $sth2->finish () ;
-      }
-      $sth->finish () ;
-
-      @reqlist = () ;
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+16" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021214.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021214.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+17" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021215.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021215.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+18" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021216.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021216.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+19" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20021223.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021223.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+20" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030102.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030102.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+21" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030105.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030105.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+22" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030107.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030107.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+23" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030109.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030109.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+24" ;
-    if (is_lesser $version, $target) {
-
-      debug "Adjusting language sequense" ;
-
-	$query = "SELECT max(language_id) FROM supported_languages" ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-	my $maxid = $array [0] ;
-	&bump_sequence_to ("supported_languages_pk_seq", $maxid) ;
-
-      debug "Upgrading with 20030112.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030112.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+25" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030113.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030113.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+26" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030131.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030131.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+27" ;
-    if (is_lesser $version, $target) {
-      debug "Upgrading with 20030209.sql" ;
-
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030209.sql") } ;
-      foreach my $s (@reqlist) {
-	  $query = $s ;
-	  # debug $query ;
-	  $sth = $dbh->prepare ($query) ;
-	  $sth->execute () ;
-	  $sth->finish () ;
-      }
-      @reqlist = () ;
-
-      &update_db_version ($target) ;
-      debug "Committing $target." ;
-      $dbh->commit () ;
-    }
-
-    debug "It seems your database $action went well and smoothly.  That's cool." ;
+    my $from = "latin-1" ;
+    my $to = "utf-8" ;
+
+    convert_column_to_charset ('canned_responses', 'response_title', $from, $to, 25) ;
+    convert_column_to_charset ('canned_responses', 'response_text', $from, $to, 0) ;
+
+    convert_column_to_charset ('db_images', 'response_text', $from, $to, 0) ;
+    convert_column_to_charset ('db_images', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('db_images', 'bin_data', $from, $to, 0) ;
+    convert_column_to_charset ('db_images', 'filename', $from, $to, 0) ;
+    convert_column_to_charset ('db_images', 'filetype', $from, $to, 0) ;
+
+    convert_column_to_charset ('doc_data', 'filetype', $from, $to, 0) ;
+    convert_column_to_charset ('doc_data', 'title', $from, $to, 255) ;
+    convert_column_to_charset ('doc_data', 'data', $from, $to, 0) ;
+    convert_column_to_charset ('doc_data', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('doc_data', 'filename', $from, $to, 0) ;
+    convert_column_to_charset ('doc_data', 'filetype', $from, $to, 0) ;
+
+    convert_column_to_charset ('doc_groups', 'filetype', $from, $to, 0) ;
+    convert_column_to_charset ('doc_groups', 'groupname', $from, $to, 255) ;
+
+    convert_column_to_charset ('doc_states', 'groupname', $from, $to, 255) ;
+    convert_column_to_charset ('doc_states', 'name', $from, $to, 255) ;
+
+    convert_column_to_charset ('filemodule_monitor', 'name', $from, $to, 255) ;
+
+    convert_column_to_charset ('forum', 'name', $from, $to, 255) ;
+    convert_column_to_charset ('forum', 'subject', $from, $to, 0) ;
+    convert_column_to_charset ('forum', 'body', $from, $to, 0) ;
+
+    convert_column_to_charset ('forum_agg_msg_count', 'body', $from, $to, 0) ;
+
+    convert_column_to_charset ('forum_group_list', 'body', $from, $to, 0) ;
+    convert_column_to_charset ('forum_group_list', 'forum_name', $from, $to, 0) ;
+    convert_column_to_charset ('forum_group_list', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('forum_group_list', 'send_all_posts_to', $from, $to, 0) ;
+
+    convert_column_to_charset ('forum_monitored_forums', 'send_all_posts_to', $from, $to, 0) ;
+
+    convert_column_to_charset ('forum_saved_place', 'send_all_posts_to', $from, $to, 0) ;
+
+    convert_column_to_charset ('frs_file', 'send_all_posts_to', $from, $to, 0) ;
+    convert_column_to_charset ('frs_file', 'filename', $from, $to, 0) ;
+
+    convert_column_to_charset ('frs_filetype', 'filename', $from, $to, 0) ;
+    convert_column_to_charset ('frs_filetype', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('frs_package', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('frs_processor', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('frs_release', 'name', $from, $to, 0) ;
+    convert_column_to_charset ('frs_release', 'notes', $from, $to, 0) ;
+    convert_column_to_charset ('frs_release', 'changes', $from, $to, 0) ;
+
+    convert_column_to_charset ('frs_status', 'changes', $from, $to, 0) ;
+    convert_column_to_charset ('frs_status', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('group_history', 'name', $from, $to, 0) ;
+    convert_column_to_charset ('group_history', 'field_name', $from, $to, 0) ;
+    convert_column_to_charset ('group_history', 'old_value', $from, $to, 0) ;
+
+    convert_column_to_charset ('groups', 'old_value', $from, $to, 0) ;
+    convert_column_to_charset ('groups', 'group_name', $from, $to, 40) ;
+    convert_column_to_charset ('groups', 'homepage', $from, $to, 128) ;
+    convert_column_to_charset ('groups', 'unix_group_name', $from, $to, 30) ;
+    convert_column_to_charset ('groups', 'unix_box', $from, $to, 20) ;
+    convert_column_to_charset ('groups', 'http_domain', $from, $to, 80) ;
+    convert_column_to_charset ('groups', 'short_description', $from, $to, 255) ;
+    convert_column_to_charset ('groups', 'cvs_box', $from, $to, 20) ;
+    convert_column_to_charset ('groups', 'license', $from, $to, 16) ;
+    convert_column_to_charset ('groups', 'register_purpose', $from, $to, 0) ;
+    convert_column_to_charset ('groups', 'license_other', $from, $to, 0) ;
+    convert_column_to_charset ('groups', 'rand_hash', $from, $to, 0) ;
+    convert_column_to_charset ('groups', 'dead4', $from, $to, 0) ;
+    convert_column_to_charset ('groups', 'dead5', $from, $to, 0) ;
+    convert_column_to_charset ('groups', 'dead6', $from, $to, 0) ;
+    convert_column_to_charset ('groups', 'new_doc_address', $from, $to, 0) ;
+
+    convert_column_to_charset ('mail_group_list', 'new_doc_address', $from, $to, 0) ;
+    convert_column_to_charset ('mail_group_list', 'list_name', $from, $to, 0) ;
+    convert_column_to_charset ('mail_group_list', 'password', $from, $to, 16) ;
+    convert_column_to_charset ('mail_group_list', 'description', $from, $to, 0) ;
+
+    convert_column_to_charset ('news_bytes', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('news_bytes', 'summary', $from, $to, 0) ;
+    convert_column_to_charset ('news_bytes', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_job', 'details', $from, $to, 0) ;
+    convert_column_to_charset ('people_job', 'title', $from, $to, 0) ;
+    convert_column_to_charset ('people_job', 'description', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_job_category', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('people_job_category', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_job_inventory', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_job_status', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_skill', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_skill_inventory', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_skill_level', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('people_skill_year', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_assigned_to', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_dependencies', 'name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_group_list', 'name', $from, $to, 0) ;
+    convert_column_to_charset ('project_group_list', 'project_name', $from, $to, 0) ;
+    convert_column_to_charset ('project_group_list', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('project_group_list', 'send_all_posts_to', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_history', 'send_all_posts_to', $from, $to, 0) ;
+    convert_column_to_charset ('project_history', 'field_name', $from, $to, 0) ;
+    convert_column_to_charset ('project_history', 'old_value', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_metric', 'old_value', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_metric_tmp1', 'old_value', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_status', 'old_value', $from, $to, 0) ;
+    convert_column_to_charset ('project_status', 'status_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_task', 'status_name', $from, $to, 0) ;
+    convert_column_to_charset ('project_task', 'summary', $from, $to, 0) ;
+    convert_column_to_charset ('project_task', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_weekly_metric', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('session', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('snippet', 'details', $from, $to, 0) ;
+    convert_column_to_charset ('snippet', 'name', $from, $to, 0) ;
+    convert_column_to_charset ('snippet', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('snippet', 'license', $from, $to, 0) ;
+
+    convert_column_to_charset ('snippet_package', 'license', $from, $to, 0) ;
+    convert_column_to_charset ('snippet_package', 'name', $from, $to, 0) ;
+    convert_column_to_charset ('snippet_package', 'description', $from, $to, 0) ;
+
+    convert_column_to_charset ('snippet_package_item', 'description', $from, $to, 0) ;
+
+    convert_column_to_charset ('snippet_package_version', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('snippet_package_version', 'changes', $from, $to, 0) ;
+    convert_column_to_charset ('snippet_package_version', 'version', $from, $to, 0) ;
+
+    convert_column_to_charset ('snippet_version', 'version', $from, $to, 0) ;
+    convert_column_to_charset ('snippet_version', 'changes', $from, $to, 0) ;
+    convert_column_to_charset ('snippet_version', 'version', $from, $to, 0) ;
+    convert_column_to_charset ('snippet_version', 'code', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_agg_logo_by_day', 'code', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_agg_pages_by_day', 'code', $from, $to, 0) ;
+
+    convert_column_to_charset ('survey_question_types', 'code', $from, $to, 0) ;
+    convert_column_to_charset ('survey_question_types', 'type', $from, $to, 0) ;
+
+    convert_column_to_charset ('survey_questions', 'type', $from, $to, 0) ;
+    convert_column_to_charset ('survey_questions', 'question', $from, $to, 0) ;
+
+    convert_column_to_charset ('survey_rating_aggregate', 'question', $from, $to, 0) ;
+
+    convert_column_to_charset ('survey_rating_response', 'question', $from, $to, 0) ;
+
+    convert_column_to_charset ('survey_responses', 'question', $from, $to, 0) ;
+    convert_column_to_charset ('survey_responses', 'response', $from, $to, 0) ;
+
+    convert_column_to_charset ('surveys', 'response', $from, $to, 0) ;
+    convert_column_to_charset ('surveys', 'survey_title', $from, $to, 0) ;
+    convert_column_to_charset ('surveys', 'survey_questions', $from, $to, 0) ;
+
+    convert_column_to_charset ('trove_cat', 'survey_questions', $from, $to, 0) ;
+    convert_column_to_charset ('trove_cat', 'shortname', $from, $to, 80) ;
+    convert_column_to_charset ('trove_cat', 'fullname', $from, $to, 80) ;
+    convert_column_to_charset ('trove_cat', 'description', $from, $to, 255) ;
+    convert_column_to_charset ('trove_cat', 'fullpath', $from, $to, 0) ;
+    convert_column_to_charset ('trove_cat', 'fullpath_ids', $from, $to, 0) ;
+
+    convert_column_to_charset ('trove_group_link', 'fullpath_ids', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_bookmarks', 'fullpath_ids', $from, $to, 0) ;
+    convert_column_to_charset ('user_bookmarks', 'bookmark_url', $from, $to, 0) ;
+    convert_column_to_charset ('user_bookmarks', 'bookmark_title', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_diary', 'bookmark_title', $from, $to, 0) ;
+    convert_column_to_charset ('user_diary', 'summary', $from, $to, 0) ;
+    convert_column_to_charset ('user_diary', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_diary_monitor', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_group', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_metric', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_metric0', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_preferences', 'details', $from, $to, 0) ;
+    convert_column_to_charset ('user_preferences', 'preference_name', $from, $to, 20) ;
+    convert_column_to_charset ('user_preferences', 'dead1', $from, $to, 20) ;
+    convert_column_to_charset ('user_preferences', 'preference_value', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_ratings', 'preference_value', $from, $to, 0) ;
+
+    convert_column_to_charset ('users', 'preference_value', $from, $to, 0) ;
+    convert_column_to_charset ('users', 'user_name', $from, $to, 0) ;
+    convert_column_to_charset ('users', 'email', $from, $to, 0) ;
+    convert_column_to_charset ('users', 'user_pw', $from, $to, 32) ;
+    convert_column_to_charset ('users', 'realname', $from, $to, 32) ;
+    convert_column_to_charset ('users', 'shell', $from, $to, 20) ;
+    convert_column_to_charset ('users', 'unix_pw', $from, $to, 40) ;
+    convert_column_to_charset ('users', 'unix_box', $from, $to, 10) ;
+    convert_column_to_charset ('users', 'confirm_hash', $from, $to, 32) ;
+    convert_column_to_charset ('users', 'authorized_keys', $from, $to, 0) ;
+    convert_column_to_charset ('users', 'email_new', $from, $to, 0) ;
+    convert_column_to_charset ('users', 'people_resume', $from, $to, 0) ;
+    convert_column_to_charset ('users', 'timezone', $from, $to, 64) ;
+    convert_column_to_charset ('users', 'jabber_address', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_sums_agg', 'jabber_address', $from, $to, 0) ;
+
+    convert_column_to_charset ('prdb_dbs', 'jabber_address', $from, $to, 0) ;
+    convert_column_to_charset ('prdb_dbs', 'dbname', $from, $to, 0) ;
+    convert_column_to_charset ('prdb_dbs', 'dbusername', $from, $to, 0) ;
+    convert_column_to_charset ('prdb_dbs', 'dbuserpass', $from, $to, 0) ;
+
+    convert_column_to_charset ('prdb_states', 'dbuserpass', $from, $to, 0) ;
+    convert_column_to_charset ('prdb_states', 'statename', $from, $to, 0) ;
+
+    convert_column_to_charset ('prdb_types', 'statename', $from, $to, 0) ;
+    convert_column_to_charset ('prdb_types', 'dbservername', $from, $to, 0) ;
+    convert_column_to_charset ('prdb_types', 'dbsoftware', $from, $to, 0) ;
+
+    convert_column_to_charset ('prweb_vhost', 'dbsoftware', $from, $to, 0) ;
+    convert_column_to_charset ('prweb_vhost', 'vhost_name', $from, $to, 0) ;
+    convert_column_to_charset ('prweb_vhost', 'docdir', $from, $to, 0) ;
+    convert_column_to_charset ('prweb_vhost', 'cgidir', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_group_list', 'cgidir', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_group_list', 'name', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_group_list', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_group_list', 'email_address', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_group_list', 'submit_instructions', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_group_list', 'browse_instructions', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_resolution', 'browse_instructions', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_resolution', 'resolution_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_perm', 'resolution_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_category', 'resolution_name', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_category', 'category_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_group', 'category_name', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_group', 'group_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_status', 'group_name', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_status', 'status_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact', 'status_name', $from, $to, 0) ;
+    convert_column_to_charset ('artifact', 'summary', $from, $to, 0) ;
+    convert_column_to_charset ('artifact', 'details', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_history', 'details', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_history', 'field_name', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_history', 'old_value', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_file', 'old_value', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_file', 'description', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_file', 'bin_data', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_file', 'filename', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_file', 'filetype', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_message', 'filetype', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_message', 'from_email', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_message', 'body', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_monitor', 'body', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_monitor', 'email', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_canned_responses', 'email', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_canned_responses', 'title', $from, $to, 0) ;
+    convert_column_to_charset ('artifact_canned_responses', 'body', $from, $to, 0) ;
+
+    convert_column_to_charset ('artifact_counts_agg', 'body', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_site_pages_by_day', 'body', $from, $to, 0) ;
+
+    convert_column_to_charset ('massmail_queue', 'body', $from, $to, 0) ;
+    convert_column_to_charset ('massmail_queue', 'type', $from, $to, 8) ;
+    convert_column_to_charset ('massmail_queue', 'subject', $from, $to, 0) ;
+    convert_column_to_charset ('massmail_queue', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_agg_site_by_group', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_project_metric', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_agg_logo_by_group', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_subd_pages', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_cvs_user', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_cvs_group', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_project_developers', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_project', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_site', 'message', $from, $to, 0) ;
+
+    convert_column_to_charset ('activity_log_old_old', 'message', $from, $to, 0) ;
+    convert_column_to_charset ('activity_log_old_old', 'browser', $from, $to, 8) ;
+    convert_column_to_charset ('activity_log_old_old', 'platform', $from, $to, 8) ;
+    convert_column_to_charset ('activity_log_old_old', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('activity_log_old', 'page', $from, $to, 0) ;
+    convert_column_to_charset ('activity_log_old', 'browser', $from, $to, 8) ;
+    convert_column_to_charset ('activity_log_old', 'platform', $from, $to, 8) ;
+    convert_column_to_charset ('activity_log_old', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('activity_log', 'page', $from, $to, 0) ;
+    convert_column_to_charset ('activity_log', 'browser', $from, $to, 8) ;
+    convert_column_to_charset ('activity_log', 'platform', $from, $to, 8) ;
+    convert_column_to_charset ('activity_log', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_metric_history', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('frs_dlstats_filetotal_agg', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_project_months', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_site_pages_by_month', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('stats_site_months', 'page', $from, $to, 0) ;
+
+    convert_column_to_charset ('trove_agg', 'page', $from, $to, 0) ;
+    convert_column_to_charset ('trove_agg', 'group_name', $from, $to, 40) ;
+    convert_column_to_charset ('trove_agg', 'unix_group_name', $from, $to, 30) ;
+    convert_column_to_charset ('trove_agg', 'short_description', $from, $to, 255) ;
+
+    convert_column_to_charset ('trove_treesums', 'short_description', $from, $to, 255) ;
+
+    convert_column_to_charset ('frs_dlstats_file', 'ip_address', $from, $to, 0) ;
+
+    convert_column_to_charset ('group_cvs_history', 'ip_address', $from, $to, 0) ;
+    convert_column_to_charset ('group_cvs_history', 'user_name', $from, $to, 80) ;
+
+    convert_column_to_charset ('themes', 'user_name', $from, $to, 80) ;
+    convert_column_to_charset ('themes', 'dirname', $from, $to, 80) ;
+    convert_column_to_charset ('themes', 'fullname', $from, $to, 80) ;
+
+    convert_column_to_charset ('theme_prefs', 'fullname', $from, $to, 80) ;
+
+    convert_column_to_charset ('supported_languages', 'fullname', $from, $to, 80) ;
+    convert_column_to_charset ('supported_languages', 'name', $from, $to, 0) ;
+    convert_column_to_charset ('supported_languages', 'filename', $from, $to, 0) ;
+    convert_column_to_charset ('supported_languages', 'classname', $from, $to, 0) ;
+
+    convert_column_to_charset ('skills_data_types', 'classname', $from, $to, 0) ;
+    convert_column_to_charset ('skills_data_types', 'type_name', $from, $to, 25) ;
+
+    convert_column_to_charset ('skills_data', 'type_name', $from, $to, 25) ;
+    convert_column_to_charset ('skills_data', 'title', $from, $to, 100) ;
+    convert_column_to_charset ('skills_data', 'keywords', $from, $to, 255) ;
+
+    convert_column_to_charset ('project_category', 'keywords', $from, $to, 255) ;
+    convert_column_to_charset ('project_category', 'category_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_task_artifact', 'category_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_group_forum', 'category_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_group_doccat', 'category_name', $from, $to, 0) ;
+
+    convert_column_to_charset ('project_messages', 'category_name', $from, $to, 0) ;
+    convert_column_to_charset ('project_messages', 'body', $from, $to, 0) ;
+
+    convert_column_to_charset ('plugins', 'body', $from, $to, 0) ;
+    convert_column_to_charset ('plugins', 'plugin_name', $from, $to, 32) ;
+    convert_column_to_charset ('plugins', 'plugin_desc', $from, $to, 0) ;
+
+    convert_column_to_charset ('group_plugin', 'plugin_desc', $from, $to, 0) ;
+
+    convert_column_to_charset ('user_plugin', 'plugin_desc', $from, $to, 0) ;
+
+# CREATE TABLE "canned_responses" (
+# 	"response_title" character varying(25),
+# 	"response_text" text,
+
+# CREATE TABLE "db_images" (
+# 	"description" text DEFAULT '' NOT NULL,
+# 	"bin_data" text DEFAULT '' NOT NULL,
+# 	"filename" text DEFAULT '' NOT NULL,
+# 	"filetype" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "doc_data" (
+# 	"title" character varying(255) DEFAULT '' NOT NULL,
+# 	"data" text DEFAULT '' NOT NULL,
+# 	"description" text,
+# 	"filename" text,
+# 	"filetype" text,
+
+# CREATE TABLE "doc_groups" (
+# 	"groupname" character varying(255) DEFAULT '' NOT NULL,
+
+# CREATE TABLE "doc_states" (
+# 	"name" character varying(255) DEFAULT '' NOT NULL,
+
+# CREATE TABLE "forum" (
+# 	"subject" text DEFAULT '' NOT NULL,
+# 	"body" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "forum_group_list" (
+# 	"forum_name" text DEFAULT '' NOT NULL,
+# 	"description" text,
+# 	"send_all_posts_to" text,
+
+# CREATE TABLE "frs_file" (
+# 	"filename" text,
+
+# CREATE TABLE "frs_filetype" (
+# 	"name" text,
+
+# CREATE TABLE "frs_package" (
+# 	"name" text,
+
+# CREATE TABLE "frs_processor" (
+# 	"name" text,
+
+# CREATE TABLE "frs_release" (
+# 	"name" text,
+# 	"notes" text,
+# 	"changes" text,
+
+# CREATE TABLE "frs_status" (
+# 	"name" text,
+
+# CREATE TABLE "group_history" (
+# 	"field_name" text DEFAULT '' NOT NULL,
+# 	"old_value" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "groups" (
+# 	"group_name" character varying(40),
+# 	"homepage" character varying(128),
+# 	"unix_group_name" character varying(30) DEFAULT '' NOT NULL,
+# 	"unix_box" character varying(20) DEFAULT 'shell1' NOT NULL,
+# 	"http_domain" character varying(80),
+# 	"short_description" character varying(255),
+# 	"cvs_box" character varying(20) DEFAULT 'cvs1' NOT NULL,
+# 	"license" character varying(16),
+# 	"register_purpose" text,
+# 	"license_other" text,
+# 	"rand_hash" text,
+# 	"new_doc_address" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "mail_group_list" (
+# 	"list_name" text,
+# 	"password" character varying(16),
+# 	"description" text,
+
+# CREATE TABLE "news_bytes" (
+# 	"summary" text,
+# 	"details" text,
+
+# CREATE TABLE "people_job" (
+# 	"title" text,
+# 	"description" text,
+
+# CREATE TABLE "people_job_category" (
+# 	"name" text,
+
+# CREATE TABLE "people_job_status" (
+# 	"name" text,
+
+# CREATE TABLE "people_skill" (
+# 	"name" text,
+
+# CREATE TABLE "people_skill_level" (
+# 	"name" text,
+
+# CREATE TABLE "people_skill_year" (
+# 	"name" text,
+
+# CREATE TABLE "project_group_list" (
+# 	"project_name" text DEFAULT '' NOT NULL,
+# 	"description" text,
+# 	"send_all_posts_to" text,
+
+# CREATE TABLE "project_history" (
+# 	"field_name" text DEFAULT '' NOT NULL,
+# 	"old_value" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "project_status" (
+# 	"status_name" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "project_task" (
+# 	"summary" text DEFAULT '' NOT NULL,
+# 	"details" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "session" (
+# 	"session_hash" character(32) DEFAULT '' NOT NULL,
+# 	"ip_addr" character(15) DEFAULT '' NOT NULL,
+
+# CREATE TABLE "snippet" (
+# 	"name" text,
+# 	"description" text,
+# 	"license" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "snippet_package" (
+# 	"name" text,
+# 	"description" text,
+
+# CREATE TABLE "snippet_package_version" (
+# 	"changes" text,
+# 	"version" text,
+
+# CREATE TABLE "snippet_version" (
+# 	"changes" text,
+# 	"version" text,
+# 	"code" text,
+
+# CREATE TABLE "survey_question_types" (
+# 	"type" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "survey_questions" (
+# 	"question" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "survey_responses" (
+# 	"response" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "surveys" (
+# 	"survey_title" text DEFAULT '' NOT NULL,
+# 	"survey_questions" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "trove_cat" (
+# 	"shortname" character varying(80),
+# 	"fullname" character varying(80),
+# 	"description" character varying(255),
+# 	"fullpath" text DEFAULT '' NOT NULL,
+# 	"fullpath_ids" text,
+
+# CREATE TABLE "user_bookmarks" (
+# 	"bookmark_url" text,
+# 	"bookmark_title" text,
+
+# CREATE TABLE "user_diary" (
+# 	"summary" text,
+# 	"details" text,
+
+# CREATE TABLE "user_group" (
+# 	"admin_flags" character(16) DEFAULT '' NOT NULL,
+
+# CREATE TABLE "user_preferences" (
+# 	"preference_name" character varying(20),
+# 	"preference_value" text
+
+# CREATE TABLE "users" (
+# 	"user_name" text DEFAULT '' NOT NULL,
+# 	"email" text DEFAULT '' NOT NULL,
+# 	"user_pw" character varying(32) DEFAULT '' NOT NULL,
+# 	"realname" character varying(32) DEFAULT '' NOT NULL,
+# 	"shell" character varying(20) DEFAULT '/bin/bash' NOT NULL,
+# 	"unix_pw" character varying(40) DEFAULT '' NOT NULL,
+# 	"authorized_keys" text,
+# 	"email_new" text,
+# 	"people_resume" text DEFAULT '' NOT NULL,
+# 	"jabber_address" text,
+
+# CREATE TABLE "prdb_dbs" (
+# 	"dbname" text NOT NULL,
+# 	"dbusername" text NOT NULL,
+# 	"dbuserpass" text NOT NULL,
+
+# CREATE TABLE "prdb_states" (
+# 	"statename" text
+
+# CREATE TABLE "prdb_types" (
+# 	"dbservername" text NOT NULL,
+# 	"dbsoftware" text NOT NULL,
+
+# CREATE TABLE "prweb_vhost" (
+# 	"vhost_name" text,
+# 	"docdir" text,
+# 	"cgidir" text,
+
+# CREATE TABLE "artifact_group_list" (
+# 	"name" text,
+# 	"description" text,
+# 	"email_address" text NOT NULL,
+# 	"submit_instructions" text,
+# 	"browse_instructions" text,
+
+# CREATE TABLE "artifact_resolution" (
+# 	"resolution_name" text,
+
+
+# CREATE TABLE "artifact_category" (
+# 	"category_name" text NOT NULL,
+
+# CREATE TABLE "artifact_group" (
+# 	"group_name" text NOT NULL,
+
+# CREATE TABLE "artifact_status" (
+# 	"status_name" text NOT NULL,
+
+# CREATE TABLE "artifact" (
+# 	"summary" text NOT NULL,
+# 	"details" text NOT NULL,
+
+# CREATE TABLE "artifact_history" (
+# 	"field_name" text DEFAULT '' NOT NULL,
+# 	"old_value" text DEFAULT '' NOT NULL,
+
+# CREATE TABLE "artifact_file" (
+# 	"description" text NOT NULL,
+# 	"bin_data" text NOT NULL,
+# 	"filename" text NOT NULL,
+# 	"filetype" text NOT NULL,
+
+# CREATE TABLE "artifact_message" (
+# 	"from_email" text NOT NULL,
+# 	"body" text NOT NULL,
+
+# CREATE TABLE "artifact_monitor" (
+# 	"email" text,
+
+# CREATE TABLE "artifact_canned_responses" (
+# 	"title" text NOT NULL,
+# 	"body" text NOT NULL,
+
+# CREATE TABLE "massmail_queue" (
+# 	"subject" text NOT NULL,
+# 	"message" text NOT NULL,
+
+# CREATE TABLE "activity_log_old_old" (
+# 	"browser" character varying(8) DEFAULT 'OTHER' NOT NULL,
+# 	"platform" character varying(8) DEFAULT 'OTHER' NOT NULL,
+# 	"page" text,
+
+# CREATE TABLE "activity_log_old" (
+# 	"browser" character varying(8) DEFAULT 'OTHER' NOT NULL,
+# 	"platform" character varying(8) DEFAULT 'OTHER' NOT NULL,
+# 	"page" text,
+
+# CREATE TABLE "activity_log" (
+# 	"browser" character varying(8) DEFAULT 'OTHER' NOT NULL,
+# 	"platform" character varying(8) DEFAULT 'OTHER' NOT NULL,
+# 	"page" text,
+
+# CREATE TABLE "trove_agg" (
+# 	"group_name" character varying(40),
+# 	"unix_group_name" character varying(30),
+# 	"short_description" character varying(255),
+
+# CREATE TABLE "frs_dlstats_file" (
+# 	"ip_address" text,
+
+# CREATE TABLE "group_cvs_history" (
+# 	"user_name" character varying(80) DEFAULT '' NOT NULL,
+
+# CREATE TABLE "themes" (
+# 	"dirname" character varying(80),
+# 	"fullname" character varying(80)
+
+# CREATE TABLE "theme_prefs" (
+# 	"body_font" character(80) DEFAULT '',
+# 	"body_size" character(5) DEFAULT '',
+# 	"titlebar_font" character(80) DEFAULT '',
+# 	"titlebar_size" character(5) DEFAULT '',
+# 	"color_titlebar_back" character(7) DEFAULT '',
+# 	"color_ltback1" character(7) DEFAULT '',
+
+# CREATE TABLE "supported_languages" (
+# 	"name" text,
+# 	"filename" text,
+# 	"classname" text,
+
+# CREATE TABLE "skills_data_types" (
+# 	"type_name" character varying(25) DEFAULT '' NOT NULL,
+
+# CREATE TABLE "skills_data" (
+# 	"title" character varying(100) DEFAULT '' NOT NULL,
+# 	"keywords" character varying(255) DEFAULT '' NOT NULL,
+
+# CREATE TABLE "project_category" (
+# 	"category_name" text
+
+
+# CREATE TABLE "project_messages" (
+# 	"body" text,
+
+# CREATE TABLE "plugins" (
+# 	"plugin_name" character varying(32) NOT NULL,
+# 	"plugin_desc" text,
+
+    debug "It seems your database conversion went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
 
     # There should be a commit at the end of every block above.
@@ -1183,185 +769,26 @@ if ($@) {
 $dbh->rollback ;
 $dbh->disconnect ;
 
-sub is_lesser ( $$ ) {
-    my $v1 = shift || 0 ;
-    my $v2 = shift || 0 ;
+sub convert_column_to_charset ( $$$$$ ) {
+    my $table = shift or die "Not enough arguments" ;
+    my $column = shift or die "Not enough arguments" ;
+    my $from = shift or die "Not enough arguments" ;
+    my $to = shift or die "Not enough arguments" ;
+    my $size = shift or die "Not enough arguments" ;
 
-    my $rc = system "dpkg --compare-versions $v1 lt $v2" ;
-
-    return (! $rc) ;
-}
-
-sub is_greater ( $$ ) {
-    my $v1 = shift || 0 ;
-    my $v2 = shift || 0 ;
-
-    my $rc = system "dpkg --compare-versions $v1 gt $v2" ;
-
-    return (! $rc) ;
-}
-
-sub get_pg_version () {
-    my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
-    my $version = qx($command) ;
-    chomp $version ;
-    return $version ;
+    if ($size > 0) {
+	$query = "UPDATE $table SET $column = substr (convert ($column, '$from', '$to'), 0, $size)" ;
+    } else {
+	$query = "UPDATE $table SET $column = convert ($column, '$from', '$to')" ;
+    }
+    # debug $query ;
+    my $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    $sth->finish () ;
 }
 
 sub debug ( $ ) {
     my $v = shift ;
     chomp $v ;
     print STDERR "$v\n" ;
-}
-
-sub create_metadata_table ( $ ) {
-    my $v = shift || "2.5-7+just+before+8" ;
-    # Do we have the metadata table?
-
-    $query = "SELECT count(*) FROM pg_class WHERE relname = 'debian_meta_data' and relkind = 'r'";
-    # debug $query ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    # Let's create this table if we have it not
-
-    if ($array [0] == 0) {
-	debug "Creating debian_meta_data table." ;
-	$query = "CREATE TABLE debian_meta_data (key varchar primary key, value text not null)" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-
-    $query = "SELECT count(*) FROM debian_meta_data WHERE key = 'db-version'";
-    # debug $query ;
-    $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    # Empty table?  We'll have to fill it up a bit
-
-    if ($array [0] == 0) {
-	debug "Inserting first data into debian_meta_data table." ;
-	$query = "INSERT INTO debian_meta_data (key, value) VALUES ('db-version', '$v')" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub update_db_version ( $ ) {
-    my $v = shift or die "Not enough arguments" ;
-
-    debug "Updating debian_meta_data table." ;
-    $query = "UPDATE debian_meta_data SET value = '$v' WHERE key = 'db-version'" ;
-    # debug $query ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    $sth->finish () ;
-}
-
-sub get_db_version () {
-    $query = "SELECT value FROM debian_meta_data WHERE key = 'db-version'" ;
-    # debug $query ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    my $version = $array [0] ;
-
-    return $version ;
-}
-
-sub drop_table_if_exists ( $ ) {
-    my $tname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping table $tname" ;
-	$query = "DROP TABLE $tname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_sequence_if_exists ( $ ) {
-    my $sname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$sname' AND relkind='S'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping sequence $sname" ;
-	$query = "DROP SEQUENCE $sname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_index_if_exists ( $ ) {
-    my $iname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='i'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping index $iname" ;
-	$query = "DROP INDEX $iname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_view_if_exists ( $ ) {
-    my $iname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='v'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping view $iname" ;
-	$query = "DROP VIEW $iname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub bump_sequence_to ( $$ ) {
-    my ($sth, @array, $seqname, $targetvalue) ;
-
-    $seqname = shift ;
-    $targetvalue = shift ;
-
-    do {
-	$query = "select nextval ('$seqname')" ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-    } until $array[0] >= $targetvalue ;
 }
