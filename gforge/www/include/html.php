@@ -494,7 +494,7 @@ function site_user_header($params) {
 		      array($Language->getText('menu','my_personal_page'),
 			    $Language->getText('menu','diary_notes'),
 			    $Language->getText('menu','account_maintenance')),
-		      array('/my/','/my/diary.php','/account/')));
+		      array('"/my/"','"/my/diary.php"','"/account/"')));
 	plugin_hook ("usermenu", false) ;
 	echo ($HTML->EndSubMenu());
 }

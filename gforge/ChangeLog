@@ -4,8 +4,12 @@
 
 	* www/sendmessage.php: ditto.
 
+	* www/account/index.php: ditto.
+
+	* www/include/html.php: ditto.
+
 	* www/include/languages/Base.tab: valid XHTML 1.0 Transitional
-	for sendmessage string.
+	for several strings.
 
 	* www/people/editjob.php: Audit: escape special characters from
 	user input before submitting to database.

@@ -72,8 +72,8 @@ account_register	timezone	Timezone:
 account_register	emailaddr	Email Address:<span><font color="red">*</font></span> <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
 account_register	jabberaddr	Jabber Address:
 account_register	jabberonly	Send auto-generated notices only to my Jabber address
-account_register	siteupdate	Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>
-account_register	communitymail	Receive additional community mailings. <I>(Low traffic.)</I>
+account_register	siteupdate	Receive Email about Site Updates <i>(Very low traffic and includes security notices. Highly Recommended.)</i>
+account_register	communitymail	Receive additional community mailings. <i>(Low traffic.)</i>
 account_register	mandatory	Fields marked with $1 are mandatory.
 account_register	register	Register
 account_register	err_username	You must supply a username
@@ -88,8 +88,8 @@ account_register	err_userexist	That username already exists.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
 account_register	err_badinsert	Insert Failed 
 account_register	message_header	$1 Account Registration
-account_register	partecipate_peer_ratings	Participate in peer ratings. <I>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your $1 user page </a> if you have chosen to partecipate in ratings).
-account_register	remember_me	"Remember me". <I>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</I>
+account_register	partecipate_peer_ratings	Participate in peer ratings. <i>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your $1 user page </a> if you have chosen to partecipate in ratings)</i>.
+account_register	remember_me	"Remember me". <i>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>
 account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to a bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
 account_register	update	Update
 account_register	reset	Reset Changes
