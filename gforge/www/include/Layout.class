@@ -347,7 +347,7 @@ class Layout extends Error {
 	 * @param	array	Footer parameters array
 	 */
 	function generic_footer($params) {
-		global $PHP_SELF, $sys_name;
+		global $PHP_SELF, $Language, $sys_name;
 		echo '<P><A HREF="/source.php?page_url='.$PHP_SELF.'"><B><FONT COLOR="WHITE">Show Source</FONT></B></A><P>';
 
 		global $IS_DEBUG,$QUERY_COUNT;

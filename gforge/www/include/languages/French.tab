@@ -343,7 +343,7 @@ survey_survey	section	Outil de sondages
 survey_survey	title	Affichage d'un sondage
 survey_survey_resp	section	Outil de sondages
 survey_survey_resp	title	Réponse à un sondage
-thanks	about_blurb	<p><h2>Remerciements</h2>Les développeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements ::<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
+thanks	about_blurb	<p><h2>Remerciements</h2>Les développeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements :<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
 top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichés ici.
