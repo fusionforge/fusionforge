@@ -6,13 +6,13 @@
     xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" 
     xmlns:s="http://www.w3.org/2001/XMLSchema" 
     xmlns:si="http://soapinterop.org/xsd" 
-    xmlns:s0="http://sourceforge.vestek.com/" 
+    xmlns:s0="http://gforge.org/" 
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
     xmlns="http://schemas.xmlsoap.org/wsdl/" 
-    targetNamespace="http://sourceforge.vestek.com/">
+    targetNamespace="http://gforge.org/">
     <types xmlns:s="http://www.w3.org/2001/XMLSchema">
-    <s:schema elementFormDefault="qualified" targetNamespace="http://sourceforge.vestek.com/">
+    <s:schema elementFormDefault="qualified" targetNamespace="http://gforge.org/">
     <s:complexType name="ArrayOfstring">
       <s:complexContent>
       <s:restriction base="SOAP-ENC:Array">
@@ -37,6 +37,42 @@
     <message name="userResponse">
         <part name="userResponse" type="s0:ArrayOfstring" />
     </message>
+    
+<message name="login">
+        <part name="userid" type="xsd:string" />
+        <part name="passwd" type="xsd:string" />
+    </message>
+    <message name="loginResponse">
+        <part name="sessionKey" type="xsd:string" />
+    </message>
+
+<message name="logout">
+        <part name="sessionkey" type="xsd:string" />
+    </message>
+    <message name="logoutResponse">
+        <part name="statusCode" type="xsd:string" />
+    </message>
+
+<message name="bugAdd">
+        <part name="sessionkey" type="xsd:string" />
+        <part name="groupid" type="xsd:string" />
+        <part name="summary" type="xsd:string" />
+        <part name="details" type="xsd:string" />
+    </message>
+    <message name="bugAddResponse">
+        <part name="id" type="xsd:string" />
+    </message>
+
+<message name="bugUpdate">
+        <part name="sessionkey" type="xsd:string" />
+        <part name="groupid" type="xsd:string" />
+        <part name="bugid" type="xsd:string" />
+        <part name="comment" type="xsd:string" />
+    </message>
+    <message name="bugUpdateResponse">
+        <part name="result" type="xsd:string" />
+    </message>
+
     <portType name="Service1PortType">
     <operation name="hello">
     <input message="s0:helloRequest"/>
@@ -46,31 +82,83 @@
     <input message="s0:userRequest"/>
     <output message="s0:userResponse"/>
     </operation>
+
+    <operation name="bugAdd">
+    <input message="s0:bugAddRequest"/>
+    <output message="s0:bugAddResponse"/>
+    </operation>
+    
+<operation name="bugUpdate">
+    <input message="s0:bugUpdateRequest"/>
+    <input message="s0:bugUpdateResponse"/>
+    </operation>
+
     </portType>
     <binding name="Service1Binding" type="s0:Service1PortType">
     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
     <operation name="hello">
-    <soap:operation soapAction="http://sourceforge.vestek.com/soap/SoapAPI.php" style="rpc"/>
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
     <input>
-    <soap:body use="encoded" namespace="http://sourceforge.vestek.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
     </input>
     <output>
-    <soap:body use="encoded" namespace="http://sourceforge.vestek.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
     </output>
     </operation>
     <operation name="user">
-    <soap:operation soapAction="http://sourceforge.vestek.com/soap/SoapAPI.php" style="rpc"/>
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
     <input>
-    <soap:body use="encoded" namespace="http://sourceforge.vestek.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
     </input>
     <output>
-    <soap:body use="encoded" namespace="http://sourceforge.vestek.com" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
     </output>
     </operation>
+
+    <operation name="bugAdd">
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+    <input>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </input>
+    <output>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </output>
+    </operation>
+    
+<operation name="bugUpdate">
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+    <input>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </input>
+    <output>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </output>
+    </operation>
+
+<operation name="login">
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+    <input>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </input>
+    <output>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </output>
+    </operation>
+
+<operation name="logout">
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+    <input>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </input>
+    <output>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </output>
+    </operation>
+
     </binding>
     <service name="Service1">
     <port name="Service1Port" binding="s0:Service1Binding">
-    <soap:address location="http://sourceforge.vestek.com/soap/SoapAPI.php"/>
+    <soap:address location="http://gforge.org/soap/SoapAPI.php"/>
     </port>
     </service>
 </definitions>

@@ -58,6 +58,30 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
+	 * getArtifactType - get a particular artifact type
+	 *
+	 * @param 	int 	the datatype for the ArtifactType - see common/tracker/ArtifactType.class for a list
+	 *
+	 * @param	ArtifactType	the requested ArtifactType
+	 */
+	function &getArtifactType($typeID) {
+		if (!$this->ArtifactTypes) {
+			$this->getArtifactTypes();
+			if (!$this->ArtifactTypes) {
+				return false;
+			}
+		}
+
+		foreach ($this->ArtifactTypes as $aType) {
+			if ($aType->getDataType() == $typeID) {
+				return $aType;
+			}
+		}
+		$this->setError("Unable to find that data type!");
+		return false;
+	}	 
+
+	/**
 	 *	getArtifactTypes - return an array of ArtifactType objects.
 	 *
 	 *	@return	array	The array of ArtifactType objects.
@@ -66,20 +90,10 @@ class ArtifactTypeFactory extends Error {
 		if ($this->ArtifactTypes) {
 			return $this->ArtifactTypes;
 		}
-		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission( session_get_user() );
-			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$public_flag='1';
-			} else {
-				$public_flag='0,1';
-			}
-		} else {
-			$public_flag='1';
-		}
 
 		$sql="SELECT * FROM artifact_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."'
-			AND is_public IN ($public_flag)
+			AND is_public IN (".$this->getPublicFlag().")
 			ORDER BY group_artifact_id ASC";
 
 		$result = db_query ($sql);
@@ -95,6 +109,25 @@ class ArtifactTypeFactory extends Error {
 			}
 		}
 		return $this->ArtifactTypes;
+	}
+
+	/**
+	 * getPublicFlag - a utility method to load up the current user's permissions
+ 	 *
+	 * @return 	string 	The public_flag field to plug into a SQL string
+	 */	
+	function &getPublicFlag() {
+		if (session_loggedin()) {
+			$perm =& $this->Group->getPermission( session_get_user() );
+			if (!$perm || !is_object($perm) || !$perm->isMember()) {
+				$public_flag='1';
+			} else {
+				$public_flag='0,1';
+			}
+		} else {
+			$public_flag='1';
+		}
+		return $public_flag;
 	}
 
 }

@@ -1,8 +1,14 @@
 <?php
 
 // 0. Include GForge files for access to GForge system
+require_once('www/include/squal_pre.php');
+require_once('www/include/BaseLanguage.class');
 
-require_once('squal_pre.php');
+// includes for bug operations
+require_once('www/tracker/include/ArtifactTypeHtml.class');
+require_once('www/tracker/include/ArtifactHtml.class');
+require_once('common/tracker/ArtifactTypeFactory.class');
+
 $uri = 'http://'.$sys_default_domain;
 
 // 1. include client and server
@@ -58,16 +64,16 @@ $server->wsdl->addComplexType(
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupObject[]')),
 	'tns:GroupObject');
 
+//
+// TODO: Create and add a definition for a bug object
+//
+
 // 3. call the register() method for each service (function) you want to expose:
 $server->register(
 	'hello',
 	array('parm'=>'xsd:string'),
 	array('helloResponse'=>'xsd:string'),
 	$uri);
-
-function hello($inputString){
-    return new soapval('tns:soapVal','string',$inputString.'echoed back to you');
-}
 
 $server->register(
 	'user',
@@ -81,6 +87,29 @@ $server->register(
 	array('groupResponse'=>'tns:ArrayOfGroupObject'),
 	$uri);
 
+$server->register(
+	'bugAdd',
+	array('groupid'=>'xsd:string','summary'=>'xsd:string','details'=>'xsd:string'),
+	array('bugAddResponse'=>'xsd:string'),
+	$uri);
+
+$server->register(
+	'bugUpdate',
+	array('groupid'=>'xsd:string','bugid'=>'xsd:string','comment'=>'xsd:string'),
+	array('bugUpdateResponse'=>'xsd:string'),
+	$uri);
+
+$server->register(
+	'login',
+	array('userid'=>'xsd:string','passwd'=>'xsd:string'),
+	array('loginResponse'=>'xsd:string'),
+	$uri);
+
+$server->register(
+	'logout',
+	array(),
+	array('logoutResponse'=>'xsd:string'),
+	$uri);
 
 $wsdl_data = $server->wsdl->serialize();
 
@@ -93,6 +122,130 @@ if ($wsdl == "save") {
 if ($wsdl) {
     echo $wsdl_data;
     return;
+}
+
+/**
+ * continueSession - A utility method to carry on with an already established session
+ *
+ * @param 	string		The session key
+ */
+function continueSession($sessionKey) {
+	global $session_ser;
+	$session_ser = $sessionKey;
+	session_set();
+}
+
+/**
+ * login - Logs in a SOAP client
+ * 
+ * @param	string	userid	The user's unix id
+ * @param	string	passwd	The user's passwd in clear text
+ *
+ * @return	string	the session key
+ */
+function login($userid, $passwd) {
+	global $feedback, $Language, $session_ser;
+        
+	$Language=new BaseLanguage();
+        $Language->loadLanguage("English"); // TODO use the user's default language
+	setlocale (LC_TIME, $Language->getText('system','locale'));
+	$sys_strftimefmt = $Language->getText('system','strftimefmt');
+	$sys_datefmt = $Language->getText('system','datefmt');
+
+	$res = session_login_valid($userid, $passwd);
+	
+	if (!$res) {
+    		return new soapval('tns:soapVal','string',"Couldn't log in: ".$feedback);
+ 	}
+	
+    	return new soapval('tns:soapVal','string',$session_ser);
+}
+
+/**
+ * logout - Logs out a SOAP client
+ *
+ * @param 	string	sessionkey	The session key
+ */
+function logout($sessionkey) {
+	continueSession($sessionkey);
+	session_logout();
+	setcookie("session_ser", "", time() - 3600, "/", 0);
+    	return new soapval('tns:soapVal','string',"OK");
+}
+
+/**
+ * bugUpdate - Update a bug
+ *
+ * @param	string	sessionkey	The current session key
+ * @param	string 	groupid		The group id that the bug is in
+ * @param	string	bugid		The bug id to be updated
+ * @param	string	comment		The comment to add
+ */
+function bugUpdate($sessionkey, $groupid, $bugid, $comment) {
+	continueSession($sessionkey);
+
+	$group =& group_get_object($groupid);
+	if (!$group) {
+    		return new soapval('tns:soapVal','string',"Couldn't create group");
+	}
+	
+	$atf = new ArtifactTypeFactory($group);
+	$artifactType = $atf->getArtifactType(1); // TODO use a constant or something
+	if (!$artifactType) {
+    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
+	}
+
+	$bug = new Artifact($artifactType, $bugid);
+	if (!$bug) {
+    		return new soapval('tns:soapVal','string',"Couldn't fetch bug");
+	}
+
+	if (!$bug->update(	$bug->getPriority(),
+			1,
+			'100',
+			'100',
+			$bug->getResolutionID(),
+			'100',
+			$bug->getSummary(),
+			'100',
+			$comment,
+			$artifactType->getID())) {
+    		return new soapval('tns:soapVal','string',"Couldn't update bug: ".$bug->getErrorMessage());
+	}
+    	return new soapval('tns:soapVal','string',"new comment: ".$comment);
+}
+
+/**
+ * bugAdd - Add a new bug
+ *
+ * @param	string	sessionkey	The current session key
+ * @param	string 	groupid		The group id that the bug is in
+ * @param 	string	summary		The bug summary
+ * @param 	string	details		The bug details
+ */
+function bugAdd($sessionkey, $groupid, $summary, $details) {
+	continueSession($sessionkey);
+	
+	$group =& group_get_object($groupid);
+	if (!$group) {
+    		return new soapval('tns:soapVal','string',"Couldn't create group using id ".$groupid);
+	}
+
+	$artifactTypeFactory = new ArtifactTypeFactory($group);
+	$artifactType = $artifactTypeFactory->getArtifactType(1); // TODO reference a constant or something here
+	if (!$artifactType) {
+    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$artifactTypeFactory->getErrorMessage());
+	}
+	
+	$artifact=new Artifact($artifactType);
+	if (!$artifact->create('100', '100', $summary, $details)) {
+    		return new soapval('tns:soapVal','string',"Couldn't create bug: ".$artifact->getErrorMessage());
+	}
+    	return new soapval('tns:soapVal','string',$artifact->getID());
+}
+
+function hello($inputString){
+    return new soapval('tns:soapVal','string',$inputString.'echoed back to you');
 }
 
 function user($func, $params){
