@@ -9,7 +9,7 @@
  * @version $Id$
  */
  
-require_once('www/search/include/HtmlGroupSearchRenderer.class');
+require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class');
 require_once('common/search/DocsSearchQuery.class');
 			  
 class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
@@ -25,6 +25,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	 *
 	 */
 	function DocsHtmlSearchRenderer($words, $offset, $isExact, $groupId, $sections=SEARCH__ALL_SECTIONS) {
+	
 		$userIsGroupMember = $this->isGroupMember($groupId);
 					
 		$searchQuery = new DocsSearchQuery($words, $offset, $isExact, $groupId, $sections, $userIsGroupMember);

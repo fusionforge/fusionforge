@@ -11,7 +11,7 @@
  * @version $Id$
  */
 
-require_once('www/search/include/RssSearchRenderer.class');
+require_once('www/search/include/renderers/RssSearchRenderer.class');
 require_once('common/search/ExportProjectSearchQuery.class');
 
 /**

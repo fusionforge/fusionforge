@@ -1,0 +1,149 @@
+<?php
+/**
+ * GForge Search Engine
+ *
+ * Copyright 2004 (c) Guillaume Smet
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
+
+require_once('www/search/include/engines/GroupSearchEngine.class');
+require_once('www/search/include/engines/ArtifactSearchEngine.class');
+require_once('www/search/include/engines/ForumSearchEngine.class');
+
+function & getSearchManager() {
+	if(!isset($GLOBALS['OBJ_SEARCH_MANAGER'])) {
+		$GLOBALS['OBJ_SEARCH_MANAGER'] =& new SearchManager();
+	}
+	return $GLOBALS['OBJ_SEARCH_MANAGER'];
+}
+
+class SearchManager {
+	var $searchEngines = array();
+	var $parameters = array();
+	var $parametersValues = array();
+
+	function SearchManager() {
+		$this->loadSearchEngines();
+		$this->loadParameters();
+	}
+	
+	function setParametersValues($parametersValues) {
+		for($i = 0, $max = count($this->parameters); $i < $max; $i++) {
+			if(isset($parametersValues[$this->parameters[$i]])) {
+				$this->parametersValues[$this->parameters[$i]] = (int) $parametersValues[$this->parameters[$i]];
+			}
+		}
+	}
+	
+	function getParameters() {
+		return $this->parametersValues;
+	}
+	
+	function addSearchEngine($type, &$searchEngine, $format = SEARCH__OUTPUT_HTML) {
+		$this->searchEngines[$format][$type] =& $searchEngine;
+	}
+	
+	function addParameter($parameterName) {
+		if(!in_array($parameterName, $this->parameters)) {
+			$this->parameters[] = $parameterName;
+		}
+	}
+	
+	function & getAvailableSearchEngines($format = SEARCH__OUTPUT_HTML) {
+		$availableSearchEngines = array();
+		if(isset($this->searchEngines[$format])) {
+			$searchEngines = $this->searchEngines[$format];
+			foreach($this->searchEngines[$format] AS $type => $searchEngine) {
+				if($searchEngine->isAvailable($this->parametersValues)) {
+					$availableSearchEngines[] = $searchEngine;
+				}
+			}
+		}
+		return $availableSearchEngines;
+	}
+	
+	function getSearchRenderer($typeOfSearch, $words, $offset, $exact, $format = SEARCH__OUTPUT_HTML) {
+		if(isset($this->searchEngines[$format]) && isset($this->searchEngines[$format][$typeOfSearch])) {
+			$searchEngine =& $this->searchEngines[$format][$typeOfSearch];
+			if($searchEngine->isAvailable($this->parametersValues)) {
+				return $searchEngine->getSearchRenderer($words, $offset, $exact, $this->parametersValues);
+			}
+		}
+		return false;
+	}
+	
+	function loadSearchEngines() {
+		global $Language;
+		
+		// Specific search engines
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_ARTIFACT,
+			new ArtifactSearchEngine()
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_FORUM,
+			new ForumSearchEngine()
+		);
+		
+		// Project search engines
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_TRACKERS,
+			new GroupSearchEngine(SEARCH__TYPE_IS_TRACKERS, 'TrackersHtmlSearchRenderer', $Language->getText('searchbox','trackers'))
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_FORUMS,
+			new GroupSearchEngine(SEARCH__TYPE_IS_FORUMS, 'ForumsHtmlSearchRenderer', $Language->getText('searchbox','forums'))
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_TASKS,
+			new GroupSearchEngine(SEARCH__TYPE_IS_TASKS, 'TasksHtmlSearchRenderer', $Language->getText('searchbox','tasks'))
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_FRS,
+			new GroupSearchEngine(SEARCH__TYPE_IS_FRS, 'FrsHtmlSearchRenderer', $Language->getText('searchbox','frs'))
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_DOCS,
+			new GroupSearchEngine(SEARCH__TYPE_IS_DOCS, 'DocsHtmlSearchRenderer', $Language->getText('searchbox','docs'))
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_NEWS,
+			new GroupSearchEngine(SEARCH__TYPE_IS_NEWS, 'NewsHtmlSearchRenderer', $Language->getText('searchbox','news'))
+		);
+		
+		// Global search engine
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_SOFTWARE,
+			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectHtmlSearchRenderer', $Language->getText('searchbox','softwaregroup'))
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_PEOPLE,
+			new SearchEngine(SEARCH__TYPE_IS_PEOPLE, 'PeopleHtmlSearchRenderer', $Language->getText('searchbox','people'))
+		);
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_SKILL,
+			new SearchEngine(SEARCH__TYPE_IS_SKILL, 'SkillHtmlSearchRenderer', $Language->getText('searchbox','skill'))
+		);
+		
+		// Rss search engines
+		$this->addSearchEngine(
+			SEARCH__TYPE_IS_SOFTWARE,
+			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', $Language->getText('searchbox','softwaregroup')),
+			SEARCH__OUTPUT_RSS
+		);
+	}
+	
+	function loadParameters() {
+		$this->parameters = array(
+			SEARCH__PARAMETER_GROUP_ID,
+			SEARCH__PARAMETER_ARTIFACT_ID,
+			SEARCH__PARAMETER_FORUM_ID,
+			SEARCH__PARAMETER_GROUP_PROJECT_ID
+		);
+	}
+	
+	
+}

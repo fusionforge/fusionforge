@@ -12,7 +12,7 @@
  *
  * @version   $Id$
  */
-require_once ('www/tracker/include/ArtifactTypeHtml.class');
+require_once ('www/search/include/SearchManager.class');
 
 class Layout extends Error {
 
@@ -797,64 +797,36 @@ if (isset($params['group']) && $params['group']) {
 		}
 
 		print '
-		<form action="/search/" method="post">
+		<form action="/search/" method="get">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr><td>
-		<div align="center" style="font-size:smaller">
-
-		<select name="type_of_search">';
-		if($group_id) {
-			$Group =& group_get_object($group_id);
-			if($Group && is_object($Group) && !$Group->isError()) {
-				if ($atid) {
-					$ath = new ArtifactTypeHtml($group,$atid);
-					if ($ath && is_object($ath)) {
-						print '<option value="'.SEARCH__TYPE_IS_ARTIFACT.'"'.( $type_of_search == SEARCH__TYPE_IS_ARTIFACT ? ' selected="selected"' : '' ).'>'. $ath->getName() .'</option>';
-					}
-				} elseif ($forum_id) {
-					print '<option value="'.SEARCH__TYPE_IS_FORUM.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUM ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</option>';
-				}/* else if ($group_id && $group_project_id) {
-					print '<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';
-				}*/
+		<div align="center" style="font-size:smaller">';
+		$parameters = array(
+			SEARCH__PARAMETER_GROUP_ID => $group_id,
+			SEARCH__PARAMETER_ARTIFACT_ID => $atid,
+			SEARCH__PARAMETER_FORUM_ID => $forum_id,
+			SEARCH__PARAMETER_GROUP_PROJECT_ID => $group_project_id
+		);
 		
-				print '<option value="'.SEARCH__TYPE_IS_TRACKERS.'"'.( $type_of_search == SEARCH__TYPE_IS_TRACKERS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','trackers').'</option>';
-				print '<option value="'.SEARCH__TYPE_IS_FORUMS.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUMS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forums').'</option>';
-				print '<option value="'.SEARCH__TYPE_IS_TASKS.'"'.( $type_of_search == SEARCH__TYPE_IS_TASKS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','tasks').'</option>';
-				print '<option value="'.SEARCH__TYPE_IS_FRS.'"'.( $type_of_search == SEARCH__TYPE_IS_FRS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','frs').'</option>';
-				print '<option value="'.SEARCH__TYPE_IS_DOCS.'"'.( $type_of_search == SEARCH__TYPE_IS_DOCS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','docs').'</option>';
-				print '<option value="'.SEARCH__TYPE_IS_NEWS.'"'.( $type_of_search == SEARCH__TYPE_IS_NEWS ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','news').'</option>';
-			}
+		$searchManager =& getSearchManager();
+		$searchManager->setParametersValues($parameters);
+		$searchEngines =& $searchManager->getAvailableSearchEngines();
+		
+		echo '<select name="type_of_search">';
+		for($i = 0, $max = count($searchEngines); $i < $max; $i++) {
+			$searchEngine =& $searchEngines[$i];
+			echo '<option value="'.$searchEngine->getType().'"'.( $type_of_search == $searchEngine->getType() ? ' selected="selected"' : '' ).'>'.$searchEngine->getLabel($parameters).'</option>'."\n";
 		}
-
-		print '
-			<option value="'.SEARCH__TYPE_IS_SOFTWARE.'"'.( $type_of_search == SEARCH__TYPE_IS_SOFTWARE ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
-		print '
-			<option value="'.SEARCH__TYPE_IS_SKILL.'"'.( $type_of_search == SEARCH__TYPE_IS_SKILL ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','skill').'</option>';
-		print '
-			<option value="'.SEARCH__TYPE_IS_PEOPLE.'"'.( $type_of_search == SEARCH__TYPE_IS_PEOPLE ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
-		print '
-			</select></div>';
+		echo '</select></div>';
 
 //		print '<br />';
 //		print '
 //		<input type="CHECKBOX" name="exact" value="1"'.( $exact ? ' CHECKED' : ' UNCHECKED' ).'> Require All Words';
 
 		print '</td><td>&nbsp;';
-		if ( isset($forum_id) ) {
-			print '
-			<input type="hidden" value="'.$forum_id.'" name="forum_id" />';
-		}
-		if ( isset($group_id) ) {
-			print '
-			<input type="hidden" value="'.$group_id.'" name="group_id" />';
-		}
-		if ( isset($atid) ) {
-			print '
-			<input type="hidden" value="'.$atid.'" name="atid" />';
-		}
-		if ( isset($group_project_id) ){
-			print '
-			<input type="hidden" value="'.$group_project_id.'" name="group_project_id" />';
+		$parameters = $searchManager->getParameters();
+		foreach($parameters AS $name => $value) {
+			print '<input type="hidden" value="'.$value.'" name="'.$name.'" />';
 		}
 		print '</td><td>';
 		print '

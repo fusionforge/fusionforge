@@ -17,6 +17,14 @@ define('SEARCH__TYPE_IS_FRS', 'frs');
 define('SEARCH__DEFAULT_ROWS_PER_PAGE', 25);
 define('SEARCH__ALL_SECTIONS', 'all');
 
+define('SEARCH__PARAMETER_GROUP_ID', 'group_id');
+define('SEARCH__PARAMETER_ARTIFACT_ID', 'atid');
+define('SEARCH__PARAMETER_FORUM_ID', 'forum_id');
+define('SEARCH__PARAMETER_GROUP_PROJECT_ID', 'group_project_id');
+
+define('SEARCH__OUTPUT_RSS', 'rss');
+define('SEARCH__OUTPUT_HTML', 'html');
+
 /* Mailing lists */
 
 define('MAIL__MAILING_LIST_IS_PRIVATE', '0');

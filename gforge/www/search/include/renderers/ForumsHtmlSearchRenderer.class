@@ -9,7 +9,7 @@
  * @version $Id$
  */
  
-require_once('www/search/include/HtmlGroupSearchRenderer.class');
+require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class');
 require_once('common/search/ForumsSearchQuery.class');
 	
 class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
