@@ -25,14 +25,34 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 }
 
 if ($post_changes) {
-	$sql="UPDATE surveys SET survey_title='$survey_title', survey_questions='$survey_questions', is_active='$is_active' ".
-		"WHERE survey_id='$survey_id' AND group_id='$group_id'";
-	$result=db_query($sql);
-	if (db_affected_rows($result) < 1) {
-		$feedback .= ' UPDATE FAILED ';
-		echo db_error();
-	} else {
-		$feedback .= ' UPDATE SUCCESSFUL ';
+	if (!isset($survey_title) || $survey_title == "")
+	{
+		$feedback .= ' UPDATE FAILED: Survey Title Required';
+	}
+	elseif (!isset($survey_questions) || $survey_questions == "")
+	{
+		$feedback .= ' UPDATE FAILED: Survey Questions Required';
+	}
+	if (!isset($survey_id) || !isset($group_id) || $survey_id == "" || $group_id == "")
+	{
+		$feedback .= ' UPDATE FAILED: Missing Data';
+	}
+	else
+	{
+		if ($is_active) {
+			$is_active = 1;
+		} else {
+			$is_active = 0;
+		}
+		$sql="UPDATE surveys SET survey_title='$survey_title', survey_questions='$survey_questions', is_active='$is_active' ".
+			 "WHERE survey_id='$survey_id' AND group_id='$group_id'";
+		$result=db_query($sql);
+		if (db_affected_rows($result) < 1) {
+			$feedback .= ' UPDATE FAILED ';
+			echo db_error();
+		} else {
+			$feedback .= ' UPDATE SUCCESSFUL ';
+		}
 	}
 }
 
