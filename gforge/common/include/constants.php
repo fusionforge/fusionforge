@@ -43,4 +43,7 @@ define('GROUP_IS_NEWS', 3);
 define('GROUP_IS_STATS', 2);
 define('GROUP_IS_PEER_RATINGS', 4);
 
+/* Admin */
+define('ADMIN_CRONMAN_ROWS', 30);
+
 ?>
