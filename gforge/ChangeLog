@@ -1,4 +1,13 @@
+2004-02-17  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* sf_ldap_check_group now returns false when ldap is not used
+	(users were not activated when the project was approved)
+	* updated french localization
+	* corrected several UI bugs
+	* removed edit release link from /project/admin/
+
 2004-02-13  Guillaume Smet <guillaume-gforge@smet.org>
+
 	* Improved newest projects box localization and sql query
 	* Improved /admin/ localization and UI
 	* Improved /admin/ french localization
