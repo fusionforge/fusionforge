@@ -120,7 +120,28 @@ if (session_loggedin()) {
 	<table>
 	<tr><td colspan="2" align="center">
 		<strong><?php echo $Language->getText('add_snippet','add_this_snippet_version_id'); ?></strong><br />
-		<input type="text" name="snippet_version_id" size="6" maxlength="7" />
+ <select name="snippet_version_id">
+<?php
+
+$combolistresult=db_query
+("SELECT myname,snippet_version.snippet_version_id
+FROM ( SELECT MAX(date) AS
+mydate,name AS myname,snippet.snippet_id AS myid
+FROM
+snippet,snippet_version
+WHERE
+snippet.snippet_id=snippet_version.snippet_id
+GROUP BY
+name,snippet.snippet_id ) AS foo,snippet_version
+WHERE
+snippet_version.date=mydate;");
+$combolistrows=db_numrows($combolistresult);
+for ($i=0; $i<$combolistrows; $i++)
+{
+	print '<option value='.db_result($combolistresult,$i,'snippet_version_id').'>'.db_result($combolistresult,$i,'myname').'</option>';
+}
+?>
+</select>
 	</td></tr>
 
 	<tr><td colspan="2" align="center">
