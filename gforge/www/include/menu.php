@@ -68,7 +68,7 @@ function menu_software() {
 	$HTML->menuhtml_top('Software'); 
 		$HTML->menu_entry('/softwaremap/',$Language->SOFTWARE_MAP);
 		$HTML->menu_entry('/new/',$Language->NEW_RELEASES);
-		$HTML->menu_entry('/mirrors/',$Language->OTHER_SITE_MIRRORS);
+		// $HTML->menu_entry('/mirrors/',$Language->OTHER_SITE_MIRRORS);
 		$HTML->menu_entry('/snippet/',$Language->CODE_SNIPPET_LIBRARY);
 	$HTML->menuhtml_bottom();
 }
@@ -81,10 +81,10 @@ function menu_sourceforge() {
 		$HTML->menu_entry('/people/',$Language->PROJECT_HELP_WANTED);
 		$HTML->menu_entry('/top/',$Language->TOP_PROJECTS);
 		print '<P>';
-		$HTML->menu_entry('/compilefarm/',$Language->COMPILE_FARM);
-		print '<P>';
-		$HTML->menu_entry('/contact.php',$Language->CONTACT_US);
-		$HTML->menu_entry('/about.php',$Language->ABOUT_SOURCEFORGE);
+		// $HTML->menu_entry('/compilefarm/',$Language->COMPILE_FARM);
+		// print '<P>';
+		// $HTML->menu_entry('/contact.php',$Language->CONTACT_US);
+		// $HTML->menu_entry('/about.php',$Language->ABOUT_SOURCEFORGE);
 	$HTML->menuhtml_bottom();
 }
 
@@ -115,6 +115,24 @@ function menu_project($grp) {
 		$HTML->menu_entry('/projects/'. group_getunixname($grp) .'/',$Language->PROJECT_SUMMARY);
 		print '<P>';
 		$HTML->menu_entry('/project/admin/?group_id='.$grp,$Language->PROJECT_ADMIN);
+	$HTML->menuhtml_bottom();
+}
+
+function menu_site_admin() {
+	GLOBAL $HTML;
+	$HTML->menuhtml_top('Site Admin');
+		$HTML->menu_entry('/admin/','Site Admin Home');
+		$HTML->menu_entry('/admin/approve-pending.php','Approve Pending Projects');
+		$HTML->menu_entry('/admin/lastlogins.php','View Last Logins');
+	$HTML->menuhtml_bottom();
+}
+
+function menu_news_admin() {
+	GLOBAL $HTML;
+	$HTML->menuhtml_top('Site News Admin');
+		$HTML->menu_entry('/news/','Site News');
+		$HTML->menu_entry('/news/submit.php?group_id=' . $GLOBALS['sys_news_group'], 'Submit Site News');
+		$HTML->menu_entry('/news/admin/?group_id=' . $GLOBALS['sys_news_group'], 'Approve Site News');
 	$HTML->menuhtml_bottom();
 }
 
@@ -181,6 +199,13 @@ function menu_loggedin($page_title) {
 			$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->BOOKMARK_PAGE);
 		}
 	$HTML->menuhtml_bottom();
+
+	if (user_ismember(1, 'A')) {
+		menu_site_admin();
+	}		
+	if (user_ismember($GLOBALS['sys_news_group'], 'A')) {
+		menu_news_admin();
+	}		
 }
 
 function menu_notloggedin() {
@@ -265,7 +290,7 @@ function menu_print_sidebar($params) {
 	}
 
 	//Foundry Links
-	echo menu_foundry_links();
+	// echo menu_foundry_links();
 
 	if (!user_isloggedin()) {
 		echo menu_language_box();
