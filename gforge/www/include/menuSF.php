@@ -102,8 +102,6 @@ function menu_site_help() {
 		$HTML->menu_entry('/register/',$Language->getText('menu', 'new_project'));
 	}
 	$HTML->menu_entry('/people/',$Language->getText('menu', 'project_help_wanted'));
-	$HTML->menu_entry('/search/index.php?type_of_search=soft&amp;words=%%%',$Language->getText('menu', 'hosted_projects_list'));
-	$HTML->menu_entry('/contact.php',$Language->getText('menu', 'contact_us', $sys_name));
 	$HTML->menuhtml_bottom();
 }
 
@@ -225,5 +223,9 @@ function menu_print_sidebar($params) {
 	echo menu_valid_html();
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
