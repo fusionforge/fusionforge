@@ -7,28 +7,17 @@
 // $Id$
 
 require ('pre.php');    
+require_once ('common/include/Stats.class');    
 
 if (!$offset || $offset < 0) {
 	$offset=0;
 }
 
 if ($type == 'week') {
-
-	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile ".
-		"FROM groups,project_weekly_metric ".
-		"WHERE groups.group_id=project_weekly_metric.group_id AND ".
-		"groups.is_public=1 ".
-		"ORDER BY ranking ASC";
 	$title = $Language->getText('top','active_weekly');
 } else {
-  	$sql="SELECT g.group_name,g.unix_group_name,g.group_id,s.group_ranking as ranking,s.group_metric as percentile ".
-	"FROM groups g,stats_project_all_vw s  ".
-	"WHERE g.group_id=s.group_id ".
-	"AND g.is_public=1 and s.group_ranking > 0 ".
-	"ORDER BY ranking ASC";
 	$title = $Language->getText('top','active_all_time');
 }
-
 
 $HTML->header(array('title'=>$title));
 
@@ -41,7 +30,8 @@ $arr=array($Language->getText('top_mostactive','rank'),$Language->getText('top_m
 
 echo $HTML->listTableTop($arr);
 
-$res_top = db_query($sql, $LIMIT, $offset);
+$stats = new Stats();
+$res_top = $stats->getMostActiveStats($type, $offset);
 $rows=db_numrows($res_top);
 
 while ($row_top = db_fetch_array($res_top)) {

@@ -43,4 +43,29 @@ class Stats extends Error {
 		}
 		return $res;
 	}
+
+	/**
+	* Returns a resultset consisting of the group name, unix group name, group id, ranking, and percentile
+	* from the groups and project_weekly_metric tables
+	* 
+	* @param type 		either "week" or "" - pass in "" for all time
+	* @param offset		used to get the next $offset rows in a batch	
+	*/
+	function getMostActiveStats($type, $offset) {
+		$sql="";
+		if ($type == 'week') 	{
+		  $sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile ".
+		    "FROM groups,project_weekly_metric ".
+		    "WHERE groups.group_id=project_weekly_metric.group_id AND ".
+		    "groups.is_public=1 ".
+		    "ORDER BY ranking ASC";
+		} else {
+			$sql="SELECT g.group_name,g.unix_group_name,g.group_id,s.group_ranking as ranking,s.group_metric as percentile ".
+		  "FROM groups g,stats_project_all_vw s  ".
+			"WHERE g.group_id=s.group_id ".
+			"AND g.is_public=1 and s.group_ranking > 0 ".
+			"ORDER BY ranking ASC";
+		}
+		return db_query($sql, $LIMIT, $offset);
+	}
 }
