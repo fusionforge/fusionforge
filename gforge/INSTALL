@@ -4,7 +4,9 @@ been removed to make the installation and use of GForge practical for
 just about any Linux admin.
 
 *
-*  If you need professional installation, customization,  
+*  PROFESSIONAL SUPPORT
+*
+*  If you need professional support, customization,  
 *  or advanced reporting tools for GForge, visit 
 *  http://gforge.org/pro/
 *
@@ -16,6 +18,9 @@ You will need:
 	PostgreSQL 7.1 or higher ( http://postgresql.org/ )
 	PHP 4.x or higher ( http://www.php.net/ )
 	Apache 1.2x or higher ( http://www.apache.org/ )
+
+	Optional (but highly recommended)
+	PHP Accelerator ( http://www.php-accelerator.co.uk/ )
 
 	Optional Mailing list support:
 	GNU MailMan ( http://www.gnu.org/software/mailman/ )
@@ -58,7 +63,10 @@ You may need to add Pl/Pgsql as a language.  To do so:
 
 Next, import the database schema:
 
-# psql alexandria < db/gforge3.sql
+# psql alexandria < db/gforge3.sql > import.log
+
+Be sure to watch for any errors during import.
+
 
 WEB SETUP
 ---------
@@ -96,9 +104,6 @@ may run the cronjobs with:
 
 if you do not want to edit your php.ini file.
 
-It is also recommended, for fastest possible performance, that you
-use a php caching accelerator, such as the Ion Cube Accelerator.
-http://www.php-accelerator.co.uk/
 
 FRS - File Release System
 -------------------------
@@ -124,6 +129,7 @@ insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NEW ID**
 /etc/aliases - add this line and run "newaliases"
 noreply:        /dev/null
 
+
 PEER RATINGS
 ------------
 
@@ -136,6 +142,7 @@ Members of the "Peer Ratings" project, who are "admins" of the project
 become the first trusted users. This is the only way to prime the pump
 for the peer ratings system.
 
+
 CRON JOBS
 ---------
 
@@ -143,19 +150,10 @@ Cron jobs are in the cronjobs/ directory and the README file contains
 a sample crontab. This gives you the basic cronjobs for updating
 certain statistics and data on the site.
 
-More advanced cron jobs are being re-written to create the user email
-aliases, mailing lists, Unix groups/passwords, etc. Many of these
-scripts are available in the util/ directory, although they will not
-yet run without some polishing. If you polish up and make all these
-scripts work, please submit them back for inclusion at
+/cronjobs/cvs-cron/ contains scripts useful for creating blank cvs 
+trees and managing the /etc/groups /etc/passwd and /etc/shadow files.
+See /cronjobs/README.root for more info.
 
-http://gforge.org/
+/cronjobs/mail/ contains files useful for the creation of new mailing 
+lists in mailman and creating the /etc/aliases file.
 
-BACKEND PROCESSES
------------------
-
-Backend processes, such as creating home directories and cvs trees are
-still incomplete. Stubbed out sample cronjobs exist in /cronjobs/mail/
-and some of the old SourceForge-specific cronjobs are still in /utils/
-and /backend/ If you wish to contribute fixes to this functionality,
-please visit http://gforge.org/
