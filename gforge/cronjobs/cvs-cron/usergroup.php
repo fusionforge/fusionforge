@@ -14,8 +14,18 @@ define('USER_DEFAULT_GROUP','users');
 define('FILE_EXTENSION','.new'); // use .new when testing
 define('CVS_ROOT','/cvsroot/');
 
-if (!file_exists('/etc/passwd.org') || !file_exists('/etc/shadow.org') || file_exists('/etc/group.org')) {
-	$err .= "CANNOT PROCEED - You must first copy/backup your /etc/shadow, /etc/group, and /etc/passwd files";
+if (!file_exists('/etc/passwd.org')) {
+	echo "passwd.org missing";
+	exit;
+}
+
+if (!file_exists('/etc/shadow.org')) {
+	echo "shadow.org missing";
+	exit;
+}
+
+if (!file_exists('/etc/group.org')) {
+	echo "group.org missing";
 	exit;
 }
 
@@ -109,7 +119,7 @@ for($i = 0; $i < count($users); $i++) {
 
     if ($def_shadow[$users[$i]]) {
 
-        //this username was already existing in the "default" file
+	//this username was already existing in the "default" file
 
     } else {
 
