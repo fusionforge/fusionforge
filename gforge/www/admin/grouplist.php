@@ -46,8 +46,6 @@ if ($form_catroot == 1) {
 			. ($form_pending?"AND WHERE status='P' ":"")
 			. " ORDER BY $sortorder");
 	} else {
-		echo "<p>".$Language->getText('admin_grouplist','group_list_for_category').' ';
-		echo "<strong>".$Language->getText('admin_grouplist', 'all_categories')."</strong></p>\n";
 		$res = db_query("SELECT group_name,register_time,unix_group_name,groups.group_id,is_public,status,license_name, COUNT(user_group.group_id) AS members "
 			. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id, licenses "
 			. "WHERE license_id=license "
