@@ -14,6 +14,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge 3.0-2\n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-03-02 11:21+0100\n"
 "PO-Revision-Date: 2004-03-17 18:42+0100\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
