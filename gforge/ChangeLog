@@ -1,3 +1,7 @@
+2003-07-18 Christian Bayle	<bayle@debian.org>
+
+	* Applied patch for controlleroo.php. Bug [ #443 ]
+
 2003-07-11 Tom Copeland  <tom@infoether.com>
 
 	* www/themes/gforge/images/:

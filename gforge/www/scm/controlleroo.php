@@ -96,10 +96,10 @@ if ($allow) {
 	echo("<td width=\"50%\" bgcolor=\"#AAAAAA\"><b>Last log entry</b></td>");
 	echo("</tr>");
 	$i = 0;
-	foreach($dirContent AS $k=>$v) {   
+	foreach($dirContent AS $k=>$v) { 
 		$bgc = "#F0F0F0";
 		if ($i % 2 == 0) {
-	    $bgc = "#FFFFFF";
+		    $bgc = "#FFFFFF";
 		}
 		$i++;
 		if($FHD->getFileType($DIRNAME."/".$v) == 1) {
@@ -133,8 +133,8 @@ if ($allow) {
 			echo("<td width=\"50%\" bgcolor=\"".$bgc."\">".$rcsInfo['LOG']."</td>");
 			echo("</tr>");
 		}
-		echo("</table>");
 	}
+	echo("</table>");
 } else {
 	echo("Error: u don't have access rights to <b>".$project->getPublicName()."</b> CVS root = $cvsroot");
 }
