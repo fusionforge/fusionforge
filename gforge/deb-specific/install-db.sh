@@ -57,7 +57,7 @@ $db_passwd
 EOF
 	else
             # PostgreSQL configuration for versions from 7.3 on
-	    echo "Configuring for PostgreSQL 7.3"
+	    echo "Configuring for PostgreSQL 7.3 or later"
 	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
 	    # if 7.2 formatted string, elseif 7.3 string, else no previous string
 	    if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
