@@ -75,7 +75,8 @@ function forum_header($params) {
 				echo '<P>';
 			}
 			echo '</TD><TD VALIGN="TOP" WIDTH="35%">';
-			echo $HTML->box1_top('Latest News',0,$GLOBALS['COLOR_LTBACK2']);
+			//echo $HTML->box1_top('Latest News',0,$GLOBALS['COLOR_LTBACK2']);
+			echo $HTML->box1_top('Latest News');
 			echo news_show_latest($sys_news_group,5,false);
 			echo $HTML->box1_bottom();
 			echo '</TD></TR></TABLE>';
