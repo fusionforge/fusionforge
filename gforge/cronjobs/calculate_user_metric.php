@@ -69,7 +69,7 @@ db_query("INSERT INTO user_metric0
 SELECT user_id,5,1.25,1,0,0,1.25
 FROM user_group
 WHERE
-user_group.group_id=4
+user_group.group_id='$sys_peer_rating_group'
 AND user_group.admin_flags='A';");
 echo db_error();
 
