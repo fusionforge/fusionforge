@@ -30,3 +30,8 @@ $sys_use_project_multimedia={sys_use_project_multimedia};
 //	If set to true, only a site admin can register projects
 //
 $sys_project_reg_restricted={sys_project_reg_restricted};
+//
+//	Restricted user registration
+//	If set to true, only a site admin can register users
+//
+$sys_user_reg_restricted={sys_user_reg_restricted};
