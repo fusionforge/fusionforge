@@ -1,0 +1,3 @@
+# This fields are not translated, but the choice depend on the current language
+gforge-db-postgresql: select-with-translated-default-field gforge/shared/sys_lang fr.iso-8859-15
+gforge-db-postgresql: select-with-translated-default-field gforge/shared/sys_lang nl.iso-8859-15
