@@ -587,6 +587,7 @@ docman_common_doc	invalid_docid	Document : n° de document invalide
 docman_common_docgroup	invalid_id	Groupe de documents : n° de groupe de documents invalide
 docman_common_docgroup	name_required	Groupe de Document : Le nom est requis
 docman_display_doc	all_languages	Toutes les langues
+docman_display_doc	docmoved	Ce document se trouve maintenant <a href="/docman/view.php/$1/$2">ici</a>
 docman_display_doc	no_document_data_text	Pas de document à afficher - N° de document invalide ou inactif
 docman_display_doc	no_document_data_title	Pas de données dans le document
 docman_display_doc	section	Projet : $1

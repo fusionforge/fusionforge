@@ -590,6 +590,7 @@ docman_common_doc	invalid_docid	Document:: docid inválida
 docman_common_docgroup	invalid_id	Grupo de documento: ID del grupo de documento inválida
 docman_common_docgroup	name_required	Grupo de documento: se require un nombre
 docman_display_doc	all_languages	Todos los idiomas.
+docman_display_doc	docmoved	Este documento se ha movido a esta <a href="/docman/view.php/$1/$2">nueva localización</a>
 docman_display_doc	no_document_data_text	No hay documento que mostrar - número de documento no válido o inactivo
 docman_display_doc	no_document_data_title	No hay datos en el documento
 docman_display_doc	section	Proyecto: $1 

@@ -580,6 +580,7 @@ docman_common_doc	invalid_docid	Document:: Invalid docid
 docman_common_docgroup	invalid_id	DocumentGroup: Invalid DocumentGroup ID
 docman_common_docgroup	name_required	DocumentGroup: name is Required
 docman_display_doc	all_languages	All Languages
+docman_display_doc	docmoved	This document was moved to <a href="/docman/view.php/$1/$2">this new location</a>
 docman_display_doc	no_document_data_text	No document to display - invalid or inactive document number
 docman_display_doc	no_document_data_title	No document data
 docman_display_doc	section	Project: $1 
