@@ -57,6 +57,7 @@ class Theme extends Layout {
 
 		<p align=right>
 		<?php echo $this->searchBox(); ?>
+		
 		</p>
 
 		<p align=right>
@@ -109,6 +110,8 @@ class Theme extends Layout {
 		print '
 			<option value="'.SEARCH__TYPE_IS_PEOPLE.'"'.( $type_of_search == SEARCH__TYPE_IS_PEOPLE ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
 
+		print '</select>';
+		
 		if ( isset($forum_id) ) {
 			print '
 			<input type="hidden" value="'.$forum_id.'" name="forum_id" />';
