@@ -90,28 +90,20 @@ Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_
 <p>
 Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?>
 <p>
-Project WWW directory on shell server <a href="/docman/display_doc.php?docid=774&group_id=1">(how to upload)</a>:
+Project WWW directory on shell server:
 <b><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
 
 <P align=center>
 <A HREF="http://<?php echo $GLOBALS['sys_cvs_host']; ?>/cvstarballs/<?php echo $group->getUnixName(); ?>-cvsroot.tar.gz">[ Download Your Nightly CVS Tree Tarball ]</A>
 <P>
 
-<HR NOSHADE>
-<P>
-<H4>Trove Categorization:
-<A href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">
-[Edit]</A></H4>
-<P>
-<?php
-
-echo $HTML->boxBottom(); 
+$HTML->boxBottom(); 
 
 echo '
 </TD><TD>&nbsp;</TD><TD width=50%>';
 
 
-echo $HTML->boxTop("Group Members");
+$HTML->boxTop("Group Members");
 
 /*
 
@@ -122,7 +114,7 @@ echo $HTML->boxTop("Group Members");
 $res_memb = db_query("SELECT users.realname,users.user_id,users.user_name,user_group.admin_flags ".
 		"FROM users,user_group ".
 		"WHERE users.user_id=user_group.user_id ".
-		"AND user_group.group_id=$group_id");
+		"AND user_group.group_id='$group_id'");
 
 print '<TABLE WIDTH="100%" BORDER="0">';
 
@@ -210,7 +202,7 @@ echo $HTML->boxTop('Tool Admin');
 
 <TD width=50%>
 
-<?php echo $HTML->boxTop("File Releases"); ?>
+<?php $HTML->boxTop("File Releases"); ?>
 	&nbsp;<BR>
 	<CENTER>
 	<A href="editpackages.php?group_id=<?php print $group_id; ?>"><B>[Edit/Add File Releases]</B></A>
@@ -223,7 +215,7 @@ echo $HTML->boxTop('Tool Admin');
 
 	<?php
 
-	$res_module = db_query("SELECT * FROM frs_package WHERE group_id=$group_id");
+	$res_module = db_query("SELECT * FROM frs_package WHERE group_id='$group_id'");
 	while ($row_module = db_fetch_array($res_module)) {
 		print "$row_module[name]<BR>";
 	}
