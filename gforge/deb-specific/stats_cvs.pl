@@ -149,6 +149,69 @@ sub print_stats {
 	print "-----------------------------------------------------\n";
 }
 
+sub cvs_stats_merge {
+        print "-----------------------------------------------------\n";
+        print "Inserting cvs data into\n";
+        print "-----------------------------------------------------\n";
+	my ($sql,$res,$temp);
+	$sql = "DELETE FROM stats_cvs_group 
+		WHERE (month,day,group_id) IN (
+			SELECT d.month+ d.year*100,
+	 			d.day,g.group_id 
+			FROM deb_cvs_group_user AS d,	groups AS g
+			WHERE d.cvsgroup=g.unix_group_name 
+			GROUP BY d.month,d.year,d.day,g.group_id 
+		)";
+	$dbh->do ( $sql );
+	$sql = "INSERT INTO stats_cvs_group 
+		SELECT d.month + d.year * 100,
+			d.day,g.group_id, 
+			sum(coalesce(d.others,0)),
+			sum(coalesce(d.modified,0)),
+			sum(COALESCE(d.added,0)) 
+		FROM deb_cvs_group_user AS d,groups AS g
+		WHERE d.cvsgroup=g.unix_group_name 
+			and (d.month + d.year * 100,
+			d.day,
+			g.group_id) NOT IN (
+				SELECT month,day,group_id FROM stats_cvs_group 
+				)
+		GROUP BY year,month,day,group_id
+		";
+	$dbh->do ( $sql );
+	
+	$sql = "DELETE FROM stats_cvs_user 
+		WHERE (month,day,group_id,user_id) IN (
+			SELECT d.month+ d.year*100,
+	 			d.day,g.group_id,u.user_id
+			FROM deb_cvs_group_user AS d, groups AS g, users as u
+			WHERE d.cvsgroup=g.unix_group_name AND d.cvsuser=u.user_name 
+			GROUP BY d.month,d.year,d.day,g.group_id,u.user_id 
+		)";
+	$dbh->do ( $sql );
+	$sql = "INSERT INTO stats_cvs_user
+		SELECT d.month + d.year * 100,
+			d.day,
+			g.group_id, 
+			u.user_id,
+			sum(coalesce(d.others,0)),
+			sum(coalesce(d.modified,0)),
+			sum(COALESCE(d.added,0)) 
+		FROM deb_cvs_group_user AS d,groups AS g, users AS u
+		WHERE d.cvsgroup=g.unix_group_name and
+			d.cvsuser=u.user_name
+			and (d.month + d.year * 100,
+			d.day,
+			g.group_id,
+			u.user_id) NOT IN (
+				SELECT month,day,group_id,user_id FROM stats_cvs_user
+				)
+		GROUP BY year,month,day,group_id,user_id
+		";
+	$dbh->do ( $sql );
+	
+	print "  [ x ] Done\n";
+}
 #############
 # main      #
 #############
@@ -158,5 +221,6 @@ sub print_stats {
 &dump_history;
 &parse_history;
 &print_stats;
+&cvs_stats_merge;
 &drop_tables;
 

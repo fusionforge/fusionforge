@@ -82,29 +82,29 @@ if ($project->enableAnonCVS() && $project->enablePserver()) {
 		<?php echo $HTML->boxTop($Language->getText('scm_index', 'history')); ?>
 
 <?php
-// ################ is there commit info?
-$res_cvshist = db_query("SELECT * FROM group_cvs_history WHERE group_id='$group_id'");
-if (db_numrows($res_cvshist) < 1) {
-?>
-		<p>
-		<?php echo $Language->getText('scm_index', 'nohistory'); ?>
-<?php
-} else {
-?>
-		<p>
-		<b><?php echo $Language->getText('scm_index','developer_commits_adds'); ?></b>
-		<br>&nbsp;
+// ######################### CVS
 
-<?php
-	while ($row_cvshist = db_fetch_array($res_cvshist)) {
-?>
-		<br><? print $row_cvshist['user_name'].' ('.$row_cvshist['cvs_commits_wk'].'/'
-		.$row_cvshist['cvs_commits'].') ('.$row_cvshist['cvs_adds_wk'].'/'
-		.$row_cvshist['cvs_adds'].')'; ?>
-<?php
-	}
+$result = db_query("
+	SELECT u.realname, sum(commits) as commits, sum(adds) as adds, sum(adds+commits) as combined
+	FROM stats_cvs_user s, users u
+	WHERE group_id='$group_id' AND s.user_id=u.user_id AND (commits>0 OR adds >0)
+	GROUP BY group_id, realname
+	ORDER BY combined DESC, realname;
+");
 
-} // ### else no cvs history
+if (db_numrows($result) > 0) {
+	print '<hr size="1" noshade="noshade" />';
+
+	$headerMapping = array(
+	'realname' => array("Name", 'width="60%"'),
+	'adds' 	=> array("Adds", 'width="13%"'),
+	'commits' => array("Commits", 'width="13%"')
+	);
+	ShowResultSet($result,'', false, true, $headerMapping, array('combined'));
+}
+else {
+	echo $Language->getText('scm_index', 'nohistory');
+}
 
 // ############################## CVS Browsing
 
