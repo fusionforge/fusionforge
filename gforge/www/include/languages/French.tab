@@ -88,7 +88,7 @@ account_lostpw	title	Perdu votre mot de passe ?
 account_lostpw	user_dont_exist	Cet utilisateur n'existe pas.
 account_lostpw	warn	<p>Perdre son mot de passe n'est pas sans conséquence. Cela compromet la sécurité de votre compte, de vos projets et de ce site.</p><p>Cliquer sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous déclenchera l'envoi d'une URL à l'adresse que vous nous avez fournie. Celle-ci contient une clé de confirmation de 128 bits pour votre compte. An allant à cette URL, vous pourrez changer votre mot de passe en ligne et vous connecter.</p>
 account_options	address		Adresse complète :
-account_options	country	Pays :
+account_options	ccode	Pays :
 account_options	change_email_address	Modifier mon adresse e-mail
 account_options	change_password	Modifier mon mot de passe
 account_options	edit_skills_profile	Éditer mon profil de compétences
@@ -110,7 +110,7 @@ account_options	welcome	Bienvenue
 account_register	Preferences	Préférences
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <i>(Faible trafic)</i>
 account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.</p><p>Vous allez recevoir un courrier électronique de confirmation pour vérifier votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer votre compte.</p>
-account_register	country	Pays :
+account_register	ccode	Pays :
 account_register	emailaddr	Adresse e-mail : <span><font color="red">*</font></span><br /><i>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Une adresse de la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse vous sera attribuée.</i>
 account_register	err_badinsert	L'insertion a échouée.
 account_register	err_email	Adresse e-mail non valide
