@@ -23,8 +23,10 @@ gforge (3.1-4+) unstable; urgency=low
   * [Roland] Fixed the way we use modules-config so that gforge-web-apache
     does not hang on install (closes: #221172).
   * [Roland] Upgrade database schema using 20031105.sql and 20031124.sql.
+  * [Roland] Also use 20031129.sql, for the "last changed XX days ago"
+    patch from Hidenari Miwa and Tsutomu Tominaga.
 
- -- Roland Mas <lolando@debian.org>  Sat, 29 Nov 2003 21:17:05 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 29 Nov 2003 21:54:49 +0100
 
 gforge (3.1-4) unstable; urgency=low
 

@@ -25,13 +25,14 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_category,$_group);
+$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_category,$_group,$_changed_from);
 $_sort_col=$af->order_col;
 $_sort_ord=$af->sort;
 $_status=$af->status;
 $_assigned_to=$af->assigned_to;
 $_category=$af->category;
 $_group=$af->group;
+$_changed_from=$af->changed_from;
 
 $art_arr =& $af->getArtifacts();
 if (!$art_arr && $af->isError()) {
@@ -98,6 +99,24 @@ $sort_arr[]='ASC';
 $sort_arr[]='DESC';
 
 //
+//	custom changed arrays to build pop-up box
+//
+$changed_name_arr=array();
+$changed_name_arr[]='Any';
+$changed_name_arr[]=$Language->getText('tracker_browse','hour24');
+$changed_name_arr[]=$Language->getText('tracker_browse','day7');
+$changed_name_arr[]=$Language->getText('tracker_browse','week2');
+$changed_name_arr[]=$Language->getText('tracker_browse','month1');
+
+$changed_arr=array();
+$changed_arr[]= 0x7fffffff;     // Any
+$changed_arr[]= 3600 * 24;     // 24 hour
+$changed_arr[]= 3600 * 24 * 7; // 1 week
+$changed_arr[]= 3600 * 24 * 14;// 2 week
+$changed_arr[]= 3600 * 24 * 30;// 1 month
+
+
+//
 //	Show the new pop-up boxes to select assigned to, status, etc
 //
 
@@ -109,7 +128,8 @@ echo '
 		<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a><br />'. $tech_box .'</span></td>'.
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a><br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any')) .'</span></td>'.
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','category').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a><br />'. $ath->categoryBox ('_category',$_category,$Language->getText('tracker','category_any')) .'</span></td>'.
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','group').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a><br />'. $ath->artifactGroupBox ('_group',$_group,$Language->getText('tracker','group_any')) .'</span></td>
+	'<td><span style="font-size:smaller">'.$Language->getText('tracker','group').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a><br />'. $ath->artifactGroupBox ('_group',$_group,$Language->getText('tracker','group_any')) .'</span></td>' .
+	'<td><span style="font-size:smaller">'.$Language->getText('tracker','changed').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=changed\')"><strong>(?)</strong></a><br />'. html_build_select_box_from_arrays($changed_arr,$changed_name_arr,'_changed_from',$_changed_from,false) .'</span></td>
 	</tr>
 	<tr>
 		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.

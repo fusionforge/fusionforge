@@ -47,6 +47,8 @@ class ArtifactFactory extends Error {
 	var $status;
 	var $category;
 	var $group;
+        var $changed_from;
+        var $last_changed;
 	var $assigned_to;
 	var $offset;
 	var $max_rows;
@@ -69,6 +71,7 @@ class ArtifactFactory extends Error {
 			return false;
 		}
 		$this->ArtifactType =& $ArtifactType;
+                $this->changed_from = 0x7ffffff; // Any
 
 		return true;
 	}
@@ -85,7 +88,7 @@ class ArtifactFactory extends Error {
 	 *	@param	int	Include this param if you want to limit to a certain category.
 	 *	@param	int	Include this param if you want to limit to a certain group.
 	 */
-	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_category,$_group) {
+	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_category,$_group, $_changed) {
 //echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id +";
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -112,11 +115,13 @@ class ArtifactFactory extends Error {
 					$_group=$pref_arr[3];
 					$order_col=$pref_arr[4];
 					$sort=$pref_arr[5];
+					$_changed=$pref_arr[6];
 					$set='custom';
 				} else {
 					//default to open
 					$_assigned_to=0;
 					$_status=1;
+					$_changed=0;
 				}
 			} else {
 				//default to open
@@ -147,7 +152,7 @@ class ArtifactFactory extends Error {
 				/*
 					if this custom set is different than the stored one, reset preference
 				*/
-				$pref_=$_assigned_to.'|'.$_status.'|'.$_category.'|'.$_group.'|'.$_order_col.'|'.$_sort_ord;
+				$pref_=$_assigned_to.'|'.$_status.'|'.$_category.'|'.$_group.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed;
 				if ($pref_ != $u->getPreference('art_cust'.$this->ArtifactType->getID())) {
 					$u->setPreference('art_cust'.$this->ArtifactType->getID(),$pref_);
 				}
@@ -160,12 +165,24 @@ class ArtifactFactory extends Error {
 		$this->assigned_to=$_assigned_to;
 		$this->category=$_category;
 		$this->group=$_group;
+		$this->setChangedFrom($_changed);
 
 		if (!$max_rows || $max_rows < 5) {
 			$max_rows=50;
 		}
 		$this->max_rows=$max_rows;
 	}
+
+	/**
+	 *	setChangedFrom - sets up changed-from and last-changed before you call getTasks().
+	 *
+	 *	@param	int	The changed_from - offset time(sec) from now
+	 */
+	function setChangedFrom($changed_from) {
+                $this->changed_from = ($changed_from <= 0) ? 0x7fffffff : $changed_from;
+                $this->last_changed = time() - $this->changed_from;
+        }
+
 
 	/**
 	 *	getArtifacts - get an array of Artifact objects.
@@ -213,6 +230,8 @@ class ArtifactFactory extends Error {
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
 			 $status_str $assigned_str $category_str $group_str
+                         and (update_date>'" . $this->last_changed . "'
+                             or message_date >'" . $this->last_changed . "')   
 			ORDER BY group_artifact_id ".$this->sort.", ". $this->order_col ." ".$this->sort;
 
 

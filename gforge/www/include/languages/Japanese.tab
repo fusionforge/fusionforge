@@ -596,6 +596,10 @@ tracker_admin_update_users	section	トラッカー管理
 tracker_admin_update_users	title	トラッカーユーザーパーミッション 追加/更新
 tracker_browse	section	プロジェクト: $1
 tracker_browse	title	$1 閲覧
+tracker_browse	hour24	24時間以内
+tracker_browse	day7	1週間
+tracker_browse	week2	2週間
+tracker_browse	month1	1ヶ月
 tracker_detail	section	$1
 tracker_detail	title	トラッカー詳細
 tracker_reporting	section	プロジェクト: $1

@@ -2189,6 +2189,7 @@ tracker	assigned_to	Assigned To
 tracker	assignee	Assignee
 tracker	category	Category
 tracker	category_any	Any
+tracker	changed	Changed
 tracker	check_upload	Check to Upload & Attach File
 tracker	choose	Choose a tracker and you can browse/edit/add items to it.
 tracker	close_date	Close Date
@@ -2355,6 +2356,10 @@ tracker_browse	request_id	Request ID
 tracker_browse	resolution	Resolution 
 tracker_browse	sort_by	Order by
 tracker_browse	title	Browse $1
+tracker_browse	hour24	Last 24H
+tracker_browse	day7	Last 7days
+tracker_browse	week2	Last 2weeks
+tracker_browse	month1	Last 1month
 tracker_detail	add_comment	Add A Comment
 tracker_detail	attached_files	Attached Files
 tracker_detail	build_task_relation	Build Task Relation

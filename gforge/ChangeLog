@@ -1,5 +1,14 @@
 2003-11-29  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/tracker/browse.php, common/tracker/ArtifactFactory.class,
+	www/include/languages/Japanese.tab,
+	www/include/languages/Base.tab: "Last changed" filter for tracker
+	browser.  This is patch #560 from Hidenari Miwa and Tsutomu
+	Tominaga.
+	* db/20031129.sql: New file (patch #560 from Hidenari Miwa and
+	Tsutomu Tominaga).
+	* deb-specific/db-upgrade.pl: Upgrade databse using 20031129.sql.
+	
 	* deb-specific/db-upgrade.pl: Upgrade database schema using
 	20031105.sql and 20031124.sql.
 
