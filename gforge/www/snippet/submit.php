@@ -28,7 +28,7 @@ if (session_loggedin()) {
 				htmlspecialchars($description)."','$type','$language','$license')";
 			$result=db_query($sql);
 			if (!$result) {
-				$feedback .= ' ERROR DOING SNIPPET INSERT! ';
+				$feedback .= $Language->getText('snippet_submit','error_doing_snippet_insert');
 				echo db_error();
 			} else {
 				$feedback .= ' Snippet Added Successfully. ';
@@ -45,7 +45,7 @@ if (session_loggedin()) {
 					$feedback .= ' ERROR DOING SNIPPET VERSION INSERT! ';
 					echo db_error();
 				} else {
-					$feedback .= ' Snippet Version Added Successfully. ';
+					$feedback .= $Language->getText('snippet_submit','snippet_added_successfull');
 				}
 			}
 		} else {
@@ -53,16 +53,11 @@ if (session_loggedin()) {
 		}
 
 	}
-	snippet_header(array('title'=>'Submit A New Snippet','pagename'=>'snippet_submit'));
+	snippet_header(array('title'=>$Language->getText('snippet_submit','title'),'pagename'=>'snippet_submit'));
 
 	?>
-	<p>You can post a new code snippet and share it with other people around the world.
-	Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong>
-	so others can read and understand it.</p>
-	
-	<p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing snippet by
-	browsing the library. You should only use this page if you are submitting an
-	entirely new script or function.</p>
+	<p><?php echo $Language->getText('snippet_submit','you_can_post'); ?>
+	</p>
 	<p>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
@@ -70,50 +65,50 @@ if (session_loggedin()) {
 
 	<table>
 
-	<tr><td colspan="2"><strong>Title:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','snippet_title'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="name" size="45" maxlength="60" />
 	</td></tr>
 
-	<tr><td colspan="2"><strong>Description:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','description'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<textarea name="description" rows="5" cols="45" wrap="soft"></textarea>
 	</td></tr>
 
 	<tr>
-	<td><strong>Type:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo $Language->getText('snippet_submit','type'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array($SCRIPT_TYPE,'type'); ?>
 	</td>
 
-	<td><strong>License:</strong><br />
+	<td><strong><?php echo $Language->getText('snippet_submit','license'); ?>:</strong><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LICENSE,'license'); ?>
 	</td>
 	</tr>
 
 	<tr>
-	<td><strong>Language:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo $Language->getText('snippet_submit','language'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_LANGUAGE,'language'); ?>
 		<br />
-		<a href="/support/?func=addsupport&amp;group_id=1">Suggest a Language</a>
+		<a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_language'); ?></a>
 	</td>
 
-	<td><strong>Category:</strong><?php echo utils_requiredField(); ?><br />
+	<td><strong><?php echo $Language->getText('snippet_submit','category'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<?php echo html_build_select_box_from_array ($SCRIPT_CATEGORY,'category'); ?>
                 <br />
-                <a href="/support/?func=addsupport&amp;group_id=1">Suggest a Category</a>
+                <a href="/support/?func=addsupport&amp;group_id=1"><?php echo $Language->getText('snippet_submit','suggest_a_category'); ?></a>
 	</td>
 	</tr>
  
-	<tr><td colspan="2"><strong>Version:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','version'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="version" size="10" maxlength="15" />
 	</td></tr>
   
-	<tr><td colspan="2"><strong>Paste the Code Here:</strong><?php echo utils_requiredField(); ?><br />
+	<tr><td colspan="2"><strong><?php echo $Language->getText('snippet_submit','paste_the_code_here'); ?>:</strong><?php echo utils_requiredField(); ?><br />
 		<textarea name="code" rows="30" cols="85" wrap="soft"></textarea>
 	</td></tr>
  
 	<tr><td colspan="2" align="center">
-		<strong>Make sure all info is complete and accurate</strong>
+		<strong><?php echo $Language->getText('snippet_submit','make_sure_all_info'); ?></strong>
 		<br />
-		<input type="submit" name="submit" value="SUBMIT" />
+		<input type="submit" name="submit" value="<?php echo $Language->getText('snippet_submit','submit'); ?>" />
 	</td></tr>
 	</table></form></p>
 	<?php

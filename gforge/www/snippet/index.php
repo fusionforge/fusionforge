@@ -17,7 +17,7 @@ require_once('common/include/vars.php');
 require_once('www/snippet/snippet_utils.php');
 require_once('www/include/snippet_caching.php');
 
-snippet_header(array('title'=>'Snippet Library', 'header'=>'Snippet Library','pagename'=>'snippet'));
+snippet_header(array('title'=>$Language->getText('snippet_index','title'), 'header'=>'Snippet Library','pagename'=>'snippet'));
 
 echo snippet_mainpage();
 

@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
-snippet_header(array('title'=>'Snippet Library', 'header'=>'','pagename'=>'snippet_browse'));
+snippet_header(array('title'=>$Language->getText('snippet_browse','title'), 'header'=>'','pagename'=>'snippet_browse'));
 
 if ($by=='lang') {
 
@@ -27,7 +27,7 @@ if ($by=='lang') {
 		"FROM snippet_package,users ".
 		"WHERE users.user_id=snippet_package.created_by AND snippet_package.language='$lang'";
 
-	echo '<h2>Snippets by language: '.$SCRIPT_LANGUAGE[$lang].'</h2>';
+	echo '<h2>' .$Language->getText('snippet_browse','snippets_by_language', array($SCRIPT_LANGUAGE[$lang])).'</h2>';
 
 } else if ($by=='cat') {
 
@@ -39,11 +39,11 @@ if ($by=='lang') {
 		"FROM snippet_package,users ".
 		"WHERE users.user_id=snippet_package.created_by AND snippet_package.category='$cat'";
 
-	echo '<h2>Snippets by category: '.$SCRIPT_CATEGORY[$cat].'</h2>';
+	echo '<h2>' .$Language->getText('snippet_browse','snippet_by_category', array($SCRIPT_CATEGORY[$cat])).'</h2>';
 
 } else {
 
-	exit_error('Error','Error - bad url?');
+	exit_error($Language->getText('general','error'),$Language->getText('snippet_browse','error_bad_url'));
 
 }
 
@@ -54,13 +54,13 @@ $result2=db_query($sql2);
 $rows2=db_numrows($result2);
 
 if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
-	echo '<h2>No snippets found</h2>';
+	echo '<h2>' .$Language->getText('snippet_browse','no_snippets_found').'</h2>';
 } else {
 
 	$title_arr=array();
-	$title_arr[]='Snippet ID';
-	$title_arr[]='Title';
-	$title_arr[]='Creator';
+	$title_arr[]= $Language->getText('snippet_browse','snippet_id');
+	$title_arr[]= $Language->getText('snippet_browse','snippet_title');
+	$title_arr[]= $Language->getText('snippet_browse','Creator');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -69,7 +69,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	*/
 	if ($rows2 > 0) {
 		echo '
-			<tr style="background-color:#efefef"><td colspan="3"><strong>Packages Of Snippets</strong><td';
+			<tr style="background-color:#efefef"><td colspan="3"><strong>' .$Language->getText('snippet_browse','packages_of_snippets').'</strong><td';
 	}
 	for ($i=0; $i<$rows2; $i++) {
 		echo '
@@ -89,7 +89,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 
 	if ($rows > 0) {
 		echo '
-			<tr style="background-color:#efefef"><td colspan="3"><strong>Snippets</strong></td>';
+			<tr style="background-color:#efefef"><td colspan="3"><strong>' .$Language->getText('snippet_browse','snippets').'</strong></td>';
 	}
 	for ($i=0; $i<$rows; $i++) {
 		echo '

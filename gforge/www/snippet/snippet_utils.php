@@ -17,28 +17,27 @@
 	By Tim Perdue, Sourceforge, Jan 2000
 */
 
-$SCRIPT_CATEGORY=array();
-$SCRIPT_CATEGORY[0]='Choose One';
-$SCRIPT_CATEGORY[1]='UNIX Admin';
-$SCRIPT_CATEGORY[2]='HTML Manipulation';
-$SCRIPT_CATEGORY[3]='BBS Systems';
-$SCRIPT_CATEGORY[4]='Auctions';
-$SCRIPT_CATEGORY[5]='Calendars';
-$SCRIPT_CATEGORY[6]='Database Manipulation';
-$SCRIPT_CATEGORY[7]='Searching';
-$SCRIPT_CATEGORY[8]='File Management';
-$SCRIPT_CATEGORY[9]='Games';
-$SCRIPT_CATEGORY[10]='Voting';
-$SCRIPT_CATEGORY[11]='Shopping Carts';
-$SCRIPT_CATEGORY[12]='Other';
-$SCRIPT_CATEGORY[13]='Math Functions';
+$SCRIPT_CATEGORY[0]= $Language->getText('snippet_utils','choose_one');
+$SCRIPT_CATEGORY[1]= $Language->getText('snippet_utils','unix_admim');
+$SCRIPT_CATEGORY[2]= $Language->getText('snippet_utils','html_manipulation');
+$SCRIPT_CATEGORY[3]= $Language->getText('snippet_utils','bbs_systems');
+$SCRIPT_CATEGORY[4]= $Language->getText('snippet_utils','auctions');
+$SCRIPT_CATEGORY[5]= $Language->getText('snippet_utils','calendars');
+$SCRIPT_CATEGORY[6]= $Language->getText('snippet_utils','database_manipulation');
+$SCRIPT_CATEGORY[7]= $Language->getText('snippet_utils','searching');
+$SCRIPT_CATEGORY[8]= $Language->getText('snippet_utils','file_management');
+$SCRIPT_CATEGORY[9]= $Language->getText('snippet_utils','games');
+$SCRIPT_CATEGORY[10]= $Language->getText('snippet_utils','voting');
+$SCRIPT_CATEGORY[11]= $Language->getText('snippet_utils','shopping_carts');
+$SCRIPT_CATEGORY[12]= $Language->getText('snippet_utils','other');
+$SCRIPT_CATEGORY[13]= $Language->getText('snippet_utils','math_functions');
 
-$SCRIPT_TYPE[0]='Choose One';
-$SCRIPT_TYPE[1]='Function';
-$SCRIPT_TYPE[2]='Full Script';
-$SCRIPT_TYPE[3]='Sample Code (HOWTO)';
-$SCRIPT_TYPE[4]='README';
-$SCRIPT_TYPE[5]='Class';
+$SCRIPT_TYPE[0]= $Language->getText('snippet_utils','choose_one');
+$SCRIPT_TYPE[1]= $Language->getText('snippet_utils','funktion');
+$SCRIPT_TYPE[2]= $Language->getText('snippet_utils','full_script');
+$SCRIPT_TYPE[3]= $Language->getText('snippet_utils','sample_code');
+$SCRIPT_TYPE[4]= $Language->getText('snippet_utils','readme');
+$SCRIPT_TYPE[5]= $Language->getText('snippet_utils','class');
 
 $SCRIPT_LICENSE = array();
 $SCRIPT_LICENSE[0] = 'GNU General Public License';
@@ -55,10 +54,12 @@ $SCRIPT_LICENSE[10] = 'Python License';
 $SCRIPT_LICENSE[11] = 'zlib/libpng License';
 $SCRIPT_LICENSE[12] = 'WebSite Only';
 $SCRIPT_LICENSE[13] = 'Other';
+$SCRIPT_LICENSE[12] = $Language->getText('snippet_utils','website_only');
+$SCRIPT_LICENSE[13] = $Language->getText('snippet_utils','other');
 
 $SCRIPT_LANGUAGE = array();
-$SCRIPT_LANGUAGE[0] = 'Choose One';
-$SCRIPT_LANGUAGE[1] = 'Other Language';
+$SCRIPT_LANGUAGE[0] = $Language->getText('snippet_utils','choose_one');
+$SCRIPT_LANGUAGE[1] = $Language->getText('snippet_utils','other_language');
 $SCRIPT_LANGUAGE[2] = 'C';
 $SCRIPT_LANGUAGE[3] = 'C++';
 $SCRIPT_LANGUAGE[4] = 'Perl';
@@ -77,6 +78,7 @@ $SCRIPT_LANGUAGE[16] = 'C#';
 
 function snippet_header($params) {
 	global $DOCUMENT_ROOT,$HTML;
+	global $Language;
 
 	$HTML->header($params);
 	/*
@@ -84,9 +86,9 @@ function snippet_header($params) {
 	*/
 	echo '<span style="font-family:arial, helvetica">';
 	echo '<p><strong>';
-	echo '<a href="/snippet/">Browse</a>
-		 | <a href="/snippet/submit.php">Submit A New Snippet</a>
-		 | <a href="/snippet/package.php">Create A Package</a></strong></p></span>';
+	echo '<a href="/snippet/">' .$Language->getText('snippet_utils','browse').'</a>
+		 | <a href="/snippet/submit.php">' .$Language->getText('snippet_utils','submit_a_new_snippet').'</a>
+		 | <a href="/snippet/package.php">' .$Language->getText('snippet_utils','create_a_package').'</a></strong></p></span>';
 	echo '<p>&nbsp;</p>';
 }
 
@@ -98,6 +100,8 @@ function snippet_footer($params) {
 }
 
 function snippet_show_package_snippets($version) {
+
+	global $Language;
 	//show the latest version
 	$sql="SELECT snippet_package_item.snippet_version_id, snippet_version.version,snippet.name,users.user_name ".
 		"FROM snippet,snippet_version,snippet_package_item,users ".
@@ -110,21 +114,21 @@ function snippet_show_package_snippets($version) {
 	$rows=db_numrows($result);
 	echo '
 	<p>&nbsp;</p>
-	<h3>Snippets In This Package:</h3>
+	<h3>' .$Language->getText('snippet_utils','snippet_in_this_package').':</h3>
 	<p>&nbsp;</p>';
 
 	$title_arr=array();
-	$title_arr[]='Snippet ID';
-	$title_arr[]='Download Version';
-	$title_arr[]='Title';
-	$title_arr[]='Author';
+	$title_arr[]= $Language->getText('snippet_utils','snippet_id');
+	$title_arr[]= $Language->getText('snippet_utils','download_version');
+	$title_arr[]= $Language->getText('snippet_utils','snippet_title');
+	$title_arr[]= $Language->getText('snippet_utils','author');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr,$links_arr);
 
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-			<tr><td colspan="4"><h3>No Snippets Are In This Package Yet</h3></td></tr>';
+			<tr><td colspan="4"><h3>' .$Language->getText('snippet_utils','no_snippets_are_in_this_package').'</h3></td></tr>';
 	} else {
 
 		//get the newest version, so we can display it's code

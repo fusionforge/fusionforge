@@ -33,12 +33,12 @@ if (session_loggedin()) {
 		<html>
 		<body style="background-color:white">';
 	} else {
-		snippet_header(array('title'=>'Submit A New Snippet','pagename'=>'snippet_add_snippet_to_package'));
+		snippet_header(array('title'=>$Language->getText('add_snippet','title'),'pagename'=>'snippet_add_snippet_to_package'));
 	}
 
 	if (!$snippet_package_version_id) {
 		//make sure the package id was passed in
-		echo '<h1>Error - snippet_package_version_id missing</h1>';
+		echo '<h1>' .$Language->getText('add_snippet','error_snippet_id_missing') .'</h1>';
 		handle_add_exit();
 	}
 
@@ -54,7 +54,7 @@ if (session_loggedin()) {
 				"WHERE submitted_by='".user_getid()."' AND ".
 				"snippet_package_version_id='$snippet_package_version_id'");
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h1>Error - Only the creator of a package version can add snippets to it.</h1>';
+				echo '<h1>' .$Language->getText('add_snippet','error_only_creator_can_add').'</h1>';
 				handle_add_exit();
 			}
 
@@ -63,8 +63,8 @@ if (session_loggedin()) {
 			*/
 			$result=db_query("SELECT * FROM snippet_version WHERE snippet_version_id='$snippet_version_id'");
 			if (!$result || db_numrows($result) < 1) {
-				echo '<h1>Error - That snippet doesn\'t exist.</h1>';
-				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</a>';
+				echo '<h1>' .$Language->getText('add_snippet','error_snippet_doesnt_exist').'</h1>';
+				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">' .$Language->getText('add_snippet','back_to_add_page').'</a>';
 				handle_add_exit();
 			}
 
@@ -75,8 +75,8 @@ if (session_loggedin()) {
 				"WHERE snippet_package_version_id='$snippet_package_version_id' ".
 				"AND snippet_version_id='$snippet_version_id'");
 			if ($result && db_numrows($result) > 0) {
-				echo '<h1>Error - That snippet was already added to this package.</h1>';
-				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</a>';
+				echo '<h1>'.$Language->getText('add_snippet','error_snippet_already_added').'</h1>';
+				echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
 				handle_add_exit();
 			}
 
@@ -88,14 +88,14 @@ if (session_loggedin()) {
 			$result=db_query($sql);
 
 			if (!$result) {
-				$feedback .= ' ERROR DOING SNIPPET VERSION INSERT! ';
+				$feedback .= $Language->getText('add_snippet','error_doing_snippet_version_insert');
 				echo db_error();
 			} else {
-				$feedback .= ' Snippet Version Added Successfully. ';
+				$feedback .= $Language->getText('add_snippet','snippet_version_added_successfully');
 			}
 		} else {
-			echo '<h1>Error - Go back and fill in all the information</h1>';
-			echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">Back To Add Page</a>';
+			echo '<h1>' .$Language->getText('add_snippet','error_go_back_and_fill_all').'</h1>';
+			echo '<a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.$snippet_package_version_id.'">'.$Language->getText('add_snippet','back_to_add_page').'</a>';
 			handle_add_exit();
 		}
 
@@ -108,11 +108,9 @@ if (session_loggedin()) {
 
 	?>
 	<p>
-	<strong>Package:</strong><br />
+	<strong><?php echo $Language->getText('add_snippet','package'); ?></strong><br />
 	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?></p>
-	<p>You can use this form repeatedly to keep adding snippets to your package.</p>
-	<p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet
-	on the browse pages.</p>
+	<p><?php echo $Language->getText('add_snippet','you_can_use_this_form'); ?></p>
 	<p>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<input type="hidden" name="post_changes" value="y" />
@@ -121,14 +119,14 @@ if (session_loggedin()) {
 
 	<table>
 	<tr><td colspan="2" align="center">
-		<strong>Add This Snippet Version ID:</strong><br />
+		<strong><?php echo $Language->getText('add_snippet','add_this_snippet_version_id'); ?></strong><br />
 		<input type="text" name="snippet_version_id" size="6" maxlength="7" />
 	</td></tr>
 
 	<tr><td colspan="2" align="center">
-		<strong>Make sure all info is complete and accurate</strong>
+		<strong><?php echo $Language->getText('add_snippet','make_sure_all_info'); ?></strong>
 		<br />
-		<input type="submit" name="submit" value="SUBMIT" />
+		<input type="submit" name="submit" value="<?php echo $Language->getText('add_snippet','submit'); ?>" />
 	</td></tr>
 	</table></form></p>
 	<?php
@@ -144,9 +142,9 @@ if (session_loggedin()) {
 	if (!$result || $rows < 1) {
 		echo db_error();
 		echo '
-		<p>No Snippets Are In This Package Yet</p>';
+		<p>' .$Language->getText('add_snippet','no_snippets_in_this_package').'</p>';
 	} else {
-		echo $HTML->boxTop('Snippets In This Package');
+		echo $HTML->boxTop($Language->getText('add_snippet','snippets_in_this_package'));
 		for ($i=0; $i<$rows; $i++) {
 			echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td align="center">
