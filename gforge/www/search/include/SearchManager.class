@@ -134,6 +134,8 @@ class SearchManager {
 			new SearchEngine(SEARCH__TYPE_IS_SOFTWARE, 'ProjectRssSearchRenderer', $Language->getText('searchbox','softwaregroup')),
 			SEARCH__OUTPUT_RSS
 		);
+		
+		plugin_hook_by_reference('search_engines', $this);
 	}
 	
 	function loadParameters() {
