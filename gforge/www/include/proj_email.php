@@ -103,7 +103,7 @@ function send_project_rejection($group_id, $response_id, $message="zxcv")
 		$response = db_result(db_query("SELECT response_text FROM canned_responses WHERE response_id='$response_id'"),0,"response_text");
 	}
 
-	mail($email, $GLOBALS['sys_name']." Project Denied", $response, "From: noreply@sourceforge.net");
+	mail($email, $GLOBALS['sys_name']." Project Denied", $response, "From: noreply@".$GLOBALS['sys_default_domain']);
 
 	return true;
 }

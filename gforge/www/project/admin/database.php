@@ -166,7 +166,7 @@ if (db_numrows($res_db) > 0) {
 } else {
 ?>
 
-Documentation: <a href="https://sourceforge.net/docman/display_doc.php?docid=3052&group_id=1">Basic MySQL database access</a><p>
+Documentation: <a href="https://<?php echo $GLOBALS['sys_default_domain']; ?>/docman/display_doc.php?docid=3052&group_id=1">Basic MySQL database access</a><p>
 Maximum number of databases of all types have been allocated. <p>
 
 <?php

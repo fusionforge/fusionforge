@@ -264,7 +264,7 @@ if( $submit ) {
 	if (!$atleastone) {
 		print '<h3>No available files</H3>
 			<P>
-			You can upload files using FTP to <B>upload.sourceforge.net</B> 
+			You can upload files using FTP to <B>'.$GLOBALS['sys_upload_host'].'</B> 
 			in the <B>/incoming</B> directory, then hit <B>Refresh View</B>.';
 	}
 ?>

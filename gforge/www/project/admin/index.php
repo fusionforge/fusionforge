@@ -110,7 +110,7 @@ Project WWW directory on shell server <a href="/docman/display_doc.php?docid=774
 <font size=-1>
 If you use <?php echo $GLOBALS['sys_name']; ?> services, we ask you to display our logo
 on project homepage, as explained
-<a href="http://sourceforge.net/docman/display_doc.php?docid=790&group_id=1">here
+<a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/docman/display_doc.php?docid=790&group_id=1">here
 </a>
 </font>
 </p>

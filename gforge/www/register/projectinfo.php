@@ -197,7 +197,7 @@ your license.
 <LI><A href="http://www.opensource.org/licenses/nethack.html" target="_blank">Nethack General Public License</A>
 <LI><A href="http://oss.software.ibm.com/developerworks/opensource/license-cpl.html" target="_blank">IBM Common Public License</A>
 <LI><A href="http://www.opensource.apple.com/apsl/" target="_blank">Apple Public Source License</A>
-<LI><A href="http://www.sourceforge.net/register/publicdomain.txt" target="_blank">Public Domain</A>
+<LI><A href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/register/publicdomain.txt" target="_blank">Public Domain</A>
 <LI>Website Only
 <LI>Other/Proprietary License
 
