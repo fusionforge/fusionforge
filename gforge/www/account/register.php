@@ -94,9 +94,6 @@ if ($sys_use_jabber) {
 <p>
 <input type="submit" name="submit" value="<?php echo $Language->getText('account_register','register'); ?>">
 </form>
+<p><a href="pending-resend.php"><?php echo $Language->getText('account_register','resend_pending'); ?></a>
 
-<?php
-
-$HTML->footer(array());
-
-?>
+<?php $HTML->footer(array()); ?>
