@@ -14,6 +14,9 @@
 
 require_once('pre.php');
 require_once('vote_function.php');
+require_once('common/tracker/ArtifactsForUser.class');
+require_once('common/forum/ForumsForUser.class');
+require_once('common/pm/ProjectTasksForUser.class');
 
 global $G_SESSION;
 
@@ -52,129 +55,96 @@ if (session_loggedin() || $sf_user_hash) {
 	*/
 	$last_group=0;
 	echo $HTML->boxTop($Language->getText('my', 'assigneditems'));
-
-	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
-		a.assigned_to,a.summary,a.artifact_id,a.priority
-		FROM artifact a, groups g, artifact_group_list agl
-		WHERE
-		a.group_artifact_id=agl.group_artifact_id
-		AND agl.group_id=g.group_id
-    AND g.status = 'A'
-		AND a.assigned_to='". user_getid() ."'
-		AND a.status_id='1'
-		AND g.status='A'
-		ORDER BY agl.group_id,a.group_artifact_id,a.assigned_to,a.status_id";
-
-	$result=db_query($sql);
-	$rows=db_numrows($result);
-
-	if ($rows > 0) {
-		echo '</td></tr>';
-		for ($i=0; $i < $rows; $i++) {
-			if (db_result($result,$i,'group_artifact_id') != $last_group) {
+	$artifactsForUser = new ArtifactsForUser($G_SESSION);
+	$assignedArtifacts = $artifactsForUser->getAssignedArtifactsByGroup();
+	if (count($assignedArtifacts) > 0) {
+		foreach($assignedArtifacts as $art) {
+		        echo '</td></tr>';
+			if ($art->ArtifactType->Group->getID() != $last_group) {
 				echo '
 				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
-				db_result($result,$i,'group_id').'&atid='.
-				db_result($result,$i,'group_artifact_id').'">'.
-				db_result($result,$i,'group_name').' - '.
-				db_result($result,$i,'name').'</a></strong></td></tr>';
+				$art->ArtifactType->Group->getID().'&atid='.
+				$art->ArtifactType->getID().'">'.
+				$art->ArtifactType->Group->getPublicName().' - '.
+				$art->ArtifactType->getName().'</a></strong></td></tr>';
+
 			}
 			echo '
-			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
+			<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
 			<td><a href="/tracker/?func=detail&amp;aid='.
-			db_result($result, $i, 'artifact_id').
-			'&amp;group_id='.db_result($result, $i, 'group_id').
-			'&amp;atid='.db_result($result, $i, 'group_artifact_id').'">'.
-			db_result($result, $i, 'artifact_id').'</td>
-			<td>' . stripslashes(db_result($result, $i, 'summary'));
+			$art->getID().
+			'&amp;group_id='.$art->ArtifactType->Group->getID().
+			'&amp;atid='.$art->ArtifactType->getID().'">'.
+			$art->getID().'</td>
+			<td>' . stripslashes($art->getSummary());
 
-			$last_group = db_result($result,$i,'group_artifact_id');
+			$last_group = $art->getArtifactGroupID();
 		}
 	} else {
-		echo '
-		<strong>'.$Language->getText('my', 'no_tracker_items_assigned').'</strong>';
-		echo db_error();
+	                echo '
+			<strong>'.$Language->getText('my', 'no_tracker_items_assigned').'</strong>';
 	}
 
-	$last_group=0;
+	$last_group="0";
 	echo $HTML->boxMiddle($Language->getText('my', 'submitteditems'),false,false);
-
-	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
-		a.assigned_to,a.summary,a.artifact_id,a.priority
-		FROM artifact a, groups g, artifact_group_list agl
-		WHERE
-		a.group_artifact_id=agl.group_artifact_id
-		AND agl.group_id=g.group_id
-    AND g.status = 'A'
-		AND a.submitted_by='". user_getid() ."'
-		AND a.status_id='1'
-		ORDER BY agl.group_id,a.group_artifact_id,a.submitted_by,a.status_id";
-
-	$result=db_query($sql);
-	$rows=db_numrows($result);
-
-	if ($rows > 0) {
-		for ($i=0; $i < $rows; $i++) {
+	$submittedArtifacts = $artifactsForUser->getSubmittedArtifactsByGroup();
+	if (count($submittedArtifacts) > 0) {
+		foreach ($submittedArtifacts as $art) {
 			echo '</td></tr>';
-			if (db_result($result,$i,'group_artifact_id') != $last_group) {
-				echo '
+			if ($art->ArtifactType->Group->getID() != $last_group) {
+                                echo '
 				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
-				db_result($result,$i,'group_id').'&amp;atid='.
-				db_result($result,$i,'group_artifact_id').'">'.
-				db_result($result,$i,'group_name').' - '.
-				db_result($result,$i,'name').'</a></strong></td></tr>';
+				$art->ArtifactType->Group->getID().'&atid='.
+				$art->ArtifactType->getID().'">'.
+				$art->ArtifactType->Group->getPublicName().' - '.
+				$art->ArtifactType->getName().'</a></strong></td></tr>';
 			}
 			echo '
-			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
+			<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
 			<td><a href="/tracker/?func=detail&amp;aid='.
-			db_result($result, $i, 'artifact_id').
-			'&amp;group_id='.db_result($result, $i, 'group_id').
-			'&amp;atid='.db_result($result, $i, 'group_artifact_id').'">'.
-			db_result($result, $i, 'artifact_id').'</a></td>
-			<td>' . stripslashes(db_result($result, $i, 'summary'));
+			$art->getID().
+			'&amp;group_id='.$art->ArtifactType->Group->getID().
+			'&amp;atid='.$art->ArtifactType->getID().'">'.
+			$art->getID().'</td>
+			<td>' . stripslashes($art->getSummary());
 
-			$last_group = db_result($result,$i,'group_artifact_id');
+			$last_group = $art->ArtifactType->Group->getID();
 		}
 	} else {
 		echo '
 		<strong>'.$Language->getText('my', 'no_tracker_items_submitted').'</strong>';
-		echo db_error();
 	}
-
 
 	/*
 		Forums that are actively monitored
 	*/
 	$last_group=0;
 	echo $HTML->boxMiddle($Language->getText('my', 'monitoredforum'),false,false);
-	$sql="SELECT groups.group_name,groups.group_id,forum_group_list.group_forum_id,forum_group_list.forum_name ".
-		"FROM groups,forum_group_list,forum_monitored_forums ".
-		"WHERE groups.group_id=forum_group_list.group_id AND groups.status ='A' ".
-		"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
-		"AND forum_monitored_forums.user_id='".user_getid()."' ORDER BY group_name DESC";
-	$result=db_query($sql);
-	$rows=db_numrows($result);
-	if (!$result || $rows < 1) {
+	$forumsForUser = new ForumsForUser($G_SESSION);
+	$forums =& $forumsForUser->getMonitoredForums();
+	if (count($forums) < 1) {
 		echo $Language->getText('my', 'no_monitored_forums');
-		echo db_error();
 	} else {
-		for ($i=0; $i<$rows; $i++) {
+		foreach ($forums as $f) {
 			echo '</td></tr>';
-			if (db_result($result,$i,'group_id') != $last_group) {
+			$group = $f->getGroup();
+			if ($group->getID() != $last_group) {
 				echo '
 				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><strong><a href="/forum/?group_id='.
-					db_result($result,$i,'group_id').'">'.
-					db_result($result,$i,'group_name').'</a></strong></td></tr>';
+				$group->getID().'">'.
+				$group->getPublicName().'</a></strong></td></tr';
 			}
+
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/forum/monitor.php?forum_id='.
-				db_result($result,$i,'group_forum_id').
-				'&amp;stop=1&amp;group_id='.db_result($result,$i,'group_id').'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
-				'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
-				db_result($result,$i,'group_forum_id').'">'.
-				db_result($result,$i,'forum_name').'</a>';
+			db_result($result,$i,'group_forum_id').
+			'&amp;stop=1&amp;group_id='.db_result($result,$i,'group_id').'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
+			'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
+			$f->getID().'">'.
+			$f->getName().'</a>';
 
-			$last_group=db_result($result,$i,'group_id');
+			$last_group= $group->getID();
+
 		}
 	}
 
@@ -228,47 +198,41 @@ if (session_loggedin() || $sf_user_hash) {
 	*/
 	$last_group=0;
 	echo $HTML->boxTop($Language->getText('my', 'tasks'));
+	$projectTasksForUser = new ProjectTasksForUser($G_SESSION);
+	$userTasks =& $projectTasksForUser->getTasksByGroupProjectName();
 
-	$sql="SELECT groups.group_name,project_group_list.project_name,project_group_list.group_id, ".
-		"project_task.group_project_id,project_task.priority,project_task.project_task_id,project_task.summary,project_task.percent_complete ".
-		"FROM groups,project_group_list,project_task,project_assigned_to ".
-		"WHERE project_task.project_task_id=project_assigned_to.project_task_id ".
-		"AND project_assigned_to.assigned_to_id='".user_getid()."' AND project_task.status_id='1'  ".
-		"AND project_group_list.group_id=groups.group_id ".
-		"AND project_group_list.group_project_id=project_task.group_project_id AND groups.status = 'A'".
-		"ORDER BY group_name,project_name";
-
-	$result=db_query($sql);
-	$rows=db_numrows($result);
-
-	if ($rows > 0) {
-		for ($i=0; $i < $rows; $i++) {
+	if (count($userTasks) > 0) {
+		foreach ($userTasks as $task) {
 			echo '</td></tr>';
 			/* Deduce summary style */
 			$style_begin='';
 			$style_end='';
-			if (db_result($result,$i,'percent_complete')==100) {
+			if ($task->getPercentComplete()==100) {
 				$style_begin='<span style="text-decoration:underline">';
 				$style_end='</span>';
 			}
-			if (db_result($result,$i,'group_project_id') != $last_group) {
+			//if ($task->getProjectGroup()->getID() != $last_group) {
+			$projectGroup =& $task->getProjectGroup();
+			$group =& $projectGroup->getGroup();
+			if ($projectGroup->getID() != $last_group) {
 				echo '
 				<tr><td colspan="2"><strong><a href="/pm/task.php?group_id='.
-				db_result($result,$i,'group_id').'&amp;group_project_id='.
-				db_result($result,$i,'group_project_id').'">'.
-				db_result($result,$i,'group_name').' - '.
-				db_result($result,$i,'project_name').'</a></strong></td></tr>';
+				$group->getID().
+				'&amp;group_project_id='.
+				$projectGroup->getID().'">'.
+				$group->getPublicName().' - '.
+				$projectGroup->getName().'</a></strong></td></tr>';
 			}
 			echo '
-			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
+			<tr style="background-color:'.html_get_priority_color($task->getPriority()).'">
 			<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.
-			db_result($result, $i, 'project_task_id').
-			'&amp;group_id='.db_result($result, $i, 'group_id').
-			'&amp;group_project_id='.db_result($result, $i, 'group_project_id').'">'.
-			db_result($result, $i, 'project_task_id').'</td>
-			<td>'.$style_begin.stripslashes(db_result($result, $i, 'summary')).$style_end;
+			$task->getID().
+			'&amp;group_id='.$group->getID().
+			'&amp;group_project_id='.$projectGroup->getID().'">'.
+			$task->getID().'</td>
+			<td>'.$style_begin.stripslashes($task->getSummary()).$style_end;
 
-			$last_group = db_result($result,$i,'group_project_id');
+			$last_group = $projectGroup->getID();
 		}
 	} else {
 		echo '

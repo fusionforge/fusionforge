@@ -1,0 +1,108 @@
+<?php
+/**
+ * GForge Tracker Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ */
+
+require_once ('common/include/Error.class');
+require_once ('common/include/User.class');
+require_once ('common/tracker/Artifact.class');
+require_once ('common/tracker/ArtifactFromID.class');
+
+class ArtifactsForUser extends Error {
+
+//artifact_vw
+	var $User;
+	var $Group;
+	var $ArtifactType;
+	var $Artifact;
+
+	function ArtifactsForUser(&$user) {
+		$this->User =& $user;	
+		return true;
+	}
+
+	/**
+	*       getArtifactsFromSQL
+	*       $sql - The sql that returns artifact_id
+	*
+	*       @return Artifact[] The array of Artifacts
+	*
+	*/
+	function getArtifactsFromSQL($sql) {
+		$artifacts = array();
+	        $result=db_query($sql);
+	        $rows=db_numrows($result);
+	        if ($rows<=0) {
+	        	return $artifacts;
+	         }
+	        for ($i=0; $i < $rows; $i++) {
+	       		$id  = db_result($result,$i,'artifact_id');
+	             	$afi =& new ArtifactFromID($id);
+	             	if ($afi->isError()) {
+	                    	$this->setError($afi->getErrorMessage());
+	             	} else {
+	                	$artifacts[] =& $afi->Artifact;
+			}
+	         }
+                return $artifacts;
+	 }
+
+        /**
+        *       getAssignedArtifacts
+        *
+        *       @return Artifact[] The array of Artifacts
+        *
+        */
+        function getAssignedArtifactsByGroup() {
+                $sql="SELECT a.artifact_id
+		      FROM artifact a, artifact_group_list agl
+		      WHERE a.assigned_to=".$this->User->getID()."
+	              AND a.group_artifact_id=agl.group_artifact_id
+		      ORDER BY agl.group_id,a.group_artifact_id,a.assigned_to,a.status_id";
+
+		return $this->getArtifactsFromSQL($sql);
+	}
+
+	/**
+	*	getSubmittedArtifactsByGroup
+	*
+	*	@return Artifact[] The array of Artifacts
+	*
+	*/
+	function getSubmittedArtifactsByGroup() {
+	        $sql="SELECT a.artifact_id
+		      FROM artifact a, artifact_group_list agl
+		      WHERE a.group_artifact_id=agl.group_artifact_id
+		      AND a.submitted_by='".$this->User->getID()."'
+		      AND a.status_id='1'
+		      ORDER BY agl.group_id,a.group_artifact_id,a.submitted_by,a.status_id";
+
+		return $this->getArtifactsFromSQL($sql);
+	}
+
+
+
+}
+
+?>

@@ -1,3 +1,10 @@
+2003-05-20 Tom Copeland <tom@infoether.com>
+
+	* www/my/index.php, common/forum/ForumsForUser.class, 
+	common/pm/ProjectTasksForUser.class, common/tracker/ArtifactsForUser.class
+	Applied patch #349: Refactoring of the www/my/index.php page. Thanks to
+	Jeff Fynboh for the code.
+
 2003-05-19 Tom Copeland <tom@infoether.com>
 
 	* common/include/User.class:
