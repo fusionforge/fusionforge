@@ -4,8 +4,10 @@ gforge (3.0-0+6+) experimental; urgency=low
   * [Christian] See upstream Changelog
   * [Christian] Replacing html_get_alt_row_color with boxGetAltRowStyle
   * [Christian] Removed obsolete html_get_alt_row_color function
+  * [Christian] FRS/QRS in gforge fashion
+  * [Christian] Added Peerating parameter management
 
- -- Christian Bayle <bayle@debian.org>  Fri, 13 Dec 2002 02:17:16 +0100
+ -- Christian Bayle <bayle@debian.org>  Fri, 13 Dec 2002 23:11:45 +0100
 
 gforge (3.0-0+5) experimental; urgency=low
 

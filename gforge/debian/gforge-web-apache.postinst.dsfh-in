@@ -30,8 +30,7 @@ set -e
 
 case "$1" in
     configure)
-	vars="system_name domain_name server_admin db_password shell_host users_host cvs_host lists_host download_host admin_login ip_address admin_password newsadmin_groupid statsadmin_groupid skill_list"
-	#vars="shell_host users_host cvs_host lists_host download_host ldap_host ldap_base_dn ip_address newsadmin_groupid statsadmin_groupid db_password db_host db_name db_user"
+	vars="system_name domain_name server_admin db_password shell_host users_host cvs_host lists_host download_host admin_login ip_address admin_password newsadmin_groupid statsadmin_groupid peerrating_groupid skill_list"
 	update_mainconffile $vars
         /usr/sbin/gforge-config
 
@@ -52,6 +51,9 @@ case "$1" in
 	if grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
 		echo "" >/etc/gforge/httpd.common
 	fi
+
+	# Set up upload directory
+	chown www-data:www-data /var/lib/gforge/uploads
 	
     ;;
 

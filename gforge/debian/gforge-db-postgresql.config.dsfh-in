@@ -19,7 +19,6 @@ get_pw gforge/shared/admin_password critical
 #DSFHELPER:lists-variables#
 #DSFHELPER:downloadhost-variables#
 
-db_input low gforge/shared/newsadmin_groupid || true
 db_input low gforge/shared/skill_list || true
 
 db_go || true
