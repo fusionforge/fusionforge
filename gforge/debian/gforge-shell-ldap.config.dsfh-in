@@ -3,5 +3,10 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:handle-mainconffile#
+
+create_mainconffile
+init_debconf_from_mainconffile
+
 #DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:ldap-variables#
