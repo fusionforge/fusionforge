@@ -1,3 +1,8 @@
+2004-09-29  Francisco Gimeno <kikov@kikov.org>
+
+	* gforge-plugin-scmsvn/include/SVNPlugin.class: add a new hook to get
+	the plugin published as scm_plugin.
+
 2004-09-23  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* fixed [#905] Incorrect DB transaction handling in ArtifactType.class
