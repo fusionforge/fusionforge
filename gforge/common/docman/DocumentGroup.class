@@ -19,7 +19,7 @@
 
 require_once('common/include/Error.class');
 
-class DocumentCategory extends Error {
+class DocumentGroup extends Error {
 
 	/** 
 	 * The artifact type object
@@ -36,7 +36,7 @@ class DocumentCategory extends Error {
 	var $data_array;
 
 	/**
-	 *  DocumentCategory - constructor.
+	 *  DocumentGroup - constructor.
 	 *
 	 *  Use this constructor if you are modifying an existing doc_group.
 	 *
@@ -44,17 +44,17 @@ class DocumentCategory extends Error {
 	 *  @param	array	(all fields from doc_groups) OR doc_group from database.
 	 *  @return boolean.
 	 */
-	function DocumentCategory(&$Group, $data=false) {
+	function DocumentGroup(&$Group, $data=false) {
 		$this->Error(); 
 
 		//was Group legit?
 		if (!$Group || !is_object($Group)) {
-			$this->setError('DocumentCategory: No Valid Group');
+			$this->setError('DocumentGroup: No Valid Group');
 			return false;
 		}
 		//did Group have an error?
 		if ($Group->isError()) {
-			$this->setError('DocumentCategory: '.$Group->getErrorMessage());
+			$this->setError('DocumentGroup: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;
@@ -88,12 +88,12 @@ class DocumentCategory extends Error {
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError('DocumentCategory: name is Required');
+			$this->setError('DocumentGroup: name is Required');
 			return false;
 		}
 
 		$perm =& $this->Group->getPermission (session_get_user());
-		if (!$perm || !$perm->isPMAdmin()) {
+		if (!$perm || !$perm->isDocEditor()) {
 			$this->setError('Permission Denied');
 			return false;
 		}
@@ -121,7 +121,7 @@ class DocumentCategory extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this DocumentCategory from the database
+	 *	fetchData() - re-fetch the data for this DocumentGroup from the database
 	 *
 	 *	@param	int		ID of the category
 	 *	@return true/false
@@ -129,7 +129,7 @@ class DocumentCategory extends Error {
 	function fetchData($id) {
 		$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$id'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('DocumentCategory: Invalid DocumentCategory ID');
+			$this->setError('DocumentGroup: Invalid DocumentGroup ID');
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -138,7 +138,7 @@ class DocumentCategory extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group Object this DocumentCategory is associated with.
+	 *	getGroup - get the Group Object this DocumentGroup is associated with.
 	 *
 	 *	@return Object Group.
 	 */
@@ -147,7 +147,7 @@ class DocumentCategory extends Error {
 	}
 	
 	/**
-	 *	getID - get this DocumentCategory's ID.
+	 *	getID - get this DocumentGroup's ID.
 	 *
 	 *	@return	int	The id #.
 	 */
@@ -165,14 +165,14 @@ class DocumentCategory extends Error {
 	}
 
 	/**
-	 *  update - update an DocumentCategory.
+	 *  update - update a DocumentGroup.
 	 *
 	 *  @param	string	Name of the category.
 	 *  @return boolean.
 	 */
 	function update($name) {
 		$perm =& $this->Group->getPermission (session_get_user());
-		if (!$perm || !$perm->isDocAdmin()) {
+		if (!$perm || !$perm->isDocEditor()) {
 			$this->setError('Permission Denied');
 			return false;
 		}

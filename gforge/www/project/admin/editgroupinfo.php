@@ -39,8 +39,8 @@ if ($submit) {
 		$use_cvs,
 		$use_news,
 		$use_docman,
-		$new_task_address,
-		$send_all_tasks,
+		$new_doc_address,
+		$send_all_docs,
 		100,
 		$enable_pserver,
 		$enable_anoncvs,
@@ -256,9 +256,9 @@ function c($v) {
 
 <P>
 If you wish, you can provide default email addresses to which new submissions will be sent.<BR>
-<B>New Task Assignments:</B><BR><INPUT TYPE="TEXT" NAME="new_task_address" VALUE="<?php echo $group->PMEmailAddress(); ?>" SIZE="25" MAXLENGTH="250">
+<B>New Document Submissions:</B><BR><INPUT TYPE="TEXT" NAME="new_doc_address" VALUE="<?php echo $group->getDocEmailAddress(); ?>" SIZE="25" MAXLENGTH="250">
 (send on all updates)
-<INPUT TYPE="CHECKBOX" NAME="send_all_tasks" VALUE="1" <?php echo c($group->PMEmailAll()); ?> ><BR>
+<INPUT TYPE="CHECKBOX" NAME="send_all_docs" VALUE="1" <?php echo c($group->docEmailAll()); ?> ><BR>
 
 <HR>
 <P><INPUT type="submit" name="submit" value="Update">

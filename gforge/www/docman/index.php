@@ -1,83 +1,77 @@
 <?php
 /**
-  *
-  * SourceForge Documentaion Manager
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Doc Mgr Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
 
 
 /*
-        by Quentin Cregan, SourceForge 06/2000
+	Document Manager
+
+	by Quentin Cregan, SourceForge 06/2000
+
+	Complete OO rewrite by Tim Perdue 1/2003
 */
 
-require_once('doc_utils.php');
 require_once('pre.php');
+require_once('include/doc_utils.php');
+require_once('common/docman/DocumentFactory.class');
 
-if ($group_id) {
-
-	if (!$language_id) {
-		if (session_loggedin()) {
-			$language_id = $LUSER->getLanguage();
-		} else {
-			$language_id = 1;
-		}
-	}
-
-	$usermem = user_ismember($group_id);
-	docman_header('Project Documentation','Project Documentation','docman','',group_getname($group_id));
-	//get a list of group numbers that this project owns
-	$query = "select * "
-		."from doc_groups "
-		."where group_id = '$group_id' "
-		."order by groupname";
-	$result = db_query($query); 
-
-	//otherwise, throw up an error
-	if (db_numrows($result) < 1) {
-		print "<b>This project has no categorized data.</b><p>";
-	} else { 
-		doc_droplist_count($group_id, $language_id);
-		print "<hr>";
-		// get the groupings and display them with their members.
-		while ($row = db_fetch_array($result)) {
-			$query = "select description, docid, title, doc_group, filename "
-				."from doc_data "
-				."where doc_group = '".$row['doc_group']."' "
-				."and stateid='1' "
-				."and language_id='$language_id'";
-				
-				//state 1 == 'active'
-				if ($usermem == true) {
-					$query .= " or stateid = '5' "
-						 ." and doc_group = '".$row['doc_group']."' ";
-				} //state 5 == 'private' 
-				
-				$query .= " order by title" ;
-
-			$subresult = db_query($query); 
-
-			if (!(db_numrows($subresult) < 1)) {
-				print "<p><b>".$row['groupname']."</b>\n<ul>\n";
-				while ($subrow = db_fetch_array($subresult)) {
-					print "<li><a href=\"display_doc.php/$subrow[docid]/$subrow[filename]\">$subrow[title]</a>".
-					"<BR><i>Description:</i> ".$subrow['description'];
-				}
-				print "</ul>\n\n";
-
-			}
-		}
-	}
-
-        docman_footer($params);
-
-} else {
-	exit_no_group();
+if (!$group_id) {
+    exit_no_group();
 }
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g) || $g->isError()) {
+    exit_no_group();
+}
+
+$df = new DocumentFactory($g);
+if ($df->isError()) {
+	exit_error('Error',$df->getErrorMessage());
+}
+
+if (!$language_id) {
+	if (session_loggedin()) {
+		$language_id = $LUSER->getLanguage();
+	} else {
+		$language_id = 1;
+	}
+}
+
+$df->setLanguageID($language_id);
+$d_arr =& $df->getDocuments();
+
+docman_header('Project Documentation','Project Documentation','docman','',$g->getPublicName());
+
+if (!$d_arr || count($d_arr) < 1) {
+	print "<b>This project has no visible documents.</b><p>";
+} else { 
+//		doc_droplist_count($group_id, $language_id);
+
+	print "\n<ul>";
+	for ($i=0; $i<count($d_arr); $i++) {
+
+		//
+		//	If we're starting a new "group" of docs, put in the 
+		//	docGroupName and start a new <ul>
+		//
+		if ($d_arr[$i]->getDocGroupID() != $last_group) {
+			print (($i==0) ? '' : '</ul>');
+			print "\n\n<li><b>". $d_arr[$i]->getDocGroupName() ."</b></li><ul>";
+			$last_group=$d_arr[$i]->getDocGroupID();
+		}
+		print "\n<li><a href=\"view.php/$group_id/".$d_arr[$i]->getID()."/".$d_arr[$i]->getFileName()."\">". 
+			$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
+			"\n<BR><i>Description:</i> ".$d_arr[$i]->getDescription();
+
+	}
+	print "\n</ul>\n";
+}
+
+docman_footer(array());
 
 ?>

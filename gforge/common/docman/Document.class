@@ -94,31 +94,32 @@ class Document extends Error {
 /*
 		$perm =& $this->Group->getPermission( session_get_user() );
 
-		if (!$perm || !is_object($perm) || !$perm->isDocumentAdmin()) {
+		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 			$this->setError('Permission Denied');
 			return false;
 		}
 */
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
-		$sql="INSERT INTO doc_data (group_id,title,description,createdate,
+		$sql="INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
 			stateid,language_id,filename,filetype,data,created_by)
 			VALUES ('".$this->Group->getId()."',
 			'". htmlspecialchars($title) ."',
 			'". htmlspecialchars($description) ."',
 			'". time() ."',
+			'$doc_group',
 			'3',
 			'$language_id',
 			'$filename',
 			'$filetype',
-			'". base64_encode($data) ."',
+			'". base64_encode(stripslashes($data)) ."',
 			'$user_id')";
 
 		db_begin();
 		$result=db_query($sql);
 		if (!$result) {
-			db_rollback();
 			$this->setError('Error Adding Document: '.db_error());
+			db_rollback();
 			return false;
 		}
 		$docid=db_insertid($result,'doc_data','docid');
@@ -174,7 +175,7 @@ class Document extends Error {
 	 *	@return string	The name of this document.
 	 */
 	function getName() {
-		return $this->data_array['filename'];
+		return $this->data_array['title'];
 	}
 
 	/**
@@ -211,6 +212,24 @@ class Document extends Error {
 	 */
 	function getStateName() {
 		return $this->data_array['state_name'];
+	}
+
+	/**
+	 *	getLanguageID - get this language_id.
+	 *
+	 *	@return	int	The language_id.
+	 */
+	function getLanguageID() {
+		return $this->data_array['language_id'];
+	}
+
+	/**
+	 *	getLanguageName - the language_name of this document.
+	 *
+	 *	@return string	The language_name.
+	 */
+	function getLanguageName() {
+		return $this->data_array['language_name'];
 	}
 
 	/**
@@ -311,9 +330,12 @@ class Document extends Error {
 
 		$perm =& $this->Group->getPermission( session_get_user() );
 
-		if (!$perm || !is_object($perm) || !$perm->isDocAdmin()) {
+		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 			$this->setError('Permission Denied');
 			return false;
+		}
+		if ($data) {
+			$datastr="data='". base64_encode(stripslashes($data)) ."',";
 		}
 
 		$res=db_query("UPDATE doc_data SET
@@ -323,7 +345,7 @@ class Document extends Error {
 			doc_group='$doc_group',
 			filetype='$filetype',
 			filename='$filename',
-			data='$data',
+			$datastr
 			language_id='$language_id',
 			updatedate='". time() ."'
 			WHERE group_id='".$this->Group->getID()."'

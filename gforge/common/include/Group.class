@@ -27,6 +27,7 @@
 require_once('common/tracker/ArtifactTypes.class');
 require_once('common/forum/Forum.class');
 require_once('common/frs/FRSPackage.class');
+require_once('common/docman/DocumentGroup.class');
 require_once('www/include/BaseLanguage.class');
 
 $GROUP_OBJ=array();
@@ -374,7 +375,7 @@ class Group extends Error {
 	 */
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
 		$use_pm,$use_pm_depend_box,$use_cvs,$use_news,$use_docman,
-		$new_task_address,$send_all_tasks,$logo_image_id,
+		$new_doc_address,$send_all_docs,$logo_image_id,
 		$enable_pserver,$enable_anoncvs,
 		$use_ftp,$use_tracker,$use_frs,$use_stats) {
 		global $Language;
@@ -397,8 +398,8 @@ class Group extends Error {
 			return false;
 		}
 
-		if ($new_task_address && !validate_email($new_task_address)) {
-			$this->setError('Task Address Appeared Invalid');
+		if ($new_doc_address && !validate_email($new_doc_address)) {
+			$this->setError('New Doc Address Appeared Invalid');
 			return false;
 		}
 
@@ -474,15 +475,14 @@ class Group extends Error {
 				use_cvs='$use_cvs',
 				use_news='$use_news',
 				use_docman='$use_docman',
-				new_task_address='$new_task_address',
-				send_all_tasks='$send_all_tasks',
+				new_doc_address='$new_doc_address',
+				send_all_docs='$send_all_docs',
 				enable_pserver='$enable_pserver',
 				enable_anoncvs='$enable_anoncvs',
 				use_ftp='$use_ftp',
 				use_tracker='$use_tracker',
 				use_frs='$use_frs',
-				use_stats='$use_stats'".
-			"
+				use_stats='$use_stats'
 			WHERE group_id='".$this->getID()."'
 		");
 
@@ -977,28 +977,28 @@ class Group extends Error {
 	// consistent with trackers code
 
 	/**
-	 *  PMEmailAddress() - get email address to send PM notifications to
+	 *  getDocEmailAddress() - get email address to send doc notifications to.
 	 *
-	 *  @return true/false
+	 *  @return	string	email address.
 	 */
-	function PMEmailAddress() {
-		return $this->data_array['new_task_address'];
+	function getDocEmailAddress() {
+		return $this->data_array['new_doc_address'];
 	}
 
 	/**
-	 *  PMEmailAll() - whether or not this group has opted to use task dependencies
+	 *  DocEmailAll() - whether or not this group has opted to use receive notices on all doc updates.
 	 *
-	 *  @return true/false
+	 *  @return true/false.
 	 */
-	function PMEmailAll() {
-		return $this->data_array['send_all_tasks'];
+	function docEmailAll() {
+		return $this->data_array['send_all_docs'];
 	}
 
 
 	/**
-	 *	getHomePage() - The URL for this project's home page
+	 *	getHomePage() - The URL for this project's home page.
 	 *
-	 *	@return text homepage URL
+	 *	@return	string	homepage URL.
 	 */
 	function getHomePage() {
 		return $this->data_array['homepage'];
@@ -1452,11 +1452,12 @@ class Group extends Error {
 			return false;
 		}
 
-		// Step 3: Setup default DocManager doc_group
-		db_query("
-			INSERT INTO doc_groups(groupname,group_id) 
-			VALUES ('Uncategorized Submissions',".$this->getID().")
-		");
+		$dg = new DocumentGroup($this);
+		if (!$dg->create('Uncategorized Submissions')) {
+			$this->setError($dg->getErrorMessage());
+			db_rollback();
+			return false;
+		}
 
 		// Step 4: Setup default filerelease package
 		$frs = new FRSPackage($this);

@@ -1,3 +1,7 @@
+2003-01-02  Tim Perdue <tim@gforge.org>
+
+	* Complete rewrite of doc mgr in GForge coding guidelines.
+
 2002-12-24  Tim Perdue <tim@gforge.org>
 
 	* Gantt charting added and more debugging of new Project Manager.

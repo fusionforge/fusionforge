@@ -1,276 +1,337 @@
 <?php
 /**
-  *
-  * SourceForge Documentaion Manager
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Doc Mgr Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
 
 
 /*
-		Docmentation Manager
-		by Quentin Cregan, SourceForge 06/2000
+	Document Manager
+
+	by Quentin Cregan, SourceForge 06/2000
+
+	Complete OO rewrite by Tim Perdue 1/2003
 */
 
-
-require_once('../doc_utils.php');
 require_once('pre.php');
+require_once('www/docman/include/doc_utils.php');
+require_once('common/docman/DocumentFactory.class');
+require_once('common/docman/DocumentGroup.class');
 
-if (!($group_id)) {
+if (!$group_id) {
 	exit_no_group();
 }
 
-if (!(user_ismember($group_id,"D1"))) {
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g) || $g->isError()) {
+	exit_no_group();
+}
+
+$perm =& $g->getPermission( session_get_user() );
+if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 	exit_permission_denied();
 }
 
-function main_page($group_id) {
-		docman_header('Document Admin Page','Document Manager Admin','docman_admin','admin',group_getname($group_id),'admin');
-		echo '<p><b>Pending Submissions:</b>  <p>';
-		display_docs('3',$group_id);
-		// doc_group 3 == pending
-		echo '<p>';
-		echo '<b>Active Submissions:</b>  <p>';
-		display_docs('1',$group_id);
-		//doc_group 1 == active
-		docman_footer($params);
+//
+//
+//	Submit the changes to the database
+//
+//
+if ($submit) {
 
-}//end function main_page($group_id);
+	if ($editdoc) {
 
-//begin to seek out what this page has been called to do.
+		$d= new Document($g,$docid);
+		if ($d->isError()) {
+			exit_error('Error',$d->getErrorMessage());
+		}
+		if ($uploaded_data_name) {
+			if (!is_uploaded_file($uploaded_data)) {
+				exit_error("Error","Invalid file attack attempt $uploaded_data");
+			}
+			$data = addslashes(fread(fopen($uploaded_data, 'r'), filesize($uploaded_data)));
+			$filename=$uploaded_data_name;
+			$filetype=$uploaded_data_type;
+		} else {
+			$filename=$d->getFileName();
+			$filetype=$d->getFileType();
+		}
+		if (!$d->update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid)) {
+			exit_error('Error',$d->getErrorMessage());
+		}
+		$feedback = "Successfully Updated";
 
-	if (strstr($mode,"docedit")) {
-		$query = "select * from doc_data,doc_groups "
-			."where docid='$docid' "
-			."and doc_groups.doc_group = doc_data.doc_group "
-			."and doc_groups.group_id = '$group_id'";
-		$result = db_query($query);
-		$row = db_fetch_array($result);
+	} elseif ($editgroup) {
+
+		$dg = new DocumentGroup($g,$doc_group);
+		if ($dg->isError()) {
+			exit_error('Error',$dg->getErrorMessage());
+		}
+		if (!$dg->update($groupname)) {
+			exit_error('Error',$dg->getErrorMessage());
+		}
+		$feedback = "Successfully Updated";
+
+	} elseif ($addgroup) {
+
+		$dg = new DocumentGroup($g);
+		if ($dg->isError()) {
+			exit_error('Error',$dg->getErrorMessage());
+		}
+		if (!$dg->create($groupname)) {
+			exit_error('Error',$dg->getErrorMessage());
+		}
+		$feedback = "Successfully Created";
+
+	}
+
+}
+
+//
+//
+//	Edit a specific document
+//
+//
+if ($editdoc && $docid) {
 	
-		docman_header('Edit Document','Edit Document','docman_admin_docedit','admin',group_getname($group_id),'');
+	$d= new Document($g,$docid);
+	if ($d->isError()) {
+		exit_error('Error',$d->getErrorMessage());
+	}
 
-		echo '
-	
-			<form name="editdata" action="index.php?mode=docdoedit&group_id='.$group_id.'" method="POST" enctype="multipart/form-data">
+	docman_header('Edit Document','Edit Document','docman_admin_docedit','admin',$g->getPublicName(),'');
 
-			<table border="0" width="75%">
+	?>
+	<form name="editdata" action="index.php?editdoc=1&group_id=<?php echo $group_id; ?>" method="POST" enctype="multipart/form-data">
 
-			<tr>
-					<th>Document Title:</th>
-					<td><input type="text" name="title" size="40" maxlength="255" value="'.$row['title'].'"></td>
-					<td class="example">(e.g. How to use the download server)</td>
+	<table border="0">
 
-			</tr>
-			<tr>
-			</tr>
-			<tr>
-					<th>Short Description:</td>
-					<td><input type="text" name="description" size="20" maxlength="255" value="'.$row['description'].'"></td>
-					<td class="example">(e.g. http://www.linux.com/)</td>
+	<tr>
+		<td>
+		<b>Document Title:</b><br>
+		<input type="text" name="title" size="40" maxlength="255" value="<?php echo $d->getName(); ?>">
+		<br>(e.g. How to use the download server)</td>
+	</tr>
 
-			</tr>
-			<tr>
-				<th>File:</th>
-				<td><a target="_blank" href="../display_doc.php/'.$row['docid'].'/'.$row['filename'].'">'.$row['title'].'</A>
-			</tr>
-			<tr>
-				<th>Language:</th>
-				<td>';
+	<tr>
+		<td>
+		<b>Short Description:</b><br>
+		<input type="text" name="description" size="20" maxlength="255" value="<?php echo $d->getDescription(); ?>">
+		<br>(e.g. http://www.linux.com/)</td>
+	</tr>
 
-		echo html_get_language_popup($Language,'language_id',$row['language_id']);
+	<tr>
+		<td>
+		<b>File:</b><br>
+		<a target="_blank" href="../view.php/<?php echo $group_id.'/'.$d->getID().'/'.$d->getFileName() ?>"><?php echo $d->getName(); ?></a>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+		<b>Language:</b><br>
+		<?php
+
+			echo html_get_language_popup($Language,'language_id',$d->getLanguageID());
+
+		?></td>
+	</tr>
+
+	<tr>
+		<td>
+		<b>Group doc belongs in:</b><br>
+		<?php
+
+			echo display_groups_option($group_id,$d->getDocGroupID());
+
+		?></td>
+	</tr>
+
+	<tr>
+		<td>
+		<br>State:</b><br>
+		<?php
+
+			doc_get_state_box($d->getStateID());
+
+		?></td>
+	</tr>
+
+	<?php
+
+	//	if this is a text/html doc, display an edit box
+	if (strstr($d->getFileType(),'ext')) {
 
 		echo	'
-			<tr>
-					<th>Group doc belongs in:</th>
-					<td>';
+	<tr>
+		<td>
+		<b>Document Contents:</b><br>
+		<textarea cols="80" rows="20" name="data">'. htmlspecialchars( $d->getFileData() ).'</textarea>
+		</td>
+	</tr>';
+	}
 
-		display_groups_option($group_id,$row['doc_group']);
+	?>
+	<tr>
+		<td>
+		<b>OPTIONAL: Upload New File:</b><br>
+		<input type="file" name="uploaded_data" size="30">
+		</td>
+	</tr>
+	</table>
 
-		echo '			</td>
-				</tr>
+	<input type="hidden" name="docid" value="<?php echo $d->getID(); ?>">
+	<input type="submit" value="Submit Edit" name="submit">
 
-				<tr>
-						<th>State:</th>
-						<td>';
+	</form>
+	<?php
 
-		doc_get_state_box($row['stateid']);
+	docman_footer(array());
 
-		echo '
-	   				</td>
-			</tr>';
+//
+//
+//	Add a document group / view existing groups list
+//
+//
+} elseif ($addgroup) {
 
-		//	if this is a text/html doc, display an edit box
-		if (strstr($row['filetype'],'ext')) {
+	docman_header('Group Edit', 'Group Edit','docman_admin_editgroups','admin',$g->getPublicName(),'');
 
-			echo	'
-				<tr>
-					<th>Document Contents:</th>
-					<td><textarea cols="80" rows="20" name="data">'. htmlspecialchars(base64_decode($row['data'])).'</textarea></td>
-				</tr>';
+	echo "<h1>Add Document Groups</h1>";
+
+	/*
+		List of possible categories for this ArtifactType
+	*/
+	$result=db_query("SELECT * FROM doc_groups WHERE group_id='$group_id'");
+	echo "<p>";
+	$rows=db_numrows($result);
+	if ($result && $rows > 0) {
+		$title_arr=array();
+		$title_arr[]='ID';
+		$title_arr[]='Title';
+
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+		for ($i=0; $i < $rows; $i++) {
+			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+				'<td>'.db_result($result, $i, 'doc_group').'</td>'.
+				'<td><a href="index.php?editgroup=1&doc_group='.
+					db_result($result, $i, 'doc_group').'&group_id='.$group_id.'">'.
+					db_result($result, $i, 'groupname').'</a></td></tr>';
 		}
 
-		echo '
-		<tr>
-			<th>OPTIONAL: Upload New File:</th>
-			<td><input type="file" name="uploaded_data" size="30"></td>
-			</tr>
-		</table>
-
-		<input type="hidden" name="docid" value="'.$row['docid'].'">
-		<input type="submit" value="Submit Edit">
-
-		</form>';
-
-		docman_footer($params);
-	} elseif (strstr($mode,"groupdelete")) {
-		$query = "select docid "
-			."from doc_data "
-			."where doc_group = '$doc_group'";
-		$result = db_query($query);
-		if (db_numrows($result) < 1) {
-			$query = "delete from doc_groups "
-				."where doc_group = '$doc_group' "
-				."and group_id = '$group_id'";
-			db_query($query);
-			docman_header("Group Delete","Group Delete",'docman_admin_groupdelete','admin',group_getname($group_id),'');
-			print "<p><b>Group deleted. (GroupID : ".$doc_group.")</b>";	
-			docman_footer($params);	
-
-		} else {
-		
-			docman_header("Group Delete","Group Delete Failed",'docman_admin_groupdelete','admin',group_getname($group_id),'');
-			print "Group was not deleted.  Cannot delete groups that still have documents grouped under them."; 
-			docman_footer($params);
-		}
-		
-	} elseif (strstr($mode,"groupedit")) {
-			docman_header('Group Edit','Group Edit','docman_admin_groupedit','admin',group_getname($group_id),'');
-			$query = "select * "
-				."from doc_groups "
-				."where doc_group = '$doc_group' "
-				."and group_id='$group_id'";
-			$result = db_query($query);
-			$row = db_fetch_array($result);
-			echo '
-			<b> Edit a group:</b>
-
-			<form name="editgroup" action="index.php?mode=groupdoedit&group_id='.$group_id.'" method="POST">
-			<table>
-			<tr><th>Name:</th>  <td><input type="text" name="groupname" value="'.$row['groupname'].'"></td></tr>
-			<input type="hidden" name="doc_group" value="'.$row['doc_group'].'">
-			<tr><td> <input type="submit"></td></tr></table>	
-			</form>	
-			';
-			docman_footer($params);
-
-	} elseif (strstr($mode,"groupdoedit")) {
-		$query = "update doc_groups "
-			."set groupname='".htmlspecialchars($groupname)."' "
-			."where doc_group='$doc_group' "
-			."and group_id = '$group_id'";
-		db_query($query);
-		$feedback .= "Document Group Edited.";
-		main_page($group_id);
-
-	} elseif (strstr($mode,"docdoedit")) {
-		//Page security - checks someone isnt updating a doc
-		//that isnt theirs.
-
-		$query = "select dd.docid "
-			."from doc_data dd, doc_groups dg "
-			."where dd.doc_group = dg.doc_group "
-			."and dg.group_id = '$group_id' "
-			."and dd.docid = '$docid'"; 
-		
-		$result = db_query($query);
-	
-		if (db_numrows($result) == 1) {	
-
-			if ($data) {
-				$datastring = "data = '". base64_encode($data) ."',";
-			}
-			if ($uploaded_data_name) {
-				if (!is_uploaded_file($uploaded_data)) {
-					exit_error("Error","Invalid file attack attempt $uploaded_data");
-				}
-				$data = fread(fopen($uploaded_data, 'r'), filesize($uploaded_data));
-				$datastring = "data = '". base64_encode($data) ."',
-					filename='$uploaded_data_name',
-					filetype='$uploaded_data_type',";
-			}
-			// data in DB stored in htmlspecialchars()-encoded form
-			$query = "update doc_data "
-				."set title = '".htmlspecialchars($title)."', "
-				.$datastring
-				."updatedate = '".time()."', "
-				."doc_group = '".$doc_group."', "
-				."stateid = '".$stateid."', "
-				."language_id = '".$language_id."', "
-				."description = '".htmlspecialchars($description)."' "
-				."where docid = '$docid'"; 
-		
-			$res = db_query($query);
-			if (!$res || db_affected_rows($res)<1) {
-				$feedback .= 'Could not update document<br>';
-			} else {
-				$feedback .= "Document \" ".htmlspecialchars($title)." \" updated";
-			}
-			main_page($group_id);
-
-		} else {
-
-			exit_error("Error","Unable to update - Document does not exist, or document's group not the same as that to which your account belongs.");
-
-		}
-
-	} elseif (strstr($mode,"groupadd")) {
-		$query = "insert into doc_groups(groupname,group_id) " 
-			."values ('"
-			."".htmlspecialchars($groupname)."',"
-			."'$group_id')";
-		
-		db_query($query);
-		$feedback .= "Group ".htmlspecialchars($groupname)." added.";
-		main_page($group_id);
-	
-	} elseif (strstr($mode,"editgroups")) {
-		docman_header('Group Edit', 'Group Edit','docman_admin_editgroups','admin',group_getname($group_id),'');
-		echo '
-			<p><b> Add a group:</b>
-			<form name="addgroup" action="index.php?mode=groupadd&group_id='.$group_id.'" method="POST">
-			<table>
-			<tr><th>New Group Name:</th>  <td><input type="text" name="groupname"></td><td><input type="submit" value="Add"></td></tr></table>	
-			<p>
-			Group name will be used as a title, so it should be
-			formatted correspondingly.
-			</p>
-			</form>	
-		';
-		display_groups($group_id);
-
-	} elseif (strstr($mode,"editdocs")) {
-
-		docman_header('Edit documents list','Edit documents','docman_admin_editdocs','admin',group_getname($group_id),'');
-		
-		print "<p><b>Active Documents:</b><p>";	
-		display_docs('1',$group_id);
-		print "<p><b>Pending Documents:</b><p>";	
-		display_docs('3',$group_id);
-		print "<p><b>Hidden Documents:</b><p>";	
-		display_docs('4',$group_id);
-		print "<p><b>Deleted Documents:</b><p>";	
-		display_docs('2',$group_id);
-		print "<p><b>Private Documents:</b><p>";	
-		display_docs('5',$group_id);
-		docman_footer($params);	
+		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		main_page($group_id);
-	} //end else
+		echo "\n<h1>No Document Groups Defined</h1>";
+	}
+
+	?>
+	<p><b> Add a group:</b>
+	<form name="addgroup" action="index.php?addgroup=1&group_id=<?php echo $group_id; ?>" method="POST">
+	<table>
+		<tr>
+			<th>New Group Name:</th>
+			<td><input type="text" name="groupname"></td>
+			<td><input type="submit" value="Add" name="submit"></td>
+		</tr>
+	</table>	
+	<p>
+	Group name will be used as a title, so it should be
+	formatted correspondingly.
+	</p>
+	</form>	
+	<?php
+
+	docman_footer(array());
+
+//
+//
+//	Edit a specific doc group
+//
+//
+} elseif ($editgroup && $doc_group) {
+
+	$dg = new DocumentGroup($g,$doc_group);
+	if ($dg->isError()) {
+		exit_error('Error',$dg->getErrorMessage());
+	}
+
+	docman_header('Group Edit', 'Group Edit','docman_admin_editgroups','admin',$g->getPublicName(),'');
+	?>
+	<p><b>Edit a group:</b>
+	<form name="editgroup" action="index.php?editgroup=1&group_id=<?php echo $group_id; ?>" method="POST">
+	<input type="hidden" name="doc_group" value="<?php echo $doc_group; ?>">
+	<table>
+		<tr>
+			<th>Group Name:</th>
+			<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>"></td>
+			<td><input type="submit" value="Edit" name="submit"></td>
+		</tr>
+	</table>	
+	<p>
+	Group name will be used as a title, so it should be
+	formatted correspondingly.
+	</p>
+	</form>	
+	<?php
+	docman_footer(array());
+
+//
+//
+//	Display the main admin page
+//
+//
+} else {
+
+	$df = new DocumentFactory($g);
+	if ($df->isError()) {
+		exit_error('Error',$df->getErrorMessage());
+	}
+	$df->setStateID('ALL');
+	$df->setSort('stateid');
+	$d_arr =& $df->getDocuments();
+
+	docman_header('Document Admin Page','Document Manager Admin','docman_admin','admin',$g->getPublicName(),'admin');
+
+	?>
+	<h3>Doc Manager Administration</h3>
+	<p>
+	<a href="index.php?group_id=<?php echo $group_id; ?>&addgroup=1">Add/Edit Document Groups</a>
+	<p>
+	<?php
+
+	if (!$d_arr || count($d_arr) < 1) {
+		print "<b>This project has no visible documents.</b><p>";
+	} else {
+	//	  doc_droplist_count($group_id, $language_id);
+
+		print "\n<ul>";
+		for ($i=0; $i<count($d_arr); $i++) {
+
+			//
+			//  If we're starting a new "group" of docs, put in the
+			//  docGroupName and start a new <ul>
+			//
+			if ($d_arr[$i]->getStateID() != $last_state) {
+				print (($i==0) ? '' : '</ul>');
+				print "\n\n<li><b>". $d_arr[$i]->getStateName() ."</b></li><ul>";
+				$last_state=$d_arr[$i]->getStateID();
+			}
+			print "\n<li><a href=\"index.php?editdoc=1&docid=".$d_arr[$i]->getID()."&group_id=$group_id\">".
+				$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
+				"\n<BR><i>Description:</i> ".$d_arr[$i]->getDescription();
+
+		}
+		print "\n</ul>\n";
+	}
+
+	docman_footer(array());
+
+}
 
 ?>
