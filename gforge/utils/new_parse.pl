@@ -232,6 +232,14 @@ sub update_user {
 #		}
 #		$counter++;
 #	}
+
+        $home_dir = $homedir_prefix.$username;
+	unless (-d $home_dir.'/incoming') {
+	    mkdir $home_dir.'/incoming', 0771;
+	}
+        system("chown www-data:$username $home_dir/incoming");
+	system("chmod 0771 $home_dir/incoming");
+
 	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
 	push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
 	push @group_array, "$username:x:$uid:\n";
