@@ -28,6 +28,7 @@
 			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_opt" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />
+			<input type="hidden" name="boxid" value="<?php echo $boxid; ?>" />
 
 			<p>
 			<strong><?php echo $Language->getText('tracker_admin_build_boxes','opt_name') ?>:</strong><br />
@@ -37,7 +38,7 @@
 			-->
 			<?php if ($ac->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) { ?>
 			<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_status'); ?>:</strong><br />
-			<?php echo $ath->statusBox('status_id',1,false,false); ?>
+			<?php echo $ath->statusBox('status_id',$ao->getStatusID(),false,false); ?>
 			<?php } ?>
 
 			<p>

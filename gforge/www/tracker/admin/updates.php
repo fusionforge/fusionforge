@@ -182,19 +182,26 @@
 		//
 		} elseif ($update_opt) {
 
-			$ao = new ArtifactExtraFieldElement($ath,$id);
-			if (!$ao || !is_object($ao)) {
-				$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
-			} elseif ($ao->isError()) {
-				$feedback .= $ao->getErrorMessage();
+			$ac = new ArtifactExtraField($ath,$boxid);
+			if (!$ac || !is_object($ac)) {
+				$feedback .= 'Unable to create ArtifactExtraField Object';
+			} elseif ($ac->isError()) {
+				$feedback .= $ac->getErrorMessage();
 			} else {
-				if (!$ao->update($name,$boxid,$id,$status_id)) {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ao->getErrorMessage();
-					$ao->clearError();
+				$ao = new ArtifactExtraFieldElement($ath,$id);
+				if (!$ao || !is_object($ao)) {
+					$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+				} elseif ($ao->isError()) {
+					$feedback .= $ao->getErrorMessage();
 				} else {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','choice_updated');
-					$update_opt=false;
-					$add_extrafield=true;
+					if (!$ao->update($name,$status_id)) {
+						$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ao->getErrorMessage();
+						$ao->clearError();
+					} else {
+						$feedback .= $Language->getText('tracker_admin_build_boxes','choice_updated');
+						$update_opt=false;
+						$add_extrafield=true;
+					}
 				}
 			}
 

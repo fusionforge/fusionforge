@@ -26,7 +26,7 @@
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<td><a href="'.$PHP_SELF.'?update_opt=1&amp;id='.
 					$efearr[$i]['element_id'].'&amp;boxid='.			
-					$efearr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+					$boxid.'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
 					$efearr[$i]['element_name'].' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a></td>';
 			}		   
 			echo $GLOBALS['HTML']->listTableBottom();

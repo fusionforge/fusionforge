@@ -21,9 +21,10 @@
 			<p>
 			<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_type').': '.$ac->getTypeName(); ?></strong><br />
 			
-			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&id='.$id.'&boxid='.$box.'&atid='.$ath->getID(); ?>" method="post">
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&id='.$id.'&atid='.$ath->getID(); ?>" method="post">
 			<input type="hidden" name="update_box" value="y" />
 			<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
+			<input type="hidden" name="is_required" value="0" />
 			<p>
 			<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
 			<input type="text" name="name" value="<?php echo $ac->getName(); ?>" /></p>
@@ -33,6 +34,9 @@
 		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr1'); ?> <input type="text" name="attribute1" value="<?php echo $ac->getAttribute1(); ?>" size="2" maxlength="2"><br />
 		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizeattr2'); ?> <input type="text" name="attribute2" value="<?php echo $ac->getAttribute2(); ?>" size="2" maxlength="2">
 		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizerows'); ?><br />
+		<?php } else { ?>
+			<input type="hidden" name="attribute1" value="0" />
+			<input type="hidden" name="attribute2" value="0" />
 		<?php } ?>
 			<p>
 			<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
