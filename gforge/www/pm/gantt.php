@@ -62,7 +62,7 @@ $rows=count($pt_arr);
 for ($i=0; $i<$rows; $i++) {
 	// Format the bar for the first activity
 	// ($row,$title,$startdate,$enddate)
-	$activity[$i] = new GanttBar ($i, $pt_arr[$i]->getSummary(), date('Y-m-d',$pt_arr[$i]->getStartDate()), date('Y-m-d',$pt_arr[$i]->getEndDate()));
+	$activity[$i] = new GanttBar ($i, $pt_arr[$i]->getSummary(), date('Y-m-d',$pt_arr[$i]->getStartDate()), date('Y-m-d',$pt_arr[$i]->getEndDate()-86400));
 
 	// Yellow diagonal line pattern on a red background
 	$activity[$i]->SetPattern(BAND_RDIAG, "yellow");

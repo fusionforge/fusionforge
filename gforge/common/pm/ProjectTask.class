@@ -306,6 +306,9 @@ class ProjectTask extends Error {
 //	new ArtifactFromID($id)
 //
 		for ($i=0; $i<count($art_array); $i++) {
+			if ($art_array[$i] < 1) {
+				continue;
+			}
 			$res=db_query("INSERT INTO project_task_artifact (project_task_id,artifact_id) 
 				VALUES ('".$this->getID()."','".$art_array[$i]."')");
 			if (!$res) {
@@ -412,7 +415,7 @@ class ProjectTask extends Error {
 			VALUES ('". $this->getID() ."','". htmlspecialchars($message) ."','".user_getid()."','". time() ."')";
 		$res=db_query($sql);
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('AddMessage: '.db_error());
+			$this->setError('AddMessage():: '.db_error());
 			return false;
 		} else {
 			return true;
@@ -454,6 +457,7 @@ class ProjectTask extends Error {
 				return false;
 			}
 		}
+		return true;
 	}
 
 	function setDependentOn(&$arr) {
@@ -472,7 +476,7 @@ class ProjectTask extends Error {
 					WHERE project_task_id='".$this->getID()."'
 					AND is_dependent_on_task_id='". $del_arr[$i] ."'");
 				if (db_error()) {
-					$this->setError('setDependentOn() '.db_error());
+					$this->setError('setDependentOn()-1:: '.db_error());
 					return false;
 				}
 			}
@@ -486,7 +490,7 @@ class ProjectTask extends Error {
 				db_query("INSERT INTO project_dependencies (project_task_id,is_dependent_on_task_id) 
 					VALUES ('".$this->getID()."','". $add_arr[$i] ."')");
 				if (db_error()) {
-					$this->setError('setDependentOn() '.db_error());
+					$this->setError('setDependentOn()-2:: '.db_error());
 					return false;
 				}
 			}
@@ -516,6 +520,10 @@ class ProjectTask extends Error {
 		$arr2 =& $this->getAssignedTo();
 		$this->assignedto =& $arr2;
 
+		//If no one is assigned, then assign it to "100" - NOBODY
+		if (count($arr) < 1 || ((count($arr)==1) && ($arr[0]==''))) {
+			$arr=array('100');
+		}
 		if (count($arr) || count($arr2)) {
 			$add_arr = array_diff ($arr, $arr2);
 			$del_arr = array_diff ($arr2, $arr);
@@ -524,7 +532,7 @@ class ProjectTask extends Error {
 					WHERE project_task_id='".$this->getID()."'
 					AND assigned_to_id='". $del_arr[$i] ."'");
 				if (db_error()) {
-					$this->setError('setAssignedTo() '.db_error());
+					$this->setError('setAssignedTo()-1:: '.db_error());
 					return false;
 				}
 			}
@@ -532,7 +540,7 @@ class ProjectTask extends Error {
 				db_query("INSERT INTO project_assigned_to (project_task_id,assigned_to_id) 
 					VALUES ('".$this->getID()."','". $add_arr[$i] ."')");
 				if (db_error()) {
-					$this->setError('setAssignedTo() '.db_error());
+					$this->setError('setAssignedTo()-2:: '.db_error());
 					return false;
 				}
 			}
@@ -603,13 +611,11 @@ class ProjectTask extends Error {
 
 		if ($this->getEndDate() != $end_date)
 			{ $this->addHistory ('end_date',$this->getEndDate());  }
-
 		if (!$this->setDependentOn($depend_arr)) {
 			return false;
 		} elseif (!$this->setAssignedTo($assigned_arr)) {
 			return false;
 		} else {
-
 			$sql="UPDATE project_task SET
 				summary='".htmlspecialchars($summary)."',
 				priority='$priority',
