@@ -319,8 +319,8 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
-print "<br>There are ".$frsp->getMonitorCount()." users monitoring this package.";
-print "<hr>";
+echo '<br />'.$Language->getText('project_admin_editrelease', 'monitor_count', array($frsp->getMonitorCount()));ere are ".$frsp->getMonitorCount()." users monitoring this package.";
+echo '<hr />';
 
 frs_admin_footer();
 

@@ -63,7 +63,7 @@ $title_arr[]=$Language->getText('project_admin_showreleases','date');
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 for ($i=0; $i<db_numrows($res); $i++) {
-	echo '<tr "'. $HTML->boxGetAltRowStyle($i) .'">
+	echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>
 			<td>'.db_result($res,$i,'package_name').'</td>
 			<td><a href="editrelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id
