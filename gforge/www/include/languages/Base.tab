@@ -268,6 +268,7 @@ admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
 admin_index	add_delete_edit_laguage	Add, Delete, or Edit Supported Languages
 admin_index	add_edit_delete_processors	Add, Delete, or Edit Processors
 admin_index	add_edit_delete_themes	Add, Delete, or Edit Themes
+admin_index	add_edit_delete_licenses	Add, Delete, or Edit Licenses
 admin_index	add_to_trove_map	Add to the Trove Map
 admin_index	approve_reject	Approve/Reject
 admin_index	cronman	Cron Manager
