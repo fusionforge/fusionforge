@@ -49,35 +49,33 @@ $TEST = 0;
 
 // This tables maps mailing types to tables which required to perform it
 $table_mapping = array(
-  'ALL'	    => "users",
-  'SITE'    => "users",
-  'COMMNTY' => "users",
-  'DVLPR'   => "users,user_group",
-  'ADMIN'   => "users,user_group",
-  'SFDVLPR' => "users,user_group",
+	'ALL'		=> "users",
+	'SITE'	=> "users",
+	'COMMNTY' => "users",
+	'DVLPR'   => "users,user_group",
+	'ADMIN'   => "users,user_group",
+	'SFDVLPR' => "users,user_group",
 );
 
 // This tables maps mailing types to WHERE subclauses which select 
 // appropriate users
 $cond_mapping = array(
-  'ALL'	    => "",
-  'SITE'    => "AND mail_siteupdates=1",
-  'COMMNTY' => "AND mail_va=1",
-  'DVLPR'   => "AND users.user_id=user_group.user_id",
-  'ADMIN'   => "AND users.user_id=user_group.user_id AND user_group.admin_flags='A'",
-  'SFDVLPR' => "AND users.user_id=user_group.user_id AND user_group.group_id=1"
+	'ALL'		=> "",
+	'SITE'	=> "AND mail_siteupdates=1",
+	'COMMNTY' => "AND mail_va=1",
+	'DVLPR'   => "AND users.user_id=user_group.user_id",
+	'ADMIN'   => "AND users.user_id=user_group.user_id AND user_group.admin_flags='A'",
+	'SFDVLPR' => "AND users.user_id=user_group.user_id AND user_group.group_id=1"
 );
 
 /*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-        exit_permission_denied();
+	exit_permission_denied();
 }*/
 
-$mail_res = db_query("
-	SELECT *
+$mail_res = db_query("SELECT *
 	FROM massmail_queue
 	WHERE finished_date=0
-	ORDER BY queued_date
-", 1);
+	ORDER BY queued_date");
 
 /* If there was error, notify admins, but don't be pesky */
 if (!$mail_res) {
@@ -85,7 +83,7 @@ if (!$mail_res) {
 	$hrs = time()/(60*60);
 	// Send reminder every second day at 11am
 	if (($hrs%24)==11 && (($hrs/24)%2)==1) {
-	        global $sys_default_domain;
+		global $sys_default_domain;
 		util_send_message(
 			"admin@$sys_default_domain",
 			"ATT: Problems with massmail cron script",
@@ -108,8 +106,8 @@ if (db_numrows($mail_res)<1) {
 
 $type = db_result($mail_res, 0, 'type');
 if (!$table_mapping[$type]) {
-    print "Unknown mailing type\n";
-    exit(1);
+	print "Unknown mailing type\n";
+	exit(1);
 }
 
 $subj = db_result($mail_res, 0, 'subject');
@@ -117,14 +115,12 @@ $mail_id = db_result($mail_res, 0, 'id');
 
 //print "Got mail to send: ".$subj."\n";
 
-$sql = "
-	SELECT users.user_id,user_name,realname,email,confirm_hash
+$sql = "SELECT users.user_id,user_name,realname,email,confirm_hash
 	FROM ".$table_mapping[$type]."
 	WHERE users.user_id>".db_result($mail_res, 0, 'last_userid')."
 	AND status='A'
 	".$cond_mapping[$type]."
-	ORDER BY users.user_id
-";
+	ORDER BY users.user_id";
 
 //echo $sql;
 
@@ -135,11 +131,9 @@ print "Mailing ".db_numrows($users_res)." users.\n";
 
 // If no more users left, we've finished with this mailing
 if ($users_res && db_numrows($users_res)==0) {
-	db_query("
-		UPDATE massmail_queue
+	db_query("UPDATE massmail_queue
 		SET failed_date=0,finished_date='".time()."'
-		WHERE id=$mail_id
-	");
+		WHERE id=$mail_id");
 	exit();
 }
 
@@ -150,12 +144,12 @@ $last_userid = 0;
 // These mailing types should include unsubscription info
 if ($type=='SITE' || $type=='COMMNTY') {
 	$tail = "\r\n==================================================================\r\n"
-	       ."You receive this message because you subscribed to $sys_name\r\n"
-	       ."site mailing(s). You may opt out from some of them selectively\r\n"
-	       ."by logging in to $sys_name and visiting your Account Maintenance\r\n"
-	       ."page (http://$sys_default_domain/account/), or disable them altogether\r\n"
-	       ."by visiting following link:\r\n"
-	       ."<http://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
+		   ."You receive this message because you subscribed to $sys_name\r\n"
+		   ."site mailing(s). You may opt out from some of them selectively\r\n"
+		   ."by logging in to $sys_name and visiting your Account Maintenance\r\n"
+		   ."page (http://$sys_default_domain/account/), or disable them altogether\r\n"
+		   ."by visiting following link:\r\n"
+		   ."<http://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
 }
 $body = db_result($mail_res, 0, 'message');
 //$lines = explode("\n", $body);
@@ -163,7 +157,7 @@ $body = db_result($mail_res, 0, 'message');
 
 // Get SMTP response
 function get_resp() {
-        global $out;
+	global $out;
 	global $response;
 	
 	$response = fgets($out, 500);
@@ -186,8 +180,8 @@ function expect($diag, $resp) {
 
 // Start new batch
 function start_batch() {
-        global $out;
-        global $batch_no;
+	global $out;
+	global $batch_no;
 	global $sys_default_domain;
 	global $MAILSERVER;
 	global $TEST;
@@ -215,29 +209,29 @@ function start_batch() {
 
 // Finish new batch
 function flush_batch() {
-        global $out;
-        global $count;
-        global $last_userid;
+	global $out;
+	global $count;
+	global $last_userid;
 	global $mail_id;
 	global $TEST;
 
-        if ($count) {
+	if ($count) {
 		fputs($out,"QUIT\r\n");
 		if (!$TEST) {
 //			fpassthru($out);
-			while (!feof($out)) fgets($out, 200);
+			while (!feof($out)) {
+				fgets($out, 200);
+			}
 			fclose($out);
 		} else {
 			fclose($out);
 		}
 		$count = 0;
 
-		$sql="
-			UPDATE massmail_queue
+		$sql="UPDATE massmail_queue
 			SET failed_date=0,
-			    last_userid=$last_userid
-			WHERE id=$mail_id
-		";
+			last_userid=$last_userid
+			WHERE id=$mail_id";
 //		print $sql;
 		db_query($sql);
 
@@ -249,16 +243,16 @@ function flush_batch() {
 // Actual mailing loop
 while ($row = db_fetch_array($users_res)) {
 
-        if (!$count) {
-                $batch_no++;
+	if (!$count) {
+		$batch_no++;
 		start_batch();
-        }
+	}
 
-//        print "Sending for: ".$row['user_id']."\n";
+//	print "Sending for: ".$row['user_id']."\n";
 
 //	$row['email'] = 'test@email';
 
-        fputs($out,"MAIL FROM: noreply@$sys_default_domain\r\n");
+	fputs($out,"MAIL FROM: noreply@$sys_default_domain\r\n");
 	expect("MAIL", "250");
 	fputs($out,"RCPT TO: ".$row['email']."\r\n");
 	expect("RCPT", "250");
@@ -277,10 +271,10 @@ while ($row = db_fetch_array($users_res)) {
 	);
 	expect("DATA end", "250");
 
-        $last_userid = $row['user_id'];
+	$last_userid = $row['user_id'];
 
 	if (++$count == $BATCH) {
-	        flush_batch();
+		flush_batch();
 	}
 }
 
