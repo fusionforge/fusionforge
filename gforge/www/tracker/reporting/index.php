@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   index.php,v 1.2 2002/10/04 00:09:59 cbayle Exp
+  * @version   index.php,v 1.3 2002/10/04 16:10:40 cbayle Exp
   *
   */
 
@@ -42,7 +42,8 @@ function reporting_header($group_id) {
 function quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2) {
 	global $bar_colors;
 
-	echo site_project_header(array("title"=>$title,'group'=>$group_id,'pagename'=>'tracker_reporting'));
+	$group_name=array(group_getname($group_id));
+	echo site_project_header(array("title"=>$title,'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
 	reporting_header($group_id);
 	echo "\n<H1>$title</H1>";
 
@@ -62,7 +63,8 @@ if ($perm->isMember()) {
 
 		if ($what=="aging") {
 
-			site_project_header(array ("title"=>"Aging Report",'group'=>$group_id,'pagename'=>'tracker_reporting'));
+			$group_name=array(group_getname($group_id));
+			site_project_header(array ("title"=>"Aging Report",'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
 			reporting_header($group_id);
 			echo "\n<H1>Aging Report</H1>";
 
