@@ -126,6 +126,9 @@ function &group_get_objects($id_arr) {
 		//
 		//	See if this ID already has been fetched in the cache
 		//
+		if (!$id_arr[$i]) {
+			continue;
+		}
 		if (!isset($GROUP_OBJ["_".$id_arr[$i]."_"])) {
 			$fetch[]=$id_arr[$i];
 		} else {
