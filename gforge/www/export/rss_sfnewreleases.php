@@ -32,10 +32,10 @@ $res=db_query("SELECT
 					groups.group_id,
 					groups.group_name,
 					groups.unix_group_name,
-					groups.type,
+					groups.type_id,
 					news_bytes.forum_id,
 					news_bytes.summary,
-					news_bytes.date,
+					news_bytes.post_date,
 					news_bytes.details 
 				FROM 
 					news_bytes,
@@ -43,9 +43,9 @@ $res=db_query("SELECT
 				WHERE 
 					news_bytes.group_id=groups.group_id 
 					AND groups.status='A'
-					AND groups.is_public='A'
+					AND groups.is_public = 1
 				ORDER BY 
-					date 
+					post_date 
 				DESC",($limit * 3));
 
 
