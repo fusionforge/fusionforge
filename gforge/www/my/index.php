@@ -168,7 +168,7 @@ if (session_loggedin() || $sf_user_hash) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/forum/monitor.php?forum_id='.
 				db_result($result,$i,'group_forum_id').
-				'&amp;stop=1&amp;group_id='.db_result($result,$i,'group_id').'"><img src="/images/ic/trash.png" height="16" width="16" '.
+				'&amp;stop=1&amp;group_id='.db_result($result,$i,'group_id').'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
 				'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
 				db_result($result,$i,'group_forum_id').'">'.
 				db_result($result,$i,'forum_name').'</a></td></tr>';
@@ -207,7 +207,7 @@ if (session_loggedin() || $sf_user_hash) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="MIDDLE"><a href="/project/filemodule_monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
-			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="/images/ic/trash.png" height="16" width="16" '.
+			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
 			'BORDER=0"></a></td><td width="99%"><a href="/project/showfiles.php?group_id='.
 			db_result($result,$i,'group_id').'">'.
 			db_result($result,$i,'name').'</a></td></tr>';
@@ -371,7 +371,7 @@ if (session_loggedin() || $sf_user_hash) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
-			<img src="/images/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
+			<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
 			db_result($result,$i,'bookmark_title') .'</a></strong> &nbsp;
 			<span style="font-size:small"><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a></span></td></tr>';
@@ -418,7 +418,7 @@ if (session_loggedin() || $sf_user_hash) {
 			echo '
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
-			<img src="/images/ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
+			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
 			<td><a href="/'.$type.'/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';
 		}
 	}
