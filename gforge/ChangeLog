@@ -1,6 +1,9 @@
+2004-08-25  Tom Copeland <tom@infoether.com>
+	* common/include/utils.php - Silenced several PHP 'notice' warnings.
+
 2004-08-24  Tom Copeland <tom@infoether.com>
 	* www/docman/index.php, www/include/features_boxes.php - Silenced 
-	several PHP 'notice'-level warnings.
+	several PHP 'notice' warnings.
 
 2004-08-20  Francisco Gimeno <kikov@kikov.org>
 	* www/register/projectinfo.php: Solved a bug on [#856] that prevents
