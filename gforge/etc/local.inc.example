@@ -172,7 +172,7 @@ $sys_upload_dir='/path/to/uploads/';
 $sys_urlroot="/path/to/gforge/www/";
 
 // Name of the system as a whole (needed by various utils and titles)
-$sys_name="Gforge";
+$sys_name="MyGForge";
 
 // session cookie settings
 //
