@@ -296,7 +296,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		$result=db_query($sql);
 		$rows=db_numrows($result);
 		if ($rows) {
-			echo $HTML->box1_middle('Pending Projects', false, "red", false);
+			echo $HTML->box1_middle('Pending Projects', false, false);
 			echo "<TR><TD COLSPAN=\"2\">There ";
 			echo (($rows!=1)?"are ": "is "). "$rows project";
 			echo (($rows!=1)?"s":"");
@@ -309,7 +309,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		$result=db_query($sql);
 		$rows=db_numrows($result);
 		if ($rows) {
-			echo $HTML->box1_middle('Pending News Bytes', false, "red", false);
+			echo $HTML->box1_middle('Pending News Bytes', false, false);
 			echo "<TR><TD COLSPAN=\"2\">There ";
 			echo (($rows!=1)?"are ": "is "). "$rows news byte";
 			echo (($rows!=1)?"s":"");
