@@ -15,8 +15,8 @@ search the board.  If you find something wrong please tell me.
 1) Downloads
 	a) postgres 7.3.2 -- (for the database)
 		ftp://ftp.at.postgresql.org/db/www.postgresql.org/pub/source/v7.3.2/postgresql-7.3.2.tar.gz
-	b) apache 2.0.44 -- (for the webserver)
-		http://apache.towardex.com/httpd/httpd-2.0.44.tar.gz
+	b) apache 1.3.27 -- (for the webserver)
+		http://ftp.epix.net/apache/httpd/apache_1.3.27.tar.gz
 	c) php 4.3.1 -- (for the programming language)
 		http://www.php.net/get/php-4.3.1.tar.gz/from/us3.php.net/mirror
 	d) gzip 1.1.4 -- (for php, needed by gd library, not sure why)
@@ -29,21 +29,31 @@ search the board.  If you find something wrong please tell me.
 	g) jabber
 		when mailman is figured out i will add this also
 	h) gforge3beta1 -- (for gforge)
-		http://gforge.org/download.php/32/pre9-b1.diff.bz2
+		http://gforge.org/download.php/31/gforge-3.0b1.tar.bz2
+	i) cvsweb -- (to browse the cvs repositories, use my replacement :))
+		http://stud.fh-heilbronn.de/~zeller/download/cvsweb-1.112.tar.gz
+	j) libpng 
+		ftp://swrinde.nde.swri.edu/pub/png/src/libpng-1.2.5.tar.gz
+	k) libjpeg
+		http://www.ijg.org/files/jpegsrc.v6b.tar.gz
+
 2) Install
 	a) su to root, move all files to /usr/local/src, then change directory to /usr/local/src
 	b) gunzip *.gz
-	c) tar xvf all the tar files (can copy and past below)
+	c) bzip2 -dc gforge-3.0b1.tar.bz2 | tar xvf -
+	d) tar xvf all the tar files (can copy and past below)
 		tar xvf postgresql-7.3.2.tar
 		tar xvf httpd-2.0.44.tar
 		tar xvf php-4.3.1.tar
 		tar xvf zlib-1.1.4
-		bzip2 -dc gforge-3.0b1.tar.bz2 | tar xvf -
-	d) cd httpd-2.0.44
+		tar xvf cvsweb-1.112.tar
+	3) cd httpd-1.3.27
 		./configure --prefix=/usr/local/apache --enable-so
 		./make
 		./make install
 		edit /usr/local/apache/conf/httpd.conf to listen to your name/ip and port
+
+		copy this file (listed below) as root to a file called /etc/init.d/httpd
 START AFTER THIS LINE ===========================================
 #!/bin/bash
 . /etc/rc.d/init.d/functions
@@ -74,14 +84,16 @@ case "$1" in
                 ;;
 esac
 END BEFORE THIS LINE=============================================
+		cd /etc/init.d
 		chmod 700 httpd 
 		If you want to make apache(httpd) start and stop on boot and shutdown add this
+		(note* this is for redhat, may work with others)
 		cd ../rc3.d
-		ln -s ../init.d/S68httpd
-		ln -s ../init.d/K68httpd
+		ln -s ../init.d/httpd S68httpd
+		ln -s ../init.d/httpd K68httpd
 		cd ../rc5.d
-		ln -s ../init.d/S68httpd
-		ln -s ../init.d/K68httpd
+		ln -s ../init.d/httpd S68httpd
+		ln -s ../init.d/httpd K68httpd
 	
 		You can double check that the start and stop script works by 
 		cd /etc/init.d
@@ -103,13 +115,13 @@ END BEFORE THIS LINE=============================================
 		ps wuxa | grep postmaster; and kill -9 the pid
 		cd data
 
-		edit pg_hba.conf (mine looks like this, at the bottom, I tried to use my hostname for the the ip, but it wouldn't work for some reason)
+		edit /usr/local/pgsql/data/pg_hba.conf (mine looks like this, at the bottom, I tried to use my hostname for the the ip, but it wouldn't work for some reason)
 local   all         all                                             trust
 host    all         all         192.168.1.111       255.255.255.0   trust
 host    all         all         127.0.0.1         255.255.255.255   trust
 		type exit (makes you root again)
 		cd /etc/init.d
-		create a file called postgres (here is mine)
+		create a file called /etc/init.d/postgres (here is mine)
 START AFTER THIS LINE====================================
 #!/bin/bash
 . /etc/rc.d/init.d/functions
@@ -117,7 +129,7 @@ case "$1" in
         start)
                 echo "Starting PostgreSQL daemon..."
                 su - postgres -c '/usr/local/pgsql/bin/pg_ctl start -W -D /usr/local/pgsql/data \
-                               -l /usr/local/pgsql/data/logfile -o "-i -h laptop.unigeek.com"'
+                               -l /usr/local/pgsql/data/logfile -o "-i -h 127.0.0.1"'
                 ;;
 
         stop)
@@ -143,6 +155,7 @@ esac
 END BEFORE THIS LINE =======================================
 		chmod 700 postgres
 		If you want to make postgres start and stop on boot and shutdown add this
+		(note* this is redhat, may work for you)
 		cd ../rc3.d
 		ln -s ../init.d/S67postgres
 		ln -s ../init.d/K67postgres
@@ -159,20 +172,39 @@ END BEFORE THIS LINE =======================================
 		make test
 		make install
 		cd ..
-	g) cd php-4.3.1
+
+	g) cd libpng-1.2.5 (only use this if you want jgraph support for gnatt
+charts)
+		figure out which scripts/makefile.(which one you need) makefile
+		make test
+		make install
+		
+	h) cd jpeg-6b (only use this if you want jgraph support for gnatt
+charts)
+		./configure
+		make
+		make install
+
+	i) cd php-4.3.1
 		./configure --with-apxs2=/usr/local/apache/bin/apxs
 			--with-gd
 			--with-pgsql
-			--with-jpeg-dir=/usr/lib
-			--with-zlib=/usr/local/lib
+			--with-jpeg-dir=/usr/local/lib	(where you installed)
+			--with-png-dir=/usr/local/lib	(where you installed)
+			--with-zlib-dir=/usr/local/lib	(where you installed)
+		*** note *** you may have to make a symbolic links if configure can't find libjpeg.so|a or libpng.so|a
+
 		make
 		make install
 		cd ..
 		cp /usr/local/src/php-4.3.1/php.ini-dist /usr/local/lib/php.ini
 		You need to edit /usr/local/apache/conf/httpd.conf so php will work, add these lines
+
 		LoadModule php4_module modules/libphp4.so
 		AddType application/x-httpd-php .php	
+
 		/etc/init.d/httpd restart
+
 		If you want to test do this,
 		cd /usr/local/apache/htdocs
 		vi index.php (copy the following)
@@ -180,8 +212,9 @@ END BEFORE THIS LINE =======================================
 			phpinfo();
 		?>
 		chmod 755 index.php
-		Open a broswer and goto http://myurlorip.com/index.php
-	h) follow install instructions for gforge 
+		Open a broswer and goto http://my_url_or_ip.com/index.php
+
+	j) follow install instructions for gforge 
 		http://gforge.org/docman/view.php/1/34/gforge.pdf
 		WARNING -- the current document is not up to date, when you add the gforge user is postgres you may need
 		to make him/her a superuser in postgres
@@ -190,6 +223,17 @@ END BEFORE THIS LINE =======================================
 		* update pg_shadow set usesuper = 't' where usename = 'gforge';
 		This will allow you to update tracker statistics, I have not tried this yet, but I know it didn't
 		work before.
+
+	k) cd /usr/local/src/cvsweb
+		mkdir /var/www/gforge-3.0/cgi-bin
+		cp cvsweb.cgi /var/www/gforge-3.0/cgi-bin
+		cp cvsweb.conf /usr/local/apache/conf
+		Now in order to make this work, you need to have a repository set up an a project going.  So I assume you have a repository called /cvsroot/gforge and a project called gforge.  Now I will show you how to configure cvsweb.cgi and cvsweb.con.
+		i) I get an error right away because of gzip compression, so I go to cvsweb.conf and go 
+to the line where $allow_compress = 1 and set it to 0.
+		ii) Failed to spawn rlog, figure it out
+		Go to the project page and attempt to access cvs like this
+			
 3) Test
 	go to the website
 	http://gforge.org/docman/view.php/1/34/gforge.pdf
