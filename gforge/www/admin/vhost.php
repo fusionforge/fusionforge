@@ -145,7 +145,6 @@ if ($tweak) {
 		$title[]='Htdocs Dir';
 		$title[]='CGI Dir';
 		$title[]='Operations';
-		echo html_build_list_table_top($title);
 
 		print '
 			<form name="update" method="post" action="'.$PHP_SELF.'">
