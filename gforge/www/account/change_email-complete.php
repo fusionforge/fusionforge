@@ -38,17 +38,11 @@ if (!$u->setEmail($u->getNewEmail())) {
 	);
 }
 
-site_user_header(array('title'=>"Email Change Complete",'pagename'=>'account_change_email'));
+site_user_header(array('title'=>$Language->getText('account_change_email-complete','title'),'pagename'=>'account_change_email'));
 ?>
 
 <p>
-Welcome, <?php print $u->getUnixName(); ?>. Your email
-change is complete. Your new email address on file is 
-<strong>&lt;<?php print $u->getEmail(); ?>&gt;</strong>.
-
-Mail sent to
-&lt;<?php print $u->getUnixName(); ?>@<?php print $GLOBALS['sys_users_host']; ?>&gt; 
-will now be forwarded to this account.
+<?php echo $Language->getText('account_change_email-complete','confirm', array($u->getUnixName(),$u->getEmail(),'&lt;'.$u->getUnixName().'@'.$GLOBALS['sys_users_host'].'&gt')) ?>
 </p>
 
 <p><a href="/"><?php echo $Language->getText('account_change_email', 'return'); ?></a></p>

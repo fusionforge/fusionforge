@@ -22,7 +22,7 @@ if ($loginname) {
 	$u = user_get_object_by_name($loginname);
 
 	if (!$u || !is_object($u)){
-		exit_error("Invalid user","That user does not exist.");
+		exit_error($Language->getText('account_lostpw','invalid_user'),$Language->getText('account_lostpw','user_dont_exist'));
 	}
 
 	// First, we need to create new confirm hash

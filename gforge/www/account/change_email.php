@@ -19,7 +19,7 @@ session_require(array('isloggedin'=>1));
 if ($newemail) {
 
 	if (!validate_email($newemail)) {
-		exit_error('Error','Invalid email address');
+		exit_error($Language->getText('general','error'),$Language->getText('account_change_email','invalid_email'));
 	}
 
 	$confirm_hash = substr(md5($session_hash . time()),0,16);
@@ -38,7 +38,7 @@ if ($newemail) {
 
 	util_send_message($newemail,$Language->getText('account_change_email', 'subject', $GLOBALS[sys_name]),$message);
 
-	site_user_header(array('title'=>"Email Change Confirmation",'pagename'=>'account_change_email'));
+	site_user_header(array('title'=>$Language->getText('account_change_email_confirm','title'),'pagename'=>'account_change_email'));
 
 	echo $Language->getText('account_change_email', 'mailsent');
 
@@ -47,15 +47,15 @@ if ($newemail) {
 }
 
 
-site_user_header(array('title'=>"Change Email Address",'pagename'=>'account_change_email'));
+site_user_header(array('title'=>$Language->getText('account_change_email','title'),'pagename'=>'account_change_email'));
 
 echo $Language->getText('account_change_email', 'desc');
 ?>
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
-New Email Address:
+<?php echo $Language->getText('account_change_email','new_address') ?>: 
 <input type="text" name="newemail" maxlength="255" />
-<input type="submit" name="submit" value="Send Confirmation to New Address" />
+<input type="submit" name="submit" value="<?php echo $Language->getText('account_change_email','send_confirmation') ?>" />
 </form>
 
 <p><a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></a></p>

@@ -46,7 +46,7 @@ if ($submit) {
 		$jabber_address,$jabber_only)) {
 		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
-		$feedback .= 'Updated<br />';
+		$feedback .= $Language->getText('account','updated').'<br />';
 	}
 
 	if ($refresh) {

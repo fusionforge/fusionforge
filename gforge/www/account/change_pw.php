@@ -22,55 +22,55 @@ if ($submit) {
 
 	if ($u->getMD5Passwd() != md5($old_passwd)) {
 		exit_error(
-			'Error',
-			'Old password is incorrect.'
+			$Language->getText('general','error'),
+			$Language->getText('account_change_pw','old_password_incorrect')
 		);
 	}
 	
 	if (strlen($passwd)<6) {
 		exit_error(
-			'Error',
-			'You must supply valid password (at least 6 chars).'
+			$Language->getText('general','error'),
+			$Language->getText('account_change_pw','not_valid_password')
 		);
 	}
 	
 	if ($passwd != $passwd2) {
 		exit_error(
-			'Error',
-			'New passwords do not match.'
+			$Language->getText('general','error'),
+			$Language->getText('account_change_pw','passwords_dont_match')
 		);
 	}
 
         if (!$u->setPasswd($passwd)) {
 		exit_error(
-			'Error',
+			$Language->getText('general','error'),
 			'Could not change password: '.$u->getErrorMessage()
 		);
         }
 
-	site_user_header(array(title=>"Successfully Changed Password",'pagename'=>'account_change_pw'));
+	site_user_header(array(title=>$Language->getText('account_change_pw_changed','title'),'pagename'=>'account_change_pw'));
 	?>
 
 	<?php echo $Language->getText('account_change_pw', 'confirmation', $GLOBALS[sys_name]); ?>
 
 	<p>
-	You should now <a href="/account/">Return to UserPrefs</a>.
+	<?php echo $Language->getText('account_change_pw_changed','return_to',array('<a href="/account/">','</a>')) ?>
 	</p>
 	
 	<?php
 } else { 
 	// Show change form
-	site_user_header(array(title=>"Change Password",'pagename'=>'account_change_pw'));
+	site_user_header(array(title=>$Language->getText('account_change_pw','title'),'pagename'=>'account_change_pw'));
 	?>
 
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
-	<p>Old Password:
+	<p><?php echo $Language->getText('account_change_pw','old_password') ?>:
 	<br /><input type="password" name="old_passwd" /></p>
-	<p>New Password (at least 6 chars):
+	<p><?php echo $Language->getText('account_change_pw','new_password') ?>:
 	<br /><input type="password" name="passwd" /></p>
-	<p>New Password (repeat):
+	<p><?php echo $Language->getText('account_change_pw','new_password_repeat') ?>:
 	<br /><input type="password" name="passwd2" /></p>
-	<p><input type="submit" name="submit" value="Update" /></p>
+	<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_change_pw','update') ?>" /></p>
 	</form>
 	<?php
 }
