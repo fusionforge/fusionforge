@@ -10,14 +10,15 @@
 # This is the debhelper compatability version to use.
 export DH_COMPAT=4
 
-configure: configure-stamp debian/po/templates.pot
-configure-stamp:
-	dh_testdir
-
+remove-binary-files:
 	# Remove files in contrib, especially binaries that break dpkg-source
 	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
 	# Also a few images
 	rm www/themes/gforge/images/es_*
+
+configure: configure-stamp debian/po/templates.pot
+configure-stamp: remove-binary-files
+	dh_testdir
 
 	touch configure-stamp
 
@@ -37,14 +38,11 @@ build-stamp:
 
 	touch build-stamp
 
-clean:
+clean: remove-binary-files
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
 	rm -f cvssh.1 gforge-config.1
-
-	# Remove files in contrib, especially binaries that break dpkg-source
-	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
 
 	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
 	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
@@ -222,4 +220,4 @@ binary-arch: build install
 	# (No architecture-dependent files for Gforge, doing nothing here)
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install configure
+.PHONY: build clean binary-indep binary-arch binary install configure remove-binary-files
