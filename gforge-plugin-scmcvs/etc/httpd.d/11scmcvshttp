@@ -2,7 +2,7 @@
 <VirtualHost {ip_address}:80>
   ServerName {scm_host}
   DocumentRoot {usr_share_gforge}/cvs
-  ScriptAlias /plugins/scmcvs/cgi-bin {usr_share_gforge}/plugins/scmcvs/cgi-bin/
+  ScriptAlias /plugins/scmcvs/cgi-bin {usr_lib_gforge}/plugins/scmcvs/cgi-bin/
   Alias /images/ {usr_share_gforge}/www/images/
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
   CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
