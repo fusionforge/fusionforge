@@ -135,11 +135,44 @@ if ($group_id) {
 		*/
 		forum_header(array('title'=>$Language->getText('forum_admin_addforum','title'),'pagename'=>'forum_admin_addforum','sectionvals'=>group_getname($group_id)));
 
-		$sql="SELECT forum_name FROM forum_group_list WHERE group_id='$group_id'";
-		$result=db_query($sql);
-		ShowResultSet($result,$Language->getText('forum_admin_addforum','existing_forums'));
+//		$sql="SELECT forum_name FROM forum_group_list WHERE group_id='$group_id'";
+//		$result=db_query($sql);
+//		ShowResultSet($result,$Language->getText('forum_admin_addforum','existing_forums'));
+		$ff=new ForumFactory($g);
+		if (!$ff || !is_object($ff) || $ff->isError()) {
+			exit_error($Language->getText('general','error'),$ff->getErrorMessage());
+		}
+		
+		$farr =& $ff->getForums();
+
+		if ($ff->isError() || count($farr) < 1) {
+			echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
+			echo $ff->getErrorMessage();
+			forum_footer(array());
+			exit;
+		}
+
+		$tablearr=array($Language->getText('forum_admin_addforum','existing_forums'));
+		echo $HTML->listTableTop($tablearr);
+
+		/*
+			Put the result set (list of forums for this group) into a column with folders
+		*/
+
+		for ($j = 0; $j < count($farr); $j++) {
+			if ($farr[$j]->isError()) {
+				echo $farr->getErrorMessage();
+			} else {
+				echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.
+					html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
+					'&nbsp;' .
+					$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'</td></tr>';
+			}
+		}
+		echo $HTML->listTableBottom();
 
 		echo '
+			<br>
 			<form method="post" action="'.$PHP_SELF.'">
 			<input type="hidden" name="post_changes" value="y" />
 			<input type="hidden" name="add_forum" value="y" />
@@ -204,8 +237,8 @@ if ($group_id) {
 						<table width="100%"><tr><td valign="top">
 						<span style="font-size:-1">
 						<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
-						<input type="radio" name="allow_anonymous" value="1"'.(($farr[$i]->AllowAnonymous() == 1)?' checked="checked"':'').' /> Yes<br />
-						<input type="radio" name="allow_anonymous" value="0"'.(($farr[$i]->AllowAnonymous() == 0)?' checked="checked"':'').'/> No<br />
+						<input type="radio" name="allow_anonymous" value="1"'.(($farr[$i]->AllowAnonymous() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
+						<input type="radio" name="allow_anonymous" value="0"'.(($farr[$i]->AllowAnonymous() == 0)?' checked="checked"':'').'/> '.$Language->getText('general','no').'<br />
 						</span>
 						</td>
 						<td valign="top">

@@ -1,7 +1,11 @@
-2003-04-08  Christian Bayle	<bayle@debian.org>
+2003-04-09  Christian Bayle	<bayle@debian.org>
 
 	* rewrote tarballs download in such a way that only project admins can
 	download
+	* reordered records in Base.tab plus some cleaning
+	* added checktab.sh in tools dir to check .tab files
+	* reordered records in French.tab
+	* Made a beautiful table to list exixting forums in forum add
 
 2003-04-06  Ryan T. Sammartino  <ryants@shaw.ca>
 
