@@ -136,6 +136,9 @@ class FRSFile extends Error {
 		if (!is_dir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName())) {
 			mkdir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName());
 		}
+		if (!is_dir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName().'/'.$this->FRSRelease->getFileName())) {
+			mkdir($GLOBALS['sys_upload_dir'].'/'.$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.$this->FRSRelease->FRSPackage->getFileName().'/'.$this->FRSRelease->getFileName());		
+		}
 		$file_location=escapeshellcmd($file_location);
 		$newfilelocation = $GLOBALS['sys_upload_dir'].'/'.
 			$this->FRSRelease->FRSPackage->Group->getUnixName().'/'.
