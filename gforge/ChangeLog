@@ -1,3 +1,8 @@
+2003-08-22  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/languages/French.tab: a few UTF-8 fixes;
+	* .../Spanish.tab: fixed HTML-escaped HTML tags.
+
 2003-08-15 Tom Copeland  <tom@infoether.com>
 
 	* www/include/languages/Base.tab:

@@ -1577,10 +1577,10 @@ project_admin_utils	user_permissions	Permissions de l'utilisateur
 project_admin_utils	vhosts	Hôtes virtuels
 project_admin_vhost	create	Créer
 project_admin_vhost	delete	Effacer
-project_admin_vhost	info	<b>Ajouter un nouvel hôte virtuel</b><p>Pour ajouter un nouvel un nouvel hôte virtuel, faites pointer simplement un <strong>CNAME</strong> pour <em>votreh����org</em> sur <strong>$1.$2</strong> (chez le gestionnaire de DNS de votreh����org).  $3 n'accepte pas les h���� de courrier (autrement dit ne supporte pas qu'on fasse pointer les champs MX) ou les h���� DNS.  <p>Cliquer sur 'Créer' programmera la création de l'hôte virtuel.  Ce sera synchronisé avec le serveur web du projet de manière que <em>yourhost.org</em> affichera ce qui se trouve sur <em>$4.$5</em>.
+project_admin_vhost	info	<b>Ajouter un nouvel hôte virtuel</b><p>Pour ajouter un nouvel un nouvel hôte virtuel, faites pointer simplement un <strong>CNAME</strong> pour <em>votrehôte.org</em> sur <strong>$1.$2</strong> (chez le gestionnaire de DNS de votrehôteorg).  $3 n'accepte pas les hôtes de courrier (autrement dit ne supporte pas qu'on fasse pointer les champs MX) ou les hôtes DNS.  <p>Cliquer sur 'Créer' programmera la création de l'hôte virtuel.  Ce sera synchronisé avec le serveur web du projet de manière que <em>yourhost.org</em> affichera ce qui se trouve sur <em>$4.$5</em>.
 project_admin_vhost	name	Nouvel hôte virtuel <em>(par ex. vhost.org)</em>
 project_admin_vhost	no_vhosts	aucun hôte virtuel défini
-project_admin_vhost	not_valid_hostname	$1 n'est pas un nom d'h����valide
+project_admin_vhost	not_valid_hostname	$1 n'est pas un nom d'hôte valide
 project_admin_vhost	operations	Opérations
 project_admin_vhost	title	Gestion des hôtes virtuels
 project_admin_vhost	vhost	Hôte virtuel
@@ -1594,7 +1594,7 @@ project_home	cvs_commits	<strong>$1</strong> remontées (commits), <strong>$2</s
 project_home	forum_messages	<strong>$1</strong> message(s) dans <strong>$2</strong> forum(s)
 project_home	forums	Forums
 project_home	help_wanted	NOUS AVONS BESOIN D'AIDE&nbsp;: ce projet recherche des 
-project_home	help_wanted_multiple	Pour remplir plusieurs fonction dans $1
+project_home	help_wanted_multiple	Pour remplir plusieurs fonctions dans $1
 project_home	holding_note	NOTE : Cette valeur est maintenue par l'équipe de $1. Nous ne sommes pas le site officiel de ce produit. Un information supplémentaire sur le copyright peut être trouvée surmay be found sur la page d'accueil de ce projet.
 project_home	messages_in	message(s) dans
 project_home	monitor_package	Suivre ce paquet
@@ -1609,7 +1609,7 @@ project_home	view_members	Voir les membres
 project_home	view_project_files	Voir tous les fichiers du projet
 project_memberlist	developer	Développeur
 project_memberlist	joining	<P>Si vous désirez contribuer à ce projet
-project_memberlist	role	R����Fonction
+project_memberlist	role	Rôle / Fonction
 project_memberlist	skills	Compétences
 project_memberlist	title	Liste des membres du projet
 project_memberlist	username	Nom d'utilisateur
@@ -2237,7 +2237,7 @@ tracker_admin	group_updated	Groupe mis à jour
 tracker_admin	intro	<h3>Créer un nouveau traceur</h3><p>Vous pouvez utiliser ce système pour suivre la trace de n'importe quel type de données, chaque traceur ayant ses listes séparées d'utilisateur, de groupes, de catégories et de permissions. Vous pouvez aussi facilement déplacer des 'traces' entre les traceurs quand vous le voulez.</p><p>Les traceurs sont désignés comme étant des "types de traces" et les parties individuelles de données sont des "traces". "Bugs" pourrait être un type de trace, bien qu'un rapport de bug puisse être une trace. Vous pouvez créer autant de types de trace que vous voulez, mais rappelez-vous qu'administrer les catégories, groupes et permissions pour chaque type peut prendre rapidement beaucoup de temps
 tracker_admin	section	Traceur&nbsp;
 tracker_admin	title	Administration
-tracker_admin	tracker_id	num鲯 de traceur
+tracker_admin	tracker_id	numéro de traceur
 tracker_admin	tracker_title	Titre
 tracker_admin	tracker_updated	Traceur mis à jour
 tracker_admin	update_preferences	Mettre à jour les préférences

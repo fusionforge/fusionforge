@@ -897,7 +897,7 @@ help_trove_cat	description	Descripción
 help_trove_cat	full_category_name	Nombre Completo de Categoría
 help_trove_cat	no_such_category	Categoría de Proyecto no existente
 help_trove_cat	short_name	Nombre Corto
-home	about_blurb	$1 es un&lt;B&gt; servicio gratuito para &lt;A href="<a href="http://www.opensource.org" class="rawurl">http://www.opensource.org</a>"&gt; desarroladores de software libre &lt;/A&gt; &lt;/B&gt; que ofrece facil acceso al mejor servicio CVS, de listas de correo, servicio de seguimiento de errores, tablón de anuncios, foros, administración de tareas, hosting, almacenamiento permanente de archivos, copias de restauración completas, y una adminstración totalmente basada en web. &lt;BR&gt;&amp;nbsp;&lt;P&gt;&lt;B&gt;Retroalimentación y participación&lt;/B&gt;&lt;P&gt;Para conseguir todo esto $1, necesitarás&lt;A href="/account/register.php"&gt;registrarte como un usuario de este sitio&lt;/A&gt;. Esto te permitirá participar completamente en todo lo que ofrezcamos. Puedes navegar por el sitio sin necesidad de registrarte pero no tendrás acceso a un uso total de los servicios. &lt;P&gt;&amp;nbsp;&lt;BR&gt;&lt;B&gt; Configura tu propio proyecto&lt;/B&gt;&lt;P&gt;&lt;A href="/account/register.php"&gt; Registrate como usuario del sitio&lt;/A&gt;, después &lt;A HREF="/account/login.php"&gt;Login&lt;/A&gt; finalmente, &lt;A HREF="/register/"&gt;Registra tu proyecto.&lt;/A&gt; Gracias... y disfruta del sitio.
+home	about_blurb	$1 es un <b>servicio gratuito para <a href="http://www.opensource.org" class="rawurl">http://www.opensource.org</a> desarroladores de software libre</a></b> que ofrece facil acceso al mejor servicio CVS, de listas de correo, servicio de seguimiento de errores, tablón de anuncios, foros, administración de tareas, hosting, almacenamiento permanente de archivos, copias de restauración completas, y una adminstración totalmente basada en web. <p><b>Retroalimentación y participación</b><p>Para conseguir todo esto $1, necesitarás<a href="/account/register.php">registrarte como un usuario de este sitio</a>. Esto te permitirá participar completamente en todo lo que ofrezcamos. Puedes navegar por el sitio sin necesidad de registrarte pero no tendrás acceso a un uso total de los servicios. <p><b>Configura tu propio proyecto</b><p><a href="/account/register.php">Registrate como usuario del sitio</a>, después <a href="/account/login.php">Login</a> finalmente, <a href="/register/">Registra tu proyecto.</a> Gracias... y disfruta del sitio.
 home	breaking_down_barriers	Rompiendo las barreras del desarrollo del Software Libre
 home	gforge_statistics	Estadísticas de $1
 home	highest_ranked_users	Usuarios mejor puntuados
@@ -1026,7 +1026,7 @@ my_diary	submit_only_once	Haga click una vez solamente.
 my_diary	summary	Resumen
 my_diary	title	Diario y Notas
 my_diary	update_entry	Actualizar un apunte
-my_rmproject	operation_not_permitted_text	No puedes eliminarte tú mismo de este proyecto, porque eres administrador del mismo. Primero deberás pedirle a otro administrador que elimine tu privilegio de administración. Si eres el único administrador del proyecto, por favor considera la opción de publicar un anuncio de disponibilidad en &lt;a href="/people/"&gt;Help Wanted Board&lt;/a&gt; y estate listo para traspasar el privilegio de administración a quien esté interesado en ello.
+my_rmproject	operation_not_permitted_text	No puedes eliminarte tú mismo de este proyecto, porque eres administrador del mismo. Primero deberás pedirle a otro administrador que elimine tu privilegio de administración. Si eres el único administrador del proyecto, por favor considera la opción de publicar un anuncio de disponibilidad en <a href="/people/">Help Wanted Board</a> y estate listo para traspasar el privilegio de administración a quien esté interesado en ello.
 my_rmproject	operation_not_permitted_title	Operación No Permitida
 my_rmproject	quitting_project	Saliendo del proyecto
 my_rmproject	quitting_project_text	Estás a punto de eliminarte tú mismo del proyecto. Por favor, confirma tu acción:
@@ -1601,7 +1601,7 @@ project_home	cvs_commits	<strong>$1</strong> envios, <strong>$2</strong> añadid
 project_home	forum_messages	<strong>$1</strong> mensages en <strong>$2</strong> foros
 project_home	forums	foros
 project_home	help_wanted	SE BUSCA AYUDA: Este proyecto está buscando
-project_home	help_wanted_multiple	Gente para llenar $1 numerosas posiciones diferentes  &lt;/a&gt;
+project_home	help_wanted_multiple	Gente para llenar $1 numerosas posiciones diferentes
 project_home	holding_note	NOTA: Este proyecto es mantenido enteramente por el personal. No somos el sitop oficial para este producto. Para más información sobre el copyright acudir a la página principal de este proyecto.
 project_home	messages_in	mensajes en
 project_home	monitor_package	Monitorizar este paquete
