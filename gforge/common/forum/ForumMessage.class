@@ -398,9 +398,9 @@ class ForumMessage extends Error {
 		$messagesys=$GLOBALS['sys_name'];
 		$messagemonitor='http://'.$GLOBALS[sys_default_domain].'/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 		
-		$body = stripcslashes($Language->getText('forum_utils', 'mailmonitor', array($messagelink, $messagesender, $messagebody, $messagesys, $messagemonitor)));
+//		$body = stripcslashes($Language->getText('forum_utils', 'mailmonitor', array($messagelink, $messagesender, $messagebody, $messagesys, $messagemonitor)));
 
-		/*	$body = "\nRead and respond to this message at: ".
+		$body = "\nRead and respond to this message at: ".
 		"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$this->getID().
 		"\nBy: " . $this->getPosterName() .
 		"\n\n" . util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
@@ -408,12 +408,10 @@ class ForumMessage extends Error {
 		"\nRead and respond to this message at: ".
 		"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$this->getID().
 		"\n\nYou are receiving this email because you elected to monitor this forum.".
-		"\nTo stop monitoring this forum, login to $GLOBALS[$sys_name] and visit: ".
+		"\nTo stop monitoring this forum, login to $GLOBALS[sys_name] and visit: ".
 		"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 
 
-		
-		*/
 		$subject="[" . $this->Forum->Group->getUnixName() . " - " . $this->Forum->getName() ."] ".util_unconvert_htmlspecialchars($this->getSubject());
 		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo());
 		return true;
