@@ -631,9 +631,11 @@ Function GraphIt($name_string,$value_string,$title) {
  * @param		int		The result set ID
  * @param		string	The title of the result set
  * @param		bool	The option to turn URL's into links
+ * @param		bool	The option to display headers
+ * @param		array	The db field name -> label mapping
  *
  */
-function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
+function  ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$headerMapping=array())  {
 	global $group_id,$HTML;
 
 	if  ($result)  {
@@ -644,15 +646,22 @@ function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 			<table border="0" width="100%">';
 
 		/*  Create the title  */
-
-		$cell_data=array();
-		$cell_data[] = array($title, 'colspan="'.$cols.'"');
-		echo $HTML->multiTableRow('',$cell_data, TRUE);
+		if(strlen($title) > 0) {
+			$cell_data=array();
+			$cell_data[] = array($title, 'colspan="'.$cols.'"');
+			echo $HTML->multiTableRow('',$cell_data, TRUE);
+		}
 
 		/*  Create  the  headers  */
 		$cell_data=array();
 		for ($i=0; $i < $cols; $i++) {
-			$cell_data[] = array(db_fieldname($result,$i));
+			$fieldName = db_fieldname($result,$i);
+			if(isset($headerMapping[$fieldName])) {
+				$cell_data[] = $headerMapping[$fieldName];
+			}
+			else {
+				$cell_data[] = array($fieldName);
+			}
 		}
 		echo $HTML->multiTableRow('',$cell_data, TRUE);
 
