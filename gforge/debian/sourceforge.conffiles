@@ -1,1 +1,6 @@
 /etc/cron.d/sourceforge
+/usr/lib/sourceforge/templates/database.inc.template
+/usr/lib/sourceforge/templates/local.inc.template
+/usr/lib/sourceforge/templates/local.pl.template
+/usr/lib/sourceforge/templates/sf-httpd.conf.template
+/usr/lib/sourceforge/templates/sf-httpd.secrets.template
