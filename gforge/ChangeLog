@@ -5,6 +5,7 @@
 	* updated french localization
 	* corrected several UI bugs
 	* removed edit release link from /project/admin/
+	* fixed a consistency problem in cvs/ssh related cronjobs
 
 2004-02-13  Guillaume Smet <guillaume-gforge@smet.org>
 

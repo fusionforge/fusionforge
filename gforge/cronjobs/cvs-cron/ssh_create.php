@@ -29,10 +29,10 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	fwrite($h8,$ssh_key);
 	fclose($h8);
 
-	system("chown $username:$username $homedir_prefix$username");
-	system("chown $username:$username $ssh_dir");
+	system("chown $username:users $homedir_prefix$username");
+	system("chown $username:users $ssh_dir");
 	system("chmod 0644 $ssh_dir/authorized_keys");
-	system("chown $username:$username $ssh_dir/authorized_keys");
+	system("chown $username:users $ssh_dir/authorized_keys");
 
 }
 
