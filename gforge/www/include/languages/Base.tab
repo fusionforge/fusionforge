@@ -59,6 +59,16 @@ account_register	siteupdate	Receive Email about Site Updates <I>(Very low traffi
 account_register	communitymail	Receive additional community mailings. <I>(Low traffic.)</I>
 account_register	mandatory	Fields marked with * are mandatory.
 account_register	register	Register
+account_register	err_username	You must supply a username
+account_register	err_realname	You must supply a real name
+account_register	err_passwd	You must supply a password
+account_register	err_passwd2	Passwords do not match
+account_register	err_passwd3	Password must be at least 6 characters
+account_register	err_unixname	Invalid Unix Name. 
+account_register	err_email	Invalid Email Address
+account_register	err_userexist	That username already exists.
+account_register	err_mailexist	User with this email already exists - use people search to recover your login.
+account_register	err_badinsert	Insert Failed 
 account_unsubscribe	all_mailings	all SourceForge mailings and notifications
 account_unsubscribe	site_mailings	SourceForge site mailings
 account_verify	title	SourceForge Account Verification
@@ -398,6 +408,8 @@ tracker_add	section	$1
 tracker_add	title	Submit Tracker Item
 tracker_admin	section	Tracker
 tracker_admin	title	Administration
+tracker_admin_choose	section	Project: $1
+tracker_admin_choose	title	Tracker Admin
 tracker_admin_add_canned	section	Tracker Administration
 tracker_admin_add_canned	title	Add Canned Responses To: $1
 tracker_admin_add_cat	section	Tracker Administration
@@ -418,7 +430,7 @@ tracker_browse	section	Project: $1
 tracker_browse	title	Browse $1
 tracker_detail	section	$1
 tracker_detail	title	Tracker Detailed View
-tracker_reporting	section	$1
+tracker_reporting	section	Project: $1
 tracker_reporting	title	Tracker Reporting
 users	title	User Summary
 users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
