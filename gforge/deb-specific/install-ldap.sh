@@ -43,6 +43,8 @@ setup_vars() {
     # Probably only do that when needed (when inserting the robot account)
     [ -f /etc/ldap.secret ] && slapd_admin_passwd=$(cat /etc/ldap.secret) || slapd_admin_passwd=$robot_passwd
 
+    cryptedpasswd=`slappasswd -s "$slapd_admin_passwd" -h {CRYPT}`
+
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
 
@@ -568,8 +570,28 @@ case "$1" in
 	show_vars
 	check_server
 	;;
+    setup)
+    	$0 configure-files
+	$0 configure
+	cp /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-old
+	cp /etc/libnss-ldap.conf /etc/libnss-ldap.conf.gforge-old
+	cp /etc/nsswitch.conf.gforge /etc/nsswitch.conf.gforge-old
+	mv /etc/ldap/slapd.conf.gforge-new /etc/ldap/slapd.conf
+	mv /etc/libnss-ldap.conf.gforge-new /etc/libnss-ldap.conf
+	mv /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
+	;;
+    cleanup)
+	$0 purge-files
+	$0 purge
+	cp /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-old
+	cp /etc/libnss-ldap.conf /etc/libnss-ldap.conf.gforge-old
+	cp /etc/nsswitch.conf.gforge /etc/nsswitch.conf.gforge-old
+	mv /etc/ldap/slapd.conf.gforge-new /etc/ldap/slapd.conf
+	mv /etc/libnss-ldap.conf.gforge-new /etc/libnss-ldap.conf
+	mv /etc/nsswitch.conf.gforge-new /etc/nsswitch.conf
+	;;
     *)
-	echo "Usage: $0 {configure|configure-files|update|purge|purge-files|list|empty|reset|test}"
+	echo "Usage: $0 {configure|configure-files|update|purge|purge-files|list|empty|reset|test|setup|cleanup}"
 	exit 1
 	;;
 esac
