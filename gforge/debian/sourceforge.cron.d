@@ -40,13 +40,13 @@
 0 * * * * sourceforge [ -x /usr/lib/sourceforge/bin/dns_conf.pl ] && /usr/lib/sourceforge/bin/dns_conf.pl && /etc/init.d/bind9 restart &>/dev/null
 
 # Mailing-list creation
-55 * * * * root [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl
+55 * * * * root [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl &> /dev/null
 
 # FTP update
-0 * * * * root [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update
+0 * * * * root [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update &> /dev/null
 
 # CVS tarballs
-5 2 * * * root [ -x /usr/lib/sourceforge/bin/tarballs.sh ] && /usr/lib/sourceforge/bin/tarballs.sh
+5 2 * * * root [ -x /usr/lib/sourceforge/bin/tarballs.sh ] && /usr/lib/sourceforge/bin/tarballs.sh &> /dev/null
 
 # CVS/user/group update
-0 * * * * root [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh
+0 * * * * root [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh &> /dev/null
