@@ -9,7 +9,7 @@
 # This is to test if apache2 is started and listen on port 80
 #
 [ -f /etc/default/apache2 ] && . /etc/default/apache2
-if [ "x$NO_START" == "x0" ]
+if [ "x$NO_START" = "x0" ]
 then
 	/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system pgsql -nolisten80
 else
