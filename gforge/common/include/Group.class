@@ -1268,14 +1268,13 @@ class Group extends Error {
 						db_rollback();
 						return false;
 					}
-/*					if (!$SYS->sys_create_user($user_id)) {
+					if (!$SYS->sys_create_user($user_id)) {
 						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
 					}
-*/
 				} else {
-/*					//
+					//
 					//	User already had unix account
 					//
 					if (!$SYS->sys_check_create_user($user_id)) {
@@ -1283,7 +1282,6 @@ class Group extends Error {
 						db_rollback();
 						return false;
 					}
-*/
 				}
 				//
 				//	Create this user's row in the user_group table
@@ -1299,7 +1297,7 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
-/*				//
+				//
 				//	set up their ldap info
 				//
 				if (!$SYS->sys_group_add_user($this->getID(),$user_id)) {
@@ -1307,7 +1305,6 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
-*/
 				//
 				//	Add to all forums
 				//
@@ -1377,17 +1374,11 @@ class Group extends Error {
 					return false;
 				} else {
 					$user->fetchData($user->getID());
-/*					if (!$SYS->sys_check_create_user($user_id)) {
+					if (!$SYS->sys_check_create_user($user_id)) {
 						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
 					}
-					if (!sf_ldap_group_add_user($this->getID(),$user_id)) {
-						$this->setError('addUser::ld5::'.sf_ldap_get_error_msg());
-						db_rollback();
-						return false;
-					}
-*/
 					$role = new Role($this,$role_id);
 					if (!$role || !is_object($role)) {
 						$this->setError('Error Getting Role Object');
@@ -1400,10 +1391,6 @@ class Group extends Error {
 					}
 					if (!$role->setUser($user_id)) {
 						$this->setError('addUser::role::setUser'.$role->getErrorMessage());
-/*
-						if (!$SYS->sys_group_add_user($this->getID(),$form_newuid)) {
-						$this->setError($SYS->getErrorMessage());
-*/
 						db_rollback();
 						return false;
 					}
@@ -1487,12 +1474,11 @@ class Group extends Error {
 				WHERE group_id='".$this->getID()."') 
 				AND user_id='$user_id'");
 
-/*			if (!$SYS->sys_group_remove_user($this->getID(),$user_id)) {
+			if (!$SYS->sys_group_remove_user($this->getID(),$user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
-*/
 			//audit trail
 			$this->addHistory('removed user',$user_id);
 		}

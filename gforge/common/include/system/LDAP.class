@@ -251,11 +251,6 @@ class LDAP extends System {
 		global $ldap_conn;
 		global $sys_ldap_base_dn;
 	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
-	
 		if (!$this->gf_ldap_connect()) {
 			return false;
 		}
@@ -295,11 +290,6 @@ class LDAP extends System {
 	 *
 	 */
 	function sys_check_create_user($user_id) {
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
-	
 		if (!$this->sys_check_user($user_id)){
 			$user = &user_get_object($user_id);
 			return $this->gf_ldap_create_user_from_object($user);
@@ -317,12 +307,6 @@ class LDAP extends System {
 	function gf_ldap_create_user_from_object(&$user) {
 		global $sys_ldap_base_dn;
 		global $UID_ADD;
-	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
-	
 		if (!$this->gf_ldap_connect()) {
 			return false;
 		}
@@ -366,12 +350,6 @@ class LDAP extends System {
 	function gf_ldap_create_user_from_props($username, $cn, $crypt_pw,
 						$shell, $cvsshell, $uid, $gid, $email) {
 		global $sys_ldap_base_dn;
-	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
-	
 		if (!$this->gf_ldap_connect()) {
 			return false;
 		}
@@ -413,11 +391,6 @@ class LDAP extends System {
 	function sys_remove_user($user_id) {
 		global $sys_ldap_base_dn;
 	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
-	
 		$user = &user_get_object($user_id);
 		if (!$this->gf_ldap_connect()) {
 			return false;
@@ -443,11 +416,6 @@ class LDAP extends System {
 	 */
 	function sys_user_set_attribute($user_id,$attr,$value) {
 		global $sys_ldap_base_dn;
-	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
 	
 		$user = &user_get_object($user_id);
 		if (!$this->gf_ldap_connect()) {
@@ -479,11 +447,6 @@ class LDAP extends System {
 		global $ldap_conn;
 		global $sys_ldap_base_dn;
 	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return false;
-		}
-	
 		$group = &group_get_object($group_id);
 		if (!$group) {
 			$this->setError("ERROR: Cannot find group [$group_id]<br />");
@@ -512,11 +475,6 @@ class LDAP extends System {
 		global $sys_ldap_base_dn;
 		global $GID_ADD;
 		global $ANONCVS_UID_ADD;
-	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
 	
 		$group = &group_get_object($group_id);
 		if (!$this->gf_ldap_connect()) {
@@ -589,11 +547,6 @@ class LDAP extends System {
 	function sys_remove_group($group_id) {
 		global $sys_ldap_base_dn;
 	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
-	
 		$group = &group_get_object($group_id);
 		if (!$this->gf_ldap_connect()) {
 			return false;
@@ -650,11 +603,6 @@ class LDAP extends System {
 	function sys_group_add_user($group_id,$user_id,$cvs_only=0) {
 		global $ldap_conn;
 		global $sys_ldap_base_dn;
-	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
 	
 		$group = &group_get_object($group_id);
 		$user  = &user_get_object($user_id);
@@ -725,11 +673,6 @@ class LDAP extends System {
 	 */
 	function sys_group_remove_user($group_id,$user_id,$cvs_only=0) {
 		global $sys_ldap_base_dn;
-	
-		global $sys_use_ldap;
-		if (!$sys_use_ldap) {
-			return true;
-		}
 	
 		$group = &group_get_object($group_id);
 		$user  = &user_get_object($user_id);
