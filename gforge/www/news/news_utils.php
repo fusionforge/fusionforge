@@ -117,10 +117,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					date($sys_datefmt,db_result($result,$i,'date')). '</I>' . 
 					$proj_name . $summ_txt;
 				
-				$sql="SELECT famc.count as total
-					  FROM forum_group_list g
-					  LEFT JOIN forum_agg_msg_count famc USING (group_forum_id)
-					  WHERE g.group_id='$group_id' AND group_forum_id='" . db_result($result,$i,'forum_id') . "' AND g.is_public='1'";
+				$sql="SELECT total FROM forum_group_list_vw WHERE group_forum_id='" . db_result($result,$i,'forum_id') . "'";
 				$res2 = db_query($sql);
 				$num_comments = db_result($res2,0,'total');
 

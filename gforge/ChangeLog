@@ -2,6 +2,11 @@
 
 	* common/include/session.php(session_issecure, session_redirect):
 	use $HTTP_SERVER_VARS instead of $_SERVER.
+	* db/20030109.sql: new file.
+	* www/include/project_summary.php: use project_sums_agg table for
+	fora and forum message count.
+	* www/news/news_utils.php: use forum_group_list_vw to get number
+	of comments.
 
 2003-01-9  Jim Nutt
 
