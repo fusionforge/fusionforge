@@ -1,11 +1,12 @@
 sourceforge (2.6-0+7+) unstable; urgency=low
 
-  * Added debian/BUGS
-  * Corrected approve_pending bug
-  * Corrected wrong userid for CVS
-  * Fixed libmcryp4 dependancy 
+  * [Christian] Added debian/BUGS
+  * [Christian] Corrected approve_pending bug
+  * [Christian] Corrected wrong userid for CVS
+  * [Christian] Fixed libmcryp4 dependancy
+  * [Christian] Added anoncvs_ users in ldap db 
 
- -- Christian Bayle <bayle@aist.enst.fr>  Thu, 28 Feb 2002 14:29:24 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Thu, 28 Feb 2002 21:44:15 +0100
 
 sourceforge (2.6-0+7) unstable; urgency=low
 

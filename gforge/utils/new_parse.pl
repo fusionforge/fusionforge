@@ -95,7 +95,7 @@ while ($ln = pop(@groupdump_array)) {
 	chop($ln);
 	($gname, $gstatus, $gid, $userlist) = split(":", $ln);
 	
-	$cvs_id = $gid + 50000;
+	$cvs_id = $gid + $anoncvs_uid_add;
 	$gid += $gid_add;
 	$userlist =~ tr/A-Z/a-z/;
 
