@@ -17,8 +17,7 @@ for ($i=0; $i<db_numrows($res);$i++) {
 
 	if (!$user_object || !is_object($user_object)) {
 		$err .= "Could not get User object with ID: $user_id\n";
-	}
-	else {
+	} else {
 
 		$projectTasksForUser = new ProjectTasksForUser($user_object);
 		$userTasks =& $projectTasksForUser->getTasksForToday();

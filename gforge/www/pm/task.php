@@ -232,8 +232,7 @@ switch ($func) {
 			}
 			if (!$confirm_delete) {
 				$feedback .= $Language->getText('pm_deletetask','task_delete_failed_confirm');
-			}
-			else {
+			} else {
 				$deletion = $pt->delete(true);
 				if (!$deletion) {
 					echo $deletion;
