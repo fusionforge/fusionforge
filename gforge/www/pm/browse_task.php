@@ -72,7 +72,7 @@ $cat_id_arr[]='0';  //this will be the 'any' row
 $cat_name_arr=util_result_column_to_array($res_cat,1);
 $cat_name_arr[]='Any';
 
-$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,'Any');
+$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,false);
 
 /*
 	Creating a custom sort box
@@ -83,6 +83,7 @@ $title_arr[]='Summary';
 $title_arr[]='Start Date';
 $title_arr[]='End Date';
 $title_arr[]='Percent Complete';
+$title_arr[]='Priority';
 
 $order_col_arr=array();
 $order_col_arr[]='project_task_id';
@@ -90,6 +91,7 @@ $order_col_arr[]='summary';
 $order_col_arr[]='start_date';
 $order_col_arr[]='end_date';
 $order_col_arr[]='percent_complete';
+$order_col_arr[]='priority';
 $order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order',$_order,false);
 
 /*
@@ -143,7 +145,8 @@ if ($rows < 1) {
 			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
 			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
 				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
-			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
+			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td>'.
+			'<td>'. $pt_arr[$i]->getPriority() .'</td></tr>';
 
 	}
 
