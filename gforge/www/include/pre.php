@@ -25,7 +25,11 @@ if (is_file('/etc/gforge/custom/pre.php')){
 if (is_file('/etc/gforge/local.inc')) {
 	require ('/etc/gforge/local.inc');
 } else {
-	require('etc/local.inc');
+	if (is_file('etc/local.inc')) {
+		require('etc/local.inc');
+	} else {
+		require(getenv('sys_localinc'));
+	}
 }
 
 if ($HTTP_HOST != $GLOBALS['sys_default_domain'] && $HTTP_HOST != $GLOBALS['sys_fallback_domain']) {
