@@ -144,7 +144,14 @@ class BaseLanguage {
 	 * @param string $lang language name
 	 */	
 	function loadLanguage($lang) {
+<<<<<<< BaseLanguage.class
 		$cachePath = $this->getLocalizationCachePath($lang);
+
+		$pluginManager =& plugin_manager_get_object();
+		$pluginNames =& $pluginManager->getPlugins();
+=======
+		$cachePath = $this->getLocalizationCachePath($lang);
+>>>>>>> 1.17
 
 		$pluginManager =& plugin_manager_get_object();
 		$pluginNames =& $pluginManager->getPlugins();
@@ -161,6 +168,17 @@ class BaseLanguage {
 		}
 		$this->loadGlobalLanguage($lang);
 
+<<<<<<< BaseLanguage.class
+		$this->dependencies = array();
+		if($lang != 'Base') {
+			$this->loadGlobalLanguage('Base');
+		}
+		$this->loadGlobalLanguage($lang);
+
+		$this->pluginDependencies = array();
+		if($lang != 'Base') {
+			$this->loadPluginSpecificLanguage('Base', $pluginNames);
+=======
 		$this->pluginDependencies = array();
 		if ( $lang != 'Base' )
 		{
@@ -168,6 +186,14 @@ class BaseLanguage {
 		}
 		$this->loadPluginSpecificLanguage($lang, $pluginNames);
 
+		$this->lang = $lang ;
+		if($GLOBALS['sys_localization_enable_caching']) {
+			$this->writeLocalizationCache($cachePath);
+>>>>>>> 1.17
+		}
+<<<<<<< BaseLanguage.class
+		$this->loadPluginSpecificLanguage($lang, $pluginNames);
+		
 		$this->lang = $lang ;
 		if($GLOBALS['sys_localization_enable_caching']) {
 			$this->writeLocalizationCache($cachePath);
@@ -181,6 +207,17 @@ class BaseLanguage {
 	 */
 	function loadGlobalLanguage($lang) {
 		global $sys_theme, $sys_urlroot;
+=======
+	}
+
+	/**
+	 * loadGlobalLanguage - load localized strings of the selected language for the global site
+	 *
+	 * @param string $lang language name
+	 */
+	function loadGlobalLanguage($lang) {
+		global $sys_theme, $sys_urlroot;
+>>>>>>> 1.17
 
 		// Customization by language in $sys_urlroot/include/languages/<Language>.tab
 		$fname = $sys_urlroot.'/include/languages/'.$lang.'.tab';
@@ -200,6 +237,27 @@ class BaseLanguage {
 		if (file_exists ($fltname)) {
 			$this->loadLanguageFile($fltname) ;
 		}
+<<<<<<< BaseLanguage.class
+	}
+
+	/**
+	 * loadPluginSpecificLanguage - load localized strings of the selected language for installed plugins
+	 *
+	 * @param string $lang language name
+	 */
+	function loadPluginSpecificLanguage($lang, $pluginNames) {
+		foreach($pluginNames AS $pluginName) {
+			$plugin =& plugin_get_object($pluginName);
+			$languagePath = $plugin->getLanguagePath().$lang.'.tab';
+			$specificLanguagePath = $plugin->getSpecificLanguagePath().$lang.'.tab';
+			if(file_exists($languagePath)) {
+				$this->loadLanguageFile($languagePath);
+			}
+			if(file_exists($specificLanguagePath)) {
+				$this->loadLanguageFile($specificLanguagePath);
+			}
+			$this->pluginDependencies[] = $pluginName;
+=======
 	}
 
 	/**
@@ -220,6 +278,7 @@ class BaseLanguage {
 				$this->loadLanguageFile($specificLanguagePath);
 			}
 			$this->pluginDependencies[] = $pluginName;
+>>>>>>> 1.17
 		}
 	}
 
@@ -375,8 +434,8 @@ class BaseLanguage {
 	 * @return boolean true if the cache is deprecated, false if it's still valid
 	 */
 	function isCacheOutdated($cachePath, $pluginNames) {
-		if(count(array_diff($pluginNames, $this->cacheDependencies)) > 0) {
-			return false;
+		if(count(array_diff($pluginNames, $this->pluginDependencies)) > 0) {
+			return true;
 		}
 		if(!empty($this->cacheDependencies)) {
 			$cacheTimestamp = filemtime($cachePath);
