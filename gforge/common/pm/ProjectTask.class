@@ -690,7 +690,6 @@ class ProjectTask extends Error {
 		$arr =& array_keys($arr_);
 		//get existing dependencies to diff against
 		$arr2 =& array_keys($this->getDependentOn());
-		$this->dependon =& $arr2;
 
 		if (count($arr) || count($arr2)) {
 			$add_arr = array_values (array_diff ($arr, $arr2));
