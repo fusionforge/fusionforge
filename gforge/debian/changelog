@@ -49,6 +49,12 @@ sourceforge (2.5-29+) unstable; urgency=low
     fact that ProFTPd was still in non-US eluded both me and the
     ftpmasters at the time the 2.5-29 package made it into main.  I'm
     sorry about that.
+  * [Soon-Son] added group write permission(0664) when creating the val-tags
+    file in the CVSROOT directory of each project. Old configuration (0644)
+    caused an error when the user tries to tag it as follows:
+    $cvs up -r xterm-branch 
+    cvs [server aborted]: cannot write /cvsroot/hanterm-xf/CVSROOT/val-tags:
+    Permission denied 
 
  -- Roland Mas <lolando@debian.org>  Wed, 17 Jul 2002 22:58:57 +0200
 
