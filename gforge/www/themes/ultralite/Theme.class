@@ -50,18 +50,14 @@ class Theme extends Layout {
 
 	}
 
-	function boxTop($title,$echoout=1,$bgcolor='') {
+	function boxTop($title) {
 		$bgcolor=$this->COLOR_HTMLBOX_BACK;
 		$return .= '<TABLE cellspacing="1" cellpadding="2" width="100%" border="0" bgcolor="'.$bgcolor.'">'.
 						'<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">'.
 						'<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD></TR>'.
 						'<TR align=left>
 								<TD colspan=2>';
-			if ($echoout) {
-					print $return;
-			} else {
-					return $return;
-			}
+		return $return;
 	}
 
 	function boxMiddle($title) {
@@ -81,7 +77,6 @@ class Theme extends Layout {
 								</TD>
 						</TR>
 				</TABLE><P>';
-//</TD></TR></TABLE><P>';
 			return $return;
 	}
 
