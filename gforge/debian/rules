@@ -157,7 +157,7 @@ install: build
 	# gforge-shell-ldap
 	cd $(CURDIR)/debian/gforge-shell-ldap/var/lib/gforge/chroot/var/lib/gforge/chroot && ln -s ../../../../home .
 
-	# gforge-shellpostgresql
+	# gforge-shell-postgresql
 	install -m 755 deb-specific/install-nsspgsql.sh $(CURDIR)/debian/gforge-shell-postgresql/usr/lib/gforge/bin/
 
 	# gforge-ftp-proftpd
@@ -178,9 +178,6 @@ install: build
 	# gforge-lists-mailman
 	install -m 755 deb-specific/create-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
 	install -m 755 deb-specific/fix-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
-
-	# gforge-sourceforge-transition
-	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/gforge-sourceforge-transition/usr/lib/gforge-sourceforge-transition/bin/
 
 binary-indep: build install
 	dh_testdir
