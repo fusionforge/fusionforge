@@ -1,3 +1,9 @@
+sourceforge (2.5-31+) unstable; urgency=low
+
+  * 
+
+ --
+
 sourceforge (2.5-31) unstable; urgency=low
 
   * [Soon-Son] added method="post" to massmail.php which was missing so
