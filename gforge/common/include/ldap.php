@@ -133,10 +133,10 @@ function sf_ldap_connect() {
 			sf_ldap_set_error_msg('ERROR: Cannot connect to LDAP server<br />');
 			return false;
 		}
-		ldap_bind($ldap_conn,$sys_ldap_bind_dn,$sys_ldap_passwd);
 		if ($sys_ldap_version) {
 			ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $sys_ldap_version);
 		}
+		ldap_bind($ldap_conn,$sys_ldap_bind_dn,$sys_ldap_passwd);
 	}
 	return true;
 }
