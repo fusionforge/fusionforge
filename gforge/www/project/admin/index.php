@@ -80,8 +80,8 @@ Homepage Link: <B>'. db_result($res_grp,0,'homepage') .'</B>
 <H4>Showing The SourceForge Logo:</H4>
 <P>
 '.
-htmlspecialchars('<A href="http://sourceforge.net"> 
-<IMG src="http://sourceforge.net/sflogo.php?group_id='. $group_id .'" width="88" height="31"
+htmlspecialchars('<A href="http://'.$GLOBALS['sys_default_domain'].'"> 
+<IMG src="http://'.$GLOBALS['sys_default_domain'].'/sflogo.php?group_id='. $group_id .'" width="88" height="31"
 border="0" alt="SourceForge Logo"></A>');
 
 echo '<P>'.html_image('/images/sflogo-88-1.png','88','31',array(),0);

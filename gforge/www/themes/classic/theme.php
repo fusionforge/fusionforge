@@ -219,7 +219,7 @@ function theme_header($params) {
 	?>
         <BODY bgcolor=<?php echo $GLOBALS['COLOR_CONTENT_BACK']; ?> topmargin="0" bottommargin="0" leftmargin="0" rightmargin="0" marginheight="0" marginwidth="0">
 <?php 
-	osdn_print_navbar(); 
+								      osdn_print_navbar(); 
 ?>
         <!-- top title table -->
         <TABLE width="100%" border=0 cellspacing=0 cellpadding=0 bgcolor="<?php echo $GLOBALS['COLOR_BARBACK']; ?>" valign="center">
@@ -251,7 +251,7 @@ function theme_header($params) {
         <!-- VA Linux Stats Counter -->
         <?php
         if (!session_issecure()) {
-                print '<IMG src="http://www2.valinux.com/clear.gif?id=105" width=1 height=1 alt="Counter">';
+                print '<IMG src="/images/clear.gif" width=1 height=1 alt="Counter">';
         }
         ?>
 

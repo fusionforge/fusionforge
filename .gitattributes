@@ -3,7 +3,6 @@ gforge/backend/shell/apache.sh svneol=native#unset
 gforge/docs/branching.sda svneol=native#unset
 gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/sourceforge-architecture.sda svneol=native#unset
-gforge/utils/tmpfilemove svneol=native#unset
 gforge/www/bugs/bugs-er-diagram.sda svneol=native#unset
 gforge/www/forum/forum-er-diagram.sda svneol=native#unset
 gforge/www/images/404.png svneol=native#unset

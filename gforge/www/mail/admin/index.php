@@ -24,7 +24,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			$new_list_name=strtolower(group_getunixname($group_id).'-'.$list_name);
 
 			//see if that's a valid email address
-			if (validate_email($new_list_name.'@lists.sourceforge.net')) {
+			if (validate_email($new_list_name.'@'.$GLOBALS['sys_lists_host'])) {
 
 				$result=db_query("SELECT * FROM mail_group_list WHERE lower(list_name)='$new_list_name'");
 
@@ -122,7 +122,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			<INPUT TYPE="HIDDEN" NAME="add_list" VALUE="y">
 			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
 			<B>Mailing List Name:</B><BR>
-			<B>'.group_getunixname($group_id).'-<INPUT TYPE="TEXT" NAME="list_name" VALUE="" SIZE="10" MAXLENGTH="12">@lists.sourceforge.net</B><BR>
+			<B>'.group_getunixname($group_id).'-<INPUT TYPE="TEXT" NAME="list_name" VALUE="" SIZE="10" MAXLENGTH="12">@'.$GLOBALS['sys_lists_host'].'</B><BR>
 			<P>
 			<B>Is Public?</B><BR>
 			<INPUT TYPE="RADIO" NAME="is_public" VALUE="1" CHECKED> Yes<BR>
