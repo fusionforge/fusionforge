@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('www/people/people_utils.php');
 
-people_header(array('title'=>$Language->getText('people_help_wanted_latest','title')'Help Wanted Latest Posts','pagename'=>'people_helpwanted_latest'));
+people_header(array('title'=>$Language->getText('people_help_wanted_latest','title'),'pagename'=>'people_helpwanted_latest'));
 
 {
         echo '<p>';
