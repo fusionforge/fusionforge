@@ -1,3 +1,5 @@
+<?php
+
 class HelloWorldPlugin extends Plugin {
 	function HelloWorldPlugin () {
 		$this->Plugin() ;
@@ -15,4 +17,17 @@ class HelloWorldPlugin extends Plugin {
 			// Blah
 		}
 	}
+
+	function GetHooks () {
+		$hooks = array () ;
+		$hooks [] = "usermenu" ;
+		return $hooks ;
+	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>
