@@ -70,7 +70,7 @@ if (!$res) {
 	echo "FAIL\n";
 	exit();
 } else {
-	$tasks = array();
+	$artifacts = array();
 	
 	for ($i=0;$i<db_numrows($res);$i++) {
 		$data = &db_fetch_array($res);
