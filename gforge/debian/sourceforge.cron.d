@@ -37,7 +37,8 @@
 15 0 * * * sourceforge [ -x /usr/lib/sourceforge/bin/site_stats.php ] && /usr/lib/sourceforge/bin/site_stats.php -d include_path=/usr/lib/sourceforge/www/include 2>&1 > /dev/null
 
 # DNS Update
-0 * * * * sourceforge [ -x /usr/lib/sourceforge/bin/dns_conf.pl ] && /usr/lib/sourceforge/bin/dns_conf.pl && /usr/sbin/invoke-rc.d bind9 reload 2>&1 >/dev/null
+0 * * * * sourceforge [ -x /usr/lib/sourceforge/bin/dns_conf.pl ] && /usr/lib/sourceforge/bin/dns_conf.pl 2>&1 >/dev/null
+5 * * * * root [ -x /usr/lib/sourceforge/bin/dns_conf.pl ] && /usr/sbin/invoke-rc.d bind9 reload 2>&1 >/dev/null
 
 # Mailing-list creation
 55 * * * * root [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl 2>&1 > /dev/null
