@@ -465,7 +465,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 
 	echo "<br />\n";
 
-	echo "<table style=\"background-color:#eeeeee\" width=\"100%\" cellpadding=\"5\" cellspacing=\"0\">\n";
+	echo "<table style=\"background-color:".$HTML->COLOR_LTBACK1."\" width=\"100%\" cellpadding=\"5\" cellspacing=\"0\">\n";
 	echo "<tr>\n";
 	echo "\t<td align=\"left\">";
 	if ($offset != 0) {

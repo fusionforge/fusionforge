@@ -310,7 +310,7 @@ if ($forum_id) {
 		This code puts the nice next/prev.
 	*/
 	$ret_val .= '<table width="100%" border="0">
-		<tr bgcolor="#eeeeee"><td width="50%">';
+		<tr bgcolor="'.$HTML->COLOR_LTBACK1.'"><td width="50%">';
 	if ($offset != 0) {
 		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
 		<a href="javascript:history.back()"><strong>' .

@@ -103,7 +103,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		}
 	}
 
-	echo "<tr style=\"background-color:#eeeeee\"><td>";
+	echo "<tr style=\"background-color:".$HTML->COLOR_LTBACK1."\"><td>";
         if ($offset != 0) {
 		echo "<span style=\"text-decoration: none;font-family: arial, helvetica\">";
         	echo "<a href=\"/new/?offset=".($offset-20)."\">" .
