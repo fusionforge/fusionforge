@@ -18,5 +18,6 @@ CREATE VIEW nss_accounts AS
 CREATE VIEW nss_usergroups AS
         SELECT group_id+10000 AS gid,
                 user_id+20000 AS uid
-        FROM user_group;
---         WHERE group_id!=800;    -- drop unused and overfull Debian group
+        FROM user_group
+--         WHERE group_id!=800    -- drop unused and overfull Debian group
+	;
