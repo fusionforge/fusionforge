@@ -135,7 +135,7 @@ account_register	resend_pending	[Renvoyer l'email de confirmation à un compte e
 account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site <i>(Faible trafic et informations relatives à la sécurité. Fortement recommandé.)</i>
 account_register	timezone	Fuseau horaire :
 account_register	title	Nouvelle inscription
-account_register	update	Mise à jour
+account_register	update	Mettre à jour
 account_shell	autorized_keys	Clés publiques CVS/SSH autorisées
 account_shell	edit_keys	Editer les clés
 account_shell	shell_box	Serveur shell
@@ -159,22 +159,22 @@ account_verify	password	Mot de passe :
 account_verify	title	$1 - Vérification de votre compte
 account_verify	usermandatory	Vous devez rentrer un nom d'utilisateur.
 account_verify	verify_blurb	<p>Pour terminer votre inscription, identifiez-vous. Votre compte sera alors activé pour l'identification standard.</p>
-add_snippet	add_this_snippet_version_id	Ajouter cet identifiant de version d'échantillon 
+add_snippet	add_this_snippet_version_id	Ajouter cet identifiant de version 
 add_snippet	back_to_add_page	Retour à la page d'ajout
-add_snippet	error_doing_snippet_version_insert	ERREUR pendant l'insertion de version d'échantillon
+add_snippet	error_doing_snippet_version_insert	Erreur lors de l'insertion de version de l'extrait
 add_snippet	error_go_back_and_fill_all	Erreur - Revenez en arrière et remplissez toutes les informations
-add_snippet	error_only_creator_can_add	ERREUR - Seul le créateur d'une version de paquet peut lui ajouter des échantillons
-add_snippet	error_snippet_already_added	ERREUR - Cet échantillon est toujours présent dans ce paquet
-add_snippet	error_snippet_doesnt_exist	ERREUR - Cet échantillon n'existe pas.
-add_snippet	error_snippet_id_missing	ERREUR - identifiant de version de paquet d'échantillon manquant
-add_snippet	make_sure_all_info	Vé'ifiez que toutes les informations sont complètes et exactes
-add_snippet	no_snippets_in_this_package	Aucun échantillon n'est encore présent dans le paquet
-add_snippet	package	Paquets
-add_snippet	snippet_version_added_successfully	La version d'échantillon a été correctement ajoutée.
-add_snippet	snippets_in_this_package	Echantillons dans ce paquet
+add_snippet	error_only_creator_can_add	Erreur - Seul le créateur d'une version de paquet peut lui ajouter des extraits
+add_snippet	error_snippet_already_added	Erreur - Cet extrait de code est toujours présent dans ce paquet
+add_snippet	error_snippet_doesnt_exist	Erreur - Cet extrait de code n'existe pas
+add_snippet	error_snippet_id_missing	Erreur - Identifiant de version de paquet manquant
+add_snippet	make_sure_all_info	Vérifiez que les informations sont complètes et exactes
+add_snippet	no_snippets_in_this_package	Il n'y a pas d'extrait de code dans le paquet pour le moment
+add_snippet	package	Paquet :
+add_snippet	snippet_version_added_successfully	La version de l'extrait a été correctement ajoutée.
+add_snippet	snippets_in_this_package	Extraits de code de ce paquet
 add_snippet	submit	ENVOYER
-add_snippet	title	Soumettre un nouvel échantillon
-add_snippet	you_can_use_this_form	Vous pouvez utiliser ce formulaire de manière répétitive pour ajouter des échantillons à votre paquet.</p><p>L'identifiant de version d'échantillon est l'identifiant unique qui apparaît après une version données d'un échantillon sur les pages d'affichage.
+add_snippet	title	Soumettre un nouvel extrait de code
+add_snippet	you_can_use_this_form	Vous pouvez utiliser ce formulaire plusieurs fois pour ajouter des extraits de code à votre paquet.</p><p>L'identifiant de version d'extrait est un identifiant unique ; il apparaît après une version donnée d'un extrait de code dans les pages de navigation.
 admin	add	Ajouter
 admin	add_new	[Ajouter une annonce]
 admin	are_you_sure_delete	Etes vous sûr de vouloir effacer ceci ?
@@ -249,7 +249,7 @@ admin_groupedit	registration_application	Demande d'inscription
 admin_groupedit	status	Statut
 admin_groupedit	title	Administration du site : Informations sur le groupe
 admin_groupedit	unix_group_name	Nom Unix du groupe :
-admin_groupedit	update	Mise à jour
+admin_groupedit	update	Mettre à jour
 admin_groupedit	updated	Mise à jour effectuée
 admin_groupedit	yes	Oui
 admin_grouplist	group_list	Liste des groupes
@@ -321,7 +321,7 @@ admin_massmail	schedule_for_mailing	Programmation de l'envoi de messages
 admin_massmail	select	(choisir)
 admin_massmail	subject	Sujet
 admin_massmail	subscribers_to_additional_community	Abonnés aux « Courriers de la communuauté »
-admin_massmail	subscribers_to_site_updates	Inscrits aux « Mises à jour du site »
+admin_massmail	subscribers_to_site_updates	Abonnés aux « Mises à jour du site »
 admin_massmail	text_of_message	Texte du message
 admin_massmail	title	Moteur d'envoi massif de courriers
 admin_massmail	type	Type
@@ -395,103 +395,104 @@ admin_trove_cat_list	add	Ajouter
 admin_trove_cat_list	title	Administration du site : Liste des catégories de l'arbre
 admin_unsubscribe	admin_initiaded_mail	Courriers à l'initiative de l'administrateur
 admin_unsubscribe	all	TOUS
-admin_unsubscribe	all_site_mailing	Courriers concernant tout le site
-admin_unsubscribe	comm_mail	Courriers de communuauté
+admin_unsubscribe	all_site_mailing	Tous les courriers du site
+admin_unsubscribe	comm_mail	Courriers de communauté
 admin_unsubscribe	email	E-mail
 admin_unsubscribe	error_unsubscribe_user	Erreur, impossible de désabonner l'utilisateur :
 admin_unsubscribe	mail	E-mail
-admin_unsubscribe	real_name	Nom réel
-admin_unsubscribe	show_user_matching	Voici les utilisateurs répondants au critère
+admin_unsubscribe	real_name	Nom complet
+admin_unsubscribe	show_user_matching	Montrer les utilisateurs correspondant au motif
 admin_unsubscribe	site_mail	Courrier
 admin_unsubscribe	subscription_maintance	Gestion des abonnements
 admin_unsubscribe	title	Gestion des abonnements
-admin_unsubscribe	unsubscribe	Desinscription
-admin_unsubscribe	unsubscribe_user	Desinscrire l'utilisateur
-admin_unsubscribe	use_fields_bellow	Utilisez le champ ce-dessous pour trouver les utilisateurs qui correpondent aux critère par login, nom réel, ou e-mail (une recherche pas sous-chaine est effectuée, utilisez '%' au milieu du modèle pour remplacer des caractères arbitraires, 0 ou plus). Cliquez sur son pour désabonner un utilisateur (un nouveau formulaire apparaîtra).
-admin_unsubscribe	user_id	Numéro d'identification utilisateur :
+admin_unsubscribe	unsubscribe	Désabonnement
+admin_unsubscribe	unsubscribe_user	Désabonner l'utilisateur
+admin_unsubscribe	use_fields_bellow	Utilisez le champ ci-dessous pour trouver les utilisateurs qui correpondent au motif par nom d'utilisateur, nom complet ou e-mail (une recherche par sous-chaîne est effectuée ; utilisez '%' au milieu du motif pour remplacer 0 ou n caractères quelconques). Cliquez sur le nom de l'utilisateur pour le désabonner (un nouveau formulaire apparaîtra).
+admin_unsubscribe	user_id	Identifiant utilisateur :
 admin_unsubscribe	user_unsubscribed	Utilisateur désabonné
 admin_unsubscribe	username	Nom d'utilisateur
-admin_unsubscribe	you_can_unsubscribe	Vous pouvez désabonner un utilisateur soit pour les courrier généraux, ou pour tous les courriers (courrier généraux, et diffusions automatiques, comme celles des forums et des mises à jours).
-admin_useredit	account_info	Information du compte
+admin_unsubscribe	you_can_unsubscribe	Vous pouvez désabonner un utilisateur soit pour les envois de mails généraux, soit pour tous les envois de mails (envois de mails généraux et diffusions automatiques, comme pour les forums et les notifications de mises à jours).
+admin_useredit	account_info	Informations du compte
 admin_useredit	active	Actif (A)
 admin_useredit	could_not_complete_operation	Impossible de terminer l'opération
 admin_useredit	current_confirm_bash	Clé de confirmation actuelle :
 admin_useredit	deleted	Supprimé (S)
 admin_useredit	email	E-mail :
-admin_useredit	group_memerbership	Adhésions aux groupes
+admin_useredit	group_memerbership	Participation aux groupes
 admin_useredit	membership_permissions	Autorisations des membres
 admin_useredit	name	Nom
 admin_useredit	no_unix_account	Pas de compte Unix (N)
+admin_useredit	operations	Opérations
 admin_useredit	pending	En attente (E)
 admin_useredit	project_admin	Administrateur de projet
-admin_useredit	real_name	Nom réel
+admin_useredit	real_name	Nom complet
 admin_useredit	suspended	Suspendu (S)
-admin_useredit	this_page_allows	Ces pages permettent de changer seulement les propriétés directes d'un utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un groupe sépcifique, aller à la page d'administration de ce groupe (ci-dessous). 
-admin_useredit	title	Information Utilisateur
-admin_useredit	unix_account_status	Statuts des comptes Unix
+admin_useredit	this_page_allows	Cette page permet uniquement de changer les propriétés directes d'un utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un groupe spécifique, rendez vous à la page d'administration de ce groupe (ci-dessous). 
+admin_useredit	title	Administration du site : Informations Utilisateur
+admin_useredit	unix_account_status	Statut du compte Unix
 admin_useredit	unix_name	Nom Unix
 admin_useredit	unix_shell	Shell Unix
-admin_useredit	unix_status_updated_mirroring	Statut Unix mis à jour, sauf en ca de valeur 'No unix account (N)'.
-admin_useredit	update	Mise à jour
+admin_useredit	unix_status_updated_mirroring	Statut Unix mis à jour en copiant le statut web, sauf s'il a la valeur 'Pas de compte Unix (N)'.
+admin_useredit	update	Mettre à jour
 admin_useredit	updated	Mis à jour
-admin_useredit	user_id	Numéro d'identifiant utilisateur :
+admin_useredit	user_id	Identifiant utilisateur :
 admin_useredit	user_name	Nom d'utilisateur
-admin_useredit	web_account_status	Etat du compte Web
+admin_useredit	web_account_status	Statut du compte Web
 admin_userlist	activate	Activer
 admin_userlist	active	Actif
 admin_userlist	all_groups	Tous les groupes
-admin_userlist	delete	Effacer
-admin_userlist	deleted	Effacé
+admin_userlist	delete	Supprimer
+admin_userlist	deleted	Supprimé
 admin_userlist	devprofile	Profil du développeur
 admin_userlist	key	Clé
 admin_userlist	pending	(*)En attente
-admin_userlist	submit	Soumettre
+admin_userlist	submit	Valider
 admin_userlist	suspend	Suspendre
 admin_userlist	suspended	Suspendu
-admin_userlist	user_list_for_group	Liste des membres pour le groupe : 
-admin_userlist	user_updated	Utilisateur Mis à jour touchant le statut de $1
-admin_userlist	userlist	Liste des utilisateurs
+admin_userlist	user_list_for_group	Liste des membres de ce groupe : 
+admin_userlist	user_updated	Utilisateur mis à jour au statut $1
+admin_userlist	userlist	: Liste des utilisateurs
 admin_vhost	add_virtual_host	Ajouter un hôte virtuel
-admin_vhost	cgi_dir	Repertoire des CGIs
-admin_vhost	error_adding_vhost	Erreur en ajoutant l'hôte virtuel :
-admin_vhost	error_updating_vhost	Erreur en mettant à jour l'hôte virtuel :
+admin_vhost	cgi_dir	Répertoire CGI
+admin_vhost	error_adding_vhost	Erreur lors de l'ajout de l'hôte virtuel :
+admin_vhost	error_updating_vhost	Erreur lors de la mise à jour de l'hôte virtuel :
 admin_vhost	get_info	Obtenir les informations
 admin_vhost	group	Groupe
 admin_vhost	group_unix_name	Nom Unix du groupe
-admin_vhost	htdocs_dir	Repertoire htdocs
-admin_vhost	no_such_host	Aucun hôte virtuel de ce genre :
+admin_vhost	htdocs_dir	Répertoire htdocs
+admin_vhost	no_such_host	Aucun hôte virtuel correspondant :
 admin_vhost	operations	Opérations
-admin_vhost	scheduled_for_creation	Programmé pour une création sur ce groupe
-admin_vhost	the_provided_group	Le nom fourni pour le groupe n'existe pas
+admin_vhost	scheduled_for_creation	programmé pour une création sur ce groupe
+admin_vhost	the_provided_group	Le nom de groupe fourni n'existe pas
 admin_vhost	title	Administration du site
 admin_vhost	tweak_directories	Ajuster les répertoires
-admin_vhost	update	Mise à jour
-admin_vhost	update_record	Enregistrement mis a jour  :
-admin_vhost	vhost_id	N° d'hôte vituel
+admin_vhost	update	Mettre à jour
+admin_vhost	update_record	Mettre à jour l'enregistrement :
+admin_vhost	vhost_id	Identifiant d'hôte vituel
 admin_vhost	vhost_name	Nom de l'hôte virtuel
 admin_vhost	virtual_host	Hôte virtuel :
 admin_vhost	virtual_host_administration	Administration de l'hôte virtuel
-admin_vhost	virtual_host_entry_updated	Entrée de l'hôte virtuel mise à jour
-admin_vhost	virtual_host_name	Nom de l''hôte virtuel
-artifact_canned	required_fields	trace pré-enregistrée : un nom et un responsable est requis.
-artifact_category	required_fields	catégorie : un nom et un responsable est requis.
+admin_vhost	virtual_host_entry_updated	Hôte virtuel mis à jour
+admin_vhost	virtual_host_name	Nom de l'hôte virtuel
+artifact_canned	required_fields	ArtifactCanned : un nom et un responsable sont requis.
+artifact_category	required_fields	ArtifactCategory : un nom et un responsable sont requis.
 calendar	april	Avril
 calendar	august	Août
 calendar	comingyear	Année prochaine
 calendar	currentyear	Année courante
 calendar	december	Décembre
 calendar	february	Février
-calendar	fordate	Pour la date :
+calendar	fordate	A partir du :
 calendar	friday	Vendredi
-calendar	invaliddate	Date invalide
+calendar	invaliddate	Date non valide
 calendar	invaliddateexplain	$1 n'est pas une date valide.
 calendar	invalidday	Jour invalide
 calendar	invaliddayexplain	Le jour doit être compris entre 1 et 31.
 calendar	invalidmonth	Mois invalide
 calendar	invalidmonthexplain	Le mois doit être compris entre 1 et 12.
-calendar	invalidtype	Type invalide
-calendar	invalidtypeexplain	Le type est invalide.
-calendar	invalidyear	Année invalide
+calendar	invalidtype	Type non valide
+calendar	invalidtypeexplain	Le type n'est pas valide.
+calendar	invalidyear	Année non valide
 calendar	invalidyearexplain	L'année doit être comprise entre 1990 et 2020.
 calendar	january	Janvier
 calendar	july	Juillet
@@ -511,31 +512,31 @@ calendar	task_ends	Fin de la tâche $1
 calendar	task_link_title	Résumé d'une tâche : $1
 calendar	threemonth	Trois mois
 calendar	thursday	Jeudi
-calendar	title	Gestion de projet : calendrier
+calendar	title	Gestion de projet : Calendrier
 calendar	todaysdate	Date du jour
 calendar	tuesday	Mardi
-calendar	update	Mise à jour
-calendar	view	Vue :
+calendar	update	Mettre à jour
+calendar	view	Voir :
 calendar	wednesday	Mercredi
-classgroup	acceptedproject	Votre demande d'enregistrement pour <b>$7</b> a été acceptée.\n\nNom complet du projet : $1\nNom unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nLe DNS prendra prendre jusqu'à une journée pour pointer sur votre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne marche toujours pas, veuillez nous le signaler (traceurs | support technique) afin que nous puissions y regarder.\nNotez que tous les comptes Shell/CVS ne peuvent utiliser telnet mais seulement SSH 1.\n\nVotre site web est accessible à travers votre compte. Vous pouvez lire la documentation du site (lien ci-dessus) pour prendre connaissance des services disponibles et de leur usage, ainsi que des répertoires du compte.\n\nPrenez le temps de lire la documentation concernant l'administration d'un projet. (http://$3/docs/site/). Si vous allez sur la page de votre projet en $7 en étant connecté, vous trouverez un menu supplémentaire à gauche :  'Administration'. Nous vous suggérons de vous y rendre afin de créer une description publique de votre projet. cela peut être fait en aller sur la page de votre projet (en étant connecté), et en allant dans l''Administration' (menu à gauche) ou en allant directement sur http://$3projet/admin/?group_id=$6\naprès vous être connecté.\n\nVotre projet n'apparaîtra dans l'arbre des projets (qui recense les projects hébergés dans $7 et qui offre des possibilités étendues d'affichage et de recherche) que lorsque vous l'aurez catégorisé. Afin qu'on puisse trouver votre projet, vous devriez le faire maintenant (en étant connecté, et dans la zone d'administration)\n\nEncore bienvenue dans $7. Nous espérons que le système vous donnera satisfaction. A votre discposition\n\n- L'équipe de $7.
-classgroup	acceptedprojecttitle	Projet $1 Approuvé
-classgroup	newprojectnotification	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou rejeter ce projet:\nhttp://$5/admin/approve-pending.php
-classgroup	newprojectnotification_submitter	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\L'équipe d'administration de $1 va maintenant examiner votre\nsoumission de projet, et vous serez tenu informé de sa décision.
-classgroup	newprojectnotificationtitle	Projet $1 Soumis
-classgroup	rejectedproject	Votre enregistrement de projet a été rejeté.\n\nNom long du projet:  $1\nNom UNIX du projet:  $2\n\nRaison de notre refus:\n\n
-classgroup	rejectedprojecttitle	Projet $1 Refusé
-common	login	Entrer
-common	logout	Quitter
+classgroup	acceptedproject	La candidature de votre projet sur $7 a été acceptée.\n\nNom complet du projet : $1\nNom Unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nVotre enregistrement DNS mettra jusqu'à une journée pour être actif sur notre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne fonctionne toujours pas, veuillez ouvrir une demande de support afin que nous puissions résoudre votre problème.\nNotez que tous les comptes Shell/CVS fonctionnent seulement avec SSH1 et pas avec Telnet.\n\nVotre site web est accessible à travers votre compte shell. Vous pouvez lire la documentation du site (lien ci-dessous) afin de prendre connaissance des services disponibles, de leur utilisation et de l'arborescence de votre compte.Si vous vous rendez sur la page de votre projet sur $7 en étant identifié, vous trouverez à votre gauche\nun menu appelé \'Administration du projet\' proposant des fonctionnalités supplémentaires.\n\nNous vous recommandons chaudement d'aller sur $7 et de créer une\ndescription publique pour votre projet. Cette opération peut être effectué sur la page\nde votre projet quand vous êtes identifié en sélectionnant \'Administration du projet\' dans le menu\nde gauche (ou en allant sur http://$3/project/admin/?group_id=$6\naprès l'authentification).\n\nVotre projet n'apparaîtra dans l'Arbre des projets (liste\nprincipale des projets hébergés sur $7 qui offre une grande flexibilité de navigation et de recherche) qu'une fois que vous l'aurez classé dans une catégorie dans les écrans\nd'administration du projet. Afin que les autres utilisateurs puissent trouver votre projet, vous devriez le faire immédiatement.\n\nProfitez du site et n'hésitez pas à parler de $7 autour de vous. N'hésitez pas à nous contacter\n : nous sommes à votre disposition pour vous aider.\n\n-- L'équipe de $7
+classgroup	acceptedprojecttitle	$1 - Projet approuvé
+classgroup	newprojectnotification	Un nouveau projet a été soumis sur $1\n\nNom long du projet :  $2\nDescription fournie : $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou refuser ce projet:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification_submitter	Un nouveau projet a été soumis sur $1\n\nNom long du projet :  $2\nDescription fournie : $3\nLicense: $4\n\L'équipe d'administration de $1 va maintenant examiner votre\ncandidature. Vous serez tenu informé de sa décision.
+classgroup	newprojectnotificationtitle	$1 - Nouveau projet soumis
+classgroup	rejectedproject	La candidature de votre projet a été rejetée.\n\nNom long du projet :  $1\nNom UNIX du projet : $2\n\nRaison de notre refus :\n\n
+classgroup	rejectedprojecttitle	$1 - Projet refusé
+common	login	S'identifier
+common	logout	Se déconnecter
 common	myaccount	Mon compte
-common	newaccount	Créer compte
+common	newaccount	Nouveau compte
 common_include_account	cvsreserved	Nom réservé pour CVS.
 common_include_account	dnsreserved	Nom réservé pour le DNS.
 common_include_account	illegal	Caractère interdit dans le nom.
-common_include_account	nospace	Il ne peut y avoir d'espace dans un nom de login.
+common_include_account	nospace	Il ne peut y avoir d'espace dans un nom de compte.
 common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractère souligné à cause des règles imposées par le DNS.
 common_include_account	sixchar	Le mot de passe doit comporter au moins 6 caractères.
-common_include_account	toolong	Le nom est trop long. Il doit avoir moins de 15 caractères.
-common_include_account	tooshort	Le nom est trop court. Il doit avoir au moins 3 caractéres.
+common_include_account	toolong	Le nom est trop long. Il doit compter moins de 15 caractères.
+common_include_account	tooshort	Le nom est trop court. Il doit compter au moins 3 caractéres.
 common_utils	priority_colors	Echelle de priorité&nbsp;
 conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif

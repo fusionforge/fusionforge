@@ -1,3 +1,8 @@
+2003-11-26  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/languages/French.tab: Patch #609 from Guillaume
+	Smet.
+
 2003-11-25  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/Spanish.tab: Patch #607 from Francisco
