@@ -6,7 +6,7 @@ db_name=alexandria
 db_user=www
 db_password=
 ip_address=10.GF.OR.GE
-scm_host=scm.g-tt.rd.francetelecom.fr
+scm_host=cvs.gforge.company.com
 shell_host=shell.gforge.company.com
 users_host=users.gforge.company.com
 lists_host=lists.gforge.company.com
@@ -57,6 +57,7 @@ sys_ldap_auth_port=389
 sys_ldap_auth_version=3
 sys_ldap_auth_dn=dc=gforge,dc=company,dc=com
 sys_scm_tarballs_path=/home/bayle/local/gforge/gforge/var/lib/gforge/scmtarballs
+sys_scm_snapshots_path=/var/lib/gforge/scmsnapshots
 sys_use_scm=true
 sys_use_tracker=true
 sys_use_forum=true

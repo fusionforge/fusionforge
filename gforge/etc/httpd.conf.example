@@ -1,3 +1,4 @@
+Listen 80
 <Files .htaccess>
   order allow,deny
   deny from all
@@ -193,7 +194,7 @@ UseCanonicalName Off
     SSLEnable
   </IfModule>
 
-  ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+  ScriptAlias /mailman/ /var/lib/mailman/cgi-bin/
 
   Alias /pipermail /var/lib/mailman/archives/public
   <Directory /var/lib/mailman/archives/public>
@@ -221,6 +222,7 @@ UseCanonicalName Off
 	VirtualDocumentRoot /home/groups/%1/htdocs
         VirtualScriptAlias /home/groups/%1/cgi-bin
 	DirectoryIndex index.html index.php
+	php_admin_value default_charset "UTF-8"
         <Directory /home/groups>
                Options Indexes FollowSymlinks
                AllowOverride All
