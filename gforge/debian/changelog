@@ -1,3 +1,12 @@
+gforge (3.1-22) unstable; urgency=medium
+
+  * [Roland] Fixed quoting in db-upgrade.pl script, to prevent Bad Things
+    from happening when some password contains special characters, thanks
+    to David Margery for noticing (closes: #276465).
+  * [Roland] urgency=medium because this is an RC bug.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 14 Oct 2004 22:30:18 +0200
+
 gforge (3.1-21) unstable; urgency=low
 
   * [Roland] The "Troll farceur, elfe farci" release.
