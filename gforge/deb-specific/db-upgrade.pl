@@ -503,6 +503,17 @@ eval {
     $target = "2.6-0+checkpoint+4" ;
     if (is_lesser $version, $target) {
 	debug "Registering Savannah themes." ;
+
+	$query = "SELECT max(theme_id) FROM themes" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+	my $maxid = $array [0] ;
+
+	&bump_sequence_to ("themes_pk_seq", $maxid) ;
+
 	@reqlist = (
 		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX') ;",
 		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest') ;",
