@@ -2,9 +2,10 @@ sourceforge (2.5-15+) unstable; urgency=low
 
   * [Christian] Added proper chmod for cp -r of www
   * Replaced last instances of x-cvsShell by the correct form
-    (debSfCvsShell) in the LDAP stuff (closes: #121633).
+    (debSfCvsShell) in the LDAP stuff.  Also fix sf_ldap_moify_if_exists.
+    (closes: #121633).
 
- -- Roland Mas <lolando@debian.org>  Thu, 29 Nov 2001 09:09:23 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 11:58:38 +0100
 
 sourceforge (2.5-15) unstable; urgency=medium
 
