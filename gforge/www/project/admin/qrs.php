@@ -36,9 +36,14 @@ if (!$perm->isReleaseTechnician()) {
 if( $submit ) {
 	if (!$release_name) {
 		$feedback .= ' Must define a release name. ';
-		echo db_error();
 	} else 	if (!$package_id) {
 		$feedback .= ' Must select a package. ';
+	} else 	if (!$userfile) {
+		$feedback .= ' Must select a file. ';
+	} else 	if (!$type_id || $type_id == "100") {
+		$feedback .= ' Must select a file type. ';
+	} else 	if (!$processor_id || $processor_id == "100")  {
+		$feedback .= ' Must select a processor type. ';
 	} else {
 
 		//
@@ -142,7 +147,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td>
-			<h4>Release Name:</h4>
+			<h4>Release Name:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 			<input type="text" name="release_name" />
@@ -158,7 +163,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td>
-			<h4>File Name:</h4>
+			<h4>File Name:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 		<span style="color:red"><strong>NOTE: In some browsers you must select the file in
@@ -168,7 +173,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td>
-			<h4>File Type:</h4>
+			<h4>File Type:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 <?php
@@ -178,7 +183,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td>
-			<h4>Processor Type:</h4>
+			<h4>Processor Type:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 <?php

@@ -1,6 +1,9 @@
 2003-01-13 Tom Copeland (tom@infoether.com)
 
 	* www/survey/admin/add_survey.php: Survey title is now a required field.
+	
+	* www/project/admin/qrs.php: File name/type/release name/processor 
+	type are now required fields.
 
 2003-01-13  Tim Perdue (tim@gforge.org)
 
