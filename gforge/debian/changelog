@@ -85,17 +85,17 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Bob] Fixed relative paths to utils/include.pl since all cronjobs seem
     to installed in the bin directory.  The old path was 3 levels down in
     the cronjobs directory which is not part of the install hierarchy.
-  * [Roland] Applied patch #637.  Author was not authenticated when
-    submitting patch, maybe wishes to remain anonymous.  In any case,
-    thanks a lot, whoever you are!
-  * [??? - patch #637] Fixed project title displayed when the forum of a
-    news item is viewed (was always 'Site Admin News' instead of the name
-    of the project).
-  * [??? - patch #637] Fixed typos in www/forum/forum_utils.php,
+  * [Roland] Applied patch #637 from Mathieu Peltier
+    <Mathieu.Peltier@inrialpes.fr>.  Changes are detailed below, with
+    entries having a [Mathieu] prefix.
+  * [Mathieu] Fixed project title displayed when the forum of a news item
+    is viewed (was always 'Site Admin News' instead of the name of the
+    project).
+  * [Mathieu] Fixed typos in www/forum/forum_utils.php,
     www/include/Base.tab, www/include/menu.php and
     www/include/Layout.class.
-  * [??? - patch #637] Removed 'Edit' and '?' links for root trove
-    category in the trove map.
+  * [Mathieu] Removed 'Edit' and '?' links for root trove category in the
+    trove map.
   * [Christian] you can now have a customized pre.php in 
     /etc/sourceforge/custom/pre.php
 
