@@ -166,6 +166,14 @@ switch ($func) {
 	}
 
 	//
+	//	Show the page surrounding the gantt chart
+	//
+	case 'ganttpage' : {
+		include 'ganttpage.php';
+		break;
+	}
+
+	//
 	//	Show a gantt chart
 	//
 	case 'ganttchart' : {
