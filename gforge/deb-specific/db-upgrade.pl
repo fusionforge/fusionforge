@@ -823,9 +823,9 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+12" ;
     if (is_lesser $version, $target) {
-      debug "Upgrading with 20021125-debian.sql" ;
+      debug "Upgrading with 20021125.sql" ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021125-debian.sql") } ;
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021125.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -952,9 +952,9 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+17" ;
     if (is_lesser $version, $target) {
-      debug "Upgrading with 20021216-debian.sql" ;
+      debug "Upgrading with 20021216.sql" ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021216-debian.sql") } ;
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021216.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
