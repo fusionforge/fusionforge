@@ -64,15 +64,15 @@ To install GForge, follow these steps:
 <ol>
 <li>Login as root user</li>
 <li>cd to <code>/var/www/</code></li>
-<li>Extract the content of gforge-3.0pre9.tar.bz2 to the current directory:<br/>
+<li>Extract the content of gforge-3.0b1.tar.bz2 to the current directory:<br/>
 <code>
-bzip2 -dc gforge-3.0pre9.tar.bz2 | tar xvf -
+bzip2 -dc gforge-3.0b1.tar.bz2 | tar xvf -
 <br/>
 </code>
 
 </li>
-<li>Now there's a directory /var/www/gforge-3.0pre9</li>
-<li>Rename this directory to /var/www/gforge-3.0/ - <code>mv /var/www/gforge3.0pre9/ /var/www/gforge-3.0</code></li>
+<li>Now there's a directory /var/www/gforge-3.0b1</li>
+<li>Rename this directory to /var/www/gforge-3.0/ - <code>mv /var/www/gforge3.0b1/ /var/www/gforge-3.0</code></li>
 </ol>
 
 </p>
