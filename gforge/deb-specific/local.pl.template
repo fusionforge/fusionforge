@@ -28,5 +28,6 @@ $domain_name = '{domain_name}' ;
 $newsadmin_groupid = '{newsadmin_groupid}' ;
 $statsadmin_groupid = '{statsadmin_groupid}' ;
 $noreply_to_bitbucket = '{noreply_to_bitbucket}' ;
+$sys_simple_dns = '{simple_dns}';
 
 1;

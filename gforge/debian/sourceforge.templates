@@ -247,6 +247,20 @@ Description-fr: Sourceforge a besoin d'une configuration PAM-LDAP correcte
  passe pour le compte administrateur de libpam-ldap et pour le mot de
  passe LDAP de Sourceforge.
 
+Template: sourceforge/simple_dns
+Type: boolean
+Default: false
+Description: Do you want a simple DNS setup?
+ You can have a simple DNS setup wich uses wildcards to map all
+ project web-hosts to a single IP, and direct all the cvs-hosts
+ to a single CVS server, or a complex setup wich allows you to
+ have many servers as project web servers or CVS servers.
+ .
+ Even though you have a simple DNS setup, you can still have
+ seperate boxes for your project servers, it just assumes you
+ have all the project web dirs on the same server and a single
+ server for CVS.
+
 Template: sourceforge/replace_file_install
 Type: boolean
 Default: false

@@ -12,6 +12,7 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
+
 case "$1" in
     configure-files)
 	cp -a /etc/bind/named.conf /etc/bind/named.conf.sourceforge-new
@@ -27,26 +28,31 @@ EOF
   	fi
 	;;
     configure)
-  	echo "Creating /var/lib/sourceforge/bind/dns.head"
 	domain_name=$(perl -e'require "/etc/sourceforge/local.pl"; print "$domain_name\n";')
 	ip_address=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbhost\n";')
+	sys_simple_dns=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_simple_dns\n";')
   	serial=`date '+%Y%m%d'`01
   	# cvs_host lists_host are useless for now
   	for i in domain_name ip_address serial ; do
   	    eval "sedexpr=\"$sedexpr|sed 's/{$i}/\${$i}/g'\""
  	done
-  	eval "cat /var/lib/sourceforge/bind/dns.head.template $sedexpr > /var/lib/sourceforge/bind/dns.head"
-  	if [ ! -f /var/lib/sourceforge/bind/dns.zone ] ; then
+
+	if [ "$sys_simple_dns" = "false" ]; then
+  	    echo "Creating /var/lib/sourceforge/bind/dns.head"
+  	    eval "cat /var/lib/sourceforge/bind/dns.head.template $sedexpr > /var/lib/sourceforge/bind/dns.head"
 	    cp /var/lib/sourceforge/bind/dns.head /var/lib/sourceforge/bind/dns.zone
-  	fi
-  	chown sourceforge:sourceforge /var/lib/sourceforge/bind
-  	chown sourceforge:sourceforge /var/lib/sourceforge/bind/dns.head
-  	chown sourceforge:sourceforge /var/lib/sourceforge/bind/dns.zone
+	    chown -R sourceforge:sourceforge /var/lib/sourceforge/bind
+
+	    /usr/lib/sourceforge/bin/dns_conf.pl
+	else
+  	    echo "Creating /var/lib/sourceforge/bind/dns.zone"
+  	    eval "cat /var/lib/sourceforge/bind/dns.simple.template $sedexpr > /var/lib/sourceforge/bind/dns.zone"
+	fi
+
   	echo "DNS Config is not complete:"
   	echo "	-Does not do reverse, maybe not in the state of the art"
   	echo "	-Suppose that all servers are in the same box"
   	echo "	-Wizards advices are welcome"
-	/usr/lib/sourceforge/bin/dns_conf.pl
 
 	invoke-rc.d bind9 restart
 	# This is equivalent but require some signature, not always there

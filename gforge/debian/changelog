@@ -2,8 +2,10 @@ sourceforge (2.6-0+11+) unstable; urgency=low
 
   * [Roland] Added support for local overloading of the default
     translation files.  See README.Custom for details.
+  * [Roland] Applied Olafur's "Making DNS simpler" patch, with a few
+    changes.
 
- -- Roland Mas <lolando@debian.org>  Sun, 28 Apr 2002 18:20:24 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Apr 2002 13:55:04 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
