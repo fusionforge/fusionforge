@@ -38,7 +38,6 @@ if (file_exists($sys_tar_dir.'/'.$filename)) {
 
 	readfile($sys_tar_dir.'/'.$filename);
 } else {
-	Header("Status: 404");
+	session_redirect("/404.php");
 }
-
 ?>
