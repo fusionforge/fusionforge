@@ -6,6 +6,7 @@
 #DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:create-random-pw#
 #DSFHELPER:common-variables#
+# [Disabled] DSFHELPER:dbhost-variables#
 
 get_pw sourceforge/shared/db_password low
 db_fget sourceforge/shared/db_password seen || true
