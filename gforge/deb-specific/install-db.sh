@@ -77,9 +77,9 @@ EOF
 
 	# Install/upgrade the database contents (tables and data)
 	# Dirty scripting for testing purpose
-	psql -U sourceforge -h $ip_address sourceforge -f /usr/lib/sourceforge/db/sf-2.6-complete.sql <<-FIN
-$db_passwd
-FIN
+#	psql -U sourceforge -h $ip_address sourceforge -f /usr/lib/sourceforge/db/sf-2.6-complete.sql <<-FIN
+#$db_passwd
+#FIN
 	/usr/lib/sourceforge/bin/db-upgrade26.pl
 	;;
     purge)
