@@ -1,4 +1,4 @@
-gforge (3.3.0-58) unstable; urgency=low
+gforge (3.3.0-60) unstable; urgency=low
 
   * [Christian] Added a call to migrateform.php and migraterbac.php in
     db-upgrade
@@ -24,7 +24,7 @@ gforge (3.3.0-58) unstable; urgency=low
   * [Roland] Various fixes in several scripts.
   * [Christian] Added 20041104 and 20041108 to db-upgrade.pl
 
- -- Christian Bayle <bayle@debian.org>  Tue, 30 Nov 2004 16:09:50 +0100
+ -- Christian Bayle <bayle@debian.org>  Mon, 13 Dec 2004 00:20:02 +0100
 
 gforge (3.3.0-12) unstable; urgency=low
 
