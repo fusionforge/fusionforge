@@ -1,6 +1,6 @@
 <?php
 /**
- * Site Admin page to edit File Release System processor types
+ * Site Admin page to edit themes.
  *
  * Copyright 1999-2001 (c) VA Linux Systems
  *
@@ -24,9 +24,9 @@
  */
 
 
-$unit        = 'processor';
-$table       = 'frs_processor';
-$primary_key = 'processor_id';
+$unit        = 'theme';
+$table       = 'themes';
+$primary_key = 'theme_id';
 
 include_once('admin_table.php');
 

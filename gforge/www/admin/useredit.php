@@ -1,15 +1,27 @@
 <?php
 /**
-  *
-  * Site Admin user properties editing page
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * Site Admin user properties editing page
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('pre.php');
 require_once('common/include/account.php');
@@ -24,13 +36,17 @@ $unix_status2str = array(
 );
 
 $u =& user_get_object($user_id);
-exit_assert_object($u, 'User');
+if (!$u || !is_object($u)) {
+	exit_error('Error','Could Not Get User');
+} elseif ($u->isError()) {
+	exit_error('Error',$u->getErrorMessage());
+}
 
 if ($action == "update_user") {
 
 	if (!$u->setEmail($email)
-	    || !$u->setShell($shell)
-	    || !$u->setStatus($status)) {
+		|| !$u->setShell($shell)
+		|| !$u->setStatus($status)) {
 		exit_error(
 			$Language->getText('admin_useredit','could_not_complete_operation'),
 			$u->getErrorMessage()

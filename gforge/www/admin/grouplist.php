@@ -1,17 +1,32 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * List of all groups in the system. 
+ *
+ * Copyright 1999-2000 (c) The SourceForge Crew
+ *
+ * $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
-
-site_admin_header(array('title'=>$GLOBALS['system_name'].$Language->getText('admin_grouplist','group_list')));
+site_admin_header(array('title'=>$Language->getText('admin_grouplist','group_list')));
 
 // start from root if root not passed in
 if (!$form_catroot) {
@@ -20,7 +35,7 @@ if (!$form_catroot) {
 
 //CB removed from 2.6 and 2.5 was link to a page saying to use new project
 //echo "<br /><a href=\"groupedit-add.php\">[Add Group]</a>";
-echo "<p>".$GLOBALS['system_name'].$Language->getText('admin_grouplist','group_list_for_category');
+echo "<p>".$Language->getText('admin_grouplist','group_list_for_category');
 
 $sortorder = $_GET['sortorder'];
 if (!isset($sortorder) || empty($sortorder)) {

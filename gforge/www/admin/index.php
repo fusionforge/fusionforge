@@ -1,24 +1,36 @@
 <?php
 /**
-  * SourceForge Site Admin main page
-  *
-  * This pages lists all global administration facilities for the
-  * site, including user/group properties editing, maintanance of
-  * site meta-information (Trove maps, metadata for file releases),
-  * etc.
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  */
+ * GForge Site Admin main page
+ *
+ * This pages lists all global administration facilities for the
+ * site, including user/group properties editing, maintanance of
+ * site meta-information (Trove maps, metadata for file releases),
+ * etc.
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 
 require_once('pre.php');
 require_once('www/admin/admin_utils.php');
-
-session_require(array('group'=>'1','admin_flags'=>'A'));
 
 site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
@@ -139,7 +151,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="edit_supported_languages.php"><?php echo $Language->getText('admin_index','add_delete_edit_laguage'); ?></a></li>
 	<li><a href="edit_frs_filetype.php"><?php echo $Language->getText('admin_index','add_delete_edit_file_types'); ?></a></li>
 	<li><a href="edit_frs_processor.php"><?php echo $Language->getText('admin_index','add_edit_delete_processors'); ?></a></li>
-	<li><a href="edit_frs_theme.php"><?php echo $Language->getText('admin_index','add_edit_delete_themes'); ?></a></li>
+	<li><a href="edit_theme.php"><?php echo $Language->getText('admin_index','add_edit_delete_themes'); ?></a></li>
 	<li><a href="edit_licenses.php"><?php echo $Language->getText('admin_index','add_edit_delete_licenses'); ?></a></li>
 	<li><a href="loadtabfiles.php"><?php echo $Language->getText('admin_index','translation_file_tool'); ?></a></li>
 	<li><a href="/stats/lastlogins.php"><?php echo $Language->getText('admin_index','recent_logins'); ?></a></li>

@@ -1,22 +1,34 @@
 <?php
 /**
-  *
-  * Site Admin page for maintaining groups'databases
-  *
-  * This page allows to:
-  *   - browse aggregate numbers of databases of specific type (active,
-  *     deleted, etc.)
-  *   - list all databases of given type
-  *   - edit some database (by going to group's DB Admin page)
-  *   - register existing database in system
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * Site Admin page for maintaining groups'databases
+ *
+ * This page allows to:
+ *   - browse aggregate numbers of databases of specific type (active,
+ *	 deleted, etc.)
+ *   - list all databases of given type
+ *   - edit some database (by going to group's DB Admin page)
+ *   - register existing database in system
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 
 require_once('pre.php');
@@ -28,16 +40,25 @@ if (!$sys_use_project_database) {
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-
 if ($submit) {
 
 	if ($group_id) {
 
 		$group =& group_get_object_by_name($groupname);
-		exit_assert_object($group, 'Group');
+		if (!$group || !is_object($group)) {
+			exit_error('Error','Could Not Get Group');
+		} elseif ($group->isError()) {
+			exit_error('Error',$group->getErrorMessage());
+		}
+
 
 		$user =& session_get_user();
-		exit_assert_object($user, 'User');
+		if (!$u || !is_object($u)) {
+			exit_error('Error','Could Not Get User');
+		} elseif ($u->isError()) {
+			exit_error('Error',$u->getErrorMessage());
+		}
+
 
 		$res = db_query("
 			INSERT INTO prdb_dbs(group_id, dbname, dbusername, dbuserpass, requestdate, dbtype, created_by, state)
@@ -57,7 +78,6 @@ if ($submit) {
 	}
 
 }
-
 
 site_admin_header(array('title'=>$Language->getText('admin_database','site_admin_groups_maintance')));
 

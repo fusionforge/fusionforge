@@ -2,12 +2,25 @@
 /**
  * Site Admin group properties editing page
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
  *
  * @version   $Id$
- * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
 require_once('pre.php');
@@ -18,19 +31,10 @@ require_once('www/project/admin/project_admin_utils.php');
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);
-
 if (!$group || !is_object($group)) {
-        exit_error(
-        	$Language->getText('admin_groupedit','error'),
-                $Language->getText('admin_groupedit','error_creating_group_object')
-        );
-}
-
-if ($group->isError()) {
-	// If group object was created, but has error condition,
-	// don't treat this as fatal - this page is supposed to be
-	// "repair" page for such circumstances.
-	$feedback .= $group->getErrorMessage().'<br /> ';
+	exit_error('Error','Could Not Get Group');
+} elseif ($group->isError()) {
+	exit_error('Error',$group->getErrorMessage());
 }
 
 // This function performs very update
@@ -41,17 +45,17 @@ function do_update(&$group, $is_public, $status, $license,
 
 	db_begin();
 
-        if (!$group->setStatus(session_get_user(), $status)) {
+	if (!$group->setStatus(session_get_user(), $status)) {
 		$feedback .= $group->getErrorMessage();
 		db_rollback();
 		return false;
 	}
 
-        if (!$group->updateAdmin(session_get_user(), $is_public, $license, $group_type, $unix_box, $http_domain)) {
+	if (!$group->updateAdmin(session_get_user(), $is_public, $license, $group_type, $unix_box, $http_domain)) {
 		$feedback .= $group->getErrorMessage();
 		db_rollback();
 		return false;
-        }
+	}
 
 	if(!$group->setSCMBox($scm_box) && $GLOBALS['sys_scm_single_host'] != '1' && $scm_box!=NULL) {
 		$feedback .= $group->getErrorMessage();
@@ -191,7 +195,7 @@ if ($group->getLicense() == 'other') {
 <?php
 }
 if ($group->usesSCM() && $GLOBALS['sys_scm_single_host'] != '1' ) {
-?>      <tr>
+?>	  <tr>
 	<td><?php echo $Language->getText('admin','scm_box'); ?>
 	</td>
 	<td>

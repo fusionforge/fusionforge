@@ -1,22 +1,33 @@
 <?php
 /**
-  *
-  * Site Admin page for maintaining groups' Virtual Hosts
-  *
-  * This page allows to:
-  *   - add a VHOST entry for group
-  *   - query properties of VHOST entry
-  *   - edit some database (by going to group's DB Admin page)
-  *   - register existing database in system
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
+ * Site Admin page for maintaining groups' Virtual Hosts
+ *
+ * This page allows to:
+ *   - add a VHOST entry for group
+ *   - query properties of VHOST entry
+ *   - edit some database (by going to group's DB Admin page)
+ *   - register existing database in system
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('pre.php');
 require_once('common/include/account.php');
@@ -33,7 +44,11 @@ if ($add) {
 	if ($group_id) {
 
 		$group = &group_get_object_by_name($groupname);
-		exit_assert_object($group, 'Group');
+		if (!$group || !is_object($group)) {
+			exit_error('Error','Could Not Get Group');
+		} elseif ($group->isError()) {
+			exit_error('Error',$group->getErrorMessage());
+		}
 
 		if (valid_hostname($vhost_name)) {
 

@@ -1,18 +1,30 @@
 <?php
 /**
-  *
-  * Site Mailings Subscription Maintenance page
-  *
-  * This page is used to maintain site mailings (currently, just
-  * unsubscribe specific user).
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * Site Mailings Subscription Maintenance page
+ *
+ * This page is used to maintain site mailings (currently, just
+ * unsubscribe specific user).
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 
 require_once('pre.php');
@@ -23,11 +35,11 @@ if ($submit && $user_name) {
 
 	if (!$type) {
 
-	        /*
-	        	Show form for unsubscription type selection
+		/*
+				Show form for unsubscription type selection
 		*/
 
-                site_admin_header(array('title'=>$Language->getText('admin_unsubscribe','title')));
+		site_admin_header(array('title'=>$Language->getText('admin_unsubscribe','title')));
 		?>
 
 		<h4><?php echo $Language->getText('admin_unsubscribe','unsubscribe_user'); ?> <?php echo $user_name; ?></h4>
@@ -49,12 +61,17 @@ if ($submit && $user_name) {
 		exit();
 	} else {
 
-	        /*
-	        	Perform unsubscription
+		/*
+			Perform unsubscription
 		*/
 
 		$u =& user_get_object_by_name($user_name);
-		exit_assert_object($u, 'User');
+		if (!$u || !is_object($u)) {
+			exit_error('Error','Could Not Get User');
+		} elseif ($u->isError()) {
+			exit_error('Error',$u->getErrorMessage());
+		}
+
 		if (!$u->unsubscribeFromMailings($type=='ALL' ? 1 : 0)) {
 			exit_error(
 				$Language->getText('admin_unsubscribe','error_unsubscribe_user') .$u->getErrorMessage()

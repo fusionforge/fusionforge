@@ -1,18 +1,29 @@
 <?php
 /**
-  *
-  * Site Admin page to edit canned responces for project rejection
-  *
-  * This page is linked from approve-pending.php
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
+ * Site Admin page to edit canned responces for project rejection
+ *
+ * This page is linked from approve-pending.php
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('pre.php');
 require_once('common/include/account.php');
@@ -21,12 +32,9 @@ require_once('www/include/canned_responses.php');
 require_once('www/admin/admin_utils.php');
 require_once('www/project/admin/project_admin_utils.php');
 
-session_require(array('group'=>'1','admin_flags'=>'A'));
-
 site_admin_header(array('title'=>$Language->getText('admin_responses','title')));
 
-function check_select_value($value, $type)
-{
+function check_select_value($value, $type) {
 	global $Language;
 	if( $value == "100" ) {
 		print("<span style=\"color:red\"><strong>".$Language->getText('admin_responses','you_cant',array($GLOBALS['type']))."</strong></span><br />\n");
