@@ -277,8 +277,7 @@ class DocumentGroup extends Error {
 		if (is_array($nested_groups["$doc_group_id"])) {
 			$count = count($nested_groups["$doc_group_id"]);
 			for ($i=0; $i < $count; $i++) {
-				//if (docman_group_has_documents(&$nested_groups, &$document_factory, $stateid, $nested_groups["$doc_group_id"][$i]->getID())) {
-				if ($nested_groups["$doc_group_id"][$i]->hasDocuments(&$nested_groups, &$document_factory, $stateid)) {
+				if ($nested_groups["$doc_group_id"][$i]->hasDocuments($nested_groups, $document_factory, $stateid)) {
 					// child has documents
 					$result[$stateid][$doc_group_id] = true;
 					return true;
@@ -310,7 +309,7 @@ class DocumentGroup extends Error {
 					return true;
 				} else {
 					// recursively check if this child has this subgroup
-					if ($nested_groups["$doc_group_id"][$i]->hasSubgroup(&$nested_groups, $doc_subgroup_id)) {
+					if ($nested_groups["$doc_group_id"][$i]->hasSubgroup($nested_groups, $doc_subgroup_id)) {
 						return true;
 					}
 				}
