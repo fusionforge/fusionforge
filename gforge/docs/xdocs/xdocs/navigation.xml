@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Gforge 3.0">
+
+  <title>Gforge 3.0</title>
+
+  <body>
+    <menu name="Gforge 3.0">
+      <item name="Introduction"		href="/introduction.html"/>
+      <item name="Installation"          href="/installation.html"/>
+    </menu>
+  
+   <menu name="User Guide">
+    <item name="Introduction"         href="/user_guide/intro.html"/>
+    <item name="Getting Started"      href="/user_guide/getting_started.html"/>
+    <item name="User functions"       href="/user_guide/user_functions/index.html"/>
+
+      <item name="Project Summary"    href="/user_guide/project_functions/project_summary.html"/>
+  <item name="Project Administration" href="/user_guide/project_functions/project_admin.html"/>
+  
+    <item name="Forums"               href="/user_guide/project_functions/forum.html"/>
+    <item name="Tracker"              href="/user_guide/project_functions/tracker.html"/>
+  
+    <item name="Mailing Lists"        href="/user_guide/project_functions/mailing_lists.html"/>
+    <item name="Task Manager"                href="/user_guide/project_functions/pm.html"/>
+    <item name="Document Manager"      href="/user_guide/project_functions/docman.html"/>
+    <item name="Surveys"              href="/user_guide/project_functions/survey.html"/>
+    <item name="News"                 href="/user_guide/project_functions/news.html"/>
+  <item name="CVS"        href="/user_guide/project_functions/cvs.html"/>
+  <item name="File Releases"        href="/user_guide/project_functions/file_releases.html"/>
+   
+   <item name="Searching" href="/user_guide/side_wide/search.html"/>
+      <item name="Trove map" href="/user_guide/side_wide/trove.html"/>
+   <item name="Snippet Library" href="/user_guide/side_wide/snippet.html"/>
+   <item name="Project Help" href="/user_guide/side_wide/project_help.html"/>
+
+   </menu> 
+  </body>
+</project>

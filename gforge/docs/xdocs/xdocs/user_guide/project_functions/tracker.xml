@@ -1,0 +1,303 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="reinhard@spisser.it">Reinhard Spisser</author>
+    <title>Gforge User Guide - Tracker</title>
+  </properties>
+
+  <body>
+
+
+
+
+<section name="What is the Tracker?">
+<p>
+
+The Tracker is a generic system where you can store items like bugs, feature requests, patch submissions, etc.
+<p/>
+In previous versions of the software, these items were handled in separate software modules. Bugs, Enhancement Requests, Support Requests and Patches handle the same type of data, so it was logical to create an unique software module that can handle this types of data. New types of trackers can be created when needed, e.g. Test Results, meeting minutes, etc.
+
+
+You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.
+
+Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming.
+
+Name:
+<p/>
+When a project is created, gforge creates automatically 4 trackers:
+<ul>
+<li><b>Bugs</b><br/>
+Used for Bug tracking
+</li>
+<li><b>Support Requests</b><br/>
+Users can insert here support requests and receive support</li>
+<li><b>Patches</b><br/>
+Developers can upload here patches to the software
+</li>
+<li><b>Feature Requests</b><br/>
+Requests for enhancements of the software should be posted here
+</li>
+</ul>
+</p>
+</section>
+
+<section name="Using a Tracker">
+<p>
+The following descriptions can be applied to any of the trackers. The functionalities between the different trackers are the same, we'll use the Bugs Tracker as example to describe the functionality of all trackers.
+<br/>
+The Tracker provides the following functions:
+<ol>
+<li><b>Submitting a new item</b><br/>
+</li>
+<li><b>Browsing of Items</b><br/>
+</li>
+<li><b>Reporting</b><br/>
+</li>
+<li><b>Administration</b><br/>
+</li>
+
+</ol>
+</p>
+</section>
+
+<section name="Submitting a new Bug">
+<p>
+To submit a new bug, click on the "Submit New" link. A form will be displayed, where you can insert/select the following data:
+<ul>
+<li><b>Category</b><br/>
+The Category is generally used to describe the function/module in which the bug appears. E.g for gforge, this might be the items "User Login", "File releases", "Forums", "Tracker", etc.
+</li>
+<li><b>Group</b><br/>
+The Category can be used to describe the version of the software or the gravity of the bug. E.g "3.0pre7", "3.0pre8" in case of version or "Fatal error", "Non-fatal error" in case of gravity.
+</li>
+<li><b>Assigned To</b><br/>
+You can assign the item to a user. Only users which are "Tecnicians" are listed here.
+</li>
+<li><b>Priority</b><br/>
+You can select the Priority of the item. In the Browse list, and the homepage of the users, priorities are displayed in different colors, and can be ordered by priority.
+</li>
+<li><b>Summary</b><br/>
+Give a short description of the bug, e.g. Logout function gives an SQL Error
+</li>
+<li><b>Detailed Description</b><br/>
+Insert the most detailed description possibile.
+</li>
+<li><b>File upload</b><br/>
+You can also upload a file as an attachment to the bug. This can be used to attach a screenshot with the error and the log file of the application.
+<br/>
+To upload the file, Check the checkbox, select a file using the Browse button and insert a file description.
+<br/>
+Note that attachments to tracker items can be maximal 256KB. 
+</li>
+</ul>
+</p>
+</section>
+<section name="Browse Bugs">
+<p>
+The Browse page shows the list of bugs. You can select to filter the bugs by Assignee, Status, Category or Group. 
+<br/>
+You can sort the items by ID, Priority, Summary, Open Date, Close Date, Submittere, Assignee and the Ordering (Ascending, descending).
+<br/>
+The different colors indicate the different priorities of the bug; a * near the open date indicates that the request is more than 30 days old. The overdue time (default 30 days) is configurabel for each tracker.
+<br/>
+When you click on the summary, you go to the detail/modify Bug page.
+</p>
+</section>
+<section name="Modify Bugs">
+<p>
+In the modify Bug page, you can modify the data you inserted, and also add the following information:
+
+<ol>
+<li><b>Data Type</b><br/>
+This combo box lists the trackers of the project. If you select a different tracker and submit the changes, the item will be reassigned to the selected tracker.
+</li>
+<li><b>Status</b><br/>
+The status indicates the status of the item. When an item is inserted, it is created in the "Open" state. When you fix a bug, you should change the state to "Closed". When a bug is duplicated or not valid, change it to "Deleted".
+</li>
+<li><b>Resolution</b><br/>
+This indicates the resolution of the item.
+</li>
+<li><b>Canned Responses</b><br/>
+Canned responses are prefixed responses. You can create canned responses for your project in the admin section and select the responses in the combo box.
+</li>
+</ol>
+<br/>
+The Changelog on the bottom of the page shows in cronological order the changes applied to the item. Also all followups can be viewed.
+</p>
+</section>
+<section name="Monitor Bugs">
+<p>
+If you select the "Monitor" button on the top left of the Bug detail page, bug monitoring will be enabled.
+<br/>
+When you are monitoring a bug, every change to the bug will be sent to you by email.
+<br/>
+To disable bug monitoring, simply reselect the "Monitor" button.
+</p>
+
+</section>
+<section name="Admin Tracker">
+<p>
+If you are an Administrator of the tracker, you can add or change bug groups, categories, canned responses:
+
+<ol>
+<li>
+<b>Add/Update Categories</b><br/>
+You can add new categories or change the name of existing categories. 
+<br/>
+You can also select a user in the Auto-Assign To combo box; every bug with this category will be auto-assigned to the selected user. This feature can save you lots of time when administering the tracker. 
+</li>
+<li>
+<b>Add/Update Groups</b><br/>
+You can add new groups or change the name of existing groups.It is not recommended that you change the  group name because other things are dependent upon it. When you change the group name, all related items will be changed to the new name.
+</li>
+<li>
+<b>Add Update Canned Responses</b><br/>
+Canned responses are predefined responses. Creating useful generic messages can save you a lot of time when handling common requests.
+</li>
+<li>
+<b>Add Update Users &amp; Permissions</b><br/>
+You can add new users to the tracker or delete users from the tracker.<br/>
+In this section you can assign the following permissions to the user:
+<ol>
+<li>
+<b>-</b><br/>
+The user has no specific permission on the tracker; he cannot administer the tracker, no items can be assigned to the user.
+</li>
+<li>
+<b>Tecnician</b><br/>
+Items can be assigned to the user.
+</li>
+<li>
+<b>Administrator &amp; Tecnician</b><br/>
+The user is both an Administrator and also a Tecnician.
+</li>
+<li>
+<b>Administrator</b><br/>
+User can administer the tracker (add user, set permissions, create/update groups, categories, canned responses).
+</li>
+</ol>
+</li>
+<li>
+<b>Update preferences</b><br/>
+Here you can update the following information on the tracker:
+
+<ol>
+<li>
+<b>Name</b><br/>
+The name of the Tracker. This is the name displayed in the tracker list, e.g. Bug Submittions.
+</li>
+
+<li>
+<b>Description</b><br/>
+The descriptions of the Tracker. E.g. This is the tracker dedicated to the Bugs of the project
+</li>
+<li>
+<b>Publicy Available</b><br/>
+
+By default, this checkbox is not enabled.
+</li>
+<li>
+<b>Allow non-logged-in postings</b><br/>
+If this checkbox is enabled, also non logged-in users can post items to the tracker. If this checkbox is not enabled, only logged in users can post items.
+
+<br/>
+By default, this checkbox is not enabled.
+</li>
+<li>
+<b>Display the "Resolution" box</b><br/>
+
+</li>
+<li>
+<b>Send email on new submission to address:</b><br/>
+All new items be sent to the address inserted in the text box.
+</li>
+<li>
+<b>Send email on all changes</b><br/>
+If this checkbox is enabled, all changes on the items will be sent out via email. It is useful to check this radiobutton only if in the Send email address is inserted an email address.
+</li>
+<li>
+<b>Days still considered overdue:</b><br/>
+
+</li>
+<li>
+<b>Days till pending tracker items time out:</b><br/>
+
+</li>
+<li>
+<b>Free form text for the "submit new item" page:</b><br/>
+
+</li>
+<li>
+<b>Free form text for the "browse items" page</b><br/>
+</li>
+</ol>
+</li>
+</ol>
+</p>
+</section>
+<section name="Mass Update">
+<p>
+If you are an Administrator of the tracker, you are also enabled for the Mass Update function. 
+<br/>
+This function is visible in the browse bug page and allows you to update the following information:
+<ol>
+<li>Category</li>
+<li>Group</li>
+<li>Priority</li>
+<li>Resolution</li>
+<li>Assignee</li>
+<li>Status</li>
+<li>Canned Response</li>
+</ol>
+When this function is enabled, a checkbox will appear at the left side of each bug id. You can check one or more of the ids, select one or more of the values in the Mass Update combo boxes and click Mass Update.
+
+All bugs will be modified with these new value(s). This function is very useful if you need to change the same information for more bugs; e.g. assigning 5 bugs to one developer or closing 10 bugs.
+
+
+
+</p>
+</section>
+
+
+
+
+
+<section name="Reporting">
+<p> 
+The reporting functions allows to check the life-span of the Bug. The lifespan is the duration of the bug; it starts when the bug is inserted (opened) in the tracker and ends when the bug is closed.
+
+<ol>
+<li><b>Aging Report</b><br/>
+ Aging Report
+The Aging report shows the turnaround time for closed bugs, the number of bugs inserted and the number of bugs still open.
+
+</li>
+<li><b>Bugs by Tecnician</b><br/>
+The Bugs by Tecnician report shows for every member of the project: the number of bugs assigned to the user, the number of closed bugs and the number of bugs still open.
+</li>
+<li><b>Bugs by Category</b><br/>
+The Bugs by Category report shows for every Category: the number of bugs inserted, the number of closed and the number of open bugs
+</li>
+<li><b>Bugs by Group</b><br/>
+The Bugs by Group report shows for every Group: the number of bugs inserted, the number of closed and the number of open bugs.
+</li>
+<li><b>Bugs by Resolution</b><br/>
+The Bugs by Resolution report shows for every type of Resolution (Fixed, invalid, later, etc): the number of bugs inserted, the number of closed and the number of open bugs.
+
+</li>
+</ol>
+
+</p>
+</section>
+<section name="Searching for bugs">
+<p>
+When using a tracker, a voice with the name of the tracker  will appear in the search combo box. The search will be done on the description, summary, the username of the submitter and the username of the assignee.
+
+</p>
+</section>
+
+
+
+  </body>
+</document>

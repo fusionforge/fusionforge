@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven">
+
+  <title>Gforge</title>
+
+  <body>
+    <menu name="Gforge">
+      <item name="Introduction"		href="/introduction.html"/>
+      <item name="Installation"          href="/installation.html"/>
+      <item name="Usser Guide"		href="/user_guide/index.html">
+	<item name="Tracker"		href="/user_guide/tracker.html"/>
+
+      </item>
+
+      <item name="Admin Guide"		href="/admin_guide.html"/>
+    </menu>
+   
+  </body>
+</project>

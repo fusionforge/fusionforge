@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="reinhard@spisser.it">Reinhard Spisser</author>
+    <title>Gforge User Guide - CVS</title>
+  </properties>
+
+  <body>
+
+<section name="CVS">
+<p>
+The CVS button shows a page that contains information on how to access the CVS repository. Use this information to configure your client for CVS access. 
+<p/>
+The Browse CVS Repository link opens the viewcvs web interface, where you can view the CVS repository, view differences between revisions, download versions of a file.
+<br/>
+Note that only public projects will show the browse CVS repository link.
+</p>
+</section>
+
+</body>
+</document>
+

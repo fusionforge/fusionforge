@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="reinhard@spisser.it">Reinhard Spisser</author>
+    <title>Gforge User Guide - News</title>
+  </properties>
+
+  <body>
+<section name="News">
+<p>
+The news section allows you to insert news relative to your project. News can be monitored similar to tracker items, forums. News will be displayed on the project homepage and also on the site homepage, if the side administrators approve the news.
+<br/>
+News are used generally to announce software releases or to announce significant changes in the software or milestones.
+
+
+</p>
+
+<subsection name="Inserting a news item">
+<p>
+You can insert a NewsByte by clicking on the Submit link.
+<br/>
+ You can post news about your project if you are an admin on your project.
+<br/>
+All posts for your project will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the gforge news team before they will appear on the gforge home page.
+<br/>
+You may include URLs, but not HTML in your submissions.
+<br/>
+URLs that start with http:// are made clickable. 
+<br/>
+The NewsByte will go to the News Admin for approval for pubblication.
+
+</p>
+</subsection>
+<subsection name="Modifying/Approving a news item">
+<p>
+
+
+
+You can modify or/and approva a NewsByte by clicking on the Admin Link. 
+<br/>
+You can select the status of the News: Displayed or Delete (the news will be deleted), you can insert the Subject (title) of the newsByte and the details.
+
+
+</p>
+</subsection>
+</section>
+</body>
+</document>

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="reinhard@spisser.it">Reinhard Spisser</author>
+    <title>Gforge User Guide - File Releases</title>
+  </properties>
+
+  <body>
+
+
+
+<section name="Introduction">
+<p>
+The File Releases System (FRS) is used to upload files to the gforge site and to make these files available to the users in an easy and efficient way.
+<br/>
+Files can be divided in different packages, and every single package can be monitored by the users; these users will receive an email every time a new file has been added to the package.
+
+</p>
+</section>
+
+
+<section name="Creating a package">
+<p>
+
+</p>
+</section>
+<section name="Monitoring a package">
+<p>
+
+</p>
+
+</section>
+<section name="Uploading a file">
+<p>
+
+</p>
+
+</section>
+
+  </body>
+</document>

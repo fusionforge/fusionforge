@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="reinhard@spisser.it">Reinhard Spisser</author>
+    <title>Gforge User Guide - Forums</title>
+  </properties>
+
+  <body>
+<section name="Forums">
+<p>
+Every project can have his own discussion forums. When a new project is created, 3 forums are automatically created:
+<ol>
+<li><b>Open Discussion</b><br/>
+A place where to discuss about everything.
+</li>
+<li><b>Help</b><br/>
+A forum where to ask for help.
+</li>
+<li><b>Developers</b><br/>
+A place where developers discuss about developments
+</li>
+</ol>
+
+</p>
+</section>
+<section name="Creating a new forum">
+<p>
+New forums can be created using the Admin section of the forum. When a new forum is created, you must insert a name of the forum, the description of the forum, select if the forum is public or private and if anonymous posts are allowed on the forum.
+<p/>
+Public forums are visibile only to project members. If Anonymous posts are enabled, everybody can post messages to the forum, even users that are not logged it.
+<p/>
+You can also insert an email address where all posts will be sent. 
+
+</p>
+</section>
+<section name="Using the forum">
+<p>
+When you click on the name of the forum, you go to the detail of the forum.
+
+You can select the following types of visualization for the forum lists:
+<ol>
+<li><b>Nested</b><br/>
+Shows the messages ordered by thread. All data of the message, including the posted message itself will be visualized.
+</li>
+<li><b>Flat</b><br/>
+Similar to Nested, the messages will be showed in cronological order.
+</li>
+<li><b>Threaded</b><br/>
+Shows only title, author and date of each message. Shows the messages in threaded order. Clicking on the title of the message the entire message will be displayed
+</li>
+<li><b>Ultimate</b><br/>
+Shows only the "topic started" messages. Topic starters are the messages that starts a new thread. 
+</li>
+</ol>
+
+<p/>
+You can select the number of messages for every page: 25, 50, 75 or 100.
+<p/>
+
+</p>
+</section>
+<section name="Available options">
+<p>
+The forums of gforge have 2 very powerful options:
+<ol>
+<li><b>Save place</b><br/>
+This function registers the number of messages already inserted in the forum and will highlight new messages the next time you return to the forum.
+</li>
+<li>
+<b>Monitor forum</b><br/>
+You can select to monitor the forum by clicking on the Monitor Forum button.
+<br/>
+If this option is enabled, every post to the forum will be sent to you by email.This allows you to be informed about new messages without beeing logged on to gforge. The name of the monitored forum will appear in the users homepage in the section Monitored Forums.
+</li>
+</ol>
+
+
+
+</p>
+</section>
+
+<section name="Searching">
+<p>
+When using a forum, a voice "Forum" will appear in the search combo box. Selecting forum and inserting a text in the search box allows you to search through the text data of the forum.
+
+
+</p>
+</section>
+  </body>
+</document>
