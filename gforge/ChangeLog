@@ -1,3 +1,8 @@
+2003-01-09  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* common/include/session.php(session_issecure, session_redirect):
+	use $HTTP_SERVER_VARS instead of $_SERVER.
+
 2003-01-9  Jim Nutt
 
 	* www/scm/index.php Cleanup/set to use Group object.
