@@ -4,7 +4,7 @@
   <pomVersion>3</pomVersion>
   <id>gforge</id>
   <name>gforge</name>
-  <currentVersion>3.0</currentVersion>
+  <currentVersion>3.1</currentVersion>
   <organization>
     <name>GForge</name>
     <url>http://gforge.org/</url>

@@ -3,7 +3,7 @@
 
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
-    <title>GForge 3.0 - Introduction</title>
+    <title>Introduction</title>
   </properties>
 
   <body>
@@ -11,60 +11,41 @@
 
  <section name="Introduction">
       <p>
-<!--<img src="/images/logo.png"/>-->
 <p/>
 GForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for comunication between members of a development team.  The tools provided by GForge allows team members to comunicate and organize their work; this allows the creation of a knowledgebase.
 </p><p>
 A complete configurated GForge system will give you the following features:
 
 <ol>
-<li><b>A Web site for every project</b><br/>
-</li>
-<li><b>Versioning via CVS</b><br/>
-</li>
-<li><b>Shell access to the server for the developers</b><br/>
-</li>
+<li><b>A Web site for every project</b><br/></li>
+<li><b>Versioning via CVS</b><br/></li>
+<li><b>Shell access to the server for the developers</b><br/></li>
 <li><b>A web site for project coordination and comunication between team members:</b><br/>
+
 <ol>
-<li><b>Discussion Forums</b><br/>
-For discussions between team members
-</li>
-<li><b>Bug tracking</b><br/>
-Allow registration and administration of bugs
-</li>
-<li><b>Support requests, patch submissions, and enhancement requests</b><br/>
-</li>
-<li><b>Comunication between project members using mailing lists</b><br/>
-</li>
-<li><b>Sharing of documentation</b><br/>
-</li>
-<li><b>Handling of todo lists, tasks, etc</b><br/>
-</li>
-<li><b>File uploads/releases</b><br/>
-</li>
-<li><b>Posting of news</b><br/>
-Every project can have its own news items.
-</li>
-<li><b>Code Snippets</b><br/>
-Provides of a basic knowledgebase that can contain code fragments, HOWTOs, etc.
-</li>
+<li><b>Discussion Forums</b><br/>For discussions between team members</li>
+<li><b>Bug tracking</b><br/>Allow registration and administration of bugs</li>
+<li><b>Support requests, patch submissions, and enhancement requests</b><br/></li>
+<li><b>Comunication between project members using mailing lists</b><br/></li>
+<li><b>Sharing of documentation</b><br/></li>
+<li><b>Handling of todo lists, tasks, etc</b><br/></li>
+<li><b>File uploads/releases</b><br/></li>
+<li><b>Posting of news</b><br/>Every project can have its own news items.</li>
+<li><b>Code Snippets</b><br/>Provides of a basic knowledgebase that can contain code fragments, HOWTOs, etc.</li>
 </ol>
+
 </li>
 
 </ol>
-
-
-</p><p>
-The tasks and the tracker items (to track bugs, patches, support requests, enhancement requests) can be classified using status, priority, category.
-</p><p>
-
-<br/>
-
-The system provides also  a classification system of the projects and a user profile and user rating system.
 
 </p>
-    </section>
-<section name="History of the project">
+
+<p>The tasks and the tracker items (to track bugs, patches, support requests, enhancement requests) can be classified using status, priority, category.</p>
+
+<p><br/>The system provides also a classification system of the projects, a user profile, and a user rating system.</p>
+</section>
+
+<section name="GForge History">
 <p>
 GForge is a fork of the 2.61 SourceForge code, which was only available via anonymous CVS from VA (Research|Linux|Software).
 <br/>
