@@ -269,13 +269,14 @@ admin_index	display_user_beginning_with	Mostrar Usuarios que empiezan por:
 admin_index	front_page_news	Noticias de la Página Inicial
 admin_index	get	obtener
 admin_index	group_maintaince	Mantenimiento de Grupos
-admin_index	groups_with	Grupos con
+admin_index	groups_with_status	Grupos con Estado
 admin_index	mail_engine	Motor de Correo para subscriptores de $1
 admin_index	new_project_approval	(Aprobación de un Proyecto Nuevo)
 admin_index	news	Noticias
 admin_index	pending_status	Estado (pendiente)
 admin_index	private_groups	Grupos Privados
 admin_index	project_database_administration	Administración de Base de Datos de Proyectos
+admin_index	recent_logins	Logins recientes
 admin_index	register_new_project	Registrar un Nuevo Proyecto
 admin_index	site_mailing_maintaince	Mantenimiento de la Correspondencia de este Sitio
 admin_index	site_utilities	Utilidades del Sitio
@@ -510,9 +511,10 @@ calendar	tuesday	martes
 calendar	update	Actualice
 calendar	view	Enseñe:
 calendar	wednesday	miércoles
-classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nMientras espera que funcione su nombre DNS, puede intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi después de seis horas su cuenta shell/CVS no funcionan, por favor\nabra una petición de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas están cerradas para el \'telnet\' y solo\nfuncionará con \'ssh\'.\n\nSu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lea la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribución de directorios de la cuenta.\n\nPor favor, tómese un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia página de proyectos en $3 mientras está autenticado, encontrará\nfunciones adicionales de menú con un titulo llamado \'Administración de Proyectos\'.\n\nLe recomendamos altamente que visite ahora la página de $3 y cree una descripción\npública de su proyecto. Esto puede hacerlo visitando su página\nde proyecto mientras está autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarse).\n\nSu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorice en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisite su proyecto, mientras está autenticado, y seleccione \'Administración\' en el\nmenú.\n\nDisfrute del sistema, y por favor, dígales a otras personas de $3. Coméntenos también\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
+classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nMientras espera que funcione su nombre DNS, puede intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi después de seis horas su cuenta shell/CVS no funcionan, por favor\nabra una petición de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas están cerradas para el \'telnet\' y solo\nfuncionará con \'ssh\'.\n\nSu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lea la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribución de directorios de la cuenta.\n\nPor favor, tómese un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia página de proyectos en $3 mientras está autenticado, encontrará\nfunciones adicionales de menú con un título llamado \'Administración de Proyectos\'.\n\nLe recomendamos encarecidamente que visite ahora la página de $3 y cree una descripción\npública de su proyecto. Esto puede hacerlo visitando su página\nde proyecto mientras está autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarse).\n\nSu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorice en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisite su proyecto, mientras está autenticado, y seleccione \'Administración\' en el\nmenú.\n\nDisfrute del sistema, y por favor, dígales a otras personas de $3. Coméntenos también\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
 classgroup	acceptedprojecttitle	Proyecto Aprobado por $1
 classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\nNombre completo del Proyecto:  $2\nDescripción registrada: $3\nLicencia: $4\n\nPor favor, visite esta dirección para aprobar o rechazar este proyecto:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification_submitter	Petición de nuevo proyecto en $1\n\nNombre Completo del Proyecto: $2\nDescripción enviada: $3\nLicencia: $4\n\nEl equipo de administración de $1 examinará ahora su envío. Se le notificará su decisión.
 classgroup	newprojectnotificationtitle	Proyecto Pendiente de Aprobación en $1
 classgroup	rejectedproject	Su registración de su proyecto en $3 ha sido negada.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\n\nLas razones para negarla:\n\n
 classgroup	rejectedprojecttitle	Proyecto Denegado por $1 
@@ -533,7 +535,6 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	es
 conf	language_id	4
-conf	mail_charset	ISO-8859-1
 contact	about_blurb	<p>Ésta es la página de contacto de <b>$1</b> -- si está teniendo problemas con un proyecto que alojamos nosotros por favor mande sus preguntas/información al encargado de soporte y problemas de ese proyecto. Se puede acceder a esta funcionalidad visitando la página principal de un proyecto en: <tt>http://$2/projects/&lt;nombre del proyecto&gt;</tt> y pulsando en la herramienta apropiada.</p><p>Si tiene una petición de soporte, un reporte de error o quiere comunicarse directamente con el equipo de $1, por favor visite <a href="/projects/sourceforge">la página del proyecto de $1</a>.</p>
 contact	title	Contacta $1
 developer	body	Apunte
@@ -824,7 +825,7 @@ general	no	No
 general	no_valid_filename	El nombre del fichero es invalido.
 general	no_valid_group	El grupo de $1 no fue seleccionado.
 general	no_valid_group_object	$1 Objeto de Grupo no válido
-general	open	abrir
+general	open	abierto		
 general	permdenied	Permiso denegado.
 general	permexcuse	Un administrador de este proyecto tiene que darle permisos para ver esta página.
 general	permnotget	No puedo obtener permiso
@@ -1535,10 +1536,12 @@ project_admin_userpermedit	developer_not_found	Colaborador No Encontrado para es
 project_admin_userpermedit	docman	Administración de documentos
 project_admin_userpermedit	editing_permissions	Estás editando los permisos para el usuario $1 ($2)
 project_admin_userpermedit	editor	Editor
+project_admin_userpermedit	file_release_role	Papel en las versiones de ficheros
 project_admin_userpermedit	forums	Foros
 project_admin_userpermedit	invalid_user	Usuario Inválido
 project_admin_userpermedit	moderator	Moderador
 project_admin_userpermedit	no_permissions	Sin Permisos
+project_admin_userpermedit	not_available	No disponible
 project_admin_userpermedit	permissions_updated	Permisos Actualizados
 project_admin_userpermedit	pm	Administrador de Proyectos/Tareas
 project_admin_userpermedit	project_admin	Aministrador del Proyecto
@@ -1603,14 +1606,14 @@ project_home	cvs_commits	<strong>$1</strong> envios, <strong>$2</strong> añadid
 project_home	forum_messages	<strong>$1</strong> mensages en <strong>$2</strong> foros
 project_home	forums	foros
 project_home	help_wanted	SE BUSCA AYUDA: Este proyecto está buscando
-project_home	help_wanted_multiple	Gente para llenar $1 numerosas posiciones diferentes
-project_home	holding_note	NOTA: Este proyecto es mantenido enteramente por el personal. No somos el sitop oficial para este producto. Para más información sobre el copyright acudir a la página principal de este proyecto.
+project_home	help_wanted_multiple	Gente $1 puestos diferentes
+project_home	holding_note	NOTA: Este proyecto es mantenido enteramente por el personal. No somos el sitio oficial para este producto. Para más información sobre el copyright acudir a la página principal de este proyecto.
 project_home	messages_in	mensajes en
 project_home	monitor_package	Monitorizar este paquete
 project_home	no_subprojects	No hay subproyectos públicos disponibles
 project_home	no_trackers	No hay trackers públicos disponibles 
 project_home	public_mailing_lists	listas de correo públicas
-project_home	release_notes	Release Notes
+project_home	release_notes	Notas de la Versión
 project_home	surveys	encuestas
 project_home	title	Información del Proyecto
 project_home	tracker_open	$1 abierto /$2 total
@@ -1681,7 +1684,7 @@ project_stats_utils	support	Support
 project_stats_utils	tasks	Tareas
 projects	section	Proyecto: $1
 projects	title	Resumen
-register	apply_for_registration	Para registrat un proyecto, debe introducir una información básica sobre él. Por favor, lea las descripciones más abajo e introduzca datos completos y comprensibles. Todos los campos son necesarios.
+register	apply_for_registration	Para registrar un proyecto, debe introducir una información básica sobre él. Por favor, lea las descripciones más abajo e introduzca datos completos y comprensibles. Todos los campos son necesarios.
 register	comprehensive_description	Describa su proyecto de modo más comprensible.
 register	conflicting_licenses_choice	Elección de licencias con conflicto
 register	describe_registration	Por favor, describa su Propuesta de Registro de modo más comprensible
@@ -2190,7 +2193,9 @@ tracker	category_any	Cualquiera
 tracker	check_upload	Haga click aquí para enviar un fichero
 tracker	choose	Elige un registro para poder navegar/editar/añadir elementos a él.
 tracker	close_date	Fecha que fue resuelto
+tracker	comment	comentario
 tracker	comment_added	Comentario añadido
+tracker	comments	comentarios
 tracker	date	Fecha
 tracker	detailed_description	Descripción
 tracker	file_delete	Borrar fichero

@@ -1,5 +1,8 @@
 2003-11-25  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/languages/Spanish.tab: Patch #607 from Francisco
+	Gimeno fixing various strings.
+
 	* www/include/languages/French.tab: Patch #605 from Guillaume Smet
 	<guillaume_ml@smet.org> fixing various strings.
 
