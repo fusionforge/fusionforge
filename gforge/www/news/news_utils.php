@@ -18,25 +18,19 @@
 
 function news_header($params) {
 	global $DOCUMENT_ROOT,$HTML,$group_id,$news_name,$news_id,$sys_news_group;
-
 	$params['toptab']='news';
 	$params['group']=$group_id;
-
+	$params['sysnewsgroup']=$sys_news_group;
 	/*
 		Show horizontal links
 	*/
 	if ($group_id && ($group_id != $sys_news_group)) {
 		site_project_header($params);
-		echo '<P><B>';
-		echo '<A HREF="/news/submit.php?group_id='.$group_id.'">Submit</A> | <A HREF="/news/admin/?group_id='.$group_id.'">Admin</A></B>';
-		echo '<P>';
 	} else {
 		$params['pagename']='news_main';
 		$HTML->header($params);
-		echo '<P><B>';
-		echo '<A HREF="/news/submit.php?group_id='.$sys_news_group.'">Submit</A> | <A HREF="/news/admin/?group_id='.$sys_news_group.'">Admin</A></B>';
-		echo '<P>';
 	}
+	site_news_menu($params);
 }
 
 function news_footer($params) {
@@ -128,7 +122,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$comments_txt = " Comments";
 				}
 
-				$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <A HREF="http://'.$GLOBALS['sys_default_domain'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[Read More/Comment]</a></div><HR width="100%" size="1" noshade>';
+				$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <A HREF="http://'.$GLOBALS['sys_default_domain'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><HR width="100%" size="1" noshade>';
 			}
 
 			if ($limit==1 && $tail_headlines) {

@@ -51,7 +51,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		Artifacts
 	*/
 	$last_group=0;
-	echo $HTML->box1_top($Language->getText('my', 'assigneditems'),false,false,false);
+	echo $HTML->box1_top($Language->getText('my', 'assigneditems'));
 	
 	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
 		a.assigned_to,a.summary,a.artifact_id,a.priority 
@@ -227,7 +227,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		Tasks assigned to me
 	*/
 	$last_group=0;
-	echo $HTML->box1_top($Language->getText('my', 'tasks'),false,false,false);
+	echo $HTML->box1_top($Language->getText('my', 'tasks'));
 
 	$sql="SELECT groups.group_name,project_group_list.project_name,project_group_list.group_id, ".
 		"project_task.group_project_id,project_task.priority,project_task.project_task_id,project_task.summary,project_task.percent_complete ".

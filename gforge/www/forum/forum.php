@@ -185,6 +185,7 @@ if ($forum_id) {
 		<TABLE BORDER="0" WIDTH="50%">
 			<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
 			<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
+			<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">
 			<TR><TD><FONT SIZE="-1">'. $forum_popup .
 				'</TD><TD><FONT SIZE="-1">'. $options_popup .
 				'</TD><TD><FONT SIZE="-1">'. $max_row_popup .

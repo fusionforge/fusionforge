@@ -74,6 +74,9 @@ account_unsubscribe	all_mailings	all SourceForge mailings and notifications
 account_unsubscribe	site_mailings	SourceForge site mailings
 account_verify	title	SourceForge Account Verification
 account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>
+account_verify	loginname	Login Name:
+account_verify	password	Password:
+account_verify	login		Login
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
@@ -126,6 +129,43 @@ forum_message	section	Forums
 forum_message	title	View Message
 forum_message	msg	Post A Message To This Thread:
 forum_message	thread	Start a New Thread:
+forum_utils	news	News
+forum_utils	discussionforum	Discussion Forums:
+forum_utils	nonewsitem	Error - this news item was not found
+forum_utils	latest	Latest News
+forum_utils	monitor	Monitor Forum
+forum_utils	admin	Admin
+forum_utils	saveplace	Save Place
+forum_utils	erroradd	Error Adding Forum
+forum_utils	added	Forum Added
+forum_utils	notfound	Not Found
+forum_utils	by	By:
+forum_utils	brokenthread	Broken Thread
+forum_utils	thread	Thread
+forum_utils	author	Author
+forum_utils	date	Date
+forum_utils	error	Error!
+forum_utils	noid	Trying to post without a forum ID
+forum_utils	mustinclude	Must include a message body and subject
+forum_utils	doublepost	You appear to be double-posting this message, since it has the same subject and followup information as a prior post.
+forum_utils	nextfailed	Getting next thread_id failed
+forum_utils	errormaster	Couldn't Update Master Thread parent with current time
+forum_utils	errorparent	Could Not Update Parent
+forum_utils	errorfollowup	Trying to followup to a message that doesn't exist.
+forum_utils	errorfollowup2	No followup ID present when trying to post to an existing thread.
+forum_utils	errorpost	Posting Failed
+forum_utils	errorinsert	Failed to get insertid()
+forum_utils	posted	Message Posted
+forum_utils	feedbacklogin	You could post if you were logged in
+forum_utils	subject	Subject:
+forum_utils	message	Message:
+forum_utils	htmltag	HTML tags will display in your post as text
+forum_utils	postanon	You are posting anonymously because you are not
+forum_utils	loggedin	logged in
+forum_utils	postcomment	Post Comment
+forum_utils	anonymously	Anonymously
+forum_utils	couldpostif	You could post if you were
+forum_utils	reply	reply
 foundry	section	Foundry: $1
 foundry	title	Summary
 foundry_admin	section	Foundry: $1
@@ -225,6 +265,8 @@ menu	search	Search
 menu	site_status	Site Status
 menu	software_map	Software Map
 menu	top_projects	Top Projects
+menu	admin	Admin
+menu	submit	Submit
 my	about_blurb	Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.
 my	no_bookmarks	You currently do not have any bookmarks saved
 my	no_monitored_filemodules	<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp
@@ -254,6 +296,9 @@ new	title	New Releases
 news	section	Project: $1
 news	title	News
 news	choose	<P>Choose a News item and you can browse, search, and post messages.<P>
+news	nonews	No News Found
+news	nonewsfor	No News Found For $1
+news	noitems	No items were found
 news_admin	section	News
 news_admin	title	News Admin
 news_main	title	News
@@ -263,6 +308,7 @@ news_submit	title	Submit News for $1
 news_utils	nonews	No News Items Found
 news_utils	archive	News archive
 news_utils	submit	Submit News
+news_utils	readmore	<NOBR>Read More/Comment</NOBR>
 partners	about_blurb	<P>SourceForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
 people	about_blurb	<P>The $1 Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
 people	section	Project Help Wanted

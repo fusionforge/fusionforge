@@ -25,7 +25,7 @@ require_once('pre.php');
 require_once('www/news/news_utils.php');
 
 function forum_header($params) {
-	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$thread_id,$msg_id,$forum_id,$REQUEST_URI,$sys_datefmt,$et,$et_cookie,$sys_news_group;
+	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$thread_id,$msg_id,$forum_id,$REQUEST_URI,$sys_datefmt,$et,$et_cookie,$sys_news_group,$Language;
 
 	$params['group']=$group_id;
 	$params['toptab']='forums';
@@ -56,14 +56,14 @@ function forum_header($params) {
 			} else {
 				$HTML->header($params);
 				echo '
-					<H2>'.$GLOBALS['sys_name'].' <A HREF="/news/">News</A></H2><P>';
+					<H2>'.$GLOBALS['sys_name'].' <A HREF="/news/">'.$Language->getText('forum_utils','news').'</A></H2><P>';
 			}
 
 
 			echo '<TABLE><TR><TD VALIGN="TOP">';
 			if (!$result || db_numrows($result) < 1) {
 				echo '
-					<h3>Error - this news item was not found</h3>';
+					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
 			} else {
 				echo '
 				<B>Posted By:</B> '.user_getname( db_result($result,0,'submitted_by')).'<BR>
@@ -76,10 +76,12 @@ function forum_header($params) {
 			}
 			echo '</TD><TD VALIGN="TOP" WIDTH="35%">';
 			//echo $HTML->box1_top('Latest News',0,$GLOBALS['COLOR_LTBACK2']);
-			echo $HTML->box1_top('Latest News');
+			echo $HTML->box1_top($Language->getText('forum_utils','latest'));
 			echo news_show_latest($sys_news_group,5,false);
 			echo $HTML->box1_bottom();
 			echo '</TD></TR></TABLE>';
+		} else {
+			site_project_header($params);
 		}
 	} else {
 		//this is just a regular forum, not a news item
@@ -90,18 +92,18 @@ function forum_header($params) {
 		Show horizontal forum links
 	*/
 	if ($forum_id && $forum_name) {
-		echo '<P><H3>Discussion Forums: <A HREF="/forum/forum.php?forum_id='.$forum_id.'">'.$forum_name.'</A></H3>';
+		echo '<P><H3>'.$Language->getText('forum_utils','discussionforum').' <A HREF="/forum/forum.php?forum_id='.$forum_id.'">'.$forum_name.'</A></H3>';
 	}
 	echo '<P><B>';
 
 	if ($forum_id && user_isloggedin() ) {
 		echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'">' . 
-			html_image('images/ic/check.png','16','15',array()).' Monitor Forum</A> | '.
+			html_image('images/ic/check.png','16','15',array()).' '.$Language->getText('forum_utils','monitor').'</A> | '.
 			'<A HREF="/forum/save.php?forum_id='.$forum_id.'">';
-		echo  html_image('images/ic/save.png','24','24',array()) .' Save Place</A> | ';
+		echo  html_image('images/ic/save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</A> | ';
 	}
 
-	echo '  <A HREF="/forum/admin/?group_id='.$group_id.'">Admin</A></B>';
+	echo '  <A HREF="/forum/admin/?group_id='.$group_id.'">'.$Language->getText('forum_utils','admin').'</A></B>';
 	echo '<P>';
 }
 
@@ -122,7 +124,7 @@ function forum_footer($params) {
 }
 
 function forum_create_forum($group_id,$forum_name,$is_public=1,$create_default_message=1,$description='') {
-	global $feedback;
+	global $feedback,$Language;
 	/*
 		Adding forums to this group
 	*/
@@ -131,9 +133,9 @@ function forum_create_forum($group_id,$forum_name,$is_public=1,$create_default_m
 
 	$result=db_query($sql);
 	if (!$result) {
-		$feedback .= " Error Adding Forum ";
+		$feedback .= " ".$Language->getText('forum_utils','erroradd')." ";
 	} else {
-		$feedback .= " Forum Added ";
+		$feedback .= " ".$Language->getText('forum_utils','added')." ";
 	}
 	$forum_id=db_insertid($result,'forum_group_list','group_forum_id');
 
@@ -153,13 +155,14 @@ function make_links ($data="") {
 }
 
 function get_forum_name($id) {
+	global $Language;
 	/*
 		Takes an ID and returns the corresponding forum name
 	*/
 	$sql="SELECT forum_name FROM forum_group_list WHERE group_forum_id='$id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
-		return "Not Found";
+		return $Language->getText('forum_utils','notfound');
 	} else {
 		return db_result($result, 0, "forum_name");
 	}
@@ -173,7 +176,7 @@ function forum_show_a_nested_message ( &$result ) {
 		in the format appropriate for the nested messages
 
 	*/
-	global $sys_datefmt;
+	global $sys_datefmt,$Language;
 	/*
 		See if this message is new or not
 		If so, highlite it in bold
@@ -185,14 +188,14 @@ function forum_show_a_nested_message ( &$result ) {
 	$ret_val = '
 		<TABLE BORDER="0">
 			<TR>
-				<TD BGCOLOR="#DDDDDD" NOWRAP>By: <A HREF="/users/'.
+				<TD BGCOLOR="#DDDDDD" NOWRAP>'.$Language->getText('forum_utils','by').' <A HREF="/users/'.
 					$result['user_name'] .'/">'. 
 					$result['user_name'] .'</A>'.
 					' ( '. $result['realname'] . ' ) '.
 					'<BR><A HREF="/forum/message.php?msg_id='.
 					$result['msg_id'] .'">'.
 					html_image("images/msg.png","10","12",array("BORDER"=>"0")) .
-					$bold_begin.$result['subject'] .' [ reply ]'. $bold_end .'</A> &nbsp; '.
+					$bold_begin.$result['subject'] .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</A> &nbsp; '.
 					'<BR>'. date($sys_datefmt,$result['date']) .'
 				</TD>   
 			</TR>
@@ -249,7 +252,7 @@ function show_thread( $thread_id ) {
 
 		$et is whether or not the forum is "expanded" or in flat mode
 	*/
-	global $total_rows,$sys_datefmt,$is_followup_to,$subject,$forum_id,$current_message;
+	global $total_rows,$sys_datefmt,$is_followup_to,$subject,$forum_id,$current_message,$Language;
 
 	$sql="SELECT forum.group_forum_id,users.user_name,users.realname,forum.has_followups, ".
 		"users.user_id,forum.msg_id,forum.subject,forum.thread_id, ".
@@ -264,7 +267,7 @@ function show_thread( $thread_id ) {
 	$total_rows=0;
 
 	if (!$result || db_numrows($result) < 1) {
-		return 'Broken Thread';
+		return $Language->getText('forum_utils','brokenthread');
 	} else {
 		/*
 			Build associative array containing row information
@@ -277,9 +280,9 @@ function show_thread( $thread_id ) {
 			Build table header row
 		*/
 		$title_arr=array();
-		$title_arr[]='Thread';
-		$title_arr[]='Author';
-		$title_arr[]='Date';
+		$title_arr[]=$Language->getText('forum_utils','thread');
+		$title_arr[]=$Language->getText('forum_utils','author');
+		$title_arr[]=$Language->getText('forum_utils','date');
 
 		$ret_val .= html_build_list_table_top ($title_arr);
 
@@ -369,7 +372,7 @@ function show_submessages($msg_arr, $msg_id, $level) {
 }
 
 function get_next_thread_id() {
-	global $sys_database_type;
+	global $sys_database_type,$Language;
 
 	if ($sys_database_type=='mysql') {
 		/*
@@ -378,7 +381,7 @@ function get_next_thread_id() {
 		$result=db_query("INSERT INTO forum_thread_id VALUES ('')");
 
 		if (!$result) {
-			echo '<H1>Error!</H1>';
+			echo '<H1>'.$Language->getText('forum_utils','error').'</H1>';
 			echo db_error();
 			exit;
 		} else {
@@ -429,14 +432,14 @@ function get_forum_saved_date($forum_id) {
  *	added checks and tests to allow anonymous posting
  */
 function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum_id) {
-	global $feedback,$allow_anonymous;
+	global $feedback,$allow_anonymous,$Language;
 	if (user_isloggedin() || $allow_anonymous) {
 		if (!$group_forum_id) {
-			$feedback='Trying to post without a forum ID';
+			$feedback=$Language->getText('forum_utils','noid');
 			return false;
 		}
 		if (!$body || !$subject) {
-			$feedback='Must include a message body and subject';
+			$feedback=$Language->getText('forum_utils','mustinclude');
 			return false;
 		}
 		if (!user_isloggedin()) {
@@ -454,7 +457,7 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 
 		if (db_numrows($res3) > 0) {
 			//already posted this message
-			$feedback='You appear to be double-posting this message, since it has the same subject and followup information as a prior post.';
+			$feedback=$Language->getText('forum_utils','doublepost');
 			return false;
 		} else {
 			echo db_error();
@@ -464,7 +467,7 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 			$thread_id=get_next_thread_id();
 			$is_followup_to=0;
 			if (!$thread_id) {
-				$feedback .= ' Getting next thread_id failed ';
+				$feedback .= $Language->getText('forum_utils','nextfailed');
 				db_rollback();
 				return false;
 			}
@@ -489,7 +492,7 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 					$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' ".
 						"WHERE thread_id='$thread_id' AND is_followup_to='0'");
 					if (!$res4 || db_affected_rows($res4) < 1) {
-						$feedback='Couldn\'t Update Master Thread parent with current time';
+						$feedback=$Language->getText('forum_utils','errormaster');
 						db_rollback();
 						return false;
 					} else {
@@ -499,20 +502,20 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 						$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' ".
 							"WHERE msg_id='$is_followup_to'");
 						if (!$res3) {
-							$feedback='Could Not Update Parent';
+							$feedback=$Language->getText('forum_utils','errorparent');
 							db_rollback();
 							return false;
 						}
 					}
 				} else {
-					$feedback='Trying to followup to a message that doesn\'t exist.';
+					$feedback=$Language->getText('forum_utils','errorfollowup');
 					db_rollback();
 					return false;
 				}
 			} else {
 				//should never happen except with shoddy 
 				//browsers or mucking with the HTML form
-				$feedback='No followup ID present when trying to post to an existing thread.';
+				$feedback=$Language->getText('forum_utils','errorfollowup2');
 				db_rollback();
 				return false;
 			}
@@ -524,7 +527,7 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 		$result=db_query($sql);
 
 		if (!$result) {
-			$feedback .= ' Posting Failed '.db_error();
+			$feedback .= ' '.$Language->getText('forum_utils','errorfollowup2').' '.db_error();
 			db_rollback();
 			return false;
 		} else {
@@ -532,18 +535,18 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 
 			if (!$msg_id) {
 				db_rollback();
-				$feedback .= "Failed to get insertid()";
+				$feedback .= $Language->getText('forum_utils','errorinsert');
 				return false;
 			} else {
 				handle_monitoring($group_forum_id,$msg_id);
 				db_commit();
-				$feedback .= ' Message Posted ';
+				$feedback .= ' '.$Language->getText('forum_utils','posted').' ';
 				return true;
 			}
 		}
 	} else {
 		$feedback .= '
-			<H3>You could post if you were logged in</H3>';
+			<H3>'.$Language->getText('forum_utils','feedbacklogin').'</H3>';
 		return false;
 	}
 }
@@ -553,7 +556,7 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
  *	added checks and tests to allow anonymous posting
  */
 function show_post_form($forum_id, $thread_id=0, $is_followup_to=0, $subject="") {
-	global $allow_anonymous,$REQUEST_URI;
+	global $allow_anonymous,$REQUEST_URI,$Language;
 
 	if (user_isloggedin() || $allow_anonymous) {
 		if ($subject) {
@@ -573,23 +576,22 @@ function show_post_form($forum_id, $thread_id=0, $is_followup_to=0, $subject="")
 		<INPUT TYPE="HIDDEN" NAME="is_followup_to" VALUE="<?php echo $is_followup_to; ?>">
 		<TABLE>
 		<TR>
-			<TD><B>Subject:</B><BR>
+			<TD><B><?php echo $Language->getText('forum_utils','subject'); ?></B><BR>
 			<INPUT TYPE="TEXT" NAME="subject" VALUE="<?php echo $subject; ?>" SIZE="45" MAXLENGTH="45">
 		</TD></TR>
-		<TR><TD><B>Message:</B><BR>
+		<TR><TD><B><?php echo $Language->getText('forum_utils','message'); ?></B><BR>
 		<TEXTAREA NAME="body" VALUE="" ROWS="10" COLS="50" WRAP="SOFT"></TEXTAREA>
 		</TD></TR>
 		<TR><TD ALIGN="MIDDLE">
-		<B><FONT COLOR="RED">HTML tags will display in your post as text</FONT></B>
+		<B><FONT COLOR="RED"><?php echo $Language->getText('forum_utils','htmltag'); ?></FONT></B>
 		<P>
 		<?php 
 		if (!user_isloggedin()) {
-			echo '<B><FONT COLOR="RED">You are posting anonymously '.
-			'because you are not <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">[logged in]</A></FONT></B>';
+			echo '<B><FONT COLOR="RED">'.$Language->getText('forum_utils','postanon').' <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</A></FONT></B>';
 		} 
 		?>
 		<BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Post Comment<?php echo ((!user_isloggedin())?' Anonymously':''); ?>">
+		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!user_isloggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>">
 		</TD></TR></TABLE>
 		</FORM>
 		</CENTER>
@@ -597,8 +599,8 @@ function show_post_form($forum_id, $thread_id=0, $is_followup_to=0, $subject="")
 
 	} else {
 		echo "<CENTER>";
-		echo '<H3><FONT COLOR="RED">You could post if you were '.
-			'<A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">[logged in]</A></FONT></H3>';
+		echo '<H3><FONT COLOR="RED">'.$Language->getText('forum_utils','couldpostif').' '.
+			'<A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</A></FONT></H3>';
 		echo "</CENTER>";
 	}
 

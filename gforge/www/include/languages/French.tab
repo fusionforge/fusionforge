@@ -32,8 +32,8 @@ account_change_email	message	Vous avez demandé un changement d'adresse e-mail po
 account_change_email	section	Préférences de votre compte
 account_change_email	subject	Sourceforge -- vérification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email	mailsent	<P>Un courriel a été envoyé à votre nouvelle adresses. Suivez les instructions du courriel pour terminer le changement d'adresse. <P><A href="/">[ Home ]</A> 
-account_change_email	desc	<P>Changer votre adresse de courriel va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
+account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Home ]</A> 
+account_change_email	desc	<P>Changer votre adresse de courrier électronique va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
 account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
 account_change_pw	section	Préférences de votre compte
 account_change_pw	title	Changement de mot de passe
@@ -57,11 +57,11 @@ account_login	newaccount	[Nouveau Compte]
 account_lostpw	message	  Quelqu'un, probablement vous, a demandé un changement de mot de passe par\nvérification d'adresse e-mail.  Si ce n'était pas vous, ignorez ce message et\nrien ne se passera.\n\n  Si vous avez demandé cette vérification, visitez la page à l'adresse suivante\npour que votre demande soit prise en compte :\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- l'équipe Sourceforge
 account_lostpw	subject	$1 Vérification
 account_lostpw	title	Perdu votre mot de passe ?
-account_lostpw	notify	<P>Un courriel a été envoyé à l'adresse enregistrée. Suivez les instructions du courriel pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'acceuil ]</A>
-account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Cela compromet la sécurité de votre compte, de vos projets, et de ce site. <P>Cliquez sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous vous enverra un lien à l'adresse de courrier enregistrée. Dans ce lien il y a une clé de Hachage de 128 bits pour votre compte. Suivre le lien vous autorisera à changer votre mot de passe en ligne et à vous connecter.
+account_lostpw	notify	<P>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions du courrier électronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'acceuil ]</A>
+account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Cela compromet la sécurité de votre compte, de vos projets, et de ce site. <P>Cliquez sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous vous enverra un lien à l'adresse de courrier électronique enregistrée. Dans ce lien il y a une clé de Hachage de 128 bits pour votre compte. Suivre le lien vous autorisera à changer votre mot de passe en ligne et à vous connecter.
 account_lostpw	sendhash	Envoyer une clé de Hachage pour mot de passe perdu
 account_register	title	Enregistrement d'un nouvel utilisateur Sourceforge
-account_register	congrat	<p>Congratulations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
+account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
 account_register	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préference avec SSL 128-bit ou utiliser Netscape 4.7 ou supérieur</FONT></H2>
 account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
 account_register	loginname	Nom de login (en minuscule) *:
@@ -70,9 +70,9 @@ account_register	password2	Mot de passe (vérification) *:
 account_register	realname	Nom complet *:
 account_register	language	Langue:
 account_register	timezone	Fuseau horaire:
-account_register	emailaddr	Adresse de courriel *:<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
-account_register	siteupdate	Recevoir du courrier à propos des mises à jour du site<I>(Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
-account_register	communitymail	Recevoir du courrier supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
+account_register	emailaddr	Adresse de courrier électronique *:<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
+account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I>(Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
+account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
 account_register	mandatory	Les champs avec * sont obligatoires.
 account_register	register	S'enregistrer
 account_register	err_username	Vous devez fournir un nom d'utilisateur
@@ -89,6 +89,9 @@ account_unsubscribe	all_mailings	toutes les notifications concernant Sourceforge
 account_unsubscribe	site_mailings	les messages concernant le site Sourceforge
 account_verify	title	Vérification de votre compte Sourceforge
 account_verify	verify_blurb	<p>Pour valider votre enregistrement, connectez-vous maintenant.  Votre compte sera alors activé pour les connexions ultérieures.
+account_verify	loginname	Nom de login:
+account_verify	password	Mot de passe:
+account_verify	login		Connexion
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
@@ -131,6 +134,43 @@ forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
 forum_message	section	Forums
 forum_message	title	Affichage d'un message
+forum_utils	news	Nouveautés
+forum_utils	discussionforum	Forums de discution:
+forum_utils	nonewsitem	Erreur - Cette nouveauté n'a pas été trouvée
+forum_utils	latest	Dernières Nouveautés
+forum_utils	monitor	Surveiller le forum
+forum_utils	admin	Gérer
+forum_utils	saveplace	Sauvegarder cet endroit
+forum_utils	erroradd	Erreur dans l'ajout du Forum
+forum_utils	added	Forum ajouté
+forum_utils	notfound	Non trouvé
+forum_utils	by	Par:
+forum_utils	brokenthread	Thread cassé
+forum_utils	thread	Thread
+forum_utils	author	Auteur
+forum_utils	date	Date
+forum_utils	error	Erreur!
+forum_utils	noid	Envoi sans identifiant de forum
+forum_utils	mustinclude	Doit inclure un corps et un entête de message
+forum_utils	doublepost	Il semble que ce message soit un doublon compte tenu du fait qu'il a le même sujet et les mêmes informations de suivi qu'un précédent message.
+forum_utils	nextfailed	Impossible de trouver le thread_id suivant
+forum_utils	errormaster	Impossible de mettre à jour le thread maître avec l'heure courante
+forum_utils	errorparent	Impossible de mettre à jour le parent
+forum_utils	errorfollowup	Essai de suivi d'un message qui n'existe pas.
+forum_utils	errorfollowup2	Pas d'identifiant de suivi
+forum_utils	errorpost	L'envoi a échoué
+forum_utils	errorinsert	Impossible d'obtenir insertid()
+forum_utils	posted	Message envoyé
+forum_utils	feedbacklogin	Vous pourriez répondre si vous étiez connecté
+forum_utils	subject	Sujet:
+forum_utils	message	Message:
+forum_utils	htmltag	les tags HTML s'afficheront comme du texte dans votre envoi
+forum_utils	postanon	Vous faites un envoi anonyme car vous n'êtes pas
+forum_utils	loggedin	Authentifié
+forum_utils	postcomment	Envoyer un commentaire
+forum_utils	anonymously	Anonymement
+forum_utils	couldpostif	Vous pourriez répondre si vous êtiez
+forum_utils	reply	répondre
 foundry	section	Fonderie : $1
 foundry	title	Résumé
 foundry_admin	section	Fonderie : $1
@@ -230,6 +270,8 @@ menu	search	Recherche
 menu	site_status	État du site
 menu	software_map	Recherche thématique
 menu	top_projects	Meilleurs projets
+menu	admin	Gérer
+menu	submit	Proposer
 my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés, ainsi que la liste des groupes dont vous faites partie.
 my	no_bookmarks	Vous n'avez pas encore de favoris
 my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de téléchargement.<p>Vous pouvez déclencher la surveillance de fichiers en visitant la page de résumé d'un projet et en cliquant sur le lien dans la section « Fichiers ».<br>
@@ -258,6 +300,10 @@ my_diary	title	Journal et notes
 new	title	Sorties récentes
 news	section	Projet : $1
 news	title	Nouveautés
+news	choose	<P>Choisissez une nouveauté et vous pouvez visualiser, chercher et poster des messages.<P>
+news	nonews	Aucune nouveauté
+news	nonewsfor	Aucune nouveauté trouvée pour: $1
+news	noitems	Aucun enregistrement trouvé
 news_admin	section	Nouveautés
 news_admin	title	Administration des nouveautés
 news_main	title	Nouveautés de Sourceforge
@@ -267,6 +313,7 @@ news_submit	title	Soumettre une nouveauté pour $1
 news_utils	nonews	<H3>Pas de nouveauté<H3>
 news_utils	archive	Archive des nouveautés
 news_utils	submit	Proposer une nouveauté
+news_utils	readmore	<NOBR>Lire plus/Commenter</NOBR>
 partners	about_blurb	<p>Sourceforge est fier d'être partenaire avec <a href="http://www.cosource.com/">Cosource.com</a>.  Cosource.com est un site web collaboratif d'enchères inversées, permettant aux clients et aux développeurs de logiciels libres de travailler ensemble afin de financer les solutions logicielles innovantes.
 people	about_blurb	<p>Le système « Besoin d'aide » de Sourceforge est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus, sauf si l'émetteur décide de les fermer.  Les administrateurs de projet peuvent toujours re-proposer des postes si les propositions précédentes ont expiré.<p>Naviguez dans le menu des catégories pour trouver les projets qui ont besoin de vous.<p>Si vous êtes administrateur d'un projet, connectez-vous et proposez vos offres de postes par la page d'administration de votre projet.<p>Pour proposer de nouvelles catégories de postes, soumettez une requête par le gestionnaire de support technique.
 people	section	Besoin d'aide

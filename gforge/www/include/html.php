@@ -525,6 +525,28 @@ function site_project_header($params) {
 }
 
 /**
+ *	site_news_menu() - everything required to handle 
+ *	security and state checks for a project news menu
+ *
+ *	@param params array() must contain $toptab and $group
+ */
+function site_news_menu($params) {
+	GLOBAL $HTML;
+	echo $HTML->news_menu($params);
+}
+
+/**
+ *	site_project_menu() - everything required to handle 
+ *	security and state checks for a project admin menu
+ *
+ *	@param params array() must contain $toptab and $group
+ */
+function site_project_menu($params) {
+	GLOBAL $HTML;
+	echo $HTML->admin_menu($params);
+}
+
+/**
  *	site_project_footer() - currently a simple shim 
  *	that should be on every project page,  rather than 
  *	a direct call to site_footer() or theme_footer()

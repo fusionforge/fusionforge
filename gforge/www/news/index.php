@@ -38,13 +38,13 @@ if ($rows>$limit) {
 }
 
 if ($rows < 1) {
-	echo '<H2>No News Found';
 	if ($group_id) {
-		echo ' For '.group_getname($group_id);
+		echo '<H2>'.$Language->getText('news', 'nonewsfor', group_getname($group_id)).'</H2>';
+	} else {
+		echo '<H2>'.$Language->getText('news', 'nonews').'</H2>';
 	}
-	echo '</H2>';
 	echo '
-		<P>No items were found';
+		<P>' . $Language->getText('news', 'noitems');;
 	echo db_error();
 } else {
 	echo '<table WIDTH="100%" border=0>

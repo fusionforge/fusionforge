@@ -24,41 +24,7 @@ function project_admin_header($params) {
 	$params['toptab']='admin';
 	$params['group']=$group_id;
 	site_project_header($params);
-
-	$project =& group_get_object($group_id);
-	exit_assert_object($project,'Group');
-
-	$perm =& $project->getPermission( session_get_user() );
-	exit_assert_object($perm,'Permission');
-
-	$is_admin=$perm->isAdmin();
-
-	echo '
-	<P><B>
-	<A HREF="/project/admin/?group_id='.$group_id.'">Admin</A> | ';
-
-	// We should show most of the admin menu only to the admins
-	if ($is_admin) {
-		echo '<A HREF="/project/admin/userperms.php?group_id='.$group_id.'">User Permissions</A> | 
-		<A HREF="/project/admin/editgroupinfo.php?group_id='.$group_id.'">Edit Public Info</A> |
-		<A HREF="/project/admin/history.php?group_id='.$group_id.'">Project History</A> |
-		<A HREF="/project/admin/vhost.php?group_id='.$group_id.'">VHOSTs</A> |
-		<br>';
-	}
-
-	echo '
-	<A HREF="/project/admin/editpackages.php?group_id='.$group_id.'">Edit/Release Files</A>';
-
-	// We should show most of the admin menu only to the admins
-	if ($is_admin) {
-		echo '
-		| <A HREF="/people/createjob.php?group_id='.$group_id.'">Post Jobs</A> | 
-		<A HREF="/people/?group_id='.$group_id.'">Edit Jobs</A> |
-		<A HREF="/project/admin/editimages.php?group_id='.$group_id.'">Edit Multimedia Data</A> | 
-		<A HREF="/project/admin/database.php?group_id='.$group_id.'">Database Admin</A>
-		</B>
-		<P>';
-	}
+	site_project_menu($params);
 }
 
 /*
