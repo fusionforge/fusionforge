@@ -1,12 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: views_graph.png,v 1.2 2000/08/31 23:15:04 msnelham Exp $
-require('pre.php');
-require("graph_lib.php");
+/**
+  *
+  * SourceForge Sitewide Statistics - stats common module
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: change_email.php,v 1.12 2001/05/13 17:53:29 pfalcon Exp $
+  *
+  */
+
+
+require_once('pre.php');
+require_once('graph_lib.php');
 
    // require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );
@@ -20,15 +27,29 @@ if ( ! $year ) {
 	$year = gmstrftime("%Y", time() );
 }
 
-$sql = "SELECT month,day,site_views,subdomain_views FROM stats_site ORDER BY month ASC, day ASC";
-$res = db_query( $sql );
+if ($monthly) {
+
+	$sql = "SELECT month,site_page_views AS site_views,subdomain_views 
+		FROM stats_site_months ORDER BY month ASC";
+	$grouping='Months';
+
+} else {
+
+	$sql = "SELECT month,day,site_page_views AS site_views,subdomain_views 
+		FROM stats_site_last_30 ORDER BY month ASC, day ASC";
+	$grouping='Days';
+
+}
+
+$res = db_query($sql, -1, 0, SYS_DB_STATS);
+//echo db_error();
 
 $i = 0;
 $xdata = array();
 $ydata = array();
 while ( $row = db_fetch_array($res) ) {
         $xdata[$i]          = $i;
-	$xlabel[$i]         = (substr($row['month'],4) + 1 - 1) . "/" . $row['day'];
+	$xlabel[$i]         = $row['month'] . (($row['day']) ? "/" . $row['day'] : '');
         $ydata1[$i]         = $row["site_views"] + $row["subdomain_views"];
         ++$i;
 }
@@ -40,7 +61,7 @@ $data1 = $graph->AddData( $xdata, $ydata1, $xlabel );
 $graph->DrawGrid('gray');
 $graph->LineGraph($data1,'red');
 $graph->SetTitle( "Sourceforge Page Views" );
-$graph->SetSubTitle("Page Views (RED) since beginning of time ( $i days )");
+$graph->SetSubTitle("Total Page Views (RED) ( $i $grouping )");
 $graph->SetxTitle('Date');
 $graph->SetyTitle('Views (RED)');
 $graph->DrawAxis();

@@ -1,42 +1,53 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Site Admin main page
+  *
+  * This pages lists all global administration facilities for the
+  * site, including user/group properties editing, maintanance of
+  * site meta-information (Trove maps, metadata for file releases),
+  * etc.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";
-require($DOCUMENT_ROOT.'/admin/admin_utils.php');
+
+require_once('pre.php');
+require_once('www/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-site_admin_header(array('title'=>$GLOBALS['system_name']." Admin"));
+site_admin_header(array('title'=>"Site Admin"));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
 
+
 ?>
  
-<p>Administrative Functions
 <p><i><b>Warning!</b> These functions currently have minimal error checking,
 if any. They are fine to play with but may not act as expected if you leave
 fields blank, etc... Also, navigating the admin functions with the 
 <b>back</b> button is highly unadvised.</i>
 
-<p><B>User/Group/Category Maintenance</B>
+<p><B>User/Group Maintenance</B>
 <ul>
 <li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;
 <li>Display Users Beginning with : 
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo "<a href=\"userlist.php?user_name_search=$abc_array[$i]\">$abc_array[$i]</a>|";
+		echo "<a href=\"search.php?usersearch=1&search=$abc_array[$i]%\">$abc_array[$i]</a>|";
 	}
 ?>
 <br>
-Search <i>(email,username,realname,userid)</i>:
-<br>
 <form name="usersrch" action="search.php" method="POST">
+Search <i>(userid, username, realname, email)</i>:
   <input type="text" name="search">
+  <input type="hidden" name="substr" value="1">
   <input type="hidden" name="usersearch" value="1">
   <input type="submit" value="get">
 </form>
@@ -46,14 +57,13 @@ Search <i>(email,username,realname,userid)</i>:
 <li>Display Groups Beginning with : 
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo "<a href=\"grouplist.php?group_name_search=$abc_array[$i]\">$abc_array[$i]</a>|";
+		echo "<a href=\"search.php?groupsearch=1&search=$abc_array[$i]%\">$abc_array[$i]</a>|";
 	}
 ?>
-<br>
-Search <i>(groupid,groupunixname,groupname)</i>:
-<br>
 <form name="gpsrch" action="search.php" method="POST">
+Search <i>(groupid, group unix name, full name)</i>:
   <input type="text" name="search">
+  <input type="hidden" name="substr" value="1">
   <input type="hidden" name="groupsearch" value="1">
   <input type="submit" value="get">
 </form>
@@ -61,9 +71,10 @@ Search <i>(groupid,groupunixname,groupname)</i>:
 <p>
 
 
-<LI>Groups in <a href="grouplist.php?status=I"><B>I</B> (incomplete) Status</A>
-<LI>Groups in <a href="approve-pending.php"><B>P</B> (pending) Status</A> <i>(New Project Approval)</i>
-<LI>Groups in <a href="grouplist.php?status=D"><B>D</B> (deleted) Status</A>
+<LI>Groups with <a href="approve-pending.php"><B>P</B> (pending) Status</A> <i>(New Project Approval)</i>
+<LI>Groups with <a href="search.php?groupsearch=1&search=%&status=I"><B>I</B> (incomplete) Status</A>
+<LI>Groups with <a href="search.php?groupsearch=1&search=%&status=D"><B>D</B> (deleted) Status</A>
+<LI><a href="search.php?groupsearch=1&search=%&is_public=0">Private Groups </A>
 </ul>
 
 <p><b>Trove</b>
@@ -72,34 +83,41 @@ Search <i>(groupid,groupunixname,groupname)</i>:
 <li><a href="trove/trove_cat_add.php">Add to the Trove Map</a>
 </ul>
 
-<P><B>Statistics</B>
-<ul>
-<li><a href="lastlogins.php">View Most Recent Logins</A>
-</ul>
-
 <P><B>Site Utilities</B>
 <UL>
 <LI><A href="massmail.php">Mail Engine for SourceForge Subscribers (MESS)</A>
-<LI><A HREF="add_language.php">Add Supported Language</A>
+<LI><A href="unsubscribe.php">SourceForge Site Mailings Maintanance</A>
+<LI><A HREF="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</A>
+<LI><A HREF="edit_frs_filetype.php">Add, Delete, or Edit File Types</A>
+<LI><A HREF="edit_frs_processor.php">Add, Delete, or Edit Processors</A>
 </UL>
 
-<P><B>Site Stats</B>
+<P><B>Global Admin Tools / Mass Insert Tools</B>
+<UL>
+<LI><A HREF="vhost.php">Virtual Host Administration Tool</A>
+<LI><A HREF="database.php">Project Database Administration</A>
+</UL>
+
+<P><B>Quick Site Statistics</B></P>
+
 <?php
-	$res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
-	$row = db_fetch_array($res);
-	print "<P>Registered active site users: <B>$row[count]</B>";
 
-	$res=db_query("SELECT count(*) AS count FROM groups");
-	$row = db_fetch_array($res);
-	print "<BR>Registered projects: <B>$row[count]</B>";
+$res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
+$row = db_fetch_array($res);
+print "<P>Active site users: <B>$row[count]</B>";
 
-	$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
-	$row = db_fetch_array($res);
-	print "<BR>Registered/hosted projects: <B>$row[count]</B>";
+$res=db_query("SELECT count(*) AS count FROM groups");
+$row = db_fetch_array($res);
+print "<BR>Registered projects: <B>$row[count]</B>";
 
-	$res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
-	$row = db_fetch_array($res);
-	print "<BR>Pending projects: <B>$row[count]</B>";
+$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
+$row = db_fetch_array($res);
+print "<BR>Active projects: <B>$row[count]</B>";
+
+$res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
+$row = db_fetch_array($res);
+print "<BR>Pending projects: <B>$row[count]</B>";
+
 site_admin_footer(array());
 
 ?>

@@ -1,22 +1,49 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
+/**
+  *
+  * Site Admin generic user/group search page
+  *
+  * This is the single page for searching/selection of users/groups for
+  * Site Admin. Currently, it supports querying by (sub)string match in
+  * string user/group properties (names, fullnames, email) and status.
+  * If new search criteria will be required, they should be added here,
+  * not any other (new) page.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";
+
+require_once('pre.php');
+require_once('www/admin/admin_utils.php');
+
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-$HTML->header(array('title'=>$GLOBALS['system_name']." Admin"));
+site_admin_header(array('title'=>'Admin Search Results'));
 
-?>
+function format_name($name, $status) {
+	if ($status == 'D') {
+		return "<b><strike>$name</strike></b>";
+	} else if ($status == 'S') {
+		return "<b><u>$name</u></b>";
+	} else if ($status == 'H') {
+		return "<b><u>$name</u></b>";
+	} else if ($status == 'P') {
+		return "<b><i>$name</i></b>";
+	} else if ($status == 'I') {
+		return "<b><i>$name</i></b>";
+	}
 
-<p>Administrative Functions
+	return $name;
+}
 
-<p><B>User/Group/Category Maintenance</B>
-<br>
-<b> Search Criteria: </b> <?php print " \"%$search%\" <p>"; 
+/*
+	Main code
+*/
 
 if ($search == "") {
 
@@ -24,22 +51,51 @@ if ($search == "") {
 
 }
 
+if ($substr) {
+	$search = "%$search%";
+}
+
 
 if ($usersearch) {
 
-	$sql = "select distinct * from users where user_id ilike '%$search%' or user_name ilike '%$search%' or email ilike '%$search%' or realname ilike '%$search%'";
-	$result = db_query($sql); 
+	$result = db_query("
+	    SELECT DISTINCT * 
+	    FROM users
+	    WHERE user_id ILIKE '$search'
+	    OR user_name ILIKE '%$search%'
+	    OR email ILIKE '%$search%'
+	    OR realname ILIKE '%$search%'
+	"); 
+
+	print '<p><b>User search with criteria "<i>'.$search.'</i>": '
+	      .db_numrows($result).' matches.</b></p>';
+
 	if (db_numrows($result) < 1) {
-		print "No matches.<p><a href=\"/admin/\">Back</a>";
+		echo db_error();
+	} else {
 
-	}
-	else {
 
-		print "<table border=\"1\">";
-		print "<tr><th>UserName</th><th>User's Name</th></tr>\n\n";
+		$title=array();
+		$title[]='ID';
+		$title[]='Username';
+		$title[]='Real Name';
+		$title[]='Email';
+		$title[]='Member since';
+		$title[]='Status (Web/Unix)';
+					 
+		echo html_build_list_table_top($title);
 
 		while ($row = db_fetch_array($result)) {
-			print "<tr><td><a href=\"usergroup.php?user_id=$row[user_id]\">$row[user_name]</a></td><td>$row[realname]</td></tr>\n"; 
+			print '
+				<tr bgcolor="'.html_get_alt_row_color($i++).'">
+				<td><a href="useredit.php?user_id='.$row['user_id'].'">'.$row['user_id'].'</a></td>
+				<td>'.format_name($row['user_name'], $row['status']).'</td>
+				<td>'.$row['realname'].'</td>
+				<td>'.$row['email'].'</td>
+				<td>'.date($sys_datefmt, $row['add_date']).'</td>
+				<td align="center">'.format_name($row['status'].'/'.$row['unix_status'], $row['status']).'</td>
+				</tr>
+			'; 
 		}
 		print "</table>";
 
@@ -49,20 +105,59 @@ if ($usersearch) {
 
 if ($groupsearch) {
 
-	$sql = "select distinct * from groups where group_id ilike '%$search%' or unix_group_name ilike '%$search%' or group_name ilike '%$search%'";
-	$result = db_query($sql); 
+	if ($status) {
+		$crit_sql  .= " AND status='$status'";
+		$crit_desc .= " status=$status";
+	}
+	if (isset($is_public)) {
+		$crit_sql  .= " AND is_public='$is_public'";
+		$crit_desc .= " is_public=$is_public";
+	}
+
+	$result = db_query("
+		SELECT DISTINCT *
+		FROM groups
+		WHERE (group_id ILIKE '%$search%'
+		OR unix_group_name ILIKE '%$search%'
+		OR group_name ILIKE '%$search%')
+		$crit_sql
+	"); 
+
+	if ($crit_desc) {
+		$crit_desc = "($crit_desc )";
+	}
+	print '<p><b>Group search with criteria "<i>'.$search.'</i>" '.$crit_desc.': '
+	      .db_numrows($result).' matches.</b></p>';
 
 	if (db_numrows($result) < 1) {
+		echo db_error();
+	} else {
 
-		print "No matches.<p><a href=\"/admin/\">Back</a>";
+		$title=array();
+		$title[]='ID';
+		$title[]='Unix Name';
+		$title[]='Full Name';
+		$title[]='Registered';
+		$title[]='Status';
 
-	}
-	else {
+		echo html_build_list_table_top($title);
 
-		print "<table border=\"1\">";
-		print "<tr><th>GroupUnixName</th><th>Group's Name</th></tr>\n\n";
 		while ($row = db_fetch_array($result)) {
-			print "<tr><td><a href=\"groupedit.php?group_id=$row[group_id]\">$row[unix_group_name]</a></td><td>$row[group_name]</td></tr>\n";
+
+			$extra_status = "";
+			if (!$row['is_public']) {
+				$extra_status = "/PRV";
+			}
+			
+			print '
+				<tr bgcolor="'.html_get_alt_row_color($i++).'">
+				<td><a href="groupedit.php?group_id='.$row['group_id'].'">'.$row['group_id'].'</a></td>
+				<td>'.format_name($row['unix_group_name'], $row['status']).'</td>
+				<td>'.$row['group_name'].'</td>
+				<td>'.date($sys_datefmt, $row['register_time']).'</td>
+				<td align="center">'.format_name($row['status'].$extra_status, $row['status']).'</td>
+				</tr>
+			';
 					
 		}
 		
@@ -73,6 +168,6 @@ if ($groupsearch) {
 
 } //end if($groupsearch)
 
+site_admin_footer(array());
 
-$HTML->footer(array());
 ?>

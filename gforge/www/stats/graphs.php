@@ -1,17 +1,24 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$ 
-require('pre.php');
-require('site_stats_utils.php');
+/**
+  *
+  * SourceForge Sitewide Statistics
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-   // require you to be a member of the sfstats group (group_id = 11084)
+
+require_once('pre.php');
+require_once('site_stats_utils.php');
+
+// require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>"SourceForge Site Statistics "));
+$HTML->header(array('title'=>"SourceForge Site Statistics"));
 
 //
 // BEGIN PAGE CONTENT CODE
@@ -35,18 +42,15 @@ print '<font size="+1"><b>Sitewide Statistics Graphs</b></font><BR>' . "\n";
 
 <HR>
 
+<BR><BR>
+<IMG SRC="views_graph.png">
+<BR><BR>
+<IMG SRC="views_graph.png?monthly=1">
+<BR><BR>
+<IMG SRC="users_graph.png">
+<BR><BR>
+</DIV>
+
 <?php
-
-print '<BR><BR>' . "\n";
-print '<IMG SRC="' . 'views_graph.png">' . "\n";
-print '<BR><BR>' . "\n";
-print '<IMG SRC="u' . 'users_graph.png">' . "\n";
-print '<BR><BR>' . "\n";
-print '</DIV>' . "\n";
-
-//
-// END PAGE CONTENT CODE
-//
-
 $HTML->footer( array() );
 ?>

@@ -1,93 +1,84 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Site Admin page for approving/rejecting new projects
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');	 
-require ('vars.php');
-require ('account.php');
-require ('proj_email.php');
-require ('canned_responses.php');
-require($DOCUMENT_ROOT.'/admin/admin_utils.php');
-require($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
-global $feedback;
+
+// Show no more pending projects per page than specified here
+$LIMIT = 50;
+
+require_once('pre.php');	 
+require_once('common/include/vars.php');
+require_once('common/include/account.php');
+require_once('www/include/proj_email.php');
+require_once('www/include/canned_responses.php');
+require_once('www/admin/admin_utils.php');
+require_once('www/project/admin/project_admin_utils.php');
+require_once('common/tracker/ArtifactTypes.class');
+require_once('www/forum/forum_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 function activate_group($group_id) {
 	global $feedback;
-	//echo("activate_group($group_id)<br>");	
 
-	if (sf_ldap_create_group($group_id,0)) {
-		db_query("UPDATE groups ".
-		"SET status='A' ".
-		"WHERE group_id=$group_id");
+	$group =& group_get_object($group_id);
 
-		/*
-			Make founding admin be an active member of the project
-		*/
-		 
-		$admin_res=db_query("SELECT * ".
-			"FROM users,user_group ".
-			"WHERE user_group.group_id=$group_id ".
-			"AND user_group.admin_flags='A' ".
-			"AND users.user_id=user_group.user_id ");
-
-		if (db_numrows($admin_res) > 0) {
-			$group=&group_get_object($group_id);
-
-//
-//	user_get_object should really have a valid user_id passed in
-//	or you are defeating the purpose of the object pooling
-//
-			$admin=&user_get_object(db_result($admin_res,0,'user_id'),$admin_res);
-
-			if ($group->addUser($admin->getUnixName())) {
-				/*
-					Now send the project approval emails
-				*/
-				group_add_history ('approved','x',$group_id);
-				send_new_project_email($group_id);
-				usleep(250000); // TODO: This is dirty. If sendmail required pause, let send_new... handle it
-			} else {
-				$feedback=$group->getErrorMessage();
-			}
-		} else {
-			echo db_error();
-		}
-	} else {
-		/* There was error creating LDAP entry */
-		group_add_history ('ldap:',sf_ldap_get_error_msg(),$group_id);
+	if (!$group || !is_object($group)) {
+		$feedback .= 'Error creating group object<br> ';
+		return false;
+	} else if ($group->isError()) {
+		$feedback .= $group->getErrorMessage();
+		return false;
 	}
+
+	$feedback .= '<BR>Approving Group: '.$group->getUnixName().' ';
+
+	if (!$group->approve(session_get_user())) {
+		$feedback .= $group->getErrorMessage();
+		return false;
+	}
+	
+	return true;
 }
 
-// group public choice
 if ($action=='activate') {
-	/*
-		update the project flag to active
-	*/
 
-	$groups=explode(',',$list_of_groups);
-	array_walk($groups,'activate_group');
+	$groups=explode(',', $list_of_groups);
+	array_walk($groups, 'activate_group');
 
 } else if ($action=='delete') {
-	group_add_history ('deleted','x',$group_id);
-	db_query("UPDATE groups ".
-		 "SET status='D' ".
-		 "WHERE group_id='$group_id'");
+
+	$group =& group_get_object($group_id);
+	exit_assert_object($group, 'Group');
+
+	if (!$group->setStatus(session_get_user(), 'D')) {
+		exit_error(
+			'Error during group rejection',
+			$this->getErrorMessage()
+		);
+	}
+
+	$group->addHistory('rejected', 'x');
 
 	// Determine whether to send a canned or custom rejection letter and send it
 	if( $response_id == 100 ) {
-		send_project_rejection($group_id, 0, $response_text);
+
+                $group->sendRejectionEmail(0, $response_text);
 
 		if( $add_to_can ) {
 			add_canned_response($response_title, $response_text);
 		}
 	} else {
-		send_project_rejection($group_id, $response_id);
+		$group->sendRejectionEmail($response_id);
 	}
 }
 
@@ -95,13 +86,21 @@ if ($action=='activate') {
 site_admin_header(array('title'=>'Approving Pending Projects'));
 
 // get current information
-$res_grp = db_query("SELECT * FROM groups WHERE status='P'");
+$res_grp = db_query("SELECT * FROM groups WHERE status='P'", $LIMIT);
 
-if (db_numrows($res_grp) < 1) {
+$rows = db_numrows($res_grp);
+
+if ($rows < 1) {
 	print "<h1>None Found</h1>";
 	print "<p>No Pending Projects to Approve</p>";
 	site_admin_footer(array());
 	exit;
+}
+
+if ($rows > $LIMIT) {
+	print "<p>Pending projects: $LIMIT+ ($LIMIT shown)</p>";
+} else {
+	print "<p>Pending projects: $rows</p>";
 }
 
 while ($row_grp = db_fetch_array($res_grp)) {
@@ -131,14 +130,14 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<INPUT TYPE="HIDDEN" NAME="action" VALUE="delete">
 	<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php print $row_grp['group_id']; ?>">
 	Canned responses<br>
-<?php print get_canned_responses(); ?>
+	<?php print get_canned_responses(); ?> <a href="responses_admin.php">(manage responses)</a>
 	<br><br>
-	Custom response tilte and text<br>
+	Custom response title and text<br>
 	<input type="text" name="response_title" size="30" max="25"><br>
 	<textarea name="response_text" rows="10" cols="50"></textarea>
-	<input type="checkbox" name="add_to_can" value="yes">Add this custom response to to canned responses
+	<input type="checkbox" name="add_to_can" value="yes">Add this custom response to canned responses
 	<br>
-	<INPUT type="submit" name="submit" value="Delete">
+	<INPUT type="submit" name="submit" value="Reject">
 	</FORM>
 	</td></tr>
 	</table>
@@ -152,15 +151,6 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<br>
 	&nbsp;
 	<?php
-	$res_cat = db_query("SELECT category.category_id AS category_id,"
-		. "category.category_name AS category_name FROM category,group_category "
-		. "WHERE category.category_id=group_category.category_id AND "
-		. "group_category.group_id=$row_grp[group_id]");
-	while ($row_cat = db_fetch_array($res_cat)) {
-		print "<br>$row_cat[category_name] "
-		. "<A href=\"groupedit.php?group_id=$row_grp[group_id]&group_idrm=$row_grp[group_id]&form_catrm=$row_cat[category_id]\">"
-		. "[Remove from Category]</A>";
-	}
 
 	// ########################## OTHER INFO
 
