@@ -1880,25 +1880,25 @@ END;
         $dbh->commit () ;
     }
 
-    $version = &get_db_version ;
-    $target = "4.0.2-0+2" ;
-    if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20041222-debian.sql") ;
-
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041222-debian.sql") } ;
-        foreach my $s (@reqlist) {
-            $query = $s ;
-            # debug $query ;
-            $sth = $dbh->prepare ($query) ;
-            $sth->execute () ;
-            $sth->finish () ;
-        }
-        @reqlist = () ;
-
-        &update_db_version ($target) ;
-        &debug ("Committing.") ;
-        $dbh->commit () ;
-    }
+#    $version = &get_db_version ;
+#    $target = "4.0.2-0+2" ;
+#    if (&is_lesser ($version, $target)) {
+#        &debug ("Upgrading with 20041222-debian.sql") ;
+#
+#        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041222-debian.sql") } ;
+#        foreach my $s (@reqlist) {
+#            $query = $s ;
+#            # debug $query ;
+#            $sth = $dbh->prepare ($query) ;
+#            $sth->execute () ;
+#            $sth->finish () ;
+#        }
+#        @reqlist = () ;
+#
+#        &update_db_version ($target) ;
+#        &debug ("Committing.") ;
+#        $dbh->commit () ;
+#    }
 
     $version = &get_db_version ;
     $target = "4.0.2-0+3" ;
@@ -1946,6 +1946,26 @@ END;
         &debug ("Upgrading with 20050212.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050212.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.0.2-0+7" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050214-nss.sql valantine") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050214-nss.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;

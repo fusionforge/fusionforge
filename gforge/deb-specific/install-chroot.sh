@@ -76,9 +76,9 @@ case "$1" in
 	# To get uid/gid
 	# Maybe ldap later
 	cat > $CHROOTDIR/etc/nsswitch.conf <<-FIN
-passwd:         files ldap 
-group:          files ldap
-shadow:         files ldap
+passwd:         files pgsql 
+group:          files pgsql
+shadow:         files pgsql
 FIN
 	# Copy miscellaneous files
 	[ -d /etc/ssh ] && find /etc/ssh | cpio --quiet -pdumLB $CHROOTDIR
@@ -95,36 +95,48 @@ FIN
 	cp /lib/security/* $CHROOTDIR/lib/security
 	cp /etc/security/*.conf $CHROOTDIR/etc/security
 
-	# Libnss-ldap related stuffs
-	for binary in \
-	    /usr/bin/ldapsearch ; do
-	  if [ -x "$binary" ] ; then
-	      #echo "$binary"
-	      ldd $binary | cut -d" " -f3
-	  fi
-	done \
-	    | sort -u \
-	    | cpio --quiet -pdumVLB $CHROOTDIR
-	
-	#cp -r /etc/ldap $CHROOTDIR/etc
-	[ -e /etc/libnss-ldap.conf ] && cp /etc/libnss-ldap.conf $CHROOTDIR/etc
-	[ -e /etc/libnss-pgsql.conf ] && cp /etc/libnss-pgsql.conf $CHROOTDIR/etc
-	[ "$(echo /lib/libnss_ldap*)" != "/lib/libnss_ldap*" ] && cp /lib/libnss_ldap* $CHROOTDIR/lib
-	[ "$(echo /usr/lib/libnss_ldap*)" != "/usr/lib/libnss_ldap*" ] && cp /usr/lib/libnss_ldap* $CHROOTDIR/usr/lib
+#	# Libnss-ldap related stuffs
+#	for binary in \
+#	    /usr/bin/ldapsearch ; do
+#	  if [ -x "$binary" ] ; then
+#	      #echo "$binary"
+#	      ldd $binary | cut -d" " -f3
+#	  fi
+#	done \
+#	    | sort -u \
+#	    | cpio --quiet -pdumVLB $CHROOTDIR
+#	
+#	#cp -r /etc/ldap $CHROOTDIR/etc
+#	[ -e /etc/libnss-ldap.conf ] && cp /etc/libnss-ldap.conf $CHROOTDIR/etc
+#	[ -e /etc/libnss-pgsql.conf ] && cp /etc/libnss-pgsql.conf $CHROOTDIR/etc
+#	[ "$(echo /lib/libnss_ldap*)" != "/lib/libnss_ldap*" ] && cp /lib/libnss_ldap* $CHROOTDIR/lib
+#	[ "$(echo /usr/lib/libnss_ldap*)" != "/usr/lib/libnss_ldap*" ] && cp /usr/lib/libnss_ldap* $CHROOTDIR/usr/lib
+#
+#	# Libpam-ldap
+#	[ -f /etc/ldap.secret ] && cp /etc/ldap.secret $CHROOTDIR/etc && chmod 600 /etc/ldap.secret
+
+	# Libnss-pgsql related stuffs
+	[ -e /etc/nss-pgsql.conf ] && cp /etc/nss-pgsql.conf $CHROOTDIR/etc
 	[ "$(echo /lib/libnss_pgsql*)" != "/lib/libnss_pgsql*" ] && cp /lib/libnss_pgsql* $CHROOTDIR/lib
 	[ "$(echo /usr/lib/libnss_pgsql*)" != "/usr/lib/libnss_pgsql*" ] && cp /usr/lib/libnss_pgsql* $CHROOTDIR/usr/lib
 	[ "$(echo /usr/lib/libdb*)" != "/usr/lib/libdb*" ] && cp /usr/lib/libdb* $CHROOTDIR/usr/lib
 	[ "$(echo /usr/lib/libssl*)" != "/usr/lib/libssl*" ] && cp /usr/lib/libssl* $CHROOTDIR/usr/lib
 	[ "$(echo /usr/lib/libcrypto*)" != "/usr/lib/libcrypto*" ] && cp /usr/lib/libcrypto* $CHROOTDIR/usr/lib
 
-	# Libpam-ldap
-	[ -f /etc/ldap.secret ] && cp /etc/ldap.secret $CHROOTDIR/etc && chmod 600 /etc/ldap.secret
+	[ "$(echo /usr/lib/libpq*)" != "/usr/lib/libpq*" ] && cp /usr/lib/libpq* $CHROOTDIR/usr/lib
+	[ "$(echo /usr/lib/libkrb5*)" != "/usr/lib/libkrb5*" ] && cp /usr/lib/libkrb5* $CHROOTDIR/usr/lib
+	[ "$(echo /usr/lib/libk5crypto*)" != "/usr/lib/libk5crypto*" ] && cp /usr/lib/libk5crypto* $CHROOTDIR/usr/lib
+	[ "$(echo /usr/lib/libcom_err*)" != "/usr/lib/libcom_err*" ] && cp /usr/lib/libcom_err* $CHROOTDIR/usr/lib
+	[ -f /usr/lib/libcom_err.so ] && cp /usr/lib/libcom_err.so $CHROOTDIR/usr/lib/libcom_err.so.2
+
+
 
 	# Now this never change
 	cat > $CHROOTDIR/etc/passwd <<-FIN
 root:x:0:0:Root:/:/bin/bash
 nobody:x:65534:65534:nobody:/:/bin/false
 FIN
+getent passwd | grep anonscm-gforge >> $CHROOTDIR/etc/passwd
 	cat > $CHROOTDIR/etc/shadow <<-FIN
 root:*:11142:0:99999:7:::
 nobody:*:11142:0:99999:7:::
@@ -133,6 +145,7 @@ FIN
 root:x:0
 nogroup:x:65534:
 FIN
+getent group | grep anonscm-gforge >> $CHROOTDIR/etc/group
 
 	;;
 

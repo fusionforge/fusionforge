@@ -50,28 +50,82 @@ modify_pam_pgsql(){
 # Check/Modify /etc/libnss-ldap.conf
 configure_libnss_pgsql(){
     # All users can see ldap stored gid/uid
+#    cat > /etc/nss-pgsql.conf.gforge-new <<EOF
+#host            = $db_host
+#port            = 5432
+#database        = $db_name
+#login           = gforge_nss
+#passwd          = ''
+#passwdtable     = nss_passwd
+#grouptable      = nss_groups
+#groupmembertable = nss_passwd JOIN nss_usergroups ON nss_passwd.uid=nss_usergroups.uid JOIN nss_groups ON nss_usergroups.gid=nss_groups.gid
+#
+#passwd_name     = login
+#passwd_passwd   = passwd
+#passwd_uid      = uid
+#passwd_dir      = homedir
+#passwd_shell    = shell
+#passwd_gecos    = gecos
+#passwd_gid      = gid
+#
+#group_name      = name
+#group_passwd    = passwd
+#group_gid       = gid
+#group_member    = login
+#EOF
     cat > /etc/nss-pgsql.conf.gforge-new <<EOF
-host            = $db_host
-port            = 5432
-database        = $db_name
-login           = gforge_nss
-passwd          = ''
-passwdtable     = nss_passwd
-grouptable      = nss_groups
-groupmembertable = nss_passwd JOIN nss_usergroups ON nss_passwd.uid=nss_usergroups.uid JOIN nss_groups ON nss_usergroups.gid=nss_groups.gid
+#----------------- DB connection
+host             = $db_host
+# For socket give the directory to put the socket
+#host            = /tmp
+port             = 5432
+database         = gforge
+login            = gforge_nss
+passwd           = ''
 
-passwd_name     = login
-passwd_passwd   = passwd
-passwd_uid      = uid
-passwd_dir      = homedir
-passwd_shell    = shell
-passwd_gecos    = gecos
-passwd_gid      = gid
+#----------------- New possibility including the query directly here ------------------#
+# query
+# return the passwd array
+querypasswd      = SELECT login,passwd,uid,gid,gecos,('/var/lib/gforge/chroot/home/users/' || login),shell FROM nss_passwd
+# return the group array whithout list of members
+querygroup       = SELECT name,'x',gid FROM nss_groups
+# return an array of users that are member of a group with gid %d
+querymembers     = SELECT user_name FROM nss_usergroups WHERE gid = %d
+# return an array of numeric gid a user %s is member of except his own gid %d
+queryids         = SELECT gid FROM nss_usergroups WHERE user_name = '%s' AND gid != %d
+#----------------- Only the following tables map are necessary ------------------------#
+# passwd
+passwd_name      = login
+passwd_uid       = uid
+# group
+group_name       = name
+group_gid        = gid
+#--------------------------------------------------------------------------------------#
 
-group_name      = name
-group_passwd    = passwd
-group_gid       = gid
-group_member    = login
+#----------------- Old Method ------------------#
+# tables
+#passwdtable      = nss_passwd
+#grouptable       = nss_groups
+#groupmembertable = nss_passwd JOIN nss_usergroups ON nss_passwd.uid=nss_usergroups.uid JOIN nss_groups ON nss_usergroups.gid=nss_groups.gid
+
+# passwd
+#passwd_name      = login
+#passwd_passwd    = passwd
+#passwd_uid       = uid
+#passwd_gid       = gid
+#passwd_gecos     = gecos
+
+#passwd_dir      = homedir
+# New extention that allow concatenation
+#passwd_dir       = ('/home/users/' || login)
+#passwd_shell     = shell
+
+# group
+#group_name       = name
+#group_passwd     = passwd
+#group_gid        = gid
+
+#group_member     = login
 EOF
     chmod 644 /etc/nss-pgsql.conf.gforge-new
 }

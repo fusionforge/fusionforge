@@ -11,15 +11,16 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 my $verbose = 0;
 my $user_array = ();
 my $group_array = ();
+my $gid_add = 10000 ;
 
 &db_connect;
 
 # Dump the Groups Table information
-$query = "select group_id,unix_group_name,status from groups";
+$query = "select group_id,group_id+".$gid_add.",unix_group_name,status from groups";
 $c = $dbh->prepare($query);
 $c->execute();
 
-while(my ($group_id, $group_name, $status) = $c->fetchrow()) {
+while(my ($group_id, $unix_gid, $group_name, $status) = $c->fetchrow()) {
 
 	my $new_query = "select users.user_name AS user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND group_id=$group_id";
 	my $d = $dbh->prepare($new_query);
@@ -31,7 +32,7 @@ while(my ($group_id, $group_name, $status) = $c->fetchrow()) {
 	   $user_list .= "$user_name,";
 	}
 
-	$grouplist = "$group_name:$status:$group_id:$user_list\n";
+	$grouplist = "$group_name:$status:$unix_gid:$user_list\n";
 	$grouplist =~ s/,$//;
 
 	push @group_array, $grouplist;
@@ -54,7 +55,6 @@ while ($ln = pop(@groupdump_array)) {
 	chop($ln);
 	($gname, $gstatus, $gid, $userlist) = split(":", $ln);
 	
-	$gid += $gid_add;
 	$userlist =~ tr/A-Z/a-z/;
 
 	$group_exists = (-d $grpdir_prefix . $gname);
@@ -108,6 +108,7 @@ sub add_group {
 sub update_group {
 	my ($gid, $gname, $userlist) = @_;
 	my ($log_dir, $cgi_dir, $ht_dir);
+	my ($realuid, $realgid);
 	
 	$group_dir = $grpdir_prefix.$gname;
 	$log_dir = $group_dir."/log";
@@ -122,6 +123,20 @@ sub update_group {
 	system("chmod 2775 $ht_dir");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 	
+	my $realuid=get_file_owner_uid($group_dir);
+	if ($dummy_uid eq $realuid){
+        	system("chown $dummy_uid $group_dir");
+	} else {
+		if($verbose){print("Changing owner of $group_dir $realuid -> $dummy_uid\n")};
+        	system("chown -R $dummy_uid $group_dir");
+	}
+	my $realgid=get_file_owner_gid($group_dir);
+	if ($gid eq $realgid){
+        	system("chgrp $gid $group_dir");
+	} else {
+		if($verbose){print("Changing group of $group_dir $realgid -> $gid\n")};
+        	system("chgrp -R $gid $group_dir");
+	}
 }
 
 #############################
@@ -137,4 +152,22 @@ sub delete_group {
 		system("/bin/mv /var/lib/gforge/chroot/home/groups/$this_group /var/lib/gforge/chroot/home/groups/deleted_group_$this_group");
 		system("/bin/tar -czf /var/lib/gforge/tmp/$this_group.tar.gz /var/lib/gforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/gforge/chroot/home/groups/deleted_group_$this_group");
 	}
+}
+
+#############################
+# Get File Owner UID
+#############################
+sub get_file_owner_uid {
+	my $filename = shift(@_);
+	my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($filename);
+	return $uid;
+}
+
+#############################
+# Get File Owner GID
+#############################
+sub get_file_owner_gid {
+	my $filename = shift(@_);
+	my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($filename);
+	return $gid;
 }

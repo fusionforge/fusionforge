@@ -15,14 +15,14 @@ my $group_array = ();
 &db_connect;
 
 # Dump the users Table information
-my $query = "select unix_uid, unix_status, user_name, shell, unix_pw, realname from users where unix_status != 'N'";
+my $query = "select unix_uid, unix_gid, unix_status, user_name, shell, unix_pw, realname from users where unix_status != 'N'";
 my $c = $dbh->prepare($query);
 $c->execute();
 	
-while(my ($id, $status, $username, $shell, $passwd, $realname) = $c->fetchrow()) {
+while(my ($uid, $gid, $status, $username, $shell, $passwd, $realname) = $c->fetchrow()) {
 	$home_dir = $homedir_prefix.$username;
 
-	$userlist = "$id:$status:$username:$shell:$passwd:$realname\n";
+	$userlist = "$uid:$gid:$status:$username:$shell:$passwd:$realname\n";
 
 	push @user_array, $userlist;
 }
@@ -31,7 +31,7 @@ while(my ($id, $status, $username, $shell, $passwd, $realname) = $c->fetchrow())
 write_array_file($file_dir."dumps/user_dump", @user_array);
 
 my $user_file = $file_dir . "dumps/user_dump";
-my ($uid, $status, $username, $shell, $passwd, $realname);
+my ($uid, $gid, $status, $username, $shell, $passwd, $realname);
 
 # Open up all the files that we need.
 @userdump_array = open_array_file($user_file);
@@ -42,16 +42,15 @@ my ($uid, $status, $username, $shell, $passwd, $realname);
 if($verbose){print ("\n\n	Processing Users\n\n")};
 while ($ln = pop(@userdump_array)) {
 	chop($ln);
-	($uid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
-	$uid += $uid_add;
+	($uid, $gid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
 	$username =~ tr/A-Z/a-z/;
 	$user_exists = (-d $homedir_prefix . $username || -f "/var/lib/gforge/tmp/$username.tar.gz");
 	
 	if ($status eq 'A' && $user_exists) {
-		update_user($uid, $username, $realname, $shell, $passwd);
+		update_user($uid, $gid, $username, $realname, $shell, $passwd);
 	
 	} elsif ($status eq 'A' && !$user_exists) {
-		add_user($uid, $username, $realname, $shell, $passwd);
+		add_user($uid, $gid, $username, $realname, $shell, $passwd);
 	
 	} elsif ($status eq 'D' && $user_exists) {
 		delete_user($username);
@@ -78,7 +77,7 @@ while ($ln = pop(@userdump_array)) {
 # User Add Function
 #############################
 sub add_user {  
-	my ($uid, $username, $realname, $shell, $passwd) = @_;
+	my ($uid, $gid, $username, $realname, $shell, $passwd) = @_;
 	my $skel_array = ();
 	
 	$home_dir = $homedir_prefix.$username;
@@ -87,19 +86,18 @@ sub add_user {
 		
 	# Now lets create the homedir and copy the contents of /etc/skel into it.
 	mkdir $home_dir, 0755;
-        chown $uid, $uid, $home_dir;
+        chown $uid, $gid, $home_dir;
 	
 	mkdir $home_dir.'/incoming', 0755;
-	chown $uid, $uid, $home_dir.'/incoming' ;
+	chown $uid, $gid, $home_dir.'/incoming' ;
 }
 
 #############################
 # User Update Function
 #############################
 sub update_user {
-	my ($uid, $username, $realname, $shell, $passwd) = @_;
-	my ($p_uid, $p_junk, $p_uid, $p_gid, $p_realname, $p_homedir, $p_shell);
-	my ($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv, $counter);
+	my ($uid, $gid, $username, $realname, $shell, $passwd) = @_;
+	my ($realuid, $realgid); 
 	
 	if($verbose){print("Updating Account for: $username\n")};
 	
@@ -110,12 +108,19 @@ sub update_user {
 
 	my $realuid=get_file_owner_uid($home_dir);
 	if ($uid eq $realuid){
-        	system("chown $uid:$uid $home_dir/incoming");
+        	system("chown $uid $home_dir/incoming");
 		system("chmod 0755 $home_dir/incoming");
 	} else {
 		if($verbose){print("Changing owner of $home_dir $realuid -> $uid\n")};
-        	system("chown -R $uid:$uid $home_dir");
+        	system("chown -R $uid $home_dir");
 		system("chmod 0755 $home_dir/incoming");
+	}
+	my $realgid=get_file_owner_gid($home_dir);
+	if ($gid eq $realgid){
+        	system("chgrp $gid $home_dir/incoming");
+	} else {
+		if($verbose){print("Changing group of $home_dir $realgid -> $gid\n")};
+        	system("chgrp -R $gid $home_dir");
 	}
 }
 
@@ -146,10 +151,18 @@ sub suspend_user {
 }
 
 #############################
-# Get File Owner Id
+# Get File Owner UID
 #############################
 sub get_file_owner_uid {
 	my $filename = shift(@_);
 	my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($filename);
 	return $uid;
+}
+#############################
+# Get File Owner GID
+#############################
+sub get_file_owner_gid {
+	my $filename = shift(@_);
+	my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($filename);
+	return $gid;
 }
