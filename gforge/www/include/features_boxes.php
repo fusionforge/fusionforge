@@ -20,6 +20,8 @@ function show_features_boxes() {
 	$return .= show_highest_ranked_users();
 	$return .= $HTML->boxMiddle($Language->getText('home','most_active_this_week'));
 	$return .= show_highest_ranked_projects();
+	$return .= $HTML->boxMiddle($Language->getText('home','recently_registered'));
+	$return .= show_newest_projects();
 	$return .= $HTML->boxBottom(0);
 	return $return;
 }
@@ -122,12 +124,14 @@ function show_newest_projects() {
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			if ( $row_newproj['register_time'] ) {
-				$return .= "(" . date("m/d",$row_newproj['register_time'])  . ") "
+				$return .= "<strong>(" . date("m/d",$row_newproj['register_time'])  . ")</strong> "
 				. "<a href=\"/projects/$row_newproj[unix_group_name]/\">"
 				. "$row_newproj[group_name]</a><br />";
 			}
 		}
 	}
+	// TODO: Add more link to show all project
+	//$return .= '<div align="center"><a href="/top/projlist.php">[ '.$Language->getText('general','more').' ]</a></div>';
 	return $return;
 }
 
