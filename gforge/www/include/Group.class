@@ -545,7 +545,7 @@ class Group extends Error {
 			//
 			//	user doesn't exist
 			//
-			$this->setError('ERROR: That user does not exist on SourceForge');
+			$this->setError('ERROR: That user does not exist here.');
 			return false;
 		}
 		//
@@ -618,12 +618,12 @@ class Group extends Error {
 		//	else - restrictted.
 		//
 		if ($cvs_flags>1) {
-			if (!sf_ldap_user_set_attribute($user_id,"x-cvsShell","/bin/bash")) {
+			if (!sf_ldap_user_set_attribute($user_id,"debSfCvsShell","/bin/bash")) {
 				$this->setError(sf_ldap_get_error_msg());
 				return false;
 			}
 		} else {
-			if (!sf_ldap_user_set_attribute($user_id,"x-cvsShell","/bin/cvssh")) {
+			if (!sf_ldap_user_set_attribute($user_id,"debSfCvsShell","/bin/cvssh")) {
 				$this->setError(sf_ldap_get_error_msg());
 				return false;
 			}

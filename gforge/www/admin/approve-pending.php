@@ -19,7 +19,7 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 function activate_group($group_id) {
 	global $feedback;
-echo("activate_group($group_id)<br>");	
+	//echo("activate_group($group_id)<br>");	
 
 	if (sf_ldap_create_group($group_id,0)) {
 		db_query("UPDATE groups ".
@@ -152,6 +152,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<br>
 	&nbsp;
 	<?php
+/* [RM] -- this is unneeded (and the tables don't even exist)
 	$res_cat = db_query("SELECT category.category_id AS category_id,"
 		. "category.category_name AS category_name FROM category,group_category "
 		. "WHERE category.category_id=group_category.category_id AND "
@@ -161,6 +162,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 		. "<A href=\"groupedit.php?group_id=$row_grp[group_id]&group_idrm=$row_grp[group_id]&form_catrm=$row_cat[category_id]\">"
 		. "[Remove from Category]</A>";
 	}
+*/
 
 	// ########################## OTHER INFO
 

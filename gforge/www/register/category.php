@@ -29,22 +29,9 @@ if ($group_id && $insert_license && $rand_hash && $form_license) {
 }
 
 $HTML->header(array('title'=>'Project Category'));
+echo "<H2>".$Language->REGISTER_step6_title."</H2>";
+echo $Language->REGISTER_step6;
 ?>
-
-<H2>Step 6: Category</H2>
-
-
-<P><B>Project Category</B>
-
-<P>So that visitors to the site can find your project, you should select
-categories that is most appropriate to your project's purpose.
-
-<P>Your project will not be visible in the Trove software map until
-(1) it is approved and (2) you have manually categorized your project in
-your project administration screens.
-
-<P>After project approval, please immediately categorize your project
-following the instructions in the email you will receive.
 
 <FONT size=-1>
 <FORM action="confirmation.php" method="post">
@@ -52,9 +39,9 @@ following the instructions in the email you will receive.
 <INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
 <INPUT TYPE="HIDDEN" NAME="rand_hash" VALUE="<?php echo $rand_hash; ?>">
 <P>
-<H2><FONT COLOR="RED">Do Not Back Arrow After This Point</FONT></H2> 
+<H2><FONT COLOR="RED"><?php echo $Language->REGISTER_step4_warn;?></FONT></H2> 
 <P>
-<INPUT type=submit name="Submit" value="Finish Registration">
+<INPUT type=submit name="Submit" value="<?php echo $Language->REGISTER_step6_finish; ?>">
 </FORM>
 </FONT>
 

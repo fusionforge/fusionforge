@@ -16,7 +16,7 @@ if ($msg_id) {
 		Figure out which group this message is in, for the sake of the admin links
 	*/
 	$result=db_query("SELECT forum_group_list.send_all_posts_to,forum_group_list.group_id,".
-		"forum_group_list.allow_anonymous,forum_group_list.forum_name,forum.group_forum_id,forum.thread_id ".
+		"forum_group_list.allow_anonymous,forum_group_list.forum_name,forum.group_forum_id,forum.thread_id, subject ".
 		"FROM forum_group_list,forum WHERE forum_group_list.group_forum_id=forum.group_forum_id AND forum.msg_id='$msg_id'");
 
 	$group_id=db_result($result,0,'group_id');

@@ -35,10 +35,9 @@ if (user_isloggedin() || $sf_user_hash) {
 	echo site_user_header(array('title'=>'My Personal Page'));
 	?>
 
-	<H3>Personal Page for: <?php print $G_SESSION->getUnixName(); ?></H3>
+	<H3><?php echo $Language->MY_PERSONAL_PAGE; ?>: <?php print $G_SESSION->getUnixName(); ?></H3>
 	<P>
-	Your personal page contains lists of bugs and tasks that 
-	you are assigned, plus a list of groups that you are a member of.
+	<?php echo $Language->MY_about_blurb; ?>
 	<P>
 	<TABLE width="100%" border="0">
 	<TR><TD VALIGN="TOP" WIDTH="50%">
@@ -61,7 +60,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>No Open Bugs are assigned to you or were submitted by you</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_open_bugs.'</TD></TR>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
@@ -97,7 +96,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>No open support requests are assigned to you or were submitted by you</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_open_request.'</TD></TR>';
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
@@ -130,16 +129,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2">
-			<H3>You are not monitoring any forums</H3>
-			<P>
-			If you monitor forums, you will be sent new posts in 
-			the form of an email, with a link to the new message.
-			<P>
-			You can monitor forums by clicking &quot;Monitor Forum&quot; in 
-			any given discussion forum.
-			<BR>&nbsp;
-		</TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_monitored_forums.'</TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -177,16 +167,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2">
-			<H3>You are not monitoring any files</H3>
-			<P>
-			If you monitor files, you will be sent new release notices via
-			email, with a link to the new file on our download server.
-			<P>
-			You can monitor files by visiting a project\'s &quot;Summary Page&quot; 
-			and clicking on the check box in the files section.
-			<BR>&nbsp
-		</TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_monitored_filemodules.'</TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -215,6 +196,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	?>
 	</TD><TD VALIGN="TOP" WIDTH="50%">
 	<?php
+	
 	/*
 		Tasks assigned to me
 	*/
@@ -262,7 +244,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		}
 	} else {
 		echo '
-		<TR><TD COLSPAN="2"><B>You have no open tasks assigned to you.</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_task.'</TD></TR>';
 		echo db_error();
 	}
 
@@ -288,6 +270,35 @@ if (user_isloggedin() || $sf_user_hash) {
 	}
 
 	/*
+	 * Pending projects and news bytes
+	 */
+	if (user_ismember(1, 'A')) {
+		$sql="SELECT group_name FROM groups where status='P';";
+		$result=db_query($sql);
+		$rows=db_numrows($result);
+		if ($rows) {
+			echo $HTML->box1_middle('Pending Projects', false, false);
+			echo "<TR><TD COLSPAN=\"2\">There ";
+			echo (($rows!=1)?"are ": "is "). "$rows project";
+			echo (($rows!=1)?"s":"");
+			echo " awaiting <a href=\"/admin/approve-pending.php\">";
+			echo "review</a>.</td></tr>";
+		}
+	}
+	if (user_ismember($GLOBALS['sys_news_group'], 'A')) {
+		$sql="SELECT * FROM news_bytes WHERE is_approved=0";
+		$result=db_query($sql);
+		$rows=db_numrows($result);
+		if ($rows) {
+			echo $HTML->box1_middle('Pending News Bytes', false, false);
+			echo "<TR><TD COLSPAN=\"2\">There ";
+			echo (($rows!=1)?"are ": "is "). "$rows news byte";
+			echo (($rows!=1)?"s":"");
+			echo " awaiting <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
+			echo "review</a>.</td></tr>";
+		}
+	}
+	/*
 		   Personal bookmarks
 	*/
 	echo $HTML->box1_middle('My Bookmarks',false,false);
@@ -297,7 +308,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>You currently do not have any bookmarks saved</B></TD></TR>';
+		<TR><TD COLSPAN="2">'.$Language->MY_no_bookmarks.'</TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -322,6 +333,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		. "groups.group_id,"
 		. "groups.unix_group_name,"
 		. "groups.status,"
+		. "groups.type,"
 		. "user_group.admin_flags "
 		. "FROM groups,user_group "
 		. "WHERE groups.group_id=user_group.group_id "
@@ -329,14 +341,25 @@ if (user_isloggedin() || $sf_user_hash) {
 		. "AND groups.status='A' AND groups.is_public=1");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo "<TR><TD COLSPAN=\"2\"><B>You're not a member of any public projects</B></TD></TR>";
+		echo "<TR><TD COLSPAN=\"2\">$Language->MY_no_projects</TD></TR>";
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
-			echo '
+			$gid = db_result ($result,$i,'group_id') ;
+			if (user_ismember ($gid, 'A')) {
+				$img="trash-x.png";
+			} else {
+				$img="trash.png";
+			}
+			if (db_result ($result, $i, 'type') == 1) {
+				$link = "/projects/" . db_result ($result,$i,'unix_group_name') ;
+			} else {
+				$link = "/foundry/" . db_result ($result,$i,'unix_group_name') ;
+			}
+ 			echo '
 			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE">
-			<A href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'"><IMG SRC="/images/ic/trash.png" ALT="DELETE" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD>
-			<TD><A href="/projects/'. db_result($result,$i,'unix_group_name') .'/">'. db_result($result,$i,'group_name') .'</A></TD></TR>';
+			<A href="rmproject.php?group_id='.$gid.'"><IMG SRC="/images/ic/'.$img.'" ALT="DELETE" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD>
+			<TD><A href="'.$link.'">'. db_result($result,$i,'group_name') .'</A></TD></TR>';
 		}
 	}
 	echo $HTML->box1_bottom();
