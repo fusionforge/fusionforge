@@ -1,3 +1,11 @@
+sourceforge (2.6-0+7+) unstable; urgency=low
+
+  * Added debian/BUGS
+  * Corrected approve_pending bug
+  * Corrected wrong userid for CVS
+
+ -- Christian Bayle <bayle@aist.enst.fr>  Wed, 27 Feb 2002 01:09:11 +0100
+
 sourceforge (2.6-0+7) unstable; urgency=low
 
   * [Roland] [From 2.5] Added templates to conffiles.
