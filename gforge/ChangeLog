@@ -1,5 +1,8 @@
 2003-01-10  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* common/include/utils.php(util_make_links): exclude <> from
+	URL regexp to avoid sucking in the <br /> tag.
+
 	* www/include/html.php(html_image): XHTML compliance: <img> tag
 	fixup
 
