@@ -141,7 +141,7 @@ writedefault(){
 	# This create a default conf file in $1 
 	tmpfile=$1.$$computedefault
 	echo "cat >$1<<-EOF" > $tmpfile
-	cat $0 | grep "^	DEFAULT" | sed 's/	DEFAULT\(.[^=]*\)=.*/\1=\${DEFAULT\1}/' >> $tmpfile
+	cat $0 | grep "^	DEFAULT" | sed 's/	DEFAULT\(.[^=]*\)=.*/\1=\${\1:-\$DEFAULT\1}/' >> $tmpfile
 	echo 'EOF' >> $tmpfile
 	. $tmpfile
 	rm -f $tmpfile
