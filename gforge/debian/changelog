@@ -2,9 +2,10 @@ gforge (3rc1-2+) experimental; urgency=low
 
   * [Roland] Corrected a bug in exim install script
   * [Christian] Added location on projects and users for ssl part
-  * [Christian] Fixed a typo in deb-specific/install-postfix.sh 
+  * [Christian] Fixed a typo in deb-specific/install-postfix.sh
+  * [Christian] Fixed GForge-CVS in cvsweb.conf
 
- -- Christian Bayle <bayle@debian.org>  Sat, 22 Mar 2003 16:02:45 +0100
+ -- Christian Bayle <bayle@debian.org>  Wed, 26 Mar 2003 22:59:35 +0100
 
 gforge (3rc1-1) experimental; urgency=low
 
