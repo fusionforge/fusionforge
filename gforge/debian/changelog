@@ -1,5 +1,6 @@
-gforge (3.3.0-6) unstable; urgency=low
+gforge (3.3.0-11) unstable; urgency=low
 
+  * [Christian] Repared vhosts generation
   * [Christian] Some renaming cvs -> scm
   * [Christian] Added new sql upgrade (2004*.sql)
   * [Christian] Stable backbort
@@ -17,7 +18,7 @@ gforge (3.3.0-6) unstable; urgency=low
   * [Christian] Made system management OO (see Changelog)
   * [Roland] SCM systems are now pluginified.
 
- -- Christian Bayle <bayle@debian.org>  Thu, 22 Jul 2004 01:44:24 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 28 Jul 2004 13:29:02 +0200
 
 gforge (3.2.1-4) experimental; urgency=low
 

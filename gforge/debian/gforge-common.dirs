@@ -10,4 +10,5 @@ var
 var/lib
 var/lib/gforge
 var/lib/gforge/etc
+var/lib/gforge/etc/templates
 bin
