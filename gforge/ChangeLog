@@ -9,6 +9,8 @@
 	* Added darkaqua theme from Patrick McFarland (diablod3)
 	* Applied patch from Vincente Ruiz that fix Browser language selection
 	if you are not logged in
+	* Removed unwanted translation in admin/groupedit.php as remarked by
+	Jeff Fynboh (jfynboh) in patch #290
 
 2003-04-06  Ryan T. Sammartino  <ryants@shaw.ca>
 

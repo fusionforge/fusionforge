@@ -215,13 +215,6 @@ admin_database	site_admin_groups_maintance	Site Admin: Groups' DB Maintenance
 admin_database	statistics_for_project_database	Statistics for Project Databases
 admin_database	type	Type
 admin_database	unable_to_insert	Unable to insert already active database.
-admin_groupedit	0	0
-admin_groupedit	1	1
-admin_groupedit	A	A
-admin_groupedit	D	D
-admin_groupedit	H	H
-admin_groupedit	I	I
-admin_groupedit	P	P
 admin_groupedit	active	Active (A)
 admin_groupedit	deleted	Deleted (D)
 admin_groupedit	error	Error

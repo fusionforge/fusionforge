@@ -92,14 +92,15 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 <td colspan="3">
 
 <?php echo $Language->getText('admin_groupedit','status') ?>:
-<?php echo html_build_select_box_from_arrays(
+<?php	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
+	echo html_build_select_box_from_arrays(
 	array(
-		$Language->getText('admin_groupedit','i'),
-		$Language->getText('admin_groupedit','a'),
-		$Language->getText('admin_groupedit','p'),
-		$Language->getText('admin_groupedit','h'),
-		$Language->getText('admin_groupedit','d')
-),
+		'I',
+		'A',
+		'P',
+		'H',
+		'D'
+	),
 	array(
 		$Language->getText('admin_groupedit','incomplete'),
 		$Language->getText('admin_groupedit','active'),
@@ -111,10 +112,11 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 ); ?>
 
 <?php echo $Language->getText('admin_groupedit','public') ?>:
-<?php echo html_build_select_box_from_arrays(
+<?php 	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
+	echo html_build_select_box_from_arrays(
 	array(
-		$Language->getText('admin_groupedit','0'),
-		$Language->getText('admin_groupedit','1')
+		'0',
+		'1'
 	),
 	array(
 		$Language->getText('admin_groupedit','no'),
