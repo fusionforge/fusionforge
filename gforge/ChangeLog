@@ -1,3 +1,8 @@
+2004-07-23  Tom Copeland <tom@infoether.com>
+
+	* www/stats/i18n.php: Now it doesn't display unused
+	languages.
+
 2004-07-21  Christian Bayle <bayle@aist.enst.fr>
 	
 	* Some renaming cvs -> scm
