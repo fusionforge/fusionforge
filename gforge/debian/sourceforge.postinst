@@ -32,7 +32,7 @@ case "$1" in
 	pattern=$(basename $0).XXXXXX
 	
 	# "Fill in the blanks" in main config file
-        vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host download_host newsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list dont_touch_config"
+        vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host download_host newsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list do_config"
 	mainconffile=/etc/sourceforge/sourceforge.conf
         if [ ! -e $mainconffile ] ; then
 	    touch $mainconffile

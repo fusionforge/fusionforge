@@ -38,7 +38,7 @@ modify_libnss_ldap(){
 	# Check rootbinddn
 	# This seems to be necessary to display uid/gid
 	# Should be cn=admin,ou=People,dc=...
-	if [ ! "$do_config" = "true" ] ; then
+	if [ "$do_config" = "true" ] ; then
 	    if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf ; then
 		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf
 		echo "rootbinddn cn=admin,ou=People,$dn" >>/etc/libnss-ldap.conf
@@ -48,7 +48,7 @@ modify_libnss_ldap(){
 
 # Purge /etc/libnss-ldap.conf
 purge_libnss_ldap(){
-	if [ ! "$do_config" = "true" ] ; then
+	if [ "$do_config" = "true" ] ; then
 	    perl -pi -e "s/^# Next line added by Sourceforge install\n/#SF#/g" /etc/libnss-ldap.conf
 	    perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf
 	fi
@@ -60,7 +60,7 @@ modify_slapd(){
 	# Maybe should comment referral line too
 	echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
 	
-	if [ ! "$do_config" = "true" ] ; then
+	if [ "$do_config" = "true" ] ; then
 	    # Debian config by default only include core schema
 	    if ! grep -q "Sourceforge" /etc/ldap/slapd.conf ; then
 		rm -f /etc/ldap/slapd.conf.sourceforge
@@ -70,13 +70,13 @@ modify_slapd(){
 			/etc/ldap/schema/nis.schema \
 			/etc/sourceforge/sourceforge.schema
 		do
-			if ! grep -q "^include.[ 	]*$schema" /etc/ldap/slapd.conf ; then
+			if ! grep -q "^include[ 	]*$schema" /etc/ldap/slapd.conf ; then
 				echo "include	$schema	#Added by Sourceforge install" >>/etc/ldap/slapd.conf.sourceforge
 				echo "Adding $schema"
 			else
 				echo "Commenting $schema"
 				export schema
-				perl -pi -e "s/^include.[        ]*\$schema/#Comment by Sourceforge install#include	\$schema/g" /etc/ldap/slapd.conf
+				perl -pi -e "s/^include[ 	]*\$schema/#Comment by Sourceforge install#include	\$schema/g" /etc/ldap/slapd.conf
 				echo "include	$schema	#Added by Sourceforge install" >>/etc/ldap/slapd.conf.sourceforge
 				echo "Adding $schema"
 			fi
@@ -116,7 +116,7 @@ access to */" /etc/ldap/slapd.conf
 
 # Purge /etc/ldap/slapd.conf
 purge_slapd(){
-    if [ ! "$do_config" = "true" ] ; then
+    if [ "$do_config" = "true" ] ; then
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
 	if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf
@@ -149,15 +149,16 @@ FIN
 # Modify /etc/nsswitch.conf
 modify_nsswitch()
 {
-    if [ ! "$do_config" = "true" ] ; then
+    if [ "$do_config" = "true" ] ; then
 	# This is sensitive file
-	if ! grep -q "Sourceforge" /etc/nsswitch.conf ; then
-		# By security i let priority to files
-		# Should maybe enhance this to take in account nis
-		# Maybe ask the order db/files/nis/ldap
-		perl -pi -e "s/^passwd/passwd:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#passwd/g" /etc/nsswitch.conf
-		perl -pi -e "s/^group/group:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#group/g" /etc/nsswitch.conf
-		perl -pi -e "s/^shadow/shadow:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#shadow/g" /etc/nsswitch.conf
+	if ! grep -q '^passwd:.*ldap' /etc/nsswitch.conf ; then
+	    perl -pi -e "s/^(passwd:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf
+	fi
+	if ! grep -q '^group:.*ldap' /etc/nsswitch.conf ; then
+	    perl -pi -e "s/^(group:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf
+	fi
+	if ! grep -q '^shadow:.*ldap' /etc/nsswitch.conf ; then
+	    perl -pi -e "s/^(shadow:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf
 	fi
     fi
 }
@@ -165,7 +166,7 @@ modify_nsswitch()
 # Purge /etc/nsswitch.conf
 purge_nsswitch()
 {
-    if [ ! "$do_config" = "true" ] ; then
+    if [ "$do_config" = "true" ] ; then
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/nsswitch.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/nsswitch.conf
     fi
