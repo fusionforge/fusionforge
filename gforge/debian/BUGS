@@ -1,6 +1,3 @@
--Wrong CVS user id not yet corrected (probably something to change in
-newparse.pl)
-
 -Ldap empty leaves some sourceforge stuff in ldap db (Workaround:
 /usr/lib/sourceforge/install-ldap.sh reset)
 
@@ -12,4 +9,5 @@ dependency)
 
 -upgrade from 2.5 miss some tables (On the way to be done)
 
+-QRS is broken (Doesn't upload)
 

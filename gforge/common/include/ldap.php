@@ -25,7 +25,7 @@ require_once('common/include/account.php');
  *
  * @var	constant		$GID_ADD
  */
-$GID_ADD = 1000;
+$GID_ADD = 10000;
 
 /**
  * Value to add to unix_uid to get unix uid
@@ -39,7 +39,7 @@ $UID_ADD = 20000;
  *
  * @var	constant		$ANONCVS_UID_ADD
  */
-$ANONCVS_UID_ADD = 2000;
+$ANONCVS_UID_ADD = 50000;
 
 /*
  * Auxilary functions
