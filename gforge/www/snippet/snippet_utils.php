@@ -18,7 +18,7 @@
 */
 
 $SCRIPT_CATEGORY[0]= $Language->getText('snippet_utils','choose_one');
-$SCRIPT_CATEGORY[1]= $Language->getText('snippet_utils','unix_admim');
+$SCRIPT_CATEGORY[1]= $Language->getText('snippet_utils','unix_admin');
 $SCRIPT_CATEGORY[2]= $Language->getText('snippet_utils','html_manipulation');
 $SCRIPT_CATEGORY[3]= $Language->getText('snippet_utils','bbs_systems');
 $SCRIPT_CATEGORY[4]= $Language->getText('snippet_utils','auctions');
@@ -33,7 +33,7 @@ $SCRIPT_CATEGORY[12]= $Language->getText('snippet_utils','other');
 $SCRIPT_CATEGORY[13]= $Language->getText('snippet_utils','math_functions');
 
 $SCRIPT_TYPE[0]= $Language->getText('snippet_utils','choose_one');
-$SCRIPT_TYPE[1]= $Language->getText('snippet_utils','funktion');
+$SCRIPT_TYPE[1]= $Language->getText('snippet_utils','function');
 $SCRIPT_TYPE[2]= $Language->getText('snippet_utils','full_script');
 $SCRIPT_TYPE[3]= $Language->getText('snippet_utils','sample_code');
 $SCRIPT_TYPE[4]= $Language->getText('snippet_utils','readme');

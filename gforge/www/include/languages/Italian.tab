@@ -2204,7 +2204,7 @@ snippet_utils	voting	Sondaggi
 snippet_utils	shopping_carts	Carelli spesa
 snippet_utils	other	Altro
 snippet_utils	math_functions	Funzioni matematiche
-snippet_utils	funktion	Funzione
+snippet_utils	function	Funzione
 snippet_utils	full_script	Script intero
 snippet_utils	sample_code	Codice d'esempio (HOWTO)
 snippet_utils	readme	README

@@ -2417,7 +2417,7 @@ snippet_utils	voting	Voting
 snippet_utils	shopping_carts	Shopping Carts
 snippet_utils	other	Other
 snippet_utils	math_functions	Math Functions
-snippet_utils	funktion	Function
+snippet_utils	function	Function
 snippet_utils	full_script	Full Script
 snippet_utils	sample_code	Sample Code (HOWTO)
 snippet_utils	readme	README
