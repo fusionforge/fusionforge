@@ -79,8 +79,9 @@ install: build
 	install -m 644 cronjobs/cvs-cron/default_page.php $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
 	install -m 755 deb-specific/ssh_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	#
-	install -m 4755 deb-specific/fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	ln -sf fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/tmpfilemove.pl
+# Temporary removed
+#	install -m 4755 deb-specific/fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+#	ln -sf fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/tmpfilemove.pl
 	#
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 
