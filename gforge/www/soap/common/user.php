@@ -125,7 +125,8 @@ function &users_to_soap($usrs) {
 			//skip it if it had an error
 		} else {
 			//build an array of just the fields we want
-			$return[] = array('user_id'=>$usrs[$i]->data_array['user_id'], 
+			$return[] = array(
+			'user_id'=>$usrs[$i]->data_array['user_id'], 
 			'user_name'=>$usrs[$i]->data_array['user_name'],
 			'title'=>$usrs[$i]->data_array['title'],
 			'firstname'=>$usrs[$i]->data_array['firstname'],
@@ -137,8 +138,9 @@ function &users_to_soap($usrs) {
 			'status'=>$usrs[$i]->data_array['status'],
 			'timezone'=>$usrs[$i]->data_array['timezone'],
 			'country_code'=>$usrs[$i]->data_array['country_code'],
-			'add_date'=>$usrs[$i]->data_array['add_date']),
-			'language_id'=>$usrs[$i]->data_array['language_id']);
+			'add_date'=>$usrs[$i]->data_array['add_date'],
+			'language_id'=>$usrs[$i]->data_array['language_id']
+			);
 		}
 
 	}
