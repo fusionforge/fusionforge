@@ -3,7 +3,6 @@
 
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
-require_once('/etc/gforge/local.inc');
 
 $use_cvs_acl = false;
 $maincvsroot = "/cvsroot/";

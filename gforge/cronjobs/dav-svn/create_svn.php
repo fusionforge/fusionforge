@@ -9,7 +9,6 @@
  */
 
 require ('squal_pre.php');
-require_once('/etc/gforge/local.inc');
 
 //	/path/to/svn/bin/
 $svn_path='/usr/local/svn/bin';

@@ -12,13 +12,12 @@ for ($i=0; $i<count($arr); $i++) {
 	$group_id   = $arr[$i][0];
 	$group_name = $arr[$i][1];
 
-	$res_aux2 = db_query("SELECT * FROM mail_group_list WHERE group_id = ".$group_id." AND list_name = '".$group_name."-commits'");
+	$res_aux2 = db_query("SELECT * FROM mail_group_list WHERE group_id = '".$group_id."' AND list_name = '".$group_name."-commits'");
 
-	if (db_numrows($res_aux) > 0)
-	{
+	if (db_numrows($res_aux) > 0) {
 		$group = new Group($group_id);
 
-		$res_aux2 = db_query("SELECT user_id FROM user_group WHERE admin_flags = 'A' AND group_id = ".$group_id);
+		$res_aux2 = db_query("SELECT user_id FROM user_group WHERE admin_flags = 'A' AND group_id = '".$group_id."'");
 
 		$group_admin = db_result($res,0,'user_id');
 
