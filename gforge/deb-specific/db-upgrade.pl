@@ -12,7 +12,7 @@ use DBI ;
 use MIME::Base64 ;
 use HTML::Entities ;
 
-use vars qw/$dbh @reqlist/ ;
+use vars qw/$dbh @reqlist $query/ ;
 use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
     $sys_shell_host $sys_users_host $sys_docs_host $sys_lists_host
     $sys_dns1_host $sys_dns2_host $FTPINCOMING_DIR $FTPFILES_DIR
@@ -40,7 +40,7 @@ debug "Do not worry unless told otherwise." ;
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
-    my ($query, $sth, @array, $version, $action, $path, $target) ;
+    my ($sth, @array, $version, $action, $path, $target) ;
 
     # Do we have at least the basic schema?
 
@@ -169,6 +169,7 @@ eval {
 	      $pwd = $admin_password ;
 	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
 	      chomp $md5pwd ;
+	      $md5pwd =~ s/(.{32})  -/$1/ ;
 	      $email = $server_admin ;
 	      $noreplymail="noreply\@$domain_name" ;
 	      $date = time () ;
@@ -302,13 +303,13 @@ eval {
  	  if (is_lesser $version, $target) {
  	      debug "Adding rows to supported_languages." ;
 	      @reqlist = (
-			  "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian')",
-			  "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek')",
-			  "INSERT INTO supported_languages VALUES (18,'Indonesian','Indonesian.class','Indonesian')",
-			  "INSERT INTO supported_languages VALUES (19,'Portuguese (Brazillian)','PortugueseBrazillian.class','Portuguese (Brazillian)')",
-			  "INSERT INTO supported_languages VALUES (20,'Polish','Polish.class','Polish')",
-			  "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese')",
-			  "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian')"
+			  "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian','bg')",
+			  "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek','el')",
+			  "INSERT INTO supported_languages VALUES (18,'Indonesian','Indonesian.class','Indonesian','id')",
+			  "INSERT INTO supported_languages VALUES (19,'Portuguese (Brazillian)','PortugueseBrazillian.class','PortugueseBrazillian', 'br')",
+			  "INSERT INTO supported_languages VALUES (20,'Polish','Polish.class','Polish','pl')",
+			  "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese', 'pt')",
+			  "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian','ru')"
 			  ) ;
 	      
 	      foreach my $s (@reqlist) {
@@ -592,6 +593,7 @@ eval {
 if ($@) {
     warn "Transaction aborted because $@" ;
     debug "Transaction aborted because $@" ;
+    debug "Last SQL query was:\n$query\n(end of query)" ;
     $dbh->rollback ;
     debug "Please report this bug on the Debian bug-tracking system." ;
     debug "Please include the previous messages as well to help debugging." ;
@@ -631,7 +633,7 @@ sub create_metadata_table ( $ ) {
     my $v = shift || "2.5-7+just+before+8" ;
     # Do we have the metadata table?
 
-    my $query = "SELECT count(*) FROM pg_class WHERE relname = 'debian_meta_data' and relkind = 'r'";
+    $query = "SELECT count(*) FROM pg_class WHERE relname = 'debian_meta_data' and relkind = 'r'";
     # debug $query ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -672,7 +674,7 @@ sub update_db_version ( $ ) {
     my $v = shift or die "Not enough arguments" ;
 
     debug "Updating debian_meta_data table." ;
-    my $query = "UPDATE debian_meta_data SET value = '$v' WHERE key = 'db-version'" ;
+    $query = "UPDATE debian_meta_data SET value = '$v' WHERE key = 'db-version'" ;
     # debug $query ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -680,7 +682,7 @@ sub update_db_version ( $ ) {
 }
 
 sub get_db_version () {
-    my $query = "SELECT value FROM debian_meta_data WHERE key = 'db-version'" ;
+    $query = "SELECT value FROM debian_meta_data WHERE key = 'db-version'" ;
     # debug $query ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
@@ -694,7 +696,7 @@ sub get_db_version () {
 
 sub drop_table_if_exists ( $ ) {
     my $tname = shift or die  "Not enough arguments" ;
-    my $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
+    $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
@@ -712,7 +714,7 @@ sub drop_table_if_exists ( $ ) {
 
 sub drop_sequence_if_exists ( $ ) {
     my $sname = shift or die  "Not enough arguments" ;
-    my $query = "SELECT count(*) FROM pg_class WHERE relname='$sname' AND relkind='S'" ;
+    $query = "SELECT count(*) FROM pg_class WHERE relname='$sname' AND relkind='S'" ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
@@ -730,7 +732,7 @@ sub drop_sequence_if_exists ( $ ) {
 
 sub drop_index_if_exists ( $ ) {
     my $iname = shift or die  "Not enough arguments" ;
-    my $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='i'" ;
+    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='i'" ;
     my $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
@@ -747,7 +749,7 @@ sub drop_index_if_exists ( $ ) {
 }
 
 sub bump_sequence_to ( $$ ) {
-    my ($query, $sth, @array, $seqname, $targetvalue) ;
+    my ($sth, @array, $seqname, $targetvalue) ;
 
     $seqname = shift ;
     $targetvalue = shift ;

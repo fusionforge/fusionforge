@@ -361,22 +361,24 @@ case "$1" in
 		admin_regexp=$(echo $sys_ldap_base_dn | sed 's/, */, */g')
 		admin_regexp="^cn=admin, *$admin_regexp"
 		get_our_entries () {
-		    slapcat \
-			| grep "^dn:" \
-			| sed 's/^dn: *//' \
-			| grep -v "^dc=" \
-			| grep -v "^ou=" \
-			| grep -v "$admin_regexp"
-		    slapcat \
-			| grep "^dn:" \
-			| sed 's/^dn: *//' \
-			| grep -v "^dc=" \
-			| grep -v "^ou=People," \
-			| grep -v "^ou=Roaming," \
-			| grep -v "$admin_regexp"
-		}
-		get_our_entries || true
-		get_our_entries | ldapdelete -D "cn=admin,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
+		    {		# List candidates...
+			/usr/lib/sourceforge/bin/sql2ldif.pl \
+			    | grep "^dn:" \
+			    | sed 's/^dn: *//' \
+			    | grep -v "^dc=" \
+			    | grep -v "^ou=" \
+			    | grep -v "$admin_regexp"
+			/usr/lib/sourceforge/bin/sql2ldif.pl \
+			    | grep "^dn:" \
+			    | sed 's/^dn: *//' \
+			    | grep -v "^dc=" \
+			    | grep -v "^ou=People," \
+			    | grep -v "^ou=Roaming," \
+			    | grep -v "$admin_regexp"
+			echo cn=Replicator,$sys_ldap_base_dn
+			echo cn=SF_robot,$sys_ldap_base_dn
+		    } | sort -u # ...then uniquify that list
+		get_our_entries | ldapdelete -D "cn=admin,$sys_ldap_base_dn" -x -w"$secret" -c > /dev/null 2>&1 || true
 		;;
 	reset)
 		setup_vars
