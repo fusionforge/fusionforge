@@ -3,6 +3,7 @@
  * Copyright 2003 Roland Mas <lolando@debian.org>
  * Copyright 2004 Roland Mas <roland@gnurandal.com> 
  *                The Gforge Group, LLC <http://gforgegroup.com/>
+ * Copyright 2004 Christian Bayle <bayle@debian.org> 
  *
  * This file is not part of Gforge
  *
@@ -45,6 +46,9 @@ class LdapextauthPlugin extends Plugin {
 		if ($ldap_port) {
 			$this->ldap_port = $ldap_port ;
 		}
+		if ($ldap_kind) {
+			$this->ldap_kind = $ldap_kind ;
+		}
 	}
 	
 	function CallHook ($hookname, $params) {
@@ -70,7 +74,7 @@ class LdapextauthPlugin extends Plugin {
 		global $feedback,$Language;
 	
 		if (!$this->ldap_conn) {
-			echo "ldap_connect ($this->ldap_server, $this->ldap_port);";
+			//echo "ldap_connect ($this->ldap_server, $this->ldap_port);";
 			$this->ldap_conn = ldap_connect ($this->ldap_server,
 							 $this->ldap_port);
 		}
@@ -82,7 +86,7 @@ class LdapextauthPlugin extends Plugin {
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
 			// User exists in DB
-			if (ldap_bind($this->ldap_conn, $dn, $passwd)) {
+			if (@ldap_bind($this->ldap_conn, $dn, $passwd)) {
 				// Password from form is valid in LDAP
 				if (session_login_valid_dbonly ($loginname, $passwd, false)) {
 					// Also according to DB
@@ -105,7 +109,11 @@ class LdapextauthPlugin extends Plugin {
 			if (ldap_bind($this->ldap_conn, $dn, $passwd)) {
 				// User authenticated
 				// Now get her info
-				$res = ldap_read ($this->ldap_conn, $dn, "objectclass=*") ;
+				if ($this->ldap_kind=="AD"){
+					$res = ldap_search ($this->ldap_conn, $this->base_dn, "sAMAccountName=".$loginname) ;
+				} else {
+					$res = ldap_read ($this->ldap_conn, $dn, "objectclass=*") ;
+				}
 				$info = ldap_get_entries ($this->ldap_conn,$res);
 				$ldapentry = $info[0] ;
 				
@@ -171,6 +179,9 @@ class LdapextauthPlugin extends Plugin {
 				}
 				if ($mappedinfo['ccode']) {
 					$ccode = $mappedinfo['ccode'] ;
+				}
+				if ($mappedinfo['themeid']) {
+					$theme_id = $mappedinfo['themeid'] ;
 				}
 
 				if (!$u->create ($unix_name,$firstname,$lastname,$password1,$password2,$email,

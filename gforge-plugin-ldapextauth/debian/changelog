@@ -1,3 +1,12 @@
+gforge-plugin-ldapextauth (1.0-3) unstable; urgency=low
+
+  * Added Active Directory Support
+  * Added some exanples in config.php and mapping.php
+  * Removed ldap_bind Warning
+  * Bump to unstable
+
+ -- Christian Bayle <bayle@debian.org>  Sat, 30 Oct 2004 00:44:34 +0200
+
 gforge-plugin-ldapextauth (1.0-0) experimental; urgency=low
 
   * First real release of an external LDAP authentication plugin.
