@@ -14,19 +14,22 @@
 #
 # ChangeLog:
 #
-# 2004-02-06  Lars Ehrhardt
-#       * continued with translation -> did some parts of task manager
-#
-# 2004-02-04  Lars Ehrhardt
-#       * merged german.tab with base.tab to allow easier editing
-#       * added small bits and pieces
-#       * added translation for tracker items (not completed)
-#       * convert to UTF-8 with: konwert iso1-utf8 German.tab > German_new.tab
-#       * convert to UTF-8 with: konwert html-utf8 German.tab > German_new.tab
-#
 # 2003-11-07  Marco Schmidt
 #	* changed translation
+# 2004-02-04  Lars Ehrhardt
+#   * merged german.tab with base.tab to allow easier editing
+#   * added small bits and pieces
+#   * added translation for tracker items (not completed)
+#   * convert to UTF-8 with: konwert iso1-utf8 German.tab > German_new.tab
+#   * convert to UTF-8 with: konwert html-utf8 German.tab > German_new.tab
+# 2004-02-06  Lars Ehrhardt
+#   * continued with translation -> did some parts of task manager
+# 2004-11-04  Tobias Rötschke  <gforge@roetschke.com>
+#   * fixed files/forum tab and some corrections
+# 2005-01-13  Tobias Rötschke  <gforge@roetschke.com>
+#   * corrected submit_new and depend_info
 #
+
 account	title	Account Einstellungen
 account	updated	Aktualisiert
 account_change_email	desc	<p>Das Ändern Ihrer EMail-Adresse erfordert eine Bestätigung von Ihrem neu angegebenen EMail-Konto aus, damit wir sicherstellen können, dass wir eine korrekte EMail-Adresse gespeichert haben.</p><p>Wir müssen für jeden Benutzer eine korrekte EMail-Adresse pflegen, weil wir über diese die Zugriffsberechtigung regeln. Falls wir aus projektbezogenen Gründen einen Benutzer erreichen müssen, ist es wichtig, dass uns das auch möglich ist.</p>  <p>Durch das Abschicken des unten stehenden Formulars wird Ihnen eine EMail mit einem Bestätigungs-Link  an Ihre neue EMail-Adresse zugeschickt. Das Besuchen dieses Links wird die Änderung der EMail-Adresse endgültig übernehmen.</p>
@@ -995,7 +998,7 @@ pm_include_grouphtml	project	Projekt
 pm_include_taskhtml	by	Von
 pm_include_taskhtml	comment	Kommentar
 pm_include_taskhtml	date	Datum
-pm_include_taskhtml	depend_info	Diese Aufgabe hängt von dieser Aufgabe ab
+pm_include_taskhtml	depend_info	Diese Aufgabe hängt von folgenden Aufgaben ab
 pm_include_taskhtml	field	Feld
 pm_include_taskhtml	no_changes	Es wurden keine Änderungen gemacht
 pm_include_taskhtml	no_comments	Es wurden keine Kommentare abgegeben
@@ -1246,7 +1249,7 @@ tracker_admin_update_type	publicy_available	Öffentlich sichtbar
 tracker_admin_update_type	send_submissions	Schicke E-Mail bei Neueinträgen an
 tracker_admin_update_type	title	Aktualisiere $1
 tracker_artifact	error_body_required	Artefakt: Rumpf der Nachricht erforderlich
-tracker_artifact	error_summary_required	Artefakt: Zusammenfassung der Nachricht wird benötigt
+tracker_artifact	error_summary_required	Artefakt: Zusammenfassung der Nachricht erforderlich
 tracker_artifact	logged_in_no	Angemeldet: NEIN
 tracker_artifact	logged_in_yes	Angemeldet: JA
 tracker_artifact	nothing_changed	Keine Änderungen - Aktualisierung abgebrochen
@@ -1255,20 +1258,20 @@ tracker_artifacthtml	date	Datum
 tracker_artifacthtml	field	Feld
 tracker_artifacthtml	message	Nachricht
 tracker_artifacthtml	old_value	Alter Wert
-tracker_artifacttype	admin	Administrieren
-tracker_artifacttype	admin_functions	Adminfunktionen:
+tracker_artifacttype	admin	Verwalten
+tracker_artifacttype	admin_functions	Verwaltungsfunktionen:
 tracker_artifacttype	browse	Durchsuchen
 tracker_artifacttype	edit_options	Ändere/Aktualisiere Optionen in
 tracker_artifacttype	nobody	Niemanden
 tracker_artifacttype	none	Keine
 tracker_artifacttype	required_fields	ArtifactType: Name, Beschreibung, Frist, und Statustimeout werden benötigt
-tracker_artifacttype	submit_new	Neueintragen
+tracker_artifacttype	submit_new	Eintrag anlegen
 tracker_browse	ascending	Aufsteigend
 tracker_browse	canned_response	Vorbereitete Antwort
 tracker_browse	check_all	Markiere  alle
 tracker_browse	clear_all	Lösche  alle
 tracker_browse	descending	Absteigend
-tracker_browse	mass_update	Massenaktualisierung
+tracker_browse	mass_update	Markierte Einträge aktualisieren
 tracker_browse	next	Nächste 50
 tracker_browse	no_change	Keine Änderung
 tracker_browse	no_items	Keine Beiträge gefunden
