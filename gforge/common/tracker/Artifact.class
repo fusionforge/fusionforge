@@ -15,42 +15,40 @@ require_once('common/include/Error.class');
 class Artifact extends Error {
 
 	/**
-	 * Resource ID
+	 * Resource ID.
 	 *
-	 * @var		int		$status_res
+	 * @var		int		$status_res.
 	 */
 	var $status_res;
 
 	/**
-	 * Artifact Type object
+	 * Artifact Type object.
 	 *
-	 * @var		object	$ArtifactType
+	 * @var		object	$ArtifactType.
 	 */
 	var $ArtifactType; 
 
 	/**
-	 * Array of artifact data
+	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 * Array of ArtifactFile objects
+	 * Array of ArtifactFile objects.
 	 *
 	 * @var		array	$files
 	 */
 	var $files; 
 
 	/**
-	 *  Artifact() - constructor
+	 *  Artifact - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing artifact
-	 *
-	 *	@param	object	The artifact type object
+	 *	@param	object	The ArtifactType object.
 	 *  @param	integer	(primary key from database OR complete assoc array) 
 	 *		ONLY OPTIONAL WHEN YOU PLAN TO IMMEDIATELY CALL ->create()
-	 *  @return true/false
+	 *  @return	boolean	success.
 	 */
 	function Artifact(&$ArtifactType, $data=false) {
 		$this->Error(); 
@@ -98,15 +96,16 @@ class Artifact extends Error {
 
 
 	/**
-	 *	create() - construct a new Artifact in the database
+	 *	create - construct a new Artifact in the database.
 	 *
-	 *	@param	int		The category ID
-	 *	@param	int		The artifact group ID
-	 *	@param	string	The artifact summary
-	 *	@param	string	Details of the artifact
-	 *	@param	int		The ID of the user to which this artifact is to be assigned
-	 *	@param	int		The artifacts priority
-	 *  @return id on success / false on failure
+	 *	@param	int		The category ID.
+	 *	@param	int		The artifact group ID.
+	 *	@param	string	The artifact summary.
+	 *	@param	string	Details of the artifact.
+	 *	@param	int		The ID of the user to which this artifact is to be assigned.
+	 *	@param	int		The artifacts priority.
+	 *	@param	string	An email address to add to the monitoring queue.
+	 *  @return id on success / false on failure.
 	 */
 	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=5, $monitor_email=false) {
 
@@ -227,21 +226,15 @@ class Artifact extends Error {
 			$this->mailFollowup(1);
 			db_commit();
 
-			//
-			//  Set up monitoring for the user if requested
-			//
-			if ($monitor_email) {
-				$this->setMonitor($monitor_email);
-			}
 			return $artifact_id;
 		}
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this Artifact from the database
+	 *	fetchData - re-fetch the data for this Artifact from the database.
 	 *
-	 *	@param	int		The artifact ID
-	 *	@return true/false
+	 *	@param	int		The artifact ID.
+	 *	@return	boolean	success.
 	 */
 	function fetchData($artifact_id) {
 		$res=db_query("SELECT * FROM artifact_vw 
@@ -256,79 +249,79 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getArtifactType() - get the ArtifactType Object this Artifact is associated with
+	 *	getArtifactType - get the ArtifactType Object this Artifact is associated with.
 	 *
-	 *	@return ArtifactType
+	 *	@return object	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
 	
 	/**
-	 *	getID() - get this ArtifactID
+	 *	getID - get this ArtifactID.
 	 *
-	 *	@return the group_artifact_id #
+	 *	@return	int	The artifact_id #.
 	 */
 	function getID() {
 		return $this->data_array['artifact_id'];
 	}
 
 	/**
-	 *	getStatusID() - get open/closed/deleted flag
+	 *	getStatusID - get open/closed/deleted flag.
 	 *
-	 *	@return (1) Open, (2) Closed, (3) Deleted
+	 *	@return	int	Status: (1) Open, (2) Closed, (3) Deleted.
 	 */
 	function getStatusID() {
 		return $this->data_array['status_id'];
 	}
 
 	/**
-	 *	getStatusName() - get open/closed/deleted text
+	 *	getStatusName - get open/closed/deleted text.
 	 *
-	 *	@return text status name
+	 *	@return	string	The status name.
 	 */
 	function getStatusName() {
 		return $this->data_array['status_name'];
 	}
 
 	/**
-	 *	getResolutionID() - get resolution flag
+	 *	getResolutionID - get resolution flag.
 	 *
-	 *	@return int
+	 *	@return int	resolution.
 	 */
 	function getResolutionID() {
 		return $this->data_array['resolution_id'];
 	}
 
 	/**
-	 *	getResolutionName() - get resolution name
+	 *	getResolutionName - get resolution name.
 	 *
-	 *	@return text resolution name
+	 *	@return	string	The resolution name.
 	 */
 	function getResolutionName() {
 		return $this->data_array['resolution_name'];
 	}
 
 	/**
-	 *	getCategoryID() - get category_id flag
+	 *	getCategoryID - get category_id flag.
 	 *
-	 *	@return int category_id
+	 *	@return int category_id.
 	 */
 	function getCategoryID() {
 		return $this->data_array['category_id'];
 	}
 
 	/**
-	 *	getCategoryName() - get category text name
+	 *	getCategoryName - get category text name.
 	 *
-	 *	@return text category name
+	 *	@return	string	The category name.
 	 */
 	function getCategoryName() {
 		return $this->data_array['category_name'];
 	}
 
 	/**
-	 *	getArtifactGroupID() - get artifact_group_id flag
+	 *	getArtifactGroupID - get artifact_group_id flag.
 	 *
 	 *	@return int artifact_group_id
 	 */
@@ -337,133 +330,133 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getArtifactGroupName() - get artifact_group_name text
+	 *	getArtifactGroupName - get artifact_group_name text.
 	 *
-	 *	@return text artifact_group name
+	 *	@return	string	The artifact_group name.
 	 */
 	function getArtifactGroupName() {
 		return $this->data_array['group_name'];
 	}
 
 	/**
-	 *	getPriority() - get priority flag
+	 *	getPriority - get priority flag.
 	 *
-	 *	@return int priority
+	 *	@return int priority.
 	 */
 	function getPriority() {
 		return $this->data_array['priority'];
 	}
 
 	/**
-	 *	getSubmittedBy() - get ID of submitter
+	 *	getSubmittedBy - get ID of submitter.
 	 *
-	 *	@return int user_id of submitter
+	 *	@return int user_id of submitter.
 	 */
 	function getSubmittedBy() {
 		return $this->data_array['submitted_by'];
 	}
 
 	/**
-	 *	getSubmittedEmail() - get email of submitter
+	 *	getSubmittedEmail - get email of submitter.
 	 *
-	 *	@return text email of submitter
+	 *	@return	string	The email of submitter.
 	 */
 	function getSubmittedEmail() {
 		return $this->data_array['submitted_email'];
 	}
 
 	/**
-	 *	getSubmittedRealName() - get real name of submitter
+	 *	getSubmittedRealName - get real name of submitter.
 	 *
-	 *	@return text real name of submitter
+	 *	@return	string	The real name of submitter.
 	 */
 	function getSubmittedRealName() {
 		return $this->data_array['submitted_realname'];
 	}
 
 	/**
-	 *	getSubmittedUnixName() - get login name of submitter
+	 *	getSubmittedUnixName - get login name of submitter.
 	 *
-	 *	@return text unix name of submitter
+	 *	@return	string	The unix name of submitter.
 	 */
 	function getSubmittedUnixName() {
 		return $this->data_array['submitted_unixname'];
 	}
 
 	/**
-	 *	getAssignedTo() - get ID of assignee
+	 *	getAssignedTo - get ID of assignee.
 	 *
-	 *	@return int user_id of assignee
+	 *	@return int user_id of assignee.
 	 */
 	function getAssignedTo() {
 		return $this->data_array['assigned_to'];
 	}
 
 	/**
-	 *	getAssignedEmail() - get email of assignee
+	 *	getAssignedEmail - get email of assignee.
 	 *
-	 *	@return text email of assignee
+	 *	@return	string	The email of assignee.
 	 */
 	function getAssignedEmail() {
 		return $this->data_array['assigned_email'];
 	}
 
 	/**
-	 *	getAssignedRealName() - get real name of assignee
+	 *	getAssignedRealName - get real name of assignee.
 	 *
-	 *	@return text real name of assignee
+	 *	@return	string	The real name of assignee.
 	 */
 	function getAssignedRealName() {
 		return $this->data_array['assigned_realname'];
 	}
 
 	/**
-	 *	getAssignedUnixName() - get login name of assignee
+	 *	getAssignedUnixName - get login name of assignee.
 	 *
-	 *	@return text unix name of assignee
+	 *	@return	string	The unix name of assignee.
 	 */
 	function getAssignedUnixName() {
 		return $this->data_array['assigned_unixname'];
 	}
 
 	/**
-	 *	getOpenDate() - get unix time of creation
+	 *	getOpenDate - get unix time of creation.
 	 *
-	 *	@return int unix time
+	 *	@return int unix time.
 	 */
 	function getOpenDate() {
 		return $this->data_array['open_date'];
 	}
 
 	/**
-	 *	getCloseDate() - get unix time of closure
+	 *	getCloseDate - get unix time of closure.
 	 *
-	 *	@return int unix time
+	 *	@return int unix time.
 	 */
 	function getCloseDate() {
 		return $this->data_array['close_date'];
 	}
 
 	/**
-	 *	getSummary() - get text summary of artifact
+	 *	getSummary - get text summary of artifact.
 	 *
-	 *	@return text summary (subject)
+	 *	@return	string The summary (subject).
 	 */
 	function getSummary() {
 		return $this->data_array['summary'];
 	}
 
 	/**
-	 *	getDetails() - get text body (message) of artifact
+	 *	getDetails - get text body (message) of artifact.
 	 *
-	 *	@return text body (message)
+	 *	@return	string	The body (message).
 	 */
 	function getDetails() {
 		return $this->data_array['details'];
 	}
 
 	/**
-	 *  setMonitor() - user can monitor this artifact
+	 *  setMonitor - user can monitor this artifact.
 	 *
 	 *  @return false - always false - always use the getErrorMessage() for feedback
 	 */
@@ -511,9 +504,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *  getMonitorIds() - 
+	 *  getMonitorIds - array of email addresses monitoring this Artifact.
 	 *
-	 *  @return array of email addresses monitoring this ArtifactType
+	 *  @return array of email addresses monitoring this Artifact.
 	 */
 	function &getMonitorIds() {
 		$res=db_query("SELECT user_id
@@ -523,9 +516,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getHistory() - returns a result set of audit trail for this support request
+	 *	getHistory - returns a result set of audit trail for this support request.
 	 *
-	 *	@return result set
+	 *	@return database result set.
 	 */
 	function getHistory() {
 		$sql="SELECT * ".
@@ -536,9 +529,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getMessages() - get the list of messages attached to this artifact
+	 *	getMessages - get the list of messages attached to this artifact.
 	 *
-	 *	@return database result set
+	 *	@return database result set.
 	 */
 	function getMessages() {
 		$sql="select * ".
@@ -548,9 +541,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	getFiles() - get array of ArtifactFile's
+	 *	getFiles - get array of ArtifactFile's.
 	 *
-	 *	@return array of ArtifactFile's
+	 *	@return array of ArtifactFile's.
 	 */
 	function &getFiles() {
 		if (!isset($this->files)) {
@@ -571,13 +564,13 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *  addMessage() - attach a text message to this Artifact
+	 *  addMessage - attach a text message to this Artifact.
 	 *
-	 *	@param	string	The message being attached
-	 *	@param	string	Email address of message creator
-	 *	@param	bool	Whether to email out a followup
-	 *	@access private
-	 *  @return true/false
+	 *	@param	string	The message being attached.
+	 *	@param	string	Email address of message creator.
+	 *	@param	bool	Whether to email out a followup.
+	 *	@access private.
+	 *  @return	boolean	success.
 	 */
 	function addMessage($body,$by=false,$send_followup=false) {
 		if (!$body) {
@@ -616,12 +609,12 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *  addHistory() - add an entry to audit trail
+	 *  addHistory - add an entry to audit trail.
 	 *
-	 *  @param	string	The name of the field in the database being modified
-	 *  @param	string	The former value of this field
-	 *  @access private
-	 *  @return true/false
+	 *  @param	string	The name of the field in the database being modified.
+	 *  @param	string	The former value of this field.
+	 *  @access private.
+	 *  @return	boolean	success.
 	 */
 	function addHistory($field_name,$old_value) {
 		if (!session_loggedin()) {
@@ -635,19 +628,19 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *	update() - update the fields in this artifact
+	 *	update - update the fields in this artifact.
 	 *
-	 *	@param	int		The artifact priority
-	 *	@param	int		The artifact status ID
-	 *	@param	int		The artifact category ID
-	 *	@param	int		The artifact group ID
-	 *	@param	int		The artifact resolution ID
-	 *	@param	int		The person to which this artifact is to be assigned
-	 *	@param	int		The artifact summary
-	 *	@param	int		The canned response
-	 *	@param	int		Attaching another comment
-	 *	@param	int		Allows you to move an artifact to another type
-	 *	@return true/false
+	 *	@param	int		The artifact priority.
+	 *	@param	int		The artifact status ID.
+	 *	@param	int		The artifact category ID.
+	 *	@param	int		The artifact group ID.
+	 *	@param	int		The artifact resolution ID.
+	 *	@param	int		The person to which this artifact is to be assigned.
+	 *	@param	string	The artifact summary.
+	 *	@param	int		The canned response.
+	 *	@param	string	Attaching another comment.
+	 *	@param	int		Allows you to move an artifact to another type.
+	 *	@return	boolean	success.
 	 */
 	function update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id) {
@@ -860,13 +853,13 @@ class Artifact extends Error {
 	}				
 
 	/**
-	 *	mailFollowup() - send out an email update for this artifact
+	 *	mailFollowup - send out an email update for this artifact.
 	 *
-	 *	@param	int		(1) initial/creation (2) update
-	 *	@param	array	Array of additional addresses to mail to
-	 *	@param	array	Array of fields changed in this update 
-	 *	@access private
-	 *	@return true/false
+	 *	@param	int		(1) initial/creation (2) update.
+	 *	@param	array	Array of additional addresses to mail to.
+	 *	@param	array	Array of fields changed in this update .
+	 *	@access private.
+	 *	@return	boolean	success.
 	 */
 	function mailFollowup($type, $more_addresses=false, $changes='') {
 		global $sys_datefmt;

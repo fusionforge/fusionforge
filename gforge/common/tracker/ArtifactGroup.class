@@ -14,27 +14,25 @@ require_once('common/include/Error.class');
 class ArtifactGroup extends Error {
 
 	/**
-	 * Artifact type object
+	 * Artifact type object.
 	 *
-	 * @var		object	$ArtifactType
+	 * @var		object	$ArtifactType.
 	 */	
 	var $ArtifactType; 
 
 	/**
-	 * Array of artifact data
+	 * Array of artifactGroup data.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *  ArtifactGroup() - constructor
+	 *  ArtifactGroup - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing artifact
-	 *
-	 *	@param	object	Artifact type object
-	 *  @param	array	(all fields from artifact_group) OR id from database
-	 *  @return true/false
+	 *	@param	object	Artifact type object.
+	 *  @param	array	(all fields from artifact_group) OR id from database.
+	 *  @return	boolean	success.
 	 */
 	function ArtifactGroup(&$ArtifactType, $data=false) {
 		$this->Error(); 
@@ -66,10 +64,10 @@ class ArtifactGroup extends Error {
 	}
 
 	/**
-	 *	create() - create a new item in the database
+	 *	create - create a new item in the database.
 	 *
-	 *	@param	string	Item name
-	 *  @return id on success / false on failure
+	 *	@param	string	Item name.
+	 *  @return id on success / false on failure.
 	 */
 	function create($name) {
 		//
@@ -105,10 +103,10 @@ class ArtifactGroup extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this ArtifactGroup from the database
+	 *	fetchData - re-fetch the data for this ArtifactGroup from the database.
 	 *
-	 *	@param	int		Data ID
-	 *	@return true/false
+	 *	@param	int		Data ID.
+	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res=db_query("SELECT * FROM artifact_group WHERE id='$id'");
@@ -122,37 +120,37 @@ class ArtifactGroup extends Error {
 	}
 
 	/**
-	 *	getArtifactType() - get the ArtifactType Object this ArtifactGroup is associated with
+	 *	getArtifactType - get the ArtifactType Object this ArtifactGroup is associated with.
 	 *
-	 *	@return ArtifactType
+	 *	@return object	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
 	
 	/**
-	 *	getID() - get this ArtifactGroup's ID
+	 *	getID - get this ArtifactGroup's ID.
 	 *
-	 *	@return the id #
+	 *	@return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getName() - get the name
+	 *	getName - get the name.
 	 *
-	 *	@return text name
+	 *	@return string name.
 	 */
 	function getName() {
 		return $this->data_array['group_name'];
 	}
 
 	/**
-	 *  update() - update an ArtifactGroup
+	 *  update - update an ArtifactGroup.
 	 *
-	 *  @param	string	Name of the group
-	 *  @return true/false
+	 *  @param	string	Name of the group.
+	 *  @return	boolean	success.
 	 */
 	function update($name) {
 		if (!$this->ArtifactType->userIsAdmin()) {

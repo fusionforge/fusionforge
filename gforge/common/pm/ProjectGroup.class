@@ -24,14 +24,14 @@ class ProjectGroup extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $data_array
+	 * @var	 array   $data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group
+	 * @var	 object  $Group.
 	 */
 	var $Group;
 	var $statuses;
@@ -41,9 +41,10 @@ class ProjectGroup extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated
-	 *  @param  int	 The group_project_id
-	 *  @param  array	The associative array of data
+	 *	@param	object	The Group object to which this forum is associated.
+	 *  @param  int	 The group_project_id.
+	 *  @param  array	The associative array of data.
+	 *	@return	boolean	success.
 	 */
 	function ProjectGroup(&$Group, $group_project_id=false, $arr=false) {
 		$this->Error();
@@ -82,6 +83,15 @@ class ProjectGroup extends Error {
 		return true;
 	}
 
+	/**
+	 *	create - create a new ProjectGroup in the database.
+	 *
+	 *	@param	string	The project name.
+	 *	@param	string	The project description.
+	 *	@param	int	Whether it is (1) public or (0) private .
+	 *	@param	string	The email address to send new notifications to.
+	 *	@return boolean success.
+	 */
 	function create($project_name,$description,$is_public=1,$send_all_posts_to='') {
 
 		if (strlen($project_name) < 3) {
@@ -124,10 +134,10 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this ProjectGroup from the database.
+	 *  fetchData - re-fetch the data for this ProjectGroup from the database.
 	 *
 	 *  @param  int	 The project group ID.
-	 *  @return true/false
+	 *  @return	boolean	success.
 	 */
 	function fetchData($group_project_id) {
 		$res=db_query("SELECT * FROM project_group_list
@@ -143,18 +153,18 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 *	getGroup() - get the Group object this ProjectGroup is associated with.
+	 *	getGroup - get the Group object this ProjectGroup is associated with.
 	 *
-	 *	@return the Group object.
+	 *	@return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID() - get this GroupProjectID.
+	 *	getID - get this GroupProjectID.
 	 *
-	 *	@return the group_project_id #.
+	 *	@return	int	The group_project_id #.
 	 */
 	function getID() {
 		return $this->data_array['group_project_id'];
@@ -197,11 +207,11 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 *	getMessageCount - the total number of messages in this forum.
+	 *	getTaskCount - the total number of tasks in this ProjectGroup.
 	 *
 	 *	@return int	The count.
 	 * /
-	function getMessageCount() {
+	function getTaskCount() {
 		return $this->data_array['total'];
 	}*/
 
@@ -251,6 +261,15 @@ class ProjectGroup extends Error {
 		return $this->technicians;
 	}
 
+	/**
+	 *	create - create a new ProjectGroup in the database.
+	 *
+	 *	@param	string	The project name.
+	 *	@param	string	The project description.
+	 *	@param	int	Whether it is (1) public or (0) private .
+	 *	@param	string	The email address to send new notifications to.
+	 *	@return boolean success.
+	 */
 	function update($project_name,$description,$is_public=1,$send_all_posts_to='') {
 
 		if (strlen($project_name) < 3) {

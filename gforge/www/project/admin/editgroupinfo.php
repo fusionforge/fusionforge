@@ -35,7 +35,7 @@ if ($submit) {
 		$use_survey,
 		$use_forum,
 		$use_pm,
-		$use_pm_depend,
+		1,
 		$use_cvs,
 		$use_news,
 		$use_docman,
@@ -158,15 +158,6 @@ function c($v) {
 </td>
 <td>
 <B>Use Project/Task Manager</B>
-</td>
-</tr>
-
-<tr>
-<td>
- <INPUT TYPE="CHECKBOX" NAME="use_pm_depend" VALUE="1" <?php echo c($group->usesPMDependencies()); ?> ><BR>
-</td>
-<td>
-<B>Use Task Dependency List</B>
 </td>
 </tr>
 

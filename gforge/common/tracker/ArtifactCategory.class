@@ -14,27 +14,25 @@ require_once('common/include/Error.class');
 class ArtifactCategory extends Error {
 
 	/** 
-	 * The artifact type object
+	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactType
+	 * @var		object	$ArtifactType.
 	 */
 	var $ArtifactType; //object
 
 	/**
-	 * Array of artifact data
+	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *  ArtifactCategory() - constructor
+	 *  ArtifactCategory - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing artifact
-	 *
-	 *	@param	object	ArtifactType object
-	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database
-	 *  @return true/false
+	 *	@param	object	ArtifactType object.
+	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
+	 *  @return	boolean	success.
 	 */
 	function ArtifactCategory(&$ArtifactType, $data=false) {
 		$this->Error(); 
@@ -66,11 +64,11 @@ class ArtifactCategory extends Error {
 	}
 
 	/**
-	 *	create() - create a new item in the database
+	 *	create - create a new item in the database.
 	 *
-	 *	@param	string	Item name
-	 *	@param	int		User_id of assignee
-	 *  @return id on success / false on failure
+	 *	@param	string	Item name.
+	 *	@param	int		User_id of assignee.
+	 *  @return id on success / false on failure.
 	 */
 	function create($name, $auto_assign_to) {
 		//
@@ -108,10 +106,10 @@ class ArtifactCategory extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this ArtifactCategory from the database
+	 *	fetchData - re-fetch the data for this ArtifactCategory from the database.
 	 *
-	 *	@param	int		ID of the category
-	 *	@return true/false
+	 *	@param	int		ID of the category.
+	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res=db_query("SELECT * FROM artifact_category WHERE id='$id'");
@@ -125,47 +123,47 @@ class ArtifactCategory extends Error {
 	}
 
 	/**
-	 *	getArtifactType() - get the ArtifactType Object this ArtifactCategory is associated with
+	 *	getArtifactType - get the ArtifactType Object this ArtifactCategory is associated with.
 	 *
-	 *	@return ArtifactType
+	 *	@return object	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
 	
 	/**
-	 *	getID() - get this ArtifactCategory's ID
+	 *	getID - get this ArtifactCategory's ID.
 	 *
-	 *	@return the id #
+	 *	@return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getName() - get the name
+	 *	getName - get the name.
 	 *
-	 *	@return text name
+	 *	@return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['category_name'];
 	}
 
 	/**
-	 *	getAssignee() - get the user_id of the person to assign this category to
+	 *	getAssignee - get the user_id of the person to assign this category to.
 	 *
-	 *	@return int user_id
+	 *	@return int user_id.
 	 */
 	function getAssignee() {
 		return $this->data_array['auto_assign_to'];
 	}
 
 	/**
-	 *  update() - update an ArtifactCategory
+	 *  update - update an ArtifactCategory.
 	 *
-	 *  @param	string	Name of the category
-	 *  @param	int		user_id of the person this category should auto-assign to
-	 *  @return true/false
+	 *  @param	string	Name of the category.
+	 *  @param	int		user_id of the person this category should auto-assign to.
+	 *  @return	boolean	success.
 	 */
 	function update($name,$assign_to) {
 		if (!$this->ArtifactType->userIsAdmin()) {

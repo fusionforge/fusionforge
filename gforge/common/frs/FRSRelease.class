@@ -16,23 +16,24 @@ class FRSRelease extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var  array   $data_array
+	 * @var  array   $data_array.
 	 */
 	var $data_array;
 
 	/**
-	 * The FRSPackage
+	 * The FRSPackage.
 	 *
-	 * @var  object  FRSPacakge
+	 * @var  object  FRSPacakge.
 	 */
 	var $FRSPackage;
 
 	/**
 	 *  Constructor.
 	 *
-	 *  @param  object  The FRSPackage object to which this release is associated
-	 *  @param  int  The release_id
-	 *  @param  array   The associative array of data
+	 *  @param  object  The FRSPackage object to which this release is associated.
+	 *  @param  int  The release_id.
+	 *  @param  array   The associative array of data.
+	 *	@return	boolean	success.
 	 */
 	function FRSRelease(&$FRSPackage, $release_id=false, $arr=false) {
 		$this->Error();
@@ -55,6 +56,7 @@ class FRSRelease extends Error {
 				$this->data_array =& $arr;
 				if ($this->data_array['package_id'] != $this->FRSPackage->getID()) {
 					$this->setError('FRSPackage_id in db result does not match FRSPackage Object');
+					$this->data_array=null;
 					return false;
 				}
 			}
@@ -62,6 +64,16 @@ class FRSRelease extends Error {
 		return true;
 	}
 
+	/**
+	 *	create - create a new release in the database.
+	 *
+	 *	@param	string	The name of the release.
+	 *	@param	string	The release notes for the release.
+	 *	@param	string	The change log for the release.
+	 *	@param	int	Whether the notes/log are preformatted with \n chars (1) true (0) false.
+	 *	@param	int	The unix date of the release.
+	 *	@return	boolean success.
+	 */
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
 		if (strlen($name) < 3) {
 			$this->setError('FRSRelease Name Must Be At Least 3 Characters');
@@ -106,10 +118,10 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this Package from the database
+	 *  fetchData - re-fetch the data for this Release from the database.
 	 *
-	 *  @param  int  The artifact type ID
-	 *  @return true/false
+	 *  @param  int  The release_id.
+	 *  @return	boolean	success.
 	 */
 	function fetchData($release_id) {
 		$res=db_query("SELECT * FROM frs_release
@@ -125,34 +137,34 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  getFRSPackage() - get the FRSPackage object this release is associated with
+	 *  getFRSPackage - get the FRSPackage object this release is associated with.
 	 *
-	 *  @return the FRSPackage object
+	 *  @return	object	The FRSPackage object.
 	 */
 	function &getFRSPackage() {
 		return $this->FRSPackage;
 	}
 
 	/**
-	 *  getID() - get this release_id
+	 *  getID - get this release_id.
 	 *
-	 *  @return the id of this package
+	 *  @return	int	The id of this release.
 	 */
 	function getID() {
 		return $this->data_array['release_id'];
 	}
 
 	/**
-	 *  getName - get the name of this package.
+	 *  getName - get the name of this release.
 	 *
-	 *  @return string  The name of this package.
+	 *  @return string  The name of this release.
 	 */
 	function getName() {
 		return $this->data_array['name'];
 	}
 
 	/**
-	 *  getStatus - get the status of this package.
+	 *  getStatus - get the status of this release.
 	 *
 	 *  @return int	The status.
 	 */
@@ -161,7 +173,7 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  getNotes - get the release notes of this package.
+	 *  getNotes - get the release notes of this release.
 	 *
 	 *  @return string	The release notes.
 	 */
@@ -170,7 +182,7 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  getChanges - get the changelog of this package.
+	 *  getChanges - get the changelog of this release.
 	 *
 	 *  @return string	The changelog.
 	 */
@@ -179,16 +191,16 @@ class FRSRelease extends Error {
 	}
 
 	/**
-	 *  getPreformatted - get the preformatted option of this package.
+	 *  getPreformatted - get the preformatted option of this release.
 	 *
-	 *  @return boolean	whether to preserve the preformatted text.
+	 *  @return	boolean	preserve_formatting.
 	 */
 	function getPreformatted() {
 		return $this->data_array['preformatted'];
 	}
 
 	/**
-	 *  getReleaseDate - get the releasedate of this package.
+	 *  getReleaseDate - get the releasedate of this release.
 	 *
 	 *  @return int	The release date in unix time.
 	 */
@@ -196,6 +208,11 @@ class FRSRelease extends Error {
 		return $this->data_array['release_date'];
 	}
 
+	/**
+	 *  sendNotice - the logic to send an email/jabber notice for a release.
+	 *
+	 *  @return	boolean	success.
+	 */
 	function sendNotice() {
 		$arr =& $this->FRSPackage->getMonitorIDs();
 		
@@ -220,6 +237,17 @@ class FRSRelease extends Error {
 		}
 	}
 
+	/**
+	 *	create - create a new release in the database.
+	 *
+	 *	@param	int	The status of this release from the frs_status table.
+	 *	@param	string	The name of the release.
+	 *	@param	string	The release notes for the release.
+	 *	@param	string	The change log for the release.
+	 *	@param	int	Whether the notes/log are preformatted with \n chars (1) true (0) false.
+	 *	@param	int	The unix date of the release.
+	 *	@return	boolean success.
+	 */
 	function update($status,$name,$notes,$changes,$preformatted,$release_date) {
 
 		if (strlen($name) < 3) {

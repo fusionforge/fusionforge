@@ -47,6 +47,11 @@ class BaseLanguage {
 		}
 	}
 
+	function loadLanguageID($language_id) {
+		$res=db_query("SELECT * FROM supported_languages WHERE language_id='$language_id'");
+		$this->loadLanguage(db_result($res,0,'classname'));
+	}
+
 	function loadLanguage($lang) {
 		$fname = 'languages/'.$lang.'.tab' ;
 		$this->loadLanguageFile($fname) ;
@@ -123,7 +128,6 @@ class BaseLanguage {
 		return $this->text_array['conf']['default_font'];
 	}
 }
-
 
 function language_code_to_result($alang) {
 	global $cookie_language_id;

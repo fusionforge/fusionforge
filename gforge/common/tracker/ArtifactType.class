@@ -89,7 +89,7 @@ class ArtifactType extends Error {
 	 *	@param	object	The Group object.
 	 *	@param	int		The id # assigned to this artifact type in the db.
 	 *  @param	array	The associative array of data.
-	 *	@return boolean.
+	 *	@return boolean	success.
 	 */
 	function ArtifactType(&$Group,$artifact_type_id=false, $arr=false) {
 		$this->Error();
@@ -128,7 +128,7 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	create() - use this to create a new ArtifactType in the database.
+	 *	create - use this to create a new ArtifactType in the database.
 	 *
 	 *	@param	string	The type name.
 	 *	@param	string	The type description.
@@ -138,8 +138,8 @@ class ArtifactType extends Error {
 	 *	@param	string	The address to send new entries and updates to.
 	 *	@param	int		Days before this item is considered overdue.
 	 *	@param	bool	(1) trye (0) false - whether the resolution box should be shown.
-	 *	@param	string	Free-form text that project admins can place on the submit page.
-	 *	@param	string	Free-form text that project admins can place on the browse page.
+	 *	@param	string	Free-form string that project admins can place on the submit page.
+	 *	@param	string	Free-form string that project admins can place on the browse page.
 	 *	@param	int		(1) bug tracker, (2) Support Tracker, (3) Patch Tracker, (4) features (0) other.
 	 *	@return id on success, false on failure.
 	 */
@@ -217,7 +217,7 @@ class ArtifactType extends Error {
 	 *  fetchData - re-fetch the data for this ArtifactType from the database.
 	 *
 	 *  @param	int		The artifact type ID.
-	 *  @return boolean.
+	 *  @return boolean	success.
 	 */
 	function fetchData($artifact_type_id) {
 		$res=db_query("SELECT * FROM artifact_group_list_vw
@@ -271,14 +271,14 @@ class ArtifactType extends Error {
 	/**
 	 *	  allowsAnon - determine if non-logged-in users can post.
 	 *
-	 *	  @return	boolean.
+	 *	  @return	boolean	allow_anonymous_submissions.
 	 */
 	function allowsAnon() {
 		return $this->data_array['allow_anon'];
 	}
 
 	/**
-	 *	  getSubmitInstructions - get the free-form text strings.
+	 *	  getSubmitInstructions - get the free-form string strings.
 	 *
 	 *	  @return	string	instructions.
 	 */
@@ -287,9 +287,9 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  getBrowseInstructions - get the free-form text strings.
+	 *	  getBrowseInstructions - get the free-form string strings.
 	 *
-	 *	  @return text instructions.
+	 *	  @return string instructions.
 	 */
 	function getBrowseInstructions() {
 		return $this->data_array['browse_instructions'];
@@ -298,7 +298,7 @@ class ArtifactType extends Error {
 	/**
 	 *	  emailAll - determine if we're supposed to email on every event.
 	 *
-	 *	  @return	boolean.
+	 *	  @return	boolean	email_all.
 	 */
 	function emailAll() {
 		return $this->data_array['email_all_updates'];
@@ -316,7 +316,7 @@ class ArtifactType extends Error {
 	/**
 	 *	  isPublic - whether non-group-members can view.
 	 *
-	 *	  @return boolean.
+	 *	  @return boolean	is_public.
 	 */
 	function isPublic() {
 		return $this->data_array['is_public'];
@@ -361,7 +361,7 @@ class ArtifactType extends Error {
 	/**
 	 *	  useResolution - whether this ArtifactType uses the resolution feature.
 	 *
-	 *	  @return boolean.
+	 *	  @return boolean	use_resolution.
 	 */
 	function useResolution() {
 		return $this->data_array['use_resolution'];
@@ -370,7 +370,7 @@ class ArtifactType extends Error {
 	/**
 	 *	  getDataType - flag that is generally unused but can mark the difference between bugs, patches, etc.
 	 *
-	 *	  @return (1) bug (2) support (3) patch (4) feature (0) other.
+	 *	  @return	int	The type (1) bug (2) support (3) patch (4) feature (0) other.
 	 */
 	function getDataType() {
 		return $this->data_array['datatype'];
@@ -379,7 +379,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getCategories - List of possible categories set up for this artifact type.
 	 *
-	 *	@return result set.
+	 *	@return database result set.
 	 */
 	function getCategories() {
 		if (!isset($this->categories_res)) {
@@ -394,7 +394,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getGroups - List of possible groups set up for this artifact type.
 	 *
-	 *	@return result set.
+	 *	@return database result set.
 	 */
 	function getGroups() {
 		if (!isset($this->groups_res)) {
@@ -409,7 +409,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getResolutions - List of possible resolutions.
 	 *
-	 *	@return result set.
+	 *	@return database result set.
 	 */
 	function getResolutions() {
 		if (!isset($this->resolutions_res)) {
@@ -423,7 +423,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getTechnicians - returns a result set of technicians.
 	 *
-	 *	@return result set.
+	 *	@return database result set.
 	 */
 	function getTechnicians() {
 		if (!isset($this->technicians_res)) {
@@ -439,7 +439,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getCannedResponses - returns a result set of canned responses.
 	 *
-	 *	@return result set.
+	 *	@return database result set.
 	 */
 	function getCannedResponses() {
 		if (!isset($this->cannedresponses_res)) {
@@ -454,7 +454,7 @@ class ArtifactType extends Error {
 	/**
 	 *	getStatuses - returns a result set of statuses.
 	 *
-	 *	@return result set.
+	 *	@return database result set.
 	 */
 	function getStatuses() {
 		if (!isset($this->status_res)) {
@@ -484,7 +484,7 @@ class ArtifactType extends Error {
 	 *	addUser - add a user to this ArtifactType - depends on UNIQUE INDEX preventing duplicates.
 	 *
 	 *	@param	int		user_id of the new user.
-	 *	@return boolean.
+	 *	@return boolean	success.
 	 */
 	function addUser($id) {
 		if (!$this->userIsAdmin()) {
@@ -511,7 +511,7 @@ class ArtifactType extends Error {
 	 *
 	 *	@param	int		user_id of the user to update.
 	 *	@param	int		(1) tech only, (2) admin & tech (3) admin only.
-	 *	@return boolean.
+	 *	@return boolean	success.
 	 */
 	function updateUser($id,$perm_level) {
 		if (!$this->userIsAdmin()) {
@@ -537,7 +537,7 @@ class ArtifactType extends Error {
 	 *	deleteUser - delete a user's permissions.
 	 *
 	 *	@param	int		user_id of the user who's permissions to delete.
-	 *	@return boolean.
+	 *	@return boolean	success.
 	 */
 	function deleteUser($id) {
 		if (!$this->userIsAdmin()) {
@@ -568,7 +568,7 @@ class ArtifactType extends Error {
 	/**
 	 *	  userCanView - determine if the user can view this artifact type.
 	 *
-	 *	  @return boolean.
+	 *	  @return boolean	user_can_view.
 	 */
 	function userCanView() {
 		if ($this->isPublic()) {
@@ -591,7 +591,7 @@ class ArtifactType extends Error {
 	/**
 	 *	userIsAdmin - see if the logged-in user's perms are >= 2 or Group ArtifactAdmin.
 	 *
-	 *	@return boolean.
+	 *	@return boolean	user_is_admin.
 	 */
 	function userIsAdmin() { 
 		$perm =& $this->Group->getPermission( session_get_user() );
@@ -634,9 +634,9 @@ class ArtifactType extends Error {
 	 *  @param	string	The address to send new entries and updates to.
 	 *  @param	int		Days before this item is considered overdue.
 	 *  @param	int		Days before stale items time out.
-	 *  @param	bool	(1) trye (0) false - whether the resolution box should be shown.
-	 *  @param	string	Free-form text that project admins can place on the submit page.
-	 *  @param	string	Free-form text that project admins can place on the browse page.
+	 *  @param	bool	(1) true (0) false - whether the resolution box should be shown.
+	 *  @param	string	Free-form string that project admins can place on the submit page.
+	 *  @param	string	Free-form string that project admins can place on the browse page.
 	 *  @return true on success, false on failure.
 	 */
 	function update($name,$description,$is_public,$allow_anon,$email_all,$email_address,

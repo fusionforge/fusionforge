@@ -24,14 +24,14 @@ class Document extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $data_array
+	 * @var	 array   $data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group
+	 * @var	 object  $Group.
 	 */
 	var $Group; //group object
 
@@ -41,6 +41,7 @@ class Document extends Error {
 	 *	@param	object	The Group object to which this document is associated.
 	 *  @param  int	 The docid.
 	 *  @param  array	The associative array of data.
+	 *	@return	boolean	success.
 	 */
 	function Document(&$Group, $docid=false, $arr=false) {
 		$this->Error();
@@ -80,6 +81,18 @@ class Document extends Error {
 		return true;
 	}
 
+	/**
+	 *	create - use this function to create a new entry in the database.
+	 *
+	 *	@param	string	The filename of this document.
+	 *	@param	string	The filetype of this document.
+	 *	@param	string	The contents of this document (should be addslashes()'d before entry).
+	 *	@param	int	The doc_group id of the doc_groups table.
+	 *	@param	string	The title of this document.
+	 *	@param	int	The language id of the supported_languages table.
+	 *	@param	string	The description of this document.
+	 *	@return	boolean	success.
+	 */
 	function create($filename,$filetype,$data,$doc_group,$title,$language_id,$description) {
 
 		if (strlen($title) < 5) {
@@ -133,10 +146,10 @@ class Document extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this ArtifactType from the database
+	 *  fetchData() - re-fetch the data for this document from the database.
 	 *
-	 *  @param  int	 The artifact type ID
-	 *  @return true/false
+	 *  @param  int	 The document id.
+	 *	@return	boolean	success
 	 */
 	function fetchData($docid) {
 		$res=db_query("SELECT * FROM docdata_vw
@@ -152,7 +165,7 @@ class Document extends Error {
 	}
 
 	/**
-	 *	getGroup - get the Group object this ArtifactType is associated with.
+	 *	getGroup - get the Group object this Document is associated with.
 	 *
 	 *	@return	Object	The Group object.
 	 */
@@ -190,7 +203,7 @@ class Document extends Error {
 	/**
 	 *	isPublic - whether this document is available to the general public.
 	 *
-	 *	@return	boolean	public_status.
+	 *	@return	boolean	is_public.
 	 */
 	function isPublic() {
 		return (($this->data_array['stateid'] == 1) ? true  : false);
@@ -317,6 +330,19 @@ class Document extends Error {
 		return base64_decode(db_result($res,0,'data'));
 	}
 
+	/**
+	 *	update - use this function to update an existing entry in the database.
+	 *
+	 *	@param	string	The filename of this document.
+	 *	@param	string	The filetype of this document.
+	 *	@param	string	The contents of this document (should be addslashes()'d before entry).
+	 *	@param	int	The doc_group id of the doc_groups table.
+	 *	@param	string	The title of this document.
+	 *	@param	int	The language id of the supported_languages table.
+	 *	@param	string	The description of this document.
+	 *	@param	int	The state id of the doc_states table.
+	 *	@return	boolean	success.
+	 */
 	function update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid) {
 
 		if (strlen($title) < 5) {

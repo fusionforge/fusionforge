@@ -15,23 +15,24 @@ class FRSPackage extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var  array   $data_array
+	 * @var  array   $data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The Group object.
 	 *
-	 * @var  object  $Group
+	 * @var  object  $Group.
 	 */
 	var $Group; //group object
 
 	/**
 	 *  Constructor.
 	 *
-	 *  @param  object  The Group object to which this forum is associated
-	 *  @param  int  The package_id
-	 *  @param  array   The associative array of data
+	 *  @param  object  The Group object to which this FRSPackage is associated.
+	 *  @param  int  The package_id.
+	 *  @param  array   The associative array of data.
+	 *	@return	boolean	success.
 	 */
 	function FRSPackage(&$Group, $package_id=false, $arr=false) {
 		$this->Error();
@@ -54,13 +55,23 @@ class FRSPackage extends Error {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError('Group_id in db result does not match Group Object');
+					$this->data_array=null;
 					return false;
 				}
+//
+//	Add an is_public check here
+//
 			}
 		}
 		return true;
 	}
 
+	/**
+	 *	create - create a new FRSPackage in the database.
+	 *
+	 *	@param	string	The name of this package.
+	 *	@return	boolean success.
+	 */
 	function create($name) {
 		if (strlen($name) < 3) {
 			$this->setError('FRSPackage Name Must Be At Least 3 Characters');
@@ -97,10 +108,10 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this Package from the database
+	 *  fetchData - re-fetch the data for this Package from the database.
 	 *
-	 *  @param  int  The artifact type ID
-	 *  @return true/false
+	 *  @param  int  The package_id.
+	 *  @return boolean	success.
 	 */
 	function fetchData($package_id) {
 		$res=db_query("SELECT * FROM frs_package
@@ -116,18 +127,18 @@ class FRSPackage extends Error {
 	}
 
 	/**
-	 *  getGroup() - get the Group object this ArtifactType is associated with
+	 *  getGroup - get the Group object this FRSPackage is associated with.
 	 *
-	 *  @return the Group object
+	 *  @return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *  getID() - get this package_id
+	 *  getID - get this package_id.
 	 *
-	 *  @return the id of this package
+	 *  @return	int	The id of this package.
 	 */
 	function getID() {
 		return $this->data_array['package_id'];
@@ -151,6 +162,11 @@ class FRSPackage extends Error {
 		return $this->data_array['status_id'];
 	}
 
+	/**
+	 *  setMonitor - Add the current user to the list of people monitoring this package.
+	 *
+	 *  @return	boolean	success.
+	 */
 	function setMonitor() {
 		if (!session_loggedin()) {
 			$this->setError('You Can Only Monitor If You Are Logged In');
@@ -180,6 +196,11 @@ class FRSPackage extends Error {
 		return true;
 	}
 
+	/**
+	 *  stopMonitor - Remove the current user from the list of people monitoring this package.
+	 *
+	 *  @return	boolean	success.
+	 */
 	function stopMonitor() {
 		if (!session_loggedin()) {
 			$this->setError('You Can Only Monitor If You Are Logged In');
@@ -191,6 +212,11 @@ class FRSPackage extends Error {
 		return db_query($sql);
 	}
 
+	/**
+	 *  isMonitoring - Is the current user in the list of people monitoring this package.
+	 *
+	 *  @return	boolean	is_monitoring.
+	 */
 	function isMonitoring() {
 		if (!session_loggedin()) {
 			return false;
@@ -208,6 +234,11 @@ class FRSPackage extends Error {
 		}
 	}
 
+	/**
+	 *  getMonitorIDs - Return an array of user_id's of the list of people monitoring this package.
+	 *
+	 *  @return	array	The array of user_id's.
+	 */
 	function &getMonitorIDs() {
 		$res=db_query("SELECT user_id 
 			FROM filemodule_monitor 
@@ -215,6 +246,13 @@ class FRSPackage extends Error {
 		return util_result_column_to_array($res);
 	}
 
+	/**
+	 *	update - update an FRSPackage in the database.
+	 *
+	 *	@param	string	The name of this package.
+	 *	@param	int	The status_id of this package from frs_status table.
+	 *	@return	boolean success.
+	 */
 	function update($name,$status) {
 
 		if (strlen($name) < 3) {

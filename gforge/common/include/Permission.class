@@ -52,45 +52,45 @@ function &permission_get_object($_Group, $_User) {
 
 class Permission extends Error {
 	/**
-	 * Associative array of data from db
+	 * Associative array of data from db.
 	 *
-	 * @var array $data_array
+	 * @var array $data_array.
 	 */
 	var $data_array;
 
 	/**
-	 * The Group object
+	 * The Group object.
 	 *
-	 * @var object $Group
+	 * @var object $Group.
 	 */
 	var $Group;
 
 	/**
-	 * The User object
+	 * The User object.
 	 *
-	 * @var object $User
+	 * @var object $User.
 	 */
 	var $User;
 
 	/**
-	 * Whether the user is an admin/super user of this project
+	 * Whether the user is an admin/super user of this project.
 	 *
-	 * @var bool $is_admin
+	 * @var bool $is_admin.
 	 */
 	var $is_admin=false;
 
 	/**
-	 * Whether the user is an admin/super user of the entire site
+	 * Whether the user is an admin/super user of the entire site.
 	 *
-	 * @var bool $is_site_admin
+	 * @var bool $is_site_admin.
 	 */
 	var $is_site_admin;
 
 	/**
-	 *	Constructor for this object
+	 *	Constructor for this object.
 	 *
-	 *	@param	object	Group Object required
-	 *	@param	object	User Object required
+	 *	@param	object	Group Object required.
+	 *	@param	object	User Object required.
 	 *	
 	 */
 	function Permission (&$_Group, &$_User) {
@@ -122,10 +122,10 @@ class Permission extends Error {
 	}
 
 	/**
-	 *  fetchData() - fetch the data for this Permission from the database
+	 *  fetchData - fetch the data for this Permission from the database.
 	 *
-	 *  @return true/false
-	 *	@access private
+	 *  @return	boolean success.
+	 *	@access private.
 	 */
 	function fetchData() {
 		$res=db_query("SELECT * FROM user_group 
@@ -150,9 +150,9 @@ class Permission extends Error {
 	}
 
 	/**
-	 *	setUpSuperUser() - check to see if this User is a site super-user
+	 *	setUpSuperUser - check to see if this User is a site super-user.
 	 *
-	 *	@return true/false
+	 *	@return	boolean	is_super_user.
 	 *	@access private
 	 */
 	function setUpSuperUser() {
@@ -170,27 +170,27 @@ class Permission extends Error {
 	}
 
 	/**
-	 *	getUser() - get the User object this Permission is associated with
+	 *	getUser - get the User object this Permission is associated with.
 	 *
-	 *	@return the User object
+	 *	@return	object	The User object.
 	 */
 	function &getUser() {
 		return $this->User;
 	}
 
 	/**
-	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *	getGroup - get the Group object this Permission is associated with.
 	 *
-	 *	@return the Group object
+	 *	@return the Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *  isSuperUser() - whether the current user has site admin privilege
+	 *  isSuperUser - whether the current user has site admin privilege.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	is_super_user.
 	 */
 	function isSuperUser() {
 	        if (isset($this->is_site_admin)) {
@@ -213,53 +213,58 @@ class Permission extends Error {
 	}
 
 	/**
-	 *  isForumAdmin() - whether the current user has form admin perms
+	 *  isForumAdmin - whether the current user has form admin perms.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	is_forum_admin.
 	 */
 	function isForumAdmin() {
 		return $this->isMember('forum_flags',2);
 	}
 
 	/**
-	 *  isDocEditor() - whether the current user has form doc editor perms
+	 *  isDocEditor - whether the current user has form doc editor perms.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	is_doc_editor.
 	 */
 	function isDocEditor() {
 		return $this->isMember('doc_flags',1);
 	}
 
 	/**
-	 *  isReleaseTechnician() - whether the current user has FRS admin perms
+	 *  isReleaseTechnician - whether the current user has FRS admin perms.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	is_release_technician.
 	 */
 	function isReleaseTechnician() {
 		return $this->isMember('release_flags',1);
 	}
 
 	/**
-	 *  useIsArtifactAdmin() - whether the current user has artifact admin perms
+	 *  isArtifactAdmin - whether the current user has artifact admin perms.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	is_artifact_admin.
 	 */
 	function isArtifactAdmin() {
 		return $this->isMember('artifact_flags',2);
 	}
 
+	/**
+	 *  isPMAdmin - whether the current user has Task Manager admin perms.
+	 *
+	 *  @return	boolean	is_projman_admin.
+	 */
 	function isPMAdmin() {
 		return $this->isMember('project_flags',2);
 	}
 
 	/**
-	 *  isMember() - Simple test to see if the current user is a member of this project
+	 *  isMember - Simple test to see if the current user is a member of this project.
 	 *
-	 *  Can optionally pass in vars to test other permissions
+	 *  Can optionally pass in vars to test other permissions.
 	 *
-	 *  @param string	The field to check
-	 *  @param int		The value that $field should have
-	 *  @return true/false
+	 *  @param string	The field to check.
+	 *  @param int		The value that $field should have.
+	 *  @return	boolean	is_member.
 	 */
 	function isMember($field='user_id',$value='-1') {
 		if ($this->isAdmin()) {
@@ -278,19 +283,19 @@ class Permission extends Error {
 	}
 
 	/**
-	 *  userIsAdmin() - User is an admin of the project or admin of the entire site
+	 *  isAdmin - User is an admin of the project or admin of the entire site.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	is_admin.
 	 */
 	function isAdmin() {
 		return $this->is_admin;
 	}
 
 	/**
-	 *	getPermData() - returns the assocative array from the db
+	 *	getPermData - returns the assocative array from the db.
 	 *
-	 *	@return associative array
-	 *	@access private
+	 *	@return array The array of data.
+	 *	@access private.
 	 */
 	function &getPermData() {
 		return $this->data_array;

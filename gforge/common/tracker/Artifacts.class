@@ -11,41 +11,39 @@
  */
 
 require_once('common/include/Error.class');
-
-//need to include Artifact.class
 require_once('common/tracker/Artifact.class');
 
 class Artifacts extends Error {
 
 	/**
-	 * Status db resource ID
+	 * Status db resource ID.
 	 *
-	 * @var		int		$status_res
+	 * @var		int		$status_res.
 	 */
 	var $status_res;
 
 	/**
-	 * Artifact Type object
+	 * Artifact Type object.
 	 *
-	 * @var		object	$ArtifactType
+	 * @var		object	$ArtifactType.
 	 */
 	var $ArtifactType; 
 
 	/**
-	 * Array of Artifact objects
+	 * Array of Artifact objects.
 	 *
-	 * @var		array	$artifacts_array
+	 * @var		array	$artifacts_array.
 	 */
 	var $artifacts_array; 
 
 	/**
-	 *  Artifacts() - constructor
+	 *  Artifacts - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing artifact
+	 *  Use this constructor if you are modifying an existing artifact.
 	 *
-	 *	@param	object	Artifact Type object
-	 *  @param	int		(primary key from database)
-	 *  @return true/false
+	 *	@param	object	Artifact Type object.
+	 *  @param	int		(primary key from database).
+	 *  @return	boolean	success.
 	 */
 	function Artifacts(&$ArtifactType) {
 		$this->Error(); 
@@ -66,11 +64,11 @@ class Artifacts extends Error {
 	}
 
 	/**
-	 *  getArtifacts() - get an array of artifacts
+	 *  getArtifacts - get an array of artifacts.
 	 *
 	 *  Retrieves an array of artifact objects.
 	 *
-	 *  @param	bool	Database query offset
+	 *  @param	boolean	Database query offset.
 	 *  @return an array of artifact objects on success / false on failure.
 	 */
 	function &getArtifacts($offset=false) {
@@ -100,8 +98,9 @@ class Artifacts extends Error {
 	}
 
 	/**
-	 * getArtifactType() - get the artifact type
+	 * getArtifactType - get the artifact type.
 	 *
+	 *	@return	object	The ArtifactType object.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;

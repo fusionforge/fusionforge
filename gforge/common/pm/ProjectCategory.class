@@ -21,27 +21,25 @@ require_once('common/include/Error.class');
 class ProjectCategory extends Error {
 
 	/** 
-	 * The artifact type object
+	 * The ProjectGroup object.
 	 *
-	 * @var		object	$ProjectGroup
+	 * @var		object	$ProjectGroup.
 	 */
 	var $ProjectGroup; //object
 
 	/**
-	 * Array of artifact data
+	 * Array of data.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *  ProjectCategory() - constructor
+	 *  ProjectCategory - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing project_category
-	 *
-	 *	@param	object	ProjectGroup object
-	 *  @param	array	(all fields from project_category) OR category_id from database
-	 *  @return true/false
+	 *	@param	object	ProjectGroup object.
+	 *  @param	array	(all fields from project_category) OR category_id from database.
+	 *  @return	boolean	success.
 	 */
 	function ProjectCategory(&$ProjectGroup, $data=false) {
 		$this->Error(); 
@@ -76,11 +74,10 @@ class ProjectCategory extends Error {
 	}
 
 	/**
-	 *	create() - create a new item in the database
+	 *	create - create a new item in the database.
 	 *
-	 *	@param	string	Item name
-	 *	@param	int		User_id of assignee
-	 *  @return id on success / false on failure
+	 *	@param	string	Item name.
+	 *  @return	boolean success.
 	 */
 	function create($name) {
 		//
@@ -120,10 +117,10 @@ class ProjectCategory extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this ProjectCategory from the database
+	 *	fetchData() - re-fetch the data for this ProjectCategory from the database.
 	 *
-	 *	@param	int		ID of the category
-	 *	@return true/false
+	 *	@param	int		ID of the category.
+	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res=db_query("SELECT * FROM project_category WHERE category_id='$id'");
@@ -137,37 +134,37 @@ class ProjectCategory extends Error {
 	}
 
 	/**
-	 *	getProjectGroup() - get the ProjectGroup Object this ProjectCategory is associated with
+	 *	getProjectGroup - get the ProjectGroup Object this ProjectCategory is associated with.
 	 *
-	 *	@return ProjectGroup
+	 *	@return	object	ProjectGroup.
 	 */
 	function &getProjectGroup() {
 		return $this->ProjectGroup;
 	}
 	
 	/**
-	 *	getID() - get this ProjectCategory's ID
+	 *	getID - get this ProjectCategory's ID.
 	 *
-	 *	@return the id #
+	 *	@return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['category_id'];
 	}
 
 	/**
-	 *	getName() - get the name
+	 *	getName - get the name.
 	 *
-	 *	@return text name
+	 *	@return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['category_name'];
 	}
 
 	/**
-	 *  update() - update an ProjectCategory
+	 *  update - update a ProjectCategory.
 	 *
-	 *  @param	string	Name of the category
-	 *  @return true/false
+	 *  @param	string	Name of the category.
+	 *  @return	boolean success.
 	 */
 	function update($name) {
 		$perm =& $this->ProjectGroup->Group->getPermission (session_get_user());

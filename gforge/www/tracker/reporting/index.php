@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   index.php,v 1.4 2003/01/02 23:17:09 bigdisk Exp
+  * @version   index.php,v 1.5 2003/01/03 22:34:18 bigdisk Exp
   *
   */
 
@@ -28,14 +28,27 @@ $perm =& $group->getPermission( session_get_user() );
 exit_assert_object($perm, 'Permission');
 
 function reporting_header($group_id) {
-	global $atid;
+	global $atid,$perm,$group_id;
+    if ($perm->isAdmin()) {
+        $alevel=' >= 0';
+    } else {
+        $alevel=' > 1';
+    }
+    $sql="SELECT agl.group_artifact_id,agl.name
+        FROM artifact_group_list agl,artifact_perm ap
+        WHERE agl.group_artifact_id=ap.group_artifact_id
+        AND ap.user_id='". user_getid() ."'
+        AND ap.perm_level $alevel
+        AND agl.group_id='$group_id'";
+    $res=db_query($sql);
+
 	
 	reports_header(
 		$group_id,
 		array('aging','tech','category','group','resolution'),
 		array('Aging Report','Distribution by Technician','Distribution by Category','Distribution by Group','Distribution by Resolution'),
 		'<b>Artifact Type: </b>'
-		 .html_build_select_box($GLOBALS['group']->getArtifactTypes(),'atid',$atid,false)
+		 .html_build_select_box($res,'atid',$atid,false)
 		 .'<br><br>'
 	);
 }

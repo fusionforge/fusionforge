@@ -17,24 +17,24 @@ require_once('common/tracker/ArtifactCategory.class');
 class ArtifactTypes extends Error {
 
 	/** 
-	 * The artifact type object
+	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactType
+	 * @var		object	$ArtifactType.
 	 */
 	var $Group; //group object
 
 	/**
-	 * Array of artifact data
+	 * Array of artifactTypes data.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *	ArtifactTypes() - constructor.
+	 *	ArtifactTypes - constructor.
 	 *
-	 *	@param	object	The Group object
-	 *	@return true/false
+	 *	@param	object	The Group object.
+	 *	@return	boolean	success.
 	 */
 	function ArtifactTypes(&$Group) {
 		$this->Error();
@@ -51,9 +51,9 @@ class ArtifactTypes extends Error {
 	}
 
 	/**
-	 *	createTrackers() creates all the standard trackers for a given Group.
+	 *	createTrackers - creates all the standard trackers for a given Group.
 	 *
-	 *	@return true/false
+	 *	@return	boolean	success.
 	 */
 	function createTrackers() {
 
@@ -84,10 +84,10 @@ class ArtifactTypes extends Error {
 	}
 
 	/**
-	 *	createBugTracker() creates bug tracker
+	 *	createBugTracker creates bug tracker.
 	 *
-	 *	@return true/false
-	 *	@access private
+	 *	@return	boolean	success.
+	 *	@access private.
 	 */
 	function createBugTracker() {
 		$at=new ArtifactType($this->Group);
@@ -116,10 +116,10 @@ class ArtifactTypes extends Error {
 	}
 
 	/**
-	 *	createSupportTracker() creates support tracker
+	 *	createSupportTracker creates support tracker.
 	 *
-	 *	@return true/false
-	 *	@access private
+	 *	@return	boolean	success.
+	 *	@access private.
 	 */
 	function createSupportTracker() {
 		$at=new ArtifactType($this->Group);
@@ -148,10 +148,10 @@ class ArtifactTypes extends Error {
 	}
 
 	/**
-	 *	createPatchTracker() creates patch tracker
+	 *	createPatchTracker creates patch tracker.
 	 *
-	 *	@return true/false
-	 *	@access private
+	 *	@return	boolean	success.
+	 *	@access private.
 	 */
 	function createPatchTracker() {
 		//	
@@ -183,10 +183,10 @@ class ArtifactTypes extends Error {
 	}
 
 	/**
-	 *	createFeatureTracker() creates feature tracker
+	 *	createFeatureTracker creates feature tracker.
 	 *
-	 *	@return true/false
-	 *	@access private
+	 *	@return	boolean	success.
+	 *	@access private.
 	 */
 	function createFeatureTracker() {
 		//	

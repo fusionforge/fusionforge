@@ -20,19 +20,19 @@ class Error {
 	/**
 	 * The current error state.
 	 *
-	 * @var bool $error_state
+	 * @var bool $error_state.
 	 */
 	var $error_state;
 
 	/**
 	 * The current error message(s).
 	 *
-	 * @var string $error_message
+	 * @var string $error_message.
 	 */
 	var $error_message;
 
 	/**
-	 * Error() - Constructor
+	 * Error() - Constructor.
 	 * Constructor for the Error class.
 	 * Sets the error state to false.
 	 *

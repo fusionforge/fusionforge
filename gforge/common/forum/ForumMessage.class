@@ -25,30 +25,24 @@ class ForumMessage extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $data_array
+	 * @var	 array   $data_array.
 	 */
 	var $data_array;
 
 	/**
-	 * This is the id of the forum message in question.
-	 *
-	 * @var	 int	message id
-	 */
-	var $msg_id;
-
-	/**
 	 * The Forum object.
 	 *
-	 * @var	 object  $Forum
+	 * @var	 object  $Forum.
 	 */
 	var $Forum;
 
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Forum object to which this ForumMessage is associated
-	 *  @param  int	 The message_id
-	 *  @param  array   The associative array of data
+	 *	@param	object	The Forum object to which this ForumMessage is associated.
+	 *  @param  int	 The message_id.
+	 *  @param  array   The associative array of data.
+	 *	@return	boolean	success.
 	 */
 	function ForumMessage(&$Forum, $msg_id=false, $arr=false) {
 		$this->Error();
@@ -63,7 +57,6 @@ class ForumMessage extends Error {
 		$this->Forum =& $Forum;
 
 		if ($msg_id) {
-			$this->msg_id=$msg_id;
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($msg_id)) {
 					return false;
@@ -75,6 +68,7 @@ class ForumMessage extends Error {
 				//
 				if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
 					$this->setError('Group_forum_id in db result does not match Forum Object');
+					$this->data_array=null;
 					return false;
 				}
 			}
@@ -82,6 +76,15 @@ class ForumMessage extends Error {
 		return true;
 	}
 
+	/**
+	 *	create - use this function to create a new message in the database.
+	 *
+	 *	@param	string	The subject of the message.
+	 *	@param	string	The body of the message.
+	 *	@param	int	The thread_id of the message, if known.
+	 *	@param	int	The message_id of the parent message, if any.
+	 *	@return	boolean success.
+	 */
 	function create($subject, $body, $thread_id='', $is_followup_to='') {
 		if (!$body || !$subject) {
 			$this->setError('Must include a message body and subject');
@@ -173,7 +176,6 @@ class ForumMessage extends Error {
 			return false;
 		} else {
 			$msg_id=db_insertid($result,'forum','msg_id');
-			$this->msg_id=$msg_id;
 			if (!$this->fetchData($msg_id)) {
 				db_rollback();
 				return false;
@@ -196,10 +198,10 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this ArtifactType from the database
+	 *  fetchData - re-fetch the data for this forum_message from the database.
 	 *
-	 *  @param  int	 The message ID
-	 *  @return true/false
+	 *  @param  int	 The message ID.
+	 *  @return boolean	success.
 	 */
 	function fetchData($msg_id) {
 		$res=db_query("SELECT * FROM forum_user_vw
@@ -215,113 +217,118 @@ class ForumMessage extends Error {
 	}
 
 	/**
-	 *	getForum() - get the Forum object this ForumMessage is associated with
+	 *	getForum - get the Forum object this ForumMessage is associated with.
 	 *
-	 *	@return the Forum object
+	 *	@return	object	The Forum object.
 	 */
 	function &getForum() {
 		return $this->Forum;
 	}
 
 	/**
-	 *	getID() - get this message_id.
+	 *	getID - get this message_id.
 	 *
-	 *	@return the message_id
+	 *	@return	int	The message_id.
 	 */
 	function getID() {
-		return $this->msg_id;
+		return $this->data_array['msg_id'];
 	}
 
 	/**
-	 *	getPosterName() - get the unix user_name of this message's poster.
+	 *	getPosterName - get the unix user_name of this message's poster.
 	 *
-	 *	@return the poster's unix name.
+	 *	@return	string	The poster's unix name.
 	 */
 	function getPosterName() {
 		return $this->data_array['user_name'];
 	}
 
 	/**
-	 *	getPosterID() - get this user_id of this message's poster.
+	 *	getPosterID - get this user_id of this message's poster.
 	 *
-	 *	@return the user_id
+	 *	@return	int	The user_id.
 	 */
 	function getPosterID() {
 		return $this->data_array['posted_by'];
 	}
 
 	/**
-	 *	getPosterRealName() - get the real name of this message's poster.
+	 *	getPosterRealName - get the real name of this message's poster.
 	 *
-	 *	@return the real name.
+	 *	@return	string	The real name.
 	 */
 	function getPosterRealName() {
 		return $this->data_array['realname'];
 	}
 
 	/**
-	 *	getSubject() - get the subject of this message.
+	 *	getSubject - get the subject of this message.
 	 *
-	 *	@return the subject
+	 *	@return	string	The subject.
 	 */
 	function getSubject() {
 		return $this->data_array['subject'];
 	}
 
 	/**
-	 *	getBody() - get the body of this message.
+	 *	getBody - get the body of this message.
 	 *
-	 *	@return the body
+	 *	@return	String	The body.
 	 */
 	function getBody() {
 		return $this->data_array['body'];
 	}
 
 	/**
-	 *	getPostDate() - get the post date of this message.
+	 *	getPostDate - get the post date of this message.
 	 *
-	 *	@return the post date
+	 *	@return	int	The post date.
 	 */
 	function getPostDate() {
 		return $this->data_array['date'];
 	}
 
 	/**
-	 *	getParentID() - get the id of the parent message, if this is a followup.
+	 *	getParentID - get the id of the parent message, if this is a followup.
 	 *
-	 *	@return the parent id
+	 *	@return	int	The parent id.
 	 */
 	function getParentID() {
 		return $this->data_array['is_followup_to'];
 	}
 
 	/**
-	 *	getThreadID() - get the thread_id of the message.
+	 *	getThreadID - get the thread_id of the message.
 	 *
-	 *	@return the thread_id
+	 *	@return	int	The thread_id.
 	 */
 	function getThreadID() {
 		return $this->data_array['thread_id'];
 	}
 
 	/**
-	 *	getMostRecentDate() - get the date of the most recent followup
+	 *	getMostRecentDate - get the date of the most recent followup.
 	 *
-	 *	@return the date of the most recent followup
+	 *	@return	int	The date of the most recent followup.
 	 */
 	function getMostRecentDate() {
 		return $this->data_array['most_recent_date'];
 	}
 
 	/**
-	 *	hasFollowups - whether this message has any followups
+	 *	hasFollowups - whether this message has any followups.
 	 *
-	 *	@return boolean followups
+	 *	@return boolean has_followups.
 	 */
 	function hasFollowups() {
 		return $this->data_array['has_followups'];
 	}
 
+	/**
+	 *	delete - Delete this message and its followups.
+	 *
+	 *	@return	int	The count of deleted messages.
+	 */
 	function delete() {
 		$msg_id=$this->getID();
 		$perm =& $this->Forum->Group->getPermission( session_get_user() );
@@ -351,6 +358,11 @@ class ForumMessage extends Error {
 
 	}
 
+	/**
+	 *	sendNotice - contains the logic to send out email followups when a message is posted.
+	 *
+	 *	@return boolean success.
+	 */
 	function sendNotice() {
 		$ids =& $this->Forum->getMonitoringIDs();
 

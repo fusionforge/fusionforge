@@ -15,27 +15,27 @@ require_once('common/include/Error.class');
 class ArtifactResolution extends Error {
 
 	/** 
-	 * The artifact type object
+	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactType
+	 * @var		object	$ArtifactType.
 	 */
 	var $ArtifactType; //object
 
 	/**
-	 * Array of artifact data
+	 * Array of artifact data.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 
 	/**
-	 *  ArtifactResolution() - constructor
+	 *  ArtifactResolution - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing artifact
+	 *  Use this constructor if you are modifying an existing artifact.
 	 *
-	 *	@param	object	Artifact type object
-	 *  @param	array	(all fields from artifact_group) OR id from database
-	 *  @return true/false
+	 *	@param	object	Artifact type object.
+	 *  @param	array	(all fields from artifact_group) OR id from database.
+	 *  @return	boolean	success.
 	 */
 	function ArtifactResolution(&$ArtifactType, $data=false) {
 		$this->Error(); 
@@ -67,10 +67,10 @@ class ArtifactResolution extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this ArtifactResolution from the database
+	 *	fetchData - re-fetch the data for this ArtifactResolution from the database.
 	 *
-	 *	@param	int		Data ID
-	 *	@return true/false
+	 *	@param	int		Data ID.
+	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res=db_query("SELECT * FROM artifact_resolution WHERE id='$id'");
@@ -84,27 +84,27 @@ class ArtifactResolution extends Error {
 	}
 
 	/**
-	 *	getArtifactType() - get the ArtifactType Object this ArtifactResolution is associated with
+	 *	getArtifactType - get the ArtifactType Object this ArtifactResolution is associated with.
 	 *
-	 *	@return ArtifactType
+	 *	@return	object	ArtifactType.
 	 */
 	function &getArtifactType() {
 		return $this->ArtifactType;
 	}
 	
 	/**
-	 *	getID() - get this ArtifactResolution's ID
+	 *	getID - get this ArtifactResolution's ID.
 	 *
-	 *	@return the id #
+	 *	@return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getName() - get the name
+	 *	getName - get the name.
 	 *
-	 *	@return text name
+	 *	@return	string	The name.
 	 */
 	function getName() {
 		return $this->data_array['resolution_name'];

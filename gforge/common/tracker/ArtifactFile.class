@@ -14,27 +14,25 @@ require_once('common/include/Error.class');
 class ArtifactFile extends Error {
 
 	/** 
-	 * The artifact type object
+	 * The artifact object.
 	 *
-	 * @var		object	$ArtifactType
+	 * @var		object	$Artifact.
 	 */
 	var $Artifact; //object
 
 	/**
-	 * Array of artifact data
+	 * Array of file data
 	 *
 	 * @var		array	$data_array
 	 */
 	var $data_array;
 
 	/**
-	 *  ArtifactFile() - constructor
+	 *  ArtifactFile - constructor.
 	 *
-	 *  Use this constructor if you are modifying an existing artifact
-	 *
-	 *	@param	object	The Artifact object
-	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database
-	 *  @return true/false
+	 *	@param	object	The Artifact object.
+	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
+	 *  @return	boolean	success.
 	 */
 	function ArtifactFile(&$Artifact, $data=false) {
 		$this->Error(); 
@@ -66,14 +64,14 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	create() - create a new item in the database
+	 *	create - create a new item in the database.
 	 *
-	 *	@para	string	Filename of the item
-	 *	@param	string	Item filetype
-	 *	@param	string	Item filesize
-	 *	@param	binary	Binary item data
-	 *	@param	string	Item description
-	 *  @return id on success / false on failure
+	 *	@para	string	Filename of the item.
+	 *	@param	string	Item filetype.
+	 *	@param	string	Item filesize.
+	 *	@param	binary	Binary item data.
+	 *	@param	string	Item description.
+	 *  @return id on success / false on failure.
 	 */
 	function create($filename, $filetype, $filesize, $bin_data, $description='None') {
 
@@ -133,9 +131,9 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	delete() - delete this artifact file from the db
+	 *	delete - delete this artifact file from the db.
 	 *
-	 *	@return true/false
+	 *	@return	boolean	success.
 	 */
 	function delete() {
 		if (!$this->Artifact->ArtifactType->userIsAdmin()) {
@@ -153,10 +151,10 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this ArtifactFile from the database
+	 *	fetchData - re-fetch the data for this ArtifactFile from the database.
 	 *
-	 *	@param	int		Data ID
-	 *	@return true/false
+	 *	@param	int	The file_id.
+	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
 		$res=db_query("SELECT * FROM artifact_file_user_vw WHERE id='$id'");
@@ -170,99 +168,99 @@ class ArtifactFile extends Error {
 	}
 
 	/**
-	 *	getArtifact() - get the Artifact Object this ArtifactFile is associated with
+	 *	getArtifact - get the Artifact Object this ArtifactFile is associated with.
 	 *
-	 *	@return Artifact
+	 *	@return object	Artifact.
 	 */
 	function &getArtifact() {
 		return $this->Artifact;
 	}
 	
 	/**
-	 *	getID() - get this ArtifactFile's ID
+	 *	getID - get this ArtifactFile's ID.
 	 *
-	 *	@return the id #
+	 *	@return	int	The id #.
 	 */
 	function getID() {
 		return $this->data_array['id'];
 	}
 
 	/**
-	 *	getName() - get the filename
+	 *	getName - get the filename.
 	 *
-	 *	@return text filename
+	 *	@return string filename.
 	 */
 	function getName() {
 		return $this->data_array['filename'];
 	}
 
 	/**
-	 *	getType() - get the type
+	 *	getType - get the type.
 	 *
-	 *	@return text type
+	 *	@return string type.
 	 */
 	function getType() {
 		return $this->data_array['filetype'];
 	}
 
 	/**
-	 *	getData() - get the binary data from the db
+	 *	getData - get the binary data from the db.
 	 *
-	 *	@return binary
+	 *	@return binary.
 	 */
 	function &getData() {
 		return base64_decode($this->data_array['bin_data']);
 	}
 
 	/**
-	 *	getSize() - get the size
+	 *	getSize - get the size.
 	 *
-	 *	@return int size
+	 *	@return int size.
 	 */
 	function getSize() {
 		return $this->data_array['filesize'];
 	}
 
 	/**
-	 *	getDescription() - get the description
+	 *	getDescription - get the description.
 	 *
-	 *	@return text description
+	 *	@return string description.
 	 */
 	function getDescription() {
 		return $this->data_array['description'];
 	}
 
 	/**
-	 *	getDate() - get the date file was added
+	 *	getDate - get the date file was added.
 	 *
-	 *	@return int unix time
+	 *	@return int unix time.
 	 */
 	function getDate() {
 		return $this->data_array['adddate'];
 	}
 
 	/**
-	 *	getSubmittedBy() - get the user_id of the submitter
+	 *	getSubmittedBy - get the user_id of the submitter.
 	 *
-	 *	@return int user_id
+	 *	@return int user_id.
 	 */
 	function getSubmittedBy() {
 		return $this->data_array['submitted_by'];
 	}
 
 	/**
-	 *	getSubmittedRealName() - get the real name of the submitter
+	 *	getSubmittedRealName - get the real name of the submitter.
 	 *
-	 *	@return text name
+	 *	@return	string	name.
 	 */
 	function getSubmittedRealName() {
 		return $this->data_array['realname'];
 	}
 
 	/**
-	 *	getSubmittedUnixName() - get the unix name of the submitter
+	 *	getSubmittedUnixName - get the unix name of the submitter.
 	 *
-	 *	@return text unixname
+	 *	@return	string	unixname.
 	 */
 	function getSubmittedUnixName() {
 		return $this->data_array['user_name'];

@@ -26,30 +26,31 @@ class Forum extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var	 array   $data_array
+	 * @var	 array   $data_array.
 	 */
 	var $data_array;
 
 	/**
 	 * The Group object.
 	 *
-	 * @var	 object  $Group
+	 * @var	 object  $Group.
 	 */
 	var $Group; //group object
 
 	/**
 	 * An array of 'types' for this forum - nested, flat, ultimate, etc.
 	 *
-	 * @var	 array	view_types
+	 * @var	 array	view_types.
 	 */
 	var $view_types;
 
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated
-	 *  @param  int	 The group_forum_id
-	 *  @param  array	The associative array of data
+	 *	@param	object	The Group object to which this forum is associated.
+	 *  @param  int	 The group_forum_id.
+	 *  @param  array	The associative array of data.
+	 *	@return	boolean	success.
 	 */
 	function Forum(&$Group, $group_forum_id=false, $arr=false) {
 		$this->Error();
@@ -93,6 +94,17 @@ class Forum extends Error {
 		return true;
 	}
 
+	/**
+	 *	create - use this function to create a new entry in the database.
+	 *
+	 *	@param	string	The name of the forum.
+	 *	@param	string	The description of the forum.
+	 *	@param	int	Pass (1) if it should be public (0) for private.
+	 *	@param	string	The email address to send all new posts to.
+	 *	@param	int	Pass (1) if a welcome message should be created (0) for no welcome message.
+	 *	@param	int	Pass (1) if we should allow non-logged-in users to post (0) for mandatory login.
+	 *	@return	boolean	success.
+	 */
 	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1) {
 
 		if (strlen($forum_name) < 3) {
@@ -159,7 +171,7 @@ class Forum extends Error {
 	 *  fetchData - re-fetch the data for this forum from the database.
 	 *
 	 *  @param  int	 The forum_id.
-	 *  @return boolean.
+	 *	@return	boolean	success.
 	 */
 	function fetchData($group_forum_id) {
 		$res=db_query("SELECT * FROM forum_group_list_vw
@@ -177,7 +189,7 @@ class Forum extends Error {
 	/**
 	 *	getGroup - get the Group object this ArtifactType is associated with.
 	 *
-	 *	@return the Group object.
+	 *	@return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
@@ -192,6 +204,11 @@ class Forum extends Error {
 		return $this->data_array['group_forum_id'];
 	}
 
+	/**
+	 *	getNextThreadID - The next thread_id for a new top in this forum.
+	 *
+	 *	@return	int	The next thread_id #.
+	 */
 	function getNextThreadID() {
 		$result=db_query("SELECT nextval('forum_thread_seq')");
 		if (!$result || db_numrows($result) < 1) {
@@ -202,6 +219,11 @@ class Forum extends Error {
 		}
 	}
 
+	/**
+	 *	getSavedDate - The unix time when the person last hit "save my place".
+	 *
+	 *	@return	int	The unix time.
+	 */
 	function getSavedDate() {
 		if ($this->save_date) {
 			return $this->save_date;
@@ -229,7 +251,7 @@ class Forum extends Error {
 	/**
 	 *	allowAnonymous - does this forum allow non-logged in users to post.
 	 *
-	 *	@return boolean	allow
+	 *	@return boolean	allow_anonymous.
 	 */
 	function allowAnonymous() {
 		return $this->data_array['allow_anonymous'];
@@ -238,7 +260,7 @@ class Forum extends Error {
 	/**
 	 *	isPublic - Is this forum open to the general public.
 	 *
-	 *	@return boolean	allow
+	 *	@return boolean	is_public.
 	 */
 	function isPublic() {
 		return $this->data_array['is_public'];
@@ -298,12 +320,22 @@ class Forum extends Error {
 		return $this->data_array['recent'];
 	}
 
+	/**
+	 *	getMonitoringIDs - return an array of user_id's for those monitoring this forum.
+	 *
+	 *	@return	array	The array of user_id's.
+	 */
 	function getMonitoringIDs() {
 		$sql="SELECT user_id FROM forum_monitored_forums WHERE forum_id='".$this->getID()."'";
 		$result=db_query($sql);
 		return result_column_to_array($result);
 	}
 
+	/**
+	 *	setMonitor - Add the current user to the list of people monitoring the forum.
+	 *
+	 *	@return	boolean	success.
+	 */
 	function setMonitor() {
 		if (!session_loggedin()) {
 			$this->setError('You Can Only Monitor If You Are Logged In');
@@ -332,6 +364,11 @@ class Forum extends Error {
 		return true;
 	}
 
+	/**
+	 *	stopMonitor - Remove the current user from the list of people monitoring the forum.
+	 *
+	 *	@return	boolean	success.
+	 */
 	function stopMonitor() {
 		if (!session_loggedin()) {
 			$this->setError('You Can Only Monitor If You Are Logged In');
@@ -342,6 +379,11 @@ class Forum extends Error {
 		return db_query($sql);
 	}
 
+	/**
+	 *	isMonitoring - See if the current user is in the list of people monitoring the forum.
+	 *
+	 *	@return	boolean	is_monitoring.
+	 */
 	function isMonitoring() {
 		if (!session_loggedin()) {
 			return false;
@@ -358,6 +400,11 @@ class Forum extends Error {
 		}
 	}
 
+	/**
+	 *	savePlace - set a unix time into the database for this user, so future messages can be highlighted.
+	 *
+	 *	@return	boolean	success.
+	 */
 	function savePlace() {
 		if (!session_loggedin()) {
 			$this->setError('You Can Only Save Your Place If You Are Logged In');
@@ -397,6 +444,16 @@ class Forum extends Error {
 		return true;
 	}
 
+	/**
+	 *	update - use this function to update an entry in the database.
+	 *
+	 *	@param	string	The name of the forum.
+	 *	@param	string	The description of the forum.
+	 *	@param	int	Pass (1) if it should be public (0) for private.
+	 *	@param	string	The email address to send all new posts to.
+	 *	@param	int	Pass (1) if we should allow non-logged-in users to post (0) for mandatory login.
+	 *	@return	boolean	success.
+	 */
 	function update($forum_name,$description,$is_public=1,$send_all_posts_to='',$allow_anonymous=0) {
 
 		if (strlen($forum_name) < 3) {

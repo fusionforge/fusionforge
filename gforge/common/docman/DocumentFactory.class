@@ -23,16 +23,16 @@ require_once('common/docman/Document.class');
 class DocumentFactory extends Error {
 
 	/**
-	 * The Group object
+	 * The Group object.
 	 *
-	 * @var	 object  $Group
+	 * @var	 object  $Group.
 	 */
 	var $Group;
 
 	/**
 	 * The Documents array.
 	 *
-	 * @var	 array	Documents
+	 * @var	 array	Documents.
 	 */
 	var $Documents;
 	var $stateid;
@@ -43,7 +43,8 @@ class DocumentFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated
+	 *	@param	object	The Group object to which this DocumentFactory is associated.
+	 *	@return	boolean	success.
 	 */
 	function DocumentFactory(&$Group) {
 		$this->Error();
@@ -61,30 +62,55 @@ class DocumentFactory extends Error {
 	}
 
 	/**
-	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *	getGroup - get the Group object this DocumentFactory is associated with.
 	 *
-	 *	@return the Group object
+	 *	@return object	the Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
+	/**
+	 *	setStateID - call this before getDocuments() if you want to limit to a specific state.
+	 *
+	 *	@param	int	The stateid from the doc_states table.
+	 */
 	function setStateID($stateid) {
 		$this->stateid=$stateid;
 	}
 
+	/**
+	 *	setLanguageID - call this before getDocuments() if you want to limit to a specific language.
+	 *
+	 *	@param	int	The language_id from the supported_languages table.
+	 */
 	function setLanguageID($languageid) {
 		$this->languageid=$languageid;
 	}
 
+	/**
+	 *	setDocGroupID - call this before getDocuments() if you want to limit to a specific doc_group.
+	 *
+	 *	@param	int	The doc_group from the doc_groups table.
+	 */
 	function setDocGroupID($docgroupid) {
 		$this->docgroupid=$docgroupid;
 	}
 
+	/**
+	 *	setSort - call this before getDocuments() if you want to control the sorting.
+	 *
+	 *	@param	string	The name of the field to sort on.
+	 */
 	function setSort($sort) {
 		$this->sort=$sort;
 	}
 
+	/**
+	 *	getDocuments - returns an array of Document objects.
+	 *
+	 *	@return	array	Document objects.
+	 */
 	function &getDocuments() {
 		if ($this->Documents) {
 			return $this->Documents;

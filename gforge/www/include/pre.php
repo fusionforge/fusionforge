@@ -65,9 +65,6 @@ require_once('common/include/Group.class');
 //permission functions
 require_once('common/include/Permission.class');
 
-//Project extends Group and includes preference accessors
-require_once('common/include/Project.class');
-
 //library to set up context help
 require_once('www/include/help.php');
 
@@ -143,23 +140,16 @@ if (!$sys_lang) {
 	$sys_lang="English";
 }
 if (session_loggedin()) {
-	$res=$LUSER->getData();
-		$classname=db_result($res,0,'classname');
-	if ($classname) {
-		$Language=new BaseLanguage();
-		$Language->loadLanguage($classname);
-	} else {
-		$Language=new BaseLanguage();
-		$Language->loadLanguage($sys_lang);
-	}
+	$Language=new BaseLanguage();
+	$Language->loadLanguageID($LUSER->getLanguage());
 } else {
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
 	//if we don't support it, just use English as default
-        if ($HTTP_ACCEPT_LANGUAGE) {
-               $res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
-               $classfile=db_result($res,0,'filename');
-       }
+	if ($HTTP_ACCEPT_LANGUAGE) {
+		$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
+		$classfile=db_result($res,0,'filename');
+	}
 	if (!$classname) {
 		$classname=$sys_lang;
 	}

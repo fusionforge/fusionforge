@@ -15,23 +15,24 @@ class FRSFile extends Error {
 	/**
 	 * Associative array of data from db.
 	 *
-	 * @var  array   $data_array
+	 * @var  array   $data_array.
 	 */
 	var $data_array;
 
 	/**
-	 * The FRSRelease
+	 * The FRSRelease.
 	 *
-	 * @var  object  FRSPacakge
+	 * @var  object  FRSRelease.
 	 */
 	var $FRSRelease;
 
 	/**
 	 *  Constructor.
 	 *
-	 *  @param  object  The FRSRelease object to which this release is associated
-	 *  @param  int  The file_id
-	 *  @param  array   The associative array of data
+	 *  @param  object  The FRSRelease object to which this file is associated.
+	 *  @param  int  The file_id.
+	 *  @param  array   The associative array of data.
+	 *	@return	boolean	success.
 	 */
 	function FRSFile(&$FRSRelease, $file_id=false, $arr=false) {
 		$this->Error();
@@ -54,6 +55,7 @@ class FRSFile extends Error {
 				$this->data_array =& $arr;
 				if ($this->data_array['release_id'] != $this->FRSRelease->getID()) {
 					$this->setError('FRSRelease_id in db result does not match FRSRelease Object');
+					$this->data_array=null;
 					return false;
 				}
 			}
@@ -61,6 +63,16 @@ class FRSFile extends Error {
 		return true;
 	}
 
+	/**
+	 *	create - create a new file in this FRSFileRelease/FRSPackage.
+	 *
+	 *	@param	string	The name of this file.
+	 *	@param	string	The location of this file in the local file system.
+	 *	@param	int	The type_id of this file from the frs-file-types table.
+	 *	@param	int	The processor_id of this file from the frs-processor-types table.
+	 *	@param	int	The release_date of this file in unix time (seconds).
+	 *	@return	boolean success.
+	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
 		if (strlen($name) < 3) {
 			$this->setError('FRSFile Name Must Be At Least 3 Characters');
@@ -73,7 +85,8 @@ class FRSFile extends Error {
 //
 //	Can't really use is_uploaded_file() or move_uploaded_file()
 //	since we want this to be generalized code
-//	This is potentially exploitable
+//	This is potentially exploitable if you do not validate 
+//	before calling this function
 //
 		if (!is_file($file_location) || !file_exists($file_location)) {
 			$this->setError('FRSFile Appears to be invalid');
@@ -138,10 +151,10 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this Package from the database
+	 *  fetchData - re-fetch the data for this FRSFile from the database.
 	 *
-	 *  @param  int  The artifact type ID
-	 *  @return true/false
+	 *  @param  int  The file_id.
+	 *  @return boolean	success.
 	 */
 	function fetchData($file_id) {
 		$res=db_query("SELECT * FROM frs_file_vw
@@ -157,27 +170,27 @@ class FRSFile extends Error {
 	}
 
 	/**
-	 *  getFRSRelease() - get the FRSRelease object this file is associated with
+	 *  getFRSRelease - get the FRSRelease object this file is associated with.
 	 *
-	 *  @return the FRSRelease object
+	 *  @return	object	The FRSRelease object.
 	 */
 	function &getFRSRelease() {
 		return $this->FRSRelease;
 	}
 
 	/**
-	 *  getID() - get this file_id
+	 *  getID - get this file_id.
 	 *
-	 *  @return the id of this package
+	 *  @return	int	The id of this file.
 	 */
 	function getID() {
 		return $this->data_array['file_id'];
 	}
 
 	/**
-	 *  getName - get the name of this package.
+	 *  getName - get the name of this file.
 	 *
-	 *  @return string  The name of this package.
+	 *  @return string  The name of this file.
 	 */
 	function getName() {
 		return $this->data_array['filename'];
@@ -255,6 +268,11 @@ class FRSFile extends Error {
 		return $this->data_array['post_time'];
 	}
 
+	/**
+	 *  delete - Delete this file from the database and file system.
+	 *
+	 *  @return	boolean	success.
+	 */
 	function delete() {
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
 
@@ -278,6 +296,14 @@ class FRSFile extends Error {
 		}
 	}
 
+	/**
+	 *	update - update an existing file in this FRSFileRelease/FRSPackage.
+	 *
+	 *	@param	int	The type_id of this file from the frs-file-types table.
+	 *	@param	int	The processor_id of this file from the frs-processor-types table.
+	 *	@param	int	The release_date of this file in unix time (seconds).
+	 *	@return	boolean success.
+	 */
 	function update($type_id,$processor_id,$release_time) {
 
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );

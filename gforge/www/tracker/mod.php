@@ -60,16 +60,18 @@ if (session_loggedin()) {
 //  need to get list of data types this person can admin
 //
 	if ($ath->userIsAdmin()) {
-		$res=$group->getArtifactTypes();
+		$alevel=' >= 0';	
 	} else {
-		$sql="SELECT agl.group_artifact_id,agl.name 
-			FROM artifact_group_list agl,artifact_perm ap
-			WHERE agl.group_artifact_id=ap.group_artifact_id 
-			AND ap.user_id='". user_getid() ."' 
-			AND ap.perm_level > 1
-			AND agl.group_id='$group_id'";
-		$res=db_query($sql);
+		$alevel=' > 1';	
 	}
+	$sql="SELECT agl.group_artifact_id,agl.name 
+		FROM artifact_group_list agl,artifact_perm ap
+		WHERE agl.group_artifact_id=ap.group_artifact_id 
+		AND ap.user_id='". user_getid() ."' 
+		AND ap.perm_level $alevel
+		AND agl.group_id='$group_id'";
+	$res=db_query($sql);
+
 	echo html_build_select_box ($res,'new_artfact_type_id',$ath->getID(),false);
 
 		?>

@@ -14,23 +14,24 @@ require_once('common/tracker/ArtifactType.class');
 class ArtifactTypeFactory extends Error {
 
 	/**
-	 * The Group object
+	 * The Group object.
 	 *
-	 * @var	 object  $Group
+	 * @var	 object  $Group.
 	 */
 	var $Group;
 
 	/**
 	 * The ArtifactTypes array.
 	 *
-	 * @var	 array	ArtifactTypes
+	 * @var	 array	ArtifactTypes.
 	 */
 	var $ArtifactTypes;
 
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated
+	 *	@param	object	The Group object to which this ArtifactTypeFactory is associated
+	 *	@return	boolean	success.
 	 */
 	function ArtifactTypeFactory(&$Group) {
 		$this->Error();
@@ -48,14 +49,19 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
-	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *	getGroup - get the Group object this ArtifactType is associated with.
 	 *
-	 *	@return the Group object
+	 *	@return	object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
+	/**
+	 *	getArtifactTypes - return an array of ArtifactType objects.
+	 *
+	 *	@return	array	The array of ArtifactType objects.
+	 */
 	function &getArtifactTypes() {
 		if ($this->ArtifactTypes) {
 			return $this->ArtifactTypes;

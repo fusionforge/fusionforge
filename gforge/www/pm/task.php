@@ -85,7 +85,7 @@ switch ($func) {
 			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 
-			if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$hours,$category_id,$percent_complete,$assigned_to,$dependent_on)) {
+			if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$dependent_on)) {
 				exit_error('ERROR',$pt->getErrorMessage());
 			} else {
 				if (count($add_artifact_id) > 0) {

@@ -22,16 +22,16 @@ require_once('common/include/Error.class');
 class DocumentGroup extends Error {
 
 	/** 
-	 * The artifact type object
+	 * The Group object.
 	 *
-	 * @var		object	$Group
+	 * @var		object	$Group.
 	 */
 	var $Group; //object
 
 	/**
-	 * Array of artifact data
+	 * Array of data.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 
@@ -42,7 +42,7 @@ class DocumentGroup extends Error {
 	 *
 	 *	@param	object	Group object.
 	 *  @param	array	(all fields from doc_groups) OR doc_group from database.
-	 *  @return boolean.
+	 *  @return boolean	success.
 	 */
 	function DocumentGroup(&$Group, $data=false) {
 		$this->Error(); 
@@ -77,11 +77,10 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 *	create() - create a new item in the database
+	 *	create - create a new item in the database.
 	 *
-	 *	@param	string	Item name
-	 *	@param	int		User_id of assignee
-	 *  @return id on success / false on failure
+	 *	@param	string	Item name.
+	 *  @return id on success / false on failure.
 	 */
 	function create($name) {
 		//
@@ -121,10 +120,10 @@ class DocumentGroup extends Error {
 	}
 
 	/**
-	 *	fetchData() - re-fetch the data for this DocumentGroup from the database
+	 *	fetchData - re-fetch the data for this DocumentGroup from the database.
 	 *
-	 *	@param	int		ID of the category
-	 *	@return true/false
+	 *	@param	int		ID of the doc_group.
+	 *	@return boolean.
 	 */
 	function fetchData($id) {
 		$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$id'");

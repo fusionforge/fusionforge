@@ -26,14 +26,14 @@ class ForumMessageFactory extends Error {
 	/**
 	 * The Forum object.
 	 *
-	 * @var	 object  $Forum
+	 * @var	 object  $Forum.
 	 */
 	var $Forum;
 
 	/**
 	 * The forum_messages array.
 	 *
-	 * @var  array  forum_messages
+	 * @var  array  forum_messages.
 	 */
 	var $forum_messages;
 	var $style;
@@ -44,7 +44,8 @@ class ForumMessageFactory extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Forum object to which this ForumMessage is associated
+	 *	@param	object	The Forum object to which this ForumMessageFactory is associated.
+	 *	@return	boolean	success.
 	 */
 	function ForumMessageFactory(&$Forum) {
 		$this->Error();
@@ -61,6 +62,14 @@ class ForumMessageFactory extends Error {
 		return true;
 	}
 
+	/**
+	 *	setup - call this function before getThreaded/nested/etc to set up the user preferences.
+	 *
+	 *	@param	int	The number of rows to skip.
+	 *	@param	string	The style of forum, whether it's nested, ultimate, etc.
+	 *	@param	int	The maximum number of rows to return.
+	 *	@param	int	Whether to set these prefs into the database - use "custom".
+	 */
 	function setup($offset,$style,$max_rows,$set) {
 //echo "<BR>offset: $offset| style: $style|max_rows: $max_rows|set: $set+";
 		if ((!$offset) || ($offset < 0)) {
@@ -112,10 +121,20 @@ class ForumMessageFactory extends Error {
 		$this->max_rows=$max_rows;
 	}
 
+	/**
+	 *	getStyle - the style of forum this is - nested/ultimate/etc.
+	 *
+	 *	@return	string	The style.
+	 */
 	function getStyle() {
 		return $this->style;
 	}
 
+	/**
+	 *	nestArray - take an array of Forum Messages and building a multi-dimensional associative array for followups.
+	 *
+	 *	@return	array	The nested multi-dimensional associative array.
+	 */
 	function &nestArray(&$row) {
 		$cnt=count($row);
 		for ($i=0; $i<$cnt; $i++) {
@@ -126,6 +145,11 @@ class ForumMessageFactory extends Error {
 		return $msg_arr;
 	}
 
+	/**
+	 *	getNested - Return an array of ForumMessage objects arranged for nested forum views.
+	 *
+	 *	@return	array	The array of ForumMessages.
+	 */
 	function &getNested($thread_id=false) {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
@@ -153,6 +177,11 @@ class ForumMessageFactory extends Error {
 		return $this->forum_messages;
 	}
 
+	/**
+	 *	getThreaded - Return an array of ForumMessage objects arranged for threaded forum views.
+	 *
+	 *	@return	array	The array of ForumMessages.
+	 */
 	function &getThreaded($thread_id=false) {
 		if ($this->forum_messages) {
 			return $this->forum_messages;
@@ -179,6 +208,11 @@ class ForumMessageFactory extends Error {
 		return $this->forum_messages;
 	}
 
+	/**
+	 *	getFlat - Return an array of ForumMessage objects arranged for flat forum views.
+	 *
+	 *	@return	array	The array of ForumMessages.
+	 */
 	function &getFlat($thread_id=false) {
 		if ($this->forum_messages) {
 			return $this->forum_messages;

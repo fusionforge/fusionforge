@@ -19,7 +19,6 @@ require_once('common/tracker/ArtifactFile.class');
 require_once('common/tracker/ArtifactType.class');
 require_once('common/tracker/ArtifactType.class');
 require_once('common/include/Group.class');
-require_once('common/include/Project.class');
 
 $arr=explode('/',$REQUEST_URI);
 $group_id=$arr[3];

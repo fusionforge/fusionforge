@@ -25,23 +25,23 @@ require_once('common/forum/Forum.class');
 class ForumFactory extends Error {
 
 	/**
-	 * The Group object
+	 * The Group object.
 	 *
-	 * @var	 object  $Group
+	 * @var	 object  $Group.
 	 */
 	var $Group;
 
 	/**
 	 * The forums array.
 	 *
-	 * @var	 array	forums
+	 * @var	 array	forums.
 	 */
 	var $forums;
 
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated
+	 *	@param	object	The Group object to which this forum is associated.
 	 */
 	function ForumFactory(&$Group) {
 		$this->Error();
@@ -59,14 +59,19 @@ class ForumFactory extends Error {
 	}
 
 	/**
-	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *	getGroup - get the Group object this ForumFactory is associated with.
 	 *
-	 *	@return the Group object
+	 *	@return object	The Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
+	/**
+	 *	getForums - get an array of Forum objects for this Group.
+	 *
+	 *	@return	array	The array of Forum objects.
+	 */
 	function &getForums() {
 		if ($this->forums) {
 			return $this->forums;

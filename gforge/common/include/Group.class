@@ -70,7 +70,7 @@ function &group_get_object($group_id,$res=false) {
 			*/
 			if (db_result($res,0,'type')==1) {
 				//project
-				$GROUP_OBJ["_".$group_id."_"]= new Project($group_id,$res);
+				$GROUP_OBJ["_".$group_id."_"]= new Group($group_id,$res);
 			} else {
 				//invalid
 				$GROUP_OBJ["_".$group_id."_"]=false;
@@ -80,61 +80,52 @@ function &group_get_object($group_id,$res=false) {
 	return $GROUP_OBJ["_".$group_id."_"];
 }
 
+function &group_get_object_by_name($groupname) {
+	$res=db_query("SELECT * FROM groups WHERE unix_group_name='$groupname'");
+	return group_get_object(db_result($res,0,'group_id'),$res);
+}
+
 class Group extends Error {
 	/**
-	 * Associative array of data from db
+	 * Associative array of data from db.
 	 * 
-	 * @var array $data_array
+	 * @var array $data_array.
 	 */
 	var $data_array;
 
 	/**
-	 * The group ID
-	 *
-	 * @var int $group_id
-	 */
-	var $group_id;
-
-	/** 
-	 * Database result set handle
-	 *
-	 * @var int $db_result
-	 */
-	var $db_result;
-
-	/**
-	 * Permissions data row from db
+	 * Permissions data row from db.
 	 * 
-	 * @var array $perm_data_array
+	 * @var array $perm_data_array.
 	 */
 	var $perm_data_array;
 
 	/**
-	 * Whether the use is an admin/super user of this project
+	 * Whether the use is an admin/super user of this project.
 	 *
-	 * @var bool $is_admin
+	 * @var bool $is_admin.
 	 */
 	var $is_admin;
 
 	/**
-	 * Artifact types result handle
+	 * Artifact types result handle.
 	 * 
-	 * @var int $types_res;
+	 * @var int $types_res.
 	 */
 	var $types_res;
 
 	/**
-	 * Associative array of data for plugins
+	 * Associative array of data for plugins.
 	 * 
-	 * @var array $plugins_array
+	 * @var array $plugins_array.
 	 */
 	var $plugins_array;
 
 	/**
-	 *	Group() - Group object constructor - use group_get_object() to instantiate
+	 *	Group - Group object constructor - use group_get_object() to instantiate.
 	 *
-	 *	@param	int		Required - group_id of the group you want to instantiate
-	 *	@param	int		Database result from select query
+	 *	@param	int		Required - group_id of the group you want to instantiate.
+	 *	@param	int		Database result from select query.
 	 */
 	function Group($id=false, $res=false) {
 		$this->Error();
@@ -143,62 +134,57 @@ class Group extends Error {
 			//probably going to call create()
 			return true;
 		}
-		$this->group_id=$id;
 		if (!$res) {
-			$this->db_result=db_query("SELECT * FROM groups WHERE group_id='$id'");
+			if (!$this->fetchData($id)) {
+				return false;
+			}
 		} else {
-			$this->db_result=$res;
+			if (db_numrows($res) < 1) {
+				//function in class we extended
+				$this->setError('Group Not Found');
+				$this->data_array=array();
+				return false;
+			} else {
+				//set up an associative array for use by other functions
+				db_reset_result($res);
+				$this->data_array =& db_fetch_array($res);
+			}
 		}
-		if (db_numrows($this->db_result) < 1) {
-			//function in class we extended
-			$this->setError('Group Not Found');
-			$this->data_array=array();
-		} else {
-			//set up an associative array for use by other functions
+//
+//	Need to add a check if this is not public, verify user is logged in and isMember
+//
+		return true;
+	}
 
-			db_reset_result($this->db_result);
-
-			$this->data_array=db_fetch_array($this->db_result);
+	/**
+	 *	fetchData - May need to refresh database fields if an update occurred.
+	 *
+	 *	@param	int	The group_id.
+	 */
+	function fetchData($group_id) {
+		$res = db_query("SELECT * FROM groups WHERE group_id='$group_id'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('fetchData():: '.db_error());
+			return false;
 		}
+		$this->data_array =& db_fetch_array($res);
+		return true;
 	}
 
-
 	/**
-	 *	getData()
+	 *	create - Create new group.
 	 *
-	 *	Generally should NOT be used - here for supporting deprecated group.php
-	 *	@return a database result set handle
-	 *	@access private
-	 */
-	function getData() {
-		db_reset_result($this->db_result);
-		return $this->db_result;
-	}
-
-	/**
-	 *	refreshGroupData() - May need to refresh database fields if an update occurred
-	 */
-	function refreshGroupData() {
-		$this->db_result=db_query("SELECT * FROM groups WHERE group_id='". $this->getID() ."'");
-		$this->data_array=db_fetch_array($this->db_result);
-	}
-
-
-	/**
-	 *	create() - Create new group
-	 *
-	 *	This method should be called on empty Group object
+	 *	This method should be called on empty Group object.
 	 *  
-	 *  @param	object	The User object
-	 *  @param	string	The full name of the user
-	 *  @param	string	The Unix name of the user
-	 *  @param	string	The new group description
-	 *  @param	int	The ID of the license to use
-	 *  @param	string	The 'other' license to use if any
-	 *  @param	string	The purpose of the group
+	 *  @param	object	The User object.
+	 *  @param	string	The full name of the user.
+	 *  @param	string	The Unix name of the user.
+	 *  @param	string	The new group description.
+	 *  @param	int	The ID of the license to use.
+	 *  @param	string	The 'other' license to use if any.
+	 *  @param	string	The purpose of the group.
 	 */
-	function create(&$user, $full_name, $unix_name, $description,
-		$license, $license_other, $purpose) {
+	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose) {
 
 		// $user is ignored - anyone can create pending group
 
@@ -253,7 +239,7 @@ class Group extends Error {
 			return false;
 		}
 
-		$this->group_id = db_insertid($res, 'groups', 'group_id');
+		$id = db_insertid($res, 'groups', 'group_id');
 
 		//
 		// Now, make the user an admin
@@ -283,26 +269,29 @@ class Group extends Error {
 			return false;
 		}
 
+		if (!$this->fetchData($id)) {
+			db_rollback();
+			return false;
+		}
 		db_commit();
-		$this->refreshGroupData();
 		$this->sendNewProjectNotificationEmail();
 		return true;
 	}
 
 
 	/**
-	 *	updateAdmin($user) - Update core properties of group object
+	 *	updateAdmin - Update core properties of group object.
 	 *
-	 *	This function require site admin privilege
+	 *	This function require site admin privilege.
 	 *
-	 *	@param	object	User requesting operation (for access control)
-	 *	@param	bool	Whether group is publicly accessible (0/1)
-	 *	@param	string	Project's license (string ident)
-	 *	@param	int		Group type (1-project, 2-foundry)
-	 *	@param	string	Machine on which group's home directory located
-	 *	@param	string	Domain which serves group's WWW
-	 *	@return status
-	 *	@access public
+	 *	@param	object	User requesting operation (for access control).
+	 *	@param	bool	Whether group is publicly accessible (0/1).
+	 *	@param	string	Project's license (string ident).
+	 *	@param	int		Group type (1-project, 2-foundry).
+	 *	@param	string	Machine on which group's home directory located.
+	 *	@param	string	Domain which serves group's WWW.
+	 *	@return status.
+	 *	@access public.
 	 */
 	function updateAdmin(&$user, $is_public, $license, $type, $unix_box, $http_domain) {
 		global $Language;
@@ -335,8 +324,6 @@ class Group extends Error {
 			return false;
 		}
 
-		db_commit();
-
 		// Log the audit trail
 		if ($is_public != $this->isPublic()) {
 			$this->addHistory('is_public', $this->isPublic());
@@ -354,24 +341,27 @@ class Group extends Error {
 			$this->addHistory('http_domain', $this->data_array['http_domain']);
 		}
 
-		$this->refreshGroupData();
+		if (!$this->fetchData($this->getID())) {
+			db_rollback();
+			return false;
+		}
+		db_commit();
 		return true;
 	}
 
 	/**
-	 *	update() - Update number of common properties
+	 *	update - Update number of common properties.
 	 *
-	 *	Unlike updateAdmin(), this function accessible to project
-	 *	admin.
+	 *	Unlike updateAdmin(), this function accessible to project admin.
 	 *
-	 *	@param	object	User requesting operation (for access control)
-	 *	@param	bool	Whether group is publicly accessible (0/1)
-	 *	@param	string	Project's license (string ident)
-	 *	@param	int		Group type (1-project, 2-foundry)
-	 *	@param	string	Machine on which group's home directory located
-	 *	@param	string	Domain which serves group's WWW
-	 *	@return status
-	 *	@access public
+	 *	@param	object	User requesting operation (for access control).
+	 *	@param	bool	Whether group is publicly accessible (0/1).
+	 *	@param	string	Project's license (string ident).
+	 *	@param	int		Group type (1-project, 2-foundry).
+	 *	@param	string	Machine on which group's home directory located.
+	 *	@param	string	Domain which serves group's WWW.
+	 *	@return int	status.
+	 *	@access public.
 	 */
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
 		$use_pm,$use_pm_depend_box,$use_cvs,$use_news,$use_docman,
@@ -460,6 +450,8 @@ class Group extends Error {
 			return false;
 		}
 
+		db_begin();
+
 		//XXX not yet actived logo_image_id='$logo_image_id', 
 		$res = db_query("
 			UPDATE groups
@@ -488,29 +480,34 @@ class Group extends Error {
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('Error updating project information: '.db_error());
+			db_rollback();
 			return false;
 		}
 
 		// Log the audit trail
 		$this->addHistory('Changed Public Info', '');
 
-		$this->refreshGroupData();
+		if (!$this->fetchData($group_id)) {
+			db_rollback();
+			return false;
+		}
+		db_commit();
 		return true;
 	}
 
 	/**
-	 *	getID() - Simply return the group_id for this object
+	 *	getID - Simply return the group_id for this object.
 	 *
-	 *	@return integer group_id
+	 *	@return int group_id.
 	 */
 	function getID() {
-		return $this->group_id;
+		return $this->data_array['group_id'];
 	}
 
 	/**
-	 *	getType() - Foundry, project, etc
+	 *	getType() - Foundry, project, etc.
 	 *
-	 *	@return the type flag from the database
+	 *	@return	int	The type flag from the database.
 	 */
 	function getType() {
 		return $this->data_array['type'];
@@ -518,23 +515,23 @@ class Group extends Error {
 
 
 	/**
-	 *	getStatus()
+	 *	getStatus - the status code.
 	 *
-	 *	Statuses include I,H,A,D
+	 *	Statuses	char	include I,H,A,D.
 	 */
 	function getStatus() {
 		return $this->data_array['status'];
 	}
 
 	/**
-	 *	setStatus($user, $status)
+	 *	setStatus - set the status code.
 	 *
-	 *	Statuses include I,H,A,D
+	 *	Statuses include I,H,A,D.
 	 *
-	 *	@param	object	User requesting operation (for access control)
-	 *	@param	string	Status value
-	 *
-	 *	@access public
+	 *	@param	object	User requesting operation (for access control).
+	 *	@param	string	Status value.
+	 *	@return	boolean	success.
+	 *	@access public.
 	 */
 	function setStatus(&$user, $status) {
 		global $Language;
@@ -559,11 +556,11 @@ class Group extends Error {
 		$allowed_status_changes = array(
 			'AH'=>1,'AD'=>1,'DA'=>1,'PA'=>1,'PD'=>1,
 			'IP'=>1,'HA'=>1,'HD'=>1
-		);              
+		);			  
 
 		// Check that status transition is valid
 		if ($this->getStatus() != $status
-		    && !$allowed_status_changes[$this->getStatus().$status]) {
+			&& !$allowed_status_changes[$this->getStatus().$status]) {
 			$this->setError('Invalid Status Change');
 			return false;
 		}
@@ -641,9 +638,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *	isProject() - Simple boolean test to see if it's a project or not
+	 *	isProject - Simple boolean test to see if it's a project or not.
 	 *
-	 *	@return true/false
+	 *	@return	boolean is_project.
 	 */
 	function isProject() {
 		if ($this->getType()==1) {
@@ -654,18 +651,18 @@ class Group extends Error {
 	}
 
 	/**
-	 *	isPublic() - Simply returns the is_public flag from the database
+	 *	isPublic - Simply returns the is_public flag from the database.
 	 *
-	 *	@return true/false
+	 *	@return	boolean	is_public.
 	 */
 	function isPublic() {
 		return $this->data_array['is_public'];
 	}
 
 	/**
-	 *	isActive() - Database field status of 'A' returns true
+	 *	isActive - Database field status of 'A' returns true.
 	 *
-	 *	@return true/false
+	 *	@return	boolean	is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus()=='A') {
@@ -676,90 +673,90 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getUnixName()
+	 *  getUnixName - the unix_name
 	 *
-	 *  @return text unix_name
+	 *  @return	string	unix_name.
 	 */
 	function getUnixName() {
 		return strtolower($this->data_array['unix_group_name']);
 	}
 
 	/**
-	 *  getPublicName()
+	 *  getPublicName - the full-length public name.
 	 *
-	 *  @return text group_name
+	 *  @return	string	The group_name.
 	 */
 	function getPublicName() {
 		return htmlspecialchars($this->data_array['group_name']);
 	}
 
 	/**
-	 *  getRegisterPurpose()
+	 *  getRegisterPurpose - the text description of the purpose of this project.
 	 *
-	 *  @return text description
+	 *  @return	string	The description.
 	 */
 	function getRegisterPurpose() {
 		return $this->data_array['register_purpose'];
 	}
 
 	/**
-	 *  getDescription()
+	 *  getDescription	- the text description of this project.
 	 *
-	 *  @return text description
+	 *  @return	string	The description.
 	 */
 	function getDescription() {
 		return $this->data_array['short_description'];
 	}
 
 	/**
-	 *  getStartDate()
+	 *  getStartDate - the unix time this project was registered.
 	 *
-	 *  @return integer (unix time) of registration
+	 *  @return int (unix time) of registration.
 	 */
 	function getStartDate() {
 		return $this->data_array['register_time'];
 	}
 
 	/**
-	 *  getLogoImageID()
+	 *  getLogoImageID - the id of the logo in the database for this project.
 	 *
-	 *  @return ID of logo image in db_images table (or 100 if none)
+	 *  @return	int	The ID of logo image in db_images table (or 100 if none).
 	 */
 	function getLogoImageID() {
 		return $this->data_array['logo_image_id'];
 	}
 
 	/**
-	 *  getUnixBox()
+	 *  getUnixBox - the hostname of the unix box where this project is located.
 	 *
-	 *  @return name of the unix machine for the group
+	 *  @return	string	The name of the unix machine for the group.
 	 */
 	function getUnixBox() {
 		return $this->data_array['unix_box'];
 	}
 
 	/**
-	 *  getDomain()
+	 *  getDomain - the hostname.domain where their web page is located.
 	 *
-	 *  @return name of the group [web] domain
+	 *  @return	string	The name of the group [web] domain.
 	 */
 	function getDomain() {
 		return $this->data_array['http_domain'];
 	}
 
 	/**
-	 *  getLicense()
+	 *  getLicense	- the license they chose.
 	 *
-	 *  @return string ident of group license
+	 *  @return	string	ident of group license.
 	 */
 	function getLicense() {
 		return $this->data_array['license'];
 	}
 
 	/**
-	 *  getLicenseOther()
+	 *  getLicenseOther - optional string describing license.
 	 *
-	 *  @return text custom license
+	 *  @return	string	The custom license.
 	 */
 	function getLicenseOther() {
 		if ($this->getLicense() == 'other') {
@@ -770,15 +767,13 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getRegistrationPurpose()
+	 *  getRegistrationPurpose - the text description of the purpose of this project.
 	 *
-	 *  @return text application for project hosting
+	 *  @return	string	The application for project hosting.
 	 */
 	function getRegistrationPurpose() {
 		return $this->data_array['register_purpose'];
 	}
-
-
 
 
 
@@ -789,138 +784,129 @@ class Group extends Error {
 	*/
 
 	/**
-	 *	enableAnonCVS() - whether or not this group has opted to enable Anonymous CVS
+	 *	enableAnonCVS - whether or not this group has opted to enable Anonymous CVS.
 	 *
-	 *	@return true/false
+	 *	@return boolean enable_cvs.
 	 */
 	function enableAnonCVS() {
 		return $this->data_array['enable_anoncvs'];
 	}
 
 	/**
-	 *	enablePserver() - whether or not this group has opted to enable Pserver
+	 *	enablePserver - whether or not this group has opted to enable Pserver.
 	 *
-	 *	@return true/false
+	 *	@return boolean	enable_pserver.
 	 */
 	function enablePserver() {
 		return $this->data_array['enable_pserver'];
 	}
 
 	/**
-	 *	usesCVS() - whether or not this group has opted to use CVS
+	 *	usesCVS - whether or not this group has opted to use CVS.
 	 *
-	 *	@return true/false
+	 *	@return	boolean	uses_cvs.
 	 */
 	function usesCVS() {
 		return $this->data_array['use_cvs'];
 	}
 
 	/**
-	 *	usesMail() - whether or not this group has opted to use mailing lists
+	 *	usesMail - whether or not this group has opted to use mailing lists.
 	 *
-	 *	@return true/false
+	 *	@return	boolean uses_mail.
 	 */
 	function usesMail() {
 		return $this->data_array['use_mail'];
 	}
 
 	/**
-	 * 	usesNews() - whether or not this group has opted to use news
+	 * 	usesNews - whether or not this group has opted to use news.
 	 *
-	 *	@return true/false
+	 *	@return	boolean	uses_news.
 	 */
 	function usesNews() {
 		return $this->data_array['use_news'];
 	}
 
 	/**
-	 *	usesForum() - whether or not this group has opted to use discussion forums
+	 *	usesForum - whether or not this group has opted to use discussion forums.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_forum.
 	 */
 	function usesForum() {
 		return $this->data_array['use_forum'];
 	}	   
 
 	/**
-	 *  usesStats() - whether or not this group has opted to use stats
+	 *  usesStats - whether or not this group has opted to use stats.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_stats.
 	 */
 	function usesStats() {
 		return $this->data_array['use_stats'];
 	}
 
 	/**
-	 *  usesFRS() - whether or not this group has opted to use file release system
+	 *  usesFRS - whether or not this group has opted to use file release system.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_frs.
 	 */
 	function usesFRS() {
 		return $this->data_array['use_frs'];
 	}
 
 	/**
-	 *  usesTracker() - whether or not this group has opted to use tracker
+	 *  usesTracker - whether or not this group has opted to use tracker.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_tracker.
 	 */
 	function usesTracker() {
 		return $this->data_array['use_tracker'];
 	}
 
 	/**
-	 *  usesDocman() - whether or not this group has opted to use docman
+	 *  usesDocman - whether or not this group has opted to use docman.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_docman.
 	 */
 	function usesDocman() {
 		return $this->data_array['use_docman'];
 	}
 
 	/**
-	 *  usesFTP() - whether or not this group has opted to use FTP
+	 *  usesFTP - whether or not this group has opted to use FTP.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_ftp.
 	 */
 	function usesFTP() {
 		return $this->data_array['use_ftp'];
 	}
 
 	/**
-	 *  usesSurvey() - whether or not this group has opted to use surveys
+	 *  usesSurvey - whether or not this group has opted to use surveys.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_survey.
 	 */
 	function usesSurvey() {
 		return $this->data_array['use_survey'];
 	}	   
 
 	/**
-	 *  usesPM() - whether or not this group has opted to Project Manager
+	 *  usesPM - whether or not this group has opted to Project Manager.
 	 *
-	 *  @return true/false
+	 *  @return	boolean	uses_projman.
 	 */
 	function usesPM() {
 		return $this->data_array['use_pm'];
-	}
-
-	/**
-	 *  usesPMDependencies() - whether or not this group has opted to use task dependencies
-	 *
-	 *  @return true/false
-	 */
-	function usesPMDependencies() {
-		return $this->data_array['use_pm_depend'];
 	}
 
 	function getPlugins() {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
 			$sql="SELECT group_plugin.plugin_id, plugins.plugin_name
-                              FROM group_plugin, plugins
-			      WHERE group_plugin.group_id='".$this->getID()."
-                                AND group_plugin.plugin_id = plugins.plugin_id" ;
+							  FROM group_plugin, plugins
+				  WHERE group_plugin.group_id='".$this->getID()."
+								AND group_plugin.plugin_id = plugins.plugin_id" ;
 			$res=db_query($sql);
 			$rows = db_numrows($res);
 
@@ -948,8 +934,8 @@ class Group extends Error {
 			return true ;
 		}
 		$sql="SELECT plugin_id
-		      FROM plugins
-		      WHERE plugin_name = '" . $pluginname . "'" ;
+			  FROM plugins
+			  WHERE plugin_name = '" . $pluginname . "'" ;
 		$res=db_query($sql);
 		$rows = db_numrows($res);
 		if ($rows == 0) {
@@ -961,23 +947,20 @@ class Group extends Error {
 		unset ($this->plugins_data) ;
 		if ($val) {
 			$sql="INSERT INTO group_plugin (group_id, plugin_id)
-                              VALUES (". $this->getID() . ", ". $plugin_id .")" ;
+							  VALUES (". $this->getID() . ", ". $plugin_id .")" ;
 			$res=db_query($sql);
 			return $res ;
 		} else {
 			$sql="DELETE FROM group_plugin
-                              WHERE group_id = ". $this->getID() . "
-                                AND plugin_id = ". $plugin_id ;
+							  WHERE group_id = ". $this->getID() . "
+								AND plugin_id = ". $plugin_id ;
 			$res=db_query($sql);
 			return $res ;
 		}
 	}
 
-	// Warning: names for 2 functions below were choosen to be
-	// consistent with trackers code
-
 	/**
-	 *  getDocEmailAddress() - get email address to send doc notifications to.
+	 *  getDocEmailAddress - get email address to send doc notifications to.
 	 *
 	 *  @return	string	email address.
 	 */
@@ -986,9 +969,9 @@ class Group extends Error {
 	}
 
 	/**
-	 *  DocEmailAll() - whether or not this group has opted to use receive notices on all doc updates.
+	 *  DocEmailAll - whether or not this group has opted to use receive notices on all doc updates.
 	 *
-	 *  @return true/false.
+	 *  @return	boolean	email_on_all_doc_updates.
 	 */
 	function docEmailAll() {
 		return $this->data_array['send_all_docs'];
@@ -996,7 +979,7 @@ class Group extends Error {
 
 
 	/**
-	 *	getHomePage() - The URL for this project's home page.
+	 *	getHomePage - The URL for this project's home page.
 	 *
 	 *	@return	string	homepage URL.
 	 */
@@ -1005,26 +988,10 @@ class Group extends Error {
 	}
 
 	/**
-	 *	getArtifactTypes() - Get all Artifact types for this group
+	 *	getPermission - Return a Permission for this Group and the specified User.
 	 *
-	 *	@return result set
-	 */
-	function getArtifactTypes() {
-		if (!isset($this->types_res)) {
-			$sql="SELECT group_artifact_id,name
-				FROM artifact_group_list
-				WHERE group_id='".$this->getID()."'
-				ORDER BY name";
-			$this->types_res=db_query($sql);
-		}
-		return $this->types_res;
-	}
-
-	/**
-	 *	getPermission() - Return a Permission for this Group and the specified User
-	 *
-	 *	@param	object	The user you wish to get permission for (usually the logged in user)
-	 *	@return permission
+	 *	@param	object	The user you wish to get permission for (usually the logged in user).
+	 *	@return	object	The Permission.
 	 */
 	function &getPermission(&$_user) {
 		return permission_get_object(&$this, &$_user);
@@ -1032,9 +999,9 @@ class Group extends Error {
 
 
 	/**
-	 *	userIsAdmin() - Return if for this Group the User is admin
+	 *	userIsAdmin - Return if for this Group the User is admin.
 	 *
-	 *	@return bool
+	 *	@return boolean	is_admin.
 	 */
 	function userIsAdmin() {
 		$perm =& $this->getPermission( session_get_user() );
@@ -1051,18 +1018,17 @@ class Group extends Error {
 	*/
 
 	/**
-	 *	addUser() - controls adding a user to a group
+	 *	addUser - controls adding a user to a group.
 	 *  
-	 *  @param	string	Unix name of the user to add
-	 *	@return true/false
-	 *	@access public
+	 *  @param	string	Unix name of the user to add.
+	 *	@return	boolean	success.
+	 *	@access public.
 	 */
 	function addUser($user_unix_name) {
 		/*
 			Admins can add users to groups
 		*/
-?><?php
-//TODO should not assume logged in user only - $user should be passed in or $perm passed in
+
 		$perm =& $this->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
@@ -1161,7 +1127,7 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				} else {
-					$user->refreshUserData();
+					$user->fetchData($user->getID());
 					if (!sf_ldap_check_create_user($form_newuid)) {
 						$this->setError(sf_ldap_get_error_msg());
 						db_rollback();
@@ -1193,12 +1159,12 @@ class Group extends Error {
 	}
 
 	/**
-	 *  removeUser() - controls removing a user from a group
+	 *  removeUser - controls removing a user from a group.
 	 * 
-	 *  Users can remove themselves
+	 *  Users can remove themselves.
 	 *
-	 *  @param	int		The ID of the user to remove
-	 *	@return true/false
+	 *  @param	int		The ID of the user to remove.
+	 *	@return	boolean	success.
 	 */ 
 	function removeUser($user_id) {
 
@@ -1206,7 +1172,6 @@ class Group extends Error {
 			//users can remove themselves
 			//everyone else must be a project admin
 		} else {
-//TODO should not assume logged in user only - $user should be passed in or $perm passed in
 			$perm =& $this->getPermission( session_get_user() );
 
 			if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
@@ -1254,27 +1219,26 @@ class Group extends Error {
 	}
 
 	/**	 
-	 *  updateUser() - controls updating a user's perms in this group
+	 *  updateUser - controls updating a user's perms in this group.
 	 *
-	 *	NOTE - bug_flags,patch_flags,support flags are deprecated
+	 *	NOTE - bug_flags,patch_flags,support flags are deprecated.
 	 *
-	 *  @param	int		The ID of the user
-	 *  @param	string	The admin flag for the user
-	 *  @param	int		The bug flag for the user  DEPRECATED
-	 *  @param	int		The forum flag for the user
-	 *  @param	int		The project flag for the user
-	 *  @param	int		The patch flag for the user  DEPRECATED
-	 *  @param	int		The support flag for the user  DEPRECATED
-	 *  @param	int		The doc flag for the user
-	 *  @param	int		The CVS flag for the user
-	 *  @param	int		The release flag for the user
-	 *	@param	int		The member role for the user
-	 *	@param	int		The artifact flags for the user
-	 *	@return true/false
+	 *  @param	int		The ID of the user.
+	 *  @param	string	The admin flag for the user.
+	 *  @param	int		The bug flag for the user  DEPRECATED.
+	 *  @param	int		The forum flag for the user.
+	 *  @param	int		The project flag for the user.
+	 *  @param	int		The patch flag for the user  DEPRECATED.
+	 *  @param	int		The support flag for the user  DEPRECATED.
+	 *  @param	int		The doc flag for the user.
+	 *  @param	int		The CVS flag for the user.
+	 *  @param	int		The release flag for the user.
+	 *	@param	int		The member role for the user.
+	 *	@param	int		The artifact flags for the user.
+	 *	@return	boolean	success.
 	 */	 
 	function updateUser($user_id,$admin_flags='',$bug_flags=1,$forum_flags=0,$project_flags=1,$patch_flags=1,$support_flags=1,$doc_flags=0,$cvs_flags=1,$release_flags=1,$member_role=100,$artifact_flags=0) {
 
-//TODO should not assume logged in user only - $user should be passed in or $perm passed in
 	$perm =& $this->getPermission( session_get_user() );
 
 	if (!$perm || !is_object($perm) || !$perm->isAdmin()) {
@@ -1347,12 +1311,12 @@ class Group extends Error {
 	}
 
 	/**
-	 *	addHistory() - Makes an audit trail entry for this project
+	 *	addHistory - Makes an audit trail entry for this project.
 	 *
-	 *  @param	string	The name of the field
-	 *  @param	string	The Old Value for this $field_name
-	 *	@return database result handle
-	 *	@access public
+	 *  @param	string	The name of the field.
+	 *  @param	string	The Old Value for this $field_name.
+	 *	@return database result handle.
+	 *	@access public.
 	 */
 	function addHistory($field_name, $old_value) {
 		$sql="
@@ -1363,13 +1327,12 @@ class Group extends Error {
 	}		  
 
 	/**
-	 *	activateUsers() - Make sure that group members have unix accounts
+	 *	activateUsers - Make sure that group members have unix accounts.
 	 *
 	 *	Setup unix accounts for group members. Can be called even
 	 *	if members are already active. 
 	 *
-	 *	@access private
-	 *
+	 *	@access private.
 	 */
 	function activateUsers() {
 
@@ -1411,11 +1374,10 @@ class Group extends Error {
 	}
 
 	/**
-	 *	approve() - Approve pending project
+	 *	approve - Approve pending project.
 	 *
-	 *      @param	object	The User object
+	 *	@param	object	The User object who is doing the updating.
 	 *	@access public
-	 *
 	 */
 	function approve(&$user) {
 
@@ -1432,6 +1394,11 @@ class Group extends Error {
 			return false;
 		}
 
+		//
+		//
+		//	Forum Integration
+		//
+		//
 		// Step 2: Setup forums for this group
 		$f = new Forum($this);
 		if (!$f->create('Open Discussion','General Discussion',1,'',1,0)) {
@@ -1452,6 +1419,11 @@ class Group extends Error {
 			return false;
 		}
 
+		//
+		//
+		//	Doc Mgr Integration
+		//
+		//
 		$dg = new DocumentGroup($this);
 		if (!$dg->create('Uncategorized Submissions')) {
 			$this->setError($dg->getErrorMessage());
@@ -1459,6 +1431,11 @@ class Group extends Error {
 			return false;
 		}
 
+		//
+		//
+		//	FRS integration
+		//
+		//
 		// Step 4: Setup default filerelease package
 		$frs = new FRSPackage($this);
 		if (!$frs->create($this->getUnixName())) {
@@ -1477,11 +1454,10 @@ class Group extends Error {
 
 
 	/**
-	 *	sendApprovalEmail() - Send new project email 
+	 *	sendApprovalEmail - Send new project email.
 	 *
-	 *	@return completion status
-	 *	@access public
-	 *
+	 *	@return	boolean	success.
+	 *	@access public.
 	 */
 	function sendApprovalEmail() {
 		global $Language;
@@ -1502,7 +1478,7 @@ class Group extends Error {
 		// send one email per admin
 		while ($row_admins = db_fetch_array($res_admins)) {
 
-			//                                                                               $1                      $2                    $3                              $4                          $5                        $6
+			//																			   $1					  $2					$3							  $4						  $5						$6
 			$message=stripcslashes($Language->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_cvs_host'], $this->getID(), $GLOBALS['sys_name'])));
 	
 			util_send_message($row_admins['email'], $Language->getText('classgroup', 'acceptedprojecttitle', array($GLOBALS['sys_name'])), $message);
@@ -1512,17 +1488,16 @@ class Group extends Error {
 	}
 
 
-	/*
-	 *	sendRejectionEmail() - Send project rejection email
+	/**
+	 *	sendRejectionEmail - Send project rejection email.
 	 *
 	 *	This function sends out a rejection message to a user who
 	 *	registered a project.
 	 *
-	 *      @param	int	The id of the response to use
-	 *	@param	string	The rejection message
-	 *	@return completion status
-	 *	@access public
-	 *
+	 *	@param	int	The id of the response to use.
+	 *	@param	string	The rejection message.
+	 *	@return completion status.
+	 *	@access public.
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
 		global $Language;
@@ -1553,16 +1528,15 @@ class Group extends Error {
 		return true;
 	}
 
-	/*
-	 *	sendNewProjectNotificationEmail() - Send new project notification email
+	/**
+	 *	sendNewProjectNotificationEmail - Send new project notification email.
 	 *
 	 *	This function sends out a notification email to the
 	 *	SourceForge admin user when a new project is
 	 *	submitted.
 	 *
-	 *	@return completion status
-	 *	@access public
-	 *
+	 *	@return	boolean	success.
+	 *	@access public.
 	 */
 	function sendNewProjectNotificationEmail() {
 		global $Language;
@@ -1570,8 +1544,8 @@ class Group extends Error {
 	  // Get the admin(s) email
 	  $admin_email='';
 	  //$res = db_query("SELECT email AS admin_email
-          //                FROM users
-          //               WHERE user_name='admin';");
+		  //				FROM users
+		  //			   WHERE user_name='admin';");
 	  $res = db_query("SELECT users.email AS admin_email
 	 			FROM users,user_group
 				WHERE group_id=1 
@@ -1579,8 +1553,8 @@ class Group extends Error {
 				AND users.user_id=user_group.user_id;");
 
 	  if (db_numrows($res) < 1) {
-	    $this->setError("There is no administrator to send the mail.");
-	    return false;
+		$this->setError("There is no administrator to send the mail.");
+		return false;
 	  } else {
 	  	for ($i=0; $i<db_numrows($res) ; $i++) {
 			$admin_email .= db_result($res,$i,'admin_email').', ';
@@ -1589,14 +1563,14 @@ class Group extends Error {
 
 	  // Get the email of the user who wants to register the project
 	  $res = db_query("SELECT u.email AS email
-                           FROM users u, user_group ug
-                           WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
+						   FROM users u, user_group ug
+						   WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
 
 	  if (db_numrows($res) < 1) {
-	    $this->setError("Cound not find user who has submitted the project.");
-	    return false;
+		$this->setError("Cound not find user who has submitted the project.");
+		return false;
 	  } else {
-	    $email = db_result($res, 0, "email");
+		$email = db_result($res, 0, "email");
 	  }
 	  
 	  $message=stripcslashes($Language->getText('classgroup', 'newprojectnotification', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicense(), $GLOBALS['sys_default_domain'])));
@@ -1607,9 +1581,53 @@ class Group extends Error {
 	}
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+/**
+ * group_getname() - get the group name
+ *
+ * @param	   int	 The group ID
+ * @deprecated
+ *
+ */
+function group_getname ($group_id = 0) {
+	$grp = &group_get_object($group_id);
+	if ($grp) {
+		return $grp->getPublicName();
+	} else {
+		return 'Invalid';
+	}
+}
+
+/**
+ * group_getunixname() - get the unixname for a group
+ *
+ * @param	   int	 The group ID
+ * @deprecated
+ *
+ */
+function group_getunixname ($group_id) {
+	$grp = &group_get_object($group_id);
+	if ($grp) {
+		return $grp->getUnixName();
+	} else {
+		return 'Invalid';
+	}
+}
+
+/**
+ * group_get_result() - Get the group object result ID.
+ *
+ * @param	   int	 The group ID
+ * @deprecated
+ *
+ */
+function &group_get_result($group_id=0) {
+	$grp = &group_get_object($group_id);
+	if ($grp) {
+		return $grp->getData();
+	} else {
+		return 0;
+	}
+}
+
 
 ?>

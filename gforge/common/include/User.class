@@ -81,26 +81,12 @@ function &user_get_object($user_id,$res=false) {
 
 class User extends Error {
 	/** 
-	 * Associative array of data from db
+	 * Associative array of data from db.
 	 *
-	 * @var		array	$data_array
+	 * @var		array	$data_array.
 	 */
 	var $data_array;
 	
-	/**
-	 * The User ID
-	 *
-	 * @var		int		$user_id
-	 */
-	var $user_id;
-	
-	/**
-	 * Database result set handle
-	 *
-	 * @var		int		$db_result
-	 */
-	var $db_result;
-
 	/**
 	 * Is this person a site super-admin?
 	 *
@@ -140,25 +126,20 @@ class User extends Error {
 			//probably going to call create()
 			return true;
 		}
-		$this->user_id=$id;
 		if (!$res) {
-			$this->db_result=db_query("SELECT * FROM users WHERE user_id='$id'");
+			$this->fetchData($id);
 		} else {
-			$this->db_result=$res;
+			if (db_numrows($res) < 1) {
+				//function in class we extended
+				$this->setError('User Not Found');
+				$this->data_array=array();
+				return false;
+			} else {
+				//set up an associative array for use by other functions
+				db_reset_result($res);
+				$this->data_array =& db_fetch_array($res);
+			}
 		}
-		if (db_numrows($this->db_result) < 1) {
-			//function in class we extended
-			$this->setError('User Not Found');
-			$this->data_array=array();
-			return false;
-		} else {
-			//set up an associative array for use by other functions
-			
-			db_reset_result($this->db_result);
-			
-			$this->data_array =& db_fetch_array($this->db_result);
-		}
-		$this->user_id=$this->data_array['user_id'];
 		$this->is_super_user=false;
 		$this->is_logged_in=false;
 		return true;
@@ -262,22 +243,24 @@ class User extends Error {
 			'$timezone',
 			'$jabber_address',
 			'$jabber_only')");
-		$this->user_id = db_insertid($result,'users','user_id');
+		$id = db_insertid($result,'users','user_id');
 	
-		if (!$result || !$this->user_id) {
-			db_rollback();
-			//$this->setError('Insert Failed '.db_error());
+		if (!$result || !$id) {
 			$this->setError($Language->getText('account_register','err_badinsert') .db_error());
+			db_rollback();
 			return false;
 		} else {
 
 			// send mail
-			$this->refreshUserData();
+			if (!$this->fetchData($id)) {
+				db_rollback();
+				return false;
+			}
 
 			$this->sendRegistrationEmail();
 
 			db_commit();
-			return $this->user_id;
+			return $id;
 		}
 	}
 
@@ -326,6 +309,7 @@ class User extends Error {
 			$jabber_only=1;
 		}
 
+		db_begin();
 
 		$res = db_query("
 			UPDATE users
@@ -343,6 +327,7 @@ class User extends Error {
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Object: '.db_error());
+			db_rollback();
 			return false;
 		} else {
 			// If there's a transaction from using to not
@@ -352,58 +337,57 @@ class User extends Error {
 			if (!$use_ratings && $this->usesRatings()) {
 				vote_remove_all_ratings_by($this->getID());
 			}
-			$this->refreshUserData();
+			if (!$this->fetchData($this->getID())) {
+				db_rollback();
+				return false;
+			}
+			db_commit();
 			return true;
 		}
 	}
 
 	/**
-	 *	getData() - Return database result handle for direct access
+	 *	fetchData - May need to refresh database fields.
 	 *
-	 *	Generally should NOT be used - here for supporting deprecated group.php
-	 *	@return database result set handle
-	 */
-	function getData() {
-		db_reset_result($this->db_result);
-		return $this->db_result;
-	}
-
-	/**
-	 *	refreshUserData() - May need to refresh database fields
+	 *	If an update occurred and you need to access the updated info.
 	 *
-	 *	if an update occurred and you need to access the updated info
+	 *	@return boolean success;
 	 */
-	function refreshUserData() {
-		$this->db_result=db_query("SELECT * FROM users WHERE user_id='". $this->getID() ."'");
-		$this->data_array=db_fetch_array($this->db_result);
-		return $this->db_result;
+	function fetchData($user_id) {
+		$res=db_query("SELECT * FROM users WHERE user_id='$user_id'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('User::fetchData()::'.db_error());
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		return true;
 	}
 	
 	/**
-	 *	getID() - Simply return the user_id for this object
+	 *	getID - Simply return the user_id for this object.
 	 *
-	 *	@return this user's user_id number
+	 *	@return	int	This user's user_id number.
 	 */
 	function getID() {
-		return $this->user_id;
+		return $this->data_array['user_id'];
 	}
 
 	/**
-	 *	getStatus()
+	 *	getStatus - get the status of this user.
 	 *
-	 *	Statuses include (A)ctive, (P)ending, (S)uspended ,(D)eleted
+	 *	Statuses include (A)ctive, (P)ending, (S)uspended ,(D)eleted.
 	 *
-	 *	@return this user's status flag
+	 *	@return	char	This user's status flag.
 	 */
 	function getStatus() {
 		return $this->data_array['status'];
 	}
 
 	/**
-	 *	setStatus()
+	 *	setStatus - set this user's status.
 	 *
-	 *	@param	string	Status - P, A, S, or D
-	 *	@sets user status
+	 *	@param	string	Status - P, A, S, or D.
+	 *	@return	boolean	success.
 	 */
 	function setStatus($status) {
 
@@ -444,10 +428,10 @@ class User extends Error {
 	}
 
 	/**
-	 *	isActive()
+	 *	isActive - whether this user is confirmed and active.
 	 *
-	 *	Database field status of 'A' returns true
-	 *	@return true or false
+	 *	Database field status of 'A' returns true.
+	 *	@return	boolean is_active.
 	 */
 	function isActive() {
 		if ($this->getStatus()=='A') {
@@ -458,19 +442,19 @@ class User extends Error {
 	}
 
 	/**
-	 *	getUnixStatus() - Status of activation of unix account
+	 *	getUnixStatus - Status of activation of unix account.
 	 *
-	 *	@return (N)one, (A)ctive, (S)uspended or (D)eleted
+	 *	@return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
 	 */
 	function getUnixStatus() {
 		return $this->data_array['unix_status'];
 	}
 
 	/**
-	 *	setUnixStatus() - Sets status of activation of unix account
+	 *	setUnixStatus - Sets status of activation of unix account.
 	 *
-	 *  @param	string	The unix tatus
-	 *	@return true/false
+	 *  @param	string	The unix status.
+	 *	@return	boolean success.
 	 */
 	function setUnixStatus($status) {
 		db_begin();
@@ -512,65 +496,65 @@ class User extends Error {
 	}
 
 	/**
-	 *	getUnixName()
+	 *	getUnixName - the user's unix_name.
 	 *
-	 *	@return this user's unix/login name
+	 *	@return	string	This user's unix/login name.
 	 */
 	function getUnixName() {
 		return strtolower($this->data_array['user_name']);
 	}
 
 	/**
-	 *	getUnixPasswd()
+	 *	getUnixPasswd - get the user's password.
 	 *
-	 * 	@return this user's unix crypted passwd
+	 * 	@return	string	This user's unix crypted passwd.
 	 */
 	function getUnixPasswd() {
 		return $this->data_array['unix_pw'];
 	}
 
 	/**
-	 *	getUnixBox()
+	 *	getUnixBox - the hostname of the unix box this user has an account on.
 	 *
-	 * 	@return this user's shell login machine
+	 * 	@return	string	This user's shell login machine.
 	 */
 	function getUnixBox() {
 		return $this->data_array['unix_box'];
 	}
 
 	/**
-	 *	getMD5Passwd()
+	 *	getMD5Passwd - the password.
 	 *
-	 *	@return this user's MD5-crypted passwd
+	 *	@return	string	This user's MD5-crypted passwd.
 	 */
 	function getMD5Passwd() {
 		return $this->data_array['user_pw'];
 	}
 
 	/**
-	 *	getConfirmHash()
+	 *	getConfirmHash - the confirm hash in the db.
 	 *
-	 *	@return this user's confirmation hash
+	 *	@return	string	This user's confirmation hash.
 	 */
 	function getConfirmHash() {
 		return $this->data_array['confirm_hash'];
 	}
 
 	/**
-	 *	getEmail()
+	 *	getEmail - the user's email address.
 	 *
-	 *	@return this user's email address
+	 *	@return	string	This user's email address.
 	 */
 	function getEmail() {
 		return $this->data_array['email'];
 	}
 
 	/**
-	 *	getNewEmail()
+	 *	getNewEmail - while changing an email address, it is stored here until confirmation.
 	 *
-	 *	getNewEmail is a private operation for email change
+	 *	getNewEmail is a private operation for email change.
 	 *
-	 *	@return this user's new (not yet confirmed) email address
+	 *	@return	string	This user's new (not yet confirmed) email address.
 	 *	@private
 	 */
 	function getNewEmail() {
@@ -578,10 +562,10 @@ class User extends Error {
 	}
 
 	/**
-	 *	setEmail()
+	 *	setEmail - set a new email address, which must be confirmed.
 	 *
-	 *  @param	string	The email address
-	 *	@sets user's email address
+	 *  @param	string	The email address.
+	 *	@return boolean success.
 	 */
 	function setEmail($email) {
 		if (!$email || !validate_email($email)) {
@@ -604,13 +588,11 @@ class User extends Error {
 	}
 
 	/**
-	 *	setNewEmailAndHash()
+	 *	setNewEmailAndHash - setNewEmailAndHash is a private operation for email change.
 	 *
-	 *	setNewEmailAndHash is a private operation for email change
-	 *
-	 *  @param	string	The email address
-	 *  @param	string	The emial hash
-	 *	@sets record of user's new email address and confirmation hash
+	 *  @param	string	The email address.
+	 *  @param	string	The email hash.
+	 *	@return boolean success.
 	 */
 	function setNewEmailAndHash($email, $hash='') {
 
@@ -641,46 +623,46 @@ class User extends Error {
 	}
 
 	/**
-	 *	getRealName()
+	 *	getRealName - get the user's real name.
 	 *
-	 *	@return this user's real name
+	 *	@return	string	This user's real name.
 	 */
 	function getRealName() {
 		return $this->data_array['realname'];
 	}
 
 	/**
-	 *	getAddDate()
+	 *	getAddDate - this user's unix time when account was opened.
 	 *
-	 *	@return this user's unix time since account was opened
+	 *	@return	int	This user's unix time when account was opened.
 	 */
 	function getAddDate() {
 		return $this->data_array['add_date'];
 	}
 
 	/**
-	 *	getTimeZone()
+	 *	getTimeZone - this user's timezone setting.
 	 *
-	 *	@return this user's timezone setting
+	 *	@return	string	This user's timezone setting.
 	 */
 	function getTimeZone() {
 		return $this->data_array['timezone'];
 	}
 
 	/**
-	 *	getShell()
+	 *	getShell - this user's preferred shell.
 	 *
-	 *	@return this user's preferred shell
+	 *	@return	string	This user's preferred shell.
 	 */
 	function getShell() {
 		return $this->data_array['shell'];
 	}
 
 	/**
-	 *	setShell()
+	 *	setShell - sets user's preferred shell.
 	 *
-	 *  @param	string	The users preferred shell
-	 *	@sets user's preferred shell
+	 *  @param	string	The users preferred shell.
+	 *	@return boolean success.
 	 */
 	function setShell($shell) {
 		$shells = file('/etc/shells');
@@ -726,55 +708,55 @@ class User extends Error {
 	}
 
 	/**
-	 *	getUnixUid()
+	 *	getUnixUid - this user's unix_uid.
 	 *
-	 *	@return this user's unix_uid
+	 *	@return	int	This user's unix_uid.
 	 */
 	function getUnixUID() {
 		return $this->data_array['unix_uid'];
 	}
 
 	/**
-	 *	getLanguage()
+	 *	getLanguage - this user's language_id from supported_languages table.
 	 *
-	 *	@return this user's language_id
+	 *	@return	int	This user's language_id.
 	 */
 	function getLanguage() {
 		return $this->data_array['language'];
 	}
 
 	/**
-	 *	getJabberAddress()
+	 *	getJabberAddress - this user's optional jabber address.
 	 *
-	 *	@return this user's jabber address
+	 *	@return	string	This user's jabber address.
 	 */
 	function getJabberAddress() {
 		return $this->data_array['jabber_address'];
 	}
 
 	/**
-	 *	getJabberOnly()
+	 *	getJabberOnly - whether this person wants updates sent ONLY to jabber.
 	 *
-	 *	@return this user's jabber preference
+	 *	@return boolean	This user's jabber preference.
 	 */
 	function getJabberOnly() {
 		return $this->data_array['jabber_only'];
 	}
 
 	/**
-	 *	getAuthorizedKeys()
+	 *	getAuthorizedKeys - the SSH authorized keys set by the user.
 	 *
-	 *	@return this user's SSH authorized (public) keys
+	 *	@return	string	This user's SSH authorized (public) keys.
 	 */
 	function getAuthorizedKeys() {
 		return ereg_replace("###", "\n", $this->data_array['authorized_keys']);
 	}
 
 	/**
-	 *	setAuthorizedKeys()
+	 *	setAuthorizedKeys - set the SSH authorized keys for the user.
 	 *
-	 *  @param	string	The users public keys
-	 *	@sets this user's SSH authorized (public) keys
+	 *  @param	string	The users public keys.
+	 *	@return boolean success.
 	 */
 	function setAuthorizedKeys($keys) {
 		$keys = trim($keys);
@@ -796,9 +778,9 @@ class User extends Error {
 	}
 
 	/**
-	 *	setLoggedIn($val) - Really only used by session code
+	 *	setLoggedIn($val) - Really only used by session code.
 	 *
-	 * 	@param	bool	The session value
+	 * 	@param	boolean	The session value.
 	 */
 	function setLoggedIn($val=true) {
 		$this->is_logged_in=$val;
@@ -817,20 +799,20 @@ class User extends Error {
 	}
 
 	/**
-	 *	isLoggedIn()
+	 *	isLoggedIn - only used by session code.
 	 *
-	 *	@return true or false
+	 *	@return	boolean	is_logged_in.
 	 */
 	function isLoggedIn() {
 		return $this->is_logged_in;
 	}
 
 	/**
-	 *	setPreference($preference_name,$value)
+	 *	setPreference - set a new preference for this user.
 	 *
-	 *	@param	string	Tthe unique field name for this preference
-	 *	@param	string	The value you are setting this preference to
-	 *	@return true or false on failure
+	 *	@param	string	The unique field name for this preference.
+	 *	@param	string	The value you are setting this preference to.
+	 *	@return	boolean	success.
 	 */
 	function setPreference($preference_name,$value) {
 		$preference_name=strtolower(trim($preference_name));
@@ -846,10 +828,10 @@ class User extends Error {
 	}
 
 	/**
-	 *	getPreference($preference_name)
+	 *	getPreference - get a specific preference.
 	 *
-	 *	@param	string	The unique field name for this preference
-	 *	@return the preference or false on failure
+	 *	@param	string	The unique field name for this preference.
+	 *	@return the preference string or false on failure.
 	 */
 	function getPreference($preference_name) {
 		$preference_name=strtolower(trim($preference_name));
@@ -892,9 +874,9 @@ class User extends Error {
 	}
 
 	/**
-	 *	setUpUnixUID() - Sets up this user's unix_uid for shell access
+	 *	setUpUnixUID - Sets up this user's unix_uid for shell access.
 	 *
-	 *	@return true on success false on failure
+	 *	@return	boolean	success.
 	 */
 	function setUpUnixUID() {
 		global $sys_database_type;
@@ -939,10 +921,10 @@ class User extends Error {
 	}
 	
 	/**
-	 *	setPasswd($passwd) - Changes user's password
+	 *	setPasswd - Changes user's password.
 	 *
-	 *	@param	string	The plaintext password
-	 *	@return true on success false on failure
+	 *	@param	string	The plaintext password.
+	 *	@return boolean success.
 	 */
 	function setPasswd($passwd) {
 		if (!account_pwvalid($passwd)) {
@@ -980,9 +962,9 @@ class User extends Error {
 	}
 
 	/**
-	 *	usesRatings() - whether user participates in rating system
+	 *	usesRatings - whether user participates in rating system.
 	 *
-	 *	@return true/false
+	 *	@return boolean success.
 	 */
 	function usesRatings() {
 		return !$this->data_array['block_ratings'];
@@ -1048,10 +1030,10 @@ class User extends Error {
 	}
 
 	/**
-	 *	getMailingsPrefs($mailing_id) - Get activity status for one of the site mailings
+	 *	getMailingsPrefs - Get activity status for one of the site mailings.
 	 *
 	 *	@param	string	The id of mailing ('mail_va' for community mailings, 'mail_siteupdates' for site mailings)
-	 *	@return true/false
+	 *	@return	boolean success.
 	 */
 	function getMailingsPrefs($mailing_id) {
 		if ($mailing_id=='va') {
@@ -1064,10 +1046,10 @@ class User extends Error {
 	}
 
 	/**
-	 *	unsubscribeFromMailings($all) - Disable email notifications for user
+	 *	unsubscribeFromMailings - Disable email notifications for user.
 	 *
-	 *	@param	bool	If false, disable general site mailings, else - all
-	 *	@return true on success false on failure
+	 *	@param	boolean	If false, disable general site mailings, else - all.
+	 *	@return	boolean	success.
 	 */
 	function unsubscribeFromMailings($all=false) {
 		$res1 = $res2 = $res3 = true;
@@ -1091,6 +1073,11 @@ class User extends Error {
 		return $res1 && $res2 && $res3;
 	}
 
+	/**
+	 *	getThemeID - get the theme_id for this user from the theme_prefs table.
+	 *
+	 *	@return	int	The theme_id.
+	 */
 	function getThemeID() {
 		if (!$this->theme_id) {
 			$res=db_query("SELECT * FROM theme_prefs WHERE user_id='".$this->getID()."'");
@@ -1103,16 +1090,27 @@ class User extends Error {
 		return $this->theme_id;
 	}
 
+	/**
+	 *	setThemeID - set the theme_id for this user in the theme_prefs table.
+	 *
+	 *	@return	boolean	success.
+	 */
 	function setThemeID($id) {
 		db_query("DELETE FROM theme_prefs WHERE user_id='".$this->getID()."'");
 		$result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES ('".$this->getID()."','$id')");
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError('Error inserting theme_pre: '.db_error());
+			return false;
 		} else {
 			return true;
 		}
 	}
 
+	/**
+	 *	getThemeID - get the theme_id for this user from the theme_prefs table.
+	 *
+	 *	@return	int	The theme_id.
+	 */
 	function setUpTheme() {
 		if (!$this->theme) {
 			$res=db_query("SELECT * FROM themes WHERE theme_id='".$this->getThemeID()."'");
