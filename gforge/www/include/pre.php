@@ -16,9 +16,6 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
 */
-if (is_file('/etc/gforge/custom/pre.php')){
-	require_once('/etc/gforge/custom/pre.php');
-} else {
 
 // get constants used for flags or status
 require('common/include/constants.php');
@@ -135,11 +132,6 @@ if (session_loggedin()) {
 //
 //	Include user Theme
 //
-//if ($sys_theme=='') {
-if (!is_file($sys_themeroot.$sys_theme.'/Theme.class')) {
-    // to avoid error at first execution
-    $sys_theme='gforge';
-}
 require_once($sys_themeroot.$sys_theme.'/Theme.class');
 
 $HTML=new Theme();
@@ -191,7 +183,6 @@ setlocale (LC_TIME, $Language->getText('system','locale'));
 $sys_strftimefmt = $Language->getText('system','strftimefmt');
 $sys_datefmt = $Language->getText('system','datefmt');
 
-}
 /*
 
 
