@@ -5,7 +5,7 @@
 <body>
 
 <h2><center>GForge 3.0 FAQ</center></h2>
-<h3><center>Updated 2/24/03</center></h3>
+<h3><center>Updated 4/24/2003</center></h3>
 <h3><center>Suggestions are <a href="http://gforge.org/forum/forum.php?forum_id=6">welcome</a>.</center></h3>
 
 <br/><a href="#users">Users FAQ</a>
@@ -118,13 +118,6 @@ AcceptPathInfo on
 <br></br>
 
 <li>
-<b>I'm using 3.0pre7 and I can't add or delete Trove categories - doing so results in a blank screen</b>
-<p>Are you using PHP 4.2 or higher?  If so, please tweak session.php as described <a href="http://gforge.org/forum/message.php?msg_id=589">here</a>.
-</li>
-
-<br></br>
-
-<li>
 <b>What's the relationship between a GForge user account and a regular Unix user account?</b>
 <p>A user creates a new account by filling out a form with a username, password, email address and so on.  An MD5 hash of the password gets put into the database tables and also used as a hyperlink with which the user can confirm the email address.  So, initially, there's no connection.  
 <p>However, there are several scripts - like <a href="http://savannah.nongnu.org/cgi-bin/viewcvs/gforge/gforge/utils/new_parse.pl?rev=1.13&content-type=text/vnd.viewcvs-markup">new_parse.pl</a> - which can be used to create users and groups from the GForge projects and users.  new_parse.pl isn't working right now, so you'll have to either create Unix users by hand or fix the script.  If you do the latter, please share the fix via a <a href="http://gforge.org/tracker/?atid=106&group_id=1&func=browse">patch</a>.
@@ -180,6 +173,21 @@ AcceptPathInfo on
 	}
 </pre>
 </li>
+
+<li>
+<b>My Postgres database is getting pretty big - is there a way to make it smaller?</b>
+<p>Sure, run <code>vacuumdb -f -z</code>, like this:</p>
+<pre>
+[root@hal data]# vacuumdb -f -z -U gforge gforge
+VACUUM
+[root@hal data]#
+</pre>
+<p>This does "full vacuuming" whatever that is, and also updates optimizer hints.</p>
+<p>Another suggestion is to dump and restore the database.  If you've done so and would like to provide a step by step guide, please post to the forums, thanks!</p>
+</li>
+
+<br></br>
+
 </li>
 
 <li>
@@ -189,7 +197,7 @@ AcceptPathInfo on
 
 <li>
 <b>Will GForge work with QMail?</b>
-<p>Yup, it should, as long as <code>/usr/sbin/sendmail</code> is a symbolically linked to <code>/var/qmail/bin/sendmail</code>, which is the way qmail is usually installed.  Also, you'll need to edit <code>common/include/utils.php</code> and change <code>>& /dev/null &</code> to <code>> /dev/null 2>&1 &</code> in the <code>util_send_message</code> function.  This has been fixed in CVS and will not be necessary when pre10 is released.
+<p>Yup, it should, as long as <code>/usr/sbin/sendmail</code> is a symbolically linked to <code>/var/qmail/bin/sendmail</code>, which is the way qmail is usually installed.</p>
 </li>
 
 </ol>
@@ -197,7 +205,7 @@ AcceptPathInfo on
 <h2>Developers</h2>
 <ol>
 <li>
-<b>How can I check out the code?</b>
+<b>How can I check out the GForge code?</b>
 <p>You can check it out by typing:
 <pre>
 cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/gforge login 
@@ -274,4 +282,3 @@ which you can then submit using the <a href="http://gforge.org/tracker/?atid=106
  
 </body>
 </html>
-<!-- C:/data/gforge/docs/site/faq.html -->
