@@ -53,19 +53,19 @@ eval {
 #			       /usr/lib/sourceforge/db/init-extra.sql } ;
 	# TODO: user_rating.sql
 			      
-	foreach my $file (@filelist) {
-	    debug "Processing $file" ;
-	    @reqlist = @{ &parse_sql_file ($file) } ;
-	    
- 	    foreach my $s (@reqlist) {
- 		$query = $s ;
-		debug $query ;
-  		$sth = $dbh->prepare ($query) ;
-  		$sth->execute () ;
-  		$sth->finish () ;
- 	    }
- 	}
-	@reqlist = () ;
+#	foreach my $file (@filelist) {
+#	    debug "Processing $file" ;
+#	    @reqlist = @{ &parse_sql_file ($file) } ;
+#	    
+# 	    foreach my $s (@reqlist) {
+# 		$query = $s ;
+#		debug $query ;
+#  		$sth = $dbh->prepare ($query) ;
+#  		$sth->execute () ;
+#  		$sth->finish () ;
+# 	    }
+# 	}
+#	@reqlist = () ;
 
 	debug "Adding local data." ;
 
