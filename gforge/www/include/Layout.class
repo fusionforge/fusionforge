@@ -581,7 +581,7 @@ if ($params['group']) {
 		if ($project->usesCVS()) {
 			$TABS_DIRS[]='/scm/?group_id='.$group;
 			$TABS_TITLES[]=$Language->getText('group','short_cvs');
-			(($toptab == 'cvs') ? $selected=(count($TABS_TITLES)-1) : '' );
+			(($toptab == 'scm_index') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		// Downloads
@@ -676,11 +676,11 @@ if ($params['group']) {
 		} else if ($group_id && $forum_id) {
 			print '
 			<option value="forums"'.( $type_of_search == 'forums' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</OPTION>';
-		} else if ($group_id && $group_project_id) { 
+		} else if ($group_id && $group_project_id) {
 			print '
 			<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';
 		}
-		
+
 		print '
 			<option value="soft"'.( $type_of_search == 'soft' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
 		print '

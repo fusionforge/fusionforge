@@ -689,7 +689,7 @@ class Theme extends Layout {
 
 		// CVS
 		if ($project->usesCVS()) {
-			if ($toptab == 'cvs') {
+			if ($toptab == 'scm_index') {
 				$img = 'cvs.png';
 			} else {
 				$img = 'cvs_dark.png';
@@ -750,7 +750,7 @@ class Theme extends Layout {
 			}
 		} else if ($group_id && $forum_id) {
 			print '
-				<option value="forums"'.( $type_of_search == 'forums' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</OPTION>';
+				<option value="forums"'.( $type_of_search == 'forums' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</option>';
 		} else if ($group_id && $group_project_id) {
 			print '
 				<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';

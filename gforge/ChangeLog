@@ -1,5 +1,10 @@
 2003-02-15  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/Layout.class(projectTabs): cvs --> scm_index for
+	toptab parameter.
+
+	* www/themes/kde/Theme.class(projectTabs): ditto.
+
 	* common/include/utils.php(ShowResultSet): lowercase f in
 	"Functional"; valid XHTML 1.0 Transitional.
 
