@@ -62,7 +62,7 @@ class ForumsForUser extends Error {
 		     "FROM groups,forum_group_list,forum_monitored_forums ".
 		     "WHERE groups.group_id=forum_group_list.group_id AND groups.status ='A' ".
 		     "AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
-		     "AND forum_monitored_forums.user_id='".$this->User->getID()."' ORDER BY group_name DESC";
+		     "AND forum_monitored_forums.user_id='".$this->User->getID()."' ORDER BY group_name ASC";
 
 		$result=db_query($sql);
 		$rows=db_numrows($result);
