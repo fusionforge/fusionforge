@@ -4,7 +4,7 @@
  * GForge Localization Facility
  *
  * Portions Copyright 1999-2000 (c) VA Linux Systems
- * The rest Copyright 2003 (c) Guillaume Smet
+ * The rest Copyright 2003-2004 (c) Guillaume Smet
  *
  * http://gforge.org
  *
@@ -398,15 +398,13 @@ class BaseLanguage {
 
 }
 
-	/**
-	 * language_code_to_result - get the classname for a language id
-	 * 
-	 * @param string $alang A language ID
-	 * @return db_result A database result set containing one field - the 
-	 * language class name.  TODO: We could probably simplify things a
-	 * bit by making this function just return the class name, not a DB result.
-	 */
-function language_code_to_result($alang) {
+/**
+ * getLanguageClassName - get the classname for a language id
+ * 
+ * @param string $acceptedLanguages HTTP_ACCEPT_LANGUAGE header string
+ * @return string the language class name.
+ */
+function getLanguageClassName($acceptedLanguages) {
 	global $cookie_language_id;
 
 	/*
@@ -419,36 +417,54 @@ function language_code_to_result($alang) {
 		if logged in, use language from users table
 		else check for cookie and use that value if valid
 		if no cookie check browser preference and use that language if valid
-		else just use english
+		else just use default language as configured for the installation
 	*/
 
 	if ($cookie_language_id) {
 		$lang=$cookie_language_id;
-		$res=db_query("select classname from supported_languages where language_id='$lang'");
+		$res=db_query("select classname from supported_languages where language_id='".addslashes($lang)."'");
 		if (!$res || db_numrows($res) < 1) {
-			return db_query("select classname from supported_languages where language_id='1'"); // default to english
+			return false; // we will use default language
 		} else {
-			return $res;
+			return db_result($res,0,'classname');
 		}
 	} else {
-		$ary = explode(',', str_replace(' ', '', $alang)); // delete space and split
-		for( $i=0; $i<sizeof($ary); $i++){
-			$lang_code = ereg_replace(';.*', '', $ary[$i]); // remove ;q=0.x
-			$res = db_query("select classname from supported_languages where language_code = '$lang_code'");
-			if (db_numrows($res) > 0) {
-				return $res;
+		$matches = array();
+		preg_match_all('/([a-z]{2}(?:-[a-z]{2})?)(?:;q=([0-9\.]{1,4}))?/', $acceptedLanguages, $matches, PREG_SET_ORDER);
+		$languages = array();
+		
+		$languagesCount = count($matches);
+		
+		if($languagesCount > 0) {
+			$delta = 0.009/$languagesCount;
+		
+			for($i = 0, $max = count($matches); $i < $max; $i++) {
+				$languageCode = $matches[$i][1];
+				$quality = (!isset($matches[$i][2]) || empty($matches[$i][2])) ? '1' : $matches[$i][2];
+				$languages[$languageCode] = $quality + $delta * ($languagesCount - $i);
 			}
-			// If that didn't work, check if we have sublanguage specifier
-			// If so, try to strip it and look for for main language only
-			if (strstr($lang_code, '-')) {
-				$lang_code = substr($lang_code, 0, 2);
-				$res = db_query("select classname from supported_languages where language_code = '$lang_code'");
+
+			arsort($languages, SORT_NUMERIC);
+			$languages = array_keys($languages);
+
+			for( $i=0, $max = sizeof($languages); $i < $max; $i++){
+				$languageCode = $languages[$i];
+				$res = db_query("select classname from supported_languages where language_code = '".addslashes($languageCode)."'");
 				if (db_numrows($res) > 0) {
-					return $res;
+					return db_result($res,0,'classname');
+				}
+				// If that didn't work, check if we have sublanguage specifier
+				// If so, try to strip it and look for for main language only
+				if (strstr($languageCode, '-')) {
+					$languageCode = substr($languageCode, 0, 2);
+					$res = db_query("select classname from supported_languages where language_code = '".addslashes($languageCode)."'");
+					if (db_numrows($res) > 0) {
+						return db_result($res,0,'classname');
+					}
 				}
 			}
 		}
-		return db_query("select classname from supported_languages where language_id='1'"); // default to english
+		return false; // we will use default language
 	}
 }
 

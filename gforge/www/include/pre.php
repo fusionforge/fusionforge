@@ -175,10 +175,9 @@ if (session_loggedin()) {
 } else {
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
-	//if we don't support it, just use English as default
+	//if we don't support it, just use default language
 	if ($HTTP_ACCEPT_LANGUAGE) {
-		$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
-		$classname=db_result($res,0,'classname');
+		$classname = getLanguageClassName($HTTP_ACCEPT_LANGUAGE);
 	}
 	if (!$classname) {
 		$classname=$sys_lang;
