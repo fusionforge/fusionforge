@@ -20,9 +20,9 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 
 ?>
 
-<form action="<?php echo "$PHP_SELF?group_id=$group_id&group_project_id=$group_project_id"; ?>" method="post">
-<input type="hidden" name="func" value="postmodtask">
-<input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>">
+<form action="<?php echo "$PHP_SELF?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+<input type="hidden" name="func" value="postmodtask" />
+<input type="hidden" name="project_task_id" value="<?php echo $project_task_id; ?>" />
 
 <table border="0" width="100%">
 
@@ -30,14 +30,14 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 		<td><strong><?php echo $Language->getText('pm_modtask','submitted_by') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 	</tr>
 
-	<tr>	
+	<tr>
 		<td>
 		<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
-		<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&add_cat=1&group_project_id=$group_project_id"; ?>">(admin)</a>
+		<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(admin)</a>
 		</td>
 
 		<td>
-		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit">
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
 		</td>
 	</tr>
 
@@ -59,7 +59,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
   	<tr>
 		<td colspan="2">
 		<strong><?php echo $Language->getText('pm','summary') ?>:</strong><br />
-		<input type="text" name="summary" size="40" MAXLENGTH="65" value="<?php echo $pt->getSummary(); ?>">
+		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
 		</td>
 	</tr>
 
@@ -67,9 +67,9 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 		<td colspan="2">
 		<strong><?php echo $Language->getText('pm_modtask','original_comment') ?>:</strong><br />
 		<?php echo nl2br( $pt->getDetails() ); ?>
-		<p>
+		<p />
 		<strong><?php echo $Language->getText('pm_modtask','add_comment') ?>:</strong><br />
-		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea>
+		<textarea name="details" rows="5" cols="40"></textarea>
 		</td>
 	</tr>
 
@@ -81,7 +81,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 		echo $pg->showDayBox ('start_day',date('d', $pt->getStartDate()));
 		echo $pg->showYearBox ('start_year',date('Y', $pt->getStartDate()));
 		echo $pg->showHourBox ('start_hour',date('G', $pt->getStartDate()));
-		echo $pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate())); 
+		echo $pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate()));
 		?><br /><?php echo $Language->getText('pm','date_note') ?>
 		<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank"><?php echo $Language->getText('pm','view_calendar') ?></a>
 		</td>
@@ -127,7 +127,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 	<tr>
 		<td>
 		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><br />
-		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>">
+		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
 		</td>
 
 		<td>
@@ -163,13 +163,13 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 	</tr>
 
 	<tr>
-		<td colspan="2" align="MIDDLE">
-		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit">
+		<td colspan="2" align="center">
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
 		</td>
-		</form>
 	</tr>
 
 </table>
+</form>
 <?php
 
 pm_footer(array());

@@ -7,6 +7,9 @@
  * @author		Tim Perdue <tperdue@valnux.com>
  * @version		$Id$
  * @date		$Date$
+ *
+ * Ryan T. Sammartino made several changes to make the output XHTML 1.0
+ * Transitional.
  */
 
 /*
@@ -48,7 +51,7 @@
 #     *  http://www.pobox.com/~pdavis/
 #     *
 #
-#     (C) Copyright 1998 
+#     (C) Copyright 1998
 #         Phil Davis
 #         Printed in the United States of America
 #
@@ -110,32 +113,32 @@
 #  the same.  The arrays that must be set up consist of:
 #
 #       * A names array containing column/row identifiers ($names)
-#       * One or two values arrays containg corresponding 
+#       * One or two values arrays containg corresponding
 #         values to the column/row names ($values & $dvalues)
 #       * One or two bars array which also corresponds to the names
 #         array.  The values in these arrays are URLS to graphics
 #         or color codes starting with a # which will be used to
 #         generate the graph bar.  Color codes and graphics may
-#         be mixed in the same chart, although color codes can't 
+#         be mixed in the same chart, although color codes can't
 #         be used on Vertical charts. ($bars & $dbars)
-#       * The heart of customization... a vals array.  If this 
-#         array isn't created then html_graphs will use all 
+#       * The heart of customization... a vals array.  If this
+#         array isn't created then html_graphs will use all
 #         default values for the chart.  Items that are customizable
-#         include font styles & colors, backgrounds, graphics, 
+#         include font styles & colors, backgrounds, graphics,
 #         labels, cellspacing, cellpadding, borders, anotations
 #         and scaling factor. ($vals)
 #
 #######################################################################
 #
 #  Known Bugs:
-# 
-#  * Currently the $vals["background"] tag element doesn't 
+#
+#  * Currently the $vals["background"] tag element doesn't
 #    work in Netscape.
 #
 #######################################################################
-# 
-#  To Do: 
-# 
+#
+#  To Do:
+#
 #  * Would like to make the $vals array to html_graph() completely
 #    optional.  Currently it has to at least be an empty array.
 #
@@ -150,8 +153,8 @@
 #
 # Contact:
 #
-# If you have questions, suggestions, bugs, bug fixes, or enhancements 
-# please send them to pdavis@pobox.com so that they may be wrapped into 
+# If you have questions, suggestions, bugs, bug fixes, or enhancements
+# please send them to pdavis@pobox.com so that they may be wrapped into
 # future versions of HTML_Graph.
 #
 #######################################################################
@@ -166,20 +169,20 @@
 /*
 #######################################################################
 #
-#  Function:  html_graph($names, $values, $bars, $vals[, $dvalues, $dbars]) 
+#  Function:  html_graph($names, $values, $bars, $vals[, $dvalues, $dbars])
 #
 #   Purpose:  Calls routines to initialize defaults, set up table
 #             print data, and close table.
 #
-# Arguments: 
+# Arguments:
 #                   $names - Array of element names.
 #                  $values - Array of corresponding values for elements.
-#                    $bars - Array of corresponding graphic image names 
+#                    $bars - Array of corresponding graphic image names
 #                            or color codes (begining with a #) for elements.
 #                            Color codes can't be used on vertical charts.
 #                 $dvalues - Array of corresponding values for elements.
 #                            This set is required only in the double graph.
-#                   $dbars - Array of corresponding graphic image names 
+#                   $dbars - Array of corresponding graphic image names
 #                            or color codes (begining with a #) for elements.
 #                            This set is required only in the double graph.
 #
@@ -213,11 +216,11 @@
 #                            default is NUL
 #                   hlabel - Horizontal Label to apply
 #                            default is NUL
-#                     type - Type of graph 
+#                     type - Type of graph
 #                            0 = horizontal
 #                            1 = vertical
 #                            2 = double horizontal
-#                            3 = double vertical 
+#                            3 = double vertical
 #                            default is 0
 #              cellpadding - Padding for the overall table
 #                            default is 0
@@ -242,9 +245,9 @@
 #                            Not used if background is set
 #                            default is #FFFFFF
 #                  vfstyle - Vertical label font style
-#                            default is NUL 
+#                            default is NUL
 #                  hfstyle - Horizontal label font style
-#                            default is NUL 
+#                            default is NUL
 #               noshowvals - Don't show numeric value at end of graphic
 #                            Boolean value, default is FALSE
 #                    scale - Scale values by some number.
@@ -260,15 +263,15 @@
 #              valuefcolor - Color code for font of value element
 #                            default is "#000000"
 #               namefstyle - Style code for font of name element
-#                            default is NUL 
+#                            default is NUL
 #              valuefstyle - Style code for font of value element
-#                            default is NUL 
+#                            default is NUL
 #             doublefcolor - Color code for font of second element value
 #                            default is "#886666"
 #
 #######################################################################
 */
-function html_graph($names, $values, $bars, $vals, $dvalues=0, $dbars=0) 
+function html_graph($names, $values, $bars, $vals, $dvalues=0, $dbars=0)
    {
     // Set the error level on entry and exit so as not to interfear
     // with anyone elses error checking.
@@ -298,22 +301,22 @@ function html_graph($names, $values, $bars, $vals, $dvalues=0, $dbars=0)
     end_graph();
 
     // Set the error level back to where it was.
-    error_reporting($er);  
+    error_reporting($er);
    }
 
 /*
-####################################################################### 
+#######################################################################
 #
 #  Function:  html_graph_init()
 #
-#   Purpose:  Sets up the $vals array by initializing all values to 
+#   Purpose:  Sets up the $vals array by initializing all values to
 #             null.  Used to avoid warnings from error_reporting being
-#             set high.  This routine only needs to be called if you 
+#             set high.  This routine only needs to be called if you
 #             are woried about using uninitialized variables.
-#           
+#
 #   Returns:  The initialized $vals array
-# 
-####################################################################### 
+#
+#######################################################################
 */
 function html_graph_init()
    {
@@ -344,13 +347,13 @@ function html_graph_init()
     return($vals);
    }
 /*
-####################################################################### 
+#######################################################################
 #
 #  Function:  start_graph($vals, $names)
 #
 #   Purpose:  Prints out the table header and graph labels.
 #
-####################################################################### 
+#######################################################################
 */
 function start_graph($vals, $names)
    {
@@ -367,14 +370,14 @@ function start_graph($vals, $names)
     if (($vals["vlabel"]) || ($vals["hlabel"]))
        {
         if (($vals["type"] == 0) || ($vals["type"] == 2 ))// horizontal chart
-           { 
-            $rowspan = SizeOf($names) + 1; 
-            $colspan = 3; 
+           {
+            $rowspan = SizeOf($names) + 1;
+            $colspan = 3;
            }
         elseif ($vals["type"] == 1 || ($vals["type"] == 3 )) // vertical chart
            {
             $rowspan = 3;
-            $colspan = SizeOf($names) + 1; 
+            $colspan = SizeOf($names) + 1;
            }
 
         print '<tr><td align="center" valign="center" ';
@@ -400,13 +403,13 @@ function start_graph($vals, $names)
    }
 
 /*
-####################################################################### 
+#######################################################################
 #
 #  Function:  end_graph()
 #
 #   Purpose:  Prints out the table footer.
 #
-####################################################################### 
+#######################################################################
 */
 function end_graph()
    {
@@ -414,13 +417,13 @@ function end_graph()
    }
 
 /*
-####################################################################### 
+#######################################################################
 #
 #  Function:  hv_graph_defaults($vals)
 #
-#   Purpose:  Sets the default values for the $vals array 
+#   Purpose:  Sets the default values for the $vals array
 #
-####################################################################### 
+#######################################################################
 */
 function hv_graph_defaults($vals)
    {
@@ -442,18 +445,18 @@ function hv_graph_defaults($vals)
    }
 
 /*
-####################################################################### 
+#######################################################################
 #
-#  Function:  horizontal_graph($names, $values, $bars, $vals) 
+#  Function:  horizontal_graph($names, $values, $bars, $vals)
 #
-#   Purpose:  Prints out the actual data for the horizontal chart. 
+#   Purpose:  Prints out the actual data for the horizontal chart.
 #
-####################################################################### 
+#######################################################################
 */
-function horizontal_graph($names, $values, $bars, $vals) 
+function horizontal_graph($names, $values, $bars, $vals)
    {
     for( $i=0;$i<SizeOf($values);$i++ )
-       { 
+       {
 ?>
 
 	<tr>
@@ -461,7 +464,7 @@ function horizontal_graph($names, $values, $bars, $vals)
         // If a background was choosen don't print cell BGCOLOR
         if (! $vals["background"]) { print ' style="background-color:' . $vals["namebgcolor"] . '"'; }
 ?>>
-		<span style="font-size: -1;color:"<?php
+		<span style="font-size: -1;color:<?php
 			echo $vals["namefcolor"];
 		?>;<?php
 			echo $vals["namefstyle"];
@@ -478,7 +481,7 @@ function horizontal_graph($names, $values, $bars, $vals)
 
         // Decide if the value in bar is a color code or image.
         if (ereg("^#", $bars[$i]))
-           { 
+           {
 ?>
 
 		<table align="left" cellpadding="0" cellspacing="0" style="background-color:<?php echo $bars[$i] ?>" width="<?php echo $values[$i] * $vals["scale"] ?>">
@@ -508,20 +511,20 @@ function horizontal_graph($names, $values, $bars, $vals)
    } // end horizontal_graph
 
 /*
-####################################################################### 
+#######################################################################
 #
-#  Function:  vertical_graph($names, $values, $bars, $vals) 
+#  Function:  vertical_graph($names, $values, $bars, $vals)
 #
-#   Purpose:  Prints out the actual data for the vertical chart. 
+#   Purpose:  Prints out the actual data for the vertical chart.
 #
-####################################################################### 
+#######################################################################
 */
-function vertical_graph($names, $values, $bars, $vals) 
+function vertical_graph($names, $values, $bars, $vals)
    {
     print "<tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
-       { 
+       {
 
         print '<td  align="center" valign="bottom" ';
 
@@ -539,17 +542,17 @@ function vertical_graph($names, $values, $bars, $vals)
 
          <img src="<?php echo $bars[$i] ?>" width="5" height="<?php
 
-        // Values of zero are displayed wrong because a image height of zero 
-        // gives a strange behavior in Netscape. For this reason the height 
+        // Values of zero are displayed wrong because a image height of zero
+        // gives a strange behavior in Netscape. For this reason the height
         // is set at 1 pixel if the value is zero. - Jan Diepens
         if ($values[$i] != 0)
            {
             echo $values[$i] * $vals["scale"];
-           } 
-        else 
-           { 
+           }
+        else
+           {
             echo "1";
-           } 
+           }
 ?>" alt="" />
 
          </td>
@@ -559,7 +562,7 @@ function vertical_graph($names, $values, $bars, $vals)
     print "</tr><tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
-       { 
+       {
 ?>
         <td align="center" valign="top"
 
@@ -575,22 +578,22 @@ function vertical_graph($names, $values, $bars, $vals)
 <?php
        } // endfor
 
-   } // end vertical_graph 
+   } // end vertical_graph
 
 /*
-####################################################################### 
+#######################################################################
 #
-#  Function:  double_horizontal_graph($names, $values, $bars, 
-#                                     $vals, $dvalues, $dbars) 
+#  Function:  double_horizontal_graph($names, $values, $bars,
+#                                     $vals, $dvalues, $dbars)
 #
-#   Purpose:  Prints out the actual data for the double horizontal chart. 
+#   Purpose:  Prints out the actual data for the double horizontal chart.
 #
-####################################################################### 
+#######################################################################
 */
-function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars) 
+function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars)
    {
     for( $i=0;$i<SizeOf($values);$i++ )
-       { 
+       {
 ?>
        <tr>
         <td align="right"
@@ -621,7 +624,7 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
 <?php
         // Decide if the value in bar is a color code or image.
         if (ereg("^#", $bars[$i]))
-           { 
+           {
 ?>
             <table align="left" cellpadding="0" cellspacing="0"
              style="background-color:"<?php echo $bars[$i] ?>"
@@ -634,7 +637,7 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
             {
              print '<img src="' . $bars[$i] . '"';
              print ' height="10" width="' . $values[$i] * $vals["scale"] . '" alt="" />';
-            }          
+            }
 
         if (! $vals["noshowvals"])
            {
@@ -662,22 +665,22 @@ function double_horizontal_graph($names, $values, $bars, $vals, $dvalues, $dbars
    } // end double_horizontal_graph
 
 /*
-####################################################################### 
+#######################################################################
 #
-#  Function:  double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars) 
+#  Function:  double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars)
 #
-#   Purpose:  Prints out the actual data for the double vertical chart. 
+#   Purpose:  Prints out the actual data for the double vertical chart.
 #
 #    Author: Jan Diepens
 #
-####################################################################### 
+#######################################################################
 */
-function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars) 
+function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars)
    {
    // print "<tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
-       { 
+       {
 
         print '<td align="center" valign="bottom" ';
         // If a background was choosen don't print cell BGCOLOR
@@ -726,7 +729,7 @@ function double_vertical_graph($names, $values, $bars, $vals, $dvalues, $dbars)
     print "</tr><tr>";
 
     for( $i=0;$i<SizeOf($values);$i++ )
-       { 
+       {
 ?>
         <td align="center" valign="top"
 

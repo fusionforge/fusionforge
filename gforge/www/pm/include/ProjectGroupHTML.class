@@ -29,7 +29,7 @@ function pm_header($params) {
 	$project =& group_get_object($group_id);
 	if (!$project || !is_object($project)) {
 		exit_no_group();
-	}   
+	}
 
 	if (!$project->usesPm()) {
 		exit_error($Language->getText('general','error'),$Language->getText('pm_include_grouphtml','error_disabled'));
@@ -44,14 +44,14 @@ function pm_header($params) {
 
 	if ($group_project_id) {
 		if (session_loggedin()) {
-			echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=addtask\">".$Language->getText('pm_include_grouphtml','add_task')."</a> | ";
+			echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=addtask\">".$Language->getText('pm_include_grouphtml','add_task')."</a> | ";
 		}
-		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse\">".$Language->getText('pm_include_grouphtml','browse_task')."</a> | ";
-		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage\" target=\"_blank\">".$Language->getText('pm_include_grouphtml','gantt_chart')."</a> | ";
+		echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=browse\">".$Language->getText('pm_include_grouphtml','browse_task')."</a> | ";
+		echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=ganttpage\" target=\"_blank\">".$Language->getText('pm_include_grouphtml','gantt_chart')."</a> | ";
 	}
 	echo '
-		<a href="/pm/reporting/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','reporting').'</a> | 
-		<a href="/pm/admin/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','admin').'</a> </strong>';
+		<a href="/pm/reporting/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','reporting').'</a> |
+		<a href="/pm/admin/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','admin').'</a> </strong></p>';
 }
 
 function pm_footer($params) {
@@ -81,14 +81,14 @@ class ProjectGroupHTML extends ProjectGroup {
 		echo '
 		<select name="'.$name.'">';
 		echo '
-		<option value="0">'.$Language->getText('pm_include_grouphtml','not_started');
+		<option value="0">'.$Language->getText('pm_include_grouphtml','not_started'). '</option>';
 		for ($i=5; $i<101; $i+=5) {
 			echo '
 			<option value="'.$i.'"';
 			if ($i==$selected) {
-				echo ' SELECTED';
-			}	
-			echo '>'.$i.'%';
+				echo ' selected="selected"';
+			}
+			echo '>'.$i.'%</option>';
 		}
 		echo '
 		</select>';
@@ -115,14 +115,14 @@ class ProjectGroupHTML extends ProjectGroup {
 		for ($i=1; $i<=count($monthlist); $i++) {
 			if ($i == $select_month) {
 				echo '
-				<option selected value="'.$i.'">'.$monthlist[$i];
+				<option selected="selected" value="'.$i.'">'.$monthlist[$i].'</option>';
 			} else {
 				echo '
-				<option value="'.$i.'">'.$monthlist[$i];
+				<option value="'.$i.'">'.$monthlist[$i].'</option>';
 			}
 		}
 		echo '
-		</SELECT>';
+		</select>';
 	}
 
 	function showDayBox($name,$day=1) {
@@ -131,10 +131,10 @@ class ProjectGroupHTML extends ProjectGroup {
 		for ($i=1; $i<=31; $i++) {
 			if ($i == $day) {
 				echo '
-				<option selected value="'.$i.'">'.$i;
+				<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
 				echo '
-				<option value="'.$i.'">'.$i;
+				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
 		echo '
@@ -147,10 +147,10 @@ class ProjectGroupHTML extends ProjectGroup {
 		for ($i=1999; $i<=2013; $i++) {
 			if ($i == $year) {
 				echo '
-				<option selected value="'.$i.'">'.$i;
+				<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
 				echo '
-				<option value="'.$i.'">'.$i;
+				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
 		echo '
@@ -164,10 +164,10 @@ class ProjectGroupHTML extends ProjectGroup {
 		for ($i=0; $i<=23; $i++) {
 			if ($i == $hour) {
 				echo '
-				<option selected value="'.$i.'">'.$i;
+				<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
 				echo '
-				<option value="'.$i.'">'.$i;
+				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
 		echo '
@@ -178,10 +178,10 @@ class ProjectGroupHTML extends ProjectGroup {
 		echo '	<select name="'.$name.'" size="1">';
 		for ($i=0; $i<=45; $i=$i+15) {
 			if ($i == $minute) {
-				echo '	<option selected value="'.$i.'">'.$i;
+				echo '	<option selected="selected" value="'.$i.'">'.$i.'</option>';
 			} else {
 				echo '
-				<option value="'.$i.'">'.$i;
+				<option value="'.$i.'">'.$i.'</option>';
 			}
 		}
 		echo '
@@ -200,7 +200,7 @@ class ProjectGroupHTML extends ProjectGroup {
 		$title_arr[] = $Language->getText('pm','start_date');
 		$title_arr[] = $Language->getText('pm','end_date');
 		$title_arr[] = $Language->getText('pm','percent_complete');
-		
+
 
 		$rows=count($pt_arr);
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -208,14 +208,14 @@ class ProjectGroupHTML extends ProjectGroup {
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 
-			
-		
+
+
 			echo '
 			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
 			'<td><a href="/pm/task.php?func=detailtask'.
-			'&project_task_id='. $pt_arr[$i]->getID() .
-			'&group_id='.$group_id.
-			'&group_project_id='. $group_project_id .'">'.
+			'&amp;project_task_id='. $pt_arr[$i]->getID() .
+			'&amp;group_id='.$group_id.
+			'&amp;group_project_id='. $group_project_id .'">'.
 			$pt_arr[$i]->getID() .'</a></td>'.
 			'<td>'. $pt_arr[$i]->getSummary() .'</td>'.
 			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
@@ -223,13 +223,13 @@ class ProjectGroupHTML extends ProjectGroup {
 				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
 			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
 
-		       
-			
+
+
 		}
-		
+
 		echo $GLOBALS['HTML']->listTableBottom();
 
-	
+
 
 
 

@@ -12,7 +12,7 @@
 
 /**
  * reports_quick_graph() - Show a quick graph of data.
- * 
+ *
  * @param		string	Graph title
  * @param		int		First query resource ID
  * @param		int		Second query resource ID
@@ -50,10 +50,10 @@ function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
 			$props
 		);
 		end_graph();
-		print '<p><br />';
+		print '<p /><br />';
 		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">'.$Language->getText('include_toolreport','key').':</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">'.$Language->getText('include_toolreport','open').'</td>'.
 		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">'.$Language->getText('include_toolreport','all').' </td><td width="5%">)</td></tr></table>';
-		print '</p>';
+		print '<p />';
 //      		GraphResult($result,$title);
 	} else {
 		echo "<h2>".$Language->getText('include_toolreport','no_data')."</h2>";
@@ -63,7 +63,7 @@ function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
 
 /**
  * reports_header() - Show the reports header
- * 
+ *
  * @param		int		The group ID
  * @param		array	Array of select box values
  * @param		string	The select box title
@@ -74,8 +74,9 @@ function reports_header($group_id, $vals, $titles, $html='') {
 	global $period;
 	global $span;
 	global $Language;
-	
-	print "<form method=\"GET\" action=\"$PHP_SELF#b\">";
+	global $PHP_SELF;
+
+	print "<form method=\"get\" action=\"$PHP_SELF#b\">";
 
 	print $html;
 

@@ -46,30 +46,29 @@ if ($pg_arr && $pgf->isError()) {
 pm_header(array('title'=>$Language->getText('pm','title'). $g->getPublicName(),'pagename'=>'pm','sectionvals'=>$g->getPublicName()));
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
-	echo '<p>'.$Language->getText('pm','noprj');
+	echo '<p>'.$Language->getText('pm','noprj').'</p>';
 } else {
 	echo '
-	<p>'.$Language->getText('pm','intro').'
-	<p>';
+	<p>'.$Language->getText('pm','intro').'</p>';
 
 	/*
 		Put the result set (list of projects for this group) into a column with folders
 	*/
 
-	for ($j = 0; $j < count($pg_arr); $j++) { 
+	for ($j = 0; $j < count($pg_arr); $j++) {
 		if ($pg_arr[$j]->isError()) {
 			echo $pg_arr[$j]->getErrorMessage();
 		}
 		echo '
-		<a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().
-		'&group_id='.$group_id.'&func=browse">' .
+		<p><a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().
+		'&amp;group_id='.$group_id.'&amp;func=browse">' .
 		html_image("ic/taskman20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 		$pg_arr[$j]->getName() .'</a><br />'.
-		$pg_arr[$j]->getDescription() .'<p>';
+		$pg_arr[$j]->getDescription() .'</p>';
 	}
 
 }
 
-pm_footer(array()); 
+pm_footer(array());
 
 ?>

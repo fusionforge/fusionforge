@@ -816,12 +816,12 @@ pm_admin_projects	project_name	New Project Name
 pm_admin_projects	description	Description
 pm_admin_projects	send_updates	Send All Updates To
 pm_admin_projects	change_project_title	Change Project/Task Manager Status
-pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.<p>
+pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.
 pm_admin_projects	add_edit_categories	Add/Edit Categories
 pm_admin_projects	admin_title	Project/Task Manager Administration
 pm_admin_projects	add_project	Add A Project
 pm_admin_projects	add_project_intro	Add a project, which can contain a set of tasks. This is different than creating a new task.
-pm_admin_projects	no_projects_found	<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.
+pm_admin_projects	no_projects_found	<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.</p>
 pm_admin_projects	edit_update	Edit/Update Project
 pm_admin_projects	project_title	Title
 pm_admin_projects	add_categories_to	Add Categories To
@@ -869,7 +869,7 @@ pm_reporting	all_tasks_by_category	All Tasks By Category
 pm_reporting	tasks_by_technician	Tasks By Technician
 pm_reporting	open_tasks_by_technician	Open Tasks By Technician
 pm_reporting	all_tasks_by_technician	All Tasks By Technician
-pm_reporting	report_note	Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
+pm_reporting	report_note	<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
 pm_projectgroup	error_min_name_length	Title Must Be At Least 5 Characters
 pm_projectgroup	error_min_desc_length	Document Description Must Be At Least 10 Characters
 pm_projectgroup	none_found	No ProjectGroups Found

@@ -121,7 +121,7 @@ if ($what) {
 
 		GraphIt($names, $values, $Language->getText('pm_reporting','average_duration'));
 
-		echo "<p>";
+		echo "<p />";
 
 		for ($counter=1; $counter<=$span; $counter++) {
 
@@ -143,7 +143,7 @@ if ($what) {
 
 		GraphIt($names, $values, $Language->getText('pm_reporting','started_tasks'));
 
-		echo "<p>";
+		echo "<p />";
 
 		for ($counter=1; $counter<=$span; $counter++) {
 
@@ -165,7 +165,7 @@ if ($what) {
 
 		GraphIt($names, $values, $Language->getText('pm_reporting','not_completed'));
 
-		echo "<p>";
+		echo "<p />";
 
 		pm_footer(array());
 
@@ -218,7 +218,7 @@ if ($what) {
 		  $Language->getText('pm_reporting','open_tasks_by_technician'),$sql1,
 		  $Language->getText('pm_reporting','all_tasks_by_technician'),$sql2,
 		  $Language->getText('pm_reporting','report_note'));
-		  
+
 	} else {
 		exit_missing_param();
 	}

@@ -20,20 +20,20 @@ pm_header(array('title'=>$Language->getText('pm_addtask','title'),'pagename'=>'p
 
 ?>
 
-<form action="<?php echo "$PHP_SELF?group_id=$group_id&group_project_id=$group_project_id"; ?>" method="post">
-<input type="hidden" name="func" value="postaddtask">
-<input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>">
+<form action="<?php echo "$PHP_SELF?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">
+<input type="hidden" name="func" value="postaddtask" />
+<input type="hidden" name="add_artifact_id[]" value="<?php echo $related_artifact_id; ?>" />
 
 <table border="0" width="100%">
 
 	<tr>
 		<td>
 		<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
-		<?php echo $pg->categoryBox('category_id'); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&add_cat=1&group_project_id=$group_project_id"; ?>">(<?php echo $Language->getText('pm','admin') ?>)</a>
+		<?php echo $pg->categoryBox('category_id'); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(<?php echo $Language->getText('pm','admin') ?>)</a>
 		</td>
 
 		<td><font size="-1">
-		<input type="submit" value=<?php echo $Language->getText('general','submit') ?> name="submit"></font>
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" /></font>
 		</td>
 	</tr>
 
@@ -51,14 +51,14 @@ pm_header(array('title'=>$Language->getText('pm_addtask','title'),'pagename'=>'p
   	<tr>
 		<td colspan="2">
 		<strong><?php echo $Language->getText('pm','summary') ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $related_artifact_summary; ?>">
+		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $related_artifact_summary; ?>" />
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
 		<strong><?php echo $Language->getText('pm','details') ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea></td>
+		<textarea name="details" rows="5" cols="40"></textarea></td>
 	</tr>
 
 	<tr>
@@ -109,16 +109,16 @@ pm_header(array('title'=>$Language->getText('pm_addtask','title'),'pagename'=>'p
 	<tr>
 		<td>
 		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><?php echo utils_requiredField(); ?><br />
-		<input type="text" name="hours" size="5">
+		<input type="text" name="hours" size="5" />
 		</td>
 
 		<td>
-		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit">
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
 		</td>
-		</form>
 	</tr>
 
 </table>
+</form>
 <?php
 
 pm_footer(array());

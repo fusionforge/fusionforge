@@ -19,8 +19,20 @@
 //pm_header(array('title'=>'Browse Tasks','pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>$g->getPublicName()));
 
 ?>
-<html>
-<body>
+
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>';?>
+
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en   ">
+
+  <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title><?php echo $Language->getText('pm_include_grouphtml', 'gantt_chart');?></title>
+  </head>
+  <body>
 <?php
 /*
 		creating a custom technician box which includes "any" and "unassigned"
@@ -98,28 +110,28 @@ $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_siz
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
-echo '<table width="10%" border="0">
-	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&group_project_id='.$group_project_id.'&func=ganttpage" method="post">
-	<input type="hidden" name="set" value="custom">
+echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
+	<input type="hidden" name="set" value="custom" />
+	<table width="10%" border="0">
 	<tr>
-		<td><font size="-1">'.$Language->getText('pm_ganttpage','assignee').':<br />'. $tech_box .'</td>
-		<td><font size="-1">'.$Language->getText('pm','status').':<br />'. $pg->statusBox('_status',$_status,'Any') .'</td>
-		<td><font size="-1">'.$Language->getText('pm','category').':<br />'. $cat_box .'</td>
-		<td><font size="-1">'.$Language->getText('pm_ganttpage','sort_on').':<br />'. $order_box .'</td>
-		<td><font size="-1">'.$Language->getText('pm_ganttpage','resolution').':<br />'. $dispres_box .'</td>
-		<td><font size="-1">'.$Language->getText('pm_ganttpage','size').':<br />'. $size_box .'</td>
-		<td><font size="-1"><input type="SUBMIT" name="SUBMIT" value="'.$Language->getText('general','browse').'"></td>
-	</tr></form></table>';
+		<td><font size="-1">'.$Language->getText('pm_ganttpage','assignee').':<br />'. $tech_box .'</font></td>
+		<td><font size="-1">'.$Language->getText('pm','status').':<br />'. $pg->statusBox('_status',$_status,'Any') .'</font></td>
+		<td><font size="-1">'.$Language->getText('pm','category').':<br />'. $cat_box .'</font></td>
+		<td><font size="-1">'.$Language->getText('pm_ganttpage','sort_on').':<br />'. $order_box .'</font></td>
+		<td><font size="-1">'.$Language->getText('pm_ganttpage','resolution').':<br />'. $dispres_box .'</font></td>
+		<td><font size="-1">'.$Language->getText('pm_ganttpage','size').':<br />'. $size_box .'</font></td>
+		<td><font size="-1"><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></font></td>
+	</tr></table></form>';
 
 echo '<img src="'. $PHP_SELF .
-		'?func=ganttchart&group_id='.$group_id.
-		'&group_project_id='.$group_project_id.
-		'&_assigned_to='.$_assigned_to.
-		'&_order='.$_order.
-		'&_resolution='.$_resolution.
-		'&_category_id='.$_category_id.
-		'&_size='.$_size.
-		'&rand='.time().'">';
+		'?func=ganttchart&amp;group_id='.$group_id.
+		'&amp;group_project_id='.$group_project_id.
+		'&amp;_assigned_to='.$_assigned_to.
+		'&amp;_order='.$_order.
+		'&amp;_resolution='.$_resolution.
+		'&amp;_category_id='.$_category_id.
+		'&amp;_size='.$_size.
+		'&amp;rand='.time().'" alt="'. $Language->getText('pm_include_grouphtml', 'gantt_chart').'" />';
 
 //pm_footer(array());
 ?>

@@ -142,7 +142,7 @@ if ($add_cat && $group_project_id) {
 		List of possible categories for this ArtifactType
 	*/
 	$result=$pg->getCategories();
-	echo "<p>";
+	echo "<p />";
 	$rows=db_numrows($result);
 	if ($result && $rows > 0) {
 		$title_arr=array();
@@ -154,8 +154,8 @@ if ($add_cat && $group_project_id) {
 		for ($i=0; $i < $rows; $i++) {
 			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 				'<td>'.db_result($result, $i, 'category_id').'</td>'.
-				'<td><a href="'.$PHP_SELF.'?update_cat=1&id='.
-					db_result($result, $i, 'category_id').'&group_id='.$group_id.'&group_project_id='. $pg->getID() .'">'.
+				'<td><a href="'.$PHP_SELF.'?update_cat=1&amp;id='.
+					db_result($result, $i, 'category_id').'&amp;group_id='.$group_id.'&amp;group_project_id='. $pg->getID() .'">'.
 					db_result($result, $i, 'category_name').'</a></td></tr>';
 		}
 
@@ -166,16 +166,16 @@ if ($add_cat && $group_project_id) {
 	}
 
 	?>
-	<p>
+	<p />
 	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
-	<input type="hidden" name="add_cat" value="y">
-	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>">
+	<input type="hidden" name="add_cat" value="y" />
+	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
 	<strong><?php echo $Language->getText('pm_admin_projects','category_name') ?>:</strong><br />
-	<input type="text" name="name" value="" size="15" maxlength="30"><br />
-	<p>
-	<strong><font COLOR="RED"><?php echo $Language->getText('pm_admin_projects','category_note') ?></font></strong>
-	<p>
-	<input type="SUBMIT" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>">
+	<input type="text" name="name" value="" size="15" maxlength="30" /><br />
+	<p />
+	<strong><font color="red"><?php echo $Language->getText('pm_admin_projects','category_note') ?></font></strong>
+	<p />
+	<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" />
 	</form>
 	<?php
 
@@ -208,18 +208,18 @@ if ($add_cat && $group_project_id) {
 		$feedback .= $ac->getErrorMessage();
 	} else {
 		?>
-		<p>
-		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
-		<input type="hidden" name="update_cat" value="y">
-		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>">
-		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>">
-		<p>
+		<p />
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post" />
+		<input type="hidden" name="update_cat" value="y" />
+		<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
+		<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
+		<p />
 		<strong><?php echo $Language->getText('pm_admin_projects','category_name')?>:</strong><br />
-		<input type="text" name="name" value="<?php echo $ac->getName(); ?>">
-		<p>
-		<strong><font COLOR="RED"><?php echo $Language->getText('pm_admin_projects','category_note2')?></font></strong>
-		<p>
-		<input type="SUBMIT" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>">
+		<input type="text" name="name" value="<?php echo $ac->getName(); ?>" />
+		<p />
+		<strong><font color="red"><?php echo $Language->getText('pm_admin_projects','category_note2')?></font></strong>
+		<p />
+		<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" />
 		</form>
 		<?php
 	}
@@ -238,35 +238,35 @@ if ($add_cat && $group_project_id) {
 	*/
 	$sql="SELECT group_project_id,project_name FROM project_group_list WHERE group_id='$group_id'";
 	$result=db_query($sql);
-	echo "<p>";
+	echo "<p />";
 	if ($result && db_numrows($result) > 0) {
 		ShowResultSet($result,$Language->getText('pm_admin_projects','existing_subprojects'));
 	} else {
 		echo "\n<h1>".$Language->getText('pm_admin_projects','no_subprojects')."</h1>";
 	}
 	?>
-	<p><?php echo $Language->getText('pm_admin_projects','projects_intro') ?>
+	<p><?php echo $Language->getText('pm_admin_projects','projects_intro') ?></p>
 
-	<p>
+	<p />
 	<form action="<?php echo $PHP_SELF."?group_id=$group_id"; ?>" method="post">
-	<input type="hidden" name="addproject" value="y">
-	<input type="hidden" name="post_changes" value="y">
-	<p>
+	<input type="hidden" name="addproject" value="y" />
+	<input type="hidden" name="post_changes" value="y" />
+	<p />
 	<strong><?php echo $Language->getText('pm_admin_projects','is_public')?></strong><br />
-	<input type="radio" name="is_public" value="1" checked><?php echo $Language->getText('general','yes') ?><br />
-	<input type="radio" name="is_public" value="0"><?php echo $Language->getText('general','no') ?><p>
-	<p>
+	<input type="radio" name="is_public" value="1" checked="checked" /><?php echo $Language->getText('general','yes') ?><br />
+	<input type="radio" name="is_public" value="0" /><?php echo $Language->getText('general','no') ?><p />
+	<p />
 	<h3><?php echo $Language->getText('pm_admin_projects','project_name')?></h3>
-	<p>
-	<input type="text" name="project_name" value="" size="15" maxlength="30">
-	<p>
+	<p />
+	<input type="text" name="project_name" value="" size="15" maxlength="30" />
+	<p />
 	<strong><?php echo $Language->getText('pm_admin_projects','description')?></strong><br />
-	<input type="text" name="description" value="" size="40" maxlength="80">
-	<p>
+	<input type="text" name="description" value="" size="40" maxlength="80" />
+	<p />
 	<strong><?php echo $Language->getText('pm_admin_projects','send_updates')?>:</strong><br />
-	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80"><br />
-	<p>
-	<input type="SUBMIT" name="SUBMIT" value="<?php echo $Language->getText('general','submit') ?>">
+	<input type="text" name="send_all_posts_to" value="" size="40" maxlength="80" /><br />
+	<p />
+	<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>" />
 	</form>
 	<?php
 	pm_footer(array());
@@ -284,47 +284,47 @@ if ($add_cat && $group_project_id) {
 	pm_header(array('title'=>$Language->getText('pm_admin_projects','change_project_title'),'pagename'=>'pm_admin_update_pg','sectionvals'=>$g->getPublicName()));
 
 	?>
-	<p><?php echo $Language->getText('pm_admin_projects','change_project_intro') ?>
-	<p>
+	<p><?php echo $Language->getText('pm_admin_projects','change_project_intro') ?></p>
+	<p />
 
 	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
-	<input type="hidden" name="post_changes" value="y">
-	<input type="hidden" name="update_pg" value="y">
-	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>">
+	<input type="hidden" name="post_changes" value="y" />
+	<input type="hidden" name="update_pg" value="y" />
+	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
 	<table border="0">
 	<tr>
 		<td>
 			<strong><?php echo $Language->getText('pm_admin_projects','is_public')?></strong><br />
-			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked':''); ?>> <?php echo $Language->getText('general','yes') ?><br />
-			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked':''); ?>> <?php echo $Language->getText('general','no') ?><br />
-			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked':''); ?>> <?php echo $Language->getText('general','deleted')?><br />
+			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked="checked"':''); ?> /> <?php echo $Language->getText('general','yes') ?><br />
+			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked="checked"':''); ?> /> <?php echo $Language->getText('general','no') ?><br />
+			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked="checked"':''); ?> /> <?php echo $Language->getText('general','deleted')?><br />
 		</td>
 	</tr>
 	<tr>
 		<td><strong><?php echo $Language->getText('pm_admin_projects','project_name')?>:</strong><br />
-			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>">
+			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<strong><?php echo $Language->getText('pm_admin_projects','description')?>:</strong><br />
-			<input type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80"><br />
+			<input type="text" name="description" value="<?php echo $pg->getDescription(); ?>" size="40" maxlength="80" /><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
 			<strong><?php echo $Language->getText('pm_admin_projects','send_updates')?>:</strong><br />
-			<input type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80"><br />
+			<input type="text" name="send_all_posts_to" value="<?php echo $pg->getSendAllPostsTo(); ?>" size="40" maxlength="80" /><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&add_cat=1&group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','add_edit_categories')?></a></strong><br />
+			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&amp;add_cat=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','add_edit_categories')?></a></strong><br />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<input type="SUBMIT" name="SUBMIT" value="<?php echo $Language->getText('general','update') ?>">
+			<input type="submit" name="submit" value="<?php echo $Language->getText('general','update') ?>" />
 		</td>
 	</tr>
 	</table>
@@ -341,10 +341,10 @@ if ($add_cat && $group_project_id) {
 	pm_header(array('title'=>$Language->getText('pm_admin_projects','admin_title'),'pagename'=>'pm_admin','sectionvals'=>group_getname($group_id)));
 
 	?>
-	<p>
-	<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&addproject=1"><?php echo $Language->getText('pm_admin_projects','add_project') ?></a><br />
+	<p />
+	<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo $Language->getText('pm_admin_projects','add_project') ?></a><br />
 	<?php echo $Language->getText('pm_admin_projects','add_project_intro') ?>
-	<p>
+	<p />
 	<?php
     $pgf = new ProjectGroupFactory($g);
     if (!$pgf || !is_object($pgf)) {
@@ -360,7 +360,7 @@ if ($add_cat && $group_project_id) {
         echo db_error();
     } else {
 		for ($i=0; $i<count($pg_arr); $i++) {
-			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&group_project_id='.$pg_arr[$i]->getID().'&update_pg=1">'.$Language->getText('pm_admin_projects','edit_update').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p>';
+			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&amp;group_project_id='.$pg_arr[$i]->getID().'&amp;update_pg=1">'.$Language->getText('pm_admin_projects','edit_update').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p />';
 		}
 
 	}

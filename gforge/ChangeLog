@@ -1,6 +1,37 @@
+2003-04-06  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/include/html.php: HTML-ify special chars in select boxes.
+
+	* www/include/languages/Base.tab(pm_reporting:report_note) Fix
+	HTML.
+	(pm_reporting:error_min_name_length,error_min_desc_length): Fix
+	tabification.
+	(pm_admin_projects:change_project_intro): Remove extraneous <p>.
+	(pm_admin_projects:no_projects_fount): Fix HTML.
+
+	* www/pm/index.php: valid XHTML 1.0 Transitional.
+
+	* www/pm/include/ProjectGroupHTML.class: ditto.
+
+	* www/pm/browse_task.php: ditto.
+
+	* www/pm/add_task.php: ditto.
+
+	* www/pm/mod_task.php: ditto.
+
+	* www/pm/ganttpage.php: ditto.
+
+	* www/pm/reporting/index.php: ditto.
+
+	* www/include/HTML_Graphs.php: ditto.
+
+	* www/include/tool_reports.php: ditto.
+
+	* www/pm/admin/index.php: ditto.
+
 2003-03-16  Christian Bayle  <bayle@debian.org>
 
-	* add unix_box and cvs_box argument to the create funtion 
+	* add unix_box and cvs_box argument to the create funtion
 	in Group.class
 
 2003-03-16  Christian Bayle  <bayle@debian.org>
@@ -8,7 +39,7 @@
 	* Uncommented display CVS write in project/admin/userperms.php
 
 2003-03-14  Reinhard Spisser  <reinhard@spisser.it>
-	
+
 	* common/pm/ProjectTask.class:
 	Fix bug # 231: Assignee not registered
 
@@ -16,16 +47,16 @@
 	Translations
 
 	* www/include/html.php
-	Added a parameter pos_100 to  html_build_select_box_from_arrays, 
-	so that you can decide if you wish to have the 'none' 
+	Added a parameter pos_100 to  html_build_select_box_from_arrays,
+	so that you can decide if you wish to have the 'none'
 	on the top (default) or at the bottom of the list
-	
+
 	* www/pm/browse_task.php:
 	Fix bug # 216: Category: missing "None"
-	
+
 	* www/survey/admin/show_results_aggregate.php:
 	Fix bug # 244: survey: pg_atoi_error
-	
+
 2003-03-12  Roland Mas  <lolando@debian.org>
 
 	* db/20030312.sql: New file: the start_date of a task is now
@@ -36,10 +67,10 @@
 
 	* www/include/languages/SimplifiedChinese.tab:
 	Committing Simon Lei's translations to Chines
-	
+
 	* www/include/languages/Italian.tab
 	translations
-	
+
 
 2003-03-08  Ryan T. Sammartino  <ryants@shaw.ca>
 
