@@ -201,7 +201,7 @@ class SurveyHTML extends Error {
 			}
 
 			if ($i%3==0) {
-				$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($i++) .">\n";
+				$ret.= "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($i) .">\n";
 			}
 			
 			$ret.= '<td><input type="checkbox" name="to_add[]" value="'.$arr_to_add[$i]->getID().'">'.
