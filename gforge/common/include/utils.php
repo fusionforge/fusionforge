@@ -52,7 +52,7 @@ function util_check_fileupload($filename) {
 }
 
 /**
- * util_send_mail() - Send email
+ * util_send_message() - Send email
  * This function should be used in place of the PHP mail() function
  *
  * @param		string	The email recipients address

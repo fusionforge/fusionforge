@@ -125,7 +125,7 @@ class Artifact extends Error {
 		//
 		//	get the user_id
 		//
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$user=user_getid();
 		} else {
 			if ($this->ArtifactType->allowsAnon()) {
@@ -469,7 +469,7 @@ class Artifact extends Error {
 	 *  @return false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor($email=false) {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 
 			$user_id=user_getid();
 			$user =& user_get_object(user_getid());
@@ -607,7 +607,7 @@ class Artifact extends Error {
 			return false;
 		}
 
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
 			if (!$user || !is_object($user)) {
@@ -646,7 +646,7 @@ class Artifact extends Error {
 	 *  @return true/false
 	 */
 	function addHistory($field_name,$old_value) {
-		if (!user_isloggedin()) {
+		if (!session_loggedin()) {
 			$user=100;
 		} else {
 			$user=user_getid();
@@ -1017,7 +1017,7 @@ class Artifact extends Error {
 		/*
 			Send the email
 		*/
-		util_send_mail("noreply@$GLOBALS[sys_default_domain]",$subject,$body,"noreply@$GLOBALS[sys_default_domain]",$BCC);
+		util_send_message("noreply@$GLOBALS[sys_default_domain]",$subject,$body,"noreply@$GLOBALS[sys_default_domain]",$BCC);
 		return true;
 	}
 

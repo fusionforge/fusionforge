@@ -80,7 +80,7 @@ function people_job_category_box($name='category_id',$checked='xyxy') {
 
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
 	global $feedback;
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_skill_inventory WHERE user_id='". user_getid() ."' AND skill_id='$skill_id'";
 		$result=db_query($sql);
@@ -191,7 +191,7 @@ function people_edit_skill_inventory($user_id) {
 
 function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id) {
 	global $feedback;
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id' AND skill_id='$skill_id'";
 		$result=db_query($sql);

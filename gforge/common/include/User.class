@@ -649,7 +649,6 @@ class User extends Error {
 	 *	@return this user's preferred shell
 	 */
 	function getShell() {
-?><?php
 		return $this->data_array['shell'];
 	}
 
@@ -1053,7 +1052,7 @@ class User extends Error {
  *
  */
 function user_ismember($group_id,$type=0) {
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 		return false;
 	}
 
@@ -1114,7 +1113,7 @@ function user_ismember($group_id,$type=0) {
 function user_getname($user_id = false) {
 	// use current user if one is not passed in
 	if (!$user_id) {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$user=&user_get_object(user_getid());
 			if ($user) {
 				return $user->getUnixName();

@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('www/forum/forum_utils.php');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	/*
 		User obviously has to be logged in to save place 
 	*/

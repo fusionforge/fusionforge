@@ -100,8 +100,8 @@ function html_dbimage($id, $args=0) {
  */
 function html_image($src,$width,$height,$args,$display=1) {
 	global $sys_images_url;
-	$s = ((session_issecure()) ? 's' : '' );
-	$return = ('<IMG src="http'. $s .':' . $sys_images_url . $src .'"');
+	$s = ((session_issecure()) ? $sys_images_secure_url : $sys_images_url );
+	$return = ('<IMG src="' . $s . $src .'"');
 	reset($args);
 	while(list($k,$v) = each($args)) {
 		$return .= ' '.$k.'="'.$v.'"';
@@ -521,7 +521,7 @@ function site_project_header($params) {
 
 	echo $HTML->header($params);
 	echo html_feedback_top($GLOBALS['feedback']);
-	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
+//	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
 }
 
 /**

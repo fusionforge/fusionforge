@@ -23,7 +23,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 		<TR>
 			<TD COLSPAN=2">
 			<?php
-			if (!user_isloggedin()) {
+			if (!session_loggedin()) {
 				?>
 				<B>Email:</B> &nbsp;
 				<INPUT TYPE="TEXT" NAME="user_email" SIZE="20" MAXLENGTH="40">
@@ -65,7 +65,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 		<TR><TD COLSPAN="2">
 	<?php
 
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 		?>
 		<h3><FONT COLOR="RED">Please <A HREF="/account/login.php?return_to=<?php echo urlencode($REQUEST_URI); ?>">log in!</A></FONT></h3><BR>
 		If you <B>cannot</B> login, then enter your email address here:<P>

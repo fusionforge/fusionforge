@@ -19,7 +19,7 @@ if ($group_id) {
 
 	forum_header(array('title'=>'Forums for '.group_getname($group_id),'pagename'=>'forum','sectionvals'=>array(group_getname($group_id))));
 
-	if (user_isloggedin() && user_ismember($group_id)) {
+	if (session_loggedin() && user_ismember($group_id)) {
 		$public_flag='<3';
 	} else {
 		$public_flag='=1';
@@ -49,7 +49,7 @@ if ($group_id) {
 
 	for ($j = 0; $j < $rows; $j++) { 
 		echo '<A HREF="forum.php?forum_id='. db_result($result, $j, 'group_forum_id') .'">'.
-			html_image("images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
+			html_image("/images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
 			'&nbsp;' .
 			db_result($result, $j, 'forum_name').'</A> ';
 		//message count

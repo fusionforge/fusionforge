@@ -17,13 +17,13 @@ require_once('vote_function.php');
 
 global $G_SESSION;
 
-if (user_isloggedin() || $sf_user_hash) {
+if (session_loggedin() || $sf_user_hash) {
 
 	/*
 	 *  If user has valid "remember-me" hash, instantiate not-logged in
 	 *  session for one.
 	 */
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 			list($user_id,$hash)=explode('_',$sf_user_hash);
 			$sql="SELECT * 
 			FROM users 
@@ -216,7 +216,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		}
 	}
 
-	echo $HTML->box1_bottom();
+	echo $HTML->boxBottom();
 
 //second column of "my" page
 
@@ -399,7 +399,7 @@ if (user_isloggedin() || $sf_user_hash) {
 			<TD><A href="/'.$type.'/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</A></TD></TR>';
 		}
 	}
-	echo $HTML->box1_bottom();
+	echo $HTML->boxBottom();
 
 	echo '</TD></TR>
 

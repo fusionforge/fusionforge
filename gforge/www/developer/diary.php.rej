@@ -1,0 +1,17 @@
+***************
+*** 29,35 ****
+  
+  	<P>';
+  
+- 	echo $HTML->box1_top('Existing Diary And Note Entries',false,false);
+  
+  	if ($diary_id) {
+  		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";
+--- 29,35 ----
+  
+  	<P>';
+  
++ 	echo $HTML->boxTop('Existing Diary And Note Entries',false,false);
+  
+  	if ($diary_id) {
+  		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";

@@ -138,6 +138,9 @@ function show_top_downloads() {
 	", 10, 0, SYS_DB_STATS);
 //	echo db_error();
 
+	if (db_numrows($res_topdown) == 0) {
+		return 'No Stats Available';
+	}
 	// print each one
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0) 
@@ -214,20 +217,17 @@ function stats_downloads_total() {
 function show_sitestats() {
 	$return .= 'Hosted Projects: <B>'.number_format(stats_getprojects_active()).'</B>';
 	$return .= '<BR>Registered Users: <B>'.number_format(stats_getusers()).'</B>';
-//	$return .= '<BR>Files Downloaded: <B>'.number_format(stats_downloads_total()).'</B>';
-//	$return .= '<BR>Pages Viewed: <B>'.number_format(stats_getpageviews_total()).'</B><BR>&nbsp;';
 	return $return;
 }
 
 function show_newest_projects() {
 	$sql =	"SELECT group_id,unix_group_name,group_name,register_time FROM groups " .
 		"WHERE is_public=1 AND status='A' AND type=1 " .
-		"AND register_time < " . strval(time()-(24*3600)) . " " . 
 		"ORDER BY register_time DESC";
 	$res_newproj = db_query($sql,10);
 
 	if (!$res_newproj || db_numrows($res_newproj) < 1) {
-		return db_error();
+		return "No Stats".db_error();
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			if ( $row_newproj['register_time'] ) {
@@ -270,7 +270,7 @@ function show_highest_ranked_projects() {
 		"ORDER BY ranking ASC";
 	$result=db_query($sql,20);
 	if (!$result || db_numrows($result) < 1) {
-		return db_error();
+		return "No Stats".db_error();
 	} else {
 		while ($row=db_fetch_array($result)) {
 			$return .= '<B>( '.$row['percentile'].'% )</B>'
@@ -280,12 +280,6 @@ function show_highest_ranked_projects() {
 		$return .= '<CENTER><A href="/top/mostactive.php?type=week">[ More ]</A></CENTER>';
 	}
 	return $return;
-}
-
-function show_sfos() {
-		$return = "Bring SourceForge to your company - support 100 to 10,000+ developers with <a href='http://www.valinux.com/services/sfos.html'>SourceForge OnSite</a>.<br>";
-
-		return $return;
 }
 
 ?>

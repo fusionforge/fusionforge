@@ -261,7 +261,6 @@ for ($i=0; $i<$rows; $i++) {
 	.'<TD ALIGN="MIDDLE">'
 	 .'<A HREF="'. $PHP_SELF .'?submit=1&group_id='.$group_id.'&remove=1&id='
 	 .db_result($result,$i,'id').'">'
-//	.html_image("images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD>'
 	 .'[Del]'.'</A>'
 	 .'<A HREF="'. $PHP_SELF .'?submit=1&group_id='.$group_id.'&mode=edit&id='
 	 .db_result($result,$i,'id').'"> '

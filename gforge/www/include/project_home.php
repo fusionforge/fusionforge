@@ -35,8 +35,9 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home','p
 ?>
 
 <TABLE WIDTH="100%" BORDER="0">
-<TR><TD WIDTH="99%" VALIGN="top">
-<?php 
+	<TR>
+		<TD WIDTH="99%" VALIGN="top">
+		<?php 
 
 // ########################################## top area, not in box 
 $res_admin = db_query("
@@ -101,11 +102,15 @@ if ($jobs_res) {
 }
 
 
-print '</TD><TD NoWrap VALIGN="top">';
+?>
+		</TD>
+		<TD NoWrap VALIGN="top">
+
+<?php
 
 // ########################### Developers on this project
 
-echo $HTML->box1_top($Language->getText('group','developer_info'));
+echo $HTML->boxTop($Language->getText('group','developer_info'));
 
 if (db_numrows($res_admin) > 0) {
 

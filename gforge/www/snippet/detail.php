@@ -75,7 +75,7 @@ if ($type=='snippet') {
 				date($sys_datefmt,db_result($result,$i,'date')).'</TD><TD>'.
 				db_result($result,$i,'user_name').'</TD><TD ALIGN="MIDDLE"><A HREF="/snippet/delete.php?type=snippet&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
-				'">' . html_image("images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
+				'">' . html_image("/images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
 
 				if ($i != ($rows - 1)) {
 					echo '
@@ -170,10 +170,10 @@ if ($type=='snippet') {
 				db_result($result,$i,'user_name').
 				'</TD><TD ALIGN="MIDDLE"><A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
-				'">' . html_image("images/ic/pencil.png","20","25",array("BORDER"=>"0")) . 
+				'">' . html_image("/images/ic/pencil.png","20","25",array("BORDER"=>"0")) . 
 				'</A> &nbsp; &nbsp; &nbsp; <A HREF="/snippet/delete.php?type=package&snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
-				'">' . html_image("images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
+				'">' . html_image("/images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
 		}
 		echo '</TABLE>';
 

@@ -14,6 +14,9 @@
   */
 
 
+//$sys_upload_dir
+
+
 require_once('pre.php');    
 require_once('www/project/admin/project_admin_utils.php');
 require_once('frs.class');
@@ -121,6 +124,7 @@ if( $submit ) {
 				//see if filename is legal before adding it
 				if (!util_is_valid_filename ($file_name)) {
 					$feedback .= " | Illegal FileName: $file_name ";
+					db_rollback();
 				} else {
 					//see if they already have a file by this name
 
@@ -188,7 +192,7 @@ if( $submit ) {
 ?>
 
 <FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF; ?>">
-<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="1000000">
+<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
 	<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="2">
 	<TR>
 		<TD>
@@ -202,6 +206,7 @@ if( $submit ) {
 	if (!$res || $rows < 1) {
 		echo '<H4>No File Types Available</H4>';
 	} else {
+		
 		echo '<SELECT NAME="package_id">';
 		echo '<OPTION VALUE="">(select)</OPTION>';
 		for ($i=0; $i<$rows; $i++) {

@@ -44,14 +44,14 @@ if ($forum_id) {
 	//
 	$g =& group_get_object($group_id);
 
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		$u =& session_get_user();
 		$perm =& $g->getPermission($u);
 	}
 
 	//private forum check
 	if (db_result($result,0,'is_public') != 1) {
-		if (!user_isloggedin() || (user_isloggedin() && !$perm->isMember())) {
+		if (!session_loggedin() || (session_loggedin() && !$perm->isMember())) {
 			/*
 				If this is a private forum, kick 'em out
 			*/
@@ -98,7 +98,7 @@ if ($forum_id) {
 				if so, use it
 			if it was a custom set just posted && logged in, set pref if it's changed
 	*/
-	if (!$thread_id && user_isloggedin()) {
+	if (!$thread_id && session_loggedin()) {
 		$_pref=$style.'|'.$max_rows;
 		if ($set=='custom') {
 			if ($u->getPreference('forum_style')) {
@@ -151,7 +151,7 @@ if ($forum_id) {
 	if (!$thread_id) {
 		//create a pop-up select box listing the forums for this project
 		//determine if this person can see private forums or not
-		if (user_isloggedin() && user_ismember($group_id)) {
+		if (session_loggedin() && user_ismember($group_id)) {
 			$public_flag='0,1';
 		} else {
 			$public_flag='1';
@@ -358,7 +358,7 @@ if ($forum_id) {
 			$ret_val .= '
 				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/forum/forum.php?thread_id='.
 				$row['thread_id'].'&forum_id='.$forum_id.'">'.
-				html_image("images/ic/cfolder15.png","15","13",array("border"=>"0")) . '  &nbsp; ';
+				html_image("/images/ic/cfolder15.png","15","13",array("border"=>"0")) . '  &nbsp; ';
 			/*	  
 					See if this message is new or not
 					If so, highlite it in bold

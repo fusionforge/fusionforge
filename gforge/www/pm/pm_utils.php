@@ -47,7 +47,7 @@ function pm_header($params) {
 	echo "<A HREF=\"/pm/?group_id=$group_id\">Subproject List</A>";
         $need_bar=1;
 	if ($group_project_id) {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
                 	if ($need_bar) echo ' | ';
 			echo "<A HREF=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=addtask\">Add Task</A>";
 			echo " | <A HREF=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse&set=my\">My Tasks</A>";
@@ -57,7 +57,7 @@ function pm_header($params) {
 		echo "<A HREF=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse&set=open\">Browse Open Tasks</A>";
                 $need_bar=1;
 	}
-       	if (user_isloggedin()) {
+       	if (session_loggedin()) {
                 if ($need_bar) echo ' | ';
 		echo '<A HREF="/pm/reporting/?group_id='.$group_id.'">Reporting</A>';
                 $need_bar=1;

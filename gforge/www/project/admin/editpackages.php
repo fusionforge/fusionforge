@@ -11,7 +11,7 @@
   *
   */
 
-require_once('pre.php');    
+require_once('pre.php');	
 require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>$group_id));
@@ -22,10 +22,8 @@ exit_assert_object($project,'Project');
 $perm =& $project->getPermission(session_get_user());
 
 if (!$perm->isReleaseTechnician()) {
-    exit_permission_denied();
+	exit_permission_denied();
 }
-
-$is_admin=$perm->isAdmin();
 
 /*
 
@@ -36,7 +34,7 @@ $is_admin=$perm->isAdmin();
 */
 
 // only admin can modify packages (vs modifying releases of packages)
-if ($is_admin && $submit) {
+if ($submit) {
 	/*
 
 		make updates to the database
@@ -122,20 +120,10 @@ if (!$res || $rows < 1) {
 	$title_arr[]='Releases';
 	$title_arr[]='Package Name';
 	$title_arr[]='Status';
-	if ($is_admin) $title_arr[]='Update';
 
 	echo html_build_list_table_top ($title_arr);
 
 	for ($i=0; $i<$rows; $i++) {
-                // If user is not project admin, use static fields whenever possible
-        	if ($is_admin) {
-                	$name_entry='<INPUT TYPE="TEXT" NAME="package_name" VALUE="'. 
-				db_result($res,$i,'package_name') .'" SIZE="20" MAXLENGTH="30">';
-                } else {
-                	$name_entry=db_result($res,$i,'package_name');
-                }
-		$status_entry= frs_show_status_popup ('status_id', db_result($res,$i,'status_id'));
-
 		echo '
 		<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
 		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
@@ -144,21 +132,21 @@ if (!$res || $rows < 1) {
 		<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
 			<TD NOWRAP ALIGN="center">
 				<FONT SIZE="-1">
-					<A HREF="newrelease.php?package_id='. 
+					<A HREF="qrs.php?package_id='. 
 						db_result($res,$i,'package_id') .'&group_id='. $group_id .'"><B>[Add Release]</B>
 					</A>
 				</FONT>
 				<FONT SIZE="-1">
-					<A HREF="editreleases.php?package_id='. 
+					<A HREF="showreleases.php?package_id='. 
 						db_result($res,$i,'package_id') .'&group_id='. $group_id .'"><B>[Edit Releases]</B>
 					</A>
 				</FONT>
 
 			</TD>
-			<TD><FONT SIZE="-1">'.$name_entry.'</TD>
-			<TD><FONT SIZE="-1">'.$status_entry.'</TD>';
-		if ($is_admin)	echo '<TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Update"></TD>';
-		echo '</TR></FORM>';
+			<TD><FONT SIZE="-1"><INPUT TYPE="TEXT" NAME="package_name" VALUE="'.db_result($res,$i,'package_name') .'" SIZE="20" MAXLENGTH="30"></TD>
+			<TD><FONT SIZE="-1">'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</TD>
+			<TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Update"></TD>
+			</TR></FORM>';
 	}
 	echo '</TABLE>';
 
@@ -170,17 +158,19 @@ if (!$res || $rows < 1) {
 
 */
 
-if ($is_admin)
-echo '<P>
+?>
+<P>
 <h3>New Package Name:</h3>
 <P>
-<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
+<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
+<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
 <INPUT TYPE="HIDDEN" NAME="func" VALUE="add_package">
 <INPUT TYPE="TEXT" NAME="package_name" VALUE="" SIZE="20" MAXLENGTH="30">
 <P>
 <INPUT TYPE="SUBMIT" NAME="submit" VALUE="Create This Package">
-</FORM>';
+</FORM>
+
+<?php
 
 project_admin_footer(array());
 

@@ -252,7 +252,7 @@ if ($group_id && $atid) {
 			} else if ($ah->isError()) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
-				if ($ath->userIsAdmin() || (user_isloggedin() && ($ah->getSubmittedBy() == user_getid()))) {
+				if ($ath->userIsAdmin() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
 					include '../tracker/mod.php';
 				} else {
 					include '../tracker/detail.php';
@@ -280,7 +280,7 @@ if ($group_id && $atid) {
 	//
 	//	get a list of artifact types they have defined
 	//
-	if (user_isloggedin() && $perm->isMember()) {
+	if (session_loggedin() && $perm->isMember()) {
 		$public_flag='0,1';
 	} else {
 		$public_flag='1';
@@ -323,7 +323,7 @@ if ($group_id && $atid) {
 			echo '
 			<A HREF="/tracker/?atid='.db_result($result, $j, 'group_artifact_id').
 			'&group_id='.$group_id.'&func=browse">' .
-			html_image("images/ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+			html_image("/images/ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
 			db_result($result, $j, 'name').'</A> 
 			( <B>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</B> )<BR>'.
 			db_result($result, $j, 'description').'<P>';

@@ -1,0 +1,49 @@
+***************
+*** 103,131 ****
+  //             installation.  If you use ANY form of relative path
+  //             you will break the html_image function in include/html.php
+  //
+- $sys_urlroot="/alexandria/www/";
+   
+- // Cache location -- this is needed by include/cache.php
+- // This directory must be world reachable, but writable only by the web-server
+- $sf_cache_dir = "/sfcache";
+  // Name of the system as a whole (needed by various utils and titles)
+  $sys_name="prodigy";
+  
+  // session cookie settings
+  //
+  $sys_session_key        = "foobar";
+  $sys_session_expire     = 60 * 60 * 24 * 7; 
+- $sys_session_cypher     = MCRYPT_TWOFISH;
+- $sys_session_cyphermode = MCRYPT_MODE_ECB;
+- 
+- // username cookie settings
+- //
+- $sys_username_cookie_key        = "frobaz";
+- $sys_username_cookie_urlspace   = ".company.com";
+- $sys_username_cookie_expiration = 60 * 60 * 24 * 7;
+- $sys_username_cookie_plaintext  = true;
+- $sys_username_cookie_cypher     = MCRYPT_BLOWFISH;
+- $sys_username_cookie_cyphermode = MCRYPT_MODE_ECB;
+  
+  // Require that user give unique (not yet existent in db) email upon
+  // registration
+--- 126,142 ----
+  //             installation.  If you use ANY form of relative path
+  //             you will break the html_image function in include/html.php
+  //
++ $sys_urlroot="/path/to/gforge/www/";
+   
+  // Name of the system as a whole (needed by various utils and titles)
+  $sys_name="prodigy";
+  
+  // session cookie settings
+  //
++ //	IMPORTANT - YOU MUST CHANGE "foobar" to a long, random number
++ //
+  $sys_session_key        = "foobar";
+  $sys_session_expire     = 60 * 60 * 24 * 7; 
+  
+  // Require that user give unique (not yet existent in db) email upon
+  // registration

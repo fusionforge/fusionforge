@@ -94,7 +94,7 @@ class ArtifactFile extends Error {
 			return false;
 		}
 
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$userid=user_getid();
 		} else {
 			$userid=100;

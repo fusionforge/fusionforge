@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('www/forum/forum_utils.php');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	if (!user_ismember($group_id,'A')) {
 		exit_permission_denied($Language->getText('news_submit','cannot'));

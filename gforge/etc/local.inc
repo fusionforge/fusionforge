@@ -1,5 +1,5 @@
 <?php
-// SourceForge Universal Site Modifications
+// GForge Universal Site Modifications
 // by David HM Spector <spector@zeitgeist.com>
 //
 // Really Important Safety Tip: --> DO NOT LEAVE ANY WHITE
@@ -13,7 +13,7 @@
 // so white space is meaningful!
 //
 //
-// PART I - SourceForge hostnames
+// PART I - GForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
 // would be prettier but would stop you from distributing your SourceForge
@@ -24,11 +24,11 @@
 // reality an addr_list of machines that is serviced by a round-robin
 // mechanism or something fancy like a local-director.
 //
-// The default SourceForge domain
-// this is used where ever the "naked" form of the SourceForge domain
-// might be used.  E.g., "mailto:admin@sourceforge.net"
-$sys_default_domain = 'webdev.company.com';
-$sys_fallback_domain = 'sf-www.sourceforge.net';
+// The default GForge domain
+// this is used where ever the "naked" form of the GForge domain
+// might be used.  E.g., "mailto:admin@company.com"
+$sys_default_domain = 'gforge.company.com';
+$sys_fallback_domain = 'gforge2.company.com';
 $sys_internal_network = '192.168.1.';
  
 // Machine that hosts CVS
@@ -66,13 +66,13 @@ $sys_dns2_host = "ns2.company.com";
 //server to use for updates and reads
 $sys_dbhost="localhost";
 //whether or not to use replication
-$sys_db_use_replication=true;
+$sys_db_use_replication=false;
 $sys_dbreadhost='localhost';
 $sys_dbreaddb='stats';
 $sys_dbname="alexandria";
 $sys_dbuser="www";
 $sys_dbpasswd="";
-$sys_server="mysql";
+$sys_server="pgsql";
 
 // 
 // LDAP configurataion
@@ -91,11 +91,34 @@ $sys_ldap_passwd="";
 // note that password NOT stored here
 $sys_ldap_admin_dn="cn=Manager,dc=company,dc=com";
 
-// Where files are placed when uploaded
-$FTPINCOMING_DIR = "/nfs/remission/u7/ftp/incoming";
 
+//
+//	Jabber Configuration
+//
+$sys_use_jabber=0;
+	//messages from the system will be sent to this address
+$sys_jabber_server='jabber.company.com';
+$sys_jabber_port='5222';
+	// messages sent to jabber accounts will come from this user
+	// It is similar to the "From: noreply@gforge.org" used in emails
+$sys_jabber_user='noreply';
+$sys_jabber_pass='temp123';
+
+//
+//	File Upload Configuration
+//
+//	Create a directory, which is writable by your webserver, but not
+//	within its document root (does not fall under www/ in the tarball)
+//	Your php.ini file may have to be modified to allow writing outside
+//	the webserver's directory
+//
+$sys_upload_dir='/path/to/uploads/';
+
+// Where files are placed when uploaded
+//$FTPINCOMING_DIR = "/nfs/remission/u7/ftp/incoming";
 // Where the released files are located
-$FTPFILES_DIR = "/nfs/garbage/sourceforge";
+//$FTPFILES_DIR = "/nfs/garbage/sourceforge";
+
  
 // Where the SourceForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
@@ -135,20 +158,19 @@ $sys_require_unique_email=0;
 //    See the top of the file include/html.php, this is where the menu colors
 //    and colors used throughout SourceForge are defined.
  
-// Themeing related vars... Some of this needs to change in the session stuff
-// The theme base directory, everything else is handled by theme_sysinit()
-$sys_themeroot=$sys_urlroot."themes/";
-
 // Akamization of images
+// example: http://images.company.com
 $sys_images_url = "";
+$sys_images_secure_url = "";
 
 // Part IV - Groups
 //  The SourceForge permission model is based on groups
 //  certain parts of the site, like news, stats, etc
 //  are based on special group_id numbers
 //  group_id #1 is the super-user group of sitewide admins
-$sys_news_group=714;
-$sys_stats_group=11084;
+$sys_news_group=3;
+$sys_stats_group=2;
+$sys_peer_rating_group=4;
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

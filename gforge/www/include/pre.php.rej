@@ -1,0 +1,67 @@
+***************
+*** 92,103 ****
+  //various html libs like button bar, themable
+  require_once('www/include/html.php');
+  
+- //left-hand nav library, themable
+- require_once('www/include/menu.php');
+- 
+- //theme functions like get_themename, etc
+- require_once('www/include/theme.php');
+- 
+  $sys_datefmt = "Y-m-d H:i";
+  
+  // #### Connect to db
+--- 78,83 ----
+  //various html libs like button bar, themable
+  require_once('www/include/html.php');
+  
+  $sys_datefmt = "Y-m-d H:i";
+  
+  // #### Connect to db
+***************
+*** 152,158 ****
+  
+  require_once('www/include/BaseLanguage.class');
+  
+- if (user_isloggedin()) {
+  	$res=$LUSER->getData();
+  		$classname=db_result($res,0,'classname');
+  	if ($classname) {
+--- 126,132 ----
+  
+  require_once('www/include/BaseLanguage.class');
+  
++ if (session_loggedin()) {
+  	$res=$LUSER->getData();
+  		$classname=db_result($res,0,'classname');
+  	if ($classname) {
+***************
+*** 176,193 ****
+  }
+  
+  
+- //ob_start(ob_gzhandler);
+- 
+- //
+- //	For now, only cache English, non-logged-in pages, with no POST going on
+- //
+- if (!user_isloggedin() && ($Language->getLanguageId() == 1) && (count($HTTP_POST_VARS) < 1) && !session_issecure()) {
+- 	include_once('common/include/jpcache.php');
+- }
+- 
+  /*
+  
+- 
+  RESERVED VARIABLES
+  
+  $conn
+--- 150,157 ----
+  }
+  
+  
+  /*
+  
+  RESERVED VARIABLES
+  
+  $conn

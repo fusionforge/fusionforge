@@ -29,9 +29,9 @@ echo "<CENTER><H1>PAGE NOT FOUND</H1></CENTER>";
 
 echo "<P>";
 
-$HTML->box1_top('Search');
+echo $HTML->boxTop('Search');
 menu_show_search_box();
-$HTML->box1_bottom();
+echo $HTML->boxBottom();
 
 echo "<P>";
 

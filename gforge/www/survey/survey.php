@@ -17,7 +17,7 @@ require_once('vote_function.php');
 require_once('www/survey/survey_utils.php');
 
 // Check to make sure they're logged in.
-if (!user_isloggedin()) {
+if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 

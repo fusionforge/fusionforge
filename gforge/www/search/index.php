@@ -32,12 +32,6 @@ if (!$type_of_search) {
 	$type_of_search='soft';
 }
 
-// For freshmeat searh, redirect immediately
-if ($type_of_search == 'freshmeat') {
-	header('Location: http://freshmeat.net/search/?q='.urlencode($words));
-	exit();
-}
-
 require_once('pre.php');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 
@@ -67,7 +61,7 @@ if (!$rss) {
 
 	// show search box which will return results on
 	// this very page (default is to open new window)
-	menu_show_search_box(false, false);
+	echo $HTML->searchBox();
 }
 
 /*

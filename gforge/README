@@ -1,11 +1,3 @@
-#
-# SourceForge: Breaking Down the Barriers to Open Source Development
-# Copyright 1999-2001 (c) VA Linux Systems
-# http://sourceforge.net
-#
-# $Id$
-#
-
 *************************************************************************
 *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
 
@@ -18,18 +10,16 @@
 *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *  WARNING  *
 *************************************************************************
 
-SourceForge Version 2.6.1
+GForge 3.0 (Fork of SourceForge 2.61 which was only available via anonymous CVS)
 
-SourceForge is a free service to Open Source developers offering easy
-access to the best in CVS, mailing lists, bug tracking, message
-boards/forums, task management, site hosting, permanent file archival,
-full backups, and total web-based administration.
+GForge is a web-based Collaborative Development Environment offering 
+easy access to CVS, mailing lists, bug tracking, message
+boards/forums, task management, permanent file archival,
+and total web-based administration.
 
 All files contained in this archive are licensed as stated in the
 COPYING file.  Please check out the AUTHORS file to see who helped
 make this possible.
 
 Thanks for taking the time to download this code.  If you have any
-questions please feel free to contacts the us.
-
-			- The SourceForge Crew <staff@sourceforge.net>
+questions please feel free to visit http://gforge.org/

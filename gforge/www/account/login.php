@@ -1,6 +1,5 @@
 <?php
 /**
-  *
   * SourceForge login page
   *
   * This is main SF login page. It takes care of different account states
@@ -12,7 +11,6 @@
   * http://sourceforge.net
   *
   * @version   $Id$
-  *
   */
 
 Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
@@ -40,25 +38,11 @@ if ($login) {
 		/*
 			You can now optionally stay in SSL mode
 		*/
-		if ($stay_in_ssl) {
-			$ssl_='s';
-		} else {
-			$ssl_='';
-		}
 		if ($return_to) {
-
-			// check for external redirection 
-			//
-			if (substr($return_to, 0, 4) == "http") {
-				header ("Location: " . $return_to);
-				exit;
-			} else {
-				header ("Location: http".$ssl_."://". $HTTP_HOST . $return_to);
-				exit;
-			}
-
+			header ("Location: " . $return_to);
+			exit;
 		} else {
-			header ("Location: http".$ssl_."://". $HTTP_HOST ."/my/");
+			header ("Location: /my/");
 			exit;
 		}
 	}
@@ -70,7 +54,7 @@ if ($session_hash) {
 }
 
 //echo "\n\n$session_hash";
-//echo "\n\nlogged in: ".user_isloggedin();
+//echo "\n\nlogged in: ".session_loggedin();
 
 $HTML->header(array('title'=>'Login','pagename'=>'account_login'));
 

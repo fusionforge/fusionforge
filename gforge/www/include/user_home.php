@@ -53,7 +53,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	<TD><B><?php print date($sys_datefmt, $user->getAddDate()); ?></B>
 	<?php
 
-	echo $HTML->box1_middle('Peer Rating',false,false);
+	echo $HTML->boxMiddle('Peer Rating',false,false);
 
 	if ($user->usesRatings()) {
 		echo vote_show_user_rating($user_id);
@@ -61,7 +61,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 		echo 'User chose not to participate in peer rating';
 	}
 
-	echo $HTML->box1_middle('Diary And Notes');
+	echo $HTML->boxMiddle('Diary And Notes');
  
 	/*
 
@@ -108,7 +108,7 @@ if (db_numrows($res_cat) < 1) {
 	print "</ul>";
 } // end if groups
 
-$HTML->box1_bottom(); ?>
+echo $HTML->boxBottom(); ?>
 
 </TD>
 
@@ -146,7 +146,7 @@ echo $Language->getText('users','peerinfo1', $GLOBALS[sys_name]);
 
 <?php 
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	$u =& session_get_user();
 

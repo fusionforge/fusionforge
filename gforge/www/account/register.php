@@ -55,7 +55,7 @@ if ($feedback) {
 } 
 ?>
 
-<form action="https://<?php echo $HTTP_HOST.$PHP_SELF; ?>" method="post">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 <p>
 <?php echo $Language->getText('account_register','loginname'); ?><br>
 <input type="text" name="unix_name" value="<?php print($unix_name); ?>">

@@ -37,7 +37,7 @@ if($group_id) {
 			exit_missing_param();
 		}
 
-		if (!user_isloggedin()) {
+		if (!session_loggedin()) {
 			$user_id=100;
 		} else {
 			$user_id=user_getid();

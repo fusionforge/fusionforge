@@ -48,7 +48,7 @@ if ($submit) {
 site_user_header(array('title'=>"Account Maintenance",'pagename'=>'account'));
 
 echo '<FORM action="'.$PHP_SELF.'" method="post">';
-$HTML->box1_top("Account Maintenance: " . $u->getUnixName()); ?>
+echo $HTML->boxTop("Account Maintenance: " . $u->getUnixName()); ?>
 
 <p>Welcome, <b><?php print $u->getUnixName(); ?></b>. 
 <p>You can view/change all of your account features from here. You may also wish
@@ -59,7 +59,7 @@ to view your developer/consultant profiles and ratings.
 <LI><A HREF="/people/editprofile.php"><B>Edit My Skills Profile</B></A>
 <LI><A HREF="/themes/"><B>Change My Theme</B></A>
 </UL>
-<?php $HTML->box1_bottom(); ?>
+<?php echo $HTML->boxBottom(); ?>
 
 &nbsp;<BR>
 <TABLE width=100% border=0>
@@ -107,7 +107,7 @@ to view your developer/consultant profiles and ratings.
 <TD COLSPAN=2>
 <?php 
 // ############################# Preferences
-$HTML->box1_top("Preferences"); ?>
+echo $HTML->boxTop("Preferences"); ?>
 
 <INPUT type="checkbox" name="mail_site" value="1"<?php 
 	if ($u->getMailingsPrefs('site')) print " checked"; ?>> 
@@ -130,12 +130,12 @@ your user page</a> if you have chosen to participate in ratings).
 </I>
 
 <P align=center>
-<?php $HTML->box1_bottom(); 
+<?php echo $HTML->boxBottom(); 
 
 // ############################### Shell Account
 
 if ($u->getUnixStatus() == 'A') {
-	$HTML->box1_top("Shell Account Information"); 
+	echo $HTML->boxTop("Shell Account Information"); 
 	print '&nbsp;
 <BR>Shell box: <b>'.$u->getUnixBox().'</b>
 <BR>CVS/SSH Shared Authorized Keys: <B>';
@@ -147,7 +147,7 @@ if ($u->getUnixStatus() == 'A') {
 		print '0';
 	}
 	print '</B> <A href="editsshkeys.php">[Edit Keys]</A>';
-	$HTML->box1_bottom(); 
+	echo $HTML->boxBottom(); 
 } 
 ?>
 

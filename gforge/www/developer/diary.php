@@ -70,7 +70,7 @@ if ($diary_user) {
 		<TR><TD COLSPAN="2" BGCOLOR="'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</TD></TR>';
 	}
 
-	echo $HTML->box1_bottom();
+	echo $HTML->boxBottom();
 
 	echo $HTML->footer(array());
 

@@ -78,7 +78,7 @@ project_admin_header(array('title'=>"Project Admin: ".$group->getPublicName(),'g
 <TABLE width=100% cellpadding=2 cellspacing=2 border=0>
 <TR valign=top><TD width=50%>
 
-<?php $HTML->box1_top("Misc. Project Information");  ?>
+<?php echo $HTML->boxTop("Misc. Project Information");  ?>
 
 &nbsp;
 <BR>
@@ -190,7 +190,7 @@ if ($is_admin) {
 }
 ?>
  
-<?php $HTML->box1_bottom();?>
+<?php echo $HTML->boxBottom();?>
 
 
 </TD></TR>
@@ -203,7 +203,7 @@ if ($is_admin) {
 	Tool admin pages
 */
 
-$HTML->box1_top('Tool Admin');
+echo $HTML->boxTop('Tool Admin');
 
 ?>
 
@@ -215,7 +215,7 @@ $HTML->box1_top('Tool Admin');
 <A HREF="/pm/admin/?group_id=<?php echo $group->getID(); ?>">Task Manager Admin</A><BR>
 <A HREF="/forum/admin/?group_id=<?php echo $group->getID(); ?>">Forum Admin</A><BR>
 
-<?php $HTML->box1_bottom(); ?>
+<?php echo $HTML->boxBottom(); ?>
 
 
 
@@ -250,7 +250,7 @@ $HTML->box1_top('Tool Admin');
 		print "$row_module[name]<BR>";
 	}
 
-	echo $HTML->box1_bottom();
+	echo $HTML->boxBottom();
 	?>
 </TD>
 </TR>

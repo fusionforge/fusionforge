@@ -20,7 +20,7 @@ require_once('www/snippet/snippet_utils.php');
 	Delete items from packages, package versions, and snippet versions
 */
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	snippet_header(array('title'=>'Delete Snippets','pagename'=>'snippet_delete'));
 
 	if ($type=='frompackage' && $snippet_version_id && $snippet_package_version_id) {

@@ -1,0 +1,34 @@
+***************
+*** 111,117 ****
+          if ($offset != 0) {
+  		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
+          	echo "<A HREF=\"/new/?offset=".($offset-20)."\"><B>" . 
+- 			html_image("images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+  			" Newer Releases</A></B></FONT>";
+          } else {
+          	echo "&nbsp;";
+--- 111,117 ----
+          if ($offset != 0) {
+  		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
+          	echo "<A HREF=\"/new/?offset=".($offset-20)."\"><B>" . 
++ 			html_image("/images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+  			" Newer Releases</A></B></FONT>";
+          } else {
+          	echo "&nbsp;";
+***************
+*** 121,127 ****
+  	if (db_numrows($res_new)>$rows) {
+  		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
+  		echo "<A HREF=\"/new/?offset=".($offset+20)."\"><B>Older Releases " .
+- 		html_image("images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+  		"</A></B></FONT>";
+  	} else {
+  		echo "&nbsp;";
+--- 121,127 ----
+  	if (db_numrows($res_new)>$rows) {
+  		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
+  		echo "<A HREF=\"/new/?offset=".($offset+20)."\"><B>Older Releases " .
++ 		html_image("/images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+  		"</A></B></FONT>";
+  	} else {
+  		echo "&nbsp;";

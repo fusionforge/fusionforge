@@ -1,0 +1,293 @@
+***************
+*** 133,149 ****
+  <A HREF="/project/memberlist.php?group_id=<?php print $group_id; ?>">[View Members]</A>
+  <?php 
+  
+- echo $HTML->box1_bottom();
+  
+  ?>
+- </TD></TR>
+  </TABLE>
+  <P>
+  <?php
+  
+  // ############################# File Releases
+  
+- echo $HTML->box1_top($Language->getText('frs','latest_file_releases')); 
+  	$unix_group_name = $project->getUnixName();
+  
+  	echo '
+--- 138,155 ----
+  <A HREF="/project/memberlist.php?group_id=<?php print $group_id; ?>">[View Members]</A>
+  <?php 
+  
++ echo $HTML->boxBottom();
+  
+  ?>
++ 		</TD>
++ 	</TR>
+  </TABLE>
+  <P>
+  <?php
+  
+  // ############################# File Releases
+  
++ echo $HTML->boxTop($Language->getText('frs','latest_file_releases')); 
+  	$unix_group_name = $project->getUnixName();
+  
+  	echo '
+***************
+*** 199,207 ****
+  					</TD>
+  					<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
+  					<TD><A href="/project/shownotes.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">';
+- 					echo html_image("images/ic/manual16c.png",'15','15',array('alt'=>'Release Notes'));
+  					echo '</A> - <A HREF="/project/filemodule_monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '">';
+- 					echo html_image("images/ic/mail16d.png",'15','15',array('alt'=>'Monitor This Package'));
+  					echo '</A>
+  					</TD>
+  					<TD><A HREF="/project/showfiles.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">'.$Language->getText('frs','file_download').'</A></TD></TR>';
+--- 205,213 ----
+  					</TD>
+  					<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
+  					<TD><A href="/project/shownotes.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">';
++ 					echo html_image("/images/ic/manual16c.png",'15','15',array('alt'=>'Release Notes'));
+  					echo '</A> - <A HREF="/project/filemodule_monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '">';
++ 					echo html_image("/images/ic/mail16d.png",'15','15',array('alt'=>'Monitor This Package'));
+  					echo '</A>
+  					</TD>
+  					<TD><A HREF="/project/showfiles.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">'.$Language->getText('frs','file_download').'</A></TD></TR>';
+***************
+*** 214,241 ****
+  	<a href="/project/showfiles.php?group_id=<?php print $group_id; ?>">[View ALL Project Files]</A>
+  	</div>
+  <?php
+- 	echo $HTML->box1_bottom();
+  
+  ?>
+  <P>
+  <TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+- <TR><TD VALIGN="top">
+  
+  <?php
+  
+  // ############################## PUBLIC AREAS
+- echo $HTML->box1_top($Language->getText('group','public_area')); 
+  
+  // ################# Homepage Link
+  
+  print "<A href=\"http://" . $project->getHomePage() . "\">";
+- print html_image("images/ic/home16b.png",'20','20',array('alt'=>$Language->getText('group','short_homepage')));
+  print '&nbsp;'.$Language->getText('group','long_homepage').'</A>';
+  
+  // ################## ArtifactTypes
+  
+  print '<HR SIZE="1" NoShade><A href="/tracker/?group_id='.$group_id.'">';
+- print html_image("images/ic/taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_tracker')));
+  print ' Tracker</A>';
+  
+  $result=db_query("SELECT agl.*,aca.count,aca.open_count
+--- 220,249 ----
+  	<a href="/project/showfiles.php?group_id=<?php print $group_id; ?>">[View ALL Project Files]</A>
+  	</div>
+  <?php
++ 	echo $HTML->boxBottom();
+  
+  ?>
+  <P>
++ 
+  <TABLE WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
++ 	<TR>
++ 		<TD VALIGN="top">
+  
+  <?php
+  
+  // ############################## PUBLIC AREAS
++ echo $HTML->boxTop($Language->getText('group','public_area')); 
+  
+  // ################# Homepage Link
+  
+  print "<A href=\"http://" . $project->getHomePage() . "\">";
++ print html_image("/images/ic/home16b.png",'20','20',array('alt'=>$Language->getText('group','short_homepage')));
+  print '&nbsp;'.$Language->getText('group','long_homepage').'</A>';
+  
+  // ################## ArtifactTypes
+  
+  print '<HR SIZE="1" NoShade><A href="/tracker/?group_id='.$group_id.'">';
++ print html_image("/images/ic/taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_tracker')));
+  print ' Tracker</A>';
+  
+  $result=db_query("SELECT agl.*,aca.count,aca.open_count
+***************
+*** 263,269 ****
+  
+  if ($project->usesForum()) {
+  	print '<HR SIZE="1" NoShade><A href="/forum/?group_id='.$group_id.'">';
+- 	print html_image("images/ic/notes16.png",'20','20',array('alt'=>$Language->getText('group','short_forum'))); 
+  	print '&nbsp;'.$Language->getText('group','long_forum').'</A>';
+  	print " ( <B>". project_get_public_forum_message_count($group_id) ."</B> messages in ";
+  
+--- 271,277 ----
+  
+  if ($project->usesForum()) {
+  	print '<HR SIZE="1" NoShade><A href="/forum/?group_id='.$group_id.'">';
++ 	print html_image("/images/ic/notes16.png",'20','20',array('alt'=>$Language->getText('group','short_forum'))); 
+  	print '&nbsp;'.$Language->getText('group','long_forum').'</A>';
+  	print " ( <B>". project_get_public_forum_message_count($group_id) ."</B> messages in ";
+  
+***************
+*** 276,282 ****
+  	print '
+  	<HR SIZE="1" NoShade>
+  	<A href="/docman/?group_id='.$group_id.'">';
+- 	print html_image("images/ic/docman16b.png",'20','20',array('alt'=>$Language->getText('group','short_docman')));
+  	print '&nbsp;'.$Language->getText('group','long_docman').'</A>';
+  }
+  
+--- 284,290 ----
+  	print '
+  	<HR SIZE="1" NoShade>
+  	<A href="/docman/?group_id='.$group_id.'">';
++ 	print html_image("/images/ic/docman16b.png",'20','20',array('alt'=>$Language->getText('group','short_docman')));
+  	print '&nbsp;'.$Language->getText('group','long_docman').'</A>';
+  }
+  
+***************
+*** 284,290 ****
+  
+  if ($project->usesMail()) {
+  	print '<HR SIZE="1" NoShade><A href="/mail/?group_id='.$group_id.'">';
+- 	print html_image("images/ic/mail16b.png",'20','20',array('alt'=>$Language->getText('group','short_mail'))); 
+  	print '&nbsp;'.$Language->getText('group','long_mail').'</A>';
+  	print " ( <B>". project_get_mail_list_count($group_id) ."</B> public mailing lists )";
+  }
+--- 292,298 ----
+  
+  if ($project->usesMail()) {
+  	print '<HR SIZE="1" NoShade><A href="/mail/?group_id='.$group_id.'">';
++ 	print html_image("/images/ic/mail16b.png",'20','20',array('alt'=>$Language->getText('group','short_mail'))); 
+  	print '&nbsp;'.$Language->getText('group','long_mail').'</A>';
+  	print " ( <B>". project_get_mail_list_count($group_id) ."</B> public mailing lists )";
+  }
+***************
+*** 293,299 ****
+  
+  if ($project->usesPm()) {
+  	print '<HR SIZE="1" NoShade><A href="/pm/?group_id='.$group_id.'">';
+- 	print html_image("images/ic/taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_pm')));
+  	print '&nbsp;'.$Language->getText('group','long_pm').'</A>';
+  	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
+  	$result = db_query ($sql);
+--- 301,307 ----
+  
+  if ($project->usesPm()) {
+  	print '<HR SIZE="1" NoShade><A href="/pm/?group_id='.$group_id.'">';
++ 	print html_image("/images/ic/taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_pm')));
+  	print '&nbsp;'.$Language->getText('group','long_pm').'</A>';
+  	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
+  	$result = db_query ($sql);
+***************
+*** 314,320 ****
+  
+  if ($project->usesSurvey()) {
+  	print '<HR SIZE="1" NoShade><A href="/survey/?group_id='.$group_id.'">';
+- 	print html_image("images/ic/survey16b.png",'20','20',array('alt'=>$Language->getText('group','short_survey')));
+  	print " ".$Language->getText('group','long_survey')."</A>";
+  	echo ' ( <B>'. project_get_survey_count($group_id) .'</B> surveys )';
+  }
+--- 322,328 ----
+  
+  if ($project->usesSurvey()) {
+  	print '<HR SIZE="1" NoShade><A href="/survey/?group_id='.$group_id.'">';
++ 	print html_image("/images/ic/survey16b.png",'20','20',array('alt'=>$Language->getText('group','short_survey')));
+  	print " ".$Language->getText('group','long_survey')."</A>";
+  	echo ' ( <B>'. project_get_survey_count($group_id) .'</B> surveys )';
+  }
+***************
+*** 323,329 ****
+  
+  if ($project->usesCVS()) {
+  	print '<HR SIZE="1" NoShade><A href="/cvs/?group_id='.$group_id.'">';
+- 	print html_image("images/ic/cvs16b.png",'20','20',array('alt'=>$Language->getText('group','short_cvs')));
+  	print " ".$Language->getText('group','long_cvs')."</A>";
+  
+  	$result = db_query("
+--- 331,337 ----
+  
+  if ($project->usesCVS()) {
+  	print '<HR SIZE="1" NoShade><A href="/cvs/?group_id='.$group_id.'">';
++ 	print html_image("/images/ic/cvs16b.png",'20','20',array('alt'=>$Language->getText('group','short_cvs')));
+  	print " ".$Language->getText('group','long_cvs')."</A>";
+  
+  	$result = db_query("
+***************
+*** 353,386 ****
+  if ($project->isActive()) {
+  	print '<HR SIZE="1" NoShade>';
+  	print "<A href=\"ftp://" . $project->getUnixName() . ".sourceforge.net/pub/". $project->getUnixName() ."/\">";
+- 	print html_image("images/ic/ftp16b.png",'20','20',array('alt'=>$Language->getText('group','long_ftp')));
+  	print $Language->getText('group','long_ftp')."</A>";
+  }
+  
+- $HTML->box1_bottom();
+  
+  if ($project->usesNews()) {
+  	// COLUMN BREAK
+  	?>
+  
+- 	</TD>
+- 	<TD WIDTH="15">&nbsp;</TD>
+- 	<TD VALIGN="top">
+  
+  	<?php
+  	// ############################# Latest News
+  
+- 	echo $HTML->box1_top($Language->getText('group','long_news'));
+  
+  	echo news_show_latest($group_id,10,false);
+  
+- 	echo $HTML->box1_bottom();
+  }
+  
+  ?>
+- </TD>
+- 
+- </TR></TABLE>
+  
+  <?php
+  
+--- 361,394 ----
+  if ($project->isActive()) {
+  	print '<HR SIZE="1" NoShade>';
+  	print "<A href=\"ftp://" . $project->getUnixName() . ".sourceforge.net/pub/". $project->getUnixName() ."/\">";
++ 	print html_image("/images/ic/ftp16b.png",'20','20',array('alt'=>$Language->getText('group','long_ftp')));
+  	print $Language->getText('group','long_ftp')."</A>";
+  }
+  
++ echo $HTML->boxBottom();
+  
+  if ($project->usesNews()) {
+  	// COLUMN BREAK
+  	?>
+  
++ 		</TD>
++ 		<TD WIDTH="15">&nbsp;</TD>
++ 		<TD VALIGN="top">
+  
+  	<?php
+  	// ############################# Latest News
+  
++ 	echo $HTML->boxTop($Language->getText('group','long_news'));
+  
+  	echo news_show_latest($group_id,10,false);
+  
++ 	echo $HTML->boxBottom();
+  }
+  
+  ?>
++ 		</TD>
++ 	</TR>
++ </TABLE>
+  
+  <?php
+  

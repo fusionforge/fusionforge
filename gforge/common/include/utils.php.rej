@@ -1,0 +1,17 @@
+***************
+*** 62,68 ****
+   * @param		string	The addresses to blind-carbon-copy this message
+   *
+   */
+- function util_send_mail($to,$subject,$body,$from='',$BCC='') {
+  	if (!$from) {
+  		$from='noreply@'.$GLOBALS['sys_default_domain'];
+  	}
+--- 62,68 ----
+   * @param		string	The addresses to blind-carbon-copy this message
+   *
+   */
++ function util_send_message($to,$subject,$body,$from='',$BCC='') {
+  	if (!$from) {
+  		$from='noreply@'.$GLOBALS['sys_default_domain'];
+  	}

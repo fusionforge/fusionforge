@@ -40,7 +40,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 		echo '<B><A HREF="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">Submit New</A>';
 		echo ' | <A HREF="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">Browse</A>';
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			echo ' | <A HREF="/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID() .'">Reporting</A>';
 		}
 		echo ' | <A HREF="/tracker/admin/?group_id='.$group_id.'">Admin</A>';

@@ -1,0 +1,118 @@
+***************
+*** 74,82 ****
+  				echo '<P>';
+  			}
+  			echo '</TD><TD VALIGN="TOP" WIDTH="35%">';
+- 			echo $HTML->box1_top('Latest News',0,$GLOBALS['COLOR_LTBACK2']);
+  			echo news_show_latest($sys_news_group,5,false);
+- 			echo $HTML->box1_bottom();
+  			echo '</TD></TR></TABLE>';
+  		}
+  	} else {
+--- 74,82 ----
+  				echo '<P>';
+  			}
+  			echo '</TD><TD VALIGN="TOP" WIDTH="35%">';
++ 			echo $HTML->boxTop('Latest News',0,$GLOBALS['COLOR_LTBACK2']);
+  			echo news_show_latest($sys_news_group,5,false);
++ 			echo $HTML->boxBottom();
+  			echo '</TD></TR></TABLE>';
+  		}
+  	} else {
+***************
+*** 194,200 ****
+  					' ( '. $result['realname'] . ' ) '.
+  					'<BR><A HREF="/forum/message.php?msg_id='.
+  					$result['msg_id'] .'">'.
+- 					html_image("images/msg.gif","10","12",array("BORDER"=>"0")) .
+  					$bold_begin.$result['subject'] .' [ reply ]'. $bold_end .'</A> &nbsp; '.
+  					'<BR>'. date($sys_datefmt,$result['date']) .'
+  				</TD>   
+--- 194,200 ----
+  					' ( '. $result['realname'] . ' ) '.
+  					'<BR><A HREF="/forum/message.php?msg_id='.
+  					$result['msg_id'] .'">'.
++ 					html_image("/images/msg.gif","10","12",array("BORDER"=>"0")) .
+  					$bold_begin.$result['subject'] .' [ reply ]'. $bold_end .'</A> &nbsp; '.
+  					'<BR>'. date($sys_datefmt,$result['date']) .'
+  				</TD>   
+***************
+*** 293,299 ****
+  
+  		$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD>'. 
+  			(($current_message != $thread['msg_id'])?'<A HREF="/forum/message.php?msg_id='.$thread['msg_id'].'">':'').
+- 			html_image("images/msg.gif","10","12",array("BORDER"=>"0"));
+  		/*
+  			See if this message is new or not
+  		*/
+--- 293,299 ----
+  
+  		$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD>'. 
+  			(($current_message != $thread['msg_id'])?'<A HREF="/forum/message.php?msg_id='.$thread['msg_id'].'">':'').
++ 			html_image("/images/msg.gif","10","12",array("BORDER"=>"0"));
+  		/*
+  			See if this message is new or not
+  		*/
+***************
+*** 350,356 ****
+  			*/
+  			$ret_val .= (($current_message != $msg_arr[$msg_id][$i]['msg_id'])?
+  				'<A HREF="/forum/message.php?msg_id='. $msg_arr[$msg_id][$i]['msg_id'].'">':'').
+- 				html_image("images/msg.gif","10","12",array("BORDER"=>"0"));
+  			/*
+  				See if this message is new or not
+  			*/
+--- 350,356 ----
+  			*/
+  			$ret_val .= (($current_message != $msg_arr[$msg_id][$i]['msg_id'])?
+  				'<A HREF="/forum/message.php?msg_id='. $msg_arr[$msg_id][$i]['msg_id'].'">':'').
++ 				html_image("/images/msg.gif","10","12",array("BORDER"=>"0"));
+  			/*
+  				See if this message is new or not
+  			*/
+***************
+*** 434,440 ****
+   */
+  function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum_id) {
+  	global $feedback,$allow_anonymous;
+- 	if (user_isloggedin() || $allow_anonymous) {
+  		if (!$group_forum_id) {
+  			$feedback='Trying to post without a forum ID';
+  			return false;
+--- 434,440 ----
+   */
+  function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum_id) {
+  	global $feedback,$allow_anonymous;
++ 	if (session_loggedin() || $allow_anonymous) {
+  		if (!$group_forum_id) {
+  			$feedback='Trying to post without a forum ID';
+  			return false;
+***************
+*** 587,599 ****
+  		<B><FONT COLOR="RED">HTML tags will display in your post as text</FONT></B>
+  		<P>
+  		<?php 
+- 		if (!user_isloggedin()) {
+  			echo '<B><FONT COLOR="RED">You are posting anonymously '.
+  			'because you are not <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">[logged in]</A></FONT></B>';
+  		} 
+  		?>
+  		<BR>
+- 		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Post Comment<?php echo ((!user_isloggedin())?' Anonymously':''); ?>">
+  		</TD></TR></TABLE>
+  		</FORM>
+  		</CENTER>
+--- 587,599 ----
+  		<B><FONT COLOR="RED">HTML tags will display in your post as text</FONT></B>
+  		<P>
+  		<?php 
++ 		if (!session_loggedin()) {
+  			echo '<B><FONT COLOR="RED">You are posting anonymously '.
+  			'because you are not <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">[logged in]</A></FONT></B>';
+  		} 
+  		?>
+  		<BR>
++ 		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Post Comment<?php echo ((!session_loggedin())?' Anonymously':''); ?>">
+  		</TD></TR></TABLE>
+  		</FORM>
+  		</CENTER>

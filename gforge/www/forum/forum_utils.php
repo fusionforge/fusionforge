@@ -97,7 +97,7 @@ function forum_header($params) {
 	}
 	echo '<P><B>';
 
-	if ($forum_id && user_isloggedin() ) {
+	if ($forum_id && session_loggedin() ) {
 		echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'">' . 
 			html_image('images/ic/check.png','16','15',array()).' '.$Language->getText('forum_utils','monitor').'</A> | '.
 			'<A HREF="/forum/save.php?forum_id='.$forum_id.'">';
@@ -408,7 +408,7 @@ function get_forum_saved_date($forum_id) {
 	if ($forum_saved_date["$forum_id"]) {
 		return $forum_saved_date["$forum_id"];
 	} else {
-		if (user_isloggedin() && $forum_id) {
+		if (session_loggedin() && $forum_id) {
 			$sql="SELECT save_date FROM forum_saved_place 
 				WHERE user_id='".user_getid()."' AND forum_id='$forum_id';";
 			$result = db_query($sql);
@@ -443,7 +443,7 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 			$feedback=$Language->getText('forum_utils','mustinclude');
 			return false;
 		}
-		if (!user_isloggedin()) {
+		if (!session_loggedin()) {
 			$user_id=100;
 		} else {
 			$user_id=user_getid();
@@ -559,7 +559,7 @@ function post_message($thread_id, $is_followup_to, $subject, $body, $group_forum
 function show_post_form($forum_id, $thread_id=0, $is_followup_to=0, $subject="") {
 	global $allow_anonymous,$REQUEST_URI,$Language;
 
-	if (user_isloggedin() || $allow_anonymous) {
+	if (session_loggedin() || $allow_anonymous) {
 		if ($subject) {
 			//if this is a followup, put a RE: before it if needed
 			if (!eregi('RE:',$subject,$test)) {
@@ -655,7 +655,7 @@ function handle_monitoring($forum_id,$msg_id) {
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
 			*/
 
-			util_send_mail("noreply@$GLOBALS[sys_default_domain]",
+			util_send_message("noreply@$GLOBALS[sys_default_domain]",
 				"[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject')),
 				$body,"noreply@$GLOBALS[sys_default_domain]",
 				$tolist);

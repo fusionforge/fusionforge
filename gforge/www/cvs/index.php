@@ -88,7 +88,7 @@ if ($row_grp['is_public']) {
 <B>'.$Language->getText('cvs', 'browseit').'</B></A>';
 }
 
-print $HTML->box1_bottom();
+print $HTML->boxBottom();
 
 print '</TD></TR></TABLE>';
 

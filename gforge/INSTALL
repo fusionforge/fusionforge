@@ -1,14 +1,85 @@
-#
-# SourceForge: Breaking Down the Barriers to Open Source Development
-# Copyright 1999-2001 (c) VA Linux Systems
-# http://sourceforge.net
-#
-# $Id$
-#
+Installation of GForge has been made much easier than the old SF2.x codebase.
+A great deal of unnecessary code and scalability hacks have been removed to 
+make the installation and use of GForge practical for just about any 
+Linux admin.
 
-To get help setting up your copy of SourceForge, visit the "SF Offsite
-Talk" discussion boards at:
+Even at that, it could be a daunting process for the uniniated. If you need 
+professional help installing GForge, visit:
 
-http://sourceforge.net/forum/forum.php?forum_id=21304
+http://perdue.net/
 
-                    - The SourceForge Crew <staff@sourceforge.net>
+
+BASICS OF INSTALLATION
+----------------------
+
+You will need: 
+	PostgreSQL 7.1 or higher ( http://postgresql.org/ )
+	PHP 4.x or higher ( http://www.php.net/ )
+	Apache 1.2x or higher ( http://www.apache.org/ )
+
+	Optional Mailing list support:
+	GNU MailMan ( http://www.gnu.org/software/mailman/ )
+	Python ( http://www.python.org/ )
+
+	Optional Jabber Support:
+	Jabberd ( http://jabberd.jabberstudio.org/ )
+
+Compile and install PostgreSQL, then PHP/Apache as per the instructions. PHP should 
+be compiled into Apache, as well as compiled as a separate CGI. When compiling PHP, 
+don't forget the --with-pgsql option for PostgreSQL support
+
+Install Python and MailMan as per the instructions.
+
+
+Database Setup
+--------------
+
+Create a blank database for postgres
+
+# createdb alexandria
+
+Be certain that plpgsql.so is present in your Postgres library path
+
+Import the SourceForge Database
+
+# psql alexandria < db/gforge3.sql
+
+Web Setup
+---------
+
+Move the GForge tarball into position and make the www/ directory 
+the "Document Root".
+
+Apache's http.conf file should have these values:
+
+php_value include_path ".:/path/to/:/path/to/www/include/"
+<Location /projects>
+  ForceType application/x-httpd-php
+</Location>
+<Location /users>
+  ForceType application/x-httpd-php
+</Location>
+
+SF Config File
+--------------
+
+In the GForge distribution, you will find etc/local.inc. Move it to /etc/local.inc 
+and edit all of the settings.
+
+Giving the first user "Site Admin" privileges. Register a new user, and confirm 
+it via the email link. Then enter the postgres command line and issue these 
+commands:
+
+insert into user_group (user_id,group_id) values (*****YOUR NEW ID*****,1);
+update user_group set admin_flags='A' where group_id=1 
+	AND user_id='*****YOUR NEW ID*****';
+
+/etc/aliases - add this line and run "newaliases"
+noreply:        /dev/null
+
+STATS
+-----
+
+Setting up stats is a truly complex endeavor, and is not being tackled just yet.
+However, you can look in the cron/ directory to look at the various processes 
+involved and attempt to set it up yourself.

@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('vote_function.php');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	$u =& session_get_user();
 
@@ -136,7 +136,7 @@ if (user_isloggedin()) {
 
 	<P>';
 
-	echo $HTML->box1_top('Existing Diary And Note Entries');
+	echo $HTML->boxTop('Existing Diary And Note Entries');
 
 	$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' ORDER BY id DESC";
 
@@ -158,7 +158,7 @@ if (user_isloggedin()) {
 		<TR><TD COLSPAN="2" BGCOLOR="'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</TD></TR>';
 	}
 
-	echo $HTML->box1_bottom();
+	echo $HTML->boxBottom();
 
 	echo site_user_footer(array());
 
