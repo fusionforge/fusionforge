@@ -22,32 +22,40 @@
 *
 */
 class Validator {
- var $badfields;
+	var $badfields;
 
- /**
- * Checks to see if a field is null; if so, the field name is added to an internal array
- */
- function check($field, $name) {
-  if (!$field) {
-   $this->badfields[] = $name;
-  }
- }
+	/**
+	* Checks to see if a field is null; if so, the field name is added to an internal array
+	*
+	* @param field - a variable to check for null
+	* @param name - the variable name
+	*/
+	function check($field, $name) {
+		if (!$field) {
+			$this->badfields[] = $name;
+		}
+	}
 
- /**
- * Returns true if no null fields have been checked so far
- */
- function isClean() {
-  return count($this->badfields) == 0;
- }
-
- /**
- * Returns an error message which contains the null field names which have been checked
- */
- function formErrorMsg($preamble) {
-  foreach ($this->badfields as $field) {
-   $preamble = $preamble.$field.",";
-  }
-  return substr($preamble, 0, strlen($preamble)-1);
- }
+	/**
+	* Returns true if no null fields have been checked so far
+	*
+	* @return boolean - True if there are no null fields so far
+	*/
+	function isClean() {
+		return count($this->badfields) == 0;
+	}
+	
+	/**
+	* Returns an error message which contains the null field names which have been checked
+	*
+	* @param preamble string - A string with which to start the error message
+	* @return string - A complete error message
+	*/
+	function formErrorMsg($preamble) {
+		foreach ($this->badfields as $field) {
+			$preamble = $preamble.$field.",";
+		}
+		return substr($preamble, 0, strlen($preamble)-1);
+	}
 }
 ?>
