@@ -92,7 +92,7 @@ if ($msg_id) {
 	echo "BY: ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<BR>";
 	echo "DATE: ". date($sys_datefmt, $fm->getPostDate()) ."<BR>";
 	echo "SUBJECT: ". $fm->getSubject() ."<P>";
-	echo util_make_links(nl2br( $fm->getSubject() ));
+	echo util_make_links(nl2br( $fm->getBody() ));
 	echo "</TD></TR>";
 
 	echo $GLOBALS['HTML']->listTableBottom();

@@ -81,11 +81,14 @@ if ($forum_id) {
 		exit_error('Error',$fmf->getErrorMessage());
 	}
 
-	$fmf->setUp($offset,$style,$maxrows,$set);
+//echo "<BR> style: $style|max_rows: $max_rows|offset: $offset+";
+	$fmf->setUp($offset,$style,$max_rows,$set);
 
 	$style=$fmf->getStyle();
 	$max_rows=$fmf->max_rows;
 	$offset=$fmf->offset;
+
+//echo "<BR> style: $style|max_rows: $max_rows|offset: $offset+";
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
@@ -165,6 +168,7 @@ if ($forum_id) {
 		}
 
 		$rows=count($msg_arr["0"]);
+		$avail_rows=$fmf->fetched_rows;
 		if ($rows > $max_rows) {
 			$rows=$max_rows;
 		}
@@ -203,7 +207,7 @@ if ($forum_id) {
 		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$rows=count($msg_arr[0]);
-			 
+		$avail_rows=$fmf->fetched_rows;
 		if ($rows > $max_rows) {
 			$rows=$max_rows;
 		}	   
@@ -247,6 +251,7 @@ if ($forum_id) {
 		if ($fmf->isError()) {
 			echo $fmf->getErrorMessage();
 		}
+		$avail_rows=$fmf->fetched_rows;
 
 		for ($i=0; ($i<count($msg_arr) && ($i < $max_rows)); $i++) {
 			$ret_val .= $fh->showNestedMessage ( $msg_arr[$i] ).'<BR>';
@@ -268,6 +273,8 @@ if ($forum_id) {
 			"ORDER BY f.most_recent_date DESC";
 
 		$result=db_query($sql,($max_rows+1),$offset);
+
+		$avail_rows=db_numrows($result);
 
 		echo db_error();
 
@@ -324,7 +331,7 @@ if ($forum_id) {
 
 	$ret_val .= '</TD><TD>&nbsp;</TD><TD ALIGN="RIGHT" WIDTH="50%">';
 
-	if (db_numrows($result) > $max_rows) {
+	if ($avail_rows > $max_rows) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE=3 STYLE="text-decoration: none"><B>
 		<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
 		<B>Next Messages ' .
