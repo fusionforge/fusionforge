@@ -73,10 +73,10 @@ if ($feedback) {
 <p>
 <?php
 if ($sys_use_jabber) {
-	echo 'Jabber Address:<BR>
+	echo $Language->getText('account_register','jabberaddr').'<BR>
 	<INPUT size=30 type="text" name="jabber_address" value="'. $jabber_address .'"><BR>
     <INPUT type="checkbox" name="jabber_only" value="1">
-    Send auto-generated notices only to Jabber address.';
+    '.$Language->getText('account_register','jabberonly').'.';
 }
 ?>
 <P>

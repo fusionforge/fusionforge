@@ -69,6 +69,8 @@ account_register	realname	Full/Real Name *:
 account_register	language	Language Choice:
 account_register	timezone	Timezone:
 account_register	emailaddr	Email Address *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
+account_register	jabberaddr	Email Address:
+account_register	jabberonly	Send auto-generated notices only to this address
 account_register	siteupdate	Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>
 account_register	communitymail	Receive additional community mailings. <I>(Low traffic.)</I>
 account_register	mandatory	Fields marked with * are mandatory.
@@ -80,6 +82,7 @@ account_register	err_passwd2	Passwords do not match
 account_register	err_passwd3	Invalid Password:
 account_register	err_unixname	Invalid Unix Name. 
 account_register	err_email	Invalid Email Address
+account_register	err_jabber	Invalid Jabber Address
 account_register	err_userexist	That username already exists.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
 account_register	err_badinsert	Insert Failed 

@@ -220,7 +220,7 @@ class User extends Error {
 			return false;
 		}
 		if ($jabber_address && !validate_email($jabber_address)) {
-			$this->setError('Invalid Jabber Address');
+			$this->setError($Language->getText('account_register','err_jabber'));
 			return false;
 		}
 		if (db_numrows(db_query("SELECT user_id FROM users WHERE user_name LIKE '$unix_name'")) > 0) {
@@ -307,7 +307,7 @@ class User extends Error {
 		$block_ratings = !$use_ratings;
 
 		if ($jabber_address && !validate_email($jabber_address)) {
-			$this­>setError('Invalid Jabber Address');
+			$this->setError($Language->getText('account_register','err_jabber'));
 			return false;
 		}
 

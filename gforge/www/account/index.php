@@ -107,11 +107,11 @@ to view your developer/consultant profiles and ratings.
 <?php
 if ($sys_use_jabber) {
     echo '<TR VALIGN=top>
-<TD>Jabber Address:</TD>
+<TD>'. $Language->getText('account_register','jabberaddr') .'</TD>
 <TD>
     <INPUT size=30 type="text" name="jabber_address" value="'. $u->getJabberAddress() .'"><P>
 	<INPUT type="checkbox" name="jabber_only" value="1" '.(($u->getJabberOnly()) ? 'CHECKED' : '' ).'>
-	Send auto-generated notices only to this address.
+	'.$Language->getText('account_register','jabberonly').'.
 </TD></TR>';
 
 }
