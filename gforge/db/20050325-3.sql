@@ -6,13 +6,10 @@ ALTER TABLE artifact DROP COLUMN resolution_id;
 ALTER TABLE artifact DROP COLUMN category_id;
 ALTER TABLE artifact_group_list DROP COLUMN use_resolution CASCADE;
 
-DROP VIEW artifact_group_list_vw;
 CREATE VIEW artifact_group_list_vw AS
 SELECT agl.*,aca.count,aca.open_count
         FROM artifact_group_list agl
         LEFT JOIN artifact_counts_agg aca USING (group_artifact_id);
-
-DROP VIEW artifact_vw;
 
 CREATE VIEW artifact_vw
 AS

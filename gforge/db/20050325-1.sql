@@ -24,7 +24,6 @@ CREATE TABLE artifact_query (
 	Constraint artifact_query_pkey Primary Key (artifact_query_id)
 );
 
-DROP TABLE artifact_query_fields;	
 CREATE TABLE artifact_query_fields (
 	artifact_query_id integer NOT NULL 
 		CONSTRAINT artqueryelmnt_artqueryid REFERENCES artifact_query(artifact_query_id) ON DELETE CASCADE,
