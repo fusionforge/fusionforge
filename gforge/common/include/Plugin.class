@@ -66,6 +66,24 @@ class Plugin extends Error {
 	function CallHook ($hookname, $params) {
 		return true ;
 	}
+
+	/**
+	 * GetLanguagePath() - get the path where we can find i18n for the plugin
+	 *
+	 * @return string path
+	 */
+	function GetLanguagePath() {
+		return $GLOBALS['sys_plugins_path'].'/'.$this->name.'/include/languages/';
+	}
+
+	/**
+	 * GetSpecificLanguagePath() - get the path where we can find installation specific language files
+	 *
+	 * @return string path
+	 */
+	function GetSpecificLanguagePath() {
+		return '/etc/gforge/plugins/'.$this->name.'/languages/';
+	}
 }
 
 // Local Variables:

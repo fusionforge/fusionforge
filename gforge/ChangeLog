@@ -3,6 +3,7 @@
 	* Some renaming cvs -> scm
 	* Rebuild etc/*.example without cvs stuffs at the moment
 	more work needed on setup
+	* Added co work from Kikov and GSmet to enable i18n in plugins
 
 2004-07-21  Tom Copeland <tom@infoether.com>
 	

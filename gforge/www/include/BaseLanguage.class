@@ -80,6 +80,13 @@ class BaseLanguage {
 	var $cacheDependencies = array();
 
 	/**
+	 * array containing the plugins which are loaded
+	 *
+	 * @var array $pluginDependencies
+	 */
+	var $pluginDependencies = array();
+
+	/**
 	 * Constructor
 	 */
 	function BaseLanguage() {
@@ -135,23 +142,45 @@ class BaseLanguage {
 	 * loadLanguage - load localized strings of the selected language
 	 *
 	 * @param string $lang language name
-	 */
+	 */	
 	function loadLanguage($lang) {
-		global $sys_theme, $sys_urlroot;
-
 		$cachePath = $this->getLocalizationCachePath($lang);
 
+		$pluginManager =& plugin_manager_get_object();
+		$pluginNames =& $pluginManager->getPlugins();
 		if($GLOBALS['sys_localization_enable_caching'] && file_exists($cachePath)) {
 			$this->textArray =& $this->getLocalizationCache($cachePath);
 			$this->lang = $lang ;
-			if(!$GLOBALS['sys_localization_enable_timestamp_checking'] || !$this->isCacheOutdated($cachePath)) {
+			if(!$GLOBALS['sys_localization_enable_timestamp_checking'] || !$this->isCacheOutdated($cachePath, $pluginNames)) {
 				return;
 			}
 		}
-
+		$this->dependencies = array();
 		if($lang != 'Base') {
-			$this->loadLanguage('Base');
+			$this->loadGlobalLanguage('Base');
 		}
+		$this->loadGlobalLanguage($lang);
+
+		$this->pluginDependencies = array();
+		if ( $lang != 'Base' )
+		{
+			$this->loadPluginSpecificLanguage('Base', $pluginNames);
+		}
+		$this->loadPluginSpecificLanguage($lang, $pluginNames);
+
+		$this->lang = $lang ;
+		if($GLOBALS['sys_localization_enable_caching']) {
+			$this->writeLocalizationCache($cachePath);
+		}
+	}
+
+	/**
+	 * loadGlobalLanguage - load localized strings of the selected language for the global site
+	 *
+	 * @param string $lang language name
+	 */
+	function loadGlobalLanguage($lang) {
+		global $sys_theme, $sys_urlroot;
 
 		// Customization by language in $sys_urlroot/include/languages/<Language>.tab
 		$fname = $sys_urlroot.'/include/languages/'.$lang.'.tab';
@@ -171,9 +200,26 @@ class BaseLanguage {
 		if (file_exists ($fltname)) {
 			$this->loadLanguageFile($fltname) ;
 		}
-		$this->lang = $lang ;
-		if($GLOBALS['sys_localization_enable_caching']) {
-			$this->writeLocalizationCache($cachePath);
+	}
+
+	/**
+	 * loadPluginSpecificLanguage - load localized strings of the selected language for installed plugins
+	 *
+	 * @param string $lang language name
+	 * @param string $pluginNames plugin names
+	 */
+	function loadPluginSpecificLanguage($lang, $pluginNames) {
+		foreach($pluginNames AS $pluginName) {
+			$plugin =& plugin_get_object($pluginName);
+			$languagePath = $plugin->getLanguagePath().$lang.'.tab';
+			$specificLanguagePath = $plugin->getSpecificLanguagePath().$lang.'.tab';
+			if(file_exists($languagePath)) {
+				$this->loadLanguageFile($languagePath);
+			}
+			if(file_exists($specificLanguagePath)) {
+				$this->loadLanguageFile($specificLanguagePath);
+			}
+			$this->pluginDependencies[] = $pluginName;
 		}
 	}
 
@@ -289,6 +335,7 @@ class BaseLanguage {
 		$array = unserialize(fread($fp, filesize($cachePath)));
 		fclose($fp);
 		$this->cacheDependencies =& $array['dependencies'];
+		$this->pluginDependencies =& $array['pluginDependencies'];
 		return $array['text'];
 	}
 
@@ -300,6 +347,7 @@ class BaseLanguage {
 	function writeLocalizationCache($cachePath) { 
 		$content = array();
 		$content['dependencies'] =& $this->cacheDependencies;
+		$content['pluginDependencies'] =& $this->pluginDependencies;
 		$content['text'] =& $this->textArray;
 		$fp = fopen($cachePath, 'a');
 		flock($fp, LOCK_EX);
@@ -323,9 +371,13 @@ class BaseLanguage {
 	 * isCacheOutdated - test if the localization cache is deprecated
 	 *
 	 * @param string $path path of the cache file
+	 * @param array $pluginNames list of installed plugins
 	 * @return boolean true if the cache is deprecated, false if it's still valid
 	 */
-	function isCacheOutdated($cachePath) {
+	function isCacheOutdated($cachePath, $pluginNames) {
+		if(count(array_diff($pluginNames, $this->cacheDependencies)) > 0) {
+			return false;
+		}
 		if(!empty($this->cacheDependencies)) {
 			$cacheTimestamp = filemtime($cachePath);
 			$cacheDependencies =& $this->cacheDependencies;
