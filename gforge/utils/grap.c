@@ -77,7 +77,7 @@ char *options[] = 		{ "-c", "-e", NULL };
 
 /* Define what strings are acceptable in <command>
    define an optional execution path CMD_PATH if desired */
-char *commands[] = 		{ "cvs", "server", NULL };
+char *commands[] = 		{ "cvs", "server", "svnserve", NULL };
 
 #define MAXARGS		256
 
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 	if(argc < 3) {
 			/* printf("FATAL: %s bailed because not enough options.\n", argv[0]); */
 
-			printf("\nWelcome to cvs\n\n");
+			printf("\nWelcome to GForge SCM\n\n");
 			printf("This is a restricted Shell Account\n");
 			printf("You cannot execute anything here.\n\n");
 
@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
 		if(options[i] == NULL || strlen(argv[OPTION_ARGC]) > MAXSTRLEN) {
 			/* printf("FATAL: %s bailed because options didn't qualify.\n", argv[0]); */
 
-			printf("\nWelcome to cvs\n\n");
+			printf("\nWelcome to GForge SCM\n\n");
 			printf("This is a restricted Shell Account\n");
 			printf("You cannot execute anything here.\n\n");
 
@@ -152,7 +152,7 @@ int main(int argc, char *argv[]) {
 
 	/* 	printf("FATAL: %s bailed because command didn't qualify.\n", args[CMD_POS]); */
 
-		printf("\nWelcome to cvs\n\n");
+		printf("\nWelcome to GForge SCM\n\n");
 		printf("This is a restricted Shell Account\n");
 		printf("You cannot execute anything here.\n\n");
 
