@@ -229,3 +229,41 @@ Description-fr: Sourceforge a besoin d'une configuration PAM-LDAP correcte
  passwords="crypt".  En outre, vous devrez utiliser le même mot de
  passe pour le compte administrateur de libpam-ldap et pour le mot de
  passe LDAP de Sourceforge.
+
+Template: sourceforge/dont_touch_config
+Type: boolean
+Default: false
+Description: Do you want to let sourceforge install modify some config files?
+This is not recommended, even forbidden by the debian policy, so it's the 
+default.
+.
+Modified files are:
+/etc/ldap/slapd.conf, /etc/nsswitch.conf,
+/etc/libnss-ldap.conf, /etc/apache/httpd.conf,
+/etc/php4/apache/php.ini, /etc/php4/cgi/php.ini,
+/etc/aliases, /etc/postgresql/pg_hba.conf,
+/etc/exim/main.cf, /etc/bind/named.conf,
+/etc/exim/main.cf, /etc/proftpd.conf,
+/etc/bind/named.conf, /etc/init.d/ssh.
+Notice: usage of NIS is not recommended,
+since you can have duplicated users, groups.
+We will maybe have a better support for this in the future, 
+feel free to send a patch :-)
+
+Description-fr: Voulez vous laisser l'intallation de sourceforge modifier
+certains fichiers de configuration? La modification est non recommandée,
+voir interdite par les règles debian, et donc non activée par défaut.
+.
+Les fichiers modifiés sont:
+/etc/ldap/slapd.conf, /etc/nsswitch.conf,
+/etc/libnss-ldap.conf, /etc/apache/httpd.conf
+/etc/php4/apache/php.ini, /etc/php4/cgi/php.ini,
+/etc/aliases, /etc/postgresql/pg_hba.conf,
+/etc/exim/main.cf, /etc/bind/named.conf,
+/etc/exim/main.cf, /etc/proftpd.conf,
+/etc/bind/named.conf, /etc/init.d/ssh.
+Attention: l'usage de NIS n'est pas recommandé
+car cela peut créer des duplications d'utilisateurs et de groupes.
+Nous supporterons peut etre cela de meilleure façon, 
+envoyez vos patch :-)
+
