@@ -39,7 +39,7 @@ computedefault(){
 	DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTcgidir=$CGIDIR
-	DEFAULTcronolog_path=`which cronolog || echo /usr/bin/cronolog`
+	DEFAULTcronolog_path=$(findcronolog)
 	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
 	DEFAULTsys_path_to_scmweb=/usr/lib/gforge/bin/
 	DEFAULTgforge_chroot=$CHROOT
@@ -136,6 +136,20 @@ findkey(){
 	fi
 }
 
+findcronolog(){
+	if [ -x /usr/sbin/cronolog ]
+	then 
+		echo /usr/sbin/cronolog
+	else
+		if [ -x /usr/sbin/cronolog ]
+		then
+			echo /usr/bin/cronolog
+		else
+			which cronolog
+		fi
+	fi
+}
+
 writedefault(){
 	# Here is the fun
 	# This create a default conf file in $1 
@@ -148,8 +162,31 @@ writedefault(){
 }
 
 readdefault() {
-	cat $1 | sed 's/\(.[^=]*\)=\(.*\)/DEFAULT\1="\2"/' > $1.$$readdefault
+	cat $1 | sed 's/\(.[^=]*\)=\(.*\)/DEFAULT\1="\2"/' |
+		grep -v '^DEFAULTcronolog_path' > $1.$$readdefault
 	. $1.$$readdefault
+
+	if [ ! -z "$DEFAULTsys_sslcrt" -a ! -f "$DEFAULTsys_sslcrt" ]
+	then
+		unset DEFAULTsys_sslcrt
+		DEFAULTsys_sslcrt=$(findcrt)
+	else
+		if [ -z "$DEFAULTsys_sslcrt" ]
+		then
+			DEFAULTsys_sslcrt=$(findcrt)
+		fi
+	fi
+	if [ ! -z "$DEFAULTsys_sslkey" -a ! -f "$DEFAULTsys_sslkey" ]
+	then
+		unset DEFAULTsys_sslkey
+		DEFAULTsys_sslkey=$(findkey)
+	else
+		if [ -z "$DEFAULTsys_sslkey" ]
+		then
+			DEFAULTsys_sslkey=$(findkey)
+		fi
+	fi
+	
 	rm -f $1.$$readdefault
 }
 
