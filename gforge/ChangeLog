@@ -1,3 +1,7 @@
+2002-12-12  Tim Perdue <tim@gforge.org>
+
+	* Added skills/profile system patch submitted by John Maguire
+
 2002-12-09  Tim Perdue <tim@gforge.org>
 
 	* Complete forum rewrite using OO style and coding guidlines.
