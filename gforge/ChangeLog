@@ -1,3 +1,18 @@
+2003-02-17  Reinhard Spisser <reinhard@spisser.it>
+
+	*  www/project/admin/*.php, www/project/stats/*.php:
+	i18n
+		
+	* www/stats/index.php, www/stats/graphs.php,
+	www/stats/i18n.php, 
+	I18n of missing strings
+
+	* www/include/languages/Base.tab:
+	added new strings
+
+	* www/include/languages/Italian.tab:
+	l10n
+
 2003-02-15  Graham Batter <graham@sandworm.ca>
 
 	Patch #220
