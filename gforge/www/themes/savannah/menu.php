@@ -35,7 +35,6 @@ function menu_site_admin() {
 	global $HTML, $Language, $sys_name;
 	$HTML->menuhtml_top($sys_name." ".$Language->getText('menu', 'admin'));
 	$HTML->menu_entry('/admin/',$Language->getText('menu', 'admin_main_page'));
-	$HTML->menu_entry('/admin/group_type.php',$Language->getText('menu', 'admin_group_type_admin'));
 	$HTML->menu_entry('/admin/grouplist.php',$Language->getText('menu', 'admin_group_list'));
 	$HTML->menu_entry('/admin/userlist.php',$Language->getText('menu', 'admin_user_list'));
 	$HTML->menu_entry('/admin/approve-pending.php',$Language->getText('menu', 'admin_pending_projects'));
@@ -98,6 +97,7 @@ function menu_site_help() {
 	global $HTML, $Language, $sys_name;
 	$HTML->menuhtml_top($sys_name);
 	$HTML->menu_entry('/', $Language->getText('menu', 'home'));
+	$HTML->menu_entry('/snippet/', $Language->getText('menu', 'code_snippet'));
 	if (session_loggedin()) {
 		$HTML->menu_entry('/register/',$Language->getText('menu', 'new_project'));
 	}
@@ -186,7 +186,7 @@ function menu_loggedin($page_title) {
 	/*
 		Show links appropriate for someone logged in, like account maintenance, etc
 	*/
-	$HTML->menuhtml_top($Language->getText('menu', 'logged_in_as') . " " .user_getname());
+	$HTML->menuhtml_top($Language->getText('menu', 'logged_in_as', user_getname()));
 	$HTML->menu_entry('/my/',$Language->getText('menu', 'my_personal_page'));
 	$HTML->menu_entry('/account/',$Language->getText('menu', 'my_account'));
 	if (!$GLOBALS['HTTP_POST_VARS']) {
