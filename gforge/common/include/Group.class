@@ -495,7 +495,7 @@ class Group extends Error {
 		// Log the audit trail
 		$this->addHistory('Changed Public Info', '');
 
-		if (!$this->fetchData($group_id)) {
+		if (!$this->fetchData($this->getID())) {
 			db_rollback();
 			return false;
 		}
