@@ -25,7 +25,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 		Shows their own news items so they can edit/update.
 
-		If their news is on the homepage, and they edit, it is removed from 
+		If their news is on the homepage, and they edit, it is removed from
 			sf.net homepage.
 
 	*/
@@ -81,7 +81,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 		echo '
 		<h3>Approve a NewsByte For Project: '.group_getname($group_id).'</h3>
-		<p>
+		<p />
 		<form action="'.$PHP_SELF.'" method="post">
 		<input type="hidden" name="group_id" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
@@ -93,14 +93,14 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<strong>Status:</strong><br />
 		<input type="radio" name="status" value="0" checked="checked" /> Displayed<br />
 		<input type="radio" name="status" value="4" /> Delete<br />
- 
+
 		<strong>Subject:</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
 		<strong>Details:</strong><br />
-		<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><p>
+		<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><p>
 		<strong>If this item is on the '.$GLOBALS['sys_name'].' home page and you edit it, it will be removed from the home page.</strong><br /></p>
 		<input type="submit" name="submit" value="SUBMIT">
-		</form></p>';
+		</form>';
 
 	} else {
 		/*
@@ -205,7 +205,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 		echo '
 		<h3>Approve a NewsByte</h3>
-		<p>
+		<p />
 		<form action="'.$PHP_SELF.'" method="post">
 		<input type="hidden" name="for_group" value="'.db_result($result,0,'group_id').'" />
 		<input type="hidden" name="id" value="'.db_result($result,0,'id').'" />
@@ -219,9 +219,9 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<strong>Subject:</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60" /><br />
 		<strong>Details:</strong><br />
-		<textarea name="details" rows="5" cols="50" wrap="soft">'.db_result($result,0,'details').'</textarea><br />
+		<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><br />
 		<input type="submit" name="submit" value="SUBMIT" />
-		</form></p>';
+		</form>';
 
 	} else {
 
@@ -231,12 +231,12 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 	        $old_date = time()-60*60*24*30;
 		$sql_pending= "
-			SELECT groups.group_id,id,date,summary, 
-				group_name,unix_group_name 
-			FROM news_bytes,groups 
-			WHERE is_approved=0 
-			AND news_bytes.group_id=groups.group_id 
-			AND date > '$old_date' 
+			SELECT groups.group_id,id,date,summary,
+				group_name,unix_group_name
+			FROM news_bytes,groups
+			WHERE is_approved=0
+			AND news_bytes.group_id=groups.group_id
+			AND date > '$old_date'
 			AND groups.is_public=1
 			AND groups.status='A'
 			ORDER BY date
@@ -244,22 +244,22 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 		$old_date = time()-(60*60*24*7);
 		$sql_rejected = "
-			SELECT groups.group_id,id,date,summary, 
-				group_name,unix_group_name 
-			FROM news_bytes,groups 
-			WHERE is_approved=2 
-			AND news_bytes.group_id=groups.group_id 
-			AND date > '$old_date' 
+			SELECT groups.group_id,id,date,summary,
+				group_name,unix_group_name
+			FROM news_bytes,groups
+			WHERE is_approved=2
+			AND news_bytes.group_id=groups.group_id
+			AND date > '$old_date'
 			ORDER BY date
 		";
 
 		$sql_approved = "
-			SELECT groups.group_id,id,date,summary, 
-				group_name,unix_group_name 
-			FROM news_bytes,groups 
-			WHERE is_approved=1 
-			AND news_bytes.group_id=groups.group_id 
-			AND date > '$old_date' 
+			SELECT groups.group_id,id,date,summary,
+				group_name,unix_group_name
+			FROM news_bytes,groups
+			WHERE is_approved=1
+			AND news_bytes.group_id=groups.group_id
+			AND date > '$old_date'
 			ORDER BY date
 		";
 
