@@ -47,7 +47,9 @@ $server->wsdl->addComplexType(
 	'name' => array('name'=>'name', 'type' => 'xsd:string'),
 	'description' => array('name'=>'description', 'type' => 'xsd:string'),
 	'is_public' => array('name'=>'is_public', 'type' => 'xsd:integer'),
-	'send_all_posts_to' => array('name'=>'send_all_posts_to', 'type' => 'xsd:string')));
+	'send_all_posts_to' => array('name'=>'send_all_posts_to', 'type' => 'xsd:string')
+	)
+);
 
 $server->wsdl->addComplexType(
 	'ArrayOfProjectGroup',
@@ -57,13 +59,15 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ProjectGroup[]')),
-	'tns:ProjectGroup');
+	'tns:ProjectGroup'
+);
 
 $server->register(
 	'getProjectGroups',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer'),
 	array('getProjectGroupsResponse'=>'tns:ArrayOfProjectGroup'),
-	$uri);
+	$uri
+);
 
 //
 //	ProjectTasks
@@ -88,7 +92,8 @@ $server->wsdl->addComplexType(
 	'category_id' => array('name'=>'category_id', 'type' => 'xsd:integer'),
 	'is_dependent_on_task_id' => array('name'=>'is_dependent_on_task_id', 'type' => 'ArrayOfInteger'),
 	'assigned_to_id' => array('name'=>'assigned_to_id', 'type' => 'ArrayOfInteger')
-));
+	)
+);
 
 $server->wsdl->addComplexType(
 	'ArrayOfProjectTask',
@@ -98,7 +103,8 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ProjectTask[]')),
-	'tns:ProjectTask');
+	'tns:ProjectTask'
+);
 
 //getProjectTask
 $server->register(
@@ -124,14 +130,39 @@ $server->register(
 		'group_project_id'=>'xsd:integer',
 		'summary'=>'xsd:string',
 		'details'=>'xsd:string',
-		'percent_complete'=>'xsd:integer',
-		'hours'=>'xsd:integer',
 		'priority'=>'xsd:integer',
-		'status_id'=>'xsd:integer',
+		'hours'=>'xsd:integer',
 		'start_date'=>'xsd:integer',
 		'end_date'=>'xsd:integer',
+		'category_id'=>'xsd:integer',
+		'percent_complete'=>'xsd:integer',
 		'assigned_to'=>'ArrayOfInteger',
 		'dependent_on'=>'ArrayOfInteger',
+		array('addProjectTaskResponse'=>'xsd:integer'),
+		$uri
+	)
+);
+
+//updateProjectTask
+$server->register(
+	'addProjectTask',
+	array(
+		'session_ser'=>'xsd:string',
+		'group_id'=>'xsd:integer',
+		'group_project_id'=>'xsd:integer',
+		'project_task_id'=>'xsd:integer',
+		'summary'=>'xsd:string',
+		'details'=>'xsd:string',
+		'priority'=>'xsd:integer',
+		'hours'=>'xsd:integer',
+		'start_date'=>'xsd:integer',
+		'end_date'=>'xsd:integer',
+		'status_id'=>'xsd:integer',
+		'category_id'=>'xsd:integer',
+		'percent_complete'=>'xsd:integer',
+		'assigned_to'=>'ArrayOfInteger',
+		'dependent_on'=>'ArrayOfInteger',
+		'new_group_project_id'=>'integer',
 		array('addProjectTaskResponse'=>'xsd:integer'),
 		$uri
 	)
@@ -150,7 +181,8 @@ $server->wsdl->addComplexType(
 	'id' => array('name'=>'id', 'type' => 'xsd:integer'),
 	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:integer'),
 	'category_name' => array('name'=>'category_name', 'type' => 'xsd:string')
-));
+	)
+);
 
 $server->wsdl->addComplexType(
 	'ArrayOfProjectCategory',
@@ -160,13 +192,15 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ProjectCategory[]')),
-	'tns:ProjectCategory');
+	'tns:ProjectCategory'
+);
 
 $server->register(
 	'getProjectTaskCategories',
 	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_project_id'=>'xsd:integer'),
 	array('getProjectTaskCategoriesResponse'=>'tns:ArrayOfProjectCategory'),
-	$uri);
+	$uri
+);
 
 //
 //	ProjectMessage
@@ -183,7 +217,8 @@ $server->wsdl->addComplexType(
 	'body' => array('name'=>'body', 'type' => 'xsd:string'),
 	'postdate' => array('name'=>'postdate', 'type' => 'xsd:integer'),
 	'posted_by' => array('name'=>'posted_by', 'type' => 'xsd:integer')
-));
+	)
+);
 
 $server->wsdl->addComplexType(
 	'ArrayOfProjectMessage',
@@ -193,16 +228,19 @@ $server->wsdl->addComplexType(
 	'SOAP-ENC:Array',
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:ProjectMessage[]')),
-	'tns:ProjectMessage');
+	'tns:ProjectMessage'
+);
 
 $server->register(
 	'getProjectMessages',
 	array('session_ser'=>'xsd:string',
 		'group_id'=>'xsd:integer',
 		'group_project_id'=>'xsd:integer',
-		'project_task_id'=>'xsd:integer'),
+		'project_task_id'=>'xsd:integer'
+	),
 	array('getProjectMessagesResponse'=>'tns:ArrayOfProjectMessage'),
-	$uri);
+	$uri
+);
 
 //add
 $server->register(
@@ -211,9 +249,11 @@ $server->register(
 		'group_id'=>'xsd:integer',
 		'group_project_id'=>'xsd:integer',
 		'project_task_id'=>'xsd:integer',
-		'body'=>'xsd:string'),
+		'body'=>'xsd:string'
+	),
 	array('addProjectMessageResponse'=>'xsd:integer'),
-	$uri);
+	$uri
+);
 
 //
 //	ProjectTaskTechnician
@@ -226,8 +266,8 @@ $server->register(
 		'group_id'=>'xsd:integer',
 		'group_project_id'=>'xsd:integer'),
 	array('getProjectTechniciansResponse'=>'tns:ArrayOfUser'),
-	$uri);
-
+	$uri
+);
 
 
 //
@@ -275,8 +315,8 @@ function projectgroups_to_soap($at_arr) {
 //
 //	addProjectTask
 //
-function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$details,
-	$percent_complete,$hours,$priority,$status_id,$start_date,$end_date,$assigned_to,$dependent_on) {
+function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$details,$priority,
+	$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_arr,$depend_arr) {
 	continue_session($session_ser);
 	$grp =& group_get_object($group_id);
 	if (!$grp || !is_object($grp)) {
@@ -299,11 +339,48 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
 		return new soap_fault ('','addProjectTask','$a->getErrorMessage()',$a->getErrorMessage());
 	}
 
-	if (!$a->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority)) {
+	if (!$a->create($summary,$details,$priority,$hours,$start_date,$end_date,
+            $category_id,$percent_complete,&$assigned_arr,&$depend_arr)) {
 		return new soap_fault ('','addProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
 		soapval('xsd:integer', 'integer', $a->getID());
 	}
+}
+
+//
+//  Update ProjectTask
+//
+function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_task_id,
+	$summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
+    $percent_complete,&$assigned_arr,&$depend_arr,$new_group_project_id) {
+    continue_session($session_ser);
+    $grp =& group_get_object($group_id);
+    if (!$grp || !is_object($grp)) {
+        return new soap_fault ('','updateProjectTask','Could Not Get Group','Could Not Get Group');
+    } elseif ($grp->isError()) {
+        return new soap_fault ('','updateProjectTask',$grp->getErrorMessage(),$grp->getErrorMessage());
+    }
+
+    $at = new ProjectGroup($grp,$group_project_id);
+    if (!$at || !is_object($at)) {
+        return new soap_fault ('','updateProjectTask','Could Not Get ProjectGroup','Could Not Get ProjectGroup');
+    } elseif ($at->isError()) {
+        return new soap_fault ('','updateProjectTask',$at->getErrorMessage(),$at->getErrorMessage());
+    }
+
+    $a = new ProjectTask($at,$project_task_id);
+    if (!$a || !is_object($a)) {
+        return new soap_fault ('','updateProjectTask','Could Not Get ProjectTask','Could Not Get ProjectTask');
+    } elseif ($a->isError()) {
+        return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
+    }
+
+    if (!$a->update($summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,
+		$percent_complete,&$assigned_arr,&$depend_arr,$new_group_project_id)) {
+        return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
+    } else {
+        soapval('xsd:integer', 'integer', $a->getID());
+    }
 }
 
 //
