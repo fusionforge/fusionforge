@@ -1,3 +1,9 @@
+sourceforge (2.5-25+) unstable; urgency=low
+
+  * 
+
+ --
+
 sourceforge (2.5-25) unstable; urgency=low
 
   * [Roland] Rewrote the setup_vars() function in install-ldap.sh for more
