@@ -64,16 +64,20 @@ if ($project->getDescription()) {
 print '<BR>&nbsp;<BR>';
 print trove_getcatlisting($group_id,0,1);
 
-// Get the activity percentile
-$actv = db_query("SELECT percentile FROM project_weekly_metric WHERE group_id='$group_id'");
-$actv_res = db_result($actv,0,"percentile");
-if (!$actv_res) {
-	$actv_res=0;
-}
-
+// registration date
 print($Language->getText('group', 'registered') . date($sys_datefmt, $project->getStartDate()));
-print '<br>'.$Language->getText('group', 'activity'). $actv_res . '%';
-print '<br>'.$Language->getText('group', 'activitystat', $group_id);
+
+// Get the activity percentile
+// CB hide stats if desired
+if ($project->usesStats()) {
+	$actv = db_query("SELECT percentile FROM project_weekly_metric WHERE group_id='$group_id'");
+	$actv_res = db_result($actv,0,"percentile");
+	if (!$actv_res) {
+		$actv_res=0;
+	}
+	print '<br>'.$Language->getText('group', 'activity'). $actv_res . '%';
+	print '<br>'.$Language->getText('group', 'activitystat', $group_id);
+}
 
 $jobs_res = db_query("SELECT name ".
 				"FROM people_job,people_job_category ".
@@ -139,7 +143,9 @@ echo $HTML->box1_bottom();
 
 // ############################# File Releases
 
-echo $HTML->box1_top($Language->getText('frs','latest_file_releases')); 
+// CB hide FRS if desired
+if ($project->usesFRS()) {
+	echo $HTML->box1_top($Language->getText('frs','latest_file_releases')); 
 	$unix_group_name = $project->getUnixName();
 
 	echo '
@@ -211,6 +217,7 @@ echo $HTML->box1_top($Language->getText('frs','latest_file_releases'));
 	</div>
 <?php
 	echo $HTML->box1_bottom();
+}
 
 ?>
 <P>
@@ -230,28 +237,31 @@ print '&nbsp;'.$Language->getText('group','long_homepage').'</A>';
 
 // ################## ArtifactTypes
 
-print '<HR SIZE="1" NoShade><A href="/tracker/?group_id='.$group_id.'">';
-print html_image($imgproj . "taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_tracker')));
-print $Language->getText('group', 'short_tracker').'</A>';
+// CB hide tracker if desired
+if ($project->usesTracker()) {
+	print '<HR SIZE="1" NoShade><A href="/tracker/?group_id='.$group_id.'">';
+	print html_image($imgproj . "taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_tracker')));
+	print $Language->getText('group', 'short_tracker').'</A>';
 
-$result=db_query("SELECT agl.*,aca.count,aca.open_count
-FROM artifact_group_list agl
-LEFT JOIN artifact_counts_agg aca USING (group_artifact_id) 
-WHERE agl.group_id='$group_id'
-AND agl.is_public=1 
-ORDER BY group_artifact_id ASC");
+	$result=db_query("SELECT agl.*,aca.count,aca.open_count
+	FROM artifact_group_list agl
+	LEFT JOIN artifact_counts_agg aca USING (group_artifact_id) 
+	WHERE agl.group_id='$group_id'
+	AND agl.is_public=1 
+	ORDER BY group_artifact_id ASC");
 
-$rows = db_numrows($result);
+	$rows = db_numrows($result);
 
-if (!$result || $rows < 1) {
-	echo '<BR><I>There are no public trackers available</I>';
-} else {
-	for ($j = 0; $j < $rows; $j++) {
-		echo '<P>
+	if (!$result || $rows < 1) {
+		echo '<BR><I>There are no public trackers available</I>';
+	} else {
+		for ($j = 0; $j < $rows; $j++) {
+			echo '<P>
 		&nbsp;-&nbsp;<A HREF="/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 		'&group_id='.$group_id.'&func=browse">'. db_result($result, $j, 'name') .'</A> 
 		( <B>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</B> )<BR>'.
 		db_result($result, $j, 'description');
+		}
 	}
 }
 
@@ -346,11 +356,14 @@ if ($project->usesCVS()) {
 
 // ######################## AnonFTP 
 
-if ($project->isActive()) {
-	print '<HR SIZE="1" NoShade>';
-	print "<A href=\"ftp://" . $project->getUnixName() . "." . $GLOBALS['sys_default_domain'] . "/pub/". $project->getUnixName() ."/\">";
-	print html_image($imgproj . "ftp16b.png",'20','20',array('alt'=>$Language->getText('group','long_ftp')));
-	print $Language->getText('group','long_ftp')."</A>";
+// CB hide FTP if desired
+if ($project->usesFTP()) {
+	if ($project->isActive()) {
+		print '<HR SIZE="1" NoShade>';
+		print "<A href=\"ftp://" . $project->getUnixName() . "." . $GLOBALS['sys_default_domain'] . "/pub/". $project->getUnixName() ."/\">";
+		print html_image($imgproj . "ftp16b.png",'20','20',array('alt'=>$Language->getText('group','long_ftp')));
+		print $Language->getText('group','long_ftp')."</A>";
+	}
 }
 
 $HTML->box1_bottom();

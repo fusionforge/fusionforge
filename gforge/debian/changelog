@@ -37,8 +37,10 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     the STDOUT and STDERR of all commands.
   * [Roland] Added extra columns (use_ftp, use_tracker, use_frs,
     use_stats, enable_pserver, enable_anoncvs) in the groups table.
+  * [Christian] added web management of these new columns, now you can hide
+    almost everything in project page 
 
- -- Roland Mas <lolando@debian.org>  Fri, 25 Oct 2002 19:31:28 +0200
+ -- Christian Bayle <bayle@debian.org>  Sat, 26 Oct 2002 02:32:12 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

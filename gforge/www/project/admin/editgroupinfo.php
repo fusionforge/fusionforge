@@ -41,8 +41,15 @@ if ($submit) {
 		$use_docman,
 		$new_task_address,
 		$send_all_tasks,
-		100 //$logo_image_id
+		100,
+		$enable_pserver,
+		$enable_anoncvs,
+		$use_ftp,
+		$use_tracker,
+		$use_frs,
+		$use_stats
 	);
+	//100 $logo_image_id
 
 	if (!res) {
 		$feedback .= $group->getErrorMessage();
@@ -174,6 +181,24 @@ function c($v) {
 
 <tr>
 <td>
+ <INPUT TYPE="CHECKBOX" NAME="enable_pserver" VALUE="1" <?php echo c($group->enablePserver()); ?> ><BR>
+</td>
+<td>
+<B>Enable pserver</B>
+</td>
+</tr>
+
+<tr>
+<td>
+ <INPUT TYPE="CHECKBOX" NAME="enable_anoncvs" VALUE="1" <?php echo c($group->enableAnonCVS()); ?> ><BR>
+</td>
+<td>
+<B>Enable anonymous CVS</B>
+</td>
+</tr>
+
+<tr>
+<td>
  <INPUT TYPE="CHECKBOX" NAME="use_news" VALUE="1" <?php echo c($group->usesNews()); ?> ><BR>
 </td>
 <td>
@@ -187,6 +212,42 @@ function c($v) {
 </td>
 <td>
 <B>Use Doc Mgr</B>
+</td>
+</tr>
+
+<tr>
+<td>
+ <INPUT TYPE="CHECKBOX" NAME="use_ftp" VALUE="1" <?php echo c($group->usesFTP()); ?> >
+</td>
+<td>
+<B>Use FTP</B>
+</td>
+</tr>
+
+<tr>
+<td>
+ <INPUT TYPE="CHECKBOX" NAME="use_tracker" VALUE="1" <?php echo c($group->usesTracker()); ?> >
+</td>
+<td>
+<B>Use Tracker</B>
+</td>
+</tr>
+
+<tr>
+<td>
+ <INPUT TYPE="CHECKBOX" NAME="use_frs" VALUE="1" <?php echo c($group->usesFRS()); ?> >
+</td>
+<td>
+<B>Use File Release System</B>
+</td>
+</tr>
+
+<tr>
+<td>
+ <INPUT TYPE="CHECKBOX" NAME="use_stats" VALUE="1" <?php echo c($group->usesStats()); ?> >
+</td>
+<td>
+<B>Use Statistics</B>
 </td>
 </tr>
 
