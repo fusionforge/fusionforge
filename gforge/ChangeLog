@@ -1,3 +1,8 @@
+2003-07-24  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/languages/Dutch.tab: Dutch language update from
+	Patrick Lemmens.
+
 2003-07-21 Tom Copeland  <tom@infoether.com>
 
 	* www/account/index.php:
