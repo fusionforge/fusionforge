@@ -286,17 +286,17 @@ my	monitoredforum	Foros Monitorizados
 my	monitoredfile	Ficheros Monitorizados
 my	tasks	Mis Tareas
 my	survey	Encuestas R&aacute;pidas
-my	survey_taken	Usted has respondido a la encuesta de programadores.
+my	survey_taken	Usted ha respondido a la encuesta de programadores.
 my	bookmarks	Mis Marcadores
 my	projects	Mis Proyectos
 my	pending_projects	Proyectos Pendientes.
 my	pending_projects_1	Hay un proyecto pendiente.
 my	pending_projects_2	Hay $1 proyectos pendientes.
-my	pending_projects_3	Haz click aqu&iacute;
+my	pending_projects_3	Haga click aqu&iacute;
 my	pending_news_bytes	Noticias Pendientes.
 my	pending_news_bytes_1	Hay una noticia pendiente.
 my	pending_news_bytes_2	Hay $1 noticias pendientes.
-my	pending_news_bytes_3	HAz click aqu&iacute;
+my	pending_news_bytes_3	Haga click aqu&iacute;
 my_bookmark_add	section	Mi P&aacute;gina Personal
 my_bookmark_add	title	A&ntilde;adir Marcador
 my_bookmark_delete	section	Mi P&aacute;gina Personal
