@@ -1,4 +1,4 @@
-gforge (3.0~pre8-0+) experimental; urgency=low
+gforge (3pre8-0+) experimental; urgency=low
 
   * [Roland] Reencoded this changelog into UTF-8, as per upcoming policy
     changes (see bug #174982).
@@ -6,7 +6,7 @@ gforge (3.0~pre8-0+) experimental; urgency=low
     current code.
   * [Roland] Stricter dependency on debconf, to fix a Lintian warning.
 
- -- Roland Mas <lolando@debian.org>  Sun,  5 Jan 2003 15:12:53 +0100
+ -- Roland Mas <lolando@debian.org>  Sun,  5 Jan 2003 15:25:58 +0100
 
 gforge (3.0-0+8) experimental; urgency=low
 
