@@ -25,6 +25,8 @@ account_editsshkeys	title	Edit CVS/SSH Shared Keys
 account_first	about_blurb	You are now a registered user on $1, the online development environment for Open Source projects.<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in $1, sign on as a project developer, or even start your own project.<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of $1.<P>Enjoy the site, and please provide us with feedback on ways that we can improve $1.<P>--the $1 staff
 account_first	title	Welcome!
 account_login	deleted_account	<p>Your $1 account has been removed by $1 staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a<a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
+account_login	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
+account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>
 account_login	pending_account	<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
 account_login	title	Site Login
 account_login	cookiewarn	Cookies must be enabled past this point.
@@ -119,14 +121,14 @@ frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
 general	return	[Return to Sourceforge]
 general	sitename	Sourceforge
-general	footer	This is Debian Sourceforge.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
+general	footer	This is Debian SourceForge.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
 group	long_cvs	CVS Repository
 group	long_docman	DocManager: Project Documentation
 group	long_forum	Public Forums
-group	long_foundries	SourceForge Development Foundries
+group	long_foundries	Development Foundries
 group	long_ftp	Anonymous FTP Space
 group	long_homepage	Project Home Page
 group	long_mail	Mailing Lists

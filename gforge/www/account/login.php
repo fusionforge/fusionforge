@@ -91,13 +91,11 @@ if ($login && !$success) {
 }
 
 if (browser_is_windows() && browser_is_ie() && browser_get_version() < '5.6') {
-	echo '<H2><FONT COLOR="RED">Internet Explorer users need to
-	upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>';
+	echo $Language->getText('account_login', 'iewarn');
 }
 
 if (browser_is_ie() && browser_is_mac()) {
-	echo '<H2><FONT COLOR="RED">Internet Explorer on the Macintosh 
-	is not supported currently. Use Netscape 4.7 or higher</FONT></H2>';
+	echo $Language->getText('account_login', 'macwarn');
 }
 
 

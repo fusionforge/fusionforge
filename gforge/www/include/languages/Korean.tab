@@ -16,20 +16,29 @@
 # 2001-01-15	Kim SeungBaeck	<kongsi@users.sourceforge.net>
 #   * Initial translation
 #
-# 2002-03-27	Kwon SoonSon	<kss@kldp.org>
+# 2002-03-27	Soon-Son Kwon	<kss@kldp.org>
 #   * Complete Rework based on the newest Base.tab
 #
-# 2002-04-26	Kwon SoonSon	<kss@kldp.org>
-#   * Added translation for .../account/login.php, various basic modules
+# 2002-04-26	Soon-Son Kwon	<kss@kldp.org>
+#   * Added translation for .../account/login.php and various basic modules
 #
-# 2002-04-30	Kwon SoonSon	<kss@kldp.org>
+# 2002-04-30	Soon-Son Kwon	<kss@kldp.org>
 #   * Changed fontname from gulim to 굴림체 to prevent ugly screen on mozilla
 #   * Modified to use $GLOBALS[sys_name] instead of hardcoded "SourceForge"
 #     as much as possible 
 #   * Added/Modified/Updated translation for many pages including messge
 #     with parameters
 #
-about_foundries	about_blurb	SourceForge Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >SourceForge에게 연락해</a> 주십시오.
+# 2002-05-16	Soon-Son Kwon	<kss@kldp.org>
+#   * Removed most (not all yet) hardcoded "SourceForge"
+#     and changed them to $GLOBALS[sys_name]
+#   * More i18n on people, account, news, top projects
+#   * i18n'ing user registration page done
+#
+# 2002-05-19	Soon-Son Kwon	<kss@kldp.org>
+#   * Added a few more trivial message translation
+#
+about_foundries	about_blurb	Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >저희에게 연락해</a> 주십시오.
 about_foundries	foundries_list	시스템의 모든 Foundry에 관한 정보입니다. 어떤 것은 다른 것에 비해 좀더 완성도가 높습니다. 만약 여러분께서 공헌하고자 하시는 Foundry가 있다면 해당 Foundry의 관리자에게 연락하시기 바랍니다.
 account	title	사용자 등록 정보
 account_change_email	message	$3의 이메일 주소를 변경하는 과정입니다.\n다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
@@ -44,6 +53,8 @@ account_editsshkeys	title	CVS/SSH 키 편집
 account_first	about_blurb	여러분은 이제 온라인 오픈소스 개발 환경인 $1의 등록 사용자입니다.<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 포럼에 글을 올릴 수도 있고, $1에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. <P>$1(이)가 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.<P>부디 좋은 시간이 되시기를 바라며 저희가 $1(을)를 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>--$1
 account_first	title	환영합니다!
 account_login	deleted_account	<p>여러분의 $1 계정이 관리자에 의해 삭제되었습니다. 이는 보통 두가지로 나눌 수 있는데 1) 여러분 스스로 계정을 삭제해 달라고 요청하셨거나 2) 여러분의 계정이 서비스 계약에 위배되는 행위에 이용되어 시스템 관리를 위해 관리자에 의해 계정이 삭제되는 것입니다. 만약 의문 사항이나 의심되는 점이 있다면 <a href="/support/?group_id=1">지원 요청</a>을 하시면 됩니다.</p><p>감사합니다, <br><br>$1</p>
+account_login	iewarn	<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>
+account_login	macwarn	<H2><FONT COLOR="RED">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</FONT></H2>
 account_login	pending_account	<P>여러분의 계정은 현재 이메일을 통한 확인 작업을 기다리고 있는 중입니다.		이메일에 포함되어 있는 링크를 방문하시면 계정이 곧바로 활성화됩니다.		<P>만약 이 이메일을 다시 받고 싶으시다면 아래에 있는 링크를 클릭하세요. 여러분이 등록 과정 중에 입력하신 이메일로 확인 메일이 다시한번 발송됩니다.		<P><A href="pending-resend.php?form_user=$1">[확인 메일 다시 보내기]</A>		<br><hr>		<p>
 account_login	title	사이트 로그인
 account_login	cookiewarn	여기서부터는 쿠키를 사용합니다.
@@ -138,13 +149,14 @@ frs	file_version	버전
 frs	latest_file_releases	최근 파일 릴리즈
 general	return	[SourceForge로 되돌아가기]
 general	sitename	SourceForge
+general	footer	이것은 Debian에서 작동하는 SourceForge입니다. 저작권 등의 자세한 사항은 <a href="/about.php">이곳</a>을 참고하십시오.
 group	developer_info	개발자 정보
 group	developers	개발자
 group	long_bugs	버그 트래킹
 group	long_cvs	CVS 저장소
 group	long_docman	문서 관리자: 프로젝트 문서화
 group	long_forum	공개 포럼
-group	long_foundries	SourceForge Foundry
+group	long_foundries	Foundry
 group	long_ftp	익명 FTP 공간
 group	long_homepage	프로젝트 홈페이지
 group	long_mail	메일링 리스트
