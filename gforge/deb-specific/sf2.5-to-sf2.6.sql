@@ -116,7 +116,7 @@ ALTER TABLE user_preferences ADD COLUMN preference_value TEXT;
 UPDATE user_preferences SET preference_value=dead1;
 UPDATE user_preferences SET dead1='';
 ALTER TABLE user_group ADD COLUMN artifact_flags INT ;
-ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT 0;
+ALTER TABLE user_group ALTER COLUMN artifact_flags SET DEFAULT '0';
 UPDATE user_group SET artifact_flags=0;
 CREATE TABLE artifact_group_list (
   group_artifact_id serial primary key,
@@ -594,7 +594,7 @@ CREATE TABLE "users" (
 	"unix_pw" character varying(40) DEFAULT '' NOT NULL,
 	"unix_status" character(1) DEFAULT 'N' NOT NULL,
 	"unix_uid" integer DEFAULT '0' NOT NULL,
-	"unix_box" character varying(10) DEFAULT 'shell1' NOT NULL,
+	"unix_box" character varying(10) DEFAULT 'shell' NOT NULL,
 	"add_date" integer DEFAULT '0' NOT NULL,
 	"confirm_hash" character varying(32),
 	"mail_siteupdates" integer DEFAULT '0' NOT NULL,
@@ -889,7 +889,7 @@ CREATE TABLE stats_project_metric (
 month int not null default 0,
 day int not null default 0,
 ranking int not null default 0,
-precentile float not null default 0,
+percentile float not null default 0,
 group_id int not null default 0
 );
 -- copy stats_project_metric from '/tmp/stats_project_metric.dump';
@@ -1009,10 +1009,6 @@ CREATE UNIQUE INDEX statssite_month_day on stats_site(month,day);
 -- GRANT ALL ON stats_project TO stats;
 -- GRANT ALL ON stats_subd_pages TO stats;
 
--- 20010412
-ALTER TABLE groups ADD COLUMN logo_image_id int ;
-ALTER TABLE groups ALTER COLUMN logo_image_id SET DEFAULT 100;
-
 -- 20010507
 ALTER TABLE users ADD COLUMN block_ratings int ;
 ALTER TABLE users ALTER COLUMN block_ratings SET DEFAULT 0;
@@ -1088,7 +1084,7 @@ DROP INDEX user_pref_user_id ;
 CREATE TABLE "user_preferences" (
 	"user_id" integer DEFAULT '0' NOT NULL,
 	"preference_name" character varying(20),
-	"preference_value" character varying(20),
+	"preference_value" text,
 	"set_date" integer DEFAULT '0' NOT NULL
 );
 
@@ -1120,3 +1116,234 @@ DROP INDEX httpdl_day ;
 DROP INDEX idx_users_username ;
 DROP INDEX stats_agr_tmp_fid ;
 DROP INDEX stats_agr_tmp_gid ;
+DROP INDEX idx_project_metric_weekly_group ;
+
+-- Add a few missing tables
+CREATE TABLE "cache_store" (
+	"name" character varying(255) NOT NULL,
+	"data" text,
+	"indate" integer DEFAULT 0 NOT NULL,
+	Constraint "cache_store_pkey" Primary Key ("name")
+);
+
+CREATE TABLE "foundry_project_downloads_agg" (
+	"foundry_id" integer,
+	"downloads" integer,
+	"group_id" integer,
+	"group_name" character varying(40),
+	"unix_group_name" character varying(30)
+);
+
+CREATE TABLE "foundry_project_rankings_agg" (
+	"foundry_id" integer,
+	"group_id" integer,
+	"group_name" character varying(40),
+	"unix_group_name" character varying(30),
+	"ranking" integer,
+	"percentile" double precision
+);
+
+CREATE TABLE "stats_project_all" (
+	"group_id" integer,
+	"developers" integer,
+	"group_ranking" integer,
+	"group_metric" double precision,
+	"logo_showings" integer,
+	"downloads" integer,
+	"site_views" integer,
+	"subdomain_views" integer,
+	"page_views" integer,
+	"msg_posted" integer,
+	"msg_uniq_auth" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE TABLE "stats_project_developers_last30" (
+	"month" integer,
+	"day" integer,
+	"group_id" integer,
+	"developers" integer
+);
+
+CREATE TABLE "stats_project_last_30" (
+	"month" integer,
+	"day" integer,
+	"group_id" integer,
+	"developers" integer,
+	"group_ranking" integer,
+	"group_metric" double precision,
+	"logo_showings" integer,
+	"downloads" integer,
+	"site_views" integer,
+	"subdomain_views" integer,
+	"page_views" integer,
+	"filereleases" integer,
+	"msg_posted" integer,
+	"msg_uniq_auth" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE TABLE "stats_project_months" (
+	"month" integer,
+	"group_id" integer,
+	"developers" integer,
+	"group_ranking" integer,
+	"group_metric" double precision,
+	"logo_showings" integer,
+	"downloads" integer,
+	"site_views" integer,
+	"subdomain_views" integer,
+	"page_views" integer,
+	"file_releases" integer,
+	"msg_posted" integer,
+	"msg_uniq_auth" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE TABLE "stats_site_all" (
+	"site_page_views" integer,
+	"downloads" integer,
+	"subdomain_views" integer,
+	"msg_posted" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE TABLE "stats_site_last_30" (
+	"month" integer,
+	"day" integer,
+	"site_page_views" integer,
+	"downloads" integer,
+	"subdomain_views" integer,
+	"msg_posted" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE TABLE "stats_site_months" (
+	"month" integer,
+	"site_page_views" integer,
+	"downloads" integer,
+	"subdomain_views" integer,
+	"msg_posted" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE TABLE "stats_site_pages_by_day" (
+	"month" integer,
+	"day" integer,
+	"site_page_views" integer
+);
+
+CREATE TABLE "stats_site_pages_by_month" (
+	"month" integer,
+	"site_page_views" integer
+);
+
+-- Add/alter a few columns
+ALTER TABLE frs_dlstats_group_agg ADD COLUMN month integer;
+ALTER TABLE frs_dlstats_group_agg ALTER COLUMN month SET DEFAULT 0;
+ALTER TABLE project_weekly_metric ALTER COLUMN group_id SET DEFAULT 0;
+
+-- Drop an unused table
+DROP TABLE intel_agreement ;
+
+-- (Re-)create indexes
+CREATE INDEX frs_file_release_id ON frs_file USING btree (release_id);
+CREATE INDEX frs_release_package ON frs_release USING btree (package_id);
+CREATE INDEX frsdlfiletotal_fileid ON frs_dlstats_filetotal_agg USING btree (file_id);
+CREATE INDEX frsdlgroup_groupid ON frs_dlstats_group_agg USING btree (group_id);
+CREATE INDEX frsdlgroup_month_day_groupid ON frs_dlstats_group_agg USING btree ("month", "day", group_id);
+CREATE INDEX frsdlgrouptotal_groupid ON frs_dlstats_grouptotal_agg USING btree (group_id);
+CREATE INDEX project_metric_group ON project_metric USING btree (group_id);
+CREATE INDEX project_metric_weekly_group ON project_weekly_metric USING btree (group_id);
+CREATE INDEX projectweeklymetric_ranking ON project_weekly_metric USING btree (ranking);
+CREATE INDEX statsproject30_groupid ON stats_project_last_30 USING btree (group_id);
+CREATE INDEX statsprojectall_groupid ON stats_project_all USING btree (group_id);
+CREATE INDEX statsprojectmonths_groupid ON stats_project_months USING btree (group_id);
+CREATE INDEX statsprojectmonths_groupid_mont ON stats_project_months USING btree (group_id, "month");
+CREATE INDEX statssitelast30_month_day ON stats_site_last_30 USING btree ("month", "day");
+CREATE INDEX statssitemonths_month ON stats_site_months USING btree ("month");
+CREATE INDEX statssitepagesbyday_month_day ON stats_site_pages_by_day USING btree ("month", "day");
+CREATE INDEX troveagg_trovecatid_ranking ON trove_agg USING btree (trove_cat_id, ranking);
+CREATE INDEX user_metric_history_date_userid ON user_metric_history USING btree ("month", "day", user_id);
+
+-- Sequences
+CREATE SEQUENCE "trove_treesum_trove_treesum_seq" start 1 increment 1 maxvalue 2147483647 minvalue
+1 cache 1;

@@ -43,8 +43,8 @@ CREATE TABLE "db_images" (
 	"filetype" text DEFAULT '' NOT NULL,
 	"width" integer DEFAULT '0' NOT NULL,
 	"height" integer DEFAULT '0' NOT NULL,
-	"upload_date" integer,
-	"version" integer,
+	"upload_date" integer DEFAULT '0',
+	"version" integer DEFAULT '0',
 	Constraint "db_images_pkey" Primary Key ("id")
 );
 
@@ -1566,7 +1566,7 @@ CREATE TABLE "user_group" (
 	"cvs_flags" integer DEFAULT '1' NOT NULL,
 	"member_role" integer DEFAULT '100' NOT NULL,
 	"release_flags" integer DEFAULT '0' NOT NULL,
-	"artifact_flags" integer,
+	"artifact_flags" integer DEFAULT '0',
 	Constraint "user_group_pkey" Primary Key ("user_group_id")
 );
 
@@ -1631,9 +1631,8 @@ CREATE TABLE "user_metric0" (
 CREATE TABLE "user_preferences" (
 	"user_id" integer DEFAULT '0' NOT NULL,
 	"preference_name" character varying(20),
-	"dead1" character varying(20),
-	"set_date" integer DEFAULT '0' NOT NULL,
-	"preference_value" text
+	"preference_value" text,
+	"set_date" integer DEFAULT '0' NOT NULL
 );
 
 --
@@ -2560,8 +2559,9 @@ CREATE TABLE "foundry_project_downloads_agg" (
 --
 
 CREATE TABLE "frs_dlstats_filetotal_agg" (
-	"file_id" integer,
-	"downloads" integer
+	"file_id" integer DEFAULT '0' NOT NULL,
+	"downloads" integer DEFAULT '0' NOT NULL,
+	Constraint "frs_dlstats_filetotal_agg_pkey" Primary Key ("file_id")
 );
 
 --
@@ -2571,8 +2571,8 @@ CREATE TABLE "frs_dlstats_filetotal_agg" (
 --
 
 CREATE TABLE "frs_dlstats_grouptotal_agg" (
-	"group_id" integer,
-	"downloads" integer
+	"group_id" integer DEFAULT 0 NOT NULL,
+	"downloads" integer DEFAULT 0 NOT NULL
 );
 
 --
@@ -2582,10 +2582,10 @@ CREATE TABLE "frs_dlstats_grouptotal_agg" (
 --
 
 CREATE TABLE "frs_dlstats_group_agg" (
-	"group_id" integer,
-	"month" integer,
-	"day" integer,
-	"downloads" integer
+	"group_id" integer DEFAULT '0' NOT NULL,
+	"month" integer DEFAULT '0' NOT NULL,
+	"day" integer DEFAULT '0' NOT NULL,
+	"downloads" integer DEFAULT '0' NOT NULL
 );
 
 --
