@@ -40,7 +40,7 @@ clean:
 	# rm -f utils/cvssh
 	# rm -f utils/fileforge
 	# rm -f utils/tmpfilemove
-	rm -f cvssh.1
+	rm -f cvssh.1 sourceforge-config.1
 
 	# Add here commands to clean up after the build process.
 	#$(MAKE) clean
