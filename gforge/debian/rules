@@ -56,6 +56,7 @@ install: build
 	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 644 deb-specific/httpd.conf.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/httpd.common.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 644 deb-specific/httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/

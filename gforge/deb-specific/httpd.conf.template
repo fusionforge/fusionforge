@@ -6,18 +6,7 @@
   php_admin_value include_path "/usr/share/gforge:/usr/share/gforge/www/include:."
 </Directory>
 
-<Files .htaccess>
-  order allow,deny
-  deny from all
-</Files>
-
-<IfModule mod_ssl.c>
-  Listen 80
-  Listen 443
-</IfModule>
-
-NameVirtualHost {ip_address}
-NameVirtualHost {ip_address}:443
+Include /etc/gforge/httpd.common
 
 <VirtualHost {ip_address}>
   ServerName {domain_name}

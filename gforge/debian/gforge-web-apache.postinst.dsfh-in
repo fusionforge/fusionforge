@@ -47,6 +47,11 @@ case "$1" in
 
         # Setup our Apache
 	/usr/lib/gforge/bin/install-apache.sh configure
+
+	# If you want to work with sourceforge-web-apache at the same time
+	if grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
+		echo "" >/etc/gforge/httpd.common
+	fi
 	
     ;;
 

@@ -54,7 +54,7 @@ function session_get_session_cookie_hash($session_cookie) {
  */
 function session_check_session_cookie($session_cookie) {
 
-	list ($session_serial, $hash) = explode('-', $session_cookie);
+	list ($session_serial, $hash) = explode('-*-', $session_cookie);
 	$session_serial = base64_decode($session_serial);
 	$new_hash = md5($session_serial.$GLOBALS['sys_session_key']);
 
