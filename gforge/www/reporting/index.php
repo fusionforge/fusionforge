@@ -64,8 +64,7 @@ echo report_header('Main Page');
 <p>
 <a href="rebuild.php"><?php echo $Language->getText('reporting','initialize'); ?></a><br />
 <a href="timecategory.php"><?php echo $Language->getText('reporting','manage'); ?></a><br />
-<a href="http://gforge.org/tracker/?atid=116&group_id=7&func=browse"><?php echo $Language->getText('reporting','file_support'); ?></a><br />
-<a href="http://gforge.org/tracker/?atid=118&group_id=7&func=browse"><?php echo $Language->getText('reporting','file_feature'); ?></a><br />
+
 <p>
 <?php
 
