@@ -35,6 +35,10 @@ case "$1" in
 
 	cp -a /etc/postfix/main.cf /etc/postfix/main.cf.gforge-new
 
+	perl -pi -e's/SOURCEFORGE_DOMAINS/GFORGE_DOMAINS/' \
+	    -e's/BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT/BEGIN GFORGE BLOCK -- DO NOT EDIT/' \
+	    -e's/END SOURCEFORGE BLOCK/END GFORGE BLOCK/' /etc/postfix/main.cf.gforge-new
+
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, get the list of local domains right - add gforge domains to 'mydestination'
@@ -149,38 +153,41 @@ if ($seen_virtual_maps == 0) {
 
 	cp -a /etc/postfix/main.cf /etc/postfix/main.cf.gforge-new
 
+	perl -pi -e's/SOURCEFORGE_DOMAINS/GFORGE_DOMAINS/ ; s/BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT/BEGIN GFORGE BLOCK -- DO NOT EDIT/ ; s/END SOURCEFORGE BLOCK/END GFORGE BLOCK/' /etc/postfix/main.cf.gforge-new
+
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, replace the list of local domains
 	perl -e '
-while (($l = <>) !~ /^\s*local_domains/) {
-  print $l unless ($l =~ /\s*SOURCEFORGE_DOMAINS=/) ;
+require ("/etc/gforge/local.pl") ;
+while (($l = <>) !~ /^\s*mydestination/) {
+  print $l;
 };
 chomp $l ;
-$l =~ /^(\s*local_domains\s*=\s*)(\S+)/ ;
-$l = $1 . join (":", grep (!/SOURCEFORGE_DOMAINS/, (split ":", $2))) ;
+$l =~ /^(\s*mydestination\s*=\s*)(\S.*)/ ;
+$head = $1 ;
+$dests = $2 ;
+$dests =~ s/, users.$domain_name// ;
+$dests =~ s/, $sys_lists_host// ;
+$l = $head . $dests ;
 print "$l\n" ;
 while ($l = <>) { print $l; };
 ' < /etc/postfix/main.cf.gforge-new > $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, kill our forwarding rules
 	perl -e '
-while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };
-print $l ;
-while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };
-print $l ;
 $in_sf_block = 0 ;
-while (($l = <>) !~ /^\s*end\s*$/) {
-  if ($l =~ /^# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #/) {
+while ($l = <>) {
+  if ($l =~ /^### BEGIN GFORGE BLOCK -- DO NOT EDIT ###/) {
     $in_sf_block = 1 ;
   }
   print $l unless $in_sf_block ;
-  $in_sf_block = 0 if ($l =~ /^# END SOURCEFORGE BLOCK #/) ;
+  $in_sf_block = 0 if ($l =~ /^### END GFORGE BLOCK ###/) ;
 };
 print $l ;
 while ($l = <>) { print $l; };
 ' < $tmp1 > $tmp2
 	rm $tmp1
-	cat $tmp2 > /etc/psotfix/main.cf.gforge-new
+	cat $tmp2 > /etc/postfix/main.cf.gforge-new
 	rm $tmp2
 	;;
 
