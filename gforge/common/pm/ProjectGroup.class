@@ -250,7 +250,7 @@ class ProjectGroup extends Error {
 	 */
 	function getTechnicians () {
 		if (!$this->technicians) {
-			$sql="SELECT users.user_id,users.user_name 
+			$sql="SELECT users.user_id,users.realname 
 				FROM users,user_group 
 				WHERE users.user_id=user_group.user_id 
 				AND user_group.group_id='". $this->Group->getID() ."' 

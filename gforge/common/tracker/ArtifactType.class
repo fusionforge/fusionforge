@@ -427,7 +427,7 @@ class ArtifactType extends Error {
 	 */
 	function getTechnicians() {
 		if (!isset($this->technicians_res)) {
-			$sql="SELECT user_id,user_name 
+			$sql="SELECT user_id,realname 
 				FROM artifactperm_user_vw
 				WHERE group_artifact_id='". $this->getID() ."' 
 				AND perm_level in (1,2)";
