@@ -65,8 +65,8 @@ if ($group_id && $group_project_id) {
 		case 'postaddtask' : {
 			if (user_isloggedin() && $perm->isPMAdmin()) {
 				if (pm_data_create_task ($group_project_id,$start_month,$start_day,$start_year,
-					$start_hour,$end_month,$end_day,$end_year,
-					$end_hour,$summary,$details,$percent_complete,
+					$start_hour,$start_minute,$end_month,$end_day,$end_year,
+					$end_hour,$end_minute,$summary,$details,$percent_complete,
 					$priority,$hours,$assigned_to,$dependent_on)) {
 					$feedback='Task Created Successfully';
 					include '../pm/browse_task.php';
@@ -82,9 +82,9 @@ if ($group_id && $group_project_id) {
 		case 'postmodtask' : {
 			if (user_isloggedin() && $perm->isPMAdmin()) {
 				if (pm_data_update_task ($group_project_id,$project_task_id,$start_month,$start_day,
-					$start_year,$start_hour,$end_month,$end_day,$end_year,$end_hour,
-					$summary,$details,$percent_complete,$priority,$hours,$status_id,$assigned_to,
-					$dependent_on,$new_group_project_id,$group_id)) {
+					$start_year,$start_hour,$start_minute,$end_month,$end_day,$end_year,$end_hour,
+					$end_minute,$summary,$details,$percent_complete,$priority,$hours,$status_id,
+					$assigned_to,$dependent_on,$new_group_project_id,$group_id)) {
 					$feedback='Task Updated Successfully';
 					include '../pm/browse_task.php';
 				} else {
