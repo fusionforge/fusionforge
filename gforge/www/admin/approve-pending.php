@@ -29,18 +29,19 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 function activate_group($group_id) {
 	global $feedback;
+	global $Language;
 
 	$group =& group_get_object($group_id);
 
 	if (!$group || !is_object($group)) {
-		$feedback .= 'Error creating group object<br /> ';
+		$feedback .= $Language->getText('admin_approve_pending','error_creating_group').'<br /> ';
 		return false;
 	} else if ($group->isError()) {
 		$feedback .= $group->getErrorMessage();
 		return false;
 	}
 
-	$feedback .= '<br />Approving Group: '.$group->getUnixName().' ';
+	$feedback .= '<br />'. $Language->getText('admin_approve_pending','approving_group'). $group->getUnixName().' ';
 
 	if (!$group->approve(session_get_user())) {
 		$feedback .= $group->getErrorMessage();
@@ -62,7 +63,7 @@ if ($action=='activate') {
 
 	if (!$group->setStatus(session_get_user(), 'D')) {
 		exit_error(
-			'Error during group rejection',
+			$Language->getText('admin_apprive_pending','error_group_rejection'),
 			$this->getErrorMessage()
 		);
 	}
@@ -83,7 +84,7 @@ if ($action=='activate') {
 }
 
 
-site_admin_header(array('title'=>'Approving Pending Projects'));
+site_admin_header(array('title'=>$Language->getText('admin_approve_pending','approving_pending_projects')));
 
 // get current information
 $res_grp = db_query("SELECT * FROM groups WHERE status='P'", $LIMIT);
@@ -91,16 +92,16 @@ $res_grp = db_query("SELECT * FROM groups WHERE status='P'", $LIMIT);
 $rows = db_numrows($res_grp);
 
 if ($rows < 1) {
-	print "<h1>None Found</h1>";
-	print "<p>No Pending Projects to Approve</p>";
+	print "<h1>".$Language->getText('admin_approve_pending','none_found'). "</h1>";
+	print "<p>".$Language->getText('admin_approve_pending','no_pending_projects_to_approve')."</p>";
 	site_admin_footer(array());
 	exit;
 }
 
 if ($rows > $LIMIT) {
-	print "<p>Pending projects: $LIMIT+ ($LIMIT shown)</p>";
+	print "<p>".$Language->getText('admin_approve_pending','pending_projects'). "$LIMIT+ ($LIMIT shown)</p>";
 } else {
-	print "<p>Pending projects: $rows</p>";
+	print "<p>".$Language->getText('admin_approve_pending','pending_projects'). "$rows</p>";
 }
 
 while ($row_grp = db_fetch_array($res_grp)) {
@@ -109,20 +110,20 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<h2><?php echo $row_grp['group_name']; ?></h2>
 
 	<p />
-	<h3><a href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>">[Edit Project Details]</a></h3>
+	<h3><a href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','edit_project_details'); ?></a></h3>
 
 	<p />
-	<h3><a href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>">[Project Admin]</a></h3>
+	<h3><a href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','project_admin'); ?></a></h3>
 
 	<p />
-	<h3><a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>">[View/Edit Project Members]</a></h3>
+	<h3><a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>"><?php echo $Language->getText('admin_approve_pending','view_edit_project_members'); ?></a></h3>
 
 	<p />
 	<table><tr><td>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="<?php print $row_grp['group_id']; ?>" />
-	<input type="submit" name="submit" value="Approve" />
+	<input type="submit" name="submit" value="<?php echo $Language->getText('admin_approve_pending','approve'); ?>" />
 	</form>
 	</td></tr>
 	<tr><td>
@@ -130,23 +131,23 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	<input type="hidden" name="action" value="delete" />
 	<input type="hidden" name="group_id" value="<?php print $row_grp['group_id']; ?>" />
 	Canned responses<br />
-	<?php print get_canned_responses(); ?> <a href="responses_admin.php">(manage responses)</a>
+	<?php print get_canned_responses(); ?> <a href="responses_admin.php"><?php echo $Language->getText('admin_approve_pending','manage_responses'); ?></a>
 	<br /><br />
-	Custom response title and text<br />
+	<?php echo $Language->getText('admin_approve_pending','custom_response_title'); ?><br />
 	<input type="text" name="response_title" size="30" maxlength="25" /><br />
 	<textarea name="response_text" rows="10" cols="50"></textarea>
-	<input type="checkbox" name="add_to_can" value="yes" />Add this custom response to canned responses
+	<input type="checkbox" name="add_to_can" value="<?php echo $Language->getText('admin','yes'); ?>" /><?php echo $Language->getText('admin_approve_pending','add_this_custom_response') ;?>
 	<br />
-	<input type="submit" name="submit" value="Reject" />
+	<input type="submit" name="submit" value="<?php echo $Language->getText('admin','reject'); ?>" />
 	</form>
 	</td></tr>
 	</table>
 
 	<p>
-	<strong>License: <?php echo $row_grp['license']; ?></strong>
+	<strong><?php echo $Language->getText('admin','license'); ?><?php echo $row_grp['license']; ?></strong>
 
-	<br /><strong>Home Box: <?php print $row_grp['unix_box']; ?></strong>
-	<br /><strong>HTTP Domain: <?php print $row_grp['http_domain']; ?></strong>
+	<br /><strong><?php echo $Language->getText('admin_approve_pending','home_box'); ?><?php print $row_grp['unix_box']; ?></strong>
+	<br /><strong><?php echo $Language->getText('admin','http_domain'); ?><?php print $row_grp['http_domain']; ?></strong>
 
 	<br />
 	&nbsp;</p>
@@ -154,17 +155,17 @@ while ($row_grp = db_fetch_array($res_grp)) {
 
 	// ########################## OTHER INFO
 
-	print "<p><strong>Other Information</strong></p>";
-	print "<p>Unix Group Name: $row_grp[unix_group_name]</p>";
+	print "<p><strong>" .$Language->getText('admin_approve_pending','other_information')."</strong></p>";
+	print "<p>" .$Language->getText('admin_approve_pending','unix_group_name'). "$row_grp[unix_group_name]</p>";
 
-	print "<p>Submitted Description:</p><blockquote>$row_grp[register_purpose]</blockquote>";
+	print "<p>" .$Language->getText('admin_approve_pending','submitted_description'). "</p><blockquote>$row_grp[register_purpose]</blockquote>";
 
 	if ($row_grp[license]=="other") {
-		print "<p>License Other:</p><blockquote>$row_grp[license_other]</blockquote>";
+		print "<p>" .$Language->getText('admin','license_other'). "</p><blockquote>$row_grp[license_other]</blockquote>";
 	}
 
 	if ($row_grp[status_comment]) {
-		print "<p>Pending reason:</p><span style=\"color:red\">$row_grp[status_comment]</span>";
+		print "<p>" .$Language->getText('admin_approve_pending','pending_reason'). "</p><span style=\"color:red\">$row_grp[status_comment]</span>";
 	}
 
 	echo "<p>&nbsp;</p><hr /><p>&nbsp;</p>";
@@ -178,9 +179,9 @@ $group_list=implode($arr,',');
 echo '
 	<div align="center">
 	<form action="'.$PHP_SELF.'" method="post">
-	<input type="hidden" name="action" value="activate" />
+	<input type="hidden" name="action" value="'.$Language->getText('admin_approve_pending','activate').'" />
 	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />
-	<input type="submit" name="submit" value="Approve All On This Page" />
+	<input type="submit" name="submit" value="'.$Language->getText('admin_approve_pending','approve_all_on_this_page').'" />
 	</form></div>
 	';
 

@@ -1,5 +1,10 @@
 2003-02-09 Reinhard Spisser <reinhard@spisser.it>
 
+	* www/admin/*,
+	www/include/languages/Base.tab,
+	www/include/languages/Italian.tab:
+	Submitting Reiner Jung's localization of admin
+
 	* www/include/User.class:
 	Fixing bug #212: get error on update adding jabber address
 

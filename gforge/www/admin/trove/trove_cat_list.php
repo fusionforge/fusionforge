@@ -22,6 +22,7 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 // print current node, then all subnodes
 function printnode ($nodeid,$text) {
+	global $Language;
 	print ('<br />');
 
 	for ($i=0;$i<$GLOBALS[depth];$i++) {
@@ -31,7 +32,7 @@ function printnode ($nodeid,$text) {
 	print html_image('ic/cfolder15.png','15','13',array());
 	print ('&nbsp; '.$text." ");
 	if ($nodeid != 0) {
-                print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">[Edit]</a> ');
+                print ('<a href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">['.$Language->getText('admin_trove_cat_list','edit').']</a> ');
                 print (help_button('trove_cat',$nodeid)."\n");
         }
 
@@ -49,11 +50,11 @@ function printnode ($nodeid,$text) {
 
 // ########################################################
 
-site_admin_header(array('title'=>'Site Admin: Trove - Category List'));
+site_admin_header(array('title'=>$Language->getText('admin_trove_cat_list','title')));
 
 ?>
 
-<h3>Browse Trove Tree</h3>
+<h3><?php echo $Language->getText('admin_trove_cat_list','browse_trove_tree'); ?></h3>
 
 <?php
 

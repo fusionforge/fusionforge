@@ -20,17 +20,17 @@ require_once('www/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-site_admin_header(array('title'=>"Site Admin"));
+site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
 
 
 ?>
 
-<p><strong>User Maintenance</strong></p>
+<p><strong><?php echo $Language->getText('admin_index','user_maintaince'); ?></strong></p>
 <ul>
-	<li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;</li>
-	<li>Display Users Beginning with :
+	<li><a href="userlist.php"><?php echo $Language->getText('admin_index','display_full_user_list'); ?></a>&nbsp;&nbsp;</li>
+	<li><?php echo $Language->getText('admin_index','display_user_beginning_with') ?>
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo "<a href=\"search.php?usersearch=1&amp;search=$abc_array[$i]%\">$abc_array[$i]</a>|";
@@ -42,17 +42,17 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="usersearch" value="1" />
-		<input type="submit" value="get" />
+		<input type="submit" value="<?php echo $Language->getText('admin_index','get'); ?>" />
 		</form>
 	</li>
 </ul>
 <p>
-<strong>Group Maintenance</strong>
+<strong><?php echo $Language->getText('admin_index','group_maintaince'); ?></strong>
 </p>
 <ul>
-	<li><a href="grouplist.php">Display Full Group List/Edit Groups</a></li>
+	<li><a href="grouplist.php"><?php echo $Language->getText('admin_index','display_full_group'); ?></a></li>
 
-	<li>Display Groups Beginning with :
+	<li><?php echo $Language->getText('admin_index','display_groups_beginning_with'); ?>
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo "<a href=\"search.php?groupsearch=1&amp;search=$abc_array[$i]%\">$abc_array[$i]</a>|";
@@ -64,59 +64,59 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="groupsearch" value="1" />
-		<input type="submit" value="get" />
+		<input type="submit" value="<?php echo $Language->getText('admin_index','get'); ?>" />
 		</form>
 	</li>
 </ul>
 <ul>
-	<li><a href="/register/">Register New Project</a></li>
-	<li>Groups with <a href="approve-pending.php"><strong>P</strong> (pending) Status</a> <em>(New Project Approval)</em></li>
-	<li>Groups with <a href="search.php?groupsearch=1&amp;search=%&amp;status=D"><strong>D</strong> (deleted) Status</a></li>
-	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0">Private Groups </a></li>
+	<li><a href="/register/"><?php echo $Language->getText('admin_index','register_new_project'); ?></a></li>
+	<li><?php echo $Language->getText('admin_index','groups_with'); ?> <a href="approve-pending.php"><strong>P</strong> <?php echo $Language->getText('admin_index','pending_status'); ?></a> <em><?php echo $Language->getText('admin_index','new_project_approval'); ?></em></li>
+	<li><?php echo $Language->getText('admin_index','groups_with'); ?> <a href="search.php?groupsearch=1&amp;search=%&amp;status=D"><strong>D</strong> <?php echo $Language->getText('admin_index','deleted_status'); ?></a></li>
+	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo $Language->getText('admin_index','private_groups'); ?></a></li>
 </ul>
 
 <p>
-<strong>News</strong>
+<strong><?php echo $Language->getText('admin_index','news'); ?></strong>
 </p>
 <ul>
-	<li><a href="/news/admin/">Approve/Reject</a> Front-page news</li>
+	<li><a href="/news/admin/"><?php echo $Language->getText('admin_index','approve_reject'); ?></a> <?php echo $Language->getText('admin_index','front_page_news'); ?></li>
 </ul>
 
 <p>
-<strong>Stats</strong>
+<strong><?php echo $Language->getText('admin_index','stats'); ?></strong>
 </p>
 <ul>
-	<li><a href="/stats/">Site-Wide Stats</a></li>
+	<li><a href="/stats/"><?php echo $Language->getText('admin_index','site_wide_stats'); ?></a></li>
 </ul>
 
 <p>
-<strong>Trove Project Tree</strong>
+<strong><?php echo $Language->getText('admin_index','trove_project_tree'); ?></strong>
 </p>
 <ul>
-	<li><a href="trove/trove_cat_list.php">Display Trove Map</a></li>
-	<li><a href="trove/trove_cat_add.php">Add to the Trove Map</a></li>
+	<li><a href="trove/trove_cat_list.php"><?php echo $Language->getText('admin_index','display_trove_map'); ?></a></li>
+	<li><a href="trove/trove_cat_add.php"><?php echo $Language->getText('admin_index','add_to_trove_map'); ?></a></li>
 </ul>
 
-<p><strong>Site Utilities</strong></p>
+<p><strong><?php echo $Language->getText('admin_index','site_utilities'); ?></strong></p>
 <ul>
-	<li><a href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</a></li>
-	<li><a href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</a></li>
-	<li><a href="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</a></li>
-	<li><a href="edit_frs_filetype.php">Add, Delete, or Edit File Types</a></li>
-	<li><a href="edit_frs_processor.php">Add, Delete, or Edit Processors</a></li>
-	<li><a href="edit_frs_theme.php">Add, Delete, or Edit Themes</a></li>
-	<li><a href="loadtabfiles.php">Translation file tool</a></li>
+	<li><a href="massmail.php"><?php echo $Language->getText('admin_index','mail_engine',array($GLOBALS['sys_name'])); ?></a></li>
+	<li><a href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> <?php echo $Language->getText('admin_index','site_mailing_maintaince'); ?></a></li>
+	<li><a href="edit_supported_languages.php"><?php echo $Language->getText('admin_index','add_delete_edit_laguage'); ?></a></li>
+	<li><a href="edit_frs_filetype.php"><?php echo $Language->getText('admin_index','add_delete_edit_file_types'); ?></a></li>
+	<li><a href="edit_frs_processor.php"><?php echo $Language->getText('admin_index','add_edit_delete_processors'); ?></a></li>
+	<li><a href="edit_frs_theme.php"><?php echo $Language->getText('admin_index','add_edit_delete_themes'); ?></a></li>
+	<li><a href="loadtabfiles.php"><?php echo $Language->getText('admin_index','translation_file_tool'); ?></a></li>
 </ul>
 
 <p>
-<strong>Global Admin Tools / Mass Insert Tools</strong>
+<strong><?php echo $Language->getText('admin_index','global_admin_tools_mass_insert'); ?></strong>
 </p>
 <ul>
-	<li><a href="vhost.php">Virtual Host Administration Tool</a></li>
-	<li><a href="database.php">Project Database Administration</a></li>
+	<li><a href="vhost.php"><?php echo $Language->getText('admin_index','virtual_host_admin_tool'); ?></a></li>
+	<li><a href="database.php"><?php echo $Language->getText('admin_index','project_database_administration'); ?></a></li>
 </ul>
 
-<p><strong>Quick Site Statistics</strong></p>
+<p><strong><?php echo $Language->getText('admin_index','quick_site_statistic'); ?></strong></p>
 
 <?php
 

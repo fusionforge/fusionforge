@@ -23,8 +23,8 @@ $group =& group_get_object($group_id);
 
 if (!$group || !is_object($group)) {
         exit_error(
-        	'Error',
-                'Error creating group object'
+        	$Language->getText('admin_groupedit','error'),
+                $Language->getText('admin_groupedit','error_creating_group_object')
         );
 }
 
@@ -39,6 +39,7 @@ if ($group->isError()) {
 function do_update(&$group, $is_public, $status, $license,
 		   $group_type, $unix_box, $http_domain) {
 	global $feedback;
+	global $Language;
 
 	db_begin();
 
@@ -56,7 +57,7 @@ function do_update(&$group, $is_public, $status, $license,
 
 	db_commit();
 
-	$feedback .= 'Updated<br /> ';
+	$feedback .= $Language->getText('admin_groupedit','updated').'<br /> ';
 
 	return true;
 }
@@ -70,16 +71,16 @@ if ($submit) {
 } else if ($resend) {
 
 	$group->sendApprovalEmail();
-	$feedback .= 'Instruction email sent<br /> ';
+	$feedback .= $Language->getText('admin_groupedit','instruction_email_sent').'<br /> ';
 
 }
 
-site_admin_header(array('title'=>'Site Admin: Group Info'));
+site_admin_header(array('title'=>$Language->getText('admin_groupedit','title')));
 
 echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
 <p>
-<?php print "<a href=\"/project/admin/?group_id=$group_id\"><h3>[Project Admin]</h3></a>"; ?></p>
+<?php print "<a href=\"/project/admin/?group_id=$group_id\"><h3>".$Language->getText('admin_groupedit','project_admin'). "</h3></a>"; ?></p>
 
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
@@ -90,23 +91,35 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 <tr>
 <td colspan="3">
 
-Status:
+<?php echo $Language->getText('admin_groupedit','status') ?>:
 <?php echo html_build_select_box_from_arrays(
-	array('I','A','P','H','D'),
 	array(
-		'Incomplete (I)',
-		'Active (A)',
-		'Pending (P)',
-		'Holding (H)',
-		'Deleted (D)'
+		$Language->getText('admin_groupedit','i'),
+		$Language->getText('admin_groupedit','a'),
+		$Language->getText('admin_groupedit','p'),
+		$Language->getText('admin_groupedit','h'),
+		$Language->getText('admin_groupedit','d')
+),
+	array(
+		$Language->getText('admin_groupedit','incomplete'),
+		$Language->getText('admin_groupedit','active'),
+		$Language->getText('admin_groupedit','pending'),
+		$Language->getText('admin_groupedit','holding'),
+		$Language->getText('admin_groupedit','deleted')
 	),
 	'form_status', $group->getStatus(), false
 ); ?>
 
-Public?:
+<?php echo $Language->getText('admin_groupedit','public') ?>:
 <?php echo html_build_select_box_from_arrays(
-	array(0,1),
-	array('No','Yes'),
+	array(
+		$Language->getText('admin_groupedit','0'),
+		$Language->getText('admin_groupedit','1')
+	),
+	array(
+		$Language->getText('admin_groupedit','no'),
+		$Language->getText('admin_groupedit','yes')
+),
 	'form_public', $group->isPublic(), false
 ); ?>
 
@@ -115,7 +128,7 @@ Public?:
 
 <tr>
 <td>
-Unix Group Name:
+<?php echo $Language->getText('admin_groupedit','unix_group_name'); ?>
 </td>
 <td>
 <?php echo $group->getUnixName(); ?>
@@ -124,12 +137,12 @@ Unix Group Name:
 
 <tr>
 <td>
-License:
+<?php echo $Language->getText('admin','license'); ?>
 </td>
 <td>
 <select name="form_license">
-<option value="none">N/A</option>
-<option value="other">Other</option>
+<option value="none"><?php echo $Language->getText('admin','na'); ?></option>
+<option value="other"><?php echo $Language->getText('admin','other'); ?></option>
 <?php
 	while (list($k,$v) = each($LICENSE)) {
 		print "<option value=\"$k\"";
@@ -152,7 +165,7 @@ Home Box:
 
 <tr>
 <td>
-HTTP Domain:
+<?php echo $Language->getText('admin','http_domain') ?>
 </td>
 <td>
 <input size="40" type="text" name="form_domain" value="<?php echo $group->getDomain(); ?>" />
@@ -161,7 +174,7 @@ HTTP Domain:
 
 <tr>
 <td>
-Registration Application:
+<?php echo $Language->getText('admin_groupedit','registration_application'); ?>
 </td>
 <td>
 <?php echo $group->getRegistrationPurpose(); ?>
@@ -172,7 +185,7 @@ Registration Application:
 if ($group->getLicense() == 'other') {
 ?>
 	<tr>
-	<td>License Other:
+	<td><?php echo $Language->getText('admin','license_other'); ?>
 	</td>
 	<td>
 	<?php echo $group->getLicenseOther(); ?>
@@ -186,8 +199,8 @@ if ($group->getLicense() == 'other') {
 
 <input type="hidden" name="group_id" value="<?php print $group_id; ?>" />
 
-<br /><input type="submit" name="submit" value="Update" />
-&nbsp;&nbsp;&nbsp; <input type="submit" name="resend" value="Resend New Project Instruction Email" />
+<br /><input type="submit" name="submit" value="<?php echo $Language->getText('admin_groupedit','update'); ?>" />
+&nbsp;&nbsp;&nbsp; <input type="submit" name="resend" value="<?php echo $Language->getText('admin_groupedit','new_project_instruction_email'); ?>" />
 </form></p>
 
 <?php

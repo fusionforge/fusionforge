@@ -38,7 +38,7 @@ if ($GLOBALS['submit']) {
 
 		if (!$res || db_affected_rows($res)<1) {
 			exit_error(
-				'Error In Trove Operation',
+				$Language->getText('admin_trove_cat_add','error_in_trove_openration'),
 				db_error()
 			);
 		}
@@ -50,13 +50,13 @@ if ($GLOBALS['submit']) {
 	session_redirect("/admin/trove/trove_cat_list.php");
 } 
 
-site_admin_header(array('title'=>'Site Admin: Trove - Add Node'));
+site_admin_header(array('title'=>$Language->getText('admin_trove_cat_add','title')));
 ?>
 
-<h3>Add New Trove Category</h3>
+<h3><?php echo $Language->getText('admin_trove_cat_add','add_new_trove_category'); ?></h3>
 
 <form action="trove_cat_add.php" method="post">
-<p>Parent Category:<?php echo utils_requiredField(); ?>
+<p><?php echo $Language->getText('admin_trove_cat_add','parent_category'); ?>:<?php echo utils_requiredField(); ?>
 <br /><select name="form_parent">
 
 <?php
@@ -70,13 +70,13 @@ while ($row_cat = db_fetch_array($res_cat)) {
 ?>
 
 </select></p>
-<p>New category short name (no spaces, unix-like):<?php echo utils_requiredField(); ?>
+<p><?php echo $Language->getText('admin_trove_cat_add','new_category_short_name'); ?>:<?php echo utils_requiredField(); ?>
 <br /><input type="text" name="form_shortname" /></p>
-<p>New category full name (VARCHAR 80):<?php echo utils_requiredField(); ?>
+<p><?php echo $Language->getText('admin_trove_cat_add','new_category_full_name'); ?>:<?php echo utils_requiredField(); ?>
 <br /><input type="text" name="form_fullname" /></p>
-<p>New category description (VARCHAR 255):<?php echo utils_requiredField(); ?>
+<p><?php echo $Language->getText('admin_trove_cat_add','new_category_description'); ?>:<?php echo utils_requiredField(); ?>
 <br /><input type="text" size="80" name="form_description" />
-<br /><input type="submit" name="submit" value="Add" /></p>
+<br /><input type="submit" name="submit" value="<?php echo $Language->getText('admin_trove_cat_add','add'); ?>" /></p>
 </form>
 
 <?php

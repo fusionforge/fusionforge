@@ -23,7 +23,7 @@ require_once('www/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-site_admin_header(array('title'=>'Admin Search Results'));
+site_admin_header(array('title'=>$Language->getText('admin_search','index')));
 
 function format_name($name, $status) {
 	if ($status == 'D') {
@@ -47,7 +47,7 @@ function format_name($name, $status) {
 
 if ($search == "") {
 
-  exit_error("Refusing to display whole DB","That would display whole DB.  Please use a CLI query if you wish to do this.");
+  exit_error( $Language->getText('admin_search','refusing_to_display_whole_db'));
 
 }
 
@@ -67,8 +67,8 @@ if ($usersearch) {
 	    OR realname ILIKE '%$search%'
 	"); 
 
-	print '<p><strong>User search with criteria "<em>'.$search.'</em>": '
-	      .db_numrows($result).' matches.</strong></p>';
+	print '<p><strong>' .$Language->getText('admin_search','user_search_criteria').'"<em>'.$search.'</em>": '
+	      .db_numrows($result) .$Language->getText('admin_search','matches').'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();
@@ -76,12 +76,12 @@ if ($usersearch) {
 
 
 		$title=array();
-		$title[]='ID';
-		$title[]='Username';
-		$title[]='Real Name';
-		$title[]='Email';
-		$title[]='Member since';
-		$title[]='Status (Web/Unix)';
+		$title[]=$Language->getText('admin_search','id');
+		$title[]=$Language->getText('admin_search','username');
+		$title[]=$Language->getText('admin_search','real_name');
+		$title[]=$Language->getText('admin_search','email');
+		$title[]=$Language->getText('admin_search','member_since');
+		$title[]=$Language->getText('admin_search','status');
 					 
 		echo $GLOBALS['HTML']->listTableTop($title);
 
@@ -127,19 +127,19 @@ if ($groupsearch) {
 	if ($crit_desc) {
 		$crit_desc = "($crit_desc )";
 	}
-	print '<p><strong>Group search with criteria "<em>'.$search.'</em>" '.$crit_desc.': '
-	      .db_numrows($result).' matches.</strong></p>';
+	print '<p><strong>' .$Language->getText('admin_search','group_search_criteria').'"<em>'.$search.'</em>" '.$crit_desc.': '
+	      .db_numrows($result).$Language->getText('admin_search','matches').'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();
 	} else {
 
 		$title=array();
-		$title[]='ID';
-		$title[]='Unix Name';
-		$title[]='Full Name';
-		$title[]='Registered';
-		$title[]='Status';
+		$title[]=$Language->getText('admin_search','id');
+		$title[]=$Language->getText('admin_search','unix_name');
+		$title[]=$Language->getText('admin_search','full_name');
+		$title[]=$Language->getText('admin_search','registered');
+		$title[]=$Language->getText('admin_search','status');
 
 		echo $GLOBALS['HTML']->listTableTop($title);
 

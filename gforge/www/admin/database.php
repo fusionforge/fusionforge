@@ -41,21 +41,21 @@ if ($submit) {
 		");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= 'Error adding databse: '.db_error();
+			$feedback .= $Language->getText('admin_database','error_adding_database') .db_error();
 		} else {
-			$feedback .= "Group <em>".$group->getUnixName()."</em> added already active database";
+			$feedback .= $Language->getText('admin_database','group'). "<em>".$group->getUnixName()."</em>" .$Language->getText('admin_database','added_already_active_database');
 		}
 
 	} else {
 
-		$feedback .=	"<strong>Unable to insert already active database.</strong>";
+		$feedback .=	"<strong>" .$Language->getText('admin_database','unable_to_insert'). "</strong>";
 
 	}
 
 }
 
 
-site_admin_header(array('title'=>"Site Admin: Groups' DB Maintenance"));
+site_admin_header(array('title'=>$Language->getText('admin_database','site_admin_groups_maintance')));
 
 $res_db = db_query("
 	SELECT stateid,statename,COUNT(*)
@@ -64,13 +64,13 @@ $res_db = db_query("
 	GROUP BY statename,stateid
 ");
 
-echo '<h3>Statistics for Project Databases</h3>';
+echo '<h3>' .$Language->getText('admin_database','statistics_for_project_database').'</h3>';
 
 if (db_numrows($res_db) > 0) {
 
 	$title=array();
-	$title[]='Type';
-	$title[]='Count';
+	$title[]= $Language->getText('admin_database','type');
+	$title[]= $Language->getText('admin_database','count');
 	echo $GLOBALS['HTML']->listTableTop($title);
 
 	while ($row_db = db_fetch_array($res_db)) {
@@ -82,7 +82,7 @@ if (db_numrows($res_db) > 0) {
 	echo $GLOBALS['HTML']->listTableBottom();
 
 } else {
-	echo '<p>No databases defined</p>';
+	echo '<p>' .$Language->getText('admin_database','no_databases_defined').'</p>';
 }
 
 
@@ -96,7 +96,7 @@ if ($displaydb) {
 
 	$row_db = db_fetch_array($res_db);
 
-	print '<hr /><h3>Displaying Databases of Type: '.$row_db['statename'].' </h3><ul>';
+	print '<hr /><h3>' .$Language->getText('admin_database','display_database_type') .$row_db['statename'].' </h3><ul>';
 
 	$res_db = db_query("
 		SELECT *
@@ -120,14 +120,14 @@ if ($displaydb) {
 ?>
 <hr />
 
-<h3>Add an already active database</h3>
+<h3><?php echo $Language->getText('admin_database','add_an_already_active_database'); ?></h3>
 
 <form name="madd" method="post" action="<?php  echo $PHP_SELF; ?>">
 
 <table>
 
 <tr>
-<td>Group Unix Name:<?php echo utils_requiredField(); ?></td>
+<td><?php echo $Language->getText('admin_database','group_unix_name'); ?><?php echo utils_requiredField(); ?></td>
 <td><input type="text" name="groupname" /></td>
 </tr>
 
@@ -137,7 +137,7 @@ if ($displaydb) {
 </tr>
 
 </table>
-<input type="submit" name="submit" value="Add" />
+<input type="submit" name="submit" value="<?php echo $Language->getText('admin','add'); ?>"/>
 </form>
 
 <?php

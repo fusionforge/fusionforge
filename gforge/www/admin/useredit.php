@@ -17,10 +17,10 @@ require_once('www/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 $unix_status2str = array(
-	'N'=>'No Unix account (N)',
-	'A'=>'Active (A)',
-	'S'=>'Suspended (S)',
-	'D'=>'Deleted (D)'
+	'N'=>$Language->getText('admin_useredit','no_unix_account'),
+	'A'=>$Language->getText('admin_useredit','active'),
+	'S'=>$Language->getText('admin_useredit','suspended'),
+	'D'=>$Language->getText('admin_useredit','deleted')
 );
 
 $u =& user_get_object($user_id);
@@ -32,7 +32,7 @@ if ($action == "update_user") {
 	    || !$u->setShell($shell)
 	    || !$u->setStatus($status)) {
 		exit_error(
-			'Could Not Complete Operation',
+			$Language->getText('admin_useredit','could_not_complete_operation'),
 			$u->getErrorMessage()
 		);
 	}
@@ -47,16 +47,16 @@ if ($action == "update_user") {
 	if ($u->isError()) {
 		$feedback .= $u->getErrorMessage();
 	} else {
-		$feedback .= 'Updated<br />';
+		$feedback .= $Language->getText('admin_useredit','updated').'<br />';
 	}
 
 }
 
 
-site_admin_header(array('title'=>'Site Admin: User Info'));
+site_admin_header(array('title'=>$Language->getText('admin_useredit','title')));
 
 ?>
-<h3>Account Information <sup>1</sup></h3>
+<h3><?php echo $Language->getText('admin_useredit','account_info'); ?><sup>1</sup></h3>
 
 <form method="post" action="<?php echo $PHP_SELF; ?>">
 <input type="hidden" name="action" value="update_user" />
@@ -65,7 +65,7 @@ site_admin_header(array('title'=>'Site Admin: User Info'));
 <table>
 <tr>
 <td>
-User ID:
+<?php echo $Language->getText('admin_useredit','user_id'); ?>
 </td>
 <td>
 <?php echo $u->getID(); ?>
@@ -73,7 +73,7 @@ User ID:
 </tr>
 
 <td>
-User Name:
+<?php echo $Language->getText('admin_useredit','user_name'); ?>
 </td>
 <td>
 <?php echo $u->getUnixName(); ?>
@@ -81,7 +81,7 @@ User Name:
 </tr>
 
 <td>
-Real Name:
+<?php echo $Language->getText('admin_useredit','real_name'); ?>
 </td>
 <td>
 <?php echo $u->getRealName(); ?>
@@ -90,16 +90,16 @@ Real Name:
 
 <tr>
 <td>
-Web Account Status:
+<?php echo $Language->getText('admin_useredit','web_account_status'); ?>
 </td>
 <td>
 <?php echo html_build_select_box_from_arrays(
 	array('P','A','S','D'),
 	array(
-		'Pending (P)',
-		'Active (A)',
-		'Suspended (S)',
-		'Deleted (D)'
+		$Language->getText('admin_useredit','pending'),
+		$Language->getText('admin_useredit','active'),
+		$Language->getText('admin_useredit','suspended'),
+		$Language->getText('admin_useredit','deleted')
 	),
 	'status', $u->getStatus(),false
 ); ?>
@@ -108,7 +108,7 @@ Web Account Status:
 
 <tr>
 <td>
-Unix Account Status<sup>2</sup>:
+<?php echo $Language->getText('admin_useredit','unix_account_status'); ?><sup>2</sup>:
 </td>
 <td>
 <?php echo $unix_status2str[$u->getUnixStatus()]; ?>
@@ -117,7 +117,7 @@ Unix Account Status<sup>2</sup>:
 
 <tr>
 <td>
-Unix Shell:
+<?php echo $Language->getText('admin_useredit','unix_shell'); ?>
 </td>
 <td>
 <select name="shell">
@@ -128,7 +128,7 @@ Unix Shell:
 
 <tr>
 <td>
-Email:
+<?php echo $Language->getText('admin_useredit','email'); ?>
 </td>
 <td>
 <input type="text" name="email" value="<?php echo $u->getEmail(); ?>" size="25" maxlength="55" />
@@ -137,7 +137,7 @@ Email:
 
 <tr>
 <td>
-Current confirm hash:
+<?php echo $Language->getText('admin_useredit','current_confirm_bash'); ?>
 </td>
 <td>
 <?php echo $u->getConfirmHash(); ?>
@@ -147,16 +147,13 @@ Current confirm hash:
 
 </table>
 
-<input type="submit" name="submit" value="Update" />
+<input type="submit" name="submit" value="<?php echo $Language->getText('admin_useredit','update'); ?>" />
 
 <p>
-<sup>1</sup> This pages allows to change only direct properties of user object. To edit
-properties pertinent to user within specific group, visit admin page of that
-group (below).
+<sup>1</sup><?php echo $Language->getText('admin_useredit','this_page_allows'); ?>
 </p>
 <p>
-<sup>2</sup> Unix status updated mirroring web status, unless it has
-value 'No unix account (N)'.
+<sup>2</sup><?php echo $Language->getText('admin_useredit','unix_status_updated_mirroring'); ?>
 </p>
 
 </form>
@@ -164,7 +161,7 @@ value 'No unix account (N)'.
 <hr />
 
 <p>
-<h3>Groups Membership</h3>
+<h3><?php echo $Language->getText('admin_useredit','group_memerbership'); ?></h3>
 
 <?php
 /*
@@ -180,9 +177,9 @@ $res_cat = db_query("
 ");
 
 $title=array();
-$title[]='Name';
-$title[]='Unix Name';
-$title[]='Operations';
+$title[]=$Language->getText('admin_useredit','name');
+$title[]=$Language->getText('admin_useredit','unix_name');
+$title[]=$Language->getText('admin_useredit','operations');
 echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row_cat = db_fetch_array($res_cat)) {
@@ -192,8 +189,8 @@ while ($row_cat = db_fetch_array($res_cat)) {
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.$row_cat['group_name'].'</td>
 		<td>'.$row_cat['unix_group_name'].'</td>
-		<td><a href="/project/admin/?group_id='.$row_cat[group_id].'">[Project Admin]</a>
-		<a href="/project/admin/userperms.php?group_id='.$row_cat['group_id'].'">[Member Permissions]</a></td>
+		<td><a href="/project/admin/?group_id='.$row_cat[group_id].'">['.$Language->getText('admin_useredit','project_admin').']</a>
+		<a href="/project/admin/userperms.php?group_id='.$row_cat['group_id'].'">['.$Language->getText('admin_useredit','membership_permissions').']</a></td>
 		</tr>
 	';
 

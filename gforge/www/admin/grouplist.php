@@ -11,7 +11,7 @@ require($DOCUMENT_ROOT.'/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-site_admin_header(array('title'=>$GLOBALS['system_name'].": Group List"));
+site_admin_header(array('title'=>$GLOBALS['system_name'].$Language->getText('admin_grouplist','group_list')));
 
 // start from root if root not passed in
 if (!$form_catroot) {
@@ -20,12 +20,12 @@ if (!$form_catroot) {
 
 //CB removed from 2.6 and 2.5 was link to a page saying to use new project
 //print "<br /><a href=\"groupedit-add.php\">[Add Group]</a>";
-print "<p>".$GLOBALS['system_name']." Group List for Category: ";
+print "<p>".$GLOBALS['system_name'].$Language->getText('admin_grouplist','group_list_for_category');
 
 if ($form_catroot == 1) {
 
 	if (isset($group_name_search)) {
-		print "<strong>Groups that begin with $group_name_search</strong>\n";
+		print "<strong>" .$Language->getText('admin_grouplist','groups_that_begin_with'). "$group_name_search</strong>\n";
 		// [RM] LIKE is case-sensitive, and we don't want that
 		// $res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
 		// . "FROM groups WHERE group_name LIKE '$group_name_search%' "
@@ -57,12 +57,12 @@ if ($form_catroot == 1) {
 </p>
 <table width="100%" border="1">
 <tr>
-<td><strong>Group Name (click to edit)</strong></td>
-<td><strong>UNIX Name</strong></td>
-<td><strong>Status</strong></td>
-<td><strong>Public?</strong></td>
-<td><strong>License</strong></td>
-<td><strong>Members</strong></td>
+<td><strong><?php echo $Language->getText('admin_grouplist','group_name_click_to_edit'); ?></strong></td>
+<td><strong><?php echo $Language->getText('admin_grouplist','unix_name'); ?></strong></td>
+<td><strong><?php echo $Language->getText('admin_grouplist','status'); ?></strong></td>
+<td><strong><?php echo $Language->getText('admin_grouplist','pubic'); ?></strong></td>
+<td><strong><?php echo $Language->getText('admin_grouplist','license'); ?></strong></td>
+<td><strong><?php echo $Language->getText('admin_grouplist','members'); ?></strong></td>
 </tr>
 
 <?php

@@ -24,22 +24,19 @@ if ($submit) {
 
 	if (!$mail_type) {
 		exit_error(
-			'Missing parameter',
-			'You must select target audience for mailing'
+			$Language->getText('admin_massmail','missing_parameter_select_target')
 		);
 	}
 
 	if (!trim($mail_message)) {
 		exit_error(
-			'Missing parameter',
-			'You are trying to send empty message'
+			$Language->getText('admin_massmail','missing_parameter_empty_message')
 		);
 	}
 
 	if (trim($mail_subject) == '['.$GLOBALS['sys_name'].']') {
 		exit_error(
-			'Missing parameter',
-			'You must give proper subject to the mailing'
+			$Language->getText('admin_massmail','missing_parameter_proper_subject')
 		);
 	}
 
@@ -50,33 +47,31 @@ if ($submit) {
 
 	if (!$res || db_affected_rows($res)<1) {
 		exit_error(
-			'Error Scheduling Mailing',
-			'Could not schedule mailing, database error: '.db_error()
+			$Language->getText('admin_massmail','error_scheduling_mailing') .db_error()
 		);
 	}
 
-	site_admin_header(array('title'=>"Administrative Mass Mail Engine"));
-	print "<p>Mailing successfully scheduled for delivery</p>";
+	site_admin_header(array('title'=>$Language->getText('admin_massmail','title')));
+	print "<p>" .$Language->getText('admin_massmail','mailing_successfully_scheduled'). "</p>";
 	site_admin_footer(array());
 	exit();
 }
 
-site_admin_header(array('title'=>"Administrative Mass Mail Engine"));
+site_admin_header(array('title'=>$Language->getText('admin_massmail','title')));
 
 print '
-<h4>
-Mail Engine for '.$GLOBALS['sys_name'].' Subscribers
-</h4>
+<h4>'
+.$Language->getText('admin_massmail','mail_engine_for',array($GLOBALS['sys_name'])) .
+'</h4>
 ';
 
 print '
 <p>
-<a href="#active">Active deliveries</a>
+<a href="#active">' .$Language->getText('admin_massmail','active_deliveries').'</a>
 </p>
 
-<p>Be <span style="color:red"><strong>VERY</strong></span> careful with this form,
-because submitting it WILL lead to sending email to lots of users.
-</p>
+<p>' .$Language->getText('admin_massmail','be_verry_carefull').
+'</p>
 ';
 
 print '
@@ -84,13 +79,13 @@ print '
 .'<strong>Target Audience:</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMUNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(
-		'(select)',
-		'Subscribers to "Site Updates"',
-		'Subscribers to "Additional Community Mailings"',
-		'All Project Developers',
-		'All Project Admins',
-		'All Users',
-		$GLOBALS['sys_name'].' Developers (test)'
+		$Language->getText('admin_massmail','select'),
+		$Language->getText('admin_massmail','subscribers_to_site_updates'),
+		$Language->getText('admin_massmail','subscribers_to_additional_community'),
+		$Language->getText('admin_massmail','all_project_developers'),
+		$Language->getText('admin_massmail','all_project_admins'),
+		$Language->getText('admin_massmail','all_users'),
+		$GLOBALS['sys_name']. $Language->getText('admin_massmail','developers_test')
 	),
 	'mail_type',false,false
 )
@@ -100,16 +95,15 @@ print '
 print '
 
 <p>
-<strong>Subject:</strong>'.utils_requiredField().'
+<strong>' .$Language->getText('admin_massmail','subject').':</strong>'.utils_requiredField().'
 <br /><input type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] " /></p>
 
-<p><strong>Text of Message:</strong>'.utils_requiredField().' (will be appended with unsubscription
-information, if applicable)</p>
+<p><strong>'.$Language->getText('admin_massmail','text_of_message'). ':</strong>'.utils_requiredField(). $Language->getText('admin_massmail','will_be_append').'</p>
 <pre><textarea name="mail_message" cols="70" rows="20">
 </textarea>
 </pre>
 
-<p><input type="submit" name="submit" value="Schedule for Mailing" /></p>
+<p><input type="submit" name="submit" value="' .$Language->getText('admin_massmail','schedule_for_mailing').'" /></p>
 
 </form>
 ';
@@ -123,13 +117,13 @@ $res = db_query("
 
 $title=array();
 $title[]='&nbsp;';
-$title[]='ID';
-$title[]='Type';
-$title[]='Subject';
-$title[]='Date';
-$title[]='Last user_id mailed';
+$title[]=$Language->getText('admin_massmail','id');
+$title[]=$Language->getText('admin_massmail','type');
+$title[]=$Language->getText('admin_massmail','subject');
+$title[]=$Language->getText('admin_massmail','date');
+$title[]=$Language->getText('admin_massmail','last_user_id_mailed');
 
-print '<a name="active">Active Deliveries:</a>';
+print '<a name="active">'.$Language->getText('admin_massmail','active_deliveries').':</a>';
 
 echo $GLOBALS['HTML']->listTableTop($title);
 

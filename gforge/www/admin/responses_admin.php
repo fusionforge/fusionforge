@@ -24,21 +24,28 @@ require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-site_admin_header(array('title'=>'Site Admin: Edit Rejection Responses'));
+site_admin_header(array('title'=>$Language->getText('admin_responses','title')));
 
 function check_select_value($value, $type)
 {
+	global $Language;
 	if( $value == "100" ) {
-		print("<span style=\"color:red\"><strong>You can't $type \"None\", bozo!</strong></span><br />\n");
+		print("<span style=\"color:red\"><strong>".$Language->getText('admin_responses','you_cant',array($GLOBALS['type']))."</strong></span><br />\n");
 	}
 }
 ?>
 
 <form method="post" action="<?php echo $PHP_SELF; ?>">
-Existing Responses: <?php echo get_canned_responses(); ?>
-<input name="action" type="submit" value="Edit" />
+<?php echo $Language->getText('admin_responses','existing_responses'); ?><?php echo get_canned_responses(); ?>
+<!-- Reinhard Spisser: commenting localization, since otherwise it will not work -->
+<!--
+<input name="action" type="submit" value="<?php echo $Language->getText('admin','edit'); ?>"/>
+<input name="action" type="submit" value="<?php echo $Language->getText('admin','delete'); ?>" />
+--->
+<input name="action" type="submit" value="Edit"/>
 <input name="action" type="submit" value="Delete" />
-<input type="checkbox" name="sure" value="yes" />Yes, I'm sure
+<input type="checkbox" name="sure" value="<?php echo $Language->getText('admin','yes'); ?>" />
+<?php  echo $Language->getText('admin_responses','yes_im_sure'); ?>
 </form>
 
 <br /><br />
@@ -50,7 +57,7 @@ if( $action == "Edit" ) {
 	check_select_value($response_id, $action);
 	if( $action2 ) {
 		db_query("UPDATE canned_responses SET response_title='$response_title', response_text='$response_text' WHERE response_id='$response_id'");
-		print(" <strong>Edited Response</strong> ");
+		print(" <strong>" .$Language->getText('admin_responses','edit_response')."</strong> ");
 	} else {
 		$res = db_query("SELECT * FROM canned_responses WHERE response_id='$response_id'");
 		$row = db_fetch_array($res);
@@ -58,14 +65,15 @@ if( $action == "Edit" ) {
 		$response_text=$row[2];
 ?>
 
-Edit Response:<br />
+<?php echo $Language->getText('admin_responses','edit_response_other'); ?><br />
 <form method="post" action="<?php echo $PHP_SELF; ?>">
-Response Title: <input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
-Response Text:<br />
+<?php echo $Language->getText('admin_responses','response_title'); ?><input type="text" name="response_title" size="30" maxlength="25" value="<?php echo $response_title; ?>" /><br />
+<?php echo $Language->getText('admin_responses','response_text'); ?><br />
 <textarea name="response_text" cols="50" rows="10"><?php echo $response_text; ?></textarea>
 <input type="hidden" name="response_id" value="<?php echo $response_id; ?>" />
-<input type="hidden" name="action2" value="go" />
-<input type="submit" name="action" value="Edit" />
+<input type="hidden" name="action2" value="<?php echo $Language->getText('admin_responses','go'); ?>" />
+<input type="hidden" name="action" value="Edit">
+<input type="submit" name="actionsubmit" value="<?php echo $Language->getText('admin','edit'); ?>" />
 </form>
 
 <?php
@@ -75,25 +83,26 @@ Response Text:<br />
 	check_select_value($response_id, $action);
 	if( $sure == "yes" ) {
 		db_query("DELETE FROM canned_responses WHERE response_id='$response_id'");
-		print(" <strong>Deleted Response</strong> ");
+		print(" <strong>" .$Language->getText('admin_responses','deleted_resposes')."</strong> ");
 	} else {
-		print("If you're aren't sure then why did you click 'Delete'?<br />");
-		print("<em>By the way, I didn't delete... just in case...</em><br />\n");
+		print( $Language->getText('admin_responses','not_sure_dont_click')."<br />");
+		print("<em>" .$Language->getText('admin_responses','by_the_way')."</em><br />\n");
 	}
 } else if ( $action == "Create" ) {
 	// New Response
 	add_canned_response($response_title, $response_text);
-	print(" <strong>Added Response</strong> ");
+	print(" <strong>" .$Language->getText('admin_responses','add_response')."</strong> ");
 } else {
 ?>
 
-Create New Response:<br />
+<?php echo $Language->getText('admin_responses','create_new_response'); ?><br />
 <form method="post" action="<?php echo $PHP_SELF; ?>">
-Response Title: <input type="text" name="response_title" size="30" maxlength="25" /><br />
-Response Text:<br />
+<?php echo $Language->getText('admin_responses','response_title'); ?><input type="text" name="response_title" size="30" maxlength="25" /><br />
+<?php echo $Language->getText('admin_responses','response_text'); ?><br />
 <textarea name="response_text" cols="50" rows="10"></textarea>
 <br />
-<input type="submit" name="action" value="Create" />
+<input type="hidden" name="action" value="Create">
+<input type="submit" name="actions" value="<?php echo $Language->getText('admin_responses','create'); ?>" />
 </form>
 
 <?php

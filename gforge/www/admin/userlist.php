@@ -8,7 +8,7 @@
 
 require "pre.php";
 session_require(array('group'=>'1','admin_flags'=>'A'));
-$HTML->header(array('title'=>$GLOBALS['system_name'].': User List'));
+$HTML->header(array('title'=>$GLOBALS['system_name'].$Language->getText('admin_userlist','userlist')));
 
 /**
  * performAction() - Updates the indicated user status
@@ -18,16 +18,18 @@ $HTML->header(array('title'=>$GLOBALS['system_name'].': User List'));
  * @param               string  $user_id - the user id to act upon
  */
 function performAction($newStatus, $statusString, $user_id) {
+	global $Language;
 	db_query("UPDATE users set status='".$newStatus."' WHERE user_id='".$user_id."'");
-	echo "<h2>User updated to ".$statusString." status</h2>";
+	echo "<h2>" .$Language->getText('admin_userlist','user_updated',array($GLOBALS['statusString']))."</h2>";
 }
 
 function show_users_list ($result) {
-	echo '<p>Key:
-		<font color="#00ff00">Active</font>
-		<font color="grey">Deleted</font>
-		<font color="red">Suspended</font>
-		(*)Pending</p>
+	global $Language;
+	echo '<p>' .$Language->getText('admin_userlist','key') .':
+		<font color="#00ff00">'.$Language->getText('admin_userlist','active'). '</font>
+		<font color="grey">' .$Language->getText('admin_userlist','deleted') .'</font>
+		<font color="red">' .$Language->getText('admin_userlist','suspended'). '</font>'
+		.$Language->getText('admin_userlist','pending').'</p>
 		<table width="100%" cellspacing="0" cellpadding="0" border="1">';
 
 	while ($usr = db_fetch_array($result)) {
@@ -39,10 +41,10 @@ function show_users_list ($result) {
 		if ($usr[status] == 'P') print "*";
 		print "$usr[user_name]</a>";
 		print "</td>";
-		print "\n<td><a href=\"/developer/?form_dev=$usr[user_id]\">[DevProfile]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=activate&amp;user_id=$usr[user_id]\">[Activate]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=delete&amp;user_id=$usr[user_id]\">[Delete]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=suspend&amp;user_id=$usr[user_id]\">[Suspend]</a></td>";
+		print "\n<td><a href=\"/developer/?form_dev=$usr[user_id]\">[" .$Language->getText('admin_userlist','devprofile'). "]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=activate&amp;user_id=$usr[user_id]\">[" .$Language->getText('admin_userlist','activate'). "]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=delete&amp;user_id=$usr[user_id]\">[" .$Language->getText('admin_userlist','delete') ."]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=suspend&amp;user_id=$usr[user_id]\">[" .$Language->getText('admin_userlist','suspend'). "]</a></td>";
 		print "</tr>";
 	}
 	print "</table>";
@@ -69,9 +71,9 @@ if ($action=='add_to_group') {
 /*
 	Show list of users
 */
-print "<p>User list for group: ";
+print "<p>" .$Language->getText('admin_userlist','user_list_for_group');
 if (!$group_id) {
-	print "<strong>All Groups</strong>";
+	print "<strong>" .$Language->getText('admin_userlist','all_groups'). "</strong>";
 	print "\n</p>";
 
 	if ($user_name_search) {
@@ -109,7 +111,7 @@ if (!$group_id) {
 	<br />
 	<input type="hidden" name="group_id" value="<?php print $group_id; ?>" />
 	<br />
-	<input type="submit" name="Submit" value="Submit" />
+	<input type="submit" name="Submit" value="<?php echo $Language->getText('admin_userlist','submit'); ?>" />
 	</form>
 	</p>
 	<?php
