@@ -1,3 +1,11 @@
+2003-01-25  Reinhard Spisser   <reinhard@spisser.it>
+
+	* www/pm/reporting/index.php,
+	www/include/tool_reports.php, www/pm/admin/index.php,
+	common/pm/*, www/include/html.php, www/include/Layout.class,
+	www/include/html.php, www/source.php
+	Localization
+	
 2003-01-24  Reinhard Spisser   <reinhard@spisser.it>
 
 	* www/404.php, www/sendmessage.php, www/users,
