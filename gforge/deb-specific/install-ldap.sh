@@ -294,7 +294,6 @@ case "$1" in
 		echo "Modifying /etc/nsswitch.conf"
 		modify_nsswitch
 		echo "Load ldap"
-		echo load_ldap $dn "$secret"
 		load_ldap $dn "$secret"
 		# Restarting ldap 
 		/etc/init.d/slapd restart
