@@ -49,9 +49,9 @@ function writeFile($filePath, $content) {
 */
 function addsyncmail($unix_group_name) {
 	global $sys_lists_host;
-	global $maincvsroot;
-	$pathsyncmail = $unix_group_name." ".dirname($_SERVER['SCRIPT_FILENAME'])."/syncmail %%s ".$unix_group_name."-commits@".$sys_lists_host;
-	writeFile($maincvsroot.'/CVSROOT/loginfo',$pathsyncmail);
+		global $maincvsroot;
+	$pathsyncmail = $unix_group_name." ".dirname($_SERVER['_'])."/syncmail %%s ".$unix_group_name."-commits@".$sys_lists_host;
+	writeFile($maincvsroot.$unix_group_name.'/CVSROOT/loginfo',$pathsyncmail);
 }
 
 function addProjectRepositories() {
