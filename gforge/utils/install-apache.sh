@@ -148,10 +148,6 @@ case "$1" in
 				echo "Enabling gd in $phpconffile"
 				echo "extension=gd.so" >> $phpconffile.gforge-new
 	    		fi
-	    		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*ldap.so" $phpconffile.gforge-new; then
-				echo "Enabling ldap in $phpconffile"
-				echo "extension=ldap.so" >> $phpconffile.gforge-new
-	    		fi
 		fi
 	done
 	;;
