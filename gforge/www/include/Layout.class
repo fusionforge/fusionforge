@@ -408,6 +408,7 @@ class Layout extends Error {
 	 * @param	array	Header parameters array
 	 */
 	function user_menu($params){
+		global $Language;
 		echo '
 		<P>
 		<A HREF="/my/">' . $Language->getText('menu','my_personal_page')
