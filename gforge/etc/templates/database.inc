@@ -1,4 +1,4 @@
-<?
+<?php
 	// PLEASE DO NOT REMOVE THIS LINE
 	$sys_dbhost="{db_host}";
 	$sys_dbname="{db_name}";
