@@ -445,7 +445,7 @@ if (isset($params['group']) && $params['group']) {
 	}
 
 	function outerTabs($params) {
-		global $Language,$sys_use_trove,$sys_use_snippet;
+		global $Language,$sys_use_trove,$sys_use_snippet,$sys_use_people;
 
 		$TABS_DIRS[]='/';
 		$TABS_DIRS[]='/my/';
@@ -455,8 +455,9 @@ if (isset($params['group']) && $params['group']) {
 		if ($sys_use_snippet) {
 			$TABS_DIRS[]='/snippet/';
 		}
-
-		$TABS_DIRS[]='/people/';
+		if ($sys_use_people) {
+			$TABS_DIRS[]='/people/';
+		}
 		$TABS_TITLES[]=$Language->getText('menu','home');
 		$TABS_TITLES[]=$Language->getText('menu','mypage');
 		if ($sys_use_trove) {
@@ -465,9 +466,9 @@ if (isset($params['group']) && $params['group']) {
 		if ($sys_use_snippet) {
 			$TABS_TITLES[]=$Language->getText('menu','code_snippet');
 		}
-
-		$TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
-
+		if ($sys_use_people) {
+			$TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
+		}
 		if (user_ismember(1,'A')) {
 			$TABS_DIRS[]='/admin/';
 			$TABS_TITLES[]=$Language->getText('menu','admin');
