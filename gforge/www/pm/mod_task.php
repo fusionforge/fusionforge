@@ -64,15 +64,15 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'group_project
 		<strong><?php echo $Language->getText('pm','priority') ?>:</strong><br />
 		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
-
-
-
 	</tr>
 
   	<tr>
-		<td colspan="2">
+		<td>
 		<strong><?php echo $Language->getText('pm','summary') ?>:</strong><br />
 		<input type="text" name="summary" size="40" maxlength="65" value="<?php echo $pt->getSummary(); ?>" />
+		</td>
+		<td>
+		<a href="<?php echo "$PHP_SELF?func=deletetask&amp;project_task_id=$project_task_id&amp;group_id=$group_id&amp;group_project_id=$group_project_id"; ?>"><?php echo $Language->getText('pm_deletetask','delete') ?></a>
 		</td>
 	</tr>
 

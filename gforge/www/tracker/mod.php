@@ -167,10 +167,13 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td colspan="2"><strong><?php echo $Language->getText('tracker','summary')?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
-		<input type="text" name="summary" size="80" value="<?php
+		<td><strong><?php echo $Language->getText('tracker','summary')?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+		<input type="text" name="summary" size="70" value="<?php
 			echo $ah->getSummary(); 
 			?>" maxlength="255" />
+		</td>
+		<td>
+		<a href="<?php echo "$PHP_SELF?func=deleteartifact&amp;aid=$aid&amp;group_id=$group_id&amp;atid=$atid"; ?>"><?php echo $Language->getText('tracker_artifact','delete_text'); ?></a>
 		</td>
 	</tr>
 

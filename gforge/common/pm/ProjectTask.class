@@ -182,6 +182,7 @@ class ProjectTask extends Error {
 				db_rollback();
 				return false;
 			} elseif (!$this->setAssignedTo($assigned_arr)) {
+				print_r($assigned_arr);
 				db_rollback();
 				return false;
 			} else {
@@ -491,27 +492,50 @@ class ProjectTask extends Error {
 			return false;
 		}
 		db_begin();
-		db_query("DELETE FROM project_assigned_to
-			WHERE project_task_id='".$this->getID()."'");
-//echo '4'.db_error();
-		db_query("DELETE FROM project_dependencies
-			WHERE project_task_id='".$this->getID()."'");
-//echo '5'.db_error();
-		db_query("DELETE FROM project_history
-			WHERE project_task_id='".$this->getID()."'");
-//echo '6'.db_error();
-		db_query("DELETE FROM project_messages
-			WHERE project_task_id='".$this->getID()."'");
-//echo '7'.db_error();
-		db_query("DELETE FROM project_task_artifact
-			WHERE project_task_id='".$this->getID()."'");
-//echo '8'.db_error();
-		db_query("DELETE FROM rep_time_tracking
-			WHERE project_task_id='".$this->getID()."'");
-//echo '9'.db_error();
-		db_query("DELETE FROM project_task
-			WHERE project_task_id='".$this->getID()."'");
-//echo '11'.db_error();
+
+		$res = db_query("DELETE FROM project_assigned_to WHERE project_task_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting assigned users relationship: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM project_dependencies WHERE project_task_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting dependencies: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM project_history WHERE project_task_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting history: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM project_messages WHERE project_task_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting messages: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM project_task_artifact	WHERE project_task_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting artifacts: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM rep_time_tracking	WHERE project_task_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting time tracking report: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM project_task WHERE project_task_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting task: '.db_error());
+			db_rollback();
+			return false;
+		}
+
 		if ($this->getStatusID() == 3) {
 			//no need to update project_counts_agg
 		} else {
@@ -527,6 +551,7 @@ class ProjectTask extends Error {
 			}
 		}
 		db_commit();
+		return true;
 	}
 
 	/**

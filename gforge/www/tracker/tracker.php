@@ -241,6 +241,56 @@ switch ($func) {
 		}
 		break;
 	}
+
+
+	//
+	//	Show delete form
+	//
+	case 'deleteartifact' : {
+		if ($ath->userIsAdmin()) {
+			$ah= new ArtifactHtml($ath,$aid);
+			if (!$ah || !is_object($ah)) {
+				exit_error('ERROR','Artifact Could Not Be Created');
+			} elseif ($ah->isError()) {
+				exit_error('ERROR',$ah->getErrorMessage());
+			}
+			include 'deleteartifact.php';
+		} else {
+			exit_permission_denied();
+		}
+		break;
+	}
+
+	//
+	//	Handle the actual delete
+	//
+
+	case 'postdeleteartifact' : {
+		if ($ath->userIsAdmin()) {
+			$ah= new ArtifactHtml($ath,$aid);
+			if (!$ah || !is_object($ah)) {
+				exit_error('ERROR','Artifact Could Not Be Created');
+			} elseif ($ah->isError()) {
+				exit_error('ERROR',$ah->getErrorMessage());
+			}
+			if (!$confirm_delete) {
+				$feedback .= $Language->getText('tracker_artifact','delete_failed_confirm');
+			}
+			else {
+				if (!$ah->delete(true)) {
+					$feedback .= $Language->getText('tracker_artifact','delete_failed') . ': '.$ah->getErrorMessage();
+				} else {
+					$feedback .= $Language->getText('tracker_artifact','deleted_successfully');
+				}
+			}
+			include 'browse.php';
+		} else {
+			exit_permission_denied();
+		}
+		break;
+	}
+
+
 	case 'taskmgr' : {
 		include 'taskmgr.php';
 		break;

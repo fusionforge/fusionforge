@@ -205,31 +205,49 @@ switch ($func) {
 	//
 	case 'deletetask' : {
 		if ($pg->userIsAdmin()) {
-			include 'deletetask.php';
-		} else {
-			exit_permission_denied();
-		}
-	}
-
-	//
-	//	Handle the actual delete
-	//
-	case 'deletetask' : {
-		if ($pg->userIsAdmin()) {
 			$pt= new ProjectTask($pg,$project_task_id);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get ProjectTask');
 			} elseif ($pt->isError()) {
 				exit_error('Error',$pt->getErrorMessage());
 			}
-			if (!$pt->delete()) {
-				$feedback .= 'Delete failed: '.$pt->getErrorMessage();
-			} else {
-				$feedback .= 'Successfully Deleted';
-			}
+			include 'deletetask.php';
 		} else {
 			exit_permission_denied();
 		}
+		break;
+	}
+
+	//
+	//	Handle the actual delete
+	//
+
+	case 'postdeletetask' : {
+		if ($pg->userIsAdmin()) {
+			$pt= new ProjectTask($pg, $project_task_id);
+			if (!$pt || !is_object($pt)) {
+				exit_error('Error','Could Not Get ProjectTask');
+			} elseif ($pt->isError()) {
+				exit_error('Error', $pt->getErrorMessage());
+			}
+			if (!$confirm_delete) {
+				$feedback .= $Language->getText('pm_deletetask','task_delete_failed_confirm');
+			}
+			else {
+				$deletion = $pt->delete(true);
+				if (!$deletion) {
+					echo $deletion;
+					$feedback .= $Language->getText('pm_deletetask','task_delete_failed') . ': '.$pt->getErrorMessage();
+				} else {
+					echo $deletion;
+					$feedback .= $Language->getText('pm_deletetask','task_deleted_successfully');
+				}
+			}
+			include 'browse_task.php';
+		} else {
+			exit_permission_denied();
+		}
+		break;
 	}
 
 	//

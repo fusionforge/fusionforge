@@ -520,39 +520,68 @@ class Artifact extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		if (!$this->userIsAdmin()) {
+		if (!$this->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		db_begin();
-		db_query("DELETE FROM artifact_extra_field_data
-			WHERE artifact_id='".$this->getID()."'");
-//echo '0.1'.db_error();
-		db_query("DELETE FROM artifact_file
-			WHERE artifact_id='".$this->getID()."'");
-//echo '6'.db_error();
-		db_query("DELETE FROM artifact_message
-			WHERE artifact_id='".$this->getID()."'");
-//echo '7'.db_error();
-		db_query("DELETE FROM artifact_history
-			WHERE artifact_id='".$this->getID()."'");
-//echo '8'.db_error();
-		db_query("DELETE FROM artifact_monitor
-			WHERE rtifact_id='".$this->getID()."'");
-//echo '9'.db_error();
-		db_query("DELETE FROM artifact
-			WHERE artifact_id='".$this->getID()."'");
-		if ($this->getStatusID() == 1) {
-			db_query("UPDATE artifact_counts_agg
-				SET count=count-1,open_count=open_count-1
-				WHERE group_artifact_id='".$this->getID()."'");
-		} elseif ($this->getStatusID() == 2) {
-			db_query("UPDATE artifact_counts_agg
-				SET count=count-1
-				WHERE group_artifact_id='".$this->getID()."'");
+		$res = db_query("DELETE FROM artifact_extra_field_data WHERE artifact_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting extra field data: '.db_error());
+			db_rollback();
+			return false;
 		}
-//echo '5'.db_error();
+		$res = db_query("DELETE FROM artifact_file WHERE artifact_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting file from db: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM artifact_message WHERE artifact_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting message: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM artifact_history WHERE artifact_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting history: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM artifact_monitor WHERE artifact_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting monitor: '.db_error());
+			db_rollback();
+			return false;
+		}
+		$res = db_query("DELETE FROM artifact WHERE artifact_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Error deleting artifact: '.db_error());
+			db_rollback();
+			return false;
+		}
+		
+		if ($this->getStatusID() == 1) {
+			$res = db_query("UPDATE artifact_counts_agg SET count=count-1,open_count=open_count-1
+				WHERE group_artifact_id='".$this->getID()."'");
+			if (!$res) {
+				$this->setError('Error updating artifact_counts_agg (1): '.db_error());
+				db_rollback();
+				return false;
+			}
+		} elseif ($this->getStatusID() == 2) {
+			$res = db_query("UPDATE artifact_counts_agg SET count=count-1
+				WHERE group_artifact_id='".$this->getID()."'");
+			if (!$res) {
+				$this->setError('Error updating artifact_counts_agg (2): '.db_error());
+				db_rollback();
+				return false;
+			}
+		}
+
 		db_commit();
+		return true;
 	}
 
 	/**

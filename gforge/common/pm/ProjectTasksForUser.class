@@ -84,5 +84,24 @@ class ProjectTasksForUser {
 			ORDER BY group_name,project_name";
 		return $this->getTasksFromSQL($sql);
 	}
+	
+	function getTasksForToday() {
+		$now = getdate();
+		$today = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year']);
+		
+		$sql = "SELECT ptv.*,g.group_name,pgl.project_name 
+			FROM project_task_vw ptv,
+				project_assigned_to pat,
+				groups g,
+				project_group_list pgl
+			WHERE ptv.project_task_id=pat.project_task_id
+				AND pgl.group_id=g.group_id
+				AND pgl.group_project_id=ptv.group_project_id
+				AND ptv.start_date < '$today'
+				AND ptv.status_id=1
+				AND pat.assigned_to_id='".$this->User->getID()."'
+			ORDER BY group_name,project_name";
+		return $this->getTasksFromSQL($sql);
+	}
 }
 ?>
