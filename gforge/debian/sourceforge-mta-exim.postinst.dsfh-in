@@ -26,6 +26,7 @@ set -e
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:replace-files#
+#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
 	vars="server_admin noreply_to_bitbucket users_host lists_host ip_address"
