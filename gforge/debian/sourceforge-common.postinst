@@ -27,8 +27,7 @@ case "$1" in
     configure)
 	adduser --system --group --home /var/www/sourceforge sourceforge 2>&1 > /dev/null
 	
-	pattern=$(basename $0).XXXXXX
-	
+	. /usr/share/debconf/confmodule
 	. /usr/lib/sourceforge/lib/common-utils.sh
 
 	# "Fill in the blanks" in main config file
