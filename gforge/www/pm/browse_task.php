@@ -139,7 +139,7 @@ if ($rows < 1) {
 		$url = "/pm/task.php?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
 		echo '
 			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
-			'<td><a href="'.$url.'">'.$pt_arr[$i]->getID() .'</a></td>'.
+			'<td>'.$pt_arr[$i]->getID() .'</td>'.
 			'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
 			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
 			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
