@@ -196,9 +196,17 @@ class Group extends Error {
 				}
 			}
 		}
-//
-//	TODO: Need to add a check if this is not public, verify user is logged in and isMember
-//
+		
+		$systemGroups = array(GROUP_IS_NEWS, GROUP_IS_STATS, GROUP_IS_PEER_RATINGS);
+		if(!$this->isPublic() && !in_array($id, $systemGroups)) {
+			$perm =& $this->getPermission(session_get_user());
+
+			if (!$perm || !is_object($perm) || !$perm->isMember()) {
+				// cannot use $Language as it is not created yet
+				$this->setError('Permission denied');
+				return false;
+			}
+		}
 		return true;
 	}
 

@@ -22,4 +22,11 @@ define('MAIL__MAILING_LIST_IS_CREATED', '2');
 
 define('MAIL__MAILING_LIST_NAME_MIN_LENGTH', 4);
 
+/* Groups */
+
+define('GROUP_IS_MASTER', 1);
+define('GROUP_IS_NEWS', 3);
+define('GROUP_IS_STATS', 2);
+define('GROUP_IS_PEER_RATINGS', 4);
+
 ?>
