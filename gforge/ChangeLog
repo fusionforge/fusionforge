@@ -1,3 +1,6 @@
+2004-02-06  Tom Copeland <tom@infoether.com>
+	* Implemented RFE [ #672 ] X people are monitoring this package
+
 2004-02-05  Christian Bayle <bayle@debian.org>
 
 	* Adding $sys_use_people to setup and etc/local.d/25features

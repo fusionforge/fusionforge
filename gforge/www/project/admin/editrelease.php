@@ -321,6 +321,9 @@ project_admin_header(array('title'=>$Language->getText('project_admin_editreleas
 		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
+print "<br>There are ".$frsp->getMonitorCount()." users monitoring this module.";
+print "<hr>";
+
 project_admin_footer(array());
 
 ?>

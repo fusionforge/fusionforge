@@ -237,8 +237,8 @@ class FRSPackage extends Error {
 	 *	@return int the count
 	 */
 	function getMonitorCount() {
-		$sql = "select id from filemodule_monitor where filemodule_id = ".$this->getID();
-		$res = db_numrows(db_query($sql));
+		$sql = "select count(1) as count from filemodule_monitor where filemodule_id = ".$this->getID();
+		$res = db_result(db_query($sql), 0, 0);
 		if (!$res) {
 			$this->setError('FRSPackage::getMonitorCount() Error On querying monitor count: '.db_error());
 			return false;
