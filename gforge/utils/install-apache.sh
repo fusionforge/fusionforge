@@ -28,6 +28,17 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
+remove_gforge_insert(){
+			cp -a $1 $1.gforge-new
+			echo "Removing Gforge inserted lines"
+			vi -e $1.gforge-new > /dev/null 2>&1 <<-FIN
+/### Next line inserted by GForge install
+:d
+:d
+:w
+:x
+FIN
+}
 
 search_conf_file(){
 CONFFILE=$1
@@ -99,12 +110,7 @@ case "$1" in
 			# New apache conf	
 			# Remove old hack to have Apache see us
 	    		if [ -e $apacheconffile ] && grep -q "Include $gforgeconffile" $apacheconffile ; then
-				cp -a $apacheconffile $apacheconffile.gforge-new
-				pattern=$(basename $0)
-				tmp=$(mktemp /tmp/$pattern.XXXXXX)
-				grep -v "Include $gforgeconffile\|### Next line inserted by GForge install" $apacheconffile.gforge-new > $tmp
-				cat $tmp > $apacheconffile.gforge-new
-				rm -f $tmp
+				remove_gforge_insert $apacheconffile
 	    		fi
 		else	
 			# Old fashion Apache
@@ -169,13 +175,10 @@ case "$1" in
     purge-files)
 	for apacheconffile in $APACHE_ETC_LIST
 	do
-	    	if [ -e $apacheconffile ] && grep -q "Include $gforgeconffile" $apacheconffile ; then
-			cp -a $apacheconffile $apacheconffile.gforge-new
-			pattern=$(basename $0)
-			tmp=$(mktemp /tmp/$pattern.XXXXXX)
-			grep -v "Include $gforgeconffile\|### Next line inserted by GForge install" $apacheconffile.gforge-new > $tmp
-			cat $tmp > $apacheconffile.gforge-new
-			rm -f $tmp
+	echo "Looking at $apacheconffile"
+	    	#if [ -e $apacheconffile ] && grep -q "Include $gforgeconffile" $apacheconffile ; then
+	    	if [ -e $apacheconffile ] && grep -q "### Next line inserted by GForge install" $apacheconffile ; then
+			remove_gforge_insert $apacheconffile
 	    	fi
 	done
 	;;
