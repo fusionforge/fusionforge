@@ -83,6 +83,7 @@ EOF
 #	psql -U sourceforge -h $ip_address sourceforge -f /usr/lib/sourceforge/db/sf-2.6-complete.sql <<-FIN
 #$db_passwd
 #FIN
+	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	/usr/lib/sourceforge/bin/db-upgrade26.pl 2>&1 | grep -v ^NOTICE:
 	;;
     purge-files)
@@ -97,5 +98,6 @@ EOF
 	su -s /bin/sh postgres -c "dropdb sourceforge" &> /dev/null || true
 	su -s /bin/sh postgres -c "dropuser sourceforge" &> /dev/null || true
 	rm -f /var/lib/postgres/data/sourceforge_passwd
+	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	;;
 esac
