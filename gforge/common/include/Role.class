@@ -216,6 +216,8 @@ class Role extends Error {
 	 *  @return boolean success;
 	 */
 	function fetchData($role_id) {
+		unset($this->data_array);
+		unset($this->setting_array);
 		$res=db_query("SELECT * FROM role WHERE role_id='$role_id'");
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('Role::fetchData()::'.db_error());
@@ -327,7 +329,7 @@ class Role extends Error {
 				//
 				//	See if this setting changed. If so, then update it
 				//
-				if ($this->getVal($usection_name,$uref_id) != $uvalue) {
+//				if ($this->getVal($usection_name,$uref_id) != $uvalue) {
 					$sql="UPDATE role_setting 
 						SET value='$uvalue' 
 						WHERE role_id='".$this->getID()."' 
@@ -420,10 +422,13 @@ class Role extends Error {
 							SET perm_level='$uvalue'
 							WHERE
 							group_forum_id='$uref_id'
-							AND EXISTS (SELECT user_id FROM
-							user_group 
-							WHERE role_id='".$this->getID()."'
-							AND user_id=forum_perm.user_id)";
+							AND user_id IN (SELECT ug.user_id FROM
+							user_group ug, forum_group_list fgl, forum_perm fp
+							WHERE ug.role_id='".$this->getID()."'
+							AND ug.group_id=fgl.group_id AND 
+							fgl.group_forum_id='$uref_id'
+							AND ug.user_id=fp.user_id
+							AND fp.group_forum_id=fgl.group_forum_id)";
 //echo "\n<br>$sql";
 						$res=db_query($sql);
 						if (!$res) {
@@ -436,10 +441,13 @@ class Role extends Error {
 							SET perm_level='$uvalue'
 							WHERE
 							group_project_id='$uref_id'
-							AND EXISTS (SELECT user_id FROM
-							user_group 
-							WHERE role_id='".$this->getID()."'
-							AND user_id=project_perm.user_id)";
+							AND user_id IN (SELECT ug.user_id FROM
+							user_group ug, project_group_list pgl, project_perm pp
+							WHERE ug.role_id='".$this->getID()."'
+							AND ug.group_id=pgl.group_id AND
+                            pgl.group_project_id='$uref_id'
+							AND ug.user_id=pp.user_id
+							AND pp.group_project_id=pgl.group_project_id)";
 //echo "\n<br>$sql";
 						$res=db_query($sql);
 						if (!$res) {
@@ -452,10 +460,13 @@ class Role extends Error {
 							SET perm_level='$uvalue'
 							WHERE
 							group_artifact_id='$uref_id'
-							AND EXISTS (SELECT user_id FROM
-							user_group 
-							WHERE role_id='".$this->getID()."'
-							AND user_id=artifact_perm.user_id)";
+							AND user_id IN (SELECT ug.user_id FROM
+							user_group ug, artifact_group_list agl, artifact_perm ap 
+							WHERE ug.role_id='".$this->getID()."'
+							AND ug.group_id=agl.group_id AND
+                            agl.group_artifact_id='$uref_id'
+							AND ug.user_id=ap.user_id
+							AND agl.group_artifact_id=ap.group_artifact_id)";
 //echo "\n<br>$sql";
 						$res=db_query($sql);
 						if (!$res) {
@@ -475,10 +486,10 @@ class Role extends Error {
 					} elseif ($usection_name == 'pmadmin') {
 						$update_usergroup=true;
 					}
-				}
+	//			}
 			}
 		}
-		if ($update_usergroup) {
+//		if ($update_usergroup) {
 			$sql="UPDATE user_group 
 				SET
 				admin_flags='".$data['projectadmin'][0]."',
@@ -497,7 +508,7 @@ class Role extends Error {
 				return false;
 			}
 
-		}
+//		}
 		db_commit();
 		$this->fetchData($this->getID());
 		return true;
@@ -555,7 +566,7 @@ class Role extends Error {
 				//
 				//	See if this setting changed. If so, then update it
 				//
-				if (($this->getVal($usection_name,$uref_id) != $oldrole->getVal($usection_name,$uref_id)) || ($old_roleid == 1)) {
+	//			if (($this->getVal($usection_name,$uref_id) != $oldrole->getVal($usection_name,$uref_id)) || ($old_roleid == 1)) {
 					if ($usection_name == 'frs') {
 						$update_usergroup=true;
 					} elseif ($usection_name == 'scm') {
@@ -676,10 +687,10 @@ class Role extends Error {
 					} elseif ($usection_name == 'pmadmin') {
 						$update_usergroup=true;
 					}
-				}
+	//			}
 			}
 		}
-		if ($update_usergroup) {
+	//	if ($update_usergroup) {
 			$sql="UPDATE user_group 
 				SET
 				admin_flags='".$this->getVal('projectadmin',0)."',
@@ -701,7 +712,7 @@ class Role extends Error {
 				return false;
 			}
 
-		}
+	//	}
 		db_commit();
 		return true;
 
