@@ -694,9 +694,9 @@ $s = ((session_issecure()) ? 's' : '' );
 			print ' - '.$extra_text;
 		}
 
+		print '</H2>
 */
 
-		print '</H2>
 		<P>
 		<HR SIZE="1" NoShade>';
 
