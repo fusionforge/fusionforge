@@ -21,25 +21,25 @@ $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),
 <?php
 if (session_loggedin()) {
 ?>
-
-            <FORM NAME="monitorForm" ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
-            <INPUT TYPE="HIDDEN" NAME="func" VALUE="monitor"> 
-            <INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
-        <TR>
-            <TD COLSPAN=2"><?php
-if ($ah->isMonitoring()) {
- $img="xmail16w.png";
- $key="stop_monitoring";
-} else {
- $img="mail16w.png";
- $key="monitor";
-}
-echo '<INPUT TYPE="IMAGE" NAME="SUBMIT" '.html_image('ic/'.$img.'','20','20',array()).'</INPUT>';
-echo '<A HREF="javascript:document.forms.monitorForm.submit()">'.$Language->getText('tracker_utils',$key).'</A>';
-?>&nbsp;<A href="javascript:help_window('/help/tracker.php?helpname=monitor')"><B>(?)</B></A>
-            </FORM>
-            </TD>
-        </TR>
+		<tr>
+			<td><?php
+				if ($ah->isMonitoring()) {
+					$img="xmail16w.png";
+					$key="stop_monitoring";
+				} else {
+					$img="mail16w.png";
+					$key="monitor";
+				}
+				echo '
+				<A href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><b>'.
+					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</b></a>';
+				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><b>(?)</b></a>
+			</td>
+			<td>
+				<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><?php echo 
+					html_image('ic/taskman20w.png','20','20',array()); ?><b>Build Task Relation</b></a>
+			</td>
+		</TR>
 <?php } ?>
 	<FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
 	<INPUT TYPE="HIDDEN" NAME="func" VALUE="postmod">
@@ -54,7 +54,7 @@ echo '<A HREF="javascript:document.forms.monitorForm.submit()">'.$Language->getT
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
 			echo '<BR><B>Date Closed:</B><BR>'
-			     .date($sys_datefmt, $close_date);
+				 .date($sys_datefmt, $close_date);
 		}
 		?>
 		</TD>
@@ -235,11 +235,6 @@ echo '<A HREF="javascript:document.forms.monitorForm.submit()">'.$Language->getT
 		</FORM>
 	</TD></TR>
 
-	<tr>
-		<td colspan=2><b>Task Manager Integration:</b>
-			<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><b>Create New Task Or Attach To Existing Task</b></a>
-		</td>
-	</tr>
 	</table>
 
 <?php

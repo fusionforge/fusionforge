@@ -314,7 +314,7 @@ if ($group_id && $atid) {
 			echo '
 			<A HREF="/tracker/?atid='. $at_arr[$j]->getID() .
 			'&group_id='.$group_id.'&func=browse">' .
-			html_image("ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+			html_image("ic/tracker20w.png","20","20",array("BORDER"=>"0")) . ' &nbsp;'.
 			$at_arr[$j]->getName() .'</A> 
 			( <B>'. $at_arr[$j]->getOpenCount() .' open / '. $at_arr[$j]->getTotalCount() .' total</B> )<BR>'.
 			$at_arr[$j]->getDescription() .'<P>';

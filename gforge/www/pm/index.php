@@ -64,7 +64,7 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		echo '
 		<a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().
 		'&group_id='.$group_id.'&func=browse">' .
-		html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+		html_image("ic/taskman20w.png","20","20",array("BORDER"=>"0")) . ' &nbsp;'.
 		$pg_arr[$j]->getName() .'</a><br>'.
 		$pg_arr[$j]->getDescription() .'<p>';
 	}

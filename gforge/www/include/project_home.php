@@ -1,13 +1,5 @@
-<?php 
-/**
- * project_home.php
- *
- * SourceForge: Breaking Down the Barriers to Open Source Development
- * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
- *
- * @version   $Id$
- */
+<?php /** * project_home.php * * SourceForge: Breaking Down the Barriers to Open Source Development * Copyright 1999-2001 (c) VA Linux Systems * http://sourceforge.net * * @version   $Id: project_home.php.patched,v 1.1.2.1 2002/11/30 09:57:57 cbayle
+Exp $ */
 
 require_once('www/include/vote_function.php');
 require_once('common/include/vars.php');
@@ -247,7 +239,7 @@ print '&nbsp;'.$Language->getText('group','long_homepage').'</A>';
 // CB hide tracker if desired
 if ($project->usesTracker()) {
 	print '<HR SIZE="1" NoShade><A href="/tracker/?group_id='.$group_id.'">';
-	print html_image('ic/taskman16b.png','20','20',array('alt'=>$Language->getText('group','short_tracker')));
+	print html_image('ic/tracker20g.png','20','20',array('alt'=>$Language->getText('group','short_tracker')));
 	print $Language->getText('group', 'short_tracker').'</A>';
 
 	$result=db_query("SELECT agl.*,aca.count,aca.open_count
@@ -306,7 +298,7 @@ if ($project->usesMail()) {
 
 if ($project->usesPm()) {
 	print '<HR SIZE="1" NoShade><A href="/pm/?group_id='.$group_id.'">';
-	print html_image('ic/taskman16b.png','20','20',array('alt'=>$Language->getText('group','short_pm')));
+	print html_image('ic/taskman20g.png','20','20',array('alt'=>$Language->getText('group','short_pm')));
 	print '&nbsp;'.$Language->getText('group','long_pm').'</A>';
 	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
 	$result = db_query ($sql);

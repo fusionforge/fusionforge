@@ -125,7 +125,7 @@ function project_summary($group_id,$mode,$no_table) {
 	// ################## ArtifactTypes
 
 	$return .= '<A href="/tracker/?group_id='.$group_id.'">';
-	$return .= html_image("ic/taskman16b.png",'20','20',array('alt'=>'Tracker'));
+	$return .= html_image("ic/tracker20g.png",'20','20',array('alt'=>'Tracker'));
 	$return .= ' Tracker</A>';
 
 	if ($mode != 'compact') {
@@ -198,7 +198,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="/pm/?group_id='.$group_id.'">';
-		$return .= html_image("ic/taskman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Tasks"));
+		$return .= html_image("ic/taskman20g.png","20","20",array("BORDER"=>"0","ALT"=>"Tasks"));
 		$return .= '&nbsp;Task&nbsp;Manager</A>';
 
 		if ($mode != 'compact') {
