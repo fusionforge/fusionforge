@@ -90,6 +90,8 @@ computedefault(){
 	DEFAULTsys_use_snippet=true
 	DEFAULTsys_use_ssl=false
 	DEFAULTsys_use_people=true
+	DEFAULTsys_use_ftpuploads=false
+	DEFAULTsys_use_gateways=true
 	DEFAULTsys_use_project_vhost=true
 	DEFAULTsys_use_project_database=false
 	DEFAULTsys_use_project_multimedia=false
@@ -103,7 +105,6 @@ computedefault(){
 	DEFAULTsys_plugins_path=/usr/lib/gforge/plugins/
 	DEFAULTsys_sslcrt=$(findcrt)
 	DEFAULTsys_sslkey=$(findkey)
-	DEFAULTsys_use_ftpuploads=false
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR

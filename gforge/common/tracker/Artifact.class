@@ -1234,11 +1234,7 @@ class Artifact extends Error {
 			$monitor_ids=array_unique($monitor_ids);
 		}
 		
-		// alias to which replies to the e-mail will go (see cronjobs/mailaliases.php)
-		$formatted_tracker_name = preg_replace('/[^[:alnum:]]/','',$this->ArtifactType->getName());
-		$formatted_tracker_name = strtolower($formatted_tracker_name);
-
-		$from = strtolower($this->ArtifactType->Group->getUnixName()).'-'.$formatted_tracker_name.'@'.$GLOBALS['sys_default_domain'];
+		$from = $this->ArtifactType->getReturnEmailAddress();
 		$extra_headers = 'Reply-to: '.$from;
 		
 		// load the e-mail addresses of the users

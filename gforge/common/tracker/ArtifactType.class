@@ -408,6 +408,43 @@ class ArtifactType extends Error {
 	function getName() {
 		return $this->data_array['name'];
 	}
+	
+	/**
+	 * getFormattedName - formatted name of this ArtifactType
+	 *
+	 * @return string formatted name
+	 */
+	function getFormattedName() {
+		$name = preg_replace('/[^[:alnum:]]/','',$this->getName());
+		$name = strtolower($name);
+		return $name;
+	}
+	
+	/**
+	 * getUnixName - returns the name used by email gateway
+	 *
+	 * @return string unix name
+	 */
+	function getUnixName() {
+		return strtolower($this->Group->getUnixName()).'-'.$this->getFormattedName();
+	}
+	
+	/**
+	 * getReturnEmailAddress() - return the return email address for notification emails
+	 *
+	 * @return string return email address
+	 */
+	function getReturnEmailAddress() {
+		global $sys_default_domain;
+		$address = '';
+		if($sys_use_gateways) {
+			$address .= strtolower($this->getUnixName());
+		} else {
+			$address .= 'noreply';
+		}
+		$address .= '@'.$sys_default_domain;
+		return $address;
+	}
 
 	/**
 	 *	  getDescription - the description of this ArtifactType.

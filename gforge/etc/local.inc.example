@@ -162,7 +162,11 @@ $sys_use_trove=true;
 $sys_use_snippet=true;
 $sys_use_ssl=false;
 $sys_use_people=true;
+
+// Enable/Disable the ability to upload files using FTP in FRS
 $sys_use_ftpuploads=false;
+// Enable/Disable the use of mail gateways for trackers and forums
+$sys_use_gateways=true;
 
 // Enable/Disable the ability to add additionnal vhost for a project
 $sys_use_project_vhost=true;

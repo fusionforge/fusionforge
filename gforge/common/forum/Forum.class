@@ -250,6 +250,11 @@ class Forum extends Error {
 		}
 	}
 
+	/**
+	 * getUnixName - returns the name used by email gateway
+	 *
+	 * @return string unix name
+	 */
 	function getUnixName() {
 		return $this->Group->getUnixName().'-'.$this->getName();
 	}
@@ -364,6 +369,28 @@ class Forum extends Error {
 		$sql="SELECT user_id FROM forum_monitored_forums WHERE forum_id='".$this->getID()."'";
 		$result=db_query($sql);
 		return util_result_column_to_array($result);
+	}
+	
+	/**
+	 * getReturnEmailAddress() - return the return email address for notification emails
+	 *
+	 * @return string return email address
+	 */
+	function getReturnEmailAddress() {
+		global $sys_default_domain, $sys_use_gateways;
+		$address = '';
+		if($sys_use_gateways) {
+			$address .= $this->getUnixName();
+		} else {
+			$address .= 'noreply';
+		}
+		$address .= '@';
+		if($sys_use_gateways && isset($GLOBALS['sys_forum_return_domain'])) {
+			$address .= $GLOBALS['sys_forum_return_domain'];
+		} else {
+			$address .= $sys_default_domain;
+		}
+		return $address;
 	}
 
 	/**
