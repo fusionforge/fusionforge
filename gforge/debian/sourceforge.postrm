@@ -18,8 +18,8 @@ set -e
 
 case "$1" in
     purge)
-	su -s /bin/sh postgres -c "dropdb sourceforge" &> /dev/null || true
-	su -s /bin/sh postgres -c "dropuser sourceforge" &> /dev/null || true
+	su -s /bin/sh postgres -c "dropdb sourceforge" 2>&1 > /dev/null || true
+	su -s /bin/sh postgres -c "dropuser sourceforge" 2>&1 > /dev/null || true
 	rm -f /var/lib/postgres/data/sourceforge_passwd
 	rm -rf /var/lib/sourceforge
 	rm -f /etc/sourceforge/sourceforge.conf

@@ -28,7 +28,7 @@ su -c "/usr/lib/sourceforge/bin/project_weekly_metric.php -d include_path=/usr/l
 
 # Database vacuuming
 # Theoretically unneeded: postgres does it at 4:00 by default
-# 0 2 * * * sourceforge [ -x /usr/lib/sourceforge/bin/vacuum.php ] && /usr/lib/sourceforge/bin/vacuum.php -d include_path=/usr/lib/sourceforge/www/include &> /dev/null
+# 0 2 * * * sourceforge [ -x /usr/lib/sourceforge/bin/vacuum.php ] && /usr/lib/sourceforge/bin/vacuum.php -d include_path=/usr/lib/sourceforge/www/include 2>&1 > /dev/null
 
 # Daily rotation of the activity_log
 su -c "/usr/lib/sourceforge/bin/rotate_activity.php -d include_path=/usr/lib/sourceforge/www/include" - sourceforge
