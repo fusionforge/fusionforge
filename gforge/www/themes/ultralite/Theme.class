@@ -3,10 +3,8 @@ class Theme extends Layout {
 	/**
 	 * Theme() - Constructor
 	 */
-
 	function Theme() {
 	}
-
 
 	/**
 	 *	header() - "steel theme" top of page
@@ -14,12 +12,10 @@ class Theme extends Layout {
 	 * @param	array	Header parameters array
 	 */
 	function header($params) {
-		
 		if ($_POST['selectmenu'] == "yes")
 		{
 		header("Location:".$_POST['menuList']);		
 		}
-
 		global $Language, $sys_name;
 		if (!$params['title']) {
 			$params['title'] = "$sys_name";
@@ -31,7 +27,6 @@ class Theme extends Layout {
 		<!DOCTYPE html
 		PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo $Language->getLanguageCode(); ?>">
 		<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
@@ -39,6 +34,9 @@ class Theme extends Layout {
 		</head>
 		
 		<body>
+		<p align=left>
+		<a href="/"><h2>GForge</h2></a>
+		</p>
 		<p align=right>
 		<?
 		if (session_loggedin()) {
@@ -55,12 +53,11 @@ class Theme extends Layout {
 		?>
 		</p>
 
-		<p align=right>
+		<p align=left>
 		<?php echo $this->searchBox(); ?>
-		
 		</p>
 
-		<p align=right>
+		<p align=left>
 		<?php echo $this->outerTabs($params); ?>
 		<?php
 		if ($params['group']) {
@@ -164,7 +161,7 @@ class Theme extends Layout {
 	 * @param   string  Box title
 	 */
 	function boxTop($title) {
-		return '<!-- boxTop --><BR>'.$title.'<BR>';
+		return '<!-- boxTop --><br>'.$title.'<br>';
 	}
 
 	
@@ -174,9 +171,20 @@ class Theme extends Layout {
 	 * @param   string  Box title
 	 */
 	function boxMiddle($title) {
-		return '<!-- boxMiddle --><BR><BR>'.$title.'<BR><BR>';
+		return '<!-- boxMiddle --><br />'.$title.'<br />';
 	}
 
+	/**
+	 * boxBottom() - Bottom HTML box
+	 *
+	 * @param   bool	Whether to echo or return the results
+	 */
+	function boxBottom() {
+		return '
+			<!-- Box Bottom Start -->
+			<br />
+		<!-- Box Bottom End -->';
+	}
 
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
@@ -185,11 +193,17 @@ class Theme extends Layout {
 	 * @param	   array   The array of title links
 	 */
 	function listTableTop ($title_arr,$links_arr=false) {
+		$return = '
+		<!-- listTableTop -->
+		<table>
+        <tr><td>
+		<table>
+		<tr>';
 		$count=count($title_arr);
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align="left"><a class="titlebar" href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
+				<td align="left"><a  href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
 			}
 		} else {
 			for ($i=0; $i<$count; $i++) {
@@ -197,8 +211,30 @@ class Theme extends Layout {
 				<td align="left">'.$title_arr[$i].'</td>';
 			}
 		}
+		$return .= '
+		</tr>
+		<tr align="left">
+		<td colspan="'.$count.'" height="1"></td>
+		</tr>';
 		return $return;
 	}
+
+	function listTableBottom() {
+		return '</table></td>
+			<!-- <td valign="top" align="right" width="10"></td> -->
+			</tr></table>';
+	}
+
+
+
+/**
+	 * boxGetAltRowStyle() - Get an alternating row style for tables
+	 *
+	 * @param			   int			 Row number
+	 */
+	function boxGetAltRowStyle($i) {
+	}
+
 
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
 		$count=count($TABS_DIRS);
