@@ -46,9 +46,7 @@ Create a blank database for postgres
 
 # createdb alexandria
 
-Be certain that plpgsql.so is present in your Postgres library path
-
-Import the database schema
+Be certain that plpgsql.so is present in your Postgres library path.  Import the database schema:
 
 # psql alexandria < db/gforge3.sql
 
