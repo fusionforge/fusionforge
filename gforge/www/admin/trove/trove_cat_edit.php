@@ -60,6 +60,22 @@ if ($GLOBALS["submit"]) {
 	session_redirect("/admin/trove/trove_cat_list.php");
 } 
 
+if ($GLOBALS["delete"]) {
+	$res = db_query("
+		SELECT trove_cat_id FROM trove_cat WHERE parent='$form_trove_cat_id'
+	");
+		
+	if (!$res) {
+		exit_error( 'Error In Trove Operation', db_error());
+	}
+	if (db_numrows($res)>0) {
+		exit_error("Can't delete","That trove cat has sub categories");
+	} else {
+		db_query(" DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
+		db_query(" DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
+	}
+	session_redirect("/admin/trove/trove_cat_list.php");
+}
 
 /*
 	Main Code
@@ -106,7 +122,7 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <p>New category description (VARCHAR 255):
 <br><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>">
 
-<br><input type="submit" name="submit" value="Update">
+<br><input type="submit" name="submit" value="Update"><input type="submit" name="delete" value="Delete">
 </form>
 
 <?php
