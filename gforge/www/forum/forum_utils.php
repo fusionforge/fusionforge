@@ -66,9 +66,9 @@ function forum_header($params) {
 					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
 			} else {
 				echo '
-				<B>Posted By:</B> '.user_getname( db_result($result,0,'submitted_by')).'<BR>
-				<B>Date:</B> '. date($sys_datefmt,db_result($result,0,'date')).'<BR>
-				<B>Summary:</B><A HREF="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</A>
+				<B>'.$Language->getText('forum_utils','postedby').':</B> '.user_getname( db_result($result,0,'submitted_by')).'<BR>
+				<B>'.$Language->getText('forum_utils','date').':</B> '. date($sys_datefmt,db_result($result,0,'date')).'<BR>
+				<B>'.$Language->getText('forum_utils','summary').':</B><A HREF="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</A>
 				<P>
 				'. util_make_links( nl2br( db_result($result,0,'details')));
 

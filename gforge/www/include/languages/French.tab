@@ -145,10 +145,12 @@ forum_utils	erroradd	Erreur dans l'ajout du Forum
 forum_utils	added	Forum ajouté
 forum_utils	notfound	Non trouvé
 forum_utils	by	Par:
-forum_utils	brokenthread	Thread cassé
-forum_utils	thread	Thread
+forum_utils	brokenthread	File de message cassé
+forum_utils	thread	File de message
 forum_utils	author	Auteur
+forum_utils	postedby	Posté par
 forum_utils	date	Date
+forum_utils	summary	Titre
 forum_utils	error	Erreur!
 forum_utils	noid	Envoi sans identifiant de forum
 forum_utils	mustinclude	Doit inclure un corps et un entête de message

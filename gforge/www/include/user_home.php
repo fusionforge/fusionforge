@@ -22,7 +22,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 <TABLE width=100% cellpadding=2 cellspacing=2 border=0><TR valign=top>
 <TD width=50%>
 
-<?php echo $HTML->box1_top("Personal Information",true,false,false); ?>
+<?php echo $HTML->box1_top("Personal Information"); ?>
 <TR>
 	<TD>User ID: </TD>
 	<TD><B><?php print $user_id; ?></B> ( <A HREF="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><B>Skills Profile</B></A> )</TD>

@@ -29,7 +29,7 @@ if ($diary_user) {
 
 	<P>';
 
-	echo $HTML->box1_top('Existing Diary And Note Entries',false,false);
+	echo $HTML->box1_top('Existing Diary And Note Entries');
 
 	if ($diary_id) {
 		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";

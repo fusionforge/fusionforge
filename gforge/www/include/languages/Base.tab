@@ -143,7 +143,9 @@ forum_utils	by	By:
 forum_utils	brokenthread	Broken Thread
 forum_utils	thread	Thread
 forum_utils	author	Author
+forum_utils	postedby	Posted By
 forum_utils	date	Date
+forum_utils	summary	Summary
 forum_utils	error	Error!
 forum_utils	noid	Trying to post without a forum ID
 forum_utils	mustinclude	Must include a message body and subject
