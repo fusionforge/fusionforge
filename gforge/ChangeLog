@@ -16,6 +16,14 @@
 	within the realm of being XHTML-compliant. Significant refinement
 	is still necessary to be 100% compliant.
 
+2003-01-10  Tom Copeland <tom@infoether.com>
+
+	* www/account/register.php, 
+	www/tracker/add.php, 
+	common/include/utils.php
+	www/forum/include/ForumHTML.class: Began work on task #63 - adding a
+	red * to all required fields.
+
 2003-01-09  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* common/include/session.php(session_issecure, session_redirect):
