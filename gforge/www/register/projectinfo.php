@@ -25,7 +25,7 @@
 
 require_once('pre.php');
 require_once('common/include/license.php');
-
+require_once('common/scm/SCMFactory.class');
 //
 //	Test if restricted project registration
 //
@@ -41,7 +41,6 @@ if ($submit) {
 	$license_other = trim($license_other);
 	$description = trim($description);
 	$unix_name = strtolower($unix_name);
-
 	/*
 		Fierce validation
 	*/
@@ -64,6 +63,8 @@ if ($submit) {
 		$feedback .= $Language->getText('register','conflicting_licenses_choice');
 	} else if ($license==GROUP_LICENSE_OTHER && strlen($license_other)<50) {
 		$feedback .= $Language->getText('register','more_license_description');
+	} else if ($sys_use_scm && !$scm) {
+		$feedback .= $Language->getText('register','scm_not_selected');
 	} else {
 		$group = new Group();
 		$u =& session_get_user();
@@ -77,6 +78,7 @@ if ($submit) {
 			$purpose
 		);
 
+		$res = $res && $group->setPluginUse($scm,true);
 		if (!$res) {
 			$feedback .= $group->getErrorMessage();
 		} else {
@@ -92,7 +94,6 @@ if ($submit) {
 			$HTML->footer(array());
 			exit();
 		}
-
 	}
 } else if ($i_disagree) {
 	session_redirect("/");
@@ -142,6 +143,33 @@ echo license_selectbox('license',$license);
 <?php echo $Language->getText('register','project_unix_name',array($GLOBALS['sys_default_domain'])) ?>
 
 <input type=text maxlength="15" SIZE="15" name="unix_name" value="<?php echo $unix_name; ?>">
+
+<?php
+	$SCMFactory=new SCMFactory();
+	if ($sys_use_scm) {
+		echo $Language->getText('register','choose_scm');
+	}
+	$scm_plugins=$SCMFactory->getSCMs();
+	if(count($scm_plugins)==1) {
+		echo $Language->getText('register','one_scm',$scm_plugins[0]);
+		echo '<input type=\'hidden\' name=\'scm\' value=\''. $scm_plugins[0].'\'/>';
+	} else {
+		$checked=true;
+		foreach($scm_plugins as $scm)
+		{
+			$myPlugin= plugin_get_object($scm);
+			echo '<p><input type=\'radio\' name=\'scm\' ';
+			if ($checked) {
+				echo 'CHECKED ';
+			}
+			echo 'value='.$myPlugin->name;
+			echo '>'.$myPlugin->text.'</input></p>';
+			$checked=false;
+		}
+	}
+
+?>
+
 
 <div align="center">
 <input type=submit name="submit" value="<?php echo $Language->getText('register','i_agree') ?>"> <input type=submit name="i_disagree" value="<?php echo $Language->getText('register','i_disagree') ?>">
