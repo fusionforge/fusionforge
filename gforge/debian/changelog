@@ -1,11 +1,12 @@
-gforge (3.1-26+2) unstable; urgency=low
+gforge (3.1-26+3) unstable; urgency=low
 
   * Fixed a bug in include.pl, where db_drop_table_if_exists would check
     for the existence of a table then promptly do nothing about it.
   * Fixed stats_cvs.pl so it actually does something useful, and enabled
     it in crontab, so it does so every night (closes: #215920).
+  * Enlarged the text input widget for SSH keys (closes: #293566).
 
- -- Roland Mas <lolando@debian.org>  Sat, 19 Feb 2005 19:06:29 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 19 Feb 2005 19:11:00 +0100
 
 gforge (3.1-26) unstable; urgency=high
 
