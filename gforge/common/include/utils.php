@@ -97,7 +97,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 
 	$charset = $Language->getText('conf','mail_charset');
 	if (!$charset) {
-		$charset = 'ISO-8859-1';
+		$charset = 'UTF-8';
 	}
 	$body2 = '';
 	if ($extra_headers) {

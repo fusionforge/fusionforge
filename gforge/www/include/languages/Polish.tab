@@ -84,4 +84,4 @@ home	top_project_downloads	Najczęściej pobierane projekty
 conf	content_encoding	UTF-8
 conf	language_code	pl
 conf	language_id	15
-conf	mail_charset	ISO-8859-2
+conf	mail_charset	UTF-8

@@ -520,7 +520,7 @@ conf	content_encoding	UTF-8
 conf	default_font		verdana,arial,helvetica,sans-serif
 conf	language_code		nl
 conf	language_id		12
-conf	mail_charset		ISO-8859-1
+conf	mail_charset		UTF-8
 #contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/siteadmin">$1 Master Project</a>.</p>
 #contact	title		Contact $1
 #developer	body		Body

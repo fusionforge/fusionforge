@@ -81,4 +81,4 @@ conf	content_encoding	UTF-8
 conf	default_font	MS Sans Serif,Thonburi,sans-serif
 conf	language_code	th
 conf	language_id	5
-conf	mail_charset	TIS-620
+conf	mail_charset	UTF-8

@@ -546,7 +546,7 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	sv
 conf	language_id	10
-conf	mail_charset	ISO-8859-1
+conf	mail_charset	UTF-8
 contact	about_blurb	<p>Detta är kontakt sidan för <b>$1</b> -- Om du har ett problem med ett projekt med oss som värd, var vänlig skicka dina frågor/information till support/fel-ansvarig för det projektet. Du kan komma åt dessa finesser genom att besöka projektets utvecklingshemsida på: <tt>http://$2/projects/&lt;projectnamn&gt;</tt> och klicka på lämpligt verktyg.</p><p>Om du har en supportbegäran, felanmälan eller önskar att kommunicera direkt med $1-personalen, var vänlig och besök då <a href="/projects/siteadmin">$1 Huvudprojekt</a>.</p>
 contact	title	Kontakta $1
 developer	body	Text

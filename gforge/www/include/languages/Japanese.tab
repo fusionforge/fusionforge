@@ -3,7 +3,7 @@ system	locale	ja
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	Y-m-d H:i
 conf	content_encoding	UTF-8
-conf	mail_charset	ISO-2022-JP
+conf	mail_charset	UTF-8
 conf	default_font	""
 conf	language_code	ja
 conf	language_id	25

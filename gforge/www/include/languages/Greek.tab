@@ -81,4 +81,4 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	el
 conf	language_id	19
-conf	mail_charset	ISO-8859-7
+conf	mail_charset	UTF-8

@@ -22,7 +22,7 @@ account	updated	Изменено
 conf	content_encoding	UTF-8
 conf	language_code	ru
 conf	language_id	17
-conf	mail_charset	ISO-8859-5
+conf	mail_charset	UTF-8
 frs	file_download	Скачать
 frs	file_monitor	Следить
 frs	file_notes	Информация

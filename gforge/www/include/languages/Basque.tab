@@ -560,7 +560,7 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	eu
 conf	language_id	4
-conf	mail_charset	ISO-8859-1
+conf	mail_charset	UTF-8
 contact	about_blurb	<p>Hau <b>$1</b>-en kontaktu orria da -- Guk ostatu ematen dugun proiekturen batekin arazoak badituzu mesedez bidali iezazkiozu azalpenak eta galderak webgune horren arduradunari. Horretarako proiektuaren webgune nagusira joan eta bertan arazoa beharrezko baliabideak izango dituzu: <tt>http://$2/projects/&amp;lt;proiektuaren izena&amp;gt;</tt> eta tresna aproposan sakatuz.</p><p>Laguntza eskaera, akats txostena edota $1 proiektuko arduradunekin hitzegin nahi baduzu, mesedez ondorengo lotura bisita ezazu: <a href="/projects/sourceforge">$1 proiektuaren webgunea</a>.</p>
 contact	title	$1 -ekin harremanetan jarri
 cronman	date	Data

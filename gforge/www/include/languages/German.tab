@@ -526,7 +526,7 @@ common_include_account	tooshort	Der Name ist zu kurz. Er muss mindestens 3 Buchs
 common_utils	priority_colors	Prioritätsfarben
 conf	language_code	de
 conf	language_id	6
-conf	mail_charset	ISO-8859-1
+conf	mail_charset	UTF-8
 contact	about_blurb	<p>Dieses ist die Kontakt-Seite für <b>$1</b> -- wenn Sie ein Problem mit einem bei uns gehosteten Projekt haben, senden Sie bitte die Fragen/Info zum Support-/Bug-Manager für das Projekt. Sie können auf dieses Feature zugreifen, indem Sie die Projekt-Entwicklungs-Homepage auf: <tt>http://$2/projects/<project name></tt> besuchen und auf den entsprechenden Werkzeug-Link klicken.</p><p>Wenn Sie eine Support-Anfrage, einen Bug-Report haben oder direkt mit der $1-Leitung kommunizieren wollen, besuchen Sie bitte das <a href="/projects/siteadmin">$1 Master Projekt</a>.</p>
 contact	title	Kontaktiere $1
 developer	date	Datum

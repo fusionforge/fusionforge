@@ -10,4 +10,4 @@
 #  *
 #  */
 conf	content_encoding	UTF-8
-conf	mail_charset	ISO-8859-1
+conf	mail_charset	UTF-8

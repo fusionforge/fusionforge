@@ -594,7 +594,7 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
 conf	language_id	7
-conf	mail_charset	ISO-8859-1
+conf	mail_charset	UTF-8
 contact	about_blurb	<p>Ceci est la page de prise de contact pour <b>$1</b> : si vous avez des problèmes avec un projet hébergé ici, veuillez poser vos questions sur le gestionnaire de support ou de bug de ce projet. Vous pouvez accéder à ces fonctionnalités en vous rendant sur la page d'accueil du projet à l'adresse : <tt>http://$2/projects/&lt;nom du projet&gt;</tt> et en cliquant sur l'outil approprié.</p><p>Si vous avez besoin d'aide, que vous souhaitez signaler un bug ou communiquer directement avec l'équipe de $1, merci de vous rendre sur le <a href="/projects/siteadmin">Projet Principal de $1</a>.</p>
 contact	title	Contacter $1
 cronman	date	Date
