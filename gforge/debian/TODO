@@ -24,17 +24,9 @@ here have been transferred onto the Savannah project, at
 
 * [RM] Decide on whether to use a chroot or not.
 
-* [RM] Split DB-related part from sourceforge.postinst into an
-  install-db.sh script.
-
 * [RM] Provide a way to un-release a file, and (why not?) to modify a
   released file afterwards.  Maybe.  [RM] Already supposed to work
   (edit releases), needs testing.
-
-* [RM] Multiple installations of the package result in duplicate lines
-  in the /etc/inetd.conf file.  Removal of the package restore the
-  situation to a correct one, but it's suboptimal nevertheless.  Find
-  a way to solve this problem.
 
 # Local variables:
 # mode: indented-text
