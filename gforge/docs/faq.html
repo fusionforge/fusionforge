@@ -209,9 +209,16 @@ VACUUM
 </li>
 
 <li>
-<b>When I update a task with a comment I get the following error: 
-update():: AddMessage():: ERROR: pg_aclcheck: class "project_messa_project_messa_seq" not found.  In fact, poking around my database a bit, there seem to be a lot of sequences missing.  What gives?</b>
-<p>Are you running an old version of Postgres - i.e. 7.1?  Since then, the maximum size of a sequence changed from an int to a long (when?) and the GForge database creation script is set up to use the newer limits.  So, edit the db/gforge3.sql script and do a search and replace of <code>9223372036854775807</code> with <code>2147483647</code>.  Then rerun gforge3.sql and see if the sequences get created and the problems go away.</p>
+<b>When I update a task with a comment I get the following error:
+<pre>
+<p>update():: AddMessage():: ERROR: pg_aclcheck: class "project_messa_project_messa_seq" not found.
+</pre>
+<p>In fact, poking around my database a bit, there seem to be a lot of sequences missing.  What gives?</b>
+<p>Are you running an old version of Postgres - i.e. 7.1?  Since then, the maximum size of a sequence changed from an int to a long (when?) and the GForge database creation script is set up to use the newer limits.  So, edit <code>db/gforge3.sql</code> and do a search and replace of <code>9223372036854775807</code> with <code>2147483647</code>.  Then rerun <code>db/gforge3.sql</code> and see if the sequences get created and the problems go away.</p>
+<p>Note that if there are already some entries in those tables you might need to reset the sequence like this:
+<pre>
+select setval('project_messa_project_messa_seq',max(project_message_id)) from project_messages;
+</pre>
 </li>
 
 
