@@ -79,6 +79,7 @@ gforge/www/images/pow-gforge.png -text
 gforge/www/images/sf-for-debian.png -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
+gforge/www/search/include/engines/TrackersGroupSearchEngine.class -text svneol=unset#application/octet-stream
 gforge/www/themes/gforge/images/box-grad.png -text
 gforge/www/themes/gforge/images/box-topleft.png -text
 gforge/www/themes/gforge/images/box-topright.png -text

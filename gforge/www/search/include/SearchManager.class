@@ -10,6 +10,7 @@
  */
 
 require_once('www/search/include/engines/GroupSearchEngine.class');
+require_once('www/search/include/engines/TrackersGroupSearchEngine.class');
 require_once('www/search/include/engines/ArtifactSearchEngine.class');
 require_once('www/search/include/engines/ForumSearchEngine.class');
 
@@ -91,7 +92,7 @@ class SearchManager {
 		// Project search engines
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_TRACKERS,
-			new GroupSearchEngine(SEARCH__TYPE_IS_TRACKERS, 'TrackersHtmlSearchRenderer', $Language->getText('searchbox','trackers'))
+			new TrackersGroupSearchEngine()
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FORUMS,
