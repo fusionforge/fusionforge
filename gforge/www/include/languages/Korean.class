@@ -242,7 +242,7 @@ class Korean extends BaseLanguage {
 	$this->REALNAME='이름';
 	$this->EMAILADDR='이메일 주소';
 
-	$this->ACCOUNT_LOSTPW_title='계정 비밀번호 분실';
+	$this->ACCOUNT_LOSTPW_title='비밀번호를 잊으셨습니까';
 	$this->ACCOUNT_LOSTPW_desc='
 	<P><B>비밀번호를 잊으셨습니까?</B>
 	<P>비밀번호를 분실하는 것은 사용하고 계신 계정과, 운영중인 프로젝트, 그리고 이 사이트 전체적으로 좋지않은 영향을 미칠 수 있습니다. 
@@ -269,6 +269,215 @@ class Korean extends BaseLanguage {
 
 	// New strings added on 2002/06/16 by Soon-Son Kwon
 	$this->SENDMESSAGE_blurb='스팸을 줄이기 위해 아래 양식을 사용합니다.<p>아래 양식을 모두 제대로 채워 주십시오. 만약 그렇지 않다면 수신인이 제대로 응답하지 못하게 될수도 있습니다.<P><FONT COLOR="RED"><B>만약 어떤 도움을 요청하는 경우라면:</B> 사이트 관련 문서를 읽어 보셨습니까? 여러분의 <B>사용자 ID</B>와 <B>이름</B>을 제대로 명시하셨는지요? 어느 특정 프로젝트에 관한 것이라면 <B>프로젝트 ID</B> (<B>그룹 ID</B>) 및 <B>프로젝트 이름</B>을 명시해 주시기 바랍니다.</FONT>';
+
+	// New strings added on 2002/06/20 by Soon-Son Kwon
+	$this->REGISTER_start='
+<p>
+환영합니다. 여러분은 이제 이곳에서 제공하는 모든 기능들을 
+활용할 수 있는 프로젝트를 새로 생성하고 있습니다. 
+</p>
+		
+<p><B>진행 과정</B>
+		
+<P>
+새로운 프로젝트를 생성하는 것은 어렵지 않습니다만 가능한 한 많은 
+과정을 자동화하기 위해 몇 가지 정보를 필요로 합니다. 전체 과정은 
+총 10분 정도가 소요됩니다.
+
+<P>
+프로젝트 등록 과정 도중 여러분의 계정 사용에 관련된 책임의 한계에 관한
+문서들을 읽어보시게 됩니다. 여러분과 여러분이 개설하실 프로젝트에 중요한 
+내용이니 무시하지 마시고 차근차근 읽어봐 주시기 바랍니다.
+				
+<p>&nbsp;
+<BR><H3 align=center><a href="requirements.php">단계 1: 제공되는 서비스와 필요 조건</a></H3>
+</p>';
+
+	$this->REGISTER_step1='
+<H2>단계 1: 제공되는 서비스와 필요 조건</H2>
+
+<p>
+We are now offering a full suite of services for Sourceforge projects. If
+you haven\'t already, please be sure to browse the most recent revision of
+the Sourceforge Services.
+</p>
+
+<p>
+<b>Use of Project Account</b>
+</p>
+
+<p>
+The space given to you on the original Sourceforge servers is given
+for the expressed purpose of Open Source development or, in the case
+of web sites, the advancement of Open Source.  The space given to you
+on this server, on the other hand, is given for the expressed purpose
+of whatever the local Sourceforge maintainer has decided.
+</p>
+
+<p>
+<b>Creative Freedom</b>
+</p>
+
+<p>
+It is the intent of the Sourceforge software to allow you creative
+freedom on your project.  However, for the legal protection of this
+site and yours there might be limits imposed by the local Sourceforge
+administrator.  Details about these restrictions are described in the
+Terms of Service.
+</p>
+
+<p>
+<b>Advertisements</b>
+</p>
+
+<p>
+You may not place any revenue-generating advertisements on a site
+hosted at sourceforge.net.  Contact the local Sourceforge
+administrator about the present site.
+</p>
+
+<p>
+<b>Sourceforge Link</b>
+</p>
+
+<p>
+If you host a web site at this Sourceforge site, you might want to
+place one of our approved graphic images on your site with a link back
+to the Sourceforge site.  The graphic may either link to the main
+Sourceforge site or to your project page on the site.  For information
+about how to insert a SourceForge logo which will track your
+pageviews, please read the Sourceforge documentation.  Again, this
+condition is subject to the will of the local Sourceforge
+administrator.
+</p>
+
+<p>
+<b>Open Source/Rights to Code</b>
+</p>
+
+<p>
+You will be presented with a choice of licenses for your project.
+Some of them are Open Source approved, some are not.  The ones that
+are Open Source approved also allow us to make your code available to
+the general public: although you may choose to stop hosting your
+project with us, the nature of these licenses will allow us to
+continue to make your code available.  It is therefore advised to
+think twice before you choose a license, especially if you choose one
+the local Sourceforge administrator might have added to the default
+ones.
+</p>
+
+<p>
+If you wish to use another license that is not currently listed, let
+the local Sourceforge administrator know and he will review these
+requests on a case-by-case basis.
+</p>
+
+<p>
+It is the intent of the software to provide a permanent home for all
+versions of your code.  The Sourceforge administrator does reserve the
+right, however, to terminate your project if there is due cause, in
+accordance with the Terms of Service.
+</p>';
+	$this->REGISTER_step2_title='단계 2: 사용에 관한 규정';
+	$this->REGISTER_step2_bottom='
+<P align=center>아래에 있는 링크를 클릭하시는 것은 여러분이 위의 사용 규정을 
+모두 읽으셨음을 의미합니다. "동의함"을 클릭하시면 다음 단계로 
+넘어갑니다. 
+
+<P><H3 align=center><A href="basicinfo.php">[동의함]</A>
+&nbsp;&nbsp;<A href="/">[동의하지 않음]</A></H3>';
+	$this->REGISTER_step3='
+<H2>단계 3: 프로젝트 등록</H2>
+
+<p>
+개설하실 프로젝트에 대한 간략한 설명이 필요합니다. 
+설명에는 프로젝트의 목적과 여러분이 이루고자 하는 목표를 포함시켜 
+주십시오. 
+
+<p>
+본 사이트 관리자가 여러분의 프로젝트를 승인하게 되면 해당 계정은 
+지금 기술하신 프로젝트의 목적에 맞게 사용이 되어야 합니다. 원래의 
+목적이 아닌 다른 목적으로 프로젝트를 활용하시는 일은 삼가해 주십시오. 
+
+<P>
+<B>프로젝트의 목적 및 요약</B>
+<P>
+<FONT COLOR="RED"><B>필수항목:</B> 최대한 자세하고 정확하게 적어 주세요.</FONT>
+<P>';
+	$this->REGISTER_step4_title='단계 4: 프로젝트 이름';
+	$this->REGISTER_step4="
+<P><B>프로젝트 이름</B>
+
+<P>
+개설하시고자 하는 프로젝트에 대한 기본적인 기술 정보가 필요합니다. 
+이 프로젝트는 두 가지 종류의 이름을 가지게 됩니다.
+
+<P>
+\"Full Name\"은 40글자 이내의 자유로운 형식으로 지정하실 수 있으며 
+나중에 바꿀 수도 있습니다. 반면 \"Unix Name\"은 본 사이트의 많은 부분에서 
+사용되기 때문에 이름에 다음과 같은 몇 가지 제약 조건이 있습니다. 
+
+<UL>
+<LI>다른 프로젝트에서 지정한 이름과 겹칠 수 없습니다. 
+<LI>3글자 이상 15글자 미만의 영문 소문자로 구성되어야 합니다. 
+<LI>알파벳, 숫자 혹은 -만으로만 구성되어야 합니다. 
+<LI>유닉스 시스템에서 인식 가능한 사용자 이름이어야 합니다. 
+<LI>예약된 특정 도메인과 일치하면 안됩니다. 
+<LI>이 프로젝트에 대한 \"Unix Name\"은 변경될 수 없습니다. 
+</UL>
+
+<P>Unix Name은 다음과 같이 많은 부분에 사용되기 때문에 매우 중요합니다.";
+	$this->REGISTER_step4_warn='지금부터는 뒤로가기 버튼을 누르지 마십시오.';
+	$this->REGISTER_step5_title='단계 5: 저작권';
+	$this->REGISTER_step5='
+<P><B><I>소프트웨어 등의 직접적인 개발 작업 없이 웹사이트만을
+운영하고자 하실 경우는 "website-only"를 선택하여 주십시오.</I></B>
+
+<P>어떤 저작권을 적용하느냐 하는 것은 매우 중요한 결정입니다.
+되도록 충분한 시간을 들여 다음의 여러 저작권들이 어떤 내용을
+가지고 있는지 미리 잘 살펴보시는 것이 좋습니다.
+
+<P>몇몇 법적인 이유로 인해 한번 저작권을 결정하신 후에는 추후
+다른 저작권을 적용하는 것이 불가능하거나, 혹은 어려울 수도 있습니다.
+이는 경우에 따라 다르며 자세한 사항은 적절한 논의가 필요합니다.
+
+<P><B>저작권</B>
+
+<UL>
+<LI><A href="http://www.opensource.org/licenses/gpl-license.html" target="_blank">GNU General Public License</A>
+<LI><A href="http://www.opensource.org/licenses/lgpl-license.html" target="_blank">GNU Library or \'Lesser\' Public License</A>
+<LI><A href="http://www.opensource.org/licenses/bsd-license.html" target="_blank">BSD License</A>
+<LI><A href="http://www.opensource.org/licenses/mit-license.html" target="_blank">MIT License</A>
+<LI><A href="http://www.opensource.org/licenses/artistic-license.html" target="_blank">Artistic License</A>
+<LI><A href="http://www.mozilla.org/MPL/MPL-1.0.html" target="_blank">Mozilla Public License 1.0</A>
+<LI><A href="http://www.troll.no/qpl" target="_blank">Q Public License</A>
+<LI><A href="http://www.research.ibm.com/jikes/license/license3.htm" target="_blank">IBM Public License 1.0</A>
+<LI><A href="http://cvw.mitre.org/cvw/licenses/source/license.html" target="_blank">Collaborative Virtual Workspace License</A>
+<LI><A href="http://www.risource.org/RPL/RPL-1.0A.shtml" target="_blank">Ricoh Source Code Public License 1.0</A>
+<LI><A href="http://www.python.org/doc/Copyright.html" target="_blank">Python License</A>
+<LI><A href="http://www.opensource.org/licenses/zlib-license.html" target="_blank">zlib/libpng License</A>
+<LI><A href="http://www.sourceforge.net/register/publicdomain.txt" target="_blank">Public Domain</A>
+</UL>
+
+<P><B>이 프로젝트에 적용할 저작권</B>';
+	$this->REGISTER_step6_title='단계 6: 분류';
+	$this->REGISTER_step6='
+<P><B>프로젝트 분류</B>
+
+<P>
+본 사이트 이용자들이 여러분의 프로젝트를 찾을 수 있도록 하기 위해서는
+프로젝트의 목적에 가장 합치하는 분류를 선정하셔야 합니다.
+
+<P>
+여러분의 프로젝트는 (1) 관리자로부터 승인되고 (2) 여러분이 직접 프로젝트
+관리 페이지에서 분류를 설정해 주기 전까지는 소프트웨어 맵에 나타나지
+않습니다.
+
+<P>
+프로젝트가 승인될때 발송되는 이메일을 참고하셔서 여러분의 프로젝트를
+최대한 빠른 시간 안에 분류해 주시기 바랍니다.';
+	$this->REGISTER_step6_finish='등록 완료';
 
 	}
 }

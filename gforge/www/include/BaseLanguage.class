@@ -34,6 +34,9 @@
 
 	Soon-Son Kwon, June 16, 2002
 	*Added more strings
+
+	Soon-Son Kwon, June 20, 2002
+	*Added more strings including project registration process
 */
 
 class BaseLanguage {
@@ -290,6 +293,225 @@ This site runs Debian Sourceforge, a derivative of the code that runs the <a hre
 		
 	// New strings added on 2002/06/16 by Soon-Son Kwon
 	var $SENDMESSAGE_blurb='In an attempt to reduce spam, we are using this form to send email.<p>Fill it out accurately and completely or the receiver may not be able to respond.<P><FONT COLOR="RED"><B>IF YOU ARE WRITING FOR HELP:</B> Did you read the site documentation? Did you include your <B>user_id</B> and <B>user_name?</B> If you are writing about a project, include your <B>project id</B> (<B>group_id</B>) and <B>Project Name</B>.</FONT>';
+
+	// New strings added on 2002/06/20 by Soon-Son Kwon
+	var $REGISTER_start='
+<p>
+Welcome to Debian Sourceforge.  You are going to create a project,
+with which you will then be able to use all the Sourceforge tools.
+</p>
+		
+<p><B>The Process</B>
+		
+<P>
+Registering a project with Sourceforge is an easy process, but we
+do require a lot of information in order to automate things as much as
+possible. The entire process should take about 10 minutes.
+				
+<P>
+During signup, we will present you with some legal documents regarding
+your account with us. Please do not ignore these; they are very
+important to you and your project.
+				
+<p>&nbsp;
+<BR><H3 align=center><a href="requirements.php">Step 1: Services and Requirements</a></H3>
+</p>';
+
+	var $REGISTER_step1='
+<H2>Step 1: SourceForge Services & Requirements (Service Specific Rules)</H2>
+
+<p>
+We are now offering a full suite of services for Sourceforge projects. If
+you haven\'t already, please be sure to browse the most recent revision of
+the Sourceforge Services.
+</p>
+
+<p>
+<b>Use of Project Account</b>
+</p>
+
+<p>
+The space given to you on the original Sourceforge servers is given
+for the expressed purpose of Open Source development or, in the case
+of web sites, the advancement of Open Source.  The space given to you
+on this server, on the other hand, is given for the expressed purpose
+of whatever the local Sourceforge maintainer has decided.
+</p>
+
+<p>
+<b>Creative Freedom</b>
+</p>
+
+<p>
+It is the intent of the Sourceforge software to allow you creative
+freedom on your project.  However, for the legal protection of this
+site and yours there might be limits imposed by the local Sourceforge
+administrator.  Details about these restrictions are described in the
+Terms of Service.
+</p>
+
+<p>
+<b>Advertisements</b>
+</p>
+
+<p>
+You may not place any revenue-generating advertisements on a site
+hosted at sourceforge.net.  Contact the local Sourceforge
+administrator about the present site.
+</p>
+
+<p>
+<b>Sourceforge Link</b>
+</p>
+
+<p>
+If you host a web site at this Sourceforge site, you might want to
+place one of our approved graphic images on your site with a link back
+to the Sourceforge site.  The graphic may either link to the main
+Sourceforge site or to your project page on the site.  For information
+about how to insert a SourceForge logo which will track your
+pageviews, please read the Sourceforge documentation.  Again, this
+condition is subject to the will of the local Sourceforge
+administrator.
+</p>
+
+<p>
+<b>Open Source/Rights to Code</b>
+</p>
+
+<p>
+You will be presented with a choice of licenses for your project.
+Some of them are Open Source approved, some are not.  The ones that
+are Open Source approved also allow us to make your code available to
+the general public: although you may choose to stop hosting your
+project with us, the nature of these licenses will allow us to
+continue to make your code available.  It is therefore advised to
+think twice before you choose a license, especially if you choose one
+the local Sourceforge administrator might have added to the default
+ones.
+</p>
+
+<p>
+If you wish to use another license that is not currently listed, let
+the local Sourceforge administrator know and he will review these
+requests on a case-by-case basis.
+</p>
+
+<p>
+It is the intent of the software to provide a permanent home for all
+versions of your code.  The Sourceforge administrator does reserve the
+right, however, to terminate your project if there is due cause, in
+accordance with the Terms of Service.
+</p>';
+	var $REGISTER_step2_title='Step 2: Terms of Service Agreement';
+	var $REGISTER_step2_bottom='
+<P align=center>By clicking below, you acknowledge that you have read
+and understand the Terms of Service agreement. Clicking "I AGREE" will
+constitute your legal signature on this document.
+<P><H3 align=center><A href="basicinfo.php">[I AGREE]</A>
+&nbsp;&nbsp;<A href="/">[I DISAGREE]</A></H3>';
+	var $REGISTER_step3='
+<H2>Step 3: SourceForge Project Registration</H2>
+
+<p>We now need a short description of your project. This description
+needs to contain the purpose of the project and a summarization of your
+goals.
+
+<p>
+If the local Sourceforge administrator approves your project account,
+the account is to be used purely to meet the goals set forth in this
+statement.  Use of the project account for anything other than the
+purposes and goals in this statement is probably prohibited by local
+policy.  If you need to change this statement at any time, please
+inform a staff member and he will assist you in getting a new
+statement approved.
+
+<P>
+<B>Project Purpose and Summarization</B>
+<P>
+<FONT COLOR="RED"><B>REQUIRED:</B> Provide detailed, accurate description</FONT>
+<P>';
+	var $REGISTER_step4_title='Step 4: Project Name';
+	var $REGISTER_step4="
+<P><B>Project Name</B>
+
+<P>We now need some basic technical information for your project.
+There are two types of names that will be associated with this project.
+
+<P>The \"Full Name\" is descriptive, has no real name restrictions (except
+a 40 character limit), and
+can be changed. The \"Unix Name\" has several restrictions because it is
+used in so many places around the site. They are:
+
+<UL>
+<LI>Cannot match the unix name of any other project
+<LI>Must be between 3 and 15 characters in length
+<LI>Can only contain characters, numbers, and dashes
+<LI>Must be a valid unix username
+<LI>Cannot match one of our reserved domains
+<LI>Unix name will never change for this project
+</UL>
+
+<P>Your unix name is important, however, because it will be used for
+many things, including:";
+	var $REGISTER_step4_warn='Do Not Back Arrow After This Point';
+	var $REGISTER_step5_title='Step 5: License';
+	var $REGISTER_step5='
+<P><B><I>If you are applying for a website-only project, please
+select "website-only" from the choices below and proceed.</I></B>
+
+<P>
+SourceForge was created to advance Open Source software development.
+To keep things simple, the original SourceForge crew are relying on
+the outstanding work of the <A href="http://www.opensource.org">Open
+Source Initiative</A> for their licensing choices.
+
+<p>Local policy may require the availability of other licenses,
+though.  This should be handled by the local Sourceforge
+administrator.  If you wish to use a license that is not listed here,
+please let the administrator know why you wish to use another license.
+
+<P>Choosing a license is a serious decision. Please take some time to
+read the text (and our explanations) of several licenses before making
+a choice abour your project.
+
+<P>For many legal reasons, you may not change a project\'s license once
+it has been set. If you feel that you have a special case and legal
+capability to do this, we will work with you on a case-by-case basis.
+
+<P><B>Licenses</B>
+
+<UL>
+<LI><A href="http://www.opensource.org/licenses/gpl-license.html" target="_blank">GNU General Public License</A>
+<LI><A href="http://www.opensource.org/licenses/lgpl-license.html" target="_blank">GNU Library or \'Lesser\' Public License</A>
+<LI><A href="http://www.opensource.org/licenses/bsd-license.html" target="_blank">BSD License</A>
+<LI><A href="http://www.opensource.org/licenses/mit-license.html" target="_blank">MIT License</A>
+<LI><A href="http://www.opensource.org/licenses/artistic-license.html" target="_blank">Artistic License</A>
+<LI><A href="http://www.mozilla.org/MPL/MPL-1.0.html" target="_blank">Mozilla Public License 1.0</A>
+<LI><A href="http://www.troll.no/qpl" target="_blank">Q Public License</A>
+<LI><A href="http://www.research.ibm.com/jikes/license/license3.htm" target="_blank">IBM Public License 1.0</A>
+<LI><A href="http://cvw.mitre.org/cvw/licenses/source/license.html" target="_blank">Collaborative Virtual Workspace License</A>
+<LI><A href="http://www.risource.org/RPL/RPL-1.0A.shtml" target="_blank">Ricoh Source Code Public License 1.0</A>
+<LI><A href="http://www.python.org/doc/Copyright.html" target="_blank">Python License</A>
+<LI><A href="http://www.opensource.org/licenses/zlib-license.html" target="_blank">zlib/libpng License</A>
+<LI><A href="http://www.sourceforge.net/register/publicdomain.txt" target="_blank">Public Domain</A>
+</UL>
+
+<P><B>License for This Project</B>';
+	var $REGISTER_step6_title='Step 6: Category';
+	var $REGISTER_step6='
+<P><B>Project Category</B>
+
+<P>So that visitors to the site can find your project, you should select
+categories that is most appropriate to your project\'s purpose.
+
+<P>Your project will not be visible in the Trove software map until
+(1) it is approved and (2) you have manually categorized your project in
+your project administration screens.
+
+<P>After project approval, please immediately categorize your project
+following the instructions in the email you will receive.';
+	var $REGISTER_step6_finish='Finish Registration';
 
 	/*
 		returns database result

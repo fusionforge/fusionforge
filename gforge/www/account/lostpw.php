@@ -19,7 +19,7 @@ $HTML->header(array('title'=>$Language->ACCOUNT_LOSTPW_title));
 <INPUT type="submit" name="Send Lost PW Hash" value="Send Lost PW Hash">
 </FORM>
 
-<P><A href="/">[Return to Main Page]</A>
+<P><A href="/">[Return to <?php echo $GLOBALS["sys_name"]; ?>]</A>
 
 <?php
 $HTML->footer(array());
