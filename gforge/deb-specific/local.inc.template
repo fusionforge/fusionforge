@@ -124,7 +124,9 @@ $sys_name="{system_name}";
 //
 $sys_session_key        = "foobar";
 $sys_session_expire     = 60 * 60 * 24 * 7; 
-$sys_session_cypher     = MCRYPT_TWOFISH;
+//$sys_session_cypher     = MCRYPT_TWOFISH;
+// Temporary workaround for libmcrypt bug
+$sys_session_cypher     = MCRYPT_TripleDES;
 $sys_session_cyphermode = MCRYPT_MODE_ECB;
 
 // username cookie settings
