@@ -103,7 +103,7 @@ site_header(array('title'=>$Language->getText('register','project_information'),
 
 <input size="40" maxlength="40" type=text name="full_name" value="<?php echo stripslashes($full_name); ?>">
 
-<h3><?php echo $Language->getText('register','purpose_and_summarization', array($GLOBALS['sys_name']))?>
+<?php echo $Language->getText('register','purpose_and_summarization', array($GLOBALS['sys_name']))?>
 <p>
 <font size="-1">
 <textarea name="purpose" wrap="virtual" cols="70" rows="10">
