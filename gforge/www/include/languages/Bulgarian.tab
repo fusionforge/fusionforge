@@ -46,7 +46,8 @@ group	long_survey	Допитване
 group	short_bugs	Грешки
 group	short_scm	SCM
 group	short_docman	Документи
-group	short_files	Filesgroup	short_forum	Форуми
+group	short_files	Файлове
+group	short_forum	Форуми
 group	short_homepage	Начало
 group	short_mail	Получатели
 group	short_main	Основно
