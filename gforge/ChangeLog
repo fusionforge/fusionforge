@@ -1,3 +1,7 @@
+2004-02-18  Guillaume Smet <guillaume-gforge@smet.org>
+	
+	* updated french localization
+
 2004-02-17  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* sf_ldap_check_group now returns false when ldap is not used

@@ -87,11 +87,15 @@ account_lostpw	subject	$1 - Vérification
 account_lostpw	title	Perdu votre mot de passe ?
 account_lostpw	user_dont_exist	Cet utilisateur n'existe pas.
 account_lostpw	warn	<p>Perdre son mot de passe n'est pas sans conséquence. Cela compromet la sécurité de votre compte, de vos projets et de ce site.</p><p>Cliquer sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous déclenchera l'envoi d'une URL à l'adresse que vous nous avez fournie. Celle-ci contient une clé de confirmation de 128 bits pour votre compte. An allant à cette URL, vous pourrez changer votre mot de passe en ligne et vous connecter.</p>
-account_options	change_email_address	Modifier son adresse e-mail
-account_options	change_password	Modifier son mot de passe
+account_options	change_email_address	Modifier mon adresse e-mail
+account_options	change_password	Modifier mon mot de passe
 account_options	edit_skills_profile	Editer mon profil de compétences
 account_options	email_address	Adresse e-mail :
+account_options	address		Adresse complète :
 account_options	language	Langue :
+account_options	phone		Téléphone :
+account_options	fax		Fax :
+account_options	title2		Titre :
 account_options	login_name	Identifiant :
 account_options	member_since	Membre depuis le :
 account_options	real_name	Nom complet :
@@ -1753,8 +1757,8 @@ register	apply_for_registration	Pour demander l'enregistrement d'un projet, vous
 register	comprehensive_description	Décrivez de manière plus complète votre projet
 register	conflicting_licenses_choice	Conflit dans le choix de licence
 register	describe_registration	Veuillez décrire de manière plus précise l'objet de votre enregistrement.
-register	i_agree	JE SUIS D'ACCORD
-register	i_disagree	JE NE SUIS PAS D'ACCORD
+register	i_agree	Je suis d'accord
+register	i_disagree	Je ne suis pas d'accord
 register	invalid_full_name	Nom complet invalide
 register	invalid_unix_name	Nom Unix invalide
 register	license_type	Domaine public</a><li>site web seulement<li>Autre/Licence propriétaire</ul><p><strong>Licence pour ce projet</strong><br/ ><strong>Votre licence :</strong><br /></s>
