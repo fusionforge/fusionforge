@@ -118,6 +118,42 @@ if (!$_status) {
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
+	global $_size;
+		if ($_size==640) {
+			$gantt_width=740;
+			$gantt_height=620;
+		} elseif ($_size==1024) {
+			$gantt_width=1084;
+			$gantt_height=920;
+		} elseif ($_size==1600) {
+			$gantt_width=1660;
+			$gantt_height=1340;
+		} else {
+			$gantt_width=860;
+			$gantt_height=740;
+		}
+		//echo "XX $_size $gantt_width $gantt_height XX";
+		?>
+		<script type="text/javascript">
+<!--
+		function setSize(width,height) {
+			if (window.outerWidth) {
+				window.outerWidth = width;
+				window.outerHeight = height;
+				window.resize();
+			}
+			else if (window.resizeTo) {
+				window.resizeTo(width,height);
+			}
+			else {
+				alert("Not supported.");
+			}
+		}
+		window.setSize(<?php echo $gantt_width; ?>,<?php echo $gantt_height; ?>);
+//-->
+		</script>
+		<?php
+
 echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
 	<table width="10%" border="0">
 	<tr>
