@@ -2,9 +2,10 @@ sourceforge (2.5-29+) unstable; urgency=low
 
   * [Christian] Change gid/uid attribution in ldap.php to be like in backend 
   * [Christian] Added asciize function in ldap.php because 
-  LDAP expects utf-8 encoded character string (backport from 2.6)
+    LDAP expects utf-8 encoded character string (backport from 2.6)
+  * [Roland] Fixed install-ftp.sh so that it actually does install stuff.
 
- -- Roland Mas <lolando@debian.org>  Tue,  9 Apr 2002 19:38:46 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 10 Apr 2002 16:32:15 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 

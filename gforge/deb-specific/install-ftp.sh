@@ -27,7 +27,7 @@ please report them via e-mail to <root@%L>.
 				#
 				# This initialize FTP
 				#
-    			        if [ ! "$do_config" = "true" ] ; then
+    			        if [ "$do_config" = "true" ] ; then
 				    if ! grep -q "^Include /etc/sourceforge/sf-proftpd.conf" /etc/proftpd.conf ; then
 				    
                 			perl -pi -e "s/^/#SF#/" /etc/proftpd.conf
@@ -51,7 +51,7 @@ please report them via e-mail to <root@%L>.
 				;;
 			purge)
 			        do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
-    			        if [ ! "$do_config" = "true" ] ; then
+    			        if [ "$do_config" = "true" ] ; then
 				    if grep -q "### Next lines inserted by Sourceforge install" /etc/proftpd.conf
 					then
 	    				perl -pi -e "s/### Previous lines commented by Sourceforge install\n//"  /etc/proftpd.conf
