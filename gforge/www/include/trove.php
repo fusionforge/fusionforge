@@ -153,7 +153,8 @@ function trove_getallroots() {
 	$res = db_query("
 		SELECT trove_cat_id,fullname
 		FROM trove_cat 
-		WHERE parent=0");
+		WHERE parent=0
+		AND trove_cat_id!=0");
 
 	while ($row = db_fetch_array($res)) {
 		$tmpcatid = $row["trove_cat_id"];
