@@ -7,6 +7,13 @@
 
 set -e
 
+if [ "$DEBSFDEBUG" != 1 ] ; then
+    DEVNULL12="> /dev/null 2>&1"
+    DEVNULL2="2> /dev/null"
+else
+    set -x
+fi
+
 if [  $(id -u) != 0 -a  "x$1" != "xlist" ] ; then
 	echo "You must be root to run this, please enter passwd"
 	exec su -c "$0 $1"
@@ -28,13 +35,6 @@ setup_vars() {
     ldap_suffix=$(grep suffix /etc/ldap/slapd.conf | cut -d\" -f2)
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
-
-    if [ "$DEBSFDEBUG" != 1 ] ; then
-	DEVNULL12="> /dev/null 2>&1"
-	DEVNULL2="2> /dev/null"
-    else
-	set -x
-    fi
 }
 
 show_vars () {
