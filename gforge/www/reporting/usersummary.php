@@ -96,23 +96,22 @@ $res=db_query($sql);
 if (!$res || db_numrows($res) < 1) {
 	echo $Language->getText('reporting_us','no_matches').db_error();
 } else {
-
-	echo '<table border="1">
-			<tr>
-				<td><strong>'.$Language->getText('reporting_us','name').'</strong></td>
-				<td><strong>'.$Language->getText('reporting_us','task').'</strong></td>
-				<td><strong>'.$Language->getText('reporting_us','status').'</strong></td>
-				<td><strong>'.$Language->getText('reporting_us','cum_hrs').'</strong></td>
-				<td><strong>'.$Language->getText('reporting_us','rem_hrs').'</strong></td>
-				<td><strong>'.$Language->getText('reporting_us','end_date').'</strong></td>
-			</tr>';
+	$tableHeaders = array(
+		$Language->getText('reporting_us','name'),
+		$Language->getText('reporting_us','task'),
+		$Language->getText('reporting_us','status'),
+		$Language->getText('reporting_us','cum_hrs'),
+		$Language->getText('reporting_us','rem_hrs'),
+		$Language->getText('reporting_us','end_date')
+	);
+	echo $HTML->listTableTop($tableHeaders);
 	for ($i=0; $i<db_numrows($res); $i++) {
 		$name=db_result($res,$i,'realname');
 		if ($last_name != $name) {
-			echo '<tr><td colspan="6"><strong>'.$name.'</strong></td></tr>';
+			echo '<tr '.$HTML->boxGetAltRowStyle(0).'><td colspan="6"><strong>'.$name.'</strong></td></tr>';
 			$last_name = $name;
 		}
-		echo '<tr><td>&nbsp;</td>
+		echo '<tr '.$HTML->boxGetAltRowStyle(1).'><td>&nbsp;</td>
 				<td><a href="/pm/task.php?func=detailtask&group_id='.db_result($res,$i,'group_id')
 					.'&project_task_id='.db_result($res,$i,'project_task_id')
 					.'&group_project_id='.db_result($res,$i,'group_project_id')
@@ -121,7 +120,7 @@ if (!$res || db_numrows($res) < 1) {
 				<td>'.number_format(db_result($res,$i,'cumulative_hrs'),1).'</td>
 				<td>'.number_format((db_result($res,$i,'hours')-db_result($res,$i,'remaining_hrs')),1).'</td>
 				<td>'.date($sys_datefmt,db_result($res,$i,'end_date')).'</td>
-				';
+				</tr>';
 
 		$task=db_result($res,$i,'project_task_id');
 		$sql2="SELECT g.group_name, g.group_id, agl.group_artifact_id, agl.name, a.artifact_id, a.summary
@@ -137,7 +136,7 @@ if (!$res || db_numrows($res) < 1) {
 		} else {
 			for ($j=0; $j<db_numrows($res2); $j++) {
 				$tracker=db_result($res2,$j,'group_name'). '*' .db_result($res2,$j,'name');
-				echo '<tr><td colspan="3">&nbsp;</td>
+				echo '<tr '.$HTML->boxGetAltRowStyle(1).'><td colspan="3">&nbsp;</td>
 					<td>';
 				if ($last_tracker != $tracker) {
 					$last_tracker = $tracker;
@@ -154,7 +153,7 @@ if (!$res || db_numrows($res) < 1) {
 		}
 
 	}
-	echo '</table>';
+	echo $HTML->listTableBottom();
 
 }
 

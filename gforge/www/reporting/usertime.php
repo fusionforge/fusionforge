@@ -74,10 +74,10 @@ if ($sw) {
 	<input type="hidden" name="sw" value="<?php echo $sw; ?>">
 	<input type="hidden" name="typ" value="<?php echo $typ; ?>">
 	<table><tr>
-	<td><strong>User:</strong><br /><?php echo report_usertime_box('dev_id',$dev_id,$sw); ?></td>
-	<td><strong>Type:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
-	<td><strong>Start:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
-	<td><strong>End:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','user'); ?>:</strong><br /><?php echo report_usertime_box('dev_id',$dev_id,$sw); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','type'); ?>:</strong><br /><?php echo html_build_select_box_from_arrays($a2,$a,'type',$type,false); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
+	<td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
 	<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 	</tr></table>
 	</form>

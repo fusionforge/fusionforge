@@ -52,7 +52,7 @@ echo report_header($Language->getText('reporting','site_wide_time_tracking'));
 <table><tr>
 <td><strong><?php echo $Language->getText('reporting','start'); ?>:</strong><br /><?php echo report_months_box($report, 'start', $start); ?></td>
 <td><strong><?php echo $Language->getText('reporting','end'); ?>:</strong><br /><?php echo report_months_box($report, 'end', $end); ?></td>
-<td><input type="submit" name="submit" value="<?php $Language->getText('reporting','refresh'); ?>"></td>
+<td><input type="submit" name="submit" value="<?php echo $Language->getText('reporting','refresh'); ?>"></td>
 </tr></table>
 </form>
 <p>

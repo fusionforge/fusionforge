@@ -54,12 +54,12 @@ function report_span_box($name='SPAN', $selected='1', $suppress_daily=false) {
 }
 
 function report_weeks_box($Report, $name='week', $selected=false) {
-	global $sys_datefmt;
+	global $sys_shortdatefmt, $Language;
 	$arr =& $Report->getWeekStartArr();
 
 	$arr2=array();
 	for ($i=0; $i<count($arr); $i++) {
-		$arr2[$i]=date('Y-m-d',$arr[$i]) .' to '. date('Y-m-d',($arr[$i]+6*24*60*60));
+		$arr2[$i]=date($sys_shortdatefmt, $arr[$i]) .' '.$Language->getText('general', 'to').' '. date($sys_shortdatefmt, ($arr[$i]+6*24*60*60));
 	}
 
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);
@@ -87,12 +87,12 @@ function report_day_adjust_box($Report, $name='days_adjust', $selected=false) {
 }
 
 function report_months_box($Report, $name='month', $selected=false) {
-	global $sys_datefmt;
+	global $Language;
 	$arr =& $Report->getMonthStartArr();
 
 	$arr2=array();
 	for ($i=0; $i<count($arr); $i++) {
-		$arr2[$i]=date('Y-m',$arr[$i]);
+		$arr2[$i]=date($Language->getText('calendar', 'monthdatefmt'),$arr[$i]);
 	}
 
 	return html_build_select_box_from_arrays ($arr,$arr2,$name,$selected,false);

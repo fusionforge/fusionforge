@@ -517,6 +517,7 @@ calendar	june	June
 calendar	march	March
 calendar	may	May
 calendar	monday	Monday
+calendar	monthdatefmt	Y-m
 calendar	november	November
 calendar	october	October
 calendar	onemonth	One Month
@@ -877,6 +878,7 @@ general	sitename	$1
 general	submit	Submit
 general	submit_edit	Submit Edit
 general	submitted_successfully	$1 Submitted Successfully
+general	to	to
 general	total	total
 general	turned_off	This Project Has Turned Off The $1
 general	update	Update
@@ -2500,6 +2502,7 @@ survey_error	permission_denied	You don't have a permission to access this page
 survey_error	no_survey_data_filled	The Survey data is not filled
 system	datefmt	Y-m-d H:i
 system	locale	en_US
+system	shortdatefmt	Y-m-d
 system	strftimefmt	%Y %B %e  %H:%M
 themes	section	Account Preferences
 themes	title	View/Change Theme
