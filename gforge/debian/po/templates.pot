@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-02 11:21+0100\n"
+"POT-Creation-Date: 2004-05-31 12:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -256,36 +256,13 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:85
-msgid "Generate an SSL certificate"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:85
-msgid ""
-"You need a valid SSL/TLS certificate to run Gforge. If you don't already "
-"have one, you'll have to run the \"mod-ssl-makecert\" command to generate "
-"one, and restart Apache afterwards."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:85
-msgid ""
-"Please note you will not be able to start Apache if you have no such "
-"certificate."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:96
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid "Gforge requires appropriate PAM-LDAP configuration"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:96
+#: ../gforge-dns-bind9.templates.dsfh-in:85
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid ""
 "Gforge requires the libpam-ldap package to be configured appropriately.  You "
@@ -295,7 +272,7 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:96
+#: ../gforge-dns-bind9.templates.dsfh-in:85
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid ""
 "Known good values are: LDAP protocol version=3, make root database "
@@ -306,13 +283,13 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:109
+#: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid "Do you want a simple DNS setup?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:109
+#: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid ""
 "You can have a simple DNS setup wich uses wildcards to map all project web-"
 "hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
@@ -322,7 +299,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:109
+#: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid ""
 "Even though you have a simple DNS setup, you can still have seperate boxes "
 "for your project servers, it just assumes you have all the project web dirs "
@@ -331,14 +308,14 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid "Do you want ${file} to be updated?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid ""
 "In order for Gforge to be fully deinstalled, some changes must be made to "
@@ -347,7 +324,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid ""
 "I can either do them for you (and backup the current version in ${file}."
@@ -357,21 +334,21 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid "Shall I modify the ${file} automatically?"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:136
+#: ../gforge-dns-bind9.templates.dsfh-in:125
 #: ../dsf-helper/replace-files.templates:31
 msgid "Please check ${file}"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:136
+#: ../gforge-dns-bind9.templates.dsfh-in:125
 #: ../dsf-helper/replace-files.templates:31
 msgid ""
 "You have chosen not to let the Gforge package update the ${file} file.  Very "
