@@ -13,8 +13,10 @@ gforge (3rc2-3+) unstable; urgency=low
     their proper package), more policy-compliant (gforge.conf is read and
     Debconf is initialised from it as much as possible), and it even
     actually seems to work.
+  * [Christian] Added {cronolog_path} in httpd.conf.template, make it fill 
+    by gforge-config and removed dependancy on a specific cronolog version
 
- -- Roland Mas <lolando@debian.org>  Fri, 30 May 2003 22:03:06 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri,  6 Jun 2003 15:17:39 +0200
 
 gforge (3rc2-3) unstable; urgency=low
 

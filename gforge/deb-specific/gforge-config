@@ -13,6 +13,9 @@ for i in $filenames ; do
 	/etc/gforge/$i
 done
 
+[ -f /usr/bin/cronolog ] && perl -pi -e "s:{cronolog_path}:/usr/bin/cronolog:g" /etc/gforge/httpd.conf
+[ -f /usr/sbin/cronolog ] && perl -pi -e "s:{cronolog_path}:/usr/sbin/cronolog:g" /etc/gforge/httpd.conf
+
 [ -f /etc/gforge/local.inc ] && chmod 644 /etc/gforge/local.inc
 [ -f /etc/gforge/httpd.conf ] && chmod 644 /etc/gforge/httpd.conf
 

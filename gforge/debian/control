@@ -35,7 +35,7 @@ Description: Collaborative development tool - shared files
 
 Package: gforge-web-apache
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-cgi, php4-pgsql, php4-gd, php4-ldap, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), slapd (>= 2.0.23-3), cronolog (>= 1.6.2-1)
+Depends: gforge-common, gforge-db-postgresql | gforge-db, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-cgi, php4-pgsql, php4-gd, php4-ldap, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), slapd (>= 2.0.23-3), cronolog
 Suggests: libphp-jpgraph
 Replaces: sourceforge-web-apache (>> 2.6-0+11)
 Provides: gforge-web
