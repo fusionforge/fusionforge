@@ -2568,7 +2568,7 @@ top	highest_ranked_users	Les développeurs les mieux classés
 top	pageviews	Les projets les plus visités
 top	same	Même chose
 top	title	Les meilleurs projets
-top	top_project	Les meilleurs projets de l'$1
+top	top_project	Les meilleurs projets de $1
 top	up	Monte $1
 top	updated_daily	Mise à jour quotidienne
 top	view_other_top_category	Voir les autres catégories
