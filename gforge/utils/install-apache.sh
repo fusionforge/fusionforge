@@ -69,7 +69,7 @@ if [ "$HAVECONF" != "true" ]
 then
 if [ -z "$APACHE_ETC_SEARCH" ] 
 then 
-	APACHE_ETC_SEARCH="/etc/apache/httpd.conf /etc/apache-perl/httpd.conf /etc/apache-ssl/httpd.conf"
+	APACHE_ETC_SEARCH="/etc/apache2/apache2.conf /etc/apache/httpd.conf /etc/apache-perl/httpd.conf /etc/apache-ssl/httpd.conf"
 fi
 if [ -z "$GFORGE_ETC_SEARCH" ] 
 then 
@@ -77,7 +77,7 @@ then
 fi
 if [ -z "$PHP_ETC_SEARCH" ] 
 then 
-	PHP_ETC_SEARCH="/etc/php4/apache/php.ini /etc/php4/cgi/php.ini"
+	PHP_ETC_SEARCH="/etc/php4/apache2/php.ini /etc/php4/apache/php.ini /etc/php4/cgi/php.ini"
 fi
 export APACHE_ETC_SEARCH GFORGE_ETC_SEARCH PHP_ETC_SEARCH
 
@@ -182,6 +182,30 @@ case "$1" in
 			fi
 		done
 	fi
+	# do configuring for apache2, loop through flavours not necessary
+	# but it's here in case other flavours of apache2 come along
+	if [ -f /usr/sbin/a2enmod ] ; then
+		for flavour in apache2 ;  do
+			if [ -e /etc/$flavour/httpd.conf ] ; then
+	    			/usr/sbin/a2enmod php4
+    				/usr/sbin/a2enmod ssl
+				#not enabling env module, part of base in apache2
+	    			/usr/sbin/a2enmod vhost_alias
+
+				LINK=`ls -l /etc/$flavour/conf.d/gforge.httpd.conf | sed 's/.*-> \(.*\)$/\1/'`
+				if [ "$LINK" != "$GFORGE_ETC_LIST" ] ; then 
+					echo Removing symlink
+					rm -f /etc/$flavour/conf.d/gforge.httpd.conf
+				fi
+				if [ -d /etc/$flavour/conf.d ] ; then
+					[ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && ln -s $GFORGE_ETC_LIST /etc/$flavour/conf.d/gforge.httpd.conf
+				fi
+			fi
+			if [ -x /usr/sbin/$flavour ]; then
+				invoke-rc.d $flavour restart || true
+			fi
+		done
+	fi
 	;;
 
     purge-files)
@@ -196,7 +220,7 @@ case "$1" in
 	;;
 
     purge)
-    	for flavour in apache apache-perl apache-ssl ; do
+    	for flavour in apache apache-perl apache-ssl apache2; do
 		[ ! -e /etc/$flavour/conf.d/gforge.httpd.conf ] && rm -f /etc/$flavour/conf.d/gforge.httpd.conf
 		if [ -x /usr/sbin/$flavour ]; then
 			invoke-rc.d $flavour restart || true
