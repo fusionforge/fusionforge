@@ -18,7 +18,7 @@ class Layout extends Error {
 	/**
 	 * The default main page content
 	 */
-	var $rootindex = "index_std.php";
+	var $rootindex = 'index_std.php';
 
 	/**
 	 * The root location for images
@@ -47,6 +47,8 @@ class Layout extends Error {
 	function Layout() {
 		GLOBAL $bgpri;
 		// Constructor for parent class...
+		if ( file_exists('/etc/gforge/custom/index_std.php') )
+			$this->rootindex = '/etc/gforge/custom/index_std.php';
 		$this->Error();
 
 		/*

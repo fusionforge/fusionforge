@@ -85,6 +85,8 @@ install: build
 
 	# gforge-web-apache
 	cp -r www $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
+	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache/etc/gforge/custom/
+	rm $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/index_std.php
 	#cp $(CURDIR)/www/project/admin/qrs.php.debian $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/project/admin/qrs.php
 	cp -r common $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name CVS -type d | xargs rm -rf

@@ -1,5 +1,8 @@
 2003-10-05  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/Layout.class: Use /etc/gforge/custom/index_std.php
+	if it exists (patch #525 by Francisco Gimeno).
+
 	* www/include/languages/Korean.tab, SimplifiedChinese.tab: Removed
 	English strings.  They are unneeded, and since they're quite
 	possibly outdated they can even be harmful since they override the
