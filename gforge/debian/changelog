@@ -68,8 +68,10 @@ sourceforge (2.5-10+15+) unstable; urgency=low
   * Fixed top of page background (looked nice on Forged Metal theme, but
     not with any other theme).
   * Deduped releases in the Quick Release System.
+  * Fixed searches: broken SQL syntax in the admin-only search, and
+    removed case-sensitiveness in the other search.
 
- -- Roland Mas <lolando@debian.org>  Thu, 25 Oct 2001 19:39:19 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 30 Oct 2001 14:00:40 +0100
 
 sourceforge (2.5-10) unstable; urgency=low
 
