@@ -92,6 +92,7 @@ function project_get_public_forum_message_count($group_id) {
  * @param		bool	Whether to return the results within an HTML table or not
  */
 function project_summary($group_id,$mode,$no_table) {
+	global $Language;
 	if (!$group_id) {
 		return 'Error - No Group ID';
 	}
@@ -137,7 +138,7 @@ function project_summary($group_id,$mode,$no_table) {
 				$return .= '<p>
 				&nbsp;-&nbsp;<a href="/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 				'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-				( <strong>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</strong> )<br />'.
+				( <strong>'. db_result($result, $j, 'open_count') .' '.$Language->getText('general','open').'  / '. db_result($result, $j, 'count') . $Language->getText('general','total').' </strong> )<br />'.
 				db_result($result, $j, 'description') . '</p>';
 			}   
 		}
