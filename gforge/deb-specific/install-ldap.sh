@@ -180,7 +180,7 @@ configure_nsswitch()
 purge_nsswitch()
 {
     cp -a /etc/nsswitch.conf /etc/nsswitch.conf.sourceforge-new
-    perl -pi -e "s/^([^\n]*)ldap([^\n]*)#Added by Sourceforge install\n/\1\2/" /etc/nsswitch.conf.sourceforge-new
+    perl -pi -e "s/^[^\n]*#Added by Sourceforge install\n//" /etc/nsswitch.conf.sourceforge-new
     perl -pi -e "s/#Comment by Sourceforge install#//" /etc/nsswitch.conf.sourceforge-new
 }
 
