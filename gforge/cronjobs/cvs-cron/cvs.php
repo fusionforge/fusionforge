@@ -50,7 +50,17 @@ function addProjectRepositories() {
 		}
 
 		mkdir($maincvsroot . $activegroups[$i]);
-		//chmod it to something
+/*
+Date: 2003-02-25 14:46
+Sender: reinhard
+Collegato: no 
+user_id=226
+
+for the chmod part:
+you can set the s flag
+(chmod -R +s /cvs/myrepository), so all files, dirs, 
+subdirectories will be created with the same permissions
+*/
 	}
 }
 
