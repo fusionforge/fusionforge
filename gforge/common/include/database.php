@@ -120,7 +120,7 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 		$qstring=$qstring." LIMIT $limit OFFSET $offset";
 	}
 
-	$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<p>\n";
+	//$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<p>\n";
 	$res = @pg_exec($dbserver,$qstring);
 	//echo "<br />|*| ".db_error().$qstring;
 	return $res;
