@@ -184,7 +184,7 @@ docman_admin	section	$1
 docman_admin	title	Document Manager: Amministrazione
 docman_admin	add_edit_docgroups	Aggiungi/Modifica gruppi di documenti
 docman_admin_docedit	section	Document Manager
-docman_admin_docedit	title	Edit Document
+docman_admin_docedit	title	Modifica documento
 docman_admin_addgroups	title	Aggiungi gruppi di documenti
 docman_admin_editdocs	section	Document Manager Administration
 docman_admin_editdocs	title	Modifica documenti
@@ -320,7 +320,7 @@ forum_utils	stopmonitor	Termina Notifica
 forum_utils	admin	Amministra
 forum_utils	saveplace	Salva Posizione
 forum_utils	by	Da:
-forum_utils	postedby	Inivato da
+forum_utils	postedby	Inviato da
 forum_utils	date	Date
 forum_utils	subject	Soggetto:
 forum_utils	message	Messaggio:
@@ -492,16 +492,16 @@ news	choose	<P>Seleziona una news e puoi visualizzare, ricercare e inviare messa
 news	nonews	Nessuna news
 news	nonewsfor	Nessuna news per $1
 news	noitems	Non sono state trovate news
-news_admin	noqueued	No Queued Items Found For Project
-news_admin	queued	These News Items Were Submitted For Project
-news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the $1 news team before they will appear on the $1 home page.<P>You may include URLs, but not HTML in your submissions.<P>URLs that start with http:// are made clickable.
-news_submit	cannot	You cannot submit news for a project unless you are an admin on that project
-news_submit	forproject	For Project
-news_submit	subject	Subject
-news_submit	details	Details
-news_submit	errorinsert	ERROR doing insert
-news_submit	errorboth	ERROR - both subject and body are required
-news_submit	newsadded	News Added.
+news_admin	noqueued	Nessun item in attesa per questo progetto
+news_admin	queued	I seguenti item sono stati inseriti per il progetto
+news_submit	post_blurb	&Egrave; possibile inserire news sul progetto se si &egrave; un amministratore del progetto. &Egrave; anche possibile inserire note di "richiesta di aiuto" se il progetto ha bisogno di aiuto.<P>Tutti i messaggi <B>per il tuo progetto</B> verranno inseriti immediatamente nella pagina di sommario del progetto. Note che sono di particolare interesse per la comunit&agrave; dovranno essere approvati da un membro del team di news di $1 prima che questi vengano pubblicati sulla homepage di $1.<P>Si possono inserire URL, ma non codice <P>URL che iniziano con http:// saranno resi cliccabili.
+news_submit	cannot	Non &egrave; possibile inserire news per un progetto se non si &egrave; un amministratore del progetto
+news_submit	forproject	Per il progetto
+news_submit	subject	Oggetto
+news_submit	details	Dettagli
+news_submit	errorinsert	ERRORE durante l'inserimento
+news_submit	errorboth	ERRORE - oggetto e messaggio sono obbligatori
+news_submit	newsadded	News aggiunta
 news_submit	submit	INVIA
 news_utils	nonews	Nessuna news trovata
 news_utils	archive	Archivio News
@@ -538,8 +538,8 @@ pm_modtask	sort_on	Ordina per
 pm_addtask	title	Aggiungi un nuovo task
 pm_admin	section	$1
 pm_admin	title	Task Manager: Administration
-pm_admin_change_status	section	Task Manager Administration
-pm_admin_change_status	title	Update Information
+pm_admin_change_status	section	Amministrazione Task Manager
+pm_admin_change_status	title	Aggiorna Informazione
 pm_browse_custom	section	Task Manager
 pm_admin_projects	section	Amministrazione attivit&agrave;
 pm_admin_projects	title	Aggiungi sottoprogetti
@@ -576,11 +576,8 @@ pm_admin_projects	no_projects_found	<h2>Nessun progetto trovato</h2><p>. &Egrave
 pm_admin_projects	edit_update	Modifica/aggiorna progetto
 pm_admin_projects	project_title	Titolo
 pm_admin_projects	add_categories_to	Aggiungi categorie a
-pm_browse_custom	title	Browse Custom Tasks
-pm_browse_my	section	Project $1 Task Manager
-pm_browse_my	title	Browse My Tasks
-pm_browse_open	section	Task Manager
-pm_browse_open	title	Browse Open Tasks
+pm_browse_custom	title	Elenca Attivi&agrave; Custom
+pm_browse_my	section	Task Manager
 pm_browsetask	title	Scorri attivit&agrave;
 pm_browsetask	overdue_tasks	* indica attivit&agrave; scadute
 pm_browsetask	browse	Scorri
@@ -758,7 +755,7 @@ trove_list	limiting_view	Filtro impostato sulle seguenti categorie
 trove_list	number_of_projects	<strong>$1</strong> progetti
 trove_list	more_than	Pi&ugrave; di <strong>$1</strong> progetti
 trove_list	browse_by	Visualizza per
-classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto: $1\nUnix Name del progetto: $2\nServer CVS:      cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
+classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto: $1\nUnix Name del progetto: $2\nServer CVS:      cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nMentre aspetti che il DNS per il tuo sito venga risolto, pouoi provare a loggarti a \n$4 e impostare il CVS a $5\n\nSe dopo 6 ore il tuo account shell/CVS non funziona ancora,\napri un ticket di supporto.\nNota che tutti gli account di shell/CVS funzionano solo con SSH1 (e non con telnet).\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
 classgroup	rejectedproject	Il tuo progetto $3 &egrave; stato rifiutato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\n\nRagioni per il rifiuto:\n\n
 classgroup	newprojectnotification	Nuovo progetto $1 inserito\n\nNome progetto:  $2\nDescrizione: $3\nLicenza: $4\n\nCollegati all'URL \nhttp://$5/admin/approve-pending.php per approvare o rifiutare il progetto.
 classgroup	acceptedprojecttitle	Progetto $1 approvato
@@ -877,7 +874,6 @@ register	project_information	Informazioni progetto
 register	apply_for_registration	Per registrare un progetto, compila i campi del form. Leggi attentamente le descrizioni e fornisci informazioni complete. Tutti i campi sono obbligatori.
 register	project_full_name	</h3>1. Nome completo del progetto</h3><p>Inizia col dare un nome al progetto. Il "Nome completo" &egrave; descrittivo e non ha restrizioni, eccetto una lunghezza massima di 40 caratteri.</p>Nome completo:<br/>
 register	purpose_and_summarization	2. Sommario e obiettivo del progetto</h3><p><strong></strong><p><strong> Inserisci una descrizione dettagliata e accurata del tuo progetto e quali risorse di $1 userai. Questa descrizione sar&agrave; la base per la scelta di approvare o rifiutare il tuo progetto su $1 e in futuro se utilizzi le risorse nel modo dovuto. La descrizione non sar&agrave; utilizzata come descrizione pubblica del progetto. Deve essere scritta in inglese.</strong>
-register	project_license	<h3>3. Licenza</h3> <p><strong><em>If you are applying for a website-only project, please select "website-only" from the choices below and proceed.</em></strong><p>$1 was created to advance Open Source software development. To keep things simple, we are relying on the outstanding work of the <a href="http://www.opensource.org">Open Source Initiative</a> for our licensing choices. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p>Choosing a license is a serious decision. Please take some time to read the text (and our explanations) of several licenses before making a choice about your project. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
 register	license_type	Publico domino</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><strong>Your License:</strong><br />
 register	other_license	Se hai selezionato "altri", inserisci una descrizione della licenza. Considera che altre licenze potrebbero non venir approvate e potrebbe passare pi&ugrave; tempo visto che dovremo controllare se la licenza è compatibile con l'ambiente OpenSource.
 register	project_description	<h3>4. Descrizione pubblica del progetto</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
