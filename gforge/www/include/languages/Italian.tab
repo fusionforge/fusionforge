@@ -530,6 +530,7 @@ pm	any	Tutti
 pm	admin	amministra
 pm	tech_any	Tutti
 pm	cat_any	Tutte
+pm	cat_none	Nessuna
 pm	no_tasks_found	Nessuna attivit&agrave; trovata
 pm	no_tasks_found_text	Aggiungere attivit&agrave; utilizzando i link elencati sopra
 pm_modtask	assignee	Assegnatario
@@ -1276,7 +1277,7 @@ admin_approve_pending	approving_group		Approvazione gruppo
 admin_approve_pending	error_group_rejection	Error during group rejection
 admin_approve_pending	approving_pending_projects	Approvazione progetto in attesa
 admin_approve_pending	none_found	Nessun progetto trovato
-admin_approve_pending	no_pending_projects_to_approve	No Pending Projects to Approve
+admin_approve_pending	no_pending_projects_to_approve	Non ci sono progetti in attesa di approvazione
 admin_approve_pending	pending_projects	Progetti in attesa di approvazione:
 admin_approve_pending	edit_project_details	[Modifica dettaglio progetto]
 admin_approve_pending	project_admin	Amministrazione progetti
@@ -1287,9 +1288,9 @@ admin_approve_pending	custom_response_title	Risposte: titolo e testo
 admin_approve_pending	add_this_custom_response	Aggiungi questa risposta alle risposte predefinite
 admin_approve_pending	home_box	Home Box:
 admin_approve_pending	other_information	Altre informazioni
-admin_approve_pending	unix_group_name	Unix Group Name:
-admin_approve_pending	submitted_description	Submitted Description:
-admin_approve_pending	pending_reason	Pending reason:
+admin_approve_pending	unix_group_name	Nome unix
+admin_approve_pending	submitted_description	Descrizione:
+admin_approve_pending	pending_reason	Ragioni per l'attesa
 admin_approve_pending	admin_approve_pending	Attiva
 admin_approve_pending	approve_all_on_this_page	Approva tutto
 admin_database	error_adding_database	Error Adding Database
@@ -1298,12 +1299,12 @@ admin_database	added_already_active_database	added already active database
 admin_database	unable_to_insert	Unable to insert already active database.
 admin_database	site_admin_groups_maintance	Site Admin: Groups' DB Maintenance
 admin_database	statistics_for_project_database	Statistics for Project Databases
-admin_database	type	Type
+admin_database	type	Tipo
 admin_database	count	Count
-admin_database	no_databases_defined	No databases defined
+admin_database	no_databases_defined	Nessun database definito
 admin_database	display_database_type	Displaying Databases of Type:
 admin_database	add_an_already_active_database	Add an already active database
-admin_database	group_unix_name	Group Unix Name:
+admin_database	group_unix_name	Nome unix del gruppo
 admin_groupedit	error	Errore
 admin_groupedit	error_creating_group_object	Error creating group object
 admin_groupedit	updated	Aggiornato
