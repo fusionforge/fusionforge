@@ -24,27 +24,49 @@ if(is_dir($maincvsroot)) {
 	}
 }
 
+function writeFile($filePath, $content) {
+	$file = fopen($filePath, 'a');
+	flock($file, LOCK_EX);
+	ftruncate($file, 0);
+	rewind($file);
+	if(!empty($content)) {
+		fwrite($file, $content);
+	}
+	flock($file, LOCK_UN);
+	fclose($file);
+}
+
 function addProjectRepositories() {
 	global $maincvsroot;
 
-	$res = db_query("select group_id,unix_group_name from groups where status='A' AND group_id NOT IN (2,3,4)");
+	$res = db_query("select group_id,unix_group_name,enable_anoncvs,enable_pserver from groups where status='A' AND group_id NOT IN (2,3,4)");
 	
 	for($i = 0; $i < db_numrows($res); $i++) {
 		/*
 			Simply call cvscreate.sh
 		*/
-		if (is_dir("$maincvsroot".db_result($res,$i,'unix_group_name'))) {
-
-			//already exists
-
-		} elseif (is_file("$maincvsroot".db_result($res,$i,'unix_group_name'))) {
-
-			$err .= "$maincvsroot".db_result($res,$i,'unix_group_name')." Already Exists As A File";
-
+		$repositoryPath = $maincvsroot.db_result($res,$i,'unix_group_name');
+		if (is_dir($repositoryPath)) {
+			$writersContent = '';
+			$readersContent = '';
+			$passwdContent = '';
+			if(db_result($res,$i,'enable_anoncvs')) {
+				$repositoryMode = 2775;
+				if (db_result($res,$i,'enable_pserver')) {
+					$readersContent = 'anonymous::anonymous';
+					$passwdContent = 'anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonymous';
+				}
+			} else {
+				$repositoryMode = 2770;
+			}
+			chmod($repositoryPath, $repositoryMode);
+			writeFile($repositoryPath.'/CVSROOT/writers', $writersContent);
+			writeFile($repositoryPath.'/CVSROOT/readers', $readersContent);
+			writeFile($repositoryPath.'/CVSROOT/passwd', $passwdContent);
+		} elseif (is_file($repositoryPath)) {
+			$err .= $repositoryPath.' already exists as a file';
 		} else {
-
-			system("./cvscreate.sh ".db_result($res,$i,'unix_group_name')." ".(db_result($res,$i,'group_id')+50000));
-
+			system('./cvscreate.sh '.db_result($res,$i,'unix_group_name').' '.(db_result($res,$i,'group_id')+50000).' '.db_result($res,$i,'enable_anoncvs').' '.db_result($res,$i,'enable_pserver'));
 		}
 	}
 }

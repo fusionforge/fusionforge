@@ -1,55 +1,63 @@
 #!/bin/sh
 echo ""
 echo "CVS Repository Tool"
-echo "(c)1999 SourceForge Development Team"
+echo "Portions (c)1999 SourceForge Development Team"
+echo "The rest (c)2004 Guillaume Smet"
 echo "Released under the GPL, 1999"
 echo ""
 
 # if no arguments, print out help screen
-if test $# -lt 2; then 
+if test $# -lt 4; then 
 	echo "usage:"
-	echo "  cvscreate.sh [repositoryname] [groupid]"
+	echo "  cvscreate.sh [repositoryname] [groupid] [isanonymousenabled] [ispserverenabled]"
 	echo ""
 	exit 1 
 fi
 
-# make sure this repository doesn't already exist
-if [ -d /cvsroot/$1 ] ; then
-	echo "$1 already exists."
+repositoryname=$1
+repositorypath=/cvsroot/$1
+groupid=$2
+isanonymousenabled=$3
+ispserverenabled=$4
+
+function setPserverAccess() {
+	writers=""
+	readers=""
+	passwd=""
+	if [[ $isanonymousenabled -eq 1 && $ispserverenabled -eq 1 ]] ; then
+		readers="anonymous::anonymous"
+		passwd="anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonymous"
+	fi
+	echo $writers > $repositorypath/CVSROOT/writers
+	echo $readers > $repositorypath/CVSROOT/readers
+	echo $passwd > $repositorypath/CVSROOT/passwd
+}
+
+function setRepositoryAccess() {
+	if [ $isanonymousenabled -eq 1 ] ; then
+		# make the repository user and group writable and world readable
+		chmod 2775 $repositorypath
+	else
+		# make the repository user and group writable but not accessible to other users
+		chmod 2770 $repositorypath
+	fi
+}
+
+function createRepository() {
+	mkdir $repositorypath
+	setRepositoryAccess
+	cvs -d$repositorypath init
+	setPserverAccess
+	echo "" > $repositorypath/CVSROOT/val-tags
+	chmod 664 $repositorypath/CVSROOT/val-tags
+	chown -R nobody:$groupid $repositorypath
+}
+
+if [ -d $repositorypath ] ; then
+	echo "$repositoryname already exists."
+	setRepositoryAccess
+	setPserverAccess
 	echo ""
-	exit 1
+else
+	createRepository
 fi
-
-# first create the repository
-mkdir /cvsroot/$1
-cvs -d/cvsroot/$1 init
-
-# make it group writable
-chmod 775 /cvsroot/$1
-
-# import default directory, with default cvs.txt
-#mkdir $1
-#cp cvs.txt $1
-#cd $1
-#cvs -d/cvsroot/$1 import -m "SourceForge CVStool creation" $1 SourceForge start	
-#rm cvs.txt
-#cd ..
-#rmdir $1
-
-# turn off pserver writers, on anonymous readers
-echo "" > /cvsroot/$1/CVSROOT/writers
-echo "anonymous::anonymous" > /cvsroot/$1/CVSROOT/readers
-echo "anonymous:\$1\$0H\$2/LSjjwDfsSA0gaDYY5Df/:anonymous" > /cvsroot/$1/CVSROOT/passwd 
-
-# setup loginfo to make group ownership every commit
-echo "ALL chgrp -R $1 /cvsroot/$1" > /cvsroot/$1/CVSROOT/loginfo
-echo "" > /cvsroot/$1/CVSROOT/val-tags
-chmod 664 /cvsroot/$1/CVSROOT/val-tags
-
-# set group ownership, anonymous group user 
-chown -R nobody:$2 /cvsroot/$1
-#cat /etc/passwd | grep -v anoncvs_$1 > newpasswd 
-#cp newpasswd /etc/passwd
-#rm -f newpasswd
-#/usr/sbin/adduser -M -g $2 -d/cvsroot/$1 -s /bin/false -n anoncvs_$1
-
