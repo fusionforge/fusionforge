@@ -92,6 +92,34 @@ function &user_get_object($user_id,$res=false) {
 	return $USER_OBJ["_".$user_id."_"];
 }
 
+function &user_get_objects($id_arr) {
+	global $USER_OBJ;
+	for ($i=0; $i<count($id_arr); $i++) {
+		//
+		//  See if this ID already has been fetched in the cache
+		//
+		if (!isset($USER_OBJ["_".$id_arr[$i]."_"])) {
+			$fetch[]=$id_arr[$i];
+		} else {
+			$return[] =& $USER_OBJ["_".$id_arr[$i]."_"];
+		}
+	}
+	if (count($fetch) > 0) {
+		$res=db_query("SELECT * FROM users WHERE user_id IN ('".implode($fetch,'\',\'') ."')");
+		while ($arr =& db_fetch_array($res)) {
+			$USER_OBJ["_".$arr['user_id']."_"] = new User($arr['user_id'],$arr);
+			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];
+		}
+	}
+	return $return;
+}
+
+function &user_get_objects_by_name($username_arr) {
+	$res=db_query("SELECT user_id FROM users WHERE user_name IN ('".implode($username_arr,'\',\'')."')");
+	$arr =& util_result_column_to_array($res,0);
+	return user_get_objects($arr);
+}
+
 class User extends Error {
 	/** 
 	 * Associative array of data from db.
@@ -130,7 +158,7 @@ class User extends Error {
 	 *	instead use the user_get_object() function call
 	 *
 	 *	@param	int		The user_id
-	 *	@param	int		The database result set
+	 *	@param	int		The database result set OR array of data
 	 */
 	function User($id=false,$res=false) {
 		$this->Error();
@@ -142,7 +170,9 @@ class User extends Error {
 		if (!$res) {
 			$this->fetchData($id);
 		} else {
-			if (db_numrows($res) < 1) {
+			if (is_array($res)) {
+				$this->data_array =& $res;
+			} elseif (db_numrows($res) < 1) {
 				//function in class we extended
 				$this->setError('User Not Found');
 				$this->data_array=array();
@@ -803,6 +833,20 @@ class User extends Error {
 	 */
 	function getTitle() {
 		return $this->data_array['title'];
+	}
+
+	/**
+	 *	getGroups - get an array of groups this user is a member of.
+	 *
+	 *	@return array	Array of groups.
+	 */
+	function &getGroups() {
+		$sql="SELECT group_id
+			FROM user_group
+			WHERE user_id='". $this->getID() ."'";
+		$res=db_query($sql);
+		$arr =& util_result_column_to_array($res,0);	
+		return group_get_objects($arr);
 	}
 
 	/**

@@ -90,9 +90,38 @@ function &group_get_object($group_id,$res=false) {
 	return $GROUP_OBJ["_".$group_id."_"];
 }
 
+function &group_get_objects($id_arr) {
+	global $GROUP_OBJ;
+	for ($i=0; $i<count($id_arr); $i++) {
+		//
+		//	See if this ID already has been fetched in the cache
+		//
+		if (!isset($GROUP_OBJ["_".$id_arr[$i]."_"])) {
+			$fetch[]=$id_arr[$i];
+		} else {
+			$return[] =& $GROUP_OBJ["_".$id_arr[$i]."_"];
+		}
+	}
+	if (count($fetch) > 0) {
+		$res=db_query("SELECT * FROM groups WHERE group_id IN ('".implode($fetch,'\',\'') ."')");
+		while ($arr =& db_fetch_array($res)) {
+			$GROUP_OBJ["_".$arr['group_id']."_"] = new Group($arr['group_id'],$arr);
+			$return[] =& $GROUP_OBJ["_".$arr['group_id']."_"];
+		}
+	}
+	return $return;
+}
+
 function &group_get_object_by_name($groupname) {
 	$res=db_query("SELECT * FROM groups WHERE unix_group_name='$groupname'");
 	return group_get_object(db_result($res,0,'group_id'),$res);
+}
+
+function &group_get_objects_by_name($groupname_arr) {
+	$sql="SELECT group_id FROM groups WHERE unix_group_name IN ('".implode($groupname_arr,'\',\'')."')";
+	$res=db_query($sql);
+	$arr =& util_result_column_to_array($res,0);
+	return group_get_objects($arr);
 }
 
 class Group extends Error {
@@ -135,7 +164,7 @@ class Group extends Error {
 	 *	Group - Group object constructor - use group_get_object() to instantiate.
 	 *
 	 *	@param	int		Required - group_id of the group you want to instantiate.
-	 *	@param	int		Database result from select query.
+	 *	@param	int		Database result from select query OR associative array of all columns.
 	 */
 	function Group($id=false, $res=false) {
 		$this->Error();
@@ -149,19 +178,26 @@ class Group extends Error {
 				return false;
 			}
 		} else {
-			if (db_numrows($res) < 1) {
-				//function in class we extended
-				$this->setError('Group Not Found');
-				$this->data_array=array();
-				return false;
+			//
+			//	Assoc array was passed in
+			//
+			if (is_array($res)) {
+				$this->data_array =& $res;
 			} else {
-				//set up an associative array for use by other functions
-				db_reset_result($res);
-				$this->data_array =& db_fetch_array($res);
+				if (db_numrows($res) < 1) {
+					//function in class we extended
+					$this->setError('Group Not Found');
+					$this->data_array=array();
+					return false;
+				} else {
+					//set up an associative array for use by other functions
+					db_reset_result($res);
+					$this->data_array =& db_fetch_array($res);
+				}
 			}
 		}
 //
-//	Need to add a check if this is not public, verify user is logged in and isMember
+//	TODO: Need to add a check if this is not public, verify user is logged in and isMember
 //
 		return true;
 	}
