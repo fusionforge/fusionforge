@@ -194,7 +194,7 @@ class Group extends Error {
 	 *  @param	string	The 'other' license to use if any.
 	 *  @param	string	The purpose of the group.
 	 */
-	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose) {
+	function create(&$user, $full_name, $unix_name, $description, $license, $license_other, $purpose, $unix_box='shell1', $cvs_box='cvs1') {
 
 		// $user is ignored - anyone can create pending group
 
@@ -233,8 +233,8 @@ class Group extends Error {
 				'$unix_name.".$GLOBALS['sys_default_domain']."',
 				'$unix_name.".$GLOBALS['sys_default_domain']."',
 				'P',
-				'shell1',
-				'cvs1',
+				'$unix_box',
+				'$cvs_box',
 				'$license',
 				'".htmlspecialchars($purpose)."',
 				".time().",
