@@ -1,11 +1,12 @@
-sourceforge (2.6-0+15+) experimental; urgency=low
+sourceforge (2.6-0+16) experimental; urgency=low
 
   * [Christian] repared broken delete function in new_parse.pl
   * [Christian] made that ssh_dump.pl don't try to create key files for
     deleted user
-  * [Christian] Applied Francisco Gimeno alias kikov supposed repared patch 
+  * [Christian] Applied an repared Francisco Gimeno alias kikov task 
+    manager patch
 
- -- Christian Bayle <bayle@debian.org>  Mon,  2 Dec 2002 14:37:29 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue,  3 Dec 2002 10:11:31 +0100
 
 sourceforge (2.6-0+15) experimental; urgency=low
 
