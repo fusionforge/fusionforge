@@ -1,11 +1,14 @@
-gforge (3.1-8+1+) unstable; urgency=low
+gforge (3.1-8+2) unstable; urgency=low
 
   * [Roland] Added permissions for the robot to edit the
     ou=mailingList,dc=... entries in LDAP.
   * [Roland] Better detection of strange conditions in cvs_dump_update.pl.
   * [Roland] Fixed permissions for groups' "home" directories.
+  * [Roland] Added po/nl.po for the Dutch translation (closes: #232236).
+  * [Roland] Don't comment out LDAP schema inclusions in slapd.conf
+    (closes: #227377).
 
- -- Roland Mas <lolando@debian.org>  Tue, 20 Jan 2004 22:51:19 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 11 Feb 2004 23:08:24 +0100
 
 gforge (3.1-8) unstable; urgency=low
 
