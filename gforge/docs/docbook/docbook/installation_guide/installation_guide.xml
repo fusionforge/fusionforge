@@ -24,7 +24,7 @@
 		</para>
 		<orderedlist>
 			<listitem><para>Linux Operating System</para></listitem>
-			<listitem><para>Postgres 7.1 or later</para></listitem>
+			<listitem><para>PostgreSQL 7.1 or later</para></listitem>
 			<listitem><para>Apache 1.3.22 or later</para></listitem>
 			<listitem><para>openssl >0.9.4</para></listitem>
 			<listitem><para>mod_ssl >2.4.10</para></listitem>
@@ -38,7 +38,7 @@
 			RedHat Linux 8.0 with the following software configured (already bundled with RH8):
 		</para>
 		<orderedlist>
-			<listitem><para>Postgres 7.2.2</para></listitem>
+			<listitem><para>PostgreSQL 7.2.2</para></listitem>
 			<listitem><para>Apache 2.0.40</para></listitem>
 			<listitem><para>openssl 0.9.6b</para></listitem>
 			<listitem><para>mod_ssl 2.0.40</para></listitem>
@@ -49,7 +49,7 @@
 			RedHat Linux 7.3:
 		</para>
 		<orderedlist>
-			<listitem><para>Postgres 7.2-1</para></listitem>
+			<listitem><para>PostgreSQL 7.2-1</para></listitem>
 			<listitem><para>Apache 1.3.27</para></listitem>
 			<listitem><para>openssl 0.9.6b</para></listitem>
 			<listitem><para>mod_ssl 2.0.40</para></listitem>
@@ -64,21 +64,21 @@
 			<note>
 				<title>Note for Debian users</title>
 				<para>
-					You can simply add lines found at <ulink url="http://people.debian.org/~bayle/">http://people.debian.org/~bayle/</ulink> or <ulink url="http://people.debian.org/~lolando/">http://people.debian.org/~lolando/</ulink> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install gforge</command> to install a working GForge system, thanks to Christian Bayle and Roland Mas.
+					You can simply add lines found at <ulink url="http://people.debian.org/~bayle/"/> or <ulink url="http://people.debian.org/~lolando/"/> to <filename>/etc/apt/sources.list</filename> and type <command>apt-get install gforge</command> to install a working GForge system, thanks to Christian Bayle and Roland Mas.
 				</para>
 				<para>
-					Note that Gforge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. From scrach install snapshot are also available for a guided installation.
+					Note that Gforge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. From scratch install snapshot are also available for a guided installation.
 				</para>
 			</note>
 			<para>
 				To install GForge, follow these steps:
 			</para>
 			<orderedlist>
-				<listitem><para>Login as root user</para></listitem>
-				<listitem><para>cd to <filename>/var/www/</filename></para></listitem>
-				<listitem><para>Extract the content of gforge-3.21.tar.bz2 to the current directory:
+				<listitem><para>Login as <literal>root</literal> user</para></listitem>
+				<listitem><para>cd to <filename class="directory">/var/www/</filename></para></listitem>
+				<listitem><para>Extract the content of <filename>gforge-4.0.tar.bz2</filename> to the current directory:
 					<command>
-						bzip2 -dc gforge-3.21.tar.bz2 | tar xvf -
+						bzip2 -dc gforge-4.0.tar.bz2 | tar xvf -
 					</command></para>
 				</listitem>
 			</orderedlist>
@@ -88,15 +88,15 @@
 			<orderedlist>
 				<listitem><para>Open <filename>/etc/httpd/conf/httpd.conf</filename>:</para></listitem>
 				<listitem>
-					<para>Change the DocumentRoot to point to the <filename>www</filename> directory:</para>
+					<para>Change the <literal>DocumentRoot</literal> to point to the <filename class="directory">www</filename> directory:</para>
 <programlisting>
-DocumentRoot "/var/www/gforge-3.21/www"
+DocumentRoot "/var/www/gforge-4.0/www"
 </programlisting>
 				</listitem>
 				<listitem>
-					<para>Change the Directory directive following the DocumentRoot as follows:</para>
+					<para>Change the <literal>Directory</literal> directive following the <literal>DocumentRoot</literal> as follows:</para>
 <programlisting><![CDATA[
-<Directory "/var/www/gforge-3.21/www">
+<Directory "/var/www/gforge-4.0/www">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -105,11 +105,11 @@ DocumentRoot "/var/www/gforge-3.21/www"
 </Directory>
 ]]></programlisting>
 				</listitem>
-				<listitem><para>Change the ScriptAlias to <filename>/var/www/gforge-3.21/cgi-bin</filename></para></listitem>
+				<listitem><para>Change the <literal>ScriptAlias</literal> to <filename class="directory">/var/www/gforge-4.0/cgi-bin</filename></para></listitem>
 				<listitem>
-					<para>Change the Directory configuration following the ScriptAlias directive as follows:</para>
+					<para>Change the <literal>Directory</literal> configuration following the <literal>ScriptAlias</literal> directive as follows:</para>
 <programlisting><![CDATA[
-<Directory "/var/www/gforge-3.21/cgi-bin">
+<Directory "/var/www/gforge-4.0/cgi-bin">
     AllowOverride All
     Options None
     Order allow,deny
@@ -117,9 +117,9 @@ DocumentRoot "/var/www/gforge-3.21/www"
 </Directory>
 ]]></programlisting>
 				</listitem>
-				<listitem><para>If you wish to set up a server with HTTPS, you need to configure the VirtualHost:443 section of <filename>httpd.conf</filename>.</para></listitem>
+				<listitem><para>If you wish to set up a server with HTTPS, you need to configure the <literal>VirtualHost:443</literal> section of <filename>httpd.conf</filename>.</para></listitem>
 				<listitem>
-					<para>Add several new filenames to the DirectoryIndex directive:</para>
+					<para>Add several new filenames to the <literal>DirectoryIndex</literal> directive:</para>
 <programlisting>
 DirectoryIndex index.html index.shtml index.cgi index.php
 </programlisting>
@@ -135,7 +135,7 @@ DirectoryIndex index.html index.shtml index.cgi index.php
 									<para>Open <filename>/etc/httpd/conf/httpd.conf</filename></para>
 								</listitem>
 								<listitem>
-									<para>Insert the following instructions after the DocumentRoot directive:</para>
+									<para>Insert the following instructions after the <literal>DocumentRoot</literal> directive:</para>
 <programlisting><![CDATA[
 <Location /projects>
   ForceType application/x-httpd-php
@@ -159,7 +159,7 @@ AddModule mod_php.c
 									<para>Open <filename>/etc/httpd/conf.d/php.conf</filename></para>
 								</listitem>
 								<listitem>
-									<para>Change the existing Files directive to:</para>
+									<para>Change the existing <literal>Files</literal> directive to:</para>
 <programlisting><![CDATA[
 <Files *.php>
     SetOutputFilter PHP
@@ -169,7 +169,7 @@ AddModule mod_php.c
 </Files>
 ]]></programlisting>
 									<para>
-													The LimitRequestBody directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size >512Kb. With this directive we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the upload_max_filesize directive in php.ini.
+													The <literal>LimitRequestBody</literal> directive allows you to limit the maximum number of bytes of a request (including uploads). The default is 524288 (512Kb). This means that you cannot upload files with a size &gt;512Kb. With this directive we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the <literal>upload_max_filesize</literal> directive in <filename>php.ini</filename>.
 									</para>
 								</listitem>
 								<listitem>
@@ -212,18 +212,18 @@ psql: could not connect to server: Connection refused
 	Is the server running on host localhost and accepting
 	TCP/IP connections on port 5432?
 </screen>
-					<para>you need to add the -i option to the pg_ctl command so that the result is:</para>
+					<para>you need to add the <literal>-i</literal> option to the <command>pg_ctl</command> command so that the result is:</para>
 <screen>
-cd /etc/init.d/
-vi postgresql
-su -l postgres -s /bin/sh -c "/usr/bin/pg_ctl -o -i -D $PGDATA -p /usr/bin/postmaster start  &gt; /dev/null 2>&amp;1" &lt; /dev/null
+# cd /etc/init.d/
+# vi postgresql
+# su -l postgres -s /bin/sh -c "/usr/bin/pg_ctl -o -i -D $PGDATA -p /usr/bin/postmaster start  &gt; /dev/null 2>&amp;1" &lt; /dev/null
 </screen>
 					<para>
-						On some systems, PostgreSQL is configured with the ident clause, allowing you only to access to the database if the username/password of your server is identical to the database username/password.  You should either create a user called gforge on your server or disable this feature: <command>su - postgres</command>
+						On some systems, PostgreSQL is configured with the <literal>ident</literal> clause, allowing you only to access to the database if the username/password of your server is identical to the database username/password.  You should either create a user called <literal>gforge</literal> on your server, or disable this feature: <command>su - postgres</command>;
 					</para>
-					<para>Open <filename>/var/lib/pgsql/data/pg_hba.conf</filename> and insert the following lines:</para>
+					<para>Open <filename>/var/lib/pgsql/data/pg_hba.conf</filename> and insert the following lines;</para>
 					<para>
-						For PostgreSQL 7.3 (note that you can figure out your Postgres version by opening <filename>/etc/init.d/postgresql</filename> and looking for the string PG_VERSION=):
+						For PostgreSQL 7.3 (note that you can figure out your PostgreSQL version by opening <filename>/etc/init.d/postgresql</filename> and looking for the string <literal>PG_VERSION</literal>=):
 					</para>
 <programlisting>
 local all all trust
@@ -236,26 +236,29 @@ host all 127.0.0.1 255.255.255.255 crypt
 </programlisting>
 					<para>and comment out all other directives.</para>
 					<para>Restart the PostgreSQL server as root user:</para>
-					<screen>/etc/init.d/postgresql restart</screen>
-					<para>Now, initialize the database (if you haven't done so already):</para>
+					<screen># /etc/init.d/postgresql restart</screen>
+					<para>Become <literal>postgres</literal> user for the following commands:</para>
 <screen>
 # su - postgres
-# initdb
+</screen>
+					<para>Now, initialize the database (if you haven't done so already):</para>
+<screen>
+$ initdb
 </screen>
 					<para>Create the database user:</para>
 <screen>
-su - postgres
-createuser gforge -W 
+$ createuser gforge -W 
 </screen>
 					<para>Answer the following two questions:</para>
 <screen>
 Shall the new user be allowed to create databases? (y/n) y
 Shall the new user be allowed to create more new users? (y/n) n
 </screen>
-					<para>and insert a password (most people use 'gforge') for the user to be created.</para>
-					<para>Create the database using the command:</para>
+					<para>and insert a password (most people use <quote>gforge</quote>) for the user to be created.</para>
+					<para>Create the database with PL/pgSQL support using the commands:</para>
 <screen>
-createdb -U gforge gforge
+$ createdb -U gforge gforge
+$ createlang plpgsql gforge
 </screen>
 				</listitem>
 				<listitem>
@@ -263,11 +266,11 @@ createdb -U gforge gforge
 					<para>Now it's time to install the database. The steps are:</para>
 					<orderedlist>
 						<listitem>
-							<para>cd to <filename>/var/www/gforge-3.21/db</filename></para>
+							<para>cd to <filename class="directory">/var/www/gforge-4.0/db</filename></para>
 						</listitem>
 						<listitem>
 <screen>
-psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
+$ psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
 </screen>
 						</listitem>
 					</orderedlist>
@@ -275,14 +278,14 @@ psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
 						<title>Mandrake 9-specific installation notes (thanks to Francois Elie)</title>
 						<itemizedlist>
 							<listitem>
-								<para>Edit /var/lib/pgsql/data/postgresql.conf:</para>
+								<para>Edit <filename>/var/lib/pgsql/data/postgresql.conf</filename>:</para>
 <programlisting>
 set tcpip_socket=true
 local all md5
 </programlisting>
 							</listitem>
 							<listitem>
-								<para>Edit /var/lib/pgsql/data/pg_hba.conf:</para>
+								<para>Edit <filename>/var/lib/pgsql/data/pg_hba.conf</filename>:</para>
 								<para>Set for example access right to</para>
 								<programlisting>host     all     0.0.0.0   0.0.0.0   md5</programlisting>
 							</listitem>
@@ -290,7 +293,7 @@ local all md5
 					</note>
 				</listitem>
 				<listitem>
-					<para>Then restart the server <command>/etc/rc.d/init.d/postgresql restart</command></para>
+					<para>Then restart the server: <command>/etc/rc.d/init.d/postgresql restart</command></para>
 				</listitem>
 			</orderedlist>
 		</section>
@@ -300,9 +303,9 @@ local all md5
 				Verify the version of PHP installed on your system: <command>php -v</command>
 			</para>
 			<orderedlist>
-				<listitem><para>open <filename>/etc/php.ini</filename></para></listitem>
+				<listitem><para>Open <filename>/etc/php.ini</filename>.</para></listitem>
 				<listitem>
-					<para>if the PHP version you're using is 4.2.0 or later, enable the register_globals variable:</para>
+					<para>If the PHP version you're using is 4.2.0 or later, enable the <literal>register_globals</literal> variable:</para>
 <programlisting>
 register_globals = On
 </programlisting>
@@ -314,10 +317,10 @@ file_uploads = On
 </programlisting>
 				</listitem>
 				<listitem>
-					<para>and configure the include_path directive as follows:</para>
+					<para>and configure the <literal>include_path</literal> directive as follows (on one line):</para>
 <programlisting>
-include_path=".:/var/www/gforge-3.21/:/var/www/gforge-3.21/common/include:
-/var/www/gforge-3.21/www/include:/var/www/gforge-3.21/etc/"
+include_path=".:/var/www/gforge-4.0/:/var/www/gforge-4.0/common/include:
+/var/www/gforge-4.0/www/include:/var/www/gforge-4.0/etc/"
 </programlisting>
 				</listitem>
 			</orderedlist>
@@ -325,51 +328,51 @@ include_path=".:/var/www/gforge-3.21/:/var/www/gforge-3.21/common/include:
 		<section>
 			<title>Configuring cvsweb</title>
 			<para>
-				First download the latest cvsweb release - 1.112 - from <ulink url="http://stud.fh-heilbronn.de/~zeller/cgi/cvsweb.cgi/">http://stud.fh-heilbronn.de/~zeller/cgi/cvsweb.cgi/</ulink>
+				First download the latest cvsweb release from <ulink url="http://www.freebsd.org/projects/cvsweb.html"/>
 			</para>
 			<para>Copy the tar.gz file into a tmp directory and unzip it:</para>
 <screen>
-tar -zxvf cvsweb-1.112.tar.gz
+tar -zxvf cvsweb-3.0.2.tar.gz
 </screen>
-			<para>cvsweb consists of a Perl script (cvsweb.cgi), a configuration file (cvsweb.conf), and some icons (back.gif, dir.gif, etc).</para>
+			<para>cvsweb consists of a Perl script (<filename>cvsweb.cgi</filename>), a configuration file (<filename>cvsweb.conf</filename>), and some icons (<filename>back.gif</filename>, <filename>dir.gif</filename>, etc).</para>
 			<itemizedlist>
-				<listitem><para>Copy the cvsweb.cgi script into Apache's cgi-bin directory</para></listitem>
-				<listitem><para>Copy the cvsweb.conf file into Apache's configuration directory (such as /etc/httpd/conf.d/ on RedHat 9)</para></listitem>
-				<listitem><para>Edit cvsweb.conf</para></listitem>
-				<listitem><para>change %CVSROOT hash to include your repositories - note you'll need to have created a repository first, of course</para></listitem>
-				<listitem><para>change the $cvstreedefault variable to point to a default repository</para></listitem>
-				<listitem><para>TODO: can we add the repositories automatically? Or should we tweak cvsweb.cgi?</para></listitem>
-				<listitem><para>TODO: should we tweak cvsweb.cgi so it doesn't have a default repository?</para></listitem>
-				<listitem><para>Edit cvsweb.cgi</para></listitem>
-				<listitem><para>Change the $config variable to point the cvsweb.conf file</para></listitem>
-				<listitem><para>Change the $PATH variable in <filename>cvsweb.conf</filename> to point to the directory that contains rlog</para></listitem>
+				<listitem><para>Copy the <filename>cvsweb.cgi</filename> script into Apache's <filename class="directory">cgi-bin</filename> directory</para></listitem>
+				<listitem><para>Copy the <filename>cvsweb.conf</filename> file into Apache's configuration directory (such as <filename class="directory">/etc/httpd/conf.d/</filename> on RedHat 9)</para></listitem>
+				<listitem><para>Edit <filename>cvsweb.conf</filename></para></listitem>
+				<listitem><para>Change <varname>%CVSROOT</varname> hash to include your repositories - note you'll need to have created a repository first, of course.</para></listitem>
+				<listitem><para>Change the <varname>$cvstreedefault</varname> variable to point to a default repository</para></listitem>
+				<listitem><para>TODO: can we add the repositories automatically? Or should we tweak <filename>cvsweb.cgi</filename>?</para></listitem>
+				<listitem><para>TODO: should we tweak <filename>cvsweb.cgi</filename> so it doesn't have a default repository?</para></listitem>
+				<listitem><para>Edit <filename>cvsweb.cgi</filename></para></listitem>
+				<listitem><para>Change the <varname>$config</varname> variable to point the <filename>cvsweb.conf</filename> file</para></listitem>
+				<listitem><para>Change the <varname>$PATH</varname> variable in <filename>cvsweb.conf</filename> to point to the directory that contains <command>rlog</command></para></listitem>
 			</itemizedlist>
 			<para>Possible problems:</para>
 			<itemizedlist>
 				<listitem>
-					<para>Error: Configuration not found - edit cvsweb.cgi and point $config to the cvsweb.conf file</para>
+					<para><computeroutput>Error: Configuration not found</computeroutput> - edit <filename>cvsweb.cgi</filename> and point <varname>$config</varname> to the <filename>cvsweb.conf</filename> file</para>
 				</listitem>
 				<listitem>
-					<para>Error: Failed to spawn GNU rlog - ensure rlog is in the directory pointed to by ENV{'PATH'}</para>
+					<para><computeroutput>Error: Failed to spawn GNU rlog</computeroutput> - ensure <command>rlog</command> is in the directory pointed to by <varname>$ENV{'PATH'}</varname></para>
 				</listitem>
 			</itemizedlist>
 		</section>
 		<section>
 			<title>Configuring GForge</title>
 			<orderedlist>
-				<listitem><para>login as root user</para></listitem>
+				<listitem><para>Login as <literal>root</literal> user</para></listitem>
 				<listitem>
-					<para>create a directory gforge3-files:</para>
-					<screen>mkdir /var/www/gforge3-files</screen>
-					<para>Make this directory writeable by Apache</para>
-					<screen>chown -R apache.apache /var/www/gforge3-files</screen>
+					<para>Create a directory <filename class="directory">gforge-files</filename>:</para>
+					<screen># mkdir /var/www/gforge-files</screen>
+					<para>Make this directory writeable by Apache:</para>
+					<screen># chown -R apache.apache /var/www/gforge-files</screen>
 					<para>This directory will contain all files/patches uploaded to your gforge site.</para>
 				</listitem>
 				<listitem>
-					<para>Create a directory<filename> /etc/gforge</filename></para>
+					<para>Create a directory <filename class="directory">/etc/gforge</filename></para>
 				</listitem>
 				<listitem>
-					<para>Copy the file <filename>local.inc</filename> from <filename>/var/www/gforge-3.21/etc/</filename> to <filename>/etc/gforge/</filename> </para>
+					<para>Copy the file <filename>local.inc.example</filename> from <filename class="directory">/var/www/gforge-4.0/etc/</filename> to <filename class="directory">/etc/gforge/</filename> </para>
 				</listitem>
 				<listitem>
 					<para>Open <filename>/etc/gforge/local.inc</filename>, configuring the following basic parameters:</para>
@@ -385,15 +388,15 @@ $sys_server="postgres"
 </programlisting>
 						</listitem>
 						<listitem>
-							<para>Change the value of the $sys_upload_dir to:</para>
-							<programlisting>$sys_upload_dir='/var/www/gforge3-files/';</programlisting>
+							<para>Change the value of the <varname>$sys_upload_dir</varname> to:</para>
+							<programlisting>$sys_upload_dir='/var/www/gforge-files/';</programlisting>
 						</listitem>
 						<listitem>
-							<para>Change the value of the $sys_urlroot to:</para>
-<programlisting>$sys_urlroot="/var/www/gforge-3.21/www/";</programlisting>
+							<para>Change the value of the <varname>$sys_urlroot</varname> to:</para>
+<programlisting>$sys_urlroot="/var/www/gforge-4.0/www/";</programlisting>
 						</listitem>
 						<listitem>
-							<para>The directives <varname>$sys_default_domain</varname> and <varname>$sys_fallback_domain</varname>should contain the domain of your server, e.g. gforge.org.</para>
+							<para>The directives <varname>$sys_default_domain</varname> and <varname>$sys_fallback_domain</varname> should contain the domain of your server, e.g. <literal>gforge.org</literal>.</para>
 						</listitem>
 					</orderedlist>
 				</listitem>
@@ -406,29 +409,28 @@ $sys_server="postgres"
 			<title>Configuring GNU Mailman</title>
 			<para>GNU Mailman is used to help manage the GForge mailing lists.  To install it:</para>
 			<para>Install the 2.0.13 RPM (TODO add compilation instructions)</para>
-			<para>su to root and set the mailman password</para>
-			<para>Add the following to the httpd.conf</para>
+			<para><command>su</command> to <literal>root</literal> and set the Mailman password</para>
+			<para>Add the following to the <filename>httpd.conf</filename>:</para>
 <programlisting>
 Alias /pipermail/ /usr/local/mailman/archives/public/
 ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
 </programlisting>
-			<para>Run the script <command>gforge-3.21/cronjobs/mail/mailing_lists_create.php</command>; this creates any lists that are already in the database.  Note that to run the script you need to invoke the PHP interpreter with the <filename>-f</filename> flag, i.e.:</para>
-<programlisting>
-php -f mailing_lists_create.php
-</programlisting>
+			<para>Run the script <command>gforge-4.0/cronjobs/mail/mailing_lists_create.php</command>; this creates any lists that are already in the database.  Note that to run the script you need to invoke the PHP interpreter with the <literal>-f</literal> flag, i.e.:</para>
+<screen>
+# php -f mailing_lists_create.php
+</screen>
 		</section>
 		<section>
 			<title>Configuring CVS</title>
-			<para>GForge uses CVS via pserver for anonymous read only access and ext for developers to commit to the repositories.  To set it up:</para>
+			<para>GForge uses CVS via <literal>pserver</literal> for anonymous read only access and <literal>ext</literal> for developers to commit to the repositories.  To set it up:</para>
 			<para>Download and install the latest CVS RPM</para>
 			<para>Ensure the following info is in <filename>/etc/services</filename>:</para>
 <screen>
-[tom@cougaar tom]$ cat /etc/services | grep cvspserver
+$ grep cvspserver /etc/services
 cvspserver      2401/tcp                        # CVS client/server operations
 cvspserver      2401/udp                        # CVS client/server operations
-[tom@cougaar tom]$
 </screen>
-			<para>Ensure the following info is in <filename>/etc/xinetd.d/cvspserver</filename> (if it doesn't exist create a new file with the following text to enable anonymous access):</para>
+			<para>Ensure the following info is in <filename>/etc/xinetd.d/cvspserver</filename> (if it doesn't exist, create a new file with the following text to enable anonymous access):</para>
 <programlisting>
 service cvspserver
 {
@@ -441,15 +443,15 @@ service cvspserver
         server_args  = -f --allow-root=/path/to/my/cvsroot pserver
 }
 </programlisting>
-			<para>Now add an <filename>anonymous</filename> user to your system with a blank password, or one of <filename>anonymous</filename></para>
-			<para>TODO - does the CVSROOT/readers file get added via a cronjob or something?</para>
+			<para>Now add an <literal>anonymous</literal> user to your system with a blank password, or one of <literal>anonymous</literal></para>
+			<para>TODO - does the <filename>CVSROOT/readers</filename> file get added via a cronjob or something?</para>
 			<para>TODO - any extra notes on setting up dev access?  i.e., uploading of public key and such?</para>
 		</section>
 	</section>
 	<section>
 		<title>Verifying the installation</title>
 		<para>
-			To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage.  If you get an Error: Could Not Connect to Database:, check if you have followed all installation instructions for the database.  Also, you can experiment with making the settings in pg_hba.conf a bit more trusting - for example, change the last work of the second line from "md5" to "trust".
+			To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage.  If you get an <computeroutput>Error: Could Not Connect to Database</computeroutput>, check if you have followed all installation instructions for the database.  Also, you can experiment with making the settings in <filename>pg_hba.conf</filename> a bit more trusting - for example, change the last work of the second line from <literal>md5</literal> to <literal>trust</literal>.
 		</para>
 
 	</section>
@@ -463,16 +465,16 @@ service cvspserver
 			<listitem><para>Open your e-mail client, wait for the email from GForge site and follow the link that appears on the message.</para></listitem>
 			<listitem>
 				<para>Verify in Account Maintenance the user id of the user registered.</para>
-				<para>Usually this is 102, but you can verify this by running the following SQL query via the Postgres <command>psql</command> utility:</para>
+				<para>Usually this is 102, but you can verify this by running the following SQL query via the PostgreSQL <command>psql</command> utility:</para>
 <screen>
-psql -c "select user_id from users where user_name='***YOUR USER NAME***'" gforge gforge
+$ psql -c "select user_id from users where user_name='<replaceable>***YOUR USER NAME***</replaceable>'" gforge gforge
 </screen>
 			</listitem>
 			<listitem>
-				<para>Now set up the newly added user to be a GForge administrator</para>
+				<para>Now set up the newly added user to be a GForge administrator:</para>
 <screen>
-psql -U gforge -d gforge
-insert into user_group (user_id,group_id,admin_flags) values (102,1,'A');
+$ psql -U gforge gforge
+gforge=> insert into user_group (user_id,group_id,admin_flags) values (102,1,'A');
 </screen>
 			</listitem>
 		</orderedlist>
