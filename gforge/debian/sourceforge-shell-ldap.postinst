@@ -31,9 +31,9 @@ case "$1" in
 
         # Patch Slapd configuration files
 	/usr/lib/sourceforge/bin/install-ldap.sh configure-files
-	propose_update /etc/libnss-ldap.conf
-	propose_update /etc/nsswitch.conf
-	propose_update /etc/ldap/slapd.conf
+	propose_update_install /etc/libnss-ldap.conf
+	propose_update_install /etc/nsswitch.conf
+	propose_update_install /etc/ldap/slapd.conf
 
 	# Clean debconf after ourselves
 	db_stop

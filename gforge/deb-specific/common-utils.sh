@@ -19,15 +19,17 @@ replace_file () {
 # Propose a replacement to the user
 propose_update () {
     file=$1
+    mode=$2
+    template=sourceforge/shared/replace_file_$mode
     if diff -q ${file} ${file}.sourceforge-new 2>&1 > /dev/null ; then
 	# Old file and new file are identical
 	rm -f ${file}.sourceforge-new
     else
-	db_fset sourceforge/shared/replace_file_install seen false
-	db_subst sourceforge/shared/replace_file_install file $file
-	db_input high sourceforge/shared/replace_file_install || true
+	db_fset $template seen false
+	db_subst $template file $file
+	db_input high $template || true
 	db_go || true
-	db_get sourceforge/shared/replace_file_install || true
+	db_get $template || true
 	case "$RET" in
 	    "true")
 		echo >&2 "Replacing file $file with changed version"
@@ -41,6 +43,16 @@ propose_update () {
 		;;
 	esac
     fi
+}
+
+# Same, but for installation
+propose_update_install () {
+    propose_update $1 install
+}
+
+# Same, but for de-installation
+propose_update_remove () {
+    propose_update $1 remove
 }
 
 ###

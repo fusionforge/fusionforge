@@ -30,7 +30,7 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/lib/sourceforge/bin/install-db.sh configure-files
-	propose_update /etc/postgresql/pg_hba.conf
+	propose_update_install /etc/postgresql/pg_hba.conf
 
 	# Clean debconf after ourselves
 	db_stop

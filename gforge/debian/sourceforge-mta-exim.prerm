@@ -23,8 +23,8 @@ case "$1" in
 
 	# Unpatch Exim configuration files
 	/usr/lib/sourceforge/bin/install-exim.sh purge-files
-	propose_update /etc/aliases
-	propose_update /etc/exim/exim.conf
+	propose_update_remove /etc/aliases
+	propose_update_remove /etc/exim/exim.conf
 
 	# Clean debconf after ourselves
 	db_stop

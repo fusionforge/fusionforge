@@ -30,7 +30,7 @@ case "$1" in
 
 	# Patch Bind configuration files
 	/usr/lib/sourceforge/bin/install-dns.sh configure-files
-	propose_update /etc/bind/named.conf
+	propose_update_install /etc/bind/named.conf
 
 	# Clean debconf after ourselves
 	db_stop

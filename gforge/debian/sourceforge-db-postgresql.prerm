@@ -23,7 +23,7 @@ case "$1" in
 
         # Unpatch DB configuration files
 	/usr/lib/sourceforge/bin/install-db.sh purge-files
-	propose_update /etc/postgresql/pg_hba.conf
+	propose_update_remove /etc/postgresql/pg_hba.conf
 
         # DB config removal
 	/usr/lib/sourceforge/bin/install-db.sh purge

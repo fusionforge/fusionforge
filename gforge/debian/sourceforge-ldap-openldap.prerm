@@ -23,9 +23,9 @@ case "$1" in
 
         # Unpatch Slapd configuration files
 	/usr/lib/sourceforge/bin/install-ldap.sh purge-files
-	propose_update /etc/libnss-ldap.conf
-	propose_update /etc/nsswitch.conf
-	propose_update /etc/ldap/slapd.conf
+	propose_update_remove /etc/libnss-ldap.conf
+	propose_update_remove /etc/nsswitch.conf
+	propose_update_remove /etc/ldap/slapd.conf
 
 	# Clean debconf after ourselves
 	db_stop

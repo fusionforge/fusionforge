@@ -23,7 +23,7 @@ case "$1" in
 
 	# Unpatch Bind configuration files
 	/usr/lib/sourceforge/bin/install-dns.sh purge-files
-	propose_update /etc/bind/named.conf
+	propose_update_remove /etc/bind/named.conf
 	
 	# Clean debconf after ourselves
 	db_stop

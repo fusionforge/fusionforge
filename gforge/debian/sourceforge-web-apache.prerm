@@ -24,7 +24,7 @@ case "$1" in
 
         # Unpatch Apache configuration files
 	/usr/lib/sourceforge/bin/install-apache.sh purge-files
-	propose_update /etc/apache/httpd.conf
+	propose_update_remove /etc/apache/httpd.conf
 
 	# Clean debconf after ourselves
 	db_stop

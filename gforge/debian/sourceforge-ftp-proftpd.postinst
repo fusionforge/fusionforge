@@ -30,7 +30,7 @@ case "$1" in
 
         # Patch Proftpd configuration files
 	/usr/lib/sourceforge/bin/install-ftp.sh configure-files
-	propose_update /etc/proftpd.conf
+	propose_update_install /etc/proftpd.conf
 
 	# Clean debconf after ourselves
 	db_stop

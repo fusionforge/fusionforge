@@ -30,8 +30,8 @@ case "$1" in
 	
         # Patch Exim configuration files
 	/usr/lib/sourceforge/bin/install-exim.sh configure-files
-	propose_update /etc/aliases
-	propose_update /etc/exim/exim.conf
+	propose_update_install /etc/aliases
+	propose_update_install /etc/exim/exim.conf
 
 	# Clean debconf after ourselves
 	db_stop
