@@ -23,7 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
-require_once ('/usr/lib/gforge/plugins/scmcvs/include/CVSPlugin.class') ;
+require_once ('CVSPlugin.class') ;
 
 $CVSPluginObject = new CVSPlugin ;
 
