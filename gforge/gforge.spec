@@ -119,6 +119,7 @@ mkdir -p $UPLOAD_DIR
 mkdir -p $CACHE_DIR
 mkdir -p $SCM_TARBALLS_DIR
 mkdir -p $PLUGINS_DIR
+mkdir -p $SBIN_DIR
 
 # configuring apache
 mkdir -p $HTTPD_CONF_DIR/conf.d
