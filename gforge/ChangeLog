@@ -1,3 +1,8 @@
+2003-05-19 Tom Copeland <tom@infoether.com>
+
+	* common/include/User.class:
+	Applied patch #353: theme and User.class problems
+
 2003-05-17 Tom Copeland <tom@infoether.com>
 
 	* www/top/most_active.php:

@@ -1132,7 +1132,7 @@ class User extends Error {
 			$this->theme=db_result($res,0,'dirname');
 			$GLOBALS['sys_theme']=db_result($res,0,'dirname');
 			//If the theme dir doesn't exist
-			if (!is_dir($GLOBALS['sys_themeroot.'].$GLOBALS['sys_theme'])) $GLOBALS['sys_theme']='';
+			if (!is_dir($GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'])) $GLOBALS['sys_theme']='';
 		}
 		return $this->theme;
 	}
