@@ -124,7 +124,7 @@ sub parse_history {
 
 sub print_stats {
 	my ($sql,$res,$temp);
-	$sql = "SELECT * FROM deb_cvs_group";
+	$sql = "SELECT * FROM deb_cvs_group order by year, month, day";
 	$res = $dbh->prepare($sql);
 	$res->execute();
 	while ( my ($cvsgroup, $year, $month, $day, $total, $commits, $adds, $checkouts, $errors) = $res->fetchrow()) {
