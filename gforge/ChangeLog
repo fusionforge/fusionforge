@@ -5,6 +5,9 @@
 	was happening because the SQL statement had an offset 
 	of 23 which wasn't working for months that don't have 30 
 	days.  I think.
+	* www/include/user_home.php:
+	Fixed bug #380: users.{sys_default_domain} hardcoded and 
+	ignores users_host in gforge.conf
 	
 2003-06-13 Tom Copeland  <tom@infoether.com>
 
