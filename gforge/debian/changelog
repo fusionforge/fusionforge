@@ -1,4 +1,4 @@
-gforge (3.1-13+4) unstable; urgency=low
+gforge (3.1-14) unstable; urgency=low
 
   * [Roland] Rewrote the "sourceforge" package description to fix a
     Lintian error.
@@ -12,7 +12,7 @@ gforge (3.1-13+4) unstable; urgency=low
   * [Roland] Fixed cvsweb.cgi so it calls cvs with non-absolute filenames,
     thus allowing the "download" feature to work again.
 
- -- Roland Mas <lolando@debian.org>  Tue, 30 Mar 2004 15:11:44 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 31 Mar 2004 22:00:46 +0200
 
 gforge (3.1-13) unstable; urgency=low
 
