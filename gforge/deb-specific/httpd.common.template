@@ -5,11 +5,6 @@
   deny from all
 </Files>
 
-<IfModule mod_ssl.c>
-  Listen 80
-  Listen 443
-</IfModule>
-
 NameVirtualHost {ip_address}:80
 NameVirtualHost {ip_address}:443
 
