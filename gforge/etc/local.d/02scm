@@ -14,6 +14,9 @@ $sys_scm_single_host = 1;
 // Path to tarballs directory
 $sys_scm_tarballs_path='{sys_scm_tarballs_path}';
 
+// Path to snapshots directory
+$sys_scm_snapshots_path='{sys_scm_snapshots_path}';
+
 // Path to SCMWEB
 $sys_path_to_scmweb='{sys_path_to_scmweb}';
 
