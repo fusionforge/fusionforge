@@ -226,7 +226,7 @@ switch ($func) {
 		} elseif ($pt->isError()) {
 			exit_error('Error',$pt->getErrorMessage());
 		}
-		if (session_loggedin() && $perm->isPMAdmin()) {
+		if (session_loggedin() && $pg->userIsAdmin()) {
 			include 'mod_task.php';
 		} else {
 			include 'detail_task.php';
