@@ -191,6 +191,33 @@ WEB SETUP
 Move the GForge tarball into position and make the www/ directory the
 "Document Root".
 
+The following are sample commands commonly issued for a manual installation:
+
+tar -xjf gforge-4.0.2.tar.bz2
+mv gforge-4.0.2 /var/www/
+cd /var/www/
+ln -s gforge-4.0.2 gforge
+mkdir mailman
+mkdir cvs
+mkdir uploads
+mkdir jpgraph
+mkdir localizationcache
+mkdir svn
+mkdir /var/svn
+mkdir /etc/gforge
+mkdir /cvsroot
+cp /var/www/gforge/etc/local.inc.example /etc/gforge/local.inc
+
+tar -xzf jpgraph-1.9.1.tar.gz
+mv jpgraph-1.9.1/src/* /var/www/jpgraph/
+chown -R apache:apache /etc/gforge/
+chmod 600 /etc/gforge/local.inc
+cd /var/www/gforge/cronjobs/cvs-cron/
+chmod 755 *.php
+chmod 755 *.sh
+chown -R apache:apache /var/www
+
+
 The following are sample Apache 2.0 httpd.conf entries:
 
 NameVirtualHost 192.168.1.1
@@ -241,7 +268,7 @@ ServerAdmin mailman@lists.gforge.company.com
 DocumentRoot /var/www/mailman
 ScriptAlias   /mailman/ /var/mailman/cgi-bin/
 Alias /pipermail/ /var/mailman/archives/public/
-DirectoryIndex index.php index.cgi index.html index.htm
+DirectoryIndex index.php
 </VirtualHost>
 
 #
@@ -329,6 +356,10 @@ line and issue these commands:
 
 [gforge]# psql gforge
 
+psql> SELECT user_id FROM users WHERE user_name='******MY NEW USERNAME*********';
+
+The result of that query will be put into this next query:
+
 psql> insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NEW NUMERIC USER ID*****,1,'A');
 
 
@@ -391,6 +422,11 @@ to edit the cron script to remove the .new extension, but you must
 make sure that it is properly generating your files or your server 
 could be unusable.
 
+Once you have manually run the usergroup.php file, look at the 
+/etc/*.new files and verify that they contain sensisble information.
+When you are confident they are right, you can edit usergroup.php 
+to remove the .new extension and uncomment the cronjobs.
+
 
 JPGRAPH
 -------
@@ -418,3 +454,91 @@ libdbi-perl and libdbd-pg-perl.
 | $sys_dbuser = 'gforge' ;
 | $sys_dbpasswd = 'p455w0rd' ;
 `----
+
+
+MOST COMMON PROBLEMS
+--------------------
+
+Q: I get a blank page when I visit http://gforge.company.com/
+
+A: Most often you are missing the php-pgsql library that lets PHP
+talk to the postgres database. Find a php-pgsql RPM or recompile 
+php to have pgql support.
+
+If you're sure you have php-pgsql support, you can edit 
+common/include/database.php and remove the @ symbol from
+this line:
+
+	$conn = @pg_connect( 
+
+So that it looks like:
+
+	$conn = pg_connect(
+
+This will let debug output dump to the screen and may let you find
+the problem. Search the forums for more solutions.
+
+
+Q: "Error Occurred In the Logger" or other database permission problems
+
+A: As stated in the installation instructions, the database must be created, 
+owned, and accessed by the gforge user. This user is the only one who will 
+have total acess to all the tables. Any other user would have to be specifically 
+granted permissions with the GRANT commands in postgres.
+
+
+Q: Reporting or time tracking doesn't work
+
+A: Go to the reporting tab and scroll down so you can choose 
+"Initialize/Rebuild Reporting Tables"
+
+You may also be missing GD support or be missing JPGraph or have it installed 
+improperly. The jpgraph/src/ directory should be specified accurately in your 
+local.inc file, and you should include a / at the end of the path specified.
+In addition, you should modify jpgraph.php to set USE_CACHE=false
+
+
+Q: How do I upgrade my database?
+
+A: As stated above, you must apply the changes that are listed in date order 
+in the db/ directory to your database. Only the changes that are not already 
+in your old db/ directory should be applied, and they should be applied and 
+checked IN ORDER.
+
+
+Q: I'm getting an error about BaseLanguage.class not being found.
+
+A: Make sure your localization path is correctly specified in the local.inc 
+file and that it is readable AND writable by the apache user.
+
+
+Q: When I click on "/projects/" or "/users/" links, I get the source code
+instead of the page I expected.
+
+A: As shown in the example httpd.conf files above, you may have to switch 
+to using the <Files> or <Location> directives depending on your server
+version.
+
+
+Q: How do I backup GForge? 
+
+A: The only proper way to backup the gforge database is with pg_dump. 
+Any attempt to backup the filesystem while pgsql is running will result
+in a useless and corrupt backup. You can backup CVS trees using tar as 
+long as they are not actively and heavily used during the backup. 
+Mailman and the FRS uploads dir can also be backed up with tar.
+
+
+Q: Any time i enter an apostrophe in a text box, i get a parse error
+
+A: As stated in the instructions above, you should have magic_quotes_gpc=On
+in your php.ini file
+
+
+Q: Large uploads into FRS or the doc manager fail.
+
+A: Apache and the php.ini file need to have upload limits and possibly 
+memory limits increased.
+
+
+
