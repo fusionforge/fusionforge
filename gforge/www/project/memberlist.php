@@ -58,7 +58,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 	print "\t\t<td align=\"middle\"><A href=\"/users/$row_memb[user_name]/\">$row_memb[user_name]</A></td>\n";
 	print "\t\t<td align=\"middle\">$row_memb[role]</td>\n";
 	print "\t\t<td align=\"middle\"><A href=\"/sendmessage.php?touser=".$row_memb['user_id'].
-		"\">".$row_memb['user_name']." at users.".$GLOBALS['sys_users_host']."</td>\n";
+		"\">".$row_memb['user_name']." at ".$GLOBALS['sys_users_host']."</td>\n";
 	print "\t\t<td align=\"middle\"><A href=\"/people/viewprofile.php?user_id=".
 		$row_memb['user_id']."\">View</a></td>\n";
 	print "\t</tr>\n";
