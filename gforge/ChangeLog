@@ -1,5 +1,7 @@
 2003-01-18  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/languages/Spanish.tab: bunch o' translations.
+
 	* utils/missing_L10n.pl: new file.
 
 	* www/404.php: valid XHTML 1.0 Transitional.

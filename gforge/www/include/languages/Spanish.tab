@@ -98,11 +98,13 @@ cvs	devcvs	<P><B>Acceso al CVS por colaboradores v&iacute;a SSH</B> <P>Solo los 
 cvs	history	Historia del repositorio
 cvs	browsetree	<HR><B>Navegue por el &aacute;rbol CVS</B> <P>Navegar por el directorio CVS te porporciona una gran visi&oacute;n del estado actual de este proyecto. Tambi&eacute;n puedes ver el historial completo de cualquier fichero del repositorio.
 cvs	browseit	Navegar por el repositorio CVS
-docman	section	Proyecto: $1
-docman	title	Administrador de documentos
 docman	submit_new	Publicar Nuevo Documento
 docman	view_doc	Leer Documentos
 docman	admin	Administraci&oacute;n
+docman	error_no_docs	Este proyecto no tiene documentos visibles.
+docman	error_no_groups_defined	No hay grupos de documentos.
+docman	description	Descripci&oacute;n
+docman	error_invalid_file_attack	Ataque del archivo: $1
 docman_admin	section	$1
 docman_admin	title	Administrador de documentos: Administraci&oacute;n
 docman_admin	add_edit_docgroups	Crear/Editar Grupos de Documentos
@@ -144,16 +146,22 @@ forum	section	Proyecto: $1
 forum	title	Foros
 forum	choose	<p>Elije un foro y podr&aacute;s navegar, buscar y enviar mensajes.<p>
 forum	html	No est&aacute; permitido HTML. Los tags HTML se visulizar&aacute;n como texto
+forum_common_forum	error_save_place	Forum::savePlace()
+forum_save	saved	Su posici&oacute;n en el foro est&acute; guardada.  Mensajes nuevos estar&aacute;n subrayados cuando regrese.
 forum_admin	section	Proyecto: $1 
 forum_admin	title	Foros: Administraci&oacute;n 
 forum_admin_addforum	section	Administraci&oacute;n de foros
 forum_admin_addforum	title	A&ntilde;adir foro
 forum_admin_changestatus	section	Administraci&oacute;n de foros
 forum_admin_changestatus	title	Cambiar el estado de un foro
+forum_admin_changestatus	update_successful	Informaci&oacute;n del Foro Actualizado con &Eacute;xito.
+forum_admin_changestatus	no_forums_found No se encuentra ning&uacute;n foro.
+forum_admin_changestatus	intro	Se puede ajustar las caracturisticas de los foros aqu&iacute;.  Favor de notar que los miembros del proyecto pueden leer los foros privados, pero no el gran p&uacute;blico.
+forum_admin_changestatus	status	Estado
+forum_admin_changestatus	forum	Foro
+forum_admin_changestatus	change_status	Cambiar el estado del foro.
 forum_admin_delete	section	Administraci&oacute;n de foros
 forum_admin_delete	title	Borrar un foro
-forum_forum	section	Proyecto: $1 
-forum_forum	title	Forums: Ver un foro
 forum_forum_thread	section	Foros
 forum_forum_thread	title	Ver la conversaci&oacute;n
 forum_message	section	Foros
@@ -172,11 +180,11 @@ general	sitename	$1
 general	footer	Esto es $1. Para mayor informaci&oacute;n incluido informaci&oacute;n de copyright, ver <a href="/about.php">esta p&aacute;gina</a>.
 general	error	Error
 general	turned_off	Este proyecto no se usa $1.
-general update_successful	Actualizado con exito.
-general	create_successful	Creado con exito.
+general update_successful	Actualizado con &eacute;xito.
+general	create_successful	Creado con &eacute;xito.
 general	no_valid_group	El grupo de $1 no fue selecionado.
 general	no_valid_filename	El nombre del archivo es invalido.
-general	submitted_successfully	$1 fue enviado con exito.
+general	submitted_successfully	$1 fue enviado con &eacute;xito.
 general	language	idioma
 general	edit	Editar
 group	developer_info	Informaci&oacute;n del colaborador
@@ -278,8 +286,17 @@ my	monitoredforum	Foros Monitorizados
 my	monitoredfile	Ficheros Monitorizados
 my	tasks	Mis Tareas
 my	survey	Encuestas R&aacute;pidas
+my	survey_taken	Usted has respondido a la encuesta de programadores.
 my	bookmarks	Mis Marcadores
 my	projects	Mis Proyectos
+my	pending_projects	Proyectos Pendientes.
+my	pending_projects_1	Hay un proyecto pendiente.
+my	pending_projects_2	Hay $1 proyectos pendientes.
+my	pending_projects_3	Haz click aqu&iacute;
+my	pending_news_bytes	Noticias Pendientes.
+my	pending_news_bytes_1	Hay una noticia pendiente.
+my	pending_news_bytes_2	Hay $1 noticias pendientes.
+my	pending_news_bytes_3	HAz click aqu&iacute;
 my_bookmark_add	section	Mi P&aacute;gina Personal
 my_bookmark_add	title	A&ntilde;adir Marcador
 my_bookmark_delete	section	Mi P&aacute;gina Personal
@@ -491,10 +508,18 @@ classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\n
 classgroup	acceptedprojecttitle	Proyecto Aprobado por $1
 classgroup	rejectedprojecttitle	Proyecto Denegado por $1 
 classgroup	newprojectnotificationtitle	Proyecto Sometado a $1
-account_lostlogin	title	Confirmación de perdida de contrase&ntilde;a
+common_include_account	sixchar	Debe proporcionar una contrase&ntilde;a valida (por lo menos seis car&aacute;cteres).
+common_include_account	nospace	No se permiten los espacios en el nombre de la cuenta.
+common_include_account	tooshort	Debe proporcionar un nombre valido (por lo menos seis car&aacute;cteres).
+common_include_account	toolong	Debe proporcionar un nombre valido (por lo m&aacute;ximo 15 car&aacute;cteres).
+common_include_account	illegal	Hay un car&aacute;ctere illegal en el nombre.
+common_include_account	nounderscore	El nombre del grupo no se puede tener el "underscore" por razones del DNS.
+common_include_account	cvsreserved	El nombre est&aacute; reservado para el CVS.
+common_include_account	dnsreserved	El nombre est&aacute; reservado para el DNS.
+account_lostlogin	title	Confirmaci&oacute;n de perdida de contrase&ntilde;a
 account_lostlogin	severalconfirm	Este \'hash\' de confirmaci&oacute;n existe m&aacute;s de una vez.
 account_lostlogin	invalidconfirm	\'Hash\' de confirmaci&oacute;n invalido
-account_lostlogin	sixchars	Debes proporcionar una contrase&ntilde;a valida (por lo menos seis caracteres).
+account_lostlogin	sixchars	Debe proporcionar una contrase&ntilde;a valida (por lo menos seis car&aacute;cteres).
 account_lostlogin	notmatch	Las nuevas contrase&ntilde;as no coinciden.
 account_lostlogin	passwdchanged	<h2>Contrase&ntilde;a cambiada</h2><p>Enhorabuena, has cambiado tu contrase&ntilde;a de tu cuenta. Puedes ahora <a href="/account/login.php">acceder</a> a nuestro sitio ahora.</p>
 account_lostlogin	welcome	<h2>Acceso con contrase&ntilde;a perdida</h2><P>Bienvenido, $1. Debes cambiar ahora tu contrase&ntilde;a.
@@ -518,7 +543,20 @@ account_verify	accessdenied	Acceso denegado
 account_verify	invalidcred	Las credenciales que has introducido no corresponden con ninguna cuenta v&aacute;lida.
 account_verify	cannotactivate	No puedo activar la cuenta
 account_verify	erroractivate	Error mientras activaba la cuenta
+forum_forum	section	Proyecto: $1 
+forum_forum	title	Forums: Ver un foro
+forum_forum	no_forum_chosen	No hay un foro escogido.
+forum_forum	forum	Foro
+forum_forum	show	Ense&ntilde;ar
+forum_forum	next_messages	Pr&oacute;ximas mensajes.
+forum_forum	nested	Anidado
+forum_forum	flat	Lista
+forum_forum	threads	Hilos
+forum_forum	previous_messages	Anteriores mensajes.
+forum_forum	ultimate	Ultimate
+forum_forum	threaded	Hilos
 forum_forum	thread	Conversaci&oacute;n
+forum_forum	posts	Mensajes
 forum_forum	author	Autor
 forum_forum	date	D&iacute;a
 forum_forum	changeview	Cambiar la vista
