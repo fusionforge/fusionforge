@@ -894,10 +894,10 @@ help	page_information	Page d'information
 help	title	Bienvenue sur $1
 help_tracker	assignee	Cette liste déroulante représente l'administrateur à qui un élément à suivre est confié.
 help_tracker	attach_file	Si vous souhaitez annexer un fichier à un élément à suivre, vous devez cocher cette case avant de soumettre les changements.
-help_tracker	canned_response	La liste déroulante de réponses pré-enregistrées recense les réponses définies par les administrateurs pour réagir à des demandes de support récurrentes ou à des soumissions de bugs.<br /><br /> Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Administration' pour définir vos propres réponses pré-enregistrées.
+help_tracker	canned_response	La liste déroulante de réponses types recense les réponses définies par les administrateurs pour réagir à des demandes de support récurrentes ou à des soumissions de bugs.<br /><br /> Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Administration' pour définir vos propres réponses types.
 help_tracker	category	Cette liste déroulante recense les catégories d'élements à suivre qui sont des parties particulières du projet.<br /><br />Choisir 'Tous' pour un choix plus large.
 help_tracker	close_window	Fermer la fenêtre
-help_tracker	comment	Le champ commentaire vous permet d'attacher un commentaire à un élément à suivre lorsqu'il n'y a pas de réponse pré-enregistrée appropriée.
+help_tracker	comment	Le champ commentaire vous permet d'attacher un commentaire à un élément à suivre lorsqu'il n'y a pas de réponse type appropriée.
 help_tracker	data_type	L'option 'Type de données' détermine le genre d'élément de suivi dont il s'agit. Comme l'élément se trouve dans un des gestionnaires (de bugs, de support, de patchs...), on a besoin de déterminer auquel de ces gestionnaires un élément doit appartenir. <br /><br />De plus, ceci permet à un administrateur de transformer une demande de support en bug.
 help_tracker	group	Cette liste déroulante recense les groupes d'éléments à suivre définis par les adminstrateurs.<br /><br />Si vous êtes administrateur du projet, vous pouvez définir vos propres groupes en cliquant sur (Administration).
 help_tracker	monitor	Vous pouvez activer ou arrêter la surveillance de cet élément en cliquant sur 'Surveiller'. <br /><br /><strong>Note !</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires à cet élément à suivre, que vous l'avez soumis ou s'il vous est confié, vous recevrez des messages également.
@@ -2228,94 +2228,96 @@ top_topusers	user_name	Nom d'utilisateur
 tracker	admin	Administration
 tracker	any	Tous
 tracker	assigned_to	Confié à
-tracker	assignee	Responsable 
+tracker	assignee	Responsable
 tracker	category	Catégorie
 tracker	category_any	Tous
-tracker	check_upload	Cochez pour pour faire remonter un fichier attaché.
-tracker	choose	Choisissez un traceur et vous pourrez le parcourir, l'éditer, lui ajouter des items.</s>
-tracker	close_date	Date de fermeture :
-tracker	comment_added	commentaire ajouté
-tracker	date	Date :
+tracker	changed	Modifié
+tracker	check_upload	Cochez pour envoyer un fichier attaché&nbsp;
+tracker	choose	Choisissez un outil de suivi et vous pourrez le parcourir, l'éditer, lui ajouter des éléments.
+tracker	close_date	Date de fermeture
+tracker	comment_added	Commentaire ajouté
+tracker	date	Date
 tracker	detailed_description	Description détaillée
 tracker	file_delete	Fichier détruit :
 tracker	file_delete_successful	Fichier détruit avec succès
-tracker	file_delete_upload	Fichier remonté
-tracker	file_description	Description de fichier
-tracker	file_upload_successful	Fichier remonté avec succès
-tracker	followups	Passage de témoin
-tracker	group	Groupe&nbsp;
+tracker	file_delete_upload	Fichier envoyé
+tracker	file_description	Description du fichier&nbsp;
+tracker	file_upload_successful	Fichier envoyé avec succès
+tracker	followups	Commentaires
+tracker	group	Groupe
 tracker	group_any	Tous
-tracker	id	numéro
-tracker	insert_email	Si vous <strong>ne parvenez pas</strong> à vous connecter, alors entrez votre e-mail ici :
-tracker	item_created	Élément créé avec succès.
-tracker	item_group	Groupe
-tracker	no_trackers	Aucun traceur trouvé
-tracker	no_trackers_text	Aucun traceur n'a été défini, ou alors vous ne pouvez pas les voir.</p><p><FONT COLOR=RED>L'administrateur de ce projet devra préciser les types de données en utilisant la page d'administration $1 admin page $2</FONT></strong></s>
-tracker	open_date	Date d'ouverture :
-tracker	please_login	$1 : connectez-vous à $2
+tracker	id	Numéro
+tracker	insert_email	Si vous ne parvenez pas à vous connecter, saisissez votre e-mail :
+tracker	item_created	Élément créé avec succès
+tracker	item_group	Groupe&nbsp;
+tracker	no_trackers	Aucun outil de suivi trouvé
+tracker	no_trackers_text	Aucun outil de suivi n'a été défini ou vous ne pouvez pas y accéder.</strong></p><p style="color:red">L'administrateur de ce projet doit préciser les types de données en utilisant la page d'administration $1 admin page $2
+tracker	open_date	Date d'ouverture
+tracker	pagetitle	Suivi&nbsp;
+tracker	please_login	$1 Identifiez-vous $2
 tracker	priority	Priorité
 tracker	reporting	Affichage
-tracker	resolution	précision
-tracker	security_note	N'entrez SURTOUT PAS de mots de passe ou d'informations confidentielles dans vos messages!
-tracker	status	Etat&nbsp;
+tracker	resolution	Résolution
+tracker	security_note	N'entrez SURTOUT PAS de mot de passe ou d'informations confidentielles dans vos messages !
+tracker	status	Etat
 tracker	status_any	Tous
 tracker	submitted_by	Soumis par
 tracker	submitter	Soumis par
-tracker	summary	Sommaire
-tracker	title	Traceur&nbsp;
-tracker	tracker_item	Trace
+tracker	summary	Résumé
+tracker	title	Suivi&nbsp;
+tracker	tracker_item	Elément à suivre
 tracker	unassigned	Personne !
 tracker	updated_successful	Mise à jour réussie
-tracker_add	for_project	Pour le projet
+tracker_add	for_project	Pour le projet&nbsp;
 tracker_add	submit	Soumettre
-tracker_add	title	Soumission d'un objet de tracker
-tracker_admin	add_canned_responses	Ajouter/Mettre à jour des réponses pré-enregistrées
-tracker_admin	add_canned_responses_info	Créer/Modifier des messages de réponses pré-enregistrés pour le traceur.
-tracker_admin	add_categories	Ajouter/modifier les catégories
-tracker_admin	add_categories_info	L'ajout de catégories du genre 'module courrier','module de diagramme de Gantt','cvs', etc. n'est pas accepté.
-tracker_admin	add_group_infos	L'ajout de groupes du genre 'v1.2', 'sans support', 'non vérifié', etc. n'est pas accepté.
-tracker_admin	add_groups	Ajouter/Mettre à jour les groupes
-tracker_admin	add_permissions	Ajouter/Mettre à jour les droits des utilisateurs
-tracker_admin	add_permissions_info	Ajouter/Retirer des utilisateurs à ce traceur
+tracker_add	title	Soumission d'un élément à suivre
+tracker_admin	add_canned_responses	Ajouter/Modifier les réponses types
+tracker_admin	add_canned_responses_info	Ajouter/Modifier des réponses types pour l'outil de suivi
+tracker_admin	add_categories	Ajouter/Modifier les catégories
+tracker_admin	add_categories_info	Ajout de catégories du type 'module courrier','module de diagramme de Gantt','cvs', etc
+tracker_admin	add_group_infos	Ajout de groupes du type 'v1.2', 'sans support', 'non vérifié', etc
+tracker_admin	add_groups	Ajouter/Modifier les groupes
+tracker_admin	add_permissions	Ajouter/Modifier les droits des utilisateurs
+tracker_admin	add_permissions_info	Ajouter/Retirer des utilisateurs à cet outil de suivi
 tracker_admin	admin	Administration
-tracker_admin	auto_assign_to	Confié automatiquement à :
-tracker_admin	canned_response_inserted	Réponse pré-enregistrée insérée.
-tracker_admin	canned_response_updated	Réponse pré-enregistrée mise à jour.
-tracker_admin	category_add_warning	Dès lors que vous avez ajouté une catégorie, elle ne peut être supprimée.
-tracker_admin	category_inserted	Catégorie insérée.
+tracker_admin	auto_assign_to	Confier automatiquement à
+tracker_admin	canned_response_inserted	Réponse type ajoutée
+tracker_admin	canned_response_updated	Réponse type mise à jour
+tracker_admin	category_add_warning	Une catégorie ajoutée ne peut pas être supprimée.
+tracker_admin	category_inserted	Catégorie ajoutée
 tracker_admin	category_name	Nom de catégorie
-tracker_admin	category_updated	Category mise à jour.
-tracker_admin	choose_datatype	Choisissez un type de données et vous pourrez régler les préférences, catégories, groupes, membres, et permissions.
+tracker_admin	category_updated	Categorie mise à jour
+tracker_admin	choose_datatype	Choisissez un outil de suivi et vous pourrez en modifier les préférences, catégories, groupes, membres, et permissions
 tracker_admin	error_inserting	Erreur d'insertion
 tracker_admin	error_updating	Erreur de mise à jour
 tracker_admin	group_inserted	Groupe inséré
 tracker_admin	group_name	Nouveau nom de groupe
 tracker_admin	group_updated	Groupe mis à jour
-tracker_admin	intro	<h3>Créer un nouveau traceur</h3><p>Vous pouvez utiliser ce système pour suivre la trace de n'importe quel type de données, chaque traceur ayant ses listes séparées d'utilisateur, de groupes, de catégories et de permissions. Vous pouvez aussi facilement déplacer des 'traces' entre les traceurs quand vous le voulez.</p><p>Les traceurs sont désignés comme étant des "types de traces" et les parties individuelles de données sont des "traces". "Bugs" pourrait être un type de trace, bien qu'un rapport de bug puisse être une trace. Vous pouvez créer autant de types de trace que vous voulez, mais rappelez-vous qu'administrer les catégories, groupes et permissions pour chaque type peut prendre rapidement beaucoup de temps
-tracker_admin	section	Traceur&nbsp;
+tracker_admin	intro	<h3>Créer un nouvel outil de suivi</h3><p>Vous pouvez utiliser ce système pour suivre la trace de n'importe quel type de données, chaque outil de suivi ayant ses listes séparées d'utilisateurs, de groupes, de catégories et de permissions. Vous pouvez facilement déplacer des éléments à suivre entre les outils quand vous le voulez.</p><p>Les outils de suivi sont désignés comme étant des "types" et les parties individuelles de données sont des "éléments". Ainsi, "Bugs" pourrait être un type, alors qu'un rapport de bug sera un élément. Vous pouvez créer autant d'outils de suivi que vous voulez, mais rappelez-vous qu'administrer les catégories, groupes et permissions pour chaque type peut rapidement prendre beaucoup de temps.</p>
+tracker_admin	section	Outil de suivi&nbsp;
 tracker_admin	title	Administration
-tracker_admin	tracker_id	numéro de traceur
+tracker_admin	tracker_id	Identifiant de l'outil de suivi
 tracker_admin	tracker_title	Titre
 tracker_admin	tracker_updated	Traceur mis à jour
-tracker_admin	update_preferences	Mettre à jour les préférences
-tracker_admin	update_preferences_info	Mettre à jour les préférences (date d'expiration, e-mail)
+tracker_admin	update_preferences	Modifier les préférences
+tracker_admin	update_preferences_info	Modifier les préférences (date d'expiration, e-mail)
 tracker_admin	users_added	Utilisateur(s) ajouté(s)
 tracker_admin	users_deleted	Utilisateur(s) effacé(s)
 tracker_admin	users_updated	Utilisateur(s) mis à jour
 tracker_admin_add_canned	canned_response_body	Corps du message
-tracker_admin_add_canned	canned_response_info	Créer des réponses automatiques peut vous faire gagner beaucoup de temps dans le traitement de traces communes.
+tracker_admin_add_canned	canned_response_info	Créer des réponses types peut vous faire gagner beaucoup de temps dans le traitement de requêtes récurrentes
 tracker_admin_add_canned	canned_response_title	Titre
 tracker_admin_add_canned	existing_responses	Réponses existantes
-tracker_admin_add_canned	no_responses	Aucune réponse n'est prévue pour ce groupe
-tracker_admin_add_canned	title	Ajout d'une réponse pré-enregistrée à $1
+tracker_admin_add_canned	no_responses	Aucune réponse-type n'est prévue pour cet outil de suivi
+tracker_admin_add_canned	title	Ajout d'une réponse type à $1
 tracker_admin_add_cat	no_categories	Aucune catégorie définie
 tracker_admin_add_cat	title	Ajout d'une catégorie à $1
-tracker_admin_add_group	group_add_warning	Dès lors que vous ajoutez un groupe, il ne peut pas être supprimé.
+tracker_admin_add_group	group_add_warning	Un groupe ajouté ne peut pas être supprimé.
 tracker_admin_add_group	no_groups_defined	Groupes non définis
 tracker_admin_add_group	title	Ajout/modification de groupes à $1
-tracker_admin_add_users	add_all_users	Ajout de tous les utilisateurs
-tracker_admin_add_users	add_user_info	<h3>s:</h3><p />Vous pouvez choisir des membres paticuliers pour vos traceurs, or les ajouter tous en cochant 'Les ajouter tous'
-tracker_admin_add_users	add_users	Ajout d'utilisateur
+tracker_admin_add_users	add_all_users	Ajouter tous les utilisateurs
+tracker_admin_add_users	add_user_info	<h3>Ajouter ces utilisateurs :</h3><p>Vous pouvez choisir des membres particuliers pour votre outil de suivi, ou tous les ajouter en cochant 'Ajouter tous les utilisateurs'.</p>
+tracker_admin_add_users	add_users	Ajouter
 tracker_admin_add_users	admin_only	Administrateurs seulement
 tracker_admin_add_users	category_permission	Permission
 tracker_admin_add_users	delete	Effacer
@@ -2328,8 +2330,8 @@ tracker_admin_add_users	update_permissions	Mise à jour des permissions de déve
 tracker_admin_add_users	user_name	Nom d'utilisateur
 tracker_admin_choose	title	Administration des traceurs
 tracker_admin_update_canned	title	Modification des réponses-types de $1
-tracker_admin_update_cat	auto_assign_to	Confié automatiquement à :
-tracker_admin_update_cat	category_change_warning	Il n'est pas recommandé de change le nom d'une catégorie, parce qu' d'autres choses en dépendent. Quand vous changez le nom de la catégorie, tous les éléments vont prendre le nouveau nom.
+tracker_admin_update_cat	auto_assign_to	Confier automatiquement à
+tracker_admin_update_cat	category_change_warning	Il n'est pas recommandé de changer le nom d'une catégorie car d'autres éléments en dépendent. Quand vous changez le nom d'une catégorie, tous les éléments en dépendant vont prendre le nouveau nom.
 tracker_admin_update_cat	category_name	Nom de la catégorie
 tracker_admin_update_cat	title	Modification d'une catagorie de $1
 tracker_admin_update_group	title	Modification d'un groupe de $1
@@ -2338,12 +2340,12 @@ tracker_admin_update_type	allow_anonymous	Soumissions anonymes autorisées
 tracker_admin_update_type	browse_item_form_text	Texte pour la page 'Parcourir'&nbsp;
 tracker_admin_update_type	days_overdue	Délai avant de déclarer en retard (en jours)
 tracker_admin_update_type	description	Description&nbsp;
-tracker_admin_update_type	display_resolution	Afficher la 'boite d'aiguillage'.
-tracker_admin_update_type	email_all_changes	Envoyer un courrier pour tous les changements
+tracker_admin_update_type	display_resolution	Afficher la 'boite de résolution'
+tracker_admin_update_type	email_all_changes	Envoyer un courrier pour toutes les modifications
 tracker_admin_update_type	name	<strong> Nom&nbsp;:</strong> (exemples&nbsp;: comptes-rendus de réunions, résultats de tests... )
-tracker_admin_update_type	pending_timeout	Attente maximale en jours avant de supprimer la trace (persistance)
+tracker_admin_update_type	pending_timeout	Attente maximale en jours avant de supprimer l'élément à suivre (persistance)&nbsp;
 tracker_admin_update_type	publicy_available	Usage public
-tracker_admin_update_type	send_submissions	Envoyer un e-mail pour une nouvelle soumission à l'adresse&nbsp;
+tracker_admin_update_type	send_submissions	Envoyer un courrier pour toute nouvelle soumission à l'adresse&nbsp;
 tracker_admin_update_type	submit_item_form_text	Texte pour la page 'Nouveau'&nbsp; 
 tracker_admin_update_type	title	Mise à jour de $1
 tracker_admin_update_users	title	Édition des permissions des utilisateurs
@@ -2366,35 +2368,40 @@ tracker_artifacthtml	date	Date
 tracker_artifacthtml	field	Champ
 tracker_artifacthtml	message	Message
 tracker_artifacthtml	no_changes	Aucun changement
-tracker_artifacthtml	no_followups	Aucun passage de témoin n'a été posté.
+tracker_artifacthtml	no_followups	Aucun commentaire n'a été posté.
 tracker_artifacthtml	old_value	Ancienne valeur
 tracker_artifacthtml	sender	Expéditeur
-tracker_artifacttype	add_artifact_types	Ajouter/Mettre à jour les types de traces
+tracker_artifacttype	add_artifact_types	Ajouter/Mettre à jour les outils de suivi
 tracker_artifacttype	admin	Administration
 tracker_artifacttype	admin_functions	Fonctions d'administration
 tracker_artifacttype	browse	Parcourir
-tracker_artifacttype	edit_options	Editer/Mettre à jour les options dans
+tracker_artifacttype	edit_options	Editer/Mettre à jour les options de&nbsp;
 tracker_artifacttype	nobody	Personne
 tracker_artifacttype	none	Aucun(e)
 tracker_artifacttype	reporting	Rapport
 tracker_artifacttype	required_fields	Type de trace : nom, description, délai avant retard, persistance.
 tracker_artifacttype	submit_new	Nouveau
-tracker_browse	admin_mass_update	<strong>Administration&nbsp;:</strong></FONT> Si vous voulez appliquer les changements à tous les items sélectionnés au dessus, utilisez ces réglages pour changer leurs propriétés et cliquez sur "Mise à jour de masse".
-tracker_browse	ascending	Ascendant
-tracker_browse	canned_response	Réponses pré-enregistrées
-tracker_browse	check_all	Cochez tous
-tracker_browse	clear_all	Effacer tous
-tracker_browse	descending	Descendant
-tracker_browse	mass_update	Mise à jour de masse
+tracker_browse	admin_mass_update	<strong>Administration&nbsp;:</strong></FONT> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
+tracker_browse	ascending	Croissant
+tracker_browse	canned_response	Réponses types
+tracker_browse	check_all	Cocher tous
+tracker_browse	clear_all	Décocher tous
+tracker_browse	descending	Décroissant
+tracker_browse	mass_update	Mise à jour massive
 tracker_browse	next	50 suivants
 tracker_browse	no_change	Aucun changement
-tracker_browse	no_items	Aucun item trouvé
-tracker_browse	old_requests	* indique les requêtes vieilles de plus de $1 jours
+tracker_browse	no_items	Aucun élément trouvé
+tracker_browse	old_requests	* indique les requêtes datant de plus de $1 jours
 tracker_browse	previous	50 précédents
-tracker_browse	request_id	Numéro d'identifiant de requète
-tracker_browse	resolution	Aiguillage
+tracker_browse	request_id	Identifiant de requète
+tracker_browse	resolution	Résolution
 tracker_browse	sort_by	Afficher par 
 tracker_browse	title	Navigation dans $1
+tracker_browse	changed_any	Tous
+tracker_browse	hour24	Les dernières 24h
+tracker_browse	day7	La dernière semaine
+tracker_browse	week2	La dernière quinzaine
+tracker_browse	month1	Le mois dernier
 tracker_detail	add_comment	Ajouter un commentaire
 tracker_detail	attached_files	Fichiers attachés
 tracker_detail	build_task_relation	Etablir une relation avec des tâches
@@ -2404,9 +2411,9 @@ tracker_detail	download	Télécharger (download)
 tracker_detail	name	Nom
 tracker_detail	no_files_attached	Pas de fichier attaché
 tracker_detail	title	Vue détaillée d'un traceur
-tracker_mod	attach_comment	OU attacher un commentaire
+tracker_mod	attach_comment	Ou rédiger un commentaire
 tracker_mod	build_task_relation	Etablir une relation avec des tâches
-tracker_mod	canned_response	Utiliser une réponse pré-enregistrée
+tracker_mod	canned_response	Utiliser une réponse type
 tracker_mod	changelog	Journaux
 tracker_mod	data_type	Type de données
 tracker_mod	date_closed	Date de fermuture
