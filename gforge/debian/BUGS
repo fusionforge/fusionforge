@@ -1,6 +1,1 @@
--Ldap empty leaves some sourceforge stuff in ldap db (Workaround:
-/usr/lib/sourceforge/install-ldap.sh reset)
-
--upgrade from 2.5 miss some tables (On the way to be done)
-
 -Shell account per user management seems broken

@@ -4,8 +4,8 @@ DEBIAN SOURCEFORGE THEMING HOWTO
 Here is a short HOWTO explaining how Themes work in Debian
 Sourceforge, and how to make a new one.
 
-It was written by Christian Bayle, with a few cosmetic fixes applied
-by Roland Mas.
+It was written by Christian Bayle <bayle@debian.org>, with a few
+cosmetic fixes applied by Roland Mas <lolando@debian.org>.
 
 HOW DOES THEMING WORK?
 ----------------------
