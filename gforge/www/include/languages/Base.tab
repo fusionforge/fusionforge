@@ -1517,6 +1517,7 @@ project_admin_userpermedit	add_to_tracker	Add To Tracker
 project_admin_userpermedit	admin	Admin
 project_admin_userpermedit	admin_only	Admin Only
 project_admin_userpermedit	admin_tech	Admin & Tech
+project_admin_userpermedit	no_permissions	No permissions
 project_admin_userpermedit	developer_not_found	Developer Not Found In This Group
 project_admin_userpermedit	docman	Documentation Manager
 project_admin_userpermedit	editing_permissions	You are editing permissions for user $1 ($2)

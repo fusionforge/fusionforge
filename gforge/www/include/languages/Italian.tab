@@ -227,6 +227,17 @@ exit	choose_group_title	ERRORE - Gruppo id
 exit	choose_group_body	Non &egrave stato scelto nessun Id gruppo
 exit	missing_parameters_title	Error - parametri obbligatori mancanti
 exit	missing_parameters_body	Error - Mancano alcuni parametri obbligatori
+error	not_found	Pagina non trovata
+account	title	Preferenze account
+account_login	title	Login
+account_login	usessl	Rimani in modalit&agrave; SSL dopo il login
+account_change_email	section	Preferenze Account
+account_change_pw	section	Preferenze Account
+account_editsshkeys	section	Preferenze Acocunt
+account_editsshkeys	title	Modifica chiavi CVS/SSH 
+account_login	iewarn	<H2><FONT COLOR="RED">Utenti di Internet Explorer devono effettuare l'aggiornamento alla versione 5.01 o maggiore, preferibilmente con SSL a 128-bit SSL oppure usare 4.7 o maggiore</FONT></H2>
+account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer su Macintosh non &egrave; attualmente supportato. Usare Netscape 4.7 o superiore</FONT></H2>
+account_login	sslnotice	<p><B><FONT COLOR="RED">Quando verr&agrave; inviato questo form, sarai connesso ad un server SSL, la tua password non sar&agrave; visibile ad altri utenti.</FONT></B>  <P> <B>Utenti di Internet Explorer</B> potranno avere problemi intermittenti di SSL, per cui dovrebbero uscire dalla modalit&agrave; SSL dopo il login. Utenti di Netscape dovrebbero rimanere permanentemente in modalit&agrave; SSL. Visita il sito <A HREF="http://www.microsoft.com/">Microsoft</A> per maggiori informazioni su questo problema. <P
 forum	title	Forum
 forum	choose	<p>Seleziona un forum e puoi scorrere, cercare e inserire messaggi.<p>
 forum	error_no_forums_found	Nessun forum trovato per $1
@@ -415,6 +426,10 @@ home	hosted_projects	Progetti ospitati
 home	registered_users	Utenti registrati
 home	none_found	Non trovato
 index	welcome	Benvenuto
+image	login	it_login.png
+image	logout	it_logout.png
+image	myaccount	it_myaccount.png
+image	newaccount	it_newaccount.png
 mail	provided_by	<P>Le mailing list sono fornite tramite una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>.  Grazie ai team di Mailman and <A href="http://www.python.org">Python</A> per il software eccezionale.
 menu	bookmark_page	Segna pagina
 menu	change_my_theme	Cambia tema
@@ -1548,7 +1563,7 @@ admin_massmail	type	Type
 admin_massmail	subject	Subject
 admin_massmail	date	Date
 admin_massmail	last_user_id_mailed	Last user_id mailed
-project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>possono accedere a questa pagina e altre pagine per l'amministrazione del progetto</dd><dt><strong>Tecnici per il rilascio</strong></dt><dd>possono rilasciare file (tutti gli amministratori di progetti sono tecnici del rilascio)</dd><dt><strong>Tecnici degli strumenti (T)</strong></dt><dd>a loro possono essere assegnati bug/attività/patch, etc</dd><dt><strong>Amministratori di strumenti (A)</strong></dt><dd>possono effettuare cambiamenti a bug/attività, etc e amministrare il progetto </dd><dt><strong>Nessun permesso sullo strumento(N/A)</strong></dt><dd>Lo sviluppatore non ha permessi sullo strumento </dd><dt><strong>Moderatori</strong> (forums)</dt><dd>possono cancellar i messaggi dai forum</dd><dt><strong>Editor</strong> (Gestore progetti)</dt><dd>possono aggiornare/modifica/eliminare la documentazione del progetto.</dd></dl>
+project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>possono accedere a questa pagina e altre pagine per l'amministrazione del progetto</dd><dt><strong>Tecnici per il rilascio</strong></dt><dd>possono rilasciare file (tutti gli amministratori di progetti sono tecnici del rilascio)</dd><dt><strong>Tecnici degli strumenti (T)</strong></dt><dd>a loro possono essere assegnati bug/attivit&agrave;/patch, etc</dd><dt><strong>Amministratori di strumenti (A)</strong></dt><dd>possono effettuare cambiamenti a bug/attivit&agrave;, etc e amministrare il progetto </dd><dt><strong>Nessun permesso sullo strumento(N/A)</strong></dt><dd>Lo sviluppatore non ha permessi sullo strumento </dd><dt><strong>Moderatori</strong> (forums)</dt><dd>possono cancellar i messaggi dai forum</dd><dt><strong>Editor</strong> (Gestore progetti)</dt><dd>possono aggiornare/modifica/eliminare la documentazione del progetto.</dd></dl>
 project_admin_utils	admin	Amministra
 project_admin_utils	user_permissions	Permessi utente
 project_admin_utils	edit_public_info	Modifica informazioni pubbliche
@@ -1751,9 +1766,10 @@ project_admin_userpermedit	project_role	Ruolo nel progetto
 project_admin_userpermedit	project_admin	Amministratore progetto
 project_admin_userpermedit	release_technician	Tecnico per i rilasci
 project_admin_userpermedit	tracker_manager	Tracker Manager
-project_admin_userpermedit	technician	Tecnico
-project_admin_userpermedit	admin_tech	Amministratore e tecnico
-project_admin_userpermedit	admin	Amministratore
+project_admin_userpermedit	technician	Tecnico (T)
+project_admin_userpermedit	admin_tech	Amministratore e tecnico (A/T)
+project_admin_userpermedit	no_permissions	Nessun permesso (N/A)
+project_admin_userpermedit	admin	Amministratore (A)
 project_admin_userpermedit	pm	Gestore Attivit&agrave;
 project_admin_userpermedit	forums	Forum
 project_admin_userpermedit	moderator	Moderatore
@@ -2284,3 +2300,21 @@ help_trove_cat	no_such_category	No such trove category
 help_trove_cat	full_category_name	Full Category Name
 help_trove_cat	short_name	Short Name
 help_trove_cat	description	Description
+account_lostlogin	title	Conferma di password persa
+account_lostpw	title	Persa la password?
+account_register	iewarn	<H2><FONT COLOR="RED">Utenti di Internet Explorer devono effettuare l'aggiornamento alla versione 5.01 o maggiore, preferibilmente con SSL a 128-bit SSL oppure usare 4.7 o maggiore</FONT></H2>
+account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer su Macintosh non &egrave; attualmente supportato. Usare Netscape 4.7 o superiore</FONT></H2>
+account_register	title	Registrazione nuovo account
+account_verify	title	Verifica account $1
+admin_massmail	subscribers_to_additional_community	Iscritti a "Mailing aggiuntivi di comunit&agrave;"
+admin_trove_cat_add	error_in_trove_openration	Errore in operazione Trove
+admin_trove_cat_edit	error_trove_equal_parent	Errore: La categoria padre non pu&ograve; essere uguale a quella corrente
+admin_trove_cat_list	add	Aggiungi
+contact	about_blurb	<p>Questa &egrave; la pagina di contatti per <b>$1</b> -- se hai un problema con un progetto ospitato su questo sito, apri un ticket di supporto sul progetto collegandodi a : <tt>http://$2/projects/&lt;project name&gt;</tt> e selezionando lo strumento adeguato.</p><p>.</p>
+contact	title	Contatta $1
+docman	error_invalid_file_attack	Errore: attacco file non valido $1
+docman_admin_addgroups	section	Amministrazione document Manager
+
+
+
+
