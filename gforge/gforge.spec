@@ -72,8 +72,8 @@ install -m 750 setup $GFORGE_DIR/
 cp -rp db $GFORGE_LIB_DIR/
 cp -p deb-specific/sf-2.6-complete.sql $GFORGE_LIB_DIR/db/
 mkdir -p $GFORGE_LIB_DIR/lib $GFORGE_LIB_DIR/bin
-for i in sqlhelper.pm sqlparser.pm ; do
-	cp -p deb-specific/$i $GFORGE_LIB_DIR/lib/
+for i in deb-specific/sqlhelper.pm deb-specific/sqlparser.pm utils/include.pl ; do
+	cp -p $i $GFORGE_LIB_DIR/lib/
 done
 for i in db-upgrade.pl register-plugin unregister-plugin register-theme unregister-theme ; do
 	install -m 755 deb-specific/$i $GFORGE_LIB_DIR/bin/
@@ -104,7 +104,7 @@ if ! id -u %gfuser >/dev/null 2>&1; then
 fi
 
 %post
-if [ $1 -eq 1 ]; then
+if [ "$1" -eq "1" ]; then
 	# creating the database
 	service postgresql status | grep '(pid' >/dev/null 2>&1 || service postgresql start
 	su -l postgres -s /bin/sh -c "createdb -E UNICODE %{dbname} >/dev/null 2>&1"
@@ -171,12 +171,13 @@ else
 fi
 
 %postun
-if [ $1 -eq 0 ]; then
-	# Uninstall everything
+if [ "$1" -eq "0" ]; then
+	# dropping gforge database
 	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropdb %{dbname} >/dev/null 2>&1"
-	rm -f %{_sysconfdir}/gforge/siteadmin.pass %{_sysconfdir}/gforge/local.pl
-	rm -f %{_sysconfdir}/gforge/httpd.*
-	rm -f %{_sysconfdir}/gforge/*.inc
+	
+	for file in siteadmin.pass local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
+		rm -f %{_sysconfdir}/gforge/$file
+	done
 	# Remove PostgreSQL access
 	if grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		perl -ni -e 'm@^ *host.*%{dbname}.*@ or print;' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1

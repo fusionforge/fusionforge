@@ -12,9 +12,10 @@ Group: Development/Tools
 Source0: %{name}-%{version}.tar.gz
 AutoReqProv: off
 Requires: gforge >= 4.0
-Requires: perl libipc-run-perl liburi-perl
+Requires: perl perl-IPC-Run perl-URI
+Requires: cvs rcs
 URL: http://www.gforge.org/
-BuildRoot: /var/tmp/%{name}-%{version}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 %description
 GForge CDE is a web-based Collaborative Development Environment offering
@@ -62,12 +63,16 @@ install -m 664 etc/plugins/%{plugin}/cvsweb.conf $PLUGIN_CONF_DIR/
 %pre
 
 %post
-# register plugin in database
-# remove localization cache for GForge
+if [ "$1" = "1" ] ; then
+	# register plugin in database
+	%{_libdir}/gforge/bin/register-plugin scmcvs CVS
+fi
 
 %postun
-# unregister plugin in database
-# remove localization cache for GForge
+if [ "$1" = "0" ] ; then
+	# unregister plugin in database
+	%{_libdir}/gforge/bin/unregister-plugin scmcvs
+fi
 
 %clean
 [ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
