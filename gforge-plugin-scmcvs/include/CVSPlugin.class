@@ -263,12 +263,9 @@ class CVSPlugin extends SCM {
 			
 		print $Language->getText('plugin_scmcvs','documentation');
 
-		if($this->cvs_single_host) {
-				$cvsrootend=$this->default_cvs_host.':/cvsroot/'.$project->getUnixName();
-			} else {
-				$cvsrootend='cvs.'.$project->getUnixName().'.'.$this->default_cvs_host.':/cvsroot/'.$project->getUnixName();
-			}
-// ######################## table for summary info
+		$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
+
+		// ######################## table for summary info
 
 ?>
 <table width="100%">
@@ -277,22 +274,23 @@ class CVSPlugin extends SCM {
 <?php
 // ######################## anonymous CVS instructions
 
-	//if ($this->UsesAnonCVS ($group_id)) {
 	if ($project->enableAnonSCM()){
 		echo $Language->getText('plugin_scmcvs', 'anoncvs');
-		print " <p>
-		                <tt>cvs -d :pserver:anonymous@" . $project->getSCMBox() . ":/cvsroot/".$project->getUnixName()." login</tt><br>
-		                <tt>cvs -d :pserver:anonymous@" . $project->getSCMBox() . ":/cvsroot/".$project->getUnixName()." checkout <em>modulename</em></tt>
-                        </p>" ;
+		print "
+			<p>
+				<tt>cvs -d :pserver:anonymous@" . $cvsrootend." login</tt><br>
+				<tt>cvs -d :pserver:anonymous@" . $cvsrootend." checkout <em>modulename</em></tt>
+			</p>" ;
 	 }
 
 // ############################ developer access
 			
 	echo $Language->getText('plugin_scmcvs', 'devcvs');
-		print "<p>
-                                <tt>export CVS_RSH=ssh</tt><br>
-		                <tt>cvs -d :ext:<em>username</em>@" . $project->getSCMBox() . ":/cvsroot/".$project->getUnixName()." checkout <em>modulename</em></tt>
-                                </p>" ;
+		print "
+			<p>
+				<tt>export CVS_RSH=ssh</tt><br>
+				<tt>cvs -d :ext:<em>username</em>@".$cvsrootend." checkout <em>modulename</em></tt>
+			</p>" ;
 
 ?>
 
@@ -309,7 +307,6 @@ if (session_loggedin()) {
 	$anonymous = !$perm->isMember();
 }
  
-//if ($this->UsesAnonCVS ($group_id)) {
 if ($project->enableAnonSCM()){
 	echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
 
@@ -378,13 +375,19 @@ if ($project->enableAnonSCM()){
 		}
 	}
 
-	function todoornottodo() {
+	function todoornottodo ($params) {
+		$group =& group_get_object($params['group_id']);
 	?>
-		<input type="radio" name="scmradio" value="scmcvs" <?php if ($group->usesPlugin("scmcvs")) {print '"checked"';} ?>> <strong>Use CVS</strong><br>
-		<input type="checkbox" name="scmcvs_enable_anon_cvs" value="1" <?php if ($this->UsesAnonCVS($params['group_id'])) {print '"checked"';} ?>> <strong>Allow anonymous CVS</strong><br>
-		<input type="text" name="scmcvs_cvs_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>CVS server</strong><br><br>
-	<?
+		<input type="radio" name="scmradio" value="scmcvs" <?php echo $this->c($group->usesPlugin("scmcvs")); ?>>
+		<strong>Use CVS</strong>
+		<br />
+		<input type="text" name="scmcvs_cvs_server" value="<?php echo $group->getSCMBox(); ?>">
+		<strong>CVS server</strong>
+		<br />
+		<br />
+	<?php
 	}
+
 
 	function display_scm_admin_page ($params) {
 		global $Language;
