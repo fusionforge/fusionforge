@@ -95,6 +95,9 @@ $(documentor_path)/$(documentor_vers)/patched:
 gforge/docs/phpdoc/docs:
 	cd gforge/docs/phpdoc/ && ./makedoc.sh
 
+#
+# Developper personal use
+#
 chris:
 	make allgf dchcmd="dch -i" debuildopts=""
 	make upload 
