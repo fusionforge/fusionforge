@@ -27,29 +27,20 @@ Function  ShowResultsGroupSurveys($result) {
 	global $Language;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
-
 	$title_arr=array();
-	$title_arr[]=$Language->getText('survey_index','survey_id');
 	$title_arr[]=$Language->getText('survey_index','survey_title');
-
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	for($j=0; $j<$rows; $j++)  {
-
 		echo "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($j) .">\n";
-
-		echo "<td><a href=\"survey.php?group_id=$group_id&amp;survey_id=".db_result($result,$j,"survey_id")."\">".
-			db_result($result,$j,"survey_id")."</a></td>";
-
 		for ($i=1; $i<$cols; $i++)  {
-			printf("<td>%s</td>\n",db_result($result,$j,$i));
+			echo "<td><a href=\"survey.php?group_id=$group_id&amp;survey_id=".db_result($result,$j,"survey_id")."\">";
+			printf("%s",db_result($result,$j,$i));
+			echo "</a></td>\n";
 		}
-
 		echo "</tr>";
 	}
-
 	echo $GLOBALS['HTML']->listTableBottom();
-
 }
 
 $sql="SELECT survey_id,survey_title FROM surveys WHERE group_id='$group_id' AND is_active='1'";
