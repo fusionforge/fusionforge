@@ -1,4 +1,15 @@
-2003-02-07 Reinhard Spisser <reinhard@spisser.it>
+  2003-02-08 Reinhard Spisser <reinhard@spisser.i>
+ 
+ 	* www/scm/index.php,
+ 	www/include/languages/Base.tab:
+ 	Submitting Reiner Jung's localization of scm
+ 	Moved cvs strings to scm_index
+ 	Added strings to localize developername and modulename
+ 	
+ 	* www/include/languages/Italian.tab:
+ 	Translation of scm_index strings
+ 	
+ 2003-02-07 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/softwaremap/trove_list.php,
 	www/include/languages/Base.tab,
