@@ -6,7 +6,7 @@ use DBI ;
 use strict ;
 use diagnostics ;
 
-use vars qw/$dbh @reqlist/ ;
+use vars qw/$dbh @reqlist $query/ ;
 
 use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
     $sys_shell_host $sys_users_host $sys_docs_host $sys_lists_host
@@ -31,7 +31,7 @@ debug "Do not worry unless told otherwise." ;
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
-    my ($query, $sth, @array, $version, $action) ;
+    my ($sth, @array, $version, $action) ;
 
     # Do we have at least the basic schema?
 
@@ -76,6 +76,9 @@ eval {
 	$pwd = $admin_password ;
 	$md5pwd=qx/echo -n $pwd | md5sum/ ;
 	chomp $md5pwd ;
+	# Next line is a hack to work around the change in behaviour of
+	# /usr/bin/md5sum in dpkg 1.10 (as compared to 1.9.*)
+	$md5pwd =~ s/(.{32})  -/$1/ ;
 	$email = $server_admin ;
 	$shellbox = "shell" ;
 	$noreplymail="noreply\@$domain_name" ;
@@ -295,13 +298,13 @@ eval {
     if (is_lesser $version, "2.5-30") {
 	debug "Found version $version lesser than 2.5-30, adding rows to supported_languages." ;
 	@reqlist = (
-		    "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian')",
-		    "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek')",
-		    "INSERT INTO supported_languages VALUES (18,'Indonesian','Indonesian.class','Indonesian')",
-		    "INSERT INTO supported_languages VALUES (19,'Portuguese (Brazillian)','PortugueseBrazillian.class','Portuguese (Brazillian)')",
-		    "INSERT INTO supported_languages VALUES (20,'Polish','Polish.class','Polish')",
-		    "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese')",
-		    "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian')"
+		    "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian','bg')",
+		    "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek','el')",
+		    "INSERT INTO supported_languages VALUES (18,'Indonesian','Indonesian.class','Indonesian','id')",
+		    "INSERT INTO supported_languages VALUES (19,'Portuguese (Brazillian)','PortugueseBrazillian.class','PortugueseBrazillian', 'br')",
+		    "INSERT INTO supported_languages VALUES (20,'Polish','Polish.class','Polish','pl')",
+		    "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese', 'pt')",
+		    "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian','ru')"
 		    ) ;
 	
  	foreach my $s (@reqlist) {
@@ -334,6 +337,7 @@ eval {
 if ($@) {
     warn "Transaction aborted because $@" ;
     debug "Transaction aborted because $@" ;
+    debug "Last SQL query was:\n$query\n(end of query)" ;
     $dbh->rollback ;
     debug "Please report this bug on the Debian bug-tracking system." ;
     debug "Please include the previous messages as well to help debugging." ;
@@ -471,7 +475,7 @@ sub parse_sql_file ( $ ) {
 }
 
 sub bump_sequence_to ( $$ ) {
-    my ($query, $sth, @array, $seqname, $targetvalue) ;
+    my ($sth, @array, $seqname, $targetvalue) ;
 
     $seqname = shift ;
     $targetvalue = shift ;
