@@ -34,7 +34,7 @@ if ($docid) {
 	}
 	$g =& group_get_object($row['doc_group']);
 	if (!$g || !is_object($g)) {
-		exit_nogroup();
+		exit_no_group();
 	} elseif ($g->isError()) {
 		exit_error('Error',$g->getErrorMessage());
 	}
