@@ -123,7 +123,7 @@ if ($submit || $form_unix_name) {
 		exit_assert_object($u, 'User');
 
 		// XXX: remove when CVS roles will be activated!
-		$cvs_flags = 1;
+		//$cvs_flags = 1;
 
 		//call to control function in the $Group object
 		if ($group->updateUser($user_id, $admin_flags, $forum_flags, $project_flags, 
