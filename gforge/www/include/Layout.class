@@ -328,6 +328,9 @@ if ($params['group']) {
 
 	}
 
+	function getRootIndex() {
+		return $this->rootindex;
+	}
 
 	/**
 	 * boxTop() - Top HTML box

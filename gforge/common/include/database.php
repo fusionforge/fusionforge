@@ -35,7 +35,7 @@ function db_connect() {
 	//
 	//	Connect to primary database
 	//
-	$conn = @pg_connect("user=$sys_dbuser dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
+	$conn = @pg_pconnect("user=$sys_dbuser dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
 
 	//
 	//	If any replication is configured, connect
@@ -81,7 +81,9 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 	}
 
 	$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<P>\n";
-	return @pg_exec($dbserver,$qstring);
+	$res = @pg_exec($dbserver,$qstring);
+//	echo "|*| ".db_error().$qstring;
+	return $res;
 }
 
 /* Current transaction level, private variable */

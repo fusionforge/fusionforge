@@ -82,6 +82,9 @@ class Artifact extends Error {
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
+//
+//	Should verify ArtifactType ID
+//
 				return true;
 			} else {
 				if (!$this->fetchData($data)) {
@@ -223,8 +226,7 @@ class Artifact extends Error {
 			//
 			$this->mailFollowup(1);
 			db_commit();
-			$this->clearError();
-			
+
 			//
 			//  Set up monitoring for the user if requested
 			//
@@ -990,10 +992,16 @@ class Artifact extends Error {
 		if (count($emails) > 0) {
 			$BCC=implode(',',array_unique($emails));
 		}
+
+		if (count($monitor_ids) < 1) {
+			$monitor_ids=array();
+		} else {
+			$monitor_ids=array_unique($monitor_ids);
+		}
 		/*
 			Send the email
 		*/
-		util_handle_message(array_unique($monitor_ids),$subject,$body,$BCC);
+		util_handle_message($monitor_ids,$subject,$body,$BCC);
 		return true;
 	}
 
