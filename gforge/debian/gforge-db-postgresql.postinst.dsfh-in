@@ -30,7 +30,6 @@ set -e
 case "$1" in
     configure)
 	add_onevar_mainconfile default_trove_cat 18
-	add_onevar_mainconfile newsadmin_groupid 2
 
 	/usr/sbin/gforge-config
 

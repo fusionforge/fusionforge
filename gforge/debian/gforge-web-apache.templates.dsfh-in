@@ -6,5 +6,6 @@
 #DSFHELPER:users-variables#
 #DSFHELPER:shellhost-variables#
 #DSFHELPER:web-variables#
+#DSFHELPER:groupid-variables#
 #DSFHELPER:dbpasswd-variables#
 #DSFHELPER:ldap-variables#

@@ -32,6 +32,7 @@ fi
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
 #DSFHELPER:downloadhost-variables#
+#DSFHELPER:groupid-variables#
 
 db_input low gforge/shared/skill_list || true
 
