@@ -196,8 +196,8 @@ $sys_lang='English';
 
 // Akamization of images
 //	example: http://images.gforge.company.com
-$sys_images_url = "";
-$sys_images_secure_url = "";
+$sys_images_url="http://gforge.company.com/";
+$sys_images_secure_url="https://gforge.company.com/";
 
 // Groups
 //	The GForge permission model is based on groups
@@ -210,7 +210,7 @@ $sys_peer_rating_group=4;
 $default_trove_cat=18;
 
 // JPGRAPH Package
-$sys_path_to_jpgraph='/path/to/jpgraph/src/';
+$sys_path_to_jpgraph='/path/to/jpgraph';
 
 // CVSWEB
 $sys_path_to_cvsweb='/path/to/cvsweb';
