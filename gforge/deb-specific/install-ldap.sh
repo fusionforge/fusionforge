@@ -1,6 +1,14 @@
 #!/bin/sh
+# 
+# $Id$
+#
+# Configure ldap for Sourceforge
+# Christian Bayle, debian-sf (Sourceforge for Debian)
+
 # Should I do something for /etc/pam_ldap.conf ?
-# Some Functions
+modify_pam_ldap(){
+	echo "Nothing to do"
+}
 
 # Check/Modify /etc/libnss-ldap.conf
 modify_libnss_ldap(){
@@ -71,6 +79,12 @@ access to dn=\".*,ou=People,$dn\"
 # End of sourceforge add
 access to */" /etc/ldap/slapd.conf
 
+		# Then this SASL things I was looking for several days
+		# But that is useless in fact ;-)
+		#cat >> /etc/ldap/slapd.conf <<-FIN
+#sasl-realm	localhost	#Added by Sourceforge install
+#sasl-host	localhost	#Added by Sourceforge install
+#FIN
 		/etc/init.d/slapd restart
 	fi	
 }
@@ -175,14 +189,16 @@ FIN
 
 # Setup SF_robot Passwd
 setup_robot() {
+	echo "Changing SF_robot passwd using admin account"
 	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
-	echo "=====$sys_ldap_admin_dn"
+	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
 	sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
-	echo "=====$sys_ldap_bind_dn"
+	#echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
 	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/local.inc | cut -d\" -f2)
-	echo "=====$sys_ldap_passwd"
-	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
-	echo "=====$cryptedpass"
+	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
+	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret)
+	cryptedpasswd=`slappasswd -s $sys_ldap_passwd -h {CRYPT}`
+	#echo "=====>$cryptedpasswd"
 	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w$secret <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
@@ -192,15 +208,15 @@ userPassword: $cryptedpasswd
 FIN
 
 # Test!
+echo "Changing dummy cn using SF_robot account"
 naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w$secret <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w$sys_ldap_passwd <<-FIN
 dn: uid=dummy,ou=People,$naming_context
 changetype: modify
 replace: cn
-cn: toto Dummy User
+cn: Dummy User Tested
 -
 FIN
-
 }
 
 # Main
@@ -235,6 +251,8 @@ else
 				modify_nsswitch
 				echo "Load ldap"
 				load_ldap $dn $secret
+				echo "Setup SF_robot account"
+				setup_robot
 				;;
 			update)
 				dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
