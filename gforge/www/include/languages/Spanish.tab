@@ -1,4 +1,4 @@
-#  *
+﻿#  *
 #  * Spanish message catalog
 #  *
 #  * GForge: Breaking Down the Barriers to Open Source Development
@@ -2122,12 +2122,20 @@ search	skill_title	Título
 search	skill_to	Para
 search	skill_type	Tipo
 search	title	Buscar
+searchbox	advanced_search	Búsqueda avanzada
+searchbox	docs	Los documentos de este proyecto
 searchbox	forum	Este foro
+searchbox	forums	Los fotos de este proyecto
+searchbox	frs	Las publicaciones de este proyecto
+searchbox	full	Buscar en todo el proyecto
+searchbox	news	Las noticias de este proyecto
 searchbox	people	Personas
 searchbox	search	Buscar
 searchbox	skill	Habilidad
 searchbox	softwaregroup	Software/Grupos
 searchbox	task	Tarea
+searchbox	tasks	Las tareas de este proyecto
+searchbox	trackers	Los registros de este proyecto
 send_pending_items_mail	pm_message	Este correo se te ha enviado para recordarte que tienes tareas pendientes. \n La tarea #$1 está pendiente: \nResumen de la Tarea: $2\nEnviado por: $4\nStatus:$5\nPorcentaje completado: $6\n\nHaga click aquí para visitar la tarea $3
 send_pending_items_mail	pm_subject	Notificación de tareas pendientes
 send_pending_items_mail	tracker_message	Este mensaje se te ha enviado para recordarte los registros pendientes. El registro #$1 está pendiente: \nResumen: $3\nEstado: $5\nFecha de comienzo:$6\nAsignado a: $7\nEnviado por: $8\nDetalles: $9\n\n\nHaga click aquí para visitar la tarea: $4
