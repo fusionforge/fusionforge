@@ -14,6 +14,8 @@ gforge/www/images/ic/cfolder15.png -text
 gforge/www/images/ic/check.png -text
 gforge/www/images/ic/cvs16b.png -text
 gforge/www/images/ic/docman16b.png -text
+gforge/www/images/ic/forum20g.png -text
+gforge/www/images/ic/forum20w.png -text
 gforge/www/images/ic/ftp16b.png -text
 gforge/www/images/ic/halfcheck.png -text
 gforge/www/images/ic/home16b.png -text
@@ -22,6 +24,7 @@ gforge/www/images/ic/mail16b.png -text
 gforge/www/images/ic/mail16d.png -text
 gforge/www/images/ic/mail16w.png -text
 gforge/www/images/ic/manual16c.png -text
+gforge/www/images/ic/msg.png -text
 gforge/www/images/ic/notes16.png -text
 gforge/www/images/ic/ofolder15.png -text
 gforge/www/images/ic/pencil.png -text
@@ -29,8 +32,13 @@ gforge/www/images/ic/save.png -text
 gforge/www/images/ic/support16b.jpg svneol=native#unset
 gforge/www/images/ic/survey16b.png -text
 gforge/www/images/ic/taskman16b.png -text
+gforge/www/images/ic/taskman20g.png -text
+gforge/www/images/ic/taskman20w.png -text
+gforge/www/images/ic/tracker20g.png -text
+gforge/www/images/ic/tracker20w.png -text
 gforge/www/images/ic/trash-x.png -text
 gforge/www/images/ic/trash.png -text
+gforge/www/images/ic/write16w.png -text
 gforge/www/images/ic/xmail16w.png -text
 gforge/www/images/icon.png -text
 gforge/www/images/msg.png -text
