@@ -13,7 +13,8 @@
 
 
 require_once('pre.php');
-require_once('www/forum/forum_utils.php');
+require_once('www/news/news_utils.php');
+require_once('common/forum/Forum.class');
 
 news_header(array('title'=>'News','pagename'=>'news','sectionvals'=>array(group_getname($group_id))));
 

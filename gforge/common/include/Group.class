@@ -25,6 +25,7 @@
  */
 
 require_once('common/tracker/ArtifactTypes.class');
+require_once('common/forum/Forum.class');
 require_once('www/include/frs.class');
 require_once('www/include/BaseLanguage.class');
 
@@ -324,31 +325,6 @@ class Group extends Error {
 			$this->setError('ERROR: DB: Could not change group properties: '.db_error());
 			db_rollback();
 			return false;
-		}
-
-		/*
-			If this is a foundry, see if they have a preferences row, if not, create one
-		*/
-		if ($type=='2') {
-
-			$res = db_query("
-				SELECT *
-				FROM foundry_data
-				WHERE foundry_id='".$this->getID()."'
-			");
-
-			if (db_numrows($res) < 1) {
-				$res = db_query("
-					INSERT INTO foundry_data (foundry_id)
-					VALUES ('".$this->getID()."')
-				");
-
-				if (!$res || db_affected_rows($res) < 1) {
-					$this->setError('Could not insert foundry_data row: '.db_error());
-					db_rollback();
-					return false;
-				}
-			}
 		}
 
 		db_commit();
@@ -1391,9 +1367,24 @@ class Group extends Error {
 		}
 
 		// Step 2: Setup forums for this group
-		forum_create_forum($this->getID(),'Open Discussion',1,'General Discussion');
-		forum_create_forum($this->getID(),'Help',1,'Get Help');
-		forum_create_forum($this->getID(),'Developers',0,'Project Developer Discussion');
+		$f = new Forum($this);
+		if (!$f->create('Open Discussion','General Discussion',1,'',1,0)) {
+			$this->setError($f->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+		$f = new Forum($this);
+		if (!$f->create('Help','Get Public Help',1,'',1,0)) {
+			$this->setError($f->getErrorMessage());
+			db_rollback();
+			return false;
+		}
+		$f = new Forum($this);
+		if (!$f->create('Developers','Project Developer Discussion',0,'',1,0)) {
+			$this->setError($f->getErrorMessage());
+			db_rollback();
+			return false;
+		}
 
 		// Step 3: Setup default DocManager doc_group
 		db_query("

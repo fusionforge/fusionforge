@@ -168,10 +168,10 @@ if (session_loggedin() || $sf_user_hash) {
 			echo '
 			<TR '. $HTML->boxGetAltRowStyle($i) .'><TD ALIGN="MIDDLE"><A HREF="/forum/monitor.php?forum_id='.
 				db_result($result,$i,'group_forum_id').
-				'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
+				'&stop=1&group_id='.db_result($result,$i,'group_id').'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
 				'BORDER=0"></A></TD><TD WIDTH="99%"><A HREF="/forum/forum.php?forum_id='.
 				db_result($result,$i,'group_forum_id').'">'.
-				stripslashes(db_result($result,$i,'forum_name')).'</A></TD></TR>';
+				db_result($result,$i,'forum_name').'</A></TD></TR>';
 
 			$last_group=db_result($result,$i,'group_id');
 		}

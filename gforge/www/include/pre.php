@@ -20,7 +20,7 @@ if (is_file('/etc/gforge/custom/pre.php')){
 // This needs to be loaded first becuase the lines below depend upon it.
 require ('/etc/gforge/local.inc');
 
-if ($HTTP_HOST != $GLOBALS['sys_default_domain']) {
+if ($HTTP_HOST != $GLOBALS['sys_default_domain'] && $HTTP_HOST != $GLOBALS['sys_fallback_domain']) {
 	if ($SERVER_PORT == '443') {
 		header ("Location: https://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
 	} else {
