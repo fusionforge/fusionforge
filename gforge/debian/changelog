@@ -1,4 +1,4 @@
-sourceforge (2.5-29+) unstable; urgency=low
+sourceforge (2.5-30) unstable; urgency=high
 
   * [Christian] Change gid/uid attribution in ldap.php to be like in
     backend
@@ -56,7 +56,7 @@ sourceforge (2.5-29+) unstable; urgency=low
     cvs [server aborted]: cannot write /cvsroot/hanterm-xf/CVSROOT/val-tags:
     Permission denied 
 
- -- Roland Mas <lolando@debian.org>  Wed, 17 Jul 2002 22:58:57 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 19 Jul 2002 20:46:00 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
