@@ -45,4 +45,4 @@ while(($username, $email) = $c->fetchrow()) {
 }
 
 
-write_array_file($file_dir."alias_dump", @alias_array);
+write_array_file($file_dir."/alias_dump", @alias_array);

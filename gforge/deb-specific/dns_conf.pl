@@ -9,7 +9,7 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 
 &db_connect;
 
-@dns_zone = open_array_file($file_dir."bind/dns.head");
+@dns_zone = open_array_file($file_dir."/bind/dns.head");
 
 #
 # Update the Serial Number
@@ -61,4 +61,4 @@ while(my ($http_domain,$unix_group_name,$group_name,$unix_box) = $c->fetchrow())
 	}
 }
 
-write_array_file($file_dir."bind/dns.zone", @dns_zone);
+write_array_file($file_dir."/bind/dns.zone", @dns_zone);

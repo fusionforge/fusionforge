@@ -33,3 +33,9 @@ $peerrating_groupid = '{peerrating_groupid}' ;
 $noreply_to_bitbucket = '{noreply_to_bitbucket}' ;
 $sys_simple_dns = '{simple_dns}';
 $sys_ip_address = '{ip_address}';
+$homedir_prefix = '{homedir}';
+$grpdir_prefix = '{groupdir}';
+$file_dir = '{var_lib_gforge}';
+$cvs_root = '{cvsdir}';
+$svn_root = '{svndir}';
+

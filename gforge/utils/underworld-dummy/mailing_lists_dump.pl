@@ -25,4 +25,4 @@ while(my ($list_name, $list_admin, $password, $status) = $c->fetchrow()) {
 
 
 # Now write out the files
-write_array_file($file_dir."list_dump", @list_array);
+write_array_file($file_dir."/list_dump", @list_array);

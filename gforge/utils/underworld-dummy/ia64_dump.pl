@@ -27,4 +27,4 @@ while(my ($id, $status, $username, $shell, $passwd, $realname) = $c->fetchrow())
 }
 
 # Now write out the files
-write_array_file($file_dir."ia64_dump", @user_array);
+write_array_file($file_dir."/ia64_dump", @user_array);

@@ -22,4 +22,4 @@ while(my ($username, $unix_uid, $ssh_key) = $c->fetchrow()) {
 }
 
 # Now write out the files
-write_array_file($file_dir."dumps/ssh_dump", @ssh_array);
+write_array_file($file_dir."/dumps/ssh_dump", @ssh_array);

@@ -52,5 +52,5 @@ while(my ($group_id, $group_name, $status) = $c->fetchrow()) {
 }
 
 # Now write out the files
-write_array_file($file_dir."dumps/user_dump", @user_array);
-write_array_file($file_dir."dumps/group_dump", @group_array);
+write_array_file($file_dir."/dumps/user_dump", @user_array);
+write_array_file($file_dir."/dumps/group_dump", @group_array);

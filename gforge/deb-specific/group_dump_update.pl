@@ -39,9 +39,9 @@ while(my ($group_id, $unix_gid, $group_name, $status) = $c->fetchrow()) {
 }
 
 # Now write out the files
-write_array_file($file_dir."dumps/group_dump", @group_array);
+write_array_file($file_dir."/dumps/group_dump", @group_array);
 
-my $group_file = $file_dir . "dumps/group_dump";
+my $group_file = $file_dir . "/dumps/group_dump";
 my ($gname, $gstatus, $gid, $userlist);
 
 # Open up all the files that we need.

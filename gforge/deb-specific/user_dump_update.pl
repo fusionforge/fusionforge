@@ -28,9 +28,9 @@ while(my ($uid, $gid, $status, $username, $shell, $passwd, $realname) = $c->fetc
 }
 
 # Now write out the files
-write_array_file($file_dir."dumps/user_dump", @user_array);
+write_array_file($file_dir."/dumps/user_dump", @user_array);
 
-my $user_file = $file_dir . "dumps/user_dump";
+my $user_file = $file_dir . "/dumps/user_dump";
 my ($uid, $gid, $status, $username, $shell, $passwd, $realname);
 
 # Open up all the files that we need.
