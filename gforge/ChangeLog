@@ -1,3 +1,8 @@
+2004-11-23  Tim Perdue <tim@gforge.org>
+
+	* fixed bug in tracker that prevented deletion of tracker
+	* fixed bug in tracker where userCanView returned false for admins
+
 2004-11-08  Tim Perdue <tim@gforge.org>
 
 	* enhancing task mgr with more fields and properties. Much more will be 

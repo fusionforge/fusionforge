@@ -550,24 +550,21 @@ class ArtifactType extends Error {
 			WHERE EXISTS (SELECT artifact_id FROM artifact 
 			WHERE group_artifact_id='".$this->getID()."'
 			AND artifact.artifact_id=artifact_extra_field_data.artifact_id)");
+//echo '0.1'.db_error();
 		db_query("DELETE FROM artifact_extra_field_elements
 			WHERE EXISTS (SELECT extra_field_id FROM artifact_extra_field_list 
 			WHERE group_artifact_id='".$this->getID()."'
 			AND artifact_extra_field_list.extra_field_id = artifact_extra_field_elements.extra_field_id)");
+//echo '0.2'.db_error();
 		db_query ("DELETE FROM artifact_extra_field_list
 			WHERE group_artifact_id='".$this->getID()."'");
+//echo '0.3'.db_error();
 		db_query("DELETE FROM artifact_canned_responses 
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '1'.db_error();
-		db_query("DELETE FROM artifact_category
-			WHERE group_artifact_id='".$this->getID()."'");
-//echo '2'.db_error();
 		db_query("DELETE FROM artifact_perm
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '3'.db_error();
-		db_query("DELETE FROM artifact_group
-			WHERE group_artifact_id='".$this->getID()."'");
-//echo '4'.db_error();
 		db_query("DELETE FROM artifact_counts_agg
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '5'.db_error();
@@ -594,6 +591,12 @@ class ArtifactType extends Error {
 		db_query("DELETE FROM artifact
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '10'.db_error();
+		db_query("DELETE FROM artifact_category
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '2'.db_error();
+		db_query("DELETE FROM artifact_group
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '4'.db_error();
 		db_query("DELETE FROM artifact_group_list
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '11'.db_error();
@@ -903,7 +906,7 @@ class ArtifactType extends Error {
 				//
 				//	You must have an entry in artifact_perm if this tracker is not public
 				//
-				if ($this->getCurrentUserPerm() >= 1) {
+				if ($this->userIsAdmin() || $this->getCurrentUserPerm() >= 1) {
 					return true;
 				} else {
 					return false;
