@@ -1,4 +1,4 @@
-sourceforge (2.6-0+2) unstable; urgency=low
+sourceforge (2.6-0+2+) unstable; urgency=low
 
   * Started working on 2.6.  Don't expect it to work just yet.
   * Split the DB installation/deinstallation process out of
@@ -43,8 +43,10 @@ sourceforge (2.6-0+2) unstable; urgency=low
   * Removed an unneeded dependency on bash (in install-chroot.sh).
   * [Christian] Patch for db init.
   * [Christian] Repared bad db init.
+  * Added resolution data.  Fixes the "Can't submit a bug/patch/whatever"
+    bug.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Sat, 17 Nov 2001 01:29:25 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 20:05:11 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 
