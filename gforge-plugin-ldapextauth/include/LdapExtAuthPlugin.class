@@ -74,7 +74,6 @@ class LdapextauthPlugin extends Plugin {
 		global $feedback,$Language;
 	
 		if (!$this->ldap_conn) {
-			//echo "ldap_connect ($this->ldap_server, $this->ldap_port);";
 			$this->ldap_conn = ldap_connect ($this->ldap_server,
 							 $this->ldap_port);
 		}
@@ -110,7 +109,7 @@ class LdapextauthPlugin extends Plugin {
 			}
 		} else {
 			// User doesn't exist in DB yet
-			if (ldap_bind($this->ldap_conn, $dn, $passwd)) {
+			if (@ldap_bind($this->ldap_conn, $dn, $passwd)) {
 				// User authenticated
 				// Now get her info
 				if ($this->ldap_kind=="AD"){
@@ -192,13 +191,13 @@ class LdapextauthPlugin extends Plugin {
 					    $mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
 					    $unix_box, $address, $address2, $phone, $fax, $title, $ccode, $send_mail)) {
 					$GLOBALS['ldap_auth_failed']=true;
-					echo "<br>Error Creating User: ".$u->getErrorMessage();
+					$feedback = "<br>Error Creating User: ".$u->getErrorMessage();
 					return false;
 				}
 
 				if (!$u->setStatus ('A')) {
 					$GLOBALS['ldap_auth_failed']=true;
-					echo "<br>Error Activating User: ".$u->getErrorMessage();
+					$feedback = "<br>Error Activating User: ".$u->getErrorMessage();
 					return false;
 				}
 				$GLOBALS['ldap_auth_failed']=false;
