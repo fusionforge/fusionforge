@@ -160,7 +160,7 @@ $l =~ /^(\s*local_domains\s*=\s*)(\S+)/ ;
 $l = $1 . join (":", grep (!/SOURCEFORGE_DOMAINS/, (split ":", $2))) ;
 print "$l\n" ;
 while ($l = <>) { print $l; };
-' < /etc/postix/main.cf.gforge-new > $tmp1
+' < /etc/postfix/main.cf.gforge-new > $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, kill our forwarding rules
 	perl -e '
