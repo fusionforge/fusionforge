@@ -244,7 +244,7 @@ server_args = -f
 </li>
 
 <li>
-<b>I set up GForge on Apache behind a ProxyPass and now I'm getting infinite redirects!</b>
+<b>I've set up GForge on Apache behind a ProxyPass and now I'm getting infinite redirects!</b>
 <p>Try setting the <code>ProxyPreserveHost</code> directive to <code>On</code>:
 <pre>
 &lt;VirtualHost *&gt;
@@ -257,6 +257,22 @@ ProxyPassReverse / http://192.168.1.13/
 ProxyPreserveHost On
 &lt;/VirtualHost&gt;
 </pre>
+</li>
+
+<li>
+<b>When I try to upload large documents I get various PHP errors.  How can I increase the maximum file upload size?</b>
+<p>Bump up the following parameters in <code>php.ini</code> as high as you want:
+<pre>
+; Maximum allowed size for uploaded files.
+upload_max_filesize = 10M
+
+; Maximum size of POST data that PHP will accept.
+post_max_size = 10M
+
+; Maximum amount of memory a script may consume
+memory_limit = 10M
+</pre>
+
 </li>
 
 </ol>
@@ -344,11 +360,9 @@ which you can then submit using the <a href="http://gforge.org/tracker/?atid=106
 <ol>
 <li>GForge uses Postgres stored procedures, so you'd have to convert those into PHP functions
 <li>GForge uses Postgres functions like pg_connect, so you'd have to replace those with the MySQL equivalents
-<li>GForge uses subselects, so you'd have to rewrite those to use temporary tables or whatever
+<li>GForge uses subselects, so you'd have to rewrite those to use temporary tables or whatever (MySQL 4.1 supports subselects, so once it becomes production-ready, this won't be a barrier anymore)
 </ol>
 </li>
-
-
 </ol>
  
 </body>
