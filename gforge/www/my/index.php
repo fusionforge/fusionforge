@@ -78,7 +78,7 @@ if (session_loggedin() || $sf_user_hash) {
 			$art->getID().'</td>
 			<td>' . stripslashes($art->getSummary());
 
-			$last_group = $art->getArtifactGroupID();
+			$last_group = $art->ArtifactType->Group->getID();
 		}
 	} else {
 	                echo '
