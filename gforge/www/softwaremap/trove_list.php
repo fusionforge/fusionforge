@@ -21,7 +21,7 @@ if (!$sys_use_trove) {
 }
 
 // assign default. 18 is 'topic'
-if (!$form_cat) {
+if (!isset($form_cat) || !$form_cat) {
 	$form_cat = $default_trove_cat;
 }
 
@@ -50,10 +50,10 @@ $row_trove_cat = db_fetch_array($res_trove_cat);
 // #####################################
 // this section limits search and requeries if there are discrim elements
 
-unset ($discrim_url);
-unset ($discrim_desc);
+$discrim_url = '';
+$discrim_desc = '';
 
-if ($discrim) {
+if (isset($discrim) && $discrim) {
 	unset ($discrim_queryalias);
 	unset ($discrim_queryand);
 	unset ($discrim_url_b);
@@ -122,7 +122,7 @@ if ($discrim) {
 
 // #######################################
 
-print '<p>'.$discrim_desc . '</p>';
+print '<p>'. (isset($discrim_desc) ? $discrim_desc : '') . '</p>';
 
 // ######## two column table for key on right
 // first print all parent cats and current cat
@@ -213,6 +213,14 @@ print '</span></td></tr></table>';
 <?php
 // one listing for each project
 
+if(!isset($discrim_queryalias)) {
+	$discrim_queryalias = '';
+}
+
+if(!isset($discrim_queryand)) {
+	$discrim_queryand = '';
+}
+
 $res_grp = db_query("
 	SELECT * 
 	FROM trove_agg
@@ -228,8 +236,8 @@ $querytotalcount = db_numrows($res_grp);
 // limit/offset display
 
 // no funny stuff with get vars
-$page = intval($page);
-if (!$page) {
+
+if (!isset($page) || !is_numeric($page)) {
 	$page = 1;
 }
 

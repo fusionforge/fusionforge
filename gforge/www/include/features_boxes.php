@@ -12,7 +12,9 @@ require_once('common/include/GForge.class');
 
 function show_features_boxes() {
 	GLOBAL $HTML,$Language;
-	$return .= $HTML->boxTop($Language->getText('home','gforge_statistics', $GLOBALS[sys_name]),0);
+	
+	$return = '';
+	$return .= $HTML->boxTop($Language->getText('home','gforge_statistics', $GLOBALS['sys_name']),0);
 	$return .= show_sitestats();
 	$return .= $HTML->boxMiddle($Language->getText('home','top_project_downloads'));
 	$return .= show_top_downloads();
@@ -107,6 +109,7 @@ function stats_downloads_total() {
 function show_sitestats() {
 	global $Language;
 	$gforge = new GForge();
+	$return = '';
 	$return .= $Language->getText('home','hosted_projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
 	$return .= '<br />'.$Language->getText('home','registered_users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	return $return;
@@ -118,6 +121,8 @@ function show_newest_projects() {
 		"WHERE is_public=1 AND status='A' AND type=1 " .
 		"ORDER BY register_time DESC";
 	$res_newproj = db_query($sql,10);
+
+	$return = '';
 
 	if (!$res_newproj || db_numrows($res_newproj) < 1) {
 		return $Language->getText('home','no_stats_available')." ".db_error();
@@ -147,6 +152,7 @@ function show_highest_ranked_users() {
 	if (!$res || $rows<1) {
 		return  $Language->getText('home','none_found').db_error();
 	} else {
+		$return = '';
 		for ($i=0; $i<$rows; $i++) {
 			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <a href="/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</a><br />';
 		}

@@ -9,7 +9,7 @@
  * @version   $Id$
  */
 
-if (!$no_gz_buffer) {
+if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
 

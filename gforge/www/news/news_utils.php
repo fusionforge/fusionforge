@@ -72,6 +72,8 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 	$result=db_query($sql,$limit+$tail_headlines);
 	$rows=db_numrows($result);
+	
+	$return = '';
 
 	if (!$result || $rows < 1) {
 		$return .= $Language->getText('news_utils', 'nonews');

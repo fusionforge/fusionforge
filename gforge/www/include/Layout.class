@@ -245,7 +245,7 @@ class Layout extends Error {
 <?php
 
 
-if ($params['group']) {
+if (isset($params['group']) && $params['group']) {
 
 			?>
 			<tr>
@@ -472,7 +472,7 @@ if ($params['group']) {
 			$TABS_DIRS[]='/admin/';
 			$TABS_TITLES[]=$Language->getText('menu','admin');
 		}
-		if ($params['group']) {
+		if(isset($params['group']) && $params['group']) {
 			// get group info using the common result set
 			$project =& group_get_object($params['group']);
 			if ($project && is_object($project)) {
@@ -624,6 +624,9 @@ if ($params['group']) {
 
 		$count=count($TABS_DIRS);
 		$width=intval((100/$count));
+		
+		$return = '';
+		
 		$return .= '
 
 		<!-- start tabs -->
@@ -681,7 +684,7 @@ if ($params['group']) {
 		}
 
 		print '
-		<form action="/search/" method="post"'.$new_window.'>
+		<form action="/search/" method="post">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr><td>
 		<div align="center" style="font-size:smaller">
@@ -779,6 +782,9 @@ if ($params['group']) {
 	function printSubMenu ($title_arr,$links_arr) {
 		$count=count($title_arr);
 		$count--;
+		
+		$return = '';
+		
 		for ($i=0; $i<$count; $i++) {
 			$return .= '
 				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a> | ';

@@ -39,7 +39,7 @@ if ($group_id) {
 
 	people_header(array('title'=>$Language->getText('people','title'),'pagename'=>'people'));
 
-	echo $Language->getText('people','about_blurb', $GLOBALS[sys_name]);
+	echo $Language->getText('people','about_blurb', $GLOBALS['sys_name']);
 
 	echo people_show_category_table();
 

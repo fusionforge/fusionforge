@@ -13,9 +13,9 @@
 	Determine group
 */
 
-if ($group_id) {
+if (isset($group_id) && $group_id) {
 	$log_group=$group_id;
-} else if ($form_grp) {
+} else if (isset($form_grp) && $form_grp) {
 	$log_group=$form_grp;
 } else {
 	//

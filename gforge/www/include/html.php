@@ -210,6 +210,8 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	if ($text_100=='none'){
 		$text_100=$Language->getText('include_html','none');
 	}
+	$return = '';
+	
 	$return .= '
 		<select name="'.$select_name.'">';
 
@@ -480,7 +482,10 @@ function site_project_header($params) {
 	}
 
 	echo $HTML->header($params);
-	echo html_feedback_top($GLOBALS['feedback']);
+	
+	if(isset($GLOBALS['feedback'])) {
+		echo html_feedback_top($GLOBALS['feedback']);
+	}
 //	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
 }
 
@@ -494,7 +499,9 @@ function site_project_header($params) {
 function site_project_footer($params) {
 	GLOBAL $HTML;
 
-	echo html_feedback_bottom($GLOBALS['feedback']);
+	if(isset($GLOBALS['feedback'])) {
+		echo html_feedback_bottom($GLOBALS['feedback']);
+	}
 	echo $HTML->footer($params);
 }
 
@@ -512,7 +519,7 @@ function site_user_header($params) {
 		Check to see if logged in
 	*/
 	echo $HTML->header($params);
-	echo html_feedback_top($GLOBALS['feedback']);
+	echo html_feedback_top((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
 	echo ($HTML->BeginSubMenu());
 	echo ($HTML->PrintSubMenu(
 		array($Language->getText('menu','my_personal_page'),
@@ -536,7 +543,7 @@ function site_user_header($params) {
 function site_user_footer($params) {
 	GLOBAL $HTML;
 
-	echo html_feedback_bottom($GLOBALS['feedback']);
+	echo html_feedback_bottom((isset($GLOBALS['feedback']) ? $GLOBALS['feedback'] : ''));
 	echo $HTML->footer($params);
 }
 

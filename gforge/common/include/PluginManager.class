@@ -131,8 +131,8 @@ class PluginManager extends Error {
 	 * @param params - array of extra parameters
 	 */
 	function RunHooks ($hookname, $params) {
-		$p_list = $this->hooks_to_plugins[$hookname] ;
-		if (isset ($p_list)) {
+		if (isset($this->hooks_to_plugins[$hookname])) {
+			$p_list = $this->hooks_to_plugins[$hookname];
 			foreach ($p_list as $p_name) {
 				$p_obj = $this->plugins_objects[$p_name] ;
 				$p_obj->CallHook ($hookname, $params) ;
