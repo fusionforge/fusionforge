@@ -1,3 +1,18 @@
+2003-05-06 Tom Copeland <tom@infoether.com>
+
+	* www/soap/SoapAPI.php:
+	Added a few new methods - getNumberOfProjects, getNumberOfUsers
+
+	* contrib/soapclients/java:
+	Added an initial Java SOAP client implementation
+
+	* common/include/GForge.class:
+	A new class with some utility methods to get the number of users
+	and projects hosted by a GForge server.
+
+	* www/include/features_boxes.php:
+	Refactoring some SQL into the new GForge.class.
+
 2003-05-02  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/pm/include/ProjectTaskHTML.class,
