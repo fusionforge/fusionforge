@@ -225,8 +225,7 @@ print_ldif_default(){
 	cryptedpasswd=$2
 	cat <<-FIN
 dn: $dn
-objectClass: top
-objectClass: domain
+objectClass: dcObject
 dc: $dc
 
 dn: cn=admin,$dn
@@ -236,29 +235,29 @@ cn: admin
 userPassword: $cryptedpasswd
 description: LDAP administrator
 
-dn: ou=People, $dn
+dn: ou=People,$dn
 objectClass: organizationalUnit
 ou: People
 
-dn: ou=Roaming, $dn
+dn: ou=Roaming,$dn
 objectCLass: organizationalUnit
-ou=Roaming
+ou: Roaming
 FIN
 }
 
 setup_vars() {
 	sys_ldap_base_dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.inc | cut -d\" -f2)
 	[ "x$sys_ldap_base_dn" == "x" ] && sys_ldap_base_dn=`grep suffix /etc/ldap/slapd.conf | cut -d\" -f2`
-	#echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
+	echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
 	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
-	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
+	echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
 	sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
-	#echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
+	echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
 	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/database.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
 	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
-	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
-	#echo "=====>$cryptedpasswd"
+	#cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
+	echo "=====>$cryptedpasswd"
 }
 # Check Server
 check_server() {

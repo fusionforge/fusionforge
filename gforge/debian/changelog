@@ -3,12 +3,16 @@ sourceforge (2.6-0+6+) unstable; urgency=low
   * [Roland] [From 2.5] Added templates to conffiles.
   * [Roland] Added debconf magic to ask whether to replace a config file
     before doing it (in the post-installation and pre-remove phases).
-  * [Christian] Changed to use cvsweb 
+  * [Christian] Changed to use cvsweb
   * [Roland] [From 2.5] Added "-s /bin/sh" when su'ing to postgres.
   * [Roland] [From 2.5] Moved templates to a Policy-compliant location
     (/etc/sourceforge/templates).
+  * [Christian] modify install-ldap.sh to follow slapd undocumented changes
+  * [Christian] removed test on /etc/ldap.secret in sourceforge.config 
+  * [Christian] changed template in local.inc.template to remove People in
+    sys_ldap_admin dn
 
- -- Christian Bayle <bayle@aist.enst.fr>  Thu,  7 Feb 2002 18:30:27 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Tue, 26 Feb 2002 18:11:28 +0100
 
 sourceforge (2.6-0+6) unstable; urgency=low
 
