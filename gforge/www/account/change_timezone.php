@@ -32,8 +32,7 @@ site_user_header(array('title'=>"Change Timezone &amp; Language"));
 ?>
 <H3>Timezone/Language Change</h3>
 <P>
-Now, no matter where you live, you can see all dates and times throughout SourceForge 
-as if it were in your neighborhood.
+Now, no matter where you live, you can see all dates and times throughout <?php echo $GLOBALS["sys_name"]; ?> as if it were in your neighborhood.
 <P>
 <FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
 <?php

@@ -74,13 +74,13 @@ function account_register_new($unix_name,$realname,$password1,$password2,$email,
 	} else {
 	
 		// send mail
-		$message = "Thank you for registering on the SourceForge web site. In order\n"
+		$message = "Thank you for registering on the $GLOBALS[sys_name] web site. In order\n"
 			. "to complete your registration, visit the following url: \n\n"
 			. "<https://". $GLOBALS['HTTP_HOST'] ."/account/verify.php?confirm_hash=$confirm_hash>\n\n"
 			. "Enjoy the site.\n\n"
-			. " -- the SourceForge staff\n";
+			. " -- the $GLOBALS[sys_name] staff\n";
 			
-		mail($email,"SourceForge Account Registration",$message,"From: noreply@".$GLOBALS['HTTP_HOST']);
+		mail($email,"$GLOBALS[sys_name] Account Registration",$message,"From: noreply@".$GLOBALS['HTTP_HOST']);
 		
 		return $user_id;
 	}       

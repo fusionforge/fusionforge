@@ -545,7 +545,7 @@ class Group extends Error {
 			//
 			//	user doesn't exist
 			//
-			$this->setError('ERROR: That user does not exist on SourceForge');
+			$this->setError('ERROR: That user does not exist here.');
 			return false;
 		}
 		//

@@ -57,7 +57,7 @@ function register_valid()	{
 if (register_valid()) {
 	site_user_header(array(title=>"Successfully Changed Password"));
 	?>
-	<p><b>SourceForge Change Confirmation</b>
+	<p><b><?php echo $GLOBALS["sys_name"]; ?> Change Confirmation</b>
 	<p>
 	Congratulations. You have changed your password.
 	This change is immediate on the web site, but will not take
@@ -68,7 +68,7 @@ if (register_valid()) {
 } else { // not valid registration, or first time to page
 	site_user_header(array(title=>"Change Password"));
 	?>
-	<p><b>SourceForge Password Change</b>
+	<p><b><?php echo $GLOBALS["sys_name"]; ?> Password Change</b>
 	<?php if ($register_error) print "<p>$register_error"; ?>
 	<form action="change_pw.php" method="post">
 	<p>Old Password:

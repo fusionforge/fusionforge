@@ -55,9 +55,9 @@ if (isset($HTTP_POST_VARS["form_user"])){
 }
 
 if (register_valid()) {
-	$HTML->header(array(title=>$GLOBALS['system_name'].": Change Password"));
+	$HTML->header(array(title=>" Change Password"));
 ?>
-<p><b>SourceForge Change Confirmation</b>
+<p><b><?php echo $GLOBALS["sys_name"]; ?> Change Confirmation</b>
 <p>Congratulations, genius. You have managed to change this user's password.
 <p>You should now <a href="/admin/userlist.php">Return to UserList</a>.
 <?php
@@ -65,7 +65,7 @@ if (register_valid()) {
 	$HTML->header(array(title=>"Change Password"));
 
 ?>
-<p><b>SourceForge Password Change</b>
+<p><b><?php echo $GLOBALS["sys_name"]; ?> Password Change</b>
 <?php if ($register_error) print "<p>$register_error"; ?>
 <form action="user_changepw.php" method="post">
 <p>New Password:

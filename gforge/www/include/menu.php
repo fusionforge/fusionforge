@@ -75,7 +75,7 @@ function menu_software() {
 
 function menu_sourceforge() {
 	GLOBAL $HTML, $Language;
-	$HTML->menuhtml_top('SourceForge');
+	$HTML->menuhtml_top("$GLOBALS[sys_name]");
 		$HTML->menu_entry('/docman/?group_id=1','<b>'.$Language->DOCUMENTATION.'</b>');
 		$HTML->menu_entry('/forum/?group_id=1',$Language->DISCUSSION_FORUMS);
 		$HTML->menu_entry('/people/',$Language->PROJECT_HELP_WANTED);
@@ -193,7 +193,7 @@ function menu_loggedin($page_title) {
 		$HTML->menu_entry('/my/',$Language->MY_PERSONAL_PAGE);
 
 		if (!$GLOBALS['HTTP_POST_VARS']) {
-			$bookmark_title = urlencode( str_replace('SourceForge: ', '', $page_title));
+			$bookmark_title = urlencode( str_replace("$GLOBALS[sys_name]: ", '', $page_title));
 			print '<P>';
 			$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->BOOKMARK_PAGE);
 		}

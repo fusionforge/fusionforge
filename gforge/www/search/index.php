@@ -127,8 +127,8 @@ if ($type_of_search == "soft") {
 		}
 		header("Content-Type: text/plain");
         	rss_dump_project_result_set($result,
-                	'SourceForge Search Results',
-                        'SourceForge Search Results for "'
+                	'Search Results',
+                        'Search Results for "'
                         .htmlspecialchars($words).'"',
                         'callback');
                 exit;

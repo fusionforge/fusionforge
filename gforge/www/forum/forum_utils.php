@@ -49,7 +49,7 @@ function forum_header($params) {
 			} else {
 				$HTML->header($params);
 				echo '
-					<H2>SourceForge <A HREF="/news/">News</A></H2><P>';
+					<H2>'.$GLOBALS[sys_name].' <A HREF="/news/">News</A></H2><P>';
 			}
 
 
@@ -639,7 +639,7 @@ function handle_monitoring($forum_id,$msg_id) {
 				"\n\n" . util_line_wrap(util_unconvert_htmlspecialchars(db_result($result,0, 'body'))).
 				"\n\n______________________________________________________________________".
 				"\nYou are receiving this email because you elected to monitor this forum.".
-				"\nTo stop monitoring this forum, login to SourceForge and visit: ".
+				"\nTo stop monitoring this forum, login to $GLOBALS[sys_name] and visit: ".
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
 
 			exec ("/bin/echo \"". util_prep_string_for_sendmail($body) ."\" | /usr/sbin/sendmail -fnoreply@$GLOBALS[HTTP_HOST] -t -i >& /dev/null &");

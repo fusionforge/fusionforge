@@ -43,7 +43,7 @@ if ($send_mail) {
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$from='From: '. $name .' <'. $email .'>';
 		mail($to, stripslashes($subject),stripslashes($body) ,$from);
-		$HTML->header(array('title'=>'SourceForge Contact'));
+		$HTML->header(array('title'=>' Contact'));
 		echo '<H2>Message sent</H2>';
 		$HTML->footer(array());
 		exit;
@@ -54,7 +54,7 @@ if ($send_mail) {
 		$to=db_result($result,0,'email');
 		$from='From: '. $name .' <'. $email .'>';
 		mail($to, stripslashes($subject), stripslashes($body),$from);
-		$HTML->header(array('title'=>'SourceForge Contact'));
+		$HTML->header(array('title'=>' Contact'));
 		echo '<H2>Message sent</H2>';
 		$HTML->footer(array());
 		exit;

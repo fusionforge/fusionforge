@@ -32,7 +32,7 @@ if ($group_id) {
 
 	echo '
 	<H3>Projects Needing Help</H3>
-	The SourceForge Project Help Wanted board is for non-commercial, project
+	The Project Help Wanted board is for non-commercial, project
 	volunteer openings. Commercial use is prohibited.
 	<P>
 	Project listings remain live for two weeks, or until closed by the

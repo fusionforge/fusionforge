@@ -22,7 +22,7 @@ if ($submit) {
 		echo $HTML->header(array('title'=>'Register Confirmation'));
 		?>
 		<p>
-		<b>SourceForge: New Account Registration Confirmation</b>
+		<b><?php echo $GLOBALS["sys_name"]; ?>: New Account Registration Confirmation</b>
 		<?php
 		echo $Language->ACCOUNTREGISTER_congrat;
 
@@ -32,7 +32,7 @@ if ($submit) {
 }
 
 
-$HTML->header(array('title'=>'SourceForge: Register'));
+$HTML->header(array('title'=>'Register'));
 
 if (browser_is_windows() && browser_is_ie() && browser_get_version() < '5.1') {
 	echo $Language->IEWARN;

@@ -186,7 +186,7 @@ class Layout extends Error {
 		if (!$params['title']) {
 			$params['title'] = "SourceForge";
 		} else {
-			$params['title'] = "SourceForge: " . $params['title'];
+			$params['title'] = $GLOBALS[sys_name]. " : " . $params['title'];
 		}
 		?>
 
