@@ -69,7 +69,7 @@ function project_admin_header($params) {
 	$links[] = '/project/admin/userperms.php?group_id='.$group_id;
 	$links[] = '/project/admin/editgroupinfo.php?group_id='.$group_id;
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
-	if($GLOBALS['$sys_use_people']) {
+	if($GLOBALS['sys_use_people']) {
 		$links[] = '/people/createjob.php?group_id='.$group_id;
 		$links[] = '/people/?group_id='.$group_id;
 	}
