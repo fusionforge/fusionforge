@@ -1,391 +1,390 @@
 #/**
 #  *
-#  * Traditional Chinese message catalog
+#  * Default message catalog (English)
 #  *
-#  * GForge
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
-#  * Copyright 2004 (c) Jason Chen
 #  * http://sourceforge.net
 #  *
 #  * @version   $Id$
-#  * @author Yu-Jui Lee, Jason Chen
 #  *
 #  */
-# ChangeLog:
-#
-# 2000-10-01  Yu-Jui Lee
-#	* Initial translation
-# 2004-03-26  Jason Chen
-#	* Update
-account	title	帳號設置
-account	updated	更新
-account_change_email	desc	<p>爲了保證我們擁有您正確的email地址，改變您的email地址，將會要求新email地址的確認。</p><p>我們需要維護每個用戶的準確email地址，是爲了通過這個帳號來對用戶進行授權訪問。當這個帳號有重要的事件需要通知時，有個確切的email地址才能使我們做到這一點。</p>  <p>提交這個表單，將會發出一個要求確認的URL到新的email地址，訪問那個連接就可以完成email地址的改變。</p>
-account_change_email	invalid_email	無效的 email 地址
-account_change_email	mailsent	<p>一封email已經送出到新的地址。 按照那封email上的指示完成email地址的改變。 </p><a href="/">[ Home ]</a>
-account_change_email	message	您申請在 $1 上更改您的email地址。 \n 請瀏覽這個URL來完成email地址的改變：\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 工作組
-account_change_email	new_address	新的Email地址:
-account_change_email	section	帳號設置
-account_change_email	send_confirmation	發送確認信到新的地址
-account_change_email	subject	$1 確認
-account_change_email	title	更改Email地址
-account_change_email-complete	confirm	歡迎您, $1. 您的email地址成功的改變了。 您新的email地址現在是<strong>$2</strong>。 所有發送到 $3 的 Mail 都會被轉發到這個帳號上。
-account_change_email-complete	title	Email地址改變成功
-account_change_email_confirm	title	確認email地址改變
-account_change_pw	confirmation	<h2>$1 密碼更改確認</h2><p>祝賀您。 您已經改變了密碼</p>
-account_change_pw	new_password	新密碼（至少6個字元）
-account_change_pw	new_password_repeat	新密碼（重復）
-account_change_pw	not_valid_password	你必須提供有效的密碼（至少6個字元）
-account_change_pw	old_password	舊密碼
-account_change_pw	old_password_incorrect	舊的密碼不正確
-account_change_pw	passwords_dont_match	新密碼不一致。
-account_change_pw	section	帳號設置
-account_change_pw	title	更改密碼
-account_change_pw	update	更新密碼
-account_change_pw_changed	return_to	您現在可以 $1 返回到帳號維護頁面 $2。
-account_change_pw_changed	title	更改密碼成功
-account_editsshkeys	section	帳號設置
-account_editsshkeys	title	編輯CVS/SSH共用密鑰
-account_first	about_blurb	<p>您現在是 $1 的一個註冊用戶。 $1 開源軟體專案的在線開發環境。</p><p>做爲一個註冊用戶，您可以參與到整個站點的所有活動當中。您可以在專案討論版上貼出新的消息，可以報告在 $1 當中軟體的Bug，可以申請稱爲某個專案的開發者，甚至創建一個您自己的專案。</p><p>您最好花一些時間把<a href="/docs/site/"><b>站點文件</b></a> 都瀏覽一遍，以確保您可以完全的享受 $1 所提供的所有服務。</p><p>享用這個站點，也請給我們一些反饋資訊，以便我們能共同使 $1 變得更好。</p><p>--$1 工作組。</p>
-account_first	title	歡迎來到$1
-account_login	cookiewarn	爲了登錄，你的Cookies必須是被允許的。
-account_login	deleted_account	<p>您在 $1 上的帳號已經被 $1 工作組刪除。這有可能是因爲以下兩個原因：1）您主動要求把帳號刪除；或者2）您帳號的某些動作被視爲不受歡迎的（也就是說，您打破了使用您帳號的服務協定），以至您的帳號因爲管理的原因被刪除。如果您有任何問題或者是疑問，請發出一個<a href="/support/?group_id=1">支援請求</a>。</p><p>謝謝您的合作， <br><br>$1 工作組</p>
-account_login	login	登錄
-account_login	loginname	登錄名稱:
-account_login	lostpw	[忘了密碼？]
-account_login	newaccount	[新帳號]
-account_login	passwd	密碼:
-account_login	pending_account	<P>您的帳號正在等待email地址改變的確認。 訪問您的email當中的連接就可以啟動您的帳號。<P>如果您需要再次發送確認email，請點擊下面，一封確認email將被送到您在註冊時提供的email地址當中。	<P><A href="pending-resend.php?form_user=$1">[再次發送確認Email]</A>		<br><hr>		<p>
-account_login	sslnotice	<p><B><FONT COLOR="RED">在提交這個表單之後，您將連接到一個SSL伺服器，這樣其他用戶就無法看見您的密碼。 </FONT></B> <small style="font-size: x-small"> （如果您奇怪爲什麽這個頁面不是使用SSL裝載進來的，請閱讀下一段，謝謝） </small> <P> <B>Internet Explorer</B> 用戶有時會碰到SSL問題，因而他們應該在登錄之後離開SSL模式。Netscape用戶可以一直停留在SSL模式當中以獲得最大的安全性。想獲得關於這個問題更詳細的資訊，請訪問 <A HREF="http://www.microsoft.com/">微軟</A> 的主頁<P>
-account_login	title	登錄站點
-account_login	usessl	登錄後仍然使用SSL
-account_lostlogin	invalidconfirm	非法的確認編碼
-account_lostlogin	newpasswd	新密碼（至少6個字元）
-account_lostlogin	newpasswd2	新密碼（重復）
-account_lostlogin	notmatch	新密碼不一致。
-account_lostlogin	passwdchanged	<h2>密碼更改成功</h2><p>祝賀您，您成功的重新設置了帳號密碼。現在你可以通過<a href="/account/login.php">登錄</a> 到站點。</p>
-account_lostlogin	severalconfirm	這個確認編碼不只存在了一次
-account_lostlogin	sixchars	您必須提供一個有效的密碼（至少6個字元）。
-account_lostlogin	title	遺忘密碼確認
-account_lostlogin	update	更新
-account_lostlogin	welcome	<h2>忘記密碼，登錄</h2><p>歡迎您， $1。 您現在可以更改密碼。</p>
-account_lostpw	invalid_user	非法用戶
-account_lostpw	message	有人 （大概就是您本人）在 $3 站點上申請通過email確認來更改密碼。如果這個人不是您，那麽就忽略這封mail，當做一切都沒有發生。\n\n如果是您發出找個請求確認，請訪問下面的URL來改變您的密碼：\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3 工作組\n
-account_lostpw	notify	<p>一封email已經被發送到您的地址當中。依照email上的指示來改變您的密碼。</p><p><a href="/">[ Home ]</a></p>
-account_lostpw	sendhash	發送遺失密碼確認編碼
-account_lostpw	subject	$1 確認
-account_lostpw	title	忘了密碼？
-account_lostpw	user_dont_exist	用戶不存在。
-account_lostpw	warn	<p>嗨... 忘了密碼是件很嚴重的事情。它不僅威脅了您的帳號的安全性，還包括專案甚至是這個站點的安全性。</p><p>點擊下面的"發送遺失密碼確認編碼" ，我們將發送一個URL到您的email地址。在這個URL當中，有一個您帳號的128位元的確認編碼。訪問那個URL，您就可以在線更新密碼並且登錄。</p>
-account_options	change_email_address	改變Email地址
-account_options	change_password	改變密碼
-account_options	edit_skills_profile	編輯我的個人能力
-account_options	email_address		Email地址：
-account_options	language	語言
-account_options	login_name	登錄名
-account_options	member_since	帳號創建日期
-account_options	real_name	真實姓名
-account_options	timezone	時區
-account_options	title		帳號維護
-account_options	user_id	用戶編號
-account_options	view_developer_profile	查看開發者個人能力
-account_options	welcome		歡迎
-account_register	Preferences	設置
-account_register	communitymail	接收附加的公共郵件列表。 <i>(量很小)</i>
-account_register	congrat	<p>恭喜。您已經在 $1 上成功註冊。 <p> 一封確認email已經發送到您的email地址，以確保您email地址的正確性。訪問email當中的連接就可以啟動您的帳號。
-account_register	emailaddr	Email 地址<span><font color="red">*</font></span> <BR><I>在帳號啟動前，這個email地址將被確認。它不會在這個站點當中顯示出來，你在這個站點將使用 &lt;loginname@$1&gt; 做爲email地址，所有發向該地址的email會被轉發到您真正的email地址當中去。</I>
-account_register	err_badinsert	插入失敗
-account_register	err_email	無效的Email地址
-account_register	err_jabber	無效的Jabber地址
-account_register	err_mailexist	已存在使用該email地址的用戶 － 使用用戶查找來恢復您的登錄。
-account_register	err_passwd	您必須提供密碼
-account_register	err_passwd2	密碼不一致
-account_register	err_passwd3	無效的密碼：
-account_register	err_realname	您必須提供一個真實姓名
-account_register	err_unixname	無效的用戶名
-account_register	err_userexist	用戶名已存在
-account_register	err_username	您必須提供一個用戶名
-account_register	jabberaddr	Jabber 地址：
-account_register	jabberonly	自動生成的通知只發送到我的Jabber地址
-account_register	language	語言選擇：
-account_register	loginname	登錄名稱（請不要使用大寫字母）：
-account_register	mandatory	標記爲 $1 的域是必填的。
-account_register	message_body	謝謝您在 $4 站點上註冊。您創建了一個名爲 $1 的帳號。爲了完成註冊，請訪問下面的URL：\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n（如果您沒看見上面的URL，那可能是因爲您郵件用戶端的Bug。\n使用下面的連接，並且確保您把它當做一整行拷貝到瀏覽器的位址欄中。）\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\n享用這個站點吧。\n\n-- $4 工作組\n
-account_register	message_header	$1 帳號註冊
-account_register	partecipate_peer_ratings	參與對等評價。 <i>（允許您使用若干指標來評價其他用戶，同樣您也會被其他用戶評價。如果您選擇參加評價，更多資訊，請參看 $1 用戶首頁 </a>）</i>。
-account_register	password	密碼（至少6個字元）：
-account_register	password2	密碼（重復）：
-account_register	realname	完整/真是姓名：
-account_register	register	註冊
-account_register	remember_me	"記住我". <i>（允許訪問您的個人首頁 $1 personal page</a> 而不需要登錄。但是在做任何改動之前，仍然需要顯式的登錄。）</i>
-account_register	reset	重設
-account_register	siteupdate	接受關於本站點更新的Email<i>（量非常小，並且包括安全通告，強烈推薦。）</i>
-account_register	timezone	時區選擇：
-account_register	title	註冊新帳號
-account_register	update	更新
-account_shell	autorized_keys	CVS/SSH 共用認證Key
-account_shell	edit_keys	編輯Keys
-account_shell	shell_box	Shell box
-account_shell	title	Shell帳號資訊
-account_unsubscribe	all_mailings	所有 $1 的郵件列表和通知
-account_unsubscribe	site_mailings	$1 站點的郵件列表
-account_verify	accessdenied	訪問被拒絕
-account_verify	accountactive	帳號已經啟動。
-account_verify	cannotactivate	無法啟動帳號
-account_verify	cannotconfirm	無法確認帳號身份 ―― 無效的確認編碼（或登錄名）
-account_verify	erroractivate	啟動帳號過程中出錯
-account_verify	invalidcred	您輸入的信用卡號與有效的帳號無對應關係。
-account_verify	invalidop	無效操作
-account_verify	invalidparam	無效參數
-account_verify	invaliduser	無效用戶
-account_verify	login		登錄
-account_verify	loginname	登錄名：
-account_verify	missingparam	缺少參數
-account_verify	nouser	用戶不存在。
-account_verify	password	密碼：
-account_verify	title	$1 帳號確認
-account_verify	usermandatory	您必須輸入用戶名。
-account_verify	verify_blurb	<p>爲了完成出測，請現在就登錄。然後您的帳號就會啟動成普通的登錄模式。</p>
-common_utils	priority_colors	優先順序顔色
+error	title	所請求的頁面不存在（錯誤號 404）
+error	not_found	頁面不存在
+error	error_creating	建置錯誤
+system	locale	en_US
+system	strftimefmt	%Y %B %e  %H:%M
+system	datefmt	Y-m-d H:i
 conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	zh-TW
 conf	language_id	11
 conf	mail_charset	Big5
+account	title	帳號設置
+account	updated	更新
+account_change_email	message	您申請在 $1 上更改您的email地址。 \n 請瀏覽這個URL來完成email地址的改變：\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 工作組
+account_change_email	section	帳號設置
+account_change_email	subject	$1 確認
+account_change_email	title	更改Email地址
+account_change_email	mailsent	<p>一封email已經送出到新的地址。 按照那封email上的指示完成email地址的改變。 </p><a href="/">[ Home ]</a> 
+account_change_email	desc	<p>爲了保證我們擁有您正確的email地址，改變您的email地址，將會要求新email地址的確認。</p><p>我們需要維護每個用戶的準確email地址，是爲了通過這個帳號來對用戶進行授權訪問。當這個帳號有重要的事件需要通知時，有個確切的email地址才能使我們做到這一點。</p>  <p>提交這個表單，將會發出一個要求確認的URL到新的email地址，訪問那個連接就可以完成email地址的改變。</p>
+account_change_email	invalid_email	無效的 email 地址
+account_change_email_confirm	title	確認email地址改變
+account_change_email	new_address	新的Email地址:
+account_change_email	send_confirmation	發送確認信到新的地址
+account_change_email-complete	title	Email地址改變成功
+account_change_email-complete	confirm	歡迎您, $1. 您的email地址成功的改變了。 您新的email地址現在是<strong>$2</strong>。 所有發送到 $3 的 Mail 都會被轉發到這個帳號上。
+account_change_pw	confirmation	<h2>$1 密碼更改確認</h2><p>祝賀您。 您已經改變了密碼</p>
+account_change_pw	section	帳號設置
+account_change_pw	title	更改密碼
+account_change_pw	old_password_incorrect	舊的密碼不正確
+account_change_pw	not_valid_password	你必須提供有效的密碼（至少6個字元）
+account_change_pw	passwords_dont_match	新密碼不一致。
+account_change_pw_changed	title	更改密碼成功
+account_change_pw_changed	return_to	您現在可以 $1 返回到帳號維護頁面 $2。
+account_change_pw	old_password	舊密碼
+account_change_pw	new_password	新密碼（至少6個字元）
+account_change_pw	new_password_repeat	新密碼（重復）
+account_change_pw	update	更新密碼
+account_editsshkeys	section	帳號設置
+account_editsshkeys	title	編輯CVS/SSH共用密鑰
+account_first	about_blurb	<p>您現在是 $1 的一個註冊用戶。 $1 開源軟體專案的在線開發環境。</p><p>做爲一個註冊用戶，您可以參與到整個站點的所有活動當中。您可以在專案討論版上貼出新的消息，可以報告在 $1 當中軟體的Bug，可以申請稱爲某個專案的開發者，甚至創建一個您自己的專案。</p><p>您最好花一些時間把<a href="/docs/site/"><b>站點文件</b></a> 都瀏覽一遍，以確保您可以完全的享受 $1 所提供的所有服務。</p><p>享用這個站點，也請給我們一些反饋資訊，以便我們能共同使 $1 變得更好。</p><p>--$1 工作組。</p>
+account_first	title	歡迎來到$1
+account_login	deleted_account	<p>您在 $1 上的帳號已經被 $1 工作組刪除。這有可能是因爲以下兩個原因：1）您主動要求把帳號刪除；或者2）您帳號的某些動作被視爲不受歡迎的（也就是說，您打破了使用您帳號的服務協定），以至您的帳號因爲管理的原因被刪除。如果您有任何問題或者是疑問，請發出一個<a href="/support/?group_id=1">支援請求</a>。</p><p>謝謝您的合作， <br><br>$1 工作組</p>
+account_login	iewarn	<H2><FONT COLOR="RED">Internet Explorer 用戶需要升級到5.01或者更高版本，最好是帶有128位SSL支援。或者使用 Netscape 4.7或更高版本</FONT></H2>
+account_login	macwarn	<H2><FONT COLOR="RED">目前本站不能很好的支援Macintosh 上的Internet Explorer。請使用Netscape 4.7或更高版本</FONT></H2>
+account_login	pending_account	<P>您的帳號正在等待email地址改變的確認。 訪問您的email當中的連接就可以啟動您的帳號。<P>如果您需要再次發送確認email，請點擊下面，一封確認email將被送到您在註冊時提供的email地址當中。	<P><A href="pending-resend.php?form_user=$1">[再次發送確認Email]</A>		<br><hr>		<p>
+account_login	title	登錄站點
+account_login	cookiewarn	爲了登錄，你的Cookies必須是被允許的。
+account_login	loginname	登錄名稱:
+account_login	passwd	密碼:
+account_login	usessl	登錄後仍然使用SSL
+account_login	sslnotice	<p><B><FONT COLOR="RED">在提交這個表單之後，您將連接到一個SSL伺服器，這樣其他用戶就無法看見您的密碼。 </FONT></B> <small style="font-size: x-small"> （如果您奇怪爲什麽這個頁面不是使用SSL裝載進來的，請閱讀下一段，謝謝） </small> <P> <B>Internet Explorer</B> 用戶有時會碰到SSL問題，因而他們應該在登錄之後離開SSL模式。Netscape用戶可以一直停留在SSL模式當中以獲得最大的安全性。想獲得關於這個問題更詳細的資訊，請訪問 <A HREF="http://www.microsoft.com/">微軟</A> 的主頁<P>
+account_login	login	登錄
+account_login	lostpw	[忘了密碼？]
+account_login	newaccount	[新帳號]
+account_lostpw	message	有人 （大概就是您本人）在 $3 站點上申請通過email確認來更改密碼。如果這個人不是您，那麽就忽略這封mail，當做一切都沒有發生。\n\n如果是您發出找個請求確認，請訪問下面的URL來改變您的密碼：\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3 工作組\n
+account_lostpw	subject	$1 確認
+account_lostpw	title	忘了密碼？
+account_lostpw	notify	<p>一封email已經被發送到您的地址當中。依照email上的指示來改變您的密碼。</p><p><a href="/">[ Home ]</a></p>
+account_lostpw	warn	<p>嗨... 忘了密碼是件很嚴重的事情。它不僅威脅了您的帳號的安全性，還包括專案甚至是這個站點的安全性。</p><p>點擊下面的"發送遺失密碼確認編碼" ，我們將發送一個URL到您的email地址。在這個URL當中，有一個您帳號的128位元的確認編碼。訪問那個URL，您就可以在線更新密碼並且登錄。</p>
+account_lostpw	sendhash	發送遺失密碼確認編碼
+account_lostpw	invalid_user	非法用戶
+account_lostpw	user_dont_exist	用戶不存在。
+account_lostlogin	title	遺忘密碼確認
+account_lostlogin	severalconfirm	這個確認編碼不只存在了一次
+account_lostlogin	invalidconfirm	非法的確認編碼
+account_lostlogin	sixchars	您必須提供一個有效的密碼（至少6個字元）。
+account_lostlogin	notmatch	新密碼不一致。
+account_lostlogin	passwdchanged	<h2>密碼更改成功</h2><p>祝賀您，您成功的重新設置了帳號密碼。現在你可以通過<a href="/account/login.php">登錄</a> 到站點。</p>
+account_lostlogin	welcome	<h2>忘記密碼，登錄</h2><p>歡迎您， $1。 您現在可以更改密碼。</p>
+account_lostlogin	newpasswd	新密碼（至少6個字元）
+account_lostlogin	newpasswd2	新密碼（重復）
+account_lostlogin	update	更新
+account_register	title	註冊新帳號
+account_register	congrat	<p>恭喜。您已經在 $1 上成功註冊。 <p> 一封確認email已經發送到您的email地址，以確保您email地址的正確性。訪問email當中的連接就可以啟動您的帳號。
+account_register	iewarn	<H2><FONT COLOR="RED">Internet Explorer 用戶需要升級到 IE5.01或者更高版本，最好是支援128位SSL，或者使用Netscape4.7或更高版本。</FONT></H2>
+account_register	macwarn	<H2><FONT COLOR="RED">目前本站不能很好的支援Macintosh 上的Internet Explorer。請使用Netscape 4.7或更高版本</FONT></H2>
+account_register	loginname	登錄名稱（請不要使用大寫字母）：
+account_register	password	密碼（至少6個字元）：
+account_register	password2	密碼（重復）：
+account_register	realname	完整/真實姓名：
+account_register	language	語言選擇：
+account_register	timezone	時區選擇：
+account_register	emailaddr	Email 地址<span><font color="red">*</font></span> <BR><I>在帳號啟動前，這個email地址將被確認。它不會在這個站點當中顯示出來，你在這個站點將使用 &lt;loginname@$1&gt; 做爲email地址，所有發向該地址的email會被轉發到您真正的email地址當中去。</I>
+account_register	jabberaddr	Jabber 地址：
+account_register	jabberonly	自動生成的通知只發送到我的Jabber地址
+account_register	siteupdate	接受關於本站點更新的Email<i>（量非常小，並且包括安全通告，強烈推薦。）</i>
+account_register	communitymail	接收附加的公共郵件列表。 <i>(量很小)</i>
+account_register	mandatory	標記爲 $1 的域是必填的。
+account_register	register	註冊
+account_register	err_username	您必須提供一個用戶名
+account_register	err_realname	您必須提供一個真實姓名
+account_register	err_passwd	您必須提供密碼
+account_register	err_passwd2	密碼不一致
+account_register	err_passwd3	無效的密碼：
+account_register	err_unixname	無效的用戶名 
+account_register	err_email	無效的Email地址
+account_register	err_jabber	無效的Jabber地址
+account_register	err_userexist	用戶名已存在
+account_register	err_mailexist	已存在使用該email地址的用戶 － 使用用戶查找來恢復您的登錄。
+account_register	err_badinsert	插入失敗
+account_register	message_header	$1 帳號註冊
+account_register	partecipate_peer_ratings	參與對等評價。 <i>（允許您使用若干指標來評價其他用戶，同樣您也會被其他用戶評價。如果您選擇參加評價，更多資訊，請參看 $1 用戶首頁 </a>）</i>。
+account_register	remember_me	"記住我". <i>（允許訪問您的個人首頁 $1 personal page</a> 而不需要登錄。但是在做任何改動之前，仍然需要顯式的登錄。）</i>
+account_register	message_body	謝謝您在 $4 站點上註冊。您創建了一個名爲 $1 的帳號。爲了完成註冊，請訪問下面的URL：\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n（如果您沒看見上面的URL，那可能是因爲您郵件用戶端的Bug。\n使用下面的連接，並且確保您把它當做一整行拷貝到瀏覽器的位址欄中。）\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\n享用這個站點吧。\n\n-- $4 工作組\n
+account_register	update	更新
+account_register	reset	重設
+account_register	Preferences	設置
+account_unsubscribe	all_mailings	所有 $1 的郵件列表和通知
+account_unsubscribe	site_mailings	$1 站點的郵件列表
+account_verify	title	$1 帳號確認
+account_verify	verify_blurb	<p>爲了完成出測，請現在就登錄。然後您的帳號就會啟動成普通的登錄模式。</p>
+account_verify	password	密碼：
+account_verify	login		登錄
+account_verify	loginname	登錄名：
+account_verify	missingparam	缺少參數
+account_verify	usermandatory	您必須輸入用戶名。
+account_verify	invaliduser	無效用戶
+account_verify	nouser	用戶不存在。
+account_verify	invalidop	無效操作
+account_verify	accountactive	帳號已經啟動。
+account_verify	invalidparam	無效參數
+account_verify	cannotconfirm	無法確認帳號身份 ―― 無效的確認編碼（或登錄名）
+account_verify	accessdenied	訪問被拒絕
+account_verify	invalidcred	您輸入的信用卡號與有效的帳號無對應關係。
+account_verify	cannotactivate	無法啟動帳號
+account_verify	erroractivate	啟動帳號過程中出錯
+account_options	title		帳號維護
+account_options	welcome		歡迎
+account_options	member_since	帳號創建日期
+account_options	view_developer_profile	查看開發者個人能力
+account_options	edit_skills_profile	編輯我的個人能力
+account_options	user_id	用戶編號
+account_options	login_name	登錄名
+account_options	change_password	改變密碼
+account_options	real_name	真實姓名
+account_options	language	語言
+account_options	timezone	時區
+account_options	email_address		Email地址：
+account_options	change_email_address	改變Email地址
+account_shell	title	Shell帳號資訊
+account_shell	shell_box	Shell box
+account_shell	autorized_keys	CVS/SSH 共用認證Key
+account_shell	edit_keys	編輯Keys
 contact	about_blurb	<p>這是 <b>$1</b>的聯繫資訊 -- 如果您對本站點上的專案有任何的問題，請將您的問題/資訊發送到該專案支援/Bug管理員。你可以通過訪問這些專案的首頁來獲取這些資訊： <tt>http://$2/projects/&lt;project name&gt;</tt> 點擊相應的工具。</p><p>如果您需要支援，報告Bug或者想直接和 $1 工作組聯繫，請訪問<a href="/projects/sourceforge">$1 Master Project</a>.</p>
 contact	title	聯繫 $1
-developer	body	正文
-developer	date	時間
-developer	diary_and_notes	日記和筆記
+common_utils	priority_colors	優先順序顔色
 developer	entry_not_found	沒有發現該用戶的Entry
+developer	date	時間
+developer	subject	標題
+developer	body	正文
+developer	diary_and_notes	日記和筆記
 developer	no_entries	該用戶沒有日記和筆記
 developer	no_user_selected	沒有選擇用戶
-developer	subject	標題
+developer_monitor	title	監視用戶
 developer_monitor	error_inserting	監視用戶日記時出錯
 developer_monitor	monitoring_user	用戶已被監視
 developer_monitor	monitoring_user_expl	<p>當用戶增加日記條目時，您將收到該日記的內容。</p><p>如果不想監視，只要簡單的點一下<strong>Monitor user</strong> 連接</p>
 developer_monitor	monitoring_user_off	監視行爲已被關閉
 developer_monitor	monitoring_user_off_expl	你將不再獲得任何關於該用戶更新的email
-developer_monitor	title	監視用戶
-developer_monitor_choose_user	body	錯誤 － 先選擇某個用戶
 developer_monitor_choose_user	title	請先選擇用戶
-developer_rate	cannot_rate_yourself	您不能評價自己
-developer_rate	invalid_rating_value	錯誤 ― 無效的評價值
+developer_monitor_choose_user	body	錯誤 － 先選擇某個用戶
+developer_rate	title	用戶評價頁面
 developer_rate	ratings_recorded	評價記錄
 developer_rate	ratings_recorded_body	您可以重新評價某個人。只需要回到他們的評價頁面，重新提交資訊即可。
-developer_rate	title	用戶評價頁面
-developer_rate	turned_off_body	您選擇不參與相互評價系統
+developer_rate	cannot_rate_yourself	您不能評價自己
+developer_rate	invalid_rating_value	錯誤 ― 無效的評價值
 developer_rate	turned_off_title	評價功能被關閉
-docman	admin	管理
-docman	description	描述
-docman	error_invalid_file_attack	Invalid file attack attempt $1
-docman	error_no_docs	該專案沒有可見的文件
-docman	error_no_groups_defined	沒有定義文件分組
+developer_rate	turned_off_body	您選擇不參與相互評價系統
 docman	submit_new	提交新的文件
-docman	turned_off	專案關閉了文件管理功能
 docman	view_doc	查看文件
-docman_admin	add_edit_docgroups	增加/編輯文件分組
+docman	admin	管理
+docman	error_no_docs	該專案沒有可見的文件
+docman	error_invalid_file_attack	Invalid file attack attempt $1
+docman	error_no_groups_defined	沒有定義文件分組
+docman	description	描述
+docman	turned_off	專案關閉了文件管理功能
 docman_admin	section	專案： $1
 docman_admin	title	文件管理：管理
-docman_admin_addgroups	section	文件管理員管理
-docman_admin_addgroups	title	增加文件分組
+docman_admin	add_edit_docgroups	增加/編輯文件分組
 docman_admin_docedit	section	文件管理員
 docman_admin_docedit	title	編輯文件
-docman_admin_editdocs	doc_contents	文件內容
 docman_admin_editdocs	section	文件管理員管理
-docman_admin_editdocs	state	狀態
 docman_admin_editdocs	title	編輯文件
+docman_admin_editdocs	state	狀態
 docman_admin_editdocs	upload	可選項：上傳新的文件
-docman_admin_editgroups	add_group	增加新分組
-docman_admin_editgroups	description	分組名稱將被用作標題，所以它應該相應的格式化。
-docman_admin_editgroups	edit_group	編輯分組
-docman_admin_editgroups	group_id	編號
-docman_admin_editgroups	group_name	分組名稱
-docman_admin_editgroups	new_group_name	新分組名稱
+docman_admin_editdocs	doc_contents	文件內容
+docman_admin_addgroups	section	文件管理員管理
+docman_admin_addgroups	title	增加文件分組
 docman_admin_editgroups	section	文件管理員管理
 docman_admin_editgroups	title	編輯文件分組
+docman_admin_editgroups	new_group_name	新分組名稱
+docman_admin_editgroups	add_group	增加新分組
+docman_admin_editgroups	edit_group	編輯分組
+docman_admin_editgroups	description	分組名稱將被用作標題，所以它應該相應的格式化。
 docman_admin_groupedit	section	文件管理員管理
 docman_admin_groupedit	title	重命名文件分組
-docman_common	error_min_desc_length	文件描述不少於10個字元
-docman_common	error_min_title_length	標題不少於5個字元
-docman_common	no_docs	沒有發現文件
-docman_common_doc	invalid_docid	文件：無效的文件編號
-docman_common_docgroup	invalid_id	文件分組：無效的分組編號
-docman_common_docgroup	name_required	文件分組：請輸入名字
-docman_display_doc	all_languages	所有語言
-docman_display_doc	no_document_data_text	沒有文件可顯示 ― 無效或未啟動的文件編號
-docman_display_doc	no_document_data_title	無文件資料
-docman_display_doc	section	專案： $1
+docman_admin_editgroups	group_name	分組名稱
+docman_admin_editgroups	group_id	編號
+docman_display_doc	section	專案： $1 
 docman_display_doc	title	專案管理： 顯示文件
-docman_new	description	描述
-docman_new	doc_title	文件標題
-docman_new	error_blank_document	獲取空白文件錯誤
-docman_new	file	文件
-docman_new	group	文件所屬的分組：
-docman_new	intro	<strong>文件標題</strong>:  引用文件中相關的簡單標題（例如：如何使用下載伺服器）<br /><strong>描述：</strong>放在該標題下的簡單描述。
-docman_new	language	語言
-docman_new	no_valid_group	沒有選擇有效的文件分組
-docman_new	section	專案： $1
-docman_new	state	狀態
-docman_new	submit	提交資訊
-docman_new	submitted_successfully	文件上載成功
+docman_display_doc	all_languages	所有語言
+docman_new	section	專案： $1 
 docman_new	title	文件管理：提交新文件
+docman_new	intro	<strong>文件標題</strong>:  引用文件中相關的簡單標題（例如：如何使用下載伺服器）<br /><strong>描述：</strong>放在該標題下的簡單描述。
+docman_new	doc_title	文件標題
+docman_new	description	描述
 docman_new	upload_file	上傳文件
-error	error_creating	建置錯誤
-error	not_found	頁面不存在
-error	title	所請求的頁面不存在（錯誤號 404）
-exit	choose_a_group	出錯 - 請選擇分組
-exit	choose_group_body	沒有選擇分組編號
-exit	choose_group_title	出錯 - 沒有選擇分組編號
+docman_new	language	語言
+docman_new	group	文件所屬的分組：
+docman_new	submit	提交資訊
+docman_new	file	文件
+docman_new	state	狀態
+docman_new	error_blank_document	獲取空白文件錯誤
+docman_new	submitted_successfully	文件上載成功
+docman_new	no_valid_group	沒有選擇有效的文件分組
+docman_display_doc	no_document_data_title	無文件資料
+docman_display_doc	no_document_data_text	沒有文件可顯示 ― 無效或未啟動的文件編號
+docman_common	error_min_title_length	標題不少於5個字元
+docman_common	error_min_desc_length	文件描述不少於10個字元
+docman_common	no_docs	沒有發現文件
+docman_common_docgroup	name_required	文件分組：請輸入名字
+docman_common_docgroup	invalid_id	文件分組：無效的分組編號
+docman_common_doc	invalid_docid	文件：無效的文件編號
 exit	exiting_with_error	出錯退出
-exit	missing_parameters_body	出錯 - 缺少必須的參數
+exit	choose_a_group	出錯 - 請選擇分組
+exit	choose_group_title	出錯 - 沒有選擇分組編號
+exit	choose_group_body	沒有選擇分組編號
 exit	missing_parameters_title	出錯 - 缺少參數
-forum	choose	<p>選擇一個論壇進行瀏覽，查找和發表資訊。<p>
-forum	error_forum_not_found	沒有找到論壇
-forum	error_invalid_group_forum_id	$1:: 無效的group_forum_id
-forum	error_no_forums_found	$1 沒有論壇
-forum	error_no_valid_forum_object	$1:: 無效的Forum 物件
-forum	error_no_valid_group_object	論壇:: 無效的Group 物件
-forum	forum	論壇
-forum	forums_for	 $1 的論壇
-forum	html	HTML標記將當做普通文本在您的文章當中顯示
+exit	missing_parameters_body	出錯 - 缺少必須的參數
 forum	section	專案： $1
 forum	title	論壇
+forum	choose	<p>選擇一個論壇進行瀏覽，查找和發表資訊。<p>
+forum	html	HTML標記將當做普通文本在您的文章當中顯示
+forum	error_no_forums_found	$1 沒有論壇
+forum	forums_for	 $1 的論壇
+forum	error_no_valid_group_object	論壇:: 無效的Group 物件
+forum	forum	論壇
+forum	error_no_valid_forum_object	$1:: 無效的Forum 物件
+forum	error_invalid_group_forum_id	$1:: 無效的group_forum_id
+forum	error_forum_not_found	沒有找到論壇
+forum_common	error_adding_forum	添加論壇出錯
+forum_common	error_save_when_logged_in	只有登錄後才能保存位置
+forum_common	error_min_name_length	論壇名稱不小於3個字元
+forum_common	error_min_desc_length	論壇描述不小於10個字元
+forum_common	error_set_monitor	只有登錄後才能監視
+forum_common	error_unable_to_add_monitor	無法添加監視
+forum_common	welcome_to	歡迎來到 $1
+forum_common_forummessage	no_valid_forum_object	論壇資訊:: 無效的Forum 物件
+forum_common_forummessage	forum_message	論壇資訊
+forum_common_forummessage	error_group_forum_id	資料庫中的Group_forum_id 和Forum 物件不一致
+forum_common_forummessage	error_required_fields	必須包括帖文章標題和正文
+forum_common_forummessage	error_not_logged	發文章之前必須登錄
+forum_common_forummessage	error_posting_failed	ForumMessage::create() 張貼失敗
+forum_common_forummessage	error_get_message_id	ForumMessage::create() 無法獲得文章編號
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() 無效的文章編號
+forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() 無效的ParentMessage 物件
+forum_common_forummessage	error_getting_next_thread	無法獲取下一個thread_id 
+forum_common_forummessage	error_cannot_update_parent	無法更新父文章
+forum_common_forummessage	error_cannot_update_master_thread	目前無法更新主線Master Thread parent 
+forum_common_forum	error_save_place	Forum::savePlace() 
+forum_save	saved	論壇位置已保存。當您下次回來時，新的文章將被加亮顯示
+forum_admin	section	專案： $1 
+forum_admin	title	論壇：管理
 forum_admin	add_forum	增加論壇
 forum_admin	delete_message	刪除文章
-forum_admin	section	專案： $1
-forum_admin	title	論壇：管理
 forum_admin	update_forum	更新論壇資訊/狀態
-forum_admin_addforum	add_forum	增加該論壇
-forum_admin_addforum	allow_anonymous	允許匿名發文章？
-forum_admin_addforum	email_posts	將文章用Email發送到：
-forum_admin_addforum	existing_forums	論壇已存在
-forum_admin_addforum	forum_created	論壇創建成功
-forum_admin_addforum	forum_description	描述
-forum_admin_addforum	forum_name	論壇名稱
-forum_admin_addforum	is_public	是否公共論壇？
 forum_admin_addforum	section	論壇管理
 forum_admin_addforum	title	增加論壇
-forum_admin_changestatus	forum	論壇
-forum_admin_changestatus	intro	您可以在這兒調整論壇的特色。請注意私有論壇仍然能夠被該專案的成員查看，但不是完全公開。forum_admin_changestatus	change_status	改變論壇狀態
-forum_admin_changestatus	no_forums_found	沒發現論壇
+forum_admin_addforum	forum_created	論壇創建成功
+forum_admin_addforum	existing_forums	論壇已存在
+forum_admin_addforum	forum_name	論壇名稱
+forum_admin_addforum	forum_description	描述
+forum_admin_addforum	is_public	是否公共論壇？
+forum_admin_addforum	allow_anonymous	允許匿名發文章？
+forum_admin_addforum	email_posts	將文章用Email發送到：
+forum_admin_addforum	add_forum	增加該論壇
+forum_admin_delete_messages	messages_deleted	$1 文章已刪除
 forum_admin_changestatus	section	論壇管理
-forum_admin_changestatus	status	狀態
 forum_admin_changestatus	title	改變論壇狀態
 forum_admin_changestatus	update_successful	論壇資訊更新成功
+forum_admin_changestatus	no_forums_found	沒發現論壇
+forum_admin_changestatus	intro	您可以在這兒調整論壇的特色。請注意私有論壇仍然能夠被該專案的成員查看，但不是完全公開。forum_admin_changestatus	change_status	改變論壇狀態
+forum_admin_changestatus	forum	論壇
+forum_admin_changestatus	status	狀態
 forum_admin_delete	section	論壇管理
 forum_admin_delete	title	刪除論壇
 forum_admin_delete_message	section	論壇管理
 forum_admin_delete_message	title	刪除文章
 forum_admin_delete_message	warning	警告！您打算永久地刪除一個文章以及所有對它的回復！！
-forum_admin_delete_messages	messages_deleted	$1 文章已刪除
-forum_common	error_adding_forum	添加論壇出錯
-forum_common	error_min_desc_length	論壇描述不小於10個字元
-forum_common	error_min_name_length	論壇名稱不小於3個字元
-forum_common	error_save_when_logged_in	只有登錄後才能保存位置
-forum_common	error_set_monitor	只有登錄後才能監視
-forum_common	error_unable_to_add_monitor	無法添加監視
-forum_common	welcome_to	歡迎來到 $1
-forum_common_forum	error_save_place	Forum::savePlace()
-forum_common_forummessage	error_cannot_update_master_thread	目前無法更新主線Master Thread parent
-forum_common_forummessage	error_cannot_update_parent	無法更新父文章
-forum_common_forummessage	error_get_message_id	ForumMessage::create() 無法獲得文章編號
-forum_common_forummessage	error_getting_next_thread	無法獲取下一個thread_id
-forum_common_forummessage	error_group_forum_id	資料庫中的Group_forum_id 和Forum 物件不一致
-forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() 無效的文章編號
-forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() 無效的ParentMessage 物件
-forum_common_forummessage	error_not_logged	發文章之前必須登錄
-forum_common_forummessage	error_posting_failed	ForumMessage::create() 張貼失敗
-forum_common_forummessage	error_required_fields	必須包括帖文章標題和正文
-forum_common_forummessage	forum_message	論壇資訊
-forum_common_forummessage	no_valid_forum_object	論壇資訊:: 無效的Forum 物件
-forum_errors	error_determining_forum_id	決定論壇編號時出錯
 forum_errors	error_getting_forum	獲取論壇出錯
-forum_forum	author	作者
-forum_forum	changeview	改變視圖
-forum_forum	date	日期
-forum_forum	flat	平板
-forum_forum	forum	論壇
-forum_forum	lastpost	最後發表時間
-forum_forum	nested	嵌套
-forum_forum	next_messages	後一頁
-forum_forum	no_forum_chosen	沒有選擇論壇
-forum_forum	posts	文章
-forum_forum	postsuccess	文章發表成功
-forum_forum	previous_messages	前一頁
-forum_forum	replies	回復
-forum_forum	section	專案： $1
-forum_forum	show	顯示
-forum_forum	thread	主題
-forum_forum	threaded	主題
-forum_forum	threads	主題
+forum_errors	error_determining_forum_id	決定論壇編號時出錯
+forum_forum	section	專案： $1 
 forum_forum	title	論壇：查看論壇
-forum_forum	topic	主題
-forum_forum	topicstarter	主題發起人
-forum_forum	ultimate	基本
 forum_forum_thread	section	論壇
 forum_forum_thread	title	查看主題
-forum_message	by	作者
-forum_message	date	日期
-forum_message	message	文章
-forum_message	message_not_found_body	該文章（不再）存在
-forum_message	message_not_found_title	沒發現文章
+forum_forum	thread	主題
+forum_forum	author	作者
+forum_forum	date	日期
+forum_forum	changeview	改變視圖
+forum_forum	postsuccess	文章發表成功
+forum_forum	topic	主題
+forum_forum	topicstarter	主題發起人
+forum_forum	replies	回復
+forum_forum	lastpost	最後發表時間
+forum_forum	forum	論壇
+forum_forum	threads	主題
+forum_forum	posts	文章
+forum_forum	nested	嵌套	
+forum_forum	flat	平板
+forum_forum	threaded	主題
+forum_forum	ultimate	基本
+forum_forum	show	顯示
+forum_forum	previous_messages	前一頁
+forum_forum	next_messages	後一頁
+forum_forum	no_forum_chosen	沒有選擇論壇
+forum_message	thread_view	主題視圖
+forum_message	section	論壇
+forum_message	title	讀文章
 forum_message	msg	發表一個文章到這個主題：
-forum_message	must_choose_message_body	您必須先選擇一個文章
-forum_message	must_choose_message_title	必須先選擇一個文章
+forum_message	thread	創建新主題
 forum_message	post_followup	回復該文章
 forum_message	receive_followups	通過 email 接收所有的回復
-forum_message	section	論壇
+forum_message	by	作者
+forum_message	date	日期
 forum_message	subject	標題
-forum_message	thread	創建新主題
-forum_message	thread_view	主題視圖
-forum_message	title	讀文章
-forum_monitor	activated	論壇監視開始
+forum_message	message	文章
+forum_message	message_not_found_title	沒發現文章
+forum_message	message_not_found_body	該文章（不再）存在
+forum_message	must_choose_message_title	必須先選擇一個文章
+forum_message	must_choose_message_body	您必須先選擇一個文章
 forum_monitor	deactivated	論壇監視停用
-forum_save	saved	論壇位置已保存。當您下次回來時，新的文章將被加亮顯示
-forum_utils	added	論壇添加成功
-forum_utils	admin	管理
-forum_utils	anonymously	匿名
-forum_utils	author	作者
-forum_utils	brokenthread	中斷的主題
-forum_utils	by	作者：
-forum_utils	couldpostif	您只有$1 登錄 $2 之後才能發表
-forum_utils	date	日期
+forum_monitor	activated	論壇監視開始
+forum_utils	news	新聞
 forum_utils	discussionforum	討論版：
-forum_utils	doublepost	看起來您打算重復發表文章，因爲它和前一個文章擁有同樣的標題和其他資訊。
-forum_utils	error	錯誤！
+forum_utils	nonewsitem	錯誤 - 沒發現新聞
+forum_utils	latest	最新新聞
+forum_utils	monitor	監視論壇
+forum_utils	stopmonitor	停止監視
+forum_utils	admin	管理
+forum_utils	saveplace	保存位置
 forum_utils	erroradd	添加論壇出錯
-forum_utils	errorfollowup	試圖回復一個不存在的文章
-forum_utils	errorfollowup2	回復主題時，沒找到回復的編號
-forum_utils	errorinsert	無法獲取insertid()
+forum_utils	added	論壇添加成功
+forum_utils	notfound	沒發現
+forum_utils	by	作者：
+forum_utils	brokenthread	中斷的主題
+forum_utils	thread	主題
+forum_utils	author	作者
+forum_utils	postedby	發貼人
+forum_utils	date	日期
+forum_utils	summary	概要
+forum_utils	error	錯誤！
+forum_utils	noid	試圖發文章而沒有指定論壇
+forum_utils	mustinclude	必須包括文章標題和內容
+forum_utils	doublepost	看起來您打算重復發表文章，因爲它和前一個文章擁有同樣的標題和其他資訊。
+forum_utils	nextfailed	獲取下一個 thread_id 失敗
 forum_utils	errormaster	目前無法更新Master Thread parent
 forum_utils	errorparent	無法更新父文章
+forum_utils	errorfollowup	試圖回復一個不存在的文章
+forum_utils	errorfollowup2	回復主題時，沒找到回復的編號
 forum_utils	errorpost	發表文章出錯
+forum_utils	errorinsert	無法獲取insertid()
+forum_utils	posted	文章發佈成功
 forum_utils	feedbacklogin	只有登錄之後才能發表文章
+forum_utils	subject	標題：
+forum_utils	message	消息：
 forum_utils	htmltag	您文章當中的 HTML 標記將當做普通文本顯示
-forum_utils	latest	最新新聞
+forum_utils	postanon	您不是匿名用戶，無法發表匿名文章
 forum_utils	loggedin	登錄
+forum_utils	postcomment	發表評論
+forum_utils	anonymously	匿名
+forum_utils	couldpostif	您只有$1 登錄 $2 之後才能發表
+forum_utils	reply	回復
 forum_utils	mailmonitor	\n閱讀並回復該文章： \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\n您收到這封email是因爲您選擇監視這個論壇。\n要停止監視論壇，登錄到$4 \n並且訪問： $5
+forum_utils	mailsent	郵件發送 － 有人監視論壇
 forum_utils	mailnotsent	郵件沒有發送 － 有人監視論壇
 forum_utils	mailnotsent2	郵件沒有發送 － 無人監視論壇
-forum_utils	mailsent	郵件發送 － 有人監視論壇
-forum_utils	message	消息：
-forum_utils	monitor	監視論壇
-forum_utils	mustinclude	必須包括文章標題和內容
-forum_utils	news	新聞
-forum_utils	nextfailed	獲取下一個 thread_id 失敗
-forum_utils	noid	試圖發文章而沒有指定論壇
-forum_utils	nonewsitem	錯誤 - 沒發現新聞
-forum_utils	notfound	沒發現
-forum_utils	postanon	您不是匿名用戶，無法發表匿名文章
-forum_utils	postcomment	發表評論
-forum_utils	posted	文章發佈成功
-forum_utils	postedby	發貼人
-forum_utils	reply	回復
-forum_utils	saveplace	保存位置
-forum_utils	stopmonitor	停止監視
-forum_utils	subject	標題：
-forum_utils	summary	概要
-forum_utils	thread	主題
 frs	file_download	下載
 frs	file_monitor	監視
 frs	file_notes	備註
@@ -393,70 +392,68 @@ frs	file_package	套裝軟體
 frs	file_rel_date	日期
 frs	file_version	版本
 frs	latest_file_releases	最新發佈專案
-frs_file	error_already_exists	在這個專案空間當中，同樣檔案名的文件已存在
-frs_file	error_cannot_move	文件無法被移到永久保存位置
-frs_file	error_invalid_file	FRSFile 似乎無效
 frs_file	error_min_name_length	FRSFile 檔案名不少於3個字元
 frs_file	error_name_format	FRSFile 檔案名應該是這樣的格式：gforge-3.0.tar.bz2
-frs_package	error_already_exists	在這個專案空間當中，同樣檔案名的文件已存在
-frs_package	error_cannot_move	文件無法被移到永久保存位置
-frs_package	error_invalid_file	FRSFile 似乎無效
+frs_file	error_invalid_file	FRSFile 似乎無效
+frs_file	error_already_exists	在這個專案空間當中，同樣檔案名的文件已存在
+frs_file	error_cannot_move	文件無法被移到永久保存位置
 frs_package	error_min_name_length	FRSPackage 名稱不小於3個字元
 frs_package	error_name_format	FRSPackage::Update： 包的名稱只能是字母
+frs_package	error_invalid_file	FRSFile 似乎無效
+frs_package	error_already_exists	在這個專案空間當中，同樣檔案名的文件已存在
+frs_package	error_cannot_move	文件無法被移到永久保存位置
 frs_package	error_set_monitor	只有登錄後才能監視
-frs_release	email_text	\n\n專案 "$1" ('$2') 已經  \n 發佈套裝軟體'$3'的新版本 \n您可以通過下面的地址去下載：\n $4\n\n您收到這封email是一萬年您\n要求當這個套裝軟體有新版本發佈時通知您。\n 如果您不希望以後再被通知，\n 請登錄到 $5 並點擊如下連接：\n $6
-frs_release	email_title	[$1 發佈] $2
-frs_release	error_already_exists	在這個專案空間當中，同樣檔案名的發佈文件已存在
-frs_release	error_cannot_move	發佈文件無法被移到永久保存位置
-frs_release	error_invalid_file	FRS 發佈 似乎無效
 frs_release	error_min_name_length	FRSPackage 名稱不小於3個字元
 frs_release	error_name_format	FRS 發佈 檔案名應該是這樣的格式： gforge-3.0.tar.bz2
+frs_release	error_invalid_file	FRS 發佈 似乎無效
+frs_release	error_already_exists	在這個專案空間當中，同樣檔案名的發佈文件已存在
+frs_release	error_cannot_move	發佈文件無法被移到永久保存位置
 frs_release	error_set_monitor	只有登錄後才能監視
-general	add	增加
-general	browse	瀏覽
-general	cancel	取消
-general	confirm	確認
-general	create_successful	創建成功
-general	delete	刪除
-general	deleted	已刪除
-general	done	完成
-general	edit	編輯
+frs_release	email_title	[$1 發佈] $2
+frs_release	email_text	\n\n專案 "$1" ('$2') 已經  \n 發佈套裝軟體'$3'的新版本 \n您可以通過下面的地址去下載：\n $4\n\n您收到這封email是一萬年您\n要求當這個套裝軟體有新版本發佈時通知您。\n 如果您不希望以後再被通知，\n 請登錄到 $5 並點擊如下連接：\n $6
+general	return_to	[返回到 to $1]
+general	return	返回
 general	error	出錯
+general	sitename	$1
+general	footer	這裏是 $1.  關於更多的資訊，包括版權資訊，請閱讀<a href="/about.php">這一頁</a>.
+general	permdenied	許可權不允許
+general	permnotget	無法獲得許可權
+general	permexcuse	要想查看該頁面，必須由這個專案的管理員賦予您許可權。
+general	turned_off	該專案已經將 $1 關閉
+general	update_successful	更新成功
+general	create_successful	創建成功
+general	no_valid_group	沒有選擇有效的 $1 組
+general	no_valid_filename	無效的檔案名
+general	no_valid_group_object	$1 無效的組物件
+general	submitted_successfully	$1 提交成功
+general	invalid_email	無效的Email地址
+general	language	語言
+general	submit_edit	提交編輯
+general	edit	編輯
+general	add	增加
+general	go	Go
+general	submit	提交
+general	yes	是
+general	no	否
+general	deleted	已刪除
+general	delete	刪除
+general	update	更新
+general	remove	刪除
+general	cancel	取消
+general	done	完成
+general	more	更多
+general	confirm	確認
+general	error_on_update	更新時出錯：
+general	error_group_id	資料庫中的Group_id與Group 物件不一致
+general	error_no_valid_group_object	$1:: 沒有有效的組物件
 general	error_creating	創建 $1 時出錯
 general	error_getting	獲取 $1 時出錯
 general	error_getting_new	獲取新 $1 時出錯
-general	error_group_id	資料庫中的Group_id與Group 物件不一致
 general	error_missing_params	缺少參數
-general	error_no_valid_group_object	$1:: 沒有有效的組物件
-general	error_on_update	更新時出錯：
-general	footer	這裏是 $1.  關於更多的資訊，包括版權資訊，請閱讀<a href="/about.php">這一頁</a>.
-general	go	Go
-general	invalid_email	無效的Email地址
-general	language	語言
-general	more	更多
-general	no	否
-general	no_valid_filename	無效的檔案名
-general	no_valid_group	沒有選擇有效的 $1 組
-general	no_valid_group_object	$1 無效的組物件
+general	browse	瀏覽
 general	open	打開
-general	permdenied	許可權不允許
-general	permexcuse	要想查看該頁面，必須由這個專案的管理員賦予您許可權。
-general	permnotget	無法獲得許可權
-general	remove	刪除
-general	reset	重設
-general	return	返回
-general	return_to	[返回到 to $1]
-general	sitename	$1
-general	submit	提交
-general	submit_edit	提交編輯
-general	submitted_successfully	$1 提交成功
 general	total	總共
-general	turned_off	該專案已經將 $1 關閉
-general	update	更新
-general	update_successful	更新成功
-general	yes	是
-group	activity	活動百分比：
-group	activitystat	查看專案活動<a href="/project/stats/?group_id=$1">統計</a>
+general	reset	重設
 group	developer_info	研發團隊
 group	developers	開發者
 group	long_bugs	Bug追蹤
@@ -472,11 +469,8 @@ group	long_pm	任務管理
 group	long_support	技術支援
 group	long_survey	研究
 group	long_tracker	追蹤
-group	nodescription	該專案還沒有提交描述
-group	norelease	該專案沒有發佈任何文件
 group	project_admins	專案經理
 group	public_area	公共區域
-group	registered	已註冊:
 group	short_admin	管理
 group	short_bugs	Bugs
 group	short_cvs	CVS
@@ -494,47 +488,47 @@ group	short_summary	摘要
 group	short_support	支援
 group	short_survey	研究
 group	short_tracker	追蹤
-help_tracker	close_window	關閉窗口
-help_tracker	unknown_help_request	未知的幫助請求:
-help_trove_cat	description	描述
-help_trove_cat	full_category_name	完整的分類名稱
-help_trove_cat	no_such_category	沒有這種分類
-help_trove_cat	short_name	短名稱
+group	registered	已註冊: 
+group	activity	活動百分比： 
+group	activitystat	查看專案活動<a href="/project/stats/?group_id=$1">統計</a>
+group	norelease	該專案沒有發佈任何文件
+group	nodescription	該專案還沒有提交描述
 home	about_blurb	$1 爲<b><a href="http://www.opensource.org">開放源程式碼軟體</a>開發者提供全方面的免費服務</b>，包括CVS倉庫, 郵件列表, BUG追蹤, 在線論壇, 任務管理, 網站空間, 專案存儲及完整的備份, 並且完全是通過WEB方式來管理的。 <BR> &nbsp; <P> <B>請立即加入，並提出您的寶貴意見</B> <P> 爲了充分利用 $1 所提供的服務, <A href="/account/register.php">請立即註冊成爲 本站用戶</A>，這樣您就可以參與本站的各項活動。若您尚不是註冊用戶, 仍能瀏覽本站, 但無權參與本站的活動。 <P> &nbsp; <BR> <B>開始您自己的專案</B> <P> <A href="/account/register.php">先註冊成爲本站用戶</A>, 然後<A HREF="/account/login.php">登錄</A>最後<A HREF="/register/">開始您的專案。</A> <P> 謝謝參與，請充分享受本站提供的服務吧！
 home	breaking_down_barriers	爲開放源碼的發展開闢一條坦途
-home	gforge_statistics	$1 統計資料
 home	highest_ranked_users	用戶評價排行榜
-home	hosted_projects	成立專案
 home	most_active_this_week	本周活動最強排行榜
-home	no_stats_available	沒有統計資訊
-home	none_found	沒有發現
-home	registered_users	註冊用戶
 home	sfos	$1 OnSite
+home	gforge_statistics	$1 統計資料
 home	top_project_downloads	專案下載排行榜
+home	no_stats_available	沒有統計資訊
+home	hosted_projects	成立專案
+home	registered_users	註冊用戶
+home	none_found	沒有發現
+home	recently_registered	近期註冊的專案
 index	welcome	歡迎
 mail	provided_by	<p>郵件列表通過一個GForge版本的<a href="http://www.list.org">GNU Mailman</a>. 感謝Mailman 和<a href="http://www.python.org">Python</a> 全體工作人員，感謝他們卓越的軟體。</p>
 mail	section	專案： $1
 mail	title	郵件列表
 mail_admin	section	郵件列表
 mail_admin	title	郵件列表管理
+mail_admin_add_list	section	郵件列表管理
+mail_admin_add_list	title	增加列表
+mail_admin_change_status	section	郵件列表管理
+mail_admin_change_status	title	管理 / 更新列表
 menu	about_gforge	關於 $1
 menu	account_maintenance	帳號維護
-menu	admin	管理
 menu	bookmark_page	書簽
 menu	change_my_theme	更換外觀
-menu	code_snippet	程式碼分享
 menu	code_snippet_library	程式碼分享
 menu	compile_farm	編譯工廠
 menu	diary_notes	日記和筆記
 menu	discussion_forums	討論區
 menu	documentation	文件
-menu	home	首頁
 menu	login	登錄
 menu	login_ssl	通過 SSL 登錄
 menu	logout	退出登錄
-menu	my_account	我的帳號
 menu	my_personal_page	我的首頁
-menu	mypage	我的首頁
+menu	my_account	我的帳號
 menu	new_project	註冊新專案
 menu	new_releases	新發佈軟體
 menu	new_user	通過 SSL 創建新用戶
@@ -542,17 +536,18 @@ menu	other_site_mirrors	其他站點鏡像
 menu	project_admin	專案維護
 menu	project_help_wanted	尋求專案支援
 menu	project_summary	專案摘要
-menu	projectree	專案樹
 menu	search	查找
 menu	site_status	站點狀態
 menu	software_map	軟體分類表
-menu	submit	發佈
 menu	top_projects	熱點專案
+menu	admin	管理
+menu	submit	發佈
+menu	home	首頁
+menu	projectree	專案樹
+menu	mypage	我的首頁
+menu	code_snippet	程式碼分享
+menu	admin	管理
 my	about_blurb	您的個人首頁包括分配給您的bug和任務列表，外加您所屬的專案列表
-my	assigneditems	分配給我的條目
-my	bookmarks	我的書簽
-my	monitoredfile	監視的文件
-my	monitoredforum	監視的論壇
 my	no_bookmarks	您目前沒有保存任何的書簽
 my	no_monitored_filemodules	您沒有監視任何文件
 my	no_monitored_filemodules_details	<p>如果您監視了文件，新版本的發佈將會通過郵件通知給您。郵件當中包含從我們的下載伺服器上下載該新文件的鏈結</p><p>您可以通過訪問一個專案的"摘要"頁並點擊文件部分來監視文件。</p>
@@ -562,114 +557,119 @@ my	no_open_tasks	目前沒有未完成的任務分配給您
 my	no_projects	您目前不屬於任何一個活動專案
 my	no_tracker_items_assigned	目前沒有開放的追蹤項分配給您
 my	no_tracker_items_submitted	目前沒有您發佈的開放追蹤項
+my	title	$1 的個人首頁
+my	assigneditems	分配給我的條目
+my	submitteditems	我發佈的條目
+my	monitoredforum	監視的論壇
+my	monitoredfile	監視的文件
+my	tasks	我的任務
+my	survey	快速研究
+my	survey_taken	您已經參與了開發研究
+my	bookmarks	我的書簽
+my	projects	我的專案
+my	pending_projects	待審批的專案 
+my	pending_projects_1	有個待審批的專案需要審查
+my	pending_projects_2	共有 $1 個待審批專案需要審查
+my	pending_projects_3	點擊這裏
 my	pending_news_bytes	待審批新聞
 my	pending_news_bytes_1	有個待審批的新聞需要審查
 my	pending_news_bytes_2	共有 $1 個新聞待審查
 my	pending_news_bytes_3	點擊這裏
-my	pending_projects	待審批的專案
-my	pending_projects_1	有個待審批的專案需要審查
-my	pending_projects_2	共有 $1 個待審批專案需要審查
-my	pending_projects_3	點擊這裏
-my	projects	我的專案
-my	submitteditems	我發佈的條目
-my	survey	快速研究
-my	survey_taken	您已經參與了開發研究
-my	tasks	我的任務
-my	title	$1 的個人首頁
 my_bookmark	return	返回
-my_bookmark_add	added_bookmark	爲<strong>$1</strong>增加標題爲<strong>$2</strong>的書簽
-my_bookmark_add	back	返回您的首頁
-my_bookmark_add	bookmark_title	書簽標題
-my_bookmark_add	bookmark_url	書簽位址
 my_bookmark_add	section	我的個人首頁
 my_bookmark_add	title	增加書簽
+my_bookmark_add	added_bookmark	爲<strong>$1</strong>增加標題爲<strong>$2</strong>的書簽
+my_bookmark_add	bookmark_title	書簽標題
+my_bookmark_add	bookmark_url	書簽位址
 my_bookmark_add	visit_page	訪問書簽頁
-my_bookmark_delete	bookmark_deleted	書簽已刪除
+my_bookmark_add	back	返回您的首頁
 my_bookmark_delete	section	我的個人首頁
 my_bookmark_delete	title	刪除書簽
-my_bookmark_edit	bookmark_updated	書簽已更新
-my_bookmark_edit	failed_to_update_bookmark	更新書簽失敗
+my_bookmark_delete	bookmark_deleted	書簽已刪除
 my_bookmark_edit	section	我的個人首頁
 my_bookmark_edit	title	編輯書簽
-my_diary	add_new_entry	增加新條目
-my_diary	details	細節
-my_diary	diary_updated	日記已更新
-my_diary	entry_not_found	條目不存在或者不屬於您
-my_diary	error_adding_item	增加新條目時出錯
-my_diary	existing_entries	已有的日記和筆記條目
-my_diary	is_public	是否公開？
-my_diary	is_public_expl	如果標記爲公開，您的條目將被通過mail發送到監視您日記筆記的用戶郵箱。
-my_diary	item_added	新條目已增加
-my_diary	no_entries	您沒有日記條目
-my_diary	nothing_updated	沒有任何東西更新
-my_diary	section	我的首頁
-my_diary	submit_only_once	只能提交一次
-my_diary	summary	摘要
-my_diary	title	我的日記和筆記
-my_diary	update_entry	更新一個條目
-my_rmproject	operation_not_permitted_text	您不能將自己從該專案刪除，因爲您不是該專案的管理員。您應該首先要求其他管理員重設您的管理許可權。如果您是專案中唯一的管理員，請考慮到到<a href="/people/">需要幫助版面</a>貼出資訊，並且準備將專案和管理許可權移交給感興趣的人員和小組。
+my_bookmark_edit	bookmark_updated	書簽已更新
+my_bookmark_edit	failed_to_update_bookmark	更新書簽失敗
+my_rmproject	title	退出專案
 my_rmproject	operation_not_permitted_title	操作被禁止
+my_rmproject	operation_not_permitted_text	您不能將自己從該專案刪除，因爲您不是該專案的管理員。您應該首先要求其他管理員重設您的管理許可權。如果您是專案中唯一的管理員，請考慮到到<a href="/people/">需要幫助版面</a>貼出資訊，並且準備將專案和管理許可權移交給感興趣的人員和小組。
 my_rmproject	quitting_project	退出專案
 my_rmproject	quitting_project_text	您打算把自己從當前專案中刪除。請確認您的操作：
-my_rmproject	title	退出專案
+my_diary	section	我的首頁
+my_diary	title	我的日記和筆記
+my_diary	add_new_entry	增加新條目
+my_diary	summary	摘要
+my_diary	details	細節
+my_diary	submit_only_once	只能提交一次
+my_diary	is_public	是否公開？
+my_diary	is_public_expl	如果標記爲公開，您的條目將被通過mail發送到監視您日記筆記的用戶郵箱。
+my_diary	diary_updated	日記已更新
+my_diary	nothing_updated	沒有任何東西更新
+my_diary	error_adding_item	增加新條目時出錯
+my_diary	existing_entries	已有的日記和筆記條目
+my_diary	update_entry	更新一個條目
+my_diary	entry_not_found	條目不存在或者不屬於您
+my_diary	item_added	新條目已增加
+my_diary	no_entries	您沒有日記條目
 new	title	新發佈
-news	choose	<P>選擇一條新聞進行閱讀，查找和發佈消息<P>
-news	noitems	沒有發現條目
-news	nonews	沒有新聞
-news	nonewsfor	$1 沒有新聞
 news	section	專案： $1
 news	title	新聞
-news_admin	noqueued	本專案沒有發現新聞
-news_admin	permdenied	您必須是專案管理員或者屬於 $1 新聞工作組
-news_admin	queued	以下新聞條目被提交：
+news	choose	<P>選擇一條新聞進行閱讀，查找和發佈消息<P>
+news	nonews	沒有新聞
+news	nonewsfor	$1 沒有新聞
+news	noitems	沒有發現條目
 news_admin	section	新聞
 news_admin	title	新聞管理
+news_admin	permdenied	您必須是專案管理員或者屬於 $1 新聞工作組
+news_admin	noqueued	本專案沒有發現新聞
+news_admin	queued	以下新聞條目被提交：
 news_main	title	新聞
-news_submit	cannot	除非您是專案管理員，否則不能發佈該專案的新聞
-news_submit	cannotadmin	從news專案中發佈新聞是不允許的。
-news_submit	details	細節
-news_submit	errorboth	錯誤 - 標題和正文都是必須的
-news_submit	errorinsert	插入操作出錯
-news_submit	forproject	爲專案
-news_submit	newsadded	新聞已添加
 news_submit	post_blurb	如果您是專案管理員，您可以爲專案發佈新聞。當專案需要幫助時，您也可以發佈"需要幫助"通知。<P>所有 <B>爲您的專案</B>發佈的消息都將馬上在您專案的摘要頁面顯示。 對整個社區都感興趣的新聞，將會在 $1 新聞工作組的成員審核之後，出現在 $1 的首頁上。<P>您可以包括URL，但是不需要使用HTML標記。<P>以 http:// 開頭的 URLs 都會自動變成可點擊的
 news_submit	section	新聞
-news_submit	subject	標題
-news_submit	submit	提交
 news_submit	title	爲專案 $1 發佈新聞
-news_utils	archive	新聞存檔
+news_submit	cannot	除非您是專案管理員，否則不能發佈該專案的新聞
+news_submit	cannotadmin	從news專案中發佈新聞是不允許的。
+news_submit	forproject	爲專案
+news_submit	subject	標題
+news_submit	details	細節
+news_submit	errorinsert	插入操作出錯
+news_submit	errorboth	錯誤 - 標題和正文都是必須的
+news_submit	newsadded	新聞已添加
+
+news_submit	submit	提交
 news_utils	nonews	沒有發現新聞條目
-news_utils	readmore	閱讀&nbsp;更多/評論
+news_utils	archive	新聞存檔
 news_utils	submit	提交新聞
+news_utils	readmore	閱讀&nbsp;更多/評論
 people	about_blurb	<P> $1 尋求幫助的文章將存活兩個星期，或者被用戶主動關閉。（專案管理員可能總是在過期前重復張貼）<P>通過分類目錄瀏覽並發現需要您幫助的專案。<P>如果您是專案管理員，請登錄並通過您的專案管理頁來發佈需要幫助的資訊。<P>如果需要增加一種新的工作分類，請向支援管理員提交一個請求。<P>
+people	section	需要幫助的專案
+people	title	需要幫助的系統
+people	here_is_list_position	以下是這個專案能夠提供的職位列表
+people	click_job_titles	點擊職位名稱來獲得更詳細的描述
+people	last_posts	最新的文章
+people	more_latest_posts	更多最新的文章
+people	category	分類
+people	short_description	短描述
+people	long_description	長描述
+people	status	狀態
+people	error_inserting	錯誤 － 無法插入技能目錄
+people	added_skill	加入到技能目錄
+people	error_skill_already	錯誤 － 技能已經在您的目錄當中
+people	must_be_loggin	請先登錄
+people	must_select_a_skill	必須選擇一個技能編號
+people	skill	技能
+people	level	等級
+people	experience	經驗
+people	no_skill_inventory_setup_up	沒有設置技能目錄
 people	action	動作
 people	add_new_skill	增加新的技能
 people	add_skill	增加技能
-people	added_skill	加入到技能目錄
-people	category	分類
-people	click_job_titles	點擊職位名稱來獲得更詳細的描述
-people	date_opened	提交日期
-people	error_inserting	錯誤 － 無法插入技能目錄
-people	error_skill_already	錯誤 － 技能已經在您的目錄當中
-people	experience	經驗
-people	here_is_list_position	以下是這個專案能夠提供的職位列表
 people	invalid_id	無效的編號
-people	last_posts	最新的文章
-people	level	等級
-people	long_description	長描述
-people	more_latest_posts	更多最新的文章
-people	must_be_loggin	請先登錄
-people	must_select_a_skill	必須選擇一個技能編號
 people	no_categories_found	沒有發現分類
-people	no_skill_inventory_setup_up	沒有設置技能目錄
-people	none_found	沒有發現
-people	project	$1 專案
-people	section	需要幫助的專案
-people	short_description	短描述
-people	skill	技能
-people	status	狀態
-people	title	需要幫助的系統
+people	date_opened	提交日期
 people	title_array	標題
+people	project	$1 專案
+people	none_found	沒有發現
 people_admin	section	尋求幫助的專案
 people_admin	title	尋求幫助管理
 people_admin_people_cat	section	尋求幫助管理
@@ -678,407 +678,792 @@ people_admin_people_skills	section	尋求幫助管理
 people_admin_people_skills	title	增加工作技能
 people_cat	section	需要幫助
 people_cat	title	按分類排序的工作
-people_createjob	continue	繼續 >>
-people_createjob	explains	首先填寫以下各項。當點擊繼續時，將會展示給您這個工作所需要的技能和經驗登記列表。
 people_createjob	section	尋求幫助的專案
 people_createjob	title	創建新工作
+people_createjob	explains	首先填寫以下各項。當點擊繼續時，將會展示給您這個工作所需要的技能和經驗登記列表。
+people_createjob	continue	繼續 >>
+people_editjob	section	尋求幫助的專案
+people_editjob	title	編輯工作
 people_editjob	error_missing	錯誤 － 缺少資訊
 people_editjob	fill_in	請填寫所有必須的項
-people_editjob	finished	完成
 people_editjob	job_insert_failed	插入JOB失敗
 people_editjob	job_insert_ok	工作添加成功
-people_editjob	job_skill_delete_no	工作技能刪除失敗
-people_editjob	job_skill_delete_no_wrong_id	工作技能刪除失敗 － 錯誤的專案編號
-people_editjob	job_skill_delete_ok	工作技能刪除成功
-people_editjob	job_skill_update_no	工作技能更新失敗
-people_editjob	job_skill_update_no_wrong_id	工作技能更新失敗 － 錯誤的專案編號
-people_editjob	job_skill_update_ok	工作技能更新成功
 people_editjob	job_update_no	工作更新失敗
-people_editjob	job_update_no_wrong_id	工作更新失敗 － 錯誤的專案編號
 people_editjob	job_update_ok	工作更新成功
-people_editjob	no_such	該專案沒有這樣的文章
+people_editjob	job_update_no_wrong_id	工作更新失敗 － 錯誤的專案編號
+people_editjob	job_skill_update_no	工作技能更新失敗
+people_editjob	job_skill_update_ok	工作技能更新成功
+people_editjob	job_skill_update_no_wrong_id	工作技能更新失敗 － 錯誤的專案編號
+people_editjob	job_skill_delete_no	工作技能刪除失敗
+people_editjob	job_skill_delete_ok	工作技能刪除成功
+people_editjob	job_skill_delete_no_wrong_id	工作技能刪除失敗 － 錯誤的專案編號
 people_editjob	posting_fetch_failed	無法獲取文章
-people_editjob	section	尋求幫助的專案
+people_editjob	no_such	該專案沒有這樣的文章
 people_editjob	skill_explains	<p>現在您可以編輯/改變這個文章的技能列表。開發者可以根據您的技能要求列表來判斷他們是否符合您的要求。 </p><p>您的貼子在兩星期後自動關閉。</p>
-people_editjob	title	編輯工作
 people_editjob	update_description	更新描述
-people_editprofile	about_to_delete	您正準備刪除以下技能：$1
-people_editprofile	add_new_skill	增加新技能
-people_editprofile	add_this_skill	增加這個技能
-people_editprofile	all_fields_required	所有項都必須填寫！
-people_editprofile	are_you_sure	您<strong>確定</strong> 您希望繼續？
-people_editprofile	cancel_skills_update	取消技能的更新
-people_editprofile	change_required_fields	改變必須的項，然後按下本頁底端的"完成"按鈕
-people_editprofile	confirm_delete	確認刪除
-people_editprofile	confirm_skill_delete	確認刪除該技能
-people_editprofile	edit_delete_your_skills	編輯/刪除您的技能
-people_editprofile	edit_public_permissions	編輯公共許可權
-people_editprofile	edit_skills	編輯技能
-people_editprofile	edit_your_profile	編輯您的個人能力
-people_editprofile	end_date	結束日期
-people_editprofile	error	錯誤 － 缺少資訊
-people_editprofile	failed_delete_skills	刪除技能失敗
-people_editprofile	failed_to_add_skill	增加技能失敗
-people_editprofile	failed_update_skills	更新技能失敗
-people_editprofile	fill_all_required_fields	技能 $1 更新成功
-people_editprofile	following_options	以下選項決定別人是否可以看見您的技能。就算他們不能看見您的技能，您也可以一樣的輸入您的技能。
-people_editprofile	from_skills_database	這個動作無法在技能資料庫中完成。
-people_editprofile	keywords	關鍵字
-people_editprofile	keywords_max_255_chars	關鍵字（不多於255字元）
-people_editprofile	no_skill_types_in_database	資料庫中沒有技能類型(skills_data_types table)
-people_editprofile	no_skill_types_in_database_inform	資料庫中沒有技能類型 - inform system administrator
-people_editprofile	no_skills_selected	沒有選擇技能進行編輯
-people_editprofile	no_skills_selected_to_delete	沒有選擇技能進行刪除
-people_editprofile	no_such_user	沒有這個用戶
-people_editprofile	profile_title	標題
-people_editprofile	publicly_viewable	是否對公衆可見
+people_editjob	finished	完成
 people_editprofile	section	需要幫助的專案
-people_editprofile	skill_added_ok	增加技能成功
-people_editprofile	skill_delete_successfully	技能 $1 刪除成功
-people_editprofile	skill_deletion_cancelled	取消技能刪除
-people_editprofile	skills_edit	編輯技能
-people_editprofile	start_date	開始日期
-people_editprofile	title	編輯您的個人能力
-people_editprofile	title_max_100_chars	標題（不多於100字元）
-people_editprofile	type	類型
 people_editprofile	update_failed	用戶更新失敗
 people_editprofile	update_ok	用戶更新成功
-people_editprofile	update_permission	更新許可權
+people_editprofile	title	編輯您的個人能力
+people_editprofile	error	錯誤 － 缺少資訊
+people_editprofile	fill_all_required_fields	請填寫所有必須的項
+people_editprofile	failed_to_add_skill	增加技能失敗
+people_editprofile	skill_added_ok	增加技能成功
+people_editprofile	no_skills_selected	沒有選擇技能進行編輯
+people_editprofile	failed_update_skills	更新技能失敗
+people_editprofile	fill_all_required_fields	技能 $1 更新成功
+people_editprofile	skills_edit	編輯技能
+people_editprofile	edit_skills	編輯技能
+people_editprofile	change_required_fields	改變必須的項，然後按下本頁底端的"完成"按鈕
+people_editprofile	cancel_skills_update	取消技能的更新
+people_editprofile	no_skills_selected_to_delete	沒有選擇技能進行刪除
+people_editprofile	failed_delete_skills	刪除技能失敗
+people_editprofile	skill_delete_successfully	技能 $1 刪除成功
+people_editprofile	confirm_skill_delete	確認刪除該技能
+people_editprofile	confirm_delete	確認刪除
+people_editprofile	about_to_delete	您正準備刪除以下技能：$1
+people_editprofile	from_skills_database	這個動作無法在技能資料庫中完成。
+people_editprofile	are_you_sure	您<strong>確定</strong> 您希望繼續？
+people_editprofile	skill_deletion_cancelled	取消技能刪除
+people_editprofile	edit_your_profile	編輯您的個人能力
 people_editprofile	user_fetch_failed	獲取用戶失敗
+people_editprofile	no_such_user	沒有這個用戶
+people_editprofile	edit_public_permissions	編輯公共許可權
+people_editprofile	following_options	以下選項決定別人是否可以看見您的技能。就算他們不能看見您的技能，您也可以一樣的輸入您的技能。
+people_editprofile	publicly_viewable	是否對公衆可見
+people_editprofile	update_permission	更新許可權
+people_editprofile	no_skill_types_in_database	資料庫中沒有技能類型(skills_data_types table)
+people_editprofile	no_skill_types_in_database_inform	資料庫中沒有技能類型 - inform system administrator
+people_editprofile	add_new_skill	增加新技能
 people_editprofile	you_can_enter_new_skills	您可以輸入在這兒學到的新技能。請輸入儘量準確的開始和結束時間。
+people_editprofile	all_fields_required	所有項都必須填寫！
+people_editprofile	add_this_skill	增加這個技能
+people_editprofile	edit_delete_your_skills	編輯/刪除您的技能
+people_editprofile	type	類型
+people_editprofile	profile_title	標題
+people_editprofile	start_date	開始日期
+people_editprofile	end_date	結束日期
+people_editprofile	keywords	關鍵字
+people_editprofile	title_max_100_chars	標題（不多於100字元）
+people_editprofile	keywords_max_255_chars	關鍵字（不多於255字元）
 people_help_wanted_latest	title	尋求幫助最新文章
 people_helpwanted_latest	section	尋求幫助的專案
 people_helpwanted_latest	title	最新文章
 people_proj	section	尋求幫助的專案
 people_proj	title	$1 中尋求幫助的專案
-people_viewjob	contact_info	聯繫資訊
-people_viewjob	fetch_failed	文章獲取失敗
-people_viewjob	for_project	爲專案
-people_viewjob	no_such_posting	該專案沒有這個文章
-people_viewjob	open_date	開始日期
-people_viewjob	posting_id_not_found	文章編號沒有發現
-people_viewjob	required_skills	需要技能
 people_viewjob	section	尋求幫助的專案
 people_viewjob	title	$1 需要 $2
+people_viewjob	posting_id_not_found	文章編號沒有發現
 people_viewjob	view_a_job	查看工作
-people_viewprofile	no_such_user	沒有這個用戶
+people_viewjob	fetch_failed	文章獲取失敗
+people_viewjob	no_such_posting	該專案沒有這個文章
+people_viewjob	contact_info	聯繫資訊
+people_viewjob	open_date	開始日期
+people_viewjob	for_project	爲專案
+people_viewjob	required_skills	需要技能
 people_viewprofile	section	用戶個人能力
-people_viewprofile	set_private	用戶將他/她的個人能力設置爲私有
-people_viewprofile	skills_profile_for	技能能力
 people_viewprofile	title	查看用戶個人能力
 people_viewprofile	user_fetch_failed	獲取用戶失敗
-pm	admin	管理
-pm	any	任何
-pm	assigned_to	分配給
-pm	cat_any	Any
-pm	category	分類
-pm	date_note		如果您試圖創建一個依賴於其他任務的新任務，而這個新任務的開始日期比那些任務的結束日期要早，系統將改變您的開始/結束日期。
-pm	dependent	依賴於任務
-pm	dependent_note			您應該只選擇那些只有完成了才能開始這個任務的任務。
-pm	details	任務細節
-pm	end_date	結束日期
-pm	hours	估計小時數
+people_viewprofile	no_such_user	沒有這個用戶
+people_viewprofile	set_private	用戶將他/她的個人能力設置爲私有
+people_viewprofile	skills_profile_for	技能能力
+pm	section	專案： $1 
+pm	title	專案/任務管理：子專案和任務
 pm	intro	選擇某個子專案進行瀏覽/編輯/增加任務。
-pm	no_tasks_found	沒有發現匹配的任務
-pm	no_tasks_found_text	使用上面的連接增加任務
 pm	noprj	<H1>沒有發現子專案</H1><P><B>沒有設置子專案，或者您沒有許可權查看<P><FONT COLOR=RED>專案管理員可以通過專案管理頁進行設置</FONT></B>
+pm	category	分類
+pm	start_date	開始日期
+pm	end_date	結束日期
 pm	percent_complete	完成度百分比
 pm	priority	優先順序
-pm	section	專案： $1
-pm	start_date	開始日期
-pm	status	狀態
 pm	summary	任務摘要
+pm	details	任務細節
+pm	assigned_to	分配給
+pm	dependent	依賴於任務
+pm	hours	估計小時數
+pm	status	狀態
 pm	task_id	任務編號
-pm	tech_any	任何
-pm	title	專案/任務管理：子專案和任務
-pm	unassigned	沒有分配
+pm	date_note		如果您試圖創建一個依賴於其他任務的新任務，而這個新任務的開始日期比那些任務的結束日期要早，系統將改變您的開始/結束日期。
 pm	view_calendar	查看日曆
-pm_addtask	task_added_relationship	增加追蹤關係成功
-pm_addtask	task_created_successfully	任務創建成功
-pm_addtask	task_updated_successfully	任務更新成功
+pm	dependent_note			您應該只選擇那些只有完成了才能開始這個任務的任務。
+pm	unassigned	沒有分配
+pm	any	任何
+pm	tech_any	任何
+pm	admin	管理
+pm	cat_any	Any
+pm	no_tasks_found	沒有發現匹配的任務
+pm	no_tasks_found_text	使用上面的連接增加任務
 pm_addtask	title	增加新任務
 pm_admin	title	任務管理器：管理
 pm_admin_change_status	section	任務管理器管理
 pm_admin_change_status	title	更新資訊
-pm_admin_projects	add_categories	增加分類
+pm_admin_projects	section	任務管理器管理
+pm_admin_projects	title	增加子專案
+pm_admin_projects	project_inserted	專案已插入
+pm_admin_projects	add_categories_title	增加分類
+pm_admin_projects	project_inserted	專案已插入
+pm_admin_projects	category_inserted	分類已插入
+pm_admin_projects	category_updated	分類已更新
+pm_admin_projects	updated_successfully	更新成功 ";
 pm_admin_projects	add_categories_title	增加分類'
-pm_admin_projects	add_categories_to	增加分類到
+pm_admin_projects	add_categories	增加分類到
+pm_admin_projects	id	編號
+pm_admin_projects	no_categories	沒有定義分類
+pm_admin_projects	category_name	新分類名稱
+pm_admin_projects	category_note	一旦您增加了一個分類，它就無法被刪除
+pm_admin_projects	add_categories	增加分類
+pm_admin_projects	modify_category	更改分類
+pm_admin_projects	category_name	分類名稱
+pm_admin_projects	category_note2	不建議您更改分類名稱，因爲其他東西依賴於它。當您修改分類名稱時，所有其他相關的項都會被更改成新的名字。</font></strong>
+pm_admin_projects	add_subprojects	增加子專案
+pm_admin_projects	existing_subprojects	已存在的子專案
+pm_admin_projects	no_subprojects	該專案沒有子專案
+pm_admin_projects	projects_intro	增加新的專案到專案/任務管理器。<strong>這與增加一個任務到專案不一樣。</strong>
+pm_admin_projects	is_public	是否公開？
+pm_admin_projects	project_name	新專案名稱
+pm_admin_projects	description	描述
+pm_admin_projects	send_updates	發送所有的更新到
+pm_admin_projects	change_project_title	更改專案/任務管理器狀態
+pm_admin_projects	change_project_intro	您可以通過這個表單更改一個現有的任務。請注意私有專案仍然能夠被專案成員查看到，雖然不是被完全公開。<p>
 pm_admin_projects	add_edit_categories	增加/編輯分類
+pm_admin_projects	admin_title	專案/任務管理器管理
 pm_admin_projects	add_project	增加新專案
 pm_admin_projects	add_project_intro	增加一個包括一系列任務的專案。這和創建一個新任務是不同的。
-pm_admin_projects	add_subprojects	增加子專案
-pm_admin_projects	admin_title	專案/任務管理器管理
-pm_admin_projects	category_inserted	分類已插入
-pm_admin_projects	category_name	分類名稱
-pm_admin_projects	category_note	一旦您增加了一個分類，它就無法被刪除
-pm_admin_projects	category_note2	不建議您更改分類名稱，因爲其他東西依賴於它。當您修改分類名稱時，所有其他相關的項都會被更改成新的名字。</font></strong>
-pm_admin_projects	category_updated	分類已更新
-pm_admin_projects	change_project_intro	您可以通過這個表單更改一個現有的任務。請注意私有專案仍然能夠被專案成員查看到，雖然不是被完全公開。<p>
-pm_admin_projects	change_project_title	更改專案/任務管理器狀態
-pm_admin_projects	description	描述
-pm_admin_projects	edit_update	編輯/更新專案
-pm_admin_projects	existing_subprojects	已存在的子專案
-pm_admin_projects	id	編號
-pm_admin_projects	is_public	是否公開？
-pm_admin_projects	modify_category	更改分類
-pm_admin_projects	no_categories	沒有定義分類
 pm_admin_projects	no_projects_found	<h2>沒有發現專案</h2><p>該專案沒有子專案。您可以通過上面"增加新專案"的連接來增加新的子專案。
-pm_admin_projects	no_subprojects	該專案沒有子專案
-pm_admin_projects	project_inserted	專案已插入
-pm_admin_projects	project_name	新專案名稱
+pm_admin_projects	edit_update	編輯/更新專案
 pm_admin_projects	project_title	標題
-pm_admin_projects	projects_intro	增加新的專案到專案/任務管理器。<strong>這與增加一個任務到專案不一樣。</strong>
-pm_admin_projects	section	任務管理器管理
-pm_admin_projects	send_updates	發送所有的更新到
-pm_admin_projects	title	增加子專案
+pm_admin_projects	add_categories_to	增加分類到
 pm_browse_custom	section	任務管理器
 pm_browse_custom	title	瀏覽定制的任務
 pm_browse_my	section	專案 $1 的任務管理器
 pm_browse_my	title	瀏覽我的任務
 pm_browse_open	section	任務管理器
 pm_browse_open	title	瀏覽開放的任務
+pm_browsetask	title	瀏覽任務
 pm_browsetask	browse	瀏覽
+pm_browsetask	previous	前50
 pm_browsetask	next	後50
 pm_browsetask	overdue_tasks	* 表示逾期任務
-pm_browsetask	previous	前50
-pm_browsetask	title	瀏覽任務
-pm_detailtask	assigned_to	分配給
+pm_detailtask	section	任務管理器
+pm_detailtask	title	任務細節
+pm_detailtask	submitted_by	提交人
 pm_detailtask	category	分類
-pm_detailtask	dependend_on_task	依賴於任務
-pm_detailtask	end_date	結束日期
-pm_detailtask	hours	小時
-pm_detailtask	original_comment	初始評論
 pm_detailtask	pct_complete	完成度百分比
 pm_detailtask	priority	優先順序
-pm_detailtask	section	任務管理器
 pm_detailtask	start_date	開始日期
-pm_detailtask	status	狀態
-pm_detailtask	submitted_by	提交人
+pm_detailtask	end_date	結束日期
 pm_detailtask	task_summary	任務摘要
-pm_detailtask	title	任務細節
-pm_ganttpage	assignee	被分配人
-pm_ganttpage	days	天
-pm_ganttpage	months	月
-pm_ganttpage	resolution	解析度
-pm_ganttpage	size	大小
-pm_ganttpage	sort_on	排序
-pm_ganttpage	weeks	周
-pm_include_grouphtml	add_task	增加任務
-pm_include_grouphtml	admin	管理
-pm_include_grouphtml	browse_task	瀏覽任務
-pm_include_grouphtml	error_disabled	專案關閉了任務管理功能
-pm_include_grouphtml	gantt_chart	甘特圖
-pm_include_grouphtml	not_started	沒有開始
-pm_include_grouphtml	project	專案
-pm_include_grouphtml	reporting	報表
-pm_include_taskhtml	by	作者
-pm_include_taskhtml	comment	評論
-pm_include_taskhtml	date	日期
-pm_include_taskhtml	depend_info	依賴本任務的任務
-pm_include_taskhtml	field	域
-pm_include_taskhtml	followups	回復
-pm_include_taskhtml	no_changes	沒有被改動
-pm_include_taskhtml	no_comments	沒有評論
-pm_include_taskhtml	no_depend_info	沒有任務依賴於本任務
-pm_include_taskhtml	no_followups	沒有回復
-pm_include_taskhtml	no_tracker_items	沒有相關的追蹤項被添加
-pm_include_taskhtml	old_value	舊的值
-pm_include_taskhtml	open_date	開放日期
-pm_include_taskhtml	related_items	相關的追蹤項
-pm_include_taskhtml	remove_relation	移除關係
-pm_include_taskhtml	task_history	任務變更歷史
-pm_include_taskhtml	tracker	追蹤
+pm_detailtask	original_comment	初始評論
+pm_detailtask	assigned_to	分配給
+pm_detailtask	dependend_on_task	依賴於任務
+pm_detailtask	hours	小時
+pm_detailtask	status	狀態
+pm_modtask	title	修改任務
+pm_modtask	submitted_by	提交人
+pm_modtask	original_comment	初始評論
 pm_modtask	add_comment	增加評論
 pm_modtask	assignee	被指定人
-pm_modtask	original_comment	初始評論
 pm_modtask	sort_on	排序
-pm_modtask	submitted_by	提交人
-pm_modtask	title	修改任務
-pm_projectcategory	required_fields	專案分類：需要名字和被指定人
-pm_projectgroup	error_min_desc_length	文件描述不少於10個字元
+pm_reporting	title	任務報表系統
+pm_reporting	aging_report	按時間報表
+pm_reporting	by_tech	按人員報表
+pm_reporting	by_subproject	按子專案報表
+pm_reporting	average_duration	已完成任務的平均時間（天）
+pm_reporting	started_tasks	已開始的任務數
+pm_reporting	not_completed	未完成的任務數
+pm_reporting	tasks_by_category	按分類統計的任務
+pm_reporting	open_tasks_by_category	按分類統計的開放任務
+pm_reporting	all_tasks_by_category	按分類統計的所有任務
+pm_reporting	not_completed	未完成的任務數
+pm_reporting	started_tasks	已開始的任務數
+pm_reporting	average_duration	已完成任務的平均時間（天）
+pm_reporting	tasks_by_technician	按人統計的任務
+pm_reporting	open_tasks_by_technician	按人統計的開放任務
+pm_reporting	all_tasks_by_technician	按人統計的所有任務
+pm_reporting	report_note	請注意，一個任務可能被分配給多個人。這些任務每次都被計算在內。</p>
 pm_projectgroup	error_min_name_length	標題不少於5個字元
+pm_projectgroup	error_min_desc_length	文件描述不少於10個字元
 pm_projectgroup	none_found	沒有發現專案組
+pm_projectcategory	required_fields	專案分類：需要名字和被指定人
 pm_projecttask	circular_dependency	發現迴圈依賴'
+pm_projecttask	mail_notice			任務 # $1 已被更新\n\n專案: $2\n子專案: $3\n摘要: $4\n完成度: $5\n狀態: $6\n\n描述: $7
+pm_projecttask	mail_followups_title	\n\n回復
 pm_projecttask	mail_followups_body	\n日期: $1\n作者: $2\n\n評論:\n$3
 pm_projecttask	mail_followups_footer	獲取更多資訊，請訪問:
 pm_projecttask	mail_followups_subject	任務 #
-pm_projecttask	mail_followups_title	\n\n回復
-pm_projecttask	mail_notice			任務 # $1 已被更新\n\n專案: $2\n子專案: $3\n摘要: $4\n完成度: $5\n狀態: $6\n\n描述: $7
-pm_reporting	aging_report	按時間報表
-pm_reporting	all_tasks_by_category	按分類統計的所有任務
-pm_reporting	all_tasks_by_technician	按人統計的所有任務
-pm_reporting	average_duration	已完成任務的平均時間（天）
-pm_reporting	by_subproject	按子專案報表
-pm_reporting	by_tech	按人員報表
-pm_reporting	not_completed	未完成的任務數
-pm_reporting	open_tasks_by_category	按分類統計的開放任務
-pm_reporting	open_tasks_by_technician	按人統計的開放任務
-pm_reporting	report_note	請注意，一個任務可能被分配給多個人。這些任務每次都被計算在內。</p>
-pm_reporting	started_tasks	已開始的任務數
-pm_reporting	tasks_by_category	按分類統計的任務
-pm_reporting	tasks_by_technician	按人統計的任務
-pm_reporting	title	任務報表系統
+pm_include_grouphtml	project	專案
+pm_include_grouphtml	add_task	增加任務
+pm_include_grouphtml	browse_task	瀏覽任務
+pm_include_grouphtml	gantt_chart	甘特圖
+pm_include_grouphtml	reporting	報表
+pm_include_grouphtml	admin	管理
+pm_include_grouphtml	not_started	沒有開始
+pm_include_grouphtml	error_disabled	專案關閉了任務管理功能
+pm_include_taskhtml	depend_info	依賴本任務的任務
+pm_include_taskhtml	no_depend_info	沒有任務依賴於本任務
+pm_include_taskhtml	no_tracker_items	沒有相關的追蹤項被添加
+pm_include_taskhtml	no_comments	沒有評論
+pm_include_taskhtml	no_changes	沒有被改動
+pm_include_taskhtml	related_items	相關的追蹤項
+pm_include_taskhtml	tracker	追蹤
+pm_include_taskhtml	open_date	開放日期
+pm_include_taskhtml	remove_relation	移除關係
+pm_include_taskhtml	followups	回復
+pm_include_taskhtml	comment	評論
+pm_include_taskhtml	date	日期
+pm_include_taskhtml	by	作者
+pm_include_taskhtml	task_history	任務變更歷史
+pm_include_taskhtml	field	域
+pm_include_taskhtml	old_value	舊的值
+pm_include_taskhtml	no_followups	沒有回復
+pm_addtask	task_created_successfully	任務創建成功
+pm_addtask	task_updated_successfully	任務更新成功
+pm_addtask	task_added_relationship	增加追蹤關係成功
+pm_ganttpage	weeks	周
+pm_ganttpage	months	月
+pm_ganttpage	days	天
+pm_ganttpage	sort_on	排序
+pm_ganttpage	resolution	解析度
+pm_ganttpage	size	大小
+pm_ganttpage	assignee	被分配人
 pm_task	create_successfully	任務創建成功
-project_admin	add_user	增加用戶
-project_admin	docmanager_admin	文件管理員
-project_admin	download_tarball	下載您的每夜CVS Tree Tarball
-project_admin	edit_file_releases	編輯/增加文件發佈
-project_admin	edit_member_permissions	編輯成員許可權
-project_admin	file_releases	文件發佈
-project_admin	forum_admin	論壇管理員
-project_admin	group_members	組成員
-project_admin	homepage_link	主頁鏈結
-project_admin	mail_admin	郵件管理員
-project_admin	news_admin	新聞管理員
-project_admin	packages	套裝軟體
-project_admin	project_information	專案其他資訊
 project_admin	section	任務： $1
-project_admin	shell_server	專案shell (SSH) 伺服器
-project_admin	shell_server_group_directory	shell 伺服器上的專案目錄：
-project_admin	short_description	短描述
-project_admin	task_manager_admin	任務管理員
 project_admin	title	專案管理： $1
-project_admin	tool_admin	工具管理員
-project_admin	tracker_admin	追蹤管理員
-project_admin	trove_categorization	Trove 分類：
-project_admin	unix_name	Unix名稱
 project_admin	user_added	用戶添加成功
 project_admin	user_removed	用戶刪除成功
+project_admin	project_information	專案其他資訊
+project_admin	short_description	短描述
+project_admin	homepage_link	主頁鏈結
+project_admin	shell_server	專案shell (SSH) 伺服器
+project_admin	shell_server_group_directory	shell 伺服器上的專案目錄： 
 project_admin	www_directory	shell伺服器上的www目錄：
+project_admin	download_tarball	下載您的每夜CVS Tree Tarball
+project_admin	trove_categorization	Trove 分類：
+project_admin	group_members	組成員
+project_admin	add_user	增加用戶
+project_admin	edit_member_permissions	編輯成員許可權
+project_admin	tool_admin	工具管理員
+project_admin	tracker_admin	追蹤管理員
+project_admin	docmanager_admin	文件管理員
+project_admin	mail_admin	郵件管理員
+project_admin	news_admin	新聞管理員
+project_admin	task_manager_admin	任務管理員
+project_admin	forum_admin	論壇管理員
+project_admin	file_releases	文件發佈
+project_admin	edit_file_releases	編輯/增加文件發佈
+project_admin	packages	套裝軟體
+project_admin	unix_name	Unix名稱
+project_admin_database	title	資料庫資訊
+project_admin_database	confirm_deletion	點擊這裏確認刪除
+project_admin_database	confirm_delete	確認刪除
 project_admin_database	add_new_database	增加新資料庫
 project_admin_database	add_new_database_info	點擊"創建" 將把資料庫的創建放進進度表，同時把詳細資訊用email通知專案管理員。project_admin_database	database_type	資料庫類型
-project_admin_database	cannot_add	無法增加資料庫分類
-project_admin_database	confirm_delete	確認刪除
-project_admin_database	confirm_deletion	點擊這裏確認刪除
-project_admin_database	confirm_new	確認新密碼
-project_admin_database	create	創建
-project_admin_database	current_databases	當前資料庫
-project_admin_database	database_created	資料庫創建已加入進度表
 project_admin_database	db_type	資料庫類型
-project_admin_database	maximum_databases_allocated	所有類型的資料庫最大值都被分配了
-project_admin_database	new_password	新密碼
-project_admin_database	no_databases	當前專案沒有分配資料庫
-project_admin_database	operations	操作
 project_admin_database	state	狀態
-project_admin_database	title	資料庫資訊
+project_admin_database	new_password	新密碼
+project_admin_database	confirm_new	確認新密碼
+project_admin_database	operations	操作
 project_admin_database	update	更新
-project_admin_editgroupinfo	active_features	活動的特性
-project_admin_editgroupinfo	enable_anonymous_cvs	允許匿名訪問CVS
-project_admin_editgroupinfo	enable_pserver	允許pserver
-project_admin_editgroupinfo	group_name	描述性的專案名稱
-project_admin_editgroupinfo	group_updated	專案資訊更新
-project_admin_editgroupinfo	homepage_link	主頁鏈結：
-project_admin_editgroupinfo	new_doc	新文件提交
-project_admin_editgroupinfo	new_doc_info	如果您願意，您可以提供缺省的email位址，這樣所有的提交都會發送到該郵箱
-project_admin_editgroupinfo	send_on_all_updates	(發送所有更新)
-project_admin_editgroupinfo	short_description	短描述（最多255個字元，HTML標記都會當做普通文本顯示）
+project_admin_database	current_databases	當前資料庫
+project_admin_database	no_databases	當前專案沒有分配資料庫
+project_admin_database	maximum_databases_allocated	所有類型的資料庫最大值都被分配了
+
+project_admin_database	cannot_add	無法增加資料庫分類
+project_admin_database	create	創建
+project_admin_database	database_created	資料庫創建已加入進度表
 project_admin_editgroupinfo	title	編輯專案資訊
-project_admin_editgroupinfo	use_docman	使用文件產生器
-project_admin_editgroupinfo	use_forums	使用論壇
-project_admin_editgroupinfo	use_frs	使用文件發佈系統
-project_admin_editgroupinfo	use_ftp	使用FTP
+project_admin_editgroupinfo	group_updated	專案資訊更新
+project_admin_editgroupinfo	group_name	描述性的專案名稱
+project_admin_editgroupinfo	short_description	短描述（最多255個字元，HTML標記都會當做普通文本顯示）
+project_admin_editgroupinfo	homepage_link	主頁鏈結：
+project_admin_editgroupinfo	active_features	活動的特性
 project_admin_editgroupinfo	use_mailing_lists	使用郵件列表
-project_admin_editgroupinfo	use_news	使用新聞
-project_admin_editgroupinfo	use_pm	使用CVS
-project_admin_editgroupinfo	use_stats	使用統計
 project_admin_editgroupinfo	use_surveys	使用研究
+project_admin_editgroupinfo	use_forums	使用論壇
+project_admin_editgroupinfo	use_pm	使用專案/任務管理器
+project_admin_editgroupinfo	use_pm	使用CVS
+project_admin_editgroupinfo	enable_pserver	允許pserver
+project_admin_editgroupinfo	enable_anonymous_cvs	允許匿名訪問CVS
+project_admin_editgroupinfo	use_news	使用新聞
+project_admin_editgroupinfo	use_docman	使用文件產生器
+project_admin_editgroupinfo	use_ftp	使用FTP
 project_admin_editgroupinfo	use_tracker	使用追蹤
-project_admin_editimages	add_data	增加多媒體資料
-project_admin_editimages	add_file	增加文件
-project_admin_editimages	del	刪除
-project_admin_editimages	description	描述
-project_admin_editimages	dims	Dims
-project_admin_editimages	edit	編輯
+project_admin_editgroupinfo	use_frs	使用文件發佈系統
+project_admin_editgroupinfo	use_stats	使用統計
+project_admin_editgroupinfo	new_doc_info	如果您願意，您可以提供缺省的email位址，這樣所有的提交都會發送到該郵箱
+project_admin_editgroupinfo	new_doc	新文件提交
+project_admin_editgroupinfo	send_on_all_updates	(發送所有更新)
+project_admin_editimages	title	編輯多媒體資料
 project_admin_editimages	error_length	錯誤 - 文件必須大於20位元組，小魚 256000位元組
+project_admin_editimages	file_uploaded	多媒體文件已上傳
+project_admin_editimages	required_fields	檔案名和描述都是必須的
 project_admin_editimages	file_deleted	多媒體文件已刪除
 project_admin_editimages	file_description_required	需要文件描述
-project_admin_editimages	file_uploaded	多媒體文件已上傳
-project_admin_editimages	id	編號
-project_admin_editimages	intro	您可以存儲最多不超過 $1 MB 的多媒體資料（點陣圖或是向量圖，音效檔案，3D模型）到資料庫中。使用本頁進行增加/刪除專案多媒體資料。
-project_admin_editimages	local_filename	本地檔案名
-project_admin_editimages	mime_type	MIME 類型
-project_admin_editimages	name	名字
 project_admin_editimages	properties_updated	多媒體文件資訊已更新
+project_admin_editimages	intro	您可以存儲最多不超過 $1 MB 的多媒體資料（點陣圖或是向量圖，音效檔案，3D模型）到資料庫中。使用本頁進行增加/刪除專案多媒體資料。
 project_admin_editimages	replace	使用新文件替換(可選)
-project_admin_editimages	required_fields	檔案名和描述都是必須的
-project_admin_editimages	size	大小
-project_admin_editimages	title	編輯多媒體資料
+project_admin_editimages	description	描述
+project_admin_editimages	mime_type	MIME 類型
+project_admin_editimages	add_data	增加多媒體資料
+project_admin_editimages	local_filename	本地檔案名
+project_admin_editimages	description	描述
+project_admin_editimages	add_file	增加文件
+project_admin_editimages	edit	編輯
+project_admin_editimages	id	編號
 project_admin_editimages	uploaded	上傳
-project_admin_editpackages	add_release	增加發佈
-project_admin_editpackages	added_package	增加套裝軟體
-project_admin_editpackages	create_package	創建這個套裝軟體
-project_admin_editpackages	edit_releases	編輯發佈
-project_admin_editpackages	new_package_name	新軟體包名稱
-project_admin_editpackages	no_packages_defined	您沒有定義套裝軟體
-project_admin_editpackages	no_packages_status	狀態
-project_admin_editpackages	package_name	套裝軟體名稱
-project_admin_editpackages	packages_info	<h3>套裝軟體</h3><p>您可以使用套裝軟體來把不同的文件一起成組發佈，或者如果您願意，分開發佈也可以。<p><H4>一個可參考的套裝軟體：</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>您的套裝軟體：</H4><p><ol><li>定義您的套裝軟體</li><li>創建套裝軟體的新發佈</li></ol><p><h3>套裝軟體的發佈</h3><p>一個套裝軟體發佈可以包含多個文件<p><H4>發佈的例子:</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>您可以通過點擊套裝軟體名稱旁的<strong>增加/編輯發佈</strong>來創建套裝軟體的新發佈。<p>
+project_admin_editimages	name	名字
+project_admin_editimages	mime_type	MIME 類型
+project_admin_editimages	size	大小
+project_admin_editimages	dims	Dims
+project_admin_editimages	description	描述
+project_admin_editimages	del	刪除
+project_admin_editpackages	title	編輯發佈/發佈文件
 project_admin_editpackages	qrs	QRS（快速發佈系統）
 project_admin_editpackages	qrs_a_file	點擊這裏來 $1 快速發佈文件 $2
+project_admin_editpackages	packages_info	<h3>套裝軟體</h3><p>您可以使用套裝軟體來把不同的文件一起成組發佈，或者如果您願意，分開發佈也可以。<p><H4>一個可參考的套裝軟體：</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>您的套裝軟體：</H4><p><ol><li>定義您的套裝軟體</li><li>創建套裝軟體的新發佈</li></ol><p><h3>套裝軟體的發佈</h3><p>一個套裝軟體發佈可以包含多個文件<p><H4>發佈的例子:</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>您可以通過點擊套裝軟體名稱旁的<strong>增加/編輯發佈</strong>來創建套裝軟體的新發佈。<p>
+project_admin_editpackages	no_packages_defined	您沒有定義套裝軟體
 project_admin_editpackages	releases	發佈
-project_admin_editpackages	title	編輯發佈/發佈文件
+project_admin_editpackages	package_name	套裝軟體名稱
+project_admin_editpackages	no_packages_status	狀態
+project_admin_editpackages	add_release	增加發佈
+project_admin_editpackages	edit_releases	編輯發佈
+project_admin_editpackages	new_package_name	新軟體包名稱
+project_admin_editpackages	create_package	創建這個套裝軟體
 project_admin_editpackages	updated_package	更新軟體包
-project_admin_editrelease	add_file	添加這個文件
-project_admin_editrelease	add_files_note	注意：在某些瀏覽器中，您必須在文件上傳對話方塊中選擇文件，然後再點擊"OK"，雙擊則無法上傳文件。</strong></span>
+project_admin_editpackages	added_package	增加套裝軟體
+project_admin_editrelease	title	編輯發佈
+project_admin_editrelease	release_notes_too_small	發佈通知太小了
 project_admin_editrelease	changelog_too_small	更改日誌太小了
 project_admin_editrelease	data_saved	資料已保存
-project_admin_editrelease	delete_file	刪除文件
-project_admin_editrelease	file_deleted	文件已刪除
-project_admin_editrelease	file_list_note	一旦您添加了文件到發佈當中，您<strong>必須</strong>用正確的資訊更新每個文件，否則它們不會正確地顯示在您的下載摘要頁當中。
 project_admin_editrelease	file_released	文件已發佈
-project_admin_editrelease	file_type	文件類型
-project_admin_editrelease	file_type_update	文件類型<br />更新
-project_admin_editrelease	file_updated	文件更新
-project_admin_editrelease	filename_release	檔案名<br />發佈
-project_admin_editrelease	i_am_sure	我確定
-project_admin_editrelease	no_files_in_release	本次發佈沒有文件
-project_admin_editrelease	note	編輯本套裝軟體本次發佈的發佈通知或者更改日誌。這些改動將被更新到本次發佈中的所有文件當中。<br />您可以分別上傳發佈通知和更改日誌，也可以在下面貼在一起。
-project_admin_editrelease	paste_changelog	粘貼更改日誌
-project_admin_editrelease	paste_release_notes	粘貼發佈通知
-project_admin_editrelease	preserve_preformatted	保存我預先格式化的文本
-project_admin_editrelease	processor_type	處理器類型
-project_admin_editrelease	processor_update	處理器<br />發佈日期
+project_admin_editrelease	file_deleted	文件已刪除
+project_admin_editrelease	step_1	第一步：&nbsp;&nbsp; 編輯發佈
 project_admin_editrelease	release_date	發佈日期
 project_admin_editrelease	release_name	發佈名稱
-project_admin_editrelease	release_notes_too_small	發佈通知太小了
 project_admin_editrelease	status	狀態
-project_admin_editrelease	step_1	第一步：&nbsp;&nbsp; 編輯發佈
-project_admin_editrelease	step_2	第二步：增加文件到這次發佈當中</h3><p>現在，選擇一個文件並且上傳到系統當中。文件的大小不能超過站點管理員預先設定的值，缺省是2MB。如果您需要上傳更大的文件，請與站點管理員聯繫。</p>
-project_admin_editrelease	step_3	第三步：編輯這個發佈中的文件
-project_admin_editrelease	submit_refresh	提交/刷新
-project_admin_editrelease	title	編輯發佈
-project_admin_editrelease	update_refresh	更新/刷新
-project_admin_editrelease	upload_change_log	上傳更改日誌
-project_admin_editrelease	upload_new_file	上傳一個新文件
+project_admin_editrelease	note	編輯本套裝軟體本次發佈的發佈通知或者更改日誌。這些改動將被更新到本次發佈中的所有文件當中。<br />您可以分別上傳發佈通知和更改日誌，也可以在下面貼在一起。
 project_admin_editrelease	upload_release_notes	上傳發佈通知
-project_admin_group_trove	title	專案Trove資訊
-project_admin_history	info	這個日誌顯示，誰曾經在何時對您的專案做過大的更改
+project_admin_editrelease	upload_change_log	上傳更改日誌
+project_admin_editrelease	paste_release_notes	粘貼發佈通知
+project_admin_editrelease	paste_changelog	粘貼更改日誌
+project_admin_editrelease	preserve_preformatted	保存我預先格式化的文本
+project_admin_editrelease	submit_refresh	提交/刷新
+project_admin_editrelease	step_2	第二步：增加文件到這次發佈當中</h3><p>現在，選擇一個文件並且上傳到系統當中。文件的大小不能超過站點管理員預先設定的值，缺省是2MB。如果您需要上傳更大的文件，請與站點管理員聯繫。</p>
+project_admin_editrelease	add_files_note	注意：在某些瀏覽器中，您必須在文件上傳對話方塊中選擇文件，然後再點擊"OK"，雙擊則無法上傳文件。</strong></span>
+project_admin_editrelease	upload_new_file	上傳一個新文件
+project_admin_editrelease	file_type	文件類型
+project_admin_editrelease	processor_type	處理器類型
+project_admin_editrelease	add_file	添加這個文件
+project_admin_editrelease	step_3	第三步：編輯這個發佈中的文件
+project_admin_editrelease	no_files_in_release	本次發佈沒有文件
+project_admin_editrelease	file_list_note	一旦您添加了文件到發佈當中，您<strong>必須</strong>用正確的資訊更新每個文件，否則它們不會正確地顯示在您的下載摘要頁當中。
+project_admin_editrelease	filename_release	檔案名<br />發佈
+project_admin_editrelease	processor_update	處理器<br />發佈日期
+project_admin_editrelease	file_type_update	文件類型<br />更新
+project_admin_editrelease	update_refresh	更新/刷新
+project_admin_editrelease	delete_file	刪除文件
+project_admin_editrelease	i_am_sure	我確定
+project_admin_editrelease	file_updated	文件更新
 project_admin_history	title	歷史
+project_admin_history	info	這個日誌顯示，誰曾經在何時對您的專案做過大的更改
 project_admin_newrelease	section	專案 $1 - 管理
 project_admin_newrelease	title	創建新發佈
-project_admin_qrs	changelog	更改日誌
-project_admin_qrs	create_new_package	或者 $1 創建新的套裝軟體 $2
-project_admin_qrs	file_name	檔案名
-project_admin_qrs	file_released	文件發佈：您現在可以選擇編輯發佈
-project_admin_qrs	file_type	文件類型
-project_admin_qrs	no_file_types_available	沒有可用的文件類型
-project_admin_qrs	package_id	套裝軟體編號
-project_admin_qrs	preserve_text	保存我的預格式化文本
-project_admin_qrs	processor_type	處理器類型
-project_admin_qrs	qrs_info	如果您樂意，現在可以 $1 增加文件到發佈 $2 或者編輯這次發佈。</p> <p>請注意文件可能不會馬上顯示在 $3 下載頁 $4。 文件在伺服器間的更新需要時間。
-project_admin_qrs	release_date	發佈日期
-project_admin_qrs	release_file	發佈文件
-project_admin_qrs	release_name	發佈名稱
-project_admin_qrs	release_note	注意：在某些瀏覽器中，您必須在文件上傳對話方塊中選擇文件，然後再點擊"OK"，雙擊則無法上傳文件。
-project_admin_qrs	release_notes	發佈通知
+project_admin_qrs	title	快速發佈系統
+project_admin_qrs	required_release_name	必須定義一個發佈名
+project_admin_qrs	required_package	必須選擇一個套裝軟體
 project_admin_qrs	required_file	必須選擇一個文件
 project_admin_qrs	required_file_type	必須選擇一個文件類型
-project_admin_qrs	required_package	必須選擇一個套裝軟體
 project_admin_qrs	required_processor_type	必須選擇一個處理器類型
-project_admin_qrs	required_release_name	必須定義一個發佈名
 project_admin_qrs	title	發佈新文件版本
+project_admin_qrs	qrs_info	如果您樂意，現在可以 $1 增加文件到發佈 $2 或者編輯這次發佈。</p> <p>請注意文件可能不會馬上顯示在 $3 下載頁 $4。 文件在伺服器間的更新需要時間。
+project_admin_qrs	no_file_types_available	沒有可用的文件類型
+project_admin_qrs	create_new_package	或者 $1 創建新的套裝軟體 $2
+project_admin_qrs	release_name	發佈名稱
+project_admin_qrs	release_date	發佈日期
+project_admin_qrs	file_name	檔案名
+project_admin_qrs	release_note	注意：在某些瀏覽器中，您必須在文件上傳對話方塊中選擇文件，然後再點擊"OK"，雙擊則無法上傳文件。
 project_admin_qrs	upload_new_file	上傳一個新文件
+project_admin_qrs	file_type	文件類型
+project_admin_qrs	processor_type	處理器類型
+project_admin_qrs	release_notes	發佈通知
+project_admin_qrs	changelog	更改日誌
+project_admin_qrs	preserve_text	保存我的預格式化文本
+project_admin_qrs	release_file	發佈文件
+project_admin_qrs	package_id	套裝軟體編號
+project_admin_qrs	file_released	文件發佈：您現在可以選擇編輯發佈
+project_admin_group_trove	title	專案Trove資訊
+help_tracker	unknown_help_request	未知的幫助請求:
+help_tracker	close_window	關閉窗口
+help_trove_cat	no_such_category	沒有這種分類
+help_trove_cat	full_category_name	完整的分類名稱
+help_trove_cat	short_name	短名稱
+help_trove_cat	description	描述
 snippet_caching	intro	在此可分享各式程式片段，藉以累積每次進行Survey研究之後的心得與經驗，可省去後續大量重複Survey的功夫。
-system	datefmt	Y-m-d H:i
-system	locale	zh_TW
-system	strftimefmt	%Y %B %e  %H:%M
+tracker	admin	管理
+tracker	any	任何
+tracker	assigned_to	指派給
+tracker	assignee	指派者
+tracker	category	類別
+tracker	category_any	任何類別
+tracker	changed	已修改
+tracker	check_upload	是否上載檔案
+tracker	choose	選擇一個追蹤項目以進行瀏覽、編修、新增項目
+tracker	close_date	結案日期
+tracker	comment	評論
+tracker	comments	其他評論
+tracker	comment_added	您的評論已被加入
+tracker	date	日期
+tracker	detailed_description	詳細描述
+tracker	file_delete	刪除檔案: 
+
+tracker	file_delete_successful	刪除檔案: 
+成功
+tracker	file_delete_upload	上傳檔案
+tracker	file_description	檔案描述
+tracker	file_upload_successful	上傳檔案: 成功
+tracker	followups	回復評論
+tracker	group	群組
+tracker	group_any	任意群組
+tracker	id	識別碼
+
+tracker	insert_email	如果您<strong>無法</strong>登入，請在此輸入您的電子郵件:
+
+tracker	item_created	此項目已成功建立
+tracker	item_group	群組
+tracker	no_trackers	沒有可用的追蹤項目
+tracker	no_trackers_text	您無法檢視，或沒有任何追蹤被建立。<p><FONT COLOR=RED>此專案的系統管理者必須利用 $1 的管理網頁進行設定 $2 資料型態</FONT></strong>
+
+tracker	open_date	啟始日期
+tracker	pagetitle	Tracker
+
+tracker	please_login	請  $1 登入 $2
+
+tracker	priority	優先度
+tracker	reporting	報告
+
+tracker	resolution	解決方案
+tracker	security_note	請勿在您的訊息中填寫任何密碼或認證資訊!
+
+tracker	status	狀態
+
+tracker	status_any	任意狀態
+tracker	submitted_by	發佈者
+tracker	submitter	發佈者
+
+tracker	summary	主題
+tracker	title	Trackers
+
+tracker	tracker_item	追蹤項目
+
+tracker	unassigned	未指派
+tracker	updated_successful	更新成功
+tracker_add	for_project	專案
+
+tracker_add	submit		提交
+tracker_add	title	提交追蹤項目
+tracker_admin	add_canned_responses	Add/Update Canned Responses
+
+tracker_admin	add_canned_responses_info	Create/Change generic response messages for the tracker
+
+tracker_admin	add_categories	Add/Update Categories
+
+tracker_admin	add_categories_info	Add categories like, 'mail module','gant chart module','cvs', etc
+
+tracker_admin	add_group_infos	Add groups like, 'v1.2','unsupported','unverified', etc
+
+tracker_admin	add_groups	Add/Update Groups
+
+tracker_admin	add_permissions	Add/Update Users &amp; Permissions
+
+tracker_admin	add_permissions_info	Add/remove users to/from this tracker
+
+tracker_admin	admin	Admin
+
+tracker_admin	auto_assign_to	Auto-Assign To
+
+tracker_admin	canned_response_inserted	Canned Response Inserted
+
+tracker_admin	canned_response_updated	Canned Response Updated
+
+tracker_admin	category_add_warning	Once you add a category, it cannot be deleted
+
+tracker_admin	category_inserted	Category Inserted
+
+tracker_admin	category_name	Category Name
+
+tracker_admin	category_updated	Category Updated
+
+tracker_admin	choose_datatype	Choose a data type and you can set up prefs, categories, groups, users, and permissions
+
+tracker_admin	error_inserting	Error inserting
+
+tracker_admin	error_updating	Error updating
+
+tracker_admin	group_inserted	Group Inserted
+
+tracker_admin	group_name	New group Name
+
+tracker_admin	group_updated	Group Updated
+
+tracker_admin	intro	<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming
+
+tracker_admin	section	Tracker
+
+tracker_admin	title	Administration
+
+tracker_admin	tracker_id	ID
+
+tracker_admin	tracker_title	Title
+
+tracker_admin	tracker_updated	Tracker Updated
+
+tracker_admin	update_preferences	Update preferences
+
+tracker_admin	update_preferences_info	Set up prefs like expiration times, email addresses
+
+tracker_admin	users_added	User(s) Added
+
+tracker_admin	users_deleted	User(s) Deleted
+
+tracker_admin	users_updated	User(s) Updated
+
+tracker_admin_add_canned	canned_response_body	Message Body
+
+tracker_admin_add_canned	canned_response_info	Creating useful generic messages can save you a lot of time when handling common artifact requests.
+
+tracker_admin_add_canned	canned_response_title	Title
+
+tracker_admin_add_canned	existing_responses	Existing Responses
+
+tracker_admin_add_canned	no_responses	No responses set up in this group
+
+tracker_admin_add_canned	title	Add/Change Canned Responses to $1
+
+tracker_admin_add_cat	no_categories	No categories defined
+
+tracker_admin_add_cat	title	Add Categories to $1
+
+tracker_admin_add_group	group_add_warning	Once you add a group, it cannot be deleted
+
+tracker_admin_add_group	no_groups_defined	No groups defined
+
+tracker_admin_add_group	title	Add/Change Groups to $1
+
+tracker_admin_add_users	add_all_users	Add All Users
+
+tracker_admin_add_users	add_user_info	<h3>Add These Users:</h3><p>You can pick and choose users for your tracker, or simply add them all by checking "Add All Users".</p>
+
+tracker_admin_add_users	add_users	Add Users
+
+tracker_admin_add_users	admin_only	Admin Only
+
+tracker_admin_add_users	category_permission	Permission
+
+tracker_admin_add_users	delete	Delete
+
+tracker_admin_add_users	developers_info	<p>Each tracker that you define has separate user lists and user permissions.</p><p>Simply add developers to this tracker, then update their permissions.</p><p><dl><dt><strong>Technicians</strong></dt><dd>can be assigned items</dd><dt><strong>Admins</strong></dt><dd>can make changes to items</dd></dl></p>
+
+tracker_admin_add_users	no_developers	No Developers Found
+
+tracker_admin_add_users	tech_admin	Tech & Admin
+
+tracker_admin_add_users	technician	Technician
+
+tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
+
+tracker_admin_add_users	update_permissions	Update Developer Permissions
+
+tracker_admin_add_users	user_name	User Name
+
+tracker_admin_choose	title	Tracker Admin
+
+tracker_admin_update_canned	title	Modify Canned Responses In: $1
+
+tracker_admin_update_cat	auto_assign_to	Auto-Assign To
+
+tracker_admin_update_cat	category_change_warning	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name
+
+tracker_admin_update_cat	category_name	Category Name
+
+tracker_admin_update_cat	title	Modify Category In: $1
+
+tracker_admin_update_group	title	Modify A Group In: $1
+
+tracker_admin_update_group	warning	It is not recommended that you change the artifact group name because other things are dependent upon it. When you change the group name, all related items will be changed to the new name.				
+
+tracker_admin_update_type	allow_anonymous	Allow non-logged-in postings
+
+tracker_admin_update_type	browse_item_form_text	Free form text for the "browse items" page
+
+tracker_admin_update_type	days_overdue	Days till considered overdue
+
+tracker_admin_update_type	description	Description
+
+tracker_admin_update_type	display_resolution	Display the "Resolution" box
+
+tracker_admin_update_type	email_all_changes	Send email on all changes
+
+tracker_admin_update_type	name	<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)
+
+tracker_admin_update_type	pending_timeout	Days till pending tracker items time out
+
+tracker_admin_update_type	publicy_available	Publicly Available
+
+tracker_admin_update_type	send_submissions	Send email on new submission to address
+
+tracker_admin_update_type	submit_item_form_text	Free form text for the "submit new item" page
+
+tracker_admin_update_type	title	Update $1
+
+tracker_admin_update_users	title	Add/Update Tracker User Permissions
+
+tracker_artifact	double_submit	You Attempted To Double-submit this item. Please avoid double-clicking.
+
+tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
+
+tracker_artifact	error_body_required	Artifact: Message Body Is Required
+
+tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
+
+tracker_artifact	error_summary_required	Artifact: Message Summary Is Required
+
+tracker_artifact	error_valid_email_required	SetMonitor::Valid Email Address Required
+
+tracker_artifact	logged_in_no	Logged In: NO
+
+tracker_artifact	logged_in_yes	Logged In: YES
+
+tracker_artifact	monitoring_activated	Now Monitoring
+
+tracker_artifact	monitoring_deactivated	Monitoring Deactivated
+
+tracker_artifact	nothing_changed	Nothing Changed - Update Cancelled
+
+tracker_artifact	private_error	Artifact: Only group members can view private artifact types
+
+tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are required
+
+tracker_artifactgroup	required_field	ArtifactGroup: name is required
+
+tracker_artifacthtml	by	被
+
+tracker_artifacthtml	date	日期
+
+tracker_artifacthtml	field	欄位
+tracker_artifacthtml	message	訊息
+
+tracker_artifacthtml	no_changes	這個項目沒有被修改
+tracker_artifacthtml	no_followups	沒有任何回復
+tracker_artifacthtml	old_value	就值
+tracker_artifacthtml	sender	發送者
+tracker_artifacttype	add_artifact_types	新增、瀏覽文件型別
+tracker_artifacttype	admin	管理
+
+tracker_artifacttype	admin_functions	管理功能
+tracker_artifacttype	browse	瀏覽
+tracker_artifacttype	edit_options	更新選項於
+tracker_artifacttype	nobody	沒有人
+tracker_artifacttype	none	無
+tracker_artifacttype	reporting	報告
+tracker_artifacttype	required_fields	請務必填寫下列欄位: Name, Description, Due Period, and Status Timeout
+tracker_artifacttype	submit_new	新增
+
+tracker_browse	admin_mass_update	<strong>管理:</strong></FONT>如果您要一次對上面所選的項目進行批次更新，請在這些輸入欄位中設定您的更新值之後點選「批次更新」。
+tracker_browse	ascending	遞增
+tracker_browse	canned_response	回復範本
+tracker_browse	check_all	全選
+tracker_browse	clear_all	全部清除
+tracker_browse	descending	遞減
+tracker_browse	mass_update	批次更新
+tracker_browse	next	下50
+個
+tracker_browse	no_change	沒有變更
+tracker_browse	no_items	找不到項目
+tracker_browse	old_requests	* $1 天前所提的需求
+tracker_browse	previous	前50
+ 個
+tracker_browse	request_id	需求編號
+tracker_browse	resolution	解決方案
+tracker_browse	sort_by	排序
+
+tracker_browse	title	檢視 $1
+
+tracker_browse	change_any	修改全部
+tracker_browse	hour24	最近24小時
+
+tracker_browse	day7	最近7天
+tracker_browse	week2	最近2週
+tracker_browse	month1	最近1各月
+tracker_detail	add_comment	增加一個評論
+tracker_detail	attached_files	附加檔案
+tracker_detail	build_task_relation	建立任務關連
+tracker_detail	changes	修改
+tracker_detail	description	描述
+tracker_detail	download	下載
+tracker_detail	name	名稱
+tracker_detail	no_files_attached	沒有附加檔案
+tracker_detail	title	細目
+tracker_mod	attach_comment	或者增加一個評論
+tracker_mod	build_task_relation	建立任務連結
+tracker_mod	canned_response	使用回復範本
+tracker_mod	changelog	修改記錄
+tracker_mod	data_type	追蹤型別
+
+tracker_mod	date_closed	結案日期
+tracker_mod	date_submitted	發佈日期
+tracker_mod	delete	刪除
+tracker_mod	description	描述
+tracker_mod	download	下載
+tracker_mod	existing_files	既有檔案
+tracker_mod	name	名稱
+tracker_mod	no_files	沒有任何附件
+tracker_mod	title	修改
+tracker_reporting	aging_report	Aging Report
+
+tracker_reporting	all_by_group	All Items By Artifact Group
+
+tracker_reporting	all_by_resolution	All Items By Resolution
+
+tracker_reporting	all_by_technician	All Items By Category
+
+tracker_reporting	all_items_by_technician	All Items By Technician
+
+tracker_reporting	artifact_type	Artifact Type: 
+
+tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (days)
+
+tracker_reporting	dist_by_category	Distribution by Category
+
+tracker_reporting	dist_by_group	Distribution by Group
+
+tracker_reporting	dist_by_resolution	Distribution by Resolution
+
+tracker_reporting	dist_by_technician	Distribution by Technician
+
+tracker_reporting	items_open	Number of Items Still Open
+
+tracker_reporting	items_submitted	Number of Items Submitted
+
+tracker_reporting	open_by_group	Open By Artifact Group
+
+tracker_reporting	open_items_by_category	Open Items By Category
+
+tracker_reporting	open_items_by_resolution	Open Items By Resolution
+
+tracker_reporting	open_items_by_technician	Open Items By Technician
+
+tracker_reporting	title	Artifact Reporting System
+
+tracker_taskmgr	add_relation_to_task	關連至既有任務
+
+tracker_taskmgr	add_relationship	關連至被選擇的任務
+tracker_taskmgr	build_relationships	建立追蹤項目與專案任務的關連
+tracker_taskmgr	create_task	根據此追蹤項目建立新任務
+tracker_taskmgr	task	任務
+tracker_taskmgr	task_manager_project	關連至專案
+tracker_taskmgr	tracker_item	追蹤項目
+tracker_utils	monitor		監視此項目
+
+tracker_utils	stop_monitoring		停止監視此項目
+
