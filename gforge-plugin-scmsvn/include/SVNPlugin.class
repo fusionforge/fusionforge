@@ -250,43 +250,6 @@ if ($project->enableAnonSCM()) {
 		}
 		return true;
 	}
-
-
-/*
-	function GetDefaultServer () {
-		return $this->default_svn_server ;
-	}
-*/
-
-/*
-	function GetGroupServer ($group_id) {
-		//$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
-		$sql = "SELECT scm_host FROM groups WHERE group_id = $group_id" ;
-		$res = db_query($sql);
-		if (db_numrows($res) == 0) {
-			return $this->default_svn_server ;
-		} else {
-			//return db_result($res,0,'svn_host');
-			return db_result($res,0,'scm_host');
-		}
-	}
-*/
-
-/*
-	function SetGroupServer ($group_id, $server) {
-		db_begin () ;
-		$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
-		$res = db_query($sql);
-		if (db_numrows($res) == 0) {
-			$sql = "INSERT INTO plugin_scmsvn_group_usage (group_id, svn_host) VALUES ($group_id, '$server')" ;
-		} else {
-			$sql = "UPDATE plugin_scmsvn_group_usage SET svn_host = '$server' WHERE group_id = $group_id" ;
-			
-		}
-		$res = db_query($sql);
-		db_commit () ;
-	}
-*/
 }
 
 // Local Variables:
