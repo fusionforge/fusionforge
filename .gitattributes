@@ -28,12 +28,6 @@ gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application
 gforge/docs/images/sflogo2-105a.png -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
-gforge/www/images/cvsweb/back.png -text
-gforge/www/images/cvsweb/dir.png -text
-gforge/www/images/cvsweb/miniback.png -text
-gforge/www/images/cvsweb/minidir.png -text
-gforge/www/images/cvsweb/minitext.png -text
-gforge/www/images/cvsweb/text.png -text
 gforge/www/images/debian-sf-icon.png -text
 gforge/www/images/favicon.ico svneol=native#unset
 gforge/www/images/gantt.png -text
