@@ -13,7 +13,7 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 
 my $group_array = ();
 my $verbose = 0;
-my $cvs_file = $file_dir . "dumps/cvs_dump";
+my $cvs_file = $file_dir . "/dumps/cvs_dump";
 
 if($verbose) {print ("\nConnecting to database");}
 
