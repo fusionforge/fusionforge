@@ -34,13 +34,13 @@ conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
 account	updated	Aggiornato
-account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nVisitare la seguente URL per completare il cambio di indirizzo email::\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- il team $1
+account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nVisitare la seguente URL per completare il cambio di indirizzo email:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- il team $1
 account_change_email	subject	$1 verifica
 account_change_email	mailsent	<P>Un messaggio di posta elettronica &egrave; stato inviato al nuovo indirizzo. Seguire le istruzioni contenute nel messaggio per completare il cambio di email. <P><A href="/">[ Home ]</A> 
 account_change_email	desc	<P>Il cambio dell'email richiede la conferma via email dal nuovo indirizzo in modo tale da verificare che l'indirizzo sia valido.  <P>&Egrave; necessario mantenere un indirizzo email corretto per ogni utente dato gli accessi che consentiamo a questo account. Se &egrave; necessario raggiungere un utente per argomenti relativi ad un account shell oppure di progetto, &egrave; necessario che siamo in grado di farlo.  <P>Cliccando su Invia nel form invier&agrave; un messaggio contenente un URL per confermare il nuovo indirizzo di posta elettronica. Il cambio sar&agrave; completato quando il link di conferma sar&agrave; visitato.
 account_change_email	invalid_email	Indirizzo email non valido
 account_change_email_confirm	title	Conferma di cambio indirizzo email
-account_change_email	new_address	Nuovo indirizzo email
+account_change_email	new_address	Nuovo indirizzo email:
 account_change_email	send_confirmation	Invia conferma a nuovo indirizzo
 account_change_email	title	Cambio indirizzo email
 account_change_email-complete	title	Cambio indirizzo email completato
@@ -221,7 +221,7 @@ docman_new	submit	Invia Informazioni
 docman_new	submitted_successfully	Documento inserito
 docman_display_doc	no_document_data_title	Nessun documento
 docman_display_doc	no_document_data_text	Impossibile visualizzare il documento - ID documento non valido oppure non attivo
-docman_common_doc	invalid_docid	Document:: docid non valido
+docman_common_doc	invalid_docid	Document: docid non valido
 exit	exiting_with_error	Uscita con errore
 exit	choose_a_group	Errore - seleziona un gruppo
 exit	choose_group_title	ERRORE - Gruppo id
@@ -276,7 +276,7 @@ forum_admin_delete_message	title	Cancella un messaggio
 forum_admin_delete_message	warning	ATTENZIONE! Stai per cancellare in modo permanente il messaggio e tutte le risposte!!
 forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da cancellare
 forum_common	error_adding_forum	Error Adding Forum
-forum_common	error_invalid_group_forum_id	Forum:: Invalid group_forum_id
+forum_common	error_invalid_group_forum_id	Forum: Invalid group_forum_id
 forum_common	error_save_when_logged_in	Si pu&ograve; salvare la posizione solo quando si &egrave; loggati
 forum_common	error_min_name_length	Il nome del forum deve essere almeno di 3 caratteri
 forum_common	error_min_desc_length	La descrizione del forum deve essere almeno di 10 caratteri
@@ -351,7 +351,7 @@ frs	file_version	Versione
 frs	latest_file_releases	Ultimi rilasci
 frs	file_monitor	Notifica
 frs_release	email_title	[Rilascio $1 Release]: $2
-frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link::\n$4\n\nRicevi questa mail\npoich&egrave; hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi pi&ugrave; essere notificato via email,\ncollegati a $5 e segui il link: \n$6
+frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link:\n$4\n\nRicevi questa mail\npoich&egrave; hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi pi&ugrave; essere notificato via email,\ncollegati a $5 e segui il link: \n$6
 frs_file	error_min_name_length	FRSFile La lunghezza minima del nome &egrave; di 3 caratteri
 frs_file	error_name_format	Il nome del file dovrebbe seguire un formato simile a: gforge-3.0.tar.bz2
 frs_file	error_invalid_file	Il file sembra non essere valido

@@ -53,7 +53,7 @@ echo $Language->getText('account_change_email', 'desc');
 ?>
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
-<?php echo $Language->getText('account_change_email','new_address') ?>: 
+<?php echo $Language->getText('account_change_email','new_address') ?>
 <input type="text" name="newemail" maxlength="255" />
 <input type="submit" name="submit" value="<?php echo $Language->getText('account_change_email','send_confirmation') ?>" />
 </form>

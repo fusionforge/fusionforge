@@ -1,5 +1,8 @@
 2003-09-23  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/account/change_email.php: Removed duplicate colon from PHP,
+	it belongs in the *.tab files.
+
 	* www/download.php: Suppressed an SQL warning.
 
 2003-09-21  Roland Mas  <99.roland.mas@aist.enst.fr>
