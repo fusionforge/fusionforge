@@ -1,3 +1,8 @@
+2003-09-05 Tom Copeland  <tom@infoether.com>
+
+	* common/include/Group.class:
+	Fixed bug [ #494 ] "Project Approved" don't send e-mail
+	
 2003-08-22  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/French.tab: a few UTF-8 fixes;

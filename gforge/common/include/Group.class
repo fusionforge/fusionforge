@@ -1501,7 +1501,7 @@ class Group extends Error {
 	 */
 	function sendApprovalEmail() {
 		$res_admins = db_query("
-			SELECT users.user_name,users.email,user.language
+			SELECT users.user_name,users.email,users.language
 			FROM users,user_group
 			WHERE users.user_id=user_group.user_id
 			AND user_group.group_id='".$this->getID()."'
