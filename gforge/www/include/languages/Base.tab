@@ -387,6 +387,7 @@ news_submit	post_blurb	You can post news about your project if you are an admin 
 news_submit	section	News
 news_submit	title	Submit News for $1
 news_submit	cannot	You cannot submit news for a project unless you are an admin on that project
+news_submit	cannotadmin	Submitting news from the news group is not allowed.
 news_submit	forproject	For Project
 news_submit	subject	Subject
 news_submit	details	Details
