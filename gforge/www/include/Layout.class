@@ -323,7 +323,7 @@ Content owned by VA Linux Systems is copyright
 
 osdn_print_navbar();
 
-echo html_blankimage(5,100);
+	// echo html_blankimage(5,100);
 ?>
 <br>
 <!-- start page body -->
