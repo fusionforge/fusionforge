@@ -1,3 +1,8 @@
+2003-08-12 Tom Copeland  <tom@infoether.com>
+
+	* common/include/User.class:
+	Fixed bug [ #480 ] Confirmation email does not reflect language choice
+	
 2003-08-08 Tom Copeland  <tom@infoether.com>
 
 	* www/search/index.php:

@@ -262,6 +262,8 @@ class User extends Error {
 				return false;
 			}
 
+			$Language->loadLanguageID($language_id);
+
 			$this->sendRegistrationEmail();
 
 			db_commit();
