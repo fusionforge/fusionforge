@@ -460,12 +460,12 @@ eval {
     $target = "2.6-0+checkpoint+2" ;
     if (is_lesser $version, $target) {
 	debug "Updating permissions on system groups." ;
-	$query = "UPDATE groups SET is_public=1 WHERE group_id=1" ;
+	$query = "UPDATE groups SET group_name='Site Admin', is_public=1 WHERE group_id=1" ;
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
-	$query = "UPDATE groups SET is_public=1 WHERE group_id=$sys_news_group" ;
+	$query = "UPDATE groups SET group_name='Site News Admin', is_public=1 WHERE group_id=$sys_news_group" ;
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
