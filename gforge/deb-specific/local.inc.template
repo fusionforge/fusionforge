@@ -69,6 +69,7 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 	$sys_dbname=getenv('sys_dbname');
 	$sys_dbuser=getenv('sys_dbuser');
 	$sys_dbpasswd=getenv('sys_dbpasswd');
+	$sys_ldap_passwd=getenv('sys_ldap_passwd');
 } else {
 	require ('/etc/sourceforge/database.inc');
 }
@@ -84,7 +85,6 @@ $sys_ldap_port=389;
 $sys_ldap_base_dn="{ldap_base_dn}";
 // and this, how we do access it (add permission required)
 $sys_ldap_bind_dn="cn=SF_robot,{ldap_base_dn}";
-$sys_ldap_passwd="{ldap_web_add_password}";
 // admin dn - login dn which has permissions to delete entries
 // NOT used by web code, only by support utilities
 // note that password NOT stored here

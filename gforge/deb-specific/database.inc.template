@@ -3,4 +3,5 @@
 	$sys_dbname="sourceforge";
 	$sys_dbuser="sourceforge";
 	$sys_dbpasswd="{db_password}";
+	$sys_ldap_passwd="{ldap_web_add_password}";
 ?>
