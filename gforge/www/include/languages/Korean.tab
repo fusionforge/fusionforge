@@ -3,11 +3,9 @@
 #  * Korean message catalog
 #  *
 #  * GForge: Breaking Down the Barriers to Open Source Development
-#  * Copyright 1999-2001 (c) VA Linux Systems
-#  * http://sourceforge.net
+#  * http://gforge.org
 #  *
 #  * @version   $Id$
-#  * @author Kim SeungBaeck <kongsi@users.sourceforge.net>
 #  *
 #  */
 #
@@ -16,431 +14,2495 @@
 # 2001-01-15	Kim SeungBaeck	<kongsi@users.sourceforge.net>
 #   * Initial translation
 #
-# 2002-03-27	Soon-Son Kwon	<kss@kldp.org>
-#   * Complete Rework based on the newest Base.tab
+# 2002-03-27~current	Soon-Son Kwon	<kss@kldp.org> (maintainer)
 #
-# 2002-04-26	Soon-Son Kwon	<kss@kldp.org>
-#   * Added translation for .../account/login.php and various basic modules
+#   * Contributors:	Kim Sung Hun(hunkim of kldp.net)
+#					Yun-young Lee (lseeker of kldp.net)
 #
-# 2002-04-30	Soon-Son Kwon	<kss@kldp.org>
-#   * Changed fontname from gulim to êµ´ë¦¼ì²´ to prevent ugly screen on mozilla
-#   * Modified to use $GLOBALS[sys_name] instead of hardcoded "GForge"
-#     as much as possible 
-#   * Added/Modified/Updated translation for many pages including messge
-#     with parameters
-#
-# 2002-05-16	Soon-Son Kwon	<kss@kldp.org>
-#   * Removed most (not all yet) hardcoded "GForge"
-#     and changed them to $GLOBALS[sys_name]
-#   * More i18n on people, account, news, top projects
-#   * i18n'ing user registration page done
-#
-# 2002-05-19	Soon-Son Kwon	<kss@kldp.org>
-#   * Added a few more trivial message translation
-#
-# 2002-05-19	Soon-Son Kwon	<kss@kldp.org>
-#   * ë„ì›€ì„ ê¸°ë‹¤ë¦¬ëŠ” í”„ë¡œì íŠ¸-->ë©¤ë²„ êµ¬í•¨, 
-#     Code Snippet Library-->ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬ ë¡œ ë³€ê²½
-#
-# 2002-05-25	Soon-Son Kwon	<kss@kldp.org>
-#   * Added more translation including Forum, Tracker, CVS
-#
-account	title	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
-account_change_email	message	$3ì˜ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ë³€ê²½í•˜ëŠ” ê³¼ì •ì…ë‹ˆë‹¤.\në‹¤ìŒ URLì„ ë°©ë¬¸í•˜ì…”ì„œ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ë³€ê²½í•˜ì‹­ì‹œì˜¤.\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
-account_change_email	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
-account_change_email	subject	$1 í™•ì¸
-account_change_email	title	ì´ë©”ì¼ ì£¼ì†Œ ë³€ê²½
-account_change_email	mailsent	<P>ìƒˆë¡œ ì…ë ¥í•˜ì‹  ì´ë©”ì¼ ì£¼ì†Œë¡œ ë©”ì¼ì´ ì „ì†¡ë˜ì—ˆìŠµë‹ˆë‹¤. ì´ë©”ì¼ ì£¼ì†Œ ë³€ê²½ì„ ì™„ë£Œí•˜ì‹œë ¤ë©´ ì§€ê¸ˆ ë³´ë‚´ë“œë¦° ì´ë©”ì¼ ë‚´ìš©ì„ ì˜ ì½ì–´ ë³´ì‹œê¸° ë°”ëë‹ˆë‹¤. <P><A href="/">[ í™ˆìœ¼ë¡œ ë˜ëŒì•„ê°€ê¸° ]</A>
-account_change_email	desc	<P>ì´ë©”ì¼ ì£¼ì†Œë¥¼ ë³€ê²½í•˜ì‹œë ¤ë©´, ìœ íš¨í•œ ì´ë©”ì¼ ì£¼ì†Œì„ì„ í™•ì¸í•˜ê¸° ìœ„í•´ ìƒˆ ì£¼ì†Œë¡œë¶€í„° í™•ì¸í•˜ëŠ” ì ˆì°¨ë¥¼ ë°Ÿì•„ì•¼ í•©ë‹ˆë‹¤. <P>ì œê³µë˜ëŠ” ì„œë¹„ìŠ¤ì˜ ì„±ê²©ìƒ ì •í™•í•œ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ìœ ì§€í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤. ì‰˜ ê³„ì • ì ‘ì†ì´ë‚˜ í”„ë¡œì íŠ¸ ê´€ë¦¬ ë“±ì˜ ì¤‘ìš”í•œ ì´ìŠˆ ì‚¬í•­ë“¤ì— ëŒ€í•´ì„œ í•­ìƒ ì‚¬ìš©ì ì—¬ëŸ¬ë¶„ê³¼ ì—°ë½ì´ ê°€ëŠ¥í•˜ë„ë¡ ë³´ì¥í•˜ëŠ” ê²ƒì€ ì¤‘ìš”í•œ ì¼ì…ë‹ˆë‹¤. <P>ì•„ë˜ ì–‘ì‹ì„ ì±„ì›Œ ì£¼ì‹œë©´ ë³€ê²½ í™•ì¸ ì ˆì°¨ì— ì‚¬ìš©ë˜ëŠ” URLì´ í•´ë‹¹ ë©”ì¼ ì£¼ì†Œë¡œ ë°°ë‹¬ë˜ë©°, ê·¸ URLì„ ë°©ë¬¸í•˜ì…”ì•¼ ì´ë©”ì¼ ì£¼ì†Œ ë³€ê²½ì´ ì™„ë£Œë©ë‹ˆë‹¤.
-account_change_pw	confirmation	<h2>$1 ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ í™•ì¸</h2>	<p>	ì¶•í•˜í•©ë‹ˆë‹¤. ë¹„ë°€ë²ˆí˜¸ê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.</p>
-account_change_pw	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
-account_change_pw	title	ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
-account_editsshkeys	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
-account_editsshkeys	title	CVS/SSH í‚¤ í¸ì§‘
-account_first	about_blurb	ì—¬ëŸ¬ë¶„ì€ ì´ì œ ì˜¨ë¼ì¸ ì˜¤í”ˆì†ŒìŠ¤ ê°œë°œ í™˜ê²½ì¸ $1ì˜ ë“±ë¡ ì‚¬ìš©ìì…ë‹ˆë‹¤.<P>ë“±ë¡ ì‚¬ìš©ìë¡œì„œ ì—¬ëŸ¬ë¶„ì€ ì´ê³³ì˜ ëª¨ë“  í™œë™ì— ì°¸ì—¬í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ê° í”„ë¡œì íŠ¸ì˜ ê²Œì‹œíŒì— ê¸€ì„ ì˜¬ë¦´ ìˆ˜ë„ ìˆê³ , $1ì— ìˆëŠ” ì†Œí”„íŠ¸ì›¨ì–´ë“¤ì— ëŒ€í•´ ë²„ê·¸ ë¦¬í¬íŒ…ì„ í•  ìˆ˜ë„ ìˆê³ , í”„ë¡œì íŠ¸ì˜ ê°œë°œìë¡œ ë“±ë¡í•˜ì‹¤ ìˆ˜ë„ ìˆê³ , ì—¬ëŸ¬ë¶„ë§Œì˜ í”„ë¡œì íŠ¸ë¥¼ ê°œì„¤í•˜ì‹œëŠ” ê²ƒë„ ê°€ëŠ¥í•©ë‹ˆë‹¤. <P>$1(ì´)ê°€ ì œê³µí•˜ëŠ” ëª¨ë“  ì„œë¹„ìŠ¤ë¥¼ í™œìš©í•˜ì‹œê¸° ìœ„í•´ì„œ ì—¬ëŸ¬ë¶„ì€ ì•½ê°„ì˜ ì‹œê°„ì„ ë‚´ì–´ ë‹¤ìŒ <A href="/docs/site/"><b>ì‚¬ì´íŠ¸ ê´€ë ¨ ë¬¸ì„œ</b></A>ë¥¼ ì°¬ì°¬íˆ ì½ì–´ ë³´ì‹œê¸° ë°”ëë‹ˆë‹¤.<P>ë¶€ë”” ì¢‹ì€ ì‹œê°„ì´ ë˜ì‹œê¸°ë¥¼ ë°”ë¼ë©° ì €í¬ê°€ $1(ì„)ë¥¼ í–¥ìƒì‹œí‚¬ ìˆ˜ ìˆë„ë¡ ì–¸ì œë“ ì§€ í”¼ë“œë°±ì„ ë³´ë‚´ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.<P>--$1
-account_first	title	í™˜ì˜í•©ë‹ˆë‹¤!
-account_login	deleted_account	<p>ì—¬ëŸ¬ë¶„ì˜ $1 ê³„ì •ì´ ê´€ë¦¬ìì— ì˜í•´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤. ì´ëŠ” ë³´í†µ ë‘ê°€ì§€ë¡œ ë‚˜ëˆŒ ìˆ˜ ìˆëŠ”ë° 1) ì—¬ëŸ¬ë¶„ ìŠ¤ìŠ¤ë¡œ ê³„ì •ì„ ì‚­ì œí•´ ë‹¬ë¼ê³  ìš”ì²­í•˜ì…¨ê±°ë‚˜ 2) ì—¬ëŸ¬ë¶„ì˜ ê³„ì •ì´ ì„œë¹„ìŠ¤ ê³„ì•½ì— ìœ„ë°°ë˜ëŠ” í–‰ìœ„ì— ì´ìš©ë˜ì–´ ì‹œìŠ¤í…œ ê´€ë¦¬ë¥¼ ìœ„í•´ ê´€ë¦¬ìì— ì˜í•´ ê³„ì •ì´ ì‚­ì œë˜ëŠ” ê²ƒì…ë‹ˆë‹¤. ë§Œì•½ ì˜ë¬¸ ì‚¬í•­ì´ë‚˜ ì˜ì‹¬ë˜ëŠ” ì ì´ ìˆë‹¤ë©´ <a href="/support/?group_id=1">ì§€ì› ìš”ì²­</a>ì„ í•˜ì‹œë©´ ë©ë‹ˆë‹¤.</p><p>ê°ì‚¬í•©ë‹ˆë‹¤, <br><br>$1</p>
-account_login	iewarn	<H2><FONT COLOR="RED">ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ ì‚¬ìš©ìëŠ” 5.01 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì…”ì•¼ í•˜ë©° 128-bit SSLì˜ ì‚¬ìš©ì„ ê¶Œì¥í•©ë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì‹œëŠ” ê²ƒë„ ì¢‹ìŠµë‹ˆë‹¤.</FONT></H2>
-account_login	macwarn	<H2><FONT COLOR="RED">í˜„ì¬ ë§¤í‚¨í† ì‹œì—ì„œì˜ ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ëŠ” ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•´ ì£¼ì‹­ì‹œì˜¤.</FONT></H2>
-account_login	pending_account	<P>ì—¬ëŸ¬ë¶„ì˜ ê³„ì •ì€ í˜„ì¬ ì´ë©”ì¼ì„ í†µí•œ í™•ì¸ ì‘ì—…ì„ ê¸°ë‹¤ë¦¬ê³  ìˆëŠ” ì¤‘ì…ë‹ˆë‹¤.		ì´ë©”ì¼ì— í¬í•¨ë˜ì–´ ìˆëŠ” ë§í¬ë¥¼ ë°©ë¬¸í•˜ì‹œë©´ ê³„ì •ì´ ê³§ë°”ë¡œ í™œì„±í™”ë©ë‹ˆë‹¤.		<P>ë§Œì•½ ì´ ì´ë©”ì¼ì„ ë‹¤ì‹œ ë°›ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´ ì•„ë˜ì— ìˆëŠ” ë§í¬ë¥¼ í´ë¦­í•˜ì„¸ìš”. ì—¬ëŸ¬ë¶„ì´ ë“±ë¡ ê³¼ì • ì¤‘ì— ì…ë ¥í•˜ì‹  ì´ë©”ì¼ë¡œ í™•ì¸ ë©”ì¼ì´ ë‹¤ì‹œí•œë²ˆ ë°œì†¡ë©ë‹ˆë‹¤.		<P><A href="pending-resend.php?form_user=$1">[í™•ì¸ ë©”ì¼ ë‹¤ì‹œ ë³´ë‚´ê¸°]</A>		<br><hr>		<p>
-account_login	title	ì‚¬ì´íŠ¸ ë¡œê·¸ì¸
-account_login	cookiewarn	ì—¬ê¸°ì„œë¶€í„°ëŠ” ì¿ í‚¤ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
-account_login	loginname	ë¡œê·¸ì¸ë„¤ì„:
-account_login	passwd	ë¹„ë°€ë²ˆí˜¸:
-account_login	usessl	ë¡œê·¸ì¸í›„ SSL ê³„ì† ì‚¬ìš©
-account_login	sslnotice	<p><B><FONT COLOR="RED">ì•„ë˜ ë²„íŠ¼ì„ ëˆ„ë¥´ì‹œë©´ SSLê¸°ëŠ¥ì´ êµ¬í˜„ë˜ì–´ ìˆëŠ” ì›¹ì„œë²„ë¡œ ì§„ì…í•˜ì‹œê²Œ ë˜ë©°, ì…ë ¥í•˜ì‹  ë¹„ë°€ë²ˆí˜¸ëŠ” ë‹¤ë¥¸ ì‚¬ëŒì´ ë³¼ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</FONT></B> <small style="font-size: x-small"> (ì´ í˜ì´ì§€ ìì²´ê°€ SSLë¡œ ë³´ì´ì§€ ì•ŠëŠ” ì´ìœ ê°€ ê¶ê¸ˆí•˜ì‹œë‹¤ë©´ ë‹¤ìŒ ì ˆì„ ì½ì–´ ë³´ì‹­ì‹œì˜¤. ê°ì‚¬í•©ë‹ˆë‹¤.) </small> <P> <B>ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬</B>ë¥¼ ì‚¬ìš©í•˜ê³  ê³„ì‹¤ ê²½ìš° ì¼ì‹œì ìœ¼ë¡œ SSLì— ê´€í•œ ë¬¸ì œê°€ ìˆì„ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ ì‚¬ìš©ìëŠ” ë³´ì•ˆì„ ìœ„í•´ SSLì„ ê³„ì† ì‚¬ìš©í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤. ì´ ë¬¸ì œì— ê´€í•´ì„œëŠ” <A HREF="http://www.microsoft.com/">Microsoftì˜ ì›¹ì‚¬ì´íŠ¸</A>ë¥¼ ì°¸ê³ í•˜ì‹­ì‹œì˜¤.<P>
-account_login	login	SSLì„ í†µí•´ ë¡œê·¸ì¸í•˜ê¸°
-account_login	lostpw	[ë¹„ë°€ë²ˆí˜¸ë¥¼ ìŠìœ¼ì…¨ë‚˜ìš”?]
-account_login	newaccount	[ìƒˆë¡œìš´ ê³„ì • ë§Œë“¤ê¸°(ê°€ì…í•˜ê¸°)]
-account_lostpw	message	$3 ì‚¬ì´íŠ¸ì˜ ëˆ„êµ°ê°€ê°€ (ì•„ë§ˆë„ ë³¸ì¸?) ì´ë©”ì¼ì„ ì´ìš©í•œ\në¹„ë°€ë²ˆí˜¸ ë³€ê²½ì„ ìš”ì²­í•˜ì˜€ìŠµë‹ˆë‹¤. ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ ì§ì ‘ í•˜ì‹  ê²ƒì´ ì•„ë‹ˆë¼ë©´\nì´ ë©”ì‹œì§€ëŠ” ê·¸ëƒ¥ ë¬´ì‹œí•˜ì‹­ì‹œì˜¤. ê·¸ëŸ¬ë©´ ì•„ë¬´ê²ƒë„ ë°”ë€Œì§€ ì•ŠìŠµë‹ˆë‹¤.\n\në§Œì•½ ë³¸ì¸ì´ ì§ì ‘ ìš”ì²­í•˜ì‹  ê²ƒì´ë¼ë©´ ë‹¤ìŒ URLì„ ë°©ë¬¸í•˜ì—¬ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì‹­ì‹œì˜¤.\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
-account_lostpw	subject	$1 í™•ì¸
-account_lostpw	title	ë¹„ë°€ë²ˆí˜¸ë¥¼ ìŠìœ¼ì…¨ìŠµë‹ˆê¹Œ?
-account_lostpw	notify	<P>ì…ë ¥í•˜ì‹  ì´ë©”ì¼ ì£¼ì†Œë¡œ ë©”ì¼ì„ ë³´ëƒˆìŠµë‹ˆë‹¤. ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì‹œë ¤ë©´ ì§€ê¸ˆ ë³´ë‚¸ ë©”ì¼ì˜ ë‚´ìš©ì„ ì°¸ê³ í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤. <P><A href="/">[ í™ˆìœ¼ë¡œ ]</A>
-account_lostpw	warn	<P>ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¶„ì‹¤í•˜ëŠ” ê²ƒì€ ì‚¬ìš©í•˜ê³  ê³„ì‹  ê³„ì •ê³¼, ìš´ì˜ì¤‘ì¸ í”„ë¡œì íŠ¸, ê·¸ë¦¬ê³  ì´ ì‚¬ì´íŠ¸ ì „ì²´ì ìœ¼ë¡œ ì¢‹ì§€ì•Šì€ ì˜í–¥ì„ ë¯¸ì¹  ìˆ˜ ìˆìŠµë‹ˆë‹¤. <P>ì•„ë˜ "Send Lost PW Hash" ë¥¼ ëˆ„ë¥´ì‹œë©´ ì—¬ëŸ¬ë¶„ì—ê²Œ í• ë‹¹ë˜ì–´ ìˆëŠ” ì´ë©”ì¼ ì£¼ì†Œë¡œ URLì„ ì•Œë ¤ ë“œë¦¬ê² ìŠµë‹ˆë‹¤. ê·¸ URLì€ ì—¬ëŸ¬ë¶„ì˜ ê³„ì •ì— í• ë‹¹ë˜ì–´ ìˆëŠ” 128-bit í•´ì‰¬ ì •ë³´ì…ë‹ˆë‹¤. ê·¸ URLì„ ë°©ë¬¸í•˜ì‹œë©´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì‹œê³  ì‚¬ì´íŠ¸ì— ë‹¤ì‹œ ë¡œê·¸ì¸í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
-account_register	title	ì‚¬ìš©ì ë“±ë¡
-account_register	congrat	<p>ì¶•í•˜í•©ë‹ˆë‹¤. $1ì— ë“±ë¡í•˜ì…¨ìŠµë‹ˆë‹¤. <p> ê·€í•˜ëŠ” ì´ì œ ê³§ ë©”ì¼ ì£¼ì†Œë¥¼ í™•ì¸í•˜ê¸° ìœ„í•œ í™•ì¸ ë©”ì¼ì„ ë°›ìœ¼ì‹œê²Œ ë©ë‹ˆë‹¤. ë©”ì¼ì— í¬í•¨ë˜ì–´ ìˆëŠ” URLì„ í´ë¦­í•˜ì‹œë©´ ê³„ì •ì„ ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
-account_register	iewarn	<H2><FONT COLOR="RED">ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ ì‚¬ìš©ìëŠ” 5.01 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì…”ì•¼ í•˜ë©° 128-bit SSLì˜ ì‚¬ìš©ì„ ê¶Œì¥í•©ë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì‹œëŠ” ê²ƒë„ ì¢‹ìŠµë‹ˆë‹¤.</FONT></H2>
-account_register	macwarn	<H2><FONT COLOR="RED">í˜„ì¬ ë§¤í‚¨í† ì‹œì—ì„œì˜ ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ëŠ” ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•´ ì£¼ì‹­ì‹œì˜¤.</FONT></H2>
-account_register	loginname	ë¡œê·¸ì¸ ë„¤ì„ (ëŒ€ë¬¸ìëŠ” ì“°ì§€ ë§ˆì‹­ì‹œì˜¤.) *:
-account_register	password	ë¹„ë°€ë²ˆí˜¸ (ìµœì†Œ 6 ê¸€ì) *:
-account_register	password2	ë¹„ë°€ë²ˆí˜¸ (ë‹¤ì‹œ) *:
-account_register	realname	ì´ë¦„ *:
-account_register	language	ì–¸ì–´ ì„ íƒ:
-account_register	timezone	ì‹œê°„ëŒ€:
-account_register	emailaddr	ì´ë©”ì¼ ì£¼ì†Œ *: <BR><I>ì´ ì´ë©”ì¼ ì£¼ì†ŒëŠ” ê³„ì •ì´ í™œì„±í™”ë˜ê¸° ì „ì— í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤. ì…ë ¥í•˜ì‹  ì£¼ì†ŒëŠ” ì‚¬ì´íŠ¸ ìƒì—ì„œ ë…¸ì¶œë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ì—¬ëŸ¬ë¶„ì€ &lt;loginname\@$1&gt;ë¼ëŠ” ê³„ì •ì„ ë°œê¸‰ë°›ê²Œ ë˜ë©° ì´ê³³ìœ¼ë¡œ ë³´ë‚´ì§„ ëª¨ë“  ë©”ì¼ì€ ì…ë ¥í•˜ì‹  ë©”ì¼ ì£¼ì†Œë¡œ ì¬ì „ì†¡ë©ë‹ˆë‹¤.</I>
-account_register	siteupdate	ì‚¬ì´íŠ¸ ì—…ë°ì´íŠ¸ì— ê´€í•œ ì†Œì‹ ë©”ì¼ë¡œ ë°›ê¸° <I>(íŠ¸ë˜í”½ì´ ê±°ì˜ ì—†ìœ¼ë©° ë³´ì•ˆ ê´€ë ¨ ê³µì§€ì‚¬í•­ì„ í¬í•¨í•˜ë¯€ë¡œ ë©”ì¼ì„ ë°›ì•„ ë³´ì‹œê¸°ë¥¼ ê¶Œì¥í•©ë‹ˆë‹¤.)</I>
-account_register	communitymail	ì»¤ë®¤ë‹ˆí‹° ê´€ë ¨ ë©”ì¼ ë°›ê¸°. <I>(íŠ¸ë˜í”½ ë³„ë¡œ ì—†ìŒ.)</I>
-account_register	mandatory	ë³„í‘œ(*)ê°€ ìˆëŠ” ë¶€ë¶„ì€ í•„ìˆ˜ í•­ëª©ì…ë‹ˆë‹¤.
-account_register	register	ë“±ë¡í•˜ê¸°
-account_unsubscribe	all_mailings	ëª¨ë“  GForge ë©”ì¼ ë° ê³µì§€ì‚¬í•­
-account_unsubscribe	site_mailings	GForge ë©”ì¼
-account_verify	title	GForge ì‚¬ìš©ì í™•ì¸
-account_verify	verify_blurb	<p>ì‚¬ìš©ì ë“±ë¡ ì ˆì°¨ë¥¼ ì™„ë£Œí•˜ì‹œë ¤ë©´ ì§€ê¸ˆ ë¡œê·¸ì¸í•˜ì‹­ì‹œì˜¤. ì¼ë°˜ ë¡œê·¸ì¸ ê¸°ëŠ¥ì€ ê³§ë°”ë¡œ í™œì„±í™”ë©ë‹ˆë‹¤.</p>
-conf	content_encoding	UTF-8
-conf	default_font	êµ´ë¦¼ì²´,verdana,arial,helvetica,sans-serif
+#   * Notable Changes:	Complete Rework based on the newest Base.tab
+#						Changed fontname from gulim to ±¼¸²Ã¼ to 
+#						prevent ugly screen on mozilla
+# 
+
+account	title	»ç¿ëÀÚ µî·Ï Á¤º¸
+account	updated	°»½ÅµÇ¾ú½À´Ï´Ù.
+account_change_email	desc	<p>ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ º¯°æÇÏ½Ã·Á¸é, À¯È¿ÇÑ ÀÌ¸ŞÀÏ ÁÖ¼ÒÀÓÀ» È®ÀÎÇÏ±â À§ÇØ »õ ÁÖ¼Ò·ÎºÎÅÍ È®ÀÎÇÏ´Â ÀıÂ÷¸¦ ¹â¾Æ¾ß ÇÕ´Ï´Ù. </p><p>Á¦°øµÇ´Â ¼­ºñ½ºÀÇ ¼º°İ»ó Á¤È®ÇÑ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ À¯ÁöÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù. ½© °èÁ¤ Á¢¼ÓÀÌ³ª ÇÁ·ÎÁ§Æ® °ü¸® µîÀÇ Áß¿äÇÑ ÀÌ½´ »çÇ×µé¿¡ ´ëÇØ¼­ Ç×»ó »ç¿ëÀÚ ¿©·¯ºĞ°ú ¿¬¶ôÀÌ °¡´ÉÇÏµµ·Ï º¸ÀåÇÏ´Â °ÍÀº Áß¿äÇÑ ÀÏÀÔ´Ï´Ù. </p><p>¾Æ·¡ ¾ç½ÄÀ» Ã¤¿ö ÁÖ½Ã¸é º¯°æ È®ÀÎ ÀıÂ÷¿¡ »ç¿ëµÇ´Â URLÀÌ ÇØ´ç ¸ŞÀÏ ÁÖ¼Ò·Î ¹è´ŞµÇ¸ç, ±× URLÀ» ¹æ¹®ÇÏ¼Å¾ß ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æÀÌ ¿Ï·áµË´Ï´Ù.</p>
+account_change_email	invalid_email	À¯È¿ÇÏÁö ¾ÊÀº ¸ŞÀÏÁÖ¼ÒÀÔ´Ï´Ù.
+account_change_email	mailsent	<P>»õ·Î ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î ¸ŞÀÏÀÌ Àü¼ÛµÇ¾ú½À´Ï´Ù. ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æÀ» ¿Ï·áÇÏ½Ã·Á¸é Áö±İ º¸³»µå¸° ÀÌ¸ŞÀÏ ³»¿ëÀ» Àß ÀĞ¾î º¸½Ã±â ¹Ù¶ø´Ï´Ù. <P><A href="/">[ È¨À¸·Î µÇµ¹¾Æ°¡±â ]</A>
+account_change_email	message	$1ÀÇ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ º¯°æÇÏ´Â °úÁ¤ÀÔ´Ï´Ù.\n´ÙÀ½ URLÀ» ¹æ¹®ÇÏ¼Å¼­ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ º¯°æÇÏ½Ê½Ã¿À.\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 °ü¸®ÀÚ
+account_change_email	new_address	»õ·Î¿î ÀÌ¸ŞÀÏ ÁÖ¼Ò:
+account_change_email	section	»ç¿ëÀÚ µî·Ï Á¤º¸
+account_change_email	send_confirmation	»õ ÁÖ¼Ò·Î È®ÀÎ ¸ŞÀÏÀ» º¸³À´Ï´Ù.
+account_change_email	subject	$1 È®ÀÎ
+account_change_email	title	ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æ
+account_change_email-complete	confirm	È¯¿µÇÕ´Ï´Ù, $1. ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù. »õ·Î¿î ¸ŞÀÏ ÁÖ¼Ò´Â <strong>$2</strong>ÀÔ´Ï´Ù. $3À¸·Î º¸³»Áö´Â ÀÌ¸ŞÀÏÀº ¸ğµÎ ÀÌ°÷À¸·Î ÀçÀü¼ÛµË´Ï´Ù.
+account_change_email-complete	title	ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æ ¿Ï°á
+account_change_email_confirm	title	ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æ È®ÀÎ
+account_change_pw	confirmation	<h2>$1 ºñ¹Ğ¹øÈ£ º¯°æ È®ÀÎ</h2>	<p>	ÃàÇÏÇÕ´Ï´Ù. ºñ¹Ğ¹øÈ£°¡ º¯°æµÇ¾ú½À´Ï´Ù.</p>
+account_change_pw	new_password	»õ·Î¿î ºñ¹Ğ¹øÈ£ (6±ÛÀÚ ÀÌ»ó)
+account_change_pw	new_password_repeat	»õ·Î¿î ºñ¹Ğ¹øÈ£ (ÇÑ¹ø´õ)
+account_change_pw	not_valid_password	À¯È¿ÇÑ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù. (6±ÛÀÚ ÀÌ»ó)
+account_change_pw	old_password	±âÁ¸ ºñ¹Ğ¹øÈ£
+account_change_pw	old_password_incorrect	±âÁ¸ ºñ¹Ğ¹øÈ£°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.
+account_change_pw	passwords_dont_match	»õ ºñ¹Ğ¹øÈ£°¡ ¼­·Î ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.
+account_change_pw	section	»ç¿ëÀÚ µî·Ï Á¤º¸
+account_change_pw	title	ºñ¹Ğ¹øÈ£ º¯°æ
+account_change_pw	update	ºñ¹Ğ¹øÈ£ °»½Å
+account_change_pw_changed	return_to	»ç¿ëÀÚ µî·Ï Á¤º¸ ÆäÀÌÁö·Î µÇµ¹¾Æ°©´Ï´Ù.
+account_change_pw_changed	title	ºñ¹Ğ¹øÈ£ º¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.
+account_editsshkeys	section	»ç¿ëÀÚ µî·Ï Á¤º¸
+account_editsshkeys	title	CVS/SSH Å° ÆíÁı
+account_first	about_blurb	¿©·¯ºĞÀº ÀÌÁ¦ ¿Â¶óÀÎ ¿ÀÇÂ¼Ò½º °³¹ß È¯°æÀÎ $1ÀÇ µî·Ï »ç¿ëÀÚÀÔ´Ï´Ù.<P>µî·Ï »ç¿ëÀÚ·Î¼­ ¿©·¯ºĞÀº ÀÌ°÷ÀÇ ¸ğµç È°µ¿¿¡ Âü¿©ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. °¢ ÇÁ·ÎÁ§Æ®ÀÇ °Ô½ÃÆÇ¿¡ ±ÛÀ» ¿Ã¸± ¼öµµ ÀÖ°í, $1¿¡ ÀÖ´Â ¼ÒÇÁÆ®¿ş¾îµé¿¡ ´ëÇØ ¹ö±× ¸®Æ÷ÆÃÀ» ÇÒ ¼öµµ ÀÖ°í, ÇÁ·ÎÁ§Æ®ÀÇ °³¹ßÀÚ·Î µî·ÏÇÏ½Ç ¼öµµ ÀÖ°í, ¿©·¯ºĞ¸¸ÀÇ ÇÁ·ÎÁ§Æ®¸¦ °³¼³ÇÏ½Ã´Â °Íµµ °¡´ÉÇÕ´Ï´Ù. <P>$1(ÀÌ)°¡ Á¦°øÇÏ´Â ¸ğµç ¼­ºñ½º¸¦ È°¿ëÇÏ½Ã±â À§ÇØ¼­ ¿©·¯ºĞÀº ¾à°£ÀÇ ½Ã°£À» ³»¾î ´ÙÀ½ <A href="/docs/site/"><b>»çÀÌÆ® °ü·Ã ¹®¼­</b></A>¸¦ ÂùÂùÈ÷ ÀĞ¾î º¸½Ã±â ¹Ù¶ø´Ï´Ù.<P>ºÎµğ ÁÁÀº ½Ã°£ÀÌ µÇ½Ã±â¸¦ ¹Ù¶ó¸ç ÀúÈñ°¡ $1(À»)¸¦ Çâ»ó½ÃÅ³ ¼ö ÀÖµµ·Ï ¾ğÁ¦µçÁö ÇÇµå¹éÀ» º¸³» ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.<P>--$1
+account_first	title	$1 : È¯¿µÇÕ´Ï´Ù!
+account_login	cookiewarn	¿©±â¼­ºÎÅÍ´Â ÄíÅ°¸¦ »ç¿ëÇÕ´Ï´Ù.
+account_login	deleted_account	<p>¿©·¯ºĞÀÇ $1 °èÁ¤ÀÌ °ü¸®ÀÚ¿¡ ÀÇÇØ »èÁ¦µÇ¾ú½À´Ï´Ù. ÀÌ´Â º¸Åë µÎ°¡Áö·Î ³ª´­ ¼ö ÀÖ´Âµ¥ 1) ¿©·¯ºĞ ½º½º·Î °èÁ¤À» »èÁ¦ÇØ ´Ş¶ó°í ¿äÃ»ÇÏ¼Ì°Å³ª 2) ¿©·¯ºĞÀÇ °èÁ¤ÀÌ ¼­ºñ½º °è¾à¿¡ À§¹èµÇ´Â ÇàÀ§¿¡ ÀÌ¿ëµÇ¾î ½Ã½ºÅÛ °ü¸®¸¦ À§ÇØ °ü¸®ÀÚ¿¡ ÀÇÇØ °èÁ¤ÀÌ »èÁ¦µÇ´Â °ÍÀÔ´Ï´Ù. ¸¸¾à ÀÇ¹® »çÇ×ÀÌ³ª ÀÇ½ÉµÇ´Â Á¡ÀÌ ÀÖ´Ù¸é <a href="/support/?group_id=1">Áö¿ø ¿äÃ»</a>À» ÇÏ½Ã¸é µË´Ï´Ù.</p><p>°¨»çÇÕ´Ï´Ù, <br><br>$1</p>
+account_login	iewarn	<H2><FONT COLOR="RED">ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯ »ç¿ëÀÚ´Â 5.01 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ¼Å¾ß ÇÏ¸ç 128-bit SSLÀÇ »ç¿ëÀ» ±ÇÀåÇÕ´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ½Ã´Â °Íµµ ÁÁ½À´Ï´Ù.</FONT></H2>
+account_login	login	SSLÀ» ÅëÇØ ·Î±×ÀÎÇÏ±â
+account_login	loginname	»ç¿ëÀÚ ID:
+account_login	lostpw	[ºñ¹Ğ¹øÈ£¸¦ ÀØÀ¸¼Ì³ª¿ä?]
+account_login	macwarn	<H2><FONT COLOR="RED">ÇöÀç ¸ÅÅ²Åä½Ã¿¡¼­ÀÇ ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯´Â Áö¿øµÇÁö ¾Ê½À´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇØ ÁÖ½Ê½Ã¿À.</FONT></H2>
+account_login	newaccount	[»õ·Î¿î °èÁ¤ ¸¸µé±â(°¡ÀÔÇÏ±â)]
+account_login	passwd	ºñ¹Ğ¹øÈ£:
+account_login	pending_account	<P>¿©·¯ºĞÀÇ °èÁ¤Àº ÇöÀç ÀÌ¸ŞÀÏÀ» ÅëÇÑ È®ÀÎ ÀÛ¾÷À» ±â´Ù¸®°í ÀÖ´Â ÁßÀÔ´Ï´Ù.		ÀÌ¸ŞÀÏ¿¡ Æ÷ÇÔµÇ¾î ÀÖ´Â ¸µÅ©¸¦ ¹æ¹®ÇÏ½Ã¸é °èÁ¤ÀÌ °ğ¹Ù·Î È°¼ºÈ­µË´Ï´Ù.		<P>¸¸¾à ÀÌ ÀÌ¸ŞÀÏÀ» ´Ù½Ã ¹Ş°í ½ÍÀ¸½Ã´Ù¸é ¾Æ·¡¿¡ ÀÖ´Â ¸µÅ©¸¦ Å¬¸¯ÇÏ¼¼¿ä. ¿©·¯ºĞÀÌ µî·Ï °úÁ¤ Áß¿¡ ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ·Î È®ÀÎ ¸ŞÀÏÀÌ ´Ù½ÃÇÑ¹ø ¹ß¼ÛµË´Ï´Ù.		<P><A href="pending-resend.php?form_user=$1">[È®ÀÎ ¸ŞÀÏ ´Ù½Ã º¸³»±â]</A>		<br><hr>		<p>
+account_login	sslnotice	<p><B><FONT COLOR="RED">¾Æ·¡ ¹öÆ°À» ´©¸£½Ã¸é SSL±â´ÉÀÌ ±¸ÇöµÇ¾î ÀÖ´Â À¥¼­¹ö·Î ÁøÀÔÇÏ½Ã°Ô µÇ¸ç, ÀÔ·ÂÇÏ½Å ºñ¹Ğ¹øÈ£´Â ´Ù¸¥ »ç¶÷ÀÌ º¼ ¼ö ¾ø½À´Ï´Ù.</FONT></B> <small style="font-size: x-small"> (ÀÌ ÆäÀÌÁö ÀÚÃ¼°¡ SSL·Î º¸ÀÌÁö ¾Ê´Â ÀÌÀ¯°¡ ±Ã±İÇÏ½Ã´Ù¸é ´ÙÀ½ ÀıÀ» ÀĞ¾î º¸½Ê½Ã¿À. °¨»çÇÕ´Ï´Ù.) </small> <P> <B>ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯</B>¸¦ »ç¿ëÇÏ°í °è½Ç °æ¿ì ÀÏ½ÃÀûÀ¸·Î SSL¿¡ °üÇÑ ¹®Á¦°¡ ÀÖÀ»¼öµµ ÀÖ½À´Ï´Ù. ³İ½ºÄÉÀÌÇÁ »ç¿ëÀÚ´Â º¸¾ÈÀ» À§ÇØ SSLÀ» °è¼Ó »ç¿ëÇÏ½Ã±â ¹Ù¶ø´Ï´Ù. ÀÌ ¹®Á¦¿¡ °üÇØ¼­´Â <A HREF="http://www.microsoft.com/">MicrosoftÀÇ À¥»çÀÌÆ®</A>¸¦ Âü°íÇÏ½Ê½Ã¿À.<P>
+account_login	title	»çÀÌÆ® ·Î±×ÀÎ
+account_login	usessl	·Î±×ÀÎÈÄ SSL °è¼Ó »ç¿ë
+account_lostlogin	invalidconfirm	È®ÀÎ¿¡ »ç¿ëµÈ hash°ªÀÌ ¸ÂÁö ¾Ê½À´Ï´Ù.
+account_lostlogin	newpasswd	»õ·Î¿î ºñ¹Ğ¹øÈ£ (6±ÛÀÚ ÀÌ»ó)
+account_lostlogin	newpasswd2	»õ·Î¿î ºñ¹Ğ¹øÈ£ (ÇÑ¹ø´õ)
+account_lostlogin	notmatch	»õ ºñ¹Ğ¹øÈ£°¡ ¼­·Î ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.
+account_lostlogin	passwdchanged	<h2>ºñ¹Ğ¹øÈ£°¡ º¯°æµÇ¾ú½À´Ï´Ù.</h2><p>ÃàÇÏÇÕ´Ï´Ù. ºñ¹Ğ¹øÈ£°¡ Àç¼³Á¤µÇ¾úÀ¸¹Ç·Î ÀÌÁ¦ »çÀÌÆ®¿¡ <a href="/account/login.php">·Î±×ÀÎ</a>ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.</p>
+account_lostlogin	severalconfirm	È®ÀÎ¿¡ »ç¿ëµÈ hash°ª°ú µ¿ÀÏÇÑ hash°ªÀÌ ÇÏ³ª ÀÌ»ó Á¸ÀçÇÕ´Ï´Ù.
+account_lostlogin	sixchars	À¯È¿ÇÑ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù. (ÃÖ¼Ò 6±ÛÀÚ ÀÌ»ó)
+account_lostlogin	title	ºñ¹Ğ¹øÈ£ ºĞ½Ç È®ÀÎ
+account_lostlogin	update	¾÷µ¥ÀÌÆ®
+account_lostlogin	welcome	<h2>ºñ¹Ğ¹øÈ£ ºĞ½Ç ·Î±×ÀÎ</h2><p>È¯¿µÇÕ´Ï´Ù, $1. ÀÌ°÷¿¡¼­ ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.</p>
+account_lostpw	invalid_user	À¯È¿ÇÏÁö ¾ÊÀº »ç¿ëÀÚÀÔ´Ï´Ù.
+account_lostpw	message	$3 »çÀÌÆ®ÀÇ ´©±º°¡°¡ (¾Æ¸¶µµ º»ÀÎ?) ÀÌ¸ŞÀÏÀ» ÀÌ¿ëÇÑ\nºñ¹Ğ¹øÈ£ º¯°æÀ» ¿äÃ»ÇÏ¿´½À´Ï´Ù. ¸¸¾à ¿©·¯ºĞÀÌ Á÷Á¢ ÇÏ½Å °ÍÀÌ ¾Æ´Ï¶ó¸é\nÀÌ ¸Ş½ÃÁö´Â ±×³É ¹«½ÃÇÏ½Ê½Ã¿À. ±×·¯¸é ¾Æ¹«°Íµµ ¹Ù²îÁö ¾Ê½À´Ï´Ù.\n\n¸¸¾à º»ÀÎÀÌ Á÷Á¢ ¿äÃ»ÇÏ½Å °ÍÀÌ¶ó¸é ´ÙÀ½ URLÀ» ¹æ¹®ÇÏ¿© ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ½Ê½Ã¿À.\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
+account_lostpw	notify	<P>ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î ¸ŞÀÏÀ» º¸³Â½À´Ï´Ù. ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ½Ã·Á¸é Áö±İ º¸³½ ¸ŞÀÏÀÇ ³»¿ëÀ» Âü°íÇÏ½Ã±â ¹Ù¶ø´Ï´Ù. <P><A href="/">[ È¨À¸·Î ]</A>
+account_lostpw	sendhash	È®ÀÎ¿¡ »ç¿ëµÇ´Â hash°ªÀ» ´Ù½Ã º¸³À´Ï´Ù.
+account_lostpw	subject	$1 È®ÀÎ
+account_lostpw	title	ºñ¹Ğ¹øÈ£¸¦ ÀØÀ¸¼Ì½À´Ï±î?
+account_lostpw	user_dont_exist	Á¸ÀçÇÏÁö ¾Ê´Â »ç¿ëÀÚÀÔ´Ï´Ù.
+account_lostpw	warn	<P>ºñ¹Ğ¹øÈ£¸¦ ºĞ½ÇÇÏ´Â °ÍÀº »ç¿ëÇÏ°í °è½Å °èÁ¤°ú, ¿î¿µÁßÀÎ ÇÁ·ÎÁ§Æ®, ±×¸®°í ÀÌ »çÀÌÆ® ÀüÃ¼ÀûÀ¸·Î ÁÁÁö¾ÊÀº ¿µÇâÀ» ¹ÌÄ¥ ¼ö ÀÖ½À´Ï´Ù. <P>¾Æ·¡ "Send Lost PW Hash" ¸¦ ´©¸£½Ã¸é ¿©·¯ºĞ¿¡°Ô ÇÒ´çµÇ¾î ÀÖ´Â ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î URLÀ» ¾Ë·Á µå¸®°Ú½À´Ï´Ù. ±× URLÀº ¿©·¯ºĞÀÇ °èÁ¤¿¡ ÇÒ´çµÇ¾î ÀÖ´Â 128-bit ÇØ½¬ Á¤º¸ÀÔ´Ï´Ù. ±× URLÀ» ¹æ¹®ÇÏ½Ã¸é ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ½Ã°í »çÀÌÆ®¿¡ ´Ù½Ã ·Î±×ÀÎÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+account_options	change_email_address	ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æ
+account_options	change_password	ºñ¹Ğ¹øÈ£ º¯°æ
+account_options	edit_skills_profile	³ªÀÇ ½ºÅ³ ÇÁ·ÎÇÊ ÆíÁı
+account_options	email_address		ÀÌ¸ŞÀÏ ÁÖ¼Ò:
+account_options	language	¾ğ¾î:
+account_options	login_name	»ç¿ëÀÚ ID:
+account_options	member_since	°¡ÀÔÇÑ ³¯:
+account_options	real_name	ÀÌ¸§:
+account_options	timezone	½Ã°£´ë:
+account_options	title		°èÁ¤ ¼³Á¤
+account_options	user_id	»ç¿ëÀÚ ¹øÈ£:
+account_options	view_developer_profile	³ªÀÇ °³¹ßÀÚ ÇÁ·ÎÇÊ º¸±â
+account_options	welcome		È¯¿µÇÕ´Ï´Ù
+account_register	Preferences	¼³Á¤ÇÏ±â
+account_register	communitymail	Ä¿¹Â´ÏÆ¼ °ü·Ã ¸ŞÀÏ ¹Ş±â. <I>(Æ®·¡ÇÈ º°·Î ¾øÀ½.)</I>
+account_register	congrat	<p>ÃàÇÏÇÕ´Ï´Ù. $1¿¡ µî·ÏÇÏ¼Ì½À´Ï´Ù. <p> ±ÍÇÏ´Â ÀÌÁ¦ °ğ ¸ŞÀÏ ÁÖ¼Ò¸¦ È®ÀÎÇÏ±â À§ÇÑ È®ÀÎ ¸ŞÀÏÀ» ¹ŞÀ¸½Ã°Ô µË´Ï´Ù. ¸ŞÀÏ¿¡ Æ÷ÇÔµÇ¾î ÀÖ´Â URLÀ» Å¬¸¯ÇÏ½Ã¸é °èÁ¤À» »ç¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+account_register	emailaddr	ÀÌ¸ŞÀÏ ÁÖ¼Ò:<span><font color="red">*</font></span> <BR><I>ÀÌ ÀÌ¸ŞÀÏ ÁÖ¼Ò´Â °èÁ¤ÀÌ È°¼ºÈ­µÇ±â Àü¿¡ È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù. ÀÔ·ÂÇÏ½Å ÁÖ¼Ò´Â »çÀÌÆ® »ó¿¡¼­ ³ëÃâµÇÁö ¾Ê½À´Ï´Ù. ¿©·¯ºĞÀº &lt;loginname\@$1&gt;¶ó´Â °èÁ¤À» ¹ß±Ş¹Ş°Ô µÇ¸ç ÀÌ°÷À¸·Î º¸³»Áø ¸ğµç ¸ŞÀÏÀº ÀÔ·ÂÇÏ½Å ¸ŞÀÏ ÁÖ¼Ò·Î ÀçÀü¼ÛµË´Ï´Ù.</I>
+account_register	err_badinsert	ÀÔ·Â ½ÇÆĞ
+account_register	err_email	À¯È¿ÇÏÁö ¾ÊÀº ÀÌ¸ŞÀÏ ÁÖ¼Ò
+account_register	err_jabber	À¯È¿ÇÏÁö ¾ÊÀº  Jabber ÁÖ¼Ò
+account_register	err_mailexist	´©±º°¡ ÀÌ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÌ¹Ì »ç¿ëÇÏ°í ÀÖ½À´Ï´Ù. - »ç¶÷ Ã£±â ±â´ÉÀ» ÀÌ¿ëÇØ¼­ º¹±¸ÇÏ¼¼¿ä.
+account_register	err_passwd	ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+account_register	err_passwd2	ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.
+account_register	err_passwd3	Àß¸øµÈ ºñ¹Ğ¹øÈ£ÀÔ´Ï´Ù.
+account_register	err_realname	ÀÌ¸§À» ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+account_register	err_unixname	Àß¸øµÈ Unix Name. 
+account_register	err_userexist	»ç¿ëÀÚ ID°¡ ÀÌ¹Ì Á¸ÀçÇÕ´Ï´Ù.
+account_register	err_username	»ç¿ëÀÚ ID¸¦ ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+account_register	iewarn	<H2><FONT COLOR="RED">ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯ »ç¿ëÀÚ´Â 5.01 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ¼Å¾ß ÇÏ¸ç 128-bit SSLÀÇ »ç¿ëÀ» ±ÇÀåÇÕ´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ½Ã´Â °Íµµ ÁÁ½À´Ï´Ù.</FONT></H2>
+account_register	jabberaddr	Jabber ÁÖ¼Ò:
+account_register	jabberonly	ÀÚµ¿»ı¼ºµÇ´Â ¸Ş½ÃÁö´Â Jabber ÁÖ¼Ò·Î¸¸ º¸³»±â
+account_register	language	¾ğ¾î ¼±ÅÃ:
+account_register	loginname	»ç¿ëÀÚ ID(´ë¹®ÀÚ´Â ¾²Áö ¸¶½Ê½Ã¿À.):
+account_register	macwarn	<H2><FONT COLOR="RED">ÇöÀç ¸ÅÅ²Åä½Ã¿¡¼­ÀÇ ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯´Â Áö¿øµÇÁö ¾Ê½À´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇØ ÁÖ½Ê½Ã¿À.</FONT></H2>
+account_register	mandatory	$1°¡ ÀÖ´Â ºÎºĞÀº ÇÊ¼ö Ç×¸ñÀÔ´Ï´Ù.
+account_register	message_body	$4 »çÀÌÆ®¿¡ µî·ÏÇØ ÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.\n$1ÀÌ¶ó´Â °èÁ¤ÀÌ °³¼³µÇ¾î ÀÖÀ¸¸ç \nµî·ÏÀ» ¸¶Ä¡±â À§ÇØ¼­´Â ´ÙÀ½ ¸µÅ©¸¦ µû¶ó°¡¼Å¾ß ÇÕ´Ï´Ù.\n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(URLÀÌ º¸ÀÌÁö ¾Ê´Â´Ù¸é »ç¿ëÇÏ°í °è½Å ¸ŞÀÏ Å¬¶óÀÌ¾ğÆ®ÀÇ ¹®Á¦ÀÔ´Ï´Ù.\n¾Æ·¡¿¡ º¸ÀÌ´Â URLÀ» µû¶ó°¡½Ê½Ã¿À. ²À ÇÑÁÙ¿¡ ¸ğµÎ ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\n°¨»çÇÕ´Ï´Ù.\n\n-- $4 ¿î¿µÀÚ\n
+account_register	message_header	$1 »ç¿ëÀÚ µî·Ï
+account_register	partecipate_peer_ratings	»ç¿ëÀÚ°£ Æò°¡ ÇÁ·Î±×·¥¿¡ Âü¿©ÇÕ´Ï´Ù. <i>(¿©·¯°¡Áö ±âÁØÀ¸·Î ´Ù¸¥ »ç¿ëÀÚÀÇ È°µ¿À» Æò°¡ÇÏ°í, ´Ù¸¥ »ç¿ëÀÚ ¿ª½Ã ¿©·¯ºĞÀ» Æò°¡ÇÕ´Ï´Ù. ¸¸¾à ¿©·¯ºĞÀÌ »ç¿ëÀÚ°£ Æò°¡ ÇÁ·Î±×·¥¿¡ Âü¿©ÇÏ±â·Î ÇÏ¼Ì´Ù¸é, ÀÌ°Í¿¡ ´ëÇÑ ÀÚ¼¼ÇÑ ³»¿ëÀº $1 °³ÀÎ ÆäÀÌÁö</a>¿¡¼­ º¸½Ç ¼ö ÀÖ½À´Ï´Ù.)</i>
+account_register	password	ºñ¹Ğ¹øÈ£ (ÃÖ¼Ò 6 ±ÛÀÚ):
+account_register	password2	ºñ¹Ğ¹øÈ£ (´Ù½Ã):
+account_register	realname	ÀÌ¸§:
+account_register	register	µî·ÏÇÏ±â
+account_register	remember_me	"±â¾ïÇÏ±â". <i>(·Î±×ÀÎÇÏÁö ¾Ê°í $1 °³ÀÎ ÆäÀÌÁö</a>¸¦ º¼ ¼ö ÀÖ´Â ±â´ÉÀÔ´Ï´Ù. ³»¿ëÀ» º¯°æÇÏ°íÀÚ ÇÑ´Ù¸é ½ÇÁ¦·Î ·Î±×ÀÎÇÏ¼Å¾ß ÇÕ´Ï´Ù.)</i>
+account_register	reset	º¯°æ Ãë¼Ò
+account_register	siteupdate	»çÀÌÆ® ¾÷µ¥ÀÌÆ®¿¡ °üÇÑ ¼Ò½Ä ¸ŞÀÏ·Î ¹Ş±â <I>(Æ®·¡ÇÈÀÌ °ÅÀÇ ¾øÀ¸¸ç º¸¾È °ü·Ã °øÁö»çÇ×À» Æ÷ÇÔÇÏ¹Ç·Î ¸ŞÀÏÀ» ¹Ş¾Æ º¸½Ã±â¸¦ ±ÇÀåÇÕ´Ï´Ù.)</I>
+account_register	timezone	½Ã°£´ë:
+account_register	title	»ç¿ëÀÚ µî·Ï
+account_register	update	¾÷µ¥ÀÌÆ®
+account_shell	autorized_keys	CVS/SSH ÀÎÁõ Å°
+account_shell	edit_keys	Å° ÆíÁıÇÏ±â
+account_shell	shell_box	½©(Shell) ¼­¹ö
+account_shell	title	½©(Shell) °èÁ¤ Á¤º¸
+account_unsubscribe	all_mailings	¸ğµç $1 ¸ŞÀÏ ¹× °øÁö»çÇ×
+account_unsubscribe	site_mailings	$1 ¸ŞÀÏ
+account_verify	accessdenied	Á¢±ÙÀÌ °ÅºÎµÇ¾ú½À´Ï´Ù.
+account_verify	accountactive	°èÁ¤ÀÌ ÀÌ¹Ì È°¼ºÈ­µÇ¾î ÀÖ½À´Ï´Ù.
+account_verify	cannotactivate	°èÁ¤À» È°¼ºÈ­ÇÒ ¼ö ¾ø½À´Ï´Ù.
+account_verify	cannotconfirm	°èÁ¤À» È®ÀÎÇÒ ¼ö ¾ø½À´Ï´Ù. - È®ÀÎ hash°ªÀÌ Àß¸øµÇ¾ú°Å³ª »ç¿ëÀÚ ID°¡ Àß¸øµÇ¾ú½À´Ï´Ù.
+account_verify	erroractivate	°èÁ¤À» È°¼ºÈ­ÇÏ´Â µµÁß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.
+account_verify	invalidcred	Á¦°øÇÑ Á¤º¸¿Í ÀÏÄ¡ÇÏ´Â À¯È¿ÇÑ °èÁ¤ÀÌ ¾ø½À´Ï´Ù.
+account_verify	invalidop	Àß¸øµÈ µ¿ÀÛÀÔ´Ï´Ù.
+account_verify	invalidparam	Àß¸øµÈ ÀÎÀÚÀÔ´Ï´Ù.
+account_verify	invaliduser	Àß¸øµÈ »ç¿ëÀÚ
+account_verify	login		·Î±×ÀÎ
+account_verify	loginname	»ç¿ëÀÚ ID:
+account_verify	missingparam	ÀÎÀÚ°¡ ºüÁ³½À´Ï´Ù.
+account_verify	nouser	»ç¿ëÀÚ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
+account_verify	password	ºñ¹Ğ¹øÈ£:
+account_verify	title	$1 »ç¿ëÀÚ È®ÀÎ
+account_verify	usermandatory	»ç¿ëÀÚ ID¸¦ ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+account_verify	verify_blurb	<p>»ç¿ëÀÚ µî·Ï ÀıÂ÷¸¦ ¿Ï·áÇÏ½Ã·Á¸é Áö±İ ·Î±×ÀÎÇÏ½Ê½Ã¿À. ÀÏ¹İ ·Î±×ÀÎ ±â´ÉÀº °ğ¹Ù·Î È°¼ºÈ­µË´Ï´Ù.</p>
+add_snippet	add_this_snippet_version_id	ÀÌ ÄÚµå ¹öÀü ID¸¦ Ãß°¡ÇÏ±â:
+add_snippet	back_to_add_page	Ãß°¡ÇÏ±â ÆäÀÌÁö·Î µÇµ¹¾Æ°¡±â
+add_snippet	error_doing_snippet_version_insert	ÄÚµå ¹öÀü ÀÔ·Â¿¡ ¿À·ù°¡ »ı°å½À´Ï´Ù!
+add_snippet	error_go_back_and_fill_all	¿À·ù - µÇµ¹¾Æ°¡¼­ ¸ğµç Á¤º¸¸¦ ÀÔ·ÂÇØ ÁÖ¼¼¿ä.
+add_snippet	error_only_creator_can_add	¿À·ù - ÆĞÅ°Áö ¹öÀüÀ» ¸¸µç »ç¶÷¸¸ÀÌ °Å±â¿¡ ÄÚµå¸¦ Ãß°¡ÇÒ ¼ö ÀÖ½À´Ï´Ù.
+add_snippet	error_snippet_already_added	¿À·ù - ÄÚµå°¡ ÀÌ¹Ì ÀÌ ÆĞÅ°Áö¿¡ Ãß°¡µÇ¾ú½À´Ï´Ù.
+add_snippet	error_snippet_doesnt_exist	¿À·ù - ÄÚµå°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
+add_snippet	error_snippet_id_missing	¿À·ù - ÄÚµå ¹öÀü ID°¡ ¾ø½À´Ï´Ù.
+add_snippet	make_sure_all_info	¸ğµç Á¤º¸°¡ Á¤È®ÇÑÁö È®ÀÎÇÏ½Ê½Ã¿À.
+add_snippet	no_snippets_in_this_package	ÀÌ ÆĞÅ°Áö¿¡´Â ¾ÆÁ÷ ÄÚµå°¡ ¾ø½À´Ï´Ù.
+add_snippet	package	ÆĞÅ°Áö:
+add_snippet	snippet_version_added_successfully	ÄÚµå ¹öÀüÀÌ ¼º°øÀûÀ¸·Î Ãß°¡µÇ¾ú½À´Ï´Ù.
+add_snippet	snippets_in_this_package	ÀÌ ÆĞÅ°Áö¿¡ ÀÖ´Â ÄÚµåµé
+add_snippet	submit	Á¦Ãâ
+add_snippet	title	»õ·Î¿î ÄÚµå Á¦Ãâ
+add_snippet	you_can_use_this_form	ÀÌ formÀ» ÀÌ¿ëÇØ¼­ ÆĞÅ°Áö¿¡ ÄÚµå¸¦ °è¼Ó Ãß°¡ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.</p><p>"ÄÚµå ¹öÀü ID"´Â ºê¶ó¿ìÀú »ó¿¡¼­ Æ¯Á¤ ¹öÀüÀÇ ÄÚµå ¿·¿¡ º¸ÀÌ´Â À¯ÀÏÇÑ IDÀÔ´Ï´Ù.
+admin	add	Ãß°¡
+admin	add_new	[»õ·Î Ãß°¡]
+admin	are_you_sure_delete	Á¤¸»·Î »èÁ¦ÇÏ½Ã°Ú½À´Ï±î
+admin	cancel	Ãë¼Ò
+admin	delete	Áö¿ì±â
+admin	edit	ÆíÁı
+admin	http_domain	HTTP µµ¸ŞÀÎ:
+admin	license	ÀúÀÛ±Ç:
+admin	license_other	±âÅ¸ ÀúÀÛ±Ç:
+admin	na	N/A
+admin	other	±×¿Ü
+admin	reject	°ÅºÎ
+admin	site_admin_home	»çÀÌÆ® °ü¸® ÆäÀÌÁö
+admin	submit_changes	º¯µ¿»çÇ× Á¦ÃâÇÏ±â
+admin	submit_new	»õ·Î Á¦Ãâ
+admin	successfully_added	¼º°øÀûÀ¸·Î Ãß°¡µÇ¾ú½À´Ï´Ù.
+admin	successfully_deleted	¼º°øÀûÀ¸·Î »èÁ¦µÇ¾ú½À´Ï´Ù.
+admin	successfully_modified	¼º°øÀûÀ¸·Î ¼öÁ¤µÇ¾ú½À´Ï´Ù.
+admin	yes	¿¹
+admin_add_language	add_new_language	»õ·Î¿î ¾ğ¾î Ãß°¡ÇÏ±â
+admin_add_language	class_filename	¾ğ¾î Å¬·¡½º ÆÄÀÏ¸í:
+admin_add_language	classname	¾ğ¾î Å¬·¡½º:
+admin_add_language	existing_language	ÇöÀç Á¸ÀçÇÏ´Â ¾ğ¾îµé
+admin_add_language	name	ÀÌ¸§:
+admin_add_language	submit	Á¦Ãâ
+admin_approve_pending	add_this_custom_response	ÀÌ ÀÀ´äÀ» ¹Ì¸® Á¤ÀÇµÈ ÀÀ´ä¿¡ Ãß°¡ÇÏ±â
+admin_approve_pending	admin_approve_pending	È°¼ºÈ­
+admin_approve_pending	approve	½ÂÀÎ
+admin_approve_pending	approve_all_on_this_page	ÀÌ ÆäÀÌÁö¿¡ ÀÖ´Â °Í ¸ğµÎ ½ÂÀÎÇÏ±â
+admin_approve_pending	approving_group		±×·ì ½ÂÀÎÇÏ±â:
+admin_approve_pending	approving_pending_projects	´ë±âÁßÀÎ ÇÁ·ÎÁ§Æ® ½ÂÀÎÇÏ±â
+admin_approve_pending	custom_response_title	ÀÀ´ä Á¦¸ñ°ú ³»¿ë
+admin_approve_pending	edit_project_details	[ÇÁ·ÎÁ§Æ® ¼¼ºÎ»çÇ× ÆíÁı]
+admin_approve_pending	error_creating_group	±×·ì °´Ã¼ »ı¼º ¿À·ù
+admin_approve_pending	error_group_rejection	±×·ì °ÅºÎ ¿À·ù
+admin_approve_pending	home_box	Home ¹Ú½º:
+admin_approve_pending	manage_responses	(ÀÀ´ä °ü¸®)
+admin_approve_pending	no_pending_projects_to_approve	´ë±âÁßÀÎ ÇÁ·ÎÁ§Æ®°¡ ¾ø½À´Ï´Ù.
+admin_approve_pending	none_found	None Found
+admin_approve_pending	other_information	´Ù¸¥ Á¤º¸
+admin_approve_pending	pending_projects	´ë±âÁßÀÎ ÇÁ·ÎÁ§Æ®:
+admin_approve_pending	pending_reason	´ë±âÁßÀÎ Á¦ÃâÀÌÀ¯:
+admin_approve_pending	project_admin	ÇÁ·ÎÁ§Æ® °ü¸®
+admin_approve_pending	submitted_description	Á¦ÃâµÈ ¼³¸í:
+admin_approve_pending	unix_group_name	Unix Group Name:
+admin_approve_pending	view_edit_project_members	[ÇÁ·ÎÁ§Æ® ¸â¹ö º¸±â/°íÄ¡±â]
+admin_database	add_an_already_active_database	Add an already active database
+admin_database	added_already_active_database	added already active database
+admin_database	count	Count
+admin_database	display_database_type	Displaying Databases of Type:
+admin_database	error_adding_database	Error Adding Database
+admin_database	group	Group
+admin_database	group_unix_name	Group Unix Name:
+admin_database	no_databases_defined	No databases defined
+admin_database	site_admin_groups_maintance	Site Admin: Groups' DB Maintenance
+admin_database	statistics_for_project_database	Statistics for Project Databases
+admin_database	type	Type
+admin_database	unable_to_insert	Unable to insert already active database.
+admin_groupedit	active	Active (A)
+admin_groupedit	deleted	Deleted (D)
+admin_groupedit	error	Error
+admin_groupedit	error_creating_group_object	Error creating group object
+admin_groupedit	holding	Holding (H)
+admin_groupedit	incomplete	Incomplete (I)
+admin_groupedit	instruction_email_sent	Instruction email sent
+admin_groupedit	new_project_instruction_email	Resend New Project Instruction Email
+admin_groupedit	no	No
+admin_groupedit	pending	Pending (P)
+admin_groupedit	project_admin	[Project Admin]
+admin_groupedit	public	Public?
+admin_groupedit	registration_application	Registration Application:
+admin_groupedit	status	Status
+admin_groupedit	title	Site Admin: Group Info
+admin_groupedit	unix_group_name	Unix Group Name:
+admin_groupedit	update	Update
+admin_groupedit	updated	Updated
+admin_groupedit	yes	Yes
+admin_grouplist	group_list	Group List
+admin_grouplist	group_list_for_category	Group List for Category:
+admin_grouplist	group_name_click_to_edit	Group Name (click to edit)
+admin_grouplist	groups_that_begin_with	Groups that begin with
+admin_grouplist	license	License
+admin_grouplist	members	Members
+admin_grouplist	public	Public?
+admin_grouplist	status	Status
+admin_grouplist	unix_name	Unix Name
+admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
+admin_index	add_delete_edit_laguage	Add, Delete, or Edit Supported Languages
+admin_index	add_edit_delete_processors	Add, Delete, or Edit Processors
+admin_index	add_edit_delete_themes	Add, Delete, or Edit Themes
+admin_index	add_to_trove_map	Add to the Trove Map
+admin_index	approve_reject	Approve/Reject
+admin_index	deleted_status	(deleted) Status
+admin_index	display_full_group	Display Full Group List/Edit Groups
+admin_index	display_full_user_list	Display Full User List/Edit Users
+admin_index	display_groups_beginning_with	Display Groups Beginning with :
+admin_index	display_trove_map	Display Trove Map
+admin_index	display_user_beginning_with	Display Users Beginning with :
+admin_index	front_page_news	Front-page news
+admin_index	get	get
+admin_index	group_maintaince	Group Maintenance
+admin_index	groups_with_status	Groups with status
+admin_index	mail_engine	Mail Engine for $1 Subscribers
+admin_index	new_project_approval	(New Project Approval)
+admin_index	news	News
+admin_index	pending_status	 (pending) Status
+admin_index	private_groups	Private Groups
+admin_index	project_database_administration	Project Database Administration
+admin_index	recent_logins	Recent logins
+admin_index	register_new_project	Register New Project
+admin_index	site_mailing_maintaince	Site Mailings Maintenance
+admin_index	site_utilities	Site Utilities
+admin_index	site_wide_stats	Site-Wide Stats
+admin_index	stats	Stats
+admin_index	title	Site Admin
+admin_index	translation_file_tool	Translation file tool
+admin_index	trove_project_tree	Trove Project Tree
+admin_index	user_maintaince	User Maintenance
+admin_index	virtual_host_admin_tool	Virtual Host Admin Tool
+admin_loadtabfile	availaible_tables	Available Tables:
+admin_loadtabfile	edit_dont_work	[edit(don t work)]
+admin_loadtabfile	purge_loaded_data	Purge loaded data
+admin_loadtabfile	reload_all_language_files	(Re)Load all language files
+admin_loadtabfile	see_translations	[see translations]
+admin_loadtabfile	see_untranslated	[see untranslated]
+admin_loadtabfile	tables_loaded	Tables loaded
+admin_loadtabfile	title	Site Admin
+admin_massmail	active_deliveries	Active Deliveries
+admin_massmail	all_project_admins	All Project Admins
+admin_massmail	all_project_developers	All Project Developers
+admin_massmail	all_users	All Users
+admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
+admin_massmail	date	Date
+admin_massmail	developers_test	Developers (test)
+admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not schedule mailing, database error:
+admin_massmail	id	ID
+admin_massmail	last_user_id_mailed	Last user_id mailed
+admin_massmail	mail_engine_for	Mail Engine for $1 Subscribers
+admin_massmail	mailing_successfully_scheduled	Mailing successfully scheduled for delivery
+admin_massmail	missing_parameter_empty_message	Missing parameter, You are trying to send empty message
+admin_massmail	missing_parameter_proper_subject	Missing parameter, You must give proper subject to the mailing
+admin_massmail	missing_parameter_select_target	Missing parameter, You must select target audience for mailing
+admin_massmail	schedule_for_mailing	Schedule for Mailing
+admin_massmail	select	(select)
+admin_massmail	subject	Subject
+admin_massmail	subscribers_to_additional_community	Subscribers to "Additional Community Mailings"
+admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
+admin_massmail	text_of_message	Text of Message
+admin_massmail	title	Administrative Mass Mail Engine
+admin_massmail	type	Type
+admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
+admin_massmail_execute	completed_successfully	COMPLETED SUCCESSFULLY
+admin_massmail_execute	querry_complete	Query Complete. Beginning mailings to 
+admin_massmail_execute	receive_post	Received Post. Making Query.
+admin_massmail_execute	sending_to	sending to
+admin_massmail_execute	unrecognized_post	Unrecognized Post, cannot execute
+admin_massmail_execute	user_id	User id:
+admin_responses	add_response	Added Response
+admin_responses	by_the_way	By the way, I didn't delete... just in case...
+admin_responses	create	Create
+admin_responses	create_new_response	Create New Response:
+admin_responses	deleted_resposes	Deleted Response
+admin_responses	edit_response	Edited Response
+admin_responses	edit_response_other	Edit Response: 
+admin_responses	existing_responses	Existing Responses: 
+admin_responses	go	go
+admin_responses	not_sure_dont_click	If you're aren't sure then why did you click 'Delete'?
+admin_responses	response_text	Response Text:
+admin_responses	response_title	Response Title: 
+admin_responses	title	Site Admin: Edit Rejection Responses
+admin_responses	yes_im_sure	Yes, I'm sure
+admin_responses	you_cant	You can't $1 \"None\"!
+admin_search	email	Email
+admin_search	full_name	Full Name
+admin_search	group_search_criteria	Group search with criteria
+admin_search	id	ID
+admin_search	index	Admin Search Results
+admin_search	matches	matches
+admin_search	member_since	Member since
+admin_search	real_name	Real Name
+admin_search	refusing_to_display_whole_db	Refusing to display whole DB,That would display whole DB.  Please use a CLI query if you wish to do this.
+admin_search	registered	Registered
+admin_search	status	Status
+admin_search	unix_name	UNIX Name
+admin_search	user_search_criteria	User search with criteria
+admin_search	username	Username
+admin_tabfiles	delete_lang	[delete]
+admin_tabfiles	edit_the_langfile	Edit The $1 Language
+admin_tabfiles	edit_the_language	Edit The Language
+admin_tabfiles	language	Language
+admin_tabfiles	modify_the	Modify the $1 below:
+admin_table	edit_the	Edit The
+admin_table	table	Table
+admin_trove_cat_add	add	Add
+admin_trove_cat_add	add_new_trove_category	Add New Trove Category
+admin_trove_cat_add	error_in_trove_openration	Error In Trove Operation
+admin_trove_cat_add	new_category_description	New category description (VARCHAR 255)
+admin_trove_cat_add	new_category_full_name	New category full name (VARCHAR 80)
+admin_trove_cat_add	new_category_short_name	New category short name (no spaces, unix-like)
+admin_trove_cat_add	parent_category	Parent Category
+admin_trove_cat_add	title	Site Admin: Trove - Add Node
+admin_trove_cat_edit	cant_delete_has_subcategories	Can't delete, That trove cat has sub categories
+admin_trove_cat_edit	delete	Delete
+admin_trove_cat_edit	edit_trove_category	Edit Trove Category
+admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
+admin_trove_cat_edit	error_trove_equal_parent	Error Parent Category can not be same as current
+admin_trove_cat_edit	new_category_description	New category description (VARCHAR 255)
+admin_trove_cat_edit	new_category_full_name	New category full name (VARCHAR 80)
+admin_trove_cat_edit	new_category_short_name	New category short name (no spaces, unix-like)
+admin_trove_cat_edit	no_such_category	No Such Category, That trove cat does not exist
+admin_trove_cat_edit	parent_category	Parent Category:
+admin_trove_cat_edit	title	Site Admin: Trove - Edit Category
+admin_trove_cat_edit	update	Update
+admin_trove_cat_list	add	Add
+admin_trove_cat_list	browse_trove_tree	Browse Trove Tree
+admin_trove_cat_list	edit	Edit
+admin_trove_cat_list	title	Site Admin: Trove - Category List
+admin_unsubscribe	admin_initiaded_mail	Admin-initiated mailings
+admin_unsubscribe	all	ALL
+admin_unsubscribe	all_site_mailing	All site mailings
+admin_unsubscribe	comm_mail	Comm. Mail.
+admin_unsubscribe	email	Email
+admin_unsubscribe	error_unsubscribe_user	Error, Could not unsubscribe user: 
+admin_unsubscribe	mail	MAIL
+admin_unsubscribe	real_name	Real Name
+admin_unsubscribe	show_user_matching	Show users matching pattern
+admin_unsubscribe	site_mail	Site Mail.
+admin_unsubscribe	subscription_maintance	Site Mailings Subscription Maintenance
+admin_unsubscribe	title	Site Mailings Subscription Maintenance
+admin_unsubscribe	unsubscribe	Unsubscribe
+admin_unsubscribe	unsubscribe_user	Unsubscribe user:
+admin_unsubscribe	use_fields_bellow	Use field below to find users which match given pattern with the $1 username, real name, or email address (substring match is preformed, use '%' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).
+admin_unsubscribe	user_id	user_id
+admin_unsubscribe	user_unsubscribed	User unsubscribed
+admin_unsubscribe	username	Username
+admin_unsubscribe	you_can_unsubscribe	You can unsubscribe user either from admin-initiated sitewide mailings or from all site mailings (admin-initiated and automated mailings, like forum and file release notifications).
+admin_useredit	account_info	Account Information
+admin_useredit	active	Active (A)
+admin_useredit	could_not_complete_operation	Could Not Complete Operation
+admin_useredit	current_confirm_bash	Current confirm hash:
+admin_useredit	deleted	Deleted (D)
+admin_useredit	email	Email:
+admin_useredit	group_memerbership	Groups Membership
+admin_useredit	membership_permissions	Member Permissions
+admin_useredit	name	Name
+admin_useredit	no_unix_account	No Unix account (N)
+admin_useredit	operations	Operations
+admin_useredit	pending	Pending (P)
+admin_useredit	project_admin	Project Admin
+admin_useredit	real_name	Real name
+admin_useredit	suspended	Suspended (S)
+admin_useredit	this_page_allows	This pages allows to change only direct properties of user object. To edit properties pertinent to user within specific group, visit admin page of that group (below).
+admin_useredit	title	Site Admin: User Info
+admin_useredit	unix_account_status	Unix Account Status
+admin_useredit	unix_name	Unix Name
+admin_useredit	unix_shell	Unix Shell:
+admin_useredit	unix_status_updated_mirroring	Unix status updated mirroring web status, unless it has value 'No unix account (N)'
+admin_useredit	update	Update
+admin_useredit	updated	Updated
+admin_useredit	user_id	User ID:
+admin_useredit	user_name	User name:
+admin_useredit	web_account_status	Web account status
+admin_userlist	activate	Activate
+admin_userlist	active	Active
+admin_userlist	all_groups	All Groups
+admin_userlist	delete	Delete
+admin_userlist	deleted	Deleted
+admin_userlist	devprofile	DevProfile
+admin_userlist	key	Key
+admin_userlist	pending	(*)Pending
+admin_userlist	submit	Submit
+admin_userlist	suspend	Suspend
+admin_userlist	suspended	Suspended
+admin_userlist	user_list_for_group	User list for group:
+admin_userlist	user_updated	User updated to $1 status
+admin_userlist	userlist	: User List
+admin_vhost	add_virtual_host	Add Virtual Host
+admin_vhost	cgi_dir	CGI Dir
+admin_vhost	error_adding_vhost	Error adding VHOST: 
+admin_vhost	error_updating_vhost	Error updating VHOST entry: 
+admin_vhost	get_info	Get Info
+admin_vhost	group	Group
+admin_vhost	group_unix_name	Group Unix Name
+admin_vhost	htdocs_dir	Htdocs Dir
+admin_vhost	no_such_host	No such VHOST:
+admin_vhost	operations	Operations
+admin_vhost	scheduled_for_creation	scheduled for creation on group
+admin_vhost	the_provided_group	The provided group name does not exist
+admin_vhost	title	Site Admin
+admin_vhost	tweak_directories	Tweak Directories
+admin_vhost	update	Update
+admin_vhost	update_record	Update Record:
+admin_vhost	vhost_id	VHOST ID
+admin_vhost	vhost_name	VHOST Name
+admin_vhost	virtual_host	Virtual Host:
+admin_vhost	virtual_host_administration	Virtual Host Administration
+admin_vhost	virtual_host_entry_updated	Virtual Host entry updated.
+admin_vhost	virtual_host_name	Virtual Host Name
+artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
+artifact_category	required_fields	ArtifactCategory: name and assignee are Required
+calendar	april	4¿ù
+calendar	august	8¿ù
+calendar	comingyear	³»³â
+calendar	currentyear	±İ³â
+calendar	december	12¿ù
+calendar	february	2¿ù
+calendar	fordate	For date:
+calendar	friday	±İ¿äÀÏ
+calendar	invaliddate	Àß¸øµÈ ³¯Â¥
+calendar	invaliddateexplain	$1 Àº Àß¸øµÈ ³¯Â¥ÀÔ´Ï´Ù
+calendar	invalidday	Àß¸øµÈ ¿äÀÏÀÔ´Ï´Ù
+calendar	invaliddayexplain	ÀÏÀº 1 ºÎÅÍ 31 »çÀÌ¶ó¾ß ÇÕ´Ï´Ù.
+calendar	invalidmonth	Àß¸øµÈ ´ŞÀÔ´Ï´Ù.
+calendar	invalidmonthexplain	¿ùÀº 1 ºÎÅÍ 12 »çÀÌ¶ó¾ß ÇÕ´Ï´Ù.
+calendar	invalidtype	Àß¸øµÈ Çü½ÄÀÔ´Ï´Ù.
+calendar	invalidtypeexplain	Çü½ÄÀÌ Àß¸øµÇ¾ú½À´Ï´Ù.
+calendar	invalidyear	Àß¸øµÈ ¿¬µµÀÔ´Ï´Ù.
+calendar	invalidyearexplain	¿¬µµ´Â 1990 ¿¡¼­ 2020»çÀÌ¶ó¾ß ÇÕ´Ï´Ù.
+calendar	january	1¿ù
+calendar	july	7¿ù
+calendar	june	6¿ù
+calendar	march	3¿ù
+calendar	may	5¿ù
+calendar	monday	¿ù¿äÀÏ
+calendar	november	11¿ù
+calendar	october	10¿ù
+calendar	onemonth	ÇÑ´Ş
+calendar	saturday	Åä¿äÀÏ
+calendar	selecteddate	¼±ÅÃµÈ ³¯Â¥ (¸¸¾à ¿À´ÃÀÌ ¾Æ´Ò °æ¿ì).
+calendar	september	9¿ù
+calendar	sunday	ÀÏ¿äÀÏ
+calendar	task_begins	ÀÓ¹« $1 ½ÃÀÛ
+calendar	task_ends	ÀÓ¹« $1 Á¾·á
+calendar	task_link_title	ÀÓ¹« ¿ä¾à: $1
+calendar	threemonth	3°³¿ù
+calendar	thursday	¸ñ¿äÀÏ
+calendar	title	ÇÁ·ÎÁ§Æ® °ü¸®: ´Ş·Â
+calendar	todaysdate	¿À´ÃÀÇ ³¯Â¥:
+calendar	tuesday	È­¿äÀÏ
+calendar	update	°»½Å
+calendar	view	º¸±â:
+calendar	wednesday	¼ö¿äÀÏ
+classgroup	acceptedproject	$7¿¡ ½ÅÃ»ÇÏ½Å ÇÁ·ÎÁ§Æ®°¡ ½ÂÀÎµÇ¾ú½À´Ï´Ù.\n\nÇÁ·ÎÁ§Æ® ÀÌ¸§:  $1\nÇÁ·ÎÁ§Æ® Unix Name:  $2\nCVS ¼­¹ö:         cvs.$2.$3\nShell/Web ¼­¹ö:   $2.$3\n\nDNSÁ¤º¸ °»½ÅÀº ÃÖ´ë ÇÏ·ç°¡ °É¸³´Ï´Ù.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nIf you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
+classgroup	acceptedprojecttitle	$1 ÇÁ·ÎÁ§Æ®°¡ ½ÂÀÎµÇ¾ú½À´Ï´Ù.
+classgroup	newprojectnotification	$1 ÇÁ·ÎÁ§Æ®°¡ ½ÂÀÎÀ» ±â´Ù¸®°í ÀÖ½À´Ï´Ù.\n\nÇÁ·ÎÁ§Æ® ÀÌ¸§:  $2\n¼³¸í: $3\nÀúÀÛ±Ç: $4\n\n´ÙÀ½ URLÀ» ¹æ¹®ÇÏ¿© ÀÌ ÇÁ·ÎÁ§Æ®¸¦ ½ÂÀÎÇÏ°Å³ª °ÅºÎÇÏ½Ê½Ã¿À.\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification_submitter	$1 ÇÁ·ÎÁ§Æ®°¡ Á¦ÃâµÇ¾ú½À´Ï´Ù.\n\nÇÁ·ÎÁ§Æ® ÀÌ¸§:  $2\n¼³¸í: $3\nÀúÀÛ±Ç: $4\n\n$1ÀÇ °ü¸®ÀÚ°¡ Á¦Ãâ »óÈ²À» Á¡°ËÇÒ °ÍÀÔ´Ï´Ù. °á°ú´Â ÀÌ¸ŞÀÏ·Î Åëº¸¹ŞÀ¸½Ç ¼ö ÀÖ½À´Ï´Ù.
+classgroup	newprojectnotificationtitle	$1 ÇÁ·ÎÁ§Æ®°¡ Á¦ÃâµÇ¾ú½À´Ï´Ù.
+classgroup	rejectedproject	±ÍÇÏ°¡ Á¦ÃâÇÏ½Å $3 ÇÁ·ÎÁ§Æ®°¡ °ÅºÎµÇ¾ú½À´Ï´Ù.\n\nÇÁ·ÎÁ§Æ® ÀÌ¸§:  $1\nÇÁ·ÎÁ§Æ® Unix Name:  $2\n\n°ÅºÎ ÀÌÀ¯:\n\n
+classgroup	rejectedprojecttitle	$1 ÇÁ·ÎÁ§Æ®°¡ °ÅºÎµÇ¾ú½À´Ï´Ù.
+common	login	·Î±×ÀÎ
+common	logout	·Î±×¾Æ¿ô
+common	myaccount	³ªÀÇ °èÁ¤
+common	newaccount	»ç¿ëÀÚ µî·Ï
+common_include_account	cvsreserved	ID°¡ CVS¿¡ ¿¹¾àµÇ¾î ÀÖ½À´Ï´Ù.
+common_include_account	dnsreserved	ID°¡ DNS¸¦ À§ÇØ ¿¹¾àµÇ¾î ÀÖ½À´Ï´Ù.
+common_include_account	illegal	ID¿¡ »ç¿ëÇÒ ¼ö ¾ø´Â ¹®ÀÚ¸¦ ÀÔ·ÂÇÏ¼Ì½À´Ï´Ù.
+common_include_account	nospace	ID¿¡ °ø¹éÀÌ µé¾î°¡¸é ¾ÈµË´Ï´Ù.
+common_include_account	nounderscore	±×·ì ÀÌ¸§¿¡´Â DNS¿ÍÀÇ È£È¯¼ºÀ» À§ÇØ underscore¹®ÀÚ°¡ µé¾î°¡¼­´Â ¾ÈµË´Ï´Ù.
+common_include_account	sixchar	ºñ¹Ğ¹øÈ£´Â Àû¾îµµ 6±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+common_include_account	toolong	ID°¡ ³Ê¹« ±é´Ï´Ù. ÀÌ¸§Àº 15±ÛÀÚ ÀÌÇÏÀÌ¾î¾ß ÇÕ´Ï´Ù.
+common_include_account	tooshort	ID°¡ ³Ê¹« Âª½À´Ï´Ù. 3±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+common_utils	priority_colors	¿ì¼±¼øÀ§
+conf	content_encoding	utf-8
+conf	default_font	±¼¸²Ã¼,verdana,arial,helvetica,sans-serif
 conf	language_code	ko
 conf	language_id	22
-conf	mail_charset	ISO-2022-KR
-contact	about_blurb	<p>ì´ê²ƒì€ <b>GForge.net</b>ì˜ ì—°ë½ í˜ì´ì§€ì…ë‹ˆë‹¤. -- ì´ê³³ì—ì„œ í˜¸ìŠ¤íŒ…ë˜ê³  ìˆëŠ” í”„ë¡œì íŠ¸ì— ëŒ€í•´ ë¬¸ì œê°€ ìˆë‹¤ë©´ í•´ë‹¹ í”„ë¡œì íŠ¸ì˜ ë²„ê·¸ íŠ¸ë˜í‚¹ ì‹œìŠ¤í…œì´ë‚˜ ê¸°ìˆ ì§€ì› ê´€ë¦¬ì ê¸°ëŠ¥ì„ í™œìš©í•˜ì‹­ì‹œì˜¤. ì´ëŸ¬í•œ ê¸°ëŠ¥ë“¤ì€ í•´ë‹¹ í”„ë¡œì íŠ¸ì˜ í™ˆí˜ì´ì§€ì¸ sourceforge.net/projects/&lt;í”„ë¡œì íŠ¸ ì´ë¦„&gt; ì„ ë°©ë¬¸í•˜ì‹œë©´ ì´ìš©í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.</p><p>ê¸°ìˆ ì§€ì› ìš”ì²­ì´ë‚˜ ë²„ê·¸ ë¦¬í¬íŠ¸ í˜¹ì€ GForgeì˜ <A href="staff.php">staff</a>ë“¤ê³¼ ì§ì ‘ ì—°ë½í•˜ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´, ì ì ˆí•œ ë°©ë²•ì„ ì´ìš©í•˜ì—¬ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.</p><ul><li>ì—¬ëŸ¬ë¶„ì˜ í”„ë¡œì íŠ¸ë‚˜ ê³„ì •ì— ëŒ€í•œ ì§€ì›ìš”ì²­ì€ <a href="/support/?func=addsupport&group_id=1">GForge ê¸°ìˆ ì§€ì› ê´€ë¦¬ì</a>ë¥¼ ë°©ë¬¸í•˜ì‹­ì‹œì˜¤.</li><li>GForgeì— ë²„ê·¸ë¥¼ ë°œê²¬í•˜ì…¨ë‹¤ë©´, <a href="/bugs/?func=addbug&group_id=1">GForge ë²„ê·¸ íŠ¸ë˜í‚¹</a>ì„ ì´ìš©í•˜ì‹­ì‹œì˜¤.</li><li>ë³´ë„ìë£Œ ìš”ì²­ì€ VA Linux Systemsì˜ í•´ë‹¹ ë‹´ë‹¹ìì¸ <a href="mailto:eureka@valinux.com">Eureka Endo</a>ì—ê²Œ ì—°ë½í•˜ì‹œë©´ ë©ë‹ˆë‹¤.</li></ul>
-contact	title	GForgeì™€ ì—°ë½í•˜ê¸°
-cvs	section	í”„ë¡œì íŠ¸: $1
+conf	mail_charset	UTF-8
+contact	about_blurb	<p>ÀÌ°ÍÀº <b>$1</b>ÀÇ ¿¬¶ô ÆäÀÌÁöÀÔ´Ï´Ù. -- ÀÌ°÷¿¡¼­ È£½ºÆÃµÇ°í ÀÖ´Â ÇÁ·ÎÁ§Æ®¿¡ ´ëÇØ ¹®Á¦°¡ ÀÖ´Ù¸é ÇØ´ç ÇÁ·ÎÁ§Æ®ÀÇ ¹ö±× Æ®·¡Å· ½Ã½ºÅÛÀÌ³ª ±â¼úÁö¿ø °ü¸®ÀÚ ±â´ÉÀ» È°¿ëÇÏ½Ê½Ã¿À. ÀÌ·¯ÇÑ ±â´ÉµéÀº ÇØ´ç ÇÁ·ÎÁ§Æ®ÀÇ È¨ÆäÀÌÁöÀÎ <tt>http://$2/projects/&lt;ÇÁ·ÎÁ§Æ® ÀÌ¸§&gt;</tt> À» ¹æ¹®ÇÏ½Ã¸é ÀÌ¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.</p><p>±â¼úÁö¿ø ¿äÃ»ÀÌ³ª ¹ö±× ¸®Æ÷Æ® È¤Àº $1ÀÇ <A href="staff.php">¿î¿µÀÚ</a>¿Í Á÷Á¢ ¿¬¶ôÇÏ°í ½ÍÀ¸½Ã´Ù¸é <a href="/projects/siteadmin">$1</a>À» ¹æ¹®ÇÏ½Ê½Ã¿À.</p>
+contact	title	$1¿Í ¿¬¶ôÇÏ±â
+cvs	anoncvs	<P><B>ÀÍ¸í CVS »ç¿ë ¹æ¹ı</B> <P>´ÙÀ½ ¹æ¹ıÀ» »ç¿ëÇÏ½Ã¸é ÀÍ¸íÀ¸·Î ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ CVS ÀúÀå¼Ò·ÎºÎÅÍ ¼Ò½ºÄÚµå¸¦ Ã¼Å©¾Æ¿ôÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. Ã¼Å©¾Æ¿ôÇÏ°íÀÚ ÇÏ´Â ¸ğµâÀ» ¹İµå½Ã <I>modulename</I>ºÎºĞ¿¡ ½á ÁÖ¼Å¾ß ÇÕ´Ï´Ù. <I>anonymous</I>¿¡ ´ëÇÑ ºñ¹Ğ¹øÈ£¸¦ ¹°¾îº¸¸é ±×³É Enter¸¦ ´©¸£½Ã¸é µË´Ï´Ù.
+cvs	anoncvsup	ÇØ´ç ¸ğµâ µğ·ºÅä¸® ¾È¿¡¼­ ¾÷µ¥ÀÌÆ®¸¦ ÇÒ ¶§´Â -d ¿É¼ÇÀÌ ÇÊ¿ä ¾ø½À´Ï´Ù.
+cvs	browseit	CVS ÀúÀå¼Ò(Repository)
+cvs	browsetree	<HR><B>CVS Æ®¸® »ìÆìº¸±â</B> <P>CVS Æ®¸®¸¦ »ìÆìº¸½Ã¸é ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ ¼Ò½ºÄÚµå°¡ ¾î¶»°Ô ¿î¿µµÇ°í ÀÖ´ÂÁö Àß ¾Ë ¼ö ÀÖ½À´Ï´Ù. ¶ÇÇÑ ÀúÀå¼Ò ³»ÀÇ ¸ğµç ÆÄÀÏ¿¡ ´ëÇÑ ¿ÏÀüÇÑ È÷½ºÅä¸®µµ »ìÆìº¸½Ç ¼ö ÀÖ½À´Ï´Ù.
+cvs	devcvs	<P><B>SSH¸¦ ÅëÇÑ °³¹ßÀÚÀÇ CVS »ç¿ë ¹æ¹ı</B> <P>ÇÁ·ÎÁ§Æ®ÀÇ °³¹ßÀÚ·Î ÁöÁ¤µÈ »ç¶÷¸¸ÀÌ ÀÌ ¹æ¹ıÀ» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. SSH1ÀÌ Å¬¶óÀÌ¾ğÆ® Ãø¿¡ ¹İµå½Ã ¼³Ä¡µÇ¾î ÀÖ¾î¾ß ÇÕ´Ï´Ù. <I>modulename</I>°ú <I>developername</I> ºÎºĞÀ» »óÈ²¿¡ ¸Â°Ô ¹Ù²Ù¾î ÁÖ½Ê½Ã¿À. ºñ¹Ğ¹øÈ£´Â »çÀÌÆ® ÀÌ¿ë½Ã ÁöÁ¤ÇÑ ºñ¹Ğ¹øÈ£¿Í µ¿ÀÏÇÕ´Ï´Ù.
+cvs	history	ÀúÀå¼Ò È÷½ºÅä¸®
+cvs	section	ÇÁ·ÎÁ§Æ®: $1
 cvs	title	CVS
-cvs	anoncvs	<P><B>ìµëª… CVS ì‚¬ìš© ë°©ë²•</B> <P>ë‹¤ìŒ ë°©ë²•ì„ ì‚¬ìš©í•˜ì‹œë©´ ìµëª…ìœ¼ë¡œ ì´ í”„ë¡œì íŠ¸ì˜ CVS ì €ì¥ì†Œë¡œë¶€í„° ì†ŒìŠ¤ì½”ë“œë¥¼ ì²´í¬ì•„ì›ƒí•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì²´í¬ì•„ì›ƒí•˜ê³ ì í•˜ëŠ” ëª¨ë“ˆì„ ë°˜ë“œì‹œ <I>modulename</I>ë¶€ë¶„ì— ì¨ ì£¼ì…”ì•¼ í•©ë‹ˆë‹¤. <I>anonymous</I>ì— ëŒ€í•œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¬¼ì–´ë³´ë©´ ê·¸ëƒ¥ Enterë¥¼ ëˆ„ë¥´ì‹œë©´ ë©ë‹ˆë‹¤.
-cvs	anoncvsup	í•´ë‹¹ ëª¨ë“ˆ ë””ë ‰í† ë¦¬ ì•ˆì—ì„œ ì—…ë°ì´íŠ¸ë¥¼ í•  ë•ŒëŠ” -d ì˜µì…˜ì´ í•„ìš” ì—†ìŠµë‹ˆë‹¤.
-cvs	devcvs	<P><B>SSHë¥¼ í†µí•œ ê°œë°œìì˜ CVS ì‚¬ìš© ë°©ë²•</B> <P>í”„ë¡œì íŠ¸ì˜ ê°œë°œìë¡œ ì§€ì •ëœ ì‚¬ëŒë§Œì´ ì´ ë°©ë²•ì„ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. SSH1ì´ í´ë¼ì´ì–¸íŠ¸ ì¸¡ì— ë°˜ë“œì‹œ ì„¤ì¹˜ë˜ì–´ ìˆì–´ì•¼ í•©ë‹ˆë‹¤. <I>modulename</I>ê³¼ <I>developername</I> ë¶€ë¶„ì„ ìƒí™©ì— ë§ê²Œ ë°”ê¾¸ì–´ ì£¼ì‹­ì‹œì˜¤. ë¹„ë°€ë²ˆí˜¸ëŠ” ì‚¬ì´íŠ¸ ì´ìš©ì‹œ ì§€ì •í•œ ë¹„ë°€ë²ˆí˜¸ì™€ ë™ì¼í•©ë‹ˆë‹¤.
-cvs	history	ì €ì¥ì†Œ íˆìŠ¤í† ë¦¬
-cvs	browsetree	<HR><B>CVS íŠ¸ë¦¬ ì‚´í´ë³´ê¸°</B> <P>CVS íŠ¸ë¦¬ë¥¼ ì‚´í´ë³´ì‹œë©´ ì´ í”„ë¡œì íŠ¸ì˜ ì†ŒìŠ¤ì½”ë“œê°€ ì–´ë–»ê²Œ ìš´ì˜ë˜ê³  ìˆëŠ”ì§€ ì˜ ì•Œ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë˜í•œ ì €ì¥ì†Œ ë‚´ì˜ ëª¨ë“  íŒŒì¼ì— ëŒ€í•œ ì™„ì „í•œ íˆìŠ¤í† ë¦¬ë„ ì‚´í´ë³´ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
-cvs	browseit	CVS ì €ì¥ì†Œ(Repository)
-docman	section	í”„ë¡œì íŠ¸: $1
-docman	title	ë¬¸ì„œ ê´€ë¦¬ì
+developer	body	º»¹®
+developer	date	³¯Â¥
+developer	diary_and_notes	ÀÏ±â¿Í ¸Ş¸ğ: 
+developer	entry_not_found	ÀÌ »ç¿ëÀÚ¿¡°Ô ÇØ´çÇÏ´Â ¸ñ·ÏÀÌ ¾ø½À´Ï´Ù.
+developer	no_entries	ÀÌ »ç¿ëÀÚÀÇ ÀÏ±â°¡ ¾ø½À´Ï´Ù.
+developer	no_user_selected	»ç¿ëÀÚ°¡ ¼±ÅÃµÇÁö ¾Ê¾Ò½À´Ï´Ù.
+developer	subject	Á¦¸ñ
+developer_monitor	error_inserting	user_diary_monitor¿¡ Ãß°¡ÇÏ´Âµ¥ ½ÇÆĞÇß½À´Ï´Ù.
+developer_monitor	monitoring_user	ÀÌ »ç¿ëÀÚ¸¦ ¸ğ´ÏÅÍ¸µÇÕ´Ï´Ù.
+developer_monitor	monitoring_user_expl	<p>±ÍÇÏ´Â ÀÌÁ¦ºÎÅÍ ÀÌ »ç¿ëÀÚÀÇ ÀÏ±â ¸ñ·ÏÀ» ÀÌ¸ŞÀÏ·Î ¹Ş¾Æº¸½Ã°Ô µË´Ï´Ù.</p><p>¸ğ´ÏÅÍ¸µÀ» ÁßÁöÇÏ½Ã·Á¸é <strong>ÀÌ »ç¿ëÀÚ¸¦ ¸ğ´ÏÅÍ¸µÇÕ´Ï´Ù.</strong> ¸µÅ©¸¦ ´Ù½Ã Å¬¸¯ÇÏ½Ã¸é µË´Ï´Ù.</p>
+developer_monitor	monitoring_user_off	¸ğ´ÏÅÍ¸µÀÌ Áß´ÜµÇ¾ú½À´Ï´Ù.
+developer_monitor	monitoring_user_off_expl	ÀÌÁ¦ ÀÌ »ç¿ëÀÚ¿¡ °üÇÑ ÀÌ¸ŞÀÏÀÌ ¹ß¼ÛµÇÁö ¾Ê½À´Ï´Ù.
+developer_monitor	title	»ç¿ëÀÚ ¸ğ´ÏÅÍ¸µÇÏ±â
+developer_monitor_choose_user	body	¿À·ù - ¸ğ´ÏÅÍ¸µÇÒ »ç¿ëÀÚ¸¦ ¸ÕÀú ¼±ÅÃÇÏ½Ê½Ã¿À
+developer_monitor_choose_user	title	»ç¿ëÀÚ¸¦ ¸ÕÀú ¼±ÅÃÇÏ½Ê½Ã¿À
+developer_rate	cannot_rate_yourself	ÀÚ±â ÀÚ½ÅÀº Æò°¡ÇÒ ¼ö ¾ø½À´Ï´Ù.
+developer_rate	invalid_rating_value	¿À·ù - À¯È¿ÇÏÁö ¾ÊÀº Á¡¼ö°¡ ÀÔ·ÂµÇ¾ú½À´Ï´Ù.
+developer_rate	ratings_recorded	 Æò°¡Á¤º¸°¡ ±â·ÏµÇ¾ú½À´Ï´Ù.
+developer_rate	ratings_recorded_body	»ç¿ëÀÚ Æò°¡ ÆäÀÌÁö¿¡¼­ Æò°¡Á¡¼ö¸¦ ÀçÀÔ·ÂÇÏ´Â °Í¸¸À¸·Î ÀÌ »ç¿ëÀÚ¸¦ ´Ù½Ã Æò°¡ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+developer_rate	title	»ç¿ëÀÚ Æò°¡ ÆäÀÌÁö
+developer_rate	turned_off_body	±ÍÇÏ´Â »ç¿ëÀÚ°£ Æò°¡ ½Ã½ºÅÛ¿¡ Âü¿©ÇÏÁö ¾Ê±â·Î ÇÏ¼Ì½À´Ï´Ù.
+developer_rate	turned_off_title	Æò°¡ ±â´ÉÀ» »ç¿ëÇÏÁö ¾Ê½À´Ï´Ù.
+docman	admin	°ü¸®
+docman	description	¼³¸í
+docman	error_invalid_file_attack	Àß¸øµÈ ÆÄÀÏÀÔ´Ï´Ù: $1
+docman	error_no_docs	ÀÌ ÇÁ·ÎÁ§Æ®¿¡ ´ëÇØ °ø°³µÇ¾î ÀÖ´Â ¹®¼­°¡ ¾ø½À´Ï´Ù.
+docman	error_no_groups_defined	¹®¼­ ±×·ìÀÌ Á¤ÀÇµÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù.
+docman	section	ÇÁ·ÎÁ§Æ®: $1
+docman	submit_new	»õ·Î¿î ¹®¼­ ¿Ã¸®±â
+docman	title	¹®¼­ °ü¸®ÀÚ
+docman	turned_off	ÀÌ ÇÁ·ÎÁ§Æ®´Â ¹®¼­ °ü¸®ÀÚ ½Ã½ºÅÛÀ» »ç¿ëÇÏÁö ¾Êµµ·Ï ¼³Á¤µÇ¾î ÀÖ½À´Ï´Ù.
+docman	view_doc	¹®¼­ º¸±â
+docman_admin	add_edit_docgroups	¹®¼­ ±×·ìÀ» Ãß°¡/ÆíÁıÇÏ±â
 docman_admin	section	$1
-docman_admin	title	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
-docman_admin_docedit	section	ë¬¸ì„œ ê´€ë¦¬ì
-docman_admin_docedit	title	ë¬¸ì„œ í¸ì§‘
-docman_admin_editdocs	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
-docman_admin_editdocs	title	ë¬¸ì„œ í¸ì§‘
-docman_admin_editgroups	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
-docman_admin_editgroups	title	ê·¸ë£¹ í¸ì§‘
-docman_admin_groupdelete	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
-docman_admin_groupdelete	title	ë¬¸ì„œ ê·¸ë£¹ ì§€ìš°ê¸°
-docman_admin_groupedit	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
-docman_admin_groupedit	title	ë¬¸ì„œ ê·¸ë£¹ ì´ë¦„ ë°”ê¾¸ê¸°
-docman_display_doc	section	í”„ë¡œì íŠ¸: $1 
-docman_display_doc	title	ë¬¸ì„œ ê´€ë¦¬ì: ë¬¸ì„œ ë³´ì—¬ì£¼ê¸°
-docman_new	section	í”„ë¡œì íŠ¸: $1 
-docman_new	title	ë¬¸ì„œ ê´€ë¦¬ì: ìƒˆë¡œìš´ ë¬¸ì„œ ì œì¶œí•˜ê¸°
-forum	section	í”„ë¡œì íŠ¸: $1
-forum	title	ê²Œì‹œíŒ
-forum	choose	<p>ì›í•˜ì‹œëŠ” ê²Œì‹œíŒì„ ì„ íƒí•˜ì‹­ì‹œì˜¤. ê¸€ì„ ì½ê±°ë‚˜, ìƒˆë¡œìš´ ê¸€ì„ ì˜¬ë¦¬ê±°ë‚˜, í˜¹ì€ ë‹µê¸€ì„ ì˜¬ë¦¬ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<p>
-forum	html	HTML íƒœê·¸ëŠ” ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
-forum_admin	section	í”„ë¡œì íŠ¸: $1 
-forum_admin	title	ê²Œì‹œíŒ: ê´€ë¦¬
-forum_admin_addforum	section	ê²Œì‹œíŒ ê´€ë¦¬
-forum_admin_addforum	title	ê²Œì‹œíŒ ì¶”ê°€
-forum_admin_changestatus	section	ê²Œì‹œíŒ ê´€ë¦¬
-forum_admin_changestatus	title	ê²Œì‹œíŒ ìƒíƒœ ë³€ê²½
-forum_admin_delete	section	ê²Œì‹œíŒ ê´€ë¦¬
-forum_admin_delete	title	ê²Œì‹œíŒ ì§€ìš°ê¸°
-forum_forum	section	í”„ë¡œì íŠ¸: $1 
-forum_forum	title	ê²Œì‹œíŒ: ê²Œì‹œíŒ ë³´ê¸°
-forum_forum_thread	section	ê²Œì‹œíŒ
-forum_forum_thread	title	ìŠ¤ë ˆë“œ ë³´ê¸°
-forum_message	section	ê²Œì‹œíŒ
-forum_message	title	ë©”ì‹œì§€ ë³´ê¸°
-forum_message	msg	ë‹µê¸€ ì˜¬ë¦¬ê¸°
-forum_message	thread	ìƒˆê¸€ ì˜¬ë¦¬ê¸°
-frs	file_download	ë‹¤ìš´ë¡œë“œ
-frs	file_monitor	ëª¨ë‹ˆí„°
-frs	file_notes	ë…¸íŠ¸
-frs	file_package	íŒ¨í‚¤ì§€
-frs	file_rel_date	ë‚ ì§œ
-frs	file_version	ë²„ì „
-frs	latest_file_releases	ìµœê·¼ íŒŒì¼ ë¦´ë¦¬ì¦ˆ
-general	return	[$1ë¡œ ë˜ëŒì•„ê°€ê¸°]
-general	sitename	GForge
-general	footer	ì´ê²ƒì€ Debianì—ì„œ ì‘ë™í•˜ëŠ” GForgeì…ë‹ˆë‹¤. ì €ì‘ê¶Œ ë“±ì˜ ìì„¸í•œ ì‚¬í•­ì€ <a href="/about.php">ì´ê³³</a>ì„ ì°¸ê³ í•˜ì‹­ì‹œì˜¤.
-group	developer_info	ê°œë°œì ì •ë³´
-group	developers	ê°œë°œì
-group	long_bugs	ë²„ê·¸ íŠ¸ë˜í‚¹
-group	long_cvs	CVS ì €ì¥ì†Œ
-group	long_docman	ë¬¸ì„œ ê´€ë¦¬ì: í”„ë¡œì íŠ¸ ë¬¸ì„œí™”
-group	long_forum	ê³µê°œ ê²Œì‹œíŒ
-group	long_ftp	ìµëª… FTP ê³µê°„
-group	long_homepage	í”„ë¡œì íŠ¸ í™ˆí˜ì´ì§€
-group	long_mail	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
-group	long_news	ìµœì‹  ì†Œì‹
-group	long_patch	íŒ¨ì¹˜ ê´€ë¦¬ì
-group	long_pm	ì„ë¬´ ê´€ë¦¬ì
-group	long_support	ê¸°ìˆ ì§€ì› ê´€ë¦¬ì
-group	long_survey	ì„¤ë¬¸ì¡°ì‚¬
-group	long_tracker	ë¬¸ì œì  ì¶”ì 
-group	project_admins	í”„ë¡œì íŠ¸ ê´€ë¦¬ì
-group	public_area	ê³µê°œ êµ¬ì—­
-group	short_admin	í”„ë¡œì íŠ¸ ê´€ë¦¬
-group	short_bugs	ë²„ê·¸
+docman_admin	title	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
+docman_admin_addgroups	section	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
+docman_admin_addgroups	title	¹®¼­ ±×·ì Ãß°¡
+docman_admin_docedit	section	¹®¼­ °ü¸®ÀÚ
+docman_admin_docedit	title	¹®¼­ ÆíÁı
+docman_admin_editdocs	doc_contents	¹®¼­ ³»¿ë
+docman_admin_editdocs	section	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
+docman_admin_editdocs	state	»óÅÂ
+docman_admin_editdocs	title	¹®¼­ ÆíÁı
+docman_admin_editdocs	upload	¼±ÅÃ: »õ ÆÄÀÏ ¿Ã¸®±â
+docman_admin_editgroups	add_group	±×·ì Ãß°¡ÇÏ±â
+docman_admin_editgroups	description	±×·ì ÀÌ¸§ÀÌ Á¦¸ñÀÌ µÇ¹Ç·Î ¿Ã¹Ù¸£°Ô ÀÔ·ÂÇØ ÁÖ¼¼¿ä.
+docman_admin_editgroups	edit_group	±×·ì ÆíÁıÇÏ±â
+docman_admin_editgroups	group_id	ID
+docman_admin_editgroups	group_name	±×·ì ÀÌ¸§
+docman_admin_editgroups	new_group_name	»õ·Î¿î ±×·ì ÀÌ¸§
+docman_admin_editgroups	section	¹®¼­ °ü¸®ÀÚ ¼³Á¤ÇÏ±â
+docman_admin_editgroups	title	±×·ì ÆíÁı
+docman_admin_groupdelete	section	¹®¼­ °ü¸®ÀÚ ¼³Á¤ÇÏ±â
+docman_admin_groupdelete	title	¹®¼­ ±×·ì Áö¿ì±â
+docman_admin_groupedit	section	¹®¼­ °ü¸®ÀÚ ¼³Á¤ÇÏ±â
+docman_admin_groupedit	title	¹®¼­ ±×·ì ÀÌ¸§ ¹Ù²Ù±â
+docman_common	error_min_desc_length	¹®¼­¿¡ ´ëÇÑ ¼³¸íÀº ÃÖ¼Ò 10±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+docman_common	error_min_title_length	Á¦¸ñÀº ÃÖ¼Ò 5±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+docman_common	no_docs	¹®¼­°¡ ¾ø½À´Ï´Ù.
+docman_common_doc	invalid_docid	Àß¸øµÈ ¹®¼­ id ÀÔ´Ï´Ù.
+docman_common_docgroup	invalid_id	Àß¸øµÈ ¹®¼­ ±×·ì idÀÔ´Ï´Ù.
+docman_common_docgroup	name_required	¹®¼­ ±×·ì: ÀÌ¸§ÀÌ ÇÊ¿äÇÕ´Ï´Ù.
+docman_display_doc	all_languages	¸ğµç ¾ğ¾î
+docman_display_doc	docmoved	ÀÌ ¹®¼­´Â <a href="/docman/view.php/$1/$2">ÀÌ°÷</a>À¸·Î ÀÌµ¿µÇ¾ú½À´Ï´Ù.
+docman_display_doc	no_document_data_text	º¸¿©ÁÙ ¹®¼­°¡ ¾ø½À´Ï´Ù. À¯È¿ÇÏÁö ¾Ê°Å³ª ºñÈ°¼ºÈ­µÈ ¹®¼­ ¹øÈ£ÀÔ´Ï´Ù.
+docman_display_doc	no_document_data_title	¹®¼­¿¡ ³»¿ëÀÌ ¾ø½À´Ï´Ù.
+docman_display_doc	section	ÇÁ·ÎÁ§Æ®: $1 
+docman_display_doc	title	¹®¼­ °ü¸®ÀÚ: ¹®¼­ º¸¿©ÁÖ±â
+docman_new	description	¼³¸í
+docman_new	doc_title	¹®¼­ Á¦¸ñ
+docman_new	error_blank_document	ºó ¹®¼­¸¦ ÀĞ¾î¿À´Â µµÁß ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.
+docman_new	file	ÆÄÀÏ
+docman_new	group	¹®¼­°¡ ¼ÓÇÏ´Â ±×·ì:
+docman_new	intro	<strong>¹®¼­ Á¦¸ñ</strong>: ÀÌ ¹®¼­¿¡ ´ëÇÑ °£´ÜÇÑ Á¦¸ñÀÔ´Ï´Ù. (¿¹: ´Ù¿î·Îµå ¼­¹ö¸¦ »ç¿ëÇÏ´Â ¹æ¹ı)<br /><strong>¼³¸í:</strong> Á¦¸ñ ¾Æ·¡¿¡ µé¾î°¥ °£´ÜÇÑ ¼³¸í
+docman_new	language	¾ğ¾î
+docman_new	no_valid_group	À¯È¿ÇÑ ¹®¼­ ±×·ìÀÌ ¼±ÅÃµÇÁö ¾Ê¾Ò½À´Ï´Ù.
+docman_new	section	ÇÁ·ÎÁ§Æ®: $1 
+docman_new	state	»óÅÂ
+docman_new	submit	Á¦Ãâ Á¤º¸
+docman_new	submitted_successfully	¹®¼­°¡ ¼º°øÀûÀ¸·Î Á¦ÃâµÇ¾ú½À´Ï´Ù.
+docman_new	title	¹®¼­ °ü¸®ÀÚ: »õ·Î¿î ¹®¼­ Á¦ÃâÇÏ±â
+docman_new	upload_file	ÆÄÀÏ ¾÷·Îµå
+error	error_creating	¹®¼­ »ı¼º ½ÇÆĞ:
+error	not_found	ÆäÀÌÁö¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.
+error	title	¿äÃ»ÇÏ½Å ÆäÀÌÁö¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.(Error 404)
+exit	choose_a_group	¿À·ù - ±×·ìÀ» ¼±ÅÃÇÏ½Ê½Ã¿À.
+exit	choose_group_body	±×·ì id°¡ ¼±ÅÃµÇÁö ¾Ê¾Ò½À´Ï´Ù.
+exit	choose_group_title	¿À·ù - ±×·ì id°¡ ¼±ÅÃµÇÁö ¾Ê¾Ò½À´Ï´Ù.
+exit	exiting_with_error	¿À·ù°¡ ¹ß»ıÇÏ¿© Á¾·áÇÕ´Ï´Ù.
+exit	missing_parameters_body	¿À·ù - ÇÊ¿äÇÑ ÀÎÀÚ°¡ ºüÁ³½À´Ï´Ù.
+exit	missing_parameters_title	¿À·ù - ÇÊ¿äÇÑ ÀÎÀÚ°¡ ºüÁ³½À´Ï´Ù.
+forum	choose	<p>¿øÇÏ½Ã´Â °Ô½ÃÆÇÀ» ¼±ÅÃÇÏ½Ê½Ã¿À. ±ÛÀ» ÀĞ°Å³ª, »õ·Î¿î ±ÛÀ» ¿Ã¸®°Å³ª, È¤Àº ´ä±ÛÀ» ¿Ã¸®½Ç ¼öµµ ÀÖ½À´Ï´Ù.<p>
+forum	error_forum_not_found	°Ô½ÃÆÇÀÌ ¾ø½À´Ï´Ù.
+forum	error_invalid_group_forum_id	$1:: °Ô½ÃÆÇ id°¡ À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù.
+forum	error_no_forums_found	$1¿¡ ´ëÇÑ °Ô½ÃÆÇÀÌ ¾ø½À´Ï´Ù.
+forum	error_no_valid_forum_object	$1:: À¯È¿ÇÑ °Ô½ÃÆÇ °´Ã¼ÀÌ ¾ø½À´Ï´Ù.
+forum	error_no_valid_group_object	Forum:: À¯È¿ÇÑ ±×·ì °´Ã¼°¡ ¾ø½À´Ï´Ù.
+forum	forum	°Ô½ÃÆÇ
+forum	forums_for	$1ÀÇ °Ô½ÃÆÇ
+forum	html	HTML ÅÂ±×´Â »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.
+forum	section	ÇÁ·ÎÁ§Æ®: $1
+forum	title	°Ô½ÃÆÇ
+forum_admin	add_forum	°Ô½ÃÆÇ Ãß°¡ÇÏ±â
+forum_admin	delete_message	°Ô½ÃÆÇ ±Û »èÁ¦ÇÏ±â
+forum_admin	section	ÇÁ·ÎÁ§Æ®: $1 
+forum_admin	title	°Ô½ÃÆÇ: °ü¸®
+forum_admin	update_forum	°Ô½ÃÆÇ Á¤º¸¿Í »óÅÂ¸¦ °»½ÅÇÕ´Ï´Ù.
+forum_admin_addforum	add_forum	ÀÌ °Ô½ÃÆÇÀ» Ãß°¡ÇÕ´Ï´Ù.
+forum_admin_addforum	allow_anonymous	ÀÍ¸í »ç¿ëÀÚ°¡ ±ÛÀ» ¿Ã¸± ¼ö ÀÖµµ·Ï ÇÏ½Ã°Ú½À´Ï±î?
+forum_admin_addforum	email_posts	¸ğµç ±ÛÀ» ´ÙÀ½ ÀÌ¸ŞÀÏ·Î º¸³À´Ï´Ù.:
+forum_admin_addforum	existing_forums	°Ô½ÃÆÇÀ» Á¾·áÇÕ´Ï´Ù.
+forum_admin_addforum	forum_created	°Ô½ÃÆÇÀÌ ¼º°øÀûÀ¸·Î »ı¼ºµÇ¾ú½À´Ï´Ù.
+forum_admin_addforum	forum_description	¼³¸í
+forum_admin_addforum	forum_name	°Ô½ÃÆÇ ÀÌ¸§
+forum_admin_addforum	is_public	°ø°³?
+forum_admin_addforum	section	°Ô½ÃÆÇ °ü¸®
+forum_admin_addforum	title	°Ô½ÃÆÇ Ãß°¡
+forum_admin_changestatus	change_status	°Ô½ÃÆÇ »óÅÂ º¯°æÇÏ±â
+forum_admin_changestatus	forum	°Ô½ÃÆÇ
+forum_admin_changestatus	intro	ÀÌ°÷¿¡¼­ °Ô½ÃÆÇÀÇ Æ¯¼ºµéÀ» Á¤ÀÇÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. ºñ°ø°³ °Ô½ÃÆÇÀº ÇÁ·ÎÁ§Æ® ¸â¹öµé³¢¸®¸¸ º¼ ¼ö ÀÖ°í ÀÏ¹İ »ç¿ëÀÚ´Â º¼ ¼ö ¾ø´Ù´Â »ç½ÇÀ» À¯³äÇÏ¼¼¿ä.
+forum_admin_changestatus	no_forums_found	°Ô½ÃÆÇÀÌ ¾ø½À´Ï´Ù.
+forum_admin_changestatus	section	°Ô½ÃÆÇ °ü¸®
+forum_admin_changestatus	status	»óÅÂ
+forum_admin_changestatus	title	°Ô½ÃÆÇ ¼³Á¤ º¯°æ
+forum_admin_changestatus	update_successful	°Ô½ÃÆÇ Á¤º¸°¡ ¼º°øÀûÀ¸·Î °»½ÅµÇ¾ú½À´Ï´Ù.
+forum_admin_delete	section	°Ô½ÃÆÇ °ü¸®
+forum_admin_delete	title	°Ô½ÃÆÇ Áö¿ì±â
+forum_admin_delete_message	enter_message_id	±Û ¹øÈ£¸¦ ÀÔ·ÂÇÏ½Ê½Ã¿À.
+forum_admin_delete_message	section	°Ô½ÃÆÇ °ü¸®
+forum_admin_delete_message	title	±Û Áö¿ì±â
+forum_admin_delete_message	warning	°æ°í! Áö¿öÁø ±ÛÀº º¹±¸ÇÒ ¼ö ¾øÀ¸¸ç ´ä±Û±îÁö ÇÔ²² Áö¿öÁı´Ï´Ù!
+forum_admin_delete_messages	messages_deleted	$1 °³ÀÇ ±ÛÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.
+forum_common	error_adding_forum	°Ô½ÃÆÇÀ» Ãß°¡ÇÒ ¶§ ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.
+forum_common	error_min_desc_length	°Ô½ÃÆÇ ¼³¸íÀº 10±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+forum_common	error_min_name_length	°Ô½ÃÆÇ ÀÌ¸§Àº 3±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+forum_common	error_save_when_logged_in	·Î±×ÀÎÇÏ¼Å¾ß¸¸ ÇöÀç À§Ä¡¸¦ ±â·ÏÇÒ ¼ö ÀÖ½À´Ï´Ù.
+forum_common	error_set_monitor	¸ğ´ÏÅÍ¸µ ±â´ÉÀ» »ç¿ëÇÏ½Ã·Á¸é ·Î±×ÀÎÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+forum_common	error_unable_to_add_monitor	¸ğ´ÏÅÍ¸µ ±â´ÉÀ» »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.
+forum_common	welcome_to	$1: È¯¿µÇÕ´Ï´Ù.
+forum_common_forum	error_save_place	°Ô½ÃÆÇ::savePlace() 
+forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
+forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
+forum_common_forummessage	error_get_message_id	ForumMessage::create() Unable to get new message id
+forum_common_forummessage	error_getting_next_thread	Getting next thread_id failed
+forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does not match Forum Object
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Invalid MessageID
+forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() No Valid ParentMessage Object
+forum_common_forummessage	error_not_logged	±ÛÀ» ¿Ã¸®½Ã±â À§ÇØ¼­´Â ·Î±×ÀÎÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting Failed 
+forum_common_forummessage	error_required_fields	Must Include A Message Body And Subject
+forum_common_forummessage	forum_message	Forum Message
+forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
+forum_errors	error_determining_forum_id	Error Determining forum_id
+forum_errors	error_getting_forum	Error getting Forum
+forum_forum	author	±Û¾´ÀÌ
+forum_forum	changeview	º¸±â ¹æ¹ı º¯°æ
+forum_forum	date	³¯Â¥
+forum_forum	flat	Flat
+forum_forum	forum	°Ô½ÃÆÇ
+forum_forum	lastpost	¸¶Áö¸· ±Û
+forum_forum	nested	Nested	
+forum_forum	next_messages	´ÙÀ½ ±Û
+forum_forum	no_forum_chosen	°Ô½ÃÆÇÀÌ ¼±ÅÃµÇÁö ¾Ê¾Ò½À´Ï´Ù.
+forum_forum	posts	±Û¼ö
+forum_forum	postsuccess	¼º°øÀûÀ¸·Î ±ÛÀÌ °Ô½ÃµÇ¾ú½À´Ï´Ù.
+forum_forum	previous_messages	ÀÌÀü ±Û
+forum_forum	replies	´äÀå
+forum_forum	section	ÇÁ·ÎÁ§Æ®: $1 
+forum_forum	show	Show
+forum_forum	thread	Thread
+forum_forum	threaded	Threaded
+forum_forum	threads	Threads
+forum_forum	title	°Ô½ÃÆÇ: °Ô½ÃÆÇ º¸±â
+forum_forum	topic	ÁÖÁ¦
+forum_forum	topicstarter	Ã³À½ ±Û¿Ã¸°ÀÌ
+forum_forum	ultimate	Ultimate
+forum_forum_thread	section	°Ô½ÃÆÇ
+forum_forum_thread	title	½º·¹µå º¸±â
+forum_message	by	BY
+forum_message	date	³¯Â¥
+forum_message	message	±Û
+forum_message	message_not_found_body	±ÛÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
+forum_message	message_not_found_title	±ÛÀÌ ¾ø½À´Ï´Ù.
+forum_message	msg	ÀÌ ½º·¹µå¿¡ ´ä±Û ¿Ã¸®±â
+forum_message	must_choose_message_body	±ÛÀ» ¸ÕÀú ¼±ÅÃÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+forum_message	must_choose_message_title	±ÛÀ» ¸ÕÀú ¼±ÅÃÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+forum_message	post_followup	ÀÌ ±Û¿¡ ´ä±Û ¿Ã¸®±â
+forum_message	receive_followups	ÀÌ ±Û¿¡ ´ëÇÑ ´ä±ÛÀ» ÀÌ¸ŞÀÏ·Î ¹Ş¾Æº¸±â
+forum_message	section	°Ô½ÃÆÇ
+forum_message	subject	Á¦¸ñ
+forum_message	thread	»õ±Û ¿Ã¸®±â
+forum_message	thread_view	Thread View
+forum_message	title	¸Ş½ÃÁö º¸±â
+forum_monitor	activated	°Ô½ÃÆÇÀ» ¸ğ´ÏÅÍ¸µÇÕ´Ï´Ù.
+forum_monitor	deactivated	°Ô½ÃÆÇÀ» ¸ğ´ÏÅÍ¸µÇÏÁö ¾Ê½À´Ï´Ù.
+forum_save	saved	°Ô½ÃÆÇÀÇ À§Ä¡°¡ ±â·ÏµÇ¾ú½À´Ï´Ù. ´ÙÀ½ ¹æ¹®ºÎÅÍ´Â »õ·Î¿î ¸Ş½ÃÁö°¡ ÇÏÀÌ¶óÀÌÆ®µÇ¾î Ç¥½ÃµÉ °ÍÀÔ´Ï´Ù.
+forum_utils	added	°Ô½ÃÆÇÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.
+forum_utils	admin	°ü¸®
+forum_utils	anonymously	ÀÍ¸í
+forum_utils	author	±Û¾´ÀÌ
+forum_utils	brokenthread	±úÁø ±ÛÅ¸·¡
+forum_utils	by	By:
+forum_utils	couldpostif	$1 ·Î±×ÀÎ $2 ÇÏ½Ã¸é ±ÛÀ» ¿Ã¸± ¼ö ÀÖ½À´Ï´Ù.
+forum_utils	date	³¯Â¥
+forum_utils	discussionforum	°Ô½ÃÆÇ:
+forum_utils	doublepost	¾Æ¸¶µµ °°Àº °Ô½Ã¹°À» µÎ¹ø ¿Ã¸®½Å °Í °°½À´Ï´Ù. Á¦¸ñ°ú º»¹®ÀÌ ÀÌÀü °Ô½Ã¹°°ú µ¿ÀÏÇÕ´Ï´Ù.
+forum_utils	error	¿À·ù!
+forum_utils	erroradd	°Ô½ÃÆÇ Ãß°¡½Ã ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.
+forum_utils	errorfollowup	Á¸ÀçÇÏÁö ¾Ê´Â ±Û¿¡ ´ä±ÛÀ» ´Ş ¼ö ¾ø½À´Ï´Ù.
+forum_utils	errorfollowup2	ÀÌ¹Ì Á¸ÀçÇÏ°í ÀÖ´Â ±ÛÅ¸·¡¿¡ ´ä±ÛÀ» ´Ş ¶§´Â ´ä±Û ID°¡ ÇÊ¿äÇÕ´Ï´Ù.
+forum_utils	errorinsert	insertid()°¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.
+forum_utils	errormaster	Áö±İÀº ±ÛÅ¸·¡ÀÇ ¿ø ±ÛÀ» °»½ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+forum_utils	errorparent	ºÎ¸ğ ±ÛÀ» °»½ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+forum_utils	errorpost	±Û ¿Ã¸®±â ½ÇÆĞ
+forum_utils	feedbacklogin	·Î±×ÀÎÇÏ½Ã¸é ±ÛÀ» ¿Ã¸®½Ç ¼ö ÀÖ½À´Ï´Ù.
+forum_utils	htmltag	HTML ÅÂ±×´Â ÇØ¼®µÇÁö ¾Ê°í º»¹®¿¡¼­ ¹®ÀÚ ±×´ë·Î º¸ÀÔ´Ï´Ù.
+forum_utils	latest	ÃÖ±Ù ¼Ò½Ä
+forum_utils	loggedin	·Î±×ÀÎÇÏ¼Ì½À´Ï´Ù.
+forum_utils	mailmonitor	\n´ÙÀ½ URL¿¡¼­ ÀÌ ±ÛÀ» ÀĞÀ¸½Ã°í ´ä±ÛÀ» ¿Ã¸®½Ç ¼ö ÀÖ½À´Ï´Ù.\n$1\n±Û¾´ÀÌ: $2 \n\n $3\n\n______________________________________________________________________\nÀÌ ¸ŞÀÏÀº ±ÍÇÏ²²¼­ ÀÌ °Ô½ÃÆÇÀ» ¸ğ´ÏÅÍ¸µÇÏ°í ÀÖ±â ¶§¹®¿¡ ¹ß¼ÛµÈ °ÍÀÔ´Ï´Ù.\n´õÀÌ»ó ¸ğ´ÏÅÍ¸µÇÏÁö ¾ÊÀ¸½Ã·Á¸é $4¿¡ ·Î±×ÀÎÇÏ¼Å¼­ \´ÙÀ½ URLÀ» ¹æ¹®ÇÏ¼Å¾ß ÇÕ´Ï´Ù.: $5
+forum_utils	mailnotsent	ÀÌ¸ŞÀÏÀÌ ¹ß¼ÛµÇÁö ¾Ê¾Ò½À´Ï´Ù.- ¸ğ´ÏÅÍ¸µÁß
+forum_utils	mailnotsent2	ÀÌ¸ŞÀÏÀÌ ¹ß¼ÛµÇÁö ¾Ê¾Ò½À´Ï´Ù. - ¸ğ´ÏÅÍ¸µÇÏ´Â »ç¶÷ÀÌ ¾ø½À´Ï´Ù.
+forum_utils	mailsent	ÀÌ¸ŞÀÏ ¹ß¼Û - ¸ğ´ÏÅÍ¸µÁß
+forum_utils	message	±Û:
+forum_utils	monitor	°Ô½ÃÆÇ ¸ğ´ÏÅÍ¸µÇÏ±â
+forum_utils	mustinclude	º»¹®°ú Á¦¸ñÀ» Æ÷ÇÔÇÏ¿©¾ß ÇÕ´Ï´Ù.
+forum_utils	news	´º½º
+forum_utils	nextfailed	´ÙÀ½ thread_id ¸¦ ¹Ş¾Æ¿ÀÁö ¸øÇß½À´Ï´Ù.
+forum_utils	noid	°Ô½ÃÆÇ ID¾øÀÌ ±ÛÀ» °Ô½ÃÇÏ·Á°í ÇÕ´Ï´Ù.
+forum_utils	nonewsitem	¿À·ù - ÀÌ ´º½º °Ô½Ã¹°Àº ¾ø½À´Ï´Ù.
+forum_utils	notfound	Ã£À» ¼ö ¾ø½À´Ï´Ù.
+forum_utils	postanon	ÀÍ¸íÀ¸·Î ±ÛÀ» ¿Ã¸³´Ï´Ù.
+forum_utils	postcomment	´ä±Û ¿Ã¸®±â
+forum_utils	posted	±ÛÀÌ ¿Ã¶ó°¬½À´Ï´Ù.
+forum_utils	postedby	±Û¿Ã¸°ÀÌ
+forum_utils	reply	´ä±Û
+forum_utils	saveplace	À§Ä¡ ±â·ÏÇÏ±â
+forum_utils	stopmonitor	¸ğ´ÏÅÍ¸µ ÁßÁö
+forum_utils	subject	Á¦¸ñ:
+forum_utils	summary	¿ä¾à
+forum_utils	thread	±ÛÅ¸·¡
+frs	file_download	´Ù¿î·Îµå
+frs	file_monitor	¸ğ´ÏÅÍ
+frs	file_notes	¸±¸®Áî³ëÆ®
+frs	file_package	ÆĞÅ°Áö
+frs	file_rel_date	³¯Â¥
+frs	file_version	¹öÀü
+frs	latest_file_releases	ÃÖ±Ù ÆÄÀÏ ¸±¸®Áî
+frs_file	error_already_exists	µ¿ÀÏÇÑ ÆÄÀÏ¸íÀÌ ÇÁ·ÎÁ§Æ® °ø°£ ¾È¿¡ ÀÌ¹Ì Á¸ÀçÇÏ°í ÀÖ½À´Ï´Ù.
+frs_file	error_cannot_move	ÆÄÀÏÀ» ¿µ±¸ ÀúÀå °ø°£À¸·Î ¿Å±æ ¼ö ¾ø½À´Ï´Ù.
+frs_file	error_invalid_file	ÆÄÀÏÀÌ À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù.
+frs_file	error_min_name_length	ÆÄÀÏ¸íÀº 3±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+frs_file	error_name_format	ÆÄÀÏ¸íÀº ´ÙÀ½°ú °°Àº Çü½ÄÀÌ¾î¾ß ÇÕ´Ï´Ù.: gforge-3.0.tar.bz2
+frs_package	error_already_exists	µ¿ÀÏÇÑ ÆÄÀÏ¸íÀÌ ÇÁ·ÎÁ§Æ® °ø°£ ¾È¿¡ ÀÌ¹Ì Á¸ÀçÇÏ°í ÀÖ½À´Ï´Ù.
+frs_package	error_cannot_move	ÆÄÀÏÀ» ¿µ±¸ ÀúÀå °ø°£À¸·Î ¿Å±æ ¼ö ¾ø½À´Ï´Ù.
+frs_package	error_invalid_file	ÆÄÀÏÀÌ À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù.
+frs_package	error_min_name_length	ÆĞÅ°Áö ÀÌ¸§Àº 3±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+frs_package	error_name_format	ÆĞÅ°Áö::¾÷µ¥ÀÌÆ®: ÆĞÅ°Áö ÀÌ¸§Àº ¼ıÀÚ/¿µ¹®À¸·Î¸¸ ÀÌ·ç¾îÁ®¾ß ÇÕ´Ï´Ù.
+frs_package	error_set_monitor	·Î±×ÀÎÇÏ¼Å¾ß ¸ğ´ÏÅÍ¸µÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+frs_release	email_text	\n\nÇÁ·ÎÁ§Æ® "$1" ('$2') °¡ \n'$3'ÆĞÅ°ÁöÀÇ »õ·Î¿î ¹öÀüÀ» ¸±¸®ÁîÇÏ¿´½À´Ï´Ù.\n¾Æ·¡ ¸µÅ©¸¦ µû¶ó°¡½Ã¸é ´Ù¿î·ÎµåÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.:\n $4\n\nÀÌ ¸ŞÀÏÀº ±ÍÇÏ²²¼­ ¼±ÅÃÇÏ½Å ÆĞÅ°ÁöÀÇ »õ·Î¿î ¹öÀüÀ»\n¸ğ´ÏÅÍ¸µÇÏ°í °è½Ã±â ¶§¹®¿¡ ¹ß¼ÛµÈ °ÍÀÔ´Ï´Ù.\n¸¸¾à ÀÌ ³»¿ëÀ» ¸ŞÀÏ·Î ¹Ş¾Æº¸Áö ¾Ê°íÀÚ ÇÏ½Å´Ù¸é\n$5¿¡ ·Î±×ÀÎÇÏ½Å ÈÄ ´ÙÀ½ ¸µÅ©¸¦ µû¶ó°¡½Ê½Ã¿À.: \n $6
+frs_release	email_title	[$1 ¸±¸®Áî] $2
+frs_release	error_already_exists	µ¿ÀÏÇÑ ¸±¸®Áî°¡ ÇÁ·ÎÁ§Æ® °ø°£ ¾È¿¡ ÀÌ¹Ì Á¸ÀçÇÏ°í ÀÖ½À´Ï´Ù.
+frs_release	error_cannot_move	¸±¸®Áî¸¦ ¿µ±¸ ÀúÀå °ø°£À¸·Î ¿Å±æ ¼ö ¾ø½À´Ï´Ù.
+frs_release	error_invalid_file	¸±¸®Áî°¡ À¯È¿ÇÏÁö ¾Ê½À´Ï´Ù.
+frs_release	error_min_name_length	¸±¸®Áî ÀÌ¸§Àº 3±ÛÀÚ ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.
+frs_release	error_name_format	¸±¸®Áî ÀÌ¸§Àº ´ÙÀ½°ú °°Àº Çü½ÄÀÌ¾î¾ß ÇÕ´Ï´Ù.: gforge-3.0.tar.bz2
+frs_release	error_set_monitor	·Î±×ÀÎÇÏ¼Å¾ß ¸ğ´ÏÅÍ¸µÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+general	add	Ãß°¡
+general	browse	µÑ·¯º¸±â
+general	cancel	Ãë¼Ò
+general	confirm	È®ÀÎ
+general	create_successful	¼º°øÀûÀ¸·Î »ı¼ºµÇ¾ú½À´Ï´Ù.
+general	delete	»èÁ¦
+general	deleted	»èÁ¦µÇ¾ú½À´Ï´Ù.
+general	done	¿Ï·á
+general	edit	ÆíÁı
+general	error	¿À·ù
+general	error_creating	$1 »ı¼º ¿À·ù ¹ß»ı
+general	error_getting	$1 °¡Á®¿À±â ¿À·ù
+general	error_getting_new	»õ $1 °¡Á®¿À±â ¿À·ù
+general	error_group_id	µ¥ÀÌÅÍº£ÀÌ½ºÀÇ ±×·ìID°¡ ±×·ì °´Ã¼¿Í ¸ÂÁö ¾Ê½À´Ï´Ù.
+general	error_missing_params	ÀÎÀÚ°¡ ¾ø½À´Ï´Ù.
+general	error_no_valid_group_object	$1:: À¯È¿ÇÑ ±×·ì °´Ã¼°¡ ¾ø½À´Ï´Ù.
+general	error_on_update	°»½Å ¿À·ù: 
+general	footer	ÀÌ°ÍÀº $1ÀÔ´Ï´Ù. ÀúÀÛ±Ç µîÀÇ ÀÚ¼¼ÇÑ »çÇ×Àº <a href="/about.php">ÀÌ°÷</a>À» Âü°íÇÏ½Ê½Ã¿À.
+general	go	Go
+general	invalid_email	À¯È¿ÇÏÁö ¾ÊÀº ÀÌ¸ŞÀÏ ÁÖ¼Ò
+general	language	¾ğ¾î
+general	more	´õ º¸±â
+general	no	No
+general	no_valid_filename	À¯È¿ÇÑ ÆÄÀÏÀÌ¸§ÀÌ ¾ø½À´Ï´Ù.
+general	no_valid_group	À¯È¿ÇÑ $1±×·ìÀÌ ¾ø½À´Ï´Ù.
+general	no_valid_group_object	$1 À¯È¿ÇÑ ±×·ì °´Ã¼°¡ ¾ø½À´Ï´Ù.
+general	open	open
+general	permdenied	Á¢±Ù ±İÁö
+general	permexcuse	ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ°¡ ÀÌ ÆäÀÌÁö¸¦ º¼ ¼ö ÀÖµµ·Ï Á¢±Ù ±ÇÇÑÀ» Çã¶ôÇØ ÁÖ¾î¾ß ÇÕ´Ï´Ù.
+general	permnotget	±ÇÇÑÀ» °¡Á®¿Ã ¼ö ¾ø½À´Ï´Ù.
+general	remove	Áö¿ì±â
+general	reset	¸®¼Â
+general	return	[µÇµ¹¾Æ°¡±â]
+general	return_to	[$1·Î µÇµ¹¾Æ°¡±â]
+general	sitename	$1
+general	submit	Á¦Ãâ
+general	submit_edit	ÆíÁı Á¦Ãâ
+general	submitted_successfully	$1: ¼º°øÀûÀ¸·Î Á¦ÃâµÇ¾ú½À´Ï´Ù.
+general	total	total
+general	turned_off	ÀÌ ÇÁ·ÎÁ§Æ®´Â $1 ±â´ÉÀ» »ç¿ëÇÏÁö ¾Ê½À´Ï´Ù.
+general	update	°»½Å
+general	update_successful	¼º°øÀûÀ¸·Î °»½ÅµÇ¾ú½À´Ï´Ù.
+general	yes	Yes
+global	error	¿À·ù
+group	activity	ÇÁ·ÎÁ§Æ® È°µ¿ »óÈ²:&nbsp; 
+group	activitystat	È°µ¿»óÈ² <a href="/project/stats/?group_id=$1">Åë°è ÀÚ·á</a> º¸±â
+group	developer_info	°³¹ßÀÚ Á¤º¸
+group	developers	°³¹ßÀÚ
+group	long_bugs	¹ö±× Æ®·¡Å·
+group	long_cvs	CVS ÀúÀå¼Ò
+group	long_docman	¹®¼­ °ü¸®ÀÚ: ÇÁ·ÎÁ§Æ® ¹®¼­È­
+group	long_forum	°ø°³ °Ô½ÃÆÇ
+group	long_ftp	ÀÍ¸í FTP °ø°£
+group	long_homepage	ÇÁ·ÎÁ§Æ® È¨ÆäÀÌÁö
+group	long_mail	¸ŞÀÏ¸µ ¸®½ºÆ®
+group	long_news	´º½º
+group	long_patch	ÆĞÄ¡ °ü¸®ÀÚ
+group	long_pm	ÀÓ¹« °ü¸®ÀÚ
+group	long_support	±â¼úÁö¿ø °ü¸®ÀÚ
+group	long_survey	¼³¹®Á¶»ç
+group	nodescription	ÀÌ ÇÁ·ÎÁ§Æ®´Â ¾ÆÁ÷ ¼³¸íÀ» Á¦ÃâÇÏÁö ¾Ê¾Ò½À´Ï´Ù.
+group	norelease	ÀÌ ÇÁ·ÎÁ§Æ®´Â ¾ÆÁ÷ ¸±¸®ÁîÇÑ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.
+group	project_admins	ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ
+group	public_area	°ø°³ ±¸¿ª
+group	registered	µî·ÏµÈ ³¯Â¥:&nbsp;
+group	short_admin	ÇÁ·ÎÁ§Æ® °ü¸®
+group	short_bugs	¹ö±×
 group	short_cvs	CVS
-group	short_docman	ë¬¸ì„œ
-group	short_files	ë‹¤ìš´ë¡œë“œ
-group	short_forum	ê²Œì‹œíŒ
-group	short_homepage	í™ˆí˜ì´ì§€
-group	short_mail	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
-group	short_main	ë©”ì¸
-group	short_memberlist	ê°œë°œì
-group	short_news	ìƒˆì†Œì‹
-group	short_patch	íŒ¨ì¹˜
-group	short_pm	í•˜ìœ„ í”„ë¡œì íŠ¸
-group	short_summary	ìš”ì•½
-group	short_support	ì§€ì›
-group	short_survey	ì„¤ë¬¸ì¡°ì‚¬
-group	short_tracker	ë¬¸ì œì  ì¶”ì 
-group	registered	ë“±ë¡ëœ ë‚ ì§œ: 
-group	activity	í”„ë¡œì íŠ¸ í™œë™ ìƒí™©: 
-group	activitystat	í™œë™ìƒí™© <a href="/project/stats/?group_id=$1">í†µê³„</a> ë³´ê¸°
-group	norelease	ì´ í”„ë¡œì íŠ¸ëŠ” ì•„ì§ ë¦´ë¦¬ì¦ˆí•œ íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.
-home	about_blurb	$1ëŠ” <B><A href="http://www.opensource.org">Open Source</A> ê°œë°œìì—ê²Œ ì œê³µë˜ëŠ” ë¬´ë£Œ ì„œë¹„ìŠ¤</B>ë¡œì„œ, CVS, ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸, ë²„ê·¸ íŠ¸ë˜í‚¹, ê³µê°œ ê²Œì‹œíŒ, ì„ë¬´ ê´€ë¦¬, ì›¹ì‚¬ì´íŠ¸ í˜¸ìŠ¤íŒ…, ì˜êµ¬ì ì¸ íŒŒì¼ ì•„ì¹´ì´ë¸Œ, ë°±ì—… ì„œë¹„ìŠ¤ë¥¼ í¬í•¨í•œ ì™„ì „í•œ ì›¹ê¸°ë°˜ ê´€ë¦¬ ì¸í„°í˜ì´ìŠ¤ë¥¼ ì œê³µí•©ë‹ˆë‹¤. <BR>&nbsp;<P><B>ì‚¬ì´íŠ¸ì— ëŒ€í•œ í”¼ë“œë°± ë° ì°¸ì—¬ ë°©ë²•</B><P>$1ë¥¼ ìµœëŒ€í•œìœ¼ë¡œ í™œìš©í•˜ê¸° ìœ„í•´ì„œëŠ” <A href="/account/register.php">ì‚¬ìš©ì ë“±ë¡</A>ì„ í•˜ì‹œëŠ”ê²Œ ì¢‹ìŠµë‹ˆë‹¤. ì‚¬ìš©ì ë“±ë¡ì„ í•˜ì‹œë©´ ì´ê³³ì—ì„œ ì œê³µë˜ëŠ” ëª¨ë“  ê³µê°„ì— ì°¸ì—¬í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë¬¼ë¡  ë“±ë¡í•˜ì§€ ì•Šìœ¼ì…”ë„ ì‚¬ì´íŠ¸ë¥¼ ë‘˜ëŸ¬ë³´ì‹¤ ìˆ˜ëŠ” ìˆì§€ë§Œ ëª¨ë“  ë¶€ë¶„ì— ëŒ€í•œ ì ‘ê·¼ ê¶Œí•œì„ ê°–ì§€ëŠ” ëª»í•  ê²ƒì…ë‹ˆë‹¤.<P>&nbsp;<BR><B>ì—¬ëŸ¬ë¶„ë§Œì˜ í”„ë¡œì íŠ¸ë¥¼ êµ¬ì„±í•˜ì‹­ì‹œì˜¤.</B><P><A href="/account/register.php">ì‚¬ìš©ì ë“±ë¡</A>ì„ í•˜ì‹œê³ , <A HREF="/account/login.php">ë¡œê·¸ì¸</A>í•˜ì‹  í›„, <A HREF="/register/">í”„ë¡œì íŠ¸ ë“±ë¡</A>ì„ í•˜ì‹œë©´ ë©ë‹ˆë‹¤. ê°ì‚¬í•©ë‹ˆë‹¤. ì¦ê±°ìš´ ì‹œê°„ ë˜ì‹­ì‹œì˜¤.
-home	breaking_down_barriers	Open Source ê°œë°œì˜ ì¥ë²½ì„ ë„˜ì–´
-home	highest_ranked_users	í™œë°œí•œ ì‚¬ìš©ì
-home	most_active_this_week	ê¸ˆì£¼ ê°€ì¥ í™œë°œí•œ ê³³
-home	sfos	GForge OnSite
-home	gforge_statistics	$1 í†µê³„
-home	top_project_downloads	ìµœë‹¤ ë‹¤ìš´ë¡œë“œ
-mail	provided_by	<P>ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ëŠ” GForgeì— ì•Œë§ê²Œ êµ¬í˜„ëœ <A href="http://www.list.org">GNU Mailman</A>ì„ í†µí•´ ìš´ì˜ë©ë‹ˆë‹¤.  ë©‹ì§„ ì†Œí”„íŠ¸ì›¨ì–´ë¥¼ ë§Œë“¤ì–´ë‚¸  Mailmanê³¼ <A href="http://www.python.org">Python</A> ê°œë°œì ì—¬ëŸ¬ë¶„ë“¤ê»˜ ê°ì‚¬ë“œë¦½ë‹ˆë‹¤.
-mail	section	í”„ë¡œì íŠ¸: $1
-mail	title	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
-mail_admin	section	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
-mail_admin	title	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬
-mail_admin_add_list	section	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬
-mail_admin_add_list	title	ë¦¬ìŠ¤íŠ¸ ì¶”ê°€
-mail_admin_change_status	section	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬
-mail_admin_change_status	title	ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬ ë° ê°±ì‹ 
-menu	about_gforge	GForge ì†Œê°œ
-menu	account_maintenance	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
-menu	bookmark_page	ì±…ê°ˆí”¼
-menu	change_my_theme	í…Œë§ˆ ë³€ê²½
-menu	code_snippet_library	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-menu	compile_farm	Compile Farm
-menu	discussion_forums	ê²Œì‹œíŒ
-menu	documentation	ì°¸ê³  ë¬¸ì„œ
-menu	login	ë¡œê·¸ì¸
-menu	logout	ë¡œê·¸ì•„ì›ƒ
-menu	my_personal_page	ê°œì¸ í˜ì´ì§€
-menu	new_project	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
-menu	new_releases	ìƒˆë¡œìš´ ë¦´ë¦¬ì¦ˆ
-menu	new_user	ì‚¬ìš©ì ë“±ë¡
-menu	other_site_mirrors	ê¸°íƒ€ ì‚¬ì´íŠ¸ ë¯¸ëŸ¬
-menu	project_admin	í”„ë¡œì íŠ¸ ê´€ë¦¬
-menu	project_help_wanted	ë©¤ë²„ êµ¬í•¨
-menu	project_summary	í”„ë¡œì íŠ¸ ìš”ì•½
-menu	search	ì°¾ê¸°
-menu	site_status	ì‚¬ì´íŠ¸ ìƒíƒœ
-menu	software_map	ì†Œí”„íŠ¸ì›¨ì–´ ë§µ
-menu	top_projects	ìƒìœ„ í”„ë¡œì íŠ¸
-my	about_blurb	ì—¬ëŸ¬ë¶„ì˜ ê°œì¸ í˜ì´ì§€ëŠ” ì—¬ëŸ¬ë¶„ì—ê²Œ í• ë‹¹ëœ ë²„ê·¸ë‚˜ ì„ë¬´ë“¤ê³¼ ì—¬ëŸ¬ë¶„ì´ ì°¸ì—¬í•˜ê³  ê³„ì‹  ê·¸ë£¹ì— ê´€í•œ ì •ë³´ë¥¼ ë³´ì—¬ì¤ë‹ˆë‹¤.
-my	no_bookmarks	í˜„ì¬ ì €ì¥ëœ ì±…ê°ˆí”¼ê°€ ì—†ìŠµë‹ˆë‹¤.
-my	no_monitored_filemodules	ëª¨ë‹ˆí„°í•˜ê³  ìˆëŠ” íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.
-my	no_monitored_filemodules_details	<P>ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ íŒŒì¼ì„ ëª¨ë‹ˆí„°í•˜ì‹œê²Œ ë˜ë©´ ìƒˆë¡œìš´ íŒŒì¼ì´ ë¦´ë¦¬ì¦ˆë  ë•Œ ì´ê³³ì˜ ë‹¤ìš´ë¡œë“œ ì„œë²„ë¡œ íŒŒì¼ì„ ë°›ì„ ìˆ˜ ìˆëŠ” ë§í¬ê°€ í¬í•¨ëœ ì´ë©”ì¼ì„ ë°›ì•„ë³´ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.<P>íŒŒì¼ì„ ëª¨ë‹ˆí„°í•˜ì‹œë ¤ë©´ í”„ë¡œì íŠ¸ì˜ &quot;ìš”ì•½ í˜ì´ì§€&quot;ì— ê°€ì„œ íŒŒì¼ ì„¹ì…˜ì˜ ì²´í¬ë°•ìŠ¤ë¥¼ í´ë¦­í•˜ì‹œë©´ ë©ë‹ˆë‹¤.<BR>&nbsp;
-my	no_monitored_forums	ëª¨ë‹ˆí„°í•˜ê³  ìˆëŠ” ê²Œì‹œíŒì´ ì—†ìŠµë‹ˆë‹¤.
-my	no_monitored_forums_details	<P>ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ ê²Œì‹œíŒì„ ëª¨ë‹ˆí„°í•˜ì‹œê²Œ ë˜ë©´ ìƒˆë¡œìš´ ê¸€ì´ ì˜¬ë¼ì˜¬ ë•Œ ê·¸ ê¸€ì„ ì½ì„ ìˆ˜ ìˆëŠ” ë§í¬ê°€ í¬í•¨ëœ ì´ë©”ì¼ì„ ë°›ì•„ë³´ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.<P>ê²Œì‹œíŒì„ ëª¨ë‹ˆí„°í•˜ì‹œë ¤ë©´ ì•„ë¬´ ê²Œì‹œíŒì—ì„œë‚˜ &quot;ê²Œì‹œíŒ ëª¨ë‹ˆí„°&quot;ë¥¼ í´ë¦­í•˜ì‹œë©´ ë©ë‹ˆë‹¤.<BR>&nbsp;
-my	no_open_tasks	í• ë‹¹ëœ ì„ë¬´ê°€ ì—†ìŠµë‹ˆë‹¤.
-my	no_projects	ì•„ì§ ì–´ë–¤ í”„ë¡œì íŠ¸ì—ë„ ì†Œì†ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.
-my	no_tracker_items_assigned	í• ë‹¹ëœ ë¬¸ì œì  ì¶”ì  ì•„ì´í…œì´ ì—†ìŠµë‹ˆë‹¤.
-my	no_tracker_items_submitted	ì œì¶œí•˜ì‹  ë¬¸ì œì  ì¶”ì  ì•„ì´í…œì´ ì—†ìŠµë‹ˆë‹¤.
-my	title	ê°œì¸ í˜ì´ì§€: $1
-my_bookmark_add	section	ê°œì¸ í˜ì´ì§€
-my_bookmark_add	title	ì±…ê°ˆí”¼ ì¶”ê°€
-my_bookmark_delete	section	ê°œì¸ í˜ì´ì§€
-my_bookmark_delete	title	ì±…ê°ˆí”¼ ì§€ìš°ê¸°
-my_bookmark_edit	section	ê°œì¸ í˜ì´ì§€
-my_bookmark_edit	title	ì±…ê°ˆí”¼ í¸ì§‘
-my_diary	section	ê°œì¸ í˜ì´ì§€
-my_diary	title	ì¼ê¸°ì“°ê¸° ë° ë…¸íŠ¸
-new	title	ìƒˆ ë¦´ë¦¬ì¦ˆ
-news	section	í”„ë¡œì íŠ¸: $1
-news	title	ìƒˆì†Œì‹
-news	choose	<p>ì›í•˜ì‹œëŠ” ë‰´ìŠ¤ë¥¼ ì„ íƒí•˜ì‹­ì‹œì˜¤. ë‰´ìŠ¤ë¥¼ ì½ê±°ë‚˜ ê²€ìƒ‰, í˜¹ì€ ì˜¬ë¼ì™€ ìˆëŠ” ë‰´ìŠ¤ì— ëŒ€í•´ ë‹µê¸€ì„ ì˜¬ë¦¬ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<p>
-news_admin	section	ìƒˆì†Œì‹
-news_admin	title	ìƒˆì†Œì‹ Admin
-news_main	title	ìƒˆì†Œì‹
-news_submit	post_blurb	ì—¬ëŸ¬ë¶„ì´ í”„ë¡œì íŠ¸ ê´€ë¦¬ìë¼ë©´ ìƒˆì†Œì‹ì„ ë“±ë¡í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë§Œì•½ ë‹¤ë¥¸ ì‚¬ëŒì˜ ë„ì›€ì´ í•„ìš”í•˜ë‹¤ë©´ "ë„ì›€ ìš”ì²­" ë©”ì‹œì§€ë¥¼ ì˜¬ë¦¬ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<P><B>ì—¬ëŸ¬ë¶„ì˜ í”„ë¡œì íŠ¸</B>ì— ê´€í•œ ëª¨ë“  ìƒˆì†Œì‹ì€ ê³§ë°”ë¡œ í”„ë¡œì íŠ¸ ìš”ì•½ í˜ì´ì§€ì— ì˜¬ë¼ê°€ê²Œ ë©ë‹ˆë‹¤. ë§Œì•½ $1 í™ˆí˜ì´ì§€ì— ìƒˆì†Œì‹ì„ ì˜¬ë¦¬ì‹œë ¤ë©´ ìƒˆì†Œì‹ ê´€ë¦¬ íŒ€ìœ¼ë¡œë¶€í„° ìŠ¹ì¸ì„ ë°›ì•„ì•¼ í•©ë‹ˆë‹¤.
-news_submit	section	ìƒˆì†Œì‹
-news_submit	title	ìƒˆì†Œì‹ ì˜¬ë¦¬ê¸°: $1
-people	about_blurb	<P>ì´ê³³ì€ ë¹„ì˜ë¦¬ ëª©ì ì˜ ìì›ë´‰ì‚¬ìë“¤ì„ ìœ„í•œ ê³µê°„ì´ë©° ìƒì—…ì ì¸ ëª©ì ìœ¼ë¡œì˜ í™œìš©ì€ ê¸ˆì§€í•©ë‹ˆë‹¤.<P>ì´ê³³ì— ì˜¬ë¦° ê¸€ì€ 2ì£¼ ë™ì•ˆ ìœ íš¨í•˜ê³ , ë§Œì•½ í•„ìš”ì—†ê²Œ ë˜ë©´ ê¸€ì“´ì´ê°€ ê·¸ ì „ì—ë¼ë„ ì‚­ì œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. (ë¬¼ë¡  ë§Œë£Œëœ ë©”ì‹œì§€ë¥¼ ë‹¤ì‹œ ì˜¬ë¦´ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.)<P>ì—¬ëŸ¬ë¶„ì˜ ë„ì›€ì„ í•„ìš”ë¡œ í•˜ëŠ” í”„ë¡œì íŠ¸ë“¤ì´ ìˆëŠ”ì§€ ë‘˜ëŸ¬ ë³´ì‹­ì‹œì˜¤.<P>ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ í”„ë¡œì íŠ¸ ê´€ë¦¬ìë¼ë©´ ë¡œê·¸ì¸í•˜ì‹  í›„ ì—¬ëŸ¬ë¶„ì´ ê´€ë¦¬í•˜ê³  ê³„ì‹œëŠ” í”„ë¡œì íŠ¸ë¡œ ê°€ì‹  í›„ ê·¸ê³³ì—ì„œ ê¸€ì„ ì˜¬ë¦¬ì…”ì•¼ í•©ë‹ˆë‹¤.<P>ë§Œì•½ ìƒˆë¡œìš´ Jobì„ ì œì•ˆí•˜ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´ ê¸°ìˆ ì§€ì› ê´€ë¦¬ì ê¸°ëŠ¥ì„ ì´ìš©í•˜ì—¬ ì£¼ì‹­ì‹œì˜¤.<P>
-people	section	ë©¤ë²„ êµ¬í•¨
-people	title	ë„ì›€ì´ í•„ìš”í•œ í”„ë¡œì íŠ¸
-people_admin	section	Help Wanted
-people_admin	title	Help Wanted ê´€ë¦¬
-people_admin_people_cat	section	Help Wanted ê´€ë¦¬
-people_admin_people_cat	title	Job ë¶„ë¥˜ ì¶”ê°€í•˜ê¸°
-people_admin_people_skills	section	Help Wanted ê´€ë¦¬
-people_admin_people_skills	title	Job ìŠ¤í‚¬ ì¶”ê°€í•˜ê¸°
-people_cat	section	Help Wanted
-people_cat	title	ë¶„ë¥˜ë³„ Job ë‚˜ì—´í•˜ê¸°
-people_createjob	section	ë©¤ë²„ êµ¬í•¨
-people_createjob	title	ìƒˆë¡œìš´ Job ë§Œë“¤ê¸°
-people_editjob	section	ë©¤ë²„ êµ¬í•¨
-people_editjob	title	Job í¸ì§‘
-people_editprofile	section	ë©¤ë²„ êµ¬í•¨
-people_editprofile	title	ë‚˜ì˜ í”„ë¡œí•„ í¸ì§‘
-people_helpwanted_latest	section	ë©¤ë²„ êµ¬í•¨
-people_helpwanted_latest	title	ë§ˆì§€ë§‰ í¬ìŠ¤íŒ…
-people_proj	section	ë©¤ë²„ êµ¬í•¨
-people_proj	title	ë©¤ë²„ êµ¬í•¨: $1
-people_viewjob	section	ë©¤ë²„ êµ¬í•¨
-people_viewjob	title	$1 ì´(ê°€) $2 ì— í•„ìš”í•©ë‹ˆë‹¤.
-people_viewprofile	section	ì‚¬ìš©ì ì •ë³´
-people_viewprofile	title	ê°œë°œì í”„ë¡œí•„ ë³´ê¸°
-pm	section	í”„ë¡œì íŠ¸: $1 
-pm	title	ì„ë¬´ ê´€ë¦¬ì: í•˜ìœ„ í”„ë¡œì íŠ¸ ë° ì„ë¬´
-pm	noprj	<H1>í•˜ìœ„ í”„ë¡œì íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.</H1><P><B>ì„¤ì •ë˜ì–´ ìˆëŠ” í•˜ìœ„ í”„ë¡œì íŠ¸ê°€ ì—†ê±°ë‚˜, ì—´ëŒí•  ìˆ˜ ìˆëŠ” ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤.<P><FONT COLOR=RED>í”„ë¡œì íŠ¸ ê´€ë¦¬ìê°€ ê´€ë¦¬ í˜ì´ì§€ë¥¼ í†µí•´ í•˜ìœ„ í”„ë¡œì íŠ¸ë¥¼ ì„¤ì •í•´ ì£¼ì–´ì•¼ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</FONT></B>
-pm_addtask	section	ì„ë¬´ ê´€ë¦¬ì
-pm_addtask	title	ì„ë¬´ ì¶”ê°€í•˜ê¸°
+group	short_docman	¹®¼­
+group	short_files	´Ù¿î·Îµå
+group	short_forum	°Ô½ÃÆÇ
+group	short_homepage	È¨ÆäÀÌÁö
+group	short_mail	¸ŞÀÏ¸µ ¸®½ºÆ®
+group	short_main	¸ŞÀÎ
+group	short_memberlist	°³¹ßÀÚ
+group	short_news	´º½º
+group	short_patch	ÆĞÄ¡
+group	short_pm	ÇÏÀ§ ÇÁ·ÎÁ§Æ®
+group	short_summary	¿ä¾à
+group	short_support	Áö¿ø
+group	short_survey	¼³¹®Á¶»ç
+group	short_tracker	¹®Á¦Á¡ ÃßÀû
+help	page_information	ÆäÀÌÁö Á¤º¸
+help	title	È¯¿µÇÕ´Ï´Ù: $1
+help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
+help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
+help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
+help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
+help_tracker	close_window	Close Window
+help_tracker	comment	The comment textarea allows you to attach a comment to a tracker item when a canned response isn't appropriate.
+help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
+help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
+help_tracker	monitor	You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!
+help_tracker	priority	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
+help_tracker	resolution	The resolution option represents a tracker items resolution if any.
+help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
+help_tracker	status	This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'.
+help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
+help_tracker	unknown_help_request	UNKNOWN HELP REQUEST:
+help_trove_cat	description	Description
+help_trove_cat	full_category_name	Full Category Name
+help_trove_cat	no_such_category	No such trove category
+help_trove_cat	short_name	Short Name
+home	about_blurb	$1´Â <B><A href="http://www.opensource.org">Open Source</A> °³¹ßÀÚ¿¡°Ô Á¦°øµÇ´Â ¹«·á ¼­ºñ½º</B>·Î¼­, CVS, ¸ŞÀÏ¸µ ¸®½ºÆ®, ¹ö±× Æ®·¡Å·, °ø°³ °Ô½ÃÆÇ, ÀÓ¹« °ü¸®, À¥»çÀÌÆ® È£½ºÆÃ, ¿µ±¸ÀûÀÎ ÆÄÀÏ ¾ÆÄ«ÀÌºê, ¹é¾÷ ¼­ºñ½º¸¦ Æ÷ÇÔÇÑ ¿ÏÀüÇÑ À¥±â¹İ °ü¸® ÀÎÅÍÆäÀÌ½º¸¦ Á¦°øÇÕ´Ï´Ù. <BR>&nbsp;<P><B>»çÀÌÆ®¿¡ ´ëÇÑ ÇÇµå¹é ¹× Âü¿© ¹æ¹ı</B><P>$1¸¦ ÃÖ´ëÇÑÀ¸·Î È°¿ëÇÏ±â À§ÇØ¼­´Â <A href="/account/register.php">»ç¿ëÀÚ µî·Ï</A>À» ÇÏ½Ã´Â°Ô ÁÁ½À´Ï´Ù. »ç¿ëÀÚ µî·ÏÀ» ÇÏ½Ã¸é ÀÌ°÷¿¡¼­ Á¦°øµÇ´Â ¸ğµç °ø°£¿¡ Âü¿©ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. ¹°·Ğ µî·ÏÇÏÁö ¾ÊÀ¸¼Åµµ »çÀÌÆ®¸¦ µÑ·¯º¸½Ç ¼ö´Â ÀÖÁö¸¸ ¸ğµç ºÎºĞ¿¡ ´ëÇÑ Á¢±Ù ±ÇÇÑÀ» °®Áö´Â ¸øÇÒ °ÍÀÔ´Ï´Ù.<P>&nbsp;<BR><B>¿©·¯ºĞ¸¸ÀÇ ÇÁ·ÎÁ§Æ®¸¦ ±¸¼ºÇÏ½Ê½Ã¿À.</B><P><A href="/account/register.php">»ç¿ëÀÚ µî·Ï</A>À» ÇÏ½Ã°í, <A HREF="/account/login.php">·Î±×ÀÎ</A>ÇÏ½Å ÈÄ, <A HREF="/register/">ÇÁ·ÎÁ§Æ® µî·Ï</A>À» ÇÏ½Ã¸é µË´Ï´Ù. °¨»çÇÕ´Ï´Ù. Áñ°Å¿î ½Ã°£ µÇ½Ê½Ã¿À.
+home	breaking_down_barriers	Open Source °³¹ßÀÇ Àåº®À» ³Ñ¾î
+home	gforge_statistics	$1 Åë°è
+home	highest_ranked_users	¿ì¼ö »ç¿ëÀÚ
+home	hosted_projects	¿î¿µÁßÀÎ ÇÁ·ÎÁ§Æ®
+home	most_active_this_week	ÁÖ°£ ÇÁ·ÎÁ§Æ® ¼øÀ§
+home	no_stats_available	Åë°è ÀÚ·á°¡ ¾ø½À´Ï´Ù.
+home	none_found	None Found
+home	registered_users	µî·Ï »ç¿ëÀÚ
+home	sfos	$1 OnSite
+home	top_project_downloads	ÃÖ´Ù ´Ù¿î·Îµå
+include_html	no_change	º¯µ¿»çÇ× ¾øÀ½
+include_html	none	None
+include_html	priority_highest	ÃÖ°í
+include_html	priority_lowest	ÃÖÀú
+include_html	priority_medium	Áß°£
+include_toolreport	all	All 
+include_toolreport	key	Key
+include_toolreport	last_days	Last day(s)
+include_toolreport	last_months	Last month(s)
+include_toolreport	last_weeks	Last week(s)
+include_toolreport	last_years	Last year(s)
+include_toolreport	no_data	¸®Æ÷Æ®ÇÒ µ¥ÀÌÅÍ°¡ ¾ø½À´Ï´Ù.
+include_toolreport	open	Open 
+include_toolreport	project_lifespan	Project lifespan
+include_toolreport	show	Show
+index	welcome	È¯¿µÇÕ´Ï´Ù.
+mail	provided_by	<p>¸ŞÀÏ¸µ ¸®½ºÆ®´Â GForge¿¡ ¾Ë¸Â°Ô ±¸ÇöµÈ <a href="http://www.list.org">GNU Mailman</a>À» ÅëÇØ ¿î¿µµË´Ï´Ù.  ¸ÚÁø ¼ÒÇÁÆ®¿ş¾î¸¦ ¸¸µé¾î³½  Mailman°ú <a href="http://www.python.org">Python</a> °³¹ßÀÚ ¿©·¯ºĞµé²² °¨»çµå¸³´Ï´Ù.</p>
+mail	section	ÇÁ·ÎÁ§Æ®: $1
+mail	title	¸ŞÀÏ¸µ ¸®½ºÆ®
+mail_admin	section	¸ŞÀÏ¸µ ¸®½ºÆ®
+mail_admin	title	¸ŞÀÏ¸µ ¸®½ºÆ® °ü¸®
+mail_admin_add_list	section	¸ŞÀÏ¸µ ¸®½ºÆ® °ü¸®
+mail_admin_add_list	title	¸®½ºÆ® Ãß°¡
+mail_admin_change_status	section	¸ŞÀÏ¸µ ¸®½ºÆ® °ü¸®
+mail_admin_change_status	title	¸®½ºÆ® °ü¸® ¹× °»½Å
+menu	about_gforge	$1 ¼Ò°³
+menu	account_maintenance	»ç¿ëÀÚ µî·Ï Á¤º¸
+menu	admin	Admin
+menu	bookmark_page	Áñ°ÜÃ£±â
+menu	change_my_theme	Å×¸¶ º¯°æ
+menu	code_snippet	ÄÚµå ¶óÀÌºê·¯¸®
+menu	code_snippet_library	ÄÚµå ¶óÀÌºê·¯¸®
+menu	compile_farm	ÄÄÆÄÀÏ Farm
+menu	diary_notes	ÀÏ±â¿Í ¸Ş¸ğ
+menu	discussion_forums	°Ô½ÃÆÇ
+menu	documentation	Âü°í ¹®¼­
+menu	home	È¨
+menu	login	·Î±×ÀÎ
+menu	login_ssl	SSL·Î ·Î±×ÀÎÇÏ±â
+menu	logout	·Î±×¾Æ¿ô
+menu	my_account	»ç¿ëÀÚ µî·Ï Á¤º¸
+menu	my_personal_page	°³ÀÎ ÆäÀÌÁö
+menu	mypage	°³ÀÎ ÆäÀÌÁö
+menu	new_project	»õ ÇÁ·ÎÁ§Æ® µî·Ï
+menu	new_releases	»õ·Î¿î ¸±¸®Áî
+menu	new_user	»ç¿ëÀÚ µî·Ï
+menu	other_site_mirrors	±âÅ¸ »çÀÌÆ® ¹Ì·¯
+menu	project_admin	ÇÁ·ÎÁ§Æ® °ü¸®
+menu	project_help_wanted	¸â¹ö ±¸ÇÔ
+menu	project_summary	ÇÁ·ÎÁ§Æ® ¿ä¾à
+menu	projectree	ÇÁ·ÎÁ§Æ® Æ®¸®
+menu	register_project	ÇÁ·ÎÁ§Æ® µî·ÏÇÏ±â
+menu	search	Ã£±â
+menu	site_status	»çÀÌÆ® »óÅÂ
+menu	software_map	¼ÒÇÁÆ®¿ş¾î ¸Ê
+menu	submit	Á¦Ãâ
+menu	top_projects	»óÀ§ ÇÁ·ÎÁ§Æ®
+my	about_blurb	¿©·¯ºĞÀÇ °³ÀÎ ÆäÀÌÁö´Â ¿©·¯ºĞ¿¡°Ô ÇÒ´çµÈ ¹ö±×³ª ÀÓ¹«µé°ú ¿©·¯ºĞÀÌ Âü¿©ÇÏ°í °è½Å ±×·ì¿¡ °üÇÑ Á¤º¸¸¦ º¸¿©Áİ´Ï´Ù.
+my	assigneditems	³ª¿¡°Ô ÇÒ´çµÈ Ç×¸ñ
+my	bookmarks	³ªÀÇ Áñ°ÜÃ£±â
+my	monitoredfile	¸ğ´ÏÅÍ¸µÁßÀÎ ÆÄÀÏ ¸±¸®Áî
+my	monitoredforum	¸ğ´ÏÅÍ¸µÁßÀÎ °Ô½ÃÆÇ
+my	no_bookmarks	ÇöÀç ÀúÀåµÈ Áñ°ÜÃ£±â°¡ ¾ø½À´Ï´Ù.
+my	no_monitored_filemodules	¸ğ´ÏÅÍ¸µÇÏ°í ÀÖ´Â ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.
+my	no_monitored_filemodules_details	<P>¸¸¾à ¿©·¯ºĞÀÌ ÆÄÀÏÀ» ¸ğ´ÏÅÍÇÏ½Ã°Ô µÇ¸é »õ·Î¿î ÆÄÀÏÀÌ ¸±¸®ÁîµÉ ¶§ ÀÌ°÷ÀÇ ´Ù¿î·Îµå ¼­¹ö·Î ÆÄÀÏÀ» ¹ŞÀ» ¼ö ÀÖ´Â ¸µÅ©°¡ Æ÷ÇÔµÈ ÀÌ¸ŞÀÏÀ» ¹Ş¾Æº¸½Ç ¼ö ÀÖ½À´Ï´Ù. ÆÄÀÏÀ» ¸ğ´ÏÅÍÇÏ½Ã·Á¸é ÇÁ·ÎÁ§Æ®ÀÇ &quot;¿ä¾à ÆäÀÌÁö&quot;¿¡ °¡¼­ ÆÄÀÏ ¼½¼ÇÀÇ Ã¼Å©¹Ú½º¸¦ Å¬¸¯ÇÏ½Ã¸é µË´Ï´Ù.</p>
+my	no_monitored_forums	¸ğ´ÏÅÍÇÏ°í ÀÖ´Â °Ô½ÃÆÇÀÌ ¾ø½À´Ï´Ù.
+my	no_monitored_forums_details	<p>¸¸¾à ¿©·¯ºĞÀÌ °Ô½ÃÆÇÀ» ¸ğ´ÏÅÍÇÏ½Ã°Ô µÇ¸é »õ·Î¿î ±ÛÀÌ ¿Ã¶ó¿Ã ¶§ ±× ±ÛÀ» ÀĞÀ» ¼ö ÀÖ´Â ¸µÅ©°¡ Æ÷ÇÔµÈ ÀÌ¸ŞÀÏÀ» ¹Ş¾Æº¸½Ç ¼ö ÀÖ½À´Ï´Ù.</p><p>°Ô½ÃÆÇÀ» ¸ğ´ÏÅÍÇÏ½Ã·Á¸é ¾Æ¹« °Ô½ÃÆÇ¿¡¼­³ª &quot;°Ô½ÃÆÇ ¸ğ´ÏÅÍ&quot;¸¦ Å¬¸¯ÇÏ½Ã¸é µË´Ï´Ù.</p>
+my	no_open_tasks	ÇÒ´çµÈ ÀÓ¹«°¡ ¾ø½À´Ï´Ù.
+my	no_projects	¾ÆÁ÷ ¾î¶² ÇÁ·ÎÁ§Æ®¿¡µµ ¼Ò¼ÓµÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù.
+my	no_tracker_items_assigned	´ã´çÁßÀÎ ¹®Á¦Á¡ ÃßÀû Ç×¸ñÀÌ ¾ø½À´Ï´Ù.
+my	no_tracker_items_submitted	Á¦ÃâÇÏ½Å ¹®Á¦Á¡ ÃßÀû Ç×¸ñÀÌ ¾ø½À´Ï´Ù.
+my	pending_news_bytes	½ÂÀÎÀ» ±â´Ù¸®´Â ´º½º ¸ñ·Ï
+my	pending_news_bytes_1	1 °³ÀÇ ´º½º°¡ ½ÂÀÎÀ» ±â´Ù¸®°í ÀÖ½À´Ï´Ù.
+my	pending_news_bytes_2	$1 °³ÀÇ ´º½º°¡ ½ÂÀÎÀ» ±â´Ù¸®°í ÀÖ½À´Ï´Ù.
+my	pending_news_bytes_3	¿©±â¸¦ Å¬¸¯ÇÏ½Ê½Ã¿À.
+my	pending_projects	½ÂÀÎÀ» ±â´Ù¸®´Â ÇÁ·ÎÁ§Æ® ¸ñ·Ï
+my	pending_projects_1	1 °³ÀÇ ÇÁ·ÎÁ§Æ®°¡ ´ë±âÁßÀÔ´Ï´Ù.
+my	pending_projects_2	$1 °³ÀÇ ÇÁ·ÎÁ§Æ®°¡ ´ë±âÁßÀÔ´Ï´Ù.
+my	pending_projects_3	¿©±â¸¦ Å¬¸¯ÇÏ½Ê½Ã¿À.
+my	projects	³ªÀÇ ÇÁ·ÎÁ§Æ®
+my	submitteditems	³»°¡ Á¦ÃâÇÑ Ç×¸ñ
+my	survey	¼³¹® Á¶»ç
+my	survey_taken	¼³¹®Á¶»ç¿¡ ÀÌ¹Ì ÀÀ´äÇÏ¼Ì½À´Ï´Ù.
+my	tasks	³ªÀÇ ÀÓ¹«
+my	title	°³ÀÎ ÆäÀÌÁö: $1
+my_bookmark	return	µÇµ¹¾Æ°¡±â
+my_bookmark_add	added_bookmark	<strong>$1</strong>¿¡ ´ëÇÑ Áñ°ÜÃ£±â¸¦ <strong>$2</strong>¶ó´Â Á¦¸ñÀ¸·Î Ãß°¡ÇÏ¿´½À´Ï´Ù.
+my_bookmark_add	back	È¨ÆäÀÌÁö·Î µÇµ¹¾Æ°¡±â
+my_bookmark_add	bookmark_title	Áñ°ÜÃ£±â Á¦¸ñ
+my_bookmark_add	bookmark_url	Áñ°ÜÃ£±â ÁÖ¼Ò
+my_bookmark_add	section	°³ÀÎ ÆäÀÌÁö
+my_bookmark_add	title	Áñ°ÜÃ£±â Ãß°¡
+my_bookmark_add	visit_page	Áñ°ÜÃ£±â ÆäÀÌÁö ¹æ¹®ÇÏ±â
+my_bookmark_delete	bookmark_deleted	Áñ°ÜÃ£±â°¡ »èÁ¦µÇ¾ú½À´Ï´Ù.
+my_bookmark_delete	section	°³ÀÎ ÆäÀÌÁö
+my_bookmark_delete	title	Áñ°ÜÃ£±â Áö¿ì±â
+my_bookmark_edit	bookmark_updated	Áñ°ÜÃ£±â°¡ °»½ÅµÇ¾ú½À´Ï´Ù.
+my_bookmark_edit	failed_to_update_bookmark	Áñ°ÜÃ£±â¸¦ °»½ÅÇÏÁö ¸øÇß½À´Ï´Ù.
+my_bookmark_edit	section	°³ÀÎ ÆäÀÌÁö
+my_bookmark_edit	title	Áñ°ÜÃ£±â ÆíÁı
+my_diary	add_new_entry	»õ·Î¿î Ç×¸ñ Ãß°¡
+my_diary	details	ÀÚ¼¼È÷
+my_diary	diary_updated	ÀÏ±â°¡ °»½ÅµÇ¾ú½À´Ï´Ù.
+my_diary	entry_not_found	ÇØ´ç Ç×¸ñÀÌ ¾ø°Å³ª ±ÍÇÏ¿¡°Ô ¼ÓÇÏÁö ¾Ê´Â Ç×¸ñÀÔ´Ï´Ù.
+my_diary	error_adding_item	Ç×¸ñÀ» Ãß°¡ÇÏ´Âµ¥ ¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.
+my_diary	existing_entries	Á¸ÀçÇÏ´Â ÀÏ±â¿Í ¸Ş¸ğ Ç×¸ñµé
+my_diary	is_public	°ø°³
+my_diary	is_public_expl	°ø°³ÇÏ½Ã¸é Ãß°¡µÇ´Â Ç×¸ñµéÀÌ ¸ğ´ÏÅÍ¸µ ÁßÀÎ »ç¿ëÀÚµéÀÇ ÀÌ¸ŞÀÏ·Î ¹ß¼ÛµË´Ï´Ù.
+my_diary	item_added	Ç×¸ñÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.
+my_diary	no_entries	ÀÏ±â°¡ ¾ø½À´Ï´Ù.
+my_diary	nothing_updated	°»½ÅµÈ °ÍÀÌ ¾ø½À´Ï´Ù.
+my_diary	section	°³ÀÎ ÆäÀÌÁö
+my_diary	submit_only_once	ÇÑ¹ø¸¸ Å¬¸¯ÇÏ¼¼¿ä.
+my_diary	summary	¿ä¾à
+my_diary	title	ÀÏ±â¾²±â ¹× ¸Ş¸ğ
+my_diary	update_entry	Ç×¸ñ °»½ÅÇÏ±â
+my_rmproject	operation_not_permitted_text	You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="/people/">Help Wanted Board</a> and be ready to pass admin privilege to interested party.
+my_rmproject	operation_not_permitted_title	Operation Not Permitted
+my_rmproject	quitting_project	Quitting Project
+my_rmproject	quitting_project_text	You are about to remove yourself from the project. Please confirm your action:
+my_rmproject	title	Quitting Project
+new	download	´Ù¿î·Îµå
+new	module	¸ğµâ:
+new	newer_releases	»õ ¸±¸®Áî
+new	no_new_release_found	»õ·Î¿î ¸±¸®Áî°¡ ¾ø½À´Ï´Ù.
+new	notes_changes	¸±¸®Áî ³ëÆ® &amp; º¯µ¿»çÇ×
+new	older_releases	¿¹Àü ¸±¸®Áî
+new	projects_total	ÃÑ°è:
+new	released_by	¿Ã¸° »ç¶÷:
+new	this_project_has_not	ÀÌ ÇÁ·ÎÁ§Æ®´Â ¾ÆÁ÷ ¼³¸íÀ» Á¦ÃâÇÏÁö ¾Ê¾Ò½À´Ï´Ù.
+new	title	»õ ¸±¸®Áî
+new	version	¹öÀü:
+news	choose	<p>¿øÇÏ½Ã´Â ´º½º¸¦ ¼±ÅÃÇÏ½Ê½Ã¿À. ´º½º¸¦ ÀĞ°Å³ª °Ë»ö, È¤Àº ¿Ã¶ó¿Í ÀÖ´Â ´º½º¿¡ ´ëÇØ ´ä±ÛÀ» ¿Ã¸®½Ç ¼öµµ ÀÖ½À´Ï´Ù.<p>
+news	noitems	Ç×¸ñÀÌ ¾ø½À´Ï´Ù.
+news	nonews	´º½º°¡ ¾ø½À´Ï´Ù.
+news	nonewsfor	$1¿¡ ´ëÇÑ ´º½º°¡ ¾ø½À´Ï´Ù.
+news	section	ÇÁ·ÎÁ§Æ®: $1
+news	title	´º½º
+news_admin	noqueued	No Queued Items Found For Project
+news_admin	permdenied	You have to be an admin on the project you are editing or a member of the $1 News team.
+news_admin	queued	These News Items Were Submitted For Project
+news_admin	section	´º½º
+news_admin	title	´º½º °ü¸®
+news_main	title	´º½º
+news_submit	cannot	You cannot submit news for a project unless you are an admin on that project
+news_submit	cannotadmin	Submitting news from the news group is not allowed.
+news_submit	details	Details
+news_submit	errorboth	ERROR - both subject and body are required
+news_submit	errorinsert	ERROR doing insert
+news_submit	forproject	For Project
+news_submit	newsadded	News Added.
+news_submit	post_blurb	¿©·¯ºĞÀÌ ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ¶ó¸é ´º½º¸¦ µî·ÏÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. ¸¸¾à ´Ù¸¥ »ç¶÷ÀÇ µµ¿òÀÌ ÇÊ¿äÇÏ´Ù¸é "µµ¿ò ¿äÃ»" ¸Ş½ÃÁö¸¦ ¿Ã¸®½Ç ¼öµµ ÀÖ½À´Ï´Ù.<P><B>¿©·¯ºĞÀÇ ÇÁ·ÎÁ§Æ®</B>¿¡ °üÇÑ ¸ğµç ´º½º´Â °ğ¹Ù·Î ÇÁ·ÎÁ§Æ® ¿ä¾à ÆäÀÌÁö¿¡ ¿Ã¶ó°¡°Ô µË´Ï´Ù. ¸¸¾à $1 È¨ÆäÀÌÁö¿¡ ´º½º¸¦ ¿Ã¸®½Ã·Á¸é °ü¸® ÆÀÀ¸·ÎºÎÅÍ ½ÂÀÎÀ» ¹Ş¾Æ¾ß ÇÕ´Ï´Ù.
+news_submit	section	´º½º
+news_submit	subject	Á¦¸ñ
+news_submit	submit	Á¦ÃâÇÏ±â
+news_submit	title	´º½º ¿Ã¸®±â: $1
+news_utils	archive	´º½º ¾ÆÄ«ÀÌºê
+news_utils	nonews	´º½º Ç×¸ñÀÌ ¾ø½À´Ï´Ù.
+news_utils	readmore	´õ&nbsp;ÀĞ±â/´ä±Û ¿Ã¸®±â
+news_utils	submit	´º½º Á¦ÃâÇÏ±â
+people	about_blurb	<p>ÀÌ°÷Àº ºñ¿µ¸® ¸ñÀûÀÇ ÀÚ¿øºÀ»çÀÚµéÀ» À§ÇÑ °ø°£ÀÌ¸ç »ó¾÷ÀûÀÎ ¸ñÀûÀ¸·ÎÀÇ È°¿ëÀº ±İÁöÇÕ´Ï´Ù.</p><p>ÀÌ°÷¿¡ ¿Ã¸° ±ÛÀº 2ÁÖ µ¿¾È À¯È¿ÇÏ°í, ¸¸¾à ÇÊ¿ä¾ø°Ô µÇ¸é ±Û¾´ÀÌ°¡ ±× Àü¿¡¶óµµ »èÁ¦ÇÒ ¼ö ÀÖ½À´Ï´Ù. (¹°·Ğ ¸¸·áµÈ ¸Ş½ÃÁö¸¦ ´Ù½Ã ¿Ã¸± ¼öµµ ÀÖ½À´Ï´Ù.)</p><p>¿©·¯ºĞÀÇ µµ¿òÀ» ÇÊ¿ä·Î ÇÏ´Â ÇÁ·ÎÁ§Æ®µéÀÌ ÀÖ´ÂÁö µÑ·¯ º¸½Ê½Ã¿À.</p><p>¸¸¾à ¿©·¯ºĞÀÌ ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ¶ó¸é ·Î±×ÀÎÇÏ½Å ÈÄ ¿©·¯ºĞÀÌ °ü¸®ÇÏ°í °è½Ã´Â ÇÁ·ÎÁ§Æ®·Î °¡½Å ÈÄ ±×°÷¿¡¼­ ±ÛÀ» ¿Ã¸®¼Å¾ß ÇÕ´Ï´Ù.</p><p>¸¸¾à »õ·Î¿î JobÀ» Á¦¾ÈÇÏ°í ½ÍÀ¸½Ã´Ù¸é ±â¼úÁö¿ø °ü¸®ÀÚ ±â´ÉÀ» ÀÌ¿ëÇÏ¿© ÁÖ½Ê½Ã¿À.</p>
+people	action	Action
+people	add_new_skill	Add A New Skill
+people	add_skill	Add Skill
+people	added_skill	Added to skill inventory
+people	category	Category
+people	click_job_titles	Click job titles for more detailed descriptions.
+people	date_opened	Date Opened
+people	error_inserting	ERROR inserting into skill inventory
+people	error_skill_already	ERROR - skill already in your inventory
+people	experience	Experience
+people	here_is_list_position	Here is a list of positions available for this project.
+people	invalid_id	Invalid ID
+people	last_posts	Last posts
+people	level	Level
+people	long_description	Long Description
+people	more_latest_posts	more latest posts
+people	must_be_loggin	You must be logged in first
+people	must_select_a_skill	Must select a skill ID
+people	no_categories_found	No Categories Found
+people	no_skill_inventory_setup_up	No Skill Inventory Set Up
+people	none_found	None Found
+people	project	$1 project
+people	section	ÇÁ·ÎÁ§Æ® ¸â¹ö ±¸ÇÔ
+people	section	¸â¹ö ±¸ÇÔ
+people	short_description	Short Description
+people	skill	Skill
+people	status	Status
+people	title	µµ¿òÀÌ ÇÊ¿äÇÑ ÇÁ·ÎÁ§Æ®
+people	title_array	Title
+people_admin	section	¸â¹ö ±¸ÇÔ
+people_admin	title	¸â¹ö ±¸ÇÔ °ü¸®
+people_admin_people_cat	section	¸â¹ö ±¸ÇÔ °ü¸®
+people_admin_people_cat	title	Job ºĞ·ù Ãß°¡ÇÏ±â
+people_admin_people_skills	section	¸â¹ö ±¸ÇÔ °ü¸®
+people_admin_people_skills	title	Job ½ºÅ³ Ãß°¡ÇÏ±â
+people_cat	section	¸â¹ö ±¸ÇÔ
+people_cat	title	ºĞ·ùº° Job ³ª¿­ÇÏ±â
+people_createjob	continue	°è¼Ó >>
+people_createjob	explains	Start by filling in the fields below. When you click continue, you will be shown a list of skills and experience levels that this job requires.
+people_createjob	section	¸â¹ö ±¸ÇÔ
+people_createjob	title	»õ·Î¿î Job ¸¸µé±â
+people_editjob	error_missing	error - missing info
+people_editjob	fill_in	Fill in all required fields
+people_editjob	finished	Finished
+people_editjob	job_insert_failed	JOB insert FAILED
+people_editjob	job_insert_ok	JOB inserted successfully
+people_editjob	job_skill_delete_no	JOB skill delete FAILED
+people_editjob	job_skill_delete_no_wrong_id	JOB skill delete failed - wrong project_id
+people_editjob	job_skill_delete_ok	JOB skill deleted successfully
+people_editjob	job_skill_update_no	JOB skill update FAILED
+people_editjob	job_skill_update_no_wrong_id	JOB skill update failed - wrong project_id
+people_editjob	job_skill_update_ok	JOB skill updated successfully
+people_editjob	job_update_no	JOB update FAILED 
+people_editjob	job_update_no_wrong_id	JOB update failed - wrong project_id
+people_editjob	job_update_ok	JOB updated successfully
+people_editjob	no_such	No Such posting For This Project
+people_editjob	posting_fetch_failed	POSTING fetch FAILED
+people_editjob	section	¸â¹ö ±¸ÇÔ
+people_editjob	skill_explains	<p>Now you can edit/change the list of skills attached to this posting. Developers will be able to match their skills with your requirements.</p><p>All postings are automatically closed after two weeks.</p>
+people_editjob	title	Job ÆíÁı
+people_editjob	update_description	Update Descriptions
+people_editprofile	about_to_delete	You are about to delete the following skill$1
+people_editprofile	add_new_skill	Add a new skill
+people_editprofile	add_this_skill	Add This Skill
+people_editprofile	all_fields_required	All fields are required!
+people_editprofile	are_you_sure	Are you <strong>sure</strong> you wish to continue?
+people_editprofile	cancel_skills_update	Cancelled skills update
+people_editprofile	change_required_fields	Change the required fields, and press "Done" at the bottom of the page
+people_editprofile	confirm_delete	Confirm Delete
+people_editprofile	confirm_skill_delete	Confirm skill delete
+people_editprofile	edit_delete_your_skills	Edit/Delete Your Skills
+people_editprofile	edit_public_permissions	Edit Public Permissions
+people_editprofile	edit_skills	Edit Skills
+people_editprofile	edit_your_profile	Edit Your Profile
+people_editprofile	end_date	End Date
+people_editprofile	error	error - missing info
+people_editprofile	failed_delete_skills	Failed to delete any skills
+people_editprofile	failed_to_add_skill	Failed to add the skill
+people_editprofile	failed_update_skills	Failed to update skills
+people_editprofile	fill_all_required_fields	Fill in all required fields
+people_editprofile	following_options	The following option determines if others can see your skills. If they can't, you can still enter your skills.
+people_editprofile	from_skills_database	from the skills database. This action cannot be undone.
+people_editprofile	keywords	Keywords
+people_editprofile	keywords_max_255_chars	Keywords (max 255 characters)
+people_editprofile	no_skill_types_in_database	No skill types in database (skills_data_types table)
+people_editprofile	no_skill_types_in_database_inform	No skill types in database - inform system administrator
+people_editprofile	no_skills_selected	No skills selected to edit.
+people_editprofile	no_skills_selected_to_delete	No skills selected to delete.
+people_editprofile	no_such_user	No Such User
+people_editprofile	profile_title	Title
+people_editprofile	publicly_viewable	Publicly Viewable
+people_editprofile	section	¸â¹ö ±¸ÇÔ
+people_editprofile	skill_added_ok	Skill added successfully
+people_editprofile	skill_delete_successfully	Skill$1 deleted successfully 
+people_editprofile	skill_deletion_cancelled	Skill deletion cancelled
+people_editprofile	skills_edit	Skills edit
+people_editprofile	start_date	Start Date
+people_editprofile	title	³ªÀÇ ÇÁ·ÎÇÊ ÆíÁı
+people_editprofile	title_max_100_chars	Title (max 100 characters)
+people_editprofile	type	Type
+people_editprofile	update_failed	User update FAILED
+people_editprofile	update_ok	User updated successfully
+people_editprofile	update_permission	Update Permissions
+people_editprofile	user_fetch_failed	User fetch FAILED
+people_editprofile	you_can_enter_new_skills	You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.
+people_help_wanted_latest	title	Help Wanted Latest Posts
+people_helpwanted_latest	section	¸â¹ö ±¸ÇÔ
+people_helpwanted_latest	title	¸¶Áö¸· Æ÷½ºÆÃ
+people_proj	section	¸â¹ö ±¸ÇÔ
+people_proj	title	¸â¹ö ±¸ÇÔ: $1
+people_viewjob	contact_info	Contact Info
+people_viewjob	fetch_failed	POSTING fetch FAILED
+people_viewjob	for_project	For Project
+people_viewjob	no_such_posting	No Such Posting For This Project
+people_viewjob	open_date	Open Date
+people_viewjob	posting_id_not_found	Posting ID not found
+people_viewjob	required_skills	Required Skills
+people_viewjob	section	¸â¹ö ±¸ÇÔ
+people_viewjob	title	$1 ÀÌ(°¡) $2 ¿¡ ÇÊ¿äÇÕ´Ï´Ù.
+people_viewjob	view_a_job	View a Job
+people_viewprofile	no_such_user	No Such User
+people_viewprofile	section	»ç¿ëÀÚ Á¤º¸
+people_viewprofile	set_private	»ç¿ëÀÚÀÇ ÇÁ·ÎÇÊÀÌ ºñ°ø°³·Î ¼³Á¤µÇ¾î ÀÖ½À´Ï´Ù.
+people_viewprofile	skills_profile_for	½ºÅ³ ÇÁ·ÎÇÊ:
+people_viewprofile	title	°³¹ßÀÚ ÇÁ·ÎÇÊ º¸±â
+people_viewprofile	user_fetch_failed	User fetch FAILED
+pm	admin	admin
+pm	any	Any
+pm	assigned_to	Assigned To
+pm	cat_any	Any
+pm	cat_none	None
+pm	category	Category
+pm	date_note		The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.
+pm	dependent	Dependend on Task
+pm	dependent_note			You should choose only tasks which must be completed before this task can start.
+pm	details	Task Details
+pm	end_date	End Date
+pm	hours	Estimated Hours
+pm	intro	Choose a Subproject and you can browse/edit/add tasks to it.
+pm	no_tasks_found	No Matching Tasks found
+pm	no_tasks_found_text	Add tasks using the link above
+pm	noprj	<H1>ÇÏÀ§ ÇÁ·ÎÁ§Æ®°¡ ¾ø½À´Ï´Ù.</H1><P><B>¼³Á¤µÇ¾î ÀÖ´Â ÇÏÀ§ ÇÁ·ÎÁ§Æ®°¡ ¾ø°Å³ª, ¿­¶÷ÇÒ ¼ö ÀÖ´Â ±ÇÇÑÀÌ ¾ø½À´Ï´Ù.<P><FONT COLOR=RED>ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ°¡ °ü¸® ÆäÀÌÁö¸¦ ÅëÇØ ÇÏÀ§ ÇÁ·ÎÁ§Æ®¸¦ ¼³Á¤ÇØ ÁÖ¾î¾ß »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.</FONT></B>
+pm	percent_complete	Percent Complete
+pm	priority	Priority
+pm	section	ÇÁ·ÎÁ§Æ®: $1 
+pm	start_date	Start Date
+pm	status	Status
+pm	summary	Task Summary
+pm	task_id	Task Id
+pm	tech_any	Any
+pm	title	ÀÓ¹« °ü¸®ÀÚ: ÇÏÀ§ ÇÁ·ÎÁ§Æ® ¹× ÀÓ¹«
+pm	unassigned	Unassigned
+pm	view_calendar	View Calendar
+pm_addtask	section	ÀÓ¹« °ü¸®ÀÚ
+pm_addtask	task_added_relationship	Successfully Added Tracker Relationship
+pm_addtask	task_created_successfully	Task Created Successfully
+pm_addtask	task_updated_successfully	Task Updated Successfully
+pm_addtask	title	ÀÓ¹« Ãß°¡ÇÏ±â
 pm_admin	section	$1
-pm_admin	title	ì„ë¬´ ê´€ë¦¬ì: ê´€ë¦¬
-pm_admin_change_status	section	ì„ë¬´ ê´€ë¦¬ì ê´€ë¦¬
-pm_admin_change_status	title	ì •ë³´ ê°±ì‹ 
-pm_admin_projects	section	ì„ë¬´ ê´€ë¦¬ì ê´€ë¦¬
-pm_admin_projects	title	í•˜ìœ„ í”„ë¡œì íŠ¸ ì¶”ê°€
-pm_browse_custom	section	ì„ë¬´ ê´€ë¦¬ì
-pm_browse_custom	title	ë³„ë„ ì„ë¬´ ë³´ê¸°
-pm_browse_my	section	í”„ë¡œì íŠ¸ $1 ì„ë¬´ ê´€ë¦¬ì
-pm_browse_my	title	ë‚˜ì˜ ì„ë¬´ ë³´ê¸°
-pm_browse_open	section	ì„ë¬´ ê´€ë¦¬ì
-pm_browse_open	title	í• ë‹¹ëœ ì„ë¬´ ë³´ê¸°
-pm_detailtask	section	ì„ë¬´ ê´€ë¦¬ì
-pm_detailtask	title	ì„ë¬´ ì„¸ë¶€ì‚¬í•­
-pm_modtask	section	ì„ë¬´ ê´€ë¦¬ì
-pm_modtask	title	ì„ë¬´ ìˆ˜ì •
-pm_reporting	section	ì„ë¬´ ê´€ë¦¬ì
-pm_reporting	title	ì„ë¬´ ë¦¬í¬íŒ… ì‹œìŠ¤í…œ
-project_admin	section	í”„ë¡œì íŠ¸: $1
-project_admin	title	ê´€ë¦¬ ìš”ì•½
-project_admin_database	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_database	title	ë°ì´í„°ë² ì´ìŠ¤ ì •ë³´
-project_admin_editgroupinfo	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_editgroupinfo	title	ê³µê°œì •ë³´ í¸ì§‘
-project_admin_editimages	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_editimages	title	ë©€í‹°ë¯¸ë””ì–´ ë°ì´í„° í¸ì§‘
-project_admin_editpackages	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_editpackages	title	íŒ¨í‚¤ì§€ í¸ì§‘
-project_admin_editreleases	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_editreleases	title	ë¦´ë¦¬ì¦ˆ í¸ì§‘
-project_admin_history	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_history	title	íˆìŠ¤í† ë¦¬
-project_admin_newrelease	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_newrelease	title	ìƒˆ ë¦´ë¦¬ì¦ˆ ì¶”ê°€
-project_admin_qrs	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_qrs	title	QRS: í€µ ë¦´ë¦¬ì¦ˆ ì‹œìŠ¤í…œ
-project_admin_userpermedit	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_userpermedit	title	ê°œë°œìê°„ ê¶Œí•œ í¸ì§‘
-project_admin_userperms	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_userperms	title	ì‚¬ìš©ìê°„ ê¶Œí•œ ë³´ê¸°
-project_admin_vhost	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
-project_admin_vhost	title	ë²„ì¶”ì–¼ í˜¸ìŠ¤íŠ¸ ê´€ë¦¬
-project_memberlist	joining	<P>ì´ í”„ë¡œì íŠ¸ì— ê°œë°œìë¡œì„œ ì°¸ì—¬í•˜ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´, ì•„ë˜ êµµì€ ê¸€ì”¨ì²´ë¡œ ë³´ì´ëŠ” í”„ë¡œì íŠ¸ ê´€ë¦¬ìë“¤ ì¤‘ í•œì‚¬ëŒê³¼ ì—°ë½í•˜ì‹œë©´ ë©ë‹ˆë‹¤.<br><br>
-project_showfiles	section	í”„ë¡œì íŠ¸: $1
-project_showfiles	title	íŒŒì¼ ë³´ê¸°
-project_shownotes	section	í”„ë¡œì íŠ¸: $1
-project_shownotes	title	ë¦´ë¦¬ì¦ˆ ë…¸íŠ¸
-projects	section	í”„ë¡œì íŠ¸: $1
-projects	title	ìš”ì•½
-register	title	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
-register_complete	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
-register_complete	title	ë“±ë¡ ì™„ë£Œ
-register_projectinfo	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
-register_projectinfo	title	í”„ë¡œì íŠ¸ ì •ë³´
-register_requirements	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
-register_requirements	title	ì œê³µë˜ëŠ” ì„œë¹„ìŠ¤ ë° ìš”êµ¬ì‚¬í•­
-register_tos	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
-register_tos	title	ì„œë¹„ìŠ¤ì— ê´€í•œ ê³„ì•½ì‚¬í•­
-search	title	ì°¾ê¸°
-sendmessage	about_blurb	ìŠ¤íŒ¸ì„ ì¤„ì´ê¸° ìœ„í•´ ì•„ë˜ ì–‘ì‹ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.<p>ì•„ë˜ ì–‘ì‹ì„ ëª¨ë‘ ì œëŒ€ë¡œ ì±„ì›Œ ì£¼ì‹­ì‹œì˜¤. ë§Œì•½ ê·¸ë ‡ì§€ ì•Šë‹¤ë©´ ìˆ˜ì‹ ì¸ì´ ì œëŒ€ë¡œ ì‘ë‹µí•˜ì§€ ëª»í•˜ê²Œ ë ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<P><FONT COLOR="RED"><B>ë§Œì•½ ì–´ë–¤ ë„ì›€ì„ ìš”ì²­í•˜ëŠ” ê²½ìš°ë¼ë©´:</B> ì‚¬ì´íŠ¸ ê´€ë ¨ ë¬¸ì„œë¥¼ ì½ì–´ ë³´ì…¨ìŠµë‹ˆê¹Œ? ì—¬ëŸ¬ë¶„ì˜ <B>ì‚¬ìš©ì ID</B>ì™€ <B>ì´ë¦„</B>ì„ ì œëŒ€ë¡œ ëª…ì‹œí•˜ì…¨ëŠ”ì§€ìš”? ì–´ëŠ íŠ¹ì • í”„ë¡œì íŠ¸ì— ê´€í•œ ê²ƒì´ë¼ë©´ <B>í”„ë¡œì íŠ¸ ID</B> (<B>ê·¸ë£¹ ID</B>) ë° <B>í”„ë¡œì íŠ¸ ì´ë¦„</B>ì„ ëª…ì‹œí•´ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.</FONT>
-sendmessage	title	ë©”ì‹œì§€ ë³´ë‚´ê¸°: $1
-snippet	title	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_add_snippet_to_package	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_add_snippet_to_package	title	íŒ¨í‚¤ì§€ì— ì½”ë“œ ì¶”ê°€
-snippet_addversion	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_addversion	title	ìƒˆ ë²„ì „ ì˜¬ë¦¬ê¸°
-snippet_browse	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_browse	title	ì½”ë“œ ë‘˜ëŸ¬ë³´ê¸°
-snippet_delete	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_delete	title	ì½”ë“œ ì§€ìš°ê¸°
-snippet_detail	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_detail	title	ì½”ë“œ ìì„¸íˆ ë³´ê¸°
-snippet_package	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_package	title	ì½”ë“œ íŒ¨í‚¤ì§€ ë§Œë“¤ê¸°
-snippet_submit	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
-snippet_submit	title	ì½”ë“œ ì œì¶œ
+pm_admin	title	ÀÓ¹« °ü¸®ÀÚ: °ü¸®
+pm_admin_change_status	section	ÀÓ¹« °ü¸®ÀÚ °ü¸®
+pm_admin_change_status	title	Á¤º¸ °»½Å
+pm_admin_projects	add_categories	Add Categories
+pm_admin_projects	add_categories_title	Add Categories
+pm_admin_projects	add_categories_to	Add Categories To
+pm_admin_projects	add_edit_categories	Add/Edit Categories
+pm_admin_projects	add_project	Add A Project
+pm_admin_projects	add_project_intro	Add a project, which can contain a set of tasks. This is different than creating a new task.
+pm_admin_projects	add_subprojects	Add Projects
+pm_admin_projects	admin_title	Project/Task Manager Administration
+pm_admin_projects	category_inserted	Category Inserted
+pm_admin_projects	category_name	Category Name
+pm_admin_projects	category_note	Once you add a category, it cannot be deleted
+pm_admin_projects	category_note2	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.</font></strong>
+pm_admin_projects	category_updated	Category Updated
+pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.
+pm_admin_projects	change_project_title	Change Project/Task Manager Status
+pm_admin_projects	description	Description
+pm_admin_projects	edit_update	Edit/Update Project
+pm_admin_projects	existing_subprojects	Existing Subprojects
+pm_admin_projects	id	Id
+pm_admin_projects	is_public	Is Public?	
+pm_admin_projects	modify_category	Modify an Category in
+pm_admin_projects	no_categories	No categories defined
+pm_admin_projects	no_projects_found	<h2>No Projects Found</h2><p>None found for this group. You may add new Projects using the "Add A Project" link above.</p>
+pm_admin_projects	no_subprojects	No Subprojects in this group	
+pm_admin_projects	project_inserted	Project Inserted 
+pm_admin_projects	project_name	New Project Name
+pm_admin_projects	project_title	Title
+pm_admin_projects	projects_intro	Add a new project to the Project/Task Manager. <strong>This is different than adding a task to a project.</strong>
+pm_admin_projects	section	ÀÓ¹« °ü¸®ÀÚ °ü¸®
+pm_admin_projects	send_updates	Send All Updates To
+pm_admin_projects	title	ÇÏÀ§ ÇÁ·ÎÁ§Æ® Ãß°¡
+pm_admin_projects	updated_successfully	Updated Successfully ";
+pm_browse_custom	section	ÀÓ¹« °ü¸®ÀÚ
+pm_browse_custom	title	º°µµ ÀÓ¹« º¸±â
+pm_browse_my	section	ÇÁ·ÎÁ§Æ® $1 ÀÓ¹« °ü¸®ÀÚ
+pm_browse_my	title	³ªÀÇ ÀÓ¹« º¸±â
+pm_browse_open	section	ÀÓ¹« °ü¸®ÀÚ
+pm_browse_open	title	ÇÒ´çµÈ ÀÓ¹« º¸±â
+pm_browsetask	browse	Browse
+pm_browsetask	next	next 50
+pm_browsetask	overdue_tasks	* Denotes overdue tasks
+pm_browsetask	previous	previous 50
+pm_browsetask	title	Browse tasks
+pm_detailtask	assigned_to	Assigned To
+pm_detailtask	category	Category
+pm_detailtask	dependend_on_task	Dependent On Task
+pm_detailtask	end_date	End Date
+pm_detailtask	hours	Hours
+pm_detailtask	original_comment	Original Comment
+pm_detailtask	pct_complete	Percent Complete
+pm_detailtask	priority	Priority
+pm_detailtask	section	ÀÓ¹« °ü¸®ÀÚ
+pm_detailtask	start_date	Start Date
+pm_detailtask	status	Status
+pm_detailtask	submitted_by	Submitted By
+pm_detailtask	task_summary	Task Summary
+pm_detailtask	title	ÀÓ¹« ¼¼ºÎ»çÇ×
+pm_ganttpage	assignee	Assignee
+pm_ganttpage	days	Days
+pm_ganttpage	months	Months
+pm_ganttpage	resolution	Resolution
+pm_ganttpage	size	Size
+pm_ganttpage	sort_on	Sort On
+pm_ganttpage	weeks	Weeks
+pm_include_grouphtml	add_task	Add Task
+pm_include_grouphtml	admin	Admin
+pm_include_grouphtml	browse_task	Browse Tasks
+pm_include_grouphtml	error_disabled	This Project Has Turned Off The Task Manager
+pm_include_grouphtml	gantt_chart	Gantt Chart
+pm_include_grouphtml	not_started	Not Started
+pm_include_grouphtml	project	Project
+pm_include_grouphtml	reporting	Reporting
+pm_include_taskhtml	by	By
+pm_include_taskhtml	comment	Comment
+pm_include_taskhtml	date	Date
+pm_include_taskhtml	depend_info	Tasks That Depend on This Task
+pm_include_taskhtml	field	Field
+pm_include_taskhtml	followups	Folloups
+pm_include_taskhtml	no_changes	No Changes Have Been Made
+pm_include_taskhtml	no_comments	No Comments Have Been Added
+pm_include_taskhtml	no_depend_info	No Tasks are Dependent on This Task
+pm_include_taskhtml	no_followups	No Followups
+pm_include_taskhtml	no_tracker_items	No Related Tracker Items Have Been Added
+pm_include_taskhtml	old_value	Old Value
+pm_include_taskhtml	open_date	Open Date
+pm_include_taskhtml	related_items	Related Tracker Items
+pm_include_taskhtml	remove_relation	Remove Relation
+pm_include_taskhtml	task_history	Task Change History
+pm_include_taskhtml	tracker	Tracker
+pm_modtask	add_comment	Add A Comment
+pm_modtask	assignee	Assignee
+pm_modtask	original_comment	Original Comment
+pm_modtask	section	ÀÓ¹« °ü¸®ÀÚ
+pm_modtask	sort_on	Sort On
+pm_modtask	submitted_by	Submitted By
+pm_modtask	title	ÀÓ¹« ¼öÁ¤
+pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
+pm_projectgroup	error_min_desc_length	Document Description Must Be At Least 10 Characters
+pm_projectgroup	error_min_name_length	Title Must Be At Least 5 Characters
+pm_projectgroup	none_found	No ProjectGroups Found
+pm_projecttask	circular_dependency	Circular Dependency Detected'
+pm_projecttask	mail_followups_body	\nDate: $1\nBy: $2\n\nComment:\n$3
+pm_projecttask	mail_followups_footer	For more info, visit:
+pm_projecttask	mail_followups_subject	Task #
+pm_projecttask	mail_followups_title	\n\nFollow-Ups
+pm_projecttask	mail_notice			Task # $1 has been updated\n\nProject: $2\nSubproject: $3\nSummary: $4\nComplete: $5\nStatus: $6\n\nDescription: $7
+pm_reporting	aging_report	Aging Report
+pm_reporting	all_tasks_by_category	All Tasks By Category
+pm_reporting	all_tasks_by_technician	All Tasks By Technician
+pm_reporting	average_duration	Average duration for closed tasks (days)
+pm_reporting	by_subproject	Report by Subproject
+pm_reporting	by_tech	Report by Technician
+pm_reporting	not_completed	Number of tasks still not completed
+pm_reporting	open_tasks_by_category	Open Tasks By Category
+pm_reporting	open_tasks_by_technician	Open Tasks By Technician
+pm_reporting	report_note	<p>Note that same task can be assigned to several technicians. Such task will be counted for each of them.</p>
+pm_reporting	section	ÀÓ¹« °ü¸®ÀÚ
+pm_reporting	started_tasks	Number of started tasks
+pm_reporting	tasks_by_category	Tasks By Category
+pm_reporting	tasks_by_technician	Tasks By Technician
+pm_reporting	title	ÀÓ¹« ¸®Æ÷ÆÃ ½Ã½ºÅÛ
+pm_task	create_successfully	Task Created Successfully
+project_admin	add_user	»ç¿ëÀÚ Ãß°¡
+project_admin	docmanager_admin	¹®¼­ °ü¸®ÀÚ ¼³Á¤
+project_admin	download_tarball	CVS Æ®¸® tarball ³»·Á¹Ş±â
+project_admin	edit_file_releases	ÆÄÀÏ ¸±¸®Áî ÆíÁı/Ãß°¡ÇÏ±â
+project_admin	edit_member_permissions	ÇÁ·ÎÁ§Æ® ¸â¹ö ±ÇÇÑ ¼³Á¤ÇÏ±â
+project_admin	file_releases	ÆÄÀÏ ¸±¸®Áî
+project_admin	forum_admin	°Ô½ÃÆÇ ¼³Á¤
+project_admin	group_members	ÇÁ·ÎÁ§Æ® ¸â¹ö
+project_admin	homepage_link	È¨ÆäÀÌÁö ¸µÅ©:&nbsp;
+project_admin	mail_admin	¸ŞÀÏ ¼³Á¤
+project_admin	news_admin	´º½º ¼³Á¤
+project_admin	packages	ÆĞÅ°Áö
+project_admin	project_information	±×¿Ü ÇÁ·ÎÁ§Æ® Á¤º¸
+project_admin	section	ÇÁ·ÎÁ§Æ®: $1
+project_admin	shell_server	ÇÁ·ÎÁ§Æ® shell (SSH) ¼­¹ö:&nbsp;
+project_admin	shell_server_group_directory	shell ¼­¹öÀÇ ÇÁ·ÎÁ§Æ® µğ·ºÅä¸®:&nbsp; 
+project_admin	short_description	ÂªÀº ¼³¸í:&nbsp;
+project_admin	task_manager_admin	ÀÓ¹« °ü¸®ÀÚ ¼³Á¤
+project_admin	title	ÇÁ·ÎÁ§Æ® °ü¸®: $1
+project_admin	tool_admin	Åø °ü¸®ÀÚ
+project_admin	tracker_admin	¹®Á¦Á¡ ÃßÀû °ü¸®
+project_admin	trove_categorization	¼ÒÇÁÆ®¿ş¾î ¸Ê ºĞ·ù:&nbsp;
+project_admin	unix_name	Unix ÀÌ¸§
+project_admin	user_added	»ç¿ëÀÚ°¡ ¼º°øÀûÀ¸·Î Ãß°¡µÇ¾ú½À´Ï´Ù.
+project_admin	user_removed	»ç¿ëÀÚ°¡ ¼º°øÀûÀ¸·Î »èÁ¦µÇ¾ú½À´Ï´Ù.
+project_admin	www_directory	shell ¼­¹öÀÇ ÇÁ·ÎÁ§Æ® WWW µğ·ºÅä¸®:&nbsp;
+project_admin_database	add_new_database	»õ·Î¿î database Ãß°¡ÇÏ±â
+project_admin_database	add_new_database_info	"Ãß°¡" ¹öÆ°À» Å¬¸¯ÇÏ¸é database »ı¼º ÀÏÁ¤ÀÌ Ãß°¡µÇ°í ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ¿¡°Ô ÀÚ¼¼ÇÑ Á¤º¸°¡ ÀÌ¸ŞÀÏ·Î Àü¼ÛµË´Ï´Ù.
+project_admin_database	cannot_add	database Ç×¸ñÀ» Ãß°¡ÇÒ ¼ö ¾ø½À´Ï´Ù.
+project_admin_database	confirm_delete	»èÁ¦ È®ÀÎ
+project_admin_database	confirm_deletion	»èÁ¦ÇÏ½Ã·Á¸é Å¬¸¯ÇÏ½Ê½Ã¿À.
+project_admin_database	confirm_new	´Ù½ÃÇÑ¹ø
+project_admin_database	create	»ı¼º
+project_admin_database	current_databases	ÇöÀç databases
+project_admin_database	database_created	database »ı¼º ÀÏÁ¤ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.
+project_admin_database	database_type	database ÇüÅÂ
+project_admin_database	db_type	DB ÇüÅÂ
+project_admin_database	maximum_databases_allocated	ÃÖ´ë ÇÒ´ç °¡´ÉÇÑ database°¡ ÀÌ¹Ì ¼³Á¤µÇ¾î ÀÖ½À´Ï´Ù.
+project_admin_database	new_password	»õ·Î¿î ºñ¹Ğ¹øÈ£
+project_admin_database	no_databases	ÇöÀç ÇÒ´çµÇ¾î ÀÖ´Â database°¡ ¾ø½À´Ï´Ù.
+project_admin_database	operations	µ¿ÀÛ
+project_admin_database	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_database	state	»óÅÂ
+project_admin_database	title	µ¥ÀÌÅÍº£ÀÌ½º Á¤º¸
+project_admin_database	update	°»½Å
+project_admin_editgroupinfo	active_features	»ç¿ëÁßÀÎ ±â´Éµé
+project_admin_editgroupinfo	enable_anonymous_cvs	ÀÍ¸í CVS Á¢±Ù Çã¿ë
+project_admin_editgroupinfo	enable_pserver	pserver Çã¿ë
+project_admin_editgroupinfo	group_name	ÇÁ·ÎÁ§Æ® ÀÌ¸§
+project_admin_editgroupinfo	group_updated	ÇÁ·ÎÁ§Æ® Á¤º¸°¡ °»½ÅµÇ¾ú½À´Ï´Ù.
+project_admin_editgroupinfo	homepage_link	È¨ÆäÀÌÁö ¸µÅ©
+project_admin_editgroupinfo	new_doc	»õ·Î¿î ¹®¼­ Á¦Ãâ
+project_admin_editgroupinfo	new_doc_info	¿øÇÏ½Å´Ù¸é ¸ğµç Á¦Ãâ »óÈ²À» ÁöÁ¤ÇÑ ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î ¹Ş¾Æº¸½Ç ¼ö ÀÖ½À´Ï´Ù.
+project_admin_editgroupinfo	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_editgroupinfo	send_on_all_updates	(°»½ÅµÉ ¶§¸¶´Ù ÀÌ¸ŞÀÏ º¸³¿)
+project_admin_editgroupinfo	short_description	°£·«ÇÑ ¼³¸í(ÃÖ´ë 255ÀÚ. HTMLÅÂ±×´Â Çã¿ëµÇÁö ¾Ê½À´Ï´Ù.)
+project_admin_editgroupinfo	title	°ø°³ Á¤º¸ ÆíÁıÇÏ±â
+project_admin_editgroupinfo	use_cvs	CVS »ç¿ë
+project_admin_editgroupinfo	use_docman	¹®¼­ °ü¸®ÀÚ »ç¿ë
+project_admin_editgroupinfo	use_forums	°Ô½ÃÆÇ »ç¿ë
+project_admin_editgroupinfo	use_frs	ÆÄÀÏ ¸±¸®Áî ½Ã½ºÅÛ »ç¿ë
+project_admin_editgroupinfo	use_ftp	FTP »ç¿ë
+project_admin_editgroupinfo	use_mailing_lists	¸ŞÀÏ¸µ ¸®½ºÆ® »ç¿ë
+project_admin_editgroupinfo	use_news	´º½º ±â´É »ç¿ë
+project_admin_editgroupinfo	use_pm	ÇÁ·ÎÁ§Æ®/ÀÓ¹« °ü¸®ÀÚ ±â´É »ç¿ë
+project_admin_editgroupinfo	use_stats	Åë°è ±â´É »ç¿ë
+project_admin_editgroupinfo	use_surveys	¼³¹®Á¶»ç ±â´É »ç¿ë
+project_admin_editgroupinfo	use_tracker	¹®Á¦Á¡ ÃßÀû ±â´É »ç¿ë
+project_admin_editimages	add_data	¸ÖÆ¼¹Ìµğ¾î µ¥ÀÌÅÍ Ãß°¡ÇÏ±â
+project_admin_editimages	add_file	ÆÄÀÏ Ãß°¡ÇÏ±â
+project_admin_editimages	del	Áö¿ì±â
+project_admin_editimages	description	¼³¸í
+project_admin_editimages	dims	Dims
+project_admin_editimages	edit	ÆíÁı
+project_admin_editimages	error_length	¿À·ù - ÆÄÀÏÀº 20byte ÀÌ»ó, 256000byte ¹Ì¸¸ÀÌ¾î¾ß ÇÕ´Ï´Ù.
+project_admin_editimages	file_deleted	ÆÄÀÏÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.
+project_admin_editimages	file_description_required	ÆÄÀÏ ¼³¸íÀ» ³Ö¾î ÁÖ¼Å¾ß ÇÕ´Ï´Ù.
+project_admin_editimages	file_uploaded	ÆÄÀÏÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.
+project_admin_editimages	id	ID
+project_admin_editimages	intro	1MB±îÁöÀÇ ¸ÖÆ¼¹Ìµğ¾î ÆÄÀÏÀ» database¿¡ ÀúÀåÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. (bitmap and vector graphics, sound clips, 3D models) ÀÌ ÆäÀÌÁö¿¡¼­ ¸ÖÆ¼¹Ìµğ¾î ÆÄÀÏÀ» Ãß°¡ÇÏ°Å³ª »èÁ¦ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+project_admin_editimages	local_filename	·ÎÄÃ ÆÄÀÏ¸í
+project_admin_editimages	mime_type	MIME Å¸ÀÔ
+project_admin_editimages	name	ÀÌ¸§
+project_admin_editimages	properties_updated	ÆÄÀÏ ¼Ó¼ºÀÌ °»½ÅµÇ¾ú½À´Ï´Ù.
+project_admin_editimages	replace	»õ·Î¿î ÆÄÀÏ·Î ±³Ã¼ÇÏ±â (¼±ÅÃ»çÇ×)
+project_admin_editimages	required_fields	ÆÄÀÏ¸í°ú ¼³¸íÀ» ¸ğµÎ ÀÔ·ÂÇØ ÁÖ¼Å¾ß ÇÕ´Ï´Ù.
+project_admin_editimages	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_editimages	size	Å©±â
+project_admin_editimages	title	¸ÖÆ¼¹Ìµğ¾î µ¥ÀÌÅÍ ÆíÁı
+project_admin_editimages	uploaded	Ãß°¡µÇ¾ú½À´Ï´Ù.
+project_admin_editpackages	add_release	¸±¸®Áî Ãß°¡
+project_admin_editpackages	added_package	ÆĞÅ°Áö°¡ Ãß°¡µÇ¾ú½À´Ï´Ù.
+project_admin_editpackages	create_package	ÀÌ ÆĞÅ°Áö¸¦ »ı¼ºÇÕ´Ï´Ù.
+project_admin_editpackages	edit_releases	¸±¸®Áî¸¦ ÆíÁıÇÕ´Ï´Ù.
+project_admin_editpackages	new_package_name	»õ ÆĞÅ°Áö ÀÌ¸§
+project_admin_editpackages	no_packages_defined	Á¤ÀÇµÈ ÆĞÅ°Áö°¡ ¾ø½À´Ï´Ù.
+project_admin_editpackages	no_packages_status	»óÅÂ
+project_admin_editpackages	package_name	ÆĞÅ°Áö ÀÌ¸§
+project_admin_editpackages	packages_info	<h3>ÆĞÅ°Áö</h3><p>¼­·Î ´Ù¸¥ ÆÄÀÏ ¸±¸®Áî¸¦ ÆĞÅ°Áö ´ÜÀ§·Î Ã³¸®ÇÏ½Ã°Å³ª ¶Ç´Â ¿øÇÏ½Ã´Â ´ë·Î ¼³Á¤ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.<p><h4>ÆĞÅ°Áö ¿¹:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>¿©·¯ºĞÀÇ ÆĞÅ°Áö:</H4><p><ol><li>ÆĞÅ°Áö¸¦ Á¤ÀÇÇÕ´Ï´Ù.</li><li>ÇØ´ç ÆĞÅ°Áö¿¡ »õ ¸±¸®Áî¸¦ Ãß°¡ÇÕ´Ï´Ù.</li></ol><p><h3>ÆĞÅ°Áö¿¡ µş¸° ¸±¸®Áî</h3><p>ÆĞÅ°Áö¿¡ µş¸° ¸±¸®Áî´Â ¿©·¯°³ÀÇ ÆÄÀÏÀ» Æ÷ÇÔÇÒ ¼ö ÀÖ½À´Ï´Ù.<p><H4>¸±¸®Áî ¿¹</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>ÆĞÅ°Áö¿¡ µş¸° »õ·Î¿î ¸±¸®Áî´Â ÆĞÅ°Áö ÀÌ¸§ ¿·ÀÇ <strong>¸±¸®Áî Ãß°¡/ÆíÁıÇÏ±â</strong>¸¦ Å¬¸¯ÇÏ½Ã¸é µË´Ï´Ù.<p>
+project_admin_editpackages	qrs	QRS
+project_admin_editpackages	qrs_a_file	$1 °£´ÜÈ÷ ÆÄÀÏÀ» ¸±¸®Áî $2 ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+project_admin_editpackages	releases	¸±¸®Áî
+project_admin_editpackages	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_editpackages	title	ÆĞÅ°Áö ÆíÁı
+project_admin_editpackages	updated_package	°»½ÅµÈ ÆĞÅ°Áö
+project_admin_editrelease	add_file	ÀÌ ÆÄÀÏÀ» Ãß°¡ÇÏ±â
+project_admin_editrelease	add_files_note	¾Ë¸²: ¾î¶² ºê¶ó¿ìÀú¿¡¼­´Â ÆÄÀÏÀ» ´ÙÀÌ¾ó·Î±× Ã¢¿¡¼­ ¼±ÅÃÇÑ ÈÄ "OK"¹öÆ°À» ´­·¯ ÁÖ¾î¾ß¸¸ ÇÏ´Â °æ¿ì°¡ ÀÖ½À´Ï´Ù. ´õºíÅ¬¸¯¸¸ ÇØ¼­´Â µî·ÏÀÌ µÇÁö ¾ÊÀ» ¼öµµ ÀÖ½À´Ï´Ù.</strong></span>
+project_admin_editrelease	changelog_too_small	º¯µ¿»çÇ× Á¤º¸°¡ ³Ê¹« Âª½À´Ï´Ù.
+project_admin_editrelease	data_saved	ÀúÀåµÇ¾ú½À´Ï´Ù.
+project_admin_editrelease	delete_file	ÆÄÀÏ »èÁ¦ÇÏ±â
+project_admin_editrelease	file_deleted	ÆÄÀÏÀÌ »èÁ¦µÇ¾ú½À´Ï´Ù.
+project_admin_editrelease	file_list_note	ÀÌ ¸±¸®Áî¿¡ ÆÄÀÏÀ» Ãß°¡ÇÏ½Ã¸é ÀÌ ÆÄÀÏµéÀ» <strong>¹İµå½Ã</strong> ¿Ã¹Ù¸¥ Á¤º¸¿Í ÇÔ²² °»½ÅÇØ ÁÖ¼Å¾ß ÇÕ´Ï´Ù. ±×·¸Áö ¾ÊÀ¸¸é ´Ù¿î·Îµå ¿ä¾à ÆäÀÌÁö¿¡ ÆÄÀÏÀÌ Á¦´ë·Î ³ªÅ¸³ªÁö ¾Ê½À´Ï´Ù.
+project_admin_editrelease	file_released	ÆÄÀÏÀÌ ¸±¸®ÁîµÇ¾ú½À´Ï´Ù.
+project_admin_editrelease	file_type	ÆÄÀÏ ÇüÅÂ
+project_admin_editrelease	file_type_update	ÆÄÀÏ ÇüÅÂ<br />°»½Å
+project_admin_editrelease	file_updated	ÆÄÀÏÀÌ °»½ÅµÇ¾ú½À´Ï´Ù.
+project_admin_editrelease	filename_release	ÆÄÀÏÀÌ¸§<br />¸±¸®Áî
+project_admin_editrelease	i_am_sure	È®ÀÎ
+project_admin_editrelease	no_files_in_release	ÀÌ ¸±¸®Áî¿¡ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.
+project_admin_editrelease	note	ÀÌ ÆĞÅ°ÁöÀÇ ¸±¸®Áî¿¡ ´ëÇÑ ¸±¸®Áî ³ëÆ®¿Í º¯µ¿»çÇ×À» ÆíÁıÇÕ´Ï´Ù. ÀÌ º¯µ¿»çÇ×µéÀº ÀÌ ¸±¸®Áî¿¡ µş¸° ¸ğµç ÆÄÀÏµé¿¡ ´ëÇØ Àû¿ëµË´Ï´Ù.<br />¸±¸®Áî ³ëÆ®¿Í º¯µ¿»çÇ×Àº µû·Îµû·Î ¿Ã¸®½Ç ¼öµµ ÀÖ°í ¾Æ·¡¿¡ Á÷Á¢ ºÙ¿©³Ö±âÇÏ½Ç ¼öµµ ÀÖ½À´Ï´Ù.
+project_admin_editrelease	paste_changelog	º¯µ¿»çÇ× ³»¿ë
+project_admin_editrelease	paste_release_notes	¸±¸®Áî ³ëÆ® ³»¿ë
+project_admin_editrelease	preserve_preformatted	º»¹® Çü½ÄÀ» ±×´ë·Î º¸ÀüÇÕ´Ï´Ù.
+project_admin_editrelease	processor_type	ÇÁ·Î¼¼¼­ Å¸ÀÔ
+project_admin_editrelease	processor_update	ÇÁ·Î¼¼¼­<br />¸±¸®Áî ³¯Â¥
+project_admin_editrelease	release_date	¸±¸®Áî ³¯Â¥
+project_admin_editrelease	release_name	¸±¸®Áî ÀÌ¸§
+project_admin_editrelease	release_notes_too_small	¸±¸®Áî ³ëÆ®ÀÇ ³»¿ëÀÌ ³Ê¹« Âª½À´Ï´Ù.
+project_admin_editrelease	status	»óÅÂ
+project_admin_editrelease	step_1	1´Ü°è: &nbsp;&nbsp; ¸±¸®Áî ÆíÁı
+project_admin_editrelease	step_2	2´Ü°è: ÀÌ ¸±¸®Áî¿¡ ÆÄÀÏ Ãß°¡</h3><p>ÀÌÁ¦ ¾÷·ÎµåÇÒ ÆÄÀÏÀ» ¼±ÅÃÇÕ´Ï´Ù. ¿Ã¸± ¼ö ÀÖ´Â ÃÖ´ë ÆÄÀÏ Å©±â´Â ½Ã½ºÅÛ °ü¸®ÀÚ¿¡ ÀÇÇØ¼­ Á¤ÀÇµÇ¸ç µû·Î Á¤ÀÇÇÏÁö ¾Ê¾ÒÀ» ¶§´Â 2MB±îÁöÀÔ´Ï´Ù. ¸¸¾à Å« ÆÄÀÏÀ» ¿Ã¸± ÇÊ¿ä°¡ ÀÖ´Ù¸é ½Ã½ºÅÛ °ü¸®ÀÚ¿¡°Ô Á÷Á¢ ¹®ÀÇÇÏ¼¼¿ä.</p>
+project_admin_editrelease	step_3	3´Ü°è: ÀÌ ¸±¸®ÁîÀÇ ÆÄÀÏ ÆíÁıÇÏ±â
+project_admin_editrelease	submit_refresh	Á¦Ãâ/°»½Å
+project_admin_editrelease	title	¸±¸®Áî ÆíÁı
+project_admin_editrelease	update_refresh	°»½Å/¸®ÇÁ·¹½¬
+project_admin_editrelease	upload_change_log	º¯µ¿»çÇ× ¿Ã¸®±â
+project_admin_editrelease	upload_new_file	»õ ÆÄÀÏ ¿Ã¸®±â
+project_admin_editrelease	upload_release_notes	¸±¸®Áî ³ëÆ® ¿Ã¸®±â
+project_admin_editreleases	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_editreleases	title	¸±¸®Áî ÆíÁı
+project_admin_group_trove	intro	<h3>¼ÒÇÁÆ®¿ş¾î ¸Ê ºĞ·ù Á¤º¸ ÆíÁı</h3><p>´ÙÀ½ ºĞ·ù¿¡ ´ëÇØ °ü·ÃµÇ´Â Ç×¸ñÀ» ¼±ÅÃÇÏ½Ê½Ã¿À. ÇØ´çµÇÁö ¾Ê´Â Ç×¸ñ¿¡ ´ëÇØ¼­´Â "None Selected" »óÅÂ·Î µÎ½Ã¸é µË´Ï´Ù.</p><p> Áß¿ä: ¸ğµç ÇÁ·ÎÁ§Æ®´Â ¼ÒÇÁÆ®¿ş¾î ¸Ê »ó¿¡¼­ ÃÖ´ëÇÑ ÀÚ¼¼È÷ ºĞ·ùµÇ¾î¾ß ÇÕ´Ï´Ù. Æ¯Á¤ ºĞ·ù ±âÁØ ¾È¿¡¼­ ºñ½ÁÇÑ Ç×¸ñÀ» µ¿½Ã¿¡ ¼±ÅÃÇÏ¼ÌÀ» °æ¿ì´Â »óÀ§¿¡ ÇØ´çÇÏ´Â Ç×¸ñ¸¸ÀÌ ¼±ÅÃµË´Ï´Ù.
+project_admin_group_trove	title	¼ÒÇÁÆ®¿ş¾î ¸Ê ºĞ·ù Á¤º¸
+project_admin_group_trove	update_changes	ºĞ·ù Á¤º¸ º¯°æ»çÇ× °»½Å
+project_admin_history	info	ÀÌ ·Î±×´Â ¾ğÁ¦ ´©°¡ ÇÁ·ÎÁ§Æ®¸¦ º¯°æÇß´ÂÁö º¸¿©Áİ´Ï´Ù.
+project_admin_history	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_history	title	È÷½ºÅä¸®
+project_admin_newrelease	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_newrelease	title	»õ ¸±¸®Áî Ãß°¡
+project_admin_qrs	changelog	º¯µ¿»çÇ×
+project_admin_qrs	create_new_package	¶Ç´Â $1 »õ·Î¿î ÆĞÅ°Áö¸¦ »ı¼ºÇÕ´Ï´Ù. $2
+project_admin_qrs	file_name	ÆÄÀÏ ÀÌ¸§
+project_admin_qrs	file_released	ÆÄÀÏÀÌ ¸±¸®ÁîµÇ¾ú½À´Ï´Ù: ÀÌÁ¦ ¸±¸®Áî¸¦ ÆíÁıÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
+project_admin_qrs	file_type	ÆÄÀÏ Çü½Ä
+project_admin_qrs	no_file_types_available	ÆÄÀÏ Çü½ÄÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
+project_admin_qrs	package_id	ÆĞÅ°Áö ID
+project_admin_qrs	preserve_text	º»¹® Çü½ÄÀ» ±×´ë·Î º¸ÀüÇÕ´Ï´Ù.
+project_admin_qrs	processor_type	ÇÁ·Î¼¼¼­ Å¸ÀÔ
+project_admin_qrs	qrs_info	¿©·¯ºĞÀº ÀÌÁ¦ $1 ÀÌ ¸±¸®Áî¿¡ ÆÄÀÏÀ» Ãß°¡ $2ÇÏ½Ç ¼ö ÀÖÀ¸¸ç ¿øÇÏ½Å´Ù¸é ¸±¸®Áî¸¦ ÆíÁıÇÏ½Ç ¼öµµ ÀÖ½À´Ï´Ù.</p> <p>ÆÄÀÏÀÌ $3 ´Ù¿î·Îµå ÆäÀÌÁö $4¿¡ ¹Ù·Î º¸ÀÌÁö ¾ÊÀ» ¼öµµ ÀÖ½À´Ï´Ù. º¯µ¿»çÇ×ÀÌ ¹İ¿µµÉ ¶§±îÁö´Â ¸î ½Ã°£ÀÌ °É¸± ¼öµµ ÀÖ½À´Ï´Ù.
+project_admin_qrs	release_date	¸±¸®Áî ³¯Â¥
+project_admin_qrs	release_file	¸±¸®Áî ÆÄÀÏ
+project_admin_qrs	release_name	¸±¸®Áî ÀÌ¸§
+project_admin_qrs	release_note	¾Ë¸²: ¾î¶² ºê¶ó¿ìÀú¿¡¼­´Â ÆÄÀÏÀ» ´ÙÀÌ¾ó·Î±× Ã¢¿¡¼­ ¼±ÅÃÇÑ ÈÄ "OK"¹öÆ°À» ´­·¯ ÁÖ¾î¾ß¸¸ ÇÏ´Â °æ¿ì°¡ ÀÖ½À´Ï´Ù. ´õºíÅ¬¸¯¸¸ ÇØ¼­´Â µî·ÏÀÌ µÇÁö ¾ÊÀ» ¼öµµ ÀÖ½À´Ï´Ù.
+project_admin_qrs	release_notes	¸±¸®Áî ³ëÆ®
+project_admin_qrs	required_file	ÆÄÀÏÀ» ¼±ÅÃÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+project_admin_qrs	required_file_type	ÆÄÀÏ Çü½ÄÀ» ¼±ÅÃÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+project_admin_qrs	required_package	ÆĞÅ°Áö¸¦ ¼±ÅÃÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+project_admin_qrs	required_processor_type	ÇÁ·Î¼¼¼­ Å¸ÀÔÀ» ¼±ÅÃÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+project_admin_qrs	required_release_name	¸±¸®Áî ÀÌ¸§À» Á¤ÀÇÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+project_admin_qrs	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_qrs	title	QRS: Äü ¸±¸®Áî ½Ã½ºÅÛ
+project_admin_qrs	upload_new_file	»õ·Î¿î ÆÄÀÏ ¿Ã¸®±â
+project_admin_rmuser	cancel	Ãë¼Ò
+project_admin_rmuser	cannot_remove_admin	$1 °ü¸®ÀÚ´Â Á¦°ÅÇÒ ¼ö ¾ø½À´Ï´Ù.
+project_admin_rmuser	info	<h3>$1 ¿¡¼­ °³¹ßÀÚ »èÁ¦</h3><p>Áö±İ ±ÍÇÏ´Â $1·ÎºÎÅÍ °³¹ßÀÚ¸¦ Á¦°ÅÇÏ·Á°í ÇÕ´Ï´Ù. È®ÀÎÇÏ½Ê½Ã¿À:</p>
+project_admin_rmuser	operation_not_permitted	µ¿ÀÛÀÌ Çã¿ëµÇÁö ¾Ê½À´Ï´Ù.
+project_admin_rmuser	remove	Á¦°Å
+project_admin_rmuser	title	»ç¿ëÀÚ Á¦°Å
+project_admin_showreleases	date	³¯Â¥
+project_admin_showreleases	no_release	ÀÌ ÆĞÅ°Áö¿¡ ¸±¸®Áî°¡ ¾ø½À´Ï´Ù.
+project_admin_showreleases	package_name	ÆĞÅ°Áö ÀÌ¸§
+project_admin_showreleases	release_name	¸±¸®Áî ÀÌ¸§
+project_admin_showreleases	title	»õ ÆÄÀÏ ¹öÀü ¸±¸®Áî
+project_admin_userpermedit	add_to_all	¸ğµÎ¿¡ Ãß°¡
+project_admin_userpermedit	add_to_tracker	¹®Á¦Á¡ ÃßÀû ±â´É¿¡ Ãß°¡
+project_admin_userpermedit	admin	°ü¸®
+project_admin_userpermedit	admin_only	°ü¸®¸¸
+project_admin_userpermedit	admin_tech	°ü¸®ÀÚ & Å×Å©´Ï¼Ç
+project_admin_userpermedit	developer_not_found	ÀÌ ÇÁ·ÎÁ§Æ®¿¡´Â °³¹ßÀÚ°¡ ¾ø½À´Ï´Ù.
+project_admin_userpermedit	docman	¹®¼­ °ü¸®ÀÚ
+project_admin_userpermedit	editing_permissions	»ç¿ëÀÚ $1 ($2)ÀÇ ±ÇÇÑÀ» ÆíÁıÇÏ°í ÀÖ½À´Ï´Ù.
+project_admin_userpermedit	editor	ÆíÁıÀÚ
+project_admin_userpermedit	file_release_role	ÆÄÀÏ ¸±¸®Áî ¿ªÇÒ
+project_admin_userpermedit	forums	°Ô½ÃÆÇ
+project_admin_userpermedit	invalid_user	À¯È¿ÇÏÁö ¾ÊÀº »ç¿ëÀÚÀÔ´Ï´Ù.
+project_admin_userpermedit	moderator	°Ô½ÃÆÇ °ü¸®ÀÚ
+project_admin_userpermedit	no_permissions	±ÇÇÑÀÌ ¾ø½À´Ï´Ù.
+project_admin_userpermedit	not_available	»ç¿ëÇÒ ¼ö ¾ø½À´Ï´Ù.
+project_admin_userpermedit	permissions_updated	±ÇÇÑÀÌ °»½ÅµÇ¾ú½À´Ï´Ù.
+project_admin_userpermedit	pm	ÇÁ·ÎÁ§Æ®/ÀÓ¹« °ü¸®ÀÚ
+project_admin_userpermedit	project_admin	ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ
+project_admin_userpermedit	project_role	ÇÁ·ÎÁ§Æ® ¿ªÇÒ
+project_admin_userpermedit	property	¼Ó¼º
+project_admin_userpermedit	release_technician	¸±¸®Áî Å×Å©´Ï¼Ç
+project_admin_userpermedit	remove	Á¦°Å
+project_admin_userpermedit	reset_changes	º¯µ¿»çÇ× ¸®¼Â
+project_admin_userpermedit	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_userpermedit	technician	Å×Å©´Ï¼Ç
+project_admin_userpermedit	title	°³¹ßÀÚ°£ ±ÇÇÑ ÆíÁı
+project_admin_userpermedit	tracker_info	<h3>»ç¿ëÀÚ¸¦ ´ÙÀ½ ¹®Á¦Á¡ ÃßÀû ±â´É¿¡ Ãß°¡ÇÕ´Ï´Ù. :</h3>	<p> ÀÌ »ç¿ëÀÚ¸¦ ¾î´À ¹®Á¦Á¡ ÃßÀû Ç×¸ñ ±ÇÇÑ¿¡ Ãß°¡ÇÒÁö °áÁ¤ÇÏ½Ç ¼ö ÀÖÀ¸¸ç "Add To All"À» ¼±ÅÃÇÏ½Ã¸é ¸ğµç ¹®Á¦Á¡ ÃßÀû Ç×¸ñ¿¡ °£´ÜÈ÷ Ãß°¡µË´Ï´Ù.</p>
+project_admin_userpermedit	tracker_manager	ÀÓ¹« °ü¸®ÀÚ
+project_admin_userpermedit	undefined	¹ÌÁ¤
+project_admin_userpermedit	update_permissions	°³¹ßÀÚ ±ÇÇÑ °»½Å
+project_admin_userpermedit	user_added	»ç¿ëÀÚ°¡ ¼º°øÀûÀ¸·Î Ãß°¡µÇ¾ú½À´Ï´Ù.
+project_admin_userpermedit	user_does_not_exist	»ç¿ëÀÚ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
+project_admin_userpermedit	value	¼öÄ¡
+project_admin_userperms	docman	¹®¼­<br />°ü¸®ÀÚ
+project_admin_userperms	editor	ÆíÁıÀÚ
+project_admin_userperms	forums	°Ô½ÃÆÇ
+project_admin_userperms	general	ÀÏ¹İ
+project_admin_userperms	info	±ÇÇÑÀ» ÆíÁıÇÏ±â À§ÇØ¼­´Â °³¹ßÀÚÀÇ ÀÌ¸§À» Å¬¸¯ÇÏ½Ê½Ã¿À.
+project_admin_userperms	moderator	°Ô½ÃÆÇ °ü¸®ÀÚ
+project_admin_userperms	no_developers	°³¹ßÀÚ°¡ ¾ø½À´Ï´Ù.
+project_admin_userperms	rel_tech	¸±¸®Áî Å×Å©´Ï¼Ç
+project_admin_userperms	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_userperms	task_manager	ÀÓ¹«<br />°ü¸®ÀÚ
+project_admin_userperms	title	»ç¿ëÀÚ°£ ±ÇÇÑ º¸±â
+project_admin_userperms	tracker_manager	¹®Á¦Á¡ ÃßÀû<br />°ü¸®ÀÚ
+project_admin_utils	admin	°ü¸®
+project_admin_utils	by	By
+project_admin_utils	change_history	ÇÁ·ÎÁ§Æ® º¯°æ ÀÌ·Â
+project_admin_utils	database_admin	database ¼³Á¤
+project_admin_utils	date	³¯Â¥
+project_admin_utils	edit_jobs	¸â¹ö ±¸ÇÔ
+project_admin_utils	edit_public_info	°ø°³ Á¤º¸ ÆíÁı
+project_admin_utils	edit_release_files	ÆÄÀÏ ¸±¸®Áî/ÆíÁı
+project_admin_utils	field	Ç×¸ñ
+project_admin_utils	multimedia_data	¸ÖÆ¼¹Ìµğ¾î µ¥ÀÌÅÍ ÆíÁı
+project_admin_utils	old_value	±âÁ¸ ¼öÄ¡
+project_admin_utils	permission_blurb	<strong>¾Ë¸²:</strong><dl><dt><strong>ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ(±½Àº±Û¾¾)</strong></dt><dd>ÀÌ ÆäÀÌÁö¿Í ´Ù¸¥ ¼³Á¤ ÆäÀÌÁö¿¡µµ Á¢±ÙÇÒ ¼ö ÀÖ½À´Ï´Ù.</dd><dt><strong>¸±¸®Áî Å×Å©´Ï¼Ç</strong></dt><dd>ÆÄÀÏÀ» ¸±¸®ÁîÇÒ ¼ö ÀÖ½À´Ï´Ù.(¸ğµç ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ´Â ¸±¸®Áî Å×Å©´Ï¼ÇÀÇ ¿ªÇÒÀ» °âÇÕ´Ï´Ù.)</dd><dt><strong>Å×Å©´Ï¼Ç(T)</strong></dt><dd>Bugs/Tasks/Patches¸¦ ÇÒ´ç¹ŞÀ» ¼ö ÀÖ½À´Ï´Ù.</dd><dt><strong>Åø °ü¸®ÀÚ(A)</strong></dt><dd>Bugs/Tasks/Patches ¼³Á¤À» °íÄ¥ ¼ö ÀÖÀ¸¸ç /toolname/admin/ ÆäÀÌÁö¿¡µµ Á¢±ÙÇÒ ¼ö ÀÖ½À´Ï´Ù.</dd><dt><strong>±ÇÇÑ ¾øÀ½ (N/A)</strong></dt><dd>°³¹ßÀÚ°¡ ÇØ´ç ±â´É¿¡ ´ëÇØ Æ¯º°ÇÑ ±ÇÇÑÀ» °¡Áö°í ÀÖÁö ¾Ê´Ù´Â ¶æÀÔ´Ï´Ù.('-'¿Í °°½À´Ï´Ù)</dd><dt><strong>°Ô½ÃÆÇ °ü¸®ÀÚ</strong> (°Ô½ÃÆÇ)</dt><dd>°Ô½ÃÆÇÀÇ ±ÛÀ» Áö¿ï ¼ö ÀÖ½À´Ï´Ù.</dd><dt><strong>ÆíÁıÀÚ</strong> (¹®¼­ °ü¸®ÀÚ)</dt><dd>¹®¼­ °ü¸®ÀÚÀÇ ¹®¼­¸¦ °»½Å/ÆíÁı/»èÁ¦ÇÒ ¼ö ÀÖ½À´Ï´Ù.</dd></dl>
+project_admin_utils	post_jobs	¸â¹ö ±¸ÇÔ °øÁö ¿Ã¸®±â
+project_admin_utils	project_history	ÇÁ·ÎÁ§Æ® È÷½ºÅä¸®
+project_admin_utils	stats	»óÅÂ
+project_admin_utils	user_permissions	»ç¿ëÀÚ ±ÇÇÑ
+project_admin_utils	vhosts	VHOSTs
+project_admin_vhost	create	»ı¼º
+project_admin_vhost	delete	»èÁ¦
+project_admin_vhost	info	<strong><span style="text-decoration:underline">»õ·Î¿î ¹öÃß¾ó È£½ºÆ® Ãß°¡</span></strong><p>»õ·Î¿î ¹öÃß¾ó È£½ºÆ®¸¦ Ãß°¡ÇÏ½Ã·Á¸é - <em>yourhost.org</em>ÀÇ <strong>CNAME</strong>À» <strong>$1.$2</strong>¿¡ ÁöÁ¤ÇÏ½Ã±â¸¸ ÇÏ¸é µË´Ï´Ù.  $3 Àº ÇöÀç ¸ŞÀÏÀº È£½ºÆÃÇÏÁö ¾ÊÀ¸¸ç (i.e. MX°¡ µÉ ¼ö ¾ø½À´Ï´Ù) DNSµµ ¿ÜºÎ¿¡¼­ ÀûÀıÈ÷ ¼³Á¤ÇØ ÁÖ¼Å¾ß ÇÕ´Ï´Ù.</strong>.  <p>"»ı¼º" ¹öÆ°À» ´©¸£½Ã¸é ¹öÃß¾ó È£½ºÆ® »ı¼º ¼³Á¤ÀÌ Ãß°¡µË´Ï´Ù. ÀÌ°ÍÀº ÇÁ·ÎÁ§Æ®ÀÇ À¥¼­¹ö¿Í µ¿±âÈ­µÇ°í - µû¶ó¼­ <em>yourhost.org</em>°¡ <em>$4.$5</em>¿¡ ÀÖ´Â ÀÚ·áµéÀ» º¸¿©ÁÖ°Ô µË´Ï´Ù.
+project_admin_vhost	name	»õ·Î¿î ¹öÃß¾ó È£½ºÆ® <em>(e.g. vhost.org)</em>
+project_admin_vhost	no_vhosts	VHOST°¡ Á¤ÀÇµÇÁö ¾Ê¾Ò½À´Ï´Ù.
+project_admin_vhost	not_valid_hostname	À¯È¿ÇÑ È£½ºÆ®³×ÀÓÀÌ ¾Æ´Ô - $1
+project_admin_vhost	operations	µ¿ÀÛ
+project_admin_vhost	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
+project_admin_vhost	title	¹öÃß¾ó È£½ºÆ® °ü¸®
+project_admin_vhost	vhost	¹öÃß¾ó È£½ºÆ®
+project_admin_vhost	vhost_deleted	VHOST »èÁ¦µÊ
+project_admin_vhost	vhost_scheduled	¹öÃß¾ó È£½ºÆÃ ¼³Á¤ ¿äÃ»ÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.
+project_filemodule_monitor	start_monitor_body	¸ğ´ÏÅÍ¸µÀÌ ½ÃÀÛµÇ¾ú½À´Ï´Ù.
+project_filemodule_monitor	start_monitor_title	¸ğ´ÏÅÍ¸µÀÌ ½ÃÀÛµÇ¾ú½À´Ï´Ù.
+project_filemodule_monitor	stop_monitor_body	¸ğ´ÏÅÍ¸µÀÌ Áß´ÜµÇ¾ú½À´Ï´Ù.
+project_filemodule_monitor	stop_monitor_title	¸ğ´ÏÅÍ¸µÀÌ Áß´ÜµÇ¾ú½À´Ï´Ù.
+project_home	cvs_commits	<strong>$1</strong> commits, <strong>$2</strong> adds
+project_home	forum_messages	°Ô½ÃÆÇ °¹¼ö: <strong>$2</strong> ±Û °¹¼ö: <strong>$1</strong>
+project_home	forums	°Ô½ÃÆÇ
+project_home	help_wanted	¸â¹ö ±¸ÇÔ: ÀÌ ÇÁ·ÎÁ§Æ®´Â ´ÙÀ½ ¿ªÇÒÀ» ¸Ã¾ÆÁÙ ¸â¹ö¸¦ ±¸ÇÏ°í ÀÖ½À´Ï´Ù : 
+project_home	help_wanted_multiple	$1°³ÀÇ ¼­·Î ´Ù¸¥ ¿ªÇÒÀ» ¸Ã¾ÆÁÙ ¸â¹ö¸¦ ±¸ÇÕ´Ï´Ù.</a>
+project_home	holding_note	¾Ë¸²: ÀÌ ÇÁ·ÎÁ§Æ® ¿£Æ®¸®´Â $1ÀÇ °ü¸®ÀÚ¿¡ ÀÇÇØ À¯ÁöµÇ°í ÀÖ½À´Ï´Ù. ¿ì¸®´Â ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ °ø½Ä »çÀÌÆ®°¡ ¾Æ´Õ´Ï´Ù. Ãß°¡ÀûÀÎ ÀúÀÛ±Ç Á¤º¸´Â ÇÁ·ÎÁ§Æ®ÀÇ È¨ÆäÀÌÁö¿¡¼­ Ã£¾Æº¸½Ç ¼ö ÀÖ½À´Ï´Ù.
+project_home	messages_in	¸Ş½ÃÁö 
+project_home	monitor_package	ÀÌ ÆĞÅ°Áö¸¦ ¸ğ´ÏÅÍ¸µÇÏ±â
+project_home	no_subprojects	°ø°³µÈ ÇÏÀ§ ÇÁ·ÎÁ§Æ®°¡ ¾ø½À´Ï´Ù.
+project_home	no_trackers	°ø°³µÈ ¹®Á¦Á¡ ÃßÀû Ç×¸ñÀÌ ¾ø½À´Ï´Ù.
+project_home	public_mailing_lists	°ø°³ ¸ŞÀÏ¸µ ¸®½ºÆ®
+project_home	release_notes	¸±¸®Áî ³ëÆ®
+project_home	surveys	¼³¹®Á¶»ç
+project_home	title	ÇÁ·ÎÁ§Æ® Á¤º¸
+project_home	tracker_open	$1 open /$2 total
+project_home	view_members	¸â¹ö º¸±â
+project_home	view_project_files	ÇÁ·ÎÁ§Æ® ÆÄÀÏ ¸ğµÎ º¸±â
+project_memberlist	developer	°³¹ßÀÚ
+project_memberlist	joining	<P>ÀÌ ÇÁ·ÎÁ§Æ®¿¡ °³¹ßÀÚ·Î¼­ Âü¿©ÇÏ°í ½ÍÀ¸½Ã´Ù¸é, ¾Æ·¡ ±½Àº ±Û¾¾Ã¼·Î º¸ÀÌ´Â ÇÁ·ÎÁ§Æ® °ü¸®ÀÚµé Áß ÇÑ»ç¶÷°ú ¿¬¶ôÇÏ½Ã¸é µË´Ï´Ù.<br><br>
+project_memberlist	role	¿ªÇÒ/À§Ä¡
+project_memberlist	skills	½ºÅ³(±â¼ú)
+project_memberlist	title	ÇÁ·ÎÁ§Æ® ¸â¹ö ¸ñ·Ï
+project_memberlist	username	»ç¿ëÀÚ ID
+project_memberlist	view	º¸±â
+project_showfiles	architecture	¾ÆÅ°ÅØÃ³
+project_showfiles	date	³¯Â¥
+project_showfiles	downloads	³»·Á¹Ş±â
+project_showfiles	error_no_packages_defined_text	ÀÌ ÇÁ·ÎÁ§Æ®¿¡ Á¤ÀÇµÈ ÆÄÀÏ ÆĞÅ°Áö°¡ ¾ø½À´Ï´Ù.
+project_showfiles	error_no_packages_defined_title	ÆÄÀÏ ÆĞÅ°Áö°¡ ¾ø½À´Ï´Ù.
+project_showfiles	file_type	Çü½Ä
+project_showfiles	filename	ÆÄÀÏ¸í
+project_showfiles	intro	´ÙÀ½Àº ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ ¸ğµç ÆÄÀÏ ¸ñ·ÏÀÔ´Ï´Ù. 
+project_showfiles	intro2	ÆÄÀÏÀ» ³»·Á¹Ş±â Àü¿¡ ¸±¸®Áî ³ëÆ®¿Í º¯µ¿»çÇ×À» È®ÀÎÇØ º¸½Ç ¼öµµ ÀÖ½À´Ï´Ù. (¸±¸®Áî ¹öÀüÀ» Å¬¸¯ÇÏ¼¼¿ä.)
+project_showfiles	monitor_package	ÀÌ ÆĞÅ°Áö¸¦ ¸ğ´ÏÅÍ¸µÇÏ±â
+project_showfiles	new_release	»õ·Î¿î ¸±¸®Áî¸¦ »ı¼ºÇÏ½Ã·Á¸é ÀÌ°÷À» Å¬¸¯ÇÏ¼¼¿ä.
+project_showfiles	no_releases	¸±¸®Áî°¡ ¾ø½À´Ï´Ù.
+project_showfiles	package	ÆĞÅ°Áö
+project_showfiles	project_totals	ÀüÃ¼
+project_showfiles	release_highlighted	¼±ÅÃÇÏ½Å ¸±¸®Áî°¡ <span style="background-color:pink">ÇÏÀÌ¶óÀÌÆ®</span>µÇ¾ú½À´Ï´Ù.
+project_showfiles	release_notes	¸±¸®Áî &amp; ³ëÆ®
+project_showfiles	section	ÇÁ·ÎÁ§Æ®: $1
+project_showfiles	size	Å©±â
+project_showfiles	title	ÆÄÀÏ º¸±â
+project_shownotes	changes	º¯µ¿»çÇ×:
+project_shownotes	error_release_not_found	ÇØ´çµÇ´Â ¸±¸®Áî°¡ ¾ø½À´Ï´Ù.
+project_shownotes	notes	¸±¸®Áî ³ëÆ®:
+project_shownotes	release_name	¸±¸®Áî ÀÌ¸§ :
+project_shownotes	section	ÇÁ·ÎÁ§Æ®: $1
+project_shownotes	title	¸±¸®Áî ³ëÆ®¿Í º¯µ¿»çÇ×
+project_stats	change_stats_view	Change Stats View
+project_stats	detailed_statistics	Detailed statistics for
+project_stats	last_30_days	Last 30 Days
+project_stats	last_7_days	Last 7 Days
+project_stats	monthly	Monthly
+project_stats	tasks	Tasks
+project_stats	title	Project statistics 
+project_stats	tracker	Tracker
+project_stats	usage_statistics	Usage Statistics 
+project_stats	view_reports	View Reports
+project_stats_graph	date	Date
+project_stats_graph	page_view_days	Page Views (red) and Downloads (blue) for the past $1 days
+project_stats_graph	page_view_months	Page Views (red) and Downloads (blue) for the past $1 months
+project_stats_graph	statistics	$1 Statistics For $2
+project_stats_graph	views	Views (red) / Downloads (blue)
+project_stats_utils	CVS	CVS
+project_stats_utils	all_tracker	All Trkr
+project_stats_utils	bugs	Bugs
+project_stats_utils	date	Date
+project_stats_utils	days	Days
+project_stats_utils	dl	D/l
+project_stats_utils	month	Lifespan
+project_stats_utils	page_views	Page Views
+project_stats_utils	patches	Patches
+project_stats_utils	project_did_not_exits	Project did not exist on this date.
+project_stats_utils	rank	Rank
+project_stats_utils	stats_all_time	Statistics for All Time
+project_stats_utils	stats_for_days	Statistics for the past $1 days
+project_stats_utils	stats_for_months	Statistics for the past $1 months.
+project_stats_utils	support	Support
+project_stats_utils	tasks	Tasks
+projects	section	ÇÁ·ÎÁ§Æ®: $1
+projects	title	¿ä¾à
+register	apply_for_registration	ÇÁ·ÎÁ§Æ®¸¦ µî·ÏÇÏ·Á¸é, ÇÁ·ÎÁ§Æ®¿¡ ´ëÇÑ ±âº» Á¤º¸¸¦ ÀÛ¼ºÇÏ¼Å¾ß ÇÕ´Ï´Ù. ¾Æ·¡ÀÇ ¼³¸íÀ» ÁÖÀÇ±í°Ô ÀĞ¾îº¸½Ã°í, ¿ÏÀüÇÏ°í ÀÚ¼¼ÇÑ ³»¿ëÀ» Á¦°øÇØ ÁÖ½Ê½Ã¿À. ¾Æ·¡ÀÇ ¸ğµç ÇÊµå´Â ÇÊ¼öÀÔ´Ï´Ù.
+register	comprehensive_description	ÇÁ·ÎÁ§Æ® ¼³¸íÀ» ´õ ÀÚ¼¼ÇÏ°Ô ÇØÁÖ½Ê½Ã¿À.
+register	conflicting_licenses_choice	¶óÀÌ¼¾½º ¼±ÅÃÀÌ Ãæµ¹ÇÕ´Ï´Ù.
+register	describe_registration	µî·Ï ¸ñÀûÀ» ´õ ÀÚ¼¼ÇÏ°Ô ¼³¸íÇØÁÖ½Ê½Ã¿À.
+register	i_agree	I AGREE
+register	i_disagree	I DISAGREE
+register	invalid_full_name	À¯È¿ÇÏÁö ¾ÊÀº ÇÁ·ÎÁ§Æ® ÀÌ¸§ÀÔ´Ï´Ù.
+register	invalid_unix_name	À¯È¿ÇÏÁö ¾ÊÀº À¯´Ğ½º ÀÌ¸§ÀÔ´Ï´Ù.
+register	license_type	Public domain</a><li>Website Only<li>±âÅ¸/°³º° ¶óÀÌ¼¾½º</ul><p><strong>ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ ¶óÀÌ¼¾½º</strong><br/ ><strong>¶óÀÌ¼¾½º:</strong><br />
+register	maximum_description	ÇÁ·ÎÁ§Æ® ¼³¸íÀº 255 ±ÛÀÚ ÀÌ³»·Î ÇØÁÖ½Ê½Ã¿À.
+register	more_license_description	¶óÀÌ¼¾½º ¼³¸íÀ» ´õ ÀÚ¼¼ÇÏ°Ô ÇØÁÖ½Ê½Ã¿À.
+register	no_license_chosen	¶óÀÌ¼¾½º¸¦ ¼±ÅÃÇÏÁö ¾Ê¾Ò½À´Ï´Ù.
+register	other_license	"±âÅ¸"¸¦ ¼±ÅÃÇÏ¼Ì´Ù¸é, ÀÌÀ¯¿Í ÇÔ²² ¶óÀÌ¼¾½º¸¦ ¼³¸íÇØ ÁÖ½Ê½Ã¿À. ±âÅ¸ ¶óÀÌ¼¾½º´Â Ç¥½ÃµÇÁö ¾Ê´Â Á¡¿¡ ÁÖÀÇÇÏ½Ã°í, ¶óÀÌ¼¾½º°¡ ¿ÀÇÂ¼Ò½º Á¤ÀÇ¿¡ ÀûÇÕÇÑÁö È®ÀÎÇÏ±â À§ÇØ¼­, ÇÁ·ÎÁ§Æ®°¡ »ı¼ºµÉ ¶§±îÁö ½Ã°£ÀÌ Ãß°¡·Î ¼Ò¸ğµË´Ï´Ù.
+register	project_description	<h3>4. ÇÁ·ÎÁ§Æ® °ø°³ ¼³¸í</h3><p>ÇÁ·ÎÁ§Æ® ¿ä¾à ÆäÀÌÁö³ª °Ë»ö °á°ú µî¿¡¼­ º¸¿©Áö´Â ÇÁ·ÎÁ§Æ®ÀÇ ¼³¸íÀÔ´Ï´Ù. ÇÁ·ÎÁ§Æ® ¸ñÀû ¼³¸í(2´Ü°è)Ã³·³ ÀÚ¼¼ÇÏ°Å³ª Çü½ÄÀûÀÌÁö ¾Ê¾Æµµ µË´Ï´Ù. °£°áÇÏ°í ¸Å·ÂÀûÀÎ ´Ü¾î¸¦ »ç¿ëÇÏ½Ê½Ã¿À. ÃÖ´ë ±æÀÌ´Â 255 ¹®ÀÚÀÔ´Ï´Ù.
+register	project_full_name	<h3>1. ÇÁ·ÎÁ§Æ® ÀÌ¸§</h3><p>¸ÕÀú, ÇÁ·ÎÁ§Æ®ÀÇ ÀÌ¸§À» ÁöÁ¤ÇØ¾ß ÇÕ´Ï´Ù. "ÇÁ·ÎÁ§Æ® ÀÌ¸§"Àº ¼­¼úÀûÀÌ¸ç, 40±ÛÀÚ ÀÌ³»¿¡¼­ ¹«¾ùÀÌµç ¾µ ¼ö ÀÖ½À´Ï´Ù.</p>ÇÁ·ÎÁ§Æ® ÀÌ¸§:<br/>
+register	project_information	ÇÁ·ÎÁ§Æ® Á¤º¸
+register	project_license	<h3>3. ¶óÀÌ¼¾½º</h3> <p><strong><em>È¨ÆäÀÌÁö¸¸ ¿î¿µÇÏ½Ç °èÈ¹ÀÌ¶ó¸é "website-only"¸¦ ¼±ÅÃÇÏ¼¼¿ä.</em></strong><p>$1 Àº ¿ÀÇÂ¼Ò½º °³¹ß ÀÛ¾÷À» ÁøÇàÇÏ±â À§ÇÑ °÷ÀÔ´Ï´Ù. ÀıÂ÷¸¦ °£¼ÒÈ­ÇÏ±â À§ÇØ ÀÌ°÷Àº ¶óÀÌ¼¾½º ¼±ÅÃ¿¡ ´ëÇØ¼­ <a href="http://www.opensource.org">Open Source Initiative</a>ÀÇ Å¹¿ùÇÑ  ÀÛ¾÷ °á°úµéÀ» ÀÌ¿ëÇÏ°í ÀÖ½À´Ï´Ù. <p>±×·¸Áö¸¸ °³º°ÀûÀÎ »ç¿ëÀÚµéÀÇ ÇÊ¿ä¼º¿¡ ¸Â´Â º°µµÀÇ ¶óÀÌ¼¾½º°¡ µû·Î Á¸ÀçÇÒ ¼öµµ ÀÖ´Ù´Â °Íµµ Àß ÀÌÇØÇÏ°í ÀÖ½À´Ï´Ù. ¸¸¾à ¿©·¯ºĞÀÌ OSI¿¡¼­ ÀÎÁõÇÏÁö ¾ÊÀº ´Ù¸¥ ¶óÀÌ¼¾½º¸¦ ¼±ÅÃÇÏ½Ã°íÀÚ ÇÑ´Ù¸é ¿Ö ±× ¶óÀÌ¼¾½º¸¦ ¼±ÅÃÇÏ¼Ì´ÂÁö ¾Ë·Á ÁÖ½Ê½Ã¿À. <p>¶óÀÌ¼¾½º¸¦ °áÁ¤ÇÏ´Â °ÍÀº ¸Å¿ì Áß¿äÇÑ ¹®Á¦ÀÔ´Ï´Ù. ¿©·¯ºĞÀÇ ÇÁ·ÎÁ§Æ®ÀÇ ¶óÀÌ¼¾½º¸¦ ÃÖÁ¾ÀûÀ¸·Î °áÁ¤ÇÏ½Ã±â Àü¿¡ ÃæºĞÇÑ ½Ã°£À» °¡Áö°í ¿©·¯ °¢ ¶óÀÌ¼¾½ºµé°ú (ÀúÈñ°¡ Á¦°øÇÏ´Â ¼³¸íµµ) Àß °ËÅäÇØ º¸½Ã±â ¹Ù¶ø´Ï´Ù. <p>¶óÀÌ¼¾½º¸¦ ³ªÁß¿¡ ¹Ù²Ù½Ç ¼öµµ ÀÖ½À´Ï´Ù¸¸, ±×°ÍÀº ¹ıÀûÀÎ ¹®Á¦°¡ ¾ø°í ÀÛ¾÷ÇÏ½Å ÆÄÀÏµéÀÌ º¯°æµÈ ¶óÀÌ¼¾½º¿¡ ´ëÇØ¼­ ¹®Á¦°¡ ¾ø¾î¾ß ÇÏ°í µî·Ï Á¤º¸°¡ °»½ÅµÇ¾úÀ» ¶§¿¡ ºñ·Î¼Ò °¡´ÉÇÑ ÀÏÀÔ´Ï´Ù. <em>¶óÀÌ¼¾½º º¯°æÀº ¼Ò±ŞÀû¿ëµÇÁö ¾ÊÀ½¿¡ À¯ÀÇÇÏ½Ê½Ã¿À. (Áï, ÀÌ¹Ì ¿ÀÇÂ¼Ò½º ¶óÀÌ¼¾½º ÇÏ¿¡ ¸±¸®ÁîµÈ °á°ú¹°µé¿¡ ´ëÇØ¼­´Â Àû¿ëµÇÁö ¾Ê½À´Ï´Ù.)</em> <p>$1 Àº ¶óÀÌ¼¾½º¿¡ °üÇØ¼­ ¾î¶°ÇÑ ¹ıÀûÀÎ Ã¥ÀÓµµ ÁöÁö ¾Ê½À´Ï´Ù.<p><strong>¶óÀÌ¼¾½º</strong>
+register	project_submitted	ÇÁ·ÎÁ§Æ®¸¦ $1 °ü¸®ÀÚ¿¡°Ô Á¦ÃâÇß½À´Ï´Ù. 72 ½Ã°£ ÀÌ³»¿¡ °áÁ¤ ¹× ÀÚ¼¼ÇÑ ÀÌ¿ë ÀıÂ÷¿¡ ´ëÇÑ ³»¿ëÀ» Åëº¸¹ŞÀ» °ÍÀÔ´Ï´Ù.</p><p>$1À» ¼±ÅÃÇØ ÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.
+register	project_unix_name	<h3>5. ÇÁ·ÎÁ§Æ® À¯´Ğ½º ÀÌ¸§</h3><p>ÇÁ·ÎÁ§Æ® ÀÌ¸§¿¡ µ¡ºÙ¿©¼­, ÂªÀº Çü½ÄÀÇ À¯´Ğ½º ÀÌ¸§À» ¼±ÅÃÇØ¾ß ÇÕ´Ï´Ù.</p><p>À¯´Ğ½º ÀÌ¸§Àº »çÀÌÆ®¿¡¼­ ¿©·¯°¡Áö·Î »ç¿ëÇÏ±â ¶§¹®¿¡ ¸î°¡Áö Á¦ÇÑÀÌ Á¸ÀçÇÕ´Ï´Ù:<ul><li>´Ù¸¥ ÇÁ·ÎÁ§Æ®ÀÇ À¯´Ğ½º ÀÌ¸§°ú °°À» ¼ö ¾ø½À´Ï´Ù.<li>3 ±ÛÀÚ¿¡¼­ 15 ±ÛÀÚ »çÀÌ¿©¾ß ÇÕ´Ï´Ù.<li>¼Ò¹®ÀÚ¸¸À» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.<li>¿µ¹®ÀÚ, ¼ıÀÚ, ´ë½¬¸¸À» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.<li>À¯È¿ÇÑ À¯´Ğ½º »ç¿ëÀÚ¸íÀÌ¿©¾ß ÇÕ´Ï´Ù.<li>¿¹¾àµÈ µµ¸ŞÀÎ°ú ÀÏÄ¡ÇØ¼­´Â ¾ÈµË´Ï´Ù.<li>À¯´Ğ½º ÀÌ¸§Àº º¯°æÇÒ ¼ö ¾ø½À´Ï´Ù.</ul><p>À¯´Ğ½º ÀÌ¸§Àº ´ÙÀ½°ú °°ÀÌ ¿©·¯°¡Áö·Î »ç¿ëÇÕ´Ï´Ù:<ul><li><tt>unixname.$1</tt> À¥»çÀÌÆ®<li><tt>cvs.unixname.$1</tt>¿¡¼­ CVS ÀúÀå¼Ò ·çÆ® <tt>/cvsroot/unixname</tt><li><tt>unixname.$1</tt>À¸·Î ½© Á¢±Ù<li>»çÀÌÆ® ÀüÃ¼ÀÇ °Ë»ö ¿£Áø</ul><p>À¯´Ğ½º ÀÌ¸§:<br/>
+register	purpose_and_summarization	<h3>2. ÇÁ·ÎÁ§Æ® ¸ñÀû°ú ¿ä¾à</h3><p><strong></strong><p><strong>ÇÁ·ÎÁ§Æ®¿¡ ´ëÇÑ ÀÚ¼¼ÇÏ°í Á¤È®ÇÑ ¼³¸í°ú ¾î¶°ÇÑ $1 ±â´ÉÀ» »ç¿ëÇÒ ¿¹Á¤ÀÎÁö Àû¾îÁÖ½Ê½Ã¿À. ÀÌ ¼³¸íÀº $1¿¡¼­ ÇÁ·ÎÁ§Æ® °ø°£ÀÇ Á¦°ø ¿©ºÎ¸¦ °áÁ¤ÇÏ´Â ±âÃÊ ÀÚ·áÀÌ¸ç, ÀÇµµÇÑ ´ë·Î ¼­ºñ½º¸¦ »ç¿ëÇÏ±â À§ÇÑ º¸ÁõÀÔ´Ï´Ù. ÀÌ ¼³¸íÀº ÇÁ·ÎÁ§Æ®ÀÇ °ø°³ ¼³¸íÀÌ ¾Æ´Õ´Ï´Ù.</strong></p>
+register	registration_complete	µî·Ï ¿Ï·á
+register	title	»õ ÇÁ·ÎÁ§Æ® µî·Ï
+register	unix_group_name_already_taken	ÀÌ¹Ì Á¸ÀçÇÏ´Â À¯´Ğ½º ÀÌ¸§ÀÔ´Ï´Ù.
+register_complete	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
+register_complete	title	µî·Ï ¿Ï·á
+register_projectinfo	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
+register_projectinfo	title	ÇÁ·ÎÁ§Æ® Á¤º¸
+register_requirements	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
+register_requirements	title	Á¦°øµÇ´Â ¼­ºñ½º ¹× ¿ä±¸»çÇ×
+register_tos	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
+register_tos	title	¼­ºñ½º¿¡ °üÇÑ ¾à¼Ó
+scm_index	anoncvs	<p><b>ÀÍ¸í CVS ±ÇÇÑ</b></p><p>ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ CVS ÀúÀå¼Ò´Â ´ÙÀ½°ú °°Àº ¹æ¹ıÀ» ÅëÇØ ÀÍ¸í(pserver)À¸·Î Ã¼Å©¾Æ¿ôÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. <i>modulename</i>¿¡ Ã¼Å©¾Æ¿ôÇÏ°íÀÚ ÇÏ´Â ¸ğµâ ÀÌ¸§À» Á¤È®È÷ ¸í½ÃÇÏ¼Å¾ß ÇÕ´Ï´Ù. <i>anonymous</i>¿¡ ´ëÇØ¼­ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ´Â ºÎºĞÀÌ ³ª¿À¸é ±×³É ¿£ÅÍÅ°¸¦ ´©¸£½Ã¸é µË´Ï´Ù.
+scm_index	anoncvsup	¸ğµâ µğ·ºÅä¸® ¾È¿¡¼­ ¾÷µ¥ÀÌÆ®¸¦ ¹Ş¾Æº¸½Ç °æ¿ì¿¡´Â -d ÀÎÀÚ°¡ ÇÊ¿ä ¾ø½À´Ï´Ù.
+scm_index	browseit	CVS ÀúÀå¼Ò µÑ·¯º¸±â
+scm_index	browsetree	<hr><b>CVS ÀúÀå¼Ò µÑ·¯º¸±â</b> <p>CVS ÀúÀå¼Ò¸¦ µÑ·¯º¸½Ã¸é ÇöÀç ÇÁ·ÎÁ§Æ®°¡ ¾î¶»°Ô ÁøÇàµÇ°í ÀÖ´ÂÁö ½±°Ô »ìÆìº¸½Ç ¼ö ÀÖ½À´Ï´Ù. ±×¸®°í ÀúÀå¼Ò ¾È¿¡¼­ ¾î¶² Æ¯Á¤ ÆÄÀÏ¿¡ ´ëÇÑ ÀüÃ¼ ³»¿ªµµ ¾Æ¿ï·¯ º¸½Ç ¼ö ÀÖ½À´Ï´Ù.
+scm_index	cvs_repository	CVS ÀúÀå¼Ò
+scm_index	devcvs	<p><b>SSH¸¦ ÅëÇÑ °³¹ßÀÚÀÇ CVS Á¢±Ù</b></p><p>ÇÁ·ÎÁ§Æ®¿¡ °³¹ßÀÚ·Î µî·ÏµÇ¾î ÀÖ´Â »ç¶÷¸¸ÀÌ ÀÌ ¹æ¹ıÀ» »ç¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. Å¬¶óÀÌ¾ğÆ® Ãø¿¡ SSH1ÀÌ ¼³Ä¡µÇ¾î ÀÖ¾î¾ß ÇÕ´Ï´Ù. <i>modulename</i>°ú <i>developername</i>À» ÀûÀıÈ÷ ¹Ù²Ù¾î¼­ ³Ö¾î ÁÖ½Ã¸é µË´Ï´Ù. ºñ¹Ğ¹øÈ£´Â ÀÚ±â ÀÚ½ÅÀÇ ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä.
+scm_index	developer_commits_adds	°³¹ßÀÚ (30 ÀÏ/Commits) (30 ÀÏ/Adds)
+scm_index	developername	°³¹ßÀÚÀÌ¸§
+scm_index	error_only_projects_can_use_cvs	¿À·ù. CVS´Â ÇÁ·ÎÁ§Æ®¿¡¼­¸¸ »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.
+scm_index	error_this_project_has_turned_off	¿À·ù. ÀÌ ÇÁ·ÎÁ§Æ®´Â CVS±â´ÉÀ» »ç¿ëÇÏÁö ¾Êµµ·Ï ¼³Á¤µÇ¾î ÀÖ½À´Ï´Ù.
+scm_index	history	ÀúÀå¼Ò È÷½ºÅä¸®
+scm_index	modulename	¸ğµâ¸í
+scm_index	nohistory	ÀÌ ÇÁ·ÎÁ§Æ®´Â CVS È÷½ºÅä¸®°¡ ¾ø½À´Ï´Ù.
+scm_index	section	ÇÁ·ÎÁ§Æ®: $1
+scm_index	title	CVS
+search	title	Ã£±â
+searchbox	forum	ÀÌ °Ô½ÃÆÇ
+searchbox	people	»ç¶÷
+searchbox	search	Ã£±â
+searchbox	skill	½ºÅ³
+searchbox	softwaregroup	¼ÒÇÁÆ®¿ş¾î/ÇÁ·ÎÁ§Æ®
+searchbox	task	ÀÓ¹«
+sendmessage	about_blurb	½ºÆÔÀ» ÁÙÀÌ±â À§ÇØ ¾Æ·¡ ¾ç½ÄÀ» »ç¿ëÇÕ´Ï´Ù.<p>¾Æ·¡ ¾ç½ÄÀ» ¸ğµÎ Á¦´ë·Î Ã¤¿ö ÁÖ½Ê½Ã¿À. ¸¸¾à ±×·¸Áö ¾Ê´Ù¸é ¼ö½ÅÀÎÀÌ Á¦´ë·Î ÀÀ´äÇÏÁö ¸øÇÏ°Ô µÉ ¼öµµ ÀÖ½À´Ï´Ù.<p><font color="red"><b>¸¸¾à ¾î¶² µµ¿òÀ» ¿äÃ»ÇÏ´Â °æ¿ì¶ó¸é:</b> »çÀÌÆ® °ü·Ã ¹®¼­¸¦ ÀĞ¾î º¸¼Ì½À´Ï±î? ¿©·¯ºĞÀÇ <b>»ç¿ëÀÚ ID</b>¿Í <b>ÀÌ¸§</b>À» Á¦´ë·Î ¸í½ÃÇÏ¼Ì´ÂÁö¿ä? ¾î´À Æ¯Á¤ ÇÁ·ÎÁ§Æ®¿¡ °üÇÑ °ÍÀÌ¶ó¸é <b>ÇÁ·ÎÁ§Æ® ID</b> (<b>±×·ì ID</b>) ¹× <b>ÇÁ·ÎÁ§Æ® ÀÌ¸§</b>À» ¸í½ÃÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.</font>
+sendmessage	contact	¿¬¶ôÃ³
+sendmessage	email	º¸³»´Â »ç¶÷ ÀÌ¸ŞÀÏ ÁÖ¼Ò
+sendmessage	email_only_to	You can only send to addresses 
+sendmessage	error_user_not_exist	¿À·ù - Á¸ÀçÇÏÁö ¾Ê´Â »ç¿ëÀÚÀÔ´Ï´Ù.
+sendmessage	error_variables	¿À·ù - ÀÔ·ÂÇÏÁö ¾ÊÀº ºÎºĞÀÌ ÀÖ½À´Ï´Ù.
+sendmessage	message	º»¹®
+sendmessage	message_sent	¸ŞÀÏÀÌ ¹ß¼ÛµÇ¾ú½À´Ï´Ù.
+sendmessage	name	º¸³»´Â »ç¶÷ ÀÌ¸§
+sendmessage	send	¸ŞÀÏ º¸³»±â
+sendmessage	subject	Á¦¸ñ
+sendmessage	title	¸ŞÀÏ º¸³»±â: $1
+session	cannotinit	ERROR - Cannot initialize session
+session	deleted	Account Deleted
+session	invalidpasswd	Invalid Password Or User Name
+session	missingpasswd	Missing Password Or Users Name
+session	notactive	Account Not Active
+session	pending	Account Pending
+session	suspended	Account Suspended
+snippet	title	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_add_snippet_to_package	section	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_add_snippet_to_package	title	ÆĞÅ°Áö¿¡ ÄÚµå Ãß°¡
+snippet_addversion	browse_the_library	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
+snippet_addversion	changes	Changes:
+snippet_addversion	error_doing_snippet_package_version_insert	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_addversion	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_addversion	error_go_back_and_fill_in_all	Error - Go back and fill in all the information
+snippet_addversion	error_snippet_doesnt_exist	Error, Error - snippet doesn't exist
+snippet_addversion	error_snippet_package_doesnt_exist	Error, Error - snippet_package doesn't exist
+snippet_addversion	error_url_or_form	Error, Error - was the URL or form mangled??	
+snippet_addversion	if_new_window_opened	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_addversion	if_you_have_modified	If you have modified a version of a package and you feel it is significant enough to share with others, please do so.
+snippet_addversion	if_you_have_modified_a_version	If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.
+snippet_addversion	important	IMPORTANT!
+snippet_addversion	link_add_snippets_to_package	Add Snippets To Package
+snippet_addversion	make_sure_all_info_is_complete	Make sure all info is complete and accurate
+snippet_addversion	paste_the_code_here	Paste the Code Here:
+snippet_addversion	section	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_addversion	snippet_package_version_added_successfully	Snippet Package Version Added Successfully.
+snippet_addversion	snippet_version_added_successfully	Snippet Version Added Successfully.
+snippet_addversion	submit	SUBMIT
+snippet_addversion	title	»õ ¹öÀü ¿Ã¸®±â
+snippet_addversion	title_add_snippet_to_package	Add Snippets to Package
+snippet_addversion	title_submit_a_new_snippet_package	Submit A New Snippet Package
+snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
+snippet_addversion	version	Version:
+snippet_browse	creator	Creator
+snippet_browse	error_bad_url	Error, Error - bad url?
+snippet_browse	no_snippets_found	No snippets found
+snippet_browse	packages_of_snippets	Packages Of Snippets
+snippet_browse	section	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_browse	snippet_by_category	Snippets by category: $1
+snippet_browse	snippet_id	Snippet ID
+snippet_browse	snippet_title	Title
+snippet_browse	snippets	Snippets
+snippet_browse	snippets_by_language	Snippets by language: $1
+snippet_browse	title	ÄÚµå µÑ·¯º¸±â
+snippet_caching	browse_by_category	Browse by Category
+snippet_caching	browse_by_language	Browse by Language
+snippet_caching	intro	<p>The purpose of this archive is to let you share your code snippets, scripts,	and functions with the Open Source Software Community.</p><p>You can create a "new snippet", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>	<p>You can browse the snippet library quickly:</p>
+snippet_delete	error_mangled_url	Error, Error - mangled URL?
+snippet_delete	error_only_creator_of_package_version_can_delete	Error - Only the creator of a package version can delete it.
+snippet_delete	error_only_the_creator	Error - Only the creator of a package version can delete snippets from it.
+snippet_delete	item_removed_from	Item Removed From Package
+snippet_delete	package_removed	Package Removed
+snippet_delete	section	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_delete	snippet_removed	Snippet Removed
+snippet_delete	that_snippet_doesnt_exist	Error - That snippet doesn't exist in this package.
+snippet_delete	title	ÄÚµå Áö¿ì±â
+snippet_detail	author	Author
+snippet_detail	changes_since_last_version	Changes since last version:
+snippet_detail	date_posted	Date Posted
+snippet_detail	delete	Delete
+snippet_detail	download_a_raw_text	Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;
+snippet_detail	download_version	Download Version
+snippet_detail	edit_del	Edit/Del
+snippet_detail	error_no_version_found	Error - no versions found
+snippet_detail	error_was_the_url_mangled	Error, Error - was the URL mangled?
+snippet_detail	latest_package_version	Latest Package Version:
+snippet_detail	latest_snippet_version	Latest Snippet Version:
+snippet_detail	package_version	Package Version
+snippet_detail	section	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_detail	snippet_id	Snippet ID
+snippet_detail	submit_a_new_snippet	Submit a new version
+snippet_detail	submit_a_new_version	Submit a new version
+snippet_detail	title	ÄÚµå ÀÚ¼¼È÷ º¸±â
+snippet_detail	version_of_this_package	Versions Of This Package:
+snippet_detail	version_of_this_snippet	Versions Of This Snippet:
+snippet_detail	you_can_submit_a_new	You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.
+snippet_detail	you_can_submit_a_new_version_of_package	You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.
+snippet_download	error	Error
+snippet_download	nothing_in_here	nothing in here
+snippet_index	title	Snippet Library
+snippet_package	add_snippet_to	Add Snippets To Package
+snippet_package	add_snippet_to_package	Add Snippets to Package
+snippet_package	browse_the_libary	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
+snippet_package	category	Category
+snippet_package	description	Description:
+snippet_package	error_doing_snippet_package_insert	ERROR DOING SNIPPET PACKAGE INSERT!
+snippet_package	error_doing_snippet_package_version	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_package	error_go_back_and_fill	Error, Error - Go back and fill in all the information
+snippet_package	if_a_new_window	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_package	important	IMPORTANT!
+snippet_package	language	Language
+snippet_package	make_sure_all_info	Make sure all info is complete and accurate
+snippet_package	section	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_package	snippet_package_added_successfull	Snippet Package Added Successfully. 
+snippet_package	snippet_title	Title:
+snippet_package	snippet_version_added_successfull	Snippet Pacakge Version Added Successfully.
+snippet_package	submit	SUBMIT
+snippet_package	suggest_a_category	Suggest a Category
+snippet_package	suggest_a_language	Suggest a Language
+snippet_package	title	ÄÚµå ÆĞÅ°Áö ¸¸µé±â
+snippet_package	title_new_snippet_package	Submit A New Snippet Package
+snippet_package	version	Version
+snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+snippet_submit	category	Category
+snippet_submit	description	Description
+snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
+snippet_submit	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_submit	error_go_back_and_fill	Error, Error - Go back and fill in all the information
+snippet_submit	language	Language
+snippet_submit	license	License
+snippet_submit	make_sure_all_info	Make sure all info is complete and accurate
+snippet_submit	paste_the_code_here	Paste the Code Here
+snippet_submit	section	ÄÚµå ¶óÀÌºê·¯¸®
+snippet_submit	snippet_added_successfull	Snippet Added Successfully.
+snippet_submit	snippet_title	Title
+snippet_submit	snippet_version_added_successfully	Snippet Version Added Successfully
+snippet_submit	submit	SUBMIT
+snippet_submit	submit_a_new_snippet	Submit A New Snippet
+snippet_submit	suggest_a_category	Suggest a Category
+snippet_submit	suggest_a_language	Suggest a Language
+snippet_submit	title	ÄÚµå Á¦Ãâ
+snippet_submit	type	Script Type
+snippet_submit	version	Version
+snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
+snippet_utils	auctions	Auctions
+snippet_utils	author	Author
+snippet_utils	bbs_systems	BBS Systems
+snippet_utils	browse	Browse
+snippet_utils	calendars	Calendars
+snippet_utils	category	Category:
+snippet_utils	choose_one	Choose One
+snippet_utils	class	Class
+snippet_utils	create_a_package	Create A Package
+snippet_utils	database_manipulation	Database Manipulation
+snippet_utils	description	Description:
+snippet_utils	download_version	Download Version
+snippet_utils	file_management	File Management
+snippet_utils	full_script	Full Script
+snippet_utils	function	Function
+snippet_utils	games	Games
+snippet_utils	html_manipulation	HTML Manipulation
+snippet_utils	language	Language:
+snippet_utils	license	License:
+snippet_utils	math_functions	Math Functions
+snippet_utils	no_snippets_are_in_this_package	No Snippets Are In This Package Yet
+snippet_utils	other	Other
+snippet_utils	other_language	Other Language
+snippet_utils	readme	README
+snippet_utils	sample_code	Sample Code (HOWTO)
+snippet_utils	searching	Searching
+snippet_utils	shopping_carts	Shopping Carts
+snippet_utils	snippet_id	Snippet ID
+snippet_utils	snippet_in_this_package	Snippets In This Package:
+snippet_utils	snippet_title	Title
+snippet_utils	submit_a_new_snippet	Submit A New Snippet
+snippet_utils	type	Type:
+snippet_utils	unix_admin	UNIX Admin
+snippet_utils	voting	Voting
+snippet_utils	website_only	WebSite Only
 softwaremap	title	Trove
-survey	title	ì„¤ë¬¸ì¡°ì‚¬: $1
-survey_admin	section	ì„¤ë¬¸ì¡°ì‚¬ ë„êµ¬
-survey_admin	title	ê´€ë¦¬í•˜ê¸°
-survey_admin_add_question	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_add_question	title	ì„¤ë¬¸ ì¶”ê°€
-survey_admin_add_survey	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_add_survey	title	ì„¤ë¬¸ì¡°ì‚¬ ì¶”ê°€
-survey_admin_edit_question	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_edit_question	title	ì§ˆë¬¸ë‚´ìš© í¸ì§‘
-survey_admin_edit_survey	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_edit_survey	title	ì„¤ë¬¸ì¡°ì‚¬ í¸ì§‘
-survey_admin_show_questions	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_show_questions	title	ì§ˆë¬¸ë‚´ìš© ë³´ê¸°
-survey_admin_show_results	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_show_results	title	ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ ë³´ê¸°
-survey_admin_show_results_aggregate	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_show_results_aggregate	title	ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ ë³´ê¸°
-survey_admin_show_results_comments	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
-survey_admin_show_results_comments	title	ì„¤ë¬¸ì— ëŒ€í•œ ë‹µê¸€ ë³´ê¸°
-survey_admin_show_results_individual	section	ì„¤ë¬¸ì¡°ì‚¬ ë„êµ¬ ê´€ë¦¬
-survey_admin_show_results_individual	title	ê°ê°ì˜ ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ ë³´ê¸°
-survey_survey	section	ì„¤ë¬¸ì¡°ì‚¬
-survey_survey	title	ì„¤ë¬¸ì¡°ì‚¬ ë³´ê¸°
-survey_survey_resp	section	ì„¤ë¬¸ì¡°ì‚¬ ë„êµ¬
-survey_survey_resp	title	ì„¤ë¬¸ì¡°ì‚¬ ì²˜ë¦¬ ë° ë°˜ì‘
-themes	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
-themes	title	í…Œë§ˆ ë³´ê¸°/ë°”ê¾¸ê¸°
-top	about_blurb	ì´ê³³ $1ì—ì„œ ìš´ì˜ë˜ê³  ìˆëŠ” ì—¬ëŸ¬ í”„ë¡œì íŠ¸ë“¤ì— ëŒ€í•œ ì‚¬ìš© ê¸°ë¡ì„ ì§‘ê³„í•˜ì—¬ ì—¬ëŸ¬ê°€ì§€ ë¶„ë¥˜ë¥¼ í†µí•´ ë³´ì‹¤ ìˆ˜ ìˆë„ë¡ í•˜ê³  ìˆìŠµë‹ˆë‹¤.
-top	active_all_time	í˜„ì¬ ê°€ì¥ í™œë°œí•œ í”„ë¡œì íŠ¸
-top	active_weekly	ê¸ˆì£¼ ê°€ì¥ í™œë°œí•œ í”„ë¡œì íŠ¸
-top	downloads	ìµœë‹¤ ë‹¤ìš´ë¡œë“œ
-top	downloads_7_days	ìµœë‹¤ ë‹¤ìš´ë¡œë“œ (ìµœê·¼ 7ì¼ë™ì•ˆ)
-top	forum_posts	í™œë°œí•œ ê²Œì‹œíŒ
-top	pageviews	í˜ì´ì§€ë·°ê°€ ë§ì€ í”„ë¡œì íŠ¸ - $1 ë²„íŠ¼ ë¡œê³ ë¥¼ í´ë¦­í•œ íšŸìˆ˜ë¡œ ì¸¡ì •ë¨
-top	highest_ranked_users	í™œë°œí•œ ì‚¬ìš©ì
-top	title	ìƒìœ„ í”„ë¡œì íŠ¸
-top_mostactive	section	ìƒìœ„ í”„ë¡œì íŠ¸
-top_mostactive	title	ê°€ì¥ í™œë°œí•œ í”„ë¡œì íŠ¸: $1
-top_toplist	section	ìƒìœ„ í”„ë¡œì íŠ¸
-top_toplist	title	ìƒìœ„ í”„ë¡œì íŠ¸ ë³´ê¸°
-tracker	section	í”„ë¡œì íŠ¸: $1
-tracker	title	ë¬¸ì œì  ì¶”ì 
-tracker	choose	ì¶”ì í•  í•­ëª©ì„ ì„ íƒí•˜ì‹­ì‹œì˜¤. ê° ì•„ì´í…œì„ ì‚´í´ë³´ì‹œê±°ë‚˜ í¸ì§‘í•˜ì‹¤ ìˆ˜ ìˆê³  ìƒˆë¡œìš´ ì•„ì´í…œì„ ì¶”ê°€í•˜ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
+softwaremap	title	Trove
+source	file_not_found	File Not Found
+source	file_not_found_text	Cannot find specified file to display.
+source	invalid_argument	Invalid File Argument
+source	invalid_argument_text	The file argument is invalid.
+source	missing_file	Missing File Argument
+source	missing_file_text	A file must be specified for this page.
+source	show_source	Show source
+source	source_of	Source of $1
+staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
+stats	overview_stats	OVERVIEW STATS
+stats	project_stats	PROJECT STATS
+stats	site_graphs	SITE GRAPHS
+stats	title	$1 Site Statistics
+stats_graph	joverview_stats	OVERVIEW STATS
+stats_graph	project_stats	PROJECT STATS
+stats_graph	site_graphs	SITE GRAPHS
+stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
+stats_i18n	language	Language
+stats_i18n	language_distribution	Languages Distributions
+stats_i18n	language_text	This is a list of the preferences that users have chosen in their user preferences; it does not include languages which are selected via cookies or browser preferences
+stats_i18n	title	$1 I18n Statistics
+stats_i18n	total_non_english	Total Non-English
+stats_i18n	users	Users
+stats_index	other_statistics	Other statistics:<ul><li><a href="i18n.php">I18n Statistics</a></li></ul>
+stats_index	overview_stats	OVERVIEW STATS
+stats_index	project_stats	PROJECT STATS
+stats_index	site_graphs	SITE GRAPHS
+stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
+stats_lastlogins	date	Date
+stats_lastlogins	last_logins	Last Logins
+stats_lastlogins	most_recent_open	Most Recent Opened Sessions
+stats_lastlogins	no_records	No records found","Database error: "
+stats_lastlogins	source_ip	Source IP
+stats_lastlogins	username	Username
+stats_projects	project_comparision	Project Statistical Comparisons
+stats_site_utils	adds	Adds
+stats_site_utils	all	all
+stats_site_utils	all_projects	All Projects
+stats_site_utils	all_trkr	All Trkr
+stats_site_utils	bugs	Bugs
+stats_site_utils	cls	Cls
+stats_site_utils	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
+stats_site_utils	comms	Comm's
+stats_site_utils	cos	CO's
+stats_site_utils	current_statistic_all_time	Current Aggregate Statistics for All Time
+stats_site_utils	cvs	CVS
+stats_site_utils	day	Day
+stats_site_utils	developers	Developers
+stats_site_utils	downloads	Downloads
+stats_site_utils	generate_report	Generate Report
+stats_site_utils	group_name	Group Name
+stats_site_utils	in_trove_category	Projects in trove category:
+stats_site_utils	last_30	last_30
+stats_site_utils	month	Month
+stats_site_utils	no_data	No Data
+stats_site_utils	no_valid_data	Query returned no valid data.
+stats_site_utils	opn	Opn
+stats_site_utils	or_special_project_list	OR enter Special Project List: 
+stats_site_utils	page_views	Page Views
+stats_site_utils	patches	Patches
+stats_site_utils	projects	Projects
+stats_site_utils	report	Report: 
+stats_site_utils	returned_no_category	returned no category name
+stats_site_utils	site	Site
+stats_site_utils	site_views	Site Views
+stats_site_utils	special_project_list	Special Project List
+stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days.
+stats_site_utils	statistics_for_the_past_months	Statistics for the past $1 months.
+stats_site_utils	subdomain	Subdomain
+stats_site_utils	subdomain_views	Subdomain Views
+stats_site_utils	support	Support
+stats_site_utils	tasks	Tasks
+stats_site_utils	total	Total
+stats_site_utils	view_by	View by: 
+stats_user_graph	date	Date
+stats_user_graph	new_additions_by_day	New Additions, by Day
+stats_user_graph	new_user_projects	New Users (RED), New Projects (BLUE
+stats_user_graph	user_projects	Users (RED) / Projects (BLUE)
+stats_view_graph	date	Date
+stats_view_graph	page_views	Gforge Page Views
+stats_view_graph	total_views	Total Page Views (RED) ($1 days)
+stats_view_graph	views	Views (RED)
+survey	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
+survey	high	High
+survey	low	Low
+survey	permission_denied	Permission Denied
+survey	survey_not_found	Survey not found.
+survey	survey_privacy	Survey Privacy
+survey	title	¼³¹®Á¶»ç
+survey_add_question	add_this_question	Add This Question.
+survey_add_question	error_insert_question	Error inserting question
+survey_add_question	question	Question
+survey_add_question	question_added	Question Added
+survey_add_question	question_type	Question type
+survey_add_question	show_existing_questions	Show Existing Questions.
+survey_add_question	title	Add A Question
+survey_add_survey	add_this_survey	Add This Survey
+survey_add_survey	error_in_insert	Error in Survey Insert
+survey_add_survey	existing_surveys	Existing Surveys
+survey_add_survey	is_active	Is Active?
+survey_add_survey	list_questions_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
+survey_add_survey	name_of_survey	Name Of Survey:
+survey_add_survey	no	No
+survey_add_survey	show_existing_question	Show Existing Questions
+survey_add_survey	survey_inserted	Survey Inserted
+survey_add_survey	title	Add A Survey
+survey_add_survey	title_is_required	Survey title is required
+survey_add_survey	yes	Yes
+survey_admin	section	¼³¹®Á¶»ç µµ±¸
+survey_admin	title	°ü¸®ÇÏ±â
+survey_admin_add_question	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_add_question	title	¼³¹® Ãß°¡
+survey_admin_add_survey	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_add_survey	title	¼³¹®Á¶»ç Ãß°¡
+survey_admin_edit_question	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_edit_question	title	Áú¹®³»¿ë ÆíÁı
+survey_admin_edit_survey	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_edit_survey	title	¼³¹®Á¶»ç ÆíÁı
+survey_admin_index	add_question	Add Questions
+survey_admin_index	add_survey	Add Surveys
+survey_admin_index	edir_existing_survey	Edit Existing Surveys
+survey_admin_index	edit_existing_question	Edit Existing Questions
+survey_admin_index	its_simple_to_create	<p>It's simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: $1 where XX is the survey number
+survey_admin_index	permission_denied	Permission Denied
+survey_admin_index	show_results	Show Survey Results
+survey_admin_index	title	Survey Administration
+survey_admin_index	you_can_now_activate	You can now activate/deactivate surveys on the $1 Edit Existing Surveys $2 page
+survey_admin_show_questions	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_show_questions	title	Áú¹®³»¿ë º¸±â
+survey_admin_show_results	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_show_results	title	¼³¹®Á¶»ç °á°ú º¸±â
+survey_admin_show_results_aggregate	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_show_results_aggregate	title	¼³¹®Á¶»ç °á°ú º¸±â
+survey_admin_show_results_comments	section	¼³¹®Á¶»ç °ü¸®
+survey_admin_show_results_comments	title	¼³¹®¿¡ ´ëÇÑ ´ä±Û º¸±â
+survey_admin_show_results_individual	section	¼³¹®Á¶»ç µµ±¸ °ü¸®
+survey_admin_show_results_individual	title	°¢°¢ÀÇ ¼³¹®Á¶»ç °á°ú º¸±â
+survey_admin_utils	found	$1 surveys found
+survey_admin_utils	group_id	Group Id
+survey_admin_utils	survey_id	Survey Id
+survey_admin_utils	survey_questions	Survey questions
+survey_admin_utils	survey_title	Title of survey
+survey_edit	change_after_already_response	If you change a survey after you already have responses, your results pages could be misleading or messed up
+survey_edit	existing_surveys	Existing Surveys
+survey_edit	is_active	Is Active
+survey_edit	list_question_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view	the question id's. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7
+survey_edit	missing_date	UPDATE FAILED: Missing Data
+survey_edit	name_off_survey	Name of Survey
+survey_edit	no	No
+survey_edit	permission_denied	Permission Denied
+survey_edit	question	Questions
+survey_edit	show_existing_questions	Show Existing Questions
+survey_edit	submit_changes	Submit Changes
+survey_edit	survey_question_required	UPDATE FAILED: Survey Questions Required
+survey_edit	survey_title_required	UPDATE FAILED: Survey Title Required
+survey_edit	tilte	Edit A Survey
+survey_edit	update_failed	UPDATE FAILED
+survey_edit	update_successful	UPDATE SUCCESSFUL
+survey_edit	warning_survey_after_response	WARNING! It is a bad idea to edit a survey after responses have been posted
+survey_edit	yes	Yes
+survey_edit_question	editing_question	Editing Question
+survey_edit_question	error_finding_question	Error finding question
+survey_edit_question	if_you_change_after	If you change a question after responses have been posted, your results pages may be misleading
+survey_edit_question	permission_denied	Permission Denied
+survey_edit_question	question	Question
+survey_edit_question	question_type	Question Type
+survey_edit_question	show_existing_question	Show Existing Questions
+survey_edit_question	submit_changes	Submit Changes
+survey_edit_question	title	Edit A Question
+survey_edit_question	update_failed	UPDATE FAILED
+survey_edit_question	update_successful	UPDATE SUCCESSFUL
+survey_edit_question	warning_change_after_response	WARNING! It is a bad idea to change a question after responses to it have been submitted
+survey_index	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
+survey_index	survey_id	Survey ID
+survey_index	survey_title	Survey Title
+survey_index	this_group_has	This Group Has No Active Surveys
+survey_index	title	Survey
+survey_privacy	survey_privacy	Survey Privacy
+survey_privacy	the_privacy_information	<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
+survey_privacy	the_team	The $1 Team
+survey_privacy	title	Survey
+survey_rating_resp	click_to_resturn	Click to return to previous page
+survey_rating_resp	error	ERROR
+survey_rating_resp	error_in_insert	Error in insert
+survey_rating_resp	error_missing	ERROR!!! MISSING PARAMS
+survey_rating_resp	if_you_vote_again	If you vote again, your old vote will be erased.
+survey_rating_resp	title	Voting
+survey_rating_resp	vote_reg	Vote registered
+survey_rating_resp	vote_regsitered	Vote Registered
+survey_rating_resp	you_must_be_logged_in	You must be logged in to vote
+survey_resp	error	Error
+survey_resp	error_some_reason	Error - For some reason group_id and/or survey_id did not make it he
+survey_resp	regards	Regards
+survey_resp	thank_you	Thank you for taking time to complete this survey.
+survey_resp	the_crew	The $1 Crew
+survey_resp	title	Survey Complete
+survey_resp	unfortunately_you_have_to_be	Unfortunately, you have to be logged in to participate in surveys.
+survey_resp	you_nedd_to_be_logged_in	You need to be logged in
+survey_show_questions	found	$1 questions found
+survey_show_questions	note_use_these_questions_id	NOTE: use these question_id's when you create a new survey
+survey_show_questions	permission_denied	Permission Denied
+survey_show_questions	title	Survey Questions
+survey_show_questions	you_may_use_any_of_these	You may use any of these questions on your surveys
+survey_show_result_comment	found	Found
+survey_show_result_comment	permission_denied	Permission Denied
+survey_show_result_comment	question	Question:
+survey_show_result_comment	title	Survey Aggregate Results
+survey_show_results	found	Found
+survey_show_results	permission_denied	Permission Denied
+survey_show_results	title	Survey Results
+survey_show_results	view_aggregate_responses	View Aggregate Responses
+survey_show_results_aggregate	average	Average
+survey_show_results_aggregate	error	error
+survey_show_results_aggregate	no	No
+survey_show_results_aggregate	permission_denied	Permission Denied
+survey_show_results_aggregate	responses	Responses
+survey_show_results_aggregate	title	Survey Aggregate Results
+survey_show_results_aggregate	view_comments	View Comments
+survey_show_results_aggregate	yes	Yes
+survey_show_results_aggregate	yes_no	Yes / No
+survey_show_results_csv	permission_denied	Permission Denied
+survey_show_results_individual	permission_denied	Permission Denied
+survey_show_results_individual	title	Results
+survey_show_results_individual	yes_no	Yes / No
+survey_survey	section	¼³¹®Á¶»ç
+survey_survey	title	¼³¹®Á¶»ç º¸±â
+survey_survey_resp	section	¼³¹®Á¶»ç µµ±¸
+survey_survey_resp	title	¼³¹®Á¶»ç Ã³¸® ¹× ¹İÀÀ
+survey_utils	add_question	Áú¹® Ãß°¡ÇÏ±â
+survey_utils	add_survey	¼³¹®Á¶»ç Ãß°¡ÇÏ±â
+survey_utils	admin	°ü¸®
+survey_utils	edit_questions	Áú¹® ÆíÁıÇÏ±â
+survey_utils	edit_survey	¼³¹®Á¶»ç ÆíÁıÇÏ±â
+survey_utils	error_this_group_has_turned_off	¿À·ù: ¼³¹®Á¶»ç¸¦ »ç¿ëÇÏÁö ¾Êµµ·Ï ¼³Á¤µÇ¾î ÀÖ½À´Ï´Ù.
+survey_utils	show_results	°á°ú º¸¿©ÁÖ±â
+system	datefmt	Y-m-d H:i
+system	locale	en_US
+system	strftimefmt	%Y %B %e  %H:%M
+themes	section	»ç¿ëÀÚ µî·Ï Á¤º¸
+themes	title	Å×¸¶ º¸±â/¹Ù²Ù±â
+top	NA	N/A
+top	about_blurb	ÀÌ°÷ $1¿¡¼­ ¿î¿µµÇ°í ÀÖ´Â ¿©·¯ ÇÁ·ÎÁ§Æ®µé¿¡ ´ëÇÑ »ç¿ë ±â·ÏÀ» Áı°èÇÏ¿© ¿©·¯°¡Áö ºĞ·ù¸¦ ÅëÇØ º¸½Ç ¼ö ÀÖµµ·Ï ÇÏ°í ÀÖ½À´Ï´Ù.
+top	active_all_time	ÇöÀç °¡Àå È°¹ßÇÑ ÇÁ·ÎÁ§Æ®
+top	active_weekly	±İÁÖ °¡Àå È°¹ßÇÑ ÇÁ·ÎÁ§Æ®
+top	down	$1°è´Ü ÇÏ¶ô
+top	downloads	ÃÖ´Ù ´Ù¿î·Îµå
+top	downloads_7_days	ÃÖ´Ù ´Ù¿î·Îµå (ÃÖ±Ù 7ÀÏµ¿¾È)
+top	forum_posts	°¡Àå È°¹ßÇÑ °Ô½ÃÆÇ
+top	highest_ranked_users	¿ì¼ö »ç¿ëÀÚ
+top	pageviews	ÆäÀÌÁöºä°¡ ¸¹Àº ÇÁ·ÎÁ§Æ® - $1 ¹öÆ° ·Î°í¸¦ Å¬¸¯ÇÑ È½¼ö·Î ÃøÁ¤µÊ
+top	same	º¯µ¿¾øÀ½
+top	title	»óÀ§ ÇÁ·ÎÁ§Æ®
+top	top_project	$1 ¿ì¼ö ÇÁ·ÎÁ§Æ®
+top	up	$1°è´Ü »ó½Â
+top	updated_daily	¸ÅÀÏ °»½ÅµË´Ï´Ù.
+top	view_other_top_category	´Ù¸¥ Åë°è »óÈ² º¸±â
+top_mostactive	percentile	ºñÀ²
+top_mostactive	project_name	ÇÁ·ÎÁ§Æ® ÀÌ¸§
+top_mostactive	rank	¼øÀ§
+top_mostactive	section	»óÀ§ ÇÁ·ÎÁ§Æ®
+top_mostactive	title	°¡Àå È°¹ßÇÑ ÇÁ·ÎÁ§Æ®: $1
+top_mostactive	updated_daily	¸ÅÀÏ °»½ÅµË´Ï´Ù.
+top_toplist	change	º¯µ¿
+top_toplist	download	´Ù¿î¸£µµ
+top_toplist	last_rank	Áö³­¹ø ¼øÀ§
+top_toplist	pageviews	ÆäÀÌÁöºä
+top_toplist	posts	¿Ã¸°±Û¼ö
+top_toplist	project_name	ÇÁ·ÎÁ§Æ® ÀÌ¸§
+top_toplist	rank	¼øÀ§
+top_toplist	section	»óÀ§ ÇÁ·ÎÁ§Æ®
+top_toplist	title	»óÀ§ ÇÁ·ÎÁ§Æ® º¸±â
+top_toplist	top_download	ÃÖ´Ù ´Ù¿î·Îµå
+top_toplist	top_download_7_days	Áö³­ 7ÀÏµ¿¾ÈÀÇ ÃÖ´Ù ´Ù¿î·Îµå ±â·Ï
+top_toplist	top_forum_post_count	°¡Àå ±ÛÀÌ ¸¹Àº °Ô½ÃÆÇ
+top_toplist	top_weekly_pagesviews	ÁÖ°£ ÆäÀÌÁöºä ¼øÀ§ *.$1 ($2 ·Î°í Å¬¸¯ È½¼ö)
+top_topusers	change	º¯µ¿
+top_topusers	info_not_available	Á¤º¸°¡ ¾ø½À´Ï´Ù.
+top_topusers	info_not_available_more	¿ì¼ö »ç¿ëÀÚ¿¡ ´ëÇÑ Á¤º¸°¡ ¾ø½À´Ï´Ù.
+top_topusers	last_rank	Áö³­¹ø ¼øÀ§
+top_topusers	rank	¼øÀ§
+top_topusers	rating	Æò°¡
+top_topusers	real_name	ÀÌ¸§
+top_topusers	title	¿ì¼ö »ç¿ëÀÚ
+top_topusers	user_name	»ç¿ëÀÚID
+tracker	admin	°ü¸®
+tracker	any	Any
+tracker	assigned_to	´ã´çÀÚ
+tracker	assignee	´ã´çÀÚ
+tracker	category	ºĞ·ù
+tracker	category_any	ÀüÃ¼
+tracker	check_upload	ÆÄÀÏÀ» ¾÷·Îµå/Ã·ºÎÇÏ½Ã·Á¸é ¼±ÅÃÇÏ½Ê½Ã¿À.
+tracker	choose	ÃßÀûÇÒ Ç×¸ñÀ» ¼±ÅÃÇÏ½Ê½Ã¿À. °¢ Ç×¸ñÀ» »ìÆìº¸½Ã°Å³ª ÆíÁıÇÏ½Ç ¼ö ÀÖ°í »õ·Î¿î Ç×¸ñÀ» Ãß°¡ÇÏ½Ç ¼öµµ ÀÖ½À´Ï´Ù.
+tracker	close_date	ÇØ°áÇÑ ³¯
+tracker	comment	ÀÇ°ß
+tracker	comment_added	ÀÇ°ßÀÌ Ãß°¡µÇ¾ú½À´Ï´Ù.
+tracker	comments	ÀÇ°ß
+tracker	date	³¯Â¥
+tracker	detailed_description	ÀÚ¼¼ÇÑ ¼³¸í
+tracker	file_delete	ÆÄÀÏ »èÁ¦: 
+tracker	file_delete_successful	ÆÄÀÏ »èÁ¦: ¼º°ø
+tracker	file_delete_upload	ÆÄÀÏ ¾÷·Îµå
+tracker	file_description	ÆÄÀÏ ¼³¸í
+tracker	file_upload_successful	ÆÄÀÏ ¾÷·Îµå: ¼º°ø
+tracker	followups	Followup
+tracker	group	±×·ì
+tracker	group_any	ÀüÃ¼
+tracker	id	ID
+tracker	insert_email	<strong>·Î±×ÀÎÇÏ½Ç ¼ö ¾ø´Ù¸é</strong>, ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ ÀÔ·ÂÇÏ¼Å¾ß ÇÕ´Ï´Ù.
+tracker	item_created	Ç×¸ñÀ» »ı¼ºÇÏ¿´½À´Ï´Ù.
+tracker	item_group	±×·ì
+tracker	no_trackers	Á¢±ÙÇÒ ¼ö ÀÖ´Â ¹®Á¦Á¡ ÃßÀû Ç×¸ñÀÌ ¾ø½À´Ï´Ù.
+tracker	no_trackers_text	¹®Á¦Á¡ ÃßÀû ±â´ÉÀ» ¼³Á¤ÇÏÁö ¾Ê¾Ò°Å³ª, º¼ ¼ö ÀÖ´Â ±ÇÇÑÀÌ ¾ø½À´Ï´Ù.<p><FONT COLOR=RED>ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ´Â $1 °ü¸®ÀÚ ÆäÀÌÁö $2¸¦ »ç¿ëÇÏ¿© µ¥ÀÌÅÍÇüÀ» ¼³Á¤ÇÒ ¼ö ÀÖ½À´Ï´Ù.</FONT></strong>
+tracker	open_date	Á¦ÃâÇÑ ³¯
+tracker	please_login	Please $1 login $2
+tracker	priority	Áß¿äµµ
+tracker	reporting	º¸°í¼­
+tracker	resolution	ÇØ°á¹æ¾È
+tracker	section	ÇÁ·ÎÁ§Æ®: $1
+tracker	security_note	¸Ş½ÃÁö¿¡ ºñ¹Ğ¹øÈ£³ª ±â¹Ğ Á¤º¸¸¦ ÀÔ·ÂÇÏÁö ¸¶½Ê½Ã¿À!
+tracker	status	»óÅÂ
+tracker	status_any	ÀüºÎ
+tracker	submitted_by	Á¦ÃâÀÚ
+tracker	submitter	Á¦ÃâÀÚ
+tracker	summary	¿ä¾à
+tracker	title	¹®Á¦Á¡ ÃßÀû
+tracker	tracker_item	¹®Á¦Á¡ ÃßÀû Ç×¸ñ
+tracker	unassigned	¾øÀ½
+tracker	updated_successful	°»½Å ¼º°ø
+tracker_add	for_project	ÇÁ·ÎÁ§Æ®
 tracker_add	section	$1
-tracker_add	title	ë¬¸ì œì  ì¶”ì  ì•„ì´í…œ ì œì¶œ
-tracker_admin	section	ë¬¸ì œì  ì¶”ì 
-tracker_admin	title	ê´€ë¦¬
-tracker_admin_add_canned	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
-tracker_admin_add_canned	title	ë‹µê¸€ ì¶”ê°€: $1
-tracker_admin_add_cat	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
-tracker_admin_add_cat	title	$1 ì— ë¶„ë¥˜ ì¶”ê°€
-tracker_admin_add_group	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
-tracker_admin_add_group	title	$1 ì— ê·¸ë£¹ ì¶”ê°€
-tracker_admin_update_canned	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
-tracker_admin_update_canned	title	ë‹µê¸€ ìˆ˜ì •: $1
-tracker_admin_update_cat	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
-tracker_admin_update_cat	title	ë¶„ë¥˜ ìˆ˜ì •: $1
-tracker_admin_update_group	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
-tracker_admin_update_group	title	ê·¸ë£¹ ìˆ˜ì •: $1
-tracker_admin_update_type	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_add	submit		Á¦Ãâ
+tracker_add	title	¹®Á¦Á¡ ÃßÀû Ç×¸ñ Á¦Ãâ
+tracker_admin	add_canned_responses	¹Ì¸® ÁØºñÇÑ ÀÇ°ß Ãß°¡/°»½Å
+tracker_admin	add_canned_responses_info	¹®Á¦Á¡ ÃßÀû ±â´É¿¡¼­ »ç¿ëÇÏ´Â ÀÏ¹İÀûÀÎ ÀÀ´ä ¸Ş½ÃÁö¸¦ ÀÛ¼º/º¯°æÇÕ´Ï´Ù.
+tracker_admin	add_categories	ºĞ·ù Ãß°¡/°»½Å
+tracker_admin	add_categories_info	Add categories like, 'mail module','gant chart module','cvs', etc
+tracker_admin	add_group_infos	Add groups like, 'v1.2','unsupported','unverified', etc
+tracker_admin	add_groups	±×·ì Ãß°¡/°»½Å
+tracker_admin	add_permissions	»ç¿ëÀÚ ¹× ±ÇÇÑ Ãß°¡/°»½Å
+tracker_admin	add_permissions_info	ÀÌ ¹®Á¦Á¡ ÃßÀû¿¡ »ç¿ëÀÚ¸¦ Ãß°¡/Á¦°ÅÇÕ´Ï´Ù.
+tracker_admin	admin	°ü¸®
+tracker_admin	auto_assign_to	ÀÚµ¿ ÇÒ´ç
+tracker_admin	canned_response_inserted	Canned Response Inserted
+tracker_admin	canned_response_updated	Canned Response Updated
+tracker_admin	category_add_warning	Ãß°¡ÇÑ ºĞ·ù´Â »èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.
+tracker_admin	category_inserted	Category Inserted
+tracker_admin	category_name	ºĞ·ù ÀÌ¸§
+tracker_admin	category_updated	Category Updated
+tracker_admin	choose_datatype	Choose a data type and you can set up prefs, categories, groups, users, and permissions
+tracker_admin	error_inserting	Error inserting
+tracker_admin	error_updating	Error updating
+tracker_admin	group_inserted	Group Inserted
+tracker_admin	group_name	New group Name
+tracker_admin	group_updated	Group Updated
+tracker_admin	intro	<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming
+tracker_admin	section	¹®Á¦Á¡ ÃßÀû
+tracker_admin	title	°ü¸®
+tracker_admin	tracker_id	ID
+tracker_admin	tracker_title	Á¦¸ñ
+tracker_admin	tracker_updated	Tracker Updated
+tracker_admin	update_preferences	Update preferences
+tracker_admin	update_preferences_info	Set up prefs like expiration times, email addresses
+tracker_admin	users_added	User(s) Added
+tracker_admin	users_deleted	User(s) Deleted
+tracker_admin	users_updated	User(s) Updated
+tracker_admin_add_canned	canned_response_body	Message Body
+tracker_admin_add_canned	canned_response_info	Creating useful generic messages can save you a lot of time when handling common artifact requests.
+tracker_admin_add_canned	canned_response_title	Title
+tracker_admin_add_canned	existing_responses	Existing Responses
+tracker_admin_add_canned	no_responses	No responses set up in this group
+tracker_admin_add_canned	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_add_canned	title	¹Ì¸® ÁØºñÇÑ ÀÇ°ß Ãß°¡: $1
+tracker_admin_add_cat	no_categories	No categories defined
+tracker_admin_add_cat	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_add_cat	title	Add Categories to $1
+tracker_admin_add_group	group_add_warning	Once you add a group, it cannot be deleted
+tracker_admin_add_group	no_groups_defined	No groups defined
+tracker_admin_add_group	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_add_group	title	$1 ¿¡ ±×·ì Ãß°¡
+tracker_admin_add_users	add_all_users	Add All Users
+tracker_admin_add_users	add_user_info	<h3>Add These Users:</h3><p>You can pick and choose users for your tracker, or simply add them all by checking "Add All Users".</p>
+tracker_admin_add_users	add_users	Add Users
+tracker_admin_add_users	admin_only	Admin Only
+tracker_admin_add_users	category_permission	Permission
+tracker_admin_add_users	delete	Delete
+tracker_admin_add_users	developers_info	<p>Each tracker that you define has separate user lists and user permissions.</p><p>Simply add developers to this tracker, then update their permissions.</p><p><dl><dt><strong>Technicians</strong></dt><dd>can be assigned items</dd><dt><strong>Admins</strong></dt><dd>can make changes to items</dd></dl></p>
+tracker_admin_add_users	no_developers	No Developers Found
+tracker_admin_add_users	tech_admin	Tech & Admin
+tracker_admin_add_users	technician	Technician
+tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
+tracker_admin_add_users	update_permissions	Update Developer Permissions
+tracker_admin_add_users	user_name	User Name
+tracker_admin_choose	title	Tracker Admin
+tracker_admin_update_canned	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_update_canned	title	¹Ì¸® ÁØºñÇÑ ÀÇ°ß ¼öÁ¤: $1
+tracker_admin_update_cat	auto_assign_to	Auto-Assign To
+tracker_admin_update_cat	category_change_warning	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name
+tracker_admin_update_cat	category_name	Category Name
+tracker_admin_update_cat	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_update_cat	title	ºĞ·ù ¼öÁ¤: $1
+tracker_admin_update_group	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_update_group	title	±×·ì ¼öÁ¤: $1
+tracker_admin_update_group	warning	It is not recommended that you change the artifact group name because other things are dependent upon it. When you change the group name, all related items will be changed to the new name.				
+tracker_admin_update_type	allow_anonymous	Allow non-logged-in postings
+tracker_admin_update_type	browse_item_form_text	Free form text for the "browse items" page
+tracker_admin_update_type	days_overdue	Days till considered overdue
+tracker_admin_update_type	description	Description
+tracker_admin_update_type	display_resolution	Display the "Resolution" box
+tracker_admin_update_type	email_all_changes	Send email on all changes
+tracker_admin_update_type	name	<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)
+tracker_admin_update_type	pending_timeout	Days till pending tracker items time out
+tracker_admin_update_type	publicy_available	Publicly Available
+tracker_admin_update_type	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_update_type	send_submissions	Send email on new submission to address
+tracker_admin_update_type	submit_item_form_text	Free form text for the "submit new item" page
 tracker_admin_update_type	title	Update $1
-tracker_admin_update_users	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
-tracker_admin_update_users	title	ë¬¸ì œì  ì¶”ì  ì‚¬ìš©ì ê¶Œí•œ ì¶”ê°€/í¸ì§‘
-tracker_browse	section	í”„ë¡œì íŠ¸: $1
-tracker_browse	title	$1 ë³´ê¸°
+tracker_admin_update_users	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_admin_update_users	title	¹®Á¦Á¡ ÃßÀû »ç¿ëÀÚ ±ÇÇÑ Ãß°¡/ÆíÁı
+tracker_artifact	double_submit	Ç×¸ñÀÌ Áßº¹ Á¦ÃâµÇ¾ú½À´Ï´Ù. ¹öÆ°À» µÎ¹ø ´©¸£½Ã¸é ¾ÈµË´Ï´Ù.
+tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
+tracker_artifact	error_body_required	Artifact: ¸Ş½ÃÁö º»¹®ÀÌ ÇÊ¿äÇÕ´Ï´Ù.
+tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
+tracker_artifact	error_summary_required	Artifact: ¸Ş½ÃÁö ¿ä¾àÀÌ ÇÊ¿äÇÕ´Ï´Ù.
+tracker_artifact	error_valid_email_required	SetMonitor::À¯È¿ÇÑ ÀÌ¸ŞÀÏ ÁÖ¼Ò°¡ ÇÊ¿äÇÕ´Ï´Ù.
+tracker_artifact	logged_in_no	·Î±×ÀÎ: NO
+tracker_artifact	logged_in_yes	·Î±×ÀÎ: YES
+tracker_artifact	monitoring_activated	Now Monitoring
+tracker_artifact	monitoring_deactivated	Monitoring Deactivated
+tracker_artifact	nothing_changed	°»½Å Ãë¼Ò - º¯µ¿»çÇ×ÀÌ ¾ø½À´Ï´Ù.
+tracker_artifact	private_error	Artifact: Only Group Members Can View Private ArtifactTypes
+tracker_artifactfile	required_fields	ArtifactFile: ÆÄÀÏ ÀÌ¸§, Å¸ÀÔ, Å©±â, µ¥ÀÌÅÍ°¡ ÇÊ¿äÇÕ´Ï´Ù.
+tracker_artifactgroup	required_field	ArtifactGroup: ÀÌ¸§ÀÌ ÇÊ¿äÇÕ´Ï´Ù.
+tracker_artifacthtml	by	By
+tracker_artifacthtml	date	³¯Â¥
+tracker_artifacthtml	field	ÇÊµå
+tracker_artifacthtml	message	¸Ş½ÃÁö
+tracker_artifacthtml	no_changes	º¯µ¿ »çÇ×ÀÌ ¾ø½À´Ï´Ù.
+tracker_artifacthtml	no_followups	No Followups Have Been Posted
+tracker_artifacthtml	old_value	ÀÌÀü°ª
+tracker_artifacthtml	sender	Àü¼ÛÀÚ
+tracker_artifacttype	add_artifact_types	Add/Browse Artifact Types
+tracker_artifacttype	admin	°ü¸®
+tracker_artifacttype	admin_functions	°ü¸® ±â´É
+tracker_artifacttype	browse	µÑ·¯º¸±â
+tracker_artifacttype	edit_options	Edit/Update Options in
+tracker_artifacttype	nobody	Nobody
+tracker_artifacttype	none	¾øÀ½
+tracker_artifacttype	reporting	º¸°íÇÏ±â
+tracker_artifacttype	required_fields	ArtifactType: Name, Description, Due Period, and Status Timeout are required
+tracker_artifacttype	submit_new	»õ Ç×¸ñ Á¦Ãâ
+tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
+tracker_browse	ascending	¿À¸§Â÷¼ø
+tracker_browse	canned_response	¹Ì¸® ÁØºñÇÑ ÀÇ°ß
+tracker_browse	check_all	ÀüºÎ &nbsp;¼±ÅÃ
+tracker_browse	clear_all	ÀüºÎ &nbsp;ÇØÁ¦
+tracker_browse	descending	³»¸²Â÷¼ø
+tracker_browse	mass_update	´ë·® °»½Å
+tracker_browse	next	´ÙÀ½ 50
+tracker_browse	no_change	º¯°æ ¾øÀ½
+tracker_browse	no_items	Ç×¸ñÀÌ ¾ø½À´Ï´Ù
+tracker_browse	old_requests	* ¿äÃ» Ç¥½Ã > $1ÀÏ Áö³µ½À´Ï´Ù.
+tracker_browse	previous	ÀÌÀü 50
+tracker_browse	request_id	¿äÃ» ID
+tracker_browse	resolution	ÇØ°áÃ¥
+tracker_browse	section	ÇÁ·ÎÁ§Æ®: $1
+tracker_browse	sort_by	Á¤·Ä
+tracker_browse	title	$1 º¸±â
+tracker_detail	add_comment	ÀÇ°ß Ãß°¡
+tracker_detail	attached_files	Ã·ºÎ ÆÄÀÏ
+tracker_detail	build_task_relation	ÀÛ¾÷ °ü°è ÀÛ¼º
+tracker_detail	changes	º¯°æÁ¡
+tracker_detail	description	¼³¸í
+tracker_detail	download	´Ù¿î·Îµå
+tracker_detail	name	ÀÌ¸§
+tracker_detail	no_files_attached	Ã·ºÎ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.
 tracker_detail	section	$1
-tracker_detail	title	ë¬¸ì œì  ì¶”ì  ìì„¸íˆ ë³´ê¸°
+tracker_detail	title	¹®Á¦Á¡ ÃßÀû ÀÚ¼¼È÷ º¸±â
+tracker_mod	attach_comment	È¤Àº ÀÇ°ß Ã·ºÎ
+tracker_mod	build_task_relation	ÀÛ¾÷ °ü°è ÀÛ¼º
+tracker_mod	canned_response	¹Ì¸® ÁØºñÇÑ ÀÇ°ß »ç¿ë 
+tracker_mod	changelog	º¯°æ ±â·Ï
+tracker_mod	data_type	µ¥ÀÌÅÍ Çü
+tracker_mod	date_closed	Á¾·áÀÏ
+tracker_mod	date_submitted	Á¦ÃâÇÑ ³¯Â¥
+tracker_mod	delete	»èÁ¦
+tracker_mod	description	¼³¸í
+tracker_mod	download	´Ù¿î·Îµå
+tracker_mod	existing_files	Á¸ÀçÇÏ´Â ÆÄÀÏ
+tracker_mod	name	ÀÌ¸§
+tracker_mod	no_files	ÇöÀç Ã·ºÎ ÆÄÀÏ ¾øÀ½
+tracker_mod	title	º¯°æ
+tracker_reporting	aging_report	Aging Report
+tracker_reporting	all_by_group	All Items By Artifact Group
+tracker_reporting	all_by_resolution	All Items By Resolution
+tracker_reporting	all_by_technician	All Items By Category
+tracker_reporting	all_items_by_technician	All Items By Technician
+tracker_reporting	artifact_type	Artifact Type: 
+tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (days)
+tracker_reporting	dist_by_category	Distribution by Category
+tracker_reporting	dist_by_group	Distribution by Group
+tracker_reporting	dist_by_resolution	Distribution by Resolution
+tracker_reporting	dist_by_technician	Distribution by Technician
+tracker_reporting	items_open	Number of Items Still Open
+tracker_reporting	items_submitted	Number of Items Submitted
+tracker_reporting	open_by_group	Open By Artifact Group
+tracker_reporting	open_items_by_category	Open Items By Category
+tracker_reporting	open_items_by_resolution	Open Items By Resolution
+tracker_reporting	open_items_by_technician	Open Items By Technician
 tracker_reporting	section	$1
-tracker_reporting	title	ë¬¸ì œì  ì¶”ì  ë¦¬í¬íŒ…
-users	title	ì‚¬ìš©ì ì •ë³´
-users	peerinfo1	ë§Œì•½ ì´ ì‚¬ìš©ìì— ëŒ€í•´ ì˜ ì•Œê³  ê³„ì‹ ë‹¤ë©´ ì•½ê°„ì˜ ì‹œê°„ì„ ë“¤ì—¬ ë‹¤ìŒ ê¸°ì¤€ì— ë”°ë¼ ì´ ì‚¬ìš©ìë¥¼ í‰ê°€í•´ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤. ì—¬ëŸ¬ë¶„ì˜ í‰ê°€ ê²°ê³¼ëŠ” ë‹¤ë¥¸ ëª¨ë“  ì‚¬ìš©ìë“¤ì—ê²Œ ë³´ì—¬ì§„ë‹¤ëŠ” ê²ƒì„ ëª…ì‹¬í•˜ì‹­ì‹œì˜¤. <p> $1 Peer Rating Systemì€ <A HREF="http://www.advogato.com">Advogato</A>ì—ì„œ íŒíŠ¸ë¥¼ ì–»ì€ ê²ƒì…ë‹ˆë‹¤. ì§€ê¸ˆ ì‚¬ìš©í•˜ê³  ê³„ì‹  ê²ƒì€ ê·¸ë¥¼ ê¸°ë°˜ìœ¼ë¡œ í™•ì¥, ì¬êµ¬í˜„ëœ ê²ƒì…ë‹ˆë‹¤.
-users	peerinfo2	Peer Rating ë°•ìŠ¤ëŠ” ê° í•­ëª©ì— ëŒ€í•œ í‰ê°€ ê²°ê³¼ì˜ í‰ê· ê³¼ ë ˆë²¨ì„ í•¨ê»˜ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤. ì´ ê²°ê³¼ëŠ” "trusted" ì‚¬ìš©ìì™€ "non-trusted" ì‚¬ìš©ìì˜ í‰ê°€ê°€ í•¨ê»˜ ë°˜ì˜ë˜ì–´ ìˆìŠµë‹ˆë‹¤. <ul><li>"ì „ì²´ ìˆœìœ„" í•„ë“œëŠ” $1ì˜ ëª¨ë“  ì‚¬ìš©ìì™€ ë¹„êµí•œ ìˆœìœ„ë¥¼ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤. <li>"ì¢…í•©ì ìˆ˜"ëŠ” trusted ì‚¬ìš©ìì˜ ì‘ë‹µì„ ê¸°ì¤€ìœ¼ë¡œ í•œ í‰ê· ì…ë‹ˆë‹¤. <li>"ê°œì¸ ì¤‘ìš”ë„" í•„ë“œëŠ” ë‹¤ë¥¸ ê°œë°œìë¥¼ í‰ê°€í•  ë•Œ ì ìš©ë˜ëŠ” ê°€ì¤‘ì¹˜ì´ë©° 1ë¶€í„° 1.5ì‚¬ì´ì˜ ê°’ì„ ê°€ì§‘ë‹ˆë‹¤. ì ìˆ˜ê°€ ë†’ì€ ì‚¬ìš©ìëŠ” ê°€ì¤‘ì¹˜ë„ ë” ë†’ìŠµë‹ˆë‹¤. </ul> <p> <i> Peer Rating Systemì— ì°¸ì—¬í•˜ê³  ì‹¶ì§€ ì•Šìœ¼ì‹œë‹¤ë©´, (ì´ëŠ” ë‹¤ë¥¸ ì‚¬ëŒì—ê²Œ í‰ê°€ë°›ëŠ” ê²ƒ, ë‹¤ë¥¸ ì‚¬ëŒì„ í‰ê°€í•˜ëŠ” ê²ƒ ì–‘ìª½ ëª¨ë‘ì—ê²Œ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤.) <a href="/account/">ì‚¬ìš©ì ë“±ë¡ ì •ë³´</a> í˜ì´ì§€ì—ì„œ ì„¤ì •í•˜ì‹œë©´ ë©ë‹ˆë‹¤. ë§Œì•½ ì´ í‰ê°€ ì‹œìŠ¤í…œì—ì„œ íƒˆí‡´í•˜ì‹œë©´ ë‹¤ë¥¸ ì‚¬ìš©ìë¥¼ í‰ê°€í–ˆë˜ ì •ë³´ë“¤ë„ ëª¨ë‘ ì˜êµ¬ì ìœ¼ë¡œ ì‚­ì œë˜ê³  ì—¬ëŸ¬ë¶„ì˜ ê°œì¸ í˜ì´ì§€ì—ì„œ 'Peer Rating' ë°•ìŠ¤ë„ ì‚¬ë¼ì§€ê²Œ ë˜ë‹ˆë‹¤. </i></p>
-users	optout	ì—¬ëŸ¬ë¶„ì€ Peer Rating ì‹œìŠ¤í…œì—ì„œ íƒˆí‡´í•˜ì‹  ìƒíƒœì´ë©° ê·¸ë ‡ì§€ ì•Šë‹¤ë©´ ë‹¤ë¥¸ ì‚¬ìš©ìë¥¼ í‰ê°€í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ìì„¸í•œ ì‚¬í•­ì€ <a href="/account/">ì‚¬ìš©ì ë“±ë¡ ì •ë³´</a>ë¥¼ ì°¸ê³ í•˜ì„¸ìš”.
+tracker_reporting	title	¹®Á¦Á¡ ÃßÀû ¸®Æ÷ÆÃ
+tracker_taskmgr	add_relation_to_task	ÀÌ¹Ì Á¸ÀçÇÏ´Â ÀÛ¾÷°ú ¿¬°èÇÏ±â
+tracker_taskmgr	add_relationship	¼±ÅÃÇÑ ÀÛ¾÷¿¡ ´ëÇØ °ü°è Ãß°¡
+tracker_taskmgr	build_relationships	Build Relationship Between Tracker Items and Task Manager
+tracker_taskmgr	create_task	»õ ÀÛ¾÷ »ı¼ºÇÏ±â
+tracker_taskmgr	task	ÀÛ¾÷
+tracker_taskmgr	task_manager_project	ÀÛ¾÷ °ü¸® ÇÁ·ÎÁ§Æ®
+tracker_taskmgr	tracker_item	ÃßÀû Ç×¸ñ
+tracker_utils	monitor		¸ğ´ÏÅÍ¸µÇÏ±â
+tracker_utils	stop_monitoring		¸ğ´ÏÅÍ¸µ ÁßÁöÇÏ±â
+trove	not_categorized	ÀÌ ÇÁ·ÎÁ§Æ®´Â ¾ÆÁ÷ ºĞ·ù°¡ ¼³Á¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.
+trove	title	¼ÒÇÁÆ®¿ş¾î ¸Ê
+trove_list	browse_by	Á¤·Ä ±âÁØ:
+trove_list	invalid_category_text	ºĞ·ù ±âÁØÀÌ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
+trove_list	invalid_category_title	À¯È¿ÇÏÁö ¾ÊÀº ºĞ·ù ±âÁØÀÔ´Ï´Ù.
+trove_list	limiting_view	´ÙÀ½ ºĞ·ù¿¡ ÇØ´çÇÏ´Â ÇÁ·ÎÁ§Æ®¸¸ ³ªÅ¸³À´Ï´Ù.
+trove_list	more_than	<strong>$1</strong>°³ ÀÌ»óÀÇ ÇÁ·ÎÁ§Æ®°¡ °á°ú¿¡ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.
+trove_list	number_of_projects	<strong>$1</strong>°³ÀÇ ÇÁ·ÎÁ§Æ®°¡ °á°ú¿¡ Æ÷ÇÔµÇ¾ú½À´Ï´Ù.
+trove_list	projects	$1°³ÀÇ ÇÁ·ÎÁ§Æ®
+trove_list	remove_filter	ÀÌ ÇÊÅÍ¸¦ Á¦°ÅÇÏ±â
+trove_list	title	¼ÒÇÁÆ®¿ş¾î ¸Ê
+user_home	contact	¿¬¶ôÃ³
+user_home	diary_notes	ÀÏ±â¿Í ¸Ş¸ğ
+user_home	diary_notes_entries	ÀÏ±â/¸Ş¸ğ Ç×¸ñ:
+user_home	diary_notes_monitor	ÀÏ±â/¸Ş¸ğ ¸ğ´ÏÅÍ¸µÇÏ±â 
+user_home	diary_notes_view	ÀÏ±â/¸Ş¸ğ º¸±â
+user_home	email	ÀÌ¸ŞÀÏ ÁÖ¼Ò
+user_home	jabber_address	Jabber ÁÖ¼Ò
+user_home	login_name	»ç¿ëÀÚ ID
+user_home	member_of	º» °³¹ßÀÚ´Â ´ÙÀ½ ÇÁ·ÎÁ§Æ®ÀÇ ¸â¹ö·Î È°µ¿ÁßÀÔ´Ï´Ù :
+user_home	message	¸Ş½ÃÁö
+user_home	name	ÀÌ¸§
+user_home	no_projects	º» °³¹ßÀÚ´Â ¾ÆÁ÷ ÇÁ·ÎÁ§Æ®¿¡ °¡ÀÔÇÏÁö ¾Ê¾Ò½À´Ï´Ù.
+user_home	peer_rating	»ç¿ëÀÚ°£ Æò°¡ ÇÁ·Î±×·¥
+user_home	peer_rating_disabled	ÀÌ »ç¿ëÀÚ´Â »ç¿ëÀÚ°£ Æò°¡ ÇÁ·Î±×·¥¿¡ Âü¿©ÇÏÁö ¾Ê½À´Ï´Ù.
+user_home	personal_information	°³ÀÎ Á¤º¸ 
+user_home	project_info	ÇÁ·ÎÁ§Æ® Á¤º¸ 
+user_home	real_name	ÀÌ¸§
+user_home	send	¸ŞÀÏ º¸³»±â 
+user_home	send_a_message	¸ŞÀÏÀ» ´ÙÀ½ »ç¶÷¿¡°Ô º¸³À´Ï´Ù. 
+user_home	send_message_if_logged	·Î±×ÀÎÇÏ½Ã¸é ¸ŞÀÏÀ» º¸³»½Ç ¼ö ÀÖ½À´Ï´Ù.
+user_home	site_member_since	°¡ÀÔÇÑ ³¯Â¥
+user_home	skills_profile	½ºÅ³ ÇÁ·ÎÇÊ
+user_home	subject	Á¦¸ñ
+user_home	title	°³¹ßÀÚ ÇÁ·ÎÇÊ
+user_home	user_id	»ç¿ëÀÚ ¹øÈ£
+users	no_user_name	»ç¿ëÀÚ ÀÌ¸§ÀÌ ¾ø½À´Ï´Ù.
+users	optout	¿©·¯ºĞÀº »ç¿ëÀÚ°£ Æò°¡ ½Ã½ºÅÛ¿¡¼­ Å»ÅğÇÏ½Å »óÅÂÀÌ±â ¶§¹®¿¡ ´Ù¸¥ »ç¿ëÀÚ¸¦ Æò°¡ÇÏ½Ç ¼ö ¾ø½À´Ï´Ù. ÀÚ¼¼ÇÑ »çÇ×Àº <a href="/account/">»ç¿ëÀÚ µî·Ï Á¤º¸</a>¸¦ Âü°íÇÏ¼¼¿ä.
+users	peerinfo1	¸¸¾à ÀÌ »ç¿ëÀÚ¿¡ ´ëÇØ Àß ¾Ë°í °è½Å´Ù¸é ¾à°£ÀÇ ½Ã°£À» µé¿© ´ÙÀ½ ±âÁØ¿¡ µû¶ó ÀÌ »ç¿ëÀÚ¸¦ Æò°¡ÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù. ¿©·¯ºĞÀÇ Æò°¡ °á°ú´Â ´Ù¸¥ ¸ğµç »ç¿ëÀÚµé¿¡°Ô º¸¿©Áø´Ù´Â °ÍÀ» ¸í½ÉÇÏ½Ê½Ã¿À. <p> $1 »ç¿ëÀÚ°£ Æò°¡ ½Ã½ºÅÛÀº <A HREF="http://www.advogato.com">Advogato</A>¿¡¼­ ÈùÆ®¸¦ ¾òÀº °ÍÀÔ´Ï´Ù. Áö±İ »ç¿ëÇÏ°í °è½Å °ÍÀº ±×¸¦ ±â¹İÀ¸·Î È®Àå, Àç±¸ÇöµÈ °ÍÀÔ´Ï´Ù.
+users	peerinfo2	»ç¿ëÀÚ°£ Æò°¡ Á¤º¸´Â °¢ Ç×¸ñ¿¡ ´ëÇÑ Æò°¡ °á°úÀÇ Æò±Õ°ú ·¹º§À» ÇÔ²² ³ªÅ¸³À´Ï´Ù. ÀÌ °á°ú´Â "trusted" »ç¿ëÀÚ¿Í "non-trusted" »ç¿ëÀÚÀÇ Æò°¡°¡ ÇÔ²² ¹İ¿µµÇ¾î ÀÖ½À´Ï´Ù. <ul><li>"ÀüÃ¼ ¼øÀ§" ÇÊµå´Â $1ÀÇ ¸ğµç »ç¿ëÀÚ¿Í ºñ±³ÇÑ ¼øÀ§¸¦ ³ªÅ¸³À´Ï´Ù. <li>"Á¾ÇÕÁ¡¼ö"´Â trusted »ç¿ëÀÚÀÇ ÀÀ´äÀ» ±âÁØÀ¸·Î ÇÑ Æò±ÕÀÔ´Ï´Ù. <li>"°³ÀÎ Áß¿äµµ" ÇÊµå´Â ´Ù¸¥ °³¹ßÀÚ¸¦ Æò°¡ÇÒ ¶§ Àû¿ëµÇ´Â °¡ÁßÄ¡ÀÌ¸ç 1ºÎÅÍ 1.5»çÀÌÀÇ °ªÀ» °¡Áı´Ï´Ù. Á¡¼ö°¡ ³ôÀº »ç¿ëÀÚ´Â °¡ÁßÄ¡µµ ´õ ³ô½À´Ï´Ù.</ul><p><i>»ç¿ëÀÚ°£ Æò°¡ ½Ã½ºÅÛ¿¡ Âü¿©ÇÏ°í ½ÍÁö ¾ÊÀ¸½Ã´Ù¸é, (ÀÌ´Â ´Ù¸¥ »ç¶÷¿¡°Ô Æò°¡¹Ş´Â °Í, ´Ù¸¥ »ç¶÷À» Æò°¡ÇÏ´Â °Í ¾çÂÊ ¸ğµÎ¿¡ ¿µÇâÀ» ¹ÌÄ¨´Ï´Ù.) <a href="/account/">»ç¿ëÀÚ µî·Ï Á¤º¸</a> ÆäÀÌÁö¿¡¼­ ¼³Á¤ÇÏ½Ã¸é µË´Ï´Ù. ¸¸¾à ÀÌ Æò°¡ ½Ã½ºÅÛ¿¡¼­ Å»ÅğÇÏ½Ã¸é ´Ù¸¥ »ç¿ëÀÚ¸¦ Æò°¡Çß´ø Á¤º¸µéµµ ¸ğµÎ ¿µ±¸ÀûÀ¸·Î »èÁ¦µÇ°í ¿©·¯ºĞÀÇ °³ÀÎ ÆäÀÌÁö¿¡¼­ '»ç¿ëÀÚ°£ Æò°¡' ¹Ú½ºµµ »ç¶óÁö°Ô µÇ´Ï´Ù. </i></p>
+users	title	»ç¿ëÀÚ Á¤º¸
+users	user_not_exist_text	Àß¸øµÈ »ç¿ëÀÚ
+users	user_not_exist_title	»ç¿ëÀÚ°¡ Á¸ÀçÇÏÁö ¾Ê½À´Ï´Ù.
