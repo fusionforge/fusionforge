@@ -11,14 +11,14 @@ require('site_stats_utils.php');
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>"SourceForge I18n Statistics"));
+$HTML->header(array('title'=>" i18n Statistics"));
 
 //
 // BEGIN PAGE CONTENT CODE
 //
 
 echo html_build_list_table_top(array("Language","Users","%"));
-echo "<h1>SourceForge Languages Distribution</h1>";
+echo "<h1>$GLOBALS[sys_name] Languages Distribution</h1>";
 
 $sql='
 SELECT count(user_name) AS total

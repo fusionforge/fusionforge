@@ -7,30 +7,9 @@
 // $Id$
 
 require "pre.php";    
-site_user_header(array(title=>"Welcome to SourceForge"));
-?>
+site_user_header(array(title=>"Welcome!"));
 
-<P><B>Welcome to SourceForge!</B>
+echo $Language->FIRSTBLURB;
 
-<P>You are now a registered user on SourceForge, the online development
-environment for Open Source projects.
-
-<P>As a registered user, you can participate fully in the activities
-on the site.
-You may now post messages to the project message forums, post bugs
-for software in SourceForge, sign on as a project developer, or even
-start your own project.
-
-<P>You should take some time to read through the
-<A href="/docs/site/"><b>Site Documentation</b></A> so that you may take
-full advantage of SourceForge.
-
-<P>Enjoy the site, and please provide us with feedback on ways
-that we can improve SourceForge.
-
-<P>--the SourceForge staff
-
-<?php
 site_user_footer(array());
-
 ?>

@@ -240,7 +240,7 @@ function theme_header($params) {
 
 */
 
-osdn_print_navbar();
+   osdn_print_navbar();
 
 echo html_blankimage(5,100) . '<br>';
 
@@ -265,7 +265,7 @@ echo html_blankimage(5,100) . '<br>';
 			<td width="141" background="<?php echo $GLOBALS['sys_themeimgroot']; ?>steel3.jpg" bgcolor="#cfd1d4" align="left" valign="top">
 
 	<CENTER>
-	<a href="/"><?php echo html_image($GLOBALS['sys_themeimgroot'] . "sflogo-hammer1.jpg","136","79",array("alt"=>" SourceForge ","border"=>"0")); ?></A>
+	<a href="/"><?php echo html_image($GLOBALS['sys_themeimgroot'] . "sflogo-hammer1.jpg","136","79",array("alt"=>" $GLOBALS[sys_name] ","border"=>"0")); ?></A>
 	</CENTER>
 	<P>
 	<!-- menus -->
@@ -315,7 +315,10 @@ function theme_menu_entry($link, $title) {
 	print "\t".'<font face="arial, helvetica" size="2"><A class="menus" href="'.$link.'">'.$title.'</A> &nbsp;<img src="'.$GLOBALS['sys_themeimgroot'].'point1.png" alt=" " width="7" height="7"></font><br>';
 }
 
-function theme_tab_entry($url='http://localhost/', $icon='', $title='Home', $selected=0) {
+function theme_tab_entry($url='', $icon='', $title='Home', $selected=0) {
+	if ($url == '') {
+		$url = 'http://'.$GLOBALS['sys_default_domain'].'/' ;
+	}
         print '
                 <A ';
         if ($selected){

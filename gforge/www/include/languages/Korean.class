@@ -1,0 +1,507 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+// $Id$
+
+
+/*
+
+	[Soon-Son Kwon <kss@kldp.org>], 2002/02/23
+	*initial release
+
+	If you find any mistake, feel free to send email to me.
+
+        This is the Korean class that overrides BaseLanguage
+        Each Language extends BaseLanguage
+
+	Soon-Son Kwon, 2002/06/09
+	*fine-tuned expressions
+
+	Soon-Son Kwon, 2002/06/10
+	*added more strings including .../www/account/login.php
+
+	Soon-Son Kwon, 2002/06/11
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/12
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/13
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/14
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/16
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/20
+	*translated project registration process
+*/
+
+class Korean extends BaseLanguage {
+
+	function Korean() {
+
+	$this-> BaseLanguage();
+
+	$this->content_encoding='EUC-KR';
+
+	$this->language_id=15;
+
+	$this->language_code='kr';
+
+	//default font which can be overridden on a language-by-language basis
+	$this->default_font='굴림체,verdana,arial,helvetica,sans-serif';
+
+	//navigation menu strings
+	$this->SEARCH='찾기';
+	$this->LOGOUT='로그아웃';
+	$this->LOGIN='로그인';
+	$this->NEW_USER='사용자 등록';
+	$this->NEW_PROJECT='새 프로젝트 등록';
+	$this->ACCOUNT_MAINTENANCE='사용자 등록 정보';
+	$this->DIARY='일기쓰기 및 메모';
+	$this->CHANGE_MY_THEME='테마 바꾸기';
+	$this->MY_PERSONAL_PAGE='개인 페이지';
+	$this->BOOKMARK_PAGE='책갈피';
+	$this->PROJECT_SUMMARY='프로젝트 요약';
+	$this->PROJECT_ADMIN='프로젝트 관리';
+	$this->FOUNDRY_SUMMARY='Foundry 요약';
+	$this->FOUNDRY_ADMIN='Foundry 관리';
+	$this->SOFTWARE_MAP='소프트웨어 맵';
+	$this->NEW_RELEASES='새로운 릴리즈';
+	$this->OTHER_SITE_MIRRORS='미러 사이트';
+	$this->CODE_SNIPPET_LIBRARY='코드 라이브러리';
+	$this->DOCUMENTATION='사이트 문서';
+	$this->DISCUSSION_FORUMS='게시판';
+	$this->PROJECT_HELP_WANTED='멤버 구함';
+	$this->TOP_PROJECTS='상위 프로젝트';
+	$this->COMPILE_FARM='컴파일 장소';
+	$this->CONTACT_US='관리자에게 연락하기';
+
+        // 2000-11-24
+ 	$this->ABOUT_SOURCEFORGE='이곳에 관해';
+ 	$this->ABOUT_FOUNDRIES='Foundry에 관해';
+
+	//tool short names as in HTML_TABS()
+	$this->GROUP_SHORT_MAIN ='메인';
+	$this->GROUP_SHORT_SUMMARY='요약';
+	$this->GROUP_SHORT_HOMEPAGE='홈페이지';
+	$this->GROUP_SHORT_FORUM='게시판';
+	$this->GROUP_SHORT_BUGS='버그';
+	$this->GROUP_SHORT_SUPPORT='지원';
+	$this->GROUP_SHORT_PATCH='패치';
+	$this->GROUP_SHORT_MAIL='메일링리스트';
+	$this->GROUP_SHORT_PM='프로젝트';
+	$this->GROUP_SHORT_DOCMAN='문서';
+	$this->GROUP_SHORT_SURVEY='설문조사';
+	$this->GROUP_SHORT_NEWS='새소식';
+	$this->GROUP_SHORT_CVS='CVS';
+	$this->GROUP_SHORT_FILES='파일';
+        // 2000-11-24
+	$this->GROUP_SHORT_MEMBERLIST='개발자';
+
+	//tool long names for summary page
+	$this->LATEST_FILE_RELEASES='최근 릴리즈된 파일';
+	$this->FILE_PACKAGE='패키지';
+	$this->FILE_VERSION='버전';
+	$this->FILE_REL_DATE='날짜';
+	$this->FILE_MONITOR='모니터링';
+	$this->FILE_NOTES='릴리즈 노트';
+	$this->FILE_DOWNLOAD='내려받기';
+
+	$this->DEVELOPER_INFO='개발자 정보';
+	$this->PROJECT_ADMINS='관리자';
+	$this->DEVELOPERS='개발자';
+	$this->PUBLIC_AREA='열린 공간';
+
+	$this->GROUP_LONG_HOMEPAGE='프로젝트 홈페이지';
+	$this->GROUP_LONG_FORUM='게시판';
+	$this->GROUP_LONG_BUGS='버그 트래킹';
+	$this->GROUP_LONG_SUPPORT='기술지원';
+	$this->GROUP_LONG_PATCH='패치 관리';
+	$this->GROUP_LONG_MAIL='메일링 리스트';
+	$this->GROUP_LONG_PM='하위 프로젝트';
+	$this->GROUP_LONG_DOCMAN='문서 관리';
+	$this->GROUP_LONG_SURVEY='설문조사';
+	$this->GROUP_LONG_NEWS='최신 소식';	
+	$this->GROUP_LONG_CVS='CVS';
+	$this->GROUP_LONG_FTP='익명 FTP 공간';
+	$this->GROUP_LONG_FOUNDRIES='Development Foundries';
+
+
+	//
+	// New strings for home page added 10/1
+	//
+	$this->BREAKING_DOWN_BARRIERS='오픈 소스 개발의 장벽을 넘어';
+	$this->SOURCEFORGE_STATISTICS='이용 실적 통계';
+	$this->TOP_PROJECT_DOWNLOADS='최다 다운로드';
+	$this->HIGHEST_RANKED_USERS='활발한 사용자';
+	$this->MOST_ACTIVE_THIS_WEEK='금주 가장 활발한 곳';
+	$this->SFOS='SourceForge OnSite';
+
+
+//temporary hack until
+//content manager is ready
+
+	$this->HOME_PAGE_ABOUT_BLURB='
+
+이곳은 <B><A href="http://www.gnu.org">자유 소프트웨어</A>, 
+<A href="http://www.opensource.org">오픈 소스 소프트웨어</A> 개발자들을 위한
+무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 게시판,
+하위 프로젝트, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를
+포함한 완전한 웹 기반의 관리 인터페이스를 제공합니다.
+<BR>
+&nbsp;
+<P>
+<B>사이트에 대한 피드백 및 참여방법</B>
+<P>
+이곳을 최대한으로 활용하기 위해서는 
+<A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다.
+사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다.
+물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만, 등록 사용자에 비해
+사용하실 수 있는 범위에 제한이 있습니다.
+<P>
+&nbsp;
+<BR>
+<B>여러분의 프로젝트를 운영하십시오.</B>
+<P>
+<A href="/account/register.php">사용자 등록</A>을 하시고 
+<A HREF="/account/login.php">로그인</A>하시면 
+<A HREF="/register/">여러분의 프로젝트를 등록</A>하실 수 있습니다.
+감사합니다. 즐거운 시간 되십시오.';
+
+    // New strings added on 2002/06/10 by Soon-Son Kwon
+	$this->FOOTER='
+<font face="굴림체, arial, helvetica" size="1" color="#cccccc">
+이 사이트는 Debian-SF에서 운영중입니다. 저작권 등의 자세한 사항은 <a href="/about.php">이곳</a>을 참고하십시오.
+</font>';
+
+	$this->IEWARN='<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>';
+	$this->MACWARN='<H2><FONT COLOR="RED">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</FONT></H2>';
+	$this->ACCOUNTLOGIN='사이트 로그인';
+	$this->COOKIEWARN='여기서부터는 쿠키를 사용합니다.';
+	$this->USESSL='로그인후 SSL 계속 사용';
+	$this->SSLNOTICE='<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 구현되어 있는 웹서버로 진입하시게 되며, 입력하신 비밀번호는 다른 사람이 볼 수 없습니다.</FONT></B> <small style="font-size: x-small"> (이 페이지 자체가 SSL로 보이지 않는 이유가 궁금하시다면 다음 절을 읽어 보십시오. 감사합니다.) </small> <P> <B>인터넷 익스플로러</B>를 사용하고 계실 경우 일시적으로 SSL에 관한 문제가 있을수도 있습니다. 넷스케이프 사용자는 보안을 위해 SSL을 계속 사용하시기 바랍니다. 이 문제에 관해서는 <A HREF="http://www.microsoft.com/">Microsoft의 웹사이트</A>를 참고하십시오.<P>';
+
+    // New strings added on 2002/06/11 by Soon-Son Kwon
+	$this->FIRSTBLURB='
+<P><B>환영합니다!</B>
+<P>여러분은 이제 등록 사용자가 되셨습니다.
+<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 게시판에 글을 올릴 수도 있고, 이곳에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. 
+<P>이곳에서 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.
+<P>부디 좋은 시간이 되시기를 바라며, 저희가 이곳을 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>';
+
+	$this->ANONCVS='<P><B>익명 CVS 사용 방법</B> <P>다음 방법을 사용하시면 익명으로 이 프로젝트의 CVS 저장소로부터 소스코드를 체크아웃하실 수 있습니다. 체크아웃하고자 하는 모듈을 반드시 <I>modulename</I> 부분에 써 주셔야 합니다. <I>anonymous</I>에 대한 비밀번호를 물어보면 그냥 Enter를 누르시면 됩니다.';
+	$this->ANONCVSUP='해당 모듈 디렉토리 안에서 업데이트를 할 때는 -d 옵션이 필요 없습니다.';
+	$this->DEVCVS='<P><B>SSH를 통한 개발자의 CVS 사용 방법</B> <P>프로젝트의 개발자로 지정된 사람만이 이 방법을 사용할 수 있습니다. SSH1이 클라이언트 측에 반드시 설치되어 있어야 합니다. <I>modulename</I>과 <I>developername</I> 부분을 상황에 맞게 바꾸어 주십시오. 비밀번호는 사이트 이용시 지정한 비밀번호와 동일합니다.';
+	$this->CVSHISTORY='저장소 히스토리';
+	$this->BROWSETREE='<HR><B>CVS 트리 살펴보기</B> <P>CVS 트리를 살펴보시면 이 프로젝트의 소스코드가 어떻게 운영되고 있는지 잘 알 수 있습니다. 또한 저장소 내의 모든 파일에 대한 완전한 히스토리도 살펴보실 수 있습니다.';
+	$this->BROWSEIT='CVS 저장소(Repository)';
+
+	$this->ACCOUNTREGISTER_title='사용자 등록';
+	$this->ACCOUNTREGISTER_congrat='<p>사용자 등록을 축하드립니다. <p> 귀하는 이제 곧 메일 주소를 확인하기 위한 확인 메일을 받으시게 됩니다. 메일에 포함되어 있는 URL을 클릭하시면 계정을 사용하실 수 있습니다.';
+	$this->ACCOUNTREGISTER_loginname='로그인 네임 (대문자는 쓰지 마십시오.) *:';
+	$this->ACCOUNTREGISTER_password='비밀번호 (최소 6 글자) *:';
+	$this->ACCOUNTREGISTER_password2='비밀번호 (다시) *:';
+	$this->ACCOUNTREGISTER_realname='이름 *:';
+	$this->ACCOUNTREGISTER_language='언어 선택:';
+	$this->ACCOUNTREGISTER_timezone='시간대:';
+	$this->ACCOUNTREGISTER_emailaddr='이메일 주소 *: <BR><I>이 이메일 주소는 계정이 활성화되기 전에 확인 절차를 거칩니다. 입력하신 주소는 사이트 상에서 노출되지 않습니다. 여러분은 &lt;loginname@users.';
+	$this->ACCOUNTREGISTER_emailaddr2='&gt;라는 계정을 발급받게 되며 이곳으로 보내진 모든 메일은 입력하신 메일 주소로 재전송됩니다.</I>';
+	$this->ACCOUNTREGISTER_siteupdate='사이트 업데이트에 관한 소식 메일로 받기 <I>(트래픽이 거의 없으며 보안 관련 공지사항을 포함하므로 메일을 받아 보시기를 권장합니다.)</I>';
+	$this->ACCOUNTREGISTER_communitymail='커뮤니티 관련 메일 받기. <I>(트래픽 별로 없음.)</I>';
+	$this->ACCOUNTREGISTER_register='등록하기';
+
+	$this->USERS_PEERINFO1='만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오. <p> 이 Peer Rating System은 <A HREF="http://www.advogato.com">Advogato</A>에서 힌트를 얻은 것이며, 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.';
+	$this->USERS_PEERINFO2='Peer Rating 박스는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다. <ul><li>"전체 순위" 필드는 이곳의 모든 사용자와 비교한 순위를 나타냅니다. <li>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다. <li>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다. </ul></i></p>';
+
+    // New strings added on 2002/06/12 by Soon-Son Kwon
+	$this->MY_about_blurb='여러분의 개인 페이지는 여러분에게 할당된 버그나 임무들과 여러분이 참여하고 계신 그룹에 관한 정보를 보여줍니다.';
+	$this->MY_no_bookmarks='현재 저장된 책갈피가 없습니다.';
+	$this->MY_no_monitored_filemodules='모니터하고 있는 파일이 없습니다.<P>만약 여러분이 파일을 모니터하시게 되면 새로운 파일이 릴리즈될 때 이곳의 다운로드 서버로 파일을 받을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>파일을 모니터하시려면 프로젝트의 &quot;요약 페이지&quot;에 가서 파일 섹션의 체크박스를 클릭하시면 됩니다.<BR>&nbsp;';
+	$this->MY_no_monitored_forums='모니터하고 있는 게시판이 없습니다.<P>만약 여러분이 게시판을 모니터하시게 되면 새로운 글이 올라올 때 그 글을 읽을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>게시판을 모니터하시려면 아무 게시판에서나 &quot;게시판 모니터&quot;를 클릭하시면 됩니다.<BR>&nbsp;';
+	$this->MY_no_survey='진행중인 설문조사가 없습니다.';
+	$this->MY_no_open_bugs='내가 제출했거나, 혹은 나에게 할당되어 있는 버그가 없습니다.';
+	$this->MY_no_open_request='내가 제출했거나, 혹은 나에게 할당되어 있는 기술지원 요청 항목이 없습니다.';
+	$this->MY_no_task='나에게 할당되어 있는 임무가 없습니다.';
+	$this->MY_no_projects='아직 어떤 프로젝트에도 소속되어 있지 않습니다.';
+
+	$this->DIARY_add='새로운 항목 작성하기';
+	$this->DIARY_update='기존 항목 고치기';
+	$this->DIARY_public='공개하기';
+	$this->DIARY_mark_public='공개하기를 선택하시면 입력하신 내용이 이곳을 모니터링하고 있는 사용자들에게 메일로 전송됩니다.';
+	$this->DIARY_list_title='일기 및 메모 항목들';
+	$this->DIARY_noentry='저장된 내용이 없습니다.';
+
+	$this->ACCOUNT_welcome='
+		<P>환영합니다!<P>
+		여러분의 계정과 관련된 사항들을 이곳에서 확인하시거나 변경하실 수 있습니다. 개발자 프로필 정보 역시 보실 수 있으며 다른 사람들에 의한 평가 결과 역시 이곳에서 확인하실 수 있습니다.';
+
+	$this->ACCOUNT_rememberme='
+		"Remember me".
+		<I>(로그인하지 않도고 여러분의 <a href="/my/">개인 페이지</a>에 접근할 수 있도록 합니다. 수정할 사항이 있을 때는 로그인을 하셔야 합니다.)</I>';
+
+	$this->MEMBER_SINCE='사용자 등록 일자';
+	$this->USER_ID='일련번호';
+	$this->LOGIN_NAME='로그인네임';
+	$this->PASSWORD='비밀번호';
+	$this->TIMEZONE='시간대';
+	$this->LANGUAGE='언어';
+	$this->REALNAME='이름';
+	$this->EMAILADDR='이메일 주소';
+
+	$this->ACCOUNT_LOSTPW_title='비밀번호를 잊으셨습니까';
+	$this->ACCOUNT_LOSTPW_desc='
+	<P><B>비밀번호를 잊으셨습니까?</B>
+	<P>비밀번호를 분실하는 것은 사용하고 계신 계정과, 운영중인 프로젝트, 그리고 이 사이트 전체적으로 좋지않은 영향을 미칠 수 있습니다. 
+	<P>아래 "Send Lost PW Hash" 를 누르시면 여러분에게 할당되어 있는 이메일 주소로 URL을 알려 드리겠습니다. 그 URL은 여러분의 계정에 할당되어 있는 128-bit 해쉬 정보입니다. 그 URL을 방문하시면 비밀번호를 변경하시고 사이트에 다시 로그인하실 수 있습니다.';
+
+	// New strings added on 2002/06/13 by Soon-Son Kwon
+	$this->CHANGE='바꾸기';
+	$this->EDIT='편집하기';
+	$this->OLD='기존의';
+	$this->NEW='새로운';
+
+	$this->CHANGEEMAIL_desc='<P>이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로부터 확인하는 절차를 밟아야 합니다. <P>제공되는 서비스의 성격상 정확한 이메일 주소를 유지할 필요가 있습니다. 쉘 계정 접속이나 프로젝트 관리 등의 중요한 이슈 사항들에 대해서 항상 사용자 여러분과 연락이 가능하도록 보장하는 것은 중요한 일입니다. <P>아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL이 해당 메일 주소로 배달되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니다.';
+
+	$this->FORUM_CHOOSE='<p>원하는 게시판을 선택하십시오. 글을 읽거나 내용 검색, 혹은 글을 올리실 수도 있습니다.<p>';
+
+	// New strings added on 2002/06/14 by Soon-Son Kwon
+	$this->PROJECTNEEDHELP_blurb='
+<H3>도움이 필요한 프로젝트</H3>
+<P>이곳은 비영리 목적의 자원봉사자들을 위한 공간이며 상업적인 목적으로의 활용은 금지합니다.
+<P>이곳에 올린 글은 2주 동안 유효하고, 만약 필요없게 되면 글쓴이가 그 전에라도 삭제할 수 있습니다. (물론 만료된 메시지를 다시 올릴 수도 있습니다.)
+<P>여러분의 도움을 필요로 하는 프로젝트들이 있는지 둘러 보십시오.
+<P>만약 여러분이 프로젝트 관리자라면 로그인하신 후 여러분이 관리하고 계시는 프로젝트로 가신 후 그곳에서 글을 올리셔야 합니다.
+<P>만약 새로운 Job을 제안하고 싶으시다면 기술지원 관리자 기능을 이용하여 주십시오.<P>';
+
+	// New strings added on 2002/06/16 by Soon-Son Kwon
+	$this->SENDMESSAGE_blurb='스팸을 줄이기 위해 아래 양식을 사용합니다.<p>아래 양식을 모두 제대로 채워 주십시오. 만약 그렇지 않다면 수신인이 제대로 응답하지 못하게 될수도 있습니다.<P><FONT COLOR="RED"><B>만약 어떤 도움을 요청하는 경우라면:</B> 사이트 관련 문서를 읽어 보셨습니까? 여러분의 <B>사용자 ID</B>와 <B>이름</B>을 제대로 명시하셨는지요? 어느 특정 프로젝트에 관한 것이라면 <B>프로젝트 ID</B> (<B>그룹 ID</B>) 및 <B>프로젝트 이름</B>을 명시해 주시기 바랍니다.</FONT>';
+
+	// New strings added on 2002/06/20 by Soon-Son Kwon
+	$this->REGISTER_start='
+<p>
+환영합니다. 여러분은 이제 이곳에서 제공하는 모든 기능들을 
+활용할 수 있는 프로젝트를 새로 생성하고 있습니다. 
+</p>
+		
+<p><B>진행 과정</B>
+		
+<P>
+새로운 프로젝트를 생성하는 것은 어렵지 않습니다만 가능한 한 많은 
+과정을 자동화하기 위해 몇 가지 정보를 필요로 합니다. 전체 과정은 
+총 10분 정도가 소요됩니다.
+
+<P>
+프로젝트 등록 과정 도중 여러분의 계정 사용에 관련된 책임의 한계에 관한
+문서들을 읽어보시게 됩니다. 여러분과 여러분이 개설하실 프로젝트에 중요한 
+내용이니 무시하지 마시고 차근차근 읽어봐 주시기 바랍니다.
+				
+<p>&nbsp;
+<BR><H3 align=center><a href="requirements.php">단계 1: 제공되는 서비스와 필요 조건</a></H3>
+</p>';
+
+	$this->REGISTER_step1='
+<H2>단계 1: 제공되는 서비스와 필요 조건</H2>
+
+<p>
+이곳에서는 여러분의 프로젝트가 원활하게 운영될 수 있도록 가능한 모든
+서비스를 제공하고 있습니다. 이미 운영되고 있는 다른 프로젝트들을 참고하여
+어떤 기능들이 제공되고 있는지 살펴 보시면 좀더 빠르게 이해하실 수 있을 것입니다.
+</p>
+
+<p>
+<b>프로젝트 계정의 사용</b>
+</p>
+
+<p>
+이곳은 개발자 여러분들이 자유 소프트웨어/오픈소스 소프트웨어의
+개발에 다양한 방법으로 참여하고 서로 협력하여 발전시킬 수 있도록
+하기 위하여 제공됩니다.
+</p>
+
+<p>
+<b>창조의 자유</b>
+</p>
+
+<p>
+이 사이트의 여러 자원들을 여러분에제 제공하는 것은 여러분의 프로젝트에
+여러분을 포함한 좀더 많은 사람들이 창조의 자유를 함께 누릴 수 있도록
+하기 위함이며 이 사이트 및 여러분의 프로젝트가 법적인 보호를 받을 수
+있도록 하기 위해서는 몇 가지 제약 사항과 지켜야 할 규칙이 있습니다.
+이는 프로젝트 등록 다음 단계에 상세히 기술되어 있습니다.
+</p>
+
+<p>
+<b>광고</b>
+</p>
+
+<p>
+운영하시게 될 프로젝트의 웹사이트에 불특정 영리 목적의 광고 배너는 
+게재하실 수 없습니다.
+</p>
+
+<p>
+<b>본 사이트로의 링크</b>
+</p>
+
+<p>
+이곳을 통하여 웹사이트를 운영하게 된다면 적절한 이미지 파일을
+사용하여 이곳으로의 링크를 거실 수 있습니다. 링크는 본 사이트의
+메인 페이지가 될수도 있고 여러분이 운영하시는 프로젝트 페이지가
+될 수도 있습니다. 여러분의 프로젝트에 대한 페이지뷰를 계산할 수 있도록
+로고를 사용하여 링크하는 방법에 대한 자세한 정보는 프로젝트 관리자가
+프로젝트 관리시에 쉽게 찾아보실 수 있습니다.
+</p>
+
+<p>
+<b>오픈 소스/프로그래밍의 자유</b>
+</p>
+
+<p>
+여러분은 여러분의 프로젝트에 적용할 저작권을 선택하는 과정을 아울러
+밟게 될 것입니다. 어떤 것은 오픈 소스(Open Source)의 정의에 합치되는
+것들도 있고, 그렇지 않은 것들도 있습니다. 오픈소스의 정의에 합치되는
+저작권을 적용하시게 된다면 여러분의 코드를 저희가 다른 사람들에게 합법적으로 
+공개할 수 있도록 해 주며 만약 여러분이 프로젝트를 더이상 이곳에서
+운영하지 않겠다고 결정하시더라도 저희가 여러분의 코드를 계속해서 제공할 
+수 있도록 해줄 수 있습니다. 그러므로 저작권을 선택하실 때는 꼭 심사숙고해 
+주시기 바랍니다.
+</p>
+
+<p>
+만약 현재 제공되지 않는 다른 저작권을 적용하고자 하신다면 별도로
+관리자이게 연락해 주십시오. 관리자가 해당 사항에 대해 개별적으로 검토한
+후 승인 여부를 결정하게 됩니다.
+</p>
+
+<p>
+이곳은 여러분의 코드에 대한 모든 버전의 영구적인 저장 장소가
+되고자 합니다. 그렇지만 관리자는 다음의 사용 규정에 따라
+여러분의 프로젝트 및 그에 관련된 자료들을 삭제하게 될 수도 있습니다.
+다음 내용을 자세히 읽어 보시기 바랍니다.
+</p>';
+	$this->REGISTER_step2_title='단계 2: 사용에 관한 규정';
+	$this->REGISTER_step2_bottom='
+<P align=center>아래에 있는 링크를 클릭하시는 것은 여러분이 위의 사용 규정을 
+모두 읽으셨음을 의미합니다. "동의함"을 클릭하시면 다음 단계로 
+넘어갑니다. 
+
+<P><H3 align=center><A href="basicinfo.php">[동의함]</A>
+&nbsp;&nbsp;<A href="/">[동의하지 않음]</A></H3>';
+	$this->REGISTER_step3='
+<H2>단계 3: 프로젝트 등록</H2>
+
+<p>
+개설하실 프로젝트에 대한 간략한 설명이 필요합니다. 
+설명에는 프로젝트의 목적과 여러분이 이루고자 하는 목표를 포함시켜 
+주십시오. 
+
+<p>
+본 사이트 관리자가 여러분의 프로젝트를 승인하게 되면 해당 계정은 
+지금 기술하신 프로젝트의 목적에 맞게 사용이 되어야 합니다. 원래의 
+목적이 아닌 다른 목적으로 프로젝트를 활용하시는 일은 삼가해 주십시오. 
+
+<P>
+<B>프로젝트의 목적 및 요약</B>
+<P>
+<FONT COLOR="RED"><B>필수항목:</B> 최대한 자세하고 정확하게 적어 주세요.</FONT>
+<P>';
+	$this->REGISTER_step4_title='단계 4: 프로젝트 이름';
+	$this->REGISTER_step4="
+<P><B>프로젝트 이름</B>
+
+<P>
+개설하시고자 하는 프로젝트에 대한 기본적인 기술 정보가 필요합니다. 
+이 프로젝트는 두 가지 종류의 이름을 가지게 됩니다.
+
+<P>
+\"Full Name\"은 40글자 이내의 자유로운 형식으로 지정하실 수 있으며 
+나중에 바꿀 수도 있습니다. 반면 \"Unix Name\"은 본 사이트의 많은 부분에서 
+사용되기 때문에 이름에 다음과 같은 몇 가지 제약 조건이 있습니다. 
+
+<UL>
+<LI>다른 프로젝트에서 지정한 이름과 겹칠 수 없습니다. 
+<LI>3글자 이상 15글자 미만의 영문 소문자로 구성되어야 합니다. 
+<LI>알파벳, 숫자 혹은 -만으로만 구성되어야 합니다. 
+<LI>유닉스 시스템에서 인식 가능한 사용자 이름이어야 합니다. 
+<LI>예약된 특정 도메인과 일치하면 안됩니다. 
+<LI>이 프로젝트에 대한 \"Unix Name\"은 변경될 수 없습니다. 
+</UL>
+
+<P>Unix Name은 다음과 같이 많은 부분에 사용되기 때문에 매우 중요합니다.";
+	$this->REGISTER_step4_warn='지금부터는 뒤로가기 버튼을 누르지 마십시오.';
+	$this->REGISTER_step5_title='단계 5: 저작권';
+	$this->REGISTER_step5='
+<P><B><I>소프트웨어 등의 직접적인 개발 작업 없이 웹사이트만을
+운영하고자 하실 경우는 "website-only"를 선택하여 주십시오.</I></B>
+
+<P>어떤 저작권을 적용하느냐 하는 것은 매우 중요한 결정입니다.
+되도록 충분한 시간을 들여 다음의 여러 저작권들이 어떤 내용을
+가지고 있는지 미리 잘 살펴보시는 것이 좋습니다.
+
+<P>몇몇 법적인 이유로 인해 한번 저작권을 결정하신 후에는 추후
+다른 저작권을 적용하는 것이 불가능하거나, 혹은 어려울 수도 있습니다.
+이는 경우에 따라 다르며 자세한 사항은 적절한 논의가 필요합니다.
+
+<P><B>저작권</B>
+
+<UL>
+<LI><A href="http://www.opensource.org/licenses/gpl-license.html" target="_blank">GNU General Public License</A>
+<LI><A href="http://www.opensource.org/licenses/lgpl-license.html" target="_blank">GNU Library or \'Lesser\' Public License</A>
+<LI><A href="http://www.opensource.org/licenses/bsd-license.html" target="_blank">BSD License</A>
+<LI><A href="http://www.opensource.org/licenses/mit-license.html" target="_blank">MIT License</A>
+<LI><A href="http://www.opensource.org/licenses/artistic-license.html" target="_blank">Artistic License</A>
+<LI><A href="http://www.mozilla.org/MPL/MPL-1.0.html" target="_blank">Mozilla Public License 1.0</A>
+<LI><A href="http://www.troll.no/qpl" target="_blank">Q Public License</A>
+<LI><A href="http://www.research.ibm.com/jikes/license/license3.htm" target="_blank">IBM Public License 1.0</A>
+<LI><A href="http://cvw.mitre.org/cvw/licenses/source/license.html" target="_blank">Collaborative Virtual Workspace License</A>
+<LI><A href="http://www.risource.org/RPL/RPL-1.0A.shtml" target="_blank">Ricoh Source Code Public License 1.0</A>
+<LI><A href="http://www.python.org/doc/Copyright.html" target="_blank">Python License</A>
+<LI><A href="http://www.opensource.org/licenses/zlib-license.html" target="_blank">zlib/libpng License</A>
+<LI><A href="http://www.sourceforge.net/register/publicdomain.txt" target="_blank">Public Domain</A>
+</UL>
+
+<P><B>이 프로젝트에 적용할 저작권</B>';
+	$this->REGISTER_step6_title='단계 6: 분류';
+	$this->REGISTER_step6='
+<P><B>프로젝트 분류</B>
+
+<P>
+본 사이트 이용자들이 여러분의 프로젝트를 찾을 수 있도록 하기 위해서는
+프로젝트의 목적에 가장 합치하는 분류를 선정하셔야 합니다.
+
+<P>
+여러분의 프로젝트는 (1) 관리자로부터 승인되고 (2) 여러분이 직접 프로젝트
+관리 페이지에서 분류를 설정해 주기 전까지는 소프트웨어 맵에 나타나지
+않습니다.
+
+<P>
+프로젝트가 승인될때 발송되는 이메일을 참고하셔서 여러분의 프로젝트를
+최대한 빠른 시간 안에 분류해 주시기 바랍니다.';
+	$this->REGISTER_step6_finish='등록 완료';
+
+	$this->SNIPPETFRONT='
+<P>
+이 아카이브는 여러분이 자주 사용하는 코드나 스크립트, 함수 등을
+다른 사람들과 공유하기 위한 것입니다.
+<P>
+여러분은 "new snippet" 을 언제라도 생성할 수 있고 해당 snippet에
+대한 버전업도 빠르고 쉽게 수행하실 수 있습니다.
+<P>
+snippet을 올리신 후 해당 snippet에 대한 패키지를 생성하실 수도
+있습니다. 패키지는 여러 개의 snippet을 포함할 수 있습니다.
+<P>
+<H3>Snippet 둘러보기</H3>
+<P>
+snippet들을 살펴 보십시오.
+<BR>';
+
+	}
+}
+
+?>

@@ -12,7 +12,7 @@
 
 // Defines all of the Source Forge hosts, databases, etc.
 // This needs to be loaded first becuase the lines below depend upon it.
-require ('/etc/local.inc');
+require ('/etc/sourceforge/local.inc');
 
 /*
 
@@ -134,6 +134,9 @@ if (user_isloggedin()) {
 
 require ('BaseLanguage.class');
 
+if (!$sys_lang) {
+	$sys_lang="English";
+}
 if (user_isloggedin()) {
 	$user=&user_get_object(user_getid());
 	$res=$user->getData();
@@ -141,21 +144,24 @@ if (user_isloggedin()) {
 	if ($classfile) {
 		include ("languages/$classfile");
 		$classname=db_result($res,0,'classname');
+		if (!$classname) $classname="$sys_lang";
 		$Language=new $classname();
 	} else {
-		include ('languages/English.class');
-	        $Language=new English();
+		include ("languages/${sys_lang}.class");
+	        $Language=new $sys_lang();
 	}
 } else {
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
 	//if we don't support it, just use English as default
-	$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
-	$classfile=db_result($res,0,'filename');
-	if (!$classfile) $classfile="English.class";
+	if ($HTTP_ACCEPT_LANGUAGE) {
+		$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
+		$classfile=db_result($res,0,'filename');
+	}
+	if (!$classfile) $classfile="${sys_lang}.class";
 	include ("languages/$classfile");
 	$classname=db_result($res,0,'classname');
-	if (!$classname) $classname="English";
+	if (!$classname) $classname="$sys_lang";
 	$Language=new $classname();
 }
 

@@ -36,7 +36,7 @@ change is complete. Your new email address on file is
 <?php print $row_user['user_name']; ?>@<?php print $GLOBALS['sys_users_host']; ?> will now
 be forwarded to this account.
 
-<P><A href="/">[Return to SourceForge]</A>
+<P><A href="/">[Return to <?php echo $GLOBALS['sys_name']; ?>]</A>
 
 <?php
 site_user_footer(array());

@@ -30,7 +30,7 @@ echo bug_group_box ('bug_group_id',$group_id);
 
 echo '</TD></TR>';
 
-if (user_ismember($group_id,'A')) {
+if ($project->userIsBugAdmin()) {
 
 	echo '
 		<TR><TD><B>Priority:</B><BR>';

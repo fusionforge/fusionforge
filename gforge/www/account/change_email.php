@@ -8,31 +8,21 @@
 
 require "pre.php";    
 session_require(array('isloggedin'=>1));
-site_user_header(array('title'=>"Change Email Address"));
+site_user_header(array('title'=>"$Language->EMAILADDR $Language->CHANGE"));
 ?>
 
-<P><B>Change Email Address</B>
+<P><B><?php echo "$Language->EMAILADDR $Language->CHANGE"; ?></B>
 
-<P>Changing your email address will require confirmation from your 
-new email address, so that we can ensure we have a good email address
-on file.
-
-<P>We need to maintain an accurate email address for each user due
-to the level of access we grant via this account. If we need to reach a user
-for issues arriving from a shell or project account, it is important that
-we be able to do so.
-
-<P>Submitting the form below will mail a confirmation URL to the new
-email address. Visiting this link will complete the email change.
+<?php echo "$Language->CHANGEEMAIL_desc"; ?>
 
 <FORM action="change_email-confirm.php" method="post">
 <P><INPUT type="hidden" name="form_user" value="<?php print user_getid(); ?>">
-New Email Address:
+<?php echo "$Language->NEW $Language->EMAILADDR"; ?>:
 <INPUT type="text" name="form_newemail">
 <INPUT type="submit" name="Send Confirmation to New Address" value="Send Confirmation to New Address">
 </FORM>
 
-<P><A href="/">[Return to SourceForge]</A>
+<P><A href="/">[Return to <?php echo $GLOBALS["sys_name"]; ?>]</A>
 
 <?php
 site_user_footer(array());
