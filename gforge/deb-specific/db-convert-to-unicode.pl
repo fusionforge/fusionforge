@@ -230,14 +230,6 @@ eval {
     convert_column_to_charset ('massmail_queue', 'subject', $from, $to, -1) ;
     convert_column_to_charset ('massmail_queue', 'message', $from, $to, -1) ;
 
-    convert_column_to_charset ('activity_log_old_old', 'browser', $from, $to, 8) ;
-    convert_column_to_charset ('activity_log_old_old', 'platform', $from, $to, 8) ;
-    convert_column_to_charset ('activity_log_old_old', 'page', $from, $to, -1) ;
-
-    convert_column_to_charset ('activity_log_old', 'browser', $from, $to, 8) ;
-    convert_column_to_charset ('activity_log_old', 'platform', $from, $to, 8) ;
-    convert_column_to_charset ('activity_log_old', 'page', $from, $to, -1) ;
-
     convert_column_to_charset ('activity_log', 'browser', $from, $to, 8) ;
     convert_column_to_charset ('activity_log', 'platform', $from, $to, 8) ;
     convert_column_to_charset ('activity_log', 'page', $from, $to, -1) ;
