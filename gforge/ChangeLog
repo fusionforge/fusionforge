@@ -1,3 +1,8 @@
+2004-07-20  Tom Copeland <tom@infoether.com>
+
+	* www/include/languages/Basque.tab: Applied patch # 
+	841 - Basque language file.
+
 2004-07-20  Christian Bayle <bayle@aist.enst.fr>
 
 	* reorganisation of submenu with intensive use of $HTML->subMenu()
