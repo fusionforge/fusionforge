@@ -79,6 +79,22 @@ Description: Collaborative development tool - mail tools (using Exim)
  This package configures the Exim mail transfer agent to run
  Sourceforge.
 
+Package: sourceforge-mta-postfix
+Architecture: all
+Depends: sourceforge-common, perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), postfix, postfix-ldap
+Replaces: sourceforge (<= 2.6-0+11)
+Provides: sourceforge-mta
+Conflicts: sourceforge-mta
+Description: Collaborative development tool - mail tools (using Postfix)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package configures the Postfix mail transfer agent to run
+ Sourceforge.
+
 Package: sourceforge-shell-ldap
 Architecture: all
 Depends: sourceforge-common, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap, sourceforge-ldap-openldap | sourceforge-ldap
