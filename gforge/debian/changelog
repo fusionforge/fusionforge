@@ -35,8 +35,10 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Roland] Added eval magic in install-ldap.sh to help debugging.
     "export DEBSFDEBUG=1" will disable all the redirections, thus showing
     the STDOUT and STDERR of all commands.
+  * [Roland] Added extra columns (use_ftp, use_tracker, use_frs,
+    use_stats, enable_pserver, enable_anoncvs) in the groups table.
 
- -- Roland Mas <lolando@debian.org>  Mon, 21 Oct 2002 13:47:51 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 25 Oct 2002 19:31:28 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

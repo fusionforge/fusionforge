@@ -603,7 +603,7 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+6" ;
     if (is_lesser $version, $target) {
-	debug "Updating language code." ;
+	debug "Updating language codes." ;
 
 	@reqlist = (
 		"UPDATE supported_languages SET language_code='en' where classname='English'",
@@ -699,6 +699,91 @@ eval {
 	debug "Committing." ;
 	$dbh->commit () ;
     }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+9" ;
+    if (is_lesser $version, $target) {
+	debug "Adding extra fields to the groups table." ;
+
+	@reqlist = (
+		    "ALTER TABLE groups ADD COLUMN use_ftp integer",
+		    "ALTER TABLE groups ALTER COLUMN use_ftp SET DEFAULT 1",
+		    "UPDATE groups SET use_ftp = 1",
+		    "ALTER TABLE groups ADD COLUMN use_tracker integer",
+		    "ALTER TABLE groups ALTER COLUMN use_tracker SET DEFAULT 1",
+		    "UPDATE groups SET use_tracker = 1",
+		    "ALTER TABLE groups ADD COLUMN use_frs integer",
+		    "ALTER TABLE groups ALTER COLUMN use_frs SET DEFAULT 1",
+		    "UPDATE groups SET use_frs = 1",
+		    "ALTER TABLE groups ADD COLUMN use_stats integer",
+		    "ALTER TABLE groups ALTER COLUMN use_stats SET DEFAULT 1",
+		    "UPDATE groups SET use_stats = 1",
+		    "ALTER TABLE groups ADD COLUMN enable_pserver integer",
+		    "ALTER TABLE groups ALTER COLUMN enable_pserver SET DEFAULT 1",
+		    "UPDATE groups SET enable_pserver = 1",
+		    "ALTER TABLE groups ADD COLUMN enable_anoncvs integer",
+		    "ALTER TABLE groups ALTER COLUMN enable_anoncvs SET DEFAULT 1",
+		    "UPDATE groups SET enable_anoncvs = 1",
+		    ) ;
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
+# This is commented out for now, since the operations to do are more complex than just these.
+# I'll fix this, then uncomment.  Please don't touch.
+#   -- Roland
+
+#     $version = &get_db_version ;
+#     $target = "2.6-0+checkpoint+10" ;
+#     if (is_lesser $version, $target) {
+# 	debug "Updating language ids." ;
+
+# 	@reqlist = (
+#           		"UPDATE supported_languages SET language_id=1 where classname='English'",
+#           		"UPDATE supported_languages SET language_id=2 where classname='Japanese'",
+#           		"UPDATE supported_languages SET language_id=3 where classname='Hebrew'",
+#           		"UPDATE supported_languages SET language_id=4 where classname='Spanish'",
+#           		"UPDATE supported_languages SET language_id=5 where classname='Thai'",
+#           		"UPDATE supported_languages SET language_id=6 where classname='German'",
+#           		"UPDATE supported_languages SET language_id=7 where classname='French'",
+#           		"UPDATE supported_languages SET language_id=8 where classname='Italian'",
+#           		"UPDATE supported_languages SET language_id=9 where classname='Norwegian'",
+#           		"UPDATE supported_languages SET language_id=10 where classname='Swedish'",
+#           		"UPDATE supported_languages SET language_id=11 where classname='Chinese'",
+#           		"UPDATE supported_languages SET language_id=12 where classname='Dutch'",
+#           		"UPDATE supported_languages SET language_id=13 where classname='Esperanto'",
+#           		"UPDATE supported_languages SET language_id=14 where classname='Catalan'",
+#           		"UPDATE supported_languages SET language_id=15 where classname='Korean'",
+#           		"UPDATE supported_languages SET language_id=16 where classname='Bulgarian'",
+#           		"UPDATE supported_languages SET language_id=17 where classname='Greek'",
+#           		"UPDATE supported_languages SET language_id=18 where classname='Indonesian'",
+#           		"UPDATE supported_languages SET language_id=19 where classname='Portuguese (Brasillian)'",
+#           		"UPDATE supported_languages SET language_id=20 where classname='Polish'",
+#           		"UPDATE supported_languages SET language_id=21 where classname='Portuguese'",
+#           		"UPDATE supported_languages SET language_id=22 where classname='Russian'",
+# 		    ) ;
+# 	foreach my $s (@reqlist) {
+# 	    $query = $s ;
+# 	    # debug $query ;
+# 	    $sth = $dbh->prepare ($query) ;
+# 	    $sth->execute () ;
+# 	    $sth->finish () ;
+# 	}
+# 	@reqlist = () ;
+# 	&update_db_version ($target) ;
+# 	debug "Committing." ;
+# 	$dbh->commit () ;
+#     }
+
 
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
