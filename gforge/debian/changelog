@@ -1,3 +1,9 @@
+gforge (3.0-6+) unstable; urgency=low
+
+  * Added 20030822.sql.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 23 Aug 2003 11:55:19 +0200
+
 gforge (3.0-6) unstable; urgency=low
 
   * [Roland] Suppressed warning in gforge-common.postinst when the
