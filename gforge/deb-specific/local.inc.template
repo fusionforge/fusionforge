@@ -1,5 +1,5 @@
 <?php
-// SourceForge Universal Site Modifications
+// GForge Universal Site Modifications
 // by David HM Spector <spector@zeitgeist.com>
 //
 // Really Important Safety Tip: --> DO NOT LEAVE ANY WHITE
@@ -13,7 +13,7 @@
 // so white space is meaningful!
 //
 //
-// PART I - SourceForge hostnames
+// PART I - GForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
 // would be prettier but would stop you from distributing your SourceForge
@@ -24,10 +24,12 @@
 // reality an addr_list of machines that is serviced by a round-robin
 // mechanism or something fancy like a local-director.
 //
-// The default SourceForge domain
-// this is used where ever the "naked" form of the SourceForge domain
+// The default GForge domain
+// this is used where ever the "naked" form of the GForge domain
 // might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = "{domain_name}";
+//$sys_fallback_domain = 'gforge2.company.com';
+//$sys_internal_network = '192.168.1.';
  
 // Machine that hosts CVS
 $sys_cvs_host = "{cvs_host}";
@@ -35,7 +37,7 @@ $sys_cvs_host = "{cvs_host}";
 // Machine used for downloading sources/packages
 $sys_download_host = "download.{domain_name}";
  
-// Machine used for downloading sources/packages
+// Machine used for uploading sources/packages
 $sys_upload_host = "upload.{domain_name}";
 
 // Machine(s) that host users' shell accounts
@@ -47,12 +49,12 @@ $sys_users_host = "{users_host}";
  
 // Machine that hosts docs (such as the FAQs and the various software
 // licenses (*BSD, [L]GPL, etc.).  You REALLY want this to be the same
-// machine that the SourceForge code is running on because all of the
+// machine that the GForge code is running on because all of the
 // PHP makes reference to these documents in terms of relative paths that
-// are part of the SourceForge code tree.
+// are part of the GForge code tree.
 $sys_docs_host = "{domain_name}";
  
-// Machine that hosts the SourceForge mailing lists (This could also be
+// Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
 $sys_lists_host = "{lists_host}";
  
@@ -119,37 +121,33 @@ $FTPFILES_DIR = "/var/lib/gforge/download/<GROUP>";
 $homedir_prefix="/var/lib/gforge/chroot/home/users";
 $groupdir_prefix="/var/lib/gforge/chroot/home/groups";
  
-// Where the SourceForge files are placed
+//
+//	File Upload Configuration
+//
+//	Create a directory, which is writable by your webserver, but not
+//	within its document root (does not fall under www/ in the tarball)
+//	Your php.ini file may have to be modified to allow writing outside
+//	the webserver's directory
+//
+$sys_upload_dir='/var/lib/gforge/uploads/';
+
+// Where the GForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
-//             that points to the www directory of the SourceForge
+//             that points to the www directory of the GForge
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
 $sys_urlroot="/usr/share/gforge/www/";
  
-// Cache location -- this is needed by include/cache.php
-// This directory must be world reachable, but writable only by the web-server
-$sf_cache_dir = "/var/cache/gforge";
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name="{system_name}";
  
 // session cookie settings
 //
+//	IMPORTANT - YOU MUST CHANGE "foobar" to a long, random number
+//
 $sys_session_key        = "foobar";
 $sys_session_expire     = 60 * 60 * 24 * 7; 
-$sys_session_cypher     = MCRYPT_TWOFISH;
-// Temporary workaround for libmcrypt if MCRYPT_TWOFISH segfault
-//$sys_session_cypher     = MCRYPT_TripleDES;
-$sys_session_cyphermode = MCRYPT_MODE_ECB;
-
-// username cookie settings
-//
-$sys_username_cookie_key        = "frobaz";
-$sys_username_cookie_urlspace   = ".{domain_name}";
-$sys_username_cookie_expiration = 60 * 60 * 24 * 7;
-$sys_username_cookie_plaintext  = true;
-$sys_username_cookie_cypher     = MCRYPT_BLOWFISH;
-$sys_username_cookie_cyphermode = MCRYPT_MODE_ECB;
 
 // Require that user give unique (not yet existent in db) email upon
 // registration
@@ -157,7 +155,7 @@ $sys_require_unique_email=0;
  
 // Part III - GUI modifications (menu colors, etc.)
 //    See the top of the file include/html.php, this is where the menu colors
-//    and colors used throughout SourceForge are defined.
+//    and colors used throughout GForge are defined.
  
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
@@ -171,16 +169,13 @@ $sys_images_url="http://{domain_name}/";
 $sys_images_secure_url="https://{domain_name}/";
 
 // Part IV - Groups
-//  The SourceForge permission model is based on groups
+//  The GForge permission model is based on groups
 //  certain parts of the site, like news, stats, etc
 //  are based on special group_id numbers
 //  group_id #1 is the super-user group of sitewide admins
 $sys_news_group = {newsadmin_groupid};
 $sys_stats_group = {statsadmin_groupid};
-
-// Part V - Stuff added by Debian-SF
-$sys_show_banner_1 = 0 ;
-$sys_show_banner_2 = 1 ;
+$sys_peer_rating_group = {peerrating_groupid};
 $default_trove_cat = {default_trove_cat};
 
 // End of customizations -- place nothing after the closing PHP tag!
