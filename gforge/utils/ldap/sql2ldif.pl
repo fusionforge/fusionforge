@@ -145,7 +145,7 @@ cn: $listname
 ou: mailingList
 debGforgeListPostAddress: \"|/var/lib/mailman/mail/mailman post $listname\"
 debGforgeListOwnerAddress: \"|/var/lib/mailman/mail/mailman owner $listname\"
-debGforgeListRequestAddress: \"|/var/lib/mailman/mail/mailman mailcmd $listname\"
+debGforgeListRequestAddress: \"|/var/lib/mailman/mail/mailman request $listname\"
 debGforgeListAdminAddress: \"|/var/lib/mailman/mail/mailman admin $listname\"
 debGforgeListBouncesAddress: \"|/var/lib/mailman/mail/mailman bounces $listname\"
 debGforgeListConfirmAddress: \"|/var/lib/mailman/mail/mailman confirm $listname\"

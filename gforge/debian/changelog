@@ -1,11 +1,12 @@
-gforge (3.0-7+4) unstable; urgency=low
+gforge (3.0-7+5) unstable; urgency=low
 
   * [Roland] Fixed redirecttion URL for Mailman.
   * [Roland] Made the create-vhosts cronjob silent.
   * [Roland] Removed duplicate colon from PHP script, it belongs in the
     *.tab files (closes: #212213).
+  * [Roland] Fixed -request alias for Mailman (closes: #213160).
 
- -- Roland Mas <lolando@debian.org>  Tue, 23 Sep 2003 12:38:01 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Sep 2003 14:53:46 +0200
 
 gforge (3.0-7) unstable; urgency=low
 
