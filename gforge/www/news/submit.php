@@ -22,10 +22,11 @@ if (session_loggedin()) {
 	if (!user_ismember($group_id,'A')) {
 		exit_permission_denied($Language->getText('news_submit','cannot'));
 	}
-	
+/*	
 	if (user_ismember($sys_news_group,'A')) {
 		exit_permission_denied($Language->getText('news_submit','cannotadmin'));
 	}
+*/
 
 
 	if ($post_changes) {
