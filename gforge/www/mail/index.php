@@ -1,71 +1,91 @@
 <?php
 /**
-  *
-  * SourceForge Mailing Lists Facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Mailing Lists Facility
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2003 (c) Guillaume Smet
+ *
+ * @version $Id$
+ */
 
 require_once('pre.php');
 require_once('../mail/mail_utils.php');
 
+require_once('common/include/escapingUtils.php');
+require_once('common/mail/MailingList.class');
+require_once('common/mail/MailingListFactory.class');
+
+$group_id = getIntFromGet('group_id');
+
 if ($group_id) {
-
-	mail_header(array('title'=>'Mailing Lists for '.group_getname($group_id),'pagename'=>'mail','sectionvals'=>array(group_getname($group_id))));
-
-	if (session_loggedin() && user_ismember($group_id)) {
-		$public_flag='0,1';
-	} else {
-		$public_flag='1';
+	$Group =& group_get_object($group_id);
+	if (!$Group || !is_object($Group) || $Group->isError()) {
+		exit_no_group();
 	}
+	
+	$mlFactory = new MailingListFactory($Group);
+   if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
+       exit_error($Language->getText('general', 'error'), $mlFactory->getErrorMessage());
+   }
 
-	$sql="SELECT * FROM mail_group_list WHERE group_id='$group_id' AND is_public IN ($public_flag)";
+	mail_header(array(
+		'title' => $Language->getText('mail', 'mailinglists_for', array($Group->getPublicName())),
+		'pagename' => 'mail',
+		'sectionvals' => array($Group->getPublicName())
+	));
 
-	$result = db_query ($sql);
 
-	$rows = db_numrows($result);
+	$mlArray =& $mlFactory->getMailingLists();
 
-	if (!$result || $rows < 1) {
-		echo '
-			<h1>No Lists found for '.group_getname($group_id).'</h1>';
-		echo '
-			<p>Project administrators use the admin link to request mailing lists.</p>';
-		$HTML->footer(array());
+	if ($mlFactory->isError()) {
+		echo '<h1>'.$Language->getText('general', 'error').' '.$Language->getText('mail', 'unable_to_get_lists', array($Group->getPublicName())) .'</h1>';
+		echo $mlFactory->getErrorMessage();
+		mail_footer(array());
 		exit;
 	}
-
-	echo $Language->getText('mail', 'provided_by');
-	echo "<p>Choose a list to browse, search, and post messages.</p>\n";
-
-	/*
-		Put the result set (list of mailing lists for this group) into a column with folders
-	*/
-
-	echo "<table width=\"100%\" border=\"0\">\n".
-		"<tr><td valign=\"top\">\n";
-
-	for ($j = 0; $j < $rows; $j++) {
-		echo '<a href="http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.
-			db_result($result, $j, 'list_name').'/">' .
-			html_image("ic/cfolder15.png","15","13",array("border"=>"0")) . ' &nbsp; '.
-			db_result($result, $j, 'list_name').' Archives</a>';
-		echo ' (go to <a href="http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.
-			db_result($result, $j, 'list_name').'">Subscribe/Unsubscribe/Preferences</a>)<br />';
-		echo '&nbsp;'.  db_result($result, $j, 'description') . '<p />';
+	
+	$mlCount = count($mlArray);
+	if($mlCount == 0) {
+		echo '<h1>'.$Language->getText('mail', 'no_list_found', array($Group->getPublicName())) .'</h1>';
+		echo '<p>'.$Language->getText('mail', 'help_to_request').'</p>';
+		mail_footer(array());
+		exit;
 	}
-	echo '</td></tr></table>';
+	
+	echo $Language->getText('mail', 'provided_by');
+	echo $Language->getText('mail', 'choose_a_list');
+	
+	$tableHeaders = array(
+		$Language->getText('mail_common', 'mailing_list'),
+		''
+	);
+	echo $HTML->listTableTop($tableHeaders);
+
+	for ($j = 0; $j < $mlCount; $j++) {
+		$currentList =& $mlArray[$j];
+		if ($currentList->isError()) {
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) .'><td colspan="2">';
+			echo $currentList->getErrorMessage();
+			echo '</td></tr>';
+		} else {
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td width="60%">'.
+				'<a href="'.$currentList->getArchivesUrl().'">' .
+				html_image('ic/cfolder15.png', '15', '13', array('border' => '0')).' &nbsp; '.
+				$Language->getText('mail', 'archives', array($currentList->getName())).'</a><br />'.
+				'&nbsp;'.  htmlspecialchars($currentList->getDescription()). '</td>'.
+				'<td width="40%" align="center"><a href="'.$currentList->getExternalInfoUrl().'">'.$Language->getText('mail', 'external_administration').'</a>'.
+				'</td></tr>';
+		}
+	}
+
+	echo $HTML->listTableBottom();
+	
+	mail_footer(array());
 
 } else {
-	mail_header(array('title'=>'Choose a Group First','pagename'=>'mail'));
-	require_once('../mail/mail_nav.php');
-	echo '
-		<h1>Error - choose a group first</h1>';
+
+	exit_no_group();
+
 }
-mail_footer(array());
 
 ?>
