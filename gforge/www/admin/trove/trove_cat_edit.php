@@ -61,7 +61,7 @@ if ($GLOBALS["submit"]) {
 } 
 
 if ($GLOBALS["delete"]) {
-	if ($form_trove_cat_id=$default_trove_cat){
+	if ($form_trove_cat_id==$default_trove_cat){
 		exit_error( 'Error In Trove Operation','Can t delete trove category define as default in local.inc');
 	}
 	$res = db_query("
