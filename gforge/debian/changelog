@@ -15,8 +15,9 @@ gforge (3pre9-0+2) experimental; urgency=low
   * [Roland] Adapted to run with Mailman 2.1.
   * [Christian] Adjusted sequence in language table
   * [Christian] Adjusted stateid in doc_data
+  * [Christian] Repeared local customization 
 
- -- Christian Bayle <bayle@debian.org>  Sat,  1 Mar 2003 01:16:34 +0100
+ -- Christian Bayle <bayle@debian.org>  Mon,  3 Mar 2003 22:55:59 +0100
 
 gforge (3pre8-0+) experimental; urgency=low
 

@@ -74,6 +74,11 @@ class BaseLanguage {
 		if (file_exists ($ftname)) {
 			$this->loadLanguageFile($ftname) ;
 		}
+		//Customization by theme in /etc/gforge/languages-local/<theme_name>/<Language>.tab
+		$fltname = '/etc/gforge/languages-local/'.$sys_theme.'/'.$lang.'.tab' ;
+		if (file_exists ($fltname)) {
+			$this->loadLanguageFile($fltname) ;
+		}
 		$this->lang = $lang ;
 	}
 
