@@ -1,23 +1,17 @@
 sourceforge (2.6-0+2) unstable; urgency=low
 
-  * Patch for db init
-  * Repared bad db init 
-
- -- Christian Bayle <bayle@aist.enst.fr>  Sat, 17 Nov 2001 01:29:25 +0100
-
-sourceforge (2.6-0+1) unstable; urgency=low
-
   * Started working on 2.6.  Don't expect it to work just yet.
   * Split the DB installation/deinstallation process out of
-    postinst/postrm/prerm and into an install-db.sh script.
+    postinst/postrm/prerm and into an install-db.sh script.  Made it a bit
+    less verbose.
   * Split the Apache installation/deinstallation process out of
     postinst/prerm and into an install-db.sh script.
   * Cleaned the exim configuration a bit.
   * Cleaned the DNS configuration a bit.
   * Cleaned the install-*.sh scripts a lot.  They now all look the same,
     are more readable (well, they are more readable to me), and work
-    approximately the same way.  Added a install-skel.sh template for
-    future such scripts.
+    approximately the same way.  Added a template for future such scripts
+    (install-skel.sh).
   * [Christian] Put utils/include.pl utils/sql2ldif.pl
     utils/underworld-dummy/ssh_dump.pl of 2.5 as 2.6 scripts, sql2ldif
     will probably have to be re-seen
@@ -27,8 +21,30 @@ sourceforge (2.6-0+1) unstable; urgency=low
   * deb-specific/db-upgrade26.pl: Rewrote the SQL parsing state machine so
     that it 1. works better, 2. is more readable, 3. knows about comments,
     4. knows about COPY [...] FROM stdin.
+  * [From 2.5 branch] Fixed install-cvs.sh so that it no longer inserts
+    too many lines in the inetd.conf file.
+  * [From 2.5 branch] Added sf_ldap_modify_if_exists() to
+    www/include/ldap.php.  Works the same as sf_ldap_modify, but returns a
+    non-error if the LDAP entry does not exist.  Patched
+    sf_ldap_user_set_attribute to use this new function, so that even
+    users with no account (or no account yet) can change their passwords
+    and personal info.
+  * Adapted the patch to display the site admin menu, from using the now
+    deprecated function user_ismember() to using the new (2.6) methods
+    involving Group and Permission objects.
+  * [From 2.5 branch] Improved personal page: site admin(s) now see(s) a
+    list of pending projects, and news admin(s) see(s) a list of pending
+    news bytes.
+  * Replaced calls to /etc/init.d/<script> <action> in maintainer scripts
+    with invoke-rc.d <script> <action>, as per policy.
+  * Slightly rewrote the template handling in postinst script, to allow
+    parsing for files not in /etc/sourceforge (not needed yet, but it
+    might come in handy).
+  * Removed an unneeded dependency on bash (in install-chroot.sh).
+  * [Christian] Patch for db init.
+  * [Christian] Repared bad db init.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Mon, 12 Nov 2001 00:30:27 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Sat, 17 Nov 2001 01:29:25 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 
