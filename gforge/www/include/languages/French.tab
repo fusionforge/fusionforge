@@ -555,7 +555,7 @@ developer_rate	ratings_recorded_body	Vous pouvez modifier votre classement en re
 developer_rate	title	Classement de l'utilisateur
 developer_rate	turned_off_body	Vious avez choisi de ne pas participer aux classements
 developer_rate	turned_off_title	Classements désactivés
-docman	admin	Admistration
+docman	admin	Administration
 docman	description	Description
 docman	error_invalid_file_attack	Tentative d'atteindre un fichier invalide $1
 docman	error_no_docs	Ce projet n'a pas de documentation visible
@@ -973,7 +973,7 @@ my	no_bookmarks	Vous n'avez pas encore de signets
 my	no_monitored_filemodules	Vous ne surveillez pas de fichiers
 my	no_monitored_filemodules_details	<p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail, qui contiendra un lien vers le nouveau fichier sur le serveur de téléchargement.</p><p>Vous pouvez surveiller des fichier en visitant la page de « Survol » d'un projet en en cliquant sur l'icône « enveloppe » dans la section fichiers.</p>
 my	no_monitored_forums	Vous ne surveillez pas de forums
-my	no_monitored_forums_details	<p>Si vous surveillez des forums, les nouveaux articles pûbliés vous seront envoyés dans un e-mail, qui contiendra un lien vers l'article.</p><p>Vous pouvez surveiller des forums en cliquant sur le lien « Surveiller le forum » présent sur le forum.</p>
+my	no_monitored_forums_details	<p>Si vous surveillez des forums, les nouveaux articles publiés vous seront envoyés dans un e-mail, qui contiendra un lien vers l'article.</p><p>Vous pouvez surveiller des forums en cliquant sur le lien « Surveiller le forum » présent sur le forum.</p>
 my	no_open_tasks	Aucune tâche ne vous est confiée.
 my	no_projects	Vous ne faites partie d'aucun projet.
 my	no_tracker_items_assigned	Aucun objet de traceur ne vous est confié.

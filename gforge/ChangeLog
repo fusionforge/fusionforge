@@ -1,5 +1,7 @@
 2003-10-21  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/languages/French.tab: Couple of minor fixes.
+
 	* www/docman/include/doc_utils.php: "All languages" in language
 	selection dropdown menu is now * rather than 0.
 
