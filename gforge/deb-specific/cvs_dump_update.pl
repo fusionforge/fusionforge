@@ -120,12 +120,23 @@ while ($ln = pop(@group_array)) {
 		if ($enable_pserver){
 			# turn on pserver writers
 			my $userlistcr=join("\n",split(",", $userlist));
-			open WRITERS,">$cvs_dir/CVSROOT/writers";
-			print WRITERS $userlistcr;
+			open (WRITERS,">$cvs_dir/CVSROOT/writers");
+			print WRITERS "$userlistcr\n";
 			close WRITERS;
+			if($verbose) { print("Enable pserver for $group_name:\t$userlist in $cvs_dir/CVSROOT/writers \n"); }
+			open (CONFIG,">$cvs_dir/CVSROOT/config");
+			print CONFIG "SystemAuth=yes\n";
+			close CONFIG;
 		} else {
 			# turn off pserver writers
-			system("echo \"\" > $cvs_dir/CVSROOT/writers");
+			open (WRITERS,">$cvs_dir/CVSROOT/writers");
+			print WRITERS "\n";
+			close WRITERS;
+			#system("echo \"\" > $cvs_dir/CVSROOT/writers");
+			if($verbose) { print("Disable pserver for $group_name\n"); }
+			open (CONFIG,">$cvs_dir/CVSROOT/config");
+			print CONFIG "SystemAuth=no\n";
+			close CONFIG;
 		}
 
 		if ($enable_anoncvs){
