@@ -84,7 +84,7 @@ class DocsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getSections($groupId) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
 		
-		return $this->searchQuery->getSections($groupId, $userIsGroupMember);
+		return DocsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
 

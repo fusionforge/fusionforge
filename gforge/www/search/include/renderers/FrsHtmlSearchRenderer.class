@@ -80,7 +80,7 @@ class FrsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getSections($groupId) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
 	
-		return FilesSearchQuery::getSections($groupId, $userIsGroupMember);	
+		return FrsSearchQuery::getSections($groupId, $userIsGroupMember);	
 	}
 }
 

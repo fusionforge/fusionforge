@@ -513,6 +513,16 @@ admin_vhost	virtual_host	Virtual Host:
 admin_vhost	virtual_host_administration	Virtual Host Administration
 admin_vhost	virtual_host_entry_updated	Virtual Host entry updated.
 admin_vhost	virtual_host_name	Virtual Host Name
+advanced_search	and_search	with all words
+advanced_search	all	all
+advanced_search	or_search	with one word
+advanced_search	none	none
+advanced_search	search_button	Search
+advanced_search	search_in	Search in
+advanced_search	select	Select
+advanced_search	headline	$1 Search Result
+advanced_search	no_matches_found	No matches found
+advanced_search	no_matches_found_no_under_section	No matches found - No sections available (check your permissions)
 artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
 artifact_category	required_fields	ArtifactCategory: name and assignee are Required
 calendar	april	April
@@ -2150,6 +2160,7 @@ search	tasks_end_date	End Date
 search	tasks_created_by	Created By
 search	tasks_completed	Completed
 search	title	Search
+searchbox	advanced_search	Advanced search
 searchbox	docs	This project's documents
 searchbox	forum	This forum
 searchbox	forums	This project's forums

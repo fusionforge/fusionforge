@@ -81,7 +81,7 @@ class ForumsHtmlSearchRenderer extends HtmlGroupSearchRenderer {
 	function getSections($groupId) {
 		$userIsGroupMember = $this->isGroupMember($groupId);
 		
-		return $this->searchQuery->getSections($groupId, $userIsGroupMember);
+		return ForumsSearchQuery::getSections($groupId, $userIsGroupMember);
 	}
 }
 

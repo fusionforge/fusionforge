@@ -27,7 +27,7 @@ class Layout extends Error {
 	 * @var		string	$imgroot
 	 */
 	var $imgroot = '/themes/gforge/images/';
-	var $COLOR_CONTENT_BACK= 'ffffff';
+	var $COLOR_CONTENT_BACK= '#ffffff';
 	var $COLOR_LTBACK1= '#eeeeef';
 	var $COLOR_LTBACK2= '#fafafa';
 	var $COLOR_SELECTED_TAB= '#e0e0e0';
@@ -830,16 +830,156 @@ if (isset($params['group']) && $params['group']) {
 			print '<input type="hidden" value="'.$value.'" name="'.$name.'" />';
 		}
 		print '</td><td>';
-		print '
-		<input type="text" size="12" name="words" value="'.$words.'" />';
+		print '<input type="text" size="12" name="words" value="'.$words.'" />';
 
 		print '</td><td>&nbsp;</td><td>';
 		print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'" />';
+		print '</td>';
 
-		print '
-		</td></tr></table>';
+		if (isset($group_id)) {
+			print '
+					<td width="10">&nbsp;</td>
+					<td><b><a style="color: #FFFFFF" href="/search/advanced_search.php?group_id='.$group_id.'"> '.$Language->getText('searchbox', 'advanced_search').'</a></b></td>';
+		}
+		print '</tr></table>';
 		print '</form>';
 
+	}
+	
+	function advancedSearchBox($sectionsArray, $group_id, $words, $isExact) {
+		global $Language;
+		 // display the searchmask
+		print '
+		<form name="advancedsearch" action="'.$PHP_SELF.'" method="post">
+		<input type="hidden" name="search" value="1"/>
+		<input type="hidden" name="group_id" value="'.$group_id.'"/>
+		<div align="center"><br />
+			<table border="0">
+				<tr>
+					<td colspan ="2">
+						<input type="text" size="60" name="words" value="'.stripslashes(htmlspecialchars($words)).'" />
+						<input type="submit" name="submitbutton" value="'.$Language->getText('advanced_search', 'search_button').'" />
+					</td>
+				</tr>
+				<tr>
+					<td valign="top">
+						<input type="radio" name="mode" value="'.SEARCH__MODE_AND.'" '.($isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'and_search').'
+					</td>
+					<td>
+						<input type="radio" name="mode" value="'.SEARCH__MODE_OR.'" '.(!$isExact ? 'checked="checked"' : '').' />'.$Language->getText('advanced_search', 'or_search').'
+					</td>
+				</tr>
+			</table><br /></div>'
+		.$this->createUnderSections($sectionsArray).'
+		</form>';
+
+
+		//create javascript methods for select none/all
+		print '
+		<script type="text/javascript">
+			<!-- method for disable/enable checkboxes
+			function setCheckBoxes(parent, checked) {
+
+
+				for (var i = 0; i < document.advancedsearch.elements.length; i++)
+					if (document.advancedsearch.elements[i].type == "checkbox") 
+							if (document.advancedsearch.elements[i].name.substr(0, parent.length) == parent)
+								document.advancedsearch.elements[i].checked = checked;
+				}
+			//-->
+		</script>
+		';
+
+	}
+	
+	function createUnderSections($sectionsArray) {
+		global $Language;
+		$countLines = 0;
+		foreach ($sectionsArray as $section) {
+			if(is_array($section)) {
+				$countLines += (3 + count ($section));
+			} else {
+				//2 lines one for section name and one for checkbox
+				$countLines += 3;
+			}
+		}
+		$breakLimit = round($countLines/3);
+		$break = $breakLimit;
+		$countLines = 0;
+		$return = '
+			<table width="100%" border="0" cellspacing="0" cellpadding="2" style="background-color:'. $this->COLOR_HTMLBOX_TITLE .'">
+				<tr>
+					<td>
+						<table width="100%" cellspacing="0" border="0">
+							<tr style="font-weight: bold; background-color:'. $this->COLOR_HTMLBOX_TITLE .'">
+								<td colspan="2">'.$Language->getText('advanced_search', 'search_in').':</td>
+								<td align="right">'.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\'\', false)">'.$Language->getText('advanced_search', 'none').'</a></td>
+							</tr>
+							<tr height="20" style="background-color:'. $this->COLOR_CONTENT_BACK .'">
+								<td colspan="3">&nbsp;</td>
+							</tr>
+							<tr align="center" valign="top" style="background-color:'. $this->COLOR_CONTENT_BACK .'">
+								<td>';
+		foreach($sectionsArray as $key => $section) {
+			$oldcountlines = $countLines;
+			if (is_array($section)) {
+				$countLines += (3 + count ($section));
+			} else {
+				$countLines += 3;
+			}
+				
+			if ($countLines >= $break) {
+				//if the next block is so large that shifting it to the next column hits the breakpoint better
+				//the second part of statement (behind &&) proofs, that no 4th column is added
+				if ((($countLines - $break) >= ($break - $countLines)) && ((($break + $breakLimit)/$breakLimit) <= 3)) {
+					$return .= '</td><td>';
+					$break += $breakLimit;
+				}
+			}
+		
+			$return .= '<table width="90%" border="0" cellpadding="1" cellspacing="0" style="background-color:'. $this->COLOR_HTMLBOX_TITLE.'">
+							<tr><td><table width="100%" border="0" cellspacing="0" cellpadding="3">
+							<tr style="background-color:'. $this->COLOR_HTMLBOX_TITLE .'; font-weight: bold">
+								<td cellspacing="0">
+									<a href="#'.$key.'">'.$Language->getText('group', $key).'</a>'
+							.'	</td>
+								<td align="right">'
+								.$Language->getText('advanced_search', 'select').' <a href="javascript:setCheckBoxes(\''.$key.'\', true)">'.$Language->getText('advanced_search', 'all').'</a> / <a href="javascript:setCheckBoxes(\''.$key.'\', false)">'.$Language->getText('advanced_search', 'none').'</a>
+								</td>
+							</tr>
+							<tr style="background-color:'. $this->COLOR_CONTENT_BACK.'">
+								<td colspan="2">';
+								
+			if (!is_array($section)) {
+				$return .= '		<input type="checkbox" name="'.urlencode($key).'"';
+				if (isset($GLOBALS[urlencode($key)]))
+					$return .= ' checked="checked" ';
+				$return .= ' /></input>'.$Language->getText('group', $key).'<br />';
+			}
+			else
+				foreach($section as $underkey => $undersection) {
+					$return .= '	<input type="checkbox" name="'.urlencode($key.$underkey).'"';
+					if (isset($GLOBALS[urlencode($key.$underkey)]))
+						$return .= ' checked ';
+					$return .= '></input>'.$undersection.'<br />';				
+					
+				}
+				
+			$return .=		'	</td>
+							</tr>
+						</table></td></tr></table><br />';
+						
+			if ($countLines >= $break) {
+				if (($countLines - $break) < ($break - $countLines)) {
+					$return .= '</td><td width="33%">';
+					$break += $breakLimit;
+				}
+			}
+		}
+		
+		return $return.'		</td>
+							</tr>
+						</table></td></tr></table>';
 	}
 
 	/**
