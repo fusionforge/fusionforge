@@ -9,6 +9,13 @@
 %if %{?sitename:0}%{!?sitename:1}
 	%define sitename MyForge
 %endif
+%if %{?adminemail:0}%{!?adminemail:1}
+	%if "%hostname" == "localhost"
+		%define adminemail root@localhost.localdomain
+	%else
+		%define adminemail root@%hostname
+	%endif
+%endif
 %{!?release:%define release 1}
 
 %if %{?dist:0}%{!?dist:1}
@@ -61,7 +68,7 @@ web-based administration.
 %define randstr() %1=`perl -e 'for ($i = 0, $bit = "!", $key = ""; $i < %2; $i++) {while ($bit !~ /^[0-9A-Za-z]$/) { $bit = chr(rand(90) + 32); } $key .= $bit; $bit = "!"; } print "$key";'`
 
 # Change password for admin user
-%define changepassword() echo "UPDATE users SET user_pw='%1' WHERE user_name='admin'" | su -l postgres -s /bin/sh -c "psql %dbname" >/dev/null 2>&1
+%define changepassword() echo "UPDATE users SET user_pw='%1', email='%{adminemail}' WHERE user_name='admin'" | su -l postgres -s /bin/sh -c "psql %dbname" >/dev/null 2>&1
 
 # Start the postgresql service if needed
 %define startpostgresql() service %postgresqlservice status | grep '(pid' >/dev/null 2>&1 || service %postgresqlservice start
