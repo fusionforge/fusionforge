@@ -35,8 +35,8 @@ require_once('common/frs/FRSFile.class');
 $arr=explode('/',$REQUEST_URI);
 $file_id=$arr[3];
 
-$res=db_query("SELECT frs_file.filename,frs_package.is_public,frs_package.package_id
-	frs_file.file_id,groups.unix_group_name,groups.group_id
+$res=db_query("SELECT frs_file.filename,frs_package.is_public,frs_package.package_id,
+	frs_file.file_id,groups.unix_group_name,groups.group_id,frs_release.release_id
 	FROM frs_package,frs_release,frs_file,groups
 	WHERE frs_release.release_id=frs_file.release_id
 	AND groups.group_id=frs_package.group_id
@@ -83,14 +83,14 @@ if(!$is_public) {
 	}
 }
 
-$file=$sys_upload_dir.'/'.$Group->getUnixName.'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$file->getName();
-if (file_exists($file)) {
+$filepath=$sys_upload_dir.'/'.$Group->getUnixName().'/'.$Package->getFileName().'/'.$Release->getFileName().'/'.$File->getName();
+if (file_exists($filepath)) {
 	Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
 	Header("Content-type: application/binary");
-	$length = filesize($file);
+	$length = filesize($filepath);
 	Header("Content-length: $length");
 
-	readfile($file);
+	readfile($filepath);
 
 	if (session_loggedin()) {
 		$s =& session_get_user();

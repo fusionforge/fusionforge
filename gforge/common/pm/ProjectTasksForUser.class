@@ -25,11 +25,12 @@
 require_once('common/pm/ProjectGroup.class');
 require_once('common/pm/ProjectTask.class');
 require_once('common/include/Group.class');
+require_once('common/include/Error.class');
 
 /**
 *	A class that manages the project tasks for a specific user
 */
-class ProjectTasksForUser {
+class ProjectTasksForUser extends Error {
 
 	/**
 	* The User to whom the tasks belong
@@ -52,7 +53,7 @@ class ProjectTasksForUser {
 	* @param the SQL query to use to fetch the tasks
 	*	@return	an array of ProjectTask objects
 	*/
-	function getTasksFromSQL ($sql) {
+	function &getTasksFromSQL ($sql) {
 		$tasks = array();
 		$result=db_query($sql);
 		$rows=db_numrows($result);
@@ -70,7 +71,7 @@ class ProjectTasksForUser {
 	*
 	* @return an array of ProjectTask objects
 	*/
-	function getTasksByGroupProjectName () {
+	function &getTasksByGroupProjectName () {
 		$sql = "SELECT ptv.*,g.group_name,pgl.project_name 
 			FROM project_task_vw ptv,
 				project_assigned_to pat,
@@ -85,7 +86,7 @@ class ProjectTasksForUser {
 		return $this->getTasksFromSQL($sql);
 	}
 	
-	function getTasksForToday() {
+	function &getTasksForToday() {
 		$now = getdate();
 		$today = mktime (18, 00, 00, $now['mon'], $now['mday'], $now['year']);
 		

@@ -954,7 +954,7 @@ class Artifact extends Error {
 			$result=db_query($sql);
 
 			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError('Error - update failed!');
+				$this->setError('Error - update failed!'.db_error());
 				echo db_error();
 				db_rollback();
 				return false;

@@ -181,9 +181,10 @@ class FRSFile extends Error {
 	 *  @return boolean	success.
 	 */
 	function fetchData($file_id) {
-		$res=db_query("SELECT * FROM frs_file_vw
+		$sql="SELECT * FROM frs_file_vw
 			WHERE file_id='$file_id'
-			AND release_id='". $this->FRSRelease->getID() ."'");
+			AND release_id='". $this->FRSRelease->getID() ."'";
+		$res=db_query($sql);
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('FRSFile::fetchData()  Invalid file_id');
 			return false;

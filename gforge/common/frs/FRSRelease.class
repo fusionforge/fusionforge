@@ -152,9 +152,10 @@ class FRSRelease extends Error {
 	 *  @return	boolean	success.
 	 */
 	function fetchData($release_id) {
-		$res=db_query("SELECT * FROM frs_release
+		$sql="SELECT * FROM frs_release
 			WHERE release_id='$release_id'
-			AND package_id='". $this->FRSPackage->getID() ."'");
+			AND package_id='". $this->FRSPackage->getID() ."'";
+		$res=db_query($sql);
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError('FRSRelease::fetchData()  Invalid release_id');
 			return false;
