@@ -72,3 +72,8 @@ CREATE VIEW frs_dlstats_group_vw AS
 		AND frs_release.release_id=frs_file.release_id
 		AND frs_file.file_id=fdfa.file_id
 	GROUP BY frs_package.group_id, fdfa.month, fdfa.day;
+
+---
+--- Add Latin as a supported language
+---
+INSERT INTO supported_languages (name, filename, classname, language_code) values ('Latin', 'Latin.class', 'Latin', 'la');

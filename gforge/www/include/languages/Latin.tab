@@ -1,0 +1,64 @@
+#/**
+#  * Latin L10n catalog.
+#  * 
+#  * Copyright 2003 (c) GForge Development Team
+#  * http://gforge.org
+#  *
+#  * Can't be any more useless than Esperanto, can it? :)
+#  *
+#  * @version	$Id$
+#  *
+#  */
+# 
+# I'm surprised to find Latin has an ISO 639 Language code!
+conf	language_code	la
+conf	language_id	24
+forum	title	Fora
+forum_forum	date	Dies
+forum_forum_thread	section	Fora
+forum_message	section	Fora
+forum_utils	latest	Res Novae
+forum_utils	date	Dies
+frs	file_monitor	Observa
+frs	files_notes	Notae
+frs	file_rel_date	Dies
+group	long_bugs	Errata
+group	long_homepage	Domus Coronae
+group	long_forum	Fora Publica
+group	long_mail	Indeces Tabellariorum
+group	long_news	Res Novae
+group	public_area	Area Publica
+group	short_bugs	Errata
+group	short_forum	Fora
+group	short_homepage	Pagina Principalis
+group	short_mail	Indeces
+group	short_news	Fama
+group	short_pm	Pensa
+group	short_summary	Summarium
+menu	home	Pagina Principalis
+menu	login	Recognoscere
+menu	login_ssl	Recognoscere cum SSL
+menu	mypage	Mea&nbsp;Pagina
+menu	my_personal_page	Mea Pagina Privata
+my	tasks	Mea Pensa
+calendar	january	Ianuarius
+calendar	february	Februarius
+calendar	march	Martius
+calendar	april	Aprilis
+calendar	may	Maius
+calendar	june	Iunius
+calendar	july	Iulius
+calendar	august	Augustus
+calendar	september	September
+calendar	october	October
+calendar	november	Novembris
+calendar	december	December
+calendar	sunday	Solis dies
+calendar	monday	Lunae dies
+calendar	tuesday	Martis dies
+calendar	wednesday	Mercurii dies
+calendar	thursday	Jovis dies
+calendar	friday	Veneris dies
+calendar	saturday	Saturni dies
+calendar	todaysdate	Hodie
+calendar	fordate	Dies:

@@ -1,3 +1,9 @@
+2003-01-12  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/include/languages/Latin.tab: new file.
+
+	* db/20030112.sql: add Latin as a supported language.
+
 2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/account/index.php: Display new language immediately.
