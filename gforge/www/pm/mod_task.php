@@ -150,7 +150,24 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 		?>
 		</td>
 	</tr>
+	<input type="hidden" name="duration" value="<?php echo $pt->getDuration(); ?>">
+	<input type="hidden" name="parent_id" value="<?php echo $pt->getParentID(); ?>">
+<!--
+//will add duration and parent selection boxes
+	<tr>
+		<td>
+		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><br />
+		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>" />
+		</td>
 
+		<td>
+		<strong><?php echo $Language->getText('pm','status') ?>:</strong><br />
+		<?php
+//		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
+		?>
+		</td>
+	</tr>
+-->
 	<tr>
 		<td colspan="2">
 			<?php echo $pt->showDependentTasks(); ?>

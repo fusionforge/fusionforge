@@ -81,7 +81,7 @@ switch ($func) {
 			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 
-			if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$dependent_on)) {
+			if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$duration,$parent_id)) {
 				exit_error('ERROR',$pt->getErrorMessage());
 			} else {
 				if (count($add_artifact_id) > 0) {
@@ -113,7 +113,7 @@ switch ($func) {
 			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
 			if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
-				$status_id,$category_id,$percent_complete,$assigned_to,$dependent_on,$new_group_project_id)) {
+				$status_id,$category_id,$percent_complete,$assigned_to,$pt->convertDependentOn($dependent_on),$new_group_project_id,$duration,$parent_id)) {
 				exit_error('ERROR','update():: '.$pt->getErrorMessage());
 			} else {
 				if (count($rem_artifact_id) > 0) {
@@ -155,11 +155,13 @@ switch ($func) {
 					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 					//conflicts with the "no change" ID! Sorry for messy use of 100.1
 					$_assigned_to=(($assigned_to != '100.1') ? $pt->getAssignedTo() : array('100'));
-					$_dependent_on=$pt->getDependentOn();
+					$_dependent_on=array_keys($pt->getDependentOn());
 					$_new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
+					$_duration=$pt->getDuration();
+					$_parent_id=$pt->getParentID();
 
 					if (!$pt->update($_summary,$_details,$_priority,$_hours,$_start_date,$_end_date,
-							$_status_id,$_category_id,$_percent_complete,$_assigned_to,$_dependent_on,$_new_group_project_id)) {
+							$_status_id,$_category_id,$_percent_complete,$_assigned_to,$_dependent_on,$_new_group_project_id,$_duration,$parent_id)) {
 						$was_error=true;
 						$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
 

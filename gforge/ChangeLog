@@ -1,3 +1,12 @@
+2004-11-08  Tim Perdue <tim@gforge.org>
+
+	* enhancing task mgr with more fields and properties. Much more will be 
+	rolled in the future.
+
+2004-11-07  Tim Perdue <tim@gforge.org>
+
+	* gforge 4.0.1 released
+
 2004-11-04  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* fixed bug when updating forum due to RBAC refactoring

@@ -133,7 +133,8 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	$hook_params['passwd'] = $passwd ;
 	plugin_hook ("session_before_login", $hook_params) ;
 
-	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;}
+	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;
+}
 
 function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
 	global $feedback,$userstatus,$Language;
@@ -407,8 +408,7 @@ function session_getdata($user_id) {
 		themes t
 		WHERE u.language=sl.language_id 
 		AND u.theme_id=t.theme_id
-		AND u.user_id='$user_id'
-	");
+		AND u.user_id='$user_id'");
 	return $res;
 }
 
@@ -457,6 +457,20 @@ function session_set() {
 			session_logout();
 		}
 	}
+}
+
+//TODO - this should be generalized and used for pre.php, squal_pre.php, 
+//SOAP, forum_gateway.php, tracker_gateway.php, etc to 
+//setup languages
+function session_continue($sessionKey) {
+    global $session_ser, $Language, $sys_strftimefmt, $sys_datefmt;
+    $session_ser = $sessionKey;
+    session_set();
+    $Language=new BaseLanguage();
+    $Language->loadLanguage("English"); // TODO use the user's default language
+    setlocale (LC_TIME, $Language->getText('system','locale'));
+    $sys_strftimefmt = $Language->getText('system','strftimefmt');
+    $sys_datefmt = $Language->getText('system','datefmt');
 }
 
 /**

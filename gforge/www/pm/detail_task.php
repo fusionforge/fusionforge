@@ -78,8 +78,8 @@ pm_header(array('title'=>$Language->getText('pm_detailtask','title'),'pagename'=
 			to pass into multiple select box
 		*/
 
-		$result2=db_query("SELECT users.user_name AS User_Name FROM users,project_assigned_to ".
-			"WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id='$project_task_id'");
+		$result2=db_query("SELECT users.user_name AS User_Name FROM users,project_assigned_to 
+			WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id='$project_task_id'");
 		ShowResultSet($result2,$Language->getText('pm_detailtask','assigned_to'), false, false);
 		?>
 		</td>
@@ -89,8 +89,9 @@ pm_header(array('title'=>$Language->getText('pm_detailtask','title'),'pagename'=
 			Get the list of ids this is dependent on and convert to array
 			to pass into multiple select box
 		*/
-		$result2=db_query("SELECT project_task.summary FROM project_dependencies,project_task ".
-			"WHERE is_dependent_on_task_id=project_task.project_task_id AND project_dependencies.project_task_id='$project_task_id'");
+		$result2=db_query("SELECT project_task.summary FROM project_dependencies,project_task 
+			WHERE is_dependent_on_task_id=project_task.project_task_id 
+			AND project_dependencies.project_task_id='$project_task_id'");
 		ShowResultSet($result2,$Language->getText('pm_detailtask','dependend_on_task'), false, false);
 		?>
 		</td>

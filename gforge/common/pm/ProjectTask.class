@@ -60,6 +60,14 @@ function &projecttask_get_object($project_task_id,$data=false) {
 		return $PROJECTTASK_OBJ["_".$project_task_id."_"];
 }
 
+/*
+	Types of task dependencies
+*/
+define('PM_LINK_DEFAULT','SS');
+define('PM_LINK_START_START','SS');
+define('PM_LINK_START_FINISH','SF');
+define('PM_LINK_FINISH_START','FS');
+define('PM_LINK_FINISH_FINISH','FF');
 
 class ProjectTask extends Error {
 
@@ -132,10 +140,12 @@ class ProjectTask extends Error {
 	 *	@param	int	The percentage of completion in integer format of this task.
 	 *	@param	array	An array of user_id's that are assigned this task.
 	 *	@param	array	An array of project_task_id's that this task depends on.
+	 *	@param	int	The duration of the task in days.
+	 *	@param	int	The id of the parent task, if any.
 	 *	@return	boolean success.
 	 */
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
-			$category_id,$percent_complete,&$assigned_arr,&$depend_arr) {
+			$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$duration=0,$parent_id=0) {
 		$v = new Validator();
 		$v->check($summary, "summary");
 		$v->check($details, "details");
@@ -173,9 +183,9 @@ class ProjectTask extends Error {
 				return false;
 			} else {
 				$sql="INSERT INTO project_task (project_task_id,group_project_id,created_by,summary,
-					details,start_date,end_date,status_id,category_id,priority,percent_complete,hours) 
+					details,start_date,end_date,status_id,category_id,priority,percent_complete,hours,duration,parent_id) 
 					VALUES ('$project_task_id','". $this->ProjectGroup->getID() ."', '".user_getid()."', '". htmlspecialchars($summary) ."',
-					'". htmlspecialchars($details) ."','$start_date','$end_date','1','$category_id','$priority','$percent_complete','$hours')";
+					'". htmlspecialchars($details) ."','$start_date','$end_date','1','$category_id','$priority','$percent_complete','$hours','$duration','$parent_id')";
 
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
@@ -240,6 +250,24 @@ class ProjectTask extends Error {
 	 */
 	function getSubmittedRealName() {
 		return $this->data_array['realname'];
+	}
+	
+	/**
+	 *	getDuration - the duration of the task.
+	 *
+	 *	@return	int	The number of days of duration.
+	 */
+	function getDuration() {
+		return $this->data_array['duration'];
+	}
+	
+	/**
+	 *	getParentID - the task_id of the parent task, if any.
+	 *
+	 *	@return	string	The real name person who created this task.
+	 */
+	function getParentID() {
+		return $this->data_array['parent_id'];
 	}
 	
 	/**
@@ -555,12 +583,13 @@ class ProjectTask extends Error {
 	 * @param	array	The array of project_task_id's.
 	 * @returns	boolean	success.
 	 */
-	function setDependentOn(&$arr) {
+	function setDependentOn(&$arr_) {
 //
 //	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!! 
 //
+		$arr =& array_keys($arr_);
 		//get existing dependencies to diff against
-		$arr2 =& $this->getDependentOn();
+		$arr2 =& array_keys($this->getDependentOn());
 		$this->dependon =& $arr2;
 
 		if (count($arr) || count($arr2)) {
@@ -582,8 +611,12 @@ class ProjectTask extends Error {
 				if (!$this->checkCircular($add_arr[$i],$this->getID())) {
 					return false;
 				}
-				db_query("INSERT INTO project_dependencies (project_task_id,is_dependent_on_task_id) 
-					VALUES ('".$this->getID()."','". $add_arr[$i] ."')");
+				$lnk = $arr_[$add_arr[$i]];
+				if (!$lnk) {
+					$lnk=PM_LINK_DEFAULT;
+				}
+				db_query("INSERT INTO project_dependencies (project_task_id,is_dependent_on_task_id,link_type) 
+					VALUES ('".$this->getID()."','". $add_arr[$i] ."','$lnk')");
 				if (db_error()) {
 					$this->setError('setDependentOn()-2:: '.db_error());
 					return false;
@@ -596,22 +629,46 @@ class ProjectTask extends Error {
 	}
 
 	/**
+	 *	convertDependentOn - converts a regular array of dependencies, such 
+	 *	as from a multiple-select-box to an associative array with default 
+	 *	link types. Should be called from web code as part of the create/update calls.
+	 *  Here we are converting an array like array(1,5,9,77) to array(1=>SS,5=>SF,9=>FS,77=>SS)
+	 */
+	function &convertDependentOn($arr) {
+		$deps =& $this->getDependentOn();
+		for ($i=0; $i<count($arr); $i++) {
+			if ($deps[$arr[$i]]) {
+				//use existing link_type if it exists
+				$new[$arr[$i]]=$deps[$arr[$i]];
+			} else {
+				//else create with default link type
+				$new[$arr[$i]]=PM_LINK_DEFAULT;
+			}	
+		}
+		return $new;
+	}
+
+	/**
 	 *	getDependentOn - get an array of project_task_id's that you are dependent on.
 	 *
-	 *	@return	array	The array of project_task_id's.
+	 *	@return	array	The array of project_task_id's in this format: 
+	 *  array($id=>$link_type,id2=>link_type2).
 	 */
 	function &getDependentOn() {
 		if (!$this->getID()) {
 			return array();
 		}
 		if (!$this->dependon) {
-			$this->dependon =& util_result_column_to_array(db_query("SELECT is_dependent_on_task_id 
-				FROM project_dependencies 
-				WHERE project_task_id='".$this->getID()."'"));
+			$res=db_query("SELECT is_dependent_on_task_id,link_type
+				FROM project_dependencies
+				WHERE project_task_id='".$this->getID()."'");
+			for ($i=0; $i<db_numrows($res); $i++) {
+				$this->dependon[db_result($res,$i,'is_dependent_on_task_id')] = db_result($res,$i,'link_type');
+			}
 		}
 		/* fix bug 319: if dependentlist is emtpy, set it to 100 (none) */
 		if (!$this->dependon) {
-			$this->dependon[]=100;
+			$this->dependon[100]=PM_LINK_DEFAULT;
 		}
 		return $this->dependon;
 	}
@@ -688,10 +745,13 @@ class ProjectTask extends Error {
 	 *	@param	array	An array of user_id's that are assigned this task.
 	 *	@param	array	An array of project_task_id's that this task depends on.
 	 *	@param	int	The GroupProjectID of a new subproject that you want to move this Task to.
+	 *	@param	int	The duration of the task in days.
+	 *	@param	int	The id of the parent task, if any.
 	 *	@return	boolean success.
 	 */
 	function update($summary,$details,$priority,$hours,$start_date,$end_date,
-		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$new_group_project_id) {
+		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr,
+		$new_group_project_id,$duration=0,$parent_id=0) {
 		$v = new Validator();
 		$v->check($summary, "summary");
 		$v->check($priority, "priority");
@@ -781,7 +841,7 @@ class ProjectTask extends Error {
 					$this->addHistory('assigned_to_id',$old_assigned[$tmp]);
 				}
 		}
-		$old_array = &$this->getDependentOn();			
+		$old_array =& array_keys($this->getDependentOn());			
 		$diff_array=array_diff($old_array,$depend_arr);
 		if (count($diff_array)>0) { 
 			for ($tmp=0;$tmp<count($old_array);$tmp++) {
@@ -805,7 +865,9 @@ class ProjectTask extends Error {
 				status_id='$status_id',
 				percent_complete='$percent_complete',
 				category_id='$category_id',
-				group_project_id='$new_group_project_id'
+				group_project_id='$new_group_project_id',
+				duration='$duration',
+				parent_id='$parent_id'
 				WHERE group_project_id='$group_project_id'
 				AND project_task_id='".$this->getID()."'";
 

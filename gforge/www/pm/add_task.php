@@ -118,7 +118,21 @@ echo notepad_func();
 		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
 		</td>
 	</tr>
+	<input type="hidden" name="duration" value="0">
+	<input type="hidden" name="parent_id" value="0">
+<!--
+will add duration and parent_id choices at some point
+	<tr>
+		<td>
+		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><?php echo utils_requiredField(); ?><br />
+		<input type="text" name="hours" size="5" />
+		</td>
 
+		<td>
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
+		</td>
+	</tr>
+-->
 </table>
 </form>
 <?php
