@@ -30,11 +30,12 @@ if (!$ptf || !is_object($ptf)) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
 
-$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id,$_view);
+$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id);
 if ($ptf->isError()) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
-$pt_arr =& $ptf->getTasks(true);
+
+$pt_arr =& $ptf->getTasks();
 if ($ptf->isError()) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
@@ -43,7 +44,6 @@ $_assigned_to=$ptf->assigned_to;
 $_status=$ptf->status;
 $_order=$ptf->order;
 $_category_id=$ptf->category;
-$_view=$ptf->view_type;
 
 pm_header(array('title'=>$Language->getText('pm_browsetask','title'),'pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>$g->getPublicName()));
 
@@ -88,17 +88,6 @@ $order_col_arr[]='percent_complete';
 $order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order',$_order,false);
 
 /*
-	Creating View array
-*/
-$view_arr=array();
-$view_arr[]=$Language->getText('pm','view_type_summary');
-$view_arr[]=$Language->getText('pm','view_type_detail');
-
-$order_col_arr=array();
-$view_col_arr[]='summary';
-$view_col_arr[]='detail';
-$view_box=html_build_select_box_from_arrays ($view_col_arr,$view_arr,'_view',$_view,false);
-/*
 	Show the new pop-up boxes to select assigned to and/or status
 */
 echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'" method="post">
@@ -109,7 +98,6 @@ echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id
 		<td><font size="-1">'.$Language->getText('pm','status').'<br />'. $pg->statusBox('_status',$_status,true, $Language->getText('pm','status_any')) .'</font></td>
 		<td><font size="-1">'.$Language->getText('pm','category').'<br />'. $cat_box .'</font></td>
 		<td><font size="-1">'.$Language->getText('pm_modtask','sort_on').'<br />'. $order_box .'</font></td>
-		<td><font size="-1">'.$Language->getText('pm','view_type').'<br />'. $view_box .'</font></td>
 		<td><font size="-1"><input type="submit" name="submit" value="'.$Language->getText('pm_browsetask','browse').'" /></font></td>
 	</tr></table></form><p />';
 
@@ -146,42 +134,17 @@ if ($rows < 1) {
 
 	for ($i=0; $i < $rows; $i++) {
 		$url = "/pm/task.php?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
-		
-		if (($_view == "summary")||($_view == "")) //show the summary view
-		{
-			echo '
-				<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
-				'<td>'.
-				($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
-				$pt_arr[$i]->getID() .'"> ':'').
-				$pt_arr[$i]->getID() .'</td>'.
-				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
-				'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
-				'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
-					date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
-				'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
-		}
-		else if ($_view == "detail") //show the Detail view
-		{
-			echo '
-				<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
-				'<td>'.
-				($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
-				$pt_arr[$i]->getID() .'"> ':'').
-				$pt_arr[$i]->getID() .'</td>'.
-				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
-				'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
-				'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
-					date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
-				'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
-				echo '
-				<tr>'.
-					'<td>&nbsp;</td>'.
-					'<td colspan="4">';
-				echo nl2br( $pt_arr[$i]->getDetails() );
-				$pt_arr[$i]->showMessages();
-				echo '</td></tr>';
-		}
+		echo '
+			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+			'<td>'.
+			($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
+			$pt_arr[$i]->getID() .'"> ':'').
+			$pt_arr[$i]->getID() .'</td>'.
+			'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
+			'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
+			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
+				date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
+			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
 
 	}
 
