@@ -380,10 +380,10 @@ frs_package	error_already_exists	That filename already exists in this project sp
 frs_package	error_cannot_move	File cannot be moved to the permanent location
 frs_package	error_set_monitor	You Can Only Monitor If You Are Logged In
 frs_release	error_min_name_length	FRSPackage Name Must Be At Least 3 Characters
-frs_release	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
-frs_release	error_invalid_file	FRSFile Appears to be invalid
-frs_release	error_already_exists	That filename already exists in this project space 
-frs_release	error_cannot_move	File cannot be moved to the permanent location
+frs_release	error_name_format	FRS Release Name Should Be in This Example Format: gforge-3.0.tar.bz2
+frs_release	error_invalid_file	FRS Release  Appears to be invalid
+frs_release	error_already_exists	That release already exists in this project space 
+frs_release	error_cannot_move	Release cannot be moved to the permanent location
 frs_release	error_set_monitor	You Can Only Monitor If You Are Logged In
 frs_release	email_title	[$1 Release] $2
 frs_release	email_text	\n\nProject "$1" ('$2') has  \nreleased the new version of package '$3' \nYou can download it by following this link:\n $4\n\nYou receive this email because you\nrequested to be notified when new versions of this package\nwere released. If you don't wish to be notified in the\nfuture, please login to $5 and click this link: \n $6
