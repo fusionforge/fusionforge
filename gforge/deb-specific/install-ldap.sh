@@ -43,12 +43,13 @@ setup_vars() {
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
 
-show_vars () {
-    echo "gforge_base_dn = '$gforge_base_dn'"
+show_vars() {
+    echo "slapd_base_dn      = '$slapd_base_dn'"
+    echo "gforge_base_dn     = '$gforge_base_dn'"
+    echo "slapd_admin_dn     = '$slapd_admin_dn'"
     echo "slapd_admin_passwd = '$slapd_admin_passwd'"
-    echo "cryptedpasswd = '$cryptedpasswd'"
-    echo "slapd_base_dn = '$slapd_base_dn'"
-    echo "tmpfile_pattern = '$tmpfile_pattern'"
+    echo "cryptedpasswd      = '$cryptedpasswd'"
+    echo "tmpfile_pattern    = '$tmpfile_pattern'"
 }
 
 check_base_dn() {
@@ -197,7 +198,8 @@ configure_slapd(){
 access to attribute=userPassword
 	by dn=\"$robot_dn\" write/" /etc/ldap/slapd.conf.gforge-new
 
-	perl -pi -e "s/access to \*/# Next lines added by GForge install
+	# odd looking regex makes sure it doesnt match the comment 'access to *'
+	perl -pi -e "s/(?<!')access to \*(?!')/# Next lines added by GForge install
 access to dn=\".*,ou=People,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
