@@ -1,135 +1,207 @@
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/calculate_user_metric.php mezzanine_patched_gforge-3.0pre9/cronjobs/calculate_user_metric.php
---- gforge-3.0pre9/cronjobs/calculate_user_metric.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/calculate_user_metric.php	Wed Jan 22 17:22:14 2003
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/calculate_user_metric.php mezzanine_patched_gforge-3.0/cronjobs/calculate_user_metric.php
+--- gforge-3.0/cronjobs/calculate_user_metric.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/calculate_user_metric.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/check_stale_tracker_items.php mezzanine_patched_gforge-3.0pre9/cronjobs/check_stale_tracker_items.php
---- gforge-3.0pre9/cronjobs/check_stale_tracker_items.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/check_stale_tracker_items.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/check_stale_tracker_items.php mezzanine_patched_gforge-3.0/cronjobs/check_stale_tracker_items.php
+--- gforge-3.0/cronjobs/check_stale_tracker_items.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/check_stale_tracker_items.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
   * check_stale_tracker_items.php - Check for stale tracker items.
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/db_stats_agg.php mezzanine_patched_gforge-3.0pre9/cronjobs/db_stats_agg.php
---- gforge-3.0pre9/cronjobs/db_stats_agg.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/db_stats_agg.php	Wed Jan 22 17:22:14 2003
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/cvs-cron/cvs.php mezzanine_patched_gforge-3.0/cronjobs/cvs-cron/cvs.php
+--- gforge-3.0/cronjobs/cvs-cron/cvs.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/cvs-cron/cvs.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
+ <?php
+ 
+ require ('squal_pre.php');
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/cvs-cron/ssh_create.php mezzanine_patched_gforge-3.0/cronjobs/cvs-cron/ssh_create.php
+--- gforge-3.0/cronjobs/cvs-cron/ssh_create.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/cvs-cron/ssh_create.php	Thu Aug 14 20:47:23 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#!/usr/bin/php -f
+ <?php
+ 
+ require_once('squal_pre.php');
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/cvs-cron/usergroup.php mezzanine_patched_gforge-3.0/cronjobs/cvs-cron/usergroup.php
+--- gforge-3.0/cronjobs/cvs-cron/usergroup.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/cvs-cron/usergroup.php	Thu Aug 14 20:47:23 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -q -f
++#!/usr/bin/php -q -f
+ <?php
+ 
+ require_once('squal_pre.php');
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/db_project_sums.php mezzanine_patched_gforge-3.0/cronjobs/db_project_sums.php
+--- gforge-3.0/cronjobs/db_project_sums.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/db_project_sums.php	Thu Aug 14 20:47:23 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#!/usr/bin/php -f
+ <?php
+ /**
+   *
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/db_stats_agg.php mezzanine_patched_gforge-3.0/cronjobs/db_stats_agg.php
+--- gforge-3.0/cronjobs/db_stats_agg.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/db_stats_agg.php	Thu Aug 14 20:47:23 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#!/usr/bin/php -f
  <?php
  /**
   * GForge
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/db_trove_maint.php mezzanine_patched_gforge-3.0pre9/cronjobs/db_trove_maint.php
---- gforge-3.0pre9/cronjobs/db_trove_maint.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/db_trove_maint.php	Wed Jan 22 17:22:14 2003
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/db_trove_maint.php mezzanine_patched_gforge-3.0/cronjobs/db_trove_maint.php
+--- gforge-3.0/cronjobs/db_trove_maint.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/db_trove_maint.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/massmail.php mezzanine_patched_gforge-3.0pre9/cronjobs/massmail.php
---- gforge-3.0pre9/cronjobs/massmail.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/massmail.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/mail/mailaliases.php mezzanine_patched_gforge-3.0/cronjobs/mail/mailaliases.php
+--- gforge-3.0/cronjobs/mail/mailaliases.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/mail/mailaliases.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
+ <?php
+ 
+ require ('squal_pre.php');
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/mail/mailing_lists_create.php mezzanine_patched_gforge-3.0/cronjobs/mail/mailing_lists_create.php
+--- gforge-3.0/cronjobs/mail/mailing_lists_create.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/mail/mailing_lists_create.php	Thu Aug 14 20:47:23 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#!/usr/bin/php -f
+ <?php
+ 
+ //
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/massmail.php mezzanine_patched_gforge-3.0/cronjobs/massmail.php
+--- gforge-3.0/cronjobs/massmail.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/massmail.php	Thu Aug 14 20:47:23 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/project_cleanup.php mezzanine_patched_gforge-3.0pre9/cronjobs/project_cleanup.php
---- gforge-3.0pre9/cronjobs/project_cleanup.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/project_cleanup.php	Wed Jan 22 17:22:14 2003
+  * Massmail backend cron script
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/project_cleanup.php mezzanine_patched_gforge-3.0/cronjobs/project_cleanup.php
+--- gforge-3.0/cronjobs/project_cleanup.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/project_cleanup.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/project_weekly_metric-backfill.php mezzanine_patched_gforge-3.0pre9/cronjobs/project_weekly_metric-backfill.php
---- gforge-3.0pre9/cronjobs/project_weekly_metric-backfill.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/project_weekly_metric-backfill.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/project_weekly_metric-backfill.php mezzanine_patched_gforge-3.0/cronjobs/project_weekly_metric-backfill.php
+--- gforge-3.0/cronjobs/project_weekly_metric-backfill.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/project_weekly_metric-backfill.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/project_weekly_metric.php mezzanine_patched_gforge-3.0pre9/cronjobs/project_weekly_metric.php
---- gforge-3.0pre9/cronjobs/project_weekly_metric.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/project_weekly_metric.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/project_weekly_metric.php mezzanine_patched_gforge-3.0/cronjobs/project_weekly_metric.php
+--- gforge-3.0/cronjobs/project_weekly_metric.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/project_weekly_metric.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/rating_stats.php mezzanine_patched_gforge-3.0pre9/cronjobs/rating_stats.php
---- gforge-3.0pre9/cronjobs/rating_stats.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/rating_stats.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/rating_stats.php mezzanine_patched_gforge-3.0/cronjobs/rating_stats.php
+--- gforge-3.0/cronjobs/rating_stats.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/rating_stats.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/rotate_activity.php mezzanine_patched_gforge-3.0pre9/cronjobs/rotate_activity.php
---- gforge-3.0pre9/cronjobs/rotate_activity.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/rotate_activity.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/rotate_activity.php mezzanine_patched_gforge-3.0/cronjobs/rotate_activity.php
+--- gforge-3.0/cronjobs/rotate_activity.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/rotate_activity.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/site_stats.php mezzanine_patched_gforge-3.0pre9/cronjobs/site_stats.php
---- gforge-3.0pre9/cronjobs/site_stats.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/site_stats.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/site_stats.php mezzanine_patched_gforge-3.0/cronjobs/site_stats.php
+--- gforge-3.0/cronjobs/site_stats.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/site_stats.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/stats_projects-backfill.php mezzanine_patched_gforge-3.0pre9/cronjobs/stats_projects-backfill.php
---- gforge-3.0pre9/cronjobs/stats_projects-backfill.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/stats_projects-backfill.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/stats_projects-backfill.php mezzanine_patched_gforge-3.0/cronjobs/stats_projects-backfill.php
+--- gforge-3.0/cronjobs/stats_projects-backfill.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/stats_projects-backfill.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
  <?php
  /**
-   *
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/cronjobs/vacuum.php mezzanine_patched_gforge-3.0pre9/cronjobs/vacuum.php
---- gforge-3.0pre9/cronjobs/vacuum.php	Wed Jan 15 19:16:44 2003
-+++ mezzanine_patched_gforge-3.0pre9/cronjobs/vacuum.php	Wed Jan 22 17:22:14 2003
+  * Copyright 1999-2001 (c) VA Linux Systems
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/cronjobs/vacuum.php mezzanine_patched_gforge-3.0/cronjobs/vacuum.php
+--- gforge-3.0/cronjobs/vacuum.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/cronjobs/vacuum.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
++#!/usr/bin/php -f
+ <?php
+ /**
+  * nightly VACUUM job
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/db/20021213_doc_data-migrate.php mezzanine_patched_gforge-3.0/db/20021213_doc_data-migrate.php
+--- gforge-3.0/db/20021213_doc_data-migrate.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/db/20021213_doc_data-migrate.php	Thu Aug 14 20:47:23 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/php4 -f
++#!/usr/bin/php -f
  <?php
  
  /**
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/db/20021213_doc_data-migrate.php mezzanine_patched_gforge-3.0pre9/db/20021213_doc_data-migrate.php
---- gforge-3.0pre9/db/20021213_doc_data-migrate.php	Wed Jan 15 19:16:45 2003
-+++ mezzanine_patched_gforge-3.0pre9/db/20021213_doc_data-migrate.php	Wed Jan 22 17:22:14 2003
-@@ -1,4 +1,4 @@
--#! /usr/bin/php4 -f
-+#! /usr/bin/php -f
- <?php
- 
- /**
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php mezzanine_patched_gforge-3.0pre9/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php
---- gforge-3.0pre9/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php	Wed Jan 15 19:16:45 2003
-+++ mezzanine_patched_gforge-3.0pre9/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php	Wed Jan 22 17:22:20 2003
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php mezzanine_patched_gforge-3.0/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php
+--- gforge-3.0/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/db/SQL_migrate-2.5-to-2.6/artifact-convert-files.php	Thu Aug 14 20:47:23 2003
 @@ -1,4 +1,4 @@
 -#!/usr/local/bin/php
 +#!/usr/bin/php
  <?php
  
  require ('squal_pre.php');
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/utils/decode_images.sh mezzanine_patched_gforge-3.0/utils/decode_images.sh
+--- gforge-3.0/utils/decode_images.sh	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/utils/decode_images.sh	Thu Aug 14 20:49:04 2003
+@@ -1,4 +1,4 @@
+-#! /bin/bash
++#!/bin/bash
+ 
+ for u in `find ../www -name '*.uu'` ; do f=${u%.uu} ; uudecode $u -o $f ; done
+ 
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/utils/missing_L10n.pl mezzanine_patched_gforge-3.0/utils/missing_L10n.pl
+--- gforge-3.0/utils/missing_L10n.pl	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/utils/missing_L10n.pl	Thu Aug 14 20:49:04 2003
+@@ -1,4 +1,4 @@
+-#! /usr/bin/perl -w
++#!/usr/bin/perl -w
+ # $Id$
+ 
+ # This Perl script is to help the L10n team find missing strings in a

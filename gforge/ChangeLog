@@ -1,3 +1,14 @@
+2003-08-14 Michael Jennings  <mej@eterm.org>
+
+	* gforge.spec:
+	Updated to 3.0 release.
+
+	* contrib/gforge-3.0-*.patch
+	Patches resynced to 3.0 release.
+
+	* contrib/gforge.conf
+	Added Apache config file from SRPM.
+	
 2003-08-12 Tom Copeland  <tom@infoether.com>
 
 	* common/include/User.class:

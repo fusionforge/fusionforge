@@ -4,21 +4,23 @@
 
 Summary: Collaborative Development Tool
 Name: gforge
-Version: 3.0pre9
-Release: 5
+Version: 3.0
+Release: 1
 BuildArch: noarch
 Copyright: GPL
 Group: Development/Tools
 %if %{bzip}
-Source0: http://gforge.org/download.php/27/gforge-3.0pre9.tar.bz2
+Source0: http://gforge.org/download.php/37/gforge-3.0.tar.bz2
 %else
-Source0: http://gforge.org/download.php/27/gforge-3.0pre9.tar.gz
+Source0: gforge-3.0.tar.gz
 %endif
 Source1: gforge.conf
 Patch1000: gforge-3.0-local_config.patch
 Patch1001: gforge-3.0-php_path.patch
 Patch1002: gforge-3.0-init_sql.patch
 Patch1003: gforge-3.0-cronjobs.patch
+AutoReqProv: off
+Requires: /bin/sh /bin/bash /usr/bin/perl /usr/bin/php
 URL: http://www.gforge.org/
 BuildRoot: /var/tmp/%{name}-%{version}-root
 
@@ -27,6 +29,11 @@ GForge is a web-based Collaborative Development Environment offering
 easy access to CVS, mailing lists, bug tracking, message
 boards/forums, task management, permanent file archival, and total
 web-based administration.
+
+NOTE:  After installing this RPM, you will have a working GForge site
+at http://localhost/.  However, everything is set up to work locally,
+so if you are installing a site-wide instance of GForge, be sure to
+customize /etc/gforge/local.inc before use!
 
 # Macro for generating an environment variable (%1) with %2 random characters
 %define randstr() %1=`perl -e 'for ($i = 0, $bit = "!", $key = ""; $i < %2; $i++) {while ($bit !~ /^[0-9A-Za-z]$/) { $bit = chr(rand(90) + 32); } $key .= $bit; $bit = "!"; } print "$key";'`
@@ -190,5 +197,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/www
 /etc/cron.daily/gforge-nightly-cronjobs.sh
 /etc/cron.hourly/gforge-hourly-cronjobs.sh
-
-%changelog
