@@ -7,7 +7,7 @@ Standards-Version: 3.5.6.0
 
 Package: sourceforge
 Architecture: all
-Depends: apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-pgsql, php4-gd, php4-cgi, php4-ldap, php4-mcrypt, postgresql (>= 7.1.2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), bind9, slapd (>= 2.0.23-3), ldap-utils, exim | exim-tls, libpam-ldap, cvs, mailman, proftpd, elvis | nvi | vim
+Depends: apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-pgsql, php4-gd, php4-cgi, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), postgresql (>= 7.1.2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), bind9, slapd (>= 2.0.23-3), ldap-utils, exim | exim-tls, libpam-ldap, cvs, mailman, proftpd, elvis | nvi | vim
 Description: Integrated development project framework
  This package provides many services a development project can use,
  such as bug-tracking, task management, mailing-lists, CVS repository,
