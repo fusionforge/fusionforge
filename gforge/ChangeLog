@@ -3,6 +3,9 @@
 	* www/snippet/detail.php:
 	Fixed bug [ #459 ] Snippet formatting is a bit off
 
+	* www/snippet/browse.php:
+	Implemented feature[ #457 ] Snippet titles could be hyperlinked
+
 2004-07-25  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/languages/Base.tab:

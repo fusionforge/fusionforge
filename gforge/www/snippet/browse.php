@@ -95,8 +95,8 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td rowspan="2"><a href="/snippet/detail.php?type=snippet&amp;id='.
 			db_result($result,$i,'snippet_id').'"><strong>'.
-			db_result($result,$i,'snippet_id').'</strong></a></td><td><strong>'.
-			db_result($result,$i,'name').'</td><td>'.
+			db_result($result,$i,'snippet_id').'</strong></a></td><td><strong><a href="/snippet/detail.php?type=snippet&amp;id='.
+                        db_result($result,$i,'snippet_id').'">'.db_result($result,$i,'name').'</a></td><td>'.
 			db_result($result,$i,'user_name').'</td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';
