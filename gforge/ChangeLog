@@ -1,3 +1,10 @@
+2004-10-26  Tim Perdue <tim@gforge.org>
+
+	* Fixed cronjobs/cvs-cron/cvs.php so it generates a working 
+	readers/passwd file
+	* Fixed www/register/projectinfo.php so it uses sys_cvs_host 
+	to fill in scm_host by default.
+
 2004-10-24  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* common/include/system/pgsql.class: New file.
