@@ -8,15 +8,16 @@ class HelloWorldPlugin extends Plugin {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $Language, $G_SESSION ;
+		global $Language, $G_SESSION, $HTML ;
 		if ($hookname == "usermenu") {
-			echo ' | <A HREF="/plugins/helloworld/index.php?user_id=' . $G_SESSION->getId() . '">Hello world' ;
+			$text = "Hello world" ;
 			if ($G_SESSION->usesPlugin("helloworld")) {
-				echo ' [on]' ;
+				$text .= ' [on]' ;
 			} else {
-				echo ' [off]' ;
+				$text .= ' [off]' ;
 			}
-			echo '</A>' ;
+			echo $HTML->PrintSubMenu (array ($text),
+						  array ('/plugins/helloworld/index.php?user_id=' . $G_SESSION->getId()));
 		} elseif ($hookname == "blahblahblah") {
 			// ...
 		}

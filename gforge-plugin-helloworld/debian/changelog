@@ -1,3 +1,9 @@
+sourceforge-plugin-helloworld (0.3.1-1) experimental; urgency=low
+
+  * Adapted to current Gforge code.
+
+ -- Roland Mas <lolando@debian.org>  Wed, 15 Jan 2003 22:07:48 +0100
+
 sourceforge-plugin-helloworld (0.3-1) experimental; urgency=low
 
   * Added database install/remove support with db-upgrade.pl and
