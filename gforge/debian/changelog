@@ -35,8 +35,11 @@ sourceforge (2.6-0+11+) unstable; urgency=low
     concurrent for a while (and still is).  Such merges should happen
     until the 2.5 branch is abandoned.
   * [Roland] Added missing languages.
+  * [Christian] added checks in sourceforge-config
+  * [Christian] install/desinstall cycle support for common, web-apache,
+    db-postgress
 
- -- Roland Mas <lolando@debian.org>  Thu, 20 Jun 2002 14:04:19 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu, 20 Jun 2002 19:05:57 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
