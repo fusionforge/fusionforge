@@ -30,6 +30,12 @@
 	* www/include/languages/Italian.tab:
 	l10n of new strings
 	
+2003-02-12 Tom Copeland <tom@infoether.com>
+
+	* www/soap/*:
+	Updated SOAP API to allow fetching a list of open bug ids and 
+	fetching an individual bug.  Added a "complex type" that encapsulates 
+	a bug.
 
 2003-02-09  Ryan T. Sammartino  <ryants@shaw.ca>
 
