@@ -1,4 +1,9 @@
-  2003-02-08 Reinhard Spisser <reinhard@spisser.i>
+2003-02-09 Reinhard Spisser <reinhard@spisser.it>
+
+	* www/include/User.class:
+	Fixing bug #212: get error on update adding jabber address
+
+2003-02-08 Reinhard Spisser <reinhard@spisser.i>
  
  	* www/scm/index.php,
  	www/include/languages/Base.tab:
