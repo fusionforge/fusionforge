@@ -3,19 +3,21 @@
 %define dbuser			gforge
 %define dbpassword		gforge
 
-%define hostname		localhost
-%define systemname		MyGForge
+%{!?hostname:%define hostname localhost}
+%{!?sitename:%define sitename MyGForge}
 
 %define httpduser		apache
 %define gfuser			gforge
 %define gfgroup			gforge
 
+%{!?release:%define release 1}
+
 Summary: GForge Collaborative Development Environment
 Name: gforge
-Version: 4.0
-Release: 1
+Version: 4.0.1
+Release: %{release}
 BuildArch: noarch
-Copyright: GPL
+License: GPL
 Group: Development/Tools
 Source0: %{name}-%{version}.tar.bz2
 
@@ -148,7 +150,7 @@ if [ "$1" -eq "1" ]; then
 		s/DB_NAME/"%{dbname}"/g;
 		s/DB_USER/"%{dbuser}"/g;
 		s/DB_PASSWORD/"$GFORGEDATABASE_PASSWORD"/g;
-		s/SYSTEM_NAME/"%{systemname}"/g;
+		s/SYSTEM_NAME/"%{sitename}"/g;
 		s/RANDOM_ID/"$SESSID"/g;
 		s/HOST_NAME/"%{hostname}"/g" %{_sysconfdir}/gforge/gforge.conf
 	perl -pi -e "s/HOST_NAME/%{hostname}/g" /etc/httpd/conf.d/gforge.conf

@@ -2,12 +2,14 @@
 %define pluginlibdir %{_libdir}/gforge/plugins/%{plugin}
 %define pluginconfdir /etc/gforge/plugins/%{plugin}
 
+%{!?release:%define release 1}
+
 Summary: CVS Plugin for GForge CDE
 Name: gforge-plugin-scmcvs
-Version: 4.0
-Release: 1
+Version: 4.0.1
+Release: %{release}
 BuildArch: noarch
-Copyright: GPL
+License: GPL
 Group: Development/Tools
 Source0: %{name}-%{version}.tar.gz
 AutoReqProv: off
