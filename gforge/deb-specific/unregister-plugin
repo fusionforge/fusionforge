@@ -29,7 +29,7 @@ if ($plugin_name =~ /[^a-z]/) {
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
-    my ($query, $sth, @array, $version, $action) ;
+    my ($query, $query2, $query3, $sth, @array, @array2, @array3, $version, $action) ;
 
     $query = "SELECT count(*) FROM plugins WHERE plugin_name = '$plugin_name'" ;
     $sth = $dbh->prepare ($query) ;
@@ -37,17 +37,39 @@ eval {
     @array = $sth->fetchrow_array () ;
     $sth->finish () ;
 
+
+
+
     if ($array[0] == 1) {
-	$query = "DELETE FROM plugins WHERE plugin_name = '$plugin_name'" ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
+    	# Looking if this plugin is already referenced by a group
+    	$query2="SELECT group_plugin.plugin_id FROM group_plugin,plugins WHERE group_plugin.plugin_id=plugins.plugin_id AND plugin_name = '$plugin_name'";
+        $sth = $dbh->prepare ($query) ;
+        $sth->execute () ;
+        @array2 = $sth->fetchrow_array () ;
+        $sth->finish () ;
+    	if ($array2[0] >= 1) {
+		print "WARNING: This plugin is already used by one or more groups, can't unregister\n"
+	} else {
+    		$query3="SELECT user_plugin.plugin_id FROM user_plugin,plugins WHERE user_plugin.plugin_id=plugins.plugin_id AND plugin_name = '$plugin_name'";
+        	$sth = $dbh->prepare ($query) ;
+        	$sth->execute () ;
+        	@array3 = $sth->fetchrow_array () ;
+        	$sth->finish () ;
+    		if ($array3[0] >= 1) {
+			print "WARNING: This plugin is already used by one or more users, can't unregister\n"
+		} else {
+			$query = "DELETE FROM plugins WHERE plugin_name = '$plugin_name'" ;
+			$sth = $dbh->prepare ($query) ;
+			$sth->execute () ;
+			$sth->finish () ;
 
-	$plugin_id = $array[0] ;
-	debug "Plugin '$plugin_name' successfully unregistered." ;
+			$plugin_id = $array[0] ;
+			debug "Plugin '$plugin_name' successfully unregistered." ;
 
-	# debug "Committing." ;
-	$dbh->commit () ;
+			# debug "Committing." ;
+			$dbh->commit () ;
+		}
+	}
     } else {
 	debug "No plugin '$plugin_name' found, skipping." ;
     }
