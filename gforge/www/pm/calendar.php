@@ -10,6 +10,7 @@
  *
  * @todo Remove hardcoded colours etc. and move into style sheet.
  * @todo some locales start the week with "Monday", and not "Sunday".
+ * @todo display holidays.
  */
 
 require_once('pre.php');
@@ -42,9 +43,6 @@ if (isset($type) && $type != 'onemonth' && $type != 'threemonth' && $type != 'cu
 		   $Language->getText("calendar", "invalidtypeexplain"));
 }
 
-$HTML->header(array(title=>$Language->getText("calendar", "title")));
-
-
 // Fill in defaults
 if (!isset($type)) {
 	$type = 'threemonth';
@@ -69,6 +67,63 @@ if (!isset($day)) {
 $months = array(1 => 'january', 'february', 'march', 'april', 'may', 'june',
 		'july', 'august', 'september', 'october', 'november', 'december');
 
+if (isset($group_id) && isset($group_project_id)) {
+	require_once('common/pm/ProjectTaskFactory.class');
+	require_once('common/pm/ProjectGroup.class');
+
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g)) {
+		exit_no_group();
+	} elseif ($g->isError()) {
+		exit_error($Language->getText('global', 'error'), $g->getErrorMessage());
+	}
+	$pg = new ProjectGroup($g, $group_project_id);
+	if (!$pg || !is_object($pg)) {
+		exit_error($Language->getText('global', 'error'), 'BUG: Could Not Get Factory');
+	} elseif ($pg->isError()) {
+		exit_error($Language->getText('global', 'error'), $pg->getErrorMessage());
+	}
+
+	$ptf = new ProjectTaskFactory($pg);
+	if (!$ptf || !is_object($ptf)) {
+		exit_error($Language->getText('global', 'error'), 'BUG: Could Not Get ProjectTaskFactory');
+	} elseif ($ptf->isError()) {
+		exit_error($Language->getText('global', 'error'), $ptf->getErrorMessage());
+	}
+	$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id);
+	$pt_arr =& $ptf->getTasks();
+	if ($ptf->isError()) {
+		exit_error($Language->getText('global', 'error'), $ptf->getErrorMessage());
+	}
+}
+
+$HTML->header(array(title=>$Language->getText("calendar", "title"),group=>$group_id));
+
+/**
+ * Create link to a task.
+ * This returns a string that is a link to a particular task.
+ *
+ * @author    Ryan T. Sammartino <ryants at shaw dot ca>
+ * @param     $task  the task to make a link for.
+ * @param     $type  either 'begin' for beginning of a task or 'end' for
+ *                   end of a task.
+ * @date      2002-01-04
+ *
+ */
+function make_task_link($task, $type) {
+	global $HTML, $Language, $group_id, $group_project_id;
+	return '<p style="font-size: ' . $HTML->FONTSIZE_SMALLEST
+		. '"><a title="'. $Language->getText('calendar', 'task_link_title', $task->getSummary())
+		. '" href="/pm/task.php?func=detailtask&amp;project_task_id=' . $task->getID()
+		. '&amp;group_id=' . $group_id
+		. '&amp;group_project_id=' .$group_project_id
+		. '">' . ($type == 'begin' ?
+			  $Language->getText('calendar', 'task_begins', $task->getID()) :
+			  $Language->getText('calendar', 'task_ends', $task->getID()))
+		. '</a></p>';
+}
+
+
 /**
  * Display one month.
  * This displays one month.  m may be less than 0 and greater than 12: display_month
@@ -81,7 +136,8 @@ $months = array(1 => 'january', 'february', 'march', 'april', 'may', 'june',
  *
  */
 function display_month($m, $y) {
-	global $months, $today, $month, $day, $year, $Language;
+	global $months, $today, $month, $day, $year, $Language, $HTML,
+		$pt_arr, $group_id, $group_project_id;
 	$dow = array('sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday');
 
 	$date = getdate(mktime(0, 0, 0, $m + 1, 0, $y));
@@ -126,7 +182,26 @@ function display_month($m, $y) {
 					  && $m == $month) {
 					$colour = " bgcolor=\"gray\"";
 				}
-				print "\t\t\t<td" . $colour . ">$curr_date<br /><br /><br /></td>\n";
+				print "\t\t\t<td valign=\"top\"" . $colour . ">$curr_date";
+				$cell_contents = '';
+				$rows = count($pt_arr);
+				for ($i = 0; $i < $rows; $i++) {
+					$start_date = getdate($pt_arr[$i]->getStartDate());
+					$end_date = getdate($pt_arr[$i]->getEndDate());
+					if ($curr_date == $start_date['mday']
+					    && $y == $start_date['year']
+					    && $m == $start_date['mon']) {
+						$cell_contents .= make_task_link($pt_arr[$i], 'begin');
+					} elseif ($curr_date == $end_date['mday']
+						  && $y == $end_date['year']
+						  && $m == $end_date['mon']) {
+						$cell_contents .= make_task_link($pt_arr[$i], 'end');
+					}
+				}
+				if ($cell_contents == '') {
+					$cell_contents = '<br /><br /><br />';
+				}
+				print "$cell_contents</td>\n";
 			} else {
 				print "\t\t\t<td></td>\n";
 			}
@@ -193,6 +268,14 @@ function display_month($m, $y) {
 			</td>
 		</tr>
 	</table>
+<?php
+	if (isset($group_id) && isset($group_project_id)) {
+		print '
+	<input type="hidden" name="group_id" value="'. $group_id .'" />
+	<input type="hidden" name="group_project_id" value="'. $group_project_id .'" />';
+	}
+?>
+
 	</form>
 	<table width="100%">
 		<tr>

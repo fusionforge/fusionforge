@@ -646,6 +646,9 @@ calendar	fordate	For date:
 calendar	update	Update
 calendar	todaysdate	Today's date.
 calendar	selecteddate	Selected date (if different from today).
+calendar	task_link_title	Task Summary: $1
+calendar	task_begins	Task $1 Begins
+calendar	task_ends	Task $1 Ends
 calendar	invalidyear	Invalid year
 calendar	invalidyearexplain	Year must be between 1990 and 2020.
 calendar	invalidmonth	Invalid month

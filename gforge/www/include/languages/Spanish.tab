@@ -600,6 +600,9 @@ calendar	fordate	Para la fecha:
 calendar	update	Actualice
 calendar	todaysdate	Hoy.
 calendar	selecteddate	Fecha escogida (si es diferente de hoy).
+calendar	task_link_title	Resumen: $1
+calendar	task_begins	Tarea $1 empieza
+calendar	task_ends	Tarea $1 termina
 calendar	invalidyear	A&ntilde; inv&aacute;lido
 calendar	invalidyearexplain	El a&ntilde;o tiene que ser entre 1990 y 2020.
 calendar	invalidmonth	Mes inv&aacute;lido

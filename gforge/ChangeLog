@@ -1,5 +1,10 @@
 2003-01-04  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/pm/calendar.php: show tasks in calendar.
+
+	* www/include/languages/{Base,Spanish}.tab: new entries for
+	calendar tasks.
+
 	* www/include/languages/Base.tab: Bug 123: tabify "conf" entries.
 
 	* www/my/index.php: Bug 120: fix link to unmonitor file
