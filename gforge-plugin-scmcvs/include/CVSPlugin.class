@@ -8,15 +8,13 @@ class CVSPlugin extends SCM {
 		$this->name = "scmcvs";
 		$this->text = "CVS";
 		$this->hooks[] = "scm_page";
-/*
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
-		$this->hooks[] = "scm_stats";
-		$this->hooks[] = "group_approved";
-*/
+// to be revised		$this->hooks[] = "scm_stats";
+
 		$this->hooks[] = "scm_plugin";
+		$this->hooks[] = "group_approved";
 		$this->hooks[] = "cssstyle";
-		//$this->hooks[] = "groupmenu_scm";
 
 		require_once('/etc/gforge/plugins/scmcvs/config.php') ;
 
@@ -35,7 +33,6 @@ class CVSPlugin extends SCM {
 			$group_id = $params['group_id'] ;
 			$this->display_scm_page ($group_id) ;
 			break ;
-/*
 		case "scm_admin_update":
 			$this->scm_admin_update ($params) ;
 			break ;
@@ -48,10 +45,6 @@ class CVSPlugin extends SCM {
 		case "group_approved":
 			$this->group_approved ($params) ;
 			break;
-		case "groupmenu_scm":
-			$this->display_groupmenu_scm ($params) ;
-			break;
-*/
 		case "cssstyle":
 			$this->cssstyle_scm ($params) ;
 			break;
@@ -349,39 +342,20 @@ if ($project->enableAnonSCM()){
 
 	}
 
-/*
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
- 		if ($params['scmcvs_enable_anoncvs']) {
-			$group->SetUsesAnonSCM(true);
-		} else {
-			$group->SetUsesAnonSCM(false);
- 		}
- 		if ($params['scmcvs_enable_pserver']) {
-			$group->SetUsesPserver(true);
-		} else {
-			$group->SetUsesPserver(false);
- 		}
-////		if ($params['scmradio'] == 'scmcvs') {
-////			$group->setPluginUse("scmcvs", 1) ;
-////		} else {
-////			$group->setPluginUse("scmcvs", 0) ;
-////		}
-// 		if ($params['scmcvs_use_cvs']) {
-// 			$group->setPluginUse("scmcvs", 1) ;
-// 		} else {
-// 			$group->setPluginUse("scmcvs", 0) ;
-// 		}
-////		if ($params['scmcvs_enable_anon_cvs']) {
-////			$this->SetUsesAnonCVS ($params['group_id'], true) ;
-////		} else {
-////			$this->SetUsesAnonCVS ($params['group_id'], false) ;
-////		}
-////		if ($params['scmcvs_cvs_server'] && $params['scmcvs_cvs_server'] != "") {
-////			$this->SetGroupServer ($params['group_id'], $params['scmcvs_cvs_server']) ;
-////		} else {
-////			$this->SetGroupServer ($params['group_id'], $this->GetDefaultServer ()) ;
-////		}
+		if ($group->usesPlugin($this->name)) {
+ 			if ($params['scmcvs_enable_anoncvs']) {
+				$group->SetUsesAnonSCM(true);
+			} else {
+				$group->SetUsesAnonSCM(false);
+ 			}
+ 			if ($params['scmcvs_enable_pserver']) {
+				$group->SetUsesPserver(true);
+			} else {
+				$group->SetUsesPserver(false);
+ 			}
+		}
 	}
 
 	// This function is used to render checkboxes below
@@ -393,23 +367,10 @@ if ($project->enableAnonSCM()){
 		}
 	}
 
-	function todoornottodo ($params) {
-		$group =& group_get_object($params['group_id']);
-	?>
-		<input type="radio" name="scmradio" value="scmcvs" <?php echo $this->c($group->usesPlugin("scmcvs")); ?>>
-		<strong>Use CVS</strong>
-		<br />
-		<input type="text" name="scmcvs_cvs_server" value="<?php echo $group->getSCMBox(); ?>">
-		<strong>CVS server</strong>
-		<br />
-		<br />
-	<?php
-	}
-
-
 	function display_scm_admin_page ($params) {
 		global $Language;
 		$group =& group_get_object($params['group_id']);
+		if ($group->usesPlugin($this->name)) {
 	?>
 		<input type="CHECKBOX" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> >
 		<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_anonymous_cvs') ?></strong>
@@ -418,6 +379,7 @@ if ($project->enableAnonSCM()){
 		<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_pserver') ?></strong>
 		<br />
 	<?php
+		}
 	}
 
 	function display_stats ($params) {
@@ -441,9 +403,8 @@ if ($project->enableAnonSCM()){
 		<br /> &nbsp; -
 			<a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>';
 	        }
-		
 	}
-*/
+
 	/**
 	 *      account_group_cvsweb_url() - Returns URL for group's CVS interface WWW
 	 *
@@ -455,23 +416,7 @@ if ($project->enableAnonSCM()){
 		return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot=cvsroot/'.$project->getUnixName();
 	}
 
-	function display_groupmenu_scm($params) {
-		$group_id = $params['group_id'] ;
-		$project =& group_get_object($group_id);
-		if (!$project || !is_object($project)) 
-			return;
-		if ($project->isError())
-		        return;
-		if (!$project->isProject())
-		        return;
-		if ( $project->usesPlugin ( $this->name ) ) {
-	        	$params['DIRS'][]='/plugins/scmcvs/?group_id=' . $group_id;
-			$params['TITLES'][]=$this->text;
-			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
-		}
-	}
-
-/*	function group_approved ($params) {
+	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
 	
 		$project =& group_get_object($group_id);
@@ -483,10 +428,60 @@ if ($project->enableAnonSCM()){
 		}
 	}
 
+/*
 	function GetDefaultServer () {
 		return $this->default_cvs_server ;
 	}
 
+	function GetGroupServer ($group_id) {
+		$sql = "SELECT cvs_host FROM plugin_scmcvs_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			return $this->default_cvs_server ;
+		} else {
+			return db_result($res,0,'cvs_host');
+		}
+	}
+
+	function SetGroupServer ($group_id, $server) {
+		db_begin () ;
+		$sql = "SELECT cvs_host FROM plugin_scmcvs_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			$sql = "INSERT INTO plugin_scmcvs_group_usage (group_id, cvs_host) VALUES ($group_id, '$server')" ;
+		} else {
+			$sql = "UPDATE plugin_scmcvs_group_usage SET cvs_host = '$server' WHERE group_id = $group_id" ;
+			
+		}
+		$res = db_query($sql);
+		db_commit () ;
+	}
+
+	function UsesAnonCVS ($group_id) {
+		$sql = "SELECT anon_cvs FROM plugin_scmcvs_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			return false ;
+		} else {
+			return db_result($res,0,'anon_cvs');
+		}
+	}
+
+	function SetUsesAnonCVS ($group_id, $anon_cvs) {
+		db_begin () ;
+		$anon_cvs = $anon_cvs ? 1 : 0 ;
+
+		$sql = "SELECT anon_cvs FROM plugin_scmcvs_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			$sql = "INSERT INTO plugin_scmcvs_group_usage (group_id, anon_cvs) VALUES ($group_id, $anon_cvs)" ;
+		} else {
+			$sql = "UPDATE plugin_scmcvs_group_usage SET anon_cvs = $anon_cvs WHERE group_id = $group_id" ;
+			
+		}
+		$res = db_query($sql);
+		db_commit () ;
+	}
 */
 
 }
