@@ -31,8 +31,8 @@ class SVNPlugin extends SCM {
 		$this->name = "scmsvn";
 		$this->text = "SVN";
 		$this->hooks[] = "scm_page";
-//		$this->hooks[] = "scm_admin_update";
-//		$this->hooks[] = "scm_admin_page";
+		$this->hooks[] = "scm_admin_update";
+		$this->hooks[] = "scm_admin_page";
 // to be revised		$this->hooks[] = "scm_stats";
 //		$this->hooks[] = "group_approved";
 
@@ -184,19 +184,18 @@ if ($project->enableAnonSCM()) {
 		}
 
 	}
-/*
+
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) ) {
 			if ($params['scmsvn_enable_anon_svn']) {
-//code doesn't even work - no such function
 				$group->SetUsesAnonSCM(true);
 			} else {
 				$group->SetUsesAnonSCM(false);
 			}
 		}
 	}
-*/
+
 	// This function is used to render checkboxes below
 	function c($v) {
 		if ($v) {
@@ -206,7 +205,7 @@ if ($project->enableAnonSCM()) {
 		}
 	}
 
-/*	function display_scm_admin_page ($params) {
+	function display_scm_admin_page ($params) {
 		$group =& group_get_object($params['group_id']);
 		if ( $group->usesPlugin ( $this->name ) ) {
 ?>
@@ -217,7 +216,7 @@ if ($project->enableAnonSCM()) {
 		}
 
 	}
-*/
+
 	function display_stats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
@@ -236,6 +235,7 @@ if ($project->enableAnonSCM()) {
 		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
 	}
 
+	// Not used at the moment and probably useless
 	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
 		
