@@ -193,8 +193,8 @@ sub add_user {
         chown $uid, $uid, $home_dir;
 	
 	mkdir $home_dir.'/incoming', 0771;
-	system("chown www-data:$uid $home_dir/incoming");
-	chmod 0771, $home_dir.'/incoming';
+	chown $uid, $uid, $home_dir.'/incoming' ;
+	chmod 0755, $home_dir.'/incoming';
 }
 
 #############################
@@ -237,7 +237,7 @@ sub update_user {
 	unless (-d $home_dir.'/incoming') {
 	    mkdir $home_dir.'/incoming', 0771;
 	}
-        system("chown www-data:$username $home_dir/incoming");
+        system("chown $username:$username $home_dir/incoming");
 	system("chmod 0771 $home_dir/incoming");
 
 	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
