@@ -640,7 +640,7 @@ docman_display_doc	no_document_data_title	Pas de données dans le document
 docman_display_doc	section	Projet : $1
 docman_display_doc	title	Gestionnaire de documents : affichage d'un document
 docman_new	description	Description
-docman_new	doc_title	Titre du document :
+docman_new	doc_title	Titre du document
 docman_new	error_blank_document	Erreur en prenant un document vide
 docman_new	file	Fichier
 docman_new	group	Groupe auquel le document appartient
@@ -2536,7 +2536,7 @@ tracker_mod	build_task_relation	Établir une relation avec des tâches
 tracker_mod	canned_response	Utiliser une réponse type
 tracker_mod	changelog	Journaux
 tracker_mod	data_type	Type de données
-tracker_mod	date_closed	Date de fermuture
+tracker_mod	date_closed	Date de fermeture
 tracker_mod	date_submitted	Date de soumission
 tracker_mod	delete	Effacer
 tracker_mod	description	Description
