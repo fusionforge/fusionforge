@@ -1,3 +1,17 @@
+2003-09-30 Michael Jennings  <mej@eterm.org>
+
+	* gforge.spec:
+	Updated to 3.0-2 release.
+	Replaced distro-specific package dependencies with distro-agnostic
+	dependencies.  Individual distros may "correct" dependencies if
+	needed, but the primary spec file should remain as neutral as
+	possible.
+
+	* contrib/gforge-3.0-init_sql.patch:
+	Added db/20030513.sql.  Thanks to Andrew Bainbridge-Smith
+	<Andrew.Bainbridge-Smith@canterbury.ac.nz> for pointing out the
+	problem.
+
 2003-09-30  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* common/include/User.class: Use default system theme for users

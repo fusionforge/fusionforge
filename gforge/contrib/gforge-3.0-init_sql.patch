@@ -1,7 +1,7 @@
-diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/db/gforge3.sql mezzanine_patched_gforge-3.0pre9/db/gforge3.sql
---- gforge-3.0pre9/db/gforge3.sql	Wed Jan 15 19:16:45 2003
-+++ mezzanine_patched_gforge-3.0pre9/db/gforge3.sql	Fri Jan 24 16:05:09 2003
-@@ -4035,7 +4035,7 @@
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0/db/gforge3.sql mezzanine_patched_gforge-3.0/db/gforge3.sql
+--- gforge-3.0/db/gforge3.sql	Fri Jun 20 07:42:09 2003
++++ mezzanine_patched_gforge-3.0/db/gforge3.sql	Tue Sep 30 21:48:34 2003
+@@ -4002,7 +4002,7 @@
  SELECT setval ('"user_metric0_pk_seq"', 1, false);
  
  
@@ -10,7 +10,7 @@ diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/db/gforge3.sql mezzanine_patched
  
  
  SELECT setval ('"unix_uid_seq"', 1, false);
-@@ -4124,3 +4124,14 @@
+@@ -4091,3 +4091,18 @@
  
  SELECT setval ('"user_plugin_pk_seq"', 1, false);
  
@@ -25,3 +25,7 @@ diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/db/gforge3.sql mezzanine_patched
 +UPDATE groups SET homepage = '/news/' WHERE group_id = 2;
 +UPDATE groups SET homepage = '/stats/' WHERE group_id = 3;
 +UPDATE groups SET homepage = '/peerrating/' WHERE group_id = 4;
++
++ALTER TABLE themes ADD COLUMN enabled BOOLEAN ;
++ALTER TABLE themes ALTER enabled SET DEFAULT TRUE ;
++UPDATE themes SET enabled=true;
