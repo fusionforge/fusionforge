@@ -50,7 +50,6 @@ if ($submit) {
 		$use_stats
 	);
 	
-	plugin_hook("groupisactivecheckboxpost",false);
 	//100 $logo_image_id
 
 	if (!$res) {
@@ -61,6 +60,10 @@ if ($submit) {
 }
 
 project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID(),'pagename'=>'project_admin_editgroupinfo','sectionvals'=>array(group_getname($group_id))));
+
+if ($submit) {
+	plugin_hook("groupisactivecheckboxpost",false);
+}
 
 /* NOT ACTIVE YET
 
