@@ -387,3 +387,5 @@ tracker_detail	title	Vue détaillée d'un tracker
 tracker_reporting	section	$1
 tracker_reporting	title	Rapports sur les trackers
 users	title	Résumé d'un utilisateur
+trove	not_categorized	Ce projet ne s'est pas encore classifié dans la 
+trove	title	Carte de Recherche thématique

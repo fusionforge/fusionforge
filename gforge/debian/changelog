@@ -41,8 +41,9 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     <manik.surtani@conchango.com> fixing a few paths.
   * [Christian] Update language_code in supported_languages table
     it's used to have a default language corresponding to browser language settings
+  * [Christian] more i18n on trove map (work in progress)
 
- -- Christian Bayle <bayle@debian.org>  Thu,  5 Sep 2002 17:45:28 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu,  5 Sep 2002 23:50:36 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 

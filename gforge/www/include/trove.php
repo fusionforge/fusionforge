@@ -195,6 +195,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	global $discrim_url;
 	global $expl_discrim;
 	global $form_cat;
+	global $Language;
 
 	$res_trovecat = db_query("
 		SELECT trove_cat.fullpath AS fullpath,
@@ -207,9 +208,10 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 
 	$return = '';
 	if (db_numrows($res_trovecat) < 1) {
-		$return .= 'This project has not yet categorized itself in the '
-			.'<A href="/softwaremap/trove_list.php">Trove '
-			.'Software Map</A>.';
+		$return .= $Language->getText('trove','not_categorized')
+			.' <A href="/softwaremap/trove_list.php">'
+			. $Language->getText('trove','title')
+			.'</A>.';
 	}
 
 	// first unset the vars were using here
