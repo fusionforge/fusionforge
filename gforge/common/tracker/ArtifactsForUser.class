@@ -79,6 +79,7 @@ class ArtifactsForUser extends Error {
 		      FROM artifact a, artifact_group_list agl
 		      WHERE a.assigned_to=".$this->User->getID()."
 	              AND a.group_artifact_id=agl.group_artifact_id
+		      AND a.status_id='1'
 		      ORDER BY agl.group_id,a.group_artifact_id,a.assigned_to,a.status_id";
 
 		return $this->getArtifactsFromSQL($sql);
