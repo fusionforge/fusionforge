@@ -184,7 +184,7 @@ $sys_project_reg_restricted=true;
 //	Restricted user registration
 //	If set to true, only a site admin can register users
 //
-$sys_user_reg_restricted=true;
+$sys_user_reg_restricted=false;
 
 //
 // Groups and Homes dir prefix
