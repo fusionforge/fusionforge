@@ -21,7 +21,7 @@ case "$target" in
 	;;
     configure)
 	# Create the appropriate database user
-	pattern=$(basename $0)
+	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
 	if su postgres -c "createuser --no-createdb --no-adduser sourceforge" 1> $tmp1 2> $tmp2 \
@@ -76,7 +76,7 @@ EOF
 	fi
 
 	# Install/upgrade the database contents (tables and data)
-	/usr/lib/sourceforge/bin/db-upgrade.pl
+	#/usr/lib/sourceforge/bin/db-upgrade.pl
 	;;
     purge)
         if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf

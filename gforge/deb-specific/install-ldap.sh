@@ -106,7 +106,7 @@ access to */" /etc/ldap/slapd.conf
 #sasl-realm	localhost	#Added by Sourceforge install
 #sasl-host	localhost	#Added by Sourceforge install
 #FIN
-		/etc/init.d/slapd restart
+		#/etc/init.d/slapd restart
 	fi	
 }
 
@@ -116,7 +116,7 @@ purge_slapd(){
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
 if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf
 then
-	vi -e /etc/ldap/slapd.conf <<-FIN
+	vi -e /etc/ldap/slapd.conf >/dev/null <<-FIN
 /# Next lines added by Sourceforge install
 :ma a
 /# End of sourceforge add
@@ -177,8 +177,10 @@ load_ldap(){
 		# -r Replace existing values by default.
 		# add with -r don't modify and modify don't add so i do add and modify
 	
-		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif 
-		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif 
+		set +e
+		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1
+		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1
+		set -e
 		rm -f $tmpldif
 	else
 		echo "WARNING: Can't load ldap table without /etc/slapd.secret file"
@@ -231,7 +233,8 @@ setup_robot() {
 
     # The first account is only used in a multiserver SF
     echo "Adding robot accounts"
-    ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
+    set +e
+    ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" >/dev/null 2>&1 <<-FIN
 dn: cn=Replicator,$sys_ldap_base_dn
 cn: Replicator
 sn: Replicator the Robot
@@ -248,9 +251,10 @@ objectClass: top
 objectClass: person
 userPassword: {crypt}x
 FIN
+    set -e
 
     echo "Changing SF_robot passwd using admin account"
-    ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
+    ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" >/dev/null <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
@@ -258,10 +262,10 @@ userPassword: $cryptedpasswd
 -
 FIN
 
-    # Test!
+    echo "Testing LDAP"
     #naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
     echo "Changing dummy cn using SF_robot account"
-    ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" <<-FIN
+    ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" >/dev/null <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
@@ -285,7 +289,7 @@ case "$1" in
 	modify_nsswitch
 	echo "Load ldap"
 	load_ldap $dn "$secret"
-				# Restarting ldap 
+	# Restarting ldap 
 	/etc/init.d/slapd restart
 	sleep 5
 	echo "Setup SF_robot account"

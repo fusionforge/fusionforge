@@ -13,7 +13,7 @@ if [ $(id -u) != 0 ] ; then
 fi
 
 case "$1" in
-    default)
+    configure)
 	[ -h /cvsroot ] || ln -s /var/lib/sourceforge/chroot/cvsroot /cvsroot
 	$0 purge
 	;;
@@ -36,7 +36,7 @@ case "$1" in
 	;;
 
     *)
-	echo "Usage: $0 {default|chroot|purge}"
+	echo "Usage: $0 {configure|chroot|purge}"
 	exit 1
 	;;
 	
