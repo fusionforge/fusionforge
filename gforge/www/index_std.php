@@ -23,6 +23,15 @@ progress of your project. The data can then be plotted in a standard Gantt chart
 <p>
 <a href="http://dev.gforge.org/pm/task.php?group_id=5&amp;group_project_id=2&amp;func=ganttpage"><img src="/images/gantt.png" width="447" height="230" border="0" alt="" /></a>
 </p>
+<strong>Site-Wide Reporting and Time Tracking Module Add-on</strong>
+<p>
+With 42+ graphs covering your entire GForge installation all the way down to individual 
+users and tasks, the <strong>Reporting</strong> and <strong>Time Tracking</strong> Module 
+helps you manage projects, people and your entire organization.
+<p>
+The module is available from <a href="http://perdue.net/reporting/">Perdue, Inc.</a> starting at $999.
+<p>
+<a href="http://perdue.net/reporting/"><img src="/images/reporting.jpg" width="400" height="300" border="0" alt="Reporting Module"/></a>
 <p />
 
 <?php
