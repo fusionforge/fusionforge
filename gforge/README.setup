@@ -22,6 +22,8 @@
 mv etc/local.inc etc/local.inc.example
 mv etc/httpd.conf etc/httpd.conf.example
 mv etc/httpd.secrets etc/httpd.secrets.example
+mv etc/database.inc etc/database.inc.example
+mv etc/local.pl etc/local.pl.example
 #
 # ./setup -help will give you all available switch
 #
