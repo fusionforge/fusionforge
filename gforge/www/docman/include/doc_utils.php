@@ -112,9 +112,4 @@ function docman_footer($params) {
 	site_project_footer($params);
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
-
 ?>

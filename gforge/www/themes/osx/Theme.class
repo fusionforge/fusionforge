@@ -592,9 +592,4 @@ class Theme extends Layout {
 
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
-
 ?>

@@ -136,12 +136,12 @@ if (session_loggedin()) { // || $sf_user_hash) {
 				$group->getPublicName().'</a></strong></td></tr';
 			}
 
-      echo '
-      <tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/forum/monitor.php?forum_id='.$f->getID().
-      '&amp;stop=1&amp;group_id='.$group->getID().'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
-      'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
-      $f->getID().'">'.
-      $f->getName().'</a>';
+			echo '
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center"><a href="/forum/monitor.php?forum_id='.$f->getID().
+			'&amp;stop=1&amp;group_id='.$group->getID().'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
+			'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
+			$f->getID().'">'.
+			$f->getName().'</a>';
 
 			$last_group= $group->getID();
 		}
@@ -400,10 +400,5 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	exit_not_logged_in();
 
 }
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
 
 ?>

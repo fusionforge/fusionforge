@@ -528,8 +528,8 @@ function site_user_header($params) {
 		array('"/my/"',
 			'"/my/diary.php"',
 			'"/account/"',
-		      '"/register/"',
-		      '"/my/bookmark_add.php"')));
+			'"/register/"',
+			'"/my/bookmark_add.php"')));
 	plugin_hook ("usermenu", false) ;
 	echo ($HTML->EndSubMenu());
 }
