@@ -21,24 +21,24 @@ my ($gname, $gstatus, $gid, $userlist);
 @userdump_array = open_array_file($user_file);
 @groupdump_array = open_array_file($group_file);
 
-open (FD,'>'.$file_dir."chroot/etc/passwd"); close(FD);
-open (FD,'>'.$file_dir."chroot/etc/shadow"); close(FD);
-open (FD,'>'.$file_dir."chroot/etc/group"); close(FD);
+#LDAP_NOW#open (FD,'>'.$file_dir."chroot/etc/passwd"); close(FD);
+#LDAP_NOW#open (FD,'>'.$file_dir."chroot/etc/shadow"); close(FD);
+#LDAP_NOW#open (FD,'>'.$file_dir."chroot/etc/group"); close(FD);
 
-@passwd_array = open_array_file($file_dir."chroot/etc/passwd");
-push @passwd_array, "root:x:0:0:Root:/:/bin/bash\n";
-push @passwd_array, "dummy:x:$dummy_uid:$dummy_uid:Dummy User:/:/bin/false\n";
-push @passwd_array, "nobody:x:65534:65534:nobody:/:/bin/false\n";
+#LDAP_NOW#@passwd_array = open_array_file($file_dir."chroot/etc/passwd");
+#LDAP_NOW#push @passwd_array, "root:x:0:0:Root:/:/bin/bash\n";
+#LDAP_NOW#push @passwd_array, "dummy:x:$dummy_uid:$dummy_uid:Dummy User:/:/bin/false\n";
+#LDAP_NOW#push @passwd_array, "nobody:x:65534:65534:nobody:/:/bin/false\n";
 
-@shadow_array = open_array_file($file_dir."chroot/etc/shadow");
-push @shadow_array, "root:*:11142:0:99999:7:::\n";
-push @shadow_array, "dummy:*:11142:0:99999:7:::\n";
-push @shadow_array, "nobody:*:11142:0:99999:7:::\n";
+#LDAP_NOW#@shadow_array = open_array_file($file_dir."chroot/etc/shadow");
+#LDAP_NOW#push @shadow_array, "root:*:11142:0:99999:7:::\n";
+#LDAP_NOW#push @shadow_array, "dummy:*:11142:0:99999:7:::\n";
+#LDAP_NOW#push @shadow_array, "nobody:*:11142:0:99999:7:::\n";
 
-@group_array = open_array_file($file_dir."chroot/etc/group");
-push @group_array, "root:x:0\n";
-push @group_array, "dummy:x:$dummy_uid:\n";
-push @group_array, "nogroup:x:65534:\n";
+#LDAP_NOW#@group_array = open_array_file($file_dir."chroot/etc/group");
+#LDAP_NOW#push @group_array, "root:x:0\n";
+#LDAP_NOW#push @group_array, "dummy:x:$dummy_uid:\n";
+#LDAP_NOW#push @group_array, "nogroup:x:65534:\n";
 
 #
 # Loop through @userdump_array and deal w/ users.
@@ -48,20 +48,9 @@ push @group_array, "nogroup:x:65534:\n";
 while ($ln = pop(@userdump_array)) {
 	chop($ln);
 	($uid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
-
-#CB# Shell is now taken in the database
-#	if (substr($hostname,0,3) eq "cvs") {
-#		$shell = "/bin/cvssh";
-#	}
-	
 	$uid += $uid_add;
-
 	$username =~ tr/A-Z/a-z/;
-	
-#	$user_exists = getpwnam($username);
-#	$user_exists = stat($homedir_prefix . $username);
 	$user_exists = (-d $homedir_prefix . $username);
-#	$user_exists = 0;
 	
 	if ($status eq 'A' && $user_exists) {
 		update_user($uid, $username, $realname, $shell, $passwd);
@@ -99,10 +88,7 @@ while ($ln = pop(@groupdump_array)) {
 	$gid += $gid_add;
 	$userlist =~ tr/A-Z/a-z/;
 
-#	$group_exists = getgrnam($gname);
-#	$group_exists = stat($grpdir_prefix . $gname);
 	$group_exists = (-d $grpdir_prefix . $gname);
-#	$group_exists = 0;
 
 	if ($gstatus eq 'A' && $group_exists) {
 		update_group($gid, $gname, $userlist);
@@ -114,10 +100,6 @@ while ($ln = pop(@groupdump_array)) {
 		delete_group($gname);
 
 	} 
-	#CB# these lines cause a bug.
-	#elsif ($gstatus eq 'D' && !$group_exists) {
-	#	print("Error trying to delete group: $gname\n");
-	#}
 
 	if ((substr($hostname,0,3) eq "cvs") && $gstatus eq 'A' && !(-e "$cvs_root$gname/CVSROOT")) {
 		#CB# Added this for the first time
@@ -152,20 +134,17 @@ while ($ln = pop(@groupdump_array)) {
 		#system("chmod g+rw $cvs_dir");
 		system("chmod g+rws $cvs_dir");
 
-		# And finally add a user for this repository
-		#CB# Do it all the time
-		#CB# push @passwd_array, "anoncvs_$gname:x:$cvs_id:$gid:Anonymous CVS User for $gname:/cvsroot/$gname:/bin/false\n";
 	}
 	#CB# Do it all the time
-	push @passwd_array, "anoncvs_$gname:x:$cvs_id:$gid:Anonymous CVS User for $gname:/cvsroot/$gname:/bin/false\n";
+	#LDAP_NOW#push @passwd_array, "anoncvs_$gname:x:$cvs_id:$gid:Anonymous CVS User for $gname:/cvsroot/$gname:/bin/false\n";
 }
 
 #
 # Now write out the new files
 #
-write_array_file($file_dir."chroot/etc/passwd", @passwd_array);
-write_array_file($file_dir."chroot/etc/shadow", @shadow_array);
-write_array_file($file_dir."chroot/etc/group", @group_array);
+#LDAP_NOW#write_array_file($file_dir."chroot/etc/passwd", @passwd_array);
+#LDAP_NOW#write_array_file($file_dir."chroot/etc/shadow", @shadow_array);
+#LDAP_NOW#write_array_file($file_dir."chroot/etc/group", @group_array);
 
 
 
@@ -184,9 +163,9 @@ sub add_user {
 
 	print("Making a User Account for : $username\n");
 		
-	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
-	push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
-	push @group_array, "$username:x:$uid:\n";
+	#LDAP_NOW#push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
+	#LDAP_NOW#push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
+	#LDAP_NOW#push @group_array, "$username:x:$uid:\n";
 	
 	# Now lets create the homedir and copy the contents of /etc/skel into it.
 	mkdir $home_dir, 0751;
@@ -208,31 +187,6 @@ sub update_user {
 	#CB# Let's make this silent
 	#print("Updating Account for: $username\n");
 	
-#	foreach (@passwd_array) {
-#		($p_uid, $p_junk, $p_uid, $p_gid, $p_realname, $p_homedir, $p_shell) = split(":", $_);
-#		
-#		if ($uid == $p_uid) {
-#			if ($realname ne $p_realname) {
-#				$passwd_array[$counter] = "$username:x:$uid:$uid:$realname:$p_homedir:$shell\n";
-#			} elsif ($shell ne $t_shell) {
-#				$passwd_array[$counter] = "$username:x:$uid:$uid:$p_realname:$p_homedir:$p_shell";
-#			}
-#		}
-#		$counter++;
-#	}
-#	
-#	$counter = 0;
-#	
-#	foreach (@shadow_array) {
-#		($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv) = split(":", $_);
-#		if ($username eq $s_username) {
-#			if ($passwd ne $s_passwd) {
-#				$shadow_array[$counter] = "$username:$passwd:$s_date:$s_min:$s_max:$s_inact:$s_expire:$s_flag:$s_resv";
-#			}
-#		}
-#		$counter++;
-#	}
-
         $home_dir = $homedir_prefix.$username;
 	unless (-d $home_dir.'/incoming') {
 	    mkdir $home_dir.'/incoming', 0771;
@@ -240,9 +194,9 @@ sub update_user {
         system("chown $username:$username $home_dir/incoming");
 	system("chmod 0771 $home_dir/incoming");
 
-	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
-	push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
-	push @group_array, "$username:x:$uid:\n";
+	#LDAP_NOW#push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
+	#LDAP_NOW#push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
+	#LDAP_NOW#push @group_array, "$username:x:$uid:\n";
 }
 
 #############################
@@ -252,19 +206,7 @@ sub delete_user {
 	my ($username, $junk, $uid, $gid, $realname, $homedir, $shell, $counter);
 	my $this_user = shift(@_);
 	
-#	foreach (@passwd_array) {
-#		($username, $junk, $uid, $gid, $realname, $homedir, $shell) = split(":", $_);
-#		if ($this_user eq $username) {
-#			$passwd_array[$counter] = '';
-#		}
-#		$counter++;
-#	}
-	
 	print("Deleting User : $this_user\n");
-# Find a better solution
-# I don't like this with vars
-#	system("cd $homedir_prefix ; /bin/tar -czf $tar_dir/$username.tar.gz $username");
-#	system("rm -fr $homedir_prefix/$username");
 	system("/bin/mv /var/lib/sourceforge/cvsroot/home/users/$username /var/lib/sourceforge/cvsroot/home/users/deleted_$username");
 	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/home/users/deleted_$username");
 }
@@ -278,15 +220,8 @@ sub suspend_user {
 	
 	my $new_pass = "!!" . $s_passwd;
 	
-#	foreach (@shadow_array) {
-#		($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv) = split(":", $_);
-#		if ($username eq $s_username) {
-#		       $shadow_array[$counter] = "$s_username:$new_pass:$s_date:$s_min:$s_max:$s_inact:$s_expire:$s_flag:$s_resv";
-#		}
-#		$counter++;
-#	}
-	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
-	push @shadow_array, "$username:!!$passwd:$date:0:99999:7:::\n";
+	#LDAP_NOW#push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
+	#LDAP_NOW#push @shadow_array, "$username:!!$passwd:$date:0:99999:7:::\n";
 }
 
 
@@ -304,16 +239,13 @@ sub add_group {
 
 	print("Making a Group for : $gname\n");
 		
-	push @group_array, "$gname:x:$gid:$userlist\n";
+	#LDAP_NOW#push @group_array, "$gname:x:$gid:$userlist\n";
 	
-	#if (substr($hostname,0,3) ne "cvs") {
-		# Now lets create the group's homedir.
-		mkdir $group_dir, 0775;
-		mkdir $log_dir, 0775;
-		mkdir $cgi_dir, 0775;
-		mkdir $ht_dir, 0775;
-		chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
-	#}
+	mkdir $group_dir, 0775;
+	mkdir $log_dir, 0775;
+	mkdir $cgi_dir, 0775;
+	mkdir $ht_dir, 0775;
+	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 }
 
 #############################
@@ -326,17 +258,7 @@ sub update_group {
 	#CB# Let's make this silent
 	#print("Updating Group: $gname\n");
 	
-#	foreach (@group_array) {
-#		($p_gname, $p_junk, $p_gid, $p_userlist) = split(":", $_);
-#		
-#		if ($gid == $p_gid) {
-#			if ($userlist ne $p_userlist) {
-#				$group_array[$counter] = "$gname:x:$gid:$userlist\n";
-#			}
-#		}
-#		$counter++;
-#	}
-	push @group_array, "$gname:x:$gid:$userlist\n";
+	#LDAP_NOW#push @group_array, "$gname:x:$gid:$userlist\n";
 }
 
 #############################
@@ -347,19 +269,8 @@ sub delete_group {
 	my $this_group = shift(@_);
 	$counter = 0;
 	
-#	foreach (@group_array) {
-#		($gname, $x, $gid, $userlist) = split(":", $_);
-#		if ($this_user eq $gname) {
-#			$group_array[$counter] = '';
-#		}
-#		$counter++;
-#	}
-
 	if (substr($hostname,0,3) ne "cvs") {
 		print("Deleting Group: $this_group\n");
-# Find a better solution
-#		system("cd $grpdir_prefix ; /bin/tar -czf $tar_dir/$this_group.tar.gz $this_group");
-#		system("rm -fr $grpdir_prefix/$this_group");
 		system("/bin/mv /var/lib/sourceforge/cvsroot/home/groups/$this_group /var/lib/sourceforge/cvsroot/home/groups/deleted_group_$this_group");
 		system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_group.tar.gz /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/sourceforge/home/groups/deleted_group_$this_group");
 	}
