@@ -269,6 +269,8 @@ check_server() {
 setup_robot() {
 	setup_vars
 
+	check_server
+
 	# The first account is only used in a multiserver SF
 	echo "Adding robot accounts"
 
@@ -352,6 +354,7 @@ case "$1" in
 		;;
 	empty)
 	        setup_vars
+		check_server
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 		admin_regexp=$(echo $sys_ldap_base_dn | sed 's/, */, */g')
 		admin_regexp="^cn=admin, *$admin_regexp"
@@ -374,6 +377,8 @@ case "$1" in
 		get_our_entries | ldapdelete -D "cn=admin,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
 		;;
 	reset)
+	        # *Warning*!  Big, fat, flashing warning!
+	        # Do not use this target unless you want to delete your LDAP directory!
 		setup_vars
 		invoke-rc.d slapd stop
 		rm -f /var/lib/ldap/*.dbb
