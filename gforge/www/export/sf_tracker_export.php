@@ -30,6 +30,10 @@ header("Content-Type: text/plain");
 ?>
 <tracker version="1.0" xmlns:xsi="http://www.w3.org/2000/10/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://<?php echo $sys_default_domain; ?>/export/sf_tracker_export.xsd">
 <?php
+
+$group_id = $_GET['group_id'];
+$atid = $_GET['atid'];
+
 if ($group_id && $atid) {
 	//
 	//	get the Group object
