@@ -1,3 +1,16 @@
+sourceforge (2.6-0+17+) experimental; urgency=low
+
+  * [Roland] Introducing the plugin subsystem: some infrastructure is now
+    in place to add plugins to Sourceforge.  Currently implemented: a
+    table containing a list of installed plugins, a table for a list of
+    "this group uses that plugin" relations, one for "this user uses that
+    plugin" relations, and a usesPlugin() method for the User and Group
+    classes (in PHP).
+  * [Roland] Also implemented: a PluginManager class, a Plugin class.
+  * [Roland] Also, a hook system.  Read README.Plugins for more info.
+  
+ -- Roland Mas <lolando@debian.org>  Sat, 14 Dec 2002 19:29:04 +0100
+
 sourceforge (2.6-0+17) experimental; urgency=low
 
   * [Christian] repared broken delete function in new_parse.pl (again)
@@ -22,8 +35,8 @@ sourceforge (2.6-0+15) experimental; urgency=low
   * [Christian] Add the possibility to hide forum in news_show_latest
   * [Christian] Added the possibility of a language by theme customization
     and updated README.Custom
-  * [Christian] Included full Spanish translation from Vicente Ruiz.  Thanks
-    again
+  * [Christian] Included full Spanish translation from Vicente Ruiz.
+    Thanks again
   * [Christian] Removed the unused categories column in
     www/admin/grouplist.php
   * [Christian] Added stats_getprojects_active_public function in

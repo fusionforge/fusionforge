@@ -109,6 +109,10 @@ if (!$conn) {
 	exit;
 }
 
+// Plugins subsystem
+require_once('common/include/Plugin.class') ;
+require_once('common/include/PluginManager.class') ;
+
 //determine if they're logged in
 session_set();
 
