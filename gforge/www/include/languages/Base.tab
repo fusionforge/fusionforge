@@ -1909,7 +1909,7 @@ stats_i18n	language_text	This is a list of the preferences that users have chose
 stats_i18n	title	$1 I18n Statistics
 stats_i18n	total_non_english	Total Non-English
 stats_i18n	users	Users
-stats_index	other_statistics	Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
+stats_index	other_statistics	Other statistics:<ul><li><a href="i18n.php">I18n Statistics</a></li></ul>
 stats_index	overview_stats	OVERVIEW STATS
 stats_index	project_stats	PROJECT STATS
 stats_index	site_graphs	SITE GRAPHS
