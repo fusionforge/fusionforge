@@ -516,7 +516,7 @@ class ArtifactType extends Error {
 	 * @return	string	name.
 	 */
 	function getStatusName($id) {
-		$sql="select * from artifact_status WHERE id='$id'";
+		$sql="select status_name from artifact_status WHERE id='$id'";
 		$result=db_query($sql);
 		if ($result && db_numrows($result) > 0) {
 			return db_result($result,0,'status_name');

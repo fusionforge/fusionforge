@@ -1,7 +1,7 @@
 2004-02-26  Tom Copeland <tom@infoether.com>
 	* Applied patch [ #685 ] Translation to PortugueseBrasilian
-	* SQL optimization: Replaced 'select *' in PluginManager.class
-	and BaseLanguage.class with explicit column names.
+	* SQL optimization: Replaced 'select *' in PluginManager.class,
+	BaseLanguage.class, and ArtifactType.class with explicit column names.
 	* Added some PHPDocs to BaseLanguage.class.
 
 2004-02-19  Tom Copeland <tom@infoether.com>
