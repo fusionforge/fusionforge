@@ -27,13 +27,14 @@ sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
 sub parse_sql_file ( $ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/etc/gforge/local.pl") ; 
 require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
 
-&db_connect ;
+$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
+die "Cannot connect to database: $!" if ( ! $dbh );
 
 # debug "Connected to the database OK." ;
 
