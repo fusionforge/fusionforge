@@ -21,8 +21,8 @@
 require ('squal_pre.php');
 
 // SMTP server to connect to
-$MAILSERVER = "sf-list1";
-//$MAILSERVER = "localhost";
+//$MAILSERVER = "sf-list1";
+$MAILSERVER = "localhost";
 // Whether to feed batch on its entirety and ignore responces or
 // *talk* with server. I decided against using pipelining.
 $PIPELINE = 0;
@@ -78,7 +78,7 @@ if (!$mail_res) {
 			"admin@$sys_default_domain",
 			"ATT: Problems with massmail cron script",
 			"This is automatically generated message from\n"
-			."the mass mailing cron script of SourceForge\n"
+			."the mass mailing cron script of $sys_name\n"
 			."installation. There was error querying massmail_queue\n"
 			."database table. Please take appropriate actions.\n"
 		);
@@ -138,12 +138,12 @@ $last_userid = 0;
 // These mailing types should include unsubscription info
 if ($type=='SITE' || $type=='COMMNTY') {
 	$tail = "\r\n==================================================================\r\n"
-	       ."You receive this message because you subscribed to SourceForge\r\n"
+	       ."You receive this message because you subscribed to $sys_name\r\n"
 	       ."site mailing(s). You may opt out from some of them selectively\r\n"
-	       ."by logging in to SourceForge and visiting your Account Maintenance\r\n"
-	       ."page (https://$sys_default_domain/account/), or disable them altogether\r\n"
+	       ."by logging in to $sys_name and visiting your Account Maintenance\r\n"
+	       ."page (http://$sys_default_domain/account/), or disable them altogether\r\n"
 	       ."by visiting following link:\r\n"
-	       ."<https://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
+	       ."<http://$sys_default_domain/account/unsubscribe.php?ch=_%s>\r\n";
 }
 $body = db_result($mail_res, 0, 'message');
 //$lines = explode("\n", $body);
