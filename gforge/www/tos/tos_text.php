@@ -1,10 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: tos_text.php,v 1.2 2000/09/04 22:14:40 q Exp $
+/**
+  *
+  * SourceForge Terms of Service text
+  *
+  * This should be pure HTML content, as it is included in several
+  * other pages.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: tos_text.php,v 1.3 2001/05/22 15:47:25 pfalcon Exp $
+  *
+  */
 ?>
 
 <p>
