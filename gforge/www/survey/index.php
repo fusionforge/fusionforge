@@ -35,7 +35,7 @@ $sh->header(array('title'=>$Language->getText('survey_index','title'),'pagename'
 $sf = new SurveyFactory($g);
 $ss = & $sf->getSurveys();
 if (!$ss) {
-    echo ($Language->getText('survey_error', 'no_survey_found'));
+    echo '<H2>' . ($Language->getText('survey_error', 'no_survey_found')) . '</H2>';
 } else {
     echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }
