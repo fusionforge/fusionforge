@@ -151,7 +151,7 @@ switch ($func) {
 					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 					//conflicts with the "no change" ID! Sorry for messy use of 100.1
 					$_assigned_to=(($assigned_to != '100.1') ? $pt->getAssignedTo() : array('100'));
-					$_dependent_on=array_keys($pt->getDependentOn());
+					$_dependent_on=$pt->getDependentOn();
 					$_new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
 					$_duration=$pt->getDuration();
 					$_parent_id=$pt->getParentID();

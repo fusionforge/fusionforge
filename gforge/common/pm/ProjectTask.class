@@ -636,6 +636,7 @@ class ProjectTask extends Error {
 	 * @returns	boolean	success.
 	 */
 	function setDependentOn(&$arr_) {
+//echo "initial arr: ".print_r($arr);
 //
 //	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!! 
 //
@@ -646,7 +647,9 @@ class ProjectTask extends Error {
 
 		if (count($arr) || count($arr2)) {
 			$add_arr = array_values (array_diff ($arr, $arr2));
+//echo "add arr: ".print_r($add_arr);
 			$del_arr = array_values (array_diff ($arr2, $arr));
+//echo "del arr: ".print_r($del_arr);
 			for ($i=0; $i<count($del_arr); $i++) {
 				db_query("DELETE FROM project_dependencies 
 					WHERE project_task_id='".$this->getID()."'
@@ -688,6 +691,7 @@ class ProjectTask extends Error {
 	 *  Here we are converting an array like array(1,5,9,77) to array(1=>SS,5=>SF,9=>FS,77=>SS)
 	 */
 	function &convertDependentOn($arr) {
+//echo "<p>Convert Dep0: ".print_r($arr);
 		$deps =& $this->getDependentOn();
 		for ($i=0; $i<count($arr); $i++) {
 			if ($deps[$arr[$i]]) {
@@ -698,6 +702,7 @@ class ProjectTask extends Error {
 				$new[$arr[$i]]=PM_LINK_DEFAULT;
 			}	
 		}
+//echo "<p>Convert Dep1: ".print_r($new);
 		return $new;
 	}
 
@@ -906,7 +911,7 @@ class ProjectTask extends Error {
 			}
 		}
 		
-		if (!$this->setDependentOn($this->convertDependentOn($depend_arr))) {
+		if (!$this->setDependentOn($depend_arr)) {
 			db_rollback();
 			return false;
 		} elseif (!$this->setAssignedTo($assigned_arr)) {
