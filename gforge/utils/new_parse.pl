@@ -248,10 +248,10 @@ sub delete_user {
 	print("Deleting User : $this_user\n");
 # Find a better solution
 # I don't like this with vars
-#	system("cd $homedir_prefix ; /bin/tar -czf $tar_dir/$username.tar.gz $username");
-#	system("rm -fr $homedir_prefix/$username");
-	system("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username");
-	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username");
+#	system("cd $homedir_prefix ; /bin/tar -czf $tar_dir/$this_user.tar.gz $this_user");
+#	system("rm -fr $homedir_prefix/$this_user");
+	system("/bin/mv /var/lib/sourceforge/chroot/home/users/$this_user /var/lib/sourceforge/chroot/home/users/deleted_$this_user");
+	system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_user.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$this_user && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$this_user");
 }
 
 #############################

@@ -7,8 +7,9 @@ sourceforge (2.5-33+) unstable; urgency=low
     $sys_theme.
   * [Christian] Applied Otavio patch and updated postinst consequantly
   * [Roland] Bumped Standards-Version to 3.5.7 and DH_COMPAT to 4.
+  * [Otavio] Patch to fix user deletion (closes: #162793).
 
- -- Roland Mas <lolando@debian.org>  Fri,  4 Oct 2002 17:43:54 +0200
+ -- Roland Mas <lolando@debian.org>  Fri,  4 Oct 2002 17:50:07 +0200
 
 sourceforge (2.5-33) unstable; urgency=low
 
