@@ -1,4 +1,4 @@
-2003-04-26  Reinhard Spisser	<reinhard@spisser.it>
+2003-04-28  Reinhard Spisser	<reinhard@spisser.it>
 
 	* common/include/utils.php:
 	bug 52: Path to sendmail is hardcoded
