@@ -67,7 +67,7 @@ $mail_res = db_query("SELECT *
 
 /* If there was error, notify admins, but don't be pesky */
 if (!$mail_res) {
-	$err .= "cannot execute quesry to select pending mailings\n";
+	$err .= "cannot execute query to select pending mailings\n";
 	$hrs = time()/(60*60);
 	// Send reminder every second day at 11am
 	if (($hrs%24)==11 && (($hrs/24)%2)==1) {
