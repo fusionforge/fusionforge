@@ -106,7 +106,6 @@ $sys_account_manager_type='UNIX';
 // LDAP configuration
 //
 // enable(1) or disable(0) ldap use altogether
-$sys_use_ldap=0;
 $sys_ldap_host="ldap.gforge.company.com";
 $sys_ldap_port=389;
 $sys_ldap_version=3;

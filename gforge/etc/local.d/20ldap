@@ -3,7 +3,6 @@
 // LDAP configuration
 //
 // enable(1) or disable(0) ldap use altogether
-$sys_use_ldap={sys_use_ldap};
 $sys_ldap_host="{ldap_host}";
 $sys_ldap_port=389;
 $sys_ldap_version=3;

@@ -61,7 +61,6 @@ computedefault(){
 	DEFAULTsys_lang=English
 	DEFAULTsys_default_timezone=GMT
 	DEFAULTsys_default_country_code=US
-	DEFAULTsys_use_ldap=0
 	DEFAULTsys_account_manager_type=$SYSTEM
 	DEFAULTsys_use_jabber=0
 	DEFAULTsys_use_auth_ldap=1
