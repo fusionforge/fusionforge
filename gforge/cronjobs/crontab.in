@@ -118,7 +118,7 @@ MAILTO=""
 #
 #       Daily CVS stats collection
 #
-###incomplete 20 1 * * * $PHP $GFORGE/cronjobs/cvs-cron/history_parse.php
+#20 1 * * * $PHP $GFORGE/cronjobs/cvs-cron/history_parse.php
 
 #
 #       Create the new mailing lists
