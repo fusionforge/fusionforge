@@ -59,6 +59,7 @@ GFORGE_DIR=$RPM_BUILD_ROOT/%{_datadir}/gforge
 CACHE_DIR=$RPM_BUILD_ROOT/var/cache/gforge
 UPLOAD_DIR=$RPM_BUILD_ROOT/var/lib/gforge/upload
 SCM_TARBALLS_DIR=$RPM_BUILD_ROOT/var/lib/gforge/scmtarballs
+SCM_SNAPSHOTS_DIR=$RPM_BUILD_ROOT/var/lib/gforge/scmsnapshots
 HTTPD_CONF_DIR=$RPM_BUILD_ROOT/%{_sysconfdir}/httpd
 GFORGE_CONF_DIR=$RPM_BUILD_ROOT/%{_sysconfdir}/gforge
 GFORGE_LIB_DIR=$RPM_BUILD_ROOT/%{_libdir}/gforge

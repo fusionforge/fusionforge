@@ -110,9 +110,10 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 <p><?php echo $Language->getText('project_admin','shell_server_group_directory') ?><br/><strong><?php echo account_group_homedir($group->getUnixName()); ?></strong></p>
 <p><?php echo $Language->getText('project_admin','www_directory') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></p>
 
-<p align="center">
-<a href="/tarballs.php?group_id=<?php echo $group_id; ?>">[ <?php echo $Language->getText('project_admin','download_tarball') ?>]</a></p>
-</p>
+<?php if($sys_use_scm) { ?>
+	<p>[ <a href="/tarballs.php?group_id=<?php echo $group_id; ?>"><?php echo $Language->getText('project_admin', 'download_tarball') ?></a> ]</p>
+<?php } ?>
+
 <hr />
 <p>
 <h4><?php echo $Language->getText('project_admin','trove_categorization') ?><a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('general','edit') ?>]</a></h4>

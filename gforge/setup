@@ -71,6 +71,7 @@ computedefault(){
 	DEFAULTsys_ldap_auth_version=3
 	DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 	DEFAULTsys_scm_tarballs_path=$GFGDIR/var/lib/gforge/scmtarballs
+	DEFAULTsys_scm_snapshots_path=$GFGDIR/var/lib/gforge/scmsnapshots
 	DEFAULTsys_use_scm=true
 	DEFAULTsys_use_tracker=true
 	DEFAULTsys_use_forum=true

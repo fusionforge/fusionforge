@@ -11,7 +11,8 @@ usr/share
 usr/share/gforge/common
 usr/share/gforge/www
 var/lib/gforge
-var/lib/gforge/cvstarballs
+var/lib/gforge/scmtarballs
+var/lib/gforge/scmsnapshots
 var/lib/gforge/download
 var/lib/gforge/etc
 var/cache/gforge

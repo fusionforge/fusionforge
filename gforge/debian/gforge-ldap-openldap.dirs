@@ -16,7 +16,8 @@ var/lib/gforge/bind
 var/lib/gforge/chroot
 var/lib/gforge/download
 var/lib/gforge/etc
-var/lib/gforge/cvstarballs
+var/lib/gforge/scmtarballs
+var/lib/gforge/scmsnapshots
 var/lib/gforge/ftp
 var/lib/gforge/ftp/incoming
 var/lib/gforge/tmp
