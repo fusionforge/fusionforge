@@ -83,7 +83,7 @@ public class AcceptanceTest {
         }
     }
      public static void main(String[] args) throws Exception {
-        AcceptanceTest test = new  AcceptanceTest();
-        test.run();
+         AcceptanceTest test = new  AcceptanceTest();
+         test.run();
     }
 }
