@@ -11,16 +11,16 @@
 
 require_once('www/search/include/engines/GroupSearchEngine.class');
 
-class TrackersGroupSearchEngine extends GroupSearchEngine {
+class ForumsGroupSearchEngine extends GroupSearchEngine {
 	
-	function TrackersGroupSearchEngine() {
+	function ForumsGroupSearchEngine() {
 		global $Language;
-		$this->GroupSearchEngine(SEARCH__TYPE_IS_TRACKERS, 'TrackersHtmlSearchRenderer', $Language->getText('searchbox','trackers'));
+		$this->GroupSearchEngine(SEARCH__TYPE_IS_FORUMS, 'ForumsHtmlSearchRenderer', $Language->getText('searchbox','forums'));
 	}
 	
 	function isAvailable($parameters) {
 		if(parent::isAvailable($parameters)) {
-			if($this->Group->usesTracker()) {
+			if($this->Group->usesForum()) {
 				return true;
 			}
 		}

@@ -10,7 +10,13 @@
  */
 
 require_once('www/search/include/engines/GroupSearchEngine.class');
+require_once('www/search/include/engines/DocsGroupSearchEngine.class');
+require_once('www/search/include/engines/ForumsGroupSearchEngine.class');
+require_once('www/search/include/engines/FrsGroupSearchEngine.class');
+require_once('www/search/include/engines/NewsGroupSearchEngine.class');
+require_once('www/search/include/engines/TasksGroupSearchEngine.class');
 require_once('www/search/include/engines/TrackersGroupSearchEngine.class');
+
 require_once('www/search/include/engines/ArtifactSearchEngine.class');
 require_once('www/search/include/engines/ForumSearchEngine.class');
 
@@ -96,23 +102,23 @@ class SearchManager {
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FORUMS,
-			new GroupSearchEngine(SEARCH__TYPE_IS_FORUMS, 'ForumsHtmlSearchRenderer', $Language->getText('searchbox','forums'))
+			new ForumsGroupSearchEngine()
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_TASKS,
-			new GroupSearchEngine(SEARCH__TYPE_IS_TASKS, 'TasksHtmlSearchRenderer', $Language->getText('searchbox','tasks'))
+			new TasksGroupSearchEngine()
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_FRS,
-			new GroupSearchEngine(SEARCH__TYPE_IS_FRS, 'FrsHtmlSearchRenderer', $Language->getText('searchbox','frs'))
+			new FrsGroupSearchEngine()
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_DOCS,
-			new GroupSearchEngine(SEARCH__TYPE_IS_DOCS, 'DocsHtmlSearchRenderer', $Language->getText('searchbox','docs'))
+			new DocsGroupSearchEngine()
 		);
 		$this->addSearchEngine(
 			SEARCH__TYPE_IS_NEWS,
-			new GroupSearchEngine(SEARCH__TYPE_IS_NEWS, 'NewsHtmlSearchRenderer', $Language->getText('searchbox','news'))
+			new NewsGroupSearchEngine()
 		);
 		
 		// Global search engine
