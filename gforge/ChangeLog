@@ -1,3 +1,8 @@
+2003-12-18  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* common/include/GForge.class: Only count public projects and
+	non-None users when gathering statistics for the front page.
+
 2003-12-17  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* README.Plugins: Mention ldapextauth in the list of known
