@@ -1800,4 +1800,132 @@ project_stats_graph	page_view_days	Pagine visualizzate (rosso) e download (blu) 
 project_stats_graph	page_view_months	Pagine visualizzate (rosso) e download (blu) per gli ultimi $1 mesi
 project_stats_graph	date	Data
 project_stats_graph	views	Viste (rosso) / Download (blu)
+people	about_blurb	<P>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non &egrave; consentito un uso commerciale.<P>L'elenco dei progetti rimane attivo per due settimane oppure se viene chiusa la posozione (amministratori di progetto possono ri-postare posizioni scadute)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
+people	section	Progetti in ricerca di aiuto
+people	title	Sistema per la ricerca di aiuto
+people	here_is_list_position	Di seguito &egrave; elencato un elenco di posizioni disponibili per il progetto.
+people	click_job_titles	Seleziona il titolo delle posizioni per maggiori informazioni
+people	last_posts	Ultimi inserimenti
+people	more_latest_posts	inserimenti pi&ugrave; recenti
+people	category	Categoria
+people	short_description	Descrizione breve
+people	long_description	Descrizione lunga
+people	status	Stato
+people	error_inserting	ERRORE durante l'inserimento della competenza
+people	added_skill	Aggiungi a elenco competenze
+people	error_skill_already	ERRORE - competenza gi&agrave; inserita
+people	must_be_loggin	Devi essere collegato
+people	must_select_a_skill	&Egrave; necessario selezionare un ID competenza
+people	skill	Competenza
+people	level	Livello
+people	experience	Esperienza
+people	no_skill_inventory_setup_up	Nessun inventario compentenze disponibile
+people	action	Azione
+people	add_new_skill	Aggiungi nuova competenza
+people	add_skill	Aggiungi competenza
+people	invalid_id	ID non valido
+people	no_categories_found	Nessuna categoria trovata
+people	date_opened	Data inserimento
+people	title_array	Titolo
+people	project	progetto
+people	none_found	Nessuno trovato
+people_admin	section	Progetti in ricerca di aiuto
+people_admin	title	Amministrazione progetti in ricerca di aiuto
+people_admin_people_cat	section	Amministrazione progetti in ricerca di aiuto
+people_admin_people_cat	title	Aggiungi categorie posizione
+people_admin_people_skills	section	Amministrazione progetti in ricerca di aiuto
+people_admin_people_skills	title	Aggiungi competenze di posizione
+people_cat	section	Progetti in ricerca di aiuto
+people_cat	title	Elenca posizioni per categoria
+people_createjob	section	Progetti in ricerca di aiuto
+people_createjob	title	Crea una nuova posizione
+people_createjob	explains	Riempire i campi sottostanti. Cliccando su continua viene visualizzato un elenco di competenze ed esperienze necessarie per la posizione.
+people_createjob	continue	Continua >>
+people_editjob	section	Progetti in ricerca d'aiuto
+people_editjob	title	Modifica posizione
+people_editjob	error_missing	errore - informazioni mancanti
+people_editjob	fill_in	Riempire tutti i campi obbligatori
+people_editjob	job_insert_failed	Inserimento Posizione fallita
+people_editjob	job_insert_ok	Posizione inserita
+people_editjob	job_update_no	Aggiornamento posizione fallita
+people_editjob	job_update_ok	Aggiornamento posizione effettuata
+people_editjob	job_update_no_wrong_id	Aggiornamento posizione fallita - project_id errato
+people_editjob	job_skill_update_no	Aggiornamento competenza posizione fallito
+people_editjob	job_skill_update_ok	Aggiornamento competenza posizione eseguito
+people_editjob	job_skill_update_no_wrong_id	Aggiornamento competenza posizione fallita - project_id errato
+people_editjob	job_skill_delete_no	Cancellazione competenza posizione fallita
+people_editjob	job_skill_delete_ok	Cancellazione competenza posizione effettuata
+people_editjob	job_skill_delete_no_wrong_id	Cancellazione competenza posizione fallita - project_id errato
+people_editjob	posting_fetch_failed	POSTING fetch FAILED
+people_editjob	no_such	Nessuna posizione disponibile per il progetto
+people_editjob	skill_explains	<p>&Egrave; possibile cambiare l'elenco delle competenze necessarie per questa posizione. </p><p>Tutte le posizioni verranno chiuse automaticamente dopo due settimane.</p>
+people_editjob	update_description	Aggiorna descrizioni
+people_editjob	finished	Finito
+people_editprofile	section	Progetti in ricerca d'aiuto
+people_editprofile	update_failed	Aggiornamento utente fallito
+people_editprofile	update_ok	Aggiornamento utente eseguito
+people_editprofile	title	Modifica profilo
+people_editprofile	error	errore - informazioni mancanti
+people_editprofile	fill_all_required_fields	Riempire tutti i campi obbligatori
+people_editprofile	failed_to_add_skill	Aggiunta competenza fallita
+people_editprofile	skill_added_ok	Competenza aggiunta
+people_editprofile	no_skills_selected	Nessuna competenza selezionata
+people_editprofile	failed_update_skills	Aggiornamento competenze fallita
+people_editprofile	fill_all_required_fields	Competenza $1 aggiornata
+people_editprofile	skills_edit	Modifica comptetenze
+people_editprofile	edit_skills	Modifica posizione
+people_editprofile	change_required_fields	Change the required fields, and press "Done" at the bottom of the page
+people_editprofile	cancel_skills_update	Aggiornamento competenze cancellato
+people_editprofile	no_skills_selected_to_delete	Nessuna competenza da cancellare selezionata
+people_editprofile	failed_delete_skills	Cancellazione competenze fallita
+people_editprofile	skill_delete_successfully	Competenze $1 cancellate
+people_editprofile	confirm_skill_delete	Conferma la cancellazione delle competenze
+people_editprofile	confirm_delete	Conferma cancellazione
+people_editprofile	about_to_delete	Stai per cancellare le seguenti competenze $1
+people_editprofile	from_skills_database	dal database delle competenze. Questa operazione non &egrave; irreversibile.
+people_editprofile	are_you_sure	Sei <strong>sicuro</strong> di voler continuare?
+people_editprofile	skill_deletion_cancelled	Cancellazione competenza annullata
+people_editprofile	edit_your_profile	Modifica il profilo
+people_editprofile	user_fetch_failed	User fetch FAILED
+people_editprofile	no_such_user	L'utente non esiste
+people_editprofile	edit_public_permissions	Modifica permessi pubblici
+people_editprofile	following_options	Le segeunti opzioni determinano se altri possono vedere le tue competenze. 
+people_editprofile	publicly_viewable	Visibile da tutti
+people_editprofile	update_permission	Aggiorna permessi
+people_editprofile	no_skill_types_in_database	Nessun tipo competenze disponibile nel database (tabella skills_data_types)
+people_editprofile	no_skill_types_in_database_inform	Nessun tipo competenze nel database - informare il system administrator
+people_editprofile	add_new_skill	Aggiungi una nuova competenza
+people_editprofile	you_can_enter_new_skills	Inserire nuove competenze acquisite. 
+people_editprofile	all_fields_required	Tutti i campi sono richiesti!
+people_editprofile	add_this_skill	Aggiungi questa competenza
+people_editprofile	edit_delete_your_skills	Modifica/cancella le tue competenze
+people_editprofile	type	Tipo
+people_editprofile	profile_title	Titolo
+people_editprofile	start_date	Data inizio
+people_editprofile	end_date	Data fine
+people_editprofile	keywords	Parole chiavi
+people_editprofile	title_max_100_chars	Titolo (massimo 100 caratteri)
+people_editprofile	keywords_max_255_chars	parole chiavi (massimo 255 caratteri)
+people_help_wanted_latest	title	Ultimi inserimenti
+people_helpwanted_latest	section	Progetti in ricerca d'aiuto
+people_helpwanted_latest	title	Ultimi inserimenti
+people_proj	section	Progetti in ricerca d'aiuto
+people_proj	title	Progetti in ricerca di aiuto
+people_viewjob	section	Progetti in ricerca di aiuto
+people_viewjob	title	$1 wanted for $2
+people_viewjob	posting_id_not_found	Posting ID not found
+people_viewjob	view_a_job	Visualizza una posizione
+people_viewjob	fetch_failed	POSTING fetch FAILED
+people_viewjob	no_such_posting	Questa posizione non &egrave; disponibile per questo progetto
+people_viewjob	view_a_job	Visualizza posizione
+people_viewjob	contact_info	Informazioni sul contatto
+people_viewjob	open_date	Data inizio
+people_viewjob	for_project	Per il progetto
+people_viewjob	required_skills	Competenze richieste
+people_viewprofile	section	Informazioni utente
+people_viewprofile	title	Visualizza un profilo utente
+people_viewprofile	user_fetch_failed	User fetch FAILED
+people_viewprofile	no_such_user	L'utente non esiste
+people_viewprofile	set_private	L'utente ha impostato il suo profilo a privato
+people_viewprofile	skills_profile_for	Profilo delle competenze
 
