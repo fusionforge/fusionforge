@@ -67,6 +67,7 @@ case "$1" in
 
 	;;
     configure)
+	/usr/lib/gforge/bin/prepare-vhosts-file.pl
 	if [ -x /usr/sbin/apache ]; then
 		invoke-rc.d apache restart
 	fi

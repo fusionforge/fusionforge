@@ -97,6 +97,8 @@ install: build
 
 	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache/var/cache/gforge
 	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
+	install -m 755 deb-specific/create-vhosts.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
+	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 
 	# gforge-db-postgresql
 	#NOT USED#install -m 644 db/SourceForge.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
