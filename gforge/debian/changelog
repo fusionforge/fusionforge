@@ -1,4 +1,4 @@
-sourceforge (2.5-14+) unstable; urgency=medium
+sourceforge (2.5-15) unstable; urgency=medium
 
   * [Christian] LDAP cleanup: Added access to userPassword for SF_robot
     (Thanks to Justin Richer), made a clean LDAP purge, made
@@ -30,7 +30,7 @@ sourceforge (2.5-14+) unstable; urgency=medium
   * Rewrote the config file handling, so that it does not overwrite local
     changes (closes: #120442).
 
- -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 13:54:45 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 14:46:29 +0100
 
 sourceforge (2.5-14) unstable; urgency=low
 
