@@ -1,4 +1,4 @@
-system_name=Gforge
+system_name=MyGForge
 domain_name=gforge.company.com
 server_admin=webmaster@gforge.company.com
 db_host=localhost
@@ -49,6 +49,7 @@ sys_ldap_auth_host=localhost
 sys_ldap_auth_port=389
 sys_ldap_auth_version=3
 sys_ldap_auth_dn=dc=gforge,dc=company,dc=com
+sys_cvs_tarballs_path=/path/to/cvs/tarballs
 sys_use_cvs=true
 sys_use_tracker=true
 sys_use_forum=true
@@ -63,6 +64,9 @@ sys_use_trove=true
 sys_use_snippet=true
 sys_use_ssl=false
 sys_use_people=true
+sys_use_project_vhost=true
+sys_use_project_database=false
+sys_use_project_multimedia=false
 sys_project_reg_restricted=true
 sys_localization_enable_caching=true
 sys_localization_cache_path=/path/to/localization/cache/
