@@ -104,7 +104,7 @@ if ($editdoc && $docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 
-	docman_header($Language->getText('docman_admin_editdocs','title'),'Edit Document','docman_admin_docedit','admin',$g->getPublicName(),'');
+	docman_header($Language->getText('docman_admin_editdocs','section'),$Language->getText('docman_admin_editdocs','title'),'docman_admin_docedit','admin',$g->getPublicName(),'');
 
 	?>
 		<br />
@@ -202,7 +202,7 @@ if ($editdoc && $docid) {
 //
 } elseif ($addgroup) {
 
-	docman_header($Language->getText('docman_admin_editgroups','title'),$Language->getText('docman_admin_editgroups','section'),'docman_admin_editgroups','admin',$g->getPublicName(),'');
+	docman_header($Language->getText('docman_admin_addgroups','section'),$Language->getText('docman_admin_addgroups','title'),'docman_admin_addgroups','admin',$g->getPublicName(),'');
 
 	echo "<h1>".$Language->getText('docman_admin_addgroups','title')."</h1>";
 
@@ -215,7 +215,7 @@ if ($editdoc && $docid) {
 	if ($result && $rows > 0) {
 		$title_arr=array();
 		$title_arr[]='ID';
-		$title_arr[]='Title';
+		$title_arr[]=$Language->getText('docman_admin_groupedit','group_name');
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -230,7 +230,7 @@ if ($editdoc && $docid) {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo "\n<h1>No Document Groups Defined</h1>";
+		echo "\n<h1>".$Language->getText('docman','error_no_groups_defined')."</h1>";
 	}
 
 	?>
@@ -240,7 +240,7 @@ if ($editdoc && $docid) {
 		<tr>
 			<th><?php echo $Language->getText('docman_admin_editgroups','new_group_name') ?>:</th>
 			<td><input type="text" name="groupname"></td>
-			<td><input type="submit" value="Add" name="submit"></td>
+			<td><input type="submit" value="<?php echo $Language->getText('general','add') ?>" name="submit"></td>
 		</tr>
 	</table>	
 	<p>
@@ -263,7 +263,7 @@ if ($editdoc && $docid) {
 		exit_error('Error',$dg->getErrorMessage());
 	}
 
-	docman_header($Language->getText('docman_admin_editgroups','title'),$Language->getText('docman_admin_editgroups','section'),'docman_admin_editgroups','admin',$g->getPublicName(),'');
+	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'docman_admin_editgroups','admin',$g->getPublicName(),'');
 	?>
 	<p><strong><?php echo $Language->getText('docman_admin_editgroups','edit_group') ?></strong>
 	<form name="editgroup" action="index.php?editgroup=1&group_id=<?php echo $group_id; ?>" method="POST">
@@ -298,7 +298,7 @@ if ($editdoc && $docid) {
 	$df->setSort('stateid');
 	$d_arr =& $df->getDocuments();
 
-	docman_header($Language->getText('docman_admin','title'),$Language->getText('docman_admin','section'),'docman_admin','admin',$g->getPublicName(),'admin');
+	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),$Language->getText('docman_admin','title'),'docman_admin','admin',$g->getPublicName(),'admin');
 
 	?>
 	<h3><?php echo $Language->getText('docman_admin','title') ?></h3>
@@ -326,7 +326,7 @@ if ($editdoc && $docid) {
 			}
 			print "\n<li><a href=\"index.php?editdoc=1&docid=".$d_arr[$i]->getID()."&group_id=$group_id\">".
 				$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
-				"\n<br /><em><?php echo $Language->getText('docman','description') ?>:</em> ".$d_arr[$i]->getDescription();
+				"\n<br /><em>".$Language->getText('docman_new','description').":</em> ".$d_arr[$i]->getDescription();
 
 		}
 		print "\n</ul>\n";

@@ -85,7 +85,7 @@ function doc_droplist_count($l_group_id, $language_id) {
 				print "<option value=\"".$grow['language_id']."\">".$grow['name']." (".$grow['count'].") </option>";
 			}	
 		}	
-		print "</select></td><td valign=\"center\"><input type=\"submit\" value=\"Go\"></td></tr></table></form>"; 
+		print "</select></td><td valign=\"center\"><input type=\"submit\" value=\"".$Language->getText('general','go')."\"></td></tr></table></form>"; 
 	} else {
 		echo db_error();
 	}
