@@ -254,7 +254,7 @@ if ($project->usesTracker()) {
 			echo '<p />
 		&nbsp;-&nbsp;<a href="/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 		'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-		( <strong>'.$Language->getText('project_home','tracker_open',array(db_result($result, $j, 'open_count'), db_result($result, $j, 'count'))) .'</strong> )<br />'.
+		( '.$Language->getText('project_home','tracker_open',array((int) db_result($result, $j, 'open_count'), (int) db_result($result, $j, 'count'))) .' )<br />'.
 		db_result($result, $j, 'description');
 		}
 	}
