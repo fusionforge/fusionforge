@@ -34,7 +34,7 @@ if ($submit){
 
 	if (!$doc_group || $doc_group ==100) {
 		//cannot add a doc unless an appropriate group is provided
-		exit_error($Language->getText('general','error'),$Language->getText('general','no_valid_group'),array('Document'));
+		exit_error($Language->getText('general','error'),$Language->getText('general','no_valid_group',array('Document')));
 	}
 
 	if (!$title || !$description) { 
