@@ -60,8 +60,7 @@ if (session_loggedin()) {
 		}
 	} else {
 		global $G_SESSION;
-//		exit_error('ERROR','You can\'t rate yourself');
-		exit_error('ERROR',$rated_user);
+		exit_error('ERROR','You can\'t rate yourself');
 	}
 
 	echo $HTML->header(array('title'=>'User Ratings Page'));
