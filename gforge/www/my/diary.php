@@ -58,7 +58,7 @@ if (user_isloggedin()) {
 						"\n\n" . util_line_wrap(stripslashes($details)).
 						"\n\n______________________________________________________________________".
 						"\nYou are receiving this email because you elected to monitor this user.".
-						"\nTo stop monitoring this user, login to SourceForge and visit: ".
+						"\nTo stop monitoring this user, login to ".$GLOBALS['sys_name']." and visit: ".
 						"\nhttp://$GLOBALS[sys_default_domain]/developer/monitor.php?diary_user=". user_getid();
 
 						exec ("/bin/echo \"". util_prep_string_for_sendmail($body) ."\" | /usr/sbin/sendmail -fnoreply@$GLOBALS[HTTP_HOST] -t -i >& /dev/null &");

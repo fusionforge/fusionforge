@@ -49,7 +49,7 @@ if ($send_mail) {
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$from='From: '. $name .' <'. $email .'>';
 		mail($to, stripslashes($subject),stripslashes($body) ,$from);
-		$HTML->header(array('title'=>'SourceForge Contact','pagename'=>'sendmessage','titlevals'=>array($to)));
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($to)));
 		echo '<p>Message has been sent.</p>';
 		$HTML->footer(array());
 		exit;
@@ -60,7 +60,7 @@ if ($send_mail) {
 		$to=db_result($result,0,'email');
 		$from='From: '. $name .' <'. $email .'>';
 		mail($to, stripslashes($subject), stripslashes($body),$from);
-		$HTML->header(array('title'=>'SourceForge Contact','pagename'=>'sendmessage','titlevals'=>array($touser)));
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($touser)));
 		echo '<p>Message has been sent.</p>';
 		$HTML->footer(array());
 		exit;
@@ -73,7 +73,7 @@ if ($toaddress) {
 	$titleaddress = db_result($result,0,'user_name');
 }
 
-$HTML->header(array('title'=>'SourceForge Staff','pagename'=>'sendmessage','titlevals'=>array($titleaddress)));
+$HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmessage','titlevals'=>array($titleaddress)));
 
 ?>
 

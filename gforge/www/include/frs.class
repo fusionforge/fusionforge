@@ -814,7 +814,7 @@ class FRS extends Error {
 			$unix_group = db_result($result,0,'unix_group_name');
 			$date = date('Y-m-d H:i',time());
 			
-			$subject = '[SourceForge Release] '
+			$subject = '['.$GLOBALS['sys_name'].' Release] '
 			           .$unix_group.' : '.$package;
 		
 
@@ -824,17 +824,17 @@ class FRS extends Error {
 				."\n\nProject \"$full_group\" ('$unix_group') has "
 			        ."released the new version of package '"
 				.$package."'. "
-				."You can download it from SourceForge "
-				."by following this link:\n"
+				."You can download it from ".$GLOBALS['sys_name']
+				." by following this link:\n"
 				."<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=$group_id&release_id=$release_id>\n"
 				."or browse Release Notes and ChangeLog by visiting this link:\n"
 				."<http://".$GLOBALS['HTTP_HOST']."/project/shownotes.php?release_id=$release_id> "
 				."\n\nYou receive this email because you "
 				."requested to be notified when new versions of this package "
 				."were released. If you don't wish to be notified in the "
-				."future, please login to SourceForge and click this link: "
+				."future, please login to ".$GLOBALS['sys_name']." and click this link: "
 				."<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=$package_id> "
-				."\nIf you lost your SourceForge login name or password, refer to "
+				."\nIf you lost your ".$GLOBALS['sys_name']." login name or password, refer to "
 				."this document: "
 				."<http://$GLOBALS[HTTP_HOST]/docman/display_doc.php?docid=760&group_id=1> "
 				."\n\nNote that you may receive this message indirectly via one of "

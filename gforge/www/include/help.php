@@ -34,7 +34,7 @@ function help_header($title) {
 <TITLE><?php print $title; ?></TITLE>
 </HEAD>
 <BODY bgcolor="#FFFFFF">
-<H4>SourceForge Site Help System:</H4>
+<H4><?php echo $GLOBALS['sys_name']; ?> Site Help System:</H4>
 <H2><?php print $title; ?></H2>
 <HR>
 <?php

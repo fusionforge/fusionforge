@@ -105,10 +105,10 @@ Project WWW directory on shell server <a href="/docman/display_doc.php?docid=774
 <P>
 <HR NOSHADE>
 <P>
-<H4>Showing The SourceForge Logo:</H4>
+<H4>Showing The <?php echo $GLOBALS['sys_name']; ?> Logo:</H4>
 <p>
 <font size=-1>
-If you use SourceForge services, we ask you to display our logo
+If you use <?php echo $GLOBALS['sys_name']; ?> services, we ask you to display our logo
 on project homepage, as explained
 <a href="http://sourceforge.net/docman/display_doc.php?docid=790&group_id=1">here
 </a>
@@ -118,7 +118,7 @@ on project homepage, as explained
 <?php
 echo htmlspecialchars('<A href="http://'.$GLOBALS['sys_default_domain'].'"> 
 <IMG src="http://'.$GLOBALS['sys_default_domain'].'/sflogo.php?group_id='. $group_id .'" width="88" height="31"
-border="0" alt="SourceForge Logo"></A>');
+border="0" alt="'.$GLOBALS['sys_name'].' Logo"></A>');
 
 echo '<P>'.html_image('images/sflogo-88-1.png','88','31',array(),0);
 

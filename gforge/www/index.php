@@ -49,7 +49,7 @@ echo '<P>';
 
 <!--
 
-<br><b>SourceForge Development Foundries</b><br><br>
+<br><b><?php echo $GLOBALS['sys_name']; ?> Development Foundries</b><br><br>
 <table bgcolor="White" border="0" cellpadding="0" cellspacing="0" valign="top" width="100%">
 <tr>
 	<td>Essentials:</td>

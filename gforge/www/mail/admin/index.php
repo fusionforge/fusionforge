@@ -69,7 +69,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 					$row_email = db_fetch_array($res_email);
 
 					// mail password to admin
-					$message = "A mailing list will be created on SourceForge in 6-24 hours \n"
+					$message = "A mailing list will be created on ".$GLOBALS['sys_name']." in 6-24 hours \n"
 					. "and you are the list administrator.\n\n"
 					. "This list is: $new_list_name@" .$GLOBALS['sys_lists_host'] ."\n\n"
 					. "Your mailing list info is at:\n"
@@ -78,10 +78,10 @@ if ($group_id && user_ismember($group_id,'A')) {
 					. "https://".$GLOBALS['sys_lists_host']."/mailman/admin/$new_list_name\n\n"
 					. "Your list password is: $list_password\n"
 					. "You are encouraged to change this password as soon as possible.\n\n"
-					. "Thank you for registering your project with SourceForge.\n\n"
-					. " -- the SourceForge staff\n";
+					. "Thank you for registering your project with ".$GLOBALS['sys_name'].".\n\n"
+					. " -- the ".$GLOBALS['sys_name']." staff\n";
 
-					mail ($row_email['email'],"SourceForge New Mailing List",$message,"From: admin@$GLOBALS[sys_default_domain]");
+					mail ($row_email['email'],$GLOBALS['sys_name']." New Mailing List",$message,"From: admin@$GLOBALS[sys_default_domain]");
  
 					$feedback .= " Email sent with details to: $row_email[email] ";
 				}
@@ -166,7 +166,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			echo '
 			<P>
 			You can administrate lists from here. Please note that private lists
-			can still be viewed by members of your project, but are not listed on SourceForge.<P>';
+			can still be viewed by members of your project, but are not listed on '.$GLOBALS['sys_name'].'.<P>';
 
 			$title_arr=array();
 			$title_arr[]='List';

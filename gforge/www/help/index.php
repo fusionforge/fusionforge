@@ -14,7 +14,7 @@
 
 require_once('pre.php');
 
-$HTML->header(array(title=>"Welcome to SourceForge"));
+$HTML->header(array(title=>"Welcome to ".$GLOBALS['sys_name']));
 
 print "<p>Page Information";
 print "<p>Page Information";

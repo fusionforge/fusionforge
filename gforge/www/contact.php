@@ -13,7 +13,7 @@
 
 require_once('pre.php');
 
-$HTML->header(array('title'=>'Contact SourceForge','pagename'=>'contact'));
+$HTML->header(array('title'=>'Contact '.$GLOBALS['sys_name'],'pagename'=>'contact'));
 
 echo $Language->getText('contact', 'about_blurb');
 

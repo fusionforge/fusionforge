@@ -97,7 +97,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<INPUT TYPE="TEXT" NAME="summary" VALUE="'.db_result($result,0,'summary').'" SIZE="30" MAXLENGTH="60"><BR>
 		<B>Details:</B><BR>
 		<TEXTAREA NAME="details" ROWS="5" COLS="50" WRAP="SOFT">'.db_result($result,0,'details').'</TEXTAREA><P>
-		<B>If this item is on the SourceForge home page and you edit it, it will be removed from the home page.</B><BR>
+		<B>If this item is on the '.$GLOBALS['sys_name'].' home page and you edit it, it will be removed from the home page.</B><BR>
 		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
 		</FORM>';
 
@@ -273,7 +273,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 } else {
 
-	exit_error('Permission Denied.','Permission Denied. You have to be an admin on the project you are editing or a member of the SourceForge News team.');
+	exit_error('Permission Denied.','Permission Denied. You have to be an admin on the project you are editing or a member of the '.$GLOBALS['sys_name'].' News team.');
 
 }
 ?>

@@ -20,7 +20,7 @@ print '<?xml version="1.0" encoding="utf-8"?>';
 <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/">
     <channel rdf:about="http://www.xml.com/xml/news.rss">
         <title>OSDN Universal Search</title>
-        <description>SourceForge export for OSDN Universal search</description>
+        <description><?php echo $GLOBALS['sys_name']; ?> export for OSDN Universal search</description>
 <?php
 	$result=search_projects();
 	if (!$result || db_numrows($result) < 1) {

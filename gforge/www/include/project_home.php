@@ -46,7 +46,7 @@ $res_admin = db_query("
 ");
 
 if ($project->getStatus() == 'H') {
-	print "<P>NOTE: This project entry is maintained by the SourceForge staff. We are not "
+	print "<P>NOTE: This project entry is maintained by the ".$GLOBALS['sys_name']." staff. We are not "
 		. "the official site "
 		. "for this product. Additional copyright information may be found on this project's homepage.\n";
 }

@@ -76,12 +76,12 @@ if ($submit) {
 
 			?>
 
-			<p>Your project has been submitted to the SourceForge admininstrators.
+			<p>Your project has been submitted to the <?php echo $GLOBALS['sys_name']; ?> admininstrators.
 			Within 72 hours, you will receive decision notification and further
 			instructions.
 			</p>
 			<p>
-			Thank you for choosing SourceForge.
+			Thank you for choosing <?php echo $GLOBALS['sys_name']; ?>.
 			</p>
 
 			<?php
@@ -126,9 +126,9 @@ Full Name:
 <P>
 <b>
 Please provide detailed, accurate description of your project and
-what SourceForge resources and in which way you plan to use. This
+what <?php echo $GLOBALS['sys_name']; ?> resources and in which way you plan to use. This
 description will be the basis for the approval or rejection of
-your project's hosting on SourceForge, and later, to ensure that
+your project's hosting on <?php echo $GLOBALS['sys_name']; ?>, and later, to ensure that
 you are using the services in the intended way. This description
 will not be used as a public description of your project. It must
 be written in English.
@@ -145,7 +145,7 @@ be written in English.
 <P><B><I>If you are applying for a website-only project, please
 select "website-only" from the choices below and proceed.</I></B>
 
-<P>SourceForge was created to advance Open Source software development.
+<P><?php echo $GLOBALS['sys_name']; ?> was created to advance Open Source software development.
 To keep things simple, we are relying on the outstanding work
 of the <A href="http://www.opensource.org">Open Source Initiative</A>
 for our licensing choices.
@@ -166,7 +166,7 @@ updated appropriately. <i>Please note that license changes are not
 retroactive (i.e. do not apply to products already released under
 OpenSource license).</i>
 
-<P>SourceForge is not responsible for legal discrepencies regarding
+<P><?php echo $GLOBALS['sys_name']; ?> is not responsible for legal discrepencies regarding
 your license.
 
 <P><B>Licenses</B>

@@ -17,7 +17,7 @@ function site_admin_header($params) {
 	global $feedback;
 	$HTML->header($params);
 	echo html_feedback_top($feedback);
-	echo '<H2>SourceForge Site Admin</H2>
+	echo '<H2>'.$GLOBALS['sys_name'].' Site Admin</H2>
 	<P><A HREF="/admin/">Site Admin Home</A> |
 	<A HREF="/news/admin/">Site News Admin</A> |
 	<A HREF="/stats/">Site Stats</A>

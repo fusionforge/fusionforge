@@ -14,7 +14,7 @@
 
 require_once('pre.php');    
 
-$HTML->header(array('title'=>'Sourceforge Staff'));
+$HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff'));
 
 echo $Language->getText('staff', 'about_blurb');
 

@@ -91,7 +91,7 @@ project_admin_header(array('title'=>'Editing Virtual Host Info','group'=>$group-
 <b><u>Add New Virtual Host</u></b>
 <p>
 To add a new virtual host - simply point a <b>CNAME</b> for <i>yourhost.org</i> at
-<b>usw-pr-vhost.sourceforge.net</b>.  SourceForge does not currently host mail (i.e. cannot be an MX)
+<b>usw-pr-vhost.sourceforge.net</b>.  <?php echo $GLOBALS['sys_name']; ?> does not currently host mail (i.e. cannot be an MX)
 or DNS</b>.  
 <p>
 Clicking on "create" will schedule the creation of the Virtual Host.  This will be

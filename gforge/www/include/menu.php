@@ -145,7 +145,7 @@ function menu_software() {
  */
 function menu_sourceforge() {
 	GLOBAL $HTML, $Language;
-	$HTML->menuhtml_top('SourceForge');
+	$HTML->menuhtml_top($GLOBALS['sys_name']);
 		$HTML->menu_entry('/docman/?group_id=1','<b>'.$Language->getText('menu','documentation').'</b>');
 		$HTML->menu_entry('/forum/?group_id=1',$Language->getText('menu','discussion_forums'));
 		$HTML->menu_entry('/people/',$Language->getText('menu','project_help_wanted'));
@@ -164,7 +164,7 @@ function menu_sourceforge() {
  */
 function menu_foundry_links() {
 	GLOBAL $HTML, $Language;
-	$HTML->menuhtml_top('SourceForge Foundries');
+	$HTML->menuhtml_top($GLOBALS['sys_name'].' Foundries');
 	$HTML->menu_entry('/about_foundries.php', $Language->getText('menu','about_foundries'));
 	echo '<P>';
 	$HTML->menu_entry('/foundry/linuxkernel/', 'Linux Kernel');
@@ -290,7 +290,7 @@ function menu_loggedin($page_title) {
 	$HTML->menu_entry('/my/',$Language->getText('menu','my_personal_page'));
 	
 	if (!$GLOBALS['HTTP_POST_VARS']) {
-		$bookmark_title = urlencode( str_replace('SourceForge: ', '', $page_title));
+		$bookmark_title = urlencode( str_replace($GLOBALS['sys_name'].': ', '', $page_title));
 		print '<P>';
 		$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->getText('menu','bookmark_page'));
 		

@@ -39,7 +39,7 @@ print '<TABLE width="100%"><TR valign="top"><TD width="65%">'."\n";
 
 if ($row_grp['is_public']) {
 	print '<P><B>Anonymous CVS Access</B>
-<P>This project\'s ' . $Language->getText('general', 'sitename') . ' CVS repository can be checked out through anonymous
+<P>This project\'s ' . $GLOBALS['sys_name'] . ' CVS repository can be checked out through anonymous
 (pserver) CVS with the following instruction set. The module you wish
 to check out must be specified as the <I>modulename</I>. When prompted
 for a password for <I>anonymous</I>, simply press the Enter key.

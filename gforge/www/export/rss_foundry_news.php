@@ -52,9 +52,9 @@ $res = db_query($query, $limit);
 print " <channel>\n";
 print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
-print "  <description>SourceForge Project News Highlights</description>\n";
+print "  <description>".$GLOBALS['sys_name']." Project News Highlights</description>\n";
 print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
-print "  <title>SourceForge Project News</title>\n";
+print "  <title>".$GLOBALS['sys_name']." Project News</title>\n";
 print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
 print "  <language>en-us</language>\n";
 

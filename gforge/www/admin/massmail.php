@@ -36,7 +36,7 @@ if ($submit) {
 		);
 	}
 
-	if (trim($mail_subject) == '[SourceForge]') {
+	if (trim($mail_subject) == '['.$GLOBALS['sys_name'].']') {
 		exit_error(
 			'Missing parameter',
 			'You must give proper subject to the mailing'
@@ -65,7 +65,7 @@ site_admin_header(array('title'=>"Administrative Mass Mail Engine"));
 
 print '
 <h4>
-Mail Engine for SourceForge Subscribers (MESS)
+Mail Engine for '.$GLOBALS['sys_name'].' Subscribers
 </h4>
 ';
 
@@ -90,7 +90,7 @@ print '
 		'All Project Developers',
 		'All Project Admins',
 		'All Users',
-		'SourceForge Developers (test)'
+		$GLOBALS['sys_name'].' Developers (test)'
 	),
 	'mail_type',false,false
 )
@@ -101,7 +101,7 @@ print '
 
 <P>
 <b>Subject:</b>
-<BR><INPUT type="text" name="mail_subject" size="50" value="[SourceForge] ">
+<BR><INPUT type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] ">
 
 <P><b>Text of Message:</b> (will be appended with unsubscription
 information, if applicable)

@@ -36,6 +36,6 @@ $res = db_query("
     ORDER BY 
 		group_id",$limit);
 
-rss_dump_project_result_set($res,'SourceForge Full Project Listing');
+rss_dump_project_result_set($res,$GLOBALS['sys_name'].' Full Project Listing');
 ?>
 </rss>

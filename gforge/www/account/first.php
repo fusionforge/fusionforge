@@ -15,7 +15,7 @@
 
 require_once('pre.php');
 
-site_user_header(array(title=>"Welcome to SourceForge",'pagename'=>'account_first'));
+site_user_header(array(title=>"Welcome to ".$GLOBALS['sys_name'],'pagename'=>'account_first'));
 
 echo $Language->getText('account_first','about_blurb');
 

@@ -59,7 +59,7 @@ if ($func) {
 			}
 		} else {
 			//user doesn't exist
-			$feedback .= "That project does not exist on SourceForge";
+			$feedback .= "That project does not exist on ".$GLOBALS['sys_name'];
 		}
 
 		$foundry->refreshFoundryData();

@@ -29,7 +29,7 @@ if ($submit) {
 		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
 		?>
 		<p>
-		Congratulations. You have registered on SourceForge.
+		Congratulations. You have registered on <?php echo $GLOBALS['sys_name']; ?>.
 		<p> 
 		You are now being sent a confirmation email to verify your email 
 		address. Visiting the link sent to you in this email will activate

@@ -35,7 +35,7 @@ function send_new_project_email($group_id) {
 	// send one email per admin
 while ($row_admins = db_fetch_array($res_admins)) {
 	$message = 
-'Your project registration for SourceForge has been approved. 
+'Your project registration for '.$GLOBALS['sys_name'].' has been approved. 
 
 Project Full Name:  '.$row_grp['group_name'].'
 Project Unix Name:  '.$row_grp['unix_group_name'].'
@@ -57,28 +57,28 @@ services, and directory layout of the account.
 
 Please take some time to read the site documentation about project
 administration (http://'.$GLOBALS['sys_default_domain'].'/docs/site/). If you visit your 
-own project page in SourceForge while logged in, you will find 
+own project page in '.$GLOBALS['sys_name'].' while logged in, you will find 
 additional menu functions to your left labeled \'Project Admin\'. 
 
-We highly suggest that you now visit SourceForge and create a public
+We highly suggest that you now visit '.$GLOBALS['sys_name'].' and create a public
 description for your project. This can be done by visiting your project
 page while logged in, and selecting \'Project Admin\' from the menus
 on the left (or by visiting https://'.$GLOBALS['sys_default_domain'].'/project/admin/?group_id='.$group_id.'
 after login).
 
 Your project will also not appear in the Trove Software Map (primary
-list of projects hosted on SourceForge which offers great flexibility in
+list of projects hosted on '.$GLOBALS['sys_name'].' which offers great flexibility in
 browsing and search) until you categorize it in the project administration 
 screens. So that people can find your project, you should do this now. 
 Visit your project while logged in, and select \'Project Admin\' from the 
 menus on the left.
 
-Enjoy the system, and please tell others about SourceForge. Let us know
+Enjoy the system, and please tell others about '.$GLOBALS['sys_name'].'. Let us know
 if there is anything we can do to help you.
 
- -- the SourceForge crew';
+ -- the '.$GLOBALS['sys_name'].' crew';
 	
-	mail($row_admins['email'],"SourceForge Project Approved",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+	mail($row_admins['email'],$GLOBALS['sys_name']." Project Approved",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 
 }
 
@@ -103,7 +103,7 @@ function send_project_rejection($group_id, $response_id, $message="zxcv")
 		$response = db_result(db_query("SELECT response_text FROM canned_responses WHERE response_id='$response_id'"),0,"response_text");
 	}
 
-	mail($email, "SourceForge Project Denied", $response, "From: noreply@sourceforge.net");
+	mail($email, $GLOBALS['sys_name']." Project Denied", $response, "From: noreply@sourceforge.net");
 
 	return true;
 }

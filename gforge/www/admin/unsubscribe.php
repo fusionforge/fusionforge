@@ -79,7 +79,7 @@ Site Mailings Subscription Maintanance
 
 <p>
 Use field below to find users which match given pattern with
-the SourceForge username, real name, or email address
+the <?php echo $GLOBALS['sys_name']; ?> username, real name, or email address
 (substring match is preformed, use '%' in the middle of pattern
 to specify 0 or more arbitrary characters). Click on the username
 to unsubscribe user from site mailings (new form will appear).

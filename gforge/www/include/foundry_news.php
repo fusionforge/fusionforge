@@ -181,7 +181,7 @@ if (user_ismember($group_id,'A')) {
 
 } else {
 
-	exit_error('Permission Denied.','Permission Denied. You have to be an admin on the project you are editing or a member of the SourceForge News team.');
+	exit_error('Permission Denied.','Permission Denied. You have to be an admin on the project you are editing or a member of the '.$GLOBALS['sys_name'].' News team.');
 
 }
 

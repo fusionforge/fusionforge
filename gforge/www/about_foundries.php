@@ -18,7 +18,7 @@ $HTML->header(array(title=>"About Foundries"));
 ?>
 
 <P>
-<h2>About SourceForge Foundries</h2>
+<h2>About <?php echo $GLOBALS['sys_name']; ?> Foundries</h2>
 
 <? echo $Language->getText('about_foundries', 'about_blurb'); ?> 
 

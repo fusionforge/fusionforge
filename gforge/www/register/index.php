@@ -31,7 +31,7 @@ with which you will then be able to use all the Sourceforge tools.
 <p><B>The Process</B>
 
 <p>
-Registering a project with SourceForge is an easy process, but we do require
+Registering a project with <?php echo $GLOBALS['sys_name']; ?> is an easy process, but we do require
 a reasonable amount of information in order to automate things 
 as much as possible and present your project adequately. Registering 
 project consists of the three steps:
