@@ -42,7 +42,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=
 	<td><?php echo $Language->getText('user_home','email') ?>: </td>
 	<td>
 	<strong><a href="/sendmessage.php?touser=<?php print $user_id; 
-		?>"><?php print $user->getUnixName(); ?> at <?php print $GLOBALS['sys_users_host']; ?></a></strong>
+		?>"><?php print str_replace('@',' @nospam@ ',$user->getEmail()); ?></a></strong>
 	</td>
 </tr>
 <?php if ($user->getJabberAddress()) { ?>
@@ -149,48 +149,6 @@ echo $Language->getText('users','peerinfo1', $GLOBALS[sys_name]);
 <p>
 <table width="100%" cellpadding="2" cellspacing="2" border="0"><tr valign="top">
 <tr><td colspan="2">
-
-<?php
-
-if (session_loggedin()) {
-
-	$u =& session_get_user();
-
-	?>
-	&nbsp;
-	<p>&nbsp;</p>
-	<h3><?php echo $Language->getText('user_home','send_a_message') ?> <?php echo $user->getRealName(); ?></h3>
-	<p>
-	<form action="/sendmessage.php" method="post">
-	<input type="hidden" name="touser" value="<?php echo $user_id; ?>" />
-
-	<strong><?php echo $Language->getText('user_home','email') ?>:</strong><br />
-	<strong><?php echo $u->getUnixName().'@'.$GLOBALS['sys_users_host']; ?></strong>
-	<input type="hidden" name="email" value="<?php echo $u->getUnixName().'@'.$GLOBALS['sys_users_host']; ?>" />
-	<p>
-	<strong><?php echo $Language->getText('user_home','name') ?>:</strong><br />
-	<strong><?php echo $u->getRealName(); ?></strong>
-	<input type="hidden" name="name" value="<?php echo $u->getRealName(); ?>" /></p>
-	<p>
-	<strong><?php echo $Language->getText('user_home','subject') ?>:</strong><br />
-	<input type="TEXT" name="subject" size="30" maxlength="40" value="" /></p>
-	<p>
-	<strong><?php echo $Language->getText('user_home','message') ?></strong><br />
-	<textarea name="body" rows="15" cols="50" wrap="hard"></textarea></p>
-	<p>
-	<div align="center">
-	<input type="submit" name="send_mail" value="<?php echo $Language->getText('user_home','send') ?>" />
-	</div></p>
-	</form></p>
-	<?php
-
-} else {
-
-	echo '<h3>'.$Language->getText('user_home','send_message_if_logged').'</h3>';
-
-}
-
-?>
 
 </td></tr>
 </table></p>
