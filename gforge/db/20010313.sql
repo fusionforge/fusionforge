@@ -9,8 +9,9 @@ DROP INDEX idx_users_username;
 --
 --	INSTALL PL/pgSQL
 --
-CREATE FUNCTION plpgsql_call_handler () RETURNS OPAQUE AS
-		 '/usr/local/pgsql/lib/plpgsql.so' LANGUAGE 'C';
+CREATE FUNCTION plpgsql_call_handler() RETURNS language_handler
+    AS '$libdir/plpgsql', 'plpgsql_call_handler'
+    LANGUAGE c;
 
 CREATE TRUSTED PROCEDURAL LANGUAGE 'plpgsql'
 		 HANDLER plpgsql_call_handler
@@ -79,7 +80,6 @@ CREATE RULE artifact_insert_agg AS
 --
 --
 drop TRIGGER artifactgroup_update_trig ON artifact;
-drop function artifactgroup_update_agg();
 
 CREATE FUNCTION artifactgroup_update_agg () RETURNS OPAQUE AS '
 BEGIN

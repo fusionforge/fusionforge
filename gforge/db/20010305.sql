@@ -4,11 +4,6 @@
 --	All these changes were applied 3/8/2001
 --
 
-CREATE USER backend WITH PASSWORD 'xxxxx' NOCREATEDB NOCREATEUSER;
-
-GRANT SELECT ON prweb_vhost TO backend;
-GRANT SELECT,UPDATE ON prdb_dbs TO backend;
-
 DROP SEQUENCE bug_bug_dependencies_pk_seq;--
 DROP SEQUENCE bug_canned_responses_pk_seq;--     | sequence | tperdue
 DROP SEQUENCE bug_category_pk_seq       ;--      | sequence | tperdue

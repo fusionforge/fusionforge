@@ -52,11 +52,9 @@ CREATE TABLE stats_project_metric (
 month int not null default 0,
 day int not null default 0,
 ranking int not null default 0,
-precentile float not null default 0,
+percentile float not null default 0,
 group_id int not null default 0
 );
-
-copy stats_project_metric from '/tmp/stats_project_metric.dump';
 
 CREATE UNIQUE INDEX statsprojectmetric_month_day_group ON stats_project_metric(month,day,group_id);
 
@@ -172,7 +170,7 @@ developers INT NOT NULL DEFAULT 0
 --
 --	Migrate data from old stats_project table
 --
-COPY stats_project_developers from '/tmp/stats_project_developers';
+
 CREATE UNIQUE INDEX statsprojectdev_month_day_group ON stats_project_developers(month,day,group_id);
 
 
@@ -203,9 +201,82 @@ tasks_closed INT DEFAULT 0,
 help_requests INT DEFAULT 0
 );
 
-copy stats_project from '/tmp/stats_project.dump';
-
 CREATE UNIQUE INDEX statsproject_month_day_group ON stats_project(month,day,group_id);
+
+
+CREATE TABLE "stats_project_months" (
+	"month" integer,
+	"group_id" integer,
+	"developers" integer,
+	"group_ranking" integer,
+	"group_metric" double precision,
+	"logo_showings" integer,
+	"downloads" integer,
+	"site_views" integer,
+	"subdomain_views" integer,
+	"page_views" integer,
+	"file_releases" integer,
+	"msg_posted" integer,
+	"msg_uniq_auth" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE  INDEX "statsprojectmonths_groupid" on "stats_project_months" using btree ( "group_id" "int4_ops" );
+CREATE  INDEX "statsprojectmonths_groupid_mont" on "stats_project_months" using btree ( "group_id" "int4_ops", "month" "int4_ops" );
+
+
+CREATE TABLE "stats_site_pages_by_day" (
+	"month" integer,
+	"day" integer,
+	"site_page_views" integer
+);
+
+CREATE UNIQUE INDEX "statssitepgsbyday_oid" on "stats_site_pages_by_day" using btree ( "oid" "oid_ops" );
+CREATE  INDEX "statssitepagesbyday_month_day" on "stats_site_pages_by_day" using btree ( "month" "int4_ops", "day" "int4_ops" );
+
+
+CREATE TABLE "stats_site_pages_by_month" (
+	"month" integer,
+	"site_page_views" integer
+);
+
+
+CREATE TABLE "stats_site_months" (
+	"month" integer,
+	"site_page_views" integer,
+	"downloads" integer,
+	"subdomain_views" integer,
+	"msg_posted" integer,
+	"bugs_opened" integer,
+	"bugs_closed" integer,
+	"support_opened" integer,
+	"support_closed" integer,
+	"patches_opened" integer,
+	"patches_closed" integer,
+	"artifacts_opened" integer,
+	"artifacts_closed" integer,
+	"tasks_opened" integer,
+	"tasks_closed" integer,
+	"help_requests" integer,
+	"cvs_checkouts" integer,
+	"cvs_commits" integer,
+	"cvs_adds" integer
+);
+
+CREATE  INDEX "statssitemonths_month" on "stats_site_months" using btree ( "month" "int4_ops" );
 
 
 --
@@ -221,7 +292,3 @@ DROP TABLE stats_site;
 ALTER TABLE stats_site_tmp RENAME TO stats_site;
 
 CREATE UNIQUE INDEX statssite_month_day on stats_site(month,day);
-
-grant all on stats_cvs_group to stats;
-grant all on stats_project to stats;
-grant all on stats_subd_pages to stats;
