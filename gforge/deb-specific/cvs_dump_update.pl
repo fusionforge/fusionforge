@@ -112,7 +112,7 @@ while ($ln = pop(@group_array)) {
 		# set group ownership, anonymous group user
 		system("chown -R nobody:$cvs_gid $cvs_dir");
 		# s bit to have all owned by group
-		system("chmod g+rws $cvs_dir");
+		system("chmod -R g+rws $cvs_dir");
 	}
 
 	# Right management
@@ -144,13 +144,13 @@ while ($ln = pop(@group_array)) {
 			system("echo \"anonymous\" > $cvs_dir/CVSROOT/readers");
 			system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:anoncvs_${group_name}\" > $cvs_dir/CVSROOT/passwd");
 			# This will give access to all users and cvsweb
-			chmod 0775, "$cvs_dir";
+			chmod 02775, "$cvs_dir";
 		} else {
 			# turn off anonymous readers
 			system("echo \"\" > $cvs_dir/CVSROOT/readers");
 			system("echo \"\" > $cvs_dir/CVSROOT/passwd");
 			# This will lock all access from users not in the group and cvsweb
-			chmod 0770, "$cvs_dir";
+			chmod 02770, "$cvs_dir";
 		}
 	}
 }
