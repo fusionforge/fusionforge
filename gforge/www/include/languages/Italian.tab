@@ -20,8 +20,8 @@
 
 
 
-error	title	Requested Page not Found (Error 404)
-error	text	PAGE NOT FOUND
+error	title	Pagina richiesta non trovata (Errore 404)
+error	text	PAGINA NON TROVATA
 error	error_creating	Errore nella creazione
 system	locale	it_IT
 system	strftimefmt	%Y %B %e  %H:%M
@@ -31,7 +31,7 @@ conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
 account_change_email	message	You have requested a change of email address on $1.\nPlease visit the following URL to complete the email change:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
-account_change_email	subject	$1 Verification
+account_change_email	subject	$1 verifica
 account_change_email	mailsent	<P>An email has been sent to the new address. Follow the instructions in the email to complete the email change. <P><A href="/">[ Home ]</A> 
 account_change_email	desc	<P>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.  <P>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.  <P>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.
 account_change_pw	confirmation	<h2>$1 Password Change Confirmation</h2>	<p>	Congratulations. You have changed your password.	</p>
@@ -58,7 +58,7 @@ account_lostlogin	welcome	<h2>Lost Password Login</h2><P>Welcome, $1. You may no
 account_lostlogin	newpasswd	Nuova Password (minimo 6 caratteri)
 account_lostlogin	newpasswd2	Conferma nuova password
 account_lostlogin	update	Update
-account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
+account_register	congrat	<p>Congratulazioni. Ti sei registrato su $1.  <p> Ti verr&agrave; inviata una email di conferma per verificare il tuo indirizzo email. Collegati al link indicato nella email per abilitarti.
 account_register	loginname	Login (non usare maiuscole)*:
 account_register	password	Password (minimo 6 caratteri) *:
 account_register	password2	Conferma password *:
@@ -91,7 +91,7 @@ account_register	update	Applica Modifiche
 account_register	reset	Annulla
 account_unsubscribe	all_mailings	tutti i e-mail ed annunci di $1
 account_unsubscribe	site_mailings	tutti i e-mail di $1
-account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo conto serà attivato.</p>
+account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo account sar&agrave; attivato.</p>
 account_verify	loginname	Nome Login:
 account_verify	password	Password:
 account_verify	login		Login
@@ -135,11 +135,11 @@ developer	body	Contenuto
 developer	diary_and_notes	Diario e note per
 developer	no_entries	Questo utente non ha elementi nel diario
 developer	no_user_selected	Nessun elemento selezionato
-developer_monitor	title	Monitorizza un utente
+developer_monitor	title	Notifica cambiamenti dell'utente
 developer_monitor	error_inserting	Error inserting into user_diary_monitor
-developer_monitor	monitoring_user	L'utente viene monitorizzato
-developer_monitor	monitoring_user_expl	<p>Ti verranno inviate per email gli elementi del diario.</p><p>Per disabilitare la monitorizzazione, &egrave; sufficiente cliccare <strong>Monitorizza utente</strong>
-developer_monitor	monitoring_user_off	Monitorizzazione disabilitata
+developer_monitor	monitoring_user	Attivata notifica utente
+developer_monitor	monitoring_user_expl	<p>Ti verranno inviate per email gli elementi del diario.</p><p>Per disabilitare la notifica, &egrave; sufficiente cliccare <strong>Notifica utente</strong>
+developer_monitor	monitoring_user_off	Notifica utente disabilitata
 developer_monitor	monitoring_user_off_expl	Non riceverai pi&ugrave; email da questo utente
 developer_monitor_choose_user	title	Selezionare un utente
 developer_monitor_choose_user	body	Errore - Selezionare un utente da monitorare
@@ -242,8 +242,8 @@ forum_common	error_invalid_group_forum_id	Forum:: Invalid group_forum_id
 forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
 forum_common	error_min_name_lenght	Il nome del forum deve essere almeno di 3 caratteri
 forum_common	error_min_desc_lenght	La descrizione del forum deve essere almeno di 10 caratteri
-forum_common	error_set_monitor	Puoi monitorare il forum solo se sei collegato
-forum_common	error_unable_to_add_monitor	Impossibile monitorare
+forum_common	error_set_monitor	Puoi richiedere la notifica di un forum solo se sei collegato
+forum_common	error_unable_to_add_monitor	Impossibile notificare
 forum_common	welcome_to	Benvenuto a
 forum_common_forumfactory	error_no_forums_found	Nessun forum trovato
 forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
@@ -292,13 +292,13 @@ forum_message	subject	SOGGETTO
 forum_message	message	Messaggio
 forum_message	message_not_found_title	Messaggio non trovato
 forum_message	message_not_found_body	Il messaggio non esiste.
-forum_monitor	activated	Monitoraggio forum attivato
-forum_monitor	deactivated	Monitoraggio forum disattivato
+forum_monitor	activated	Notifica forum attivato
+forum_monitor	deactivated	Notifica forum disattivato
 forum_utils	discussionforum	Forum di discussione:
 forum_utils	nonewsitem	Errore - non &egrave; stato trovato questo item news
 forum_utils	latest	Ultime News
-forum_utils	monitor	Monitorizza Forum
-forum_utils	stopmonitor	Termina Monitorizzazione
+forum_utils	monitor	Notifica Forum
+forum_utils	stopmonitor	Termina Notifica
 forum_utils	admin	Amministra
 forum_utils	saveplace	Salva Posizione
 forum_utils	by	Da:
@@ -312,14 +312,14 @@ forum_utils	loggedin	collegato
 forum_utils	postcomment	Invia messaggio
 forum_utils	couldpostif	Potresti inviare messaggi se tu fossi 
 forum_utils	reply	rispondi
-forum_utils	mailmonitor	\nLeggi e rispondi a questo messaggio a: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nRicevi questo messaggio perché hai selezionato di monitare questo forum.\nPer terminare il il monitoraggio del forum, login a $4 \n e vai a: $5
+forum_utils	mailmonitor	\nLeggi e rispondi a questo messaggio a: \n$1\nBy: $2 \n\n$3\n\n______________________________________________________________________\nLeggi e rispondi a questo messaggio a: \n$1\nRicevi questo messaggio perché hai selezionato di monitare questo forum.\nPer terminare la notifica, fai il login a $4 \n e vai a: $5
 frs	file_download	Scarica
 frs	file_notes	Note
 frs	file_package	Package
 frs	file_rel_date	Data
 frs	file_version	Versione
 frs	latest_file_releases	Ultimi rilasci
-frs	file_monitor	Monitorizza
+frs	file_monitor	Notifica
 frs_release	email_title	[Rilascio $1 Release]: $2
 frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link::\n$4\n\nRicevi questa mail\npoich&egrave; hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi pi&ugrave; essere notificato via email,\ncollegati a $5 e segui il link: \n$6
 general	return	[Ritorna  a $1]
@@ -411,8 +411,8 @@ menu	admin	Amministrazione
 menu	account_maintenance	Opzioni Utente
 my	about_blurb	La tua pagina personale contiene un elenco di bug, attivita che ti sono stati assegnati, inoltre l'elenco dei progetti ai quali partecipi.
 my	no_bookmarks	Non ci sono segnalibri salvati
-my	no_monitored_filemodules	<H3>Non stai monitorando nessun file</H3><P>Quando monitorizzi un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
-my	no_monitored_forums	<H3>Non stai monitorando nessun forum</H3><P>Quando monitorizzi un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare il monitoraggio di forum cliccando su &quot;Monitorizza Forum&quot;
+my	no_monitored_filemodules	<H3>No hai richiesto la notifica di alcun file</H3><P>Quando &egrave; attivita la notifica di un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
+my	no_monitored_forums	<H3>Non hai richiesto la notifica di nessun forum</H3><P>Quando &egrave; attivita la notifica di  un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare la notifica cliccando su &quot;Notifica Forum&quot;
 my	no_open_tasks	Non ci sono attivit&agrave; aperte assegnate a te.
 my	no_projects	Non sei membro di nessun progetto attivo
 my	no_tracker_items_assigned	Non ci sono elementi del tracker assegnati a te.
@@ -420,8 +420,8 @@ my	no_tracker_items_submitted	Non ci sono elementi del tracker inseriti da te.
 my	title	Pagina personale per: $1
 my	assigneditems	Elementi assegnati a me
 my	submitteditems	Elementi inseriti da me
-my	monitoredforum	Forum monitorati
-my	monitoredfile	File monitorati
+my	monitoredforum	Forum da notificare
+my	monitoredfile	File da notificare
 my	tasks	Mie attivit&agrave;
 my	survey	Sondaggi
 my	bookmarks	Miei Segnalibri
@@ -452,7 +452,7 @@ my_diary	summary	Sommario
 my_diary	details	Dettaglio
 my_diary	submit_only_once	INSERIRE SOLO UNA VOLTA
 my_diary	is_public	Pubblico?
-my_diary	is_public_expl	Se marcato come publico, la nota verr&agrave; inviata a tutti gli utenti che monitorizzano la nota.
+my_diary	is_public_expl	Se marcato come publico, la nota verr&agrave; inviata a tutti gli utenti che richiedono la notifica della nota.
 my_diary	diary_updated	Diaro aggiornato 
 my_diary	nothing_updated	Nulla da aggiornato
 my_diary	error_adding_item	Errore nell'aggiornamento dell'elemento
@@ -613,7 +613,7 @@ pm_ganttpage	size	Dimensioni
 pm_ganttpage	assignee	Assegnatario
 pm_projectgroup	error_min_name_lenght	Il titolo deve essere almeno di 5 caratteri
 pm_projectgroup	error_min_desc_lenght	La descrizione del documento deve essere almeno di 10 caratteri
-pm_projectgroup	none_found	No ProjectGroups Found
+pm_projectgroup	none_found	Nessun ProjectGroups found
 pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
 pm_projecttask	circular_dependency	&Egrave; stata rilevata una dipendenza circolare
 pm_projecttask	mail_notice			L'attività # $1 è stata aggiornata\n\nProgetto: $2\nSottoprogetto: $3\nSommario: $4\nPerc. Completo: $5\nStato: $6\n\nDescrizione: $7
@@ -629,7 +629,7 @@ project_home	view_members	Visualizza membri
 project_home	view_project_files	Visualizza tutti i file
 project_home	no_trackers	Non ci sono tracker pubblici
 project_home	no_subprojects	Non ci sono sottoprogetti pubblici
-project_home	monitor_package	Monitor this package
+project_home	monitor_package	Notifica questo package
 project_home	release_notes	Note di rilascio
 project_home	public_mailing_lists	mailing list pubbliche
 project_home	messages_in	messaggi in
@@ -655,10 +655,10 @@ project_shownotes	notes	Note:
 project_shownotes	changes	Cambiamenti:
 project_shownotes	release_name	Nome Release:
 project_shownotes	title	Note e Changelog per i rilasci
-project_filemodule_monitor	stop_monitor_title	Monitorizzazione disattivata
-project_filemodule_monitor	stop_monitor_body	&Egrave; stata disattivata la monitorizzazione del package
-project_filemodule_monitor	start_monitor_title	Monitorizzazione attivata
-project_filemodule_monitor	start_monitor_body	&Egrave; stata attivata la monitorizzazione del package
+project_filemodule_monitor	stop_monitor_title	Notifica disattivata
+project_filemodule_monitor	stop_monitor_body	&Egrave; stata disattivata la notifica del package
+project_filemodule_monitor	start_monitor_title	Notifica attivata
+project_filemodule_monitor	start_monitor_body	&Egrave; stata attivata la notifica del package
 project_memberlist	joining	<P>Se vuoi partecipare a questo progetto , contatta uno degli amministratori. Gli amministratori del progetto sono segnati in grassetto..<br><br>
 project_memberlist	title	Elenci partecipanti progetto
 project_memberlist	developer	Nome utente
@@ -668,7 +668,7 @@ project_memberlist	skills	Competenze
 project_memberlist	view	Visualizza
 sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p>Fill it out accurately and completely or the receiver may not be able to respond.<P><FONT COLOR="RED"><B>IF YOU ARE WRITING FOR HELP:</B> Did you read the site documentation? Did you include your <B>user_id</B> and <B>user_name?</B> If you are writing about a project, include your <B>project id</B> (<B>group_id</B>) and <B>Project Name</B>.</FONT>
 users	peerinfo1	Se conosci questo utente, prenditi un minuto per quotarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri.  <P> Il sistema di quotazioni $1 si basa su concetti di <A HREF="http://www.advogato.com">Advogato.</A> Il sistema &egrave; stato re-implementato ed espanso.
-users	peerinfo2	The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
+users	peerinfo2	La casella delle quotazioni visualizza tutte le quotazioni per ogni criterio. I numeri includono quotazioni sia da utenti verificati che non.  <ul> <li> Il campo The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
 users	optout	Hai selezionato di non partecipare alle quotazioni, perci&ograve; non puoi quotare questo utente. Vai a <a href="/account/">opzioni utente </a> per maggiori informazioni.
 users	user_not_exist_title	L'utente non esiste
 users	no_user_name	Nessun nome utente specificato
@@ -694,7 +694,7 @@ user_home	peer_rating_disabled	L'utente ha selezionato di non partecipare alle q
 user_home	diary_notes	Diario e Note
 user_home	diary_notes_entries	Diary/Note entries:
 user_home	diary_notes_view	Visualizza Diario e Note
-user_home	diary_notes_monitor	Monitorizza questo diario
+user_home	diary_notes_monitor	Notifica questo diario
 user_home	project_info	Informazioni progetto
 user_home	no_projects	Questo utente non &egrave; membro di nessun progetto.
 user_home	member_of	Questo utente &egrave; membro dei seguenti progetti:
@@ -717,23 +717,23 @@ sendmessage	name	Il tuo nome
 sendmessage	subject	Soggetto
 sendmessage	message	Messaggio
 sendmessage	send	Invia messaggio
-session	missingpasswd	Missing Password Or Users Name
-session	invalidpasswd	Invalid Password Or User Name
+session	missingpasswd	Password o nome utente mancante
+session	invalidpasswd	Password o nome utente non valido
 session	suspended	Utente sospeso
 session	pending	Utente in attesa di attivazione
 session	deleted	Utente cancellato
 session	notactive	Utente non attivo
 global	error	ERROR
-common_include_account	sixchar	Password must be at least 6 characters.
+common_include_account	sixchar	La lunghezza della password deve essere di almeno 6 caratteri.
 common_include_account	nospace	There cannot be any spaces in the login name.
-common_include_account	tooshort	Name is too short. It must be at least 3 characters.
-common_include_account	toolong	Name is too long. It must be less than 15 characters.
+common_include_account	tooshort	Nome troppo corto, la lunghezza minima &egrave; di 3 caratteri.
+common_include_account	toolong	Nome troppo lungo, la lunghezza massima &egrave; di 15 caratteri.
 common_include_account	illegal	Illegal character in name.
-common_include_account	cvsreserved	Name is reserved for CVS.
-common_include_account	dnsreserved	Name is reserved for DNS purposes.
+common_include_account	cvsreserved	Il nome &egrave; riservato per CVS.
+common_include_account	dnsreserved	Il nome &egrave; riservato per DNS.
 common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.
 calendar	title	Calendario
-calendar	view	Indicare:
+calendar	view	Visualizza
 calendar	january	gennaio
 calendar	february	febbraio
 calendar	march	marzo
@@ -801,3 +801,34 @@ source	invalid_argument	Argomento file non valido
 source	invalid_argument_text	L'argomento per il file non &egrave; valido.
 source	file_not_found	File non trovato
 source	file_not_found_text	Il file specificato non &egrave; disponibile.
+register	invalid_full_name	Nome non valido
+register	invalid_unix_name	Nome unix non valido
+register	unix_group_name_already_taken	Nome unix gi&agrave; occupato.
+register	describe_registration	Descrivi il tuo sommario in modo pi&ugrave; dettagliato.
+register	comprehensive_description	Descrivere in modo pi&ugrave; dettagliato il progetto.
+register	maximum_description	La lunghezza massima della descrizione del progetto &egrave; di 255 caratteri.
+register	no_license_chosen	Non hai scelto una licenza
+register	conflicting_licenses_choice	Scelta sulle licenze conflittuale
+register	more_license_description	Descrivere in modo pi&ugrave; dettagliato la licenza.
+register	registration_complete	Registrazione completata
+register	project_submitted	Il progetto &egrave; stato sottoposto agli amministratori di $1. Entro 72 riceverai notifica della loro decisione e ulteriori istruzioni.</p><p>Grazie per aver scelto $1
+register	project_information	Informazioni progetto
+register	apply_for_registration	Per registrare un progetto, compila i campi del form. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory.
+register	project_full_name	</h3>1. Nome completo del progetto</h3><p>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).</p>Full Name:<br/>
+register	purpose_and_summarization	2. Sommario e obiettivo del progetto</h3><p><strong></strong><p><strong> Please provide detailed, accurate description of your project and what $1 resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on $1, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>
+register	project_license	<h3>3. Licenza</h3> <p><strong><em>If you are applying for a website-only project, please select "website-only" from the choices below and proceed.</em></strong><p>$1 was created to advance Open Source software development. To keep things simple, we are relying on the outstanding work of the <a href="http://www.opensource.org">Open Source Initiative</a> for our licensing choices. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p>Choosing a license is a serious decision. Please take some time to read the text (and our explanations) of several licenses before making a choice about your project. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
+register	license_type	Publico domino</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><strong>Your License:</strong><br />
+register	other_license	Se hai selezionato "altri", inserisci una descrizione della licenza. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.
+register	project_description	<h3>4. Descrizione pubblica del progetto</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
+register	project_unix_name	<h3>5. Nome unix del progetto</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Nome unix:<br/>
+register	i_agree	Approvo
+register	i_disagree	Non approvo
+register	title	Registrazione nuovo progetto
+register_complete	section	New Project Registration
+register_complete	title	Registrazione completata
+register_projectinfo	section	New Project Registration
+register_projectinfo	title	Project Information
+register_requirements	section	New Project Registration
+register_requirements	title	Services & Requirements
+register_tos	section	New Project Registration
+register_tos	title	Terms Of Service Agreement
