@@ -165,8 +165,8 @@ if (session_loggedin()) {
 	<input type="hidden" name="touser" value="<?php echo $user_id; ?>" />
 
 	<strong><?php echo $Language->getText('user_home','email') ?>:</strong><br />
-	<strong><?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?></strong>
-	<input type="hidden" name="email" value="<?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?>" />
+	<strong><?php echo $u->getUnixName().'@'.$GLOBALS['sys_default_domain']; ?></strong>
+	<input type="hidden" name="email" value="<?php echo $u->getUnixName().'@'.$GLOBALS['sys_default_domain']; ?>" />
 	<p>
 	<strong><?php echo $Language->getText('user_home','name') ?>:</strong><br />
 	<strong><?php echo $u->getRealName(); ?></strong>
