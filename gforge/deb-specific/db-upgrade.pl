@@ -1490,6 +1490,26 @@ END;
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "3.3.0-0+1" ;
+    if (is_lesser $version, $target) {
+        debug "Upgrading with 200403252.sql" ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/200403252.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        debug "Committing." ;
+        $dbh->commit () ;
+    }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Gforge." ;
 
