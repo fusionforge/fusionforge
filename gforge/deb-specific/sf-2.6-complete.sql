@@ -3812,6 +3812,10 @@ COPY "trove_cat"  FROM stdin;
 300	2001041701	14	13	josl	Jabber Open Source License	Jabber Open Source License	0	0	License :: OSI Approved :: Jabber Open Source License	13 :: 14 :: 300
 302	2001041701	14	13	sleepycat	Sleepycat License	Sleepycat License	0	0	License :: OSI Approved :: Sleepycat License	13 :: 14 :: 302
 \.
+
+-- ' <-- This quote to help Emacs not get lost for its syntax-highlighting
+
+
 --
 -- Data for TOC Entry ID 539 (OID 21825)
 --
@@ -7392,3 +7396,4 @@ SELECT setval ('"massmail_queue_id_seq"', 1, 'f');
 
 SELECT setval ('"trove_treesum_trove_treesum_seq"', 1, 'f');
 
+---- From now on, everything comes from Debian-SF
