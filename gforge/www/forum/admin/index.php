@@ -29,7 +29,7 @@ if ($group_id) {
 	}
 
 	$p =& $g->getPermission( session_get_user() );
-	if (!$g || !is_object($g) || $g->isError()) {
+	if (!$p || !is_object($p) || $p->isError() || !$p->isForumAdmin()) {
 		exit_permission_denied();
 	}
 
