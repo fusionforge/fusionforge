@@ -32,6 +32,19 @@ here have been transferred onto the Savannah project, at
   inetd config file by hand.  Less error-prone, and we'll also
   probably get more portable (I'm thinking xinetd here).
 
+* [RM] Split CVS-related part from install-dns.sh into an
+  install-cvs.sh script.
+
+* [RM] Split DB-related part from sourceforge.postinst into an
+  install-db.sh script.
+
+* [RM] Add a cron job to remove released files from the database if
+  the file is erased.  (Maybe not needed: if users are chrooted, they
+  should not be able to remove files there.)
+
+* [RM] Provide a way to un-release a file, and (why not?) to modify a
+  released file afterwards.  Maybe.
+
 # Local variables:
 # mode: indented-text
 # End:
