@@ -28,6 +28,10 @@ here have been transferred onto the Savannah project, at
   the correct database password), and changing said incoming dirs to
   user:user, perms 755.
 
+* [RM] Use update-inetd(8) in install-dns.sh instead of modifying the
+  inetd config file by hand.  Less error-prone, and we'll also
+  probably get more portable (I'm thinking xinetd here).
+
 # Local variables:
 # mode: indented-text
 # End:
