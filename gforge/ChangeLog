@@ -3,8 +3,8 @@
 	* www/top/most_active.php:
 	Shortened the activity percentage to two decimal places.
 	
-	* www/include/languages/Base.tab:
-	Applied patch #348, thanks to Vicente Ruiz for the patch.
+	* www/include/languages/Base.tab,www/help/tracker.php:
+	Applied patch #348, thanks to Vicente Ruiz for the code.
 
 2003-05-14 Tom Copeland <tom@infoether.com>
 
