@@ -66,7 +66,7 @@ class ArtifactsForUser extends Error {
 			if ($afi->isError()) {
 				$this->setError($afi->getErrorMessage());
 				echo "Error =".$afi->getErrorMessage()."<br>";
-			} else {
+			} elseif($afi->Artifact->ArtifactType->Group->getStatus() == 'A') {
 				$artifacts[] =& $afi->Artifact;
 			}
 		}
