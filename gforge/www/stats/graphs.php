@@ -27,16 +27,15 @@ $HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics"));
 echo "\n\n";
 
 print '<div align="center">' . "\n";
-print '<h3>Sitewide Statistics Graphs</h3><br />' . "\n";
+print '<h3>'.$Language->getText('stats_graph','sitewide_statistics_graphs').'</h3><br />' . "\n";
 ?>
-
 <hr />
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr align="center">
-<td><a href="index.php">OVERVIEW STATS</a></td>
-<td><a href="projects.php">PROJECT STATS</a></td>
-<td><strong>SITE GRAPHS</strong></td>
+<td><a href="index.php"><?php echo $Language->getText('stats_graph','overview_stats'); ?></a></td>
+<td><a href="projects.php"><?php echo $Language->getText('stats_graph','project_stats'); ?></a></td>
+<td><strong><?php echo $Language->getText('stats_graph','site_graphs'); ?></strong></td>
 </tr>
 </table>
 

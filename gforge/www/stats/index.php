@@ -27,16 +27,17 @@ $HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics "));
 echo "\n\n";
 
 print '<div align="center">' . "\n";
-print '<h3>Sitewide Aggregate Statistics </h3><br />' . "\n";
+print '<h3>'.$Language->getText('stats_index','sitewide_aggregate_statistics
+').'</h3><br />' . "\n";
 ?>
 
 <hr />
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr align="center">
-<td><strong>OVERVIEW STATS</strong></td>
-<td><a href="projects.php">PROJECT STATS</a></td>
-<td><a href="graphs.php">SITE GRAPHS</a></td>
+<td><strong><?php echo $Language->getText('stats_index','overview_stats'); ?></strong></td>
+<td><a href="projects.php"><?php echo $Language->getText('stats_index','project_stats'); ?></a></td>
+<td><a href="graphs.php"><?php echo $Language->getText('stats_index','site_graphs'); ?></a></td>
 </tr>
 </table>
 
@@ -51,14 +52,8 @@ print '<br /><br />';
 stats_site_projects_monthly( );
 print '<br /><br />' . "\n";
 print '</div>' . "\n";
-echo '
-<p>Other statistics:
-<ul>
-<li><a href="lastlogins.php">Most Recent Logins</a></li>
-<li><a href="i18n.php">I18n Statistics</a></li>
-</ul>
-</p>
-';
+echo '<p>'.$Language->getText('stats_index','other_statistics').'</p>';
+
 //
 // END PAGE CONTENT CODE
 //

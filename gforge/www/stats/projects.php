@@ -23,16 +23,16 @@ $HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics "));
 
 ?>
 <div align="center">
-<h3>Project Statistical Comparisons</h3><br />
+<h3><?php echo $Language->getText('stats_projects','project_comparision'); ?></h3><br />
 </div>
 
 <hr />
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 <tr align="center">
-<td><a href="index.php">OVERVIEW STATS</a></td>
-<td><strong>PROJECT STATS</strong></td>
-<td><a href="graphs.php">SITE GRAPHS</a></td>
+<td><a href="index.php"><?php echo $Language->getText('stats_graph','overview_stats'); ?></a></td>
+<td><strong><?php echo $Language->getText('stats_graph','project_stats'); ?></strong></td>
+<td><a href="graphs.php"><?php echo $Language->getText('stats_graph','site_graphs'); ?></a></td>
 </tr>
 </table>
 

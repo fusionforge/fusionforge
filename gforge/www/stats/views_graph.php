@@ -78,15 +78,15 @@ if ($i == 1) {
 	$xlabel[1] = $xlabel[0];
 	$ydata1[1] = $ydata1[0];
 }
-$graph->SetTitle( "Sourceforge Page Views" );
-$graph->SetSubTitle("Total Page Views (RED) ( $i $grouping )");
+$graph->SetTitle( $Language->getText('stats_view_graph','page_views') );
+$graph->SetSubTitle($Language->getText('stats_view_graph','total_views', array( $i)));
 
 $data1 = $graph->AddData( $xdata, $ydata1, $xlabel );
 $graph->LineGraph($data1,'red');
 
 $graph->DrawGrid('gray');
-$graph->SetxTitle('Date');
-$graph->SetyTitle('Views (RED)');
+$graph->SetxTitle($Language->getText('stats_view_graph','date'));
+$graph->SetyTitle($Language->getText('stats_view_graph','views'));
 $graph->DrawAxis();
 //$graph->showDebug();
 $graph->ShowGraph('png');
