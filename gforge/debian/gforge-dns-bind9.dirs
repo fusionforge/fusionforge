@@ -7,3 +7,4 @@ usr/sbin
 var/lib/gforge
 var/lib/gforge/bind
 var/lib/gforge/tmp
+var/lib/gforge/etc

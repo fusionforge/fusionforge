@@ -8,5 +8,6 @@ usr/sbin
 var/lib/gforge
 var/lib/gforge/chroot
 var/lib/gforge/download
+var/lib/gforge/etc
 var/lib/gforge/ftp
 var/lib/gforge/ftp/incoming

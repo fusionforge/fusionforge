@@ -6,3 +6,4 @@ usr/lib/gforge/lib
 usr/sbin
 var/lib/gforge
 var/lib/gforge/tmp
+var/lib/gforge/etc

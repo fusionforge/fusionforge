@@ -22,3 +22,4 @@ var/lib/gforge/ftp/incoming
 var/lib/gforge/tmp
 var/log/gforge
 var/log/gforge/cvs
+var/lib/gforge/etc
