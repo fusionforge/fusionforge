@@ -210,7 +210,7 @@ setup_robot() {
 	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/local.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
 	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret)
-	cryptedpasswd=`slappasswd -s $sys_ldap_passwd -h {CRYPT}`
+	cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
 	#echo "=====>$cryptedpasswd"
 
 # The first accunt is only used in a multiserver SF
@@ -245,7 +245,7 @@ FIN
 # Test!
 #naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 echo "Changing dummy cn using SF_robot account"
-	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w$sys_ldap_passwd <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w$secret <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
