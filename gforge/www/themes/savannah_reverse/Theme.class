@@ -109,6 +109,15 @@ class Theme extends Layout {
                                 <td colspan=2 class="boxitem">';
 	}
 
+	// Get an alternating row style for tables.
+	function box1_get_alt_row_style($i) {
+		if ($i % 2 == 0) {
+			return 'class=boxitem';
+		} else {
+			return 'class=boxitemalt';
+		}
+	}
+
 	// Box Bottom, equivalent to html_box1_bottom()
 	function box1_bottom($echoout=1) {
         	$return = '
