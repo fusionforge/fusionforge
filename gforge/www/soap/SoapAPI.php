@@ -110,6 +110,12 @@ $server->register(
 	$uri);
 
 $server->register(
+	'getPublicProjectNames',
+	null,
+	array('projectNames'=>'tns:ArrayOfstring'),
+	$uri);
+
+$server->register(
 	'user',
 	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
 	array('userResponse'=>'tns:ArrayOfstring'),
@@ -235,6 +241,15 @@ function getNumberOfHostedProjects() {
 function getNumberOfActiveUsers() {
 	$gforge = new GForge();
 	return new soapval('tns:soapVal', 'string', $gforge->getNumberOfActiveUsers());
+}
+
+/**
+ * getPublicProjectNames - gets a list of public project names
+ *
+ */
+function getPublicProjectNames() {
+	$gforge = new GForge();
+	return new soapval('tns:ArrayOfString', 'ArrayOfstring', $gforge->getPublicProjectNames());
 }
 
 /**

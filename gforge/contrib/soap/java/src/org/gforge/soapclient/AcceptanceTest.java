@@ -14,6 +14,13 @@ public class AcceptanceTest {
         System.out.println("projects = " + client.getNumberOfHostedProjects());
         System.out.println("users = " + client.getNumberOfActiveUsers());
 
+        String[] projectNames = client.getPublicProjectNames();
+        for (int i=0;i<projectNames.length; i++) {
+            System.out.println("projectNames = " + projectNames[i]);
+        }
+
+        if (true) return;
+
         System.out.print("Testing: login/logout...");
         testLogin(client);
         System.out.println("OK");

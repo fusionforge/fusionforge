@@ -51,4 +51,18 @@ class GForge extends Error {
     return $row_count['count'];
 	}
 
+	function getPublicProjectNames() {
+		$res = db_query("SELECT unix_group_name FROM groups WHERE status='A' AND is_public=1");
+		if (!$res) {
+			$this->setError('Unable to get list of public projects: '.db_error());
+			return false;
+		}
+		$rows=db_numrows($res);
+		$result = array();
+    for ($i=0; $i<$rows; $i++) {
+			$result[$i] = db_result($res, $i, 'unix_group_name');
+    }
+		return $result;
+	}
+
 }

@@ -19,6 +19,7 @@ public class Client {
     private String group;
 
     private QName activeUsers;
+    private QName publicProjectNames;
     private QName hostedProjects;
     private QName bugFetch;
     private QName bugList;
@@ -36,6 +37,7 @@ public class Client {
         logout = new QName(this.server, "logout");
         hostedProjects = new QName(this.server, "getNumberOfHostedProjects");
         activeUsers = new QName(this.server, "getNumberOfActiveUsers");
+        publicProjectNames = new QName(this.server, "getPublicProjectNames");
 
         this.group = initialGroup;
         this.service = new Service();
@@ -48,13 +50,19 @@ public class Client {
         this.group = newGroup;
     }
 
-    public int getNumberOfHostedProjects()  throws ServiceException, RemoteException {
+    public int getNumberOfHostedProjects() throws ServiceException, RemoteException {
         Call call = createCallTo(hostedProjects);
         call.setReturnType(Constants.XSD_STRING);
         return Integer.parseInt((String)call.invoke(new Object[] {}));
     }
 
-    public int getNumberOfActiveUsers()  throws ServiceException, RemoteException {
+    public String[] getPublicProjectNames() throws ServiceException, RemoteException {
+        Call call = createCallTo(publicProjectNames);
+        call.setReturnType(Constants.XSD_ANYTYPE);
+        return returnStringArrayOrEmptyArray((Object[])call.invoke(new Object[] {}));
+    }
+
+    public int getNumberOfActiveUsers() throws ServiceException, RemoteException {
         Call call = createCallTo(activeUsers);
         call.setReturnType(Constants.XSD_STRING);
         return Integer.parseInt((String)call.invoke(new Object[] {}));
@@ -68,16 +76,12 @@ public class Client {
         sessionKey = (String)call.invoke(new Object[] {userid,passwd});
     }
 
-    public String[] bugList()  throws ServiceException, RemoteException {
+    public String[] bugList() throws ServiceException, RemoteException {
         Call call = createCallTo(bugList);
         call.addParameter("sessionkey", Constants.XSD_STRING, ParameterMode.IN);
         call.addParameter("project", Constants.XSD_STRING, ParameterMode.IN);
         call.setReturnType(Constants.XSD_ANYTYPE);
-        Object[] bugIds = (Object[])call.invoke(new Object[] {sessionKey, group});
-        if (bugIds.length == 0) {
-            return new String[] {};
-        }
-        return (String[]) bugIds;
+        return returnStringArrayOrEmptyArray((Object[])call.invoke(new Object[] {}));
     }
 
     public Bug bugFetch(String bugID)  throws ServiceException, RemoteException {
@@ -112,4 +116,12 @@ public class Client {
         call.setOperationName(operation);
         return call;
     }
+
+    private String[] returnStringArrayOrEmptyArray(Object[] arr) {
+        if (arr.length == 0) {
+            return new String[] {};
+        }
+        return (String[]) arr;
+    }
+
 }
