@@ -498,6 +498,11 @@ pm	task_id	Id attivit&agrave;
 pm	dependent_note			Scegliere solo attivit&agrave; che devono essere completate prima che questa attivit&agrave; parte.
 pm	unassigned	Non assegn.
 pm	any	Tutti
+pm	admin	amministra
+pm	tech_any	Tutti
+pm	cat_any	Tutte
+pm	no_tasks_found	Nessuna attivit&agrave; trovata
+pm	no_tasks_found_text	Aggiungere attivit&agrave; utilizzando i link elencati sopra
 pm_modtask	assignee	Assegnatario
 pm_modtask	sort_on	Ordina per
 pm_addtask	title	Aggiungi un nuovo task
@@ -553,6 +558,19 @@ pm_browsetask	previous	indietro
 pm_browsetask	next	avanti
 pm_detailtask	section	Task Manager
 pm_detailtask	title	Task Detail
+pm_detailtask	submitted_by	Inserito da
+pm_detailtask	category	Categoria
+pm_detailtask	pct_complete	Perc. di completamento
+pm_detailtask	priority	Priorit&agrave
+pm_detailtask	start_date	Data inizio
+pm_detailtask	end_date	Data fine
+pm_detailtask	task_summary	Sommario
+pm_detailtask	original_comment	Commento originale
+pm_detailtask	assigned_to	Assegnato a:
+pm_detailtask	dependend_on_task	Dipende da attivit&agrave;
+pm_detailtask	hours	Ore
+pm_detailtask	status	Stato
+
 pm_modtask	title	Modifica attivit&agrave;
 pm_modtask	submitted_by	Inserito da
 pm_modtask	original_comment	Commento originale
@@ -884,6 +902,14 @@ tracker_browse	descending	Discendente
 tracker	status	Stato
 tracker	group	Gruppo
 tracker	followups	Commenti
+tracker	please_login	Fai la $1 login $2
+tracker	insert_email	Se <strong>non</strong> puoi fare la login, inserisci qui il tuo indirizzo email:
+tracker	status_any	Tutti
+tracker	category_any	Tutte
+tracker	group_any	Tutti
+tracker	no_trackers	Nessun tracker trovato
+tracker	no_trackers_text	Non &egrave; stato creato nessun tracker oppure non hai le autorizzazioni per visualizzarlo.<p><FONT COLOR=RED>L'amministratore del progetto pu&ograve; creare tracker utilizzando la pagina di $1 amministrazione $2</FONT></strong>
+
 tracker_browse	sort_by	Ordina per
 tracker_browse	request_id	Request ID
 tracker_browse	previous	Indietro
@@ -900,14 +926,13 @@ tracker_browse	no_items	Nessun elemento trovato
 tracker_detail	title	Dettaglio
 tracker_detail	build_task_relation	Build Task Relation
 tracker_detail	add_comment	Add A Comment
-tracker_detail	please_login	Please $1 log in!</a></FONT></h3><br />If you <strong>cannot</strong> login, then enter your email address here:<p>
-tracker_detail	security_note	DO NOT enter passwords or confidential information in your message!
-tracker_detail	attached_files	Attached Files
+tracker_detail	security_note	NON inserire password e informazioni confidenziali!
+tracker_detail	attached_files	File inseriti
 tracker_detail	name	Name
-tracker_detail	description	Description
+tracker_detail	description	Descrizione
 tracker_detail	download	Download
-tracker_detail	no_files_attached	No Files Currently Attached
-tracker_detail	changes	Changes
+tracker_detail	no_files_attached	Nessun file inserito
+tracker_detail	changes	Cambiamenti
 tracker_taskmgr	build_relationships	Costruisce relazione tra attivit&agrave; e elementi del tracker
 tracker_taskmgr	add_relationship	Aggiungi relazione alla attivit&agrave; selezionata
 tracker_taskmgr	add_relation_to_task	Aggiungi relazione ad attivit&agrave; esistente
