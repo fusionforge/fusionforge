@@ -41,6 +41,7 @@ sys_show_source=0
 sys_force_login=0
 sys_session_key=foobar
 sys_theme=gforge
+sys_default_theme_id=1
 sys_lang=English
 sys_use_ldap=0
 sys_use_jabber=0
