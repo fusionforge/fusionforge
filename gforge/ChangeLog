@@ -1,5 +1,10 @@
 2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/languages/PortugueseBrazilian.tab: use new include
+	functionality to get default strings from Portuguese.
+
+	* www/include/languages/Portuguese.tab: add missing newline.
+
 	* www/include/languages/Base.tab: move Savannah-specific strings
 	into their own .tab files.
 

@@ -53,7 +53,8 @@ group	long_survey	Inquéritos
 group	short_bugs	Bugs
 group	short_cvs	CVS
 group	short_docman	Documentação
-group	short_files	Filesgroup	short_forum	Fóruns
+group	short_files	Files
+group	short_forum	Fóruns
 group	short_homepage	Página de Entrada
 group	short_mail	Listas
 group	short_main 	Principal

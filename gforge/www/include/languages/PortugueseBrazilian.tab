@@ -18,68 +18,52 @@
 # 2001-03-26  Vilson Cristiano G¤rtner  <vgartner@users.sourceforge.net>
 #	* Updates
 #
+# Include default Portuguese strings
+include Portuguese
+# Now override where Brazillian differs:
 about_foundries	about_blurb	Sobre as Foundries
 menu	about_sourceforge	Sobre o GForge
-menu	account_maintenance	Manutenção da Conta
 menu	bookmark_page	Adicionar aos Favoritos
 home	breaking_down_barriers	Quebrando as Barreiras para o Desenvolvimento em Código Aberto
 menu	change_my_theme	Mudar Meu Tema
-menu	code_snippet_library	Biblioteca de Código
 menu	compile_farm	Compilação de Programas
 menu	contact_us	Entre em Contato
 group	developers	Desenvolvedores
 group	developer_info	Info Desenvolvedor
 menu	discussion_forums	Fórums de Discussão
-menu	documentation	Documentação do Site
-frs	file_download	Download
 frs	file_monitor	Monitorar
 frs	file_notes	Notas
 frs	file_package	Pacote
-frs	file_rel_date	Data
-frs	file_version	Versão
 group	long_bugs	Mapeamento de Bugs
 group	long_cvs	Repositório CVS
 group	long_docman	DocManager: Documentação do Projeto
 group	long_forum	Fórums Públicos
-group	long_foundries	Foundries de Desenvolvimento do GForge
 group	long_ftp	Espaço de FTP Anônimo
 group	long_homepage	Home Page do Projeto
-group	long_mail	Mailing Lists
 group	long_news	Últimas Notícias
 group	long_patch	Gerenciador de Alterações
 group	long_pm	Gerenciador de Tarefas
 group	long_support	Gerenciador de Suporte
 group	long_survey	Pesquisas
-group	short_bugs	Bugs
-group	short_cvs	CVS
-group	short_docman	Documentação
-group	short_files	Filesgroup	short_forum	Fórums
+group	short_forum	Fórums
 group	short_homepage	Home Page
-group	short_mail	Listas
-group	short_main 	Principal
 group	short_memberlist	Membros
-group	short_news	Notícias
 group	short_patch	Alterações
-group	short_pm	Tarefas
 group	short_summary	Sumário
-group	short_support	Suporte
 group	short_survey	Pesquisas
 home	highest_ranked_users	Usuários Mais Pontuados
 home	about_blurb	  GForge é um <B>serviço gratuido para desenvolvedores em <A href="http://www.opensource.org">Código Aberto</A> </B> oferecendo fácil acesso ao que há de melhor em CVS, listas, controle de bugs, quadro de mensagens/fórums, gerenciador de tarefas, hospedagem, arquivamento permanente de arquivos, backups completos, e administração totalmente baseado na web.  <BR> &nbsp; <P> <B>Conteúdo do Site e Participação</B> <P> Para tirar o máximo proveito do GForge, você deve se  <A href="/account/register.php">registrar como um usuário do site</A>.  Isso permitirá que você participe plenamente em tudo o que temos a oferecer.  É claro que você pode ver o conteúdo do site sem se registrar, mas não terá accesso para participar plenamente. <P> &nbsp; <BR> <B>Registre seu próprio Projeto</B> <P> <A href="/account/register.php">Registre-se como um usuário do site</A>, em seguida efetue <A HREF="/account/login.php">Login</A> e finalmente, <A HREF="/register/">Registre seu Projeto.</A> <P> Obrigado... e aproveite o site.
 frs	latest_file_releases	Últimos Arquivos Enviados
 menu	login	Login via SSL
-menu	logout	Logout
 home	most_active_this_week	Mais Ativo da Semana
 menu	my_personal_page	Minha Página Pessoal
 menu	new_project	Registrar Novo Projeto
 menu	new_releases	Novas Atualizações
 menu	new_user	Novo Usuário via SSL
-menu	other_site_mirrors	Outros Mirrors
 menu	project_admin	Administração do Projeto
 group	project_admins	Administradores
 menu	project_help_wanted	Projetos que Precisam de Ajuda
 menu	project_summary	Sumário do Projeto
-group	public_area	Áreas Públicas
 menu	search	Procurar
 menu	software_map	Mapa dos Softwares
 home	sourceforge_statistics	Estatísticas do GForge
