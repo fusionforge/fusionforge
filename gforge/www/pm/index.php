@@ -39,13 +39,13 @@ if (!$pgf || !is_object($pgf)) {
 }
 
 $pg_arr =& $pgf->getProjectGroups();
-if ($pgf->isError()) {
+if ($pg_arr && $pgf->isError()) {
 	exit_error('Error',$pgf->getErrorMessage());
 }
 
 pm_header(array('title'=>'Projects for '. $g->getPublicName(),'pagename'=>'pm','sectionvals'=>$g->getPublicName()));
 
-if (count($pg_arr) < 1) {
+if (count($pg_arr) < 1 || $pg_arr == false) {
 	echo '<p>No Projects Defined.';
 } else {
 	echo '

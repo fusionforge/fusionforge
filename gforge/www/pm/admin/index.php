@@ -119,7 +119,7 @@ if ($post_changes) {
 		} else {
 			$feedback .= " Updated Successfully ";
 		}
-	} 
+	}
 }
 /*
 	Show UI forms
@@ -359,7 +359,7 @@ if ($add_cat && $group_project_id) {
 
     $pg_arr =& $pgf->getProjectGroups();
 
-    if (count($pg_arr) < 1) {
+    if (count($pg_arr) < 1 || $pg_arr == false) {
         echo '
             <h2>No Projects Found</h2>
             <p>
