@@ -23,9 +23,7 @@
 #	* Added about/about_blurb, plus a few minor fixes	
 # 2002-09-25 Christian Bayle <bayle@debian.org>		
 #	* Added more account_register/blurb	
-# 2003-05-10  Linac (Angoulême Lug) pour l'Adullact <michel.bondaz@linac.org>		
 #	* Added all Base.tab strings	
-error	title	La page demandée  n'a pas été trouvée (Erreur 404)
 account	title	Préférences de votre compte
 account	updated	Mis à jour
 account_change_email	desc	<P>Changer votre adresse de courrier électronique va nécessiter une confirmation de votre nouvelle adresse, afin que nous puissions nous assurer que nous enregistrons une bonne adresse. </p><p>Nous avons besoin de conserver une adresse valide pour chaque utilisateur pour nous garantir un accès au compte. Si nous avons besoin de de joindre un utilisateur à cause d'un problème en provenance d'un compte utilsateur ou d'un projet, il est important que nous puissions le faire.</p><p>En validant le formulaire ci-dessous, vous déclencherez l'envoi d'un courrier à votre nouvelle adresse, contenant une URL de confirmation. En allant sur ce lien, vous pourrez achevez la procédure de changement d'adresse.</p> 
@@ -37,9 +35,9 @@ account_change_email	section	Préférences de votre compte
 account_change_email	send_confirmation	Envoi confirmation à la nouvelle adresse
 account_change_email	subject	$1 - vérification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email_confirm	title	Confirmation de changement d'email
 account_change_email-complete	confirm	Bienvenue $1, votre changement d'adresse email a été effectué. Votre nouvelle adresse enregistrée est <strong>$2</strong>. Les messages envoyés à $3 y désormais redirigés.
 account_change_email-complete	title	Changement d'adresse email effectué
+account_change_email_confirm	title	Confirmation de changement d'email
 account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe $1</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
 account_change_pw	new_password	Nouveau mot de passe (6 caractères minimum)
 account_change_pw	new_password_repeat	Nouveau mot de passe (répéter)
@@ -100,6 +98,7 @@ account_options	title	Gestion de compte
 account_options	user_id	Identification Utilisateur
 account_options	view_developer_profile	Voir mon profil de développeur
 account_options	welcome	Bienvenue
+account_register	Preferences	Préférences
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
 account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
 account_register	emailaddr	Adresse de courrier électronique :<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse.
@@ -126,7 +125,6 @@ account_register	message_header	Enregistrement dans $1
 account_register	partecipate_peer_ratings	Participer au classement par les pairs. <i>(Vous permet de classer les autres développeurs en fonctions de différents critères, aussi bien que d'être évalué par les autres. Pour plus d'information, voir votre page d'utilisateur de $1 si vous avez choisi de participer aux classements)</i>.
 account_register	password	Mot de passe (6 caractères minimum) *:
 account_register	password2	Mot de passe (répété) :
-account_register	Preferences	Préférences
 account_register	realname	Nom complet :
 account_register	register	S'enregistrer
 account_register	remember_me	Mémoriser la connection
@@ -313,12 +311,12 @@ admin_massmail	missing_parameter_select_target	Paramètre manquant. Vous devez i
 admin_massmail	schedule_for_mailing	Programmation pour le courrier
 admin_massmail	select	(choisir)
 admin_massmail	subject	Sujet
+admin_massmail	subscribers_to_additional_community	Abonnés aux « courriers de la communuauté »
 admin_massmail	subscribers_to_site_updates	Inscrits aux « mises à jours du site »
 admin_massmail	text_of_message	Texte du message
 admin_massmail	title	Moteur d'envoi en masse de courriers
 admin_massmail	type	Type
 admin_massmail	will_be_append	(sera suivi d'une information pour la désinscription, si choisi)
-admin_massmail	subscribers_to_additional_community	Abonnés aux « courriers de la communuauté »
 admin_massmail_execute	completed_successfully	EFFECTUE
 admin_massmail_execute	querry_complete	Interrogation complète. Les envois adressés à
 admin_massmail_execute	receive_post	Envois reçus. Requête.
@@ -609,6 +607,7 @@ docman_new	title	Gestionnaire de documentation : soumission d'un nouveau documen
 docman_new	upload_file	Télécharger vers le serveur
 error	error_creating	Erreur de création
 error	not_found	PAGE NON TROUVEE
+error	title	La page demandée  n'a pas été trouvée (Erreur 404)
 exit	choose_a_group	Erreur - Choisissez un groupe
 exit	choose_group_body	Aucun numéro d'identification de groupe choisi
 exit	choose_group_title	Erreur - aucun n° de groupe n'a été choisi
@@ -877,9 +876,10 @@ help_tracker	canned_response	La liste déroulante de réponses pré-enregistrée
 help_tracker	category	Cette liste déroulante recense les catégories de traces possibles ici.<br /><br />Choisir 'tous' pour l'ensemble.
 help_tracker	close_window	Fermer la fenêtre.
 help_tracker	comment	La zone de texte 'commentaire' vous permet d'attacher un commentaire à une trace lorsqu'il n'y a pas de réponse automatique appropriée.
-help_tracker	priority	L'option de priorité permet à un utilisateur une priorité (de 1 à 9) pour sa trace.<br /><br />C'est particulièrement utilie pour des bugs ou des soucis pour lesquels un utilisateur peut avoir découvert un problème critique pour le projet.
+help_tracker	data_type	L'option 'Tpe de données' détermine le genre de trace dont il s'agit. Comme le traceur reste dans un genre de trace, il est important de connae son genre item.<br /><br />Cela permet en outre aux administrateurs de convertir d'un genre à l'autre (un bug en support par exemple).
 help_tracker	group	Cette liste déroulante recense les groupes de traces définis par les adminstrateurs.<br /><br />Si vous êtes administrateur du projet, vous pouvez définir vos propres groupes.
 help_tracker	monitor	Vous pouvez démarrer ou arrêter un suivi de cette trace en cliquant sur 'Suivi'. <br /><br /><strong>Note!</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires à cette trace, ou que vous l'avez soumise, ou si elle vous est confiée, vous aurez de toutes fa篮 des courriers pour ces motifs aussi bien.
+help_tracker	priority	L'option de priorité permet à un utilisateur une priorité (de 1 à 9) pour sa trace.<br /><br />C'est particulièrement utilie pour des bugs ou des soucis pour lesquels un utilisateur peut avoir découvert un problème critique pour le projet.
 help_tracker	resolution	Aiguillage (s'il y a lieu)
 help_tracker	sort_by	L'option 'trié par' vous permet de précider le type d'affichage.<br /><br /> Vous pouveez trier par NЬ priorité, titre, date d'ouverture, date de fermeture, auteur, responsable.  Vous pouvez aussi choisir l'ordre ascendant ou descendant.
 help_tracker	status	Cette liste déroulante recense les status possible d'une trace.<br /><br />'Pending' si vous attendez une réponse de l'auteur.  Quand l'auteur aura répondu, le statut repassera à 'Ouvert'. Toutefois, si l'auteur ne répond pas en u temp défini par l'administrateur (par défaut 14 jours), alors le statut passe à 'Supprimé'.
@@ -1063,7 +1063,6 @@ news_utils	archive	Archive des nouvelles
 news_utils	nonews	<H3>Pas de nouvelles</H3>
 news_utils	readmore	<NOBR>Lire plus/Commenter</NOBR>
 news_utils	submit	Proposer une nouvelle
-help_tracker	data_type	L'option 'Tpe de données' détermine le genre de trace dont il s'agit. Comme le traceur reste dans un genre de trace, il est important de connae son genre item.<br /><br />Cela permet en outre aux administrateurs de convertir d'un genre à l'autre (un bug en support par exemple).
 people	about_blurb	<p>Le système « Besoin d'aide » est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus
 people	action	Action
 people	add_new_skill	Ajouter une nouvelle competence
@@ -1653,9 +1652,9 @@ project_stats_graph	page_view_days	Visites de la page (rouge) et téléchargemen
 project_stats_graph	page_view_months	Visites de la page (rouge) et téléchargements (bleu) sur $1 mois
 project_stats_graph	statistics	$1 Statistiques $1
 project_stats_graph	views	Visites (rouge) / Téléchargements (bleu)
+project_stats_utils	CVS	CVS
 project_stats_utils	all_tracker	Trac.
 project_stats_utils	bugs	Bugs
-project_stats_utils	CVS	CVS
 project_stats_utils	days	Jours
 project_stats_utils	dl	D/l
 project_stats_utils	month	mois
@@ -1701,16 +1700,18 @@ register_requirements	section	Nouveau projet
 register_requirements	title	Services et conditions requises
 register_tos	section	Nouveau projet
 register_tos	title	Accord sur les conditions générales
-scm_index	anoncvs	<P><B>Accès CVS anonyme</B> <P>Ce dép����VS peut-être interrogé (par la méthode pserver) CVS avec les instructions suivantes. le module que vous voulez récupérert doit être spécifié comme <I>modulename</I>. Lorsqu'on vous demande un mot de passe pour <I>anonymous</I>, tapez simplement 'Entrée'.
+scm_index	anoncvs	<P><B>Accès CVS anonyme</b> <P>Ce dépôt CVS peut-être interrogé (par la méthode pserver) CVS avec les instructions suivantes. le module que vous voulez récupérer doit être spécifié comme <I>modulename</i>. Lorsqu'on vous demande un mot de passe pour <I>anonymous</i>, tapez simplement 'Entrée'.
 scm_index	anoncvsup	Les mises à jour (update) quand on se trouve à l'intérieur du répertoire du module n'ont pas besoin du paramètre -d
-scm_index	browseit	Parcourir le dép����VS
-scm_index	browsetree	<HR><B>Parcourir l'arbre CVS</B> <P>Parcourir l'arbre CVS vous donne un vue d'ensemble sur l'état du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dép����scm_index	cvs_repository	Dép����VS
+scm_index	browseit	Parcourir le dépôt CVS
+scm_index	browsetree	<HR><B>Parcourir l'arbre CVS</B> <P>Parcourir l'arbre CVS vous donne un vue d'ensemble sur l'état du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt
+scm_index	cvs_repository	dépôt CVS
 scm_index	devcvs	<P><B>Accès CVS pour développeur via SSH</B> <P>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <I>module</I> et <I>développeuer</I> par les valeurs appropriées. Fournissez votre mot de passe pour le site lorsqu'on vous le demande.
 scm_index	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 scm_index	developername	développeur
 scm_index	error_only_projects_can_use_cvs	ERREUR
 scm_index	error_this_project_has_turned_off	Erreur : ce projet a désactivé son CVS.
-scm_index	history	Historique du dép����cm_index	modulename	module
+scm_index	history	Historique du dépôt
+scm_index	modulename	module
 scm_index	nohistory	Ce projet n'a pas d'historique CVS
 scm_index	section	Projet : $1
 scm_index	title	CVS
@@ -1924,6 +1925,7 @@ stats_site_utils	all_projects	Tous les projets
 stats_site_utils	all_trkr	Tous les suivis
 stats_site_utils	bugs	Bugs
 stats_site_utils	cls	**Cls
+stats_site_utils	comma_seperated_group_id	numéros de groupes <strong>séparés pas des virgules</strong>
 stats_site_utils	comms	**Comm's
 stats_site_utils	cos	**CO's
 stats_site_utils	current_statistic_all_time	Statistiques agrégées depuis le début
@@ -1933,6 +1935,7 @@ stats_site_utils	developers	Développeurs
 stats_site_utils	downloads	Téléchargements
 stats_site_utils	generate_report	Produire le rapport d'activité
 stats_site_utils	group_name	Nom du groupe
+stats_site_utils	in_trove_category	Catégorie de projets :
 stats_site_utils	last_30	derniers 30
 stats_site_utils	no_data	Aucune données
 stats_site_utils	no_valid_data	La requête ne retourne de pas de données valdes.
@@ -1954,8 +1957,6 @@ stats_site_utils	support	Support technique
 stats_site_utils	tasks	tâches
 stats_site_utils	total	Total
 stats_site_utils	view_by	Voir par :
-stats_site_utils	comma_seperated_group_id	numéros de groupes <strong>séparés pas des virgules</strong>
-stats_site_utils	in_trove_category	Catégorie de projets :
 stats_user_graph	date	Date
 stats_user_graph	new_additions_by_day	Nouveaux ajouts, par jours
 stats_user_graph	new_user_projects	Nouveaux membres (rouge), Nouveaux projets (bleu)
@@ -2121,6 +2122,7 @@ system	locale	fr
 system	strftimefmt	%e %B %Y %H:%M
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
+top	NA	Pas disponible
 top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichées ici.
 top	active_all_time	Les plus actifs de tous les temps
 top	active_weekly	Les plus actifs cette semaine
@@ -2129,7 +2131,6 @@ top	downloads	Les plus téléchargés
 top	downloads_7_days	Les plus téléchargés cette semaine
 top	forum_posts	Les forums les plus actifs
 top	highest_ranked_users	Les développeurs les mieux classés
-top	NA	Pas disponible
 top	pageviews	Les projets les plus visités
 top	same	Même chose
 top	title	Les meilleurs projets
