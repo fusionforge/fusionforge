@@ -70,7 +70,7 @@ install: build
 	install -m 644 deb-specific/httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 utils/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/gforge-config $(CURDIR)/debian/gforge-common/usr/sbin/
 	install -m 644 utils/include.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
 
