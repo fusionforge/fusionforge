@@ -39,7 +39,7 @@ function writeFile($filePath, $content) {
 function addProjectRepositories() {
 	global $maincvsroot;
 
-	$res = db_query("select group_id,unix_group_name,enable_anoncvs,enable_pserver from groups where status='A' AND group_id NOT IN (2,3,4)");
+	$res = db_query("select group_id,unix_group_name,enable_anonscm,enable_pserver from groups where status='A' AND group_id NOT IN (2,3,4)");
 	
 	for($i = 0; $i < db_numrows($res); $i++) {
 		/*
@@ -50,7 +50,7 @@ function addProjectRepositories() {
 			$writersContent = '';
 			$readersContent = '';
 			$passwdContent = '';
-			if(db_result($res,$i,'enable_anoncvs')) {
+			if(db_result($res,$i,'enable_anonscm')) {
 				$repositoryMode = 02775;
 				if (db_result($res,$i,'enable_pserver')) {
 					$readersContent = 'anonymous::anonymous';
@@ -66,7 +66,7 @@ function addProjectRepositories() {
 		} elseif (is_file($repositoryPath)) {
 			$err .= $repositoryPath.' already exists as a file';
 		} else {
-			system('./cvscreate.sh '.db_result($res,$i,'unix_group_name').' '.(db_result($res,$i,'group_id')+50000).' '.db_result($res,$i,'enable_anoncvs').' '.db_result($res,$i,'enable_pserver'));
+			system('./cvscreate.sh '.db_result($res,$i,'unix_group_name').' '.(db_result($res,$i,'group_id')+50000).' '.db_result($res,$i,'enable_anonscm').' '.db_result($res,$i,'enable_pserver'));
 		}
 	}
 }
