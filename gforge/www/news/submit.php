@@ -37,7 +37,7 @@ if (session_loggedin()) {
 	   			*/
 
 				db_begin();
-				$f=new Forum(group_get_object($sys_news_group));
+				$f=new Forum(group_get_object($group_id));
 				if (!$f->create($summary,$summary,1,'',0,0)) {
 					db_rollback();
 					exit_error('Error',$f->getErrorMessage());
