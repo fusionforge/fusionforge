@@ -134,12 +134,18 @@ if ($this->UsesAnonCVS ($group_id)) {
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
 
-		if ($params['scmcvs_use_cvs']) {
+		if ($params['scmradio'] == 'scmcvs') {
 			$group->setPluginUse("scmcvs", 1) ;
 			
 		} else {
 			$group->setPluginUse("scmcvs", 0) ;
 		}
+// 		if ($params['scmcvs_use_cvs']) {
+// 			$group->setPluginUse("scmcvs", 1) ;
+			
+// 		} else {
+// 			$group->setPluginUse("scmcvs", 0) ;
+// 		}
 		if ($params['scmcvs_enable_anon_cvs']) {
 			$this->SetUsesAnonCVS ($params['group_id'], true) ;
 		} else {
@@ -155,7 +161,8 @@ if ($this->UsesAnonCVS ($group_id)) {
 	function display_scm_admin_page ($params) {
 		$group =& group_get_object($params['group_id']);
 ?>
-<input type="checkbox" name="scmcvs_use_cvs" value="1" <?php if ($group->usesPlugin("scmcvs")) {print '"checked"';} ?>> <strong>Use CVS</strong><br>
+<!-- <input type="checkbox" name="scmcvs_use_cvs" value="1" <?php if ($group->usesPlugin("scmcvs")) {print '"checked"';} ?>> <strong>Use CVS</strong><br> -->
+<input type="radio" name="scmradio" value="scmcvs" <?php if ($group->usesPlugin("scmcvs")) {print '"checked"';} ?>> <strong>Use CVS</strong><br>
 <input type="checkbox" name="scmcvs_enable_anon_cvs" value="1" <?php if ($this->UsesAnonCVS($params['group_id'])) {print '"checked"';} ?>> <strong>Allow anonymous CVS</strong><br>
 <input type="text" name="scmcvs_cvs_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>CVS server</strong><br><br>
 <?php

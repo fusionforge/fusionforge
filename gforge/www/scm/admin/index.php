@@ -38,6 +38,7 @@ if ($submit) {
 			}
 		}
 	}
+	$hook_params['scmradio'] = $scmradio ;
 	plugin_hook ("scm_admin_update", $hook_params) ;
 }
 
