@@ -32,6 +32,7 @@ gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
+gforge/rpm-specific/scripts/refresh.sh -text svneol=unset#application/octet-stream
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text
 gforge/www/images/debian-sf-icon.png -text
