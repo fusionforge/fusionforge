@@ -78,3 +78,5 @@ Description-fr: Liste de compétences
  points-virgules `;'.
 
 #DSFHELPER:dbhost-variables#
+
+#DSFHELPER:web-variables#
