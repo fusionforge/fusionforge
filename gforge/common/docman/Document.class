@@ -1,0 +1,288 @@
+<?php
+/**
+ * GForge Doc Mgr Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+
+/*
+	Document Manager
+
+	by Quentin Cregan, SourceForge 06/2000
+
+	Complete OO rewrite by Tim Perdue 1/2003
+*/
+
+require_once('common/include/Error.class');
+
+class Document extends Error {
+
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var	 array   $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The Group object.
+	 *
+	 * @var	 object  $Group
+	 */
+	var $Group; //group object
+
+	/**
+	 *  Constructor.
+	 *
+	 *	@param	object	The Group object to which this forum is associated.
+	 *  @param  int	 The docid.
+	 *  @param  array	The associative array of data.
+	 */
+	function Document(&$Group, $docid=false, $arr=false) {
+		$this->Error();
+		if (!$Group || !is_object($Group)) {
+			$this->setError('Document:: No Valid Group Object');
+			return false;
+		}
+		if ($Group->isError()) {
+			$this->setError('Document:: '.$Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $Group;
+
+		if ($docid) {
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($docid)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				if ($this->data_array['group_id'] != $this->Group->getID()) {
+					$this->setError('Group_id in db result does not match Group Object');
+					$this->data_array = null;
+					return false;
+				}
+			}
+			if (!$this->isPublic()) {
+				$perm =& $this->Group->getPermission( session_get_user() );
+
+				if (!$perm || !is_object($perm) || !$perm->isMember()) {
+					$this->setError('Permission Denied');
+					$this->data_array = null;
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1) {
+
+		if (strlen($forum_name) < 3) {
+			$this->setError('Document Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (strlen($description) < 10) {
+			$this->setError('Document Description Must Be At Least 10 Characters');
+			return false;
+		}
+		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
+			$this->setError('Invalid Email Address');
+			return false;
+		}
+
+		// This is a hack to allow non-site-wide-admins to post
+		// news.  The news/submit.php checks for proper permissions.
+		// This needs to be revisited.
+		global $sys_news_group;
+		if ($this->Group->getID() == $sys_news_group) {
+			// Future check will be added.
+
+		} else {
+			// Current permissions check.
+
+			$perm =& $this->Group->getPermission( session_get_user() );
+
+			if (!$perm || !is_object($perm) || !$perm->isDocumentAdmin()) {
+				$this->setError('Permission Denied');
+				return false;
+			}
+		}
+
+		$sql="INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous)
+			VALUES ('".$this->Group->getId()."',
+			'". htmlspecialchars($forum_name) ."',
+			'$is_public',
+			'". htmlspecialchars($description) ."',
+			'$send_all_posts_to',
+			'$allow_anonymous')";
+
+		db_begin();
+		$result=db_query($sql);
+		if (!$result) {
+			db_rollback();
+			$this->setError('Error Adding Document: '.db_error());
+			return false;
+		}
+		$this->docid=db_insertid($result,'forum_group_list','docid');
+		$this->fetchData($this->docid);
+
+		if ($create_default_message) {
+			$fm=new DocumentMessage($this);
+			if (!$fm->create('Welcome To '.$forum_name,'Welcome To '.$forum_name)) {
+				$this->setError($fm->getErrorMessage());
+				return false;
+//Error check?
+			}
+		}
+		db_commit();
+		return true;
+	}
+
+	/**
+	 *  fetchData() - re-fetch the data for this ArtifactType from the database
+	 *
+	 *  @param  int	 The artifact type ID
+	 *  @return true/false
+	 */
+	function fetchData($docid) {
+		$res=db_query("SELECT * FROM docdata_vw
+			WHERE docid='$docid'
+			AND group_id='". $this->Group->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('Document:: Invalid docid');
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *	getGroup - get the Group object this ArtifactType is associated with.
+	 *
+	 *	@return	Object	The Group object.
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+
+	/**
+	 *	getID - get this docid.
+	 *
+	 *	@return	int	The docid.
+	 */
+	function getID() {
+		return $this->data_array['docid'];
+	}
+
+	/**
+	 *	getName - get the name of this document.
+	 *
+	 *	@return string	The name of this document.
+	 */
+	function getName() {
+		return $this->data_array['filename'];
+	}
+
+	/**
+	 *	getDescription - the description of this document.
+	 *
+	 *	@return string	The description.
+	 */
+	function getDescription() {
+		return $this->data_array['description'];
+	}
+
+	/**
+	 *	isPublic - whether this document is available to the general public.
+	 *
+	 *	@return	boolean	public_status.
+	 */
+	function isPublic() {
+		return (($this->data_array['stateid'] == 1) ? true  : false);
+	}
+
+	/**
+	 *	getStateID - get this stateid.
+	 *
+	 *	@return	int	The stateid.
+	 */
+	function getStateID() {
+		return $this->data_array['stateid'];
+	}
+
+	/**
+	 *	getStateName - the statename of this document.
+	 *
+	 *	@return string	The statename.
+	 */
+	function getStateName() {
+		return $this->data_array['state_name'];
+	}
+
+	/**
+	 *	getDocGroupID - get this doc_group_id.
+	 *
+	 *	@return	int	The doc_group_id.
+	 */
+	function getDocGroupID() {
+		return $this->data_array['doc_group'];
+	}
+
+	/**
+	 *	getDocGroupName - the doc_group_name of this document.
+	 *
+	 *	@return string	The docgroupname.
+	 */
+	function getDocGroupName() {
+		return $this->data_array['group_name'];
+	}
+
+
+
+	function update($forum_name,$description,$is_public=1,$send_all_posts_to='',$allow_anonymous=0) {
+
+		if (strlen($forum_name) < 3) {
+			$this->setError('Document Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (strlen($description) < 10) {
+			$this->setError('Document Description Must Be At Least 10 Characters');
+			return false;
+		}
+		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
+			$this->setError('Invalid Email Address');
+			return false;
+		}
+
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isDocAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$res=db_query("UPDATE forum_group_list SET
+			forum_name='". htmlspecialchars($forum_name) ."',
+			description='". htmlspecialchars($description) ."',
+			is_public='$is_public',
+			send_all_posts_to='$send_all_posts_to',
+			allow_anonymous='$allow_anonymous'
+			WHERE group_id='".$this->Group->getID()."'
+			AND docid='".$this->getID()."'");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('Error On Update: '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+}
+
+?>
