@@ -624,7 +624,7 @@ class ProjectTask extends Error {
 	 */
 	function setAssignedTo(&$arr) {
 		$arr2 =& $this->getAssignedTo();
-		$this->assignedto =& $arr2;
+		$this->assignedto =& $arr;
 
 		//If no one is assigned, then assign it to "100" - NOBODY
 		if (count($arr) < 1 || ((count($arr)==1) && ($arr[0]==''))) {

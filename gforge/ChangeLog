@@ -1,3 +1,8 @@
+2004-07-21  Tom Copeland <tom@infoether.com>
+	
+	* common/pm/ProjectTask.class: Applied patch # 
+	803: Assigned-to not updated when sending mail
+	
 2004-07-20  Tom Copeland <tom@infoether.com>
 
 	* www/include/languages/Basque.tab: Applied patch # 
