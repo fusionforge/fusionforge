@@ -1,10 +1,15 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Forums Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
 /*
 
@@ -15,10 +20,11 @@
 
 */
 
-require('pre.php');
-require('../forum/forum_utils.php');
+require_once('pre.php');
+require_once('www/forum/forum_utils.php');
 
 if ($forum_id) {
+
 	/*
 		Set up global vars that are expected by some forum functions
 	*/
@@ -33,15 +39,25 @@ if ($forum_id) {
 	$allow_anonymous=db_result($result,0,'allow_anonymous');
 	$send_all_posts_to=db_result($result,0,'send_all_posts_to');
 
+	//
+	//	Set up local objects
+	//
+	$g =& group_get_object($group_id);
+
+	if (user_isloggedin()) {
+		$u =& session_get_user();
+		$perm =& $g->getPermission($u);
+	}
+
 	//private forum check
-	if (!db_result($result,0,'is_public')) {
-		if (!user_isloggedin() || !user_ismember($group_id)) {
+	if (db_result($result,0,'is_public') != 1) {
+		if (!user_isloggedin() || (user_isloggedin() && !$perm->isMember())) {
 			/*
 				If this is a private forum, kick 'em out
 			*/
 			exit_error('ERROR','Forum is restricted to members of this group');
 		}	 
-	}	 
+	}
 
 
 	/*
@@ -67,7 +83,7 @@ if ($forum_id) {
 		$style='nested';
 	}
 	if (!$style || ($style != 'ultimate' && $style != 'flat' && $style != 'nested' && $style != 'threaded')) {
-		$style='nested';
+		$style='ultimate';
 	}
 
 	if (!$max_rows || $max_rows < 5) {
@@ -85,25 +101,20 @@ if ($forum_id) {
 	if (!$thread_id && user_isloggedin()) {
 		$_pref=$style.'|'.$max_rows;
 		if ($set=='custom') {
-//echo "<P>checking pref";
-			if (user_get_preference('forum_style')) {
-//echo "<P>pref exists";
-				if ($_pref == user_get_preference('forum_style')) {
-//echo "<P>pref same: $_pref";
+			if ($u->getPreference('forum_style')) {
+				if ($_pref == $u->getPreference('forum_style')) {
 					//do nothing - pref already stored
 				} else {
-//echo "<P>setting pref: $_pref";
 					//set the pref
-					user_set_preference ('forum_style',$_pref);
+					$u->setPreference ('forum_style',$_pref);
 				}
 			} else {
-//echo "<P>setting pref";
 					//set the pref
-					user_set_preference ('forum_style',$_pref);
+					$u->setPreference ('forum_style',$_pref);
 			}
 		} else {
-			if (user_get_preference('forum_style')) {
-				$_pref_arr=explode ('|',user_get_preference('forum_style'));
+			if ($u->getPreference('forum_style')) {
+				$_pref_arr=explode ('|',$u->getPreference('forum_style'));
 				$style=$_pref_arr[0];
 				$max_rows=$_pref_arr[1];
 			} else {
@@ -113,12 +124,15 @@ if ($forum_id) {
 		}
 	}
 	if (!$style || ($style != 'ultimate' && $style != 'flat' && $style != 'nested' && $style != 'threaded')) {
-		$style='nested';
+		$style='ultimate';
 	}
 
+	if (!$max_rows || $max_rows < 5) {
+		$max_rows=25; 
+	}
 
 //echo "<P>style: $style";
-	forum_header(array('title'=>$forum_name));
+	forum_header(array('title'=>$forum_name,'pagename'=>'forum_forum','sectionvals'=>group_getname($group_id),'forum_id'=>$forum_id));
 
 /**
  *
@@ -197,6 +211,9 @@ if ($forum_id) {
 		"ORDER BY forum.most_recent_date DESC";
 
 		$result=db_query($sql,($max_rows+25),$offset);
+
+		echo db_error();
+
 		while ($row=db_fetch_array($result)) {
 			$msg_arr["$row[is_followup_to]"][]=$row;
 		}
@@ -233,6 +250,9 @@ if ($forum_id) {
 		"ORDER BY forum.most_recent_date DESC";
 		
 		$result=db_query($sql,($max_rows+25),$offset);
+
+		echo db_error();
+
 		while ($row=db_fetch_array($result)) {
 			$msg_arr["$row[is_followup_to]"][]=$row;
 		}
@@ -248,7 +268,7 @@ if ($forum_id) {
 			 
 		if ($rows > $max_rows) {
 			$rows=$max_rows;
-		}       
+		}	   
 		$i=0;	 
 		while (($i < $rows) && ($total_rows < $max_rows)) {
 			$thread=$msg_arr["0"][$i];
@@ -257,14 +277,14 @@ if ($forum_id) {
 			$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD><A HREF="/forum/message.php?msg_id='.
 				$thread['msg_id'].'">'.
 				html_image("images/msg.gif","12","10",array("BORDER"=>"0"));
-			/*      
+			/*	  
 				See if this message is new or not
 				If so, highlite it in bold
 			*/
 			if (get_forum_saved_date($forum_id) < $thread['date']) {
 				$ret_val .= '<B>';
 			}
-			/*      
+			/*	  
 				show the subject and poster
 			*/
 			$ret_val .= $thread['subject'] .'</A></TD>'.
@@ -296,6 +316,9 @@ if ($forum_id) {
 		"ORDER BY forum.msg_id DESC";
 
 		$result=db_query($sql,($max_rows+1),$offset);
+
+		echo db_error();
+
 		$i=0;	 
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 			$ret_val .= forum_show_a_nested_message ( $row ).'<BR>';
@@ -319,8 +342,9 @@ if ($forum_id) {
 			"ORDER BY f.most_recent_date DESC";
 
 		$result=db_query($sql,($max_rows+1),$offset);
-//echo db_error();
-//echo "In Ultimate View";
+
+		echo db_error();
+
 		$title_arr=array();
 		$title_arr[]='Topic';
 		$title_arr[]='Topic Starter';
@@ -331,23 +355,23 @@ if ($forum_id) {
 		$i=0;
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 			$ret_val .= '
-			        <TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/forum/forum.php?thread_id='.
-			        $row['thread_id'].'&forum_id='.$forum_id.'">'.
-			        html_image("images/ic/cfolder15.png","15","13",array("border"=>"0")) . '  &nbsp; ';
-			/*      
-			        See if this message is new or not
-			        If so, highlite it in bold
+				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/forum/forum.php?thread_id='.
+				$row['thread_id'].'&forum_id='.$forum_id.'">'.
+				html_image("images/ic/cfolder15.png","15","13",array("border"=>"0")) . '  &nbsp; ';
+			/*	  
+					See if this message is new or not
+					If so, highlite it in bold
 			*/
 			if (get_forum_saved_date($forum_id) < $row['recent']) {
-			        $ret_val .= '<B>';
+					$ret_val .= '<B>';
 			}
 			/* 
-			        show the subject and poster
+					show the subject and poster
 			*/
 			$ret_val .= $row['subject'] .'</A></TD>'.
-			        '<TD>'. $row['user_name'] .'</TD>'.
+				'<TD>'. $row['user_name'] .'</TD>'.
 				'<TD>'. $row['followups'] .'</TD>'.
-			        '<TD>'.date($sys_datefmt,$row['recent']).'</TD></TR>';
+				'<TD>'.date($sys_datefmt,$row['recent']).'</TD></TR>';
 			$i++;
 		}
 
@@ -362,8 +386,8 @@ if ($forum_id) {
 		<TR BGCOLOR="#EEEEEE"><TD WIDTH="50%">';
 	if ($offset != 0) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE="3" STYLE="text-decoration: none"><B>
-			<A HREF="javascript:history.back()"><B>' .
-			html_image("images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
+		<A HREF="javascript:history.back()"><B>' .
+		html_image("images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -372,9 +396,9 @@ if ($forum_id) {
 
 	if (db_numrows($result) > $max_rows) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE=3 STYLE="text-decoration: none"><B>
-			<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
-			<B>Next Messages ' .
-			html_image("images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
+		<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
+		<B>Next Messages ' .
+		html_image("images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -390,7 +414,7 @@ if ($forum_id) {
 		//	Viewing a particular thread in nested view
 		//
 		echo '<CENTER><h3>Post A Message To This Thread:</H3></CENTER>';
-                show_post_form($forum_id,$thread_id,$msg_arr["0"][0]['msg_id'],$msg_arr["0"][0]['subject']);
+				show_post_form($forum_id,$thread_id,$msg_arr["0"][0]['msg_id'],$msg_arr["0"][0]['subject']);
 	} else {
 		//
 		//	Viewing an entire message forum in a given format

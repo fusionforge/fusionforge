@@ -1,17 +1,22 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Front Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');    // Initial db and session library, opens session
-require ('cache.php');
-require($DOCUMENT_ROOT.'/forum/forum_utils.php');
-require ('features_boxes.php');
+require_once('pre.php');    // Initial db and session library, opens session
+require_once('www/include/cache.php');
+require_once('www/forum/forum_utils.php');
+require_once('www/include/features_boxes.php');
 
-$HTML->header(array('title'=>'Welcome'));
+$HTML->header(array('title'=>'Welcome','pagename'=>'home'));
 
 ?>
 <!-- whole page table -->
@@ -21,31 +26,37 @@ $HTML->header(array('title'=>'Welcome'));
 	<hr width="100%" size="1" noshade>
 	<span class="slogan">
 	<div align="center">
-	<?php echo $Language->BREAKING_DOWN_BARRIERS; ?>
+	<?php echo $Language->getText('home','breaking_down_barriers'); ?>
 	</div>
 	</span>
         <hr width="100%" size="1" noshade>
 	&nbsp;<br>
 <P>
 <?php
-
+ 
 /*
 
-	Temp way of getting
+       Temp way of getting
 
-	blurb before the content mgr is ready
+       blurb before the content mgr is ready
 
 */
 
-echo $Language->HOME_PAGE_ABOUT_BLURB;
+echo $Language->getText('home','about_blurb');
 echo '<P>';
-// echo $HTML->box1_top($Language->GROUP_LONG_FOUNDRIES);
+// echo $HTML->box1_top($Language->getText('menu','long_foundries'));
 ?>
 
 <!--
 
 <br><b>SourceForge Development Foundries</b><br><br>
 <table bgcolor="White" border="0" cellpadding="0" cellspacing="0" valign="top" width="100%">
+<tr>
+	<td>Essentials:</td>
+</tr>
+<tr>
+	<td><font size="-1"><a href="/foundry/linuxkernel/">Linux Kernel</a>, <a href="/foundry/linuxdrivers/"><b>Linux Drivers</b></a></font></td>
+</tr>
 <tr>
 	<td>Hardware:</td>
 	<td>Programming:</td>
@@ -79,7 +90,7 @@ echo '<P>';
 -->
 
 <?php
-echo $HTML->box1_top($Language->GROUP_LONG_NEWS);
+echo $HTML->box1_top($Language->getText('group','long_news'));
 echo news_show_latest($sys_news_group,5,true,false,false,5);
 echo $HTML->box1_bottom();
 ?>
@@ -90,7 +101,7 @@ echo $HTML->box1_bottom();
 
 echo '<TD width="35%" VALIGN="TOP">';
 
-echo cache_display('show_features_boxes','show_features_boxes()',3600);
+echo cache_display('show_features_boxes','show_features_boxes()',(24*3600));
 
 ?>
 

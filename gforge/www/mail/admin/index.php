@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Mailing Lists Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../mail_utils.php');
+
+require_once('pre.php');
+require_once('../mail_utils.php');
 
 if ($group_id && user_ismember($group_id,'A')) {
 
@@ -18,8 +24,11 @@ if ($group_id && user_ismember($group_id,'A')) {
 
 		if ($add_list) {
 			$list_password = substr(md5($GLOBALS['session_hash'] . time() . rand(0,40000)),0,16);
-			if (!$list_name || strlen($list_name) < 3) {
-				exit_error('Error','Must Provide List Name That Is 3 or More Characters Long');
+
+			$list_name=stripslashes($list_name);
+
+			if (!$list_name || strlen($list_name) < 4) {
+				exit_error('Error','Must Provide List Name That Is 4 or More Characters Long');
 			}
 			$new_list_name=strtolower(group_getunixname($group_id).'-'.$list_name);
 
@@ -66,7 +75,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 					. "Your mailing list info is at:\n"
 					. "http://".$GLOBALS['sys_lists_host']."/mailman/listinfo/$new_list_name\n\n"
 					. "List administration can be found at:\n"
-					. "http://".$GLOBALS['sys_lists_host']."/mailman/admin/$new_list_name\n\n"
+					. "https://".$GLOBALS['sys_lists_host']."/mailman/admin/$new_list_name\n\n"
 					. "Your list password is: $list_password\n"
 					. "You are encouraged to change this password as soon as possible.\n\n"
 					. "Thank you for registering your project with SourceForge.\n\n"
@@ -104,10 +113,9 @@ if ($group_id && user_ismember($group_id,'A')) {
 		/*
 			Show the form for adding forums
 		*/
-		mail_header(array('title'=>'Add a Mailing List'));
+		mail_header(array('title'=>'Add a Mailing List','pagename'=>'mail_admin_add_list'));
 
 		echo '
-			<H2>Add a Mailing List</H2>
 			<P>Lists are named in this manner: 
 			<BR><B>projectname-listname@'. $GLOBALS['sys_lists_host'] .'</B>
 			<P>It will take <B><FONT COLOR="RED">6-24 Hours</FONT></B> for your list 
@@ -142,7 +150,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 		/*
 			Change a forum to public/private
 		*/
-		mail_header(array('title'=>'Update Mailing Lists'));
+		mail_header(array('title'=>'Update Mailing Lists','pagename'=>'mail_admin_change_status'));
 
 		$sql="SELECT list_name,group_list_id,is_public,description ".
 			"FROM mail_group_list ".
@@ -152,13 +160,10 @@ if ($group_id && user_ismember($group_id,'A')) {
 
 		if (!$result || $rows < 1) {
 			echo '
-				<H2>No Lists Found</H2>
-				<P>
-				None found for this project';
+				<P>No lists found for this project';
 			echo db_error();
 		} else {
 			echo '
-			<H2>Update Mailing Lists</H2>
 			<P>
 			You can administrate lists from here. Please note that private lists
 			can still be viewed by members of your project, but are not listed on SourceForge.<P>';
@@ -190,7 +195,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 						<FONT SIZE="-1">
 						<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Update">
 					</TD>
-					<TD><A href="http://'. $GLOBALS['sys_lists_host'] .'/mailman/admin/'
+					<TD><A href="https://'. $GLOBALS['sys_lists_host'] .'/mailman/admin/'
 					.db_result($result,$i,'list_name').'">[Administrate this list in GNU Mailman]</A>
 				       </TD></TR>
 				       <TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="3">
@@ -210,10 +215,9 @@ if ($group_id && user_ismember($group_id,'A')) {
 			Show main page for choosing 
 			either moderotor or delete
 		*/
-		mail_header(array('title'=>'Mailing List Administration'));
+		mail_header(array('title'=>'Mailing List Administration','pagename'=>'mail_admin'));
 
 		echo '
-			<H2>Mailing List Administration</H2>
 			<P>
 			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&add_list=1">Add Mailing List</A><BR>
 			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&change_status=1">Administrate/Update Lists</A>';

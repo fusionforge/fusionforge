@@ -65,10 +65,10 @@ $sys_dns2_host = "ns2.company.com";
 // Part II - Databases, html/php/other paths
 //server to use for updates and reads
 $sys_dbhost="localhost";
-//whether or not to use mysql replication
+//whether or not to use replication
 $sys_db_use_replication=true;
-//server to use for read-only stuff
 $sys_dbreadhost='localhost';
+$sys_dbreaddb='stats';
 $sys_dbname="alexandria";
 $sys_dbuser="www";
 $sys_dbpasswd="";
@@ -110,7 +110,26 @@ $sys_urlroot="/usr/lib/sourceforge/www/";
 $sf_cache_dir = "/var/cache/sourceforge";
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name="prodigy";
- 
+
+// session cookie settings
+//
+$sys_session_key        = "foobar";
+$sys_session_expire     = 60 * 60 * 24 * 7; 
+$sys_session_cypher     = MCRYPT_TWOFISH;
+$sys_session_cyphermode = MCRYPT_MODE_ECB;
+
+// username cookie settings
+//
+$sys_username_cookie_key        = "frobaz";
+$sys_username_cookie_urlspace   = ".company.com";
+$sys_username_cookie_expiration = 60 * 60 * 24 * 7;
+$sys_username_cookie_plaintext  = true;
+$sys_username_cookie_cypher     = MCRYPT_BLOWFISH;
+$sys_username_cookie_cyphermode = MCRYPT_MODE_ECB;
+
+// Require that user give unique (not yet existent in db) email upon
+// registration
+$sys_require_unique_email=0;
  
 // Part III - GUI modifications (menu colors, etc.)
 //    See the top of the file include/html.php, this is where the menu colors
@@ -121,7 +140,7 @@ $sys_name="prodigy";
 $sys_themeroot=$sys_urlroot."themes/";
 
 // Akamization of images
-$sys_images_url = "//a248.e.akamai.net/7/248/1710/949111342/sourceforge.net/";
+$sys_images_url = "";
 
 // Part IV - Groups
 //  The SourceForge permission model is based on groups

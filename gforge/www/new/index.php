@@ -1,14 +1,20 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge New Releases Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
-require "vote_function.php";
-$HTML->header(array("title"=>"New File Releases"));
+require_once('pre.php');
+require_once('vote_function.php');
+
+$HTML->header(array("title"=>"New File Releases",'pagename'=>'new'));
 
 if ( !$offset || $offset < 0 ) {
 	$offset = 0;
@@ -30,7 +36,7 @@ $query	= "SELECT groups.group_name,"
 	. "frs_package.name AS module_name, "
 	. "frs_dlstats_grouptotal_agg.downloads "
 	. "FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_agg "
-	. "WHERE ( frs_release.release_date > $start_time "
+	. "WHERE ( frs_release.release_date > '$start_time' "
 	. "AND frs_release.package_id = frs_package.package_id "
 	. "AND frs_package.group_id = groups.group_id "
 	. "AND frs_release.released_by = users.user_id "
@@ -41,7 +47,7 @@ $query	= "SELECT groups.group_name,"
 //	. "GROUP BY groups.group_name,groups.group_id,groups.unix_group_name,"
 //	."groups.short_description,users.user_name,users.user_id,frs_release.release_id "
 	. "ORDER BY frs_release.release_date DESC";
-$res_new = db_query($query,21,$offset);
+$res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 
 if (!$res_new || db_numrows($res_new) < 1) {
 	// echo $query . "<BR><BR>";
