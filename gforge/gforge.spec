@@ -178,7 +178,7 @@ else
 	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl >/dev/null 2>&1"
 
 	# updating configuration
-	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1
+	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1 || :
 fi
 
 %postun
