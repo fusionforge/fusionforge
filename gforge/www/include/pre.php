@@ -83,6 +83,9 @@ require_once('common/include/Group.class');
 //permission functions
 require_once('common/include/Permission.class');
 
+// escaping lib
+require_once('common/include/escapingUtils.php');
+
 //library to set up context help
 require_once('www/include/help.php');
 
@@ -91,7 +94,6 @@ require_once('www/include/exit.php');
 
 //various html libs like button bar, themable
 require_once('www/include/html.php');
-
 
 // #### Connect to db
 

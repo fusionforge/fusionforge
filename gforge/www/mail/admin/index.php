@@ -12,7 +12,6 @@
 require_once('pre.php');
 require_once('../mail_utils.php');
 
-require_once('common/include/escapingUtils.php');
 require_once('common/mail/MailingList.class');
 require_once('common/mail/MailingListFactory.class');
 
@@ -207,7 +206,7 @@ if ($group_id) {
 					htmlspecialchars($currentList->getDescription()).'</td>'.
 					'<td width="20%" align="center"><a href="'.getStringFromServer('PHP_SELF').'?group_id='.$group_id.'&amp;group_list_id='.$currentList->getID().'&amp;change_status=1">'.$Language->getText('mail_admin', 'update_list').'</a></td>'.
 					'<td width="20%" align="center">';
-					if($currentList->getStatus() != MAIL__MAILING_LIST_IS_CREATED) {
+					if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 						echo $Language->getText('mail_common', 'list_not_activated');
 					} else {
 						echo '<a href="'.$currentList->getExternalAdminUrl().'">'.$Language->getText('mail_admin', 'admin_in_mailman').'</a></td>';

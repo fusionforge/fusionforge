@@ -28,7 +28,6 @@ if (!$type_of_search) {
 }
 
 require_once('pre.php');
-require_once('common/include/escapingUtils.php');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 
 $offset = getIntFromGet('offset');

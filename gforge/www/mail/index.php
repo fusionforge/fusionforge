@@ -11,7 +11,6 @@
 require_once('pre.php');
 require_once('../mail/mail_utils.php');
 
-require_once('common/include/escapingUtils.php');
 require_once('common/mail/MailingList.class');
 require_once('common/mail/MailingListFactory.class');
 
@@ -24,9 +23,9 @@ if ($group_id) {
 	}
 	
 	$mlFactory = new MailingListFactory($Group);
-   if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
-       exit_error($Language->getText('general', 'error'), $mlFactory->getErrorMessage());
-   }
+	if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
+		exit_error($Language->getText('general', 'error'), $mlFactory->getErrorMessage());
+	}
 
 	mail_header(array(
 		'title' => $Language->getText('mail', 'mailinglists_for', array($Group->getPublicName())),
@@ -66,7 +65,7 @@ if ($group_id) {
 		echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
 		if ($currentList->isError()) {
 			echo '<td colspan="2">'.$currentList->getErrorMessage().'</td></tr>';
-		} else if($currentList->getStatus() != MAIL__MAILING_LIST_IS_CREATED) {
+		} else if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
 			echo '<td width="60%">'.
 				'<strong>'.$currentList->getName().'</strong><br />'.
 				htmlspecialchars($currentList->getDescription()). '</td>'.
