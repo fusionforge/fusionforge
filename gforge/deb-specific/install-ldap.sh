@@ -146,9 +146,9 @@ modify_nsswitch()
 		# By security i let priority to files
 		# Should maybe enhance this to take in account nis
 		# Maybe ask the order db/files/nis/ldap
-		perl -pi -e "s/^passwd/passwd	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#passwd/g" /etc/nsswitch.conf
-		perl -pi -e "s/^group/group	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#group/g" /etc/nsswitch.conf
-		perl -pi -e "s/^shadow/shadow	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#shadow/g" /etc/nsswitch.conf
+		perl -pi -e "s/^passwd/passwd:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#passwd/g" /etc/nsswitch.conf
+		perl -pi -e "s/^group/group:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#group/g" /etc/nsswitch.conf
+		perl -pi -e "s/^shadow/shadow:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#shadow/g" /etc/nsswitch.conf
 	fi
 }
 
