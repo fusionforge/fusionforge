@@ -1,17 +1,15 @@
 <?xml version="1.0"?>
 <document>
-
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
     <author email="tom@infoether.com">Tom Copeland</author>
     <title>Installation</title>
   </properties>
-
   <body>
 
 <section name="Hardware requirements">
 <p>
-Hardware requirements are dependent on the number of users that will use the system and how active those users are.  One installation of GForge 3.1 hosts over 360 users and over 110 projects on a single CPU Pentium 2.4GHz machine with 512 MB of RAM.
+Hardware requirements are dependent on the number of users that will use the system and how active those users are.  One installation of GForge hosts over 450 users and over 140 projects on a single CPU Pentium 2.4GHz machine with 512 MB of RAM.
 </p>
 </section>
 <section name="Software requirements">
@@ -64,9 +62,9 @@ To install GForge, follow these steps:
 <ol>
 <li>Login as root user</li>
 <li>cd to <code>/var/www/</code></li>
-<li>Extract the content of gforge-3.1.tar.bz2 to the current directory:<br/>
+<li>Extract the content of gforge-3.21.tar.bz2 to the current directory:<br/>
 <code>
-bzip2 -dc gforge-3.1.tar.bz2 | tar xvf -
+bzip2 -dc gforge-3.21.tar.bz2 | tar xvf -
 <br/>
 </code>
 </li>
@@ -83,7 +81,7 @@ bzip2 -dc gforge-3.1.tar.bz2 | tar xvf -
 <li>Change the DocumentRoot to point to the <code>www</code> directory:
 <code><br/>
 <br/>
-DocumentRoot "/var/www/gforge-3.1/www"
+DocumentRoot "/var/www/gforge-3.21/www"
 <br/>
 <br/></code>
 
@@ -92,7 +90,7 @@ DocumentRoot "/var/www/gforge-3.1/www"
 Change the Directory directive following the DocumentRoot as follows:
 
 <source><![CDATA[
-<Directory "/var/www/gforge-3.1/www">
+<Directory "/var/www/gforge-3.21/www">
     Options Indexes FollowSymLinks
     AllowOverride All
     Order allow,deny
@@ -102,11 +100,11 @@ Change the Directory directive following the DocumentRoot as follows:
 ]]></source>
 <p/>
 </li>
-<li>Change the ScriptAlias to <code>/var/www/gforge-3.1/cgi-bin</code>
+<li>Change the ScriptAlias to <code>/var/www/gforge-3.21/cgi-bin</code>
 </li>
 <li>Change the Directory configuration following the ScriptAlias directive as follows:
 <source><![CDATA[
-<Directory "/var/www/gforge-3.1/cgi-bin">
+<Directory "/var/www/gforge-3.21/cgi-bin">
     AllowOverride All
     Options None
     Order allow,deny
@@ -301,7 +299,7 @@ Now it's time to install the database. The steps are:
 
 <ol>
 
-<li>cd to <code>/var/www/gforge-3.1/db</code></li>
+<li>cd to <code>/var/www/gforge-3.21/db</code></li>
 <li>
 <code>
 psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
@@ -353,8 +351,8 @@ Verify the version of PHP installed on your system:
 </li>
 <li> and configure the include_path directive as follows:
 <source>
-include_path=".:/var/www/gforge-3.1/:/var/www/gforge-3.1/common/include:
-/var/www/gforge-3.1/www/include:/var/www/gforge-3.1/etc/"
+include_path=".:/var/www/gforge-3.21/:/var/www/gforge-3.21/common/include:
+/var/www/gforge-3.21/www/include:/var/www/gforge-3.21/etc/"
 </source>
 
 </li>
@@ -374,7 +372,7 @@ tar -zxvf cvsweb-1.112.tar.gz
 <li>Copy the cvsweb.cgi script into Apache's cgi-bin directory</li>
 <li>Copy the cvsweb.conf file into Apache's configuration directory (such as /etc/httpd/conf/ on RedHat 9)</li>
 <li>Edit cvsweb.conf</li>
-<li>change %CVSROOT hash to include your repositories</li>
+<li>change %CVSROOT hash to include your repositories - note you'll need to have created a repository first, of course</li>
 <li>change the $cvstreedefault variable to point to a default repository</li>
 <li>TODO: can we add the repositories automagically? Or should we tweak cvsweb.cgi?</li>
 <li>TODO: should we tweak cvsweb.cgi so it doesn't have a default repository?</li>
@@ -410,7 +408,7 @@ This directory will contain all files/patches uploaded to your gforge site.
 </li>
 
 <li>Create a directory<code> /etc/gforge</code><br/></li>
-<li>Copy the file <code>local.inc</code> from <code>/var/www/gforge-3.1/etc/</code> to <code>/etc/gforge/</code> </li>
+<li>Copy the file <code>local.inc</code> from <code>/var/www/gforge-3.21/etc/</code> to <code>/etc/gforge/</code> </li>
 <li>Open <code>/etc/gforge/local.inc</code>, configuring the following basic parameters:
 <ol>
 <li>Database configuration:
@@ -432,7 +430,7 @@ Change the value of the $sys_upload_dir to:
 </li>
 <li>
 Change the value of the $sys_urlroot to:<br/>
-<code>$sys_urlroot="/var/www/gforge-3.1/www/";</code>
+<code>$sys_urlroot="/var/www/gforge-3.21/www/";</code>
 <br/>
 </li>
 
@@ -464,7 +462,7 @@ should contain the domain of your server, e.g. gforge.org.
 Alias /pipermail/ /usr/local/mailman/archives/public/
 ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
 </source>
-<p>Run the script <code>gforge-3.1/cronjobs/mail/mailing_lists_create.php</code>; this creates any lists that are already in the database.  Note that to run the script you need to invoke the PHP interpreter with the <code>-f</code> flag, i.e.:</p>
+<p>Run the script <code>gforge-3.21/cronjobs/mail/mailing_lists_create.php</code>; this creates any lists that are already in the database.  Note that to run the script you need to invoke the PHP interpreter with the <code>-f</code> flag, i.e.:</p>
 <source>
 php -f mailing_lists_create.php
 </source>

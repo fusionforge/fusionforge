@@ -1,16 +1,10 @@
-a?xml version="1.0"?>
+<?xml version="1.0"?>
 <document>
-
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
     <title>Gforge User Guide - User specific functions</title>
   </properties>
-
   <body>
-
-
-
-
 <section name="User Homepage">
 <p>
 The User home page appears after the user has performed the <a href="../getting_started.html#login">login</a> or when he clicks the <code>My Page</code> tab.
