@@ -1,4 +1,5 @@
 <?php
+
 require_once('pre.php');
 header("Content-Type: text/plain");
 
@@ -16,7 +17,8 @@ project</error>\n");
 	           print("</bugs>\n");
                   exit;
           }
-
+// this is broken; the bug table doesn't exist
+// it should use ArtifactFactory and all that 
           $query = "SELECT
       b.*
       FROM
