@@ -148,9 +148,21 @@ switch ($func) {
 					$_status_id=(($status_id != 100) ? $status_id : $pt->getStatusID());
 					$_category_id=(($category_id != 100) ? $category_id : $pt->getCategoryID());
 					$_percent_complete=$pt->getPercentComplete();
+
 					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 					//conflicts with the "no change" ID! Sorry for messy use of 100.1
-					$_assigned_to=(($assigned_to != '100.1') ? $pt->getAssignedTo() : array('100'));
+					// 100 means => no change
+					// 100.1 means non assigned
+					// other means assigned to ...
+
+					if ($assigned_to == '100') {
+					    $_assigned_to = $pt->getAssignedTo();
+					} else if ($assigned_to == '100.1') {
+					    $_assigned_to = array('100');
+					} else {
+					    $_assigned_to = array($assigned_to);
+					} 			
+
 					$_dependent_on=$pt->getDependentOn();
 					$_new_group_project_id=(($new_group_project_id != 100) ? $new_group_project_id : $pt->ProjectGroup->getID() );
 					$_duration=$pt->getDuration();

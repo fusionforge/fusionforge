@@ -683,19 +683,19 @@ function artifacts_to_soap($at_arr) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'artifact_id'=>$at_arr->data_array['artifact_id'],
-				'group_artifact_id'=>$at_arr->data_array['group_artifact_id'],
-				'status_id'=>$at_arr->data_array['status_id'],
-				'category_id'=>$at_arr->data_array['category_id'],
-				'artifact_group_id'=>$at_arr->data_array['artifact_group_id'],
-				'resolution_id'=>$at_arr->data_array['resolution_id'],
-				'priority'=>$at_arr->data_array['priority'],
-				'submitted_by'=>$at_arr->data_array['submitted_by'],
-				'assigned_to'=>$at_arr->data_array['assigned_to'],
-				'open_date'=>$at_arr->data_array['open_date'],
-				'close_date'=>$at_arr->data_array['close_date'],
-				'summary'=>$at_arr->data_array['summary'],
-				'details'=>$at_arr->data_array['details']
+				'artifact_id'=>$at_arr[$i]->data_array['artifact_id'],
+				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+				'status_id'=>$at_arr[$i]->data_array['status_id'],
+				'category_id'=>$at_arr[$i]->data_array['category_id'],
+				'artifact_group_id'=>$at_arr[$i]->data_array['artifact_group_id'],
+				'resolution_id'=>$at_arr[$i]->data_array['resolution_id'],
+				'priority'=>$at_arr[$i]->data_array['priority'],
+				'submitted_by'=>$at_arr[$i]->data_array['submitted_by'],
+				'assigned_to'=>$at_arr[$i]->data_array['assigned_to'],
+				'open_date'=>$at_arr[$i]->data_array['open_date'],
+				'close_date'=>$at_arr[$i]->data_array['close_date'],
+				'summary'=>$at_arr[$i]->data_array['summary'],
+				'details'=>$at_arr[$i]->data_array['details']
 			);
 		}
 	}
