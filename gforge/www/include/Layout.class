@@ -326,9 +326,10 @@ if ($params['group']) {
 	global $sys_show_source;
 	if ($sys_show_source) {
 		global $SCRIPT_NAME;
-		print '<A CLASS=showsource HREF="/source.php?file=' . $SCRIPT_NAME . '"> Show Source</A>\n';
+		print '<A CLASS=showsource HREF="/source.php?file=' . $SCRIPT_NAME . '"> Show Source</A>';
 	}
 ?>
+
 </body>
 </html>
 <?php
