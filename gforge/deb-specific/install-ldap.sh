@@ -64,7 +64,7 @@ check_base_dn() {
     addon=$(echo $sf_ldap_base_dn | sed "s/$server_base_dn\$//")
     echo "addon = $addon"
     if [ -z "$addon" ] ; then
-	echo Gforge base DN is equal to server base DN -- strange but OK
+	echo Gforge base DN is equal to server base DN -- OK
 	return 0
     elif [ -z $(echo $addon | cut -d, -f2-) ] ; then
 	echo Gforge base DN is just a level under the server base DN -- OK
