@@ -15,6 +15,10 @@ $sys_chroot='{gforge_chroot}';
 // the webserver's directory
 //
 $sys_upload_dir='{uploaddir}';
+$sys_ftp_upload_dir='{ftpuploaddir}';
+$sys_ftp_upload_host='{ftpuploadhost}';
+$sys_ftp_upload_chowner='{ftpuploadchowner}';
+$sys_apache_usergroup='{apapche_usergroup}';
 
 // Where the GForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME

@@ -17,6 +17,7 @@ $sys_use_trove={sys_use_trove};
 $sys_use_snippet={sys_use_snippet};
 $sys_use_ssl={sys_use_ssl};
 $sys_use_people={sys_use_people};
+$sys_use_ftpuploads={sys_use_ftpuploads};
 
 // Enable/Disable the ability to add additionnal vhost for a project
 $sys_use_project_vhost={sys_use_project_vhost};

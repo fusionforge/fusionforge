@@ -826,7 +826,24 @@ function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array(' 
 	return $text;
 }
 
-
-
+/**
+ *	ls - lists a specified directory and returns an array of files
+ *	@param	string	the path of the directory to list
+ *	@param	boolean	whether to filter out directories and illegal filenames
+ *	@return	array	array of file names.
+ */
+function &ls($dir,$filter=false) {
+	exec('ls -c1 '.$dir,$out);
+	if ($filter) {
+		for ($i=0; $i<count($out); $i++) {
+			if (util_is_valid_filename($out[$i]) && is_file($dir.'/'.$out[$i])) {
+				$filtered[]=$out[$i];
+			}
+		}
+		return $filtered;
+	} else {
+		return $out;
+	}
+}
 
 ?>

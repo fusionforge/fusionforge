@@ -161,6 +161,7 @@ $sys_use_trove=true;
 $sys_use_snippet=true;
 $sys_use_ssl=false;
 $sys_use_people=true;
+$sys_use_ftpuploads=false;
 
 // Enable/Disable the ability to add additionnal vhost for a project
 $sys_use_project_vhost=true;
@@ -196,6 +197,11 @@ $sys_chroot='';
 // the webserver's directory
 //
 $sys_upload_dir='/path/to/uploads/';
+$sys_ftp_upload_dir='/path/to/ftpuploads/';
+$sys_ftp_upload_host='ftp.gforge.company.com/pub/ftpuploads';
+$sys_ftp_upload_chowner='/path/to/gforge/bin/ftpuploadchowner.php';
+$sys_apache_usergroup='www-data:www-data';
+
 
 // Where the GForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME

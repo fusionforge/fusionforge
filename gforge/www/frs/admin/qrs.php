@@ -35,13 +35,22 @@ if (!$perm->isReleaseTechnician()) {
 */
 
 if( $submit ) {
+	if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($sys_ftp_upload_dir.'/'.$ftp_filename)) {
+		//file was uploaded already via ftp
+		//use setuid prog to chown it
+		//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
+		//exec($cmd,$output);
+		$userfile_name=$ftp_filename;
+		$userfile=$sys_ftp_upload_dir.'/'.$ftp_filename;
+		//echo $cmd.'***'.$output.'***'.$userfile;
+	}
 	if (!$release_name) {
 		$feedback .= $Language->getText('project_admin_qrs','required_release_name');
 	} else 	if (!$package_id) {
 		$feedback .= $Language->getText('project_admin_qrs','required_package');
 	} else 	if (!$userfile || $userfile == 'none') {
 		// Check errors
-		switch($_FILES['userfile']['error']) {
+		switch(!$ftp_filename && $_FILES['userfile']['error']) {
 			case UPLOAD_ERR_INI_SIZE:
 			case UPLOAD_ERR_FORM_SIZE:
 				$feedback .= $Language->getText('project_admin_qrs','exceed_file_size');
@@ -71,7 +80,7 @@ if( $submit ) {
 		} elseif ($frsp->isError()) {
 			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			if ($userfile && is_uploaded_file($userfile)) {
+			if ($userfile && (is_uploaded_file($userfile) || ($sys_use_ftpuploads && $ftp_filename))) {
 				//
 				//	Create a new FRSRelease in the db
 				//
@@ -81,8 +90,9 @@ if( $submit ) {
 				} elseif ($frsr->isError()) {
 					exit_error('Error',$frsr->getErrorMessage());
 				} else {
-					$date_list = split('[- :]',$release_date,5);
-					$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+//					$date_list = split('[- :]',$release_date,5);
+//					$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+					$release_date = strtotime($release_date);
 					db_begin();
 					if (!$frsr->create($release_name,$release_notes,$release_changes,
 						$preformatted,$release_date)) {
@@ -189,6 +199,17 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 		<span style="color:red"><strong>
 		<?php echo $Language->getText('project_admin_qrs','release_note').' ('.$Language->getText('project_admin_qrs','maximum_file_size').' '. ini_get('upload_max_filesize')?>)</strong></span><br />
 		<?php echo $Language->getText('project_admin_qrs','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
+		<?php if ($sys_use_ftpuploads) { 
+
+			echo '<p>';
+			echo $Language->getText('project_admin_qrs','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
+			echo $Language->getText('project_admin_qrs','ftpupload_choosefile').'<br />';
+			$arr[]='';
+			$ftp_files_arr=array_merge($arr,ls($sys_ftp_upload_dir,true));
+			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
+		
+		</p>
+		<?php } ?>
 		</td>
 	</tr>
 	<tr>

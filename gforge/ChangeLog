@@ -1,3 +1,10 @@
+2005-01-16  Tim Perdue <tim@gforge.org>
+
+	* added ability to release files in FRS system that were 
+	uploaded via FTP instead of the HTTP upload. Requires several new 
+	vars and a FTP upload directory that is readable and owned by the 
+	same user as apache.
+
 2005-01-16  Christian Bayle <bayle@debian.org>
 
 	* Added a Makefile, that make easy to build debian package and phpdoc

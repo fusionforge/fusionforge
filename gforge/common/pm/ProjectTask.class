@@ -34,7 +34,7 @@
 
 
 require_once('common/include/Error.class');
-require_once('common/pm/Validator.class');
+require_once('common/include/Validator.class');
 
 function &projecttask_get_object($project_task_id,$data=false) {
 		global $PROJECTTASK_OBJ;

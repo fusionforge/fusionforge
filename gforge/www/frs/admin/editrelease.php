@@ -109,8 +109,9 @@ if ($step1) {
 
 	// If we haven't encountered any problems so far then save the changes
 	if ($exec_changes == true) {
-		$date_list = split('[- :]',$release_date,5);
-		$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+		//$date_list = split('[- :]',$release_date,5);
+		//$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+		$release_date = strtotime($release_date);
 		if (!$frsr->update($status_id,$release_name,$notes,$changes,$preformatted,$release_date)) {
 			exit_error('Error',$frsr->getErrorMessage());
 		} else {
@@ -124,7 +125,17 @@ if ($step2) {
 	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);
 
-	if ($userfile && is_uploaded_file($userfile)) {
+	if ($userfile && (is_uploaded_file($userfile) || ($sys_use_ftpuploads && $ftp_filename))) {
+		if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($sys_ftp_upload_dir.'/'.$ftp_filename)) {
+			//file was uploaded already via ftp
+			//use setuid prog to chown it
+			//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
+			//exec($cmd,$output);
+			$userfile_name=$ftp_filename;
+			$userfile=$sys_ftp_upload_dir.'/'.$ftp_filename;
+			//echo $cmd.'***'.$output.'***'.$userfile;
+		}
+
 		//
 		//  Now create the new FRSFile in the db
 		//
@@ -167,8 +178,9 @@ if ($step3) {
 		} elseif ($frsf->isError()) {
 			exit_error('Error',$frsf->getErrorMessage());
 		} else {
-			$date_list = split('[- :]',$release_time,5);
-			$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+			//$date_list = split('[- :]',$release_time,5);
+			//$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+			$release_time = strtotime($release_time);
 			if (!$frsf->update($type_id,$processor_id,$release_time)) {
 				exit_error('Error',$frsf->getErrorMessage());
 			} else {
@@ -251,6 +263,16 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 <?php echo $Language->getText('project_admin_editrelease','add_files_note') ?>
 </strong></span><br />
 <?php echo $Language->getText('project_admin_editrelease','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
+<?php if ($sys_use_ftpuploads) {
+
+	echo '<p>';
+	echo $Language->getText('project_admin_qrs','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
+	echo $Language->getText('project_admin_qrs','ftpupload_choosefile').'<br />';
+	$arr[]='';
+	$ftp_files_arr=array_merge($arr,ls($sys_ftp_upload_dir,true));
+	echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','',false); ?>
+	</p>
+<?php } ?>
 <table width="60%">
 <tr>
 <td>
