@@ -23,24 +23,18 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
-
-        # Patch Proftpd configuration files
-	/usr/lib/sourceforge/bin/install-ftp.sh configure-files
-	propose_update_install /etc/proftpd.conf
-
-	# Clean debconf after ourselves
-	db_stop
-
-        # Setup our FTP
-	/usr/lib/sourceforge/bin/install-ftp.sh configure 
-
-        # Setup our FRS
-	chown root:root /var/lib/sourceforge/download
+	adduser --system --group --home /var/www/sourceforge sourceforge 2>&1 > /dev/null
 	
+	# "Fill in the blanks" in main config file
+	create_mainconffile
+	vars=""
+        update_mainconffile $vars
+	/usr/sbin/sourceforge-config
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

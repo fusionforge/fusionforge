@@ -1,0 +1,124 @@
+DEBIAN SOURCEFORGE MAINTAINER HOWTO
+-----------------------------------
+
+Here is a short HOWTO explaining a few of the tricks that are used by
+the Debian Sourceforge packages.
+
+HELPERS (DEBHELPER & DEBCONF)
+-----------------------------
+The package uses Debhelper and Debconf.  While not all features of are
+used (no Emacsen modules, no shared libraries, no rollback features in
+Debconf, etc.), some of them are.  Where they are, it is in a fairly
+straightforward way.  No black magic or advanced features are used.
+
+PACKAGE ORGANISATION
+--------------------
+Historically, the package was monolithic: there was only one (rather
+large) package, called "sourceforge".  This package went and changed
+things all over the system, configuring a database, a web server, the
+mail transfer agent, etc.  In order to keep a semblance of order in
+all the actions involved, we separated them by "subsystem".  There was
+the database subsystem, the web server subsystem, the LDAP subsystem,
+etc.  These subsystems were each represented by a script handling most
+of it.  These scripts are called deb-specific/install-*.sh.  The main
+maintainer scripts (postinst, prerm, cron jobs and suchlike) called
+these scripts in turn.  The install-*.sh scripts handle different
+parameters: "configure", "purge" and "update" have rather explicit
+names (I hope); "configure-files" and "purge-files" are special
+targets.  They are used as a way for the postinst to delegate the task
+of computing a proposed change in a configuration file to the
+subsystem.  The postinst then uses Debconf to ask whether the proposed
+file should be used, takes appropriate action, then lets the subsystem
+finish its configuration.  Similar things happen for prerm scripts.
+
+  The package is now split into several sourceforge-* packages.  Some
+of them still contain some install-*.sh scripts (usually at most one).
+Each sourceforge-* package installs its corresponding subsystem, or a
+semblance thereof.  For instance, it is planned that the database can
+be hosted on a different server than the website.  But the website
+still needs to know where the database server is.  In this case, the
+database host will have to install sourceforge-db-local (or whatever
+the package is named), and the web server will have to install
+sourceforge-db-remote.  The -db-local package will still install the
+database (thus invoking install-db.sh), but -db-remote will only
+install what is needed by the database *clients* (basically, the host
+where the database is installed and the appropriate password).
+
+  There are therefore some areas where packages overlap: the database
+password is a variable "provided" by both the -db-local and -db-remote
+packages.  Debconf is intelligent enough not to ask the corresponding
+question twice, but it is interesting nevertheless to keep the
+appropriate variables where they belong, and only there.  Hence the
+use of a Debhelper-like trick, as described below.
+
+DSF-HELPER
+----------
+This is the most tricky part of the source package.  The maintainer
+scripts and Debconf templates are not used "as is", but they are
+instead generated from templates.  In much the same way as Debhelper
+replaces #DEBHELPER# lines in maintainer scripts by appropriate chunks
+of code to add the needed functionality to packages, this package
+builds the maintainer scripts (and Debconf templates) from templates
+by inserting bits of text in them.  These bits can be either simple
+text (like for Debconf templates), or bits of code (like the
+appropriate code to handle one particular Debconf variable in a
+.config file, or a function to repeatedly ask for a password until two
+consecutive answers match).
+
+  I call this trick DSF-Helper (for "Debian Sourceforge helper").
+It's largely inspired from Debhelper (particularly dh_installdeb) in
+both its concepts and implementation, and it might result in a patch
+submitted against Debhelper proper when I'm confident it works and is
+useful.  It is currently implemented in Perl.
+
+  The "bits of stuff" are grouped by identifiers.  For each
+identifier, you can have one chunk of text for each family of
+generated files (currently the families are .templates, .config,
+.preinst, .postinst, .prerm and .postrm).  For instance, a Debconf
+variable shared between several packages will have one chunk for the
+.templates file (containing the Debconf template), one for the .config
+file (containing the appropriate Debconf call), and one for the
+.postinst file (containing code to turn this Debconf variable into a
+line in a configuration file).
+
+  Each subpackage can then use some of these "bits of stuff" in its
+files.  To do so, the files must be named *.dsfh-in and include lines
+like #DSFHELPER:identifier#.  These files will be processed by
+dsf-helper.pl and turned into the appropriate files, with the keywords
+replaced by the appropriate text.
+
+  Now for a few examples.
+
+- get-debconf-password: this is a simple shell function looping until
+  the user types the same passwrd twice.  This function is mostly
+  useful in .config files, hence the "group" consists of the sole
+  debian/dsf-helper/get-debconf-password.config file.  To use it in a
+  <blah>.config file, just rename that <blah>.config file as
+  <blah>.config.dsfh-in and include #DSFHELPER:get-debconf-password#
+  in it.
+
+- ldap-variables: this one involves both Debconf templates and .config
+  code.  Just include #DSFHELPER:ldap-variables# in both the
+  <blah>.templates.dsfh-in and <blah>.config.dsfh-in, and DSF-Helper
+  will insert the appropriate chunk of text in the appropriate file.
+
+  The rationale behind DSF-Helper is that the code handling, say, one
+particular Debconf variable is likely to change from time to time, and
+to be added to one subpackage and removed from another.  It can become
+a big hassle just to maintain the code in different files and keep it
+consistent, and creating a new subpackage is also a tedious task.
+DSF-Helper makes these tasks a bit more automated.  Each bit of code
+is only maintained in one file, and it's propagated into every package
+at package building time.  Creating a new package can be "just" a
+matter of picking the appropriate bits of code, and DSF-Helper will
+put them where needed.
+
+  To draw a comparison with compiled C code, DSF-Helper is separate
+compilation (each function in its own file) made into static binaries.
+The "static" part is this: I could of course have put all the bits of
+code into one external file, and source it at run time, but that
+cannot work for .config, .preinst and .postrm scripts since they are
+executed when the package is not installed (not yet unpacked or
+already removed).
+
+  -- Roland Mas

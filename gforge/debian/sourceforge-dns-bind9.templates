@@ -1,4 +1,4 @@
-Template: sourceforge/domain_name
+Template: sourceforge/shared/domain_name
 Type: string
 Description: Your SF domain or subdomain name
  The domain that will host your Sourceforge installation.  Some services
@@ -7,17 +7,17 @@ Description-fr: Votre nom de domaine
  Le nom du domaine qui héberge votre Sourceforge.  Certains services auront
  leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
 
-Template: sourceforge/shell_host
+Template: sourceforge/shared/shell_host
 Type: string
 Description: Your shell server
  The hostname of the server that will host your Sourceforge shell accounts
 
-Template: sourceforge/users_host
+Template: sourceforge/shared/users_host
 Type: string
 Description: Your user server
  The hostname of the server that will host your Sourceforge user accounts and mail
 
-Template: sourceforge/cvs_host
+Template: sourceforge/shared/cvs_host
 Type: string
 Description: Your CVS server
  The hostname of the server that will host your Sourceforge CVS
@@ -26,7 +26,7 @@ Description-fr: Votre serveur CVS
  Le nom du serveur CVS de votre Sourceforge.
  Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
 
-Template: sourceforge/lists_host
+Template: sourceforge/shared/lists_host
 Type: string
 Description: Your mailing-lists server
  The hostname of the server that will host your Sourceforge mailing-lists. 
@@ -35,7 +35,7 @@ Description-fr: Votre serveur de listes de diffusion
  Le nom du serveur qui hébergera vos listes de diffusion de Sourceforge.
  Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
 
-Template: sourceforge/download_host
+Template: sourceforge/shared/download_host
 Type: string
 Description: Your download server
  The hostname of the server that will host your Sourceforge packages. 
@@ -44,7 +44,7 @@ Description-fr: Votre serveur de telechargement
  Le nom du serveur qui hébergera vos paquetages Sourceforge.
  Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
 
-Template: sourceforge/ip_address
+Template: sourceforge/shared/ip_address
 Type: string
 Description: Your IP address
  The IP address of the server that will host your Sourceforge installation.
@@ -54,7 +54,7 @@ Description-fr: Votre adresse IP
  Cette information est requise pour la configuration des hôtes virtuels
  d'Apache.
 
-Template: sourceforge/server_admin
+Template: sourceforge/shared/server_admin
 Type: string
 Description: The SF admin email address.
  The email address of the Sourceforge administrator of your site.  Needed
@@ -63,7 +63,7 @@ Description-fr: L'adresse e-mail de l'administrateur SF
  L'adresse e-mail de l'administrateur de votre Sourceforge, requise au cas
  où un problème survendrait.
 
-Template: sourceforge/db_password
+Template: sourceforge/shared/db_password
 Type: password
 Description: Password used for the database
  The connecton to the DB system requires a password.  Please choose a
@@ -72,14 +72,14 @@ Description-fr: Mot de passe utilisé pour la base de données
  La connexion à la base de données doit être authentifiée par un mot de
  passe.  Veuillez le choisir ici.
 
-Template: sourceforge/db_password_confirm
+Template: sourceforge/shared/db_password_confirm
 Type: password
 Description: Password used for the database - again
  Please re-type the password for confirmation.
 Description-fr: Mot de passe pour la base de données - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
-Template: sourceforge/system_name
+Template: sourceforge/shared/system_name
 Type: string
 Default: Sourceforge
 Default-fr: Sourceforge
@@ -88,7 +88,7 @@ Description: The Sourceforge system name
 Description-fr: Nom de votre système Sourceforge
  Ce nom est utilisé à divers endroits au travers du système.
 
-Template: sourceforge/admin_login
+Template: sourceforge/shared/admin_login
 Type: string
 Default: admin
 Default-fr: admin
@@ -99,7 +99,7 @@ Description-fr: Le nom du compte de l'administrateur
  Ce compte Sourceforge a tous les privilèges sur le système Sourceforge.
  Il sert entre autres à approuver la création de projets.
 
-Template: sourceforge/admin_password
+Template: sourceforge/shared/admin_password
 Type: password
 Description: The Sourceforge administrator password
  This Sourceforge account will have all privileges on the Sourceforge
@@ -109,14 +109,14 @@ Description-fr: Mot de passe de l'administrateur
  Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le
  saisir ici.
 
-Template: sourceforge/admin_password_confirm
+Template: sourceforge/shared/admin_password_confirm
 Type: password
 Description: The Sourceforge administrator password - again
  Please re-type the password for confirmation.
 Description-fr: Mot de passe administrateur - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
-Template: sourceforge/newsadmin_groupid
+Template: sourceforge/shared/newsadmin_groupid
 Type: string
 Default: 2
 Default-fr: 2
@@ -130,14 +130,14 @@ Description-fr: Le numéro du groupe d'administration des nouvelles
  de ce groupe NE DOIT PAS être 1.  Cette information n'est requise que si vous
  mettez à jour une installation précédente et voulez garder vos données.
 
-Template: sourceforge/statsadmin_groupid
+Template: sourceforge/shared/statsadmin_groupid
 Type: string
 Default: 3
 Default-fr: 3
 Description: The stats admin group id
 Description-fr: Le numéro du groupe d'administration des statistiques
 
-Template: sourceforge/skill_list
+Template: sourceforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 Default-fr: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
@@ -152,7 +152,7 @@ Description-fr: Liste de compétences
  Veuillez entrer les noms de ces domaines de compétence séparés par des
  points-virgules `;'.
 
-Template: sourceforge/ldap_base_dn
+Template: sourceforge/shared/ldap_base_dn
 Type: string
 Description: The LDAP base DN
  The DN is used to refer to the LDAP directory unambiguously.  You could use,
@@ -161,14 +161,14 @@ Description-fr: Le nom du répertoire LDAP (DN)
  Le nom DN est utilisé pour identifier l'annuaire LDAP de manière unique.
  Par exemple, vous pourriez utiliser le DN "dc=sourceforge,dc=exemple,dc=com".
 
-Template: sourceforge/ldap_host
+Template: sourceforge/shared/ldap_host
 Type: string
 Description: The LDAP host
  The hostname of the LDAP server.
 Description-fr: Le serveur LDAP
  Le nom d'hôte de votre serveur LDAP.
 
-Template: sourceforge/noreply_to_bitbucket
+Template: sourceforge/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
 Description: Do you want mail to ${noreply} to be deleted?
@@ -188,7 +188,7 @@ Description-fr: Supprimer les e-mails pour ${noreply} ?
  .
  Répondre "oui" ici mettra en place cette redirection.
 
-Template: sourceforge/ldap_web_add_password
+Template: sourceforge/shared/ldap_web_add_password
 Type: password
 Description: LDAP password used to add users from the web
  In order to add users into the LDAP directory from the web, you need to
@@ -197,14 +197,14 @@ Description-fr: Mot de passe LDAP pour l'ajout d'utilisateurs
  Vous avez besoin d'un mot de passe pour ajouter des utilisateurs à
  l'annuaire LDAP depuis le web.  Veuillez le saisir ici.
 
-Template: sourceforge/ldap_web_add_password_confirm
+Template: sourceforge/shared/ldap_web_add_password_confirm
 Type: password
 Description: LDAP password - again
  Please re-type the password for confirmation.
 Description-fr: Mot de passe LDAP - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
-Template: sourceforge/mod_ssl_cert
+Template: sourceforge/shared/mod_ssl_cert
 Type: note
 Description: Generate an SSL certificate
  You need a valid SSL/TLS certificate to run Sourceforge.
@@ -223,7 +223,7 @@ Description-fr: N'oubliez pas de générer un certificat SSL
  NB : vous ne pourrez pas démarrer Apache si vous n'avez pas de
  certificat.
 
-Template: sourceforge/pam_ldap_config
+Template: sourceforge/shared/pam_ldap_config
 Type: note
 Description: Sourceforge requires appropriate PAM-LDAP configuration
  Sourceforge requires the libpam-ldap package to be configured
@@ -247,7 +247,7 @@ Description-fr: Sourceforge a besoin d'une configuration PAM-LDAP correcte
  passe pour le compte administrateur de libpam-ldap et pour le mot de
  passe LDAP de Sourceforge.
 
-Template: sourceforge/simple_dns
+Template: sourceforge/shared/simple_dns
 Type: boolean
 Default: false
 Description: Do you want a simple DNS setup?
@@ -261,7 +261,7 @@ Description: Do you want a simple DNS setup?
  have all the project web dirs on the same server and a single
  server for CVS.
 
-Template: sourceforge/replace_file_install
+Template: sourceforge/shared/replace_file_install
 Type: boolean
 Default: false
 Description: Do you want ${file} to be updated?
@@ -285,7 +285,7 @@ Description-fr: Voulez-vous mettre à jour ${file} ?
  .
  Dois-je modifier ${file} automatiquement ?
 
-Template: sourceforge/replace_file_remove
+Template: sourceforge/shared/replace_file_remove
 Type: boolean
 Default: false
 Description: Do you want ${file} to be updated?
@@ -309,7 +309,7 @@ Description-fr: Voulez-vous mettre à jour ${file} ?
  .
  Dois-je modifier ${file} automatiquement ?
 
-Template: sourceforge/file_changed
+Template: sourceforge/shared/file_changed
 Type: note
 Description: Please check ${file}
  You have chosen not to let the Sourceforge package update the

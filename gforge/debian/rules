@@ -31,6 +31,8 @@ clean:
 	rm -f build-stamp configure-stamp
 	rm -f cvssh.1 sourceforge-config.1
 
+	$(CURDIR)/deb-specific/dsf-helper.pl --clean
+
 	dh_clean
 
 install: build
@@ -38,6 +40,9 @@ install: build
 	dh_testroot
 	dh_clean -k
 	dh_installdirs
+
+	# Preprocess files with DSF-Helper
+	$(CURDIR)/deb-specific/dsf-helper.pl
 
 	# sourceforge
 	# (sourceforge is a meta-package and needs no files)

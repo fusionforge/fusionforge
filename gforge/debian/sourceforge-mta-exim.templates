@@ -1,4 +1,4 @@
-Template: sourceforge/lists_host
+Template: sourceforge/shared/lists_host
 Type: string
 Description: Your mailing-lists server
  The hostname of the server that will host your Sourceforge mailing-lists. 
@@ -7,7 +7,7 @@ Description-fr: Votre serveur de listes de diffusion
  Le nom du serveur qui hébergera vos listes de diffusion de Sourceforge.
  Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
 
-Template: sourceforge/ldap_base_dn
+Template: sourceforge/shared/ldap_base_dn
 Type: string
 Description: The LDAP base DN
  The DN is used to refer to the LDAP directory unambiguously.  You could use,
@@ -16,14 +16,14 @@ Description-fr: Le nom du répertoire LDAP (DN)
  Le nom DN est utilisé pour identifier l'annuaire LDAP de manière unique.
  Par exemple, vous pourriez utiliser le DN "dc=sourceforge,dc=exemple,dc=com".
 
-Template: sourceforge/ldap_host
+Template: sourceforge/shared/ldap_host
 Type: string
 Description: The LDAP host
  The hostname of the LDAP server.
 Description-fr: Le serveur LDAP
  Le nom d'hôte de votre serveur LDAP.
 
-Template: sourceforge/noreply_to_bitbucket
+Template: sourceforge/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
 Description: Do you want mail to ${noreply} to be deleted?

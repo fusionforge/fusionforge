@@ -1,0 +1,10 @@
+Template: sourceforge/shared/domain_name
+Type: string
+Description: Your SF domain or subdomain name
+ The domain that will host your Sourceforge installation.  Some services
+ will be given their own subdomain in that domain (cvs, lists, etc.).
+Description-fr: Votre nom de domaine
+ Le nom du domaine qui héberge votre Sourceforge.  Certains services auront
+ leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
+
+#DSFHELPER:ldap-variables#

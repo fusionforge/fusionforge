@@ -15,18 +15,25 @@ set -e
 #          <conflicting-package> <version>
 # for details, see /usr/share/doc/packaging-manual/
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
 case "$1" in
     remove)
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
 	db_title "Unconfiguring Sourceforge"
 
-        # Unpatch DB configuration files
-	/usr/lib/sourceforge/bin/install-db.sh purge-files
-	propose_update_remove /etc/postgresql/pg_hba.conf
+        # Unpatch Slapd configuration files
+	/usr/lib/sourceforge/bin/install-ldap.sh purge-files
+	propose_update_remove /etc/libnss-ldap.conf
+	propose_update_remove /etc/nsswitch.conf
+	propose_update_remove /etc/ldap/slapd.conf
 
-        # DB config removal
-	/usr/lib/sourceforge/bin/install-db.sh purge
+	# Clean debconf after ourselves
+	db_stop
+
+        # LDAP config removal
+	/usr/lib/sourceforge/bin/install-ldap.sh purge
+
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

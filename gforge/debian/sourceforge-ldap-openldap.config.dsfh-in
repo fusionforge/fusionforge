@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+db_fget sourceforge/shared/domain_name seen || true
+[ "$RET" = "false" ] && db_set sourceforge/shared/domain_name $(hostname -f)
+db_input medium sourceforge/shared/domain_name || true
+db_go || true
+
+db_fget sourceforge/shared/ldap_host seen || true
+if [ "$RET" = "false" ] ; then
+    db_get sourceforge/shared/domain_name
+    db_set sourceforge/shared/ldap_host $RET
+fi
+
+db_fget sourceforge/shared/ldap_base_dn seen || true
+if [ "$RET" = "false" ] ; then
+    db_set sourceforge/shared/ldap_base_dn $(/usr/bin/ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+fi
+
+#DSFHELPER:get-pw-from-debconf#
+#DSFHELPER:ldap-variables#
+db_go || true

@@ -15,22 +15,22 @@ set -e
 #          <conflicting-package> <version>
 # for details, see /usr/share/doc/packaging-manual/
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
 case "$1" in
     remove)
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
 	db_title "Unconfiguring Sourceforge"
 
-	# Unpatch Bind configuration files
-	/usr/lib/sourceforge/bin/install-dns.sh purge-files
-	propose_update_remove /etc/bind/named.conf
-	
+	# Unpatch Proftpd configuration files
+	/usr/lib/sourceforge/bin/install-ftp.sh purge-files
+	propose_update_remove /etc/proftpd.conf
+
 	# Clean debconf after ourselves
 	db_stop
 
-        # DNS config removal
-	/usr/lib/sourceforge/bin/install-dns.sh purge
-
+        # FTP config removal
+	/usr/lib/sourceforge/bin/install-ftp.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

@@ -23,19 +23,26 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
+#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
-	
-        # Patch Exim configuration files
-	/usr/lib/sourceforge/bin/install-exim.sh configure-files
-	propose_update_install /etc/aliases
-	propose_update_install /etc/exim/exim.conf
+
+	vars="domain_name shell_host users_host cvs_host lists_host download_host db_password admin_login ip_address server_admin admin_password newsadmin_groupid statsadmin_groupid skill_list"
+        update_mainconffile $vars
+	/usr/sbin/sourceforge-config
+
+        # Patch DB configuration files
+	/usr/lib/sourceforge/bin/install-db.sh configure-files
+	propose_update_install /etc/postgresql/pg_hba.conf
 
 	# Clean debconf after ourselves
 	db_stop
-	
+
+        # Setup our DB
+	/usr/lib/sourceforge/bin/install-db.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

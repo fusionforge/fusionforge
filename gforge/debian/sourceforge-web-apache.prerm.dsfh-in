@@ -15,22 +15,23 @@ set -e
 #          <conflicting-package> <version>
 # for details, see /usr/share/doc/packaging-manual/
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
 case "$1" in
     remove)
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
 	db_title "Unconfiguring Sourceforge"
 
-	# Unpatch Exim configuration files
-	/usr/lib/sourceforge/bin/install-exim.sh purge-files
-	propose_update_remove /etc/aliases
-	propose_update_remove /etc/exim/exim.conf
+        # Unpatch Apache configuration files
+	/usr/lib/sourceforge/bin/install-apache.sh purge-files
+	propose_update_remove /etc/apache/httpd.conf
 
 	# Clean debconf after ourselves
 	db_stop
 
-        # Exim config removal
-	/usr/lib/sourceforge/bin/install-exim.sh purge
+        # Apache config removal
+	/usr/lib/sourceforge/bin/install-apache.sh purge
+
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

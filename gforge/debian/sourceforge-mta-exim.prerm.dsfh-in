@@ -15,24 +15,23 @@ set -e
 #          <conflicting-package> <version>
 # for details, see /usr/share/doc/packaging-manual/
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
 case "$1" in
     remove)
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
 	db_title "Unconfiguring Sourceforge"
 
-        # Unpatch Slapd configuration files
-	/usr/lib/sourceforge/bin/install-ldap.sh purge-files
-	propose_update_remove /etc/libnss-ldap.conf
-	propose_update_remove /etc/nsswitch.conf
-	propose_update_remove /etc/ldap/slapd.conf
+	# Unpatch Exim configuration files
+	/usr/lib/sourceforge/bin/install-exim.sh purge-files
+	propose_update_remove /etc/aliases
+	propose_update_remove /etc/exim/exim.conf
 
 	# Clean debconf after ourselves
 	db_stop
 
-        # LDAP config removal
-	/usr/lib/sourceforge/bin/install-ldap.sh purge
-
+        # Exim config removal
+	/usr/lib/sourceforge/bin/install-exim.sh purge
 	;;
     upgrade|deconfigure|failed-upgrade)
         ;;

@@ -23,11 +23,15 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
+#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
-
+	vars="ldap_host ldap_base_dn ldap_web_add_password"
+        update_mainconffile $vars
+	/usr/sbin/sourceforge-config
 
         # Patch Slapd configuration files
 	/usr/lib/sourceforge/bin/install-ldap.sh configure-files
@@ -40,6 +44,7 @@ case "$1" in
 
         # Setup our LDAP
 	/usr/lib/sourceforge/bin/install-ldap.sh configure
+	
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

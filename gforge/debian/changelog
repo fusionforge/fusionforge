@@ -9,6 +9,14 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Roland] Split the package into no less than eleven subpackages.  This
     isolates different features into different packages, and it also paves
     the road to multi-host installations (that part is not done yet).
+  * [Roland] To facilitate this splitting, a bit of magic was introduced.
+    I hereby present DSF-Helper to the face of the world.  This script is
+    inspired from dh_installdeb, and basically does a search-and-replace
+    on template files.  This allows us to share bits of code (for
+    maintainer scripts) or text (Debconf templates) between several
+    packages without having to maintain consistency by hand.  The
+    code/text is in one file, and is inserted in the appropriate files
+    when the package is built.
   * [Roland] Cleaned debian/rules file a bit.
   * [Christian] Added box1_get_alt_row_style function in Layout.class
     that replace html_get_alt_row_color from html.php. This will help
@@ -22,7 +30,7 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Christian] Repared trove map count 
   * [Roland] Fixed invocation of tarballs.sh in crontab.
 
- -- Roland Mas <lolando@debian.org>  Fri, 24 May 2002 18:31:26 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 24 May 2002 20:58:51 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 

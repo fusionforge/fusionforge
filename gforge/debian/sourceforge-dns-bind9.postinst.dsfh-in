@@ -23,18 +23,20 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:replace-files#
 case "$1" in
     configure)
-	adduser --system --group --home /var/www/sourceforge sourceforge 2>&1 > /dev/null
-	
-	. /usr/share/debconf/confmodule
-	. /usr/lib/sourceforge/lib/common-utils.sh
+	# Patch Bind configuration files
+	/usr/lib/sourceforge/bin/install-dns.sh configure-files
+	propose_update_install /etc/bind/named.conf
 
-	# "Fill in the blanks" in main config file
-	create_mainconffile
-	vars="domain_name ip_address server_admin db_password system_name admin_login admin_password shell_host users_host cvs_host lists_host download_host newsadmin_groupid statsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list noreply_to_bitbucket simple_dns"
-        update_mainconffile $vars
-	/usr/sbin/sourceforge-config
+	# Clean debconf after ourselves
+	db_stop
+
+	# Create the DNS zone
+	/usr/lib/sourceforge/bin/install-dns.sh configure
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
