@@ -34,7 +34,7 @@ class SVNPlugin extends SCM {
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
 		$this->hooks[] = "group_approved";
-                $this->hooks[] = "scm_plugin";
+		$this->hooks[] = "scm_plugin";
 
                 require_once('/etc/gforge/plugins/scmsvn/config.php') ;
 		
