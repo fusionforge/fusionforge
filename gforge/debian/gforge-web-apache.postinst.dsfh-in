@@ -54,9 +54,6 @@ case "$1" in
 	propose_update_install /etc/php4/apache/php.ini
 	propose_update_install /etc/php4/cgi/php.ini
 
-	# Clean debconf after ourselves
-	db_stop
-
         # Setup our Apache
 	/usr/lib/gforge/bin/install-apache.sh configure
 
