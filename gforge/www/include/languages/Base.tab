@@ -1027,6 +1027,8 @@ mail_common	error_list_already_exists	List Already Exists
 mail_common	list_not_activated	Not activated yet
 mail_common	mailing_list	Mailing list
 mail_common	mailing_lists	Mailing lists
+mail_common	prefs	Subscription
+mail_common	description	Description
 mail_utils	admin	Admin
 mail_utils	turned_off	This Project Has Turned Off The Mailing Lists
 menu	about_gforge	About $1
@@ -1293,6 +1295,10 @@ people_viewprofile	set_private	This User Has Set His/Her Profile to Private
 people_viewprofile	skills_profile_for	Skills profile for
 people_viewprofile	title	View a User Profile
 people_viewprofile	user_fetch_failed	User fetch FAILED
+pm_index	short_name	Subproject Name
+pm_index	open	Open
+pm_index	total	Total
+pm_index	description	Description
 pm	admin	admin
 pm	any	Any
 pm	assigned_to	Assigned To

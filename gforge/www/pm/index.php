@@ -33,9 +33,9 @@ if (!$g || !is_object($g)) {
 
 $pgf = new ProjectGroupFactory($g);
 if (!$pgf || !is_object($pgf)) {
-    exit_error('Error','Could Not Get Factory');
+	exit_error('Error','Could Not Get Factory');
 } elseif ($pgf->isError()) {
-    exit_error('Error',$pgf->getErrorMessage());
+	exit_error('Error',$pgf->getErrorMessage());
 }
 
 $pg_arr =& $pgf->getProjectGroups();
@@ -43,7 +43,7 @@ if ($pg_arr && $pgf->isError()) {
 	exit_error('Error',$pgf->getErrorMessage());
 }
 
-pm_header(array('title'=>$Language->getText('pm','title'). $g->getPublicName(),'pagename'=>'pm','sectionvals'=>$g->getPublicName()));
+pm_header(array('title'=>$Language->getText('pm','title')));
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
 	echo '<p>'.$Language->getText('pm','noprj').'</p>';
@@ -54,18 +54,27 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 	/*
 		Put the result set (list of projects for this group) into a column with folders
 	*/
+	$tablearr=array($Language->getText('pm_index','short_name'),
+	$Language->getText('pm_index','open'),
+	$Language->getText('pm_index','total'),
+	$Language->getText('pm_index','description'));
+	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($pg_arr); $j++) {
 		if ($pg_arr[$j]->isError()) {
 			echo $pg_arr[$j]->getErrorMessage();
 		}
 		echo '
-		<p><a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().
-		'&amp;group_id='.$group_id.'&amp;func=browse">' .
+		<tr '. $HTML->boxGetAltRowStyle($j) . '>
+			<td><a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse">' .
 		html_image("ic/taskman20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
-		$pg_arr[$j]->getName() .'</a><br />'.
-		$pg_arr[$j]->getDescription() .'</p>';
+		$pg_arr[$j]->getName() .'</a></td>
+			<td align="center">'. (int) $pg_arr[$j]->getOpenCount().'</td>
+			<td align="center">'. (int) $pg_arr[$j]->getTotalCount().'</td>
+			<td>'.$pg_arr[$j]->getDescription() .'</td>
+		</tr>';
 	}
+	echo $HTML->listTableBottom();
 
 }
 

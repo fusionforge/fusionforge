@@ -107,7 +107,7 @@ class ProjectGroupFactory extends Error {
 		}
 
 		$sql="SELECT *
-			FROM project_group_list
+			FROM project_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."' 
 			AND is_public $public_flag $exists
 			ORDER BY group_project_id;";
