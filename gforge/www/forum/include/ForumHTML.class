@@ -168,7 +168,7 @@ class ForumHTML extends Error {
 			</TR>
 			<TR>
 				<TD>
-					'. nl2br(util_make_links( $msg->getBody() ) ) .'
+					'. util_make_links( nl2br( $msg->getBody() ) ) .'
 				</TD>
 			</TR>
 		</TABLE>';
