@@ -1,4 +1,4 @@
-gforge (3.0-4+) unstable; urgency=low
+gforge (3.0-5) unstable; urgency=low
 
   * [Roland] Changed proftpd configuration file to comply with current
     syntax.  Patch from Igor Genibel <igenibel@debian.org>, thanks Igor
@@ -6,7 +6,7 @@ gforge (3.0-4+) unstable; urgency=low
   * [Roland] Fixed the *-owner alias for Mailman lists.  Patch from Igor
     Genibel again (closes: #203522).
 
- -- Roland Mas <lolando@debian.org>  Thu, 21 Aug 2003 18:38:39 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 21 Aug 2003 20:49:18 +0200
 
 gforge (3.0-4) unstable; urgency=low
 
