@@ -57,6 +57,8 @@ if ($group_id) {
 					$query .= " or stateid = '5' "
 						 ." and doc_group = '".$row['doc_group']."' ";
 				} //state 5 == 'private' 
+				
+				$query .= " order by title" ;
 
 			$subresult = db_query($query); 
 

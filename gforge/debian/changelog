@@ -27,8 +27,9 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     moment)
   * [Roland] Added missing dependency on php4-cgi for package
     sourceforge-web-apache.
+  * [Roland] [From 2.5] Sort documents by title.
 
- -- Roland Mas <lolando@debian.org>  Thu, 17 Oct 2002 18:50:18 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 17 Oct 2002 18:59:47 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
