@@ -199,11 +199,12 @@ class Artifact extends Error {
 		db_begin();
 
 		//
-		//	Check to see if this idiot user is trying to double-submit
+		//	Check to see if this user is trying to double-submit
 		//
 		$res=db_query("SELECT * FROM artifact 
 			WHERE summary='$summary' 
 			AND submitted_by='$user'
+			AND group_artifact_id='".$this->ArtifactType->getID()."'
 			AND open_date > '". (time() - 86400) ."'");
 		if ($res && db_numrows($res) > 0) {
 			$this->setError($Language->getText('tracker_artifact','double_submit'));
