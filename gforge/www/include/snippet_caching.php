@@ -27,7 +27,7 @@ function snippet_mainpage() {
 
 	<tr><td>
 	<strong>'.$Language->getText('snippet_caching','browse_by_language').':</strong>
-	<p>';
+	<ul>';
 
 	$count=count($SCRIPT_LANGUAGE);
 	for ($i=1; $i<$count; $i++) {
@@ -39,10 +39,10 @@ function snippet_mainpage() {
 	}
 
 	$return .= 	
-	'</p></td>
+	'</ul></td>
 	<td>
 	<strong>'.$Language->getText('snippet_caching','browse_by_category').':</strong>
-	<p>';
+	<ul>';
 
 	$count=count($SCRIPT_CATEGORY);
 	for ($i=1; $i<$count; $i++) {
@@ -55,7 +55,7 @@ function snippet_mainpage() {
 
 
 	$return .=
-	'</p></td>
+	'</ul></td>
 	</tr>
 	</table></div>';
 
