@@ -1,3 +1,16 @@
+2003-10-18 Christian Bayle <bayle@debian.org>
+	
+	* Applied various patch
+	#547: Fix syntax typo of mailing_lists_create.php (Hidenari Miwa)
+	#554: skills_utils.php missing a double quote     (Mitch Murphy )
+	#550: Mandatory login for gforge remastered       (Ramon van Alteren)
+	#540: Changes for Project Summary and Admin pages (Mathieu Peltier)
+	#546: Fix of mail by Developer Profile page.      (Hidenari Miwa)
+	#545: Tracker i18n                                (Hidenari Miwa)
+	#544: Document manager i18n                       (Hidenari Miwa)
+	#542: Bookmark page link                          (Hidenari Miwa)
+	#475: PluginManager show comments before HTML (Vicente J. Ruiz Jurado)
+	
 2003-10-08 Tom Copeland  <tom@infoether.com>
 
 	* www/mail/admin/index.php:
