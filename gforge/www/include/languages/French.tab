@@ -820,7 +820,7 @@ general	permexcuse	Vous devez obtenir l'autorisation de l'administrateur de ce p
 general	permnotget	Accés non permis
 general	remove	Supprimer
 general	reset	Remise à zéro
-general	return	[Retour à la page d'acceuil $1]
+general	return	[Retour à la page d'accueil $1]
 general	return_to	[retour à $1]
 general	sitename	
 general	submit	Envoyer
@@ -1394,7 +1394,7 @@ project_admin_editgroupinfo	enable_anonymous_cvs	méthode CVS anonyme
 project_admin_editgroupinfo	enable_pserver	méthode pserver
 project_admin_editgroupinfo	group_name	Nom précis du projet&nbsp; 
 project_admin_editgroupinfo	group_updated	Informations de groupes mises à jour
-project_admin_editgroupinfo	homepage_link	Lien vers la page d'acceuil
+project_admin_editgroupinfo	homepage_link	Lien vers la page d'accueil
 project_admin_editgroupinfo	new_doc	Soumission de nouveaux documents&nbsp;
 project_admin_editgroupinfo	new_doc_info	Si vous voulez
 project_admin_editgroupinfo	send_on_all_updates	(envoi pour toutes les mises à jour)
