@@ -155,7 +155,7 @@ class Artifact extends Error {
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 *  @return id on success / false on failure.
 	 */
-	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=5, $extra_fields=array()) {
+	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array()) {
 		global $Language;
 		
 		//
@@ -219,7 +219,7 @@ class Artifact extends Error {
 			}
 		}
 		if (!$priority) {
-			$priority=5;
+			$priority=3;
 		}
 		if (!$category_id) {
 			$category_id=100;

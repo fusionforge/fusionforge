@@ -461,7 +461,7 @@ function html_get_priority_color ($index) {
  *
  * @see html_build_priority_select_box()
  */
-function build_priority_select_box ($name='priority', $checked_val='5', $nochange=false) {
+function build_priority_select_box ($name='priority', $checked_val='3', $nochange=false) {
 	echo html_build_priority_select_box ($name, $checked_val, $nochange);
 }
 
