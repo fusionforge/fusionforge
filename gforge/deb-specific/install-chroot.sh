@@ -67,7 +67,7 @@ case "$1" in
 	# For /dev/log
 	if ! grep -q "^SYSLOGD.*/var/lib/gforge/chroot/dev/log.*" /etc/init.d/sysklogd ; then 
 		echo '######################################################################################################'
-		echo 'WARNING: you must have SYSLOGD="-p /dev/log -p /var/lib/gforge/chroot/dev/log" in /etc/init.d/sysklogd'
+		echo 'WARNING: you must have SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/init.d/sysklogd'
 		echo 'To have cvs pserver running correctly'
 		echo '######################################################################################################'
 	fi
