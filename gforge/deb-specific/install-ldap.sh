@@ -53,6 +53,13 @@ purge_libnss_ldap(){
 # Modify /etc/ldap/slapd.conf
 modify_slapd(){
 	dn=$1
+
+	if [ ! -e /etc/ldap/slapd.conf ] ; then
+	    echo "ERROR: You don't have a /etc/ldap/slapd.conf file."
+	    echo "Please make sure your slapd package is correctly configured."
+	    exit 1
+	fi
+	
 	# Maybe should comment referral line too
 	echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
 	
@@ -110,6 +117,12 @@ access to */" /etc/ldap/slapd.conf
 
 # Purge /etc/ldap/slapd.conf
 purge_slapd(){
+	if [ ! -e /etc/ldap/slapd.conf ] ; then
+	    echo "ERROR: You don't have a /etc/ldap/slapd.conf file."
+	    echo "Please make sure your slapd package is correctly configured."
+	    exit 1
+	fi
+	
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
 if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf
