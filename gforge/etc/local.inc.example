@@ -93,13 +93,14 @@ $sys_server="pgsql";
 $sys_dbpasswd="";
 $sys_ldap_passwd="";
 $sys_jabber_pass="";
+
 //
 // Account Management
 //
 // UNIX for classic account management
 // LDAP for managing with ldap
 // NIS not implemented
-$sys_account_manager_type=UNIX;
+$sys_account_manager_type='UNIX';
 
 //
 // LDAP configuration
