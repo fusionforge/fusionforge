@@ -39,6 +39,8 @@ require_once('common/forum/Forum.class');
 require_once('common/frs/FRSPackage.class');
 require_once('common/docman/DocumentGroup.class');
 require_once('www/include/BaseLanguage.class');
+//the license_id of "Other/proprietary" license
+define('GROUP_LICENSE_OTHER',127);
 
 $GROUP_OBJ=array();
 
