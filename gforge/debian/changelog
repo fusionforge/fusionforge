@@ -1,4 +1,4 @@
-sourceforge (2.5-10+12) unstable; urgency=low
+sourceforge (2.5-10+13) unstable; urgency=low
 
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
@@ -42,8 +42,9 @@ sourceforge (2.5-10+12) unstable; urgency=low
   * Fixed a thinko in debian/sourceforge/cron.d.
   * Added a periodical check for the presence of an incoming directory in
     the users' home dir.
+  * Fixed versioned dependency on debconf (thanks to lintian).
 
- -- Roland Mas <lolando@debian.org>  Wed, 17 Oct 2001 17:49:51 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Oct 2001 18:14:25 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 
