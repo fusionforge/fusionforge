@@ -132,6 +132,7 @@ if (session_loggedin()) {
 	//set up the user's timezone if they are logged in
 	$LUSER =& session_get_user();
 	$LUSER->setUpTheme();
+	header('Cache-Control: private');
 }
 
 //
