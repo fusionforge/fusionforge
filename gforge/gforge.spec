@@ -94,10 +94,11 @@ install -m 644 rpm-specific/conf/vhost.conf $HTTPD_CONF_DIR/conf.d/gforge.conf
 # configuring GForge
 mkdir -p $GFORGE_CONF_DIR
 install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
+install -m 750 rpm-specific/scripts/refresh.sh $GFORGE_CONF_DIR/ 
 
 # setting crontab
 mkdir -p $CROND_DIR
-install -m 755 rpm-specific/cron.d/gforge $CROND_DIR/
+install -m 664 rpm-specific/cron.d/gforge $CROND_DIR/
 
 %pre
 if ! id -u %gfuser >/dev/null 2>&1; then
@@ -201,14 +202,20 @@ fi
 %doc AUTHORS AUTHORS.sourceforge COPYING ChangeLog INSTALL README*
 %doc docs/*
 %attr(0660, apache, gforge) %config(noreplace) %{_sysconfdir}/gforge/gforge.conf
+%attr(0750, root, root) %{_sysconfdir}/gforge/refresh.sh
 %attr(0640, apache, apache) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
+%attr(0664, root, root) %config(noreplace) %{_sysconfdir}/cron.d/gforge
 %attr(0775, apache, apache) %dir /var/lib/gforge/upload
 %{_datadir}/gforge
 %{_libdir}/gforge
-%{_sysconfdir}/cron.d/gforge
 /var/cache/gforge
 /var/lib/gforge/scmtarballs
 
 %changelog
+* Fri Dec 03 2004 Dassault Aviation <guillaume.smet@openwide.fr>
+- fixed the vhost configuration
+- fixed the default crontab
+- the crontab is now a config file and is not replaced on update
+- added refresh.sh in /etc/gforge/ to refresh the configuration easily
 * Wed Nov 03 2004 Guillaume Smet <guillaume-gforge@smet.org>
 - new RPM packaging
