@@ -149,12 +149,11 @@ if ($msg_id) {
 			See if this message is new or not
 			If so, highlite it in bold
 		*/
+		$bold_begin='';
+		$bold_end='';
 		if ($f->getSavedDate() < $msg->getPostDate()) {
-			$bold_begin . '<strong>';
-			$bold_end . '</strong>';
-		} else {
-			$bold_begin='';
-			$bold_end='';
+			$bold_begin = '<strong>';
+			$bold_end = '</strong>';
 		}
 		/*
 			show the subject and poster
