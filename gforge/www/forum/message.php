@@ -94,7 +94,7 @@ if ($msg_id) {
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-	echo "<td><td style=\"background-color:#e3e3e3\">\n";
+	echo "<tr><td style=\"background-color:#e3e3e3\">\n";
 	echo "BY: ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<br />";
 	echo "DATE: ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
 	echo "SUBJECT: ". $fm->getSubject() ."<p>&nbsp;</p>";
