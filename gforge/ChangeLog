@@ -1,3 +1,7 @@
+2003-11-30  Tim Perdue  <tim@perdue.net>
+
+	* added cronjob logging and viewing apparatus
+
 2003-11-30  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/project_home.php: Patch #614 from Guillaume Smet
