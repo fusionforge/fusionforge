@@ -2,8 +2,9 @@ sourceforge (2.6-0+8+) unstable; urgency=low
 
   * Let's continue
   * [Christian] Added dependancy on rcs for our patched cvsweb
+  * [Roland] Renamed db-upgrade26.pl to db-upgrade.pl.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Tue, 12 Mar 2002 07:34:03 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 14 Mar 2002 18:39:29 +0100
 
 sourceforge (2.6-0+8) unstable; urgency=low
 

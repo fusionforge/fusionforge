@@ -84,7 +84,7 @@ EOF
 #$db_passwd
 #FIN
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
-	/usr/lib/sourceforge/bin/db-upgrade26.pl 2>&1 | grep -v ^NOTICE:
+	/usr/lib/sourceforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE:
 	;;
     purge-files)
 	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.sourceforge-new
