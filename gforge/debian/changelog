@@ -53,8 +53,9 @@ sourceforge (2.6-0+12+) unstable; urgency=low
   * [Christian] added choice for default language and theme in debconf
   * [Christian] more i18n for account register
   * [Christian] cosmetics/i18n in bugtracker
+  * [Christian] removed multi record bug in software map
 
- -- Christian Bayle <bayle@debian.org>  Fri,  4 Oct 2002 01:49:01 +0200
+ -- Christian Bayle <bayle@debian.org>  Tue,  8 Oct 2002 00:46:36 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 

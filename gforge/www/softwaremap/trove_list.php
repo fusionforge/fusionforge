@@ -69,12 +69,16 @@ if ($discrim) {
 		$expl_discrim[$i] = intval($expl_discrim[$i]);
 
 		// need one aliased table for everything
-		$discrim_queryalias .= ', trove_group_link trove_group_link_'.$i.' ';
+//[CB]		$discrim_queryalias .= ', trove_group_link trove_group_link_'.$i.' ';
+		$discrim_queryalias .= ', trove_agg trove_agg_'.$i.' ';
 		
 		// need additional AND entries for aliased tables
-		$discrim_queryand .= 'AND trove_group_link_'.$i.'.trove_cat_id='
-			.$expl_discrim[$i].' AND trove_group_link_'.$i.'.group_id='
-			.'trove_group_link.group_id ';
+//[CB]		$discrim_queryand .= 'AND trove_group_link_'.$i.'.trove_cat_id='
+//[CB]			.$expl_discrim[$i].' AND trove_group_link_'.$i.'.group_id='
+//[CB]			.'trove_group_link.group_id ';
+		$discrim_queryand .= 'AND trove_agg_'.$i.'.trove_cat_id='
+			.$expl_discrim[$i].' AND trove_agg_'.$i.'.group_id='
+			.'trove_agg.group_id ';
 
 		// must build query string for all urls
 		if ($i==0) {
