@@ -112,9 +112,9 @@ FRS has been radically simplified. Simply create a directory and make
 it owned by the webserver-user. Usually "chown -R nobody:nobody mydir"
 will do the trick.
 
-This directory will be referenced in the SF Config File as $sys_upload_dir
+This directory will be referenced in the GForge Config File as $sys_upload_dir
 
-SF Config File
+GForge Config File
 --------------
 
 In the GForge distribution, you will find etc/local.inc. Move it to
