@@ -247,7 +247,7 @@ function session_check_ip($oldip,$newip) {
  *	@access public
  */
 function session_issecure() {
-	return (getenv('SERVER_PORT') == '443');
+	return ($_SERVER['SERVER_PORT'] == '443');
 }
 
 /**
@@ -273,7 +273,7 @@ function session_cookie($name ,$value, $domain = '', $expiration = 0) {
  *	@return never returns
  */
 function session_redirect($loc) {
-	header('Location: http' . (session_issecure()?'s':'') . '://' . getenv('HTTP_HOST') . $loc);
+	header('Location: http' . (session_issecure()?'s':'') . '://' . $_SERVER['HTTP_HOST'] . $loc);
 	print("\n\n");
 	exit;
 }
