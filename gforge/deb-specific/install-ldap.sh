@@ -394,10 +394,18 @@ setup_robot() {
     
     # The first account is only used in a multiserver SF
     check_server
-    if ! exists_dn $robot_dn ; then
+    if ! exists_dn "$robot_dn" || ! exists_dn "ou=People,$gforge_base_dn" ; then
 	echo "Adding robot accounts and sub-trees"
     
 	{ eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' $DEVNULL12" || true ; } <<-FIN
+dn: $gforge_base_dn
+objectClass: dcObject
+dc: $dc
+
+dn: ou=People,$gforge_base_dn
+ou: People
+objectClass: organizationalUnit
+
 dn: cn=Replicator,$gforge_base_dn
 description: Replicator the Robot
 objectClass: organizationalRole

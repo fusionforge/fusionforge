@@ -1,8 +1,9 @@
 gforge (3.0-2+) unstable; urgency=low
 
-  * 
+  * [Roland] Make sure the $gforge_base_dn and ou=People,$gforge_base_dn
+    records exist before we try to insert sub-trees/records in them.
 
- -- Roland Mas <lolando@debian.org>  Tue,  8 Jul 2003 21:32:26 +0200
+ -- Roland Mas <lolando@debian.org>  Wed,  9 Jul 2003 16:55:25 +0200
 
 gforge (3.0-2) unstable; urgency=low
 
