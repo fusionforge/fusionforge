@@ -417,7 +417,6 @@ home	none_found	Non trovato
 index	welcome	Benvenuto
 mail	provided_by	<P>Le mailing list sono fornite tramite una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>.  Grazie ai team di Mailman and <A href="http://www.python.org">Python</A> per il software eccezionale.
 menu	bookmark_page	Segna pagina
-menu	contact_us	Contatta $1
 menu	change_my_theme	Cambia tema
 menu	diary_notes	Diario &amp; Note
 menu	login	Connetti con SSL
