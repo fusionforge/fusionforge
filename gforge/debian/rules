@@ -85,9 +85,9 @@ install: build
 	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 
 	# gforge-db-postgresql
-	install -m 644 db/SourceForge.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	#NOT USED#install -m 644 db/SourceForge.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	#install -m 644 db/trove_defaults.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/user_rating.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	#NOT USED#install -m 644 db/user_rating.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
@@ -117,12 +117,9 @@ install: build
 	install -m 644 deb-specific/view_bug.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/view_patch.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
-	install -m 644 db/20021125-debian.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20021212.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20021213.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20021214.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20021215.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
-	install -m 644 db/20021216-debian.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021125.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/200212*.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/2003*.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
 	# gforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
