@@ -386,7 +386,7 @@ function language_code_to_result($alang) {
 				}
 			}
 		}
-		return db_query("select * from supported_languages where language_id='1'"); // default to english
+		return db_query("select classname from supported_languages where language_id='1'"); // default to english
 	}
 }
 
