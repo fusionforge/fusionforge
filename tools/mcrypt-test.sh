@@ -7,7 +7,8 @@ function encrypt_pass($ascii_pass)
 		$keystr="Veni, vidi, vici!!!";
 		//echo "keystr=$keystr\n";
 		//$td = mcrypt_module_open(MCRYPT_TripleDES, "", MCRYPT_MODE_ECB, "");
-		$td = mcrypt_module_open(MCRYPT_TWOFISH, "", MCRYPT_MODE_ECB, "");
+		//$td = mcrypt_module_open(MCRYPT_TWOFISH, "", MCRYPT_MODE_ECB, "");
+		$td = mcrypt_module_open(MCRYPT_ARCFOUR, "", MCRYPT_MODE_STREAM, "");
 		//echo "td=$td\n";
 		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
 		//echo "iv=$iv\n";
