@@ -1,4 +1,7 @@
 <?php
+echo "Disabled Until Security Audited and Using Proper Accessor Functions";
+exit;
+
 /**
   *
   * SourceForge Exports: Export project forums in RSS

@@ -21,8 +21,12 @@ print '<?xml version="1.0"?>
 <rss version="0.91">
 ';
 // ## default limit
-if (!$limit) $limit = 10;
-if ($limit > 100) $limit = 100;
+if (!$limit < 1) {
+	$limit = 10;
+}
+if ($limit > 100) {
+	$limit = 100;
+}
 
 $res=db_query("SELECT 
 					groups.group_id,
@@ -38,6 +42,8 @@ $res=db_query("SELECT
 					groups 
 				WHERE 
 					news_bytes.group_id=groups.group_id 
+					AND groups.status='A'
+					AND groups.is_public='A'
 				ORDER BY 
 					date 
 				DESC",($limit * 3));

@@ -21,17 +21,23 @@ print '<?xml version="1.0"?>
 <rss version="0.91">
 ';
 // ## default limit
-if (!$limit or intval($limit) == 0) {
+if ($limit < 1) {
 	$limit = 10;
-} else {
-	$limit = min(100, intval($limit));
+} elseif ($limit > 100) {
+	$limit = 100;
 }
 
-$where_clause = " WHERE is_approved=1 ";
 if ($group_id) {
-	$where_clause = " where group_id=".intval($group_id);
+	$where_clause = " AND group_id='$group_id'";
 }
-$sql = "SELECT forum_id,summary,post_date,details,group_id FROM news_bytes ".$where_clause." order by post_date desc";
+$sql = "SELECT forum_id,summary,post_date,details,group_id 
+	FROM news_bytes, groups g 
+	WHERE is_approved=1 
+	AND news_bytes.group_id=g.group_id
+	AND g.is_public='1'
+	AND g.status='A'
+	$where_clause
+	order by post_date desc";
 $res = db_query($sql, $limit);
 
 // ## one time output

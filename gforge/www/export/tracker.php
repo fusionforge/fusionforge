@@ -14,8 +14,6 @@
   *
   */
 
-set_time_limit(0);
-
 require_once('pre.php');
 require_once('common/tracker/Artifact.class');
 require_once('common/tracker/Artifacts.class');
@@ -39,9 +37,22 @@ if ($group_id && $atid) {
 	//	get the Group object
 	//
 	$group =& group_get_object($group_id);
-	if (!$group || !is_object($group) || $group->isError()) {
-		echo("	<error>Could not get the Group object</error>\n");
+	if (!$group || !is_object($group)) {
+		echo "<error>Could not get the Group object</error>\n";
+	} elseif ($group->isError()) {
+		echo("	<error>".$group->getErrorMessage()."</error>\n";
 		$errors = true;
+	}
+
+	//
+	//  Add checks to see if they have perms to view this
+	//
+	if (!$group->isPublic()) {
+		if (!session_loggedin()) {
+			exit_permission_denied();
+		} elseif (!user_ismember($group_id)) {
+			exit_permission_denied();
+		}
 	}
 
 	//
@@ -51,8 +62,7 @@ if ($group_id && $atid) {
 	if (!$ath || !is_object($ath)) {
 		echo("	<error>ArtifactType could not be created</error>\n");
 		$errors = true;
-	}
-	if ($ath->isError()) {
+	} elseif ($ath->isError()) {
 		echo('	<error>' . $ath->getErrorMessage() . "</error>\n");
 		$errors = true;
 	}
@@ -168,7 +178,7 @@ if ($group_id && $atid) {
 <?php
 	}
 } else {
-	print("    <error>Group ID Not Set</error>\n");
+	print("	<error>Group ID Not Set</error>\n");
 }
 ?>
 </tracker>
