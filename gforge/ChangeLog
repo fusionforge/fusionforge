@@ -72,6 +72,11 @@
 	* www/include/languages/Italian.tab:
 	Translation in italian of new strings
 
+2003-02-05  Roland Mas  <lolando@debian.org>
+
+	* www/include/languages/French.tab: some more translations, trying
+	to keep up with Reinhard's work...
+
 2003-02-04 Reinhard Spisser <reinhard@spisser.it>
 
 	* common/tracker/*,

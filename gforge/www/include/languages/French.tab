@@ -216,6 +216,29 @@ forum_utils	mailmonitor	\nLisez et répondez à ce message à: \n$1\nPar: $2 \n\
 forum_utils	mailsent	courrier envoyé - surveillé par des utilisateurs
 forum_utils	mailnotsent	courrier non envoyé - surveillé par des utilisateurs
 forum_utils	mailnotsent2	courrier non envoyé - personne ne surveille
+forum_common	error_adding_forum	Erreur lors de l'ajout d'un forum
+forum_common	error_save_when_logged_in	Vous ne pouvez pas sauvegarder cet endroit sans être connecté
+forum_common	error_min_name_length	Le nom d'un forum doit comprendre au moins 3 caractères
+forum_common	error_min_desc_length	La description d'un forum doit comprendre au moins 10 caractères
+forum_common	error_set_monitor	Vous ne pouvez pas surveiller ce forum sans être connecté
+forum_common	error_unable_to_add_monitor	Impossible d'ajouter la surveillance
+forum_common	welcome_to	Bienvenue sur
+forum_common_forummessage	no_valid_forum_object	ForumMessage:: Pas d'objet Forum valide
+forum_common_forummessage	forum_message	Message de forum
+forum_common_forummessage	error_group_forum_id	L'identifiant group_forum_id de la BD ne correspond pas à celui de l'objet Forum
+forum_common_forummessage	error_required_fields	Vous devez inclure un objet et un corps de message
+forum_common_forummessage	error_not_logged	Vous ne pouvez pas poster sans être connecté
+forum_common_forummessage	error_posting_failed	ForumMessage::create() le postage a échoué
+forum_common_forummessage	error_get_message_id	ForumMessage::create() n'arrive pas à obtenir d'identifiant de message
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() identifiant de message invalide
+forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() pas d'objet ParentMessage valide
+forum_common_forummessage	error_getting_next_thread	Échec de l'obtention du prochain identifiant de fil
+forum_common_forummessage	error_cannot_update_parent	Échec lors de la mise à jour du parent
+forum_common_forummessage	error_cannot_update_master_thread	Échec de la mise à jour du fil maître avec la date courante
+forum_common_forum	error_save_place	Forum::savePlace()
+forum_save	saved	Position dans le forum sauvée.  Les nouveaux messages seront mis en valeur lors de votre prochain retour
+forum_monitor	deactivated	Surveillance du forum désactivée
+forum_monitor	activated	Surveillance du forum activée
 frs	file_download	Téléchargement
 frs	file_monitor	Surveillance
 frs	file_notes	Remarques
@@ -223,6 +246,24 @@ frs	file_package	Paquet
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Sorties récentes
+frs_file	error_min_name_length	Le nom de fichier doit comprendre au moins 3 caractères
+frs_file	error_name_format	Le nom de fichier doit être dans le format suivant : gforge-3.0.tar.bz2
+frs_file	error_invalid_file	Le fichier semble être invalide
+frs_file	error_already_exists	Ce nom de fichier existe déjà dans ce projet
+frs_file	error_cannot_move	Le fichier ne peut pas être déplacé vers sa destination
+frs_package	error_min_name_length	Le nom de paquet doit comprendre au moins 3 caractères
+frs_package	error_name_format	Le nom de paquet doit être alphanumérique
+frs_package	error_invalid_file	Le fichier semble être invalide
+frs_package	error_already_exists	Ce nom de fichier existe déjà dans ce projet
+frs_package	error_cannot_move	Le fichier ne peut pas être déplacé vers sa destination
+frs_package	error_set_monitor	Vous ne pouvez pas déclencher la surveillance sans être connecté
+frs_release	error_min_name_length	Le nom de révision doit comprendre au moins 3 caractères
+frs_release	error_name_format	Le nom de révision doit être alphanumérique
+frs_release	error_invalid_file	Le fichier semble être invalide
+frs_release	error_already_exists	Ce nom de révision existe déjà dans ce projet
+frs_release	error_cannot_move	La révision ne peut pas être déplacée vers sa destination
+frs_release	error_set_monitor	Vous ne pouvez pas déclencher la surveillance sans être connecté
+frs_release	email_title	[Révision $1] $2
 general	return	[Retour à la page d'acceuil $1]
 general	sitename	$1
 general	footer	Vous êtes sur $1.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
@@ -331,6 +372,7 @@ my	tasks	Mes tâches
 my	survey	Sondages rapides
 my	bookmarks	Mes signets
 my	projects	Mes projets
+my_bookmark	return	Retour
 my_bookmark_add	section	Ma page personnelle
 my_bookmark_add	title	Ajout d'un favori
 my_bookmark_delete	section	Ma page personnelle
@@ -608,5 +650,75 @@ image	myaccount	fr_myaccount.png
 image	newaccount	fr_newaccount.png
 searchbox	softwaregroup	Logiciel/Groupe
 searchbox	skill	Savoir-faire
-searchbox	people	Personne	
+searchbox	people	Personne
 searchbox	search	Rechercher
+searchbox	forum	Ce forum
+searchbox	task	Tâches
+user_home	title	Profil de développeur
+user_home	skills_profile	Compétences
+user_home	user_id	Identifiant d'utilisateur
+user_home	login_name	Nom de connexion
+user_home	real_name	Nom réel
+user_home	email	Adresse e-mail
+user_home	jabber_address	Addresse Jabber
+user_home	personal_information	Informations personnelles
+user_home	site_member_since	Date d'entrée
+user_home	contact	Contact
+user_home	email	Votre adresse e-mail
+user_home	name	Votre nom
+user_home	subject	Objet
+user_home	message	Message
+user_home	send	Envoyer message
+user_home	send_a_message	Envoyer un message à
+user_home	peer_rating	Évaluations réciproques
+user_home	peer_rating_disabled	L'utilisateur a choisi de ne pas participer aux évaluations
+user_home	diary_notes	Journal et notes
+user_home	diary_notes_entries	Entrées dans le journal ou les notes
+user_home	diary_notes_view	Voir le journal et les notes
+user_home	diary_notes_monitor	Surveiller ce journal
+user_home	project_info	Information sur un projet
+user_home	no_projects	Ce développeur ne fait partie d'aucun projet
+user_home	member_of	Ce développeur fait partie des groupes suivants
+user_home	send_message_if_logged	Vous pourriez envoyer un message si vous étiez connecté
+calendar	title	Gestion de projet : calendrier
+calendar	january	Janvier
+calendar	february	Février
+calendar	march	Mars
+calendar	april	Avril
+calendar	may	Mai
+calendar	june	Juin
+calendar	july	Juillet
+calendar	august	Août
+calendar	september	Septembre
+calendar	october	Octobre
+calendar	november	Novembre
+calendar	december	Decembre
+calendar	sunday	Dimanche
+calendar	monday	Lundi
+calendar	tuesday	Mardi
+calendar	wednesday	Mercredi
+calendar	thursday	Jeudi
+calendar	friday	Vendredi
+calendar	saturday	Samedi
+calendar	view	Vue :
+calendar	onemonth	Un mois
+calendar	threemonth	Trois mois
+calendar	currentyear	Année courante
+calendar	comingyear	Année prochaine
+calendar	fordate	Pour la date :
+calendar	update	Mise à jour
+calendar	todaysdate	Date du jour
+calendar	selecteddate	Date sélectionnée (si différente d'aujourd'hui).
+calendar	task_link_title	Résumé d'une tâche : $1
+calendar	task_begins	Début de la tâche $1
+calendar	task_ends	Fin de la tâche $1
+calendar	invalidyear	Année invalide
+calendar	invalidyearexplain	L'année doit être comprise entre 1990 et 2020.
+calendar	invalidmonth	Mois invalide
+calendar	invalidmonthexplain	Le mois doit être compris entre 1 et 12.
+calendar	invalidday	Jour invalide
+calendar	invaliddayexplain	Le jour doit être compris entre 1 et 31.
+calendar	invaliddate	Date invalide
+calendar	invaliddateexplain	$1 n'est pas une date valide.
+calendar	invalidtype	Type invalide
+calendar	invalidtypeexplain	Le type est invalide.
