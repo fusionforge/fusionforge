@@ -1,8 +1,33 @@
+2004-12-12  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* improved french localization of scmcvs plugin
+	* fixed two parse errors in SVNPlugin
+	* translated SVN plugin in French
+	* finalized Grand Unified Search work based on Dominik Haas' patch [#833]
+
 2004-12-12  Christian Bayle <bayle@aist.enst.fr>
 
 	* Made some cleanup in Group.class so everything concerning System is
 	done in System.class
 	* Applied  Mathieu Peltier patch [#993] that generate scm snapshot
+	
+2004-12-11  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* applied [#1017] Important fix for Bulgarian.tab
+	* applied [#1002] Update memberlist.php for new roles system by Greg Hudson
+	* cosmetic fix in header title
+	* minor fixes in french translation
+	
+2004-12-07  Dassault Aviation <guillaume.smet@openwide.fr>
+
+	* improved RPM packaging and fixed bugs
+	* fixed the grouplist page (license name and localized strings)
+	* fixed global admin index
+	* fixed typo in french translation
+	
+2004-12-07  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* added getXXXFromRequest in escapingUtils
 
 2004-11-23  Tim Perdue <tim@gforge.org>
 
@@ -14,16 +39,37 @@
 	* www/include/languages/PortugueseBrazilian.tab: Recoded to UTF-8.
 	* www/include/languages/*.tab: Changed all conf/mail_charset
 	values to UTF-8.
+	
+2004-11-26  Dassault Aviation <guillaume.smet@openwide.fr>
+
+	* fixed JPGraph path in RPM configuration
+	* RPM packaging for ldapextauth plugin
 
 2004-11-23  Tim Perdue <tim@gforge.org>
 
 	* fixed bug in tracker that prevented deletion of tracker
 	* fixed bug in tracker where userCanView returned false for admins
 
+2004-11-23  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed [#996] and [#1007]
+
+2004-11-15  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed the path to cgi-bin in https vhost
+
+2004-11-09  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* improved RPM packaging
+
 2004-11-08  Tim Perdue <tim@gforge.org>
 
 	* enhancing task mgr with more fields and properties. Much more
 	will be rolled in the future.
+
+2004-11-07  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed bugs in RPM packaging
 
 2004-11-07  Tim Perdue <tim@gforge.org>
 
