@@ -51,30 +51,32 @@ function user_getthemeid($user_id = 0) {
  * @param		int		The theme iD
  */
 function get_themedir($theme_id = 0) {
-	global $THEME_DIR;
-	// use current theme if one is not passed in
-	if (!$theme_id) {
-		return ($THEME_DIR?$THEME_DIR["theme_$theme_id"]:$GLOBALS['sys_theme']);
-	}
-	// else must lookup name
-	else {
-		if ($THEME_DIR["theme_$theme_id"]) {
-			//theme name was fetched previously
-			return $THEME_DIR["theme_$theme_id"];
-		} else {
-			//fetch the theme name and store it for future reference
-			$result = db_query("SELECT theme_id,dirname FROM themes WHERE theme_id='$theme_id'");
-			if ($result && db_numrows($result) > 0) {
-				//valid theme - store and return
-				$THEME_DIR["theme_$theme_id"]=db_result($result,0,"dirname");
-				return $THEME_DIR["theme_$theme_id"];
-			} else {
-				//invalid theme - store and return
-				$THEME_DIR["theme_$theme_id"]="<B>Invalid Theme ID</B>";
-				return $THEME_DIR["theme_$theme_id"];
-			}
-		}
-	}
+        global $THEME_DIR;
+        // use current theme if one is not passed in
+        if (!$theme_id) {
+                return ($THEME_DIR?$THEME_DIR["theme_$theme_id"]:$GLOBALS['sys_theme']);
+        }
+        // else must lookup name
+        else {
+                if ($THEME_DIR["theme_$theme_id"]) {
+                        //theme name was fetched previously
+                        return $THEME_DIR["theme_$theme_id"];
+                } else {
+                        //fetch the theme name and store it for future reference
+                        $sql ="SELECT theme_id,dirname FROM themes WHERE theme_id=$theme_id";
+			// echo "<b> $sql </b><br>" ;
+                        $result = db_query($sql) ;
+                        if ($result && db_numrows($result) > 0) {
+                                //valid theme - store and return
+                                $THEME_DIR["theme_$theme_id"]=db_result($result,0,"dirname");
+                                return $THEME_DIR["theme_$theme_id"];
+                        } else {
+                                //invalid theme - store and return
+                                $THEME_DIR["theme_$theme_id"]="<B>Invalid Theme ID</B>";
+                                return $THEME_DIR["theme_$theme_id"];
+                        }
+                }
+        }
 }
 
 /**
@@ -83,30 +85,32 @@ function get_themedir($theme_id = 0) {
  * @param		int		The theme ID
  */
 function get_themename($theme_id = 0) {
-	global $THEME_NAME;
-	// use current theme if one is not passed in
-	if (!$theme_id) {
-		return ($THEME_NAME?$THEME_NAME["theme_$theme_id"]:$GLOBALS['sys_theme']);
-	}
-	// else must lookup name
-	else {
-		if ($THEME_NAME["theme_$theme_id"]) {
-			//theme name was fetched previously
-			return $THEME_NAME["theme_$theme_id"];
-		} else {
-			//fetch the theme name and store it for future reference
-			$result = db_query("SELECT theme_id,fullname FROM themes WHERE theme_id='$theme_id'");
-			if ($result && db_numrows($result) > 0) {
-				//valid theme - store and return
-				$THEME_NAME["theme_$theme_id"]=db_result($result,0,"fullname");
-				return $THEME_NAME["theme_$theme_id"];
-			} else {
-				//invalid theme - store and return
-				$THEME_NAME["theme_$theme_id"]="<B>Invalid Theme ID</B>";
-				return $THEME_NAME["theme_$theme_id"];
-			}
-		}
-	}
+        global $THEME_NAME;
+        // use current theme if one is not passed in
+        if (!$theme_id) {
+                return ($THEME_NAME?$THEME_NAME["theme_$theme_id"]:$GLOBALS['sys_theme']);
+        }
+        // else must lookup name
+        else {
+                if ($THEME_NAME["theme_$theme_id"]) {
+                        //theme name was fetched previously
+                        return $THEME_NAME["theme_$theme_id"];
+                } else {
+                        //fetch the theme name and store it for future reference
+                        $sql = "SELECT theme_id,fullname FROM themes WHERE theme_id=$theme_id" ;
+			// echo "<b> $sql </b><br>" ;
+                        $result = db_query($sql) ;
+                        if ($result && db_numrows($result) > 0) {
+                                //valid theme - store and return
+                                $THEME_NAME["theme_$theme_id"]=db_result($result,0,"fullname");
+                                return $THEME_NAME["theme_$theme_id"];
+                        } else {
+                                //invalid theme - store and return
+                                $THEME_NAME["theme_$theme_id"]="<B>Invalid Theme ID</B>";
+                                return $THEME_NAME["theme_$theme_id"];
+                        }
+                }
+        }
 }
 
 /**
@@ -115,27 +119,25 @@ function get_themename($theme_id = 0) {
  * @param		string	The preference name
  */
 function theme_get_userpref($preference_name) {
-	GLOBAL $theme_pref;
-	if (user_isloggedin()) {
-		/*
-			First check to see if we have already fetched the preferences
-		*/
-		if ($theme_pref) {
-			if ($theme_pref["$preference_name"]) {
-				//we have fetched prefs - return part of array
-				return $theme_pref["$preference_name"];
-			} else {
-				//we have fetched prefs, but this pref hasn't been set
-				return false;
-			}
-		} else {
-			//we haven't returned prefs - go to the db
-			$result=db_query("SELECT * FROM theme_prefs ".
-				"WHERE user_id='".user_getid()."'");
-			if (db_numrows($result) < 1) {
-				return false;
-			} else {
-
+        GLOBAL $theme_pref;
+        if (user_isloggedin()) {
+                /*
+                        First check to see if we have already fetched the preferences
+                */
+                if ($theme_pref) {
+                        if ($theme_pref["$preference_name"]) {
+                                //we have fetched prefs - return part of array
+                                return $theme_pref["$preference_name"];
+                        } else {
+                                //we have fetched prefs, but this pref hasn't been set
+                                return false;
+                        }
+                } else {
+                        //we haven't returned prefs - go to the db
+                        $result=db_query("SELECT * FROM theme_prefs WHERE user_id=".user_getid());
+                        if (db_numrows($result) < 1) {
+                                return false;
+                        } else {
 				$theme_pref = db_fetch_array($result);
 
 				if($theme_pref["$preference_name"]){
@@ -156,12 +158,12 @@ function theme_get_userpref($preference_name) {
  * @param		int		The theme ID
  */
 function theme_set_usertheme($theme_id) {
-	if (user_isloggedin()) {
-		$result=db_query("DELETE FROM theme_prefs WHERE user_id='".user_getid()."'");
-		$result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES ('".user_getid()."','$theme_id')");
-	} else {
-	    return false;
-	}
+        if (user_isloggedin()) {
+                $result=db_query("DELETE FROM theme_prefs WHERE user_id=".user_getid());
+		$result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES (".user_getid().",$theme_id)");
+        } else {
+                return false;
+        }
 	return true;
 }
 

@@ -1,4 +1,4 @@
-#!/usr/local/bin/php -q
+#! /usr/bin/php4 -f
 <?php
 /**
   *
@@ -53,14 +53,23 @@ require ('squal_pre.php');
 
 $threshhold='1.6';
 
-echo '<BR>Starting... ';
+/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
+	exit_permission_denied();
+}*/
+
+// echo '<BR>Starting... ';
 
 db_begin();
 
 for ($i=1; $i<9; $i++) {
-	echo '<BR>Starting round: '.$i;
+	// echo '<BR>Starting round: '.$i;
 
 	$j=($i-1);
+
+	/*
+		Set up an interim table to grab and average all trusted result
+	*/
+	db_drop_table_if_exists ("user_metric_tmp1_".$i);
 
 	$sql="CREATE TABLE user_metric_tmp1_$i (
 		user_id int not null default 0, 
@@ -89,7 +98,7 @@ for ($i=1; $i<9; $i++) {
 		GROUP BY user_ratings.user_id";
 
 	$res=db_query($sql);
-	if (!$res || db_affected_rows($res) < 1) {
+	if (!$res) {
 		echo "Error in round $i inserting average ratings: ";
 		echo '<P>'.$sql.'<P>';
 		echo db_error();
@@ -105,7 +114,7 @@ for ($i=1; $i<9; $i++) {
 
 	$sql="UPDATE user_metric_tmp1_$i SET metric=(log(times_ranked)*avg_raters_importance*avg_rating);";
 	$res=db_query($sql);
-	if (!$res || db_affected_rows($res) < 1) {
+	if (!$res) {
 		echo "Error in round $i calculating metric: ";
 		echo '<P>'.$sql.'<P>';
 		echo db_error();
@@ -115,7 +124,7 @@ for ($i=1; $i<9; $i++) {
 
 	$sql="DELETE FROM user_metric_tmp1_$i WHERE metric < $threshhold";
 	$res=db_query($sql);
-	if (!$res || db_affected_rows($res) < 1) {
+	if (!$res) {
                 echo "Error in round $i deleting < threshhold ids: ";
 		echo '<P>'.$sql.'<P>';
                 echo db_error();
@@ -150,7 +159,10 @@ for ($i=1; $i<9; $i++) {
 		Create the final table, then insert the data
 	*/
 
-	echo '<BR>Starting Final Metric';
+	// echo '<BR>Starting Final Metric';
+
+	db_drop_table_if_exists ("user_metric".$i);
+	db_drop_sequence_if_exists ("user_metric".$i."_ranking_seq");
 
 	$sql="CREATE TABLE user_metric$i (
 		ranking serial,
@@ -179,7 +191,7 @@ for ($i=1; $i<9; $i++) {
 		FROM user_metric_tmp1_$i
 		ORDER BY metric DESC;";
 	$res=db_query($sql);
-	if (!$res || db_affected_rows($res) < 1) {
+	if (!$res) {
 		echo "Error in round $i inserting final data: ";
 		echo '<P>'.$sql.'<P>';
 		echo db_error();
@@ -190,14 +202,14 @@ for ($i=1; $i<9; $i++) {
 		Get the row count so we can calc the percentile below
 	*/
 	$res=db_query("SELECT COUNT(*) FROM user_metric$i");
-	if (!$res || db_numrows($res) < 1) {
+	if (!$res) {
 		echo "Error in round $i getting row count: ";
 		echo '<P>'.$sql.'<P>';
 		echo db_error();
 		exit;
 	}
 
-	echo '<BR>Issuing Final Update';
+	// echo '<BR>Issuing Final Update';
 
 	/*
 		Update with final percentile and importance
@@ -224,26 +236,19 @@ for ($i=1; $i<9; $i++) {
 
 db_query("DELETE FROM user_metric;");
 db_query("INSERT INTO user_metric SELECT * FROM user_metric".($i-1).";");
-echo '<P>'.db_error().'<P>';
+//echo '<P>'.db_error().'<P>';
 
 db_commit();
 /*
 	Now run through and drop the tmp tables
 */
-echo "<P>Cleaning up tables<P>";
+// echo "<P>Cleaning up tables<P>";
+
 for ($i=1; $i<9; $i++) {
-	$sql="DROP TABLE user_metric_tmp1_$i;";
-        $res=db_query($sql);
-        echo db_error();
-
-	$sql="DROP SEQUENCE user_metric".$i."_ranking_seq;";
-        $res=db_query($sql);
-        echo db_error();
-
-	$sql="DROP TABLE user_metric$i;";
-        $res=db_query($sql);
-        echo db_error();
-}
+	db_drop_table_if_exists ("user_metric_tmp1_".$i);
+	db_drop_sequence_if_exists ("user_metric_tmp1_".$i."_ranking_seq");
+	db_drop_table_if_exists ("user_metric".$i);
+};
 
 echo db_error();
 
@@ -259,6 +264,5 @@ db_query("
 ");
 echo db_error();
 db_commit();
-
 
 ?>

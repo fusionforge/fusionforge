@@ -52,21 +52,21 @@ if( $submit ) {
 		//see if this package belongs to this project
 		$res1=db_query("SELECT * FROM frs_package WHERE package_id='$package_id' AND group_id='$group_id'");
 		if (!$res1 || db_numrows($res1) < 1) {
-			$feedback .= ' | Package Doesn\'t Exist Or Isn\'t Yours ';
-			echo db_error();
+		  $feedback .= ' | Package Doesn\'t Exist Or Isn\'t Yours ';
+		  echo db_error();
 		} else {
-			//package_id was fine - now insert the release
-			$res=db_query("INSERT INTO frs_release (package_id,name,notes,changes,status_id,preformatted,release_date,released_by) ".
+		  //package_id was fine - now insert the release
+		  $res=db_query("INSERT INTO frs_release (package_id,name,notes,changes,status_id,preformatted,release_date,released_by) ".
 				"VALUES ('$package_id','$release_name','$release_notes','$release_changes','$status_id','$preformatted','". time() ."','". user_getid() ."')");
-			if (!$res) {
-				$feedback .= ' | Adding Release Failed ';
-				echo db_error();
-				//insert failed - go back to definition screen
-			} else {
-				//release added - now show the detail page for this new release
-				$release_id=db_insertid($res,'frs_release','release_id');
-				$feedback .= ' Added Release <BR>';
-			}
+		  if (!$res) {
+		    $feedback .= ' | Adding Release Failed ';
+		    echo db_error();
+		    //insert failed - go back to definition screen
+		  } else {
+		    //release added - now show the detail page for this new release
+		    $release_id=db_insertid($res,'frs_release','release_id');
+		    $feedback .= ' Added Release <BR>';
+		  }
 		}
 
 		/*
@@ -82,7 +82,9 @@ if( $submit ) {
 			Fifth insert it into the database
 		*/
 		$group_unix_name=group_getunixname($group_id);
-		$project_files_dir=$FTPFILES_DIR.$group_unix_name;
+		$project_files_dir=ereg_replace("<GROUP>",$group_unix_name,$FTPFILES_DIR);
+		$user_unix_name=user_getname();
+		$user_incoming_dir=ereg_replace("<USER>",$user_unix_name,$FTPINCOMING_DIR);
 
 		if ($file_name) {
 			// Check to see if the user uploaded a file instead of selecting an existing one.
@@ -93,7 +95,13 @@ if( $submit ) {
 				if (is_file($userfile) && file_exists($userfile)) {
 					$new_userfile = explode("tmp/", $userfile);
 					$userfile = $new_userfile[1];
-					exec ("/usr/local/bin/tmpfilemove $userfile $userfile_name",$exec_res);
+					// The following line is due to PHP braindeadness.
+					// Don't you dare remove it, it'll break.
+					// I know.  I tried it.
+					// [RM]
+					putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
+					exec ("/usr/lib/sourceforge/bin/tmpfilemove.pl ".escapeshellarg($userfile). " ".escapeshellarg($userfile_name)." ".escapeshellarg($user_unix_name)." 2>&1",$exec_res);
+					putenv ('sys_dbpasswd=') ;
 					if ($exec_res[0]) {
 						echo '<H3>' . $exec_res[0],$exec_res[1] . '</H3><P>';
 					}
@@ -127,11 +135,17 @@ if( $submit ) {
 							move the file to the project's fileserver directory
 						*/
 						clearstatcache();
-						if (is_file($FTPINCOMING_DIR.'/'.$file_name) && file_exists($FTPINCOMING_DIR.'/'.$file_name)) {
+						if (is_file($user_incoming_dir.'/'.$file_name) && file_exists($user_incoming_dir.'/'.$file_name)) {
 							//move the file to a its project page using a setuid program
-							exec ("/usr/local/bin/fileforge $file_name ".$group_unix_name,$exec_res);
+						  // The following line is due to PHP braindeadness.
+						  // Don't you dare remove it, it'll break.
+						  // I know.  I tried it.
+						  // [RM]
+						  putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
+						  exec ("/usr/lib/sourceforge/bin/fileforge.pl ".escapeshellarg($file_name)." ".escapeshellarg($user_unix_name)." ".escapeshellarg($group_unix_name)." 2>&1",$exec_res);
+						  putenv ('sys_dbpasswd=') ;
 							if ($exec_res[0]) {
-								echo '<h3>'.$exec_res[0],$exec_res[1].'</H3><P>';
+								echo '<h3>'.$exec_res[0],$exec_res[1],$exec_res[2].'</H3><P>';
 							}
 							//add the file to the database
 							$res=db_query("INSERT INTO frs_file ".
@@ -230,7 +244,11 @@ if( $submit ) {
 		<TD>
 <font color="red"><b>NOTE: In some browsers you must select the file in the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</b></font><br>
 <?php
-	$dirhandle = opendir($FTPINCOMING_DIR);
+	
+	$user_unix_name=user_getname();
+	$user_incoming_dir=ereg_replace("<USER>",$user_unix_name,$FTPINCOMING_DIR);
+	if(is_dir($user_incoming_dir)){
+	$dirhandle = opendir($user_incoming_dir);
 
 	echo '<SELECT NAME="file_name">';
 	echo '	<OPTION VALUE="qrs_newfile">Select a file</OPTION>';
@@ -240,6 +258,7 @@ if( $submit ) {
 			$atleastone = 1;
 			print '<OPTION value="'.$file.'">'.$file.'</OPTION>';
 		}
+	}
 	}
 	echo '</SELECT> Or, upload a new file: <input type="file" name="userfile"  size="30">';
 	if (!$atleastone) {

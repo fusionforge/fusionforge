@@ -24,10 +24,8 @@ $HTML->header(array(title=>"Project Registration",'pagename'=>'register'));
 ?>
 
 <p>
-SourceForge would like to extend an invitation to any 
-<A href="http://www.opensource.org">Open Source</A> project to be hosted for no price and
-no catch. This is our token of appreciation to the people who help make 
-<A href="http://www.opensource.org">Open Source</A> a reality.
+Welcome to Debian Sourceforge.  You are going to create a project,
+with which you will then be able to use all the Sourceforge tools.
 </p>
 
 <p><B>The Process</B>
@@ -45,12 +43,11 @@ project consists of the three steps:
 </p>
 
 <p>
-Currently, you are going to proceed with the first step of the 
-process. It should take about 10 minutes. After that, allow 
-several days for our review of the request. If it will comply 
-with our requirements for hosting (see the next step), your 
-project will be approved, and you will receive email 
-with directions for future steps.
+Currently, you are going to proceed with the first step of the
+process. It should take about 10 minutes. After that, allow some time
+for the administrator to review the request. If it will comply with
+our requirements for hosting (see the next step), your project will be
+approved, and you will receive email with directions for future steps.
 </p>
 
 <p>
@@ -68,4 +65,3 @@ ignore these; they are very important to you and your project.
 $HTML->footer(array());
 
 ?>
-

@@ -135,7 +135,7 @@ function menu_software() {
 	$HTML->menuhtml_top('Software'); 
 		$HTML->menu_entry('/softwaremap/',$Language->getText('menu','software_map'));
 		$HTML->menu_entry('/new/',$Language->getText('menu','new_releases'));
-		$HTML->menu_entry('/mirrors/',$Language->getText('menu','other_site_mirrors'));
+		// $HTML->menu_entry('/mirrors/',$Language->getText('menu','other_site_mirrors'));
 		$HTML->menu_entry('/snippet/',$Language->getText('menu','code_snippet_library'));
 	$HTML->menuhtml_bottom();
 }
@@ -154,10 +154,10 @@ function menu_sourceforge() {
 		print '<P>';
 		$HTML->menu_entry('http://jobs.osdn.com', 'jobs.osdn.com');
 		print '<P>';
-		$HTML->menu_entry('/compilefarm/',$Language->getText('menu','compile_farm'));
-		print '<P>';
-		$HTML->menu_entry('/contact.php',$Language->getText('menu','contact_us'));
-		$HTML->menu_entry('/about.php',$Language->getText('menu','about_sourceforge'));
+		// $HTML->menu_entry('/compilefarm/',$Language->getText('menu','compile_farm'));
+		// print '<P>';
+		// $HTML->menu_entry('/contact.php',$Language->getText('menu','contact_us'));
+		// $HTML->menu_entry('/about.php',$Language->getText('menu','about_sourceforge'));
 	$HTML->menuhtml_bottom();
 }
 
@@ -200,6 +200,24 @@ function menu_project($grp) {
 		$HTML->menu_entry('/projects/'. group_getunixname($grp) .'/',$Language->getText('menu','project_summary'));
 		print '<P>';
 		$HTML->menu_entry('/project/admin/?group_id='.$grp,$Language->getText('menu','project_admin'));
+	$HTML->menuhtml_bottom();
+}
+
+function menu_site_admin() {
+	GLOBAL $HTML;
+	$HTML->menuhtml_top('Site Admin');
+		$HTML->menu_entry('/admin/','Site Admin Home');
+		$HTML->menu_entry('/admin/approve-pending.php','Approve Pending Projects');
+		$HTML->menu_entry('/admin/lastlogins.php','View Last Logins');
+	$HTML->menuhtml_bottom();
+}
+
+function menu_news_admin() {
+	GLOBAL $HTML;
+	$HTML->menuhtml_top('Site News Admin');
+		$HTML->menu_entry('/news/','Site News');
+		$HTML->menu_entry('/news/submit.php?group_id=' . $GLOBALS['sys_news_group'], 'Submit Site News');
+		$HTML->menu_entry('/news/admin/?group_id=' . $GLOBALS['sys_news_group'], 'Approve Site News');
 	$HTML->menuhtml_bottom();
 }
 
@@ -279,6 +297,13 @@ function menu_loggedin($page_title) {
 			$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->getText('menu','bookmark_page'));
 		}
 	$HTML->menuhtml_bottom();
+
+	if (user_ismember(1, 'A')) {
+		menu_site_admin();
+	}		
+	if (user_ismember($GLOBALS['sys_news_group'], 'A')) {
+		menu_news_admin();
+	}		
 }
 
 function menu_notloggedin() {
@@ -361,7 +386,7 @@ function menu_print_sidebar($params) {
 	}
 
 	//Foundry Links
-	echo menu_foundry_links();
+	// echo menu_foundry_links();
 
 	if (!user_isloggedin()) {
 		echo menu_language_box();
