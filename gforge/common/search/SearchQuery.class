@@ -93,6 +93,7 @@ class SearchQuery extends Error {
 			$this->searchId = (int) $words;
 		} else {
 			$words = htmlspecialchars($words);
+			$words = strtr($words, array('%' => '', '_' => ''));
 			$words = preg_replace("/[ \t]+/", ' ', $words);
 			if(strlen($words) < 3) {
 				$this->setError('error_search_minlength');
