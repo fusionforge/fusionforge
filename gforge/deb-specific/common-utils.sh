@@ -71,7 +71,7 @@ create_mainconffile () {
 update_mainconffile () {
     for i in $@ ; do
 	if ! grep -q "^$i=" $mainconffile ; then
-	    db_get sourceforge/$i
+	    db_get sourceforge/shared/$i
 	    echo "$i=$RET" >> $mainconffile
 	fi
     done
