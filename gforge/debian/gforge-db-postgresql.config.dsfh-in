@@ -3,6 +3,11 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:handle-mainconffile#
+
+create_mainconffile
+init_debconf_from_mainconffile
+
 #DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:create-random-pw#
 #DSFHELPER:common-variables#
@@ -10,7 +15,16 @@
 #DSFHELPER:dbpasswd-variables#
 
 db_input low gforge/shared/admin_login || true
-get_pw gforge/shared/admin_password critical
+db_fget gforge/shared/admin_password seen || true
+if [ "$RET" = "false" ]; then
+    if [ $(get_pw gforge/shared/admin_password high) = "not-asked" ] ; then
+	db_set gforge/shared/admin_password $(gen_random_pw)
+	db_get gforge/shared/admin_password || true
+	echo "Since you asked not to see all the debconf questions, I generated a random"
+	echo "password for the admin user.  It is '${RET}'.\n" ;
+	db_fset gforge/shared/admin_password seen true
+    fi
+fi
 
 #DSFHELPER:host-variables#
 #DSFHELPER:cvshost-variables#
