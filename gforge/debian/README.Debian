@@ -18,6 +18,15 @@ problem precisely and/or offering a solution will probably be
 processed faster :-)
 
 
+Note on documentation
+---------------------
+Although a few documentation files from upstream are included, they
+are either very out of date or practically useless.  I mostly include
+them for completeness's sake (and per request, too).  The files I'm
+referring to are Install_Guide.html, Adminstration_Guide.html,
+Contributor_Guide.html, INSTALL, and AUTHORS.
+
+
 Installation notes
 ------------------
   Sourceforge is a big piece of software.  It's far-reaching.  It
