@@ -16,10 +16,13 @@ define('DEFAULT_SHELL','/bin/grap');
 
 //
 //	Get the users' unix_name and password out of the database
+//	ONLY USERS WITH CVS COMMIT PRIVS ARE ADDED
 //
-$res = db_query("select distinct users.user_name,users.unix_pw,users.user_id 
-	from users,user_group
-	WHERE users.user_id=user_group.user_id ORDER BY user_id ASC");
+$res = db_query("SELECT distinct users.user_name,users.unix_pw,users.user_id 
+	FROM users,user_group
+	WHERE users.user_id=user_group.user_id 
+	AND user_group.cvs_flags='1'
+	ORDER BY user_id ASC");
 
 $users = array();
 $user_ids = array();
