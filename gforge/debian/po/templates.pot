@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-03-02 11:21+0100\n"
+"POT-Creation-Date: 2004-11-28 12:54+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,16 +197,16 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
-#: ../gforge-mta-exim.templates.dsfh-in:9
-#: ../gforge-mta-postfix.templates.dsfh-in:9
+#: ../gforge-mta-exim.templates.dsfh-in:8
+#: ../gforge-mta-postfix.templates.dsfh-in:8
 msgid "Do you want mail to ${noreply} to be deleted?"
 msgstr ""
 
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
-#: ../gforge-mta-exim.templates.dsfh-in:9
-#: ../gforge-mta-postfix.templates.dsfh-in:9
+#: ../gforge-mta-exim.templates.dsfh-in:8
+#: ../gforge-mta-postfix.templates.dsfh-in:8
 msgid ""
 "Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
 "even some e-mail to that address too."
@@ -215,8 +215,8 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
-#: ../gforge-mta-exim.templates.dsfh-in:9
-#: ../gforge-mta-postfix.templates.dsfh-in:9
+#: ../gforge-mta-exim.templates.dsfh-in:8
+#: ../gforge-mta-postfix.templates.dsfh-in:8
 msgid ""
 "It is advised that you let the package direct e-mail to that address to a "
 "black hole (/dev/null), unless you have another use for that address."
@@ -225,8 +225,8 @@ msgstr ""
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
-#: ../gforge-mta-exim.templates.dsfh-in:9
-#: ../gforge-mta-postfix.templates.dsfh-in:9
+#: ../gforge-mta-exim.templates.dsfh-in:8
+#: ../gforge-mta-postfix.templates.dsfh-in:8
 msgid "Accepting this option will perform that redirection."
 msgstr ""
 
