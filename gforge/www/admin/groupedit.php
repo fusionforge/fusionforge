@@ -94,31 +94,43 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
 
 <table>
-
 <tr>
-<td colspan="3">
-
+<td>
 <?php echo $Language->getText('admin_groupedit','status') ?>:
+</td>
+<td>
 <?php	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
+$status = $group->getStatus();
+if($status == 'P') {
+	// we cannot update the status of a pending project
+	echo '<input type="hidden" name="form_status" value="P" />';
+	echo $Language->getText('admin_groupedit','pending').'&nbsp; &nbsp; ';
+} else {
 	echo html_build_select_box_from_arrays(
-	array(
-		'I',
-		'A',
-		'P',
-		'H',
-		'D'
-	),
-	array(
-		$Language->getText('admin_groupedit','incomplete'),
-		$Language->getText('admin_groupedit','active'),
-		$Language->getText('admin_groupedit','pending'),
-		$Language->getText('admin_groupedit','holding'),
-		$Language->getText('admin_groupedit','deleted')
-	),
-	'form_status', $group->getStatus(), false
-); ?>
-
+		array(
+			'I',
+			'A',
+			'P',
+			'H',
+			'D'
+		),
+		array(
+			$Language->getText('admin_groupedit','incomplete'),
+			$Language->getText('admin_groupedit','active'),
+			$Language->getText('admin_groupedit','pending'),
+			$Language->getText('admin_groupedit','holding'),
+			$Language->getText('admin_groupedit','deleted')
+		),
+		'form_status', $status, false
+	);
+} ?>
+</td>
+</tr>
+<tr>
+<td>
 <?php echo $Language->getText('admin_groupedit','public') ?>:
+</td>
+<td>
 <?php 	// PLEASE DONT TRANSLATE THIS, THIS IS DATABASE INFO THAT CANT BE DIFFERENT AMONG LANGUAGES
 	echo html_build_select_box_from_arrays(
 	array(
@@ -154,10 +166,20 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 ?>
 </td>
 </tr>
-
+<?php
+if ($group->getLicense() == 'other') {
+?>
+<tr>
+<td><?php echo $Language->getText('admin','license_other'); ?>
+</td>
+<td>
+<?php echo $group->getLicenseOther(); ?>
+</td>
+</tr>
+<?php } ?> 
 <tr>
 <td>
-Home Box:
+<?php echo $Language->getText('admin','home_box'); ?>
 </td>
 <td>
 <input type="text" name="form_box" value="<?php echo $group->getUnixBox(); ?>" />
@@ -181,25 +203,13 @@ Home Box:
 <?php echo $group->getRegistrationPurpose(); ?>
 </td>
 </tr>
-
 <?php
-if ($group->getLicense() == 'other') {
-?>
-	<tr>
-	<td><?php echo $Language->getText('admin','license_other'); ?>
-	</td>
-	<td>
-	<?php echo $group->getLicenseOther(); ?>
-	</td>
-	</tr>
-<?php
-}
 if ($group->usesSCM() && $GLOBALS['sys_scm_single_host'] != '1' ) {
-?>	  <tr>
-	<td><?php echo $Language->getText('admin','scm_box'); ?>
-	</td>
-	<td>
-	<input size="40" type="text" name="form_scm_box" value="<?php echo $group->getSCMBox(); ?>"/></td></tr>
+?>
+<tr>
+	<td><?php echo $Language->getText('admin','scm_box'); ?></td>
+	<td><input size="40" type="text" name="form_scm_box" value="<?php echo $group->getSCMBox(); ?>"/></td>
+</tr>
 <?php
 }
 ?>
