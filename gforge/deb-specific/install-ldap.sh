@@ -317,7 +317,7 @@ load_ldap(){
 	tmpldifadd=$(mktemp $tmpfile_pattern)
 	tmpldifmod=$(mktemp $tmpfile_pattern)
 	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
-	echo >> $tmpldif <<EOF
+	cat >> $tmpldif <<EOF
 dn: $sys_ldap_base_dn
 dc: $dc
 objectClass: top
@@ -418,7 +418,7 @@ setup_robot() {
 	tmpldif=$(mktemp $tmpfile_pattern)
 	tmpldifadd=$(mktemp $tmpfile_pattern)
 	tmpldifmod=$(mktemp $tmpfile_pattern)
-	echo > $tmpldif <<-FIN
+	cat > $tmpldif <<-FIN
 dn: $gforge_base_dn
 objectClass: domain
 dc: $dc
@@ -478,8 +478,8 @@ gecos: Dummy User
 
 FIN
 	
-	if ! eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' > $tmpldifadd 2>&1" < $tmpldif ; then
-	    if ! eval "ldapmodify -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' > $tmpldifadd 2>&1" < $tmpldif ; then
+	if ! eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
+	    if ! eval "ldapmodify -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
 		echo "WARNING WARNING WARNING Something wrong happened when setting up the robot"
 		echo "please check and report following error"
 		echo ========================================================================================

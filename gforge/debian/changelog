@@ -1,18 +1,29 @@
-gforge (3.2.1-0+) experimental; urgency=low
+gforge (3.2.1-0+1) experimental; urgency=low
 
   * [Roland] New upstream release.  Debian packaging still experimental at
-    that stage.
-
- -- Roland Mas <lolando@debian.org>  Fri, 16 Jan 2004 22:37:44 +0100
-
-gforge (3.1-6+) unstable; urgency=low
-
+    this stage.
   * [Roland] Upgrade database schema using 20031105.sql and 20031124.sql.
   * [Roland] Also use 20031129.sql, for the "last changed XX days ago"
     patch from Hidenari Miwa and Tsutomu Tominaga.
   * [Roland] Also use 20031126.sql, for the "cron manager" feature.
 
  -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 23:08:13 +0100
+
+gforge (3.1-8) unstable; urgency=low
+
+  * [Roland] It seems the new organisation of the apache (and related)
+    packages managed to break quite a lot of things.  Still trying to
+    catch up, this time removing a "Listen" directive that would turn out
+    to be a duplicate one, thus preventing Apache from running.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 11 Jan 2004 12:15:33 +0100
+
+gforge (3.1-7) unstable; urgency=low
+
+  * [Roland] Yet another LDAP fix.  This one would completely prevent
+    installation from scratch.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 11 Jan 2004 02:12:51 +0100
 
 gforge (3.1-6) unstable; urgency=low
 
