@@ -108,7 +108,7 @@ foreach $group (@groupArray) {
 			# setup loginfo to make group ownership every commit
 			system("echo \"ALL chgrp -R $group $cvsdir\" > $cvsdir/CVSROOT/loginfo");
 			system("echo \"\" > $cvsdir/CVSROOT/val-tags");
-			chmod 0644, "$cvsdir/CVSROOT/val-tags";
+			chmod 0664, "$cvsdir/CVSROOT/val-tags";
 
 			# set group ownership, anonymous group user
 			system("chown -R $uid:$gid $cvsdir");

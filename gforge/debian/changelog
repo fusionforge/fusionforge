@@ -12,6 +12,12 @@ sourceforge (2.6-0+12+) unstable; urgency=low
   * [Roland] [From 2.5] Changed the way we empty the LDAP directory, so as
     not to kill entries that are not ours.
   * [Roland] [From 2.5] Fixed last inserted languages.
+  * [Soon-Son] added group write permission(0664) when creating the val-tags
+    file in the CVSROOT directory of each project. Old configuration (0644)
+    caused an error when the user tries to tag it as follows:
+    $cvs up -r xterm-branch
+    cvs [server aborted]: cannot write /cvsroot/hanterm-xf/CVSROOT/val-tags:
+    Permission denied
 
  -- Roland Mas <lolando@debian.org>  Thu, 18 Jul 2002 10:45:35 +0200
 

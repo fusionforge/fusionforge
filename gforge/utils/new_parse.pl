@@ -126,7 +126,7 @@ while ($ln = pop(@groupdump_array)) {
 		#CB# This cause a bug on the client
 		##system("echo \"ALL chgrp -R $gname /cvsroot/$gname\" > $cvs_dir/CVSROOT/loginfo");
 		system("echo \"\" > $cvs_dir/CVSROOT/val-tags");
-		chmod 0644, "$cvs_dir/CVSROOT/val-tags";
+		chmod 0664, "$cvs_dir/CVSROOT/val-tags";
 
 		# set group ownership, anonymous group user
 		system("chown -R nobody:$gid $cvs_dir");
