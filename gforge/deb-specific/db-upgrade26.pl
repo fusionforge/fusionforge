@@ -336,7 +336,6 @@ sub parse_sql_file ( $ ) {
     # my $n = 0 ;
     
   STATE_LOOP: while ($state != $states{DONE}) { # State machine main loop
-      # debug "State = $state" ;
     STATE_SWITCH: {		# State machine step processing
 	$state == $states{INIT} && do {
 	    $par_level = 0 ;
@@ -352,17 +351,14 @@ sub parse_sql_file ( $ ) {
 	
 	$state == $states{SCAN} && do {
 	  SCAN_STATE_SWITCH: {
-	      # debug "SCAN -- \$l = <$l>" ;
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
 		  $l = <F> ;
 		  unless ($l) {
-		      debug "Detected end of file." ;
 		      $state = $states{DONE} ;
 		      last SCAN_STATE_SWITCH ;
 		  }
 		  chomp $l ;
 		  
-		  $state = $states{SCAN} ;
 		  last SCAN_STATE_SWITCH ;
 	      } ;
 
@@ -388,11 +384,9 @@ sub parse_sql_file ( $ ) {
 	$state == $states{SQL_SCAN} && do {
 	  SQL_SCAN_STATE_SWITCH: {
 	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
-		  # debug "SQL_SCAN -- \$l = <$l>" ;
 		  $l = <F> ;
 		  unless ($l) {
 		      debug "End of file detected during an SQL statement." ;
-
 		      $state = $states{ERROR} ;
 		      last SQL_SCAN_STATE_SWITCH ;
 		  }
@@ -403,7 +397,6 @@ sub parse_sql_file ( $ ) {
 	      } ;
 
 	      ( 1 ) && do {
-		  # debug "SQL_SCAN -- \$l = <$l>" ;
 		  ($chunk, $rest) = ($l =~ /^([^()\';-]*)(.*)/) ;
 		  $sql .= $chunk ;
 		  
@@ -411,14 +404,12 @@ sub parse_sql_file ( $ ) {
 		  last SQL_SCAN_STATE_SWITCH ;
 	      } ;
 	      
-	      die "Unknown event in SQL_SCAN state" ;
 	  }			# SQL_SCAN_STATE_SWITCH
 	    last STATE_SWITCH ;
 	} ;			# End of SQL_SCAN state
 	
 	$state == $states{IN_SQL} && do {
 	  IN_SQL_STATE_SWITCH: {
-	      # debug "IN_SQL -- \$rest = <$rest>" ;
 	      ($rest =~ /^\(/) && do {
 		  $par_level += 1 ;
 		  $sql .= '(' ;
@@ -441,7 +432,6 @@ sub parse_sql_file ( $ ) {
 
 	      ($rest =~ /^\)/) && do {
 		  debug "Detected ')' without any matching '('." ;
-		  
 		  $state = $states{ERROR} ;
 		  last IN_SQL_STATE_SWITCH ;
 	      } ;
@@ -473,7 +463,6 @@ sub parse_sql_file ( $ ) {
 
 	      ($rest =~ /^;/) && do {
 		  debug "Detected ';' within a parenthesis." ;
-		  
 		  $state = $states{ERROR} ;
 		  last IN_SQL_STATE_SWITCH ;
 	      } ;
@@ -495,21 +484,22 @@ sub parse_sql_file ( $ ) {
 		  last IN_SQL_STATE_SWITCH ;
 	      } ;
 	      
-	      # debug "IN_SQL -- \$rest = <$rest>" ;
-	      die "Unknown event in IN_SQL state" ;
+	      ( 1 ) && do {
+		  debug "Unknown event in IN_SQL state" ;
+		  $state = $states{ERROR} ;
+		  last IN_SQL_STATE_SWITCH ;
+	      } ;
 	  }			# IN_SQL_STATE_SWITCH
 	    last STATE_SWITCH ;
 	} ;			# End of IN_SQL state
 
 	$state == $states{END_SQL} && do {
 	  END_SQL_STATE_SWITCH: {
-	      debug "END_SQL -- \$sql = <$sql>" ;
 	      ($sql =~ /^\s*$/) && do {
-		  debug "Empty request." ;
 		  $sql = "" ;
 		  $l = $rest ;
 
-		  $state = $states{SQL_SCAN} ;
+		  $state = $states{SCAN} ;
 		  last END_SQL_STATE_SWITCH ;
 	      } ;
 
@@ -528,7 +518,6 @@ sub parse_sql_file ( $ ) {
 
 	$state == $states{QUOTE_SCAN} && do {
 	  QUOTE_SCAN_STATE_SWITCH: {
-	      # debug "QUOTE_SCAN -- \$l = <$l>" ;
 	      ($l eq "") && do {
 		  $sql .= "\n" ;
 		  $l = <F> ;
@@ -556,7 +545,6 @@ sub parse_sql_file ( $ ) {
 	
 	$state == $states{IN_QUOTE} && do {
 	  IN_QUOTE_STATE_SWITCH: {
-	      # debug "IN_QUOTE -- \$rest = <$rest>" ;
 	      ($rest =~ /^\'/) && do {
 		  $sql .= '\'' ;
 		  $rest = substr $rest, 1 ;
@@ -577,13 +565,6 @@ sub parse_sql_file ( $ ) {
 		  $sql .= '\\' ;
 		  $rest = substr $rest, 1 ;
 		  
-		  last IN_QUOTE_STATE_SWITCH ;
-	      } ;
-
-	      ($rest eq "") && do {
-		  $l = $rest ;
-		  
-		  $state = $states{QUOTE_SCAN} ;
 		  last IN_QUOTE_STATE_SWITCH ;
 	      } ;
 
@@ -659,11 +640,9 @@ sub parse_sql_file ( $ ) {
 		      }
 		      push @copy_data, $copy_field ;
 		  }
-		  debug "IN_COPY -- \$#copy_data = " . $#copy_data ;
 		  $sql = "INSERT INTO \"$copy_table\" VALUES (" ;
 		  $sql .= join (", ", @copy_data) ;
 		  $sql .= ")" ;
-		  debug "IN_COPY -- \$sql = <$sql>" ;
 		  push @sql_list, $sql ;
 		  $l = <F> ;
 		  unless ($l) {
@@ -681,8 +660,6 @@ sub parse_sql_file ( $ ) {
 	} ;			# End of IN_COPY state
 
 	$state == $states{DONE} && do {
-	    debug "End of file detected." ;
-
 	    last STATE_SWITCH ;
 	} ;			# End of DONE state
 
