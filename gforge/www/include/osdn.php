@@ -105,16 +105,16 @@ function osdn_print_navbar_2() {
 
 <table width="100%" cellpadding="0" cellspacing="0" border="0">
 	<tr>' ;
-  print '<td bgcolor="#d5d7d9" background="/images/steel3.jpg" WIDTH="20%">'.html_blankimage(1,100).'</td>';
+  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" WIDTH="20%">'.html_blankimage(1,100).'</td>';
 
   // srand((double)microtime()*1000000);
   // $random_num=rand(0,100000);
   
-  print '<td bgcolor="#d5d7d9" background="/images/steel3.jpg" width="60%"><a href="/"><img src="/images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
+  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].' width="60%"><a href="/"><img src="/images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
 
   //	print '<td valign="center" align="left" bgcolor="#d5d7d9" background="/images/steel3.jpg" WIDTH="20%"><a href="http://www.osdn.com">' . html_image("/images/OSDN-lc.gif","100","40",array("hspace"=>"10","border"=>"0","alt"=>" OSDN - Open Source Development Network ")) . '</a></td>';
 
-  print '<td bgcolor="#d5d7d9" background="/images/steel3.jpg" WIDTH="20%">'.html_blankimage(1,100).'</td>';
+  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" WIDTH="20%">'.html_blankimage(1,100).'</td>';
 
 	print '</tr>
 </table>
