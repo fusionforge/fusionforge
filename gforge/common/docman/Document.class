@@ -131,6 +131,13 @@ class Document extends Error {
 */
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
+		// If $filetype is "text/plain", $body convert UTF-8 encoding.
+		if (strcasecmp($filetype,"text/plain") === 0 &&
+			function_exists('mb_convert_encoding') &&
+			function_exists('mb_detect_encoding')) {
+			$data = mb_convert_encoding($data,'UTF-8',mb_detect_encoding($data));
+		}
+
 		$sql="INSERT INTO doc_data (group_id,title,description,createdate,doc_group,
 			stateid,language_id,filename,filetype,data,created_by)
 			VALUES ('".$this->Group->getId()."',
