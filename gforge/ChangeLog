@@ -1,3 +1,7 @@
+2003-06-09 Christian Bayle	<bayle@debian.org>
+
+	* Added Ronald Petty cvs browser as an alternate cvs browser
+
 2003-06-09  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* common/include/Group.class: Send a different project submission
