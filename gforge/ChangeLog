@@ -3,6 +3,8 @@
 	* common/tracker/ArtifactsForUser.class: Fixed bug #792: 
 	'My personal page' submitted items includes those 
 	submitted to deleted projects
+	* www/export/rss_sfnewreleases.php: Fixed a couple of 
+	field names.
 
 2004-05-06	Reinhard Spisser
 
