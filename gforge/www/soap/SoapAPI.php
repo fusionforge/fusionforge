@@ -10,6 +10,9 @@ require_once('www/tracker/include/ArtifactHtml.class');
 require_once('common/tracker/ArtifactFactory.class');
 require_once('common/tracker/ArtifactTypeFactory.class');
 
+// requires for general site info
+require_once('common/include/GForge.class');
+
 $uri = 'http://'.$sys_default_domain;
 
 // 1. include client and server
@@ -17,12 +20,10 @@ require_once('./nusoap.php');
 
 // 2. instantiate server object
 $server = new soap_server();
-
 //configureWSDL($serviceName,$namespace = false,$endpoint = false,$style='rpc', $transport = 'http://schemas.xmlsoap.org/soap/http');
-
 $server->configureWSDL('GForgeAPI',$uri);
-// set schema target namespace
 
+// set schema target namespace
 $server->wsdl->schemaTargetNamespace = $uri.'/';
 $server->namespaces['s0'] = $uri;
 // add types
@@ -37,9 +38,8 @@ $server->wsdl->addComplexType(
 	array(array('ref'=>'SOAP-ENC:Array','wsdl:arrayType'=>'string[]')),
 	'xsd:string'
 );
-//
+
 // Add The definition of a group object
-//
 $server->wsdl->addComplexType(
 	'GroupObject',
 	'complexType',
@@ -89,15 +89,24 @@ $server->wsdl->addComplexType(
 	array(),
 	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupObject[]')), 'tns:GroupObject');
 
-//
 // TODO: Create and add a definition for a bug object
-//
-
 // 3. call the register() method for each service (function) you want to expose:
 $server->register(
 	'hello',
 	array('parm'=>'xsd:string'),
 	array('helloResponse'=>'xsd:string'),
+	$uri);
+
+$server->register(
+	'getNumberOfHostedProjects',
+	null,
+	array('hostedProjects'=>'xsd:string'),
+	$uri);
+
+$server->register(
+	'getNumberOfActiveUsers',
+	null,
+	array('activeUsers'=>'xsd:string'),
 	$uri);
 
 $server->register(
@@ -184,7 +193,7 @@ function login($userid, $passwd) {
 	global $feedback, $Language, $session_ser;
         
 	$Language=new BaseLanguage();
-        $Language->loadLanguage("English"); // TODO use the user's default language
+	$Language->loadLanguage("English"); // TODO use the user's default language
 	setlocale (LC_TIME, $Language->getText('system','locale'));
 	$sys_strftimefmt = $Language->getText('system','strftimefmt');
 	$sys_datefmt = $Language->getText('system','datefmt');
@@ -195,7 +204,7 @@ function login($userid, $passwd) {
 		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid." and password of ".$passwd, 'No Detail');
  	}
 	
-    	return new soapval('tns:soapVal','string',$session_ser);
+	return new soapval('tns:soapVal','string',$session_ser);
 }
 
 /**
@@ -211,31 +220,49 @@ function logout($sessionkey) {
 }
 
 /**
+ * getNumberOfHostedProjects - gets the number of active projects
+ *
+ */
+function getNumberOfHostedProjects() {
+	$gforge = new GForge();
+	return new soapval('tns:soapVal', 'string', $gforge->getNumberOfHostedProjects());
+}
+
+/**
+ * getNumberOfActiveUsers - gets the number of active users
+ *
+ */
+function getNumberOfActiveUsers() {
+	$gforge = new GForge();
+	return new soapval('tns:soapVal', 'string', $gforge->getNumberOfActiveUsers());
+}
+
+/**
  * bugList - Lists all open bugs for a project
  * 
  * @param	string	sessionkey	The current session key
  * @param	string 	project		The project that the bug is in
  */
 function bugList($sessionkey, $project) {
-        continueSession($sessionkey);
+	continueSession($sessionkey);
 
-        $group =& group_get_object_by_name($project);
-        if (!$group) {
-                return new soapval('tns:soapVal','string',"Couldn't create group");
-        }
+	$group =& group_get_object_by_name($project);
+	if (!$group) {
+		return new soapval('tns:soapVal','string',"Couldn't create group");
+	}
 
-        $atf = new ArtifactTypeFactory($group);
-        $atf->setDataType("1"); // TODO reference a constant or something here
-        $artifactType = $atf->getArtifactTypes();
-        if (!$artifactType) {
-                return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
-        }
+	$atf = new ArtifactTypeFactory($group);
+	$atf->setDataType("1"); // TODO reference a constant or something here
+	$artifactType = $atf->getArtifactTypes();
+	if (!$artifactType) {
+		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
+	}
 	$af = new ArtifactFactory($artifactType[0]);
 	if (!$af) {
-    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactFactory: ".$af->getErrorMessage());
+		return new soapval('tns:soapVal','string',"Couldn't create ArtifactFactory: ".$af->getErrorMessage());
 	}
 	
-	$af->setup('','','','','',0,1,'',$group->getID());
+	$af->setup('','','','','',0,1,'','');
 	$art_arr =& $af->getArtifacts();
 
 	$result = array();
@@ -244,27 +271,25 @@ function bugList($sessionkey, $project) {
 	}
 
 	return new soapval('tns:ArrayOfString', 'ArrayOfstring', $result);
-    	#return new soapval('tns:Bug','Bug', $inner_result);
 }
 
 function bugFetch($sessionkey, $project, $bugid) {
-        continueSession($sessionkey);
+continueSession($sessionkey);
 
-        $group =& group_get_object_by_name($project);
-        if (!$group) {
-                return new soapval('tns:soapVal','string',"Couldn't create group");
-        }
-
-        $atf = new ArtifactTypeFactory($group);
-        $atf->setDataType("1"); // TODO reference a constant or something here
-        $artifactType = $atf->getArtifactTypes();
+$group =& group_get_object_by_name($project);
+	if (!$group) {
+		return new soapval('tns:soapVal','string',"Couldn't create group");
+	}
+	$atf = new ArtifactTypeFactory($group);
+	$atf->setDataType("1"); // TODO reference a constant or something here
+	$artifactType = $atf->getArtifactTypes();
 	if (!$artifactType) {
-    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
+		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
 	}
 
 	$bug = new Artifact($artifactType[0], $bugid);
 	if (!$bug) {
-    		return new soapval('tns:soapVal','string',"Couldn't fetch bug");
+		return new soapval('tns:soapVal','string',"Couldn't fetch bug");
 	}
 
 	$result = array();
@@ -313,7 +338,7 @@ function bugUpdate($sessionkey, $project, $bugid, $comment) {
 			$artifactType[0]->getID())) {
     		return new soapval('tns:soapVal','string',"Couldn't update bug: ".$bug->getErrorMessage());
 	}
-    	return new soapval('tns:soapVal','string',"new comment: ".$comment);
+	return new soapval('tns:soapVal','string',"new comment: ".$comment);
 }
 
 /**
@@ -340,77 +365,74 @@ function bugAdd($sessionkey, $project, $summary, $details) {
 	}
 	$artifact=new Artifact($artifactType[0]);
 	if (!$artifact->create('100', '100', $summary, $details)) {
-    		return new soapval('tns:soapVal','string',"Couldn't create bug: ".$artifact->getErrorMessage());
+		return new soapval('tns:soapVal','string',"Couldn't create bug: ".$artifact->getErrorMessage());
 	}
-    	return new soapval('tns:soapVal','string',$artifact->getID());
+	return new soapval('tns:soapVal','string',$artifact->getID());
 }
 
 function hello($inputString){
-    return new soapval('tns:soapVal','string',$inputString.' echoed back to you');
+return new soapval('tns:soapVal','string',$inputString.' echoed back to you');
 }
 
 function user($func, $params){
-    if ($func == "get") {
-        $where = "";
-        $prefix = " where user_name in (";
-        while (list($key, $name) = each($params)) {
-            $where .= $prefix."'".$name."'";
-	    $prefix = ",";
-	}
-        if ($where != "") {
-	    $where .= ")";
-        }
-
-        $res = db_query("select * from users ".$where);
-        $result_array = array();
-
-        if ($res && db_numrows($res) > 0) {
-	    while ( $row = db_fetch_array($res) ) {
-	        while (list($key, $val) = each($row)) {
-	            if (!is_int($key)) {
-		        $result_array[] = $key;
-		        $result_array[] = "$val";
-		    }
-	        }
-	    }
-        }
-        return new soapval('tns:userInfo','ArrayOfstring',$result_array);
-    } 
-    return new soap_fault ('1001', 'user', 'Unknown Function('.$func.') Must be get|set|add|delete', 'No Detail');
+	if ($func == "get") {
+		$where = "";
+		$prefix = " where user_name in (";
+		while (list($key, $name) = each($params)) {
+			$where .= $prefix."'".$name."'";
+			$prefix = ",";
+		}
+		if ($where != "") {
+			$where .= ")";
+		}
+	
+		$res = db_query("select * from users ".$where);
+		$result_array = array();
+		
+		if ($res && db_numrows($res) > 0) {
+			while ( $row = db_fetch_array($res) ) {
+				while (list($key, $val) = each($row)) {
+					if (!is_int($key)) {
+						$result_array[] = $key;
+						$result_array[] = "$val";
+					}
+				}
+			}
+		}
+		return new soapval('tns:userInfo','ArrayOfstring',$result_array);
+	} 
+	return new soap_fault ('1001', 'user', 'Unknown Function('.$func.') Must be get|set|add|delete', 'No Detail');
 }
 
 function group($func, $params){
-    if ($func == "get") {
-        $where = "";
-        $prefix = " where unix_group_name in (";
-        while (list($key, $name) = each($params)) {
-            if ($name != "all") {
-                $where .= $prefix."'".$name."'";
-                $prefix = ",";
-            }
-   	}
-        if ($where != "") {
-	    $where .= ")";
-        }
-
-        $res = db_query("select group_id, group_name, is_public, status, unix_group_name from groups ".$where);
-        $result_array = array();
-
-        if ($res && db_numrows($res) > 0) {
-	    while ( $row = db_fetch_array($res) ) {
-		$inner_array = array();
-	        while (list($key, $val) = each($row)) {
-	            if (!is_int($key)) {
-		        $inner_array[$key] = $val;
-		    }
-	        }
-		$result_array[] = $inner_array;
-	    }
-        }
-
-        return new soapval('GroupObject','tns:GroupObject',$result_array);
-    } 
-    return new soap_fault ('1001', 'user', 'Unknown Function('.$func.') Must be \'get\'', 'No Detail');
+	if ($func == "get") {
+		$where = "";
+		$prefix = " where unix_group_name in (";
+		while (list($key, $name) = each($params)) {
+			if ($name != "all") {
+				$where .= $prefix."'".$name."'";
+				$prefix = ",";
+			}
+		}
+		if ($where != "") {
+			$where .= ")";
+		}
+		$res = db_query("select group_id, group_name, is_public, status, unix_group_name from groups ".$where);
+		$result_array = array();
+		if ($res && db_numrows($res) > 0) {
+			while ( $row = db_fetch_array($res) ) {
+				$inner_array = array();
+				while (list($key, $val) = each($row)) {
+					if (!is_int($key)) {
+						$inner_array[$key] = $val;
+					}
+				}
+				$result_array[] = $inner_array;
+			}
+		}
+		return new soapval('GroupObject','tns:GroupObject',$result_array);
+	} 
+	return new soap_fault ('1001', 'user', 'Unknown Function('.$func.') Must be \'get\'', 'No Detail');
 }
 
 
@@ -422,4 +444,3 @@ if(isset($log) and $log != ''){
 	harness('nusoap_r2_base_server',$server->headers['User-Agent'],$server->methodname,$server->request,$server->response,$server->result);
 }
 ?>
-
