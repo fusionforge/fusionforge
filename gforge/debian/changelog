@@ -1,5 +1,7 @@
 sourceforge (2.6-0+9+) unstable; urgency=low
 
+  * [Christian] Added savannah converted themes and appropriate db inserts
+  * [Christian] Added README.Themes
   * [Christian] Corrected wrong link in menu.php for lastlogin.php.
   * [Roland] *Lots* of patches from Olafur Osvaldsson <oli@isnic.is>
     applied, many thanks to him.

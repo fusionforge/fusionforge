@@ -1,0 +1,304 @@
+<?php   
+
+//
+// Copyright 1999-2000 (c) The SourceForge Crew
+//
+//  This is a modified version made by the Savannah Project
+//  Copyright 2000-2001 (c) Free Software Foundation
+//
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+//
+//
+// http://sourceforge.net
+//              
+// $Id$
+
+
+/*
+
+	Extends the basic Error class to add HTML functions for displaying all site dependent HTML, while allowing extendibility/overriding by themes via the Theme class.
+
+	Make sure browser.php is included _before_ you create an instance of this object.
+
+	Geoffrey Herteg, August 29, 2000
+
+*/
+
+class Theme extends Layout {
+
+	var $theme_id;
+	var $long_name;
+	var $dir_name;
+
+	function Theme() {
+		// Parent constructor
+		$this->Layout();
+
+		// The root location for images
+		$this->imgroot = "themes/savannah_sad/images/";
+		$this->imgproj = "themes/savannah_sad/images/";
+
+		//Define all the icons for this theme
+		$this->icons = array('Summary' => 'ic/anvil24.png',
+			'Homepage' => 'ic/home.png',
+			'Forums' => 'ic/notes.png',
+			'Bugs' => 'ic/bug.png',
+			'Support' => 'ic/support.png',
+			'Patches' => 'ic/patch.png',
+			'Lists' => 'ic/mail.png',
+			'Tasks' => 'ic/index.png',
+			'Docs' => 'ic/docman.png',
+			'Surveys' => 'ic/survey.png',
+			'News' => 'ic/news.png',
+			'CVS' => 'ic/convert.png',
+			'Files' => 'ic/save.png'
+		);
+
+		$this->bgpri = array();
+
+		/*
+	        Set up the priority color array one time only
+		*/
+		$bgpri[1] = 'priora';
+		$bgpri[2] = 'priorb';
+		$bgpri[3] = 'priorc';
+		$bgpri[4] = 'priord';
+		$bgpri[5] = 'priore';
+		$bgpri[6] = 'priorf';
+		$bgpri[7] = 'priorg';
+		$bgpri[8] = 'priorh';
+		$bgpri[9] = 'priori';
+	}
+
+	// Box Top, equivalent to html_box1_top()
+	function box1_top($title,$echoout=1,$bgcolor=''){
+        	$return = '<table summary="" class="boxtable">
+                        <tr>
+                                <td colspan="2" class="boxtitle">'.$title.'</td>
+                        </tr>
+                       <tr>
+                                <td colspan="2" class="boxitem">';
+	        if ($echoout) {
+        	        print $return;
+	        } else {
+                	return $return;
+        	}
+	}
+
+	// Box Middle, equivalent to html_box1_middle()
+	function box1_middle($title,$bgcolor='') {
+        	return '
+                                </td>
+                        </tr>
+                        <tr>
+                                <td colspan="2" class="boxtitle">'.$title.'</td>
+                        </tr>
+                        <tr>
+                                <td colspan=2 class="boxitem">';
+	}
+
+	// Box Bottom, equivalent to html_box1_bottom()
+	function box1_bottom($echoout=1) {
+        	$return = '
+                </td>
+                        </tr>
+        </table>
+';
+	        if ($echoout) {
+        	        print $return;
+	        } else {
+                	return $return;
+        	}
+	}
+
+	function generic_header_start($params) {
+
+        	global $G_USER, $G_SESSION;
+
+	        if (!$params['title']) {
+        	        $params['title'] = "Savannah";
+	        } else {
+        	        $params['title'] = "Savannah: " . $params['title'];
+	        }
+        	?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/REC-html40/loose.dtd">
+
+<html lang="en">
+  <head>
+    <title><?php echo $params['title']; ?></title>
+       <SCRIPT language="JavaScript" type="text/javascript">
+        <!--
+        function help_window(helpurl) {
+                HelpWin = window.open(helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=550,width=500');
+		HelpWin.focus();
+        }
+        // -->
+        </SCRIPT>
+    <meta name="Author" content="Copyright (C) 2000, 2001, 2002 Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111, USA Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved">
+    <meta name="Keywords" content="Savannah,GNU, FSF, Free Software Foundation, Linux, Emacs, GCC, Unix, Free Software, Operating System, GNU Kernel, HURD, GNU HURD, SourceForge">
+    <meta name="Description" content="Savannah is a central point for development, distribution and maintainance of Free Software. It allows contributors to easily join existing Free Software projects.">
+	<?php
+	// 2002-04-15 yeupou@coleumes.org
+	// NOW we stop to use favico.ico read http://bugzilla.mozilla.org/show_bug.cgi?id=110296
+	?>
+    <link rel="stylesheet" type="text/css" href="/themes/savannah_sad/debiansf.css">
+    <link rel="icon" type="image/png" href="/images/icon.png">
+<?php
+	}
+
+	function generic_header_end($params) {
+	?>
+  </head>
+<?php
+	}
+
+	function generic_footer($params) {
+
+	        global $IS_DEBUG,$QUERY_COUNT,$Language;
+        	if ($IS_DEBUG && user_ismember(1,'A')) {
+	                echo "<CENTER><B><FONT COLOR=RED>Query Count: $QUERY_COUNT</FONT
+></B></CENTER>";
+                	echo "<P>$GLOBALS[G_DEBUGQUERY]";
+        	}
+	        ?>
+<p class="footer">
+Copyright (C) 2000, 2001, 2002 Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111, USA 
+
+Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved.
+
+</p>&nbsp;
+<span class="center">
+<? echo $Language->getText('general', 'footer'); ?>
+</span>
+
+</body>
+</html>
+        <?php
+	}
+
+	function header($params) {
+	        $this->generic_header_start($params); 
+
+        	//themable someday?
+	        $site_fonts='helvetica,sans-serif';
+
+        $this->generic_header_end($params); 
+
+?>
+
+<body>
+
+<!-- start page body -->
+<table summary="" class="standardtable">
+        <tr>
+                <td colspan="3">
+<!-- start main body cell -->
+
+        <table summary="" class="standardtable">
+                <tr>
+                        <td class="menutable">
+
+        <?php
+        if (!session_issecure()) {
+                //print '<IMG src="/images/clear.png" width=140 height=1 alt="Counter"><BR>';
+        } else {
+                //print html_blankimage(1,140) . '<br>';
+        }
+        ?>
+
+        <a href="/"><?php print html_image($this->imgroot . "floating.png",'150','130',array('alt'=>'Floating GNU')); ?></a>
+        <p>
+        <!-- menus -->
+        <?php
+        menu_print_sidebar($params);
+        ?>
+        <P>
+        </TD>
+
+	<td class="contenttable">
+        <BR>
+<?php
+	}
+
+	function footer($params) {
+        ?>
+        <!-- end content -->
+        </tr>
+        </table>
+                </td>
+        </tr>
+</table>
+
+<!-- themed page footer -->
+<?php 
+	$this->generic_footer($params);
+	}
+
+
+
+	function menuhtml_top($title) {
+        	/*
+                	Use only for the top most menu
+	        */
+        ?>
+<table summary="" class="menutable">
+        <tr>
+                <td class="menutitle"><?php echo $title; ?><br></td>
+        </tr>
+        <tr>
+                <td class="menuitem">
+        <?php
+	}
+
+
+	function menuhtml_bottom() {
+	        /*
+        	        End the table
+	        */
+        	print '
+                        <BR>
+                        </td>
+                </tr>
+        </table>
+';
+	}
+
+	function menu_entry($link, $title) {
+        	print "\t".'<a href="'.$link.'">'.$title.'</a>&nbsp;&nbsp;';
+		print html_image($this->imgroot . "point.png",'7','7',array('alt'=>' > '));
+		print '&nbsp;&nbsp;<br>';
+	}
+
+        /*!     @function tab_entry
+                @abstract Prints out the a themed tab, used by project_tabs
+                @param  $url is the URL to link to
+			$icon is the image to use (if the theme uses it)
+			$title is the title to use in the link tags
+			$selected is a boolean to test if the tab is 'selected'
+                @result text - echos HTML to the screen directly
+        */
+	function tab_entry($url='http://localhost/', $icon='', $title='Home', $selected=0) {
+        	print '
+                <A ';
+	        if ($selected){
+        	        print 'class=tabselect ';
+	        } else {
+        	        print 'class=tabs ';
+	        }
+        	print 'href="'. $url .'">' . $title . '</A>&nbsp;|&nbsp;';
+	}
+}
+?>

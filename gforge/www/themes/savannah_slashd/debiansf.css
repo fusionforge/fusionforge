@@ -1,0 +1,118 @@
+/*
+ *
+ * the Savannah Project
+ * Copyright 2002 (c) Mathieu Roy <yeupou@gnu.org>
+ * See the ChangeLog file for a detailed list of changes
+ *
+ *  http://savannah.gnu.org 
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * $Id$
+ *
+*/
+
+/* general stuff */
+BODY { 
+  margin-top: 1%;
+  margin-left: 1%;
+  margin-right: 1%;
+  margin-bottom: 1%;
+  background: #000000;
+  font-family: arial,helvetica;
+  font-size: small;
+  color: #ffffff;
+;
+}
+
+A { text-decoration: none; color: #006666;}
+a:hover { text-decoration: underline; color: #009391; }
+a:active { color: #00618e; }
+
+.smaller { font-size: smaller; }
+.small { font-size: small; }
+.xsmall { font-size: xx-small; }
+.center { text-align: center; }
+.left { text-align: left; }
+.error { font-weight: bold; color: #980000; }
+.bold { font-weight: bold; }
+
+PRE,TT { font-family: courier,sans-serif; }
+HR { width: 99%; } 
+input { background-color: #ffffff; border: thin solid #006666; color: #006666 }
+select { background-color: #ffffff; border: thin solid #006666; color: #006666 }
+option { background-color: #ffffff; border: thin solid #006666; color: #006666 }
+textarea { background-color: #ffffff; border: thin solid #006666; color: #006666 }
+
+.footer { font-size: x-small; }
+.standardtable {  background: #ffffff; width: 99%; border-spacing: 0; border: 0;color: #000000; }
+
+/* content frame specific */
+.contenttable { background: #ffffff; vertical-align: top; width: 99%; border-spacing: 0; border: 0;  color: #000000; }
+
+/* left menu specific */
+.menutable { background: #ffffff; vertical-align: top; width: 150px; border-spacing: 0; border: 0; font-size: small; color: #000000;}
+.menutitle { background-color: #cccccc;vertical-align: top; font-weight: bold; text-align: left; }
+.menuitem { border: thin solid #cccccc; vertical-align: top; text-align: right; }
+.menusearch { font-size: xx-small; } 
+
+/* classic box */
+.boxtable { width: 99%; vertical-align: top; border-spacing: 1px; border: 0; }
+.boxtitle { background: #006666; font-weight: bold; text-align: center; text-transform: capitalize; color: #ffffff; }
+      /* if there's a link in boxtitle, we use sortbutton */
+      .sortbutton { color: #ffffff; }
+      /*.sortbutton:hover { color: #917400; }*/
+.boxitem { text-align: left; }
+
+.boxitemalt { background-color: #e2f9ff; text-align: left; }
+
+
+
+/* priority  */
+.priora { background-color: #d8ffeb; }
+.priorb { background-color: #cbffe4; }
+.priorc { background-color: #bcffdc; }
+.priord { background-color: #adffd4; }
+.priore { background-color: #a3ffcf; }
+.priorf { background-color: #93ffc7; }
+.priorg { background-color: #87ffc1; }
+.priorh { background-color: #77ffb9; }
+.priori { background-color: #6bffb2; }
+
+/* page specific */
+  /* index.php */
+  .indexcenter { vertical-align: top; width: 65%; }
+  .indexright { vertical-align: top; width: 35%; }
+
+
+
+.tabs { color: #000000; }
+.tabselect { }
+.tabselect:hover { text-decoration: none; color: #009391; }
+
+        .titlebar { }
+        .develtitle {  }
+        .legallink {  }
+
+
+
+/* This is the original Sourceforge css.. we let this stuff here until this savaannah css is fully used */
+
+SPAN.center { text-align: center; }
+SPAN.boxspace { font-size: 2pt; }
+SPAN.alignright { text-align: right }
+SPAN.maintitlebar { }
+SPAN.titlebar { }
+
+

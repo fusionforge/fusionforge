@@ -1402,6 +1402,16 @@ CREATE UNIQUE INDEX statssubdpages_oid ON stats_subd_pages USING btree (oid);
 -- Add two new themes
 INSERT INTO themes (dirname, fullname) VALUES ('debian', 'Debian') ;
 INSERT INTO themes (dirname, fullname) VALUES ('savannah', 'Savannah') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_reverse', 'Savannah Reverse') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_sad', 'Savannah Sad') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_savannah', 'Savannah Original') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_slashd', 'Savannah SlashDot') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_startrek', 'Savannah StarTrek') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_transparent', 'Savannah Transparent') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_water', 'Savannah Water') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah_www.gnu.org', 'Savannah www.gnu.org') ;
 
 -- Constraints
 ALTER TABLE project_group_list ADD CONSTRAINT project_group_list_group_id_fk
