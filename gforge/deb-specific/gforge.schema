@@ -86,4 +86,6 @@ objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.1 NAME 'debSfAccount' SUP top AUXILIARY
 
 objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.2 NAME 'debSfMailingList' SUP top AUXILIARY
 	DESC 'Abstraction of a Sourceforge Mailing List' 
-	MAY ( debSfListPostAddress $ debSfListOwnerAddress $ debSfListRequestAddress ) )
+	MAY ( debSfListPostAddress $ debSfListOwnerAddress $ debSfListRequestAddress
+	$ debSfListAdminAddress $ debSfListBouncesAddress $ debSfListConfirmAddress $ debSfListJoinAddress
+	$ debSfListLeaveAddress $ debSfListSubscribeAddress $ debSfListUnsubscribeAddress) )

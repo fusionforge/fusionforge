@@ -5,8 +5,10 @@ gforge (3rc2-1+) unstable; urgency=low
     unregister-theme too (which just disables the theme).
   * [Christian] Updated French.tab contributed by Linac (Angouleme Lug) for
     Adullact <michel.bondaz@linac.org>
+  * [Roland] Applied patch #330 fixing LDAP schema.  Thanks, Alwyn
+    Schoeman <alwyn@smart.com.ph>.
 
- -- Christian Bayle <bayle@debian.org>  Wed, 14 May 2003 00:36:41 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 15 May 2003 13:45:34 +0200
 
 gforge (3rc2-1) unstable; urgency=low
 
