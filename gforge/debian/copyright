@@ -1,9 +1,13 @@
-This package was debianized by Roland Mas <99.roland.mas@aist.enst.fr> on
-Wed, 22 Nov 2000 22:06:35 +0100.
+This package was first debianized on Wed, 22 Nov 2000 22:06:35 +0100
+by Roland Mas <lolando@debian.org>.  Work has been constant since
+then, and the package evolved a great deal.  It started working, for a
+start.
 
-It was downloaded from http://www.sourceforge.net/
+The original sources were downloaded from http://www.sourceforge.net/
 
-Upstream Author(s): The Sourceforge crew at VA Linux
+Authors: The Sourceforge crew at VA Linux.  They are many, they
+change as time goes by, and they are listed on the Sourceforge
+website.  Let them be thanked for their work.
 
 Copyright:
 
