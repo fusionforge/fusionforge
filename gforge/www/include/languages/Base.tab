@@ -327,7 +327,7 @@ admin_responses	response_text	Response Text:
 admin_responses	response_title	Response Title: 
 admin_responses	title	Site Admin: Edit Rejection Responses
 admin_responses	yes_im_sure	Yes, I'm sure
-admin_responses	you_cant	You can't $1 \"None\", bozo!
+admin_responses	you_cant	You can't $1 \"None\"!
 admin_search	email	Email
 admin_search	full_name	Full Name
 admin_search	group_search_criteria	Group search with criteria
