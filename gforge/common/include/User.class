@@ -982,6 +982,65 @@ class User extends Error {
 		return !$this->data_array['block_ratings'];
 	}
 
+	function getPlugins() {
+		if (!isset($this->plugins_data)) {
+			$this->plugins_data = array () ;
+			$sql="SELECT user_plugin.plugin_id, plugins.plugin_name
+			      FROM user_plugin, plugins
+			      WHERE user_plugin.user_id=".$this->getID()."
+                                AND user_plugin.plugin_id = plugins.plugin_id" ;
+			$res=db_query($sql);
+			$rows = db_numrows($res);
+
+			for ($i=0; $i<$rows; $i++) {
+				$plugin_id = db_result($res,$i,'plugin_id');
+				$this->plugins_data[$plugin_id] = db_result($res,$i,'plugin_name');
+			}
+		}
+		return $this->plugins_data ;
+	}
+
+	function usesPlugin($pluginname) {
+		$plugins_data = $this->getPlugins() ;
+		foreach ($plugins_data as $p_name) {
+			if ($p_name == $pluginname) {
+				return true ;
+			}
+		}
+		return false ;
+	}
+
+	function setPluginUse($pluginname, $val=true) {
+		if ($val == $this->usesPlugin($pluginname)) {
+			// State is already good, returning
+			return true ;
+		}
+		$sql="SELECT plugin_id
+		      FROM plugins
+		      WHERE plugin_name = '" . $pluginname . "'" ;
+		$res=db_query($sql);
+		$rows = db_numrows($res);
+		if ($rows == 0) {
+			// Error: no plugin by that name
+			return false ;
+		}
+		$plugin_id = db_result($res,0,'plugin_id');
+		// Invalidate cache
+		unset ($this->plugins_data) ;
+		if ($val) {
+			$sql="INSERT INTO user_plugin (user_id, plugin_id)
+                              VALUES (". $this->getID() . ", ". $plugin_id .")" ;
+			$res=db_query($sql);
+			return $res ;
+		} else {
+			$sql="DELETE FROM user_plugin
+                              WHERE user_id = ". $this->getID() . "
+                                AND plugin_id = ". $plugin_id ;
+			$res=db_query($sql);
+			return $res ;
+		}
+	}
+
 	/**
 	 *	getMailingsPrefs($mailing_id) - Get activity status for one of the site mailings
 	 *
@@ -1133,5 +1192,10 @@ function user_getname($user_id = false) {
 		}
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

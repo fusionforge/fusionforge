@@ -125,6 +125,13 @@ class Group extends Error {
 	var $types_res;
 
 	/**
+	 * Associative array of data for plugins
+	 * 
+	 * @var array $plugins_array
+	 */
+	var $plugins_array;
+
+	/**
 	 *	Group() - Group object constructor - use group_get_object() to instantiate
 	 *
 	 *	@param	int		Required - group_id of the group you want to instantiate
@@ -947,6 +954,65 @@ class Group extends Error {
 		return $this->data_array['use_pm_depend'];
 	}
 
+	function getPlugins() {
+		if (!isset($this->plugins_data)) {
+			$this->plugins_data = array () ;
+			$sql="SELECT group_plugin.plugin_id, plugins.plugin_name
+                              FROM group_plugin, plugins
+			      WHERE group_plugin.group_id='".$this->getID()."
+                                AND group_plugin.plugin_id = plugins.plugin_id" ;
+			$res=db_query($sql);
+			$rows = db_numrows($res);
+
+			for ($i=0; $i<$rows; $i++) {
+				$plugin_id = db_result($res,$i,'plugin_id');
+				$this->plugins_data[$plugin_id] = db_result($res,$i,'plugin_name');
+			}
+		}
+		return $this->plugins_data ;
+	}
+
+	function usesPlugin($pluginname) {
+		$plugins_data = $this->getPlugins() ;
+		foreach ($plugins_data as $p_id => $p_name) {
+			if ($p_name == $pluginname) {
+				return true ;
+			}
+		}
+		return false ;
+	}
+
+	function setPluginUse($pluginname, $val=true) {
+		if ($val == $this->usesPlugin($pluginname)) {
+			// State is already good, returning
+			return true ;
+		}
+		$sql="SELECT plugin_id
+		      FROM plugins
+		      WHERE plugin_name = '" . $pluginname . "'" ;
+		$res=db_query($sql);
+		$rows = db_numrows($res);
+		if ($rows == 0) {
+			// Error: no plugin by that name
+			return false ;
+		}
+		$plugin_id = db_result($res,0,'plugin_id');
+		// Invalidate cache
+		unset ($this->plugins_data) ;
+		if ($val) {
+			$sql="INSERT INTO group_plugin (group_id, plugin_id)
+                              VALUES (". $this->getID() . ", ". $plugin_id .")" ;
+			$res=db_query($sql);
+			return $res ;
+		} else {
+			$sql="DELETE FROM group_plugin
+                              WHERE group_id = ". $this->getID() . "
+                                AND plugin_id = ". $plugin_id ;
+			$res=db_query($sql);
+			return $res ;
+		}
+	}
+
 	// Warning: names for 2 functions below were choosen to be
 	// consistent with trackers code
 
@@ -1559,5 +1625,10 @@ class Group extends Error {
 	  return true;
 	}
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

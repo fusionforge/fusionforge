@@ -8,8 +8,6 @@ use diagnostics ;
 
 use vars qw/$dbh @reqlist $thdir $thname/ ;
 
-use vars qw/@skills/ ;
-
 sub debug ( $ ) ;
 
 require ("/usr/lib/sourceforge/lib/include.pl") ; # Include all the predefined functions 
@@ -41,15 +39,15 @@ eval {
 
     $thdir = $dbh->quote ($thdir) ;
     $thname = $dbh->quote ($thname) ;
-    
-    $query = "INSERT INTO themes (dirname, fullname) VALUES ($thdir, $thname)" ;
-    
+
+    $query = "INSERT INTO themes (dirname, fullname) VALUES ('$thdir', '$thname')" ;
+
     # debug $query ;
-    
+
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     $sth->finish () ;
-    
+
     # debug "Committing." ;
     $dbh->commit () ;
 
