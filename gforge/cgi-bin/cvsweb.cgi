@@ -177,6 +177,7 @@ $where =~ tr|/|/|s;
 $doCheckout = ($where =~ /^\/$checkoutMagic/);
 $where =~ s|^/($checkoutMagic)?||;
 $where =~ s|/+$||;
+$where =~ s|^/+||;
 if ($where) {
     $scriptwhere = $scriptname . '/' . urlencode($where);
 }
@@ -336,6 +337,7 @@ if ($input{'cvsroot'}) {
     $input{'cvsroot'} =~ s/\.//g; # we do not like dots
     if ( -d ($CVSROOT{"$cvstree"} . "/" . $input{'cvsroot'}) ) {
 	$cvsroot = $CVSROOT{"$cvstree"} . "/" . $input{'cvsroot'};
+	$cvstree = $input{'cvsroot'};
     } else {
     	&fatal("500 Internal Error", "<strong>no such project</strong>");
     }
