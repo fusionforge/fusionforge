@@ -1,3 +1,8 @@
+2003-07-28 Tom Copeland  <tom@infoether.com>
+
+	* www/snippet/detail.php:
+	Fixed bug [ #459 ] Snippet formatting is a bit off
+
 2004-07-25  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/languages/Base.tab:

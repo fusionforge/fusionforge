@@ -100,8 +100,7 @@ if ($type=='snippet') {
 		<hr />
 		<h2>'.$Language->getText('snippet_detail','latest_snippet_version').' :'.db_result($result,0,'version').'</h2>
 		<p>
-		<pre><span style="font-size:smaller">
-		'. db_result($result,0,'code') .'
+		<pre><span style="font-size:smaller">'. db_result($result,0,'code') .'
 		</span></pre>
 		</p>';
 	/*
