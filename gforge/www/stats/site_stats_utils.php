@@ -349,7 +349,6 @@ function stats_site_projects_daily( $span ) {
 	}
 
 	$sql="SELECT * FROM stats_site_vw 
-		WHERE 
 		ORDER BY month DESC, day DESC";
 
 	if ($span == 30) {
