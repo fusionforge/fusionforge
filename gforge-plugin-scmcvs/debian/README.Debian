@@ -1,8 +1,0 @@
-gforge-plugin-scmcvs for Debian
--------------------------------
-
-This plugin holds the CVS stuff.  It is intended as both a proof of
-concept (that the CVS code could be separated from the core code) and
-as a first step towards choice of SCM systems.
-
- -- Roland Mas <lolando@debian.org>, Sat Feb 21 15:31:21 2004
