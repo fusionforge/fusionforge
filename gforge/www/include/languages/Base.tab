@@ -765,6 +765,7 @@ forum_forum	changeview	Change View
 forum_forum	date	Date
 forum_forum	flat	Flat
 forum_forum	forum	Forum
+forum_forum	description	Description
 forum_forum	lastpost	Last Post
 forum_forum	nested	Nested	
 forum_forum	next_messages	Next Messages
