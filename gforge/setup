@@ -95,13 +95,36 @@ computedefault(){
 	DEFAULTsys_localinc=$ETCDIR/local.inc
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTsys_plugins_path=/usr/lib/gforge/plugins/
-	DEFAULTsys_sslcrt=/etc/apache/ssl.crt/server.crt
-	DEFAULTsys_sslkey=/etc/apache/ssl.key/server.key
+	DEFAULTsys_sslcrt=$(findkey)
+	DEFAULTsys_sslkey=$(findcrt)
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR
 	#vhost_name
 	#docdir
+}
+
+findcrt(){
+	if [ -f /etc/apache2/ssl/apache.pem ]
+	then
+		echo /etc/apache2/ssl/apache.pem
+	else
+		if [ -f /etc/apache/ssl.crt/server.crt ]
+		then 
+		 	echo /etc/apache/ssl.crt/server.crt
+		fi
+	fi
+}
+findkey(){
+	if [ -f /etc/apache2/ssl/apache.pem ]
+	then
+		echo /etc/apache2/ssl/apache.pem
+	else
+		if [ -f /etc/apache/ssl.key/server.crt ]
+		then 
+			echo /etc/apache/ssl.key/server.key
+		fi
+	fi
 }
 
 writedefault(){
