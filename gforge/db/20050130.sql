@@ -1,6 +1,9 @@
 ALTER TABLE artifact ADD COLUMN last_modified_date integer;
 ALTER TABLE project_task ADD COLUMN last_modified_date integer;
 
+update project_task SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
+update artifact SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
+
 CREATE FUNCTION "update_last_modified_date" () RETURNS OPAQUE AS '
 BEGIN
 NEW.last_modified_date = EXTRACT(EPOCH FROM now())::integer;
@@ -50,7 +53,7 @@ SELECT  artifact.artifact_id,
         artifact_status.status_name,
         artifact_category.category_name,
         artifact_group.group_name,
-        artifact_resolution.resolution_name
+        artifact_resolution.resolution_name,
         artifact.last_modified_date
 FROM    users u,
         users u2,
