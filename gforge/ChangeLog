@@ -1,5 +1,8 @@
 2003-11-29  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* utils/include.pl (db_drop_table_if_exists): Execute the
+	statement, don't just prepare it.
+
 	* www/tracker/browse.php, common/tracker/ArtifactFactory.class,
 	www/include/languages/Japanese.tab,
 	www/include/languages/Base.tab: "Last changed" filter for tracker

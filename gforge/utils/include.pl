@@ -58,6 +58,7 @@ sub db_drop_table_if_exists {
     if ($n != 0) {
 	$sql = "DROP TABLE $tn";
 	$res = $dbh->prepare($sql);
+	$res->execute () ;
 	$res->finish () ;
     }
 }
