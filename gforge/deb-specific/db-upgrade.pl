@@ -297,6 +297,34 @@ eval {
 	      $dbh->commit () ;
 	  }
 
+ 	  $version = &get_db_version ;
+ 	  $target = "2.5-30" ;
+ 	  if (is_lesser $version, $target) {
+ 	      debug "Adding rows to supported_languages." ;
+	      @reqlist = (
+			  "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian')",
+			  "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek')",
+			  "INSERT INTO supported_languages VALUES (18,'Indonesian','Indonesian.class','Indonesian')",
+			  "INSERT INTO supported_languages VALUES (19,'Portuguese (Brazillian)','PortugueseBrazillian.class','Portuguese (Brazillian)')",
+			  "INSERT INTO supported_languages VALUES (20,'Polish','Polish.class','Polish')",
+			  "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese')",
+			  "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian')"
+			  ) ;
+	      
+	      foreach my $s (@reqlist) {
+		  $query = $s ;
+		  # debug $query ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  $sth->finish () ;
+	      }
+	      @reqlist = () ;
+	      
+ 	      &update_db_version ($target) ;
+ 	      debug "Committing." ;
+ 	      $dbh->commit () ;
+ 	  }
+
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+temp+data+dropped" ;
 	  if (is_lesser $version, $target) {
