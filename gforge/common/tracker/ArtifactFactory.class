@@ -47,8 +47,8 @@ class ArtifactFactory extends Error {
 	var $status;
 	var $category;
 	var $group;
-        var $changed_from;
-        var $last_changed;
+	var $changed_from;
+	var $last_changed;
 	var $assigned_to;
 	var $offset;
 	var $max_rows;
@@ -179,9 +179,9 @@ class ArtifactFactory extends Error {
 	 *	@param	int	The changed_from - offset time(sec) from now
 	 */
 	function setChangedFrom($changed_from) {
-                $this->changed_from = ($changed_from <= 0) ? 0x7fffffff : $changed_from;
-                $this->last_changed = time() - $this->changed_from;
-        }
+		$this->changed_from = ($changed_from <= 0) ? 0x7fffffff : $changed_from;
+		$this->last_changed = time() - $this->changed_from;
+	}
 
 
 	/**
@@ -230,8 +230,8 @@ class ArtifactFactory extends Error {
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
 			 $status_str $assigned_str $category_str $group_str
-                         and (update_date>'" . $this->last_changed . "'
-                             or message_date >'" . $this->last_changed . "')   
+			and (update_date>'" . $this->last_changed . "'
+			or message_date >'" . $this->last_changed . "')   
 			ORDER BY group_artifact_id ".$this->sort.", ". $this->order_col ." ".$this->sort;
 
 

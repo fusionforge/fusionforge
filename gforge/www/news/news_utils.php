@@ -17,7 +17,12 @@
 */
 
 function news_header($params) {
-	global $DOCUMENT_ROOT,$HTML,$group_id,$news_name,$news_id,$sys_news_group,$Language;
+	global $DOCUMENT_ROOT,$HTML,$group_id,$news_name,$news_id,$sys_news_group,$Language,$sys_use_news;
+
+	if (!$sys_use_news) {
+		exit_disabled();
+	}
+
 	$params['toptab']='news';
 	$params['group']=$group_id;
 	/*

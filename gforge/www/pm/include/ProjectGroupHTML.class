@@ -19,7 +19,11 @@
 require_once('common/pm/ProjectGroup.class');
 
 function pm_header($params) {
-	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order,$pg, $Language;
+	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order,$pg,$Language,$sys_use_pm;
+
+	if (!$sys_use_pm) {
+		exit_disabled();
+	}
 
 	//required by site_project_header
 	$params['group']=$group_id;

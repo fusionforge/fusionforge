@@ -18,9 +18,12 @@
 */
 
 function survey_header($params) {
-	global $group_id,$is_admin_page,$DOCUMENT_ROOT;
-	global $Language;
-	
+	global $group_id,$is_admin_page,$DOCUMENT_ROOT,$Language,$sys_use_survey;
+
+	if (!$sys_use_survey) {
+		exit_disabled();
+	}
+
 	$params['toptab']='surveys';
 	$params['group']=$group_id;
 

@@ -62,8 +62,8 @@ $sql="INSERT INTO project_counts_weekly_tmp
 SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count 
 FROM forum,forum_group_list 
 WHERE forum.group_forum_id=forum_group_list.group_forum_id 
-AND date > '$last_week' 
-AND date < '$this_week'
+AND post_date > '$last_week' 
+AND post_date < '$this_week'
 GROUP BY group_id";
 $rel = db_query($sql);
 

@@ -61,6 +61,15 @@ function exit_missing_param() {
 }
 
 /**
+ * exit_disabled() - Exit with disabled feature error.
+ */
+function exit_disabled() {
+	global $Language;
+	exit_error($Language->getText('exit','disabled_title'),$Language->getText('exit','disabled_body'));
+}
+
+/**
+/**
  *	exit_assert_object() - Assert validity of Error-derived object
  *
  *	Should be used at the beginning of the code, when

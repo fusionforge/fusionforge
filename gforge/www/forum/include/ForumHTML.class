@@ -23,7 +23,11 @@ require_once('note.php');
 require_once('www/news/news_utils.php');
 
 function forum_header($params) {
-	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f;
+	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum;
+
+	if (!$sys_use_forum) {
+		exit_disabled();
+	}
 
 	$params['group']=$group_id;
 	$params['toptab']='forums';

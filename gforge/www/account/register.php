@@ -24,7 +24,8 @@ if ($submit) {
 	*/
 	$new_user = new User();
 	$register = $new_user->create($unix_name,$realname,$password1,$password2,
-		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only);
+		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,'',
+		$address,$phone,$fax,$title);
 	if ($register) {
 		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
 
@@ -82,6 +83,18 @@ if ($sys_use_jabber) {
     '.$Language->getText('account_register','jabberonly').'.';
 }
 ?>
+<p>
+<?php echo $Language->getText('account_options', 'address'); ?><br />
+<input type="text" name="address" value="<?php echo $address; ?>" size="80">
+<p>
+<?php echo $Language->getText('account_options', 'phone'); ?><br />
+<input type="text" name="phone" value="<?php echo $phone; ?>" size="20">
+<p>
+<?php echo $Language->getText('account_options', 'fax'); ?><br />
+<input type="text" name="fax" value="<?php echo $fax; ?>" size="20">
+<p>
+<?php echo $Language->getText('account_options', 'title2'); ?><br />
+<input type="text" name="title" value="<?php echo $title; ?>" size="10">
 <p>
 <input type="checkbox" name="mail_site" value="1" checked>
 <?php echo $Language->getText('account_register','siteupdate'); ?>

@@ -45,7 +45,7 @@ if ($submit) {
 	}
 
 	if (!$u->update($realname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-		$jabber_address,$jabber_only)) {
+		$jabber_address,$jabber_only,$address,$phone,$fax,$title)) {
 		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
 		$feedback .= $Language->getText('account','updated').'<br />';
@@ -122,6 +122,26 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 <td><strong><?php print $u->getEmail(); ?></strong>
 <br /><a href="change_email.php">[<?php echo $Language->getText('account_options', 'change_email_address'); ?>]</a>
 </td>
+</tr>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options', 'address'); ?></td>
+	<td><input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"></td>
+</tr>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options', 'phone'); ?></td>
+	<td><input type="text" name="phone" value="<?php echo $u->getPhone(); ?>" size="20"></td>
+</tr>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options', 'fax'); ?></td>
+	<td><input type="text" name="fax" value="<?php echo $u->getFax(); ?>" size="20"></td>
+</tr>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options', 'title2'); ?></td>
+	<td><input type="text" name="title" value="<?php echo $u->getTitle(); ?>" size="10"></td>
 </tr>
 
 <?php

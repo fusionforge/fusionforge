@@ -76,6 +76,10 @@ account_options	change_email_address	Change Email Addr
 account_options	change_password	Change Password
 account_options	edit_skills_profile	Edit My Skills Profile
 account_options	email_address		Email Addr:
+account_options	address		Complete Address:
+account_options	phone		Phone:
+account_options	fax		FAX:
+account_options	title2		Title:
 account_options	language	Language:
 account_options	login_name	Login Name:
 account_options	member_since	Member since:
@@ -620,6 +624,8 @@ exit	choose_group_title	ERROR - No group_id was chosen
 exit	exiting_with_error	Exiting with error
 exit	missing_parameters_body	Error - missing required parameters
 exit	missing_parameters_title	Error - missing parameters
+exit	disabled_title	Error - disabled feature.
+exit	disabled_body	The Site Administrator has turned off this feature.
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
 forum	error_forum_not_found	Forum Not Found
 forum	error_invalid_group_forum_id	$1:: Invalid group_forum_id

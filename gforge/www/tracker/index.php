@@ -26,6 +26,11 @@ require_once('common/tracker/ArtifactCanned.class');
 require_once('common/tracker/ArtifactResolution.class');
 require_once('common/tracker/ArtifactTypeFactory.class');
 
+if (!$sys_use_tracker) {
+	exit_disabled();
+}
+
+
 if ($group_id && $atid) {
 
 	//

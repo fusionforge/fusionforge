@@ -138,11 +138,9 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 	if (!$res || db_numrows($res) < 1) {
 		// No user whose MD5 passwd matches the MD5 of the provided passwd
 		// Selecting by user_name only
-		$res = db_query("
-                       SELECT user_id,status,unix_pw
-                       FROM users
-	               WHERE user_name='$loginname' 
-                ");
+		$res = db_query("SELECT user_id,status,unix_pw
+					FROM users
+					WHERE user_name='$loginname'");
 		if (!$res || db_numrows($res) < 1) {
 			// No user by that name
 			$feedback=$Language->getText('session','invalidpasswd');
@@ -162,9 +160,8 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 			// Update the (MD5) user_pw and retry authentication
 			// It should work, except for status errors
 			$res = db_query ("UPDATE users
-                                          SET user_pw='" . md5($passwd) . "'
-                                          WHERE user_id='".$usr['user_id']."'
-                                          ");
+				SET user_pw='" . md5($passwd) . "'
+				WHERE user_id='".$usr['user_id']."'");
 			return session_login_valid($loginname, $passwd, $allowpending) ;
 		}
 	} else {
@@ -179,16 +176,14 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 				// Update the (crypt) unix_pw and retry authentication
 				// It should work, except for status errors
 				$res = db_query ("UPDATE users
-                                                  SET unix_pw='" . account_genunixpw($passwd) . "'
-                                                  WHERE user_id='".$usr['user_id']."'
-                                                  ");
+					SET unix_pw='" . account_genunixpw($passwd) . "'
+					WHERE user_id='".$usr['user_id']."'");
 				return session_login_valid($loginname, $passwd, $allowpending) ;
 			} else {
 				// Invalidate (MD5) user_pw, refuse authentication
 				$res = db_query ("UPDATE users
-                                                  SET user_pw='OUT OF DATE'
-                                                  WHERE user_id='".$usr['user_id']."'
-                                                  ");
+					SET user_pw='OUT OF DATE'
+					WHERE user_id='".$usr['user_id']."'");
 				$feedback=$Language->getText('session','invalidpasswd');
 				return false;
 			}
@@ -310,10 +305,15 @@ function session_require($req) {
 
 	if ($req['group']) {
 		$group =& group_get_object($req['group']);
-		exit_assert_object($group,'Group');
+		if (!$group || !is_object($group) || $group->isError()) {
+			exit_error('Error','Invalid Group');
+		}
 
 		$perm =& $group->getPermission( session_get_user() );
-		exit_assert_object($perm,'Permission');
+		if (!$perm || !is_object($perm) || $perm->isError()) {
+			exit_permission_denied();
+		}
+
 
 		if ($req['admin_flags']) {
 			//$query .= " AND admin_flags = '$req[admin_flags]'";	

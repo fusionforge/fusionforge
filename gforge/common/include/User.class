@@ -178,7 +178,8 @@ class User extends Error {
 	 *
 	 */
 	function create($unix_name,$realname,$password1,$password2,$email,
-		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$unix_box='shell') {
+		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,
+		$unix_box='shell',$address='',$phone='',$fax='',$title='') {
 		global $Language;
 		if (!$unix_name) {
 			$this->setError($Language->getText('account_register','err_username'));
@@ -231,8 +232,9 @@ class User extends Error {
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($session_hash . $password1 . time()),0,16);
 		db_begin();
-		$result=db_query("INSERT INTO users (user_name,user_pw,unix_pw,realname,email,add_date,
-			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,unix_box) 
+		$sql="INSERT INTO users (user_name,user_pw,unix_pw,realname,email,add_date,
+			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,
+			unix_box,address,phone,fax,title) 
 			VALUES ('$unix_name',
 			'". md5($password1) . "',
 			'". account_genunixpw($password1) . "',
@@ -247,15 +249,27 @@ class User extends Error {
 			'$timezone',
 			'$jabber_address',
 			'$jabber_only',
-			'$unix_box')");
-		$id = db_insertid($result,'users','user_id');
+			'$unix_box',
+			'". htmlspecialchars($address) ."',
+			'". htmlspecialchars($phone) ."',
+			'". htmlspecialchars($fax) ."',
+			'". htmlspecialchars($title) ."')";
+
+
+		$result=db_query($sql);
 	
-		if (!$result || !$id) {
-			$this->setError($Language->getText('account_register','err_badinsert') .db_error());
+		if (!$result) {
+			$this->setError($Language->getText('account_register','err_badinsert') .db_error().$sql);
 			db_rollback();
 			return false;
 		} else {
 
+			$id = db_insertid($result,'users','user_id');
+			if (!$id) {
+				$this->setError('Could Not Get USERID: ' .db_error());
+				db_rollback();
+				return false;
+			}
 			// send mail
 			if (!$this->fetchData($id)) {
 				db_rollback();
@@ -301,7 +315,7 @@ class User extends Error {
 	 *	@param	int		The users Jabber preference
 	 */
 	function update($realname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,
-		$jabber_address,$jabber_only) {
+		$jabber_address,$jabber_only,$address,$phone,$fax,$title) {
 		global $Language;
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
@@ -329,7 +343,11 @@ class User extends Error {
 			mail_va=$mail_va,
 			block_ratings='$block_ratings',
 			jabber_address='$jabber_address',
-			jabber_only='$jabber_only'
+			jabber_only='$jabber_only',
+			address='". htmlspecialchars($address) ."',
+			phone='". htmlspecialchars($phone) ."',
+			fax='". htmlspecialchars($fax) ."',
+			title='". htmlspecialchars($title) ."'
 			WHERE user_id='".$this->getID()."'
 		");
 
@@ -752,6 +770,42 @@ class User extends Error {
 	}
 
 	/**
+	 *	getAddress - get this user's address.
+	 *
+	 *	@return text	This user's address..
+	 */
+	function getAddress() {
+		return $this->data_array['address'];
+	}
+
+	/**
+	 *	getPhone - get this person's phone number.
+	 *
+	 *	@return text	This user's phone number.
+	 */
+	function getPhone() {
+		return $this->data_array['phone'];
+	}
+
+	/**
+	 *	getFax - get this person's fax number.
+	 *
+	 *	@return text	This user's fax.
+	 */
+	function getFax() {
+		return $this->data_array['fax'];
+	}
+
+	/**
+	 *	getTitle - get this person's title.
+	 *
+	 *	@return text	This user's title.
+	 */
+	function getTitle() {
+		return $this->data_array['title'];
+	}
+
+	/**
 	 *	getAuthorizedKeys - the SSH authorized keys set by the user.
 	 *
 	 *	@return	string	This user's SSH authorized (public) keys.
@@ -948,7 +1002,7 @@ class User extends Error {
 		$res=db_query("
 			UPDATE users
 			SET user_pw='" . md5($passwd) . "',
-				unix_pw='$unix_pw'
+			unix_pw='$unix_pw'
 			WHERE user_id='".$this->getID()."'
 		");
 
@@ -984,9 +1038,9 @@ class User extends Error {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
 			$sql="SELECT user_plugin.plugin_id, plugins.plugin_name
-			      FROM user_plugin, plugins
-			      WHERE user_plugin.user_id=".$this->getID()."
-                                AND user_plugin.plugin_id = plugins.plugin_id" ;
+				FROM user_plugin, plugins
+				WHERE user_plugin.user_id=".$this->getID()."
+					AND user_plugin.plugin_id = plugins.plugin_id" ;
 			$res=db_query($sql);
 			$rows = db_numrows($res);
 
@@ -1014,8 +1068,8 @@ class User extends Error {
 			return true ;
 		}
 		$sql="SELECT plugin_id
-		      FROM plugins
-		      WHERE plugin_name = '" . $pluginname . "'" ;
+			FROM plugins
+			WHERE plugin_name = '" . $pluginname . "'" ;
 		$res=db_query($sql);
 		$rows = db_numrows($res);
 		if ($rows == 0) {
@@ -1027,13 +1081,13 @@ class User extends Error {
 		unset ($this->plugins_data) ;
 		if ($val) {
 			$sql="INSERT INTO user_plugin (user_id, plugin_id)
-                              VALUES (". $this->getID() . ", ". $plugin_id .")" ;
+				VALUES (". $this->getID() . ", ". $plugin_id .")" ;
 			$res=db_query($sql);
 			return $res ;
 		} else {
 			$sql="DELETE FROM user_plugin
-                              WHERE user_id = ". $this->getID() . "
-                                AND plugin_id = ". $plugin_id ;
+				WHERE user_id = ". $this->getID() . "
+				AND plugin_id = ". $plugin_id ;
 			$res=db_query($sql);
 			return $res ;
 		}

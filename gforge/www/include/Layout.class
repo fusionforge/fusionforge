@@ -445,16 +445,27 @@ if ($params['group']) {
 	}
 
 	function outerTabs($params) {
-		global $Language;
+		global $Language,$sys_use_trove,$sys_use_snippet;
+
 		$TABS_DIRS[]='/';
 		$TABS_DIRS[]='/my/';
-		$TABS_DIRS[]='/softwaremap/';
-		$TABS_DIRS[]='/snippet/';
+		if ($sys_use_trove) {
+			$TABS_DIRS[]='/softwaremap/';
+		}
+		if ($sys_use_snippet) {
+			$TABS_DIRS[]='/snippet/';
+		}
+
 		$TABS_DIRS[]='/people/';
 		$TABS_TITLES[]=$Language->getText('menu','home');
 		$TABS_TITLES[]=$Language->getText('menu','mypage');
-		$TABS_TITLES[]=$Language->getText('menu','projectree');
-		$TABS_TITLES[]=$Language->getText('menu','code_snippet');
+		if ($sys_use_trove) {
+			$TABS_TITLES[]=$Language->getText('menu','projectree');
+		}
+		if ($sys_use_snippet) {
+			$TABS_TITLES[]=$Language->getText('menu','code_snippet');
+		}
+
 		$TABS_TITLES[]=$Language->getText('menu','project_help_wanted');
 
 		if (user_ismember(1,'A')) {
@@ -476,7 +487,7 @@ if ($params['group']) {
 				}
 			}
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || strstr($GLOBALS['REQUEST_URI'],'/account/') || 
-			    strstr($GLOBALS['REQUEST_URI'],'/themes/') ) {
+				strstr($GLOBALS['REQUEST_URI'],'/themes/') ) {
 			$selected=array_search("/my/", $TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'softwaremap')) {
 			$selected=array_search("/softwaremap/", $TABS_DIRS);
@@ -797,7 +808,7 @@ if ($params['group']) {
 	 * @param	string	the row attributes
 	 * @param	array	the array of cell data, each element is an array,
 	 *				  	the first item being the text,
-	 *				    the subsequent items are attributes (dont include
+	 *					the subsequent items are attributes (dont include
 	 *					the bgcolor for the title here, that will be
 	 *					handled by $istitle
 	 * @param	boolean is this row part of the title ?

@@ -27,8 +27,10 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function header($params) {
-		global $DOCUMENT_ROOT;
-		global $Language;
+		global $DOCUMENT_ROOT, $Language, $sys_use_tracker;
+		if (!$sys_use_tracker) {
+			exit_disabled();
+		}
 		$group_id= $this->Group->getID();
 
 		//required by new site_project_header

@@ -34,9 +34,12 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 
 
 function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='xyz') {
+	
+	global $group_id, $Language, $sys_use_docman;
 
-	global $group_id;
-	global $Language;
+	if (!$sys_use_docman) {
+		exit_disabled();
+	}
 
 	$project =& group_get_object($group_id);
 	if (!$project || !is_object($project)) {

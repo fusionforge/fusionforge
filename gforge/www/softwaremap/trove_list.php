@@ -16,6 +16,10 @@ require_once('pre.php');
 require_once('common/include/vars.php');
 require_once('www/include/trove.php');
 
+if (!$sys_use_trove) {
+	exit_disabled();
+}
+
 // assign default. 18 is 'topic'
 if (!$form_cat) {
 	$form_cat = $default_trove_cat;

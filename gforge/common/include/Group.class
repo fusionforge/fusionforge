@@ -833,7 +833,11 @@ class Group extends Error {
 	 *	@return boolean enable_cvs.
 	 */
 	function enableAnonCVS() {
-		return $this->data_array['enable_anoncvs'];
+		if ($this->usesCVS()) {
+			return $this->data_array['enable_anoncvs'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -842,7 +846,11 @@ class Group extends Error {
 	 *	@return boolean	enable_pserver.
 	 */
 	function enablePserver() {
-		return $this->data_array['enable_pserver'];
+		if ($this->usesCVS()) {
+			return $this->data_array['enable_pserver'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -851,7 +859,12 @@ class Group extends Error {
 	 *	@return	boolean	uses_cvs.
 	 */
 	function usesCVS() {
-		return $this->data_array['use_cvs'];
+		global $sys_use_cvs;
+		if ($sys_use_cvs) {
+			return $this->data_array['use_cvs'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -860,7 +873,12 @@ class Group extends Error {
 	 *	@return	boolean uses_mail.
 	 */
 	function usesMail() {
-		return $this->data_array['use_mail'];
+		global $sys_use_mail;
+		if ($sys_use_mail) {
+			return $this->data_array['use_mail'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -869,7 +887,12 @@ class Group extends Error {
 	 *	@return	boolean	uses_news.
 	 */
 	function usesNews() {
-		return $this->data_array['use_news'];
+		global $sys_use_news;
+		if ($sys_use_news) {
+			return $this->data_array['use_news'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -878,7 +901,12 @@ class Group extends Error {
 	 *  @return	boolean	uses_forum.
 	 */
 	function usesForum() {
-		return $this->data_array['use_forum'];
+		global $sys_use_forum;
+		if ($sys_use_forum) {
+			return $this->data_array['use_forum'];
+		} else {
+			return false;
+		}
 	}	   
 
 	/**
@@ -896,7 +924,12 @@ class Group extends Error {
 	 *  @return	boolean	uses_frs.
 	 */
 	function usesFRS() {
-		return $this->data_array['use_frs'];
+		global $sys_use_file;
+		if ($sys_use_file) {
+			return $this->data_array['use_frs'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -905,7 +938,12 @@ class Group extends Error {
 	 *  @return	boolean	uses_tracker.
 	 */
 	function usesTracker() {
-		return $this->data_array['use_tracker'];
+		global $sys_use_tracker;
+		if ($sys_use_tracker) {
+			return $this->data_array['use_tracker'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -914,7 +952,12 @@ class Group extends Error {
 	 *  @return	boolean	uses_docman.
 	 */
 	function usesDocman() {
-		return $this->data_array['use_docman'];
+		global $sys_use_docman;
+		if ($sys_use_docman) {
+			return $this->data_array['use_docman'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -923,7 +966,12 @@ class Group extends Error {
 	 *  @return	boolean	uses_ftp.
 	 */
 	function usesFTP() {
-		return $this->data_array['use_ftp'];
+		global $sys_use_ftp;
+		if ($sys_use_ftp) {
+			return $this->data_array['use_ftp'];
+		} else {
+			return false;
+		}
 	}
 
 	/**
@@ -932,7 +980,12 @@ class Group extends Error {
 	 *  @return	boolean	uses_survey.
 	 */
 	function usesSurvey() {
-		return $this->data_array['use_survey'];
+		global $sys_use_survey;
+		if ($sys_use_survey) {
+			return $this->data_array['use_survey'];
+		} else {
+			return false;
+		}
 	}	   
 
 	/**
@@ -941,7 +994,12 @@ class Group extends Error {
 	 *  @return	boolean	uses_projman.
 	 */
 	function usesPM() {
-		return $this->data_array['use_pm'];
+		global $sys_use_pm;
+		if ($sys_use_pm) {
+			return $this->data_array['use_pm'];
+		} else {
+			return false;
+		}
 	}
 
 	function getPlugins() {

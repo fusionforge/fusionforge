@@ -77,8 +77,11 @@ $SCRIPT_LANGUAGE[15] = 'SQL';
 $SCRIPT_LANGUAGE[16] = 'C#';
 
 function snippet_header($params) {
-	global $DOCUMENT_ROOT,$HTML;
-	global $Language;
+	global $DOCUMENT_ROOT, $HTML, $Language, $sys_use_snippet;
+
+	if (!$sys_use_snippet) {
+		exit_disabled();
+	}
 
 	$HTML->header($params);
 	/*

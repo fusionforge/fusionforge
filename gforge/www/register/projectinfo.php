@@ -26,6 +26,13 @@
 require_once('pre.php');
 require_once('common/include/vars.php');
 
+//
+//	Test if restricted project registration
+//
+if ($sys_project_reg_restricted) {
+	session_require(array('group'=>'1','admin_flags'=>'A'));
+}
+
 session_require(array('isloggedin'=>'1'));
 
 if ($submit) {

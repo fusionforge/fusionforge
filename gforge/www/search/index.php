@@ -272,11 +272,11 @@ if ($type_of_search == "soft") {
 	$words1=implode($array,"%' $crit forum.body ILIKE '%");
 	$words2=implode($array,"%' $crit forum.subject ILIKE '%");
 
-	$sql =	"SELECT forum.msg_id,forum.subject,forum.date,users.user_name 
+	$sql =	"SELECT forum.msg_id,forum.subject,forum.post_date,users.user_name 
 		FROM forum,users 
 		WHERE users.user_id=forum.posted_by AND ((forum.body ILIKE '%$words1%') 
 		OR (forum.subject ILIKE '%$words2%')) AND forum.group_forum_id='$forum_id' 
-		GROUP BY msg_id,subject,date,user_name";
+		GROUP BY msg_id,subject,post_date,user_name";
 	$result = db_query($sql,26,$offset);
 	$rows = $rows_returned = db_numrows($result);
 
@@ -305,7 +305,7 @@ if ($type_of_search == "soft") {
 				. html_image("ic/msg.png","10","12",array("border"=>"0"))
 				. db_result($result, $i, "subject")."</a></td>"
 				. "<td>".db_result($result, $i, "user_name")."</td>"
-				. "<td>".date($sys_datefmt,db_result($result,$i,"date"))."</td></tr>\n";
+				. "<td>".date($sys_datefmt,db_result($result,$i,"post_date"))."</td></tr>\n";
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom() . '</p>';

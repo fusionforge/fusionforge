@@ -35,7 +35,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=
 
 <tr valign="top">
 	<td><?php echo $Language->getText('user_home','real_name') ?> </td>
-	<td><strong><?php print $user->getRealName(); ?></strong></td>
+	<td><strong><?php print $user->getTitle() .' '. $user->getRealName(); ?></strong></td>
 </tr>
 
 <tr valign="top">
@@ -49,10 +49,26 @@ $HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=
 <tr valign="top">
 	<td><?php echo $Language->getText('user_home','jabber_address') ?></td>
 	<td>
-	<a href="jabber:<?php print $user->getJabberAddress().'"><strong>'.$user->getJabberAddress().'</strong></a>'; ?>
+	<a href="jabber:<?php print $user->getJabberAddress(); ?>"><strong><?php print $user->getJabberAddress(); ?></strong></a>
 	</td>
 </tr>
 <?php } ?>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options','address'); ?></td>
+	<td><?php echo $user->getAddress(); ?></td>
+</tr>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options','phone'); ?></td>
+	<td><?php echo $user->getPhone(); ?></td>
+</tr>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options','fax'); ?></td>
+	<td><?php echo $user->getFax(); ?></td>
+</tr>
+
 <tr>
 	<td>
 	<?php echo $Language->getText('user_home','site_member_since') ?>

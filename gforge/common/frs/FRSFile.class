@@ -135,6 +135,7 @@ class FRSFile extends Error {
 		$newfilelocation = $GLOBALS['sys_upload_dir'].$this->FRSRelease->FRSPackage->Group->getUnixName().'/';
 
 		system("/bin/mkdir $newfilelocation");
+		system("/bin/mkdir $newfilelocation");
 		system("/bin/mv $file_location $newfilelocation$name");
 		if (!file_exists("$newfilelocation$name")) {
 			echo $newfilelocation.$name;

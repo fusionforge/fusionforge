@@ -1,3 +1,9 @@
+2003-11-30  Tim Perdue  <tim@perdue.net>
+
+	* Adding switches for turning tools on/off
+	* Adding phone/fax/address/title to user
+	* Couple of date -> post_date field changes
+
 2003-12-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/German.tab: Patch #623 from Marco Schmidt
