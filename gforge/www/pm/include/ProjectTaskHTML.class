@@ -29,6 +29,10 @@ class ProjectTaskHTML extends ProjectTask {
 		$result=$this->getOtherTasks();
 		//get the data so we can mark items as SELECTED
 		$arr2 =& $this->getDependentOn();
+		/* fix bug 319: if array is empty, preselect 100 (none) */
+		if (!$arr2){
+			$arr2[]=100;
+		}
 		return html_build_multiple_select_box ($result,$name,$arr2);
 	}
 
