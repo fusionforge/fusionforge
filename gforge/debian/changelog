@@ -1,4 +1,4 @@
-sourceforge (2.5-29woody0) unstable; urgency=low
+sourceforge (2.5-29.1) stable; urgency=low
 
   * [Roland] Maintenance release for Debian 3.0r1, the first update of
     Woody.  Only fixing really major bugs, so that the stable release
@@ -8,7 +8,7 @@ sourceforge (2.5-29woody0) unstable; urgency=low
     completely remove the LDAP directory, but only the entries generated
     from our database.  This fixes bug #153032 in Woody.
 
- -- Roland Mas <lolando@debian.org>  Wed,  6 Nov 2002 13:04:10 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 12 Nov 2002 19:09:24 +0100
 
 sourceforge (2.5-29) unstable; urgency=low
 
