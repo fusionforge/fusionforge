@@ -1,0 +1,829 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gforge\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-12-19 14:38+0100\n"
+"PO-Revision-Date: 2005-03-09 18:42+0100\n"
+"Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
+"Language-Team: Czech <provoz@debian.cz>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-2\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9
+#: ../dsf-helper/shellhost-variables.templates:3
+msgid "Your shell server"
+msgstr "Server se shellovými úèty"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:9
+#: ../dsf-helper/shellhost-variables.templates:3
+msgid "The hostname of the server that will host your Gforge shell accounts"
+msgstr "Jméno serveru, který bude hostit shellové úèty Gforge."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:18
+#: ../dsf-helper/downloadhost-variables.templates:3
+msgid "Your download server"
+msgstr "Server pro stahování"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:18
+msgid ""
+"The hostname of the server that will host your Gforge packages.  It should "
+"not be the same as your main Gforge host."
+msgstr ""
+"Jméno serveru, který bude hostit balíky Gforge. Mìl by to být jiný poèítaè "
+"ne¾ hlavní poèítaè Gforge."
+
+#. Type: string
+#. Default
+#: ../gforge-db-postgresql.templates.dsfh-in:26
+#: ../gforge-dns-bind9.templates.dsfh-in:23
+msgid "admin"
+msgstr "admin"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:27
+#: ../gforge-dns-bind9.templates.dsfh-in:24
+msgid "The Gforge administrator login"
+msgstr "Login administrátora Gforge"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:27
+#: ../gforge-dns-bind9.templates.dsfh-in:24
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects."
+msgstr ""
+"Tento úèet bude mít v¹echna práva v Gforge systému. Pou¾ívá se napøíklad pro "
+"schvalování vytváøení projektù."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:33
+#: ../dsf-helper/host-variables.templates:3
+msgid "Your IP address"
+msgstr "IP adresa"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:33
+#: ../dsf-helper/host-variables.templates:3
+msgid ""
+"The IP address of the server that will host your Gforge installation. This "
+"is needed for the Apache virtualhosting configuration."
+msgstr ""
+"IP adresa serveru, který bude hostit instalaci Gforge. To je nutné pro "
+"nastavení virtuálních hostù Apache."
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:39
+#: ../gforge-dns-bind9.templates.dsfh-in:30
+msgid "The Gforge administrator password"
+msgstr "Heslo administrátora Gforge"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:39
+#: ../gforge-dns-bind9.templates.dsfh-in:30
+msgid ""
+"This Gforge account will have all privileges on the Gforge system.  It is "
+"needed to approve the creation of the projects.  Please type a password here."
+msgstr ""
+"Tento úèet bude mít v¹echna práva v Gforge systému. Pou¾ívá se napøíklad pro "
+"schvalování vytváøení projektù. Zadejte zde prosím heslo."
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:46
+#: ../gforge-dns-bind9.templates.dsfh-in:37
+msgid "The Gforge administrator password - again"
+msgstr "Potvrzení hesla administrátora Gforge"
+
+#. Type: password
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:46
+#: ../gforge-dns-bind9.templates.dsfh-in:80
+#: ../dsf-helper/dbpasswd-variables.templates:9
+#: ../dsf-helper/ldap-variables.templates:20
+msgid "Please re-type the password for confirmation."
+msgstr "Zadejte heslo je¹tì jednou pro potvrzení."
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:52
+#: ../gforge-dns-bind9.templates.dsfh-in:43
+msgid "The initial list of skills"
+msgstr "Úvodní seznam schopností"
+
+#. Type: string
+#. Description
+#: ../gforge-db-postgresql.templates.dsfh-in:52
+#: ../gforge-dns-bind9.templates.dsfh-in:43
+msgid ""
+"Gforge allows users to define a list of their skills, to be chosen amongst "
+"those present in the database.  This list is the initial list of skills that "
+"will enter the database.  Please enter the skill names separated by semi-"
+"colons `;'."
+msgstr ""
+"Gforge umo¾òuje u¾ivatelùm, aby si ze seznamu schopností definovali své "
+"dovednosti. Seznam, který zde zadáte, bude ulo¾en v databázi jako výchozí. "
+"Jednotlivé polo¾ky seznamu oddìlte støedníky ';'."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:12
+#: ../dsf-helper/dbpasswd-variables.templates:3
+msgid "Password used for the database"
+msgstr "Heslo pro pøipojení do databáze"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:12
+msgid ""
+"The connection to the DB system requires a password.  Please choose a "
+"password here."
+msgstr ""
+"Pøipojení k DB systému vy¾aduje heslo. Nìjaké si vymyslete a zadejte ho zde."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:18
+#: ../dsf-helper/dbpasswd-variables.templates:9
+msgid "Password used for the database - again"
+msgstr "Potvrzení hesla pro pøipojení do databáze"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:51
+#: ../dsf-helper/ldap-variables.templates:3
+msgid "The LDAP base DN"
+msgstr "Základní LDAP DN"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:51
+#: ../dsf-helper/ldap-variables.templates:3
+msgid ""
+"The DN is used to refer to the LDAP directory unambiguously.  You could use, "
+"for instance, \"dc=gforge,dc=example,dc=com\""
+msgstr ""
+"DN se pou¾ívá pro jednoznaèné odkazování na LDAP adresáø. Mù¾ete pou¾ít "
+"napøíklad \"dc=gforge,dc=priklad,cd=cz\""
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:57
+#: ../dsf-helper/ldap-variables.templates:9
+msgid "The LDAP host"
+msgstr "LDAP server"
+
+#. Type: string
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:57
+#: ../dsf-helper/ldap-variables.templates:9
+msgid "The hostname of the LDAP server."
+msgstr "Jméno LDAP serveru."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid "Do you want mail to ${noreply} to be deleted?"
+msgstr "Chcete, aby se po¹ta doruèená na ${noreply} mazala?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid ""
+"Gforge sends plenty of e-mail from the \"${noreply}\" address, and maybe "
+"even some e-mail to that address too."
+msgstr ""
+"Gforge zasílá hromady emailù z adresy \"${noreply}\" a obèas i _na_ tuto "
+"adresu."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid ""
+"It is advised that you let the package direct e-mail to that address to a "
+"black hole (/dev/null), unless you have another use for that address."
+msgstr ""
+"Pokud s touto adresou nemáte jiné plány, doporuèujeme ve¹kerou pøíchozí "
+"po¹tu pøesmìrovat do èerné díry (/dev/null)."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:63
+#: ../gforge-mta-exim.templates.dsfh-in:9
+#: ../gforge-mta-postfix.templates.dsfh-in:9
+msgid "Accepting this option will perform that redirection."
+msgstr "Odpovíte-li kladnì, provede se pøesmìrování do èerné díry."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:74
+#: ../dsf-helper/ldap-variables.templates:14
+msgid "LDAP password used to add users from the web"
+msgstr "LDAP heslo pou¾ívané pro pøidávání u¾ivatelù z webu"
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:74
+#: ../dsf-helper/ldap-variables.templates:14
+msgid ""
+"In order to add users into the LDAP directory from the web, you need to "
+"provide a password."
+msgstr ""
+"Abyste mohli pøidávat u¾ivatele do LDAP adresáøe rovnou z webu, musíte zatat "
+"heslo."
+
+#. Type: password
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:80
+#: ../dsf-helper/ldap-variables.templates:20
+msgid "LDAP password - again"
+msgstr "Potvrzení LDAP hesla"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid "Gforge requires appropriate PAM-LDAP configuration"
+msgstr "Gforge vy¾aduje odpovídající nastavení PAM-LDAP"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid ""
+"Gforge requires the libpam-ldap package to be configured appropriately.  You "
+"might need to \"dpkg-reconfigure libpam-ldap\" in order to fix incorrect "
+"parameters."
+msgstr ""
+"Gforge vy¾aduje, aby byl balík libpam-ldap nastaven odpovídajícím zpùsobem. "
+"Abyste opravili chybné parametry, mo¾ná budete muset spustit \"dpkg-"
+"reconfigure libpam-ldap\"."
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:85
+#: ../gforge-shell-ldap.templates.dsfh-in:5
+msgid ""
+"Known good values are: LDAP protocol version=3, make root database "
+"admin=yes, root login account=\"cn=admin,dc=<your-dc-here>\", crypt to use "
+"for passwords=crypt.  Make sure that you type the same password for the "
+"libpam-ldap root password and the Gforge LDAP password."
+msgstr ""
+"Známé rozumné hodnoty jsou: LDAP protokol verze=3, udìlat roota správcem "
+"databáze=ano, pøihla¹ovací úèet roota=\"cn=admin,dc=<va¹e-dc>\", ¹ifra pro "
+"hesla=crypt.  Ujistìte se, ¾e jako LDAP heslo pro Gforge zadáte stejné "
+"heslo, jako pro jste zadali pro roota v libpam-ldap."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:98
+msgid "Do you want a simple DNS setup?"
+msgstr "Chcete mít jednoduchou konfiguraci DNS?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:98
+msgid ""
+"You can have a simple DNS setup which uses wildcards to map all project web-"
+"hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
+"or a complex setup which allows you to have many servers as project web "
+"servers or CVS servers."
+msgstr ""
+"Mù¾ete mít buï jednodu¹¹í konfiguraci DNS, která pou¾ívá zástupné znaky, aby "
+"namapovala weby v¹ech projektù na jedinou IP adresu a nasmìrovala v¹echny "
+"cvs servery na server jediný, nebo mù¾ete mít komplexní nastavení, je¾ vám "
+"umo¾ní pou¾ít vícero poèítaèù pro webové a CVS servery."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:98
+msgid ""
+"Even though you have a simple DNS setup, you can still have seperate boxes "
+"for your project servers, it just assumes you have all the project web dirs "
+"on the same server and a single server for CVS."
+msgstr ""
+"I kdy¾ zvolíte jednodu¹¹í nastavení DNS, stále mù¾ete pou¾ít více poèítaèù. "
+"Nastavení bude pouze pøedpokládat, budete mít v¹echny adresáøe s weby "
+"projektù na jednom poèítaèi a ¾e pou¾ijete jediný CVS server."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid "Do you want ${file} to be updated?"
+msgstr "Chcete aktualizovat ${file}?"
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid ""
+"In order for Gforge to be fully deinstalled, some changes must be made to "
+"the ${file} file."
+msgstr ""
+"Aby se Gforge plnì odinstaloval, musí se provést zmìny do souboru ${file}."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid ""
+"I can either do them for you (and backup the current version in ${file}."
+"gforge-old), or write the changes to another file (${file}.gforge-new) and "
+"let you propagate the changes to ${file} yourself."
+msgstr ""
+"Mù¾u buï provést zmìny automaticky (a zazálohovat aktuální verzi do ${file}."
+"gforge-old), nebo zapsat zmìny do jiného souboru (${file}.gforge-new) a "
+"nechat pøepsání zmìn do ${file} na vás."
+
+#. Type: boolean
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:112
+#: ../dsf-helper/replace-files.templates:18
+msgid "Shall I modify the ${file} automatically?"
+msgstr "Mám upravit ${file} automaticky?"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:125
+#: ../dsf-helper/replace-files.templates:31
+msgid "Please check ${file}"
+msgstr "Prosím zkontrolujte ${file}"
+
+#. Type: note
+#. Description
+#: ../gforge-dns-bind9.templates.dsfh-in:125
+#: ../dsf-helper/replace-files.templates:31
+msgid ""
+"You have chosen not to let the Gforge package update the ${file} file.  Very "
+"well, I have not changed it.  Instead, I have written the suggested changes "
+"into ${file}.gforge-new. Please check this file and apply the appropriate "
+"changes to ${file}."
+msgstr ""
+"Zvolili jste, aby balík Gforge neaktualizoval soubor ${file}. Dobrá, nechám "
+"jej na pokoji. Místo toho jsem zapsal navrhované zmìny do ${file}.gforge-"
+"new. Zkontrolujte prosím tento soubor a u¾iteèné zmìny pøeneste do ${file}."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3
+msgid "Your Gforge domain or subdomain name"
+msgstr "Název Gforge domény nebo subdomény"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:3
+msgid ""
+"The domain that will host your Gforge installation.  Some services will be "
+"given their own subdomain in that domain (cvs, lists, etc.)."
+msgstr ""
+"Doména, která bude hostit va¹i instalaci Gforge. Nìkteré slu¾by obdr¾í své "
+"vlastní subdomény této domény (cvs, lists, atd.)."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:9
+msgid "The Gforge admin email address."
+msgstr "Emailová adresa administrátora Gforge"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:9
+msgid ""
+"The email address of the Gforge administrator of your site.  Needed in case "
+"a problem occurs."
+msgstr ""
+"Emailová adresa správce Gforge je vy¾adována pro pøípad výskytu problémù."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:16
+msgid "The Gforge system name"
+msgstr "Jméno Gforge systému"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/common-variables.templates:16
+msgid "This name is used in various places throughout the system."
+msgstr "Toto jméno je pou¾íváno v systému na nìkolika místech."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/cvshost-variables.templates:3
+msgid "Your CVS server"
+msgstr "CVS server"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/cvshost-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge CVS repositories.  It "
+"should not be the same as your main Gforge host."
+msgstr ""
+"Jméno poèítaèe, který bude hostit va¹e Gforge CVS úlo¾i¹tì. Nemìlo by být "
+"shodné s hlavním serverem Gforge. "
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3
+msgid "Your database server"
+msgstr "Databázový server"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:3
+msgid ""
+"The IP address (or host name) of the server that will host your GForge "
+"database.  This is needed for virtually all the subpackages."
+msgstr ""
+"IP adresa (nebo jméno) serveru, který bude hostit va¹i GForge databázi. To "
+"je nezbytné pro témìø v¹echny podbalíky."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:10
+msgid "Your database name"
+msgstr "Jméno databáze"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:10
+msgid ""
+"The name of the database that will host your GForge database.  This is "
+"needed for virtually all the subpackages."
+msgstr ""
+"Jméno databáze, která bude hostit va¹i Gforge databázi. To je vy¾adováno "
+"témìø v¹emi podbalíky."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:17
+msgid "Your database admin username"
+msgstr "U¾ivatelské jméno administrátora databáze"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/dbhost-variables.templates:17
+msgid ""
+"The admin username of the database that will host your GForge database.  "
+"This is needed for virtually all the subpackages."
+msgstr ""
+"U¾ivatelské jméno administrátora databáze, která bude hostit va¹i Gforge "
+"databázi. To je vy¾adováno témìø v¹emi podbalíky."
+
+#. Type: password
+#. Description
+#: ../dsf-helper/dbpasswd-variables.templates:3
+msgid ""
+"The connecton to the DB system requires a password.  Please choose a "
+"password here."
+msgstr "Pøipojení k databázovému systému vy¾aduje heslo. Prosím, zadejte jej."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/downloadhost-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge packages. It should "
+"not be the same as your main Gforge host."
+msgstr ""
+"Jméno poèítaèe, který bude hostit Gforge balíky. Nemìlo by být shodné s "
+"hlavním serverem Gforge."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:4
+msgid "The news admin group id"
+msgstr "ID administrátorské skupiny pro novinky"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:4
+msgid ""
+"Members of the news admin group can approve news for the Gforge main page.  "
+"This group id MUST NOT be 1. You only need to touch this group if you "
+"upgrade from a previous version and want to keep your data."
+msgstr ""
+"Èlenové administrátorké skupiny pro novinky mohou schvalovat novinky pro "
+"hlavní stránku Gforge. Tato skupina NESMÍ mít id 1. Touto skupinou se musíte "
+"zabývat pouze pokud pøecházíte z døívìj¹í verze a chcete zachovat svá data."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:12
+msgid "The stats admin group id"
+msgstr "ID administrátorské skupiny pro statistiky"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/groupid-variables.templates:17
+msgid "The peer rating admin group id"
+msgstr "ID administrátorské skupiny pro hodnocení"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:3
+msgid "Your mailing-lists server"
+msgstr "Server pro diskusní skupiny"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/lists-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge mailing-lists. It "
+"should not be the same as your main Gforge host."
+msgstr ""
+"Jméno poèítaèe, který bude hostit diskusní skupiny va¹eho Gforge. Nemìlo by "
+"být shodné s hlavním serverem Gforge."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid "Migrate to Gforge?"
+msgstr "Migrovat na Gforge?"
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"The free software version of the Sourceforge software has been renamed to "
+"\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge\", "
+"and \"sourceforge\" is no longer supported or maintained.  The transition to "
+"Gforge should be rather simple, as most of the work is automated: once this "
+"package has been successfully installed, just install the \"gforge\" package "
+"and things should go smoothly."
+msgstr ""
+"Svobodná verze systému Sourceforge byla pøejmenována na \"Gforge\". V "
+"souladu s tím se pøejmenoval i debianí balík na \"gforge\". Pùvodní balík "
+"\"sourceforge\" ji¾ není podporován ani vyvíjen. Pøechod na Gforge by mìl "
+"být celkem bezbolestný, proto¾e vìt¹ina pøevodu  probíhá automaticky. Po "
+"úspì¹né instalaci tohoto balíku jednodu¹e nainstalujte balík \"gforge\" a "
+"v¹e probìhne hladce."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"You still have the option not to upgrade to Gforge yet, for instance if you "
+"want to backup things beforehand.  If you refuse the upgrade, nothing will "
+"happen."
+msgstr ""
+"Stále je¹tì máte mo¾nost nepøecházet na Gforge, napøíklad pokuch chcete "
+"nejprve vìci zazálohovat. Pokud odmítnete pøechod, nic se nestane."
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid "Sourceforge is no more"
+msgstr "Sourceforge ji¾ neexistuje"
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid ""
+"Sourceforge has been renamed Gforge, and the software known as Sourceforge "
+"is no longer maintained as free software.  This \"sourceforge\" package is "
+"only here to help you upgrade to Gforge.  Once you have installed this "
+"package and the one it depends on (gforge-sourceforge-transition), your data "
+"have been saved, and you can safely uninstall the \"sourceforge\" package "
+"and proceed to install Gforge."
+msgstr ""
+"Sourceforge byl pøejmenován na Gforge a pùvodní Sourceforge ji¾ není vyvíjen "
+"jako svobodný software. Balík \"sourceforge\" existuje jenom z dùvodu "
+"snadného pøechodu na Gforge. Poté, co tento balík nainstalujete (a s ním "
+"gforge-sourceforge-transition), budou va¹e data ulo¾ena. Pak mù¾ete balík "
+"\"sourceforge\" odstranit a pokraèovat v instalaci Gforge."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/replace-files.templates:4
+msgid ""
+"In order for Gforge to fully work, some changes must be made to the ${file} "
+"file."
+msgstr ""
+"Aby Gforge pracoval na 100%, musí se provést nìjaké zmìny v souboru ${file}."
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/replace-files.templates:4
+msgid "Shall I modify ${file} automatically?"
+msgstr "Mám upravit ${file} automaticky?"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:3
+msgid "Your user mail redirector server"
+msgstr "Server pro pøesmìrování po¹ty"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/users-variables.templates:3
+msgid ""
+"The hostname of the server that will host your Gforge user mail redirector. "
+"It should not be the same as your main Gforge host."
+msgstr ""
+"Zadejte jméno serveru, který bude hostit pøesmìrování po¹ty pro u¾ivatele "
+"Gforge. Mìl by to být jiný poèítaè ne¾ hlavní poèítaè Gforge."
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Bulgarian"
+msgstr "bulhar¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Catalan"
+msgstr "katalán¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Chinese"
+msgstr "èín¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Dutch"
+msgstr "holand¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Esperanto"
+msgstr "esperanto"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "French"
+msgstr "francouz¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "German"
+msgstr "nìmèina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Greek"
+msgstr "øeètina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Hebrew"
+msgstr "hebrej¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Indonesian"
+msgstr "indonéz¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Italian"
+msgstr "ital¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Japanese"
+msgstr "japon¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Korean"
+msgstr "korej¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Latin"
+msgstr "latina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Norwegian"
+msgstr "nor¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Polish"
+msgstr "pol¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "PortugueseBrazilian"
+msgstr "portugalská brazil¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Portuguese"
+msgstr "portugal¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Russian"
+msgstr "ru¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "SimplifiedChinese"
+msgstr "zjednodu¹ená èín¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Spanish"
+msgstr "¹panìl¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Swedish"
+msgstr "¹véd¹tina"
+
+#. Type: select
+#. Choices
+#: ../dsf-helper/web-variables.templates:3
+msgid "Thai"
+msgstr "thaj¹tina"
+
+#. Type: select
+#. DefaultChoice
+#: ../dsf-helper/web-variables.templates:4
+msgid "English"
+msgstr "angliètina"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:5
+msgid "Default language"
+msgstr "Výchozí jazyk"
+
+#. Type: select
+#. Description
+#: ../dsf-helper/web-variables.templates:5
+msgid "Here is the default language for web pages."
+msgstr "Vyberte výchozí jazyk pro webové stránky."
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:11
+msgid "Default theme"
+msgstr "Výchozí téma"
+
+#. Type: string
+#. Description
+#: ../dsf-helper/web-variables.templates:11
+msgid ""
+"Here is the default theme for web pages, be careful to enter a valid name."
+msgstr ""
+"Zde je výchozí téma pro webové stránky. Dejte pozor, abyste zadali platný "
+"název."
