@@ -26,6 +26,7 @@
 
 require_once('common/tracker/ArtifactTypes.class');
 require_once('www/include/frs.class');
+require_once('www/include/BaseLanguage.class');
 
 $GROUP_OBJ=array();
 
@@ -1336,6 +1337,7 @@ class Group extends Error {
 	 *
 	 */
 	function sendApprovalEmail() {
+		global $Language;
 
 		$res_admins = db_query("
 			SELECT users.user_name,users.email
@@ -1353,51 +1355,10 @@ class Group extends Error {
 		// send one email per admin
 		while ($row_admins = db_fetch_array($res_admins)) {
 
-			$message = 
-'Your project registration for SourceForge has been approved. 
-
-Project Full Name:  '.$this->getPublicName().'
-Project Unix Name:  '.$this->getUnixName().'
-CVS Server:         cvs.'.$this->getUnixName().'.'.$GLOBALS['sys_default_domain'].'
-Shell/Web Server:   '.$this->getUnixName().'.'.$GLOBALS['sys_default_domain'].'
-
-Your DNS will take up to a day to become active on our site.
-While waiting for your DNS to resolve, you may try shelling into 
-'. $GLOBALS['sys_shell_host']. ' and pointing CVS to '. $GLOBALS['sys_cvs_host'].'.
-
-If after 6 hours your shell/CVS accounts still do not work, please
-open a support ticket so that we may take a look at the problem.
-Please note that all shell/CVS accounts are closed to telnet and only
-work with SSH1.
-
-Your web site is accessible through your shell account. Please read
-site documentation (see link below) about intended usage, available 
-services, and directory layout of the account.
-
-Please take some time to read the site documentation about project
-administration (http://'.$GLOBALS['sys_default_domain'].'/docs/site/). If you visit your 
-own project page in SourceForge while logged in, you will find 
-additional menu functions to your left labeled \'Project Admin\'. 
-
-We highly suggest that you now visit SourceForge and create a public
-description for your project. This can be done by visiting your project
-page while logged in, and selecting \'Project Admin\' from the menus
-on the left (or by visiting https://'.$GLOBALS['sys_default_domain'].'/project/admin/?group_id='.$this->getID().'
-after login).
-
-Your project will also not appear in the Trove Software Map (primary
-list of projects hosted on SourceForge which offers great flexibility in
-browsing and search) until you categorize it in the project administration 
-screens. So that people can find your project, you should do this now. 
-Visit your project while logged in, and select \'Project Admin\' from the 
-menus on the left.
-
-Enjoy the system, and please tell others about SourceForge. Let us know
-if there is anything we can do to help you.
-
- -- the SourceForge crew';
+			//                                                                               $1                      $2                    $3                              $4                          $5                        $6
+			$message=stripcslashes($Language->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_cvs_host'], $this->getID())));
 	
-			util_send_mail($row_admins['email'],"SourceForge Project Approved",$message);
+			util_send_mail($row_admins['email'], $Language->getText('classgroup', 'acceptedprojecttitle'), $message);
 		}
 
 		return true;
@@ -1417,6 +1378,7 @@ if there is anything we can do to help you.
 	 *
 	 */
 	function sendRejectionEmail($response_id, $message="zxcv") {
+		global $Language;
 
 		// Get the email addr of the user who wants to register the project.
 		$email = db_result(db_query("
@@ -1426,16 +1388,7 @@ if there is anything we can do to help you.
 			AND u.user_id=ug.user_id;
 		"), 0, "email");
 	
-		$response = 
-'Your project registration for SourceForge has been denied. 
-
-Project Full Name:  '.$this->getPublicName().'
-Project Unix Name:  '.$this->getUnixName().'
-
-Reasons for negative decision:
-
-';
-
+		$response=stripcslashes($Language->getText('classgroup', 'rejectedproject', array($this->getPublicName(), $this->getUnixName())));
 
 		// Check to see if they want to send a custom rejection response
 		if ($response_id == 0) {
@@ -1448,7 +1401,7 @@ Reasons for negative decision:
 			"), 0, "response_text");
 		}
 
-		util_send_mail($email, "SourceForge Project Denied", $response);
+		util_send_mail($email, $Language->getText('classgroup', 'rejectedprojecttitle'), $response);
 
 		return true;
 	}
@@ -1465,6 +1418,7 @@ Reasons for negative decision:
 	 *
 	 */
 	function sendNewProjectNotificationEmail() {
+		global $Language;
 
 	  // Get the admin(s) email
 	  $admin_email='';
@@ -1496,17 +1450,9 @@ Reasons for negative decision:
 	    $email = db_result($res, 0, "email");
 	  }
 	  
-	  $message =
-'New SourceForge Project Submitted
+	  $message=stripcslashes($Language->getText('classgroup', 'newprojectnotification', array($this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicense(), $GLOBALS['sys_default_domain'])));
 
-Project Full Name:  '.$this->getPublicName().'
-Submitted Description: '.$this->getRegistrationPurpose().'
-License: '.$this->getLicense().'
-
-Please visit the following URL to approve or reject this project:
-http://'.$GLOBALS['sys_default_domain'].'/admin/approve-pending.php';
-
-	  util_send_mail($admin_email, "New SourceForge Project Submitted", $message, $email);
+	  util_send_mail($admin_email, $Language->getText('classgroup', 'newprojectnotificationtitle'), $message, $email);
 
 	  return true;
 	}
