@@ -5,7 +5,7 @@
 # Parse all template files and expand them into real files
 # Roland Mas, debian-sf (Sourceforge for Debian)
 
-filenames="local.inc database.inc httpd.conf httpd.secrets local.pl"
+filenames="local.inc database.inc httpd.conf httpd.secrets local.pl httpd.common"
 for i in $filenames ; do
     [ -f /etc/gforge/templates/${i}.template ] && \
     /usr/lib/gforge/bin/fill-in-the-blanks.pl \
