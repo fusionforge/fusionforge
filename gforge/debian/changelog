@@ -46,8 +46,10 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Roland] Applied patch #614 from Robert Lamoureux
     <Robert.Lamoureux@tfn.com> fixing various problems with themes.
     Thanks, Bob!
+  * [Roland] Included full Spanish translation from Vicente Ruiz.  Thanks
+    a lot, Vicente!
 
- -- Roland Mas <lolando@debian.org>  Mon, 28 Oct 2002 19:26:12 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 28 Oct 2002 19:31:18 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
