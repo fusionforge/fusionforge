@@ -41,7 +41,7 @@ PLUGIN_CONF_DIR=$RPM_BUILD_ROOT/%{pluginconfdir}
 
 # copying all needed stuff to $PLUGIN_LIB_DIR
 install -m 755 -d $PLUGIN_LIB_DIR
-for dir in include; do
+for dir in include rpm-specific; do
 	cp -rp $dir ${PLUGIN_LIB_DIR}/
 done;
 
@@ -75,5 +75,5 @@ fi
 %{pluginlibdir}/include
 
 %changelog
-* Fri Nov 26 2004  Open Wide <guillaume.smet@openwide.fr>
+* Fri Nov 26 2004  Dassault Aviation <guillaume.smet@openwide.fr>
 Initial RPM packaging
