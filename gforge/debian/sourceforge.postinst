@@ -59,8 +59,7 @@ case "$1" in
 	/usr/lib/sourceforge/bin/install-apache.sh configure
 
 	# Install the chroot environment
-	# Don't put configure there !!!
-	/usr/lib/sourceforge/bin/install-chroot.sh 
+	/usr/lib/sourceforge/bin/install-chroot.sh configure
 	
 	# Create the DNS zone
 	# echo "Installing Sourceforge DNS zone"
