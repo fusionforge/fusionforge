@@ -42,10 +42,15 @@ class ArtifactHtml extends Artifact {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><PRE>
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><pre>
 '.$Language->getText('tracker_artifacthtml','date').': '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
-'.$Language->getText('tracker_artifacthtml','sender').': '. db_result($result,$i,'user_name') . '
-'. util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</PRE></td></tr>';
+'.$Language->getText('tracker_artifacthtml','sender').': ';
+				if(db_result($result,$i,'user_id') == 100) {
+					echo db_result($result,$i,'realname');
+				} else {
+					echo '<a href="/users/'.db_result($result,$i,'user_name').'/">'.db_result($result,$i,'realname').'</a>';
+				}
+				echo "\n\n". util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</pre></td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
