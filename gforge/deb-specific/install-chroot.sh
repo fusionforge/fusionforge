@@ -99,6 +99,10 @@ FIN
 	#cp -r /etc/ldap $CHROOTDIR/etc
 	cp /lib/libnss_ldap* $CHROOTDIR/lib
 	cp /usr/lib/libnss_ldap* $CHROOTDIR/usr/lib
+	cp /usr/lib/libdb* $CHROOTDIR/usr/lib
+	cp /usr/lib/libssl* $CHROOTDIR/usr/lib
+	cp /usr/lib/libcrypto* $CHROOTDIR/usr/lib
+
 	# Now this never change
 	cat > $CHROOTDIR/etc/passwd <<-FIN
 root:x:0:0:Root:/:/bin/bash

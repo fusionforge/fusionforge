@@ -1,9 +1,11 @@
 sourceforge (2.6-0+16+) experimental; urgency=low
 
+  * [Christian] repared broken delete function in new_parse.pl (again)
+  * [Christian] Fixed install-chroot.sh incomplete copy of libs for ldap
   * [Roland] DSF-Helperised a bit of Debconf for sourceforge-dns-bind9
     that had previously been forgotten.
 
- -- Roland Mas <lolando@debian.org>  Wed,  4 Dec 2002 13:48:33 +0100
+ -- Christian Bayle <bayle@debian.org>  Wed,  4 Dec 2002 18:23:42 +0100
 
 sourceforge (2.6-0+16) experimental; urgency=low
 
