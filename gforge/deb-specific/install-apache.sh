@@ -48,7 +48,7 @@ case "$1" in
 	    fi
 	fi
 
-	/etc/init.d/apache restart
+	invoke-rc.d apache restart
 	;;
 
     purge)
@@ -58,7 +58,7 @@ case "$1" in
 	    grep -v "Include /etc/sourceforge/sf-httpd.conf\|### Next line inserted by Sourceforge install" /etc/apache/httpd.conf > $tmp
 	    cat $tmp > /etc/apache/httpd.conf
 	    rm -f $tmp
-	    /etc/init.d/apache restart
+	    invoke-rc.d apache restart
   	fi
 	;;
 

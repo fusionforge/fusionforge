@@ -37,7 +37,7 @@ FIN
 	    echo "ServerType standalone" >>/etc/proftpd.conf
 	    echo "Include /etc/sourceforge/sf-proftpd.conf" >> /etc/proftpd.conf
 	fi
-	/etc/init.d/proftpd restart
+	invoke-rc.d proftpd restart
 	;;
 
     update)
@@ -56,7 +56,7 @@ FIN
 	    perl -pi -e "s:^ServerType standalone\n::" /etc/proftpd.conf
 	    perl -pi -e "s/^#SF#//" /etc/proftpd.conf
 	fi
-	/etc/init.d/proftpd restart
+	invoke-rc.d proftpd restart
 	rm -rf $FTPROOT
 	deluser sfftp || true
 	;;

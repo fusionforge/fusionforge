@@ -19,7 +19,7 @@ case "$1" in
 	;;
 
     chroot)
-	/etc/init.d/ssh stop
+	invoke-rc.d ssh stop
 	[ -f /var/lib/sourceforge/chroot/var/run/ssh.pid ] && kill $(cat /var/lib/sourceforge/chroot/var/run/ssh.pid)
 	rm -f /var/lib/sourceforge/chroot/var/run/ssh.pid
 	if ! grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh ; then
@@ -31,7 +31,7 @@ case "$1" in
     purge)
 	if grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh ; then
 	    perl -pi -e "s:start-stop-daemon --chroot /var/lib/sourceforge/chroot:start-stop-daemon:g" /etc/init.d/ssh
-	    /etc/init.d/ssh restart
+	    invoke-rc.d ssh restart
 	fi
 	;;
 

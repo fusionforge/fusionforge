@@ -15,7 +15,7 @@ fi
 case "$1" in
     configure)
 	domain_name=$(perl -e'require "/etc/sourceforge/local.pl"; print "$domain_name\n";')
-	ip_address=$(perl -e'require "/etc/sourceforge/local.pl"; print "$ip_address\n";')
+	ip_address=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbhost\n";')
 	# export domain_name=$1
 	# export ip_address=$2
   	if ! grep -q "// Next line inserted by Sourceforge install" /etc/bind/named.conf ; then
@@ -43,7 +43,7 @@ EOF
   	echo "	-Wizards advices are welcome"
 	/usr/lib/sourceforge/bin/dns_conf.pl
 
-	/etc/init.d/bind9 restart
+	invoke-rc.d bind9 restart
 	# This is equivalent but require some signature, not always there
 	# /usr/sbin/rndc reload
 
@@ -54,7 +54,7 @@ EOF
 	    perl -pi -e "s:zone.*sourceforge.*};\n::" /etc/bind/named.conf
 	    perl -pi -e "s:// Next line inserted by Sourceforge install\n::" /etc/bind/named.conf
 
-	    /etc/init.d/bind9 restart
+	    invoke-rc.d bind9 restart
 	    # This is equivalent but require some signature, not always there
 	    # /usr/sbin/rndc reload
 

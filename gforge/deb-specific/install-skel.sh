@@ -14,6 +14,8 @@ set -e
 
 case "$1" in
     configure)
+
+	# invoke-rc.d <service> <action>
 	;;
 
     purge)
