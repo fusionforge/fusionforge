@@ -1,4 +1,4 @@
-gforge (3.1-24+3) unstable; urgency=low
+gforge (3.1-25) unstable; urgency=low
 
   * Moved db_stop back a bit later in gforge-web-apache.postinst, because
     it seems modules-config uses Debconf.  Grr.
@@ -6,7 +6,7 @@ gforge (3.1-24+3) unstable; urgency=low
     (closes: #286999, #287799).
   * Converted old setup using php4-cgi to php4-cli.
 
- -- Roland Mas <lolando@debian.org>  Mon, 10 Jan 2005 15:33:46 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 10 Jan 2005 15:34:56 +0100
 
 gforge (3.1-24) unstable; urgency=low
 
