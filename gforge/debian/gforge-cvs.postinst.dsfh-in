@@ -42,9 +42,11 @@ case "$1" in
 	chown root:gforge /var/log/gforge/cvs
 	chmod 775 /var/log/gforge/cvs
 
+	db_stop
+
 	# Restart some services
-	[ -d /etc/ssh ] && invoke-rc.d ssh start
-	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree start
+	[ -d /etc/ssh ] && invoke-rc.d ssh start || true
+	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree start || true
 	
     ;;
 
