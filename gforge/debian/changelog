@@ -1,9 +1,12 @@
-gforge (3.1-13+1) unstable; urgency=low
+gforge (3.1-13+2) unstable; urgency=low
 
   * [Roland] Rewrote the "sourceforge" package description to fix a
     Lintian error.
+  * [Roland] po-debconf updates for French (Christian Perrier and the
+    debian-l10n-french team) and Dutch (cobaco and the debian-l10n-dutch
+    team) (closes: #232235, #237844, #238566).
 
- -- Roland Mas <lolando@debian.org>  Fri,  5 Mar 2004 13:46:55 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 18 Mar 2004 23:01:36 +0100
 
 gforge (3.1-13) unstable; urgency=low
 
