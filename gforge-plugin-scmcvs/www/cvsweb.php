@@ -19,10 +19,14 @@ if (!$sys_use_scm) {
 }
 
 $supportedContentTypes = array('text/html', 'text/x-cvsweb-markup');
+$plainTextDiffTypes = array('c', 's', 'u', '');
 
 $contentType = 'text/html';
 if(getStringFromGet('cvsroot') && strpos(getStringFromGet('cvsroot'), ';') === false) {
 	$projectName = getStringFromGet('cvsroot');
+	if(getStringFromGet('r1') && getStringFromGet('r2') && in_array(getStringFromGet('f'), $plainTextDiffTypes)) {
+		$contentType = 'text/plain';
+	}
 } else {
 	$queryString = getStringFromServer('QUERY_STRING');
 	if(preg_match_all('/[;]?([^\?;=]+)=([^;]+)/', $queryString, $matches, PREG_SET_ORDER)) {
@@ -32,6 +36,9 @@ if(getStringFromGet('cvsroot') && strpos(getStringFromGet('cvsroot'), ';') === f
 		$projectName = $query['cvsroot'];
 		if(isset($query['content-type'])) {
 			$contentType = $query['content-type'];
+		}
+		if(isset($query['r1']) && isset($query['r2']) && (!isset($query['f']) || in_array($query['f'], $plainTextDiffTypes))) {
+			$contentType = 'text/plain';
 		}
 	}
 }
