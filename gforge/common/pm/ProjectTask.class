@@ -959,7 +959,7 @@ class ProjectTask extends Error {
 				}
 		}
 		$old_array =& array_keys($this->getDependentOn());			
-		$diff_array=array_diff($old_array,$depend_arr);
+		$diff_array=array_diff($old_array,array_keys($depend_arr));
 		if (count($diff_array)>0) { 
 			for ($tmp=0;$tmp<count($old_array);$tmp++) {
 				$this->addHistory('dependent_on_id', $old_array[$tmp]);	
