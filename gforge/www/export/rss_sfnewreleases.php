@@ -34,11 +34,11 @@ $res = db_query("SELECT groups.group_name AS group_name,"
 
 // ## one time output
 print " <channel>\n";
-print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
+print "  <copyright>Copyright $GLOBALS[sys_name].</copyright>\n";
 print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
-print "  <description>SourceForge New Releases</description>\n";
+print "  <description>$GLOBALS[sys_name] New Releases</description>\n";
 print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
-print "  <title>SourceForge New Releases</title>\n";
+print "  <title>$GLOBALS[sys_name] New Releases</title>\n";
 print "  <webMaster>webmaster@$GLOBALS[sys_default_domain]</webMaster>\n";
 print "  <language>en-us</language>\n";
 // ## item outputs

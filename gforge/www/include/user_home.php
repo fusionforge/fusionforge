@@ -30,31 +30,31 @@ $HTML->header(array('title'=>'Developer Profile'));
 
 <?php echo $HTML->box1_top("Personal Information",true,false,false); ?>
 <TR>
-	<TD>User ID: </TD>
+	<TD><?php echo $Language->USER_ID; ?>: </TD>
 	<TD><B><?php print $user_id; ?></B> ( <A HREF="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><B>Skills Profile</B></A> )</TD>
 </TR>
 
 <TR valign=top>
-	<TD>Login Name: </TD>
+	<TD><?php echo $Language->LOGIN_NAME; ?>: </TD>
 	<TD><B><?php print $user->getUnixName(); ?></B></TD>
 </TR>
 
 <TR valign=top>
-	<TD>Real Name: </TD>
+	<TD><?php echo $Language->REALNAME; ?>: </TD>
 	<TD><B><?php print $user->getRealName(); ?></B></TD>
 </TR>
 
 <TR valign=top>
-	<TD>Email Addr: </TD>
+	<TD><?php echo $Language->EMAILADDR; ?>: </TD>
 	<TD>
 	<B><A HREF="/sendmessage.php?touser=<?php print $user_id; 
-		?>"><?php print $user->getUnixName(); ?> at <?php print $GLOBALS['sys_users_host']; ?></A></B>
+		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></A></B>
 	</TD>
 </TR>
 
 <TR>
 	<TD>
-	Site Member Since: 
+	<?php echo $Language->MEMBER_SINCE; ?>: 
 	</TD>
 	<TD><B><?php print date($sys_datefmt, $user->getAddDate()); ?></B>
 	<?php
@@ -63,7 +63,7 @@ $HTML->header(array('title'=>'Developer Profile'));
 
 	echo vote_show_user_rating($user_id);
 
-	echo $HTML->box1_middle('Diary And Notes');
+	echo $HTML->box1_middle($Language->DIARY);
  
 	/*
 
@@ -75,9 +75,9 @@ $HTML->header(array('title'=>'Developer Profile'));
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo 'Diary/Note Entries: '.db_result($res,0,0).'
 	<P>
-	<A HREF="/developer/diary.php?user='. $user_id .'">View Diary & Notes</A>
+	<A HREF="/developer/diary.php?user_id='. $user_id .'">View Diary & Notes</A>
 	<P>
-	<A HREF="/developer/monitor.php?user='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
+	<A HREF="/developer/monitor.php?user_id='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
 
 	?>
 </TD></TR>
@@ -100,8 +100,8 @@ $HTML->header(array('title'=>'Developer Profile'));
 // see if there were any groups
 if (db_numrows($res_cat) < 1) {
 	?>
-	<p>This developer is not a member of any projects.
-	<?php
+	<p>
+	<?php echo $Language->MY_no_projects;
 } else { // endif no groups
 	print "<p>This developer is a member of the following groups:<BR>&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
@@ -113,28 +113,12 @@ if (db_numrows($res_cat) < 1) {
 $HTML->box1_bottom(); ?>
 
 </TD><TD>
-If you are familiar with this user, please take a moment to rate him/her
-on the following criteria. Keep in mind, that your rating will be visible to
-the user and others.
-<P>
-The SourceForge Peer Rating system is based on concepts from 
-<A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
+<?php echo $Language->USERS_PEERINFO1; ?>
 	<CENTER>
         <?php echo vote_show_user_rate_box ($user_id); ?>
 	</CENTER>
 <P>
-The Peer Rating box shows all rating averages
-(and response levels) for each individual criteria. Due to the math and
-processing required to do otherwise, these numbers incoporate responses from
-both "trusted" and "non-trusted" users.
-<ul>
-<li> The "Sitewide Rank" field shows the user's rank compared to all ranked
-SourceForge users. 
-<li>The "Aggregate Score" shows an average, weighted overall score, based on
-trusted-responses only. 
-<li>The "Personal Importance" field shows the weight that users ratings of
-other developers will be given (between 1 and 1.5) -- higher rated user's
-responses are given more weight.  
+<?php echo $Language->USERS_PEERINFO2; ?>
 </ul>
 </TD></TR>
 </TABLE>
@@ -155,8 +139,8 @@ if (user_isloggedin()) {
 	<INPUT TYPE="HIDDEN" NAME="touser" VALUE="<?php echo $user_id; ?>">
 
 	<B>Your Email Address:</B><BR>
-	<B><?php echo user_getname().'@'.$GLOBALS['sys_users_host']; ?></B>
-	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo user_getname().'@'.$GLOBALS['sys_users_host']; ?>">
+	<B><?php echo user_getname().'@users.'.$GLOBALS['sys_default_domain']; ?></B>
+	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo user_getname().'@users.'.$GLOBALS['sys_default_domain']; ?>">
 	<P>
 	<B>Your Name:</B><BR>
 	<B><?php 

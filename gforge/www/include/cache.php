@@ -13,7 +13,9 @@ function cache_display($name,$function,$time) {
 	global $Language;
 	$filename = $GLOBALS['sf_cache_dir']."/sfcache_". $Language->getLanguageId() ."_". $GLOBALS['sys_theme'] ."_$name.sf";
 
-	while ((filesize($filename)<=1) || ((time() - filectime($filename)) > $time)) {
+	while ((!file_exists($filename))
+	       || (filesize($filename)<=1)
+	       || ((time() - filectime($filename)) > $time)) {
 		// file is non-existant or expired, must redo, or wait for someone else to
 
 		if (!file_exists($filename)) {

@@ -24,6 +24,8 @@ $sql = "SELECT month,day,site_views,subdomain_views FROM stats_site ORDER BY mon
 $res = db_query( $sql );
 
 $i = 0;
+$xdata = array();
+$ydata = array();
 while ( $row = db_fetch_array($res) ) {
         $xdata[$i]          = $i;
 	$xlabel[$i]         = (substr($row['month'],4) + 1 - 1) . "/" . $row['day'];

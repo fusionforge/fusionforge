@@ -56,12 +56,12 @@ if ($discrim) {
 		$expl_discrim[$i] = intval($expl_discrim[$i]);
 
 		// need one aliased table for everything
-		$discrim_queryalias .= ',trove_group_link trove_group_link_'.$i.' ';
+		$discrim_queryalias .= ', trove_group_link trove_group_link_'.$i.' ';
 		
 		// need additional AND entries for aliased tables
 		$discrim_queryand .= 'AND trove_group_link_'.$i.'.trove_cat_id='
 			.$expl_discrim[$i].' AND trove_group_link_'.$i.'.group_id='
-			.'trove_agg.group_id ';
+			.'trove_group_link.group_id ';
 
 		// must build query string for all urls
 		if ($i==0) {
@@ -180,10 +180,20 @@ print '</TD></TR></TABLE>';
 <?php
 // one listing for each project
 
-$query_projlist = "SELECT * 
-	FROM trove_agg
+// $query_projlist = "SELECT * 
+// 	FROM trove_agg
+// 	$discrim_queryalias
+// 	WHERE trove_agg.trove_cat_id='$form_cat'
+// 	$discrim_queryand";
+
+// [RM]
+$query_projlist = "SELECT trove_group_link.trove_cat_id, trove_group_link.group_id,
+                   groups.group_name, groups.unix_group_name, groups.status,
+                   groups.register_time, groups.short_description
+	FROM trove_group_link, groups
 	$discrim_queryalias
-	WHERE trove_agg.trove_cat_id='$form_cat'
+	WHERE trove_group_link.trove_cat_id='$form_cat'
+        AND trove_group_link.group_id = groups.group_id
 	$discrim_queryand";
 
 /*

@@ -5,7 +5,7 @@ require('vote_function.php');
 
 if (user_isloggedin()) {
 
-	$user=user_getid();
+	$user=&user_get_object($user_id);
 	if ($rated_user != $user) {
 		//how many questions can they be rated on?
 		$count=count($USER_RATING_QUESTIONS);
