@@ -18,6 +18,10 @@ $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),
 	<H2>[ #<?php echo $ah->getID(); ?> ] <?php echo $ah->getSummary(); ?></H2>
 
 	<TABLE WIDTH="100%">
+<?php
+if (session_loggedin()) {
+?>
+
             <FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
             <INPUT TYPE="HIDDEN" NAME="func" VALUE="monitor"> 
             <INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
@@ -27,7 +31,7 @@ $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),
             </FORM>
             </TD>
         </TR>
-
+<?php } ?>
 	<FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
 	<INPUT TYPE="HIDDEN" NAME="func" VALUE="postmod">
 	<INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
@@ -192,7 +196,7 @@ $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),
 		if ($count > 0) {
 
 			for ($i=0; $i<$count; $i++) {
-				echo '<TR><TD><INPUT TYPE="CHECKBOX" NAME="delete_file[]" VALUE="'. $file_list[$i]->getID() .'"> Delete</TD>'.
+				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><INPUT TYPE="CHECKBOX" NAME="delete_file[]" VALUE="'. $file_list[$i]->getID() .'"> Delete</TD>'.
 				'<TD>'. $file_list[$i]->getName() .'</TD>
 				<TD>'.  $file_list[$i]->getDescription() .'</TD>
 				<TD><A HREF="/tracker/download.php?group_id='.$group_id.'&atid='. $ath->getID() .'&file_id='.$file_list[$i]->getID().'&aid='. $ah->getID() .'">Download</A></TD></TR>';

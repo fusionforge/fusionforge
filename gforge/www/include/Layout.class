@@ -651,6 +651,8 @@ if ($params['toptab'] && $params['group']) {
 		print '
 			<OPTION value="soft"'.( $type_of_search == 'soft' ? ' SELECTED' : '' ).'>Software/Group</OPTION>';
 		print '
+			<OPTION value="skill"'.( $type_of_search == 'skill' ? ' SELECTED' : '' ).'>Skill</OPTION>';
+		print '
 			<OPTION value="people"'.( $type_of_search == 'people' ? ' SELECTED' : '' ).'>People</OPTION>';
 		print '
 			</SELECT>';

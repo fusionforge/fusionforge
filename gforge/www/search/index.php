@@ -155,7 +155,7 @@ if ($type_of_search == "soft") {
 	if ($rss) {
 		include_once('www/export/rss_utils.inc');
 		function callback($data_row) {
-                        // trove_cat_root=18 - Topic subtree
+						// trove_cat_root=18 - Topic subtree
 			// [CB] now $default_trove_cat defined in local.inc
 			$res = db_query("
 				SELECT trove_cat.fullpath 
@@ -377,6 +377,77 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 				. db_result($result, $i, "summary")."</A></TD>"
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>". date($sys_datefmt,db_result($result,$i,"open_date"))."</TD></TR>";
+		}
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
+	}
+
+} else if ($type_of_search == "skill") {
+	/*
+		Query to find users with a particular skill
+	*/
+
+	// If multiple words, separate them and put LIKE in between
+	$array=explode(" ",$words);
+	$words1=implode($array,"%' $crit title ILIKE '%");
+	$words2=implode($array,"%' $crit keywords ILIKE '%");
+
+	$sql =	"SELECT * 
+		FROM skills_data,users, skills_data_types 
+		WHERE ((title ILIKE '%$words1%') OR (keywords ILIKE '%$words2%')) 
+		AND (skills_data.user_id=users.user_id) 
+		AND (skills_data.type=skills_data_types.type_id) ORDER BY finish DESC";
+	$result = db_query($sql);
+	$rows = $rows_returned = db_numrows($result);
+
+	if (!$result || $rows < 1) {
+		$no_rows = 1;
+		echo "<H2>No matches found for '$words'</H2>";
+		echo db_error();
+//		echo $sql;
+	} else {
+
+/*		if ( $rows_returned > 25) {
+			$rows = 25;
+		}
+*/
+		echo "<H3>Search results for <B><I>$words</I></B></H3><P>\n\n";
+
+		$title_arr = array();
+		$title_arr[] = 'Name';
+		$title_arr[] = 'Type';
+		$title_arr[] = 'Title';
+		$title_arr[] = 'Keywords';
+		$title_arr[] = 'From';
+		$title_arr[] = 'To';
+
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+		$monthArray = array();
+		for($i = 1; $i <= 12; $i++) {
+			array_push($monthArray,date("M", mktime(0,0,0,$i,10,1980)));
+		}		
+		
+		for ( $i = 0; $i < $rows; $i++ ) {
+
+		   $start = db_result($result, $i, 'start');
+		   $startY = substr($start, 0, 4);
+		   $startM = substr($start, 4, 2);
+		   
+		   $finish = db_result($result, $i, 'finish');
+		   $finishY = substr($finish, 0, 4);
+		   $finishM = substr($finish, 4, 2);
+				
+		   echo '<TR BGCOLOR="'.html_get_alt_row_color($i+1).'">';
+		   echo '<TD><A HREF="/users/'.db_result($result, $i, 'user_name').'/">'.
+				  db_result($result, $i, 'realname').'</a></TD>';
+		   echo '<TD>'.db_result($result, $i, 'type_name').'</TD>';
+		   echo '<TD>'.db_result($result, $i, 'title').'</TD>';
+		   echo '<TD>'.db_result($result, $i, 'keywords').'</TD>';
+		   echo '<TD>'.$monthArray[$startM-1].' '.$startY.'</TD>';
+		   echo '<TD>'.$monthArray[$finishM-1].' '.$finishY.'</TD>';
+		   echo '<TR>';
 		}
 
 		echo $GLOBALS['HTML']->listTableBottom();

@@ -17,6 +17,9 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 	<H2>[ #<?php echo $ah->getID(); ?> ] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></H2>
 
 	<TABLE CELLPADDING="0" WIDTH="100%">
+<?php
+if (session_loggedin()) {
+?>
 			<FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
 			<INPUT TYPE="HIDDEN" NAME="func" VALUE="monitor">
 			<INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
@@ -26,6 +29,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 			</FORM>
 			</TD>
 		</TR>
+<?php } ?>
 		<TR>
 			<TD><B>Date:</B><BR><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></TD>
 			<TD><B>Priority:</B><BR><?php echo $ah->getPriority(); ?></TD>
@@ -101,7 +105,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 	if ($count > 0) {
 
 		for ($i=0; $i<$count; $i++) {
-			echo '<TR>
+			echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
 			<TD>'. $file_list[$i]->getName() .'</TD>
 			<TD>'.  $file_list[$i]->getDescription() .'</TD>
 			<TD><A HREF="/tracker/download.php?group_id='.$group_id.'&atid='. $ath->getID().'&file_id='.$file_list[$i]->getID().'&aid='. $ah->getID() .'">Download</A></TD>

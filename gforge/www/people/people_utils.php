@@ -416,7 +416,7 @@ function people_show_job_list($result) {
 
 	$rows=db_numrows($result);
 	if ($rows < 1) {
-		$return .= '<TR><TD COLSPAN="3"><H2>None Found</H2>'. db_error() .'</TD></TR>';
+		$return .= '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="3"><H2>None Found</H2>'. db_error() .'</TD></TR>';
 	} else {
 		for ($i=0; $i < $rows; $i++) {	
 			$return .= '

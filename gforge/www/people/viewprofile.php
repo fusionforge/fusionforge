@@ -1,19 +1,19 @@
 <?php
 /**
-  *
-  * SourceForge Jobs (aka Help Wanted) Board 
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
+ *
+ * Skills viewer page.
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2002 (c) Silicon and Software Systems (S3)
+ *
+ * @version   $Id$
+ *
+ */
 
 require_once('pre.php');
-require_once('www/people/people_utils.php');
+require_once('people_utils.php');
+require_once('skills_utils.php');
+
 
 if ($user_id) {
 
@@ -41,22 +41,14 @@ if ($user_id) {
 		}
 
 		echo '
-		<P>
-		<TABLE BORDER="0" WIDTH="100%">
-		<TR><TD>
-			<B>User Name:</B><BR>
-			'. db_result($result,0,'user_name') .'
-		</TD></TR>
-		<TR><TD>
-			<B>Resume:</B><BR>
-			'. nl2br(db_result($result,0,'people_resume')) .'
-		</TD></TR>
-		<TR><TD>
-		<H2>Skill Inventory</H2>';
-
-		//now show the list of desired skills
-		echo '<P>'.people_show_skill_inventory($user_id);
-		echo '</TD></TR></TABLE>';
+        <P>
+		<B>Skills profile for : </B>'. db_result($result,0,'realname') .
+        ' ('.db_result($result, 0, 'user_name') .
+        ')<br><br> <TABLE BORDER="0" WIDTH="100%">';
+        
+        displayUserSkills($user_id, 0);
+        		
+		echo '</TABLE>';
 	}
 
 	people_footer(array());
