@@ -49,6 +49,7 @@ echo $HTML->boxTop('Getting GForge');
 * optional
 <p />
 <strong>Get Help</strong><br />
+<a href="http://gforge.org/pro/"><strong>Pro Help</strong></a><br />
 <a href="http://gforge.org/forum/forum.php?forum_id=6"><strong>Help Board</strong></a><br />
 <a href="http://gforge.org/docman/?group_id=1"><strong>Online Docs</strong></a><br />
 <p />
