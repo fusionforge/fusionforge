@@ -23,7 +23,7 @@ modify_pam_ldap(){
 modify_libnss_ldap(){
 	dn=$1
 	# Check if DN is correct
-	if ! grep -q "^base.[ 	]*$dn" /etc/libnss-ldap.conf ; then
+	if ! grep -q "^base.[ 	]*$dc=" /etc/libnss-ldap.conf ; then
 		echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
 	fi
 	# Check bindpw
