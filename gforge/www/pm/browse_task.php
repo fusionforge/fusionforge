@@ -348,7 +348,7 @@ if ($rows < 1) {
 			<td><strong>'.$Language->getText('pm_detailtask','assigned_to').
 				'</strong><br />'. $tech_box .'</td>
 			<td><strong>'.$Language->getText('tracker','status').
-				'<br />'. $pg->statusBox ('status_id','xzxz',true,$Language->getText('pm_browsetask','no_change')) .'</td>
+				'</strong><br />'. $pg->statusBox ('status_id','xzxz',true,$Language->getText('pm_browsetask','no_change')) .'</td>
 			</tr>
 
 			<tr><td><strong>'.$Language->getText('pm_detailtask','subproject').'</strong><br />
