@@ -71,7 +71,7 @@ eval {
 
     } else {			# A 'groups' table exists
 	$action = "upgrade" ;
-	
+
 	$query = "SELECT count(*) from pg_class where relname = 'debian_meta_data' and relkind = 'r'";
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
@@ -84,11 +84,11 @@ eval {
 	    # We therefore need to create the table
 	    &create_metadata_table ("2.5-7+just+before+8") ;
 	}
-	
+
 	$version = &get_db_version ;
 	if (is_lesser $version, "2.5.9999") {
 	    debug "Found an old (2.5) database, will upgrade to 2.6" ;
-	    
+
 	    $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
 	    # debug $query ;
 	    $sth = $dbh->prepare ($query) ;
@@ -108,7 +108,7 @@ eval {
 	    }
 	}
     }
-    
+
     $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
     # debug $query ;
     $sth = $dbh->prepare ($query) ;
@@ -125,7 +125,7 @@ eval {
 	$sth->execute () ;
 	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
-	
+
 	$path = $array[0] ;
     }
 
@@ -140,7 +140,7 @@ eval {
 	      foreach my $file (@filelist) {
 		  debug "Processing $file" ;
 		  @reqlist = @{ &parse_sql_file ($file) } ;
-		  
+
 		  foreach my $s (@reqlist) {
 		      $query = $s ;
 		      # debug $query ;
@@ -150,7 +150,7 @@ eval {
 		  }
 	      }
 	      @reqlist = () ;
-	      
+
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
@@ -160,11 +160,11 @@ eval {
 	  $target = "2.5.9999.2+local+data+done" ;
 	  if (is_lesser $version, $target) {
 	      debug "Adding local data." ;
-	      
+
 	      do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
-	      
+
 	      my ($login, $pwd, $md5pwd, $email, $noreplymail, $date) ;
-	      
+
 	      $login = $admin_login ;
 	      $pwd = $admin_password ;
 	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
@@ -173,7 +173,7 @@ eval {
 	      $email = $server_admin ;
 	      $noreplymail="noreply\@$domain_name" ;
 	      $date = time () ;
-	      
+
 	      @reqlist = (
 			  "UPDATE groups SET homepage = '$domain_name/admin/' where group_id = 1",
 			  "UPDATE groups SET homepage = '$domain_name/news/' where group_id = 2",
@@ -187,7 +187,7 @@ eval {
 			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 3, 'A')",
 			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 4, 'A')"
 			  ) ;
-	      
+
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -196,21 +196,21 @@ eval {
 		  $sth->finish () ;
 	      }
 	      @reqlist = () ;
-	      
+
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
-	  
+
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.3+skills+done" ;
 	  if (is_lesser $version, $target) {
 	      debug "Inserting skills." ;
-	      
+
 	      foreach my $skill (split /;/, $skill_list) {
 		  push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
 	      }
-	      
+
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -219,7 +219,7 @@ eval {
 		  $sth->finish () ;
 	      }
 	      @reqlist = () ;
-	      
+
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
@@ -234,7 +234,7 @@ eval {
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
-	      
+
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
@@ -244,7 +244,7 @@ eval {
       } ;
 
       ($path eq '2.5-to-2.6') && do {
-	  
+
 	  $version = &get_db_version ;
 	  $target = "2.5-8" ;
 	  if (is_lesser $version, $target) {
@@ -253,7 +253,7 @@ eval {
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
-	      
+
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
@@ -277,17 +277,17 @@ eval {
 	  $target = "2.5-27" ;
 	  if (is_lesser $version, $target) {
 	      debug "Fixing unix_box entries." ;
-	      
+
 	      $query = "update groups set unix_box = 'shell'" ;
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
-	      
+
 	      $query = "update users set unix_box = 'shell'" ;
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
-	      
+
 	      debug "Also fixing a few sequences." ;
 
 	      &bump_sequence_to ("bug_pk_seq", 100) ;
@@ -311,7 +311,7 @@ eval {
 			  "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese', 'pt')",
 			  "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian','ru')"
 			  ) ;
-	      
+
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -320,7 +320,7 @@ eval {
 		  $sth->finish () ;
 	      }
 	      @reqlist = () ;
-	      
+
  	      &update_db_version ($target) ;
  	      debug "Committing." ;
  	      $dbh->commit () ;
@@ -467,7 +467,7 @@ eval {
                            'website', NULL, NULL, 0, NULL, 1, 0, 0, 0, 0,
                            1, 1, 0, '', 0, 0)"
 			  ) ;
-	      
+
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -490,12 +490,12 @@ eval {
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
-	      
+
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
-	  
+
 	  last PATH_SWITCH ;
       } ;
   } # PATH_SWITCH
@@ -514,12 +514,12 @@ eval {
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
-	
+
 	&update_db_version ($target) ;
 	debug "Committing." ;
 	$dbh->commit () ;
     }
-    
+
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+3" ;
     if (is_lesser $version, $target) {
@@ -542,7 +542,7 @@ eval {
 	debug "Committing." ;
 	$dbh->commit () ;
     }
-    
+
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+4" ;
     if (is_lesser $version, $target) {
@@ -583,52 +583,52 @@ eval {
 	debug "Committing." ;
 	$dbh->commit () ;
     }
-    
+
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+5" ;
     if (is_lesser $version, $target) {
 	debug "Registering yet another Savannah theme." ;
-	
+
 	$query = "INSERT INTO themes (dirname, fullname) VALUES ('savannah_darkslate', 'Savannah Dark Slate')";
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
-	
+
 	&update_db_version ($target) ;
 	debug "Committing." ;
 	$dbh->commit () ;
     }
-    
+
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+6" ;
     if (is_lesser $version, $target) {
 	debug "Updating language codes." ;
 
 	@reqlist = (
-		"UPDATE supported_languages SET language_code='en' where classname='English'",
-		"UPDATE supported_languages SET language_code='ja' where classname='Japanese'",
-		"UPDATE supported_languages SET language_code='iw' where classname='Hebrew'",
-		"UPDATE supported_languages SET language_code='es' where classname='Spanish'",
-		"UPDATE supported_languages SET language_code='th' where classname='Thai'",
-		"UPDATE supported_languages SET language_code='de' where classname='German'",
-		"UPDATE supported_languages SET language_code='it' where classname='Italian'",
-		"UPDATE supported_languages SET language_code='no' where classname='Norwegian'",
-		"UPDATE supported_languages SET language_code='sv' where classname='Swedish'",
-		"UPDATE supported_languages SET language_code='zh' where classname='Chinese'",
-		"UPDATE supported_languages SET language_code='nl' where classname='Dutch'",
-		"UPDATE supported_languages SET language_code='eo' where classname='Esperanto'",
-		"UPDATE supported_languages SET language_code='ca' where classname='Catalan'",
-		"UPDATE supported_languages SET language_code='ko' where classname='Korean'",
-		"UPDATE supported_languages SET language_code='bg' where classname='Bulgarian'",
-		"UPDATE supported_languages SET language_code='el' where classname='Greek'",
-		"UPDATE supported_languages SET language_code='id' where classname='Indonesian'",
-		"UPDATE supported_languages SET language_code='pt' where classname='Portuguese (Brazillian)'",
-		"UPDATE supported_languages SET language_code='pl' where classname='Polish'",
-		"UPDATE supported_languages SET language_code='pt' where classname='Portuguese'",
-		"UPDATE supported_languages SET language_code='ru' where classname='Russian'",
-		"UPDATE supported_languages SET language_code='fr' where classname='French'"
-		) ;
+		    "UPDATE supported_languages SET language_code='en' where classname='English'",
+		    "UPDATE supported_languages SET language_code='ja' where classname='Japanese'",
+		    "UPDATE supported_languages SET language_code='iw' where classname='Hebrew'",
+		    "UPDATE supported_languages SET language_code='es' where classname='Spanish'",
+		    "UPDATE supported_languages SET language_code='th' where classname='Thai'",
+		    "UPDATE supported_languages SET language_code='de' where classname='German'",
+		    "UPDATE supported_languages SET language_code='it' where classname='Italian'",
+		    "UPDATE supported_languages SET language_code='no' where classname='Norwegian'",
+		    "UPDATE supported_languages SET language_code='sv' where classname='Swedish'",
+		    "UPDATE supported_languages SET language_code='zh' where classname='Chinese'",
+		    "UPDATE supported_languages SET language_code='nl' where classname='Dutch'",
+		    "UPDATE supported_languages SET language_code='eo' where classname='Esperanto'",
+		    "UPDATE supported_languages SET language_code='ca' where classname='Catalan'",
+		    "UPDATE supported_languages SET language_code='ko' where classname='Korean'",
+		    "UPDATE supported_languages SET language_code='bg' where classname='Bulgarian'",
+		    "UPDATE supported_languages SET language_code='el' where classname='Greek'",
+		    "UPDATE supported_languages SET language_code='id' where classname='Indonesian'",
+		    "UPDATE supported_languages SET language_code='pt' where classname='Portuguese (Brazillian)'",
+		    "UPDATE supported_languages SET language_code='pl' where classname='Polish'",
+		    "UPDATE supported_languages SET language_code='pt' where classname='Portuguese'",
+		    "UPDATE supported_languages SET language_code='ru' where classname='Russian'",
+		    "UPDATE supported_languages SET language_code='fr' where classname='French'"
+		    ) ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
@@ -738,56 +738,38 @@ eval {
 	$dbh->commit () ;
     }
 
-# This is commented out for now, since the operations to do are more complex than just these.
-# I'll fix this, then uncomment.  Please don't touch.
-#   -- Roland
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+10" ;
+    if (is_lesser $version, $target) {
+ 	debug "Updating supported_languages table." ;
 
-#     $version = &get_db_version ;
-#     $target = "2.6-0+checkpoint+10" ;
-#     if (is_lesser $version, $target) {
-# 	debug "Updating language ids." ;
-
-# 	@reqlist = (
-#           		"UPDATE supported_languages SET language_id=1 where classname='English'",
-#           		"UPDATE supported_languages SET language_id=2 where classname='Japanese'",
-#           		"UPDATE supported_languages SET language_id=3 where classname='Hebrew'",
-#           		"UPDATE supported_languages SET language_id=4 where classname='Spanish'",
-#           		"UPDATE supported_languages SET language_id=5 where classname='Thai'",
-#           		"UPDATE supported_languages SET language_id=6 where classname='German'",
-#           		"UPDATE supported_languages SET language_id=7 where classname='French'",
-#           		"UPDATE supported_languages SET language_id=8 where classname='Italian'",
-#           		"UPDATE supported_languages SET language_id=9 where classname='Norwegian'",
-#           		"UPDATE supported_languages SET language_id=10 where classname='Swedish'",
-#           		"UPDATE supported_languages SET language_id=11 where classname='Chinese'",
-#           		"UPDATE supported_languages SET language_id=12 where classname='Dutch'",
-#           		"UPDATE supported_languages SET language_id=13 where classname='Esperanto'",
-#           		"UPDATE supported_languages SET language_id=14 where classname='Catalan'",
-#           		"UPDATE supported_languages SET language_id=15 where classname='Korean'",
-#           		"UPDATE supported_languages SET language_id=16 where classname='Bulgarian'",
-#           		"UPDATE supported_languages SET language_id=17 where classname='Greek'",
-#           		"UPDATE supported_languages SET language_id=18 where classname='Indonesian'",
-#           		"UPDATE supported_languages SET language_id=19 where classname='Portuguese (Brasillian)'",
-#           		"UPDATE supported_languages SET language_id=20 where classname='Polish'",
-#           		"UPDATE supported_languages SET language_id=21 where classname='Portuguese'",
-#           		"UPDATE supported_languages SET language_id=22 where classname='Russian'",
-# 		    ) ;
-# 	foreach my $s (@reqlist) {
-# 	    $query = $s ;
-# 	    # debug $query ;
-# 	    $sth = $dbh->prepare ($query) ;
-# 	    $sth->execute () ;
-# 	    $sth->finish () ;
-# 	}
-# 	@reqlist = () ;
-# 	&update_db_version ($target) ;
-# 	debug "Committing." ;
-# 	$dbh->commit () ;
-#     }
+ 	@reqlist = (
+		    "ALTER TABLE supported_languages RENAME TO supported_languages_old",
+		    "CREATE TABLE supported_languages (language_id integer DEFAULT nextval('supported_languages_pk_seq'::text) NOT NULL, name text, filename text, classname text, language_code character(5))",
+		    "INSERT INTO supported_languages SELECT * FROM supported_languages_old",
+		    "DROP TABLE supported_languages_old",
+		    "ALTER TABLE supported_languages ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id)",
+		    "ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL",
+		    "ALTER TABLE doc_data ADD CONSTRAINT docdata_languageid_fk FOREIGN KEY (language_id) REFERENCES supported_languages(language_id) MATCH FULL",
+		    "UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
+ 		    ) ;
+ 	foreach my $s (@reqlist) {
+ 	    $query = $s ;
+ 	    # debug $query ;
+ 	    $sth = $dbh->prepare ($query) ;
+ 	    $sth->execute () ;
+ 	    $sth->finish () ;
+ 	}
+ 	@reqlist = () ;
+ 	&update_db_version ($target) ;
+ 	debug "Committing." ;
+ 	$dbh->commit () ;
+    }
 
 
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
-    
+
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
     # For safety, we roll back.
@@ -814,7 +796,7 @@ sub is_lesser ( $$ ) {
     my $v2 = shift || 0 ;
 
     my $rc = system "dpkg --compare-versions $v1 lt $v2" ;
-    
+
     return (! $rc) ;
 }
 
@@ -823,7 +805,7 @@ sub is_greater ( $$ ) {
     my $v2 = shift || 0 ;
 
     my $rc = system "dpkg --compare-versions $v1 gt $v2" ;
-    
+
     return (! $rc) ;
 }
 
@@ -854,7 +836,7 @@ sub create_metadata_table ( $ ) {
 	$sth->execute () ;
 	$sth->finish () ;
     }
-    
+
     $query = "SELECT count(*) FROM debian_meta_data WHERE key = 'db-version'";
     # debug $query ;
     $sth = $dbh->prepare ($query) ;
@@ -892,7 +874,7 @@ sub get_db_version () {
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
     $sth->finish () ;
-    
+
     my $version = $array [0] ;
 
     return $version ;
@@ -905,7 +887,7 @@ sub drop_table_if_exists ( $ ) {
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
     $sth->finish () ;
-    
+
     if ($array [0] != 0) {
 	# debug "Dropping table $tname" ;
 	$query = "DROP TABLE $tname" ;
@@ -923,7 +905,7 @@ sub drop_sequence_if_exists ( $ ) {
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
     $sth->finish () ;
-    
+
     if ($array [0] != 0) {
 	# debug "Dropping sequence $sname" ;
 	$query = "DROP SEQUENCE $sname" ;
@@ -941,7 +923,7 @@ sub drop_index_if_exists ( $ ) {
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
     $sth->finish () ;
-    
+
     if ($array [0] != 0) {
 	# debug "Dropping index $iname" ;
 	$query = "DROP INDEX $iname" ;
@@ -959,7 +941,7 @@ sub drop_view_if_exists ( $ ) {
     $sth->execute () ;
     my @array = $sth->fetchrow_array () ;
     $sth->finish () ;
-    
+
     if ($array [0] != 0) {
 	# debug "Dropping view $iname" ;
 	$query = "DROP VIEW $iname" ;

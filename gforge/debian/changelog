@@ -37,8 +37,8 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     the STDOUT and STDERR of all commands.
   * [Roland] Added extra columns (use_ftp, use_tracker, use_frs,
     use_stats, enable_pserver, enable_anoncvs) in the groups table.
-  * [Christian] added web management of these new columns, now you can hide
-    almost everything in project page 
+  * [Christian] added web management of these new columns, now you can
+    hide almost everything in project page.
   * [Roland] sourceforge-ldap-openldap now depends on libnss-ldap.  This
     should not be necessary and will have to be fixed at some point, but
     for now I'm just too lazy to move the code from install-ldap.sh to
@@ -48,8 +48,15 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     Thanks, Bob!
   * [Roland] Included full Spanish translation from Vicente Ruiz.  Thanks
     a lot, Vicente!
+  * [Roland] Changes to the supported_languages table: the language_code
+    field is now 5 characters wide (2 characters previously).  We can thus
+    rename the language code for Brazilian to its proper value, pt_BR.
+    Also renamed the files to PortugueseBrazilian with one 'l' only, which
+    is the proper spelling for it.
+  * [Roland] Also, added a foreign key constraint: the doc_data table
+    references a language_id.
 
- -- Roland Mas <lolando@debian.org>  Mon, 28 Oct 2002 19:31:18 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 30 Oct 2002 22:27:23 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
