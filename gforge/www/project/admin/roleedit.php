@@ -244,7 +244,7 @@ for ($i=0; $i<count($keys); $i++) {
 
 echo $HTML->listTableBottom();
 
-echo '<input type="submit" name="submit" value="Submit">
+echo '<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'">
 </form>';
 
 project_admin_footer(array());

@@ -73,7 +73,7 @@ echo '
 <input type="hidden" name="accumulated_ids" value="'. implode(',',$accumulated_ids) .'">';
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-echo "Choose the <strong>First Letter</strong> of the name of the person you wish to add.<p>";
+echo $Language->getText('project_admin', 'choose_first_letter');
 for ($i=0; $i<count($abc_array); $i++) {
     if ($sw == $abc_array[$i]) {
         echo '<strong>'.$abc_array[$i].'</strong>&nbsp;';
@@ -83,7 +83,7 @@ for ($i=0; $i<count($abc_array); $i++) {
 }
 
 if (!$res || db_numrows($res) < 1) {
-	echo "No Matching Users Found";
+	echo $Language->getText('project_admin', 'no_matching_user');
 } else {
 
 	$titles[]=$Language->getText('project_admin','userrealname');
@@ -108,7 +108,7 @@ if (!$res || db_numrows($res) < 1) {
 
 }
 
-echo '<input type="submit" name="finished" value="Finished">
+echo '<input type="submit" name="finished" value="'.$Language->getText('project_admin', 'finish').'">
 </form>';
 
 project_admin_footer(array());

@@ -1485,17 +1485,20 @@ project_admin	add_user	Ajouter un utilisateur
 project_admin	addfromlist	Ajouter des utilisateurs à partir de la liste
 project_admin	addfromlist1	Cochez la case à côté du nom de l'utilisateur que vous souhaitez ajouter. Vos sélections seront conservées si vous cliquez sur une des lettres ci-dessous. Quand vous avez terminé votre sélection, cliquez sur "Finir" pour choisir les rôles pour les utilisateurs que vous ajoutez.
 project_admin	addfromlist2	Choisissez un rôle pour chaque utilisateur et cliquez sur "Ajouter Tous".
+project_admin	choose_first_letter	<p>Choisissez la <strong>première lettre</strong> du nom de la personne que vous souhaitez ajouter.</p>
 project_admin	docmanager_admin	Administration de la documentation
 project_admin	download_tarball	Télécharger une archive de votre CVS (mise à jour chaque nuit)
 project_admin	edit_file_releases	Éditer/Ajouter Versions de fichier
 project_admin	edit_member_permissions	Éditer les permissions des membres
 project_admin	file_releases	Versions de fichier
+project_admin	finish	Finir
 project_admin	forum_admin	Administration des forums
 project_admin	frs_admin	Administration du système de publication de fichiers
 project_admin	group_members	Membres du groupe
 project_admin	homepage_link	Lien vers la page d'accueil&nbsp;:&nbsp;
 project_admin	mail_admin	Administration des listes de diffusion
 project_admin	news_admin	Administration des annonces
+project_admin	no_matching_user	<p>Aucun utilisateur correspondant</p>
 project_admin	packages	Paquet&nbsp;
 project_admin	plugins_admin	Administration des plugins
 project_admin	project_information	Informations diverses sur le projet

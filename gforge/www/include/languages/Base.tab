@@ -1469,18 +1469,21 @@ project_admin	add_user	Add User
 project_admin	addfromlist	Add Users From List
 project_admin	addfromlist1	Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click "Finish" to choose the roles for the users you are adding.
 project_admin	addfromlist2	Choose the role for each user and then press &quot;Add All&quot;.
+project_admin	choose_first_letter	<p>Choose the <strong>First Letter</strong> of the name of the person you wish to add.</p>
 project_admin	user_updated	User Updated Successfully
 project_admin	docmanager_admin	DocManager Admin
 project_admin	download_tarball	Download Your Nightly CVS Tree Tarball
 project_admin	edit_file_releases	Edit/Add File Releases
 project_admin	edit_member_permissions	Edit Member Permissions
 project_admin	file_releases	File Releases
+project_admin	finish	Finish
 project_admin	forum_admin	Forum Admin
 project_admin	frs_admin	FRS Admin
 project_admin	group_members	Group Members
 project_admin	homepage_link	Homepage Link:&nbsp;
 project_admin	mail_admin	Mail Admin
 project_admin	news_admin	News Admin
+project_admin	no_matching_user	<p>No Matching Users Found</p>
 project_admin	packages	Packages
 project_admin	plugins_admin	Plugins Admin
 project_admin	project_information	Misc. Project Information
