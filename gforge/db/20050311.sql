@@ -10,4 +10,4 @@ CREATE RULE projecttask_delete_agg AS
 	UPDATE project_counts_agg SET
 		count = (project_counts_agg.count + 1),
 		open_count = (CASE WHEN old.status_id=1 THEN project_counts_agg.open_count + 1 ELSE project_counts_agg.open_count END)
-		WHERE (project_counts_agg.group_project_id = new.group_project_id);
+		WHERE (project_counts_agg.group_project_id = old.group_project_id);
