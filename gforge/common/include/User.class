@@ -1145,9 +1145,9 @@ class User extends Error {
 	function getThemeID() {
 		global $sys_theme;
 		if (!$this->theme_id) {
-			$res=db_query("SELECT count(*) FROM theme_prefs WHERE user_id='".$this->getID()."'");
-			$row_count = db_fetch_array($res);
-			if (!$res || $row_count['count'] < 1) {
+			$res=db_query("SELECT user_theme FROM theme_prefs WHERE user_id='".$this->getID()."'");
+			$row_count = db_numrows($res);
+			if (!$res || $row_count < 1) {
 				$res=db_query("SELECT theme_id FROM themes WHERE dirname='$sys_theme'");
 				$this->theme_id=db_result($res,0,'theme_id');
 			} else {
