@@ -1,3 +1,8 @@
+2004-11-23  Tim Perdue <tim@gforge.org>
+
+	* www/my/index.php and www/pm/ganttofuser.php - this gantt doesn't yet 
+	work on my install, but I am comitting it hoping someone will test it.
+
 2004-11-28  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/PortugueseBrazilian.tab: Recoded to UTF-8.

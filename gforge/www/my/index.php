@@ -210,6 +210,7 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 	*/
 	$last_group=0;
 	echo $HTML->boxTop($Language->getText('my', 'tasks'));
+	//echo "<a href=. onclick=\"window.open('/pm/ganttofuser.php')\"><strong>".$Language->getText('pm_include_grouphtml','gantt_chart')."</strong></a>";
 	$projectTasksForUser = new ProjectTasksForUser(session_get_user());
 	$userTasks =& $projectTasksForUser->getTasksByGroupProjectName();
 
