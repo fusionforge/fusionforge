@@ -216,7 +216,7 @@ sub update_user {
 	# print("Updating User Account for : $username\n");
 		
         $home_dir = $homedir_prefix.$username;
-	$incoming_dir = $home_dir.".incoming" ;
+	$incoming_dir = $home_dir."/incoming" ;
 	foreach my $dir ($home_dir, $incoming_dir) {
 	    unless (-d $dir) {
 		mkdir $dir, 0755;
