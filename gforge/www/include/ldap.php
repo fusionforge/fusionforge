@@ -67,6 +67,20 @@ function sf_ldap_modify($dn,$entry) {
 	return @ldap_modify($ldap_conn,$dn,$entry);
 }
 
+function sf_ldap_modify_if_exists($dn,$entry) {
+	$res = sf_ldap_modify($dn,$entry);
+	if ($res) {
+		return true ;
+	} else {
+		$err = ldap_errno ($ldap_conn) ;
+		if ($err == 32) {
+			return true ;
+		} else {
+			return false ;
+		}
+	};
+}
+
 function sf_ldap_mod_add($dn,$entry) {
 	global $ldap_conn;
 	return @ldap_mod_add($ldap_conn,$dn,$entry);
@@ -156,14 +170,15 @@ function sf_ldap_create_user_from_object(&$user) {
 	$entry['objectClass'][1]='account';
 	$entry['objectClass'][2]='posixAccount';
 	$entry['objectClass'][3]='shadowAccount';
-	$entry['objectClass'][4]='x-sourceforgeAccount';
+	$entry['objectClass'][4]='debSfAccount';
 	$entry['uid']=$user->getUnixName();
 	$entry['cn']=$user->getRealName();
 	$entry['gecos']=$user->getRealName();
 	$entry['userPassword']='{crypt}'.$user->getUnixPasswd();
 	$entry['homeDirectory']="/home/users/".$user->getUnixName();
 	$entry['loginShell']=$user->getShell();
-	$entry['x-cvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
+	$entry['debSfCvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
+	$entry['debSfForwardEmail']=$user->getEmail();
 	$entry['uidNumber']=$user->getUnixUID();
 	$entry['gidNumber']=100; // users
 	$entry['shadowLastChange']=0; // TODO FIXME
@@ -209,7 +224,7 @@ function sf_ldap_user_set_attribute($user_id,$attr,$value) {
 	$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
 	$entry[$attr]=$value;
 
-	if (!sf_ldap_modify($dn,$entry)) {
+	if (!sf_ldap_modify_if_exists($dn,$entry)) {
 	    sf_ldap_set_error_msg("ERROR: cannot change LDAP attribute '$attr' for user '".
 	                 $user->getUnixName()."': ".sf_ldap_error()."<br>");
 	    return false;
