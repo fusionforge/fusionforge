@@ -2,7 +2,7 @@
 #
 # $Id$
 #
-# Create the mailing-lists from the database
+# Fix the mailing-lists if they have been broken in previous versions
 # Roland Mas <lolando@debian.org>
 
 use DBI ;
@@ -32,8 +32,8 @@ eval {
                      mail_group_list.password,
                      mail_group_list.description
               FROM mail_group_list, users
-              WHERE mail_group_list.status = 1
-                    AND mail_group_list.list_admin = users.user_id" ; # Status = 1: list just created on the website
+              WHERE mail_group_list.status = 3
+                    AND mail_group_list.list_admin = users.user_id" ; # Status = 3: list already created
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     while (my @myarray = $sth->fetchrow_array ()) {
@@ -47,14 +47,6 @@ eval {
 	my ($tmp) ;
 
 	($group_list_id, $listname, $user_name, $password, $description)= @array ;
-	my $cmd = "/usr/sbin/newlist -q $listname $user_name\@users.$domain_name $password >/dev/null 2>&1" ;
-	#print "cmd = <$cmd>\n" ;
-	system ($cmd) ;
-
-	$query = "UPDATE mail_group_list SET status = 2 where group_list_id = group_list_id" ; # Status = 2: list created on Mailman
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
 
 	$tmp = mktemp ("/tmp/XXXXXX") ;
 	$cmd = "/usr/lib/mailman/bin/config_list -o $tmp $listname" ;
@@ -73,13 +65,8 @@ eval {
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
 
-	$query = "UPDATE mail_group_list SET status = 3 where group_list_id = group_list_id" ; # Status = 3: list configured on Mailman
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-
-	#debug "Committing." ;
-	$dbh->commit () ;
+	#debug "Rolling back -- nothing should have changed anyway." ;
+	$dbh->rollback () ;
     }
     
     # There should be a commit at the end of every block above.
