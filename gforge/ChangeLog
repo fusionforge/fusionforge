@@ -1,3 +1,9 @@
+2003-02-04 Reinhard Spisser <reinhard@spisser.it>
+
+	* common/tracker/*,
+	www/tracker/index.php,
+	Localization of the tracker
+	
 2003-02-03 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/vote_function.php:

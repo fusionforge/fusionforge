@@ -350,6 +350,8 @@ general	submit	Invia
 general	error	Errore
 general	more	Altri
 general	browse	Visualizza
+general	open	aperti
+general	total	totale
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	CVS Repository
@@ -411,7 +413,7 @@ menu	admin	Amministrazione
 menu	account_maintenance	Opzioni Utente
 my	about_blurb	La tua pagina personale contiene un elenco di bug, attivita che ti sono stati assegnati, inoltre l'elenco dei progetti ai quali partecipi.
 my	no_bookmarks	Non ci sono segnalibri salvati
-my	no_monitored_filemodules	<H3>No hai richiesto la notifica di alcun file</H3><P>Quando &egrave; attivita la notifica di un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
+my	no_monitored_filemodules	<H3>Non hai richiesto la notifica di alcun file</H3><P>Quando &egrave; attivita la notifica di un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
 my	no_monitored_forums	<H3>Non hai richiesto la notifica di nessun forum</H3><P>Quando &egrave; attivita la notifica di  un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare la notifica cliccando su &quot;Notifica Forum&quot;
 my	no_open_tasks	Non ci sono attivit&agrave; aperte assegnate a te.
 my	no_projects	Non sei membro di nessun progetto attivo
@@ -837,9 +839,9 @@ register_requirements	title	Services & Requirements
 register_tos	section	New Project Registration
 register_tos	title	Terms Of Service Agreement
 tracker	title	Trackers
-tracker	choose	Choose a tracker and you can browse/edit/add items to it.
-tracker	item_created	Item Successfully Created
-tracker	updated_successful	Updated Successfully
+tracker	choose	Seleziona un tracker e puoi visualizzare/aggiungere o modificare elementi.
+tracker	item_created	Elemento creato con successo
+tracker	updated_successful	Aggiornato con successo
 tracker	tracker_item	Tracker Item
 tracker	file_upload_successful	File Upload: Successful
 tracker	file_delete_upload	File Upload
@@ -1008,6 +1010,8 @@ tracker_admin	add_permissions	Aggiungi/modifica permessi utente
 tracker_admin	add_permissions_info	Aggiungi/rimuovi utenti a/da questo tracker
 tracker_admin	update_preferences	Aggiorna preferenze
 tracker_admin	update_preferences_info	Imposta preferenze come tempi di scadenza, indirizzi email, etc
+tracker_admin	error_inserting	Errore nell'inserimento
+tracker_admin	error_updating	Errore nell'aggiornamento
 tracker_reporting	title	Reportistica tracker
 tracker_reporting	aging_report	Aging Report
 tracker_reporting	dist_by_technician	Distribuzione per tecnici
@@ -1026,6 +1030,24 @@ tracker_reporting	open_by_group	Elementi aperti per gruppo
 tracker_reporting	all_by_group	Tutti gli elementi per gruppo
 tracker_reporting	open_items_by_resolution	Elementi aperti per risoluzione
 tracker_reporting	all_by_resolution	Tutti gli elementi per risoluzione
+tracker_artifact	private_error	Solo membri del gruppo possono vedere elementi privati
+tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
+tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
+tracker_artifact	error_summary_required	Il sommario &egrave; obbligatorio
+tracker_artifact	error_body_required	Il contenuto &egrave; obbligatorio
+tracker_artifact	double_submit	Stai cercando di inserire due volte lo stesso messaggio. 
+tracker_artifact	error_valid_email_required	SetMonitor::Valid Email Address Required
+tracker_artifact	monitoring_activated	Notifica attivata
+tracker_artifact	monitoring_deactivated	Notifica disattivata
+tracker_artifact	logged_in_yes	Collegato: no
+tracker_artifact	logged_in_no	Collegato: s&igrave;
+tracker_artifact	nothing_changed	Nessuna modifica inserita
+artifact_canned	required_fields	Nome e assegnatario sono campi obbligatori
+artifact_category	required_fields	Nome e assegnatario sono campi obbligatori
+tracker_artifactfile	required_fields	Nome file, tipo, dimensione e data sono campi obbligatori
+tracker_artifactgroup	required_field	Nome &egrave; un campo obbligatorio
+tracker_artifacttype	required_fields	Nome, descrizione, fuori tempo e tempo scaduto sono campi obbligatori
+
 stats_graph	sitewide_statistics_graphs      Statistiche sul sito
 stats_graph	overview_stats	Sommario sulle statistiche
 stats_graph	project_stats	Statistiche del progetto

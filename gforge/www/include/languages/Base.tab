@@ -424,6 +424,8 @@ general	error_getting	Error Getting $1
 general	error_getting_new	Error Getting New $1
 general	error_missing_params	Missing Parameters
 general	browse	Browse
+general	open	open
+general	total	total
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
@@ -1184,6 +1186,8 @@ tracker_admin	auto_assign_to	Auto-Assign To
 tracker_admin	category_add_warning	Once you add a category, it cannot be deleted
 tracker_admin	group_name	New group Name
 tracker_admin	intro	<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming
+tracker_admin	error_inserting	Error inserting
+tracker_admin	error_updating	Error updating
 tracker_admin_add_cat	title	Add Categories to $1
 tracker_admin_add_cat	no_categories	No categories defined
 tracker_admin_add_group	title	Add/Change Groups to $1
@@ -1361,3 +1365,20 @@ tracker_artifacttype	submit_new	Submit New
 tracker_artifacttype	admin_functions	Admin Functions
 tracker_artifacttype	add_artifact_types	Add/Browse Artifact Types
 tracker_artifacttype	edit_options	Edit/Update Options in
+tracker_artifact	private_error	Artifact: Only Group Members Can View Private ArtifactTypes
+tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
+tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
+tracker_artifact	error_summary_required	Artifact: Message Summary Is Required
+tracker_artifact	error_body_required	Artifact: Message Body Is Required'
+tracker_artifact	double_submit	You Attempted To Double-submit this item. Please avoid double-clicking.
+tracker_artifact	error_valid_email_required	SetMonitor::Valid Email Address Required
+tracker_artifact	monitoring_activated	Now Monitoring
+tracker_artifact	monitoring_deactivated	Monitoring Deactivated
+tracker_artifact	logged_in_yes	Logged In: YES
+tracker_artifact	logged_in_no	Logged In: NO
+tracker_artifact	nothing_changed	Nothing Changed - Update Cancelled
+artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
+artifact_category	required_fields	ArtifactCategory: name and assignee are Required
+tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are Required
+tracker_artifactgroup	required_field	ArtifactGroup: name is Required
+tracker_artifacttype	required_fields	ArtifactType: Name, Description, Due Period, and Status Timeout are required
