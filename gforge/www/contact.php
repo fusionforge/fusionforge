@@ -13,9 +13,9 @@
 
 require_once('pre.php');
 
-$HTML->header(array('title'=>'Contact '.$GLOBALS['sys_name'],'pagename'=>'contact'));
+$HTML->header(array('title'=>'Contact '.$GLOBALS['sys_name'],'pagename'=>'contact','titlevars'=>array($GLOBALS['sys_name'])));
 
-echo $Language->getText('contact', 'about_blurb');
+echo $Language->getText('contact', 'about_blurb', array($GLOBALS['sys_name'], $GLOBALS['sys_default_domain']));
 
 $HTML->footer(array());
 ?>

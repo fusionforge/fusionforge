@@ -82,16 +82,16 @@ account_register	err_email	Direcci&oacute;n de correo invalida
 account_register	err_userexist	El usuario ya existe.
 account_register	err_mailexist	Existe un usuario con este correo - usa el buscador de personas para  recuperar el acceso.
 account_register	err_badinsert	Inserci&oacute;n err&oacute;nea
-account_unsubscribe	all_mailings	todas las notificaciones y correos
+account_unsubscribe	all_mailings	todas las notificaciones y correos de $1
 account_unsubscribe	site_mailings	Correos de $1
-account_verify	title	GForge Verificaci&oacute;n de la cuenta
+account_verify	title	$1 Verificaci&oacute;n de la cuenta
 account_verify	verify_blurb	<p>Para completar tu registro, autent&iacute;cate ahora. De esta forma tu cuenta se activar&aacute;</p>
 conf	content_encoding	utf-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	es
 conf	language_id	4
-contact	about_blurb	<p>Esta es la p&aacute;gina de contacto de <b>GForge.net</b> -- si est&aacute;s teniendo problemas con un proyecto que alojamos nosotros por favor mande sus preguntas/informaci&oacute;n al encargado de soporte y problemas de ese proyecto. Puedes acceder a esta funcionalidad visitando la p&aacute;gina inicial de un proyecto en: sourceforge.net/projects/&lt;nombre del proyecto&gt; y pulsando en la herramienta apropiada.</p><p>Si tienes una petici&oacute;n de soporte, un reporte de error o quiere comunicarse directamente con el <A href="staff.php">Equipo de Sourceforge</a>, por favor ponga cuidado en usar el destinatario adecuado:</p><ul><li>Para pedir soporte para tu cuenta o tu proyecto, visita el <a href="/support/?func=addsupport&group_id=1">Encargado de soporte de GForge</a></li><li>Si ha encontrado un error en Sourceforge, por favor contacte con <a href="/bugs/?func=addbug&group_id=1">Registro de errores de GForge</a></li><li>Todas las preguntas de prensa deben ser dirigidas a <a href="mailto:eureka@valinux.com">Eureka Endo</a>, Press Relations Manager, VA Linux Systems.</li></ul>
-contact	title	Contacta GForge
+contact	about_blurb	<p>&Eacute;sta es la p&aacute;gina de contacto de <b>$1</b> -- si est&aacute;s teniendo problemas con un proyecto que alojamos nosotros por favor mande sus preguntas/informaci&oacute;n al encargado de soporte y problemas de ese proyecto. Puedes acceder a esta funcionalidad visitando la p&aacute;gina inicial de un proyecto en: <tt>http://$2/projects/&lt;nombre del proyecto&gt;</tt> y pulsando en la herramienta apropiada.</p><p>Si tienes una petici&oacute;n de soporte, un reporte de error o quiere comunicarse directamente con el equipo de $1, por favor visite <a href="/projects/sourceforge">la p&aacute;gina del proyecto de $1</a>.</p>
+contact	title	Contacta $1
 cvs	section	Proyecto: $1
 cvs	title	CVS
 cvs	anoncvs	<P><B>Acceso por CVS an&oacute;nimo</B> <P>El repositorio CVS de este proyecto puede ser extraido a trav&eacute;s de un CVS an&oacute;nimo (pserver) con las siguientes instrucciones. El m&oacute;dulo que quieres sacar debe ser especificado como el <I>modulename</I> (el nombre del m&oacute;dulo). Cuando preguntamos por una contrase&ntilde;a para <I>anonymous</I>, simplemente pulsa la tecla Enter.
@@ -154,8 +154,8 @@ frs	file_rel_date	D&iacute;a
 frs	file_version	Versi&oacute;n
 frs	latest_file_releases	&Uacute;ltimas Publicaciones de Ficheros
 general	return	[Retornar]
-general	sitename	Sourceforge
-general	footer	Esto es Debian GForge. Para mayor informaci&oacute;n incluido informaci&oacute;n de copyright, ver <a href="/about.php">esta p&aacute;gina</a>.
+general	sitename	$1
+general	footer	Esto es $1. Para mayor informaci&oacute;n incluido informaci&oacute;n de copyright, ver <a href="/about.php">esta p&aacute;gina</a>.
 group	developer_info	Informaci&oacute;n del colaborador
 group	developers	Colaboradores
 group	long_bugs	Registro de errores
@@ -198,11 +198,11 @@ group	nodescription	Este proyecto no ha proporcionado todav&iacute;a una descrip
 home	about_blurb	$1 es un <B>servicio libre para desarrolladores de <A href="http://www.opensource.org">C&oacute;digo Abierto</A> </B>ofreciendo f&aacute;cil acceso a los mejores CVS, listas de correo, registro de fallos, tabl&oacute;n y foros de mensajes, organizador de tareas, alojamiento de webs, archivo permanente de ficheros, copias de seguridad continuas, y una administraci&oacute;n total basada en un interfaz Web.<BR>&nbsp;<P><B>Participaci&oacute;n y comentarios sobre este sitio</B><P>Para beneficiarte al m&aacute;ximo de $1, necesitar&aacute;s <A href="/account/register.php">registrar un usuario en este sitio</A>. Esto te permitir&aacute; participar plenamente en todo lo que podemos ofrecerte. T&uacute; puedes por supuesto navegar por el portal sin registrarte, pero no tendr&aacute;s oportunidad de participar plenamente al no tener acceso total.<P>&nbsp;<BR><B>Inicia tu propio proyecto</B><P><A href="/account/register.php">Reg&iacute;strate como un usuario de este sitio</A>, despu&eacute;s <A HREF="/account/login.php">Accede</A> y finalmente, <A HREF="/register/">Registra tu proyecto.</A> Gracias y disfruta del sitio.
 home	breaking_down_barriers	Rompiendo las Barreras del Desarrollo de C&oacute;digo Abierto
 home	highest_ranked_users	Usuarios con la puntuaci&oacute;n m&aacute;s alta
-home	sfos	GForge OnSite
+home	sfos	$1 OnSite
 home	most_active_this_week	Los m&aacute;s activos esta semana
 home	sourceforge_statistics	Estad&iacute;sticas de $1
 home	top_project_downloads	Proyectos m&aacute;s descargados
-mail	provided_by	<P>Listas de correo proporcionadas por una versi&oacute;n de Sourceforge de <A href="http://www.list.org">GNU Mailman</A>. Gracias al de Mailman y de <A href="http://www.python.org">Python</A> por su excelente software.
+mail	provided_by	<P>Listas de correo proporcionadas por una versi&oacute;n de Gforge de <A href="http://www.list.org">GNU Mailman</A>. Gracias al de Mailman y de <A href="http://www.python.org">Python</A> por su excelente software.
 mail	section	Proyecto: $1
 mail	title	Listas de correo
 mail_admin	section	Listas de correo
@@ -212,7 +212,7 @@ mail_admin_add_list	title	A&ntilde;ade una lista
 mail_admin_change_status	section	Administraci&oacute;n de las Listas de Correo
 mail_admin_change_status	title	Administra / Actualiza Listas
 menu	about_foundries	Acerca de las Fundiciones
-menu	about_sourceforge	Acerca de GForge
+menu	about_sourceforge	Acerca de $1
 menu	account_maintenance	Mantenimiento de la cuenta
 menu	bookmark_page	Marca esta p&aacute;gina
 menu	change_my_theme	Cambia tu tema
@@ -459,12 +459,12 @@ users	peerinfo2	El cuadro de puntuaci&oacute;n muestra todas las medias de puntu
 users	optout	Tu elegiste no aparecer en el sistema de puntuaci&oacute;n, si no podr&iacute;s puntuar a este usuario. Visita <a href="/account/">tu p&aacute;gina de mantenimiento</a> para m&aacute;s informaci&oacute;n.
 trove	not_categorized	Este proyecto todav&iacute;a no ha sido categorizado en el
 trove	title	Mapa de Proyectos
-classgroup	acceptedproject	El registro de tu proyecto en $3 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nTu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nMientras esperas que funcione tu nombre DNS, puedes intentar acceder a \n$4 y apuntar tu CVS a $5\n\nSi después de seis horas tu cuenta shell/CVS no funcionan, por favor\nabre una petición de soporte de forma que podamos ver el origen del problema.\nTen en cuenta que todas las cuentas están cerradas para el \'telnet\' y solo\nfuncionará con \'ssh\'.\n\nTu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lee la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribucion de directorios de la cuenta.\n\nPor favor, tómate un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si visitas tu\npropia página de proyectos en $3 mientras estas autenticado, encontrarás\nfunciones adicionales de menú con un titulo llamado \'Administración de Proyectos\'.\n\nTe recomendamos altamente que visites ahora la página de $3 y crees una descripción\npública de tu proyecto. Esto puedes hacerlo visitando tu página\nde proyecto mientras estás autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarte).\n\nTu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorices en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar tu proyecto debes hacer esto ahora.\nVisita tu proyecto, mientras estas autenticado, y selecciona \'Administración\' en el\nmenú.\n\nDisfruta del sistema, y por favor, habla a otras personas de $3. Comentanos también\nsi podemos hacer algo para ayudarte.\n\n-- El equipo de $3
-classgroup	rejectedproject	Your project registration for GForge has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
-classgroup	newprojectnotification	Un nuevo proyecto ha sido registrado\n\nNombre completo del Proyecto:  $1\nDescripcion registrada: $2\nLicencia: $3\n\nPor favor, visita esta direccion para aprobar o rechazar este proyecto:\nhttp://$4/admin/approve-pending.php
-classgroup	acceptedprojecttitle	Proyectos Aprobados por GForge
-classgroup	rejectedprojecttitle	Proyectos Denegados por GForge 
-classgroup	newprojectnotificationtitle	Proyectos Enviados por GForge
+classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nMientras esperas que funcione su nombre DNS, puedes intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi después de seis horas su cuenta shell/CVS no funcionan, por favor\nabre una petición de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas están cerradas para el \'telnet\' y solo\nfuncionará con \'ssh\'.\n\nSu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lea la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribucion de directorios de la cuenta.\n\nPor favor, tómese un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia página de proyectos en $3 mientras está autenticado, encontrará\nfunciones adicionales de menú con un titulo llamado \'Administración de Proyectos\'.\n\nLe recomendamos altamente que visite ahora la página de $3 y cree una descripción\npública de tu proyecto. Esto puede hacerlo visitando su página\nde proyecto mientras está autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarse).\n\nSu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorice en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisita su proyecto, mientras está autenticado, y seleccione \'Administración\' en el\nmenú.\n\nDisfruta del sistema, y por favor, dígales a otras personas de $3. Comentanos también\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
+classgroup	rejectedproject	Su registración de su projecto en $3 ha sido negada.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\n\nLas razones para negarla:\n\n
+classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\nNombre completo del Proyecto:  $2\nDescripcion registrada: $3\nLicencia: $4\n\nPor favor, visita esta direccion para aprobar o rechazar este proyecto:\nhttp://$5/admin/approve-pending.php
+classgroup	acceptedprojecttitle	Proyecto Aprobado por $1
+classgroup	rejectedprojecttitle	Proyecto Denegado por $1 
+classgroup	newprojectnotificationtitle	Proyecto Sometado a $1
 account_lostlogin	title	Confirmación de perdida de contrase&ntilde;a
 account_lostlogin	severalconfirm	Este \'hash\' de confirmaci&oacute;n existe m&aacute;s de una vez.
 account_lostlogin	invalidconfirm	\'Hash\' de confirmaci&oacute;n invalido
@@ -475,8 +475,8 @@ account_lostlogin	welcome	<h2>Acceso con contrase&ntilde;a perdida</h2><P>Bienve
 account_lostlogin	newpasswd	Nueva contrase&ntilde;a (min. 6 caracteres)
 account_lostlogin	newpasswd2	Nueva contrase&ntilde;a (rep&iacute;tala)
 account_lostlogin	update	Actualice
-account_register	message_header	Registro de una cuenta en GForge
-account_register	message_body	Gracias por registrarte en el sitio Web de GForge. Tienes\nuna cuenta con nombre $1 creada para ti. Para completar\ntu registro, visita la siguiente dirección: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si no ves ninguna dirección URL arriba, se debe a un error en tu cliente de correo.\nUsa la dirección de abajo, pero asegurate que lo escribes todo en una misma línea.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nDisfruta de este sitio.\n\n-- el equipo de GForge\n
+account_register	message_header	Registro de una cuenta en $1
+account_register	message_body	Gracias por registrarte en el sitio Web de $4. Tienes\nuna cuenta con nombre $1 creada para ti. Para completar\ntu registro, visita la siguiente dirección: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si no ves ninguna dirección URL arriba, se debe a un error en tu cliente de correo.\nUsa la dirección de abajo, pero asegurate que lo escribes todo en una misma línea.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nDisfruta de este sitio.\n\n-- el equipo de $4\n
 account_verify	loginname	Nombre de usuario:
 account_verify	password	Contrase&ntilde;a:
 account_verify	login		Acceso

@@ -89,9 +89,9 @@ account_register	remember_me	"Remember me". <I>(Allows to access your $1 persona
 account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to a bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
 account_register	update	Update
 account_register	reset	Reset Changes
-account_unsubscribe	all_mailings	all GForge mailings and notifications
-account_unsubscribe	site_mailings	GForge site mailings
-account_verify	title	GForge Account Verification
+account_unsubscribe	all_mailings	all $1 mailings and notifications
+account_unsubscribe	site_mailings	$1 site mailings
+account_verify	title	$1 Account Verification
 account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>
 account_verify	password	Password:
 account_verify	login		Login
@@ -124,8 +124,8 @@ conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
-contact	about_blurb	<p>This is the contact page for <b>GForge.net</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: sourceforge.net/projects/&lt;project name&gt; and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the GForge <A href="staff.php">staff</a>, please take care in using the appropriate means:</p><ul><li>To Request support for your project or account, visit the <a href="/support/?func=addsupport&group_id=1">GForge Support Manager</a></li><li>If you've found a bug in GForge, please use the <a href="/bugs/?func=addbug&group_id=1">GForge Bug Tracker</a></li><li>All press inquiries should be directed to <a href="mailto:eureka@valinux.com">Eureka Endo</a>, Press Relations Manager, VA Linux Systems.</li></ul>
-contact	title	Contact GForge
+contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/sourceforge">$1 Master Project</a>.</p>
+contact	title	Contact $1
 cvs	section	Project: $1
 cvs	title	CVS
 cvs	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
@@ -241,8 +241,8 @@ frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
 general	return	[Return to $1]
-general	sitename	GForge
-general	footer	This is Debian GForge.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
+general	sitename	$1
+general	footer	This is $1.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
 general	permdenied	Permission Denied.
 general	permnotget	Could not get permission
 general	permexcuse	This project's administrator will have to grant you permission to view this page.
@@ -289,7 +289,7 @@ home	about_blurb	$1 is a <B>free service to <A href="http://www.opensource.org">
 home	breaking_down_barriers	Breaking Down the Barriers to Open Source Development
 home	highest_ranked_users	Highest Ranked Users
 home	most_active_this_week	Most Active This Week
-home	sfos	GForge OnSite
+home	sfos	$1 OnSite
 home	sourceforge_statistics	$1 Statistics
 home	top_project_downloads	Top Project Downloads
 mail	provided_by	<P>Mailing lists provided via a GForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
@@ -302,7 +302,7 @@ mail_admin_add_list	title	Add List
 mail_admin_change_status	section	Mailing List Admin
 mail_admin_change_status	title	Admin / Update Lists
 menu	about_foundries	About Foundries
-menu	about_sourceforge	About GForge
+menu	about_sourceforge	About $1
 menu	account_maintenance	Account Maintenance
 menu	bookmark_page	Bookmark Page
 menu	change_my_theme	Change My Theme
@@ -584,12 +584,12 @@ users	peerinfo2	The Peer rating box shows all rating averages (and response leve
 users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.
 trove	not_categorized	This project has not yet categorized itself in the
 trove	title	Trove Software Map
-classgroup	acceptedproject	Your project registration for GForge has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in GForge while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit GForge and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on GForge which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about GForge. Let us know\nif there is anything we can do to help you.\n\n-- the GForge crew
-classgroup	rejectedproject	Your project registration for GForge has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
-classgroup	newprojectnotification	New GForge Project Submitted\n\nProject Full Name:  $1\nSubmitted Description: $2\nLicense: $3\n\nPlease visit the following URL to approve or reject this project:\nhttp://$4/admin/approve-pending.php
-classgroup	acceptedprojecttitle	GForge Project Approved
-classgroup	rejectedprojecttitle	GForge Project Denied
-classgroup	newprojectnotificationtitle	New GForge Project Submitted
+classgroup	acceptedproject	Your project registration for $7 has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
+classgroup	rejectedproject	Your project registration for $3 has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
+classgroup	newprojectnotification	New $1 Project Submitted\n\nProject Full Name:  $2\nSubmitted Description: $3\nLicense: $4\n\nPlease visit the following URL to approve or reject this project:\nhttp://$5/admin/approve-pending.php
+classgroup	acceptedprojecttitle	$1 Project Approved
+classgroup	rejectedprojecttitle	$1 Project Denied
+classgroup	newprojectnotificationtitle	New $1 Project Submitted
 session	missingpasswd	Missing Password Or Users Name
 session	invalidpasswd	Invalid Password Or User Name
 session	suspended	Account Suspended

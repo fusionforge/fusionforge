@@ -1502,9 +1502,9 @@ class Group extends Error {
 		while ($row_admins = db_fetch_array($res_admins)) {
 
 			//                                                                               $1                      $2                    $3                              $4                          $5                        $6
-			$message=stripcslashes($Language->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_cvs_host'], $this->getID())));
+			$message=stripcslashes($Language->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_cvs_host'], $this->getID(), $GLOBALS['sys_name'])));
 	
-			util_send_message($row_admins['email'], $Language->getText('classgroup', 'acceptedprojecttitle'), $message);
+			util_send_message($row_admins['email'], $Language->getText('classgroup', 'acceptedprojecttitle', array($GLOBALS['sys_name'])), $message);
 		}
 
 		return true;
@@ -1534,7 +1534,7 @@ class Group extends Error {
 			AND u.user_id=ug.user_id;
 		"), 0, "email");
 	
-		$response=stripcslashes($Language->getText('classgroup', 'rejectedproject', array($this->getPublicName(), $this->getUnixName())));
+		$response=stripcslashes($Language->getText('classgroup', 'rejectedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_name'])));
 
 		// Check to see if they want to send a custom rejection response
 		if ($response_id == 0) {
@@ -1547,7 +1547,7 @@ class Group extends Error {
 			"), 0, "response_text");
 		}
 
-		util_send_message($email, $Language->getText('classgroup', 'rejectedprojecttitle'), $response);
+		util_send_message($email, $Language->getText('classgroup', 'rejectedprojecttitle', array($GLOBALS['sys_name'])), $response);
 
 		return true;
 	}
@@ -1598,9 +1598,9 @@ class Group extends Error {
 	    $email = db_result($res, 0, "email");
 	  }
 	  
-	  $message=stripcslashes($Language->getText('classgroup', 'newprojectnotification', array($this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicense(), $GLOBALS['sys_default_domain'])));
+	  $message=stripcslashes($Language->getText('classgroup', 'newprojectnotification', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicense(), $GLOBALS['sys_default_domain'])));
 
-	  util_send_message($admin_email, $Language->getText('classgroup', 'newprojectnotificationtitle'), $message, $email);
+	  util_send_message($admin_email, $Language->getText('classgroup', 'newprojectnotificationtitle', array($GLOBALS['sys_name'])), $message, $email);
 
 	  return true;
 	}

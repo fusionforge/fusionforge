@@ -39,9 +39,9 @@ $user->unsubscribeFromMailings($all);
 site_header(array('title'=>"Unsubscription Complete"));
 
 if ($all) {
-	$what = $Language->getText('account_unsubscribe', 'all_mailings');
+	$what = $Language->getText('account_unsubscribe', 'all_mailings', array($GLOBALS['sys_name']));
 } else {
-	$what = $Language->getText('account_unsubscribe', 'site_mailings');
+	$what = $Language->getText('account_unsubscribe', 'site_mailings', array($GLOBALS['sys_name']);
 }
 ?>
 

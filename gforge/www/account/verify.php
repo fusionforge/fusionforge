@@ -67,7 +67,7 @@ if ($submit) {
 	session_redirect("/account/first.php");
 }
 
-$HTML->header(array('title'=>'Login','pagename'=>'account_verify'));
+$HTML->header(array('title'=>'Login','pagename'=>'account_verify','titlevals'=>array($GLOBALS['sys_name'])));
 
 echo $Language->getText('account_verify', 'verify_blurb');
 
