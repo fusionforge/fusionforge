@@ -16,10 +16,10 @@ gforge (3pre8-0+) experimental; urgency=low
     and data checking is stricter.  The installation process should now
     work with both versions (provided the PostgreSQL server is installed
     correctly).
-  * [Roland] Applied patches #102 and #103 fixing stuff related with
+  * [Roland] Applied patches #103 and #104 fixing stuff related with
     Apache-SSL / Apache + mod_ssl.  Thanks, Julien Goodwin
     <laptop006@users.gforge.org>.
-  * [Roland] Applied patch #104.  At last, a serious attempt at a working
+  * [Roland] Applied patch #102.  At last, a serious attempt at a working
     install-postfix.sh.  Thanks again, Julien Goodwin.
 
  -- Roland Mas <lolando@debian.org>  Wed, 15 Jan 2003 17:15:52 +0100

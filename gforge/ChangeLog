@@ -8,7 +8,7 @@
 	site_user_header by successive calls to the three aforementioned
 	methods, with a plugin hook in-between.
 
-	* deb-specific/install-postfix.sh: Applied patch #104 by Julien
+	* deb-specific/install-postfix.sh: Applied patch #102 by Julien
 	Goodwin.  Should have a better chance of a working
 	gforge-mta-postfix now.  Thanks, Julien. 
 
