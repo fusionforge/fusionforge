@@ -53,7 +53,7 @@ dnl we should probably display a list of valid defaults (once there are more)
 			TOP_DIR=/usr/share/gforge
 			CGIBIN_DIR=/usr/lib/gforge/cgi-bin
 
-			sys_urlroot=/usr/share/gforge/www
+			sys_urlroot=/usr/share/gforge/www/
 			sys_ldap_admin_dn="admin,$LDAP_BASE_DN"
 			;;
 
@@ -129,7 +129,7 @@ test -n "${sys_upload_dir}" || sys_upload_dir=$TOP_DIR/uploads
 test -n "${homedir_prefix}" || homedir_prefix="/home"
 test -n "${groupdir_prefix}" || groupdir_prefix="/home/groups"
 
-test -n "${sys_urlroot}" || sys_urlroot=$TOP_DIR/www
+test -n "${sys_urlroot}" || sys_urlroot=$TOP_DIR/www/
 
 test -n "${sys_name}" || sys_name="prodigy"
 
