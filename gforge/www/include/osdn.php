@@ -48,7 +48,7 @@ function osdn_nav_dropdown() {
 	</script>
 
 	<noscript>
-	<a href="http://www.osdn.com"><?php echo html_image("images/osdn_logo_grey.png","135","33",array("hspace"=>"10","alt"=>" OSDN - Open Source Development Network ","border"=>"0")); ?></A><br>
+	<a href="http://www.osdn.com"><?php echo html_image("/images/osdn_logo_grey.png","135","33",array("hspace"=>"10","alt"=>" OSDN - Open Source Development Network ","border"=>"0")); ?></A><br>
 	<a href="http://www.osdn.com/gallery.html"><font size="2" color="#fefefe" face="arial, helvetica">Network Gallery</font></a>
 	</noscript>
 
@@ -79,13 +79,13 @@ function osdn_print_randpick($sitear, $num_sites = 1) {
  * osdn_print_navbar() - Show the navbar
  */
 function osdn_print_navbar() {
+  // osdn_print_navbar_1 () ;
+  osdn_print_navbar_2 () ;
+}
 
+function osdn_print_navbar_1() {
+	print '<!-- OSDN navbar part 1 -->
 
-	print '<!-- 
-
-OSDN navbar 
-
--->
 <table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#CCCCCC">
 	<tr> 
 		<td valign="middle" align="left" bgcolor="#6C7198">
@@ -112,68 +112,29 @@ OSDN navbar
 	</tr>
 </table>
 
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-	<tr> 
-		<td bgcolor="#d5d7d9" background="/images/steel3.jpg" WIDTH="20%">';
-	echo html_blankimage(1,100). '</TD><TD bgcolor="#d5d7d9" background="/images/steel3.jpg" WIDTH="60%">';
+<!-- End of OSDN navbar part 1 -->
 
-	srand((double)microtime()*1000000);
-	$random_num=rand(0,100000);
-
-	if (substr($GLOBALS['REQUEST_URI'], 0, 16) == "/foundry/storage") {
-
-    // storage foundry pages use doubleclick for HP ads
-    $ad_protocol = 'http';
-    if (session_issecure()) {
-      $ad_protocol .= 's';
-    } // if
-
-    print "<IFRAME SRC=\"$ad_protocol://ad.doubleclick.net/adi/N2613.osdn/B37181.2;sz=468x60;ord=$random_num\" WIDTH=468 HEIGHT=60 MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no BORDERCOLOR=\"#000000\">
-  <SCRIPT language=\"JavaScript1.1\" SRC=\"$ad_protocol://ad.doubleclick.net/adj/N2613.osdn/B37181.2;abr=!ie;sz=468x60;ord=$random_num\"></SCRIPT>
-  <NOSCRIPT>
-    <A HREF=\"$ad_protocol://ad.doubleclick.net/jump/N2613.osdn/B37181.2;abr=!ie4;abr=!ie5;sz=468x60;ord=$random_num\">
-    <IMG SRC=\"$ad_protocol://ad.doubleclick.net/ad/N2613.osdn/B37181.2;abr=!ie4;abr=!ie5;sz=468x60;ord=$random_num\" BORDER=0 WIDTH=468 HEIGHT=60></A>
-  </NOSCRIPT>
-</IFRAME>
-";
-
-  } else if (session_issecure() || $GLOBALS['IS_DEBUG']) {
-
-		// secure pages use VA's community ad server (www2.valinux.com)
-		print '<a href="https://www2.valinux.com/adbouncer.phtml?f_s=468x60&f_p=1&f_RzXx='.$random_num.'">'.
-		'<img src="https://www2.valinux.com/adserver.phtml?f_s=468x60&f_p=1&f_RzXx='.$random_num.
-		'" width="468" height="60" border="0" alt=" Advertisement "></a>';
-
-	} else {
-
-		// insecure pages use OSDN's ad server
-    print '
-    <ilayer id="adlayer" visibility="hide" width=468 height=60></ilayer>
-
-    <NOLAYER>
-      <IFRAME SRC="http://sfads.osdn.com/1.html" width="468" height="60" '.
-      'frameborder="no" border="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="no">'.
-      '<A HREF="http://sfads.osdn.com/cgi-bin/ad_default.pl?click">'.
-      '<IMG SRC="http://sfads.osdn.com/cgi-bin/ad_default.pl?display" border=0 height="60" width="468"></A>
-      </IFRAME>
-    </NOLAYER>';
-
-	} // OSDN
-
-	print '</td>
-		<td valign="center" align="left" bgcolor="#d5d7d9" background="/images/steel3.jpg" WIDTH="20%"><a href="http://www.osdn.com">' . html_image("images/OSDN-lc.gif","100","40",array("hspace"=>"10","border"=>"0","alt"=>" OSDN - Open Source Development Network ")) . '</a>
-	</td>
-	</tr>
-</table>
 ';
+}
 
-echo '<!-- 
+function osdn_print_navbar_2() {
 
+  print '<!-- OSDN navbar part 2 -->
 
-End OSDN NavBar 
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+	<tr>' ;
+  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" WIDTH="20%">'.html_blankimage(1,100).'</td>';
 
+  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" width="60%"><a href="/"><img src="/images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
 
--->';
+  print '<td bgcolor="'.$GLOBALS['COLOR_CONTENT_BACK'].'" WIDTH="20%">'.html_blankimage(1,100).'</td>';
+
+	print '</tr>
+</table>
+
+<!-- End of OSDN navbar part 2 -->
+
+';
 }
 
 ?>

@@ -15,7 +15,7 @@
 
 // Defines all of the Source Forge hosts, databases, etc.
 // This needs to be loaded first becuase the lines below depend upon it.
-require_once('/etc/local.inc');
+require ('/etc/sourceforge/local.inc');
 
 /*
 

@@ -21,9 +21,9 @@ use POSIX qw( strftime );
 
 my ($year, $month, $day, $day_begin, $day_end);
 my ($group, $histline, $daily_log_file, $key, $verbose);
-my $verbose = 0;
-my $base_log_dir = "/home/cvslogs";
-my $cvsroot = "/cvsroot";
+my $verbose = 1;
+my $base_log_dir = "/var/log/sourceforge/cvs";
+my $cvsroot = "/var/lib/sourceforge/chroot/cvsroot";
 
 $|=0 if $verbose;
 $|++;

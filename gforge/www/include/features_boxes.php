@@ -12,8 +12,8 @@ function show_features_boxes() {
 	GLOBAL $HTML,$Language;
 	$return .= $HTML->box1_top($Language->getText('home','sourceforge_statistics'),0);
 	$return .= show_sitestats();
-	$return .= $HTML->box1_middle($Language->getText('home','sfos'));
-	$return .= show_sfos();
+	// $return .= $HTML->box1_middle($Language->getText('home','sfos'));
+	// $return .= show_sfos();
 	$return .= $HTML->box1_middle($Language->getText('home','top_project_downloads'));
 	$return .= show_top_downloads();
 	$return .= $HTML->box1_middle($Language->getText('home','highest_ranked_users'));

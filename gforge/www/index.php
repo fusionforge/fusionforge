@@ -47,6 +47,8 @@ echo '<P>';
 // echo $HTML->box1_top($Language->getText('menu','long_foundries'));
 ?>
 
+<!--
+
 <br><b>SourceForge Development Foundries</b><br><br>
 <table bgcolor="White" border="0" cellpadding="0" cellspacing="0" valign="top" width="100%">
 <tr>
@@ -84,6 +86,8 @@ echo '<P>';
 </tr>
 </table>
 <br>
+
+-->
 
 <?php
 echo $HTML->box1_top($Language->getText('group','long_news'));

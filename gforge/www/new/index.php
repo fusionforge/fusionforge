@@ -50,7 +50,7 @@ $query	= "SELECT groups.group_name,"
 $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 
 if (!$res_new || db_numrows($res_new) < 1) {
-	echo $query . "<BR><BR>";
+	// echo $query . "<BR><BR>";
 	echo db_error();
 	echo "<H1>No new releases found. </H1>";
 } else {

@@ -1,4 +1,4 @@
-#!/usr/local/bin/php -q
+#! /usr/bin/php4 -f
 <?php
 /**
   *
@@ -86,5 +86,4 @@ db_commit();
 if (db_error()) {
 	echo "Done: ".db_error();
 }
-
 ?>

@@ -45,6 +45,8 @@ $res = db_query($sql, -1, 0, SYS_DB_STATS);
 //echo db_error();
 
 $i = 0;
+$xdata = array();
+$ydata = array();
 while ( $row = db_fetch_array($res) ) {
         $xdata[$i]          = $i;
 	$xlabel[$i]         = $row['month'] . (($row['day']) ? "/" . $row['day'] : '');

@@ -19,7 +19,7 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("../../../utils/include.pl");  # Include all the predefined functions
+require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
 &db_connect;
 
 my ($logfile, $sql, $res, $temp, %groups, $group_id, $errors );
@@ -55,7 +55,7 @@ print "Running week $week, day $day month $mon year $year \n" if $verbose;
 
 
    ## We'll pull down the parsed CVS log from the CVS server via http?! <sigh>
-$logfile = "/home/cvslogs/$year/$mon/cvs_traffic_$year$mon$day.log";
+$logfile = "/var/log/sourceforge/cvs/$year/$mon/cvs_traffic_$year$mon$day.log";
 print "Using $logfile\n";
 
    ## Now, we will pull all of the project ID's and names into a *massive*
@@ -77,11 +77,11 @@ while ( $temp = $res->fetchrow_arrayref() ) {
 
 $dbh->{AutoCommit} = 0;
 
-$dbh->do("DELETE FROM stats_cvs_group WHERE month='$year$month' AND day='$day'");
+$dbh->do("DELETE FROM stats_cvs_group WHERE month='$year$mon' AND day='$day'");
 
 ## begin parsing the log file line by line.
 print "Parsing the information into the database..." if $verbose;
-open( LOGFILE, $logfile ) or die "Cannot open /tmp/boa_stats.txt";
+open( LOGFILE, $logfile ) or die "Cannot open $logfile";
 while(<LOGFILE>) {
 
 	if ( $_ =~ /^G::/ ) {
@@ -99,7 +99,7 @@ while(<LOGFILE>) {
 			
 		$sql = "INSERT INTO stats_cvs_group
 			(month,day,group_id,checkouts,commits,adds)
-			VALUES ('$year$month','$day','$group_id','$checkouts','$commits','$adds')";
+			VALUES ('$year$mon','$day','$group_id','$checkouts','$commits','$adds')";
 
 		$dbh->do( $sql );
 

@@ -36,6 +36,7 @@ fields blank, etc... Also, navigating the admin functions with the
 
 <p><B>User/Group Maintenance</B>
 <ul>
+<li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;
 <li>Display Users Beginning with : 
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
@@ -50,6 +51,8 @@ Search <i>(userid, username, realname, email)</i>:
   <input type="hidden" name="usersearch" value="1">
   <input type="submit" value="get">
 </form>
+<BR>&nbsp;
+<li><a href="grouplist.php">Display Full Group List/Edit Groups</a>
 
 <li>Display Groups Beginning with : 
 <?php

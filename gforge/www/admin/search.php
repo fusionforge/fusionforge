@@ -61,10 +61,10 @@ if ($usersearch) {
 	$result = db_query("
 	    SELECT DISTINCT * 
 	    FROM users
-	    WHERE user_id LIKE '$search' 
-	    OR user_name ILIKE '$search' 
-	    OR email ILIKE '$search' 
-	    OR realname ILIKE '$search'
+	    WHERE user_id ILIKE '$search'
+	    OR user_name ILIKE '%$search%'
+	    OR email ILIKE '%$search%'
+	    OR realname ILIKE '%$search%'
 	"); 
 
 	print '<p><b>User search with criteria "<i>'.$search.'</i>": '
@@ -117,9 +117,9 @@ if ($groupsearch) {
 	$result = db_query("
 		SELECT DISTINCT *
 		FROM groups
-		WHERE (group_id LIKE '$search'
-		OR unix_group_name ILIKE '$search'
-		OR group_name ILIKE '$search')
+		WHERE (group_id ILIKE '%$search%'
+		OR unix_group_name ILIKE '%$search%'
+		OR group_name ILIKE '%$search%')
 		$crit_sql
 	"); 
 

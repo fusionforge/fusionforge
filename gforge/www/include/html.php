@@ -139,6 +139,10 @@ function html_get_language_popup ($Language,$title='language_id',$selected='xzxz
  */
 function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
 	global $TZs;
+	if ($selected == 'xzxzxzx') {
+	  $r = file ('/etc/timezone');
+	  $selected = str_replace ("\n", '', $r[0]);
+	}
 	return html_build_select_box_from_arrays ($TZs,$TZs,$title,$selected,false);
 }
 
@@ -289,7 +293,6 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='None') {
 	return html_build_select_box_from_arrays (util_result_column_to_array($result,0),util_result_column_to_array($result,1),$name,$checked_val,$show_100,$text_100);
 }
-
 /**
  * html_build_multiple_select_box() - Takes a result set, with the first column being the "id" or value
  * and the second column being the text you want displayed.
@@ -501,7 +504,7 @@ function site_project_header($params) {
 		session_require(array('group'=>$group_id));
 	}
 
-	//for dead projects must be member of alexandria project
+	//for dead projects must be member of admin project
 	if (!$project->isActive()) {
 		//only SF group can view non-active, non-holding groups
 		session_require(array('group'=>'1'));
