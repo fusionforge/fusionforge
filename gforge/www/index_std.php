@@ -65,7 +65,7 @@ echo $HTML->boxTop('Getting GForge');
 <a href="http://www.debian.org/"><strong>Debian Users</strong></a> can simply add
 "http://people.debian.org/~bayle/" to /etc/apt/sources.list and type
 "apt-get install gforge" to
-install a working GForge-3.0pre7 system, thanks to Christian Bayle and
+install a working GForge-3.0pre9 system, thanks to Christian Bayle and
 the Debian-SF project.
 <p />
 <?php
