@@ -56,7 +56,7 @@ if (session_loggedin()) {
 					$rows=db_numrows($result);
 
 					if ($result && $rows > 0) {
-						$tolist=implode(result_column_to_array($result),', ');
+						$tolist=implode(util_result_column_to_array($result),', ');
 
 						$to = ''; // send to noreply@
 						$subject = "[ SF User Notes: ". $u->getRealName() ."] ".stripslashes($summary);

@@ -328,7 +328,7 @@ class Forum extends Error {
 	function getMonitoringIDs() {
 		$sql="SELECT user_id FROM forum_monitored_forums WHERE forum_id='".$this->getID()."'";
 		$result=db_query($sql);
-		return result_column_to_array($result);
+		return util_result_column_to_array($result);
 	}
 
 	/**

@@ -80,7 +80,7 @@ function stats_sf_stats() {
 	} else {
 		$count=array();
 		$dates=array();
-		$count=result_column_to_array($result,1);
+		$count=util_result_column_to_array($result,1);
 
 		for ($i=0;$i<$rows;$i++) {
 			//convert the dates and add to an array
@@ -103,7 +103,7 @@ function stats_sf_stats() {
 	} else {
 		$count=array();
 		$dates=array();
-		$count=result_column_to_array($result,1);
+		$count=util_result_column_to_array($result,1);
 
 		for ($i=0;$i<$rows;$i++) {
 			//convert the dates and add to an array

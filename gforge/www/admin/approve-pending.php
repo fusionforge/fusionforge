@@ -172,7 +172,7 @@ while ($row_grp = db_fetch_array($res_grp)) {
 }
 
 //list of group_id's of pending projects
-$arr=result_column_to_array($res_grp,0);
+$arr=util_result_column_to_array($res_grp,0);
 $group_list=implode($arr,',');
 
 echo '

@@ -246,22 +246,6 @@ function &util_result_column_to_array($result, $col=0) {
 }
 
 /**
- * result_column_to_array() - DEPRECATED; DO NOT USE!
- *
- * @param		int		The result set ID
- * @param		int		The column
- * @see util_result_column_to_array()
- * @deprecated
- *
- */
-function &result_column_to_array($result, $col=0) {
-	/*
-		backwards compatibility
-	*/
-	return util_result_column_to_array($result, $col);
-}
-
-/**
  * util_wrap_find_space() - Find the first space in a string
  *
  * @param		string	The string in which to find the space
