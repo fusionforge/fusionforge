@@ -88,8 +88,9 @@ class ArtifactFactory extends Error {
 	 *	@param	int	Include this param if you want to limit to a certain assignee.
 	 *	@param	int	Include this param if you want to limit to a certain category.
 	 *	@param	int	Include this param if you want to limit to a certain group.
+	 *	@param	int	Include this param if you want to limit to a certain resolution.
 	 */
-	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_category,$_group,$_changed,$_resolution) {
+	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_category,$_group,$_changed,$_resolution = 100) {
 //echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id|_resolution: $_resolution +";
 
 		if ((!$offset) || ($offset < 0)) {
