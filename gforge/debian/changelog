@@ -21,8 +21,9 @@ sourceforge (2.5-29+) unstable; urgency=low
     like .../contest/*, .../mirrors/* and simplified/generalized footer
   * [Roland] Fixed search results page for Software/Group: the link was
     wrong in the case of foundries.
+  * [Roland] Fixed POSIXness of maintainer scripts (closes: #150410).
 
- -- Roland Mas <lolando@debian.org>  Fri, 14 Jun 2002 13:40:09 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 20 Jun 2002 13:40:14 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 

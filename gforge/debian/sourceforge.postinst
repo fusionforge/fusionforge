@@ -105,7 +105,7 @@ EOF
 		cat $cur > /etc/postgresql/pg_hba.conf
 		rm -f $cur
 	    fi
-	    kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
+	    kill -s HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	fi
 
 	# Install/upgrade the database contents (tables and data)
