@@ -617,7 +617,7 @@ if (isset($params['group']) && $params['group']) {
 		if ($project->usesCVS()) {
 			$TABS_DIRS[]='/scm/?group_id='.$group;
 			$TABS_TITLES[]=$Language->getText('group','short_cvs');
-			(($toptab == 'scm_index') ? $selected=(count($TABS_TITLES)-1) : '' );
+			(($toptab == 'scm') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 
 		// groupmenu_after_scm hook
