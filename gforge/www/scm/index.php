@@ -123,7 +123,7 @@ if ($project->enableAnonCVS() || !$anonymous) {
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (php)</b></a>
 		</UL>
 		<UL>
-		<LI>Dracos Moinescu contrib<BR><a href="/scm/controlleroo.php?group_id=<?php echo $group_id; ?>&hide_attic=0" >
+		<LI>Dragos Moinescu contrib<BR><a href="/scm/controlleroo.php?group_id=<?php echo $group_id; ?>&hide_attic=0" >
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (php OO)</b></a>
 		</UL>
 <?php
