@@ -1,3 +1,11 @@
+2003-01-15  Reinhard Spisser   <reinhard@spisser.it>
+
+	* www/include/languages/Base.tab: added forum labels
+
+        * www/forum/*: localized forum
+ 
+        * www/include/languages/Italian.tab: translations of new forum strings
+
 2003-01-15  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/include/languages/Spanish.tab: translations for Reinhard's
