@@ -189,7 +189,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
                                                   SET user_pw='OUT OF DATE'
                                                   WHERE user_id='".$usr['user_id']."'
                                                   ");
-				$feedback='Invalid Password Or User Name';
+				$feedback=$Language->getText('session','invalidpasswd');
 				return false;
 			}
 		}
