@@ -15,6 +15,7 @@ else
 		if ! grep -q "#Sourceforge comment#" /etc/${inetdname}.conf ; then
 		    	perl -pi -e "s/^cvspserver/#Sourceforge comment#cvspserver/" /etc/${inetdname}.conf
 	    		echo "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	/usr/lib/sourceforge/bin/cvs-pserver" >> /etc/${inetdname}.conf
+			#update-inetd --add  "cvspserver stream tcp nowait.400 root /usr/sbin/tcpd /usr/lib/sourceforge/bin/cvs-pserver"
 	    		/etc/init.d/${inetdname} restart
 		fi
 	else
