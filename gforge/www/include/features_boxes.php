@@ -151,6 +151,16 @@ function show_top_downloads() {
 }
 
 
+function stats_getprojects_active_public() {
+	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A' AND is_public=1");
+	if (db_numrows($res_count) > 0) {
+		$row_count = db_fetch_array($res_count);
+		return $row_count['count'];
+	} else {
+		return "error";
+	}
+}
+
 function stats_getprojects_active() {
 	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
 	if (db_numrows($res_count) > 0) {
