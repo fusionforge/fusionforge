@@ -1,10 +1,12 @@
+? uploads
+? db/tracker-cc.sql
 Index: common/include/Group.class
 ===================================================================
 RCS file: /cvsroot/gforge/gforge/common/include/Group.class,v
 retrieving revision 1.21
 diff -u -b -r1.21 Group.class
 --- common/include/Group.class	19 Jan 2003 01:53:56 -0000	1.21
-+++ common/include/Group.class	26 Jan 2003 23:08:32 -0000
++++ common/include/Group.class	9 Feb 2003 22:31:37 -0000
 @@ -115,6 +115,13 @@
  	var $types_res;
  
@@ -41,10 +43,10 @@ diff -u -b -r1.21 Group.class
 Index: common/tracker/Artifact.class
 ===================================================================
 RCS file: /cvsroot/gforge/gforge/common/tracker/Artifact.class,v
-retrieving revision 1.5
-diff -u -b -r1.5 Artifact.class
---- common/tracker/Artifact.class	6 Jan 2003 18:38:50 -0000	1.5
-+++ common/tracker/Artifact.class	26 Jan 2003 23:08:33 -0000
+retrieving revision 1.6
+diff -u -b -r1.6 Artifact.class
+--- common/tracker/Artifact.class	4 Feb 2003 22:17:31 -0000	1.6
++++ common/tracker/Artifact.class	9 Feb 2003 22:31:38 -0000
 @@ -36,6 +36,13 @@
  	var $data_array;
  
@@ -59,7 +61,7 @@ diff -u -b -r1.5 Artifact.class
  	 * Array of ArtifactFile objects.
  	 *
  	 * @var		array	$files
-@@ -105,9 +112,10 @@
+@@ -106,11 +113,11 @@
  	 *	@param	int		The ID of the user to which this artifact is to be assigned.
  	 *	@param	int		The artifacts priority.
  	 *	@param	string	An email address to add to the monitoring queue.
@@ -68,10 +70,12 @@ diff -u -b -r1.5 Artifact.class
  	 */
 -	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=5, $monitor_email=false) {
 +	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=5, $monitor_email=false, &$cc_arr) {
- 
+ 		global $Language;
+-		
  		//
  		//	make sure this person has permission to add artifacts
-@@ -207,6 +215,7 @@
+ 		//
+@@ -209,6 +216,7 @@
  
  		$artifact_id=db_insertid($res,'artifact','artifact_id');
  
@@ -79,7 +83,7 @@ diff -u -b -r1.5 Artifact.class
  		if (!$res || !$artifact_id) {
  			$this->setError('Artifact: '.db_error());
  			db_rollback();
-@@ -220,6 +229,11 @@
+@@ -222,6 +230,11 @@
  				return false;
  			}
  
@@ -91,7 +95,7 @@ diff -u -b -r1.5 Artifact.class
  			//
  			//	now send an email if appropriate
  			//
-@@ -419,6 +433,63 @@
+@@ -421,6 +434,63 @@
  		return $this->data_array['assigned_unixname'];
  	}
  
@@ -155,7 +159,7 @@ diff -u -b -r1.5 Artifact.class
  	/**
  	 *	getOpenDate - get unix time of creation.
  	 *
-@@ -654,10 +725,11 @@
+@@ -658,10 +728,11 @@
  	 *	@param	int		The canned response.
  	 *	@param	string	Attaching another comment.
  	 *	@param	int		Allows you to move an artifact to another type.
@@ -166,9 +170,9 @@ diff -u -b -r1.5 Artifact.class
 -		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id) {
 +		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id, &$cc_arr) {
  
+ 		global $Language;
  		if (!$this->getID() 
- 			|| !$assigned_to 
-@@ -789,6 +861,19 @@
+@@ -794,6 +865,19 @@
  			$update = true;
  		}
  
@@ -188,7 +192,7 @@ diff -u -b -r1.5 Artifact.class
  		/*
  			Finally, update the artifact itself
  		*/
-@@ -907,6 +992,8 @@
+@@ -912,6 +996,8 @@
  			$this->marker('assigned_to',$changes).
  			 "Assigned to: ". $this->getAssignedRealName() .
  			 " (". $this->getAssignedUnixName(). ")"."\n".
@@ -197,7 +201,7 @@ diff -u -b -r1.5 Artifact.class
  			$this->marker('summary',$changes).
  			 "Summary: ". util_unconvert_htmlspecialchars( $this->getSummary() );
  			
-@@ -944,6 +1031,17 @@
+@@ -949,6 +1035,17 @@
  			}
  		}
  
@@ -215,7 +219,7 @@ diff -u -b -r1.5 Artifact.class
  		$body .= "\n\nInitial Comment:".
  			"\n".util_unconvert_htmlspecialchars( $this->getDetails() ) .
  			"\n\n----------------------------------------------------------------------";
-@@ -999,6 +1097,9 @@
+@@ -1004,6 +1101,9 @@
  		if (count($emails) > 0) {
  			$BCC=implode(',',array_unique($emails));
  		}
@@ -225,7 +229,7 @@ diff -u -b -r1.5 Artifact.class
  
  		if (count($monitor_ids) < 1) {
  			$monitor_ids=array();
-@@ -1008,7 +1109,7 @@
+@@ -1013,7 +1113,7 @@
  		/*
  			Send the email
  		*/
@@ -237,12 +241,12 @@ diff -u -b -r1.5 Artifact.class
 Index: www/tracker/add.php
 ===================================================================
 RCS file: /cvsroot/gforge/gforge/www/tracker/add.php,v
-retrieving revision 1.5
-diff -u -b -r1.5 add.php
---- www/tracker/add.php	13 Jan 2003 22:21:17 -0000	1.5
-+++ www/tracker/add.php	26 Jan 2003 23:08:36 -0000
+retrieving revision 1.6
+diff -u -b -r1.6 add.php
+--- www/tracker/add.php	2 Feb 2003 23:03:09 -0000	1.6
++++ www/tracker/add.php	9 Feb 2003 22:31:41 -0000
 @@ -46,6 +46,9 @@
- 		echo '</td><td><strong>Priority: <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a></strong><br />';
+ 		echo '</td><td><strong>'.$Language->getText('tracker','priority').': <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a></strong><br />';
  		echo build_priority_select_box('priority');
  		echo '</td></tr>';
 +		echo '<tr><td><strong>CC:</strong><br />';
@@ -250,26 +254,16 @@ diff -u -b -r1.5 add.php
 +		echo '</td><td></td></tr>';
  	}
  	?>
- 	<tr><td colspan="2"><strong>Summary: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
+ 	<tr><td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
 Index: www/tracker/detail.php
 ===================================================================
 RCS file: /cvsroot/gforge/gforge/www/tracker/detail.php,v
-retrieving revision 1.7
-diff -u -b -r1.7 detail.php
---- www/tracker/detail.php	10 Jan 2003 14:44:28 -0000	1.7
-+++ www/tracker/detail.php	26 Jan 2003 23:08:37 -0000
-@@ -47,14 +47,31 @@
- 
- 		<tr>
- 			<td><strong>Submitted By:</strong><br /><?php echo $ah->getSubmittedRealName(); ?> (<?php echo $ah->getSubmittedUnixName(); ?>)</td>
--			<td><strong>Assigned To:</strong><br /><?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
-+			<td><strong>Category:</strong><br /><?php echo $ah->getCategoryName(); ?></td>
- 		</tr>
- 
- 		<tr>
--			<td><strong>Category:</strong><br /><?php echo $ah->getCategoryName(); ?></td>
-+			<td><strong>Assigned To:</strong><br /><?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
- 			<td><strong>Status:</strong><br /><?php echo $ah->getStatusName(); ?></td>
+retrieving revision 1.8
+diff -u -b -r1.8 detail.php
+--- www/tracker/detail.php	2 Feb 2003 23:03:09 -0000	1.8
++++ www/tracker/detail.php	9 Feb 2003 22:31:41 -0000
+@@ -55,6 +55,23 @@
+ 			<td><strong><?php echo $Language->getText('tracker','status') ?>:</strong><br /><?php echo $ah->getStatusName(); ?></td>
  		</tr>
  
 +		<tr>
@@ -289,18 +283,18 @@ diff -u -b -r1.7 detail.php
 +			<td></td>
 +		</tr>
 +
- 		<tr><td colspan="2"><strong>Summary:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
+ 		<tr><td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
  
  		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
 Index: www/tracker/index.php
 ===================================================================
 RCS file: /cvsroot/gforge/gforge/www/tracker/index.php,v
-retrieving revision 1.7
-diff -u -b -r1.7 index.php
---- www/tracker/index.php	10 Jan 2003 14:44:28 -0000	1.7
-+++ www/tracker/index.php	26 Jan 2003 23:08:37 -0000
+retrieving revision 1.10
+diff -u -b -r1.10 index.php
+--- www/tracker/index.php	4 Feb 2003 22:18:24 -0000	1.10
++++ www/tracker/index.php	9 Feb 2003 22:31:41 -0000
 @@ -69,7 +69,7 @@
- 						exit_error('ERROR', 'Invalid email address');
+ 						exit_error('ERROR', $Language->getText('general','invalid_email'));
  					}
  				}
 -				if (!$ah->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority, $user_email)) {
@@ -314,16 +308,16 @@ diff -u -b -r1.7 index.php
  				if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
 -					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id)) {
 +					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id,$cc)) {
- 					$feedback = 'Tracker Item: '.$ah->getErrorMessage();
+ 					$feedback =$Language->getText('tracker','tracker_item'). 'Tracker Item: '.$ah->getErrorMessage();
  					$ah->clearError();
  					$was_error=true;
 Index: www/tracker/mod.php
 ===================================================================
 RCS file: /cvsroot/gforge/gforge/www/tracker/mod.php,v
-retrieving revision 1.9
-diff -u -b -r1.9 mod.php
---- www/tracker/mod.php	15 Jan 2003 17:06:35 -0000	1.9
-+++ www/tracker/mod.php	26 Jan 2003 23:08:37 -0000
+retrieving revision 1.10
+diff -u -b -r1.10 mod.php
+--- www/tracker/mod.php	2 Feb 2003 23:03:09 -0000	1.10
++++ www/tracker/mod.php	9 Feb 2003 22:31:42 -0000
 @@ -128,7 +128,15 @@
  	</tr>
  
@@ -338,7 +332,7 @@ diff -u -b -r1.9 mod.php
 +		?>
 +		</td>
 +		<td valign="top">
- 		<strong>Status: <a href="javascript:help_window('/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
+ 		<strong><?php echo $Language->getText('tracker','status') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
  		<?php
  
 @@ -136,7 +144,9 @@
@@ -363,14 +357,15 @@ diff -u -b -r1.9 mod.php
 Index: www/tracker/include/ArtifactTypeHtml.class
 ===================================================================
 RCS file: /cvsroot/gforge/gforge/www/tracker/include/ArtifactTypeHtml.class,v
-retrieving revision 1.8
-diff -u -b -r1.8 ArtifactTypeHtml.class
---- www/tracker/include/ArtifactTypeHtml.class	15 Jan 2003 20:22:57 -0000	1.8
-+++ www/tracker/include/ArtifactTypeHtml.class	26 Jan 2003 23:08:37 -0000
-@@ -81,6 +81,15 @@
+retrieving revision 1.10
+diff -u -b -r1.10 ArtifactTypeHtml.class
+--- www/tracker/include/ArtifactTypeHtml.class	3 Feb 2003 04:52:45 -0000	1.10
++++ www/tracker/include/ArtifactTypeHtml.class	9 Feb 2003 22:31:42 -0000
+@@ -98,7 +98,16 @@
  		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
  	}
  
+-	function resolutionBox ($name='resolution_id',$checked='xzxz',$show_100=false,$text_100='none') {
 +	function multipleCCBox($name='cc[]',$cc_arr='') {
 +		$group = $this->getGroup();
 +		$result = $group->getMembers();
@@ -380,9 +375,10 @@ diff -u -b -r1.8 ArtifactTypeHtml.class
 +		return html_build_multiple_select_box($result, $name, $cc_arr);
 +	}
 +
- 	function resolutionBox ($name='resolution_id',$checked='xzxz',$show_100=false,$text_100='None') {
- 		return html_build_select_box($this->getResolutions(),$name,$checked,$show_100,$text_100);
- 	}
++	function resolutionBox ($name='resolution_id',$checked='xzxz',$show_100=false,$text_100='None') {
+ 		global $Language;
+ 		if ($text_100=='none'){
+ 			$text_100=$Language->getText('tracker_artifacttype','none');
 --- /dev/null	1969-12-31 16:00:00.000000000 -0800
 +++ db/tracker-cc.sql	2003-01-25 20:21:25.000000000 -0800
 @@ -0,0 +1,9 @@
