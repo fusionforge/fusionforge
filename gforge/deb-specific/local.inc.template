@@ -208,5 +208,44 @@ $sys_force_login = {sys_force_login};
 //$gantt_task_font_style="FS_NORMAL";
 //$gantt_task_font_size=12;
 
+//
+//	FEATURES
+//	You can turn features on/off sitewide
+//
+$sys_use_cvs=true;
+$sys_use_tracker=true;
+$sys_use_forum=true;
+$sys_use_pm=true;
+$sys_use_docman=true;
+$sys_use_news=true;
+$sys_use_mail=true;
+$sys_use_survey=true;
+$sys_use_file=true;
+$sys_use_ftp=true;
+$sys_use_trove=true;
+$sys_use_snippet=true;
+
+//
+//	Restricted project registration
+//	If set to true, only a site admin can register projects
+//
+$sys_project_reg_restricted=true;
+
+//
+// Localization caching Configuration
+//
+
+// Enable localization caching system
+$sys_localization_enable_caching = true;
+
+// Create a directory, which is writable by your webserver, but not
+// within its document root (does not fall under www/ in the tarball)
+// Your php.ini file may have to be modified to allow writing outside
+// the webserver's directory
+$sys_localization_cache_path = '/var/cache/gforge/';
+
+// Enable timestamp checking (if disabled, you have to remove manually cache files on update)
+$sys_localization_enable_timestamp_checking = true;
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
