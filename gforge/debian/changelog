@@ -1,8 +1,14 @@
 sourceforge (2.6-0+5+) unstable; urgency=low
 
   * [Roland] [From 2.5] Added docs.
+  * [Roland] Added libmime-base64-perl and libhtml-parser-perl to
+    dependencies (db-upgrade26.pl now uses MIME::Base64 and
+    HTML::Entities).
+  * [Roland] Added migration capability to the db-upgrade26.pl script.
+    Database upgrades smoothly from 2.5 to 2.6.  Hopefully.  Not very well
+    tested yet.
 
- -- Roland Mas <lolando@debian.org>  Mon, 28 Jan 2002 11:37:57 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  7 Feb 2002 14:50:31 +0100
 
 sourceforge (2.6-0+5) unstable; urgency=low
 

@@ -69,6 +69,7 @@ install: build
 	install -m 644 deb-specific/init-extra.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -m 644 deb-specific/sfdocs.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -o www-data -m 755 -d $(CURDIR)/debian/sourceforge/var/cache/sourceforge
 	#install -o www-data -g ftp -m 750 -d $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ftp
 	#install -o www-data -g ftp -m 777 -d $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ftp/incoming
