@@ -1,16 +1,22 @@
 <?php
 /**
-  *
-  * SourceForge Forums Facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
 
+
+/*
+	Message Forums
+	By Tim Perdue, Sourceforge, 11/99
+
+	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
+
+	Complete OO rewrite by Tim Perdue 12/2002
+*/
 
 require_once('pre.php');
 require_once('www/forum/include/ForumHTML.class');
@@ -70,9 +76,9 @@ if ($msg_id) {
 	}
 
 	$fmf->setUp(0,'threaded',200,'');
-    $style=$fmf->getStyle();
-    $max_rows=$fmf->max_rows;
-    $offset=$fmf->offset;
+	$style=$fmf->getStyle();
+	$max_rows=$fmf->max_rows;
+	$offset=$fmf->offset;
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {

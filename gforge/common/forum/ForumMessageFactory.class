@@ -8,6 +8,16 @@
  * @version   $Id$
  */
 
+
+/*
+	Message Forums
+	By Tim Perdue, Sourceforge, 11/99
+
+	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
+
+	Complete OO rewrite by Tim Perdue 12/2002
+*/
+
 require_once('common/include/Error.class');
 require_once('common/forum/ForumMessage.class');
 
