@@ -32,6 +32,7 @@ $sys_fallback_domain = 'gforge2.company.com';
 $sys_internal_network = '192.168.1.';
 
 // Machine that hosts CVS
+$sys_cvs_single_host=true;
 $sys_cvs_host = 'cvs.company.com';
 
 // Force the use of a single cvs host instead of cvs.project.domain.com
