@@ -336,7 +336,7 @@ case "$1" in
 		dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
 		setup_vars
 		load_ldap $dn "$secret"
-		# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && load_ldap $dn $secret &>/dev/null
+		# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && load_ldap $dn $secret 2>&1 >/dev/null
 		# [ -f /etc/ldap.secret ] || load_ldap $dn $secret
 		;;
 	purge-files)
