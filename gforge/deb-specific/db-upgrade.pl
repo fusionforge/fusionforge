@@ -1590,7 +1590,7 @@ END;
     $target = "3.3.0-2+1" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with migrateforum.php") ;
-	system("/usr/lib/gforge/db/20040826_migrateforum.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0 
+	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migrateforum.php") == 0 
 	or die "system call of 20040826_migrateforum.php failed: $?" ;
         &update_db_version ($target) ;
         &debug ("Committing.") ;
@@ -1601,7 +1601,7 @@ END;
     $target = "3.3.0-2+2" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with migraterbac.php") ;
-	system("/usr/lib/gforge/db/20040826_migraterbac.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0
+	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migraterbac.php") == 0
 	or die "system call of 20040826_migraterbac.php failed: $?" ;
         &update_db_version ($target) ;
         &debug ("Committing.") ;
@@ -1873,7 +1873,7 @@ END;
     $target = "4.0.2-0+1" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041211-syncmail.php") ;
-	system("/usr/lib/gforge/db/20041211-syncmail.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0 
+	system("php -q -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20041211-syncmail.php") == 0 
 	or die "system call of 20041211-syncmail.php failed: $?" ;
         &update_db_version ($target) ;
         &debug ("Committing.") ;
@@ -1919,6 +1919,35 @@ END;
         &debug ("Committing.") ;
         $dbh->commit () ;
     }
+
+#
+# We got this at upgrade
+#
+#DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/lib/gforge/bin/db-upgrade.pl line 1970.
+#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/lib/gforge/bin/db-upgrade.pl line 1970.
+#Transaction aborted because DBD::Pg::st execute failed: ERREUR:  la relation avec l'OID 387345 n'existe pas at /usr/lib/gforge/bin/db-upgrade.pl line 1970.
+#Last SQL query was:
+#update project_task SET last_modified_date=EXTRACT(EPOCH FROM now())::integer;
+#(end of query)
+#Your database schema is at version 4.0.2-0+5
+#
+# This is a hack to disconnect and reconnect the DB and solve the problem
+#
+$dbh->rollback ;
+$dbh->disconnect ;
+
+$dbh=();
+
+if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
+$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
+} else {
+$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
+}
+die "Cannot connect to database: $!" if ( ! $dbh );
+
+# debug "Connected to the database OK." ;
+$dbh->{AutoCommit} = 0;
+$dbh->{RaiseError} = 1;
 
     $version = &get_db_version ;
     $target = "4.0.2-0+5" ;
