@@ -1,3 +1,8 @@
+2004-09-12  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Applied [#845] by Florent Guilleux
+	* Adapted [#866] by Matt Hope for mainstream
+
 2004-09-09  Francisco Gimeno <kikov@kikov.org>
 
 	* www/include/languages/chinese.tab: updated. Applied patch [#890].
@@ -35,6 +40,17 @@
 	* cronjobs/db_project_sums.php: Fixed bug # 868: Deleted lists are
 	no longer included in the project summary aggregate.  This prevents 
 	the wrong number from appearing on the project summary page.
+
+2004-06-08  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* added MAILTO="" to example crontabs so that it doesn't send mail anymore
+	* improved transaction management in history_parse.php
+	* updated French translation
+	* fixed [#758]
+	* fixed minor RBAC localization problems
+	* localized SCMCVS plugin
+	* participated to Reporting localization effort
+	* added $sys_shortdatefmt date format
 
 2004-08-04  Tim Perdue <tim@gforge.org>
 
@@ -87,6 +103,10 @@
 
 	* www/reporting/index.php: removed hardcoded links
 
+2004-08-03  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed a minor bug in reporting_cron.php
+
 2004-08-02  Francisco Gimeno <kikov@kikov.org>
 	Fixes [#856]
 	* www/include/languages/Base.tab: Added three expresion for being
@@ -125,6 +145,11 @@
 	* www/include/languages/Spanish.tab: solved a lot of
 	typos and changes to the formal pronoun. Applied patch#847
 
+2004-07-26  Guillaume Smet <guillaume-gforge@smet.org>
+	
+	* fixed minor bugs in BaseLanguage
+	* made mailing lists cronjob compatible with mailman < 2.1
+
 2004-07-26  Christian Bayle <bayle@aist.enst.fr>
 
 	* Added css plugin hook to Layout.class
@@ -145,10 +170,20 @@
 	* www/stats/i18n.php: Now it doesn't display unused
 	languages.
 
+2004-07-22  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* made private groups really private
+	* fixed bugs in BaseLanguage
+
 2004-07-22  Tim Perdue	<tim@gforge.org>
 
 	* Moved licenses out of vars.php and into table which
 	can be edited easily by site admin
+
+2004-07-21  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* added a Cache-Control:private header if user is logged in
+	* fixed [#840]
 
 2004-07-21  Christian Bayle <bayle@aist.enst.fr>
 	
@@ -180,6 +215,14 @@
 	comparison in $feedback, but a proper userstatus global
 	* Applied kikov patch to add 3 hooks in
 	www/tracker/[detail.php mod-limited.php mod.php] (closes patch#842)
+
+2004-07-12  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* applied patch [#776] by Vidyut Luther
+
+2004-07-09  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed bugs in mailing lists cronjob
 
 2004-07-07  Tom Copeland <tom@infoether.com>
 
@@ -306,10 +349,21 @@
 	"x messages in 1 forums" becomes "x messages in 1 forum".
 	* www/stats/site_stats_utils.php: Fixed "Statistics for the past x days." msg.
 
+2004-04-20  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* applied [#773] by Oliver Blume
+	* fixed the Content-disposition problem everywhere
+	* fixed some typos in French translation
+
 2004-04-19  Tim Perdue  <tim@perdue.net>
 
 	* added default_page.php to cvs-cron jobs - creates a slick generic 
 	page for each project.
+
+2004-04-18  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* applied [#745] by Hidenari Miwa
+	* changed mail charset for Simplified Chinese
 
 2004-04-16  Christian Bayle <bayle@debian.org>
 	* Test if Theme.class is really there, keep the default of local.inc if
@@ -321,6 +375,15 @@
 	* Added site_admin_option_hook to add new features in admin page
 	* Added group param to hooks in www/project/admin/editgroupinfo.php
 	closes patch 772 from Kikov
+
+2004-04-16  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed [#695]
+	* removed not localizable and relational information from body field of artifact_message
+	* implemented default timezone and country
+	* improved messages display of Artifact
+	* applied patch [#763] by Oliver Blume
+	* default language is now determined by browser and not English anymore
 
 2004-04-15  Christian Bayle <bayle@debian.org>
 
