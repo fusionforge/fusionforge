@@ -2,7 +2,7 @@ gforge-plugin-helloworld (0.3.1-1) experimental; urgency=low
 
   * Adapted to current Gforge code.
 
- -- Christian Bayle <bayle@debian.org>  Tue, 11 Mar 2003 16:14:25 +0100
+ -- Christian Bayle <bayle@debian.org>  Sun, 16 Mar 2003 22:21:02 +0100
 
 gforge-plugin-helloworld (0.3-1) experimental; urgency=low
 
