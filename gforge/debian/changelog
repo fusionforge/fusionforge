@@ -30,8 +30,10 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Roland] [From 2.5] Sort documents by title.
   * [Roland] Fix email delivery to users, patch from Vicente Ruiz.
   * [Otavio] Now the browser accepted language are only read if set.
-  * [Christian] i18n for project Approval/Rejection/Submission mail
-  * [Paddington] preserve release date hh:mm in "Edit Releases"
+  * [Christian] i18n for project Approval/Rejection/Submission mail.
+  * [Paddington] Patch #577 by Andreas Schrattenecker
+    <andreas.schrattenecker@aon.at>: preserve release date hh:mm in "Edit
+    Releases".
   * [Roland] Added eval magic in install-ldap.sh to help debugging.
     "export DEBSFDEBUG=1" will disable all the redirections, thus showing
     the STDOUT and STDERR of all commands.
