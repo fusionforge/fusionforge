@@ -90,6 +90,15 @@ can use the sf-add-skill script.  Give it a skill (or a list of
 skills) and it'll insert it into the databse.  This script is located
 in /usr/lib/gforge/bin/.
 
+  For cvs to work you have to add a symlink doing
+ln -s /var/lib/gforge/chroot/cvsroot /cvsroot.
+We can't do this for Debian policy reason that forbid this.
+
+  Don't forget about adding 
+SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in /etc/init.d/sysklogd
+This is a WARNING you might have seen at install, essential if you run 
+anonymous cvs in a root jail (This is the default in Debian)
+
   If you would like to add a theme to your GForge, you'll first
 have to compose it.  Please refer to README.Themes.
 
