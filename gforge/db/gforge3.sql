@@ -1,1153 +1,1611 @@
 
-CREATE FUNCTION "plpgsql_call_handler" () RETURNS opaque AS '$libdir/plpgsql', 'plpgsql_call_handler' LANGUAGE 'C';
+SET client_encoding = 'SQL_ASCII';
+SET check_function_bodies = false;
 
+SET search_path = public, pg_catalog;
 
-CREATE TRUSTED PROCEDURAL LANGUAGE 'plpgsql' HANDLER "plpgsql_call_handler" LANCOMPILER '';
 
+CREATE FUNCTION plpgsql_call_handler() RETURNS language_handler
+    AS '$libdir/plpgsql', 'plpgsql_call_handler'
+    LANGUAGE c;
 
-CREATE SEQUENCE "canned_responses_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "canned_responses" (
-	"response_id" integer DEFAULT nextval('canned_responses_pk_seq'::text) NOT NULL,
-	"response_title" character varying(25),
-	"response_text" text,
-	Constraint "canned_responses_pkey" Primary Key ("response_id")
+CREATE TRUSTED PROCEDURAL LANGUAGE plpgsql HANDLER plpgsql_call_handler;
+
+
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+
+CREATE SEQUENCE canned_responses_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE canned_responses (
+    response_id integer DEFAULT nextval('canned_responses_pk_seq'::text) NOT NULL,
+    response_title character varying(25),
+    response_text text
 );
+
 
 
-CREATE SEQUENCE "db_images_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE db_images_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "db_images" (
-	"id" integer DEFAULT nextval('db_images_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"description" text DEFAULT '' NOT NULL,
-	"bin_data" text DEFAULT '' NOT NULL,
-	"filename" text DEFAULT '' NOT NULL,
-	"filesize" integer DEFAULT '0' NOT NULL,
-	"filetype" text DEFAULT '' NOT NULL,
-	"width" integer DEFAULT '0' NOT NULL,
-	"height" integer DEFAULT '0' NOT NULL,
-	"upload_date" integer,
-	"version" integer,
-	Constraint "db_images_pkey" Primary Key ("id")
+
+CREATE TABLE db_images (
+    id integer DEFAULT nextval('db_images_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    description text DEFAULT ''::text NOT NULL,
+    bin_data text DEFAULT ''::text NOT NULL,
+    filename text DEFAULT ''::text NOT NULL,
+    filesize integer DEFAULT 0 NOT NULL,
+    filetype text DEFAULT ''::text NOT NULL,
+    width integer DEFAULT 0 NOT NULL,
+    height integer DEFAULT 0 NOT NULL,
+    upload_date integer,
+    "version" integer
 );
+
 
 
-CREATE SEQUENCE "doc_data_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE doc_data_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "doc_data" (
-	"docid" integer DEFAULT nextval('doc_data_pk_seq'::text) NOT NULL,
-	"stateid" integer DEFAULT '0' NOT NULL,
-	"title" character varying(255) DEFAULT '' NOT NULL,
-	"data" text DEFAULT '' NOT NULL,
-	"updatedate" integer DEFAULT '0' NOT NULL,
-	"createdate" integer DEFAULT '0' NOT NULL,
-	"created_by" integer DEFAULT '0' NOT NULL,
-	"doc_group" integer DEFAULT '0' NOT NULL,
-	"description" text,
-	"language_id" integer DEFAULT '1' NOT NULL,
-	"filename" text,
-	"filetype" text,
-	"group_id" integer,
-	Constraint "doc_data_pkey" Primary Key ("docid")
+
+CREATE TABLE doc_data (
+    docid integer DEFAULT nextval('doc_data_pk_seq'::text) NOT NULL,
+    stateid integer DEFAULT 0 NOT NULL,
+    title character varying(255) DEFAULT ''::character varying NOT NULL,
+    data text DEFAULT ''::text NOT NULL,
+    updatedate integer DEFAULT 0 NOT NULL,
+    createdate integer DEFAULT 0 NOT NULL,
+    created_by integer DEFAULT 0 NOT NULL,
+    doc_group integer DEFAULT 0 NOT NULL,
+    description text,
+    language_id integer DEFAULT 1 NOT NULL,
+    filename text,
+    filetype text,
+    group_id integer
 );
+
+
 
+CREATE SEQUENCE doc_groups_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "doc_groups_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "doc_groups" (
-	"doc_group" integer DEFAULT nextval('doc_groups_pk_seq'::text) NOT NULL,
-	"groupname" character varying(255) DEFAULT '' NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	Constraint "doc_groups_pkey" Primary Key ("doc_group")
+CREATE TABLE doc_groups (
+    doc_group integer DEFAULT nextval('doc_groups_pk_seq'::text) NOT NULL,
+    groupname character varying(255) DEFAULT ''::character varying NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "doc_states_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE doc_states_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "doc_states" (
-	"stateid" integer DEFAULT nextval('doc_states_pk_seq'::text) NOT NULL,
-	"name" character varying(255) DEFAULT '' NOT NULL,
-	Constraint "doc_states_pkey" Primary Key ("stateid")
+
+
+CREATE TABLE doc_states (
+    stateid integer DEFAULT nextval('doc_states_pk_seq'::text) NOT NULL,
+    name character varying(255) DEFAULT ''::character varying NOT NULL
 );
+
 
 
-CREATE SEQUENCE "filemodule_monitor_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE filemodule_monitor_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "filemodule_monitor" (
-	"id" integer DEFAULT nextval('filemodule_monitor_pk_seq'::text) NOT NULL,
-	"filemodule_id" integer DEFAULT '0' NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	Constraint "filemodule_monitor_pkey" Primary Key ("id")
+
+CREATE TABLE filemodule_monitor (
+    id integer DEFAULT nextval('filemodule_monitor_pk_seq'::text) NOT NULL,
+    filemodule_id integer DEFAULT 0 NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL
 );
+
+
 
+CREATE SEQUENCE forum_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "forum_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "forum" (
-	"msg_id" integer DEFAULT nextval('forum_pk_seq'::text) NOT NULL,
-	"group_forum_id" integer DEFAULT '0' NOT NULL,
-	"posted_by" integer DEFAULT '0' NOT NULL,
-	"subject" text DEFAULT '' NOT NULL,
-	"body" text DEFAULT '' NOT NULL,
-	"post_date" integer DEFAULT '0' NOT NULL,
-	"is_followup_to" integer DEFAULT '0' NOT NULL,
-	"thread_id" integer DEFAULT '0' NOT NULL,
-	"has_followups" integer DEFAULT '0',
-	"most_recent_date" integer DEFAULT '0' NOT NULL,
-	Constraint "forum_pkey" Primary Key ("msg_id")
+CREATE TABLE forum (
+    msg_id integer DEFAULT nextval('forum_pk_seq'::text) NOT NULL,
+    group_forum_id integer DEFAULT 0 NOT NULL,
+    posted_by integer DEFAULT 0 NOT NULL,
+    subject text DEFAULT ''::text NOT NULL,
+    body text DEFAULT ''::text NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL,
+    is_followup_to integer DEFAULT 0 NOT NULL,
+    thread_id integer DEFAULT 0 NOT NULL,
+    has_followups integer DEFAULT 0,
+    most_recent_date integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "forum_agg_msg_count" (
-	"group_forum_id" integer DEFAULT '0' NOT NULL,
-	"count" integer DEFAULT '0' NOT NULL,
-	Constraint "forum_agg_msg_count_pkey" Primary Key ("group_forum_id")
+
+CREATE TABLE forum_agg_msg_count (
+    group_forum_id integer DEFAULT 0 NOT NULL,
+    count integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "forum_group_list_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE forum_group_list_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "forum_group_list" (
-	"group_forum_id" integer DEFAULT nextval('forum_group_list_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"forum_name" text DEFAULT '' NOT NULL,
-	"is_public" integer DEFAULT '0' NOT NULL,
-	"description" text,
-	"allow_anonymous" integer DEFAULT '0' NOT NULL,
-	"send_all_posts_to" text,
-	Constraint "forum_group_list_pkey" Primary Key ("group_forum_id")
+
+CREATE TABLE forum_group_list (
+    group_forum_id integer DEFAULT nextval('forum_group_list_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    forum_name text DEFAULT ''::text NOT NULL,
+    is_public integer DEFAULT 0 NOT NULL,
+    description text,
+    allow_anonymous integer DEFAULT 0 NOT NULL,
+    send_all_posts_to text
 );
+
+
 
+CREATE SEQUENCE forum_monitored_forums_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "forum_monitored_forums_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "forum_monitored_forums" (
-	"monitor_id" integer DEFAULT nextval('forum_monitored_forums_pk_seq'::text) NOT NULL,
-	"forum_id" integer DEFAULT '0' NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	Constraint "forum_monitored_forums_pkey" Primary Key ("monitor_id")
+CREATE TABLE forum_monitored_forums (
+    monitor_id integer DEFAULT nextval('forum_monitored_forums_pk_seq'::text) NOT NULL,
+    forum_id integer DEFAULT 0 NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "forum_saved_place_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE forum_saved_place_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "forum_saved_place" (
-	"saved_place_id" integer DEFAULT nextval('forum_saved_place_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"forum_id" integer DEFAULT '0' NOT NULL,
-	"save_date" integer DEFAULT '0' NOT NULL,
-	Constraint "forum_saved_place_pkey" Primary Key ("saved_place_id")
+
+
+CREATE TABLE forum_saved_place (
+    saved_place_id integer DEFAULT nextval('forum_saved_place_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    forum_id integer DEFAULT 0 NOT NULL,
+    save_date integer DEFAULT 0 NOT NULL
 );
+
+
+
+CREATE SEQUENCE foundry_news_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE SEQUENCE "foundry_news_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE frs_file_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "frs_file_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "frs_file" (
-	"file_id" integer DEFAULT nextval('frs_file_pk_seq'::text) NOT NULL,
-	"filename" text,
-	"release_id" integer DEFAULT '0' NOT NULL,
-	"type_id" integer DEFAULT '0' NOT NULL,
-	"processor_id" integer DEFAULT '0' NOT NULL,
-	"release_time" integer DEFAULT '0' NOT NULL,
-	"file_size" integer DEFAULT '0' NOT NULL,
-	"post_date" integer DEFAULT '0' NOT NULL,
-	Constraint "frs_file_pkey" Primary Key ("file_id")
+CREATE TABLE frs_file (
+    file_id integer DEFAULT nextval('frs_file_pk_seq'::text) NOT NULL,
+    filename text,
+    release_id integer DEFAULT 0 NOT NULL,
+    type_id integer DEFAULT 0 NOT NULL,
+    processor_id integer DEFAULT 0 NOT NULL,
+    release_time integer DEFAULT 0 NOT NULL,
+    file_size integer DEFAULT 0 NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "frs_filetype_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE frs_filetype_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "frs_filetype" (
-	"type_id" integer DEFAULT nextval('frs_filetype_pk_seq'::text) NOT NULL,
-	"name" text,
-	Constraint "frs_filetype_pkey" Primary Key ("type_id")
+
+
+CREATE TABLE frs_filetype (
+    type_id integer DEFAULT nextval('frs_filetype_pk_seq'::text) NOT NULL,
+    name text
 );
 
 
-CREATE SEQUENCE "frs_package_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE frs_package_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "frs_package" (
-	"package_id" integer DEFAULT nextval('frs_package_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"name" text,
-	"status_id" integer DEFAULT '0' NOT NULL,
-	Constraint "frs_package_pkey" Primary Key ("package_id")
+
+
+CREATE TABLE frs_package (
+    package_id integer DEFAULT nextval('frs_package_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    name text,
+    status_id integer DEFAULT 0 NOT NULL,
+    is_public integer DEFAULT 1
 );
+
 
 
-CREATE SEQUENCE "frs_processor_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE frs_processor_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "frs_processor" (
-	"processor_id" integer DEFAULT nextval('frs_processor_pk_seq'::text) NOT NULL,
-	"name" text,
-	Constraint "frs_processor_pkey" Primary Key ("processor_id")
+
+CREATE TABLE frs_processor (
+    processor_id integer DEFAULT nextval('frs_processor_pk_seq'::text) NOT NULL,
+    name text
 );
+
+
 
+CREATE SEQUENCE frs_release_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "frs_release_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "frs_release" (
-	"release_id" integer DEFAULT nextval('frs_release_pk_seq'::text) NOT NULL,
-	"package_id" integer DEFAULT '0' NOT NULL,
-	"name" text,
-	"notes" text,
-	"changes" text,
-	"status_id" integer DEFAULT '0' NOT NULL,
-	"preformatted" integer DEFAULT '0' NOT NULL,
-	"release_date" integer DEFAULT '0' NOT NULL,
-	"released_by" integer DEFAULT '0' NOT NULL,
-	Constraint "frs_release_pkey" Primary Key ("release_id")
+CREATE TABLE frs_release (
+    release_id integer DEFAULT nextval('frs_release_pk_seq'::text) NOT NULL,
+    package_id integer DEFAULT 0 NOT NULL,
+    name text,
+    notes text,
+    changes text,
+    status_id integer DEFAULT 0 NOT NULL,
+    preformatted integer DEFAULT 0 NOT NULL,
+    release_date integer DEFAULT 0 NOT NULL,
+    released_by integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "frs_status_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE frs_status_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "frs_status" (
-	"status_id" integer DEFAULT nextval('frs_status_pk_seq'::text) NOT NULL,
-	"name" text,
-	Constraint "frs_status_pkey" Primary Key ("status_id")
+
+
+CREATE TABLE frs_status (
+    status_id integer DEFAULT nextval('frs_status_pk_seq'::text) NOT NULL,
+    name text
 );
+
 
 
-CREATE SEQUENCE "group_history_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE group_history_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "group_history" (
-	"group_history_id" integer DEFAULT nextval('group_history_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"field_name" text DEFAULT '' NOT NULL,
-	"old_value" text DEFAULT '' NOT NULL,
-	"mod_by" integer DEFAULT '0' NOT NULL,
-	"adddate" integer,
-	Constraint "group_history_pkey" Primary Key ("group_history_id")
+
+CREATE TABLE group_history (
+    group_history_id integer DEFAULT nextval('group_history_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    field_name text DEFAULT ''::text NOT NULL,
+    old_value text DEFAULT ''::text NOT NULL,
+    mod_by integer DEFAULT 0 NOT NULL,
+    adddate integer
 );
+
 
 
-CREATE SEQUENCE "groups_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE groups_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "groups" (
-	"group_id" integer DEFAULT nextval('groups_pk_seq'::text) NOT NULL,
-	"group_name" character varying(40),
-	"homepage" character varying(128),
-	"is_public" integer DEFAULT '0' NOT NULL,
-	"status" character(1) DEFAULT 'A' NOT NULL,
-	"unix_group_name" character varying(30) DEFAULT '' NOT NULL,
-	"unix_box" character varying(20) DEFAULT 'shell1' NOT NULL,
-	"http_domain" character varying(80),
-	"short_description" character varying(255),
-	"cvs_box" character varying(20) DEFAULT 'cvs1' NOT NULL,
-	"license" character varying(16),
-	"register_purpose" text,
-	"license_other" text,
-	"register_time" integer DEFAULT '0' NOT NULL,
-	"dead1" integer DEFAULT '1' NOT NULL,
-	"rand_hash" text,
-	"use_mail" integer DEFAULT '1' NOT NULL,
-	"use_survey" integer DEFAULT '1' NOT NULL,
-	"dead2" integer DEFAULT '1' NOT NULL,
-	"use_forum" integer DEFAULT '1' NOT NULL,
-	"use_pm" integer DEFAULT '1' NOT NULL,
-	"use_cvs" integer DEFAULT '1' NOT NULL,
-	"use_news" integer DEFAULT '1' NOT NULL,
-	"dead3" integer DEFAULT '1' NOT NULL,
-	"dead4" text DEFAULT '' NOT NULL,
-	"dead5" text DEFAULT '' NOT NULL,
-	"dead6" text DEFAULT '' NOT NULL,
-	"type_id" integer DEFAULT '1' NOT NULL,
-	"use_docman" integer DEFAULT '1' NOT NULL,
-	"dead7" integer DEFAULT '0' NOT NULL,
-	"dead8" integer DEFAULT '0' NOT NULL,
-	"dead9" integer DEFAULT '0' NOT NULL,
-	"new_doc_address" text DEFAULT '' NOT NULL,
-	"send_all_docs" integer DEFAULT '0' NOT NULL,
-	"dead10" integer DEFAULT '1' NOT NULL,
-	"use_pm_depend_box" integer DEFAULT '1' NOT NULL,
-	"dead11" integer,
-	"dead12" integer,
-	"dead13" integer,
-	"use_ftp" integer DEFAULT 1,
-	"use_tracker" integer DEFAULT 1,
-	"use_frs" integer DEFAULT 1,
-	"use_stats" integer DEFAULT 1,
-	"enable_pserver" integer DEFAULT 1,
-	"enable_anoncvs" integer DEFAULT 1,
-	Constraint "groups_pkey" Primary Key ("group_id")
+
+CREATE TABLE groups (
+    group_id integer DEFAULT nextval('groups_pk_seq'::text) NOT NULL,
+    group_name character varying(40),
+    homepage character varying(128),
+    is_public integer DEFAULT 0 NOT NULL,
+    status character(1) DEFAULT 'A'::bpchar NOT NULL,
+    unix_group_name character varying(30) DEFAULT ''::character varying NOT NULL,
+    unix_box character varying(20) DEFAULT 'shell1'::character varying NOT NULL,
+    http_domain character varying(80),
+    short_description character varying(255),
+    scm_box character varying(20) DEFAULT 'cvs1'::character varying NOT NULL,
+    register_purpose text,
+    license_other text,
+    register_time integer DEFAULT 0 NOT NULL,
+    rand_hash text,
+    use_mail integer DEFAULT 1 NOT NULL,
+    use_survey integer DEFAULT 1 NOT NULL,
+    use_forum integer DEFAULT 1 NOT NULL,
+    use_pm integer DEFAULT 1 NOT NULL,
+    use_scm integer DEFAULT 1 NOT NULL,
+    use_news integer DEFAULT 1 NOT NULL,
+    type_id integer DEFAULT 1 NOT NULL,
+    use_docman integer DEFAULT 1 NOT NULL,
+    new_doc_address text DEFAULT ''::text NOT NULL,
+    send_all_docs integer DEFAULT 0 NOT NULL,
+    use_pm_depend_box integer DEFAULT 1 NOT NULL,
+    use_ftp integer DEFAULT 1,
+    use_tracker integer DEFAULT 1,
+    use_frs integer DEFAULT 1,
+    use_stats integer DEFAULT 1,
+    enable_pserver integer DEFAULT 1,
+    enable_anonscm integer DEFAULT 1,
+    license integer DEFAULT 100
 );
+
+
 
+CREATE SEQUENCE mail_group_list_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "mail_group_list_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "mail_group_list" (
-	"group_list_id" integer DEFAULT nextval('mail_group_list_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"list_name" text,
-	"is_public" integer DEFAULT '0' NOT NULL,
-	"password" character varying(16),
-	"list_admin" integer DEFAULT '0' NOT NULL,
-	"status" integer DEFAULT '0' NOT NULL,
-	"description" text,
-	Constraint "mail_group_list_pkey" Primary Key ("group_list_id")
+CREATE TABLE mail_group_list (
+    group_list_id integer DEFAULT nextval('mail_group_list_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    list_name text,
+    is_public integer DEFAULT 0 NOT NULL,
+    "password" character varying(16),
+    list_admin integer DEFAULT 0 NOT NULL,
+    status integer DEFAULT 0 NOT NULL,
+    description text
 );
 
 
-CREATE SEQUENCE "news_bytes_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE news_bytes_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "news_bytes" (
-	"id" integer DEFAULT nextval('news_bytes_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"submitted_by" integer DEFAULT '0' NOT NULL,
-	"is_approved" integer DEFAULT '0' NOT NULL,
-	"post_date" integer DEFAULT '0' NOT NULL,
-	"forum_id" integer DEFAULT '0' NOT NULL,
-	"summary" text,
-	"details" text,
-	Constraint "news_bytes_pkey" Primary Key ("id")
+
+
+CREATE TABLE news_bytes (
+    id integer DEFAULT nextval('news_bytes_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    submitted_by integer DEFAULT 0 NOT NULL,
+    is_approved integer DEFAULT 0 NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL,
+    forum_id integer DEFAULT 0 NOT NULL,
+    summary text,
+    details text
 );
 
 
-CREATE SEQUENCE "people_job_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE people_job_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "people_job" (
-	"job_id" integer DEFAULT nextval('people_job_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"created_by" integer DEFAULT '0' NOT NULL,
-	"title" text,
-	"description" text,
-	"post_date" integer DEFAULT '0' NOT NULL,
-	"status_id" integer DEFAULT '0' NOT NULL,
-	"category_id" integer DEFAULT '0' NOT NULL,
-	Constraint "people_job_pkey" Primary Key ("job_id")
+
+
+CREATE TABLE people_job (
+    job_id integer DEFAULT nextval('people_job_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    created_by integer DEFAULT 0 NOT NULL,
+    title text,
+    description text,
+    post_date integer DEFAULT 0 NOT NULL,
+    status_id integer DEFAULT 0 NOT NULL,
+    category_id integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "people_job_category_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE people_job_category_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "people_job_category" (
-	"category_id" integer DEFAULT nextval('people_job_category_pk_seq'::text) NOT NULL,
-	"name" text,
-	"private_flag" integer DEFAULT '0' NOT NULL,
-	Constraint "people_job_category_pkey" Primary Key ("category_id")
+
+CREATE TABLE people_job_category (
+    category_id integer DEFAULT nextval('people_job_category_pk_seq'::text) NOT NULL,
+    name text,
+    private_flag integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "people_job_inventory_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE people_job_inventory_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "people_job_inventory" (
-	"job_inventory_id" integer DEFAULT nextval('people_job_inventory_pk_seq'::text) NOT NULL,
-	"job_id" integer DEFAULT '0' NOT NULL,
-	"skill_id" integer DEFAULT '0' NOT NULL,
-	"skill_level_id" integer DEFAULT '0' NOT NULL,
-	"skill_year_id" integer DEFAULT '0' NOT NULL,
-	Constraint "people_job_inventory_pkey" Primary Key ("job_inventory_id")
+
+CREATE TABLE people_job_inventory (
+    job_inventory_id integer DEFAULT nextval('people_job_inventory_pk_seq'::text) NOT NULL,
+    job_id integer DEFAULT 0 NOT NULL,
+    skill_id integer DEFAULT 0 NOT NULL,
+    skill_level_id integer DEFAULT 0 NOT NULL,
+    skill_year_id integer DEFAULT 0 NOT NULL
 );
+
+
 
+CREATE SEQUENCE people_job_status_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "people_job_status_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "people_job_status" (
-	"status_id" integer DEFAULT nextval('people_job_status_pk_seq'::text) NOT NULL,
-	"name" text,
-	Constraint "people_job_status_pkey" Primary Key ("status_id")
+CREATE TABLE people_job_status (
+    status_id integer DEFAULT nextval('people_job_status_pk_seq'::text) NOT NULL,
+    name text
 );
 
 
-CREATE SEQUENCE "people_skill_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE people_skill_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "people_skill" (
-	"skill_id" integer DEFAULT nextval('people_skill_pk_seq'::text) NOT NULL,
-	"name" text,
-	Constraint "people_skill_pkey" Primary Key ("skill_id")
+
+
+CREATE TABLE people_skill (
+    skill_id integer DEFAULT nextval('people_skill_pk_seq'::text) NOT NULL,
+    name text
 );
+
 
 
-CREATE SEQUENCE "people_skill_inventory_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE people_skill_inventory_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "people_skill_inventory" (
-	"skill_inventory_id" integer DEFAULT nextval('people_skill_inventory_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"skill_id" integer DEFAULT '0' NOT NULL,
-	"skill_level_id" integer DEFAULT '0' NOT NULL,
-	"skill_year_id" integer DEFAULT '0' NOT NULL,
-	Constraint "people_skill_inventory_pkey" Primary Key ("skill_inventory_id")
+
+CREATE TABLE people_skill_inventory (
+    skill_inventory_id integer DEFAULT nextval('people_skill_inventory_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    skill_id integer DEFAULT 0 NOT NULL,
+    skill_level_id integer DEFAULT 0 NOT NULL,
+    skill_year_id integer DEFAULT 0 NOT NULL
 );
+
+
 
+CREATE SEQUENCE people_skill_level_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "people_skill_level_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "people_skill_level" (
-	"skill_level_id" integer DEFAULT nextval('people_skill_level_pk_seq'::text) NOT NULL,
-	"name" text,
-	Constraint "people_skill_level_pkey" Primary Key ("skill_level_id")
+CREATE TABLE people_skill_level (
+    skill_level_id integer DEFAULT nextval('people_skill_level_pk_seq'::text) NOT NULL,
+    name text
 );
 
 
-CREATE SEQUENCE "people_skill_year_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE people_skill_year_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "people_skill_year" (
-	"skill_year_id" integer DEFAULT nextval('people_skill_year_pk_seq'::text) NOT NULL,
-	"name" text,
-	Constraint "people_skill_year_pkey" Primary Key ("skill_year_id")
+
+
+CREATE TABLE people_skill_year (
+    skill_year_id integer DEFAULT nextval('people_skill_year_pk_seq'::text) NOT NULL,
+    name text
 );
 
 
-CREATE SEQUENCE "project_assigned_to_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE project_assigned_to_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "project_assigned_to" (
-	"project_assigned_id" integer DEFAULT nextval('project_assigned_to_pk_seq'::text) NOT NULL,
-	"project_task_id" integer DEFAULT '0' NOT NULL,
-	"assigned_to_id" integer DEFAULT '0' NOT NULL,
-	Constraint "project_assigned_to_pkey" Primary Key ("project_assigned_id")
+
+
+CREATE TABLE project_assigned_to (
+    project_assigned_id integer DEFAULT nextval('project_assigned_to_pk_seq'::text) NOT NULL,
+    project_task_id integer DEFAULT 0 NOT NULL,
+    assigned_to_id integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "project_dependencies_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE project_dependencies_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "project_dependencies" (
-	"project_depend_id" integer DEFAULT nextval('project_dependencies_pk_seq'::text) NOT NULL,
-	"project_task_id" integer DEFAULT '0' NOT NULL,
-	"is_dependent_on_task_id" integer DEFAULT '0' NOT NULL,
-	Constraint "project_dependencies_pkey" Primary Key ("project_depend_id")
+
+CREATE TABLE project_dependencies (
+    project_depend_id integer DEFAULT nextval('project_dependencies_pk_seq'::text) NOT NULL,
+    project_task_id integer DEFAULT 0 NOT NULL,
+    is_dependent_on_task_id integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "project_group_list_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE project_group_list_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "project_group_list" (
-	"group_project_id" integer DEFAULT nextval('project_group_list_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"project_name" text DEFAULT '' NOT NULL,
-	"is_public" integer DEFAULT '0' NOT NULL,
-	"description" text,
-	"send_all_posts_to" text,
-	Constraint "project_group_list_pkey" Primary Key ("group_project_id")
+
+CREATE TABLE project_group_list (
+    group_project_id integer DEFAULT nextval('project_group_list_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    project_name text DEFAULT ''::text NOT NULL,
+    is_public integer DEFAULT 0 NOT NULL,
+    description text,
+    send_all_posts_to text
 );
+
+
 
+CREATE SEQUENCE project_history_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "project_history_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "project_history" (
-	"project_history_id" integer DEFAULT nextval('project_history_pk_seq'::text) NOT NULL,
-	"project_task_id" integer DEFAULT '0' NOT NULL,
-	"field_name" text DEFAULT '' NOT NULL,
-	"old_value" text DEFAULT '' NOT NULL,
-	"mod_by" integer DEFAULT '0' NOT NULL,
-	"mod_date" integer DEFAULT '0' NOT NULL,
-	Constraint "project_history_pkey" Primary Key ("project_history_id")
+CREATE TABLE project_history (
+    project_history_id integer DEFAULT nextval('project_history_pk_seq'::text) NOT NULL,
+    project_task_id integer DEFAULT 0 NOT NULL,
+    field_name text DEFAULT ''::text NOT NULL,
+    old_value text DEFAULT ''::text NOT NULL,
+    mod_by integer DEFAULT 0 NOT NULL,
+    mod_date integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "project_metric_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE project_metric_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "project_metric" (
-	"ranking" integer DEFAULT nextval('project_metric_pk_seq'::text) NOT NULL,
-	"percentile" double precision,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	Constraint "project_metric_pkey" Primary Key ("ranking")
+
+
+CREATE TABLE project_metric (
+    ranking integer DEFAULT nextval('project_metric_pk_seq'::text) NOT NULL,
+    percentile double precision,
+    group_id integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "project_metric_tmp1_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE project_metric_tmp1_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "project_metric_tmp1" (
-	"ranking" integer DEFAULT nextval('project_metric_tmp1_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"value" double precision,
-	Constraint "project_metric_tmp1_pkey" Primary Key ("ranking")
+
+
+CREATE TABLE project_metric_tmp1 (
+    ranking integer DEFAULT nextval('project_metric_tmp1_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    value double precision
 );
+
 
 
-CREATE SEQUENCE "project_status_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE project_status_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "project_status" (
-	"status_id" integer DEFAULT nextval('project_status_pk_seq'::text) NOT NULL,
-	"status_name" text DEFAULT '' NOT NULL,
-	Constraint "project_status_pkey" Primary Key ("status_id")
+
+CREATE TABLE project_status (
+    status_id integer DEFAULT nextval('project_status_pk_seq'::text) NOT NULL,
+    status_name text DEFAULT ''::text NOT NULL
 );
+
+
 
+CREATE SEQUENCE project_task_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "project_task_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "project_task" (
-	"project_task_id" integer DEFAULT nextval('project_task_pk_seq'::text) NOT NULL,
-	"group_project_id" integer DEFAULT '0' NOT NULL,
-	"summary" text DEFAULT '' NOT NULL,
-	"details" text DEFAULT '' NOT NULL,
-	"percent_complete" integer DEFAULT '0' NOT NULL,
-	"priority" integer DEFAULT '0' NOT NULL,
-	"hours" double precision DEFAULT '0.00' NOT NULL,
-	"start_date" integer DEFAULT '0' NOT NULL,
-	"end_date" integer DEFAULT '0' NOT NULL,
-	"created_by" integer DEFAULT '0' NOT NULL,
-	"status_id" integer DEFAULT '0' NOT NULL,
-	"category_id" integer,
-	Constraint "project_task_pkey" Primary Key ("project_task_id")
+CREATE TABLE project_task (
+    project_task_id integer DEFAULT nextval('project_task_pk_seq'::text) NOT NULL,
+    group_project_id integer DEFAULT 0 NOT NULL,
+    summary text DEFAULT ''::text NOT NULL,
+    details text DEFAULT ''::text NOT NULL,
+    percent_complete integer DEFAULT 0 NOT NULL,
+    priority integer DEFAULT 0 NOT NULL,
+    hours double precision DEFAULT 0::double precision NOT NULL,
+    start_date integer DEFAULT 0 NOT NULL,
+    end_date integer DEFAULT 0 NOT NULL,
+    created_by integer DEFAULT 0 NOT NULL,
+    status_id integer DEFAULT 0 NOT NULL,
+    category_id integer
 );
 
 
-CREATE SEQUENCE "project_weekly_metric_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE project_weekly_metric_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "project_weekly_metric" (
-	"ranking" integer DEFAULT nextval('project_weekly_metric_pk_seq'::text) NOT NULL,
-	"percentile" double precision,
-	"group_id" integer DEFAULT '0' NOT NULL
+
+
+CREATE TABLE project_weekly_metric (
+    ranking integer DEFAULT nextval('project_weekly_metric_pk_seq'::text) NOT NULL,
+    percentile double precision,
+    group_id integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE TABLE "user_session" (
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"session_hash" character(32) DEFAULT '' NOT NULL,
-	"ip_addr" character(15) DEFAULT '' NOT NULL,
-	"time" integer DEFAULT '0' NOT NULL,
-	Constraint "session_pkey" Primary Key ("session_hash")
+CREATE TABLE user_session (
+    user_id integer DEFAULT 0 NOT NULL,
+    session_hash character(32) DEFAULT ''::bpchar NOT NULL,
+    ip_addr character(15) DEFAULT ''::bpchar NOT NULL,
+    "time" integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "snippet_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE snippet_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "snippet" (
-	"snippet_id" integer DEFAULT nextval('snippet_pk_seq'::text) NOT NULL,
-	"created_by" integer DEFAULT '0' NOT NULL,
-	"name" text,
-	"description" text,
-	"type" integer DEFAULT '0' NOT NULL,
-	"language" integer DEFAULT '0' NOT NULL,
-	"license" text DEFAULT '' NOT NULL,
-	"category" integer DEFAULT '0' NOT NULL,
-	Constraint "snippet_pkey" Primary Key ("snippet_id")
+
+
+CREATE TABLE snippet (
+    snippet_id integer DEFAULT nextval('snippet_pk_seq'::text) NOT NULL,
+    created_by integer DEFAULT 0 NOT NULL,
+    name text,
+    description text,
+    "type" integer DEFAULT 0 NOT NULL,
+    "language" integer DEFAULT 0 NOT NULL,
+    license text DEFAULT ''::text NOT NULL,
+    category integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "snippet_package_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE snippet_package_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "snippet_package" (
-	"snippet_package_id" integer DEFAULT nextval('snippet_package_pk_seq'::text) NOT NULL,
-	"created_by" integer DEFAULT '0' NOT NULL,
-	"name" text,
-	"description" text,
-	"category" integer DEFAULT '0' NOT NULL,
-	"language" integer DEFAULT '0' NOT NULL,
-	Constraint "snippet_package_pkey" Primary Key ("snippet_package_id")
+
+
+CREATE TABLE snippet_package (
+    snippet_package_id integer DEFAULT nextval('snippet_package_pk_seq'::text) NOT NULL,
+    created_by integer DEFAULT 0 NOT NULL,
+    name text,
+    description text,
+    category integer DEFAULT 0 NOT NULL,
+    "language" integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "snippet_package_item_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE snippet_package_item_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "snippet_package_item" (
-	"snippet_package_item_id" integer DEFAULT nextval('snippet_package_item_pk_seq'::text) NOT NULL,
-	"snippet_package_version_id" integer DEFAULT '0' NOT NULL,
-	"snippet_version_id" integer DEFAULT '0' NOT NULL,
-	Constraint "snippet_package_item_pkey" Primary Key ("snippet_package_item_id")
+
+CREATE TABLE snippet_package_item (
+    snippet_package_item_id integer DEFAULT nextval('snippet_package_item_pk_seq'::text) NOT NULL,
+    snippet_package_version_id integer DEFAULT 0 NOT NULL,
+    snippet_version_id integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "snippet_package_version_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE snippet_package_version_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "snippet_package_version" (
-	"snippet_package_version_id" integer DEFAULT nextval('snippet_package_version_pk_seq'::text) NOT NULL,
-	"snippet_package_id" integer DEFAULT '0' NOT NULL,
-	"changes" text,
-	"version" text,
-	"submitted_by" integer DEFAULT '0' NOT NULL,
-	"post_date" integer DEFAULT '0' NOT NULL,
-	Constraint "snippet_package_version_pkey" Primary Key ("snippet_package_version_id")
+
+CREATE TABLE snippet_package_version (
+    snippet_package_version_id integer DEFAULT nextval('snippet_package_version_pk_seq'::text) NOT NULL,
+    snippet_package_id integer DEFAULT 0 NOT NULL,
+    changes text,
+    "version" text,
+    submitted_by integer DEFAULT 0 NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL
 );
+
+
 
+CREATE SEQUENCE snippet_version_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "snippet_version_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "snippet_version" (
-	"snippet_version_id" integer DEFAULT nextval('snippet_version_pk_seq'::text) NOT NULL,
-	"snippet_id" integer DEFAULT '0' NOT NULL,
-	"changes" text,
-	"version" text,
-	"submitted_by" integer DEFAULT '0' NOT NULL,
-	"post_date" integer DEFAULT '0' NOT NULL,
-	"code" text,
-	Constraint "snippet_version_pkey" Primary Key ("snippet_version_id")
+CREATE TABLE snippet_version (
+    snippet_version_id integer DEFAULT nextval('snippet_version_pk_seq'::text) NOT NULL,
+    snippet_id integer DEFAULT 0 NOT NULL,
+    changes text,
+    "version" text,
+    submitted_by integer DEFAULT 0 NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL,
+    code text
 );
 
 
-CREATE TABLE "stats_agg_logo_by_day" (
-	"day" integer,
-	"count" integer
+
+CREATE TABLE stats_agg_logo_by_day (
+    "day" integer,
+    count integer
 );
+
 
 
-CREATE TABLE "stats_agg_pages_by_day" (
-	"day" integer DEFAULT '0' NOT NULL,
-	"count" integer DEFAULT '0' NOT NULL
+CREATE TABLE stats_agg_pages_by_day (
+    "day" integer DEFAULT 0 NOT NULL,
+    count integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "survey_question_types_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE survey_question_types_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "survey_question_types" (
-	"id" integer DEFAULT nextval('survey_question_types_pk_seq'::text) NOT NULL,
-	"type" text DEFAULT '' NOT NULL,
-	Constraint "survey_question_types_pkey" Primary Key ("id")
+
+
+CREATE TABLE survey_question_types (
+    id integer DEFAULT nextval('survey_question_types_pk_seq'::text) NOT NULL,
+    "type" text DEFAULT ''::text NOT NULL
 );
+
 
 
-CREATE SEQUENCE "survey_questions_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE survey_questions_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "survey_questions" (
-	"question_id" integer DEFAULT nextval('survey_questions_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"question" text DEFAULT '' NOT NULL,
-	"question_type" integer DEFAULT '0' NOT NULL,
-	Constraint "survey_questions_pkey" Primary Key ("question_id")
+
+CREATE TABLE survey_questions (
+    question_id integer DEFAULT nextval('survey_questions_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    question text DEFAULT ''::text NOT NULL,
+    question_type integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "survey_rating_aggregate" (
-	"type" integer DEFAULT '0' NOT NULL,
-	"id" integer DEFAULT '0' NOT NULL,
-	"response" double precision DEFAULT '0' NOT NULL,
-	"count" integer DEFAULT '0' NOT NULL
+
+CREATE TABLE survey_rating_aggregate (
+    "type" integer DEFAULT 0 NOT NULL,
+    id integer DEFAULT 0 NOT NULL,
+    response double precision DEFAULT 0::double precision NOT NULL,
+    count integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE TABLE "survey_rating_response" (
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"type" integer DEFAULT '0' NOT NULL,
-	"id" integer DEFAULT '0' NOT NULL,
-	"response" integer DEFAULT '0' NOT NULL,
-	"post_date" integer DEFAULT '0' NOT NULL
+CREATE TABLE survey_rating_response (
+    user_id integer DEFAULT 0 NOT NULL,
+    "type" integer DEFAULT 0 NOT NULL,
+    id integer DEFAULT 0 NOT NULL,
+    response integer DEFAULT 0 NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "survey_responses" (
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"survey_id" integer DEFAULT '0' NOT NULL,
-	"question_id" integer DEFAULT '0' NOT NULL,
-	"response" text DEFAULT '' NOT NULL,
-	"post_date" integer DEFAULT '0' NOT NULL
+
+CREATE TABLE survey_responses (
+    user_id integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    survey_id integer DEFAULT 0 NOT NULL,
+    question_id integer DEFAULT 0 NOT NULL,
+    response text DEFAULT ''::text NOT NULL,
+    post_date integer DEFAULT 0 NOT NULL
 );
+
+
 
+CREATE SEQUENCE surveys_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "surveys_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "surveys" (
-	"survey_id" integer DEFAULT nextval('surveys_pk_seq'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"survey_title" text DEFAULT '' NOT NULL,
-	"survey_questions" text DEFAULT '' NOT NULL,
-	"is_active" integer DEFAULT '1' NOT NULL,
-	Constraint "surveys_pkey" Primary Key ("survey_id")
+CREATE TABLE surveys (
+    survey_id integer DEFAULT nextval('surveys_pk_seq'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    survey_title text DEFAULT ''::text NOT NULL,
+    survey_questions text DEFAULT ''::text NOT NULL,
+    is_active integer DEFAULT 1 NOT NULL
 );
 
 
-CREATE SEQUENCE "themes_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE themes_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "trove_cat_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "trove_cat" (
-	"trove_cat_id" integer DEFAULT nextval('trove_cat_pk_seq'::text) NOT NULL,
-	"version" integer DEFAULT '0' NOT NULL,
-	"parent" integer DEFAULT '0' NOT NULL,
-	"root_parent" integer DEFAULT '0' NOT NULL,
-	"shortname" character varying(80),
-	"fullname" character varying(80),
-	"description" character varying(255),
-	"count_subcat" integer DEFAULT '0' NOT NULL,
-	"count_subproj" integer DEFAULT '0' NOT NULL,
-	"fullpath" text DEFAULT '' NOT NULL,
-	"fullpath_ids" text,
-	Constraint "trove_cat_pkey" Primary Key ("trove_cat_id")
+CREATE SEQUENCE trove_cat_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE trove_cat (
+    trove_cat_id integer DEFAULT nextval('trove_cat_pk_seq'::text) NOT NULL,
+    "version" integer DEFAULT 0 NOT NULL,
+    parent integer DEFAULT 0 NOT NULL,
+    root_parent integer DEFAULT 0 NOT NULL,
+    shortname character varying(80),
+    fullname character varying(80),
+    description character varying(255),
+    count_subcat integer DEFAULT 0 NOT NULL,
+    count_subproj integer DEFAULT 0 NOT NULL,
+    fullpath text DEFAULT ''::text NOT NULL,
+    fullpath_ids text
 );
+
+
 
+CREATE SEQUENCE trove_group_link_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "trove_group_link_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "trove_group_link" (
-	"trove_group_id" integer DEFAULT nextval('trove_group_link_pk_seq'::text) NOT NULL,
-	"trove_cat_id" integer DEFAULT '0' NOT NULL,
-	"trove_cat_version" integer DEFAULT '0' NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"trove_cat_root" integer DEFAULT '0' NOT NULL,
-	Constraint "trove_group_link_pkey" Primary Key ("trove_group_id")
+CREATE TABLE trove_group_link (
+    trove_group_id integer DEFAULT nextval('trove_group_link_pk_seq'::text) NOT NULL,
+    trove_cat_id integer DEFAULT 0 NOT NULL,
+    trove_cat_version integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    trove_cat_root integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "trove_treesums_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE trove_treesums_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "user_bookmarks_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "user_bookmarks" (
-	"bookmark_id" integer DEFAULT nextval('user_bookmarks_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"bookmark_url" text,
-	"bookmark_title" text,
-	Constraint "user_bookmarks_pkey" Primary Key ("bookmark_id")
+CREATE SEQUENCE user_bookmarks_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE user_bookmarks (
+    bookmark_id integer DEFAULT nextval('user_bookmarks_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    bookmark_url text,
+    bookmark_title text
 );
+
+
 
+CREATE SEQUENCE user_diary_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "user_diary_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "user_diary" (
-	"id" integer DEFAULT nextval('user_diary_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"date_posted" integer DEFAULT '0' NOT NULL,
-	"summary" text,
-	"details" text,
-	"is_public" integer DEFAULT '0' NOT NULL,
-	Constraint "user_diary_pkey" Primary Key ("id")
+CREATE TABLE user_diary (
+    id integer DEFAULT nextval('user_diary_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    date_posted integer DEFAULT 0 NOT NULL,
+    summary text,
+    details text,
+    is_public integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "user_diary_monitor_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE user_diary_monitor_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "user_diary_monitor" (
-	"monitor_id" integer DEFAULT nextval('user_diary_monitor_pk_seq'::text) NOT NULL,
-	"monitored_user" integer DEFAULT '0' NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	Constraint "user_diary_monitor_pkey" Primary Key ("monitor_id")
+
+
+CREATE TABLE user_diary_monitor (
+    monitor_id integer DEFAULT nextval('user_diary_monitor_pk_seq'::text) NOT NULL,
+    monitored_user integer DEFAULT 0 NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "user_group_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE user_group_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "user_group" (
-	"user_group_id" integer DEFAULT nextval('user_group_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"admin_flags" character(16) DEFAULT '' NOT NULL,
-	"dead1" integer DEFAULT '0' NOT NULL,
-	"forum_flags" integer DEFAULT '0' NOT NULL,
-	"project_flags" integer DEFAULT '2' NOT NULL,
-	"dead2" integer DEFAULT '1' NOT NULL,
-	"dead3" integer DEFAULT '1' NOT NULL,
-	"doc_flags" integer DEFAULT '0' NOT NULL,
-	"cvs_flags" integer DEFAULT '1' NOT NULL,
-	"member_role" integer DEFAULT '100' NOT NULL,
-	"release_flags" integer DEFAULT '0' NOT NULL,
-	"artifact_flags" integer,
-	Constraint "user_group_pkey" Primary Key ("user_group_id")
+
+
+CREATE TABLE user_group (
+    user_group_id integer DEFAULT nextval('user_group_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    admin_flags character(16) DEFAULT ''::bpchar NOT NULL,
+    forum_flags integer DEFAULT 0 NOT NULL,
+    project_flags integer DEFAULT 2 NOT NULL,
+    doc_flags integer DEFAULT 0 NOT NULL,
+    cvs_flags integer DEFAULT 1 NOT NULL,
+    member_role integer DEFAULT 100 NOT NULL,
+    release_flags integer DEFAULT 0 NOT NULL,
+    artifact_flags integer,
+    role_id integer DEFAULT 1
 );
+
 
 
-CREATE SEQUENCE "user_metric_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE user_metric_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "user_metric" (
-	"ranking" integer DEFAULT nextval('user_metric_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"times_ranked" integer DEFAULT '0' NOT NULL,
-	"avg_raters_importance" double precision DEFAULT '0.00000000' NOT NULL,
-	"avg_rating" double precision DEFAULT '0.00000000' NOT NULL,
-	"metric" double precision DEFAULT '0.00000000' NOT NULL,
-	"percentile" double precision DEFAULT '0.00000000' NOT NULL,
-	"importance_factor" double precision DEFAULT '0.00000000' NOT NULL,
-	Constraint "user_metric_pkey" Primary Key ("ranking")
+
+CREATE TABLE user_metric (
+    ranking integer DEFAULT nextval('user_metric_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    times_ranked integer DEFAULT 0 NOT NULL,
+    avg_raters_importance double precision DEFAULT 0::double precision NOT NULL,
+    avg_rating double precision DEFAULT 0::double precision NOT NULL,
+    metric double precision DEFAULT 0::double precision NOT NULL,
+    percentile double precision DEFAULT 0::double precision NOT NULL,
+    importance_factor double precision DEFAULT 0::double precision NOT NULL
 );
+
+
 
+CREATE SEQUENCE user_metric0_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "user_metric0_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "user_metric0" (
-	"ranking" integer DEFAULT nextval('user_metric0_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"times_ranked" integer DEFAULT '0' NOT NULL,
-	"avg_raters_importance" double precision DEFAULT '0.00000000' NOT NULL,
-	"avg_rating" double precision DEFAULT '0.00000000' NOT NULL,
-	"metric" double precision DEFAULT '0.00000000' NOT NULL,
-	"percentile" double precision DEFAULT '0.00000000' NOT NULL,
-	"importance_factor" double precision DEFAULT '0.00000000' NOT NULL,
-	Constraint "user_metric0_pkey" Primary Key ("ranking")
+CREATE TABLE user_metric0 (
+    ranking integer DEFAULT nextval('user_metric0_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    times_ranked integer DEFAULT 0 NOT NULL,
+    avg_raters_importance double precision DEFAULT 0::double precision NOT NULL,
+    avg_rating double precision DEFAULT 0::double precision NOT NULL,
+    metric double precision DEFAULT 0::double precision NOT NULL,
+    percentile double precision DEFAULT 0::double precision NOT NULL,
+    importance_factor double precision DEFAULT 0::double precision NOT NULL
 );
 
 
-CREATE TABLE "user_preferences" (
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"preference_name" character varying(20),
-	"dead1" character varying(20),
-	"set_date" integer DEFAULT '0' NOT NULL,
-	"preference_value" text
+
+CREATE TABLE user_preferences (
+    user_id integer DEFAULT 0 NOT NULL,
+    preference_name character varying(20),
+    dead1 character varying(20),
+    set_date integer DEFAULT 0 NOT NULL,
+    preference_value text
 );
 
 
-CREATE TABLE "user_ratings" (
-	"rated_by" integer DEFAULT '0' NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"rate_field" integer DEFAULT '0' NOT NULL,
-	"rating" integer DEFAULT '0' NOT NULL
+
+CREATE TABLE user_ratings (
+    rated_by integer DEFAULT 0 NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    rate_field integer DEFAULT 0 NOT NULL,
+    rating integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "users_pk_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE users_pk_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "users" (
-	"user_id" integer DEFAULT nextval('users_pk_seq'::text) NOT NULL,
-	"user_name" text DEFAULT '' NOT NULL,
-	"email" text DEFAULT '' NOT NULL,
-	"user_pw" character varying(32) DEFAULT '' NOT NULL,
-	"realname" character varying(32) DEFAULT '' NOT NULL,
-	"status" character(1) DEFAULT 'A' NOT NULL,
-	"shell" character varying(20) DEFAULT '/bin/bash' NOT NULL,
-	"unix_pw" character varying(40) DEFAULT '' NOT NULL,
-	"unix_status" character(1) DEFAULT 'N' NOT NULL,
-	"unix_uid" integer DEFAULT '0' NOT NULL,
-	"unix_box" character varying(10) DEFAULT 'shell1' NOT NULL,
-	"add_date" integer DEFAULT '0' NOT NULL,
-	"confirm_hash" character varying(32),
-	"mail_siteupdates" integer DEFAULT '0' NOT NULL,
-	"mail_va" integer DEFAULT '0' NOT NULL,
-	"authorized_keys" text,
-	"email_new" text,
-	"people_view_skills" integer DEFAULT '0' NOT NULL,
-	"people_resume" text DEFAULT '' NOT NULL,
-	"timezone" character varying(64) DEFAULT 'GMT',
-	"language" integer DEFAULT '1' NOT NULL,
-	"block_ratings" integer DEFAULT 0,
-	"jabber_address" text,
-	"jabber_only" integer,
-	"address" text,
-	"phone" text,
-	"fax" text,
-	"title" text,
-	"firstname" character varying(60),
-	"lastname" character varying(60),
-	"address2" text,
-	"ccode" character(2) DEFAULT 'US',
-	"theme_id" integer,
-	Constraint "users_pkey" Primary Key ("user_id")
+
+CREATE TABLE users (
+    user_id integer DEFAULT nextval('users_pk_seq'::text) NOT NULL,
+    user_name text DEFAULT ''::text NOT NULL,
+    email text DEFAULT ''::text NOT NULL,
+    user_pw character varying(32) DEFAULT ''::character varying NOT NULL,
+    realname character varying(32) DEFAULT ''::character varying NOT NULL,
+    status character(1) DEFAULT 'A'::bpchar NOT NULL,
+    shell character varying(20) DEFAULT '/bin/bash'::character varying NOT NULL,
+    unix_pw character varying(40) DEFAULT ''::character varying NOT NULL,
+    unix_status character(1) DEFAULT 'N'::bpchar NOT NULL,
+    unix_uid integer DEFAULT 0 NOT NULL,
+    unix_box character varying(10) DEFAULT 'shell1'::character varying NOT NULL,
+    add_date integer DEFAULT 0 NOT NULL,
+    confirm_hash character varying(32),
+    mail_siteupdates integer DEFAULT 0 NOT NULL,
+    mail_va integer DEFAULT 0 NOT NULL,
+    authorized_keys text,
+    email_new text,
+    people_view_skills integer DEFAULT 0 NOT NULL,
+    people_resume text DEFAULT ''::text NOT NULL,
+    timezone character varying(64) DEFAULT 'GMT'::character varying,
+    "language" integer DEFAULT 1 NOT NULL,
+    block_ratings integer DEFAULT 0,
+    jabber_address text,
+    jabber_only integer,
+    address text,
+    phone text,
+    fax text,
+    title text,
+    firstname character varying(60),
+    lastname character varying(60),
+    address2 text,
+    ccode character(2) DEFAULT 'US'::bpchar,
+    theme_id integer,
+    type_id integer DEFAULT 1
 );
+
 
 
-CREATE SEQUENCE "unix_uid_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE unix_uid_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE SEQUENCE "forum_thread_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE forum_thread_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "project_sums_agg" (
-	"group_id" integer DEFAULT 0 NOT NULL,
-	"type" character(4),
-	"count" integer DEFAULT 0 NOT NULL
+
+
+CREATE TABLE project_sums_agg (
+    group_id integer DEFAULT 0 NOT NULL,
+    "type" character(4),
+    count integer DEFAULT 0 NOT NULL
 );
+
 
 
-CREATE SEQUENCE "project_metric_wee_ranking1_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE project_metric_wee_ranking1_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE SEQUENCE "prdb_dbs_dbid_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE prdb_dbs_dbid_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "prdb_dbs" (
-	"dbid" integer DEFAULT nextval('"prdb_dbs_dbid_seq"'::text) NOT NULL,
-	"group_id" integer NOT NULL,
-	"dbname" text NOT NULL,
-	"dbusername" text NOT NULL,
-	"dbuserpass" text NOT NULL,
-	"requestdate" integer NOT NULL,
-	"dbtype" integer NOT NULL,
-	"created_by" integer NOT NULL,
-	"state" integer NOT NULL,
-	Constraint "prdb_dbs_pkey" Primary Key ("dbid")
+
+
+CREATE TABLE prdb_dbs (
+    dbid integer DEFAULT nextval('"prdb_dbs_dbid_seq"'::text) NOT NULL,
+    group_id integer NOT NULL,
+    dbname text NOT NULL,
+    dbusername text NOT NULL,
+    dbuserpass text NOT NULL,
+    requestdate integer NOT NULL,
+    dbtype integer NOT NULL,
+    created_by integer NOT NULL,
+    state integer NOT NULL
 );
 
 
-CREATE TABLE "prdb_states" (
-	"stateid" integer NOT NULL,
-	"statename" text
+
+CREATE TABLE prdb_states (
+    stateid integer NOT NULL,
+    statename text
 );
 
 
-CREATE TABLE "prdb_types" (
-	"dbtypeid" integer NOT NULL,
-	"dbservername" text NOT NULL,
-	"dbsoftware" text NOT NULL,
-	Constraint "prdb_types_pkey" Primary Key ("dbtypeid")
+
+CREATE TABLE prdb_types (
+    dbtypeid integer NOT NULL,
+    dbservername text NOT NULL,
+    dbsoftware text NOT NULL
 );
+
 
 
-CREATE SEQUENCE "prweb_vhost_vhostid_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE prweb_vhost_vhostid_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "prweb_vhost" (
-	"vhostid" integer DEFAULT nextval('"prweb_vhost_vhostid_seq"'::text) NOT NULL,
-	"vhost_name" text,
-	"docdir" text,
-	"cgidir" text,
-	"group_id" integer NOT NULL,
-	Constraint "prweb_vhost_pkey" Primary Key ("vhostid")
+
+CREATE TABLE prweb_vhost (
+    vhostid integer DEFAULT nextval('"prweb_vhost_vhostid_seq"'::text) NOT NULL,
+    vhost_name text,
+    docdir text,
+    cgidir text,
+    group_id integer NOT NULL
 );
+
 
 
-CREATE SEQUENCE "artifact_grou_group_artifac_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE artifact_grou_group_artifac_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "artifact_group_list" (
-	"group_artifact_id" integer DEFAULT nextval('"artifact_grou_group_artifac_seq"'::text) NOT NULL,
-	"group_id" integer NOT NULL,
-	"name" text,
-	"description" text,
-	"is_public" integer DEFAULT 0 NOT NULL,
-	"allow_anon" integer DEFAULT 0 NOT NULL,
-	"email_all_updates" integer DEFAULT 0 NOT NULL,
-	"email_address" text NOT NULL,
-	"due_period" integer DEFAULT 2592000 NOT NULL,
-	"use_resolution" integer DEFAULT 0 NOT NULL,
-	"submit_instructions" text,
-	"browse_instructions" text,
-	"datatype" integer DEFAULT 0 NOT NULL,
-	"status_timeout" integer,
-	Constraint "artifact_group_list_pkey" Primary Key ("group_artifact_id")
+
+CREATE TABLE artifact_group_list (
+    group_artifact_id integer DEFAULT nextval('"artifact_grou_group_artifac_seq"'::text) NOT NULL,
+    group_id integer NOT NULL,
+    name text,
+    description text,
+    is_public integer DEFAULT 0 NOT NULL,
+    allow_anon integer DEFAULT 0 NOT NULL,
+    email_all_updates integer DEFAULT 0 NOT NULL,
+    email_address text NOT NULL,
+    due_period integer DEFAULT 2592000 NOT NULL,
+    use_resolution integer DEFAULT 0 NOT NULL,
+    submit_instructions text,
+    browse_instructions text,
+    datatype integer DEFAULT 0 NOT NULL,
+    status_timeout integer
 );
+
+
 
+CREATE SEQUENCE artifact_resolution_id_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "artifact_resolution_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "artifact_resolution" (
-	"id" integer DEFAULT nextval('"artifact_resolution_id_seq"'::text) NOT NULL,
-	"resolution_name" text,
-	Constraint "artifact_resolution_pkey" Primary Key ("id")
+CREATE TABLE artifact_resolution (
+    id integer DEFAULT nextval('"artifact_resolution_id_seq"'::text) NOT NULL,
+    resolution_name text
 );
 
 
-CREATE SEQUENCE "artifact_perm_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE artifact_perm_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "artifact_perm" (
-	"id" integer DEFAULT nextval('"artifact_perm_id_seq"'::text) NOT NULL,
-	"group_artifact_id" integer NOT NULL,
-	"user_id" integer NOT NULL,
-	"perm_level" integer DEFAULT 0 NOT NULL,
-	Constraint "artifact_perm_pkey" Primary Key ("id")
+
+
+CREATE TABLE artifact_perm (
+    id integer DEFAULT nextval('"artifact_perm_id_seq"'::text) NOT NULL,
+    group_artifact_id integer NOT NULL,
+    user_id integer NOT NULL,
+    perm_level integer DEFAULT 0 NOT NULL
 );
+
+
+
+CREATE VIEW artifactperm_user_vw AS
+    SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname FROM artifact_perm ap, users WHERE (users.user_id = ap.user_id);
+
 
 
-CREATE VIEW "artifactperm_user_vw" as SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname FROM artifact_perm ap, users WHERE (users.user_id = ap.user_id);
+CREATE VIEW artifactperm_artgrouplist_vw AS
+    SELECT agl.group_artifact_id, agl.name, agl.description, agl.group_id, ap.user_id, ap.perm_level FROM artifact_perm ap, artifact_group_list agl WHERE (ap.group_artifact_id = agl.group_artifact_id);
 
 
-CREATE VIEW "artifactperm_artgrouplist_vw" as SELECT agl.group_artifact_id, agl.name, agl.description, agl.group_id, ap.user_id, ap.perm_level FROM artifact_perm ap, artifact_group_list agl WHERE (ap.group_artifact_id = agl.group_artifact_id);
 
+CREATE SEQUENCE artifact_category_id_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "artifact_category_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "artifact_category" (
-	"id" integer DEFAULT nextval('"artifact_category_id_seq"'::text) NOT NULL,
-	"group_artifact_id" integer NOT NULL,
-	"category_name" text NOT NULL,
-	"auto_assign_to" integer DEFAULT 100 NOT NULL,
-	Constraint "artifact_category_pkey" Primary Key ("id")
+CREATE TABLE artifact_category (
+    id integer DEFAULT nextval('"artifact_category_id_seq"'::text) NOT NULL,
+    group_artifact_id integer NOT NULL,
+    category_name text NOT NULL,
+    auto_assign_to integer DEFAULT 100 NOT NULL
 );
 
 
-CREATE SEQUENCE "artifact_group_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE artifact_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "artifact_group" (
-	"id" integer DEFAULT nextval('"artifact_group_id_seq"'::text) NOT NULL,
-	"group_artifact_id" integer NOT NULL,
-	"group_name" text NOT NULL,
-	Constraint "artifact_group_pkey" Primary Key ("id")
+
+
+CREATE TABLE artifact_group (
+    id integer DEFAULT nextval('"artifact_group_id_seq"'::text) NOT NULL,
+    group_artifact_id integer NOT NULL,
+    group_name text NOT NULL
 );
 
 
-CREATE SEQUENCE "artifact_status_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
+CREATE SEQUENCE artifact_status_id_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE TABLE "artifact_status" (
-	"id" integer DEFAULT nextval('"artifact_status_id_seq"'::text) NOT NULL,
-	"status_name" text NOT NULL,
-	Constraint "artifact_status_pkey" Primary Key ("id")
+
+
+CREATE TABLE artifact_status (
+    id integer DEFAULT nextval('"artifact_status_id_seq"'::text) NOT NULL,
+    status_name text NOT NULL
 );
+
 
 
-CREATE SEQUENCE "artifact_artifact_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE artifact_artifact_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "artifact" (
-	"artifact_id" integer DEFAULT nextval('"artifact_artifact_id_seq"'::text) NOT NULL,
-	"group_artifact_id" integer NOT NULL,
-	"status_id" integer DEFAULT '1' NOT NULL,
-	"category_id" integer DEFAULT '100' NOT NULL,
-	"artifact_group_id" integer DEFAULT '0' NOT NULL,
-	"resolution_id" integer DEFAULT '100' NOT NULL,
-	"priority" integer DEFAULT '5' NOT NULL,
-	"submitted_by" integer DEFAULT '100' NOT NULL,
-	"assigned_to" integer DEFAULT '100' NOT NULL,
-	"open_date" integer DEFAULT '0' NOT NULL,
-	"close_date" integer DEFAULT '0' NOT NULL,
-	"summary" text NOT NULL,
-	"details" text NOT NULL,
-	Constraint "artifact_pkey" Primary Key ("artifact_id")
+
+CREATE TABLE artifact (
+    artifact_id integer DEFAULT nextval('"artifact_artifact_id_seq"'::text) NOT NULL,
+    group_artifact_id integer NOT NULL,
+    status_id integer DEFAULT 1 NOT NULL,
+    category_id integer DEFAULT 100 NOT NULL,
+    artifact_group_id integer DEFAULT 0 NOT NULL,
+    resolution_id integer DEFAULT 100 NOT NULL,
+    priority integer DEFAULT 5 NOT NULL,
+    submitted_by integer DEFAULT 100 NOT NULL,
+    assigned_to integer DEFAULT 100 NOT NULL,
+    open_date integer DEFAULT 0 NOT NULL,
+    close_date integer DEFAULT 0 NOT NULL,
+    summary text NOT NULL,
+    details text NOT NULL
 );
+
+
 
+CREATE SEQUENCE artifact_history_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "artifact_history_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "artifact_history" (
-	"id" integer DEFAULT nextval('"artifact_history_id_seq"'::text) NOT NULL,
-	"artifact_id" integer DEFAULT '0' NOT NULL,
-	"field_name" text DEFAULT '' NOT NULL,
-	"old_value" text DEFAULT '' NOT NULL,
-	"mod_by" integer DEFAULT '0' NOT NULL,
-	"entrydate" integer DEFAULT '0' NOT NULL,
-	Constraint "artifact_history_pkey" Primary Key ("id")
+CREATE TABLE artifact_history (
+    id integer DEFAULT nextval('"artifact_history_id_seq"'::text) NOT NULL,
+    artifact_id integer DEFAULT 0 NOT NULL,
+    field_name text DEFAULT ''::text NOT NULL,
+    old_value text DEFAULT ''::text NOT NULL,
+    mod_by integer DEFAULT 0 NOT NULL,
+    entrydate integer DEFAULT 0 NOT NULL
 );
+
+
+
+CREATE VIEW artifact_history_user_vw AS
+    SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name FROM artifact_history ah, users WHERE (ah.mod_by = users.user_id);
 
 
-CREATE VIEW "artifact_history_user_vw" as SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name FROM artifact_history ah, users WHERE (ah.mod_by = users.user_id);
 
+CREATE SEQUENCE artifact_file_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "artifact_file_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "artifact_file" (
-	"id" integer DEFAULT nextval('"artifact_file_id_seq"'::text) NOT NULL,
-	"artifact_id" integer NOT NULL,
-	"description" text NOT NULL,
-	"bin_data" text NOT NULL,
-	"filename" text NOT NULL,
-	"filesize" integer NOT NULL,
-	"filetype" text NOT NULL,
-	"adddate" integer DEFAULT '0' NOT NULL,
-	"submitted_by" integer NOT NULL,
-	Constraint "artifact_file_pkey" Primary Key ("id")
+CREATE TABLE artifact_file (
+    id integer DEFAULT nextval('"artifact_file_id_seq"'::text) NOT NULL,
+    artifact_id integer NOT NULL,
+    description text NOT NULL,
+    bin_data text NOT NULL,
+    filename text NOT NULL,
+    filesize integer NOT NULL,
+    filetype text NOT NULL,
+    adddate integer DEFAULT 0 NOT NULL,
+    submitted_by integer NOT NULL
 );
 
 
-CREATE VIEW "artifact_file_user_vw" as SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, af.adddate, af.submitted_by, users.user_name, users.realname FROM artifact_file af, users WHERE (af.submitted_by = users.user_id);
 
+CREATE VIEW artifact_file_user_vw AS
+    SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, af.adddate, af.submitted_by, users.user_name, users.realname FROM artifact_file af, users WHERE (af.submitted_by = users.user_id);
 
-CREATE SEQUENCE "artifact_message_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "artifact_message" (
-	"id" integer DEFAULT nextval('"artifact_message_id_seq"'::text) NOT NULL,
-	"artifact_id" integer NOT NULL,
-	"submitted_by" integer NOT NULL,
-	"from_email" text NOT NULL,
-	"adddate" integer DEFAULT '0' NOT NULL,
-	"body" text NOT NULL,
-	Constraint "artifact_message_pkey" Primary Key ("id")
+CREATE SEQUENCE artifact_message_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE artifact_message (
+    id integer DEFAULT nextval('"artifact_message_id_seq"'::text) NOT NULL,
+    artifact_id integer NOT NULL,
+    submitted_by integer NOT NULL,
+    from_email text NOT NULL,
+    adddate integer DEFAULT 0 NOT NULL,
+    body text NOT NULL
 );
+
+
 
+CREATE VIEW artifact_message_user_vw AS
+    SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, users.user_id, users.email, users.user_name, users.realname FROM artifact_message am, users WHERE (am.submitted_by = users.user_id);
 
-CREATE VIEW "artifact_message_user_vw" as SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, users.user_id, users.email, users.user_name, users.realname FROM artifact_message am, users WHERE (am.submitted_by = users.user_id);
 
 
-CREATE SEQUENCE "artifact_monitor_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+CREATE SEQUENCE artifact_monitor_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "artifact_monitor" (
-	"id" integer DEFAULT nextval('"artifact_monitor_id_seq"'::text) NOT NULL,
-	"artifact_id" integer NOT NULL,
-	"user_id" integer NOT NULL,
-	"email" text,
-	Constraint "artifact_monitor_pkey" Primary Key ("id")
+
+CREATE TABLE artifact_monitor (
+    id integer DEFAULT nextval('"artifact_monitor_id_seq"'::text) NOT NULL,
+    artifact_id integer NOT NULL,
+    user_id integer NOT NULL,
+    email text
 );
+
+
 
+CREATE SEQUENCE artifact_canned_response_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
-CREATE SEQUENCE "artifact_canned_response_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
 
 
-CREATE TABLE "artifact_canned_responses" (
-	"id" integer DEFAULT nextval('"artifact_canned_response_id_seq"'::text) NOT NULL,
-	"group_artifact_id" integer NOT NULL,
-	"title" text NOT NULL,
-	"body" text NOT NULL,
-	Constraint "artifact_canned_responses_pkey" Primary Key ("id")
+CREATE TABLE artifact_canned_responses (
+    id integer DEFAULT nextval('"artifact_canned_response_id_seq"'::text) NOT NULL,
+    group_artifact_id integer NOT NULL,
+    title text NOT NULL,
+    body text NOT NULL
 );
 
 
-CREATE TABLE "artifact_counts_agg" (
-	"group_artifact_id" integer NOT NULL,
-	"count" integer DEFAULT 0 NOT NULL,
-	"open_count" integer DEFAULT 0
+
+CREATE TABLE artifact_counts_agg (
+    group_artifact_id integer NOT NULL,
+    count integer DEFAULT 0 NOT NULL,
+    open_count integer DEFAULT 0
 );
 
 
-CREATE TABLE "stats_site_pages_by_day" (
-	"month" integer,
-	"day" integer,
-	"site_page_views" integer
+
+CREATE TABLE stats_site_pages_by_day (
+    "month" integer,
+    "day" integer,
+    site_page_views integer
 );
+
 
 
-CREATE FUNCTION "forumgrouplist_insert_agg" () RETURNS opaque AS '
+CREATE FUNCTION forumgrouplist_insert_agg() RETURNS "trigger"
+    AS '
 BEGIN
         INSERT INTO forum_agg_msg_count (group_forum_id,count) 
                 VALUES (NEW.group_forum_id,0);
         RETURN NEW;
 END;    
-' LANGUAGE 'plpgsql';
+'
+    LANGUAGE plpgsql;
 
 
-CREATE FUNCTION "artifactgrouplist_insert_agg" () RETURNS opaque AS '
+
+CREATE FUNCTION artifactgrouplist_insert_agg() RETURNS "trigger"
+    AS '
 BEGIN
     INSERT INTO artifact_counts_agg (group_artifact_id,count,open_count) 
         VALUES (NEW.group_artifact_id,0,0);
         RETURN NEW;
 END;    
-' LANGUAGE 'plpgsql';
+'
+    LANGUAGE plpgsql;
 
 
-CREATE FUNCTION "artifactgroup_update_agg" () RETURNS opaque AS '
+
+CREATE FUNCTION artifactgroup_update_agg() RETURNS "trigger"
+    AS '
 BEGIN
 	--
 	-- see if they are moving to a new artifacttype
@@ -1230,360 +1688,447 @@ BEGIN
 	END IF;
 	RETURN NEW;
 END;
-' LANGUAGE 'plpgsql';
+'
+    LANGUAGE plpgsql;
 
 
-CREATE SEQUENCE "massmail_queue_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+
+CREATE SEQUENCE massmail_queue_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "massmail_queue" (
-	"id" integer DEFAULT nextval('"massmail_queue_id_seq"'::text) NOT NULL,
-	"type" character varying(8) NOT NULL,
-	"subject" text NOT NULL,
-	"message" text NOT NULL,
-	"queued_date" integer NOT NULL,
-	"last_userid" integer DEFAULT 0 NOT NULL,
-	"failed_date" integer DEFAULT 0 NOT NULL,
-	"finished_date" integer DEFAULT 0 NOT NULL,
-	Constraint "massmail_queue_pkey" Primary Key ("id")
+
+CREATE TABLE massmail_queue (
+    id integer DEFAULT nextval('"massmail_queue_id_seq"'::text) NOT NULL,
+    "type" character varying(8) NOT NULL,
+    subject text NOT NULL,
+    message text NOT NULL,
+    queued_date integer NOT NULL,
+    last_userid integer DEFAULT 0 NOT NULL,
+    failed_date integer DEFAULT 0 NOT NULL,
+    finished_date integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "stats_agg_site_by_group" (
-	"month" integer,
-	"day" integer,
-	"group_id" integer,
-	"count" integer
+
+CREATE TABLE stats_agg_site_by_group (
+    "month" integer,
+    "day" integer,
+    group_id integer,
+    count integer
 );
 
 
-CREATE TABLE "stats_project_metric" (
-	"month" integer DEFAULT 0 NOT NULL,
-	"day" integer DEFAULT 0 NOT NULL,
-	"ranking" integer DEFAULT 0 NOT NULL,
-	"percentile" double precision DEFAULT 0 NOT NULL,
-	"group_id" integer DEFAULT 0 NOT NULL
+
+CREATE TABLE stats_project_metric (
+    "month" integer DEFAULT 0 NOT NULL,
+    "day" integer DEFAULT 0 NOT NULL,
+    ranking integer DEFAULT 0 NOT NULL,
+    percentile double precision DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "stats_agg_logo_by_group" (
-	"month" integer,
-	"day" integer,
-	"group_id" integer,
-	"count" integer
+
+CREATE TABLE stats_agg_logo_by_group (
+    "month" integer,
+    "day" integer,
+    group_id integer,
+    count integer
 );
 
 
-CREATE TABLE "stats_subd_pages" (
-	"month" integer DEFAULT 0 NOT NULL,
-	"day" integer DEFAULT 0 NOT NULL,
-	"group_id" integer DEFAULT 0 NOT NULL,
-	"pages" integer DEFAULT 0 NOT NULL
+
+CREATE TABLE stats_subd_pages (
+    "month" integer DEFAULT 0 NOT NULL,
+    "day" integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    pages integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "stats_cvs_user" (
-	"month" integer DEFAULT 0 NOT NULL,
-	"day" integer DEFAULT 0 NOT NULL,
-	"group_id" integer DEFAULT 0 NOT NULL,
-	"user_id" integer DEFAULT 0 NOT NULL,
-	"checkouts" integer DEFAULT 0 NOT NULL,
-	"commits" integer DEFAULT 0 NOT NULL,
-	"adds" integer DEFAULT 0 NOT NULL
+
+CREATE TABLE stats_cvs_user (
+    "month" integer DEFAULT 0 NOT NULL,
+    "day" integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    checkouts integer DEFAULT 0 NOT NULL,
+    commits integer DEFAULT 0 NOT NULL,
+    adds integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "stats_cvs_group" (
-	"month" integer DEFAULT 0 NOT NULL,
-	"day" integer DEFAULT 0 NOT NULL,
-	"group_id" integer DEFAULT 0 NOT NULL,
-	"checkouts" integer DEFAULT 0 NOT NULL,
-	"commits" integer DEFAULT 0 NOT NULL,
-	"adds" integer DEFAULT 0 NOT NULL
+
+CREATE TABLE stats_cvs_group (
+    "month" integer DEFAULT 0 NOT NULL,
+    "day" integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    checkouts integer DEFAULT 0 NOT NULL,
+    commits integer DEFAULT 0 NOT NULL,
+    adds integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "stats_project_developers" (
-	"month" integer DEFAULT 0 NOT NULL,
-	"day" integer DEFAULT 0 NOT NULL,
-	"group_id" integer DEFAULT 0 NOT NULL,
-	"developers" integer DEFAULT 0 NOT NULL
+
+CREATE TABLE stats_project_developers (
+    "month" integer DEFAULT 0 NOT NULL,
+    "day" integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    developers integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "stats_project" (
-	"month" integer DEFAULT 0 NOT NULL,
-	"day" integer DEFAULT 0 NOT NULL,
-	"group_id" integer DEFAULT 0 NOT NULL,
-	"file_releases" integer DEFAULT 0,
-	"msg_posted" integer DEFAULT 0,
-	"msg_uniq_auth" integer DEFAULT 0,
-	"bugs_opened" integer DEFAULT 0,
-	"bugs_closed" integer DEFAULT 0,
-	"support_opened" integer DEFAULT 0,
-	"support_closed" integer DEFAULT 0,
-	"patches_opened" integer DEFAULT 0,
-	"patches_closed" integer DEFAULT 0,
-	"artifacts_opened" integer DEFAULT 0,
-	"artifacts_closed" integer DEFAULT 0,
-	"tasks_opened" integer DEFAULT 0,
-	"tasks_closed" integer DEFAULT 0,
-	"help_requests" integer DEFAULT 0
+
+CREATE TABLE stats_project (
+    "month" integer DEFAULT 0 NOT NULL,
+    "day" integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    file_releases integer DEFAULT 0,
+    msg_posted integer DEFAULT 0,
+    msg_uniq_auth integer DEFAULT 0,
+    bugs_opened integer DEFAULT 0,
+    bugs_closed integer DEFAULT 0,
+    support_opened integer DEFAULT 0,
+    support_closed integer DEFAULT 0,
+    patches_opened integer DEFAULT 0,
+    patches_closed integer DEFAULT 0,
+    artifacts_opened integer DEFAULT 0,
+    artifacts_closed integer DEFAULT 0,
+    tasks_opened integer DEFAULT 0,
+    tasks_closed integer DEFAULT 0,
+    help_requests integer DEFAULT 0
 );
 
 
-CREATE TABLE "stats_site" (
-	"month" integer,
-	"day" integer,
-	"uniq_users" integer,
-	"sessions" integer,
-	"total_users" integer,
-	"new_users" integer,
-	"new_projects" integer
+
+CREATE TABLE stats_site (
+    "month" integer,
+    "day" integer,
+    uniq_users integer,
+    sessions integer,
+    total_users integer,
+    new_users integer,
+    new_projects integer
 );
 
 
-CREATE TABLE "activity_log" (
-	"day" integer DEFAULT '0' NOT NULL,
-	"hour" integer DEFAULT '0' NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"browser" character varying(8) DEFAULT 'OTHER' NOT NULL,
-	"ver" double precision DEFAULT '0.00' NOT NULL,
-	"platform" character varying(8) DEFAULT 'OTHER' NOT NULL,
-	"time" integer DEFAULT '0' NOT NULL,
-	"page" text,
-	"type" integer DEFAULT '0' NOT NULL
+
+CREATE TABLE activity_log (
+    "day" integer DEFAULT 0 NOT NULL,
+    "hour" integer DEFAULT 0 NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    browser character varying(8) DEFAULT 'OTHER'::character varying NOT NULL,
+    ver double precision DEFAULT 0::double precision NOT NULL,
+    platform character varying(8) DEFAULT 'OTHER'::character varying NOT NULL,
+    "time" integer DEFAULT 0 NOT NULL,
+    page text,
+    "type" integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "user_metric_history" (
-	"month" integer NOT NULL,
-	"day" integer NOT NULL,
-	"user_id" integer NOT NULL,
-	"ranking" integer NOT NULL,
-	"metric" double precision NOT NULL
+
+CREATE TABLE user_metric_history (
+    "month" integer NOT NULL,
+    "day" integer NOT NULL,
+    user_id integer NOT NULL,
+    ranking integer NOT NULL,
+    metric double precision NOT NULL
 );
 
 
-CREATE TABLE "frs_dlstats_filetotal_agg" (
-	"file_id" integer,
-	"downloads" integer
+
+CREATE TABLE frs_dlstats_filetotal_agg (
+    file_id integer,
+    downloads integer
 );
 
 
-CREATE TABLE "stats_project_months" (
-	"month" integer,
-	"group_id" integer,
-	"developers" integer,
-	"group_ranking" integer,
-	"group_metric" double precision,
-	"logo_showings" integer,
-	"downloads" integer,
-	"site_views" integer,
-	"subdomain_views" integer,
-	"page_views" integer,
-	"file_releases" integer,
-	"msg_posted" integer,
-	"msg_uniq_auth" integer,
-	"bugs_opened" integer,
-	"bugs_closed" integer,
-	"support_opened" integer,
-	"support_closed" integer,
-	"patches_opened" integer,
-	"patches_closed" integer,
-	"artifacts_opened" integer,
-	"artifacts_closed" integer,
-	"tasks_opened" integer,
-	"tasks_closed" integer,
-	"help_requests" integer,
-	"cvs_checkouts" integer,
-	"cvs_commits" integer,
-	"cvs_adds" integer
+
+CREATE TABLE stats_project_months (
+    "month" integer,
+    group_id integer,
+    developers integer,
+    group_ranking integer,
+    group_metric double precision,
+    logo_showings integer,
+    downloads integer,
+    site_views integer,
+    subdomain_views integer,
+    page_views integer,
+    file_releases integer,
+    msg_posted integer,
+    msg_uniq_auth integer,
+    bugs_opened integer,
+    bugs_closed integer,
+    support_opened integer,
+    support_closed integer,
+    patches_opened integer,
+    patches_closed integer,
+    artifacts_opened integer,
+    artifacts_closed integer,
+    tasks_opened integer,
+    tasks_closed integer,
+    help_requests integer,
+    cvs_checkouts integer,
+    cvs_commits integer,
+    cvs_adds integer
 );
 
 
-CREATE TABLE "stats_site_pages_by_month" (
-	"month" integer,
-	"site_page_views" integer
+
+CREATE TABLE stats_site_pages_by_month (
+    "month" integer,
+    site_page_views integer
 );
 
 
-CREATE TABLE "stats_site_months" (
-	"month" integer,
-	"site_page_views" integer,
-	"downloads" integer,
-	"subdomain_views" integer,
-	"msg_posted" integer,
-	"bugs_opened" integer,
-	"bugs_closed" integer,
-	"support_opened" integer,
-	"support_closed" integer,
-	"patches_opened" integer,
-	"patches_closed" integer,
-	"artifacts_opened" integer,
-	"artifacts_closed" integer,
-	"tasks_opened" integer,
-	"tasks_closed" integer,
-	"help_requests" integer,
-	"cvs_checkouts" integer,
-	"cvs_commits" integer,
-	"cvs_adds" integer
+
+CREATE TABLE stats_site_months (
+    "month" integer,
+    site_page_views integer,
+    downloads integer,
+    subdomain_views integer,
+    msg_posted integer,
+    bugs_opened integer,
+    bugs_closed integer,
+    support_opened integer,
+    support_closed integer,
+    patches_opened integer,
+    patches_closed integer,
+    artifacts_opened integer,
+    artifacts_closed integer,
+    tasks_opened integer,
+    tasks_closed integer,
+    help_requests integer,
+    cvs_checkouts integer,
+    cvs_commits integer,
+    cvs_adds integer
 );
 
 
-CREATE TABLE "trove_agg" (
-	"trove_cat_id" integer,
-	"group_id" integer,
-	"group_name" character varying(40),
-	"unix_group_name" character varying(30),
-	"status" character(1),
-	"register_time" integer,
-	"short_description" character varying(255),
-	"percentile" double precision,
-	"ranking" integer
+
+CREATE TABLE trove_agg (
+    trove_cat_id integer,
+    group_id integer,
+    group_name character varying(40),
+    unix_group_name character varying(30),
+    status character(1),
+    register_time integer,
+    short_description character varying(255),
+    percentile double precision,
+    ranking integer
 );
 
 
-CREATE SEQUENCE "trove_treesum_trove_treesum_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
+
+CREATE SEQUENCE trove_treesum_trove_treesum_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "trove_treesums" (
-	"trove_treesums_id" integer DEFAULT nextval('"trove_treesum_trove_treesum_seq"'::text) NOT NULL,
-	"trove_cat_id" integer DEFAULT '0' NOT NULL,
-	"limit_1" integer DEFAULT '0' NOT NULL,
-	"subprojects" integer DEFAULT '0' NOT NULL,
-	Constraint "trove_treesums_pkey" Primary Key ("trove_treesums_id")
+
+CREATE TABLE trove_treesums (
+    trove_treesums_id integer DEFAULT nextval('"trove_treesum_trove_treesum_seq"'::text) NOT NULL,
+    trove_cat_id integer DEFAULT 0 NOT NULL,
+    limit_1 integer DEFAULT 0 NOT NULL,
+    subprojects integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE TABLE "frs_dlstats_file" (
-	"ip_address" text,
-	"file_id" integer,
-	"month" integer,
-	"day" integer,
-	"user_id" integer
+
+CREATE TABLE frs_dlstats_file (
+    ip_address text,
+    file_id integer,
+    "month" integer,
+    "day" integer,
+    user_id integer
 );
 
 
-CREATE SEQUENCE "group_cvs_history_id_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE group_cvs_history_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "group_cvs_history" (
-	"id" integer DEFAULT nextval('"group_cvs_history_id_seq"'::text) NOT NULL,
-	"group_id" integer DEFAULT '0' NOT NULL,
-	"user_name" character varying(80) DEFAULT '' NOT NULL,
-	"cvs_commits" integer DEFAULT '0' NOT NULL,
-	"cvs_commits_wk" integer DEFAULT '0' NOT NULL,
-	"cvs_adds" integer DEFAULT '0' NOT NULL,
-	"cvs_adds_wk" integer DEFAULT '0' NOT NULL
+
+CREATE TABLE group_cvs_history (
+    id integer DEFAULT nextval('"group_cvs_history_id_seq"'::text) NOT NULL,
+    group_id integer DEFAULT 0 NOT NULL,
+    user_name character varying(80) DEFAULT ''::character varying NOT NULL,
+    cvs_commits integer DEFAULT 0 NOT NULL,
+    cvs_commits_wk integer DEFAULT 0 NOT NULL,
+    cvs_adds integer DEFAULT 0 NOT NULL,
+    cvs_adds_wk integer DEFAULT 0 NOT NULL
 );
 
 
-CREATE SEQUENCE "themes_theme_id_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE themes_theme_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "themes" (
-	"theme_id" integer DEFAULT nextval('"themes_theme_id_seq"'::text) NOT NULL,
-	"dirname" character varying(80),
-	"fullname" character varying(80),
-	"enabled" boolean DEFAULT 't'::bool
+
+CREATE TABLE themes (
+    theme_id integer DEFAULT nextval('"themes_theme_id_seq"'::text) NOT NULL,
+    dirname character varying(80),
+    fullname character varying(80),
+    enabled boolean DEFAULT true
 );
 
 
-CREATE SEQUENCE "supported_langu_language_id_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE supported_langu_language_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "supported_languages" (
-	"language_id" integer DEFAULT nextval('"supported_langu_language_id_seq"'::text) NOT NULL,
-	"name" text,
-	"filename" text,
-	"classname" text,
-	"language_code" character(5),
-	Constraint "supported_languages_pkey" Primary Key ("language_id")
+
+CREATE TABLE supported_languages (
+    language_id integer DEFAULT nextval('"supported_langu_language_id_seq"'::text) NOT NULL,
+    name text,
+    filename text,
+    classname text,
+    language_code character(5)
 );
 
 
-CREATE SEQUENCE "skills_data_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE skills_data_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE SEQUENCE "skills_data_types_pk_seq" start 0 increment 1 maxvalue 9223372036854775807 minvalue 0 cache 1;
+
+CREATE SEQUENCE skills_data_types_pk_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    MINVALUE 0
+    CACHE 1;
 
 
-CREATE TABLE "skills_data_types" (
-	"type_id" integer DEFAULT nextval('skills_data_types_pk_seq'::text) NOT NULL,
-	"type_name" character varying(25) DEFAULT '' NOT NULL,
-	Constraint "skills_data_types_pkey" Primary Key ("type_id")
+
+CREATE TABLE skills_data_types (
+    type_id integer DEFAULT nextval('skills_data_types_pk_seq'::text) NOT NULL,
+    type_name character varying(25) DEFAULT ''::character varying NOT NULL
 );
 
 
-CREATE TABLE "skills_data" (
-	"skills_data_id" integer DEFAULT nextval('skills_data_pk_seq'::text) NOT NULL,
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"type" integer DEFAULT '0' NOT NULL,
-	"title" character varying(100) DEFAULT '' NOT NULL,
-	"start" integer DEFAULT '0' NOT NULL,
-	"finish" integer DEFAULT '0' NOT NULL,
-	"keywords" character varying(255) DEFAULT '' NOT NULL,
-	Constraint "skills_data_pkey" Primary Key ("skills_data_id")
+
+CREATE TABLE skills_data (
+    skills_data_id integer DEFAULT nextval('skills_data_pk_seq'::text) NOT NULL,
+    user_id integer DEFAULT 0 NOT NULL,
+    "type" integer DEFAULT 0 NOT NULL,
+    title character varying(100) DEFAULT ''::character varying NOT NULL,
+    "start" integer DEFAULT 0 NOT NULL,
+    finish integer DEFAULT 0 NOT NULL,
+    keywords character varying(255) DEFAULT ''::character varying NOT NULL
 );
 
 
-CREATE VIEW "frs_file_vw" as SELECT frs_file.file_id, frs_file.filename, frs_file.release_id, frs_file.type_id, frs_file.processor_id, frs_file.release_time, frs_file.file_size, frs_file.post_date, frs_filetype.name AS filetype, frs_processor.name AS processor, frs_dlstats_filetotal_agg.downloads FROM frs_filetype, frs_processor, (frs_file LEFT JOIN frs_dlstats_filetotal_agg ON ((frs_dlstats_filetotal_agg.file_id = frs_file.file_id))) WHERE ((frs_filetype.type_id = frs_file.type_id) AND (frs_processor.processor_id = frs_file.processor_id));
+
+CREATE VIEW frs_file_vw AS
+    SELECT frs_file.file_id, frs_file.filename, frs_file.release_id, frs_file.type_id, frs_file.processor_id, frs_file.release_time, frs_file.file_size, frs_file.post_date, frs_filetype.name AS filetype, frs_processor.name AS processor, frs_dlstats_filetotal_agg.downloads FROM frs_filetype, frs_processor, (frs_file LEFT JOIN frs_dlstats_filetotal_agg ON ((frs_dlstats_filetotal_agg.file_id = frs_file.file_id))) WHERE ((frs_filetype.type_id = frs_file.type_id) AND (frs_processor.processor_id = frs_file.processor_id));
 
 
-CREATE SEQUENCE "project_categor_category_id_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE project_categor_category_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "project_category" (
-	"category_id" integer DEFAULT nextval('"project_categor_category_id_seq"'::text) NOT NULL,
-	"group_project_id" integer,
-	"category_name" text
+
+CREATE TABLE project_category (
+    category_id integer DEFAULT nextval('"project_categor_category_id_seq"'::text) NOT NULL,
+    group_project_id integer,
+    category_name text
 );
 
 
-CREATE TABLE "project_task_artifact" (
-	"project_task_id" integer,
-	"artifact_id" integer
+
+CREATE TABLE project_task_artifact (
+    project_task_id integer,
+    artifact_id integer
 );
 
 
-CREATE TABLE "project_group_forum" (
-	"group_project_id" integer,
-	"group_forum_id" integer
+
+CREATE TABLE project_group_forum (
+    group_project_id integer,
+    group_forum_id integer
 );
 
 
-CREATE TABLE "project_group_doccat" (
-	"group_project_id" integer,
-	"doc_group_id" integer
+
+CREATE TABLE project_group_doccat (
+    group_project_id integer,
+    doc_group_id integer
 );
 
 
-CREATE VIEW "project_depend_vw" as SELECT pt.project_task_id, pd.is_dependent_on_task_id, pt.end_date, pt.start_date FROM (project_task pt NATURAL JOIN project_dependencies pd);
+
+CREATE VIEW project_depend_vw AS
+    SELECT pt.project_task_id, pd.is_dependent_on_task_id, pt.end_date, pt.start_date FROM (project_task pt NATURAL JOIN project_dependencies pd);
 
 
-CREATE VIEW "project_dependon_vw" as SELECT pd.project_task_id, pd.is_dependent_on_task_id, pt.end_date, pt.start_date FROM (project_task pt FULL JOIN project_dependencies pd ON ((pd.is_dependent_on_task_id = pt.project_task_id)));
+
+CREATE VIEW project_dependon_vw AS
+    SELECT pd.project_task_id, pd.is_dependent_on_task_id, pt.end_date, pt.start_date FROM (project_task pt FULL JOIN project_dependencies pd ON ((pd.is_dependent_on_task_id = pt.project_task_id)));
 
 
-CREATE VIEW "project_history_user_vw" as SELECT users.realname, users.email, users.user_name, project_history.project_history_id, project_history.project_task_id, project_history.field_name, project_history.old_value, project_history.mod_by, project_history.mod_date FROM users, project_history WHERE (project_history.mod_by = users.user_id);
+
+CREATE VIEW project_history_user_vw AS
+    SELECT users.realname, users.email, users.user_name, project_history.project_history_id, project_history.project_task_id, project_history.field_name, project_history.old_value, project_history.mod_by, project_history.mod_date FROM users, project_history WHERE (project_history.mod_by = users.user_id);
 
 
-CREATE SEQUENCE "project_messa_project_messa_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE project_messa_project_messa_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "project_messages" (
-	"project_message_id" integer DEFAULT nextval('"project_messa_project_messa_seq"'::text) NOT NULL,
-	"project_task_id" integer NOT NULL,
-	"body" text,
-	"posted_by" integer NOT NULL,
-	"postdate" integer NOT NULL
+
+CREATE TABLE project_messages (
+    project_message_id integer DEFAULT nextval('"project_messa_project_messa_seq"'::text) NOT NULL,
+    project_task_id integer NOT NULL,
+    body text,
+    posted_by integer NOT NULL,
+    postdate integer NOT NULL
 );
 
 
-CREATE VIEW "project_message_user_vw" as SELECT users.realname, users.email, users.user_name, project_messages.project_message_id, project_messages.project_task_id, project_messages.body, project_messages.posted_by, project_messages.postdate FROM users, project_messages WHERE (project_messages.posted_by = users.user_id);
+
+CREATE VIEW project_message_user_vw AS
+    SELECT users.realname, users.email, users.user_name, project_messages.project_message_id, project_messages.project_task_id, project_messages.body, project_messages.posted_by, project_messages.postdate FROM users, project_messages WHERE (project_messages.posted_by = users.user_id);
 
 
-CREATE FUNCTION "projtask_update_depend" () RETURNS opaque AS '
+
+CREATE FUNCTION projtask_update_depend() RETURNS "trigger"
+    AS '
 DECLARE
     dependent RECORD;
     dependon RECORD;
@@ -1638,10 +2183,13 @@ BEGIN
     END IF;
     RETURN NEW;
 END;
-' LANGUAGE 'plpgsql';
+'
+    LANGUAGE plpgsql;
 
 
-CREATE FUNCTION "projtask_insert_depend" () RETURNS opaque AS '
+
+CREATE FUNCTION projtask_insert_depend() RETURNS "trigger"
+    AS '
 DECLARE
         dependon RECORD;
         delta INTEGER;
@@ -1672,81 +2220,125 @@ BEGIN
         END LOOP;
         RETURN NEW;
 END;
-' LANGUAGE 'plpgsql';
+'
+    LANGUAGE plpgsql;
 
 
-CREATE VIEW "docdata_vw" as SELECT users.user_name, users.realname, users.email, d.group_id, d.docid, d.stateid, d.title, d.updatedate, d.createdate, d.created_by, d.doc_group, d.description, d.language_id, d.filename, d.filetype, doc_states.name AS state_name, doc_groups.groupname AS group_name, sl.name AS language_name FROM ((((doc_data d NATURAL JOIN doc_states) NATURAL JOIN doc_groups) JOIN supported_languages sl ON ((sl.language_id = d.language_id))) JOIN users ON ((users.user_id = d.created_by)));
+
+CREATE VIEW docdata_vw AS
+    SELECT users.user_name, users.realname, users.email, d.group_id, d.docid, d.stateid, d.title, d.updatedate, d.createdate, d.created_by, d.doc_group, d.description, d.language_id, d.filename, d.filetype, doc_states.name AS state_name, doc_groups.groupname AS group_name, sl.name AS language_name FROM ((((doc_data d NATURAL JOIN doc_states) NATURAL JOIN doc_groups) JOIN supported_languages sl ON ((sl.language_id = d.language_id))) JOIN users ON ((users.user_id = d.created_by)));
 
 
-CREATE VIEW "artifact_group_list_vw" as SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.use_resolution, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, aca.count, aca.open_count FROM (artifact_group_list agl LEFT JOIN artifact_counts_agg aca USING (group_artifact_id));
+
+CREATE VIEW artifact_group_list_vw AS
+    SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.use_resolution, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, aca.count, aca.open_count FROM (artifact_group_list agl LEFT JOIN artifact_counts_agg aca USING (group_artifact_id));
 
 
-CREATE VIEW "project_task_vw" as SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
+
+CREATE VIEW project_task_vw AS
+    SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
 
 
-CREATE FUNCTION "frs_dlstats_filetotal_insert_ag" () RETURNS opaque AS '
+
+CREATE FUNCTION frs_dlstats_filetotal_insert_ag() RETURNS "trigger"
+    AS '
 BEGIN
 	INSERT INTO frs_dlstats_filetotal_agg (file_id, downloads) VALUES (NEW.file_id, 0);
 	RETURN NEW;
 END;
-' LANGUAGE 'plpgsql';
+'
+    LANGUAGE plpgsql;
 
 
-CREATE VIEW "frs_dlstats_file_agg_vw" as SELECT frs_dlstats_file."month", frs_dlstats_file."day", frs_dlstats_file.file_id, count(*) AS downloads FROM frs_dlstats_file GROUP BY frs_dlstats_file."month", frs_dlstats_file."day", frs_dlstats_file.file_id;
+
+CREATE VIEW frs_dlstats_file_agg_vw AS
+    SELECT frs_dlstats_file."month", frs_dlstats_file."day", frs_dlstats_file.file_id, count(*) AS downloads FROM frs_dlstats_file GROUP BY frs_dlstats_file."month", frs_dlstats_file."day", frs_dlstats_file.file_id;
 
 
-CREATE VIEW "frs_dlstats_grouptotal_vw" as SELECT frs_package.group_id, sum(frs_dlstats_filetotal_agg.downloads) AS downloads FROM frs_package, frs_release, frs_file, frs_dlstats_filetotal_agg WHERE (((frs_package.package_id = frs_release.package_id) AND (frs_release.release_id = frs_file.release_id)) AND (frs_file.file_id = frs_dlstats_filetotal_agg.file_id)) GROUP BY frs_package.group_id;
+
+CREATE VIEW frs_dlstats_grouptotal_vw AS
+    SELECT frs_package.group_id, sum(frs_dlstats_filetotal_agg.downloads) AS downloads FROM frs_package, frs_release, frs_file, frs_dlstats_filetotal_agg WHERE (((frs_package.package_id = frs_release.package_id) AND (frs_release.release_id = frs_file.release_id)) AND (frs_file.file_id = frs_dlstats_filetotal_agg.file_id)) GROUP BY frs_package.group_id;
 
 
-CREATE VIEW "frs_dlstats_group_vw" as SELECT frs_package.group_id, fdfa."month", fdfa."day", sum(fdfa.downloads) AS downloads FROM frs_package, frs_release, frs_file, frs_dlstats_file_agg_vw fdfa WHERE (((frs_package.package_id = frs_release.package_id) AND (frs_release.release_id = frs_file.release_id)) AND (frs_file.file_id = fdfa.file_id)) GROUP BY frs_package.group_id, fdfa."month", fdfa."day";
+
+CREATE VIEW frs_dlstats_group_vw AS
+    SELECT frs_package.group_id, fdfa."month", fdfa."day", sum(fdfa.downloads) AS downloads FROM frs_package, frs_release, frs_file, frs_dlstats_file_agg_vw fdfa WHERE (((frs_package.package_id = frs_release.package_id) AND (frs_release.release_id = frs_file.release_id)) AND (frs_file.file_id = fdfa.file_id)) GROUP BY frs_package.group_id, fdfa."month", fdfa."day";
 
 
-CREATE VIEW "stats_project_vw" as SELECT spd.group_id, spd."month", spd."day", spd.developers, spm.ranking AS group_ranking, spm.percentile AS group_metric, salbg.count AS logo_showings, fdga.downloads, sasbg.count AS site_views, ssp.pages AS subdomain_views, (CASE WHEN (sasbg.count IS NOT NULL) THEN sasbg.count WHEN (0 IS NOT NULL) THEN 0 ELSE NULL::int4 END + CASE WHEN (ssp.pages IS NOT NULL) THEN ssp.pages WHEN (0 IS NOT NULL) THEN 0 ELSE NULL::int4 END) AS page_views, sp.file_releases, sp.msg_posted, sp.msg_uniq_auth, sp.bugs_opened, sp.bugs_closed, sp.support_opened, sp.support_closed, sp.patches_opened, sp.patches_closed, sp.artifacts_opened, sp.artifacts_closed, sp.tasks_opened, sp.tasks_closed, sp.help_requests, scg.checkouts AS cvs_checkouts, scg.commits AS cvs_commits, scg.adds AS cvs_adds FROM (((((((stats_project_developers spd LEFT JOIN stats_project sp USING ("month", "day", group_id)) LEFT JOIN stats_project_metric spm USING ("month", "day", group_id)) LEFT JOIN stats_cvs_group scg USING ("month", "day", group_id)) LEFT JOIN stats_agg_site_by_group sasbg USING ("month", "day", group_id)) LEFT JOIN stats_agg_logo_by_group salbg USING ("month", "day", group_id)) LEFT JOIN stats_subd_pages ssp USING ("month", "day", group_id)) LEFT JOIN frs_dlstats_group_vw fdga USING ("month", "day", group_id));
+
+CREATE VIEW stats_project_vw AS
+    SELECT spd.group_id, spd."month", spd."day", spd.developers, spm.ranking AS group_ranking, spm.percentile AS group_metric, salbg.count AS logo_showings, fdga.downloads, sasbg.count AS site_views, ssp.pages AS subdomain_views, (CASE WHEN (sasbg.count IS NOT NULL) THEN sasbg.count WHEN (0 IS NOT NULL) THEN 0 ELSE NULL::integer END + CASE WHEN (ssp.pages IS NOT NULL) THEN ssp.pages WHEN (0 IS NOT NULL) THEN 0 ELSE NULL::integer END) AS page_views, sp.file_releases, sp.msg_posted, sp.msg_uniq_auth, sp.bugs_opened, sp.bugs_closed, sp.support_opened, sp.support_closed, sp.patches_opened, sp.patches_closed, sp.artifacts_opened, sp.artifacts_closed, sp.tasks_opened, sp.tasks_closed, sp.help_requests, scg.checkouts AS cvs_checkouts, scg.commits AS cvs_commits, scg.adds AS cvs_adds FROM (((((((stats_project_developers spd LEFT JOIN stats_project sp USING ("month", "day", group_id)) LEFT JOIN stats_project_metric spm USING ("month", "day", group_id)) LEFT JOIN stats_cvs_group scg USING ("month", "day", group_id)) LEFT JOIN stats_agg_site_by_group sasbg USING ("month", "day", group_id)) LEFT JOIN stats_agg_logo_by_group salbg USING ("month", "day", group_id)) LEFT JOIN stats_subd_pages ssp USING ("month", "day", group_id)) LEFT JOIN frs_dlstats_group_vw fdga USING ("month", "day", group_id));
 
 
-CREATE VIEW "stats_project_all_vw" as SELECT stats_project_months.group_id, int4(avg(stats_project_months.developers)) AS developers, int4(avg(stats_project_months.group_ranking)) AS group_ranking, avg(stats_project_months.group_metric) AS group_metric, sum(stats_project_months.logo_showings) AS logo_showings, sum(stats_project_months.downloads) AS downloads, sum(stats_project_months.site_views) AS site_views, sum(stats_project_months.subdomain_views) AS subdomain_views, sum(stats_project_months.page_views) AS page_views, sum(stats_project_months.file_releases) AS file_releases, sum(stats_project_months.msg_posted) AS msg_posted, int4(avg(stats_project_months.msg_uniq_auth)) AS msg_uniq_auth, sum(stats_project_months.bugs_opened) AS bugs_opened, sum(stats_project_months.bugs_closed) AS bugs_closed, sum(stats_project_months.support_opened) AS support_opened, sum(stats_project_months.support_closed) AS support_closed, sum(stats_project_months.patches_opened) AS patches_opened, sum(stats_project_months.patches_closed) AS patches_closed, sum(stats_project_months.artifacts_opened) AS artifacts_opened, sum(stats_project_months.artifacts_closed) AS artifacts_closed, sum(stats_project_months.tasks_opened) AS tasks_opened, sum(stats_project_months.tasks_closed) AS tasks_closed, sum(stats_project_months.help_requests) AS help_requests, sum(stats_project_months.cvs_checkouts) AS cvs_checkouts, sum(stats_project_months.cvs_commits) AS cvs_commits, sum(stats_project_months.cvs_adds) AS cvs_adds FROM stats_project_months GROUP BY stats_project_months.group_id;
+
+CREATE VIEW stats_project_all_vw AS
+    SELECT stats_project_months.group_id, int4(avg(stats_project_months.developers)) AS developers, int4(avg(stats_project_months.group_ranking)) AS group_ranking, avg(stats_project_months.group_metric) AS group_metric, sum(stats_project_months.logo_showings) AS logo_showings, sum(stats_project_months.downloads) AS downloads, sum(stats_project_months.site_views) AS site_views, sum(stats_project_months.subdomain_views) AS subdomain_views, sum(stats_project_months.page_views) AS page_views, sum(stats_project_months.file_releases) AS file_releases, sum(stats_project_months.msg_posted) AS msg_posted, int4(avg(stats_project_months.msg_uniq_auth)) AS msg_uniq_auth, sum(stats_project_months.bugs_opened) AS bugs_opened, sum(stats_project_months.bugs_closed) AS bugs_closed, sum(stats_project_months.support_opened) AS support_opened, sum(stats_project_months.support_closed) AS support_closed, sum(stats_project_months.patches_opened) AS patches_opened, sum(stats_project_months.patches_closed) AS patches_closed, sum(stats_project_months.artifacts_opened) AS artifacts_opened, sum(stats_project_months.artifacts_closed) AS artifacts_closed, sum(stats_project_months.tasks_opened) AS tasks_opened, sum(stats_project_months.tasks_closed) AS tasks_closed, sum(stats_project_months.help_requests) AS help_requests, sum(stats_project_months.cvs_checkouts) AS cvs_checkouts, sum(stats_project_months.cvs_commits) AS cvs_commits, sum(stats_project_months.cvs_adds) AS cvs_adds FROM stats_project_months GROUP BY stats_project_months.group_id;
 
 
-CREATE VIEW "stats_site_vw" as SELECT p."month", p."day", sspbd.site_page_views, sum(p.downloads) AS downloads, sum(p.subdomain_views) AS subdomain_views, sum(p.msg_posted) AS msg_posted, sum(p.bugs_opened) AS bugs_opened, sum(p.bugs_closed) AS bugs_closed, sum(p.support_opened) AS support_opened, sum(p.support_closed) AS support_closed, sum(p.patches_opened) AS patches_opened, sum(p.patches_closed) AS patches_closed, sum(p.artifacts_opened) AS artifacts_opened, sum(p.artifacts_closed) AS artifacts_closed, sum(p.tasks_opened) AS tasks_opened, sum(p.tasks_closed) AS tasks_closed, sum(p.help_requests) AS help_requests, sum(p.cvs_checkouts) AS cvs_checkouts, sum(p.cvs_commits) AS cvs_commits, sum(p.cvs_adds) AS cvs_adds FROM stats_project_vw p, stats_site_pages_by_day sspbd WHERE ((p."month" = sspbd."month") AND (p."day" = sspbd."day")) GROUP BY p."month", p."day", sspbd.site_page_views;
+
+CREATE VIEW stats_site_vw AS
+    SELECT p."month", p."day", sspbd.site_page_views, sum(p.downloads) AS downloads, sum(p.subdomain_views) AS subdomain_views, sum(p.msg_posted) AS msg_posted, sum(p.bugs_opened) AS bugs_opened, sum(p.bugs_closed) AS bugs_closed, sum(p.support_opened) AS support_opened, sum(p.support_closed) AS support_closed, sum(p.patches_opened) AS patches_opened, sum(p.patches_closed) AS patches_closed, sum(p.artifacts_opened) AS artifacts_opened, sum(p.artifacts_closed) AS artifacts_closed, sum(p.tasks_opened) AS tasks_opened, sum(p.tasks_closed) AS tasks_closed, sum(p.help_requests) AS help_requests, sum(p.cvs_checkouts) AS cvs_checkouts, sum(p.cvs_commits) AS cvs_commits, sum(p.cvs_adds) AS cvs_adds FROM stats_project_vw p, stats_site_pages_by_day sspbd WHERE ((p."month" = sspbd."month") AND (p."day" = sspbd."day")) GROUP BY p."month", p."day", sspbd.site_page_views;
 
 
-CREATE VIEW "stats_site_all_vw" as SELECT sum(stats_site_months.site_page_views) AS site_page_views, sum(stats_site_months.downloads) AS downloads, sum(stats_site_months.subdomain_views) AS subdomain_views, sum(stats_site_months.msg_posted) AS msg_posted, sum(stats_site_months.bugs_opened) AS bugs_opened, sum(stats_site_months.bugs_closed) AS bugs_closed, sum(stats_site_months.support_opened) AS support_opened, sum(stats_site_months.support_closed) AS support_closed, sum(stats_site_months.patches_opened) AS patches_opened, sum(stats_site_months.patches_closed) AS patches_closed, sum(stats_site_months.artifacts_opened) AS artifacts_opened, sum(stats_site_months.artifacts_closed) AS artifacts_closed, sum(stats_site_months.tasks_opened) AS tasks_opened, sum(stats_site_months.tasks_closed) AS tasks_closed, sum(stats_site_months.help_requests) AS help_requests, sum(stats_site_months.cvs_checkouts) AS cvs_checkouts, sum(stats_site_months.cvs_commits) AS cvs_commits, sum(stats_site_months.cvs_adds) AS cvs_adds FROM stats_site_months;
+
+CREATE VIEW stats_site_all_vw AS
+    SELECT sum(stats_site_months.site_page_views) AS site_page_views, sum(stats_site_months.downloads) AS downloads, sum(stats_site_months.subdomain_views) AS subdomain_views, sum(stats_site_months.msg_posted) AS msg_posted, sum(stats_site_months.bugs_opened) AS bugs_opened, sum(stats_site_months.bugs_closed) AS bugs_closed, sum(stats_site_months.support_opened) AS support_opened, sum(stats_site_months.support_closed) AS support_closed, sum(stats_site_months.patches_opened) AS patches_opened, sum(stats_site_months.patches_closed) AS patches_closed, sum(stats_site_months.artifacts_opened) AS artifacts_opened, sum(stats_site_months.artifacts_closed) AS artifacts_closed, sum(stats_site_months.tasks_opened) AS tasks_opened, sum(stats_site_months.tasks_closed) AS tasks_closed, sum(stats_site_months.help_requests) AS help_requests, sum(stats_site_months.cvs_checkouts) AS cvs_checkouts, sum(stats_site_months.cvs_commits) AS cvs_commits, sum(stats_site_months.cvs_adds) AS cvs_adds FROM stats_site_months;
 
 
-CREATE SEQUENCE "plugins_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE plugins_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "plugins" (
-	"plugin_id" integer DEFAULT nextval('plugins_pk_seq'::text) NOT NULL,
-	"plugin_name" character varying(32) NOT NULL,
-	"plugin_desc" text,
-	Constraint "plugins_pkey" Primary Key ("plugin_id")
+
+CREATE TABLE plugins (
+    plugin_id integer DEFAULT nextval('plugins_pk_seq'::text) NOT NULL,
+    plugin_name character varying(32) NOT NULL,
+    plugin_desc text
 );
 
 
-CREATE SEQUENCE "group_plugin_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE group_plugin_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "group_plugin" (
-	"group_plugin_id" integer DEFAULT nextval('group_plugin_pk_seq'::text) NOT NULL,
-	"group_id" integer,
-	"plugin_id" integer,
-	Constraint "group_plugin_pkey" Primary Key ("group_plugin_id")
+
+CREATE TABLE group_plugin (
+    group_plugin_id integer DEFAULT nextval('group_plugin_pk_seq'::text) NOT NULL,
+    group_id integer,
+    plugin_id integer
 );
 
 
-CREATE SEQUENCE "user_plugin_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+CREATE SEQUENCE user_plugin_pk_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
 
 
-CREATE TABLE "user_plugin" (
-	"user_plugin_id" integer DEFAULT nextval('user_plugin_pk_seq'::text) NOT NULL,
-	"user_id" integer,
-	"plugin_id" integer,
-	Constraint "user_plugin_pkey" Primary Key ("user_plugin_id")
+
+CREATE TABLE user_plugin (
+    user_plugin_id integer DEFAULT nextval('user_plugin_pk_seq'::text) NOT NULL,
+    user_id integer,
+    plugin_id integer
 );
 
 
-CREATE FUNCTION "project_sums" () RETURNS opaque AS '
+
+CREATE FUNCTION project_sums() RETURNS "trigger"
+    AS '
 	DECLARE
 		num integer;
 		curr_group integer;
@@ -1831,50 +2423,273 @@ CREATE FUNCTION "project_sums" () RETURNS opaque AS '
 			RETURN NEW;
 		END IF;
 	END;
-' LANGUAGE 'plpgsql';
+'
+    LANGUAGE plpgsql;
 
 
-CREATE TABLE "cron_history" (
-	"rundate" integer NOT NULL,
-	"job" text,
-	"output" text
-);
 
-
-CREATE VIEW "artifact_vw" as SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name, CASE WHEN (max(artifact_history.entrydate) IS NOT NULL) THEN max(artifact_history.entrydate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::int4 END AS update_date, CASE WHEN (max(artifact_message.adddate) IS NOT NULL) THEN max(artifact_message.adddate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::int4 END AS message_date FROM users u, users u2, artifact_status, artifact_category, artifact_group, artifact_resolution, ((artifact LEFT JOIN artifact_history ON ((artifact.artifact_id = artifact_history.artifact_id))) LEFT JOIN artifact_message ON ((artifact.artifact_id = artifact_message.artifact_id))) WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id)) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name, u.realname, u.email, u2.user_name, u2.realname, u2.email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name;
-
-
-CREATE VIEW "forum_group_list_vw" as SELECT forum_group_list.group_forum_id, forum_group_list.group_id, forum_group_list.forum_name, forum_group_list.is_public, forum_group_list.description, forum_group_list.allow_anonymous, forum_group_list.send_all_posts_to, forum_agg_msg_count.count AS total, (SELECT max(forum.post_date) AS recent FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent, (SELECT count(*) AS count FROM (SELECT forum.thread_id FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id) GROUP BY forum.thread_id) tmp) AS threads FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
-
-
-CREATE VIEW "forum_user_vw" as SELECT forum.msg_id, forum.group_forum_id, forum.posted_by, forum.subject, forum.body, forum.post_date, forum.is_followup_to, forum.thread_id, forum.has_followups, forum.most_recent_date, users.user_name, users.realname FROM forum, users WHERE (forum.posted_by = users.user_id);
-
-
-CREATE TABLE "country_code" (
-	"country_name" character varying(80),
-	"ccode" character(2) NOT NULL,
-	Constraint "country_code_pkey" Primary Key ("ccode")
+CREATE TABLE cron_history (
+    rundate integer NOT NULL,
+    job text,
+    output text
 );
 
 
 
-COPY "canned_responses" FROM stdin;
+CREATE VIEW artifact_vw AS
+    SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name, CASE WHEN (max(artifact_history.entrydate) IS NOT NULL) THEN max(artifact_history.entrydate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::integer END AS update_date, CASE WHEN (max(artifact_message.adddate) IS NOT NULL) THEN max(artifact_message.adddate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::integer END AS message_date FROM users u, users u2, artifact_status, artifact_category, artifact_group, artifact_resolution, ((artifact LEFT JOIN artifact_history ON ((artifact.artifact_id = artifact_history.artifact_id))) LEFT JOIN artifact_message ON ((artifact.artifact_id = artifact_message.artifact_id))) WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id)) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name, u.realname, u.email, u2.user_name, u2.realname, u2.email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name;
+
+
+
+CREATE VIEW forum_group_list_vw AS
+    SELECT forum_group_list.group_forum_id, forum_group_list.group_id, forum_group_list.forum_name, forum_group_list.is_public, forum_group_list.description, forum_group_list.allow_anonymous, forum_group_list.send_all_posts_to, forum_agg_msg_count.count AS total, (SELECT max(forum.post_date) AS recent FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent, (SELECT count(*) AS count FROM (SELECT forum.thread_id FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id) GROUP BY forum.thread_id) tmp) AS threads FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
+
+
+
+CREATE VIEW forum_user_vw AS
+    SELECT forum.msg_id, forum.group_forum_id, forum.posted_by, forum.subject, forum.body, forum.post_date, forum.is_followup_to, forum.thread_id, forum.has_followups, forum.most_recent_date, users.user_name, users.realname FROM forum, users WHERE (forum.posted_by = users.user_id);
+
+
+
+CREATE TABLE country_code (
+    country_name character varying(80),
+    ccode character(2) NOT NULL
+);
+
+
+
+CREATE TABLE licenses (
+    license_id serial NOT NULL,
+    license_name text
+);
+
+
+
+CREATE TABLE user_type (
+    type_id serial NOT NULL,
+    type_name text
+);
+
+
+
+CREATE TABLE role (
+    role_id serial NOT NULL,
+    group_id integer NOT NULL,
+    role_name text
+);
+
+
+
+CREATE TABLE project_perm (
+    id serial NOT NULL,
+    group_project_id integer NOT NULL,
+    user_id integer NOT NULL,
+    perm_level integer DEFAULT 0 NOT NULL
+);
+
+
+
+CREATE TABLE forum_perm (
+    id serial NOT NULL,
+    group_forum_id integer NOT NULL,
+    user_id integer NOT NULL,
+    perm_level integer DEFAULT 0 NOT NULL
+);
+
+
+
+CREATE TABLE role_setting (
+    role_id integer NOT NULL,
+    section_name text NOT NULL,
+    ref_id integer NOT NULL,
+    value character varying(2) NOT NULL
+);
+
+
+
+CREATE SEQUENCE artifact_group_selection_box_list_id_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE artifact_group_selection_box_list (
+    id integer DEFAULT nextval('"artifact_group_selection_box_list_id_seq"'::text) NOT NULL,
+    group_artifact_id integer NOT NULL,
+    selection_box_name text NOT NULL
+);
+
+
+
+CREATE SEQUENCE artifact_group_selection_box_options_id_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE artifact_group_selection_box_options (
+    id integer DEFAULT nextval('"artifact_group_selection_box_options_id_seq"'::text) NOT NULL,
+    artifact_box_id integer NOT NULL,
+    box_options_name text NOT NULL
+);
+
+
+
+CREATE SEQUENCE artifact_extra_field_data_id_seq
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE artifact_extra_field_data (
+    id integer DEFAULT nextval('"artifact_extra_field_data_id_seq"'::text) NOT NULL,
+    artifact_id integer NOT NULL,
+    choice_id integer NOT NULL
+);
+
+
+
+CREATE TABLE project_counts_agg (
+    group_project_id integer NOT NULL,
+    count integer DEFAULT 0 NOT NULL,
+    open_count integer DEFAULT 0
+);
+
+
+
+CREATE VIEW project_group_list_vw AS
+    SELECT group_project_id, group_id, project_name, is_public, description, send_all_posts_to, count, open_count FROM (project_group_list NATURAL JOIN project_counts_agg);
+
+
+
+CREATE FUNCTION projectgrouplist_insert_agg() RETURNS "trigger"
+    AS '
+BEGIN
+    INSERT INTO project_counts_agg (group_project_id,count,open_count)
+        VALUES (NEW.group_project_id,0,0);
+        RETURN NEW;
+END;
+'
+    LANGUAGE plpgsql;
+
+
+
+CREATE FUNCTION projectgroup_update_agg() RETURNS "trigger"
+    AS '
+BEGIN
+    --
+    -- see if they are moving to a new subproject
+    -- if so, its a more complex operation
+    --
+    IF NEW.group_project_id <> OLD.group_project_id THEN
+        --
+        -- transferred tasks always have a status of 1
+        -- so we will increment the new subprojects sums
+        --
+        IF OLD.status_id=3 THEN
+            -- No need to decrement counters on old tracker
+        ELSE
+            IF OLD.status_id=2 THEN
+                UPDATE project_counts_agg SET count=count-1
+                    WHERE group_project_id=OLD.group_project_id;
+            ELSE
+                IF OLD.status_id=1 THEN
+                    UPDATE project_counts_agg SET count=count-1,open_count=open_count-1
+                        WHERE group_project_id=OLD.group_project_id;
+                END IF;
+            END IF;
+        END IF;
+
+        IF NEW.status_id=3 THEN
+            --DO NOTHING
+        ELSE
+            IF NEW.status_id=2 THEN
+                    UPDATE project_counts_agg SET count=count+1
+                        WHERE group_project_id=NEW.group_project_id;
+            ELSE
+                IF NEW.status_id=1 THEN
+                    UPDATE project_counts_agg SET count=count+1, open_count=open_count+1
+                        WHERE group_project_id=NEW.group_project_id;
+                END IF;
+            END IF;
+        END IF;
+    ELSE
+        --
+        -- just need to evaluate the status flag and
+        -- increment/decrement the counter as necessary
+        --
+        IF NEW.status_id <> OLD.status_id THEN
+            IF NEW.status_id = 1 THEN
+                IF OLD.status_id=2 THEN
+                    UPDATE project_counts_agg SET open_count=open_count+1
+                        WHERE group_project_id=NEW.group_project_id;
+                ELSE
+                    IF OLD.status_id=3 THEN
+                        UPDATE project_counts_agg SET open_count=open_count+1, count=count+1
+                            WHERE group_project_id=NEW.group_project_id;
+                    END IF;
+                END IF;
+            ELSE
+                IF NEW.status_id = 2 THEN
+                    IF OLD.status_id=1 THEN
+                        UPDATE project_counts_agg SET open_count=open_count-1
+                            WHERE group_project_id=NEW.group_project_id;
+                    ELSE
+                        IF OLD.status_id=3 THEN
+                            UPDATE project_counts_agg SET count=count+1
+                                WHERE group_project_id=NEW.group_project_id;
+                        END IF;
+                    END IF;
+                ELSE
+                    IF NEW.status_id = 3 THEN
+                        IF OLD.status_id=2 THEN
+                            UPDATE project_counts_agg SET count=count-1
+                                WHERE group_project_id=NEW.group_project_id;
+                        ELSE
+                            IF OLD.status_id=1 THEN
+                                UPDATE project_counts_agg SET open_count=open_count-1,count=count-1
+                                    WHERE group_project_id=NEW.group_project_id;
+                            END IF;
+                        END IF;
+                    END IF;
+                END IF;
+            END IF;
+        END IF;
+    END IF;
+    RETURN NEW;
+END;
+'
+    LANGUAGE plpgsql;
+
+
+
+COPY canned_responses (response_id, response_title, response_text) FROM stdin;
 \.
 
 
-COPY "db_images" FROM stdin;
+
+COPY db_images (id, group_id, description, bin_data, filename, filesize, filetype, width, height, upload_date, "version") FROM stdin;
 \.
 
 
-COPY "doc_data" FROM stdin;
+
+COPY doc_data (docid, stateid, title, data, updatedate, createdate, created_by, doc_group, description, language_id, filename, filetype, group_id) FROM stdin;
 \.
 
 
-COPY "doc_groups" FROM stdin;
+
+COPY doc_groups (doc_group, groupname, group_id) FROM stdin;
 \.
 
 
-COPY "doc_states" FROM stdin;
+
+COPY doc_states (stateid, name) FROM stdin;
 1	active
 2	deleted
 3	pending
@@ -1883,35 +2698,43 @@ COPY "doc_states" FROM stdin;
 \.
 
 
-COPY "filemodule_monitor" FROM stdin;
+
+COPY filemodule_monitor (id, filemodule_id, user_id) FROM stdin;
 \.
 
 
-COPY "forum" FROM stdin;
+
+COPY forum (msg_id, group_forum_id, posted_by, subject, body, post_date, is_followup_to, thread_id, has_followups, most_recent_date) FROM stdin;
 \.
 
 
-COPY "forum_agg_msg_count" FROM stdin;
+
+COPY forum_agg_msg_count (group_forum_id, count) FROM stdin;
 \.
 
 
-COPY "forum_group_list" FROM stdin;
+
+COPY forum_group_list (group_forum_id, group_id, forum_name, is_public, description, allow_anonymous, send_all_posts_to) FROM stdin;
 \.
 
 
-COPY "forum_monitored_forums" FROM stdin;
+
+COPY forum_monitored_forums (monitor_id, forum_id, user_id) FROM stdin;
 \.
 
 
-COPY "forum_saved_place" FROM stdin;
+
+COPY forum_saved_place (saved_place_id, user_id, forum_id, save_date) FROM stdin;
 \.
 
 
-COPY "frs_file" FROM stdin;
+
+COPY frs_file (file_id, filename, release_id, type_id, processor_id, release_time, file_size, post_date) FROM stdin;
 \.
 
 
-COPY "frs_filetype" FROM stdin;
+
+COPY frs_filetype (type_id, name) FROM stdin;
 1000	.deb
 2000	.rpm
 3000	.zip
@@ -1930,11 +2753,13 @@ COPY "frs_filetype" FROM stdin;
 \.
 
 
-COPY "frs_package" FROM stdin;
+
+COPY frs_package (package_id, group_id, name, status_id, is_public) FROM stdin;
 \.
 
 
-COPY "frs_processor" FROM stdin;
+
+COPY frs_processor (processor_id, name) FROM stdin;
 1000	i386
 6000	IA64
 7000	Alpha
@@ -1947,41 +2772,49 @@ COPY "frs_processor" FROM stdin;
 \.
 
 
-COPY "frs_release" FROM stdin;
+
+COPY frs_release (release_id, package_id, name, notes, changes, status_id, preformatted, release_date, released_by) FROM stdin;
 \.
 
 
-COPY "frs_status" FROM stdin;
+
+COPY frs_status (status_id, name) FROM stdin;
 1	Active
 3	Hidden
 \.
 
 
-COPY "group_history" FROM stdin;
+
+COPY group_history (group_history_id, group_id, field_name, old_value, mod_by, adddate) FROM stdin;
 \.
 
 
-COPY "groups" FROM stdin;
-2	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
-3	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
-4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
-1	Master Group	\N	0	A	gforge	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N	1	1	1	1	1	1
+
+COPY groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box, http_domain, short_description, scm_box, register_purpose, license_other, register_time, rand_hash, use_mail, use_survey, use_forum, use_pm, use_scm, use_news, type_id, use_docman, new_doc_address, send_all_docs, use_pm_depend_box, use_ftp, use_tracker, use_frs, use_stats, enable_pserver, enable_anonscm, license) FROM stdin;
+2	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
+3	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
+4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
+1	Master Group	\N	0	A	gforge	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
 \.
 
 
-COPY "mail_group_list" FROM stdin;
+
+COPY mail_group_list (group_list_id, group_id, list_name, is_public, "password", list_admin, status, description) FROM stdin;
 \.
 
 
-COPY "news_bytes" FROM stdin;
+
+COPY news_bytes (id, group_id, submitted_by, is_approved, post_date, forum_id, summary, details) FROM stdin;
 \.
 
 
-COPY "people_job" FROM stdin;
+
+COPY people_job (job_id, group_id, created_by, title, description, post_date, status_id, category_id) FROM stdin;
 \.
 
 
-COPY "people_job_category" FROM stdin;
+
+COPY people_job_category (category_id, name, private_flag) FROM stdin;
 1	Developer	0
 2	Project Manager	0
 3	Unix Admin	0
@@ -1992,26 +2825,31 @@ COPY "people_job_category" FROM stdin;
 \.
 
 
-COPY "people_job_inventory" FROM stdin;
+
+COPY people_job_inventory (job_inventory_id, job_id, skill_id, skill_level_id, skill_year_id) FROM stdin;
 \.
 
 
-COPY "people_job_status" FROM stdin;
+
+COPY people_job_status (status_id, name) FROM stdin;
 1	Open
 2	Filled
 3	Deleted
 \.
 
 
-COPY "people_skill" FROM stdin;
+
+COPY people_skill (skill_id, name) FROM stdin;
 \.
 
 
-COPY "people_skill_inventory" FROM stdin;
+
+COPY people_skill_inventory (skill_inventory_id, user_id, skill_id, skill_level_id, skill_year_id) FROM stdin;
 \.
 
 
-COPY "people_skill_level" FROM stdin;
+
+COPY people_skill_level (skill_level_id, name) FROM stdin;
 1	Want to Learn
 2	Competent
 3	Wizard
@@ -2020,7 +2858,8 @@ COPY "people_skill_level" FROM stdin;
 \.
 
 
-COPY "people_skill_year" FROM stdin;
+
+COPY people_skill_year (skill_year_id, name) FROM stdin;
 1	< 6 Months
 2	6 Mo - 2 yr
 3	2 yr - 5 yr
@@ -2029,80 +2868,99 @@ COPY "people_skill_year" FROM stdin;
 \.
 
 
-COPY "project_assigned_to" FROM stdin;
+
+COPY project_assigned_to (project_assigned_id, project_task_id, assigned_to_id) FROM stdin;
 \.
 
 
-COPY "project_dependencies" FROM stdin;
+
+COPY project_dependencies (project_depend_id, project_task_id, is_dependent_on_task_id) FROM stdin;
 \.
 
 
-COPY "project_group_list" FROM stdin;
+
+COPY project_group_list (group_project_id, group_id, project_name, is_public, description, send_all_posts_to) FROM stdin;
 1	1	Default	0	Default Project - Don't Change	\N
 \.
 
 
-COPY "project_history" FROM stdin;
+
+COPY project_history (project_history_id, project_task_id, field_name, old_value, mod_by, mod_date) FROM stdin;
 \.
 
 
-COPY "project_metric" FROM stdin;
+
+COPY project_metric (ranking, percentile, group_id) FROM stdin;
 \.
 
 
-COPY "project_metric_tmp1" FROM stdin;
+
+COPY project_metric_tmp1 (ranking, group_id, value) FROM stdin;
 \.
 
 
-COPY "project_status" FROM stdin;
+
+COPY project_status (status_id, status_name) FROM stdin;
 1	Open
 2	Closed
 3	Deleted
 \.
 
 
-COPY "project_task" FROM stdin;
+
+COPY project_task (project_task_id, group_project_id, summary, details, percent_complete, priority, hours, start_date, end_date, created_by, status_id, category_id) FROM stdin;
 1	1			0	0	0	0	0	100	1	100
 \.
 
 
-COPY "project_weekly_metric" FROM stdin;
+
+COPY project_weekly_metric (ranking, percentile, group_id) FROM stdin;
 \.
 
 
-COPY "user_session" FROM stdin;
+
+COPY user_session (user_id, session_hash, ip_addr, "time") FROM stdin;
+100	867b0c76e3a110d924f98029a28baa95	               	1096480068
 \.
 
 
-COPY "snippet" FROM stdin;
+
+COPY snippet (snippet_id, created_by, name, description, "type", "language", license, category) FROM stdin;
 \.
 
 
-COPY "snippet_package" FROM stdin;
+
+COPY snippet_package (snippet_package_id, created_by, name, description, category, "language") FROM stdin;
 \.
 
 
-COPY "snippet_package_item" FROM stdin;
+
+COPY snippet_package_item (snippet_package_item_id, snippet_package_version_id, snippet_version_id) FROM stdin;
 \.
 
 
-COPY "snippet_package_version" FROM stdin;
+
+COPY snippet_package_version (snippet_package_version_id, snippet_package_id, changes, "version", submitted_by, post_date) FROM stdin;
 \.
 
 
-COPY "snippet_version" FROM stdin;
+
+COPY snippet_version (snippet_version_id, snippet_id, changes, "version", submitted_by, post_date, code) FROM stdin;
 \.
 
 
-COPY "stats_agg_logo_by_day" FROM stdin;
+
+COPY stats_agg_logo_by_day ("day", count) FROM stdin;
 \.
 
 
-COPY "stats_agg_pages_by_day" FROM stdin;
+
+COPY stats_agg_pages_by_day ("day", count) FROM stdin;
 \.
 
 
-COPY "survey_question_types" FROM stdin;
+
+COPY survey_question_types (id, "type") FROM stdin;
 1	Radio Buttons 1-5
 2	Text Area
 3	Radio Buttons Yes/No
@@ -2112,27 +2970,33 @@ COPY "survey_question_types" FROM stdin;
 \.
 
 
-COPY "survey_questions" FROM stdin;
+
+COPY survey_questions (question_id, group_id, question, question_type) FROM stdin;
 \.
 
 
-COPY "survey_rating_aggregate" FROM stdin;
+
+COPY survey_rating_aggregate ("type", id, response, count) FROM stdin;
 \.
 
 
-COPY "survey_rating_response" FROM stdin;
+
+COPY survey_rating_response (user_id, "type", id, response, post_date) FROM stdin;
 \.
 
 
-COPY "survey_responses" FROM stdin;
+
+COPY survey_responses (user_id, group_id, survey_id, question_id, response, post_date) FROM stdin;
 \.
 
 
-COPY "surveys" FROM stdin;
+
+COPY surveys (survey_id, group_id, survey_title, survey_questions, is_active) FROM stdin;
 \.
 
 
-COPY "trove_cat" FROM stdin;
+
+COPY trove_cat (trove_cat_id, "version", parent, root_parent, shortname, fullname, description, count_subcat, count_subproj, fullpath, fullpath_ids) FROM stdin;
 1	2000031601	0	0	audience	Intended Audience	The main class of people likely to be interested in this resource.	0	0	Intended Audience	1
 2	2000032401	1	1	endusers	End Users/Desktop	Programs and resources for software end users. Software for the desktop.	0	0	Intended Audience :: End Users/Desktop	1 :: 2
 3	2000041101	1	1	developers	Developers	Programs and resources for software developers, to include libraries.	0	0	Intended Audience :: Developers	1 :: 3
@@ -2441,74 +3305,92 @@ COPY "trove_cat" FROM stdin;
 \.
 
 
-COPY "trove_group_link" FROM stdin;
+
+COPY trove_group_link (trove_group_id, trove_cat_id, trove_cat_version, group_id, trove_cat_root) FROM stdin;
 \.
 
 
-COPY "user_bookmarks" FROM stdin;
+
+COPY user_bookmarks (bookmark_id, user_id, bookmark_url, bookmark_title) FROM stdin;
 \.
 
 
-COPY "user_diary" FROM stdin;
+
+COPY user_diary (id, user_id, date_posted, summary, details, is_public) FROM stdin;
 \.
 
 
-COPY "user_diary_monitor" FROM stdin;
+
+COPY user_diary_monitor (monitor_id, monitored_user, user_id) FROM stdin;
 \.
 
 
-COPY "user_group" FROM stdin;
+
+COPY user_group (user_group_id, user_id, group_id, admin_flags, forum_flags, project_flags, doc_flags, cvs_flags, member_role, release_flags, artifact_flags, role_id) FROM stdin;
+1	100	1	A               	0	2	0	1	100	0	\N	1
 \.
 
 
-COPY "user_metric" FROM stdin;
+
+COPY user_metric (ranking, user_id, times_ranked, avg_raters_importance, avg_rating, metric, percentile, importance_factor) FROM stdin;
 \.
 
 
-COPY "user_metric0" FROM stdin;
+
+COPY user_metric0 (ranking, user_id, times_ranked, avg_raters_importance, avg_rating, metric, percentile, importance_factor) FROM stdin;
 \.
 
 
-COPY "user_preferences" FROM stdin;
+
+COPY user_preferences (user_id, preference_name, dead1, set_date, preference_value) FROM stdin;
 \.
 
 
-COPY "user_ratings" FROM stdin;
+
+COPY user_ratings (rated_by, user_id, rate_field, rating) FROM stdin;
 \.
 
 
-COPY "users" FROM stdin;
-2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N		\N	\N	US	1
-100	None	noreply@sourceforge.net	*********34343	Nobody	A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N	Nobody	\N	\N	US	1
+
+COPY users (user_id, user_name, email, user_pw, realname, status, shell, unix_pw, unix_status, unix_uid, unix_box, add_date, confirm_hash, mail_siteupdates, mail_va, authorized_keys, email_new, people_view_skills, people_resume, timezone, "language", block_ratings, jabber_address, jabber_only, address, phone, fax, title, firstname, lastname, address2, ccode, theme_id, type_id) FROM stdin;
+2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N		\N	\N	US	1	1
+100	None	noreply@sourceforge.net	*********34343	Nobody	A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N	Nobody	\N	\N	US	1	1
 \.
 
 
-COPY "project_sums_agg" FROM stdin;
+
+COPY project_sums_agg (group_id, "type", count) FROM stdin;
 \.
 
 
-COPY "prdb_dbs" FROM stdin;
+
+COPY prdb_dbs (dbid, group_id, dbname, dbusername, dbuserpass, requestdate, dbtype, created_by, state) FROM stdin;
 \.
 
 
-COPY "prdb_states" FROM stdin;
+
+COPY prdb_states (stateid, statename) FROM stdin;
 \.
 
 
-COPY "prdb_types" FROM stdin;
+
+COPY prdb_types (dbtypeid, dbservername, dbsoftware) FROM stdin;
 \.
 
 
-COPY "prweb_vhost" FROM stdin;
+
+COPY prweb_vhost (vhostid, vhost_name, docdir, cgidir, group_id) FROM stdin;
 \.
 
 
-COPY "artifact_group_list" FROM stdin;
+
+COPY artifact_group_list (group_artifact_id, group_id, name, description, is_public, allow_anon, email_all_updates, email_address, due_period, use_resolution, submit_instructions, browse_instructions, datatype, status_timeout) FROM stdin;
 100	1	Default	Default Data - Dont Edit	3	0	0		2592000	0	\N	\N	0	\N
 \.
 
 
-COPY "artifact_resolution" FROM stdin;
+
+COPY artifact_resolution (id, resolution_name) FROM stdin;
 100	None
 102	Accepted
 103	Out of Date
@@ -2517,147 +3399,181 @@ COPY "artifact_resolution" FROM stdin;
 \.
 
 
-COPY "artifact_perm" FROM stdin;
+
+COPY artifact_perm (id, group_artifact_id, user_id, perm_level) FROM stdin;
 \.
 
 
-COPY "artifact_category" FROM stdin;
+
+COPY artifact_category (id, group_artifact_id, category_name, auto_assign_to) FROM stdin;
 100	100	None	100
 \.
 
 
-COPY "artifact_group" FROM stdin;
+
+COPY artifact_group (id, group_artifact_id, group_name) FROM stdin;
 100	100	None
 \.
 
 
-COPY "artifact_status" FROM stdin;
+
+COPY artifact_status (id, status_name) FROM stdin;
 1	Open
 2	Closed
 3	Deleted
 \.
 
 
-COPY "artifact" FROM stdin;
+
+COPY artifact (artifact_id, group_artifact_id, status_id, category_id, artifact_group_id, resolution_id, priority, submitted_by, assigned_to, open_date, close_date, summary, details) FROM stdin;
 \.
 
 
-COPY "artifact_history" FROM stdin;
+
+COPY artifact_history (id, artifact_id, field_name, old_value, mod_by, entrydate) FROM stdin;
 \.
 
 
-COPY "artifact_file" FROM stdin;
+
+COPY artifact_file (id, artifact_id, description, bin_data, filename, filesize, filetype, adddate, submitted_by) FROM stdin;
 \.
 
 
-COPY "artifact_message" FROM stdin;
+
+COPY artifact_message (id, artifact_id, submitted_by, from_email, adddate, body) FROM stdin;
 \.
 
 
-COPY "artifact_monitor" FROM stdin;
+
+COPY artifact_monitor (id, artifact_id, user_id, email) FROM stdin;
 \.
 
 
-COPY "artifact_canned_responses" FROM stdin;
+
+COPY artifact_canned_responses (id, group_artifact_id, title, body) FROM stdin;
 \.
 
 
-COPY "artifact_counts_agg" FROM stdin;
+
+COPY artifact_counts_agg (group_artifact_id, count, open_count) FROM stdin;
 100	0	0
 \.
 
 
-COPY "stats_site_pages_by_day" FROM stdin;
+
+COPY stats_site_pages_by_day ("month", "day", site_page_views) FROM stdin;
 \.
 
 
-COPY "massmail_queue" FROM stdin;
+
+COPY massmail_queue (id, "type", subject, message, queued_date, last_userid, failed_date, finished_date) FROM stdin;
 \.
 
 
-COPY "stats_agg_site_by_group" FROM stdin;
+
+COPY stats_agg_site_by_group ("month", "day", group_id, count) FROM stdin;
 \.
 
 
-COPY "stats_project_metric" FROM stdin;
+
+COPY stats_project_metric ("month", "day", ranking, percentile, group_id) FROM stdin;
 \.
 
 
-COPY "stats_agg_logo_by_group" FROM stdin;
+
+COPY stats_agg_logo_by_group ("month", "day", group_id, count) FROM stdin;
 \.
 
 
-COPY "stats_subd_pages" FROM stdin;
+
+COPY stats_subd_pages ("month", "day", group_id, pages) FROM stdin;
 \.
 
 
-COPY "stats_cvs_user" FROM stdin;
+
+COPY stats_cvs_user ("month", "day", group_id, user_id, checkouts, commits, adds) FROM stdin;
 \.
 
 
-COPY "stats_cvs_group" FROM stdin;
+
+COPY stats_cvs_group ("month", "day", group_id, checkouts, commits, adds) FROM stdin;
 \.
 
 
-COPY "stats_project_developers" FROM stdin;
+
+COPY stats_project_developers ("month", "day", group_id, developers) FROM stdin;
 \.
 
 
-COPY "stats_project" FROM stdin;
+
+COPY stats_project ("month", "day", group_id, file_releases, msg_posted, msg_uniq_auth, bugs_opened, bugs_closed, support_opened, support_closed, patches_opened, patches_closed, artifacts_opened, artifacts_closed, tasks_opened, tasks_closed, help_requests) FROM stdin;
 \.
 
 
-COPY "stats_site" FROM stdin;
+
+COPY stats_site ("month", "day", uniq_users, sessions, total_users, new_users, new_projects) FROM stdin;
 \.
 
 
-COPY "activity_log" FROM stdin;
+
+COPY activity_log ("day", "hour", group_id, browser, ver, platform, "time", page, "type") FROM stdin;
 \.
 
 
-COPY "user_metric_history" FROM stdin;
+
+COPY user_metric_history ("month", "day", user_id, ranking, metric) FROM stdin;
 \.
 
 
-COPY "frs_dlstats_filetotal_agg" FROM stdin;
+
+COPY frs_dlstats_filetotal_agg (file_id, downloads) FROM stdin;
 \.
 
 
-COPY "stats_project_months" FROM stdin;
+
+COPY stats_project_months ("month", group_id, developers, group_ranking, group_metric, logo_showings, downloads, site_views, subdomain_views, page_views, file_releases, msg_posted, msg_uniq_auth, bugs_opened, bugs_closed, support_opened, support_closed, patches_opened, patches_closed, artifacts_opened, artifacts_closed, tasks_opened, tasks_closed, help_requests, cvs_checkouts, cvs_commits, cvs_adds) FROM stdin;
 \.
 
 
-COPY "stats_site_pages_by_month" FROM stdin;
+
+COPY stats_site_pages_by_month ("month", site_page_views) FROM stdin;
 \.
 
 
-COPY "stats_site_months" FROM stdin;
+
+COPY stats_site_months ("month", site_page_views, downloads, subdomain_views, msg_posted, bugs_opened, bugs_closed, support_opened, support_closed, patches_opened, patches_closed, artifacts_opened, artifacts_closed, tasks_opened, tasks_closed, help_requests, cvs_checkouts, cvs_commits, cvs_adds) FROM stdin;
 \.
 
 
-COPY "trove_agg" FROM stdin;
+
+COPY trove_agg (trove_cat_id, group_id, group_name, unix_group_name, status, register_time, short_description, percentile, ranking) FROM stdin;
 \.
 
 
-COPY "trove_treesums" FROM stdin;
+
+COPY trove_treesums (trove_treesums_id, trove_cat_id, limit_1, subprojects) FROM stdin;
 \.
 
 
-COPY "frs_dlstats_file" FROM stdin;
+
+COPY frs_dlstats_file (ip_address, file_id, "month", "day", user_id) FROM stdin;
 \.
 
 
-COPY "group_cvs_history" FROM stdin;
+
+COPY group_cvs_history (id, group_id, user_name, cvs_commits, cvs_commits_wk, cvs_adds, cvs_adds_wk) FROM stdin;
 \.
 
 
-COPY "themes" FROM stdin;
+
+COPY themes (theme_id, dirname, fullname, enabled) FROM stdin;
 1	gforge	Default Theme	t
 2	osx	OSX	t
 \.
 
 
-COPY "supported_languages" FROM stdin;
+
+COPY supported_languages (language_id, name, filename, classname, language_code) FROM stdin;
 1	English	English.class	English	en   
 2	Japanese	Japanese.class	Japanese	ja   
 3	Hebrew	Hebrew.class	Hebrew	iw   
@@ -2685,7 +3601,8 @@ COPY "supported_languages" FROM stdin;
 \.
 
 
-COPY "skills_data_types" FROM stdin;
+
+COPY skills_data_types (type_id, type_name) FROM stdin;
 0	Unspecified
 1	Project
 2	Training
@@ -2694,48 +3611,59 @@ COPY "skills_data_types" FROM stdin;
 \.
 
 
-COPY "skills_data" FROM stdin;
+
+COPY skills_data (skills_data_id, user_id, "type", title, "start", finish, keywords) FROM stdin;
 \.
 
 
-COPY "project_category" FROM stdin;
+
+COPY project_category (category_id, group_project_id, category_name) FROM stdin;
 100	1	None
 \.
 
 
-COPY "project_task_artifact" FROM stdin;
+
+COPY project_task_artifact (project_task_id, artifact_id) FROM stdin;
 \.
 
 
-COPY "project_group_forum" FROM stdin;
+
+COPY project_group_forum (group_project_id, group_forum_id) FROM stdin;
 \.
 
 
-COPY "project_group_doccat" FROM stdin;
+
+COPY project_group_doccat (group_project_id, doc_group_id) FROM stdin;
 \.
 
 
-COPY "project_messages" FROM stdin;
+
+COPY project_messages (project_message_id, project_task_id, body, posted_by, postdate) FROM stdin;
 \.
 
 
-COPY "plugins" FROM stdin;
+
+COPY plugins (plugin_id, plugin_name, plugin_desc) FROM stdin;
 \.
 
 
-COPY "group_plugin" FROM stdin;
+
+COPY group_plugin (group_plugin_id, group_id, plugin_id) FROM stdin;
 \.
 
 
-COPY "user_plugin" FROM stdin;
+
+COPY user_plugin (user_plugin_id, user_id, plugin_id) FROM stdin;
 \.
 
 
-COPY "cron_history" FROM stdin;
+
+COPY cron_history (rundate, job, output) FROM stdin;
 \.
 
 
-COPY "country_code" FROM stdin;
+
+COPY country_code (country_name, ccode) FROM stdin;
 AFGHANISTAN	AF
 ALBANIA	AL
 ALGERIA	DZ
@@ -2977,1399 +3905,3784 @@ ZIMBABWE	ZW
 UNITED KINGDOM	UK
 \.
 
+
+
+COPY licenses (license_id, license_name) FROM stdin;
+100	None
+101	GNU General Public License (GPL)
+102	GNU Library Public License (LGPL)
+103	BSD License
+104	MIT License
+105	Artistic License
+106	Mozilla Public License 1.0 (MPL)
+107	Qt Public License (QPL)
+108	IBM Public License
+109	MITRE Collaborative Virtual Workspace License (CVW License)
+110	Ricoh Source Code Public License
+111	Python License
+112	zlib/libpng License
+113	Apache Software License
+114	Vovida Software License 1.0
+115	Sun Internet Standards Source License (SISSL)
+116	Intel Open Source License
+117	Mozilla Public License 1.1 (MPL 1.1)
+118	Jabber Open Source License
+119	Nokia Open Source License
+120	Sleepycat License
+121	Nethack General Public License
+122	IBM Common Public License
+123	Apple Public Source License
+124	Public Domain
+125	Website Only
+126	Other/Proprietary License
+\.
+
+
+
+COPY user_type (type_id, type_name) FROM stdin;
+1	User
+2	UserPool
+\.
+
+
+
+COPY role (role_id, group_id, role_name) FROM stdin;
+1	1	Default
+2	2	Admin
+3	2	Senior Developer
+4	2	Junior Developer
+5	2	Doc Writer
+6	2	Support Tech
+7	3	Admin
+8	3	Senior Developer
+9	3	Junior Developer
+10	3	Doc Writer
+11	3	Support Tech
+12	4	Admin
+13	4	Senior Developer
+14	4	Junior Developer
+15	4	Doc Writer
+16	4	Support Tech
+17	1	Admin
+18	1	Senior Developer
+19	1	Junior Developer
+20	1	Doc Writer
+21	1	Support Tech
+\.
+
+
+
+COPY project_perm (id, group_project_id, user_id, perm_level) FROM stdin;
+\.
+
+
+
+COPY forum_perm (id, group_forum_id, user_id, perm_level) FROM stdin;
+\.
+
+
+
+COPY role_setting (role_id, section_name, ref_id, value) FROM stdin;
+2	projectadmin	0	A
+2	frs	0	1
+2	scm	0	1
+2	docman	0	1
+2	forumadmin	0	2
+2	trackeradmin	0	2
+2	pmadmin	0	2
+3	projectadmin	0	0
+3	frs	0	1
+3	scm	0	1
+3	docman	0	1
+3	forumadmin	0	2
+3	trackeradmin	0	2
+3	pmadmin	0	2
+4	projectadmin	0	0
+4	frs	0	0
+4	scm	0	1
+4	docman	0	0
+4	forumadmin	0	0
+4	trackeradmin	0	0
+4	pmadmin	0	0
+5	projectadmin	0	0
+5	frs	0	0
+5	scm	0	0
+5	docman	0	1
+5	forumadmin	0	0
+5	trackeradmin	0	0
+5	pmadmin	0	0
+6	projectadmin	0	0
+6	frs	0	0
+6	scm	0	0
+6	docman	0	1
+6	forumadmin	0	0
+6	trackeradmin	0	0
+6	pmadmin	0	0
+7	projectadmin	0	A
+7	frs	0	1
+7	scm	0	1
+7	docman	0	1
+7	forumadmin	0	2
+7	trackeradmin	0	2
+7	pmadmin	0	2
+8	projectadmin	0	0
+8	frs	0	1
+8	scm	0	1
+8	docman	0	1
+8	forumadmin	0	2
+8	trackeradmin	0	2
+8	pmadmin	0	2
+9	projectadmin	0	0
+9	frs	0	0
+9	scm	0	1
+9	docman	0	0
+9	forumadmin	0	0
+9	trackeradmin	0	0
+9	pmadmin	0	0
+10	projectadmin	0	0
+10	frs	0	0
+10	scm	0	0
+10	docman	0	1
+10	forumadmin	0	0
+10	trackeradmin	0	0
+10	pmadmin	0	0
+11	projectadmin	0	0
+11	frs	0	0
+11	scm	0	0
+11	docman	0	1
+11	forumadmin	0	0
+11	trackeradmin	0	0
+11	pmadmin	0	0
+12	projectadmin	0	A
+12	frs	0	1
+12	scm	0	1
+12	docman	0	1
+12	forumadmin	0	2
+12	trackeradmin	0	2
+12	pmadmin	0	2
+13	projectadmin	0	0
+13	frs	0	1
+13	scm	0	1
+13	docman	0	1
+13	forumadmin	0	2
+13	trackeradmin	0	2
+13	pmadmin	0	2
+14	projectadmin	0	0
+14	frs	0	0
+14	scm	0	1
+14	docman	0	0
+14	forumadmin	0	0
+14	trackeradmin	0	0
+14	pmadmin	0	0
+15	projectadmin	0	0
+15	frs	0	0
+15	scm	0	0
+15	docman	0	1
+15	forumadmin	0	0
+15	trackeradmin	0	0
+15	pmadmin	0	0
+16	projectadmin	0	0
+16	frs	0	0
+16	scm	0	0
+16	docman	0	1
+16	forumadmin	0	0
+16	trackeradmin	0	0
+16	pmadmin	0	0
+17	projectadmin	0	A
+17	frs	0	1
+17	scm	0	1
+17	docman	0	1
+17	forumadmin	0	2
+17	trackeradmin	0	2
+17	tracker	100	3
+17	pmadmin	0	2
+17	pm	1	3
+18	projectadmin	0	0
+18	frs	0	1
+18	scm	0	1
+18	docman	0	1
+18	forumadmin	0	2
+18	trackeradmin	0	2
+18	tracker	100	2
+18	pmadmin	0	2
+18	pm	1	2
+19	projectadmin	0	0
+19	frs	0	0
+19	scm	0	1
+19	docman	0	0
+19	forumadmin	0	0
+19	trackeradmin	0	0
+19	tracker	100	1
+19	pmadmin	0	0
+19	pm	1	1
+20	projectadmin	0	0
+20	frs	0	0
+20	scm	0	0
+20	docman	0	1
+20	forumadmin	0	0
+20	trackeradmin	0	0
+20	tracker	100	0
+20	pmadmin	0	0
+20	pm	1	0
+21	projectadmin	0	0
+21	frs	0	0
+21	scm	0	0
+21	docman	0	1
+21	forumadmin	0	0
+21	trackeradmin	0	0
+21	tracker	100	2
+21	pmadmin	0	0
+21	pm	1	0
+\.
+
+
+
+COPY artifact_group_selection_box_list (id, group_artifact_id, selection_box_name) FROM stdin;
+\.
+
+
+
+COPY artifact_group_selection_box_options (id, artifact_box_id, box_options_name) FROM stdin;
+\.
+
+
+
+COPY artifact_extra_field_data (id, artifact_id, choice_id) FROM stdin;
+\.
+
+
+
+COPY project_counts_agg (group_project_id, count, open_count) FROM stdin;
+1	1	0
+\.
+
+
+
 CREATE INDEX db_images_group ON db_images USING btree (group_id);
+
 
 
 CREATE INDEX doc_group_doc_group ON doc_data USING btree (doc_group);
 
 
+
 CREATE INDEX doc_groups_group ON doc_groups USING btree (group_id);
+
 
 
 CREATE INDEX filemodule_monitor_id ON filemodule_monitor USING btree (filemodule_id);
 
 
+
 CREATE INDEX filemodulemonitor_userid ON filemodule_monitor USING btree (user_id);
+
 
 
 CREATE INDEX forum_forumid_msgid ON forum USING btree (group_forum_id, msg_id);
 
 
+
 CREATE INDEX forum_group_forum_id ON forum USING btree (group_forum_id);
+
 
 
 CREATE INDEX forum_forumid_threadid_mostrece ON forum USING btree (group_forum_id, thread_id, most_recent_date);
 
 
+
 CREATE INDEX forum_threadid_isfollowupto ON forum USING btree (thread_id, is_followup_to);
+
 
 
 CREATE INDEX forum_forumid_isfollto_mostrece ON forum USING btree (group_forum_id, is_followup_to, most_recent_date);
 
 
+
 CREATE INDEX forum_group_list_group_id ON forum_group_list USING btree (group_id);
+
 
 
 CREATE INDEX forummonitoredforums_user ON forum_monitored_forums USING btree (user_id);
 
 
+
 CREATE INDEX forum_monitor_combo_id ON forum_monitored_forums USING btree (forum_id, user_id);
+
 
 
 CREATE INDEX forum_monitor_thread_id ON forum_monitored_forums USING btree (forum_id);
 
 
+
 CREATE INDEX frs_file_date ON frs_file USING btree (post_date);
+
 
 
 CREATE INDEX frs_file_release_id ON frs_file USING btree (release_id);
 
 
+
 CREATE INDEX package_group_id ON frs_package USING btree (group_id);
+
 
 
 CREATE INDEX frs_release_package ON frs_release USING btree (package_id);
 
 
+
 CREATE INDEX group_history_group_id ON group_history USING btree (group_id);
+
 
 
 CREATE UNIQUE INDEX group_unix_uniq ON groups USING btree (unix_group_name);
 
 
+
 CREATE INDEX groups_type ON groups USING btree (type_id);
+
 
 
 CREATE INDEX groups_public ON groups USING btree (is_public);
 
 
+
 CREATE INDEX groups_status ON groups USING btree (status);
+
 
 
 CREATE INDEX mail_group_list_group ON mail_group_list USING btree (group_id);
 
 
+
 CREATE INDEX news_bytes_group ON news_bytes USING btree (group_id);
+
 
 
 CREATE INDEX news_bytes_approved ON news_bytes USING btree (is_approved);
 
 
+
 CREATE INDEX news_bytes_forum ON news_bytes USING btree (forum_id);
+
 
 
 CREATE INDEX news_group_date ON news_bytes USING btree (group_id, post_date);
 
 
+
 CREATE INDEX news_approved_date ON news_bytes USING btree (is_approved, post_date);
+
 
 
 CREATE INDEX people_job_group_id ON people_job USING btree (group_id);
 
 
+
 CREATE INDEX project_assigned_to_assigned_to ON project_assigned_to USING btree (assigned_to_id);
+
 
 
 CREATE INDEX project_assigned_to_task_id ON project_assigned_to USING btree (project_task_id);
 
 
+
 CREATE INDEX project_is_dependent_on_task_id ON project_dependencies USING btree (is_dependent_on_task_id);
+
 
 
 CREATE INDEX project_dependencies_task_id ON project_dependencies USING btree (project_task_id);
 
 
+
 CREATE INDEX project_group_list_group_id ON project_group_list USING btree (group_id);
+
 
 
 CREATE INDEX project_history_task_id ON project_history USING btree (project_task_id);
 
 
+
 CREATE INDEX project_metric_group ON project_metric USING btree (group_id);
+
 
 
 CREATE INDEX projecttask_projid_status ON project_task USING btree (group_project_id, status_id);
 
 
+
 CREATE INDEX project_task_group_project_id ON project_task USING btree (group_project_id);
+
 
 
 CREATE INDEX projectweeklymetric_ranking ON project_weekly_metric USING btree (ranking);
 
 
+
 CREATE INDEX project_metric_weekly_group ON project_weekly_metric USING btree (group_id);
+
 
 
 CREATE INDEX session_user_id ON user_session USING btree (user_id);
 
 
+
 CREATE INDEX session_time ON user_session USING btree ("time");
+
 
 
 CREATE INDEX snippet_language ON snippet USING btree ("language");
 
 
+
 CREATE INDEX snippet_category ON snippet USING btree (category);
+
 
 
 CREATE INDEX snippet_package_language ON snippet_package USING btree ("language");
 
 
+
 CREATE INDEX snippet_package_category ON snippet_package USING btree (category);
+
 
 
 CREATE INDEX snippet_package_item_pkg_ver ON snippet_package_item USING btree (snippet_package_version_id);
 
 
+
 CREATE INDEX snippet_package_version_pkg_id ON snippet_package_version USING btree (snippet_package_id);
+
 
 
 CREATE INDEX snippet_version_snippet_id ON snippet_version USING btree (snippet_id);
 
 
+
 CREATE INDEX pages_by_day_day ON stats_agg_pages_by_day USING btree ("day");
+
 
 
 CREATE INDEX survey_questions_group ON survey_questions USING btree (group_id);
 
 
+
 CREATE INDEX survey_rating_aggregate_type_id ON survey_rating_aggregate USING btree ("type", id);
+
 
 
 CREATE INDEX survey_rating_responses_user_ty ON survey_rating_response USING btree (user_id, "type", id);
 
 
+
 CREATE INDEX survey_rating_responses_type_id ON survey_rating_response USING btree ("type", id);
+
 
 
 CREATE INDEX survey_responses_group_id ON survey_responses USING btree (group_id);
 
 
+
 CREATE INDEX survey_responses_user_survey_qu ON survey_responses USING btree (user_id, survey_id, question_id);
+
 
 
 CREATE INDEX survey_responses_user_survey ON survey_responses USING btree (user_id, survey_id);
 
 
+
 CREATE INDEX survey_responses_survey_questio ON survey_responses USING btree (survey_id, question_id);
+
 
 
 CREATE INDEX surveys_group ON surveys USING btree (group_id);
 
 
+
 CREATE INDEX parent_idx ON trove_cat USING btree (parent);
+
 
 
 CREATE INDEX root_parent_idx ON trove_cat USING btree (root_parent);
 
 
+
 CREATE INDEX version_idx ON trove_cat USING btree ("version");
+
 
 
 CREATE INDEX trove_group_link_group_id ON trove_group_link USING btree (group_id);
 
 
+
 CREATE INDEX trove_group_link_cat_id ON trove_group_link USING btree (trove_cat_id);
+
 
 
 CREATE INDEX user_bookmark_user_id ON user_bookmarks USING btree (user_id);
 
 
+
 CREATE INDEX user_diary_user ON user_diary USING btree (user_id);
+
 
 
 CREATE INDEX user_diary_user_date ON user_diary USING btree (user_id, date_posted);
 
 
+
 CREATE INDEX user_diary_date ON user_diary USING btree (date_posted);
+
 
 
 CREATE INDEX user_diary_monitor_user ON user_diary_monitor USING btree (user_id);
 
 
+
 CREATE INDEX user_diary_monitor_monitored_us ON user_diary_monitor USING btree (monitored_user);
+
 
 
 CREATE INDEX user_group_group_id ON user_group USING btree (group_id);
 
 
+
 CREATE INDEX project_flags_idx ON user_group USING btree (project_flags);
+
 
 
 CREATE INDEX user_group_user_id ON user_group USING btree (user_id);
 
 
+
 CREATE INDEX admin_flags_idx ON user_group USING btree (admin_flags);
+
 
 
 CREATE INDEX forum_flags_idx ON user_group USING btree (forum_flags);
 
 
+
 CREATE UNIQUE INDEX usergroup_uniq_groupid_userid ON user_group USING btree (group_id, user_id);
+
 
 
 CREATE INDEX user_metric0_user_id ON user_metric0 USING btree (user_id);
 
 
+
 CREATE INDEX user_pref_user_id ON user_preferences USING btree (user_id);
+
 
 
 CREATE INDEX user_ratings_rated_by ON user_ratings USING btree (rated_by);
 
 
+
 CREATE INDEX user_ratings_user_id ON user_ratings USING btree (user_id);
+
 
 
 CREATE UNIQUE INDEX users_namename_uniq ON users USING btree (user_name);
 
 
+
 CREATE INDEX users_status ON users USING btree (status);
+
 
 
 CREATE INDEX users_user_pw ON users USING btree (user_pw);
 
 
+
 CREATE INDEX projectsumsagg_groupid ON project_sums_agg USING btree (group_id);
+
 
 
 CREATE UNIQUE INDEX idx_prdb_dbname ON prdb_dbs USING btree (dbname);
 
 
+
 CREATE INDEX idx_vhost_groups ON prweb_vhost USING btree (group_id);
+
 
 
 CREATE UNIQUE INDEX idx_vhost_hostnames ON prweb_vhost USING btree (vhost_name);
 
 
+
 CREATE INDEX artgrouplist_groupid ON artifact_group_list USING btree (group_id);
+
 
 
 CREATE INDEX artgrouplist_groupid_public ON artifact_group_list USING btree (group_id, is_public);
 
 
+
 CREATE UNIQUE INDEX artperm_groupartifactid_userid ON artifact_perm USING btree (group_artifact_id, user_id);
+
 
 
 CREATE INDEX artperm_groupartifactid ON artifact_perm USING btree (group_artifact_id);
 
 
+
 CREATE INDEX artcategory_groupartifactid ON artifact_category USING btree (group_artifact_id);
+
 
 
 CREATE INDEX artgroup_groupartifactid ON artifact_group USING btree (group_artifact_id);
 
 
+
 CREATE INDEX art_groupartid ON artifact USING btree (group_artifact_id);
+
 
 
 CREATE INDEX art_groupartid_statusid ON artifact USING btree (group_artifact_id, status_id);
 
 
+
 CREATE INDEX art_groupartid_assign ON artifact USING btree (group_artifact_id, assigned_to);
+
 
 
 CREATE INDEX art_groupartid_submit ON artifact USING btree (group_artifact_id, submitted_by);
 
 
+
 CREATE INDEX art_submit_status ON artifact USING btree (submitted_by, status_id);
+
 
 
 CREATE INDEX art_assign_status ON artifact USING btree (assigned_to, status_id);
 
 
+
 CREATE INDEX art_groupartid_artifactid ON artifact USING btree (group_artifact_id, artifact_id);
+
 
 
 CREATE INDEX arthistory_artid ON artifact_history USING btree (artifact_id);
 
 
+
 CREATE INDEX arthistory_artid_entrydate ON artifact_history USING btree (artifact_id, entrydate);
+
 
 
 CREATE INDEX artfile_artid ON artifact_file USING btree (artifact_id);
 
 
+
 CREATE INDEX artfile_artid_adddate ON artifact_file USING btree (artifact_id, adddate);
+
 
 
 CREATE INDEX artmessage_artid ON artifact_message USING btree (artifact_id);
 
 
+
 CREATE INDEX artmessage_artid_adddate ON artifact_message USING btree (artifact_id, adddate);
+
 
 
 CREATE INDEX artmonitor_artifactid ON artifact_monitor USING btree (artifact_id);
 
 
+
 CREATE INDEX artifactcannedresponses_groupid ON artifact_canned_responses USING btree (group_artifact_id);
+
 
 
 CREATE INDEX artifactcountsagg_groupartid ON artifact_counts_agg USING btree (group_artifact_id);
 
 
+
 CREATE UNIQUE INDEX statssitepgsbyday_oid ON stats_site_pages_by_day USING btree (oid);
+
 
 
 CREATE INDEX statssitepagesbyday_month_day ON stats_site_pages_by_day USING btree ("month", "day");
 
 
+
 CREATE UNIQUE INDEX statsaggsitebygrp_oid ON stats_agg_site_by_group USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statssitebygroup_month_day_grou ON stats_agg_site_by_group USING btree ("month", "day", group_id);
 
 
+
 CREATE UNIQUE INDEX statsprojectmetric_oid ON stats_project_metric USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statsprojectmetric_month_day_gr ON stats_project_metric USING btree ("month", "day", group_id);
 
 
+
 CREATE UNIQUE INDEX statsagglogobygrp_oid ON stats_agg_logo_by_group USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statslogobygroup_month_day_grou ON stats_agg_logo_by_group USING btree ("month", "day", group_id);
 
 
+
 CREATE UNIQUE INDEX statssubdpages_oid ON stats_subd_pages USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statssubdpages_month_day_group ON stats_subd_pages USING btree ("month", "day", group_id);
 
 
+
 CREATE UNIQUE INDEX statscvsgrp_oid ON stats_cvs_group USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statscvsgroup_month_day_group ON stats_cvs_group USING btree ("month", "day", group_id);
 
 
+
 CREATE UNIQUE INDEX statsprojectdevelop_oid ON stats_project_developers USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statsprojectdev_month_day_group ON stats_project_developers USING btree ("month", "day", group_id);
 
 
+
 CREATE UNIQUE INDEX statsproject_oid ON stats_project USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statsproject_month_day_group ON stats_project USING btree ("month", "day", group_id);
 
 
+
 CREATE UNIQUE INDEX statssite_oid ON stats_site USING btree (oid);
+
 
 
 CREATE UNIQUE INDEX statssite_month_day ON stats_site USING btree ("month", "day");
 
 
+
 CREATE INDEX user_metric_history_date_userid ON user_metric_history USING btree ("month", "day", user_id);
+
 
 
 CREATE INDEX frsdlfiletotal_fileid ON frs_dlstats_filetotal_agg USING btree (file_id);
 
 
+
 CREATE INDEX statsprojectmonths_groupid ON stats_project_months USING btree (group_id);
+
 
 
 CREATE INDEX statsprojectmonths_groupid_mont ON stats_project_months USING btree (group_id, "month");
 
 
+
 CREATE INDEX statssitemonths_month ON stats_site_months USING btree ("month");
+
 
 
 CREATE INDEX troveagg_trovecatid ON trove_agg USING btree (trove_cat_id);
 
 
+
 CREATE INDEX troveagg_trovecatid_ranking ON trove_agg USING btree (trove_cat_id, ranking);
+
 
 
 CREATE UNIQUE INDEX group_cvs_history_id_key ON group_cvs_history USING btree (id);
 
 
+
 CREATE INDEX groupcvshistory_groupid ON group_cvs_history USING btree (group_id);
+
 
 
 CREATE UNIQUE INDEX themes_theme_id_key ON themes USING btree (theme_id);
 
 
+
 CREATE UNIQUE INDEX supported_langu_language_id_key ON supported_languages USING btree (language_id);
+
 
 
 CREATE UNIQUE INDEX project_categor_category_id_key ON project_category USING btree (category_id);
 
 
+
 CREATE INDEX projectcategory_groupprojectid ON project_category USING btree (group_project_id);
+
 
 
 CREATE INDEX projecttaskartifact_projecttask ON project_task_artifact USING btree (project_task_id);
 
 
+
 CREATE INDEX projecttaskartifact_artifactid ON project_task_artifact USING btree (artifact_id);
+
 
 
 CREATE INDEX projectgroupforum_groupprojecti ON project_group_forum USING btree (group_project_id);
 
 
+
 CREATE INDEX projectgroupforum_groupforumid ON project_group_forum USING btree (group_forum_id);
+
 
 
 CREATE INDEX projectgroupdoccat_groupproject ON project_group_forum USING btree (group_project_id);
 
 
+
 CREATE INDEX projectgroupdoccat_groupgroupid ON project_group_doccat USING btree (doc_group_id);
+
 
 
 CREATE UNIQUE INDEX project_messa_project_messa_key ON project_messages USING btree (project_message_id);
 
 
+
 CREATE UNIQUE INDEX plugins_plugin_name_key ON plugins USING btree (plugin_name);
+
 
 
 CREATE INDEX cronhist_rundate ON cron_history USING btree (rundate);
 
 
-CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER INSERT OR UPDATE ON "user_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
 
+CREATE UNIQUE INDEX role_groupidroleid ON role USING btree (group_id, role_id);
 
-CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
+CREATE UNIQUE INDEX projectperm_groupprojiduserid ON project_perm USING btree (group_project_id, user_id);
 
 
-CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER INSERT OR UPDATE ON "user_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
 
+CREATE UNIQUE INDEX forumperm_groupforumiduserid ON forum_perm USING btree (group_forum_id, user_id);
 
-CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "user_group_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
+CREATE INDEX rolesetting_roleidsectionid ON role_setting USING btree (role_id, section_name);
 
 
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER INSERT OR UPDATE ON "forum"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
+ALTER TABLE ONLY canned_responses
+    ADD CONSTRAINT canned_responses_pkey PRIMARY KEY (response_id);
 
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+ALTER TABLE ONLY db_images
+    ADD CONSTRAINT db_images_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER INSERT OR UPDATE ON "forum"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
+ALTER TABLE ONLY doc_data
+    ADD CONSTRAINT doc_data_pkey PRIMARY KEY (docid);
 
-CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER DELETE ON "forum_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
 
-CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER UPDATE ON "forum_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
+ALTER TABLE ONLY doc_groups
+    ADD CONSTRAINT doc_groups_pkey PRIMARY KEY (doc_group);
 
 
-CREATE CONSTRAINT TRIGGER "forum_group_list_group_id_fk" AFTER INSERT OR UPDATE ON "forum_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
+ALTER TABLE ONLY doc_states
+    ADD CONSTRAINT doc_states_pkey PRIMARY KEY (stateid);
 
-CREATE CONSTRAINT TRIGGER "forum_group_list_group_id_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "forum_group_list_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE ONLY filemodule_monitor
+    ADD CONSTRAINT filemodule_monitor_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER INSERT OR UPDATE ON "forum"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
+ALTER TABLE ONLY forum
+    ADD CONSTRAINT forum_pkey PRIMARY KEY (msg_id);
 
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "forum_posted_by_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+ALTER TABLE ONLY forum_agg_msg_count
+    ADD CONSTRAINT forum_agg_msg_count_pkey PRIMARY KEY (group_forum_id);
 
 
-CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER INSERT OR UPDATE ON "forum"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
+ALTER TABLE ONLY forum_group_list
+    ADD CONSTRAINT forum_group_list_pkey PRIMARY KEY (group_forum_id);
 
-CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER DELETE ON "forum_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
 
-CREATE CONSTRAINT TRIGGER "forum_group_forum_id_fk" AFTER UPDATE ON "forum_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
+ALTER TABLE ONLY forum_monitored_forums
+    ADD CONSTRAINT forum_monitored_forums_pkey PRIMARY KEY (monitor_id);
 
 
-CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER INSERT OR UPDATE ON "project_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
+ALTER TABLE ONLY forum_saved_place
+    ADD CONSTRAINT forum_saved_place_pkey PRIMARY KEY (saved_place_id);
 
-CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE ONLY frs_file
+    ADD CONSTRAINT frs_file_pkey PRIMARY KEY (file_id);
 
 
-CREATE CONSTRAINT TRIGGER "project_task_created_by_fk" AFTER INSERT OR UPDATE ON "project_task"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
 
+ALTER TABLE ONLY frs_filetype
+    ADD CONSTRAINT frs_filetype_pkey PRIMARY KEY (type_id);
 
-CREATE CONSTRAINT TRIGGER "project_task_created_by_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "project_task_created_by_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
+ALTER TABLE ONLY frs_package
+    ADD CONSTRAINT frs_package_pkey PRIMARY KEY (package_id);
 
 
-CREATE CONSTRAINT TRIGGER "project_task_status_id_fk" AFTER INSERT OR UPDATE ON "project_task"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('project_task_status_id_fk', 'project_task', 'project_status', 'FULL', 'status_id', 'status_id');
 
+ALTER TABLE ONLY frs_processor
+    ADD CONSTRAINT frs_processor_pkey PRIMARY KEY (processor_id);
 
-CREATE CONSTRAINT TRIGGER "project_task_status_id_fk" AFTER DELETE ON "project_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('project_task_status_id_fk', 'project_task', 'project_status', 'FULL', 'status_id', 'status_id');
 
 
-CREATE CONSTRAINT TRIGGER "project_task_status_id_fk" AFTER UPDATE ON "project_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('project_task_status_id_fk', 'project_task', 'project_status', 'FULL', 'status_id', 'status_id');
+ALTER TABLE ONLY frs_release
+    ADD CONSTRAINT frs_release_pkey PRIMARY KEY (release_id);
 
 
-CREATE CONSTRAINT TRIGGER "users_languageid_fk" AFTER INSERT OR UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
 
+ALTER TABLE ONLY frs_status
+    ADD CONSTRAINT frs_status_pkey PRIMARY KEY (status_id);
 
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_monitor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+ALTER TABLE ONLY group_history
+    ADD CONSTRAINT group_history_pkey PRIMARY KEY (group_history_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT groups_pkey PRIMARY KEY (group_id);
 
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupid_fk" AFTER INSERT OR UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupid_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE ONLY mail_group_list
+    ADD CONSTRAINT mail_group_list_pkey PRIMARY KEY (group_list_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupid_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
+ALTER TABLE ONLY news_bytes
+    ADD CONSTRAINT news_bytes_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "artifactperm_userid_fk" AFTER INSERT OR UPDATE ON "artifact_perm"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactperm_userid_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
+ALTER TABLE ONLY people_job
+    ADD CONSTRAINT people_job_pkey PRIMARY KEY (job_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactperm_userid_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
 
+ALTER TABLE ONLY people_job_category
+    ADD CONSTRAINT people_job_category_pkey PRIMARY KEY (category_id);
 
-CREATE CONSTRAINT TRIGGER "artifactperm_groupartifactid_fk" AFTER INSERT OR UPDATE ON "artifact_perm"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactperm_groupartifactid_fk" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+ALTER TABLE ONLY people_job_inventory
+    ADD CONSTRAINT people_job_inventory_pkey PRIMARY KEY (job_inventory_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactperm_groupartifactid_fk" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
+ALTER TABLE ONLY people_job_status
+    ADD CONSTRAINT people_job_status_pkey PRIMARY KEY (status_id);
 
-CREATE CONSTRAINT TRIGGER "artifactcategory_groupartifacti" AFTER INSERT OR UPDATE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactcategory_groupartifacti" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+ALTER TABLE ONLY people_skill
+    ADD CONSTRAINT people_skill_pkey PRIMARY KEY (skill_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactcategory_groupartifacti" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
+ALTER TABLE ONLY people_skill_inventory
+    ADD CONSTRAINT people_skill_inventory_pkey PRIMARY KEY (skill_inventory_id);
 
-CREATE CONSTRAINT TRIGGER "artifactcategory_autoassignto_f" AFTER INSERT OR UPDATE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactcategory_autoassignto_f" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
+ALTER TABLE ONLY people_skill_level
+    ADD CONSTRAINT people_skill_level_pkey PRIMARY KEY (skill_level_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactcategory_autoassignto_f" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
 
+ALTER TABLE ONLY people_skill_year
+    ADD CONSTRAINT people_skill_year_pkey PRIMARY KEY (skill_year_id);
 
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupartifactid_f" AFTER INSERT OR UPDATE ON "artifact_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupartifactid_f" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+ALTER TABLE ONLY project_assigned_to
+    ADD CONSTRAINT project_assigned_to_pkey PRIMARY KEY (project_assigned_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactgroup_groupartifactid_f" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
+ALTER TABLE ONLY project_dependencies
+    ADD CONSTRAINT project_dependencies_pkey PRIMARY KEY (project_depend_id);
 
-CREATE CONSTRAINT TRIGGER "artifact_groupartifactid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifact_groupartifactid_fk" AFTER DELETE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+ALTER TABLE ONLY project_group_list
+    ADD CONSTRAINT project_group_list_pkey PRIMARY KEY (group_project_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifact_groupartifactid_fk" AFTER UPDATE ON "artifact_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
+ALTER TABLE ONLY project_history
+    ADD CONSTRAINT project_history_pkey PRIMARY KEY (project_history_id);
 
-CREATE CONSTRAINT TRIGGER "artifact_statusid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
 
 
-CREATE CONSTRAINT TRIGGER "artifact_statusid_fk" AFTER DELETE ON "artifact_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
+ALTER TABLE ONLY project_metric
+    ADD CONSTRAINT project_metric_pkey PRIMARY KEY (ranking);
 
 
-CREATE CONSTRAINT TRIGGER "artifact_statusid_fk" AFTER UPDATE ON "artifact_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
 
+ALTER TABLE ONLY project_metric_tmp1
+    ADD CONSTRAINT project_metric_tmp1_pkey PRIMARY KEY (ranking);
 
-CREATE CONSTRAINT TRIGGER "artifact_categoryid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
 
 
-CREATE CONSTRAINT TRIGGER "artifact_categoryid_fk" AFTER DELETE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
+ALTER TABLE ONLY project_status
+    ADD CONSTRAINT project_status_pkey PRIMARY KEY (status_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifact_categoryid_fk" AFTER UPDATE ON "artifact_category"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
 
+ALTER TABLE ONLY project_task
+    ADD CONSTRAINT project_task_pkey PRIMARY KEY (project_task_id);
 
-CREATE CONSTRAINT TRIGGER "artifact_artifactgroupid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
 
 
-CREATE CONSTRAINT TRIGGER "artifact_artifactgroupid_fk" AFTER DELETE ON "artifact_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
+ALTER TABLE ONLY user_session
+    ADD CONSTRAINT session_pkey PRIMARY KEY (session_hash);
 
 
-CREATE CONSTRAINT TRIGGER "artifact_artifactgroupid_fk" AFTER UPDATE ON "artifact_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
 
+ALTER TABLE ONLY snippet
+    ADD CONSTRAINT snippet_pkey PRIMARY KEY (snippet_id);
 
-CREATE CONSTRAINT TRIGGER "artifact_submittedby_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifact_submittedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
+ALTER TABLE ONLY snippet_package
+    ADD CONSTRAINT snippet_package_pkey PRIMARY KEY (snippet_package_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifact_submittedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
 
+ALTER TABLE ONLY snippet_package_item
+    ADD CONSTRAINT snippet_package_item_pkey PRIMARY KEY (snippet_package_item_id);
 
-CREATE CONSTRAINT TRIGGER "artifact_assignedto_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifact_assignedto_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
+ALTER TABLE ONLY snippet_package_version
+    ADD CONSTRAINT snippet_package_version_pkey PRIMARY KEY (snippet_package_version_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifact_assignedto_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
 
+ALTER TABLE ONLY snippet_version
+    ADD CONSTRAINT snippet_version_pkey PRIMARY KEY (snippet_version_id);
 
-CREATE CONSTRAINT TRIGGER "artifact_resolutionid_fk" AFTER INSERT OR UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
 
 
-CREATE CONSTRAINT TRIGGER "artifact_resolutionid_fk" AFTER DELETE ON "artifact_resolution"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
+ALTER TABLE ONLY survey_question_types
+    ADD CONSTRAINT survey_question_types_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "artifact_resolutionid_fk" AFTER UPDATE ON "artifact_resolution"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
 
+ALTER TABLE ONLY survey_questions
+    ADD CONSTRAINT survey_questions_pkey PRIMARY KEY (question_id);
 
-CREATE CONSTRAINT TRIGGER "artifacthistory_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_history"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifacthistory_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+ALTER TABLE ONLY surveys
+    ADD CONSTRAINT surveys_pkey PRIMARY KEY (survey_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifacthistory_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
+ALTER TABLE ONLY trove_cat
+    ADD CONSTRAINT trove_cat_pkey PRIMARY KEY (trove_cat_id);
 
-CREATE CONSTRAINT TRIGGER "artifacthistory_modby_fk" AFTER INSERT OR UPDATE ON "artifact_history"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifacthistory_modby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
+ALTER TABLE ONLY trove_group_link
+    ADD CONSTRAINT trove_group_link_pkey PRIMARY KEY (trove_group_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifacthistory_modby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
 
+ALTER TABLE ONLY user_bookmarks
+    ADD CONSTRAINT user_bookmarks_pkey PRIMARY KEY (bookmark_id);
 
-CREATE CONSTRAINT TRIGGER "artifactfile_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactfile_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+ALTER TABLE ONLY user_diary
+    ADD CONSTRAINT user_diary_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactfile_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
+ALTER TABLE ONLY user_diary_monitor
+    ADD CONSTRAINT user_diary_monitor_pkey PRIMARY KEY (monitor_id);
 
-CREATE CONSTRAINT TRIGGER "artifactfile_submittedby_fk" AFTER INSERT OR UPDATE ON "artifact_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactfile_submittedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
+ALTER TABLE ONLY user_group
+    ADD CONSTRAINT user_group_pkey PRIMARY KEY (user_group_id);
 
 
-CREATE CONSTRAINT TRIGGER "artifactfile_submittedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
 
+ALTER TABLE ONLY user_metric
+    ADD CONSTRAINT user_metric_pkey PRIMARY KEY (ranking);
 
-CREATE CONSTRAINT TRIGGER "artifactmessage_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_message"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactmessage_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+ALTER TABLE ONLY user_metric0
+    ADD CONSTRAINT user_metric0_pkey PRIMARY KEY (ranking);
 
 
-CREATE CONSTRAINT TRIGGER "artifactmessage_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (user_id);
 
-CREATE CONSTRAINT TRIGGER "artifactmessage_submittedby_fk" AFTER INSERT OR UPDATE ON "artifact_message"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactmessage_submittedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
+ALTER TABLE ONLY prdb_dbs
+    ADD CONSTRAINT prdb_dbs_pkey PRIMARY KEY (dbid);
 
 
-CREATE CONSTRAINT TRIGGER "artifactmessage_submittedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
 
+ALTER TABLE ONLY prdb_types
+    ADD CONSTRAINT prdb_types_pkey PRIMARY KEY (dbtypeid);
 
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER INSERT OR UPDATE ON "artifact_monitor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER DELETE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+ALTER TABLE ONLY prweb_vhost
+    ADD CONSTRAINT prweb_vhost_pkey PRIMARY KEY (vhostid);
 
 
-CREATE CONSTRAINT TRIGGER "artifactmonitor_artifactid_fk" AFTER UPDATE ON "artifact"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
+ALTER TABLE ONLY artifact_group_list
+    ADD CONSTRAINT artifact_group_list_pkey PRIMARY KEY (group_artifact_id);
 
-CREATE TRIGGER "artifactgrouplist_insert_trig" AFTER INSERT ON "artifact_group_list"  FOR EACH ROW EXECUTE PROCEDURE "artifactgrouplist_insert_agg" ();
 
 
-CREATE TRIGGER "artifactgroup_update_trig" AFTER UPDATE ON "artifact"  FOR EACH ROW EXECUTE PROCEDURE "artifactgroup_update_agg" ();
+ALTER TABLE ONLY artifact_resolution
+    ADD CONSTRAINT artifact_resolution_pkey PRIMARY KEY (id);
 
 
-CREATE TRIGGER "forumgrouplist_insert_trig" AFTER INSERT ON "forum_group_list"  FOR EACH ROW EXECUTE PROCEDURE "forumgrouplist_insert_agg" ();
 
+ALTER TABLE ONLY artifact_perm
+    ADD CONSTRAINT artifact_perm_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "frsfile_releaseid_fk" AFTER INSERT OR UPDATE ON "frs_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
 
 
-CREATE CONSTRAINT TRIGGER "frsfile_releaseid_fk" AFTER DELETE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
+ALTER TABLE ONLY artifact_category
+    ADD CONSTRAINT artifact_category_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "frsfile_releaseid_fk" AFTER UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
 
+ALTER TABLE ONLY artifact_group
+    ADD CONSTRAINT artifact_group_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "frsfile_typeid_fk" AFTER INSERT OR UPDATE ON "frs_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
 
 
-CREATE CONSTRAINT TRIGGER "frsfile_typeid_fk" AFTER DELETE ON "frs_filetype"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
+ALTER TABLE ONLY artifact_status
+    ADD CONSTRAINT artifact_status_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "frsfile_typeid_fk" AFTER UPDATE ON "frs_filetype"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
 
+ALTER TABLE ONLY artifact
+    ADD CONSTRAINT artifact_pkey PRIMARY KEY (artifact_id);
 
-CREATE CONSTRAINT TRIGGER "frsfile_processorid_fk" AFTER INSERT OR UPDATE ON "frs_file"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
 
 
-CREATE CONSTRAINT TRIGGER "frsfile_processorid_fk" AFTER DELETE ON "frs_processor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
+ALTER TABLE ONLY artifact_history
+    ADD CONSTRAINT artifact_history_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "frsfile_processorid_fk" AFTER UPDATE ON "frs_processor"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
 
+ALTER TABLE ONLY artifact_file
+    ADD CONSTRAINT artifact_file_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "frspackage_groupid_fk" AFTER INSERT OR UPDATE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "frspackage_groupid_fk" AFTER DELETE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE ONLY artifact_message
+    ADD CONSTRAINT artifact_message_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "frspackage_groupid_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
 
+ALTER TABLE ONLY artifact_monitor
+    ADD CONSTRAINT artifact_monitor_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "frspackage_statusid_fk" AFTER INSERT OR UPDATE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
 
 
-CREATE CONSTRAINT TRIGGER "frspackage_statusid_fk" AFTER DELETE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
+ALTER TABLE ONLY artifact_canned_responses
+    ADD CONSTRAINT artifact_canned_responses_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "frspackage_statusid_fk" AFTER UPDATE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
 
+ALTER TABLE ONLY massmail_queue
+    ADD CONSTRAINT massmail_queue_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "frsrelease_packageid_fk" AFTER INSERT OR UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
 
 
-CREATE CONSTRAINT TRIGGER "frsrelease_packageid_fk" AFTER DELETE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
+ALTER TABLE ONLY trove_treesums
+    ADD CONSTRAINT trove_treesums_pkey PRIMARY KEY (trove_treesums_id);
 
 
-CREATE CONSTRAINT TRIGGER "frsrelease_packageid_fk" AFTER UPDATE ON "frs_package"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
 
+ALTER TABLE ONLY supported_languages
+    ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id);
 
-CREATE CONSTRAINT TRIGGER "frsrelease_statusid_fk" AFTER INSERT OR UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
 
 
-CREATE CONSTRAINT TRIGGER "frsrelease_statusid_fk" AFTER DELETE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
+ALTER TABLE ONLY skills_data_types
+    ADD CONSTRAINT skills_data_types_pkey PRIMARY KEY (type_id);
 
 
-CREATE CONSTRAINT TRIGGER "frsrelease_statusid_fk" AFTER UPDATE ON "frs_status"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
 
+ALTER TABLE ONLY skills_data
+    ADD CONSTRAINT skills_data_pkey PRIMARY KEY (skills_data_id);
 
-CREATE CONSTRAINT TRIGGER "frsrelease_releasedby_fk" AFTER INSERT OR UPDATE ON "frs_release"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "frsrelease_releasedby_fk" AFTER DELETE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
+ALTER TABLE ONLY plugins
+    ADD CONSTRAINT plugins_pkey PRIMARY KEY (plugin_id);
 
 
-CREATE CONSTRAINT TRIGGER "frsrelease_releasedby_fk" AFTER UPDATE ON "users"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
 
+ALTER TABLE ONLY group_plugin
+    ADD CONSTRAINT group_plugin_pkey PRIMARY KEY (group_plugin_id);
 
-CREATE CONSTRAINT TRIGGER "tgl_group_id_fk" AFTER INSERT OR UPDATE ON "trove_group_link"  FROM "groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('tgl_group_id_fk', 'trove_group_link', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "tgl_group_id_fk" AFTER DELETE ON "groups"  FROM "trove_group_link" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('tgl_group_id_fk', 'trove_group_link', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE ONLY user_plugin
+    ADD CONSTRAINT user_plugin_pkey PRIMARY KEY (user_plugin_id);
 
 
-CREATE CONSTRAINT TRIGGER "tgl_group_id_fk" AFTER UPDATE ON "groups"  FROM "trove_group_link" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('tgl_group_id_fk', 'trove_group_link', 'groups', 'FULL', 'group_id', 'group_id');
 
+ALTER TABLE ONLY country_code
+    ADD CONSTRAINT country_code_pkey PRIMARY KEY (ccode);
 
-CREATE CONSTRAINT TRIGGER "tgl_cat_id_fk" AFTER INSERT OR UPDATE ON "trove_group_link"  FROM "trove_cat" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('tgl_cat_id_fk', 'trove_group_link', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
 
 
-CREATE CONSTRAINT TRIGGER "tgl_cat_id_fk" AFTER DELETE ON "trove_cat"  FROM "trove_group_link" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('tgl_cat_id_fk', 'trove_group_link', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+ALTER TABLE ONLY licenses
+    ADD CONSTRAINT licenses_license_id_key UNIQUE (license_id);
 
 
-CREATE CONSTRAINT TRIGGER "tgl_cat_id_fk" AFTER UPDATE ON "trove_cat"  FROM "trove_group_link" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('tgl_cat_id_fk', 'trove_group_link', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
 
+ALTER TABLE ONLY user_type
+    ADD CONSTRAINT user_type_type_id_key UNIQUE (type_id);
 
-CREATE CONSTRAINT TRIGGER "trove_agg_cat_id_fk" AFTER INSERT OR UPDATE ON "trove_agg"  FROM "trove_cat" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('trove_agg_cat_id_fk', 'trove_agg', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
 
 
-CREATE CONSTRAINT TRIGGER "trove_agg_cat_id_fk" AFTER DELETE ON "trove_cat"  FROM "trove_agg" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('trove_agg_cat_id_fk', 'trove_agg', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+ALTER TABLE ONLY role
+    ADD CONSTRAINT role_role_id_key UNIQUE (role_id);
 
 
-CREATE CONSTRAINT TRIGGER "trove_agg_cat_id_fk" AFTER UPDATE ON "trove_cat"  FROM "trove_agg" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('trove_agg_cat_id_fk', 'trove_agg', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
 
+ALTER TABLE ONLY project_perm
+    ADD CONSTRAINT project_perm_id_key UNIQUE (id);
 
-CREATE CONSTRAINT TRIGGER "trove_agg_group_id_fk" AFTER INSERT OR UPDATE ON "trove_agg"  FROM "groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('trove_agg_group_id_fk', 'trove_agg', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "trove_agg_group_id_fk" AFTER DELETE ON "groups"  FROM "trove_agg" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('trove_agg_group_id_fk', 'trove_agg', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE ONLY forum_perm
+    ADD CONSTRAINT forum_perm_id_key UNIQUE (id);
 
 
-CREATE CONSTRAINT TRIGGER "trove_agg_group_id_fk" AFTER UPDATE ON "groups"  FROM "trove_agg" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('trove_agg_group_id_fk', 'trove_agg', 'groups', 'FULL', 'group_id', 'group_id');
 
+ALTER TABLE ONLY artifact_group_selection_box_list
+    ADD CONSTRAINT artifact_group_selection_box_list_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "trove_treesums_cat_id_fk" AFTER INSERT OR UPDATE ON "trove_treesums"  FROM "trove_cat" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('trove_treesums_cat_id_fk', 'trove_treesums', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
 
 
-CREATE CONSTRAINT TRIGGER "trove_treesums_cat_id_fk" AFTER DELETE ON "trove_cat"  FROM "trove_treesums" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('trove_treesums_cat_id_fk', 'trove_treesums', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+ALTER TABLE ONLY artifact_group_selection_box_options
+    ADD CONSTRAINT artifact_group_selection_box_options_pkey PRIMARY KEY (id);
 
 
-CREATE CONSTRAINT TRIGGER "trove_treesums_cat_id_fk" AFTER UPDATE ON "trove_cat"  FROM "trove_treesums" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('trove_treesums_cat_id_fk', 'trove_treesums', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
 
+ALTER TABLE ONLY artifact_extra_field_data
+    ADD CONSTRAINT artifact_extra_field_data_pkey PRIMARY KEY (id);
 
-CREATE CONSTRAINT TRIGGER "users_languageid_fk" AFTER INSERT OR UPDATE ON "users"  FROM "supported_languages" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
 
 
-CREATE CONSTRAINT TRIGGER "users_languageid_fk" AFTER DELETE ON "supported_languages"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT groups_license FOREIGN KEY (license) REFERENCES licenses(license_id) MATCH FULL;
 
 
-CREATE CONSTRAINT TRIGGER "users_languageid_fk" AFTER UPDATE ON "supported_languages"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
 
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_typeid FOREIGN KEY (type_id) REFERENCES user_type(type_id) MATCH FULL;
 
-CREATE CONSTRAINT TRIGGER "docdata_languageid_fk" AFTER INSERT OR UPDATE ON "doc_data"  FROM "supported_languages" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('docdata_languageid_fk', 'doc_data', 'supported_languages', 'FULL', 'language_id', 'language_id');
 
 
-CREATE CONSTRAINT TRIGGER "docdata_languageid_fk" AFTER DELETE ON "supported_languages"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('docdata_languageid_fk', 'doc_data', 'supported_languages', 'FULL', 'language_id', 'language_id');
+ALTER TABLE ONLY role
+    ADD CONSTRAINT "$1" FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
 
 
-CREATE CONSTRAINT TRIGGER "docdata_languageid_fk" AFTER UPDATE ON "supported_languages"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('docdata_languageid_fk', 'doc_data', 'supported_languages', 'FULL', 'language_id', 'language_id');
 
+ALTER TABLE ONLY project_perm
+    ADD CONSTRAINT "$1" FOREIGN KEY (group_project_id) REFERENCES project_group_list(group_project_id) ON DELETE CASCADE;
 
-CREATE CONSTRAINT TRIGGER "forumgrouplist_groupid" AFTER INSERT OR UPDATE ON "forum_group_list"  FROM "groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forumgrouplist_groupid', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "forumgrouplist_groupid" AFTER DELETE ON "groups"  FROM "forum_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('forumgrouplist_groupid', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+ALTER TABLE ONLY project_perm
+    ADD CONSTRAINT "$2" FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
 
 
-CREATE CONSTRAINT TRIGGER "forumgrouplist_groupid" AFTER UPDATE ON "groups"  FROM "forum_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forumgrouplist_groupid', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
+ALTER TABLE ONLY forum_perm
+    ADD CONSTRAINT "$1" FOREIGN KEY (group_forum_id) REFERENCES forum_group_list(group_forum_id) ON DELETE CASCADE;
 
-CREATE CONSTRAINT TRIGGER "forum_groupforumid" AFTER INSERT OR UPDATE ON "forum"  FROM "forum_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_groupforumid', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
 
-CREATE CONSTRAINT TRIGGER "forum_groupforumid" AFTER DELETE ON "forum_group_list"  FROM "forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('forum_groupforumid', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
+ALTER TABLE ONLY forum_perm
+    ADD CONSTRAINT "$2" FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
 
 
-CREATE CONSTRAINT TRIGGER "forum_groupforumid" AFTER UPDATE ON "forum_group_list"  FROM "forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_groupforumid', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
+ALTER TABLE ONLY role_setting
+    ADD CONSTRAINT "$1" FOREIGN KEY (role_id) REFERENCES role(role_id) ON DELETE CASCADE;
 
-CREATE CONSTRAINT TRIGGER "forum_userid" AFTER INSERT OR UPDATE ON "forum"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('forum_userid', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "forum_userid" AFTER DELETE ON "users"  FROM "forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('forum_userid', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+ALTER TABLE ONLY user_group
+    ADD CONSTRAINT usergroup_roleid FOREIGN KEY (role_id) REFERENCES role(role_id) MATCH FULL;
 
 
-CREATE CONSTRAINT TRIGGER "forum_userid" AFTER UPDATE ON "users"  FROM "forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('forum_userid', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
+CREATE CONSTRAINT TRIGGER user_group_user_id_fk
+    AFTER INSERT OR UPDATE ON user_group
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "skills_data"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'skills_data', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "users"  FROM "skills_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'skills_data', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
+CREATE CONSTRAINT TRIGGER user_group_user_id_fk
+    AFTER DELETE ON users
+    FROM user_group
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "users"  FROM "skills_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'skills_data', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
 
+CREATE CONSTRAINT TRIGGER user_group_user_id_fk
+    AFTER UPDATE ON users
+    FROM user_group
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "skills_data"  FROM "skills_data_types" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'skills_data', 'skills_data_types', 'UNSPECIFIED', 'type', 'type_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "skills_data_types"  FROM "skills_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'skills_data', 'skills_data_types', 'UNSPECIFIED', 'type', 'type_id');
+CREATE CONSTRAINT TRIGGER user_group_group_id_fk
+    AFTER INSERT OR UPDATE ON user_group
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "skills_data_types"  FROM "skills_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'skills_data', 'skills_data_types', 'UNSPECIFIED', 'type', 'type_id');
 
+CREATE CONSTRAINT TRIGGER user_group_group_id_fk
+    AFTER DELETE ON groups
+    FROM user_group
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
 
-CREATE CONSTRAINT TRIGGER "projecttask_groupprojectid_fk" AFTER INSERT OR UPDATE ON "project_task"  FROM "project_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projecttask_groupprojectid_fk', 'project_task', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
 
-CREATE CONSTRAINT TRIGGER "projecttask_groupprojectid_fk" AFTER DELETE ON "project_group_list"  FROM "project_task" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projecttask_groupprojectid_fk', 'project_task', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+CREATE CONSTRAINT TRIGGER user_group_group_id_fk
+    AFTER UPDATE ON groups
+    FROM user_group
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('user_group_group_id_fk', 'user_group', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "projecttask_groupprojectid_fk" AFTER UPDATE ON "project_group_list"  FROM "project_task" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projecttask_groupprojectid_fk', 'project_task', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
+CREATE CONSTRAINT TRIGGER forum_posted_by_fk
+    AFTER INSERT OR UPDATE ON forum
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "projcat_projgroupid_fk" AFTER INSERT OR UPDATE ON "project_category"  FROM "project_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projcat_projgroupid_fk', 'project_category', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
 
-CREATE CONSTRAINT TRIGGER "projcat_projgroupid_fk" AFTER DELETE ON "project_group_list"  FROM "project_category" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projcat_projgroupid_fk', 'project_category', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+CREATE CONSTRAINT TRIGGER forum_posted_by_fk
+    AFTER DELETE ON users
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "projcat_projgroupid_fk" AFTER UPDATE ON "project_group_list"  FROM "project_category" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projcat_projgroupid_fk', 'project_category', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
+CREATE CONSTRAINT TRIGGER forum_posted_by_fk
+    AFTER UPDATE ON users
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "project_task"  FROM "project_category" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'project_task', 'project_category', 'UNSPECIFIED', 'category_id', 'category_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "project_category"  FROM "project_task" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'project_task', 'project_category', 'UNSPECIFIED', 'category_id', 'category_id');
+CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
+    AFTER INSERT OR UPDATE ON forum
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "project_category"  FROM "project_task" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'project_task', 'project_category', 'UNSPECIFIED', 'category_id', 'category_id');
 
+CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
+    AFTER DELETE ON forum_group_list
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
-CREATE CONSTRAINT TRIGGER "projtaskartifact_projtaskid_fk" AFTER INSERT OR UPDATE ON "project_task_artifact"  FROM "project_task" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projtaskartifact_projtaskid_fk', 'project_task_artifact', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
 
 
-CREATE CONSTRAINT TRIGGER "projtaskartifact_projtaskid_fk" AFTER DELETE ON "project_task"  FROM "project_task_artifact" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projtaskartifact_projtaskid_fk', 'project_task_artifact', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
+    AFTER UPDATE ON forum_group_list
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
 
-CREATE CONSTRAINT TRIGGER "projtaskartifact_projtaskid_fk" AFTER UPDATE ON "project_task"  FROM "project_task_artifact" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projtaskartifact_projtaskid_fk', 'project_task_artifact', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
 
+CREATE CONSTRAINT TRIGGER forum_group_list_group_id_fk
+    AFTER INSERT OR UPDATE ON forum_group_list
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
-CREATE CONSTRAINT TRIGGER "projtaskartifact_artifactid_fk" AFTER INSERT OR UPDATE ON "project_task_artifact"  FROM "artifact" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projtaskartifact_artifactid_fk', 'project_task_artifact', 'artifact', 'UNSPECIFIED', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "projtaskartifact_artifactid_fk" AFTER DELETE ON "artifact"  FROM "project_task_artifact" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projtaskartifact_artifactid_fk', 'project_task_artifact', 'artifact', 'UNSPECIFIED', 'artifact_id', 'artifact_id');
+CREATE CONSTRAINT TRIGGER forum_group_list_group_id_fk
+    AFTER DELETE ON groups
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "projtaskartifact_artifactid_fk" AFTER UPDATE ON "artifact"  FROM "project_task_artifact" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projtaskartifact_artifactid_fk', 'project_task_artifact', 'artifact', 'UNSPECIFIED', 'artifact_id', 'artifact_id');
 
+CREATE CONSTRAINT TRIGGER forum_group_list_group_id_fk
+    AFTER UPDATE ON groups
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_group_list_group_id_fk', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
-CREATE CONSTRAINT TRIGGER "projgroupforum_projgroupid_fk" AFTER INSERT OR UPDATE ON "project_group_forum"  FROM "project_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projgroupforum_projgroupid_fk', 'project_group_forum', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupforum_projgroupid_fk" AFTER DELETE ON "project_group_list"  FROM "project_group_forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projgroupforum_projgroupid_fk', 'project_group_forum', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+CREATE CONSTRAINT TRIGGER forum_posted_by_fk
+    AFTER INSERT OR UPDATE ON forum
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupforum_projgroupid_fk" AFTER UPDATE ON "project_group_list"  FROM "project_group_forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projgroupforum_projgroupid_fk', 'project_group_forum', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
+CREATE CONSTRAINT TRIGGER forum_posted_by_fk
+    AFTER DELETE ON users
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "projgroupforum_groupforumid_fk" AFTER INSERT OR UPDATE ON "project_group_forum"  FROM "forum_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projgroupforum_groupforumid_fk', 'project_group_forum', 'forum_group_list', 'UNSPECIFIED', 'group_forum_id', 'group_forum_id');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupforum_groupforumid_fk" AFTER DELETE ON "forum_group_list"  FROM "project_group_forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projgroupforum_groupforumid_fk', 'project_group_forum', 'forum_group_list', 'UNSPECIFIED', 'group_forum_id', 'group_forum_id');
+CREATE CONSTRAINT TRIGGER forum_posted_by_fk
+    AFTER UPDATE ON users
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_posted_by_fk', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupforum_groupforumid_fk" AFTER UPDATE ON "forum_group_list"  FROM "project_group_forum" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projgroupforum_groupforumid_fk', 'project_group_forum', 'forum_group_list', 'UNSPECIFIED', 'group_forum_id', 'group_forum_id');
 
+CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
+    AFTER INSERT OR UPDATE ON forum
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
-CREATE CONSTRAINT TRIGGER "projgroupdoccat_projgroupid_fk" AFTER INSERT OR UPDATE ON "project_group_doccat"  FROM "project_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projgroupdoccat_projgroupid_fk', 'project_group_doccat', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupdoccat_projgroupid_fk" AFTER DELETE ON "project_group_list"  FROM "project_group_doccat" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projgroupdoccat_projgroupid_fk', 'project_group_doccat', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
+    AFTER DELETE ON forum_group_list
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupdoccat_projgroupid_fk" AFTER UPDATE ON "project_group_list"  FROM "project_group_doccat" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projgroupdoccat_projgroupid_fk', 'project_group_doccat', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
+CREATE CONSTRAINT TRIGGER forum_group_forum_id_fk
+    AFTER UPDATE ON forum_group_list
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_group_forum_id_fk', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
 
-CREATE CONSTRAINT TRIGGER "projgroupdoccat_docgroupid_fk" AFTER INSERT OR UPDATE ON "project_group_doccat"  FROM "doc_groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projgroupdoccat_docgroupid_fk', 'project_group_doccat', 'doc_groups', 'UNSPECIFIED', 'doc_group_id', 'doc_group');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupdoccat_docgroupid_fk" AFTER DELETE ON "doc_groups"  FROM "project_group_doccat" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('projgroupdoccat_docgroupid_fk', 'project_group_doccat', 'doc_groups', 'UNSPECIFIED', 'doc_group_id', 'doc_group');
+CREATE CONSTRAINT TRIGGER project_group_list_group_id_fk
+    AFTER INSERT OR UPDATE ON project_group_list
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "projgroupdoccat_docgroupid_fk" AFTER UPDATE ON "doc_groups"  FROM "project_group_doccat" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('projgroupdoccat_docgroupid_fk', 'project_group_doccat', 'doc_groups', 'UNSPECIFIED', 'doc_group_id', 'doc_group');
 
+CREATE CONSTRAINT TRIGGER project_group_list_group_id_fk
+    AFTER DELETE ON groups
+    FROM project_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "project_messages"  FROM "project_task" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'project_messages', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "project_task"  FROM "project_messages" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('<unnamed>', 'project_messages', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+CREATE CONSTRAINT TRIGGER project_group_list_group_id_fk
+    AFTER UPDATE ON groups
+    FROM project_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "project_task"  FROM "project_messages" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'project_messages', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
 
+CREATE CONSTRAINT TRIGGER project_task_created_by_fk
+    AFTER INSERT OR UPDATE ON project_task
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER INSERT OR UPDATE ON "project_messages"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('<unnamed>', 'project_messages', 'users', 'UNSPECIFIED', 'posted_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "users"  FROM "project_messages" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('<unnamed>', 'project_messages', 'users', 'UNSPECIFIED', 'posted_by', 'user_id');
+CREATE CONSTRAINT TRIGGER project_task_created_by_fk
+    AFTER DELETE ON users
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "users"  FROM "project_messages" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'project_messages', 'users', 'UNSPECIFIED', 'posted_by', 'user_id');
 
+CREATE CONSTRAINT TRIGGER project_task_created_by_fk
+    AFTER UPDATE ON users
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');
 
-CREATE TRIGGER "projtask_update_depend_trig" AFTER UPDATE ON "project_task"  FOR EACH ROW EXECUTE PROCEDURE "projtask_update_depend" ();
 
 
-CREATE TRIGGER "projtask_insert_depend_trig" BEFORE INSERT OR UPDATE ON "project_task"  FOR EACH ROW EXECUTE PROCEDURE "projtask_insert_depend" ();
+CREATE CONSTRAINT TRIGGER project_task_status_id_fk
+    AFTER INSERT OR UPDATE ON project_task
+    FROM project_status
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('project_task_status_id_fk', 'project_task', 'project_status', 'FULL', 'status_id', 'status_id');
 
 
-CREATE CONSTRAINT TRIGGER "docdata_groupid" AFTER INSERT OR UPDATE ON "doc_data"  FROM "groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('docdata_groupid', 'doc_data', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
 
+CREATE CONSTRAINT TRIGGER project_task_status_id_fk
+    AFTER DELETE ON project_status
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('project_task_status_id_fk', 'project_task', 'project_status', 'FULL', 'status_id', 'status_id');
 
-CREATE CONSTRAINT TRIGGER "docdata_groupid" AFTER DELETE ON "groups"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('docdata_groupid', 'doc_data', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "docdata_groupid" AFTER UPDATE ON "groups"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('docdata_groupid', 'doc_data', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+CREATE CONSTRAINT TRIGGER project_task_status_id_fk
+    AFTER UPDATE ON project_status
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('project_task_status_id_fk', 'project_task', 'project_status', 'FULL', 'status_id', 'status_id');
 
 
-CREATE CONSTRAINT TRIGGER "docdata_docgroupid" AFTER INSERT OR UPDATE ON "doc_data"  FROM "doc_groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('docdata_docgroupid', 'doc_data', 'doc_groups', 'UNSPECIFIED', 'doc_group', 'doc_group');
 
+CREATE CONSTRAINT TRIGGER users_languageid_fk
+    AFTER INSERT OR UPDATE ON users
+    FROM supported_languages
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
 
-CREATE CONSTRAINT TRIGGER "docdata_docgroupid" AFTER DELETE ON "doc_groups"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('docdata_docgroupid', 'doc_data', 'doc_groups', 'UNSPECIFIED', 'doc_group', 'doc_group');
 
 
-CREATE CONSTRAINT TRIGGER "docdata_docgroupid" AFTER UPDATE ON "doc_groups"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('docdata_docgroupid', 'doc_data', 'doc_groups', 'UNSPECIFIED', 'doc_group', 'doc_group');
+CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
+    AFTER INSERT OR UPDATE ON artifact_monitor
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "docdata_stateid" AFTER INSERT OR UPDATE ON "doc_data"  FROM "doc_states" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('docdata_stateid', 'doc_data', 'doc_states', 'UNSPECIFIED', 'stateid', 'stateid');
 
+CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
+    AFTER DELETE ON artifact
+    FROM artifact_monitor
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
-CREATE CONSTRAINT TRIGGER "docdata_stateid" AFTER DELETE ON "doc_states"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('docdata_stateid', 'doc_data', 'doc_states', 'UNSPECIFIED', 'stateid', 'stateid');
 
 
-CREATE CONSTRAINT TRIGGER "docdata_stateid" AFTER UPDATE ON "doc_states"  FROM "doc_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('docdata_stateid', 'doc_data', 'doc_states', 'UNSPECIFIED', 'stateid', 'stateid');
+CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
+    AFTER UPDATE ON artifact
+    FROM artifact_monitor
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "docgroups_groupid" AFTER INSERT OR UPDATE ON "doc_groups"  FROM "groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
 
+CREATE CONSTRAINT TRIGGER artifactgroup_groupid_fk
+    AFTER INSERT OR UPDATE ON artifact_group_list
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
-CREATE CONSTRAINT TRIGGER "docgroups_groupid" AFTER DELETE ON "groups"  FROM "doc_groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_cascade_del" ('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "docgroups_groupid" AFTER UPDATE ON "groups"  FROM "doc_groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+CREATE CONSTRAINT TRIGGER artifactgroup_groupid_fk
+    AFTER DELETE ON groups
+    FROM artifact_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE TRIGGER "frs_file_insert_trig" AFTER INSERT ON "frs_file"  FOR EACH ROW EXECUTE PROCEDURE "frs_dlstats_filetotal_insert_ag" ();
 
+CREATE CONSTRAINT TRIGGER artifactgroup_groupid_fk
+    AFTER UPDATE ON groups
+    FROM artifact_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactgroup_groupid_fk', 'artifact_group_list', 'groups', 'FULL', 'group_id', 'group_id');
 
-CREATE CONSTRAINT TRIGGER "group_plugin_group_id_fk" AFTER INSERT OR UPDATE ON "group_plugin"  FROM "groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
 
 
-CREATE CONSTRAINT TRIGGER "group_plugin_group_id_fk" AFTER DELETE ON "groups"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
+CREATE CONSTRAINT TRIGGER artifactperm_userid_fk
+    AFTER INSERT OR UPDATE ON artifact_perm
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "group_plugin_group_id_fk" AFTER UPDATE ON "groups"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
 
+CREATE CONSTRAINT TRIGGER artifactperm_userid_fk
+    AFTER DELETE ON users
+    FROM artifact_perm
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "group_plugin_plugin_id_fk" AFTER INSERT OR UPDATE ON "group_plugin"  FROM "plugins" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
 
 
-CREATE CONSTRAINT TRIGGER "group_plugin_plugin_id_fk" AFTER DELETE ON "plugins"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+CREATE CONSTRAINT TRIGGER artifactperm_userid_fk
+    AFTER UPDATE ON users
+    FROM artifact_perm
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactperm_userid_fk', 'artifact_perm', 'users', 'FULL', 'user_id', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "group_plugin_plugin_id_fk" AFTER UPDATE ON "plugins"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
 
+CREATE CONSTRAINT TRIGGER artifactperm_groupartifactid_fk
+    AFTER INSERT OR UPDATE ON artifact_perm
+    FROM artifact_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
-CREATE CONSTRAINT TRIGGER "user_plugin_user_id_fk" AFTER INSERT OR UPDATE ON "user_plugin"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "user_plugin_user_id_fk" AFTER DELETE ON "users"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
+CREATE CONSTRAINT TRIGGER artifactperm_groupartifactid_fk
+    AFTER DELETE ON artifact_group_list
+    FROM artifact_perm
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "user_plugin_user_id_fk" AFTER UPDATE ON "users"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
 
+CREATE CONSTRAINT TRIGGER artifactperm_groupartifactid_fk
+    AFTER UPDATE ON artifact_group_list
+    FROM artifact_perm
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactperm_groupartifactid_fk', 'artifact_perm', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
-CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER INSERT OR UPDATE ON "user_plugin"  FROM "plugins" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
 
 
-CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER DELETE ON "plugins"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+CREATE CONSTRAINT TRIGGER artifactcategory_groupartifacti
+    AFTER INSERT OR UPDATE ON artifact_category
+    FROM artifact_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER UPDATE ON "plugins"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
 
+CREATE CONSTRAINT TRIGGER artifactcategory_groupartifacti
+    AFTER DELETE ON artifact_group_list
+    FROM artifact_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
-CREATE TRIGGER "surveys_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "surveys"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('surv');
 
 
-CREATE TRIGGER "mail_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "mail_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('mail');
+CREATE CONSTRAINT TRIGGER artifactcategory_groupartifacti
+    AFTER UPDATE ON artifact_group_list
+    FROM artifact_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE TRIGGER "fmsg_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fmsg');
 
+CREATE CONSTRAINT TRIGGER artifactcategory_autoassignto_f
+    AFTER INSERT OR UPDATE ON artifact_category
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
 
-CREATE TRIGGER "fora_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fora');
 
 
-CREATE CONSTRAINT TRIGGER "users_themeid" AFTER INSERT OR UPDATE ON "users"  FROM "themes" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
+CREATE CONSTRAINT TRIGGER artifactcategory_autoassignto_f
+    AFTER DELETE ON users
+    FROM artifact_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
 
 
-CREATE CONSTRAINT TRIGGER "users_themeid" AFTER DELETE ON "themes"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
 
+CREATE CONSTRAINT TRIGGER artifactcategory_autoassignto_f
+    AFTER UPDATE ON users
+    FROM artifact_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
 
-CREATE CONSTRAINT TRIGGER "users_themeid" AFTER UPDATE ON "themes"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
 
 
-CREATE CONSTRAINT TRIGGER "users_ccode" AFTER INSERT OR UPDATE ON "users"  FROM "country_code" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
+CREATE CONSTRAINT TRIGGER artifactgroup_groupartifactid_f
+    AFTER INSERT OR UPDATE ON artifact_group
+    FROM artifact_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
 
-CREATE CONSTRAINT TRIGGER "users_ccode" AFTER DELETE ON "country_code"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
 
+CREATE CONSTRAINT TRIGGER artifactgroup_groupartifactid_f
+    AFTER DELETE ON artifact_group_list
+    FROM artifact_group
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
 
-CREATE CONSTRAINT TRIGGER "users_ccode" AFTER UPDATE ON "country_code"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
+
+
+CREATE CONSTRAINT TRIGGER artifactgroup_groupartifactid_f
+    AFTER UPDATE ON artifact_group_list
+    FROM artifact_group
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_groupartifactid_fk
+    AFTER INSERT OR UPDATE ON artifact
+    FROM artifact_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_groupartifactid_fk
+    AFTER DELETE ON artifact_group_list
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_groupartifactid_fk
+    AFTER UPDATE ON artifact_group_list
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_groupartifactid_fk', 'artifact', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_statusid_fk
+    AFTER INSERT OR UPDATE ON artifact
+    FROM artifact_status
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_statusid_fk
+    AFTER DELETE ON artifact_status
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_statusid_fk
+    AFTER UPDATE ON artifact_status
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_statusid_fk', 'artifact', 'artifact_status', 'FULL', 'status_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_categoryid_fk
+    AFTER INSERT OR UPDATE ON artifact
+    FROM artifact_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_categoryid_fk
+    AFTER DELETE ON artifact_category
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_categoryid_fk
+    AFTER UPDATE ON artifact_category
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_artifactgroupid_fk
+    AFTER INSERT OR UPDATE ON artifact
+    FROM artifact_group
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_artifactgroupid_fk
+    AFTER DELETE ON artifact_group
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_artifactgroupid_fk
+    AFTER UPDATE ON artifact_group
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_submittedby_fk
+    AFTER INSERT OR UPDATE ON artifact
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_submittedby_fk
+    AFTER DELETE ON users
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_submittedby_fk
+    AFTER UPDATE ON users
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_submittedby_fk', 'artifact', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_assignedto_fk
+    AFTER INSERT OR UPDATE ON artifact
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_assignedto_fk
+    AFTER DELETE ON users
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_assignedto_fk
+    AFTER UPDATE ON users
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_resolutionid_fk
+    AFTER INSERT OR UPDATE ON artifact
+    FROM artifact_resolution
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_resolutionid_fk
+    AFTER DELETE ON artifact_resolution
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifact_resolutionid_fk
+    AFTER UPDATE ON artifact_resolution
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifacthistory_artifactid_fk
+    AFTER INSERT OR UPDATE ON artifact_history
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifacthistory_artifactid_fk
+    AFTER DELETE ON artifact
+    FROM artifact_history
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifacthistory_artifactid_fk
+    AFTER UPDATE ON artifact
+    FROM artifact_history
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifacthistory_artifactid_fk', 'artifact_history', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifacthistory_modby_fk
+    AFTER INSERT OR UPDATE ON artifact_history
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifacthistory_modby_fk
+    AFTER DELETE ON users
+    FROM artifact_history
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifacthistory_modby_fk
+    AFTER UPDATE ON users
+    FROM artifact_history
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifacthistory_modby_fk', 'artifact_history', 'users', 'FULL', 'mod_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactfile_artifactid_fk
+    AFTER INSERT OR UPDATE ON artifact_file
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactfile_artifactid_fk
+    AFTER DELETE ON artifact
+    FROM artifact_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactfile_artifactid_fk
+    AFTER UPDATE ON artifact
+    FROM artifact_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactfile_artifactid_fk', 'artifact_file', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactfile_submittedby_fk
+    AFTER INSERT OR UPDATE ON artifact_file
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactfile_submittedby_fk
+    AFTER DELETE ON users
+    FROM artifact_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactfile_submittedby_fk
+    AFTER UPDATE ON users
+    FROM artifact_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactfile_submittedby_fk', 'artifact_file', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmessage_artifactid_fk
+    AFTER INSERT OR UPDATE ON artifact_message
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmessage_artifactid_fk
+    AFTER DELETE ON artifact
+    FROM artifact_message
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmessage_artifactid_fk
+    AFTER UPDATE ON artifact
+    FROM artifact_message
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactmessage_artifactid_fk', 'artifact_message', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmessage_submittedby_fk
+    AFTER INSERT OR UPDATE ON artifact_message
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmessage_submittedby_fk
+    AFTER DELETE ON users
+    FROM artifact_message
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmessage_submittedby_fk
+    AFTER UPDATE ON users
+    FROM artifact_message
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactmessage_submittedby_fk', 'artifact_message', 'users', 'FULL', 'submitted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
+    AFTER INSERT OR UPDATE ON artifact_monitor
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
+    AFTER DELETE ON artifact
+    FROM artifact_monitor
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER artifactmonitor_artifactid_fk
+    AFTER UPDATE ON artifact
+    FROM artifact_monitor
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactmonitor_artifactid_fk', 'artifact_monitor', 'artifact', 'FULL', 'artifact_id', 'artifact_id');
+
+
+
+CREATE TRIGGER artifactgrouplist_insert_trig
+    AFTER INSERT ON artifact_group_list
+    FOR EACH ROW
+    EXECUTE PROCEDURE artifactgrouplist_insert_agg();
+
+
+
+CREATE TRIGGER artifactgroup_update_trig
+    AFTER UPDATE ON artifact
+    FOR EACH ROW
+    EXECUTE PROCEDURE artifactgroup_update_agg();
+
+
+
+CREATE TRIGGER forumgrouplist_insert_trig
+    AFTER INSERT ON forum_group_list
+    FOR EACH ROW
+    EXECUTE PROCEDURE forumgrouplist_insert_agg();
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_releaseid_fk
+    AFTER INSERT OR UPDATE ON frs_file
+    FROM frs_release
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_releaseid_fk
+    AFTER DELETE ON frs_release
+    FROM frs_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_releaseid_fk
+    AFTER UPDATE ON frs_release
+    FROM frs_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frsfile_releaseid_fk', 'frs_file', 'frs_release', 'FULL', 'release_id', 'release_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_typeid_fk
+    AFTER INSERT OR UPDATE ON frs_file
+    FROM frs_filetype
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_typeid_fk
+    AFTER DELETE ON frs_filetype
+    FROM frs_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_typeid_fk
+    AFTER UPDATE ON frs_filetype
+    FROM frs_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frsfile_typeid_fk', 'frs_file', 'frs_filetype', 'FULL', 'type_id', 'type_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_processorid_fk
+    AFTER INSERT OR UPDATE ON frs_file
+    FROM frs_processor
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_processorid_fk
+    AFTER DELETE ON frs_processor
+    FROM frs_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsfile_processorid_fk
+    AFTER UPDATE ON frs_processor
+    FROM frs_file
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frsfile_processorid_fk', 'frs_file', 'frs_processor', 'FULL', 'processor_id', 'processor_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frspackage_groupid_fk
+    AFTER INSERT OR UPDATE ON frs_package
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frspackage_groupid_fk
+    AFTER DELETE ON groups
+    FROM frs_package
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frspackage_groupid_fk
+    AFTER UPDATE ON groups
+    FROM frs_package
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frspackage_groupid_fk', 'frs_package', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frspackage_statusid_fk
+    AFTER INSERT OR UPDATE ON frs_package
+    FROM frs_status
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frspackage_statusid_fk
+    AFTER DELETE ON frs_status
+    FROM frs_package
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frspackage_statusid_fk
+    AFTER UPDATE ON frs_status
+    FROM frs_package
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frspackage_statusid_fk', 'frs_package', 'frs_status', 'FULL', 'status_id', 'status_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_packageid_fk
+    AFTER INSERT OR UPDATE ON frs_release
+    FROM frs_package
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_packageid_fk
+    AFTER DELETE ON frs_package
+    FROM frs_release
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_packageid_fk
+    AFTER UPDATE ON frs_package
+    FROM frs_release
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frsrelease_packageid_fk', 'frs_release', 'frs_package', 'FULL', 'package_id', 'package_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_statusid_fk
+    AFTER INSERT OR UPDATE ON frs_release
+    FROM frs_status
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_statusid_fk
+    AFTER DELETE ON frs_status
+    FROM frs_release
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_statusid_fk
+    AFTER UPDATE ON frs_status
+    FROM frs_release
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frsrelease_statusid_fk', 'frs_release', 'frs_status', 'FULL', 'status_id', 'status_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_releasedby_fk
+    AFTER INSERT OR UPDATE ON frs_release
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_releasedby_fk
+    AFTER DELETE ON users
+    FROM frs_release
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER frsrelease_releasedby_fk
+    AFTER UPDATE ON users
+    FROM frs_release
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('frsrelease_releasedby_fk', 'frs_release', 'users', 'FULL', 'released_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER tgl_group_id_fk
+    AFTER INSERT OR UPDATE ON trove_group_link
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('tgl_group_id_fk', 'trove_group_link', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER tgl_group_id_fk
+    AFTER DELETE ON groups
+    FROM trove_group_link
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('tgl_group_id_fk', 'trove_group_link', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER tgl_group_id_fk
+    AFTER UPDATE ON groups
+    FROM trove_group_link
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('tgl_group_id_fk', 'trove_group_link', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER tgl_cat_id_fk
+    AFTER INSERT OR UPDATE ON trove_group_link
+    FROM trove_cat
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('tgl_cat_id_fk', 'trove_group_link', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER tgl_cat_id_fk
+    AFTER DELETE ON trove_cat
+    FROM trove_group_link
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('tgl_cat_id_fk', 'trove_group_link', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER tgl_cat_id_fk
+    AFTER UPDATE ON trove_cat
+    FROM trove_group_link
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('tgl_cat_id_fk', 'trove_group_link', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_agg_cat_id_fk
+    AFTER INSERT OR UPDATE ON trove_agg
+    FROM trove_cat
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('trove_agg_cat_id_fk', 'trove_agg', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_agg_cat_id_fk
+    AFTER DELETE ON trove_cat
+    FROM trove_agg
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('trove_agg_cat_id_fk', 'trove_agg', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_agg_cat_id_fk
+    AFTER UPDATE ON trove_cat
+    FROM trove_agg
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('trove_agg_cat_id_fk', 'trove_agg', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_agg_group_id_fk
+    AFTER INSERT OR UPDATE ON trove_agg
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('trove_agg_group_id_fk', 'trove_agg', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_agg_group_id_fk
+    AFTER DELETE ON groups
+    FROM trove_agg
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('trove_agg_group_id_fk', 'trove_agg', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_agg_group_id_fk
+    AFTER UPDATE ON groups
+    FROM trove_agg
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('trove_agg_group_id_fk', 'trove_agg', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_treesums_cat_id_fk
+    AFTER INSERT OR UPDATE ON trove_treesums
+    FROM trove_cat
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('trove_treesums_cat_id_fk', 'trove_treesums', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_treesums_cat_id_fk
+    AFTER DELETE ON trove_cat
+    FROM trove_treesums
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('trove_treesums_cat_id_fk', 'trove_treesums', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER trove_treesums_cat_id_fk
+    AFTER UPDATE ON trove_cat
+    FROM trove_treesums
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('trove_treesums_cat_id_fk', 'trove_treesums', 'trove_cat', 'FULL', 'trove_cat_id', 'trove_cat_id');
+
+
+
+CREATE CONSTRAINT TRIGGER users_languageid_fk
+    AFTER INSERT OR UPDATE ON users
+    FROM supported_languages
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
+
+
+
+CREATE CONSTRAINT TRIGGER users_languageid_fk
+    AFTER DELETE ON supported_languages
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
+
+
+
+CREATE CONSTRAINT TRIGGER users_languageid_fk
+    AFTER UPDATE ON supported_languages
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('users_languageid_fk', 'users', 'supported_languages', 'FULL', 'language', 'language_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_languageid_fk
+    AFTER INSERT OR UPDATE ON doc_data
+    FROM supported_languages
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('docdata_languageid_fk', 'doc_data', 'supported_languages', 'FULL', 'language_id', 'language_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_languageid_fk
+    AFTER DELETE ON supported_languages
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('docdata_languageid_fk', 'doc_data', 'supported_languages', 'FULL', 'language_id', 'language_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_languageid_fk
+    AFTER UPDATE ON supported_languages
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('docdata_languageid_fk', 'doc_data', 'supported_languages', 'FULL', 'language_id', 'language_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forumgrouplist_groupid
+    AFTER INSERT OR UPDATE ON forum_group_list
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forumgrouplist_groupid', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forumgrouplist_groupid
+    AFTER DELETE ON groups
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('forumgrouplist_groupid', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forumgrouplist_groupid
+    AFTER UPDATE ON groups
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forumgrouplist_groupid', 'forum_group_list', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forum_groupforumid
+    AFTER INSERT OR UPDATE ON forum
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_groupforumid', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forum_groupforumid
+    AFTER DELETE ON forum_group_list
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('forum_groupforumid', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forum_groupforumid
+    AFTER UPDATE ON forum_group_list
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_groupforumid', 'forum', 'forum_group_list', 'FULL', 'group_forum_id', 'group_forum_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forum_userid
+    AFTER INSERT OR UPDATE ON forum
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('forum_userid', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forum_userid
+    AFTER DELETE ON users
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('forum_userid', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER forum_userid
+    AFTER UPDATE ON users
+    FROM forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('forum_userid', 'forum', 'users', 'FULL', 'posted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER INSERT OR UPDATE ON skills_data
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('<unnamed>', 'skills_data', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER DELETE ON users
+    FROM skills_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('<unnamed>', 'skills_data', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER UPDATE ON users
+    FROM skills_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('<unnamed>', 'skills_data', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER INSERT OR UPDATE ON skills_data
+    FROM skills_data_types
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('<unnamed>', 'skills_data', 'skills_data_types', 'UNSPECIFIED', 'type', 'type_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER DELETE ON skills_data_types
+    FROM skills_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('<unnamed>', 'skills_data', 'skills_data_types', 'UNSPECIFIED', 'type', 'type_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER UPDATE ON skills_data_types
+    FROM skills_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('<unnamed>', 'skills_data', 'skills_data_types', 'UNSPECIFIED', 'type', 'type_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projecttask_groupprojectid_fk
+    AFTER INSERT OR UPDATE ON project_task
+    FROM project_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projecttask_groupprojectid_fk', 'project_task', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projecttask_groupprojectid_fk
+    AFTER DELETE ON project_group_list
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projecttask_groupprojectid_fk', 'project_task', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projecttask_groupprojectid_fk
+    AFTER UPDATE ON project_group_list
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projecttask_groupprojectid_fk', 'project_task', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projcat_projgroupid_fk
+    AFTER INSERT OR UPDATE ON project_category
+    FROM project_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projcat_projgroupid_fk', 'project_category', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projcat_projgroupid_fk
+    AFTER DELETE ON project_group_list
+    FROM project_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projcat_projgroupid_fk', 'project_category', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projcat_projgroupid_fk
+    AFTER UPDATE ON project_group_list
+    FROM project_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projcat_projgroupid_fk', 'project_category', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER INSERT OR UPDATE ON project_task
+    FROM project_category
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('<unnamed>', 'project_task', 'project_category', 'UNSPECIFIED', 'category_id', 'category_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER DELETE ON project_category
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('<unnamed>', 'project_task', 'project_category', 'UNSPECIFIED', 'category_id', 'category_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER UPDATE ON project_category
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('<unnamed>', 'project_task', 'project_category', 'UNSPECIFIED', 'category_id', 'category_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projtaskartifact_projtaskid_fk
+    AFTER INSERT OR UPDATE ON project_task_artifact
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projtaskartifact_projtaskid_fk', 'project_task_artifact', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projtaskartifact_projtaskid_fk
+    AFTER DELETE ON project_task
+    FROM project_task_artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projtaskartifact_projtaskid_fk', 'project_task_artifact', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projtaskartifact_projtaskid_fk
+    AFTER UPDATE ON project_task
+    FROM project_task_artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projtaskartifact_projtaskid_fk', 'project_task_artifact', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projtaskartifact_artifactid_fk
+    AFTER INSERT OR UPDATE ON project_task_artifact
+    FROM artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projtaskartifact_artifactid_fk', 'project_task_artifact', 'artifact', 'UNSPECIFIED', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projtaskartifact_artifactid_fk
+    AFTER DELETE ON artifact
+    FROM project_task_artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projtaskartifact_artifactid_fk', 'project_task_artifact', 'artifact', 'UNSPECIFIED', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projtaskartifact_artifactid_fk
+    AFTER UPDATE ON artifact
+    FROM project_task_artifact
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projtaskartifact_artifactid_fk', 'project_task_artifact', 'artifact', 'UNSPECIFIED', 'artifact_id', 'artifact_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupforum_projgroupid_fk
+    AFTER INSERT OR UPDATE ON project_group_forum
+    FROM project_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projgroupforum_projgroupid_fk', 'project_group_forum', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupforum_projgroupid_fk
+    AFTER DELETE ON project_group_list
+    FROM project_group_forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projgroupforum_projgroupid_fk', 'project_group_forum', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupforum_projgroupid_fk
+    AFTER UPDATE ON project_group_list
+    FROM project_group_forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projgroupforum_projgroupid_fk', 'project_group_forum', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupforum_groupforumid_fk
+    AFTER INSERT OR UPDATE ON project_group_forum
+    FROM forum_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projgroupforum_groupforumid_fk', 'project_group_forum', 'forum_group_list', 'UNSPECIFIED', 'group_forum_id', 'group_forum_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupforum_groupforumid_fk
+    AFTER DELETE ON forum_group_list
+    FROM project_group_forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projgroupforum_groupforumid_fk', 'project_group_forum', 'forum_group_list', 'UNSPECIFIED', 'group_forum_id', 'group_forum_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupforum_groupforumid_fk
+    AFTER UPDATE ON forum_group_list
+    FROM project_group_forum
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projgroupforum_groupforumid_fk', 'project_group_forum', 'forum_group_list', 'UNSPECIFIED', 'group_forum_id', 'group_forum_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupdoccat_projgroupid_fk
+    AFTER INSERT OR UPDATE ON project_group_doccat
+    FROM project_group_list
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projgroupdoccat_projgroupid_fk', 'project_group_doccat', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupdoccat_projgroupid_fk
+    AFTER DELETE ON project_group_list
+    FROM project_group_doccat
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projgroupdoccat_projgroupid_fk', 'project_group_doccat', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupdoccat_projgroupid_fk
+    AFTER UPDATE ON project_group_list
+    FROM project_group_doccat
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projgroupdoccat_projgroupid_fk', 'project_group_doccat', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupdoccat_docgroupid_fk
+    AFTER INSERT OR UPDATE ON project_group_doccat
+    FROM doc_groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('projgroupdoccat_docgroupid_fk', 'project_group_doccat', 'doc_groups', 'UNSPECIFIED', 'doc_group_id', 'doc_group');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupdoccat_docgroupid_fk
+    AFTER DELETE ON doc_groups
+    FROM project_group_doccat
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('projgroupdoccat_docgroupid_fk', 'project_group_doccat', 'doc_groups', 'UNSPECIFIED', 'doc_group_id', 'doc_group');
+
+
+
+CREATE CONSTRAINT TRIGGER projgroupdoccat_docgroupid_fk
+    AFTER UPDATE ON doc_groups
+    FROM project_group_doccat
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('projgroupdoccat_docgroupid_fk', 'project_group_doccat', 'doc_groups', 'UNSPECIFIED', 'doc_group_id', 'doc_group');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER INSERT OR UPDATE ON project_messages
+    FROM project_task
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('<unnamed>', 'project_messages', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER DELETE ON project_task
+    FROM project_messages
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('<unnamed>', 'project_messages', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER UPDATE ON project_task
+    FROM project_messages
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('<unnamed>', 'project_messages', 'project_task', 'UNSPECIFIED', 'project_task_id', 'project_task_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER INSERT OR UPDATE ON project_messages
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('<unnamed>', 'project_messages', 'users', 'UNSPECIFIED', 'posted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER DELETE ON users
+    FROM project_messages
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('<unnamed>', 'project_messages', 'users', 'UNSPECIFIED', 'posted_by', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER "<unnamed>"
+    AFTER UPDATE ON users
+    FROM project_messages
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('<unnamed>', 'project_messages', 'users', 'UNSPECIFIED', 'posted_by', 'user_id');
+
+
+
+CREATE TRIGGER projtask_update_depend_trig
+    AFTER UPDATE ON project_task
+    FOR EACH ROW
+    EXECUTE PROCEDURE projtask_update_depend();
+
+
+
+CREATE TRIGGER projtask_insert_depend_trig
+    BEFORE INSERT OR UPDATE ON project_task
+    FOR EACH ROW
+    EXECUTE PROCEDURE projtask_insert_depend();
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_groupid
+    AFTER INSERT OR UPDATE ON doc_data
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('docdata_groupid', 'doc_data', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_groupid
+    AFTER DELETE ON groups
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('docdata_groupid', 'doc_data', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_groupid
+    AFTER UPDATE ON groups
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('docdata_groupid', 'doc_data', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_docgroupid
+    AFTER INSERT OR UPDATE ON doc_data
+    FROM doc_groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('docdata_docgroupid', 'doc_data', 'doc_groups', 'UNSPECIFIED', 'doc_group', 'doc_group');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_docgroupid
+    AFTER DELETE ON doc_groups
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('docdata_docgroupid', 'doc_data', 'doc_groups', 'UNSPECIFIED', 'doc_group', 'doc_group');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_docgroupid
+    AFTER UPDATE ON doc_groups
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('docdata_docgroupid', 'doc_data', 'doc_groups', 'UNSPECIFIED', 'doc_group', 'doc_group');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_stateid
+    AFTER INSERT OR UPDATE ON doc_data
+    FROM doc_states
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('docdata_stateid', 'doc_data', 'doc_states', 'UNSPECIFIED', 'stateid', 'stateid');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_stateid
+    AFTER DELETE ON doc_states
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('docdata_stateid', 'doc_data', 'doc_states', 'UNSPECIFIED', 'stateid', 'stateid');
+
+
+
+CREATE CONSTRAINT TRIGGER docdata_stateid
+    AFTER UPDATE ON doc_states
+    FROM doc_data
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('docdata_stateid', 'doc_data', 'doc_states', 'UNSPECIFIED', 'stateid', 'stateid');
+
+
+
+CREATE CONSTRAINT TRIGGER docgroups_groupid
+    AFTER INSERT OR UPDATE ON doc_groups
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docgroups_groupid
+    AFTER DELETE ON groups
+    FROM doc_groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_cascade_del"('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER docgroups_groupid
+    AFTER UPDATE ON groups
+    FROM doc_groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
+
+
+
+CREATE TRIGGER frs_file_insert_trig
+    AFTER INSERT ON frs_file
+    FOR EACH ROW
+    EXECUTE PROCEDURE frs_dlstats_filetotal_insert_ag();
+
+
+
+CREATE CONSTRAINT TRIGGER group_plugin_group_id_fk
+    AFTER INSERT OR UPDATE ON group_plugin
+    FROM groups
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER group_plugin_group_id_fk
+    AFTER DELETE ON groups
+    FROM group_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER group_plugin_group_id_fk
+    AFTER UPDATE ON groups
+    FROM group_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+
+CREATE CONSTRAINT TRIGGER group_plugin_plugin_id_fk
+    AFTER INSERT OR UPDATE ON group_plugin
+    FROM plugins
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+
+CREATE CONSTRAINT TRIGGER group_plugin_plugin_id_fk
+    AFTER DELETE ON plugins
+    FROM group_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+
+CREATE CONSTRAINT TRIGGER group_plugin_plugin_id_fk
+    AFTER UPDATE ON plugins
+    FROM group_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+
+CREATE CONSTRAINT TRIGGER user_plugin_user_id_fk
+    AFTER INSERT OR UPDATE ON user_plugin
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER user_plugin_user_id_fk
+    AFTER DELETE ON users
+    FROM user_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER user_plugin_user_id_fk
+    AFTER UPDATE ON users
+    FROM user_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
+
+
+
+CREATE CONSTRAINT TRIGGER user_plugin_plugin_id_fk
+    AFTER INSERT OR UPDATE ON user_plugin
+    FROM plugins
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+
+CREATE CONSTRAINT TRIGGER user_plugin_plugin_id_fk
+    AFTER DELETE ON plugins
+    FROM user_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+
+CREATE CONSTRAINT TRIGGER user_plugin_plugin_id_fk
+    AFTER UPDATE ON plugins
+    FROM user_plugin
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+
+CREATE TRIGGER surveys_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON surveys
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('surv');
+
+
+
+CREATE TRIGGER mail_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON mail_group_list
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('mail');
+
+
+
+CREATE TRIGGER fmsg_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON forum
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('fmsg');
+
+
+
+CREATE TRIGGER fora_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON forum_group_list
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('fora');
+
+
+
+CREATE CONSTRAINT TRIGGER users_themeid
+    AFTER INSERT OR UPDATE ON users
+    FROM themes
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
+
+
+
+CREATE CONSTRAINT TRIGGER users_themeid
+    AFTER DELETE ON themes
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
+
+
+
+CREATE CONSTRAINT TRIGGER users_themeid
+    AFTER UPDATE ON themes
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
+
+
+
+CREATE CONSTRAINT TRIGGER users_ccode
+    AFTER INSERT OR UPDATE ON users
+    FROM country_code
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_check_ins"('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
+
+
+
+CREATE CONSTRAINT TRIGGER users_ccode
+    AFTER DELETE ON country_code
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_del"('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
+
+
+
+CREATE CONSTRAINT TRIGGER users_ccode
+    AFTER UPDATE ON country_code
+    FROM users
+    NOT DEFERRABLE INITIALLY IMMEDIATE
+    FOR EACH ROW
+    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
+
+
+
+CREATE TRIGGER projectgrouplist_insert_trig
+    AFTER INSERT ON project_group_list
+    FOR EACH ROW
+    EXECUTE PROCEDURE projectgrouplist_insert_agg();
+
+
+
+CREATE TRIGGER projectgroup_update_trig
+    AFTER UPDATE ON project_task
+    FOR EACH ROW
+    EXECUTE PROCEDURE projectgroup_update_agg();
+
 
 
 CREATE RULE forum_insert_agg AS ON INSERT TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count + 1) WHERE (forum_agg_msg_count.group_forum_id = new.group_forum_id);
 
+
+
 CREATE RULE forum_delete_agg AS ON DELETE TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count - 1) WHERE (forum_agg_msg_count.group_forum_id = old.group_forum_id);
+
+
 
 CREATE RULE artifact_insert_agg AS ON INSERT TO artifact DO UPDATE artifact_counts_agg SET count = (artifact_counts_agg.count + 1), open_count = (artifact_counts_agg.open_count + 1) WHERE (artifact_counts_agg.group_artifact_id = new.group_artifact_id);
 
+
+
 CREATE RULE frs_dlstats_file_rule AS ON INSERT TO frs_dlstats_file DO UPDATE frs_dlstats_filetotal_agg SET downloads = (frs_dlstats_filetotal_agg.downloads + 1) WHERE (frs_dlstats_filetotal_agg.file_id = new.file_id);
 
-SELECT setval ('"canned_responses_pk_seq"', 1, false);
 
 
-SELECT setval ('"db_images_pk_seq"', 1, false);
+SELECT pg_catalog.setval('canned_responses_pk_seq', 1, false);
 
 
-SELECT setval ('"doc_data_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('db_images_pk_seq', 1, false);
 
-SELECT setval ('"doc_groups_pk_seq"', 1, false);
 
 
-SELECT setval ('"doc_states_pk_seq"', 1, false);
+SELECT pg_catalog.setval('doc_data_pk_seq', 1, false);
 
 
-SELECT setval ('"filemodule_monitor_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('doc_groups_pk_seq', 1, false);
 
-SELECT setval ('"forum_pk_seq"', 1, false);
 
 
-SELECT setval ('"forum_group_list_pk_seq"', 1, false);
+SELECT pg_catalog.setval('doc_states_pk_seq', 1, false);
 
 
-SELECT setval ('"forum_monitored_forums_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('filemodule_monitor_pk_seq', 1, false);
 
-SELECT setval ('"forum_saved_place_pk_seq"', 1, false);
 
 
-SELECT setval ('"foundry_news_pk_seq"', 1, false);
+SELECT pg_catalog.setval('forum_pk_seq', 1, false);
 
 
-SELECT setval ('"frs_file_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('forum_group_list_pk_seq', 1, false);
 
-SELECT setval ('"frs_filetype_pk_seq"', 9999, true);
 
 
-SELECT setval ('"frs_package_pk_seq"', 1, false);
+SELECT pg_catalog.setval('forum_monitored_forums_pk_seq', 1, false);
 
 
-SELECT setval ('"frs_processor_pk_seq"', 9999, true);
 
+SELECT pg_catalog.setval('forum_saved_place_pk_seq', 1, false);
 
-SELECT setval ('"frs_release_pk_seq"', 1, false);
 
 
-SELECT setval ('"frs_status_pk_seq"', 3, true);
+SELECT pg_catalog.setval('foundry_news_pk_seq', 1, false);
 
 
-SELECT setval ('"group_history_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('frs_file_pk_seq', 1, false);
 
-SELECT setval ('"groups_pk_seq"', 4, true);
 
 
-SELECT setval ('"mail_group_list_pk_seq"', 1, false);
+SELECT pg_catalog.setval('frs_filetype_pk_seq', 9999, true);
 
 
-SELECT setval ('"news_bytes_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('frs_package_pk_seq', 1, false);
 
-SELECT setval ('"people_job_pk_seq"', 1, false);
 
 
-SELECT setval ('"people_job_category_pk_seq"', 7, true);
+SELECT pg_catalog.setval('frs_processor_pk_seq', 9999, true);
 
 
-SELECT setval ('"people_job_inventory_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('frs_release_pk_seq', 1, false);
 
-SELECT setval ('"people_job_status_pk_seq"', 1, false);
 
 
-SELECT setval ('"people_skill_pk_seq"', 1, false);
+SELECT pg_catalog.setval('frs_status_pk_seq', 3, true);
 
 
-SELECT setval ('"people_skill_inventory_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('group_history_pk_seq', 1, false);
 
-SELECT setval ('"people_skill_level_pk_seq"', 5, true);
 
 
-SELECT setval ('"people_skill_year_pk_seq"', 5, true);
+SELECT pg_catalog.setval('groups_pk_seq', 4, true);
 
 
-SELECT setval ('"project_assigned_to_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('mail_group_list_pk_seq', 1, false);
 
-SELECT setval ('"project_dependencies_pk_seq"', 1, false);
 
 
-SELECT setval ('"project_group_list_pk_seq"', 1, true);
+SELECT pg_catalog.setval('news_bytes_pk_seq', 1, false);
 
 
-SELECT setval ('"project_history_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('people_job_pk_seq', 1, false);
 
-SELECT setval ('"project_metric_pk_seq"', 1, false);
 
 
-SELECT setval ('"project_metric_tmp1_pk_seq"', 1, false);
+SELECT pg_catalog.setval('people_job_category_pk_seq', 7, true);
 
 
-SELECT setval ('"project_status_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('people_job_inventory_pk_seq', 1, false);
 
-SELECT setval ('"project_task_pk_seq"', 1, true);
 
 
-SELECT setval ('"project_weekly_metric_pk_seq"', 1, false);
+SELECT pg_catalog.setval('people_job_status_pk_seq', 1, false);
 
 
-SELECT setval ('"snippet_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('people_skill_pk_seq', 1, false);
 
-SELECT setval ('"snippet_package_pk_seq"', 1, false);
 
 
-SELECT setval ('"snippet_package_item_pk_seq"', 1, false);
+SELECT pg_catalog.setval('people_skill_inventory_pk_seq', 1, false);
 
 
-SELECT setval ('"snippet_package_version_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('people_skill_level_pk_seq', 5, true);
 
-SELECT setval ('"snippet_version_pk_seq"', 1, false);
 
 
-SELECT setval ('"survey_question_types_pk_seq"', 1, false);
+SELECT pg_catalog.setval('people_skill_year_pk_seq', 5, true);
 
 
-SELECT setval ('"survey_questions_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('project_assigned_to_pk_seq', 1, false);
 
-SELECT setval ('"surveys_pk_seq"', 1, false);
 
 
-SELECT setval ('"themes_pk_seq"', 1, true);
+SELECT pg_catalog.setval('project_dependencies_pk_seq', 1, false);
 
 
-SELECT setval ('"trove_cat_pk_seq"', 305, true);
 
+SELECT pg_catalog.setval('project_group_list_pk_seq', 1, true);
 
-SELECT setval ('"trove_group_link_pk_seq"', 1, false);
 
 
-SELECT setval ('"trove_treesums_pk_seq"', 1, false);
+SELECT pg_catalog.setval('project_history_pk_seq', 1, false);
 
 
-SELECT setval ('"user_bookmarks_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('project_metric_pk_seq', 1, false);
 
-SELECT setval ('"user_diary_pk_seq"', 1, false);
 
 
-SELECT setval ('"user_diary_monitor_pk_seq"', 1, false);
+SELECT pg_catalog.setval('project_metric_tmp1_pk_seq', 1, false);
 
 
-SELECT setval ('"user_group_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('project_status_pk_seq', 1, false);
 
-SELECT setval ('"user_metric_pk_seq"', 1, false);
 
 
-SELECT setval ('"user_metric0_pk_seq"', 1, false);
+SELECT pg_catalog.setval('project_task_pk_seq', 1, true);
 
 
-SELECT setval ('"users_pk_seq"', 101, true);
 
+SELECT pg_catalog.setval('project_weekly_metric_pk_seq', 1, false);
 
-SELECT setval ('"unix_uid_seq"', 1, false);
 
 
-SELECT setval ('"forum_thread_seq"', 1, false);
+SELECT pg_catalog.setval('snippet_pk_seq', 1, false);
 
 
-SELECT setval ('"project_metric_wee_ranking1_seq"', 1, false);
 
+SELECT pg_catalog.setval('snippet_package_pk_seq', 1, false);
 
-SELECT setval ('"prdb_dbs_dbid_seq"', 1, false);
 
 
-SELECT setval ('"prweb_vhost_vhostid_seq"', 1, false);
+SELECT pg_catalog.setval('snippet_package_item_pk_seq', 1, false);
 
 
-SELECT setval ('"artifact_grou_group_artifac_seq"', 100, true);
 
+SELECT pg_catalog.setval('snippet_package_version_pk_seq', 1, false);
 
-SELECT setval ('"artifact_resolution_id_seq"', 101, true);
 
 
-SELECT setval ('"artifact_perm_id_seq"', 1, false);
+SELECT pg_catalog.setval('snippet_version_pk_seq', 1, false);
 
 
-SELECT setval ('"artifact_category_id_seq"', 100, true);
 
+SELECT pg_catalog.setval('survey_question_types_pk_seq', 1, false);
 
-SELECT setval ('"artifact_group_id_seq"', 1, false);
 
 
-SELECT setval ('"artifact_status_id_seq"', 3, true);
+SELECT pg_catalog.setval('survey_questions_pk_seq', 1, false);
 
 
-SELECT setval ('"artifact_artifact_id_seq"', 1, false);
 
+SELECT pg_catalog.setval('surveys_pk_seq', 1, false);
 
-SELECT setval ('"artifact_history_id_seq"', 1, false);
 
 
-SELECT setval ('"artifact_file_id_seq"', 1, false);
+SELECT pg_catalog.setval('themes_pk_seq', 1, true);
 
 
-SELECT setval ('"artifact_message_id_seq"', 1, false);
 
+SELECT pg_catalog.setval('trove_cat_pk_seq', 305, true);
 
-SELECT setval ('"artifact_monitor_id_seq"', 1, false);
 
 
-SELECT setval ('"artifact_canned_response_id_seq"', 1, false);
+SELECT pg_catalog.setval('trove_group_link_pk_seq', 1, false);
 
 
-SELECT setval ('"massmail_queue_id_seq"', 1, false);
 
+SELECT pg_catalog.setval('trove_treesums_pk_seq', 1, false);
 
-SELECT setval ('"trove_treesum_trove_treesum_seq"', 1, false);
 
 
-SELECT setval ('"group_cvs_history_id_seq"', 1, false);
+SELECT pg_catalog.setval('user_bookmarks_pk_seq', 1, false);
 
 
-SELECT setval ('"themes_theme_id_seq"', 3, true);
 
+SELECT pg_catalog.setval('user_diary_pk_seq', 1, false);
 
-SELECT setval ('"supported_langu_language_id_seq"', 24, true);
 
 
-SELECT setval ('"skills_data_pk_seq"', 1, false);
+SELECT pg_catalog.setval('user_diary_monitor_pk_seq', 1, false);
 
 
-SELECT setval ('"skills_data_types_pk_seq"', 4, true);
 
+SELECT pg_catalog.setval('user_group_pk_seq', 1, true);
 
-SELECT setval ('"project_categor_category_id_seq"', 100, true);
 
 
-SELECT setval ('"project_messa_project_messa_seq"', 1, false);
+SELECT pg_catalog.setval('user_metric_pk_seq', 1, false);
 
 
-SELECT setval ('"plugins_pk_seq"', 1, false);
 
+SELECT pg_catalog.setval('user_metric0_pk_seq', 1, false);
 
-SELECT setval ('"group_plugin_pk_seq"', 1, false);
 
 
-SELECT setval ('"user_plugin_pk_seq"', 1, false);
+SELECT pg_catalog.setval('users_pk_seq', 101, true);
+
+
+
+SELECT pg_catalog.setval('unix_uid_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('forum_thread_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('project_metric_wee_ranking1_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('prdb_dbs_dbid_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('prweb_vhost_vhostid_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_grou_group_artifac_seq', 100, true);
+
+
+
+SELECT pg_catalog.setval('artifact_resolution_id_seq', 101, true);
+
+
+
+SELECT pg_catalog.setval('artifact_perm_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_category_id_seq', 100, true);
+
+
+
+SELECT pg_catalog.setval('artifact_group_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_status_id_seq', 3, true);
+
+
+
+SELECT pg_catalog.setval('artifact_artifact_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_history_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_file_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_message_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_monitor_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_canned_response_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('massmail_queue_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('trove_treesum_trove_treesum_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('group_cvs_history_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('themes_theme_id_seq', 3, true);
+
+
+
+SELECT pg_catalog.setval('supported_langu_language_id_seq', 24, true);
+
+
+
+SELECT pg_catalog.setval('skills_data_pk_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('skills_data_types_pk_seq', 4, true);
+
+
+
+SELECT pg_catalog.setval('project_categor_category_id_seq', 100, true);
+
+
+
+SELECT pg_catalog.setval('project_messa_project_messa_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('plugins_pk_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('group_plugin_pk_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('user_plugin_pk_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('licenses_license_id_seq', 126, true);
+
+
+
+SELECT pg_catalog.setval('user_type_type_id_seq', 2, true);
+
+
+
+SELECT pg_catalog.setval('role_role_id_seq', 21, true);
+
+
+
+SELECT pg_catalog.setval('project_perm_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('forum_perm_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_group_selection_box_list_id_seq', 100, true);
+
+
+
+SELECT pg_catalog.setval('artifact_group_selection_box_options_id_seq', 100, true);
+
+
+
+SELECT pg_catalog.setval('artifact_extra_field_data_id_seq', 100, true);
+
+
+
+COMMENT ON SCHEMA public IS 'Standard public schema';
+
 
