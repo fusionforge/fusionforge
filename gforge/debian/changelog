@@ -1,4 +1,4 @@
-gforge (3.1-22+3) unstable; urgency=low
+gforge (3.1-22+4) unstable; urgency=low
 
   * [Roland] Updated Dutch translations for Debconf templates from
     debian-l10n-dutch (closes: #279239).
@@ -6,8 +6,11 @@ gforge (3.1-22+3) unstable; urgency=low
     <kurem@debian.cz> (closes: #280133).
   * [Roland] Ensure the various commands run by install-db.sh run in
     LANG=C.
+  * [Roland] Added libnss_ldap.so* to chroot, so that users can
+    authenticate against LDAP inside it, patch from Clement 'nodens'
+    Hermann <clement.hermann@free.fr> (closes: #280446).
 
- -- Roland Mas <lolando@debian.org>  Sun,  7 Nov 2004 21:45:48 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 10 Nov 2004 13:10:00 +0100
 
 gforge (3.1-22) unstable; urgency=medium
 
