@@ -57,7 +57,7 @@ if ($project->getStatus() == 'H') {
 if ($project->getDescription()) {
 	print "<P>" . $project->getDescription();
 } else {
-	print "<P>This project has not yet submitted a description.";
+	print "<P>" . $Language->getText('group', 'nodescription');
 }
 
 // trove info

@@ -108,7 +108,7 @@ frs	latest_file_releases	Sorties récentes
 general	return	[Retour à Sourceforge]
 general	sitename	Sourceforge
 general	footer	Vous êtes sur Debian Sourceforge.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
-group	developer_info	Information sur un développeur
+group	developer_info	Information sur les développeurs
 group	developers	Développeurs
 group	long_bugs	Gestion des bogues
 group	long_cvs	Référentiel CVS
@@ -120,7 +120,7 @@ group	long_homepage	Page d'accueil
 group	long_mail	Listes de diffusion
 group	long_news	Dernières nouveautés
 group	long_patch	Gestionnnaire de corrections
-group	long_pm	Gestio de projet
+group	long_pm	Gestion de projet
 group	long_support	Support technique
 group	long_survey	Sondages
 group	project_admins	Administrateurs du projet
@@ -142,6 +142,11 @@ group	short_summary	Survol
 group	short_support	Support
 group	short_survey	Sondages
 group	short_tracker	Tracker
+group	registered	Enregistré le:
+group	activity	Pourcentage d'activité:
+group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activité du projet
+group	norelease	Ce projet n'a pas réalisé de fichier
+group	nodescription	Ce project n'a pas encore soumis de description.
 home	about_blurb	Sourceforge est un <b>service gratuit pour les développeurs <A href="http://www.opensource.org">open source</A></b>. Sourceforge offre l'accès le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des tâches, hébergement de site, archivage de fichiers, sauvegardes complètes, etc. via une interface d'administration entièrement par le web. <BR> &nbsp; <P> <B>Participation des développeurs</B> <P>  Pour pouvoir utiliser SourceForge au mieux, il est nécéssaire de <A href="/account/register.php">s'enregistrer comme un développeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons à vous offrir. Vous pouvez bien entendu parcourir le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>Créer un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme développeur</A>, puis <A HREF="/account/login.php">connectez-vous</A>, puis <a href="/register/">enregistrez votre projet.</a> <p> Merci... et nous espérons que vous aimerez Sourceforge !
 home	breaking_down_barriers	Abaisser les barrières du développement open source
 home	highest_ranked_users	Les développeurs les mieux classés
