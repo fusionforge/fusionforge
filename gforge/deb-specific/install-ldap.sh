@@ -25,7 +25,8 @@ modify_libnss_ldap(){
 	# Check if DN is correct
 	if ! grep -q "^base[ 	]*$dn" /etc/libnss-ldap.conf ; then
 		echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
-		grep 
+		grep "^base" /etc/libnss-ldap.conf
+		echo "Should be: base $dn"
 	fi
 	# Check bindpw
 	# Should contain the secret
@@ -38,7 +39,7 @@ modify_libnss_ldap(){
 #	fi
 	# Check rootbinddn
 	# This seems to be necessary to display uid/gid
-	# Should be cn=admin,ou=People,dc=...
+	# Should be cn=admin,dc=...
 	if [ "$do_config" = "true" ] ; then
 	    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-old
 	    if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf ; then
@@ -260,7 +261,7 @@ setup_vars() {
 # Check Server
 check_server() {
 	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-	[ "x$naming_context" == "x" ] && invoke-rc.d slapd restart && sleep 5 && 	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	[ "x$naming_context" == "x" ] && invoke-rc.d slapd restart && sleep 5 && naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 	[ "x$naming_context" == "x" ] && echo "LDAP Server KO" || echo "LDAP Server OK : dn=$naming_context"
 }
 
