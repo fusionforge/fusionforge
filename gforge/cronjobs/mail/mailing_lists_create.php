@@ -77,14 +77,14 @@ for ($i=0; $i<$rows; $i++) {
 		} else {
 			// Privatize the new list
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-			passthru($privatize_cmd,$res);
+			passthru($privatize_cmd,$privatizeFailed);
 		}
 		$mailingListIds[] = $grouplistid;
 	} else {	// Old list
 		// Privatize only if it is marked as private
 		if (!$public) {
 			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
-			passthru($privatize_cmd,$res);
+			passthru($privatize_cmd,$privatizeFailed);
 		}
 	}
 	
