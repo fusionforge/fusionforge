@@ -24,11 +24,23 @@ Mini GForge/Sourceforge FAQ
 deb http://people.debian.org/~bayle/debian binary-i386/
 deb-src http://people.debian.org/~bayle/debian source/
 </pre>
-	or
+      or
 <pre>
 deb http://christian.bayle.free.fr/debian binary-i386/
 deb-src http://christian.bayle.free.fr/debian source/
 </pre>
+      (Christian's pages), or
+<pre>
+deb http://people.debian.org/~lolando/debian unstable/
+deb-src http://people.debian.org/~lolando/debian unstable/
+</pre>
+      or
+<pre>
+deb http://roland.mas.free.fr/debian unstable/
+deb-src http://roland.mas.free.fr/debian unstable/
+</pre>
+      (Roland's pages).  Depending on our real life activity, one may
+      be more up-to-date than the other.<br>
 	Then run:
 <pre>
 apt-get update
@@ -80,11 +92,11 @@ apt-get source gforge
 	From CVS
 	<BR>
 <pre>
-cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/debian-sf login
+cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/gforge login
 </pre>
 	And just return for the password
 <pre>
-cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/debian-sf co -r Branch_gforge -d gforge-3.0 sourceforge
+cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/gforge co -d gforge-3.0 gforge
 </pre>
 </blockquote>
 
@@ -93,15 +105,17 @@ cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/debian-sf co -r Branch_g
 <blockquote>
 	<b>Answer:</b>
 	<BR>
-	<A href=http://savannah.nongnu.org/projects/debian-sf/>http://savannah.nongnu.org/projects/debian-sf/</A>
+	<A href=http://savannah.nongnu.org/projects/gforge/>http://savannah.nongnu.org/projects/gforge/</A>
 </blockquote>
 
-<b>Question:</b> Where is the debian-sf home page?
+<b>Question:</b> Where is the Gforge home page?
 
 <blockquote>
 	<b>Answer:</b>
 	<BR>
-	<A href=http://www.nongnu.org/debian-sf/>http://www.nongnu.org/debian-sf/</A>
+	<A
+	href=http://www.nongnu.org/gforge/>http://www.nongnu.org/gforge/</A> or
+	<A href=http://www.gforge.org/>http://www.gforge.org/</A>
 </blockquote>
 
 <b>Question:</b> How do I build this packages?
@@ -137,9 +151,9 @@ apt-get install gforge
 <blockquote>
 	<b>Answer:</b>
 	<BR>
-	For more info you can join me on IRC at irc.openprojects.net on #debian-sf (Sourceforge/GForge package) or #debian-devel-fr (French)
+	For more info you can join us on IRC at irc.openprojects.net on #gforge (GForge package) or #debian-devel-fr (French)
 	<BR>
-	Mailing lists are there: <A HREF=http://savannah.nongnu.org/mail/?group=debian-sf>http://savannah.nongnu.org/mail/?group=debian-sf</A>
+	Mailing lists are there: <A HREF=http://savannah.nongnu.org/mail/?group=gforge>http://savannah.nongnu.org/mail/?group=gforge</A>
 
 </blockquote>
 </body>
