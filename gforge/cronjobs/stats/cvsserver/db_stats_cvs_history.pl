@@ -77,7 +77,7 @@ while ( $temp = $res->fetchrow_arrayref() ) {
 
 $dbh->{AutoCommit} = 0;
 
-$dbh->do("DELETE FROM debian_stats_cvs_group WHERE month='$year$month' AND day='$day'");
+$dbh->do("DELETE FROM stats_cvs_group WHERE month='$year$mon' AND day='$day'");
 
 ## begin parsing the log file line by line.
 print "Parsing the information into the database..." if $verbose;
@@ -97,9 +97,9 @@ while(<LOGFILE>) {
 			next;
 		}
 			
-		$sql = "INSERT INTO debian_stats_cvs_group
+		$sql = "INSERT INTO stats_cvs_group
 			(month,day,group_id,checkouts,commits,adds)
-			VALUES ('$year$month','$day','$group_id','$checkouts','$commits','$adds')";
+			VALUES ('$year$mon','$day','$group_id','$checkouts','$commits','$adds')";
 
 		$dbh->do( $sql );
 
