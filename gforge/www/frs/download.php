@@ -60,19 +60,10 @@ if(!$Group->isPublic()) {
 	session_require(array('group' => $group_id));
 }
 
-//
 //  Members of projects can see all packages
 //  Non-members can only see public packages
-//
-if (session_loggedin()) {
-	if (user_ismember($group_id) || user_ismember(1,'A')) {
-	} else {
-		if (!$is_public) {
-			exit_permission_denied();
-		}
-	}
-} else {
-	if (!$is_public) {
+if(!$is_public) {
+	if (!session_loggedin() || (!user_ismember($group_id) && !user_ismember(1,'A'))) {
 		exit_permission_denied();
 	}
 }
