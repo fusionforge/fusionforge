@@ -24,7 +24,7 @@ while (!feof($fp)) {
 }
 pclose($fp);
 
-$res=db_query("SELECT users.user_name,mail_group_list.list_name,
+$res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
         mail_group_list.password,mail_group_list.status 
 		FROM mail_group_list,users
         WHERE mail_group_list.list_admin=users.user_id");
@@ -35,12 +35,13 @@ echo "$rows rows returned from query\n";
 
 for ($i=0; $i<$rows; $i++) {
 	echo "Processing row $i\n";
-	$listadmin = db_result($res,$i,0);
-	$listname = db_result($res,$i,1);
-	$listpassword = db_result($res,$i,2);
+	$listadmin = db_result($res,$i,'user_name');
+	$email = db_result($res,$i,'email');
+	$listname = db_result($res,$i,'list_name');
+	$listpassword = db_result($res,$i,'password');
 	if (! in_array($listname,$mailing_lists)) {
 		echo "Creating Mailing List: $listname\n";
-		$lcreate_cmd = "/usr/bin/ssh $sys_lists_host -l mailman 'bin/newlist -q $listname $listadmin@$sys_default_domain $listpassword'";
+		$lcreate_cmd = "/usr/bin/ssh $sys_lists_host -l mailman 'bin/newlist -q $listname $email $listpassword'";
 		echo "Command to be executed is $lcreate_cmd\n";
 		$fp = popen($lcreate_cmd,"r");
 //
