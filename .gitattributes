@@ -1,4 +1,6 @@
 * text=auto !eol
+gforge-plugin-cvstracker/gforge-plugin-cvstracker.spec -text svneol=unset#application/octet-stream
+gforge-plugin-cvstracker/rpm-specific/cron.d/gforge-plugin-cvstracker -text svneol=unset#application/octet-stream
 gforge-plugin-eirc/EIRC-1.0.2.tar.gz -text
 gforge-plugin-ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
