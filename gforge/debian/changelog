@@ -1,4 +1,4 @@
-sourceforge (2.5-10+13+) unstable; urgency=low
+sourceforge (2.5-10+14) unstable; urgency=low
 
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
@@ -45,8 +45,17 @@ sourceforge (2.5-10+13+) unstable; urgency=low
   * Fixed versioned dependency on debconf (thanks to lintian).
   * Removed unnecessary CVS/ dirs from the package when it's built from a
     CVS checkout (as opposed to a CVS export).
+  * Fix in include.pl to allow the use of an empty password.  To be
+    tested, but it might help closing #116009.
+  * Delayed deletion of files until the very end of the uninstall process,
+    in order to potentially help fixing one symptom described in #116009
+    too.
+  * deb-specific/install-exim.sh: (still related to, and not closing,
+    #116009) no need to require /etc/sourceforge/local.pl when
+    deconfiguring.
+  * Updated debian/TODO a bit.
 
- -- Roland Mas <lolando@debian.org>  Thu, 18 Oct 2001 09:12:36 +0200
+ -- Roland Mas <lolando@debian.org>  Sat, 20 Oct 2001 16:31:06 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 
