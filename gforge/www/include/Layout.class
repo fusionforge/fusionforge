@@ -127,6 +127,7 @@ class Layout extends Error {
 		HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
 	}
 	// -->
+	<?php plugin_hook ("javascript",false) ; ?>
 	</script>
 <?php
 /*

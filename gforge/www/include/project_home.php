@@ -88,7 +88,7 @@ if ($jobs_res) {
 				}
 		}
 }
-
+plugin_hook ("project_after_description",false) ;
 
 ?>
 		</td>
