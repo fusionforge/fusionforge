@@ -1,44 +1,55 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: theme.php,v 1.16 2000/08/31 06:11:35 gherteg Exp $
+/**
+ * theme.php
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: theme.php,v 1.20 2001/06/22 18:18:08 dbrogdon Exp $
+ */
 
-$theme_arcolor = array(White=>"#FFFFFF", Black=>"#000000", Blue=>"#0000FF", Green=>"#00FF00", Red=>"#FF0000");
-$theme_arfont = array(Helvetica=>"Helvetica", Times=>"Times", Courier=>"Courier", Lucida=>"Lucida");
+$theme_arcolor = array('White'=>'#FFFFFF', 'Black'=>'#000000', 'Blue'=>'#0000FF', 'Green'=>'#00FF00', 'Red'=>'#FF0000');
+$theme_arfont = array('Helvetica'=>'Helvetica', 'Times'=>'Times', 'Courier'=>'Courier', 'Lucida'=>'Lucida');
 $theme_arfontsize = array('small'=>'small', 'medium'=>'medium', 'large'=>'large', 'x-large'=>'x-large');
 
+/**
+ * user_getthemeid() - Get the default theme ID for a user.
+ *
+ * @param		int		The user ID
+ */
 function user_getthemeid($user_id = 0) {
-        global $USER_THEME;
-        // use current user if one is not passed in
-        if (!$user_id) {
-                return ($G_USER?$G_USER['user_theme']:$GLOBALS['sys_themeid']);
-        }
-        // else must lookup name
-        else {
-                if ($USER_THEME["user_$user_id"]) {
-                        //user theme was fetched previously
-                        return $USER_THEME["user_$user_id"];
-                } else {
-                        //fetch the user theme and store it for future reference
-                        $sql = "SELECT * FROM theme_prefs WHERE user_id=$user_id";
-			// echo "<b> $sql </b><br>" ;
-                        $result = db_query($sql) ;
-                        if ($result && db_numrows($result) > 0) {
-                                //valid theme - store and return
-                                $USER_THEME["user_$user_id"]=db_result($result,0,"user_theme");
-                                return $USER_THEME["user_$user_id"];
-                        } else {
-                                //invalid theme - store and return
-                                $USER_THEME["user_$user_id"]="<B>Invalid User ID</B>";
-                                return $GLOBALS['sys_themeid'];
-                        }
-                }
-        }
+	global $USER_THEME;
+	// use current user if one is not passed in
+	if (!$user_id) {
+		return ($G_USER?$G_USER['user_theme']:$GLOBALS['sys_themeid']);
+	}
+	// else must lookup name
+	else {
+		if ($USER_THEME["user_$user_id"]) {
+			//user theme was fetched previously
+			return $USER_THEME["user_$user_id"];
+		} else {
+			//fetch the user theme and store it for future reference
+			$result = db_query("SELECT * FROM theme_prefs WHERE user_id='$user_id'");
+			if ($result && db_numrows($result) > 0) {
+				//valid theme - store and return
+				$USER_THEME["user_$user_id"]=db_result($result,0,"user_theme");
+				return $USER_THEME["user_$user_id"];
+			} else {
+				//invalid theme - store and return
+				$USER_THEME["user_$user_id"]=$GLOBALS['sys_themeid'];
+				return $USER_THEME["user_$user_id"];
+			}
+		}
+	}
 }
 
+/**
+ * get_themedir() - Get the theme dir location for a particular theme.
+ *
+ * @param		int		The theme iD
+ */
 function get_themedir($theme_id = 0) {
         global $THEME_DIR;
         // use current theme if one is not passed in
@@ -68,6 +79,11 @@ function get_themedir($theme_id = 0) {
         }
 }
 
+/**
+ * get_themename() - The the name of a theme
+ *
+ * @param		int		The theme ID
+ */
 function get_themename($theme_id = 0) {
         global $THEME_NAME;
         // use current theme if one is not passed in
@@ -97,6 +113,11 @@ function get_themename($theme_id = 0) {
         }
 }
 
+/**
+ * theme_get_userpref() - Get a users theme preference.
+ *
+ * @param		string	The preference name
+ */
 function theme_get_userpref($preference_name) {
         GLOBAL $theme_pref;
         if (user_isloggedin()) {
@@ -117,21 +138,25 @@ function theme_get_userpref($preference_name) {
                         if (db_numrows($result) < 1) {
                                 return false;
                         } else {
-
-        			$theme_pref = db_fetch_array($result);
+				$theme_pref = db_fetch_array($result);
 
 				if($theme_pref["$preference_name"]){
 					return $theme_pref["$preference_name"];
 				} else {
 					return false;
 				}
-                        }
-                }
-        } else {
-                return false;
-        }
+			}
+		}
+	} else {
+		return false;
+	}
 }
 
+/**
+ * theme_set_usertheme() - Set a users theme preference
+ *
+ * @param		int		The theme ID
+ */
 function theme_set_usertheme($theme_id) {
         if (user_isloggedin()) {
                 $result=db_query("DELETE FROM theme_prefs WHERE user_id=".user_getid());
@@ -142,10 +167,15 @@ function theme_set_usertheme($theme_id) {
 	return true;
 }
 
+/**
+ * theme_sysinit() - Initialize a theme
+ *
+ * #param		int		The theme ID
+ */
 function theme_sysinit($theme_id = 0){
 	GLOBAL $HTML;
 
-        if (user_isloggedin() && !$theme_id){
+    if (user_isloggedin() && !$theme_id){
 		$GLOBALS['sys_themeid'] = user_getthemeid(user_getid());
 		$GLOBALS['sys_theme'] = get_themedir($GLOBALS['sys_themeid']);
 	} else {
@@ -158,43 +188,65 @@ function theme_sysinit($theme_id = 0){
 		$GLOBALS['sys_theme'] = 'forged';
 	} else {
 		//now include the actual chosen theme file
-		include($GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/Theme.class');
+		include_once($GLOBALS['sys_themeroot'].$GLOBALS['sys_theme'].'/Theme.class');
 		$HTML = new Theme();
 	}
 	
 }
 
-// returns full select output for a particular root
+/**
+ * theme_selectfull() - Returns full select output for a particular root
+ *
+ * @param		string	The theme to be pre-selected
+ * @param		string	The select box name
+ */
 function theme_selectfull($selected,$name) {
-        print "<BR><SELECT name=\"$name\">\n\t";
-        $res_theme = db_query('SELECT theme_id,fullname FROM themes ORDER BY fullname');
-        while ($row_theme = db_fetch_array($res_theme)) {
-                print '  <OPTION value="'.$row_theme['theme_id'].'"';
-                if ($selected == $row_theme['theme_id']) print (' selected');
-                print '>'.$row_theme['fullname']."\n\t";
-        }
-        print "</SELECT>\n";
+	print "<BR><SELECT name=\"$name\">\n\t";
+	$res_theme = db_query('SELECT theme_id,fullname FROM themes ORDER BY fullname');
+	while ($row_theme = db_fetch_array($res_theme)) {
+		print '  <OPTION value="'.$row_theme['theme_id'].'"';
+		if ($selected == $row_theme['theme_id']) {
+			print (' selected');
+		}
+		print '>'.$row_theme['fullname']."\n\t";
+	}
+	print "</SELECT>\n";
 }
 
-// returns full select output for a particular root
+/**
+ * theme_optionselectfull() - Returns full select output for a particular root
+ *
+ * @param		string	The select box name
+ * @param		array	The select box options array
+ * @param		string	The option to be pre-selected
+ */
 function theme_optionselectfull($name, $optionar, $selected) {
-        $other_sel = " selected";
-        print "<BR><SELECT name=\"$name\">\n\t";
-        reset ($optionar);
-        while (list ($key, $val) = each ($optionar)) {
-            print '  <OPTION value="'.$val.'"';
-            if ($selected == $val){ print (' selected'); $other_sel = ""; }
-            print '>'.$key."</OPTION>\n\t";
-        }
-        print "  <OPTION VALUE='changed'$other_sel>Other\n\t</SELECT>\n";
+	$other_sel = " selected";
+	print "<BR><SELECT name=\"$name\">\n\t";
+	reset ($optionar);
+	while (list ($key, $val) = each ($optionar)) {
+	    print '  <OPTION value="'.$val.'"';
+	    if ($selected == $val){ print (' selected'); $other_sel = ""; }
+	    print '>'.$key."</OPTION>\n\t";
+	}
+	print "  <OPTION VALUE='changed'$other_sel>Other\n\t</SELECT>\n";
 	if($other_sel){ $GLOBALS[$name.'_other'] = $GLOBALS[$name]; } else {$GLOBALS[$name.'_other'] = ''; }
-        print "  <INPUT TYPE='text' NAME='".$name."_other' SIZE='7' VALUE='".$GLOBALS[$name.'_other']."'>\n";
+	print "  <INPUT TYPE='text' NAME='".$name."_other' SIZE='7' VALUE='".$GLOBALS[$name.'_other']."'>\n";
 }
 
 
-// returns form for modifying the user theme preferences
+/**
+ * theme_usermodform() - Returns form for modifying the user theme preferences
+ *
+ * @param		string	???
+ * @param		string	The form action
+ * @param		name	The form name
+ * @param		unknown	unknown
+ */
 function theme_usermodform($selected,$action,$name,$component) {
-	if(!$component){ print "<FORM NAME='$name' ACTION='$action' METHOD='post'>\n"; }
+	if(!$component) { 
+		print "<FORM NAME='$name' ACTION='$action' METHOD='post'>\n"; 
+	}
 	print'
 		<FONT FACE="Helvetica" SIZE="2">
 ';
@@ -208,11 +260,19 @@ function theme_usermodform($selected,$action,$name,$component) {
 	if(!$component){ print "</FORM>\n"; }
 }
 
-// returns form for modifying the user color preferences
+/** 
+ * theme_modcolorform() - Returns form for modifying the user color preferences
+ *
+ * @param		string	The form action
+ * @param		string	The form name
+ * @param		unknown	unknown
+ */
 function theme_modcolorform($action,$name,$component) {
-	if(!$component){ print "<FORM NAME='$name' ACTION='$action' METHOD='post'>\n"; }
-        print'
-                <FONT FACE="Helvetica" SIZE="2">
+	if(!$component) { 
+		print "<FORM NAME='$name' ACTION='$action' METHOD='post'>\n"; 
+	}
+	print'
+		<FONT FACE="Helvetica" SIZE="2">
 		Light Background (Tables)';
 		theme_optionselectfull("COLOR_LTBACK1", $GLOBALS['theme_arcolor'], $GLOBALS['COLOR_LTBACK1']);
 	print'  <BR>Alternate Row Background :';
@@ -224,36 +284,48 @@ function theme_modcolorform($action,$name,$component) {
 	print'  <BR>Main Content Background :';
 		theme_optionselectfull("COLOR_CONTENT_BACK", $GLOBALS['theme_arcolor'], $GLOBALS['COLOR_CONTENT_BACK']);
 	print'  <BR>
-                <INPUT TYPE="submit" NAME="color_action" VALUE="Preview Colors">
-                <INPUT TYPE="submit" NAME="color_action" VALUE="Apply Colors">
-                <INPUT TYPE="submit" NAME="color_action" VALUE="Cancel">
-                </FONT>
+		<INPUT TYPE="submit" NAME="color_action" VALUE="Preview Colors">
+		<INPUT TYPE="submit" NAME="color_action" VALUE="Apply Colors">
+		<INPUT TYPE="submit" NAME="color_action" VALUE="Cancel">
+		</FONT>
 ';
-	if(!$component){ print "</FORM>\n"; }
+	if(!$component) { 
+		print "</FORM>\n"; 
+	}
 }
 
-// returns form for modifying the user color preferences
+/**
+ * theme_modfontform() - Returns form for modifying the user color preferences
+ *
+ * @param		string	The form action
+ * @param		string	The form name
+ * @param		unknown	unknown
+ */
 function theme_modfontform($action,$name,$component) {
-        if(!$component){ print "<FORM NAME='$name' ACTION='$action' METHOD='post'>\n"; }
-        print'
-                <FONT FACE="Helvetica" SIZE="2">
-                Body Font:';
-                theme_optionselectfull("FONT_CONTENT", $GLOBALS['theme_arfont'], $GLOBALS['FONT_CONTENT']);
-                theme_optionselectfull("FONTSIZE_CONTENT", $GLOBALS['theme_arfontsize'], $GLOBALS['FONTSIZE_CONTENT']);
+	if(!$component) { 
+		print "<FORM NAME='$name' ACTION='$action' METHOD='post'>\n"; 
+	}
+	print'
+		<FONT FACE="Helvetica" SIZE="2">
+		Body Font:';
+		theme_optionselectfull("FONT_CONTENT", $GLOBALS['theme_arfont'], $GLOBALS['FONT_CONTENT']);
+		theme_optionselectfull("FONTSIZE_CONTENT", $GLOBALS['theme_arfontsize'], $GLOBALS['FONTSIZE_CONTENT']);
 		theme_optionselectfull("FONTCOLOR_CONTENT", $GLOBALS['theme_arcolor'], $GLOBALS['FONTCOLOR_CONTENT']);
 
-        print'  <BR>Box TitleBar Font:';
-                theme_optionselectfull("FONT_HTMLBOX_TITLE", $GLOBALS['theme_arfont'], $GLOBALS['FONT_HTMLBOX_TITLE']);
-                theme_optionselectfull("FONTSIZE_HTMLBOX_TITLE", $GLOBALS['theme_arfontsize'], $GLOBALS['FONTSIZE_HTMLBOX_TITLE']);
+	print'  <BR>Box TitleBar Font:';
+		theme_optionselectfull("FONT_HTMLBOX_TITLE", $GLOBALS['theme_arfont'], $GLOBALS['FONT_HTMLBOX_TITLE']);
+		theme_optionselectfull("FONTSIZE_HTMLBOX_TITLE", $GLOBALS['theme_arfontsize'], $GLOBALS['FONTSIZE_HTMLBOX_TITLE']);
 		theme_optionselectfull("FONTCOLOR_HTMLBOX_TITLE", $GLOBALS['theme_arcolor'], $GLOBALS['FONTCOLOR_HTMLBOX_TITLE']);
 
-        print'  <BR>
-                <INPUT TYPE="submit" NAME="font_action" VALUE="Preview Fonts">
-                <INPUT TYPE="submit" NAME="font_action" VALUE="Apply Fonts">
-                <INPUT TYPE="submit" NAME="font_action" VALUE="Cancel">
-                </FONT>
+	print'  <BR>
+		<INPUT TYPE="submit" NAME="font_action" VALUE="Preview Fonts">
+		<INPUT TYPE="submit" NAME="font_action" VALUE="Apply Fonts">
+		<INPUT TYPE="submit" NAME="font_action" VALUE="Cancel">
+		</FONT>
 ';
-        if(!$component){ print "</FORM>\n"; }
+	if(!$component){ 
+		print "</FORM>\n"; 
+	}
 }
 
 ?>

@@ -1,14 +1,23 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: cache.php,v 1.47 2000/12/14 17:56:51 tperdue Exp $
+/**
+ * Cache functions library.
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: cache.php,v 1.49 2001/06/08 14:56:43 dbrogdon Exp $
+ */
 
-
-// #################################### function cache_display
-
+/**
+ * cache_display() - Cache the output of a function
+ * 
+ * Caches the output of a function for the duration of $time.
+ *
+ * @param		string	The cache name
+ * @param		string	The funcion who's output is to be cached
+ * @param		int		The lenght of time the output should be cached
+ */
 function cache_display($name,$function,$time) {
 	global $Language;
 	$filename = $GLOBALS['sf_cache_dir']."/sfcache_". $Language->getLanguageId() ."_". $GLOBALS['sys_theme'] ."_$name.sf";
@@ -52,7 +61,7 @@ function cache_display($name,$function,$time) {
 		return cache_get_new_data($function);
 	}
 	while(!flock($rfh,1+4) && ($counter < 30)) { // obtained non blocking shared lock 
-		usleep(250000); // wait 0.25 seconds for the lock to become available
+		usleep(500000); // wait 0.5 seconds for the lock to become available
 		$counter++;
 	}
 	$result=stripslashes(fread($rfh,200000));
@@ -61,6 +70,11 @@ function cache_display($name,$function,$time) {
 	return $result;
 }
 
+/**
+ * cache_get_new_data() - Get new output for a function
+ *
+ * @param		string	The name of the function who's output is to be updated
+ */
 function cache_get_new_data($function) {
 	global $Language;
 	// Here should be localhost! It is chacked in write_cache.php .
@@ -69,5 +83,4 @@ function cache_get_new_data($function) {
 	eval("\$res= $function;");
 	return $res;
 }
-
 ?>

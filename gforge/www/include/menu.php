@@ -1,56 +1,115 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: menu.php,v 1.186 2000/11/30 05:33:42 tperdue Exp $
+/**
+ * menu.php
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: menu.php,v 1.202 2001/06/27 00:14:30 jbyers Exp $
+ */
 
-/* The correct theme.php must be included by this point -- Geoffrey */
+require_once('www/tracker/include/ArtifactTypeHtml.class');
 
-function menu_show_search_box() {
-	global $words,$forum_id,$group_id,$is_bug_page,$exact,$type_of_search;
+/**
+ * menu_show_search_box() - Show search box
+ *
+ * @param		bool	Show box horizontally
+ * @param		bool	Show box in new window
+ */
+function menu_show_search_box($show_horizontally=false, $new_window=true) {
+	global $words,$forum_id,$group_id,$atid,$exact,$type_of_search;
 
-	  // if there is no search currently, set the default
+	if ($new_window) {
+		$new_window = ' target="_blank"';
+	}
+
+	// if there is no search currently, set the default
 	if ( ! isset($type_of_search) ) {
 		$exact = 1;
 	}
 
-	print "\t<CENTER>\n";
-	print "\t<FONT SIZE=\"2\">\n";
-	print "\t<FORM action=\"/search/\" method=\"post\">\n";
+	if ($show_horizontally) {
+		print '
+		<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0>
+		<TR><TD>';
+	}
 
-	print "\t<SELECT name=\"type_of_search\">\n";
-	if ($is_bug_page && $group_id) {
-		print "\t<OPTION value=\"bugs\"".( $type_of_search == "bugs" ? " SELECTED" : "" ).">Bugs</OPTION>\n";
+	print '<CENTER>
+		<FONT SIZE="1">
+		<FORM action="/search/" method="POST"'.$new_window.'>
+
+		<SELECT name="type_of_search">';
+
+	if ($atid && $group_id) {
+		$group =& group_get_object($group_id);
+		if ($group && is_object($group)) {
+			$ath = new ArtifactTypeHtml($group,$atid);
+			if ($ath && is_object($ath)) {
+				print '
+					<OPTION value="artifact"'.( $type_of_search == 'artifact' ? ' SELECTED' : '' ).'>'. $ath->getName() .'</OPTION>';
+			}
+		}
 	} else if ($group_id && $forum_id) {
-		print "\t<OPTION value=\"forums\"".( $type_of_search == "forums" ? " SELECTED" : "" ).">This Forum</OPTION>\n";
+		print '
+			<OPTION value="forums"'.( $type_of_search == 'forums' ? ' SELECTED' : '' ).'>This Forum</OPTION>';
 	}
-	print "\t<OPTION value=\"soft\"".( $type_of_search == "soft" ? " SELECTED" : "" ).">Software/Group</OPTION>\n";
-	print "\t<OPTION value=\"people\"".( $type_of_search == "people" ? " SELECTED" : "" ).">People</OPTION>\n";
-	print "\t</SELECT>\n";
+	print '
+		<OPTION value="soft"'.( $type_of_search == 'soft' ? ' SELECTED' : '' ).'>Software/Group</OPTION>';
+	print '
+		<OPTION value="people"'.( $type_of_search == 'people' ? ' SELECTED' : '' ).'>People</OPTION>';
+	print '
+		<OPTION value="freshmeat"'.( $type_of_search == 'freshmeat' ? ' SELECTED' : '' ).'>Freshmeat.net</OPTION>';
+	print '
+		</SELECT>';
 
-	print "\t<BR>\n";
-	print "\t<INPUT TYPE=\"CHECKBOX\" NAME=\"exact\" VALUE=\"1\"".( $exact ? " CHECKED" : " UNCHECKED" )."> Require All Words \n";
+	print '<BR>';
+	print '
+		<INPUT TYPE="CHECKBOX" NAME="exact" VALUE="1"'.( $exact ? ' CHECKED' : ' UNCHECKED' ).'> Require All Words';
 
-	print "\t<BR>\n";
+	if ($show_horizontally) {
+		print '</TD>'; 
+	} else {
+		print '<BR>';
+	}
 	if ( isset($forum_id) ) {
-		print "\t<INPUT TYPE=\"HIDDEN\" VALUE=\"$forum_id\" NAME=\"forum_id\">\n";
+		print '
+		<INPUT TYPE="HIDDEN" VALUE="'.$forum_id.'" NAME="forum_id">';
 	} 
-	if ( isset($is_bug_page) ) {
-		print "\t<INPUT TYPE=\"HIDDEN\" VALUE=\"$is_bug_page\" NAME=\"is_bug_page\">\n";
-	}
 	if ( isset($group_id) ) {
-		print "\t<INPUT TYPE=\"HIDDEN\" VALUE=\"$group_id\" NAME=\"group_id\">\n";
+		print '
+		<INPUT TYPE="HIDDEN" VALUE="'.$group_id.'" NAME="group_id">';
 	}
+	if ( isset($atid) ) {
+		print '
+		<INPUT TYPE="HIDDEN" VALUE="'.$atid.'" NAME="atid">';
+	}
+	if ($show_horizontally) {
+		print '<TD>';
+	}
+	print '
+		<INPUT TYPE="text" SIZE="12" NAME="words" VALUE="'.$words.'">';
 
-	print "\t<INPUT TYPE=\"text\" SIZE=\"12\" NAME=\"words\" VALUE=\"$words\">\n";
-	print "\t<BR>\n";
-	print "\t<INPUT TYPE=\"submit\" NAME=\"Search\" VALUE=\"Search\">\n";
-	print "\t</FORM>\n";
+	if ($show_horizontally) {
+		print '</TD><TD>';
+	} else {
+		print '<BR>';
+	}
+	print '<INPUT TYPE="submit" NAME="Search" VALUE="Search">';
+
+	if ($show_horizontally) {
+		print '
+		</TD></TR></TABLE>';
+	}
+	print '</FORM></FONT>';
 }
 
-//depricated - theme wrapper
+/**
+ * menuhtml_top() - Theme wrapper
+ * DEPRECATED
+ *
+ * @deprecated
+ */
 function menuhtml_top($title) {
 	/*
 		Use only for the top most menu
@@ -58,63 +117,89 @@ function menuhtml_top($title) {
 	theme_menuhtml_top($title);
 }
 
-//deprecated - theme wrapper
+/**
+ * menuhtml_bottom() - Theme wrapper
+ * DEPRECATED
+ * 
+ * @deprecated
+ */
 function menuhtml_bottom() {
 	theme_menuhtml_bottom();
 }
 
+/**
+ * menu_software() - Show the software menu.
+ */
 function menu_software() {
 	GLOBAL $HTML, $Language;
 	$HTML->menuhtml_top('Software'); 
-		$HTML->menu_entry('/softwaremap/',$Language->SOFTWARE_MAP);
-		$HTML->menu_entry('/new/',$Language->NEW_RELEASES);
-		// $HTML->menu_entry('/mirrors/',$Language->OTHER_SITE_MIRRORS);
-		$HTML->menu_entry('/snippet/',$Language->CODE_SNIPPET_LIBRARY);
+		$HTML->menu_entry('/softwaremap/',$Language->getText('menu','software_map'));
+		$HTML->menu_entry('/new/',$Language->getText('menu','new_releases'));
+		// $HTML->menu_entry('/mirrors/',$Language->getText('menu','other_site_mirrors'));
+		$HTML->menu_entry('/snippet/',$Language->getText('menu','code_snippet_library'));
 	$HTML->menuhtml_bottom();
 }
 
+/**
+ * menu_sourceforge() - Show the sourceforge menu.
+ */
 function menu_sourceforge() {
 	GLOBAL $HTML, $Language;
 	$HTML->menuhtml_top('SourceForge');
-		$HTML->menu_entry('/docman/?group_id=1','<b>'.$Language->DOCUMENTATION.'</b>');
-		$HTML->menu_entry('/forum/?group_id=1',$Language->DISCUSSION_FORUMS);
-		$HTML->menu_entry('/people/',$Language->PROJECT_HELP_WANTED);
-		$HTML->menu_entry('/top/',$Language->TOP_PROJECTS);
+		$HTML->menu_entry('/docman/?group_id=1','<b>'.$Language->getText('menu','documentation').'</b>');
+		$HTML->menu_entry('/forum/?group_id=1',$Language->getText('menu','discussion_forums'));
+		$HTML->menu_entry('/people/',$Language->getText('menu','project_help_wanted'));
+		$HTML->menu_entry('/top/',$Language->getText('menu','top_projects'));
+		$HTML->menu_entry('/docman/display_doc.php?docid=2352&group_id=1',$Language->getText('menu','site_status'));
 		print '<P>';
-		// $HTML->menu_entry('/compilefarm/',$Language->COMPILE_FARM);
+		$HTML->menu_entry('http://jobs.osdn.com', 'jobs.osdn.com');
+		print '<P>';
+		// $HTML->menu_entry('/compilefarm/',$Language->getText('menu','compile_farm'));
 		// print '<P>';
-		// $HTML->menu_entry('/contact.php',$Language->CONTACT_US);
-		// $HTML->menu_entry('/about.php',$Language->ABOUT_SOURCEFORGE);
+		// $HTML->menu_entry('/contact.php',$Language->getText('menu','contact_us'));
+		// $HTML->menu_entry('/about.php',$Language->getText('menu','about_sourceforge'));
 	$HTML->menuhtml_bottom();
 }
 
+/**
+ * menu_foundry_links() - Show links to the Foundries.
+ */
 function menu_foundry_links() {
 	GLOBAL $HTML, $Language;
 	$HTML->menuhtml_top('SourceForge Foundries');
-		$HTML->menu_entry('/about_foundries.php', $Language->ABOUT_FOUNDRIES);
-		echo '<P>
-';
-		$HTML->menu_entry('/foundry/3d/', '3D');
-		$HTML->menu_entry('/foundry/games/', 'Games');
-		$HTML->menu_entry('/foundry/java/', 'Java');
-		$HTML->menu_entry('/foundry/printing/', 'Printing');
-		$HTML->menu_entry('/foundry/storage/', 'Storage');
+	$HTML->menu_entry('/about_foundries.php', $Language->getText('menu','about_foundries'));
+	echo '<P>';
+	$HTML->menu_entry('/foundry/linuxkernel/', 'Linux Kernel');
+	$HTML->menu_entry('/foundry/linuxdrivers/', 'Linux Drivers');
+	$HTML->menu_entry('/foundry/3d/', '3D');
+	$HTML->menu_entry('/foundry/games/', 'Games');
+	$HTML->menu_entry('/foundry/java/', 'Java');
+	$HTML->menu_entry('/foundry/printing/', 'Printing');
+	$HTML->menu_entry('/foundry/storage/', 'Storage');
 	$HTML->menuhtml_bottom();
 }
 
+/**
+ * menu_search() - Show the search menu.
+ */
 function menu_search() {
 	GLOBAL $HTML, $Language;
-	$HTML->menuhtml_top($Language->SEARCH);
+	$HTML->menuhtml_top($Language->getText('menu','search'));
 	menu_show_search_box();
 	$HTML->menuhtml_bottom();
 }
 
+/**
+ * menu_project() - Show the project menu
+ *
+ * @param		string	The group name
+ */
 function menu_project($grp) {
 	GLOBAL $HTML, $Language;
 	$HTML->menuhtml_top('Project: ' . group_getname($grp));
-		$HTML->menu_entry('/projects/'. group_getunixname($grp) .'/',$Language->PROJECT_SUMMARY);
+		$HTML->menu_entry('/projects/'. group_getunixname($grp) .'/',$Language->getText('menu','project_summary'));
 		print '<P>';
-		$HTML->menu_entry('/project/admin/?group_id='.$grp,$Language->PROJECT_ADMIN);
+		$HTML->menu_entry('/project/admin/?group_id='.$grp,$Language->getText('menu','project_admin'));
 	$HTML->menuhtml_bottom();
 }
 
@@ -136,16 +221,26 @@ function menu_news_admin() {
 	$HTML->menuhtml_bottom();
 }
 
+/**
+ * menu_foundry() - Show the foundry menu
+ *
+ * @param		string	The foundry name
+ */
 function menu_foundry($grp) {
 	GLOBAL $HTML, $Language;
 	$unix_name=strtolower(group_getunixname($grp));
 	$HTML->menuhtml_top('Foundry: ' . group_getname($grp));
-		$HTML->menu_entry('/foundry/'. $unix_name .'/',$Language->FOUNDRY_SUMMARY);
+		$HTML->menu_entry('/foundry/'. $unix_name .'/',$Language->getText('menu','foundry_summary'));
 		print '<P>';
-		$HTML->menu_entry('/foundry/'. $unix_name .'/admin/', $Language->FOUNDRY_ADMIN);
+		$HTML->menu_entry('/foundry/'. $unix_name .'/admin/', $Language->getText('menu','foundry_admin'));
 	$HTML->menuhtml_bottom();
 }
 
+/**
+ * menu_foundry_guides() - Show the foundry guides menu
+ *
+ * @param		string	The foundry name
+ */
 function menu_foundry_guides($grp) {
 	GLOBAL $HTML, $Language;
 	/*
@@ -180,23 +275,26 @@ function menu_foundry_guides($grp) {
 
 }
 
+/**
+ * menu_loggedin() - Show links appropriate for someone logged in, like account maintenance, etc
+ *
+ * @param		string	 The page title
+ */
 function menu_loggedin($page_title) {
 	GLOBAL $HTML, $Language;
-	/*
-		Show links appropriate for someone logged in, like account maintenance, etc
-	*/
+		
 	$HTML->menuhtml_top('Logged In: '.user_getname());
-		$HTML->menu_entry('/account/logout.php',$Language->LOGOUT);
-		$HTML->menu_entry('/register/',$Language->NEW_PROJECT);
-		$HTML->menu_entry('/account/',$Language->ACCOUNT_MAINTENANCE);
+		$HTML->menu_entry('/account/logout.php',$Language->getText('menu','logout'));
+		$HTML->menu_entry('/register/',$Language->getText('menu','new_project'));
+		$HTML->menu_entry('/account/',$Language->getText('menu','account_maintenance'));
 		print '<P>';
-		$HTML->menu_entry('/themes/',$Language->CHANGE_MY_THEME);
-		$HTML->menu_entry('/my/',$Language->MY_PERSONAL_PAGE);
+		$HTML->menu_entry('/themes/',$Language->getText('menu','change_my_theme'));
+		$HTML->menu_entry('/my/',$Language->getText('menu','my_personal_page'));
 
 		if (!$GLOBALS['HTTP_POST_VARS']) {
 			$bookmark_title = urlencode( str_replace('SourceForge: ', '', $page_title));
 			print '<P>';
-			$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->BOOKMARK_PAGE);
+			$HTML->menu_entry('/my/bookmark_add.php?bookmark_url='.urlencode($GLOBALS['REQUEST_URI']).'&bookmark_title='.$bookmark_title,$Language->getText('menu','bookmark_page'));
 		}
 	$HTML->menuhtml_bottom();
 
@@ -212,15 +310,13 @@ function menu_notloggedin() {
 	GLOBAL $HTML, $Language;
 	$HTML->menuhtml_top('Status:');
 		echo '<h4><FONT COLOR="#990000">NOT LOGGED IN</h4>';
-		$HTML->menu_entry('/account/login.php',$Language->LOGIN);
-		$HTML->menu_entry('/account/register.php',$Language->NEW_USER);
+		$HTML->menu_entry('/account/login.php',$Language->getText('menu','login'));
+		$HTML->menu_entry('/account/register.php',$Language->getText('menu','new_user'));
 	$HTML->menuhtml_bottom();
 }
 
 /**
- *
- *  Show a form with a language pop-up box
- *
+ * menu_language_box() - Show a form with a language pop-up box
  */
 function menu_language_box() {
 	GLOBAL $HTML, $Language,$cookie_language_id;
@@ -235,7 +331,7 @@ function menu_language_box() {
 	}
 
 	echo '
-	<!--    
+	<!--	
 
 		this document.write is necessary
 		to prevent the ads from screwing up

@@ -1,10 +1,13 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * pre.php - Automatically prepend to every page.
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
@@ -27,7 +30,7 @@ require ('/etc/sourceforge/local.inc');
 */
 
 if ($OVERRIDES_PATH) {
-	require ($OVERRIDES_PATH."overrides.inc");
+	require_once($OVERRIDES_PATH."overrides.inc");
 }
 
 if (($HTTP_HOST != $GLOBALS['sys_default_domain']) && ($HTTP_HOST != $GLOBALS['sys_fallback_domain']) && ($HTTP_HOST != 'localhost') && ($HTTP_HOST != $GLOBALS['sys_default_domain'].':80')) {
@@ -40,56 +43,59 @@ if (($HTTP_HOST != $GLOBALS['sys_default_domain']) && ($HTTP_HOST != $GLOBALS['s
 }
 
 //library to determine browser settings
-require('browser.php');
+require_once('www/include/browser.php');
 
 //base error library for new objects
-require('Error.class');
+require_once('common/include/Error.class');
 
 // HTML layout class, may be overriden by the Theme class
-require('Layout.class');
+require_once('www/include/Layout.class');
 
 $HTML = new Layout();
 
 //various html utilities
-require('utils.php');
+require_once('common/include/utils.php');
 
 //database abstraction
-require('database.php');
+require_once('common/include/database.php');
 
 //security library
-require('session.php');
+require_once('common/include/session.php');
 
 // LDAP library
-require('ldap.php');
+require_once('common/include/ldap.php');
 
 //user functions like get_name, logged_in, etc
-require('User.class');
+require_once('common/include/User.class');
 
 //group functions like get_name, etc
-require('Group.class');
+require_once('common/include/Group.class');
+
+//permission functions
+require_once('common/include/Permission.class');
 
 //Project extends Group and includes preference accessors
-require('Project.class');
+require_once('common/include/Project.class');
 
 //Foundry extends Group and includes preference/data accessors
-require ('Foundry.class');
+require_once('common/include/Foundry.class');
 
 //library to set up context help
-require('help.php');
+require_once('www/include/help.php');
 
 //exit_error library
-require('exit.php');
+require_once('www/include/exit.php');
 
 //various html libs like button bar, themable
-require('html.php');
+require_once('www/include/html.php');
 
 //left-hand nav library, themable
-require('menu.php');
+require_once('www/include/menu.php');
 
 //theme functions like get_themename, etc
-require('theme.php');
+require_once('www/include/theme.php');
 
-$sys_datefmt = "Y-M-d H:i";
+$sys_datefmt = "Y-m-d H:i";
 
 // #### Connect to db
 
@@ -107,10 +113,19 @@ session_set();
 theme_sysinit($sys_themeid);
 
 // OSDN functions and defs
-require('osdn.php');
+require_once('www/include/osdn.php');
 
 //insert this page view into the database
-require('logger.php');
+require_once('www/include/logger.php');
+
+//
+//	If logged in, set up a $LUSER var referencing
+//	the logged in user's object
+//
+if (user_isloggedin()) {
+	//set up the user's timezone if they are logged in
+	$LUSER =& session_get_user();
+}
 
 /*
 
@@ -121,7 +136,7 @@ require('logger.php');
 
 if (user_isloggedin()) {
 	//set up the user's timezone if they are logged in
-	putenv('TZ='.user_get_timezone());
+	putenv('TZ='. $LUSER->getTimeZone());
 } else {
 	//just user pacific time as always
 }
@@ -132,33 +147,40 @@ if (user_isloggedin()) {
 
 */
 
-require ('BaseLanguage.class');
+require_once('www/include/BaseLanguage.class');
 
 if (user_isloggedin()) {
-	$user=&user_get_object(user_getid());
-	$res=$user->getData();
-	$classfile=db_result($res,0,'filename');
-	if ($classfile) {
-		include ("languages/$classfile");
+	$res=$LUSER->getData();
 		$classname=db_result($res,0,'classname');
-		$Language=new $classname();
+	if ($classname) {
+		$Language=new BaseLanguage();
+		$Language->loadLanguage($classname);
 	} else {
-		include ('languages/English.class');
-	        $Language=new English();
+		$Language=new BaseLanguage();
+		$Language->loadLanguage('English');
 	}
 } else {
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
 	//if we don't support it, just use English as default
 	$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
-	$classfile=db_result($res,0,'filename');
-	if (!$classfile) $classfile="English.class";
-	include ("languages/$classfile");
 	$classname=db_result($res,0,'classname');
-	if (!$classname) $classname="English";
-	$Language=new $classname();
+	if (!$classname) {
+		$classname="English";
+	}
+	$Language=new BaseLanguage();
+	$Language->loadLanguage($classname);
 }
 
+
+//ob_start(ob_gzhandler);
+
+//
+//	For now, only cache English, non-logged-in pages, with no POST going on
+//
+if (!user_isloggedin() && ($Language->getLanguageId() == 1) && (count($HTTP_POST_VARS) < 1) && !session_issecure()) {
+	include_once('common/include/jpcache.php');
+}
 
 /*
 
@@ -168,11 +190,9 @@ RESERVED VARIABLES
 $conn
 $session_hash
 $Language
-$User
+$LUSER - Logged in user object
 $HTML
-$foundry
-$project
-$Group
+$sys_datefmt
 
 */
 

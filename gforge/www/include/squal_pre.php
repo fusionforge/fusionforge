@@ -1,37 +1,34 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * squal_pre.php
+ *
+ * Drastically simplified version of pre.php
+ * 
+ * Sets up database connection and session
+ * 
+ * NOTE:
+ *		You cannot call HTML, user, group or related functions
+ * 
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
-
-/*
-
-
-	Drastically simplified version of pre.php
-
-	Sets up database connection and session
-
-	###
-	###  You cannot call HTML, user, group or related functions
-	###
-
-*/
-
-require ('/etc/sourceforge/local.inc');
-require('database.php');
-require('session.php');
-require('Error.class');
-require('User.class');
-require('utils.php');
+require_once('/etc/sourceforge/local.inc');
+require_once('common/include/database.php');
+require_once('common/include/session.php');
+require_once('common/include/Error.class');
+require_once('common/include/User.class');
+require_once('common/include/Permission.class');
+require_once('common/include/utils.php');
 
 //plain text version of exit_error();
-require('squal_exit.php');
+require_once('squal_exit.php');
 
 //needed for logging / logo
-require('browser.php');
+require_once('browser.php');
 
 $sys_datefmt = "m/d/y H:i";
 
@@ -43,7 +40,7 @@ if (!$conn) {
 	exit_error("Could Not Connect to Database",db_error());
 }
 
-//require('logger.php');
+//require_once('logger.php');
 
 // #### set session
 

@@ -1,52 +1,135 @@
 <?php   
-
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//	      
-// $Id$
-
-
-/*
-
-	Extends the basic Error class to add HTML functions for displaying all site dependent HTML, while allowing extendibility/overriding by themes via the Theme class.
-
-	Make sure browser.php is included _before_ you create an instance of this object.
-
-	Geoffrey Herteg, August 29, 2000
-
-*/
-
+/**
+ * Base layout class.
+ *
+ * Extends the basic Error class to add HTML functions 
+ * for displaying all site dependent HTML, while allowing 
+ * extendibility/overriding by themes via the Theme class.
+ * 
+ * Make sure browser.php is included _before_ you create an instance of this object.
+ * 
+ * Geoffrey Herteg, August 29, 2000
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 class Layout extends Error {
 
+	/**
+	 * The root location for images
+	 *
+	 * @var		string	$imgroot
+	 */
 	var $imgroot = '/themes/forged/images/';
 
 	// Color Constants
+	/**
+	 * The content background color
+	 *
+	 * @var		constant		$COLOR_CONTENT_BACK
+	 */
 	var $COLOR_CONTENT_BACK= '#FFFFFF';
+
+	/**
+	 * The primary light background color
+	 *
+	 * @var		constant		$COLOR_LTBACK1
+	 */
 	var $COLOR_LTBACK1= '#EAECEF';
+
+	/**
+	 * The secondary light background color
+	 *
+	 * @var		constant		$COLOR_LTBACk2
+	 */
 	var $COLOR_LTBACK2= '#FAFAFA';
+	
+	/**
+	 * The HTML box title color
+	 *
+	 * @var		constant		$COLOR_HTMLBOX_TITLE
+	 */
 	var $COLOR_HTMLBOX_TITLE = '#D1D5D7';
+
+	/**
+	 * The HTML box background color
+	 *
+	 * @var		constant		$COLOR_HTMLBOX_BACK
+	 */
 	var $COLOR_HTMLBOX_BACK = '#EAECEF';
 
 	// Font Face Constants
+	/**
+	 * The content font
+	 *
+	 * @var		constant		$FONT_CONTENT
+	 */
 	var $FONT_CONTENT = 'Helvetica';
+
+	/**
+	 * The HTML box title font
+	 *
+	 * @var		constant		$FONT_HTMLBOX_TITLE
+	 */
 	var $FONT_HTMLBOX_TITLE = 'Helvetica';
 
 	// Font Color Constants
+	/**
+	 * The HTML box title font color
+	 *
+	 * @var		constant		$FONTCOLOR_HTMLBOX_TITLE
+	 */
 	var $FONTCOLOR_HTMLBOX_TITLE = '#333333';
+
+	/**
+	 * The content font color
+	 *
+	 * @var		constant		$FONTCOLOR_CONTENT
+	 */
 	var $FONTCOLOR_CONTENT = '#333333';
 
 	// Font Size Constants
+	/**
+	 * The font size
+	 *
+	 * @var		constant		$FONTSIZE
+	 */
 	var $FONTSIZE = 'small';
+
+	/**
+	 * The smaller font size
+	 *
+	 * @var		constant		$FONTSIZE_SMALLER
+	 */
 	var $FONTSIZE_SMALLER='x-small';
+
+	/**
+	 * The smallest font size
+	 *
+	 * @var		constnat		$FONTSIZE_SMALLEST
+	 */
 	var $FONTSIZE_SMALLEST='xx-small';
+
+	/**
+	 * The HTML box title font size
+	 *
+	 * @var		constant		$FONTSIZE_HTMLBOX_TITLE
+	 */
 	var $FONTSIZE_HTMLBOX_TITLE = 'small';
 
 	//Define all the icons for this theme
+	/**
+	 * Icons array
+	 *
+	 * @var		array	$icons
+	 */
 	var $icons = array(
 		'Summary' => '/images/ic/anvil24.png',
+		'Admin' => '/images/ic/anvil24.png',
 		'Homepage' => '/images/ic/home.png',
 		'Forums' => '/images/ic/notes.png',
 		'Bugs' => '/images/ic/bug.png',
@@ -61,9 +144,16 @@ class Layout extends Error {
 		'Files' => '/images/ic/save.png'
 		);
 
+	/**
+	 * Hell if I know?
+	 *
+	 * @var		array	$bgpri
+	 */
 	var $bgpri = array();
 
-	// Constuctor
+	/**
+	 * Layout() - Constructor
+	 */
 	function Layout() {
 		GLOBAL $bgpri;
 		// Constructor for parent class...
@@ -116,7 +206,14 @@ class Layout extends Error {
 		$this->FONTSIZE_HTMLBOX_TITLE = $this->FONTSIZE;
 	}
 
-	// Box Top, equivalent to html_box1_top()
+	/**
+	 * box1_top() - Box Top, equivalent to html_box1_top()
+	 *
+	 * @param	string	The box top title
+	 * @param	bool	Whether to echo or return the output
+	 * @param	string	The box top background color
+	 * @param	bool	Whether to start the first row or not
+	 */
 	function box1_top($title,$echoout=1,$bgcolor='',$start_first_row=1){
 		if (!$bgcolor) {
 			$bgcolor=$this->COLOR_HTMLBOX_BACK;
@@ -139,7 +236,15 @@ class Layout extends Error {
 		}
 	}
 
-	// Box Middle, equivalent to html_box1_middle()
+	/**
+	 * box1_middle() - Box Middle, equivalent to html_box1_middle()
+	 *
+	 * @param	string	The box title
+	 * @param	string	The box background color
+	 * @param	string  The title background color
+	 * @param	bool	Whether to start the first row or not
+	 * @returns	Middle box HTML content
+	 */
 	function box1_middle($title,$bgcolor='',$title_bgcolor='',$start_first_row=1) {
 		if (!$bgcolor) {
 			$bgcolor=$this->COLOR_HTMLBOX_BACK;
@@ -164,7 +269,11 @@ class Layout extends Error {
 		return $return;
 	}
 
-	// Box Bottom, equivalent to html_box1_bottom()
+	/**
+	 * box1_bottom() - Box Bottom, equivalent to html_box1_bottom()
+	 *
+	 * @param	bool	Whether to echo or return the output
+	 */
 	function box1_bottom($echoout=1) {
 		$return = '
 		</TD>
@@ -178,9 +287,14 @@ class Layout extends Error {
 		}
 	}
 
+	/**
+	 * generic_header_start() - Start a generic HTML header
+	 *
+	 * @param	array	Header parameters array
+	 */
 	function generic_header_start($params) {
 
-		global $G_SESSION, $Language;
+		global $G_SESSION, $Language, $sys_name;
 
 		if (!$params['title']) {
 			$params['title'] = "SourceForge";
@@ -191,6 +305,7 @@ class Layout extends Error {
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
 	"http://www.w3.org/TR/REC-html40/loose.dtd">
 
+<!-- Server: <?php echo $sys_name; ?> -->
 <html lang="<?php echo $Language->getLanguageCode(); ?>">
   <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>">
@@ -198,25 +313,36 @@ class Layout extends Error {
 	<SCRIPT language="JavaScript">
 	<!--
 	function help_window(helpurl) {
-		HelpWin = window.open(helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
+		HelpWin = window.open( '<?php echo ((session_issecure()) ? 'https://'.$GLOBALS['sys_default_domain'] : 'http://'.$GLOBALS['sys_default_domain'] ); ?>' + helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
 	}
 	// -->
 	</SCRIPT>
 <?php
 	}
 
+	/**
+	 * generic_header_end() - End a generic HTML header
+	 *
+	 * @param	array	Header parameters array
+	 */
 	function generic_header_end($params) {
 	?>
    </HEAD>
 <?php
 	}
 
+	/**
+	 * generic_footer() - Display a generic HTML footer
+	 *
+	 * @param	array	Footer parameters array
+	 */
 	function generic_footer($params) {
-		global $PHP_SELF;
+		global $PHP_SELF, $sys_name;
 		echo '<P><A HREF="/source.php?page_url='.$PHP_SELF.'"><B><FONT COLOR="WHITE">Show Source</FONT></B></A><P>';
 
 		global $IS_DEBUG,$QUERY_COUNT;
-		if ($IS_DEBUG) {
+		if ($IS_DEBUG && user_isloggedin() && user_ismember(1,'A')) {
+			echo "<CENTER><B><FONT COLOR=RED>Server: $sys_name</FONT ></B></CENTER>";
 			echo "<CENTER><B><FONT COLOR=RED>Query Count: $QUERY_COUNT</FONT ></B></CENTER>";
 			echo "<P>$GLOBALS[G_DEBUGQUERY]";
 		}
@@ -234,22 +360,45 @@ For privacy
 policy information, please see the <a href="/tos/privacy.php" class="legallink"
 >SourceForge Privacy Policy</a>.
 Content owned by VA Linux Systems is copyright 
-1999-2000 VA Linux Systems, Inc.  All rights reserved.
+1999-2001 VA Linux Systems, Inc.  All rights reserved.
 </font>
 <BR>&nbsp;
+
+<?php
+
+//
+//  Actual layer call must be outside of table for some reason
+//
+
+if (!session_issecure() && !$GLOBALS['IS_DEBUG']) {
+
+echo '
+<LAYER SRC="http://sfads.osdn.com/1.html" width=468 height=60 visibility=\'hide\' '.
+'onLoad="moveToAbsolute(adlayer.pageX,adlayer.pageY); clip.height=60; clip.width=468; visibility=\'show\';"></LAYER>';
+
+}
+
+?>
 
 </body>
 </html>
 	<?php
 	}
 
+	/**
+	 *	header() - "steel theme" top of page
+	 *
+	 * @param	array	Header parameters array
+	 */
 	function header($params) {
+		global $Language;
+
 		$this->generic_header_start($params); 
 /*
 
 
 
-	WARNING - changing this can affect
+	WARNING - changing this font call can affect
 	INTERNATIONALIZATION
 
 
@@ -261,6 +410,7 @@ Content owned by VA Linux Systems is copyright
 
 	?>
 
+		<link rel="SHORTCUT ICON" href="/images/favicon.ico">
 		<style type="text/css">
 			<!--
 	OL,UL,P,BODY,TD,TR,TH,FORM { font-family: <?php echo $site_fonts; ?>; font-size:<?php echo $this->FONTSIZE; ?>; color: <?php echo $this->FONTCOLOR_CONTENT ?>; }
@@ -327,7 +477,7 @@ echo html_blankimage(5,100);
 ?>
 <br>
 <!-- start page body -->
-<CENTER>
+<div align="center">
 <table cellpadding="0" cellspacing="0" border="0" width="99%">
 	<tr>
 		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tleft1.png","17","17",array()); ?></td>
@@ -362,7 +512,29 @@ echo html_blankimage(5,100);
 	<td width="20" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>fade1.png" nowrap>&nbsp;</td>
 	<td valign="top" bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width="99%">
 	<BR>
-<?php
+
+	<?php
+
+	if ($params['titlevals']) {
+		$title =        $Language->getText($params['pagename'],'title',$params['titlevals']);
+	} else {
+		$title =        $Language->getText($params['pagename'],'title');
+	}
+
+	if ($params['sectionvals']) {
+		$section =      $Language->getText($params['pagename'],'section',$params['sectionvals']);
+	} else {
+		$section =      $Language->getText($params['pagename'],'section');
+	}
+
+	if ($section) {
+		print "<b>$section</b>\n";
+	}
+
+	if ($title) {
+	       print "<h2>$title</h2>\n";
+	}
+
 	}
 
 	function footer($params) {
@@ -385,6 +557,7 @@ echo html_blankimage(5,100);
 		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>bbar1.png" bgcolor="#7c8188"><?php echo html_image($this->imgroot . "bright1.png","17","17",array()); ?></td>
 	</tr>
 </table>
+</div>
 
 <!-- themed page footer -->
 <?php 
@@ -393,25 +566,31 @@ echo html_blankimage(5,100);
 
 
 
+	/**
+	 * menuhtml_top() - HTML top menu
+	 *
+	 * Use only for the top most menu
+	 *
+	 * @param	string	Menu title
+	 */
 	function menuhtml_top($title) {
-		/*
-			Use only for the top most menu
-		*/
-	?>
+?>
 <table cellpadding="0" cellspacing="0" border="0" width="140">
 	<tr>
 		<td align="left" valign="middle"><b><?php echo $title; ?></b><br></td>
 	</tr>
 	<tr>
 		<td align="right" valign="middle">
-	<?php
+<?php
 	}
 
 
+	/**
+	 * menuhtml_bottom() - HTML bottom menu
+	 *
+	 * End the table
+	 */
 	function menuhtml_bottom() {
-		/*
-			End the table
-		*/
 		print '
 			<BR>
 			</td>
@@ -424,14 +603,14 @@ echo html_blankimage(5,100);
 		print "\t".'<A class="menus" href="'.$link.'">'.$title.'</A> &nbsp;' . html_image($this->imgroot . "point1.png","7","7",array()) . '<br>';
 	}
 
-	/*!     @function tab_entry
-		@abstract Prints out the a themed tab, used by project_tabs
-		@param  $url is the URL to link to
-			$icon is the image to use (if the theme uses it)
-			$title is the title to use in the link tags
-			$selected is a boolean to test if the tab is 'selected'
-		@result text - echos HTML to the screen directly
-	*/
+	/**
+	 *	tab_entry() - Prints out the a themed tab, used by project_tabs
+	 *
+	 *	@param	string	Is the URL to link to
+	 *	@param	string	Us the image to use (if the theme uses it)
+	 *	@param	string	Is the title to use in the link tags
+	 *	@param	bool	Is a boolean to test if the tab is 'selected'
+	 */
 	function tab_entry($url='http://localhost/', $icon='', $title='Home', $selected=0) {
 		print '
 		<A ';
@@ -443,14 +622,15 @@ echo html_blankimage(5,100);
 		print 'href="'. $url .'">' . $title . '</A>&nbsp;|&nbsp;';
 	}
 
-	/*!     @function project_tabs
-		@abstract Prints out the project tabs, contained here in case
-			we want to allow it to be overriden
-		@param 	$toptab is the tab currently selected
-			$group is the group we should look up get title info
-		@result text - echos HTML to the screen directly
-	*/
-	function project_tabs($toptab,$group) {
+	/**
+	 *	project_tabs() - Prints out the project tabs, contained here in case
+	 *		we want to allow it to be overriden
+	 *
+	 *	@param	string	Is the tab currently selected
+	 *	@param	string	Is the group we should look up get title info
+	 *  @param	string	Any extra text to print out
+	 */
+	function project_tabs($toptab,$group,$extra_text='') {
 
 		global $Language;
 
@@ -464,102 +644,132 @@ echo html_blankimage(5,100);
 			return;
 		}
 
-		print '<H2>'. $project->getPublicName() .' - ';
+/*		print '<H2>'. $project->getPublicName() .' - ';
 		// specific to where we're at
 		switch ($toptab) {
-			case 'home': print $Language->GROUP_SHORT_SUMMARY; break;
-			case 'forums': print $Language->GROUP_SHORT_FORUM; break;
-			case 'bugs': print $Language->GROUP_SHORT_BUGS; break;
-			case 'support': print $Language->GROUP_SHORT_SUPPORT; break;
-			case 'mail': print $Language->GROUP_SHORT_MAIL; break;
-			case 'pm': print $Language->GROUP_SHORT_PM; break;
-			case 'docman': print $Language->GROUP_SHORT_DOCMAN; break;
-			case 'surveys': print $Language->GROUP_SHORT_SURVEY; break;
-			case 'cvs': print $Language->GROUP_SHORT_CVS; break;
-			case 'downloads': print $Language->GROUP_SHORT_FILES; break;
-			case 'news': print $Language->GROUP_SHORT_NEWS; break;
-			case 'patch': print $Language->GROUP_SHORT_PATCH; break;
-			case 'memberlist': print $Language->GROUP_SHORT_MEMBERLIST; break;
-//			default: print "???" . $toptab; break;
-			default: print $Language->GROUP_SHORT_SUMMARY; break;
+			case 'home': print $Language->getText('group','short_summary'); break;
+			case 'admin': print $Language->getText('group','short_admin'); break;
+			case 'forums': print $Language->getText('group','short_forum'); break;
+			case 'tracker': print $Language->getText('group','short_tracker'); break;
+			case 'mail': print $Language->getText('group','short_mail'); break;
+			case 'pm': print $Language->getText('group','short_pm'); break;
+			case 'docman': print $Language->getText('group','short_docman'); break;
+			case 'surveys': print $Language->getText('group','short_survey'); break;
+			case 'cvs': print $Language->getText('group','short_cvs'); break;
+			case 'downloads': print $Language->getText('group','short_files'); break;
+			case 'news': print $Language->getText('group','short_news'); break;
+			case 'memberlist': print $Language->getText('group','short_memberlist'); break;
+			default: print $Language->getText('group','short_summary'); break;
 		}
-	print '</H2>
-	<P>
-	<HR SIZE="1" NoShade>';
+
+		if ($extra_text) {
+			print ' - '.$extra_text;
+		}
+
+*/
+
+		print '</H2>
+		<P>
+		<HR SIZE="1" NoShade>';
 
 		// Summary
 		$this->tab_entry('/projects/'. $project->getUnixName() .'/', $this->icons['Summary'],
-			$Language->GROUP_SHORT_SUMMARY, $toptab == 'home');
+			$Language->getText('group','short_summary'), $toptab == 'home');
+
+		// Project Admin 
+		$this->tab_entry('/project/admin/?group_id='. $group, $this->icons['Admin'],
+			$Language->getText('group','short_admin'), $toptab == 'admin');
 
 		// Homepage
 		$this->tab_entry('http://'. $project->getHomePage(), $this->icons['Homepage'],
-			$Language->GROUP_SHORT_HOMEPAGE);
+			$Language->getText('group','short_homepage'));
 
 		// Forums
 		if ($project->usesForum()) {
 			$this->tab_entry('/forum/?group_id='.$group, $this->icons['Forums'],
-				$Language->GROUP_SHORT_FORUM, $toptab == 'forums');
+				$Language->getText('group','short_forum'), $toptab == 'forums');
 		}
 
-		// Bug Tracking
-		if ($project->usesBugs()) {
-			$this->tab_entry('/bugs/?group_id='.$group, $this->icons['Bugs'],
-				$Language->GROUP_SHORT_BUGS, $toptab == 'bugs');
-		}
+		// Artifact Tracking
+		$this->tab_entry('/tracker/?group_id='.$group, $this->icons['Tracker'],
+			$Language->getText('group','short_tracker'), $toptab == 'tracker');
 
-		// Support Tracking
-		if ($project->usesSupport()) {
-			$this->tab_entry('/support/?group_id='.$group, $this->icons['Support'],
-				$Language->GROUP_SHORT_SUPPORT, $toptab == 'support');
-		}
+/*
+	Messy hack but they insisted on it -
 
-		// Patch Manager
-		if ($project->usesPatch()) {
-			$this->tab_entry('/patch/?group_id='.$group, $this->icons['Patches'],
-				$Language->GROUP_SHORT_PATCH, $toptab == 'patch');
+	We need to get the bug, support, and patch tracker info
+	and display it here if they are public
+*/
+		$res=db_query("SELECT * 
+			FROM artifact_group_list 
+			WHERE group_id='$group'
+			AND is_public='1' 
+			AND datatype > 0
+			ORDER BY datatype ASC");
+		$rows=db_numrows($res);
+//
+//	Iterate through the public pre-defined trackers and add them to nav bar
+//
+		for ($i=0; $i<$rows; $i++) {
+			if (db_result($res,$i,'datatype') == 1) {
+				//bug Tracker
+				$this->tab_entry('/tracker/?group_id='.$group.'&atid='.db_result($res,$i,'group_artifact_id'), 
+				$this->icons['Bugs'],
+				$Language->getText('group','short_bugs'), $toptab == 'bugs');
+			} elseif (db_result($res,$i,'datatype') == 2) {
+				//support Tracker
+				$this->tab_entry('/tracker/?group_id='.$group.'&atid='.db_result($res,$i,'group_artifact_id'), 
+				$this->icons['Support'],
+				$Language->getText('group','short_support'), $toptab == 'support');
+			} elseif (db_result($res,$i,'datatype') == 3) {
+				//patch Tracker
+				$this->tab_entry('/tracker/?group_id='.$group.'&atid='.db_result($res,$i,'group_artifact_id'), 
+				$this->icons['Patches'],
+				$Language->getText('group','short_patch'), $toptab == 'patch');
+			}
 		}
 
 		// Mailing Lists
 		if ($project->usesMail()) {
 			$this->tab_entry('/mail/?group_id='.$group, $this->icons['Lists'], 
-				$Language->GROUP_SHORT_MAIL, $toptab == 'mail');
+				$Language->getText('group','short_mail'), $toptab == 'mail');
 		}
 
 		// Project Manager
 		if ($project->usesPm()) {
 			$this->tab_entry('/pm/?group_id='.$group, $this->icons['Tasks'], 
-				$Language->GROUP_SHORT_PM, $toptab == 'pm');
+				$Language->getText('group','short_pm'), $toptab == 'pm');
 		}
 
 		// Doc Manager
 		if ($project->usesDocman()) {
 			$this->tab_entry('/docman/?group_id='.$group, $this->icons['Docs'], 
-				$Language->GROUP_SHORT_DOCMAN, $toptab == 'docman');
+				$Language->getText('group','short_docman'), $toptab == 'docman');
 		}
 
 		// Surveys
 		if ($project->usesSurvey()) {
 			$this->tab_entry('/survey/?group_id='.$group, $this->icons['Surveys'], 
-				$Language->GROUP_SHORT_SURVEY, $toptab == 'surveys');
+				$Language->getText('group','short_survey'), $toptab == 'surveys');
 		}
 
 		//newsbytes
 		if ($project->usesNews()) {
 			$this->tab_entry('/news/?group_id='.$group, $this->icons['News'], 
-				$Language->GROUP_SHORT_NEWS, $toptab == 'news');
+				$Language->getText('group','short_news'), $toptab == 'news');
 		}
 
 		// CVS
 		if ($project->usesCVS()) {
 			$this->tab_entry('/cvs/?group_id='.$group, $this->icons['CVS'], 
-				$Language->GROUP_SHORT_CVS, $toptab == 'cvs');
+				$Language->getText('group','short_cvs'), $toptab == 'cvs');
 		}
 
 		// Downloads
-		$this->tab_entry('/project/filelist.php?group_id='.$group, $this->icons['Files'], 
-			$Language->GROUP_SHORT_FILES, $toptab == 'downloads');
+		$this->tab_entry('/project/showfiles.php?group_id='.$group, $this->icons['Files'], 
+			$Language->getText('group','short_files'), $toptab == 'downloads');
 
-		print '<HR SIZE="1" NoShade><P>';
+		print '<HR SIZE="1" NoShade><BR>';
 	}
 
 

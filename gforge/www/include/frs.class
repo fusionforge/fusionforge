@@ -1,55 +1,85 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: frs.class,v 1.6 2000/12/13 19:00:11 dbrogdon Exp $
-
 /**
  * Base class for FRS (File Release System) and QRS (Quick-file Release System)
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
  *
+ * @version   $Id: frs.class,v 1.16 2001/06/08 18:44:05 dbrogdon Exp $
  * @author Darrell Brogdon <dbrogdon@valinux.com>
  */
+
 class FRS extends Error {
 
-	// {{{ Properties
-
+	/**
+	 * The group ID
+	 *
+	 * @var		int		$group_id
+	 */
 	var $group_id   = "";
-	var $package_id = "";
-	var $release_id = "";
-	var $project_id = "";
-	var $file_id    = "";
-	var $file_type  = "";
-	var $proc_type  = "";
-
-	// }}}
-
-	// {{{ Constructor
 
 	/**
+	 * The package ID
+	 *
+	 * @var		int		$package_id
+	 */
+	var $package_id = "";
+
+	/**
+	 * The release ID
+	 *
+	 * @var		int		$release_id
+	 */
+	var $release_id = "";
+
+	/**
+	 * The project ID
+	 *
+	 * @var		int		$project_id
+	 */
+	var $project_id = "";
+
+	/**
+	 * The file ID
+	 *
+	 * @var		int		$file_id
+	 */
+	var $file_id    = "";
+
+	/**
+	 * The file type
+	 *
+	 * @var		string	$file_type
+	 */
+	var $file_type  = "";
+
+	/**
+	 * The processor type
+	 *
+	 * @var		string	$proc_type
+	 */
+	var $proc_type  = "";
+
+	/**
+	 * FRS() - Constructor
+	 * 
 	 * Sets the value of Class vars if the function arguments exist.
 	 *
-	 * @param $group_id int The group ID
-	 * @param $package_id int The package ID
-	 * @param $release_id int The release ID
+	 * @param	int		The group ID
+	 * @param	int		The package ID
+	 * @param	int		The release ID
 	 */
-	function FRS($group_id)
-	{
+	function FRS($group_id) {
 		$this->group_id 	= $group_id;
 	}
 
-	// }}}
-	// {{{ frsAddChangeLog
-
 	/**	
-	 * Add an entry to the change log
+	 * frsAddChangeLog() - Add an entry to the change log
 	 * 
-	 * @param $change_log_text int The text that is to be added to the change log
-	 * @returns True on success, False on error
+	 * @param	int		The text that is to be added to the change log
+	 * @return True on success, False on error
 	 */
-	function frsAddChangeLog($change_log_text)
-	{
+	function frsAddChangeLog($change_log_text) {
 		if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError(' FRS Add Change Log Failed: ' . $this->getErrorMessage());
 			return false;
@@ -69,28 +99,27 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsAddFile
-
 	/**
-	 * Add a new file
+	 * frsAddFile() - Add a new file
 	 *
-	 * @param $release_time int Time of the release
-	 * @param $filename string The name of the file to add
-	 * @param $release_id int The ID of the release this file to which this file is associated
-	 * @param $file_size int The file size
-	 * @param $post_date int THe post date
-	 * @returns True on success, False on error
+	 * @param	int		Time of the release
+	 * @param	string	The name of the file to add
+	 * @param	int		The ID of the release this file to which this file is associated
+	 * @param	int		The file size
+	 * @param	int		The post date
+	 * @param	int		The ide of the release
+	 * @param	int		The ID of the package
 	 */
-	function frsAddFile($release_time, $filename, $group_unix_name, $user_unix_name, $file_size, $post_date, $release_id, $package_id, $type_id, $proc_id)
-	{
+	function frsAddFile($release_time, $filename, $file_size, $post_date, $release_id, $package_id) {
 		if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError(' FRS Add File Failed: ' . $this->getErrorMessage());
 			return false;
 		}
-
-		//exec is crunching var
-		$file=$filename;
+//
+//
+//	filename validation? Use a regex.
+//
+//
 		//move the file to a its project page using a setuid program
 		// The following line is due to PHP braindeadness.
 		// Don't you dare remove it, it'll break.
@@ -104,14 +133,16 @@ class FRS extends Error {
 			return false;
 		}
 
-		$res=db_query("INSERT INTO frs_file (release_time,filename,release_id,type_id,processor_id,file_size,post_date) VALUES (" .
-					  "'$release_time'," .
-					  "'$filename'," .
-					  "'$release_id'," .
-					  "'$type_id'," .
-					  "'$proc_id'," .
-					  "'$file_size'," .
-					  "'$post_date') ");
+		$res=db_query("INSERT INTO 
+								frs_file (release_time,filename,release_id,file_size,post_date,processor_id,type_id) 
+				       VALUES (
+								'$release_time',
+								'$filename',
+								'$release_id',
+								'$file_size',
+								'$post_date',
+								'100',
+								'100') ");
 		if (!$res) {
 			$this->setError(' FRS Add File Failed: ' . db_error());
 			return false;
@@ -120,18 +151,14 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsAddRelease
-
 	/**
-	 * Add a new release
+	 * frsAddRelease() - Add a new release
 	 *
-	 * @param $release_name string The name of the new release
-	 * @param $package_id int The ID of the package with which this release is to be associated
-	 * @returns Database result ID
+	 * @param	string	The name of the new release
+	 * @param	int		The ID of the package with which this release is to be associated
+	 * @return Database result ID
 	 */
-	function frsAddRelease($release_name, $package_id, $notes="", $changes="")
-	{
+	function frsAddRelease($release_name, $package_id, $notes="", $changes="") {
 		if( !$this->frsVerifyPackage($package_id) ) {
 			$this->setError(' FRS Add Release Failed: ' . $this->getErrorMessage());
 			return false;
@@ -148,17 +175,13 @@ class FRS extends Error {
 		}
 	}
 
-	// }}}
-	// {{{ frsAddNotes
-
 	/**
-	 * Add a new release note
+	 * frsAddNotes() - Add a new release note
 	 *
-	 * @param $notes_text string The text of the release notes
-	 * @returns True on success, False on error
+	 * @param	string	The text of the release notes
+	 * @return True on success, False on error
 	 */
-	function frsAddNotes($notes_text, $release_id)
-	{
+	function frsAddNotes($notes_text, $release_id) {
 		if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError(' FRS Add Notes Failed: ' . $this->getErrorMessage());
 			return false;
@@ -178,18 +201,14 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsChangePackageName
-
 	/**
-	 * Change a package name
+	 * frsChangePackageName() - Change a package name
 	 *
-	 * @param $new_name string The new name to give to a package
-	 * @param $package_id int The package ID for which to change the name
-	 * @returns True on success, False on error
+	 * @param	string	The new name to give to a package
+	 * @param	string	The package ID for which to change the name
+	 * @return True on success, False on error
 	 */
-	function frsChangePackageName($new_name, $package_id)
-	{
+	function frsChangePackageName($new_name, $package_id) {
 		if( !$this->frsVerifyPackage($package_id) ) {
 			$this->setError(' FRS Change Package Name Failed: ' . $this->getErrorMessage());
 			return false;
@@ -211,27 +230,28 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsChangeFile
-
 	/**
-	 * Change a file
+	 * frsChangeFile() - Change a file
 	 *
-	 * @param $release_time int Time of the release
-	 * @param $type_id int ID of the file type
-	 * @param $processor_id int ID of the processor type
-	 * @param $file_id int ID of the file to change
-	 * @param $release_id int ID of the release to which this file is related
-	 * @returns True on success, False on error
+	 * @param	int		Time of the release
+	 * @param	int		ID of the file type
+	 * @param	int		ID of the processor type
+	 * @param	int		ID of the file to change
+	 * @param	int		ID of the release to which this file is related
+	 * @return True on success, False on error
 	 */
-	function frsChangeFile($release_time, $type_id, $processor_id, $file_id, $release_id, $package_id)
-	{
+	function frsChangeFile($release_time, $type_id, $processor_id, $file_id, $release_id, $package_id) {
 		if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError('FRS Change File Failed: ' . $this->getErrorMessage());
 			return false;
 		}
 
 		$date_list = split("-",$release_time,3);
+//
+//
+//	date validation?
+//
+//
 		$unix_release_time = mktime(0,0,0,$date_list[1],$date_list[2],$date_list[0]);
 		$res=db_query("UPDATE 
 							frs_file 
@@ -250,18 +270,14 @@ class FRS extends Error {
 		return true;
 	}
 	 
-	// }}}
-	// {{{ frsChangeFileRelease
-
 	/**
-	 * Change a file's release
+	 * frsChangeFileRelease() - Change a file's release
 	 *
-	 * @param $file_id int The ID of the file
-	 * @param $release_id int The ID of the release
-	 * @returns True on success, False on error
+	 * @param	int		The ID of the file
+	 * @param	int		The ID of the release
+	 * @return True on success, False on error
 	 */
-	function frsChangeFileRelease($file_id, $release_id)
-	{
+	function frsChangeFileRelease($file_id, $release_id) {
     	if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError(' FRS Change File Release Failed: ' . $this->getErrorMessage());
 			return false;
@@ -286,23 +302,20 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsChangeRelease
-
 	/**
-	 * Change a release
+	 * frsChangeRelease() - Change a release
 	 *
-	 * @param $release_date int The date of the release
-	 * @param $release_name string The name of the release
-	 * @param $preformatted int The flag to store notes and changes as pre-formatted text
-	 * @param $status_id int The status ID of the release
-	 * @param $package_id int The package ID to which the release is related
-	 * @param $notes string The release notes text
-	 * @param $changes string The change log text
-	 * @param $release_id int The ID of the release
+	 * @param	int		The date of the release
+	 * @param	string	The name of the release
+	 * @param	int		The flag to store notes and changes as pre-formatted text
+	 * @param	int		The status ID of the release
+	 * @param	int		The package ID to which the release is related
+	 * @param	string	The release notes text
+	 * @param	string	The change log text
+	 * @param	int		The ID of the release
 	 */
-	function frsChangeRelease($release_date, $release_name, $preformatted, $status_id, $notes, $changes, $package_id, $release_id)
-	{
+	function frsChangeRelease($release_date, $release_name, $preformatted, $status_id, $notes, $changes, 
+							  $package_id, $release_id) {
 		if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError(' FRS Change Release Failed: ' . $this->getErrorMessage());
 			return false;
@@ -316,6 +329,11 @@ class FRS extends Error {
 		} else {
 			$date_expl = explode("-",$release_date);
 		    $release_date = mktime(0,0,0,$date_expl[1],$date_expl[2],$date_expl[0]);
+//
+//
+//	date validation
+//
+//
 		}
 		
 		$res=db_query("UPDATE 
@@ -338,36 +356,33 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsGetReleaseMonitors
-
 	/**
-	 * Get a count of the users that are monitoring a release
+	 * frsGetReleaseMonitors() - Get a count of the users that are monitoring a release
 	 *
-	 * @param $package_id int ID of the package that users are monitoring
-	 * @returns A count of the number of users monitoring $package_id
+	 * @param	int		ID of the package that users are monitoring
+	 * @return A count of the number of users monitoring $package_id
 	 */
-	function frsGetReleaseMonitors($package_id)
-	{
+	function frsGetReleaseMonitors($package_id) {
 		$result=db_result(db_query("SELECT count(*) from filemodule_monitor WHERE filemodule_id='$package_id'"),0,0);
 
 		return $result;
 	}
 
-	// }}}
-	// {{{ frsGetFileList
-	
 	/**
-	 * Get an array of all available files
+	 * frsGetFileList() - Get an array of all available files
 	 *
-	 * @returns An array of the files in the upload directory
+	 * @return An array of the files in the upload directory
 	 */
-	function frsGetFileList()
-	{
+	function frsGetFileList() {
 		$dirhandle = opendir($FTPINCOMING_DIR);
 
 		//iterate and show the files in the upload directory
 		while ($file = readdir($dirhandle)) {
+//
+//
+//	should only show valid filenames
+//
+//
 			if (!ereg('^\.',$file[0])) {
 				$file_list[] = $file;
 			}
@@ -376,17 +391,13 @@ class FRS extends Error {
 		return $file_list;
 	}
 
-	// }}}
-	// {{{ frsGetReleaseList
-
 	/**
-	 * Get a list of the releases
+	 * frsGetReleaseList() - Get a list of the releases
 	 *
-	 * @param $pkg_str string Optional string used to narrow the search
-	 * @returns Database result ID
+	 * @param	string	String used to narrow the search
+	 * @return Database result ID
 	 */
-	function frsGetReleaseList($pkg_str="")
-	{
+	function frsGetReleaseList($pkg_str="") {
 		$res=db_query("SELECT 
 							frs_release.release_id,
 							frs_package.name 
@@ -415,29 +426,22 @@ class FRS extends Error {
 		return $res;
 	}
 
-	// }}}
-	// {{{ frsGetPackageList
-
 	/**
-	 * Wrapper for getReleaseList
+	 * frsGetPackageList() - Wrapper for getReleaseList
 	 *
-	 * @param $package_id Int The ID of the package... duh!
+	 * @param	int		The ID of the package... duh!
 	 */
-	function frsGetPackageList($package_id) {
+	function frsGetPackageList($package_id) { 
 		return $this->frsGetReleaseList("AND frs_package.package_id='$package_id'");
 	}
 
-	// }}}
-	// {{{ frsGetRelease
-
 	/**
-	 * Get a specific release
+	 * frsGetRelease() - Get a specific release
 	 *
-	 * @param $release_id int ID of the release
-	 * @returns Database result ID
+	 * @param	int		ID of the release
+	 * @return Database result ID
 	 */
-	function frsGetRelease($release_id)
-	{
+	function frsGetRelease($release_id) {
 		$sql="SELECT 
 				frs_release.release_date,
 				frs_release.package_id,
@@ -469,18 +473,14 @@ class FRS extends Error {
 
 		return $result;
 	}
-	
-	// }}}
-	// {{{ frsGetReleaseFiles
 
 	/**
-	 * Get files associated with a release
+	 * frsGetReleaseFiles() - Get files associated with a release
 	 *
-	 * @param $release_id int ID of the release
-	 * @returns Database result ID
+	 * @param	int		ID of the release
+	 * @return Database result ID
 	 */
-	function frsGetReleaseFiles($release_id)
-	{
+	function frsGetReleaseFiles($release_id) {
 		$sql="SELECT * FROM frs_file WHERE release_id='$release_id'";
 		$result=db_query($sql);
 
@@ -492,17 +492,13 @@ class FRS extends Error {
 		return $result;
 	}
 
-	// }}}
-	// {{{ frsVerifyFileOwnership
-
 	/**
-	 * Verify the ownership of a file
+	 * frsVerifyFileOwnership() - Verify the ownership of a file
 	 *
-	 * @param $file_id ID of the file to verify
-	 * @returns Database result ID
+	 * @param	int		ID of the file to verify
+	 * @return Database result ID
 	 */
-	function frsVerifyFileOwnership($file_id)
-	{
+	function frsVerifyFileOwnership($file_id) {
 		$res=db_query("SELECT 
 							frs_file.filename 
 					   FROM 
@@ -522,18 +518,14 @@ class FRS extends Error {
 		return $res;
 	}
 
-	// }}}
-	// {{{ frsVerifyRelease
-
 	/**
-	 * Verify whether a release belongs to a project
+	 * frsVerifyRelease() - Verify whether a release belongs to a project
 	 *
-	 * @param $release_id int ID of the release
-	 * @param $package_id int ID of the package
-	 * @returns True on success, False on error
+	 * @param	int		ID of the release
+	 * @param	int		ID of the package
+	 * @return True on success, False on error
 	 */
-	function frsVerifyRelease($release_id, $package_id)
-	{
+	function frsVerifyRelease($release_id, $package_id) {
 		$res=db_query("SELECT 
 							frs_package.package_id 
 					   FROM 
@@ -551,17 +543,13 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsVerifyPackage
-
 	/**
-	 * Verify whether a package belongs to a group
+	 * frsVerifyPackage() - Verify whether a package belongs to a group
 	 *
-	 * @param $package_id int ID of the package
-	 * @returns True on success, False on error
+	 * @param	int		ID of the package
+	 * @return True on success, False on error
 	 */
-	function frsVerifyPackage($package_id)
-	{
+	function frsVerifyPackage($package_id) {
 		$res=db_query("SELECT * FROM frs_package WHERE package_id='$package_id' AND group_id='$this->group_id'");
 		if (!$res || db_numrows($res) < 1) {
 			$this->setError(' FRS Verify Package Failed ');
@@ -571,17 +559,18 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsVerifyPackageName
-
 	/**
-	 * Verify whether a package name exists for a project
+	 * frsVerifyPackagename() - Verify whether a package name exists for a project
 	 *
-	 * @param $group_id
-	 * @param $package_name
+	 * @param	int		The group ID
+	 * @param	string	The name of the package
 	 */
-	function frsVerifyPackageName($group_id, $package_name)
-	{
+	function frsVerifyPackageName($group_id, $package_name) {
+//
+//
+//	Why is group_id passed in here?
+//
+//
 		$res=db_query("SELECT 
 							r.name 
 					   FROM 
@@ -600,18 +589,20 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsVerifyFile
-
 	/**
-	 * Verify whether a file belongs a release/project/package
+	 * frsVerifyFile() - Verify whether a file belongs a release/project/package
 	 *
-	 * @param $file_id int ID of the file to verify
-	 * @param $group_id int ID of the group to which the file belongs
-	 * @returns True on success, False on error
+	 * @param	int		ID of the file to verify
+	 * @param	int		ID of the group to which the file belongs
+	 * @return True on success, False on error
 	 */
-	function frsVerifyFile($file_id, $group_id)
-	{
+	function frsVerifyFile($file_id, $group_id) {
+//
+//
+//	Why is group_id passed in here?
+//	cache the result by setting a flag or something - don't re-fetch on each call
+//
+//
 		$res=db_query("SELECT 
 							frs_package.package_id 
 					   FROM 
@@ -629,18 +620,20 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsVerifyFileExist
-
 	/**
-	 * Verify that a file doesn't exist in the database
+	 * frsVerifyFielexist() - Verify that a file doesn't exist in the database
 	 *
-	 * @param $filename String Name of the file
-	 * @param $release_id Int ID of the release
-	 * @param $group_id Int ID of the group
+	 * @param	string	Name of the file
+	 * @param	int		ID of the release
+	 * @param	int		ID of the group
 	 */
-	function frsVerifyFileExist($filename, $release_id, $group_id)
-	{
+	function frsVerifyFileExist($filename, $release_id, $group_id) {
+//
+//
+//	why is group_id passed in here?
+//	cache the result by setting a flag or something - don't re-fetch on each call
+//
+//
 		$res=db_query("SELECT 
 							frs_package.package_id 
 					   FROM 
@@ -658,18 +651,20 @@ class FRS extends Error {
 		}
 	}
 
-	// }}}
-	// {{{ frsVerifyFileRelease
-
 	/**
-	 * Verify that a file belongs to a release
+	 * frsVerifyFileRelease() - Verify that a file belongs to a release
 	 *
-	 * @param $group_id int ID of the group
-	 * @param $release_id int ID of the release
-	 * @returns True on success, False on error
+	 * @param	int		ID of the group
+	 * @param	int		ID of the release
+	 * @return True on success, False on error
 	 */
-	function frsVerifyFileRelease($group_id, $release_id)
-	{
+	function frsVerifyFileRelease($group_id, $release_id) {
+//
+//
+//	why is group_id passed in here?
+//	cache the result by setting a flag or something - don't re-fetch on each call
+//
+//
 		$res=db_query("SELECT 
 							frs_package.package_id 
 					   FROM 
@@ -686,18 +681,19 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsVerifyProject
-
 	/**
-	 * Verify whether a package belongs to a project
+	 * frsVerifyProject() - Verify whether a package belongs to a project
 	 *
-	 * @param $package_id int ID of the package
-	 * @param $project_id int ID of the project
-	 * @returns True on success, False on error
+	 * @param	int		ID of the package
+	 * @param	int		ID of the project
+	 * @return True on success, False on error
 	 */
-	function frsVerifyProject($package_id, $project_id)
-	{
+	function frsVerifyProject($package_id, $project_id) {
+//
+//
+//	why is group_id passed in here?
+//
+//
 		$res1=db_query("SELECT * FROM frs_package WHERE package_id='$package_id' AND group_id='$this->group_id'");
 		if (!$res1 || db_numrows($res1) < 1) {
 			$this->setError(' FRS Verify Project Failed ');
@@ -707,17 +703,13 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsVerifyReleaseDate
-
 	/**
-	 * Verify the release date format
+	 * frsVerifyReleaseDate() - Verify the release date format
 	 * 
-	 * @param $release_date int Date ofthe release to verify
-	 * @returns True on success, False on error
+	 * @param	int		Date ofthe release to verify
+	 * @return True on success, False on error
 	 */
-	function frsVerifyReleaseDate($release_date)
-	{
+	function frsVerifyReleaseDate($release_date) {
 		if (!ereg("[0-9]{4}-[0-9]{2}-[0-9]{2}",$release_date)) {
 			$this->setError(' FRS Verify Release Date Failed: invalid date format ');
 			return false;
@@ -726,31 +718,36 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsCreatePackage
-
 	/**
-	 * Create a new package
-	 * 
-	 * @param $package_id Int ID of the package
-	 * @param $group_id Int ID of the group
-	 * @param $package_name string Name of the package to create
-	 * @param $status_id int ID of the status
-	 * @returns True on success, False on error
+	 * frsVerifyFileMoved() - Verify that a file has actually moved from the temp upload location 
+	 * to the projects dir.
+	 *
+	 * @param	string	Location of the file in question.
 	 */
-	function frsCreatePackage($package_id, $group_id, $package_name, $status_id)
-	{
-		if( !$this->frsVerifyPackage($package_id) ) {
-			$this->setError(' FRS Change Package Failed: ' . $this->getErrorMessage());
+	function frsVerifyFileMoved($file_location) {
+		if( !file_exists($file_location) ) {
+			$this->setError($this->getErrorMessage() . " | Move File Failed ");
 			return false;
 		}	
 
-		if( !$this->frsVerifyPackageName($group_id, $package_name) ) {
-			$this->setError(' FRS Change Package Failed: ' . $this->getErrorMessage());
+		return true;
+	}
+
+	/**
+	 * frsCreatePackage() - Create a new package
+	 * 
+	 * @param	string	Name of the package to create
+	 * @return True on success, False on error
+	 */
+	function frsCreatePackage($package_name) {
+		if( !$this->frsVerifyPackageName($this->group_id, $package_name) ) {
 			return false;
 		}
 		
-		$res=db_query("INSERT INTO frs_package VALUES('$package_id','$group_id','$package_name','$status_id')");
+		$res=db_query("
+			INSERT INTO frs_package (group_id,name,status_id)
+			VALUES('".$this->group_id."','$package_name',1)
+		");
 
 		if (!$res) {
 			$this->setError(' FRS Create Package Failed ');
@@ -760,46 +757,48 @@ class FRS extends Error {
 		return true;
 	}
 
-	// }}}
-	// {{{ frsDeleteFile
-
 	/**
-	 * Delete a file
+	 * frsDeleteFile() - Delete a file
 	 * 
-	 * @param $group_id int ID of the group
-	 * @param $file_id int ID of the file to delete
-	 * @returns True on success, False on error
+	 * @param	int		ID of the group
+	 * @param	int		ID of the file to delete
+	 * @return True on success, False on error
 	 */
-	function frsDeleteFile($file_id, $group_id)
-	{
+	function frsDeleteFile($file_id, $group_id) {
 		$result = db_query("DELETE FROM frs_file WHERE file_id='$file_id'");
 		//append the filename and project name to a temp file for the root perl job to grab
-		exec ("/bin/echo \"". db_result($result,0,'filename') ."::". group_getunixname($group_id) ."::xxx\" >> $FTPINCOMING_DIR/.delete_files");
+		exec ("/bin/echo \"". db_result($result,0,'filename') ."::"
+			  . group_getunixname($group_id) ."::xxx\" >> $FTPINCOMING_DIR/.delete_files");
 
 		return true;
 	}
 
-	// }}}
-	// {{{ frsSendNotice
-
 	/**
-	 * Send a release update notice
+	 * frsSendNotice() - Send a release update notice
 	 *
-	 * @param $group_id int ID of the group
-	 * @param $release_id int ID of the release
-	 * @param $package_id int ID of the package
-	 * @returns Database result ID
+	 * @param	int		ID of the group
+	 * @param	int		ID of the release
+	 * @param	int		ID of the package
+	 * @return Database result ID
 	 */
-	function frsSendNotice($group_id, $release_id, $package_id)
-	{	
+	function frsSendNotice($group_id, $release_id, $package_id) {	
+//
+//
+//	why is group_id passed in here?
+//
+//
 		$sql="SELECT 
 				users.email,
-				frs_package.name 
+				frs_package.name,
+				group_name,
+				unix_group_name
 			  FROM 
 			  	users,
 				filemodule_monitor,
-				frs_package 
+				frs_package,
+				groups 
 			  WHERE 
+				groups.group_id=frs_package.group_id AND
 			  	users.user_id=filemodule_monitor.user_id AND 
 				filemodule_monitor.filemodule_id=frs_package.package_id AND 
 				filemodule_monitor.filemodule_id='$package_id' AND 
@@ -810,21 +809,42 @@ class FRS extends Error {
 			//send the email
 			$array_emails=result_column_to_array($result);
 			$list=implode($array_emails,', ');
-		
-			$subject='SourceForge File Release Notice';
-		
-			$body = "To: noreply@$GLOBALS[HTTP_HOST]".
-				"\nBCC: $list".
-				"\nSubject: $subject".
-				"\n\nA new version of ". db_result($result,0,'name')." has been released. ".
-				"\nYou can download it from SourceForge by following this link: ".
-				"\n\n<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=$group_id&release_id=$release_id> ".
-				"\n\nYou requested to be notified when new versions of this file ".
-				"\nwere released. If you don't wish to be notified in the ".
-				"\nfuture, please login to SourceForge and click this link: ".
-				"\n<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=$package_id> ";
+			$package = db_result($result,0,'name');
+			$full_group = db_result($result,0,'group_name');
+			$unix_group = db_result($result,0,'unix_group_name');
+			$date = date('Y-m-d H:i',time());
 			
-			exec ("/bin/echo \"$body\" | /usr/sbin/sendmail -fnoreply@$GLOBALS[HTTP_HOST] -t");
+			$subject = '[SourceForge Release] '
+			           .$unix_group.' : '.$package;
+		
+
+			$text = "Project: $full_group  ($unix_group)\n"
+				."Package: $package\n"
+				."Date   : $date"
+				."\n\nProject \"$full_group\" ('$unix_group') has "
+			        ."released the new version of package '"
+				.$package."'. "
+				."You can download it from SourceForge "
+				."by following this link:\n"
+				."<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=$group_id&release_id=$release_id>\n"
+				."or browse Release Notes and ChangeLog by visiting this link:\n"
+				."<http://".$GLOBALS['HTTP_HOST']."/project/shownotes.php?release_id=$release_id> "
+				."\n\nYou receive this email because you "
+				."requested to be notified when new versions of this package "
+				."were released. If you don't wish to be notified in the "
+				."future, please login to SourceForge and click this link: "
+				."<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=$package_id> "
+				."\nIf you lost your SourceForge login name or password, refer to "
+				."this document: "
+				."<http://$GLOBALS[HTTP_HOST]/docman/display_doc.php?docid=760&group_id=1> "
+				."\n\nNote that you may receive this message indirectly via one of "
+				."your mailing list subscriptions. Please review message headers "
+				."before reporting unsolicited mailings."
+				;
+
+			$text = util_line_wrap($text);
+			
+			util_send_mail("noreply@$GLOBALS[sys_default_domain]",$subject,$text,"noreply@$GLOBALS[sys_default_domain]",$list);			
 
 			return $result;
 		} else {
@@ -833,14 +853,42 @@ class FRS extends Error {
 		}
 	}
 
-	// }}}
-	//{{{ frsResolveRelease
+	/**
+	 * frsMoveFile() - Move a file from the FTP upload dir to a projects dir
+	 *
+	 * @param	string	The name of the file
+	 * @param	string	The name of the group
+	 * @param	int		The date/time of the move
+	 * @param	string	The FTP upload dir.  This is probably not needed.
+	 * @param	int		The ID of the release
+	 */
+	function frsMoveFile($file, $group_unix_name, $now, $FTPINCOMING_DIR, $release_id) {
+//
+//
+//	filename validation?
+//	permission checks??
+//
+//
+		clearstatcache();
+		if (is_file("$FTPINCOMING_DIR/$file") && file_exists("$FTPINCOMING_DIR/$file")) {
+			//move the file to a its project page using a setuid program
+			exec ("/usr/local/bin/fileforge $file $group_unix_name", $exec_res);
+			if ($exec_res[0]) {
+				$this->setError("FRS Move File Failed: $exec_res[0],$exec_res[1]");
+				return false;
+			}
+		} else {
+			$this->setError("| FRS Move File Failed: File Name Invalid Or Does Not Exist: $FTPINCOMING_DIR/$file ");
+			return false;
+		}
+
+		return true;
+	}
 
 	/**
-	 * Get a release name from the release ID
+	 * frsResolveRelease() - Get a release name from the release ID
 	 *
-	 * @param $type 
-	 * @param $release_id Int The ID of the release
+	 * @param	int		The ID of the release
 	 */
 	function frsResolveRelease($release_id)
 	{
@@ -853,8 +901,6 @@ class FRS extends Error {
 		$name = db_result($res,0,"release_name");
 		return $name;
 	}
-
-	//}}}
 }
 
 ?>

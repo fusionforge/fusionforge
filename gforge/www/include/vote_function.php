@@ -1,11 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * vote_function.php
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
+/**
+ * vote_number_to_stars() - Turns vote results into *'s
+ *
+ * @param		int		Raw value
+ */
 function vote_number_to_stars($raw) {
 	$raw=intval($raw*2);
 	//	echo "\n\n<!-- $raw -->\n\n";
@@ -24,7 +32,13 @@ function vote_number_to_stars($raw) {
 	return $return;
 }
 
-function vote_show_thumbs ($id,$flag) {
+/**
+ * vote_show_thumbs() - Show vote stars
+ *
+ * @param		int		The survey ID
+ * @param		string	The rating type
+ */
+function vote_show_thumbs($id,$flag) {
 	/*
 		$flag
 		project - 1
@@ -40,6 +54,12 @@ function vote_show_thumbs ($id,$flag) {
 	}
 }
 
+/**
+ * vote_get_rating() - Get a vote rating
+ *
+ * @param		int		The survey ID
+ * @param		string	The rating type
+ */
 function vote_get_rating ($id,$flag) {
 	$sql="SELECT response FROM survey_rating_aggregate WHERE type='$flag' AND id='$id'";
 	$result=db_query($sql);
@@ -50,6 +70,12 @@ function vote_get_rating ($id,$flag) {
 	}
 }
 
+/**
+ * vote_show_release_radios() - Show release radio buttons
+ *
+ * @param		int		Survey ID
+ * @param		string	The rating type
+ */ 
 function vote_show_release_radios ($vote_on_id,$flag) {
 	/*
 		$flag
@@ -95,12 +121,12 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 
 }
 
-/*
-
-	Select and show a specific survey from the database
-
-*/
-
+/**
+ * show_survey() - Select and show a specific survey from the database
+ * 
+ * @param		int		The group ID
+ * @param		int		The survey ID
+ */
 function show_survey ($group_id,$survey_id) {
 
 ?>
@@ -171,7 +197,7 @@ if (db_numrows($result) > 0) {
 
 			if ($question_type != $last_question_type) {
 				echo '
-					<B>1 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 5</B>';
+					<b>1</b> low &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>5</b> high';
 				echo '<BR>';
 
 			}
@@ -229,6 +255,11 @@ if (db_numrows($result) > 0) {
 				<INPUT TYPE="TEXT" name="_'.$quest_array[$i].'" SIZE=20 MAXLENGTH=70>';
 
 		}
+		else {
+			// no answers, just show question
+			echo stripslashes(db_result($result, 0, 'question')).'<BR>';
+		}
+
 		echo '</TD></TR>';
 
 		$last_question_type=$question_type;
@@ -253,12 +284,13 @@ if (db_numrows($result) > 0) {
 
 }
 
+/**
+ * Show a single question for the new user rating system
+ *
+ * @param		string	The question to show
+ * @param		string	The array element
+ */
 function vote_show_a_question ($question,$element_name) {
-	/*
-		Show a single question for the new user rating
-		system
-	*/
-
 	echo '
 	<TR><TD COLSPAN="2" NOWRAP>
 	<INPUT TYPE="RADIO" NAME="Q_'. $element_name .'" VALUE="-3">
@@ -339,7 +371,27 @@ $USER_RATING_VALUES[]='1';
 $USER_RATING_VALUES[]='2';
 $USER_RATING_VALUES[]='3';
 
-function vote_show_user_rate_box ($user_id) {
+/**
+ * vote_show_user_rate_box() - Show user rating box
+ *
+ * @param		int		The user ID
+ * @param		int		The user ID of the user who is rating $user_id
+ */
+function vote_show_user_rate_box ($user_id, $by_id=0) {
+	if ($by_id) {
+		$res = db_query("
+			SELECT rate_field,rating FROM user_ratings 
+			WHERE rated_by='$by_id' 
+			AND user_id='$user_id'
+		");
+		$prev_vote = util_result_columns_to_assoc($res);
+		while (list($k,$v) = each($prev_vote)) {
+			if ($v == 0) {
+				$prev_vote[$k] = 0.1;
+			}
+		}
+	}
+	
 	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS,$USER_RATING_POPUP1,$USER_RATING_POPUP2,$USER_RATING_POPUP3,$USER_RATING_POPUP4,$USER_RATING_POPUP5;
 	echo '
 	<TABLE BORDER=0>
@@ -348,7 +400,9 @@ function vote_show_user_rate_box ($user_id) {
 
 	for ($i=1; $i<=count($USER_RATING_QUESTIONS); $i++) {
 		$popup="USER_RATING_POPUP$i";
-		echo '<TR><TD COLSPAN=2><B>'. $USER_RATING_QUESTIONS[$i] .':</B><BR> '.html_build_select_box_from_arrays ($USER_RATING_VALUES,$$popup,"Q_$i",'xzxzx',true,'Unrated').'</TD></TR>';
+		echo '<TR>
+		<TD COLSPAN=2><B>'. $USER_RATING_QUESTIONS[$i] .':</B><BR> '
+		.html_build_select_box_from_arrays($USER_RATING_VALUES,$$popup,"Q_$i",$prev_vote[$i]/*'xzxz'*/,true,'Unrated').'</TD></TR>';
 	}
 
 	echo '
@@ -357,6 +411,11 @@ function vote_show_user_rate_box ($user_id) {
 	</FORM>';
 }
 
+/**
+ * vote_show_user_rating() - Show a user rating
+ *
+ * @param		int		The user ID
+ */
 function vote_show_user_rating($user_id) {
 	global $USER_RATING_QUESTIONS;
 	$sql="SELECT rate_field,(avg(rating)+3) AS avg_rating,count(*) as count ".
@@ -390,6 +449,18 @@ function vote_show_user_rating($user_id) {
 			echo '<TR><TD COLSPAN=2><H4>Not Yet Included In Trusted Rankings</H4></TD></TR>';
 		}
 	}
+}
+
+/**
+ * vote_remove_all_ratings_by() - Remove all ratings by a particular user
+ * 
+ * @param		int		The user ID
+ */
+function vote_remove_all_ratings_by($user_id) {
+	db_query("
+		DELETE FROM user_ratings 
+		WHERE rated_by='$user_id' 
+	");
 }
 
 ?>
