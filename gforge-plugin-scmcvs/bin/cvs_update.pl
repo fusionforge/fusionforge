@@ -36,21 +36,21 @@ while ($ln = pop(@group_array)) {
 	
 	# This 50000 is really dirty until I change this file completly
 	$cvs_gid = $group_id + $anoncvs_uid_add;
-	$cvs_dir = "$cvs_root$group_name";
+	$cvs_dir = "$cvs_root/$group_name";
 
 	$userlist =~ tr/A-Z/a-z/;
 
-	#$group_exists = (-d $grpdir_prefix . $group_name);
+	#$group_exists = (-d $grpdir_prefix/$group_name);
 	$group_exists = ($status eq 'A');
-	$cvs_exists = (-d "$cvs_root$group_name/CVSROOT");
+	$cvs_exists = (-d "$cvs_root/$group_name/CVSROOT");
 
 	if (!$group_exists && $use_scm && $status eq 'A' ) {
-		print ("ERROR: $group_name home dir $grpdir_prefix$group_name doesn't exists\n");
+		print ("ERROR: $group_name home dir $grpdir_prefix/$group_name doesn't exists\n");
 		print ("	but use_scm=$use_scm\tstatus=$status\n");
 	}
 	if ($cvs_exists && !$group_exists && $status eq 'A') {
-		print ("ERROR: CVS $cvs_root$group_name/CVSROOT exists\n");
-		print ("	but no $group_name home dir at $grpdir_prefix$group_name\n");
+		print ("ERROR: CVS $cvs_root/$group_name/CVSROOT exists\n");
+		print ("	but no $group_name home dir at $grpdir_prefix/$group_name\n");
 		print ("	use_scm=$use_scm\tstatus=$status\n");
 	}
 	# This for the first time
@@ -59,17 +59,17 @@ while ($ln = pop(@group_array)) {
 		system("mkdir -p $cvs_root");
 	}
 	# Lock dir creation
-	if (!(-d "${cvs_root}cvs-locks/$group_name")) {
-		if($verbose){print ("Creating ${cvs_root}cvs-locks/$group_name\n");}
+	if (!(-d "$cvs_root/cvs-locks/$group_name")) {
+		if($verbose){print ("Creating $cvs_root/cvs-locks/$group_name\n");}
 		if ($cvs_exists){
-			system("mkdir -p ${cvs_root}cvs-locks/$group_name");
-			system("chown anonscm-gforge:scm_$group_name ${cvs_root}cvs-locks/$group_name");
-			system("chmod g+rws ${cvs_root}cvs-locks/$group_name");
-			system("chmod o+rw ${cvs_root}cvs-locks/$group_name");
+			system("mkdir -p $cvs_root/cvs-locks/$group_name");
+			system("chown anonscm-gforge:scm_$group_name $cvs_root/cvs-locks/$group_name");
+			system("chmod g+rws $cvs_root/cvs-locks/$group_name");
+			system("chmod o+rw $cvs_root/cvs-locks/$group_name");
 		}
 	}
 	# CVS repository creation
-	if ($group_exists && !$cvs_exists && $use_scm && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
+	if ($group_exists && !$cvs_exists && $use_scm && $status eq 'A' && !(-e "$cvs_root/$group_name/CVSROOT")) {
 		if($verbose){print("Creating a CVS Repository for: $group_name\n");}
 		# Let's create a CVS repository for this group
 
@@ -95,18 +95,18 @@ while ($ln = pop(@group_array)) {
 	# Change owners
 	my $uid=$dummy_uid;
 	my $gid=$cvs_gid;
-	if (-d "$cvs_root$group_name") {
-		my $realuid=get_file_owner_uid("$cvs_root$group_name");
+	if (-d "$cvs_root/$group_name") {
+		my $realuid=get_file_owner_uid("$cvs_root/$group_name");
 		if (!($uid eq $realuid)){
-			if($verbose){print("Changing owner of $cvs_root$group_name $realuid -> $uid\n")};
-			system("chown -R $uid $cvs_root$group_name");
+			if($verbose){print("Changing owner of $cvs_root/$group_name $realuid -> $uid\n")};
+			system("chown -R $uid $cvs_root/$group_name");
 		}
-		my $realgid=get_file_owner_gid("$cvs_root$group_name");
+		my $realgid=get_file_owner_gid("$cvs_root/$group_name");
 		if (!($gid eq $realgid)){
-			if($verbose){print("Changing group of $cvs_root$group_name $realgid -> $gid\n")};
-			system("chgrp -R $gid $cvs_root$group_name");
+			if($verbose){print("Changing group of $cvs_root/$group_name $realgid -> $gid\n")};
+			system("chgrp -R $gid $cvs_root/$group_name");
 		}
-		system("chown anonscm-gforge $cvs_root$group_name/CVSROOT/history");
+		system("chown anonscm-gforge $cvs_root/$group_name/CVSROOT/history");
 	}
 
 	# Right management
