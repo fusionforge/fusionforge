@@ -11,8 +11,11 @@ gforge (3.0-6+3) unstable; urgency=low
     postfix to correct postfix setup (untested)
   * [Christian] Applied Antoine Nivard suggestion to correct [ #505 ]
     Disable Tracker and the "TAB" is not disable / error in Layout.class
+  * [Roland] Added "objectclass: domain" to the top-level LDAP object when
+    it's not the same as the top-level LDAP object created by slapd, see
+    bug [ #518 ].
 
- -- Christian Bayle <bayle@debian.org>  Mon, 15 Sep 2003 23:47:50 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 16 Sep 2003 15:20:56 +0200
 
 gforge (3.0-6) unstable; urgency=low
 

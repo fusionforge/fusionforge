@@ -369,6 +369,7 @@ print_ldif_default(){
     cat <<-FIN
 dn: $slapd_base_dn
 objectClass: dcObject
+objectClass: domain
 dc: $dc
 
 dn: cn=admin,$slapd_base_dn
