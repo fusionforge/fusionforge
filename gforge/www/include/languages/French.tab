@@ -2599,7 +2599,7 @@ top	updated_daily	Mise à jour quotidienne
 top	view_other_top_category	Voir les autres catégories
 top_mostactive	percentile	Pourcentage
 top_mostactive	project_name	Nom du projet
-top_mostactive	rank	Ranc
+top_mostactive	rank	Rang
 top_mostactive	section	Les meilleurs projets
 top_mostactive	title	Les projets les plus actifs: $1
 top_mostactive	updated_daily	Mis à jour quotidiennement
