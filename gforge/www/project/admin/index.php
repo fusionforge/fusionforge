@@ -86,9 +86,9 @@ Short Description: <?php echo $group->getDescription(); ?>
 <P>
 Homepage Link: <b><?php echo $group->getHomepage(); ?></b>
 <p>
-Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?>
+Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></b>
 <p>
-Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?>
+Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?></b>
 <p>
 Project WWW directory on shell server:
 <b><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
@@ -96,15 +96,20 @@ Project WWW directory on shell server:
 <P align=center>
 <A HREF="http://<?php echo $GLOBALS['sys_cvs_host']; ?>/cvstarballs/<?php echo $group->getUnixName(); ?>-cvsroot.tar.gz">[ Download Your Nightly CVS Tree Tarball ]</A>
 <P>
-
+<HR NOSHADE>
+<P>
+<H4>Trove Categorization:
+<A href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">
+[Edit]</A></H4>
+<P>
 <?php
-$HTML->boxBottom(); 
+echo $HTML->boxBottom(); 
 
 echo '
 </TD><TD>&nbsp;</TD><TD width=50%>';
 
 
-$HTML->boxTop("Group Members");
+echo $HTML->boxTop("Group Members");
 
 /*
 
