@@ -14,6 +14,7 @@ sourceforge (2.6-0+8+) unstable; urgency=low
   * [Roland] Worked to make the database scheme independent of the upgrade
     path: installing 2.6 over 2.5 should yield the same scheme as
     installing 2.6 from scratch.  This task is not finished yet.
+  * [Christian] gig2png conversion to make GNU happy.
 
  -- Roland Mas <lolando@debian.org>  Thu, 28 Mar 2002 22:41:51 +0100
 

@@ -254,7 +254,7 @@ function theme_header($params) {
         <!-- VA Linux Stats Counter -->
         <?php
         if (!session_issecure()) {
-                print '<IMG src="/images/clear.gif" width=1 height=1 alt="Counter">';
+                print '<IMG src="/images/clear.png" width=1 height=1 alt="Counter">';
         }
         ?>
 
@@ -262,7 +262,7 @@ function theme_header($params) {
         </TD><!-- right of logo -->
         </TR>
 
-        <TR><TD bgcolor="#543a48" colspan=2><IMG src="/images/blank.gif" height=2 vspace=0></TD></TR>
+        <TR><TD bgcolor="#543a48" colspan=2><IMG src="/images/blank.png" height=2 vspace=0></TD></TR>
 
         </TABLE>
         <!-- end top title table -->

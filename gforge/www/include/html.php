@@ -62,7 +62,7 @@ function html_a_group($grp) {
  * @param		int		The width of the image
  */
 function html_blankimage($height,$width) {
-	return '<img src="/images/blank.gif" width="' . $width . '" height="' . $height . '" alt="">';
+	return '<img src="/images/blank.png" width="' . $width . '" height="' . $height . '" alt="">';
 }
 
 /**

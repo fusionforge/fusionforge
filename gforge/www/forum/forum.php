@@ -276,7 +276,7 @@ if ($forum_id) {
 
 			$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD><A HREF="/forum/message.php?msg_id='.
 				$thread['msg_id'].'">'.
-				html_image("images/msg.gif","12","10",array("BORDER"=>"0"));
+				html_image("images/msg.png","12","10",array("BORDER"=>"0"));
 			/*	  
 				See if this message is new or not
 				If so, highlite it in bold
@@ -387,7 +387,7 @@ if ($forum_id) {
 	if ($offset != 0) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE="3" STYLE="text-decoration: none"><B>
 		<A HREF="javascript:history.back()"><B>' .
-		html_image("images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
+		html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -398,7 +398,7 @@ if ($forum_id) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE=3 STYLE="text-decoration: none"><B>
 		<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
 		<B>Next Messages ' .
-		html_image("images/t.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
+		html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}

@@ -37,7 +37,7 @@ $headers = getallheaders();
       <a href="http://www.valinux.com"><IMG src="http://sourceforge.net/images/va-btn-small-light.png" align="right" alt="VA Linux Systems" hspace="5" vspace="7" border=0 width="136" height="40"></A>
     </TD><!-- right of logo -->
   </TR>
-  <TR><TD bgcolor="#543a48" colspan=2><IMG src="http://sourceforge.net/images/blank.gif" height=2 vspace=0></TD></TR>
+  <TR><TD bgcolor="#543a48" colspan=2><IMG src="http://sourceforge.net/images/blank.png" height=2 vspace=0></TD></TR>
 </TABLE>
 <!-- end top title table -->
 

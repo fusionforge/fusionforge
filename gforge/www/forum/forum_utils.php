@@ -189,7 +189,7 @@ function forum_show_a_nested_message ( &$result ) {
 					' ( '. $result['realname'] . ' ) '.
 					'<BR><A HREF="/forum/message.php?msg_id='.
 					$result['msg_id'] .'">'.
-					html_image("images/msg.gif","10","12",array("BORDER"=>"0")) .
+					html_image("images/msg.png","10","12",array("BORDER"=>"0")) .
 					$bold_begin.$result['subject'] .' [ reply ]'. $bold_end .'</A> &nbsp; '.
 					'<BR>'. date($sys_datefmt,$result['date']) .'
 				</TD>   
@@ -288,7 +288,7 @@ function show_thread( $thread_id ) {
 
 		$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD>'. 
 			(($current_message != $thread['msg_id'])?'<A HREF="/forum/message.php?msg_id='.$thread['msg_id'].'">':'').
-			html_image("images/msg.gif","10","12",array("BORDER"=>"0"));
+			html_image("images/msg.png","10","12",array("BORDER"=>"0"));
 		/*
 			See if this message is new or not
 		*/
@@ -345,7 +345,7 @@ function show_submessages($msg_arr, $msg_id, $level) {
 			*/
 			$ret_val .= (($current_message != $msg_arr[$msg_id][$i]['msg_id'])?
 				'<A HREF="/forum/message.php?msg_id='. $msg_arr[$msg_id][$i]['msg_id'].'">':'').
-				html_image("images/msg.gif","10","12",array("BORDER"=>"0"));
+				html_image("images/msg.png","10","12",array("BORDER"=>"0"));
 			/*
 				See if this message is new or not
 			*/

@@ -21,7 +21,7 @@ $HTML->header(array(title=>"Partners"));
 
 <?php
 	
-echo $Language->getText('partners', 'about_blurb', array(html_image('/images/others/cosource142x31.gif','142','31',array())));
+echo $Language->getText('partners', 'about_blurb', array(html_image('/images/others/cosource142x31.png','142','31',array())));
 
 $HTML->footer(array());
 
