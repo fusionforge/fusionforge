@@ -3,7 +3,7 @@ Section: devel
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Uploaders: Christian Bayle <bayle@debian.org>
-Build-Depends-Indep: debhelper (>= 4.1.16), sharutils, docbook-to-man
+Build-Depends-Indep: debhelper (>= 4.1.16), sharutils, docbook-to-man, devscripts, dpatch
 Standards-Version: 3.6.1
 
 Package: gforge
