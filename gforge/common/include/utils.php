@@ -75,7 +75,8 @@ function util_send_mail($to,$subject,$body,$from='',$BCC='') {
 		"\nSubject: $subject".
 		"\n\n$body";
 
-	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) ."\" | /usr/sbin/sendmail -f$from -t -i >& /dev/null &");
+	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
+	      "\" | /usr/sbin/sendmail -f'$from' -t -i >& /dev/null &");
 }
 
 /**
