@@ -42,11 +42,11 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:integer'),
-	'group_id' => array('name'=>'group_id', 'type' => 'xsd:integer'),
+	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:int'),
+	'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
 	'name' => array('name'=>'name', 'type' => 'xsd:string'),
 	'description' => array('name'=>'description', 'type' => 'xsd:string'),
-	'is_public' => array('name'=>'is_public', 'type' => 'xsd:integer'),
+	'is_public' => array('name'=>'is_public', 'type' => 'xsd:int'),
 	'send_all_posts_to' => array('name'=>'send_all_posts_to', 'type' => 'xsd:string')
 	)
 );
@@ -64,9 +64,10 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getProjectGroups',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int'),
 	array('getProjectGroupsResponse'=>'tns:ArrayOfProjectGroup'),
-	$uri
+	$uri,$uri.'#getProjectGroups','rpc','encoded'
+
 );
 
 //
@@ -79,19 +80,19 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'project_task_id' => array('name'=>'project_task_id', 'type' => 'xsd:integer'),
-	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:integer'),
+	'project_task_id' => array('name'=>'project_task_id', 'type' => 'xsd:int'),
+	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:int'),
 	'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
 	'details' => array('name'=>'details', 'type' => 'xsd:string'),
-	'percent_complete' => array('name'=>'percent_complete', 'type' => 'xsd:integer'),
-	'priority' => array('name'=>'priority', 'type' => 'xsd:integer'),
-	'hours' => array('name'=>'hours', 'type' => 'xsd:integer'),
-	'start_date' => array('name'=>'start_date', 'type' => 'xsd:integer'),
-	'end_date' => array('name'=>'end_date', 'type' => 'xsd:integer'),
-	'status_id' => array('name'=>'status_id', 'type' => 'xsd:integer'),
-	'category_id' => array('name'=>'category_id', 'type' => 'xsd:integer'),
-	'is_dependent_on_task_id' => array('name'=>'is_dependent_on_task_id', 'type' => 'ArrayOfInteger'),
-	'assigned_to_id' => array('name'=>'assigned_to_id', 'type' => 'ArrayOfInteger')
+	'percent_complete' => array('name'=>'percent_complete', 'type' => 'xsd:int'),
+	'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
+	'hours' => array('name'=>'hours', 'type' => 'xsd:int'),
+	'start_date' => array('name'=>'start_date', 'type' => 'xsd:int'),
+	'end_date' => array('name'=>'end_date', 'type' => 'xsd:int'),
+	'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
+	'category_id' => array('name'=>'category_id', 'type' => 'xsd:int'),
+	'is_dependent_on_task_id' => array('name'=>'is_dependent_on_task_id', 'type' => 'tns:ArrayOfint'),
+	'assigned_to_id' => array('name'=>'assigned_to_id', 'type' => 'tns:ArrayOfint')
 	)
 );
 
@@ -111,14 +112,14 @@ $server->register(
 	'getProjectTasks',
 	array(
 		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_project_id'=>'xsd:integer',
-		'assigned_to'=>'xsd:integer',
-		'status'=>'xsd:integer',
-		'category'=>'xsd:integer',
-		'group'=>'xsd:integer'),
-		array('getProjectTasksResponse'=>'tns:ArrayOfProjectTask'),
-		$uri
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int',
+		'assigned_to'=>'xsd:int',
+		'status'=>'xsd:int',
+		'category'=>'xsd:int',
+		'group'=>'xsd:int'),
+	array('getProjectTasksResponse'=>'tns:ArrayOfProjectTask'),
+		$uri,$uri.'#getProjectTasks','rpc','encoded'
 	);
 
 //addProjectTask
@@ -126,20 +127,20 @@ $server->register(
 	'addProjectTask',
 	array(
 		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_project_id'=>'xsd:integer',
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int',
 		'summary'=>'xsd:string',
 		'details'=>'xsd:string',
-		'priority'=>'xsd:integer',
-		'hours'=>'xsd:integer',
-		'start_date'=>'xsd:integer',
-		'end_date'=>'xsd:integer',
-		'category_id'=>'xsd:integer',
-		'percent_complete'=>'xsd:integer',
-		'assigned_to'=>'ArrayOfInteger',
-		'dependent_on'=>'ArrayOfInteger'),
-		array('addProjectTaskResponse'=>'xsd:integer'),
-		$uri
+		'priority'=>'xsd:int',
+		'hours'=>'xsd:int',
+		'start_date'=>'xsd:int',
+		'end_date'=>'xsd:int',
+		'category_id'=>'xsd:int',
+		'percent_complete'=>'xsd:int',
+		'assigned_to'=>'tns:ArrayOfint',
+		'dependent_on'=>'tns:ArrayOfint'),
+		array('addProjectTaskResponse'=>'xsd:int'),
+		$uri,$uri.'#addProjectTask','rpc','encoded'
 );
 
 //updateProjectTask
@@ -147,23 +148,23 @@ $server->register(
 	'updateProjectTask',
 	array(
 		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_project_id'=>'xsd:integer',
-		'project_task_id'=>'xsd:integer',
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int',
+		'project_task_id'=>'xsd:int',
 		'summary'=>'xsd:string',
 		'details'=>'xsd:string',
-		'priority'=>'xsd:integer',
-		'hours'=>'xsd:integer',
-		'start_date'=>'xsd:integer',
-		'end_date'=>'xsd:integer',
-		'status_id'=>'xsd:integer',
-		'category_id'=>'xsd:integer',
-		'percent_complete'=>'xsd:integer',
-		'assigned_to'=>'ArrayOfInteger',
-		'dependent_on'=>'ArrayOfInteger',
-		'new_group_project_id'=>'integer'),
-		array('addProjectTaskResponse'=>'xsd:integer'),
-		$uri
+		'priority'=>'xsd:int',
+		'hours'=>'xsd:int',
+		'start_date'=>'xsd:int',
+		'end_date'=>'xsd:int',
+		'status_id'=>'xsd:int',
+		'category_id'=>'xsd:int',
+		'percent_complete'=>'xsd:int',
+		'assigned_to'=>'tns:ArrayOfint',
+		'dependent_on'=>'tns:ArrayOfint',
+		'new_group_project_id'=>'int'),
+		array('addProjectTaskResponse'=>'xsd:int'),
+		$uri,$uri.'#updateProjectTask','rpc','encoded'
 );
 
 //
@@ -176,8 +177,8 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:integer'),
-	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:integer'),
+	'id' => array('name'=>'id', 'type' => 'xsd:int'),
+	'group_project_id' => array('name'=>'group_project_id', 'type' => 'xsd:int'),
 	'category_name' => array('name'=>'category_name', 'type' => 'xsd:string')
 	)
 );
@@ -195,9 +196,9 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getProjectTaskCategories',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_project_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_project_id'=>'xsd:int'),
 	array('getProjectTaskCategoriesResponse'=>'tns:ArrayOfProjectCategory'),
-	$uri
+	$uri,$uri.'#getProjectTaskCategories','rpc','encoded'
 );
 
 //
@@ -210,11 +211,11 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'project_message_id' => array('name'=>'project_message_id', 'type' => 'xsd:integer'),
-	'project_task_id' => array('name'=>'project_task_id', 'type' => 'xsd:integer'),
+	'project_message_id' => array('name'=>'project_message_id', 'type' => 'xsd:int'),
+	'project_task_id' => array('name'=>'project_task_id', 'type' => 'xsd:int'),
 	'body' => array('name'=>'body', 'type' => 'xsd:string'),
-	'postdate' => array('name'=>'postdate', 'type' => 'xsd:integer'),
-	'posted_by' => array('name'=>'posted_by', 'type' => 'xsd:integer')
+	'postdate' => array('name'=>'postdate', 'type' => 'xsd:int'),
+	'posted_by' => array('name'=>'posted_by', 'type' => 'xsd:int')
 	)
 );
 
@@ -232,25 +233,25 @@ $server->wsdl->addComplexType(
 $server->register(
 	'getProjectMessages',
 	array('session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_project_id'=>'xsd:integer',
-		'project_task_id'=>'xsd:integer'
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int',
+		'project_task_id'=>'xsd:int'
 	),
 	array('getProjectMessagesResponse'=>'tns:ArrayOfProjectMessage'),
-	$uri
+	$uri,$uri.'#getProjectMessages','rpc','encoded'
 );
 
 //add
 $server->register(
 	'addProjectMessage',
 	array('session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_project_id'=>'xsd:integer',
-		'project_task_id'=>'xsd:integer',
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int',
+		'project_task_id'=>'xsd:int',
 		'body'=>'xsd:string'
 	),
-	array('addProjectMessageResponse'=>'xsd:integer'),
-	$uri
+	array('addProjectMessageResponse'=>'xsd:int'),
+	$uri,$uri.'#addProjectMessage','rpc','encoded'
 );
 
 //
@@ -261,10 +262,10 @@ $server->register(
 $server->register(
 	'getProjectTechnicians',
 	array('session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_project_id'=>'xsd:integer'),
+		'group_id'=>'xsd:int',
+		'group_project_id'=>'xsd:int'),
 	array('getProjectTechniciansResponse'=>'tns:ArrayOfUser'),
-	$uri
+	$uri,$uri.'#getProjectTechnicians','rpc','encoded'
 );
 
 
@@ -307,7 +308,7 @@ function projectgroups_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfProjectGroup', 'ArrayOfProjectGroup', $return);
+	return $return;
 }
 
 //
@@ -341,7 +342,7 @@ function &addProjectTask($session_ser,$group_id,$group_project_id,$summary,$deta
             $category_id,$percent_complete,&$assigned_arr,&$depend_arr)) {
 		return new soap_fault ('','addProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
-		soapval('xsd:integer', 'integer', $a->getID());
+		return $a->getID();
 	}
 }
 
@@ -377,7 +378,7 @@ function &updateProjectTask($session_ser,$group_id,$group_project_id,$project_ta
 		$percent_complete,&$assigned_arr,&$depend_arr,$new_group_project_id)) {
         return new soap_fault ('','updateProjectTask',$a->getErrorMessage(),$a->getErrorMessage());
     } else {
-        soapval('xsd:integer', 'integer', $a->getID());
+        return $a->getID();
     }
 }
 
@@ -418,7 +419,7 @@ function projectcategories_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactCategory', 'ArrayOfArtifactCategory', $return);
+	return $return;
 }
 
 //
@@ -495,7 +496,7 @@ function projecttasks_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfProjectTask', 'ArrayOfProjectTask', $return);
+	return $return;
 }
 
 //
@@ -543,7 +544,7 @@ function projectmessages_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfProjectMessage', 'ArrayOfProjectMessage', $return);
+	return $return;
 }
 
 //
@@ -582,7 +583,7 @@ function &addProjectMessage($session_ser,$group_id,$group_project_id,$project_ta
 	if (!$am->create($body)) {
 		return new soap_fault ('','addProjectMessage',$am->getErrorMessage(),$am->getErrorMessage());
 	} else {
-		return new soap_value ('xsd:integer','integer',$am->getID());
+		return $am->getID();
 	}
 }
 

@@ -46,16 +46,16 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:integer'),
-	'group_id' => array('name'=>'group_id', 'type' => 'xsd:integer'),
+	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
+	'group_id' => array('name'=>'group_id', 'type' => 'xsd:int'),
 	'name' => array('name'=>'name', 'type' => 'xsd:string'),
 	'description' => array('name'=>'description', 'type' => 'xsd:string'),
-	'is_public' => array('name'=>'is_public', 'type' => 'xsd:integer'),
-	'allow_anon' => array('name'=>'allow_anon', 'type' => 'xsd:integer'),
-	'due_period' => array('name'=>'due_period', 'type' => 'xsd:integer'),
-	'use_resolution' => array('name'=>'use_resolution', 'type' => 'xsd:integer'),
-	'datatype' => array('name'=>'datatype', 'type' => 'xsd:integer'),
-	'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:integer')
+	'is_public' => array('name'=>'is_public', 'type' => 'xsd:int'),
+	'allow_anon' => array('name'=>'allow_anon', 'type' => 'xsd:int'),
+	'due_period' => array('name'=>'due_period', 'type' => 'xsd:int'),
+	'use_resolution' => array('name'=>'use_resolution', 'type' => 'xsd:int'),
+	'datatype' => array('name'=>'datatype', 'type' => 'xsd:int'),
+	'status_timeout' => array('name'=>'status_timeout', 'type' => 'xsd:int')
 	)
 );
 
@@ -71,9 +71,10 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getArtifactTypes',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int'),
 	array('getArtifactTypesResponse'=>'tns:ArrayOfArtifactType'),
-	$uri
+	$uri,
+	$uri.'#getArtifactTypes','rpc','encoded'
 );
 //
 //	Artifacts
@@ -85,17 +86,17 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:integer'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:integer'),
-	'status_id' => array('name'=>'status_id', 'type' => 'xsd:integer'),
-	'category_id' => array('name'=>'category_id', 'type' => 'xsd:integer'),
-	'artifact_group_id' => array('name'=>'artifact_group_id', 'type' => 'xsd:integer'),
-	'resolution_id' => array('name'=>'resolution_id', 'type' => 'xsd:integer'),
-	'priority' => array('name'=>'priority', 'type' => 'xsd:integer'),
-	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:integer'),
-	'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:integer'),
-	'open_date' => array('name'=>'open_date', 'type' => 'xsd:integer'),
-	'close_date' => array('name'=>'close_date', 'type' => 'xsd:integer'),
+	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
+	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
+	'status_id' => array('name'=>'status_id', 'type' => 'xsd:int'),
+	'category_id' => array('name'=>'category_id', 'type' => 'xsd:int'),
+	'artifact_group_id' => array('name'=>'artifact_group_id', 'type' => 'xsd:int'),
+	'resolution_id' => array('name'=>'resolution_id', 'type' => 'xsd:int'),
+	'priority' => array('name'=>'priority', 'type' => 'xsd:int'),
+	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int'),
+	'assigned_to' => array('name'=>'assigned_to', 'type' => 'xsd:int'),
+	'open_date' => array('name'=>'open_date', 'type' => 'xsd:int'),
+	'close_date' => array('name'=>'close_date', 'type' => 'xsd:int'),
 	'summary' => array('name'=>'summary', 'type' => 'xsd:string'),
 	'details' => array('name'=>'details', 'type' => 'xsd:string')
 	)
@@ -117,33 +118,33 @@ $server->register(
 	'getArtifacts',
 	array(
 		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_artifact_id'=>'xsd:integer',
-		'assigned_to'=>'xsd:integer',
-		'status'=>'xsd:integer',
-		'category'=>'xsd:integer',
-		'group'=>'xsd:integer'),
+		'group_id'=>'xsd:int',
+		'group_artifact_id'=>'xsd:int',
+		'assigned_to'=>'xsd:int',
+		'status'=>'xsd:int',
+		'category'=>'xsd:int',
+		'group'=>'xsd:int'),
 	array('getArtifactsResponse'=>'tns:ArrayOfArtifact'),
-	$uri);
+	$uri,$uri.'#getArtifacts','rpc','encoded');
 
 //addArtifact
 $server->register(
 	'addArtifact',
 	array(
 		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_artifact_id'=>'xsd:integer',
-		'status_id'=>'xsd:integer',
-		'category_id'=>'xsd:integer',
-		'artifact_group_id'=>'xsd:integer',
-		'resolution_id'=>'xsd:integer',
-		'priority'=>'xsd:integer',
-		'assigned_to'=>'xsd:integer',
+		'group_id'=>'xsd:int',
+		'group_artifact_id'=>'xsd:int',
+		'status_id'=>'xsd:int',
+		'category_id'=>'xsd:int',
+		'artifact_group_id'=>'xsd:int',
+		'resolution_id'=>'xsd:int',
+		'priority'=>'xsd:int',
+		'assigned_to'=>'xsd:int',
 		'summary'=>'xsd:string',
 		'details'=>'xsd:string'
 	),
-	array('addArtifactResponse'=>'xsd:integer'),
-	$uri
+	array('addArtifactResponse'=>'xsd:int'),
+	$uri,$uri.'#addArtifact','rpc','encoded'
 );
 
 //updateArtifact
@@ -151,20 +152,20 @@ $server->register(
 	'updateArtifact',
 	array(
 		'session_ser'=>'xsd:string',
-		'group_id'=>'xsd:integer',
-		'group_artifact_id'=>'xsd:integer',
-		'artifact_id'=>'xsd:integer',
-		'status_id'=>'xsd:integer',
-		'category_id'=>'xsd:integer',
-		'artifact_group_id'=>'xsd:integer',
-		'resolution_id'=>'xsd:integer',
-		'priority'=>'xsd:integer',
-		'assigned_to'=>'xsd:integer',
+		'group_id'=>'xsd:int',
+		'group_artifact_id'=>'xsd:int',
+		'artifact_id'=>'xsd:int',
+		'status_id'=>'xsd:int',
+		'category_id'=>'xsd:int',
+		'artifact_group_id'=>'xsd:int',
+		'resolution_id'=>'xsd:int',
+		'priority'=>'xsd:int',
+		'assigned_to'=>'xsd:int',
 		'summary'=>'xsd:string',
 		'details'=>'xsd:string'
 	),
-	array('addArtifactResponse'=>'xsd:integer'),
-	$uri
+	array('addArtifactResponse'=>'xsd:int'),
+	$uri,$uri.'#updateArtifact','rpc','encoded'
 );
 /*
 $session_ser,$group_id,$group_artifact_id,$artifact_id,$status_id,$category_id,
@@ -180,10 +181,10 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:integer'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:integer'),
+	'id' => array('name'=>'id', 'type' => 'xsd:int'),
+	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
 	'category_name' => array('name'=>'category_name', 'type' => 'xsd:string'),
-	'auto_assign_to' => array('name'=>'auto_assign_to', 'type' => 'xsd:integer')
+	'auto_assign_to' => array('name'=>'auto_assign_to', 'type' => 'xsd:int')
 	)
 );
 
@@ -200,9 +201,9 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getArtifactCategories',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
 	array('getArtifactCategoriesResponse'=>'tns:ArrayOfArtifactCategory'),
-	$uri
+	$uri,$uri.'#getArtifactCategories','rpc','encoded'
 );
 
 //
@@ -215,8 +216,8 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:integer'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:integer'),
+	'id' => array('name'=>'id', 'type' => 'xsd:int'),
+	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
 	'group_name' => array('name'=>'group_name', 'type' => 'xsd:string')
 	)
 );
@@ -234,9 +235,9 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getArtifactGroups',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
 	array('getArtifactGroupsResponse'=>'tns:ArrayOfArtifactGroup'),
-	$uri
+	$uri,$uri.'#getArtifactGroups','rpc','encoded'
 );
 
 //
@@ -249,8 +250,8 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:integer'),
-	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:integer'),
+	'id' => array('name'=>'id', 'type' => 'xsd:int'),
+	'group_artifact_id' => array('name'=>'group_artifact_id', 'type' => 'xsd:int'),
 	'resolution_name' => array('name'=>'resolution_name', 'type' => 'xsd:string')
 	)
 );
@@ -267,9 +268,9 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getArtifactResolutions',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
 	array('getArtifactResolutionsResponse'=>'tns:ArrayOfArtifactResolution'),
-	$uri
+	$uri,$uri.'#getArtifactResolutions','rpc','encoded'
 );
 
 //
@@ -282,13 +283,13 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:integer'),
-	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:integer'),
+	'id' => array('name'=>'id', 'type' => 'xsd:int'),
+	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
 	'description' => array('name'=>'description', 'type' => 'xsd:string'),
-	'filesize' => array('name'=>'filesize', 'type' => 'xsd:integer'),
+	'filesize' => array('name'=>'filesize', 'type' => 'xsd:int'),
 	'filetype' => array('name'=>'filetype', 'type' => 'xsd:string'),
-	'adddate' => array('name'=>'adddate', 'type' => 'xsd:integer'),
-	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:integer')
+	'adddate' => array('name'=>'adddate', 'type' => 'xsd:int'),
+	'submitted_by' => array('name'=>'submitted_by', 'type' => 'xsd:int')
 	)
 );
 
@@ -305,17 +306,17 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getArtifactFiles',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer','artifact_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
 	array('getArtifactFilesResponse'=>'tns:ArrayOfArtifactFile'),
-	$uri
+	$uri,$uri.'#getArtifactFiles','rpc','encoded'
 );
 
 //TODO - FINISH ADD FILE
 $server->register(
 	'addArtifactFile',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer','artifact_id'=>'xsd:integer','file_path'=>'xsd:string','description'=>'xsd:string','filename'=>'xsd:string','filetype'=>'xsd:string'),
-	array('addArtifactFileResponse'=>'xsd:integer'),
-	$uri
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int','file_path'=>'xsd:string','description'=>'xsd:string','filename'=>'xsd:string','filetype'=>'xsd:string'),
+	array('addArtifactFileResponse'=>'xsd:int'),
+	$uri,$uri.'#addArtifactFile','rpc','encoded'
 );
 
 
@@ -329,11 +330,11 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'id' => array('name'=>'id', 'type' => 'xsd:integer'),
-	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:integer'),
+	'id' => array('name'=>'id', 'type' => 'xsd:int'),
+	'artifact_id' => array('name'=>'artifact_id', 'type' => 'xsd:int'),
 	'body' => array('name'=>'body', 'type' => 'xsd:string'),
-	'adddate' => array('name'=>'adddate', 'type' => 'xsd:integer'),
-	'user_id' => array('name'=>'user_id', 'type' => 'xsd:integer')
+	'adddate' => array('name'=>'adddate', 'type' => 'xsd:int'),
+	'user_id' => array('name'=>'user_id', 'type' => 'xsd:int')
 	)
 );
 
@@ -350,17 +351,17 @@ $server->wsdl->addComplexType(
 
 $server->register(
 	'getArtifactMessages',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer','artifact_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int'),
 	array('getArtifactMessagesResponse'=>'tns:ArrayOfArtifactMessage'),
-	$uri
+	$uri,$uri.'#getArtifactMessages','rpc','encoded'
 );
 
 //add
 $server->register(
 	'addArtifactMessage',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer','artifact_id'=>'xsd:integer','body'=>'xsd:string'),
-	array('addArtifactMessageResponse'=>'xsd:integer'),
-	$uri
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int','artifact_id'=>'xsd:int','body'=>'xsd:string'),
+	array('addArtifactMessageResponse'=>'xsd:int'),
+	$uri,$uri.'#addArtifactMessage','rpc','encoded'
 );
 
 //
@@ -370,9 +371,9 @@ $server->register(
 //
 $server->register(
 	'getArtifactTechnicians',
-	array('session_ser'=>'xsd:string','group_id'=>'xsd:integer','group_artifact_id'=>'xsd:integer'),
+	array('session_ser'=>'xsd:string','group_id'=>'xsd:int','group_artifact_id'=>'xsd:int'),
 	array('getArtifactTechniciansResponse'=>'tns:ArrayOfUser'),
-	$uri
+	$uri,$uri.'#getArtifactTechnicians','rpc','encoded'
 );
 
 
@@ -420,7 +421,7 @@ function artifacttype_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactType', 'ArrayOfArtifactType', $return);
+	return $return;
 }
 
 //
@@ -453,7 +454,7 @@ function &addArtifact($session_ser,$group_id,$group_artifact_id,$status_id,$cate
 	if (!$a->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority)) {
 		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
-		soapval('xsd:integer', 'integer', $a->getID());
+		return $a->getID();
 	}
 }
 
@@ -488,7 +489,7 @@ function &updateArtifact($session_ser,$group_id,$group_artifact_id,$artifact_id,
 		$summary,$canned_response,$details,$new_artifact_type_id)) {
 		return new soap_fault ('','addArtifact',$a->getErrorMessage(),$a->getErrorMessage());
 	} else {
-		soapval('xsd:integer', 'integer', $a->getID());
+		return $a->getID();
 	}
 }
 
@@ -530,7 +531,7 @@ function artifactcategories_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactCategory', 'ArrayOfArtifactCategory', $return);
+	return $return;
 }
 
 //
@@ -570,7 +571,7 @@ function artifactgroups_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactGroup', 'ArrayOfArtifactGroup', $return);
+	return $return;
 }
 
 //
@@ -610,7 +611,7 @@ function artifactresolutions_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactResolution', 'ArrayOfArtifactResolution', $return);
+	return $return;
 }
 
 //
@@ -698,7 +699,7 @@ function artifacts_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifact', 'ArrayOfArtifact', $return);
+	return $return;
 }
 
 //
@@ -746,7 +747,7 @@ function artifactfiles_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactFile', 'ArrayOfArtifactFile', $return);
+	return $return;
 }
 
 //
@@ -827,7 +828,7 @@ function artifactmessages_to_soap($at_arr) {
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactMessage', 'ArrayOfArtifactMessage', $return);
+	return $return;
 }
 
 //
@@ -866,7 +867,7 @@ function &addArtifactMessage($session_ser,$group_id,$group_artifact_id,$artifact
 	if (!$am->create($body)) {
 		return new soap_fault ('','addArtifactMessage',$am->getErrorMessage(),$am->getErrorMessage());
 	} else {
-		return new soap_value ('xsd:integer','integer',$am->getID());
+		return $am->getID();
 	}
 }
 

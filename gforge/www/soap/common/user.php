@@ -35,7 +35,7 @@ $server->wsdl->addComplexType(
 	'sequence',
 	'',
 	array(
-	'user_id' => array('name'=>'user_id', 'type' => 'xsd:integer'),
+	'user_id' => array('name'=>'user_id', 'type' => 'xsd:int'),
 	'user_name' => array('name'=>'user_name', 'type' => 'xsd:string'),
 	'title' => array('name'=>'title', 'type' => 'xsd:string'),
 	'firstname' => array('name'=>'firstname', 'type' => 'xsd:string'),
@@ -47,8 +47,8 @@ $server->wsdl->addComplexType(
 	'status' => array('name'=>'status', 'type' => 'xsd:string'),
 	'timezone' => array('name'=>'timezone', 'type' => 'xsd:string'),
 	'country_code' => array('name'=>'country_code', 'type' => 'xsd:string'),
-	'add_date' => array('name'=>'add_date', 'type' => 'xsd:integer'), 
-	'language_id' => array('name'=>'language_id', 'type' => 'xsd:integer') 
+	'add_date' => array('name'=>'add_date', 'type' => 'xsd:int'), 
+	'language_id' => array('name'=>'language_id', 'type' => 'xsd:int') 
 	) );
 
 // Array of users
@@ -65,23 +65,29 @@ $server->wsdl->addComplexType(
 //getUsers (id array)
 $server->register(
     'getUsers',
-    array('session_ser'=>'string','user_ids'=>'xsd:integer[]'),
+    array('session_ser'=>'string','user_ids'=>'tns:ArrayOfint'),
     array('userResponse'=>'tns:ArrayOfUser'),
-    $uri);
+    $uri,
+    $uri.'#getUsers','rpc','encoded'
+);
 
 //getUsersByName (unix_name array)
 $server->register(
     'getUsersByName',
-    array('session_ser'=>'string','user_ids'=>'xsd:string[]'),
+    array('session_ser'=>'string','user_ids'=>'tns:ArrayOfstring'),
     array('userResponse'=>'tns:ArrayOfUser'),
-    $uri);
+    $uri,
+    $uri.'#getUsersByName','rpc','encoded'
+);
 
 //getGroups (id array)
 $server->register(
     'userGetGroups',
-    array('session_ser'=>'string','user_id'=>'xsd:integer'),
+    array('session_ser'=>'string','user_id'=>'xsd:int'),
     array('groupResponse'=>'tns:ArrayOfGroup'),
-    $uri);
+    $uri,
+    $uri.'#userGetGroups','rpc','encoded'
+);
 
 
 //get user objects for array of user_ids
@@ -89,7 +95,7 @@ function &getUsers($session_ser,$user_ids) {
 	continue_session($session_ser);
 	$usrs =& user_get_objects($user_ids);
 	if (!$usrs) {
-		return new soap_fault ('','','','Could Not Get Users');
+		return new soap_fault ('3001','user','Could Not Get Users By Id','Could Not Get Users By Id');
 	}
 
 	return users_to_soap($usrs);
@@ -100,7 +106,7 @@ function &getUsersByName($session_ser,$user_names) {
 	continue_session($session_ser);
 	$usrs =& user_get_objects_by_name($user_names);
 	if (!$usrs) {
-		return new soap_fault ('','','','Could Not Get Users');
+		return new soap_fault ('3002','user','Could Not Get Users By Name','Could Not Get Users By Name');
 	}
 
 	return users_to_soap($usrs);
@@ -110,9 +116,9 @@ function &getUsersByName($session_ser,$user_names) {
 function &userGetGroups($session_ser,$user_id) {
 	continue_session($session_ser);
 	$user =& user_get_object($user_id);
-    if (!$user) {
-        return new soap_fault ('','','','Could Not Get User');
-    }
+	if (!$user) {
+		return new soap_fault ('3003','user','Could Not Get Users Groups','Could Not Get Users Groups');
+	}
 	return groups_to_soap($user->getGroups());
 }
 
@@ -144,7 +150,7 @@ function &users_to_soap($usrs) {
 		}
 
 	}
-	return new soapval('tns:ArrayOfUser', 'ArrayOfUser', $return);
+	return $return;
 }
 
 

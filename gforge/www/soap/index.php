@@ -5,28 +5,24 @@ require_once('www/include/squal_pre.php');
 require_once('www/include/BaseLanguage.class');
 
 $uri = 'http://'.$sys_default_domain;
-
 // 1. include client and server
 require_once('./nusoap.php');
-
+//$debug = true;
 // 2. instantiate server object
 $server = new soap_server();
 //configureWSDL($serviceName,$namespace = false,$endpoint = false,$style='rpc', $transport = 'http://schemas.xmlsoap.org/soap/http');
-$server->configureWSDL('GForgeAPI',$uri);
+//$server->configureWSDL('GForgeAPI',$uri);
+$server->configureWSDL('GForgeAPI',$uri,false,'rpc','http://schemas.xmlsoap.org/soap/http',$uri);
 
-// set schema target namespace
-$server->wsdl->schemaTargetNamespace = $uri.'/';
-$server->namespaces['s0'] = $uri;
 // add types
-
 $server->wsdl->addComplexType(
 	'ArrayOfstring',
 	'complexType',
 	'array',
 	'',
-	'',
+	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:Array','wsdl:arrayType'=>'string[]')),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:string[]')),
 	'xsd:string'
 );
 
@@ -35,10 +31,32 @@ $server->wsdl->addComplexType(
 	'complexType',
 	'array',
 	'',
-	'',
+	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:Array','wsdl:arrayType'=>'integer[]')),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:integer[]')),
 	'xsd:integer'
+);
+
+$server->wsdl->addComplexType(
+	'ArrayOflong',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:long[]')),
+	'xsd:long'
+);
+
+$server->wsdl->addComplexType(
+	'ArrayOfint',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'xsd:int[]')),
+	'xsd:int'
 );
 
 // session/authentication
@@ -46,13 +64,15 @@ $server->register(
 	'login',
 	array('userid'=>'xsd:string','passwd'=>'xsd:string'),
 	array('loginResponse'=>'xsd:string'),
-	$uri);
+	$uri,
+	$uri.'#login');
 
 $server->register(
 	'logout',
-	array('$sessionkey'=>'xsd:string'),
+	array('sessionkey'=>'xsd:string'),
 	array('logoutResponse'=>'xsd:string'),
-	$uri);
+	$uri,
+	$uri.'#logout');
 
 //
 //	Include Group Functions
@@ -98,16 +118,8 @@ if ($wsdl) {
  *
  * @param 	string		The session key
  */
-function continueSession($sessionKey) {
-	global $session_ser, $Language;
-	$session_ser = $sessionKey;
-	session_set();
-	$Language=new BaseLanguage();
-	$Language->loadLanguage("English"); // TODO use the user's default language
-	setlocale (LC_TIME, $Language->getText('system','locale'));
-	$sys_strftimefmt = $Language->getText('system','strftimefmt');
-	$sys_datefmt = $Language->getText('system','datefmt');
-
+function continue_session($sessionKey) {
+	session_continue($sessionKey);
 }
 
 // session/authentication
@@ -131,10 +143,10 @@ function login($userid, $passwd) {
 	$res = session_login_valid($userid, $passwd);
 	
 	if (!$res) {
-		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid." and password of ".$passwd, 'No Detail');
+		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid." and password of ".$passwd, $feedback);
  	}
 	
-	return new soapval('tns:soapVal','string',$session_ser);
+	return $session_ser;
 }
 
 /**
@@ -145,7 +157,7 @@ function login($userid, $passwd) {
 function logout($sessionkey) {
 	continueSession($sessionkey);
 	session_logout();
-   	return new soapval('tns:soapVal','string',"OK");
+   	return "OK";
 }
 
 
