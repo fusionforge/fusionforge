@@ -99,7 +99,7 @@ $sys_ldap_admin_dn="cn=admin,{ldap_base_dn}";
 //
 //      Jabber Configuration
 //
-$sys_use_jabber=1;
+$sys_use_jabber=0;
 //messages from the system will be sent to this address
 $sys_jabber_server="{jabber_host}";
 $sys_jabber_port=5222;
