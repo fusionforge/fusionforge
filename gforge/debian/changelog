@@ -1,3 +1,15 @@
+sourceforge (2.5-29woody0) unstable; urgency=low
+
+  * [Roland] Maintenance release for Debian 3.0r1, the first update of
+    Woody.  Only fixing really major bugs, so that the stable release
+    manager may accept this package.
+  * [Roland] Moved back to non-us, since proftpd is not in main in Woody.
+  * [Roland] Backported fix from 2.5-30 so that uninstalling will not
+    completely remove the LDAP directory, but only the entries generated
+    from our database.  This fixes bug #153032 in Woody.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  6 Nov 2002 13:04:10 +0100
+
 sourceforge (2.5-29) unstable; urgency=low
 
   * [Roland] Moved to main.  I promise the only changes in this package
