@@ -7,7 +7,7 @@ Standards-Version: 3.6.1
 
 Package: gforge-plugin-ldapextauth
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache | gforge-web
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache | gforge-web, php4-ldap
 Description: A Gforge plugin to authenticate from an external LDAP directory
  This plugin allows Gforge to use an external LDAP directory to
  authenticate the users.  When they first try to log in, their
