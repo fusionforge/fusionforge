@@ -18,8 +18,10 @@ gforge (3.0-4) unstable; urgency=low
   * [Christian] Added cronjobs/check_stale_tracker_items.php in postgres cron
   * [Christian] Added objectClass: person in install-ldap.sh as suggested by 
     Lars Ehrhardt in http://gforge.org/forum/message.php?msg_id=3211
+  * [Roland] Reverted a few images to their status in 3.0-1, to avoid
+    build problems.  Sorry about the delay, and the lack of a 3.0-3.
 
- -- Christian Bayle <bayle@debian.org>  Wed, 30 Jul 2003 17:50:26 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 20 Aug 2003 22:02:32 +0200
 
 gforge (3.0-2) unstable; urgency=low
 
