@@ -171,17 +171,8 @@ Thanks... and enjoy the site.';
 	// New strings added on 2002/06/10 by Soon-Son Kwon
 	var $FOOTER='
 <font face="arial, helvetica" size="1" color="#cccccc">
-VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.
-Linux is a registered trademark of Linus Torvalds.  All other trademarks and
-copyrights on this page are property of their respective owners.
-For information about other site Content ownership and sitewide
-terms of service, please see the
-<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>.
-For privacy
-policy information, please see the <a href="/tos/privacy.php" class="legallink"
->SourceForge Privacy Policy</a>.
-Content owned by VA Linux Systems is copyright
-1999-2000 VA Linux Systems, Inc.  All rights reserved.
+This site runs Debian-SF.  For more about it, including copyri
+ght info, see <a href="/about.php">this page</a>.
 </font>';
 
 	var $IEWARN='<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>';
@@ -264,7 +255,7 @@ Content owned by VA Linux Systems is copyright
 		<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. 
 		<P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.';
 
-	// New strings added on 2002/06/12 by Soon-Son Kwon
+	// New strings added on 2002/06/13 by Soon-Son Kwon
 	var $CHANGE='Change';
 	var $EDIT='Edit';
 	var $OLD='Old';
@@ -274,6 +265,15 @@ Content owned by VA Linux Systems is copyright
 
 	var $FORUM_CHOOSE='<p>Choose a forum and you can browse, search, and post messages.<p>';
 
+	// New strings added on 2002/06/14 by Soon-Son Kwon
+	var $ABOUT_BLURB=' 
+This site runs Debian Sourceforge, a derivative of the code that runs the <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  The information present on this page is only authoritative for Debian Sourceforge, please refer to <a href="http://www.sourceforge.net/">Sourceforge.net</a> for information on their code.
+<br><br><b>People</b><br>The Sourceforge <a href="staff.php">staff</a> has worked hard to make Sourceforge a reality, here\'s your chance to meet the people behind the site.
+<br><br><b>Thanks</b><br>We owe a lot of thanks to the people that wrote the software that runs Sourceforge.  We\'d also like to give <a href="thanks.php">Kudos</a> to the following people and organizations for helping make Sourceforge happen.
+<br><br><b>More Information</b><br>If you have further questions, please contact the <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">Debian Sourceforge users mailing-list</a>.  You might also have a look at the <a href="http://savannah.gnu.org/projects/debian-sf/">project page</a> for Debian Sourceforge on Savannah (another Sourceforge derivative, run and hosted by the GNU project and the FSF).
+<br><br><b>Copyrights</b><br>The code behind Sourceforge was originally written by folks at VA Linux Systems (now called "VA Software") and released under the GNU General Public License.  It is thus mostly copyrighted by them.
+<br>The code behind this site, on the other hand, is Debian Sourceforge, a derivative of the original Sourceforge code, adapted for Debian systems.  The "visible" changes are mostly fixes for bugs and typos, but much work has also been done to provide a package: Debian Sourceforge is easy to setup and run, you only need a system running Debian.  Debian Sourceforge has been done by Christian Bayle and Roland Mas, with contributions from various people.
+<br><br><br><b>Trademarks and suchlikes</b><br>VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.  Linux is a registered trademark of Linus Torvalds.  All other trademarks and copyrights on this page are property of their respective owners.  Content owned by VA Linux Systems is copyright 1999-2001 VA Linux Systems, Inc.  All rights reserved.<br><br>';
 	/*
 		returns database result
 		of supported languages

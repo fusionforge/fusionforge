@@ -68,7 +68,6 @@ function menu_software() {
 	$HTML->menuhtml_top('Software'); 
 		$HTML->menu_entry('/softwaremap/',$Language->SOFTWARE_MAP);
 		$HTML->menu_entry('/new/',$Language->NEW_RELEASES);
-		// $HTML->menu_entry('/mirrors/',$Language->OTHER_SITE_MIRRORS);
 		$HTML->menu_entry('/snippet/',$Language->CODE_SNIPPET_LIBRARY);
 	$HTML->menuhtml_bottom();
 }

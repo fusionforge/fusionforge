@@ -165,15 +165,7 @@ class Korean extends BaseLanguage {
     // New strings added on 2002/06/10 by Soon-Son Kwon
 	$this->FOOTER='
 <font face="굴림체, arial, helvetica" size="1" color="#cccccc">
-SourceForge는 VA Software의 등록 상표입니다. 
-Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
-저작권은 해당 소유자에게 있습니다.
-컨텐트에 대한 소유 정보와 사용에 대한 자세한 사항은 
-<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>를 
-참고하십시오. 개인 정보 보호 정책은
-<a href="/tos/privacy.php" class="legallink">SourceForge Privacy Policy</a>를
-참고하십시오. Content owned by VA Software is copyright
-1999-2002 VA Software, Inc.  All rights reserved.
+이 사이트는 Debian-SF에서 운영중입니다. 저작권 등의 자세한 사항은 <a href="/about.php">이곳</a>을 참고하십시오.
 </font>';
 
 	$this->IEWARN='<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>';

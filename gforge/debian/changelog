@@ -16,6 +16,8 @@ sourceforge (2.5-29+) unstable; urgency=low
   * [Soon-Son] modified .../www/forum/message.php so that it can display
     article subject correctly on the title.
   * [Soon-Son] i18n patch for *many* pages (not all yet)
+  * [Soon-Son] removed "sourceforge.net" & "VA linux" specific pages
+    like .../contest/*, .../mirrors/* and simplified/generalized footer
 
  -- Roland Mas <lolando@debian.org>  Thu, 30 May 2002 17:27:18 +0200
 
