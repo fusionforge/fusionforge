@@ -1,3 +1,7 @@
+2004-07-28  Francisco Gimeno <kikov@kikov.org>
+	* www/include/languages/Spanish.tab: solved a lot of
+	typos and changes to the formal pronoun. Applied patch#847
+
 2004-07-26  Christian Bayle <bayle@aist.enst.fr>
 
 	* Added css plugin hook to Layout.class

@@ -32,8 +32,8 @@ account_change_email	section	Preferencias de cuenta
 account_change_email	send_confirmation	Envía la Confirmación a la Nueva Dirección
 account_change_email	subject	$1 Verificación
 account_change_email	title	Cambiar dirección de correo
-account_change_email-complete	confirm	Bienvenido, $1. El cambio de su email se ha completado. Su nueva dirección de correo electrónico archivada es <strong>$2</strong>. Ahora, el correo enviado a $3 será redirigido a esta cuenta.
-account_change_email-complete	title	Cambio de Correo Completado
+account_change_email-complete	confirm	Bienvenido, $1. El cambio de su dirección de correo electrónico se ha completado. Su nueva dirección de correo electrónico archivada es <strong>$2</strong>. Ahora, el correo enviado a $3 será redirigido a esta cuenta.
+account_change_email-complete	title	Cambio de dirección de correo electrónico completado
 account_change_email_confirm	title	Confirmación de Cambio de Correo Electrónico
 account_change_pw	confirmation	<h2>$1 Confirmación de cambio de contraseña</h2><p>Felicidades. Ha cambiado su contraseña.</p>
 account_change_pw	new_password	Nueva contraseña (al menos de 6 caracteres)
@@ -49,17 +49,17 @@ account_change_pw_changed	return_to	Ahora debe $1 regresar a las preferencias de
 account_change_pw_changed	title	Contraseña cambiada con éxito
 account_editsshkeys	section	Preferencias de cuenta
 account_editsshkeys	title	Editar claves compartidas CVS/SSH
-account_first	about_blurb	<p>Ahora usted es un usuario registrado en $1, el entorno de desarrollo de proyectos de código abierto en línea.</p><p>Como un usuario registrado, puede participar totalmente en las actividades de este portal. Ahora puede enviar mensajes en los foros de mensajes de proyectos, enviar errores de código en $1, registrarse como un desarrollador de un proyecto, o incluso comenzar su propio proyecto.</p><p>Tiene que dedicar cierto tiempo para leer la <a href="/docs/site/"><b>documentación</b></a> de forma que pueda tomar partido totalmente de $1.</p><p>Disfrute de este sitio, y por favor proporcionenos comentarios de forma que podamos mejorar $1.</p><p>-- el equipo de $1.</p>
+account_first	about_blurb	<p>Ahora es un usuario registrado en $1, el entorno de desarrollo de proyectos de código abierto en línea.</p><p>Como usuario registrado, puede participar totalmente en las actividades de este portal. Ahora puede enviar mensajes en los foros de mensajes de proyectos, enviar errores de código en $1, registrarse como un desarrollador de un proyecto, o incluso comenzar su propio proyecto.</p><p>Tiene que dedicar cierto tiempo para leer la <a href="/docs/site/"><b>documentación</b></a> de forma que pueda tomar partido totalmente de $1.</p><p>Disfrute de este sitio, y por favor proporcionenos comentarios de forma que podamos mejorar $1.</p><p>-- el equipo de $1.</p>
 account_first	title	¡Bienvenid@!
 account_login	cookiewarn	Los "cookies" deben de estar habilitados pasado este punto.
-account_login	deleted_account	<p>Su cuenta de $1 ha sido borrada por el equipo de $1. Esto puede suceder por dos razones, o 1) solicitó que se borrara la cuenta; o 2) se ha realizado alguna acción cuestionable usando su cuenta (por ejemplo, violar los términos de uso) por lo que ha sido eliminada por motivos administrativos. Si tiene preguntas referentes a este asunto, déjenos una <a href="/support/?group_id=1">petición de soporte</a>.</p><p>Gracias, <br /><br />el equipo de $1</p>
+account_login	deleted_account	<p>Su cuenta de $1 ha sido borrada por el equipo de $1. Esto puede suceder por dos razones, 1) solicitó que se borrara la cuenta; ó 2) se ha realizado alguna acción cuestionable usando su cuenta (por ejemplo, violar los términos de uso) por lo que ha sido eliminada por motivos administrativos. Si tiene preguntas referentes a este asunto, déjenos una <a href="/support/?group_id=1">petición de soporte</a>.</p><p>Gracias, <br /><br />el equipo de $1</p>
 account_login	login	Acceder de forma segura
 account_login	login_ssl	Acceder con SSL
 account_login	loginname	Nombre de la cuenta:
 account_login	lostpw	[¿Se le olvidó su contraseña?]
 account_login	newaccount	[Nueva cuenta]
 account_login	passwd	Contraseña:
-account_login	pending_account	<p>Su cuenta está pendiente de que su confirmación por correo. Si accede al enlace que hemos enviado a su correo, se le activará su cuenta.</p><p>Si necesita que se le reenvíe ese correo, por favor pulse abajo y un correo de confirmación se le enviará a la cuenta de correo que proporcionó durante su registro.</p><p><a href="pending-resend.php?form_user=$1">[Reenviar Correo de Confirmación]</a><br /><hr /></p>
+account_login	pending_account	<p>Su cuenta está pendiente de su confirmación por correo. Si accede al enlace que le hemos enviado a su correo, se activará su cuenta.</p><p>Si necesita que se le reenvíe ese correo, por favor pulse abajo y un correo de confirmación se le enviará a la cuenta de correo que proporcionó durante su registro.</p><p><a href="pending-resend.php?form_user=$1">[Reenviar Correo de Confirmación]</a><br /><hr /></p>
 account_login	resend_pending	[Enviar email de confirmación a una cuenta pendiente de ser aprobada]
 account_login	resend_pending_directions	Rellene el nombre usuario y haga click en 'Enviar' para que se reenvíe el email de confirmación
 account_login	sslnotice	<p><b><font color="red">Se conectará a un servidor Web seguro SSL cuando envíe este formulario y su contraseña no será visible por otros usuarios.</font></b></p><p><small style="font-size: x-small"> (Si se pregunta por que esta página no se carga de forma segura con SSL, por favor lea el próximo párrafo. Gracias.) </small> <p> Los usuarios de <b>Internet Explorer</b> tendrán problemas intermitentes de SSL, de forma que deben abandonar el modo seguro después de autenticarse. Los usuarios de Netscape pueden permanecer en modo seguro SSL permanentemente para mayor seguridad. Visite <a href="http://www.microsoft.com/" target="_blank">Microsoft</a> para más información sobre este conocido problema.</p>
@@ -69,10 +69,10 @@ account_lostlogin	invalidconfirm	\'Hash\' de confirmación invalido
 account_lostlogin	newpasswd	Nueva contraseña (min. 6 carácteres)
 account_lostlogin	newpasswd2	Nueva contraseña (repítala)
 account_lostlogin	notmatch	Las nuevas contraseñas no coinciden.
-account_lostlogin	passwdchanged	<h2>Contraseña cambiada</h2><p>Felicidades, ha cambiado su contraseña de su cuenta. Puede ahora <a href="/account/login.php">acceder</a> a nuestro sitio ahora.</p>
+account_lostlogin	passwdchanged	<h2>Contraseña cambiada</h2><p>Felicidades, ha cambiado su contraseña de su cuenta. Puede <a href="/account/login.php">acceder</a> a nuestro sitio ahora.</p>
 account_lostlogin	severalconfirm	Este \'hash\' de confirmación existe más de una vez.
 account_lostlogin	sixchars	Debe proporcionar una contraseña válida (por lo menos seis carácteres).
-account_lostlogin	title	Confirmación de perdida de contraseña
+account_lostlogin	title	Confirmación de pérdida de contraseña
 account_lostlogin	update	Actualice
 account_lostlogin	welcome	<h2>Acceso con contraseña perdida</h2><p>Bienvenid@, $1. Debe cambiar ahora su contraseña.</p>
 account_lostpw	invalid_user	Usuario no válido
@@ -111,9 +111,9 @@ account_register	congrat	<p>Felicidades. Se ha registrado en $1.</p><p>Ahora rec
 account_register	emailaddr	Cuenta de correo *: <br /><i>Esta cuenta de correo será verificada antes de activar la cuenta. No será mostrada en el portal por motivos de privacidad. Recibirá una cuenta de correo &lt;nombredelacuenta@$1&gt; que se redirigirá a esta dirección.</i>
 account_register	err_badinsert	Inserción errónea
 account_register	err_email	Dirección de correo inválida
-account_register	err_firstname	Debes proporcionar un nombre
+account_register	err_firstname	Debe proporcionar un nombre
 account_register	err_jabber	Dirección Jabber inválida
-account_register	err_lastname	Debes proporcionar los apellidos
+account_register	err_lastname	Debe proporcionar los apellidos
 account_register	err_mailexist	Existe un usuario con este correo - use el buscador de personas para recuperar el acceso.
 account_register	err_passwd	Debe proporcionar una contraseña
 account_register	err_passwd2	No coinciden las contraseñas
@@ -275,6 +275,7 @@ admin_index	active_projects_count	Proyectos activos: <strong>$1</strong>
 admin_index	active_users_count	Usuarios del sistema activos: <strong>$1</strong>
 admin_index	add_delete_edit_file_types	Añadir, Borrar o Editar Tipos de Ficheros
 admin_index	add_delete_edit_laguage	Añadir, Borrar o Editar Lenguajes Soportados
+admin_index	add_edit_delete_licenses	Añadir, Borrar o Editar Licencias
 admin_index	add_edit_delete_processors	Añadir, Borrar o Editar Procesadores
 admin_index	add_edit_delete_themes	Añadir, Borrar o Editar Temas
 admin_index	add_to_trove_map	Añadir al Mapa de Proyectos
@@ -336,8 +337,8 @@ admin_massmail	last_user_id_mailed	Se ha enviado el correo al ĺltimo usuario
 admin_massmail	mail_engine_for	Moto de correo para $1 subscriptores
 admin_massmail	mailing_successfully_scheduled	En envío del correo se ha programado correctamente
 admin_massmail	missing_parameter_empty_message	Falta un parámetro, estás intentando enviar un mensaje vacio
-admin_massmail	missing_parameter_proper_subject	Falta un parámetro, debes poner un asunto adecuado al correo
-admin_massmail	missing_parameter_select_target	Falta un parámetro, debes seleccionar la audiencia a la que será enviado el correo
+admin_massmail	missing_parameter_proper_subject	Falta un parámetro, debe poner un asunto adecuado al correo
+admin_massmail	missing_parameter_select_target	Falta un parámetro, debe seleccionar la audiencia a la que será enviado el correo
 admin_massmail	schedule_for_mailing	Programar el envío de correo
 admin_massmail	select	(selecciona)
 admin_massmail	subject	Asunto
@@ -367,7 +368,7 @@ admin_responses	response_text	Texto de la Respuesta:
 admin_responses	response_title	Título de la Respuesta:
 admin_responses	title	Administración del Sistema: Editar Respuestas de Rechazo
 admin_responses	yes_im_sure	Si, estoy seguro
-admin_responses	you_cant	¡No puedes $1 "Nada"!
+admin_responses	you_cant	¡No puede $1 "Nada"!
 admin_search	email	Email
 admin_search	full_name	Nombre completo
 admin_search	group_search_criteria	Criterio de Búsqueda del Grupo
@@ -614,6 +615,7 @@ docman_admin_editdocs	section	Administración del encargado de documentos
 docman_admin_editdocs	state	Estado
 docman_admin_editdocs	title	Editar documentos
 docman_admin_editdocs	upload	OPCIONAL: Enviar nuevo documento
+docman_admin_editdocs	upload_url	Especificar una URL externa donde el fichero esté referenciado
 docman_admin_editgroups	add_group	Crear Grupo
 docman_admin_editgroups	description	El nombre del grupo será usado como título, entonces necesita uno apropiado.
 docman_admin_editgroups	edit_group	Editar Grupo
@@ -650,6 +652,7 @@ docman_new	submit	Enviar Documento
 docman_new	submitted_successfully	Documento enviado con éxito
 docman_new	title	Gestor de documentos: Enviar un nuevo documento
 docman_new	upload_file	Enviar Fichero
+docman_new	upload_url	O especificar una URL externa donde se halle el fichero
 error	error_creating	Error en la creación
 error	not_found	PAGINA NO ENCONTRADA
 error	title	Página solicitada no encontrada (Error 404)
@@ -705,6 +708,7 @@ forum_admin_delete_message	title	Borrar un Mensaje
 forum_admin_delete_message	warning	¡CUIDADO! ¡Vas a eliminar permanentemente un mensaje y todas sus respuestas!
 forum_admin_delete_messages	messages_deleted	$1 mensajes borrados
 forum_common	error_adding_forum	Fue un error creando el foro.
+forum_common	error_illegal_characters	Nombre de Foro contiene carácteres ilegales.
 forum_common	error_min_desc_length	La descripción del foro tiene que tener al menos 10 carácteres.
 forum_common	error_min_name_length	El nombre del foro tiene que tener al menos 3 carácteres.
 forum_common	error_save_when_logged_in	Solo puede guardar su lugar si está autenticado.
@@ -719,7 +723,7 @@ forum_common_forummessage	error_getting_next_thread	Obtención del siguiente thr
 forum_common_forummessage	error_group_forum_id	El Group_forum_id en el resultado de la base de datos no coincide con el Objeto del Foro
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() MessageID Inválido
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() Objeto ParentMessage no válido
-forum_common_forummessage	error_not_logged	Debes iniciar una sesión para enviar Mensajes
+forum_common_forummessage	error_not_logged	Debe iniciar una sesión para enviar Mensajes
 forum_common_forummessage	error_posting_failed	ForumMessage::create() Publicación del mensaje Fallida
 forum_common_forummessage	error_required_fields	Se deben añadir Contenido y Asunto al Mensaje
 forum_common_forummessage	forum_message	Mensaje en el Foro
@@ -757,8 +761,8 @@ forum_message	message	Mensaje
 forum_message	message_not_found_body	Este mensaje no existe
 forum_message	message_not_found_title	Mensaje no encontrado
 forum_message	msg	Añadir mensaje a la conversación
-forum_message	must_choose_message_body	Primero debes elegir un Mensaje
-forum_message	must_choose_message_title	Primero debes elegir un Mensaje
+forum_message	must_choose_message_body	Primero debe elegir un Mensaje
+forum_message	must_choose_message_title	Primero debe elegir un Mensaje
 forum_message	post_followup	Enviar una respuesta a este mensaje
 forum_message	receive_followups	Recibir respuestas vía correo electrónico
 forum_message	section	Foros
@@ -768,7 +772,7 @@ forum_message	thread_view	Ver la Conversacion
 forum_message	title	Ver mensaje
 forum_monitor	activated	Monitorización del Foro activada
 forum_monitor	deactivated	Monitorización del Foro desactivada
-forum_save	saved	Tu posición en el foro está guardada.  Mensajes nuevos estarán subrayados cuando regreses.
+forum_save	saved	Su posición en el foro está guardada.  Mensajes nuevos estarán subrayados cuando regreses.
 forum_utils	added	Foro Creado
 forum_utils	admin	Administración
 forum_utils	anonymously	Anónimamente
@@ -889,7 +893,6 @@ group	activitystat	Ver las <a href="/project/stats/?group_id=$1">estadísticas</
 group	developer_info	Información del colaborador
 group	developers	Colaboradores
 group	long_bugs	Registro de errores
-group	long_scm	Repositorio SCM
 group	long_docman	Gestión de doc.: Documentación del proyecto
 group	long_forum	Foros Públicos
 group	long_ftp	Espacio FTP Anónimo
@@ -898,6 +901,7 @@ group	long_mail	Listas de Correo
 group	long_news	Últimas noticias
 group	long_patch	Administrador de Parches
 group	long_pm	Gestión de Tareas
+group	long_scm	Repositorio SCM
 group	long_support	Administrador de Soporte Técnico
 group	long_survey	Encuestas
 group	long_tracker	Registro
@@ -908,7 +912,6 @@ group	public_area	Área pública
 group	registered	Registrado:&nbsp;
 group	short_admin	Admin
 group	short_bugs	Errores
-group	short_scm	SCM
 group	short_docman	Documentos
 group	short_files	Ficheros
 group	short_forum	Foros
@@ -919,6 +922,7 @@ group	short_memberlist	Colaboradores
 group	short_news	Noticias
 group	short_patch	Parches
 group	short_pm	Tareas
+group	short_scm	SCM
 group	short_summary	Resumen
 group	short_support	Soporte
 group	short_survey	Encuestas
@@ -929,12 +933,12 @@ help_forum	attach_file	Cuando desee adjuntar un fichero al registro debe marcar 
 help_forum	close_window	Cerrar ventana
 help_forum	unknown_help_request	Petición de ayuda desconocida:
 help_tracker	assignee	Este desplegable representa al administrador del proyecto al cual se le asigna un elemento del registro.
-help_tracker	attach_file	Cuando quieres adjuntar un fichero a un registro debes seleccionar esta casilla antes de enviar cambios.
+help_tracker	attach_file	Cuando quiera adjuntar un fichero a un registro debe seleccionar esta casilla antes de enviar cambios.
 help_tracker	canned_response	El desplegable de respuestas almacenadas o respuestas tipo muestra una lista de respuestas definidas por los administradores a envíos de errores y peticiones de soporte comunes.<br /><br /> Si eres un administrador de proyectos pulsa el enlace de (adminitración) para definir sus propias repuestas almacenadas o tipo.
 help_tracker	category	Este desplegable representa la Categoría de un elemento del Registro que es una sección particular de un proyecto.<br /><br />Selecciona 'Cualquiera' para un sentido amplio.
 help_tracker	close_window	Cerrar Ventana
 help_tracker	comment	La zona de comentarios te permite adjuntar un comentario al registro cuando la respuesta recibida no es adecuada.
-help_tracker	data_type	La opción de Tipo de Dato determina el tipo de registro que es. Como el registro va a parar en uno de los gestionadores de errores, parches, peticiones, etc debes de poder determinarlo.
+help_tracker	data_type	La opción de Tipo de Dato determina el tipo de registro que es. Como el registro va a parar en uno de los gestionadores de errores, parches, peticiones, etc debe de poder determinarlo.
 help_tracker	group	Este desplegable muestra el Grupo de los Registros que es una lista de opciones definidas por los administradores del proyecto.<br /><br />Si es un administrador de proyectos puede seleccionar el botón (admin) para definir su propio grupo.
 help_tracker	monitor	Puede monitorizar o desmonitorizar un elemento pulsando el botón de "Monitorizar". <br /><br /><strong>Nota!</strong> esto le enviará correos adicionales. Si añade comentarios a este elemento, o se publica o se le asigna este elemento también recibirá correos por este motivo
 help_tracker	priority	La opción de Prioridad permite a un usuario definir una prioridad de un registro (desde el 1:más baja hasta el 9:más alta).<br /><br />Esto es especialmente de utilidad para errores y peticiones de soporte donde un usuario puede encontrar un problema crítico en un proyecto.
@@ -1221,7 +1225,7 @@ people_editjob	job_update_ok	TRABAJO actualizado con éxito
 people_editjob	no_such	No existe esta publicación en este proyecto
 people_editjob	posting_fetch_failed	Obtención de la Publicación FALLIDA
 people_editjob	section	Peticiones de Ayuda para Proyectos
-people_editjob	skill_explains	<p>Ahora puedes editar/cambiar la lista de habilidades relacionadas con esta petición. Los colaboradores podrán comparar sus habilidades con tus necesidades.</p><p>Todas las peticiones son automáticamente cerradas después de dos semanas.</p>
+people_editjob	skill_explains	<p>Ahora puede editar/cambiar la lista de habilidades relacionadas con esta petición. Los colaboradores podrán comparar sus habilidades con tus necesidades.</p><p>Todas las peticiones son automáticamente cerradas después de dos semanas.</p>
 people_editjob	title	Editar trabajos
 people_editjob	update_description	Actualizar descripciones
 people_editprofile	about_to_delete	Vas a borrar la siguiente habilidad para el trabajo$1
@@ -1297,7 +1301,7 @@ pm	cat_none	nada
 pm	category	Categoria
 pm	date_note	El sistema modificara tus fechas de inicio y finalizacion si intentas crear una fecha de inicio anterior a la fecha de finalizacion de cualquiera de las tareas de las que depende esta tarea.
 pm	dependent	Depende de la Tarea
-pm	dependent_note	Debes elegir solamente las tareas que deben estar completas para que pueda comenzar esta.
+pm	dependent_note	Debe elegir solamente las tareas que deben estar completas para que pueda comenzar esta.
 pm	details	Detalles de la Tarea
 pm	end_date	Fecha Final
 pm	hours	Horas Estimadas
@@ -1311,7 +1315,7 @@ pm	section	Proyecto: $1
 pm	start_date	Fecha Inicio
 pm	status	Estado
 pm	status_any	Cualquiera
-pm	summary	Descripcion de la Tarea
+pm	summary	Descripción de la Tarea
 pm	task_id	Id Tarea
 pm	tech_any	Cualquiera
 pm	title	Administrador de Tareas: Subproyectos y tareas
@@ -1338,7 +1342,7 @@ pm_admin_projects	category_note	Si añade una categoria no podrá borrarla
 pm_admin_projects	category_note2	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.</font></strong>
 pm_admin_projects	category_updated	Categoria Actualizada
 pm_admin_projects	change_project_intro	Puede modificar un Subproyecto existente usando este formulario. Note que los proyectos privados solo pueden verlos los miembros de esos proyectos pero no el público en general.<p>
-pm_admin_projects	change_project_title	Cambiae Estado de Subproyecto/Tarea
+pm_admin_projects	change_project_title	Cambia el Estado de Subproyecto/Tarea
 pm_admin_projects	col_project_id	Identificador de proyecto
 pm_admin_projects	col_project_name	Nombre de proyecto
 pm_admin_projects	description	Descripción
@@ -1386,7 +1390,7 @@ pm_detailtask	start_date	Fecha Inicio
 pm_detailtask	status	Estado
 pm_detailtask	submitted_by	Enviado Por
 pm_detailtask	subproject	Subproyecto
-pm_detailtask	task_summary	Descripcion de la Tarea
+pm_detailtask	task_summary	Descripción de la Tarea
 pm_detailtask	title	Detalles de Tarea
 pm_ganttpage	assignee	Asignado
 pm_ganttpage	days	Días
@@ -1463,7 +1467,7 @@ project_admin	file_releases	Publicación de Ficheros
 project_admin	forum_admin	Administración de Foros
 project_admin	frs_admin	Administración de Ficheros
 project_admin	group_members	Miembros del Grupo
-project_admin	homepage_link	Enlace a la Página Inicial
+project_admin	homepage_link	Enlace a la Página Inicial:
 project_admin	mail_admin	Administración de Correos
 project_admin	news_admin	Administración de Noticias
 project_admin	packages	Paquetes
@@ -1471,14 +1475,14 @@ project_admin	plugins_admin	Administración de Plugins (añadidos)
 project_admin	project_information	Información del Projecto Varia
 project_admin	scm_admin	Administración de Control de Versiones de Código
 project_admin	section	Proyecto: $1
-project_admin	shell_server	Servidor de shell (SSH) del grupo
+project_admin	shell_server	Servidor de shell (SSH) del grupo:
 project_admin	shell_server_group_directory	Directorio de Grupo en el servidor de shell:
-project_admin	short_description	Descripción Corta
+project_admin	short_description	Descripción Corta:
 project_admin	task_manager_admin	Administración de Tareas
 project_admin	title	Resumen de Administración
 project_admin	tool_admin	Herramienta de Administración
 project_admin	tracker_admin	Administración del Registro
-project_admin	trove_categorization	Project Categorization:
+project_admin	trove_categorization	Categoría de Proyecto:
 project_admin	unix_name	Nombre Unix
 project_admin	user_added	Usuario Añadido Correctamente
 project_admin	user_removed	Usuario Eliminado Correctamente
@@ -1510,11 +1514,10 @@ project_admin_editgroupinfo	group_name	Nombre descriptivo del Grupo
 project_admin_editgroupinfo	group_updated	Información del grupo actualizada
 project_admin_editgroupinfo	homepage_link	Enlace a la Página Inicial:
 project_admin_editgroupinfo	new_doc	Publicación de Documentos Nuevos
-project_admin_editgroupinfo	new_doc_info	Si quieres, puedes proporcionar una cuenta de correo por defecto a la cual se enviará cualquier nueva publicación
+project_admin_editgroupinfo	new_doc_info	Si quieres, puede proporcionar una cuenta de correo por defecto a la cual se enviará cualquier nueva publicación
 project_admin_editgroupinfo	send_on_all_updates	(envía en todas las actualizaciones)
 project_admin_editgroupinfo	short_description	Descripción Corta (255 caracteres máximo, si hay código HTML se escapará de la descripción)
 project_admin_editgroupinfo	title	Editar información pública
-project_admin_editgroupinfo	use_scm	Usa SCM
 project_admin_editgroupinfo	use_docman	Usar Gestor de Documentación
 project_admin_editgroupinfo	use_forums	Usar Foros
 project_admin_editgroupinfo	use_frs	Usar sistema de Publicación de Ficheros
@@ -1522,6 +1525,7 @@ project_admin_editgroupinfo	use_ftp	Usar FTP
 project_admin_editgroupinfo	use_mailing_lists	Usar Listas de Correo
 project_admin_editgroupinfo	use_news	Usar Noticias
 project_admin_editgroupinfo	use_pm	Usar Gestor de Tareas
+project_admin_editgroupinfo	use_scm	Usa SCM
 project_admin_editgroupinfo	use_stats	Usar Estadísticas
 project_admin_editgroupinfo	use_surveys	Usar Encuestas
 project_admin_editgroupinfo	use_tracker	Usar Registro
@@ -1550,11 +1554,14 @@ project_admin_editpackages	add_release	Añadir Versión
 project_admin_editpackages	added_package	Añadir Paquete
 project_admin_editpackages	create_package	Crear Paquete
 project_admin_editpackages	edit_releases	Editar Versión
+project_admin_editpackages	is_public	Públicamente Visible
 project_admin_editpackages	new_package_name	Nombre del Nuevo Paquete
 project_admin_editpackages	no_packages_defined	No has definido Paquetes
 project_admin_editpackages	no_packages_status	Estado
 project_admin_editpackages	package_name	Nombre del Paquete
-project_admin_editpackages	packages_info	<h3>Paquetes</h3><p>Puede usar paquetes para agrupar diferentes versiones de ficheros o utilizarlos como prefieras. <p><H4>Un ejemplo de paquetes:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Tus Paquetes:</H4><p><ol><li>Define tus paquetes</li><li>Crear nueva versión de los paquetes</li></ol><p><h3>Versiones de Paquetes</h3><p>Una versión del paquete puede incluir multiples ficheros.<p><H4>Ejemplos de Versiones</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Puede crear nuevas versiones de los paquetes pulsando <strong>Añadir/Editar Versiones</strong> a continuación del nombre de su paquete.<p>
+project_admin_editpackages	packages_info	<h3>Paquetes</h3><p>Puede usar paquetes para agrupar diferentes versiones de ficheros o utilizarlos como prefiera. <p><H4>Un ejemplo de paquetes:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Sus Paquetes:</H4><p><ol><li>Define sus paquetes</li><li>Crear nueva versión de los paquetes</li></ol><p><h3>Versiones de Paquetes</h3><p>Una versión del paquete puede incluir multiples ficheros.<p><H4>Ejemplos de Versiones</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Puede crear nuevas versiones de los paquetes pulsando <strong>Añadir/Editar Versiones</strong> a continuación del nombre de su paquete.<p>
+project_admin_editpackages	private	Privado
+project_admin_editpackages	public	Público
 project_admin_editpackages	qrs	QRS
 project_admin_editpackages	qrs_a_file	Pulse aquí para $1 actualizar un fichero $2
 project_admin_editpackages	releases	Versiones
@@ -1583,7 +1590,7 @@ project_admin_editrelease	processor_type	Tipo de Procesador
 project_admin_editrelease	processor_update	Processor<br />Fecha Versión
 project_admin_editrelease	release_date	Fecha de la Versión
 project_admin_editrelease	release_name	Nombre de la Versión
-project_admin_editrelease	release_notes_too_small	Las notas de la revision son demasiado breves
+project_admin_editrelease	release_notes_too_small	Las notas de la revisión son demasiado breves
 project_admin_editrelease	status	Estado
 project_admin_editrelease	step_1	Paso 1:&nbsp;&nbsp; Editar Versión
 project_admin_editrelease	step_2	Paso 2: Añadir ficheros a esta Versión</h3><p>Elije el fichero a enviar al sistema. El tamaño máximo de fichero está determinado por el administrador del sitio; por defecto es 2MB. Si necesitas enviar ficheros mayores contacte con el administrador del sistema.</p>
@@ -1614,11 +1621,11 @@ project_admin_qrs	package_id	Ident.Paquete
 project_admin_qrs	partial_file	Se recibió solo una parte del fichero enviado.
 project_admin_qrs	preserve_text	Mantener mi texto preformateado
 project_admin_qrs	processor_type	Tipo de Procesador
-project_admin_qrs	qrs_info	Ahora puedes $1 Añadir ficheros a esta publicación $2 si quieres, o editar la publicación.</p> <p>Por favor ten en cuenta que los ficheros pueden no aparecer inmediatamente en la $3 página de descarga $4. Se necesitan varias horas para su propagación.
+project_admin_qrs	qrs_info	Ahora puede $1 Añadir ficheros a esta publicación $2 si quiere, o editar la publicación.</p> <p>Por favor tenga en cuenta que los ficheros pueden no aparecer inmediatamente en la $3 página de descarga $4. Se necesitan varias horas para su propagación.
 project_admin_qrs	release_date	Fecha de la Publicación
 project_admin_qrs	release_file	Publicar Fichero
 project_admin_qrs	release_name	Nombre de la Publicación
-project_admin_qrs	release_note	NOTA: En algunos navegadores debes seleccionar el fichero en el dialogo de cargar fichero y pulsar "OK". Haciendo doble-click no selecciona el fichero.
+project_admin_qrs	release_note	NOTA: En algunos navegadores debe seleccionar el fichero en el dialogo de cargar fichero y pulsar "OK". Haciendo doble-click no selecciona el fichero.
 project_admin_qrs	release_notes	Notas de la Publicación
 project_admin_qrs	required_file	Debe elegir un fichero.
 project_admin_qrs	required_file_type	Debe elegir un tipo de fichero.
@@ -1638,7 +1645,7 @@ project_admin_showreleases	date	Fecha
 project_admin_showreleases	no_release	No hay disponibles Versiones de este Paquete
 project_admin_showreleases	package_name	Nombre del Paquete
 project_admin_showreleases	release_name	Nombre de Versión
-project_admin_showreleases	title	Release Nueva Version del Fichero
+project_admin_showreleases	title	Release Nueva Versión del Fichero
 project_admin_userpermedit	add_to_all	Añadir en Todos
 project_admin_userpermedit	add_to_tracker	Añadir al Registro
 project_admin_userpermedit	admin	Admin
@@ -1843,6 +1850,9 @@ rbac_vals	forumpublic0	Privado
 rbac_vals	forumpublic1	Público
 rbac_vals	frs0	Lectura
 rbac_vals	frs1	Escritura
+rbac_vals	frspackage	Sistema de Liberación de Ficheros
+rbac_vals	frspackage0	Privado
+rbac_vals	frspackage1	Público
 rbac_vals	pm-1	Sin acceso
 rbac_vals	pm0	Lectura
 rbac_vals	pm1	Técnico
@@ -1908,7 +1918,6 @@ scm_index	anoncvs	<P><B>Acceso Anónimo por CVS</B> <P>El repositorio CVS de est
 scm_index	anoncvsup	Actualizaciones dentro del directorio del módulo no necesitan el parámetro -d.
 scm_index	browseit	Navegue por el Repositorio CVS
 scm_index	browsetree	<HR><B>Navega por el árbol CVS</B> <P>Navegando por el árbol de CVS te proporcionará una gran visión de la situación actual del código de este proyecto. Deberías ver también el histórico completo de cada fichero en el repositorio.
-scm_index	scm_repository	Repositorio SCM
 scm_index	devcvs	<P><B>Acceso a CVS por colaboradores vía SSH</B> <P>Sólo los colaboradores de un proyecto pueden acceder al árbol CVS por este método. Debe de tener instalado SSH1 en su máquina cliente. Substituye <I>modulename</I> y <I>developername</I> con los valores adecuados. Introduce su password de este sitio cuando se le solicite.
 scm_index	developer_commits_adds	Desarrollador (30 días/Commits) (30 días/Adds)
 scm_index	developername	colaborador
@@ -1917,6 +1926,7 @@ scm_index	error_this_project_has_turned_off	Error Este proyecto tiene desactivad
 scm_index	history	Histórico del Repositorio
 scm_index	modulename	modulename
 scm_index	nohistory	Este proyecto no tiene historial CVS
+scm_index	scm_repository	Repositorio SCM
 scm_index	section	Proyecto: $1
 scm_index	title	CVS
 search	artifact_author	Enviado por
@@ -1983,11 +1993,11 @@ snippet_addversion	error_snippet_doesnt_exist	Error, Error - recorte inexistente
 snippet_addversion	error_snippet_package_doesnt_exist	Error, Error - el paquete del recorte no existe
 snippet_addversion	error_url_or_form	Error, Error - ¿Has manipulado la URL o el formulario?
 snippet_addversion	if_new_window_opened	Si una nueva ventana se abre, usela para añadir nuevos recortes a su paquete. Si una nueva ventana no se abre, use el siguiente enlace para añadir a su paquete ANTES de dejar esta página.
-snippet_addversion	if_you_have_modified	Si has modificado una versión de un recorte sustancialmente y creas que debes compartirlo con otros, por favor, hazlo.
-snippet_addversion	if_you_have_modified_a_version	Si has modificado una versión de un recorte sustancialmente y creas que debes compartirlo con otros, por favor, hazlo.
+snippet_addversion	if_you_have_modified	Si ha modificado una versión de un recorte sustancialmente y crea que debe compartirlo con otros, por favor, hazlo.
+snippet_addversion	if_you_have_modified_a_version	Si ha modificado una versión de un recorte sustancialmente y crea que debe compartirlo con otros, por favor, hágalo.
 snippet_addversion	important	¡IMPORTANTE!
 snippet_addversion	link_add_snippets_to_package	Añadir Recortes a su Paquete
-snippet_addversion	make_sure_all_info_is_complete	Asegurese de que toda la información está completa y es exacta
+snippet_addversion	make_sure_all_info_is_complete	Asegúrese de que toda la información está completa y es exacta
 snippet_addversion	paste_the_code_here	Pega el Código aquí:
 snippet_addversion	snippet_package_version_added_successfully	La versión del paquete de recortes se añadió correctamente.
 snippet_addversion	snippet_version_added_successfully	Versión del recorte añadido correctamente.
@@ -1995,7 +2005,7 @@ snippet_addversion	submit	ENVIAR
 snippet_addversion	title	Envíe una nueva versión
 snippet_addversion	title_add_snippet_to_package	Añadir Recortes al Paquete
 snippet_addversion	title_submit_a_new_snippet_package	Enviar un nuevo paquete de recortes
-snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
+snippet_addversion	title_submit_a_new_snippet_version	Enviar una nueva versión de recorte
 snippet_addversion	version	Versión:
 snippet_browse	creator	Creador
 snippet_browse	error_bad_url	Error, Error - ¿URL incorrecta?
@@ -2009,10 +2019,10 @@ snippet_browse	snippets_by_language	Recortes por Lenguaje: $1
 snippet_browse	title	Hojear los Recortes
 snippet_caching	browse_by_category	Navega por Categoría
 snippet_caching	browse_by_language	Navega por Lenguaje
-snippet_caching	intro	<p>La función de este archivo es proporcionarte la forma de compartir tus recortes de código, tus scripts y funciones con la Comunidad de Software Libre.</p><p>Puede crear un "nuevo recorte", y luego publicar versiones adicionales del recorte de forma fácil y rápida.</p><p>Una vez que tenga recortes publicados, entonces puedes publicar un "Paquete" de recortes. Este paquete puede contener multiples y específicas versiones de otros recortes.</p><p>&nbsp;</p><h3>Navega por los Recortes</h3> <p>Puede navegar por la librería de recortes de una forma rápida:</p>
-snippet_delete	error_mangled_url	Error, Error - ¿Has manipulado la URL?
-snippet_delete	error_only_creator_of_package_version_can_delete	Error - Solo el creador de una versión de paquete puede borrarlos
-snippet_delete	error_only_the_creator	Error - Solo el creador de una versión de paquete puede borrar los recortes de él.
+snippet_caching	intro	<p>La función de este archivo es proporcionarle la forma de compartir sus recortes de código, sus scripts y funciones con la Comunidad de Software Libre.</p><p>Puede crear un "nuevo recorte", y luego publicar versiones adicionales del recorte de forma fácil y rápida.</p><p>Una vez que tenga recortes publicados, entonces puede publicar un "Paquete" de recortes. Este paquete puede contener múltiples y específicas versiones de otros recortes.</p><p>&nbsp;</p><h3>Navegue por los Recortes</h3> <p>Puede navegar por la librería de recortes de una forma rápida:</p>
+snippet_delete	error_mangled_url	Error, Error - ¿Ha manipulado la URL?
+snippet_delete	error_only_creator_of_package_version_can_delete	Error - Sólo el creador de una versión de paquete puede borrarlos
+snippet_delete	error_only_the_creator	Error - Sólo el creador de una versión de paquete puede borrar los recortes de él.
 snippet_delete	item_removed_from	Elemento Borrado del Paquete
 snippet_delete	package_removed	Paquete Borrado
 snippet_delete	snippet_removed	Recorte Borrado
@@ -2025,34 +2035,34 @@ snippet_detail	delete	Borrar
 snippet_detail	download_a_raw_text	Descargar una versión texto de este código pulsando en &quot;<strong>Descargar Versión</strong>&quot;
 snippet_detail	download_version	Descargar Versión
 snippet_detail	edit_del	Editar/Borar
-snippet_detail	error_no_version_found	Error - No se ha encontrado versiones
-snippet_detail	error_was_the_url_mangled	Error, Error - ¿Has manipulado la URL?
+snippet_detail	error_no_version_found	Error - No se han encontrado versiones
+snippet_detail	error_was_the_url_mangled	Error, Error - ¿Ha manipulado la URL?
 snippet_detail	latest_package_version	Última Versión del Paquete:
 snippet_detail	latest_snippet_version	útlimo recorte de la versión:
 snippet_detail	package_version	Versiones del Paquete
 snippet_detail	snippet_id	ID del Recorte
-snippet_detail	submit_a_new_snippet	Enviar una nueva versión
+snippet_detail	submit_a_new_snippet	Enviar un nuevo recorte
 snippet_detail	submit_a_new_version	Enviar una nueva versión
 snippet_detail	title	Ver Detalles del Recorte
 snippet_detail	version_of_this_package	Versiones de este Paquete:
 snippet_detail	version_of_this_snippet	Versiones del Recorte:
-snippet_detail	you_can_submit_a_new	Si has modificado una versión de este recorte sustancialmente y creas que debes compartirlo con otros, por favor, hazlo.
-snippet_detail	you_can_submit_a_new_version_of_package	Puede enviar una nueva versión de este paquete si lo has modificado y crees que es apropiado compartirlo con otros.
+snippet_detail	you_can_submit_a_new	Si ha modificado una versión de este recorte sustancialmente y crea que debe compartirlo con otros, por favor, hágalo.
+snippet_detail	you_can_submit_a_new_version_of_package	Puede enviar una nueva versión de este paquete si lo ha modificado y crea que es apropiado compartirlo con otros.
 snippet_download	error	Error
 snippet_download	nothing_in_here	no hay nada aquí
 snippet_index	title	Librería de Recortes
 snippet_package	add_snippet_to	Añadir Recortes al Paquete
 snippet_package	add_snippet_to_package	Añadir Recortes al Paquete
-snippet_package	browse_the_libary	<strong>Navegue por la librería</strong> para encontrar el recorte que quieres añadir, y después añádela usando el enlace superior.
+snippet_package	browse_the_libary	<strong>Navegue por la librería</strong> para encontrar el recorte que quiera añadir, y después añádala usando el enlace superior.
 snippet_package	category	Categoría
 snippet_package	description	Descripción:
 snippet_package	error_doing_snippet_package_insert	¡ERROR INSERTANDO UN PAQUETE DE RECORTES!
 snippet_package	error_doing_snippet_package_version	¡ERROR INSERTANDO VERSIÓN DE PAQUETE DE RECORTES!
-snippet_package	error_go_back_and_fill	Error, Error - Vuelve atrás y rellena toda la información
-snippet_package	if_a_new_window	Si se abre una nueva ventana, úsala para añadir recortes al paquete. Si la ventana nueva no se abre, use el siguiente enlace para añadir un recorte a su paquete ANTES de que deje esta pagina.
+snippet_package	error_go_back_and_fill	Error, Error - Vuelva atrás y rellene toda la información
+snippet_package	if_a_new_window	Si se abre una nueva ventana, úsela para añadir recortes al paquete. Si la ventana nueva no se abre, use el siguiente enlace para añadir un recorte a su paquete ANTES de que deje esta pagina.
 snippet_package	important	¡IMPORTANTE!
 snippet_package	language	Lenguaje
-snippet_package	make_sure_all_info	Asegúrate que toda la información es completa y exacta
+snippet_package	make_sure_all_info	Asegúrese que toda la información es completa y exacta
 snippet_package	snippet_package_added_successfull	Paquete de recortes añadido correctamente.
 snippet_package	snippet_title	Título:
 snippet_package	snippet_version_added_successfull	Versión del Paquete de Recortes insertada correctamente.
@@ -2061,8 +2071,8 @@ snippet_package	suggest_a_category	Sugerir una Categoría
 snippet_package	suggest_a_language	Sugerir un Lenguaje
 snippet_package	title	Crear un Paquete de Recorte
 snippet_package	title_new_snippet_package	Publicar un nuevo paquete de recortes
-snippet_package	version	Version
-snippet_package	you_can_group	<p>Puede agrupar conjuntamente recortes existentes en un paquete usando este interfaz. Antes de crear su paquete, compruebe que tienes todos los recortes en un lugar y ha hecho una lista de los identificativos de recortes.</p><p><ol><li>Cree el paquete usando este formulario.</li><li><strong>Entonces</strong> use el botón "Añadir Recortes al Paquete" para añadir ficheros a su paquete.</li></ol></p><p><span style="color:red"><strong>Nota:</strong></span> Puede enviar una nueva versión de un paquete existente navegando por la librería y pulsando al enlace del paquete existente. Solo debes usar esta página si estas enviando un paquete completamente nuevo.
+snippet_package	version	Versión
+snippet_package	you_can_group	<p>Puede agrupar conjuntamente recortes existentes en un paquete usando este interfaz. Antes de crear su paquete, compruebe que tienes todos los recortes en un lugar y ha hecho una lista de los identificativos de recortes.</p><p><ol><li>Cree el paquete usando este formulario.</li><li><strong>Entonces</strong> use el botón "Añadir Recortes al Paquete" para añadir ficheros a su paquete.</li></ol></p><p><span style="color:red"><strong>Nota:</strong></span> Puede enviar una nueva versión de un paquete existente navegando por la librería y pulsando al enlace del paquete existente. Solo debe usar esta página si está enviando un paquete completamente nuevo.
 snippet_submit	category	Categoría
 snippet_submit	description	Descripción
 snippet_submit	error_doing_snippet_insert	¡ERROR HACIENDO INSERCIÓN DEL RECORTE!
@@ -2071,7 +2081,7 @@ snippet_submit	error_go_back_and_fill	Error, Error - Vuelve atrás y rellena tod
 snippet_submit	language	Lenguaje
 snippet_submit	license	Licencia
 snippet_submit	make_sure_all_info	Está seguro que toda la información está completa y es correcta
-snippet_submit	paste_the_code_here	Pega el código aquí
+snippet_submit	paste_the_code_here	Pegue el código aquí
 snippet_submit	snippet_added_successfull	Recorte Añadido Correctamente.
 snippet_submit	snippet_title	Título
 snippet_submit	snippet_version_added_successfully	Versión del Recorte Añadida Correctamente
@@ -2126,7 +2136,7 @@ source	missing_file	Buscando Fichero
 source	missing_file_text	Debe específicar un fichero para esta página.
 source	show_source	Mostrar fuente
 source	source_of	Fuente de $1
-staff	about_blurb	<P><h2>El personal de GForge</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php\?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>\(pat\)</td><td>Patrick McGovern \(pat\) - Pat "Suena bin" McGovern es el nuevo director de <A HREF="http://sourceforge.net/">GForge.net</A>. Estamos contentos de tener a Pat a bordo, como él solía mantener <A HREF="http://www.valinux.com/">valinux.com</A>, sabe alguna que otra cosa sobre mantener sitios webs importantes.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>\(dlb\)</td><td>Dan es el "Encargado de Producto" de GForge. No estamos seguro de lo que eso significa, sólo sabemos que le gustan los diagramas de tiempo y "handles business development issues".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>\(bigdisk\)</td><td>Tim es el lider técnico de  GForge y es de Iowa. Si Iowa. No Idaho ni Ohio. Iowa. Cuando no está trabajando lo puedes encontrar con bastante facilidad, tiene el único BMW Z3 de Iowa.<P>Tim es el fundador de <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> y de <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>\(pfalcon\)</td><td>Paul es un desarrollador, vive en  Ukrania. Si, donde Chernobil. \*Declara\* que no tiene nada que ver con ese suceso. Se describe a sí mismo como un "geek/trabajo-adicto confirmado".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>\(zelphyr\)</td><td>Darrell también es miembro del equipo de desarrollo de  GForge . Trabajaba para otra compañía, pero ellos querían enterrar el Software Libre y cambiar sus aplicaciones web a ASP... Ahora él trabaja para nosotros.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvendo</a></td><td>\(precision\)</td><td>Uriah es un administrador de sistemas/desarrollador de las escarchadas regiones de Minesota . Cuando no está desenterrando la calzada o descongelando su coche lo encontrarás trabado en un cuarto oscuro en algún lugar delante de un ordenador.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>\(moorman\)</td><td>Jacob \(aka roguemtl\) es el encargado de la calidad del servicio de GForge. Actualmente mantiene la mayoría de las peticiones de ayuda de nivel dos, mantiene la página del estado del sitio y ayuda a asegurarse de que todo el que registra una petición de ayuda tenga un correcto y oportuno servicio. Trabaja desde el nor-este de los Estados Unidos.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvenido</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Contribuciones Externas Significantes:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>\(wallace\)</td><td>Wallace ha contribuido con ajustes significantes y mejoras al código base del núcleo de  GForge. Apreciamos sus esfuerzos tanto como los usuarios que se benefician de sus contribuciones.</td></tr></table>
+staff	about_blurb	<P><h2>El personal de GForge</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php\?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>\(pat\)</td><td>Patrick McGovern \(pat\) - Pat "Suena bien" McGovern es el nuevo director de <A HREF="http://sourceforge.net/">GForge.net</A>. Estamos contentos de tener a Pat a bordo, como él solía mantener <A HREF="http://www.valinux.com/">valinux.com</A>, sabe alguna que otra cosa sobre mantener sitios webs importantes.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>\(dlb\)</td><td>Dan es el "Encargado de Producto" de GForge. No estamos seguro de lo que eso significa, sólo sabemos que le gustan los diagramas de tiempo y "handles business development issues".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>\(bigdisk\)</td><td>Tim es el lider técnico de  GForge y es de Iowa. Si Iowa. No Idaho ni Ohio. Iowa. Cuando no está trabajando lo puedes encontrar con bastante facilidad, tiene el único BMW Z3 de Iowa.<P>Tim es el fundador de <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> y de <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>\(pfalcon\)</td><td>Paul es un desarrollador, vive en  Ukrania. Si, donde Chernobil. \*Declara\* que no tiene nada que ver con ese suceso. Se describe a sí mismo como un "geek/trabajo-adicto confirmado".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>\(zelphyr\)</td><td>Darrell también es miembro del equipo de desarrollo de  GForge . Trabajaba para otra compañía, pero ellos querían enterrar el Software Libre y cambiar sus aplicaciones web a ASP... Ahora él trabaja para nosotros.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvendo</a></td><td>\(precision\)</td><td>Uriah es un administrador de sistemas/desarrollador de las escarchadas regiones de Minesota . Cuando no está desenterrando la calzada o descongelando su coche lo encontrarás trabado en un cuarto oscuro en algún lugar delante de un ordenador.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>\(moorman\)</td><td>Jacob \(aka roguemtl\) es el encargado de la calidad del servicio de GForge. Actualmente mantiene la mayoría de las peticiones de ayuda de nivel dos, mantiene la página del estado del sitio y ayuda a asegurarse de que todo el que registra una petición de ayuda tenga un correcto y oportuno servicio. Trabaja desde el nor-este de los Estados Unidos.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvenido</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Contribuciones Externas Significantes:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>\(wallace\)</td><td>Wallace ha contribuido con ajustes significantes y mejoras al código base del núcleo de  GForge. Apreciamos sus esfuerzos tanto como los usuarios que se benefician de sus contribuciones.</td></tr></table>
 stats	overview_stats	ESTADÍSTICAS
 stats	project_stats	ESTADÍSTICAS DE PROYECTOS
 stats	site_graphs	GRÁFICOS DEL SITIO
@@ -2224,7 +2234,7 @@ survey_add_survey	no	No
 survey_add_survey	show_existing_question	Mostrar las Preguntas Existentes
 survey_add_survey	survey_inserted	Encuesta Insertada
 survey_add_survey	title	Añadir una Encuesta
-survey_add_survey	title_is_required	El Título de la Encuesta es necesario
+survey_add_survey	title_is_required	Es necesario un Título para la Encuesta
 survey_add_survey	yes	Sí
 survey_admin	delete	Eliminar
 survey_admin	edit	Editar
@@ -2242,7 +2252,7 @@ survey_admin_index	add_question	Añadir Preguntas
 survey_admin_index	add_survey	Añadir Encuestas
 survey_admin_index	edir_existing_survey	Editar la Escuestas Existentes
 survey_admin_index	edit_existing_question	Editar Preguntas Existentes
-survey_admin_index	its_simple_to_create	<p>Es fácil crear una encuesta.<ol><li>Crea preguntas y comentarios usando el formulario de arriba.</li><li>Crear una Encuesta, listando las cuestiones en orden (elígelas de <strong>tu</strong> lista de cuestiones).</li><li>Enlaza con la encuesta usando el formato: $1 donde XX es el número de encuesta
+survey_admin_index	its_simple_to_create	<p>Es fácil crear una encuesta.<ol><li>Cree preguntas y comentarios usando el formulario de arriba.</li><li>Crear una Encuesta, listando las cuestiones en orden (elígela de <strong>su</strong> lista de cuestiones).</li><li>Enlaza con la encuesta usando el formato: $1 donde XX es el número de encuesta
 survey_admin_index	permission_denied	Permiso Denegado
 survey_admin_index	show_results	Mostrar Resultados de las Encuestas
 survey_admin_index	title	Administración de Encuestas
@@ -2263,7 +2273,7 @@ survey_admin_utils	survey_id	Id de la Encuesta
 survey_admin_utils	survey_questions	Preguntas de la Encuesta
 survey_admin_utils	survey_title	Título de la encuesta
 survey_edit	addable_question	Pregunta para añadir
-survey_edit	change_after_already_response	Si cambias una pregunta después de que se haya recibido respuestas, tus resultados pueden ser incorrectos
+survey_edit	change_after_already_response	Si cambia una pregunta después de que se haya recibido respuestas, sus resultados pueden ser incorrectos
 survey_edit	delete_failed	FALLÓ LA ELIMINACIÓN
 survey_edit	delete_successful	ELIMINACIÓN CON ÉXITO
 survey_edit	existing_question	Preguntas de esta encuesta
@@ -2286,7 +2296,7 @@ survey_edit	warning_survey_after_response	¡CUIDADO! Es una mala idea cambiar un
 survey_edit	yes	Sí
 survey_edit_question	editing_question	Editando Pregunta
 survey_edit_question	error_finding_question	Error buscando la pregunta
-survey_edit_question	if_you_change_after	Si cambias una pregunta después de que se haya recibido respuestas, tus resultados pueden ser incorrectos
+survey_edit_question	if_you_change_after	Si cambia una pregunta después de que se haya recibido respuesta, sus resultados pueden ser incorrectos
 survey_edit_question	permission_denied	Permiso Denegado
 survey_edit_question	question	Pregunta
 survey_edit_question	question_type	Tipo de Pregunta
@@ -2295,7 +2305,7 @@ survey_edit_question	submit_changes	Enviar Cambios
 survey_edit_question	title	Edita una Pregunta
 survey_edit_question	update_failed	ACTUALIZACIÓN FALLIDA
 survey_edit_question	update_successful	ACTUALIZACIÓN CORRECTA
-survey_edit_question	warning_change_after_response	¡CUIDADO! Es una mala idea cambiar una pregunta cuando se han enviado respuestas a esa misma pregunta
+survey_edit_question	warning_change_after_response	¡CUIDADO! Es una mala idea cambiar una pregunta cuando se han enviado respuestas a esa pregunta
 survey_error	error_no_valid_group_object	Grupo inválido
 survey_error	error_no_valid_question_object	Pregunta inválida
 survey_error	error_no_valid_survey_object	Encuesta inválida
@@ -2330,15 +2340,15 @@ survey_rating_resp	if_you_vote_again	Si votas de nuevo su voto anterior será bo
 survey_rating_resp	title	Votación
 survey_rating_resp	vote_reg	Voto registrado
 survey_rating_resp	vote_regsitered	Vote Registrado
-survey_rating_resp	you_must_be_logged_in	Debes de estar logeado para votar
+survey_rating_resp	you_must_be_logged_in	Debe iniciar una sesión para votar
 survey_resp	error	Error
 survey_resp	error_some_reason	Error - Por alguna razón, el ID de Grupo o la ID de la encuesta no se especificó para esta página
 survey_resp	regards	Saludos,
 survey_resp	thank_you	Gracias por dedicar un momento para realizar esta encuesta.
 survey_resp	the_crew	El equipo de $1
 survey_resp	title	Encuesta Completa
-survey_resp	unfortunately_you_have_to_be	Desafortunadamente, debes iniciar una sesión para participar en una encuesta.
-survey_resp	you_nedd_to_be_logged_in	Necesitas iniciar una sesión
+survey_resp	unfortunately_you_have_to_be	Desafortunadamente, debe iniciar una sesión para participar en una encuesta.
+survey_resp	you_nedd_to_be_logged_in	Necesita iniciar una sesión
 survey_show_questions	found	$1 preguntas encontradas
 survey_show_questions	note_use_these_questions_id	NOTA: usa estos indentificadores de encuestas cuando crees una nueva encuesta
 survey_show_questions	permission_denied	Permiso Denegado
@@ -2545,7 +2555,7 @@ tracker_admin_update_group	warning	No es recomendabe que cambie It is not recomm
 tracker_admin_update_type	allow_anonymous	Permitir envios sin entrar
 tracker_admin_update_type	browse_item_form_text	Texto para la página "Visualizar registro"
 tracker_admin_update_type	days_overdue	Días para considerarlo anticuado
-tracker_admin_update_type	description	Descripcion
+tracker_admin_update_type	description	Descripción
 tracker_admin_update_type	display_resolution	Mostrar el desplegable "Resolución"
 tracker_admin_update_type	email_all_changes	Enviar correo con todos los cambios
 tracker_admin_update_type	name	<strong> Nombre:</strong> (ejemplos: reuniones, resultados de test, Documentos)
@@ -2612,7 +2622,7 @@ tracker_detail	add_comment	Añadir Comentario
 tracker_detail	attached_files	Adjuntar Ficheros
 tracker_detail	build_task_relation	Crear Tarea Relacionada
 tracker_detail	changes	Cambios
-tracker_detail	description	Descripcion
+tracker_detail	description	Descripción
 tracker_detail	download	Descargar
 tracker_detail	name	Nombre
 tracker_detail	no_files_attached	No hay Ficheros Adjuntos
@@ -2625,7 +2635,7 @@ tracker_mod	data_type	Tipo Datos
 tracker_mod	date_closed	Fecha Cierre
 tracker_mod	date_submitted	Fecha envío
 tracker_mod	delete	Borrar
-tracker_mod	description	Descripcion
+tracker_mod	description	Descripción
 tracker_mod	download	Descargar
 tracker_mod	existing_files	Ficheros Existentes
 tracker_mod	name	Nombre
