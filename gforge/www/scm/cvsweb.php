@@ -1,4 +1,7 @@
 <?php
+
+exit;
+
 /**
   *
   * Gforge cvsweb php wrapper
