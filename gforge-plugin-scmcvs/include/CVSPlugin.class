@@ -11,7 +11,8 @@ class CVSPlugin extends SCM {
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
-		$this->hooks[] = "group_approved";
+		$this->hooks[] = "scm_plugin";
+//		$this->hooks[] = "group_approved";
 		$this->hooks[] = "cssstyle";
 		//$this->hooks[] = "groupmenu_scm";
 
@@ -25,7 +26,7 @@ class CVSPlugin extends SCM {
 	}
 
 	function CallHook ($hookname, $params) {
-		global $Language, $HTML ;
+		global $Language, $HTML;
 		
 		switch ($hookname) {
 		case "scm_page":
@@ -49,6 +50,10 @@ class CVSPlugin extends SCM {
 //			break;
 		case "cssstyle":
 			$this->cssstyle_scm ($params) ;
+			break;
+		case "scm_plugin":
+			$scm_plugins=& $params['scm_plugins'];
+			$scm_plugins[]=$this->name;
 			break;
 		default:
 			// Forgot something
@@ -259,8 +264,8 @@ class CVSPlugin extends SCM {
 
 		$project =& group_get_object($group_id);
 		
-		if ($project->usesPlugin ("scmcvs")) {
-			
+		if ($project->usesPlugin($this->name)) {
+		
 		print $Language->getText('plugin_scmcvs','documentation');
 
 		$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
@@ -343,6 +348,7 @@ if ($project->enableAnonSCM()){
 			$group->SetUsesPserver(false);
  		}
 ////		if ($params['scmradio'] == 'scmcvs') {
+//// THIS IS NOT THE PLACE FOR THIS //////// TODO
 ////			$group->setPluginUse("scmcvs", 1) ;
 ////			
 ////		} else {
