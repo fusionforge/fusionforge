@@ -20,6 +20,23 @@ case "$target" in
 	exit 1
 	;;
     configure)
+	# Redirect "noreply" mail to the bit bucket (if need be)
+	noreply_to_bitbucket=$(perl -e'require "/etc/sourceforge/local.pl"; print "$noreply_to_bitbucket\n";')
+	if [ "$noreply_to_bitbucket" = "true" ] ; then
+	    if ! grep -q "^noreply:" /etc/aliases ; then
+		echo "### Next line inserted by Sourceforge install" >> /etc/aliases
+		echo "noreply: /dev/null" >> /etc/aliases
+	    fi
+	fi
+
+	# Redirect "sourceforge" mail to the site admin
+	server_admin=$(perl -e'require "/etc/sourceforge/local.pl"; print "$server_admin\n";')
+	if ! grep -q "^sourceforge:" /etc/aliases ; then
+	    echo "### Next line inserted by Sourceforge install" >> /etc/aliases
+	    echo "sourceforge: $server_admin" >> /etc/aliases
+	fi
+	[ -x /usr/bin/newaliases ] && newaliases
+
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, get the list of local domains right

@@ -55,22 +55,6 @@ case "$1" in
         # Setup our Apache
 	/usr/lib/sourceforge/bin/install-apache.sh configure
 
-	# Redirect "noreply" mail to the bit bucket
-	db_get sourceforge/noreply_to_bitbucket
-	if [ "$RET" = "true" ] ; then
-	    if ! grep -q "^noreply:" /etc/aliases ; then
-		echo "### Next line inserted by Sourceforge install" >> /etc/aliases
-		echo "noreply: /dev/null" >> /etc/aliases
-	    fi
-	fi
-	# Redirect "sourceforge" mail to the site admin
-	db_get sourceforge/server_admin
-	if ! grep -q "^sourceforge:" /etc/aliases ; then
-	    echo "### Next line inserted by Sourceforge install" >> /etc/aliases
-	    echo "sourceforge: $RET" >> /etc/aliases
-	fi
-	[ -x /usr/bin/newaliases ] && newaliases
-
 	# Prepare a few variables for the DNS stuff
 	db_get sourceforge/domain_name
 	domain_name=$RET
