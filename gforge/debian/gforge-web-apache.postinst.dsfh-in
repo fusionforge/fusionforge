@@ -57,10 +57,10 @@ case "$1" in
 	propose_update_install /etc/php4/apache/php.ini
 	propose_update_install /etc/php4/cgi/php.ini
 
-	db_stop
-
         # Setup our Apache
 	/usr/lib/gforge/bin/install-apache.sh configure
+
+	db_stop
 
 	# If you want to work with sourceforge-web-apache at the same time
 	if grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
