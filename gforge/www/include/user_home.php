@@ -48,7 +48,7 @@ $HTML->header(array('title'=>'Developer Profile'));
 	<TD>Email Addr: </TD>
 	<TD>
 	<B><A HREF="/sendmessage.php?touser=<?php print $user_id; 
-		?>"><?php print $user->getUnixName(); ?> at <?php print $GLOBALS['sys_users_host']; ?></A></B>
+		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></A></B>
 	</TD>
 </TR>
 
@@ -75,9 +75,9 @@ $HTML->header(array('title'=>'Developer Profile'));
 		"WHERE user_id='". $user_id ."' AND is_public=1");
 	echo 'Diary/Note Entries: '.db_result($res,0,0).'
 	<P>
-	<A HREF="/developer/diary.php?user='. $user_id .'">View Diary & Notes</A>
+	<A HREF="/developer/diary.php?user_id='. $user_id .'">View Diary & Notes</A>
 	<P>
-	<A HREF="/developer/monitor.php?user='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
+	<A HREF="/developer/monitor.php?user_id='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
 
 	?>
 </TD></TR>
@@ -155,8 +155,8 @@ if (user_isloggedin()) {
 	<INPUT TYPE="HIDDEN" NAME="touser" VALUE="<?php echo $user_id; ?>">
 
 	<B>Your Email Address:</B><BR>
-	<B><?php echo user_getname().'@'.$GLOBALS['sys_users_host']; ?></B>
-	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo user_getname().'@'.$GLOBALS['sys_users_host']; ?>">
+	<B><?php echo user_getname().'@users.'.$GLOBALS['sys_default_domain']; ?></B>
+	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo user_getname().'@users.'.$GLOBALS['sys_default_domain']; ?>">
 	<P>
 	<B>Your Name:</B><BR>
 	<B><?php 

@@ -1,4 +1,4 @@
-#!/usr/local/bin/php
+#! /usr/bin/php4 -f
 <?php
 //
 // SourceForge: Breaking Down the Barriers to Open Source Development
@@ -80,5 +80,5 @@ for ($i=0; $i<$count; $i++) {
 }
 
 db_commit();
-echo "Done: ".db_error();
+echo db_error();
 ?>
