@@ -39,8 +39,10 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     portability on Cygwin platforms.  Thanks, Chris.
   * [Roland] utils/new_parse.pl: Applied patch from Manik Surtani
     <manik.surtani@conchango.com> fixing a few paths.
+  * [Christian] Update language_code in supported_languages table
+    it's used to have a default language corresponding to browser language settings
 
- --
+ -- Christian Bayle <bayle@debian.org>  Thu,  5 Sep 2002 17:45:28 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 
