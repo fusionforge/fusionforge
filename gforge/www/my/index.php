@@ -51,7 +51,7 @@ if (session_loggedin() || $sf_user_hash) {
 		Artifacts
 	*/
 	$last_group=0;
-	echo $HTML->boxTop('My Assigned Items',false,false,false);
+	echo $HTML->boxTop($Language->getText('my', 'assigneditems'));
 	
 	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
 		a.assigned_to,a.summary,a.artifact_id,a.priority 
@@ -59,6 +59,7 @@ if (session_loggedin() || $sf_user_hash) {
 		WHERE 
 		a.group_artifact_id=agl.group_artifact_id 
 		AND agl.group_id=g.group_id 
+    AND g.status = 'A'
 		AND a.assigned_to='". user_getid() ."' 
 		AND a.status_id='1' 
 		AND g.status='A'
@@ -78,7 +79,7 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'name').'</A></TD></TR>';
 			}   
 			echo '
-			<TR BGCOLOR="'.get_priority_color(db_result($result,$i,'priority')).'">
+			<TR class="'.get_priority_color(db_result($result,$i,'priority')).'">
 			<TD><A HREF="/tracker/?func=detail&aid='.
 			db_result($result, $i, 'artifact_id').
 			'&group_id='.db_result($result, $i, 'group_id').
@@ -95,7 +96,7 @@ if (session_loggedin() || $sf_user_hash) {
 	}   
 
 	$last_group=0;
-	echo $HTML->boxMiddle('My Submitted Items',false,false);
+	echo $HTML->boxMiddle($Language->getText('my', 'submitteditems'),false,false);
 	
 	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
 		a.assigned_to,a.summary,a.artifact_id,a.priority 
@@ -103,6 +104,7 @@ if (session_loggedin() || $sf_user_hash) {
 		WHERE 
 		a.group_artifact_id=agl.group_artifact_id 
 		AND agl.group_id=g.group_id 
+    AND g.status = 'A' 
 		AND a.submitted_by='". user_getid() ."' 
 		AND a.status_id='1' 
 		ORDER BY agl.group_id,a.group_artifact_id,a.submitted_by,a.status_id";
@@ -121,7 +123,7 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'name').'</A></TD></TR>';
 			}	
 			echo '
-			<TR BGCOLOR="'.get_priority_color(db_result($result,$i,'priority')).'">
+			<TR class="'.get_priority_color(db_result($result,$i,'priority')).'">
 			<TD><A HREF="/tracker/?func=detail&aid='.
 			db_result($result, $i, 'artifact_id').
 			'&group_id='.db_result($result, $i, 'group_id').
@@ -142,10 +144,10 @@ if (session_loggedin() || $sf_user_hash) {
 		Forums that are actively monitored
 	*/
 	$last_group=0;
-	echo $HTML->boxMiddle('Monitored Forums',false,false);
+	echo $HTML->boxMiddle($Language->getText('my', 'monitoredforum'),false,false);
 	$sql="SELECT groups.group_name,groups.group_id,forum_group_list.group_forum_id,forum_group_list.forum_name ".
 		"FROM groups,forum_group_list,forum_monitored_forums ".
-		"WHERE groups.group_id=forum_group_list.group_id ".
+		"WHERE groups.group_id=forum_group_list.group_id AND groups.status ='A' ".
 		"AND forum_group_list.group_forum_id=forum_monitored_forums.forum_id ".
 		"AND forum_monitored_forums.user_id='".user_getid()."' ORDER BY group_name DESC";
 	$result=db_query($sql);
@@ -159,12 +161,12 @@ if (session_loggedin() || $sf_user_hash) {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
-				<TR bgcolor="'. html_get_alt_row_color($i) .'"><TD COLSPAN="2"><B><A HREF="/forum/?group_id='.
+				<TR '. $HTML->box1_get_alt_row_style($i) .'><TD COLSPAN="2"><B><A HREF="/forum/?group_id='.
 					db_result($result,$i,'group_id').'">'.
 					db_result($result,$i,'group_name').'</A></TD></TR>';
 			}
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE"><A HREF="/forum/monitor.php?forum_id='.
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE"><A HREF="/forum/monitor.php?forum_id='.
 				db_result($result,$i,'group_forum_id').
 				'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
 				'BORDER=0"></A></TD><TD WIDTH="99%"><A HREF="/forum/forum.php?forum_id='.
@@ -180,11 +182,11 @@ if (session_loggedin() || $sf_user_hash) {
 	*/
 	$last_group=0;
 
-	echo $HTML->boxMiddle('Monitored FileModules',false,false);
+	echo $HTML->boxMiddle($Language->getText('my', 'monitoredfile'),false,false);
 
 	$sql="SELECT groups.group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
 		"FROM groups,filemodule_monitor,frs_package ".
-		"WHERE groups.group_id=frs_package.group_id ".
+		"WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' ".
 		"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
 		"AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
 	$result=db_query($sql);
@@ -198,12 +200,12 @@ if (session_loggedin() || $sf_user_hash) {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
-				<TR bgcolor="'. html_get_alt_row_color($i) .'"><TD COLSPAN="2"><B><A HREF="/project/?group_id='.
+				<TR '. $HTML->box1_get_alt_row_style($i) .'><TD COLSPAN="2"><B><A HREF="/project/?group_id='.
 				db_result($result,$i,'group_id').'">'.
 				db_result($result,$i,'group_name').'</A></TD></TR>';
 			}
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE"><A HREF="/project/filemodule_monitor.php?filemodule_id='.
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE"><A HREF="/project/filemodule_monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
 			'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
 			'BORDER=0"></A></TD><TD WIDTH="99%"><A HREF="/project/showfiles.php?group_id='.
@@ -225,7 +227,7 @@ if (session_loggedin() || $sf_user_hash) {
 		Tasks assigned to me
 	*/
 	$last_group=0;
-	echo $HTML->boxTop('My Tasks',false,false,false);
+	echo $HTML->boxTop($Language->getText('my', 'tasks'));
 
 	$sql="SELECT groups.group_name,project_group_list.project_name,project_group_list.group_id, ".
 		"project_task.group_project_id,project_task.priority,project_task.project_task_id,project_task.summary,project_task.percent_complete ".
@@ -233,7 +235,7 @@ if (session_loggedin() || $sf_user_hash) {
 		"WHERE project_task.project_task_id=project_assigned_to.project_task_id ".
 		"AND project_assigned_to.assigned_to_id='".user_getid()."' AND project_task.status_id='1'  ".
 		"AND project_group_list.group_id=groups.group_id ".
-		"AND project_group_list.group_project_id=project_task.group_project_id ".
+		"AND project_group_list.group_project_id=project_task.group_project_id AND groups.status = 'A'".
 		"ORDER BY group_name,project_name";
 
 	$result=db_query($sql);
@@ -257,7 +259,7 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'project_name').'</A></TD></TR>';
 			}
 			echo '
-			<TR BGCOLOR="'.get_priority_color(db_result($result,$i,'priority')).'">
+			<TR class="'.get_priority_color(db_result($result,$i,'priority')).'">
 			<TD><A HREF="/pm/task.php?func=detailtask&project_task_id='.
 			db_result($result, $i, 'project_task_id').
 			'&group_id='.db_result($result, $i, 'group_id').
@@ -285,7 +287,7 @@ if (session_loggedin() || $sf_user_hash) {
 
 	$result=db_query($sql);
 
-	echo $HTML->boxMiddle('Quick Survey',false,false);
+	echo $HTML->boxMiddle($Language->getText('my', 'survey'),false,false);
 
 	if (db_numrows($result) < 1) {
 		show_survey(1,1);
@@ -295,21 +297,56 @@ if (session_loggedin() || $sf_user_hash) {
 	}
 
 	/*
+	 * Pending projects and news bytes
+	 */
+	$admingroup = group_get_object (1) ;
+	exit_assert_object($admingroup,'Group');
+	$perm =& $admingroup->getPermission( session_get_user() );
+	if ($perm && is_object($perm) && $perm->isAdmin()) {
+                $sql="SELECT group_name FROM groups where status='P';";
+                $result=db_query($sql);
+                $rows=db_numrows($result);
+                if ($rows) {
+                        echo $HTML->boxMiddle('Pending Projects', false, false);
+                        echo "<TR><TD COLSPAN=\"2\">There ";
+                        echo (($rows!=1)?"are ": "is "). "$rows project";
+                        echo (($rows!=1)?"s":"");
+                        echo " awaiting <a href=\"/admin/approve-pending.php\">";
+                        echo "review</a>.</td></tr>";
+                }
+	}
+	$newsgroup = group_get_object ($GLOBALS['sys_news_group']) ;
+	exit_assert_object($newsgroup,'Group');
+	$perm =& $newsgroup->getPermission( session_get_user() );
+	if ($perm && is_object($perm) && $perm->isAdmin()) {
+                $sql="SELECT * FROM news_bytes WHERE is_approved=0";
+                $result=db_query($sql);
+                $rows=db_numrows($result);
+                if ($rows) {
+                        echo $HTML->boxMiddle('Pending News Bytes', false, false);
+                        echo "<TR><TD COLSPAN=\"2\">There ";
+                        echo (($rows!=1)?"are ": "is "). "$rows news byte";
+                        echo (($rows!=1)?"s":"");
+                        echo " awaiting <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
+			echo "review</a>.</td></tr>";
+		}
+	}		
+	/*
 		   Personal bookmarks
 	*/
-	echo $HTML->boxMiddle('My Bookmarks',false,false);
+	echo $HTML->boxMiddle($Language->getText('my', 'bookmarks'),false,false);
 
 	$result = db_query("SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where ".
 		"user_id='". user_getid() ."' ORDER BY bookmark_title");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<TR><TD COLSPAN="2"><B>'.$Language->getText('my', 'no_open_tasks').'</B></TD></TR>';
+		<TR><TD COLSPAN="2"><B>'.$Language->getText('my', 'no_bookmarks').'</B></TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE">
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE">
 			<A HREF="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
 			<IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD>
 			<TD><B><A HREF="'. db_result($result,$i,'bookmark_url') .'">'.
@@ -322,7 +359,7 @@ if (session_loggedin() || $sf_user_hash) {
 		PROJECT LIST
 	*/
 
-	echo $HTML->boxMiddle('My Projects',false,false);
+	echo $HTML->boxMiddle($Language->getText('my', 'projects'),false,false);
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
 	$result = db_query("SELECT groups.group_name,"
@@ -337,7 +374,7 @@ if (session_loggedin() || $sf_user_hash) {
 		. "AND groups.status='A'");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<TR><TD COLSPAN=\"2\"><B>'.$Language->getText('my', 'no_open_tasks').'</B></TD></TR>';
+		echo '<TR><TD COLSPAN=\"2\"><B>'.$Language->getText('my', 'no_projects').'</B></TD></TR>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -356,7 +393,7 @@ if (session_loggedin() || $sf_user_hash) {
 			}
 
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE">
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE">
 			<A href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<IMG SRC="/images/ic/'.$img.'" ALT="DELETE" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD>
 			<TD><A href="/'.$type.'/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</A></TD></TR>';
