@@ -32,7 +32,6 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
-conf	mail_charset	ISO-8859-1
 account	updated	Aggiornato
 account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nVisitare la seguente URL per completare il cambio di indirizzo email::\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- il team $1
 account_change_email	subject	$1 verifica
@@ -1315,14 +1314,14 @@ admin_database	type	Tipo
 admin_database	count	Count
 admin_database	no_databases_defined	Nessun database definito
 admin_database	display_database_type	Displaying Databases of Type:
-admin_database	add_an_already_active_database	Add an already active database
+admin_database	add_an_already_active_database	Aggiungi un database gi&agrave; attivo
 admin_database	group_unix_name	Nome unix del gruppo
 admin_groupedit	error	Errore
 admin_groupedit	error_creating_group_object	Error creating group object
 admin_groupedit	updated	Aggiornato
-admin_groupedit	instruction_email_sent	Instruction email sent
+admin_groupedit	instruction_email_sent	Inviata email di istruzioni
 admin_groupedit	title	Site Admin: Group Info
-admin_groupedit	project_admin	[Amministrzione progetto]
+admin_groupedit	project_admin	[Amministrazione progetto]
 admin_groupedit	I	I
 admin_groupedit	A	A
 admin_groupedit	P	P
@@ -1353,36 +1352,36 @@ admin_grouplist	public	Pubblico?
 admin_grouplist	license	Licenza
 admin_grouplist	members	Membri
 admin_loadtabfile	title	Site Admin
-admin_loadtabfile	reload_all_language_files	(Re)Load all language files
-admin_loadtabfile	purge_loaded_data	Purge loaded data
-admin_loadtabfile	tables_loaded	Tables loaded
-admin_loadtabfile	see_translations	[see translations]
-admin_loadtabfile	see_untranslated	[see untranslated]
-admin_loadtabfile	edit_dont_work	[edit(don t work)]
-admin_loadtabfile	availaible_tables	Available Tables:
-admin_massmail_execute	receive_post	Received Post. Making Query.
-admin_massmail_execute	unrecognized_post	Unrecognized Post, cannot execute
-admin_massmail_execute	querry_complete	Query Complete. Beginning mailings to 
-admin_massmail_execute	user_id	User id:
+admin_loadtabfile	reload_all_language_files	Ricarica tutti i file
+admin_loadtabfile	purge_loaded_data	Svuota dati caricati
+admin_loadtabfile	tables_loaded	Tabelle caricate
+admin_loadtabfile	see_translations	[vedi traduzioni]
+admin_loadtabfile	see_untranslated	[vedi non tradotti]
+admin_loadtabfile	edit_dont_work	[modifca (non funziona)]
+admin_loadtabfile	availaible_tables	Tabelle disponibili:
+admin_massmail_execute	receive_post	Ricevuto richiesta. Sto effettuando la query.
+admin_massmail_execute	unrecognized_post	Richiesta sconosciuta
+admin_massmail_execute	querry_complete	Query completa, inizio mailing a 
+admin_massmail_execute	user_id	Id utente
 admin_massmail_execute	sending_to	sending to
-admin_massmail_execute	completed_successfully	COMPLETED SUCCESSFULLY
+admin_massmail_execute	completed_successfully	COMPLETATO CON SUCCESSO
 admin_responses	title	Amministrazione sito: Modifica risposte per il rigetto 
-admin_responses	you_cant	You can't $1 \"None\", bozo!
+admin_responses	you_cant	Non puoi $1 \"Nessuno\"
 admin_responses	yes_im_sure	S&igrave; sono sicuro
 admin_responses	existing_responses	Risposte esistenti:
-admin_responses	edit_response	Edited Response
+admin_responses	edit_response	Modifica risposta
 admin_responses	edit_response_other	modifica risposte
 admin_responses	response_title	Titolo risposta:
 admin_responses	response_text	Testo risposta
 admin_responses	go	vai
 admin_responses	deleted_resposes	Risposta cancellata
-admin_responses	not_sure_dont_click	If you're aren't sure then why did you click 'Delete'?
-admin_responses	by_the_way	By the way, I didn't delete... just in case...
+admin_responses	not_sure_dont_click	Se non sei sicuro perch&eacute; hai cliccato su Cancella?
+admin_responses	by_the_way	A proposito, non ho cancellato, nel caso tu avessi cambiato idea.
 admin_responses	add_response	Aggiungi risposte
 admin_responses	create_new_response	Crea nuova risposta:
 admin_responses	create	Crea
 admin_search	index	Risultato di ricerca 
-admin_search	refusing_to_display_whole_db	Refusing to display whole DB,That would display whole DB.  Please use a CLI query if you wish to do this.
+admin_search	refusing_to_display_whole_db	Mi rifiuto di visualizzare l'intero database.  Usa una query CLI se vuoi fare questo
 admin_search	user_search_criteria	Ricerca utente con criterio
 admin_search	matches	corrisponde a
 admin_search	id	ID
@@ -1391,7 +1390,7 @@ admin_search	real_name	Nome reale
 admin_search	email	email
 admin_search	member_since	Registrato il
 admin_search	status	Stato (Web/Unix)
-admin_search	group_search_criteria	Group search with criteria
+admin_search	group_search_criteria	Ricerca gruppo con criterio
 admin_search	unix_name	Nome UNIX
 admin_search	full_name	Nome completo
 admin_search	registered	Registrato
@@ -1409,12 +1408,12 @@ admin_unsubscribe	user_unsubscribed	User unsubscribed
 admin_unsubscribe	subscription_maintance	Site Mailings Subscription Maintenance
 admin_unsubscribe	use_fields_bellow	Use field below to find users which match given pattern with the $1 username, real name, or email address (substring match is preformed, use '%' in the middle of pattern to specify 0 or more arbitrary characters). Click on the username to unsubscribe user from site mailings (new form will appear).
 admin_unsubscribe	show_user_matching	Show users matching pattern
-admin_unsubscribe	user_id	user_id
-admin_unsubscribe	username	Username
-admin_unsubscribe	real_name	Real Name
+admin_unsubscribe	user_id	id utente
+admin_unsubscribe	username	utente
+admin_unsubscribe	real_name	Nome
 admin_unsubscribe	email	Email
-admin_unsubscribe	site_mail	Site Mail.
-admin_unsubscribe	comm_mail	Comm. Mail.
+admin_unsubscribe	site_mail	Mail sito
+admin_unsubscribe	comm_mail	Mail commerciale
 admin_useredit	no_unix_account	Nessun account UNIX (N)
 admin_useredit	active	Attivo (A)
 admin_useredit	suspended	Sospeso (S)
@@ -1769,7 +1768,7 @@ project_admin_userpermedit	release_technician	Tecnico per i rilasci
 project_admin_userpermedit	tracker_manager	Tracker Manager
 project_admin_userpermedit	technician	Tecnico (T)
 project_admin_userpermedit	admin_tech	Amministratore e tecnico (A/T)
-project_admin_userpermedit	not_available	Non disponibile (N/A)
+project_admin_userpermedit	no_permissions	Nessun permesso (N/A)
 project_admin_userpermedit	admin	Amministratore (A)
 project_admin_userpermedit	pm	Gestore Attivit&agrave;
 project_admin_userpermedit	forums	Forum
