@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Maven">
-
   <title>Gforge</title>
-
   <body>
     <menu name="Gforge">
-      <item name="Introduction"		href="/introduction.html"/>
-      <item name="Installation"          href="/installation.html"/>
-      <item name="Usser Guide"		href="/user_guide/index.html">
-	<item name="Tracker"		href="/user_guide/tracker.html"/>
-
-      </item>
-
-      <item name="Admin Guide"		href="/admin_guide.html"/>
+      <item name="Introduction" href="/introduction.html"/>
+      <item name="Installation" href="/installation.html"/>
+      <item name="User Guide" href="/user_guide/project_functions/index.html"/>
+			<item name="Tracker" href="/user_guide/project_functions/tracker.html"/>
+      <item name="Admin Guide" href="/admin_guide/index.html"/>
     </menu>
-   
   </body>
 </project>
