@@ -18,6 +18,7 @@ var/lib/gforge/chroot
 var/lib/gforge/download
 var/lib/gforge/cvstarballs
 var/lib/gforge/ftp
+var/lib/gforge/dumps
 var/lib/gforge/ftp/incoming
 var/lib/gforge/tmp
 var/log/gforge
