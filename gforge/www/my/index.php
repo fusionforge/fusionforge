@@ -124,7 +124,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	$forumsForUser = new ForumsForUser($G_SESSION);
 	$forums =& $forumsForUser->getMonitoredForums();
 	if (count($forums) < 1) {
-		echo $Language->getText('my', 'no_monitored_forums');
+		echo '<strong>'.$Language->getText('my', 'no_monitored_forums').'</strong>'.$Language->getText('my', 'no_monitored_forums_details');
 	} else {
 		foreach ($forums as $f) {
 			echo '</td></tr>';
@@ -162,8 +162,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo $Language->getText('my', 'no_monitored_filemodules');
-		echo db_error();
+		echo '<strong>'.$Language->getText('my', 'no_monitored_filemodules').'</strong>'.$Language->getText('my', 'no_monitored_filemodules_details');
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '</td></tr>';
@@ -401,5 +400,10 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	exit_not_logged_in();
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

@@ -236,8 +236,10 @@ menu	software_map	소프트웨어 맵
 menu	top_projects	상위 프로젝트
 my	about_blurb	여러분의 개인 페이지는 여러분에게 할당된 버그나 임무들과 여러분이 참여하고 계신 그룹에 관한 정보를 보여줍니다.
 my	no_bookmarks	현재 저장된 책갈피가 없습니다.
-my	no_monitored_filemodules	<H3>모니터하고 있는 파일이 없습니다.</H3><P>만약 여러분이 파일을 모니터하시게 되면 새로운 파일이 릴리즈될 때 이곳의 다운로드 서버로 파일을 받을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>파일을 모니터하시려면 프로젝트의 &quot;요약 페이지&quot;에 가서 파일 섹션의 체크박스를 클릭하시면 됩니다.<BR>&nbsp;
-my	no_monitored_forums	<H3>모니터하고 있는 게시판이 없습니다.</H3><P>만약 여러분이 게시판을 모니터하시게 되면 새로운 글이 올라올 때 그 글을 읽을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>게시판을 모니터하시려면 아무 게시판에서나 &quot;게시판 모니터&quot;를 클릭하시면 됩니다.<BR>&nbsp;
+my	no_monitored_filemodules	모니터하고 있는 파일이 없습니다.
+my	no_monitored_filemodules_details	<P>만약 여러분이 파일을 모니터하시게 되면 새로운 파일이 릴리즈될 때 이곳의 다운로드 서버로 파일을 받을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>파일을 모니터하시려면 프로젝트의 &quot;요약 페이지&quot;에 가서 파일 섹션의 체크박스를 클릭하시면 됩니다.<BR>&nbsp;
+my	no_monitored_forums	모니터하고 있는 게시판이 없습니다.
+my	no_monitored_forums_details	<P>만약 여러분이 게시판을 모니터하시게 되면 새로운 글이 올라올 때 그 글을 읽을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>게시판을 모니터하시려면 아무 게시판에서나 &quot;게시판 모니터&quot;를 클릭하시면 됩니다.<BR>&nbsp;
 my	no_open_tasks	할당된 임무가 없습니다.
 my	no_projects	아직 어떤 프로젝트에도 소속되어 있지 않습니다.
 my	no_tracker_items_assigned	할당된 문제점 추적 아이템이 없습니다.

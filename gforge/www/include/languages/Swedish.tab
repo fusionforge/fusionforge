@@ -990,8 +990,10 @@ my	bookmarks	Mina bokmärken
 my	monitoredfile	Bevakade filmoduler
 my	monitoredforum	Bevakade forum
 my	no_bookmarks	Du har för närvarande inga sparade bokmärken
-my	no_monitored_filemodules	<h3>Du bevakar inga filer</h3><p>Om du bevakar filer, så får du meddelanden om nya utgåvor via e-post med en länk till den nya filen på vår nerladdningsserver.</p><p>Du kan bevaka filer genom att besöka ett projekts &quot;Sammanfattningssida&quot; och klicka på kryssrutan i filurvalet.</p>
-my	no_monitored_forums	<h3>Du bevakar inga forum</h3><p>Om du bevakar forum, får du meddelanden om nya inlägg i forumet via e-post med en länk till det nya inlägget.</p><p>Du kan bevaka forum genom att klicka &quot;Bevaka Forum&quot; i forumet.</p>
+my	no_monitored_filemodules	Du bevakar inga filer
+my	no_monitored_filemodules_details	<p>Om du bevakar filer, så får du meddelanden om nya utgåvor via e-post med en länk till den nya filen på vår nerladdningsserver.</p><p>Du kan bevaka filer genom att besöka ett projekts &quot;Sammanfattningssida&quot; och klicka på kryssrutan i filurvalet.</p>
+my	no_monitored_forums	Du bevakar inga forum
+my	no_monitored_forums_details	<p>Om du bevakar forum, får du meddelanden om nya inlägg i forumet via e-post med en länk till det nya inlägget.</p><p>Du kan bevaka forum genom att klicka &quot;Bevaka Forum&quot; i forumet.</p>
 my	no_open_tasks	Du har inga öppna uppgifter tilldelade dig
 my	no_projects	Du är inte medlem i några aktiva projekt
 my	no_tracker_items_assigned	Du har inga öppna ordningsposter tilldelade dig.

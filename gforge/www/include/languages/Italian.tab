@@ -453,8 +453,10 @@ menu	account_maintenance	Opzioni Utente
 menu	register_project	Registra progetto
 my	about_blurb	La tua pagina personale contiene un elenco di bug, attivita che ti sono stati assegnati, inoltre l'elenco dei progetti ai quali partecipi.
 my	no_bookmarks	Non ci sono segnalibri salvati
-my	no_monitored_filemodules	<H3>Non hai richiesto la notifica di alcun file</H3><P>Quando &egrave; attivita la notifica di un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
-my	no_monitored_forums	<H3>Non hai richiesto la notifica di nessun forum</H3><P>Quando &egrave; attivita la notifica di  un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare la notifica cliccando su &quot;Notifica Forum&quot;
+my	no_monitored_filemodules	Non hai richiesto la notifica di alcun file
+my	no_monitored_filemodules_details	<P>Quando &egrave; attivita la notifica di un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
+my	no_monitored_forums	Non hai richiesto la notifica di nessun forum
+my	no_monitored_forums_details	<P>Quando &egrave; attivita la notifica di  un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare la notifica cliccando su &quot;Notifica Forum&quot;
 my	no_open_tasks	Non ci sono attivit&agrave; aperte assegnate a te.
 my	no_projects	Non sei membro di nessun progetto attivo
 my	no_tracker_items_assigned	Non ci sono elementi del tracker assegnati a te.

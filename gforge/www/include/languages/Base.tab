@@ -966,8 +966,10 @@ my	bookmarks	My Bookmarks
 my	monitoredfile	Monitored FileModules
 my	monitoredforum	Monitored Forums
 my	no_bookmarks	You currently do not have any bookmarks saved
-my	no_monitored_filemodules	<h3>You are not monitoring any files</h3><p>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.</p><p>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.</p>
-my	no_monitored_forums	<h3>You are not monitoring any forums</h3><p>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.</p><p>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.</p>
+my	no_monitored_filemodules	You are not monitoring any files
+my	no_monitored_filemodules_details	<p>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.</p><p>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.</p>
+my	no_monitored_forums	You are not monitoring any forums
+my	no_monitored_forums_details	<p>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.</p><p>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.</p>
 my	no_open_tasks	You have no open tasks assigned to you.
 my	no_projects	You're not a member of any active projects
 my	no_tracker_items_assigned	You have no open tracker items assigned to you.

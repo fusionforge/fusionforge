@@ -547,8 +547,10 @@ menu	code_snippet	代码片断
 menu	admin	管理
 my	about_blurb	您的个人首页包括分配给您的bug和任务列表，外加您所属的项目列表
 my	no_bookmarks	您目前没有保存任何的书签
-my	no_monitored_filemodules	<h3>您没有监视任何文件</h3><p>如果您监视了文件，新版本的发布将会通过邮件通知给您。邮件当中包含从我们的下载服务器上下载该新文件的链接</p><p>您可以通过访问一个项目的“摘要”页并点击文件部分来监视文件。</p>
-my	no_monitored_forums	<h3>您没有监视任何论坛</h3><p>如果您监视了论坛，论坛中出现新帖子时，将会通过email通知您，邮件当中嗨包括访问该帖子的连接。</p><p>您可以在某个论坛当中，点击“监视论坛”来监视该论坛。</p>
+my	no_monitored_filemodules	您没有监视任何文件
+my	no_monitored_filemodules_details	<p>如果您监视了文件，新版本的发布将会通过邮件通知给您。邮件当中包含从我们的下载服务器上下载该新文件的链接</p><p>您可以通过访问一个项目的“摘要”页并点击文件部分来监视文件。</p>
+my	no_monitored_forums	您没有监视任何论坛
+my	no_monitored_forums_details	<p>如果您监视了论坛，论坛中出现新帖子时，将会通过email通知您，邮件当中嗨包括访问该帖子的连接。</p><p>您可以在某个论坛当中，点击“监视论坛”来监视该论坛。</p>
 my	no_open_tasks	目前没有未完成的任务分配给您
 my	no_projects	您目前不属于任何一个活动项目
 my	no_tracker_items_assigned	目前没有开放的跟踪项分配给您

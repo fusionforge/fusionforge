@@ -975,8 +975,10 @@ my	bookmarks	Mis Marcadores
 my	monitoredfile	Ficheros Monitorizados
 my	monitoredforum	Foros Monitorizados
 my	no_bookmarks	Actualmente no tiene anotado ningún marcador
-my	no_monitored_filemodules	<h3>No está monitorizando ningún fichero</h3><p>Si monitoriza ficheros, recibirá noticias de nuevas publicaciones por correo, con un enlace del nuevo fichero en nuestro servidor de descargas.</p><p>Se puede monitorizar ficheros visitando la Página de Resumen de un Proyecto y seleccionando las casillas adecuadas en la sección de ficheros.</p>
-my	no_monitored_forums	<h3>No está monitorizando ningún foro</h3><p>Si monitoriza un foro, se le enviará por correo las noticias publicadas, con un enlace a la nueva noticia.</p><p>Se puede monitorizar foros pulsando &quot;Monitorizar Foro&quot; en un determinado foro.</p>
+my	no_monitored_filemodules	No está monitorizando ningún fichero
+my	no_monitored_filemodules_details	<p>Si monitoriza ficheros, recibirá noticias de nuevas publicaciones por correo, con un enlace del nuevo fichero en nuestro servidor de descargas.</p><p>Se puede monitorizar ficheros visitando la Página de Resumen de un Proyecto y seleccionando las casillas adecuadas en la sección de ficheros.</p>
+my	no_monitored_forums	No está monitorizando ningún foro
+my	no_monitored_forums_details	<p>Si monitoriza un foro, se le enviará por correo las noticias publicadas, con un enlace a la nueva noticia.</p><p>Se puede monitorizar foros pulsando &quot;Monitorizar Foro&quot; en un determinado foro.</p>
 my	no_open_tasks	No tiene tareas abiertas asignadas.
 my	no_projects	No es miembro de ningún proyecto activo
 my	no_tracker_items_assigned	No tiene ningún elemento del registro asignado.
