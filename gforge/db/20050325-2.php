@@ -78,7 +78,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	$aef->create('Category',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
 	$catbox_id=$aef->getID();
 	if (!$catbox_id) {
-		echo "\nCould Not Get New Category Box ID: $gaid";
+		echo "\nCould Not Get New Category Box ID: $gaid ".$aef->getErrorMessage();
 		db_rollback();
 		exit;
 	}
@@ -116,10 +116,10 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	//	Convert ArtifactGroup To Extra Field
 	//
 	$aef=new ArtifactExtraField($at);
-	$aef->create('Category',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+	$aef->create('Group',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
 	$groupbox_id=$aef->getID();
 	if (!$groupbox_id) {
-		echo "\nCould Not Get groupbox_id";
+		echo "\nCould Not Get groupbox_id ".$aef->getErrorMessage();
 		db_rollback();
 		exit;
 	}
@@ -161,7 +161,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 		$aef->create('Resolution',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
 		$resolutionbox_id=$aef->getID();
 		if (!$resolutionbox_id) {
-			echo "\nCould Not Get resolutionbox_id";
+			echo "\nCould Not Get resolutionbox_id ".$aef->getErrorMessage();
 			db_rollback();
 			exit;
 		}

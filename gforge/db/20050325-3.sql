@@ -42,3 +42,4 @@ WHERE   artifact.assigned_to = u.user_id
 AND     artifact.submitted_by = u2.user_id
 AND     artifact.status_id = artifact_status.id;
 
+DELETE FROM user_preferences WHERE preference_name LIKE 'art_cust%';
