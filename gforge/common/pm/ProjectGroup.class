@@ -1,0 +1,239 @@
+<?php
+/**
+ * GForge ProjectManager Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+require_once('common/include/Error.class');
+
+class ProjectGroup extends Error {
+
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var	 array   $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The Group object.
+	 *
+	 * @var	 object  $Group
+	 */
+	var $Group;
+
+	/**
+	 *  Constructor.
+	 *
+	 *	@param	object	The Group object to which this forum is associated
+	 *  @param  int	 The group_project_id
+	 *  @param  array	The associative array of data
+	 */
+	function ProjectGroup(&$Group, $group_project_id=false, $arr=false) {
+		$this->Error();
+		if (!$Group || !is_object($Group)) {
+			$this->setError('ProjectGroup:: No Valid Group Object');
+			return false;
+		}
+		if ($Group->isError()) {
+			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $Group;
+
+		if ($group_project_id) {
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($group_project_id)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				if ($this->data_array['group_id'] != $this->Group->getID()) {
+					$this->setError('Group_id in db result does not match Group Object');
+					return false;
+				}
+			}
+			if (!$this->isPublic()) {
+				$perm =& $this->Group->getPermission( session_get_user() );
+
+				if (!$perm || !is_object($perm) || !$perm->isMember()) {
+					$this->setError('Permission Denied');
+					$this->data_array = null;
+					return false;
+				}
+			}
+		}
+		$this->view_types[]='ultimate';
+		$this->view_types[]='flat';
+		$this->view_types[]='nested';
+		$this->view_types[]='threaded';
+		return true;
+	}
+
+	function create($project_name,$description,$is_public=1,$send_all_posts_to='') {
+
+		if (strlen($project_name) < 3) {
+			$this->setError('ProjectGroup Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (strlen($description) < 10) {
+			$this->setError('ProjectGroup Description Must Be At Least 10 Characters');
+			return false;
+		}
+		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
+			$this->setError('Invalid Email Address');
+			return false;
+		}
+
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$sql="INSERT INTO project_group_list (group_id,project_name,is_public,
+			description,send_all_posts_to)
+			VALUES ('".$this->Group->getId()."','". htmlspecialchars($project_name) ."','$is_public',
+			'". htmlspecialchars($description) ."','$send_all_posts_to')";
+
+		db_begin();
+		$result=db_query($sql);
+		if (!$result) {
+			db_rollback();
+			$this->setError('Error Adding ProjectGroup: '.db_error());
+			return false;
+		}
+		$this->group_project_id=db_insertid($result,'project_group_list','group_project_id');
+		$this->fetchData($this->group_project_id);
+
+		db_commit();
+		return true;
+	}
+
+	/**
+	 *  fetchData() - re-fetch the data for this ProjectGroup from the database
+	 *
+	 *  @param  int	 The artifact type ID
+	 *  @return true/false
+	 */
+	function fetchData($group_project_id) {
+		$res=db_query("SELECT * FROM project_group_list_vw
+			WHERE group_project_id='$group_project_id'
+			AND group_id='". $this->Group->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('ProjectGroup:: Invalid group_project_id');
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *	getGroup() - get the Group object this ProjectGroup is associated with
+	 *
+	 *	@return the Group object
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+
+	/**
+	 *	getID() - get this GroupProjectID
+	 *
+	 *	@return the group_artifact_id #
+	 */
+	function getID() {
+		return $this->data_array['group_project_id'];
+	}
+
+	/**
+	 *	isPublic - Is this forum open to the general public.
+	 *
+	 *	@return boolean	allow
+	 */
+	function isPublic() {
+		return $this->data_array['is_public'];
+	}
+
+	/**
+	 *	getName - get the name of this forum.
+	 *
+	 *	@return string	The name of this forum.
+	 */
+	function getName() {
+		return $this->data_array['project_name'];
+	}
+
+	/**
+	 *	getSendAllPostsTo - an optional email address to send all forum posts to.
+	 *
+	 *	@return string	The email address.
+	 */
+	function getSendAllPostsTo() {
+		return $this->data_array['send_all_posts_to'];
+	}
+
+	/**
+	 *	getDescription - the description of this forum.
+	 *
+	 *	@return string	The description.
+	 */
+	function getDescription() {
+		return $this->data_array['description'];
+	}
+
+	/**
+	 *	getMessageCount - the total number of messages in this forum.
+	 *
+	 *	@return int	The count.
+	 */
+	function getMessageCount() {
+		return $this->data_array['total'];
+	}
+
+	function update($project_name,$description,$is_public=1,$send_all_posts_to='') {
+
+		if (strlen($project_name) < 3) {
+			$this->setError('ProjectGroup Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (strlen($description) < 10) {
+			$this->setError('ProjectGroup Description Must Be At Least 10 Characters');
+			return false;
+		}
+		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
+			$this->setError('Invalid Email Address');
+			return false;
+		}
+
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$res=db_query("UPDATE project_group_list SET
+			project_name='". htmlspecialchars($project_name) ."',
+			description='". htmlspecialchars($description) ."',
+			is_public='$is_public',
+			send_all_posts_to='$send_all_posts_to'
+			WHERE group_id='".$this->Group->getID()."'
+			AND group_project_id='".$this->getID()."'");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('Error On Update: '.db_error());
+			return false;
+		}
+		return true;
+	}
+
+}
+
+?>

@@ -1,0 +1,189 @@
+<?php
+/**
+ * ProjectCategory.class - Class to handle artifact categories
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ *
+ */
+require_once('common/include/Error.class');
+
+class ProjectCategory extends Error {
+
+	/** 
+	 * The artifact type object
+	 *
+	 * @var		object	$ProjectGroup
+	 */
+	var $ProjectGroup; //object
+
+	/**
+	 * Array of artifact data
+	 *
+	 * @var		array	$data_array
+	 */
+	var $data_array;
+
+	/**
+	 *  ProjectCategory() - constructor
+	 *
+	 *  Use this constructor if you are modifying an existing project_category
+	 *
+	 *	@param	object	ProjectGroup object
+	 *  @param	array	(all fields from project_category) OR category_id from database
+	 *  @return true/false
+	 */
+	function ProjectCategory(&$ProjectGroup, $data=false) {
+		$this->Error(); 
+
+		//was ProjectGroup legit?
+		if (!$ProjectGroup || !is_object($ProjectGroup)) {
+			$this->setError('ProjectCategory: No Valid ProjectGroup');
+			return false;
+		}
+		//did ProjectGroup have an error?
+		if ($ProjectGroup->isError()) {
+			$this->setError('ProjectCategory: '.$ProjectGroup->getErrorMessage());
+			return false;
+		}
+		$this->ProjectGroup =& $ProjectGroup;
+
+		if ($data) {
+			if (is_array($data)) {
+				$this->data_array =& $data;
+//
+//	should verify group_project_id
+//
+				return true;
+			} else {
+				if (!$this->fetchData($data)) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+	}
+
+	/**
+	 *	create() - create a new item in the database
+	 *
+	 *	@param	string	Item name
+	 *	@param	int		User_id of assignee
+	 *  @return id on success / false on failure
+	 */
+	function create($name) {
+		//
+		//	data validation
+		//
+		if (!$name) {
+			$this->setError('ProjectCategory: name and assignee are Required');
+			return false;
+		}
+//
+//	Fix perms
+//
+		if (!$this->ProjectGroup->userIsAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+		$sql="INSERT INTO project_category (group_project_id,category_name,auto_assign_to) 
+			VALUES ('".$this->ProjectGroup->getID()."','$name','$auto_assign_to')";
+
+		$result=db_query($sql);
+
+		if ($result && db_affected_rows($result) > 0) {
+			$this->clearError();
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+
+/*
+			//
+			//	Now set up our internal data structures
+			//
+			if (!$this->fetchData($id)) {
+				return false;
+			}
+*/
+	}
+
+	/**
+	 *	fetchData() - re-fetch the data for this ProjectCategory from the database
+	 *
+	 *	@param	int		ID of the category
+	 *	@return true/false
+	 */
+	function fetchData($id) {
+		$res=db_query("SELECT * FROM project_category WHERE category_id='$id'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('ProjectCategory: Invalid ProjectCategory ID');
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *	getProjectGroup() - get the ProjectGroup Object this ProjectCategory is associated with
+	 *
+	 *	@return ProjectGroup
+	 */
+	function &getProjectGroup() {
+		return $this->ProjectGroup;
+	}
+	
+	/**
+	 *	getID() - get this ProjectCategory's ID
+	 *
+	 *	@return the id #
+	 */
+	function getID() {
+		return $this->data_array['category_id'];
+	}
+
+	/**
+	 *	getName() - get the name
+	 *
+	 *	@return text name
+	 */
+	function getName() {
+		return $this->data_array['category_name'];
+	}
+
+	/**
+	 *  update() - update an ProjectCategory
+	 *
+	 *  @param	string	Name of the category
+	 *  @return true/false
+	 */
+	function update($name) {
+		if (!$this->ProjectGroup->userIsAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}   
+		if (!$name || !$assign_to) {
+			$this->setError('Missing Params');
+			return false;
+		}   
+		$sql="UPDATE project_category 
+			SET category_name='$name'
+			WHERE id='". $this->getID() ."' 
+			AND group_project_id='".$this->ProjectGroup->getID()."'";
+		$result=db_query($sql);
+		if ($result && db_affected_rows($result) > 0) {
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+	}
+}
+
+?>

@@ -1,0 +1,554 @@
+<?php
+/**
+ * GForge ProjectGroups Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+require_once('common/include/Error.class');
+
+class ProjectTask extends Error {
+
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var	 array   $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The ProjectGroup object.
+	 *
+	 * @var	 object  $ProjectGroup
+	 */
+	var $ProjectGroup;
+	var $dependon;
+	var $assignedto;
+
+	/**
+	 *  Constructor.
+	 *
+	 *	@param	object	The ProjectGroup object to which this ProjectTask is associated
+	 *  @param  int	 The project_task_id
+	 *  @param  array   The associative array of data
+	 */
+	function ProjectTask(&$ProjectGroup, $project_task_id=false, $arr=false) {
+		$this->Error();
+		if (!$ProjectGroup || !is_object($ProjectGroup)) {
+			$this->setError('ProjectTask:: No Valid ProjectGroup Object');
+			return false;
+		}
+		if ($ProjectGroup->isError()) {
+			$this->setError('ProjectTask:: '.$ProjectGroup->getErrorMessage());
+			return false;
+		}
+		$this->ProjectGroup =& $ProjectGroup;
+
+		if ($project_task_id) {
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($project_task_id)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				//
+				//	Verify this message truly belongs to this ProjectGroup
+				//
+				if ($this->data_array['group_project_id'] != $this->ProjectGroup->getID()) {
+					$this->setError('Group_project_id in db result does not match ProjectGroup Object');
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+//	duration - seconds (30 days * 80640, for example)
+//	start_date - unix time
+//	hours	est number of hours
+	function create($summary,$details,$priority,$hours,$start_date,
+			$duration,$category_id,&$assigned_arr,&$depend_arr) {
+		if (!$summary || !$details || !$priority || !$hours || !$duration || !$category_id) {
+			$this->setError('Must include a summary, details, priority, hours, start date and end date.');
+			return false;
+		}
+
+		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		//
+		//	Inserting a generic task, which will then be "updated", forcing the constraint 
+		//	Triggers to check everything out
+		//
+		db_begin();
+		$sql="INSERT INTO project_task (group_project_id,created_by,summary,
+			details,start_date,end_date,status_id,category_id) 
+			VALUES ('". $this->ProjectGroup->getID() ."', '".user_getid()."', ' ',
+			' ','$start_date','$end_date','1','$category_id'";
+
+		$result=db_query($sql);
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError('ProjectTask::create() Posting Failed '.db_error());
+			db_rollback();
+			return false;
+		} else {
+			$project_task_id=db_insertid($result,'project_task','project_task_id');
+			if (!$this->fetchData($project_task_id)) {
+				db_rollback();
+				return false;
+			}
+			if (!$project_task_id) {
+				db_rollback();
+				$this->setError('ProjectTask::create() Unable to get new task_id');
+				return false;
+			} else {
+				if (!$this->update($summary,$details,$priority,$hours,$start_date,$end_date,
+					1,$category_id,$assigned_arr,$depend_arr)) {
+					return false;
+				}
+				db_commit();
+				return true;
+			}
+		}
+	}
+
+	/**
+	 *  fetchData() - re-fetch the data for this ProjectTask from the database
+	 *
+	 *  @param  int	 The message ID
+	 *  @return true/false
+	 */
+	function fetchData($project_task_id) {
+		$res=db_query("SELECT * FROM project_task
+			WHERE project_task_id='$project_task_id'
+			AND group_project_id='". $this->ProjectGroup->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('ProjectTask::fetchData() Invalid MessageID'.db_error());
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *	getProjectGroup - get the ProjectGroup object this ProjectTask is associated with.
+	 *
+	 *	@return	Object	The ProjectGroup object.
+	 */
+	function &getProjectGroup() {
+		return $this->ProjectGroup;
+	}
+
+	/**
+	 *	getID - get this message_id.
+	 *
+	 *	@return	int	The message_id.
+	 */
+	function getID() {
+		return $this->data_array['project_task_id'];
+	}
+
+	/**
+	 *	getSummary - get the subject/summary of this task.
+	 *
+	 *	@return	string	The summary.
+	 */
+	function getSummary() {
+		return $this->data_array['summary'];
+	}
+
+	/**
+	 *	getDetails - get the body/details of this task.
+	 *
+	 *	@return	string	The body/details.
+	 */
+	function getDetails() {
+		return $this->data_array['Details'];
+	}
+
+	/**
+	 *	getPercentComplete - a number between 0 and 100.
+	 *
+	 *	@return	int	The percentage of completion of this task.
+	 */
+	function getPercentComplete() {
+		return $this->data_array['percent_complete'];
+	}
+
+	/**
+	 *	getPriority - the priority, between 1 and 9 of this task.
+	 *
+	 *	@return	int	The priority.
+	 */
+	function getPriority() {
+		return $this->data_array['priority'];
+	}
+
+	/**
+	 *	getHours - the hours this task is expected to take.
+	 *
+	 *	@return	int	The hours.
+	 */
+	function getHours() {
+		return $this->data_array['hours'];
+	}
+
+	/**
+	 *	getStartDate - the unix time that this task will start.
+	 *
+	 *	@return	int	The unix start time of this task.
+	 */
+	function getStartDate() {
+		return $this->data_array['start_date'];
+	}
+
+	/**
+	 *	getEndDate - the unix time that this task will end.
+	 *
+	 *	@return	int	The unix end time of this task.
+	 */
+	function getEndDate() {
+		return $this->data_array['end_date'];
+	}
+
+	/**
+	 *	getStatusID - the integer of the status of this task.
+	 *
+	 *	@return	int	the status_id.
+	 */
+	function getStatusID() {
+		return $this->data_array['status_id'];
+	}
+
+	/**
+	 *	getStatusName - the string of the status of this task.
+	 *
+	 *	@return	string	the status_name.
+	 */
+	function getStatusName() {
+		return $this->data_array['status_name'];
+	}
+
+	/**
+	 *	getCategoryID - the category_id of this task.
+	 *
+	 *	@return	int	the category_id.
+	 */
+	function getCategoryID() {
+		return $this->data_array['category_id'];
+	}
+
+	/**
+	 *	getCategoryName - the category_name of this task.
+	 *
+	 *	@return	int	the category_name.
+	 */
+	function getCategoryName() {
+		return $this->data_array['category_name'];
+	}
+
+/*
+	function delete() {
+
+		$project_task_id=$this->getID();
+
+		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+	}
+*/
+
+	/**
+	 *  getHistory() - returns a result set of audit trail for this ProjectTask
+	 *
+	 *  @return result set
+	 */
+	function getHistory() {
+		$sql="SELECT * ".
+		"FROM project_history_user_vw ".
+		"WHERE project_task_id='". $this->getID() ."' ".
+		"ORDER BY entrydate DESC";
+		return db_query($sql);
+	}
+
+	/**
+	 *  getMessages() - get the list of messages attached to this ProjectTask
+	 *
+	 *  @return database result set
+	 */
+	function getMessages() {
+		$sql="select * ".
+			"FROM project_message_user_vw ".
+			"WHERE project_task_id='". $this->getID() ."' ORDER BY postdate DESC";
+		return db_query($sql);
+	}
+
+	function addMessage($message) {
+		$sql="INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
+			VALUES ('". $this->getID() ."','". htmlspecialchars($message) ."','".user_getid()."','". time() ."')";
+		$res=db_query($sql);
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('AddMessage: '.db_error());
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 * addHistory - Handle the insertion of history for these parameters.
+	 *
+	 * @param	   string  The field name
+	 * @param	   string  The old value
+	 * @returns true on success/false on error
+	 *
+	 */
+	function addHistory ($field_name,$old_value) {
+		$sql="insert into project_history(project_task_id,field_name,old_value,mod_by,date) ".
+			"VALUES ('". $this->getID() ."','$field_name','$old_value','".user_getid()."','".time()."')";
+		$result=db_query($sql);
+		if (!$result) {
+			$this->setError('ERROR IN AUDIT TRAIL - '.db_error());
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
+	function setDependantOn(&$arr) {
+//
+//	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!! 
+//	Simplest way is to ensure this start_date, is >= dependent_on end_date
+//
+		//get existing dependencies to diff against
+		$arr2 =& $this->getDependantOn();
+		$this->dependon =& $arr2;
+
+		if (count($arr) || count($arr2)) {
+			$add_arr = array_diff ($arr, $arr2);
+			$del_arr = array_diff ($arr2, $arr);
+			for ($i=0; $i<count($del_arr); $i++) {
+				db_query("DELETE FROM project_dependencies 
+					WHERE project_task_id='".$this->getID()."'
+					AND is_dependent_on_task_id='". $del_arr[$i] ."'");
+				if (db_error()) {
+					$this->setError('setDependentOn() '.db_error());
+					return false;
+				}
+			}
+			for ($i=0; $i<count($add_arr); $i++) {
+				db_query("INSERT INTO project_dependencies (project_task_id,is_dependent_on_task_id) 
+					VALUES ('".$this->getID()."','". $add_arr[$i] ."')");
+				if (db_error()) {
+					$this->setError('setDependentOn() '.db_error());
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *
+	 *
+	 */
+	function &getDependantOn() {
+		if (!$this->dependon) {
+			$this->dependon =& util_result_column_to_array(db_query("SELECT is_dependent_on_task_id 
+				FROM project_dependencies 
+				WHERE project_task_id='".$this->getID()."'"));
+		}
+		return $this->dependon;
+	}
+
+	function setAssignedTo(&$arr) {
+		$arr2 =& $this->getAssignedTo();
+		$this->assignedto =& $arr2;
+
+		if (count($arr) || count($arr2)) {
+			$add_arr = array_diff ($arr, $arr2);
+			$del_arr = array_diff ($arr2, $arr);
+			for ($i=0; $i<count($del_arr); $i++) {
+				db_query("DELETE FROM project_assigned_to
+					WHERE project_task_id='".$this->getID()."'
+					AND assigned_to_id='". $del_arr[$i] ."'");
+				if (db_error()) {
+					$this->setError('setAssignedTo() '.db_error());
+					return false;
+				}
+			}
+			for ($i=0; $i<count($add_arr); $i++) {
+				db_query("INSERT INTO project_assigned_to (project_task_id,assigned_to_id) 
+					VALUES ('".$this->getID()."','". $add_arr[$i] ."')");
+				if (db_error()) {
+					$this->setError('setAssignedTo() '.db_error());
+					return false;
+				}
+			}
+			return true;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *
+	 *
+	 */
+	function &getAssignedTo() {
+		if (!$this->assignedto) {
+			$this->assignedto =& util_result_column_to_array(db_query("SELECT assigned_to_id 
+				FROM project_assigned_to 
+				WHERE project_task_id='".$this->getID()."'"));
+		}
+		return $this->assignedto;
+	}
+
+	function update($summary,$details,$priority,$hours,$start_date,$end_date,
+		$status_id,$category_id,&$assigned_arr,&$depend_arr,$message) {
+		if (!$summary || !$details || !$priority || !$hours || !$start_date || !$end_date 
+			|| !$status_id || !$category_id) {
+			$this->setError('Must include a summary, details, priority, hours, start date, end date, status and category.');
+			return false;
+		}
+
+		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+//
+//
+//
+//	mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year)
+//	mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year)
+		db_begin();
+		if ($message) {
+			if (!$this->addMessage($message)) {
+				db_rollback();
+				return false;
+			}
+		}
+		if ($this->getStatusID() != $status_id)
+			{ $this->addHistory ('status_id',$this->getStatusID());  }
+
+		if ($this->getPriority() != $priority)
+			{ $this->addHistory ('priority',$this->getPriority());  }
+
+		if ($this->getSummary() != htmlspecialchars(stripslashes($summary)))
+			{ $this->addHistory ('summary',addslashes($this->getSummary()));  }
+
+		if ($this->getPercentComplete() != $percent_complete)
+			{ $this->addHistory ('percent_complete',$this->getPercentComplete()); }
+
+		if ($this->getHours() != $hours)
+			{ $this->addHistory ('hours',$this->getHours());  }
+
+		if ($this->getStartDate() != $start_date)
+			{ $this->addHistory ('start_date',$this->getStartDate());  }
+
+		if ($this->getEndDate() != $end_date)
+			{ $this->addHistory ('end_date',$this->getEndDate());  }
+
+		if (!$this->setDependantOn($depend_arr)) {
+			return false;
+		} elseif (!$this->setAssignedTo($assigned_arr)) {
+			return false;
+		} else {
+
+			$sql="UPDATE project_task SET
+				summary='".htmlspecialchars($summary)."',
+				details='".htmlspecialchars($details)."',
+				priority='$priority',
+				hours='$hours',
+				start_date='$start_date',
+				end_date='$end_date',
+				status_id='$status_id',
+				category_id='$category_id'
+				WHERE group_project_id='".$this->ProjectGroup->getID()."'
+				AND project_task_id='".$this->getID()."'";
+
+			$res=db_query($sql);
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError('Error On Update: '.db_error());
+				db_rollback();
+				return false;
+			} else {
+				if (!$this->fetchData($this->getID()) {
+
+				} else {
+					$this->sendNotice();
+					db_commit();
+					return true;
+				}
+			}
+		}
+
+	}
+
+	function sendNotice() {
+		$ids =& $this->getAssignedTo();
+
+		//
+		//	See if there is anyone to send messages to
+		//
+		if (count($ids) < 1 && !$this->ProjectGroup->getSendAllPostsTo()) {
+			return true;
+		}
+
+        $body = "Task #". $this->getID() ." has been updated. ".
+            "\n\nProject: ". $this->ProjectGroup->Group->getPublicName() .
+            "\nSubproject: ". $this->ProjectGroup->getName() .
+            "\nSummary: ".util_unconvert_htmlspecialchars( $this->getSummary() ).
+            "\nComplete: ". $this->getPercentComplete() ."%".
+            "\nStatus: ". $this->getStatusName() .
+            "\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
+
+        /*
+            Now get the followups to this task
+        */
+        $result2=$this->getMessages();
+
+        $rows=db_numrows($result2);
+
+        if ($result2 && $rows > 0) {
+            $body .= "\n\nFollow-Ups:";
+            for ($i=0; $i<$rows;$i++) {
+                $body .= "\n\n-------------------------------------------------------";
+                $body .= "\nDate: ". date($GLOBALS['sys_datefmt'],db_result($result2,$i,'postdate'));
+                $body .= "\nBy: ".db_result($result2,$i,'user_name');
+                $body .= "\n\nComment:\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body'));
+            }
+        }
+        $body .= "\n\n-------------------------------------------------------".
+            "\nFor more info, visit:".
+            "\n\nhttp://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
+                $this->getID(); ."&group_id=".
+                $this->ProjectGroup->Group->getID() ."&group_project_id=". $this->ProjectGroup->getID();
+
+        $subject="[Task #". $this->getID() .'] '.
+            util_unconvert_htmlspecialchars( $this->getID() );
+
+		util_handle_message(array_unique($ids),$subject,$body,$this->ProjectGroup->getSendAllPostsTo());
+		return true;
+	}
+
+}
+
+?>
