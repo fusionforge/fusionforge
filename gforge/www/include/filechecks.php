@@ -22,8 +22,8 @@ function filechecks_islegalname($filename) {
 		|| strstr($filename,',') || strstr($filename,':')
 		|| strstr($filename,'@') || strstr($filename,'*')
 		|| strstr($filename,'%') || strstr($filename,'^')
-		|| strstr($filename,'&') || strstr($filename,'(') 
-		|| strstr($filename,')') || 
+		|| strstr($filename,'&')
+	        || strstr($filename,'(') || strstr($filename,')')
 		|| strstr($filename,'>') || strstr($filename,'<')) {
 		return 0;
 	}
