@@ -1,0 +1,20 @@
+-Broken approve
+On https://g-tt.rd.francetelecom.fr/admin/approve-pending.php
+Fatal error: Call to undefined function: /dev/null() in /usr/lib/sourceforge/common/include/ldap.php on line 425
+Open transaction detected!!!
+
+-Wrong CVS user id not yet corrected (probably something to change in
+newparse.pl)
+
+-Ldap empty leaves some sourceforge stuff in ldap db (Workaround:
+/usr/lib/sourceforge/install-ldap.sh reset)
+
+-We don't check that mcrypt module is loaded in php4.ini (Workaround
+do-it-yourself :-)
+
+-libmcrypt4 former to 2.4.22-2 require libmcrypt-dev (I should fix
+dependency)
+
+-upgrade from 2.5 miss some tables (On the way to be done)
+
+
