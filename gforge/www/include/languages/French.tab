@@ -27,17 +27,17 @@
 account	title	Préférences de votre compte
 account	updated	Mis à jour
 account_change_email	desc	<P>Changer votre adresse de courrier électronique va nécessiter une confirmation de votre nouvelle adresse, afin que nous puissions nous assurer que nous enregistrons une bonne adresse. </p><p>Nous avons besoin de conserver une adresse valide pour chaque utilisateur pour nous garantir un accès au compte. Si nous avons besoin de de joindre un utilisateur à cause d'un problème en provenance d'un compte utilsateur ou d'un projet, il est important que nous puissions le faire.</p><p>En validant le formulaire ci-dessous, vous déclencherez l'envoi d'un courrier à votre nouvelle adresse, contenant une URL de confirmation. En allant sur ce lien, vous pourrez achevez la procédure de changement d'adresse.</p> 
-account_change_email	invalid_email	Adresse email invalide
+account_change_email	invalid_email	Adresse e-mail invalide
 account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
 account_change_email	message	Vous avez demandé un changement d'adresse e-mail pour votre compte sur $1.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\nl'équipe $1
-account_change_email	new_address	Nouvelle adresse email :
+account_change_email	new_address	Nouvelle adresse e-mail :
 account_change_email	section	Préférences de votre compte
 account_change_email	send_confirmation	Envoi confirmation à la nouvelle adresse
 account_change_email	subject	$1 - vérification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email-complete	confirm	Bienvenue $1, votre changement d'adresse email a été effectué. Votre nouvelle adresse enregistrée est <strong>$2</strong>. Les messages envoyés à $3 y désormais redirigés.
-account_change_email-complete	title	Changement d'adresse email effectué
-account_change_email_confirm	title	Confirmation de changement d'email
+account_change_email-complete	confirm	Bienvenue $1, votre changement d'adresse e-mail a été effectué. Votre nouvelle adresse enregistrée est <strong>$2</strong>. Les messages envoyés à $3 y désormais redirigés.
+account_change_email-complete	title	Changement d'adresse e-mail effectué
+account_change_email_confirm	title	Confirmation de changement d'e-mail
 account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe $1</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
 account_change_pw	new_password	Nouveau mot de passe (6 caractères minimum)
 account_change_pw	new_password_repeat	Nouveau mot de passe (répéter)
@@ -78,7 +78,7 @@ account_lostlogin	title	Confirmation pour mot de passe perdu
 account_lostlogin	update	Valider
 account_lostlogin	welcome	<h2>Mot de passe perdu</h2><P>Bienvenue, $1. Vous pouvez maintenant changer votre mot de passe.
 account_lostpw	invalid_user	Utilisateur non valide
-account_lostpw	message	Quelqu'un (probablement vous) sur le site $1, a demandé un \nchangement de mot de passe l'intermédiaire d'une vérification email. Si ce n'est pas vous\nignorez ce message et rien ne se passera.\n\nSi vous avez demandé cette vérificaton, allez à l'URL suivante\n pour changer votre mot de passe :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n - L'équipe de $3\n
+account_lostpw	message	Quelqu'un (probablement vous) sur le site $1, a demandé un \nchangement de mot de passe l'intermédiaire d'une vérification e-mail. Si ce n'est pas vous\nignorez ce message et rien ne se passera.\n\nSi vous avez demandé cette vérificaton, allez à l'URL suivante\n pour changer votre mot de passe :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n - L'équipe de $3\n
 account_lostpw	notify	<P>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions du courrier électronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'accueil ]</A>
 account_lostpw	sendhash	Envoyer une clé de Hachage pour mot de passe perdu
 account_lostpw	subject	$1 - Vérification
@@ -88,7 +88,7 @@ account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Ce
 account_options	change_email_address	Changer d'adresse de courrier
 account_options	change_password	Changement de mot de passe
 account_options	edit_skills_profile	Editer mon profil de compétences
-account_options	email_address	Adresse email :
+account_options	email_address	Adresse e-mail :
 account_options	language	Langue
 account_options	login_name	Nom de login :
 account_options	member_since	Membre depuis le :
@@ -103,7 +103,7 @@ account_register	communitymail	Recevoir du courrier électronique supplémentair
 account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
 account_register	emailaddr	Adresse de courrier électronique :<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse.
 account_register	err_badinsert	L'insertion a échouée.
-account_register	err_email	Adresse email invalide
+account_register	err_email	Adresse e-mail invalide
 account_register	err_jabber	Adresse Jabber invalide
 account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
 account_register	err_passwd	Vous devez fournir un mot de passe
@@ -338,7 +338,7 @@ admin_responses	response_title	Titre de la réponse
 admin_responses	title	Editer les réponses de rejet.
 admin_responses	yes_im_sure	Oui, j'en suis sûr
 admin_responses	you_cant	Vous ne pouvez $1 \"None\" :-)
-admin_search	email	Email
+admin_search	email	E-mail
 admin_search	full_name	Nom complet
 admin_search	group_search_criteria	Recherche de groupe avec crtères
 admin_search	id	Numéro d'identification
@@ -386,9 +386,9 @@ admin_unsubscribe	admin_initiaded_mail	Courriers à l'initiative de l'administra
 admin_unsubscribe	all	TOUS
 admin_unsubscribe	all_site_mailing	Courriers concernant tout le site
 admin_unsubscribe	comm_mail	Courriers de communuauté
-admin_unsubscribe	email	Email
+admin_unsubscribe	email	E-mail
 admin_unsubscribe	error_unsubscribe_user	Erreur, impossible de désabonner l'utilisateur :
-admin_unsubscribe	mail	Email
+admin_unsubscribe	mail	E-mail
 admin_unsubscribe	real_name	Nom réel
 admin_unsubscribe	show_user_matching	Voici les utilisateurs répondants au critère
 admin_unsubscribe	site_mail	Courrier
@@ -396,7 +396,7 @@ admin_unsubscribe	subscription_maintance	Gestion des abonnements
 admin_unsubscribe	title	Gestion des abonnements
 admin_unsubscribe	unsubscribe	Desinscription
 admin_unsubscribe	unsubscribe_user	Desinscrire l'utilisateur
-admin_unsubscribe	use_fields_bellow	Utilisez le champ ce-dessous pour trouver les utilisateurs qui correpondent aux critère par login, nom réel, ou email (une recherche pas sous-chaine est effectuée, utilisez '%' au milieu du modèle pour remplacer des caractères arbitraires, 0 ou plus). Cliquez sur son pour désabonner un utilisateur (un nouveau formulaire apparaîtra).
+admin_unsubscribe	use_fields_bellow	Utilisez le champ ce-dessous pour trouver les utilisateurs qui correpondent aux critère par login, nom réel, ou e-mail (une recherche pas sous-chaine est effectuée, utilisez '%' au milieu du modèle pour remplacer des caractères arbitraires, 0 ou plus). Cliquez sur son pour désabonner un utilisateur (un nouveau formulaire apparaîtra).
 admin_unsubscribe	user_id	Numéro d'identification utilisateur :
 admin_unsubscribe	user_unsubscribed	Utilisateur désabonné
 admin_unsubscribe	username	Nom d'utilisateur
@@ -406,7 +406,7 @@ admin_useredit	active	Actif (A)
 admin_useredit	could_not_complete_operation	Impossible de terminer l'opération
 admin_useredit	current_confirm_bash	Clé de confirmation actuelle :
 admin_useredit	deleted	Supprimé (S)
-admin_useredit	email	Email :
+admin_useredit	email	E-mail :
 admin_useredit	group_memerbership	Adhésions aux groupes
 admin_useredit	membership_permissions	Autorisations des membres
 admin_useredit	name	Nom
@@ -506,7 +506,7 @@ calendar	tuesday	Mardi
 calendar	update	Mise à jour
 calendar	view	Vue :
 calendar	wednesday	Mercredi
-classgroup	acceptedproject	Votre demande d'enregistrement pour <b>$7</b> a été acceptée.\n\nNom complet du projet : $1\nNom unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nLe DNS prendra prendre jusqu'à une journée pour pointer sur votre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne marche toujours pas, veuillez nous le signaler (traceurs | support technique) afin que nous puissions y regarder.\nNotez que tous les comptes Shell/CVS ne peuvent utiliser telnet mais seulement SSH 1.\n\nVotre site web est accessible à travers votre compte. Vous pouvez lire la documentation du site (lien ci-dessus) pour prendre connaissance des services disponibles et de leur usage, ainsi que des répertoires du compte.\n\nPrenez le temps de lire la documentation concernant l'administration d'un projet. (http://$3/docs/site/). Si vous allez sur la page de votre projet en $7 en étant connecté, vous trouverez un menu supplémentaire à gauche :  'Administration'. Nous vous suggérons de vous y rendre afin de créer une description publique de votre projet. cela peut être fait en aller sur la page de votre projet (en étant connecté), et en allant dans l''Administration' (menu à gauche) ou en allant directement sur http://$3projet/admin/?group_id=$6\naprès vous être connecté.\n\nVotre projet n'apparaa dans l'arbre des projets (qui recense les projects hébergés dans $7 et qui offre des possibilités étendues d'affichage et de recherche) que lorsque vous l'aurez catégorisé. Afin qu'on puisse trouver votre projet, vous devriez le faire maintenant (en étant connecté, et dans la zone d'administration)\n\nEncore bienvenue dans $7. Nous espérons que le système vous donnera satisfaction. A votre discposition\n\n- L'équipe de $7.
+classgroup	acceptedproject	Votre demande d'enregistrement pour <b>$7</b> a été acceptée.\n\nNom complet du projet : $1\nNom unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nLe DNS prendra prendre jusqu'à une journée pour pointer sur votre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne marche toujours pas, veuillez nous le signaler (traceurs | support technique) afin que nous puissions y regarder.\nNotez que tous les comptes Shell/CVS ne peuvent utiliser telnet mais seulement SSH 1.\n\nVotre site web est accessible à travers votre compte. Vous pouvez lire la documentation du site (lien ci-dessus) pour prendre connaissance des services disponibles et de leur usage, ainsi que des répertoires du compte.\n\nPrenez le temps de lire la documentation concernant l'administration d'un projet. (http://$3/docs/site/). Si vous allez sur la page de votre projet en $7 en étant connecté, vous trouverez un menu supplémentaire à gauche :  'Administration'. Nous vous suggérons de vous y rendre afin de créer une description publique de votre projet. cela peut être fait en aller sur la page de votre projet (en étant connecté), et en allant dans l''Administration' (menu à gauche) ou en allant directement sur http://$3projet/admin/?group_id=$6\naprès vous être connecté.\n\nVotre projet n'apparaîtra dans l'arbre des projets (qui recense les projects hébergés dans $7 et qui offre des possibilités étendues d'affichage et de recherche) que lorsque vous l'aurez catégorisé. Afin qu'on puisse trouver votre projet, vous devriez le faire maintenant (en étant connecté, et dans la zone d'administration)\n\nEncore bienvenue dans $7. Nous espérons que le système vous donnera satisfaction. A votre discposition\n\n- L'équipe de $7.
 classgroup	acceptedprojecttitle	Projet $1 Approuvé
 classgroup	newprojectnotification	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou rejeter ce projet:\nhttp://$5/admin/approve-pending.php
 classgroup	newprojectnotification_submitter	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\L'équipe d'administration de $1 va maintenant examiner votre\nsoumission de projet, et vous serez tenu informé de sa décision.
@@ -538,7 +538,7 @@ developer	no_user_selected	Pas d'utilisateur sélectionné
 developer	subject	Sujet
 developer_monitor	error_inserting	Erreur d'insertion de l'utilisateur dans le suivi journalier
 developer_monitor	monitoring_user	L'utilisateur est maintenant suivi
-developer_monitor	monitoring_user_expl	<p>Vous recevrez maintenant un email sur l 'activité journalière du développeur.</p><p>Pour arreter le monitoring, cliquez simplement à nouveau sur le lien « Suivre cet utilisateur »</p> 
+developer_monitor	monitoring_user_expl	<p>Vous recevrez maintenant un e-mail sur l 'activité journalière du développeur.</p><p>Pour arreter le monitoring, cliquez simplement à nouveau sur le lien « Suivre cet utilisateur »</p> 
 developer_monitor	monitoring_user_off	Le suivi a été arrété
 developer_monitor	monitoring_user_off_expl	Vous ne recevrez plus aucun mail de cet utilisateur
 developer_monitor	title	Suivre un utilisateur
@@ -548,7 +548,7 @@ developer_rate	cannot_rate_yourself	Vous ne pouvez pas vous classez vous-même
 developer_rate	invalid_rating_value	ERREUR - Valeur de classement invalide
 developer_rate	ratings_recorded	Classements enregistrés
 developer_rate	ratings_recorded_body	Vous pouvez modifier votre classement en retournant sur la page, et en soumettant à nouveau un classement
-developer_rate	title	Pclassement de l'utilisateur
+developer_rate	title	Classement de l'utilisateur
 developer_rate	turned_off_body	Vious avez choisi de ne pas participer aux classements
 developer_rate	turned_off_title	Classements désactivés
 docman	admin	Admistration
@@ -709,7 +709,7 @@ forum_message	msg	Poster un message dans cette file de message:
 forum_message	must_choose_message_body	Vous devez d'abord choisir un message
 forum_message	must_choose_message_title	Vous devez d'abord choisir un message
 forum_message	post_followup	Poster un message dans cette file de message:
-forum_message	receive_followups	Recevoir les réponses par email
+forum_message	receive_followups	Recevoir les réponses par e-mail
 forum_message	section	Forums
 forum_message	subject	Sujet
 forum_message	thread	Commencer une nouvelle file de message :
@@ -878,9 +878,9 @@ help_tracker	canned_response	La liste déroulante de réponses pré-enregistrée
 help_tracker	category	Cette liste déroulante recense les catégories de traces possibles ici.<br /><br />Choisir 'tous' pour l'ensemble.
 help_tracker	close_window	Fermer la fenêtre.
 help_tracker	comment	La zone de texte 'commentaire' vous permet d'attacher un commentaire à une trace lorsqu'il n'y a pas de réponse automatique appropriée.
-help_tracker	data_type	L'option 'Tpe de données' détermine le genre de trace dont il s'agit. Comme le traceur reste dans un genre de trace, il est important de connae son genre item.<br /><br />Cela permet en outre aux administrateurs de convertir d'un genre à l'autre (un bug en support par exemple).
+help_tracker	data_type	L'option 'Tpe de données' détermine le genre de trace dont il s'agit. Comme le traceur reste dans un genre de trace, il est important de connaître son genre item.<br /><br />Cela permet en outre aux administrateurs de convertir d'un genre à l'autre (un bug en support par exemple).
 help_tracker	group	Cette liste déroulante recense les groupes de traces définis par les adminstrateurs.<br /><br />Si vous êtes administrateur du projet, vous pouvez définir vos propres groupes.
-help_tracker	monitor	Vous pouvez démarrer ou arrêter un suivi de cette trace en cliquant sur 'Suivi'. <br /><br /><strong>Note!</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires à cette trace, ou que vous l'avez soumise, ou si elle vous est confiée, vous aurez de toutes fa篮 des courriers pour ces motifs aussi bien.
+help_tracker	monitor	Vous pouvez démarrer ou arrêter un suivi de cette trace en cliquant sur 'Suivi'. <br /><br /><strong>Note!</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires à cette trace, ou que vous l'avez soumise, ou si elle vous est confiée, vous aurez de toutes façons des courriers pour ces motifs aussi bien.
 help_tracker	priority	L'option de priorité permet à un utilisateur une priorité (de 1 à 9) pour sa trace.<br /><br />C'est particulièrement utilie pour des bugs ou des soucis pour lesquels un utilisateur peut avoir découvert un problème critique pour le projet.
 help_tracker	resolution	Aiguillage (s'il y a lieu)
 help_tracker	sort_by	L'option 'trié par' vous permet de précider le type d'affichage.<br /><br /> Vous pouveez trier par NЬ priorité, titre, date d'ouverture, date de fermeture, auteur, responsable.  Vous pouvez aussi choisir l'ordre ascendant ou descendant.
@@ -1417,7 +1417,7 @@ project_admin_editimages	del	Suppr
 project_admin_editimages	description	Description
 project_admin_editimages	dims	Dim
 project_admin_editimages	edit	Editer
-project_admin_editimages	error_length	Erreur – la taille du fichier doit être comprise entre 20 et 256000 octets
+project_admin_editimages	error_length	Erreur : la taille du fichier doit être comprise entre 20 et 256000 octets
 project_admin_editimages	file_deleted	Fichier multimédia effacé
 project_admin_editimages	file_description_required	Description de fichier requise
 project_admin_editimages	file_uploaded	Fichier multimédia téléchargé
@@ -1728,7 +1728,7 @@ sendmessage	about_blurb	Afin de limiter le spam
 sendmessage	contact	Conatct
 sendmessage	email	Votre adresse e-mail
 sendmessage	email_only_to	Vous pouvez seulement envoyer aux adresses&nbsp
-sendmessage	error_user_not_exist	Erreur – Cet utilisateur n'existe pas
+sendmessage	error_user_not_exist	Erreur : Cet utilisateur n'existe pas
 sendmessage	error_variables	Erreur - certaines variables ne sont pas assignées.
 sendmessage	message	Message
 sendmessage	message_sent	Le message a été envoyé
@@ -1747,7 +1747,7 @@ snippet_addversion	browse_the_library	<strong>Parcourez la librairie</strong> po
 snippet_addversion	changes	Changemenents :
 snippet_addversion	error_doing_snippet_package_version_insert	ERREUR pendant l'insertion de version de paquet d'échantillon
 snippet_addversion	error_doing_snippet_version_insert	ERREUR pendant l'insertion de version d'échantillon
-snippet_addversion	error_go_back_and_fill_in_all	Erreur – Revenez en arrière et remplissez toutes les informations
+snippet_addversion	error_go_back_and_fill_in_all	Erreur : Revenez en arrière et remplissez toutes les informations
 snippet_addversion	error_snippet_doesnt_exist	ERREUR
 snippet_addversion	error_snippet_package_doesnt_exist	Erreur.
 snippet_addversion	error_url_or_form	ERREUR
@@ -1780,12 +1780,12 @@ snippet_caching	browse_by_category	Affichage par Catégorie
 snippet_caching	browse_by_language	Affichage par langage
 snippet_caching	intro	A traduire
 snippet_delete	error_mangled_url	ERREUR
-snippet_delete	error_only_creator_of_package_version_can_delete	ERREUR – Seul le créateur d'une version de paquet peut l'effacer.
-snippet_delete	error_only_the_creator	ERREUR – Seul le créateur d'une version de paquet peut lui supprimer des échantillons
+snippet_delete	error_only_creator_of_package_version_can_delete	ERREUR : Seul le créateur d'une version de paquet peut l'effacer.
+snippet_delete	error_only_the_creator	ERREUR : Seul le créateur d'une version de paquet peut lui supprimer des échantillons
 snippet_delete	item_removed_from	Item effacé du paquet
 snippet_delete	package_removed	Paquet effacé
 snippet_delete	snippet_removed	Echantillon effacé
-snippet_delete	that_snippet_doesnt_exist	ERREUR – Cet échantillon n'existe pas dans ce paquet
+snippet_delete	that_snippet_doesnt_exist	ERREUR : Cet échantillon n'existe pas dans ce paquet
 snippet_delete	title	Suppression d'échantillon
 snippet_detail	author	Auteur
 snippet_detail	changes_since_last_version	Changement depuis la dernière version
@@ -1794,7 +1794,7 @@ snippet_detail	delete	Effacer
 snippet_detail	download_a_raw_text	Téléchargez une version en texte brut du code en cliquant sur &quot;<strong>Download Version</strong>&quot;
 snippet_detail	download_version	Version téléchargée
 snippet_detail	edit_del	Edition / Effacement
-snippet_detail	error_no_version_found	Erreur – aucune version trouvée
+snippet_detail	error_no_version_found	Erreur : aucune version trouvée
 snippet_detail	error_was_the_url_mangled	Erreur.
 snippet_detail	latest_package_version	Derniére version du paquet
 snippet_detail	latest_snippet_version	Dernière version d'échantillon :
@@ -1815,8 +1815,8 @@ snippet_package	add_snippet_to_package	Ajouter des échantillons au paquet
 snippet_package	browse_the_libary	<strong>Parcourez la librairie</strong> pour trouver les échantillons que vous voulez ajouter au paquet
 snippet_package	category	Catégorie
 snippet_package	description	Description :
-snippet_package	error_doing_snippet_package_insert	Erreur – pendant l'insertion d'un paquet d'échantillons
-snippet_package	error_doing_snippet_package_version	Erreur – pendant l'insertion d'une version de paquet d'échantillons
+snippet_package	error_doing_snippet_package_insert	Erreur : pendant l'insertion d'un paquet d'échantillons
+snippet_package	error_doing_snippet_package_version	Erreur : pendant l'insertion d'une version de paquet d'échantillons
 snippet_package	error_go_back_and_fill	ERREUR
 snippet_package	if_a_new_window	Si une nouvelle fenêtre est ouverte
 snippet_package	important	IMPORTANT !
@@ -1835,7 +1835,7 @@ snippet_package	you_can_group	<p>Vous pouvez grouper plusieurs échantillons exi
 snippet_submit	category	Catégorie&nbsp; 
 snippet_submit	description	Description&nbsp;
 snippet_submit	error_doing_snippet_insert	ERREUR - en insertion d'échantillon.
-snippet_submit	error_doing_snippet_version_insert	Erreur – pendant l'insertion d'une version d'échantillons
+snippet_submit	error_doing_snippet_version_insert	Erreur : pendant l'insertion d'une version d'échantillons
 snippet_submit	error_go_back_and_fill	Erreur :
 snippet_submit	language	Langage&nbsp; 
 snippet_submit	license	Licence&nbsp; 
@@ -2007,7 +2007,7 @@ survey_admin_index	add_question	Ajouter des questions
 survey_admin_index	add_survey	Ajouter un sondage
 survey_admin_index	edir_existing_survey	Editer les sondages existants
 survey_admin_index	edit_existing_question	Editer les résultats du sondage
-survey_admin_index	its_simple_to_create	Créer un sondage est simple.<ol><li>Créez des questions en utilisant les formulaires ci-dessus.</li><li>Créez un sondage, en indiquant la liste ordonnées des questions (prises dans <strong>votre</strong> liste de questions).</li><li>L'URL du sondage est $1 o�����est le numéro du sondage.
+survey_admin_index	its_simple_to_create	Créer un sondage est simple.<ol><li>Créez des questions en utilisant les formulaires ci-dessus.</li><li>Créez un sondage, en indiquant la liste ordonnées des questions (prises dans <strong>votre</strong> liste de questions).</li><li>L'URL du sondage est $1 o?est le numéro du sondage.
 survey_admin_index	permission_denied	Permission refusée
 survey_admin_index	show_results	Voir les résultats du sondage
 survey_admin_index	title	Administration de sondages
@@ -2189,8 +2189,8 @@ tracker	followups	Passage de témoin
 tracker	group	Groupe&nbsp;
 tracker	group_any	Tous
 tracker	id	numéro
-tracker	insert_email	Si vous <strong>ne parvenez pas</strong> à vous conneceter, alors entrez votre e-mail ici :
-tracker	item_created	Eélement créé avec succès.
+tracker	insert_email	Si vous <strong>ne parvenez pas</strong> à vous connecter, alors entrez votre e-mail ici :
+tracker	item_created	Élément créé avec succès.
 tracker	item_group	Groupe
 tracker	no_trackers	Aucun traceur trouvé
 tracker	no_trackers_text	Aucun traceur n'a été défini, ou alors vous ne pouvez pas les voir.</p><p><FONT COLOR=RED>L'administrateur de ce projet devra préciser les types de données en utilisant la page d'administration $1 admin page $2</FONT></strong></s>
@@ -2286,7 +2286,7 @@ tracker_admin_update_type	email_all_changes	Envoyer un courrier pour tous les ch
 tracker_admin_update_type	name	<strong> Nom&nbsp;:</strong> (exemples&nbsp;: comptes-rendus de réunions, résultats de tests... )
 tracker_admin_update_type	pending_timeout	Attente maximale en jours avant de supprimer la trace (persistance)
 tracker_admin_update_type	publicy_available	Usage public
-tracker_admin_update_type	send_submissions	Envoyer un email pour une nouvelle soumission à l'adresse&nbsp;
+tracker_admin_update_type	send_submissions	Envoyer un e-mail pour une nouvelle soumission à l'adresse&nbsp;
 tracker_admin_update_type	submit_item_form_text	Texte pour la page 'Nouveau'&nbsp; 
 tracker_admin_update_type	title	Mise à jour de $1
 tracker_admin_update_users	title	Édition des permissions des utilisateurs

@@ -1,3 +1,8 @@
+2003-09-09  Roland Mas  <mas@echo.fr>
+
+	* www/include/languages/French.tab: A few encoding fixes and
+	spelling errors.
+
 2003-09-05 Tom Copeland  <tom@infoether.com>
 
 	* common/include/Group.class:
