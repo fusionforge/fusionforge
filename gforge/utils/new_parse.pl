@@ -190,8 +190,11 @@ sub add_user {
 	
 	# Now lets create the homedir and copy the contents of /etc/skel into it.
 	mkdir $home_dir, 0751;
-	
         chown $uid, $uid, $home_dir;
+	
+	mkdir $home_dir.'/incoming', 0771;
+	system("chown www-data:$uid $home_dir/incoming");
+	chmod 0771, $home_dir.'/incoming';
 }
 
 #############################
