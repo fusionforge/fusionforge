@@ -64,7 +64,7 @@ install -m 664 etc/plugins/%{plugin}/cvsweb.conf $PLUGIN_CONF_DIR/
 
 # installing installation specific language files
 mkdir -p $PLUGIN_CONF_DIR/languages
-if [ ls rpm-specific/languages/*.tab &> /dev/null ]; then
+if ls rpm-specific/languages/*.tab &> /dev/null; then
 	cp rpm-specific/languages/*.tab $PLUGIN_CONF_DIR/languages/
 fi
 

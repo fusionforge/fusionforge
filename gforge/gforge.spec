@@ -130,7 +130,7 @@ mkdir -p $GFORGE_CONF_DIR
 install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
 install -m 750 rpm-specific/scripts/refresh.sh $GFORGE_CONF_DIR/
 mkdir -p $GFORGE_CONF_DIR/languages-local
-if [ ls rpm-specific/languages/*.tab &> /dev/null ]; then
+if ls rpm-specific/languages/*.tab &> /dev/null; then
 	cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
 fi
 cp -rp rpm-specific/custom $GFORGE_CONF_DIR
