@@ -80,6 +80,11 @@ php_flag file_uploads on
   ForceType application/x-httpd-php
 </Location>
 
+If you are using Apache 2, you should also add:
+
+AcceptPathInfo on
+
+
 PHP setup
 ---------
 
