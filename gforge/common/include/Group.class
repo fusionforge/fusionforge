@@ -1281,10 +1281,10 @@ class Group extends Error {
 				return false;
 			}
 		}
-		
-		$res=db_query("SELECT * FROM user_group ".
-			"WHERE group_id='".$this->getID()."' AND user_id='$user_id' AND admin_flags = 'A'");
-		if (db_numrows($res) > 0) {
+	
+		$res=db_query("SELECT count(*) FROM user_group WHERE group_id='".$this->getID()."' AND user_id='$user_id' AND admin_flags = 'A'");
+		$row_count = db_fetch_array($res);
+		if ($row_count['count'] > 0) {
 			$this->setError('Cannot remove admin');
 			return false;
 		}
