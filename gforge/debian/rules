@@ -174,6 +174,7 @@ install: build
 	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
 	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/gforge-cvs/bin/cvssh 
 	install -m 755 cgi-bin/cvsweb.cgi $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cgi-bin/cvsweb.cgi
+	install -m 755 cgi-bin/cvsweb.cgi $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/cvsweb.cgi
 	install -m 644 etc/cvsweb.conf $(CURDIR)/debian/gforge-cvs/etc/gforge/
 	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
 	install -m 755 deb-specific/cvs_dump.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
