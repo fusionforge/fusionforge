@@ -307,12 +307,12 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 				<input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
 				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>">
 				<input type="hidden" name="step3" value="1">
-				<tr bgcolor="<?php echo html_get_alt_row_color($x); ?>">
+				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
 					<td nowrap><font size="-1"><?php echo db_result($res,$x,'filename'); ?></td>
 					<td><font size="-1"><?php echo frs_show_processor_popup ('processor_id', db_result($res,$x,'processor_id')); ?></td>
 					<td><font size="-1"><?php echo frs_show_filetype_popup ('type_id', db_result($res,$x,'type_id')); ?></td>
 				</tr>
-				<tr bgcolor="<?php echo html_get_alt_row_color($x); ?>">
+				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
 					<td>
 						<font size="-1">
 							<?php echo frs_show_release_popup ($group_id, $name='new_release_id',db_result($res,$x,'release_id')); ?>
@@ -333,7 +333,7 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 				<input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
 				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>">
 				<input type="hidden" name="step3" value="Delete File">
-				<tr bgcolor="<?php echo html_get_alt_row_color($x); ?>">
+				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
 					<td><font size="-1">&nbsp;</td>
 					<td><font size="-1">&nbsp;</td>
 					<td>

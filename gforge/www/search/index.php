@@ -203,7 +203,7 @@ if ($type_of_search == "soft") {
 				$what = 'projects';
 			}
 			
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/$what/"
+			print	"<TR ". $HTML->boxGetAltRowStyle($i)."><TD><A HREF=\"/$what/"
 				. db_result($result, $i, 'unix_group_name')."/\">"
 				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) 
 				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
@@ -254,7 +254,7 @@ if ($type_of_search == "soft") {
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
+			print	"<TR ". $HTML->boxGetAltRowStyle($i) ."><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
 				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
 				. "<TD>".db_result($result,$i,'realname')."</TD></TR>\n";
 		}
@@ -300,7 +300,7 @@ if ($type_of_search == "soft") {
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/forum/message.php?msg_id="
+			print	"<TR ". $HTML->boxGetAltRowStyle($i) ."><TD><A HREF=\"/forum/message.php?msg_id="
 				. db_result($result, $i, "msg_id")."\">"
 				. html_image("ic/msg.png","10","12",array("BORDER"=>"0"))
 				. db_result($result, $i, "subject")."</A></TD>"
@@ -367,7 +367,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"\n<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\">
+			print	"\n<TR ". $HTML->boxGetAltRowStyle($i) .">
 				<td>".db_result($result, $i, "artifact_id")."</td>
 				<TD><A HREF=\"/tracker/?group_id=$group_id&atid="
 				. db_result($result, $i, "group_artifact_id") 
@@ -439,7 +439,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 		   $finishY = substr($finish, 0, 4);
 		   $finishM = substr($finish, 4, 2);
 				
-		   echo '<TR BGCOLOR="'.html_get_alt_row_color($i+1).'">';
+		   echo '<TR '.$HTML->boxGetAltRowStyle($i+1).'>';
 		   echo '<TD><A HREF="/users/'.db_result($result, $i, 'user_name').'/">'.
 				  db_result($result, $i, 'realname').'</a></TD>';
 		   echo '<TD>'.db_result($result, $i, 'type_name').'</TD>';

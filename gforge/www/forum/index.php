@@ -58,7 +58,7 @@ if ($group_id) {
 		if ($farr[$j]->isError()) {
 			echo $farr->getErrorMessage();
 		} else {
-			echo '<TR BGCOLOR="'.html_get_alt_row_color($j).'"><TD><A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
+			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '><TD><A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
 				html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
 				'&nbsp;' .
 				$farr[$j]->getName() .'</A><BR>'.$farr[$j]->getDescription().'</TD>

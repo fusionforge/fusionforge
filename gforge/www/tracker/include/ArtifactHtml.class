@@ -41,7 +41,7 @@ class ArtifactHtml extends Artifact {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><PRE>
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><PRE>
 Date: '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
 Sender: '. db_result($result,$i,'user_name') . '
 '. util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</PRE></TD></TR>';
@@ -75,7 +75,7 @@ Sender: '. db_result($result,$i,'user_name') . '
 			for ($i=0; $i < $rows; $i++) {
 				$field=db_result($result, $i, 'field_name');
 				echo '
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.$field.'</TD><TD>';
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.$field.'</TD><TD>';
 
 				if ($field == 'status_id') {
 

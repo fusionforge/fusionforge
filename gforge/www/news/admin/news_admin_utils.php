@@ -22,9 +22,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	// factored out because called 3 time below
        	function show_news_item($result,$i,$approved,$selectable) {
 
-	        global $PHP_SELF;
+	        global $PHP_SELF,$HTML;
 
-       		echo '<tr bgcolor="'.html_get_alt_row_color($i).'"><td>';
+		echo '<TR '. $HTML->boxGetAltRowStyle($i) . '><td>';
        		if ($selectable) {
        			echo '<input type="checkbox" '
        			     .'name="news_id[]" value="'

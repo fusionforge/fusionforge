@@ -43,7 +43,7 @@ $res=db_query($sql);
 $non_english=0;
 $i=0;
 while ($lang_stat = db_fetch_array($res)) {
-	echo '<tr bgcolor="'.html_get_alt_row_color($i++).'"><td>'.$lang_stat['lang'].'</td>'.
+	echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'><td>'.$lang_stat['lang'].'</td>'.
         '<td align="right">'.$lang_stat['cnt'].' </td>'.
         '<td align="right">'.sprintf("%.2f",$lang_stat['cnt']*100/$total)." </td></tr>\n";
         if ($lang_stat['lang']!='English') $non_english+=$lang_stat['cnt'];

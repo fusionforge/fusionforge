@@ -10,6 +10,7 @@
  */
 
 function displayUserSkills($user_id, $allowEdit) {
+	GLOBAL $HTML;
 	$sql = "SELECT * FROM skills_data_types ORDER BY type_id ASC";
 	$result=db_query($sql);
 	$rows = db_numrows($result);
@@ -66,7 +67,7 @@ function displayUserSkills($user_id, $allowEdit) {
 			}
 			
 			/* now print out the row, formatted nicely */
-			echo '<TR BGCOLOR="'. html_get_alt_row_color($i+1) .'">';
+			echo '<TR '. $HTML->boxGetAltRowStyle($i+1) . '>';
 			if($allowEdit) {
 				echo '<TD><INPUT TYPE="CHECKBOX" NAME="skill_edit[]" VALUE="'.db_result($result, $i, 'skills_data_id').'"></TD>';
 				echo '<TD><INPUT TYPE="CHECKBOX" NAME="skill_delete[]" VALUE="'.db_result($result, $i, 'skills_data_id').'"></TD>';
@@ -96,7 +97,6 @@ function displayUserSkills($user_id, $allowEdit) {
 }
 
 function handle_multi_edit($skill_ids) {
-
 	GLOBAL $HTML;
 	$numSkills = count($skill_ids);
 	$SQL = "select * from skills_data where skills_data_id in(".$skill_ids[0];
@@ -143,7 +143,7 @@ function handle_multi_edit($skill_ids) {
 			$finishM = substr($finish, 4, 2);
 							   
 			echo "<TABLE BORDER=0>".
-				"<TR BGCOLOR=".html_get_alt_row_color($i+1).">".
+				"<TR ".$HTML->boxGetAltRowStyle($i+1).">".
 				"<TD><H3>".db_result($result, $i,'title')."</H3></TD></TR>".
 				"<TR><TD>".
 				"<Table BORDER=0 >".
@@ -152,7 +152,7 @@ function handle_multi_edit($skill_ids) {
 						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Start Date</TD>".
 						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">End Date</TD>".
 					"</TR>";
-			echo "<TR BGCOLOR=".html_get_alt_row_color($i+1).">".
+			echo "<TR ".$HTML->boxGetAltRowStyle($i+1).">".
 						"<TD>".html_build_select_box($skills, "type[]",db_result($result, $i,'type') , false, "")."</TD>".
 						"<TD>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM[]", $startM, false, "").
 							html_build_select_box_from_arrays($yearArray,$yearArray, "startY[]", $startY, false, "")."</TD>".
@@ -162,7 +162,7 @@ function handle_multi_edit($skill_ids) {
 				"</TABLE>".
 				"</TD></TR>".
 				
-				"<TR BGCOLOR=".html_get_alt_row_color($i+1)."><TD>".
+				"<TR ".$HTML->boxGetAltRowStyle($i+1)."><TD>".
 				"<TABLE BORDER=0 >".
 					"<TR>".
 						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Title (max 100 characters)</TD>".

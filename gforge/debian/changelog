@@ -1,8 +1,10 @@
-gforge (3.0-0+5+) experimental; urgency=low
+gforge (3.0-0+6+) experimental; urgency=low
 
   * [Christian] Added db upgrade 20021125-debian.sql
+  * [Christian] See upstream Changelog
+  * [Christian] Replacing html_get_alt_row_color with boxGetAltRowStyle
 
- -- Christian Bayle <bayle@debian.org>  Wed, 11 Dec 2002 02:42:49 +0100
+ -- Christian Bayle <bayle@debian.org>  Fri, 13 Dec 2002 01:37:30 +0100
 
 gforge (3.0-0+5) experimental; urgency=low
 

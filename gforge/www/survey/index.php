@@ -35,7 +35,7 @@ Function  ShowResultsGroupSurveys($result) {
 
 	for($j=0; $j<$rows; $j++)  {
 
-		echo "<tr BGCOLOR=\"". html_get_alt_row_color($j) ."\">\n";
+		echo "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($j) .">\n";
 
 		echo "<TD><A HREF=\"survey.php?group_id=$group_id&survey_id=".db_result($result,$j,"survey_id")."\">".
 			db_result($result,$j,"survey_id")."</TD>";

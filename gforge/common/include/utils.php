@@ -563,7 +563,7 @@ Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 
 		/*  Create the rows  */
 		for ($j = 0; $j < $rows; $j++) {
-			echo '<TR BGCOLOR="'. html_get_alt_row_color($j) .'">';
+			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '>';
 			for ($i = 0; $i < $cols; $i++) {
 				if ($linkify && $i == 0) {
 					$link = '<A HREF="'.$PHP_SELF.'?';

@@ -259,7 +259,7 @@ if ($group_id && $atid) {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<TD>'.db_result($result, $i, 'id').'</TD>'.
 					'<TD><A HREF="'.$PHP_SELF.'?update_cat=1&id='.
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
@@ -309,7 +309,7 @@ if ($group_id && $atid) {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<TD>'.db_result($result, $i, 'id').'</TD>'.
 					'<TD><A HREF="'.$PHP_SELF.'?update_group=1&id='.
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
@@ -363,7 +363,7 @@ if ($group_id && $atid) {
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<TD>'.db_result($result, $i, 'id').'</TD>'.
 					'<TD><A HREF="'.$PHP_SELF.'?update_canned=1&id='.
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
@@ -437,7 +437,7 @@ if ($group_id && $atid) {
 			while ($row_dev = db_fetch_array($res)) {
 				print '
 				<INPUT TYPE="HIDDEN" NAME="updateids['.$i.'][0]" VALUE="'.$row_dev['user_id'].'">
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD><INPUT TYPE="CHECKBOX" NAME="deleteids[]" VALUE="'.$row_dev['user_id'].'"> Delete</TD>
 
 				<TD>'.$row_dev['realname'].' ( '. $row_dev['user_name'] .' )</TD>

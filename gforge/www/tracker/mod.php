@@ -196,7 +196,7 @@ if (session_loggedin()) {
 		if ($count > 0) {
 
 			for ($i=0; $i<$count; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><INPUT TYPE="CHECKBOX" NAME="delete_file[]" VALUE="'. $file_list[$i]->getID() .'"> Delete</TD>'.
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><INPUT TYPE="CHECKBOX" NAME="delete_file[]" VALUE="'. $file_list[$i]->getID() .'"> Delete</TD>'.
 				'<TD>'. $file_list[$i]->getName() .'</TD>
 				<TD>'.  $file_list[$i]->getDescription() .'</TD>
 				<TD><A HREF="/tracker/download.php?group_id='.$group_id.'&atid='. $ath->getID() .'&file_id='.$file_list[$i]->getID().'&aid='. $ah->getID() .'">Download</A></TD></TR>';
