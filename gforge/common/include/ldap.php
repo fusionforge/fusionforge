@@ -365,14 +365,15 @@ function sf_ldap_create_user_from_object(&$user) {
 	$entry['objectClass'][1]='account';
 	$entry['objectClass'][2]='posixAccount';
 	$entry['objectClass'][3]='shadowAccount';
-	$entry['objectClass'][4]='x-sourceforgeAccount';
+	$entry['objectClass'][4]='debSfAccount';
 	$entry['uid']=$user->getUnixName();
 	$entry['cn']=asciize($user->getRealName());
 	$entry['gecos']=asciize($user->getRealName());
 	$entry['userPassword']='{crypt}'.$user->getUnixPasswd();
 	$entry['homeDirectory'] = account_user_homedir($user->getUnixName());
 	$entry['loginShell']=$user->getShell();
-	$entry['x-cvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
+	$entry['debSfCvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
+	$entry['debSfForwardEmail']=$user->getEmail();
 	$entry['uidNumber']=$user->getUnixUID() + $UID_ADD;
 	$entry['gidNumber']=100; // users
 	$entry['shadowLastChange']=1; // We don't have expiration, so any non-0
@@ -397,7 +398,7 @@ function sf_ldap_create_user_from_object(&$user) {
  *
  */
 function sf_ldap_create_user_from_props($username, $cn, $crypt_pw,
-					$shell, $cvsshell, $uid, $gid) {
+					$shell, $cvsshell, $uid, $gid, $email) {
 	global $sys_ldap_base_dn;
 
 	global $sys_use_ldap;
@@ -413,14 +414,15 @@ function sf_ldap_create_user_from_props($username, $cn, $crypt_pw,
 	$entry['objectClass'][1]='account';
 	$entry['objectClass'][2]='posixAccount';
 	$entry['objectClass'][3]='shadowAccount';
-	$entry['objectClass'][4]='x-sourceforgeAccount';
+	$entry['objectClass'][4]='debSfAccount';
 	$entry['uid']=$username;
 	$entry['cn']=asciize($cn);
 	$entry['gecos']=asciize($cn);
 	$entry['userPassword']='{crypt}'.$crypt_pw;
 	$entry['homeDirectory'] = account_user_homedir($username);
 	$entry['loginShell']=$shell;
-	$entry['x-cvsShell']=$cvsshell; 
+	$entry['debSfCvsShell']=$cvsshell; 
+	$entry['debSfForwardEmail']=$email();
 	$entry['uidNumber']=$uid;
 	$entry['gidNumber']=$gid;
 	$entry['shadowLastChange']=1;
@@ -603,7 +605,7 @@ function sf_ldap_create_group($group_id) {
 						'anoncvs', 'x',
 						'/bin/false', '/bin/false',
 						$group_id+$GID_ADD+$ANONCVS_UID_ADD,
-						$group_id+$GID_ADD)) {
+						$group_id+$GID_ADD, "/dev/null")) {
 		sf_ldap_set_error_msg("ERROR: cannot add LDAP AnonCVS user entry '"
 			 .$group->getUnixName()."': ".sf_ldap_error()."<br>");
 		$ret_val=false;

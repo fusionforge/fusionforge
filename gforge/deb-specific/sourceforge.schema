@@ -1,6 +1,7 @@
-#Thanks to Olafur Osvaldson on Offsite talk
-#Sourceforge Project's directory schema items 
-# by Olafur Osvaldsson (osvaldsson@users.sourceforge.net) 
+# Sourceforge Project's directory schema items
+# initially by Olafur Osvaldsson (osvaldsson@users.sourceforge.net) 
+# Modified by Roland Mas <lolando@debian.org>
+# for the Debian-SF project (packaging Sourceforge for Debian)
 # 
 # depends upon: 
 # core.schema 
@@ -8,35 +9,46 @@
 # inetorgperson.schema 
 # nis.schema 
 # 
-attributetype ( 1.1.2.2.2 NAME 'x-cvsShell' 
+# Assigned numbers:
+# 1.3.6.1.4.1.9586 is the Enterprise number assigned to Debian
+# 1.3.6.1.4.1.9586.1.1: assigned to the Debian-SF project
+# 1.3.6.1.4.1.9586.1.1.1: stable series
+# 1.3.6.1.4.1.9586.1.1.1.1: stable series for attribute types
+# 1.3.6.1.4.1.9586.1.1.1.2: stable series for object classes
+# 1.3.6.1.4.1.9586.1.1.2: experimental series
+# 1.3.6.1.4.1.9586.1.1.2.1: experimental series for attribute types
+# 1.3.6.1.4.1.9586.1.1.2.2: experimental series for object classes
+
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.1 NAME 'debSfCvsShell' 
 	DESC 'The path to the CVS login shell' 
 	EQUALITY caseExactIA5Match 
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
 
-attributetype ( 1.1.2.2.3 NAME 'x-forward-email' 
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.2 NAME 'debSfForwardEmail' 
 	DESC 'The address to which email is forwarded' 
 	EQUALITY caseIgnoreIA5Match 
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
 
-attributetype ( 1.1.2.2.4 NAME 'listPostAddress' 
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.3 NAME 'debSfListPostAddress' 
 	DESC 'The address of the mailing-list'
 	EQUALITY caseIgnoreIA5Match 
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
 
-attributetype ( 1.1.2.2.5 NAME 'listOwnerAddress' 
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.4 NAME 'debSfListOwnerAddress' 
 	DESC 'The address of the list owner' 
 	EQUALITY caseIgnoreIA5Match 
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
 
-attributetype ( 1.1.2.2.6 NAME 'listRequestAddress' 
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.5 NAME 'debSfListRequestAddress' 
 	DESC 'The address to which email is forwarded' 
 	EQUALITY caseIgnoreIA5Match 
-	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
 
-objectclass ( 1.1.2.2.1 NAME 'x-sourceforgeAccount' SUP top AUXILIARY
+objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.1 NAME 'debSfAccount' SUP top AUXILIARY
 	DESC 'Abstraction of a Sourceforge account' 
-	MAY ( x-cvsShell $ x-forward-email ) )
+	MAY ( debSfCvsShell $ debSfForwardEmail ) )
 
-objectclass ( 1.1.2.2.4 NAME 'x-sourceforgeMailingList' SUP top AUXILIARY
+objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.2 NAME 'debSfMailingList' SUP top AUXILIARY
 	DESC 'Abstraction of a Sourceforge Mailing List' 
-	MAY ( listPostAddress $ listOwnerAddress $ listRequestAddress ) )
+	MAY ( debSfListPostAddress $ debSfListOwnerAddress $ debSfListRequestAddress ) )

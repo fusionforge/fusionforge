@@ -1175,13 +1175,13 @@ class Group extends Error {
 		//	else - restricted.
 		//
 		if ($cvs_flags>1) {
-			if (!sf_ldap_user_set_attribute($user_id,"x-cvsShell","/bin/bash")) {
+			if (!sf_ldap_user_set_attribute($user_id,"debSfCvsShell","/bin/bash")) {
 				$this->setError(sf_ldap_get_error_msg());
 				db_rollback();
 				return false;
 			}
 		} else {
-			if (!sf_ldap_user_set_attribute($user_id,"x-cvsShell","/bin/cvssh")) {
+			if (!sf_ldap_user_set_attribute($user_id,"debSfCvsShell","/bin/cvssh")) {
 				$this->setError(sf_ldap_get_error_msg());
 				db_rollback();
 				return false;
