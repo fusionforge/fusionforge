@@ -485,6 +485,22 @@ class Korean extends BaseLanguage {
 최대한 빠른 시간 안에 분류해 주시기 바랍니다.';
 	$this->REGISTER_step6_finish='등록 완료';
 
+	$this->SNIPPETFRONT='
+<P>
+이 아카이브는 여러분이 자주 사용하는 코드나 스크립트, 함수 등을
+다른 사람들과 공유하기 위한 것입니다.
+<P>
+여러분은 "new snippet" 을 언제라도 생성할 수 있고 해당 snippet에
+대한 버전업도 빠르고 쉽게 수행하실 수 있습니다.
+<P>
+snippet을 올리신 후 해당 snippet에 대한 패키지를 생성하실 수도
+있습니다. 패키지는 여러 개의 snippet을 포함할 수 있습니다.
+<P>
+<H3>Snippet 둘러보기</H3>
+<P>
+snippet들을 살펴 보십시오.
+<BR>';
+
 	}
 }
 

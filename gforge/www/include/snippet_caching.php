@@ -7,24 +7,11 @@
 // $Id$
 
 function snippet_mainpage() {
-	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY;
+	global $SCRIPT_LANGUAGE,$SCRIPT_CATEGORY,$Language;
 
 	$return .= 
 	'<FONT face="arial, helvetica">
-	<P>
-	The purpose of this archive is to let you share your code snippets, scripts, 
-	and functions with the Open Source Software Community.
-	<P>
-	You can create a "new snippet", then post additional versions of that 
-	snippet quickly and easily.
-	<P>
-	Once you have snippets posted, you can then create a "Package" of snippets. 
-	That package can contain multiple, specific versions of other snippets.
-	<P>
-	<H3>Browse Snippets</H3>
-	<P>
-	You can browse the snippet library quickly:
-	<BR>
+	'.$Language->SNIPPETFRONT.'
 	<P>
 	<TABLE WIDTH="100%" BORDER="0">
 	<TR><TD>
