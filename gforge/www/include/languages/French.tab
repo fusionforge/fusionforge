@@ -28,7 +28,7 @@ account	title	Préférences de votre compte
 account	updated	Mis à jour
 account_change_email	desc	<p>Modifier votre adresse e-mail nécessite une confirmation de votre nouvelle adresse, afin que nous puissions vérifier que nous enregistrons une adresse valide. </p><p>Nous avons besoin d'une adresse valide pour chaque utilisateur en raison du niveau d'accès accordé via ce compte. Si nous avons besoin de joindre un utilisateur à cause de problèmes en provenance d'un compte shell ou projet, il est important que nous puissions le faire.</p><p>Valider le formulaire déclenchera l'envoi d'une URL de confirmation à votre nouvelle adresse e-mail. Cliquer sur ce lien finalisera la modification d'adresse.</p> 
 account_change_email	invalid_email	Adresse e-mail invalide
-account_change_email	mailsent	<p>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez en les instructions pour compléter la modification d'adresse. </p><a href="/">[ Accueil ]</a> 
+account_change_email	mailsent	<p>Un courrier électronique a été envoyé à votre nouvelle adresse. Suivez en les instructions pour compléter la modification d'adresse. </p><a href="/">[ Accueil ]</a> 
 account_change_email	message	Vous avez demandé une modification d'adresse e-mail pour votre compte sur $1.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n-- L'équipe de  $1
 account_change_email	new_address	Nouvelle adresse e-mail :
 account_change_email	section	Préférences de votre compte
@@ -45,7 +45,7 @@ account_change_pw	not_valid_password	Vous devez donner un mot de passe valide (6
 account_change_pw	old_password	Ancien mot de passe
 account_change_pw	old_password_incorrect	Ancien mot de passe incorrect
 account_change_pw	passwords_dont_match	Les nouveaux mots de passe ne concordent pas.
-account_change_pw	section	Mes Préférences
+account_change_pw	section	Mes préférences
 account_change_pw	title	Changement de mot de passe
 account_change_pw	update	Mise à jour du mot de passe
 account_change_pw_changed	return_to	Vous devriez maintenant $1 Retourner aux préférences utilisateur $2.
@@ -61,7 +61,7 @@ account_login	login	Connexion avec SSL
 account_login	loginname	Nom du compte :
 account_login	lostpw	[Perdu votre mot de passe ?]
 account_login	macwarn	<h2><font color="red">Internet Explorer sur Macintosh n'est pas supporté pour le moment. Utilisez Netscape 4.7 ou supérieur.</font></h2>
-account_login	newaccount	[Nouveau Compte]
+account_login	newaccount	[Nouveau compte]
 account_login	passwd	Mot de passe :
 account_login	pending_account	<p>Votre compte est en attente de confirmation. Visiter le lien qui vous a été envoyé par e-mail activera votre compte.</p><p>Si vous avez besoin qu'on vous envoie à nouveau ce courrier, merci de cliquer ci-dessous : un e-mail de confirmation sera envoyé à l'adresse que vous avez fourni lors de votre enregistrement.</p><p><a href="pending-resend.php?form_user=$1">[Envoyer à nouveau l'e-mail de confirmation]</a></p><hr />
 account_login	resend_pending	[Renvoyer l'email de confirmation à un compte en attente]
@@ -1725,7 +1725,7 @@ scm_index	anoncvsup	Les mises à jour (update) quand on se trouve à l'intérieu
 scm_index	browseit	Parcourir le dépôt CVS
 scm_index	browsetree	<HR><B>Parcourir l'arbre CVS</B> <P>Parcourir l'arbre CVS vous donne un vue d'ensemble sur l'état du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt
 scm_index	cvs_repository	dépôt CVS
-scm_index	devcvs	<P><B>Accès CVS pour développeur via SSH</B> <P>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <I>module</I> et <I>développeuer</I> par les valeurs appropriées. Fournissez votre mot de passe pour le site lorsqu'on vous le demande.
+scm_index	devcvs	<P><B>Accès CVS pour développeur via SSH</B> <P>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <I>module</I> et <I>développeur</I> par les valeurs appropriées. Fournissez votre mot de passe pour le site lorsqu'on vous le demande.
 scm_index	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 scm_index	developername	développeur
 scm_index	error_only_projects_can_use_cvs	ERREUR
@@ -1869,9 +1869,9 @@ snippet_submit	suggest_a_language	Suggérer un nouveau langage
 snippet_submit	type	Type de script&nbsp; 
 snippet_submit	version	Version&nbsp; 
 snippet_submit	you_can_post	Vous pouvez envoyer un nouvel échantillon de code et le partager avec le reste du monde. Renseignez juste ce formulaire. <strong>Donnez une bonne description</strong> et <strong>commentez votre code</strong> ainsi, les autres pourront le lire et le comprendre.</p><p><span style="color:red"><strong>Note :</strong></span> Vous pouvez publier une nouvelle version d'échantillon existant en parcourant la bibliothèque. Vous ne devriez utiliser cette page que si vous soumettez  un script ou une fonction entièrement original.
-snippet_utils	auctions	enchères
+snippet_utils	auctions	Enchères
 snippet_utils	author	Auteur
-snippet_utils	bbs_systems	sytèmes BBS
+snippet_utils	bbs_systems	Systèmes BBS
 snippet_utils	browse	Naviguer
 snippet_utils	calendars	Calendriers
 snippet_utils	category	Catégorie :
@@ -1885,7 +1885,7 @@ snippet_utils	file_management	Gestion de fichiers
 snippet_utils	full_script	Scripts complets
 snippet_utils	function	Fonctions
 snippet_utils	games	Jeux
-snippet_utils	html_manipulation	manipulation HTML
+snippet_utils	html_manipulation	Manipulation HTML
 snippet_utils	language	Langue :
 snippet_utils	license	Licence :
 snippet_utils	math_functions	Fonctions mathématiques
@@ -2444,7 +2444,7 @@ user_home	title	Profil de développeur
 user_home	user_id	Identifiant d'utilisateur
 users	no_user_name	Pas de nom d'utilisateur
 users	optout	Vous avez quitté le système d'évaluation par les pairs. Vous pouviez évaluer l'utilisateur. Voir <a href="/account/">la page de gestion de votre compte</a> pour de plus amples informations.
-users	peerinfo1	Si vous connaissez cet utilisateur, prenez le temps de l'évaluer selon les critères suivants. Gardez à l'esprit que votre évaluation sera visible de l'utilisateur et des autres.  <P> Le système d'évaluation mutuelle de $1 est basé is sur les concepts de <A HREF="http://www.advogato.com">Advogato.</A> Ce système a été réimplémenté et étendu.
+users	peerinfo1	Si vous connaissez cet utilisateur, prenez le temps de l'évaluer selon les critères suivants. Gardez à l'esprit que votre évaluation sera visible de l'utilisateur et des autres.  <P> Le système d'évaluation mutuelle de $1 est basé sur les concepts de <A HREF="http://www.advogato.com">Advogato.</A> Ce système a été réimplémenté et étendu.
 users	peerinfo2	L'évaluation par les pairs vous montre tous les évaluations moyennes (et les taux de réponse) pour chaque critère. En raison des traitements mathématiques induits, ces nombres tiennent compte des réponses des utilisateurs authentifiés ou non.  <ul> <li> Le champ 'Niveau dans le site" montre le rang de l'utilisateur comparé à tous les utilisateurs de $1.  <li>Le champ 'Score agrégé' montre une moyenne pondérée de tous les scores, reposant sur les réponses authentifiées seulement.  <li>Le champ 'Importance' montre les bons scores donnés par d'autres développeurs (entre 1 and 1.5). Les réponses des utilisateurs de haut rang ont plus de poids.  </ul> <p> <i> Si vous voulez sortir du système dévaluation par les pairs (cela affectera votre capacité à noter et être noté), voir la <a href="/account/">page de gestion de votre compte</a>. Si vous choisissez de cesser votre participation, votre évaluation des autres sera détruite définitivement et vous n'aurez plus d'affichage de cela sur votre page d'accueil. </i></p></s>
 users	title	Résumé d'un utilisateur
 users	user_not_exist_text	Utilisateur invalide
