@@ -229,19 +229,11 @@ class Artifact extends Error {
 
 		$sql="INSERT INTO artifact 
 			(group_artifact_id,status_id,priority,
-
-			resolution_id,artifact_group_id,category_id,
-
 			submitted_by,assigned_to,open_date,summary,details) 
 			VALUES 
 			('".$this->ArtifactType->getID()."','$status_id','$priority',
-
-			'100','100','100',
-
 			'$user','$assigned_to','". time() ."','". htmlspecialchars($summary)."','". htmlspecialchars($details)."')";
 		$res=db_query($sql);
-echo $sql;
-echo db_error();
 
 		$artifact_id=db_insertid($res,'artifact','artifact_id');
 
@@ -870,9 +862,6 @@ echo db_error();
 		if ($update){
 			$sql = "UPDATE artifact 
 				SET 
-
-				resolution_id='100',category_id='100',artifact_group_id='100',
-
 				$sqlu
 				group_artifact_id='$new_artifact_type_id'
 				WHERE 
