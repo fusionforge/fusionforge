@@ -145,7 +145,7 @@ eval {
 	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
 	      chomp $md5pwd ;
 	      $email = $server_admin ;
-	      $shellbox = $domain_name ;
+	      $shellbox = "shell" ;
 	      $noreplymail="noreply\@$domain_name" ;
 	      $date = time () ;
 	      
@@ -259,6 +259,26 @@ eval {
 	      $sth->finish () ;
 
 	      &update_db_version ("2.5.9999.2+artifact+transcoded") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.5.9999.3+shellbox+fixed") {
+	      debug "Fixing the unix_box fields" ;
+
+	      $query = "update groups set unix_box = 'shell'" ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+	      
+	      $query = "update users set unix_box = 'shell'" ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+
+	      &update_db_version ("2.5.9999.3+shellbox+fixed") ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
