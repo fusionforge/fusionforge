@@ -173,7 +173,7 @@ fi
 %postun
 if [ "$1" -eq "0" ]; then
 	# dropping gforge database
-	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropdb %{dbname} >/dev/null 2>&1"
+	#su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropdb %{dbname} >/dev/null 2>&1"
 	
 	for file in siteadmin.pass local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
 		rm -f %{_sysconfdir}/gforge/$file
