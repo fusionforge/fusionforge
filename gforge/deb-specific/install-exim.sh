@@ -112,7 +112,8 @@ forward_for_sourceforge_lists_bounces:
   suffix = -bounces
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListBouncesAddress\"+  search_type = ldap
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListBouncesAddress\"
+  search_type = ldap
   user = nobody
   group = nogroup
 
@@ -121,7 +122,8 @@ forward_for_sourceforge_lists_confirm:
   suffix = -confirm
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListConfirmAddress\"+  search_type = ldap
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListConfirmAddress\"
+  search_type = ldap
   user = nobody
   group = nogroup
 
