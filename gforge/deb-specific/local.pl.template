@@ -1,3 +1,7 @@
+# This file is auto-generated -- Do not edit
+# Edit /etc/sourceforge/sourceforge.conf
+# and run sourceforge-config
+
 $sys_default_domain = '{domain_name}' ;
 $sys_cvs_host = '{cvs_host}' ;
 $sys_download_host = 'download.{domain_name}' ;

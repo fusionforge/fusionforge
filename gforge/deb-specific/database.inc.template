@@ -1,4 +1,8 @@
 <?
+// This file is auto-generated -- Do not edit
+// Edit /etc/sourceforge/sourceforge.conf
+// and run sourceforge-config
+
 	$sys_dbhost="{domain_name}";
 	$sys_dbname="sourceforge";
 	$sys_dbuser="sourceforge";

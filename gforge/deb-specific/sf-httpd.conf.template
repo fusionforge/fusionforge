@@ -1,3 +1,7 @@
+# This file is auto-generated -- Do not edit
+# Edit /etc/sourceforge/sourceforge.conf
+# and run sourceforge-config
+
 <Directory /usr/lib/sourceforge/www>
   Options Indexes FollowSymlinks
   AllowOverride All
