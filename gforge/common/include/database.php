@@ -33,6 +33,34 @@
  */
 $sys_db_row_pointer=array(); //current row for each result set
 
+/**
+ * pg_connectstring() - builds a postgres connection string.
+ * Combines the supplied arguments into a valid, specific, postgresql
+ * connection string. It only includes the host and port options
+ * if specified. Without those options, it will use the unix domain
+ * sockets to connect to the postgres server on the local machine.
+ *
+ * @author	Graham Batty graham@sandworm.ca
+ * @param	dbname		The database to connect to. Required.
+ * @param	user		The username used to connect. Required
+ * @param	password	The password used to connect
+ * @param	host		The hostname to connect to, if not localhost
+ * @param	port		The port to connect to, if not 5432
+ * @return	string		The connection string to pass to pg_connect()
+ * @date	2003-02-12
+ */
+function pg_connectstring($dbname, $user, $password = "", $host = "", $port = "") {
+	$string = "dbname=$dbname user=$user";
+	if ($password != "")
+		$string .= " password=$password";
+	if ($host != "") {
+		$string .= " host=$host";
+		if ($port != "")
+			$string .= " port=$port";
+	}
+	return $string;
+}
+
 
 /**
  *  db_connect() - Connect to the database
@@ -43,21 +71,17 @@ $sys_db_row_pointer=array(); //current row for each result set
 function db_connect() {
 	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$conn,
 		$sys_dbname,$sys_db_use_replication,$sys_dbport,$sys_dbreaddb,$sys_dbreadhost;
-	$db_port=$sys_dbport;
-	if ($db_port==""){
-		$db_port="5432";
-	}
 
 	//
 	//	Connect to primary database
 	//
-	$conn = @pg_pconnect("user=$sys_dbuser port=$db_port dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
+	$conn = @pg_pconnect(pg_connectstring($sys_dbname, $sys_dbuser, $sys_dbpasswd, $sys_dbhost, $sys_dbport));
 
 	//
 	//	If any replication is configured, connect
 	//
 	if ($sys_db_use_replication) {
-		$conn2 = @pg_pconnect("user=$sys_dbuser dbname=$sys_dbreaddb host=$sys_dbreadhost password=$sys_dbpasswd"); 
+		$conn2 = @pg_pconnect(pg_connectstring($sys_dbreaddb, $sys_dbuser, $sys_dbpasswd, $sys_dbreadhost, $sys_dbreadport));
 	} else {
 		$conn2 = $conn;
 	}

@@ -30,7 +30,7 @@
 $sys_default_domain = 'gforge.company.com';
 $sys_fallback_domain = 'gforge2.company.com';
 $sys_internal_network = '192.168.1.';
- 
+
 // Machine that hosts CVS
 $sys_cvs_host = 'cvs.company.com';
 
@@ -38,10 +38,10 @@ $sys_cvs_host = 'cvs.company.com';
 // Set to 1 to use cvs.domain.com:/cvsroot/project for all projects
 // Set to 0 to use cvs.project.domain.com:/cvsroot/project
 $sys_cvs_single_host = 1;
- 
+
 // Machine used for downloading sources/packages
 $sys_download_host = "download.company.com";
- 
+
 // Machine used for uploading sources/packages
 $sys_upload_host = "upload.company.com";
 
@@ -53,18 +53,18 @@ $sys_shell_host = "shell.company.com";
 $sys_users_host = "users.company.com";
 $homedir_prefix='/home';
 $groupdir_prefix='/home/groups';
- 
+
 // Machine that hosts docs (such as the FAQs and the various software
 // licenses (*BSD, [L]GPL, etc.).  You REALLY want this to be the same
 // machine that the SourceForge code is running on because all of the
 // PHP makes reference to these documents in terms of relative paths that
 // are part of the GForge code tree.
 $sys_docs_host = "sfdocs.company.com";
- 
+
 // Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
 $sys_lists_host = "lists.company.com";
- 
+
 // Domain Name Servers
 //    N.B.: Use terminated FQDNs here (with the final ".") so the resolver
 //    doesn't attempt to recurse in the case of a slightly broken DNS
@@ -74,6 +74,8 @@ $sys_dns2_host = "ns2.company.com";
 
 //Databases, html/php/other paths
 //server to use for updates and reads
+//If this is null (i.e. ""), then gforge will use Unix sockets to connect
+//to the database.
 $sys_dbhost="localhost";
 //whether or not to use replication
 $sys_db_use_replication=false;
@@ -87,7 +89,7 @@ $sys_dbpasswd="";
 $sys_server="pgsql";
 
 
-// 
+//
 // LDAP configurataion
 //
 // disable ldap use altogether
@@ -96,7 +98,7 @@ $sys_ldap_host="ldap.company.com";
 $sys_ldap_port=389;
 // this is dn under which all information stored
 $sys_ldap_base_dn="dc=company,dc=com";
-// and this, how we do access it (add permission required) 
+// and this, how we do access it (add permission required)
 $sys_ldap_bind_dn="cn=SF_robot,dc=company,dc=com";
 $sys_ldap_passwd="";
 // admin dn - login dn which has permissions to delete entries
@@ -134,7 +136,7 @@ $sys_upload_dir='/path/to/uploads/';
 //             you will break the html_image function in include/html.php
 //
 $sys_urlroot="/path/to/gforge/www/";
- 
+
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name="prodigy";
 
@@ -143,12 +145,12 @@ $sys_name="prodigy";
 //	IMPORTANT - YOU MUST CHANGE "foobar" to a long, random number
 //
 $sys_session_key        = "foobar";
-$sys_session_expire     = 60 * 60 * 24 * 7; 
+$sys_session_expire     = 60 * 60 * 24 * 7;
 
 // Require that user give unique (not yet existent in db) email upon
 // registration
 $sys_require_unique_email=0;
- 
+
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
 $sys_themeroot=$sys_urlroot."themes/";

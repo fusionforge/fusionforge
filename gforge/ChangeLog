@@ -1,4 +1,13 @@
+2003-02-15  Graham Batter <graham@sandworm.ca>
+
+	Patch #220
+	* common/include/database.php(pg_connectstring): new function.
+	(db_connect): use pg_connectstring().
+
 2003-02-15  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* etc/local.inc: Mention that sys_dbhost can be empty to use
+	Unix sockets (see patch #220).
 
 	* www/include/Layout.class(projectTabs): cvs --> scm_index for
 	toptab parameter.
