@@ -1812,6 +1812,50 @@ END;
         $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "4.0.0-0+3" ;
+    # This is an exception, I reapply a modified version of 20040729.sql since it was doing nothing
+    # the other call was deleted from this file
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20041104.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041104.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.0.0-0+4" ;
+    # This is an exception, I reapply a modified version of 20040729.sql since it was doing nothing
+    # the other call was deleted from this file
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20041108.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041108.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
     &debug ("It seems your database $action went well and smoothly.  That's cool.") ;
     &debug ("Please enjoy using Gforge.") ;
 
