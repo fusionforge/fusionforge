@@ -355,17 +355,19 @@ class BaseLanguage {
 	 *
 	 * @param string $path path of the cache file
 	 */
-	function writeLocalizationCache($cachePath) { 
-		$content = array();
-		$content['dependencies'] =& $this->cacheDependencies;
-		$content['pluginDependencies'] =& $this->pluginDependencies;
-		$content['text'] =& $this->textArray;
-		$fp = fopen($cachePath, 'a');
-		flock($fp, LOCK_EX);
-		ftruncate($fp, 0);
-		$content = serialize($content);
-		fwrite($fp, $content, strlen($content));
-		fclose($fp);
+	function writeLocalizationCache($cachePath) {
+		if(posix_getuid() != 0) {
+			$content = array();
+			$content['dependencies'] =& $this->cacheDependencies;
+			$content['pluginDependencies'] =& $this->pluginDependencies;
+			$content['text'] =& $this->textArray;
+			$fp = fopen($cachePath, 'a');
+			flock($fp, LOCK_EX);
+			ftruncate($fp, 0);
+			$content = serialize($content);
+			fwrite($fp, $content, strlen($content));
+			fclose($fp);
+		}
 	}
 
 	/**
