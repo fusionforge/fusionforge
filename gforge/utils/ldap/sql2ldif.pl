@@ -16,35 +16,6 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 $chroot="/var/lib/gforge/chroot";
 &db_connect;
 
-$scm_username = "gforge_scm" ;
-
-# dump_header();
-
-# if (!($#ARGV+1)) {
-# 	exit;
-# }
-
-print "dn: uid=$scm_username,ou=People,$sys_ldap_base_dn
-uid: $scm_username
-cn: Gforge SCM user
-objectClass: account
-objectClass: posixAccount
-objectClass: top
-objectClass: shadowAccount
-objectClass: debGforgeAccount
-userPassword: {crypt}x
-shadowLastChange: 10879
-shadowMax: 99999
-shadowWarning: 7
-loginShell: /bin/false
-debGforgeCvsShell: /bin/false
-uidNumber: $scm_uid
-gidNumber: $scm_uid
-homeDirectory: $chroot/svnroot
-gecos: Gforge SCM user
-
-" ;
-
 #
 #  Dump user entries (ou=People)
 #
@@ -137,8 +108,6 @@ gidNumber: $gid
 	while(my ($username) = $rel->fetchrow()) {
 		print "memberUid: $username\n";
 	}
-	print "memberUid: $scm_username\n" ;
-	print "\n";
 }
 
 #
@@ -235,8 +204,6 @@ gidNumber: $gid
 	while(my ($username) = $rel->fetchrow()) {
 		print "memberUid: $username\n";
 	}
-	print "memberUid: $scm_username\n" ;
-	print "\n";
 }
 
 #
