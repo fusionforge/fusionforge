@@ -1,0 +1,41 @@
+#!/bin/sh
+find . -name "*.gif" | while read giffile
+do
+	pngfile=`echo $giffile | sed 's/gif$/png/'`
+	if [ -f $pngfile ]
+	then
+		echo "There is already a png file for $giffile"
+		echo "Please check what to do"
+		#display $giffile $pngfile
+		exit 2
+	fi
+done 
+[ $? == 2 ] && exit 3
+find . -name "*.gif" | while read gifagain
+do
+	bname=`basename $gifagain`
+	gbname=`basename $gifagain|sed 's/\./\\\\./g'`
+	##echo "$gbname"
+	cnt=`grep -lr "$gbname" . | grep -v "/CVS/" | wc -l | xargs echo`
+	#echo ....
+	#grep -lr $bname . | grep -v "/CVS/"
+	#echo ....
+	if [ "$cnt" != "0" ]
+	then
+		echo "===== $gifagain is used as $bname in ====="
+		grep -lr $gbname . | grep -v "/CVS/"
+		echo "=========================================="
+		exit 4
+	fi
+done
+[ $? == 4 ] && exit 5
+echo "Ready to go ? Enter to go or ctrl-c to abort"
+read foo
+find . -name "*.gif" | while read giffile
+do
+	pngfile=`echo $giffile | sed 's/gif$/png/'`
+	gif2png -O $giffile
+	cvs add $pngfile
+	cvs delete -f $giffile
+done
+	

@@ -12,7 +12,8 @@ mv $DESCDIR/$1.tmp $DESCDIR/$1
 [ ! -d $DESCDIR/$1.dump ] && mkdir $DESCDIR/$1.dump
 #cat  $DESCDIR/$1 | while read tablename
 #do
-#	pg_dump --no-owner --no-reconnect -h `hostname -s` sourceforge -u -c -d -t $tablename -f $DESCDIR/$1.dump/$tablename <<-FIN
+#	# removed -c
+#	pg_dump --no-owner --no-reconnect -h `hostname -s` sourceforge -u -d -t $tablename -f $DESCDIR/$1.dump/$tablename <<-FIN
 #sourceforge
 #$DBPASS
 #FIN
