@@ -30,7 +30,7 @@ fi
 
 remove_gforge_insert(){
 			cp -a $1 $1.gforge-new
-			echo "Removing Gforge inserted lines"
+			echo "Removing Gforge inserted lines from $1.gforge-new"
 			vi -e $1.gforge-new > /dev/null 2>&1 <<-FIN
 /### Next line inserted by GForge install
 :d
@@ -122,8 +122,12 @@ case "$1" in
 	    			perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" $apacheconffile.gforge-new
 	    
 	    			if ! grep -q "^Include $gforgeconffile" $apacheconffile.gforge-new ; then
+					# File cleaning, just in case
+					remove_gforge_insert $apacheconffile
 					echo "### Next line inserted by GForge install" >> $apacheconffile.gforge-new
 					echo "Include $gforgeconffile" >> $apacheconffile.gforge-new
+				else
+					echo "Found Include $gforgeconffile in $apacheconffile"
 	    			fi
 			fi
 		fi
