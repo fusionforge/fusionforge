@@ -1,4 +1,12 @@
-2003-02-21  Reinhard Spisser <reinhard@spisser.i>
+2003-02-22  Reinhard Spisser <reinhard@spisser.it>
+
+	* www/new/index.php, www/include/languages/Base.tab:
+	Committing Reiner Jung's i18n of /new/
+	
+	* www/include/languages/Italian.tab:
+	l10n of new strings for /new/
+	
+2003-02-21  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/vote_function.php:
 	i18n of survey
