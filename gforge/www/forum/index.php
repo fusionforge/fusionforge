@@ -59,7 +59,7 @@ if ($group_id) {
 			echo $farr->getErrorMessage();
 		} else {
 			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '><TD><A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
-				html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
+				html_image("ic/forum20w.png","20","20",array("BORDER"=>"0")) . 
 				'&nbsp;' .
 				$farr[$j]->getName() .'</A><BR>'.$farr[$j]->getDescription().'</TD>
 				<TD ALIGN=CENTER>'.$farr[$j]->getThreadCount().'</TD>

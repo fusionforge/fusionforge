@@ -268,7 +268,7 @@ if ($project->usesTracker()) {
 
 if ($project->usesForum()) {
 	print '<HR SIZE="1" NoShade><A href="/forum/?group_id='.$group_id.'">';
-	print html_image('ic/notes16.png','20','20',array('alt'=>$Language->getText('group','short_forum'))); 
+	print html_image('ic/forum20g.png','20','20',array('alt'=>$Language->getText('group','short_forum'))); 
 	print '&nbsp;'.$Language->getText('group','long_forum').'</A>';
 	print " ( <B>". project_get_public_forum_message_count($group_id) ."</B> messages in ";
 

@@ -55,7 +55,7 @@ if (session_loggedin()) {
 			<TD><B>Status:</B><BR><?php echo $ah->getStatusName(); ?></TD>
 		</TR>
 
-		<TR><TD COLSPAN="2"><B>Summary:</B><BR><?php echo  util_unconvert_htmlspecialchars($ah->getSummary()); ?></TD></TR>
+		<TR><TD COLSPAN="2"><B>Summary:</B><BR><?php echo $ah->getSummary(); ?></TD></TR>
 
 		<FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
 

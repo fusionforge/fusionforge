@@ -156,7 +156,7 @@ function project_summary($group_id,$mode,$no_table) {
 
 			<HR SIZE="1" NoShade>';
 		$return .= '<A href="/forum/?group_id='.$group_id.'">';
-		$return .= html_image("ic/notes16.png","20","20",array("BORDER"=>"0","ALT"=>"Forums"));
+		$return .= html_image("ic/forum20g.png","20","20",array("BORDER"=>"0","ALT"=>"Forums"));
 		$return .= '&nbsp;Forums</A>';
 
 		if ($mode != 'compact') {

@@ -158,6 +158,8 @@ gforge/www/themes/gforge/images/ic/cfolder15.png -text
 gforge/www/themes/gforge/images/ic/check.png -text
 gforge/www/themes/gforge/images/ic/cvs16b.png -text
 gforge/www/themes/gforge/images/ic/docman16b.png -text
+gforge/www/themes/gforge/images/ic/forum20g.png -text
+gforge/www/themes/gforge/images/ic/forum20w.png -text
 gforge/www/themes/gforge/images/ic/ftp16b.png -text
 gforge/www/themes/gforge/images/ic/halfcheck.png -text
 gforge/www/themes/gforge/images/ic/home16b.png -text
@@ -167,7 +169,6 @@ gforge/www/themes/gforge/images/ic/mail16d.png -text
 gforge/www/themes/gforge/images/ic/mail16w.png -text
 gforge/www/themes/gforge/images/ic/manual16c.png -text
 gforge/www/themes/gforge/images/ic/msg.png -text
-gforge/www/themes/gforge/images/ic/notes16.png svneol=native#unset
 gforge/www/themes/gforge/images/ic/ofolder15.png -text
 gforge/www/themes/gforge/images/ic/pencil.png -text
 gforge/www/themes/gforge/images/ic/save.png -text
@@ -220,6 +221,8 @@ gforge/www/themes/osx/images/ic/cfolder15.png -text
 gforge/www/themes/osx/images/ic/check.png -text
 gforge/www/themes/osx/images/ic/cvs16b.png -text
 gforge/www/themes/osx/images/ic/docman16b.png -text
+gforge/www/themes/osx/images/ic/forum20g.png -text
+gforge/www/themes/osx/images/ic/forum20w.png -text
 gforge/www/themes/osx/images/ic/ftp16b.png -text
 gforge/www/themes/osx/images/ic/halfcheck.png -text
 gforge/www/themes/osx/images/ic/home16b.png -text
@@ -227,7 +230,6 @@ gforge/www/themes/osx/images/ic/index.png -text
 gforge/www/themes/osx/images/ic/mail16b.png -text
 gforge/www/themes/osx/images/ic/mail16d.png -text
 gforge/www/themes/osx/images/ic/manual16c.png -text
-gforge/www/themes/osx/images/ic/notes16.png svneol=native#unset
 gforge/www/themes/osx/images/ic/ofolder15.png -text
 gforge/www/themes/osx/images/ic/pencil.png -text
 gforge/www/themes/osx/images/ic/save.png -text
