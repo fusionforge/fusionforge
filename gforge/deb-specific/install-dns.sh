@@ -2,8 +2,8 @@
 # 
 # $Id$
 #
-# Configure Bind 9 for Sourceforge
-# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+# Configure Bind 9 for GForge
+# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
 
 set -e
 
@@ -20,9 +20,9 @@ case "$1" in
 	ip_address=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbhost\n";')
 	# export domain_name=$1
 	# export ip_address=$2
-  	if ! grep -q "// Next line inserted by Sourceforge install" /etc/bind/named.conf.gforge-new ; then
+  	if ! grep -q "// Next line inserted by GForge install" /etc/bind/named.conf.gforge-new ; then
 	    cat >> /etc/bind/named.conf.gforge-new <<-EOF
-// Next line inserted by Sourceforge install
+// Next line inserted by GForge install
 zone "$domain_name" { type master; file "/var/lib/gforge/bind/dns.zone"; };
 EOF
   	fi
@@ -62,9 +62,9 @@ EOF
 
     purge-files)
 	cp -a /etc/bind/named.conf /etc/bind/named.conf.gforge-new
-	if grep -q "// Next line inserted by Sourceforge install" /etc/bind/named.conf.gforge-new ; then
+	if grep -q "// Next line inserted by GForge install" /etc/bind/named.conf.gforge-new ; then
 	    perl -pi -e "s:zone.*gforge.*};\n::" /etc/bind/named.conf.gforge-new
-	    perl -pi -e "s:// Next line inserted by Sourceforge install\n::" /etc/bind/named.conf.gforge-new
+	    perl -pi -e "s:// Next line inserted by GForge install\n::" /etc/bind/named.conf.gforge-new
 	fi
 	;;
     purge)

@@ -2,8 +2,8 @@
 # 
 # $Id$
 #
-# Configure exim for Sourceforge
-# Roland Mas, debian-sf (Sourceforge for Debian)
+# Configure exim for GForge
+# Roland Mas, debian-sf (GForge for Debian)
 
 set -e
 
@@ -34,7 +34,7 @@ case "$target" in
 	    perl -pi -e "s/^host.*gforge_passwd$/host gforge $ip_address 255.255.255.255 password gforge_passwd/" /etc/postgresql/pg_hba.conf.gforge-new
 	else
 	    cur=$(mktemp /tmp/$pattern)
-	    echo "### Next line inserted by Sourceforge install" > $cur
+	    echo "### Next line inserted by GForge install" > $cur
 	    echo "host gforge $ip_address 255.255.255.255 password gforge_passwd" >> $cur
 	    cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
 	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
@@ -89,9 +89,9 @@ EOF
 	;;
     purge-files)
 	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
-        if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf.gforge-new
+        if grep -q "### Next line inserted by GForge install" /etc/postgresql/pg_hba.conf.gforge-new
         then
-                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf.gforge-new
+                perl -pi -e "s/### Next line inserted by GForge install\n//" /etc/postgresql/pg_hba.conf.gforge-new
                 perl -pi -e "s/^host.*gforge_passwd\n//" /etc/postgresql/pg_hba.conf.gforge-new
         fi
 	;;
@@ -113,7 +113,7 @@ EOF
     restore)
 	pattern=$(basename $0).XXXXXX
 	newpg=$(mktemp /tmp/$pattern)
-	echo "### Next line inserted by Sourceforge restore" > $newpg
+	echo "### Next line inserted by GForge restore" > $newpg
 	echo "local all  trust" >> $newpg
 	#echo "host all 127.0.0.1 255.255.255.255 trust" >> $newpg
 	cat /etc/postgresql/pg_hba.conf >> $newpg
@@ -129,7 +129,7 @@ EOF
 	su -s /bin/sh postgres -c "dropdb sourceforge" || true
 	su -s /bin/sh postgres -c "createdb sourceforge"  || true
 	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE sourceforge"
-        perl -pi -e "s/### Next line inserted by Sourceforge restore\n//" /etc/postgresql/pg_hba.conf
+        perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
         perl -pi -e "s/local all  trust\n//" /etc/postgresql/pg_hba.conf
         #perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf
 	/etc/init.d/postgresql restart

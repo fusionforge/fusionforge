@@ -2,8 +2,8 @@
 # 
 # $Id$
 #
-# Configure Postfix for Sourceforge
-# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+# Configure Postfix for GForge
+# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
 
 set -e
 
@@ -19,7 +19,7 @@ case "$1" in
 	noreply_to_bitbucket=$(perl -e'require "/etc/gforge/local.pl"; print "$noreply_to_bitbucket\n";')
 	if [ "$noreply_to_bitbucket" = "true" ] ; then
 	    if ! grep -q "^noreply:" /etc/aliases.gforge-new ; then
-		echo "### Next line inserted by Sourceforge install" >> /etc/aliases.gforge-new
+		echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
 		echo "noreply: /dev/null" >> /etc/aliases.gforge-new
 	    fi
 	fi
@@ -27,7 +27,7 @@ case "$1" in
 	# Redirect "gforge" mail to the site admin
 	server_admin=$(perl -e'require "/etc/gforge/local.pl"; print "$server_admin\n";')
 	if ! grep -q "^gforge:" /etc/aliases.gforge-new ; then
-	    echo "### Next line inserted by Sourceforge install" >> /etc/aliases.gforge-new
+	    echo "### Next line inserted by GForge install" >> /etc/aliases.gforge-new
 	    echo "gforge: $server_admin" >> /etc/aliases.gforge-new
 	fi
 

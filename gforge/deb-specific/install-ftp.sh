@@ -2,8 +2,8 @@
 # 
 # $Id$
 #
-# Configure Proftpd for Sourceforge
-# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+# Configure Proftpd for GForge
+# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
 
 set -e
 
@@ -23,8 +23,8 @@ case "$1" in
 	#
 	if ! grep -q "^Include /etc/gforge/sf-proftpd.conf" /etc/proftpd.conf.gforge-new ; then
 	    perl -pi -e "s/^/#SF#/" /etc/proftpd.conf.gforge-new
-	    echo "### Previous lines commented by Sourceforge install" >> /etc/proftpd.conf.gforge-new
-	    echo "### Next lines inserted by Sourceforge install" >> /etc/proftpd.conf.gforge-new
+	    echo "### Previous lines commented by GForge install" >> /etc/proftpd.conf.gforge-new
+	    echo "### Next lines inserted by GForge install" >> /etc/proftpd.conf.gforge-new
 	    echo "ServerType standalone" >>/etc/proftpd.conf.gforge-new
 	    echo "Include /etc/gforge/sf-proftpd.conf" >> /etc/proftpd.conf.gforge-new
 	fi
@@ -57,9 +57,9 @@ FIN
     
     purge-files)
 	cp -a /etc/proftpd.conf /etc/proftpd.conf.gforge-new
-	if grep -q "### Next lines inserted by Sourceforge install" /etc/proftpd.conf.gforge-new ; then
-	    perl -pi -e "s/### Previous lines commented by Sourceforge install\n//"  /etc/proftpd.conf.gforge-new
-	    perl -pi -e "s/### Next lines inserted by Sourceforge install\n//" /etc/proftpd.conf.gforge-new
+	if grep -q "### Next lines inserted by GForge install" /etc/proftpd.conf.gforge-new ; then
+	    perl -pi -e "s/### Previous lines commented by GForge install\n//"  /etc/proftpd.conf.gforge-new
+	    perl -pi -e "s/### Next lines inserted by GForge install\n//" /etc/proftpd.conf.gforge-new
 	    perl -pi -e "s:^Include /etc/gforge/sf-proftpd.conf\n::" /etc/proftpd.conf.gforge-new
 	    perl -pi -e "s:^ServerType standalone\n::" /etc/proftpd.conf.gforge-new
 	    perl -pi -e "s/^#SF#//" /etc/proftpd.conf.gforge-new

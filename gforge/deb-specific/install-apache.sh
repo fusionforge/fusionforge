@@ -2,8 +2,8 @@
 # 
 # $Id$
 #
-# Configure exim for Sourceforge
-# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+# Configure exim for GForge
+# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
 
 set -e
 
@@ -23,7 +23,7 @@ case "$1" in
 	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf.gforge-new
 	    
 	    if ! grep -q "^Include /etc/gforge/sf-httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
-		echo "### Next line inserted by Sourceforge install" >> /etc/apache/httpd.conf.gforge-new
+		echo "### Next line inserted by GForge install" >> /etc/apache/httpd.conf.gforge-new
 		echo "Include /etc/gforge/sf-httpd.conf" >> /etc/apache/httpd.conf.gforge-new
 	    fi
 	fi
@@ -36,7 +36,7 @@ case "$1" in
 	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache-ssl/httpd.conf.gforge-new
 	    
 	    if ! grep -q "^Include /etc/gforge/sf-httpd.conf" /etc/apache-ssl/httpd.conf.gforge-new ; then
-		echo "### Next line inserted by Sourceforge install" >> /etc/apache-ssl/httpd.conf.gforge-new
+		echo "### Next line inserted by GForge install" >> /etc/apache-ssl/httpd.conf.gforge-new
 		echo "Include /etc/gforge/sf-httpd.conf" >> /etc/apache-ssl/httpd.conf.gforge-new
 	    fi
 	fi
@@ -79,7 +79,7 @@ case "$1" in
   	if grep -q "Include /etc/gforge/sf-httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
 	    pattern=$(basename $0)
 	    tmp=$(mktemp /tmp/$pattern.XXXXXX)
-	    grep -v "Include /etc/gforge/sf-httpd.conf\|### Next line inserted by Sourceforge install" /etc/apache/httpd.conf.gforge-new > $tmp
+	    grep -v "Include /etc/gforge/sf-httpd.conf\|### Next line inserted by GForge install" /etc/apache/httpd.conf.gforge-new > $tmp
 	    cat $tmp > /etc/apache/httpd.conf.gforge-new
 	    rm -f $tmp
   	fi
