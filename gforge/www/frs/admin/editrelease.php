@@ -169,8 +169,7 @@ if ($step3) {
 		} else {
 			$date_list = split('[- :]',$release_time,5);
 			$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
-			list($new_package_id, $new_release_id) = split(':',$new_package_release_ids,2);
-			if (!$frsf->update($type_id,$processor_id,$release_time,$new_package_id,$new_release_id)) {
+			if (!$frsf->update($type_id,$processor_id,$release_time)) {
 				exit_error('Error',$frsf->getErrorMessage());
 			} else {
 				$feedback .= $Language->getText('project_admin_editrelease','file_updated');
@@ -303,7 +302,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
 					<td>
 						<span style="font-size:smaller">
-							<?php echo frs_show_release_popup ($group_id, $name='new_package_release_ids',db_result($res,$x,'release_id')); ?>
+							<?php echo frs_show_release_popup ($group_id, $name='new_release_id',db_result($res,$x,'release_id')); ?>
 						</span>
 					</td>
 					<td>

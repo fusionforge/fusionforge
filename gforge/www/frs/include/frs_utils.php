@@ -113,7 +113,7 @@ function frs_footer() {
 
 */
 
-function frs_show_status_popup ($name='status_id', $checked_val='xzxz') {
+function frs_show_status_popup ($name='status_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of statuses
 	*/
@@ -130,7 +130,7 @@ function frs_show_status_popup ($name='status_id', $checked_val='xzxz') {
 
 */
 
-function frs_show_filetype_popup ($name='type_id', $checked_val='xzxz') {
+function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of the available filetypes
 	*/
@@ -147,7 +147,7 @@ function frs_show_filetype_popup ($name='type_id', $checked_val='xzxz') {
 
 */
 
-function frs_show_processor_popup ($name='processor_id', $checked_val='xzxz') {
+function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of the available processors 
 	*/
@@ -165,7 +165,7 @@ function frs_show_processor_popup ($name='processor_id', $checked_val='xzxz') {
 */
 
 
-function frs_show_release_popup ($group_id, $name='package_release_ids', $checked_val='xzxz') {
+function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of releases for the project
 	*/
@@ -174,7 +174,7 @@ function frs_show_release_popup ($group_id, $name='package_release_ids', $checke
 		return 'ERROR - GROUP ID REQUIRED';
 	} else {
 		if (!isset($FRS_RELEASE_RES)) {
-			$FRS_RELEASE_RES=db_query("SELECT frs_package.package_id || ':' || frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) ".
+			$FRS_RELEASE_RES=db_query("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) ".
 				"FROM frs_release,frs_package ".
 				"WHERE frs_package.group_id='$group_id' ".
 				"AND frs_release.package_id=frs_package.package_id");
@@ -190,7 +190,7 @@ function frs_show_release_popup ($group_id, $name='package_release_ids', $checke
 
 */
 
-function frs_show_package_popup ($group_id, $name='package_id', $checked_val='xzxz') {
+function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xzxz") {
 	/*
 		return a pop-up select box of packages for this project
 	*/

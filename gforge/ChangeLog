@@ -1,9 +1,3 @@
-2004-12-10  Mathieu Peltier <mathieu.peltier@gmail.com>
-
-	* applied [#775] www/frs/admin/editrelease.php and
-	common/frs/FRSFile.class: Patch for not able to change file to
-	another release/package by Jader Marasca (fixed bug [#663]).
-
 2004-11-23  Tim Perdue <tim@gforge.org>
 
 	* www/my/index.php and www/pm/ganttofuser.php - this gantt doesn't yet 
