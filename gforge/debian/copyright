@@ -1,4 +1,4 @@
-This package was first debianized on Wed, 22 Nov 2000 22:06:35 +0100
+This package was first debianised on Wed, 22 Nov 2000 22:06:35 +0100
 by Roland Mas <lolando@debian.org>.  Work has been constant since
 then, and the package evolved a great deal.  It began to work, for a
 start.
@@ -20,9 +20,15 @@ Copyright info for the Sourceforge software:
 `----
 
 The packaging and installing scripts (in the debian/ and deb-specific/
-directories amongst others) are copyright (c) 2000-2001 by Christian
+directories amongst others) are copyright (c) 2000-2002 by Christian
 Bayle <bayle@aist.enst.fr> and Roland Mas <lolando@debian.org>.  You
 are free to use and redistribute them under the terms of the GNU
+General Public License.
+
+The themes are copyright (c) 1999-2000 by VA Linux.  The Savannah
+themes are modified versions, and are copyright (c) 2000-2001 by the
+Free Software Foundation.  They all are free software, and you can
+redistribute them and/or modify them under the terms of the GNU
 General Public License.
 
 On Debian systems, the complete text of the GNU General Public License
