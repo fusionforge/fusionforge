@@ -2744,11 +2744,11 @@ tracker_admin_build_boxes	tracker_box_option_title	Eléments définis
 tracker_admin_build_boxes	tracker_box_title	Champs supplémentaires définis
 tracker_admin_build_boxes	tracker_choice_id	Identifiant
 tracker_admin_choose	title	Administration des traceurs
-tracker_admin_copy	choices_title	Copier les choix �|  partir du champ supplémentaire $1
+tracker_admin_copy	choices_title	Copier les choix à partir du champ supplémentaire $1
 tracker_admin_copy	copy_choices	Cliquer ici pour copier ces éléments dans un autre outil de suivi
-tracker_admin_copy	from_box	Copier �|  partir de
+tracker_admin_copy	from_box	Copier à partir de
 tracker_admin_copy	into_box	Dans les outils de suivi et les champs supplémentaires
-tracker_admin_copy_cat	title	Copier les catégories �|  partir de $1
+tracker_admin_copy_cat	title	Copier les catégories à partir de $1
 tracker_admin_update_canned	title	Modification des réponses-types de $1
 tracker_admin_update_cat	auto_assign_to	Confier automatiquement à
 tracker_admin_update_cat	category_change_warning	Il n'est pas recommandé de changer le nom d'une catégorie car d'autres éléments en dépendent. Quand vous changez le nom d'une catégorie, tous les éléments en dépendant vont prendre le nouveau nom.
