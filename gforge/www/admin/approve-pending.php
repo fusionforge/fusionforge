@@ -63,7 +63,7 @@ if ($action=='activate') {
 
 	if (!$group->setStatus(session_get_user(), 'D')) {
 		exit_error(
-			$Language->getText('admin_apprive_pending','error_group_rejection'),
+			$Language->getText('admin_approve_pending','error_group_rejection'),
 			$this->getErrorMessage()
 		);
 	}

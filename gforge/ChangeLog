@@ -1,5 +1,8 @@
 2003-11-29  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/admin/approve-pending.php: Patch #606 from Guillaume Smet
+	fixing a localisation key.
+
 	* www/project/admin/database.php: Added missing " (patch #595 from
 	Soon Son Kwon <kss@kldp.org>.
 
