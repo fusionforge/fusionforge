@@ -6,6 +6,10 @@
 	* www/include/features_boxes.php
 	Applied patch [ #490 ] Deleted projects can appear inside 
 	the "Most Active this week" section
+
+	* www/mail/admin/index.php
+	Applied patch [ #497 ] Patch for problems mailing feedback
+	 on new project registration (actually, new list creation)
 	
 2003-08-22  Roland Mas  <99.roland.mas@aist.enst.fr>
 

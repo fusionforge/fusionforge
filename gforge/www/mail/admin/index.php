@@ -81,7 +81,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 					. "Thank you for registering your project with ".$GLOBALS['sys_name'].".\n\n"
 					. " -- the ".$GLOBALS['sys_name']." staff\n";
 
-					mail ($row_email['email'],$GLOBALS['sys_name']." New Mailing List",$message,"From: admin@$GLOBALS[sys_default_domain]");
+					util_send_message($row_email['email'],$GLOBALS['sys_name']." New Mailing List",$message,"From: admin@$GLOBALS[sys_default_domain]");
 
 					$feedback .= " Email sent with details to: $row_email[email] ";
 				}
