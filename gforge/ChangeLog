@@ -1,3 +1,8 @@
+2003-01-24  Michael Jennings  <mej@eterm.org>
+
+	* gforge.spec:  New spec file for GForge.  This is, of course,
+	still very much beta.
+
 2003-01-22  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/include/languages/Spanish.tab: more translations, sorted the
