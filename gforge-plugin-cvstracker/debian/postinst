@@ -25,11 +25,6 @@ set -e
 
 case "$1" in
     configure)
-	/usr/lib/gforge/bin/fill-in-the-blanks.pl \
-		/etc/gforge/plugins/cvstracker/cvstracker.conf.tmpl \
-		/etc/gforge/plugins/cvstracker/cvstracker.conf \
-		/etc/gforge/gforge.conf
-	chmod 0644 /etc/gforge/plugins/cvstracker/cvstracker.conf
 	/usr/lib/gforge/plugins/cvstracker/bin/db-upgrade.pl
 	/usr/lib/gforge/bin/register-plugin cvstracker "cvstracker"
 	invoke-rc.d apache reload
