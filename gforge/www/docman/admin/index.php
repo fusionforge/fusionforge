@@ -58,8 +58,8 @@ if ($submit) {
 			$filename=$uploaded_data_name;
 			$filetype=$uploaded_data_type;
 		} else {
-			$filename=$d->getFileName();
-			$filetype=$d->getFileType();
+			$filename=addslashes($d->getFileName());
+			$filetype=addslashes($d->getFileType());
 		}
 		if (!$d->update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid)) {
 			exit_error('Error',$d->getErrorMessage());
