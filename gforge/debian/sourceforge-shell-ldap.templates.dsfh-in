@@ -1,3 +1,4 @@
+#DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:ldap-variables#
 
 Template: sourceforge/shared/pam_ldap_config
