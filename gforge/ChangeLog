@@ -1,3 +1,9 @@
+2004-12-12  Christian Bayle <bayle@aist.enst.fr>
+
+	* Made some cleanup in Group.class so everything concerning System is
+	done in System.class
+	* Applied  Mathieu Peltier patch [#993] that generate scm snapshot
+
 2004-11-23  Tim Perdue <tim@gforge.org>
 
 	* www/my/index.php and www/pm/ganttofuser.php - this gantt doesn't yet 
