@@ -26,7 +26,7 @@ while(my ($username, $unix_uid, $ssh_key) = $c->fetchrow()) {
 
 my ($username, $ssh_keys, $ssh_dir);
 
-if($verbose){print("\n\n	Processing Users\n\n")};
+if($verbose){print("\n\n	Processing Users keys creation\n\n")};
 while ($ln = pop(@ssh_array)) {
 	($username, $uid, $ssh_key) = split(":", $ln);
 
@@ -39,20 +39,26 @@ while ($ln = pop(@ssh_array)) {
 
 	$ssh_dir = "$homedir_prefix/$username/.ssh";
 
-	if (! -d $ssh_dir) {
-		mkdir $ssh_dir, 0755;
+	if($verbose){print ("Processing $username\n")};
+
+	if (-d "$homedir_prefix/$username"){
+		if (! -d $ssh_dir) {
+			mkdir $ssh_dir, 0755;
+			system("chown $uid:$uid $ssh_dir");
+		}
+	
+		if($verbose){print("Writing authorized_keys for $username: ")};
+	
+		write_array_file("$ssh_dir/authorized_keys", @user_authorized_keys);
+		system("chown $uid:$uid $homedir_prefix/$username");
 		system("chown $uid:$uid $ssh_dir");
+		system("chmod 0644 $ssh_dir/authorized_keys");
+		system("chown $uid:$uid $ssh_dir/authorized_keys");
+
+		if($verbose){print ("Done\n")};
+	} else {
+		if($verbose){print ("Not yet done, waiting for home creation\n")};
 	}
-
-	if($verbose){print("Writing authorized_keys for $username: ")};
-
-	write_array_file("$ssh_dir/authorized_keys", @user_authorized_keys);
-	system("chown $uid:$uid $homedir_prefix/$username");
-	system("chown $uid:$uid $ssh_dir");
-	system("chmod 0644 $ssh_dir/authorized_keys");
-	system("chown $uid:$uid $ssh_dir/authorized_keys");
-
-	if($verbose){print ("Done\n")};
 
 	undef @user_authorized_keys;
 }
@@ -69,7 +75,7 @@ while(my ($username, $unix_uid, $ssh_key) = $c->fetchrow()) {
 	push @ssh_array, $new_list;
 }
 
-if($verbose){print("\n\n	Processing Users\n\n")};
+if($verbose){print("\n\n	Processing Users keys deletion\n\n")};
 while ($ln = pop(@ssh_array)) {
 	($username, $uid) = split(":", $ln);
 
@@ -77,6 +83,8 @@ while ($ln = pop(@ssh_array)) {
 	$uid += $uid_add;
 
 	$ssh_dir = "$homedir_prefix/$username/.ssh";
+
+	if($verbose){print ("Processing $username\n")};
 
 	if (-d $ssh_dir) {
 	    if($verbose){print("Resetting authorized_keys for $username: ")};
