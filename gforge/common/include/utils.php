@@ -72,6 +72,7 @@ function util_check_fileupload($filename) {
  *
  */
 function util_send_message($to,$subject,$body,$from='',$BCC='') {
+	global $Language;
 	if (!$to) {
 		$to='noreply@'.$GLOBALS['sys_default_domain'];
 	}
@@ -82,6 +83,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 		"\nFrom: $from".
 		"\nBCC: $BCC".
 		"\nSubject: $subject".
+		"\nContent-type: text/plain; charset=".$Language->getText('conf','content_encoding').
 		"\n\n$body";
 
 	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
