@@ -58,7 +58,9 @@ for ($g=0; $g<count($groups); $g++) {
 	$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$groups[$g]->getUnixName();
 	$cmd="/bin/mkdir $newdirlocation";
 	//echo "\n$cmd";
-	exec($cmd,$out);
+	if (!is_dir($newdirlocation)){
+		exec($cmd,$out);
+	}
 
 	$frsps =& get_frs_packages($groups[$g]);
 	//echo count($frsps);
@@ -70,7 +72,9 @@ for ($g=0; $g<count($groups); $g++) {
 		$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsps[$p]->Group->getUnixName().'/'.$frsps[$p]->getFileName();
 		$cmd="/bin/mkdir $newdirlocation";
 		//echo "\n$cmd";
-		exec($cmd,$out);
+		if (!is_dir($newdirlocation)){
+			exec($cmd,$out);
+		}
 
 		$frsrs =& $frsps[$p]->getReleases();
 
@@ -82,7 +86,9 @@ for ($g=0; $g<count($groups); $g++) {
 			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsrs[$r]->FRSPackage->Group->getUnixName().'/'.$frsrs[$r]->FRSPackage->getFileName().'/'.$frsrs[$r]->getFileName();
 			$cmd="/bin/mkdir $newdirlocation";
 			//echo "\n$cmd";
-			exec($cmd,$out);
+			if (!is_dir($newdirlocation)){
+				exec($cmd,$out);
+			}
 
 			$frsfs =& $frsrs[$r]->getFiles();
 			for ($f=0; $f<count($frsfs); $f++) {
