@@ -467,13 +467,13 @@ if ($params['group']) {
 				$selected=count($TABS_DIRS)-1;
 			}
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || strstr($GLOBALS['REQUEST_URI'],'/account/')) {
-			$selected=1;
+			$selected=array_search("/my/", $TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'softwaremap')) {
-			$selected=2;
+			$selected=array_search("/softwaremap/", $TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/snippet/')) {
-			$selected=3;
+			$selected=array_search("/snippet/", $TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/people/')) {
-			$selected=4;
+			$selected=array_search("/people/", $TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/admin/') && user_ismember(1,'A')) {
 			$selected=(count($TABS_DIRS)-1);
 		} else {
