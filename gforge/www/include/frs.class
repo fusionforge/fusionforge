@@ -763,7 +763,7 @@ class FRS extends Error {
 
 			$text = util_line_wrap($text);
 			
-			util_send_mail("noreply@$GLOBALS[sys_default_domain]",$subject,$text,"noreply@$GLOBALS[sys_default_domain]",$list);			
+			util_send_message("noreply@$GLOBALS[sys_default_domain]",$subject,$text,"noreply@$GLOBALS[sys_default_domain]",$list);			
 
 			return $result;
 		} else {

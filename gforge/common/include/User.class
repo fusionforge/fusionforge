@@ -271,7 +271,7 @@ class User extends Error {
 	function sendRegistrationEmail() {
 		global $Language;
 		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$GLOBALS['sys_default_domain'],$this->getConfirmHash())));
-		util_send_mail(
+		util_send_message(
 			$this->getEmail(),
 			$Language->getText('account_register','message_header'),
 			$message

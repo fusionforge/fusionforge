@@ -61,7 +61,7 @@ if (session_loggedin()) {
 						"\nTo stop monitoring this user, login to ".$GLOBALS['sys_name']." and visit: ".
 						"\nhttp://$GLOBALS[sys_default_domain]/developer/monitor.php?diary_user=". user_getid();
 
-						util_send_mail($to, $subject, $body, $to, $tolist); 
+						util_send_message($to, $subject, $body, $to, $tolist); 
 
 						$feedback .= " email sent - ($rows) people monitoring ";
 

@@ -607,7 +607,7 @@ function mail_followup($project_task_id,$group_project_id,$more_addresses=false,
 			$to .= ', ' . db_result($result,0,'new_task_address');
 		}
 		
-		util_send_mail($to,$subject,$body);
+		util_send_message($to,$subject,$body);
 		
 		$feedback .= " Task Update Sent ";
 		

@@ -18,7 +18,7 @@ if (is_file('/etc/sourceforge/custom/pre.php')){
 
 // Defines all of the Source Forge hosts, databases, etc.
 // This needs to be loaded first becuase the lines below depend upon it.
-require ('/etc/sourceforge/local.inc');
+require ('/etc/gforge/local.inc');
 
 if ($HTTP_HOST != $GLOBALS['sys_default_domain']) {
 	if ($SERVER_PORT == '443') {

@@ -1444,7 +1444,7 @@ class Group extends Error {
 			//                                                                               $1                      $2                    $3                              $4                          $5                        $6
 			$message=stripcslashes($Language->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_cvs_host'], $this->getID())));
 	
-			util_send_mail($row_admins['email'], $Language->getText('classgroup', 'acceptedprojecttitle'), $message);
+			util_send_message($row_admins['email'], $Language->getText('classgroup', 'acceptedprojecttitle'), $message);
 		}
 
 		return true;
@@ -1487,7 +1487,7 @@ class Group extends Error {
 			"), 0, "response_text");
 		}
 
-		util_send_mail($email, $Language->getText('classgroup', 'rejectedprojecttitle'), $response);
+		util_send_message($email, $Language->getText('classgroup', 'rejectedprojecttitle'), $response);
 
 		return true;
 	}
@@ -1538,7 +1538,7 @@ class Group extends Error {
 	  
 	  $message=stripcslashes($Language->getText('classgroup', 'newprojectnotification', array($this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicense(), $GLOBALS['sys_default_domain'])));
 
-	  util_send_mail($admin_email, $Language->getText('classgroup', 'newprojectnotificationtitle'), $message, $email);
+	  util_send_message($admin_email, $Language->getText('classgroup', 'newprojectnotificationtitle'), $message, $email);
 
 	  return true;
 	}

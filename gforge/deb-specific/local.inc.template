@@ -154,7 +154,8 @@ $sys_theme='{sys_theme}';
 $sys_lang='{sys_lang}';
 
 // Akamization of images
-$sys_images_url="//{domain_name}/";
+$sys_images_url="http://{domain_name}/";
+$sys_images_secure_url="https://{domain_name}/";
 
 // Part IV - Groups
 //  The SourceForge permission model is based on groups
