@@ -22,8 +22,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			create a new job
 		*/
 		if (!$title || !$description || $category_id==100) {
-			//required info
-			exit_error('error - missing info','Fill in all required fields');
+			exit_error('Error - missing information','Fill in all required fields');
 		}
 		$sql="INSERT INTO people_job (group_id,created_by,title,description,date,status_id,category_id) ".
 			"VALUES ('$group_id','". user_getid() ."','$title','$description','".time()."','1','$category_id')";

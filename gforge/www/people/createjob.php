@@ -28,13 +28,13 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		<p>
 		<form action="/people/editjob.php" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
-		<strong>Category:</strong><br /></p>
+		<strong>Category:</strong>'.utils_requiredField().'<br /></p>
 		'. people_job_category_box('category_id') .'
 		<p>
-		<strong>Short Description:</strong><br />
+		<strong>Short Description:</strong>'.utils_requiredField().'<br />
 		<input type="text" name="title" value="" size="40" maxlength="60" /></p>
 		<p>
-		<strong>Long Description:</strong><br />
+		<strong>Long Description:</strong>'.utils_requiredField().'<br />
 		<textarea name="description" rows="10" cols="60" wrap="soft"></textarea></p>
 		<p>
 		<input type="submit" name="add_job" value="Continue >>" />
