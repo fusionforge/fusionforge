@@ -455,7 +455,7 @@ class Group extends Error {
 		}
 
 		if (!$homepage) {
-			$homepage='http://'.$GLOBALS['sys_default_domain'].'/projects/'.$this->getUnixName().'/';
+			$homepage=$GLOBALS['sys_default_domain'].'/projects/'.$this->getUnixName().'/';
 		}
 
 		if (strlen($short_description)>255) {
