@@ -148,11 +148,17 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <p>
 <strong><?php echo $Language->getText('admin_index','global_admin_tools_mass_insert'); ?></strong>
 </p>
+<?php if($GLOBALS['sys_use_project_database'] || $GLOBALS['sys_use_project_vhost']) { ?>
 <ul>
-	<li><a href="vhost.php"><?php echo $Language->getText('admin_index','virtual_host_admin_tool'); ?></a></li>
-	<li><a href="database.php"><?php echo $Language->getText('admin_index','project_database_administration'); ?></a></li>
+	<?php if($GLOBALS['sys_use_project_vhost']) { ?>
+		<li><a href="vhost.php"><?php echo $Language->getText('admin_index','virtual_host_admin_tool'); ?></a></li>
+	<?php
+	}
+	if($GLOBALS['sys_use_project_database']) { ?>
+		<li><a href="database.php"><?php echo $Language->getText('admin_index','project_database_administration'); ?></a></li>
+	<?php } ?>
 </ul>
-
+<?php } ?>
 <p><strong><?php echo $Language->getText('admin_index','quick_site_statistic'); ?></strong></p>
 
 <?php

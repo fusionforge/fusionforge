@@ -22,6 +22,10 @@ require_once('pre.php');
 require_once('common/include/account.php');
 require_once('www/admin/admin_utils.php');
 
+if (!$sys_use_project_vhost) {
+	exit_disabled();
+}
+
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 if ($add) {
