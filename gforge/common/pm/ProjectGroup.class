@@ -275,15 +275,6 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 *	getTaskCount - the total number of tasks in this ProjectGroup.
-	 *
-	 *	@return int	The count.
-	 * /
-	function getTaskCount() {
-		return $this->data_array['total'];
-	}*/
-
-	/**
 	 * getStatuses - Return result set of statuses.
 	 *
 	 * @returns Database result set.
@@ -312,6 +303,19 @@ class ProjectGroup extends Error {
 	}
 
 	/**
+	 *  getCategoryObjects - Array of ArtifactCategory objects set up for this artifact type.
+	 *
+	 *  @return array   Of ArtifactCategory objects.
+	 */
+	function &getCategoryObjects() {
+		$res = $this->getCategories();
+		while ($arr =& db_fetch_array($res)) {
+			$cats[] =& new ArtifactCategory(&$this,$arr);
+		}
+		return $cats[];
+	}
+
+	/**
 	 * getTechnicians - Return a result set of pm technicians in this group.
 	 *
 	 * @returns Datbase result set.
@@ -327,6 +331,17 @@ class ProjectGroup extends Error {
 			$this->technicians=db_query($sql);
 		}
 		return $this->technicians;
+	}
+
+	/**
+	 *  getTechnicianObjects - Array of User objects set up for this artifact type.
+	 *
+	 *  @return array   Of User objects.
+	 */
+	function &getTechnicianObjects() {
+		$res = $this->getTechnicians();
+		$arr =& util_result_column_to_array($res,0);
+		return user_get_objects($arr);
 	}
 
 	/**

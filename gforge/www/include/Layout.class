@@ -57,14 +57,10 @@ class Layout extends Error {
 		Set up the priority color array one time only
 		*/
 		$bgpri[1] = '#dadada';
-		$bgpri[2] = '#dad0d0';
-		$bgpri[3] = '#dacaca';
-		$bgpri[4] = '#dac0c0';
-		$bgpri[5] = '#dababa';
-		$bgpri[6] = '#dab0b0';
-		$bgpri[7] = '#daaaaa';
-		$bgpri[8] = '#da9090';
-		$bgpri[9] = '#da8a8a';
+		$bgpri[2] = '#dacaca';
+		$bgpri[3] = '#dababa';
+		$bgpri[4] = '#daaaaa';
+		$bgpri[5] = '#da8a8a';
 
 		//determine font for this platform
 		if (browser_is_windows() && browser_is_ie()) {

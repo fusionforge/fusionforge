@@ -1,3 +1,8 @@
+2004-10-05  Tim Perdue <tim@gforge.org>
+
+	* simplified priorites to 5 items from 9
+	* fixed bugs in task counters
+
 2004-10-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* (Lots of files): Added new gforge-shell-pgsql package, which

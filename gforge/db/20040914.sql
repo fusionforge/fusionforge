@@ -10,7 +10,7 @@ INSERT INTO project_counts_agg
 	SELECT group_project_id, 
 	(SELECT count(*) FROM project_task WHERE status_id != 3 AND 
 		project_task.group_project_id=project_group_list.group_project_id),
-	(SELECT count(*) FROM project_task WHERE status_id = 2 AND 
+	(SELECT count(*) FROM project_task WHERE status_id = 1 AND 
 		project_task.group_project_id=project_group_list.group_project_id)
 	FROM project_group_list;
 

@@ -693,6 +693,7 @@ class ArtifactType extends Error {
 		$arr =& util_result_column_to_array($res,0);
 		return user_get_objects($arr);
 	}
+
 	/**
 	 *	getCannedResponses - returns a result set of canned responses.
 	 *

@@ -399,8 +399,8 @@ function html_get_priority_color ($index) {
 	$index = (int)$index;
 	if ($index<1) {
 		$index=1;
-	} else if ($index>9) {
-		$index=9;
+	} else if ($index>5) {
+		$index=5;
 	}
 	//return "prior$index";
 	return $bgpri[$index];
@@ -434,11 +434,7 @@ function html_build_priority_select_box ($name='priority', $checked_val='5', $no
 	<option value="2"<?php if ($checked_val=="2") {echo " selected=\"selected\"";} ?>>2</option>
 	<option value="3"<?php if ($checked_val=="3") {echo " selected=\"selected\"";} ?>>3</option>
 	<option value="4"<?php if ($checked_val=="4") {echo " selected=\"selected\"";} ?>>4</option>
-	<option value="5"<?php if ($checked_val=="5") {echo " selected=\"selected\"";} ?>>5 - <?php echo $Language->getText('include_html','priority_medium') ?></option>
-	<option value="6"<?php if ($checked_val=="6") {echo " selected=\"selected\"";} ?>>6</option>
-	<option value="7"<?php if ($checked_val=="7") {echo " selected=\"selected\"";} ?>>7</option>
-	<option value="8"<?php if ($checked_val=="8") {echo " selected=\"selected\"";} ?>>8</option>
-	<option value="9"<?php if ($checked_val=="9") {echo " selected=\"selected\"";} ?>>9 - <?php echo $Language->getText('include_html','priority_highest') ?></option>
+	<option value="5"<?php if ($checked_val=="5") {echo " selected=\"selected\"";} ?>>5 - <?php echo $Language->getText('include_html','priority_highest') ?></option>
 	</select>
 <?php
 
