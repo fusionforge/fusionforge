@@ -88,20 +88,28 @@ class ArtifactTypeHtml extends ArtifactType {
 						$this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
 
 
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
-//TODO
-
+	//		} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
+//TODO - requires schema change to store multiple choices for a given artifact
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
-//TODO
+
+				echo '
+					<td width="50%"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+						$this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
-//TODO
+
+				echo '
+					<td width="50%"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+						$this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']).'</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
-//TODO
 
-			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
-//TODO
+				echo '
+					<td width="50%"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+						$this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']).'</td>';
+
+//			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
+//TODO - requires schema change to store multiple choices for a given artifact
 
 			}
 			$col_count++;
@@ -135,6 +143,58 @@ class ArtifactTypeHtml extends ArtifactType {
 			$vals[$i]=$arr[$i]['element_name'];
 		}
 		return html_build_select_box_from_arrays ($keys,$vals,'extra_fields['.$extra_field_id.']',$checked,$show_100,$text_100);
+	}
+
+	/**
+	 *	renderRadio - this function builds radio buttons.
+	 *	
+	 *	@param		int 	The ID of this field.
+	 *	@param 		string	The item that should be checked
+	 *	@param		string	Whether to show the '100 row'
+	 *	@param		string	What to call the '100 row'
+	 *	@return		radio buttons
+	 */	
+	function renderRadio ($extra_field_id,$checked='xzxz',$show_100=false,$text_100='none') {
+		global $Language;
+		if ($text_100 == 'none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
+		$arr =& $this->getExtraFieldElements($extra_field_id);
+		if ($show_100) {
+			$return .= '
+				<input type="radio" name="extra_fields['.$extra_field_id.']" value="100" '.
+			(($checked==100) ? 'CHECKED' : '').'>'.$text_100.'<br />';
+		}
+		for ($i=0; $i<count($arr); $i++) {
+			$return .= '
+				<input type="radio" name="extra_fields['.$extra_field_id.']" value="'.$arr[$i]['element_id'].'" '.
+			(($checked==$arr[$i]['element_id']) ? 'CHECKED' : '').'>&nbsp;'.$arr[$i]['element_name'].'<br />';
+		}
+		return $return;
+	}
+
+	/**
+	 *	renderTextField - this function builds a text field.
+	 *	
+	 *	@param		int 	The ID of this field.
+	 *	@param 		string	The data for this field.
+	 *	@return		text area and data.
+	 */	
+	function renderTextField ($extra_field_id,$contents,$size,$maxlength) {
+		return '
+			<input type="text" name="extra_fields['.$extra_field_id.']" value="'.$contents.'" size="'.$size.'" maxlength="'.$maxlength.'">';
+	}
+
+	/**
+	 *	renderTextArea - this function builds a text area.
+	 *	
+	 *	@param		int 	The ID of this field.
+	 *	@param 		string	The data for this field.
+	 *	@return		text area and data.
+	 */	
+	function renderTextArea ($extra_field_id,$contents,$rows,$cols) {
+		return '
+			<textarea name="extra_fields['.$extra_field_id.']" rows="'.$rows.'" cols="'.$cols.'">'.$contents.'</textarea>';
 	}
 
 	function categoryBox ($name='category_id',$checked='xzxz',$text_100='none') {
