@@ -49,43 +49,43 @@ if($project->enableAnonCVS()) {
 	}
 }
 
-if ($allow) {
+if ($allow)
+{
 	$DHD = new DirectoryHandler();
 	$FHD = new FileHandler();
 	$RCH = new RCSHandler();
 	$CVSROOT = $sys_cvsroot_dir.$cvsroot;
 	$DIRNAME = ($dir_name != "")?"/$dir_name":"";
 	$DIRNAME = $CVSROOT.$DIRNAME;
+
 	$DIRPATH = explode("/",$dir_name);
 	echo("Current directory: ");
-	for($i=0;$i<count($DIRPATH);$i++) {
+    for($i=0;$i<count($DIRPATH);$i++)
+    {
 		$LINKPATH = array();
-		for($j=0; $j<=$i; $j++) {
+	for($j=0;$j<=$i;$j++)
 	    $LINKPATH[] = $DIRPATH[$j];
-		}
 		$LINK = implode("/",$LINKPATH);
 		$value = ($DIRPATH[$i] == "")?$project->getPublicName():$DIRPATH[$i];
-		echo("<b><a href=\"http://".$GLOBALS['sys_default_domain']."/scm/controlleroo.php?group_id=$group_id&dir_name=$LINK&hide_attic=$hide_attic\">[$value]</a>/</b>");
+	echo("<b><a href=\"/scm/controlleroo.php?group_id=$group_id&dir_name=$LINK&hide_attic=$hide_attic\">[$value]</a>/</b>");
 	}
 
-	if($hide_attic) {
-		echo("<br><br>[<a href=\"http://".$GLOBALS['sys_default_domain']."/scm/controlleroo.php?group_id=$group_id&dir_name=$dir_name&hide_attic=0\">Unhide Attic</a>]");
-	} else {
-		echo("<br><br>[<a href=\"http://".$GLOBALS['sys_default_domain']."/scm/controlleroo.php?group_id=$group_id&dir_name=$dir_name&hide_attic=1\">Hide Attic</a>]");
-	}
+    if($hide_attic)
+	echo("<br><br>[<a href=\"/scm/controlleroo.php?group_id=$group_id&dir_name=$dir_name&hide_attic=0\">Unhide Attic</a>]");
+    else
+	echo("<br><br>[<a href=\"/scm/controlleroo.php?group_id=$group_id&dir_name=$dir_name&hide_attic=1\">Hide Attic</a>]");
+
 	echo("<br>");
 
 	// hide some files and directories
 	$hideFile = ".|CVS";
-	if($hide_attic) {
+    if($hide_attic)
 		$hideFile .= "|Attic";
-	}
 
 	$DHD->hideFiles($hideFile);
 
-	if (false === ($dirContent = $DHD->readDirectory($DIRNAME))) {
+    if(false === ($dirContent = $DHD->readDirectory($DIRNAME)))
 		echo("Error: ".$DHD->getError());
-	}
 
 	echo("<table cellpadding=\"1\" cellspacing=\"1\" border=\"0\" width=\"100%\">");
 	echo("<tr>");
@@ -96,32 +96,40 @@ if ($allow) {
 	echo("<td width=\"50%\" bgcolor=\"#AAAAAA\"><b>Last log entry</b></td>");
 	echo("</tr>");
 	$i = 0;
-	foreach($dirContent AS $k=>$v) { 
+    foreach($dirContent AS $k=>$v)
+    {   
 		$bgc = "#F0F0F0";
-		if ($i % 2 == 0) {
+	if($i % 2 == 0)
 		    $bgc = "#FFFFFF";
-		}
 		$i++;
-		if($FHD->getFileType($DIRNAME."/".$v) == 1) {
+	if($FHD->getFileType($DIRNAME."/".$v) == 1)
+        {
 			echo("<tr><td colspan=\"5\" width=\"100%\" bgcolor=\"".$bgc."\"><b>&nbsp;&nbsp;&nbsp;");
-			echo("<a href=\"http://".$GLOBALS['sys_default_domain']."/scm/controlleroo.php?group_id=$group_id&dir_name=$dir_name/$v&hide_attic=$hide_attic\">$v</a>");
+	    echo("<a href=\"/scm/controlleroo.php?group_id=$group_id&dir_name=$dir_name/$v&hide_attic=$hide_attic\">$v</a>");
 			echo("</b></td></tr>");
-		} else {	
+	}
+	//elseif(substr($v,-2) == ",v")
+	else
+        {	
 			$rcsFile = $DIRNAME."/".$v;
 			$fileName = substr($v,0,-2);
-			if(false === ($rcsInfo = $RCH->getRevisionInfo($rcsFile))) {
+	    if(false === ($rcsInfo = $RCH->getRevisionInfo($rcsFile)))
 				echo($RCH->getError());
-			}
-			$fileLink = "<a href=\"http://".$GLOBALS['sys_default_domain']."/scm/viewFile.php?group_id=$group_id&file_name=$dir_name/$fileName&hide_attic=$hide_attic\">$fileName</a>";
+	    $fileLink = "<a href=\"/scm/viewFile.php?group_id=$group_id&file_name=$dir_name/$fileName&hide_attic=$hide_attic\">$fileName</a>";
 			// create 'Age' string
 			$age = time() - strtotime($rcsInfo['DATE']);
-			if($age < 24*3600) {
+	    if($age < 24*3600)
+	    {
 				$age /= 3600;
 				$age = floor($age)." hour(s)";
-			} elseif($age < 30*24*3600) {
+	    }
+	    elseif($age < 30*24*3600)
+	    {
 				$age /= 24*3600;
 				$age = floor($age)." day(s)";
-			} else {
+	    }
+	    else
+	    {
 				$age /= 30*24*3600;
 				$age = floor($age)." month(s)";
 			}
@@ -135,8 +143,10 @@ if ($allow) {
 		}
 	}
 	echo("</table>");
-} else {
-	echo("Error: u don't have access rights to <b>".$project->getPublicName()."</b> CVS root = $cvsroot");
+}
+else
+{
+    echo("Error: u don't have acces rigths to <b>".$project->getPublicName()."</b> CVS root = $cvsroot");
 }
 site_project_footer(array());
 ?>
