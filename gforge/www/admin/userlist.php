@@ -10,25 +10,36 @@ require "pre.php";
 session_require(array('group'=>'1','admin_flags'=>'A'));
 $HTML->header(array('title'=>$GLOBALS['system_name'].': User List'));
 
+/**
+ * performAction() - Updates the indicated user status
+ *
+ * @param               string  $newStatus - the new user status
+ * @param               string  $statusString - the status string to display
+ * @param               string  $user_id - the user id to act upon
+ */
+function performAction($newStatus, $statusString, $user_id) {
+	db_query("UPDATE users set status='".$newStatus."' WHERE user_id='".$user_id."'");
+	echo "<h2>User updated to ".$statusString." status</h2>";
+}
+
 function show_users_list ($result) {
 	echo '<p>Key:
-		<strong>Active</strong>
-		<em>Deleted</em>
-		Suspended
+		<font color="#00ff00">Active</font>
+		<font color="grey">Deleted</font>
+		<font color="red">Suspended</font>
 		(*)Pending</p>
 		<p>
 		<table width="100%" cellspacing="0" cellpadding="0" border="1">';
 
 	while ($usr = db_fetch_array($result)) {
-		print "\n<tr><td><a href=\"useredit.php?user_id=$usr[user_id]\">";
-		if ($usr[status] == 'A') print "<strong>";
-		if ($usr[status] == 'D') print "<em>";
+		print "\n<tr><td bgcolor=\"";
+		if ($usr[status] == 'A') print "#00ff00";
+		if ($usr[status] == 'D') print "grey";
+		if ($usr[status] == 'S') print "red";
+		print "\"><a href=\"useredit.php?user_id=$usr[user_id]\">";
 		if ($usr[status] == 'P') print "*";
 		print "$usr[user_name]</a>";
-		if ($usr[status] == 'A') print "</strong></td>";
-		if ($usr[status] == 'D') print "</em></td>";
-		if ($usr[status] == 'S') print "</td>";
-		if ($usr[status] == 'P') print "</td>";
+		print "</td>";
 		print "\n<td><a href=\"/developer/?form_dev=$usr[user_id]\">[DevProfile]</a></td>";
 		print "\n<td><a href=\"userlist.php?action=activate&user_id=$usr[user_id]\">[Activate]</a></td>";
 		print "\n<td><a href=\"userlist.php?action=delete&user_id=$usr[user_id]\">[Delete]</a></td>";
@@ -41,28 +52,12 @@ function show_users_list ($result) {
 
 // Administrative functions
 
-/*
-	Set this user to delete
-*/
 if ($action=='delete') {
-	db_query("UPDATE users SET status='D' WHERE user_id='$user_id'");
-	echo '<h2>User Updated to DELETE Status</h2>';
-}
-
-/*
-	Activate their account
-*/
-if ($action=='activate') {
-	db_query("UPDATE users SET status='A' WHERE user_id='$user_id'");
-	echo '<h2>User Updated to ACTIVE status</h2>';
-}
-
-/*
-	Suspend their account
-*/
-if ($action=='suspend') {
-	db_query("UPDATE users SET status='S' WHERE user_id='$user_id'");
-	echo '<h2>User Updated to SUSPEND Status</h2>';
+	performAction('D', "DELETED", $user_id);
+} else if ($action=='activate') {
+	performAction('A', "ACTIVE", $user_id);
+} else if ($action=='suspend') {
+	performAction('S', "SUSPENDED", $user_id);
 }
 
 /*
