@@ -21,7 +21,7 @@
 40 1 * * * sourceforge [ -x /usr/lib/sourceforge/bin/rating_stats.php ] && /usr/lib/sourceforge/bin/rating_stats.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include &> /dev/null
 
 # Daily project metrics
-45 1 * * * sourceforge [ -x /usr/lib/sourceforge/bin/project_metric.php ] && /usr/lib/sourceforge/bin/project_metric.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include &> /dev/null
+#45 1 * * * sourceforge [ -x /usr/lib/sourceforge/bin/project_metric.php ] && /usr/lib/sourceforge/bin/project_metric.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include &> /dev/null
 
 # Weekly project metrics
 50 1 * * Mon sourceforge [ -x /usr/lib/sourceforge/bin/project_weekly_metric.php ] && /usr/lib/sourceforge/bin/project_weekly_metric.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include &> /dev/null
