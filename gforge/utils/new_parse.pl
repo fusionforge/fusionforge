@@ -50,7 +50,7 @@ while ($ln = pop(@userdump_array)) {
 	($uid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
 	$uid += $uid_add;
 	$username =~ tr/A-Z/a-z/;
-	$user_exists = (-d $homedir_prefix . $username || -f "/var/lib/sourceforge/tmp/$username.tar.gz");
+	$user_exists = (-d $homedir_prefix . $username || -f "/var/lib/gforge/tmp/$username.tar.gz");
 	
 	if ($status eq 'A' && $user_exists) {
 		update_user($uid, $username, $realname, $shell, $passwd);
@@ -205,13 +205,13 @@ sub delete_user {
 	#my ($username, $junk, $uid, $gid, $realname, $homedir, $shell, $counter);
 	my $username = shift(@_);
 	
-	my $alreadydone=(-f "/var/lib/sourceforge/tmp/$username.tar.gz");
+	my $alreadydone=(-f "/var/lib/gforge/tmp/$username.tar.gz");
 	if (!$alreadydone){
 	print("Deleting User : $username\n");
-		print("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
-		system("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username");
-		print("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username\n");
-		system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username");
+		print("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username\n");
+		system("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
+		print("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username\n");
+		system("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
 	}
 }
 
