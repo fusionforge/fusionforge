@@ -119,8 +119,9 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     sent as e-mails (should fix Savannah bug #1401).
   * [Christian] applied paddington patch #644 missing rotate_activity.php,
     generate artifact stats
+  * [Christian] more i18n in account management 
 
- -- Christian Bayle <bayle@debian.org>  Mon, 11 Nov 2002 16:36:57 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue, 12 Nov 2002 02:36:53 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

@@ -153,10 +153,10 @@ function session_logout() {
  *
  */
 function session_login_valid($loginname, $passwd, $allowpending=0)  {
-	global $feedback;
+	global $feedback,$Language;
 
 	if (!$loginname || !$passwd) {
-		$feedback = 'Missing Password Or Users Name';
+		$feedback = $Language->getText('session','missingpasswd');
 		return false;
 	}
 
@@ -177,7 +177,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
                 ");
 		if (!$res || db_numrows($res) < 1) {
 			// No user by that name
-			$feedback='Invalid Password Or User Name';
+			$feedback=$Language->getText('session','invalidpasswd');
 			return false;
 		} else {
 			// There is a user with the provided user_name, but the MD5 passwds do not match
@@ -187,7 +187,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 				// Even the (crypt) unix_pw does not patch
 				// This one has clearly typed a bas passwd
-				$feedback='Invalid Password Or User Name';
+				$feedback=$Language->getText('session','invalidpasswd');
 				return false;
 			} 
 			// User exists, (crypt) unix_pw matches
@@ -211,7 +211,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
                                           SET user_pw='OUT OF DATE'
                                           WHERE user_id='".$usr['user_id']."'
                                           ");
-			$feedback='Invalid Password Or User Name';
+			$feedback=$Language->getText('session','invalidpasswd');
 			return false;
 		}
 
@@ -224,22 +224,22 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 		} else {
 			if ($usr['status'] == 'S') { 
 				//acount suspended
-				$feedback = 'Account Suspended';
+				$feedback = $Language->getText('session','suspended');
 				return false;
 			}
 			if ($usr['status'] == 'P') { 
 				//account pending
-				$feedback = 'Account Pending';
+				$feedback = $Language->getText('session','pending');
 				return false;
 			} 
 			if ($usr['status'] == 'D') { 
 				//account deleted
-				$feedback = 'Account Deleted';
+				$feedback = $Language->getText('session','deleted');
 				return false;
 			}
 			if ($usr['status'] != 'A') {
 				//unacceptable account flag
-				$feedback = 'Account Not Active';
+				$feedback = $Language->getText('session','notactive');
 				return false;
 			}
 		}
@@ -383,7 +383,7 @@ function session_set_new($user_id) {
 	$res = session_getdata($user_id);
 
 	if (!$res || db_numrows($res) < 1) {
-		exit_error("ERROR","ERROR - Cannot initialize session: ".db_error());
+		exit_error($Language->getText('global','error'),$Language->getText('session','cannotinit').": ".db_error());
 	} else {
 
 		//set up the new user object

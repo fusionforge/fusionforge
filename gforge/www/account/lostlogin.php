@@ -24,10 +24,16 @@ $confirm_hash = html_clean_hash_string($confirm_hash);
 		
 $res_user = db_query("SELECT * FROM users WHERE confirm_hash='$confirm_hash'");
 if (db_numrows($res_user) > 1) {
-	exit_error("Error","This confirm hash exists more than once.");
+	exit_error(
+		$Language->getText('global','error'),
+		$Language->getText('account_lostlogin','severalconfirm')
+	);
 }
 if (db_numrows($res_user) < 1) {
-	exit_error("Error","Invalid confirmation hash.");
+	exit_error(
+		$Language->getText('global','error'),
+		$Language->getText('account_lostlogin','invalidconfirm')
+	);
 }
 $u =& user_get_object(db_result($res_user, 0, 'user_id'), $res_user);
 exit_assert_object($u, 'User');
@@ -36,15 +42,15 @@ if ($submit) {
 
         if (strlen($passwd)<6) {
 	        exit_error(
-	                'Error',
-	                'You must supply valid password (at least 6 chars).'
+			$Language->getText('global','error'),
+			$Language->getText('account_lostlogin','sixchars')
 	        );
 	}
 
 	if ($passwd != $passwd2) {
 	        exit_error(
-	                'Error',
-	                'New passwords do not match.'
+			$Language->getText('global','error'),
+			$Language->getText('account_lostlogin','notmatch')
 		);
 	}
 
@@ -54,38 +60,25 @@ if ($submit) {
 		$u->setNewEmailAndHash('', 0);
 		
 		$HTML->header(array('title'=>"Password changed"));
-		?>
-
-		<h2>Password changed</h2>
-		<p>
-		Congratulations, you have re-set your account password.
-		You may <a href="/account/login.php">login</a> to the site
-		now.
-		</p>
-
-		<?php
+		echo $Language->getText('account_lostlogin','passwdchanged');
 		$HTML->footer(array());
 		exit();
         }
 
-	$feedback = 'Error: '.$u->getErrorMessage();
+	$feedback = $Language->getText('global','error').': '.$u->getErrorMessage();
 }
 
 $HTML->header(array('title'=>"Lost Password Login"));
+echo $Language->getText('account_lostlogin','welcome',$u->getUnixName());
 ?>
 
-<h2>Lost Password Login</h2>
-
-<P>Welcome, <?php echo $u->getUnixName(); ?>. You may now
-change your password.
-
 <FORM action="<?php echo $PHP_SELF; ?>" method="POST">
-<p>New Password (min. 6 chars):
+<p><?php echo $Language->getText('account_lostlogin','newpasswd'); ?>:
 <br><input type="password" name="passwd">
-<p>New Password (repeat):
+<p><?php echo $Language->getText('account_lostlogin','newpasswd2'); ?>:
 <br><input type="password" name="passwd2">
 <input type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>">
-<p><input type="submit" name="submit" value="Update">
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('account_lostlogin','update'); ?>">
 </form>
 
 <?php

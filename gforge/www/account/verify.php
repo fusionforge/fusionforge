@@ -20,8 +20,8 @@ if ($submit) {
 
 	if (!$loginname) {
 		exit_error(
-			'Missing paramater',
-			'You must enter a user name.'
+			$Language->getText('account_verify','missingparam'),
+			$Language->getText('account_verify','usermandatory')
 		);
 	}
 
@@ -29,15 +29,15 @@ if ($submit) {
 
 	if (!$u || !is_object($u)){
 		exit_error(
-			'Invalid user',
-			'User does not exist.'
+			$Language->getText('account_verify','invaliduser'),
+			$Language->getText('account_verify','nouser')
 		);
 	}
 
 	if ($u->getStatus()=='A'){
 		exit_error(
-			'Invalid operation',
-			'Account already active.'
+			$Language->getText('account_verify','invalidop'),
+			$Language->getText('account_verify','accountactive')
 		);
 	}
 
@@ -45,22 +45,22 @@ if ($submit) {
 
 	if ($confirm_hash != $u->getConfirmHash()) {
 		exit_error(
-			'Invalid parameter',
-			'Cannot confirm account identity - invalid confirmation hash (or login name)'
+			$Language->getText('account_verify','invalidparam'),
+			$Language->getText('account_verify','cannotconfirm')
 		);
 	}
 
 	if (!session_login_valid($loginname, $passwd, 1)) {
 		exit_error(
-			'Access denied',
-			'Credentials you entered do not correspond to valid account.'
+			$Language->getText('account_verify','accessdenied'),
+			$Language->getText('account_verify','invalidcred')
 		);
 	}
 
 	if (!$u->setStatus('A')) {
 		exit_error(
-			'Could not activate account',
-			'Error while activiting account: '.$u->getErrorMessage()
+			$Language->getText('account_verify','cannotactivate'),
+			$Language->getText('account_verify','erroractivate').': '.$u->getErrorMessage()
 		);
 	}
 

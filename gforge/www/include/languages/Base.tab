@@ -48,6 +48,16 @@ account_lostpw	title	Lost Your Password?
 account_lostpw	notify	<P>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password. <P><A href="/">[ Home ]</A>
 account_lostpw	warn	<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. <P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.
 account_lostpw	sendhash	Send Lost PW Hash
+account_lostlogin	title	Lost Password Confirmation
+account_lostlogin	severalconfirm	This confirm hash exists more than once.
+account_lostlogin	invalidconfirm	Invalid confirmation hash
+account_lostlogin	sixchars	You must supply valid password (at least 6 chars).
+account_lostlogin	notmatch	New passwords do not match.
+account_lostlogin	passwdchanged	<h2>Password changed</h2><p>Congratulations, you have re-set your account password.You may <a href="/account/login.php">login</a> to the sitenow.</p>
+account_lostlogin	welcome	<h2>Lost Password Login</h2><P>Welcome, $1. You may now change your password.
+account_lostlogin	newpasswd	New Password (min. 6 chars)
+account_lostlogin	newpasswd2	New Password (repeat)
+account_lostlogin	update	Update
 account_register	title	New Account Registration
 account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
 account_register	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
@@ -67,14 +77,14 @@ account_register	err_username	You must supply a username
 account_register	err_realname	You must supply a real name
 account_register	err_passwd	You must supply a password
 account_register	err_passwd2	Passwords do not match
-account_register	err_passwd3	Password must be at least 6 characters
+account_register	err_passwd3	Invalid Password:
 account_register	err_unixname	Invalid Unix Name. 
 account_register	err_email	Invalid Email Address
 account_register	err_userexist	That username already exists.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
 account_register	err_badinsert	Insert Failed 
 account_register	message_header	SourceForge Account Registration
-account_register	message_body	Thank you for registering on the SourceForge web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n$2\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\n$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
+account_register	message_body	Thank you for registering on the SourceForge web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
 account_unsubscribe	all_mailings	all SourceForge mailings and notifications
 account_unsubscribe	site_mailings	SourceForge site mailings
 account_verify	title	SourceForge Account Verification
@@ -82,6 +92,18 @@ account_verify	verify_blurb	<p>In order to complete your registration, login now
 account_verify	loginname	Login Name:
 account_verify	password	Password:
 account_verify	login		Login
+account_verify	missingparam	Missing paramater
+account_verify	usermandatory	You must enter a user name.
+account_verify	invaliduser	Invalid user
+account_verify	nouser	User does not exist.
+account_verify	invalidop	Invalid operation
+account_verify	accountactive	Account already active.
+account_verify	invalidparam	Invalid parameter
+account_verify	cannotconfirm	Cannot confirm account identity - invalid confirmation hash (or login name)
+account_verify	accessdenied	Access denied
+account_verify	invalidcred	Credentials you entered do not correspond to valid account.
+account_verify	cannotactivate	Could not activate account
+account_verify	erroractivate	Error while activiting account
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
@@ -533,3 +555,19 @@ classgroup	newprojectnotification	New SourceForge Project Submitted\n\nProject F
 classgroup	acceptedprojecttitle	SourceForge Project Approved
 classgroup	rejectedprojecttitle	SourceForge Project Denied
 classgroup	newprojectnotificationtitle	New SourceForge Project Submitted
+session	missingpasswd	Missing Password Or Users Name
+session	invalidpasswd	Invalid Password Or User Name
+session	suspended	Account Suspended
+session	pending	Account Pending
+session	deleted	Account Deleted
+session	notactive	Account Not Active
+session	cannotinit	ERROR - Cannot initialize session
+global	error	ERROR
+common_include_account	sixchar	Password must be at least 6 characters.
+common_include_account	nospace	There cannot be any spaces in the login name.
+common_include_account	tooshort	Name is too short. It must be at least 3 characters.
+common_include_account	toolong	Name is too long. It must be less than 15 characters.
+common_include_account	illegal	Illegal character in name.
+common_include_account	cvsreserved	Name is reserved for CVS.
+common_include_account	dnsreserved	Name is reserved for DNS purposes.
+common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.

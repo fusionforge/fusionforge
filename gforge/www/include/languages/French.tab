@@ -63,6 +63,16 @@ account_lostpw	title	Perdu votre mot de passe ?
 account_lostpw	notify	<P>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions du courrier électronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'acceuil ]</A>
 account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Cela compromet la sécurité de votre compte, de vos projets, et de ce site. <P>Cliquez sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous vous enverra un lien à l'adresse de courrier électronique enregistrée. Dans ce lien il y a une clé de Hachage de 128 bits pour votre compte. Suivre le lien vous autorisera à changer votre mot de passe en ligne et à vous connecter.
 account_lostpw	sendhash	Envoyer une clé de Hachage pour mot de passe perdu
+account_lostlogin	title	Confirmation pour mot de passe perdu
+account_lostlogin	severalconfirm	Il existe plus d'un hash de confirmation.
+account_lostlogin	invalidconfirm	Hash de confirmation invalide
+account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (Au moins 6 caractères).
+account_lostlogin	notmatch	Les nouveaux mots de passe diffèrent.
+account_lostlogin	passwdchanged	<h2>Mot de passe changé</h2><p>Félicitation, vous avez reinitialisé votre mot de passe.Vous pouvez <a href="/account/login.php">vous connecter</a> au site\nmaintenant.</p>
+account_lostlogin	welcome	<h2>Mot de passe perdu</h2><P>Bienvenu, $1. vous pouvez changer votre mot de passe maintenant.
+account_lostlogin	newpasswd	Nouveau mot de passe (6 caractères minimum)
+account_lostlogin	newpasswd2	Nouveau mot de passe (confirmation)
+account_lostlogin	update	Valider
 account_register	title	Enregistrement d'un nouvel utilisateur Sourceforge
 account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
 account_register	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préference avec SSL 128-bit ou utiliser Netscape 4.7 ou supérieur</FONT></H2>
@@ -82,14 +92,14 @@ account_register	err_username	Vous devez fournir un nom d'utilisateur
 account_register	err_realname	Vous devez entrer votre nom
 account_register	err_passwd	Vous devez fournir un mot de passe
 account_register	err_passwd2	Les mots de passe ne concordent pas
-account_register	err_passwd3	Le mot de passe doit avoir au moins 6 caractères
+account_register	err_passwd3	Mot de passe non valide:
 account_register	err_unixname	Nom unix invalide
 account_register	err_email	Courriel invalide
 account_register	err_userexist	Ce nom d'utilisateur existe déjà.
 account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
 account_register	err_badinsert	L'insertion a échouée.
 account_register	message_header	Enregistrement au site SourceForge
-account_register	message_body	Merci de vous être enregistré au site Sourceforge. \nVous avez maintenant un compte avec pour nom $1. \nPour terminer votre inscription suivez le lien: \n\n$2\n\n(Si vous ne voyez rien ci-dessus, c'est probablement un bug de votre logiciel de mail.\nUtilisez le lien ci-dessous, mais assurez vous qu'il est sur une seule ligne.)\n\n$3\n\nProfiter du site.\n\n-- l'équipe SourceForge\n
+account_register	message_body	Merci de vous être enregistré au site Sourceforge. \nVous avez maintenant un compte avec pour nom $1. \nPour terminer votre inscription suivez le lien: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(Si vous ne voyez rien ci-dessus, c'est probablement un bug de votre logiciel de mail.\nUtilisez le lien ci-dessous, mais assurez vous qu'il est sur une seule ligne.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\nProfiter du site.\n\n-- l'équipe SourceForge\n
 account_unsubscribe	all_mailings	toutes les notifications concernant Sourceforge
 account_unsubscribe	site_mailings	les messages concernant le site Sourceforge
 account_verify	title	Vérification de votre compte Sourceforge
@@ -97,6 +107,18 @@ account_verify	verify_blurb	<p>Pour valider votre enregistrement, connectez-vous
 account_verify	loginname	Nom de login:
 account_verify	password	Mot de passe:
 account_verify	login		Connexion
+account_verify	missingparam	Paramètre manquant
+account_verify	usermandatory	Vous devez rentrer un nom de user
+account_verify	invaliduser	Utilisateur non valide
+account_verify	nouser	L'utilisateur n'existe pas
+account_verify	invalidop	Opération non valide
+account_verify	accountactive	Le compte est déjà activé.
+account_verify	invalidparam	Paramètre non valide
+account_verify	cannotconfirm	Ne peut confirmer l'identité du compte - hash erroné ou login non valide
+account_verify	accessdenied	Accés interdit
+account_verify	invalidcred	Le mot de passe entré n'est pas valide.
+account_verify	cannotactivate	Impossible d'activer le compte
+account_verify	erroractivate	Erreur durant l'activation du compte
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
@@ -534,3 +556,19 @@ classgroup	newprojectnotification	Un nouveau projet SourceForge a été soumis\n\n
 classgroup	acceptedprojecttitle	Projet SourceForge Approuvé
 classgroup	rejectedprojecttitle	Projet SourceForge Refusé
 classgroup	newprojectnotificationtitle	Projet SourceForge Soumis
+session	missingpasswd	Mot de passe ou Login manquant
+session	invalidpasswd	Mot de passe ou Login non valide
+session	suspended	Compte suspendu
+session	pending	Compte en attente
+session	deleted	Compte supprimé
+session	notactive	Compte non actif
+session	cannotinit	ERREUR - Impossible d'initialiser la session
+global	error	ERREUR
+common_include_account	sixchar	Le mot de passe doit comporter au moins 6 caractères.
+common_include_account	nospace	Il ne peut y avoir d'espace dans un nom de login.
+common_include_account	tooshort	Le nom est trop court, il doit comporter au moins 3 caractères.
+common_include_account	toolong	Le nom est trop long, il doit comporter au plus 15 caractères.
+common_include_account	illegal	Caractère interdit dans le nom.
+common_include_account	cvsreserved	Nom réservé pour CVS.
+common_include_account	dnsreserved	Nom réservé pour le DNS.
+common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractère souligné à cause des règles imposées par la DNS.

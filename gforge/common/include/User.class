@@ -281,9 +281,7 @@ class User extends Error {
 		. "Enjoy the site.\n\n"
 		. " -- the SourceForge staff\n";
 */
-		$link1="<https://". $GLOBALS['sys_default_domain'] ."/account/verify.php?confirm_hash=_".$this->getConfirmHash().">";
-		$link2="https://". $GLOBALS['sys_default_domain']."/account/verify.php?confirm_hash=_".$this->getConfirmHash();
-		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$link1,$link2)));
+		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$GLOBALS['sys_default_domain'],$this->getConfirmHash())));
 		util_send_mail(
 			$this->getEmail(),
 			$Language->getText('account_register','message_header'),
