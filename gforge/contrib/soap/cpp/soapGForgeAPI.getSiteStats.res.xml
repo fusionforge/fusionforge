@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:tns="http://cougaar.org">
+ <SOAP-ENV:Body id="_0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <tns:getSiteStatsResponse>
+   <siteStats xsi:type="SOAP-ENC:Array" SOAP-ENC:arrayType="tns:SiteStatsDataPoint[1]">
+    <item xsi:type="tns:SiteStatsDataPoint">
+     <date xsi:type="xsd:string"></date>
+     <users xsi:type="xsd:string"></users>
+     <pageviews xsi:type="xsd:string"></pageviews>
+     <sessions xsi:type="xsd:string"></sessions>
+    </item>
+   </siteStats>
+  </tns:getSiteStatsResponse>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>

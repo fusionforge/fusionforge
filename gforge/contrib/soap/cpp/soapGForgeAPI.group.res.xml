@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SOAP-ENV:Envelope
+ xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+ xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:tns="http://cougaar.org">
+ <SOAP-ENV:Body id="_0" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <tns:groupResponse>
+   <groupResponse xsi:type="SOAP-ENC:Array" SOAP-ENC:arrayType="tns:GroupObject[1]">
+    <item xsi:type="tns:GroupObject">
+     <group_id xsi:type="xsd:integer"></group_id>
+     <group_name xsi:type="xsd:string"></group_name>
+     <is_public xsi:type="xsd:integer"></is_public>
+     <status xsi:type="xsd:string"></status>
+     <unix_group_name xsi:type="xsd:string"></unix_group_name>
+    </item>
+   </groupResponse>
+  </tns:groupResponse>
+ </SOAP-ENV:Body>
+</SOAP-ENV:Envelope>
