@@ -81,7 +81,7 @@ because submitting it WILL lead to sending email to lots of users.
 
 print '
 <form action="'.$PHP_SELF.'" method="post">'
-.'<strong>Target Audience:</strong><br />'.html_build_select_box_from_arrays(
+.'<strong>Target Audience:</strong>'.utils_requiredField().'<br />'.html_build_select_box_from_arrays(
 	array(0,'SITE','COMMUNTY','DVLPR','ADMIN','ALL','SFDVLPR'),
 	array(
 		'(select)',
@@ -100,10 +100,10 @@ print '
 print '
 
 <p>
-<strong>Subject:</strong>
+<strong>Subject:</strong>'.utils_requiredField().'
 <br /><input type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] " /></p>
 
-<p><strong>Text of Message:</strong> (will be appended with unsubscription
+<p><strong>Text of Message:</strong>'.utils_requiredField().' (will be appended with unsubscription
 information, if applicable)
 <pre><textarea name="mail_message" cols="70" rows="20" wrap="physical">
 </textarea>
