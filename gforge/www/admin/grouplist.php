@@ -22,15 +22,14 @@ if (!$form_catroot) {
 //print "<br /><a href=\"groupedit-add.php\">[Add Group]</a>";
 print "<p>".$GLOBALS['system_name'].$Language->getText('admin_grouplist','group_list_for_category');
 
+$sortorder = $_GET['sortorder'];
+if ($sortorder == null) {
+	$sortorder = "group_name";
+}
 if ($form_catroot == 1) {
 
 	if (isset($group_name_search)) {
 		print "<strong>" .$Language->getText('admin_grouplist','groups_that_begin_with'). "$group_name_search</strong>\n";
-		// [RM] LIKE is case-sensitive, and we don't want that
-		// $res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
-		// . "FROM groups WHERE group_name LIKE '$group_name_search%' "
-		// . ($form_pending?"AND WHERE status='P' ":"")
-		// . " ORDER BY group_name");
 		$res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
 			. "FROM groups WHERE group_name ~* '^$group_name_search%' "
 			. ($form_pending?"AND WHERE status='P' ":"")
@@ -40,7 +39,7 @@ if ($form_catroot == 1) {
 		$res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
 			. "FROM groups "
 			. ($status?"WHERE status='$status' ":"")
-			. "ORDER BY group_name");
+			. "ORDER BY $sortorder");
 	}
 } else {
 	print "<strong>" . category_fullname($form_catroot) . "</strong>\n";
@@ -51,18 +50,41 @@ if ($form_catroot == 1) {
 		. "groups.status "
 		. "FROM groups,group_category "
 		. "WHERE groups.group_id=group_category.group_id AND "
-		. "group_category.category_id=$GLOBALS[form_catroot] ORDER BY groups.group_name");
+		. "group_category.category_id=$GLOBALS[form_catroot] "
+		. "ORDER BY $sortorder");
 }
 ?>
 </p>
 <table width="100%" border="1">
 <tr>
-<td><strong><?php echo $Language->getText('admin_grouplist','group_name_click_to_edit'); ?></strong></td>
-<td><strong><?php echo $Language->getText('admin_grouplist','unix_name'); ?></strong></td>
-<td><strong><?php echo $Language->getText('admin_grouplist','status'); ?></strong></td>
-<td><strong><?php echo $Language->getText('admin_grouplist','pubic'); ?></strong></td>
-<td><strong><?php echo $Language->getText('admin_grouplist','license'); ?></strong></td>
-<td><strong><?php echo $Language->getText('admin_grouplist','members'); ?></strong></td>
+<td><strong>
+<a href="?sortorder=group_name">
+<?php echo $Language->getText('admin_grouplist','group_name_click_to_edit'); ?>
+</a>
+</strong></td>
+<td><strong>
+<a href="?sortorder=unix_group_name">
+<?php echo $Language->getText('admin_grouplist','unix_name'); ?>
+</a>
+</strong></td>
+<td><strong>
+<a href="?sortorder=status">
+<?php echo $Language->getText('admin_grouplist','status'); ?>
+</a>
+</strong></td>
+<td><strong>
+<a href="?sortorder=is_public">
+<?php echo $Language->getText('admin_grouplist','public'); ?>
+</a>
+</strong></td>
+<td><strong>
+<a href="?sortorder=license">
+<?php echo $Language->getText('admin_grouplist','license'); ?>
+</a>
+</strong></td>
+<td><strong>
+<?php echo $Language->getText('admin_grouplist','members'); ?>
+</strong></td>
 </tr>
 
 <?php

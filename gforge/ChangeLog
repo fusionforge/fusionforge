@@ -3,6 +3,9 @@
 	* www/mail/admin/index.php: 
 	Bug 323: Link to "administrate this list" was hardcoded HTTPS
 
+	* www/admin/grouplist.php: 
+	RFE #179: Groups & users list sortable
+
 2003-04-28  Reinhard Spisser	<reinhard@spisser.it>
 
 	* common/include/utils.php:
