@@ -1,15 +1,15 @@
-DEBIAN SOURCEFORGE PLUGINS HOWTO
+DEBIAN GFORGE PLUGINS HOWTO
 --------------------------------
 
 Here is a short HOWTO explaining how plugins work in Debian
-Sourceforge, and how to make a new one.
+GForge, and how to make a new one.
 
   It was written by Roland Mas <lolando@debian.org>.
 
 WHAT PLUGINS ARE, AND WHY THEY ARE USEFUL
 -----------------------------------------
 
-  Plugins are extensions to the "core" of Sourceforge, providing extra
+  Plugins are extensions to the "core" of GForge, providing extra
 functionality without being tightly integrated within Sourceforge
 proper.  They are useful because they allow for independent
 development of third-party functionality, and they add flexibility to
@@ -19,7 +19,7 @@ installation.
   As an example, it's been suggested to integrate a shared calendar
 application in Sourceforge.  It's a good idea and an interesting
 feature, but not one that everybody wants.  Thus, including it in the
-Sourceforge code would piss off someone.  Additionnally, there might
+GForge code would piss off someone.  Additionnally, there might
 be several competing implementations for such a calnedar application.
 Choosing one among them would also piss off people.  So it is made
 possible to have a system so that different implementations can exist
@@ -29,7 +29,7 @@ HOW PLUGINS WORK
 ----------------
 
   It is expected that a plugin is just some new feature added to
-Sourceforge, and not a change in the behaviour of existing features.
+GForge, and not a change in the behaviour of existing features.
 A plug-in should therefore only add files, not change existing ones.
 Whether these files be web pages, offline scripts, static
 documentation or else is not relevant.
@@ -48,7 +48,7 @@ that plugin could be "acmetimetracker".  When installed, the plugin
 will be assigned an integer identifier.  This id might vary from site
 to site, and should not be depended upon.
 
-  We [the Sourceforge-proper maintainers team] will maintain some sort
+  We [the GForge-proper maintainers team] will maintain some sort
 of list of allocated plugin names so that different plugins get
 different allocated identifiers, see below.
 
@@ -132,12 +132,12 @@ appropriate place, and printing the appropriate link whenever your
 CallHook() method is called from that place.
 
   Registering your plugin is done by providing a
-/usr/lib/sourceforge/plugins/<pluginname>/include/<pluginname>-init.php.
+/usr/lib/gforge/plugins/<pluginname>/include/<pluginname>-init.php.
 It will be parsed by the PluginManager object.  That file should
 contain a call to register_plugin(), passing it an object of the
 appropriate class.  See the helloworld plugin for an example.
 
-  The hooks are managed centrally by the Sourceforge code maintainers.
+  The hooks are managed centrally by the GForge code maintainers.
 If you need one, please ask, we'll add it.  At the time of writing,
 there's only one hook implemented (for the helloworld plugin).  It's
 called "usermenu" and occurs in the user_menu() method of the Layout
@@ -145,23 +145,23 @@ class.  I rely on you plugins developers to provide more ideas :-)
 
 - Plugin-specific web pages should reside either in the /plugin/*/
 URL-space (that is, plugin "foo" will probably put its files in
-/usr/lib/sourceforge/www/plugins/foo/) or (if the web interface is not
+/usr/share/gforge/www/plugins/foo/) or (if the web interface is not
 written in PHP) in /plugin/*/cgi-bin/ URL-space (files in
 /usr/lib/sourceforge/cgi-bin/plugins/foo/).
 
   If possible, and as much as possible, a plugin should use the layout
-functions defined by Sourceforge (Layout.class, HTML.class, or
+functions defined by GForge (Layout.class, HTML.class, or
 whatever they're called), to ensure a consistent look and themability.
 
   Of course, the previous point only applies to plugins written in
 PHP.  Plugins written in other languages are not excluded by this
 proposal, and there is no need to restrict them.  Should they appear,
-they might need to recode some of Sourceforge's functions in Perl or
+they might need to recode some of GForge's functions in Perl or
 another language.  I see no need to restrict that either.  Only thing:
 it would be better if the porting were as straightforward as possible.
 Do not reimplement, please.  Just translate from PHP to Perl or
 whatever.  If you do, please submit your translation to us, so that it
-can be provided by Sourceforge proper and maintained in common.
+can be provided by GForge proper and maintained in common.
 
 [TODO: Think about that, design, implement]
   Speaking of languages...  There should be some way to have
@@ -170,7 +170,7 @@ standard methods used elsewhere in Sourceforge.  I haven't thought
 about that very deeply yet, but I think it will evolve into a
 recommendation that the "handles" in the language files are
 plugin_foo_page / item (as compared to the current page / item model
-used for "core" Sourceforge i18n strings).
+used for "core" GForge i18n strings).
 
 - A plugin should register itself into the database using the provided
 register-plugin script on its installation, and unregister itself
@@ -193,7 +193,7 @@ HOW TO NAME MY PLUGIN
 ---------------------
 
 If you plan on distributing your plugin to the public, please contact
-the Sourceforge maintainer with your proposed name, and we'll add it
+the GForge maintainer with your proposed name, and we'll add it
 to the list below.  This ensures that no other plugin will use the
 same name, so as to reduce the risk of name conflicts.
 
