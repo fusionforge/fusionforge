@@ -234,6 +234,11 @@ access to dn=\"ou=Group,$gforge_base_dn\"
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
 	by * read
+access to dn=\"ou=mailingList,$gforge_base_dn\"
+	by dn=\"$gforge_admin_dn\" write
+	by dn=\"$robot_dn\" write
+        by dn=\"$slapd_admin_dn\" write
+	by * read
 access to dn=\"ou=cvsGroup,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
