@@ -9,7 +9,7 @@
 	<section>
 		<title>Registering as a new user</title>
 		<para>
-			To register a new user, click on the New Account button on the top right side of the browser window.
+			To register a new user, click on the New Account link on the top right side of the browser window.
 		</para>
 		<para>
 			To register as a user, you need to fill out the form with the following data:
@@ -27,7 +27,7 @@
 				<term>Password</term>
 				<listitem>
 					<para>
-						You should insert your password here. It must be at least 6 chars long. You shouldn't use too obvious names for the password. It should be easy to remember for you, but hard to guess for others. So don't use the name of your dog, of your cat, or the name of your birth city.
+						You should insert your password here. It must be at least 6 characters long. You shouldn't use too obvious names for the password. It should be easy to remember for you, but hard to guess for others. So don't use the name of your dog, of your cat, or the name of your birth city.
 					</para>
 					<para>You should use instead a combination of letters and numbers.</para>
 				</listitem>
@@ -41,7 +41,7 @@
 			<varlistentry>
 				<term>Language Choice</term>
 				<listitem>
-					<para>Select here your preferred language.   This choice does not influence only the language in which gforge will speak to you, but also some local specific data display, like dates, etc.</para>
+					<para>Select here your preferred language. This choice does not influence only the language in which gforge will speak to you, but also some local specific data display, like dates, etc.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
