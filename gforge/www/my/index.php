@@ -207,7 +207,7 @@ if (session_loggedin() || $sf_user_hash) {
 			echo '
 			<TR '. $HTML->boxGetAltRowStyle($i) .'><TD ALIGN="MIDDLE"><A HREF="/project/filemodule_monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
-			'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
+			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
 			'BORDER=0"></A></TD><TD WIDTH="99%"><A HREF="/project/showfiles.php?group_id='.
 			db_result($result,$i,'group_id').'">'.
 			db_result($result,$i,'name').'</A></TD></TR>';

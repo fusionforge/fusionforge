@@ -1,5 +1,7 @@
 2003-01-04  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/my/index.php: Bug 120: fix link to unmonitor file
+
 	* www/pm/task.php www/forum/save.php www/forum/new.php
 	www/forum/monitor.php www/project/filemodule_monitor.php
 	docs/xdocs/xdocs/contributions/templating.xml: fix typo:
