@@ -476,6 +476,29 @@ eval {
 	$dbh->commit () ;
     }
     
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+3" ;
+    if (is_lesser $version, $target) {
+	debug "Creating table group_cvs_history." ;
+	$query = "CREATE TABLE group_cvs_history (
+            id integer DEFAULT nextval('group_cvs_history_pk_seq'::text) NOT NULL,
+            group_id integer DEFAULT '0' NOT NULL,
+            user_name character varying(80) DEFAULT '' NOT NULL,
+            cvs_commits integer DEFAULT '0' NOT NULL,
+            cvs_commits_wk integer DEFAULT '0' NOT NULL,
+            cvs_adds integer DEFAULT '0' NOT NULL,
+            cvs_adds_wk integer DEFAULT '0' NOT NULL,
+            PRIMARY KEY (id)";
+    	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+    
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     
