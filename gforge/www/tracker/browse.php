@@ -151,6 +151,12 @@ if ($art_arr && count($art_arr) > 0) {
 	$then=(time()-$ath->getDuePeriod());
 	$rows=count($art_arr);
 	for ($i=0; $i < $rows; $i++) {
+		$comment_count = db_numrows($art_arr[$i]->getMessages());
+		if ($comment_count > 1) {
+			$comment_msg = "$comment_count ".$Language->getText('tracker','comments');
+		} else {
+			$comment_msg = "$comment_count ".$Language->getText('tracker','comment');
+		}
 		echo '
 		<tr bgcolor="'. html_get_priority_color( $art_arr[$i]->getPriority() ) .'">'.
 		'<td NOWRAP>'.
@@ -163,7 +169,7 @@ if ($art_arr && count($art_arr) > 0) {
 			'&group_id='. $group_id .'&atid='.
 			$ath->getID().'">'.
 			$art_arr[$i]->getSummary() .
-			'</a></td>'.
+			' ('. $comment_msg . ')</a></td>'.
 		'<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
 				date($sys_datefmt,$art_arr[$i]->getOpenDate()) .'</td>'.
 		'<td>'. $art_arr[$i]->getAssignedRealName() .'</td>'.

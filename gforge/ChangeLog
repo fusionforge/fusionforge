@@ -6,6 +6,9 @@
 
 	* www/project/admin/qrs.php:
 	Bug #344: Date/Time field was not being set properly in file releases
+
+	* www/tracker/browse.php, www/include/languages/Base.tab:
+	RFE #301: number of comments in the tracker-list
 	
 2003-07-02 Christian Bayle	<bayle@debian.org>
 

@@ -2179,6 +2179,8 @@ tracker	category_any	Any
 tracker	check_upload	Check to Upload & Attach File
 tracker	choose	Choose a tracker and you can browse/edit/add items to it.
 tracker	close_date	Close Date
+tracker	comment	comment
+tracker	comments	comments
 tracker	comment_added	Comment Added
 tracker	date	Date
 tracker	detailed_description	Detailed description
