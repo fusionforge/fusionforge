@@ -2,9 +2,9 @@
 /**
  * ArtifactCanned.class - Class to handle canned responses
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * The rest Copyright 2002-2004 (c) GForge Team
+ * http://gforge.org/
  *
  * @version   $Id$
  *
@@ -22,7 +22,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with GForge; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 require_once('common/include/Error.class');
 
