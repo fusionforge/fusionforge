@@ -2164,7 +2164,7 @@ CREATE TABLE "stats_site_pages_by_day" (
 -- Name: "plpgsql_call_handler" () Type: FUNCTION Owner: tperdue
 --
 
-CREATE FUNCTION "plpgsql_call_handler" () RETURNS opaque AS '/usr/lib/postgresql/lib/plpgsql.so', 'plpgsql_call_handler' LANGUAGE 'C';
+-- CREATE FUNCTION "plpgsql_call_handler" () RETURNS opaque AS '/usr/lib/postgresql/lib/plpgsql.so', 'plpgsql_call_handler' LANGUAGE 'C';
 
 --
 -- TOC Entry ID 470 (OID 23326)
@@ -2172,7 +2172,7 @@ CREATE FUNCTION "plpgsql_call_handler" () RETURNS opaque AS '/usr/lib/postgresql
 -- Name: plpgsql Type: PROCEDURAL LANGUAGE Owner: 
 --
 
-CREATE TRUSTED PROCEDURAL LANGUAGE 'plpgsql' HANDLER "plpgsql_call_handler" LANCOMPILER 'PL/pgSQL';
+-- CREATE TRUSTED PROCEDURAL LANGUAGE 'plpgsql' HANDLER "plpgsql_call_handler" LANCOMPILER 'PL/pgSQL';
 
 --
 -- TOC Entry ID 471 (OID 23327)
