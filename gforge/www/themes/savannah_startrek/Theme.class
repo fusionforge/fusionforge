@@ -29,7 +29,7 @@
 // $Id$
 
 // Base class for all Savannah themes.
-require_once('www/themes/savannah/Theme.class');
+require_once('www/themes/savannah/SavannahTheme.class');
 
 class Theme extends SavannahTheme {
 
