@@ -78,6 +78,7 @@ INSERT INTO forum_perm (group_forum_id,user_id,perm_level)
 --
 --	Add to all trackers
 --
+update user_group set artifact_flags=0 where artifact_flags is null;
 INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) 
 	SELECT artifact_group_list.group_artifact_id,user_group.user_id,user_group.artifact_flags
 	FROM user_group,artifact_group_list
