@@ -43,6 +43,9 @@ NameVirtualHost {ip_address}:443
 
   # This for cvsweb 
   ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
+
+  # 404 Error document
+  ErrorDocument 404 /404.php
 </VirtualHost>
 
 <VirtualHost {ip_address}>
@@ -138,6 +141,9 @@ NameVirtualHost {ip_address}:443
 
   # This for cvsweb 
   ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
+
+  # 404 Error document
+  ErrorDocument 404 /404.php
 </VirtualHost>
 
 # This is magic for virtual hosting!
