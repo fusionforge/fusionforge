@@ -1,3 +1,6 @@
+2004-04-06  Tom Copeland <tom@infoether.com>
+
+	* www/include/languages/Base.tab: Fixed stats_user_graph typo.
 
 2004-04-02  Tim Perdue  <tim@perdue.net>
 
@@ -42,6 +45,7 @@
 	* implemented a correct management of $sys_use_people flag in all GForge
 
 2004-03-23  Tom Copeland <tom@infoether.com>
+
 	* www/forum/include/ForumHTML.class: Implemented RFE [ #720 ] Link 
 	news items to project site.
 

@@ -2173,7 +2173,7 @@ stats_site_utils	total	Total
 stats_site_utils	view_by	View by: 
 stats_user_graph	date	Date
 stats_user_graph	new_additions_by_day	New Additions, by Day
-stats_user_graph	new_user_projects	New Users (RED), New Projects (BLUE
+stats_user_graph	new_user_projects	New Users (RED), New Projects (BLUE)
 stats_user_graph	user_projects	Users (RED) / Projects (BLUE)
 stats_view_graph	date	Date
 stats_view_graph	page_views	Gforge Page Views
