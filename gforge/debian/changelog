@@ -1,8 +1,13 @@
-gforge (4.0.2-5) unstable; urgency=low
+gforge (4.0.2-5c) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
   * [Christian] Had to add a db_stop before gforge-config in 
   * ftp and dns postinst scripts, quite strange
+  * [Christian] Now do a replace file in postinst if replace was wanted.
+    during config by changing dsf-helper replace-file functions.
+    Now at replace I make a copy of conffile to conffile.dpkg-old
+    At postinst, if conffile.dpkg-old exists conffile is
+    replaced with conffile.dpkg-new
 
  -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
 

@@ -25,19 +25,16 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#NODSFHELPER:replace-files#
+#DSFHELPER:replace-files#
 case "$1" in
     configure)
 	/usr/sbin/gforge-config
 
         # Patch Slapd configuration files
 	/usr/lib/gforge/bin/install-ldap.sh configure-files
-#	propose_update_install /etc/libnss-ldap.conf
-#	propose_update_install /etc/nsswitch.conf
-#	propose_update_install /etc/ldap/slapd.conf
-
-	# Clean debconf after ourselves
-#	db_stop
+	replace_file /etc/libnss-ldap.conf
+	replace_file /etc/nsswitch.conf
+	replace_file /etc/ldap/slapd.conf
 
 	# Install the chroot environment
 	/usr/lib/gforge/bin/install-chroot.sh configure

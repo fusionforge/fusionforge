@@ -25,19 +25,15 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#NODSFHELPER:replace-files#
+#DSFHELPER:replace-files#
 case "$1" in
     configure)
 	/usr/sbin/gforge-config
 
         # Patch Postfix configuration files
 	/usr/lib/gforge/bin/install-postfix.sh configure-files
-#	propose_update_install /etc/aliases
-#	propose_update_install /etc/postfix/main.cf
-
-	# Clean debconf after ourselves
-#	db_stop
-	
+	replace_file /etc/aliases
+	replace_file /etc/postfix/main.cf
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

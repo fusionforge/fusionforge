@@ -25,22 +25,22 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#NODSFHELPER:replace-files#
+#DSFHELPER:replace-files#
 case "$1" in
     configure)
+    	db_stop
 	/usr/sbin/gforge-config
 
-        # Patch Slapd configuration files
+        # Patch Slapd configuration files creation .gforge-new ones
 	/usr/lib/gforge/bin/install-ldap.sh configure-files
-#	propose_update_install /etc/libnss-ldap.conf
-#	propose_update_install /etc/nsswitch.conf
-#	propose_update_install /etc/ldap/slapd.conf
-
-	# Clean debconf after ourselves
-#	db_stop
+	replace_file /etc/libnss-ldap.conf
+	replace_file /etc/nsswitch.conf
+	replace_file /etc/ldap/slapd.conf
 
         # Setup our LDAP
 	err=0
+	if [ -f /etc/ldap/slapd.conf.gforge-old ]
+	then
 	/usr/lib/gforge/bin/install-ldap.sh configure || err=$?
 	case $err in
 	    0)
@@ -94,6 +94,7 @@ case "$1" in
 		exit $err
 		;;
 	esac
+	fi
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

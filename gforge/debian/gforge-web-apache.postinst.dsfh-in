@@ -25,7 +25,7 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#NODSFHELPER:replace-files#
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 case "$1" in
@@ -55,12 +55,12 @@ case "$1" in
 
         # Patch Apache configuration files
 	/usr/lib/gforge/bin/install-apache.sh configure-files
-#	for flavour in apache apache-perl apache-ssl ; do
-#	    [ -e /etc/$flavour/httpd.conf ] && propose_update_install /etc/$flavour/httpd.conf
-#	done
+	for flavour in apache apache-perl apache-ssl ; do
+	    [ -e /etc/$flavour/httpd.conf ] && replace_file /etc/$flavour/httpd.conf
+	done
 
-#	propose_update_install /etc/php4/apache/php.ini
-#	propose_update_install /etc/php4/cgi/php.ini
+	replace_file /etc/php4/apache/php.ini
+	replace_file /etc/php4/cgi/php.ini
 
         # Setup our Apache
 	touch /var/lib/gforge/etc/httpd.vhosts  && \

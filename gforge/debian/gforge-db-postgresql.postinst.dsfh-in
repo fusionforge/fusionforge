@@ -25,7 +25,7 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#NODSFHELPER:replace-files#
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
@@ -35,10 +35,7 @@ case "$1" in
 
         # Patch DB configuration files
 	/usr/lib/gforge/bin/install-db.sh configure-files
-#	propose_update_install /etc/postgresql/pg_hba.conf
-
-	# Clean debconf after ourselves
-#	db_stop
+	replace_file /etc/postgresql/pg_hba.conf
 
         # Setup our DB
 	/usr/lib/gforge/bin/install-db.sh configure

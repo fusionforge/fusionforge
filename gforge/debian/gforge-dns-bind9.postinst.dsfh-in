@@ -25,7 +25,7 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#NODSFHELPER:replace-files#
+#DSFHELPER:replace-files#
 case "$1" in
     configure)
 	# I don't know why I have to do this but somthing locks
@@ -36,10 +36,7 @@ case "$1" in
 
 	# Patch Bind configuration files
 	/usr/lib/gforge/bin/install-dns.sh configure-files
-#	propose_update_install /etc/bind/named.conf
-
-	# Clean debconf after ourselves
-#	db_stop
+	replace_file /etc/bind/named.conf
 
 	# Create the DNS zone
 	/usr/lib/gforge/bin/install-dns.sh configure
