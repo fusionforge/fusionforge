@@ -1,9 +1,10 @@
-gforge (3.0-6+3) unstable; urgency=low
+gforge (3.0-6+5) unstable; urgency=low
 
   * [Roland] Added 20030822.sql.
   * [Roland] Added scripts to generate a /var/lib/gforge/etc/httpd.vhosts
     file from the database and use that, so projects can use virtual hosts
-    other than <projectname>.<domainname>.
+    other than <projectname>.<domainname>.  Added a
+    /etc/gforge/templates/httpd.vhosts.template file, too.
   * [Roland] Bumped Standards-Version: to 3.6.1 (no changes needed).
   * [Christian] Applied Joo-won Jung ldap patch [#507] to correct bad ldap
     init
@@ -15,7 +16,7 @@ gforge (3.0-6+3) unstable; urgency=low
     it's not the same as the top-level LDAP object created by slapd, see
     bug [ #518 ].
 
- -- Roland Mas <lolando@debian.org>  Tue, 16 Sep 2003 15:20:56 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 16 Sep 2003 19:11:10 +0200
 
 gforge (3.0-6) unstable; urgency=low
 
