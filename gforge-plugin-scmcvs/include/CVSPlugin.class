@@ -113,7 +113,7 @@ class CVSPlugin extends SCM {
 					</p>';
 
 				// ######################## CVS Snapshot
-				if ($project->enableAnonSCM() or $displayCvsBrowser) {
+				if ($displayCvsBrowser) {
 					print '
 						<p>
 						[<a href="/snapshots.php?group_id='.$group_id.'">'.$Language->getText('plugin_scmcvs', 'download_snapshot').'</a>]
