@@ -14,6 +14,5 @@ else
 	# Fill ssh authorized_keys
 	/usr/lib/sourceforge/bin/ssh_create.pl
 	# Fill ldap tables
-	/usr/lib/sourceforge/bin/install-ldap.sh update
+	/usr/lib/sourceforge/bin/install-ldap.sh update &> /dev/null
 fi
-
