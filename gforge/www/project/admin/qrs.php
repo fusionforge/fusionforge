@@ -98,7 +98,7 @@ if( $submit ) {
 						<p>
 						Please note that file(s) may not appear immediately
 						on the <a href="/project/showfiles.php?group_id=<?php echo $group_id;?>">
-						download page</a>. Allow several hours for propogation.
+						download page</a>. Allow several hours for propagation.
 						</p>
 						<?php
 						db_commit();
