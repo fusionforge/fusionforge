@@ -3327,7 +3327,6 @@ COPY user_diary_monitor (monitor_id, monitored_user, user_id) FROM stdin;
 
 
 COPY user_group (user_group_id, user_id, group_id, admin_flags, forum_flags, project_flags, doc_flags, cvs_flags, member_role, release_flags, artifact_flags, role_id) FROM stdin;
-1	100	1	A               	0	2	0	1	100	0	\N	1
 \.
 
 
@@ -3354,7 +3353,7 @@ COPY user_ratings (rated_by, user_id, rate_field, rating) FROM stdin;
 
 COPY users (user_id, user_name, email, user_pw, realname, status, shell, unix_pw, unix_status, unix_uid, unix_box, add_date, confirm_hash, mail_siteupdates, mail_va, authorized_keys, email_new, people_view_skills, people_resume, timezone, "language", block_ratings, jabber_address, jabber_only, address, phone, fax, title, firstname, lastname, address2, ccode, theme_id, type_id) FROM stdin;
 2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N		\N	\N	US	1	1
-100	None	noreply@sourceforge.net	*********34343	Nobody	A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N	Nobody	\N	\N	US	1	1
+100	None	noreply@sourceforge.net	*********34343	Nobody	D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N	Nobody	\N	\N	US	1	1
 \.
 
 
