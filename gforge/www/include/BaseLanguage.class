@@ -8,7 +8,6 @@
 
 
 /*
-
 	Tim Perdue, September 7, 2000
 
 
@@ -24,6 +23,10 @@
 		as we extend our class, other languages can follow suit
 		as they are translated without holding up our progress
 
+	Soon-Son Kwon, June 11, 2002
+	
+
+	Added more strings
 */
 
 class BaseLanguage {
@@ -201,6 +204,21 @@ Content owned by VA Linux Systems is copyright
 	var $CVSHISTORY='Repository History';
 	var $BROWSETREE='<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project\'s code. You may also view the complete histories of any file in the repository.';
 	var $BROWSEIT='Browse CVS Repository';
+
+	var $ACCOUNTREGISTER_title='New Account Registration';
+	var $ACCOUNTREGISTER_congrat='<p>Congratulations. You have registered on SourceForge.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+	var $ACCOUNTREGISTER_loginname='Login Name (do not use uppercase letters) *:';
+	var $ACCOUNTREGISTER_password='Password (min. 6 chars) *:';
+	var $ACCOUNTREGISTER_password2='Password (repeat) *:';
+	var $ACCOUNTREGISTER_realname='Full/Real Name *:';
+	var $ACCOUNTREGISTER_language='Language Choice:';
+	var $ACCOUNTREGISTER_timezone='Timezone:';
+	var $ACCOUNTREGISTER_emailaddr='Email Address *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@users.';
+	var $ACCOUNTREGISTER_emailaddr2='&gt; that will forward to this address.</I>';
+	var $ACCOUNTREGISTER_siteupdate='Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>';
+	var $ACCOUNTREGISTER_communitymail='Receive additional community mailings. <I>(Low traffic.)</I>';
+	var $ACCOUNTREGISTER_register='Register';
+
 
 	/*
 		returns database result
