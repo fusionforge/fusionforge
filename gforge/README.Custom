@@ -70,6 +70,12 @@ following format:
 | <pagename> TAB <category> TAB <data>
 `---
 
+or
+
+,----
+| include <language>
+`---
+
   The <data> field can use variables in the form $1, $2, etc.  These
 variables are defined by the script and there's no simple way of
 knowing what they are apart from looking at the script itself.  To
@@ -82,6 +88,18 @@ always easy to do.
 from the non-customised text (either Base.tab or Foobaric.tab if it is
 defined).
 
+  The 'include <language>' line is used for languages that are dialects
+of each other.  For example, a German-Austrian.tab file might look
+like this:
+
+include German
+calendar	january	J&agrave;"anner
+
+This way German-Austrian defaults to German for strings not found in
+German-Austrian.tab but overrides "default" German for the "January"
+string.  See PortugueseBrazillian.tab for a current working example.
+
+
 HOW TO DO IT -- REALLY
 ----------------------
 
@@ -92,7 +110,7 @@ following:
    Foobaric.tab);
 2. Copy and paste the appropriate line (including the "handle" -- the
    first two fields) in /etc/gforge/languages-local/Foobaric.tab;
-   or /etc/gforge/languages-local/<theme_name>/Foobaric.tab 
+   or /usr/lib/gforge/www/themes/<theme_name>/Foobaric.tab 
    (For this last one the modification will only apply on a given theme)
 3. Read it to find out about the $n variables;
 4. Replace the third field with my own customised version.

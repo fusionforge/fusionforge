@@ -1,5 +1,7 @@
 2003-01-12  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* README.Custom: update theme info add add info about "include".
+
 	* www/include/languages/Latin.tab: new file.
 
 	* db/20030112.sql: add Latin as a supported language.
