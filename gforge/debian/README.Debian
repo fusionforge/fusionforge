@@ -37,8 +37,7 @@ delegate you the SOA for the sourceforge.<your-domain> subdomain.
 This will allow Sourceforge to create new hostnames for projects when
 needed (foo.sourceforge.<your-domain>, for instance), as well as some
 hostnames needed by the system (for mailing-lists or CVS, for
-instance).  This is if you choose web_only to be false when
-configuring Sourceforge.
+instance).
 
   The LDAP server is hosted on the same host and automatically
 managed, therefore you should not have to worry too much about it.
