@@ -1,4 +1,4 @@
-gforge (3.2.1-0+3) experimental; urgency=low
+gforge (3.2.1-0+4) experimental; urgency=low
 
   * [Roland] New upstream release.  Debian packaging still experimental at
     this stage.
@@ -8,7 +8,15 @@ gforge (3.2.1-0+3) experimental; urgency=low
   * [Roland] Also use 20031126.sql, for the "cron manager" feature.
   * [Roland] Also use 20031205.sql.
 
- -- Roland Mas <lolando@debian.org>  Sun, 15 Feb 2004 17:23:32 +0100
+ -- Roland Mas <lolando@debian.org>  Mon,  1 Mar 2004 17:54:05 +0100
+
+gforge (3.1-11) unstable; urgency=low
+
+  * [Roland] Added exim4 support, patch from Guillem Jover
+    <guillem@debian.org>.  Thanks! (closes: #234684).  Also made it the
+    default, since exim4 is the new default MTA for Sarge.
+
+ -- Roland Mas <lolando@debian.org>  Mon,  1 Mar 2004 16:46:57 +0100
 
 gforge (3.1-10) unstable; urgency=low
 
