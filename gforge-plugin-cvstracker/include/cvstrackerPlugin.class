@@ -56,7 +56,7 @@ class cvstrackerPlugin extends Plugin {
 		
 		if ($Rows > 0) {
 			echo '<tr><td colspan="2">';
-			echo '<h4>'.$Language->getText('plugin_cvstracker','title').'</h4>';
+			echo '<h4>'.$Language->getText('plugin_cvstracker','title').':</h4>';
 
 			$title_arr=$this->getTitleArr();
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
