@@ -31,6 +31,7 @@ case "$1" in
 	[ -f /var/lib/sourceforge/sf_dump_for_gforge ] && echo "Adjusting /var/lib/sourceforge/sf_dump_for_gforge" && perl -pi -e "s/connect - sourceforge/connect - gforge/" /var/lib/sourceforge/sf_dump_for_gforge
     	[ -d /var/lib/sourceforge ] && echo "Renaming dir /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
     	[ -h /var/lib/sourceforge ] && echo "Renaming symlink /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
+    	[ -d /var/log/sourceforge ] && echo "Renaming dir /var/log/sourceforge to /var/log/gforge" && mv /var/log/sourceforge /var/log/gforge 
 	[ -f /etc/sourceforge/sourceforge.conf ] && echo "Copying config file" && cp /etc/sourceforge/sourceforge.conf /etc/gforge/gforge.conf
 	[ -h /cvsroot ] && echo "Relinking symlink /cvsroot"  && rm -f /cvsroot && ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
     ;;
