@@ -184,7 +184,7 @@ $sys_peer_rating_group = {peerrating_groupid};
 $default_trove_cat = {default_trove_cat};
 
 //	JPGRAPH Package
-$sys_path_to_jpgraph='/usr/lib/jpgraph/';
+$sys_path_to_jpgraph='/usr/share/jpgraph/';
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
