@@ -24,4 +24,10 @@ file_id int,
 month int,
 day int
 );
-insert into users (user_id,user_name) values (2,'noreply');
+
+DROP TABLE cache_store;
+ALTER TABLE users ADD COLUMN jabber_address text;
+DROP TABLE top_group;
+drop table intel_agreement;
+drop table stats_ftp_downloads;
+drop table stats_http_downloads;
