@@ -658,6 +658,9 @@ class ArtifactType extends Error {
 		if ($email_all && !$email_address) {
 			$email_all=0;
 		}
+
+		$email_all = ((!$email_all) ? 0 : $email_all); 
+
 		$sql="UPDATE artifact_group_list SET 
 			name='$name',
 			description='". htmlspecialchars($description) ."',
