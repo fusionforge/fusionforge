@@ -84,7 +84,7 @@ if ($login && !$success) {
 		
 		echo '<h2><FONT COLOR="RED">'. $feedback .'</FONT></H2>';
 		if (stristr($feedback, "deleted")) {
-			echo $Language->getText('account_login', 'deleted_account');
+			echo $Language->getText('account_login', 'deleted_account', $GLOBALS[sys_name]);
 		}
 	} //end else
 

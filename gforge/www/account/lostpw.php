@@ -34,20 +34,14 @@ if ($loginname) {
 		exit_error('Error',$u->getErrorMessage());
 	} else {
 
-		$message = stripcslashes($Language->getText('account_lostpw', 'message', array($GLOBALS['HTTP_HOST'], $confirm_hash)));
+		$message = stripcslashes($Language->getText('account_lostpw', 'message', array($GLOBALS['HTTP_HOST'], $confirm_hash, $GLOBALS[sys_name])));
 
-		mail($u->getEmail(),$Language->getText('account_lostpw', 'subject'),$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+		mail($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS[sys_name]),$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 
 		$HTML->header(array('title'=>"Lost Password Confirmation",'pagename'=>'account_lostpw'));
 
-		?>
+		echo $Language->getText('account_lostpw','notify');
 
-		<P>An email has been sent to the address you have on file. Follow
-		the instructions in the email to change your account password.
-
-		<P><A href="/">[ Home ]</A>
-
-		<?php
 		$HTML->footer(array());
 		exit();
 	}
@@ -55,15 +49,9 @@ if ($loginname) {
 
 
 $HTML->header(array('title'=>"Lost Account Password",'pagename'=>'account_lostpw'));
+
+echo $Language->getText('account_lostpw','warn');
 ?>
-
-<P>Hey... losing your password is serious business. It compromises the
-security of your account, your projects, and this site.
-
-<P>Clicking "Send Lost PW Hash" below will email a URL to the email
-address we have on file for you. In this URL is a 128-bit confirmation
-hash for your account. Visiting the URL will allow you to change
-your password online and login.
 
 <FORM action="<?php echo $PHP_SELF; ?>" method="POST">
 <P>

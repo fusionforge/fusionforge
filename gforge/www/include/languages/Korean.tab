@@ -19,23 +19,33 @@
 # 2002-03-27	Kwon SoonSon	<kss@kldp.org>
 #   * Complete Rework based on the newest Base.tab
 #
+# 2002-04-26	Kwon SoonSon	<kss@kldp.org>
+#   * Added translation for .../account/login.php, various basic modules
+#
+# 2002-04-30	Kwon SoonSon	<kss@kldp.org>
+#   * Changed fontname from gulim to 굴림체 to prevent ugly screen on mozilla
+#   * Modified to use $GLOBALS[sys_name] instead of hardcoded "SourceForge"
+#     as much as possible 
+#   * Added/Modified/Updated translation for many pages including messge
+#     with parameters
+#
 about_foundries	about_blurb	SourceForge Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >SourceForge에게 연락해</a> 주십시오.
 about_foundries	foundries_list	시스템의 모든 Foundry에 관한 정보입니다. 어떤 것은 다른 것에 비해 좀더 완성도가 높습니다. 만약 여러분께서 공헌하고자 하시는 Foundry가 있다면 해당 Foundry의 관리자에게 연락하시기 바랍니다.
 account	title	사용자 등록 정보
-account_change_email	message	SourceForge의 이메일 주소를 변경하는 과정입니다.\n다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the SourceForge staff
+account_change_email	message	$3의 이메일 주소를 변경하는 과정입니다.\n다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
 account_change_email	section	사용자 등록 정보
-account_change_email	subject	SourceForge 확인
+account_change_email	subject	$1 확인
 account_change_email	title	이메일 주소 변경
-account_change_pw	confirmation		<h2>SourceForge 비밀번호 변경 확인</h2>	<p>	축하합니다. 비밀번호가 변경되었습니다.	</p>
+account_change_pw	confirmation	<h2>$1 비밀번호 변경 확인</h2>	<p>	축하합니다. 비밀번호가 변경되었습니다.	</p>
 account_change_pw	section	사용자 등록 정보
 account_change_pw	title	비밀번호 변경
 account_editsshkeys	section	사용자 등록 정보
 account_editsshkeys	title	CVS/SSH 키 편집
-account_first	about_blurb	여러분은 이제 온라인 오픈소스 개발 환경인 SourceForge의 등록 사용자입니다.<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 포럼에 글을 올릴 수도 있고, SourceForge에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. <P>SourceForge가 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.<P>부디 좋은 시간이 되시기를 바라며 저희가 SourceForge를 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>--the SourceForge staff
-account_first	title	SourceForge에 오신 것을 환영합니다!
-account_login	deleted_account	<p>여러분의 SourceForge 계정이 관리자에 의해 삭제되었습니다. 이는 보통 두가지로 나눌 수 있는데 1) 여러분 스스로 계정을 삭제해 달라고 요청하셨거나 2) 여러분의 계정이 서비스 계약에 위배되는 행위에 이용되어 시스템 관리를 위해 관리자에 의해 계정이 삭제되는 것입니다. 만약 의문 사항이나 의심되는 점이 있다면 <a href="/support/?group_id=1">지원 요청</a>을 하시면 됩니다.</p><p>감사합니다, <br><br>SourceForge Staff</p>
+account_first	about_blurb	여러분은 이제 온라인 오픈소스 개발 환경인 $1의 등록 사용자입니다.<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 포럼에 글을 올릴 수도 있고, $1에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. <P>$1(이)가 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.<P>부디 좋은 시간이 되시기를 바라며 저희가 $1(을)를 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>--$1
+account_first	title	환영합니다!
+account_login	deleted_account	<p>여러분의 $1 계정이 관리자에 의해 삭제되었습니다. 이는 보통 두가지로 나눌 수 있는데 1) 여러분 스스로 계정을 삭제해 달라고 요청하셨거나 2) 여러분의 계정이 서비스 계약에 위배되는 행위에 이용되어 시스템 관리를 위해 관리자에 의해 계정이 삭제되는 것입니다. 만약 의문 사항이나 의심되는 점이 있다면 <a href="/support/?group_id=1">지원 요청</a>을 하시면 됩니다.</p><p>감사합니다, <br><br>$1</p>
 account_login	pending_account	<P>여러분의 계정은 현재 이메일을 통한 확인 작업을 기다리고 있는 중입니다.		이메일에 포함되어 있는 링크를 방문하시면 계정이 곧바로 활성화됩니다.		<P>만약 이 이메일을 다시 받고 싶으시다면 아래에 있는 링크를 클릭하세요. 여러분이 등록 과정 중에 입력하신 이메일로 확인 메일이 다시한번 발송됩니다.		<P><A href="pending-resend.php?form_user=$1">[확인 메일 다시 보내기]</A>		<br><hr>		<p>
-account_login	title	SourceForge 사이트 로그인
+account_login	title	사이트 로그인
 account_login	cookiewarn	여기서부터는 쿠키를 사용합니다.
 account_login	loginname	로그인네임:
 account_login	passwd	비밀번호:
@@ -44,16 +54,32 @@ account_login	sslnotice	<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 �
 account_login	login	SSL을 통해 로그인하기
 account_login	lostpw	[비밀번호를 잊었습니까?]
 account_login	newaccount	[새로운 계정]
-account_lostpw	message	SourceForge 사이트의 누군가가 (아마도 본인?) 이메일을 이용한\n비밀번호 변경을 요청하였습니다. 만약 여러분이 직접 하신 것이 아니라면\n이 메시지는 그냥 무시하십시오. 그러면 아무것도 바뀌지 않습니다.\n\n만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십시오.\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the SourceForge staff\n
-account_lostpw	subject	SourceForge 확인
+account_lostpw	message	$3 사이트의 누군가가 (아마도 본인?) 이메일을 이용한\n비밀번호 변경을 요청하였습니다. 만약 여러분이 직접 하신 것이 아니라면\n이 메시지는 그냥 무시하십시오. 그러면 아무것도 바뀌지 않습니다.\n\n만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십시오.\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
+account_lostpw	subject	$1 확인
 account_lostpw	title	비밀번호를 잊으셨습니까?
-account_register	title	SourceForge 사용자 등록
+account_lostpw	notify	<P>입력하신 이메일 주소로 메일을 보냈습니다. 비밀번호를 변경하시려면 지금 보낸 메일의 내용을 참고하시기 바랍니다. <P><A href="/">[ 홈으로 ]</A>
+account_lostpw	warn	<P>비밀번호를 분실하는 것은 사용하고 계신 계정과, 운영중인 프로젝트, 그리고 이 사이트 전체적으로 좋지않은 영향을 미칠 수 있습니다. <P>아래 "Send Lost PW Hash" 를 누르시면 여러분에게 할당되어 있는 이메일 주소로 URL을 알려 드리겠습니다. 그 URL은 여러분의 계정에 할당되어 있는 128-bit 해쉬 정보입니다. 그 URL을 방문하시면 비밀번호를 변경하시고 사이트에 다시 로그인하실 수 있습니다.
+account_register	title	사용자 등록
+account_register	congrat	<p>축하합니다. $1에 등록하셨습니다. <p> 귀하는 이제 곧 메일 주소를 확인하기 위한 확인 메일을 받으시게 됩니다. 메일에 포함되어 있는 URL을 클릭하시면 계정을 사용하실 수 있습니다.
+account_register	iewarn	<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>
+account_register	macwarn	<H2><FONT COLOR="RED">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</FONT></H2>
+account_register	loginname	로그인 네임 (대문자는 쓰지 마십시오.) *:
+account_register	password	비밀번호 (최소 6 글자) *:
+account_register	password2	비밀번호 (다시) *:
+account_register	realname	이름 *:
+account_register	language	언어 선택:
+account_register	timezone	시간대:
+account_register	emailaddr	이메일 주소 *: <BR><I>이 이메일 주소는 계정이 활성화되기 전에 확인이 필요합니다. 입력하신 주소는 사이트 상에서 노출되지 않습니다. 여러분은 &lt;loginname\@$1&gt;라는 계정을 발급받게 되며 이곳으로 보내진 모든 메일은 입력하신 메일 주소로 재전송됩니다.</I>
+account_register	siteupdate	사이트 업데이트에 관한 소식 메일로 받기 <I>(트래픽이 거의 없으며 보안 관련 공지사항을 포함하므로 메일을 받아 보시기를 권장합니다.)</I>
+account_register	communitymail	커뮤니티 관련 메일 받기. <I>(트래픽 별로 없음.)</I>
+account_register	mandatory	별표(*)가 있는 부분은 필수 항목입니다.
+account_register	register	등록하기
 account_unsubscribe	all_mailings	모든 SourceForge 메일 및 공지사항
 account_unsubscribe	site_mailings	SourceForge 메일
 account_verify	title	SourceForge 사용자 확인
 account_verify	verify_blurb	<p>사용자 등록 절차를 완료하시려면 지금 로그인하십시오. 일반 로그인 기능은 곧바로 활성화됩니다.</p>
 conf	content_encoding	EUC-KR
-conf	default_font	gulim,verdana,arial,helvetica,sans-serif
+conf	default_font	굴림체,verdana,arial,helvetica,sans-serif
 conf	language_code	ko
 conf	language_id	22
 contact	about_blurb	<p>이것은 <b>SourceForge.net</b>의 연락 페이지입니다. -- 이곳에서 호스팅되고 있는 프로젝트에 대해 문제가 있다면 해당 프로젝트의 버그 트래킹 시스템이나 기술지원 관리자 기능을 활용하십시오. 이러한 기능들은 해당 프로젝트의 홈페이지인 sourceforge.net/projects/&lt;프로젝트 이름&gt; 을 방문하시면 이용하실 수 있습니다.</p><p>기술지원 요청이나 버그 리포트 혹은 SourceForge의 <A href="staff.php">staff</a>들과 직접 연락하고 싶으시다면, 적절한 방법을 이용하여 주시기 바랍니다.</p><ul><li>여러분의 프로젝트나 계정에 대한 지원요청은 <a href="/support/?func=addsupport&group_id=1">SourceForge 기술지원 관리자</a>를 방문하십시오.</li><li>SourceForge에 버그를 발견하셨다면, <a href="/bugs/?func=addbug&group_id=1">SourceForge 버그 트래킹</a>을 이용하십시오.</li><li>보도자료 요청은 VA Linux Systems의 해당 담당자인 <a href="mailto:eureka@valinux.com">Eureka Endo</a>에게 연락하시면 됩니다.</li></ul>
@@ -146,12 +172,12 @@ group	short_summary	요약
 group	short_support	지원
 group	short_survey	설문조사
 group	short_tracker	Tracker
-home	about_blurb	SourceForge는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 포럼, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>SourceForge를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
+home	about_blurb	$1는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 포럼, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>$1를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
 home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	highest_ranked_users	활발한 사용자
 home	most_active_this_week	금주 가장 활발한 곳
 home	sfos	SourceForge OnSite
-home	sourceforge_statistics	SourceForge 통계
+home	sourceforge_statistics	$1 통계
 home	top_project_downloads	최다 다운로드
 mail	provided_by	<P>메일링 리스트는 SourceForge에 알맞게 구현된 <A href="http://www.list.org">GNU Mailman</A>을 통해 운영됩니다.  멋진 소프트웨어를 만들어낸  Mailman과 <A href="http://www.python.org">Python</A> 개발자 여러분들께 감사드립니다.
 mail	section	프로젝트: $1
@@ -169,7 +195,7 @@ menu	bookmark_page	책갈피
 menu	change_my_theme	테마 변경
 menu	code_snippet_library	Code Snippet Library
 menu	compile_farm	Compile Farm
-menu	contact_us	SourceForge와 연락하기
+menu	contact_us	$1에 연락하기
 menu	discussion_forums	Discussion 포럼
 menu	documentation	사이트 관련 문서
 menu	foundry_admin	Foundry 관리
@@ -211,8 +237,8 @@ news	title	새소식
 news	choose	<p>원하시는 뉴스를 선택하십시오. 뉴스를 읽거나 검색, 혹은 올라와 있는 뉴스에 대해 답글을 올리실 수도 있습니다.<p>
 news_admin	section	새소식
 news_admin	title	새소식 Admin
-news_main	title	SourceForge 새소식
-news_submit	post_blurb	여러분이 프로젝트 관리자라면 새소식을 등록하실 수 있습니다. 만약 다른 사람의 도움이 필요하다면 "도움 요청" 메시지를 올리실 수도 있습니다.<P><B>여러분의 프로젝트</B>에 관한 모든 새소식은 곧바로 프로젝트 요약 페이지에 올라가게 됩니다. 만약 SourceForge 홈페이지에 새소식을 올리시려면 새소식 관리 팀으로부터 승인을 받아야 합니다.
+news_main	title	새소식
+news_submit	post_blurb	여러분이 프로젝트 관리자라면 새소식을 등록하실 수 있습니다. 만약 다른 사람의 도움이 필요하다면 "도움 요청" 메시지를 올리실 수도 있습니다.<P><B>여러분의 프로젝트</B>에 관한 모든 새소식은 곧바로 프로젝트 요약 페이지에 올라가게 됩니다. 만약 $1 홈페이지에 새소식을 올리시려면 새소식 관리 팀으로부터 승인을 받아야 합니다.
 news_submit	section	새소식
 news_submit	title	새소식 올리기: $1
 partners	about_blurb	<P>SourceForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
@@ -352,13 +378,14 @@ survey_survey_resp	title	설문조사 처리 및 반응
 thanks	about_blurb	<P><h2>SourceForge Acknowledgements</h2>The Developers of SourceForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	사용자 등록 정보
 themes	title	테마 보기/바꾸기
-top	about_blurb	우리는 이곳에서 운영되고 있는 여러 프로젝트들에 대한 사용 기록을 집계하여 여러가지 분류를 통해 보실 수 있도록 하고 있습니다.
+top	about_blurb	이곳 $1에서 운영되고 있는 여러 프로젝트들에 대한 사용 기록을 집계하여 여러가지 분류를 통해 보실 수 있도록 하고 있습니다.
 top	active_all_time	현재 가장 활발한 프로젝트
 top	active_weekly	금주 가장 활발한 프로젝트
 top	downloads	최다 다운로드
 top	downloads_7_days	최다 다운로드 (최근 7일동안)
 top	forum_posts	활발한 포럼
-top	pageviews	페이지뷰가 많은 프로젝트 - SourceForge '버튼' 로고를 클릭한 횟수로 측정됨
+top	pageviews	페이지뷰가 많은 프로젝트 - $1 버튼 로고를 클릭한 횟수로 측정됨
+top	highest_ranked_users	활발한 사용자
 top	title	상위 프로젝트
 top_mostactive	section	상위 프로젝트
 top_mostactive	title	가장 활발한 프로젝트: $1
@@ -392,4 +419,7 @@ tracker_detail	section	$1
 tracker_detail	title	Tracker 자세히 보기
 tracker_reporting	section	$1
 tracker_reporting	title	Tracker 리포팅
-users	title	사용자 요약
+users	title	사용자 정보
+users	peerinfo1	만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오. <p> $1 Peer Rating System은 <A HREF="http://www.advogato.com">Advogato</A>에서 힌트를 얻은 것입니다. 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.
+users	peerinfo2	Peer Rating 박스는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다. <ul><li>"전체 순위" 필드는 $1의 모든 사용자와 비교한 순위를 나타냅니다. <li>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다. <li>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다. </ul> <p> <i> Peer Rating System에 참여하고 싶지 않으시다면, (이는 다른 사람에게 평가받는 것, 다른 사람을 평가하는 것 양쪽 모두에게 영향을 미칩니다.) <a href="/account/">사용자 등록 정보</a> 페이지에서 설정하시면 됩니다. 만약 이 평가 시스템에서 탈퇴하시면 다른 사용자를 평가했던 정보들도 모두 영구적으로 삭제되고 여러분의 개인 페이지에서 'Peer Rating' 박스도 사라지게 되니다. </i></p>
+users	optout	여러분은 Peer Rating 시스템에서 탈퇴하신 상태이며 그렇지 않다면 다른 사용자를 평가하실 수 있습니다. 자세한 사항은 <a href="/account/">사용자 등록 정보</a>를 참고하세요.

@@ -27,15 +27,8 @@ if ($submit) {
 		$email,$mail_site,$mail_va,$language_id,$timezone);
 	if ($register) {
 		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
-		?>
-		<p>
-		Congratulations. You have registered on <?php echo $GLOBALS['sys_name']; ?>.
-		<p> 
-		You are now being sent a confirmation email to verify your email 
-		address. Visiting the link sent to you in this email will activate
-		your account.
-		<?php
 
+		echo $Language->getText('account_register','congrat', $GLOBALS[sys_name]);
 		echo $HTML->footer(array());
 		exit;
 	} else {
@@ -47,12 +40,10 @@ if ($submit) {
 $HTML->header(array('title'=>'Register','pagename'=>'account_register'));
 
 if (browser_is_windows() && browser_is_ie() && browser_get_version() < '5.1') {
-	echo '<H2><FONT COLOR="RED">Internet Explorer users need to 
-	upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>';	
+	echo $Language->getText('account_register','iewarn');
 }
 if (browser_is_ie() && browser_is_mac()) {
-	echo '<H2><FONT COLOR="RED">Internet Explorer on the Macintosh
-	is not supported currently. Use Netscape 4.7 or higher</FONT></H2>';
+	echo $Language->getText('account_register','macwarn');
 }
 
 
@@ -66,42 +57,37 @@ if ($feedback) {
 
 <form action="https://<?php echo $HTTP_HOST.$PHP_SELF; ?>" method="post">
 <p>
-Login Name (do not use uppercase letters) *:<br>
+<?php echo $Language->getText('account_register','loginname'); ?><br>
 <input type="text" name="unix_name" value="<?php print($unix_name); ?>">
 <p>
-Password (min. 6 chars) *:<br>
+<?php echo $Language->getText('account_register','password'); ?><br>
 <input type="password" name="password1">
 <p>
-Password (repeat) *:<br>
+<?php echo $Language->getText('account_register','password2'); ?><br>
 <input type="password" name="password2">
 <P>
-Full/Real Name *:<BR>
+<?php echo $Language->getText('account_register','realname'); ?><br>
 <INPUT size=30 type="text" name="realname" value="<?php print($realname); ?>">
 <P>
-Language Choice:<BR>
+<?php echo $Language->getText('account_register','language'); ?><br>
 <?php echo html_get_language_popup ($Language,'language_id',1); ?>
 <P>
 Timezone:<BR>
 <?php echo html_get_timezone_popup('timezone', 'GMT'); ?>
 <P>
-Email Address *:
-<BR><I>This email address will be verified before account activation.
-It will not be displayed on the site. You will receive a mail forward
-account at &lt;loginname@<?php echo $GLOBALS['sys_users_host']; ?>&gt; that will forward to
-this address.</I>
+@<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
 <BR><INPUT size=30 type="text" name="email" value="<?php print($email); ?>">
 <P>
 <INPUT type="checkbox" name="mail_site" value="1" checked>
-Receive Email about Site Updates <I>(Very low traffic and includes
-security notices. Highly Recommended.)</I>
+<?php echo $Language->getText('account_register','siteupdate'); ?>
 <P>
 <INPUT type="checkbox" name="mail_va" value="1">
-Receive additional community mailings. <I>(Low traffic.)</I>
+<?php echo $Language->getText('account_register','communitymail'); ?>
 <p>
-Fields marked with * are mandatory.
+<?php echo $Language->getText('account_register','mandatory'); ?>
 </p>
 <p>
-<input type="submit" name="submit" value="Register">
+<input type="submit" name="submit" value="<?php echo $Language->getText('account_register','register'); ?>">
 </form>
 
 <?php

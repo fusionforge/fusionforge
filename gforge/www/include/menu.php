@@ -154,7 +154,7 @@ function menu_sourceforge() {
 		print '<P>';
 		// $HTML->menu_entry('/compilefarm/',$Language->getText('menu','compile_farm'));
 		// print '<P>';
-		// $HTML->menu_entry('/contact.php',$Language->getText('menu','contact_us'));
+		// $HTML->menu_entry('/contact.php',$Language->getText('menu','contact_us', $GLOBALS[sys_name]));
 		// $HTML->menu_entry('/about.php',$Language->getText('menu','about_sourceforge'));
 	$HTML->menuhtml_bottom();
 }

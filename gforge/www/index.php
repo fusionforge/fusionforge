@@ -42,7 +42,7 @@ $HTML->header(array('title'=>'Welcome','pagename'=>'home'));
 
 */
 
-echo $Language->getText('home','about_blurb');
+echo $Language->getText('home','about_blurb', $GLOBALS[sys_name]);
 echo '<P>';
 // echo $HTML->box1_top($Language->getText('menu','long_foundries'));
 ?>

@@ -34,9 +34,9 @@ if ($newemail) {
 		);
 	}
 
-	$message = stripcslashes($Language->getText('account_change_email', 'message', array($GLOBALS[HTTP_HOST], $confirm_hash)));
+	$message = stripcslashes($Language->getText('account_change_email', 'message', array($GLOBALS[HTTP_HOST], $confirm_hash, $GLOBALS[sys_name])));
 
-	mail($newemail,$Language->getText('account_change_email', 'subject'),$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+	mail($newemail,$Language->getText('account_change_email', 'subject', $GLOBALS[sys_name]),$message,"From: noreply@$GLOBALS[HTTP_HOST]");
 
 	site_user_header(array('title'=>"Email Change Confirmation",'pagename'=>'account_change_email'));
 ?>

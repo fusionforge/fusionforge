@@ -61,7 +61,7 @@ if (user_isloggedin()) {
 
 	echo '
 		<P>
-		'. $Language->getText('news_submit', 'post_blurb') .'
+		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS[sys_name]) .'
 		<P>
 		You may include URLs, but not HTML in your submissions.
 		<P>

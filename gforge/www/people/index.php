@@ -40,7 +40,7 @@ if ($group_id) {
 
 	people_header(array('title'=>'Help Wanted System','pagename'=>'people'));
 
-	echo $Language->getText('people','about_blurb');
+	echo $Language->getText('people','about_blurb', $GLOBALS[sys_name]);
 
 	echo people_show_category_table();
 

@@ -13,20 +13,20 @@ about	about_blurb	<h2>About Sourceforge</h2>This site runs Debian Sourceforge, a
 about_foundries	about_blurb	SourceForge Foundries serve as places for developers to congregate, share expertise and news, get and give advice, and generally help each other develop  better software faster (this is Open Source, after all).<br>&nbsp;<br>If you're interested in volunteering to help support or start a foundry, or have suggestions, ideas, or gripes please <a href="/contact.php" >contact SourceForge</a>.
 about_foundries	foundries_list	Here is a list of all foundries on the system.  Some are more complete than others.  If you see a foundry you may want to contribute to, contact the existing foundry admins for that foundry.
 account	title	Account Preferences
-account_change_email	message	You have requested a change of email address on SourceForge.\nPlease visit the following URL to complete the email change:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the SourceForge staff
+account_change_email	message	You have requested a change of email address on $1.\nPlease visit the following URL to complete the email change:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
 account_change_email	section	Account Preferences
-account_change_email	subject	SourceForge Verification
+account_change_email	subject	$1 Verification
 account_change_email	title	Change Email Address
-account_change_pw	confirmation		<h2>SourceForge Password Change Confirmation</h2>	<p>	Congratulations. You have changed your password.	</p>
+account_change_pw	confirmation	<h2>$1 Password Change Confirmation</h2>	<p>	Congratulations. You have changed your password.	</p>
 account_change_pw	section	Account Preferences
 account_change_pw	title	Change Password
 account_editsshkeys	section	Account Preferences
 account_editsshkeys	title	Edit CVS/SSH Shared Keys
-account_first	about_blurb	You are now a registered user on SourceForge, the online development environment for Open Source projects.<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in SourceForge, sign on as a project developer, or even start your own project.<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of SourceForge.<P>Enjoy the site, and please provide us with feedback on ways that we can improve SourceForge.<P>--the SourceForge staff
-account_first	title	Welcome to SourceForge!
-account_login	deleted_account	<p>Your SourceForge account has been removed by SourceForge staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a<a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>SourceForge Staff</p>
+account_first	about_blurb	You are now a registered user on $1, the online development environment for Open Source projects.<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in $1, sign on as a project developer, or even start your own project.<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of $1.<P>Enjoy the site, and please provide us with feedback on ways that we can improve $1.<P>--the $1 staff
+account_first	title	Welcome!
+account_login	deleted_account	<p>Your $1 account has been removed by $1 staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a<a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
 account_login	pending_account	<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
-account_login	title	SourceForge Site Login
+account_login	title	Site Login
 account_login	cookiewarn	Cookies must be enabled past this point.
 account_login	loginname	Login Name:
 account_login	passwd	Password:
@@ -35,10 +35,26 @@ account_login	sslnotice	<p><B><FONT COLOR="RED">You will be connected with an SS
 account_login	login	Login with SSL
 account_login	lostpw	[Lost your password?]
 account_login	newaccount	[New Account]
-account_lostpw	message	Someone (presumably you) on the SourceForge site requested a\npassword change through email verification. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the SourceForge staff\n
-account_lostpw	subject	SourceForge Verification
+account_lostpw	message	Someone (presumably you) on the $3 site requested a\npassword change through email verification. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the $3 staff\n
+account_lostpw	subject	$1 Verification
 account_lostpw	title	Lost Your Password?
-account_register	title	SourceForge New Account Registration
+account_lostpw	notify	<P>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password. <P><A href="/">[ Home ]</A>
+account_lostpw	warn	<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. <P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.
+account_register	title	New Account Registration
+account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
+account_register	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
+account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>
+account_register	loginname	Login Name (do not use uppercase letters) *:
+account_register	password	Password (min. 6 chars) *:
+account_register	password2	Password (repeat) *:
+account_register	realname	Full/Real Name *:
+account_register	language	Language Choice:
+account_register	timezone	Timezone:
+account_register	emailaddr	Email Address *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
+account_register	siteupdate	Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>
+account_register	communitymail	Receive additional community mailings. <I>(Low traffic.)</I>
+account_register	mandatory	Fields marked with * are mandatory.
+account_register	register	Register
 account_unsubscribe	all_mailings	all SourceForge mailings and notifications
 account_unsubscribe	site_mailings	SourceForge site mailings
 account_verify	title	SourceForge Account Verification
@@ -138,12 +154,12 @@ group	short_summary	Summary
 group	short_support	Support
 group	short_survey	Surveys
 group	short_tracker	Tracker
-home	about_blurb	SourceForge is a <B>free service to <A href="http://www.opensource.org">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration.  <BR>&nbsp;<P><B>Site Feedback and Participation</B><P>In order to get the most out of SourceForge, you'll need to <A href="/account/register.php">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully. <P>&nbsp;<BR><B>Set Up Your Own Project</B><P><A href="/account/register.php">Register as a site user</A>, then <A HREF="/account/login.php">Login</A> and finally, <A HREF="/register/">Register Your Project.</A> Thanks... and enjoy the site.
+home	about_blurb	$1 is a <B>free service to <A href="http://www.opensource.org">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration.  <BR>&nbsp;<P><B>Site Feedback and Participation</B><P>In order to get the most out of $1, you'll need to <A href="/account/register.php">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully. <P>&nbsp;<BR><B>Set Up Your Own Project</B><P><A href="/account/register.php">Register as a site user</A>, then <A HREF="/account/login.php">Login</A> and finally, <A HREF="/register/">Register Your Project.</A> Thanks... and enjoy the site.
 home	breaking_down_barriers	Breaking Down the Barriers to Open Source Development
 home	highest_ranked_users	Highest Ranked Users
 home	most_active_this_week	Most Active This Week
 home	sfos	SourceForge OnSite
-home	sourceforge_statistics	SourceForge Statistics
+home	sourceforge_statistics	$1 Statistics
 home	top_project_downloads	Top Project Downloads
 mail	provided_by	<P>Mailing lists provided via a SourceForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
 mail	section	Project: $1
@@ -161,7 +177,7 @@ menu	bookmark_page	Bookmark Page
 menu	change_my_theme	Change My Theme
 menu	code_snippet_library	Code Snippet Library
 menu	compile_farm	Compile Farm
-menu	contact_us	Contact SourceForge
+menu	contact_us	Contact $1
 menu	discussion_forums	Discussion Forums
 menu	documentation	Site Docs
 menu	foundry_admin	Foundry Admin
@@ -203,12 +219,12 @@ news	title	News
 news	choose	<P>Choose a News item and you can browse, search, and post messages.<P>
 news_admin	section	News
 news_admin	title	News Admin
-news_main	title	SourceForge News
-news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the news team before they will appear on the SourceForge home page.
+news_main	title	News
+news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the news team before they will appear on the $1 home page.
 news_submit	section	News
 news_submit	title	Submit News for $1
 partners	about_blurb	<P>SourceForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
-people	about_blurb	<P>The SourceForge Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
+people	about_blurb	<P>The $1 Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
 people	section	Project Help Wanted
 people	title	Projects Needing Help
 people_admin	section	Project Help Wanted
@@ -344,13 +360,14 @@ survey_survey_resp	title	Survey Processing / Response
 thanks	about_blurb	<P><h2>SourceForge Acknowledgements</h2>The Developers of SourceForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Account Preferences
 themes	title	View/Change Theme
-top	about_blurb	We track many project usage statistics on SourceForge, and display here the top ranked projects in several categories.
+top	about_blurb	We track many project usage statistics on $1, and display here the top ranked projects in several categories.
 top	active_all_time	Most Active All Time
 top	active_weekly	Most Active This Week
 top	downloads	Top Downloads
 top	downloads_7_days	Top Downloads (Past 7 Days)
 top	forum_posts	Top Forum Post Counts
-top	pageviews	Top Project Pageviews - Measured by impressions of the SourceForge 'button' logo
+top	pageviews	Top Project Pageviews - Measured by impressions of the $1 'button' logo
+top	highest_ranked_users	Highest Ranked Users
 top	title	Top Projects
 top_mostactive	section	Top Projects
 top_mostactive	title	Most Active Projects: $1
@@ -385,3 +402,6 @@ tracker_detail	title	Tracker Detailed View
 tracker_reporting	section	$1
 tracker_reporting	title	Tracker Reporting
 users	title	User Summary
+users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
+users	peerinfo2	The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
+users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.

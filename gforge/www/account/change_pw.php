@@ -51,7 +51,7 @@ if ($submit) {
 	site_user_header(array(title=>"Successfully Changed Password",'pagename'=>'account_change_pw'));
 	?>
 
-	<?php echo $Language->getText('account_change_pw', 'confirmation'); ?>
+	<?php echo $Language->getText('account_change_pw', 'confirmation', $GLOBALS[sys_name]); ?>
 
 	<p>
 	You should now <a href="/account/">Return to UserPrefs</a>.

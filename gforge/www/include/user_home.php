@@ -118,47 +118,20 @@ $HTML->box1_bottom(); ?>
 <?php 
 $me = session_get_user(); 
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
+
+echo $Language->getText('users','peerinfo1', $GLOBALS[sys_name]);
 ?>
 
-If you are familiar with this user, please take a moment to rate him/her
-on the following criteria. Keep in mind, that your rating will be visible to
-the user and others.
-<P>
-The <?php echo $GLOBALS['sys_name']; ?> Peer Rating system is based on concepts from 
-<A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
 	<CENTER>
         <?php echo vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</CENTER>
-<P>
-The Peer Rating box shows all rating averages
-(and response levels) for each individual criteria. Due to the math and
-processing required to do otherwise, these numbers incoporate responses from
-both "trusted" and "non-trusted" users.
-<ul>
-<li> The "Sitewide Rank" field shows the user's rank compared to all ranked
-<?php echo $GLOBALS['sys_name']; ?> users. 
-<li>The "Aggregate Score" shows an average, weighted overall score, based on
-trusted-responses only. 
-<li>The "Personal Importance" field shows the weight that users ratings of
-other developers will be given (between 1 and 1.5) -- higher rated user's
-responses are given more weight.  
-</ul>
+
+<?php echo $Language->getText('users','peerinfo2', $GLOBALS[sys_name]);
+
+} else if ($me && !$me->usesRatings()) { ?>
 <p>
 <i>
-If you would like to opt-out from peer rating system (this will affect
-your ability to both rate and be rated), refer to <a href="/account/">your account
-maintenance page</a>. If you choose not to participate, your ratings of
-other users will be permanently deleted and the 'Peer Rating' box will
-disappear from your user page.
-</i>
-</p>
-<?php } else if ($me && !$me->usesRatings()) { ?>
-<p>
-<i>
-You opted-out from peer rating system, otherwise you would have
-a chance to rate the user. Refer to 
-<a href="/account/">your account maintenance page</a> for more
-information.
+<?php echo $Language->getText('users','optout'); ?>
 </i>
 </p>
 <?php } ?>
