@@ -1,7 +1,7 @@
 sourceforge (2.5-29+) unstable; urgency=low
 
-  * [Christian] Change gid/uid attribution in ldap.php to be like in backend 
-  * [Christian] Added asciize function in ldap.php because 
+  * [Christian] Change gid/uid attribution in ldap.php to be like in backend
+  * [Christian] Added asciize function in ldap.php because
     LDAP expects utf-8 encoded character string (backport from 2.6)
   * [Roland] Fixed install-ftp.sh so that it actually does install stuff.
   * [Roland] Fixed a few bashisms in maintainer scripts.
@@ -23,8 +23,9 @@ sourceforge (2.5-29+) unstable; urgency=low
     wrong in the case of foundries.
   * [Roland] Fixed POSIXness of maintainer scripts (closes: #150410).
   * [Roland] Added missing languages (closes: #150301).
+  * [Christian] Added support for ssh-nonfree 
 
- -- Roland Mas <lolando@debian.org>  Thu, 20 Jun 2002 13:53:21 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon, 24 Jun 2002 10:50:59 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
