@@ -140,7 +140,6 @@ while(my ($group_list_id, $listname, $user_name, $password, $description) = $rel
 	print "dn: cn=$listname,ou=mailingList,$sys_ldap_base_dn
 objectClass: debSfMailingList
 objectClass: top
-cn: $listname
 debSfListPostAddress: \"|/var/lib/mailman/mail/wrapper post $listname\"
 debSfListOwnerAddress: \"|/var/lib/mailman/mail/wrapper mailowner $listname\"
 debSfListRequestAddress: \"|/var/lib/mailman/mail/wrapper mailcmd $listname\"
