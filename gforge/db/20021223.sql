@@ -27,7 +27,7 @@ group_project_id int
 category_name text);
 CREATE INDEX projectcategory_groupprojectid ON project_category(group_project_id);
 INSERT INTO project_category VALUES ('100','1','None');
-SELECT SETVAL('project_categor_category_id_seq',100);
+SELECT SETVAL('project_category_category_id_seq',100);
 
 --
 --	Add category_id
