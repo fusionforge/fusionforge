@@ -7,10 +7,14 @@
 replace_file () {
     file=$1
     if [ -e ${file}.gforge-old ] ; then
-    	if [ ! -e ${file}.gforge-new ] ; then
-		echo "WARNING: ${file}.gforge-new replacement not generated, this shouldn't happen"
+    	if [ ! -e ${file} ] ; then 
+		echo "WARNING: No ${file}"
 	else
-    		mv ${file}.gforge-new $file
+    		if [ ! -e ${file}.gforge-new ] ; then
+			echo "WARNING: ${file}.gforge-new replacement not generated, this shouldn't happen"
+		else
+    			mv ${file}.gforge-new $file
+		fi
 	fi
     fi
 }
