@@ -80,146 +80,20 @@ Adminning notes
 should be relatively few things to do for the administrator.  The
 following are random notes trying to document them.
 
+  You'll need to periodically check the Approve Pending Projects page
+as well as the Approve News Bytes one, and take appropriate action.
+That can be done by the `admin' user (or any user having admin
+permissions on the `siteadmin' project) via the web interface.
+
   If you need to add skills to the database after installation, you
 can use the sf-add-skill script.  Give it a skill (or a list of
 skills) and it'll insert it into the databse.  This script is located
 in /usr/lib/sourceforge/bin/.
 
   If you would like to add a theme to your Sourceforge, you'll first
-have to compose it.  Take example on the ones present in
-/usr/lib/sourceforge/www/themes/ and adapt them to your needs.  When
-it's done, you'll have to register it into the database.  Use the
-sf-register-theme script for that purpose.  This script is located in
-/usr/lib/sourceforge/bin/ too.
+have to compose it.  Please refer to README.Themes.
 
-  You'll need to periodically check the Approve Pending Projects page
-as well as the Approve News Bytes one, and take appropriate action.
-That can be done by the `admin' user via the web interface.
-
-
-Packaging roadmap
------------------
-  This section sketches a roadmap of the steps that needed to be taken
-before any official release of Sourceforge in Debian was possible.
-
-  It is completely outdated, and wrong.  I once followed this roadmap,
-but it turned out that some things came before others and some came
-after, I switched to SF 2.5, that sort of stuff.  The latest scheme
-was 2.5-0+x (up to 2.5-0+15) before upload, 2.5-1 being the first
-upload to Debian unstable.  Current scheme is a classical "2.5-x" for
-released packages (the ones I upload to Debian).  Inter-release
-versioning scheme, for the packages I use internally before uploading,
-uses `+' (the current development package is 2.5-9+5).
-
-  I keep the original roadmap only for reference, and it might just
-get deleted altogether in the near future.  Here it comes:
-
-,----
-| I'll use a pre-release numbering scheme similar to Branden Robinson's,
-| except I'll use more phases.
-| 
-| Phase 1 (package revisions 2.0-0phase1v1 to 2.0-0phase1v<$BIGNUM>)
-| ------------------------------------------------------------------
-| This phase will concentrate on the web services that only involve PHP
-| and the database.  This includes account and project creation and
-| management, the bug-tracking system, the task manager, the forums, the
-| support manager, the user's page and the software map.  Probably also
-| the patch manager and the news system, maybe the doc manager.
-| 
-|   These packages will probably break everything everytime you'll
-| install them, so I won't even try to provide smooth upgrades.  Yet
-| I'll provide an apt-get'able directory for the brave.
-| 
-| Phase 2 (2.0-0phase2v*)
-| -----------------------
-| This phase will get into the system a bit more and end by proposing
-| features that require access to real files and services on the system:
-| the end of phase2 will offer all the items marked "maybe" in phase1,
-| plus the FTP and file releases services, as well as integration with
-| the MTA.
-| 
-|   At this stage I'll try and stabilize the package a bit, so that from
-| phase3 Sourceforge can be cleanly upgraded with a reasonably low risk
-| of breakage.
-| 
-| Phase 3 (2.0-0phase3*)
-| ----------------------
-| This phase will take care of the services that require modifications
-| to existing software (in particular, CVS and CVS-Web will have to be
-| patched) or deep meddling with the system (DNS and web virtual
-| hosting, Unix account creation with libnss-probably-mysql).  Mailing
-| lists should be operational by the end of phase3 if not earlier.
-| 
-| Phase 4 (2.0-0phase4*)
-| ----------------------
-| That one should wrap it up before the big show, completing all the
-| tidbits that were previously overlooked: the software foundries, the
-| search engine, and basically everything I can think of that I forgot
-| before.
-| 
-| Face it, I've got to get it out sometime
-| ----------------------------------------
-|   By that time, I should (hopefully) be a full-fledged Debian
-| developer and I'll upload to unstable.  If I'm not yet, I'll call for
-| some thick-skinned volunteer to sponsor me and upload it for me.  That
-| could be called -0phase5, but it'll be high time to call it
-| sourceforge-2.0-1.  And -2.0-2 and -2.0-3 and so on, 'cause I suspect
-| there will be bugs.
-| 
-|   I'm not yet sure if the BTS can be used to track bugs on a package
-| that's not in Debian yet, but if it can I will probably encourage its
-| use even for very early packages, and take into consideration all the
-| reports I find there.  The only exception will be for bug-reports
-| telling me that the upstream codebase I'm packaging is out-of-date,
-| see next paragraph.  These ones will get closed immediately (well, as
-| soon as I see them anyway), with minimal comment, or merged with the
-| first one that happened.
-| 
-|   I choose to package the Sourceforge released code (labeled 2.0 by
-| the SF crew).  I know that the development version has since the 2.0
-| release been made accessible by anonymous CVS.  I know that tremendous
-| enhancements have been committed into this CVS, not the least of which
-| are internationalisation and localisation.  I know that bugs have been
-| fixed.  Yet I don't feel like packaging a big piece of intrusive
-| software like Sourceforge while running after the backlog and tracking
-| its evolution at the same time.  Don't be alarmed, I will eventually
-| follow the upstream evolution, but only after the sourceforge-2.0-*
-| has stabilised a bit and the bugs in the BTS are only (or mostly) bugs
-| that have already been fixed upstream instead of problems coming from
-| the packaging.
-| 
-|   Of course, I'll be interested in feedback from users.  I just love
-| receiving email...  There are, however, some items of feedback I'd
-| *NOT* be grateful for:
-| 
-| - aesthetic comments: except for the top banner that I did, the look
-| and design of the site have been made by the SF crew upstream.  If it
-| doesn't please you, there are several (currently two) themes.  If
-| these themes do not please you, propose your own upstream.  If it
-| makes it into upstream, it'll make it into the package.
-| 
-| - "not up-to-date" reminders.  See three paragraphs above.
-| 
-| - "speed up, you're late" comments.  You'll notice I deliberately did
-| not state any date in this roadmap.  I have no clue how long it will
-| take, what with the NM queue and real-life and stuff, and any date
-| you'd get out of my mouth would be heavily smelling of alcohol (thus
-| being void).  If you feel I'm late, help me.
-| 
-|   On the contrary, here are some examples of interaction and help I'd
-| *very much* be interested in:
-| 
-| - security advice, with explanations (and patches if possible).  I am
-| absolutely no security guru, and I suspect that there are many ways SF
-| could be exploited.
-| 
-| - help with the BTS: I haven't focused really on all the evolutions of
-| SF since the 2.0 release.  I expect many people will file reports for
-| bugs that have already been fixed upstream.  Keeping the two BTS as
-| synchronous as possible would be a big help.
-| 
-|  -- Roland Mas <99.roland.mas@aist.enst.fr>, 2000-12-04
-`---- 
+  Other customisations are described in README.Custom.
 
 
 Thanks
@@ -229,16 +103,17 @@ still do) a great job with SF, I'd like to send my thanks to Guillaume
 Morin, who wrote a very thorough Sourceforge installation guide.  That
 guide gives step-by-step instructions for the installation procedure,
 and a big part of the packaging task was to turn these instructions
-into automated scripts.
+into automated scripts.  Even if this package has evolved a lot since
+then, it was originally based on his guide.
 
   Thanks also to all who tested packages and helped correct many
-errors of mine.
+errors of mine.  In particular, thanks to all who submitted patches.
 
   And mega-thanks to Christian Bayle.  That guy single-handedly
 adapted and fixed all the scripts related to CVS, DNS, SSH accounts,
 and probably more.
 
-  -- Roland Mas <lolando@debian.org>, 2001
+  -- Roland Mas <lolando@debian.org>, 2001-2002
 
 # Local Variables:
 # mode: text
