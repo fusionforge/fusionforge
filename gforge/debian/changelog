@@ -1,8 +1,9 @@
 sourceforge (2.6-0+12+) unstable; urgency=low
 
   * [Christian] Added a dump and restore option to install-db.sh
+  * [Christian] Added themeable main page support 
 
- -- Christian Bayle <bayle@debian.org>  Fri, 28 Jun 2002 16:02:35 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon,  8 Jul 2002 14:04:45 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 

@@ -20,6 +20,11 @@
 class Layout extends Error {
 
 	/**
+	 * The default main page content
+	 */
+	var $rootindex = "index_std.php";
+
+	/**
 	 * The root location for images
 	 *
 	 * @var		string	$imgroot
