@@ -1,0 +1,136 @@
+<?php
+
+/**
+ * GForge Search Engine
+ *
+ * Copyright 2004 (c) Dominik Haas, GForge Team
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
+
+require_once('pre.php');
+require_once('www/search/include/renderers/HtmlGroupSearchRenderer.class');
+require_once('www/search/include/renderers/ForumsHtmlSearchRenderer.class');
+require_once('www/search/include/renderers/TrackersHtmlSearchRenderer.class');
+require_once('www/search/include/renderers/TasksHtmlSearchRenderer.class');
+require_once('www/search/include/renderers/DocsHtmlSearchRenderer.class');
+require_once('www/search/include/renderers/FrsHtmlSearchRenderer.class');
+require_once('www/search/include/renderers/NewsHtmlSearchRenderer.class');
+
+class FullProjectHtmlSearchRenderer extends HtmlGroupSearchRenderer {
+	
+	/**
+	 * group id
+	 *
+	 * @var int $groupId
+	 */
+	var $groupId;
+
+	/**
+	 * the words to search for
+	 *
+	 * @var string $words
+	 */	
+	var $words;
+
+	/**
+	 * flag to define whether the result must contain all words or only one of them
+	 *
+	 * @var boolean $isExact
+	 */
+	var $isExact;
+	
+	/**
+	 * Constructor
+	 *
+	 * @param string $words words we are searching for
+	 * @param int $offset offset
+	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param int $groupId group id
+	 *
+	 */
+	function FullProjectHtmlSearchRenderer($words, $offset, $isExact, $groupId) {
+		$this->groupId = $groupId;
+		$this->words = $words;
+		$this->isExact = $isExact;
+		
+		$this->HtmlGroupSearchRenderer(SEARCH__TYPE_IS_ADVANCED, $words, $isExact, $searchQuery, $groupId);
+	}
+	
+	/**
+	 * flush - overwrites the flush method from htmlrenderer
+	 */
+	function flush() {
+		$this->writeBody();
+		$this->writeFooter();
+	}
+
+	/**
+	 * writeBody - write the Body of the output
+	 */
+	function writeBody() {
+		site_project_header(array('title' => $this->Language->getText('advanced_search', 'project_search'), 'group' => $this->groupId, 'pagename' => 'advanced search', ));
+		if (strlen($this->words) < 3) {
+			echo '<br><h1>'.$this->Language->getText('advanced_search', 'error_search_minlength').'<h1><br>';
+		} else {
+			echo $this->getResult();
+		}
+	}
+	
+	/**
+	 * getResult - returns the Body of the output
+	 * 
+  	 * @return string result of all selected searches
+	 */
+	function getResult() {
+		$html = '';
+		
+		$renderer = new ForumsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		$html .= $this->getPartResult($renderer, 'short_forum');
+		
+		$renderer = new TrackersHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		$html .= $this->getPartResult($renderer,  'short_tracker');
+		
+		$renderer = new TasksHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		$html .= $this->getPartResult($renderer, 'short_pm');
+
+		$renderer = new DocsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		$html .= $this->getPartResult($renderer, 'short_docman');
+
+		$renderer = new FrsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		$html .= $this->getPartResult($renderer, 'short_files');
+		
+		$renderer = new NewsHtmlSearchRenderer($this->words, $this->offset, $this->isExact, $this->groupId);
+		$html .= $this->getPartResult($renderer, 'short_news');
+
+		return $html.'<br />'; 
+	}
+
+	/**
+	* getPartResult - returns the result of the given renderer 
+	* 
+  	* @return string result of the renderer
+	*/			
+	function getPartResult($renderer, $section) {
+		$result = '';
+		$renderer->searchQuery->executeQuery();
+		
+		$result .= '<h3><a name="'.$section.'"></a>'.$this->Language->getText('advanced_search', 'headline', array($this->Language->getText('group', $section))).'</h3>';
+		
+		if ($renderer->searchQuery->getRowsCount() > 0) {
+			$result .= $GLOBALS['HTML']->listTabletop($renderer->tableHeaders);
+			$result .= $renderer->getRows();			
+			$result .= $GLOBALS['HTML']->listTableBottom();			
+		} elseif(method_exists($renderer, 'getSections') && (count($renderer->getSections($this->groupId)) == 0)) {
+			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found_no_under_section', array(htmlspecialchars($query['words']))).'</p>';
+		} else {
+			$result .= '<p>'.$this->Language->getText('advanced_search', 'no_matches_found', array(htmlspecialchars($query['words']))).'</p>';
+		}
+		return $result;
+	}
+
+}
+
+?>

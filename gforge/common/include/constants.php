@@ -13,6 +13,7 @@ define('SEARCH__TYPE_IS_TASKS', 'tasks');
 define('SEARCH__TYPE_IS_FORUMS', 'forums');
 define('SEARCH__TYPE_IS_NEWS', 'news');
 define('SEARCH__TYPE_IS_FRS', 'frs');
+define('SEARCH__TYPE_IS_FULL_PROJECT', 'full');
 
 define('SEARCH__DEFAULT_ROWS_PER_PAGE', 25);
 define('SEARCH__ALL_SECTIONS', 'all');

@@ -97,6 +97,10 @@ class SearchManager {
 		
 		// Project search engines
 		$this->addSearchEngine(
+			SEARCH__TYPE_IS_FULL_PROJECT,
+			new GroupSearchEngine(SEARCH__TYPE_IS_FULL_PROJECT, 'FullProjectHtmlSearchRenderer', $Language->getText('searchbox','full'))
+		);
+		$this->addSearchEngine(
 			SEARCH__TYPE_IS_TRACKERS,
 			new TrackersGroupSearchEngine()
 		);
