@@ -13,6 +13,11 @@ define('USER_DEFAULT_GROUP','users');
 define('FILE_EXTENSION',''); // use .new when testing
 define('CVS_ROOT','/cvsroot/');
 
+if (!file_exists('/etc/passwd.org') || !file_exists('/etc/shadow.org') || file_exists('/etc/group.org')) {
+	echo "CANNOT PROCEED - You must first copy/backup your /etc/shadow, /etc/group, and /etc/passwd files";
+	exit;
+}
+
 //
 //	Get the users' unix_name and password out of the database
 //	ONLY USERS WITH CVS COMMIT PRIVS ARE ADDED

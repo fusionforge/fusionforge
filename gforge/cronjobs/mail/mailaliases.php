@@ -3,6 +3,11 @@
 
 require ('squal_pre.php');
 
+if (!file_exists('/etc/aliases.org')) {
+	echo "CANNOT PROCEED - you must first backup your /etc/aliases file";
+	exit;
+}
+
 //
 //	Write out all the aliases
 //
