@@ -1,9 +1,9 @@
-gforge (3.0-5+) unstable; urgency=low
+gforge (3.0-6) unstable; urgency=low
 
   * [Roland] Suppressed warning in gforge-common.postinst when the
     sourceforge user does not exist.
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Aug 2003 12:42:13 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Aug 2003 17:38:01 +0200
 
 gforge (3.0-5) unstable; urgency=low
 
