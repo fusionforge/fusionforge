@@ -120,7 +120,10 @@ session_set();
 //mandatory login
 if (!session_loggedin() && $sys_force_login == 1 ) {
         $expl_pathinfo = explode('/',$REQUEST_URI);
-        if ($REQUEST_URI!='/' && $expl_pathinfo[1]!='account') exit_not_logged_in();
+        if ($REQUEST_URI!='/' && $expl_pathinfo[1]!='account' && $expl_pathinfo[1]!='export' ) exit_not_logged_in();
+	// Show proj* export even if not logged in when force login
+	// If not default web project page would be broken
+	if ($expl_pathinfo[1]=='export' && !ereg("^proj", $expl_pathinfo[2])) exit_not_logged_in();
 }
 
 //insert this page view into the database
