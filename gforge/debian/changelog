@@ -1,8 +1,9 @@
 sourceforge (2.5-26+) unstable; urgency=low
 
-  * 
+  * [Roland] Fixed the shell box hostname entries (again) in db-upgrade.pl
+    (closes: #137183).
 
- --
+ -- Roland Mas <lolando@debian.org>  Thu,  7 Mar 2002 11:16:38 +0100
 
 sourceforge (2.5-26) unstable; urgency=medium
 

@@ -77,8 +77,7 @@ eval {
 	$md5pwd=qx/echo -n $pwd | md5sum/ ;
 	chomp $md5pwd ;
 	$email = $server_admin ;
-	$shellbox = $domain_name ;
-	$shellbox =~ s/\..*$// ;
+	$shellbox = "shell" ;
 	$noreplymail="noreply\@$domain_name" ;
 	$date = time () ;
 	
@@ -257,25 +256,21 @@ eval {
     
     $version = $array [0] ;
 
-    if (is_lesser $version, "2.5-26") {
-	debug "Found version $version lesser than 2.5-26, fixing unix_box entries." ;
+    if (is_lesser $version, "2.5-27") {
+	debug "Found version $version lesser than 2.5-27, fixing unix_box entries." ;
 
-	do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
-	my $shellbox = $domain_name ;
-	$shellbox =~ s/\..*$// ;
-
-	$query = "update groups set unix_box = '$shellbox'" ;
+	$query = "update groups set unix_box = 'shell'" ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
 
-	$query = "update users set unix_box = '$shellbox'" ;
+	$query = "update users set unix_box = 'shell'" ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
 
 	debug "Updating debian_meta_data table." ;
-	$query = "UPDATE debian_meta_data SET value = '2.5-26' where key = 'db-version'" ;
+	$query = "UPDATE debian_meta_data SET value = '2.5-27' where key = 'db-version'" ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
