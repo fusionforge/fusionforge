@@ -150,6 +150,7 @@ install: build
 	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/gforge-cvs/etc/gforge/
 	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
 	install -m 755 deb-specific/cvs_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 www/tarballs.php $(CURDIR)/debian/gforge-cvs/usr/share/gforge/cvs
 
 	# gforge-ftp-proftpd
 	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/

@@ -1,3 +1,8 @@
+2003-04-08  Christian Bayle	<bayle@debian.org>
+
+	* rewrote tarballs download in such a way that only project admins can
+	download
+
 2003-04-06  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/include/html.php: HTML-ify special chars in select boxes.

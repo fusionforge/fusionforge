@@ -94,7 +94,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 <strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
 
 <p align="center">
-<a href="http://<?php echo $GLOBALS['sys_cvs_host']; ?>/cvstarballs/<?php echo $group->getUnixName(); ?>-cvsroot.tar.gz">[ <?php echo $Language->getText('project_admin','download_tarball') ?>]</a></p>
+<a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/tarballs.php/?group_id=<?php echo $group_id; ?>">[ <?php echo $Language->getText('project_admin','download_tarball') ?>]</a></p>
 <p>&nbsp;</p>
 <hr noshade="noshade" />
 <p>&nbsp;</p>
