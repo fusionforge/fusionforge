@@ -22,7 +22,7 @@
 include Portuguese
 # Now override where Brazillian differs:
 about_foundries	about_blurb	Sobre as Foundries
-menu	about_sourceforge	Sobre o GForge
+menu	about_gforge	Sobre o GForge
 menu	bookmark_page	Adicionar aos Favoritos
 home	breaking_down_barriers	Quebrando as Barreiras para o Desenvolvimento em Código Aberto
 menu	change_my_theme	Mudar Meu Tema
@@ -66,7 +66,7 @@ menu	project_help_wanted	Projetos que Precisam de Ajuda
 menu	project_summary	Sumário do Projeto
 menu	search	Procurar
 menu	software_map	Mapa dos Softwares
-home	sourceforge_statistics	Estatísticas do GForge
+home	gforge_statistics	Estatísticas do GForge
 menu	top_projects	Principais Projetos
 home	top_project_downloads	Projetos Mais Baixados
 conf	language_code	pt

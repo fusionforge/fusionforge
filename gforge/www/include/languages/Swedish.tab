@@ -19,7 +19,7 @@
 #	* Updates
 #
 about_foundries	about_blurb	Om Foundries
-menu	about_sourceforge	Om GForge
+menu	about_gforge	Om GForge
 menu	account_maintenance	Kontounderh&aring;ll
 menu	bookmark_page	L&auml;gg till bokm&auml;rke
 home	breaking_down_barriers	Bryter ner gr&auml;nserna f&ouml;r open source-utveckling
@@ -79,7 +79,7 @@ menu	project_summary	Projektsammanfattning
 group	public_area	&Ouml;ppet utrymme
 menu	search	S&ouml;k
 menu	software_map	Programvaru&ouml;versikt
-home	sourceforge_statistics	GForge-statistik
+home	gforge_statistics	GForge-statistik
 menu	top_projects	Topprojekt
 home	top_project_downloads	Projekt med flest h&auml;mtningar
 conf	content_encoding	UTF-8

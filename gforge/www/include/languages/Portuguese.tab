@@ -19,7 +19,7 @@
 #	* Contributed some strings
 #
 about_foundries	about_blurb	Sobre as Foundries
-menu	about_sourceforge	Sobre a GForge
+menu	about_gforge	Sobre a GForge
 menu	account_maintenance	Manutenção da Conta
 menu	bookmark_page	Página de Bookmarks
 home	breaking_down_barriers	Quebrando as Barreiras contra o Desenvolvimento do Open Source
@@ -83,7 +83,7 @@ menu	project_summary	Resumo do Projecto
 group	public_area	Áreas Públicas
 menu	search	Procurar
 menu	software_map	Listagem do Software
-home	sourceforge_statistics	Estatísticas da GForge
+home	gforge_statistics	Estatísticas da GForge
 menu	top_projects	Projectos Principais
 home	top_project_downloads	Projectos com mais Downloads
 conf	content_encoding	UTF-8

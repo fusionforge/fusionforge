@@ -75,7 +75,7 @@ menu	project_summary	Περίληψη Έργου
 group	public_area	Δημόσιες Περιοχές
 menu	search	Αναζήτηση
 menu	software_map	Χάρτης Λογισμικού
-home	sourceforge_statistics	Στατιστικά GForge
+home	gforge_statistics	Στατιστικά GForge
 menu	top_projects	Κορυφαία Έργα
 home	top_project_downloads	Κορυφαίες Μεταφορτώσεις Έργων
 conf	content_encoding	UTF-8

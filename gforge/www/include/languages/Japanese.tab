@@ -310,7 +310,7 @@ home	breaking_down_barriers	障害を乗り越え、オープンソース開発�
 home	highest_ranked_users	ランキングの最も高いユーザ
 home	most_active_this_week	今週最も活発なプロジェクト
 home	sfos	$1 オンサイト
-home	sourceforge_statistics	$1 統計
+home	gforge_statistics	$1 統計
 home	top_project_downloads	トッププロジェクトダウンロード
 mail	provided_by	<p>メーリングリストは<A href="http://www.list.org">GNU Mailman</a>のGForgeバージョンを利用して提供します。優れたソフトを作成したMailmanおよび<A href="http://www.python.org">Python</a>の皆さんに感謝します。
 mail	section	プロジェクト: $1
@@ -321,7 +321,7 @@ mail_admin_add_list	section	メーリングリスト管理\n
 mail_admin_add_list	title	リスト追加
 mail_admin_change_status	section	メーリングリスト管理
 mail_admin_change_status	title	リスト 管理/更新
-menu	about_sourceforge	$1 について
+menu	about_gforge	$1 について
 menu	account_maintenance	アカウント メンテナンス
 menu	bookmark_page	ブックマークページ
 menu	change_my_theme	テーマ変更

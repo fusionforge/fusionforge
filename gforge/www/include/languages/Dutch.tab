@@ -74,7 +74,7 @@ menu	project_summary	Projectsamenvatting
 group	public_area	Publieke gebieden
 menu	search	Zoeken
 menu	software_map	Software kaart
-home	sourceforge_statistics	GForge Statistieken
+home	gforge_statistics	GForge Statistieken
 menu	top_projects	Top Projecten
 home	top_project_downloads	Top projectendownloads
 conf	content_encoding	UTF-8

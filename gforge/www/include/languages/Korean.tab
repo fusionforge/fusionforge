@@ -200,7 +200,7 @@ home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	highest_ranked_users	활발한 사용자
 home	most_active_this_week	금주 가장 활발한 곳
 home	sfos	GForge OnSite
-home	sourceforge_statistics	$1 통계
+home	gforge_statistics	$1 통계
 home	top_project_downloads	최다 다운로드
 mail	provided_by	<P>메일링 리스트는 GForge에 알맞게 구현된 <A href="http://www.list.org">GNU Mailman</A>을 통해 운영됩니다.  멋진 소프트웨어를 만들어낸  Mailman과 <A href="http://www.python.org">Python</A> 개발자 여러분들께 감사드립니다.
 mail	section	프로젝트: $1
@@ -211,7 +211,7 @@ mail_admin_add_list	section	메일링 리스트 관리
 mail_admin_add_list	title	리스트 추가
 mail_admin_change_status	section	메일링 리스트 관리
 mail_admin_change_status	title	리스트 관리 및 갱신
-menu	about_sourceforge	GForge 소개
+menu	about_gforge	GForge 소개
 menu	account_maintenance	사용자 등록 정보
 menu	bookmark_page	책갈피
 menu	change_my_theme	테마 변경

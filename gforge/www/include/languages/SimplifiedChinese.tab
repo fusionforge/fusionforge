@@ -496,7 +496,7 @@ home	breaking_down_barriers	为开放源码的发展开辟一条坦途
 home	highest_ranked_users	用户评价排行榜
 home	most_active_this_week	本周活力最强排行榜
 home	sfos	$1 OnSite
-home	sourceforge_statistics	$1 统计资料
+home	gforge_statistics	$1 统计资料
 home	top_project_downloads	项目下载排行榜
 home	no_stats_available	没有统计信息
 home	hosted_projects	入住项目
@@ -512,7 +512,7 @@ mail_admin_add_list	section	邮件列表管理
 mail_admin_add_list	title	增加列表
 mail_admin_change_status	section	邮件列表管理
 mail_admin_change_status	title	管理 / 更新列表
-menu	about_sourceforge	关于 $1
+menu	about_gforge	关于 $1
 menu	account_maintenance	帐号维护
 menu	bookmark_page	书签
 menu	change_my_theme	更换外观

@@ -16,7 +16,7 @@
 # 2000-10-15  Matthias Bauer
 #	* Initial translation
 #
-menu	about_sourceforge	&Uuml;ber GForge
+menu	about_gforge	&Uuml;ber GForge
 menu	account_maintenance	Accountverwaltung
 menu	bookmark_page	Lesezeichen
 home	breaking_down_barriers	Wir reissen die Mauern zu Open-Source-Entwicklung nieder
@@ -75,7 +75,7 @@ menu	project_summary	Projekt&uuml;bersicht
 group	public_area	&Ouml;ffentliche Bereiche
 menu	search	Suche
 menu	software_map	Softwarekarte
-home	sourceforge_statistics	GForge Statistieken
+home	gforge_statistics	GForge Statistieken
 menu	top_projects	Top-Projekte
 home	top_project_downloads	Popul&auml;rste Downloads (nach Projekten)
 conf	content_encoding	UTF-8

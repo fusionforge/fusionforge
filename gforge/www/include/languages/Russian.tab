@@ -17,7 +17,7 @@
 #	* Initial translation
 #
 about_foundries	about_blurb	О цехах GForge
-menu	about_sourceforge	О GForge
+menu	about_gforge	О GForge
 menu	account_maintenance	Мои настройки
 menu	bookmark_page	Пометить тек. страницу закладкой
 home	breaking_down_barriers	Преодолевая барьеры на пути разработки с открытым исходным кодом
@@ -82,7 +82,7 @@ group	public_area	Сервисы проекта
 menu	search	Поиск
 menu	site_status	Статус Сайта
 menu	software_map	Карта проектов
-home	sourceforge_statistics	Статистика GForge
+home	gforge_statistics	Статистика GForge
 menu	top_projects	Топ-проекты
 home	top_project_downloads	Наиболее загружаемые проекты
 conf	content_encoding	UTF-8

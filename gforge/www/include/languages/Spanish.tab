@@ -418,7 +418,7 @@ home	most_active_this_week	Los más activos esta semana
 home	no_stats_available	No hay estadísticas disponibles
 home	none_found	Ningún hallado
 home	registered_users	Usuarios registrados
-home	sourceforge_statistics	Estadísticas de $1
+home	gforge_statistics	Estadísticas de $1
 home	top_project_downloads	Proyectos más descargados
 mail	provided_by	<p>Listas de correo proporcionadas por una versión de Gforge de <A href="http://www.list.org">GNU Mailman</A>. Gracias al de Mailman y de <a href="http://www.python.org">Python</a> por su excelente software.</p>
 mail	section	Proyecto: $1
@@ -429,7 +429,7 @@ mail_admin_add_list	section	Administración de las Listas de Correo
 mail_admin_add_list	title	Crear una lista
 mail_admin_change_status	section	Administración de las Listas de Correo
 mail_admin_change_status	title	Administre / Actualice Listas
-menu	about_sourceforge	Acerca de $1
+menu	about_gforge	Acerca de $1
 menu	account_maintenance	Mantenimiento de la cuenta
 menu	admin	Admin
 menu	admin	Administración

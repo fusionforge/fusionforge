@@ -10,7 +10,7 @@
 
 function show_features_boxes() {
 	GLOBAL $HTML,$Language;
-	$return .= $HTML->boxTop($Language->getText('home','sourceforge_statistics', $GLOBALS[sys_name]),0);
+	$return .= $HTML->boxTop($Language->getText('home','gforge_statistics', $GLOBALS[sys_name]),0);
 	$return .= show_sitestats();
 	$return .= $HTML->boxMiddle($Language->getText('home','top_project_downloads'));
 	$return .= show_top_downloads();

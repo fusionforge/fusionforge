@@ -75,7 +75,7 @@ menu	project_summary	Ringkasan Proyek
 group	public_area	Area Publik
 menu	search	Cari
 menu	software_map	Peta Software
-home	sourceforge_statistics	Statistik GForge
+home	gforge_statistics	Statistik GForge
 menu	top_projects	Proyek-proyek Top
 home	top_project_downloads	Proyek Top Downloads
 conf	content_encoding	UTF-8

@@ -83,7 +83,7 @@ menu	project_summary	Sumari de projectes
 group	public_area	Área pública
 menu	search	Cercar
 menu	software_map	Mapa de programari
-home	sourceforge_statistics	Estadístiques de GForge
+home	gforge_statistics	Estadístiques de GForge
 menu	top_projects	Projectes senyers
 home	top_project_downloads	Projectes més descarregats
 conf	content_encoding	UTF-8

@@ -75,7 +75,7 @@ menu	project_summary	Обща информация за проекта
 group	public_area	Общодостъпни места
 menu	search	Търсене
 menu	software_map	Карта на софтуера
-home	sourceforge_statistics	GForge статистика
+home	gforge_statistics	GForge статистика
 menu	top_projects	Топ проекти
 home	top_project_downloads	Най-популярните проекти
 conf	content_encoding	UTF-8

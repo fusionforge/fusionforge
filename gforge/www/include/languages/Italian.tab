@@ -408,7 +408,7 @@ group	norelease	Questo progetto non ha rilasciato file
 group	nodescription	Non &egrave; stata ancora inserta una descrizione per questo progetto.
 home	highest_ranked_users	Utenti pi&ugrave; quotati
 home	most_active_this_week	Progetti pi&ugrave; attivi
-home	sourceforge_statistics	Statistiche $1 
+home	gforge_statistics	Statistiche $1 
 home	top_project_downloads	Maggiori download
 home	no_stats_available	Statistiche non disponibili
 home	hosted_projects	Progetti ospitati

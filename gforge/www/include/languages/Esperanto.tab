@@ -29,7 +29,7 @@
 #  Sx: &#348;   sx: &#349;
 #  Ux: &#364;   ux: &#365;
 about_foundries	about_blurb	Pri fandejoj
-menu	about_sourceforge	Pri GForge
+menu	about_gforge	Pri GForge
 menu	account_maintenance	Modifu konton
 menu	bookmark_page	Legosignoj
 home	breaking_down_barriers	Forigu obstaklojn por skribi liberajn programojn
@@ -89,7 +89,7 @@ menu	project_summary	Projekta resumo
 group	public_area	Publikaj regionoj
 menu	search	Ser&#265;u
 menu	software_map	Mapo de programoj
-home	sourceforge_statistics	Statistika&#309;oj de GForge
+home	gforge_statistics	Statistika&#309;oj de GForge
 menu	top_projects	Plej aktivaj projektoj
 home	top_project_downloads	Plej aktivaj projektaj el&#349;utoj
 conf	content_encoding	UTF-8

@@ -19,7 +19,7 @@
 #	* Better translation, added new strings
 #
 about_foundries	about_blurb	O działach
-menu	about_sourceforge	About GForge
+menu	about_gforge	About GForge
 menu	account_maintenance	Zarządzanie kontem
 menu	bookmark_page	Zrób zakładkę
 home	breaking_down_barriers	Przełamujemy bariery w rozwoju oprogramowania Open Source
@@ -79,7 +79,7 @@ menu	project_summary	Podsumowanie projektu
 group	public_area	Obszar publiczny
 menu	search	Szukaj
 menu	software_map	Mapa projektów
-home	sourceforge_statistics	Statystyki GForge
+home	gforge_statistics	Statystyki GForge
 menu	top_projects	Najlepsze projekty
 home	top_project_downloads	Najczęściej pobierane projekty
 conf	content_encoding	UTF-8

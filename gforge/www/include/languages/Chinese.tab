@@ -74,7 +74,7 @@ menu	project_summary	專案摘要
 group	public_area	公共區域
 menu	search	搜尋
 menu	software_map	軟體分類表
-home	sourceforge_statistics	GForge統計資料
+home	gforge_statistics	GForge統計資料
 menu	top_projects	熱門專案
 home	top_project_downloads	熱門專案下載排行榜
 conf	content_encoding	UTF-8

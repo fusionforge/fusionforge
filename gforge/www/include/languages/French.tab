@@ -313,7 +313,7 @@ home	breaking_down_barriers	Abaisser les barrières du développement open sourc
 home	highest_ranked_users	Les développeurs les mieux classés
 home	most_active_this_week	Les plus actifs cette semaine
 home	sfos	$1 On-Site
-home	sourceforge_statistics	Statistiques de $1
+home	gforge_statistics	Statistiques de $1
 home	top_project_downloads	Projets les plus téléchargés
 mail	provided_by	<p>Les listes de diffusion sont fournies par <a href="http://www.list.org/">GNU Mailman</a>.  Merci aux équipes de Mailman et de <a href="http://www.python.org/">Python</a> pour leurs excellents logiciels.
 mail	section	Projet : $1
@@ -324,7 +324,7 @@ mail_admin_add_list	section	Administration des listes de diffusion
 mail_admin_add_list	title	Ajout d'une liste
 mail_admin_change_status	section	Administration des listes de diffusion
 mail_admin_change_status	title	Administration / modification des listes
-menu	about_sourceforge	À propos de $1
+menu	about_gforge	À propos de $1
 menu	account_maintenance	Gestion du compte
 menu	register_project	Enregistrer un projet
 menu	bookmark_page	Ajouter aux favoris

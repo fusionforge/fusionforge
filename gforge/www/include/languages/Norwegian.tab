@@ -75,7 +75,7 @@ menu	project_summary	Prosjektoversikt
 group	public_area	Fellesområde
 menu	search	S&oslash;k
 menu	software_map	Programvareoversikt
-home	sourceforge_statistics	GForge statistikk
+home	gforge_statistics	GForge statistikk
 menu	top_projects	Topp-prosjekter
 home	top_project_downloads	Flest nedlastinger
 conf	content_encoding	UTF-8

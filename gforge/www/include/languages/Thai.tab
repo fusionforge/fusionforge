@@ -75,7 +75,7 @@ menu	project_summary	สรุปโปรเจกต์
 group	public_area	พื้นที่สาธารณะ
 menu	search	ค้นหา
 menu	software_map	แผนที่ซอฟต์แวร์
-home	sourceforge_statistics	สถิติ GForge
+home	gforge_statistics	สถิติ GForge
 menu	top_projects	โปรเจกต์สุดยอด
 home	top_project_downloads	โปรเจกต์ดาวโหลดสูงสุด
 conf	content_encoding	UTF-8

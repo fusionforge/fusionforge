@@ -151,7 +151,7 @@ account_shell	title	Shell Account Information
 account_shell	shell_box	Shell box
 account_shell	autorized_keys	CVS/SSH Shared Authorized Keys
 account_shell	edit_keys	Edit Keys
-contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/sourceforge">$1 Master Project</a>.</p>
+contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/siteadmin">$1 Master Project</a>.</p>
 contact	title	Contact $1
 common_utils	priority_colors	Priority Colors
 developer	entry_not_found	Entry Not Found For This User
@@ -497,7 +497,7 @@ home	breaking_down_barriers	Breaking Down the Barriers to Open Source Developmen
 home	highest_ranked_users	Highest Ranked Users
 home	most_active_this_week	Most Active This Week
 home	sfos	$1 OnSite
-home	sourceforge_statistics	$1 Statistics
+home	gforge_statistics	$1 Statistics
 home	top_project_downloads	Top Project Downloads
 home	no_stats_available	No Stats Available
 home	hosted_projects	Hosted Projects
@@ -513,7 +513,7 @@ mail_admin_add_list	section	Mailing List Admin
 mail_admin_add_list	title	Add List
 mail_admin_change_status	section	Mailing List Admin
 mail_admin_change_status	title	Admin / Update Lists
-menu	about_sourceforge	About $1
+menu	about_gforge	About $1
 menu	account_maintenance	Account Maintenance
 menu	register_project	Register Project
 menu	bookmark_page	Bookmark Page
