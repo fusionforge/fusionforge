@@ -3,6 +3,8 @@ sourceforge (2.6-0+0+) unstable; urgency=low
   * Started working on 2.6.  Don't expect it to work just yet.
   * Split the DB installation/deinstallation process out of
     postinst/postrm/prerm and into an install-db.sh script.
+  * Split the Apache installation/deinstallation process out of
+    postinst/prerm and into an install-db.sh script.
 
  -- Roland Mas <lolando@debian.org>  Fri,  2 Nov 2001 18:08:28 +0100
 

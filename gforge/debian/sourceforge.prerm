@@ -22,17 +22,11 @@ fi
 case "$1" in
     remove)
 #       install-info --quiet --remove /usr/info/sourceforge.info.gz
-  	if grep -q "Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
-	    pattern=$(basename $0)
-	    tmp=$(mktemp /tmp/$pattern.XXXXXX)
-	    grep -v "Include /etc/sourceforge/sf-httpd.conf\|### Next line inserted by Sourceforge install" /etc/apache/httpd.conf > $tmp
-	    cat $tmp > /etc/apache/httpd.conf
-	    rm -f $tmp
-	    /etc/init.d/apache restart
-  	fi
-	
         # FTP config removal
 	/usr/lib/sourceforge/bin/install-ftp.sh purge
+
+        # Apache config removal
+	/usr/lib/sourceforge/bin/install-apache.sh purge
 
         # DNS config removal
 	/usr/lib/sourceforge/bin/install-dns.sh purge
