@@ -180,15 +180,20 @@ class ArtifactType extends Error {
 			'$browse_instructions',
 			'$datatype')");
 
+		db_begin();
+
 		$this->artifact_type_id = db_insertid($res,'artifact_group_list','group_artifact_id');
 		
 		if (!$res || !$this->artifact_type_id) {
 			$this->setError('ArtifactType: '.db_error());
+			db_rollback();
 			return false;
 		} else {
 			if (!$this->fetchData($this->artifact_type_id)) {
+				db_rollback();
 				return false;
 			} else {
+				db_commit();
 				$this->clearError();
 				return $this->artifact_type_id;
 			}

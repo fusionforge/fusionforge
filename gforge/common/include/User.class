@@ -226,6 +226,11 @@ class User extends Error {
 			$this->setError($Language->getText('account_register','err_jabber'));
 			return false;
 		}
+		if (!$jabber_only) {
+			$jabber_only=0;
+		} else {
+			$jabber_only=1;
+		}
 		if (db_numrows(db_query("SELECT user_id FROM users WHERE user_name LIKE '$unix_name'")) > 0) {
 			//$this->setError('That username already exists.');
 			$this->setError($Language->getText('account_register','err_userexist'));
@@ -240,6 +245,7 @@ class User extends Error {
 		}
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($session_hash . $password1 . time()),0,16);
+		db_begin();
 		$result=db_query("INSERT INTO users (user_name,user_pw,unix_pw,realname,email,add_date,
 			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only) 
 			VALUES ('$unix_name',
@@ -256,10 +262,10 @@ class User extends Error {
 			'$timezone',
 			'$jabber_address',
 			'$jabber_only')");
-
 		$this->user_id = db_insertid($result,'users','user_id');
 	
 		if (!$result || !$this->user_id) {
+			db_rollback();
 			//$this->setError('Insert Failed '.db_error());
 			$this->setError($Language->getText('account_register','err_badinsert') .db_error());
 			return false;
@@ -270,6 +276,7 @@ class User extends Error {
 
 			$this->sendRegistrationEmail();
 
+			db_commit();
 			return $this->user_id;
 		}
 	}
@@ -313,6 +320,12 @@ class User extends Error {
 			$this->setError($Language->getText('account_register','err_jabber'));
 			return false;
 		}
+		if (!$jabber_only) {
+			$jabber_only=0;
+		} else {
+			$jabber_only=1;
+		}
+
 
 		$res = db_query("
 			UPDATE users
@@ -395,7 +408,7 @@ class User extends Error {
 	function setStatus($status) {
 
 		if ($status != 'P' && $status != 'A'
-		    && $status != 'S' && $status != 'D') {
+			&& $status != 'S' && $status != 'D') {
 			$this->setError('ERROR: Invalid status value');
 			return false;
 		}
@@ -932,10 +945,10 @@ class User extends Error {
 	 *	@return true on success false on failure
 	 */
 	function setPasswd($passwd) {
-	        if (!account_pwvalid($passwd)) {
-	        	$this->setError('Error: '.$GLOBALS['register_error']);
+		if (!account_pwvalid($passwd)) {
+			$this->setError('Error: '.$GLOBALS['register_error']);
 			return false;
-	        }
+		}
 
 		db_begin();
 		$unix_pw = account_genunixpw($passwd);
@@ -954,8 +967,7 @@ class User extends Error {
 		} else {
 			// Now change LDAP password, but only if corresponding
 			// entry exists (i.e. if user have shell access)
-			if (sf_ldap_check_user($this->getID()))
-			{
+			if (sf_ldap_check_user($this->getID())) {
 				if (!sf_ldap_user_set_attribute($this->getID(),"userPassword",'{crypt}'.$unix_pw)) {
 					$this->setError(sf_ldap_get_error_msg());
 					db_rollback();
@@ -1033,8 +1045,8 @@ class User extends Error {
 	}
 
 	function setThemeID($id) {
-        db_query("DELETE FROM theme_prefs WHERE user_id='".$this->getID()."'");
-        $result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES ('".$this->getID()."','$id')");
+		db_query("DELETE FROM theme_prefs WHERE user_id='".$this->getID()."'");
+		$result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES ('".$this->getID()."','$id')");
 		if (!$result || db_affected_rows($result) < 1) {
 			$this->setError('Error inserting theme_pre: '.db_error());
 		} else {
