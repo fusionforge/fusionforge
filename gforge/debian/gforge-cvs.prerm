@@ -19,7 +19,7 @@ set -e
 case "$1" in
     remove)
         # CVS config removal
-	/usr/lib/gforge/bin/install-cvs.sh purge
+	[ -f /usr/lib/gforge/bin/install-cvs.sh ] && /usr/lib/gforge/bin/install-cvs.sh purge
 
 	;;
     upgrade|deconfigure|failed-upgrade)
