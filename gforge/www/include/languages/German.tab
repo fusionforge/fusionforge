@@ -2,7 +2,7 @@
 #  *
 #  * German message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -16,7 +16,7 @@
 # 2000-10-15  Matthias Bauer
 #	* Initial translation
 #
-menu	about_sourceforge	&Uuml;ber SourceForge
+menu	about_sourceforge	&Uuml;ber GForge
 menu	account_maintenance	Accountverwaltung
 menu	bookmark_page	Lesezeichen
 home	breaking_down_barriers	Wir reissen die Mauern zu Open-Source-Entwicklung nieder
@@ -58,7 +58,7 @@ group	short_summary	&Uuml;berblick
 group	short_support	Support
 group	short_survey	Umfragen
 home	highest_ranked_users	Am h&ouml;chsten eingestufte Benutzer
-home	about_blurb	  SourceForge ist ein <b>freier Dienst</b> f&uuml;r <a href="http://www.opensource.org">Open Source</a> Entwickler und bietet einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking, Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte Dateiarchivierung, Backups und vollst&auml;ndige Verwaltung per Web-Interface.  <br> &nbsp; <p> <b>Feedback und Teilnahme an der Site</b> <p> Um SourceForge bestm&ouml;glich zu nutzen, sollten Sie sich <a href="/account/register.php">als Benutzer anmelden</a>. Mit einem Benutzeraccount k&ouml;nnen Sie am vollen Spektrum der Website teilhaben. Nat&uuml;rlich k&ouml;nnen Sie SourceForge auch ohne Registrierung nutzen, haben dann allerdings nicht auf alle Bereiche vollen Zugriff. <p> &nbsp; <br> <b>Starten Sie Ihr eigenes Projekt</b> <p> <a href="/account/register.php">Melden Sie sich als Benutzer an</a>, <a href="/account/login.php">loggen Sie sich ein</a> und <a href="/register/">registrieren Sie Ihr Projekt</a>! <p> Vielen Dank. Sie machen eine einfache Webseite sehr gl&uuml;cklich. 
+home	about_blurb	  GForge ist ein <b>freier Dienst</b> f&uuml;r <a href="http://www.opensource.org">Open Source</a> Entwickler und bietet einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking, Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte Dateiarchivierung, Backups und vollst&auml;ndige Verwaltung per Web-Interface.  <br> &nbsp; <p> <b>Feedback und Teilnahme an der Site</b> <p> Um GForge bestm&ouml;glich zu nutzen, sollten Sie sich <a href="/account/register.php">als Benutzer anmelden</a>. Mit einem Benutzeraccount k&ouml;nnen Sie am vollen Spektrum der Website teilhaben. Nat&uuml;rlich k&ouml;nnen Sie GForge auch ohne Registrierung nutzen, haben dann allerdings nicht auf alle Bereiche vollen Zugriff. <p> &nbsp; <br> <b>Starten Sie Ihr eigenes Projekt</b> <p> <a href="/account/register.php">Melden Sie sich als Benutzer an</a>, <a href="/account/login.php">loggen Sie sich ein</a> und <a href="/register/">registrieren Sie Ihr Projekt</a>! <p> Vielen Dank. Sie machen eine einfache Webseite sehr gl&uuml;cklich. 
 frs	latest_file_releases	Letzte Dateireleases
 menu	login	Einloggen (SSL)
 menu	logout	Ausloggen
@@ -75,7 +75,7 @@ menu	project_summary	Projekt&uuml;bersicht
 group	public_area	&Ouml;ffentliche Bereiche
 menu	search	Suche
 menu	software_map	Softwarekarte
-home	sourceforge_statistics	SourceForge Statistieken
+home	sourceforge_statistics	GForge Statistieken
 menu	top_projects	Top-Projekte
 home	top_project_downloads	Popul&auml;rste Downloads (nach Projekten)
 conf	content_encoding	iso-8859-1

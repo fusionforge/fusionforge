@@ -2,7 +2,7 @@
 #  *
 #  * Swedish message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -19,7 +19,7 @@
 #	* Updates
 #
 about_foundries	about_blurb	Om Foundries
-menu	about_sourceforge	Om SourceForge
+menu	about_sourceforge	Om GForge
 menu	account_maintenance	Kontounderh&aring;ll
 menu	bookmark_page	L&auml;gg till bokm&auml;rke
 home	breaking_down_barriers	Bryter ner gr&auml;nserna f&ouml;r open source-utveckling
@@ -62,7 +62,7 @@ group	short_summary	Sammanfattning
 group	short_support	Support
 group	short_survey	Unders&ouml;kningar
 home	highest_ranked_users	H&ouml;gst rankade anv&auml;ndare
-home	about_blurb	 		SourceForge &auml;r en <B>fri tj&auml;nst f&ouml;r 		<A href="http://www.opensource.org">open source</A>-utvecklare 		</B>som erbjuder enkel tillg&aring;ng till det b&auml;sta i 		CVS, s&auml;ndlistor, felhantering, meddelandeforum, 		uppgiftshantering, webbplatsutrymme, permanent filarkivering, 		fullst&auml;ndiga backuper, och en helt webbaserad 		administration. 		<BR>&nbsp; 		<P> 		<B>Deltagande och synpunkter p&aring; webbplatsen</B> 		<P> 		F&ouml;r att f&aring; ut det mesta av SourceForge m&aring;ste 		du <A href="/account/register.php">registrera dig som en 		webbplatsanv&auml;ndare</A>. 		Det g&ouml;r att du kan deltaga i allt vi har att erbjuda. Du 		kan naturligtvis surfa p&aring; webbplatsen utan att att 		registrera dig, men du kommer d&aring; inte att kunna deltaga 		i allt. 		<P> 		&nbsp; 		<BR> 		<B>Skapa ditt eget projekt</B> 		<P> 		<A href="/account/register.php">Registrera dig som en 		webbplatsanv&auml;ndare</A>, <A HREF="/account/login.php"> 		logga sedan in</A> och till sist <A HREF="/register/"> 		registrerar du ditt projekt.</A> 		<P> 		Tack... och ha det s&aring; trevligt p&aring; webbplatsen.
+home	about_blurb	 		GForge &auml;r en <B>fri tj&auml;nst f&ouml;r 		<A href="http://www.opensource.org">open source</A>-utvecklare 		</B>som erbjuder enkel tillg&aring;ng till det b&auml;sta i 		CVS, s&auml;ndlistor, felhantering, meddelandeforum, 		uppgiftshantering, webbplatsutrymme, permanent filarkivering, 		fullst&auml;ndiga backuper, och en helt webbaserad 		administration. 		<BR>&nbsp; 		<P> 		<B>Deltagande och synpunkter p&aring; webbplatsen</B> 		<P> 		F&ouml;r att f&aring; ut det mesta av GForge m&aring;ste 		du <A href="/account/register.php">registrera dig som en 		webbplatsanv&auml;ndare</A>. 		Det g&ouml;r att du kan deltaga i allt vi har att erbjuda. Du 		kan naturligtvis surfa p&aring; webbplatsen utan att att 		registrera dig, men du kommer d&aring; inte att kunna deltaga 		i allt. 		<P> 		&nbsp; 		<BR> 		<B>Skapa ditt eget projekt</B> 		<P> 		<A href="/account/register.php">Registrera dig som en 		webbplatsanv&auml;ndare</A>, <A HREF="/account/login.php"> 		logga sedan in</A> och till sist <A HREF="/register/"> 		registrerar du ditt projekt.</A> 		<P> 		Tack... och ha det s&aring; trevligt p&aring; webbplatsen.
 frs	latest_file_releases	Senaste filutg&aring;vorna
 menu	login	Logga in via SSL
 menu	logout	Logga ut
@@ -79,7 +79,7 @@ menu	project_summary	Projektsammanfattning
 group	public_area	&Ouml;ppet utrymme
 menu	search	S&ouml;k
 menu	software_map	Programvaru&ouml;versikt
-home	sourceforge_statistics	SourceForge-statistik
+home	sourceforge_statistics	GForge-statistik
 menu	top_projects	Topprojekt
 home	top_project_downloads	Projekt med flest h&auml;mtningar
 conf	content_encoding	iso-8859-1
