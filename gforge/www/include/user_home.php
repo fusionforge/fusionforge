@@ -22,7 +22,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 <TABLE width=100% cellpadding=2 cellspacing=2 border=0><TR valign=top>
 <TD width=50%>
 
-<?php echo $HTML->boxTop("Personal Information",true,false,false); ?>
+<?php echo $HTML->boxTop("Personal Information"); ?>
 <TR>
 	<TD>User ID: </TD>
 	<TD><B><?php print $user_id; ?></B> ( <A HREF="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><B>Skills Profile</B></A> )</TD>
@@ -42,7 +42,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	<TD>Email Addr: </TD>
 	<TD>
 	<B><A HREF="/sendmessage.php?touser=<?php print $user_id; 
-		?>"><?php print $user->getUnixName(); ?> at <?php print $GLOBALS['sys_users_host']; ?></A></B>
+		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></A></B>
 	</TD>
 </TR>
 
@@ -75,7 +75,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	<P>
 	<A HREF="/developer/diary.php?diary_user='. $user_id .'">View Diary & Notes</A>
 	<P>
-	<A HREF="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
+	<A HREF="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
 
 	?>
 </TD></TR>
@@ -118,47 +118,20 @@ echo $HTML->boxBottom(); ?>
 <?php 
 $me = session_get_user(); 
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
+
+echo $Language->getText('users','peerinfo1', $GLOBALS[sys_name]);
 ?>
 
-If you are familiar with this user, please take a moment to rate him/her
-on the following criteria. Keep in mind, that your rating will be visible to
-the user and others.
-<P>
-The SourceForge Peer Rating system is based on concepts from 
-<A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
 	<CENTER>
         <?php echo vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</CENTER>
-<P>
-The Peer Rating box shows all rating averages
-(and response levels) for each individual criteria. Due to the math and
-processing required to do otherwise, these numbers incoporate responses from
-both "trusted" and "non-trusted" users.
-<ul>
-<li> The "Sitewide Rank" field shows the user's rank compared to all ranked
-SourceForge users. 
-<li>The "Aggregate Score" shows an average, weighted overall score, based on
-trusted-responses only. 
-<li>The "Personal Importance" field shows the weight that users ratings of
-other developers will be given (between 1 and 1.5) -- higher rated user's
-responses are given more weight.  
-</ul>
+
+<?php echo $Language->getText('users','peerinfo2', $GLOBALS[sys_name]);
+
+} else if ($me && !$me->usesRatings()) { ?>
 <p>
 <i>
-If you would like to opt-out from peer rating system (this will affect
-your ability to both rate and be rated), refer to <a href="/account/">your account
-maintenance page</a>. If you choose not to participate, your ratings of
-other users will be permanently deleted and the 'Peer Rating' box will
-disappear from your user page.
-</i>
-</p>
-<?php } else if ($me && !$me->usesRatings()) { ?>
-<p>
-<i>
-You opted-out from peer rating system, otherwise you would have
-a chance to rate the user. Refer to 
-<a href="/account/">your account maintenance page</a> for more
-information.
+<?php echo $Language->getText('users','optout'); ?>
 </i>
 </p>
 <?php } ?>
@@ -186,8 +159,8 @@ if (session_loggedin()) {
 	<INPUT TYPE="HIDDEN" NAME="touser" VALUE="<?php echo $user_id; ?>">
 
 	<B>Your Email Address:</B><BR>
-	<B><?php echo $u->getUnixName().'@'.$GLOBALS['sys_users_host']; ?></B>
-	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo $u->getUnixName().'@'.$GLOBALS['sys_users_host']; ?>">
+	<B><?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?></B>
+	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo $u->getUnixName().'@users.'.$GLOBALS['sys_default_domain']; ?>">
 	<P>
 	<B>Your Name:</B><BR>
 	<B><?php echo $u->getRealName(); ?></B>
