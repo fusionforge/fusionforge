@@ -1264,8 +1264,10 @@ class Artifact extends Error {
 		
 		// load the e-mail addresses of the users
 		$users =& user_get_objects($monitor_ids);
-		foreach ($users as $user) {
-			$emails[] = $user->getEmail();
+		if (count($users) > 0) {
+			foreach ($users as $user) {
+				$emails[] = $user->getEmail();
+			}
 		}
 
 		//now remove all duplicates from the email list
