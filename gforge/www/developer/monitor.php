@@ -1,19 +1,25 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Developer's Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
+
+require_once('pre.php');
 
 if (user_isloggedin()) {
 	/*
 		User obviously has to be logged in to monitor
 	*/
 
-	if ($user_id) {
+	if ($diary_user) {
 		/*
 			First check to see if they are already monitoring
 			If they are, unmonitor by deleting row.
@@ -25,7 +31,7 @@ if (user_isloggedin()) {
 		echo '
 			<H2>Monitor a User</H2>';
 
-		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$user_id';";
+		$sql="SELECT * FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 
 		$result = db_query($sql);
 
@@ -34,7 +40,7 @@ if (user_isloggedin()) {
 				User is not already monitoring thread, so 
 				insert a row so monitoring can begin
 			*/
-			$sql="INSERT INTO user_diary_monitor (monitored_user,user_id) VALUES ('$user_id','".user_getid()."')";
+			$sql="INSERT INTO user_diary_monitor (monitored_user,user_id) VALUES ('$diary_user','".user_getid()."')";
 
 			$result = db_query($sql);
 
@@ -48,7 +54,7 @@ if (user_isloggedin()) {
 
 		} else {
 
-			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$user_id';";
+			$sql="DELETE FROM user_diary_monitor WHERE user_id='".user_getid()."' AND monitored_user='$diary_user';";
 			$result = db_query($sql);
 			echo "<FONT COLOR=\"RED\"><H3>Monitoring has been turned off</H3></FONT>";
 			echo "<P>You will not receive any more emails from this user.";

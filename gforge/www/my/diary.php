@@ -1,15 +1,23 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge User's Personal Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
-require ('vote_function.php');
+
+require_once('pre.php');
+require_once('vote_function.php');
 
 if (user_isloggedin()) {
+
+	$u =& session_get_user();
 
 	if ($submit) {
 		//make changes to the database
@@ -46,12 +54,12 @@ if (user_isloggedin()) {
 
 						$body = "To: noreply@$GLOBALS[sys_default_domain]".
 						"\nBCC: $tolist".
-						"\nSubject: [ SF User Notes: ". user_getrealname( user_getid() ) ."] ".stripslashes($summary) .
+						"\nSubject: [ SF User Notes: ". $u->getRealName() ."] ".stripslashes($summary) .
 						"\n\n" . util_line_wrap(stripslashes($details)).
 						"\n\n______________________________________________________________________".
 						"\nYou are receiving this email because you elected to monitor this user.".
 						"\nTo stop monitoring this user, login to SourceForge and visit: ".
-						"\nhttp://$GLOBALS[sys_default_domain]/developer/monitor.php?user_id=". user_getid();
+						"\nhttp://$GLOBALS[sys_default_domain]/developer/monitor.php?diary_user=". user_getid();
 
 						exec ("/bin/echo \"". util_prep_string_for_sendmail($body) ."\" | /usr/sbin/sendmail -fnoreply@$GLOBALS[HTTP_HOST] -t -i >& /dev/null &");
 
@@ -96,10 +104,9 @@ if (user_isloggedin()) {
 		$info_str='Add a New Entry';
 	}
 
-	echo site_user_header(array('title'=>'My Diary And Notes'));
+	echo site_user_header(array('title'=>'My Diary And Notes','pagename'=>'my_diary'));
 
 	echo '
-	<H2>Diary And Notes</H2>
 	<P>
 	<H3>'. $info_str .'</H3>
 	<P>
