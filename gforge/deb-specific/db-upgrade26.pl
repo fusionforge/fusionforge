@@ -47,7 +47,7 @@ eval {
 	$action = "installation" ;
 	debug "Creating initial Sourceforge database from files." ;
 
-	my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
+#	my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
 #	my @filelist = qw{ /usr/lib/sourceforge/db/SourceForge.sql
 #			       /usr/lib/sourceforge/db/trove_defaults.sql
 #			       /usr/lib/sourceforge/db/init-extra.sql } ;
@@ -83,31 +83,40 @@ eval {
 	$noreplymail="noreply\@$domain_name" ;
 	$date = time () ;
 	
-# 	@reqlist = (
-# 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
-#                     http_domain, short_description, cvs_box, license, register_purpose,
-#                     license_other, register_time, use_bugs, rand_hash, use_mail, use_survey,
-#                     use_patch, use_forum, use_pm, use_cvs, use_news, use_support, new_bug_address,
-#                     new_patch_address, new_support_address, type, use_docman, send_all_bugs,
-#                     send_all_patches, send_all_support, new_task_address, send_all_tasks,
-#                     use_bug_depend_box, use_pm_depend_box)
-# 	    VALUES (1, 'Site Admin', '$domain_name/admin/', 1, 'A', 'siteadmin', 'shell1', 
-# 	    	    NULL, NULL, 'cvs1', 'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0, 1, 1, '', '', '', 1, 1, 0, 0, 0, '', 0, 0, 0)",
-# 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
-#                     http_domain, short_description, cvs_box, license, register_purpose,
-#                     license_other, register_time, use_bugs, rand_hash, use_mail, use_survey,
-#                     use_patch, use_forum, use_pm, use_cvs, use_news, use_support, new_bug_address,
-#                     new_patch_address, new_support_address, type, use_docman, send_all_bugs,
-#                     send_all_patches, send_all_support, new_task_address, send_all_tasks,
-#                     use_bug_depend_box, use_pm_depend_box)
-# 	    VALUES ($newsadmin_groupid, 'Site News Admin', '$domain_name/news/', 0, 'A', 'newsadmin', 'shell1',
-#                     NULL, NULL, 'cvs1', 'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0, 1, 1, '', '',
-#                     '', 1, 0, 0, 0, 0, '', 0, 0, 0)",
-# 	    "INSERT INTO users (user_id, user_name, email, user_pw)  
-# 		    VALUES (100,'None','$noreplymail','*********')", 
-# 	    "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1)", 
-# 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
-# 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, $newsadmin_groupid, 'A')",
+ 	@reqlist = (
+ 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
+			http_domain, short_description, cvs_box, license, register_purpose,
+			license_other, register_time, rand_hash, use_mail, use_survey,
+			use_forum, use_pm, use_cvs, use_news, 
+			type, use_docman, 
+			new_task_address, send_all_tasks,
+			use_pm_depend_box)
+ 	    VALUES (1, 'Site Admin', '$domain_name/admin/', 1, 'A', 'siteadmin', 'shell1', 
+			NULL, NULL, 'cvs1', 'website', NULL,
+			NULL, 0, 0, 1, 0,
+			0, 0, 0, 1,
+			1, 1,
+			'', 0,
+			0)",
+ 	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
+			http_domain, short_description, cvs_box, license, register_purpose,
+			license_other, register_time, rand_hash, use_mail, use_survey,
+			use_forum, use_pm, use_cvs, use_news, 
+			type, use_docman, 
+			new_task_address, send_all_tasks,
+			use_pm_depend_box)
+ 	    VALUES ($newsadmin_groupid, 'Site News Admin', '$domain_name/news/', 0, 'A', 'newsadmin', 'shell1',
+			NULL, NULL, 'cvs1', 'website', NULL,
+			NULL, 0, 0, 1, 0,
+			0, 0, 0, 1,
+			1, 0,
+			'', 0,
+			0)",
+ 	    "INSERT INTO users (user_id, user_name, email, user_pw)  
+ 		    VALUES (100,'None','$noreplymail','*********')", 
+ 	    "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
+ 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
+ 	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, $newsadmin_groupid, 'A')",
 # 	    "INSERT INTO bug_category (bug_category_id, group_id, category_name) VALUES (100,1,'None')",
 # 	    "INSERT INTO bug_group (bug_group_id, group_id, group_name) VALUES (100,1,'None')",
 # 	    "INSERT INTO bug (bug_id,group_id,status_id,category_id,bug_group_id,submitted_by,assigned_to,resolution_id)
@@ -115,20 +124,20 @@ eval {
 # 	    "INSERT INTO patch_category (patch_category_id, group_id, category_name) VALUES (100,1,'None')",
 # 	    "INSERT INTO patch (group_id,patch_status_id,patch_category_id,submitted_by,assigned_to)
 # 		    VALUES (1,100,100,100,100)",
-# 	    "INSERT INTO project_group_list (group_project_id,group_id) VALUES (1,1)",
-# 	    "INSERT INTO project_task (group_project_id,created_by,status_id)
-# 		    VALUES (1,100,100)",
+ 	    "INSERT INTO project_group_list (group_project_id,group_id) VALUES (1,1)",
+ 	    "INSERT INTO project_task (group_project_id,created_by,status_id)
+ 		    VALUES (1,100,100)",
 # 	    "INSERT INTO support_category VALUES ('100','1','None')"
-# 		    ) ;
-#
-# 	foreach my $s (@reqlist) {
-# 	    $query = $s ;
-# 	    $sth = $dbh->prepare ($query) ;
-# 	    $sth->execute () ;
-# 	    $sth->finish () ;
-# 	}
-#	@reqlist = () ;
-#
+ 		    ) ;
+
+ 	foreach my $s (@reqlist) {
+ 	    $query = $s ;
+ 	    $sth = $dbh->prepare ($query) ;
+ 	    $sth->execute () ;
+ 	    $sth->finish () ;
+ 	}
+	@reqlist = () ;
+
 #	debug "Initialising sequences." ;
 #
 #	@filelist = qw{ /usr/lib/sourceforge/db/init-sequences.sql } ;
@@ -145,20 +154,20 @@ eval {
 # 	    }
 # 	} 
 #	@reqlist = () ;
-#
-#	debug "Inserting skills." ;
-#
-#	foreach my $skill (split /;/, $skill_list) {
-#	    push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
-#	}
-#
-# 	foreach my $s (@reqlist) {
-# 	    $query = $s ;
-# 	    $sth = $dbh->prepare ($query) ;
-# 	    $sth->execute () ;
-# 	    $sth->finish () ;
-# 	}
-#	@reqlist = () ;
+
+	debug "Inserting skills." ;
+
+	foreach my $skill (split /;/, $skill_list) {
+	    push @reqlist, "INSERT INTO people_skill (name) VALUES ('$skill')" ;
+	}
+
+ 	foreach my $s (@reqlist) {
+ 	    $query = $s ;
+ 	    $sth = $dbh->prepare ($query) ;
+ 	    $sth->execute () ;
+ 	    $sth->finish () ;
+ 	}
+	@reqlist = () ;
 
  	debug "Committing." ;
  	$dbh->commit () ;
