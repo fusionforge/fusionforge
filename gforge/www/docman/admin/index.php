@@ -1,11 +1,16 @@
 <?php
+/**
+  *
+  * SourceForge Documentaion Manager
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-//
 
 /*
         Docmentation Manager
@@ -13,8 +18,8 @@
 */
 
 
-require('../doc_utils.php');
-require('pre.php');
+require_once('../doc_utils.php');
+require_once('pre.php');
 
 if (!($group_id)) {
 	exit_no_group();
@@ -25,7 +30,7 @@ if (!(user_ismember($group_id,"D1"))) {
 }
 
 function main_page($group_id) {
-		docman_header('Document Admin Page','Document Manager Admin','admin');
+		docman_header('Document Admin Page','Document Manager Admin','docman_admin','admin',group_getname($group_id),'admin');
 		echo '<p><b>Pending Submissions:</b>  <p>';
 		display_docs('3',$group_id);
 		// doc_group 3 == pending
@@ -47,7 +52,7 @@ function main_page($group_id) {
 		$result = db_query($query);
 		$row = db_fetch_array($result);
 	
-		docman_header('Edit Document','Edit Document','admin');
+		docman_header('Edit Document','Edit Document','docman_admin_docedit','admin',group_getname($group_id),'');
 
 		echo '
 	
@@ -122,19 +127,19 @@ function main_page($group_id) {
 				."where doc_group = '$doc_group' "
 				."and group_id = $group_id";
 			db_query($query);
-			docman_header("Group Delete","Group Delete",'admin');
+			docman_header("Group Delete","Group Delete",'docman_admin_groupdelete','admin',group_getname($group_id),'');
 			print "<p><b>Group deleted. (GroupID : ".$doc_group.")</b>";	
 			docman_footer($params);	
 
 		} else {
 		
-			docman_header("Group Delete","Group Delete Failed",'admin');
+			docman_header("Group Delete","Group Delete Failed",'docman_admin_groupdelete','admin',group_getname($group_id),'');
 			print "Group was not deleted.  Cannot delete groups that still have documents grouped under them."; 
 			docman_footer($params);
 		}
 		
 	} elseif (strstr($mode,"groupedit")) {
-			docman_header('Group Edit','Group Edit','admin');
+			docman_header('Group Edit','Group Edit','docman_admin_groupedit','admin',group_getname($group_id),'');
 			$query = "select * "
 				."from doc_groups "
 				."where doc_group = '$doc_group' "
@@ -176,6 +181,7 @@ function main_page($group_id) {
 	
 		if (db_numrows($result) == 1) {	
 
+			// data in DB stored in htmlspecialchars()-encoded form
 			$query = "update doc_data "
 				."set title = '".htmlspecialchars($title)."', "
 				."data = '".htmlspecialchars($data)."', "
@@ -186,8 +192,12 @@ function main_page($group_id) {
 				."description = '".htmlspecialchars($description)."' "
 				."where docid = '".$docid."'"; 
 		
-			db_query($query);
-			$feedback .= "Document \" ".htmlspecialchars($title)." \" updated";
+			$res = db_query($query);
+			if (!$res || db_affected_rows($res)<1) {
+				$feedback .= 'Could not update document<br>';
+			} else {
+				$feedback .= "Document \" ".htmlspecialchars($title)." \" updated";
+			}
 			main_page($group_id);
 
 		} else {
@@ -207,19 +217,23 @@ function main_page($group_id) {
 		main_page($group_id);
 	
 	} elseif (strstr($mode,"editgroups")) {
-		docman_header('Group Edit', 'Group Edit','admin');
+		docman_header('Group Edit', 'Group Edit','docman_admin_editgroups','admin',group_getname($group_id),'');
 		echo '
 			<p><b> Add a group:</b>
 			<form name="addgroup" action="index.php?mode=groupadd&group_id='.$group_id.'" method="POST">
 			<table>
 			<tr><th>New Group Name:</th>  <td><input type="text" name="groupname"></td><td><input type="submit" value="Add"></td></tr></table>	
+			<p>
+			Group name will be used as a title, so it should be
+			formatted correspondingly.
+			</p>
 			</form>	
 		';
 		display_groups($group_id);
 
 	} elseif (strstr($mode,"editdocs")) {
 
-		docman_header('Edit documents list','Edit documents','admin');
+		docman_header('Edit documents list','Edit documents','docman_admin_editdocs','admin',group_getname($group_id),'');
 		
 		print "<p><b>Active Documents:</b><p>";	
 		display_docs('1',$group_id);

@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 	if(argc < 3) {
 			/* printf("FATAL: %s bailed because not enough options.\n", argv[0]); */
 
-			printf("\nWelcome to cvs1.sourceforge.net\n\n");
+			printf("\nWelcome to cvs\n\n");
 			printf("This is a restricted Shell Account\n");
 			printf("You cannot execute anything here.\n\n");
 
@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
 		if(options[i] == NULL || strlen(argv[OPTION_ARGC]) > MAXSTRLEN) {
 			/* printf("FATAL: %s bailed because options didn't qualify.\n", argv[0]); */
 
-			printf("\nWelcome to cvs1.sourceforge.net\n\n");
+			printf("\nWelcome to cvs\n\n");
 			printf("This is a restricted Shell Account\n");
 			printf("You cannot execute anything here.\n\n");
 
@@ -130,13 +130,13 @@ int main(int argc, char *argv[]) {
 	j = CMD_POS;
 	n = 0;
 
-	while(buf[i] != NULL && j < MAXARGS) {
+	while(buf[i] != 0 && j < MAXARGS) {
 		if(buf[i] == ' ') {
-			buf[i] = NULL;
+			buf[i] = 0;
 			flag = GRAP_TRUE;
 		} else 
 			if(flag) {
-				args[j++] = &buf[i];
+				args[j++] = (char **)&buf[i];
 				flag = GRAP_FALSE;
 				args[j] = NULL;
 				n++;
@@ -148,11 +148,11 @@ int main(int argc, char *argv[]) {
 
 	i = -1;
 	while((options[++i] != NULL) && strncmp(commands[i], args[CMD_POS], MAXSTRLEN));
-	if(options[i] == NULL || strlen(args[CMD_POS]) > MAXSTRLEN) {
+	if(options[i] == NULL || strlen((char *)args[CMD_POS]) > MAXSTRLEN) {
 
 	/* 	printf("FATAL: %s bailed because command didn't qualify.\n", args[CMD_POS]); */
 
-		printf("\nWelcome to cvs1.sourceforge.net\n\n");
+		printf("\nWelcome to cvs\n\n");
 		printf("This is a restricted Shell Account\n");
 		printf("You cannot execute anything here.\n\n");
 
@@ -162,7 +162,7 @@ int main(int argc, char *argv[]) {
 
 	/* ok, the command is clear, exec() it */
 
-	execvp(args[CMD_POS], args);
+	execvp((char *)args[CMD_POS], (char **)args);
 
 }
 
