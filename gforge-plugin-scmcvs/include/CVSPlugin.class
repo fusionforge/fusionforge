@@ -59,7 +59,7 @@ class CVSPlugin extends SCM {
 	}
 
 	function cssfile_scm ($layout) {
-		echo '<link rel="stylesheet" type="text/css" href="/plugins/scmcvs/css/cvsweb.css" />';
+		echo '<link rel="stylesheet" type="text/css" href="/plugins/scmcvs/cvsweb/css/cvsweb.css" />';
 	}
 
 	function display_scm_page ($group_id) {
