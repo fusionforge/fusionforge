@@ -105,7 +105,8 @@ function util_unconvert_htmlspecialchars($string) {
 	if (strlen($string) < 1) {
 		return '';
 	} else {
-		$trans = get_html_translation_table(HTMLENTITIES, ENT_QUOTES); 
+		//$trans = get_html_translation_table(HTMLENTITIES, ENT_QUOTES); 
+		$trans = get_html_translation_table(HTML_ENTITIES); 
 		$trans = array_flip ($trans);
 		$str = strtr ($string, $trans);
 		return $str;
