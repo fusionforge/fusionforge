@@ -1,17 +1,52 @@
-2003-02-28  Reinhard Spisser <reinhard@spisser.i>
+2003-03-01  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/my/bookmark_add.php: valid XHTML 1.0 Transitional.
+
+	* www/my/bookmark_delete.php: do not go to a separate page and
+	force the user to return: just update the current page and
+	it is obvious the bookmark is gone.
+
+	* www/include/bookmarks.php(bookmark_edit): add feedback.
+
+	* www/my/bookmark_edit.php: fix site_user_header.  valid
+	XHTML 1.0 Transitional.
+
+	* www/my/diary.php: valid XHTML 1.0 Transitional.
+
+	* www/include/languages/Base.tab
+	(survey_add_question:show_existing_questions): add missing tab.
+	(survey_add_question:show_existing_surveys): remove duplicate
+	entry.
+	(my_bookmark_edit:bookmark_updated):
+	(my_bookmark_edit:failed_to_update_bookmark): new entries.
+
+	* www/survey/admin/add_question.php: add missing "".
+
+	* common/include/utils.php(show_priority_colors_key): valid
+	XHTML 1.0 Transitional.
+
+	* www/include/vote_function.php(show_survey): valid XHTML 1.0
+	Transitional.
+
+	* www/include/languages/Base.tab(my:no_monitored_filemodules,
+	my:no_monitored_forums): valid XHTML 1.0 Transitional.
+
+	* www/my/index.php: valid XHTML 1.0 Transitional.
+
+2003-02-28  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/help/*
 	submitting Reiner Jung's i18n of /help/
 
 	* www/snippet/*
 	submitting Reiner Jung's i18n of snippet
-	
+
 	* www/include/snippet_caching.php:
-	i18n 
-	
+	i18n
+
 	* www/include/languages/Italian.tab:
 	translations of /snippet
-	
+
 2003-02-23  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/mail/admin/index.php: valid XHTML 1.0 Transitional.

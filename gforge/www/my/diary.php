@@ -67,7 +67,7 @@ if (session_loggedin()) {
 						"\nTo stop monitoring this user, login to ".$GLOBALS['sys_name']." and visit: ".
 						"\nhttp://$GLOBALS[sys_default_domain]/developer/monitor.php?diary_user=". user_getid();
 
-						util_send_message($to, $subject, $body, $to, $tolist); 
+						util_send_message($to, $subject, $body, $to, $tolist);
 
 						$feedback .= " email sent - ($rows) people monitoring ";
 
@@ -115,31 +115,30 @@ if (session_loggedin()) {
 	echo '
 	<p>&nbsp;</p>
 	<h3>'. $info_str .'</h3>
-	<p>
-	<table>
+	<p />
 	<form action="'. $PHP_SELF .'" method="post">
-	<input type="hidden" name="'. $proc_str .'" value="1">
-	<input type="hidden" name="diary_id" value="'. $_diary_id .'">
+	<input type="hidden" name="'. $proc_str .'" value="1" />
+	<input type="hidden" name="diary_id" value="'. $_diary_id .'" />
+	<table>
 	<tr><td colspan="2"><strong>'.$Language->getText('my_diary','summary').':</strong><br />
 		<input type="text" name="summary" size="45" maxlength="60" value="'. $_summary .'" />
 	</td></tr>
 
 	<tr><td colspan="2"><strong>'.$Language->getText('my_diary','details').':</strong><br />
-		<textarea name="details" rows="15" cols="60" wrap="hard">'. $_details .'</textarea>
+		<textarea name="details" rows="15" cols="60">'. $_details .'</textarea>
 	</td></tr>
 	<tr><td colspan="2">
 		<p>
 		<input type="submit" name="submit" value="'.$Language->getText('my_diary','submit_only_once').'" />
-		&nbsp; <input type="checkbox" name="is_public" value="1" '. (($_is_public)?'checked=\"checked\"':'') .' /> '.$Language->getText('my_diary','is_public').'
+		&nbsp; <input type="checkbox" name="is_public" value="1" '. (($_is_public)?'checked="checked"':'') .' /> '.$Language->getText('my_diary','is_public').'
 		</p>
 		<p>'.$Language->getText('my_diary','is_public_expl').'
 		</p>
-		</form>
 	</td></tr>
 
-	</table></p>
+	</table></form>
 
-	<p>';
+	<p />';
 
 	echo $HTML->boxTop($Language->getText('my_diary','existing_entries'));
 
@@ -160,7 +159,7 @@ if (session_loggedin()) {
 				'<td>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</td></tr>';
 		}
 		echo '
-		<tr><td colspan="2" style="background-color:'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</td></tr>';
+		<tr><td colspan="2" style="background-color:'.$HTML->COLOR_CONTENT_BACK.'">';
 	}
 
 	echo $HTML->boxBottom();

@@ -25,8 +25,8 @@ if (session_loggedin() || $sf_user_hash) {
 	 */
 	if (!session_loggedin()) {
 			list($user_id,$hash)=explode('_',$sf_user_hash);
-			$sql="SELECT * 
-			FROM users 
+			$sql="SELECT *
+			FROM users
 			WHERE user_id='".$user_id."' AND user_pw LIKE '".$hash."%'";
 
 		$result=db_query($sql);
@@ -43,32 +43,33 @@ if (session_loggedin() || $sf_user_hash) {
 
 	<p>
     <?php echo $Language->getText('my', 'about_blurb'); ?>
-	<p>
+	</p>
 	<table width="100%" border="0">
-	<tr><td valign="TOP" width="50%">
+	<tr><td valign="top" width="50%">
 	<?php
 	/*
 		Artifacts
 	*/
 	$last_group=0;
 	echo $HTML->boxTop($Language->getText('my', 'assigneditems'));
-	
+
 	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
-		a.assigned_to,a.summary,a.artifact_id,a.priority 
-		FROM artifact a, groups g, artifact_group_list agl 
-		WHERE 
-		a.group_artifact_id=agl.group_artifact_id 
-		AND agl.group_id=g.group_id 
+		a.assigned_to,a.summary,a.artifact_id,a.priority
+		FROM artifact a, groups g, artifact_group_list agl
+		WHERE
+		a.group_artifact_id=agl.group_artifact_id
+		AND agl.group_id=g.group_id
     AND g.status = 'A'
-		AND a.assigned_to='". user_getid() ."' 
-		AND a.status_id='1' 
+		AND a.assigned_to='". user_getid() ."'
+		AND a.status_id='1'
 		AND g.status='A'
 		ORDER BY agl.group_id,a.group_artifact_id,a.assigned_to,a.status_id";
- 
+
 	$result=db_query($sql);
 	$rows=db_numrows($result);
-	
+
 	if ($rows > 0) {
+		echo '</td></tr>';
 		for ($i=0; $i < $rows; $i++) {
 			if (db_result($result,$i,'group_artifact_id') != $last_group) {
 				echo '
@@ -77,7 +78,7 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'group_artifact_id').'">'.
 				db_result($result,$i,'group_name').' - '.
 				db_result($result,$i,'name').'</a></strong></td></tr>';
-			}   
+			}
 			echo '
 			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
 			<td><a href="/tracker/?func=detail&amp;aid='.
@@ -85,35 +86,36 @@ if (session_loggedin() || $sf_user_hash) {
 			'&amp;group_id='.db_result($result, $i, 'group_id').
 			'&amp;atid='.db_result($result, $i, 'group_artifact_id').'">'.
 			db_result($result, $i, 'artifact_id').'</td>
-			<td>' . stripslashes(db_result($result, $i, 'summary')) . '</td></tr>';
+			<td>' . stripslashes(db_result($result, $i, 'summary'));
 
 			$last_group = db_result($result,$i,'group_artifact_id');
-		}   
+		}
 	} else {
 		echo '
-		<tr><td colspan="2"><strong>'.$Language->getText('my', 'no_tracker_items_assigned').'</strong></td></tr>';
+		<strong>'.$Language->getText('my', 'no_tracker_items_assigned').'</strong>';
 		echo db_error();
-	}   
+	}
 
 	$last_group=0;
 	echo $HTML->boxMiddle($Language->getText('my', 'submitteditems'),false,false);
-	
+
 	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
-		a.assigned_to,a.summary,a.artifact_id,a.priority 
-		FROM artifact a, groups g, artifact_group_list agl 
-		WHERE 
-		a.group_artifact_id=agl.group_artifact_id 
-		AND agl.group_id=g.group_id 
-    AND g.status = 'A' 
-		AND a.submitted_by='". user_getid() ."' 
-		AND a.status_id='1' 
+		a.assigned_to,a.summary,a.artifact_id,a.priority
+		FROM artifact a, groups g, artifact_group_list agl
+		WHERE
+		a.group_artifact_id=agl.group_artifact_id
+		AND agl.group_id=g.group_id
+    AND g.status = 'A'
+		AND a.submitted_by='". user_getid() ."'
+		AND a.status_id='1'
 		ORDER BY agl.group_id,a.group_artifact_id,a.submitted_by,a.status_id";
-	
+
 	$result=db_query($sql);
 	$rows=db_numrows($result);
-	
+
 	if ($rows > 0) {
 		for ($i=0; $i < $rows; $i++) {
+			echo '</td></tr>';
 			if (db_result($result,$i,'group_artifact_id') != $last_group) {
 				echo '
 				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
@@ -121,21 +123,21 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'group_artifact_id').'">'.
 				db_result($result,$i,'group_name').' - '.
 				db_result($result,$i,'name').'</a></strong></td></tr>';
-			}	
+			}
 			echo '
 			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
 			<td><a href="/tracker/?func=detail&amp;aid='.
 			db_result($result, $i, 'artifact_id').
 			'&amp;group_id='.db_result($result, $i, 'group_id').
 			'&amp;atid='.db_result($result, $i, 'group_artifact_id').'">'.
-			db_result($result, $i, 'artifact_id').'</td>
-			<td>' . stripslashes(db_result($result, $i, 'summary')) . '</td></tr>';
-			
+			db_result($result, $i, 'artifact_id').'</a></td>
+			<td>' . stripslashes(db_result($result, $i, 'summary'));
+
 			$last_group = db_result($result,$i,'group_artifact_id');
-		}	
-	} else { 
+		}
+	} else {
 		echo '
-		<tr><td colspan="2"><strong>'.$Language->getText('my', 'no_tracker_items_submitted').'</strong></td></tr>';
+		<strong>'.$Language->getText('my', 'no_tracker_items_submitted').'</strong>';
 		echo db_error();
 	}
 
@@ -153,12 +155,11 @@ if (session_loggedin() || $sf_user_hash) {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '
-		<tr><td colspan="2">'.$Language->getText('my', 'no_monitored_forums').'
-		</td></tr>';
+		echo $Language->getText('my', 'no_monitored_forums');
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
+			echo '</td></tr>';
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
 				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><strong><a href="/forum/?group_id='.
@@ -171,7 +172,7 @@ if (session_loggedin() || $sf_user_hash) {
 				'&amp;stop=1&amp;group_id='.db_result($result,$i,'group_id').'"><img src="'. $HTML->imgroot . '/ic/trash.png" height="16" width="16" '.
 				'border="0" alt="" /></a></td><td width="99%"><a href="/forum/forum.php?forum_id='.
 				db_result($result,$i,'group_forum_id').'">'.
-				db_result($result,$i,'forum_name').'</a></td></tr>';
+				db_result($result,$i,'forum_name').'</a>';
 
 			$last_group=db_result($result,$i,'group_id');
 		}
@@ -192,12 +193,11 @@ if (session_loggedin() || $sf_user_hash) {
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '
-		<tr><td colspan="2">'.$Language->getText('my', 'no_monitored_filemodules').'
-		</td></tr>';
+		echo $Language->getText('my', 'no_monitored_filemodules');
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
+			echo '</td></tr>';
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
 				<tr '. $HTML->boxGetAltRowStyle($i) .'><td colspan="2"><strong><a href="/project/?group_id='.
@@ -210,7 +210,7 @@ if (session_loggedin() || $sf_user_hash) {
 			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
 			'BORDER=0"></a></td><td width="99%"><a href="/project/showfiles.php?group_id='.
 			db_result($result,$i,'group_id').'">'.
-			db_result($result,$i,'name').'</a></td></tr>';
+			db_result($result,$i,'name').'</a>';
 
 			$last_group=db_result($result,$i,'group_id');
 		}
@@ -243,6 +243,7 @@ if (session_loggedin() || $sf_user_hash) {
 
 	if ($rows > 0) {
 		for ($i=0; $i < $rows; $i++) {
+			echo '</td></tr>';
 			/* Deduce summary style */
 			$style_begin='';
 			$style_end='';
@@ -265,13 +266,13 @@ if (session_loggedin() || $sf_user_hash) {
 			'&amp;group_id='.db_result($result, $i, 'group_id').
 			'&amp;group_project_id='.db_result($result, $i, 'group_project_id').'">'.
 			db_result($result, $i, 'project_task_id').'</td>
-			<td>'.$style_begin.stripslashes(db_result($result, $i, 'summary')).$style_end.'</td></tr>';
+			<td>'.$style_begin.stripslashes(db_result($result, $i, 'summary')).$style_end;
 
 			$last_group = db_result($result,$i,'group_project_id');
 		}
 	} else {
 		echo '
-		<tr><td colspan="2"><strong>'.$Language->getText('my', 'no_open_tasks').'</strong></td></tr>';
+		<strong>'.$Language->getText('my', 'no_open_tasks').'</strong>';
 		echo db_error();
 	}
 
@@ -293,7 +294,7 @@ if (session_loggedin() || $sf_user_hash) {
 		show_survey(1,1);
 	} else {
 		echo '
-		<tr><td colspan="2"><strong>'.$Language->getText('my','survey_taken').'</strong></td></tr>';
+		<strong>'.$Language->getText('my','survey_taken').'</strong>';
 	}
 
 	/*
@@ -308,22 +309,20 @@ if (session_loggedin() || $sf_user_hash) {
                 $rows=db_numrows($result);
                 if ($rows) {
                         echo $HTML->boxMiddle($Language->getText('my','pending_projects'), false, false);
-		       
-                        echo "<tr><td colspan=\"2\">";
 
 			if ($rows==1){
 			  echo $Language->getText('my','pending_projects_1');
 			}
 			else{
-			  echo $Language->getText('my','pending_projects_2',$rows);		
+			  echo $Language->getText('my','pending_projects_2',$rows);
 			}
-			
+
 			/*    echo (($rows!=1)?"are ": "is "). "$rows project";
                         echo (($rows!=1)?"s":"");
 			*/
                         echo " <a href=\"/admin/approve-pending.php\">";
 			echo $Language->getText('my','pending_projects_3');
-                        echo "</a>.</td></tr>";
+                        echo "</a>.";
                 }
 	}
 	$newsgroup = group_get_object ($GLOBALS['sys_news_group']) ;
@@ -341,19 +340,19 @@ if (session_loggedin() || $sf_user_hash) {
 			  echo $Language->getText('my','pending_news_bytes_1');
 			}
 			else{
-			  echo $Language->getText('my','pending_news_bytes_2',$rows);		
+			  echo $Language->getText('my','pending_news_bytes_2',$rows);
 			}
-			
-	
+
+
 			echo " <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
 
 			echo $Language->getText('my','pending_news_bytes_3');
-                        echo "</a>.</td></tr>";
+                        echo "</a>.";
 
 
-                       
+
 		}
-	}		
+	}
 	/*
 		   Personal bookmarks
 	*/
@@ -364,17 +363,17 @@ if (session_loggedin() || $sf_user_hash) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-		<tr><td colspan="2"><strong>'.$Language->getText('my', 'no_bookmarks').'</strong></td></tr>';
+		<strong>'.$Language->getText('my', 'no_bookmarks').'</strong>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
-			echo '
+			echo '</td></tr>
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
 			<img src="'.$HTML->imgroot.'/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
 			db_result($result,$i,'bookmark_title') .'</a></strong> &nbsp;
-			<span style="font-size:small"><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a></span></td></tr>';
+			<span style="font-size:small"><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a></span>';
 		}
 	}
 
@@ -397,11 +396,11 @@ if (session_loggedin() || $sf_user_hash) {
 		. "AND groups.status='A'");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<tr><td colspan=\"2\"><strong>'.$Language->getText('my', 'no_projects').'</strong></td></tr>';
+		echo '<strong>'.$Language->getText('my', 'no_projects').'</strong>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
-
+			echo '</td></tr>';
 			$admin_flags = db_result($result, $i, 'admin_flags');
 			if (stristr($admin_flags, 'A')) {
 				$img="trash-x.png";
@@ -419,7 +418,7 @@ if (session_loggedin() || $sf_user_hash) {
 			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="center">
 			<a href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<img src="'.$HTML->imgroot.'ic/'.$img.'" alt="Delete" height="16" width="16" border="0" /></a></td>
-			<td><a href="/'.$type.'/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a></td></tr>';
+			<td><a href="/'.$type.'/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</a>';
 		}
 	}
 	echo $HTML->boxBottom();
@@ -430,7 +429,7 @@ if (session_loggedin() || $sf_user_hash) {
 	<!--  Bottom Row   -->
 
 
-	<tr><td colspan=2>';
+	<tr><td colspan="2">';
 
 	echo show_priority_colors_key();
 

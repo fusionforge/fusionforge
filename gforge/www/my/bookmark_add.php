@@ -25,12 +25,12 @@ if ($bookmark_url) {
 	print "<a href=\"/my/\">".$Language->getText('my_bookmark_add','back')."</a>";
 } else {
 	?>
-	<form method="post">
+	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<p><?php echo $Language->getText('my_bookmark_add','bookmark_url') ?>:<br />
 	<input type="text" name="bookmark_url" value="http://" />
 	</p>
 	<p><?php echo $Language->getText('my_bookmark_add','bookmark_title') ?>:<br />
-	<input type="text" name="bookmark_title" value="My Fav Site" />
+	<input type="text" name="bookmark_title" value="" />
 	</p>
 	<p><input type="submit" value="<?php echo $Language->getText('general','submit') ?>" /></p>
 	</form>

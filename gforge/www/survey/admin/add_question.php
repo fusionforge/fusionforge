@@ -69,7 +69,7 @@ echo html_build_select_box($result,'question_type','xzxz',false);
 
 <p>
 <form>
-<input type="button" name="none" value= <?php echo $Language->getText('survey_add_question','show_existing_questions'); ?> onclick="show_questions()" />
+<input type="button" name="none" value="<?php echo $Language->getText('survey_add_question','show_existing_questions'); ?>" onclick="show_questions()" />
 </form></p>
 
 <?php
