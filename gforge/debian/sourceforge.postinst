@@ -193,7 +193,7 @@ EOF
 	    /usr/lib/sourceforge/bin/install-ftp.sh configure 
 
             # Setup our FRS
-	    chown www-data /var/lib/sourceforge/download
+	    chown root:root /var/lib/sourceforge/download
 
 	    # Setup our CVS
 	    # Making user group and cvs update from database 
