@@ -1,8 +1,12 @@
-gforge (3.0-6+) unstable; urgency=low
+gforge (3.0-6+3) unstable; urgency=low
 
-  * Added 20030822.sql.
+  * [Roland] Added 20030822.sql.
+  * [Roland] Added scripts to generate a /var/lib/gforge/etc/httpd.vhosts
+    file from the database and use that, so projects can use virtual hosts
+    other than <projectname>.<domainname>.
+  * [Roland] Bumped Standards-Version: to 3.6.1 (no changes needed).
 
- -- Roland Mas <lolando@debian.org>  Sat, 23 Aug 2003 11:55:19 +0200
+ -- Roland Mas <lolando@debian.org>  Mon,  8 Sep 2003 00:14:16 +0200
 
 gforge (3.0-6) unstable; urgency=low
 
