@@ -18,11 +18,14 @@
 # * Translation until 2002-10
 # 2002-11-24  Vicente Ruiz, vjrj AT ourproject.org
 # * Translation until 2002-11
-# 2003-05-17  Antonio Vico; Gabriel Rodríguez Alberich, gabriel.rodriguez AT hispalinux.es; Jesús M. Navarro, jesusmanuel.navarro.lopez AT hispalinux.es; René Martín Rodríguez, agarfu AT gulic.org; Vicente Ruiz, vjrj AT ourproject.org
+# 2003-05-17  Antonio Vico; Gabriel Rodríguez Alberich, gabriel.rodriguez AT hispalinux.es;
+# Jesús M. Navarro, jesusmanuel.navarro.lopez AT hispalinux.es; René Martín Rodríguez, agarfu AT # gulic.org; Vicente Ruiz, vjrj AT ourproject.org
 # 2004-07-20  Francisco Gimeno, kikov AT kikov.org
 # * Translation until 2004-07
 # 2004-08-20  Francisco Gimeno, kikov AT kikov.org
 # * Translation until 2004-08
+# 2004-10-13  Francisco Gimeno, kikov AT kikov.org
+# * Translation until 2004-10
 account	title	Preferencias de cuenta
 account	updated	Actualizado
 account_change_email	desc	<p>El cambio de su dirección de correo requiere que lo confirme desde su nueva dirección de correo, de esta forma podemos estar seguros de que su nueva dirección está correcta.</p><p>Necesitamos mantener una dirección de correo correcta de cada usuario debido al nivel de acceso que permitimos a una cuenta. En el caso de tener que contactar con un usuario debido a asuntos relacionados con una cuenta de proyecto, es importante que tengamos posibilidad de hacerlo.</p><p>Enviando el formulario siguiente le enviaremos un enlace de confirmación a la nueva dirección de correo. Visitando este enlace se completará el cambio de correo.</p>
@@ -49,6 +52,8 @@ account_change_pw	title	Cambio de contraseña
 account_change_pw	update	Actualizar contraseña
 account_change_pw_changed	return_to	Ahora debe $1 regresar a las preferencias de usuario $2.
 account_change_pw_changed	title	Contraseña cambiada con éxito
+account_editsshkeys	authorized_keys	Claves autorizadas:<br /><em>Importante: Asegúrese de que no hay ningún salto de línea salvo entre distintas claves. Después de enviarla, verifique que el número de claves de su cuenta es el esperado.</em>
+account_editsshkeys	intro	<p>Para evitar que tener que escribir la contraseña cada vez que se accede con la cuenta de desarrollador CVS/SSH, puede suministrar su(s) clave(s) públicas y serán colocadas en el fichero ~/.ssh/authorized_keys file. Esto se hace con una tarea programada, por lo que no ocurrirá inmediatamente. Por favor, espera una hora.</p><p>Para generar una clave pública, ejecute el programa 'ssh-keygen' (puede usar tanto el protocolo 1 como el 2). La clave pública será colocada en '~/.ssh/identity.pub' (protocolo 1) and '~/.ssh/id_dsa.pub' o '~/.ssh/id_rsa.pub' (protocolo 2). Lea la documentación de ssh para más información en el uso de claves.</p>
 account_editsshkeys	section	Preferencias de cuenta
 account_editsshkeys	title	Editar claves compartidas CVS/SSH
 account_first	about_blurb	<p>Ahora es un usuario registrado en $1, el entorno de desarrollo de proyectos de código abierto en línea.</p><p>Como usuario registrado, puede participar totalmente en las actividades de este portal. Ahora puede enviar mensajes en los foros de mensajes de proyectos, enviar errores de código en $1, registrarse como un desarrollador de un proyecto, o incluso comenzar su propio proyecto.</p><p>Tiene que dedicar cierto tiempo para leer la <a href="/docs/site/"><b>documentación</b></a> de forma que pueda tomar partido totalmente de $1.</p><p>Disfrute de este sitio, y por favor proporcionenos comentarios de forma que podamos mejorar $1.</p><p>-- el equipo de $1.</p>
@@ -211,6 +216,23 @@ admin_add_language	classname	Nombre Class:
 admin_add_language	existing_language	Lenguaje Existente
 admin_add_language	name	Nombre:
 admin_add_language	submit	Enviar
+admin_admin_table	add_new	añadir nuevo
+admin_admin_table	cant_delete_language	No se puede eliminar el idioma $1 porque está actualmente en uso por algún usuario.
+admin_admin_table	cant_delete_license	No se puede eliminar la licencia $1 porque está actualmente en uso por algún proyecto.
+admin_admin_table	cant_delete_processor	No se puede eliminar el procesador $1 porque está actualmente en uso por alguna liberación de ficheros.
+admin_admin_table	create_new_below	Crear un nuevo $1 abajo:
+admin_admin_table	delete_confirm	¿Está seguro de que desea eliminar este $1?
+admin_admin_table	modify_below	Modificar el $1 abajo:
+admin_admin_table	site_admin_home	Página Principal del Sitio
+admin_admin_table	successfully_added	$1 añadido correctamente.
+admin_admin_table	successfully_deleted	$1 eliminado correctamente.
+admin_admin_table	successfully_modified	$1 modificado correctamente.
+admin_admin_table	title	Editar la tabla de $1
+admin_admin_table	unit_file_type	Typo de Ficheros
+admin_admin_table	unit_license	Licencia
+admin_admin_table	unit_processor	Procesador
+admin_admin_table	unit_supported_language	Idiomas soportados
+admin_admin_table	unit_theme	Tema
 admin_approve_pending	add_this_custom_response	Añade esta respuesta habitual a las respuestas grabadas
 admin_approve_pending	admin_approve_pending	Aprobar
 admin_approve_pending	approve	Aprobar
@@ -761,7 +783,7 @@ forum_forum	threads	Conversaciones
 forum_forum	title	Foros: Ver un foro
 forum_forum	topic	Tema
 forum_forum	topicstarter	Quien escribió 1º
-forum_forum	ultimate	Ultimate
+forum_forum	ultimate	Últimos
 forum_forum	views	Vistas
 forum_forum_thread	section	Foros
 forum_forum_thread	title	Ver la conversación
@@ -1038,6 +1060,7 @@ mail_admin_updatelist	status	Estado
 mail_admin_updatelist	title	Actualizar Listas
 mail_common	creation_mail_body	Se va a crear una lista de correo en $1 y tardará entre 6 y 24 horas. \n Vd. es el administrador de la lista.\n\nEsta lista es: $3@$2 .\n\nLa información de la lista de correo está en:\n$4 .\n\nLa administración de la lista está en:\n$5 .\n\nLa contraseña de la lista es: $6 .\nEs aconsejable cambiar la contraseña tan pronto como sea posible.\n\nGracias por registrar el proyecto en $1.\n\n-- el equipo de $1 \n
 mail_common	creation_mail_subject	$1 Nueva Lista de Correo
+mail_common	description	Descripción
 mail_common	error_invalid_group_list_id	Identificador de lista de correo inválido
 mail_common	error_invalid_name	Nombre inválido de lista de correo
 mail_common	error_list_already_exists	La lista de correo ya EXISTE
@@ -1045,6 +1068,7 @@ mail_common	error_min_name_length	Debe proporcionar un nombre de lista de 4 o m�
 mail_common	list_not_activated	No activa todavía
 mail_common	mailing_list	Lista de correo
 mail_common	mailing_lists	Listas de correo
+mail_common	prefs	Subscripción
 mail_utils	admin	Administrador
 mail_utils	turned_off	Este proyecto ha deshabilitado las listas de correo
 menu	about_gforge	Acerca de $1
@@ -1448,6 +1472,10 @@ pm_include_taskhtml	related_items	Elementos del Registro Relacionados
 pm_include_taskhtml	remove_relation	Eliminar Relación
 pm_include_taskhtml	task_history	Histórico de Cambios de la Tarea
 pm_include_taskhtml	tracker	Registro
+pm_index	description	Descripción
+pm_index	open	Abrir
+pm_index	short_name	Nombre de subproyecto
+pm_index	total	Total
 pm_modtask	add_comment	Añadir Comentario
 pm_modtask	assignee	Asignado
 pm_modtask	original_comment	Comentario Original
@@ -2531,16 +2559,16 @@ top	NA	N/D
 top	about_blurb	Nosotros registramos muchas estadísticas de uso de proyectos en $1, y mostramos aquí los proyectos estrella en diferentes categorías.
 top	active_all_time	El proyecto más activo
 top	active_weekly	El más activo esta semana
-top	down	Bajar $1
+top	down	Baja $1
 top	downloads	Proyectos más descargados
 top	downloads_7_days	Proyectos más descargados (últimos 7 días)
 top	forum_posts	Foros con más actividad
 top	highest_ranked_users	Usuarios mejores puntuados
 top	pageviews	Los proyectos más vistos - Con las mediciones del botón del logo de $1
-top	same	Mismo
+top	same	Igual
 top	title	Proyectos estrella
 top	top_project	Top $1 project
-top	up	Subir $1
+top	up	Sube $1
 top	updated_daily	Actualización Diaria
 top	view_other_top_category	Ver Otras Categorias Principales
 top_mostactive	percentile	Porcentaje
@@ -2629,6 +2657,8 @@ tracker_admin	add_permissions	Añadir/Actualizar Permisos de Usuarios
 tracker_admin	add_permissions_info	Añadir/Eliminaar usuarios a/de este registro
 tracker_admin	admin	Admin
 tracker_admin	auto_assign_to	Auto-Asignado A
+tracker_admin	build_selection_box	Añadir/Actualizar Cajas Emergentes
+tracker_admin	build_selection_box_info	Añadir nuevos elementos como Fases, Métricas de calidad, componentes, etc.  Una vez añadidos, pueden ser usados en otras Cajas de Selección (for ejemplo, Categorías o Grupos) para describir y navegador por bugs y otros tipos de registros
 tracker_admin	canned_response_inserted	Insertada Respuesta Prefijada
 tracker_admin	canned_response_updated	Actualizada la Respuesta Prefijada
 tracker_admin	category_add_warning	Si añade una categoría, no podrá borrarla
@@ -2682,6 +2712,35 @@ tracker_admin_add_users	technician	Técnico
 tracker_admin_add_users	title	Añadir/Actualizar Permisos de Usuario del Registro $1
 tracker_admin_add_users	update_permissions	Actualizar Permisos de Desarrollador
 tracker_admin_add_users	user_name	Nombre de Usuario
+tracker_admin_build_boxes	box_add_choices	añadir opciones
+tracker_admin_build_boxes	box_change_warning	No se recomienda que cambie el nombre de la caja del registro, porque otras cosas dependen en él. Cuando se cambia el nombre de la caja, todos los items relacionados con el serán cambiados al nuevo nombre
+tracker_admin_build_boxes	box_name	Nombre de caja
+tracker_admin_build_boxes	box_name_inserted	Nombre de caja insertado
+tracker_admin_build_boxes	box_name_updated	Nombre de caja actualizado
+tracker_admin_build_boxes	box_update_title	Modificar un Caja en: $1
+tracker_admin_build_boxes	box_warning	Una vez añada una caja, no podrá ser eliminada
+tracker_admin_build_boxes	choice_change_warning	No se recomienda que se cambie el nombre de la caja de opciones porque otras cosas pueden depender en él. Cuando se cambie el nombre de la caja de opciones, todos los ítems relacionados serán cambiandos al nuevo nombre
+tracker_admin_build_boxes	choice_inserted	Elección insertada
+tracker_admin_build_boxes	choice_updated		Elección actualizada
+tracker_admin_build_boxes	choice_warning	Una vez se añada una nueva opción, no puede ser eliminada
+tracker_admin_build_boxes	error_inserting_box	Error insertando un nombre de caja
+tracker_admin_build_boxes	error_inserting_choice	Error inserting un nombre de opción
+tracker_admin_build_boxes	error_updating	Error actualizando un nombre de caja
+tracker_admin_build_boxes	no_box	No ha definido ninguna caja
+tracker_admin_build_boxes	no_choice	No ha definido ninguna opción
+tracker_admin_build_boxes	opt_add_name	Añadir Nueva Opción
+tracker_admin_build_boxes	opt_name	Opción
+tracker_admin_build_boxes	opt_title	Añadir/Actualizar opciones de cajas emergentes en: $1
+tracker_admin_build_boxes	opt_update_title	Modificar una Opción de caja emergente en: $1
+tracker_admin_build_boxes	required_box_name	se necesita un nombre de caja
+tracker_admin_build_boxes	required_choice_name	se necesita un nombre de opción
+tracker_admin_build_boxes	status_any	Cualquiera
+tracker_admin_build_boxes	title	 Añadir/Actualizar Cajas emergentes y Opciones
+tracker_admin_build_boxes	tracker_box_id	ID
+tracker_admin_build_boxes	tracker_box_option_add	Añadir/Actualizar
+tracker_admin_build_boxes	tracker_box_option_title	Opciones Definidas
+tracker_admin_build_boxes	tracker_box_title	Cajas Definidas
+tracker_admin_build_boxes	tracker_choice_id	ID
 tracker_admin_choose	title	Administración del registro
 tracker_admin_update_canned	title	Modificar Respuestas Tipo en: $1
 tracker_admin_update_cat	auto_assign_to	Auto-Asignado A
