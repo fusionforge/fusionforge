@@ -81,7 +81,7 @@ for ($i=0; $i<$count; $i++) {
 		"VALUES ('".user_getid()."','" . addslashes($group_id) . "','" . addslashes($survey_id) . "','" . addslashes($quest_array[$i]) . "','". htmlspecialchars(addslashes($$val)) . "','$now')";
 	$result=db_query($sql);
 	if (!$result) {
-		echo $language->getText('survey_resp','error');
+		echo $Language->getText('survey_resp','error');
 	}
 }
 

@@ -22,7 +22,7 @@ if (!$project->isProject()) {
  	exit_error($Language->getText('scm_index','error_only_projects_can_use_cvs'));
 }
 if (!$project->usesCVS()) {
-	exit_error($language->getText('scm_index','error_this_project_has_turned_off'));
+	exit_error($Language->getText('scm_index','error_this_project_has_turned_off'));
 }
 
 site_project_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$group_id,'toptab'=>'scm_index','pagename'=>'scm_index','sectionvals'=>array($project->getPublicName())));

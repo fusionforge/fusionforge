@@ -7,6 +7,10 @@
 	Fixed bug #382 - On the project admin page, "Post Jobs" and 
 	"Edit Jobs" were missing headers
 
+	* Various files in www/snippet/ and www/survey:
+	Fixed bug #374 - There are several $language-> instead of $Language->.  
+	Thanks to Vicente Ruiz for the pointers.
+
 2003-05-30 Roland Mas  <lolando@debian.org>
 
 	* Changed the LDAP setup: we're now using an official OID space

@@ -30,7 +30,7 @@ if (session_loggedin()) {
 			$result=db_query($sql);
 			if (!$result) {
 				//error in database
-				$feedback .= $language->getText('snippet_package','error_doing_snippet_package_insert');
+				$feedback .= $Language->getText('snippet_package','error_doing_snippet_package_insert');
 				snippet_header(array('title'=>$Language->getText('snippet_package','title'),'pagename'=>'snippet_package'));
 				echo db_error();
 				snippet_footer(array());
