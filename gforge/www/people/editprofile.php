@@ -234,12 +234,14 @@ if (session_loggedin()) {
 		echo "You can enter new skills you have acquired here. Please enter the start and finish dates as accurately as possible.<br>".
 			 "<FONT COLOR=\"#ff0000\"><I><B>All fields are required!</I></B></FONT>";
 	   	echo '<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">';
+		$cell_data = array();
+		$cell_data[] = array('Type');
+		$cell_data[] = array('Start Date');
+		$cell_data[] = array('End Date');
 		echo "<Table BORDER=0 >".
-				"<TR>".
-					"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Type</TD>".
-					"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Start Date</TD>".
-					"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">End Date</TD>".
-				"</TR>";
+
+				$HTML->multiTableRow('',$cell_data,TRUE);
+
 		echo	"<TR>".
 					"<TD>".html_build_select_box($skills, "type", 1, false, "")."</TD>".
 					"<TD>".html_build_select_box_from_arrays($monthArrayVals,$monthArray, "startM", date("m"), false, "").
@@ -249,17 +251,19 @@ if (session_loggedin()) {
 				"</TR>".
 			"</TABLE>".
 				
-				"<TABLE BORDER=0 >".
-					"<TR>".
-						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Title (max 100 characters)</TD>".
-					"</TR>".
-					"<TR>".
+				"<TABLE BORDER=0 >";
+
+				$cell_data = array();
+				$cell_data[] = array('Title (max 100 chaacters)');
+				echo $HTML->multiTableRow('',$cell_data,TRUE);
+
+				echo "<TR>".
 						"<TD><INPUT TYPE=text name=\"title\" size=100></TD>".
-					"</TR>".
-				   "<TR>".
-						"<TD BGCOLOR=".$HTML->COLOR_HTMLBOX_TITLE.">Keywords (max 255 characters)</TD>".
-					"</TR>".
-					"<TR>".
+					"</TR>";
+				$cell_data = array();
+				$cell_data[] = array('Keywords (max 255 chaacters)');
+				echo $HTML->multiTableRow('',$cell_data,TRUE);
+				echo "<TR>".
 						"<TD><textarea name=\"keywords\" rows=\"3\" cols=\"85\" wrap=\"soft\"></TEXTAREA></TD>".
 					"</TR>".
 					"<TR>".
