@@ -1,7 +1,7 @@
 gforge (3rc2-3+) unstable; urgency=low
 
   * [Roland] Install README.Debian into all packages (Gforge bug #340),
-    and README.Multipack into gforge-common.
+    and README.Multipack into gforge-common (closes: #193151).
   * [Roland] We can even quit using the OID 1.3.6.1.4.1.9586.1.1
     (iso.org.dod.internet.private.enterprise.Debian.package.sourceforge)
     and start using the newly assigned 1.3.6.1.4.1.9586.100.3
@@ -13,10 +13,10 @@ gforge (3rc2-3+) unstable; urgency=low
     their proper package), more policy-compliant (gforge.conf is read and
     Debconf is initialised from it as much as possible), and it even
     actually seems to work.
-  * [Christian] Added {cronolog_path} in httpd.conf.template, make it fill 
+  * [Christian] Added {cronolog_path} in httpd.conf.template, make it fill
     by gforge-config and removed dependancy on a specific cronolog version
 
- -- Christian Bayle <bayle@debian.org>  Fri,  6 Jun 2003 15:17:39 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 10 Jun 2003 12:09:21 +0200
 
 gforge (3rc2-3) unstable; urgency=low
 
