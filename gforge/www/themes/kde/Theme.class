@@ -719,7 +719,7 @@ class Theme extends Layout {
 
 	function makeProjectIcon($url, $hint, $img) {
 		return '
-			<td><a href="'.$url.'" title="'.$hint.'"><img src="'.$this->imgroot.'project_icons/'.$img.'" alt="'.$hint.'" border="0" /></a></td>';
+			<td align="center"><a href="'.$url.'" title="'.$hint.'"><img src="'.$this->imgroot.'project_icons/'.$img.'" alt="'.$hint.'" border="0" /></a></td>';
 	}
 
 	function makeToolbarIcon($url, $hint, $img) {

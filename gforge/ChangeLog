@@ -2,6 +2,7 @@
 
 	* www/themes/kde/Theme.class(listTableTop): remove reference
 	to unneeded clear.png.
+	(makeProjectIcon): centre the icons.
 
 	* INSTALL: mention AcceptPathInfo on if using Apache 2.
 
