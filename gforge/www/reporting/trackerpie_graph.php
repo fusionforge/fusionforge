@@ -91,6 +91,8 @@ if ($area == 'category') {
 
 } else {
 
+	$area = 'assignee';
+
 	$sql="SELECT u.realname,count(*) 
 	FROM artifact a, users u
 	WHERE a.group_artifact_id='$atid'
@@ -113,10 +115,11 @@ if (db_error()) {
 $graph  = new PieGraph(640, 480,"auto");
 //$graph->SetMargin(50,10,35,50);
 
+$arr = array();
 $arr['category']='By Category';
 $arr['group']='By Group';
 $arr['resolution']='By Resolution';
-$arr['technician']='By Tecnician';
+$arr['assignee']='By Assignee';
 $graph->title->Set($arr[$area]." (".date('m/d/Y',$start) ."-". date('m/d/Y',$end) .")");
 $graph->subtitle->Set($sys_name);
 
