@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-24 21:04+0200\n"
+"POT-Creation-Date: 2003-10-21 21:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -46,7 +46,7 @@ msgstr ""
 #: ../gforge-db-postgresql.templates.dsfh-in:18
 msgid ""
 "The hostname of the server that will host your Gforge packages.  It should "
-"not be the same as your main SF host."
+"not be the same as your main Gforge host."
 msgstr ""
 
 #. Default
@@ -338,7 +338,7 @@ msgstr ""
 
 #. Description
 #: ../dsf-helper/common-variables.templates:3
-msgid "Your SF domain or subdomain name"
+msgid "Your Gforge domain or subdomain name"
 msgstr ""
 
 #. Description
@@ -350,7 +350,7 @@ msgstr ""
 
 #. Description
 #: ../dsf-helper/common-variables.templates:9
-msgid "The SF admin email address."
+msgid "The Gforge admin email address."
 msgstr ""
 
 #. Description
@@ -379,7 +379,7 @@ msgstr ""
 #: ../dsf-helper/cvshost-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge CVS repositories.  It "
-"should not be the same as your main SF host."
+"should not be the same as your main Gforge host."
 msgstr ""
 
 #. Description
@@ -429,7 +429,7 @@ msgstr ""
 #: ../dsf-helper/downloadhost-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge packages. It should "
-"not be the same as your main SF host."
+"not be the same as your main Gforge host."
 msgstr ""
 
 #. Description
@@ -464,7 +464,7 @@ msgstr ""
 #: ../dsf-helper/lists-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge mailing-lists. It "
-"should not be the same as your main SF host."
+"should not be the same as your main Gforge host."
 msgstr ""
 
 #. Description
@@ -488,7 +488,7 @@ msgstr ""
 #: ../dsf-helper/users-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge user mail redirector. "
-"It should not be the same as your main SF host."
+"It should not be the same as your main Gforge host."
 msgstr ""
 
 #. Choices

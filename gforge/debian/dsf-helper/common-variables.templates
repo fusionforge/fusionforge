@@ -1,12 +1,12 @@
 Template: gforge/shared/domain_name
 Type: string
-_Description: Your SF domain or subdomain name
+_Description: Your Gforge domain or subdomain name
  The domain that will host your Gforge installation.  Some services will be
  given their own subdomain in that domain (cvs, lists, etc.).
 
 Template: gforge/shared/server_admin
 Type: string
-_Description: The SF admin email address.
+_Description: The Gforge admin email address.
  The email address of the Gforge administrator of your site.  Needed in
  case a problem occurs.
 

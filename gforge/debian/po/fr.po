@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge 3.0-2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-07-24 21:04+0200\n"
-"PO-Revision-Date: 2003-07-24 21:09+0200\n"
+"POT-Creation-Date: 2003-10-21 21:40+0200\n"
+"PO-Revision-Date: 2003-10-21 21:42+0200\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -46,10 +46,10 @@ msgstr "Serveur de téléchargement"
 #: ../gforge-db-postgresql.templates.dsfh-in:18
 msgid ""
 "The hostname of the server that will host your Gforge packages.  It should "
-"not be the same as your main SF host."
+"not be the same as your main Gforge host."
 msgstr ""
 "Il s'agit du serveur qui hébergera vos paquets Gforge. Il devrait être "
-"différent de votre serveur SourceForge principal."
+"différent de votre serveur Gforge principal."
 
 #. Default
 #: ../gforge-db-postgresql.templates.dsfh-in:26
@@ -399,8 +399,8 @@ msgstr ""
 
 #. Description
 #: ../dsf-helper/common-variables.templates:3
-msgid "Your SF domain or subdomain name"
-msgstr "Nom de domaine ou de sous-domaine SF"
+msgid "Your Gforge domain or subdomain name"
+msgstr "Nom de domaine ou de sous-domaine Gforge"
 
 #. Description
 #: ../dsf-helper/common-variables.templates:3
@@ -414,8 +414,8 @@ msgstr ""
 
 #. Description
 #: ../dsf-helper/common-variables.templates:9
-msgid "The SF admin email address."
-msgstr "Adresse électronique de l'administrateur SF"
+msgid "The Gforge admin email address."
+msgstr "Adresse électronique de l'administrateur Gforge"
 
 #. Description
 #: ../dsf-helper/common-variables.templates:9
@@ -445,10 +445,10 @@ msgstr "Serveur CVS"
 #: ../dsf-helper/cvshost-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge CVS repositories.  It "
-"should not be the same as your main SF host."
+"should not be the same as your main Gforge host."
 msgstr ""
 "Il s'agit du nom du serveur CVS pour Gforge. Ce nom ne devrait pas être le "
-"même que celui de votre serveur SF principal."
+"même que celui de votre serveur Gforge principal."
 
 #. Description
 #: ../dsf-helper/dbhost-variables.templates:3
@@ -507,10 +507,10 @@ msgstr ""
 #: ../dsf-helper/downloadhost-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge packages. It should "
-"not be the same as your main SF host."
+"not be the same as your main Gforge host."
 msgstr ""
 "Il s'agit du nom du serveur qui hébergera vos paquets Gforge. Ce nom ne "
-"devrait pas être identique au nom de votre serveur SF principal."
+"devrait pas être identique au nom de votre serveur Gforge principal."
 
 #. Description
 #: ../dsf-helper/groupid-variables.templates:4
@@ -549,10 +549,11 @@ msgstr "Serveur de listes de diffusion"
 #: ../dsf-helper/lists-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge mailing-lists. It "
-"should not be the same as your main SF host."
+"should not be the same as your main Gforge host."
 msgstr ""
 "Il s'agit du nom du serveur qui hébergera vos listes de diffusion de Gforge. "
-"Ce nom ne devrait pas être identique au nom de votre serveur SF principal."
+"Ce nom ne devrait pas être identique au nom de votre serveur Gforge "
+"principal."
 
 #. Description
 #: ../dsf-helper/replace-files.templates:4
@@ -577,11 +578,11 @@ msgstr "Redirecteur de courriers"
 #: ../dsf-helper/users-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge user mail redirector. "
-"It should not be the same as your main SF host."
+"It should not be the same as your main Gforge host."
 msgstr ""
 "Il s'agit du nom du serveur qui hébergera le redirecteur de courrier de vos "
 "utilisateurs. Ce nom ne devrait pas être identique au nom de votre serveur "
-"SF principal."
+"Gforge principal."
 
 #. Choices
 #: ../dsf-helper/web-variables.templates:3
