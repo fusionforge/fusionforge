@@ -1,4 +1,4 @@
-gforge (3.2.1-0+1) experimental; urgency=low
+gforge (3.2.1-0+2) experimental; urgency=low
 
   * [Roland] New upstream release.  Debian packaging still experimental at
     this stage.
@@ -6,8 +6,9 @@ gforge (3.2.1-0+1) experimental; urgency=low
   * [Roland] Also use 20031129.sql, for the "last changed XX days ago"
     patch from Hidenari Miwa and Tsutomu Tominaga.
   * [Roland] Also use 20031126.sql, for the "cron manager" feature.
+  * [Roland] Also use 20031205.sql.
 
- -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 23:08:13 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 17 Jan 2004 21:18:36 +0100
 
 gforge (3.1-8) unstable; urgency=low
 
