@@ -134,7 +134,10 @@ if (session_loggedin()) {
 
 	?>
 	</td></tr>
-
+	<?php
+		$hookParams['artifact_id']=$aid;
+		plugin_hook("artifact_extra_detail",$hookParams);
+	?>
 	<tr>
 	<td colspan="2">
 	<h3><?php echo $Language->getText('tracker_detail','changes') ?>:</h3>
