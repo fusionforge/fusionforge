@@ -29,6 +29,7 @@ class SVNPlugin extends SCM {
 	function SVNPlugin () {
 		$this->SCM () ;
 		$this->name = "scmsvn";
+		$this->text = "SVN";
 		$this->hooks[] = "scm_page";
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
