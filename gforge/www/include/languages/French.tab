@@ -2718,6 +2718,14 @@ tracker_admin_build_boxes	box_change_warning	Il n'est pas recommandé que vous c
 tracker_admin_build_boxes	box_name	Nom du champ
 tracker_admin_build_boxes	box_name_inserted	Champ ajouté
 tracker_admin_build_boxes	box_name_updated	Nom du champ modifié
+tracker_admin_build_boxes	box_sizeattr1	Taille du champ texte/Lignes de la zone de texte
+tracker_admin_build_boxes	box_sizeattr2	Longeur maximale du champ texte/Colonne de la zone de texte
+tracker_admin_build_boxes	box_sizerows	Les champs texte et les zones de textes ont besoin d'avoir une taille/longueur maximale et le nombre de lignes/colonnes respectivement définis.
+tracker_admin_build_boxes	box_type	Type de champ supplémentaire
+tracker_admin_build_boxes	box_type_radio	Boutons radio
+tracker_admin_build_boxes	box_type_select	Liste déroulante
+tracker_admin_build_boxes	box_type_text	Champ texte
+tracker_admin_build_boxes	box_type_textarea	Zone de texte
 tracker_admin_build_boxes	box_update_title	Modifier un champ dans : $1
 tracker_admin_build_boxes	box_warning	Une fois que vous avez ajouté un champ, il ne peut être supprimé.
 tracker_admin_build_boxes	choice_change_warning	Il n'est pas recommandé que vous changiez le nom d'un choix car d'autres éléments peuvent en dépendre. Quand vous changez le nom d'un choix, tous les éléments concernés seront mis à jour avec le nouveau nom.
