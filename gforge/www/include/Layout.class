@@ -714,7 +714,7 @@ if ($params['group']) {
 	 * BeginSubMenu() - Opening a submenu
 	 *
 	 */
-	function BeginSubMenu ($title_arr,$links_arr) {
+	function BeginSubMenu () {
 		$return = '
 			<p><strong>';
 		return $return;
@@ -724,7 +724,7 @@ if ($params['group']) {
 	 * EndSubMenu() - Closing a submenu
 	 *
 	 */
-	function EndSubMenu ($title_arr,$links_arr) {
+	function EndSubMenu () {
 		$return = '</strong></p>';
 		return $return;
 	}
