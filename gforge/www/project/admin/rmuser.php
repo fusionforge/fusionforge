@@ -33,9 +33,9 @@ exit_assert_object($rm_user, 'User');
 $perm = $group->getPermission($rm_user);
 
 project_admin_header(array('title'=>$Language->getText('project_admin_rmuser','title').": ".group_getname($group_id),'group'=>$group_id));
-
 ?>
-<?php echo $Language->getText('project_admin_rmuser','info',array(ucfirst($type), $type)) ?>
+
+<?php echo $Language->getText('project_admin_rmuser','info',array(group_getname($group_id))); ?>
 
 <table>
 <tr><td>
@@ -49,8 +49,8 @@ project_admin_header(array('title'=>$Language->getText('project_admin_rmuser','t
 
 </td><td>
 
-<form action="<?php echo $return_to; ?>" method="get">
-<?php echo $passed_group_id; ?>
+<form action="<?php echo $return_to; ?>" method="post">
+<input type="hidden" name="group_id" value="<?=$group_id ?>" />
 <input type="submit" value="<?php echo $Language->getText('project_admin_rmuser','cancel') ?>" />
 </form>
 
