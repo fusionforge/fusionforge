@@ -30,8 +30,12 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Christian] Repared trove map count
   * [Roland] Fixed invocation of tarballs.sh in crontab.
   * [Roland] [From 2.5] Fixed mailing-lists entries in LDAP.
+  * [Roland] Included entries from the 2.5 changelog file into this one.
+    Don't worry it the dates are not ordered.  Development has been
+    concurrent for a while (and still is).  Such merges should happen
+    until the 2.5 branch is abandoned.
 
- -- Roland Mas <lolando@debian.org>  Fri, 31 May 2002 10:00:30 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 20 Jun 2002 14:02:38 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
@@ -264,6 +268,239 @@ sourceforge (2.6-0+1) unstable; urgency=low
     bug.
 
  -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 20:05:11 +0100
+
+sourceforge (2.5-29) unstable; urgency=low
+
+  * [Roland] Moved to main.  I promise the only changes in this package
+    are this changelog entry and the Section: field of debian/control.
+  * Note to ftpmasters, #1: there's no crypto code in this package, only
+    dependencies.  I'm not sure you need to notify the BXA or anything.
+  * Note to ftpmasters, #2: this package depends on libdbd-pg-perl, which
+    is currently in queue/new.  Take care not to process sourceforge
+    before libdbd-pg-perl.
+  * Note to ftpmasters, #3: this package also has a dependency on
+    libapache-mod-ssl | apache-ssl.  At the time of writing, only
+    apache-ssl has transitioned to main, but the package is still
+    installable without any non-US-only component.  My interpretation is
+    that this is enough to allow the transition.  If not, well, I'll bug
+    the libapache-mod-ssl maintainer so that he goes through this
+    transition.
+  * Note to ftpmasters, #4: I chose the "devel" subsection because I felt
+    it was most appropriate.  "web" would be inaccurate (mailing-lists and
+    CVS are not web stuff).  In a quick survey on IRC, no really
+    convincing arguments were put up for (or against) either.
+  * Note to ftpmasters, #5: "Thank you for your contribution to Debian"
+    yourself.  You do a great job.  Thanks a lot guys.
+
+ -- Roland Mas <lolando@debian.org>  Tue,  9 Apr 2002 19:38:46 +0200
+
+sourceforge (2.5-28) unstable; urgency=low
+
+  * [Roland] Fixed problem with Apache-SSL: the config file is
+    /etc/apache-ssl/httpd.conf, not /etc/apache/httpd.conf.
+  * [Christian] Removed ou=People for admin in local.inc.template
+
+ -- Roland Mas <lolando@debian.org>  Tue,  9 Apr 2002 18:59:48 +0200
+
+sourceforge (2.5-27) unstable; urgency=low
+
+  * [Roland] Fixed the shell box hostname entries (again) in db-upgrade.pl
+    (closes: #137183).
+  * [Christian] Added dependency on rcs for cvsweb (closes: #137811).
+    Yes, we need to have our own cvsweb, since it's a patched version.
+  * [Roland] Bumped the sequences for bug and task ids so that they are
+    greater than 100.  If they are not, the 100th task/bug will have a
+    wrong list or reverse dependencies (since 100 is the id of "None", and
+    all tasks and bugs depend on this "None" by default.  This patch
+    should prevent that from happening if it hasn't already.  It won't fix
+    existing sites where the 100th bug/task already exists, though.  If
+    you are in such a situation, I'm afraid there's nothing I can do for
+    you.  Your best bet would be to declare that bug/task closed and
+    recreate another, identical, one.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Mar 2002 13:59:36 +0100
+
+sourceforge (2.5-26) unstable; urgency=medium
+
+  * [Christian] Made big changes in install-ldap.sh to be ok with
+    slapd config.
+  * [Roland] Removed unused dir /usr/lib/sourceforge/templates.
+  * [Roland] Recalculated $version in db-upgrade.pl.
+  * [Roland] Mentioned the .sourceforge-old backup files in the debconf
+    question.
+  * [Roland] Versioned Depends: on slapd (the admin dn seems to have
+    changed).
+  * [Roland] Fixed cleaning of LDAP-related files on purge.
+  * [Roland] Also fixed cleaning of LDAP directory on remove.
+  * [Roland] Updated debian/TODO a bit.  It seems we mostly have "can wait
+    until / will be done in / already done in the 2.6 series" entries now,
+    which is cool.
+  * [Roland] Removed an invalid (and useless) request from
+    approve-pending.php.  Should remove a few lines in PostgreSQL error
+    logs.
+  * [Roland] A few changes here and there to get Sourceforge working with
+    the recently uploaded PostgreSQL 7.2, see items tagged [PG7.2] below.
+  * [Roland] [PG7.2] Send HUP signal to postmaster in postinst and prerm
+    scripts.  This because PostgreSQL now only re-reads the pg_hba.conf
+    file upon receiving this signal (and no more on each connection).
+  * [Roland] [PG7.2] Fixed insertion of over-long hostnames in the
+    database (db-upgrade.pl).
+  * [Roland] Also in db-upgrade.pl: fixed the (probably truncated)
+    existing unix_box entries.
+  * [Roland] Various minor fixes here and there: Debconf templates,
+    install-dap.sh, sourceforge-config.sgml, qrs.php.
+  * [Christian] change gid determination in install-ftp.sh update 
+  * [Roland] Overall urgency set to medium, since 2.5-25 is broken with
+    recent slapds and PostgreSQLs.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  6 Mar 2002 19:35:01 +0100
+
+sourceforge (2.5-25) unstable; urgency=low
+
+  * [Roland] Rewrote the setup_vars() function in install-ldap.sh for more
+    robustness.
+  * [Roland] Added manpage for sourceforge-config (fixes lintian error).
+  * [Christian] Added ':' in /etc/nsswitch.conf
+  * [Christian] Added do_config template
+  * [Roland] Wrote the code behind the do_config debconf variable.
+  * [Roland] Also, do not completely replace the existing configuration in
+    /etc/nsswitch.conf.  Only add 'ldap' in there.  This, and the two
+    previous entries, makes the package well-behaved (closes: #134058).
+  * [Roland] Moved template files to /etc/sourceforge/templates
+    (Policy for conffiles) (closes: #134724).
+  * [Roland] Specified shell when su'ing to postgres.  Will hopefully help
+    in resolving #130230, but I'm not sure yet so I don't close it.
+  * [Roland] Added Korean language class provided by Soon-Son Kwon
+    <kss@kldp.org>, many thanks to him.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Feb 2002 17:43:19 +0100
+
+sourceforge (2.5-24) unstable; urgency=low
+
+  * [Roland] Fixed a few errors (SQL syntax, queries on nonexistant
+    tables) in project_metric.php.
+  * [Roland] Marked the templates as conffiles (closes: #130239).
+
+ -- Roland Mas <lolando@debian.org>  Thu, 14 Feb 2002 17:17:26 +0100
+
+sourceforge (2.5-23) unstable; urgency=low
+
+  * [Roland] Fixed the .../home/users/<user>.incoming bug (erroneous
+    directories were created).
+  * [Roland] Included documentation files per request (closes: #130219).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 28 Jan 2002 10:52:06 +0100
+
+sourceforge (2.5-22) unstable; urgency=low
+
+  * [Roland] Replaced a call to /etc/init.d/bind9 restart by a (more
+    appropriate) reload.  Used the policy-defined invoke-rc.d, too.
+  * [Roland] Fixed dependencies to correctly handle apache-ssl and
+    exim-tls (closes: #128345).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 11 Jan 2002 11:05:03 +0100
+
+sourceforge (2.5-21) unstable; urgency=low
+
+  * [Roland] Delete temporary LDIF files created by cronjob (closes:
+    #127636, #127641).
+
+ -- Roland Mas <lolando@debian.org>  Fri,  4 Jan 2002 11:44:30 +0100
+
+sourceforge (2.5-20) unstable; urgency=low
+
+  * [Roland] Fixed thinko in 2.5-19.  I'll stop uploading things for
+    today, sorry for the noise.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Dec 2001 16:28:42 +0100
+
+sourceforge (2.5-19) unstable; urgency=low
+
+  * [Roland] user_home.php: Fixed email addresses on /users/<blah>.
+  * [Roland] sendmessage.php: Fixed a few typos.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Dec 2001 14:44:49 +0100
+
+sourceforge (2.5-18) unstable; urgency=low
+
+  * [Roland] Fixed speling error in Description: field (closes: #125372).
+  * [Roland] Added dependencies on packages providing the vi editor
+    (closes: #124326).  I hope I got them all.
+  * [Roland] deb-specific/install-exim.sh: Fixed LDAP queries to match the
+    real attribute names from the new schema introduced in 2.5-15.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Dec 2001 10:12:30 +0100
+
+sourceforge (2.5-17) unstable; urgency=low
+
+  * [Roland] Fixed a lintian error.
+  * [Roland] Fixed a bug in postinst: just having a LoadModule line in
+    httpd.conf doesn't mean the module is present (closes: #122413).
+
+ -- Roland Mas <lolando@debian.org>  Fri,  7 Dec 2001 11:54:57 +0100
+
+sourceforge (2.5-16) unstable; urgency=low
+
+  * [Christian] Added proper chmod for cp -r of www
+  * [Roland] Replaced last instances of x-cvsShell by the correct form
+    (debSfCvsShell) in the LDAP stuff.  Also fix sf_ldap_moify_if_exists.
+    (closes: #121633).
+  * [Justin] Fix displayed file sizes in the FRS.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 16:01:43 +0100
+
+sourceforge (2.5-15) unstable; urgency=medium
+
+  * [Christian] LDAP cleanup: Added access to userPassword for SF_robot
+    (Thanks to Justin Richer), made a clean LDAP purge, made
+    install-ldap.sh more silent and backport from 2.6.
+  * deb-specific/sourceforge.schema, utils/sql2ldif.pl: Changed schema to
+    use assigned OIDs, a saner naming scheme and better attribute types.
+  * install-ldap.sh: Replaced calls to "/etc/init.d/slapd restart" with
+    "invoke-rc.d slapd restart" (policy).
+  * install-ldap.sh: Clean the LDAP directory on package removal (closes:
+    #118516).
+  * Rewrote grap.c (cvssh) in Perl, to allow for a greater portability.
+    Switched the architecture to arch: all accordingly.
+  * Merged in patch from Justin Richer: fix the changing of a user's
+    password by the admin.
+  * Also from Justin's patch (slightly rewritten): admin now sees a list
+    of pending projects on his homepage.
+  * This was not in Justin's patch, but he inspired the idea: news admin
+    sees a list of pending news bytes on his personal page too.
+  * Still from Justin's patch (a bit rewritten): fixed "My Projects" links
+    on personal pages so that they point to the right place in case the
+    project is a foundry.
+  * Added sf_ldap_modify_if_exists() to www/include/ldap.php.  Works the
+    same as sf_ldap_modify, but returns a non-error if the LDAP entry does
+    not exist.  Patched sf_ldap_user_set_attribute to use this new
+    function, so that even users with no account (or no account yet) can
+    change their passwords and personal info.
+  * Fixed install-cvs.sh so that it no longer inserts too many lines in
+    the inetd.conf file.
+  * Rewrote the config file handling, so that it does not overwrite local
+    changes (closes: #120442).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 14:46:29 +0100
+
+sourceforge (2.5-14) unstable; urgency=low
+
+  * Made install-dns.sh a bit more silent.
+  * Same for the db-upgrade.pl, which is now piped to an appropriate grep.
+  * Added a Depends: on perl-suid (for fileforge.pl).
+  * Made sure the incoming and download dirs are created and have correct
+    permissions.  Cleaned new_parse.pl a bit, accordingly.
+  * Changed Priority: from optional to extra to avoid overrides.
+  * Various fixes and cleanups.
+
+ -- Roland Mas <lolando@debian.org>  Wed,  7 Nov 2001 19:01:59 +0100
+
+sourceforge (2.5-13) unstable; urgency=low
+
+  * Fixed config so that the database password is set to what the user
+    types (and not randomly generated).
+
+ -- Roland Mas <lolando@debian.org>  Sun,  4 Nov 2001 18:52:29 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 
