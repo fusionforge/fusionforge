@@ -1,3 +1,19 @@
+2003-02-21  Reinhard Spisser <reinhard@spisser.i>
+
+	* www/include/vote_function.php:
+	i18n of survey
+	
+	* www/survey/*:
+	committing Reiner Jung's i18n of survey
+	some modifications added
+	
+	* www/include/languages/Base.tab,
+	www/include/languages/Italian.tab:
+	converted spaces to tabs
+	
+	* www/survey/admin/survey_utils.php:
+	added new file
+
 2003-02-20  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	Bug #230.
