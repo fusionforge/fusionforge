@@ -20,7 +20,6 @@ require_once('common/tracker/ArtifactType.class');
 require_once('common/tracker/ArtifactType.class');
 require_once('common/include/Group.class');
 require_once('common/include/Project.class');
-require_once('common/include/Foundry.class');
 
 if (!$group_id) {
 	exit_no_group();
