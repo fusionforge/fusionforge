@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * GForge Search Engine
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2004 (c) Guillaume Smet / Open Wide
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
+
+require_once('common/search/SearchQuery.class');
+
+class ArtifactSearchQuery extends SearchQuery {
+	
+	/**
+	 * group id
+	 *
+	 * @var int $groupId
+	 */
+	var $groupId;
+	
+	/**
+	 * artifact id
+	 *
+	 * @var int $artifactId
+	 */
+	var $artifactId;
+	
+	/**
+	 * Constructor
+	 *
+	 * @param string $words words we are searching for
+	 * @param int $offset offset
+	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 * @param int $groupId group id
+	 * @param int $artifactId artifact id
+	 */
+	function ArtifactSearchQuery($words, $offset, $isExact, $groupId, $artifactId) {
+		$this->groupId = $groupId;
+		$this->artifactId = $artifactId;
+		
+		$this->SearchQuery($words, $offset, $isExact);
+	}
+
+	/**
+	 * getQuery - get the sql query built to get the search results
+	 *
+	 * @return string sql query to execute
+	 */
+	function getQuery() {
+		$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id,a.artifact_id,a.summary,a.open_date,users.realname '
+			. 'FROM artifact a,users ' 
+			. 'WHERE a.group_artifact_id=\''.$this->artifactId.'\' '
+			. 'AND users.user_id=a.submitted_by '
+			. 'AND (('.$this->getIlikeCondition('a.details', $this->words).') ' 
+			. 'OR ('.$this->getIlikeCondition('a.summary', $this->words).')) '
+			. 'ORDER BY group_artifact_id ASC, artifact_id ASC';
+
+		return $sql;
+	}
+
+	/**
+	 * getSearchByIdQuery - get the sql query built to get the search results when we are looking for an int
+	 *
+	 * @return string sql query to execute
+	 */	
+	function getSearchByIdQuery() {
+		$sql = 'SELECT DISTINCT ON (a.group_artifact_id,a.artifact_id) a.group_artifact_id, a.artifact_id '
+			. 'FROM artifact a ' 
+			. 'WHERE a.group_artifact_id=\''.$this->artifactId.'\' '
+			. 'AND a.artifact_id=\''.$this->searchId.'\'';
+
+		return $sql;
+	}
+	
+}
+
+?>

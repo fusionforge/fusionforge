@@ -1250,7 +1250,7 @@ pm	cat_any	Any
 pm	cat_none	None
 pm	category	Category
 pm	date_note		The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.
-pm	dependent	Dependend on Task
+pm	dependent	Dependent on Task
 pm	dependent_note			You should choose only tasks which must be completed before this task can start.
 pm	details	Task Details
 pm	end_date	End Date
@@ -1671,7 +1671,7 @@ project_home	public_mailing_lists	public mailing lists
 project_home	release_notes	Release Notes
 project_home	surveys	surveys
 project_home	title	Project Info
-project_home	tracker_open	$1 open /$2 total
+project_home	tracker_open	<strong>$1</strong> open /<strong>$2</strong> total
 project_home	view_members	View Members
 project_home	view_project_files	View All Project Files
 project_memberlist	developer	Developer
@@ -1785,6 +1785,31 @@ scm_index	modulename	modulename
 scm_index	nohistory	This project has no CVS history.
 scm_index	section	Project: $1
 scm_index	title	CVS
+search	artifact_author	Submitted By
+search	artifact_date	Date
+search	artifact_id	#
+search	artifact_summary	Bug Summary
+search	error_criteria_not_specified	Enter Your Search Words Above
+search	error_invalid_search	Error - Invalid search
+search	error_search_minlength	Search must be at least three characters
+search	forum_author	Author
+search	forum_date	Date
+search	forum_thread	Thread
+search	group_name	Group Name
+search	group_description	Description
+search	next_results	Next Results
+search	no_matches_found	No matches found for <em>$1</em>
+search	people_real_name	Real Name
+search	people_user_name	User Name
+search	previous_results	Previous Results
+search	project_search	Project Search
+search	search_results	Search results for <em>$1</em>
+search	skill_from	From
+search	skill_keywords	Keywords
+search	skill_name	Name
+search	skill_title	Title
+search	skill_to	To
+search	skill_type	Type
 search	title	Search
 searchbox	forum	This forum
 searchbox	people	People

@@ -1,0 +1,223 @@
+<?php
+
+/**
+ * GForge Search Engine
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2004 (c) Guillaume Smet / Open Wide
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
+
+class SearchQuery extends Error {
+	/**
+	 * the operator between each part of the query. Can be AND or OR.
+	 *
+	 * @var string $operator
+	 */
+	var $operator;	
+	/**
+	 * Number of rows per page
+	 *
+	 * @var int $rowsPerPage
+	 */
+	var $rowsPerPage;
+	/**
+	 * Number of rows we will display on the page
+	 *
+	 * @var int $rowsCount
+	 */
+	var $rowsCount = 0;
+	/**
+	 * Number of rows returned by the query
+	 *
+	 * @var int $rowsTotalCount
+	 */
+	var $rowsTotalCount = 0;
+	/**
+	 * Offset
+	 *
+	 * @var int $offset
+	 */
+	var $offset = 0;
+	/**
+	 * Result handle
+	 *
+	 * @var resource $result
+	 */
+	var $result;
+	/**
+	 * When search by id is enabled, the id to search for
+	 *
+	 * @var int $searchId
+	 */
+	var $searchId = false;
+	/**
+	 * if we want to search for all the words or if only one is sufficient
+	 *
+	 * @var boolean $isExact
+	 */
+	 var $isExact = false;
+
+	/**
+	 * Constructor
+	 *
+	 * @param string $words words we are searching for
+	 * @param int $offset offset
+	 * @param boolean $isExact if we want to search for all the words or if only one is sufficient
+	 * @param int $rowsPerPage number of rows per page
+	 */
+	function SearchQuery($words, $offset, $isExact, $rowsPerPage = SEARCH__DEFAULT_ROWS_PER_PAGE) {
+		$this->cleanSearchWords($words);
+		
+		$this->rowsPerPage = $rowsPerPage;
+		$this->offset = $offset;
+		$this->isExact = $isExact;
+		$this->operator = $this->getOperator();
+	}
+	
+	/**
+	 * cleanSearchWords - clean the words we are searching for
+	 *
+	 * @param string $words words we are searching for
+	 */
+	function cleanSearchWords($words) {
+		$words = trim($words);
+		if(!$words) {
+			$this->setError('error_criteria_not_specified');
+			return;
+		}
+		if(is_numeric($words) && $this->implementsSearchById()) {
+			$this->searchId = (int) $words;
+		} else {
+			$words = htmlspecialchars($words);
+			$words = preg_replace("/[ \t]+/", ' ', $words);
+			if(strlen($words) < 3) {
+				$this->setError('error_search_minlength');
+				return;
+			}
+			$this->words = explode(' ', quotemeta($words));
+		}
+	}
+	
+	/**
+	 * executeQuery - execute the SQL query to get the results
+	 */ 
+	function executeQuery() {
+		if($this->searchId) {
+			$query = $this->getSearchByIdQuery();
+		} else {
+			$query = $this->getQuery();
+		}
+
+		$this->result = db_query(
+			$query,
+			$this->rowsPerPage + 1,
+			$this->offset,
+			SYS_DB_SEARCH
+		);
+		$this->rowsTotalCount = db_numrows($this->result);
+		$this->rowsCount = min($this->rowsPerPage, $this->rowsTotalCount);
+	}
+	
+	/**
+	 * getQuery - returns the sql query built to get the search results
+	 * This is an abstract method. It _MUST_ be implemented in children classes.
+	 *
+	 * @return string sql query to execute
+	 */
+	function getQuery() {
+		return;
+	}
+
+	/**
+	 * getIlikeCondition - build the ILIKE condition of the SQL query for a given field name
+	 *
+	 * @param string $fieldName name of the field in the ILIKE condition
+	 * @return string the condition
+	 */
+	function getIlikeCondition($fieldName) {
+		return $fieldName." ILIKE '%" . implode("%' ".$this->operator." ".$fieldName." ILIKE '%", $this->words) ."%'";
+	}
+	
+	/**
+	 * getOperator - get the operator we have to use in ILIKE condition
+	 *
+	 * @return string AND if it is an exact search, OR otherwise
+	 */
+	function getOperator() {
+		if($this->isExact) {
+			return 'AND';
+		} else {
+			return 'OR';
+		}
+	}
+	
+	/**
+	 * implementsSearchById - check if the current object implements the search by id feature by having a getSearchByIdQuery method
+	 *
+	 * @return boolean true if our object implements search by id, false otherwise.
+	 */
+	function implementsSearchById() {
+		return method_exists($this, 'getSearchByIdQuery');
+	}
+	
+	/**
+	 * getResult - returns the result set
+	 *
+	 * @return resource result set
+	 */
+	function & getResult() {
+		return $this->result;
+	}
+	
+	/**
+	 * getRowsCount - returns number of rows for the current page
+	 *
+	 * @return int rows count for the current page
+	 */
+	function getRowsCount() {
+		return $this->rowsCount;
+	}
+	
+	/**
+	 * getRowsTotalCount - returns total number of rows
+	 *
+	 * @return int rows count
+	 */
+	function getRowsTotalCount() {
+		return $this->rowsTotalCount;
+	}
+	
+	/**
+	 * getOffset - returns the offset
+	 *
+	 * @return int offset
+	 */
+	function getOffset() {
+		return $this->offset;
+	}
+	
+	/**
+	 * getRowsPerPage - returns number of rows per page
+	 *
+	 * @return int number of rows per page
+	 */
+	function getRowsPerPage() {
+		return $this->rowsPerPage;
+	}
+	
+	/**
+	 * getWords - returns the array containing words we are searching for
+	 *
+	 * @return array words we are searching for
+	 */
+	function getWords() {
+		return $this->words;
+	}
+
+}
+
+?>

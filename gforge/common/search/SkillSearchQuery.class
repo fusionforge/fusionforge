@@ -1,0 +1,47 @@
+<?php
+
+/**
+ * GForge Search Engine
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2004 (c) Guillaume Smet / Open Wide
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
+
+require_once('common/search/SearchQuery.class');
+
+class SkillSearchQuery extends SearchQuery {
+
+	/**
+	 * Constructor
+	 *
+	 * @param string $words words we are searching for
+	 * @param int $offset offset
+	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 */
+	function SkillSearchQuery($words, $offset, $isExact) {	
+		$this->SearchQuery($words, $offset, $isExact);	
+	}
+
+	/**
+	 * getQuery - get the sql query built to get the search results
+	 *
+	 * @return string sql query to execute
+	 */
+	function getQuery() {
+		$sql = 'SELECT * '
+			. 'FROM skills_data, users, skills_data_types '
+			. 'WHERE (('.$this->getIlikeCondition('skills_data.title', $this->words).') '
+			. 'OR ('.$this->getIlikeCondition('skills_data.keywords', $this->words).')) '
+			. 'AND (skills_data.user_id=users.user_id) '
+			. 'AND (skills_data.type=skills_data_types.type_id) '
+			. 'ORDER BY finish DESC';
+		return $sql;
+	}
+	
+}
+
+?>

@@ -705,23 +705,23 @@ if (isset($params['group']) && $params['group']) {
 				$ath = new ArtifactTypeHtml($group,$atid);
 				if ($ath && is_object($ath)) {
 				print '
-				<option value="artifact"'.( $type_of_search == 'artifact' ? ' selected="selected"' : '' ).'>'. $ath->getName() .'</option>';
+				<option value="'.SEARCH__TYPE_IS_ARTIFACT.'"'.( $type_of_search == SEARCH__TYPE_IS_ARTIFACT ? ' selected="selected"' : '' ).'>'. $ath->getName() .'</option>';
 				}
 			}
 		} else if ($group_id && $forum_id) {
 			print '
-			<option value="forums"'.( $type_of_search == 'forums' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</OPTION>';
+			<option value="'.SEARCH__TYPE_IS_FORUM.'"'.( $type_of_search == SEARCH__TYPE_IS_FORUM ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','forum').'</option>';
 		} else if ($group_id && $group_project_id) {
 			print '
 			<option value="task"'. ( $type_of_search == 'tasks' ? ' selected="selected"' : '').'>'.$Language->getText('searchbox','task').'</option>';
 		}
 
 		print '
-			<option value="soft"'.( $type_of_search == 'soft' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
+			<option value="'.SEARCH__TYPE_IS_SOFTWARE.'"'.( $type_of_search == SEARCH__TYPE_IS_SOFTWARE ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
 		print '
-			<option value="skill"'.( $type_of_search == 'skill' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','skill').'</option>';
+			<option value="'.SEARCH__TYPE_IS_SKILL.'"'.( $type_of_search == SEARCH__TYPE_IS_SKILL ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','skill').'</option>';
 		print '
-			<option value="people"'.( $type_of_search == 'people' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
+			<option value="'.SEARCH__TYPE_IS_PEOPLE.'"'.( $type_of_search == SEARCH__TYPE_IS_PEOPLE ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
 		print '
 			</select></div>';
 

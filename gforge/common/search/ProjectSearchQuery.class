@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * GForge Search Engine
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2004 (c) Guillaume Smet / Open Wide
+ *
+ * http://gforge.org
+ *
+ * @version $Id$
+ */
+
+require_once('common/search/SearchQuery.class');
+
+class ProjectSearchQuery extends SearchQuery {
+
+	/**
+	 * Constructor
+	 *
+	 * @param string $words words we are searching for
+	 * @param int $offset offset
+	 * @param boolean $isExact if we want to search for all the words or if only one matching the query is sufficient
+	 */
+	function ProjectSearchQuery($words, $offset, $isExact) {	
+		$this->SearchQuery($words, $offset, $isExact);
+	}
+
+	/**
+	 * getQuery - get the sql query built to get the search results
+	 *
+	 * @return string sql query to execute
+	 */
+	function getQuery() {
+		$groupNameCond = $this->getIlikeCondition('group_name', $this->words);
+		$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
+		$groupUnixNameCond = $this->getIlikeCondition('unix_group_name', $this->words);
+		
+		$sql = 'SELECT group_name, unix_group_name, type, group_id, short_description '
+			.'FROM groups '
+			.'WHERE status IN (\'A\', \'H\') '
+			.'AND is_public=\'1\' '
+			.'AND (('.$groupNameCond.') OR ('.$groupDescriptionCond.') OR ('.$groupUnixNameCond.'))';
+
+		return $sql;
+	}
+	
+}
+
+?>

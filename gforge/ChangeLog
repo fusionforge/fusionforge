@@ -1,3 +1,7 @@
+2004-02-09  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Implemented a new search engine architecture
+
 2004-02-06  Tom Copeland <tom@infoether.com>
 	* Implemented RFE [ #672 ] X people are monitoring this package
 

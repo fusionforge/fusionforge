@@ -1268,7 +1268,7 @@ pm	percent_complete	Taux d'avancement
 pm	priority	Priorité
 pm	section	Projet : $1
 pm	start_date	Date de début
-pm	status	Statut
+pm	status	Etat
 pm	summary	Tâche
 pm	task_id	Numéro d'identification de tâche
 pm	tech_any	Tous
@@ -1372,7 +1372,7 @@ pm_include_taskhtml	remove_relation	Supprimer la relation
 pm_include_taskhtml	task_history	Historique de tâche
 pm_include_taskhtml	tracker	Traceur
 pm_modtask	add_comment	Ajouter un commentaire
-pm_modtask	assignee	responsable
+pm_modtask	assignee	Responsable
 pm_modtask	original_comment	Commentaire original
 pm_modtask	sort_on	Trier par
 pm_modtask	submitted_by	Demandée par
@@ -1532,7 +1532,7 @@ project_admin_editrelease	step_2	Etape 2&nbsp;:&nbsp;Ajouter des fichiers à cet
 project_admin_editrelease	step_3	Etape 3&nbsp;:&nbsp;Editer les fichiers dans cette version
 project_admin_editrelease	submit_refresh	Soumettre/rafraîchir
 project_admin_editrelease	title	Editer les versions
-project_admin_editrelease	update_refresh	Mis à jour/Rafraîchir
+project_admin_editrelease	update_refresh	Mettre à jour/Rafraîchir
 project_admin_editrelease	upload_change_log	Télécharger les modifications&nbsp;
 project_admin_editrelease	upload_new_file	Télécharger vers le serveur un nouveau fichier&nbsp;
 project_admin_editrelease	upload_release_notes	Télécharger les notes&nbsp;
@@ -1666,7 +1666,7 @@ project_home	public_mailing_lists	liste(s) de diffusion publique(s)
 project_home	release_notes	Notes
 project_home	surveys	Sondages
 project_home	title	Information sur le projet
-project_home	tracker_open	$1 ouvert(s) sur un total de $2
+project_home	tracker_open	<strong>$1</strong> ouvert(s) sur un total de <strong>$2</strong>
 project_home	view_members	Voir les membres
 project_home	view_project_files	Voir tous les fichiers du projet
 project_memberlist	developer	Développeur
@@ -1779,6 +1779,31 @@ scm_index	modulename	module
 scm_index	nohistory	Ce projet n'a pas d'historique CVS
 scm_index	section	Projet : $1
 scm_index	title	CVS
+search	artifact_author	Soumis par
+search	artifact_date	Date
+search	artifact_id	#
+search	artifact_summary	Résumé
+search	error_criteria_not_specified	Saisissez les mots à rechercher ci-dessus
+search	error_invalid_search	Erreur - Recherche non valide
+search	error_search_minlength	Le critère de recherche doit compter au moins 3 caractères
+search	forum_author	Auteur
+search	forum_date	Date
+search	forum_thread	Discussion
+search	group_name	Nom du groupe
+search	group_description	Description
+search	next_results	Résultats suivants
+search	no_matches_found	Aucun résultat trouvé pour <em>$1</em>
+search	people_real_name	Nom complet
+search	people_user_name	Nom d'utilisateur
+search	previous_results	Résultats précèdents
+search	project_search	Recherche de logiciel
+search	search_results	Résultats de la recherche de <em>$1</em>
+search	skill_from	Date de début
+search	skill_keywords	Mots-clés
+search	skill_name	Nom
+search	skill_title	Titre
+search	skill_to	Date de fin
+search	skill_type	Type
 search	title	Recherche
 searchbox	forum	Ce forum
 searchbox	people	Personne
@@ -2256,7 +2281,7 @@ tracker	insert_email	Si vous ne parvenez pas à vous connecter, saisissez votre 
 tracker	item_created	Élément créé avec succès
 tracker	item_group	Groupe&nbsp;
 tracker	no_trackers	Aucun outil de suivi trouvé
-tracker	no_trackers_text	Aucun outil de suivi n'a été défini ou vous ne pouvez pas y accéder.</strong></p><p style="color:red">L'administrateur de ce projet doit préciser les types de données en utilisant la page d'administration $1 admin page $2
+tracker	no_trackers_text	Aucun outil de suivi n'a été défini ou vous ne pouvez pas y accéder.</strong></p><p style="color:red">L'administrateur de ce projet doit préciser les types de données en utilisant la $1 page d'administration $2 .
 tracker	open_date	Date d'ouverture
 tracker	pagetitle	Suivi&nbsp;
 tracker	please_login	$1 Identifiez-vous $2

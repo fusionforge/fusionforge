@@ -23,7 +23,7 @@ function rss_setscheme() {
 function rss_description ($in) {
 	// if description_maxlen is defined, then truncate appropriately
 	// added for netscape rss schema compat
-	if ($GLOBALS['description_maxlen'] &&
+	if (isset($GLOBALS['description_maxlen']) && $GLOBALS['description_maxlen'] &&
 		(strlen($in) > $GLOBALS['description_maxlen'])) {
 		$in = substr($in,0,$GLOBALS['description_maxlen']);
 	}
@@ -54,10 +54,10 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
                 	$addendum=$callback($row);
                 }
 		print "  <item>\n";
-		print "   <title>".htmlspecialchars($row[group_name])."</title>\n";
-		print "   <link>http://$GLOBALS[sys_default_domain]/projects/$row[unix_group_name]/</link>\n";
+		print "   <title>".htmlspecialchars($row['group_name'])."</title>\n";
+		print "   <link>http://".$GLOBALS['sys_default_domain']."/projects/".$row['unix_group_name']."/</link>\n";
 		print "   <description>";
-		print ereg_replace(" *\r*\n *"," ",rss_description($row[short_description]));
+		print ereg_replace(" *\r*\n *"," ",rss_description($row['short_description']));
                 print $addendum;
 		print "</description>\n";
 		print "  </item>\n";
