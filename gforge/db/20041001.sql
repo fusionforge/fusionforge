@@ -7,7 +7,7 @@ CREATE VIEW nss_passwd AS
 		shell,
 		'/var/lib/gforge/chroot/home/users/' || user_name AS homedir
 	FROM users
-	WHERE status='A';
+	WHERE unix_status='A';
 
 CREATE VIEW nss_shadow AS
 	SELECT user_name AS login,
