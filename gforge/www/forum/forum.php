@@ -137,10 +137,10 @@ if ($forum_id) {
 
 	//now show the popup boxes in a form
 	$ret_val .= '
-	<table border="0" width="33%">
 	<form action="'. $PHP_SELF .'" method="get">
 	<input type="hidden" name="set" value="custom" />
-	<input type="hidden" name="forum_id" value="'.$forum_id.'" . />
+	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
+	<table border="0" width="33%">
 		<tr><td><span style="font-size:-1">'. $options_popup .
 			'</span></td><td><span style="font-size:-1">'. $max_row_popup .
 			'</span></td><td><span style="font-size:-1"><input type="submit" name="submit" value="'.
@@ -167,12 +167,12 @@ if ($forum_id) {
 		while (($i < $rows) && ($total_rows < $max_rows)) {
 
 			$total_rows++;
-			/* 
+			/*
 				New slashdot-inspired nested threads,
 				showing all submessages and bodies
 			*/
 			$ret_val .= $fh->showNestedMessage ( $msg_arr["0"][$i] ).'<br />';
-				
+
 			if ( $msg_arr["0"][$i]->hasFollowups() ) {
 				//show submessages for this message
 				$tempid=$msg_arr["0"][$i]->getID();
@@ -200,8 +200,8 @@ if ($forum_id) {
 		$avail_rows=$fmf->fetched_rows;
 		if ($rows > $max_rows) {
 			$rows=$max_rows;
-		}	   
-		$i=0;	 
+		}
+		$i=0;
 		while (($i < $rows) && ($total_rows < $max_rows)) {
 			$msg =& $msg_arr["0"][$i];
 			$total_rows++;
@@ -209,7 +209,7 @@ if ($forum_id) {
 			$ret_val .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 				<td><a href="/forum/message.php?msg_id='.$msg->getID().'">'.
 				html_image('ic/msg.png',"10","12",array("border"=>"0"));
-			/*	  
+			/*
 				See if this message is new or not
 				If so, highlite it in bold
 			*/
@@ -220,13 +220,13 @@ if ($forum_id) {
 				$bold_begin='';
 				$bold_end='';
 			}
-			/*	  
+			/*
 				show the subject and poster
 			*/
 			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</a></td>'.
 				'<td>'. $msg->getPosterRealName() .'</td>'.
 				'<td>'. date($sys_datefmt,$msg->getPostDate()) .'</td></tr>';
-				 
+
 			if ($msg->hasFollowups()) {
 				$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
 			}
@@ -273,7 +273,7 @@ if ($forum_id) {
 		$title_arr[]=$Language->getText('forum_forum','topicstarter');
 		$title_arr[]=$Language->getText('forum_forum','replies');
 		$title_arr[]=$Language->getText('forum_forum','lastpost');
-	
+
 		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 		$i=0;
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
@@ -281,7 +281,7 @@ if ($forum_id) {
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/forum/forum.php?thread_id='.
 				$row['thread_id'].'&amp;forum_id='.$forum_id.'">'.
 				html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
-			/*	  
+			/*
 					See if this message is new or not
 					If so, highlite it in bold
 			*/
@@ -292,7 +292,7 @@ if ($forum_id) {
 				$bold_begin='';
 				$bold_end='';
 			}
-			/* 
+			/*
 					show the subject and poster
 			*/
 			$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</a></td>'.
@@ -323,14 +323,14 @@ if ($forum_id) {
 
 	if ($avail_rows > $max_rows) {
 		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
-		<a href="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
+		<a href="/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).'&amp;forum_id='.$forum_id.'">
 		<strong> '.$Language->getText('forum_forum','next_messages') .
 		html_image('t.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . '</strong></a>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
 
-	$ret_val .= '</table>';
+	$ret_val .= '</td></tr></table>';
 
 	echo $ret_val;
 /*

@@ -544,7 +544,7 @@ Function GraphIt($name_string,$value_string,$title) {
  * @param		bool	The option to turn URL's into links
  *
  */
-Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
+function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 	global $group_id,$HTML;
 
 	if  ($result)  {
@@ -557,7 +557,7 @@ Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 		/*  Create the title  */
 
 		$cell_data=array();
-		$cell_data[] = array($title, 'colspan='.$cols);
+		$cell_data[] = array($title, 'colspan="'.$cols.'"');
 		echo $HTML->multiTableRow('',$cell_data, TRUE);
 
 		/*  Create  the  headers  */
@@ -575,15 +575,15 @@ Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 					$link = '<a href="'.$PHP_SELF.'?';
 					$linkend = '</a>';
 					if ($linkify == "bug_cat") {
-						$link .= 'group_id='.$group_id.'&bug_cat_mod=y&bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
+						$link .= 'group_id='.$group_id.'&amp;bug_cat_mod=y&amp;bug_cat_id='.db_result($result, $j, 'bug_category_id').'">';
 					} else if($linkify == "bug_group") {
-						$link .= 'group_id='.$group_id.'&bug_group_mod=y&bug_group_id='.db_result($result, $j, 'bug_group_id').'">';
+						$link .= 'group_id='.$group_id.'&amp;bug_group_mod=y&amp;bug_group_id='.db_result($result, $j, 'bug_group_id').'">';
 					} else if($linkify == "patch_cat") {
-						$link .= 'group_id='.$group_id.'&patch_cat_mod=y&patch_cat_id='.db_result($result, $j, 'patch_category_id').'">';
+						$link .= 'group_id='.$group_id.'&amp;patch_cat_mod=y&amp;patch_cat_id='.db_result($result, $j, 'patch_category_id').'">';
 					} else if($linkify == "support_cat") {
-						$link .= 'group_id='.$group_id.'&support_cat_mod=y&support_cat_id='.db_result($result, $j, 'support_category_id').'">';
+						$link .= 'group_id='.$group_id.'&amp;support_cat_mod=y&amp;support_cat_id='.db_result($result, $j, 'support_category_id').'">';
 					} else if($linkify == "pm_project") {
-						$link .= 'group_id='.$group_id.'&project_cat_mod=y&project_cat_id='.db_result($result, $j, 'group_project_id').'">';
+						$link .= 'group_id='.$group_id.'&amp;project_cat_mod=y&amp;project_cat_id='.db_result($result, $j, 'group_project_id').'">';
 					} else {
 						$link = $linkend = '';
 					}

@@ -1,8 +1,20 @@
 2003-02-15  Ryan T. Sammartino  <ryants@shaw.ca>
 
-	* www/themes/kde/Theme.class(listTableTop): remove reference
-	to unneeded clear.png.
+	* common/include/utils.php(ShowResultSet): lowercase f in
+	"Functional"; valid XHTML 1.0 Transitional.
+
+	* www/forum/admin/index.php: valid XHTML 1.0 Transitional.
+
+	* www/forum/message.php: valid XHTML 1.0 Transitional.
+
+	* www/forum/forum.php: valid XHTML 1.0 Transitional.
+
+	* www/forum/index.php: valid XHTML 1.0 Transitional.
+
+	* www/themes/kde/Theme.class(listTableTop): remove reference to
+	unneeded clear.png.
 	(makeProjectIcon): centre the icons.
+	(searchBox): Fix XHTML for searching "This Forum".
 
 	* INSTALL: mention AcceptPathInfo on if using Apache 2.
 

@@ -26,13 +26,13 @@ require_once('common/forum/ForumMessageFactory.class');
 require_once('common/forum/ForumMessage.class');
 
 if ($msg_id) {
- 
+
 	/*
 		Figure out which group this message is in, for the sake of the admin links
 	*/
 	$result=db_query("SELECT forum_group_list.group_id,forum_group_list.group_forum_id
-		FROM forum_group_list,forum 
-		WHERE forum_group_list.group_forum_id=forum.group_forum_id 
+		FROM forum_group_list,forum
+		WHERE forum_group_list.group_forum_id=forum.group_forum_id
 		AND forum.msg_id='$msg_id'");
 
 	if (!$result || db_numrows($result) < 1) {
@@ -177,7 +177,7 @@ if ($msg_id) {
 		Show post followup form
 	*/
 
-	echo '<p>&nbsp;<p>';
+//	echo '<p>&nbsp;<p>';
 	echo '<div align="center"><h3>'.$Language->getText('forum_message','post_followup').'</h3></div>';
 
 	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
@@ -188,6 +188,6 @@ if ($msg_id) {
 
 }
 
-forum_footer(array()); 
+forum_footer(array());
 
 ?>

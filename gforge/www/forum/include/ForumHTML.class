@@ -46,7 +46,7 @@ function forum_header($params) {
 
 			$HTML->header($params);
 
-			echo '<table><tr><td valign="TOP">';
+			echo '<table><tr><td valign="top">';
 			if (!$result || db_numrows($result) < 1) {
 				echo '
 					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
@@ -59,13 +59,13 @@ function forum_header($params) {
 				<p>
 				'. (util_make_links(nl2br(db_result($result,0,'details'))));
 
-				echo '<p>';
+				echo '</p>';
 			}
-			echo '</td><td valign="TOP" width="35%">';
+			echo '</td><td valign="top" width="35%">';
 			echo $HTML->boxTop($Language->getText('forum_utils','latest'));
 			echo news_show_latest($sys_news_group,5,false);
 			echo $HTML->boxBottom();
-			echo '</td></tr></TABLE>';
+			echo '</td></tr></table>';
 		} else {
 			site_project_header($params);
 		}
@@ -139,7 +139,7 @@ class ForumHTML extends Error {
 
 	function showNestedMessage ( &$msg ) {
 		/*
-	
+
 		accepts a database result handle to display a single message
 		in the format appropriate for the nested messages
 
@@ -156,15 +156,15 @@ class ForumHTML extends Error {
 		$ret_val = '
 		<table border="0">
 			<tr>
-				<td bgcolor="#DDDDDD" NOWRAP>'.$Language->getText('forum_utils','by').' <a href="/users/'.
-					$msg->getPosterName() .'/">'. 
+				<td bgcolor="#dddddd" nowrap="nowrap">'.$Language->getText('forum_utils','by').' <a href="/users/'.
+					$msg->getPosterName() .'/">'.
 					$msg->getPosterRealName() .'</a>'.
 					'<br /><a href="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.
 					html_image('ic/msg.png',"10","12",array("border"=>"0")) .
 					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</a> &nbsp; '.
 					'<br />'. date($sys_datefmt,$msg->getPostDate()) .'
-				</td>   
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -183,7 +183,7 @@ class ForumHTML extends Error {
 
 		if ($msg_arr["$msg_id"] && $rows > 0) {
 			$ret_val .= '
-			<ul>';
+			<ul><li style="list-style: none">';
 
 			/*
 
@@ -197,7 +197,7 @@ class ForumHTML extends Error {
 				$total_rows++;
 
 				//	  show the actual nested message
-				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<p>';
+				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<p />';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups()) {
 					//	  Call yourself if there are followups
@@ -205,7 +205,7 @@ class ForumHTML extends Error {
 				}
 			}
 			$ret_val .= '
-			</ul>';
+			</li></ul>';
 		} else {
 			//$ret_val .= "<p><strong>no messages actually follow up to $msg_id</strong>";
 		}
@@ -215,8 +215,8 @@ class ForumHTML extends Error {
 
 	function showSubmessages(&$msg_arr, $msg_id, $level) {
 		/*
-			Recursive. Selects this message's id in this thread, 
-			then checks if any messages are nested underneath it. 
+			Recursive. Selects this message's id in this thread,
+			then checks if any messages are nested underneath it.
 			If there are, it calls itself, incrementing $level
 			$level is used for indentation of the threads.
 		*/
@@ -256,7 +256,7 @@ class ForumHTML extends Error {
 				/*
 					See if this message is new or not
 				*/
-				if ($this->Forum->getSavedDate() < $msg_arr["$msg_id"][$i]->getPostDate()) { 
+				if ($this->Forum->getSavedDate() < $msg_arr["$msg_id"][$i]->getPostDate()) {
 					$bold_begin='<strong>';
 					$bold_end='</strong>';
 				} else {
@@ -291,42 +291,43 @@ class ForumHTML extends Error {
 			}
 
 			?>
-			<CENTER>
-			<form action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" METHOD="POST">
-			<input type="hidden" name="post_message" value="y">
-			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>">
-			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>">
-			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>">
+			<div align="center">
+			<form action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" method="post">
+			<input type="hidden" name="post_message" value="y" />
+			<input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>" />
+			<input type="hidden" name="msg_id" value="<?php echo $is_followup_to; ?>" />
+			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>" />
 			<table>
 			<tr>
 			<td><strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
-				<input type="TEXT" name="subject" value="<?php echo $subject; ?>" SIZE="45" MAXLENGTH="45">
+				<input type="text" name="subject" value="<?php echo $subject; ?>" size="45" maxlength="45" />
 			</td></tr>
 			<tr><td><strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo utils_requiredField(); ?><br />
-				<textarea name="body" value="" ROWS="10" COLS="50" WRAP="SOFT"></textarea>
+				<textarea name="body" rows="10" cols="50"></textarea>
 			</td></tr>
-			<tr><td align="MIDDLE">
-				<strong><FONT COLOR="RED"><?php echo $Language->getText('forum_utils','htmltag'); ?></FONT></strong>
+			<tr><td align="center">
+				<strong><font color="red"><?php echo $Language->getText('forum_utils','htmltag'); ?></font></strong>
 				<p>
-			<?php 
+			<?php
 			if (!session_loggedin()) {
-				echo '<strong><FONT COLOR="RED">'.$Language->getText('forum_utils','postanon').' <a href="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</a></FONT></strong>';
-			} 
+				echo '<strong><font color="red">'.$Language->getText('forum_utils','postanon').' <a href="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</a></font></strong>';
+			}
 			?>
 			<br />
-			<input type="SUBMIT" name="SUBMIT" value="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>"><?php
-				echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor">&nbsp;'.$Language->getText('forum_message','receive_followups').'.' : ''); ?>
-			</td></tr></TABLE>
+			<input type="submit" name="submit" value="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>" /><?php
+				echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor" />&nbsp;'.$Language->getText('forum_message','receive_followups').'.' : ''); ?>
+				</p>
+			</td></tr></table>
 			</form>
-			</CENTER>
+			</div>
 			<?php
 
 		} else {
-			echo "<CENTER>";
-			echo '<h3><FONT COLOR="RED">';
+			echo "<div align=\"center\">";
+			echo '<h3><font color="red">';
 			echo $Language->getText('forum_utils','couldpostif',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).' ">','</a>'));
-			echo '</FONT></h3>';
-			echo "</CENTER>";
+			echo '</font></h3>';
+			echo "</div>";
 		}
 
 	}

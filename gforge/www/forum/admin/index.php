@@ -48,8 +48,8 @@ if ($group_id) {
 			/*
 				Deleting messages or threads
 			*/
-			$res=db_query("SELECT group_forum_id 
-				FROM forum 
+			$res=db_query("SELECT group_forum_id
+				FROM forum
 				WHERE msg_id='$msg_id'");
 
 			if (!$res || db_numrows($res) < 1) {
@@ -57,7 +57,7 @@ if ($group_id) {
 			}
 			$f=new Forum($g,db_result($res,0,'group_forum_id'));
 			if (!$f || !is_object($f)) {
-				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));				
+				exit_error($Language->getText('general','error'),$Language->getText('forum_errors','error_getting_forum'));
 			} elseif ($f->isError()) {
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			}
@@ -107,7 +107,7 @@ if ($group_id) {
 			}
 		}
 
-	} 
+	}
 
 	if ($delete) {
 		/*
@@ -149,17 +149,18 @@ if ($group_id) {
 			<strong>'.$Language->getText('forum_admin_addforum','forum_description').':</strong><br />
 			<input type="text" name="description" value="" size="40" maxlength="80" /><br />
 			<strong>'.$Language->getText('forum_admin_addforum','is_public').'</strong><br />
-			<input type="radio" name="is_public" value="1" checked="checked"="checked="checked"" />'.$Language->getText('general','yes').' <br />
-			<input type="radio" name="is_public" value="0" />'.$Language->getText('general','no').' 
+			<input type="radio" name="is_public" value="1" checked="checked" />'.$Language->getText('general','yes').' <br />
+			<input type="radio" name="is_public" value="0" />'.$Language->getText('general','no').'
 			<br  /><br />
 			<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
 			<input type="radio" name="allow_anonymous" value="1" />'.$Language->getText('general','yes').'<br />
-			<input type="radio" name="allow_anonymous" value="0" checked="checked"="checked="checked"" />'.$Language->getText('general','no').'
+			<input type="radio" name="allow_anonymous" value="0" checked="checked" />'.$Language->getText('general','no').'
 			<br /><br />
 			<strong>'.$Language->getText('forum_admin_addforum','email_posts').'</strong><br />
 			<input type="text" name="send_all_posts_to" value="" size="30" maxlength="50" />
 			<p>
 			<input type="submit" name="submit" value="'.$Language->getText('forum_admin_addforum','add_forum').'" />
+			</p>
 			</form>';
 
 		forum_footer(array());
@@ -180,33 +181,34 @@ if ($group_id) {
 			exit_error($Language->getText('general','error'),$Language->getText('forum_admin_changestatus','no_forums_found').$ff->getErrorMessage());
 		} else {
 			forum_header(array('title'=>$Language->getText('forum_admin_changestatus','change_status'),'pagename'=>'forum_admin_changestatus','sectionvals'=>group_getname($group_id)));
-			echo '<p>'.$Language->getText('forum_admin_changestatus','intro').'.<p>';
+			echo '<p>'.$Language->getText('forum_admin_changestatus','intro').'.</p>';
 
 			$title_arr=array();
 			$title_arr[]=$Language->getText('forum_admin_changestatus','forum');
 			$title_arr[]=$Language->getText('forum_admin_changestatus','status');
 			$title_arr[]=$Language->getText('forum_admin_changestatus','update');
-		
+
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3"><strong>'. $farr[$i]->getName() .'</strong></td></tr>';
 				echo '
-					<form action="'.$PHP_SELF.'" method="post">
-					<input type="hidden" name="post_changes" value="y" />
-					<input type="hidden" name="change_status" value="y" />
-					<input type="hidden" name="group_forum_id" value="'. $farr[$i]->getID() .'" />
-					<input type="hidden" name="group_id" value="'.$group_id.'" />
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-					<td>
+					<td colspan="3">
+						<form action="'.$PHP_SELF.'" method="post">
+						<input type="hidden" name="post_changes" value="y" />
+						<input type="hidden" name="change_status" value="y" />
+						<input type="hidden" name="group_forum_id" value="'. $farr[$i]->getID() .'" />
+						<input type="hidden" name="group_id" value="'.$group_id.'" />
+						<table width="100%"><tr><td valign="top">
 						<span style="font-size:-1">
 						<strong>'.$Language->getText('forum_admin_addforum','allow_anonymous').'</strong><br />
 						<input type="radio" name="allow_anonymous" value="1"'.(($farr[$i]->AllowAnonymous() == 1)?' checked="checked"':'').' /> Yes<br />
 						<input type="radio" name="allow_anonymous" value="0"'.(($farr[$i]->AllowAnonymous() == 0)?' checked="checked"':'').'/> No<br />
 						</span>
-					</td>
-					<td>
+						</td>
+						<td valign="top">
 						<span style="font-size:-1">
 						<strong>'.$Language->getText('forum_admin_addforum','is_public').'</strong><br />
 						<input type="radio" name="is_public" value="1"'.(($farr[$i]->isPublic() == 1)?' checked="checked"':'').' /> '.$Language->getText('general','yes').'<br />
@@ -226,7 +228,8 @@ if ($group_id) {
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3">
 						<strong>'.$Language->getText('forum_admin_addforum','forum_description').':</strong><br />
 						<input type="text" name="description" value="'. $farr[$i]->getDescription() .'" size="40" maxlength="80" /><br />
-					</td></tr></form>';
+					</td></tr></table></form>
+				</td></tr>';
 			}
 
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -237,16 +240,16 @@ if ($group_id) {
 
 	} else {
 		/*
-			Show main page for choosing 
+			Show main page for choosing
 			either moderotor or delete
 		*/
 		forum_header(array('title'=>$Language->getText('forum_admin','title'),'pagename'=>'forum_admin','sectionvals'=>group_getname($group_id)));
 
 		echo '
 			<p>
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&add_forum=1">'.$Language->getText('forum_admin','add_forum').'</a><br />
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&change_status=1">'.$Language->getText('forum_admin','update_forum').'</a></p>';
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;add_forum=1">'.$Language->getText('forum_admin','add_forum').'</a><br />
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;delete=1">'.$Language->getText('forum_admin','delete_message').'</a><br />
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;change_status=1">'.$Language->getText('forum_admin','update_forum').'</a></p>';
 
 		forum_footer(array());
 	}

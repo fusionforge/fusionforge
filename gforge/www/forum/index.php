@@ -37,7 +37,7 @@ if ($group_id) {
 	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ,'pagename'=>'forum','sectionvals'=>array($g->getPublicName())));
 
 	$farr =& $ff->getForums();
-	
+
 	if ($ff->isError() || count($farr) < 1) {
 		echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
 		echo $ff->getErrorMessage();
@@ -54,16 +54,16 @@ if ($group_id) {
 		Put the result set (list of forums for this group) into a column with folders
 	*/
 
-	for ($j = 0; $j < count($farr); $j++) { 
+	for ($j = 0; $j < count($farr); $j++) {
 		if ($farr[$j]->isError()) {
 			echo $farr->getErrorMessage();
 		} else {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.
-				html_image("ic/forum20w.png","20","20",array("border"=>"0")) . 
+				html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
 				'&nbsp;' .
 				$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'</td>
-				<td align=CENTER>'.$farr[$j]->getThreadCount().'</td>
-				<td align=CENTER>'. $farr[$j]->getMessageCount() .'</td>
+				<td align="center">'.$farr[$j]->getThreadCount().'</td>
+				<td align="center">'. $farr[$j]->getMessageCount() .'</td>
 				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td></tr>';
 		}
 	}
