@@ -1022,7 +1022,8 @@ user_home	email	Your Email Address
 user_home	name	Your Name
 user_home	subject	Subject
 user_home	message	Message
-user_home	send	Send Messageuser_home	send_a_message	Send a Message to
+user_home	send	Send Message
+user_home	send_a_message	Send a Message to
 user_home	peer_rating	Peer Rating
 user_home	peer_rating_disabled	User chose not to participate in peer rating
 user_home	diary_notes	Diary and Notes
