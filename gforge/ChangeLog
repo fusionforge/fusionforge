@@ -1,3 +1,8 @@
+2003-06-19 Tom Copeland  <tom@infoether.com>
+
+	* www/stats/lastlogins.php:
+	Spruced up lastlogins a bit; made it look more like everything else.
+	
 2003-06-17 Christian Bayle	<bayle@debian.org>
 
 	* Applied patch #395 and #394 for groupisactivecheckboxpost

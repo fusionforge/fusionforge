@@ -32,23 +32,33 @@ $HTML->header(array('title'=>$Language->getText('stats_lastlogins','last_logins'
 
 print '<h3>'.$Language->getText('stats_lastlogins','most_recent_open').'</h3>';
 
-$title=array();
-$title[]=$Language->getText('stats_lastlogins','date');
-$title[]=$Language->getText('stats_lastlogins','username');
-$title[]=$Language->getText('stats_lastlogins','source_ip');
+?>
 
-echo $GLOBALS['HTML']->listTableTop($title);
+<table  width="100%" cellspacing="0" cellpadding="0">
+<th><?php echo $Language->getText('stats_lastlogins','date'); ?></th>
+<th><?php echo $Language->getText('stats_lastlogins','username'); ?></th>
+<th><?php echo $Language->getText('stats_lastlogins','source_ip'); ?></th>
 
+<?php
+
+$alt=true;
 while ($row_logins = db_fetch_array($res_logins)) {
+	$fontcolor="white";
+	if ($alt == true) {
+		$fontcolor="lightgrey";
+	}
+	$alt = !$alt;
+
 	print '<tr>';
-	print '<td>'.date($sys_datefmt, $row_logins['time']).'</td>';
-	print '<td>'.$row_logins['user_name'].'</td>';
-	print '<td>'.$row_logins['ip_addr'].'</td>';
+	print '<td bgcolor='.$fontcolor.'>'.date($sys_datefmt, $row_logins['time']).'</td>';
+	print '<td bgcolor='.$fontcolor.'>'.$row_logins['user_name'].'</td>';
+	print '<td bgcolor='.$fontcolor.'>'.$row_logins['ip_addr'].'</td>';
 	print '</tr>';
+	print '</font>';
 }
+?>
 
-echo $GLOBALS['HTML']->listTableBottom();
-
+</table>
+<?php
 $HTML->footer(array());
-
 ?>
