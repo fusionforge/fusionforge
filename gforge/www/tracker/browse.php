@@ -136,32 +136,6 @@ echo '
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','changed').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=changed\')"><strong>(?)</strong></a><br />'. html_build_select_box_from_arrays($changed_arr,$changed_name_arr,'_changed_from',$_changed_from,false) .'</span></td>
 	</tr>';
 
-/**
- *
- *  Build pop-up boxes for BROWSE boxes and choices configured by ADMIN
-BEING REBUILT BY AARON FARR
- *
- * /
-echo '<tr>';
-	$result=$ath->getSelectionBoxes();
-	$rows=db_numrows($result);
-	$select_arr[]=array();
-	if ($result &&$rows > 0) {
-		echo '<tr>';
-		for ($i=0; $i < $rows; $i++) {
-			$newrow=is_integer(($i+1)/5);
-			echo '<td><span style="font-size:smaller">'.db_result($result,$i,'field_name').'</span></br \>';
-			
-			$choice=$extra_fields_choice[$i];
-			echo $ath->selectionBox(db_result($result,$i,'id'),$choice,$Language->getText('tracker_admin_build_boxes','status_any'));
-			echo '</td>';
-			if ($newrow) {
-				echo'</tr><tr>';
-			}
-		}
-	}
-	echo '</tr>';
-*/
 	echo '<tr>
 		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
 		'<td><span style="font-size:smaller">'. 
@@ -178,65 +152,10 @@ echo $ath->getBrowseInstructions();
 
 if ($art_arr && count($art_arr) > 0) {
 
-	/*if ($set=='custom') {
-//BEING REDONE BY AARON FARR
-
-	//
-	// validate that any admin configured extra fields meet its selection criteria
-
-		$result=$ath->getSelectionBoxes();
-		$artrows=count($art_arr);
-		$rows=db_numrows($result);
-		$matches=0;
-		if ($result &&$rows && $artrows > 0) {
-			for ($i=0; $i < $artrows; $i++){
-				$resultc = $ath->getArtifactChoices($art_arr[$i]->getID());
-				$browserows = db_numrows($resultc);
-				for ($j=0; $j < $browserows; $j++) {
-					if ((db_result($resultc,$j,'choice_id') == $extra_fields_choice[$j])|| $extra_fields_choice[$j]=='100'){
-						$matches=$matches+1;
-					}
-				}
-				if ($rows > $browserows && $matches == $browserows) {
-					for ($k = $browserows; $k < $rows; $k++){
-						if ((db_result($resultc,$k,'choice_id') == $extra_fields_choice[$k]) || $extra_fields_choice[$k] == '100') {
-							$matches = $matches+1;
-						}
-					}
-				}
-				if ($matches!==$rows){
-					$remove_arr[]=$i;
-					$matches=0;	
-				}
-				$matches=0;	
-			}
-			//
-			// remove the unselected rows from $art_arr
-			//
-			$remove_rows=count($remove_arr);
-			if ($remove_rows > 0) {
-				for ($k=0; $k < $remove_rows; $k++) {
-			
-					//   remove $art_arr entries not selected and reindex with array_values() - since unset will remove the index as a key
-					// 
-					$entry=$remove_arr[$k];
-					unset ($art_arr[$entry]);
-				}
-				$art_arr=array_values($art_arr);
-			}
-		}		
-	}*/
-
 	if ($set=='custom') {
 		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_category='.$_category.'&_group='.$_group.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
 	}
 
-	$title_arr=array();
-	$title_arr[]=$Language->getText('tracker','id');
-	$title_arr[]=$Language->getText('tracker','summary');
-	$title_arr[]=$Language->getText('tracker','open_date');
-	$title_arr[]=$Language->getText('tracker','assigned_to');
-	$title_arr[]=$Language->getText('tracker','submitted_by');
 
 	$IS_ADMIN=$ath->userIsAdmin();
 
@@ -246,6 +165,36 @@ if ($art_arr && count($art_arr) > 0) {
 		<input type="hidden" name="func" value="massupdate">';
 	}
 
+	$display_col=array('summary'=>1,
+		'open_date'=>1,
+		'category'=>0,
+		'resolution'=>0,
+		'status'=>0,
+		'priority'=>0,
+		'artifact'=>0,
+		'assigned_to'=>1,
+		'submitted_by'=>1);
+
+	$title_arr=array();
+	$title_arr[]=$Language->getText('tracker','id');
+	if ($display_col['summary'])
+		$title_arr[]=$Language->getText('tracker','summary');
+	if ($display_col['open_date'])
+		$title_arr[]=$Language->getText('tracker','open_date');
+	if ($display_col['category'])
+		$title_arr[]=$Language->getText('tracker','category');
+	if ($display_col['resolution'])
+		$title_arr[]=$Language->getText('tracker','resolution');
+	if ($display_col['status'])
+		$title_arr[]=$Language->getText('tracker','status');
+	if ($display_col['priority'])
+		$title_arr[]=$Language->getText('tracker','priority');
+	if ($display_col['artifact'])
+		$title_arr[]=$Language->getText('tracker','item_group');
+	if ($display_col['assigned_to'])
+		$title_arr[]=$Language->getText('tracker','assigned_to');
+	if ($display_col['submitted_by'])
+		$title_arr[]=$Language->getText('tracker','submitted_by');
 
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
@@ -253,35 +202,38 @@ if ($art_arr && count($art_arr) > 0) {
 	$then=(time()-$ath->getDuePeriod());
 	$rows=count($art_arr);
 	for ($i=0; $i < $rows; $i++) {
-/*
-	//BAD DESIGN - You don't do subqueries like this - it kills performance.
-	//The proper way is to do it in ArtifactFactory by adding a count(*) and left join to the comments table
-
-		$comment_count = db_numrows($art_arr[$i]->getMessages());
-		if ($comment_count == 0 || $comment_count > 1) {
-			$comment_msg = "$comment_count ".$Language->getText('tracker','comments');
-		} else {
-			$comment_msg = "$comment_count ".$Language->getText('tracker','comment');
-		}
-*/
 		echo '
 		<tr bgcolor="'. html_get_priority_color( $art_arr[$i]->getPriority() ) .'">'.
 		'<td NOWRAP>'.
 		($IS_ADMIN?'<input type="CHECKBOX" name="artifact_id_list[]" value="'.
 			$art_arr[$i]->getID() .'"> ':'').
 			$art_arr[$i]->getID() .
-			'</td>'.
-		'<td><a href="'.$PHP_SELF.'?func=detail&aid='.
+			'</td>';
+		if ($display_col['summary'])
+		 echo '<td><a href="'.$PHP_SELF.'?func=detail&aid='.
 			$art_arr[$i]->getID() .
 			'&group_id='. $group_id .'&atid='.
 			$ath->getID().'">'.
-			$art_arr[$i]->getSummary() .
-	//		' ('. $comment_msg . ')'.
-			'</a></td>'.
-		'<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
-				date($sys_datefmt,$art_arr[$i]->getOpenDate()) .'</td>'.
-		'<td>'. $art_arr[$i]->getAssignedRealName() .'</td>'.
-		'<td>'. $art_arr[$i]->getSubmittedRealName() .'</td></tr>';
+			$art_arr[$i]->getSummary().
+			'</a></td>';
+		if ($display_col['open_date'])
+			echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
+				date($sys_datefmt,$art_arr[$i]->getOpenDate()) .'</td>';
+		if ($display_col['category'])
+			echo '<td>'. $art_arr[$i]->getCategoryName() .'</td>';
+		if ($display_col['resolution'])
+			echo '<td>'. $art_arr[$i]->getResolutionName() .'</td>';
+		if ($display_col['status'])
+			echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
+		if ($display_col['priority'])
+			echo '<td>'. $art_arr[$i]->getPriority() .'</td>';
+		if ($display_col['artifact'])
+			echo '<td>'. $art_arr[$i]->getArtifactGroupName() .'</td>';
+		if ($display_col['assigned_to'])
+			echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
+		if ($display_col['submitted_by'])
+			echo '<td>'. $art_arr[$i]->getSubmittedRealName() .'</td>';
+		echo '</tr>';
 	}
 
 	/*

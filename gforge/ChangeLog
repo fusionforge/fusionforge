@@ -1,3 +1,8 @@
+2005-03-03  Tim Perdue <tim@gforge.org>
+
+	* modifying tracker/browse.php to support configurable columns 
+	like pm/browse_tasks.php
+
 2005-03-02  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* minor cosmetic fixes

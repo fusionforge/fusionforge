@@ -19,16 +19,6 @@ $params['group']=$group_id;
 $params['toptab']='tracker';
 
 echo site_project_header($params);
-echo $HTML->subMenu(
-	array(
-		$Language->getText('tracker','reporting'),
-		$Language->getText('tracker','admin')
-	),
-	array(
-		'/tracker/reporting/?group_id='.$group_id,
-		'/tracker/admin/?group_id='.$group_id
-	)
-);
 
 if (!$at_arr || count($at_arr) < 1) {
 	echo "<h1>".$Language->getText('tracker','no_trackers')."</h1>";
