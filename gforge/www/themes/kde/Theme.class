@@ -608,16 +608,18 @@ class Theme extends Layout {
 		}
 
 		// Tracker
-		if ($toptab == 'tracker' || $toptab == 'bugs'
-		    || $toptab == 'support' || $toptab == 'patch') {
-			$img = 'tracker.png';
-		} else {
-			$img = 'tracker_dark.png';
-		}
+		if ($project->usesTracker()) {
+			if ($toptab == 'tracker' || $toptab == 'bugs'
+			    || $toptab == 'support' || $toptab == 'patch') {
+				$img = 'tracker.png';
+			} else {
+				$img = 'tracker_dark.png';
+			}
 
-		$hint = $Language->getText('group', 'short_tracker');
-		$return .= $this->makeProjectIcon("/tracker/?group_id=$group",
-						  $hint, $img);
+			$hint = $Language->getText('group', 'short_tracker');
+			$return .= $this->makeProjectIcon("/tracker/?group_id=$group",
+							  $hint, $img);
+		}
 
 		// Mail
 		if ($project->usesMail()) {
@@ -692,14 +694,16 @@ class Theme extends Layout {
 		}
 
 		// Downloads
-		if ($toptab == 'downloads') {
-			$img = 'files.png';
-		} else {
-			$img = 'files_dark.png';
+		if ($project->usesFRS()) {
+			if ($toptab == 'downloads') {
+				$img = 'files.png';
+			} else {
+				$img = 'files_dark.png';
+			}
+			$hint = $Language->getText('group', 'short_files');
+			$return .= $this->makeProjectIcon("/project/showfiles.php?group_id=$group",
+							  $hint, $img);
 		}
-		$hint = $Language->getText('group', 'short_files');
-		$return .= $this->makeProjectIcon("/project/showfiles.php?group_id=$group",
-						  $hint, $img);
 
 		return $return .= '
 		</tr>

@@ -1,3 +1,8 @@
+2003-02-09  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/themes/kde/Theme.class(projectTabs): do not display tracker
+	icon, FRS icon if the project is not using them.
+
 2003-02-09 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/admin/*,
@@ -9,17 +14,17 @@
 	Fixing bug #212: get error on update adding jabber address
 
 2003-02-08 Reinhard Spisser <reinhard@spisser.i>
- 
+
  	* www/scm/index.php,
  	www/include/languages/Base.tab:
  	Submitting Reiner Jung's localization of scm
  	Moved cvs strings to scm_index
  	Added strings to localize developername and modulename
- 	
+
  	* www/include/languages/Italian.tab:
  	Translation of scm_index strings
- 	
- 2003-02-07 Reinhard Spisser <reinhard@spisser.it>
+
+2003-02-07 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/softwaremap/trove_list.php,
 	www/include/languages/Base.tab,
@@ -30,10 +35,10 @@
 	www/include/languages/French.tab:
 	Submitting Philippe Kiener's patch for localization
 	of top/
-	
+
 	* www/include/languages/Italian.tab:
 	adding new strings for localization of top
-	
+
 2003-02-06 Reinhard Spisser <reinhard@spiser.it>
 
 	* www/include/project_home.php,
@@ -46,26 +51,26 @@
 
 	* www/include/languages/Italian.tab:
 	Translation in italian of new strings
-	
+
 2003-02-04 Reinhard Spisser <reinhard@spisser.it>
 
 	* common/tracker/*,
 	www/tracker/index.php,
 	Localization of the tracker
-	
+
 2003-02-03 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/vote_function.php:
 	<b> to <strong> for xhtml compliance
-	
+
 	* common/pm/ProjectTask.class:
 	removing localized and buggy version of the
 	notify message
-	
+
 	* www/include/languages/Base.class
 	inserted missing strings for registration
-	
-	
+
+
 2003-02-03 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/tracker/reporting/index.php,
@@ -74,7 +79,7 @@
 	www/include/tool_reports.php,
 	www/include/html.class:
 	Localization of the tracker
-	
+
 2003-02-02  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/include/languages/Spanish.tab: many new translations.
@@ -121,7 +126,7 @@
 	* www/tracker/browse.php, www/tracker/add.php,
 	www/tracker/index.php, www/tracker/detail.php,
 	www/tracker/taskmgr.php, www/tracker/mod.php,
-	www/tracker/include/ArtifactHtml.class, 
+	www/tracker/include/ArtifactHtml.class,
 	www/tracker/include/ArtifactTypeHtml.class
 	www/tracker/admin/index.php, www/include/languages/Base.tab,
 	www/include/languages/Italian.tab
