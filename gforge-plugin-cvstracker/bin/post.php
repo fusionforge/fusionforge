@@ -30,7 +30,9 @@
  *  HTTP POSTs to /plugins/cvstracker/newcommit.php.
  *
  */
-require ('plugins/cvstracker/cvstracker.conf');
+ 
+require ('local.inc');
+require ('plugins/cvstracker/config.php');
 require ($sys_plugins_path.'/cvstracker/include/Snoopy.class');
 
 /**
@@ -102,17 +104,43 @@ function getLog($Input)
 	return $Log;
 }
 
-if ($argc < 6 ) {
-	usage ( $argv );
-}
+$files = array();
+if($argc == 3) {
+	$repository      = $argv[1];
+	$parameters = explode(' ', $argv[2]);
+	$path = $parameters[0];
+	
+	for($i = 1; $i < count($parameters); $i++) {
+		$filesInformation = explode(',', trim($parameters[$i], ','));
 
-if ( (($argc - 3) % 3 ) != 0 )
-{
-	echo "There should be 3 params + 3*N, instead of $argc\n";
-	usage ( $argv );
+		$files[] = array(
+			'name' => $filesInformation[0],
+			'previous' => $filesInformation[1],
+			'actual' => $filesInformation[2]
+		);
+	}
+	
+} else {
+	if ($argc < 6 ) {
+		usage ( $argv );
+	}
+	
+	if ( (($argc - 3) % 3 ) != 0 ) {
+		echo "There should be 3 params + 3*N, instead of $argc\n";
+		usage ( $argv );
+	}
+	$NumFiles= (($argc-3) / 3 ); // 3 Fixed params + 3 * File
+	$repository      = $argv[1];
+	$path            = $argv[2];
+	
+	for ( $i=0; $i < $NumFiles; $i++ ) {
+		$files[] = array(
+			'name' => $argv[3 + 3*$i],
+			'previous' => $argv[4 + 3*$i],
+			'actual' => $argv[5 + 3*$i]
+		);
+	}
 }
-
-$NumFiles= (($argc-3) / 3 ); // 3 Fixed params + 3 * File
 
 // Our POSTer in Gforge
 $snoopy = new Snoopy;
@@ -125,14 +153,14 @@ $UserName= $UserArray['name'];
 $Input = file_get_contents ("/dev/stdin" );
 $Log   = getLog($Input);
 
-for ( $i=0; $i < $NumFiles; $i++ )
+foreach ( $files as $file )
 {
 	$SubmitVars["UserName"]        = $UserName;
-	$SubmitVars["Repository"]      = $argv[1];
-	$SubmitVars["Path"]            = $argv[2];
-	$SubmitVars["FileName"]        = $argv[3 + 3*$i];
-	$SubmitVars["PrevVersion"]     = $argv[4 + 3*$i];
-	$SubmitVars["ActualVersion"]   = $argv[5 + 3*$i];
+	$SubmitVars["Repository"]      = $repository;
+	$SubmitVars["Path"]            = $path;
+	$SubmitVars["FileName"]        = $file['name'];
+	$SubmitVars["PrevVersion"]     = $file['previous'];
+	$SubmitVars["ActualVersion"]   = $file['actual'];
 	$SubmitVars["Log"]             = $Log;
 	$SubmitVars["TaskNumbers"]     = getInvolvedTasks($Log);
 	$SubmitVars["ArtifactNumbers"] = getInvolvedArtifacts($Log);

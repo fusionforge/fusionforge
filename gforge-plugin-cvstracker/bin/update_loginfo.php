@@ -28,22 +28,36 @@
  */
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
-
-require ('plugins/cvstracker/cvstracker.conf');
+require ('plugins/cvstracker/config.php');
 
 $Res = db_query("SELECT * FROM groups WHERE status='A';");
 if (!$Res) {
         echo "Error. Couldn't get Group List!\n";
 }
+
+function addCvsTrackerToFile($path) {
+	global $sys_plugins_path, $sys_users_host;
+	
+	$FOut = fopen($path, "a");
+	if($FOut) {
+		fwrite($FOut, "# BEGIN added by gforge-plugin-cvstracker\n");
+		$Line = "ALL ( php -q -d include_path=".ini_get('include_path').
+			" ".$sys_plugins_path."/cvstracker/bin/post.php".
+			" %{sVv} )\n";
+		fwrite($FOut,$Line);
+		fwrite($FOut, "# END added by gforge-plugin-cvstracker\n");
+		fclose($FOut);
+	}
+}
+
 while ($Row = db_fetch_array($Res)) {
 	$Group = group_get_object($Row["group_id"]);
 	if ($Group->usesPlugin("cvstracker")) {
 		$LineFound=FALSE;
-		$FIn  = fopen($sys_cvsroot_path."/".$Row["unix_group_name"].
-			"/CVSROOT/loginfo","r");
+		$FIn  = fopen($sys_cvsroot_path."/".$Row["unix_group_name"]."/CVSROOT/loginfo","r");
+		
 		if ($FIn) {
 			while (!feof($FIn))  {
-
 				$Line = fgets ($FIn);
 				if(!preg_match("/^#/", $Line) &&
 					preg_match("/cvstracker/",$Line)) {
@@ -52,22 +66,8 @@ while ($Row = db_fetch_array($Res)) {
 			}
 			fclose($FIn);
 			if($LineFound==FALSE) {
-				echo "loginfo modified\n";
-				$FOut = fopen($sys_cvsroot_path."/".
-					$Row["unix_group_name"].
-					"/CVSROOT/loginfo","a");
-				if($FOut) {
-					fwrite($FOut,
-						"# Added by Gforge-plugin-cvstracker \n");
-					$Line = "ALL ( ".$sys_plugins_path.
-						"/cvstracker/bin/post.php -d ".
-						"include_path=".$sys_urlroot.":".
-						$sys_urlroot.
-						"/www/include %r".
-						" %p %{sVv}; cat ) | mail `id -un`@".$sys_users_host."\n";
-					fwrite($FOut,$Line);
-					fclose($FOut);
-				}
+				echo $Group->getUnixName().": loginfo modified\n";
+				addCvsTrackerToFile($sys_cvsroot_path."/".$Row["unix_group_name"]."/CVSROOT/loginfo");
 			}
 		}
 	}
