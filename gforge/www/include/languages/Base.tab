@@ -95,6 +95,7 @@ account_verify	title	$1 Account Verification
 account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>
 account_verify	password	Password:
 account_verify	login		Login
+account_verify	loginname	Login name:
 account_verify	missingparam	Missing paramater
 account_verify	usermandatory	You must enter a user name.
 account_verify	invaliduser	Invalid user
