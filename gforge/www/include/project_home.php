@@ -120,7 +120,8 @@ print db_result($res_count,0,'count');
 
 ?>
 
-<a href="/project/memberlist.php?group_id=<?php print $group_id; ?>">[<?php echo $Language->getText('project_home','view_members') ?>]</a>
+<p><a href="/project/memberlist.php?group_id=<?php print $group_id; ?>">[<?php echo $Language->getText('project_home','view_members') ?>]</a></p>
+<p><a href="/project/request.php?group_id=<?php print $group_id; ?>">[<?php echo $Language->getText('project_joinrequest','request_link'); ?>]</a></p>
 <?php
 
 echo $HTML->boxBottom();
