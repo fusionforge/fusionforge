@@ -85,10 +85,10 @@ FIN
 	[ -d /etc/ssh-nonfree ] && find /etc/ssh-nonfree | cpio --quiet -pdumLB $CHROOTDIR
 	[ -f /etc/pam.d/ssh ] && cp /etc/pam.d/ssh $CHROOTDIR/etc/pam.d
 	[ -f /etc/pam.d/ssh-nonfree ] && cp /etc/pam.d/ssh-nonfree $CHROOTDIR/etc/pam.d
-	cp /etc/pam.d/login $CHROOTDIR/etc/pam.d
-	cp /etc/pam.d/su $CHROOTDIR/etc/pam.d
-	cp /etc/pam.d/cvs $CHROOTDIR/etc/pam.d
-	cp /etc/pam.d/other $CHROOTDIR/etc/pam.d
+	[ -f /etc/pam.d/login ] && cp /etc/pam.d/login $CHROOTDIR/etc/pam.d
+	[ -f /etc/pam.d/su ] && cp /etc/pam.d/su $CHROOTDIR/etc/pam.d
+	[ -f /etc/pam.d/cvs ] && cp /etc/pam.d/cvs $CHROOTDIR/etc/pam.d
+	[ -f /etc/pam.d/other ] && cp /etc/pam.d/other $CHROOTDIR/etc/pam.d
 	cp /lib/libpam* $CHROOTDIR/lib
 	
 	cp /lib/libnss_files* $CHROOTDIR/lib
