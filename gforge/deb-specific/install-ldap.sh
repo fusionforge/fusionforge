@@ -324,7 +324,7 @@ load_ldap(){
 	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
 	cat >> $tmpldif <<EOF
 dn: $sys_ldap_base_dn
-dc: $dc
+#dc: $dc
 objectClass: top
 objectClass: domain
 objectClass: domainRelatedObject
@@ -387,12 +387,12 @@ EOF
 
 print_ldif_default(){
     dc=`echo $slapd_base_dn | sed 's/dc=\(.[^,]*\),.*/\1/'`
-#dn: $slapd_base_dn
-#objectClass: dcObject
-#objectClass: domain
+    cat <<-FIN
+dn: $slapd_base_dn
+objectClass: dcObject
+objectClass: domain
 #dc: $dc
 
-    cat <<-FIN
 dn: cn=admin,$slapd_base_dn
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
@@ -426,7 +426,7 @@ setup_robot() {
 	cat > $tmpldif <<-FIN
 dn: $gforge_base_dn
 objectClass: organization
-dc: $dc
+#dc: $dc
 
 dn: ou=People,$gforge_base_dn
 ou: People
