@@ -128,6 +128,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
  * @param		int		The survey ID
  */
 function show_survey ($group_id,$survey_id) {
+  global $Language;
 
 ?>
 <form action="/survey/survey_resp.php" method="post">
@@ -278,7 +279,7 @@ if (db_numrows($result) > 0) {
 
 } else {
 	echo '<tr><td colspan="2">';
-	echo "<h3>Survey Not Found</h3>";
+	echo "<h3>".$Language->getText('survey','survey_not_found')."</h3>";
 	echo "</td></tr>";
 }
 
