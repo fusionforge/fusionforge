@@ -33,6 +33,11 @@ $sys_internal_network = '192.168.1.';
  
 // Machine that hosts CVS
 $sys_cvs_host = 'cvs.company.com';
+
+// Force the use of a single cvs host instead of cvs.project.domain.com
+// Set to 1 to use cvs.domain.com:/cvsroot/project for all projects
+// Set to 0 to use cvs.project.domain.com:/cvsroot/project
+$sys_cvs_single_host = 1;
  
 // Machine used for downloading sources/packages
 $sys_download_host = "download.company.com";
