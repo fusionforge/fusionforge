@@ -28,7 +28,7 @@ GForge should work correctly on any system configured like this:
 </ol>
 </p>
 <p>
-Successful installations and operations have been done using the following system:
+Successful installations and operations have been done using the following systems:
 </p>
 <p>
 RedHat Linux 8.0 with the following software configured (already bundled with RH8):
@@ -64,14 +64,14 @@ To install GForge, follow these steps:
 <ol>
 <li>Login as root user</li>
 <li>cd to <code>/var/www/</code></li>
-<li>Extract the content of gforge-3.0pre7.tar.bz2 to the current directory:<br/>
+<li>Extract the content of gforge-3.0pre8.tar.bz2 to the current directory:<br/>
 <code>
-bzip2 -dc gforge-3.0pre7.tar.bz2 | tar xvf -
+bzip2 -dc gforge-3.0pre8.tar.bz2 | tar xvf -
 <br/>
 </code>
 
 </li>
-<li>Now there's a directory /var/www/gforge-3.0pre7</li>
+<li>Now there's a directory /var/www/gforge-3.0pre8</li>
 </ol>
 
 </p>
