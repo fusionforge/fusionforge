@@ -88,7 +88,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 
 				echo '
-					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
 						$this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
 
 
@@ -97,7 +97,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
 				echo '
-					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
 						$this->renderRadio($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXT) {
@@ -114,7 +114,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					$colspan=1;
 				}
 				echo '
-					<td width="50%" colspan="'.$colspan.'" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" colspan="'.$colspan.'" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
 						$this->renderTextField($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']).'</td>';
 
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_TEXTAREA) {
@@ -131,7 +131,7 @@ class ArtifactTypeHtml extends ArtifactType {
 					$colspan=1;
 				}
 				echo '
-					<td width="50%" colspan="'.$colspan.'" valign="top"><strong>'.$efarr[$i]['field_name'].'</strong><br />'.
+					<td width="50%" colspan="'.$colspan.'" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
 						$this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']).'</td>';
 
 //			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
