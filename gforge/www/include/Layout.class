@@ -358,9 +358,9 @@ class Layout extends Error {
 		}
 
 		?>
-<font face="arial, helvetica" size="1" color="#cccccc">
+<span class="center"><font face="arial, helvetica" size="1" color="#cccccc">
 <? echo $Language->getText('general', 'footer'); ?>
-</font>
+</font></span>
 </p>&nbsp;
 
 <?php
