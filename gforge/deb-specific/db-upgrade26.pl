@@ -273,6 +273,52 @@ eval {
 	      }
 	      $sth->finish () ;
 
+	  $version = &get_db_version ;
+	  $target = "2.5.9999.3+groups+inserted" ;
+	  if (is_lesser $version, $target) {
+	      debug "Inserting missing groups" ;
+
+	      @reqlist = (
+			  "INSERT INTO groups (group_name, homepage,
+                           is_public, status, unix_group_name, unix_box,
+                           http_domain, short_description, cvs_box, license,
+                           register_purpose, license_other, register_time,
+                           use_bugs, rand_hash, use_mail, use_survey, use_patch,
+                           use_forum, use_pm, use_cvs, use_news, use_support,
+                           new_bug_address, new_patch_address,
+                           new_support_address, type, use_docman, send_all_bugs,
+                           send_all_patches, send_all_support, new_task_address,
+                           send_all_tasks, use_bug_depend_box,
+                           use_pm_depend_box)
+       	                   VALUES ('Stats', '$domain_name/top/', 1,
+       	    	           'A', 'stats', '$shellbox', NULL, NULL, 'cvs',
+       	    	           'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0,
+       	    	           1, 1, '', '', '', 1, 1, 0, 0, 0, '', 0, 0, 0)",
+			  "INSERT INTO groups (group_name, homepage,
+                           is_public, status, unix_group_name, unix_box,
+                           http_domain, short_description, cvs_box, license,
+                           register_purpose, license_other, register_time,
+                           use_bugs, rand_hash, use_mail, use_survey, use_patch,
+                           use_forum, use_pm, use_cvs, use_news, use_support,
+                           new_bug_address, new_patch_address,
+                           new_support_address, type, use_docman, send_all_bugs,
+                           send_all_patches, send_all_support, new_task_address,
+                           send_all_tasks, use_bug_depend_box,
+                           use_pm_depend_box)
+                           VALUES ('Peer Ratings', '$domain_name/people/', 0,
+                           'A', 'peerrating', '$shellbox', NULL, NULL, 'cvs1',
+                           'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0,
+                           1, 1, '', '', '', 1, 0, 0, 0, 0, '', 0, 0, 0)"
+			  ) ;
+	      
+	      foreach my $s (@reqlist) {
+		  $query = $s ;
+		  debug $query ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  $sth->finish () ;
+	      }
+	      @reqlist = () ;
 	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
