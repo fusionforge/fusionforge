@@ -21,14 +21,14 @@ if($verbose) {print ("\nConnecting to database");}
 
 if($verbose) {print ("\nGetting group list");}
 # Dump the Groups Table information
-$query = "SELECT group_id,unix_group_name,status,use_cvs,enable_pserver,enable_anoncvs FROM groups";
+$query = "SELECT group_id,unix_group_name,status,use_scm,enable_pserver,enable_anonscm FROM groups";
 # AND cvs_box=$hostname to be added for multi-cvs server support
 
 $c = $dbh->prepare($query);
 $c->execute();
 
 if($verbose) {print ("\nGetting user list per group");}
-while(my ($group_id, $group_name, $status, $use_cvs, $enable_pserver, $enable_anoncvs) = $c->fetchrow()) {
+while(my ($group_id, $group_name, $status, $use_scm, $enable_pserver, $enable_anonscm) = $c->fetchrow()) {
 
 	my $new_query = "SELECT users.user_name AS user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND cvs_flags=1 AND group_id=$group_id";
 	my $d = $dbh->prepare($new_query);
@@ -40,7 +40,7 @@ while(my ($group_id, $group_name, $status, $use_cvs, $enable_pserver, $enable_an
 	   $user_list .= "$user_name,";
 	}
 
-	$grouplist = "$group_name:$status:$group_id:$use_cvs:$enable_pserver:$enable_anoncvs:$user_list\n";
+	$grouplist = "$group_name:$status:$group_id:$use_scm:$enable_pserver:$enable_anonscm:$user_list\n";
 	$grouplist =~ s/,$//;
 
 	push @group_array, $grouplist;
@@ -66,7 +66,7 @@ if($verbose) {print ("\nReading list");}
 if($verbose) {print ("\n\nProcessing CVS\n\n");}
 while ($ln = pop(@group_array)) {
 	chop($ln);
-	($group_name, $status, $group_id, $use_cvs, $enable_pserver, $enable_anoncvs, $userlist) = split(":", $ln);
+	($group_name, $status, $group_id, $use_scm, $enable_pserver, $enable_anonscm, $userlist) = split(":", $ln);
 	
 	$cvs_uid = $group_id + $anoncvs_uid_add;
 	$cvs_gid = $group_id + $gid_add;
@@ -77,17 +77,17 @@ while ($ln = pop(@group_array)) {
 	$group_exists = (-d $grpdir_prefix . $group_name);
 	$cvs_exists = (-d "$cvs_root$group_name/CVSROOT");
 
-	if (!$group_exists && $use_cvs && $status eq 'A' ) {
+	if (!$group_exists && $use_scm && $status eq 'A' ) {
 		print ("ERROR: $group_name home dir $grpdir_prefix$group_name doesn't exists\n");
-		print ("	but use_cvs=$use_cvs\tstatus=$status\n");
+		print ("	but use_scm=$use_scm\tstatus=$status\n");
 	}
 	if ($cvs_exists && !$group_exists && $status eq 'A') {
 		print ("ERROR: CVS $cvs_root$group_name/CVSROOT exists\n");
 		print ("	but no $group_name home dir at $grpdir_prefix$group_name\n");
-		print ("	use_cvs=$use_cvs\tstatus=$status\n");
+		print ("	use_scm=$use_scm\tstatus=$status\n");
 	}
 	# CVS repository creation
-	if ($group_exists && !$cvs_exists && $use_cvs && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
+	if ($group_exists && !$cvs_exists && $use_scm && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
 		# This for the first time
 		if (!(-d "$cvs_root")) {
 			if($verbose){print("Creating $cvs_root\n");}
@@ -99,7 +99,7 @@ while ($ln = pop(@group_array)) {
 		# Firce create the repository
 		# Unix right will lock access to all users not in the group including cvsweb
 		# when anoncvs is not enabled
-		if ($enable_anoncvs){
+		if ($enable_anonscm){
 			mkdir $cvs_dir, 0775;
 		} else {
 			mkdir $cvs_dir, 0770;
@@ -116,7 +116,7 @@ while ($ln = pop(@group_array)) {
 	}
 
 	# Right management
-	if ($group_exists && $use_cvs && $status eq 'A'){
+	if ($group_exists && $use_scm && $status eq 'A'){
 		if ($enable_pserver){
 			# turn on pserver writers
 			my $userlistcr=join("\n",split(",", $userlist));
@@ -139,7 +139,7 @@ while ($ln = pop(@group_array)) {
 			close CONFIG;
 		}
 
-		if ($enable_anoncvs){
+		if ($enable_anonscm){
 			# turn on anonymous readers
 			system("echo \"anonymous\" > $cvs_dir/CVSROOT/readers");
 			system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:anoncvs_${group_name}\" > $cvs_dir/CVSROOT/passwd");
