@@ -2355,6 +2355,7 @@ survey	permission_denied	Permission Denied
 survey	survey_not_found	Survey not found.
 survey	survey_privacy	Survey Privacy
 survey	title	Survey
+survey	warning_double_vote	Warning - you are about to vote a second time on this survey.
 survey_add_question	add_this_question	Add This Question.
 survey_add_question	error_insert_question	Error inserting question
 survey_add_question	question	Question
