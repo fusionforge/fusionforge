@@ -1,3 +1,17 @@
+2003-03-07  Reinhard Spisser <reinhard@spisser.it>
+
+	* www/include/languages/Italian.tab:
+	more translations
+	
+	* www/include/languages/SimplifiedChinese.tab:
+	applied patch #242
+	
+	* docs/xdocs/*:
+	documentation improvements
+	
+	* install
+	SF->GForge
+
 2003-03-02  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	Bug #218
