@@ -1,5 +1,8 @@
 2003-11-29  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* deb-specific/db-upgrade.pl: Upgrade database schema using
+	20031105.sql and 20031124.sql.
+
 	* www/admin/approve-pending.php: Patch #606 from Guillaume Smet
 	fixing a localisation key.
 

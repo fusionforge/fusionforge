@@ -22,8 +22,9 @@ gforge (3.1-4+) unstable; urgency=low
   * [Roland] Added support for apache-perl too.
   * [Roland] Fixed the way we use modules-config so that gforge-web-apache
     does not hang on install (closes: #221172).
+  * [Roland] Upgrade database schema using 20031105.sql and 20031124.sql.
 
- -- Roland Mas <lolando@debian.org>  Sat, 22 Nov 2003 18:42:41 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 29 Nov 2003 21:17:05 +0100
 
 gforge (3.1-4) unstable; urgency=low
 
