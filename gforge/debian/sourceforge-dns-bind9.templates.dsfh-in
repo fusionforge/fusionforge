@@ -1,11 +1,6 @@
-Template: sourceforge/shared/domain_name
-Type: string
-Description: Your SF domain or subdomain name
- The domain that will host your Sourceforge installation.  Some services
- will be given their own subdomain in that domain (cvs, lists, etc.).
-Description-fr: Votre nom de domaine
- Le nom du domaine qui héberge votre Sourceforge.  Certains services auront
- leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
+#DSFHELPER:common-variables#
+
+#DSFHELPER:cvshost-variables#
 
 Template: sourceforge/shared/shell_host
 Type: string
@@ -16,15 +11,6 @@ Template: sourceforge/shared/users_host
 Type: string
 Description: Your user server
  The hostname of the server that will host your Sourceforge user accounts and mail
-
-Template: sourceforge/shared/cvs_host
-Type: string
-Description: Your CVS server
- The hostname of the server that will host your Sourceforge CVS
- repositories.  It should not be the same as your main SF host.
-Description-fr: Votre serveur CVS
- Le nom du serveur CVS de votre Sourceforge.
- Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
 
 Template: sourceforge/shared/lists_host
 Type: string
@@ -54,15 +40,6 @@ Description-fr: Votre adresse IP
  Cette information est requise pour la configuration des hôtes virtuels
  d'Apache.
 
-Template: sourceforge/shared/server_admin
-Type: string
-Description: The SF admin email address.
- The email address of the Sourceforge administrator of your site.  Needed
- in case a problem occurs.
-Description-fr: L'adresse e-mail de l'administrateur SF
- L'adresse e-mail de l'administrateur de votre Sourceforge, requise au cas
- où un problème survendrait.
-
 Template: sourceforge/shared/db_password
 Type: password
 Description: Password used for the database
@@ -78,15 +55,6 @@ Description: Password used for the database - again
  Please re-type the password for confirmation.
 Description-fr: Mot de passe pour la base de données - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
-
-Template: sourceforge/shared/system_name
-Type: string
-Default: Sourceforge
-Default-fr: Sourceforge
-Description: The Sourceforge system name
- This name is used in various places throughout the system.
-Description-fr: Nom de votre système Sourceforge
- Ce nom est utilisé à divers endroits au travers du système.
 
 Template: sourceforge/shared/admin_login
 Type: string

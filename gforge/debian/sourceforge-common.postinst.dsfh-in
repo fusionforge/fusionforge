@@ -30,9 +30,8 @@ case "$1" in
     configure)
 	adduser --system --group --home /var/www/sourceforge sourceforge 2>&1 > /dev/null
 	
-	# "Fill in the blanks" in main config file
 	create_mainconffile
-	vars="system_name"
+	vars="system_name domain_name server_admin"
         update_mainconffile $vars
 	/usr/sbin/sourceforge-config
     ;;

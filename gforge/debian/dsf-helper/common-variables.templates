@@ -1,0 +1,26 @@
+Template: sourceforge/shared/domain_name
+Type: string
+Description: Your SF domain or subdomain name
+ The domain that will host your Sourceforge installation.  Some services
+ will be given their own subdomain in that domain (cvs, lists, etc.).
+Description-fr: Votre nom de domaine
+ Le nom du domaine qui héberge votre Sourceforge.  Certains services auront
+ leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
+
+Template: sourceforge/shared/server_admin
+Type: string
+Description: The SF admin email address.
+ The email address of the Sourceforge administrator of your site.  Needed
+ in case a problem occurs.
+Description-fr: L'adresse e-mail de l'administrateur SF
+ L'adresse e-mail de l'administrateur de votre Sourceforge, requise au cas
+ où un problème survendrait.
+
+Template: sourceforge/shared/system_name
+Type: string
+Default: Sourceforge
+Default-fr: Sourceforge
+Description: The Sourceforge system name
+ This name is used in various places throughout the system.
+Description-fr: Nom de votre système Sourceforge
+ Ce nom est utilisé à divers endroits au travers du système.

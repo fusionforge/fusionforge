@@ -23,9 +23,6 @@ case "$1" in
 	rm -rf /var/lib/sourceforge
 	delete_mainconffile
 	[ -d /etc/sourceforge ] && rmdir --ignore-fail-on-non-empty /etc/sourceforge
-	if [ -h /cvsroot ] && [ $(readlink /cvsroot) = "/var/lib/sourceforge/chroot/cvsroot" ] ; then
-	    rm /cvsroot
-	fi
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
 	;;

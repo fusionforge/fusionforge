@@ -23,8 +23,15 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
+	vars="system_name domain_name server_admin cvs_host"
+        update_mainconffile $vars
+	/usr/sbin/sourceforge-config
+
         # Setup our CVS
 	/usr/lib/sourceforge/bin/install-cvs.sh configure
 

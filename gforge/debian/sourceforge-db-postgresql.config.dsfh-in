@@ -5,6 +5,7 @@
 
 #DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:create-random-pw#
+#DSFHELPER:common-variables#
 
 get_pw sourceforge/shared/db_password low
 db_fget sourceforge/shared/db_password seen || true
@@ -19,28 +20,17 @@ fi
 db_input low sourceforge/shared/admin_login || true
 get_pw sourceforge/shared/admin_password critical
 
-db_fget sourceforge/shared/domain_name seen || true
-[ "$RET" = "false" ] && db_set sourceforge/shared/domain_name $(hostname -f)
-db_input medium sourceforge/shared/domain_name || true
-db_go || true
-
 db_fget sourceforge/shared/ip_address seen || true
 if [ "$RET" = "false" ] ; then
     db_get sourceforge/shared/domain_name
     db_set sourceforge/shared/ip_address $(hostname -i | cut -f1 -d" ")
 fi
 
-db_fget sourceforge/shared/server_admin seen || true
-if [ "$RET" = "false" ] ; then
-  db_get sourceforge/shared/domain_name || true
-  db_set sourceforge/shared/server_admin "webmaster@$RET"
-fi
-
 db_input medium sourceforge/shared/ip_address || true
 db_input medium sourceforge/shared/server_admin || true
-db_get sourceforge/shared/domain_name
 db_go || true
 
+#DSFHELPER:cvshost-variables#
 db_fget sourceforge/shared/shell_host seen || true
 if [ "$RET" = "false" ] ; then
     db_get sourceforge/shared/domain_name
@@ -51,12 +41,6 @@ db_fget sourceforge/shared/users_host seen || true
 if [ "$RET" = "false" ] ; then
     db_get sourceforge/shared/domain_name
     db_set sourceforge/shared/users_host users.$RET
-fi
-
-db_fget sourceforge/shared/cvs_host seen || true
-if [ "$RET" = "false" ] ; then
-    db_get sourceforge/shared/domain_name
-    db_set sourceforge/shared/cvs_host cvs.$RET
 fi
 
 db_fget sourceforge/shared/lists_host seen || true
@@ -74,18 +58,6 @@ fi
 db_input low sourceforge/shared/shell_host || true
 db_input low sourceforge/shared/users_host || true
 db_go || true
-#db_fget sourceforge/shared/ldap_web_add_password seen || true
-#if [ "$RET" = "false" ]; then
-#    if [ -f /etc/ldap.secret ] ; then
-#	pwd=$(cat /etc/ldap.secret)
-#	db_set sourceforge/shared/ldap_web_add_password $pwd
-#    else
-#	echo "The package libpam-ldap is not correctly configured."
-#	echo "The sourceforge package configuration cannot proceed."
-#	echo "Please use \"dpkg-reconfigure libpam-ldap\" to fix the problem."
-#	exit 1
-#    fi
-#fi
 
 db_input low sourceforge/shared/newsadmin_groupid || true
 db_input low sourceforge/shared/skill_list || true
