@@ -1674,7 +1674,7 @@ CREATE TABLE "users" (
 	"unix_pw" character varying(40) DEFAULT '' NOT NULL,
 	"unix_status" character(1) DEFAULT 'N' NOT NULL,
 	"unix_uid" integer DEFAULT '0' NOT NULL,
-	"unix_box" character varying(10) DEFAULT 'shell1' NOT NULL,
+	"unix_box" character varying(10) DEFAULT 'shell' NOT NULL,
 	"add_date" integer DEFAULT '0' NOT NULL,
 	"confirm_hash" character varying(32),
 	"mail_siteupdates" integer DEFAULT '0' NOT NULL,
@@ -3085,17 +3085,11 @@ COPY "group_type"  FROM stdin;
 --
 
 
---CB COPY "groups"  FROM stdin;
---CB 1	Master Groupxxxx	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
---CB 2	Stats Groupxxxxx	\N	0	A	statsxxxx	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
---CB 3	News Groupxxxxxx	\N	0	A	newsxxxx	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
---CB 4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
---CB \.
 COPY "groups"  FROM stdin;
-1	Master Group	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
-2	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
-3	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
-4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+1	Master Group	\N	0	A	sourceforge	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+2	News Group	\N	0	A	news	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+3	Stats Group	\N	0	A	stats	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+4	Peer Ratings Group	\N	0	A	peerrating	shell	\N	\N	cvs	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
 \.
 --
 -- Data for TOC Entry ID 499 (OID 19996)
@@ -3907,7 +3901,7 @@ COPY "user_ratings"  FROM stdin;
 
 
 COPY "users"  FROM stdin;
-100	None	noreply@sourceforge.net	*********34343		A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0
+100	None	noreply@sourceforge.net	*********34343		A	/bin/bash		N	0	shell	0	\N	0	0	\N	\N	0		GMT	1	0
 \.
 --
 -- Data for TOC Entry ID 549 (OID 22336)
