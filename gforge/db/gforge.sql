@@ -382,7 +382,6 @@ CREATE TABLE groups (
     unix_box character varying(20) DEFAULT 'shell1'::character varying NOT NULL,
     http_domain character varying(80),
     short_description character varying(255),
-    scm_box character varying(20) DEFAULT 'cvs1'::character varying NOT NULL,
     register_purpose text,
     license_other text,
     register_time integer DEFAULT 0 NOT NULL,
@@ -404,7 +403,8 @@ CREATE TABLE groups (
     use_stats integer DEFAULT 1,
     enable_pserver integer DEFAULT 1,
     enable_anonscm integer DEFAULT 1,
-    license integer DEFAULT 100
+    license integer DEFAULT 100,
+    scm_box text
 );
 
 
@@ -2287,7 +2287,6 @@ CREATE VIEW stats_site_all_vw AS
 
 
 CREATE SEQUENCE plugins_pk_seq
-    START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -2304,7 +2303,6 @@ CREATE TABLE plugins (
 
 
 CREATE SEQUENCE group_plugin_pk_seq
-    START WITH 1
     INCREMENT BY 1
     NO MAXVALUE
     NO MINVALUE
@@ -2814,11 +2812,11 @@ COPY group_history (group_history_id, group_id, field_name, old_value, mod_by, a
 
 
 
-COPY groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box, http_domain, short_description, scm_box, register_purpose, license_other, register_time, rand_hash, use_mail, use_survey, use_forum, use_pm, use_scm, use_news, type_id, use_docman, new_doc_address, send_all_docs, use_pm_depend_box, use_ftp, use_tracker, use_frs, use_stats, enable_pserver, enable_anonscm, license) FROM stdin;
-2	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
-3	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
-4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
-1	Master Group	\N	0	A	gforge	shell1	\N	\N	cvs1	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100
+COPY groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box, http_domain, short_description, register_purpose, license_other, register_time, rand_hash, use_mail, use_survey, use_forum, use_pm, use_scm, use_news, type_id, use_docman, new_doc_address, send_all_docs, use_pm_depend_box, use_ftp, use_tracker, use_frs, use_stats, enable_pserver, enable_anonscm, license, scm_box) FROM stdin;
+2	Stats Group	\N	0	A	stats	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
+3	News Group	\N	0	A	news	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
+4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
+1	Master Group	\N	0	A	gforge	shell1	\N	\N	\N	\N	0	\N	1	1	1	1	1	1	1	1		0	1	1	1	1	1	1	1	100	cvs1
 \.
 
 
@@ -3668,11 +3666,17 @@ COPY project_messages (project_message_id, project_task_id, body, posted_by, pos
 
 
 COPY plugins (plugin_id, plugin_name, plugin_desc) FROM stdin;
+1	scmcvs	CVS Plugin
+2	scmsvn	SVN Plugin
 \.
 
 
 
 COPY group_plugin (group_plugin_id, group_id, plugin_id) FROM stdin;
+1	2	1
+2	3	1
+3	4	1
+4	1	1
 \.
 
 
@@ -7667,11 +7671,11 @@ SELECT pg_catalog.setval('project_messa_project_messa_seq', 1, false);
 
 
 
-SELECT pg_catalog.setval('plugins_pk_seq', 1, false);
+SELECT pg_catalog.setval('plugins_pk_seq', 2, true);
 
 
 
-SELECT pg_catalog.setval('group_plugin_pk_seq', 1, false);
+SELECT pg_catalog.setval('group_plugin_pk_seq', 4, true);
 
 
 
