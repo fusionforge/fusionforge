@@ -434,7 +434,7 @@ if (isset($params['group']) && $params['group']) {
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align="center"><a class="sortbutton "href="'.$links_arr[$i].'"><span style="color:'.
+				<td align="center"><a class="sortbutton" href="'.$links_arr[$i].'"><span style="color:'.
 				$this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
 			}
 		} else {

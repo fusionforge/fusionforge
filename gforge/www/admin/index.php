@@ -36,10 +36,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 </ul>
 <ul>
 	<li><a href="userlist.php"><?php echo $Language->getText('admin_index','display_full_user_list'); ?></a>&nbsp;&nbsp;</li>
-	<li><?php echo $Language->getText('admin_index','display_user_beginning_with') ?>
-<?php
+	<li><?php
+	echo $Language->getText('admin_index','display_user_beginning_with').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo "<a href=\"search.php?usersearch=1&amp;search=$abc_array[$i]%\">$abc_array[$i]</a>|";
+		echo '<a href="userlist.php?user_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
 	}
 ?>
 	<br />
@@ -75,10 +75,11 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="grouplist.php"><?php echo $Language->getText('admin_index','display_full_group'); ?></a></li>
 
-	<li><?php echo $Language->getText('admin_index','display_groups_beginning_with'); ?>
-<?php
+	<li>
+	<?php
+	echo $Language->getText('admin_index','display_groups_beginning_with').' ';
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo "<a href=\"search.php?groupsearch=1&amp;search=$abc_array[$i]%\">$abc_array[$i]</a>|";
+		echo '<a href="grouplist.php?group_name_search='.$abc_array[$i].'">'.$abc_array[$i].'</a>|';
 	}
 ?>
 	<br />
