@@ -38,7 +38,7 @@ $res=db_query("SELECT theme_id, fullname FROM themes WHERE enabled=true");
 echo html_build_select_box($res,'new_theme_id',$u->getThemeID(),false);
 
 ?>
-<input type="submit" name="submit" value="Submit Changes">
+ <input type="submit" name="submit" value="Submit Changes">
 </form>
 <?php
 
