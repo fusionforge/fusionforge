@@ -23,7 +23,7 @@
  * along with GForge-plugin-cvstracker; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
-require_once ('/usr/lib/gforge/plugins/cvstracker/include/cvstrackerPlugin.class') ;
+require_once ('cvstrackerPlugin.class') ;
 
 $cvstrackerPluginObject = new cvstrackerPlugin ;
 

@@ -30,8 +30,8 @@
  *  HTTP POSTs to /plugins/cvstracker/newcommit.php.
  *
  */
-require ('/etc/gforge/plugins/cvstracker/cvstracker.conf');
-require ('/usr/lib/gforge/plugins/cvstracker/include/Snoopy.class');
+require ('plugins/cvstracker/cvstracker.conf');
+require ($sys_plugins_path.'/cvstracker/include/Snoopy.class');
 
 /**
  * It returns the usage and exit program

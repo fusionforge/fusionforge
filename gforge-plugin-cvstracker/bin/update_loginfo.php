@@ -29,7 +29,7 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
-require ('/etc/gforge/plugins/cvstracker/cvstracker.conf');
+require ('plugins/cvstracker/cvstracker.conf');
 
 $Res = db_query("SELECT * FROM groups WHERE status='A';");
 if (!$Res) {
