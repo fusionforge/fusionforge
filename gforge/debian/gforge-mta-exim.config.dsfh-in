@@ -3,6 +3,7 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -12,3 +13,7 @@ init_debconf_from_mainconffile
 #DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
+
+propose_update_install /etc/aliases
+propose_update_install /etc/exim/exim.conf
+db_stop

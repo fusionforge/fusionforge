@@ -3,6 +3,7 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -12,3 +13,8 @@ init_debconf_from_mainconffile
 #DSFHELPER:create-random-pw#
 #DSFHELPER:common-variables#
 #DSFHELPER:ldap-variables#
+
+propose_update_install /etc/libnss-ldap.conf
+propose_update_install /etc/nsswitch.conf
+propose_update_install /etc/ldap/slapd.conf
+db_stop

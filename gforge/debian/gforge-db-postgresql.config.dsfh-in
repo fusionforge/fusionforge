@@ -3,6 +3,7 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -40,3 +41,6 @@ db_go || true
 
 vars="admin_login admin_password skill_list"
 update_mainconffile $vars
+
+propose_update_install /etc/postgresql/pg_hba.conf
+db_stop

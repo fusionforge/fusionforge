@@ -25,17 +25,17 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
+#NODSFHELPER:replace-files#
 case "$1" in
     configure)
 	/usr/sbin/gforge-config
 
         # Patch Proftpd configuration files
 	/usr/lib/gforge/bin/install-ftp.sh configure-files
-	propose_update_install /etc/proftpd.conf
+#	propose_update_install /etc/proftpd.conf
 
 	# Clean debconf after ourselves
-	db_stop
+#	db_stop
 
         # Setup our FTP
 	/usr/lib/gforge/bin/install-ftp.sh configure 

@@ -3,9 +3,14 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
 init_debconf_from_mainconffile
 
 #DSFHELPER:get-pw-from-debconf#
+
+propose_update_install /etc/nss-pgsql.conf
+propose_update_install /etc/nsswitch.conf
+db_stop

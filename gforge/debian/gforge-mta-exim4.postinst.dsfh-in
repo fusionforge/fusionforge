@@ -25,20 +25,20 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
+#NODSFHELPER:replace-files#
 case "$1" in
     configure)
 
 	/usr/sbin/gforge-config
         # Patch Exim configuration files
 	/usr/lib/gforge/bin/install-exim4.sh configure-files
-	propose_update_install /etc/aliases
-	propose_update_install /etc/exim4/exim4.conf
-	propose_update_install /etc/exim4/exim4.conf.template
-	propose_update_install /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
+#	propose_update_install /etc/aliases
+#	propose_update_install /etc/exim4/exim4.conf
+#	propose_update_install /etc/exim4/exim4.conf.template
+#	propose_update_install /etc/exim4/conf.d/main/01_exim4-config_listmacrosdefs
 
 	# Clean debconf after ourselves
-	db_stop
+#	db_stop
 	
     ;;
 

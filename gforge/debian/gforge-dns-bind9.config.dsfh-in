@@ -3,6 +3,7 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -12,3 +13,6 @@ init_debconf_from_mainconffile
 #DSFHELPER:cvshost-variables#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
+
+propose_update_install /etc/bind/named.conf
+db_stop

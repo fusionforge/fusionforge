@@ -1,3 +1,9 @@
+gforge (4.0.2-1) unstable; urgency=low
+
+  * [Christian] Let's go for 4.0
+
+ -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
+
 gforge (3.3.0-60) unstable; urgency=low
 
   * [Christian] Added a call to migrateform.php and migraterbac.php in
@@ -23,8 +29,17 @@ gforge (3.3.0-60) unstable; urgency=low
     start it instead.
   * [Roland] Various fixes in several scripts.
   * [Christian] Added 20041104 and 20041108 to db-upgrade.pl
+  * [Christian] Added dependancy on php4-cli for gforge-db-postgresql
+  * [Christian] Change redirection from /dev/null to $tmp1 $tmp2 in
+    install-db.sh
+  * [Christian] Lintian cleanup
+  * [Christian] Renamed gforge/debian/dsf-helper/replace-files.postinst in
+    gforge/debian/dsf-helper/replace-files.config and moved debconf stuff from
+    postinst to config
+  * [Christian] Commented fileforge and filemove in rules not to install them
+    as there are not used right now
 
- -- Christian Bayle <bayle@debian.org>  Mon, 13 Dec 2004 00:20:02 +0100
+ -- Christian Bayle <bayle@debian.org>  Sat, 15 Jan 2005 15:30:33 +0100
 
 gforge (3.3.0-12) unstable; urgency=low
 

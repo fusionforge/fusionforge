@@ -3,6 +3,7 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:replace-files#
 #DSFHELPER:handle-mainconffile#
 
 create_mainconffile
@@ -23,3 +24,10 @@ init_debconf_from_mainconffile
 # [Disabled] DSFHELPER:dbpasswd-variables#
 # [Disabled] DSFHELPER:ldap-variables#
 # [Disabled] DSFHELPER:dbhost-variables#
+
+for flavour in apache apache-perl apache-ssl ; do
+	[ -e /etc/$flavour/httpd.conf ] && propose_update_install /etc/$flavour/httpd.conf
+done
+
+propose_update_install /etc/php4/apache/php.ini
+propose_update_install /etc/php4/cgi/php.ini
