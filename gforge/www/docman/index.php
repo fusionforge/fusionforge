@@ -44,13 +44,17 @@ if (!$language_id) {
 
 $df->setLanguageID($language_id);
 $d_arr =& $df->getDocuments();
+if (!$_arr || count($d_arr) <1){
+	$df->setLanguageId(0);	
+	$d_arr = &$df->getDocuments();
+}
 
 docman_header('Project Documentation','Project Documentation','docman','',$g->getPublicName());
 
 if (!$d_arr || count($d_arr) < 1) {
 	print "<b>This project has no visible documents.</b><p>";
 } else { 
-//		doc_droplist_count($group_id, $language_id);
+	doc_droplist_count($group_id, $language_id);
 
 	print "\n<ul>";
 	for ($i=0; $i<count($d_arr); $i++) {
