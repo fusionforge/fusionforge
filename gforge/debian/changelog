@@ -24,8 +24,10 @@ sourceforge (2.6-0+8+) unstable; urgency=low
   * [Roland] Added a "checkpoint" in db-upgrade.pl, so that we should now
     be able to provide upgrades between different releases in the 2.6
     series.
+  * [Roland] Added a totally rewritten Korean language translation file
+    provided by Soon-Son Kwon <kss@kldp.org>.  Many thanks to him.
 
- -- Roland Mas <lolando@debian.org>  Wed, 10 Apr 2002 16:20:31 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 10 Apr 2002 17:09:16 +0200
 
 sourceforge (2.6-0+8) unstable; urgency=low
 
