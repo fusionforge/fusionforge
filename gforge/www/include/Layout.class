@@ -460,14 +460,16 @@ if ($params['group']) {
 		if ($params['group']) {
 			// get group info using the common result set
 			$project =& group_get_object($params['group']);
-			if ($project->isError()) {
+			if ($project && is_object($project)) {
+				if ($project->isError()) {
 
-			} elseif (!$project->isProject()) {
+				} elseif (!$project->isProject()) {
 
-			} else {
-				$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
-				$TABS_TITLES[]=$project->getPublicName();
-				$selected=count($TABS_DIRS)-1;
+				} else {
+					$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
+					$TABS_TITLES[]=$project->getPublicName();
+					$selected=count($TABS_DIRS)-1;
+				}
 			}
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || strstr($GLOBALS['REQUEST_URI'],'/account/')) {
 			$selected=array_search("/my/", $TABS_DIRS);
@@ -499,6 +501,9 @@ if ($params['group']) {
 
 		// get group info using the common result set
 		$project =& group_get_object($group);
+		if (!$project || !is_object($project)) {
+			return;
+		}
 		if ($project->isError()) {
 			//wasn't found or some other problem
 			return;
