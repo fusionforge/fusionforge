@@ -1468,6 +1468,7 @@ project_admin	mail_admin	Administration des listes de diffusion
 project_admin	news_admin	Administration des annonces
 project_admin	packages	Paquet&nbsp;
 project_admin	project_information	Informations diverses sur le projet
+project_admin	scm_admin	Administration de la Gestion de configuration
 project_admin	section	Projet : $1
 project_admin	shell_server	Serveur shell (pour SSH)&nbsp;:&nbsp;
 project_admin	shell_server_group_directory	Répertoire système du groupe&nbsp;:&nbsp;
@@ -1838,6 +1839,7 @@ scm_index	modulename	module
 scm_index	nohistory	Ce projet n'a pas d'historique CVS
 scm_index	section	Projet : $1
 scm_index	title	SCM
+scm_index	admin	Administration
 search	artifact_author	Soumis par
 search	artifact_date	Date
 search	artifact_id	#

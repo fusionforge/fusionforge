@@ -48,7 +48,7 @@ function scm_header($params) {
 	echo $HTML->subMenu(
 		array(
 			$Language->getText('scm_index','title'),
-			$Language->getText('project_admin','scm_admin')
+			$Language->getText('scm_index','admin')
 		),
 		array(
 			'/scm/?group_id='.$params['group'],
