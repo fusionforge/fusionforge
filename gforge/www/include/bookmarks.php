@@ -35,8 +35,14 @@ function bookmark_add ($bookmark_url, $bookmark_title="") {
  * @param		string	The new or existing bookmark title
  */
 function bookmark_edit ($bookmark_id, $bookmark_url, $bookmark_title) {
-	db_query("UPDATE user_bookmarks SET bookmark_url='".htmlentities($bookmark_url)."', "
+	$result = db_query("UPDATE user_bookmarks SET bookmark_url='".htmlentities($bookmark_url)."', "
 		."bookmark_title='".htmlspecialchars($bookmark_title)."' where bookmark_id='$bookmark_id' AND user_id='". user_getid() ."'");
+	if (!$result) {
+		echo db_error();
+		return false;
+	} else {
+		return true;
+	}
 }
 
 /**
