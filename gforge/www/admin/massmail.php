@@ -135,7 +135,7 @@ echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row = db_fetch_array($res)) {
 	echo '
-	<tr bgcolor="'.html_get_alt_row_color($i++).'">
+	<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 	<td>&nbsp;<a href="massmail-del.php?id='.$row['id'].'"></a></td>
 	<td>'.$row['id'].'</td>
 	<td>'.$row['type'].'</td>

@@ -36,7 +36,7 @@ function member_role_box($name, $checked) {
 // the background noise.
 function render_row($name, $val, $i) {
 	print '
-	<tr bgcolor="'.html_get_alt_row_color($i).'">
+	<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i).'>
 	<td>'.$name.'</td>
 	<td>'.$val.'</td></tr>
 	';
@@ -318,7 +318,7 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	for ($i=0; $i<$rows; $i++) {
 		print '
 		<INPUT TYPE="HIDDEN" NAME="updateperms['.$i.'][0]" VALUE="'. db_result($res,$i,'group_artifact_id').'">
-		<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+		<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 
 		<TD>'. db_result($res,$i,'name') .'</TD>
 

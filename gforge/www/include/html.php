@@ -158,20 +158,6 @@ function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
 }
 
 /**
- * html_get_alt_row_color() - Get an alternating row color for tables.
- *
- * @param		int		Row number
- */
-function html_get_alt_row_color ($i) {
-	GLOBAL $HTML;
-	if ($i % 2 == 0) {
-		return '#FFFFFF';
-	} else {
-		return $HTML->COLOR_LTBACK1;
-	}
-}
-
-/**
  * html_build_select_box_from_array() - Takes one array, with the first array being the "id"
  * or value and the array being the text you want displayed.
  *

@@ -114,7 +114,7 @@ if ($pattern) {
 
 	while ($row = db_fetch_array($res)) {
 		echo '
-		<tr bgcolor="'.html_get_alt_row_color($i++).'">
+		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>&nbsp;</td>
 		<td>'.$row['user_id'].'</td>
 		<td><a href="unsubscribe.php?submit=1&user_name='.$row['user_name'].'">'.$row['user_name'].'</a></td>

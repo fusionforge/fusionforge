@@ -302,7 +302,7 @@ function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	
 		$i = $offset;	
 		while ( $row = db_fetch_array($res) ) {
-			print	'<TR bgcolor="' . html_get_alt_row_color($i) . '">'
+			print	'<TR ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>'
 				. '<TD>' . ($i + 1) . '. <A HREF="/project/stats/?group_id=' . $row["group_id"] . '">' . $row["group_name"] . '</A></TD>'
 				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["site_views"],0 ) . '</TD>'
 				. '<TD align="right">&nbsp;&nbsp;' . number_format( $row["subdomain_views"],0 ) . '</TD>'
@@ -383,7 +383,7 @@ function stats_site_projects_daily( $span ) {
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 
-			print	'<TR bgcolor="' . html_get_alt_row_color($i) . '">'
+			print	'<TR ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>'
 				. '<TD>' . gmstrftime("%d %b %Y", mktime(0,0,1,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4)) ) . '</TD>'
 				. '<TD align="right">' . number_format( $row["site_page_views"],0 ) . '</TD>'
 				. '<TD align="right">' . number_format( $row["subdomain_views"],0 ) . '</TD>'
@@ -439,7 +439,7 @@ function stats_site_projects_monthly() {
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 
-			print	'<TR bgcolor="' . html_get_alt_row_color($i) . '">'
+			print	'<TR ' . $GLOBALS['HTML']->boxGetAltRowStyle($i) . '>'
 				. '<TD>' . $row['month'] . '</TD>'
 				. '<TD align="right">' . number_format( $row["site_page_views"],0 ) . '</TD>'
 				. '<TD align="right">' . number_format( $row["subdomain_views"],0 ) . '</TD>'

@@ -68,7 +68,7 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.db_result($result,$i,'snippet_version_id').
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.db_result($result,$i,'snippet_version_id').
 				'</TD><TD><A HREF="/snippet/download.php?type=snippet&id='.
 				db_result($result,$i,'snippet_version_id').'"><B>'.
 				db_result($result,$i,'version').'</B></A></TD><TD>'. 
@@ -164,7 +164,7 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/snippet/detail.php?type=packagever&id='.
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/snippet/detail.php?type=packagever&id='.
 				db_result($result,$i,'snippet_package_version_id').'"><B>'.
 				db_result($result,$i,'version').'</B></A></TD><TD>'.
 				date($sys_datefmt,db_result($result,$i,'date')).'</TD><TD>'.

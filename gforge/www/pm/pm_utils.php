@@ -337,7 +337,7 @@ function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) 
 
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color ($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD><A HREF="/pm/task.php?func=detailtask&project_task_id='.
 				db_result($result, $i, 'project_task_id').
 				'&group_id='.$group_id.
@@ -381,7 +381,7 @@ function pm_show_task_details ($project_task_id) {
 
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color ($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD>'. nl2br(db_result($result, $i, 'old_value')).'</TD>
 				<TD VALIGN="TOP">'.date($sys_datefmt,db_result($result, $i, 'date')).'</TD>
 				<TD VALIGN="TOP">'.db_result($result, $i, 'user_name').'</TD></TR>';
@@ -427,7 +427,7 @@ function pm_show_task_history ($project_task_id) {
 			$field=db_result($result, $i, 'field_name');
 
 			echo '
-				<TR BGCOLOR="'. html_get_alt_row_color ($i) .'"><TD>'.$field.'</TD><TD>';
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.$field.'</TD><TD>';
 
 			if ($field == 'status_id') {
 

@@ -87,7 +87,7 @@ if ($usersearch) {
 
 		while ($row = db_fetch_array($result)) {
 			print '
-				<tr bgcolor="'.html_get_alt_row_color($i++).'">
+				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 				<td><a href="useredit.php?user_id='.$row['user_id'].'">'.$row['user_id'].'</a></td>
 				<td>'.format_name($row['user_name'], $row['status']).'</td>
 				<td>'.$row['realname'].'</td>
@@ -151,7 +151,7 @@ if ($groupsearch) {
 			}
 			
 			print '
-				<tr bgcolor="'.html_get_alt_row_color($i++).'">
+				<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 				<td><a href="groupedit.php?group_id='.$row['group_id'].'">'.$row['group_id'].'</a></td>
 				<td>'.format_name($row['unix_group_name'], $row['status']).'</td>
 				<td>'.$row['group_name'].'</td>

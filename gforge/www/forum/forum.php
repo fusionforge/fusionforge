@@ -203,7 +203,7 @@ if ($forum_id) {
 			$msg =& $msg_arr["0"][$i];
 			$total_rows++;
 
-			$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'">
+			$ret_val .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 				<TD><A HREF="/forum/message.php?msg_id='.$msg->getID().'">'.
 				html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
 			/*	  
@@ -275,7 +275,7 @@ if ($forum_id) {
 		$i=0;
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 			$ret_val .= '
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/forum/forum.php?thread_id='.
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/forum/forum.php?thread_id='.
 				$row['thread_id'].'&forum_id='.$forum_id.'">'.
 				html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
 			/*	  

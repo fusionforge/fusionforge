@@ -136,7 +136,7 @@ if ($msg_id) {
 			$ah_begin='';
 			$ah_end='';
 		}
-		$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'">
+		$ret_val .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
 			<TD>'. $ah_begin .
 			html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
 		/*

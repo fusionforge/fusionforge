@@ -188,14 +188,14 @@ if ($group_id) {
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="3"><B>'. $farr[$i]->getName() .'</B></TD></TR>';
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3"><B>'. $farr[$i]->getName() .'</B></TD></TR>';
 				echo '
 					<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
 					<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
 					<INPUT TYPE="HIDDEN" NAME="change_status" VALUE="y">
 					<INPUT TYPE="HIDDEN" NAME="group_forum_id" VALUE="'. $farr[$i]->getID() .'">
 					<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 					<TD>
 						<FONT SIZE="-1">
 						<B>Allow Anonymous Posts?</B><BR>
@@ -213,14 +213,14 @@ if ($group_id) {
 						<FONT SIZE="-1">
 						<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Update Info">
 					</TD></TR>
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>
 						<B>Forum Name:</B><BR>
 						<INPUT TYPE="TEXT" NAME="forum_name" VALUE="'. $farr[$i]->getName() .'" SIZE="20" MAXLENGTH="30">
 					</TD><TD COLSPAN="2">
 						<B>Email All Posts To:</B><BR>
 						<INPUT TYPE="TEXT" NAME="send_all_posts_to" VALUE="'. $farr[$i]->getSendAllPostsTo() .'" SIZE="30" MAXLENGTH="50">
 					</TD></TR>
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="3">
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3">
 						<B>Description:</B><BR>
 						<INPUT TYPE="TEXT" NAME="description" VALUE="'. $farr[$i]->getDescription() .'" SIZE="40" MAXLENGTH="80"><BR>
 					</TD></TR></FORM>';

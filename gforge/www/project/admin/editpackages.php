@@ -132,7 +132,7 @@ if (!$res || $rows < 1) {
 		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
 		<INPUT TYPE="HIDDEN" NAME="func" VALUE="update_package">
 		<INPUT TYPE="HIDDEN" NAME="package_id" VALUE="'. db_result($res,$i,'package_id') .'">
-		<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+		<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<TD NOWRAP ALIGN="center">
 				<FONT SIZE="-1">
 					<A HREF="qrs.php?package_id='. 

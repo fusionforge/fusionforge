@@ -233,7 +233,7 @@ class ForumHTML extends Error {
 				$total_rows++;
 
 				$ret_val .= '
-					<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD NOWRAP>';
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><TD NOWRAP>';
 				/*
 					How far should it indent?
 				*/

@@ -62,7 +62,7 @@ if ($diary_user) {
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="'. $PHP_SELF .'?diary_id='.
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="'. $PHP_SELF .'?diary_id='.
 				db_result($result,$i,'id').'&diary_user='. $diary_user .'">'.db_result($result,$i,'summary').'</A></TD>'.
 				'<TD>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</TD></TR>';
 		}

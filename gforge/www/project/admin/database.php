@@ -193,7 +193,7 @@ if (db_numrows($res_db) > 0) {
 	while ($row_db = db_fetch_array($res_db)) {
 
 		print '
-			<tr bgcolor="'.html_get_alt_row_color($i++).'">
+			<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 
 			<td>'.$row_db['dbsoftware'].'</td>
 			<td>'.$row_db['statename'].'</td>

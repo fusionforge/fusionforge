@@ -153,7 +153,7 @@ if (session_loggedin()) {
 		echo $HTML->boxTop('Snippets In This Package');
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD ALIGN="MIDDLE">
 				<A HREF="/snippet/delete.php?type=frompackage&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'&snippet_package_version_id='.$snippet_package_version_id.
