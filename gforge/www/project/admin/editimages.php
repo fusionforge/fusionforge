@@ -15,7 +15,7 @@
 // Quota in bytes
 $QUOTA = 1048576;
 
-require_once('pre.php');    
+require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
@@ -23,7 +23,7 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 function check_file_size($size) {
 	global $feedback;
 	global $Language;
-	
+
 	if (($size > 20) && ($size < 256000)) {
 		return true;
 	} else {
@@ -55,29 +55,29 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 		$width = ((!$width) ? "0" : $width);
 		$height = ((!$height) ? "0" : $height);
 		if (!$id) {
-			$sql="	INSERT INTO db_images 
-					(group_id,description,bin_data, 
-					 filename,filesize,filetype, 
-					 width,height,upload_date,version) 
-					VALUES 
-					('$group_id','$description', 
-					 '$data','$input_file_name', 
-					 '$size','$input_file_type', 
+			$sql="	INSERT INTO db_images
+					(group_id,description,bin_data,
+					 filename,filesize,filetype,
+					 width,height,upload_date,version)
+					VALUES
+					('$group_id','$description',
+					 '$data','$input_file_name',
+					 '$size','$input_file_type',
 					 '$width','$height','$curtime',1)";
 		} else {
-			$sql="	UPDATE db_images 
-					SET description='$description', 
-					 bin_data='$data', 
-					 filename='$input_file_name', 
-					 filesize='$size', 
-					 filetype='$input_file_type', 
-					 width='$width', 
-					 height='$height', 
+			$sql="	UPDATE db_images
+					SET description='$description',
+					 bin_data='$data',
+					 filename='$input_file_name',
+					 filesize='$size',
+					 filetype='$input_file_type',
+					 width='$width',
+					 height='$height',
 					 upload_date='$curtime',
 					 version=version+1
-					WHERE group_id='$group_id' 
+					WHERE group_id='$group_id'
 					AND id='$id' ";
-		}	
+		}
 
 		$res = db_query($sql);
 
@@ -128,10 +128,10 @@ if ($submit) {
 
 				// Just replace description/mime type
 
-				$res = db_query("UPDATE db_images 
-						SET description='$description', 
-						 filetype='$filetype' 
-						WHERE group_id='$group_id' 
+				$res = db_query("UPDATE db_images
+						SET description='$description',
+						 filetype='$filetype'
+						WHERE group_id='$group_id'
 						AND id='$id' ");
 
 				if (!$res || db_affected_rows($res) < 1) {
@@ -148,8 +148,8 @@ if ($submit) {
 				// mime type
 
 				//see if they have too many data in the system
-				$res=db_query("	SELECT sum(filesize) 
-						WHERE group_id='$group_id' 
+				$res=db_query("	SELECT sum(filesize)
+						WHERE group_id='$group_id'
 						AND id<>'$id'");
 
 				$size = @filesize($input_file);
@@ -163,7 +163,7 @@ if ($submit) {
 
 				}
 			}
-			
+
 		}
 	}
 }
@@ -176,9 +176,9 @@ echo '
 ';
 
 if ($mode == "edit") {
-	$result=db_query("	SELECT * 
-				FROM db_images 
-				WHERE group_id='$group_id' 
+	$result=db_query("	SELECT *
+				FROM db_images
+				WHERE group_id='$group_id'
 				AND id='$id'");
 
 	if (!$result || db_numrows($result)!=1) {
@@ -201,7 +201,7 @@ if ($mode == "edit") {
 	<input type="text" name="description" size="40" maxlength="255" value="'.db_result($result,$i,'description').'" />
 	</p>
 	<p>
-	<strong>'.$Language->getText('project_admin_editimages','mime_type').'MIME Type:</strong><br />
+	<strong>'.$Language->getText('project_admin_editimages','mime_type').':</strong><br />
 	<input type="text" name="filetype" size="40" maxlength="255" value="'.db_result($result,$i,'filetype').'" />
 
 	<input type="hidden" name="edit" value="1" />
@@ -211,9 +211,9 @@ if ($mode == "edit") {
 	</form></p>
 	';
 } else {
-	$result=db_query("	SELECT * 
-				FROM db_images 
-				WHERE group_id='$group_id' 
+	$result=db_query("	SELECT *
+				FROM db_images
+				WHERE group_id='$group_id'
 				ORDER BY id");
 
 	echo '<h4>'.$Language->getText('project_admin_editimages','add_data').'</h4>
@@ -255,7 +255,7 @@ for ($i=0; $i<$rows; $i++) {
 		$dims = '&nbsp;';
 	}
 
-	echo '	  
+	echo '
 	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 	.'<td align="center">'
 	 .'<a href="'. $PHP_SELF .'?submit=1&amp;group_id='.$group_id.'&amp;remove=1&amp;id='
