@@ -1,3 +1,7 @@
+2004-09-13  Guillaume Smet <guillaume-gforge@smet.org>
+	
+	* fixed [#822] Can't send mail with ssmtp
+
 2004-09-13  Christian Bayle <bayle@aist.enst.fr>
 
 	* Reintroduce LDAP stuffs in Group.class and removal of sys_use_ldap
