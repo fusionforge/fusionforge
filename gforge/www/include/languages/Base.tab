@@ -1928,7 +1928,7 @@ register	invalid_full_name	Invalid full name
 register	invalid_unix_name	Invalid unix name
 register	license_type	Public domain</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><br/ ><strong>Your License:</strong><br />
 register	maximum_description	Maximum length for Project Description is 255 chars
-register	more_license_description	Please give more comprehensive licensing description"
+register	more_license_description	Please give more comprehensive licensing description
 register	no_license_chosen	You do not have chosen a license
 register	other_license	If you selected "other", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.
 register	project_description	<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
