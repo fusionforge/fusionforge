@@ -26,9 +26,6 @@ gforge/www/images/ic/taskman16b.png -text
 gforge/www/images/ic/trash-x.png -text
 gforge/www/images/ic/trash.png -text
 gforge/www/images/ic/xmail16w.png -text
-gforge/www/images/others/gnome1.png svneol=native#unset
-gforge/www/images/others/kde-logotp3.png svneol=native#unset
-gforge/www/images/others/suse_g_sm.png svneol=native#unset
 gforge/www/include/group-model-er-diagram.sda svneol=native#unset
 gforge/www/people/people-er-diagram.sda svneol=native#unset
 gforge/www/pm/pm-er-diagram.sda svneol=native#unset
