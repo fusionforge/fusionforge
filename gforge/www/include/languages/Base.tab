@@ -933,15 +933,54 @@ include_toolreport	open	Open
 include_toolreport	project_lifespan	Project lifespan
 include_toolreport	show	Show
 index	welcome	Welcome
+mail	archives	$1 Archives
+mail	choose_a_list	<p>Choose a list to browse, search, and post messages.</p>
+mail	external_administration	Subscribe/Unsubscribe/Preferences
+mail	help_to_request	Project administrators use the admin link to request mailing lists.
+mail	mailinglists_for	Mailing Lists for $1
+mail	no_list_found	No Lists found for $1
 mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http://www.list.org">GNU Mailman</a>.  Thanks to the Mailman and <a href="http://www.python.org">Python</a> crews for excellent software.</p>
 mail	section	Project: $1
 mail	title	Mailing Lists
+mail	unable_to_get_lists	Unable to get the lists
+mail_admin	add_list	Add Mailing List
+mail_admin	error_getting_list	Error getting the list
+mail_admin	pagetitle	Mailing List Administration
 mail_admin	section	Mailing Lists
 mail_admin	title	Mailing List Admin
-mail_admin_add_list	section	Mailing List Admin
-mail_admin_add_list	title	Add List
-mail_admin_change_status	section	Mailing List Admin
-mail_admin_change_status	title	Admin / Update Lists
+mail_admin	update_list	Administrate/Update Lists
+mail_admin_addlist	form_addlist	Add This List
+mail_admin_addlist	form_description	Description:
+mail_admin_addlist	existing_mailing_lists	Existing mailing lists
+mail_admin_addlist	form_ispublic	Is Public?
+mail_admin_addlist	form_name	Mailing List Name:
+mail_admin_addlist	list_added	List Added
+mail_admin_addlist	pagetitle	Add a Mailing List
+mail_admin_addlist	list_information	<p>Lists are named in this manner:<br /><strong>projectname-listname@$1</strong></p><p>It will take <strong><span style="color:red">6-24 Hours</span></strong> for your list to be created.</p>
+mail_admin_addlist	section	Mailing List Admin
+mail_admin_addlist	title	Add List
+mail_admin_addlist	warning	Once created, this list will ALWAYS be attached to your project and cannot be deleted!
+mail_admin_updatelist	admin_in_mailman	[Administrate this list in GNU Mailman]
+mail_admin_updatelist	form_description	Description:
+mail_admin_updatelist	form_ispublic	Is Public?
+mail_admin_updatelist	form_updatelist	Update
+mail_admin_updatelist	information	You can administrate lists from here. Please note that private lists can still be viewed by members of your project, but are not listed on $1.
+mail_admin_updatelist	list	List
+mail_admin_updatelist	list_updated	List Updated Successfully
+mail_admin_updatelist	no_list_found	No lists found for this project
+mail_admin_updatelist	section	Mailing List Admin
+mail_admin_updatelist	status	Status
+mail_admin_updatelist	title	Admin / Update Lists
+mail_common	creation_mail_body	A mailing list will be created on $1 in 6-24 hours \nand you are the list administrator.\n\nThis list is: $3@$2 .\n\nYour mailing list info is at:\n$4 .\n\nList administration can be found at:\n$5 .\n\nYour list password is: $6 .\nYou are encouraged to change this password as soon as possible.\n\nThank you for registering your project with $1.\n\n-- the $1 staff\n
+mail_common	creation_mail_subject	$1 New Mailing List
+mail_common	error_min_name_length	Must Provide List Name That Is 4 or More Characters Long
+mail_common	error_invalid_name	Invalid List Name
+mail_common	error_invalid_group_list_id	Invalid list id
+mail_common	error_list_already_exists	List Already Exists
+mail_common	mailing_list	Mailing list
+mail_common	mailing_lists	Mailing lists
+mail_utils	admin	Admin
+mail_utils	turned_off	This Project Has Turned Off The Mailing Lists
 menu	about_gforge	About $1
 menu	account_maintenance	Account Maintenance
 menu	admin	Admin
