@@ -27,8 +27,7 @@ XML Exports
 <h4>News Data</h4>
 <ul>
 <li><a href="rss_sfnews.php"><?php echo $GLOBALS['sys_name']; ?> Front Page/Project News</a>
-(<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
-<a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>
+(<a href="http://web.resource.org/rss/1.0/spec">RSS 1.0</a>)</li>
 <li><a href="rss_sfnewreleases.php"><?php echo $GLOBALS['sys_name']; ?> New Releases</a>
 (<a href="http://my.netscape.com/publish/formats/rss-spec-0.91.html">RSS 0.91</a>,
 <a href="http://my.netscape.com/publish/formats/rss-0.91.dtd">&lt;rss-0.91.dtd&gt;</a>)</li>

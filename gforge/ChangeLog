@@ -1,3 +1,8 @@
+2004-06-30  Tom Copeland <tom@infoether.com>
+
+	* www/exports/rss_sfnews.php, index.html: Applied patch #831:
+	more detailed RSS feed
+
 2004-06-29  Tom Copeland <tom@infoether.com>
 
 	* common/pm/ProjectTask.class: Applied patch #825:
