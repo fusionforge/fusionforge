@@ -208,16 +208,7 @@ class ArtifactFile extends Error {
 	 *	@return binary
 	 */
 	function &getData() {
-//
-//	sorry - the data conversion for sf.net was incorrect
-//	we needed to actually unconvert the htmlspecialchars() 
-//	before base64_encode()ing the data
-//
-		if (($GLOBALS['sys_default_domain'] == 'sourceforge.net') && ($this->getID() < 3976)) {
-			return util_unconvert_htmlspecialchars(base64_decode($this->data_array['bin_data']));
-		} else {
-			return base64_decode($this->data_array['bin_data']);
-		}
+		return base64_decode($this->data_array['bin_data']);
 	}
 
 	/**
