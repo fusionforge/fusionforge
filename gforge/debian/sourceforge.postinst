@@ -44,6 +44,15 @@ case "$1" in
 		echo "$i=$RET" >> $mainconffile
 	    fi
 	done
+	# Manage sys_lang and sys_theme in conf file
+	# Not to have it removed at every install
+	if ! grep -q "^sys_lang=" $mainconffile ; then
+		echo "sys_lang=English" >> $mainconffile
+	fi
+	if ! grep -q "^sys_theme=" $mainconffile ; then
+		echo "sys_theme=forged" >> $mainconffile
+	fi
+
 	/usr/sbin/sourceforge-config
     	
     	db_get sourceforge/do_config

@@ -122,7 +122,12 @@ $sys_name="{system_name}";
  
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
+// Themeing related vars... Some of this needs to change in the session stuff
+// The theme base directory, everything else is handled by theme_sysinit()
 $sys_themeroot=$sys_urlroot."themes/";
+// If you want an other default theme or language
+//$sys_theme='savannah';
+//$sys_lang='French';
 
 // Akamization of images
 $sys_images_url="//{domain_name}/";

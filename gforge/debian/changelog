@@ -1,8 +1,13 @@
 sourceforge (2.5-33+) unstable; urgency=low
 
   * [Christian] made that adduser don't break postinst
+  * [Otavio] Added the possibility to change default language using a
+    system variable called $sys_lang (look in /etc/sourceforge/local.inc).
+  * [Otavio] Added the commentary in /etc/sourceforge/local.inc about
+    $sys_theme.
+  * [Christian] Applied Otavio patch and updated postinst consequantly
 
- -- Christian Bayle <bayle@debian.org>  Sat, 28 Sep 2002 19:53:53 +0200
+ -- Christian Bayle <bayle@debian.org>  Sat, 28 Sep 2002 22:53:29 +0200
 
 sourceforge (2.5-33) unstable; urgency=low
 
