@@ -136,26 +136,26 @@ if (db_numrows($result1)>0) {
 		}
 ?>
 <td>
-	<a href="/admin/editdouble.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
+	<a href="editdouble.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
 </td>
 <td>
-	<a href="/admin/seetranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
-	<a href="/admin/edittranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
+	<a href="seetranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
+	<a href="edittranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
 </td>
 <td>
-	<a href="/admin/seenotranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
-	<a href="/admin/editnotranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
+	<a href="seenotranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
+	<a href="editnotranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
 </td>
 <td>
-	<a href="/admin/seenotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">
+	<a href="seenotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">
 	<? if ($rate2!=0) echo "[see]";?></a>
-	<a href="/admin/editnotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">
+	<a href="editnotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">
 	<? if ($rate2!=0) echo "[edit]";?></a>
 </td>
 <td>
-	<a href="/admin/seetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
-	<a href="/admin/edittabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
-	<a href="/admin/gettabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[get]</a>
+	<a href="seetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
+	<a href="edittabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
+	<a href="gettabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[get]</a>
 </td>
 <?php
 		echo "</tr>";

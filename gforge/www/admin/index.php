@@ -153,7 +153,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="edit_frs_processor.php"><?php echo $Language->getText('admin_index','add_edit_delete_processors'); ?></a></li>
 	<li><a href="edit_theme.php"><?php echo $Language->getText('admin_index','add_edit_delete_themes'); ?></a></li>
 	<li><a href="edit_licenses.php"><?php echo $Language->getText('admin_index','add_edit_delete_licenses'); ?></a></li>
-	<li><a href="loadtabfiles.php"><?php echo $Language->getText('admin_index','translation_file_tool'); ?></a></li>
+	<li><a href="/admin/languages/loadtabfiles.php"><?php echo $Language->getText('admin_index','translation_file_tool'); ?></a></li>
 	<li><a href="/stats/lastlogins.php"><?php echo $Language->getText('admin_index','recent_logins'); ?></a></li>
 	<li><a href="cronman.php"><?php echo $Language->getText('admin_index','cronman'); ?></a></li>
 	<?php plugin_hook("site_admin_option_hook", false); ?>
