@@ -37,6 +37,8 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     function.  Thanks, Chris.
   * [Roland] Also applied patch #418 from same Chris Rudd to help
     portability on Cygwin platforms.  Thanks, Chris.
+  * [Roland] utils/new_parse.pl: Applied patch from Manik Surtani
+    <manik.surtani@conchango.com> fixing a few paths.
 
  --
 

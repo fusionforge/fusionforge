@@ -206,8 +206,8 @@ sub delete_user {
 	my $this_user = shift(@_);
 	
 	print("Deleting User : $this_user\n");
-	system("/bin/mv /var/lib/sourceforge/cvsroot/home/users/$username /var/lib/sourceforge/cvsroot/home/users/deleted_$username");
-	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/home/users/deleted_$username");
+	system("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username");
+	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username");
 }
 
 #############################
@@ -270,7 +270,7 @@ sub delete_group {
 	
 	if (substr($hostname,0,3) ne "cvs") {
 		print("Deleting Group: $this_group\n");
-		system("/bin/mv /var/lib/sourceforge/cvsroot/home/groups/$this_group /var/lib/sourceforge/cvsroot/home/groups/deleted_group_$this_group");
-		system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_group.tar.gz /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/sourceforge/home/groups/deleted_group_$this_group");
+		system("/bin/mv /var/lib/sourceforge/chroot/home/groups/$this_group /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group");
+		system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_group.tar.gz /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group");
 	}
 }
