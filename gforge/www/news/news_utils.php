@@ -79,6 +79,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		$return .= $Language->getText('news_utils', 'nonews');
 		$return .= db_error();
 	} else {
+		if (!$limit) $return .= '<ul>';
 		for ($i=0; $i<$rows; $i++) {
 			if ($show_summaries && $limit) {
 				//get the first paragraph of the story
@@ -149,6 +150,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				$return .= '</ul><hr width="100%" size="1" />'."\n";
 			}
 		}
+		if (!$limit) $return .= '</ul>';
 		if ($group_id != $sys_news_group) {
 			$archive_url='/news/?group_id='.$group_id;
 		} else {
