@@ -62,7 +62,7 @@ function bug_user_project_box ($name='project_id',$user_id=false,$checked='xyxy'
 			return html_build_select_box_from_arrays($group_id, $checked, $name, $checked, false);
 		}	
 		else {
-			return html_build_select_box ($result,$name,$checked,true,$text_100);
+			return html_build_select_box ($result,$name,$checked,false,$text_100);
 		}	
 	}
 }
