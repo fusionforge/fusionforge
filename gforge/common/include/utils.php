@@ -106,7 +106,7 @@ function util_send_jabber($to,$subject,$body) {
 	for ($i=0; $i<count($to_arr); $i++) {
 		if ($to_arr[$i]) {
 			//echo '<BR>Sending Jabbers To: '.$to_arr[$i];
-			if (!$JABBER->SendMessage($to_arr[$i], "normal", NULL, array("body" => $body))) {
+			if (!$JABBER->SendMessage($to_arr[$i], "normal", NULL, array("body" => $body,"subject"=>$subject))) {
 				echo '<BR>Error Sending to '.$to_arr[$i];
 			}
 		}
@@ -613,8 +613,11 @@ function validate_email ($address) {
  *
  */
 function util_is_valid_filename ($file) {
-	if (ereg("[]~`! ~@#\"$%^,&*();=|[{}<>?/]",$file)) {
-		return false;
+    //bad char test
+    $invalidchars = eregi_replace("[-A-Z0-9\.]","",$file);
+
+    if (!empty($invalidchars)) {
+        return false;
 	} else {
 		if (strstr($file,'..')) {
 			return false;

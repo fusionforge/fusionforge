@@ -229,7 +229,7 @@ class Layout extends Error {
 <?php
 
 
-if ($params['toptab'] && $params['group']) {
+if ($params['group']) {
 
 			?>
 			<TR>

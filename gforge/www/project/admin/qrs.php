@@ -1,25 +1,18 @@
 <?php
 /**
-  *
-  * Project Admin: Quick Release System (QRS)
-  *
-  * This page allows one-step release of a file.
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id: qrs.php,v 1.15 2001/06/13 09:32:38 pfalcon Exp $
-  *
-  */
+ * GForge File Release Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id: forum_utils.php.patched,v 1.1.2.1 2002/11/30 09:57:57 cbayle Exp $
+ */
 
-
-//$sys_upload_dir
-
-
-require_once('pre.php');    
+require_once('pre.php');	
 require_once('www/project/admin/project_admin_utils.php');
-require_once('frs.class');
+require_once('common/frs/FRSPackage.class');
+require_once('common/frs/FRSRelease.class');
+require_once('common/frs/FRSFile.class');
 
 /*
 	Quick file release system , Darrell Brogdon, SourceForge, Aug, 2000
@@ -29,17 +22,16 @@ require_once('frs.class');
 
 session_require(array('group'=>$group_id));
 
-$project =& group_get_object($group_id);
+$g =& group_get_object($group_id);
 
-exit_assert_object($project, 'Project');
+exit_assert_object($g, 'Project');
 
-$perm =& $project->getPermission(session_get_user());
+$perm =& $g->getPermission(session_get_user());
 
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
 }
 
-project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 
 if( $submit ) {
 	if (!$release_name) {
@@ -48,130 +40,80 @@ if( $submit ) {
 	} else 	if (!$package_id) {
 		$feedback .= ' Must select a package. ';
 	} else {
-		//create a new release of this package
 
-		//see if this package belongs to this project
-		$res1=db_query("SELECT * FROM frs_package WHERE package_id='$package_id' AND group_id='$group_id'");
-		if (!$res1 || db_numrows($res1) < 1) {
-			$feedback .= ' | Package Doesn\'t Exist Or Isn\'t Yours ';
-			echo db_error();
+		//
+		//	Get the package
+		//
+		$frsp = new FRSPackage($g,$package_id);
+		if (!$frsp || !is_object($frsp)) {
+			exit_error('Error','Could Not Get FRSPackage');
+		} elseif ($frsp->isError()) {
+			exit_error('Error',$frsp->getErrorMessage());
 		} else {
-			db_begin();
-			//package_id was fine - now insert the release
-			$res=db_query("INSERT INTO frs_release (package_id,name,notes,changes,status_id,preformatted,release_date,released_by) ".
-				"VALUES ('$package_id','$release_name','$release_notes','$release_changes','$status_id','$preformatted','". time() ."','". user_getid() ."')");
-			if (!$res) {
-				$feedback .= ' | Adding Release Failed ';
-				echo db_error();
-				db_rollback();
-				//insert failed - go back to definition screen
-			} else {
-				//release added - now show the detail page for this new release
-				$release_id=db_insertid($res,'frs_release','release_id');
-				$feedback .= ' Added Release <BR>';
-			}
-		}
-
-		/*
-			Add a file to this release
-
-			First, make sure this release belongs to this group
-
-			iterate the following for each file:
-
-			Second see if the filename is legal
-			Third see if they already have a file by the same name
-			Fourth if file actually exists, physically move the file on garbage to the new location
-			Fifth insert it into the database
-		*/
-		$group_unix_name=group_getunixname($group_id);
-
-		if ($userfile && is_uploaded_file($userfile)) {
-			// Check to see if the user uploaded a file instead of selecting an existing one.
-			// If so then move it to the 'incoming' dir where we proceed as usual.
-			$file_name = $userfile_name;
-			$feedback .= ' Adding File ';
-			//see if this release belongs to this project
-			$res1=db_query("SELECT frs_package.package_id FROM frs_package,frs_release ".
-						   "WHERE frs_package.group_id='$group_id' ".
-						   "AND frs_release.release_id='$release_id' ".
-						   "AND frs_release.package_id=frs_package.package_id");
-			if (!$res1 || db_numrows($res1) < 1) {
-				//release not found for this project
-				$feedback .= " | Not Your Release Or Release Doesn't Exist ";
-			} else {
-				$now=time();
-				//see if filename is legal before adding it
-				if (!util_is_valid_filename ($file_name)) {
-					$feedback .= " | Illegal FileName: $file_name ";
-					db_rollback();
+			if ($userfile && is_uploaded_file($userfile)) {
+				//
+				//	Create a new FRSRelease in the db
+				//
+				$frsr = new FRSRelease($frsp);
+				if (!$frsr || !is_object($frsr)) {
+					exit_error('Error','Could Not Get FRSRelease');
+				} elseif ($frsr->isError()) {
+					exit_error('Error',$frsr->getErrorMessage());
 				} else {
-					//see if they already have a file by this name
-
-					$res1=db_query("SELECT frs_package.package_id FROM frs_package,frs_release,frs_file ".
-						"WHERE frs_package.group_id='$group_id' ".
-						"AND frs_release.release_id=frs_file.release_id ".
-						"AND frs_release.package_id=frs_package.package_id ".
-						"AND frs_file.filename='$file_name'");
-					if (!$res1 || db_numrows($res1) < 1) {
-
-						/*
-							Move the file into place
-						*/
-						$new_file=$sys_upload_dir.$group_unix_name.'/'.$userfile_name;
-						system("/bin/mkdir $sys_upload_dir$group_unix_name/");
-						if (!move_uploaded_file($userfile, $new_file)) {
-							$feedback .= ' | Could Not Move Uploaded File ';
-							db_rollback();
-						} else {
-							//add the file to the database
-							$res=db_query("INSERT INTO frs_file ".
-								"(release_time,filename,release_id,file_size,post_date, type_id, processor_id) ".
-								"VALUES ('$now','$file_name','$release_id','"
-								. filesize($new_file) 
-								. "','$now', '$type_id', '$processor_id') ");
-							if (!$res) {
-								$feedback .= " | Couldn't Add FileName: $file_name ";
-								echo db_error();
-								db_rollback();
-							} else {
-								// Finally, send out email notification
-								$frs = new FRS($group_id);
-						        $frs->frsSendNotice($group_id, $release_id, $package_id);
-						        if($frs->isError() ) {
-									$feedback .= ' | '.$frs->getErrorMessage();
-								} else {
-						           	$feedback .= '<br>Email Notice Sent';
-									?>
-									<p>
-									You can now <A HREF="/project/admin/editrelease.php?release_id=<?php echo "$release_id&group_id=$group_id&package_id=$package_id"; ?>"><B>Add Files To This Release</B></A> if you wish, 
-									or edit the release.
-									<p>
-									Please note that file(s) may not appear immediately
-									on the <a href="/project/showfiles.php?group_id=<?php echo $group_id;?>">
-									download page</a>. Allow several hours for propogation.
-									</p>
-									<?php
-									db_commit();
-								}
-							}
-						}
-					} else {
-						$feedback .= " | FileName Already Exists For This Project: $file_name ";
+					$date_list = split('[- :]',$release_date,5);
+					$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+					db_begin();
+					if (!$frsr->create($release_name,$release_notes,$release_changes,
+						$preformatted,$release_date)) {
+						db_rollback();
+						exit_error('Error',$frsr->getErrorMessage());
 					}
+
+					//
+					//	Now create the new FRSFile in the db
+					//
+					$frsf = new FRSFile($frsr);
+					if (!$frsf || !is_object($frsf)) {
+						exit_error('Error','Could Not Get FRSFile');
+					} elseif ($frsf->isError()) {
+						exit_error('Error',$frsf->getErrorMessage());
+					} else {
+						if (!$frsf->create($userfile_name,$userfile,$type_id,$processor_id,$release_date)) {
+							db_rollback();
+							exit_error('Error',$frsf->getErrorMessage());
+						}
+						$frsr->sendNotice();
+						$feedback='File Released: You May Choose To Edit the Release Now';
+
+						project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+						?>
+						<p>
+						You can now <A HREF="/project/admin/editrelease.php?release_id=<?php echo $frsr->getID()."&group_id=$group_id&package_id=$package_id"; ?>"><B>Add Files To This Release</B></A> if you wish, 
+						or edit the release.
+						<p>
+						Please note that file(s) may not appear immediately
+						on the <a href="/project/showfiles.php?group_id=<?php echo $group_id;?>">
+						download page</a>. Allow several hours for propogation.
+						</p>
+						<?php
+						db_commit();
+						
+					}
+
 				}
+
+			} else {
+
 			}
-		} else {
-			//do nothing
-			$feedback .= ' No Files Selected ';
 		}
 	}
 } else {
 
+project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+
 ?>
 
-<FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF; ?>">
-<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
+<FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF."?group_id=$group_id"; ?>">
 	<TABLE BORDER="0" CELLPADDING="2" CELLSPACING="2">
 	<TR>
 		<TD>
@@ -189,7 +131,7 @@ if( $submit ) {
 		echo '<SELECT NAME="package_id">';
 		for ($i=0; $i<$rows; $i++) {
 			echo '<OPTION VALUE="' . db_result($res,$i,'package_id') . 
-				((db_result($res,$i,'package_id') ==$package_id) ? ' SELECTED' : '').'">' . 
+				((db_result($res,$i,'package_id') ==$package_id) ? '" SELECTED' : '"').'>' . 
 				db_result($res,$i,'name') . '</OPTION>';
 		}
 		echo '</SELECT>';
@@ -212,14 +154,6 @@ if( $submit ) {
 		</TD>
 		<TD>
 			<INPUT TYPE="TEXT" NAME="release_date" VALUE="<?php echo date('Y-m-d'); ?>" SIZE="10" MAXLENGTH="10">
-		</TD>
-	</TR>
-	<TR>
-		<TD>
-			<H4>Status:</H4>
-		</TD>
-		<TD>
-<?php print frs_show_status_popup ($name='status_id') . "<br>"; ?>
 		</TD>
 	</TR>
 	<TR>
@@ -270,8 +204,7 @@ if( $submit ) {
 	</TR>
 	<TR>
 		<TD COLSPAN="2" ALIGN="CENTER">
-			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
-			<input type="checkbox" name="preformatted" value="1" <?php echo ((db_result($result,0,'preformatted'))?'checked':''); ?>> Preserve my pre-formatted text.
+			<input type="checkbox" name="preformatted" value="1" > Preserve my pre-formatted text.
 			<p>
 			<INPUT TYPE="SUBMIT" NAME="submit" VALUE="Release File">
 		</TD>

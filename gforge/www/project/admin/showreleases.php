@@ -17,7 +17,6 @@
  */
 
 require_once('pre.php');	
-require_once('frs.class');
 require_once('www/project/admin/project_admin_utils.php');
 
 if (!$group_id) {
@@ -69,7 +68,7 @@ $title_arr[]='Date';
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 for ($i=0; $i<db_numrows($res); $i++) {
-	echo '<TR BGOLOR="">
+	echo '<TR "'. $HTML->boxGetAltRowStyle($i) .'">
 			<TD>'.db_result($res,$i,'package_name').'</TD>
 			<TD><A HREF="editrelease.php?group_id='.$group_id
 				.'&package_id='.$package_id

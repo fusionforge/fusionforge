@@ -1,4 +1,12 @@
 <?php
+/**
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
 
 require_once('common/include/Error.class');
 

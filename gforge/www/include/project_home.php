@@ -208,7 +208,7 @@ if ($project->usesFRS()) {
 					<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
 					<TD><A href="/project/shownotes.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">';
 					echo html_image('ic/manual16c.png','15','15',array('alt'=>'Release Notes'));
-					echo '</A> - <A HREF="/project/filemodule_monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '">';
+					echo '</A> - <A HREF="/project/filemodule_monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '&group_id='.$group_id.'&start=1">';
 					echo html_image('ic/mail16d.png','15','15',array('alt'=>'Monitor This Package'));
 					echo '</A>
 					</TD>

@@ -1,23 +1,19 @@
 <?php
 /**
-  *
-  * Project Admin: Edit Releases of Packages
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
-
-/* Updated rewrite of the File Release System to clean up the UI 
- * a little and incorporate FRS.class.		-Darrell
+ * Project Admin: Edit Releases of Packages
+ * 
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
  */
 
+
 require_once('pre.php');	
-require_once('frs.class');
+require_once('common/frs/FRSPackage.class');
+require_once('common/frs/FRSRelease.class');
+require_once('common/frs/FRSFile.class');
 require_once('www/project/admin/project_admin_utils.php');
 
 if (!$group_id) {
@@ -30,20 +26,36 @@ if (!$package_id || !$release_id) {
 
 session_require(array('group'=>$group_id));
 
-$project =& group_get_object($group_id);
+$g =& group_get_object($group_id);
 
-exit_assert_object($project,'Project');
+exit_assert_object($g,'Project');
 
-$perm =& $project->getPermission(session_get_user());
+$perm =& $g->getPermission(session_get_user());
 
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
 }
 
-project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
+//
+//  Get the package
+//
+$frsp = new FRSPackage($g,$package_id);
+if (!$frsp || !is_object($frsp)) {
+	exit_error('Error','Could Not Get FRSPackage');
+} elseif ($frsp->isError()) {
+	exit_error('Error',$frsp->getErrorMessage());
+}
 
-// Create a new FRS object
-$frs = new FRS($group_id);
+//
+//  Get the release
+//
+$frsr = new FRSRelease($frsp,$release_id);
+if (!$frsr || !is_object($frsr)) {
+	exit_error('Error','Could Not Get FRSRelease');
+} elseif ($frsr->isError()) {
+	exit_error('Error',$frsr->getErrorMessage());
+}
+
 
 /*
  * Here's where we do the dirty work based on the step the user has chosen
@@ -59,8 +71,8 @@ if ($step1) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
 		$notes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_notes']['tmp_name'],'r'),filesize($HTTP_POST_FILES['uploaded_notes']['tmp_name'])));
-		if ((strlen($notes) < 20) || (strlen($notes) > 256000)) {
-			$feedback .= " Release Notes Are Either Too Small Or Too Large ";
+		if (strlen($notes) < 20) {
+			$feedback .= " Release Notes Are Too Small ";
 			$exec_changes = false;
 		}
 	} else {
@@ -73,8 +85,8 @@ if ($step1) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
 		$changes = addslashes(fread(fopen($HTTP_POST_FILES['uploaded_changes']['tmp_name'],'r'), filesize($HTTP_POST_FILES['uploaded_changes']['tmp_name'])));
-		if ((strlen($changes) < 20) || (strlen($changes) > 256000)) {
-			$feedback .= " Change Log Is Either Too Small Or Too Large ";
+		if (strlen($changes) < 20) {
+			$feedback .= " Change Log Is Too Small ";
 			$exec_changes = false;
 		}
 	} else {
@@ -83,10 +95,12 @@ if ($step1) {
 
 	// If we haven't encountered any problems so far then save the changes
 	if ($exec_changes == true) {
-		if ($frs->frsChangeRelease($release_date, $release_name, $preformatted, $status_id, $notes, $changes, $package_id, $release_id)) {
-			$feedback .= " Data Saved ";
+		$date_list = split('[- :]',$release_date,5);
+		$release_date = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+		if (!$frsr->update($status_id,$release_name,$notes,$changes,$preformatted,$release_date)) {
+			exit_error('Error',$frsr->getErrorMessage());
 		} else {
-			$feedback .= $frs->getErrorMessage();
+			$feedback .= " Data Saved ";
 		}
 	}
 } 
@@ -97,48 +111,20 @@ if ($step2) {
 	$group_unix_name=group_getunixname($group_id);
 
 	if ($userfile && is_uploaded_file($userfile)) {
-		// Check to see if the user uploaded a file instead of selecting an existing one.
-		// If so then move it to the 'incoming' dir where we proceed as usual.
-		$file_name = $userfile_name;
-		$feedback .= ' Adding File ';
-		$now=time();
-		//see if filename is legal before adding it
-		if (!util_is_valid_filename ($file_name)) {
-			$feedback .= " | Illegal FileName: $file_name ";
+		//
+		//  Now create the new FRSFile in the db
+		//
+		$frsf = new FRSFile($frsr);
+		if (!$frsf || !is_object($frsf)) {
+			exit_error('Error','Could Not Get FRSFile');
+		} elseif ($frsf->isError()) {
+			exit_error('Error',$frsf->getErrorMessage());
 		} else {
-			//see if they already have a file by this name
-
-			$res1=db_query("SELECT frs_package.package_id FROM frs_package,frs_release,frs_file ".
-				"WHERE frs_package.group_id='$group_id' ".
-				"AND frs_release.release_id=frs_file.release_id ".
-				"AND frs_release.package_id=frs_package.package_id ".
-				"AND frs_release.release_id='$release_id' ".
-				"AND frs_file.filename='$file_name'");
-			echo db_error();
-			if (!$res1 || db_numrows($res1) < 1) {
-				/*
-					Move the file into place
-				*/
-				$new_file=$sys_upload_dir.$group_unix_name.'/'.$userfile_name;
-				system("/bin/mkdir $sys_upload_dir$group_unix_name/");
-				if (!move_uploaded_file($userfile, $new_file)) {
-					$feedback .= ' | Could Not Move Uploaded File ';
-					db_rollback();
-				} else {
-					//add the file to the database
-					$res=db_query("INSERT INTO frs_file ".
-						"(release_time,filename,release_id,file_size,post_date, type_id, processor_id) ".
-						"VALUES ('$now','$file_name','$release_id','"
-						. filesize($new_file)
-						. "','$now', '$type_id', '$processor_id') ");
-					if (!$res) {
-						$feedback .= " | Couldn't Add FileName: $file_name ";
-						echo db_error();
-					}
-				}
-			} else {
-				$feedback .= " | FileName Already Exists For This Project: $file_name ";
+			if (!$frsf->create($userfile_name,$userfile,$type_id,$processor_id,$release_date)) {
+				db_rollback();
+				exit_error('Error',$frsf->getErrorMessage());
 			}
+			$feedback='File Released';
 		}
 	}
 }
@@ -147,28 +133,38 @@ if ($step2) {
 if ($step3) {	
 	// If the user chose to delete the file and he's sure then delete the file
 	if( $step3 == "Delete File" && $im_sure ) {
-		// delete the file from the database
-		$frs->frsDeleteFile($file_id, $group_id);
-		if( !$frs->isError() ) {
-			$feedback .= " File Deleted ";
+		$frsf = new FRSFile($frsr,$file_id);
+		if (!$frsf || !is_object($frsf)) {
+			exit_error('Error','Could Not Get FRSFile');
+		} elseif ($frsf->isError()) {
+			exit_error('Error',$frsf->getErrorMessage());
+		} else {
+			if (!$frsf->delete()) {
+				exit_error('Error',$frsf->getErrorMessage());
+			} else {
+				$feedback .= " File Deleted ";
+			}
 		}
 	// Otherwise update the file information
 	} else {
-		$frs->frsChangeFile($release_time, $type_id, $processor_id, $file_id, $new_release_id, $package_id);
-		if( !$frs->isError() ) {
-			$feedback .= " File Updated ";
+		$frsf = new FRSFile($frsr,$file_id);
+		if (!$frsf || !is_object($frsf)) {
+			exit_error('Error','Could Not Get FRSFile');
+		} elseif ($frsf->isError()) {
+			exit_error('Error',$frsf->getErrorMessage());
+		} else {
+			$date_list = split('[- :]',$release_time,5);
+			$release_time = mktime($date_list[3],$date_list[4],0,$date_list[1],$date_list[2],$date_list[0]);
+			if (!$frsf->update($type_id,$processor_id,$release_time)) {
+				exit_error('Error',$frsf->getErrorMessage());
+			} else {
+				$feedback .= " File Updated ";
+			}
 		}
 	}
 }
 
-// Send email notice
-if ($step4) {
-	$frs->frsSendNotice($group_id, $release_id, $package_id);
-	if( !$frs->isError() ) {
-		$feedback .= " Email Notice Sent ";
-	}
-}
-
+project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
 /*
  * Show the forms for each step
  */
@@ -178,36 +174,24 @@ if ($step4) {
 Step 1:&nbsp;&nbsp; Edit Release
 </h3>
 
-<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF; ?>">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-<input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
-<input type="hidden" name="release_id" value="<?php echo $release_id; ?>">
+<form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
 <input type="hidden" name="step1" value="1">
 <table border="0" cellpadding="1" cellspacing="1">
-<?php
-	if(!($result = $frs->frsGetRelease($release_id))) {
-		$feedback .= $frs->getErrorMessage();
-	}
-?>
 <tr>
 	<td width="10%"><b>Release Date:<b></td>
-	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d',db_result($result,0,'release_date')) ?>" size="10" maxlength="10"></td>
+	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d',$frsr->getReleaseDate()) ?>" size="10" maxlength="10"></td>
 </tr>
 <tr>
 	<td><b>Release Name:<b></td>
-	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars(db_result($result,0,'release_name')); ?>"></td>
+	<td><input type="text" name="release_name" value="<?php echo htmlspecialchars($frsr->getName()); ?>"></td>
 </tr>
 <tr>
 	<td><b>Status:</b></td>
 	<td>
 		<?php 
-			echo frs_show_status_popup('status_id',db_result($result,0,'status_id')); 
+			echo frs_show_status_popup('status_id',$frsr->getStatus()); 
 		?>
 	</td>
-</tr>
-<tr>
-	<td><b>Of Package:</b></td>
-	<td><?php echo frs_show_package_popup($group_id,'new_package_id',db_result($result,0,'package_id')); ?></td>
 </tr>
 <tr>
 	<td colspan="2">
@@ -227,19 +211,19 @@ Step 1:&nbsp;&nbsp; Edit Release
 <tr>
 	<td COLSPAN=2>
 		<b>Paste The Notes In:</b><br>
-		<textarea name="release_notes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars(db_result($result,0,'notes')); ?></textarea>
+		<textarea name="release_notes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars($frsr->getNotes()); ?></textarea>
 	</td>
 </TR>
 <TR>
 	<td COLSPAN=2>
 		<b>Paste The Change Log In:</b><br>
-		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars(db_result($result,0,'changes')); ?></textarea>
+		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars($frsr->getChanges()); ?></textarea>
 	</td>
 </tr>
 <TR>
 	<TD>
 		<br>
-		<input type="checkbox" name="preformatted" value="1" <?php echo ((db_result($result,0,'preformatted'))?'checked':''); ?>> Preserve my pre-formatted text.
+		<input type="checkbox" name="preformatted" value="1" <?php echo (($frsr->getPreformatted())?'checked':''); ?>> Preserve my pre-formatted text.
 		<p>
 		<input type="submit" name="submit" value="Submit/Refresh">
 	</td>
@@ -255,12 +239,8 @@ Now, choose a file to upload into the system. The maximum file size is determine
 the site administrator, but defaults to 2MB. If you need to upload large files, 
 contact your site administrator.
 <P>
-<FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF; ?>">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-<input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
-<input type="hidden" name="release_id" value="<?php echo $release_id; ?>">
+<FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
 <input type="hidden" name="step2" value="1">
-<INPUT TYPE="hidden" name="MAX_FILE_SIZE" value="2000000">
 <font color="red"><b>NOTE: In some browsers you must select the file in
 the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</b></font><br>
 Upload a new file: <input type="file" name="userfile"  size="30">
@@ -268,13 +248,13 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 <H4>File Type:</H4>
 <P>
 <?php
-	print frs_show_filetype_popup ($name='type_id') . "<br>";
+	print frs_show_filetype_popup ('type_id') . "<br>";
 ?>
 <P>
 <H4>Processor Type:</H4>
 <P>
 <?php
-	print frs_show_processor_popup ($name='processor_id');
+	print frs_show_processor_popup ('processor_id');
 ?>
 <P>
 <INPUT TYPE="SUBMIT" NAME="submit" VALUE="Add This File">
@@ -286,25 +266,21 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 
 <?php
 	// Get a list of files associated with this release
-	$res=$frs->frsGetReleaseFiles($release_id);
-	if( !$frs->isError() ) {
-		$rows=db_numrows($res);
-		if($rows < 1) {
-			print("<H4>No Files In This Release</H4>\n");
-		} else {
-			print("Once you have added files to this release you <b>must</b> update each of these files with the correct information or they will not appear on your download summary page.\n");
-			$title_arr[]='Filename<BR>Release';
-			$title_arr[]='Processor<BR>Release Date';
-			$title_arr[]='File Type<BR>Update';
-	
-			echo $GLOBALS['HTML']->listTableTop ($title_arr);
-	
+	$res=db_query("SELECT * FROM frs_file WHERE release_id='$release_id'");
+	$rows=db_numrows($res);
+	if($rows < 1) {
+		print("<H4>No Files In This Release</H4>\n");
+	} else {
+		print("Once you have added files to this release you <b>must</b> update each of these files with the correct information or they will not appear on your download summary page.\n");
+		$title_arr[]='Filename<BR>Release';
+		$title_arr[]='Processor<BR>Release Date';
+		$title_arr[]='File Type<BR>Update';
+
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
 		for($x=0; $x<$rows; $x++) {
 ?>
-			<form action="<?php echo $PHP_SELF; ?>" method="post">
-				<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-				<input type="hidden" name="release_id" value="<?php echo $release_id; ?>">
-				<input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
+			<form action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>" method="post">
 				<input type="hidden" name="file_id" value="<?php echo db_result($res,$x,'file_id'); ?>">
 				<input type="hidden" name="step3" value="1">
 				<tr <?php echo $HTML->boxGetAltRowStyle($x); ?>>
@@ -344,41 +320,8 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 				</tr>
 			</form>
 <?php
-			}
-
-			echo $GLOBALS['HTML']->listTableBottom();
-
 		}
-	} else {
-		$feedback .= $frs->getErrorMessage();
-	}
-?>
-
-<P>
-<hr noshade>
-<P>
-<h3>Step 4: Email Release Notice</h3>
-<P>
-<?php 
-	$mons = $frs->frsGetReleaseMonitors($package_id); 
-	if( $mons > 0 ) {
-?>
-
-<form action="<?php echo $PHP_SELF; ?>" method="post">
-	<input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
-	<input type="hidden" name="release_id" value="<?php echo $release_id; ?>">
-	<input type="hidden" name="package_id" value="<?php echo $package_id; ?>">
-	<input type="hidden" name="step4" value="Email Release">
-	<?php echo $mons; ?> users(s) are monitoring this package.  You should send a notice of your file release.<br>
-	<input type="submit" value="Send Notice"><input type="checkbox" value="sure"> I'm sure.
-</form>
-
-<?php
-
-	} else {
-
-		echo 'Nobody is monitoring this package at this time.';
-
+		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
 project_admin_footer(array());

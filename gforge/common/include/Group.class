@@ -26,7 +26,7 @@
 
 require_once('common/tracker/ArtifactTypes.class');
 require_once('common/forum/Forum.class');
-require_once('www/include/frs.class');
+require_once('common/frs/FRSPackage.class');
 require_once('www/include/BaseLanguage.class');
 
 $GROUP_OBJ=array();
@@ -1393,8 +1393,11 @@ class Group extends Error {
 		");
 
 		// Step 4: Setup default filerelease package
-		$frs = new FRS($this->getID());
-		$frs->frsCreatePackage($this->getUnixName());
+		$frs = new FRSPackage($this);
+		if (!$frs->create($this->getUnixName())) {
+			$this->setError($frs->getErrorMessage());
+			return false;
+		}
 
 		db_commit();
 

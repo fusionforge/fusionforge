@@ -83,7 +83,7 @@ $proj_stats['packages'] = $num_packages;
 for ( $p = 0; $p < $num_packages; $p++ ) {
 	$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
 	print '<TR '.$cur_style.'><TD colspan="3"><H3>'.db_result($res_package,$p,'name').'
-	<A HREF="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'">'.
+	<A HREF="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
 		html_image('ic/mail16w.png','20','20',array('alt'=>'Monitor This Package')) .
 		'</A></H3></TD><TD COLSPAN="4">&nbsp;</TD></TR>';
 

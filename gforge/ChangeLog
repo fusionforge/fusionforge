@@ -1,3 +1,8 @@
+2002-12-14  Tim Perdue <tim@gforge.org>
+
+	* Complete rewrite of FRS using OO style and coding guidelines.
+	Same form and design as tracker.
+
 2002-12-13  Tim Perdue <tim@gforge.org>
 
 	* Quick changes to doc manager to protect binary safe uploads /
