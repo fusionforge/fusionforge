@@ -1852,7 +1852,7 @@ tracker_artifacttype	browse	Mostrar
 tracker_artifacttype	edit_options	Editar/Atualizar Opções em
 tracker_artifacttype	nobody	Ninguém
 tracker_artifacttype	none	Nenhum
-tracker_artifacttype	submit_new	Enviar Agora
+tracker_artifacttype	submit_new	Enviar Novo
 tracker_browse	ascending	Crescente
 tracker_browse	check_all	Checar &nbsp;tudo
 tracker_browse	clear_all	Limpar &nbsp;tudo

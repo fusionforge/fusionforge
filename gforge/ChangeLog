@@ -1,3 +1,8 @@
+2004-06-09  Tom Copeland <tom@infoether.com>
+
+	* www/include/languages/PortugueseBrazilian.tab: Applied patch #811:
+	Small (but relevant) fix for Brazilian Portuguese translation
+
 2004-06-07  Tom Copeland <tom@infoether.com>
 
 	* www/stats/i18n.php: Fixed bug #807: i18n.php had 
