@@ -57,6 +57,10 @@ install: build
 	cp -r www $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/
 	cp -r common $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/
 	find $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ -name CVS -type d | xargs rm -rf
+	find $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www -type d -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www -type f -exec chmod 0644 {} \;
+	find $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/common -type d -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/common -type f -exec chmod 0644 {} \;
 	install -m 644 db/SourceForge.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 #####	install -m 644 db/trove_defaults.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -m 644 db/user_rating.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
