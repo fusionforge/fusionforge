@@ -274,7 +274,7 @@ CREATE TABLE "groups" (
 	"dead4" text DEFAULT '' NOT NULL,
 	"dead5" text DEFAULT '' NOT NULL,
 	"dead6" text DEFAULT '' NOT NULL,
-	"type" integer DEFAULT '1' NOT NULL,
+	"type_id" integer DEFAULT '1' NOT NULL,
 	"use_docman" integer DEFAULT '1' NOT NULL,
 	"dead7" integer DEFAULT '0' NOT NULL,
 	"dead8" integer DEFAULT '0' NOT NULL,
@@ -864,6 +864,11 @@ CREATE TABLE "users" (
 	"phone" text,
 	"fax" text,
 	"title" text,
+	"firstname" character varying(60),
+	"lastname" character varying(60),
+	"address2" text,
+	"ccode" character(2) DEFAULT 'US',
+	"theme_id" integer,
 	Constraint "users_pkey" Primary Key ("user_id")
 );
 
@@ -1112,8 +1117,8 @@ CREATE TABLE "artifact_canned_responses" (
 
 CREATE TABLE "artifact_counts_agg" (
 	"group_artifact_id" integer NOT NULL,
-	"count" integer NOT NULL,
-	"open_count" integer
+	"count" integer DEFAULT 0 NOT NULL,
+	"open_count" integer DEFAULT 0
 );
 
 
@@ -1485,19 +1490,6 @@ CREATE TABLE "themes" (
 );
 
 
-CREATE TABLE "theme_prefs" (
-	"user_id" integer DEFAULT '0' NOT NULL,
-	"user_theme" integer DEFAULT '0' NOT NULL,
-	"body_font" character(80) DEFAULT '',
-	"body_size" character(5) DEFAULT '',
-	"titlebar_font" character(80) DEFAULT '',
-	"titlebar_size" character(5) DEFAULT '',
-	"color_titlebar_back" character(7) DEFAULT '',
-	"color_ltback1" character(7) DEFAULT '',
-	Constraint "theme_prefs_pkey" Primary Key ("user_id")
-);
-
-
 CREATE SEQUENCE "supported_langu_language_id_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
 
 
@@ -1856,6 +1848,13 @@ CREATE VIEW "forum_group_list_vw" as SELECT forum_group_list.group_forum_id, for
 
 
 CREATE VIEW "forum_user_vw" as SELECT forum.msg_id, forum.group_forum_id, forum.posted_by, forum.subject, forum.body, forum.post_date, forum.is_followup_to, forum.thread_id, forum.has_followups, forum.most_recent_date, users.user_name, users.realname FROM forum, users WHERE (forum.posted_by = users.user_id);
+
+
+CREATE TABLE "country_code" (
+	"country_name" character varying(80),
+	"ccode" character(2) NOT NULL,
+	Constraint "country_code_pkey" Primary Key ("ccode")
+);
 
 
 
@@ -2479,8 +2478,8 @@ COPY "user_ratings" FROM stdin;
 
 
 COPY "users" FROM stdin;
-2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N
-100	None	noreply@sourceforge.net	*********34343	Nobody	A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N
+2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N		\N	\N	US	1
+100	None	noreply@sourceforge.net	*********34343	Nobody	A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N	Nobody	\N	\N	US	1
 \.
 
 
@@ -2658,12 +2657,7 @@ COPY "themes" FROM stdin;
 \.
 
 
-COPY "theme_prefs" FROM stdin;
-\.
-
-
 COPY "supported_languages" FROM stdin;
-23	Smpl.Chinese	SimplifiedChinese.class	SimplifiedChinese	zn   
 1	English	English.class	English	en   
 2	Japanese	Japanese.class	Japanese	ja   
 3	Hebrew	Hebrew.class	Hebrew	iw   
@@ -2673,7 +2667,6 @@ COPY "supported_languages" FROM stdin;
 8	Italian	Italian.class	Italian	it   
 9	Norwegian	Norwegian.class	Norwegian	no   
 10	Swedish	Swedish.class	Swedish	sv   
-11	Trad.Chinese	Chinese.class	Chinese	zh   
 12	Dutch	Dutch.class	Dutch	nl   
 13	Esperanto	Esperanto.class	Esperanto	eo   
 14	Catalan	Catalan.class	Catalan	ca   
@@ -2685,8 +2678,10 @@ COPY "supported_languages" FROM stdin;
 18	Portuguese	Portuguese.class	Portuguese	pt   
 17	Russian	Russian.class	Russian	ru   
 7	French	French.class	French	fr   
-16	Pt. Brazilian	PortugueseBrazilian.class	PortugueseBrazilian	pt_BR
 24	Latin	Latin.class	Latin	la   
+23	Smpl.Chinese	SimplifiedChinese.class	SimplifiedChinese	zh-cn
+11	Trad.Chinese	Chinese.class	Chinese	zh-tw
+16	Pt. Brazilian	PortugueseBrazilian.class	PortugueseBrazilian	pt-br
 \.
 
 
@@ -2737,6 +2732,249 @@ COPY "user_plugin" FROM stdin;
 
 
 COPY "cron_history" FROM stdin;
+\.
+
+
+COPY "country_code" FROM stdin;
+AFGHANISTAN	AF
+ALBANIA	AL
+ALGERIA	DZ
+AMERICAN SAMOA	AS
+ANDORRA	AD
+ANGOLA	AO
+ANGUILLA	AI
+ANTARCTICA	AQ
+ANTIGUA AND BARBUDA	AG
+ARGENTINA	AR
+ARMENIA	AM
+ARUBA	AW
+AUSTRALIA	AU
+AUSTRIA	AT
+AZERBAIJAN	AZ
+BAHAMAS	BS
+BAHRAIN	BH
+BANGLADESH	BD
+BARBADOS	BB
+BELARUS	BY
+BELGIUM	BE
+BELIZE	BZ
+BENIN	BJ
+BERMUDA	BM
+BHUTAN	BT
+BOLIVIA	BO
+BOSNIA AND HERZEGOVINA	BA
+BOTSWANA	BW
+BOUVET ISLAND	BV
+BRAZIL	BR
+BRITISH INDIAN OCEAN TERRITORY	IO
+BRUNEI DARUSSALAM	BN
+BULGARIA	BG
+BURKINA FASO	BF
+BURUNDI	BI
+CAMBODIA	KH
+CAMEROON	CM
+CANADA	CA
+CAPE VERDE	CV
+CAYMAN ISLANDS	KY
+CENTRAL AFRICAN REPUBLIC	CF
+CHAD	TD
+CHILE	CL
+CHINA	CN
+CHRISTMAS ISLAND	CX
+COCOS (KEELING) ISLANDS	CC
+COLOMBIA	CO
+COMOROS	KM
+CONGO	CG
+CONGO, THE DEMOCRATIC REPUBLIC OF THE	CD
+COOK ISLANDS	CK
+COSTA RICA	CR
+COTE D'IVOIRE	CI
+CROATIA	HR
+CUBA	CU
+CYPRUS	CY
+CZECH REPUBLIC	CZ
+DENMARK	DK
+DJIBOUTI	DJ
+DOMINICA	DM
+DOMINICAN REPUBLIC	DO
+EAST TIMOR	TP
+ECUADOR	EC
+EGYPT	EG
+EL SALVADOR	SV
+EQUATORIAL GUINEA	GQ
+ERITREA	ER
+ESTONIA	EE
+ETHIOPIA	ET
+FALKLAND ISLANDS (MALVINAS)	FK
+FAROE ISLANDS	FO
+FIJI	FJ
+FINLAND	FI
+FRANCE	FR
+FRENCH GUIANA	GF
+FRENCH POLYNESIA	PF
+FRENCH SOUTHERN TERRITORIES	TF
+GABON	GA
+GAMBIA	GM
+GEORGIA	GE
+GERMANY	DE
+GHANA	GH
+GIBRALTAR	GI
+GREECE	GR
+GREENLAND	GL
+GRENADA	GD
+GUADELOUPE	GP
+GUAM	GU
+GUATEMALA	GT
+GUINEA	GN
+GUINEA-BISSAU	GW
+GUYANA	GY
+HAITI	HT
+HEARD ISLAND AND MCDONALD ISLANDS	HM
+HOLY SEE (VATICAN CITY STATE)	VA
+HONDURAS	HN
+HONG KONG	HK
+HUNGARY	HU
+ICELAND	IS
+INDIA	IN
+INDONESIA	ID
+IRAN, ISLAMIC REPUBLIC OF	IR
+IRAQ	IQ
+IRELAND	IE
+ISRAEL	IL
+ITALY	IT
+JAMAICA	JM
+JAPAN	JP
+JORDAN	JO
+KAZAKSTAN	KZ
+KENYA	KE
+KIRIBATI	KI
+KOREA, DEMOCRATIC PEOPLE'S REPUBLIC OF	KP
+KOREA, REPUBLIC OF	KR
+KUWAIT	KW
+KYRGYZSTAN	KG
+LAO PEOPLE'S DEMOCRATIC REPUBLIC	LA
+LATVIA	LV
+LEBANON	LB
+LESOTHO	LS
+LIBERIA	LR
+LIBYAN ARAB JAMAHIRIYA	LY
+LIECHTENSTEIN	LI
+LITHUANIA	LT
+LUXEMBOURG	LU
+MACAU	MO
+MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF	MK
+MADAGASCAR	MG
+MALAWI	MW
+MALAYSIA	MY
+MALDIVES	MV
+MALI	ML
+MALTA	MT
+MARSHALL ISLANDS	MH
+MARTINIQUE	MQ
+MAURITANIA	MR
+MAURITIUS	MU
+MAYOTTE	YT
+MEXICO	MX
+MICRONESIA, FEDERATED STATES OF	FM
+MOLDOVA, REPUBLIC OF	MD
+MONACO	MC
+MONGOLIA	MN
+MONTSERRAT	MS
+MOROCCO	MA
+MOZAMBIQUE	MZ
+MYANMAR	MM
+NAMIBIA	NA
+NAURU	NR
+NEPAL	NP
+NETHERLANDS	NL
+NETHERLANDS ANTILLES	AN
+NEW CALEDONIA	NC
+NEW ZEALAND	NZ
+NICARAGUA	NI
+NIGER	NE
+NIGERIA	NG
+NIUE	NU
+NORFOLK ISLAND	NF
+NORTHERN MARIANA ISLANDS	MP
+NORWAY	NO
+OMAN	OM
+PAKISTAN	PK
+PALAU	PW
+PALESTINIAN TERRITORY, OCCUPIED	PS
+PANAMA	PA
+PAPUA NEW GUINEA	PG
+PARAGUAY	PY
+PERU	PE
+PHILIPPINES	PH
+PITCAIRN	PN
+POLAND	PL
+PORTUGAL	PT
+PUERTO RICO	PR
+QATAR	QA
+REUNION	RE
+ROMANIA	RO
+RUSSIAN FEDERATION	RU
+RWANDA	RW
+SAINT HELENA	SH
+SAINT KITTS AND NEVIS	KN
+SAINT LUCIA	LC
+SAINT PIERRE AND MIQUELON	PM
+SAINT VINCENT AND THE GRENADINES	VC
+SAMOA	WS
+SAN MARINO	SM
+SAO TOME AND PRINCIPE	ST
+SAUDI ARABIA	SA
+SENEGAL	SN
+SEYCHELLES	SC
+SIERRA LEONE	SL
+SINGAPORE	SG
+SLOVAKIA	SK
+SLOVENIA	SI
+SOLOMON ISLANDS	SB
+SOMALIA	SO
+SOUTH AFRICA	ZA
+SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS	GS
+SPAIN	ES
+SRI LANKA	LK
+SUDAN	SD
+SURINAME	SR
+SVALBARD AND JAN MAYEN	SJ
+SWAZILAND	SZ
+SWEDEN	SE
+SWITZERLAND	CH
+SYRIAN ARAB REPUBLIC	SY
+TAIWAN, PROVINCE OF CHINA	TW
+TAJIKISTAN	TJ
+TANZANIA, UNITED REPUBLIC OF	TZ
+THAILAND	TH
+TOGO	TG
+TOKELAU	TK
+TONGA	TO
+TRINIDAD AND TOBAGO	TT
+TUNISIA	TN
+TURKEY	TR
+TURKMENISTAN	TM
+TURKS AND CAICOS ISLANDS	TC
+TUVALU	TV
+UGANDA	UG
+UKRAINE	UA
+UNITED ARAB EMIRATES	AE
+UNITED STATES	US
+UNITED STATES MINOR OUTLYING ISLANDS	UM
+URUGUAY	UY
+UZBEKISTAN	UZ
+VANUATU	VU
+VENEZUELA	VE
+VIET NAM	VN
+VIRGIN ISLANDS, BRITISH	VG
+VIRGIN ISLANDS, U.S.	VI
+WALLIS AND FUTUNA	WF
+WESTERN SAHARA	EH
+YEMEN	YE
+YUGOSLAVIA	YU
+ZAMBIA	ZM
+ZIMBABWE	ZW
+UNITED KINGDOM	UK
 \.
 
 CREATE INDEX db_images_group ON db_images USING btree (group_id);
@@ -2799,7 +3037,7 @@ CREATE INDEX group_history_group_id ON group_history USING btree (group_id);
 CREATE UNIQUE INDEX group_unix_uniq ON groups USING btree (unix_group_name);
 
 
-CREATE INDEX groups_type ON groups USING btree ("type");
+CREATE INDEX groups_type ON groups USING btree (type_id);
 
 
 CREATE INDEX groups_public ON groups USING btree (is_public);
@@ -3151,9 +3389,6 @@ CREATE INDEX groupcvshistory_groupid ON group_cvs_history USING btree (group_id)
 
 
 CREATE UNIQUE INDEX themes_theme_id_key ON themes USING btree (theme_id);
-
-
-CREATE INDEX themeprefs_userid ON theme_prefs USING btree (user_id);
 
 
 CREATE UNIQUE INDEX supported_langu_language_id_key ON supported_languages USING btree (language_id);
@@ -3663,24 +3898,6 @@ CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER DELETE ON "skills_data_types"  FROM 
 CREATE CONSTRAINT TRIGGER "<unnamed>" AFTER UPDATE ON "skills_data_types"  FROM "skills_data" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('<unnamed>', 'skills_data', 'skills_data_types', 'UNSPECIFIED', 'type', 'type_id');
 
 
-CREATE CONSTRAINT TRIGGER "themeprefs_userid" AFTER INSERT OR UPDATE ON "theme_prefs"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('themeprefs_userid', 'theme_prefs', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
-
-
-CREATE CONSTRAINT TRIGGER "themeprefs_userid" AFTER DELETE ON "users"  FROM "theme_prefs" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('themeprefs_userid', 'theme_prefs', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
-
-
-CREATE CONSTRAINT TRIGGER "themeprefs_userid" AFTER UPDATE ON "users"  FROM "theme_prefs" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('themeprefs_userid', 'theme_prefs', 'users', 'UNSPECIFIED', 'user_id', 'user_id');
-
-
-CREATE CONSTRAINT TRIGGER "themeprefs_themeid" AFTER INSERT OR UPDATE ON "theme_prefs"  FROM "themes" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('themeprefs_themeid', 'theme_prefs', 'themes', 'UNSPECIFIED', 'user_theme', 'theme_id');
-
-
-CREATE CONSTRAINT TRIGGER "themeprefs_themeid" AFTER DELETE ON "themes"  FROM "theme_prefs" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('themeprefs_themeid', 'theme_prefs', 'themes', 'UNSPECIFIED', 'user_theme', 'theme_id');
-
-
-CREATE CONSTRAINT TRIGGER "themeprefs_themeid" AFTER UPDATE ON "themes"  FROM "theme_prefs" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('themeprefs_themeid', 'theme_prefs', 'themes', 'UNSPECIFIED', 'user_theme', 'theme_id');
-
-
 CREATE CONSTRAINT TRIGGER "projecttask_groupprojectid_fk" AFTER INSERT OR UPDATE ON "project_task"  FROM "project_group_list" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('projecttask_groupprojectid_fk', 'project_task', 'project_group_list', 'UNSPECIFIED', 'group_project_id', 'group_project_id');
 
 
@@ -3871,6 +4088,24 @@ CREATE TRIGGER "fmsg_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum"  FOR 
 
 
 CREATE TRIGGER "fora_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fora');
+
+
+CREATE CONSTRAINT TRIGGER "users_themeid" AFTER INSERT OR UPDATE ON "users"  FROM "themes" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
+
+
+CREATE CONSTRAINT TRIGGER "users_themeid" AFTER DELETE ON "themes"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
+
+
+CREATE CONSTRAINT TRIGGER "users_themeid" AFTER UPDATE ON "themes"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('users_themeid', 'users', 'themes', 'FULL', 'theme_id', 'theme_id');
+
+
+CREATE CONSTRAINT TRIGGER "users_ccode" AFTER INSERT OR UPDATE ON "users"  FROM "country_code" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
+
+
+CREATE CONSTRAINT TRIGGER "users_ccode" AFTER DELETE ON "country_code"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
+
+
+CREATE CONSTRAINT TRIGGER "users_ccode" AFTER UPDATE ON "country_code"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('users_ccode', 'users', 'country_code', 'FULL', 'ccode', 'ccode');
 
 
 CREATE RULE forum_insert_agg AS ON INSERT TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count + 1) WHERE (forum_agg_msg_count.group_forum_id = new.group_forum_id);
