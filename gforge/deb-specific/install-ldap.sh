@@ -336,6 +336,7 @@ case "$1" in
 		# [ -f /etc/ldap.secret ] || load_ldap $dn $secret
 		;;
 	purge)
+		setup_vars
 		echo "Purging /etc/ldap/slapd.conf"
 		purge_slapd
 		echo "Purging /etc/nsswitch.conf"
