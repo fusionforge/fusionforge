@@ -31,7 +31,7 @@ case "$1" in
 	
 	echo "Fixing past damage in mailing-lists..."
 	if [ -z "$2" ] || dpkg --compare-versions $2 le 3rc2-4 ; then
-	    /usr/lib/gforge/bin/fix-mailing-lists.pl
+	    su -s /bin/sh gforge -c /usr/lib/gforge/bin/fix-mailing-lists.pl
 	fi
     ;;
 
