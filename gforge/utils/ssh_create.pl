@@ -5,7 +5,7 @@
 # ssh_create.pl - Dumps SSH authorized_keys into users homedirs on the cvs server.
 #
 
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions and variables
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions and variables
 
 my @ssh_key_file = open_array_file($file_dir."dumps/ssh_dump");
 my ($username, $ssh_keys, $ssh_dir);

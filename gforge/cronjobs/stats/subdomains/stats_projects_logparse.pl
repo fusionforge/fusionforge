@@ -3,7 +3,7 @@
 #  *
 #  * SourceForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
-#  * http://sourceforge.net
+#  * http://gforge.net
 #  *
 #  * @version   $Id$
 #  *
@@ -12,14 +12,14 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 #######################
 ##  CONF VARS
 
 	my $verbose = 1;
 	my $chronolog_basedir = "/var/log";
-	my @webservers = ("sourceforge");
+	my @webservers = ("gforge");
 
 ##
 #######################
@@ -58,7 +58,7 @@ print " done.\n" if $verbose;
 
 foreach $server ( @webservers ) {
 
-	$file = "$chronolog_basedir/$server/$year/" . sprintf("%02d",$month) . "/" . sprintf("%02d",$day) . "/sourceforge.log"; 
+	$file = "$chronolog_basedir/$server/$year/" . sprintf("%02d",$month) . "/" . sprintf("%02d",$day) . "/gforge.log"; 
 
 	if ( -f $file ) {
 		open(LOGFILE, "< $file" ) || die "Cannot open $file";

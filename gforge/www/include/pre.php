@@ -12,8 +12,8 @@
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
 */
-if (is_file('/etc/sourceforge/custom/pre.php')){
-	require_once('/etc/sourceforge/custom/pre.php');
+if (is_file('/etc/gforge/custom/pre.php')){
+	require_once('/etc/gforge/custom/pre.php');
 } else {
 
 // Defines all of the Source Forge hosts, databases, etc.

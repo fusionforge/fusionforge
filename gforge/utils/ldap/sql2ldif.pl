@@ -12,8 +12,8 @@
 use DBI;
 
 #require("base64.pl");  # Include all the predefined functions
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
-$chroot="/var/lib/sourceforge/chroot";
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
+$chroot="/var/lib/gforge/chroot";
 &db_connect;
 
 dump_header();

@@ -7,9 +7,10 @@ gforge (3.0-1) experimental; urgency=low
   * [Christian] gforge-common and gforge-web-apache are now installable
   * [Christian] Added Jabber related French translation
   * [Christian] Added Jabber stuffs in local.inc.template
-  * [Christian] Added ldap stuffs in gforge-web-apache config and template files 
+  * [Christian] Added ldap stuffs in gforge-web-apache config and template files
+  * [Christian] Made sys_dbname sys_dbuser sys_dbhost debconf param
 
- -- Christian Bayle <bayle@debian.org>  Sat,  7 Dec 2002 00:31:34 +0100
+ -- Christian Bayle <bayle@debian.org>  Sun,  8 Dec 2002 20:27:40 +0100
 
 sourceforge (gforge-1) experimental; urgency=low
 
