@@ -138,7 +138,7 @@ be written in English.
 <P>
 <font size="-1">
 <TEXTAREA name="purpose" wrap="virtual" cols="70" rows="10">
-<?php echo $purpose; ?>
+<?php echo stripslashes($purpose); ?>
 </TEXTAREA>
 </font>
 
