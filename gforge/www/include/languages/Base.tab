@@ -669,6 +669,12 @@ forum_admin	delete_message	Delete Message
 forum_admin	section	Project: $1 
 forum_admin	title	Forums: Administration
 forum_admin	update_forum	Update Forum Info/Status
+forum_admin	delete_forum	Delete entire forum and all content
+forum_admin	sure	I'm Sure
+forum_admin	really_sure	I'm Really Sure
+forum_admin	delete	Delete
+forum_admin	deleted	Successfully Deleted
+forum_admin	delete_warning	You are about to permanently and irretrievably delete this entire forum and all its contents!
 forum_admin_addforum	add_forum	Add This Forum
 forum_admin_addforum	allow_anonymous	Allow Anonymous Posts?
 forum_admin_addforum	allow_attach	Allow File Attachment?
@@ -1317,6 +1323,12 @@ pm_addtask	title	Add a new Task
 pm_admin	title	Task Manager: Administration
 pm_admin_change_status	section	Task Manager Administration
 pm_admin_change_status	title	Update Information
+pm_admin_projects	delete_info	Permanently delete this subproject and all its data.
+pm_admin_projects	delete	Delete
+pm_admin_projects	deleted	Successfully Deleted
+pm_admin_projects	sure	I'm Sure
+pm_admin_projects	really_sure	I'm Really Sure
+pm_admin_projects	delete_warning	You are about to permanently and irretrievably delete this subproject and all its related data!
 pm_admin_projects	add_categories	Add Categories
 pm_admin_projects	add_categories_title	Add Categories
 pm_admin_projects	add_categories_to	Add Categories To
@@ -1444,6 +1456,12 @@ pm_reporting	tasks_by_category	Tasks By Category
 pm_reporting	tasks_by_technician	Tasks By Technician
 pm_reporting	title	Task Reporting System
 pm_task	create_successfully	Task Created Successfully
+frs_admin	delete	Delete
+frs_admin	deleted	Deleted
+frs_admin	delete_package_warning	You are about to permanently and irretrievably delete this package and all its releases and files!
+frs_admin	delete_release_warning	You are about to permanently and irretrievably delete this release and its files!
+frs_admin	sure	I'm Sure
+frs_admin	really_sure	I'm Really Sure
 project_admin	add_user	Add User
 project_admin	addfromlist	Add Users From List
 project_admin	addfromlist1	Check the box next to the name of the user(s) you want to add. Your choices will be preserved if you click any of the letters below. When done, click "Finish" to choose the roles for the users you are adding.
@@ -2497,6 +2515,12 @@ tracker	updated_successful	Updated Successfully
 tracker_add	for_project	For project
 tracker_add	submit		Submit
 tracker_add	title	Submit Tracker Item
+tracker_admin	permanently_delete_info	Permanently delete this tracker.
+tracker_admin	deleted	Successfully Deleted.
+tracker_admin	delete_warning	You are about to permanently and irretrievably delete this tracker and all its contents!
+tracker_admin	sure	I'm Sure.
+tracker_admin	really_sure	I'm Really Sure.
+tracker_admin	delete	Delete.
 tracker_admin	add_canned_responses	Add/Update Canned Responses
 tracker_admin	add_canned_responses_info	Create/Change generic response messages for the tracker
 tracker_admin	add_categories	Add/Update Categories
