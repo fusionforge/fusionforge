@@ -1,16 +1,29 @@
 <?php
 /**
-  *
-  * SourceForge User's Personal Page
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
+ * SourceForge User's Personal Page
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ */
 
 require_once('pre.php');
 require_once('vote_function.php');
@@ -18,9 +31,12 @@ require_once('common/tracker/ArtifactsForUser.class');
 require_once('common/forum/ForumsForUser.class');
 require_once('common/pm/ProjectTasksForUser.class');
 
-global $G_SESSION;
+if (!session_loggedin()) { // || $sf_user_hash) {
 
-if (session_loggedin()) { // || $sf_user_hash) {
+	exit_not_logged_in();
+
+} else {
+
 
 	/*
 //needs security audit
@@ -39,10 +55,10 @@ if (session_loggedin()) { // || $sf_user_hash) {
 			exit_not_logged_in();
 		}
 		$user_id=db_result($result,0,'user_id');
-		$G_SESSION=user_get_object($user_id,$result);
+		session_get_user()=user_get_object($user_id,$result);
 	}
 */
-	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname()),'pagename'=>'my','titlevals'=>array(user_getname())));
+	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname())));
 	?>
 
 	<p>
@@ -120,7 +136,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	*/
 	$last_group=0;
 	echo $HTML->boxMiddle($Language->getText('my', 'monitoredforum'),false,false);
-	$forumsForUser = new ForumsForUser($G_SESSION);
+	$forumsForUser = new ForumsForUser(session_get_user());
 	$forums =& $forumsForUser->getMonitoredForums();
 	if (count($forums) < 1) {
 		echo '<strong>'.$Language->getText('my', 'no_monitored_forums').'</strong>'.$Language->getText('my', 'no_monitored_forums_details');
@@ -195,7 +211,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	*/
 	$last_group=0;
 	echo $HTML->boxTop($Language->getText('my', 'tasks'));
-	$projectTasksForUser = new ProjectTasksForUser($G_SESSION);
+	$projectTasksForUser = new ProjectTasksForUser(session_get_user());
 	$userTasks =& $projectTasksForUser->getTasksByGroupProjectName();
 
 	if (count($userTasks) > 0) {
@@ -390,10 +406,6 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	</table>';
 
 	echo site_user_footer(array());
-
-} else {
-
-	exit_not_logged_in();
 
 }
 
