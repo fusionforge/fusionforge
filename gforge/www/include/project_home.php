@@ -268,7 +268,13 @@ if ($project->usesForum()) {
 	print '<hr size="1" /><a href="/forum/?group_id='.$group_id.'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>$Language->getText('group','short_forum')));
 	print '&nbsp;'.$Language->getText('group','long_forum').'</a>';
-	print " ( ".$Language->getText('project_home','forum_messages',array(project_get_public_forum_message_count($group_id), project_get_public_forum_count($group_id) ))." ";
+	$forums_count = project_get_public_forum_count($group_id);
+	if ($forums_count > 1) {
+		$label = 'forum_messages';
+	} else {
+		$label = 'forum_messages_only_one_forum';
+	}
+	print " ( ".$Language->getText('project_home',$label,array(project_get_public_forum_message_count($group_id), $forums_count))." ";
 	print ")\n";
 }
 

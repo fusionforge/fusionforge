@@ -2,6 +2,8 @@
 
 	* common/docman/DocumentManager.class: Applied patch [ #774 ] Ordering 
 	documents (inside GROUP) - proposal
+	* www/include/project_home.php: Fixed a little plural/singular problem - i.e.,
+	"x messages in 1 forums" becomes "x messages in 1 forum".
 
 2004-04-19  Tim Perdue  <tim@perdue.net>
 

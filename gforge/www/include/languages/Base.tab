@@ -1701,6 +1701,7 @@ project_filemodule_monitor	stop_monitor_body	Monitoring Has Been Stopped
 project_filemodule_monitor	stop_monitor_title	Monitoring stopped
 project_home	cvs_commits	<strong>$1</strong> commits, <strong>$2</strong> adds
 project_home	forum_messages	<strong>$1</strong> messages in <strong>$2</strong> forums
+project_home	forum_messages_only_one_forum	<strong>$1</strong> messages in <strong>$2</strong> forum
 project_home	forums	forums
 project_home	help_wanted	HELP WANTED: This project is looking for
 project_home	help_wanted_multiple	People to fill $1 several different positions </a>
