@@ -81,3 +81,4 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	id
 conf	language_id	21
+conf	mail_charset	ISO-8859-1

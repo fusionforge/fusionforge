@@ -32,6 +32,7 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
+conf	mail_charset	ISO-8859-1
 account	updated	Aggiornato
 account_change_email	message	Hai richiesto il cambio dell'indirizzo email per $1.\nVisitare la seguente URL per completare il cambio di indirizzo email::\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- il team $1
 account_change_email	subject	$1 verifica

@@ -81,9 +81,10 @@ function util_check_fileupload($filename) {
  * @param		string	The body of the email message
  * @param		string	The optional email sender address.  Defaults to 'noreply@'
  * @param		string	The addresses to blind-carbon-copy this message
+ * @param		string	The optional email sender name. Defaults to ''
  *
  */
-function util_send_message($to,$subject,$body,$from='',$BCC='') {
+function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='') {
 	global $Language;
 	global $sys_sendmail_path;
 
@@ -93,20 +94,76 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 	if (!$from) {
 		$from='noreply@'.$GLOBALS['sys_default_domain'];
 	}
-	$body = "To: $to".
-		"\nFrom: $from".
-		"\nBCC: $BCC".
-		"\nSubject: $subject".
-		"\nContent-type: text/plain; charset=".$Language->getText('conf','content_encoding').
-		"\n\n$body";
 
+	$charset = $Language->getText('conf','mail_charset');
+	$body = "To: $to".
+		"\nFrom: ".util_encode_mailaddr($from,$sendername,$charset).
+		"\nBCC: $BCC".
+		"\nSubject: ".util_encode_mimeheader($subject, $charset).
+		"\nContent-type: text/plain; charset=$charset".
+		"\n\n".
+		util_convert_body($body, $charset);
+	
 	if (!$sys_sendmail_path){
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
+
 	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
 		  "\" | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");
+}
 
+/**
+ * util_encode_mailaddr() - Encode email address to MIME format
+ *
+ * @param		string	The email address
+ * @param		string	The email's owner name
+ * @param		string	The converting charset
+ *
+ */
+function util_encode_mailaddr($email,$name,$charset) {
+	if (function_exists('mb_convert_encoding') && trim($name) != "") {
+		$name = "=?".$charset."?B?".
+			base64_encode(mb_convert_encoding(
+				$name,$charset,"UTF-8")).
+			"?=";
+	}
+	
+	return $name." <".$email."> ";
+}
 
+/**
+ * util_encode_mimeheader() - Encode mimeheader
+ *
+ * @param		string	The email subject
+ * @param		string	The converting charset (like ISO-2022-JP)
+ * @return		string	The MIME encoded subject
+ *
+ */
+function util_encode_mimeheader($str,$charset) {
+	if (!function_exists('mb_convert_encoding')) {
+		return $str;
+	}
+
+	return "=?".$charset."?B?".
+		base64_encode(mb_convert_encoding(
+			$str,$charset,"UTF-8")).
+		"?=";
+}
+
+/**
+ * util_convert_body() - Convert body of the email message
+ *
+ * @param		string	The body of the email message
+ * @param		string	The charset of the email message
+ * @return		string	The converted body of the email message
+ *
+ */
+function util_convert_body($str,$charset) {
+	if (!function_exists('mb_convert_encoding')) {
+		return $str;
+	}
+
+	return mb_convert_encoding($str,$charset,"UTF-8");
 }
 
 function util_send_jabber($to,$subject,$body) {
@@ -283,7 +340,7 @@ function &util_result_column_to_array($result, $col=0) {
 /**
  * util_wrap_find_space() - Find the first space in a string
  *
- * @param		string	The string in which to find the space
+ * @param		string	The string in which to find the space (must be UTF8!)
  * @param		int		The number of characters to wrap - Default is 80
  * @returns The position of the first space
  *
@@ -303,7 +360,18 @@ function util_wrap_find_space($string,$wrap) {
 			$try++;
 			$start=($wrap-($try*5));
 			//if we've gotten so far left , just truncate the line
-			if ($start<=10) {
+			if ($start<=20) {
+				while ($wrap >= 1) {
+					$code = ord(substr($string,$wrap,1));
+					if ($code <= 0x7F ||
+					    $code >= 0xC0) {
+						//Here is single byte character
+						//or head of multi byte character  
+						return $wrap;
+					}
+					//Do not break multi byte character
+					$wrap--;
+				}
 				return $wrap;
 			}
 			$found=false;

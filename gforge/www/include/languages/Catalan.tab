@@ -88,3 +88,4 @@ home	top_project_downloads	Projectes més descarregats
 conf	content_encoding	UTF-8
 conf	language_code	ca
 conf	language_id	14
+conf	mail_charset	ISO-8859-3

@@ -14,6 +14,7 @@
 conf	content_encoding	UTF-8
 conf	language_code	la
 conf	language_id	24
+conf	mail_charset	ISO-8859-1
 forum	title	Fora
 forum_forum	author	Scriptor
 forum_forum	date	Dies

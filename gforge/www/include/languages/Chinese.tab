@@ -79,3 +79,4 @@ home	top_project_downloads	熱門專案下載排行榜
 conf	content_encoding	UTF-8
 conf	language_code	zh-TW
 conf	language_id	11
+conf	mail_charset	Big5

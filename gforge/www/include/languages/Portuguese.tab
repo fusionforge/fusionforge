@@ -88,3 +88,4 @@ home	top_project_downloads	Projectos com mais Downloads
 conf	content_encoding	UTF-8
 conf	language_code	pt
 conf	language_id	18
+conf	mail_charset	ISO-8859-1

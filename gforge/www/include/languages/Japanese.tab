@@ -3,6 +3,7 @@ system	locale	ja
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	Y-m-d H:i
 conf	content_encoding	UTF-8
+conf	mail_charset	ISO-2022-JP
 conf	default_font	""
 conf	language_code	ja
 conf	language_id	25
@@ -342,6 +343,7 @@ menu	other_site_mirrors	ミラーサイト
 menu	project_admin	プロジェクト管理
 menu	project_help_wanted	プロジェクト協力者募集
 menu	project_summary	プロジェクトサマリー
+menu	register_project	新規プロジェクト登録
 menu	search	サーチ
 menu	site_status	サイトステータス
 menu	software_map	ソフトマップ
@@ -641,7 +643,7 @@ calendar	title	プロジェクト マネージメント：カレンダー
 calendar	january	1月
 calendar	february	2月
 calendar	march	3月
-calendar	april	10月
+calendar	april	4月
 calendar	may	5月
 calendar	june	6月
 calendar	july	7月

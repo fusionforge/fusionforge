@@ -525,7 +525,8 @@ common_utils	priority_colors	Echelle de priorité&nbsp;
 conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
-conf	language_id	
+conf	language_id	7
+conf	mail_charset	ISO-8859-1
 contact	about_blurb	<p>Ceci est page de prise de contact pour <b>$1</b> - si vous avez un problème acev un projet hébergé par nous, adressez vos questions/informations au gestionnaire de bogue/aide pour ce projet. Vous pouvez accéder à ces fonctions en allant sur la page d'accueil du projet à <tt>http://$2/projects/&lt;nom du projet&gt;</tt> et en cliquant sur le menu adéquat.</p> Si vous avez besoin d'aide, si vous voulez faire remonter un bogue ou si vous souhaitez communiquer directement avec l'équipe de $1, dirigez-vous vers le <a href="/projects/siteadmin">Projet maître de $1</a>.</p>
 contact	title	Contacter $1
 developer	body	Corps

@@ -19,6 +19,7 @@ conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	zh-cn
 conf	language_id	23
+conf	mail_charset	ISO-2022-CN
 account	title	帐号设置
 account	updated	更新
 account_change_email	message	您申请在 $1 上更改您的email地址。 \n 请浏览这个URL来完成email地址的改变：\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 工作组
