@@ -26,7 +26,7 @@
  */
 
 require_once('pre.php');
-require_once('www/scm/scm_utils.php');
+require_once('www/scm/admin/scm_utils.php');
 
 // Check permissions
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));

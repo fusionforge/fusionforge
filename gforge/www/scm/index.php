@@ -26,7 +26,7 @@
  */
 
 require_once('pre.php');    
-require_once('www/scm/scm_utils.php');    
+require_once('www/scm/include/scm_utils.php');    
 
 scm_header(array('title'=>$Language->getText('scm_index','scm_repository'),'group'=>$group_id));
 
