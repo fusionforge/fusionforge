@@ -56,12 +56,18 @@ install -m 664 etc/mapping.php $PLUGIN_CONF_DIR/
 if [ "$1" = "1" ] ; then
 	# register plugin in database
 	%{_libdir}/gforge/bin/register-plugin %{plugin} "LDAP external authentication"
+else
+	# upgrade
+	:
 fi
 
 %postun
 if [ "$1" = "0" ] ; then
 	# unregister plugin in database
 	%{_libdir}/gforge/bin/unregister-plugin %{plugin}
+else
+	# upgrade
+	:
 fi
 
 %clean

@@ -1,6 +1,8 @@
 * text=auto !eol
 gforge-plugin-eirc/EIRC-1.0.2.tar.gz -text
+gforge-plugin-ldapextauth/rpm-specific/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/cron.d/gforge-plugin-scmcvs -text svneol=unset#application/octet-stream
+gforge-plugin-scmcvs/rpm-specific/cronjobs/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/rpm-specific/languages/.keepme -text svneol=unset#application/octet-stream
 gforge-plugin-scmcvs/www/cvsweb/icons/back.gif -text
 gforge-plugin-scmcvs/www/cvsweb/icons/binary.gif -text
