@@ -162,8 +162,7 @@ if (session_loggedin()) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 				<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
-				<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.
-					$file_list[$i]->getName() .'">'.$Language->getText('tracker_detail','download').'</a></td>
+        <td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'.$Language->getText('tracker_mod','download').'</a></td>
 				</tr>';
 			}
 
