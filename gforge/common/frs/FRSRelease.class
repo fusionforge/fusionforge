@@ -294,7 +294,7 @@ class FRSRelease extends Error {
 		$this->FRSPackage->getName(),
 		"<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID(),
 		$GLOBALS['sys_name'],
-		"<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
+		"<http://$GLOBALS[HTTP_HOST]/frs/monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
 			
 
 		$text = util_line_wrap($text);
