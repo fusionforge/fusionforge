@@ -6,7 +6,7 @@
 #		     scripts can process it without needing to access the database.
 use DBI;
 
-require("../include.pl");  # Include all the predefined functions
+require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
 
 my $user_array = ();
 my $group_array = ();
@@ -14,7 +14,8 @@ my $group_array = ();
 &db_connect;
 
 # Dump the users Table information
-my $query = "select unix_uid, unix_status, user_name, shell, unix_pw, realname from users where unix_status != \"N\"";
+#my $query = "select unix_uid, unix_status, user_name, shell, unix_pw, realname from users where unix_status != \"N\"";
+my $query = "select unix_uid, unix_status, user_name, shell, unix_pw, realname from users where unix_status != 'N'";
 my $c = $dbh->prepare($query);
 $c->execute();
 	
@@ -51,5 +52,5 @@ while(my ($group_id, $group_name, $status) = $c->fetchrow()) {
 }
 
 # Now write out the files
-write_array_file($file_dir."user_dump", @user_array);
-write_array_file($file_dir."group_dump", @group_array);
+write_array_file($file_dir."dumps/user_dump", @user_array);
+write_array_file($file_dir."dumps/group_dump", @group_array);

@@ -53,7 +53,7 @@ be installed on your client machine. Substitute <I>modulename</I> and
 prompted.
 
 <P><FONT size="-1" face="courier">export CVS_RSH=ssh
-<BR>&nbsp;<BR>cvs -z3 -d<I>developername</I>@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
+<BR>&nbsp;<BR>cvs -z3 -d:ext:<I>developername</I>@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
 </FONT>';
 
 // ################## summary info
@@ -86,7 +86,7 @@ if ($row_grp['is_public']) {
 of this project\'s code. You may also view the complete histories of any
 file in the repository.
 <UL>
-<LI><A href="http://cvs.sourceforge.net/cgi-bin/cvsweb.cgi?cvsroot='
+<LI><A href="http://'.$sys_cvs_host.'/cgi-bin/cvsweb.cgi?cvsroot='
 .$row_grp['unix_group_name'].'"><B>Browse CVS Repository</B>';
 }
 
