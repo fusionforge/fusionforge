@@ -890,6 +890,18 @@ class Group extends Error {
 		}
 	}
 
+	function SetUsesAnonSCM ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$sql = "UPDATE groups SET enable_anonscm = $booleanparam WHERE group_id = ".$this->getID() ;
+		$res = db_query($sql);
+		if (!$this->fetchData($this->getID())) {
+			db_rollback();
+			return false;
+		}
+		db_commit () ;
+	}
+
 	/**
 	 *	enablePserver - whether or not this group has opted to enable Pserver.
 	 *
@@ -901,6 +913,18 @@ class Group extends Error {
 		} else {
 			return false;
 		}
+	}
+
+	function SetUsesPserver ($booleanparam) {
+		db_begin () ;
+		$booleanparam = $booleanparam ? 1 : 0 ;
+		$sql = "UPDATE groups SET enable_pserver = $booleanparam WHERE group_id = ".$this->getID() ;
+		$res = db_query($sql);
+		if (!$this->fetchData($this->getID())) {
+			db_rollback();
+			return false;
+		}
+		db_commit () ;
 	}
 
 	/**
