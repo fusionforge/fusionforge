@@ -129,7 +129,7 @@ function osdn_print_navbar_2() {
 	<tr>' ;
   print '<td WIDTH="20%"></td>';
 
-  print '<td WIDTH="60%"><a href="/"><img src="images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
+  print '<td WIDTH="60%"><a href="/"><img src="/images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
 
   print '<td WIDTH="20%"></td>';
 
