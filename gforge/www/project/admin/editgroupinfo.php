@@ -51,7 +51,7 @@ if ($submit) {
 	);
 	//100 $logo_image_id
 
-	if (!res) {
+	if (!$res) {
 		$feedback .= $group->getErrorMessage();
 	} else {
 		$feedback .= $Language->getText('project_admin_editgroupinfo','group_updated');
