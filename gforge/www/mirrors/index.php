@@ -44,14 +44,14 @@ Debian is the largest GNU/Linux distribution completely maintained by a base of 
 More than 500 developers currently work to make Debian the most complete distribution available
 today. <I>(We are a master push mirror for Debian.)</I>
 
-<P><?php html_image('/images/others/gnome1.png','44','50',array(align=>'right')); ?>
+<P><?php html_image('images/others/gnome1.png','44','50',array(align=>'right')); ?>
 <B><A href="http://download.sourceforge.net/mirrors/gnome/">Gnome</A></B> - GNOME 
 is the GNU Network Object Model Environment. The GNOME project intends 
 to build a complete, easy-to-use desktop
 environment for the user, and a powerful application framework 
 for the software developer. <I>(We are a primary Gnome mirror.)</I>
 
-<P><?php html_image('/images/others/kde-logotp3.png','148','40',array(align=>'right')); ?>
+<P><?php html_image('images/others/kde-logotp3.png','148','40',array(align=>'right')); ?>
 <B><A href="http://download.sourceforge.net/mirrors/kde/">KDE</A></B> -
 KDE is a powerful graphical desktop environment for Unix workstations. It combines
 ease of use, contemporary functionality and outstanding graphical design with the
@@ -101,7 +101,7 @@ enhanced Debian's robust, open source, distribution by making it easier to insta
 configure, administer, and update.
 <I>(We are mirror4.stormix.com.)</I>
 
-<P><?php html_image('/images/others/suse_g_sm.png','77','55',array(align=>'right')); ?>
+<P><?php html_image('images/others/suse_g_sm.png','77','55',array(align=>'right')); ?>
 <B><A href="http://download.sourceforge.net/pub/mirrors/suse/">SuSE Linux</A></B> -
 SuSE Linux provides a comprehensive set of software, and features the YaST2 setup
 and configuration tool with automatic hardware detection for PCI components and a

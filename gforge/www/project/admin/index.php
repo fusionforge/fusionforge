@@ -120,7 +120,7 @@ echo htmlspecialchars('<A href="http://'.$GLOBALS['sys_default_domain'].'">
 <IMG src="http://'.$GLOBALS['sys_default_domain'].'/sflogo.php?group_id='. $group_id .'" width="88" height="31"
 border="0" alt="SourceForge Logo"></A>');
 
-echo '<P>'.html_image('/images/sflogo-88-1.png','88','31',array(),0);
+echo '<P>'.html_image('images/sflogo-88-1.png','88','31',array(),0);
 
 $HTML->box1_bottom(); 
 
@@ -151,7 +151,7 @@ while ($row_memb=db_fetch_array($res_memb)) {
 		$img="trash.png";
 	}
 	if ($is_admin) {
-		$button='<INPUT TYPE="IMAGE" NAME="DELETE" SRC="/images/ic/'.$img.'" HEIGHT="16" WIDTH="16" BORDER="0">';
+		$button='<INPUT TYPE="IMAGE" NAME="DELETE" SRC="images/ic/'.$img.'" HEIGHT="16" WIDTH="16" BORDER="0">';
 	} else {
 		$button='&nbsp;';
 	}

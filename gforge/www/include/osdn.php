@@ -48,7 +48,7 @@ function osdn_nav_dropdown() {
 	</script>
 
 	<noscript>
-	<a href="http://www.osdn.com"><?php echo html_image("/images/osdn_logo_grey.png","135","33",array("hspace"=>"10","alt"=>" OSDN - Open Source Development Network ","border"=>"0")); ?></A><br>
+	<a href="http://www.osdn.com"><?php echo html_image("images/osdn_logo_grey.png","135","33",array("hspace"=>"10","alt"=>" OSDN - Open Source Development Network ","border"=>"0")); ?></A><br>
 	<a href="http://www.osdn.com/gallery.html"><font size="2" color="#fefefe" face="arial, helvetica">Network Gallery</font></a>
 	</noscript>
 
@@ -129,7 +129,7 @@ function osdn_print_navbar_2() {
 	<tr>' ;
   print '<td WIDTH="20%"></td>';
 
-  print '<td WIDTH="60%"><a href="/"><img src="/images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
+  print '<td WIDTH="60%"><a href="/"><img src="images/sf-for-debian.png" alt="Debian Sourceforge"></a></td>';
 
   print '<td WIDTH="20%"></td>';
 

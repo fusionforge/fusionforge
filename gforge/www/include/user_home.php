@@ -75,7 +75,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	<P>
 	<A HREF="/developer/diary.php?diary_user='. $user_id .'">View Diary & Notes</A>
 	<P>
-	<A HREF="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("/images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
+	<A HREF="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
 
 	?>
 </TD></TR>

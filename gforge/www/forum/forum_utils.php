@@ -94,9 +94,9 @@ function forum_header($params) {
 
 	if ($forum_id && user_isloggedin() ) {
 		echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'">' . 
-			html_image('/images/ic/check.png','16','15',array()).' Monitor Forum</A> | '.
+			html_image('images/ic/check.png','16','15',array()).' Monitor Forum</A> | '.
 			'<A HREF="/forum/save.php?forum_id='.$forum_id.'">';
-		echo  html_image('/images/ic/save.png','24','24',array()) .' Save Place</A> | ';
+		echo  html_image('images/ic/save.png','24','24',array()) .' Save Place</A> | ';
 	}
 
 	echo '  <A HREF="/forum/admin/?group_id='.$group_id.'">Admin</A></B>';
