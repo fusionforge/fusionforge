@@ -71,7 +71,7 @@ if ($is_admin && $submit) {
 project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
 
 echo '<h3>QRS:</h3>';
-echo 'Click here for to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
+echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
 
 $user_unix_name=user_getname();
 echo "<H3>Packages</H3>
