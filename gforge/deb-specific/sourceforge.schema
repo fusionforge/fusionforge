@@ -13,7 +13,11 @@ attributetype ( 1.1.2.2.2 NAME 'x-cvsShell'
 	EQUALITY caseExactIA5Match 
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
 
+attributetype ( 1.1.2.2.3 NAME 'x-forward-email' 
+	DESC 'The address to which email is forwarded' 
+	EQUALITY caseIgnoreIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+
 objectclass ( 1.1.2.2.1 NAME 'x-sourceforgeAccount' SUP top AUXILIARY
 	DESC 'Abstraction of a Sourceforge account' 
-	MAY ( x-cvsShell ) ) 
-
+	MAY ( x-cvsShell $ x-forward-email ) )

@@ -1,12 +1,5 @@
 sourceforge (2.5-10+9) unstable; urgency=low
 
-  * Added SF_robot and Replicator entry in sql2ldif script
-  * Made ldap_add_password template var work 
-
- -- Christian Bayle <bayle@aist.enst.fr>  Wed,  5 Sep 2001 00:53:29 +0200
-
-sourceforge (2.5-10+8) unstable; urgency=low
-
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
   * Added sf-add-skill and sf-register-theme scripts.
@@ -19,8 +12,16 @@ sourceforge (2.5-10+8) unstable; urgency=low
   * Fixed User.class (closes: #108682).
   * Added the alias for the Mailman images in sf-httpd.conf.template.
   * Fixed the most important entry in the zone file (ours).
+  * Started hacking on LDAP email forwarding.  I fear this will require
+    that we depend on exim (instead of any other MTA), unless we want to
+    maintain stuff for several MTAs.
+  * Fixed fill-in-the-blanks.pl to allow multiple replacements of the same
+    token on the same line.  That was needed by some magic that's not here
+    anymore, but it's better nevertheless.
+  * [Christian] Added SF_robot and Replicator entry in sql2ldif script.
+  * [Christian] Made ldap_add_password template var work.
 
- -- Roland Mas <lolando@debian.org>  Tue,  4 Sep 2001 20:07:27 +0200
+ -- Roland Mas <lolando@debian.org>  Wed,  5 Sep 2001 09:37:41 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 

@@ -1,4 +1,5 @@
-local_domains = localhost:users.{domain_name}:lists.{domain_name}
+SOURCEFORGE_DOMAINS = users.{domain_name}:{lists_host}
+local_domains = localhost:SOURCEFORGE_DOMAINS
 hide pgsql_servers = "localhost/sourceforge/some_user/some_password"
 
 #Mail director
@@ -8,10 +9,10 @@ forward_for_sourceforge:
   domains = users.{domain_name}
   driver = aliasfile
   file_transport = address_file
-  query = "select email from users where user_name = '$local_part'"
-  search_type = pgsql
-  user = nobody # trust no one
-  group = nogroup # trust no one
+  query = "ldap:///uid=$local_part,ou=People,{ldap_base_dn}?x-forward-email"
+  search_type = ldap
+  user = nobody
+  group = nogroup
 
 
 #ML directors

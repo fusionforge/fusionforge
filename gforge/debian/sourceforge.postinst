@@ -32,7 +32,7 @@ case "$1" in
 	pattern=$(basename $0).XXXXXX
 	
 	# "Fill in the blanks" in config files
-        files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
+        files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl exim.directors"
         vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host newsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list"
         
 	# Invoke our magic script
@@ -46,6 +46,7 @@ case "$1" in
 	chmod 640 /etc/sourceforge/database.inc
 	chown sourceforge:sourceforge /etc/sourceforge/local.pl
 	chmod 640 /etc/sourceforge/local.pl
+	chmod 644 /etc/sourceforge/exim.directors
     	
 	# Create the appropriate database user
 	tmp1=$(mktemp /tmp/$pattern)
