@@ -42,11 +42,11 @@ function stats_project_daily( $group_id, $span = 7 ) {
 		$span = 7;
 	}
 
-	$sql="SELECT * FROM stats_project_last_30 
+	$sql="SELECT * FROM stats_project_vw
 		WHERE group_id='$group_id' ORDER BY month DESC, day DESC";
 
 	if ($span == 30) {
-		$res = db_query($sql, -1, 0, SYS_DB_STATS);
+		$res = db_query($sql, 30, 0, SYS_DB_STATS);
 	} else {
 		$res = db_query($sql,  7, 0, SYS_DB_STATS);
 	}
@@ -164,7 +164,7 @@ function stats_project_all( $group_id ) {
 	global $HTML;
 	$res = db_query("
 		SELECT *
-		FROM stats_project_all
+		FROM stats_project_all_vw
 		WHERE group_id='$group_id'
 	", -1, 0, SYS_DB_STATS);
 	$row = db_fetch_array($res);

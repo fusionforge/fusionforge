@@ -18,8 +18,8 @@ INSERT INTO frs_dlstats_filetotal_agg
 	SELECT file_id, 0 as downloads
 	FROM frs_file;
 UPDATE frs_dlstats_filetotal_agg
-	SET downloads = count(*)
-	WHERE frs_dlstats_file.file_id = frs_dlstats_filetotal_agg.file_id;
+	SET downloads = (SELECT count(*)
+	FROM frs_dlstats_file WHERE frs_dlstats_file.file_id = frs_dlstats_filetotal_agg.file_id);
 
 ---
 --- Whenever a new file is inserted into the frs_file table, add an entry

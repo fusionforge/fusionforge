@@ -21,7 +21,7 @@ if ( !$offset || $offset < 0 ) {
 }
 
 // For expediancy, list only the filereleases in the past three days.
-$start_time = time() - (7 * 86400);
+$start_time = time() - (30 * 86400);
 
 $query	= "SELECT groups.group_name,"
 	. "groups.group_id,"

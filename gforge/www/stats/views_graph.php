@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: change_email.php,v 1.12 2001/05/13 17:53:29 pfalcon Exp $
+  * @version   $Id$
   *
   */
 
@@ -35,8 +35,14 @@ if ($monthly) {
 
 } else {
 
+	$beg_year=date('Y',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+	$beg_month=date('m',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+	$beg_day=date('d',mktime(0,0,0,(date('m')-1),date('d'),date('Y')));
+
 	$sql = "SELECT month,day,site_page_views AS site_views,subdomain_views 
-		FROM stats_site_last_30 ORDER BY month ASC, day ASC";
+		FROM stats_site_vw 
+		( month = '$beg_year$beg_month' AND day >= '$beg_day' ) OR ( month > '$beg_year$beg_month' )
+		ORDER BY month ASC, day ASC";
 	$grouping='Days';
 
 }
@@ -48,10 +54,10 @@ $i = 0;
 $xdata = array();
 $ydata = array();
 while ( $row = db_fetch_array($res) ) {
-        $xdata[$i]          = $i;
-	$xlabel[$i]         = $row['month'] . (($row['day']) ? "/" . $row['day'] : '');
-        $ydata1[$i]         = $row["site_views"] + $row["subdomain_views"];
-        ++$i;
+		$xdata[$i]		  = $i;
+	$xlabel[$i]		 = $row['month'] . (($row['day']) ? "/" . $row['day'] : '');
+		$ydata1[$i]		 = $row["site_views"] + $row["subdomain_views"];
+		++$i;
 }
 
 $graph = new Graph( 750, 550 );
@@ -59,18 +65,18 @@ $graph = new Graph( 750, 550 );
 // Need at least 2 data points
 //
 if ($i == 0) {
-    $xdata[0] = 0;
-    $xlabel[0] = "";
-    $ydata1[1] = 0;
-    $xdata[1] = 1;
-    $xlabel[1] = "";
-    $ydata1[1] = 0;
+	$xdata[0] = 0;
+	$xlabel[0] = "";
+	$ydata1[1] = 0;
+	$xdata[1] = 1;
+	$xlabel[1] = "";
+	$ydata1[1] = 0;
 }
 
 if ($i == 1) {
-    $xdata[1] = 1;
-    $xlabel[1] = $xlabel[0];
-    $ydata1[1] = $ydata1[0];
+	$xdata[1] = 1;
+	$xlabel[1] = $xlabel[0];
+	$ydata1[1] = $ydata1[0];
 }
 $graph->SetTitle( "Sourceforge Page Views" );
 $graph->SetSubTitle("Total Page Views (RED) ( $i $grouping )");

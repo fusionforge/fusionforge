@@ -332,8 +332,8 @@ if ($project->usesCVS()) {
 	print " ".$Language->getText('group','long_cvs')."</a>";
 
 	$result = db_query("
-		SELECT cvs_commits AS commits,cvs_adds AS adds
-		FROM stats_project_all
+		SELECT sum(commits) AS commits,sum(adds) AS adds
+		FROM stats_cvs_group
 		WHERE group_id='$group_id'
 	", -1, 0, SYS_DB_STATS);
 	$cvs_commit_num = db_result($result,0,0);

@@ -43,11 +43,11 @@ print '<h3>Sitewide Statistics Graphs</h3><br />' . "\n";
 <hr />
 
 <br /><br />
-<img src="views_graph.png" alt="" />
+<img src="views_graph.php" alt="" />
 <br /><br />
-<img src="views_graph.png?monthly=1" alt="" />
+<img src="views_graph.php?monthly=1" alt="" />
 <br /><br />
-<img src="users_graph.png" alt="" />
+<img src="users_graph.php" alt="" />
 <br /><br />
 </div>
 

@@ -42,8 +42,7 @@ type text,
 count float(8))";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 
@@ -58,8 +57,7 @@ GROUP BY group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 #project manager tasks
@@ -70,12 +68,11 @@ WHERE project_task.group_project_id=project_group_list.group_project_id
 AND end_date > '$last_week'
 AND end_date < '$this_week' 
 GROUP BY group_id";
-print "\n\n".$sql;
+//print "\n\n".$sql;
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 #bugs
@@ -93,8 +90,7 @@ GROUP BY agl.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 #patches
@@ -112,8 +108,7 @@ GROUP BY agl.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 #support
@@ -131,8 +126,7 @@ GROUP BY agl.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 #cvs commits
@@ -142,11 +136,10 @@ FROM stats_cvs_group
 WHERE ((month = '$last_year$last_month' AND day >= '$last_day') OR (month > '$last_year$last_month'))
 AND commits > 0
 GROUP BY group_id";
-print "\n\n".$sql;
+//print "\n\n".$sql;
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 #developers
@@ -167,30 +160,31 @@ GROUP BY frs_package.group_id";
 $rel = db_query($sql);
 
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
+db_begin();
+
 #file downloads
-$sql="SELECT group_id,'downloads', log(.3 * sum(downloads)::float) AS downloads
-FROM frs_dlstats_group_agg
+$sql="INSERT INTO project_counts_weekly_tmp 
+SELECT group_id,'downloads', log(.3 * sum(downloads)::float) AS downloads
+FROM frs_dlstats_group_vw
 WHERE (month = '$last_year$last_month' AND day >= '$last_day') OR (month > '$last_year$last_month')
 GROUP BY group_id;";
 $rel = db_query($sql,-1,0,SYS_DB_STATS);
 
-db_begin();
-
-while($row=db_fetch_array($rel)) {
-	db_query("INSERT INTO project_counts_weekly_tmp 
-		VALUES ('$row[group_id]','downloads','$row[downloads]')");
-	echo db_error();
+if (!$rel) {
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 db_commit();
 
 $sql = "CREATE SEQUENCE project_metric_weekly_seq" ;
-print "\n\n".$sql;
+//print "\n\n".$sql;
 $rel = db_query($sql);
+if (!$rel) {
+	echo "\n\n***ERROR: $sql\n\n".db_error();
+}
 
 #create a new table to insert the final records into
 $sql="CREATE TABLE project_metric_weekly_tmp1 (
@@ -199,8 +193,7 @@ group_id int not null,
 value float (10))";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 
@@ -212,39 +205,36 @@ FROM project_counts_weekly_tmp
 WHERE
 project_counts_weekly_tmp.count > 0
 GROUP BY group_id ORDER BY value DESC";
-print "\n\n".$sql;
+//print "\n\n".$sql;
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 #numrows in the set
 $sql="SELECT count(*) FROM project_metric_weekly_tmp1";
-print "\n\n".$sql;
+//print "\n\n".$sql;
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 $counts = db_result($rel,0,0);
 print "\n\nCounts: ".$counts;
-db_begin();
 
+db_begin();
 #drop the old metrics table
 $sql="DELETE FROM project_weekly_metric";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
-
 db_commit();
+
 $sql="INSERT INTO project_metric_weekly_tmp (ranking,percentile,group_id)
 SELECT ranking,(100-(100*((ranking-1)/$counts))),group_id 
 FROM project_metric_weekly_tmp1 ORDER BY ranking ASC";
-print "\n\n".$sql;
+//print "\n\n".$sql;
 $rel = db_query($sql);
 
 $sql="INSERT INTO project_weekly_metric (ranking,percentile,group_id)
@@ -253,8 +243,7 @@ FROM project_metric_weekly_tmp1
 ORDER BY ranking ASC";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 
@@ -268,8 +257,7 @@ SELECT '$this_year$this_month'::int, '$this_day'::int,group_id,ranking,percentil
 FROM project_weekly_metric";
 $rel = db_query($sql);
 if (!$rel) {
-	echo "<p>$sql<p>".db_error();
-	echo db_error();
+	echo "\n\n***ERROR: $sql\n\n".db_error();
 }
 
 echo db_error();
@@ -279,5 +267,4 @@ db_drop_table_if_exists ("project_counts_weekly_tmp");
 db_drop_table_if_exists ("project_metric_weekly_tmp1");
 db_drop_sequence_if_exists ("project_metric_week_ranking_seq");
 
-print "\n\n";
 ?>

@@ -205,7 +205,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 		SUM(s.cvs_commits) AS cvs_commits, 
 		SUM(s.cvs_adds) AS cvs_adds 
 		FROM 
-			stats_project_last_30 s, groups g
+			stats_project_vw s, groups g
 		WHERE 
 			s.group_id = g.group_id
 			$grp_str
@@ -232,7 +232,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 		s.cvs_commits,
 		s.cvs_adds
 		FROM 
-			stats_project_all s, groups g
+			stats_project_all_vw s, groups g
 		WHERE 
 			s.group_id = g.group_id
 			$grp_str
@@ -240,7 +240,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 
 	}
 
-	return db_query( $sql, 50, 0, SYS_DB_STATS);
+	return db_query( $sql, 30, 0, SYS_DB_STATS);
 
 }
 
@@ -348,11 +348,12 @@ function stats_site_projects_daily( $span ) {
 		$span = 7;
 	}
 
-	$sql="SELECT * FROM stats_site_last_30 
+	$sql="SELECT * FROM stats_site_vw 
+		WHERE 
 		ORDER BY month DESC, day DESC";
 
 	if ($span == 30) {
-		$res = db_query($sql, -1, 0, SYS_DB_STATS);
+		$res = db_query($sql, 30, 0, SYS_DB_STATS);
 	} else {
 		$res = db_query($sql,  7, 0, SYS_DB_STATS);
 	}
@@ -464,7 +465,7 @@ function stats_site_projects_monthly() {
 
 function stats_site_agregate( ) {
 
-	$res = db_query("SELECT * FROM stats_site_all", -1, 0, SYS_DB_STATS);
+	$res = db_query("SELECT * FROM stats_site_all_vw", -1, 0, SYS_DB_STATS);
 	$site_totals = db_fetch_array($res);
 
 	$sql	= "SELECT COUNT(*) AS count FROM groups WHERE status='A'";

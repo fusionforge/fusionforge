@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: change_email.php,v 1.12 2001/05/13 17:53:29 pfalcon Exp $
+  * @version   $Id$
   *
   */
 
