@@ -10,7 +10,7 @@ use strict ;
 use diagnostics ;
 use File::Temp qw/ :mktemp  /;
 
-use vars qw/ $dbh $sys_lists_host $domain_name / ;
+use vars qw/ $dbh $sys_lists_host $sys_users_host / ;
 
 use vars qw// ;
 
@@ -47,7 +47,7 @@ eval {
 	my ($tmp) ;
 
 	($group_list_id, $listname, $user_name, $password, $description)= @array ;
-	my $cmd = "/usr/sbin/newlist -q $listname $user_name\@users.$domain_name $password >/dev/null 2>&1" ;
+	my $cmd = "/usr/sbin/newlist -q $listname $user_name\@$sys_users_host $password >/dev/null 2>&1" ;
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
 
