@@ -181,6 +181,7 @@ $res_rootcat = db_query("
 	SELECT trove_cat_id,fullname
 	FROM trove_cat
 	WHERE parent=0
+	AND trove_cat_id!=0
 	ORDER BY fullname");
 echo db_error();
 

@@ -30,11 +30,13 @@ function trove_genfullpaths($mynode,$myfullpath,$myfullpathids) {
 		.$myfullpath.'\',fullpath_ids=\''
 		.$myfullpathids.'\' WHERE trove_cat_id='.$mynode);
 	// now generate paths for all children by recursive call
+	if($mynode!=0)
 	{
 		$res_child = db_query("
 			SELECT trove_cat_id,fullname
 			FROM trove_cat
 			WHERE parent='$mynode'
+			AND trove_cat_id!=0;
 		", -1, 0, SYS_DB_TROVE);
 
 		while ($row_child = db_fetch_array($res_child)) {

@@ -47,7 +47,8 @@ if ($GLOBALS["submit"]) {
 		}
 	} 
 	// update full paths now
-	trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
+	if($newroot!=0)trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
+	else trove_genfullpaths($form_trove_cat_id,trove_getfullname($form_trove_cat_id),$form_trove_cat_id);
 
 	session_redirect("/admin/trove/trove_cat_list.php");
 } 

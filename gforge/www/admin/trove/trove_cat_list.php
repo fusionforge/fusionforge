@@ -37,6 +37,7 @@ function printnode ($nodeid,$text) {
 	$res_child = db_query("
 		SELECT trove_cat_id,fullname FROM trove_cat 
 		WHERE parent='$nodeid'
+		AND trove_cat_id!=0;
 	");
 	while ($row_child = db_fetch_array($res_child)) {
 		printnode($row_child["trove_cat_id"],$row_child["fullname"]);
