@@ -40,7 +40,9 @@ if ($group_id) {
 
 	if ($ff->isError() || count($farr) < 1) {
 		echo '<h1>'.$Language->getText('forum','error_no_forums_found', array($g->getPublicName())) .'</h1>';
-		echo $ff->getErrorMessage();
+		if($ff->isError()) {
+			echo $ff->getErrorMessage();
+		}
 		forum_footer(array());
 		exit;
 	}
