@@ -172,9 +172,10 @@ top level for the directory structure of the repository.
 This is done using the cvs import command. The following steps show how it 
 can be done.<br/>
 <source>
-	$ cd &amp;&lt;top of tree&amp;&gt;>;
-	$ cvs import &amp;&lt;module-name&amp;gt; &lt;vendor-tag&gt; &lt;release-tag&gt;
-</source>
+<![CDATA[
+	$ cd <top of tree>
+	$ cvs import <module-name> <vendor-tag> <release-tag>
+]]></source>
 <br/>
 
 e.g. suppose we wish to import a directory structure called myproject, which was 

@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+a?xml version="1.0"?>
 <document>
 
   <properties>
@@ -38,7 +38,7 @@ This box shows the open surveys. The survey will be displayed directly in the Su
 This list shows your  bookmarked pages. When you click on a bookmark, you'll go direct to the page you bookmarked. When you click on Edit, you can edit or delete the bookmark.
 </li>
 <li><b>My Projects</b><br/>
-This list shows you the active projects you're partecipating. When you click on a project, you'll go direct to the project summary.
+This list shows you the active projects you're participating. When you click on a project, you'll go direct to the project summary.
 </li>
 <li><b>Pending Projects</b><br/>
 This section lists the new projects registered on gforge. This section is available only to administrators of the gforge site. It will be displayed only when pending projects needs to be approved.
@@ -101,7 +101,7 @@ The information that you can insert is:
 <ol>
 <li>Language</li>
 <li>Level of experience (Beginner, Master, expert)</li>
-<li>Duration of expierence (6 months, 1 year, 5 years) </li>
+<li>Duration of experience (6 months, 1 year, 5 years) </li>
 </ol>
 </p>
 </section>
