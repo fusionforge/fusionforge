@@ -515,16 +515,16 @@ eval {
 	&bump_sequence_to ("themes_pk_seq", $maxid) ;
 
 	@reqlist = (
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_reverse', 'Savannah Reverse') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_sad', 'Savannah Sad') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_savannah', 'Savannah Original') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_slashd', 'Savannah SlashDot') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_startrek', 'Savannah StarTrek') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_transparent', 'Savannah Transparent') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_water', 'Savannah Water') ;",
-		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_www.gnu.org', 'Savannah www.gnu.org') ;"
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_reverse', 'Savannah Reverse')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_sad', 'Savannah Sad')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_savannah', 'Savannah Original')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_slashd', 'Savannah SlashDot')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_startrek', 'Savannah StarTrek')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_transparent', 'Savannah Transparent')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_water', 'Savannah Water')",
+		    "INSERT INTO themes (dirname, fullname) VALUES ('savannah_www.gnu.org', 'Savannah www.gnu.org')"
 		    ) ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
@@ -534,7 +534,19 @@ eval {
 	    $sth->finish () ;
 	}
 	@reqlist = () ;
-
+    }
+    
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+5" ;
+    if (is_lesser $version, $target) {
+	debug "Registering yet another Savannah theme." ;
+	
+	$query = "INSERT INTO themes (dirname, fullname) VALUES ('savannah_darkslate', 'Savannah Dark Slate')";
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+	
 	&update_db_version ($target) ;
 	debug "Committing." ;
 	$dbh->commit () ;
