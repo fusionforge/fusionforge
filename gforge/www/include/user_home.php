@@ -48,7 +48,7 @@ $HTML->header(array('title'=>'Developer Profile'));
 	<TD>Email Addr: </TD>
 	<TD>
 	<B><A HREF="/sendmessage.php?touser=<?php print $user_id; 
-		?>"><?php print $user->getUnixName(); ?> at <?php print $GLOBALS['sys_users_host']; ?></A></B>
+		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['domain_name']; ?></A></B>
 	</TD>
 </TR>
 
@@ -155,8 +155,8 @@ if (user_isloggedin()) {
 	<INPUT TYPE="HIDDEN" NAME="touser" VALUE="<?php echo $user_id; ?>">
 
 	<B>Your Email Address:</B><BR>
-	<B><?php echo user_getname().'@'.$GLOBALS['sys_users_host']; ?></B>
-	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo user_getname().'@'.$GLOBALS['sys_users_host']; ?>">
+	<B><?php echo user_getname().'@users.'.$GLOBALS['sys_users_host']; ?></B>
+	<INPUT TYPE="HIDDEN" NAME="email" VALUE="<?php echo user_getname().'@users.'.$GLOBALS['sys_users_host']; ?>">
 	<P>
 	<B>Your Name:</B><BR>
 	<B><?php 
