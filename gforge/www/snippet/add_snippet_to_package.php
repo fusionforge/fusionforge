@@ -179,9 +179,6 @@ for ($i=0; $i<$combolistrows; $i++)
 		}
 		echo $HTML->boxBottom();
 	}
-	echo '
-	<p>&nbsp;</p>
-	<h2><span style="color:red">'.$feedback.'</span></h2>';
 
 	handle_add_exit();
 

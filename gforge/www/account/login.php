@@ -87,14 +87,13 @@ if ($login && !$success) {
 		
 	// Account Pending
 	if ($userstatus == "P") {
-		echo $Language->getText('account_login', 'pending_account', array($form_loginname));
+		$feedback = $Language->getText('account_login', 'pending_account', array($form_loginname));
 	} else {
-		echo '<h2 style="color:red">'. $feedback .'</h2>';
 		if ($userstatus == "D") {
-			echo $Language->getText('account_login', 'deleted_account', $GLOBALS['sys_name']);
+			$feedback .= '<br />'.$Language->getText('account_login', 'deleted_account', $GLOBALS['sys_name']);
 		}
-	} //end else
-
+	}
+	html_feedback_top($feedback);
 }
 
 ?>
