@@ -133,7 +133,7 @@ switch ($func) {
 		} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
-			if ((!$ath->userIsAdmin() && $ath->userIsTechnician()) || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
+			if (!$ath->userIsAdmin() && ($ath->userIsTechnician() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid())))) {
 //				&& !(session_loggedin() && ($ah->getSubmittedBy() == user_getid())) 
 //				&& (session_loggedin() && ($ah->getAssignedTo() == user_getid()))) {
 				$priority=$ah->getPriority();

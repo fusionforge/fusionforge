@@ -1,3 +1,8 @@
+2005-02-19  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* [#1071] Admin who is submitter now can modify all fields of
+	artifact.
+
 2005-02-18  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* commited [#1049] Dutch language tab-file updated for GForge-4
