@@ -408,16 +408,10 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT * FROM forum_monitored_forums
-			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
-
+		$sql="SELECT count(*) FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
 		$result = db_query($sql);
-
-		if (!$result || db_numrows($result) < 1) {
-			return false;
-		} else {
-			return true;
-		}
+    $row_count = db_fetch_array($result);
+		return $result && $row_count['count'] > 0;
 	}
 
 	/**
