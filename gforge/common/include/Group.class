@@ -811,6 +811,30 @@ class Group extends Error {
 			return $this->data_array['scm_box'];
 		}
 	}
+	/**
+	 * setSCMBox - the hostname of the scm box where this project is located.
+	 *
+	 * @param	string The name of the new SCM_BOX
+	 */
+	function setSCMBox($scm_box) {
+		if ( $GLOBALS['sys_scm_single_host'] == '1' ) {
+			$this->setError('Trying to change SCM_BOX when sys_scm_single_host selected');
+		} else {
+			db_begin();
+			$sql = "UPDATE groups SET scm_box = '$scm_box' WHERE group_id = ".$this->getID();
+			var_dump($sql);
+			$res = db_query($sql);
+			if ($res) {
+				$this->data_array['scm_box']=$scm_box;
+				db_commit();
+				return true;
+			} else {
+				db_rollback();
+				$this->setError('Couldn\'t insert SCM_BOX to database');
+				return false;
+			}
+		}
+	}
 
 	/**
 	 *  getDomain - the hostname.domain where their web page is located.
