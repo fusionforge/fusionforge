@@ -27,92 +27,104 @@ if (!$project->usesCVS()) {
 
 site_project_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$group_id,'toptab'=>'scm_index','pagename'=>'scm_index','sectionvals'=>array($project->getPublicName())));
 
-// ######################## table for summary info
-
-print '<table width="100%"><tr valign="top"><td width="65%">'."\n";
-
-// ######################## anonymous CVS instructions
-
-if ($project->enableAnonCVS() && $project->enablePserver()) {
-  if($GLOBALS['sys_cvs_single_host']) {
-    print $Language->getText('scm_index', 'anoncvs').' 
-     <p><tt>cvs -d:pserver:anonymous@' . $GLOBALS['sys_cvs_host'] . ':/cvsroot/'.$project->getUnixName().' login <br><br>
-cvs -z3 -d:pserver:anonymous@' . $GLOBALS['sys_cvs_host'] . ':/cvsroot/'.$project->getUnixName().' co  <i>modulename</i>
-</tt>
-
-
-<p>'.$Language->getText('scm_index', 'anoncvsup');
-  } else {
-    print $Language->getText('scm_index', 'anoncvs').'
-
-<p><tt>cvs -d:pserver:anonymous@cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' login <br><br>
-cvs -z3 -d:pserver:anonymous@cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <i>'.$Language->getText('scm_index','modulename').'</i>
-</tt>
-
- 
-<p>'.$Language->getText('scm_index', 'anoncvsup');
-  }
-}
-
-// ############################ developer access
-
 if($GLOBALS['sys_cvs_single_host']) {
-
-print $Language->getText('scm_index', 'devcvs').'
-
-<p><tt>export CVS_RSH=ssh
-<br><br>cvs -z3 -d:ext:<i>developername</i>@'.$GLOBALS['sys_cvs_host'].':/cvsroot/'.$project->getUnixName().' co <i>modulename</i>
-</tt>';
-
+	$cvsrootend=$GLOBALS['sys_cvs_host'].':/cvsroot/'.$project->getUnixName();
 } else {
-
-print $Language->getText('scm_index', 'devcvs').' 
-
-<p><tt>export CVS_RSH=ssh
-<br><br>cvs -z3 -d:ext:<i>developername</i>@cvs.'.$project->getUnixName().'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$project->getUnixName().' co <i>modulename</i>
-</tt>';
+	$cvsrootend='cvs.'.$project->getUnixName().'.'.$GLOBALS['sys_cvs_host'].':/cvsroot/'.$project->getUnixName();
 }
+// ######################## table for summary info
+?>
+
+<table width="100%">
+	<tr valign="top">
+		<td width="65%">
+
+<?php
+// ######################## anonymous CVS instructions
+if ($project->enableAnonCVS() && $project->enablePserver()) {
+?>
+		<?php echo $Language->getText('scm_index', 'anoncvs'); ?>
+     			<p>
+			<tt>cvs -d:pserver:anonymous@<?php echo $cvsrootend; ?> login 
+			<br>
+			<br>
+			cvs -z3 -d:pserver:anonymous@<?php echo $cvsrootend; ?> co  <i>modulename</i>
+			</tt>
+			<p>
+		<?php echo $Language->getText('scm_index', 'anoncvsup'); ?>
+<?php
+}
+?>
+
+<?php
+// ############################ developer access
+?>
+
+		<? echo $Language->getText('scm_index', 'devcvs'); ?>
+
+			<p>
+			<tt>export CVS_RSH=ssh
+			<br>
+			<br>cvs -z3 -d:ext:<i>developername</i>@<?php echo $cvsrootend; ?> co <i>modulename</i>
+			</tt>
+			<p>
+
+<?php
 // ################## summary info
+?>
 
-print '</td><td width="35%">';
-print $HTML->boxTop($Language->getText('scm_index', 'history'));
+		</td>
+		<td width="35%">
+		<?php echo $HTML->boxTop($Language->getText('scm_index', 'history')); ?>
 
+<?php
 // ################ is there commit info?
-
 $res_cvshist = db_query("SELECT * FROM group_cvs_history WHERE group_id='$group_id'");
 if (db_numrows($res_cvshist) < 1) {
-	//print '<p>This project has no CVS history.';
+?>
+		<p>
+		<?php echo $Language->getText('scm_index', 'nohistory'); ?>
+<?php
 } else {
+?>
+		<p>
+		<b><?php echo $Language->getText('scm_index','developer_commits_adds'); ?></b>
+		<br>&nbsp;
 
-print '<p><b>'.$Language->getText('scm_index','developer_commits_adds').'</b><br>&nbsp;';
-
-while ($row_cvshist = db_fetch_array($res_cvshist)) {
-	print '<br>'.$row_cvshist['user_name'].' ('.$row_cvshist['cvs_commits_wk'].'/'
+<?php
+	while ($row_cvshist = db_fetch_array($res_cvshist)) {
+?>
+		<br><? print $row_cvshist['user_name'].' ('.$row_cvshist['cvs_commits_wk'].'/'
 		.$row_cvshist['cvs_commits'].') ('.$row_cvshist['cvs_adds_wk'].'/'
-		.$row_cvshist['cvs_adds'].')';
-}
+		.$row_cvshist['cvs_adds'].')'; ?>
+<?php
+	}
 
 } // ### else no cvs history
 
 // ############################## CVS Browsing
 
- $anonymous = 1;
- if (session_loggedin()) {
+$anonymous = 1;
+if (session_loggedin()) {
    $perm =& $project->getPermission(session_get_user());
    $anonymous = !$perm->isMember();
- }
+}
  
- if ($project->enableAnonCVS() || !$anonymous) {
-	print $Language->getText('scm_index', 'browsetree').' 
-<UL>
-<li><a href="'.account_group_cvsweb_url($project->getUnixName()).'">
-<b>'.$Language->getText('scm_index', 'browseit').'</b></a></li>';
+if ($project->enableAnonCVS() || !$anonymous) {
+	echo $Language->getText('scm_index', 'browsetree');
+?>
+		<UL>
+		<li><a href=<?php print account_group_cvsweb_url($project->getUnixName()); ?> >
+			<b><?php echo $Language->getText('scm_index', 'browseit'); ?></b></a>
+		</UL>
+<?php
 }
 
-print $HTML->boxBottom();
-
-print '</td></tr></table>';
-
-site_project_footer(array());
+echo $HTML->boxBottom();
 
 ?>
+		</td>
+	</tr>
+</table>
+
+<?php site_project_footer(array()); ?>

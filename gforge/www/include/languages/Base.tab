@@ -1837,6 +1837,7 @@ scm_index	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repositor
 scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 scm_index	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
 scm_index	history	Repository History
+scm_index	nohistory	This project has no CVS history.
 scm_index	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
 scm_index	browseit	Browse CVS Repository
 scm_index	error_only_projects_can_use_cvs	Error, Only Projects Can Use CVS
