@@ -88,7 +88,7 @@ computedefault(){
 	DEFAULTsys_use_project_vhost=true
 	DEFAULTsys_use_project_database=false
 	DEFAULTsys_use_project_multimedia=false
-	DEFAULTsys_project_reg_restricted=true
+	DEFAULTsys_project_reg_restricted=false
 	DEFAULTsys_localization_enable_caching=true
 	DEFAULTsys_localization_cache_path=$GFGDIR/var/cache/gforge/
 	DEFAULTsys_localization_enable_timestamp_checking=true
