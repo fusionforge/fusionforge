@@ -20,6 +20,10 @@ case "$target" in
 	exit 1
 	;;
     configure)
+	do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+	if [ ! "$do_config" = "true" ] ; then
+	    exit 0
+	fi
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, get the list of local domains right

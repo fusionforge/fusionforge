@@ -38,16 +38,20 @@ modify_libnss_ldap(){
 	# Check rootbinddn
 	# This seems to be necessary to display uid/gid
 	# Should be cn=admin,ou=People,dc=...
-	if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf ; then
+	if [ ! "$do_config" = "true" ] ; then
+	    if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf ; then
 		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf
 		echo "rootbinddn cn=admin,ou=People,$dn" >>/etc/libnss-ldap.conf
+	    fi
 	fi
 }
 
 # Purge /etc/libnss-ldap.conf
 purge_libnss_ldap(){
-	perl -pi -e "s/^# Next line added by Sourceforge install\n/#SF#/g" /etc/libnss-ldap.conf
-	perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf
+	if [ ! "$do_config" = "true" ] ; then
+	    perl -pi -e "s/^# Next line added by Sourceforge install\n/#SF#/g" /etc/libnss-ldap.conf
+	    perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf
+	fi
 }
 
 # Modify /etc/ldap/slapd.conf
@@ -56,8 +60,9 @@ modify_slapd(){
 	# Maybe should comment referral line too
 	echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
 	
-	# Debian config by default only include core schema
-	if ! grep -q "Sourceforge" /etc/ldap/slapd.conf ; then
+	if [ ! "$do_config" = "true" ] ; then
+	    # Debian config by default only include core schema
+	    if ! grep -q "Sourceforge" /etc/ldap/slapd.conf ; then
 		rm -f /etc/ldap/slapd.conf.sourceforge
 		for schema in /etc/ldap/schema/core.schema \
 			/etc/ldap/schema/cosine.schema \
@@ -103,18 +108,20 @@ access to dn=\"ou=cvsGroup,$dn\"
 	by * read				
 # End of sourceforge add
 access to */" /etc/ldap/slapd.conf
-
+		
 		# invoke-rc.d slapd restart
-	fi	
+	    fi	
+	fi
 }
 
 # Purge /etc/ldap/slapd.conf
 purge_slapd(){
+    if [ ! "$do_config" = "true" ] ; then
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
-if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf
-then
-	vi -e /etc/ldap/slapd.conf <<-FIN
+	if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf
+	    then
+	    vi -e /etc/ldap/slapd.conf <<-FIN
 /# Next second line added by Sourceforge install
 :d
 /SF_robot
@@ -122,10 +129,10 @@ then
 :w
 :x
 FIN
-fi
-if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf
-then
-	vi -e /etc/ldap/slapd.conf <<-FIN
+	fi
+	if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf
+	    then
+	    vi -e /etc/ldap/slapd.conf <<-FIN
 /# Next lines added by Sourceforge install
 :ma a
 /# End of sourceforge add
@@ -134,13 +141,15 @@ then
 :w
 :x
 FIN
-fi
+	fi
+    fi
 
 }
 
 # Modify /etc/nsswitch.conf
 modify_nsswitch()
 {
+    if [ ! "$do_config" = "true" ] ; then
 	# This is sensitive file
 	if ! grep -q "Sourceforge" /etc/nsswitch.conf ; then
 		# By security i let priority to files
@@ -150,13 +159,16 @@ modify_nsswitch()
 		perl -pi -e "s/^group/group:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#group/g" /etc/nsswitch.conf
 		perl -pi -e "s/^shadow/shadow:	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#shadow/g" /etc/nsswitch.conf
 	fi
+    fi
 }
 
 # Purge /etc/nsswitch.conf
 purge_nsswitch()
 {
+    if [ ! "$do_config" = "true" ] ; then
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/nsswitch.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/nsswitch.conf
+    fi
 }
 
 # Load ldap database from sourceforge database
@@ -231,6 +243,8 @@ setup_vars() {
 	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
 	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
 	#echo "=====>$cryptedpasswd"
+	do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+
 }
 
 # Setup SF_robot Passwd

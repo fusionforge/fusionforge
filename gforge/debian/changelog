@@ -4,9 +4,10 @@ sourceforge (2.5-24+) unstable; urgency=low
     robustness.
   * [Roland] Added manpage for sourceforge-config (fixes lintian error).
   * [Christian] Added : in /etc/nsswitch.conf
-    added dont_touch_config template
+    added do_config template
+  * [Roland] Wrote the code behind the do_config debconf variable.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Fri, 15 Feb 2002 23:31:13 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 16 Feb 2002 15:08:02 +0100
 
 sourceforge (2.5-24) unstable; urgency=low
 

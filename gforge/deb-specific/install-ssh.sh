@@ -18,17 +18,25 @@ else
 				/etc/init.d/ssh stop
 				[ -f /var/lib/sourceforge/chroot/var/run/ssh.pid ] && kill $(cat /var/lib/sourceforge/chroot/var/run/ssh.pid)
 				rm -f /var/lib/sourceforge/chroot/var/run/ssh.pid
-				if ! grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh ; then
-				perl -pi -e "s:start-stop-daemon:start-stop-daemon --chroot /var/lib/sourceforge/chroot:g" /etc/init.d/ssh
-fi
-				rm -f /etc/ssh/sshd_not_to_be_run
+			        do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+    			        if [ ! "$do_config" = "true" ] ; then
+				    if ! grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh ; then
+					perl -pi -e "s:start-stop-daemon:start-stop-daemon --chroot /var/lib/sourceforge/chroot:g" /etc/init.d/ssh
+				    fi
+				    rm -f /etc/ssh/sshd_not_to_be_run
+				fi
+				/etc/init.d/ssh start
+				    
 				;;
 			purge)
-        			if grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh
-       				 then
-               				 perl -pi -e "s:start-stop-daemon --chroot /var/lib/sourceforge/chroot:start-stop-daemon:g" /etc/init.d/ssh
+			        do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+    			        if [ ! "$do_config" = "true" ] ; then
+				    if grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh
+					then
+					perl -pi -e "s:start-stop-daemon --chroot /var/lib/sourceforge/chroot:start-stop-daemon:g" /etc/init.d/ssh
 					/etc/init.d/ssh restart
-        			fi
+				    fi
+				fi
 				;;
 		esac
 	fi

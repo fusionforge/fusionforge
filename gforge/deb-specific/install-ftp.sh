@@ -13,7 +13,8 @@ else
 	else
 		case "$target" in
 			default|configure)
-				adduser --quiet --system --group --home $FTPROOT sfftp
+			        do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+			        adduser --quiet --system --group --home $FTPROOT sfftp
 				mkdir -p $FTPROOT/pub
 				cat >$FTPROOT/welcome.msg<<-FIN
 Welcome, archive user %U@%R !
@@ -26,15 +27,17 @@ please report them via e-mail to <root@%L>.
 				#
 				# This initialize FTP
 				#
-				if ! grep -q "^Include /etc/sourceforge/sf-proftpd.conf" /etc/proftpd.conf ; then
-
+    			        if [ ! "$do_config" = "true" ] ; then
+				    if ! grep -q "^Include /etc/sourceforge/sf-proftpd.conf" /etc/proftpd.conf ; then
+				    
                 			perl -pi -e "s/^/#SF#/" /etc/proftpd.conf
 	    				echo "### Previous lines commented by Sourceforge install" >> /etc/proftpd.conf
 	    				echo "### Next lines inserted by Sourceforge install" >> /etc/proftpd.conf
 					echo "ServerType standalone" >>/etc/proftpd.conf
 	    				echo "Include /etc/sourceforge/sf-proftpd.conf" >> /etc/proftpd.conf
+				    fi
+				    /etc/init.d/proftpd restart
 				fi
-				/etc/init.d/proftpd restart
 				;;
 			update)
 				(cd $GRPHOME; ls)| while read group
@@ -46,17 +49,20 @@ please report them via e-mail to <root@%L>.
 				done
 				;;
 			purge)
-        			if grep -q "### Next lines inserted by Sourceforge install" /etc/proftpd.conf
-			        then
+			        do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+    			        if [ ! "$do_config" = "true" ] ; then
+				    if grep -q "### Next lines inserted by Sourceforge install" /etc/proftpd.conf
+					then
 	    				perl -pi -e "s/### Previous lines commented by Sourceforge install\n//"  /etc/proftpd.conf
                 			perl -pi -e "s/### Next lines inserted by Sourceforge install\n//" /etc/proftpd.conf
                 			perl -pi -e "s:^Include /etc/sourceforge/sf-proftpd.conf\n::" /etc/proftpd.conf
                 			perl -pi -e "s:^ServerType standalone\n::" /etc/proftpd.conf
                 			perl -pi -e "s/^#SF#//" /etc/proftpd.conf
-        			fi
-				/etc/init.d/proftpd restart
+				    fi
+				    /etc/init.d/proftpd restart
+				fi
 				rm -rf $FTPROOT
-				deluser sfftp || true
+				deluser --quiet sfftp || true
 				;;
 		esac
 	fi
