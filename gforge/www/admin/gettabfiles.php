@@ -16,13 +16,17 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 header('Content-Type: application/octet-stream');
 header("Content-Disposition: attachment; filename=$lang.tab");
 
-$result=db_query("SELECT * from tmp_lang WHERE language_id='".$lang."' AND tmpid!='-1' ORDER BY seq");
+$result=db_query("SELECT * from tmp_lang WHERE language_id='".$lang."' AND tmpid!='-1' AND pagename='#' ORDER BY seq");
+for ($i=0; $i<db_numrows($result) ; $i++) {
+	$tstring=stripslashes(util_unconvert_htmlspecialchars(db_result($result, $i, 'tstring')));
+	echo $tstring;
+}
+$result=db_query("SELECT * from tmp_lang WHERE language_id='".$lang."' AND tmpid!='-1' AND pagename!='#' ORDER BY pagename,category");
 for ($i=0; $i<db_numrows($result) ; $i++) {
 	$pagename=db_result($result, $i, 'pagename');
 	$category=db_result($result, $i, 'category');
 	$tstring=stripslashes(util_unconvert_htmlspecialchars(db_result($result, $i, 'tstring')));
-	if ($pagename=='#') echo $tstring;
-	else echo "$pagename	$category	$tstring";
+	echo "$pagename	$category	$tstring";
 }
 
 ?>
