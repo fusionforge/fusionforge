@@ -9,6 +9,7 @@ use Sys::Hostname;
 #$hostname = hostname();
 
 require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions and variables
+require $db_include ;
 
 $hostname = "cvs";
 
@@ -180,9 +181,17 @@ sub add_user {
 	my ($uid, $username, $realname, $shell, $passwd) = @_;
 	my $skel_array = ();
 	
-	$home_dir = $homedir_prefix.$username;
-
 	print("Making a User Account for : $username\n");
+
+	$home_dir = $homedir_prefix.$username;
+	$incoming_dir = $home_dir."/incoming" ;
+	foreach my $dir ($home_dir, $incoming_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0755;
+	    }
+	    chmod 0755, $dir;
+	    chown $uid, $uid, $dir;
+	}
 		
 	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
 	push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
@@ -192,53 +201,29 @@ sub add_user {
 	mkdir $home_dir, 0751;
         chown $uid, $uid, $home_dir;
 	
-	mkdir $home_dir.'/incoming', 0771;
+	mkdir $home_dir.'/incoming', 0755;
 	chown $uid, $uid, $home_dir.'/incoming' ;
 	chmod 0755, $home_dir.'/incoming';
 }
 
 #############################
-# User Add Function
+# User Update Function
 #############################
 sub update_user {
 	my ($uid, $username, $realname, $shell, $passwd) = @_;
-	my ($p_uid, $p_junk, $p_uid, $p_gid, $p_realname, $p_homedir, $p_shell);
 	my ($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv, $counter);
 	
-	#CB# Let's make this silent
-	#print("Updating Account for: $username\n");
-	
-#	foreach (@passwd_array) {
-#		($p_uid, $p_junk, $p_uid, $p_gid, $p_realname, $p_homedir, $p_shell) = split(":", $_);
-#		
-#		if ($uid == $p_uid) {
-#			if ($realname ne $p_realname) {
-#				$passwd_array[$counter] = "$username:x:$uid:$uid:$realname:$p_homedir:$shell\n";
-#			} elsif ($shell ne $t_shell) {
-#				$passwd_array[$counter] = "$username:x:$uid:$uid:$p_realname:$p_homedir:$p_shell";
-#			}
-#		}
-#		$counter++;
-#	}
-#	
-#	$counter = 0;
-#	
-#	foreach (@shadow_array) {
-#		($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv) = split(":", $_);
-#		if ($username eq $s_username) {
-#			if ($passwd ne $s_passwd) {
-#				$shadow_array[$counter] = "$username:$passwd:$s_date:$s_min:$s_max:$s_inact:$s_expire:$s_flag:$s_resv";
-#			}
-#		}
-#		$counter++;
-#	}
-
+	# print("Updating User Account for : $username\n");
+		
         $home_dir = $homedir_prefix.$username;
-	unless (-d $home_dir.'/incoming') {
-	    mkdir $home_dir.'/incoming', 0771;
+	$incoming_dir = $home_dir.".incoming" ;
+	foreach my $dir ($home_dir, $incoming_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0755;
+	    }
+	    chmod 0755, $dir;
+	    chown $uid, $uid, $dir;
 	}
-        system("chown $username:$username $home_dir/incoming");
-	system("chmod 0771 $home_dir/incoming");
 
 	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
 	push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
@@ -295,25 +280,24 @@ sub suspend_user {
 #############################
 sub add_group {  
 	my ($gid, $gname, $userlist) = @_;
-	my ($log_dir, $cgi_dir, $ht_dir, $cvs_dir, $cvs_id);
+	my ($log_dir, $cgi_dir, $ht_dir, $cvs_dir, $cvs_id, $dl_dir);
 	
 	$group_dir = $grpdir_prefix.$gname;
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
 	$ht_dir = $group_dir."/htdocs";
+	$dl_dir = $FTPFILES_DIR."/".$gname;
 
 	print("Making a Group for : $gname\n");
-		
 	push @group_array, "$gname:x:$gid:$userlist\n";
 	
-	#if (substr($hostname,0,3) ne "cvs") {
-		# Now lets create the group's homedir.
-		mkdir $group_dir, 0775;
-		mkdir $log_dir, 0775;
-		mkdir $cgi_dir, 0775;
-		mkdir $ht_dir, 0775;
-		chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
-	#}
+	foreach my $dir ($group_dir, $log_dir, $cgi_dir, $ht_dir, $dl_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0775;
+	    }
+	    chmod 0775, $dir;
+	    chown $dummy_uid, $gid, $dir;
+	}
 }
 
 #############################
@@ -321,21 +305,23 @@ sub add_group {
 #############################
 sub update_group {
 	my ($gid, $gname, $userlist) = @_;
-	my ($p_gname, $p_junk, $p_gid, $p_userlist, $counter);
+	my ($log_dir, $cgi_dir, $ht_dir, $cvs_dir, $cvs_id, $dl_dir);
+	# my ($p_gname, $p_junk, $p_gid, $p_userlist, $counter);
+
+	$group_dir = $grpdir_prefix.$gname;
+	$log_dir = $group_dir."/log";
+	$cgi_dir = $group_dir."/cgi-bin";
+	$ht_dir = $group_dir."/htdocs";
+	$dl_dir = $FTPFILES_DIR."/".$gname;
 	
-	#CB# Let's make this silent
-	#print("Updating Group: $gname\n");
-	
-#	foreach (@group_array) {
-#		($p_gname, $p_junk, $p_gid, $p_userlist) = split(":", $_);
-#		
-#		if ($gid == $p_gid) {
-#			if ($userlist ne $p_userlist) {
-#				$group_array[$counter] = "$gname:x:$gid:$userlist\n";
-#			}
-#		}
-#		$counter++;
-#	}
+	foreach my $dir ($group_dir, $log_dir, $cgi_dir, $ht_dir, $dl_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0755;
+	    }
+	    chmod 0775, $dir;
+	    chown $dummy_uid, $gid, $dir;
+	}
+
 	push @group_array, "$gname:x:$gid:$userlist\n";
 }
 
@@ -347,14 +333,6 @@ sub delete_group {
 	my $this_group = shift(@_);
 	$counter = 0;
 	
-#	foreach (@group_array) {
-#		($gname, $x, $gid, $userlist) = split(":", $_);
-#		if ($this_user eq $gname) {
-#			$group_array[$counter] = '';
-#		}
-#		$counter++;
-#	}
-
 	if (substr($hostname,0,3) ne "cvs") {
 		print("Deleting Group: $this_group\n");
 # Find a better solution
