@@ -29,6 +29,7 @@ $one_repository = false;
 $repos_co = '/var/svn-co';
 
 //type of repository, whether filepassthru or bdb
+//$repos_type = ' --fs-type fsfs ';
 $repos_type = '';
 
 /*
@@ -139,7 +140,7 @@ function writeFile($filePath, $content) {
 }
 
 if ($one_repository) {
-	passthru ("$svn_path/svn commit -m\"\"");
+	passthru ("cd $repos_co && $svn_path/svn commit -m\"\"");
 }
 system("chown $file_owner -R $svn");
 system("cd $svn/ ; find -type d -exec chmod 700 {} \;");
