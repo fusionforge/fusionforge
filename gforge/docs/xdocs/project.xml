@@ -6,12 +6,14 @@
   <name>gforge</name>
   <currentVersion>3.0</currentVersion>
   <organization>
-    <name>Gforge.org</name>
+    <name>GForge</name>
     <url>http://gforge.org/</url>
   <logo>/images/logo.png</logo>
   </organization>
   <inceptionYear>2002</inceptionYear>
-  <description>Gforge </description>
+  <description>
+GForge is an Open Source collaborative software development tool, which allows you to organize and manage any number of software development projects. It's perfect for managing large teams of software engineers and/or engineers scattered among multiple locations.
+</description>
   <shortDescription>Software for collaborative development</shortDescription>
   <url>http://gforge.org/</url>
   <issueTrackingUrl>http://gforge.org/tracker/?group_id=1</issueTrackingUrl>
@@ -33,8 +35,7 @@
     </developer>
   </developers>
    
-  <dependencies>
-  </dependencies>
+  <dependencies></dependencies>
 	
 	<mailingLists>
 	<mailingList>
