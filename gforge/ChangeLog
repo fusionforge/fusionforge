@@ -1,3 +1,7 @@
+2003-01-13 Tom Copeland (tom@infoether.com)
+
+	* www/survey/admin/add_survey.php: Survey title is now a required field.
+
 2003-01-13  Tim Perdue (tim@gforge.org)
 
 	* more simplication of db_stats_agg.php by creating views

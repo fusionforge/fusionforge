@@ -24,13 +24,16 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 }
 
 if ($post_changes) {
-	//$survey_questions=trim(ltrim($survey_questions));
-	$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
-	$result=db_query($sql);
-	if ($result) {
-		$feedback .= " Survey Inserted ";
+	if (!$survey_title) {
+		$feedback .= " Survey title is required ";
 	} else {
-		$feedback .= " Error in Survey Insert ";
+		$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
+		$result=db_query($sql);
+		if ($result) {
+			$feedback .= " Survey Inserted ";
+		} else {
+			$feedback .= " Error in Survey Insert ";
+		}
 	}
 }
 
@@ -50,7 +53,7 @@ function show_questions() {
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 
-<strong>Name of Survey:</strong>
+<strong>Name of Survey:</strong><?php echo utils_requiredField(); ?>
 <br />
 <input type="text" name="survey_title" value="" length="60" maxlength="150" /><p>
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
