@@ -123,13 +123,21 @@ class Document extends Error {
 
 /*
 		$perm =& $this->Group->getPermission( session_get_user() );
-
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 */
 		$user_id = ((session_loggedin()) ? user_getid() : 100);
+
+		$doc_initstatus = '3';
+		// If Editor - uploaded Documents are ACTIVE
+		if ( session_loggedin() ) {
+			$perm =& $this->Group->getPermission( session_get_user() );
+			if ($perm && is_object($perm) && $perm->isDocEditor()) {
+				$doc_initstatus = '1';
+			}
+		}
 
 		// If $filetype is "text/plain", $body convert UTF-8 encoding.
 		if (strcasecmp($filetype,"text/plain") === 0 &&
@@ -145,7 +153,7 @@ class Document extends Error {
 			'". htmlspecialchars($description) ."',
 			'". time() ."',
 			'$doc_group',
-			'3',
+			'$doc_initstatus',
 			'$language_id',
 			'$filename',
 			'$filetype',
