@@ -38,7 +38,7 @@ case "$1" in
         # POSTGRES
         if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf
         then
-                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/p\g_hba.conf
+                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf
                 perl -pi -e "s/^host.*sourceforge_passwd\n//" /etc/postgresql/pg_hba.conf
         fi
 	
