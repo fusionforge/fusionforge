@@ -24,17 +24,16 @@
 # 2002-09-25 Christian Bayle <bayle@debian.org>
 #	* Added more account_register/blurb
 #
-system	locale	en_US
-system	strftimefmt	%e %B %Y %H:%M
-system	datefmt	d/m/Y H:i
 about	about_blurb	<h2>À propos de Sourceforge</h2>Ce site tourne avec Debian Sourceforge, un dérivatif du code sous lequel tourne <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  Les informations présentes sur cette page ne documentent que Debian Sourceforge.  Veuillez vous référer à <a href="http://www.sourceforge.net/">Sourceforge.net</a> pour obtenir des informations sur leur code.<br><br><b>Auteurs</b><br><a href="staff.php">L'équipe</a> Sourceforge a travaillé dur pour que le projet Sourceforge aboutisse.  Si vous voulez savoir qui est derrière ce projet, en voici l'occasion.<br><br><b>Remerciements</b><br>Nous devons beaucoup aux auteurs du code qui permet à Sourceforge de tourner, mais nous aimerions également étendre notre gratitude aux personnes et organisations listées <a href="thanks.php">ici</a> pour l'aide qu'elles nous ont apportée.<br><br><b>Pour plus d'information</b><br>Si vous avez d'autres questions, contactez la <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">liste de diffusion des utilisateurs de Debian Sourceforge</a>.  Vous pouvez également jeter un oeil sur la <a href="http://savannah.gnu.org/projects/debian-sf/">page du projet</a> Debian Sourceforge sur Savannah (un autre dérivé de Sourceforge, hébergé par le projet GNU et la FSF).<br><br><b>Copyrights</b><br>Le code originel de Sourceforge a été écrit par la société VA Linux Systems (qui a depuis changé son nom en VA Software) et publié sous la licence publique générale (GPL) GNU.  Le copyright leur appartient donc en grande partie.<br>Le code qui permet de faire fonctionner ce site, en revanche, est Debian Sourceforge, une version modifiée pour fonctionner sur des systèmes Debian.  Les changements visibles sont principalement des corrections typographiques et des bugs, mais nous avons également développé un système d'installation: Debian Sourceforge est facile à installer, configurer et exploiter dès que vous avez un système Debian.  Debian Sourceforge a été réalisé par Christian Bayle et Roland Mas, avec diverses contributions ponctuelles apportées par diverses personnes.<br><br><b>Marques déposées et autres</b><br>VA Linux Systems et Sourceforge sont des marques de la société VA Linux Systems (actuellement VA Software).  Linux est une marque déposée de Linus Torvalds.  Les autres marques déposées et copyrights sont les propriétés de leurs propriétaires respectifs.  Le contenu appartenant à VA Linux Systems est copyright 1999-2001 VA Linux Systems, tous droits réservés.<br><br>
 account	title	Préférences de votre compte
+account	updated	Mis à jour
+account_change_email	desc	<P>Changer votre adresse de courrier électronique va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
+account_change_email	invalid_email	Addresse electronique incorrecte
+account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
 account_change_email	message	Vous avez demandé un changement d'adresse e-mail pour votre compte sur Sourceforge.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- l'équipe Sourceforge
 account_change_email	section	Préférences de votre compte
 account_change_email	subject	Sourceforge -- vérification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
-account_change_email	desc	<P>Changer votre adresse de courrier électronique va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
 account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
 account_change_pw	section	Préférences de votre compte
 account_change_pw	title	Changement de mot de passe
@@ -42,84 +41,140 @@ account_editsshkeys	section	Préférences de votre compte
 account_editsshkeys	title	Édition des clefs CVS/SSH
 account_first	about_blurb	Vous êtes maintenant un utilisateur enregistré de Sourceforge, l'environnement de dévelopement en ligne pour les projets de logiciels libres.<p>En tant qu'utilisateur enregistré, vous pouvez participer pleinement aux activités du site.  Vous pouvez maintenant poster des messages dans les forums des projets, rapporter des bogues aux logiciels hébergés par Sourceforge, vous enregistrer pour faire partie de projets, ou même démarrer votre propre projet.<p>Nous vous conseillons de prendre le temps de lire la <a href="/docs/site/"><b>documentation du site</b></a> pour tirer pleinement parti de Sourceforge.<p>Profitez bien du site, et n'hésitez pas à nous faire part de vos remarques et de vos idées d'amélioration pour Sourceforge.<p> -- l'équipe Sourceforge
 account_first	title	Bienvenue!
+account_login	cookiewarn	Les Cookies doivent être activés aprés ce point.
 account_login	deleted_account	<p>Votre compte sur Sourceforge a été supprimé par l'équipe Sourceforge.  Ceci peut être dû à deux raisons : soit vous avez demandé à ce que votre compte soit supprimé, soit votre compte a été utilisé à des fins non autorisées et nous avons dû le fermer.  Si vous avez des questions ou des remarques à ce propos, veuillez soumettre une <a href="/support/?group_id=1">requête au support</a>.<p>Merci.<p> -- l'équipe Sourceforge
 account_login	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préference avec SSL 128-bit ou utiliser Netscape 4.7 ou supérieur</FONT></H2>
-account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
-account_login	pending_account	<p>Votre compte est en attente de confirmation.  Un e-mail vous a été envoyé, contenant un lien vers la page qui activera votre compte.<p>Si vous avez besoin d'un nouvel envoi de ce message, cliquez ci-dessous et il vous sera renvoyé à l'adresse que vous avez donnée pendant la phase d'enregistrement.<p><a href="pending-resend.php?form_user=$1">[Renvoyer le message de confirmation]</a><br><hr><p>
-account_login	title	Connexion
-account_login	cookiewarn	Les Cookies doivent être activés aprés ce point.
-account_login	loginname	Nom de Login:
-account_login	passwd	Mot de passe:
-account_login	usessl	Rester en mode SSL aprés la connexion
-account_login	sslnotice	<p><B><FONT COLOR="RED">Vous allez être connecté avec un serveur SSL quand vous allez soumettre ce formulaire et votre mot de passe ne sera pas visible aux autres utilisateurs.</FONT></B> <small style="font-size: x-small"> (Si vous vous demandez pourquoi cette page n'est pas chargée en SSL, lisez le paragraphe suivant. Merci.) </small> <P> Les utilisateurs de <B>Internet Explorer</B> ont des problèmes intermittents avec SSL, aussi il est préférable de quitter le mode SSL aprés le login. Les utilisateurs de Netscape doivent rester en SSL pour un maximum de sécurité.  Visitez <A HREF="http://www.microsoft.com/">Microsoft</A> pour plus d'information au sujet de ce problème connu.  <P>
 account_login	login	Connexion avec SSL
+account_login	loginname	Nom de Login:
 account_login	lostpw	[Perdu votre mot de passe?]
+account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
 account_login	newaccount	[Nouveau Compte]
-account_lostpw	message	  Quelqu'un, probablement vous, a demandé un changement de mot de passe par\nvérification d'adresse e-mail.  Si ce n'était pas vous, ignorez ce message et\nrien ne se passera.\n\n  Si vous avez demandé cette vérification, visitez la page à l'adresse suivante\npour que votre demande soit prise en compte :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- l'équipe Sourceforge
-account_lostpw	subject	$1 Vérification
-account_lostpw	title	Perdu votre mot de passe ?
-account_lostpw	notify	<P>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions du courrier électronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'acceuil ]</A>
-account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Cela compromet la sécurité de votre compte, de vos projets, et de ce site. <P>Cliquez sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous vous enverra un lien à l'adresse de courrier électronique enregistrée. Dans ce lien il y a une clé de Hachage de 128 bits pour votre compte. Suivre le lien vous autorisera à changer votre mot de passe en ligne et à vous connecter.
-account_lostpw	sendhash	Envoyer une clé de Hachage pour mot de passe perdu
-account_lostlogin	title	Confirmation pour mot de passe perdu
-account_lostlogin	severalconfirm	Il existe plus d'un hash de confirmation.
+account_login	passwd	Mot de passe:
+account_login	pending_account	<p>Votre compte est en attente de confirmation.  Un e-mail vous a été envoyé, contenant un lien vers la page qui activera votre compte.<p>Si vous avez besoin d'un nouvel envoi de ce message, cliquez ci-dessous et il vous sera renvoyé à l'adresse que vous avez donnée pendant la phase d'enregistrement.<p><a href="pending-resend.php?form_user=$1">[Renvoyer le message de confirmation]</a><br><hr><p>
+account_login	sslnotice	<p><B><FONT COLOR="RED">Vous allez être connecté avec un serveur SSL quand vous allez soumettre ce formulaire et votre mot de passe ne sera pas visible aux autres utilisateurs.</FONT></B> <small style="font-size: x-small"> (Si vous vous demandez pourquoi cette page n'est pas chargée en SSL, lisez le paragraphe suivant. Merci.) </small> <P> Les utilisateurs de <B>Internet Explorer</B> ont des problèmes intermittents avec SSL, aussi il est préférable de quitter le mode SSL aprés le login. Les utilisateurs de Netscape doivent rester en SSL pour un maximum de sécurité.  Visitez <A HREF="http://www.microsoft.com/">Microsoft</A> pour plus d'information au sujet de ce problème connu.  <P>
+account_login	title	Connexion
+account_login	usessl	Rester en mode SSL aprés la connexion
 account_lostlogin	invalidconfirm	Hash de confirmation invalide
-account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (Au moins 6 caractères).
-account_lostlogin	notmatch	Les nouveaux mots de passe diffèrent.
-account_lostlogin	passwdchanged	<h2>Mot de passe changé</h2><p>Félicitation, vous avez reinitialisé votre mot de passe.Vous pouvez <a href="/account/login.php">vous connecter</a> au site\nmaintenant.</p>
-account_lostlogin	welcome	<h2>Mot de passe perdu</h2><P>Bienvenu, $1. vous pouvez changer votre mot de passe maintenant.
 account_lostlogin	newpasswd	Nouveau mot de passe (6 caractères minimum)
 account_lostlogin	newpasswd2	Nouveau mot de passe (confirmation)
+account_lostlogin	notmatch	Les nouveaux mots de passe diffèrent.
+account_lostlogin	passwdchanged	<h2>Mot de passe changé</h2><p>Félicitation, vous avez reinitialisé votre mot de passe.Vous pouvez <a href="/account/login.php">vous connecter</a> au site\nmaintenant.</p>
+account_lostlogin	severalconfirm	Il existe plus d'un hash de confirmation.
+account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (Au moins 6 caractères).
+account_lostlogin	title	Confirmation pour mot de passe perdu
 account_lostlogin	update	Valider
-account_register	title	Enregistrement d'un nouvel utilisateur Sourceforge
-account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
-account_register	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préference avec SSL 128-bit ou utiliser Netscape 4.7 ou supérieur</FONT></H2>
-account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
-account_register	loginname	Nom de login (en minuscule) *:
-account_register	password	Mot de passe (6 caractères minimum) *:
-account_register	password2	Mot de passe (vérification) *:
-account_register	realname	Nom complet *:
-account_register	language	Langue:
-account_register	timezone	Fuseau horaire:
-account_register	emailaddr	Adresse de courrier électronique *:<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
-account_register	jabberaddr	Addresse electronique:
-account_register	jabberonly	Envoyer les messages automatiques seulement à cette adresse
-account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I>(Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
+account_lostlogin	welcome	<h2>Mot de passe perdu</h2><P>Bienvenu, $1. vous pouvez changer votre mot de passe maintenant.
+account_lostpw	message	  Quelqu'un, probablement vous, a demandé un changement de mot de passe par\nvérification d'adresse e-mail.  Si ce n'était pas vous, ignorez ce message et\nrien ne se passera.\n\n  Si vous avez demandé cette vérification, visitez la page à l'adresse suivante\npour que votre demande soit prise en compte :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- l'équipe Sourceforge
+account_lostpw	notify	<P>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions du courrier électronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'acceuil ]</A>
+account_lostpw	sendhash	Envoyer une clé de Hachage pour mot de passe perdu
+account_lostpw	subject	$1 Vérification
+account_lostpw	title	Perdu votre mot de passe ?
+account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Cela compromet la sécurité de votre compte, de vos projets, et de ce site. <P>Cliquez sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous vous enverra un lien à l'adresse de courrier électronique enregistrée. Dans ce lien il y a une clé de Hachage de 128 bits pour votre compte. Suivre le lien vous autorisera à changer votre mot de passe en ligne et à vous connecter.
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
-account_register	mandatory	Les champs avec * sont obligatoires.
-account_register	register	S'enregistrer
-account_register	err_username	Vous devez fournir un nom d'utilisateur
-account_register	err_realname	Vous devez entrer votre nom
+account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
+account_register	emailaddr	Adresse de courrier électronique *:<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
+account_register	err_badinsert	L'insertion a échouée.
+account_register	err_email	Courriel invalide
+account_register	err_jabber	Adresse Jabber incorrecte
+account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
 account_register	err_passwd	Vous devez fournir un mot de passe
 account_register	err_passwd2	Les mots de passe ne concordent pas
 account_register	err_passwd3	Mot de passe non valide:
+account_register	err_realname	Vous devez entrer votre nom
 account_register	err_unixname	Nom unix invalide
-account_register	err_jabber	Adresse Jabber incorrecte
-account_register	err_email	Courriel invalide
 account_register	err_userexist	Ce nom d'utilisateur existe déjà.
-account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
-account_register	err_badinsert	L'insertion a échouée.
-account_register	message_header	Enregistrement au site $1
+account_register	err_username	Vous devez fournir un nom d'utilisateur
+account_register	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préference avec SSL 128-bit ou utiliser Netscape 4.7 ou supérieur</FONT></H2>
+account_register	jabberaddr	Addresse electronique:
+account_register	jabberonly	Envoyer les messages automatiques seulement à cette adresse
+account_register	language	Langue:
+account_register	loginname	Nom de login (en minuscule) *:
+account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
+account_register	mandatory	Les champs avec * sont obligatoires.
 account_register	message_body	Merci de vous être enregistré au site $4. \nVous avez maintenant un compte avec pour nom $1. \nPour terminer votre inscription suivez le lien: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si vous ne voyez rien ci-dessus, c'est probablement un bug de votre logiciel de mail.\nUtilisez le lien ci-dessous, mais assurez vous qu'il est sur une seule ligne.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nProfiter du site.\n\n-- l'équipe $4\n
+account_register	message_header	Enregistrement au site $1
+account_register	password	Mot de passe (6 caractères minimum) *:
+account_register	password2	Mot de passe (vérification) *:
+account_register	realname	Nom complet *:
+account_register	register	S'enregistrer
+account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I>(Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
+account_register	timezone	Fuseau horaire:
+account_register	title	Enregistrement d'un nouvel utilisateur Sourceforge
 account_unsubscribe	all_mailings	toutes les notifications concernant $1
 account_unsubscribe	site_mailings	les messages concernant le site $1
-account_verify	title	Vérification de votre compte $1
-account_verify	verify_blurb	<p>Pour valider votre enregistrement, connectez-vous maintenant.  Votre compte sera alors activé pour les connexions ultérieures.
-account_verify	loginname	Nom de login:
-account_verify	password	Mot de passe:
-account_verify	login		Connexion
-account_verify	missingparam	Paramètre manquant
-account_verify	usermandatory	Vous devez rentrer un nom de user
-account_verify	invaliduser	Utilisateur non valide
-account_verify	nouser	L'utilisateur n'existe pas
-account_verify	invalidop	Opération non valide
-account_verify	accountactive	Le compte est déjà activé.
-account_verify	invalidparam	Paramètre non valide
-account_verify	cannotconfirm	Ne peut confirmer l'identité du compte - hash erroné ou login non valide
 account_verify	accessdenied	Accés interdit
-account_verify	invalidcred	Le mot de passe entré n'est pas valide.
+account_verify	accountactive	Le compte est déjà activé.
 account_verify	cannotactivate	Impossible d'activer le compte
+account_verify	cannotconfirm	Ne peut confirmer l'identité du compte - hash erroné ou login non valide
 account_verify	erroractivate	Erreur durant l'activation du compte
+account_verify	invalidcred	Le mot de passe entré n'est pas valide.
+account_verify	invalidop	Opération non valide
+account_verify	invalidparam	Paramètre non valide
+account_verify	invaliduser	Utilisateur non valide
+account_verify	login		Connexion
+account_verify	loginname	Nom de login:
+account_verify	missingparam	Paramètre manquant
+account_verify	nouser	L'utilisateur n'existe pas
+account_verify	password	Mot de passe:
+account_verify	title	Vérification de votre compte $1
+account_verify	usermandatory	Vous devez rentrer un nom de user
+account_verify	verify_blurb	<p>Pour valider votre enregistrement, connectez-vous maintenant.  Votre compte sera alors activé pour les connexions ultérieures.
+calendar	april	Avril
+calendar	august	Août
+calendar	comingyear	Année prochaine
+calendar	currentyear	Année courante
+calendar	december	Decembre
+calendar	february	Février
+calendar	fordate	Pour la date :
+calendar	friday	Vendredi
+calendar	invaliddate	Date invalide
+calendar	invaliddateexplain	$1 n'est pas une date valide.
+calendar	invalidday	Jour invalide
+calendar	invaliddayexplain	Le jour doit être compris entre 1 et 31.
+calendar	invalidmonth	Mois invalide
+calendar	invalidmonthexplain	Le mois doit être compris entre 1 et 12.
+calendar	invalidtype	Type invalide
+calendar	invalidtypeexplain	Le type est invalide.
+calendar	invalidyear	Année invalide
+calendar	invalidyearexplain	L'année doit être comprise entre 1990 et 2020.
+calendar	january	Janvier
+calendar	july	Juillet
+calendar	june	Juin
+calendar	march	Mars
+calendar	may	Mai
+calendar	monday	Lundi
+calendar	november	Novembre
+calendar	october	Octobre
+calendar	onemonth	Un mois
+calendar	saturday	Samedi
+calendar	selecteddate	Date sélectionnée (si différente d'aujourd'hui).
+calendar	september	Septembre
+calendar	sunday	Dimanche
+calendar	task_begins	Début de la tâche $1
+calendar	task_ends	Fin de la tâche $1
+calendar	task_link_title	Résumé d'une tâche : $1
+calendar	threemonth	Trois mois
+calendar	thursday	Jeudi
+calendar	title	Gestion de projet : calendrier
+calendar	todaysdate	Date du jour
+calendar	tuesday	Mardi
+calendar	update	Mise à jour
+calendar	view	Vue :
+calendar	wednesday	Mercredi
+classgroup	acceptedproject	Votre enregistrement de projet $7 a été accepté.\n\nNom complet du projet:  $1\nNom unix du projet:  $2\nServeur CVS:         cvs.$2.$3\nServeur Shell/Web:   $2.$3\n\nVotre DNS va prendre jusqu'à une journée pour devenir actif sur notre site.\nEn attendant que la résolution DNS soit effective, vous pouvez essayer de vous connecter à \n$4 et pointer CVS à $5\n\nSi au bout de 6 heures vos comptes shell/CVS ne fonctionnent toujours pas, s'il vous plait\nouvrez un ticket support pour que nous examinions le problème.\nNotez que les comptes shell/CVS sont fermés à telnet et\nfonctionnent avec SSH.\n\nVotre site web est accessible à travers votre compte shell. S'il vous plait lisez\nla documentation du site (voir le lien ci-dessous) au sujet de l'usage attendu, des services\ndisponibles, et de l'organisation des repertoires du compte.\n\nS'il vous plait prenez quelques temps pour lire la documentation du site au sujet de l'administration \ndes projets (http://$3/docs/site/). Si vous visitez votre\npropre page projet dans $7 alors que vous êtes authentifiés, vous trouverez \ndes menus supplémentaires à votre gauche libellés \'Administration de projet\'.\n\nNous vous recommendons fortement de visiter maintenant $7 et de créer une description \npublique de votre projet. Cela peut se faire en visitant votre page projet en étant authentifié\net en selectionnant \'Administration du projet\' depuis le menu\nà votre gauche (ou en visitant http://$3/project/admin/?group_id=$6\naprés authentification).\n\nVotre projet n'apparaitra pas dans la Recherche Thématique (liste\ndes projets hebergés par $7 qui offre une grande flexibilité de\nparcours et recherche) tant que vous n'aurez pas catégorisé votre projet dans les pages d'administration.\nAinsi pour que l'on puisse trouver votre projet, vous devriez faire ceci maintenant.\nVisiter votre projet en étant authentifié, et selectionnez \'Administration de projet\' depuis le menu de gauche.\n\n\nAppréciez le système, et faites part aux autres de votre expérience de $7. Faites nous savoir\nsi il y a quelque chose que nous puissions faire pour vous aider.\n\n-- L'équipe $7 
+classgroup	acceptedprojecttitle	Projet $1 Approuvé
+classgroup	newprojectnotification	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou rejeter ce projet:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotificationtitle	Projet $1 Soumis
+classgroup	rejectedproject	Votre enregistrement de projet a été rejeté.\n\nNom long du projet:  $1\nNom UNIX du projet:  $2\n\nRaison de notre refus:\n\n
+classgroup	rejectedprojecttitle	Projet $1 Refusé
+common_include_account	cvsreserved	Nom réservé pour CVS.
+common_include_account	dnsreserved	Nom réservé pour le DNS.
+common_include_account	illegal	Caractère interdit dans le nom.
+common_include_account	nospace	Il ne peut y avoir d'espace dans un nom de login.
+common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractère souligné à cause des règles imposées par le DNS.
+common_include_account	sixchar	Le mot de passe doit comporter au moins 6 caractères.
+common_include_account	toolong	Le nom est trop long, il doit comporter au plus 15 caractères.
+common_include_account	tooshort	Le nom est trop court, il doit comporter au moins 3 caractères.
 conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
@@ -146,99 +201,115 @@ docman_display_doc	section	Projet : $1
 docman_display_doc	title	Gestionnaire de documentation : affichage d'un document
 docman_new	section	Projet : $1
 docman_new	title	Gestionnaire de documentation : soumission d'un nouveau document
+error	error_creating	Erreur à la création
+error	not_found	PAGE NON TROUVEE
+error	title	Page non trouvée (Erreur 404)
+forum	error_forum_not_found	Forum non trouvé
 forum	section	Projet : $1
 forum	title	Forums
+forum_admin	add_forum	Ajouter un forum
+forum_admin	delete_message	Supprimer un message
 forum_admin	section	Projet : $1
 forum_admin	title	Forums : administration
+forum_admin	update_forum	Mettre à jour les infos/le status du forum
+forum_admin_addforum	add_forum	Ajouter ce forum
+forum_admin_addforum	allow_anonymous	Autoriser les envois anonymes?
+forum_admin_addforum	email_posts	Envoyer tout à l'adresse électronique:
+forum_admin_addforum	existing_forums	Forums existants
+forum_admin_addforum	forum_description	Description
+forum_admin_addforum	forum_name	Nom du forum
+forum_admin_addforum	is_public	Public?
 forum_admin_addforum	section	Administration des forums
 forum_admin_addforum	title	Ajout d'un forum
 forum_admin_changestatus	section	Administration des forums
 forum_admin_changestatus	title	Changement d'état du forum
 forum_admin_delete	section	Administration des forums
 forum_admin_delete	title	Suppression d'un forum
-forum_forum	section	Projet : $1
-forum_forum	title	Forums : affichage d'un forum
-forum_forum	thread	File de message
-forum_forum	author	Auteur
-forum_forum	date	Date
-forum_forum	changeview	Changer de visualisation
-forum_forum	postsuccess	Message Envoyé
-forum_forum	topic	Sujet
-forum_forum	topicstarter	Initiateur
-forum_forum	replies	Réponses
-forum_forum	lastpost	Dernier(s) envoi(s)
-forum_forum_thread	section	Forums
-forum_forum_thread	title	Affichage d'une discussion
-forum_message	section	Forums
-forum_message	title	Affichage d'un message
-forum_message	msg	Poster un message dans cette file de message:
-forum_message	thread	Commencer une nouvelle file de message
-forum_utils	news	Nouveautés
-forum_utils	discussionforum	Forums de discution:
-forum_utils	nonewsitem	Erreur - Cette nouveauté n'a pas été trouvée
-forum_utils	latest	Dernières Nouveautés
-forum_utils	monitor	Surveiller le forum
-forum_utils	admin	Gérer
-forum_utils	saveplace	Sauvegarder cet endroit
-forum_utils	erroradd	Erreur dans l'ajout du Forum
-forum_utils	added	Forum ajouté
-forum_utils	notfound	Non trouvé
-forum_utils	by	Par:
-forum_utils	brokenthread	File de message cassé
-forum_utils	thread	File de message
-forum_utils	author	Auteur
-forum_utils	postedby	Posté par
-forum_utils	date	Date
-forum_utils	summary	Titre
-forum_utils	error	Erreur!
-forum_utils	noid	Envoi sans identifiant de forum
-forum_utils	mustinclude	Doit inclure un corps et un entête de message
-forum_utils	doublepost	Il semble que ce message soit un doublon compte tenu du fait qu'il a le même sujet et les mêmes informations de suivi qu'un précédent message.
-forum_utils	nextfailed	Impossible de trouver le thread_id suivant
-forum_utils	errormaster	Impossible de mettre à jour le thread maître avec l'heure courante
-forum_utils	errorparent	Impossible de mettre à jour le parent
-forum_utils	errorfollowup	Essai de suivi d'un message qui n'existe pas.
-forum_utils	errorfollowup2	Pas d'identifiant de suivi
-forum_utils	errorpost	L'envoi a échoué
-forum_utils	errorinsert	Impossible d'obtenir insertid()
-forum_utils	posted	Message envoyé
-forum_utils	feedbacklogin	Vous pourriez répondre si vous étiez connecté
-forum_utils	subject	Sujet:
-forum_utils	message	Message:
-forum_utils	htmltag	les tags HTML s'afficheront comme du texte dans votre envoi
-forum_utils	postanon	Vous faites un envoi anonyme car vous n'êtes pas
-forum_utils	loggedin	Authentifié
-forum_utils	postcomment	Envoyer un commentaire
-forum_utils	anonymously	Anonymement
-forum_utils	couldpostif	Vous pourriez répondre si vous êtiez
-forum_utils	reply	répondre
-forum_utils	mailmonitor	\nLisez et répondez à ce message à: \n$1\nPar: $2 \n\n $3\n\n______________________________________________________________________\nVous recevez ce message parce que vous surveillez ce forum.\nPour arrêter la surveillance, authentifiez vous à $4 \net visitez: $5
-forum_utils	mailsent	courrier envoyé - surveillé par des utilisateurs
-forum_utils	mailnotsent	courrier non envoyé - surveillé par des utilisateurs
-forum_utils	mailnotsent2	courrier non envoyé - personne ne surveille
 forum_common	error_adding_forum	Erreur lors de l'ajout d'un forum
-forum_common	error_save_when_logged_in	Vous ne pouvez pas sauvegarder cet endroit sans être connecté
-forum_common	error_min_name_length	Le nom d'un forum doit comprendre au moins 3 caractères
 forum_common	error_min_desc_length	La description d'un forum doit comprendre au moins 10 caractères
+forum_common	error_min_name_length	Le nom d'un forum doit comprendre au moins 3 caractères
+forum_common	error_save_when_logged_in	Vous ne pouvez pas sauvegarder cet endroit sans être connecté
 forum_common	error_set_monitor	Vous ne pouvez pas surveiller ce forum sans être connecté
 forum_common	error_unable_to_add_monitor	Impossible d'ajouter la surveillance
 forum_common	welcome_to	Bienvenue sur
-forum_common_forummessage	no_valid_forum_object	ForumMessage:: Pas d'objet Forum valide
-forum_common_forummessage	forum_message	Message de forum
-forum_common_forummessage	error_group_forum_id	L'identifiant group_forum_id de la BD ne correspond pas à celui de l'objet Forum
-forum_common_forummessage	error_required_fields	Vous devez inclure un objet et un corps de message
-forum_common_forummessage	error_not_logged	Vous ne pouvez pas poster sans être connecté
-forum_common_forummessage	error_posting_failed	ForumMessage::create() le postage a échoué
+forum_common_forum	error_save_place	Forum::savePlace()
+forum_common_forummessage	error_cannot_update_master_thread	Échec de la mise à jour du fil maître avec la date courante
+forum_common_forummessage	error_cannot_update_parent	Échec lors de la mise à jour du parent
 forum_common_forummessage	error_get_message_id	ForumMessage::create() n'arrive pas à obtenir d'identifiant de message
+forum_common_forummessage	error_getting_next_thread	Échec de l'obtention du prochain identifiant de fil
+forum_common_forummessage	error_group_forum_id	L'identifiant group_forum_id de la BD ne correspond pas à celui de l'objet Forum
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() identifiant de message invalide
 forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() pas d'objet ParentMessage valide
-forum_common_forummessage	error_getting_next_thread	Échec de l'obtention du prochain identifiant de fil
-forum_common_forummessage	error_cannot_update_parent	Échec lors de la mise à jour du parent
-forum_common_forummessage	error_cannot_update_master_thread	Échec de la mise à jour du fil maître avec la date courante
-forum_common_forum	error_save_place	Forum::savePlace()
-forum_save	saved	Position dans le forum sauvée.  Les nouveaux messages seront mis en valeur lors de votre prochain retour
-forum_monitor	deactivated	Surveillance du forum désactivée
+forum_common_forummessage	error_not_logged	Vous ne pouvez pas poster sans être connecté
+forum_common_forummessage	error_posting_failed	ForumMessage::create() le postage a échoué
+forum_common_forummessage	error_required_fields	Vous devez inclure un objet et un corps de message
+forum_common_forummessage	forum_message	Message de forum
+forum_common_forummessage	no_valid_forum_object	ForumMessage:: Pas d'objet Forum valide
+forum_forum	author	Auteur
+forum_forum	changeview	Changer de visualisation
+forum_forum	date	Date
+forum_forum	lastpost	Dernier(s) envoi(s)
+forum_forum	postsuccess	Message Envoyé
+forum_forum	replies	Réponses
+forum_forum	section	Projet : $1
+forum_forum	thread	File de message
+forum_forum	title	Forums : affichage d'un forum
+forum_forum	topic	Sujet
+forum_forum	topicstarter	Initiateur
+forum_forum_thread	section	Forums
+forum_forum_thread	title	Affichage d'une discussion
+forum_message	msg	Poster un message dans cette file de message:
+forum_message	receive_followups	Recevoir les réactions par mailmenu	contact_us	Contacter $1
+forum_message	section	Forums
+forum_message	thread	Commencer une nouvelle file de message
+forum_message	title	Affichage d'un message
 forum_monitor	activated	Surveillance du forum activée
+forum_monitor	deactivated	Surveillance du forum désactivée
+forum_save	saved	Position dans le forum sauvée.  Les nouveaux messages seront mis en valeur lors de votre prochain retour
+forum_utils	added	Forum ajouté
+forum_utils	admin	Gérer
+forum_utils	anonymously	Anonymement
+forum_utils	author	Auteur
+forum_utils	brokenthread	File de message cassé
+forum_utils	by	Par:
+forum_utils	couldpostif	Vous pourriez répondre si vous êtiez
+forum_utils	date	Date
+forum_utils	discussionforum	Forums de discution:
+forum_utils	doublepost	Il semble que ce message soit un doublon compte tenu du fait qu'il a le même sujet et les mêmes informations de suivi qu'un précédent message.
+forum_utils	error	Erreur!
+forum_utils	erroradd	Erreur dans l'ajout du Forum
+forum_utils	errorfollowup	Essai de suivi d'un message qui n'existe pas.
+forum_utils	errorfollowup2	Pas d'identifiant de suivi
+forum_utils	errorinsert	Impossible d'obtenir insertid()
+forum_utils	errormaster	Impossible de mettre à jour le thread maître avec l'heure courante
+forum_utils	errorparent	Impossible de mettre à jour le parent
+forum_utils	errorpost	L'envoi a échoué
+forum_utils	feedbacklogin	Vous pourriez répondre si vous étiez connecté
+forum_utils	htmltag	les tags HTML s'afficheront comme du texte dans votre envoi
+forum_utils	latest	Dernières Nouveautés
+forum_utils	loggedin	Authentifié
+forum_utils	mailmonitor	\nLisez et répondez à ce message à: \n$1\nPar: $2 \n\n $3\n\n______________________________________________________________________\nVous recevez ce message parce que vous surveillez ce forum.\nPour arrêter la surveillance, authentifiez vous à $4 \net visitez: $5
+forum_utils	mailnotsent	courrier non envoyé - surveillé par des utilisateurs
+forum_utils	mailnotsent2	courrier non envoyé - personne ne surveille
+forum_utils	mailsent	courrier envoyé - surveillé par des utilisateurs
+forum_utils	message	Message:
+forum_utils	monitor	Surveiller le forum
+forum_utils	mustinclude	Doit inclure un corps et un entête de message
+forum_utils	news	Nouveautés
+forum_utils	nextfailed	Impossible de trouver le thread_id suivant
+forum_utils	noid	Envoi sans identifiant de forum
+forum_utils	nonewsitem	Erreur - Cette nouveauté n'a pas été trouvée
+forum_utils	notfound	Non trouvé
+forum_utils	postanon	Vous faites un envoi anonyme car vous n'êtes pas
+forum_utils	postcomment	Envoyer un commentaire
+forum_utils	posted	Message envoyé
+forum_utils	postedby	Posté par
+forum_utils	reply	répondre
+forum_utils	saveplace	Sauvegarder cet endroit
+forum_utils	stopmonitor	Arrêter de surveiller le forum
+forum_utils	subject	Sujet:
+forum_utils	summary	Titre
+forum_utils	thread	File de message
 frs	file_download	Téléchargement
 frs	file_monitor	Surveillance
 frs	file_notes	Remarques
@@ -246,30 +317,37 @@ frs	file_package	Paquet
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Sorties récentes
-frs_file	error_min_name_length	Le nom de fichier doit comprendre au moins 3 caractères
-frs_file	error_name_format	Le nom de fichier doit être dans le format suivant : gforge-3.0.tar.bz2
-frs_file	error_invalid_file	Le fichier semble être invalide
 frs_file	error_already_exists	Ce nom de fichier existe déjà dans ce projet
 frs_file	error_cannot_move	Le fichier ne peut pas être déplacé vers sa destination
-frs_package	error_min_name_length	Le nom de paquet doit comprendre au moins 3 caractères
-frs_package	error_name_format	Le nom de paquet doit être alphanumérique
-frs_package	error_invalid_file	Le fichier semble être invalide
+frs_file	error_invalid_file	Le fichier semble être invalide
+frs_file	error_min_name_length	Le nom de fichier doit comprendre au moins 3 caractères
+frs_file	error_name_format	Le nom de fichier doit être dans le format suivant : gforge-3.0.tar.bz2
 frs_package	error_already_exists	Ce nom de fichier existe déjà dans ce projet
 frs_package	error_cannot_move	Le fichier ne peut pas être déplacé vers sa destination
+frs_package	error_invalid_file	Le fichier semble être invalide
+frs_package	error_min_name_length	Le nom de paquet doit comprendre au moins 3 caractères
+frs_package	error_name_format	Le nom de paquet doit être alphanumérique
 frs_package	error_set_monitor	Vous ne pouvez pas déclencher la surveillance sans être connecté
-frs_release	error_min_name_length	Le nom de révision doit comprendre au moins 3 caractères
-frs_release	error_name_format	Le nom de révision doit être alphanumérique
-frs_release	error_invalid_file	Le fichier semble être invalide
+frs_release	email_title	[Révision $1] $2
 frs_release	error_already_exists	Ce nom de révision existe déjà dans ce projet
 frs_release	error_cannot_move	La révision ne peut pas être déplacée vers sa destination
+frs_release	error_invalid_file	Le fichier semble être invalide
+frs_release	error_min_name_length	Le nom de révision doit comprendre au moins 3 caractères
+frs_release	error_name_format	Le nom de révision doit être alphanumérique
 frs_release	error_set_monitor	Vous ne pouvez pas déclencher la surveillance sans être connecté
-frs_release	email_title	[Révision $1] $2
+general	deleted	Supprimé
+general	footer	Vous êtes sur $1.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
+general	no	Non
+general	permdenied	Accés Interdit.
+general	permexcuse	Vous devez obtenir l'autorisation de l'administrateur de ce projet pour voir cette page.
+general	permnotget	Accés non permis
 general	return	[Retour à la page d'acceuil $1]
 general	sitename	$1
-general	footer	Vous êtes sur $1.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
-general	permdenied	Accés Interdit.
-general	permnotget	Accés non permis
-general	permexcuse	Vous devez obtenir l'autorisation de l'administrateur de ce projet pour voir cette page.
+general	update	Mettre à jour
+general	yes	Oui
+global	error	ERREUR
+group	activity	Pourcentage d'activité:
+group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activité du projet
 group	developer_info	Information sur les développeurs
 group	developers	Développeurs
 group	long_bugs	Gestion des bogues
@@ -284,8 +362,11 @@ group	long_patch	Gestionnnaire de corrections
 group	long_pm	Gestion de projet
 group	long_support	Support technique
 group	long_survey	Sondages
+group	nodescription	Ce project n'a pas encore soumis de description.
+group	norelease	Ce projet n'a pas réalisé de fichier
 group	project_admins	Administrateurs du projet
 group	public_area	Zones publiques
+group	registered	Enregistré le:
 group	short_admin	Administration
 group	short_bugs	Bogues
 group	short_cvs	CVS
@@ -294,7 +375,7 @@ group	short_files	Fichiers
 group	short_forum	Forums
 group	short_homepage	Accueil
 group	short_mail	Mailing-listes
-group	short_main 	Écran principal
+group	short_main	Écran principal
 group	short_memberlist	Développeurs
 group	short_news	Nouveautés
 group	short_patch	Patches
@@ -303,18 +384,17 @@ group	short_summary	Survol
 group	short_support	Support
 group	short_survey	Sondages
 group	short_tracker	Tracker
-group	registered	Enregistré le:
-group	activity	Pourcentage d'activité:
-group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activité du projet
-group	norelease	Ce projet n'a pas réalisé de fichier
-group	nodescription	Ce project n'a pas encore soumis de description.
 home	about_blurb	$1 est un <b>service gratuit pour les développeurs <A href="http://www.opensource.org">open source</A></b>. $1 offre l'accès le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des tâches, hébergement de site, archivage de fichiers, sauvegardes complètes, etc. via une interface d'administration entièrement par le web. <BR> &nbsp; <P> <B>Participation des développeurs</B> <P>  Pour pouvoir utiliser $1 au mieux, il est nécéssaire de <A href="/account/register.php">s'enregistrer comme un développeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons à vous offrir. Vous pouvez bien entendu parcourir le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>Créer un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme développeur</A>, puis <A HREF="/account/login.php">connectez-vous</A>, puis <a href="/register/">enregistrez votre projet.</a> <p> Merci... et nous espérons que vous aimerez $1 !
 home	breaking_down_barriers	Abaisser les barrières du développement open source
+home	gforge_statistics	Statistiques de $1
 home	highest_ranked_users	Les développeurs les mieux classés
 home	most_active_this_week	Les plus actifs cette semaine
 home	sfos	$1 On-Site
-home	gforge_statistics	Statistiques de $1
 home	top_project_downloads	Projets les plus téléchargés
+image	login	fr_login.png
+image	logout	fr_logout.png
+image	myaccount	fr_myaccount.png
+image	newaccount	fr_newaccount.png
 mail	provided_by	<p>Les listes de diffusion sont fournies par <a href="http://www.list.org/">GNU Mailman</a>.  Merci aux équipes de Mailman et de <a href="http://www.python.org/">Python</a> pour leurs excellents logiciels.
 mail	section	Projet : $1
 mail	title	Listes de diffusion
@@ -326,18 +406,20 @@ mail_admin_change_status	section	Administration des listes de diffusion
 mail_admin_change_status	title	Administration / modification des listes
 menu	about_gforge	À propos de $1
 menu	account_maintenance	Gestion du compte
-menu	register_project	Enregistrer un projet
+menu	admin	Administration
 menu	bookmark_page	Ajouter aux favoris
 menu	change_my_theme	Changer de thème
+menu	code_snippet	Bibliothèque
 menu	code_snippet_library	Bibliothèque de code
 menu	compile_farm	Ferme de compilation
-menu	contact_us	Contacter $1
 menu	diary_notes	Journal et notes
 menu	discussion_forums	Forums de discussion
 menu	documentation	Documentations sur le site
+menu	home	Accueil
 menu	login	Connexion via SSL
 menu	logout	Sortir
 menu	my_personal_page	Ma page personnelle
+menu	mypage	Ma page
 menu	new_project	Nouveau projet
 menu	new_releases	Sorties récentes
 menu	new_user	Nouvel utilisateur via SSL
@@ -345,17 +427,18 @@ menu	other_site_mirrors	Miroirs d'autres sites
 menu	project_admin	Admin. du projet
 menu	project_help_wanted	Demande d'aide
 menu	project_summary	Résumé du projet
+menu	projectree	Arbre des projets
+menu	register_project	Enregistrer un projet
 menu	search	Recherche
 menu	site_status	État du site
 menu	software_map	Recherche thématique
-menu	top_projects	Meilleurs projets
 menu	submit	Proposer
-menu	home	Accueil
-menu	projectree	Arbre des projets
-menu	mypage	Ma page
-menu	code_snippet	Bibliothèque
-menu	admin	Administration
+menu	top_projects	Meilleurs projets
 my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés, ainsi que la liste des groupes dont vous faites partie.
+my	assigneditems	Mes tâches assignées
+my	bookmarks	Mes signets
+my	monitoredfile	Fichiers que vous surveillez
+my	monitoredforum	Forums que vous surveillez
 my	no_bookmarks	Vous n'avez pas encore de favoris
 my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de téléchargement.<p>Vous pouvez déclencher la surveillance de fichiers en visitant la page de résumé d'un projet et en cliquant sur le lien dans la section « Fichiers ».<br>
 my	no_monitored_forums	<h3>Vous ne surveillez pas de forums</h3>Si vous surveillez des forums, vous recevrez par les nouveaux messages dans un e-mail contenant également un lien vers le message.<p>Vous pouvez déclencher la surveillance d'un forum en cliquant sur le lien adéquat dans un forum quelconque.<br>
@@ -363,15 +446,11 @@ my	no_open_tasks	Aucune tâche ne vous est assignée.
 my	no_projects	Vous ne faites partie d'aucun projet.
 my	no_tracker_items_assigned	Aucun objet de tracker ne vous est assigné.
 my	no_tracker_items_submitted	Vous n'avez soumis aucun objet de tracker.
-my	title	Page personnelle de $1
-my	assigneditems	Mes tâches assignées
-my	submitteditems	Mes tâches proposées
-my	monitoredforum	Forums que vous surveillez
-my	monitoredfile	Fichiers que vous surveillez
-my	tasks	Mes tâches
-my	survey	Sondages rapides
-my	bookmarks	Mes signets
 my	projects	Mes projets
+my	submitteditems	Mes tâches proposées
+my	survey	Sondages rapides
+my	tasks	Mes tâches
+my	title	Page personnelle de $1
 my_bookmark	return	Retour
 my_bookmark_add	section	Ma page personnelle
 my_bookmark_add	title	Ajout d'un favori
@@ -382,33 +461,33 @@ my_bookmark_edit	title	Édition d'un favori
 my_diary	section	Ma page personnelle
 my_diary	title	Journal et notes
 new	title	Sorties récentes
-news	section	Projet : $1
-news	title	Nouveautés
 news	choose	<P>Choisissez une nouveauté et vous pouvez visualiser, chercher et poster des messages.<P>
+news	noitems	Aucun enregistrement trouvé
 news	nonews	Aucune nouveauté
 news	nonewsfor	Aucune nouveauté trouvée pour: $1
-news	noitems	Aucun enregistrement trouvé
+news	section	Projet : $1
+news	title	Nouveautés
+news_admin	noqueued	Pas de message soumis pour le projet
+news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe $1 des nouveautés.
+news_admin	queued	Messages soumis pour le projet
 news_admin	section	Nouveautés
 news_admin	title	Administration des nouveautés
-news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe $1 des nouveautés.
-news_admin	noqueued	Pas de message soumis pour le projet
-news_admin	queued	Messages soumis pour le projet
 news_main	title	Nouveautés
+news_submit	cannot	Vous ne pouvez soumettre une nouveauté sans être administrateur de ce projet
+news_submit	details	Detail
+news_submit	errorboth	ERREUR - le sujet et le corps sont requis
+news_submit	errorinsert	ERREUR d'insertion
+news_submit	forproject	Pour le projet
+news_submit	newsadded	Nouveauté ajoutée.
 news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe $1 pour apparaître sur la page d'accueil $1.<P>Vous pouvez inclure dans vos envois des URLs, mais pas de HTML.<P>Les URLs commençants par http:// sont rendues clickables.
 news_submit	section	Nouveautés
-news_submit	title	Soumettre une nouveauté pour $1
-news_submit	cannot	Vous ne pouvez soumettre une nouveauté sans être administrateur de ce projet
-news_submit	forproject	Pour le projet
 news_submit	subject	Sujet
-news_submit	details	Detail
-news_submit	errorinsert	ERREUR d'insertion
-news_submit	errorboth	ERREUR - le sujet et le corps sont requis
-news_submit	newsadded	Nouveauté ajoutée.
 news_submit	submit	ENVOYER
-news_utils	nonews	<H3>Pas de nouveauté<H3>
+news_submit	title	Soumettre une nouveauté pour $1
 news_utils	archive	Archive des nouveautés
-news_utils	submit	Proposer une nouveauté
+news_utils	nonews	<H3>Pas de nouveauté<H3>
 news_utils	readmore	<NOBR>Lire plus/Commenter</NOBR>
+news_utils	submit	Proposer une nouveauté
 partners	about_blurb	<p>Sourceforge est fier d'être partenaire avec <a href="http://www.cosource.com/">Cosource.com</a>.  Cosource.com est un site web collaboratif d'enchères inversées, permettant aux clients et aux développeurs de logiciels libres de travailler ensemble afin de financer les solutions logicielles innovantes.
 people	about_blurb	<p>Le système « Besoin d'aide » de Sourceforge est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus, sauf si l'émetteur décide de les fermer.  Les administrateurs de projet peuvent toujours re-proposer des postes si les propositions précédentes ont expiré.<p>Naviguez dans le menu des catégories pour trouver les projets qui ont besoin de vous.<p>Si vous êtes administrateur d'un projet, connectez-vous et proposez vos offres de postes par la page d'administration de votre projet.<p>Pour proposer de nouvelles catégories de postes, soumettez une requête par le gestionnaire de support technique.
 people	section	Besoin d'aide
@@ -498,8 +577,21 @@ register_requirements	title	Services et conditions requises
 register_tos	section	Nouveau projet
 register_tos	title	Accord sur les conditions générales
 search	title	Recherche
+searchbox	forum	Ce forum
+searchbox	people	Personne
+searchbox	search	Rechercher
+searchbox	skill	Savoir-faire
+searchbox	softwaregroup	Logiciel/Groupe
+searchbox	task	Tâches
 sendmessage	about_blurb	Afin de limiter le spam, nous utilisons ce formulaire pour l'envoi d'e-mails.<p>Remplissez-le consciencieusement, faute de quoi le destinataire risque de ne pas pouvoir vous répondre.<p><b>Si vous avez besoin d'aide :</b> avez-vous lu la documentation du site, avez-vous inclus votre <b>user_id</b> et votre <b>user_name</b> ?  Si vous écrivez à propos d'un projet particulier, incluez aussi le <b>group_id</b> et le nom de ce projet.
 sendmessage	title	Envoi d'un message à $1
+session	cannotinit	ERREUR - Impossible d'initialiser la session
+session	deleted	Compte supprimé
+session	invalidpasswd	Mot de passe ou Login non valide
+session	missingpasswd	Mot de passe ou Login manquant
+session	notactive	Compte non actif
+session	pending	Compte en attente
+session	suspended	Compte suspendu
 snippet	title	Bibliothèque de code
 snippet_add_snippet_to_package	section	Bibliothèque de code
 snippet_add_snippet_to_package	title	Ajout d'un bout de code à un paquet
@@ -542,66 +634,69 @@ survey_survey	section	Outil de sondages
 survey_survey	title	Affichage d'un sondage
 survey_survey_resp	section	Outil de sondages
 survey_survey_resp	title	Réponse à un sondage
+system	datefmt	d/m/Y H:i
+system	locale	en_US
+system	strftimefmt	%e %B %Y %H:%M
 thanks	about_blurb	<p><h2>Remerciements</h2>Les développeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements :<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
+top	NA	Pas disponible
 top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichées ici.
 top	active_all_time	Les plus actifs de tous les temps
 top	active_weekly	Les plus actifs cette semaine
+top	down	Descend $1
 top	downloads	Les plus téléchargés
 top	downloads_7_days	Les plus téléchargés cette semaine
 top	forum_posts	Les forums les plus actifs
-top	pageviews	Les projets les plus visités
 top	highest_ranked_users	Les utilisateurs les mieux classés
-top	title	Les meilleurs projets
-top	view_other_top_category	Voir les autres catégories
-top	top_project	Les meilleurs projets de $1
-top	NA	Pas disponible
+top	pageviews	Les projets les plus visités
 top	same	Même chose
+top	title	Les meilleurs projets
+top	top_project	Les meilleurs projets de $1
 top	up	Monte $1
-top	down	Descend $1
+top	view_other_top_category	Voir les autres catégories
+top_mostactive	percentile	Pourcentage
+top_mostactive	project_name	Nom du projet
+top_mostactive	rank	Ranc
 top_mostactive	section	Les meilleurs projets
 top_mostactive	title	Les projets les plus actifs: $1
-top_mostactive	rank	Ranc
-top_mostactive	project_name	Nom du projet
-top_mostactive	percentile	Pourcentage
 top_mostactive	updated_daily	Mis à jour quotidiennement
+top_toplist	change	Changement
+top_toplist	download	Téléchargement
+top_toplist	last_rank	Dernier ranc
+top_toplist	pageviews	Nombre de page vue
+top_toplist	posts	Messages
+top_toplist	project_name	Nom du projet
+top_toplist	rank	Ranc
 top_toplist	section	Les meilleurs projets
 top_toplist	title	Listes des meilleurs projets
-top_toplist	rank	Ranc
-top_toplist	project_name	Nom du projet
-top_toplist	last_rank	Dernier ranc
-top_toplist	change	Changement
-top_toplist	top_download_7_days	Projets les plus téléchargés ces 7 derniers jours
-top_toplist	download	Téléchargement
-top_toplist	top_weekly_pagesviews	Top Weekly Project Pageviews at *.$1 (from impressions of $2 logo)
-top_toplist	pageviews	Nombre de page vue
-top_toplist	top_forum_post_count	Le plus de message inscris dans les forums
-top_toplist	posts	Messages
 top_toplist	top_download	Top téléchargement
-top_topusers	title	Utilisateurs les mieux classés
+top_toplist	top_download_7_days	Projets les plus téléchargés ces 7 derniers jours
+top_toplist	top_forum_post_count	Le plus de message inscris dans les forums
+top_toplist	top_weekly_pagesviews	Top Weekly Project Pageviews at *.$1 (from impressions of $2 logo)
+top_topusers	change	Changemenet
 top_topusers	info_not_available	Pas d'information disponible
 top_topusers	info_not_available_more	Les informations sur les utilisateurs les mieux classés ne sont pas disponibles.
-top_topusers	rank	Ranc
-top_topusers	user_name	Nom de l'utilisateur
-top_topusers	real_name	Vrai nom
-top_topusers	rating	Classement
 top_topusers	last_rank	Dernier ranc
-top_topusers	change	Changemenet
+top_topusers	rank	Ranc
+top_topusers	rating	Classement
+top_topusers	real_name	Vrai nom
+top_topusers	title	Utilisateurs les mieux classés
+top_topusers	user_name	Nom de l'utilisateur
 tracker	section	Projet : $1
 tracker	title	Trackers
 tracker_add	section	$1
 tracker_add	title	Soumission d'un objet de tracker
 tracker_admin	section	Tracker
 tracker_admin	title	Administration
-tracker_admin_choose	section	Projet: $1
-tracker_admin_choose	title	Administration du Tracker
 tracker_admin_add_canned	section	Administration d'un tracker
 tracker_admin_add_canned	title	Ajout d'une réponse-type à $1
 tracker_admin_add_cat	section	Administration d'un tracker
 tracker_admin_add_cat	title	Ajout d'une catégorie à $1
 tracker_admin_add_group	section	Administration d'un tracker
 tracker_admin_add_group	title	Ajout de groups à $1
+tracker_admin_choose	section	Projet: $1
+tracker_admin_choose	title	Administration du Tracker
 tracker_admin_update_canned	section	Administration d'un tracker
 tracker_admin_update_canned	title	Modification des réponses-types de $1
 tracker_admin_update_cat	section	Administration d'un tracker
@@ -618,105 +713,31 @@ tracker_detail	section	$1
 tracker_detail	title	Vue détaillée d'un tracker
 tracker_reporting	section	Projet: $1
 tracker_reporting	title	Rapports sur les trackers
-users	title	Résumé d'un utilisateur
 trove	not_categorized	Ce projet ne s'est pas encore classifié dans la 
 trove	title	Carte de Recherche thématique
-classgroup	acceptedproject	Votre enregistrement de projet $7 a été accepté.\n\nNom complet du projet:  $1\nNom unix du projet:  $2\nServeur CVS:         cvs.$2.$3\nServeur Shell/Web:   $2.$3\n\nVotre DNS va prendre jusqu'à une journée pour devenir actif sur notre site.\nEn attendant que la résolution DNS soit effective, vous pouvez essayer de vous connecter à \n$4 et pointer CVS à $5\n\nSi au bout de 6 heures vos comptes shell/CVS ne fonctionnent toujours pas, s'il vous plait\nouvrez un ticket support pour que nous examinions le problème.\nNotez que les comptes shell/CVS sont fermés à telnet et\nfonctionnent avec SSH.\n\nVotre site web est accessible à travers votre compte shell. S'il vous plait lisez\nla documentation du site (voir le lien ci-dessous) au sujet de l'usage attendu, des services\ndisponibles, et de l'organisation des repertoires du compte.\n\nS'il vous plait prenez quelques temps pour lire la documentation du site au sujet de l'administration \ndes projets (http://$3/docs/site/). Si vous visitez votre\npropre page projet dans $7 alors que vous êtes authentifiés, vous trouverez \ndes menus supplémentaires à votre gauche libellés \'Administration de projet\'.\n\nNous vous recommendons fortement de visiter maintenant $7 et de créer une description \npublique de votre projet. Cela peut se faire en visitant votre page projet en étant authentifié\net en selectionnant \'Administration du projet\' depuis le menu\nà votre gauche (ou en visitant http://$3/project/admin/?group_id=$6\naprés authentification).\n\nVotre projet n'apparaitra pas dans la Recherche Thématique (liste\ndes projets hebergés par $7 qui offre une grande flexibilité de\nparcours et recherche) tant que vous n'aurez pas catégorisé votre projet dans les pages d'administration.\nAinsi pour que l'on puisse trouver votre projet, vous devriez faire ceci maintenant.\nVisiter votre projet en étant authentifié, et selectionnez \'Administration de projet\' depuis le menu de gauche.\n\n\nAppréciez le système, et faites part aux autres de votre expérience de $7. Faites nous savoir\nsi il y a quelque chose que nous puissions faire pour vous aider.\n\n-- L'équipe $7 
-classgroup	rejectedproject	Votre enregistrement de projet a été rejeté.\n\nNom long du projet:  $1\nNom UNIX du projet:  $2\n\nRaison de notre refus:\n\n
-classgroup	newprojectnotification	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou rejeter ce projet:\nhttp://$5/admin/approve-pending.php
-classgroup	acceptedprojecttitle	Projet $1 Approuvé
-classgroup	rejectedprojecttitle	Projet $1 Refusé
-classgroup	newprojectnotificationtitle	Projet $1 Soumis
-session	missingpasswd	Mot de passe ou Login manquant
-session	invalidpasswd	Mot de passe ou Login non valide
-session	suspended	Compte suspendu
-session	pending	Compte en attente
-session	deleted	Compte supprimé
-session	notactive	Compte non actif
-session	cannotinit	ERREUR - Impossible d'initialiser la session
-global	error	ERREUR
-common_include_account	sixchar	Le mot de passe doit comporter au moins 6 caractères.
-common_include_account	nospace	Il ne peut y avoir d'espace dans un nom de login.
-common_include_account	tooshort	Le nom est trop court, il doit comporter au moins 3 caractères.
-common_include_account	toolong	Le nom est trop long, il doit comporter au plus 15 caractères.
-common_include_account	illegal	Caractère interdit dans le nom.
-common_include_account	cvsreserved	Nom réservé pour CVS.
-common_include_account	dnsreserved	Nom réservé pour le DNS.
-common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractère souligné à cause des règles imposées par le DNS.
-image	logout	fr_logout.png
-image	login	fr_login.png
-image	myaccount	fr_myaccount.png
-image	newaccount	fr_newaccount.png
-searchbox	softwaregroup	Logiciel/Groupe
-searchbox	skill	Savoir-faire
-searchbox	people	Personne
-searchbox	search	Rechercher
-searchbox	forum	Ce forum
-searchbox	task	Tâches
-user_home	title	Profil de développeur
-user_home	skills_profile	Compétences
-user_home	user_id	Identifiant d'utilisateur
-user_home	login_name	Nom de connexion
-user_home	real_name	Nom réel
-user_home	jabber_address	Addresse Jabber
-user_home	personal_information	Informations personnelles
-user_home	site_member_since	Date d'entrée
 user_home	contact	Contact
-user_home	email	Votre adresse e-mail
-user_home	name	Votre nom
-user_home	subject	Objet
-user_home	message	Message
-user_home	send	Envoyer message
-user_home	send_a_message	Envoyer un message à
-user_home	peer_rating	Évaluations réciproques
-user_home	peer_rating_disabled	L'utilisateur a choisi de ne pas participer aux évaluations
 user_home	diary_notes	Journal et notes
 user_home	diary_notes_entries	Entrées dans le journal ou les notes
-user_home	diary_notes_view	Voir le journal et les notes
 user_home	diary_notes_monitor	Surveiller ce journal
-user_home	project_info	Information sur un projet
-user_home	no_projects	Ce développeur ne fait partie d'aucun projet
+user_home	diary_notes_view	Voir le journal et les notes
+user_home	email	Votre adresse e-mail
+user_home	jabber_address	Addresse Jabber
+user_home	login_name	Nom de connexion
 user_home	member_of	Ce développeur fait partie des groupes suivants
+user_home	message	Message
+user_home	name	Votre nom
+user_home	no_projects	Ce développeur ne fait partie d'aucun projet
+user_home	peer_rating	Évaluations réciproques
+user_home	peer_rating_disabled	L'utilisateur a choisi de ne pas participer aux évaluations
+user_home	personal_information	Informations personnelles
+user_home	project_info	Information sur un projet
+user_home	real_name	Nom réel
+user_home	send	Envoyer message
+user_home	send_a_message	Envoyer un message à
 user_home	send_message_if_logged	Vous pourriez envoyer un message si vous étiez connecté
-calendar	title	Gestion de projet : calendrier
-calendar	january	Janvier
-calendar	february	Février
-calendar	march	Mars
-calendar	april	Avril
-calendar	may	Mai
-calendar	june	Juin
-calendar	july	Juillet
-calendar	august	Août
-calendar	september	Septembre
-calendar	october	Octobre
-calendar	november	Novembre
-calendar	december	Decembre
-calendar	sunday	Dimanche
-calendar	monday	Lundi
-calendar	tuesday	Mardi
-calendar	wednesday	Mercredi
-calendar	thursday	Jeudi
-calendar	friday	Vendredi
-calendar	saturday	Samedi
-calendar	view	Vue :
-calendar	onemonth	Un mois
-calendar	threemonth	Trois mois
-calendar	currentyear	Année courante
-calendar	comingyear	Année prochaine
-calendar	fordate	Pour la date :
-calendar	update	Mise à jour
-calendar	todaysdate	Date du jour
-calendar	selecteddate	Date sélectionnée (si différente d'aujourd'hui).
-calendar	task_link_title	Résumé d'une tâche : $1
-calendar	task_begins	Début de la tâche $1
-calendar	task_ends	Fin de la tâche $1
-calendar	invalidyear	Année invalide
-calendar	invalidyearexplain	L'année doit être comprise entre 1990 et 2020.
-calendar	invalidmonth	Mois invalide
-calendar	invalidmonthexplain	Le mois doit être compris entre 1 et 12.
-calendar	invalidday	Jour invalide
-calendar	invaliddayexplain	Le jour doit être compris entre 1 et 31.
-calendar	invaliddate	Date invalide
-calendar	invaliddateexplain	$1 n'est pas une date valide.
-calendar	invalidtype	Type invalide
-calendar	invalidtypeexplain	Le type est invalide.
+user_home	site_member_since	Date d'entrée
+user_home	skills_profile	Compétences
+user_home	subject	Objet
+user_home	title	Profil de développeur
+user_home	user_id	Identifiant d'utilisateur
+users	title	Résumé d'un utilisateur
