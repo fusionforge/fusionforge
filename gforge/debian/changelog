@@ -6,8 +6,24 @@ gforge (3.1-4+) unstable; urgency=low
     updated to last cvsweb version
   * [Christian] added setup and cleanup target in install-ldap.sh
     and fill crypted password
+  * [Roland] Tightened the versioned dependency on Apache so that we can
+    rely on modules-config (closes: #220872).
+  * [Roland] Escape special characters like @ and $ before passing strings
+    containing them to a Perl script, for instance e-mail addresses.
+    Should help fix the administrator's e-mail.
+  * [Roland] install-db.sh now uses grep and cut (instead of Perl) to
+    extract the configuration variables from the configuration file, which
+    should help gforge-sourceforge-transition work better.
+  * [Roland] Added full path to invoke-rc.d in create-vhosts.sh.  This
+    script may be called from a very sparse environment (cron), in which
+    $PATH does not include /usr/sbin.
+  * [Roland] Remove .ssh/authorized_keys when they are set to empty,
+    instead of just leaving them as they are.
+  * [Roland] Added support for apache-perl too.
+  * [Roland] Fixed the way we use modules-config so that gforge-web-apache
+    does not hang on install (closes: #221172).
 
- -- Roland Mas <lolando@debian.org>  Sat, 15 Nov 2003 17:54:43 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 22 Nov 2003 18:42:41 +0100
 
 gforge (3.1-4) unstable; urgency=low
 
