@@ -100,9 +100,9 @@ class ProjectTask extends Error {
 		$v->check($details, "details");
 		$v->check($priority, "priority");
 		$v->check($hours, "hours");
-		$v->check($start_date, "start_date");
-		$v->check($end_date, "end_date");
-		$v->check($category_id, "category_id");
+		$v->check($start_date, "start date");
+		$v->check($end_date, "end date");
+		$v->check($category_id, "category");
 		if (!$v->isClean()) {
 			$this->setError($v->formErrorMsg("Must include "));
 			return false;
@@ -645,11 +645,18 @@ class ProjectTask extends Error {
 	 */
 	function update($summary,$details,$priority,$hours,$start_date,$end_date,
 		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr) {
-		if (!$summary || !$priority || !$hours || !$start_date || !$end_date 
-			|| !$status_id || !$category_id) {
-			$this->setError('Must include a summary, details, priority, hours, start date, end date, status and category.');
-			return false;
-		}
+                $v = new Validator();
+                $v->check($summary, "summary");
+                $v->check($priority, "priority");
+                $v->check($hours, "hours");
+                $v->check($start_date, "start date");
+                $v->check($end_date, "end date");
+                $v->check($status_id, "status");
+                $v->check($category_id, "category");
+                if (!$v->isClean()) {
+                        $this->setError($v->formErrorMsg("Must include "));
+                        return false;
+                }
 
 		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
 
