@@ -37,28 +37,27 @@ require_once('common/include/Error.class');
 require_once('common/pm/Validator.class');
 
 function &projecttask_get_object($project_task_id,$data=false) {
-        global $PROJECTTASK_OBJ;
-        if (!isset($PROJECTTASK_OBJ["_".$project_task_id."_"])) {
-                if ($data) {
-                        //the db result handle was passed in
-                } else {
-			echo "NO PT data<br>";
-                        $res=db_query("SELECT * FROM project_task_vw
-			WHERE project_task_id='$project_task_id'");
+		global $PROJECTTASK_OBJ;
+		if (!isset($PROJECTTASK_OBJ["_".$project_task_id."_"])) {
+			if ($data) {
+				//the db result handle was passed in
+			} else {
+				$res=db_query("SELECT * FROM project_task_vw
+					WHERE project_task_id='$project_task_id'");
 
-                        if (db_numrows($res) <1 ) {
-                                $PROJECTTASK_OBJ["_".$project_task_id."_"]=false;
-                                return false;
-                        }
-                        $data =& db_fetch_array($res);
+				if (db_numrows($res) <1 ) {
+					$PROJECTTASK_OBJ["_".$project_task_id."_"]=false;
+					return false;
+				}
+				$data =& db_fetch_array($res);
 
-                }
-                $ProjectGroup =& projectgroup_get_object($data["group_project_id"]);
-                $PROJECTTASK_OBJ["_".$project_task_id."_"]= new ProjectTask($ProjectGroup,$project_task_id,$data);
+			}
+			$ProjectGroup =& projectgroup_get_object($data["group_project_id"]);
+			$PROJECTTASK_OBJ["_".$project_task_id."_"]= new ProjectTask($ProjectGroup,$project_task_id,$data);
 
-        }
+		}
 
-        return $PROJECTTASK_OBJ["_".$project_task_id."_"];
+		return $PROJECTTASK_OBJ["_".$project_task_id."_"];
 }
 
 
@@ -692,18 +691,18 @@ class ProjectTask extends Error {
 	 */
 	function update($summary,$details,$priority,$hours,$start_date,$end_date,
 		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr) {
-                $v = new Validator();
-                $v->check($summary, "summary");
-                $v->check($priority, "priority");
-                $v->check($hours, "hours");
-                $v->check($start_date, "start date");
-                $v->check($end_date, "end date");
-                $v->check($status_id, "status");
-                $v->check($category_id, "category");
-                if (!$v->isClean()) {
-                        $this->setError($v->formErrorMsg("Must include "));
-                        return false;
-                }
+		$v = new Validator();
+		$v->check($summary, "summary");
+		$v->check($priority, "priority");
+		$v->check($hours, "hours");
+		$v->check($start_date, "start date");
+		$v->check($end_date, "end date");
+		$v->check($status_id, "status");
+		$v->check($category_id, "category");
+		if (!$v->isClean()) {
+			$this->setError($v->formErrorMsg("Must include "));
+			return false;
+		}
 
 		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
 
