@@ -1,3 +1,10 @@
+gforge (3.1-13+1) unstable; urgency=low
+
+  * [Roland] Rewrote the "sourceforge" package description to fix a
+    Lintian error.
+
+ -- Roland Mas <lolando@debian.org>  Fri,  5 Mar 2004 13:46:55 +0100
+
 gforge (3.1-13) unstable; urgency=low
 
   * [Roland] Upgraded the Suggests: libphp-jpgraph to a Depends:, since

@@ -208,12 +208,12 @@ Architecture: all
 Depends: sourceforge | sourceforge-db-postgresql
 Description: Sourceforge to Gforge data transition
  This package will move data from your sourceforge package
- to your gforge package
+ to your gforge package.
 
 Package: sourceforge
 Architecture: all
 Depends: gforge-sourceforge-transition
-Description: Sourceforge to Gforge transition
+Description: Empty package to help with Sourceforge to Gforge transition
  Sourceforge has been renamed Gforge, and is no longer maintained.
  This package is only here to help you upgrade to Gforge.  Once you
  have installed this package and the one it depends on
