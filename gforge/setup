@@ -12,7 +12,7 @@ getval(){
 computedefault(){
 	echo "Calculating defaults"
 	# This is used to make a default working gforge.conf
-	DEFAULTsystem_name=GForge
+	DEFAULTsystem_name=MyGForge
 	DEFAULTdomain_name=`hostname -f`
 	DEFAULTserver_admin=webmaster@$DEFAULTdomain_name
 	DEFAULTdb_host=`hostname -i`
