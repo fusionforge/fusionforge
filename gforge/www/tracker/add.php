@@ -14,8 +14,6 @@
 
 $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagename'=>'tracker_add','sectionvals'=>array($ath->getName())));
 
-	echo '
-	<p>&nbsp;</p>';
 	/*
 	    Show the free-form text submitted by the project admin
 	*/
@@ -25,7 +23,10 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	<form action="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="func" value="postadd" />
 	<table>
-	<tr><td <valign="top" colspan="2"><strong>'.$Language->getText('tracker_add','for_project').':</strong><br />'.$group->getPublicName().'</td></tr>
+	<tr>
+		<td valign="top"><strong>'.$Language->getText('tracker_add','for_project').':</strong><br />'.$group->getPublicName().'</td>
+		<td valign="top"><input type="submit" name="submit" value="'. $Language->getText('general','submit').'" /></td>
+	</tr>
 	<tr><td <valign="top"><strong>'.$Language->getText('tracker','category').': <a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a></strong><br />';
 
 		echo $ath->categoryBox('category_id');
@@ -49,7 +50,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	}
 	?>
 	<tr><td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
-		<input type="text" name="summary" size="35" maxlength="40" />
+		<input type="text" name="summary" size="80" maxlength="255" />
 	</td></tr>
 
 	<tr><td colspan="2">
@@ -82,12 +83,10 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 		<p>
 		<strong><?php echo $Language->getText('tracker','file_description') ?>:</strong><br />
 		<input type="text" name="file_description" size="40" maxlength="255" /></p>
-		<p>&nbsp;</p>
 	</td><tr>
 
 	<tr><td colspan="2">
 		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit')?>" />
-		<p>&nbsp;</p>
 	</td></tr>
 
 	</table></form></p>

@@ -152,9 +152,9 @@ if (session_loggedin()) {
 
 	<tr>
 		<td colspan="2"><strong><?php echo $Language->getText('tracker','summary')?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
-		<input type="text" name="summary" size="45" value="<?php
+		<input type="text" name="summary" size="80" value="<?php
 			echo $ah->getSummary(); 
-			?>" maxlength="60" />
+			?>" maxlength="255" />
 		</td>
 	</tr>
 
