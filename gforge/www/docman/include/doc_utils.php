@@ -44,7 +44,7 @@ function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='
 	}
 
 	if (!$project->usesDocman()) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','turned_off',array('Doc Manager')));
+		exit_error($Language->getText('general','error'),$Language->getText('docman','turned_off'));
 	}
 
 	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman','pagename'=>$pagename,'titlevals'=>array($titleval),'sectionvals'=>array($sectionval)));

@@ -153,11 +153,12 @@ class Document extends Error {
 	 *	@return	boolean	success
 	 */
 	function fetchData($docid) {
+		global $Language;
 		$res=db_query("SELECT * FROM docdata_vw
 			WHERE docid='$docid'
 			AND group_id='". $this->Group->getID() ."'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('Document:: Invalid docid');
+			$this->setError($Language->getText('docman_common_doc','invalid_docid'));
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);

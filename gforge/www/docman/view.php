@@ -54,7 +54,7 @@ if ($docid) {
 	echo $d->getFileData();
 
 } else {
-	exit_error("No document data.","No document to display - invalid or inactive document number.");
+	exit_error($Language->getText('docman_display_doc','no_document_data_title'),$Language->getText('docman_display_doc','no_document_data_text'));
 }
 
 ?>

@@ -34,7 +34,7 @@ if ($submit){
 
 	if (!$doc_group || $doc_group ==100) {
 		//cannot add a doc unless an appropriate group is provided
-		exit_error($Language->getText('general','error'),$Language->getText('general','no_valid_group',array('Document')));
+		exit_error($Language->getText('general','error'),$Language->getText('docman_new','no_valid_group'));
 	}
 
 	if (!$title || !$description) {
@@ -59,7 +59,7 @@ if ($submit){
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
 		exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	} else {
-		Header("Location: /docman/?group_id=$group_id&feedback=".$Language->getText('general','submitted_successfully','Document'));
+		Header("Location: /docman/?group_id=$group_id&feedback=".$Language->getText('docman_new','submitted_successfully'));
 		exit;
 	}
 

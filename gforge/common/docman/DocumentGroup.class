@@ -83,11 +83,12 @@ class DocumentGroup extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($name) {
+		global $Language;
 		//
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError('DocumentGroup: name is Required');
+			$this->setError($Language->getText('docman_common_docgroup','name_required'));
 			return false;
 		}
 
@@ -126,9 +127,10 @@ class DocumentGroup extends Error {
 	 *	@return boolean.
 	 */
 	function fetchData($id) {
+		global $Language;
 		$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$id'");
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('DocumentGroup: Invalid DocumentGroup ID');
+			$this->setError($Language->getText('docman_common_docgroup','invalid_id'));
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);

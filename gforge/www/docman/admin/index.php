@@ -213,8 +213,8 @@ if ($editdoc && $docid) {
 	$rows=db_numrows($result);
 	if ($result && $rows > 0) {
 		$title_arr=array();
-		$title_arr[]='ID';
-		$title_arr[]=$Language->getText('docman_admin_groupedit','group_name');
+		$title_arr[]=$Language->getText('docman_admin_editgroups','group_id');
+		$title_arr[]=$Language->getText('docman_admin_editgroups','group_name');
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -269,7 +269,7 @@ if ($editdoc && $docid) {
 	<input type="hidden" name="doc_group" value="<?php echo $doc_group; ?>" />
 	<table>
 		<tr>
-			<th><?php echo $Language->getText('docman_admin_groupedit','group_name') ?>:</th>
+			<th><?php echo $Language->getText('docman_admin_editgroups','group_name') ?>:</th>
 			<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
 			<td><input type="submit" value="<?php echo $Language->getText('general','edit') ?>" name="submit" /></td>
 		</tr>
