@@ -111,10 +111,10 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		$rows=db_numrows($result);
 		if ($rows < 1) {
 			echo '
-				<H4>No Queued Items Found For Project: '.group_getname($group_id).'</H1>';
+				<H4>'.$Language->getText('news_admin','noqueued').': '.group_getname($group_id).'</H4>';
 		} else {
 			echo '
-				<H4>These News Items Were Submitted For Project: '.group_getname($group_id).'</H4>
+				<H4>'.$Language->getText('news_admin','queued').': '.group_getname($group_id).'</H4>
 				<P>';
 			for ($i=0; $i<$rows; $i++) {
 				echo '

@@ -62,10 +62,6 @@ if (user_isloggedin()) {
 		<P>
 		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS[sys_name]) .'
 		<P>
-		You may include URLs, but not HTML in your submissions.
-		<P>
-		URLs that start with http:// are made clickable.
-		<P>
 		<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
 		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
 		<B>'.$Language->getText('news_submit', 'forproject').': '. group_getname($group_id) .'</B>
@@ -76,7 +72,7 @@ if (user_isloggedin()) {
 		<P>
 		<B>'.$Language->getText('news_submit', 'details').':</B><BR>
 		<TEXTAREA NAME="details" ROWS="5" COLS="50" WRAP="SOFT"></TEXTAREA><BR>
-		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="SUBMIT">
+		<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.$Language->getText('news_submit', 'submit').'">
 		</FORM>';
 
 	news_footer(array());

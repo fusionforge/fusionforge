@@ -67,7 +67,7 @@ if ($forum_id) {
 		if (!post_message($thread_id, $is_followup_to, $subject, $body, $forum_id)) {
 			exit_error('ERROR',$feedback);
 		} else {
-			$feedback='Message Posted Successfully';
+			$feedback=$Language->getText('forum_forum','postsuccess');
 			$style='';
 			$thread_id='';
 		}

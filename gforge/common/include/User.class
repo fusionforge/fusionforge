@@ -269,6 +269,8 @@ class User extends Error {
 	 *	@return true or false
 	 */
 	function sendRegistrationEmail() {
+		global $Language;
+/*		
 		$message = "Thank you for registering on the SourceForge web site. You have\n"
 		. "account with username '".$this->getUnixName()."' created for you. In order\n"
 		. "to complete your registration, visit the following url: \n\n"
@@ -278,10 +280,13 @@ class User extends Error {
 		. "https://". $GLOBALS['sys_default_domain']."/account/verify.php?confirm_hash=_".$this->getConfirmHash()."\n\n"
 		. "Enjoy the site.\n\n"
 		. " -- the SourceForge staff\n";
-
+*/
+		$link1="<https://". $GLOBALS['sys_default_domain'] ."/account/verify.php?confirm_hash=_".$this->getConfirmHash().">";
+		$link2="https://". $GLOBALS['sys_default_domain']."/account/verify.php?confirm_hash=_".$this->getConfirmHash();
+		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$link1,$link2)));
 		util_send_mail(
 			$this->getEmail(),
-			"SourceForge Account Registration",
+			$Language->getText('account_register','message_header'),
 			$message
 		);
 	}

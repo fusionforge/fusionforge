@@ -85,6 +85,8 @@ account_register	err_email	Courriel invalide
 account_register	err_userexist	Ce nom d'utilisateur existe déjà.
 account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
 account_register	err_badinsert	L'insertion a échouée.
+account_register	message_header	Enregistrement au site SourceForge
+account_register	message_body	Merci de vous être enregistré au site Sourceforge. \nVous avez maintenant un compte avec pour nom $1. \nPour terminer votre inscription suivez le lien: \n\n$2\n\n(Si vous ne voyez rien ci-dessus, c'est probablement un bug de votre logiciel de mail.\nUtilisez le lien ci-dessous, mais assurez vous qu'il est sur une seule ligne.)\n\n$3\n\nProfiter du site.\n\n-- l'équipe SourceForge\n
 account_unsubscribe	all_mailings	toutes les notifications concernant Sourceforge
 account_unsubscribe	site_mailings	les messages concernant le site Sourceforge
 account_verify	title	Vérification de votre compte Sourceforge
@@ -134,6 +136,7 @@ forum_forum	thread	File de message
 forum_forum	author	Auteur
 forum_forum	date	Date
 forum_forum	changeview	Changer de visualisation
+forum_forum	postsuccess	Message Envoyé
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
 forum_message	section	Forums
@@ -322,8 +325,10 @@ news	noitems	Aucun enregistrement trouvé
 news_admin	section	Nouveautés
 news_admin	title	Administration des nouveautés
 news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe $1 des nouveautés.
+news_admin	noqueued	Pas de message soumis pour le projet
+news_admin	queued	Messages soumis pour le projet
 news_main	title	Nouveautés de Sourceforge
-news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe de Sourceforge pour apparaître sur la page d'accueil de Sourceforge.
+news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe $1 pour apparaître sur la page d'accueil $1.<P>Vous pouvez inclure dans vos envois des URLs, mais pas de HTML.<P>Les URLs commençants par http:// sont rendues clickables.
 news_submit	section	Nouveautés
 news_submit	title	Soumettre une nouveauté pour $1
 news_submit	cannot	Vous ne pouvez soumettre une nouveauté sans être administrateur de ce projet
@@ -333,6 +338,7 @@ news_submit	details	Detail
 news_submit	errorinsert	ERREUR d'insertion
 news_submit	errorboth	ERREUR - le sujet et le corps sont requis
 news_submit	newsadded	Nouveauté ajoutée.
+news_submit	submit	ENVOYER
 news_utils	nonews	<H3>Pas de nouveauté<H3>
 news_utils	archive	Archive des nouveautés
 news_utils	submit	Proposer une nouveauté

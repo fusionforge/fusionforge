@@ -70,6 +70,8 @@ account_register	err_email	Invalid Email Address
 account_register	err_userexist	That username already exists.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
 account_register	err_badinsert	Insert Failed 
+account_register	message_header	SourceForge Account Registration
+account_register	message_body	Thank you for registering on the SourceForge web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n$2\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\n$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
 account_unsubscribe	all_mailings	all SourceForge mailings and notifications
 account_unsubscribe	site_mailings	SourceForge site mailings
 account_verify	title	SourceForge Account Verification
@@ -129,6 +131,7 @@ forum_forum	thread	Thread
 forum_forum	author	Author
 forum_forum	date	Date
 forum_forum	changeview	Change View
+forum_forum	postsuccess	Message Posted Successfully
 forum_message	section	Forums
 forum_message	title	View Message
 forum_message	msg	Post A Message To This Thread:
@@ -315,8 +318,10 @@ news	noitems	No items were found
 news_admin	section	News
 news_admin	title	News Admin
 news_admin	permdenied	You have to be an admin on the project you are editing or a member of the $1 News team.
+news_admin	noqueued	No Queued Items Found For Project
+news_admin	queued	These News Items Were Submitted For Project
 news_main	title	News
-news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the news team before they will appear on the $1 home page.
+news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the $1 news team before they will appear on the $1 home page.<P>You may include URLs, but not HTML in your submissions.<P>URLs that start with http:// are made clickable.
 news_submit	section	News
 news_submit	title	Submit News for $1
 news_submit	cannot	You cannot submit news for a project unless you are an admin on that project
@@ -326,6 +331,7 @@ news_submit	details	Details
 news_submit	errorinsert	ERROR doing insert
 news_submit	errorboth	ERROR - both subject and body are required
 news_submit	newsadded	News Added.
+news_submit	submit	SUBMIT
 news_utils	nonews	No News Items Found
 news_utils	archive	News archive
 news_utils	submit	Submit News
