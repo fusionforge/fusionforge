@@ -76,7 +76,7 @@ ldap_gforge_lists_query_filter = (cn=\%s,ou=mailingList)
 ldap_gforge_lists_result_attribute = debGforgeListPostAddress
 ldap_gforge_lists_search_base = $sys_ldap_base_dn
 ldap_gforge_lists_bind = no
-ldap_gforge_lists_domain = users.$domain_name
+ldap_gforge_lists_domain = lists.$domain_name
 
 #forward_for_gforge_lists_admin:
 # domains = $sys_lists_host
