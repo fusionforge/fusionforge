@@ -92,7 +92,7 @@ install: build
 	#install utils/underworld-root/db_stats_projects_nightly.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_stats_projects_nightly.pl
 	#install utils/underworld-root/db_stats_site_nightly.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_stats_site_nightly.pl
 	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
-	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/clear.gif deb-specific/clear.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/clear.png deb-specific/clear.png.uu
 	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/debian-sf-icon.png deb-specific/debian-sf-icon.png.uu
 	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge/etc/sourceforge/templates/
 	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge/etc/sourceforge/templates/
@@ -142,12 +142,12 @@ install: build
 
 	# CVSWEB
 	install -m 755 deb-specific/cvsweb/cvsweb.cgi $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cgi-bin/
-	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/back.gif deb-specific/cvsweb/icons/back.gif.uu
-	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/dir.gif deb-specific/cvsweb/icons/dir.gif.uu
-	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/minidir.gif deb-specific/cvsweb/icons/minidir.gif.uu
-	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/text.gif deb-specific/cvsweb/icons/text.gif.uu
-	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/miniback.gif deb-specific/cvsweb/icons/miniback.gif.uu
-	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/minitext.gif deb-specific/cvsweb/icons/minitext.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/back.png deb-specific/cvsweb/icons/back.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/dir.png deb-specific/cvsweb/icons/dir.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/minidir.png deb-specific/cvsweb/icons/minidir.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/text.png deb-specific/cvsweb/icons/text.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/miniback.png deb-specific/cvsweb/icons/miniback.png.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/minitext.png deb-specific/cvsweb/icons/minitext.png.uu
 	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/sourceforge/etc/sourceforge/
 
 	# CVSTARBALLS
