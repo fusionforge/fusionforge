@@ -52,19 +52,15 @@ class SurveyHTML extends Error {
 					array(
 						$Language->getText('group','short_survey'),
 						$Language->getText('survey_utils','admin'),
-						$Language->getText('survey_utils','add_survey'),
 						$Language->getText('survey_utils','edit_survey'),
-						$Language->getText('survey_utils','add_question'),
 						$Language->getText('survey_utils','edit_questions'),
 						$Language->getText('survey_utils','show_results')
 					),
 					array(
 						'/survey/?group_id='.$group_id,
 						'/survey/admin/?group_id='.$group_id,
-						'/survey/admin/add_survey.php?group_id='.$group_id,
-						'/survey/admin/edit_survey.php?group_id='.$group_id,
-						'/survey/admin/add_question.php?group_id='.$group_id,
-						'/survey/admin/show_questions.php?group_id='.$group_id,
+						'/survey/admin/survey.php?group_id='.$group_id,
+						'/survey/admin/question.php?group_id='.$group_id,
 						'/survey/admin/show_results.php?group_id='.$group_id
 					)
 				));
