@@ -1206,7 +1206,7 @@ pm	hours	Durée horaire estimée
 pm	intro	Choisissez un sous projet pour pouvoir naviguer/éditer/modifier les tâches.
 pm	no_tasks_found	Aucune tâche correspondante trouvée
 pm	no_tasks_found_text	Ajouter des tâches en utilisant le lien au dessus
-pm	noprj	<H1>Aucun sous-projet trouvé</H1><P><B>Aucun sou-projet n'a été défini, ou vous ne pouvez les voir.<P><FONT COLOR=RED>L'administrateur de ce projet définira les projets en utilisant la page d'administration</FONT></B>
+pm	noprj	<H1>Aucun sous-projet trouvé</H1><P><B>Aucun sous-projet n'a été défini, ou vous ne pouvez les voir.<P><FONT COLOR=RED>L'administrateur de ce projet définira les projets en utilisant la page d'administration</FONT></B>
 pm	percent_complete	Taux d'avancement
 pm	priority	Priorité
 pm	section	Projet : $1
@@ -1495,7 +1495,7 @@ project_admin_qrs	no_file_types_available	Pas de types de fichiers disponibles.
 project_admin_qrs	package_id	numéro&nbsp;
 project_admin_qrs	preserve_text	Conserver mon texte pré-formaté
 project_admin_qrs	processor_type	Type de microprocesseur&nbsp;
-project_admin_qrs	qrs_info	$1, Vous pouvez maintenant ajouter des fichier à cette version $2 si vous le souhaitez,  ou modifier la version.</p> <p>Remarquez que le(s) fichier(s) peuvent ne pas apparae immédiatement dans la page de téléchargement $1 page $4. Prévoir plusieurs heures pour la propagation.
+project_admin_qrs	qrs_info	$1 Vous pouvez maintenant ajouter des fichiers à cette version $2 si vous le souhaitez, ou modifier la version.</p> <p>Remarquez que le(s) fichier(s) peuvent ne pas apparaitre immédiatement dans la $3 page de téléchargement $4. Prévoir plusieurs heures pour la propagation.
 project_admin_qrs	release_date	Date de la version&nbsp;
 project_admin_qrs	release_file	Publier le paquet
 project_admin_qrs	release_name	Nom de version&nbsp;
