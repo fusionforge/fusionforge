@@ -5,9 +5,11 @@ gforge (3rc1-3) experimental; urgency=low
   * [Christian] Added suggest on libphp-jpgraph
   * [Christian] Added unix_box and cvs_box argument to the
     create funtion in Group.class
-  * [Christian] added darkaqua theme from Patrick McFarland (diablod3) 
+  * [Christian] added darkaqua theme from Patrick McFarland (diablod3)
+  * [Chrsitian] added a find for sourceforge owned file in common postinst 
+    (Closes: bug#179050)
 
- -- Christian Bayle <bayle@debian.org>  Sun, 13 Apr 2003 23:19:50 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon, 14 Apr 2003 00:32:04 +0200
 
 gforge (3rc1-2) experimental; urgency=low
 

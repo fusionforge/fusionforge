@@ -29,6 +29,7 @@ set -e
 case "$1" in
     configure)
 	adduser --system --group --home /var/www/gforge gforge > /dev/null 2>&1
+	[ ! -f /var/lib/gforge/reowned ] && find /var/lib/gforge/ -user sourceforge -exec chown gforge {} \; && find /var/lib/gforge/ -group sourceforge -exec chgrp gforge {} \; && touch /var/lib/gforge/reowned
 	
 	create_mainconffile
 	vars="system_name domain_name server_admin sys_theme sys_lang"
