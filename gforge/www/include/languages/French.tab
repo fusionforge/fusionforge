@@ -1749,7 +1749,7 @@ project_showfiles	release_notes	Version <br />&amp; Commentaires</s>
 project_showfiles	section	Projet : $1
 project_showfiles	size	Taille
 project_showfiles	title	Liste de fichiers du projet
-project_shownotes	changes	Changemenents :
+project_shownotes	changes	Changements :
 project_shownotes	error_release_not_found	Cette version n'a pas été trouvée
 project_shownotes	notes	Notes :
 project_shownotes	release_name	Nom de version :
