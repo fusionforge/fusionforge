@@ -372,7 +372,7 @@ tar -zxvf cvsweb-1.112.tar.gz
 <p>cvsweb consists of a Perl script (cvsweb.cgi), a configuration file (cvsweb.conf), and some icons (back.gif, dir.gif, etc).</p>
 <ul>
 <li>Copy the cvsweb.cgi script into Apache's cgi-bin directory</li>
-<li>Copy the cvsweb.conf file into Apache's configuration directory</li>
+<li>Copy the cvsweb.conf file into Apache's configuration directory (such as /etc/httpd/conf/ on RedHat 9)</li>
 <li>Edit cvsweb.conf</li>
 <li>change %CVSROOT hash to include your repositories</li>
 <li>change the $cvstreedefault variable to point to a default repository</li>
