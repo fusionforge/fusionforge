@@ -1,4 +1,13 @@
-gforge (4.0.2-6) unstable; urgency=low
+gforge (4.1-5b) unstable; urgency=low
+
+  * [Christian] nss-pgsql1 integration
+  * [Christian] System.class reorganization 
+  * [Christian] Added anonscm-gforge user for anonymous cvs 
+    and moved lock files in cvsroot/cvs-locks/ dir
+
+ -- Christian Bayle <bayle@debian.org>  Sat, 19 Feb 2005 17:31:29 +0100
+
+gforge (4.0.2-7) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
   * [Christian] Had to add a db_stop before gforge-config in
