@@ -1,4 +1,4 @@
-gforge (4.0.2-5c) unstable; urgency=low
+gforge (4.0.2-5h) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
   * [Christian] Had to add a db_stop before gforge-config in 
@@ -8,6 +8,7 @@ gforge (4.0.2-5c) unstable; urgency=low
     Now at replace I make a copy of conffile to conffile.dpkg-old
     At postinst, if conffile.dpkg-old exists conffile is
     replaced with conffile.dpkg-new
+  * [Christian] Added 20041124.sql to db-upgrade.pl
 
  -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
 
