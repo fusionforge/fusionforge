@@ -1,13 +1,3 @@
-sourceforge (2.6-0+11+2) unstable; urgency=low
-
-  * [Soon-Son] fixed bug # 148 (malformed part on dns.zone)
-  * [Soon-Son] fixed bug # 431 (Number of public forum/msg are 0)
-  * [Soon-Son] removed all links to nonexistent document
-  * [Soon-Son] more i18n effort including patch # 283
-  * [Soon-Son] removed dtd definition for bug # 120
-
- -- Soon-Son Kwon <kss@kldp.org>  Thu, 23 May 2002 16:24:15 +0900
-
 sourceforge (2.6-0+11+) unstable; urgency=low
 
   * [Roland] Added support for local overloading of the default
@@ -24,6 +14,11 @@ sourceforge (2.6-0+11+) unstable; urgency=low
     that replace html_get_alt_row_color from html.php. This will help
     to solve problems with savannah themes. I also made the necessary changes
     in savannah styles
+  * [Soon-Son] fixed bug # 148 (malformed part on dns.zone)
+  * [Soon-Son] fixed bug # 431 (Number of public forum/msg are 0)
+  * [Soon-Son] removed all links to nonexistent document
+  * [Soon-Son] more i18n effort including patch # 283
+  * [Soon-Son] removed dtd definition for bug # 120
 
  -- Christian Bayle <bayle@debian.org>  Mon,  6 May 2002 00:09:25 +0200
 
