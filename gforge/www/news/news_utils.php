@@ -126,14 +126,14 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$num_comments = '0';
 				}
 
-				if ($num_comments == 1) {
-					$comments_txt = " Comment";
+				if ($num_comments <= 1) {
+					$comments_txt = $Language->getText('news_utils', 'comment_1');
 				} else {
-					$comments_txt = " Comments";
+					$comments_txt = $Language->getText('news_utils', 'comment_2');
 				}
 
 				if ($show_forum){
-					$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" />';
+					$return .= '<div align="center">(' . $num_comments .' '. $comments_txt . ') <a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" />';
 				} else {
 					$return .= '<hr width="100%" size="1" />';
 				}
@@ -146,7 +146,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				$limit--;
 			}
 			if (!$limit && $i==$rows-1) {
-				$return .= "</ul>\n";
+				$return .= '</ul><hr width="100%" size="1" />'."\n";
 			}
 		}
 	}
@@ -158,10 +158,6 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 	}
 
 	if ($show_forum) {
-		if ($tail_headlines) {
-			$return .= '<hr width="100%" size="1" />'."\n";
-		}
-
 		$return .= '<div align="center">'
 			   .'<a href="'.$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
 	} else {
