@@ -1,0 +1,18 @@
+class HelloWorldPlugin extends Plugin {
+	function HelloWorldPlugin () {
+		$this->Plugin() ;
+		$this->hooks = array () ;
+		$this->hooks[] = "usermenu" ;
+	}
+
+	function CallHook ($hookname, $params) {
+		global $Language, $G_SESSION ;
+		if ($hookname == "usermenu") {
+			if ($G_SESSION->usesPlugin("helloworld")) {
+				echo ' | <A HREF="/plugins/helloworld/index.php?user_id=' . $G_SESSION->getId() . '">Hello world</A>' ;
+			}
+		} elseif ($hookname == "blah") {
+			// Blah
+		}
+	}
+}
