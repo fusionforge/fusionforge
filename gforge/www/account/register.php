@@ -44,7 +44,7 @@ if ($submit) {
 }
 
 
-$HTML->header(array('title'=>'SourceForge: Register','pagename'=>'account_register'));
+$HTML->header(array('title'=>'Register','pagename'=>'account_register'));
 
 if (browser_is_windows() && browser_is_ie() && browser_get_version() < '5.1') {
 	echo '<H2><FONT COLOR="RED">Internet Explorer users need to 
