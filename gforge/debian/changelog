@@ -1,3 +1,20 @@
+gforge (3.1-5+13) unstable; urgency=low
+
+  * [Roland] Detection of wrong passwords, with a message describing how
+    to fix (closes: #223693, #215577, #224257).
+  * [Roland] Insert data into LDAP using the robot DN, so as to minimise
+    the use of the admin DN.
+  * [Roland] Better detection of errors when creating database and user,
+    too.
+  * [Roland] Added cronjobs/massmail.php and enabled it in
+    gforge-db-postgresql.cron.d (closes: #225686).
+  * [Roland] Cleaned up the Apache installation process so that it works
+    more generically with apache{,-perl,-ssl} flavours.  Also use
+    /etc/$flavour/conf.d/ directory (thus removing the hack that changed
+    the /etc/$flavour/httpd.conf file).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 22:17:17 +0100
+
 gforge (3.1-5) unstable; urgency=low
 
   * [Roland] Tightened the versioned dependency on Apache so that we can
