@@ -26,10 +26,7 @@
  */
 
 function scm_header($params) {
-	global $DOCUMENT_ROOT, $HTML, $Language, $sys_use_cvs, $group_id;
-	if (!$group_id) {
-	        exit_no_group();
-	}
+	global $DOCUMENT_ROOT, $HTML, $Language, $sys_use_cvs;
 	if (!$sys_use_cvs) {
 		exit_disabled();
 	}
