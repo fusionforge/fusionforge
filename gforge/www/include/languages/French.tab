@@ -2730,7 +2730,7 @@ tracker_admin_build_boxes	error_inserting_choice	Erreur lors de l'ajout d'un él
 tracker_admin_build_boxes	error_updating	Erreur lors de la mise à jour du nom du champ
 tracker_admin_build_boxes	no_box	Vous n'avez pas défini de champ.
 tracker_admin_build_boxes	no_choice	Vous n'avez pas défini d'élément.
-tracker_admin_build_boxes	opt_add_name	Ajouter un nouvel l'élément
+tracker_admin_build_boxes	opt_add_name	Ajouter un nouvel élément
 tracker_admin_build_boxes	opt_name	Elément
 tracker_admin_build_boxes	opt_title	Ajouter/Modifier les éléments du champ supplémentaire : $1
 tracker_admin_build_boxes	opt_update_title	Modifier un élément d'un champ supplémentaire de : $1
