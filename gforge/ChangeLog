@@ -1,5 +1,12 @@
 2003-02-09  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/languages/Base.tab:
+	developer_monitor:monitor_using_expl: add missing </p>.
+
+	* www/developer/diary.php: valid XHTML 1.0 Transitional.
+
+	* www/themes/kde/Theme.class(boxTop, boxBottom): clean up.
+
 	* db/20030209.sql: New file.  Reimplements functionality of
 	20030109.sql in a way that works for all pgsql > 7.0.
 
