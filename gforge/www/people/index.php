@@ -30,22 +30,7 @@ if ($group_id) {
 
 } else {
 
-	echo '
-	<H3>Projects Needing Help</H3>
-	The Project Help Wanted board is for non-commercial, project
-	volunteer openings. Commercial use is prohibited.
-	<P>
-	Project listings remain live for two weeks, or until closed by the
-	poster, whichever comes first. (Project administrators may always
-	re-post expired openings.)
-	<P>
-	Browse through the category menu to find projects looking for your help.
-	<P>
-	If you\'re a project admin, log in and submit help wanted requests through
-	your project administration page.
-	<P>
-	To suggest new job categories, submit a request via the support manager.
-		<P>';
+	echo $Language->PROJECTNEEDHELP_blurb;
 	echo people_show_category_table();
 
         echo '<h4>Last posts</h4>';

@@ -100,8 +100,8 @@ $HTML->header(array('title'=>'Developer Profile'));
 // see if there were any groups
 if (db_numrows($res_cat) < 1) {
 	?>
-	<p>This developer is not a member of any projects.
-	<?php
+	<p>
+	<?php echo $Language->MY_no_projects;
 } else { // endif no groups
 	print "<p>This developer is a member of the following groups:<BR>&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {

@@ -274,6 +274,15 @@ This site runs Debian Sourceforge, a derivative of the code that runs the <a hre
 <br><br><b>Copyrights</b><br>The code behind Sourceforge was originally written by folks at VA Linux Systems (now called "VA Software") and released under the GNU General Public License.  It is thus mostly copyrighted by them.
 <br>The code behind this site, on the other hand, is Debian Sourceforge, a derivative of the original Sourceforge code, adapted for Debian systems.  The "visible" changes are mostly fixes for bugs and typos, but much work has also been done to provide a package: Debian Sourceforge is easy to setup and run, you only need a system running Debian.  Debian Sourceforge has been done by Christian Bayle and Roland Mas, with contributions from various people.
 <br><br><br><b>Trademarks and suchlikes</b><br>VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.  Linux is a registered trademark of Linus Torvalds.  All other trademarks and copyrights on this page are property of their respective owners.  Content owned by VA Linux Systems is copyright 1999-2001 VA Linux Systems, Inc.  All rights reserved.<br><br>';
+
+	var $PROJECTNEEDHELP_blurb='
+<H3>Projects Needing Help</H3>
+<P>The Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.
+<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)
+<P>Browse through the category menu to find projects looking for your help.
+<P>If you\'re a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>';
+		
+
 	/*
 		returns database result
 		of supported languages

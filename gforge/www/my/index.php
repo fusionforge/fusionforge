@@ -341,7 +341,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		. "AND groups.status='A' AND groups.is_public=1");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo "<TR><TD COLSPAN=\"2\">'.$Language->MY_no_projects.'</TD></TR>";
+		echo "<TR><TD COLSPAN=\"2\">$Language->MY_no_projects</TD></TR>";
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
