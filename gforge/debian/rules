@@ -57,17 +57,18 @@ install: build
 	cp -r www $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/
 	find $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ -name CVS -type d | xargs rm -rf
 	install -m 644 db/SourceForge.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
-	install -m 644 db/trove_defaults.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+#####	install -m 644 db/trove_defaults.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -m 644 db/user_rating.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -m 644 deb-specific/init-sequences.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -m 644 deb-specific/init-extra.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -m 644 deb-specific/sfdocs.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
+	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/db/
 	install -o www-data -m 755 -d $(CURDIR)/debian/sourceforge/var/cache/sourceforge
 	#install -o www-data -g ftp -m 750 -d $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ftp
 	#install -o www-data -g ftp -m 777 -d $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/ftp/incoming
 	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/project_cleanup.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/project_metric.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+#####	install -m 755 cronjobs/project_metric.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/rating_stats.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 cronjobs/site_stats.php $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
@@ -91,6 +92,8 @@ install: build
 	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	# install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/sourceforge/usr/bin/
