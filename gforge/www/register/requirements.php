@@ -1,17 +1,29 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: requirements.php,v 1.18 2000/08/31 06:11:36 gherteg Exp $
+/**
+  *
+  * Project Registration: Services&Requirements (informative)
+  *
+  * This page presents informative description of prerequisites and
+  * requirements for hosting on SourceForge. This page doesn't require
+  * any actions.
+  *
+  * Next in sequence: tos.php
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: requirements.php,v 1.20 2001/05/13 17:57:29 pfalcon Exp $
+  *
+  */
 
-require "pre.php";    // Initial db and session library, opens session
+
+require_once('pre.php');
+
 session_require(array(isloggedin=>1));
-$HTML->header(array(title=>"Project Requirements"));
-?>
 
-<H2>Step 1: SourceForge Services & Requirements (Service Specific Rules)</H2>
+$HTML->header(array(title=>"Project Requirements",'pagename'=>'register_requirements'));
+?>
 
 <p>
 We are now offering a full suite of services for Sourceforge projects. If
