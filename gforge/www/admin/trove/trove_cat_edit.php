@@ -71,8 +71,14 @@ if ($GLOBALS["delete"]) {
 	if (db_numrows($res)>0) {
 		exit_error("Can't delete","That trove cat has sub categories");
 	} else {
-		db_query(" DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
-		db_query(" DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
+		$res=db_query(" DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
+		if (!$res || db_affected_rows($res)<1) {
+			exit_error( 'Error In Trove Operation', db_error());
+		}
+		$res=db_query(" DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
+		if (!$res) {
+			exit_error( 'Error In Trove Operation', db_error());
+		}
 	}
 	session_redirect("/admin/trove/trove_cat_list.php");
 }
