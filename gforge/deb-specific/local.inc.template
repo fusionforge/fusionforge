@@ -147,7 +147,7 @@ $sys_name="{system_name}";
 //
 //	IMPORTANT - YOU MUST CHANGE "foobar" to a long, random number
 //
-$sys_session_key        = "foobar";
+$sys_session_key        = "{sys_session_key}";
 $sys_session_expire     = 60 * 60 * 24 * 7; 
 
 // Require that user give unique (not yet existent in db) email upon
@@ -168,6 +168,10 @@ $sys_lang='{sys_lang}';
 // Akamization of images
 $sys_images_url="http://{domain_name}/";
 $sys_images_secure_url="https://{domain_name}/";
+
+//  Show Source
+//  Setting this to 1 will add a "Show Source" link to the bottom of each page
+$sys_show_source = {sys_show_source};
 
 // Part IV - Groups
 //  The GForge permission model is based on groups
