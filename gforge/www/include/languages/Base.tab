@@ -1809,13 +1809,16 @@ register	other_license	If you selected "other", please provide an explanation al
 register	project_description	<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
 register	project_full_name	<h3>1. Project full name</h3><p>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).</p>Full Name:<br/>
 register	project_information	Project Information
-register	project_license	<h3>3. License</h3> 
+register	project_license	<h3>3. License</h3>
 register	project_submitted	Your project has been submitted to the $1 administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing $1
 register	project_unix_name	<h3>5. Project Unix Name</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Unix Name:<br/>
 register	purpose_and_summarization	<h3>2. Project Purpose And Summarization</h3><p><strong></strong><p><strong> Please provide detailed, accurate description of your project and what $1 resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on $1, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>
 register	registration_complete	Registration complete
 register	title	New Project Registration
 register	unix_group_name_already_taken	Unix name already taken
+register	choose_scm	<h3>6. SCM</h3><p>You can choose among different SCM for your project, but just one. Please select the SCM system you want to use.</p> <p><strong>You will not be able to change it once the project is registered!</strong></p>
+register	one_scm	As there exist just one SCM, then this will be selected automatically. <strong>$1</strong> will be selected.
+register	scm_not_selected	Site has SCM enabled, but no SCM was chosen.
 register_complete	section	New Project Registration
 register_complete	title	Registration Complete
 register_projectinfo	section	New Project Registration
