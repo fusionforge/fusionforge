@@ -33,9 +33,9 @@ $peerrating_groupid = '{peerrating_groupid}' ;
 $noreply_to_bitbucket = '{noreply_to_bitbucket}' ;
 $sys_simple_dns = '{simple_dns}';
 $sys_ip_address = '{ip_address}';
-$homedir_prefix = '{homedir}';
-$grpdir_prefix = '{groupdir}';
+$chroot_prefix = '{gforge_chroot}';
+$homedir_prefix = '{gforge_chroot}{homedir}';
+$grpdir_prefix = '{gforge_chroot}{groupdir}';
 $file_dir = '{var_lib_gforge}';
-$cvs_root = '{cvsdir}';
-$svn_root = '{svndir}';
-
+$cvs_root = '{gforge_chroot}{cvsdir}';
+$svn_root = '{gforge_chroot}{svndir}';
