@@ -144,7 +144,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 				/*
 					Update the db so the item shows on the home page
 				*/
-				$sql="UPDATE news_bytes SET is_approved='1', date='".time()."', ".
+				$sql="UPDATE news_bytes SET is_approved='1', post_date='".time()."', ".
 					"summary='".htmlspecialchars($summary)."', details='".htmlspecialchars($details)."' WHERE id='$id'";
 				$result=db_query($sql);
 				if (!$result || db_affected_rows($result) < 1) {
@@ -231,36 +231,36 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 	        $old_date = time()-60*60*24*30;
 		$sql_pending= "
-			SELECT groups.group_id,id,date,summary,
+			SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=0
 			AND news_bytes.group_id=groups.group_id
-			AND date > '$old_date'
+			AND post_date > '$old_date'
 			AND groups.is_public=1
 			AND groups.status='A'
-			ORDER BY date
+			ORDER BY post_date
 		";
 
 		$old_date = time()-(60*60*24*7);
 		$sql_rejected = "
-			SELECT groups.group_id,id,date,summary,
+			SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=2
 			AND news_bytes.group_id=groups.group_id
-			AND date > '$old_date'
-			ORDER BY date
+			AND post_date > '$old_date'
+			ORDER BY post_date
 		";
 
 		$sql_approved = "
-			SELECT groups.group_id,id,date,summary,
+			SELECT groups.group_id,id,post_date,summary,
 				group_name,unix_group_name
 			FROM news_bytes,groups
 			WHERE is_approved=1
 			AND news_bytes.group_id=groups.group_id
-			AND date > '$old_date'
-			ORDER BY date
+			AND post_date > '$old_date'
+			ORDER BY post_date
 		";
 
 		show_news_approve_form(
