@@ -34,7 +34,7 @@ require ('common/include/cron_utils.php');
 //
 //	PG 7.2 and 7.3
 //
-$res = db_query("VACUUM FULL;");
+$res = db_query("VACUUM FULL ANALYZE;");
 
 
 if (!$res) {
