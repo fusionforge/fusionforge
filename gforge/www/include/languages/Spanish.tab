@@ -6,7 +6,7 @@
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
-#  * @version   $Id$
+#  * @version   : Spanish.tab,v 1.42 2004/07/28 15:27:56 kikov Exp $
 #  * @author Enric Martínez <exter@users.sourceforge.net>
 #  *
 #  */
@@ -21,6 +21,8 @@
 # 2003-05-17  Antonio Vico; Gabriel Rodríguez Alberich, gabriel.rodriguez AT hispalinux.es; Jesús M. Navarro, jesusmanuel.navarro.lopez AT hispalinux.es; René Martín Rodríguez, agarfu AT gulic.org; Vicente Ruiz, vjrj AT ourproject.org
 # 2004-07-20  Francisco Gimeno, kikov AT kikov.org
 # * Translation until 2004-07
+# 2004-08-20  Francisco Gimeno, kikov AT kikov.org
+# * Translation until 2004-08
 account	title	Preferencias de cuenta
 account	updated	Actualizado
 account_change_email	desc	<p>El cambio de su dirección de correo requiere que lo confirme desde su nueva dirección de correo, de esta forma podemos estar seguros de que su nueva dirección está correcta.</p><p>Necesitamos mantener una dirección de correo correcta de cada usuario debido al nivel de acceso que permitimos a una cuenta. En el caso de tener que contactar con un usuario debido a asuntos relacionados con una cuenta de proyecto, es importante que tengamos posibilidad de hacerlo.</p><p>Enviando el formulario siguiente le enviaremos un enlace de confirmación a la nueva dirección de correo. Visitando este enlace se completará el cambio de correo.</p>
@@ -1057,6 +1059,7 @@ menu	project_help_wanted	Peticiones de ayuda
 menu	project_summary	Resumen del proyecto
 menu	projectree	Árbol de proyectos
 menu	register_project	Registrar un nuevo proyecto
+menu	reporting	Informes
 menu	search	Buscar
 menu	site_status	Estado del portal
 menu	software_map	Mapa de proyectos
@@ -1883,6 +1886,7 @@ rbac_vals	trackeranon1	Permitir Escritura Anónima
 rbac_vals	trackerpublic0	Privado
 rbac_vals	trackerpublic1	Público
 register	apply_for_registration	Para registrar un proyecto, debe introducir una información básica sobre él. Por favor, lea las descripciones más abajo e introduzca datos completos y comprensibles. Todos los campos son necesarios.
+register	choose_scm	<h3>6. SCM</h3><p>Debe elegir un único sistema entre los diferentes SCM (Sistemas de control de configuración) para su proyecto. Debe elegir sólo uno. Por favor, elija el sistema SCM que desea usar. </p> <p><strong>No podrá cambiar una vez registre el proyecto</strong></p>
 register	comprehensive_description	Describa su proyecto de modo más comprensible.
 register	conflicting_licenses_choice	Elección de licencias con conflicto
 register	describe_registration	Por favor, describa su Propuesta de Registro de modo más comprensible
@@ -1894,15 +1898,17 @@ register	license_type	Public domain</a><li>Sólo Website <li>Otra /Licencia Prop
 register	maximum_description	La máxima longitud para la Descripción del Proyecto es 255 caracteres
 register	more_license_description	Por favor, describa la licencia de modo más comprensible."
 register	no_license_chosen	No ha elegido tipo de licencia
+register	one_scm	Como sólo existe un único SCM, éste será seleccionado automáticamente. <strong>$1</strong> será seleccionado.
 register	other_license	Si ha elegido "Otra", por favor, introduzca una descripción sobre los términos de su licencia. Emplear otra licencia generalmente no se aprueba. Esto requiere tiempo adicional para tomar una decisión sobre su proyecto ya que es necesario chequear si la licencia es compatible con la definición de Código Abierto.
 register	project_description	<h3>4. Descripción Pública del Proyecto</h3><p>Esta es la descripción de su proyecto que se muestra en la página de Sumario del Proyecto, en resultados de búsquedas, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. La máxima longitud es 255 caracteres.
 register	project_full_name	<h3>1. Mombre completo del Proyecto</h3><p>Comienze especificando el nombre de su proyecto.El "Nombre Completo" es descriptivo y no tiene restricciones (excepto límite de 40 caracteres).</p>Nombre Completo:<br/>
 register	project_information	Información del Proyecto
 register	project_license	<h3>3. Licencia</h3> <p><strong><em>Si piensa aplicar su proyecto únicamente como un website, por favor, elija "Sólo Website" en la lista inferior.</em></strong><p>$1 se ha creado para un desarrollo avanzado de proyectos de Código Abierto. Para simplificar las cosas, he aquí una replica de los tipos de trabajos de la <a href="http://www.opensource.org">Open Source Initiative</a> para elegir su licencia. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p> La eleccion de una licencia es una seria desicion.Por favor tomese algun tiempo para leer el texto ( y su explicacion)de varias licencias antes de tomar una desicion acerca de su proyecto. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
 register	project_submitted	Su proyecto ha sido enviado a los administradores de $1 . Transcurridas 72 horas, recibira una notificación sobre la decisión e instrucciones.</p><p>Gracias por elegir $1
-register	project_unix_name	<h3>5. Nombre Unix del Proyecto</h3><p>Además del nombre completo del proyecto, necesita elegir un breve nombre "Unix" para su proyecto.</p><p> El "Nombre Unix" tiene restricciones severas ya que se utiliza en bastantes lugares del sitio. Estas son:<ul><li>No puede coincidir con el nombre unix de otro proyecto<li>Su longitud debe estar entre 3 y 15 caracteres<li>Las letras deben ser minúscular<li>Únicamente debe contener caracteres, números y guiones<li>Debe ser un nombre válido para sistemas unix<li>No debe coincidir con dominios reservados<li>No podrá cambiarse nunca para ese proyecto</ul><p>Su nombre unix es importante pues se utiliza para varios usos, incluyendo:<ul><li>Un sitio como<tt>nombre unix.$1</tt><li>La raiz de un Repositorio CVS<tt>/cvsroot/nombre unix</tt> at <tt>cvs.nombre unix.$1</tt><li>Acceso a una cuenta shell como <tt>nombre unix.$1</tt><li>Elementos de búsqueda de estge sitio</ul><p>Nombre Unix:<br/>
+register	project_unix_name	<h3>5. Nombre Unix del Proyecto</h3><p>Además del nombre completo del proyecto, necesita elegir un breve nombre "Unix" para su proyecto.</p><p> El "Nombre Unix" tiene restricciones severas ya que se utiliza en bastantes lugares del sitio. Estas son:<ul><li>No puede coincidir con el nombre unix de otro proyecto<li>Su longitud debe estar entre 3 y 15 caracteres<li>Las letras deben ser minúscular<li>Únicamente debe contener caracteres, números y guiones<li>Debe ser un nombre válido para sistemas unix<li>No debe coincidir con dominios reservados<li>No podrá cambiarse nunca para ese proyecto</ul><p>Su nombre unix es importante pues se utiliza para varios usos, incluyendo:<ul><li>Un sitio como<tt>nombre unix.$1</tt><li>La raiz de un Repositorio CVS<tt>/cvsroot/nombre unix</tt> at <tt>cvs.nombre unix.$1</tt><li>Acceso a una cuenta shell como <tt>nombre unix.$1</tt><li>Elementos de búsqueda de este sitio</ul><p>Nombre Unix:<br/>
 register	purpose_and_summarization	<h3>2. Descripción Pública del Proyecto</h3><p><strong></strong><p><strong> Por favor, proporcione una descripción detallada y precisa de su proyecto y que recursos de $1 piensa utilizar. Esta descripción es básica para aprobar o rechazar el alojamiento de su proyecto en $1,y después, para habilitar el uso de los servisios solicitados. Esta descripción no se utiliza como descripción pública de su proyecto. Es recomendable escribirla en inglés.</strong>
 register	registration_complete	Registro Completo
+register	scm_not_selected	El SCM está habilitado, pero no se eligió ningún SCM.
 register	title	Registro de un Nuevo Proyecto
 register	unix_group_name_already_taken	Este nombre Unix está ocupado
 register_complete	section	Registro de un Nuevo Proyecto
