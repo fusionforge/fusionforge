@@ -1,5 +1,8 @@
 2003-10-05  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/languages/French.tab: Fixed truncated about_blurb on
+	the homepage.
+
 	* www/themes/osx/Theme.class: Localised Log In/Log Out/My Account/New
 	Account texts for the OSX theme.
 
