@@ -145,6 +145,13 @@ while ($ln = pop(@group_array)) {
 			system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:anoncvs_${group_name}\" > $cvs_dir/CVSROOT/passwd");
 			# This will give access to all users and cvsweb
 			chmod 02775, "$cvs_dir";
+
+			my $gid = $group_id + $gid_add ;
+			my $uid = $group_id + $anoncvs_uid_add ;
+			my $username = "anoncvs_" . $group_name ;
+
+			add_or_update_anoncvs_user ($uid, $username, $gid) ;
+			
 		} else {
 			# turn off anonymous readers
 			system("echo \"\" > $cvs_dir/CVSROOT/readers");
@@ -153,4 +160,21 @@ while ($ln = pop(@group_array)) {
 			chmod 02770, "$cvs_dir";
 		}
 	}
+}
+
+#############################
+# User Add Function
+#############################
+sub add_or_update_anoncvs_user {  
+	my ($uid, $username, $gid) = @_;
+	
+	$home_dir = $homedir_prefix.$username;
+	
+	if ( -d $home_dir ) {
+	    chmod 0755, $home_dir;
+	} else {
+	    mkdir $home_dir, 0755;
+	}
+	
+	chown $uid, $gid, $home_dir;
 }
