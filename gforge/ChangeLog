@@ -1,3 +1,15 @@
+2005-03-02  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* minor cosmetic fixes
+	* fixed typos in French translation
+	* applied [#1077] Minor patch for french translation by Alain Peyrat
+	* fixed an history bug in project manager
+	* fixed [#1081] Error message received when assigning tasks
+	* fixed [#1078] Missing parameters in call to setup function for SOAP
+	tracker call
+	* fixed [#792] 'My personal page' submitted items includes those submitted
+	to deleted projects
+
 2005-03-02  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
 	* www/include/languages/Bulgarian.tab: Pulled translation from
