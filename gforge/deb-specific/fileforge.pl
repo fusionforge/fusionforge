@@ -109,7 +109,7 @@ sub tmpfilemove {
 	die "Could not execute '/bin/chmod $user:$user $src_file': $!" ;
     }
     if ($retval != 0) {
-	die "Error moving file" ;
+	die "Error reattributing file" ;
     }
     chmod 0644, $src_file ;
 
