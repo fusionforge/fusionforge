@@ -1367,6 +1367,29 @@ END;
 	$dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "3.1-0+3" ;
+    if (is_lesser $version, $target) {
+	# Yes, I know.  20031126 < 20031129, yet we apply that change later.
+	# Blame tperdue for late committing.
+	# They are independent anyway.
+	debug "Upgrading with 20031126.sql" ; 
+
+	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20031126.sql") } ;
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Gforge." ;
 

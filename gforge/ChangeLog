@@ -6,6 +6,8 @@
 
 2003-12-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* deb-specific/db-upgrade.pl: Upgrade database using 20031126.sql.
+
 	* www/include/languages/German.tab: Patch #623 from Marco Schmidt
 	<schmidtmarco@web.de> improving German localisation.
 
@@ -47,7 +49,7 @@
 	Tominaga.
 	* db/20031129.sql: New file (patch #560 from Hidenari Miwa and
 	Tsutomu Tominaga).
-	* deb-specific/db-upgrade.pl: Upgrade databse using 20031129.sql.
+	* deb-specific/db-upgrade.pl: Upgrade database using 20031129.sql.
 	
 	* deb-specific/db-upgrade.pl: Upgrade database schema using
 	20031105.sql and 20031124.sql.

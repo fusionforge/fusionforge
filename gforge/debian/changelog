@@ -25,8 +25,9 @@ gforge (3.1-4+) unstable; urgency=low
   * [Roland] Upgrade database schema using 20031105.sql and 20031124.sql.
   * [Roland] Also use 20031129.sql, for the "last changed XX days ago"
     patch from Hidenari Miwa and Tsutomu Tominaga.
+  * [Roland] Also use 20031126.sql, for the "cron manager" feature.
 
- -- Roland Mas <lolando@debian.org>  Sat, 29 Nov 2003 21:54:49 +0100
+ -- Roland Mas <lolando@debian.org>  Wed,  3 Dec 2003 22:31:59 +0100
 
 gforge (3.1-4) unstable; urgency=low
 
