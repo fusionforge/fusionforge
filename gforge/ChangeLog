@@ -1,3 +1,10 @@
+2004-10-27  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* improved layout consistency in /my/ page
+	* fixed some missing references in /my/ page
+	* improved error handling in BaseLanguage.class and in
+	PluginManager.class
+
 2004-10-26  Tim Perdue <tim@gforge.org>
 
 	* Fixed cronjobs/cvs-cron/cvs.php so it generates a working 
@@ -222,7 +229,7 @@
 	* applied [#845] by Florent Guilleux
 	* applied [#866] Comment in generated .ssh/authorized_keys by Matt Hope
 	and adapted it for mainstream
-	* applied [#883"] sys_show_contact_info by Rob Lanphier
+	* applied [#883] sys_show_contact_info by Rob Lanphier
 	* internationalized editsshkeys.php
 	* applied [#742] Bug fix for #559 Pop-up window by Hidenari Miwa
 	* improved Error.class thanks to an idea of Hidenari Miwa (see [#742])
@@ -380,7 +387,7 @@
 2004-07-26  Christian Bayle <bayle@aist.enst.fr>
 
 	* Added css plugin hook to Layout.class
-	* fixed old bug#717 in cronjobs/rotate_activity.php thanks to Beno�
+	* fixed old bug #717 in cronjobs/rotate_activity.php thanks to Benoît
 	Sibaud
 	* Added missing mail16w.png write16w.png xmail16w.png in osx theme
 	closing bug #814
