@@ -31,6 +31,7 @@ fi
 remove_gforge_insert(){
 			cp -a $1 $1.gforge-new
 			echo "Removing Gforge inserted lines from $1.gforge-new"
+			set +e
 			vi -e $1.gforge-new > /dev/null 2>&1 <<-FIN
 /### Next line inserted by GForge install
 :d
@@ -38,6 +39,7 @@ remove_gforge_insert(){
 :w
 :x
 FIN
+set -e
 }
 
 search_conf_file(){
