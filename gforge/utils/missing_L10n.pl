@@ -77,7 +77,7 @@ sub compare_to_base(%)
                                $$lang_ref{$base_category});
             foreach my $diff (@diff)
             {
-                if (!grep { /$diff/ } @{$$lang_ref{$base_category}})
+                if (!grep { $_ eq $diff } @{$$lang_ref{$base_category}})
                 {
                     push @missing_from_lang, $diff;
                 }
