@@ -22,13 +22,6 @@ exit_assert_object($u, 'User');
 
 if ($submit) {
 
-	if (trim($realname)=="") {
-		exit_error(
-		    'Missing Paramater',
-		    'Please fill in real name.'
-		);
-	}
-
 /*
 //needs security audit
 	if ($remember_user) {
@@ -44,8 +37,8 @@ if ($submit) {
 		$refresh = 1;
 	}
 
-	if (!$u->update($realname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-		$jabber_address,$jabber_only,$address,$phone,$fax,$title)) {
+	if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
+		$jabber_address,$jabber_only,$address,$address2,$phone,$fax,$title,$ccode)) {
 		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
 		$feedback .= $Language->getText('account','updated').'<br />';
@@ -102,8 +95,14 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 </tr>
 
 <tr valign="top">
-<td><?php echo $Language->getText('account_options', 'real_name'); ?></td>
-<td><input type="text" name="realname" value="<?php print $u->getRealName(); ?>" />
+<td><?php echo $Language->getText('account_options', 'firstname'); ?></td>
+<td><input type="text" name="firstname" value="<?php print $u->getFirstName(); ?>" />
+</td>
+</tr>
+
+<tr valign="top">
+<td><?php echo $Language->getText('account_options', 'lastname'); ?></td>
+<td><input type="text" name="lastname" value="<?php print $u->getLastName(); ?>" />
 </td>
 </tr>
 
@@ -120,6 +119,12 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 </tr>
 
 <tr valign="top">
+<td><?php echo $Language->getText('account_options', 'ccode'); ?> </td>
+<td><?php echo html_get_ccode_popup('ccode', $u->getCountryCode()); ?>
+</td>
+</tr>
+
+<tr valign="top">
 <td><?php echo $Language->getText('account_options', 'email_address'); ?> </td>
 <td><strong><?php print $u->getEmail(); ?></strong>
 <br /><a href="change_email.php">[<?php echo $Language->getText('account_options', 'change_email_address'); ?>]</a>
@@ -129,6 +134,11 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 <tr valign="top">
 	<td><?php echo $Language->getText('account_options', 'address'); ?></td>
 	<td><input type="text" name="address" value="<?php echo $u->getAddress(); ?>" size="80"></td>
+</tr>
+
+<tr valign="top">
+	<td><?php echo $Language->getText('account_options', 'address'); ?></td>
+	<td><input type="text" name="address2" value="<?php echo $u->getAddress2(); ?>" size="80"></td>
 </tr>
 
 <tr valign="top">

@@ -23,9 +23,9 @@ if ($submit) {
 
 	*/
 	$new_user = new User();
-	$register = $new_user->create($unix_name,$realname,$password1,$password2,
+	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
 		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,'',
-		$address,$phone,$fax,$title);
+		$address,$address2,$phone,$fax,$title,$ccode);
 	if ($register) {
 		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
 
@@ -63,14 +63,20 @@ if ($timezone == ''){
 <?php echo $Language->getText('account_register','password2'); echo utils_requiredField(); ?><br />
 <input type="password" name="password2">
 <p>
-<?php echo $Language->getText('account_register','realname'); echo utils_requiredField(); ?><br />
-<input size=30 type="text" name="realname" value="<?php print($realname); ?>">
+<?php echo $Language->getText('account_register','firstname'); echo utils_requiredField(); ?><br />
+<input size=30 type="text" name="firstname" value="<?php print($firstname); ?>">
+<p>
+<?php echo $Language->getText('account_register','lastname'); echo utils_requiredField(); ?><br />
+<input size=30 type="text" name="lastname" value="<?php print($lastname); ?>">
 <p>
 <?php echo $Language->getText('account_register','language'); ?><br />
 <?php echo html_get_language_popup ($Language,'language_id',1); ?>
 <p>
 <?php echo $Language->getText('account_register','timezone'); ?><br />
 <?php echo html_get_timezone_popup('timezone', $timezone); ?>
+<p>
+<?php echo $Language->getText('account_register','ccode'); ?><br />
+<?php echo html_get_ccode_popup('ccode', $ccode); ?>
 <p>
 @<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
 <br /><input size=30 type="text" name="email" value="<?php print($email); ?>">
@@ -86,6 +92,9 @@ if ($sys_use_jabber) {
 <p>
 <?php echo $Language->getText('account_options', 'address'); ?><br />
 <input type="text" name="address" value="<?php echo $address; ?>" size="80">
+<p>
+<?php echo $Language->getText('account_options', 'address'); ?><br />
+<input type="text" name="address2" value="<?php echo $address2; ?>" size="80">
 <p>
 <?php echo $Language->getText('account_options', 'phone'); ?><br />
 <input type="text" name="phone" value="<?php echo $phone; ?>" size="20">
