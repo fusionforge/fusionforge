@@ -10,10 +10,9 @@ plugin_scmsvn	title	SCM
 plugin_scmsvn	admin	Administration
 plugin_scmsvn	download_snapshot	Download The Nightly SVN Tree Snapshot
 plugin_scmsvn	documentation	<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.</p>
-plugin_scmsvn	devsvnssh	<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH1 must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>
-plugin_scmsvn	devsvndav	<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method.</p>
+plugin_scmsvn	devsvnssh	<p><b>Developer Subversion Access via SSH</b></p><p>Only project developers can access the SVN tree via this method. SSH must be installed on your client machine. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>
+plugin_scmsvn	devsvndav	<p><b>Developer Subversion Access via DAV</b></p><p>Only project developers can access the SVN tree via this method. Substitute <i>developername</i> with the proper values. Enter your site password when prompted.</p>
 plugin_scmsvn	enable_svn	Use Subversion
 plugin_scmsvn	enable_anonymous_svn	Enable Anonymous Access
-plugin_scmsvn	server_invite	Server:
 plugin_scmsvn	browseit	Browse Subversion Repository
 plugin_scmsvn	browsetree	<b>Browse the Subversion Tree</b><p>Browsing the SVN tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>

@@ -3,7 +3,7 @@ plugin_scmcvs	anoncvsup	Updates from within the module's directory do not need t
 plugin_scmcvs	browseit	Browse CVS Repository
 plugin_scmcvs	browsetree	<b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>
 plugin_scmcvs	cvs_repository	CVS Repository
-plugin_scmcvs	devcvs	<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>
+plugin_scmcvs	devcvs	<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>
 plugin_scmcvs	developername	developername
 plugin_scmcvs	error_only_projects_can_use_cvs	Error, Only Projects Can Use CVS
 plugin_scmcvs	error_this_project_has_turned_off	Error This Project Has Turned Off CVS
@@ -23,3 +23,4 @@ plugin_scmcvs	adds	Adds
 plugin_scmcvs	commits	Commits
 plugin_scmcvs	realname	Name
 plugin_scmcvs	total	Total
+plugin_scmcvs	developername	developername

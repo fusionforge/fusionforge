@@ -4,7 +4,7 @@ plugin_scmcvs	anoncvsup	Actualizaciones dentro del directorio del módulo no nec
 plugin_scmcvs	browseit	Navegue por el Repositorio CVS
 plugin_scmcvs	browsetree	<B>Navega por el árbol CVS</B><P>Navegando por el árbol de CVS te proporcionará una gran visión de la situación actual del código de este proyecto. Deberías ver también el histórico completo de cada fichero en el repositorio.</P>
 plugin_scmcvs	cvs_repository	Repositorio CVS
-plugin_scmcvs	devcvs	<P><B>Acceso a CVS por colaboradores vía SSH</B></P><P>Sólo los colaboradores de un proyecto pueden acceder al árbol CVS por este método. Debe de tener instalado SSH1 en su máquina cliente. Substituye <I>modulename</I> y <I>developername</I> con los valores adecuados. Introduce su password de este sitio cuando se le solicite.</P>
+plugin_scmcvs	devcvs	<P><B>Acceso a CVS por colaboradores vía SSH</B></P><P>Sólo los colaboradores de un proyecto pueden acceder al árbol CVS por este método. Debe de tener instalado SSH en su máquina cliente. Substituye <I>modulename</I> y <I>developername</I> con los valores adecuados. Introduce su password de este sitio cuando se le solicite.</P>
 plugin_scmcvs	developer_commits_adds	Desarrollador (30 días/Commits) (30 días/Adds)
 plugin_scmcvs	developername	colaborador
 plugin_scmcvs	error_only_projects_can_use_cvs	Error, solo los proyectos pueden usar el CVS

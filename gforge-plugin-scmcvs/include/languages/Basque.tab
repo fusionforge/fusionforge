@@ -3,7 +3,7 @@ plugin_scmcvs	anoncvsup	Moduluaren direktorioko eguneratzeak ez dute -d parametr
 plugin_scmcvs	browseit	CVS errepositoriotik nabigatu
 plugin_scmcvs	browsetree	<B>CVS zuhaitzetik nabigatu</B> <P>CVS zuhatzetik nabigatuz proiektu honen kodearen egoera ikusi ahal dezakezu. Fitxero bakoitzaren historia osoa ikusi beharko zenuke repositorioan.</P>
 plugin_scmcvs	cvs_repository	CVS errepositorioa
-plugin_scmcvs	devcvs	<P><B>CVS-ra atzipena lankideei SSH bidez</B></P><P>Sistema hau erabiliaz bakarrik atzi dezakete proiektu baten lankideek CVS zuhaitzera. Zure bezero makinan SSH1 instalatua izan behar duzu. Ordezkatzen da <I>modulename</I> y <I>developername</I> balio egokiekin. Gune honen pasahitza sartu eskatzen zaizunean.</P>
+plugin_scmcvs	devcvs	<P><B>CVS-ra atzipena lankideei SSH bidez</B></P><P>Sistema hau erabiliaz bakarrik atzi dezakete proiektu baten lankideek CVS zuhaitzera. Zure bezero makinan SSH instalatua izan behar duzu. Ordezkatzen da <I>modulename</I> y <I>developername</I> balio egokiekin. Gune honen pasahitza sartu eskatzen zaizunean.</P>
 plugin_scmcvs	developer_commits_adds	Garatzailea (30 egun/Commits) (30 egun/Adds)
 plugin_scmcvs	developername	Lankidea
 plugin_scmcvs	error_only_projects_can_use_cvs	Akatsa, proiektuek bakarrik erabili dezakete CVS-a

@@ -3,7 +3,7 @@ plugin_scmsvn	anonsvn	<p><b>Accès Subversion anonyme</b></p><p>Le dépôt Subve
 plugin_scmsvn	browseit	Parcourir le dépôt Subversion
 plugin_scmsvn	browsetree	<b>Parcourir le dépôt Subversion</b><p>Parcourir l'arbre Subversion vous donne une vue d'ensemble du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt.</p>
 plugin_scmsvn	developername	développeur
-plugin_scmsvn	devsvndav	<p><b>Accès Subversion pour développeur via DAV</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre Subversion par cette méthode.</p>
+plugin_scmsvn	devsvndav	<p><b>Accès Subversion pour développeur via DAV</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre Subversion par cette méthode. Remplacez <i>developername</i> par la valeur appropriée. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
 plugin_scmsvn	devsvnssh	<p><b>Accès Subversion pour développeur via SSH</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre Subversion par cette méthode. SSH doit être installé sur votre machine cliente. Remplacez <i>developername</i> par la valeur appropriée. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
 plugin_scmsvn	documentation	<p>Pour toute information complémentaire, vous pouvez vous référer à la <a href="http://svnbook.red-bean.com/">documentation de Subversion</a>.</p>
 plugin_scmsvn	download_snapshot	Télécharger le snapshot nocturne de l'arbre Subversion
@@ -15,5 +15,4 @@ plugin_scmsvn	history	Historique du dépôt
 plugin_scmsvn	nohistory	Ce projet n'a pas de dépôt Subversion.
 plugin_scmsvn	section	Projet : $1
 plugin_scmsvn	title	Sources
-plugin_scmsvn	server_invite	Serveur :
 plugin_scmsvn	svn_repository	Dépôt Subversion
