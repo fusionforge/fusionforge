@@ -926,7 +926,7 @@ class Group extends Error {
 	 *	@return boolean enable_scm.
 	 */
 	function enableAnonSCM() {
-		if ($this->usesSCM()) {
+		if ($this->isPublic() && $this->usesSCM()) {
 			return $this->data_array['enable_anonscm'];
 		} else {
 			return false;
