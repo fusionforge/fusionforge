@@ -30,6 +30,7 @@ while (($l = <>) !~ /^\s*local_domains/) {
   print $l;
   $seen_sf_domains = 1 if ($l =~ /\s*SOURCEFORGE_DOMAINS=/) ;
 };
+# hide pgsql_servers = "localhost/sourceforge/some_user/some_password"
 print "SOURCEFORGE_DOMAINS=users.$domain_name:$sys_lists_host\n" unless $seen_sf_domains ;
 chomp $l ;
 $l .= ":SOURCEFORGE_DOMAINS" unless ($l =~ /^[^#]*SOURCEFORGE_DOMAINS/) ;
@@ -53,7 +54,44 @@ forward_for_sourceforge:
   search_type = ldap
   user = nobody
   group = nogroup
-# END SOURCEFORGE BLOCK #
+
+#forward_for_lists:
+#  domains = $sys_lists_host
+#  driver = aliasfile
+#  file_transport = address_file
+#  pipe_transport = address_pipe
+#  query = "select \'|/usr/lib/mailman/mail/wrapper post \'||list_name
+#       from mail_group_list where list_name = \'$local_part\'"
+#  search_type = pgsql
+#  user=root
+#  group=root
+#
+#forward_for_lists_admin:
+#  domains = $sys_lists_host
+#  driver = aliasfile
+#  file_transport = address_file
+#  pipe_transport = address_pipe
+#  query = "select \'|/usr/lib/mailman/mail/wrapper mailowner \'||list_name
+#    from mail_group_list where list_name =
+#    substring(\'$local_part\' for (octet_length(\'$local_part\')-6)) and
+#    substring(\'$local_part\' from (octet_length(\'$local_part\')-5)) = \'-admin\'"
+#  search_type = pgsql
+#  user=root
+#  group=root
+#
+#forward_for_lists_request:
+#  domains = $sys_lists_host
+#  driver = aliasfile
+#  file_transport = address_file
+#  pipe_transport = address_pipe
+#  query = "select \'|/usr/lib/mailman/mail/wrapper mailcmd \'||list_name
+#    from mail_group_list where list_name =
+#    substring(\'$local_part\' for (octet_length(\'$local_part\')-8)) and
+#    substring(\'$local_part\' from (octet_length(\'$local_part\')-7)) = \'-request\'"
+#  search_type = pgsql
+#  user=root
+#  group=root
+## END SOURCEFORGE BLOCK #
 " ;
 
 while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };
