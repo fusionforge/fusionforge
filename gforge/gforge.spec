@@ -20,7 +20,7 @@ Patch1001: gforge-3.0-php_path.patch
 Patch1002: gforge-3.0-init_sql.patch
 Patch1003: gforge-3.0-cronjobs.patch
 AutoReqProv: off
-Requires: /bin/sh /bin/bash /usr/bin/perl /usr/bin/php
+Requires: /bin/sh /bin/bash /usr/bin/perl php-pgql postgresql-server
 URL: http://www.gforge.org/
 BuildRoot: /var/tmp/%{name}-%{version}-root
 
@@ -197,3 +197,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/%{name}/www
 /etc/cron.daily/gforge-nightly-cronjobs.sh
 /etc/cron.hourly/gforge-hourly-cronjobs.sh
+
+%changelog
+* Tue Sep 09 2003 Franco Catrin L. <fcatrin@tuxpan.com>
+- Fixed PHP and PostgreSQL dependencies

@@ -1,3 +1,8 @@
+2003-09-12 Tom Copeland  <tom@infoether.com>
+
+	* gforge.spec:
+	Applied patch [ #516 ] RPM dependency fixes
+
 2003-09-09  Roland Mas  <mas@echo.fr>
 
 	* www/include/languages/French.tab: A few encoding fixes and
