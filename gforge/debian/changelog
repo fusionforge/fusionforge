@@ -1,11 +1,18 @@
-gforge (3rc2-1) unstable; urgency=low
+gforge (3rc2-1+) unstable; urgency=low
 
-  * [Christian] rc2 will go to unstable
   * [Roland] Added db/20030513.sql, to add an "enabled" column to the
     themes table.  Fixed register-theme accordingly, and wrote a new
     unregister-theme too (which just disables the theme).
+  * [Christian] Updated French.tab contributed by Linac (Angouleme Lug) for
+    Adullact <michel.bondaz@linac.org>
 
- -- Roland Mas <lolando@debian.org>  Tue, 13 May 2003 23:40:11 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 14 May 2003 00:36:41 +0200
+
+gforge (3rc2-1) unstable; urgency=low
+
+  * [Christian] rc2 will go to unstable
+
+ -- Christian Bayle <bayle@debian.org>  Wed, 14 May 2003 00:15:36 +0200
 
 gforge (3rc1-3) experimental; urgency=low
 
