@@ -492,6 +492,7 @@ if ($params['group']) {
 			$inner='';
 		}
 		for ($i=0; $i<$count; $i++) {
+			$TABS_TITLES[$i] = preg_replace("/ +/", "&nbsp;", $TABS_TITLES[$i]);
 			$bgimg=(($selected==$i)?$select_tab:$deselect_tab);
 			$cornerimg=(($selected==$i)?'select':'deselect');
 			$return .= '
