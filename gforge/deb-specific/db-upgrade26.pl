@@ -17,7 +17,8 @@ use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
     $sys_urlroot $sf_cache_dir $sys_name $sys_themeroot
     $sys_news_group $sys_dbhost $sys_dbname $sys_dbuser $sys_dbpasswd
     $sys_ldap_base_dn $sys_ldap_host $admin_login $admin_password
-    $server_admin $domain_name $newsadmin_groupid $skill_list/ ;
+    $server_admin $domain_name $newsadmin_groupid $statsadmin_groupid
+    $skill_list/ ;
 
 sub is_lesser ( $$ ) ;
 sub is_greater ( $$ ) ;
@@ -144,7 +145,9 @@ eval {
 
  	@reqlist = (
             "UPDATE groups SET homepage = '$domain_name/admin/' where group_id = '1'",
-            "UPDATE groups SET homepage = '$domain_name/news/' where group_id = '3'",
+            "UPDATE groups SET homepage = '$domain_name/news/' where group_id = '2'",
+            "UPDATE groups SET homepage = '$domain_name/stats/' where group_id = '3'",
+            "UPDATE groups SET homepage = '$domain_name/peerrating/' where group_id = '4'",
             "UPDATE users SET email = '$noreplymail' where user_id = '100'",
  	    "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
  	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
