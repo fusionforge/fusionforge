@@ -5,7 +5,7 @@
 <body>
 
 <h2><center>GForge 3.0 FAQ</center></h2>
-<h3><center>Updated 5/21/2003</center></h3>
+<h3><center>Updated 6/13/2003</center></h3>
 <h3><center>Suggestions are <a href="http://gforge.org/forum/forum.php?forum_id=6">welcome</a>.</center></h3>
 
 <br/><a href="#users">Users FAQ</a>
@@ -209,7 +209,7 @@ VACUUM
 </li>
 
 <li>
-<b>When I update a task with a comment I get the following error:
+<b>When I update a task with a comment I get the following error:</b>
 <pre>
 <p>update():: AddMessage():: ERROR: pg_aclcheck: class "project_messa_project_messa_seq" not found.
 </pre>
@@ -221,6 +221,44 @@ select setval('project_messa_project_messa_seq',max(project_message_id)) from pr
 </pre>
 </li>
 
+<li>
+<b>How can I get xinetd to work with pserver when --allow-root will only work with one or two entries?</b>
+<p>Change your <code>/etc/xinetd.d/cvspserver</code> to look like this:
+<pre>
+service cvspserver
+{
+disable = no
+socket_type = stream
+protocol = tcp
+wait = no
+user = root
+server = /usr/bin/mypserver.sh
+server_args = -f
+}
+</pre>
+<p>And then add this little gem in as <code>/usr/bin/mypserver.sh</code>:
+<pre>
+#!/bin/sh
+/usr/bin/cvs -f `ls -d /cvsroot/* | sed -e '1,$s/.*/--allow-root=&/'` pserver
+[root@cougaarforge tom]#
+</pre>
+</li>
+
+<li>
+<b>I set up GForge on Apache behind a Apache ProxyPass and now I'm getting infinite redirects!</b>
+<p>Try setting the ProxyPreserveHost directive to On:
+<pre>
+&lt;VirtualHost *&gt;
+ServerAdmin webmaster@myhost.com
+ServerName forge.myhost.com
+ErrorLog logs/forge.myhost.com.log
+CustomLog logs/forge.myhost.com-access.log common
+ProxyPass / http://192.168.1.13/
+ProxyPassReverse / http://192.168.1.13/
+ProxyPreserveHost On
+&lt;/VirtualHost&gt;
+</pre>
+</li>
 
 </ol>
 
