@@ -2125,12 +2125,12 @@ class soap_server extends nusoap_base {
 					$this->debug('got no response from method');
 				}
 				$this->debug('serializing response');
-				$payload = '<'.$this->methodname."Response>".$return_val.'</'.$this->methodname."Response>";
+				$payload = '<tns:'.$this->methodname."Response>".$return_val.'</tns:'.$this->methodname."Response>";
 				$this->result = 'successful';
 				if($this->wsdl){
-					//if($this->debug_flag){
-	                	$this->debug("WSDL debug data:\n".$this->wsdl->debug_str);
-	                //	}
+					if($this->debug_flag){
+	       		$this->debug("WSDL debug data:\n".$this->wsdl->debug_str);
+	       	}
 					// Added: In case we use a WSDL, return a serialized env. WITH the usedNamespaces.
 					return $this->serializeEnvelope($payload,$this->responseHeaders,$this->wsdl->usedNamespaces,$this->opData['style']);
 				} else {
