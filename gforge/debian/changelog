@@ -5,8 +5,9 @@ gforge (3.0-0+7+) experimental; urgency=low
   * [Christian] Added subMenu in Layout 
   * [Roland] Merged in everything that was done on the trunk since
     Branch_gforge was started.  That includes the plugin subsystem.
+  * [Roland] Merged Branch_gforge back into the trunk.
 
- -- Roland Mas <lolando@debian.org>  Mon, 23 Dec 2002 12:58:56 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 23 Dec 2002 14:21:09 +0100
 
 gforge (3.0-0+7) experimental; urgency=low
 
