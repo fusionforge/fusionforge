@@ -28,6 +28,10 @@ set -e
 #NODSFHELPER:replace-files#
 case "$1" in
     configure)
+	# I don't know why I have to do this but somthing locks
+	# If I don't add this db_stop ????
+	# This might be something to do with gforge-config
+	db_stop
 	/usr/sbin/gforge-config
 
 	# Patch Bind configuration files

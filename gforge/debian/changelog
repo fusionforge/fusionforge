@@ -1,6 +1,8 @@
-gforge (4.0.2-1) unstable; urgency=low
+gforge (4.0.2-5) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
+  * [Christian] Had to add a db_stop before gforge-config in 
+  * ftp and dns postinst scripts, quite strange
 
  -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
 
