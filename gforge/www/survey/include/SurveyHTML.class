@@ -471,6 +471,7 @@ class SurveyHTML extends Error {
 
 		/* Keep question numbers */
 		$index = 1;
+		$last_question_type = "";
 		for($i = 0; $i < count($questions); $i++)  {
 			if ($questions[$i]->isError()) {
 				echo $questions[$i]->getErrorMessage();

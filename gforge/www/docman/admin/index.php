@@ -326,6 +326,7 @@ if ($editdoc && $docid) {
 	//	  doc_droplist_count($group_id, $language_id);
 
 		print "\n<ul>";
+		$last_state = "";
 		for ($i=0; $i<count($d_arr); $i++) {
 
 			//
