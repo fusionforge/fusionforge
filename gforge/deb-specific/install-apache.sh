@@ -41,7 +41,7 @@ case "$1" in
 	    fi
 	fi
 
-	# Make sure pgsql,ldap,gd and mcrypt are enabled in the PHP config files
+	# Make sure pgsql, ldap and gd are enabled in the PHP config files
 	cp -a /etc/php4/apache/php.ini /etc/php4/apache/php.ini.gforge-new
 	cp -a /etc/php4/cgi/php.ini /etc/php4/cgi/php.ini.gforge-new
 	if [ -f /etc/php4/apache/php.ini.gforge-new ]; then
@@ -57,10 +57,6 @@ case "$1" in
 		echo "Enabling ldap in /etc/php4/apache/php.ini"
 		echo "extension=ldap.so" >> /etc/php4/apache/php.ini.gforge-new
 	    fi
-	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*mcrypt.so" /etc/php4/apache/php.ini.gforge-new; then
-		echo "Enabling mcrypt in /etc/php4/apache/php.ini"
-		echo "extension=mcrypt.so" >> /etc/php4/apache/php.ini.gforge-new
-	    fi
 	fi
 	if [ -f /etc/php4/cgi/php.ini.gforge-new ]; then
 	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/cgi/php.ini.gforge-new; then
@@ -71,7 +67,12 @@ case "$1" in
 
 	;;
     configure)
-	invoke-rc.d apache restart
+	if [ -x /usr/sbin/apache ]; then
+		invoke-rc.d apache restart
+	fi
+	if [ -x /usr/sbin/apache-ssl ]; then
+		invoke-rc.d apache-ssl restart
+	fi
 	;;
 
     purge-files)
@@ -85,7 +86,12 @@ case "$1" in
   	fi
 	;;
     purge)
-	invoke-rc.d apache restart
+	if [ -x /usr/sbin/apache ]; then
+		invoke-rc.d apache restart
+	fi
+	if [ -x /usr/sbin/apache-ssl ]; then
+		invoke-rc.d apache-ssl restart
+	fi
 	;;
 
     *)

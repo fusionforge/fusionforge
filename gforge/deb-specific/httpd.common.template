@@ -8,6 +8,6 @@
   Listen 443
 </IfModule>
 
-NameVirtualHost {ip_address}
+NameVirtualHost {ip_address}:80
 NameVirtualHost {ip_address}:443
 
