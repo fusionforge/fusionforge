@@ -240,7 +240,7 @@ $HTML->box1_top('Tool Admin');
 	</CENTER>
 
 	<HR>
-	<B>Packages:</B> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<A href="/docman/display_doc.php?docid=780&group_id=1"><i>What is this?</i></A> (Very Important!)
+	<B>Packages:</B> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 	<P>
 

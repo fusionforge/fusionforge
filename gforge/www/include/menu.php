@@ -150,7 +150,7 @@ function menu_sourceforge() {
 		$HTML->menu_entry('/forum/?group_id=1',$Language->getText('menu','discussion_forums'));
 		$HTML->menu_entry('/people/',$Language->getText('menu','project_help_wanted'));
 		$HTML->menu_entry('/top/',$Language->getText('menu','top_projects'));
-		$HTML->menu_entry('/docman/display_doc.php?docid=2352&group_id=1',$Language->getText('menu','site_status'));
+		//CB//$HTML->menu_entry('/docman/display_doc.php?docid=2352&group_id=1',$Language->getText('menu','site_status'));
 		print '<P>';
 		// $HTML->menu_entry('/compilefarm/',$Language->getText('menu','compile_farm'));
 		// print '<P>';

@@ -68,7 +68,7 @@ group	short_support	支持
 group	short_survey	调查
 group	short_tracker	跟踪
 home	highest_ranked_users	用户评价排行榜
-home	about_blurb	 SourceForge为<b><a href="http://www.opensource.org">开放源代码软件</a>开发者提供全方面的免费服务</b>，包括CVS仓库, 邮件列表, BUG跟踪, 在线论坛, 任务管理, 网站空间, 项目存储及完整的备份, 并且完全是通过WEB方式来管理的。 <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 更多 ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ 常见问题 ]</font></A> <BR> &nbsp; <P> <B>请立即加入，并提出您的宝贵意见</B> <P> 为了充分利用SourceForge所提供的服务, <A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户, 仍能浏览本站, 但无权参与本站的活动。 <P> &nbsp; <BR> <B>开始您自己的项目</B> <P> <A href="/account/register.php">先注册成为本站用户</A>, 然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A> <P> 谢谢参与，请充分享受本站提供的服务吧！
+home	about_blurb	 SourceForge为<b><a href="http://www.opensource.org">开放源代码软件</a>开发者提供全方面的免费服务</b>，包括CVS仓库, 邮件列表, BUG跟踪, 在线论坛, 任务管理, 网站空间, 项目存储及完整的备份, 并且完全是通过WEB方式来管理的。 <BR> &nbsp; <P> <B>请立即加入，并提出您的宝贵意见</B> <P> 为了充分利用SourceForge所提供的服务, <A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户, 仍能浏览本站, 但无权参与本站的活动。 <P> &nbsp; <BR> <B>开始您自己的项目</B> <P> <A href="/account/register.php">先注册成为本站用户</A>, 然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A> <P> 谢谢参与，请充分享受本站提供的服务吧！
 frs	latest_file_releases	最新发布项目
 menu	login	通过SSL登录
 menu	logout	退出登录

@@ -137,7 +137,7 @@ group	short_summary	요약
 group	short_support	지원
 group	short_survey	설문조사
 group	short_tracker	Tracker
-home	about_blurb	SourceForge는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 포럼, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 자세히 ]</font></A><A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A><BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>SourceForge를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
+home	about_blurb	SourceForge는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 포럼, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>SourceForge를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
 home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	highest_ranked_users	활발한 사용자
 home	most_active_this_week	금주 가장 활발한 곳

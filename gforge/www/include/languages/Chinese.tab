@@ -57,7 +57,7 @@ group	short_summary	摘要
 group	short_support	支援
 group	short_survey	調查
 home	highest_ranked_users	最高評價用戶排行榜
-home	about_blurb	  SourceForge為一<B>提供免費服務給 <A href="http://www.opensource.org">開放源碼</A>發展者的網站</B> 包括了CVS, 郵件討論群, 臭虫追蹤系統, 訊息論壇, 工作管理, 網站空間, 檔案儲存, 完整的檔案備份, 且完全以web-based來管理. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ more ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>請立即加入並不吝指教</B> <P> 為充分利用SourceForge所提供的服務, <A href="/account/register.php">請立即註冊成為 本站用戶</A>. 您將能充分參與本站所提供的各項活動, 您若尚未註冊成為用戶, 仍能瀏覽本站, 但無權充份參與本站活動.  <P> &nbsp; <BR> <B>設置您自己的專案</B> <P> <A href="/account/register.php">註冊成為本站用戶</A>, 接著 <A HREF="/account/login.php">登入</A> 最後, <A HREF="/register/">註冊您的專案.</A> <P> 謝謝您... 並祝使用本站愉快.
+home	about_blurb	  SourceForge為一<B>提供免費服務給 <A href="http://www.opensource.org">開放源碼</A>發展者的網站</B> 包括了CVS, 郵件討論群, 臭虫追蹤系統, 訊息論壇, 工作管理, 網站空間, 檔案儲存, 完整的檔案備份, 且完全以web-based來管理. <BR> &nbsp; <P> <B>請立即加入並不吝指教</B> <P> 為充分利用SourceForge所提供的服務, <A href="/account/register.php">請立即註冊成為 本站用戶</A>. 您將能充分參與本站所提供的各項活動, 您若尚未註冊成為用戶, 仍能瀏覽本站, 但無權充份參與本站活動.  <P> &nbsp; <BR> <B>設置您自己的專案</B> <P> <A href="/account/register.php">註冊成為本站用戶</A>, 接著 <A HREF="/account/login.php">登入</A> 最後, <A HREF="/register/">註冊您的專案.</A> <P> 謝謝您... 並祝使用本站愉快.
 frs	latest_file_releases	最新檔案發表
 menu	login	經由SSL登入
 menu	logout	登出

@@ -62,7 +62,7 @@ group	short_summary	サマリ
 group	short_support	サポート
 group	short_survey	調査
 home	highest_ranked_users	ユーザ別ランキング
-home	about_blurb	 SourceForgeとは<a href="http://www.opensource.org/">オープンソース</A>開 発者にCVS、メーリングリスト、バグ追跡、掲示板・フォーラム、タスク管理、 ホストホスティング、永久的なファイルの保管、完全なバックアップさらにWebベース の総合的な管理への容易で最高な利用を提供する無料のサービスです。 <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 詳細 ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>サイトへの意見と参加</B> <P> SourceForgeを最大限活用するには<a href="http://sourceforge.net/account/register.php">ユーザ登録</a>する必 要があります。そうすることによりわれわれが提供するすべてのサービスに参加 することができます。もちろん登録しなくともサイトを閲覧することはできます が、利用に制限があります。 <P> &nbsp; <BR> <B>自分のプロジェクトを作る</B> <P> まず<a href="http://sourceforge.net/account/register.php">ユーザ登録 </a>し、<a href="http://sourceforge.net/account/login.php">ログイン </a>します。そして<a href="http://sourceforge.net/register/">プロジェク トを登録</a>します。 <P> ありがとうございます。そしてこのサイトでぜひ楽しんでください。
+home	about_blurb	 SourceForgeとは<a href="http://www.opensource.org/">オープンソース</A>開 発者にCVS、メーリングリスト、バグ追跡、掲示板・フォーラム、タスク管理、 ホストホスティング、永久的なファイルの保管、完全なバックアップさらにWebベース の総合的な管理への容易で最高な利用を提供する無料のサービスです。 <BR> &nbsp; <P> <B>サイトへの意見と参加</B> <P> SourceForgeを最大限活用するには<a href="http://sourceforge.net/account/register.php">ユーザ登録</a>する必 要があります。そうすることによりわれわれが提供するすべてのサービスに参加 することができます。もちろん登録しなくともサイトを閲覧することはできます が、利用に制限があります。 <P> &nbsp; <BR> <B>自分のプロジェクトを作る</B> <P> まず<a href="http://sourceforge.net/account/register.php">ユーザ登録 </a>し、<a href="http://sourceforge.net/account/login.php">ログイン </a>します。そして<a href="http://sourceforge.net/register/">プロジェク トを登録</a>します。 <P> ありがとうございます。そしてこのサイトでぜひ楽しんでください。
 frs	latest_file_releases	最新の File リリース
 menu	login	SSL経由でログイン
 menu	logout	ログアウト
