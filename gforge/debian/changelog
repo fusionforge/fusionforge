@@ -6,8 +6,9 @@ sourceforge (2.6-0+2+) unstable; urgency=low
     account
   * [Roland] [From 2.5] Rewrote the config file handling, so that it does
     not overwrite local changes.
+  * [Roland] [From 2.5] Added cvssh.pl.
 
- -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 17:19:30 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 17:32:06 +0100
 
 sourceforge (2.6-0+2) unstable; urgency=low
 
