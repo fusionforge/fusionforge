@@ -754,9 +754,9 @@ if ($params['group']) {
 	 * @param	   array   The array of title links
 	 */
 	function subMenu ($title_arr,$links_arr) {
-		$return  = BeginSubMenu () ;
-		$return .= PrintSubMenu ($title_arr,$links_arr) ;
-		$return .= EndSubMenu () ;
+		$return  = $this->BeginSubMenu () ;
+		$return .= $this->PrintSubMenu ($title_arr,$links_arr) ;
+		$return .= $this->EndSubMenu () ;
 		return $return;
 	}
 

@@ -187,7 +187,6 @@ if (session_loggedin()) {
 		<p>
 		<strong>File Description:</strong><br />
 		<input type="text" name="file_description" size="40" maxlength="255" /></p>
-		<p>&nbsp;</p>
 		<h4>Existing Files:</h4>
 		<?php
 		//
