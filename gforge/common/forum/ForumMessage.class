@@ -410,7 +410,12 @@ class ForumMessage extends Error {
 		$bccres = db_query($sql);
 		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
 //echo $BCC;
-		util_send_message('',$subject,$body,$this->Forum->getUnixName().'@'.$GLOBALS['sys_forum_return_domain'],$BCC,$this->getPosterRealName());
+		if(isset($GLOBALS['sys_forum_return_domain'])) {
+			$host = $GLOBALS['sys_forum_return_domain'];
+		} else {
+			$host = $GLOBALS['sys_default_domain'];
+		}
+		util_send_message('',$subject,$body,$this->Forum->getUnixName().'@'.$host,$BCC,$this->getPosterRealName());
 //		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
 		return true;
 	}
