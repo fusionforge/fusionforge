@@ -5,7 +5,7 @@ sourceforge (2.6-0+14+plugin+) experimental; urgency=low
     Plugin class that can be subclassed by plugins.  These two classes
     will be used for the hooks subsystem.
 
- -- Roland Mas <lolando@debian.org>  Wed,  4 Dec 2002 23:21:00 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  5 Dec 2002 18:14:36 +0100
 
 sourceforge (2.6-0+14+plugins) experimental; urgency=low
 
