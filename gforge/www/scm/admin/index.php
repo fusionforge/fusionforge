@@ -28,23 +28,11 @@
 require_once('pre.php');
 require_once('www/scm/scm_utils.php');
 
-if (!$group_id) {
-        exit_no_group();
-}
+// Check permissions
+session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+
 scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$group_id));
-session_require(array('group'=>$group_id));
 
-// get current information
-$group =& group_get_object($group_id);
-exit_assert_object($group,'Group');
-
-$perm =& $group->getPermission( session_get_user() );
-exit_assert_object($perm,'Permission');
-
-// only site admin get access inactive projects
-if (!$group->isActive() && !$perm->isSuperUser()) {
-        exit_error('Permission denied', 'Group is inactive.');
-}
 
 
 if ($submit) {
