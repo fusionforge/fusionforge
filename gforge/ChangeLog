@@ -1,5 +1,8 @@
 2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/survey/admin/add_survey.php: add missing <, don't display
+	empty table if there are no existing surveys.
+
 	* www/new/index.php: use new frs_dlstats_grouptotal_vw
 
 	* www/include/features_boxes.php(show_top_downloads): use new
