@@ -28,6 +28,7 @@ class ProjectTaskHTML extends ProjectTask {
 	function multipleDependBox ($name='dependent_on[]') {
 		$result=$this->getOtherTasks();
 		//get the data so we can mark items as SELECTED
+		$arr2 =& array_keys($this->getDependentOn());
 		return html_build_multiple_select_box ($result,$name,$arr2);
 	}
 
