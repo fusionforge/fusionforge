@@ -110,7 +110,7 @@ class Error {
 	 */
 	function setPermissionDeniedError(){
 		global $Language;
-		exit_error($Language->getText('general','error'),$Language->getText('general','permdenied'));
+		$this->setError($Language->getText('general','permdenied'));
 	}
 
 	/**
@@ -121,7 +121,7 @@ class Error {
 	 */
 	function setInvalidEmailError(){
 		global $Language;
-		exit_error($Language->getText('general','error'),$Language->getText('general','invalid_email'));
+		$this->setError($Language->getText('general','invalid_email'));
 	}
 	
 	/**
@@ -134,7 +134,7 @@ class Error {
 	
 	function setOnUpdateError($result=""){
 		global $Language;
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_on_update',$result));
+		$this->setError($Language->getText('general','error_on_update',$result));
 		
 	}
 
@@ -147,7 +147,7 @@ class Error {
 
 	function setGroupIdError(){
 		global $Language;
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_group_id'));
+		$this->setError($Language->getText('general','error_group_id'));
 		
 	}
 
@@ -160,7 +160,7 @@ class Error {
 
 	function setMissingParamsError(){
 		global $Language;
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_missing_params'));
+		$this->setError($Language->getText('general','error_missing_params'));
 		
 	}
 
