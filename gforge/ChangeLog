@@ -1,3 +1,16 @@
+2004-08-02  Francisco Gimeno <kikov@kikov.org>
+	Fixes [#856]
+	* www/include/languages/Base.tab: Added three expresion for being
+	used at register project page.
+	* gforge-plugin-scmcvs/include/CVSPlugin.class: Added a new hook 
+	for being published as scm plugin. Remove old "group_approved" 
+	hook, because its functionality is covered by this patch.
+	* common/scm/SCMFactory.class: Added a class to get the list of
+	plugins that are SCM Plugins.
+	* www/register/editgroupinfo.php: Added radio buttons to select
+	the SCM for the project being created. If there is just one 
+	SCM in the system, this is selected by default automatically.
+
 2004-07-29  Francisco Gimeno <kikov@kikov.org>
 	* www/pm/mod_task.php and detail_task.php: Added task_extra_detail 
 	hook to Task Manager detail. Applied patch#851
