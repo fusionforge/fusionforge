@@ -37,7 +37,7 @@ if ($group->isError()) {
 
 // This function performs very update
 function do_update(&$group, $is_public, $status, $license,
-		   $group_type, $unix_box, $http_domain) {
+		   $group_type, $unix_box, $http_domain, $scm_box='') {
 	global $feedback;
 	global $Language;
 
@@ -55,6 +55,11 @@ function do_update(&$group, $is_public, $status, $license,
 		return false;
         }
 
+	if(!$group->setSCMBox($scm_box) && $GLOBALS['sys_scm_single_host'] != '1' && $scm_box!=NULL) {
+		$feedback .= $group->getErrorMessage();
+		db_rollback();
+		return false;
+	}
 	db_commit();
 
 	$feedback .= $Language->getText('admin_groupedit','updated').'<br /> ';
@@ -66,7 +71,7 @@ function do_update(&$group, $is_public, $status, $license,
 if ($submit) {
 
 	do_update($group, $form_public, $form_status, $form_license,
-		  1, $form_box, $form_domain);
+		  1, $form_box, $form_domain, $form_scm_box);
 
 } else if ($resend) {
 
@@ -193,6 +198,14 @@ if ($group->getLicense() == 'other') {
 	<?php echo $group->getLicenseOther(); ?>
 	</td>
 	</tr>
+<?php
+}
+if ($group->usesSCM() && $GLOBALS['sys_scm_single_host'] != '1' ) {
+?>      <tr>
+	<td><?php echo $Language->getText('admin','scm_box'); ?>
+	</td>
+	<td>
+	<input size="40" type="text" name="form_scm_box" value="<?php echo $group->getSCMBox(); ?>"/></td></tr>
 <?php
 }
 ?>
