@@ -243,6 +243,11 @@ EOF
 	if [ $p != 0 ] ; then
 	    exit $p
 	fi
+	# Must be root to reorg these files, but only have to do it once
+	[ ! -f /var/lib/gforge/db/20050127-frs-reorg.done ] &&\
+	/usr/lib/gforge/db/20050127-frs-reorg.php \
+	-d include_path=/usr/share/gforge/:/usr/share/gforge/www/include &&\
+	touch /var/lib/gforge/db/20050127-frs-reorg.done
 	
 	;;
     purge-files)
