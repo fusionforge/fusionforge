@@ -1,3 +1,22 @@
+2003-01-21  Reinhard Spisser   <reinhard@spisser.it>
+
+	* www/include/project_home.php: removed obsolete foundry stuff
+	Localization
+	
+	* common/include/utils.php: Localization
+	
+	* www/include/languages/Base.tab, www/include/languages/Italian.tab:
+	Added strings for localization of project homepage and my/
+	
+	* www/include/exit.php, www/include/features_box.php,
+	www/include/project_summary.php, www/my/bookmark_add.php,
+	www/my/bookmark_delete.php, www/my/bookmark_edit.php,
+	www/my/rmproject.php, www/my/diary.php, www/developer/diary.php,
+	www/developer/diary.php:
+	Localization
+	
+	www/developer/monitor.php: correctly escaped strings, localization
+	
 2003-01-20  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/include/languages/Spanish.tab: change all HTML entities
