@@ -13,17 +13,17 @@ $no_gz_buffer=true;
 
 require_once('pre.php');
 
-// get current information
+// Get current information
+$group_id=getIntFromGet('group_id');
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {
-	exit_error($Language->getText('general','error'),
-		$Language->getText('error','error_creating_group'));
+	exit_no_group();
 } else if ($group->isError()) {
 	exit_error($Language->getText('general','error'),
 		$group->getErrorMessage());
 }
 
-// Snapshot can be download only if anon SCM is enabled or if the
+// Snapshot can be downloaded only if anon SCM is enabled or if the
 // logged in user belongs the group
 $permission = $group->enableAnonSCM();
 if(session_loggedin()) {
@@ -33,8 +33,7 @@ if(session_loggedin()) {
  	}
 }
 if (!$permission) {
-	exit_error($Language->getText('general','error'),
-		$Language->getText('general','permdenied'));
+ 	exit_permission_denied();
 }
 
 // Download file
