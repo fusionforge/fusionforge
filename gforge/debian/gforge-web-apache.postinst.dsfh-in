@@ -44,7 +44,7 @@ case "$1" in
 
 	if [ -f /usr/bin/cronolog ]; then  # this is the preferred location for debian
 	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
-	elif [ -f /usr/sbin/cronolog ]	   # this location is deprecated in debian
+	elif [ -f /usr/sbin/cronolog ]; then	   # this location is deprecated in debian
 	    add_onevar_mainconfile cronolog_path /usr/sbin/cronolog
 	else
 	    echo "can't find cronolog in usual places" >&2
