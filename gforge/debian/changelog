@@ -1,8 +1,8 @@
 sourceforge (2.5-33+) unstable; urgency=low
 
-  * 
+  * [Christian] made that adduser don't break postinst
 
- --
+ -- Christian Bayle <bayle@debian.org>  Sat, 28 Sep 2002 19:53:53 +0200
 
 sourceforge (2.5-33) unstable; urgency=low
 
