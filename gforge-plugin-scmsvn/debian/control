@@ -7,7 +7,7 @@ Standards-Version: 3.6.1
 
 Package: gforge-plugin-scmsvn
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache | gforge-web, subversion, viewcvs, python2.3-subversion, python (>= 2.3)
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-web-apache | gforge-web, subversion, subversion-tools, viewcvs, python2.3-subversion, python (>= 2.3)
 Description: The Subversion plugin for GForge
  This plug-in contains the Subversion subsystem of Gforge.  It allows
  each Gforge project to have its own Subversion repository, and gives
