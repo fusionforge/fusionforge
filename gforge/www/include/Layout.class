@@ -1079,6 +1079,21 @@ if (isset($params['group']) && $params['group']) {
 
 		return $return;
 	}
+	
+	/**
+	 * feedback() - returns the htmlized feedback string when an action is performed
+	 *
+	 * @param string feedback string
+	 * @return string htmlized feedback
+	 */
+	function feedback($feedback) {
+		if (!$feedback) {
+			return '';
+		} else {
+			return '
+				<h3><span style="color:red">'.$feedback.'</span></h3>';
+		}
+	}
 
 	/**
 	 * getThemeIdFromName()

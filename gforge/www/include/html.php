@@ -15,10 +15,8 @@
  * @param		string	The feedback.
  */
 function html_feedback_top($feedback) {
-	if (!$feedback)
-		return '';
-	print '
-		<h3><span style="color:red">'.$feedback.'</span></h3>';
+	global $HTML;
+	echo $HTML->feedback($feedback);
 }
 
 /**
@@ -40,10 +38,8 @@ function make_user_link($username) {
  * @param		string	The feedback.
  */
 function html_feedback_bottom($feedback) {
-	if (!$feedback)
-		return '';
-	print '
-		<h3><span style="color:red">'.$feedback.'</span></h3>';
+	global $HTML;
+	echo $HTML->feedback($feedback);
 }
 
 /**
