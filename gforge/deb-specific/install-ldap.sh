@@ -3,7 +3,9 @@
 # $Id$
 #
 # Configure ldap for Sourceforge
-# Christian Bayle, debian-sf (Sourceforge for Debian)
+# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+
+PATH=$PATH:/usr/sbin
 
 # Should I do something for /etc/pam_ldap.conf ?
 modify_pam_ldap(){
