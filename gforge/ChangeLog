@@ -5,6 +5,7 @@
 	query page to develop and save complex filters, download .csv format from 
 	tracker based on filters, custom template uploading to render the "extra fields"
 
+
 2005-03-25  Christian Bayle <bayle@debian.org>
 
 	* Removal of exit_assert_object function and replacement of all calls
