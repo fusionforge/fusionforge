@@ -69,10 +69,10 @@ case "$1" in
     configure)
 	/usr/lib/gforge/bin/prepare-vhosts-file.pl
 	if [ -x /usr/sbin/apache ]; then
-		invoke-rc.d apache restart
+		invoke-rc.d apache restart || true
 	fi
 	if [ -x /usr/sbin/apache-ssl ]; then
-		invoke-rc.d apache-ssl restart
+		invoke-rc.d apache-ssl restart || true
 	fi
 	;;
 
@@ -88,10 +88,10 @@ case "$1" in
 	;;
     purge)
 	if [ -x /usr/sbin/apache ]; then
-		invoke-rc.d apache restart
+		invoke-rc.d apache restart || true
 	fi
 	if [ -x /usr/sbin/apache-ssl ]; then
-		invoke-rc.d apache-ssl restart
+		invoke-rc.d apache-ssl restart || true
 	fi
 	;;
 

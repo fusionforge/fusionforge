@@ -18,8 +18,11 @@ gforge (3.0-6+8) unstable; urgency=low
     same bug.
   * [Roland] Create /var/lib/gforge/etc in all packages, for the upcoming
     move of generated config files.
+  * [Roland] install-apache.sh: do not exit with an error if Apache fails
+    to start, so that people without an SSL certificate will still be able
+    to install.
 
- -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 12:19:45 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 12:20:37 +0200
 
 gforge (3.0-6) unstable; urgency=low
 
