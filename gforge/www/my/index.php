@@ -297,6 +297,41 @@ if (user_isloggedin() || $sf_user_hash) {
 	}
 
 	/*
+	 * Pending projects and news bytes
+	 */
+	$admingroup = group_get_object (1) ;
+	exit_assert_object($admingroup,'Group');
+	$perm =& $admingroup->getPermission( session_get_user() );
+	if ($perm && is_object($perm) && $perm->isAdmin()) {
+                $sql="SELECT group_name FROM groups where status='P';";
+                $result=db_query($sql);
+                $rows=db_numrows($result);
+                if ($rows) {
+                        echo $HTML->box1_middle('Pending Projects', false, "red", false);
+                        echo "<TR><TD COLSPAN=\"2\">There ";
+                        echo (($rows!=1)?"are ": "is "). "$rows project";
+                        echo (($rows!=1)?"s":"");
+                        echo " awaiting <a href=\"/admin/approve-pending.php\">";
+                        echo "review</a>.</td></tr>";
+                }
+	}
+	$newsgroup = group_get_object ($GLOBALS['sys_news_group']) ;
+	exit_assert_object($newsgroup,'Group');
+	$perm =& $newsgroup->getPermission( session_get_user() );
+	if ($perm && is_object($perm) && $perm->isAdmin()) {
+                $sql="SELECT * FROM news_bytes WHERE is_approved=0";
+                $result=db_query($sql);
+                $rows=db_numrows($result);
+                if ($rows) {
+                        echo $HTML->box1_middle('Pending News Bytes', false, "red", false);
+                        echo "<TR><TD COLSPAN=\"2\">There ";
+                        echo (($rows!=1)?"are ": "is "). "$rows news byte";
+                        echo (($rows!=1)?"s":"");
+                        echo " awaiting <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
+			echo "review</a>.</td></tr>";
+		}
+	}		
+	/*
 		   Personal bookmarks
 	*/
 	echo $HTML->box1_middle('My Bookmarks',false,false);
