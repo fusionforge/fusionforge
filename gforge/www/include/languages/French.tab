@@ -269,15 +269,15 @@ admin_database	statistics_for_project_database	Statistiques pour les bases de do
 admin_database	type	Type
 admin_database	unable_to_insert	Impossible d'insérer une base de donnée déjà active
 admin_groupedit	active	Actif (A)
-admin_groupedit	deleted	Détruit (D)
+admin_groupedit	deleted	Supprimé (D)
 admin_groupedit	error	Erreur
 admin_groupedit	error_creating_group_object	Erreur lors de la création d'un objet groupe
-admin_groupedit	holding	Suspendu
+admin_groupedit	holding	Suspendu (H)
 admin_groupedit	incomplete	Incomplet (I)
 admin_groupedit	instruction_email_sent	Courrier contenant les instructions envoyé
 admin_groupedit	new_project_instruction_email	Courrier contenant les instructions à propos de nouveaux projets envoyé à nouveau
 admin_groupedit	no	Non
-admin_groupedit	pending	En attente (E)
+admin_groupedit	pending	En attente (P)
 admin_groupedit	project_admin	[Administration du projet]
 admin_groupedit	public	Public ?
 admin_groupedit	registration_application	Demande d'inscription :
