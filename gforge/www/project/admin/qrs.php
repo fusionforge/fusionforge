@@ -90,7 +90,7 @@ if( $submit ) {
 						$frsr->sendNotice();
 						$feedback .= $Language->getText('project_admin_qrs','file_released');
 
-						//project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+						project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 						?>
 						<p>
 						<?php echo $Language->getText('project_admin_qrs','qrs_info',
@@ -99,6 +99,8 @@ if( $submit ) {
 							'<a href="/project/showfiles.php?group_id='.$group_id.'">','</a>')) ?>
 						<?php
 						db_commit();
+						project_admin_footer(array());
+						exit(); //quite dirty but less that a buggy output like before
 						
 					}
 
