@@ -62,19 +62,20 @@ class BaseLanguage {
 
 	function loadLanguage($lang) {
 		global $sys_theme, $sys_urlroot;
+		// Customization by language in $sys_urlroot/languages/<Language>.tab
 		$fname = 'languages/'.$lang.'.tab' ;
 		$this->loadLanguageFile($fname) ;
-		// Site-local customizations
-		$fname = '/etc/gforge/languages-local/'.$lang.'.tab' ;
-		if (file_exists ($fname)) {
-			$this->loadLanguageFile($fname) ;
-		}
-		//Customization by theme
+		// Customization by theme by language in $sys_urlroot/themes/<theme_name>/<Language>.tab
 		$ftname = $sys_urlroot.'/themes/'.$sys_theme.'/'.$lang.'.tab' ;
 		if (file_exists ($ftname)) {
 			$this->loadLanguageFile($ftname) ;
 		}
-		//Customization by theme in /etc/gforge/languages-local/<theme_name>/<Language>.tab
+		// Site-local customizations in /etc/gforge/languages-local/<Language>.tab
+		$fname = '/etc/gforge/languages-local/'.$lang.'.tab' ;
+		if (file_exists ($fname)) {
+			$this->loadLanguageFile($fname) ;
+		}
+		// Site-local Customization by theme in /etc/gforge/languages-local/<theme_name>/<Language>.tab
 		$fltname = '/etc/gforge/languages-local/'.$sys_theme.'/'.$lang.'.tab' ;
 		if (file_exists ($fltname)) {
 			$this->loadLanguageFile($fltname) ;

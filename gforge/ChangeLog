@@ -1,3 +1,8 @@
+2003-07-18 Christian Bayle	<bayle@debian.org>
+
+	* Reordered and commented loadLanguage in BaseLanguage.tab
+	Local customizations have now priority 
+
 2003-07-20 Reinhard Spisser <reinhard@spisser.it>
 
 	* Italian.tab:
