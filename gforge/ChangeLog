@@ -1,3 +1,10 @@
+2004-08-20  Francisco Gimeno <kikov@kikov.org>
+	* www/register/projectinfo.php: Solved a bug on [#856] that prevents
+	new projects to be created with conditions:
+	- sys_use_scm enabled
+	- No SCM Plugin installed.
+	Fixed a problem when sys_use_scm disabled.
+
 2004-08-12  Francisco Gimeno <kikov@kikov.org>
 	* cronjobs/tracker_gateway.php: it's just a migration from forum to
 	tracker. It works in the same way. Need to be integrated into
