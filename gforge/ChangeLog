@@ -1,5 +1,9 @@
 2003-01-08  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/forum/include/ForumHTML.class: first call util_make_links,
+	then do nl2br.  This prevents <br /> from becoming part of a URL
+	that is at the end of a line.
+
 	* www/admin/trove/trove_cat_edit.php,
 	www/admin/trove/trove_cat_add.php,
 	common/pm/ProjectCategory.class, www/include/bookmarks.php: Audit:

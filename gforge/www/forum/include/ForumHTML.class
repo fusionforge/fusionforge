@@ -56,7 +56,7 @@ function forum_header($params) {
 				<B>'.$Language->getText('forum_utils','date').':</B> '. date($sys_datefmt,db_result($result,0,'date')).'<BR>
 				<B>'.$Language->getText('forum_utils','summary').':</B> <A HREF="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</A>
 				<P>
-				'. util_make_links( nl2br( db_result($result,0,'details')));
+				'. nl2br (util_make_links(db_result($result,0,'details')));
 
 				echo '<P>';
 			}
@@ -168,7 +168,7 @@ class ForumHTML extends Error {
 			</TR>
 			<TR>
 				<TD>
-					'. util_make_links( nl2br ( $msg->getBody() ) ) .'
+					'. nl2br(util_make_links( $msg->getBody() ) ) .'
 				</TD>
 			</TR>
 		</TABLE>';
