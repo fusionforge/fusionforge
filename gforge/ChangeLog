@@ -1,3 +1,9 @@
+2004-03-28  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* utils/ldap/sql2ldif.pl: Disable shell access for suspended and
+	deleted accounts, and enable e-mail forwarding for accounts even
+	if they don't belong to any group yet.
+
 2004-03-18  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/docman/index.php: Sort documents by doc_group first, then

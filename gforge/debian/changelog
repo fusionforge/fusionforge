@@ -1,12 +1,16 @@
-gforge (3.1-13+2) unstable; urgency=low
+gforge (3.1-13+3) unstable; urgency=low
 
   * [Roland] Rewrote the "sourceforge" package description to fix a
     Lintian error.
   * [Roland] po-debconf updates for French (Christian Perrier and the
     debian-l10n-french team) and Dutch (cobaco and the debian-l10n-dutch
     team) (closes: #232235, #237844, #238566).
+  * [Roland] Disable shell access for suspended and deleted accounts
+    (closes: #239879).
+  * [Roland] Also enable e-mail forwarding for accounts even if they don't
+    belong to any group (closes: #237024).
 
- -- Roland Mas <lolando@debian.org>  Thu, 18 Mar 2004 23:01:36 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 28 Mar 2004 18:40:57 +0200
 
 gforge (3.1-13) unstable; urgency=low
 
