@@ -3,10 +3,10 @@ sourceforge (2.6-0+11) unstable; urgency=low
   * [Roland] Fixed theme registration for 2.6->2.6 upgrades.  You might
     encounter problems if you registered them manually, in this case
     simply run the following SQL in the sourceforge database:
-    DELETE FROM themes WHERE dirname LIKE 'savannah_%';
+    DELETE FROM themes WHERE dirname LIKE 'savannah_%'; BUG #124 CLOSED
   * [Christian] changed Layout.class with div align=center BUG #120 CLOSED
 
- -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 12:46:40 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 14:01:43 +0200
 
 sourceforge (2.6-0+10) unstable; urgency=low
 
