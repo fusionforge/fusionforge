@@ -151,7 +151,8 @@ function admin_table_edit($table, $unit, $primary_key, $id, $lang) {
 			if ($fieldname == $primary_key) {
 				echo "<td>$value</td></tr>";
 			} elseif ($fieldname =='tstring')  {
-				echo '<td><textarea type="text" name="'.$fieldname.'" cols="50" rows="10"/>'.stripslashes($value).'</textarea></td></tr>';
+				//echo '<td><textarea type="text" name="'.$fieldname.'" cols="50" rows="10"/>'.stripslashes($value).'</textarea></td></tr>';
+				echo '<td><textarea type="text" name="'.$fieldname.'" cols="50" rows="10"/>'.stripslashes(util_unconvert_htmlspecialchars($value)).'</textarea></td></tr>';
 			} else {
 				echo '<td><input type="text" name="'.$fieldname.'" value="'.$value.'"/></td></tr>';
 			}
@@ -239,7 +240,8 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
                         if ($edit) echo '<td><a href="'.$PHP_SELF.'?function=edit&lang='.$lang.'&amp;id='.$id.'">[edit]</a>';
                         if ($edit) echo '<a href="'.$PHP_SELF.'?function=confirmdelete&lang='.$lang.'&amp;id='.$id.'">[delete]</a> </td>';
 			for ($i = 0; $i < $cols; $i++) {
-				echo '<td>'. stripslashes(htmlspecialchars(db_result($result, $j, $i))) .'</td>';
+				//echo '<td>'. stripslashes(htmlspecialchars(db_result($result, $j, $i))) .'</td>';
+				echo '<td>'. stripslashes(db_result($result, $j, $i)) .'</td>';
 			}
 			echo "</tr>\n";
 		}

@@ -38,8 +38,9 @@ if ($loadall) {
 					continue;
 				}
 				$line = explode("\t", $ary[$i], 3);
-#				$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . $line[2] ."')";
+#				//$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . $line[2] ."')";
 				$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . addslashes(quotemeta(htmlspecialchars($line[2]))) ."')";
+				//$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . base64_encode($line[2]) ."')";
 				$tmpid++;
 				$res=db_query($query);
 				if (!$res){
@@ -126,12 +127,15 @@ if (db_numrows($result)>0) {
 	<a href="/admin/editnotranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
 </td>
 <td>
-	<a href="/admin/seenotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
-	<a href="/admin/editnotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
+	<a href="/admin/seenotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">
+	<? if ($rate2!=0) echo "[see]";?></a>
+	<a href="/admin/editnotinbasetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">
+	<? if ($rate2!=0) echo "[edit]";?></a>
 </td>
 <td>
 	<a href="/admin/seetabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
 	<a href="/admin/edittabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
+	<a href="/admin/gettabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[get]</a>
 </td>
 <?php
 		echo "</tr>";
