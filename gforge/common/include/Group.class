@@ -1504,6 +1504,24 @@ class Group extends Error {
 				WHERE group_id='".$this->getID()."') 
 				AND user_id='$user_id'");
 
+			//
+			//	reassign open artifacts to id=100
+			//
+			db_query("UPDATE artifact SET assigned_to='100' 
+				WHERE group_artifact_id 
+				IN (SELECT group_artifact_id 
+				FROM artifact_group_list 
+				WHERE group_id='".$this->getID()."') 
+				AND status_id='1' AND assigned_to='$user_id'");
+
+			//
+			//	reassign open tasks to id=100
+			//
+			db_query("UPDATE project_assigned_to SET assigned_to_id='100' 
+				WHERE project_task_id IN (SELECT project_task_id 
+				FROM project_task WHERE status_id='1') 
+				AND assigned_to_id='$user_id'");
+
 			if (!$SYS->sys_group_remove_user($this->getID(),$user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
@@ -1511,6 +1529,7 @@ class Group extends Error {
 			}
 			//audit trail
 			$this->addHistory('removed user',$user_id);
+
 		}
 		db_commit();
 		return true;
