@@ -314,13 +314,12 @@ function session_redirect($loc) {
 function session_require($req) {
 	if (!session_loggedin()) {
 		exit_not_logged_in();	
-		//exit_permission_denied();
 	}
 
 	if ($req['group']) {
 		$group =& group_get_object($req['group']);
 		if (!$group || !is_object($group) || $group->isError()) {
-			exit_error('Error','Invalid Group');
+			exit_no_group();
 		}
 
 		$perm =& $group->getPermission( session_get_user() );
@@ -330,7 +329,6 @@ function session_require($req) {
 
 
 		if ($req['admin_flags']) {
-			//$query .= " AND admin_flags = '$req[admin_flags]'";	
 			if (!$perm->isAdmin()) {
 				exit_permission_denied();
 			}
