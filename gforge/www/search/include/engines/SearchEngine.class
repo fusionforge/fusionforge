@@ -43,3 +43,5 @@ class SearchEngine {
 		return $renderer;
 	}
 }
+
+?>

@@ -36,3 +36,5 @@ class GroupSearchEngine extends SearchEngine {
 		return $renderer;
 	}
 }
+
+?>

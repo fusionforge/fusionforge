@@ -12,7 +12,6 @@
 require_once('www/search/include/engines/GroupSearchEngine.class');
 
 class ForumSearchEngine extends GroupSearchEngine {
-	var $ath;
 	
 	function ForumSearchEngine() {
 		global $Language;
@@ -33,3 +32,5 @@ class ForumSearchEngine extends GroupSearchEngine {
 		return $renderer;
 	}
 }
+
+?>
