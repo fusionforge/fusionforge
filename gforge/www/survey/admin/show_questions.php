@@ -1,16 +1,22 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require($DOCUMENT_ROOT.'/survey/survey_utils.php');
+
+require_once('pre.php');
+require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
 
-$HTML->header(array('title'=>'Survey Questions'));
+$HTML->header(array('title'=>'Survey Questions','pagename'=>'survey_admin_show_questions'));
 
 if (!user_isloggedin() || !user_ismember($group_id,'A')) {
 	echo "<H1>Permission Denied</H1>";
@@ -20,7 +26,6 @@ if (!user_isloggedin() || !user_ismember($group_id,'A')) {
 
 ?>
 
-<H2>Existing Questions:</H2>
 <P>
 You may use any of these questions on your surveys.
 <P>

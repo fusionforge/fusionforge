@@ -1,29 +1,47 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Site Admin: Trove Admin: add new leaf category
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";
-require "trove.php";
+require_once('pre.php');
+require_once('www/include/trove.php');
+require_once('www/admin/admin_utils.php');
+
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
 // ########################################################
 
-if ($GLOBALS["Submit"]) {
+if ($GLOBALS['submit']) {
 	$newroot = trove_getrootcat($GLOBALS['form_parent']);
 
 	if ($GLOBALS[form_shortname]) {
-		db_query('INSERT INTO trove_cat '
-			.'(shortname,fullname,description,parent,version,root_parent) values ('
-			.'\''.$GLOBALS[form_shortname] 
-			.'\',\''.$GLOBALS[form_fullname]
-			.'\',\''.$GLOBALS[form_description]
-			.'\',\''.$GLOBALS[form_parent]
-			.'\','.date("Ymd",time()).'01'
-			.',\''.$newroot.'\')');
+		$res = db_query("
+			INSERT INTO trove_cat 
+				(shortname,fullname,description,parent,version,root_parent)
+			VALUES (
+				'$form_shortname',
+				'$form_fullname',
+				'$form_description',
+				'$form_parent',
+				'".date("Ymd",time())."01',
+				'$newroot'
+			)
+		");
+
+		if (!$res || db_affected_rows($res)<1) {
+			exit_error(
+				'Error In Trove Operation',
+				db_error()
+			);
+		}
 	} 
 
 	// update full paths now
@@ -32,30 +50,37 @@ if ($GLOBALS["Submit"]) {
 	session_redirect("/admin/trove/trove_cat_list.php");
 } 
 
-$HTML->header(array(title=>"Trove - Add Node"));
+site_admin_header(array('title'=>'Site Admin: Trove - Add Node'));
 ?>
 
+<h3>Add New Trove Category</h3>
+
 <form action="trove_cat_add.php" method="post">
+<p>Parent Category:
+<br><select name="form_parent">
+
+<?php
+
+// generate list of possible parents
+$res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
+while ($row_cat = db_fetch_array($res_cat)) {
+	print ('<OPTION value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."\n");
+}
+
+?>
+
+</select>
 <p>New category short name (no spaces, unix-like):
 <br><input type="text" name="form_shortname">
 <p>New category full name (VARCHAR 80):
 <br><input type="text" name="form_fullname">
 <p>New category description (VARCHAR 255):
 <br><input type="text" size="80" name="form_description">
-<p>Parent Category:
-<br><SELECT name="form_parent">
-<?php
-// generate list of possible parents
-$res_cat = db_query("SELECT shortname,fullname,trove_cat_id FROM trove_cat");
-while ($row_cat = db_fetch_array($res_cat)) {
-	print ('<OPTION value="'.$row_cat["trove_cat_id"].'">'.$row_cat["fullname"]."\n");
-}
-?>
-</SELECT>
-<br><input type="submit" name="Submit" value="Submit">
+<br><input type="submit" name="submit" value="Add">
 </form>
 
 <?php
-$HTML->footer(array());
+
+site_admin_footer(array());
 
 ?>

@@ -6,7 +6,7 @@
 #  ./sql2ldif.pl	: Dump only top-level ou map
 #  ./sql2ldif.pl --full : Dump full database (ouch!)
 #
-#  $Id: sql2ldif.pl,v 1.8 2000/12/10 23:07:31 pfalcon Exp $
+#  $Id: sql2ldif.pl,v 1.13 2001/03/26 20:38:01 pfalcon Exp $
 # 
 
 use DBI;
@@ -14,6 +14,12 @@ use DBI;
 #require("base64.pl");  # Include all the predefined functions
 require("include.pl");  # Include all the predefined functions
 &db_connect;
+
+
+sub homedir {
+	my ($user) = @_;
+	return "/home/users/".substr($user,0,1)."/".substr($user,0,2)."/$user";
+}
 
 dump_header();
 
@@ -41,7 +47,11 @@ $rel->execute();
 
 @cvs_flags2shell=('/dev/null','/bin/cvssh','/bin/bash');
 
+#
+# Note: unix uid = db uxix_uid + $uid_add
+#
 while(my ($username, $realname, $shell, $pw, $uid, $cvs_flags) = $rel->fetchrow()) {
+	$uid+=$uid_add;
 	print "dn: uid=$username,ou=People,$sys_ldap_base_dn\n";
 	print "uid: $username\n";
 	if (!$realname) { $realname='?'; }
@@ -54,14 +64,14 @@ objectClass: shadowAccount
 objectClass: x-sourceforgeAccount
 ";
 	print "userPassword: {crypt}$pw
-shadowLastChange: 10879
+shadowLastChange: 1
 shadowMax: 99999
 shadowWarning: 7
 loginShell: $shell
 x-cvsShell: $cvs_flags2shell[$cvs_flags]
 uidNumber: $uid
 gidNumber: 100
-homeDirectory: /home/users/$username
+homeDirectory: ".homedir($username)."
 gecos: $realname
 
 ";
@@ -72,35 +82,35 @@ gecos: $realname
 #
 
 my $query = "
-SELECT group_id,unix_group_name
-FROM groups
-WHERE status='A'
+SELECT groups.group_id,unix_group_name,user_name
+FROM groups,users,user_group
+WHERE groups.status='A'
+AND groups.group_id=user_group.group_id
+AND user_group.user_id=users.user_id
+ORDER BY groups.group_id
 ";
 my $rel = $dbh->prepare($query);
 $rel->execute();
 
-while(my ($gid, $groupname) = $rel->fetchrow()) {
-	my $query = "
-SELECT user_name
-FROM users,user_group
-WHERE group_id=$gid
-      AND users.user_id=user_group.user_id
-";
-	my $rel = $dbh->prepare($query);
-	$rel->execute();
+#
+# Note: unix gid = db group_id + $gid_add
+#
+$last_gid=-1;
+while(my ($gid, $groupname, $member) = $rel->fetchrow()) {
+	$gid+=$gid_add;
 
-	print "dn: cn=$groupname,ou=Group,$sys_ldap_base_dn
+	if ($gid != $last_gid) {
+		print "\ndn: cn=$groupname,ou=Group,$sys_ldap_base_dn
 objectClass: posixGroup
 objectClass: top
 cn: $groupname
 userPassword: {crypt}x
 gidNumber: $gid
 ";
-
-	while(my ($username) = $rel->fetchrow()) {
-		print "memberUid: $username\n";
+		$last_gid=$gid;
 	}
-	print "\n";
+
+	print "memberUid: $member\n";
 }
 
 #
@@ -108,36 +118,62 @@ gidNumber: $gid
 #
 
 my $query = "
-SELECT group_id,unix_group_name
-FROM groups
-WHERE status='A'
+SELECT groups.group_id,unix_group_name,user_name,cvs_flags
+FROM groups,users,user_group
+WHERE groups.status='A'
+AND groups.group_id=user_group.group_id
+AND user_group.user_id=users.user_id
+ORDER BY groups.group_id
 ";
+# we need cvsGroup even if no member has permission
+#AND user_group.cvs_flags > 0
 my $rel = $dbh->prepare($query);
 $rel->execute();
 
-while(my ($gid, $groupname) = $rel->fetchrow()) {
-	my $query = "
-SELECT user_name
-FROM users,user_group
-WHERE group_id=$gid
-      AND users.user_id=user_group.user_id
-      AND user_group.cvs_flags > 0
-";
-	my $rel = $dbh->prepare($query);
-	$rel->execute();
+$last_gid=-1;
+while(my ($gid, $groupname, $member, $cvs) = $rel->fetchrow()) {
+	$gid+=$gid_add;
 
-	print "dn: cn=$groupname,ou=cvsGroup,$sys_ldap_base_dn
+	if ($gid != $last_gid) {
+
+		# virtual member for anoncvs access
+		print "\ndn: uid=anoncvs_$groupname,ou=People,$sys_ldap_base_dn\n";
+		print "uid: anoncvs_$groupname\n";
+		print "cn: anoncvs\n";
+		print "objectClass: account
+objectClass: posixAccount
+objectClass: top
+objectClass: shadowAccount
+objectClass: x-sourceforgeAccount
+";
+		print "userPassword: {crypt}x
+shadowLastChange: 1
+shadowMax: 99999
+shadowWarning: 7
+loginShell: /bin/false
+x-cvsShell: /bin/false
+";
+		print "uidNumber: ",$gid+$anoncvs_add;
+		print "
+gidNumber: $gid
+homeDirectory: ".homedir("anoncvs_$groupname")."
+gecos: anoncvs
+";
+		# CVS group itself
+		print "\ndn: cn=$groupname,ou=cvsGroup,$sys_ldap_base_dn
 objectClass: posixGroup
 objectClass: top
 cn: $groupname
 userPassword: {crypt}x
 gidNumber: $gid
+memberUid: anoncvs_$groupname
 ";
-
-	while(my ($username) = $rel->fetchrow()) {
-		print "memberUid: $username\n";
+		$last_gid=$gid;
 	}
-	print "\n";
+
+	if ($cvs>0) {
+		print "memberUid: $member\n";
+	}
 }
 
 #
@@ -186,6 +222,14 @@ objectClass: top
 objectClass: organizationalUnit
 objectClass: domainRelatedObject
 associatedDomain: $sys_default_domain
+
+dn: cn=Replicator,dc=sourceforge,dc=net
+cn: Replicator
+sn: Replicator the Robot
+description: empty
+objectClass: top
+objectClass: person
+userPassword: {crypt}x
 
 ";
 }

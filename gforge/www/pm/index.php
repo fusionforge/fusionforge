@@ -1,17 +1,23 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../pm/pm_utils.php');
+
+require_once('pre.php');
+require_once('www/pm/pm_utils.php');
 
 if ($group_id) {
 
-	pm_header(array('title'=>'Projects for '.group_getname($group_id)));
+	pm_header(array('title'=>'Projects for '.group_getname($group_id),'pagename'=>'pm','sectionvals'=>group_getname($group_id)));
 
 	if (user_isloggedin() && user_ismember($group_id)) {
 		$public_flag='0,1';
@@ -33,7 +39,6 @@ if ($group_id) {
 	}
 
 	echo '
-		<H3>Subprojects and Tasks</H3>
 		<P>
 		Choose a Subproject and you can browse/edit/add tasks to it.
 		<P>';
@@ -52,7 +57,7 @@ if ($group_id) {
 	}
 
 } else {
-	pm_header(array('title'=>'Choose a Group First'));
+	pm_header(array('title'=>'Choose a Group First','pagename'=>'pm'));
 	echo '<H1>Error - choose a group first</H1>';
 }
 pm_footer(array()); 

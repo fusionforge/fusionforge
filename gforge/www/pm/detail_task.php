@@ -1,12 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-pm_header(array('title'=>'View A Task'));
+
+pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_project_id'=>$group_project_id));
 
 $sql="SELECT * FROM project_task ".
 	"WHERE project_task_id='$project_task_id' AND group_project_id='$group_project_id'";
@@ -14,7 +20,6 @@ $sql="SELECT * FROM project_task ".
 $result=db_query($sql);
 
 ?>
-<H2>View A Task In <?php echo  pm_data_get_group_name($group_project_id); ?></H2>
 
 <TABLE BORDER="0" WIDTH="100%">
 	<TR>
@@ -103,12 +108,6 @@ $result=db_query($sql);
 	<TR>
 		<TD COLSPAN="2">
 			<?php echo pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id); ?>
-		</TD>
-	</TR>
-
-	<TR>
-		<TD COLSPAN="2">
-			<?php echo pm_show_dependent_bugs ($project_task_id,$group_id,$group_project_id); ?>
 		</TD>
 	</TR>
 

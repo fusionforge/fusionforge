@@ -1,83 +1,96 @@
 <?php
+/**
+ * project_summary.php
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
-function project_get_total_bug_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM bug WHERE group_id=$group_id");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
+$project_agg_arr=array();
+
+/**
+ * project_setup_agg() - Set up a project aggregate array.
+ *
+ * @param		int		Group ID
+ * @access		private
+ */
+function project_setup_agg($group_id) {
+	global $project_agg_arr,$project_agg_arr_is_set;
+	$res=db_query("SELECT * FROM project_sums_agg WHERE group_id=$group_id");
+	$rows=db_numrows($res);
+	if ($res && $rows > 0) {
+		for ($i=0; $i<$rows; $i++) {
+			$project_agg_arr[db_result($res,$i,'type')]=db_result($res,$i,'count');
+		}	
+	}
+	$project_agg_arr_is_set=true;
 }
 
-function project_get_open_bug_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM bug WHERE group_id=$group_id AND status_id != 3");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
+/**
+ * project_getaggvalue() - Get a projects aggregate value for a specific type
+ *
+ * @param		int		The group ID
+ * @param		string	The type
+ * @access		private
+ */
+function project_getaggvalue($group_id,$type) {
+	global $project_agg_arr,$project_agg_arr_is_set;
+	if (!$project_agg_arr_is_set) {
+		project_setup_agg($group_id);
+	}
+	if ($project_agg_arr[$type]) {
+		return "$project_agg_arr[$type]";
+	} else {
+		return '0';
+	}
 }
 
-function project_get_total_support_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM support WHERE group_id=$group_id");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
-}
-
-function project_get_open_support_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM support WHERE group_id=$group_id AND support_status_id='1'");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
-}
-
-function project_get_total_patch_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM patch WHERE group_id=$group_id");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
-}
-
-function project_get_open_patch_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM patch WHERE group_id=$group_id AND patch_status_id='1'");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
-}
-
+/**
+ * project_get_mail_list_count() - Get the number of mailing lists for a project.
+ *
+ * @param		int		The group ID
+ */
 function project_get_mail_list_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM mail_group_list WHERE group_id=$group_id AND is_public=1");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
+	return project_getaggvalue($group_id,'mail'); 
 }
 
+/**
+ * project_get_survey_count() - Get the number of surveys for a project.
+ *
+ * @param		int		The group ID
+ */
 function project_get_survey_count($group_id) {
-	$res=db_query("SELECT count(*) AS count from surveys where group_id='$group_id' AND is_active='1'");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
-}       
+	return project_getaggvalue($group_id,'surv'); 
+}	   
 
+/**
+ * project_get_public_forum_count() - Get the number of public forums for a project.
+ *
+ * @param		int		The group ID
+ */
 function project_get_public_forum_count($group_id) {
-	$res = db_query("SELECT count(forum.msg_id) AS count FROM forum,forum_group_list WHERE "
-	. "forum_group_list.group_id=$group_id AND forum.group_forum_id=forum_group_list.group_forum_id "
-	. "AND forum_group_list.is_public=1");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
+	return project_getaggvalue($group_id,'fora'); 
 }
 
+/**
+ * project_get_public_forum_message_count() - Get the number of messages within public forums for a project.
+ *
+ * @param		int		The group ID
+ */
 function project_get_public_forum_message_count($group_id) {
-	$res = db_query("SELECT count(*) AS count FROM forum_group_list WHERE group_id=$group_id AND is_public=1");
-	$count=db_result($res,0,'count');
-	db_free_result($res);
-	return $count;
+	return project_getaggvalue($group_id,'fmsg'); 
 }
 
-/*
-
-	Build a project summary box that projects can insert into their project pages
-
-*/
-
+/**
+ * project_summary() - Build a project summary box that projects can insert into their project pages
+ *
+ * @param		int		The group ID
+ * @param		string	How to return the results.
+ * @param		bool	Whether to return the results within an HTML table or not
+ */
 function project_summary($group_id,$mode,$no_table) {
 	if (!$group_id) {
 		return 'Error - No Group ID';
@@ -86,13 +99,48 @@ function project_summary($group_id,$mode,$no_table) {
 		$mode='full';
 	}
 
-	$project=project_get_object($group_id);
+	$project =& group_get_object($group_id);
 	// ################## forums
+
+	if (!$project || !is_object($project)) {
+		return 'Could Not Create Project Object';
+	} elseif ($project->isError()) {
+		return $project->getErrorMessage();
+	}
 
 	if (!$no_table) {
 		$return .= '
 
 		<TABLE BORDER=0 WIDTH="100%"><TR><TD BGCOLOR="#EAECEF">';
+	}
+
+	// ################## ArtifactTypes
+
+	$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/tracker/?group_id='.$group_id.'">';
+	$return .= html_image("images/ic/taskman16b.png",'20','20',array('alt'=>'Tracker'));
+	$return .= ' Tracker</A>';
+
+	if ($mode != 'compact') {
+		$result=db_query("SELECT agl.*,aca.count,aca.open_count
+		FROM artifact_group_list agl
+		LEFT JOIN artifact_counts_agg aca USING (group_artifact_id) 
+		WHERE agl.group_id='$group_id'
+		AND agl.is_public=1
+		ORDER BY group_artifact_id ASC");
+
+		$rows = db_numrows($result);
+
+		if (!$result || $rows < 1) {
+			$return .= '<BR><I>There are no public trackers available</I>';
+		} else {
+			for ($j = 0; $j < $rows; $j++) {
+				$return .= '<P>
+				&nbsp;-&nbsp;<A HREF="http://'.$GLOBALS['sys_default_domain'].'/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
+				'&group_id='.$group_id.'&func=browse">'. db_result($result, $j, 'name') .'</A> 
+				( <B>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</B> )<BR>'.
+				db_result($result, $j, 'description');
+			}   
+		}
 	}
 
 	if ($project->usesForum()) {
@@ -104,40 +152,8 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= '&nbsp;Forums</A>';
 
 		if ($mode != 'compact') {
-			$return .= " ( <B>". project_get_public_forum_count($group_id) ."</B> messages in ";
-			$return .= "<B>". project_get_public_forum_message_count($group_id) ."</B> forums )\n";
-		}
-	}
-
-	// ##################### Bug tracking
-
-	if ($project->usesBugs()) {
-		$return .= '
-
-			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/bugs/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/bug16b.png","20","20",array("BORDER"=>"0","ALT"=>"Bugs"));
-		$return .= '&nbsp;Bug&nbsp;Tracker</A>';
-
-		if ($mode != 'compact') {
-			$return .= " ( <B>". project_get_open_bug_count($group_id) ."</B>";
-			$return .= " open bugs, <B>". project_get_total_bug_count($group_id) ."</B> total )";
-		}
-	}
-
-	// ##################### Support Manager
- 
-	if ($project->usesSupport()) {
-		$return .= '
-
-			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/support/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/support16b.jpg","20","20",array("BORDER"=>"0","ALT"=>"Support"));
-		$return .= '&nbsp;Tech&nbsp;Support</A>';
-
-		if ($mode != 'compact') {
-			$return .= " ( <B>". project_get_open_support_count($group_id) ."</B>";
-			$return .= " open requests, <B>". project_get_total_support_count($group_id) ."</B> total )";
+			$return .= " ( <B>". project_get_public_forum_message_count($group_id) ."</B> messages in ";
+			$return .= "<B>". project_get_public_forum_count($group_id) ."</B> forums )\n";
 		}
 	}
 
@@ -151,22 +167,6 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= html_image("images/ic/docman16b.png","20","20",array("BORDER"=>"0","ALT"=>"Docs"));
 		$return .= '&nbsp;Doc&nbsp;Manager</A>';
 	}
-
-	// ##################### Patch Manager
-
-	if ($project->usesPatch()) {
-		$return .= '
-
-			<HR SIZE="1" NoShade>';
-		$return .= '<A href="http://'.$GLOBALS['sys_default_domain'].'/patch/?group_id='.$group_id.'">';
-		$return .= html_image("images/ic/patch.png","20","20",array("BORDER"=>"0","ALT"=>"Patches"));
-		$return .= '&nbsp;Patch&nbsp;Manager</A>';
-
-		if ($mode != 'compact') {
-			$return .= " ( <B>". project_get_open_patch_count($group_id) ."</B>";
-			$return .= " open patches, <B>". project_get_total_patch_count($group_id) ."</B> total )";
-		}
-	}       
 
 	// ##################### Mailing lists
 
@@ -236,7 +236,7 @@ function project_summary($group_id,$mode,$no_table) {
 		$return .= "&nbsp;CVS&nbsp;Tree</A>";
 
 		if ($mode != 'compact') {
-			$sql = "SELECT SUM(cvs_commits) AS commits,SUM(cvs_adds) AS adds from stats_project where group_id='$group_id'";
+			$sql = "SELECT SUM(commits) AS commits,SUM(adds) AS adds from stats_cvs_group where group_id='$group_id'";
 			$result = db_query($sql);
 			$return .= ' ( <B>'.db_result($result,0,0).'</B> commits, <B>'.db_result($result,0,1).'</B> adds )';
 		}

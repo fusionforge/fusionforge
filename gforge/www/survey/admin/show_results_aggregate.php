@@ -1,16 +1,23 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('HTML_Graphs.php');
-require($DOCUMENT_ROOT.'/survey/survey_utils.php');
+
+require_once('pre.php');
+require_once('HTML_Graphs.php');
+require_once('www/survey/survey_utils.php');
+
 $is_admin_page='y';
-survey_header(array('title'=>'Survey Aggregate Results'));
+survey_header(array('title'=>'Survey Aggregate Results','pagename'=>'survey_admin_show_results_aggregate'));
 
 if (!user_isloggedin() || !user_ismember($group_id,'A')) {
 	echo "<H1>Permission Denied</H1>";
@@ -38,6 +45,7 @@ echo "<H3><A HREF=\"show_results_csv.php?survey_id=$survey_id&group_id=$group_id
 */
 
 $questions=db_result($result, 0, "survey_questions");
+$questions=str_replace(" ", "", $questions);
 $quest_array=explode(',', $questions);
 $count=count($quest_array);
 
@@ -51,7 +59,7 @@ for ($i=0; $i<$count; $i++) {
 		Build the questions on the HTML form
 	*/
 
-	$sql="SELECT question_type,question,question_id FROM survey_questions WHERE question_id=$quest_array[$i] AND group_id=$group_id";
+	$sql="SELECT question_type,question,question_id FROM survey_questions WHERE question_id='".$quest_array[$i]."' AND group_id='$group_id'";
 
 	$result=db_query($sql);
 
@@ -99,39 +107,39 @@ for ($i=0; $i<$count; $i++) {
 		/*
 			Select the number of responses to this question
 		*/
-		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND response IN (1,2,3,4,5) AND group_id='$group_id'";
+		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND response::int IN (1,2,3,4,5) AND group_id='$group_id'";
 
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
 			echo "error";
 			echo db_error();
 		} else {
-			echo "<B>".db_result($result2, 0, 'count')."</B> Responses<BR>";
+			$response_count = db_result($result2, 0, 'count');
+			echo "<B>" . $response_count . "</B> Responses<BR>";
 		}
 		/*
 			average
 		*/
-
-		$sql="SELECT avg(response) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'";
-
-		$result2=db_query($sql);
-		if (!$result2 || db_numrows($result2) < 1) {
-			echo "error";
-			echo db_error();
-		} else {
-			echo "<B>".db_result($result2, 0, 'avg')."</B> Average";
-		}
-
-		$sql="SELECT response,count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' GROUP BY response";
-
-		$result2=db_query($sql);
-		if (!$result2 || db_numrows($result2) < 1) {
-			echo "error";
-			echo db_error();
-		} else {
-			GraphResult($result2,stripslashes(db_result($result, 0, "question")));
-		}
-
+		if ($response_count > 0){
+			$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'";
+			$result2=db_query($sql);
+			if (!$result2 || db_numrows($result2) < 1) {
+				echo "error";
+				echo db_error();
+			} else {
+				echo "<B>".db_result($result2, 0, 'avg')."</B> Average";
+			}
+			
+			$sql="SELECT response,count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' GROUP BY response";
+			
+			$result2=db_query($sql);
+			if (!$result2 || db_numrows($result2) < 1) {
+				echo "error";
+				echo db_error();
+			} else {
+				GraphResult($result2,stripslashes(db_result($result, 0, "question")));
+			}
+		}// end if (responses to survey question present)
 	} else if ($question_type == "2") {
 		/*
 			This is a text-area question.
@@ -157,7 +165,7 @@ for ($i=0; $i<$count; $i++) {
 		/*
 			Select the count and average of responses to this question
 		*/
-		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN (1,5)";
+		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response::int IN (1,5)";
 
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
@@ -169,11 +177,12 @@ for ($i=0; $i<$count; $i++) {
 		/*
 			average
 		*/
-		$sql="SELECT avg(response) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'";
+		$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'";
 
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
 			echo "error";
+			echo db_error();
 		} else {
 			echo "<B>".db_result($result2, 0, 0)."</B> Average";
 		}

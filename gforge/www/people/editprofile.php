@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people/people_utils.php');
+
+require_once('pre.php');
+require_once('www/people/people_utils.php');
 
 if (user_isloggedin()) {
 
@@ -82,7 +88,7 @@ if (user_isloggedin()) {
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>'Edit Your Profile'));
+	people_header(array('title'=>'Edit Your Profile','pagename'=>'people_editprofile'));
 
 	//for security, include group_id
 	$sql="SELECT * FROM users WHERE user_id='". user_getid() ."'";
@@ -94,7 +100,6 @@ if (user_isloggedin()) {
 	} else {
 
 		echo '
-		<H2>Edit Your Profile</H2>
 		<P>
 		Now you can edit/change the list of your skills and your resume. 
 		The list of skills can then be matched with the list of jobs in 

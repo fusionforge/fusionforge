@@ -1,10 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Code Snippets Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
 
 /*
 	Code Snippet System
@@ -67,6 +73,7 @@ $SCRIPT_LANGUAGE[12] = 'Lisp';
 $SCRIPT_LANGUAGE[13] = 'Mixed';
 $SCRIPT_LANGUAGE[14] = 'JavaScript';
 $SCRIPT_LANGUAGE[15] = 'SQL';
+$SCRIPT_LANGUAGE[16] = 'C#';
 
 function snippet_header($params) {
 	global $DOCUMENT_ROOT,$HTML;
@@ -76,7 +83,6 @@ function snippet_header($params) {
 		Show horizontal links
 	*/
 	echo '<FONT face="arial, helvetica">';
-	echo '<H2>' . $params['header'] . '</H2>';
 	echo '<P><B>';
 	echo '<A HREF="/snippet/">Browse</A>
 		 | <A HREF="/snippet/submit.php">Submit A New Snippet</A>

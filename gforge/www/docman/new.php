@@ -1,20 +1,24 @@
 <?php
+/**
+  *
+  * SourceForge Documentaion Manager
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-//
 
 /*
-	Docmentation Manager
 	by Quentin Cregan, SourceForge 06/2000
 */
 
 
-require('doc_utils.php');
-require('pre.php');
+require_once('doc_utils.php');
+require_once('pre.php');
 
 if($group_id) {
 
@@ -40,19 +44,22 @@ if($group_id) {
 		}
 
 		if ($upload_instead) {
+			if (!util_check_fileupload($uploaded_data)) {
+				exit_error("Error","Invalid filename");
+			}
 		        $data = addslashes(fread( fopen($uploaded_data, 'r'), filesize($uploaded_data)));
         		if ((strlen($data) > 20) && (strlen($data) < 512000)) {
                 		//size is fine
                 		$feedback .= ' Document Uploaded ';
         		} else {
                 		//too big or small
-                		$feedback .= ' ERROR - patch must be > 20 chars and < 512000 chars in length ';
+                		$feedback .= ' ERROR - document must be > 20 chars and < 512000 chars in length ';
                 		exit_error('Missing Info',$feedback.' - Please click back and fix the error.');
         		}
 		}
 
 		
-		docman_header('Documentation - Add Information - Processing','Documentation - New submission');
+		docman_header('Documentation - Add Information - Processing','Documentation - New submission','docman_new','',group_getname($group_id));
 
 		$query = "insert into doc_data(stateid,title,data,createdate,updatedate,created_by,doc_group,description,language_id) "
 		."values('3',"
@@ -66,19 +73,24 @@ if($group_id) {
 		."'".htmlspecialchars($description)."',"
 		."'".$language_id."')";
 	
-		db_query($query); 
+		$res = db_query($query); 
 		//PROBLEM check the query
 
-		print "<p><b>Thank You!  Your submission has been placed in the database for review before posting.</b> \n\n<p>\n <a href=\"/docman/index.php?group_id=".$group_id."\">Back</a>"; 
+		if (!$res || db_affected_rows($res)<1) {
+			print '<p><b><font color="red">Error adding new document: '.db_error().'</font></b></p>';
+		} else {
+			print "<p><b>Thank You!  Your submission has been placed in the database for review before posting.</b> \n\n<p>\n <a href=\"/docman/index.php?group_id=".$group_id."\">Back</a>"; 
+		}
 
 		docman_footer($params);
 	} else {
-		docman_header('Add documentation','Add documentation');
-		if ($user == 100) {
+		docman_header('Add documentation','Add documentation','docman_new','',group_getname($group_id));
+		if (get_group_count($group_id) > 0){
+			if ($user == 100) {
   			print "<p>You are not logged in, and will not be given credit for this.<p>";
-		}
-
-		echo '
+			}
+			
+			echo '
 			<p>
 
 			<b> Document Title: </b> Refers to the relatively brief title of the document (e.g. How to use the download server)
@@ -108,9 +120,9 @@ if($group_id) {
 			<th> Language:</th>
 			<td>';
 			
-		echo html_get_language_popup($Language,'language_id',1);
+			echo html_get_language_popup($Language,'language_id',1);
 			
-		echo	'</td>
+			echo	'</td>
 			</tr>
 
 			<tr>
@@ -122,14 +134,25 @@ if($group_id) {
 			<th>Group that document belongs in:</th>
 			<td>';
 
-		display_groups_option($group_id);
+			display_groups_option($group_id);
 
-		echo '	</td> </tr> </table>
+			echo '	</td> </tr> </table>
 
 			<input type="submit" value="Submit Information">
 
 			</form> '; 
-	
+		}	// end if (project has doc categories)
+		else {
+			echo("At least one documentation category must be defined before you can submit a document.<BR>");
+			
+			$group = new Group($group_id);
+			$perm =& $group->getPermission( session_get_user() );
+
+			// if an admin, prompt for adding a category
+			if ( $perm->isDocEditor() || $perm->isAdmin() ) {
+				echo("<a href=\"/docman/admin/index.php?mode=editgroups&group_id=" . $group_id . "\">Add a document group</a>");
+			}
+		}
 		docman_footer($params);
 	} // end else.
 

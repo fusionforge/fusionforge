@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../pm_utils.php');
+
+require_once('pre.php');
+require_once('www/pm/pm_utils.php');
 
 /*
 
@@ -62,9 +68,7 @@ if ($group_id && user_ismember($group_id,'P2')) {
 			Show categories and blank row
 		*/
 
-		pm_header(array ('title'=>'Add Projects'));
-
-		echo '<H1>Add Subprojects to the Project/Task Manager</H1>';
+		pm_header(array ('title'=>'Add Projects','pagename'=>'pm_admin_projects','sectionvals'=>group_getname($group_id)));
 
 		/*
 			List of possible categories for this group
@@ -107,7 +111,7 @@ if ($group_id && user_ismember($group_id,'P2')) {
 		/*
 			Change a project to public/private
 		*/
-		pm_header(array('title'=>'Change Project/Task Manager Status'));
+		pm_header(array('title'=>'Change Project/Task Manager Status','pagename'=>'pm_admin_change_status','sectionvals'=>group_getname($group_id)));
 
 		$sql="SELECT project_name,group_project_id,is_public,description ".
 			"FROM project_group_list ".
@@ -123,7 +127,6 @@ if ($group_id && user_ismember($group_id,'P2')) {
 			echo db_error();
 		} else {
 			echo '
-			<H2>Update Project/Task Manager</H2>
 			<P>
 			You can make subprojects in the Project/Task Manager private from here. Please note that private subprojects
 			can still be viewed by members of your project, but not the general public.<P>';
@@ -172,10 +175,9 @@ if ($group_id && user_ismember($group_id,'P2')) {
 		/*
 			Show main page
 		*/
-		pm_header(array('title'=>'Project/Task Manager Administration'));
+		pm_header(array('title'=>'Project/Task Manager Administration','pagename'=>'pm_admin','sectionvals'=>group_getname($group_id)));
 
 		echo '
-			<H2>Project/Task Manager Administration</H2>
 			<P>
 			<A HREF="'.$PHP_SELF.'?group_id='.$group_id.'&projects=1">Add A Subproject</A><BR>
 			Add a project, which can contain a set of tasks. This is different than creating a new task.

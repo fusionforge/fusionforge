@@ -1,19 +1,25 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people/people_utils.php');
 
-people_header(array('title'=>'Help Wanted System'));
+require_once('pre.php');
+require_once('../people/people_utils.php');
 
 if ($group_id) {
 
-	echo '<H3>Project Help Wanted for '. group_getname($group_id) .'</H3>
+	people_header(array('title'=>'Help Wanted System','pagename'=>'people_proj','titlevals'=>array(group_getname($group_id))));
+
+	echo '
 	<P>
 	Here is a list of positions available for this project.
 	<P>';
@@ -22,7 +28,9 @@ if ($group_id) {
 	
 } else if ($category_id) {
 
-	echo '<H3>Projects looking for '. people_get_category_name($category_id) .'</H3>
+	people_header(array('title'=>'Help Wanted System','pagename'=>'people_cat','titlevals'=>array(people_get_category_name($category_id))));
+
+	echo '
 		<P>
 		Click job titles for more detailed descriptions.
 		<P>';
@@ -30,22 +38,10 @@ if ($group_id) {
 
 } else {
 
-	echo '
-	<H3>Projects Needing Help</H3>
-	The SourceForge Project Help Wanted board is for non-commercial, project
-	volunteer openings. Commercial use is prohibited.
-	<P>
-	Project listings remain live for two weeks, or until closed by the
-	poster, whichever comes first. (Project administrators may always
-	re-post expired openings.)
-	<P>
-	Browse through the category menu to find projects looking for your help.
-	<P>
-	If you\'re a project admin, log in and submit help wanted requests through
-	your project administration page.
-	<P>
-	To suggest new job categories, submit a request via the support manager.
-		<P>';
+	people_header(array('title'=>'Help Wanted System','pagename'=>'people'));
+
+	echo $Language->getText('people','about_blurb');
+
 	echo people_show_category_table();
 
         echo '<h4>Last posts</h4>';

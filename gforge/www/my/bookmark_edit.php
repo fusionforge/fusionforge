@@ -1,16 +1,21 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
+/**
+  *
+  * SourceForge User's Personal Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
-require ('bookmarks.php');
 
-site_user_header(array("title"=>"Edit Bookmark"));
+require_once('pre.php');
+require_once('bookmarks.php');
 
-print "<H3>Edit Bookmark</H3>";
+site_user_header(array("title"=>"Edit Bookmark",'pagename'=>'my_bookmark_edit'));
 
 if ($bookmark_url && $bookmark_title) {
 	bookmark_edit($bookmark_id, $bookmark_url, $bookmark_title);

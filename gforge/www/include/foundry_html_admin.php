@@ -1,6 +1,15 @@
 <?php
+/**
+ * Foundry freeform HTML admin page
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: foundry_html_admin.php,v 1.10 2001/06/08 18:22:43 dbrogdon Exp $
+ */
 
-require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
+require_once('www/project/admin/project_admin_utils.php');
 
 //must be a project admin
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
@@ -11,7 +20,7 @@ if ($update) {
 	echo db_error();
 }
 
-project_admin_header(array('title'=>"Project Admin: ".group_getname($group_id),'group'=>$group_id));
+project_admin_header(array('title'=>"Project Admin: ".group_getname($group_id),'group'=>$group_id,'pagename'=>'foundry_html_admin'));
 
 if (!$field) {
 

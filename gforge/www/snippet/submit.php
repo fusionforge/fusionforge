@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Code Snippets Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
-require ('../snippet/snippet_utils.php');
+
+require_once('pre.php');
+require_once('www/snippet/snippet_utils.php');
 
 if (user_isloggedin()) {
 
@@ -47,10 +53,9 @@ if (user_isloggedin()) {
 		}
 
 	}
-	snippet_header(array('title'=>'Submit A New Snippet'));
+	snippet_header(array('title'=>'Submit A New Snippet','pagename'=>'snippet_submit'));
 
 	?>
-	<H1>Post a New Code Snippet</H2>
 	<P>
 	You can post a new code snippet and share it with other people around the world. 
 	Just fill in this information. <B>Give a good description</B> and <B>comment your code</B> 

@@ -1,14 +1,21 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$ 
-require('pre.php');
-require('site_stats_utils.php');
+/**
+  *
+  * SourceForge Sitewide Statistics
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-   // require you to be a member of the sfstats group
+
+require_once('pre.php');
+require_once('site_stats_utils.php');
+
+// require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
 $HTML->header(array('title'=>"SourceForge Site Statistics "));
@@ -37,17 +44,18 @@ print '<font size="+1"><b>Sitewide Agregate Statistics </b></font><BR>' . "\n";
 
 <?php
 
-stats_site_agregate( $group_id );
-print '<BR><BR>' . "\n";
-stats_site_projects_daily( 14 );
-print '<BR><BR>' . "\n";
-//stats_site_projects_weekly( 52 );
+stats_site_agregate();
+print '<BR><BR>';
+stats_site_projects_daily( 7 );
+print '<BR><BR>';
+stats_site_projects_monthly( );
 print '<BR><BR>' . "\n";
 print '</DIV>' . "\n";
 echo '
 <p>Other statistics:
 <ul>
-<li><a href="i18n.php">i18n statistics</a>
+<li><a href="lastlogins.php">Most Recent Logins</A>
+<li><a href="i18n.php">I18n Statistics</a>
 </ul>
 </p>
 ';

@@ -1,10 +1,13 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * logger.php
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 /*
 	Determine group
@@ -23,9 +26,19 @@ if ($group_id) {
 	//
 	$expl_pathinfo = explode('/',$REQUEST_URI);
 	if (($expl_pathinfo[1]=='foundry') || ($expl_pathinfo[1]=='projects')) {
-		$res_grp=db_query("SELECT * FROM groups WHERE unix_group_name='$expl_pathinfo[2]'");
+		$res_grp=db_query("
+			SELECT *
+			FROM groups
+			WHERE unix_group_name='$expl_pathinfo[2]'
+			AND status IN ('A','H')
+		");
+		
+		// store subpage id for analyzing later
+		$subpage = $expl_pathinfo[3];
+		$subpage2 = $expl_pathinfo[4];
+
 		//set up the group_id
-       		$group_id=db_result($res_grp,0,'group_id');
+	   	$group_id=db_result($res_grp,0,'group_id');
 		//set up a foundry object for reference all over the place
 		if ($group_id) {
 			$grp =& group_get_object($group_id,$res_grp);

@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * stats_function.php
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
-require('HTML_Graphs.php');
+require_once('HTML_Graphs.php');
 
+/**
+ * stats_sf_stats() - Get SourceForge stats
+ */
 function stats_sf_stats() {
 	global $sys_datefmt;
 /*
@@ -110,6 +116,9 @@ function stats_sf_stats() {
 }
 
 
+/**
+ * stats_project_stats() - Get project stats
+ */
 function stats_project_stats() {
 /*
 	logo impressions/day
@@ -148,6 +157,9 @@ function stats_project_stats() {
 }
 
 
+/**
+ * stats_browser_stats() - Get browser stats
+ */
 function stats_browser_stats() {
 /*
 	Browser

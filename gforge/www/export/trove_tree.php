@@ -1,15 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
+/**
+  *
+  * SourceForge Exports: Export Trove category tree in XML
+  *
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-/*
- * Export SourceForge Trove Tree in XML
- */
 
-require ('pre.php');
+require_once('pre.php');
 
 header("Content-Type: text/plain");
 print("<?xml version=\"1.0\"?>
@@ -28,8 +32,12 @@ print('  <category id="0" name="root" fullname="Trove Root" description="Root of
 
 function dump_subtree($root) {
         global $level;
-	$sql="SELECT * FROM trove_cat WHERE parent=$root";
-        $res=db_query($sql);
+	$res = db_query("
+		SELECT *
+		FROM trove_cat
+		WHERE parent='$root'
+	", -1, 0, SYS_DB_TROVE);
+
         if (db_numrows($res)==0) {
 		// leaf category
 		print(" />\n");

@@ -1,12 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Web Theme Control Page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
+
+require_once('pre.php');
+
 session_require(array('isloggedin'=>'1'));
 
 switch ($theme_action) {
@@ -90,11 +97,10 @@ switch ($font_action){
 }
 
 $title = 'Choose Your Theme';
-$HTML->header(array('title'=>$title));
+$HTML->header(array('title'=>$title,'pagename'=>'themes'));
 
-echo "<H3>$title</H3>";
 // get global user vars
-$res_user = db_query("SELECT * FROM users WHERE user_id=" . user_getid());
+$res_user = db_query("SELECT * FROM users WHERE user_id='".user_getid()."'");
 $row_user = db_fetch_array($res_user);
 
 $HTML->box1_top("Choosing Theme and Colors for " . user_getname()); ?>

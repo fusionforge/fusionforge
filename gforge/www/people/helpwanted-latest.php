@@ -1,18 +1,24 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people/people_utils.php');
 
-people_header(array('title'=>'Help Wanted Latest Posts'));
+require_once('pre.php');
+require_once('www/people/people_utils.php');
+
+people_header(array('title'=>'Help Wanted Latest Posts','pagename'=>'people_helpwanted_latest'));
 
 {
-        echo '<h3>Last posts</h3>';
+        echo '<p>';
 
 	$sql="SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.date,people_job_category.name AS category_name ".
 		"FROM people_job,people_job_category,groups ".

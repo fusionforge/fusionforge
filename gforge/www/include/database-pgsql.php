@@ -1,34 +1,33 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
-//
+/**
+ * PostgreSQL database connection/querying layer
+ *
+ * ALPHA VERSION - not debugged!!
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
-/*
-
-	ALPHA VERSION - not debugged!!
-
-	This is the PostgreSQL version of our 
-	database connection/querying layer
-
-*/
-
-//$conn - database connection handle
-$sys_db_row_pointer=array(); //current row for each result set
+/**
+ * Database connection handle
+ *
+ * Current row for each result set 
+ *
+ * @var	array	$sys_db_row_pointer
+ */
+$sys_db_row_pointer=array(); 
 
 
 /**
- *
- *  Connect to the database
+ *  db_connect() - Connect to the database
  *  Notice the global vars that must be set up
  *  Sets up a global $conn variable which is used 
  *  in other functions in this library
  *
  */
-
 function db_connect() {
 	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$conn,$sys_dbname;
 	$conn = @pg_pconnect("user=$sys_dbuser dbname=$sys_dbname host=$sys_dbhost password=$sys_dbpasswd"); 
@@ -36,15 +35,12 @@ function db_connect() {
 }
 
 /**
+ *  db_query() - Query the database
  *
- *  Query the database
- *
- *  @param qstring - SQL statement
- *  @param limit - how many rows do you want returned
- *  @param offset - of matching rows, return only rows starting here
- *
+ *  @param		string	SQL statement
+ *  @param		int		How many rows do you want returned
+ *  @param		int		Of matching rows, return only rows starting here
  */
-
 function db_query($qstring,$limit='-1',$offset=0) {
 	global $QUERY_COUNT;
 	$QUERY_COUNT++;
@@ -63,131 +59,106 @@ function db_query($qstring,$limit='-1',$offset=0) {
 }
 
 /**
- *      db_begin()
- *
- *      begin a transaction
+ * db_begin() - Begin a transaction
  */
 function db_begin() {
 	return db_query("BEGIN WORK");
 }
 
 /**
- *      db_commit()
- *
- *      commit a transaction
+ * db_commit() - Commit a transaction
  */
 function db_commit() {
 	return db_query("COMMIT");
 }
 
 /**
- *      db_rollback()
- *
- *      rollback a transaction
+ * db_rollback() - Rollback a transaction
  */
 function db_rollback() {
 	return db_query("ROLLBACK");
 }
 
 /**
- *	db_numrows()
+ *	db_numrows() - Returns the number of rows in this result set
  *
- *	Returns the number of rows in this result set
- *	@param qhandle query result set handle
+ *	@param		string	Query result set handle
  */
-
 function db_numrows($qhandle) {
 	return @pg_numrows($qhandle);
 }
 
 /**
+ * db_free_result() -  Frees a database result properly 
  *
- *  Frees a database result properly 
- *
- *  @param qhandle query result set handle
- *
+ * @param		string	Query result set handle
  */
-
 function db_free_result($qhandle) {
 	return @pg_freeresult($qhandle);
 }
 
 /**
+ * db_reset_result() - Reset a result set
  *
- *  Reset is useful for db_fetch_array
- *  sometimes you need to start over
+ * Reset is useful for db_fetch_array
+ * sometimes you need to start over
  *
- *  @param qhandle query result set handle
- *  @param row - integer row number
- *
+ * @param		string	Query result set handle
+ * @param		int		Row number
  */
-
 function db_reset_result($qhandle,$row=0) {
 	global $sys_db_row_pointer;
 	return $sys_db_row_pointer[$qhandle]=$row;
 }
 
 /**
+ *  db_result() - Returns a field from a result set
  *
- *  Returns a field from a result set
- *
- *  @param qhandle query result set handle
- *  @param row - integer row number
- *  @param field - text field name
- *
+ *  @param		string	Query result set handle
+ *  @param		int		Row number
+ *  @param		string	Field name
  */
-
 function db_result($qhandle,$row,$field) {
 	return @pg_result($qhandle,$row,$field);
 }
 
 /**
+ *  db_numfields() - Returns the number of fields in this result set
  *
- *  Returns the number of fields in this result set
- *
- *  @param qhandle query result set handle
- *
+ *  @param		string	Query result set handle
  */
-
 function db_numfields($lhandle) {
 	return @pg_numfields($lhandle);
 }
 
 /**
+ *  db_fieldname() - Returns the number of rows changed in the last query
  *
- *  Returns the number of rows changed in the last query
- *
- *  @param qhandle - query result set handle
- *  @param fnumber - column number
- *
+ *  @param		string	Query result set handle
+ *  @param		int		Column number
  */
-
 function db_fieldname($lhandle,$fnumber) {
 	return @pg_fieldname($lhandle,$fnumber);
 }
 
 /**
+ *  db_affected_rows() - Returns the number of rows changed in the last query
  *
- *  Returns the number of rows changed in the last query
- *
- *  @param qhandle query result set handle
- *
+ *  @param		string	Query result set handle
  */
-
 function db_affected_rows($qhandle) {
 	return @pg_cmdtuples($qhandle);
 }
 
 /**
+ *  db_fetch_array() - Fetch an array
  *
  *  Returns an associative array from 
  *  the current row of this database result
  *  Use db_reset_result to seek a particular row
  *
- *  @param qhandle query result set handle
- *
+ *  @param		string	Query result set handle
  */
-
 function db_fetch_array($qhandle) {
 	global $sys_db_row_pointer;
 	$sys_db_row_pointer[$qhandle]++;
@@ -195,15 +166,12 @@ function db_fetch_array($qhandle) {
 }
 
 /**
+ *  db_insertid() - Returns the last primary key from an insert
  *
- *  Returns the last primary key from an insert
- *
- *  @param qhandle query result set handle
- *  @param table_name is the name of the table you inserted into
- *  @param pkey_field_name is the field name of the primary key
- *
+ *  @param		string	Query result set handle
+ *  @param		string	Is the name of the table you inserted into
+ *  @param		string	Is the field name of the primary key
  */
-
 function db_insertid($qhandle,$table_name,$pkey_field_name) {
 	$oid=@pg_getlastoid($qhandle);
 	if ($oid) {
@@ -225,11 +193,8 @@ function db_insertid($qhandle,$table_name,$pkey_field_name) {
 }
 
 /**
- *
- *  Returns the last error from the database
- *
+ *  db_error() - Returns the last error from the database
  */
-
 function db_error() {
 	global $conn;
 	return @pg_errormessage($conn);

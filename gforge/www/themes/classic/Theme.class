@@ -1,11 +1,15 @@
 <?php   
-
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//              
-// $Id: Theme.class,v 1.4 2000/11/30 16:13:44 dbrogdon Exp $
+/**
+  *
+  * "Classic" (very first) Web Theme
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: Theme.class,v 1.7 2001/05/22 16:06:38 pfalcon Exp $
+  *
+  */
 
 
 /*
@@ -91,6 +95,9 @@ class Theme extends Layout {
 	// ############################
 
 	function header($params) {
+
+		global $Language;
+
 	        $this->generic_header_start($params);
 
 	        //themable someday?
@@ -209,6 +216,31 @@ class Theme extends Layout {
         <!-- content -->
 
         <td width="99%">
+
+        <?php
+
+        if ($params['titlevals']) {
+                $title =        $Language->getText($params['pagename'],'title',$params['titlevals']);
+        } else {
+                $title =        $Language->getText($params['pagename'],'title');
+        }
+
+        if ($params['sectionvals']) {
+                $section =      $Language->getText($params['pagename'],'section',$params['sectionvals']);
+        } else {
+                $section =      $Language->getText($params['pagename'],'section');
+        }
+
+        if ($section) {
+                print "<b>$section</b>\n";
+        }
+
+        if ($title) {
+               print "<h2>$title</h2>\n";
+        }
+
+	?>
+
         &nbsp;<BR>
         	<?php
 	}
@@ -275,7 +307,7 @@ class Theme extends Layout {
                 	print 'class=tabs ';
 	        }
         	print 'href="'. $url .'">';
-	        html_image($icon,'24','24',array('alt'=>"$title",'border'=>($selected?'1':'0')));
+	        print html_image($icon,'24','24',array('alt'=>"$title",'border'=>($selected?'1':'0')));
         	print '</A>';
 	}
 

@@ -12,6 +12,7 @@ $db_include	=	"/etc/local.inc";	# Local Include file for database username and p
 $tar_dir	=	"/tmp";			# Place to put deleted user's accounts
 $uid_add	=	"20000";		# How much to add to the database uid to get the unix uid
 $gid_add	=	"1000";			# How much to add to the database gid to get the unix uid
+$anoncvs_add	=	"2000";			# How much to add to the gid to get the unix uid of anoncvs user
 $homedir_prefix =	"/home/users/";		# What prefix to add to the user's homedir
 $grpdir_prefix  =	"/home/groups/";	# What prefix to add to the user's homedir
 $file_dir	=	"/home/dummy/dumps/";	# Where should we stick files we're working with

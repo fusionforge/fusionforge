@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Forums Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../forum/forum_utils.php');
+
+require_once('pre.php');
+require_once('www/forum/forum_utils.php');
 
 if (user_isloggedin()) {
 	/*
@@ -52,7 +58,7 @@ if (user_isloggedin()) {
 			}
 		} 
 	} else {
-		forum_header(array('title'=>'Choose a forum First'));
+		forum_header(array('title'=>'Choose a forum First','paganame'=>'forum'));
 		echo '
 			<H1>Error - Choose a forum First</H1>';
 		forum_footer(array());

@@ -1,12 +1,15 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: theme.php,v 1.31 2000/12/13 23:00:22 dbrogdon Exp $
-
-// Make sure '/etc/local.inc' is required in pre.php!
+/**
+  *
+  * "Classic" (very first) Web Theme
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: theme.php,v 1.32 2001/05/22 16:06:38 pfalcon Exp $
+  *
+  */
 
 /* Dependencies upon this file:
 	include/menu.php

@@ -1,71 +1,89 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * Registration verification page
+  *
+  * This page is accessed with the link sent in account confirmation
+  * email.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require "pre.php";    
+require_once('pre.php');
 
-function account_verify($password,$user_name,$confirm_hash) {
-	global $feedback;
+if ($submit) {
 
-	if (!$user_name) {
-		$feedback .= ' Must Enter a User Name ';
-		return false;
+	if (!$loginname) {
+		exit_error(
+			'Missing paramater',
+			'You must enter a user name.'
+		);
 	}
 
-	// first check just confirmation hash
-	$res = db_query("SELECT confirm_hash,status FROM users 
-		WHERE user_name='" . strtolower($user_name) . "'");
+	$u = user_get_object_by_name($loginname);
 
-	if (db_numrows($res) < 1) {
-		$feedback .= ' Invalid username ';
-		return false;
-	}
-	$usr = db_fetch_array($res);
-
-	if (strcmp($confirm_hash,$usr['confirm_hash'])) {
-		$feedback .= ' Invalid confirmation hash ';
-		return false;
+	if (!$u || !is_object($u)){
+		exit_error(
+			'Invalid user',
+			'User does not exist.'
+		);
 	}
 
-	// then check valid login	
-	return (session_login_valid(strtolower($user_name),$password,1));
+	if ($u->getStatus()=='A'){
+		exit_error(
+			'Invalid operation',
+			'Account already active.'
+		);
+	}
+
+	$confirm_hash = html_clean_hash_string($confirm_hash);
+
+	if ($confirm_hash != $u->getConfirmHash()) {
+		exit_error(
+			'Invalid parameter',
+			'Cannot confirm account identity - invalid confirmation hash (or login name)'
+		);
+	}
+
+	if (!session_login_valid($loginname, $passwd, 1)) {
+		exit_error(
+			'Access denied',
+			'Credentials you entered do not correspond to valid account.'
+		);
+	}
+
+	if (!$u->setStatus('A')) {
+		exit_error(
+			'Could not activate account',
+			'Error while activiting account: '.$u->getErrorMessage()
+		);
+	}
+
+	session_redirect("/account/first.php");
 }
 
-// ###### first check for valid login, if so, redirect
+$HTML->header(array('title'=>'Login','pagename'=>'account_verify'));
 
-if ($Login){
-	$success=account_verify($form_pw,$form_loginname,$confirm_hash);
-	if ($success) {
-		$res = db_query("UPDATE users SET status='A' 
-			WHERE user_name='" . strtolower($form_loginname) . "'");
-		session_redirect("/account/first.php");
-	} else {
-		exit_error('ERROR',$feedback);
-	}
-}
+echo $Language->getText('account_verify', 'verify_blurb');
 
-$HTML->header(array('title'=>'Login'));
-
-?>
-<p><b>SourceForge Account Verification</b>
-<P>In order to complete your registration, login now. Your account will
-then be activated for normal logins.
-<?php 
 if ($GLOBALS['error_msg']) {
 	print '<P><FONT color="#FF0000">'.$GLOBALS['error_msg'].'</FONT>';
 }
 ?>
-<form action="verify.php" method="post">
+
+<form action="<?php echo $PHP_SELF; ?>" method="POST">
+
 <p>Login Name:
-<br><input type="text" name="form_loginname">
+<br><input type="text" name="loginname">
 <p>Password:
-<br><input type="password" name="form_pw">
+<br><input type="password" name="passwd">
 <INPUT type="hidden" name="confirm_hash" value="<?php print $confirm_hash; ?>">
-<p><input type="submit" name="Login" value="Login">
+<p><input type="submit" name="submit" value="Login">
 </form>
 
 <?php

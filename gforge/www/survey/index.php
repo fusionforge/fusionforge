@@ -1,20 +1,26 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('vote_function.php');
-require('../survey/survey_utils.php');
 
-survey_header(array('title'=>'Survey'));
+require_once('pre.php');
+require_once('vote_function.php');
+require_once('www/survey/survey_utils.php');
 
 if (!$group_id) {
 	echo "<H1>For some reason, the Group ID or Survey ID did not make it to this page</H1>";
 }
+
+survey_header(array('title'=>'Survey','pagename'=>'survey','sectionvals'=>array(group_getname($group_id))));
 
 Function  ShowResultsGroupSurveys($result) {
 	global $group_id;
@@ -51,7 +57,6 @@ if (!$result || db_numrows($result) < 1) {
 	echo "<H2>This Group Has No Active Surveys</H2>";
 	echo db_error();
 } else {
-	echo "<H2>Surveys for ".group_getname($group_id)."</H2>";
 	ShowResultsGroupSurveys($result);
 }
 

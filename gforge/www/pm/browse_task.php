@@ -1,13 +1,29 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
 
 if (!$offset || $offset < 0) {
 	$offset=0;
+}
+
+//
+//  Set up local objects
+//
+$g =& group_get_object($group_id);
+
+if (user_isloggedin()) {
+	$u =& session_get_user();
+	$perm =& $g->getPermission($u);
 }
 
 //
@@ -16,15 +32,15 @@ if (!$offset || $offset < 0) {
 //
 if ($order) {
 	if ($order=='project_task_id' || $order=='percent_complete' || $order=='summary' || $order=='start_date' || $order=='end_date' || $order=='priority') {
-		if(user_isloggedin()) {
-			user_set_preference('pm_task_order', $order);
+		if (user_isloggedin()) {
+			$u->setPreference('pm_task_order', $order);
 		}
 	} else {
 		$order = false;
 	}
 } else {
-	if(user_isloggedin()) {
-		$order = user_get_preference('pm_task_order');
+	if (user_isloggedin()) {
+		$order = $u->getPreference('pm_task_order');
 	}
 }
 
@@ -42,7 +58,7 @@ if (!$set) {
 		if no preference or not logged in, use open set
 	*/
 	if (user_isloggedin()) {
-		$custom_pref=user_get_preference('pm_brow_cust'.$group_id);
+		$custom_pref=$u->getPreference('pm_brow_cust'.$group_id);
 		if ($custom_pref) {
 			$pref_arr=explode('|',$custom_pref);
 			$_assigned_to=$pref_arr[0];
@@ -69,9 +85,9 @@ if ($set=='my') {
 		if this custom set is different than the stored one, reset preference
 	*/
 	$pref_=$_assigned_to.'|'.$_status;
-	if ($pref_ != user_get_preference('pm_brow_cust'.$group_id)) {
+	if (user_isloggedin() && ($pref_ != $u->getPreference('pm_brow_cust'.$group_id))) {
 		//echo 'setting pref';
-		user_set_preference('pm_brow_cust'.$group_id,$pref_);
+		$u->setPreference('pm_brow_cust'.$group_id,$pref_);
 	}
 } else if ($set=='closed') {
 	/*
@@ -117,9 +133,18 @@ if ($_assigned_to) {
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
+
+if ($set == "my") {
+	$pagename = "pm_browse_my";
+} elseif ($set == "open") {
+	$pagename = "pm_browse_open";
+} else {
+	$pagename = "pm_browse_custom";
+}
+
 pm_header(array('title'=>'Browse Tasks'.
 	(($_assigned_to)?' For: '.user_getname($_assigned_to):'').
-	(($_status && ($_status != 100))?' By Status: '.pm_data_get_status_name($_status):'')));
+	(($_status && ($_status != 100))?' By Status: '.pm_data_get_status_name($_status):''),'pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>group_getname($group_id)));
 
 $sql="SELECT project_task.priority,project_task.group_project_id,project_task.project_task_id,".
 	"project_task.start_date,project_task.end_date,project_task.percent_complete,project_task.summary ".
@@ -133,7 +158,7 @@ $message="Browsing Custom Task List";
 $result=db_query($sql,51,$offset);
 
 /*
-        creating a custom technician box which includes "any" and "unassigned"
+		creating a custom technician box which includes "any" and "unassigned"
 */
 
 $res_tech=pm_data_get_technicians ($group_id);

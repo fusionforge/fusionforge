@@ -1,4 +1,13 @@
 <?php
+/**
+ * osdn.php
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: osdn.php,v 1.121 2001/06/27 00:14:30 jbyers Exp $
+ */
 $osdn_sites[0] = array('Freshmeat' => 'http://www.freshmeat.net/');
 $osdn_sites[1] = array('Geocrawler' => 'http://www.geocrawler.com/');
 $osdn_sites[2] = array('Linux.Com' => 'http://www.linux.com/');
@@ -9,6 +18,9 @@ $osdn_sites[6] = array('Slashdot.Org' => 'http://www.slashdot.com/');
 $osdn_sites[7] = array('Themes.Org' => 'http://www.themes.org/');
 $osdn_sites[8] = array('Thinkgeek' => 'http://www.thinkgeek.com/');
 
+/**
+ * osdn_nav_dropdown() - Show the nav bar dropdown of all the OSDN sites.
+ */
 function osdn_nav_dropdown() {
 	GLOBAL $osdn_sites;
 ?>
@@ -43,13 +55,15 @@ function osdn_nav_dropdown() {
 
 	<!-- end OSDN navdropdown -->
 
-
 <?php
 }
 
-/*
-	Picks random OSDN sites to display
-*/
+/**
+ * osdn_print_randpick() - Picks random OSDN sites to display
+ *
+ * @param		array	Array of sites
+ * @param		int		Number of sites to print
+ */
 function osdn_print_randpick($sitear, $num_sites = 1) {
 	shuffle($sitear);
 	reset($sitear);
@@ -61,6 +75,9 @@ function osdn_print_randpick($sitear, $num_sites = 1) {
 	print '&nbsp;&middot;&nbsp;';
 }
 
+/**
+ * osdn_print_navbar() - Show the navbar
+ */
 function osdn_print_navbar() {
 
 
@@ -73,7 +90,7 @@ OSDN navbar
 	<tr> 
 		<td valign="middle" align="left" bgcolor="#6C7198">
 		<SPAN class="osdn">
-			<font face="arial,geneva,helvetica,verdana,sans-serif" size="-2" color="#ffffff">&nbsp;&nbsp;&nbsp;<b><a href="http://osdn.com/" style="text-decoration:none"><font color="#ffffff">O&nbsp;<font color="#9b9b9b">|</font>&nbsp;S&nbsp;<font color="#9b9b9b">|</font>&nbsp;D&nbsp;<font color="#9b9b9b">|</font>&nbsp;N</font></a>&nbsp;:&nbsp;
+			<font face="arial,geneva,helvetica,verdana,sans-serif" size="-2" color="#ffffff">&nbsp;&nbsp;&nbsp;<b><a href="http://osdn.com/" style="text-decoration:none"><font color="#ffffff">O&nbsp;<font color="#9b9b9b">|</font>&nbsp;S&nbsp;<font color="#9b9b9b">|</font>&nbsp;D&nbsp;<font color="#9b9b9b">|</font>&nbsp;N</font></a></b></font>&nbsp;:&nbsp;
 ';
 	osdn_print_randpick($GLOBALS['osdn_sites'], 3);
 	print '
@@ -88,7 +105,8 @@ OSDN navbar
 */
 	print '
 		<a href="http://www.osdn.com/partner_programs.shtml" style="text-decoration:none"><font color="#ffffff">PARTNERS</font></a>&nbsp;&middot;&nbsp; 
-		<a href="http://www.osdn.com/gallery.pl?type=community" style="text-decoration:none"><font color="#ffffff">AFFILIATES</font></a>&nbsp;</b></font>
+		<a href="http://www.osdn.com/gallery.pl?type=community" style="text-decoration:none"><font color="#ffffff">AFFILIATES</font></a>&nbsp;&middot;&nbsp; 
+		<a href="http://jobs.osdn.com" style="text-decoration:none"><font color="#ffffff">JOBS</font></a>&nbsp;</b></font>
 		</SPAN>
 		</td>
 	</tr>
@@ -102,28 +120,46 @@ OSDN navbar
 	srand((double)microtime()*1000000);
 	$random_num=rand(0,100000);
 
-	if (session_issecure()) {
+	if (substr($GLOBALS['REQUEST_URI'], 0, 16) == "/foundry/storage") {
 
-		//secure pages use James Byer's Ad server
+    // storage foundry pages use doubleclick for HP ads
+    $ad_protocol = 'http';
+    if (session_issecure()) {
+      $ad_protocol .= 's';
+    } // if
 
+    print "<IFRAME SRC=\"$ad_protocol://ad.doubleclick.net/adi/N2613.osdn/B37181.2;sz=468x60;ord=$random_num\" WIDTH=468 HEIGHT=60 MARGINWIDTH=0 MARGINHEIGHT=0 HSPACE=0 VSPACE=0 FRAMEBORDER=0 SCROLLING=no BORDERCOLOR=\"#000000\">
+  <SCRIPT language=\"JavaScript1.1\" SRC=\"$ad_protocol://ad.doubleclick.net/adj/N2613.osdn/B37181.2;abr=!ie;sz=468x60;ord=$random_num\"></SCRIPT>
+  <NOSCRIPT>
+    <A HREF=\"$ad_protocol://ad.doubleclick.net/jump/N2613.osdn/B37181.2;abr=!ie4;abr=!ie5;sz=468x60;ord=$random_num\">
+    <IMG SRC=\"$ad_protocol://ad.doubleclick.net/ad/N2613.osdn/B37181.2;abr=!ie4;abr=!ie5;sz=468x60;ord=$random_num\" BORDER=0 WIDTH=468 HEIGHT=60></A>
+  </NOSCRIPT>
+</IFRAME>
+";
+
+  } else if (session_issecure() || $GLOBALS['IS_DEBUG']) {
+
+		// secure pages use VA's community ad server (www2.valinux.com)
 		print '<a href="https://www2.valinux.com/adbouncer.phtml?f_s=468x60&f_p=1&f_RzXx='.$random_num.'">'.
 		'<img src="https://www2.valinux.com/adserver.phtml?f_s=468x60&f_p=1&f_RzXx='.$random_num.
 		'" width="468" height="60" border="0" alt=" Advertisement "></a>';
+
 	} else {
 
-		//insecure pages use osdn ad server
-echo '
-<ilayer id="adlayer" visibility="hide" width=468 height=60></ilayer>
+		// insecure pages use OSDN's ad server
+    print '
+    <ilayer id="adlayer" visibility="hide" width=468 height=60></ilayer>
 
-<NOLAYER>
-  <IFRAME SRC="http://sfads.osdn.com/1.html" width="468" height="60" '.
-'frameborder="no" border="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="no">'.
-'<A HREF="http://sfads.osdn.com/cgi-bin/ad_default.pl?click">'.
-'<IMG SRC="http://sfads.osdn.com/cgi-bin/ad_default.pl?display" border=0 height="60" width="468"></A>
-  </IFRAME>
-</NOLAYER>';
+    <NOLAYER>
+      <IFRAME SRC="http://sfads.osdn.com/1.html" width="468" height="60" '.
+      'frameborder="no" border="0" MARGINWIDTH="0" MARGINHEIGHT="0" SCROLLING="no">'.
+      '<A HREF="http://sfads.osdn.com/cgi-bin/ad_default.pl?click">'.
+      '<IMG SRC="http://sfads.osdn.com/cgi-bin/ad_default.pl?display" border=0 height="60" width="468"></A>
+      </IFRAME>
+    </NOLAYER>';
 
-	}
+	} // OSDN
+
 	print '</td>
 		<td valign="center" align="left" bgcolor="#d5d7d9" background="/images/steel3.jpg" WIDTH="20%"><a href="http://www.osdn.com">' . html_image("images/OSDN-lc.gif","100","40",array("hspace"=>"10","border"=>"0","alt"=>" OSDN - Open Source Development Network ")) . '</a>
 	</td>
@@ -131,18 +167,6 @@ echo '
 </table>
 ';
 
-//
-//  Actual layer call must be outside of table for some reason
-//
-/*
-if (!session_issecure()) {
-
-	echo '
-<LAYER SRC="http://sfads.osdn.com/1.html" width=468 height=60 visibility=\'hide\' '.
-'onLoad="moveToAbsolute(adlayer.pageX,adlayer.pageY); clip.height=60; clip.width=468; visibility=\'show\';"></LAYER>';
-
-}
-*/
 echo '<!-- 
 
 

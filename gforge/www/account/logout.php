@@ -1,16 +1,20 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge logout page
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');    
+require_once('pre.php');    
 
-db_query("DELETE FROM session WHERE session_hash='$session_hash'");
+session_logout();
 
-session_cookie('session_hash','');
-session_redirect('/');
+Header('Location: /');
 
 ?>

@@ -1,20 +1,26 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people/people_utils.php');
+
+require_once('pre.php');
+require_once('www/people/people_utils.php');
 
 if ($user_id) {
 
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>'View a User Profile'));
+	people_header(array('title'=>'View a User Profile','pagename'=>'people_viewprofile'));
 
 	//for security, include group_id
 	$sql="SELECT * FROM users WHERE user_id='$user_id'";
@@ -35,7 +41,6 @@ if ($user_id) {
 		}
 
 		echo '
-		<H3>View A User Profile</H3>
 		<P>
 		<TABLE BORDER="0" WIDTH="100%">
 		<TR><TD>

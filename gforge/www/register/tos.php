@@ -1,19 +1,29 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: tos.php,v 1.34 2000/08/31 06:11:36 gherteg Exp $
+/**
+  *
+  * Project Registration: Terms of Service (legal)
+  *
+  * This page presents Terms of Service Agreement and requires user
+  * subscription to it to continue registration.
+  *
+  * Next in sequence: projectinfo.php
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: tos.php,v 1.38 2001/05/13 17:57:29 pfalcon Exp $
+  *
+  */
 
-require("pre.php");    // Initial db and session library, opens session
+
+require_once("pre.php");
+
 session_require( array( isloggedin=>1 ) );
 
-$HTML->header(array(title=>"Terms of Service"));
+$HTML->header(array(title=>"Terms of Service",'pagename'=>'register_tos'));
 
-print "<p><h2>Step 2: Terms of Service Agreement</h2></p>";
-
-include("../tos/tos_text.php");
+include_once('../tos/tos_text.php');
 
 ?> 
 
@@ -22,8 +32,22 @@ include("../tos/tos_text.php");
 <P align=center>By clicking below, you acknowledge that you have read 
 and understand the Terms of Service agreement. Clicking "I AGREE" will
 constitute your legal signature on this document.
-<P><H3 align=center><A href="basicinfo.php">[I AGREE]</A>
-&nbsp;&nbsp;<A href="/">[I DISAGREE]</A></H3>
+
+<table align="center">
+<tr>
+<td>
+<form action="projectinfo.php" method="POST">
+<input type="submit" value="I AGREE">
+</form>
+</td>
+
+<td>
+<form action="/" method="POST">
+<input type="submit" value="I DISAGREE">
+</form>
+</td>
+</tr>
+</table>
 
 <?php
 

@@ -1,12 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: index.php,v 1.27 2000/11/30 16:13:26 dbrogdon Exp $
+/**
+  *
+  * SourceForge Mirrors Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: index.php,v 1.29 2001/05/22 18:52:31 pfalcon Exp $
+  *
+  */
 
-require "pre.php";    
+require_once('pre.php');
+
 $HTML->header(array(title=>"Mirrors of Other Sites"));
 ?>
 <FONT face="arial, helvetica" size="5"><B>Site Mirrors</B></FONT>

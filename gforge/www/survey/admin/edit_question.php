@@ -1,15 +1,22 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Survey Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require($DOCUMENT_ROOT.'/survey/survey_utils.php');
+
+require_once('pre.php');
+require_once('www/survey/survey_utils.php');
+
 $is_admin_page='y';
-survey_header(array('title'=>'Edit A Question'));
+survey_header(array('title'=>'Edit A Question','pagename'=>'survey_admin_edit_question'));
 
 if (!user_isloggedin() || !user_ismember($group_id,'A')) {
 	echo "<H1>Permission Denied</H1>";
@@ -50,7 +57,7 @@ function show_questions() {
 // -->
 </script>
 
-<H2>Edit a Question #<?php echo $question_id; ?></H2>
+<H2>Editing Question #<?php echo $question_id; ?></H2>
 
 <H3><FONT COLOR="RED">WARNING! It is a bad idea to change a question after responses to it have been submitted</FONT></H2> 
 <P>

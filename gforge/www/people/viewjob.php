@@ -1,20 +1,25 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Jobs (aka Help Wanted) Board 
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../people/people_utils.php');
+
+require_once('pre.php');
+require_once('www/people/people_utils.php');
 
 if ($group_id && $job_id) {
 
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>'View a Job'));
 
 	//for security, include group_id
 	$sql="SELECT groups.group_name,people_job_category.name AS category_name,".
@@ -28,13 +33,15 @@ if ($group_id && $job_id) {
 		"AND people_job.job_id='$job_id' AND people_job.group_id='$group_id'";
 	$result=db_query($sql);
 	if (!$result || db_numrows($result) < 1) {
+		people_header(array('title'=>'View a Job','pagename'=>'people_viewjob'));
 		echo db_error();
 		$feedback .= ' POSTING fetch FAILED ';
 		echo '<H2>No Such Posting For This Project</H2>';
 	} else {
 
+		people_header(array('title'=>'View a Job','pagename'=>'people_viewjob','titlevals'=>array(db_result($result,0,'category_name'),db_result($result,0,'group_name')),'sectionvals'=>array(db_result($result,0,'group_name'))));
+//		<H2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</H2>
 		echo '
-		<H2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</H2>
 		<P>
 		<TABLE BORDER="0" WIDTH="100%">
                 <TR><TD COLSPAN="2">

@@ -1,24 +1,20 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @author		Tim Perdue <tperdue@valnux.com>
+ * @version		$Id$
+ * @date		$Date$
+ */
 
 /*
 #######################################################################
 #
-#       $Id$
-#
-#   $Author$
-#   $Locker$
-#
-#     $Date$
-#
 #   $Source$
-# $Revision$
-#    $State$
+#	$Revision$
+#   $State$
 #
 #      Revision 1.5  1998/11/05 06:15:52  pdavis
 #      Added error_reporting setting per Jean-Pierre Arneodo's request.

@@ -19,7 +19,7 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
+require("../../../utils/include.pl");  # Include all the predefined functions
 &db_connect;
 
 my ($logfile, $sql, $res, $temp, %groups, $group_id, $errors );
@@ -55,7 +55,7 @@ print "Running week $week, day $day month $mon year $year \n" if $verbose;
 
 
    ## We'll pull down the parsed CVS log from the CVS server via http?! <sigh>
-$logfile = "/var/log/sourceforge/cvs/$year/$mon/cvs_traffic_$year$mon$day.log";
+$logfile = "/home/cvslogs/$year/$mon/cvs_traffic_$year$mon$day.log";
 print "Using $logfile\n";
 
    ## Now, we will pull all of the project ID's and names into a *massive*
@@ -81,7 +81,7 @@ $dbh->do("DELETE FROM stats_cvs_group WHERE month='$year$month' AND day='$day'")
 
 ## begin parsing the log file line by line.
 print "Parsing the information into the database..." if $verbose;
-open( LOGFILE, $logfile ) or die "Cannot open $logfile";
+open( LOGFILE, $logfile ) or die "Cannot open /tmp/boa_stats.txt";
 while(<LOGFILE>) {
 
 	if ( $_ =~ /^G::/ ) {

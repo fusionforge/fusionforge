@@ -1,176 +1,322 @@
-------------------------------------------------------------------------------
-Thur Dec 14, 3:15 PST 2000
+2001-07-13  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-2.5
-        - To get help setting up your copy of SourceForge, 
-          visit the "SF Offsite Talk" discussion boards at 
-          http://sourceforge.net/forum/forum.php?forum_id=21304
+	* www/include/logger.php: We should allow to access groups
+	with 'Holding' status.
+	* www/search/index.php: Ditto.
 
-        -Infrastructure migrated to PostgreSQL. See docs for migration
-         instructions (Tim)
+2001-07-09  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        -Fundamental internationalization now in place (Tim)
+	* common/include/utils.php(util_check_fileupload): New
+	function, checks that file is in fact was uploaded by user
+	and may be safely used without compromising system.
+	* www/docman/new.php, www/project/admin/editimages.php,
+	www/project/admin/editreleases.php, www/project/admin/qrs.php,
+	www/tracker/include/ArtifactFileHtml.class: Use that function.
 
-        -New forum views and massive forum optimization (Tim)
+2001-07-08  Tim Perdue  <tim@perdue.net>
 
-        -QRS (Quick Release System) added to FileRelease process to make 
-         it easier and faster (Darrell)
+	* Quick patch of massive gaping security hole where uploaded
+	files were not verified before being read in.
 
-        -user.php rewritten to User.class object w/optimizations
-         Permissions model now based in the Group object (Tim)
+2001-07-01  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        -session.php largely rewritten and massively optimized (Tim)
+	* TARBALL: Cleaned up somewhat, made leave /tmp/scratch
+	in place of manual cleanup.
 
-        -html_image() function rewritten and optimized, used sitewide
-         (Darrell)
+2001-06-29  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        -LDAP backend support added, but not 100% tested yet (Paul)
+	* www/project/stats/stats_graph.png: Use proper units names.
 
-------------------------------------------------------------------------------
-Wed Sep 6, 3:30:30 PDT 2000
+2001-06-29  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-2.0   
-        - To get help setting up your copy of SourceForge, 
-          visit the "SF Offsite Talk" discussion boards at 
-          http://sourceforge.net/forum/forum.php?forum_id=21304
+	* www/project/stats/stats_graph.png: Use proper units names.
 
-        - Foundry code now present and cleaned up.
-          You can create new foundries simply by selecting that option in 
-          the /admin/groupedit.php page (Tim)
+2001-06-28  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        - Theming support sitewide and html library cleanup. Sample themes 
-          included in /www/themes/ (Geoff)
+	* www/include/html.php(html_dbimage): Allow to pass in
+	additional attributes, like to html_image().
 
-        - Audit trail for projects. Now when site-admins and project-admins 
-          change a project, certain events will cause an audit trail recording 
-          (events like adding/removing users, updating permissions, etc) (Tim)
+2001-06-26  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        - File release system totally rewritten from the ground up to use a 
-          more normalized database schema. There is an upgrade script in 
-          /www/admin/ which should help you migrate data from the old 
-          structure (Tim)
+	* www/account/{change_email.php,change_email-complete.php}:
+	Check exit status.
+	* www/admin/useredit.pgp: Ditto.
 
-        - Using some classes to "objectize" things like Groups, Projects, 
-          and Foundries. Project and Foundry extend Group. See 
-          /include/Group.class /include/Foundry.class and 
-          /include/Project.class (Tim)
+	* www/project/admin/userpermedit.php: Provide more obvious
+	error message.
 
-        - Hundreds of misc. interface cleanups sitewide. More user feedback, 
-          ordering of pop-up list boxes, submit buttons added to the tops of 
-          many forms sitewide, etc etc (Tim, Geoff, Wallace Lee)
+2001-06-26  James Byers  <jbyers@linux.com>
 
-        - Task manager can now move tasks among subprojects. (Wallace Lee)
+	* new optionally encrypted cookie with username set on login
 
-        - Sitewide stats project. Organizing daily stats for each project 
-          into summary tables, graphing the results. (Matt Snelham)
+	* login redirection system allows non-local URLs
 
-        - Groundwork for advogato-like system of peer ratings. Need to 
-          finish user interface. New system goes beyond advogato, as each 
-          user has a unique "importance factor" and overall ranking among 
-          all users on the entire site. Only users that have achieved a 
-          "trust" level will be able to successfully rate others. See 
-          /www/admin/calculate_user_metric.php (Tim)
+	* addition of jobs.osdn.com links, front page text
 
-        - Changed user home pages to /users/*user_name*/ using .htaccess 
-          directive similar to /foundry/ and /project/ (Tim)
+2001-06-22  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-------------------------------------------------------------------------------
-Thu Jul  13 10:45:26 PDT 2000
+	* common/include/User.class(setShell): Validate argument. 
 
-1.5.0 
+	* common/include/User.class: Add SQL error message for
+	DB-related errors.
 
-        - To get help setting up your copy of SourceForge,           
-          visit the "SF Offsite Talk" discussion boards at
-          http://sourceforge.net/forum/forum.php?forum_id=21304
+2001-06-22  Tim Perdue  <tim@perdue.net>
 
-        - Added a "portability" patch. Massive thanks to 
-          William Hardeman and David HM Spector for this. SF deployers 
-          everywhere will thank them
+        * Fixed subtle bug in tracker where you could get an artifact to 
+	display right and update 1/2 right, but not completely right, 
+	if you mangled the URL. Also added Site Admin debug code so 
+	logged in admins can see query strings at the bottom of the page.
 
-        - Removed a lot of hard-coded references to SF.net everywhere, 
-          including hard-coded user_id's of the SF core staff
+2001-06-19  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        - Wallace Lee continues to make numerous clean patches throughout 
-          the site (naming forums/subprojects/mailing lists among others)
+	* common/include/User.class(setPasswd): Validate argument.
 
-        - Optimizations throughout the code base - added intelligence to the
-          user.php and group.php library so database queries aren't wasted. 
+	* www/admin/useredit.php: Show current value of the confirm
+	hash.
 
-        - Tested under PHP4 and only one know issue was found and fixed.
+2001-06-19  James Byers <jbyers@linux.com>
 
-        - Starting the process of database portability. Changed the keyword 
-          "public" in groups to "is_public". Changing the "user" table to 
-          "users" is next in line, but it is a HUGE task.
+	* updated administrative files, db/ files with header comment
 
-        - Tested some features on Postgres and found that LIMIT/OFFSET 
-          syntax is incompatible. Postgres also cannot yet handle large 
-          text fields that are > 8K in length (problem for the patch Mgr)
+	* added generic terms, privacy statement
+	
+2001-06-18  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        - Slick new "browse" options on the bug/task/support/project mgrs
+	* common/include/User.class(setStatus): Validate argument.
 
-        - Changed project homepages to "/projects/*project_name*/" using 
-          the .htaccess "files" directive. This is known to be problematic 
-          on some other platforms.
+2001-06-14  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-        - Laid groundwork for "portals" which are half-baked and considered 
-          useless right now.
+	* common/include/utils.php(util_make_links): Do not include
+	<> delimiters in URL.
 
-        - Project Admin page modernized
+2001-06-12  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-------------------------------------------------------------------------------
-Thu May  4 15:23:26 PDT 2000
+	* www/project/admin/qrs.php: Allow release technicians to access
+	this page.
 
-1.1.0 - Added Support Manager
+	* www/search/index.php: Within artifact search SQL, order
+	WHERE conditions properly.
 
-      - Added Help Wanted System
+2001-06-12  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-      - Data abstraction in all modules
+	* www/include/BaseLanguage.class(loadLanguage): Add support
+	for comments in message catalogs ('#' as the first char of line).
 
-      - TROVE catorgization
+	* www/sendmessage.php: Provide proper substs for headers.
 
-      - Download Stats Rewrite
+2001-06-11  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-      - eval() security fixes (muks)
+	* www/tracker/mod.php: Pass group name as arg to
+	header.
 
-      - Custom Bug/Support Categories (wallace)
+2001-06-09  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-      - Ability to remove yourself from project (wallace)
+	* www/partners.php, www/include/languages/Base.tab: Fix
+	last place where raw PHP code was stuffed in msgcat.
 
-      - Bundles of code cleanups
+2001-06-08  James Byers  <jbyers@linux.com>
 
-      - Navigation Updates
+	* Changed export/rss_foundry_news.php to include group
+	and user information
 
-      - Hooks Added to sitewide help
+	* Created TARBALL process document
 
-      - other fixes to numerous to list
-        
-------------------------------------------------------------------------------
-Sun Jan 30 09:22:39 PST 2000
+2001-06-08  Darrell Brogdon  <dbrogdon@valinux.com>
+	
+	* (including 6/6 commits) ...
+	
+2001-06-07  Tim Perdue  <bigdisk@sourceforge.net>
+	
+	* (including 6/6 commits) ...
+	
+2001-06-01  Darrell Brogdon  <dbrogdon@valinux.com>
+	
+	* ...
+	
+2001-05-31  Tim Perdue  <bigdisk@sourceforge.net>
 
-1.0.4 - Added docs/ Directory containing both and Installation Guide and a
-        Administration guide provided by the SF Docs Projects. Thanks to
-        the sfdocs people for contributing this. http://sfdocs.sourceforge.net
+	* cronjobs/project_weekly_metric.php - fixed replication
+	issue that interfered with including download counts in 
+	activity metric.
 
-      - Added etc/local.inc as a example for /etc/local.inc which contains
-        the database information need to run this application.
+2001-05-30  Darrell Brogdon  <dbrogdon@valinux.com>
+	
+	* ...
+	
+2001-05-30  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-      - Patch Manager
+	* www/account/lostlogin.php: Typo fix.
 
-      - Email notification of files and forums that are being monitored. 
+	* www/account/lostlogin.php: Invalidate confirm hash on
+	successful operations.
 
-      - Sorting of columns via link through the bugtracker, patch managers,
-        and task manager.  - (loic@users.sourceforge.net) - Thanks!
+	* www/include/BaseLanguage.class(loadLanguage): Remove 
+	trailing newline from strings to be returned by getText().
 
-      - All file extensions allowed on file uploads.
+	* common/include/User.class(setNewEmailAndHash): Add 
+	convenient feature: if hash value is 0, then generate
+	it randomly inline.
 
-------------------------------------------------------------------------------
+	* www/account/lostpw.php, www/include/languages/Base.tab:
+	Add code to unquote/perform substitutions on mail message
+	from message catalog.
+	
+2001-05-25  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-Thu Jan 14 09:10:37 PST 2000
+	* common/include/account.php (account_salt): Move local 
+	functions out - PHP re-defines local function each time
+	enclosing function is evaluated, so it cannot be called
+	more than once.
 
-1.0.3 - *** Initial Code Relase ***
-        Includes: Bugtracking, Project Management, Forums, Mailing Lists,
-        Surveys, Software Map, File Releases, Top Projects, Site Docs,
-        Project News, Site News, Snippet Library, Registration System, and
-        Individual Account Maitenance.
+	* www/users: Do not allow to access page for non-active
+	users.
 
-------------------------------------------------------------------------------
+	* www/include/user_home.php: Fix phpfault when accessing
+	while not logged in.
+
+2001-05-24  Darrell Brogdon  <dbrogdon@valinux.com>
+
+	* Added rss_osdnnews.php
+
+2001-05-23  James Byers  <jbyers@linux.com>
+
+	* tagged at SF_2_6_0
+
+	* rotated ChangeLog
+
+2001-03-25  Adrian Aichner  <adrian@xemacs.org>
+
+	* many files: Typo fixes.
+
+2000-12-06  Paul Sokolovsky  <pfalcon@sourceforge.net>
+
+	* bugs/bug_data.php,index.php: Fix bug when any bug update
+        by bug admin resulted in two mail notifications: once for
+        properties change and once for comment.
+
+        * search/index.php: Added parameter aliases and defaults.
+        Finished RSS exports.
+
+2000-12-05  Paul Sokolovsky  <pfalcon@sourceforge.net>
+
+	* account/index.php: Add "remember me" checkbox.
+        * account/updateprefs.php: Depending on its value, either
+        set 'sf_user_hash' cookie or clear it.
+        * my/index.php: if sf_user_hash cookie set with correct hash,
+        allow user to view the page.
+
+        * include/User.class: Added getMD5Passwd() method.
+
+2000-11-27  Paul Sokolovsky  <pfalcon@sourceforge.net>
+
+	* include/Group.php, project/admin/userperms.php: Member role
+        selection based on help wanted categories.
+
+2000-11-22  Paul Sokolovsky  <pfalcon@sourceforge.net>
+
+	* project/admin/editpackages.php,editreleases.php,index.php,
+        newrelease.php, project_admin_utils.php: Functionality of the
+        file release privilege: 1. Allow any project member to access
+        admin page, but allow only admin to perfom tasks; 2. Allow
+        user with file release privilege access Add/Edit Release page,
+	but allow only to modify releases, not packages.
+
+        * include/html.php: fix obscure bug when static error message
+        was shoen instead of real one.
+
+2000-11-21  Paul Sokolovsky  <pfalcon@sourceforge.net>
+	
+	* include/Group.php, project/admin/userperms.php: File release
+        privilege storing and UI.
+
+2000-11-13  Paul Sokolovsky  <pfalcon@sourceforge.net>
+
+	* include/HTML_Graphs.php: horizontal_multisection_graph(): render
+        horizontal graph consisting of multiple colored sections.
+        graph_calculate_scale(): calculate scale for such graphs.
+
+        * project/stats/project_stats_utils.php: period2seconds(),
+        period2sql(): functions to deal with time periods.
+
+        * include/tool_reports.php: library for tool reporting.
+
+2000-11-09  Paul Sokolovsky  <pfalcon@sourceforge.net>
+
+	* include/utils.php: util_result_columns_to_assoc(): converts
+        db result set into associative array.
+
+2000-10-27  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+	* project/admin/index.php: make fact that admins cannot be
+	deleted explicitly visible by showing crossed trash icon.
+
+2000-10-20  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+	* include/User.class: getUnixStatus() added.
+
+        * admin/approve_pending.php: Added LDAP support. For this,
+        update each group individually instead of in mass. Also, some
+        UI tweaks: now it's possible to approve projects individually,
+        fields are shown somewhat cleaner. Since data now doubled
+        between SQL and LDAP, steps to detect inconsistencies are
+        performed with (hopefully) proper diagnostics (including
+        preserving LDAP error descriptions in status_comment of
+        group) and rudimentary auto-repair.
+
+        * include/Error.class: Allow error messages to accumulate.
+
+        * include/Group.class: addUser() and removeUser() LDAPized.
+
+        * admin/groupedit.php: LDAPized.
+
+
+2000-10-19  Geoffrey Herteg  <gherteg@users.sourceforge.net>
+
+	* pm/pm_util.php: added mail_followup() to mail followups to 
+			  task owner and assigned developers...
+
+	* pm/pm_data.php: modified pm_data_create_task() and
+			  pm_data_update_task() to call mail_followup()
+			  if create/update successful.
+
+2000-10-19  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+	* include/ldap.php: module for LDAP support.
+
+        * DB: groups: new column 'status_comment', should provide
+        some explaination (for human) while group in given status.
+
+2000-10-18  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+	* include/User.class: user_get_object() can take either
+        $user_id or $res.
+
+2000-10-17  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+        * DB: user_group: add 'cvs_flags' column to hold CVS
+        permissions.
+	* project/admin/userperms.php: Add CVS access selector
+        for read, write, admin permissions (accumulated).
+        Reformat and add more roles descriptions.
+        * include/Group.class: make updateUser() method take
+        additional argument - cvs permissions (0,1,2 for read,
+        write, admin).
+	
+2000-10-15  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+	* include/menu.php: Make docs link bold.
+	* account/first.php: Make docs link bold.
+
+2000-10-14  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+	* pre.php: If run without supported_languages table,
+	mod_php died on including the directory instead of
+	language class. Bad behaviour, almost as segfault of
+	C app. Fixed.
+
+2000-10-11  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+
+	* Russian.class: File submitted by me was magically
+        converted to windows-1251 encoding. Turn back to
+        iso-8859-5.
+

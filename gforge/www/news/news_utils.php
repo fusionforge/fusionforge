@@ -1,10 +1,15 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge News Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
 /*
 	News System
@@ -23,9 +28,8 @@ function news_header($params) {
 	if ($group_id && ($group_id != $sys_news_group)) {
 		site_project_header($params);
 	} else {
+		$params['pagename']='news_main';
 		$HTML->header($params);
-		echo '
-			<H2>SourceForge <A HREF="/news/">News</A></H2>';
 	}
 	echo '<P><B>';
 	echo '<A HREF="/news/submit.php?group_id='.$group_id.'">Submit</A> | <A HREF="/news/admin/?group_id='.$group_id.'">Admin</A></B>';
@@ -79,49 +83,80 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$summ_txt='<BR>'. util_make_links( $arr[0] );
 				}
 				//show the project name 
-				if (db_result($result,$i,'type')==2) $group_type='/foundry/';
-				else $group_type='/projects/';
+				if (db_result($result,$i,'type')==2) {
+					$group_type='/foundry/';
+				} else {
+					$group_type='/projects/';
+				}
 				$proj_name=' &nbsp; - &nbsp; <A HREF="http://'.$GLOBALS['sys_default_domain'].$group_type. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</A>';
 			} else {
 				$proj_name='';
 				$summ_txt='';
 			}
 
-                        if (!$limit) {
-				$return .= '
-					<li><A HREF="http://'.$GLOBALS['sys_default_domain'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
-                        	$return .= ' &nbsp; <I>'.date($sys_datefmt,db_result($result,$i,'date')).'</A></I><br>';
-                        }
-                        else {
+			if (!$limit) {
+				$return .= '<li><A HREF="http://'.$GLOBALS['sys_default_domain'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
+				$return .= ' &nbsp; <I>'. date($sys_datefmt,db_result($result,$i,'date')).'</I><br>';
+			} else {
 				$return .= '
 					<A HREF="http://'.$GLOBALS['sys_default_domain'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
-                        	if (!$flat)
-                        		$return .= '
+				if (!$flat) {
+					$return .= '
 					<BR>&nbsp;';
-                        	$return .= '
-                                &nbsp;&nbsp;&nbsp;<I>'. db_result($result,$i,'user_name') .' - '.
-					date($sys_datefmt,db_result($result,$i,'date')) .' <A HREF="/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'">'. $proj_name . '</A></I>
-				'. $summ_txt .'<HR width="100%" size="1" noshade>';
+				}
+				$return .= '&nbsp;&nbsp;&nbsp;<I>'. db_result($result,$i,'user_name') .' - '. 
+					date($sys_datefmt,db_result($result,$i,'date')). '</I>' . 
+					$proj_name . $summ_txt;
+				
+				$sql="SELECT famc.count as total
+					  FROM forum_group_list g
+					  LEFT JOIN forum_agg_msg_count famc USING (group_forum_id)
+					  WHERE g.group_id='$group_id' AND group_forum_id='" . db_result($result,$i,'forum_id') . "' AND g.is_public='1'";
+				$res2 = db_query($sql);
+				$num_comments = db_result($res2,0,'total');
+
+				if (!$num_comments) {
+					$num_comments = '0';
+				}
+
+				if ($num_comments == 1) {
+					$comments_txt = " Comment";
+				} else {
+					$comments_txt = " Comments";
+				}
+
+				$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <A HREF="http://'.$GLOBALS['sys_default_domain'].'/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[Read More/Comment]</a></div><HR width="100%" size="1" noshade>';
 			}
 
-                        if ($limit==1 && $tail_headlines) $return .= "<ul>";
-                	if ($limit) $limit--;
+			if ($limit==1 && $tail_headlines) {
+				$return .= "<ul>";
+			}
+			if ($limit) {
+				$limit--;
+			}
 		}
 	}
 
-	if ($group_id != $sys_news_group)
-          $archive_url='/news/?group_id='.$group_id;
-        else
-          $archive_url='/news/';
+	if ($group_id != $sys_news_group) {
+		  $archive_url='/news/?group_id='.$group_id;
+	} else {
+		  $archive_url='/news/';
+	}
 
-        if ($tail_headlines) $return .= '</ul><HR width="100%" size="1" noshade>'."\n";
+	if ($tail_headlines) {
+		$return .= '</ul><HR width="100%" size="1" noshade>'."\n";
+	}
 
-        $return .= '<div align="center"><a href="'.$archive_url.'">[News archive]</a></div>';
+	$return .= '<div align="center">'
+	           .'<a href="http://'.$GLOBALS['sys_default_domain']
+	           .$archive_url.'">[News archive]</a></div>';
+
 	if ($allow_submit && $group_id != $sys_news_group) {
 		//you can only submit news from a project now
 		//you used to be able to submit general news
 		$return .= '<div align="center"><A HREF="/news/submit.php?group_id='.$group_id.'"><FONT SIZE="-1">[Submit News]</FONT></A></center>';
 	}
+
 	return $return;
 }
 

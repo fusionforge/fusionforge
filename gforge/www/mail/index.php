@@ -1,17 +1,22 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Mailing Lists Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../mail/mail_utils.php');
+require_once('pre.php');
+require_once('../mail/mail_utils.php');
 
 if ($group_id) {
 
-	mail_header(array('title'=>'Mailing Lists for '.group_getname($group_id)));
+	mail_header(array('title'=>'Mailing Lists for '.group_getname($group_id),'pagename'=>'mail','sectionvals'=>array(group_getname($group_id))));
 	
 	if (user_isloggedin() && user_ismember($group_id)) {
 		$public_flag='0,1';
@@ -34,10 +39,7 @@ if ($group_id) {
 		exit;
 	}
 
-	echo "<P>Mailing lists provided via a SourceForge version of "
-		. "<A href=\"http://www.list.org\">GNU Mailman</A>. "
-		. "Thanks to the Mailman and <A href=\"http://www.python.org\">Python</A> "
-		. "crews for excellent software.";
+	echo $Language->getText('mail', 'provided_by');
 	echo "<P>Choose a list to browse, search, and post messages.<P>\n";
 
 	/*
@@ -59,8 +61,8 @@ if ($group_id) {
 	echo '</TD></TR></TABLE>';
 
 } else {
-	mail_header(array('title'=>'Choose a Group First'));
-	require('../mail/mail_nav.php');
+	mail_header(array('title'=>'Choose a Group First','pagename'=>'mail'));
+	require_once('../mail/mail_nav.php');
 	echo '
 		<H1>Error - choose a group first</H1>';
 }

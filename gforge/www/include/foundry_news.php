@@ -1,13 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: foundry_news.php,v 1.27 2000/12/14 17:56:51 tperdue Exp $
+/**
+ * Foundry news page
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: foundry_news.php,v 1.35 2001/06/08 18:23:40 dbrogdon Exp $
+ */
 
-require ($DOCUMENT_ROOT.'/project/admin/project_admin_utils.php');
-
+require_once('www/project/admin/project_admin_utils.php');
+require_once('www/news/admin/news_admin_utils.php');
 //we know $foundry is already set up from the root /foundry/ page
 
 
@@ -51,10 +54,32 @@ if (user_ismember($group_id,'A')) {
 			*/
 			$approve='';
 			$list_queue='y';
+
+		} else if ($mass_reject) {
+			/*
+				Move msgs to rejected status
+			*/
+			reset($news_id);
+			while ( list($key,$val) = each($news_id) ) {
+       				$sql = "
+       					INSERT INTO foundry_news
+	       				(foundry_id,news_id,is_approved,approve_date)
+       					VALUES
+       					('$group_id','$val','2','". time() ."')
+       				";
+
+				$result=db_query($sql);
+				if (!$result || db_affected_rows($result) < 1) {
+					$feedback .= ' ERROR doing update ';
+					$feedback .= db_error().'<br>';
+				} else {
+					$feedback .= ' NewsBytes Rejected<br>';
+				}
+			}
 		}
 	}
 
-	project_admin_header (array('title'=>'NewsBytes','group'=>$group_id));
+	project_admin_header (array('title'=>'NewsBytes','group'=>$group_id,'pagename'=>'foundry_news'));
 
 	if ($approve) {
 		/*
@@ -82,8 +107,8 @@ if (user_ismember($group_id,'A')) {
 		<INPUT TYPE="HIDDEN" NAME="approve" VALUE="y">
 		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
 		<INPUT TYPE="RADIO" NAME="status" VALUE="1"> Approve For Foundry Page<BR>
-		<INPUT TYPE="RADIO" NAME="status" VALUE="0"> Unapprove<BR>
-		<INPUT TYPE="RADIO" NAME="status" VALUE="2" CHECKED> Delete<BR>
+		<INPUT TYPE="RADIO" NAME="status" VALUE="0"> Do not change<BR>
+		<INPUT TYPE="RADIO" NAME="status" VALUE="2" CHECKED> Reject<BR>
 		<B>Subject:</B><BR>
 		'.db_result($result,0,'summary').'<BR>
 		<B>Details:</B><BR>
@@ -99,84 +124,58 @@ if (user_ismember($group_id,'A')) {
 
 		*/
 
-		$old_date=(time()-(86400*28));
-
-		$sql="SELECT * FROM news_bytes
-			WHERE date > '$old_date' AND EXISTS (SELECT project_id FROM foundry_projects 
-			WHERE news_bytes.group_id=foundry_projects.project_id 
-			AND foundry_projects.foundry_id='$group_id')
+		// One month for pending
+		$old_date = time()-60*60*24*30;
+		$sql_pending = "
+			SELECT *
+			FROM news_bytes,groups
+			WHERE date > '$old_date'
+			AND news_bytes.group_id=groups.group_id
+			AND EXISTS (SELECT project_id FROM foundry_projects 
+				WHERE news_bytes.group_id=foundry_projects.project_id 
+				AND foundry_projects.foundry_id='$group_id')
 			AND NOT EXISTS (SELECT news_id FROM foundry_news 
-			WHERE foundry_id='$group_id' 
-			AND approve_date > '$old_date' 
-			AND foundry_news.news_id=news_bytes.id)";
-		//echo "<P>$sql<P>";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows < 1) {
-			echo db_error();
-			echo '
-			<H4>No Queued Items Found</H1>';
-		} else {
-			echo '
-			<H4>These items need to be approved</H4>
-			<P>';
-			for ($i=0; $i<$rows; $i++) {
-				echo '
-				<A HREF="'.$PHP_SELF.'?approve=1&id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A><BR>';
-			}
-		}
+				WHERE foundry_id='$group_id' 
+				AND approve_date > '$old_date' 
+				AND foundry_news.news_id=news_bytes.id)
+			AND groups.is_public=1
+			AND groups.status='A'
+			ORDER BY date
+		";
 
+		// 3 days for rejected
+		$old_date = time()-60*60*24*3;
+		$sql_rejected = "
+			SELECT *
+			FROM news_bytes,groups
+			WHERE news_bytes.group_id=groups.group_id
+			AND EXISTS (SELECT news_id FROM foundry_news 
+				WHERE is_approved=2 
+				AND foundry_id='$group_id' 
+				AND approve_date > '$old_date' 
+				AND foundry_news.news_id=news_bytes.id)
+			ORDER BY date
+		";
 
-		/*
-			Show list of deleted news items for this week
-		*/
-		$sql="SELECT * FROM news_bytes WHERE EXISTS (SELECT news_id FROM foundry_news 
-		WHERE is_approved=2 
-		AND foundry_id='$group_id' 
-		AND approve_date > '$old_date' 
-		AND foundry_news.news_id=news_bytes.id)";
+		// One week for approved
+		$old_date = time()-60*60*24*7;
+		$sql_approved = "
+			SELECT *
+			FROM news_bytes,groups
+			WHERE news_bytes.group_id=groups.group_id
+			AND EXISTS (SELECT news_id FROM foundry_news 
+				WHERE is_approved=1
+				AND foundry_id='$group_id' 
+				AND approve_date > '$old_date' 
+				AND foundry_news.news_id=news_bytes.id)
+			ORDER BY date
+		";
 
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows < 1) {
-			echo db_error();
-			echo '
-			<H4>No deleted items found for this week</H4>';
-		} else {
-			echo '
-			<H4>These items were deleted this past week</H4>
-			<P>';
-			for ($i=0; $i<$rows; $i++) {
-				echo '
-				<A HREF="'.$PHP_SELF.'?approve=1&id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A><BR>';
-			}
-		}
-
-
-		/*
-			Show list of approved news items for this week
-		*/
-		$sql="SELECT * FROM news_bytes WHERE EXISTS (SELECT news_id FROM foundry_news 
-		WHERE is_approved=1
-		AND foundry_id='$group_id' 
-		AND approve_date > '$old_date' 
-		AND foundry_news.news_id=news_bytes.id)";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows < 1) {
-			echo db_error();
-			echo '
-			<H4>No approved items found for this week</H4>';
-		} else {
-			echo '
-			<H4>These items were approved this past week</H4>
-			<P>';
-			for ($i=0; $i<$rows; $i++) {
-				echo '
-				<A HREF="'.$PHP_SELF.'?approve=1&id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A><BR>';
-			}
-		}
-
+		show_news_approve_form(
+			$sql_pending,
+			$sql_rejected,
+			$sql_approved
+		);
 	}
 	project_admin_footer(array());
 

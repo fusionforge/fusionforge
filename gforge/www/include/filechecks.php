@@ -1,11 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * File checking functions
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
+/**
+ * filechecks_islegalname() - Make sure a filename is legal
+ *
+ * @param		string	The name of the file to check
+ */
 function filechecks_islegalname($filename) {
 	if (strstr($filename,' ') || strstr($filename,'\\')
 		|| strstr($filename,"'") || strstr($filename,'"')
@@ -27,6 +35,11 @@ function filechecks_islegalname($filename) {
 	return 1;
 }
 
+/**
+ * filechecks_targz() - Verify the integrity of a .tar.gz file.
+ *
+ * @param		string	The name of the targz file to check
+ */
 function filechecks_targz($filename) {
 	exec("tar -ztvf $GLOBALS[FTPINCOMING_DIR]/" . EscapeShellCmd($filename),$output,$ret);
 	if ($ret) {
@@ -37,6 +50,11 @@ function filechecks_targz($filename) {
 	}
 }
 
+/**
+ * filechecks_gz(0 - Verify the integrity of a .gz file.
+ *
+ * @param		string	The name of the gz file to check.
+ */
 function filechecks_gz($filename) {
 	exec("gunzip -t $GLOBALS[FTPINCOMING_DIR]/" . EscapeShellCmd($filename),$output,$ret);
 	if ($ret) {
@@ -47,6 +65,11 @@ function filechecks_gz($filename) {
 	}
 }
 
+/**
+ * filechecks_getfiletype() - Resolve the filetype of a file.
+ *
+ * @param		string	The name of the file to resolve.
+ */
 function filechecks_getfiletype($filename) {
 
 	$filename = chop($filename);

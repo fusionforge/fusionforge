@@ -1,29 +1,34 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Forums Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../forum/forum_utils.php');
+
+require_once('pre.php');
+require_once('../forum/forum_utils.php');
 
 if ($group_id) {
 
-	forum_header(array('title'=>'Forums for '.group_getname($group_id)));
+	forum_header(array('title'=>'Forums for '.group_getname($group_id),'pagename'=>'forum','sectionvals'=>array(group_getname($group_id))));
 
 	if (user_isloggedin() && user_ismember($group_id)) {
-		$public_flag='0,1';
+		$public_flag='<3';
 	} else {
-		$public_flag='1';
+		$public_flag='=1';
 	}
 
-	$sql="SELECT g.group_forum_id,g.forum_name, g.description, count(*) as total " //, max(date) as latest"		 
-		." FROM forum_group_list g "
-		." LEFT JOIN forum f USING (group_forum_id) "
-		." WHERE g.group_id='$group_id' AND g.is_public IN ($public_flag)"
-		." group by g.group_forum_id, g.forum_name, g.description";
+	$sql="SELECT g.group_forum_id,g.forum_name, g.description, famc.count as total
+		FROM forum_group_list g
+		LEFT JOIN forum_agg_msg_count famc USING (group_forum_id)
+		WHERE g.group_id='$group_id' AND g.is_public $public_flag;";
 
 	$result = db_query ($sql);
 
@@ -36,8 +41,7 @@ if ($group_id) {
 		exit;
 	}
 
-	echo '<H3>Discussion Forums</H3>
-		<P>Choose a forum and you can browse, search, and post messages.<P>';
+	echo '<P>Choose a forum and you can browse, search, and post messages.<P>';
 
 	/*
 		Put the result set (list of forums for this group) into a column with folders
@@ -49,7 +53,7 @@ if ($group_id) {
 			'&nbsp;' .
 			db_result($result, $j, 'forum_name').'</A> ';
 		//message count
-		echo '('.db_result($result,$j,'total').' msgs)';
+		echo '('. ((db_result($result, $j, 'total'))?db_result($result, $j, 'total'):'0') .' msgs)';
 		echo "<BR>\n";
 		echo db_result($result,$j,'description').'<P>';
 	}

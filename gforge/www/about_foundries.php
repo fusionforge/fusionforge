@@ -1,33 +1,31 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: about_foundries.php,v 1.16 2000/11/27 23:17:05 kingdon Exp $
+/**
+  *
+  * About Foundries Page
+  *
+  * This pages gives an intro to foundries and shows list of them all.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: about_foundries.php,v 1.19 2001/05/22 21:39:30 pfalcon Exp $
+  *
+  */
 
-require "pre.php";    
+require_once('pre.php');
 $HTML->header(array(title=>"About Foundries"));
 ?>
 
 <P>
 <h2>About SourceForge Foundries</h2>
 
-SourceForge Foundries serve as places for developers to congregate, share
-expertise and news, get and give advice, and generally help each other
-develop  better software faster (this is Open Source, after all).<br>
+<? echo $Language->getText('about_foundries', 'about_blurb'); ?> 
 
-&nbsp;<br>
-
-If you're interested in volunteering to help support or start a foundry, or
-have suggestions, ideas, or gripes please
-<a href="/contact.php" >contact SourceForge</a>.
 
 <h2>Foundries</h2>
 
-<p>Here is a list of all foundries on the system.  Some are more
-complete than others.  If you see a foundry you may want to contribute
-to, contact the existing foundry admins for that foundry.
+<p><? echo $Language->getText('about_foundries', 'foundries_list'); ?> 
 
 <?php
 	$query = "SELECT group_name,unix_group_name ".

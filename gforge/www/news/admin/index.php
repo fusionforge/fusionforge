@@ -1,15 +1,21 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge News Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
 
+require_once('pre.php');
+require_once('news_admin_utils.php');
 //common forum tools which are used during the creation/editing of news items
-require($DOCUMENT_ROOT.'/forum/forum_utils.php');
+require_once('www/forum/forum_utils.php');
 
 if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 	/*
@@ -59,7 +65,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		}
 	}
 
-	news_header(array('title'=>'NewsBytes'));
+	news_header(array('title'=>'NewsBytes','pagename'=>'news_admin'));
 
 	if ($approve) {
 		/*
@@ -83,9 +89,9 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		<INPUT TYPE="HIDDEN" NAME="approve" VALUE="y">
 		<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
 
- 		<B>Status:</B><BR>
-                <INPUT TYPE="RADIO" NAME="status" VALUE="0" CHECKED> Displayed<BR>
-                <INPUT TYPE="RADIO" NAME="status" VALUE="4"> Delete<BR>
+		<B>Status:</B><BR>
+		<INPUT TYPE="RADIO" NAME="status" VALUE="0" CHECKED> Displayed<BR>
+		<INPUT TYPE="RADIO" NAME="status" VALUE="4"> Delete<BR>
  
 		<B>Subject:</B><BR>
 		<INPUT TYPE="TEXT" NAME="summary" VALUE="'.db_result($result,0,'summary').'" SIZE="30" MAXLENGTH="60"><BR>
@@ -164,10 +170,24 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 			*/
 			$approve='';
 			$list_queue='y';
+		} else if ($mass_reject) {
+			/*
+				Move msg to rejected status
+			*/
+			$sql="UPDATE news_bytes "
+			     ."SET is_approved='2' "
+			     ."WHERE id IN ('".implode($news_id,"','")."')";
+			$result=db_query($sql);
+			if (!$result || db_affected_rows($result) < 1) {
+				$feedback .= ' ERROR doing update ';
+				$feedback .= db_error();
+			} else {
+				$feedback .= ' NewsBytes Rejected. ';
+			}
 		}
 	}
 
-	news_header(array('title'=>'NewsBytes'));
+	news_header(array('title'=>'NewsBytes','pagename'=>'news_admin'));
 
 	if ($approve) {
 		/*
@@ -203,66 +223,50 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		</FORM>';
 
 	} else {
+
 		/*
 			Show list of waiting news items
 		*/
 
-		$sql="SELECT * FROM news_bytes WHERE is_approved=0";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows < 1) {
-			echo '
-				<H4>No Queued Items Found</H1>';
-		} else {
-			echo '
-				<H4>These items need to be approved</H4>
-				<P>';
-			for ($i=0; $i<$rows; $i++) {
-				echo '
-				<A HREF="/news/admin/?approve=1&id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A><BR>';
-			}
-		}
+	        $old_date = time()-60*60*24*30;
+		$sql_pending= "
+			SELECT groups.group_id,id,date,summary, 
+				group_name,unix_group_name 
+			FROM news_bytes,groups 
+			WHERE is_approved=0 
+			AND news_bytes.group_id=groups.group_id 
+			AND date > '$old_date' 
+			AND groups.is_public=1
+			AND groups.status='A'
+			ORDER BY date
+		";
 
-		/*
-			Show list of deleted news items for this week
-		*/
-		$old_date=(time()-(86400*7));
+		$old_date = time()-(60*60*24*7);
+		$sql_rejected = "
+			SELECT groups.group_id,id,date,summary, 
+				group_name,unix_group_name 
+			FROM news_bytes,groups 
+			WHERE is_approved=2 
+			AND news_bytes.group_id=groups.group_id 
+			AND date > '$old_date' 
+			ORDER BY date
+		";
 
-		$sql="SELECT * FROM news_bytes WHERE is_approved=2 AND date > '$old_date'";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows < 1) {
-			echo '
-				<H4>No deleted items found for this week</H4>';
-		} else {
-			echo '
-				<H4>These items were deleted this past week</H4>
-				<P>';
-			for ($i=0; $i<$rows; $i++) {
-				echo '
-				<A HREF="/news/admin/?approve=1&id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A><BR>';
-			}
-		}
+		$sql_approved = "
+			SELECT groups.group_id,id,date,summary, 
+				group_name,unix_group_name 
+			FROM news_bytes,groups 
+			WHERE is_approved=1 
+			AND news_bytes.group_id=groups.group_id 
+			AND date > '$old_date' 
+			ORDER BY date
+		";
 
-		/*
-			Show list of approved news items for this week
-		*/
-
-		$sql="SELECT * FROM news_bytes WHERE is_approved=1 AND date > '$old_date'";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
-		if ($rows < 1) {
-			echo '
-				<H4>No approved items found for this week</H4>';
-		} else {
-			echo '
-				<H4>These items were approved this past week</H4>
-				<P>';
-			for ($i=0; $i<$rows; $i++) {
-				echo '
-				<A HREF="/news/admin/?approve=1&id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A><BR>';
-			}
-		}
+		show_news_approve_form(
+			$sql_pending,
+			$sql_rejected,
+			$sql_approved
+		);
 
 	}
 	news_footer(array());

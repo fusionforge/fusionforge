@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge News Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require('pre.php');
-require('../forum/forum_utils.php');
+
+require_once('pre.php');
+require_once('www/forum/forum_utils.php');
 
 if (user_isloggedin()) {
 
@@ -51,18 +57,11 @@ if (user_isloggedin()) {
 	/*
 		Show the submit form
 	*/
-	news_header(array('title'=>'News'));
+	news_header(array('title'=>'News','pagename'=>'news_submit','titlevals'=>array(group_getname($group_id))));
 
 	echo '
-		<H3>Submit News For '.group_getname($group_id).'</H3>
 		<P>
-		You can post news about your project if you are an admin on your project. 
-		You may also post "help wanted" notes if your project needs help.
-		<P>
-		All posts <B>for your project</B> will appear instantly on your project 
-		summary page. Posts that are of special interest to the community will 
-		have to be approved by a member of the news team before they will appear 
-		on the SourceForge home page.
+		'. $Language->getText('news_submit', 'post_blurb') .'
 		<P>
 		You may include URLs, but not HTML in your submissions.
 		<P>

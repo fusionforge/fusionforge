@@ -1,35 +1,34 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
-//
+/**
+ * Oracle 8i database connection/querying layer
+ *
+ * ALPHA VERSION - not debugged!!
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
-/*
-
-	ALPHA VERSION - not debugged!!
-
-
-	This is the Oracle 8 version of our 
-	database connection/querying layer
-
-	$sys_db_results is an array of an array of associative arrays
-		containing row data from queries (3D array)
-
-*/
+/**
+ * An array of an array of associative arrays
+ * containing row data from queries (3D array)
+ *
+ * Say that 50 times backwards while standing on your head and you
+ * get a free SourceForge cookie!
+ *
+ * @var	array	$sys_db_oci_commit_mode
+ */
 $sys_db_oci_commit_mode='OCI_COMMIT_ON_SUCCESS';
 
 /**
+ *  db_connect() - Connect to the database
  *
- *  Connect to the database
  *  Notice the global vars that must be set up
  *  Sets up a global $conn variable which is used 
  *  in other functions in this library
- *
  */
-
 function db_connect() {
 	global $sys_dbhost,$sys_dbuser,$sys_dbpasswd,$conn,$sys_dbname;
 	$conn = @ocilogon($sys_dbuser,$sys_dbpasswd,$sys_dbname);
@@ -37,20 +36,16 @@ function db_connect() {
 }
 
 /**
- *
- *  Query the database
- *
- *  @param qstring - SQL statement
- *  @param limit - how many rows do you want returned
- *  @param offset - of matching rows, return only rows starting here
- *
+ *  db_query() - Query the database
  *
  *  NOTE - the OCI version of this may be somewhat inefficient
  *  for large result sets (hundreds or thousands of rows selected)
  *  However - most queries are returning 25-50 rows
  *
+ *  @param		string	SQL statement
+ *  @param		int		How many rows do you want returned
+ *  @param		int		Of matching rows, return only rows starting here
  */
-
 function db_query($qstring,$limit='-1',$offset=0) {
 	global $QUERY_COUNT,$sys_db_results,$sys_db_row_pointer,$sys_db_oci_commit_mode;
 	$QUERY_COUNT++;
@@ -106,9 +101,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
 }
 
 /**
- *      db_begin()
- *
- *      begin a transaction
+ * db_begin() - Begin a transaction
  */
 function db_begin() {
 	global $sys_db_oci_commit_mode;
@@ -116,9 +109,7 @@ function db_begin() {
 }
 
 /**
- *      db_commit()
- *
- *      commit a transaction
+ * db_commit() - Commit a transaction
  */
 function db_commit() {
 	global $sys_db_oci_commit_mode,$conn;
@@ -127,9 +118,7 @@ function db_commit() {
 }
 
 /**
- *      db_rollback()
- *
- *      rollback a transaction
+ * db_rollback() - Rollback a transaction
  */
 function db_rollback() {
 	global $sys_db_oci_commit_mode,$conn;
@@ -138,11 +127,9 @@ function db_rollback() {
 }
 
 /**
+ *  db_numrows() - Returns the number of rows in this result set
  *
- *  Returns the number of rows in this result set
- *
- *  @param qhandle query result set handle
- *
+ *  @param		string	Query result set handle
  */
 function db_numrows($qhandle) {
 	global $sys_db_results;
@@ -155,13 +142,10 @@ function db_numrows($qhandle) {
 }
 
 /**
+ *  db_free_result() - Frees a database result properly 
  *
- *  Frees a database result properly 
- *
- *  @param qhandle query result set handle
- *
+ *  @param		string	Query result set handle
  */
-
 function db_free_result($qhandle) {
 	global $sys_db_results;
 	unset($sys_db_results[$qhandle]);
@@ -169,97 +153,80 @@ function db_free_result($qhandle) {
 }
 
 /**
+ *  db_reset_result() - Reset a result set
  *
  *  Reset is useful for db_fetch_array
  *  sometimes you need to start over
  *
- *  @param qhandle query result set handle
- *  @param row - integer row number
- *
+ *  @param		string	Query result set handle
+ *  @param		int		Row number
  */
-
 function db_reset_result($qhandle,$row=0) {
 	global $sys_db_row_pointer;
 	return $sys_db_row_pointer[$qhandle]=$row;
 }
 
 /**
+ *  db_result() - Returns a field from a result set
  *
- *  Returns a field from a result set
- *
- *  @param qhandle query result set handle
- *  @param row - integer row number
- *  @param field - text field name
- *
+ *  @param		string	Query result set handle
+ *  @param		int		Row number
+ *  @param		string	Field name
  */
-
 function db_result($qhandle,$row,$field) {
 	global $sys_db_results;
 	return $sys_db_results[$qhandle][$row]["$field"];
 }
 
 /**
+ *  db_numfields() - Returns the number of fields in this result set
  *
- *  Returns the number of fields in this result set
- *
- *  @param qhandle query result set handle
- *
+ *  @param		sting	Query result set handle
  */
-
 function db_numfields($lhandle) {
 	return @ocinumcols($lhandle);
 }
 
 /**
+ *  db_fieldname() - Returns the number of rows changed in the last query
  *
- *  Returns the number of rows changed in the last query
- *
- *  @param qhandle - query result set handle
- *  @param fnumber - column number
- *
+ *  @param		string	Query result set handle
+ *  @param		int		Column number
  */
-
 function db_fieldname($lhandle,$fnumber) {
 	   return @ocicolumnname($lhandle,$fnumber);
 }
 
 /**
+ *  db_affected_rows() - Returns the number of rows changed in the last query
  *
- *  Returns the number of rows changed in the last query
- *
- *  @param qhandle query result set handle
- *
+ *  @param		string	Query result set handle
  */
-
 function db_affected_rows($qhandle) {
 	return @ocirowcount($qhandle);
 }
 
 /**
+ *  db_fetch_array() - Fetch an array
  *
  *  Returns an associative array from 
  *  the current row of this database result
  *  Use db_reset_result to seek a particular row
  *
- *  @param qhandle query result set handle
- *
+ *  @param		string	Query result set handle
  */
-
 function db_fetch_array($qhandle) {
 	global $sys_db_results,$sys_db_row_pointer;
 	return $sys_db_results[$qhandle][$sys_db_row_pointer++];
 }
 
 /**
+ *  db_insertid() - Returns the last primary key from an insert
  *
- *  Returns the last primary key from an insert
- *
- *  @param qhandle query result set handle
- *  @param table_name is the name of the table you inserted into
- *  @param pkey_field_name is the field name of the primary key
- *
+ *  @param		string	Query result set handle
+ *  @param		string	The name of the table you inserted into
+ *  @param		string	The field name of the primary key
  */
-
 function db_insertid($qhandle,$table_name,$pkey_field_name) {
 	$res=db_query("SELECT max($pkey_field_name) AS id FROM $table_name");
 	if ($res && db_numrows($res) > 0) {
@@ -270,11 +237,8 @@ function db_insertid($qhandle,$table_name,$pkey_field_name) {
 }
 
 /**
- *
- *  Returns the last error from the database
- *
+ *  db_error() - Returns the last error from the database
  */
-
 function db_error() {
 	global $conn;
 	$err= @ocierror($conn);

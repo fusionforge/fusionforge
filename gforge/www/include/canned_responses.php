@@ -1,11 +1,20 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+ * Canned Responses functions library.
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
+/**
+ * add_canned_response() - Add a new canned response
+ *
+ * @param		string	Canned response title
+ * @param		string	Canned response text
+ */
 function add_canned_response($title, $text)
 {
 		global $feedback;
@@ -14,15 +23,16 @@ function add_canned_response($title, $text)
 		}
 }
 
+/**
+ * get_canned_responses() - Get an HTML select-box of canned responses
+ */
 function get_canned_responses()
 {
-	$result = db_query("SELECT response_id, response_title FROM canned_responses");
-	while( $res_array = db_fetch_array($result) ) {
-		$ids[] = $res_array["response_id"];
-		$texts[] = $res_array["response_title"];
+	global $canned_response_res;
+	if (!$canned_response_res) {
+		$canned_response_res = db_query("SELECT response_id, response_title FROM canned_responses");
 	}
-
-	return html_build_select_box_from_arrays($ids, $texts, "response_id");
+	return html_build_select_box($canned_response_res, 'response_id');
 }
 
 ?>

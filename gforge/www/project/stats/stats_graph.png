@@ -1,96 +1,115 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: stats_graph.png,v 1.6 2000/09/04 23:39:01 msnelham Exp $ 
-require('pre.php');
-require("graph_lib.php");
-require("project_stats_utils.php");
+/**
+  *
+  * Project Statistics Graph
+  *
+  * This script produces PNG image which shows graph of downloads/pageviews
+  * across the time.
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: change_email.php,v 1.12 2001/05/13 17:53:29 pfalcon Exp $
+  *
+  */
 
+require_once('pre.php');
+require_once('graph_lib.php');
+require_once('project_stats_utils.php');
 
-//
-//  This is some of the ugliest code I've ever written. <sob>
-//
-
-if ( !$group_id ) {
-	$group_id = 0;
+if (!$group_id) {
+	exit_no_group();
 }
 
-if ( !$span ) {
-	$span = 30;
-}
-if ( $span < 4 ) { 
-	$span = 4; 
-}
+if (!$report) {
+	$report = 'last_7';
+}   
 
-if (!$view) $view=$period;
+$unit = 'days';
+//
+//	Data will be fetched in DESC order, then flipped into ASC order
+//
+if ( $report == 'last_7' ) {
 
-$today = localtime( time(), 1 );
+	$res=db_query("
+		SELECT month,day,downloads, subdomain_views as views,site_views as views2
+		FROM stats_project_last_30 
+		WHERE group_id='$group_id' ORDER BY month ASC, day ASC
+	", 7, 23, SYS_DB_STATS);
+    
+} elseif ( $report == 'last_30' ) {
 
-if ( $view == "month" ) {
-	$begin_time = gmmktime( 0, 0, 1, $today['tm_mon'] - $span + 2, 1, $year );
-} elseif ( $view == "week" ) {
-	$foo = gmmktime( 0, 0, 1, $today['tm_mon'] + 1, $today['tm_mday'] - (7 * $span), $year );
-	list( $begin_time, $bar ) = week_to_dates( gmstrftime("%U", $foo ) + 1, gmstrftime("%Y", $foo ) );
+	$res=db_query("
+		SELECT month,day,downloads, subdomain_views as views,site_views as views2 
+		FROM stats_project_last_30 
+		WHERE group_id='$group_id' ORDER BY month ASC, day ASC
+	", -1, 0, SYS_DB_STATS);
+    
+} elseif ( $report == 'months' ) {
+
+	$res = db_query("
+		SELECT month,'15',downloads,subdomain_views as views,site_views as views2 
+		FROM stats_project_months 
+		WHERE group_id='$group_id'
+		ORDER BY group_id ASC, month ASC
+	", -1, 0, SYS_DB_STATS);
+	$unit = 'months';
+    
 } else {
-	$begin_time = gmmktime( 0, 0, 1, $today['tm_mon'] + 1, $today['tm_mday'] - $span, $year );
-}
-$year = gmdate("Y", $begin_time);
-$month = sprintf("%02d", gmdate("m", $begin_time) );
-$day = gmdate("d", $begin_time);
 
-
-$sql  = "SELECT month,day,downloads,(site_views + subdomain_views) as views ".
-	"FROM stats_project ".
-	"WHERE ( (( month = " . $year . $month . " AND day >= " . $day . " ) OR ".
-	"( month > " . $year . $month . " )) AND group_id = " . $group_id . " ) ".
-	"ORDER BY month,day";
-
-$res = db_query( $sql );
-
-$i = 0;
-while ( $row = db_fetch_array($res) ) {
-        $xdata[$i]          = $i;
-        $xlabel[$i]         = (substr($row['month'],4) + 1 - 1) . "-" . sprintf("%02d",$row['day']);
-        $ydata1[$i]         = $row["views"];
-        $ydata2[$i]         = $row["downloads"];
-        $i++;
+	$res=db_query("
+		SELECT month,day,downloads, subdomain_views as views,site_views as views2
+		FROM stats_project_last_30 
+		WHERE group_id='$group_id' ORDER BY month ASC, day ASC
+	", 7, 23, SYS_DB_STATS);
+    
 }
 
-if (!$i) {
-/*    // In case there's nothing to graph, show query trace
-	echo "No data to graph";
-	site_project_footer(array());
-	exit;*/
+$j = 0;
+$rows=db_numrows($res);
+$db_error=db_error();
 
-	$xdata[$i]=$i;
-        $xlabel[$i]         = $month . "-" . $day;
-        $ydata1[$i]         = 0;
-        $ydata2[$i]         = 0;
-        $i=1;
-	$xdata[$i]=$i;
-        $xlabel[$i]         = $month . "-" . $day+1;
-        $ydata1[$i]         = 0;
-        $ydata2[$i]         = 0;
-        $i=2;
+while (	$row = db_fetch_array($res) ) {
+	$xdata[$j]	  = $j;
+	$xlabel[$j]	 = substr($row['month'],4) . "-" . $row['day'];
+	$ydata1[$j]	 = $row["views"] + $row["views2"];
+	$ydata2[$j]	 = $row["downloads"];
+	$j++;
+}
+
+
+//
+//	Add dummy data to keep graph from breaking
+//
+if ($rows < 1) {
+	$xdata[$j]=0;
+	$xlabel[$j]	 = "0-0";
+	$ydata1[$j]	 = 0;
+	$ydata2[$j]	 = 0;
+
+	$j++;
+	$xdata[$j]=1;
+	$xlabel[$j]	 = "0-1";
+	$ydata1[$j]	 = 0;
+	$ydata2[$j]	 = 0;
 }
 
 $graph = new Graph(600, 350);
 
-$graph->addDebug( "We appended $i rows of data to the graphing set." );
-$graph->addDebug( "$begin_time" );
-$graph->addDebug( "$sql" );
+$graph->addDebug( "We appended $j/$rows rows of data to the graphing set." );
+$graph->addDebug( $db_error );
+//$graph->addDebug( "$begin_time" );
+//$graph->addDebug( "$sql" );
 
-$data1 = $graph->AddData($xdata,$ydata1,$xlabel);
-$data2 = $graph->AddData($xdata,$ydata2,$xlabel);
+@$data1 = $graph->AddData($xdata,$ydata1,$xlabel);
+@$data2 = $graph->AddData($xdata,$ydata2,$xlabel);
 
 $graph->DrawGrid('gray');
 $graph->LineGraph( $data1, 'red' );
 $graph->LineGraph( $data2, 'blue' );
 $graph->SetTitle( "Sourceforge Statistics: " . group_getname($group_id) );
-$graph->SetSubTitle("Page Views (red) and Downloads (blue) for the past $i days");
+$graph->SetSubTitle("Page Views (red) and Downloads (blue) for the past $j $unit");
 $graph->SetxTitle('Date');
 $graph->SetyTitle('Views (red) / Downloads (blue)');
 $graph->DrawAxis();

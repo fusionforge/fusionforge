@@ -1,11 +1,15 @@
 <?php   
-
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//              
-// $Id: Theme.class,v 1.1 2000/08/31 06:10:38 gherteg Exp $
+/**
+  *
+  * "Forged Metal" Web Theme (default)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: Theme.class,v 1.2 2001/05/22 16:06:38 pfalcon Exp $
+  *
+  */
 
 
 /*

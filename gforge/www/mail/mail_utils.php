@@ -1,10 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Mailing Lists Facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
 
 function mail_header($params) {
 	global $group_id;
@@ -13,7 +19,7 @@ function mail_header($params) {
 	$params['group']=$group_id;
 	$params['toptab']='mail';
 
-	$project=project_get_object($group_id);
+	$project =& group_get_object($group_id);
 
 	if (!$project->usesMail()) {
 		exit_error('Error','This Project Has Turned Off Mailing Lists');

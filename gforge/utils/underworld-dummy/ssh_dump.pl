@@ -13,7 +13,7 @@ my $ssh_array = ();
 &db_connect;
 
 # Dump the Table information
-$query = "SELECT user_name,authorized_keys FROM users WHERE authorized_keys != \"\"";
+$query = "SELECT user_name,authorized_keys FROM users WHERE authorized_keys != \"\" and authorized_keys is not null";
 $c = $dbh->prepare($query);
 $c->execute();
 while(my ($username, $ssh_key) = $c->fetchrow()) {

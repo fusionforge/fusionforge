@@ -1,10 +1,16 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: pm_utils.php,v 1.79 2000/11/15 22:36:13 pfalcon Exp $
+/**
+  *
+  * SourceForge Project/Task Manager (PM)
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: pm_utils.php,v 1.83 2001/05/22 16:58:08 pfalcon Exp $
+  *
+  */
+
 
 /*
 
@@ -22,7 +28,10 @@ function pm_header($params) {
 	$params['toptab']='pm';
 
 	//only projects can use the bug tracker, and only if they have it turned on
-	$project=project_get_object($group_id);
+	$project =& group_get_object($group_id);
+    if (!$project || !is_object($project)) {
+        exit_no_group();
+    }   
 
 	if (!$project->isProject()) {
 		exit_error('Error','Only Projects Can Use The Task Manager');
@@ -305,41 +314,6 @@ function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) 
 		echo db_error();
 	}
 }
-
-function pm_show_dependent_bugs ($project_task_id,$group_id,$group_project_id) {
-	$sql="SELECT bug.bug_id,bug.summary ".
-		"FROM bug,bug_task_dependencies ".
-		"WHERE bug.bug_id=bug_task_dependencies.bug_id ".
-		"AND bug_task_dependencies.is_dependent_on_task_id='$project_task_id'";
-	$result=db_query($sql);
-	$rows=db_numrows($result);
-
-	if ($rows > 0) {
-		echo '
-		<H3>Bugs That Depend on This Task</H3>
-		<P>';
-		$title_arr=array();
-		$title_arr[]='Bug ID';
-		$title_arr[]='Summary';
-		
-		echo html_build_list_table_top ($title_arr);
-
-		for ($i=0; $i < $rows; $i++) {
-			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color ($i) .'">
-				<TD><A HREF="/bugs/?func=detailbug&bug_id='.
-				db_result($result, $i, 'bug_id').
-				'&group_id='.$group_id.'">'.db_result($result, $i, 'bug_id').'</A></TD>
-				<TD>'.db_result($result, $i, 'summary').'</TD></TR>';
-		}
-		echo '</TABLE>';
-	} else {
-		echo '
-			<H3>No Bugs are Dependent on This Task</H3>';
-		echo db_error();
-	}
-}
-
 
 function pm_show_task_details ($project_task_id) {
 	/*

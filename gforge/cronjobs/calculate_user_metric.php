@@ -1,17 +1,32 @@
-#!/usr/local/bin/php
+#!/usr/local/bin/php -q
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
 //exit;
 
 /*
+Before running the first time, execute initializing SQL:
 
-	Nightly cron script to calculate the peer ratings
+CREATE TABLE user_metric_history(
+month int not null,
+day int not null,
+user_id int not null,
+ranking int not null,
+metric float not null
+);
+CREATE INDEX user_metric_history_date_userid
+ON user_metric_history(month,day,user_id);
+
+
+        Nightly cron script to calculate the peer ratings
 
 	The process starts with a seed group of users who are "trusted"
 		to rate others
@@ -38,10 +53,6 @@ require ('squal_pre.php');
 
 $threshhold='1.6';
 
-/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-	exit_permission_denied();
-}*/
-
 echo '<BR>Starting... ';
 
 db_begin();
@@ -51,13 +62,6 @@ for ($i=1; $i<9; $i++) {
 
 	$j=($i-1);
 
-	/*
-		Set up an interim table to grab and average all trusted result
-	* /
-	$sql="DROP TABLE IF EXISTS user_metric_tmp1_$i;";
-	$res=db_query($sql);
-	echo db_error();
-*/	
 	$sql="CREATE TABLE user_metric_tmp1_$i (
 		user_id int not null default 0, 
 		times_ranked float(8) null default 0,
@@ -65,8 +69,12 @@ for ($i=1; $i<9; $i++) {
 		avg_rating float(8) not null default 0,
 		metric float(8) not null default 0);";
 	$res=db_query($sql);
-	echo '<P>'.$sql.'<P>';
-	echo db_error();
+        if (!$res) {
+                echo "Error in round $i inserting final data: ";
+                echo '<P>'.$sql.'<P>';
+                echo db_error();
+                exit;
+        }
 
 	/*
 		Now grab/average trusted ratings into this table
@@ -114,38 +122,28 @@ for ($i=1; $i<9; $i++) {
                 exit;
                 
         }
-/*
-	$sql="SELECT DISTINCT user_id FROM user_metric_tmp1_$i";
-	$res=db_query($sql);
-	if (!$res || db_numrows($res) < 1) {
-		echo "Error in round $i getting unique user_ids: ".db_error();
-		exit;
-		
-	}
 
-	//hack to get around lack of subselects in CheeSeQL (MySQL)
-	$trusted_ids=implode(',',util_result_column_to_array($res));
-* /
 	/*
 		Now we need to carry forward trusted IDs from the last round into this 
 		Round, as prior round people may not have been ranked enough times by 
 		new people in this round to stay in
-	* /
+	*/
 
 	$sql="INSERT INTO user_metric_tmp1_$i 
 		SELECT user_id,times_ranked,avg_raters_importance,avg_rating,metric
 		FROM user_metric$j 
-		WHERE user_id NOT EXISTS ".
-		"(SELECT DISTINCT user_id FROM user_metric_tmp1_$i ".
-		"WHERE user_metric_tmp1_$i.user_id=user_metric_tmp1_$i.user_id);";
+		WHERE NOT EXISTS 
+		(SELECT user_id FROM user_metric_tmp1_$i 
+		WHERE user_metric_tmp1_$i.user_id=user_metric$j.user_id);";
 
 	$res=db_query($sql);
-/*	if (!$res || db_affected_rows($res) < 1) {
-		echo "Error in round $i carrying forward IDs: ".db_error();
-		exit;
-		
-	}
-*/
+        if (!$res) {
+                echo "Error in round $i inserting final data: ";
+                echo '<P>'.$sql.'<P>';
+                echo db_error();
+                exit;
+        }
+
 	/*
 		Now calculate the metric for this round
 
@@ -153,11 +151,7 @@ for ($i=1; $i<9; $i++) {
 	*/
 
 	echo '<BR>Starting Final Metric';
-/*
-	$sql="DROP TABLE IF EXISTS user_metric$i;";
-	$res=db_query($sql);
-	echo db_error();
-*/
+
 	$sql="CREATE TABLE user_metric$i (
 		ranking serial,
 		user_id int not null default 0,
@@ -169,8 +163,12 @@ for ($i=1; $i<9; $i++) {
 		importance_factor float(8) not null default 0);";
 
 	$res=db_query($sql);
-	echo '<P>'.$sql.'<P>';
-	echo db_error();
+	if (!$res) {
+                echo "Error in round $i inserting final data: ";
+                echo '<P>'.$sql.'<P>';
+                echo db_error();
+                exit;
+        }
 
 	/*
 		Insert the data in ranked order
@@ -205,11 +203,19 @@ for ($i=1; $i<9; $i++) {
 		Update with final percentile and importance
 	*/
 	$sql="UPDATE user_metric$i SET
-		percentile=(100-(100*((ranking-1)/". db_result($res,0,0) ."))),
+		percentile=(100-(100*((ranking::float-1)/". db_result($res,0,0) .")))";
+	$res=db_query($sql);
+	if (!$res || db_affected_rows($res) < 1) {
+		echo "Error in round $i setting percentile: ";
+		echo '<P>'.$sql.'<P>';
+		echo db_error();
+		exit;
+	}
+	$sql="UPDATE user_metric$i SET
 		importance_factor=(1+((percentile/100)*.5));";
 	$res=db_query($sql);
 	if (!$res || db_affected_rows($res) < 1) {
-		echo "Error in round $i inserting final data: ";
+		echo "Error in round $i setting importance factor: ";
 		echo '<P>'.$sql.'<P>';
 		echo db_error();
 		exit;
@@ -239,6 +245,20 @@ for ($i=1; $i<9; $i++) {
         echo db_error();
 }
 
-echo '<BR>DONE: '.db_error();
+echo db_error();
+
+$t = time();
+$ts_month = date('Ym', $t);
+$ts_day = date('d', $t);
+
+db_begin();
+db_query("
+	INSERT INTO user_metric_history
+	SELECT '$ts_month','$ts_day',user_id,ranking,metric
+	FROM user_metric
+");
+echo db_error();
+db_commit();
+
 
 ?>

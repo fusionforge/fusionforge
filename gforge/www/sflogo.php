@@ -1,12 +1,18 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: sflogo.php,v 1.12 2000/08/24 22:04:10 tperdue Exp $
+/**
+  *
+  * Record a Logo Impression
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: sflogo.php,v 1.14 2001/05/22 21:39:31 pfalcon Exp $
+  *
+  */
 
-require ('squal_pre.php');
+
+require_once('squal_pre.php');
 
 /*
 	Determine group

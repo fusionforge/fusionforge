@@ -1,30 +1,47 @@
 <?php   
-
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//              
-// $Id: Theme.class,v 1.5 2000/11/30 16:13:05 dbrogdon Exp $
-
-
-/*
-
-	Theme class, extends Tim's basic Error class
-
-	Geoffrey Herteg, August 28, 2000
-
-*/
-
+/**
+ * Base theme class.
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id: Theme.class,v 1.7 2001/06/08 14:42:05 dbrogdon Exp $
+ */
 
 class Theme extends Layout {
 
+	/**
+	 * The theme ID
+	 *
+	 * @var		int		$theme_id
+	 */
 	var $theme_id;
+
+	/**
+	 * The long theme name
+	 *
+	 * @var		string	$long_name
+	 */
 	var $long_name;
+
+	/**
+	 * The dir name
+	 *
+	 * @var		string	$dir_name
+	 */
 	var $dir_name;
 
+	/**
+	 * The HTML box title color
+	 * 
+	 * @var		constant		$COLOR_HTMLBOX_TITLE
+	 */
 	var $COLOR_HTMLBOX_TITLE = '#737b9c';
 
+	/**
+	 * Theme() - Constructor
+	 */
 	function Theme() {
 		// Parent constructor
 		$this->Layout();
@@ -42,6 +59,13 @@ class Theme extends Layout {
 
 	}
 
+	/**
+	 * box1_top() - Top HTML box
+	 *
+	 * @param	string	Box title
+	 * @param	bool	Whether to echo or return the results
+	 * @param	string	The box background color
+	 */
 	function box1_top($title,$echoout=1,$bgcolor='') {
 	        if (!$bgcolor) {
         	        $bgcolor=$this->COLOR_HTMLBOX_BACK;
@@ -62,6 +86,12 @@ class Theme extends Layout {
         	}
 	}
 
+	/**
+	 * box1_middle() - Middle HTML box
+	 *
+	 * @param	string	Box title
+	 * @param	string	The box background color
+	 */
 	function box1_middle($title,$bgcolor='') {
 	        if (!$bgcolor) {
         	        $bgcolor=$this->COLOR_HTMLBOX_BACK;
@@ -76,6 +106,11 @@ class Theme extends Layout {
                                 <TD colspan=2>';
 	}
 
+	/**
+	 * box1_bottom() - Bottom HTML box
+	 *
+	 * @param	bool	Whether to echo or return the results
+	 */
 	function box1_bottom($echoout=1) {
         	$return = '
                                 </TD>
@@ -88,8 +123,11 @@ class Theme extends Layout {
         	}
 	}
 
-	// ############################
-
+	/**
+	 * header() - The page header
+	 *
+	 * @param	array	Array of header parameters
+	 */
 	function header($params) {
 	        $this->generic_header_start($params);
 
@@ -213,10 +251,11 @@ class Theme extends Layout {
         	<?php
 	}
 
-
-
-	// ############################
-
+	/**
+	 * footer() - page footer
+	 *
+	 * @param	array	Array of footer parameters
+	 */
 	function footer($params) {
 
         ?>
@@ -238,6 +277,11 @@ class Theme extends Layout {
         	$this->generic_footer($params);
 	}
 
+	/**
+	 * menuhtml_top() - Top HTML menu
+	 *
+	 * @param	string	Menu title
+	 */
 	function menuhtml_top($title) {
 	        /*
                 	Use only for the top most menu
@@ -253,6 +297,9 @@ class Theme extends Layout {
         <?php
 	}
 
+	/**
+	 * menuhtml_bottom() - Bottom HTML menu
+	 */
 	function menuhtml_bottom() {
 	        /*
                 	End the table
@@ -264,10 +311,24 @@ class Theme extends Layout {
 ';
 	}
 
+	/**
+	 * menu_entry() - A menu entry
+	 *
+	 * @param	string	The entry link
+	 * @param	string	The entry title
+	 */
 	function menu_entry($link, $title) {
 	        print "\t".'<font face="arial, helvetica" size="2"><A class="menus" href="'.$link.'">'.$title.'</A></font><br>';
 	}
 
+	/**
+	 * tab_entry() - A tab entry
+	 *
+	 * @param	string	The url
+	 * @param	string	The icon image
+	 * @param	string	The title
+	 * @param	bool	Whether this entry is selected (highlighted)
+	 */
 	function tab_entry($url='http://localhost/', $icon='/images/ic/home16b.png', $title='Home', $selected=0) {
 	        print '
                 <A ';
@@ -278,7 +339,5 @@ class Theme extends Layout {
 	        html_image($icon,'20','20',array('alt'=>"$title",'border'=>($selected?'1':'0')));
         	print '</A>';
 	}
-
-
 }
 ?>

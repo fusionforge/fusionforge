@@ -6,7 +6,8 @@
 //
 // $Id$
 
-require ('pre.php');
+require_once('pre.php');
+
 session_require(array('group'=>1,'admin_flags'=>'A'));
 
 header ('Content-Type: text/plain');

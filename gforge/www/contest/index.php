@@ -1,12 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: index.php,v 1.5 2000/08/31 06:07:52 gherteg Exp $
+/**
+  *
+  * SourceForge Contests
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: index.php,v 1.7 2001/05/22 19:19:51 pfalcon Exp $
+  *
+  */
 
-require "pre.php";    
+
+require_once('pre.php');
+
 $HTML->header(array(title=>"Success Story Contest"));
 ?>
 

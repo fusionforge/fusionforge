@@ -1,13 +1,19 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * SourceForge Code Snippets Repository
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');
-require ('../snippet/snippet_utils.php');
+
+require_once('pre.php');
+require_once('www/snippet/snippet_utils.php');
 
 function handle_add_exit() {
 	global $suppress_nav;
@@ -27,7 +33,7 @@ if (user_isloggedin()) {
 		<HTML>
 		<BODY BGCOLOR="#FFFFFF">';
 	} else {
-		snippet_header(array('title'=>'Submit A New Snippet'));
+		snippet_header(array('title'=>'Submit A New Snippet','pagename'=>'snippet_add_snippet_to_package'));
 	}
 
 	if (!$snippet_package_version_id) {
@@ -101,7 +107,6 @@ if (user_isloggedin()) {
 			"AND snippet_package_version.snippet_package_version_id='$snippet_package_version_id'");
 
 	?>
-	<H1>Add Snippet To Package</H2>
 	<P>
 	<B>Package:</B><BR>
 	<?php echo db_result($result,0,'name') . ' -  ' . db_result($result,0,'version'); ?>

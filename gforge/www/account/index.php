@@ -1,30 +1,63 @@
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id$
+/**
+  *
+  * User account main page - show settings with means to change them
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-require ('pre.php');    
+require_once('pre.php');    
+require_once('common/include/timezones.php');
 
 session_require(array('isloggedin'=>'1'));
 
-site_user_header(array('title'=>"Account Maintenance"));
-
 // get global users vars
-$res_user = db_query("SELECT * FROM users WHERE user_id=" . user_getid());
-$row_user = db_fetch_array($res_user);
+$u =& user_get_object(user_getid());
+exit_assert_object($u, 'User');
 
-$HTML->box1_top("Account Maintenance: " . user_getname()); ?>
+if ($submit) {
 
-<p>Welcome, <b><?php print user_getname(); ?></b>. 
+	if (trim($realname)=="") {
+		exit_error(
+		    'Missing Paramater',
+		    'Please fill in real name.'
+		);
+	}
+
+	if ($remember_user) {
+		// set cookie, expire in 3 months
+		setcookie("sf_user_hash",$u->getID().'_'.substr($u->getMD5Passwd(),0,16),time()+90*24*60*60,'/');
+	} else {
+		// remove cookie
+		setcookie("sf_user_hash",'',0,'/');
+	}
+
+	if (!$u->update($realname, $language, $timezone, $mail_site, $mail_va, $use_ratings)) {
+		$feedback .= $u->getErrorMessage().'<br>';
+	} else {
+		$feedback .= 'Updated<br>';
+	}
+
+}
+
+site_user_header(array('title'=>"Account Maintenance",'pagename'=>'account'));
+
+echo '<FORM action="'.$PHP_SELF.'" method="post">';
+$HTML->box1_top("Account Maintenance: " . $u->getUnixName()); ?>
+
+<p>Welcome, <b><?php print $u->getUnixName(); ?></b>. 
 <p>You can view/change all of your account features from here. You may also wish
 to view your developer/consultant profiles and ratings.
 
 <UL>
-<LI><A href="/users/<?php print strtolower($row_user['user_name']); ?>/"><B>View My Developer Profile</B></A>
+<LI><A href="/users/<?php print $u->getUnixName(); ?>/"><B>View My Developer Profile</B></A>
 <LI><A HREF="/people/editprofile.php"><B>Edit My Skills Profile</B></A>
+<LI><A HREF="/themes/"><B>Change My Theme</B></A>
 </UL>
 <?php $HTML->box1_bottom(); ?>
 
@@ -33,40 +66,41 @@ to view your developer/consultant profiles and ratings.
 
 <TR valign=top>
 <TD>Member Since: </TD>
-<TD><B><?php print date($sys_datefmt,$row_user['add_date']); ?></B></TD>
+<TD><B><?php print date($sys_datefmt,$u->getAddDate()); ?></B></TD>
 </TR>
 <TR valign=top>
 <TD>User ID: </TD>
-<TD><B><?php print $row_user['user_id']; ?></B></TD>
+<TD><B><?php print $u->getID(); ?></B></TD>
 </TR>
 
 <TR valign=top>
 <TD>Login Name: </TD>
-<TD><B><?php print strtolower($row_user['user_name']); ?></B>
-<BR><A href="change_pw.php">[Change Password]</A></TD>
-</TR>
-
-<TR valign=top>
-<TD>Timezone/Language: </TD>
-<TD><B><?php print $row_user['timezone']; ?></B> / <B><?php echo $Language->getLanguageName($row_user['language']); ?></B>
-<BR><A href="change_timezone.php">[Change]</A></TD>
+<TD><B><?php print $u->getUnixName(); ?></B>
+<br><A href="change_pw.php">[Change Password]</A></TD>
 </TR>
 
 <TD>Real Name: </TD>
-<TD><B><?php print $row_user['realname']; ?></B>
-<BR><A href="change_realname.php">[Change Real Name]</A></TD>
-</TR>
-
-<TR valign=top>
-<TD>Email Addr: </TD>
-<TD><B><?php print $row_user['email']; ?></B>
-<BR><A href="change_email.php">[Change Email Addr]</A>
+<TD><input type="text" name="realname" value="<?php print $u->getRealName(); ?>"></B>
 </TD>
 </TR>
 
 <TR valign=top>
-<TD>Skills Profile: </TD>
-<TD><A href="/people/editprofile.php">[Edit Skills Profile]</A></TD>
+<TD>Language: </TD>
+<TD><?php echo html_get_language_popup ($Language,'language',$u->getLanguage()); ?>
+</TD>
+</TR>
+
+<TR valign=top>
+<TD>Timezone: </TD>
+<TD><?php echo html_get_timezone_popup('timezone', $u->getTimeZone()); ?>
+</TD>
+</TR>
+
+<TR valign=top>
+<TD>Email Addr: </TD>
+<TD><B><?php print $u->getEmail(); ?></B>
+<br><A href="change_email.php">[Change Email Addr]</A>
+</TD>
 </TR>
 
 <TR>
@@ -74,34 +108,39 @@ to view your developer/consultant profiles and ratings.
 <?php 
 // ############################# Preferences
 $HTML->box1_top("Preferences"); ?>
-<FORM action="updateprefs.php" method="post">
 
-<INPUT type="checkbox" name="form_mail_site" value="1"<?php 
-	if ($row_user['mail_siteupdates']) print " checked"; ?>> Receive Email for Site Updates
+<INPUT type="checkbox" name="mail_site" value="1"<?php 
+	if ($u->getMailingsPrefs('site')) print " checked"; ?>> Receive Email for Site Updates
 <I>(This is very low traffic and will include security notices. Highly recommended.)</I>
 
-<P><INPUT type="checkbox"  name="form_mail_va" value="1"<?php
-	if ($row_user['mail_va']) print " checked"; ?>> Receive additional community mailings. 
+<P><INPUT type="checkbox"  name="mail_va" value="1"<?php
+	if ($u->getMailingsPrefs('va')) print " checked"; ?>> Receive additional community mailings. 
 <I>(Low traffic.)</I>
 
-<P><INPUT type="checkbox"  name="form_remember_user" value="1"<?php
-	if ($sf_user_hash) print " checked"; ?>> "Remember me".
+<P><INPUT type="checkbox"  name="remember_user" value="1"<?php
+	if ($sf_user_hash) print " checked"; ?> > "Remember me".
 <I>(Allows to access your <a href="/my/">personal page</a> without being logged
 in. You will still need to login explicitly before making any changes.)</I>
 
-<P align=center><CENTER><INPUT type="submit" name="Update" value="Update"></CENTER>
-</FORM>
+<P><INPUT type="checkbox"  name="use_ratings" value="1"<?php
+	if ($u->usesRatings()) print " checked"; ?> > Participate in peer ratings
+<I>(Allows you to rate other users using several criteria as well as to be
+rated by others. More information is available on <a href="/users/<?php echo $u->getUnixName(); ?>">
+your user page</a> if you have chosen to participate in ratings).
+</I>
+
+<P align=center>
 <?php $HTML->box1_bottom(); 
 
 // ############################### Shell Account
 
-if ($row_user['unix_status'] == 'A') {
+if ($u->getUnixStatus() == 'A') {
 	$HTML->box1_top("Shell Account Information"); 
 	print '&nbsp;
-<BR>Shell box: <b>'.$row_user['unix_box'].'</b>
-<BR>CVS/SSH Shared Keys: <B>';
+<BR>Shell box: <b>'.$u->getUnixBox().'</b>
+<BR>CVS/SSH Shared Authorized Keys: <B>';
 	// get shared key count from db
-	$expl_keys = explode("###",$row_user['authorized_keys']);
+	$expl_keys = explode("\n", $u->getAuthorizedKeys());
 	if ($expl_keys[0]) {
 		print (sizeof($expl_keys));
 	} else {
@@ -116,6 +155,12 @@ if ($row_user['unix_status'] == 'A') {
 </TR>
 
 </TABLE>
+
+<CENTER>
+<INPUT type="submit" name="submit" value="Update">
+<INPUT type="reset" name="reset" value="Reset Changes">
+</CENTER>
+</FORM>
 
 <?php
 site_user_footer(array());
