@@ -1,3 +1,10 @@
+gforge (3.1-7) unstable; urgency=low
+
+  * [Roland] Yet another LDAP fix.  This one would completely prevent
+    installation from scratch.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 11 Jan 2004 02:12:51 +0100
+
 gforge (3.1-6) unstable; urgency=low
 
   * [Roland] Detection of wrong passwords, with a message describing how
