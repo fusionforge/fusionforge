@@ -17,10 +17,6 @@ case "$1" in
 	# Make sure Apache sees us
 	if [ -e /etc/apache/httpd.conf ] ; then
 	    cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf.gforge-new
-	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf.gforge-new
 	    
 	    if ! grep -q "^Include /etc/gforge/httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
 		echo "### Next line inserted by GForge install" >> /etc/apache/httpd.conf.gforge-new
@@ -68,6 +64,17 @@ case "$1" in
 	;;
     configure)
 	/usr/lib/gforge/bin/prepare-vhosts-file.pl
+	if [ -e /etc/apache/httpd.conf ] ; then
+	    /usr/sbin/modules-config apache enable mod_php4
+	    /usr/sbin/modules-config apache enable mod_ssl
+	    /usr/sbin/modules-config apache enable mod_env
+	    /usr/sbin/modules-config apache enable mod_vhost_alias
+	fi
+	if [ -e /etc/apache-ssl/httpd.conf ] ; then
+	    /usr/sbin/modules-config apache-ssl enable mod_php4
+	    /usr/sbin/modules-config apache-ssl enable mod_env
+	    /usr/sbin/modules-config apache-ssl enable mod_vhost_alias
+	fi
 	if [ -x /usr/sbin/apache ]; then
 		invoke-rc.d apache restart || true
 	fi
