@@ -569,7 +569,7 @@ my	pending_projects_1	There is one pending project awaiting review
 my	pending_projects_2	There are $1 pending projects awaiting review.
 my	pending_projects_3	Click here.
 my	pending_news_bytes	Pending News Bytes
-my	pending_news_bytes_1	There is one pending project awaiting review
+my	pending_news_bytes_1	There is one news byte awaiting review
 my	pending_news_bytes_2	There are $1 news bytes awaiting review
 my	pending_news_bytes_3	Click here.
 my_bookmark	return	Return
