@@ -1,5 +1,7 @@
 2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/account/index.php: Display new language immediately.
+
 	* www/include/languages/PortugueseBrazilian.tab: use new include
 	functionality to get default strings from Portuguese.
 

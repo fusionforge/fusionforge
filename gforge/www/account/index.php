@@ -37,11 +37,20 @@ if ($submit) {
 		setcookie("sf_user_hash",'',0,'/');
 	}
 
+	// Refresh page if language changed
+	if ($language != $u->getLanguage()) {
+		$refresh = 1;
+	}
+	
 	if (!$u->update($realname, $language, $timezone, $mail_site, $mail_va, $use_ratings, 
 		$jabber_address,$jabber_only)) {
 		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
 		$feedback .= 'Updated<br />';
+	}
+
+	if ($refresh) {
+		header("Location: /account/?feedback=".urlencode($feedback));
 	}
 
 }
