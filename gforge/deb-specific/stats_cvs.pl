@@ -148,7 +148,7 @@ sub print_stats {
 	$res = $dbh->prepare($sql);
 	$res->execute();
 	while ( my ($cvsgroup, $cvsuser, $modified, $added, $others) = $res->fetchrow()) {
-		print "$cvsgroup\t$cvsuser\t$modified\t$added\n";
+		print "$cvsgroup\t$cvsuser\t$modified\t$added\t$others\n";
 	}
 	print "-----------------------------------------------------\n";
 }
