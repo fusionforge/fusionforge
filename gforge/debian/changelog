@@ -1,3 +1,10 @@
+gforge (3rc1-0+) experimental; urgency=low
+
+  * [Christian] Added support for content encoding in util_send_mail
+  * [Christian] Removed .htaccess and put appropriate lines in httpd template 
+
+ -- Christian Bayle <bayle@debian.org>  Thu,  6 Mar 2003 16:36:14 +0100
+
 gforge (3pre9-0+2) experimental; urgency=low
 
   * [Roland] Recoded Debconf templates into UTF-8, as part of the grand
@@ -19,7 +26,7 @@ gforge (3pre9-0+2) experimental; urgency=low
 
  -- Christian Bayle <bayle@debian.org>  Mon,  3 Mar 2003 22:55:59 +0100
 
-gforge (3pre8-0+) experimental; urgency=low
+gforge (3pre8-0+1) experimental; urgency=low
 
   * [Roland] Reencoded this changelog into UTF-8, as per upcoming policy
     changes (see bug #174982).
