@@ -105,6 +105,26 @@ if(!empty($mailingListIds)) {
 
 fclose($h1);
 
+//
+//delete mailing lists
+//
+$res=db_query("SELECT mailing_list_name FROM deleted_mailing_lists WHERE isdeleted = 0;");
+$err .= db_error();
+$rows	 = db_numrows($res);
+
+for($k = 0; $k < $rows; $k++) {
+	$deleted_mail_list = db_result($res,$k,'mailing_list_name');
+	
+	passthru(MAILMAN_DIR."bin/rmlist -a $deleted_mail_list", $failed);
+	if(!$failed){
+		$res1 = db_query("UPDATE mailing_list_name SET isdeleted = 1 WHERE mailing_list_name = '$deleted_group_name';" );
+		$err .= db_error();
+	}else{
+		$err .= "Colud not remove the list $deleted_mail_list \n";
+	}
+}
+
+
 cron_entry(18,$err);
 
 ?>

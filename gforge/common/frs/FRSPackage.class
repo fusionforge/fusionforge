@@ -25,6 +25,7 @@
  */
 
 require_once('common/include/Error.class');
+require_once('common/frs/FRSRelease.class');
 
 function &get_frs_packages($Group) {
 	$res=db_query("SELECT * FROM frs_package WHERE group_id='".$Group->getID()."'");
@@ -437,6 +438,10 @@ class FRSPackage extends Error {
 				return false;
 			}
 		}
+		$file=$GLOBALS['sys_upload_dir'].'/'.
+			$this->Group->getUnixName() . '/' .
+			$this->getFileName().'/';
+		unlink($file);
 		db_query("DELETE FROM frs_package WHERE package_id='".$this->getID()."'
 			AND group_id='".$this->Group->getID()."'");
 		return true;

@@ -32,6 +32,8 @@ if (!$g || !is_object($g)) {
 	exit_error('Error',$g->getErrorMessage());
 }
 
+$upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
+
 if ($submit){
 
 	if (!$doc_group || $doc_group ==100) {
@@ -39,7 +41,7 @@ if ($submit){
 		exit_error($Language->getText('general','error'),$Language->getText('docman_new','no_valid_group'));
 	}
 
-	if (!$title || !$description || (!$uploaded_data && !$file_url)) {
+	if (!$title || !$description || (!$uploaded_data && !$file_url && !$ftp_filename )) {
 		exit_missing_param();
 	}
 
@@ -60,7 +62,11 @@ if ($submit){
 		$data = '';
 		$uploaded_data_name=$file_url;
 		$uploaded_data_type='URL';
+	} elseif ($ftp_filename) {
+		$uploaded_data_name=$upload_dir.'/'.$ftp_filename;
+		$data = addslashes(fread(fopen($uploaded_data_name, 'r'), filesize($uploaded_data_name)));
 	}
+	
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
 		exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	} else {
@@ -99,6 +105,16 @@ if ($submit){
 		<input type="file" name="uploaded_data" size="30" /><br /><br />
 		<strong>	<?php echo $Language->getText('docman_new','upload_url') ?> :</strong> <?php echo utils_requiredField(); ?><br />
 		<input type="text" name="file_url" size="50" />
+
+		<?php if ($sys_use_ftpuploads) {
+			echo '<br /><br />';
+			echo '<strong>'.$Language->getText('docman_new','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
+			echo $Language->getText('docman_new','ftpupload_choosefile').'</strong>'. utils_requiredField() .'<br />';
+			$arr[]='';
+			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
+			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
+			echo '<br /><br />';			
+			} ?>
 		</td>
 		</td>
 	</tr>

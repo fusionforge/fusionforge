@@ -87,7 +87,7 @@ class MailingListFactory extends Error {
 	 * @param boolean $admin if we are in admin mode (we want to see deleted lists)
 	 *	@return	array	The array of MailingList objects.
 	 */
-	function &getMailingLists($admin = false) {
+	function &getMailingLists() {
 		global $Language;
 		if (isset($this->mailingLists) && is_array($this->mailingLists)) {
 			return $this->mailingLists;
@@ -98,9 +98,6 @@ class MailingListFactory extends Error {
 		$perm = & $this->Group->getPermission(session_get_user());
 		if ($perm && is_object($perm) && $perm->isMember()) {
 			$public_flag = MAIL__MAILING_LIST_IS_PRIVATE.', '.MAIL__MAILING_LIST_IS_PUBLIC;
-			if($admin && MailingList::userCanAdminMailingLists($this->Group)) {
-				$public_flag .= ', '.MAIL__MAILING_LIST_IS_DELETED;
-			}
 		}
 
 		$sql = 'SELECT * '

@@ -261,6 +261,14 @@ foreach($users as $user) {
 //	Create home dir for groups
 //
 foreach($groups as $group) {
+
+	//create an FTP upload dir for this project
+	if ($sys_use_ftp_upload) { 
+		if (!is_dir($sys_ftp_upload_dir.'/'.$group)) {
+			@mkdir($sys_ftp_upload_dir.'/'.$group); 
+		}
+	}
+
 	if (is_dir($groupdir_prefix."/".$group)) {
 
 	} else {
@@ -268,6 +276,7 @@ foreach($groups as $group) {
 		@mkdir($groupdir_prefix."/".$group."/htdocs");
 		@mkdir($groupdir_prefix."/".$group."/cgi-bin");
 		$g =& group_get_object_by_name($group);
+		
 
 		//
 		//	Read in the template file
@@ -307,6 +316,28 @@ foreach($groups as $group) {
 		$user=db_result($resgroupadmin,0,'user_name');
 		system("chown -R $user:$group $groupdir_prefix/$group");
 	}
+}
+
+//
+//	Move CVS trees for deleted groups
+//
+$res8=db_query("SELECT unix_group_name FROM deleted_groups WHERE isdeleted = 0;");
+$err .= db_error();
+$rows	 = db_numrows($res8);
+for($k = 0; $k < $rows; $k++) {
+	$deleted_group_name = db_result($res8,$k,'unix_group_name');
+
+	if(!is_dir($sys_cvsroot."/deleted"))
+		system("mkdir ".$sys_cvsroot."/deleted");
+		
+	if(!is_dir($sys_cvsroot."/deleted/".$deleted_group_name))
+		system("mkdir ".$sys_cvsroot."/deleted/".$deleted_group_name);
+
+	system("mv -f $sys_cvsroot/$deleted_group_name/*.* $sys_cvsroot/.deleted/$deleted_group_name");
+	
+	
+	$res9 = db_query("UPDATE deleted_groups set isdeleted = 1 WHERE unix_group_name = '$deleted_group_name';" )
+	$err .= db_error();
 }
 
 cron_entry(16,$err);

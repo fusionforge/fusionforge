@@ -88,6 +88,7 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 
 <p>
 <?php print "<a href=\"/project/admin/?group_id=$group_id\"><h3>".$Language->getText('admin_groupedit','project_admin'). "</h3></a>"; ?></p>
+<?php print "<a href=\"groupdelete.php?group_id=$group_id\"><h3>".$Language->getText('admin_groupdelete','title'). "</h3></a>"; ?></p>
 
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
@@ -111,15 +112,13 @@ if($status == 'P') {
 			'I',
 			'A',
 			'P',
-			'H',
-			'D'
+			'H'
 		),
 		array(
 			$Language->getText('admin_groupedit','incomplete'),
 			$Language->getText('admin_groupedit','active'),
 			$Language->getText('admin_groupedit','pending'),
-			$Language->getText('admin_groupedit','holding'),
-			$Language->getText('admin_groupedit','deleted')
+			$Language->getText('admin_groupedit','holding')
 		),
 		'form_status', $status, false
 	);

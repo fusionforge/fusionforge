@@ -27,6 +27,7 @@ if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
 }
 
+$upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 
 /*
 	Quick file release system , Darrell Brogdon, SourceForge, Aug, 2000
@@ -35,13 +36,13 @@ if (!$perm->isReleaseTechnician()) {
 */
 
 if( $submit ) {
-	if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($sys_ftp_upload_dir.'/'.$ftp_filename)) {
+	if ($sys_use_ftpuploads && $ftp_filename && util_is_valid_filename($ftp_filename) && is_file($upload_dir.'/'.$ftp_filename)) {
 		//file was uploaded already via ftp
 		//use setuid prog to chown it
 		//$cmd = escapeshellcmd("$sys_ftp_upload_chowner $ftp_filename");
 		//exec($cmd,$output);
 		$userfile_name=$ftp_filename;
-		$userfile=$sys_ftp_upload_dir.'/'.$ftp_filename;
+		$userfile=$upload_dir.'/'.$ftp_filename;
 		//echo $cmd.'***'.$output.'***'.$userfile;
 	}
 	if (!$release_name) {
@@ -205,7 +206,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),
 			echo $Language->getText('project_admin_qrs','ftpupload_new_file',array($sys_ftp_upload_host)).'<br />';
 			echo $Language->getText('project_admin_qrs','ftpupload_choosefile').'<br />';
 			$arr[]='';
-			$ftp_files_arr=array_merge($arr,ls($sys_ftp_upload_dir,true));
+			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
 			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename',''); ?>
 		
 		</p>

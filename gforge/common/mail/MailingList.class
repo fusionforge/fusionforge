@@ -122,7 +122,7 @@ class MailingList extends Error {
 		//
 		if (!$creator_id) {
 			$creator_id=user_getid();
-			if(! $this->userCanAdminMailingLists($this->Group)) {
+			if(!$this->userIsAdmin()) {
 				$this->setPermissionDeniedError();
 				return false;
 			}
@@ -212,22 +212,22 @@ class MailingList extends Error {
 	 *	update - use this function to update an entry in the database.
 	 *
 	 *	@param	string	The description of the mailing list
-	 *	@param	int	Pass (1) if it should be public (0) for private (9) for deleted
+	 *	@param	int	Pass (1) if it should be public (0) for private
 	 *	@return	boolean	success.
 	 */
 	function update($description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC) {
 		global $Language;
 		
-		if(! $this->userCanAdminMailingLists($this->Group)) {
+		if(! $this->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		
-		$sql = "UPDATE mail_group_list ".
-			"SET is_public='".$isPublic."', ".
-				"description='". $description ."' ".
-			"WHERE group_list_id='".$this->groupMailingListId."' ".
-			"AND group_id='".$this->Group->getID()."'";
+		$sql = "UPDATE mail_group_list 
+			SET is_public='".$isPublic."', 
+			description='". $description ."' 
+			WHERE group_list_id='".$this->groupMailingListId."' 
+			AND group_id='".$this->Group->getID()."'";
 			
 		$res = db_query($sql);
 
@@ -340,15 +340,48 @@ class MailingList extends Error {
 	}
 
 	/**
-	 * userCanAdminMailingLists - use this function to know if the user can administrate mailing lists
+	 *	delete - permanently delete this mailing list
+	 *
+	 *	@param	boolean	I'm Sure.
+	 *	@param	boolean	I'm Really Sure.
+	 *	@return	boolean success;
+	 */
+	function delete($sure,$really_sure) {
+
+		if (!$sure || !$really_sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$sql="INSERT INTO deleted_mailing_lists (mailing_list_name,
+			delete_date,isdeleted) VALUES ('".$this->getName."','".time()."','0')";
+		$res=db_query($sql);
+		if (!$res) {
+			$this->setError('Could Not Insert Into Delete Queue: '.db_error());
+			return false;
+		}
+		$res=db_query("DELETE FROM mail_group_list WHERE 
+			group_list_id='".$this->getID()."'");
+		if (!$res) {
+			$this->setError('Could Not Delete List: '.db_error());
+			return false;
+		}
+		return true;
+		
+	}
+
+	/**
+	 * userIsAdmin - use this function to know if the user can administrate mailing lists
 	 *
 	 * This is a static method. Currently the user must be a project or a sitewide admin to administrate the mailing lists
 	 *
-	 * @param object $Group group object
 	 * @return boolean true if the user can administrate mailing lists
 	 */
-	function userCanAdminMailingLists(& $Group) {
-		$perm = & $Group->getPermission(session_get_user());
+	function userIsAdmin() {
+		$perm = & $this->Group->getPermission(session_get_user());
 		if (!$perm || !is_object($perm)) {
 			return false;
 		} elseif ($perm->isAdmin()) {

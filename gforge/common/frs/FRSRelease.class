@@ -26,19 +26,20 @@
 
 
 require_once('common/include/Error.class');
+require_once('common/frs/FRSFile.class');
 
 /**
- *      Factory method which creates a FRSRelease from an release id
+ *	  Factory method which creates a FRSRelease from an release id
  *
- *      @param int      The release id
- *      @param array    The result array, if it's passed in
- *      @return object  FRSRelease object
+ *	  @param int	  The release id
+ *	  @param array	The result array, if it's passed in
+ *	  @return object  FRSRelease object
  */
 function &frsrelease_get_object($release_id, $data=false) {
 	global $FRSRELEASE_OBJ;
 	if (!isset($FRSRELEASE_OBJ['_'.$release_id.'_'])) {
 		if ($data) {
-                	//the db result handle was passed in
+					//the db result handle was passed in
 		} else {
 			$res=db_query("SELECT * FROM frs_release WHERE
 			release_id='$release_id'");
@@ -319,18 +320,18 @@ class FRSRelease extends Error {
 		return $this->release_files;
 	}
 
-    /**
-     *  delete - delete this release and all its related data.
-     *
-     *  @param  bool    I'm Sure.
-     *  @param  bool    I'm REALLY sure.
-     *  @return   bool true/false;
-     */
-    function delete($sure, $really_sure) {
-        if (!$sure || !$really_sure) {
-            $this->setMissingParamsError();
-            return false;
-        }
+	/**
+	 *  delete - delete this release and all its related data.
+	 *
+	 *  @param  bool	I'm Sure.
+	 *  @param  bool	I'm REALLY sure.
+	 *  @return   bool true/false;
+	 */
+	function delete($sure, $really_sure) {
+		if (!$sure || !$really_sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
 		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
@@ -344,6 +345,11 @@ class FRSRelease extends Error {
 				return false;
 			}
 		}
+		$file=$GLOBALS['sys_upload_dir'].'/'.
+			$this->FRSPackage->Group->getUnixName() . '/' .
+			$this->FRSPackage->getFileName().'/'.
+			$this->getFileName().'/';
+		unlink($file);
 		db_query("DELETE FROM frs_release WHERE release_id='".$this->getID()."'
 			AND package_id='".$this->FRSPackage->getID()."'");
 		return true;

@@ -35,12 +35,18 @@
  */
 
 require_once('common/tracker/ArtifactTypes.class');
+require_once('common/tracker/ArtifactTypeFactory.class');
 require_once('common/forum/Forum.class');
+require_once('common/forum/ForumFactory.class');
 require_once('common/pm/ProjectGroup.class');
+require_once('common/pm/ProjectGroupFactory.class');
 require_once('common/include/Role.class');
 require_once('common/frs/FRSPackage.class');
 require_once('common/docman/DocumentGroup.class');
 require_once('common/mail/MailingList.class');
+require_once('common/mail/MailingListFactory.class');
+require_once('common/survey/SurveyFactory.class');
+require_once('common/survey/SurveyQuestionFactory.class');
 require_once('www/include/BaseLanguage.class');
 
 //the license_id of "Other/proprietary" license
@@ -1260,7 +1266,198 @@ class Group extends Error {
 	 */
 	function userIsAdmin() {
 		$perm =& $this->getPermission( session_get_user() );
+		if (!$perm || !is_object($perm)) {
+			return false;
+		} elseif ($perm->isError()) {
+			return false;
+		}
 		return $perm->isAdmin();
+	}
+
+	function delete($sure,$really_sure,$really_really_sure) {
+
+		if (!$sure || !$really_sure || !$really_really_sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		$perm =& $this->getPermission( session_get_user() );
+		if (!$perm || !is_object($perm)) {
+			$this->setPermissionDeniedError();
+			return false;
+		} elseif ($perm->isError()) {
+			$this->setPermissionDeniedError();
+			return false;
+		} elseif (!$perm->isSuperUser()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+
+		db_begin();
+		//
+		//	Remove all the members
+		//
+		$members =& $this->getMembers();
+		for ($i=0; $i<count($members); $i++) {
+			$this->removeUser($members[$i]->getID());
+//echo 'RemoveMembers'.db_error();
+		}
+		//
+		//	Delete Trackers
+		//
+		$atf = new ArtifactTypeFactory($this);
+		$at_arr =& $atf->getArtifactTypes();
+		for ($i=0; $i<count($at_arr); $i++) {
+			if (!is_object($at_arr[$i])) {
+				echo "Not Object: ArtifactType: ".$i;
+				continue;
+			}
+			$at_arr[$i]->delete(1,1);
+//echo 'ArtifactTypeFactory'.db_error();
+		}
+		//
+		//	Delete Forums
+		//
+		$ff = new ForumFactory($this);
+		$f_arr =& $ff->getForums();
+		for ($i=0; $i<count($f_arr); $i++) {
+			if (!is_object($f_arr[$i])) {
+				echo "Not Object: Forum: ".$i;
+				continue;
+			}
+			$f_arr[$i]->delete(1,1);
+//echo 'ForumFactory'.db_error();
+		}
+		//
+		//	Delete Subprojects
+		//
+		$pgf = new ProjectGroupFactory($this);
+		$pg_arr =& $pgf->getProjectGroups();
+		for ($i=0; $i<count($pg_arr); $i++) {
+			if (!is_object($pg_arr[$i])) {
+				echo "Not Object: ProjectGroup: ".$i;
+				continue;
+			}
+			$pg_arr[$i]->delete(1,1);
+//echo 'ProjectGroupFactory'.db_error();
+		}
+		//
+		//	Delete FRS Packages
+		//
+		//$frspf = new FRSPackageFactory($this);
+		$res=db_query("SELECT * FROM frs_package WHERE group_id='".$this->getID()."'");
+//echo 'frs_package'.db_error();
+		//$frsp_arr =& $frspf->getPackages();
+		while ($arr = db_fetch_array($res)) {
+			//if (!is_object($pg_arr[$i])) {
+			//	echo "Not Object: ProjectGroup: ".$i;
+			//	continue;
+			//}
+			$frsp=new FRSPackage($this,$arr['package_id'],$arr);
+			$frsp->delete(1,1);
+		}
+		//
+		//	Delete news
+		//
+		$news_group=&group_get_object($GLOBALS['sys_news_group']);
+		$res=db_query("SELECT forum_id FROM news_bytes WHERE group_id='".$this->getID()."'");
+		for ($i=0; $i<db_numrows($res); $i++) {
+			$Forum = new Forum($news_group,db_result($res,$i,'forum_id'));
+			if (!$Forum->delete(1,1)) {
+				echo "Could Not Delete News Forum: ".$Forum->getID();
+			}
+		}
+		$res=db_query("DELETE FROM news_bytes WHERE group_id='".$this->getID()."'");
+
+		//
+		//	Delete reporting
+		//
+		$res=db_query("DELETE FROM rep_group_act_weekly WHERE group_id='".$this->getID()."'");
+//echo 'rep_group_act_weekly'.db_error();
+		$res=db_query("DELETE FROM rep_group_act_monthly WHERE group_id='".$this->getID()."'");
+//echo 'rep_group_act_monthly'.db_error();
+		$res=db_query("DELETE FROM rep_group_act_daily WHERE group_id='".$this->getID()."'");
+//echo 'rep_group_act_daily'.db_error();
+		
+		//
+		//	Delete docs
+		//
+		$res=db_query("DELETE FROM doc_data WHERE group_id='".$this->getID()."'");
+//echo 'doc_data'.db_error();
+		$res=db_query("DELETE FROM doc_groups WHERE group_id='".$this->getID()."'");
+//echo 'doc_groups'.db_error();
+		//
+		//	Delete group history
+		//
+		$res=db_query("DELETE FROM group_history WHERE group_id='".$this->getID()."'");
+//echo 'group_history'.db_error();
+		//
+		//	Delete group plugins
+		//
+		$res=db_query("DELETE FROM group_plugin WHERE group_id='".$this->getID()."'");
+//echo 'group_plugin'.db_error();
+		//
+		//	Delete group cvs stats
+		//
+		$res=db_query("DELETE FROM stats_cvs_group WHERE group_id='".$this->getID()."'");
+//echo 'stats_cvs_group'.db_error();
+		//
+		//	Delete Surveys
+		//
+		$sf = new SurveyFactory($this);
+		$s_arr =& $sf->getSurveys();
+		for ($i=0; $i<count($s_arr); $i++) {
+			if (!is_object($s_arr[$i])) {
+				echo "Not Object: Survey: ".$i;
+				continue;
+			}
+			$s_arr[$i]->delete();
+//echo 'SurveyFactory'.db_error();
+		}
+		//
+		//	Delete SurveyQuestions
+		//
+		$sqf = new SurveyQuestionFactory($this);
+		$sq_arr =& $sqf->getSurveyQuestions();
+		for ($i=0; $i<count($sq_arr); $i++) {
+			if (!is_object($sq_arr[$i])) {
+				echo "Not Object: SurveyQuestion: ".$i;
+				continue;
+			}
+			$sq_arr[$i]->delete();
+//echo 'SurveyQuestionFactory'.db_error();
+		}
+		//
+		//	Delete Mailing List Factory
+		//
+		$mlf = new MailingListFactory($this);
+		$ml_arr =& $mlf->getMailingLists();
+		for ($i=0; $i<count($ml_arr); $i++) {
+			if (!is_object($ms_arr[$i])) {
+				echo "Not Object: MailingList: ".$i;
+				continue;
+			}
+			$ml_arr[$i]->delete();
+//echo 'MailingListFactory'.db_error();
+		}
+		//
+		//	Delete counters
+		//
+		$res=db_query("DELETE FROM project_sums_agg WHERE group_id='".$this->getID()."'");
+//echo 'project_sums_agg'.db_error();
+		$res=db_query("INSERT INTO deleted_groups (
+		unix_group_name,delete_date,isdeleted) VALUES 
+		('".$this->getUnixName()."','".time()."','0')");
+//echo 'InsertIntoDeleteQueue'.db_error();
+		$res=db_query("DELETE FROM groups WHERE group_id='".$this->getID()."'");
+//echo 'DeleteGroup'.db_error();
+		db_commit();
+		if (!$res) {
+			return false;
+		}
+		exec('/bin/rm -rf '.$GLOBALS['sys_upload_dir'].'/'.$this->getUnixName().'/');
+		exec('/bin/rm -rf '.$GLOBALS['sys_ftp_upload_dir'].'/'.$this->getUnixName().'/');
+		return true;
+
 	}
 
 	/*

@@ -110,7 +110,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><form name="projectsearch" action="search.php">
 	<?php echo $Language->getText('admin_index','groups_with_status'); ?>
 	<select name="status">
-			<option value="D"><?php echo $Language->getText('admin_index','project_deleted'); ?></option>
 			<option value="A"><?php echo $Language->getText('admin_index','project_active'); ?></option>
 			<option value="H"><?php echo $Language->getText('admin_index','project_hold'); ?></option>
 			<option value="P"><?php echo $Language->getText('admin_index','project_pending'); ?></option>

@@ -174,6 +174,10 @@ add_snippet	snippets_in_this_package	Snippets In This Package
 add_snippet	submit	SUBMIT
 add_snippet	title	Submit A New Snippet
 add_snippet	you_can_use_this_form	You can use this form repeatedly to keep adding snippets to your package.</p><p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.
+admin_groupdelete	title	Permanently Delete Project
+admin_groupdelete	permanentlydeleteproject	Permanently and irretrievably delete project
+admin_groupdelete	delete	Confirm Delete
+admin_groupdelete	permanentlydelete	Permanently Delete
 admin	add	Add
 admin	add_new	[add new]
 admin	are_you_sure_delete	Are you sure you want to delete this
@@ -640,6 +644,7 @@ docman_admin_editdocs	section	Document Manager Administration
 docman_admin_editdocs	state	State
 docman_admin_editdocs	title	Edit Docs
 docman_admin_editdocs	upload	OPTIONAL: Upload new file
+docman_admin_editdocs	upload_ftp	OR choose one form FTP $1
 docman_admin_editgroups	add_group	Add a group
 docman_admin_editgroups	description	Group name will be used as a title, so it should be formatted correspondingly.
 docman_admin_editgroups	edit_group	Edit a group
@@ -677,6 +682,8 @@ docman_new	submit	Submit Information
 docman_new	submitted_successfully	Document submitted sucessfully
 docman_new	title	Document Manager: Submit New Documentation
 docman_new	upload_file	Upload File	
+docman_new	ftpupload_new_file	Alternatively, you can use FTP to upload a new file at $1
+docman_new	ftpupload_choosefile	Choose an FTP file instead of uploading:
 error	error_creating	Error creating
 error	not_found	PAGE NOT FOUND
 error	title	Requested Page not Found (Error 404)
@@ -1026,6 +1033,10 @@ mail	provided_by	<p>Mailing lists provided via a GForge version of <a href="http
 mail	section	Project: $1
 mail	title	Mailing Lists
 mail	unable_to_get_lists	Unable to get the lists
+mail_admin_deletelist	title	Permanently Delete List
+mail_admin_deletelist	confirmdelete	Confirm Delete
+mail_admin_deletelist	confirmdelete	Confirm Delete
+mail_admin_deletelist	permanentlydelete	Permanently Delete
 mail_admin	add_list	Add Mailing List
 mail_admin	admin_in_mailman	Administrate
 mail_admin	error_getting_list	Error getting the list

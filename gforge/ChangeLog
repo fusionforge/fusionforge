@@ -1,3 +1,9 @@
+2005-03-14  Tim Perdue <tim@gforge.org>
+
+	* New "delete" function to permanently purge an entire project
+	from the database and mailing lists and move cvs tree into a .deleted director
+	* Ability to upload docs using the new FTP upload functionality
+
 2005-03-11  Tim Perdue <tim@gforge.org>
 
 	* fixed possible long-standing RBAC bug in Role.class so 

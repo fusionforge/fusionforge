@@ -306,20 +306,20 @@ class FRSFile extends Error {
 			return false;
 		}
 
-		$file=$GLOBALS['sys_upload_dir']. $this->FRSRelease->FRSPackage->Group->getUnixName() . '/' . $this->getName();
-		if (!unlink($file)) {
-			$this->setError("frsDeleteFile()::$file ".db_error());
+		$file=$GLOBALS['sys_upload_dir'].'/'. 
+			$this->FRSRelease->FRSPackage->Group->getUnixName() . '/' . 
+			$this->FRSRelease->FRSPackage->getFileName().'/'.
+			$this->FRSRelease->getFileName().'/'.
+			$this->getName();
+		unlink($file);
+		$result = db_query("DELETE FROM frs_file WHERE file_id='".$this->getID()."'");
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError("frsDeleteFile()::2 ".db_error());
 			return false;
 		} else {
-			$result = db_query("DELETE FROM frs_file WHERE file_id='".$this->getID()."'");
-			if (!$result || db_affected_rows($result) < 1) {
-				$this->setError("frsDeleteFile()::2 ".db_error());
-				return false;
-			} else {
-				$res=db_query("DELETE FROM frs_dlstats_file WHERE file_id='".$this->getID()."'");
-				$res=db_query("DELETE FROM frs_dlstats_filetotal_agg WHERE file_id='".$this->getID()."'");
-				return true;
-			}
+			$res=db_query("DELETE FROM frs_dlstats_file WHERE file_id='".$this->getID()."'");
+			$res=db_query("DELETE FROM frs_dlstats_filetotal_agg WHERE file_id='".$this->getID()."'");
+			return true;
 		}
 	}
 

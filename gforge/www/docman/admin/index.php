@@ -36,6 +36,8 @@ if (!$perm || $perm->isError() || !$perm->isDocEditor()) {
 	exit_permission_denied();
 }
 
+$upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
+
 //
 //
 //	Submit the changes to the database
@@ -61,6 +63,10 @@ if ($submit) {
 			$data = '';
 			$filename=$file_url;
 			$filetype='URL';
+		} elseif ($ftp_filename) {
+			$filename=$upload_dir.'/'.$ftp_filename;
+			$data = addslashes(fread(fopen($filename, 'r'), filesize($filename)));
+			$filetype=$uploaded_data_type;
 		} else {
 			$filename=addslashes($d->getFileName());
 			$filetype=addslashes($d->getFileType());
@@ -195,8 +201,17 @@ if ($editdoc && $docid) {
         <input type="text" name="file_url" size="50" value="<?php echo $d->getFileName() ?>" />
 		<?php } else { ?>
 		<strong><?php echo $Language->getText('docman_admin_editdocs','upload') ?></strong><br />
-		<input type="file" name="uploaded_data" size="30" />
-		<?php } ?>
+		<input type="file" name="uploaded_data" size="30" /><br/><br />
+			<?php if ($sys_use_ftpuploads) { ?>
+			<strong><?php echo $Language->getText('docman_admin_editdocs','upload_ftp',array($sys_ftp_upload_host)) ?></strong><br />
+			<?php
+			$arr[]='';
+			$ftp_files_arr=array_merge($arr,ls($upload_dir,true));
+			echo html_build_select_box_from_arrays($ftp_files_arr,$ftp_files_arr,'ftp_filename','');
+			echo '<br /><br />';			
+			}
+		}
+		?>
 		</td>
 	</tr>
 	</table>

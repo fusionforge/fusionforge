@@ -25,11 +25,18 @@ if ($group_id) {
 		exit_no_group();
 	}
 	
-	if(! MailingList::userCanAdminMailingLists($Group)) {
+	$perm =& $Group->getPermission(session_get_user());
+	if (!$perm || !is_object($perm) || $perm->isError() || !$perm->isAdmin()) {
 		exit_permission_denied();
 	}
 	
+//
+//	Post Changes to database
+//
 	if (getStringFromRequest('post_changes') == 'y') {
+		//
+		//	Add list
+		//
 		if (getStringFromRequest('add_list') == 'y') {
 			$mailingList = new MailingList($Group);
 			
@@ -48,7 +55,9 @@ if ($group_id) {
 			} else {
 				$feedback .= $Language->getText('mail_admin_addlist', 'list_added');
 			}
-			
+		//
+		//	Change status
+		//
 		} elseif (getStringFromPost('change_status') == 'y') {
 			$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
 			
@@ -70,6 +79,9 @@ if ($group_id) {
 
 	}
 
+//
+//	Form to add list
+//
 	if(getIntFromGet('add_list')) {
 		mail_header(array(
 			'title' => $Language->getText('mail_admin_addlist', 'pagetitle'),
@@ -83,7 +95,7 @@ if ($group_id) {
 			exit_error($Language->getText('general','error'), $mlFactory->getErrorMessage());
 		}
 		
-		$mlArray =& $mlFactory->getMailingLists(true);
+		$mlArray =& $mlFactory->getMailingLists();
 
 		if ($mlFactory->isError()) {
 			echo '<h1>'.$Language->getText('general','error').' '.$Language->getText('mail', 'unable_to_get_lists') .'</h1>';
@@ -95,7 +107,9 @@ if ($group_id) {
 		$tableHeaders = array(
 			$Language->getText('mail_admin_addlist', 'existing_mailing_lists')
 		);
-
+//
+//	Show lists
+//
 		$mlCount = count($mlArray);
 		if($mlCount > 0) {
 			echo $HTML->listTableTop($tableHeaders);
@@ -111,6 +125,9 @@ if ($group_id) {
 			}
 			echo $HTML->listTableBottom();
 		}
+//
+//	Form to add list
+//
 		?>
 		<form method="post" action="<?php echo getStringFromServer('PHP_SELF'); ?>?group_id=<?php echo $group_id ?>">
 			<input type="hidden" name="post_changes" value="y" />
@@ -130,6 +147,10 @@ if ($group_id) {
 		</form>
 		<?php
 		mail_footer(array());
+
+//
+//	Form to modify list
+//
 	} elseif(getIntFromGet('change_status') && getIntFromGet('group_list_id')) {
 		$mailingList = new MailingList($Group, getIntFromGet('group_list_id'));
 			
@@ -152,16 +173,19 @@ if ($group_id) {
 			<strong><?php echo $Language->getText('mail_admin_updatelist', 'form_ispublic'); ?></strong><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PUBLIC; ?>"<?php echo ($mailingList->isPublic() == MAIL__MAILING_LIST_IS_PUBLIC ? ' checked="checked"' : ''); ?> /> <?php echo $Language->getText('general', 'yes'); ?><br />
 			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_PRIVATE; ?>"<?php echo ($mailingList->isPublic() == MAIL__MAILING_LIST_IS_PRIVATE ? ' checked="checked"' : ''); ?> /> <?php echo $Language->getText('general', 'no'); ?><br />
-			<input type="radio" name="is_public" value="<?php echo MAIL__MAILING_LIST_IS_DELETED; ?>"<?php echo ($mailingList->isPublic() == MAIL__MAILING_LIST_IS_DELETED ? ' checked="checked"' : ''); ?> /> <?php echo $Language->getText('general', 'deleted'); ?>
 			</p>
 			<p><strong><?php echo $Language->getText('mail_admin_updatelist', 'form_description'); ?></strong><br />
 			<input type="text" name="description" value="<?php echo inputSpecialChars($mailingList->getDescription()); ?>" size="40" maxlength="80" /><br /></p>
 			<p>
 			<input type="submit" name="submit" value="<?php echo $Language->getText('mail_admin_updatelist', 'form_updatelist'); ?>" /></p>
 		</form>
+		<a href="deletelist.php?group_id=<?php echo $group_id; ?>&amp;group_list_id=<?php echo $mailingList->getID(); ?>">[<?php echo $Language->getText('mail_admin_deletelist', 'title'); ?>]</a>
 	<?php
 		mail_footer(array());
 	} else {
+//
+//	Show lists
+//
 		$mlFactory = new MailingListFactory($Group);
 		if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
 			exit_error($Language->getText('general', 'error'), $mlFactory->getErrorMessage());
