@@ -21,10 +21,10 @@ print '<?xml version="1.0"?>
 <rss version="0.91">
 ';
 // ## default limit
-if (!$limit) {
+if (!$limit or intval($limit) == 0) {
 	$limit = 10;
 } else {
-	$limit = min(100, $limit);
+	$limit = min(100, intval($limit));
 }
 
 $where_clause = " WHERE is_approved=1 ";
