@@ -1,5 +1,7 @@
 2005-01-16  Tim Perdue <tim@gforge.org>
 
+	* added BBC-all address to all email can be copied to a 
+	certain address for archiving
 	* added ability to release files in FRS system that were 
 	uploaded via FTP instead of the HTTP upload. Requires several new 
 	vars and a FTP upload directory that is readable and owned by the 

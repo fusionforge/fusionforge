@@ -85,8 +85,7 @@ function util_check_fileupload($filename) {
  *
  */
 function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='') {
-	global $Language;
-	global $sys_sendmail_path;
+	global $Language,$sys_bcc_all_email_address,$sys_sendmail_path;
 
 	if (!$to) {
 		$to='noreply@'.$GLOBALS['sys_default_domain'];
@@ -106,6 +105,9 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	}
 	$body2 .= "To: $to".
 		"\nFrom: ".util_encode_mailaddr($from,$sendername,$charset);
+	if (!empty($sys_bcc_all_email_address)) {
+		$BCC.=",$sys_bcc_all_email_address";
+	}
 	if(!empty($BCC)) {
 		$body2 .= "\nBCC: $BCC";
 	}
