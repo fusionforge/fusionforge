@@ -276,7 +276,11 @@ function session_issecure() {
  *	@return true/false
  */
 function session_cookie($name ,$value, $domain = '', $expiration = 0) {
-	setcookie($name, $value, $expiration, '/', $domain, 0);
+	if ( $expiration != 0){
+		setcookie($name, $value, time() + $expiration, '/', $domain, 0);
+	} else {
+		setcookie($name, $value, $expiration, '/', $domain, 0);
+	}
 }
 
 /**
@@ -352,7 +356,7 @@ function session_set_new($user_id) {
 	// set session cookie
   //
 	$cookie = session_build_session_cookie($user_id);
-	session_cookie("session_ser", $cookie);
+	session_cookie("session_ser", $cookie, "", $GLOBALS['sys_session_expire']);
 	$session_ser=$cookie;
 
 	db_query("
