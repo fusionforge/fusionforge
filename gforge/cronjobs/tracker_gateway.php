@@ -234,9 +234,9 @@ class TrackerGateway extends Error {
  */
 function DBG($str) {
 	global $debug;
-	system("echo \"artifact: ".$str."\n\" >> /tmp/tracker.log");
 
 	if ($debug==1) {
+		system("echo \"artifact: ".$str."\n\" >> /tmp/tracker.log");
 		syslog(LOG_DEBUG, "artifact_gateway: ". $str);
 	} else if ($debug==2) {
 		echo $str."\n";
