@@ -18,7 +18,7 @@ while (!feof($fp)) {
 	$mlist = trim($mlist);
 	if ($mlist <> "") {
 		list($listname, $listdesc) = explode(" ",$mlist);	
-		$mailing_lists[] = $listname;
+		$mailing_lists[] = strtolower($listname);
 		echo "Existing mailing List $listname found\n";	
 	}
 }
@@ -37,7 +37,7 @@ for ($i=0; $i<$rows; $i++) {
 	echo "Processing row $i\n";
 	$listadmin = db_result($res,$i,'user_name');
 	$email = db_result($res,$i,'email');
-	$listname = db_result($res,$i,'list_name');
+	$listname = strtolower(db_result($res,$i,'list_name'));
 	$listpassword = db_result($res,$i,'password');
 	if (! in_array($listname,$mailing_lists)) {
 		echo "Creating Mailing List: $listname\n";
@@ -65,8 +65,8 @@ for ($i=0; $i<$rows; $i++) {
 //			external script because Mailman makes no attempt to
 //			add the aliases so we have to solve it anyway.
 //
-			$lcreate_cmd = "echo '$resline' | /usr/bin/ssh $sys_lists_host -l mailman bin/add_alias.php";
-			$alias_added = `$lcreate_cmd`;
+//			$lcreate_cmd = "echo '$resline' | /usr/bin/ssh $sys_lists_host -l mailman bin/add_alias.php";
+//			$alias_added = `$lcreate_cmd`;
 		}
 		pclose($fp);
 	}
