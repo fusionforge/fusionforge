@@ -1,10 +1,21 @@
 sourceforge (2.6-0+4) unstable; urgency=low
 
+  * [Christian] Removed unjustified warning in intall-ldap.sh.
   * [Roland] Updated Standards-Version to 3.5.6.0.
   * [Roland] Made the package arch-independent.
   * [Roland] Updated debian/TODO a bit.
   * [Roland] Fixed a few minor bugs in my/index.php.
   * [Roland] Fixed speling error in Description: field.
+  * [Roland] Added dependencies on packages providing the vi editor.
+  * [Roland] www/include/Layout.class (and others): Removed the VA logo in
+    the site icon.  The new site icon now consists of a black "SF" written
+    over a Debian swirl.
+  * [Roland] deb-specific/install-ldap.sh: Test for the existence of
+    /etc/ldap/slapd.conf before trying to modify it, and suggest to
+    reconfigure slapd if it is not present.
+  * [Roland] [From 2.5] Ported the new LDAP schema, that had been
+    forgotten for some reason.
+  * [Roland] [From 2.5] Fixed email addresses on the users' home page.
 
  --
 
