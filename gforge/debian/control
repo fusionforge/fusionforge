@@ -22,7 +22,7 @@ Package: gforge-common
 Architecture: all
 Depends: debconf (>= 1.2.9)
 Replaces: sourceforge-common (>> 2.6-0+11)
-Conflicts: sourceforge-common
+Conflicts: sourceforge, sourceforge-common
 Description: Collaborative development tool - shared files
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
@@ -189,6 +189,6 @@ Description: Collaborative development tool - mailing-lists (using Mailman)
 
 Package: gforge-sourceforge-transition
 Architecture: all
-Depends: sourceforge-common, sourceforge-db-postgresql
+Depends: sourceforge | sourceforge-db-postgresql
 Description: sourceforge to gforge data transition
  This package will move data from your sourceforge package to your gforge package

@@ -41,11 +41,12 @@ case "$1" in
 	# Clean debconf after ourselves
 	db_stop
 
+set -x
         # Setup our DB
-	[ -f /var/lib/gforge/sf_dump_for_gforge ] && perl -pi -e "s/connect - sourceforge/connect - gforge/" /var/lib/gforge/sf_dump_for_gforge
+	/usr/lib/gforge/bin/install-db.sh configure
 	[ -f /var/lib/gforge/sf_dump_for_gforge ] && /usr/lib/gforge/bin/install-db.sh restore /var/lib/gforge/sf_dump_for_gforge && mv /var/lib/gforge/sf_dump_for_gforge /var/lib/gforge/sf_dump_for_gforge.ok 
 	[ -f /var/lib/gforge/sf_dump_for_gforge ] && mv /var/lib/gforge/sf_dump_for_gforge /var/lib/gforge/sf_dump_for_gforge.ko
-	/usr/lib/gforge/bin/install-db.sh configure
+set +x
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

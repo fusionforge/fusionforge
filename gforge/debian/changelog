@@ -1,11 +1,13 @@
-gforge (3pre9-0+) experimental; urgency=low
+gforge (3pre9-0+1) experimental; urgency=low
 
   * [Roland] Recoded Debconf templates into UTF-8, as part of the grand
     transition to UTF-8.
   * [Roland] Also set the PHP default charset to be UTF-8 in the Apache
     configuration.
+  * [Christian] Improved transition from debian-sf 2.5 
+  * [Christian] pre9 package db upgrade
 
- -- Roland Mas <lolando@debian.org>  Fri, 17 Jan 2003 12:09:55 +0100
+ -- Christian Bayle <bayle@debian.org>  Thu, 23 Jan 2003 20:10:26 +0100
 
 gforge (3pre8-0+) experimental; urgency=low
 

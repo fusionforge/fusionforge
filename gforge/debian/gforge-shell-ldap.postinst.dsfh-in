@@ -41,7 +41,7 @@ case "$1" in
 	/usr/lib/gforge/bin/install-chroot.sh configure
 	
         # Setup our LDAP
-	/usr/lib/gforge/bin/install-ldap.sh configure
+	/usr/lib/gforge/bin/install-ldap.sh configure || echo "LDAP configuration failed"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

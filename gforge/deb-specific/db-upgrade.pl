@@ -693,6 +693,7 @@ eval {
 		    "ALTER TABLE trove_group_link ADD CONSTRAINT tgl_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
 		    "ALTER TABLE trove_agg ADD CONSTRAINT trove_agg_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
 		    "ALTER TABLE trove_agg ADD CONSTRAINT trove_agg_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
+		    "DELETE FROM trove_treesums WHERE trove_cat_id NOT IN (SELECT trove_cat_id FROM trove_cat)",
 		    "ALTER TABLE trove_treesums ADD CONSTRAINT trove_treesums_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
 		    ) ;
 	foreach my $s (@reqlist) {
@@ -1007,6 +1008,86 @@ eval {
       debug "Upgrading with 20030105.sql" ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030105.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+22" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20030107.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030107.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+23" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20030109.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030109.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+24" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20030112.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030112.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+25" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20030113.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030113.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;

@@ -172,8 +172,13 @@ EOF
 	else
 		DUMPFILE=/var/lib/gforge/dumps/db_dump
 	fi
-	echo "Dumping in $DUMPFILE"
-	su -s /bin/sh gforge -c /usr/lib/postgresql/bin/pg_dump gforge > $DUMPFILE
+	if [ "x$3" != "x" ] ;then
+		DB=$3
+	else
+		DB=gforge
+	fi
+	echo "Dumping $DB database in $DUMPFILE"
+	su -s /bin/sh $DB -c /usr/lib/postgresql/bin/pg_dump $DB > $DUMPFILE
 	;;
     restore)
 	pattern=$(basename $0).XXXXXX

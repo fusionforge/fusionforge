@@ -27,7 +27,8 @@ set -e
 
 case "$1" in
     configure)
-    	[ -f /usr/lib/sourceforge/bin/install-db.sh ] && /usr/lib/sourceforge/bin/install-db.sh dump /var/lib/sourceforge/sf_dump_for_gforge
+    	[ -f /usr/lib/gforge-sourceforge-transition/bin/install-db.sh ] && /usr/lib/gforge-sourceforge-transition/bin/install-db.sh dump /var/lib/sourceforge/sf_dump_for_gforge sourceforge
+	[ -f /var/lib/sourceforge/sf_dump_for_gforge ] && echo "Adjusting /var/lib/sourceforge/sf_dump_for_gforge" && perl -pi -e "s/connect - sourceforge/connect - gforge/" /var/lib/sourceforge/sf_dump_for_gforge
     	[ -d /var/lib/sourceforge ] && echo "Renaming dir /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
     	[ -h /var/lib/sourceforge ] && echo "Renaming symlink /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
     ;;
