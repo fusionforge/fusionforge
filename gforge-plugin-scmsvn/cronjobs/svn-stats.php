@@ -21,158 +21,180 @@
 require ('squal_pre.php');
 require ('common/include/cron_utils.php');
 
-class SVNGroup
-{
-	var $group_id;
-	var $lastdate;
-	var $lastrev;
-	var $groupname;
-	var $alreadyseen;
-	 
-	function SVNGroup($group_id, $lastdate, $lastrev, $groupname, $alreadyseen){
-		$this->group_id		= $group_id;
-		$this->lastdate		= $lastdate;
-		$this->lastrev 		= $lastrev;
-		$this->groupname 	= $groupname;
-		$this->alreadyseen = $alreadyseen;
-	 }
-	 
-	function getGroup_id(){
-		return $group_id; 
-	}
-	function getlastdate(){
-		return $lastdate;
-	}
-	function getlastrev(){
-		return $lastrev;
-	}
-	function getgroupname(){
-		return $groupname;
-	}
-	function getalreadyseen(){
-		return $alreadyseen;
-	}
-	 
-	function setGroup_id($group_id){
-		$this->group_id = $group_id;
-	}
-	function setlastdate($lastdate){
-		$this->lastdate = $lastdate;
-	}
-	function setlastrev($lastrev){
-		$this->lastrev = $lastrev;
-	}
-	function setgroupname($groupname){
-		$this->groupname = $groupname;
-	}
-	function setalreadyseen($alreadyseen){
-		$this->alreadyseen = $alreadyseen;
-	}
-	 
-};
 
 $pluginname = "scmsvn" ;
+$svnroot = "/home/norberto/test/";
 
 db_begin();
 
 $pluginid = get_plugin_id($pluginname);
 
-$groups = array();
+
+db_begin();
+
+if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
+	
+	$day_begin = gmmktime( 0, 0, 0, $ARGV[2], $ARGV[3], $ARGV[1] );
+	//	$day_begin = timegm( 0, 0, 0, $ARGV[2], $ARGV[1] - 1, $ARGV[0] - 1900 );
+	$day_end = $day_begin + 86400;
+ 
+  $rollback = process_day($day_begin, $day_end);
+} else if($ARGV[1]=='all' && !$ARGV[2] && !$ARGV[3]) { 
   
- 
-$res = db_query("SELECT group_plugin.group_id, groups.unix_group_name
-			FROM group_plugin, groups
-			WHERE group_plugin.plugin_id = $pluginid
-			AND group_plugin.group_id = groups.group_id");
+  $all_days = &get_all_days();
+  foreach ( $all_days as $day ) {
+			echo $day;  	
+  	$rollback = process_day($day, $day + 86400);
+  	
+  	if($rollback)
+  		break;
+  	
+  }
+   
+} else {
 
-if (!$res) {
-	$err .=  "Error! Database Query Failed: ".db_error();
-	echo $err;
+	$local_time = localtime();
+		## Start at midnight last night.
+	$day_end = gmmktime( 0, 0, 0, $local_time[4] + 1, $local_time[3], $local_time[5] );
+
+	//	$day_end = gmmktime( 0, 0, 0, (gmtime( time() ))[3,4,5] );
+					 ## go until midnight yesterday.
+	$day_begin = $day_end - 86400;
+	//	$day_begin = timegm( 0, 0, 0, (gmtime( time() - 86400 ))[3,4,5] );
+
+	$rollback = process_day($day_begin, $day_end);
+
+}
+
+if ( $rollback ) {
 	db_rollback();
-	exit;
+} else {
+	db_commit();
 }
 
-while ( $row =& db_fetch_array($res) ) {
-	$svn = new SVNGroup($row[0], 0, 0, $row[1], 0);
-	$groups[$row[0]] = $svn;
-}
-
-$res = db_query("SELECT group_id, last_check_date, last_repo_version
-				FROM plugin_scmsvn_stats");
-             
-if (!$res) {
-	$err .=  "Error! Database Query Failed: ".db_error();
-	echo $err;
-	db_rollback();
-	exit;
-}
-
-while ( $row =& db_fetch_array($res) ) {
-	$groups[$row[0]]->setlastdate($row[1]);
-	$groups[$row[0]]->setlastrev($row[2]);
-	$groups[$row[0]]->setalreadyseen(1);
-}
  
-foreach ($groups as $group){
-	$svnroot = "/var/lib/gforge/chroot/svnroot/" . $group->getgroupname();	
-	$currev = shell_exec( "svnlook youngest ". $svnroot ) ;
-	$adds = 0 ;
-	$deletes = 0 ;
-	$updates = 0 ;
-	$commits = 0 ;
-	$rev = $group->getlastrev() + 1 ;
-		
-	while ($rev <= $currev){
-		$commits++;	
-		$output = shell_exec("svnlook changed -r$rev $svnroot |");
-		$lines = explode("\n", $output);
-		foreach ($lines as $line) {
-			if (!$line == "") {
-				if(substr($line,0,1) == "A")
-					$adds++;
-				if(substr($line,0,1) == "D")
-					$deletes++;
-				if(substr($line,0,1) == "U")
-					$updates++;
-			}
-		}
-		$rev++;
-	}
-		
-	$time = time();
-	if ($group->getalreadyseen()) {
-		$query = "UPDATE plugin_scmsvn_stats
-			SET last_repo_version = " .$currev .",
-			adds = " .$adds. ",
-			deletes = " .$deletes . ",
-			commits = " .$commits . ",
-			changes = " .$updates . ",
-			last_check_date = ". $time . "
-			WHERE group_id = " .$group_id ;
-	} else {
-		$query = "INSERT INTO plugin_scmsvn_stats
-			(last_repo_version, last_check_date, adds, deletes, commits, changes, group_id)
-			VALUES (".$currev.", ".$time.", ".$adds.", ".$deletes.", ".$commits.", ".$updates.", ".$group_id.")";
-	}
-	  
-	$res = db_query($query);
-	  
+
+function process_day($day_begin, $day_end){
+	
+	global $err;
+	global $verbose;
+	global $pluginid;
+	
+	
+ 	$year	= gmstrftime("%Y", $day_begin );
+	$month	= gmstrftime("%m", $day_begin );
+	$day	= gmstrftime("%d", $day_begin );
+	
+	$month_string = sprintf( "%04d%02d", $year, $month );
+	
+	
+	$res = db_query("SELECT group_plugin.group_id, groups.unix_group_name
+				FROM group_plugin, groups
+				WHERE group_plugin.plugin_id = $pluginid
+				AND group_plugin.group_id = groups.group_id");
+	
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
-		echo $err;
-		db_rollback();
-		exit;
+		return 1;
 	}
-}
+		
+	while ( $groups =& db_fetch_array($res) ) {
+		$svnroot_group = $svnroot . $groups[1];	
+		$currev = shell_exec( "svnlook youngest ". $svnroot_group ) ;
+		$adds = 0 ;
+		$deletes = 0 ;
+		$updates = 0 ;
+		$commits = 0 ;
+		$rev = 0;
+		while ($rev <= $currev) {
+			$date = shell_exec( "svnlook date -r$rev ". $svnroot_group );
+			$time_parsed = strtotime($date);
+			if ($day_begin >= $time_parsed && $time_parsed <= $day_end) {
+				$commits++;
+				$author = shell_exec( "svnlook author -r$rev $svnroot_group ");
+				$output = shell_exec("svnlook changed -r$rev $svnroot_group |");
+				$lines = explode("\n", $output);
+				foreach ($lines as $line) {
+					if (!$line == "") {
+						if (substr($line,0,1) == "A")
+							$adds++;
+						if (substr($line,0,1) == "D")
+							$deletes++;
+						if (substr($line,0,1) == "U")
+							$updates++;
+					}
+				}
+			}
+			$rev++;
+		} 
+		
+		$user_res = db_query( "SELECT user_id FROM users WHERE
+		user_name='$author'" );
+		if ( $user_row = db_fetch_array($user_res) ) {
+			$user_id = $user_row[0];
+		} else {
+			$err .= "User $user was not found...	skipping.\n";
+			break;
+		}
 
- 
-db_commit();
+		// cleaning stats_cvs_* table for the current day to avoid conflicting index problem
+		$sql = "DELETE FROM stats_cvs_group
+			WHERE month = '$month_string'
+			AND day = '$day'
+			AND group_id = '$groups[0]'";
+		$res = db_query($sql);
+		if(!$res) {
+			$err .= 'Error cleaning stats_cvs_group for current day and current group: '.db_error();
+			break;
+		}
+	
+		$sql = "DELETE FROM stats_cvs_user
+			WHERE month = '$month_string'
+			AND day = '$day'
+			AND group_id = '$groups[0]'";
+		$res = db_query($sql);
+		if(!$res) {
+			$err .= 'Error cleaning stats_cvs_user for current day and current group: '.db_error();
+			break;
+		}
+		
+		$sql = "INSERT INTO stats_cvs_group
+		(month,day,group_id,checkouts,commits,adds)
+		VALUES
+		('$month_string',
+		'$day',
+		'$groups[0]',
+		'0',
+		'$commits',
+		'$adds')";
+
+		if ( !db_query( $sql ) ) {
+			$err .= 'Insertion in stats_cvs_group failed: '.$sql.' - '.db_error();
+			break;
+		}
+		
+		$sql = "INSERT INTO stats_cvs_user
+		(month,day,group_id,user_id,commits,adds) VALUES
+		('$month_string',
+		'$day',
+		'$groups[0]',
+		'$user_id',
+		'$commits',
+		'$adds')";
+
+		if ( !db_query( $sql )) {
+			$err .= 'Insertion in stats_cvs_user failed: '.$sql.' - '.db_error();
+			break;
+		}
+
+	}
+	return 0;
+}
 
 function get_plugin_id($pluginname){
 	$res = db_query("SELECT plugin_id FROM plugins WHERE plugin_name = '".$pluginname."'");	
 	if (!$res) {
 		$err .=  "Error! Database Query Failed: ".db_error();
-		echo $err;
 		db_rollback();
 		exit;
 	}
@@ -182,4 +204,40 @@ function get_plugin_id($pluginname){
  
 	return $plugin_id;
 }
+
+
+function get_all_days(){
+	
+	global $cvsroot;
+	global $err;
+	global $verbose;
+	global $debug;
+
+	$res = db_query("SELECT group_plugin.group_id, groups.unix_group_name
+				FROM group_plugin, groups
+				WHERE group_plugin.plugin_id = $pluginid
+				AND group_plugin.group_id = groups.group_id");
+	
+	if (!$res) {
+		$err .=  "Error! Database Query Failed: ".db_error();
+		return 1;
+	}
+		
+	while ( $groups =& db_fetch_array($res) ) {
+		$svnroot_group = $svnroot . $groups[1];	
+		$currev = shell_exec( "svnlook youngest ". $svnroot_group ) ;
+		$rev = 0;
+		while ($rev <= $currev) {
+			$date = shell_exec( "svnlook date -r$rev ". $svnroot_group );
+			$time_parsed = strtotime($date);
+			
+			if(!in_array($time_parsed, $all_days))
+				array_push($all_days, $time_parsed);
+				
+		}
+	}
+
+	return $all_days;
+}
+
 ?>
