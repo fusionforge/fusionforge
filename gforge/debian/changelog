@@ -1,6 +1,6 @@
 sourceforge (2.5-29+) unstable; urgency=low
 
-  * Change gid=100 for uid in ldap.php
+  * [Christian] Change gid/uid attribution in ldap.php to be like in backend 
 
  -- Roland Mas <lolando@debian.org>  Tue,  9 Apr 2002 19:38:46 +0200
 
