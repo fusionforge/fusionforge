@@ -225,7 +225,7 @@ eval {
 	  }
 
 	  $version = &get_db_version ;
-	  $target = "2.6-0" ;
+	  $target = "2.6-0+checkpoint+1" ;
 	  if (is_lesser $version, $target) {
 	      debug "Updating debian_meta_data table." ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
@@ -438,7 +438,7 @@ eval {
 	  }
 
 	  $version = &get_db_version ;
-	  $target = "2.6-0" ;
+	  $target = "2.6-0+checkpoint+1" ;
 	  if (is_lesser $version, $target) {
 	      debug "Database has successfully been converted." ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
