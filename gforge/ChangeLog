@@ -1,5 +1,8 @@
-2003-03-14  Reinhard Spisser  <reinhard@spisser.it>
+2003-03-16  Christian Bayle  <bayle@debian.org>
 
+	* Uncommented display CVS write in project/admin/userperms.php
+
+2003-03-14  Reinhard Spisser  <reinhard@spisser.it>
 	
 	* common/pm/ProjectTask.class:
 	Fix bug # 231: Assignee not registered

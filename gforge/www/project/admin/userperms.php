@@ -62,11 +62,9 @@ function show_permissions_row($i, $row_dev) {
 	.(($row_dev['release_flags']==1)?', '.$Language->getText('project_admin_userperms','rel_tech'):'')
 	.'</td>';
 
-/*
 	// cvs permissions
-	$cvs2perm = array(0=>'Read', 1=>'Write', 2=>'Admin');
+	$cvs2perm = array(0=>'-', 1=>'Commit', 2=>'Admin');
 	print '<td>'.$cvs2perm[$row_dev['cvs_flags']].'</td>'."\n";
-*/
 
 	// artifact manager permissions
 	$art2perm = array(0=>'-',2=>'A');
@@ -108,9 +106,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_userperms'
 
 <tr align="center">
 <td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','general') ?></strong></span></td>
-<?php /*
 <td><font size="-1"><strong>CVS</strong></font></td>
-*/ ?>
 <td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','tracker_manager') ?></strong></span></td>
 <td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','task_manager') ?></strong></span></td>
 <td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','forums') ?></strong></span></td>
