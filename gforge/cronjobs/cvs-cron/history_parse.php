@@ -28,9 +28,14 @@ function debug($message) {
 
 
 function get_all_days(){
+	
 	global $cvsroot;
+	global $err;
+	global $verbose;
+	global $debug;
+
 	$all_days = array();
-	$root_dir =& opendir( $cvsroot );
+  $root_dir =& opendir( $cvsroot );
 	while ( $group = readdir( $root_dir ) ) {
 		if ( $group == '.' || $group == '..' ) 
 			continue;
@@ -74,8 +79,13 @@ function get_all_days(){
 }
 
 function process_day($day_begin, $day_end){
-
+	
 	global $cvsroot;
+	global $err;
+	global $verbose;
+	global $debug;
+	
+	
  	$year	= gmstrftime("%Y", $day_begin );
 	$month	= gmstrftime("%m", $day_begin );
 	$day	= gmstrftime("%d", $day_begin );
