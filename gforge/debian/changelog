@@ -1,4 +1,4 @@
-gforge (3.1-22+5) unstable; urgency=low
+gforge (3.1-22+6) unstable; urgency=low
 
   * [Roland] Updated Dutch translations for Debconf templates from
     debian-l10n-dutch (closes: #279239).
@@ -12,8 +12,10 @@ gforge (3.1-22+5) unstable; urgency=low
   * [Roland] Disabled sys_use_ldap in local.inc.template to prevent the
     web interface from returning errors when adding users to projects
     (closes: #280496).
+  * [Roland] Updated debian/copyright a bit, including a mention of the
+    http://gforge.org upstream website (closes: #281309).
 
- -- Roland Mas <lolando@debian.org>  Wed, 10 Nov 2004 13:12:42 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Nov 2004 17:31:39 +0100
 
 gforge (3.1-22) unstable; urgency=medium
 
