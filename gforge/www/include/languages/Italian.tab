@@ -63,7 +63,7 @@ account_register	jabberonly	Send auto-generated notices only to this address
 account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito  <I>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione).</I>
 account_register	communitymail	Desidero ricevere email dalla comunit&agrave <I>(poco traffico).</I>
 account_register	mandatory	I campi indicati con  * sono obbligatori.
-account_register	register	Registra
+account_register	register	Registrag
 account_register	err_username	Campo login obbligatorio
 account_register	err_realname	You must supply a real name
 account_register	err_passwd	You must supply a password
@@ -83,7 +83,7 @@ account_register	update	Applica Modifiche
 account_register	reset	Annulla
 account_unsubscribe	all_mailings	tutti i e-mail ed annunci di $1
 account_unsubscribe	site_mailings	tutti i e-mail di $1
-account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo conto serà attivato.</p>
+account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo conto serï¿½ attivato.</p>
 account_verify	loginname	Nome Login:
 account_verify	password	Password:
 account_verify	login		Login
@@ -163,6 +163,41 @@ docman_new	group	Gruppo al quale appartiene il documento:
 docman_new	submit	Invia Informazioni
 forum	title	Forum
 forum	choose	<p>Seleziona un forum e puoi scorrere, cercare e inserire messaggi.<p>
+forum_save	saved	Posizione del forum salvato. I nuovi messaggi verranno evidenziati al prossimo collegamento 
+forum_admin	section	Progetto: $1 
+forum_admin	title	Amministrazione forum
+forum_admin	add_forum	Aggiungi forum
+forum_admin	delete_message	Cancella messaggio
+forum_admin	update_forum	Aggiorna info/stato forum
+forum_admin_addforum	section	Amministrazione forum
+forum_admin_addforum	title	Aggiungi forum
+forum_admin_addforum	forum_created	Forum creato
+forum_admin_addforum	existing_forums	Forum esistenti
+forum_admin_addforum	forum_name	Nome forum
+forum_admin_addforum	forum_description	Descrizione
+forum_admin_addforum	is_public	Forum pubblico?
+forum_admin_addforum	allow_anonymous	Permettere l'inserimento di messaggi da utenti anonimi?
+forum_admin_addforum	email_posts	Invia tutti i messaggi a:
+forum_admin_addforum	add_forum	Aggiungi questo forum
+forum_admin_changestatus	section	Amministrazione forum
+forum_admin_changestatus	title	Cambia stato forum
+forum_admin_changestatus	update_successful	Informazioni forum aggiornati con successo
+forum_admin_changestatus	no_forums_found	Nessun forum trovato
+forum_admin_changestatus	intro	Qui puoi cambiare le impostazioni per i forum. <b>Nota</b>: forum privati potranno sempre essere visti dai membri del progetto, ma non da tutti gli altri
+forum_admin_changestatus	change_status	Cambia stato forum
+forum_admin_changestatus	forum	Forum
+forum_admin_changestatus	status	Stato
+forum_admin_delete_messages	messages_deleted	$1 messaggi cancellati
+forum_admin_delete	section	Amministrazione forum
+forum_admin_delete	title	Cancella forum
+forum_admin_delete_message	section Amministrazione forum
+forum_admin_delete_message	title	Cancella un messaggio
+forum_admin_delete_message	warning	ATTENZIONE! Stai per cancellare in modo permanente il messaggio e tutte le risposte!!
+forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da cancellare
+forum_errors	error_getting_forum	Errore nel recupero del forum
+forum_errors	error_determining_forum_id Errore nel determinare il forum_id
+forum_forum	section	Progetto: $1 
+forum_forum	title	Forum: Visualizza forum
 forum_forum	thread	Argomento
 forum_forum	author	Autore
 forum_forum	date	Data
@@ -172,12 +207,32 @@ forum_forum	topic	Argomento
 forum_forum	topicstarter	Inizio Argomento
 forum_forum	replies	Risposte
 forum_forum	lastpost	Ultimo messaggio	
+forum_forum	forum	Forum
+forum_forum	threads	Argomenti
+forum_forum	posts	Numero messaggi
+forum_forum	nested	Nidificato
+forum_forum	flat	Piatto
+forum_forum	threaded	Per Argomenti
+forum_forum	ultimate	Ultimi
+forum_forum	show	Visualizza
+forum_forum	next_messages	Avanti
+forum_forum	previous_messages	Indietro
+forum_forum	no_forum_chosen	Nessun forum selezionato
 forum_message	thread	Inizia un nuovo argomento:
+forum_message	thread_view	Vista per argomenti
+forum_message	post_followup	Inserisci una risposta per il messaggio
+forum_message	receive_followups	Ricevi risposte via email
+forum_message	by	DA
+forum_message	date	DATA
+forum_message	subject	SOGGETTO
+forum_message	message	Messaggio
+forum_monitor	activated	Monitoraggio forum attivato
+forum_monitor	deactivated	Monitoraggio forum disattivato
 forum_utils	discussionforum	Forum di discussione:
-forum_utils	nonewsitem	Error - this news item was not found
+forum_utils	nonewsitem	Errore - non &egrave; stato trovato questo item news
 forum_utils	latest	Ultime News
 forum_utils	monitor	Monitorizza Forum
-forum_utils	stopmonitor	Stop Monitoring
+forum_utils	stopmonitor	Termina Monitorizzazione
 forum_utils	admin	Amministra
 forum_utils	saveplace	Salva Posizione
 forum_utils	by	Da:
@@ -186,12 +241,12 @@ forum_utils	date	Date
 forum_utils	subject	Soggetto:
 forum_utils	message	Messaggio:
 forum_utils	htmltag	I Tag HTML verranno visualizzati come testo
-forum_utils	postanon	You are posting anonymously because you are not
-forum_utils	loggedin	logged in
+forum_utils	postanon	Stai inserendo i messaggi in modalit&agrave; anonima perch&eacute; non sei
+forum_utils	loggedin	collegato
 forum_utils	postcomment	Invia messaggio
-forum_utils	couldpostif	You could post if you were
+forum_utils	couldpostif	Potresti inviare messaggi se tu fossi 
 forum_utils	reply	rispondi
-forum_utils	mailmonitor	\nRead and respond to this message at: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5
+forum_utils	mailmonitor	\nLeggi e rispondi a questo messaggio a: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nRicevi questo messaggio perchÃ© hai selezionato di monitare questo forum.\nPer terminare il il monitoraggio del forum, login a $4 \n e vai a: $5
 frs	file_download	Scarica
 frs	file_notes	Note
 frs	file_package	Package
@@ -215,6 +270,11 @@ general	submit_edit	Invia Modifiche
 general	edit	Modifica
 general	go	Vai
 general	add	Aggiungi
+general	yes	S&igrave;
+general	no	No
+general	deleted	Cancellato
+general	update	Aggiorna
+general	submit	Invia
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	CVS Repository
@@ -293,7 +353,7 @@ my	pending_projects_3	Premere qui
 my	pending_news_bytes_1	C'e' una news in attesa di approvazione
 my	pending_news_bytes_2	Ci sono  $1 news in attesa di approvazione
 my	pending_news_bytes_3	Premere qui.
-news	choose	<P>Seleziona una news e può visualizzare, ricercare e inviare messaggi.<P>
+news	choose	<P>Seleziona una news e puï¿½ visualizzare, ricercare e inviare messaggi.<P>
 news	nonews	Nessuna news
 news	nonewsfor	Nessuna news per $1
 news	noitems	Non sono state trovate news
@@ -368,7 +428,11 @@ calendar	comingyear	L'anno prossimo
 calendar	fordate	Per la data:
 calendar	update	Applica Modifiche
 calendar	todaysdate	Oggi.
+calendar	view	View:
 calendar	selecteddate	La data scelta (se &egrave; differente da quella odierna).
+calendar	task_link_title	Sommario attivit&agrave;: $1
+calendar	task_begins	Termine attivit&agrave; $1 
+calendar	task_ends	Inizio attivit&agrave; $1
 calendar	invalidyear	Anno non valido
 calendar	invalidyearexplain	L'anno deve essere compreso tra 1990 e 2020.
 calendar	invalidmonth	Mese non valido

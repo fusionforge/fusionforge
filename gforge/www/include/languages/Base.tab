@@ -182,14 +182,38 @@ forum	section	Project: $1
 forum	title	Forums
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
 forum	html	HTML tags will display in your post as text
+forum_save	saved	Forum Position Saved. New messages will be highlighted when you return
 forum_admin	section	Project: $1 
 forum_admin	title	Forums: Administration
+forum_admin	add_forum	Add Forum
+forum_admin	delete_message	Delete Message
+forum_admin	update_forum	Update Forum Info/Status
 forum_admin_addforum	section	Forum Administration
 forum_admin_addforum	title	Add Forum
+forum_admin_addforum	forum_created	Forum created successfully
+forum_admin_addforum	existing_forums	Existing Forums
+forum_admin_addforum	forum_name	Forum Name
+forum_admin_addforum	forum_description	Description
+forum_admin_addforum	is_public	Is Public?
+forum_admin_addforum	allow_anonymous	Allow Anonymous Posts?
+forum_admin_addforum	email_posts	Email All Posts To:
+forum_admin_addforum	add_forum	Add This Forum
+forum_admin_delete_messages	messages_deleted	$1 messages deleted
 forum_admin_changestatus	section	Forum Administration
 forum_admin_changestatus	title	Change Forum Status
+forum_admin_changestatus	update_successful	Forum Info Updated Successfully
+forum_admin_changestatus	no_forums_found	No Forums Found
+forum_admin_changestatus	intro	You can adjust forum features from here. Please note that private forums can still be viewed by members of your project, not the general public.
+forum_admin_changestatus	change_status	Change forum status
+forum_admin_changestatus	forum	Forum
+forum_admin_changestatus	status	Status
 forum_admin_delete	section	Forum Administration
 forum_admin_delete	title	Delete Forum
+forum_admin_delete_message	section Forum Administration
+forum_admin_delete_message	title	Delete a Message
+forum_admin_delete_message	warning	WARNING! You are about to permanently delete a message and all of its followups!!
+forum_errors	error_getting_forum	Error getting Forum
+forum_errors	error_determining_forum_id Error Determining forum_id
 forum_forum	section	Project: $1 
 forum_forum	title	Forums: View Forum
 forum_forum_thread	section	Forums
@@ -203,10 +227,30 @@ forum_forum	topic	Topic
 forum_forum	topicstarter	Topic Starter
 forum_forum	replies	Replies
 forum_forum	lastpost	Last Post
+forum_forum	forum	Forum
+forum_forum	threads	Threads
+forum_forum	posts	Posts
+forum_forum	nested	Nested	
+forum_forum	flat	Flat
+forum_forum	threaded	Threaded
+forum_forum	ultimate	Ultimate
+forum_forum	show	Show
+forum_forum	previous_messages	Previous Messages
+forum_forum	next_messages	Next Messages
+forum_forum	no_forum_chosen	No Forum Chosen
+forum_message	thread_view	Thread View
 forum_message	section	Forums
 forum_message	title	View Message
 forum_message	msg	Post A Message To This Thread:
 forum_message	thread	Start New Thread
+forum_message	post_followup	Post a followup to this message
+forum_message	receive_followups	Receive followups via email
+forum_message	by	BY
+forum_message	date	DATE
+forum_message	subject	SUBJECT
+forum_message	message	Message
+forum_monitor	deactivated	Forum monitoring deactivated
+forum_monitor	activated	Forum monitoring started
 forum_utils	news	News
 forum_utils	discussionforum	Discussion Forums:
 forum_utils	nonewsitem	Error - this news item was not found
@@ -277,6 +321,11 @@ general	submit_edit	Submit Edit
 general	edit	Edit
 general	add	Add
 general	go	Go
+general	submit	Submit
+general	yes	Yes
+general	no	No
+general	deleted	Deleted
+general	update	Update
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
@@ -390,7 +439,6 @@ my	pending_news_bytes	Pending News Bytes
 my	pending_news_bytes_1	There is one pending project awaiting review
 my	pending_news_bytes_2	There are $1 news bytes awaiting review
 my	pending_news_bytes_3	Click here.
-
 my_bookmark_add	section	My Personal Page
 my_bookmark_add	title	Add Bookmark
 my_bookmark_delete	section	My Personal Page
