@@ -1,3 +1,9 @@
+gforge (3.0-2+) unstable; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Tue,  8 Jul 2003 21:32:26 +0200
+
 gforge (3.0-2) unstable; urgency=low
 
   * [Roland] Applied patch provided by Denis Barbier <barbier@debian.org>
