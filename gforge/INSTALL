@@ -70,6 +70,7 @@ Apache's http.conf file should have these values:
 
 ErrorDocument 404 /404.php
 php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
+php_admin_value default_charset "UTF-8"
 php_flag register_globals on
 php_flag file_uploads on
 <Location /projects>
