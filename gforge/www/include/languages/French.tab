@@ -35,7 +35,7 @@ account_change_email	message	Vous avez demandé un changement d'adresse e-mail po
 account_change_email	section	Préférences de votre compte
 account_change_email	subject	Sourceforge -- vérification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Home ]</A> 
+account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
 account_change_email	desc	<P>Changer votre adresse de courrier électronique va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
 account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
 account_change_pw	section	Préférences de votre compte
@@ -230,7 +230,7 @@ frs	file_package	Paquet
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Sorties récentes
-general	return	[Retour à la page d'acceuil]
+general	return	[Retour à la page d'acceuil $1]
 general	sitename	Sourceforge
 general	footer	Vous êtes sur Debian Sourceforge.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
 general	permdenied	Accés Interdit.
