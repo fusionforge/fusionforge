@@ -151,6 +151,7 @@ switch ($func) {
 					$_end_date=$pt->getEndDate();
 					$_status_id=(($status_id != 100) ? $status_id : $pt->getStatusID());
 					$_category_id=(($category_id != 100) ? $category_id : $pt->getCategoryID());
+					$_percent_complete=$pt->getPercentComplete();
 					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 					//conflicts with the "no change" ID! Sorry for messy use of 100.1
 					$_assigned_to=(($assigned_to != '100.1') ? $pt->getAssignedTo() : array('100'));
