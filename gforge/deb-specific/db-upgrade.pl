@@ -1279,6 +1279,16 @@ END;
 	$dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "3.0-1" ;
+    if (is_lesser $version, $target) {
+	debug "Database schema is now version 3.0-1." ;
+
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Gforge." ;
 
