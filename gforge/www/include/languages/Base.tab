@@ -75,7 +75,7 @@ account_options	change_email_address	Change Email Addr
 account_options	change_password	Change Password
 account_options	edit_skills_profile	Edit My Skills Profile
 account_options	email_address		Email Addr:
-account_options	address		Complete Address:
+account_options	address		Address:
 account_options	phone		Phone:
 account_options	fax		FAX:
 account_options	title2		Title:
@@ -121,7 +121,7 @@ account_register	password2	Password (repeat):
 account_register	realname	Full/Real Name:
 account_register	firstname	First Name:
 account_register	lastname	Last Name:
-account_register	country	Country:
+account_register	ccode	Country:
 account_register	register	Register
 account_register	remember_me	"Remember me". <i>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</i>
 account_register	reset	Reset Changes
