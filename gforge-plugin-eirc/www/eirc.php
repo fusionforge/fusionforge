@@ -34,7 +34,7 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 		}
 	}
 	if ($group_id){
-		$group = group_get_object($group_id);
+		$group = &group_get_object($group_id);
 		$channels = $channels . '#' . $group->getUnixName() . ',';
 	}
 	print $HTML->boxTop("Eteria IRC Client for $user_name");
