@@ -1,8 +1,9 @@
 gforge (3.1-2+1) unstable; urgency=low
 
-  * 
+  * [Roland] Added a lock feature to update-user-group-cvs.sh.  That adds
+    a dependency on lockfile-progs.
 
- -- Roland Mas <lolando@debian.org>  Mon, 27 Oct 2003 10:43:02 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 30 Oct 2003 21:56:47 +0100
 
 gforge (3.1-2) unstable; urgency=low
 

@@ -4,6 +4,16 @@ then
 	echo "You must be root to run this, please enter passwd"
 	su -c $0
 else
+    LOCK=/var/lock/gforge-update-user-group-cvs
+    if ! lockfile-create --retry 2 $LOCK ; then
+	echo "$0 locked, please try again later."
+	exit 1
+    fi
+    lockfile-touch $LOCK &
+    LOCKPID=$!
+    trap "kill $LOCKPID" exit
+    
+    
 	# Fill ldap tables
 	# Should be safe to comment this soon
 	/usr/lib/gforge/bin/install-ldap.sh update > /dev/null 2>&1
