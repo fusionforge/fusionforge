@@ -66,7 +66,7 @@ class ArtifactFile extends Error {
 	/**
 	 *	create - create a new item in the database.
 	 *
-	 *	@para	string	Filename of the item.
+	 *	@param	string	Filename of the item.
 	 *	@param	string	Item filetype.
 	 *	@param	string	Item filesize.
 	 *	@param	binary	Binary item data.
