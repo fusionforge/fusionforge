@@ -1,0 +1,10 @@
+bin
+etc/gforge
+usr/bin
+usr/lib/gforge/bin
+usr/lib/gforge/lib
+usr/sbin
+var
+var/lib
+var/lib/gforge
+var/lib/gforge/etc

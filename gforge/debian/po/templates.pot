@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2003-10-26 10:08+0100\n"
+"POT-Creation-Date: 2004-12-19 14:38+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -256,36 +256,13 @@ msgstr ""
 #. Type: note
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:85
-msgid "Generate an SSL certificate"
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:85
-msgid ""
-"You need a valid SSL/TLS certificate to run Gforge. If you don't already "
-"have one, you'll have to run the \"mod-ssl-makecert\" command to generate "
-"one, and restart Apache afterwards."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:85
-msgid ""
-"Please note you will not be able to start Apache if you have no such "
-"certificate."
-msgstr ""
-
-#. Type: note
-#. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:96
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid "Gforge requires appropriate PAM-LDAP configuration"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:96
+#: ../gforge-dns-bind9.templates.dsfh-in:85
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid ""
 "Gforge requires the libpam-ldap package to be configured appropriately.  You "
@@ -295,7 +272,7 @@ msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:96
+#: ../gforge-dns-bind9.templates.dsfh-in:85
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid ""
 "Known good values are: LDAP protocol version=3, make root database "
@@ -306,23 +283,23 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:109
+#: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid "Do you want a simple DNS setup?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:109
+#: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid ""
-"You can have a simple DNS setup wich uses wildcards to map all project web-"
+"You can have a simple DNS setup which uses wildcards to map all project web-"
 "hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
-"or a complex setup wich allows you to have many servers as project web "
+"or a complex setup which allows you to have many servers as project web "
 "servers or CVS servers."
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:109
+#: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid ""
 "Even though you have a simple DNS setup, you can still have seperate boxes "
 "for your project servers, it just assumes you have all the project web dirs "
@@ -331,14 +308,14 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid "Do you want ${file} to be updated?"
 msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid ""
 "In order for Gforge to be fully deinstalled, some changes must be made to "
@@ -347,7 +324,7 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid ""
 "I can either do them for you (and backup the current version in ${file}."
@@ -357,21 +334,21 @@ msgstr ""
 
 #. Type: boolean
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:123
+#: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid "Shall I modify the ${file} automatically?"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:136
+#: ../gforge-dns-bind9.templates.dsfh-in:125
 #: ../dsf-helper/replace-files.templates:31
 msgid "Please check ${file}"
 msgstr ""
 
 #. Type: note
 #. Description
-#: ../gforge-dns-bind9.templates.dsfh-in:136
+#: ../gforge-dns-bind9.templates.dsfh-in:125
 #: ../dsf-helper/replace-files.templates:31
 msgid ""
 "You have chosen not to let the Gforge package update the ${file} file.  Very "
@@ -531,6 +508,51 @@ msgstr ""
 msgid ""
 "The hostname of the server that will host your Gforge mailing-lists. It "
 "should not be the same as your main Gforge host."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid "Migrate to Gforge?"
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"The free software version of the Sourceforge software has been renamed to "
+"\"Gforge\".  Accordingly, the Debian package has been renamed to \"gforge\", "
+"and \"sourceforge\" is no longer supported or maintained.  The transition to "
+"Gforge should be rather simple, as most of the work is automated: once this "
+"package has been successfully installed, just install the \"gforge\" package "
+"and things should go smoothly."
+msgstr ""
+
+#. Type: boolean
+#. Description
+#: ../dsf-helper/migration.templates:4
+msgid ""
+"You still have the option not to upgrade to Gforge yet, for instance if you "
+"want to backup things beforehand.  If you refuse the upgrade, nothing will "
+"happen."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid "Sourceforge is no more"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../dsf-helper/migration.templates:19
+msgid ""
+"Sourceforge has been renamed Gforge, and the software known as Sourceforge "
+"is no longer maintained as free software.  This \"sourceforge\" package is "
+"only here to help you upgrade to Gforge.  Once you have installed this "
+"package and the one it depends on (gforge-sourceforge-transition), your data "
+"have been saved, and you can safely uninstall the \"sourceforge\" package "
+"and proceed to install Gforge."
 msgstr ""
 
 #. Type: boolean
@@ -727,5 +749,5 @@ msgstr ""
 #. Description
 #: ../dsf-helper/web-variables.templates:11
 msgid ""
-"Here is the default theme for web pages, be carreful to enter a valid name."
+"Here is the default theme for web pages, be careful to enter a valid name."
 msgstr ""

@@ -1250,7 +1250,9 @@ sub doCheckout {
     # Safely for a child process to read from.
     if (! open($fh, "-|")) { # child
       open(STDERR, ">&STDOUT"); # Redirect stderr to stdout
-      exec("cvs", "-d", "$cvsroot", "co", "-p", "$revopt", "$where");
+      my $strippedwhere = $where ;
+      $strippedwhere =~ s|^/?|| ;
+      exec("cvs", "-d", "$cvsroot", "co", "-p", "$revopt", "$strippedwhere");
     } 
 #===================================================================
 #Checking out squid/src/ftp.c
