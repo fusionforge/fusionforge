@@ -1,3 +1,9 @@
+2003-01-22  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/project/admin/editrelease.php: what happens when no
+	file is uploaded seems to be browser specific (?)... catch
+	more cases.
+
 2003-01-21  Ryan T. Sammartino  <ryants@shaw.ca>
 	    Kenia L. Sammartino  <kenia@shaw.ca>
 

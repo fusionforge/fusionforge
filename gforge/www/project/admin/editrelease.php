@@ -66,7 +66,7 @@ if ($step1) {
 	$exec_changes = true;
 
 	// Check for uploaded release notes
-	if ($uploaded_notes != "") {
+	if ($uploaded_notes != "" && $uploaded_notes != "none") {
 		if (!is_uploaded_file($uploaded_notes)) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
@@ -80,7 +80,7 @@ if ($step1) {
 	}
 
 	// Check for uplaoded change logs
-	if ($uploaded_changes != "") {
+	if ($uploaded_changes != "" && $uploaded_changes != "none") {
 		if (!is_uploaded_file($uploaded_changes)) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
