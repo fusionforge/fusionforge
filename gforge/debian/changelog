@@ -1,11 +1,18 @@
-gforge (3rc1-2+) experimental; urgency=low
+gforge (3rc1-3) experimental; urgency=low
+
+  * [Christian] Fixed GForge-CVS in cvsweb.conf
+  * [Christian] Fixed jpgraph path in local.inc
+  * [Christian] Added suggest on libphp-jpgraph
+  * [Christian] Added unix_box and cvs_box argument to the
+    create funtion in Group.class
+
+ -- Christian Bayle <bayle@debian.org>  Fri, 28 Mar 2003 11:20:44 +0100
+
+gforge (3rc1-2) experimental; urgency=low
 
   * [Roland] Corrected a bug in exim install script
   * [Christian] Added location on projects and users for ssl part
   * [Christian] Fixed a typo in deb-specific/install-postfix.sh
-  * [Christian] Fixed GForge-CVS in cvsweb.conf
-  * [Christian] Fixed jpgraph path in local.inc
-  * [Christian] Added suggest on libphp-jpgraph
 
  -- Christian Bayle <bayle@debian.org>  Wed, 26 Mar 2003 23:29:15 +0100
 
