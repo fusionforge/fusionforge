@@ -3,6 +3,9 @@
 	* www/include/languages/Base.tab:
 	Fixed bug [ #487 ] Stats graph has funky title
 	
+	* www/my/index.php:
+	Fixed bug [ #488 ] Can't unmonitor forum from 'My Page' link
+	
 2003-08-14 Michael Jennings  <mej@eterm.org>
 
 	* gforge.spec:
