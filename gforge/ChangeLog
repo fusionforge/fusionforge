@@ -1,3 +1,19 @@
+2004-10-05  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* jumps to login page when accessing tracker item and not logged in
+	(see [#743] by Hidenari Miwa)
+	* generalized it in exit_permission_denied
+	* added a link to user page on author user name in tracker item page
+	* removed a useless instanciation of Group which raises a sql error in
+	Artifact.class
+	* corrected the order of submitted and affected items in My Page
+	* applied [#790] added resolution_select_box for tracker browse page
+	by Dominik Haas
+	* renamed AUTHORS to AUTHORS.sourceforge and created a new AUTHORS files
+	with GForge Team and contributors
+	* updated French translation
+	* fixed a minor internationalization problem in forums
+
 2004-10-05  Tim Perdue <tim@gforge.org>
 
 	* simplified priorites to 5 items from 9
@@ -15,11 +31,27 @@
 	* db/20041001.sql, deb-specific/db-upgrade.pl: Created new views
 	for NSS-PGSQL.
 
+2004-10-01  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* added version file in db/ directory so that we can easily see which
+	sql files we need to execute to upgrade
+	* when group is private, it raises now a permission denied error instead
+	of a generic error
+
 2004-09-29  Francisco Gimeno <kikov@kikov.org>
 
 	* gforge-plugin-scmsvn/include/SVNPlugin.class,
 	gforge-plugin-scmccase/include/CcasePlugin.class:
 	add a new hook to get the plugin published as scm_plugin.
+
+2004-09-29  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* applied [#915] Russian language file diff by Andrey Molchanov
+	thanks to Francisco Gimeno for reformatting the patch
+
+2004-09-28  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Applied [#914] Use $GFORGE in crontab.in by Ognyan Kulev
 
 2004-09-23  Guillaume Smet <guillaume-gforge@smet.org>
 
