@@ -12,6 +12,11 @@ update_mainconffile () {
     done
 
 }
+update_onevar_mainconfile () {
+	if ! grep -q "^$1=" $mainconffile ; then
+		echo "$1=$2" >> $mainconffile
+	fi
+}
 create_mainconffile () {
     if [ ! -e $mainconffile ] ; then
         touch $mainconffile

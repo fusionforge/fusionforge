@@ -33,6 +33,8 @@ case "$1" in
 	create_mainconffile
 	vars="system_name domain_name server_admin sys_theme sys_lang"
         update_mainconffile $vars
+	update_onevar_mainconfile default_trove_cat 18
+
 	/usr/sbin/sourceforge-config
     ;;
 
