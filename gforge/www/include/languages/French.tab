@@ -245,7 +245,7 @@ admin_groupedit	no	Non
 admin_groupedit	pending	En attente (E)
 admin_groupedit	project_admin	[Administration du projet]
 admin_groupedit	public	Public ?
-admin_groupedit	registration_application	Demande d'inscription
+admin_groupedit	registration_application	Demande d'inscription :
 admin_groupedit	status	Statut
 admin_groupedit	title	Administration du site : Informations sur le groupe
 admin_groupedit	unix_group_name	Nom Unix du groupe :
@@ -1034,23 +1034,23 @@ menu	site_status	État du site
 menu	software_map	Recherche thématique
 menu	submit	Proposer
 menu	top_projects	Meilleurs projets
-my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés
+my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés.
 my	assigneditems	Mes tâches assignées
 my	bookmarks	Mes signets
 my	monitoredfile	Fichiers que vous surveillez
 my	monitoredforum	Forums que vous surveillez
 my	no_bookmarks	Vous n'avez pas encore de signets
 my	no_monitored_filemodules	Vous ne surveillez pas de fichiers
-my	no_monitored_filemodules_details	<p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail, qui contiendra un lien vers le nouveau fichier sur le serveur de téléchargement.</p><p>Vous pouvez surveiller des fichier en visitant la page de « Survol » d'un projet en en cliquant sur l'icône « enveloppe » dans la section fichiers.</p>
-my	no_monitored_forums	Vous ne surveillez pas de forums
-my	no_monitored_forums_details	<p>Si vous surveillez des forums, les nouveaux articles publiés vous seront envoyés dans un e-mail, qui contiendra un lien vers l'article.</p><p>Vous pouvez surveiller des forums en cliquant sur le lien « Surveiller le forum » présent sur le forum.</p>
+my	no_monitored_filemodules_details	<p>Si vous surveillez des fichiers, vous serez prévenu de toute nouvelle publication par un e-mail qui contiendra un lien vers le nouveau fichier sur le serveur de téléchargement.</p><p>Vous pouvez surveiller des fichiers en visitant la page « En bref » d'un projet ou en cliquant sur l'icône « enveloppe » dans la section fichiers.</p>
+my	no_monitored_forums	Vous ne surveillez pas de forum.
+my	no_monitored_forums_details	<p>Si vous surveillez des forums, les nouveaux articles publiés vous seront envoyés par e-mail. Celui-ci contiendra un lien vers l'article.</p><p>Vous pouvez surveiller des forums en cliquant sur le lien « Surveiller le forum » présent sur chaque forum.</p>
 my	no_open_tasks	Aucune tâche ne vous est confiée.
 my	no_projects	Vous ne faites partie d'aucun projet.
-my	no_tracker_items_assigned	Aucun objet de traceur ne vous est confié.
-my	no_tracker_items_submitted	Vous n'avez soumis aucun objet de traceur.
-my	pending_news_bytes	Nouvelles en attente
-my	pending_news_bytes_1	Il y a une nouvelle en attente de validation
-my	pending_news_bytes_2	Il y a $1 nouvelles en attente de validation
+my	no_tracker_items_assigned	Rien ne vous est confié.
+my	no_tracker_items_submitted	Vous n'avez soumis aucun élément à suivre.
+my	pending_news_bytes	Annonces en attente
+my	pending_news_bytes_1	Il y a une annonce en attente de validation
+my	pending_news_bytes_2	Il y a $1 annonce(s) en attente de validation
 my	pending_news_bytes_3	Cliquez ici
 my	pending_projects	Projets en instance
 my	pending_projects_1	Ce projet en instance, attends des critiques
@@ -1109,34 +1109,34 @@ new	released_by	mis à jour par
 new	this_project_has_not	Ce projet n'a pas de déscription
 new	title	Sorties récentes
 new	version	Version :
-news	choose	<P>Choisissez une nouvelle et vous pouvez visualiser
-news	noitems	Aucun enregistrement trouvé
-news	nonews	Aucune nouvelle
-news	nonewsfor	Aucune nouvelles trouvée pour $1
+news	choose	<p>Choisissez une annonce pour visualiser, chercher ou soumettre des messages.</p>
+news	noitems	Aucune annonce trouvée
+news	nonews	Aucune annonce
+news	nonewsfor	Aucune annonce trouvée pour $1
 news	section	Projet : $1
-news	title	Nouvelles
-news_admin	noqueued	Pas de message soumis pour le projet
-news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe $1 des Nouvelles.
-news_admin	queued	Messages soumis pour le projet
-news_admin	section	Nouvelles
-news_admin	title	Administration des Nouvelles
-news_main	title	Nouvelles
-news_submit	cannot	Vous ne pouvez soumettre une nouvelles sans être administrateur de ce projet
-news_submit	cannotadmin	Soumettre des nouvelles en provenance du groupe 'nouvelles' n'est pas autorisé.
+news	title	Annonces
+news_admin	noqueued	Pas d'annonce soumise pour le projet
+news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe des annonces de $1.
+news_admin	queued	Annonces soumises pour le projet
+news_admin	section	Annonces
+news_admin	title	Administration des Annonces
+news_main	title	Annonces
+news_submit	cannot	Vous ne pouvez soumettre une annonce sans être administrateur de ce projet
+news_submit	cannotadmin	Soumettre des annonces en provenance du groupe 'annonces' n'est pas autorisé.
 news_submit	details	Détail&nbsp;
 news_submit	errorboth	ERREUR - le sujet et le corps sont requis
 news_submit	errorinsert	ERREUR d'insertion
 news_submit	forproject	Pour le projet&nbsp;
-news_submit	newsadded	Nouvelle ajoutée.
-news_submit	post_blurb	Vous pouvez publier une nouvelle concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe $1 pour apparaître sur la page d'accueil $1.<P>Vous pouvez inclure dans vos envois des URLs
-news_submit	section	Nouvelles
+news_submit	newsadded	Annonce ajoutée.
+news_submit	post_blurb	Vous pouvez publier une annonce concernant votre projet si vous en êtes administrateur. Vous pouvez également publier des annonces si votre projet a besoin d'aide.</p><p>Toutes les annonces <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet. Les annonces d'intérêt général peuvent être sélectionnées par l'équipe $1 pour apparaître sur la page d'accueil $1.</p><p>Vous pouvez inclure des URLs dans vos annonces.
+news_submit	section	Annonces
 news_submit	subject	Sujet&nbsp;
-news_submit	submit	ENVOYER
-news_submit	title	Soumettre une nouvelle pour $1
-news_utils	archive	Archive des nouvelles
-news_utils	nonews	<H3>Pas de nouvelles</H3>
-news_utils	readmore	<NOBR>Lire plus/Commenter</NOBR>
-news_utils	submit	Proposer une nouvelle
+news_submit	submit	Envoyer
+news_submit	title	Soumettre une annonce pour $1
+news_utils	archive	Archive des annonces
+news_utils	nonews	<h3>Pas d'annonces</h3>
+news_utils	readmore	Suite/Commenter
+news_utils	submit	Proposer une annonce
 people	about_blurb	<p>Le système « Demande d'aide » est destiné aux offres non commerciales de postes pour volontaires. Tout usage commercial de ce système d'annonces est interdit.</p><p>Les offres restent visibles pendant deux semaines ou jusqu'à ce qu'elles soient fermées par le demandeur, suivant ce qui arrive en premier. (Les administrateurs de projets peuvent toujours soumettre une nouvelle fois les offres qui ont expiré.)</p><p>Parcourez les catégories pour trouver un projet ayant besoin de votre aide.</p><p>Si vous êtes administrateur de projet, identifiez-vous et soumettez des demandes d'aide à travers l'interface d'administration de votre projet.</p><p>Pour suggérer de nouvelles catégories, soumettez votre demande via le gestionnaire de support.</p>
 people	action	Action
 people	add_new_skill	Ajouter une nouvelle competence
@@ -1424,6 +1424,7 @@ project_admin	edit_file_releases	Editer/Ajouter Versions de fichier
 project_admin	edit_member_permissions	Editer les permissions des membres
 project_admin	file_releases	Versions de fichier
 project_admin	forum_admin	Administration des forums
+project_admin	frs_admin	Administration du système de publication de fichiers
 project_admin	group_members	Membres du groupe
 project_admin	homepage_link	Lien vers la page d'accueil&nbsp;:&nbsp;
 project_admin	mail_admin	Administration des listes de diffusion
@@ -1468,21 +1469,21 @@ project_admin_editgroupinfo	group_name	Nom précis du projet&nbsp;
 project_admin_editgroupinfo	group_updated	Informations de groupes mises à jour
 project_admin_editgroupinfo	homepage_link	Lien vers la page d'accueil
 project_admin_editgroupinfo	new_doc	Soumission de nouveaux documents&nbsp;
-project_admin_editgroupinfo	new_doc_info	Si vous voulez
+project_admin_editgroupinfo	new_doc_info	Si vous le désirez, vous pouvez fournir une adresse email par défaut à laquelle les nouvelles soumissions seront envoyées
 project_admin_editgroupinfo	send_on_all_updates	(envoi pour toutes les mises à jour)
 project_admin_editgroupinfo	short_description	Courte description (255 caractères maximum)
 project_admin_editgroupinfo	title	Édition des infos publiques
 project_admin_editgroupinfo	use_cvs	CVS
-project_admin_editgroupinfo	use_docman	Gestionnaire de documentation
+project_admin_editgroupinfo	use_docman	Gestionnaire de documents
 project_admin_editgroupinfo	use_forums	Forums
-project_admin_editgroupinfo	use_frs	Suivi de fichier (avec version)
+project_admin_editgroupinfo	use_frs	Publication de fichiers (avec version)
 project_admin_editgroupinfo	use_ftp	FTP
 project_admin_editgroupinfo	use_mailing_lists	Listes de diffusion
 project_admin_editgroupinfo	use_news	News
 project_admin_editgroupinfo	use_pm	Gestionnaire de tâches
 project_admin_editgroupinfo	use_stats	Statistiques
 project_admin_editgroupinfo	use_surveys	Sondages
-project_admin_editgroupinfo	use_tracker	Traceurs
+project_admin_editgroupinfo	use_tracker	Suivi
 project_admin_editimages	add_data	Ajouter des données multimédia
 project_admin_editimages	add_file	Ajouter un fichier
 project_admin_editimages	del	Suppr
@@ -1553,7 +1554,7 @@ project_admin_editrelease	upload_new_file	Télécharger vers le serveur un nouve
 project_admin_editrelease	upload_release_notes	Télécharger les notes&nbsp;
 project_admin_group_trove	intro	<h3>Editer les catégories</h3><p>Choisissez jusqu'à trois emplacements pour ce projet dans chaque categorie. Si le projet ne rentre pas dans aucune, choisissez simplement "None Selected".</p><p> IMPORTANT: les projets doivent être rangés dans les emplacements les plus précis possibles. Le choix simultané d'une catégorie ET d'une catégorie parente ne servira à rien : seule la catégorie la plus plus précise sera acceptée.
 project_admin_group_trove	title	Information sur le groupe
-project_admin_group_trove	update_changes	Mise à jour de toutes changements pour la catégorie.
+project_admin_group_trove	update_changes	Mettre à jour tous les changements de catégories
 project_admin_history	info	Cet état vous montre quels changements significatifs et quand ils ont été apportés à votre projet.
 project_admin_history	title	Historique
 project_admin_newrelease	section	Projet $1 -- administration
@@ -1624,7 +1625,7 @@ project_admin_userpermedit	update_permissions	Mise à jour des permissions du d�
 project_admin_userpermedit	user_added	Utilisateur ajouté avec succès
 project_admin_userpermedit	user_does_not_exist	Utilisateur inexistant.
 project_admin_userpermedit	value	Valeur
-project_admin_userperms	docman	Gestionnaire<br />Documentation</s>
+project_admin_userperms	docman	Gestionnaire<br />de Documents
 project_admin_userperms	editor	Editeur
 project_admin_userperms	forums	Forums
 project_admin_userperms	general	Général
@@ -1634,7 +1635,7 @@ project_admin_userperms	no_developers	Aucun développeur trouvé
 project_admin_userperms	rel_tech	Lien Tech.
 project_admin_userperms	task_manager	Gestionnaire<br />de tâches
 project_admin_userperms	title	Liste des droits des développeurs
-project_admin_userperms	tracker_manager	Gestionnaire<br />de traceur
+project_admin_userperms	tracker_manager	Gestionnaire<br />de suivi
 project_admin_utils	admin	Administration
 project_admin_utils	by	Par
 project_admin_utils	change_history	Historique des changements apportés au groupe
@@ -1650,7 +1651,7 @@ project_admin_utils	permission_blurb	<strong>NOTE :</strong><dl><dt><strong>Admi
 project_admin_utils	post_jobs	Nouveau poste
 project_admin_utils	project_history	Historique du projet
 project_admin_utils	stats	Statistiques
-project_admin_utils	user_permissions	Permissions de l'utilisateur
+project_admin_utils	user_permissions	Permissions des utilisateurs
 project_admin_utils	vhosts	Hôtes virtuels
 project_admin_vhost	create	Créer
 project_admin_vhost	delete	Effacer
@@ -2497,7 +2498,7 @@ tracker_taskmgr	task_manager_project	Gestionnaire de tâche
 tracker_taskmgr	tracker_item	Trace
 tracker_utils	monitor	Suivi
 tracker_utils	stop_monitoring	Arrêter le suivi
-trove	not_categorized	Ce projet ne s'est pas encore classifié dans l'arbre des projets
+trove	not_categorized	Ce projet ne s'est pas encore classé dans l'
 trove	title	Arbre des projets
 trove_list	browse_by	Afficher par&nbsp;
 trove_list	invalid_category_text	Cette catégorie n'existe pas.
