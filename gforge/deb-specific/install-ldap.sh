@@ -396,7 +396,7 @@ setup_robot() {
     check_server
     if ! exists_dn "$robot_dn" || ! exists_dn "ou=People,$gforge_base_dn" ; then
 	echo "Adding robot accounts and sub-trees"
-    
+	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
 	{ eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' $DEVNULL12" || true ; } <<-FIN
 dn: $gforge_base_dn
 objectClass: dcObject
