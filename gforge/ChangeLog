@@ -4,6 +4,7 @@
 	setup)
 	* sys_localinc variable has now priority on all others local.inc
 	(pre.php). This allow to make easy multiple gforge config on the same box
+	* Better detection of cronolog path in setup
 
 2004-04-06  Tom Copeland <tom@infoether.com>
 

@@ -39,7 +39,7 @@ computedefault(){
 	DEFAULTldap_base_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
 	DEFAULTldap_web_add_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTcgidir=$CGIDIR
-	DEFAULTcronolog_path=`which cronolog || echo /usr/bin/cronolog`
+	DEFAULTcronolog_path=`which cronolog || echo /usr/sbin/cronolog`
 	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
 	DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
 	DEFAULTgforge_chroot=$CHROOT
