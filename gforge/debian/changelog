@@ -5,9 +5,17 @@ gforge (3.0-3+) unstable; urgency=low
     sub-trees/records in them (closes: #201536).
   * [Christian] Corrected my stupid error in ldap.php that made a warning
     on changing ldap protocol version (closes: #202208)
-  * Added dependancy on cpio for gforge-common
+  * [Christian] Added dependancy on cpio for gforge-common
+  * [Roland] Updated French translation for Debconf templates, again
+    thanks to the French l10n team (closes: #201668).
+  * [Roland] The French l10n team have too much time on their hands, but
+    they provide valid suggestions as for which Debconf templates should
+    be translated and which shouldn't.  I obey the French l10n team's
+    wishes in that regard (closes: #201666).
+  * [Roland] Clearly mark files generated from templates as such, as well
+    as these templates (closes: #193155).
 
- -- Christian Bayle <bayle@debian.org>  Sun, 20 Jul 2003 23:16:46 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 24 Jul 2003 21:36:46 +0200
 
 gforge (3.0-2) unstable; urgency=low
 
