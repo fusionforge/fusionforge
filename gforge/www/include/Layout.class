@@ -358,21 +358,11 @@ class Layout extends Error {
 		}
 
 		?>
-<P class="footer">
-<font face="arial, helvetica" size="1" color="#cccccc">
-VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.
-Linux is a registered trademark of Linus Torvalds.  All other trademarks and
-copyrights on this page are property of their respective owners.
-For information about other site Content ownership and sitewide
-terms of service, please see the
-<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>.
-For privacy
-policy information, please see the <a href="/tos/privacy.php" class="legallink"
->SourceForge Privacy Policy</a>.
-Content owned by VA Linux Systems is copyright 
-1999-2001 VA Linux Systems, Inc.  All rights reserved.
-</font>
-<BR>&nbsp;
+<P align="center">
+  <font face="arial, helvetica" size="1" color="#cccccc">
+<? echo $Language->getText('general', 'footer'); ?>
+  </font>
+</p>
 
 <?php
 
