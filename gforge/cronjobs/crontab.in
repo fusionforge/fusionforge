@@ -122,6 +122,12 @@ MAILTO=""
 #5 2 * * * $PHP $GFORGE/plugins/scmcvs/cronjobs/tarballs.php
 
 #
+#	Create SVN tarballs
+#
+#
+#5 3 * * * $PHP $GFORGE/plugins/scmsvn/cronjobs/tarballs.php
+
+#
 #       Daily CVS stats collection
 #
 #20 1 * * * $PHP $GFORGE/cronjobs/cvs-cron/history_parse.php
