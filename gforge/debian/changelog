@@ -1,3 +1,9 @@
+sourceforge (2.6-0+8+) unstable; urgency=low
+
+  * Let's continue
+
+ -- Christian Bayle <bayle@aist.enst.fr>  Mon, 11 Mar 2002 23:59:08 +0100
+
 sourceforge (2.6-0+8) unstable; urgency=low
 
   * [Christian] Added debian/BUGS
