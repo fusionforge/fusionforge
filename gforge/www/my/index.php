@@ -258,21 +258,21 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 
 		This needs to be updated manually to display any given survey
 	*/
-
-	$sql="SELECT * from survey_responses ".
-		"WHERE survey_id='1' AND user_id='".user_getid()."' AND group_id='1'";
-
-	$result=db_query($sql);
-
-	echo $HTML->boxMiddle($Language->getText('my', 'survey'),false,false);
-
-	if (db_numrows($result) < 1) {
-		show_survey(1,1);
-	} else {
-		echo '
-		<strong>'.$Language->getText('my','survey_taken').'</strong>';
+	if($sys_use_survey) {
+		$sql="SELECT * from survey_responses ".
+			"WHERE survey_id='1' AND user_id='".user_getid()."' AND group_id='1'";
+	
+		$result=db_query($sql);
+	
+		echo $HTML->boxMiddle($Language->getText('my', 'survey'),false,false);
+	
+		if (db_numrows($result) < 1) {
+			show_survey(1,1);
+		} else {
+			echo '
+			<strong>'.$Language->getText('my','survey_taken').'</strong>';
+		}
 	}
-
 	/*
 	 * Pending projects and news bytes
 	 */
