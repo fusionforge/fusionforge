@@ -21,13 +21,13 @@
  */
 function admin_table_add($table, $unit, $primary_key) {
 	global $PHP_SELF;
-	
+
 	// This query may return no rows, but the field names are needed.
 	$result = db_query('SELECT * FROM '.$table.' WHERE '.$primary_key.'=0');
 
 	if ($result) {
 		$cols = db_numfields($result);
-	       
+
 		echo 'Create a new '.$unit.' below:
 			<form name="add" action="'.$PHP_SELF.'?function=postadd" method="post">
 			<table>';
@@ -92,7 +92,7 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}
 		echo '</ul>
-			<form name="delete" action="'.$PHP_SELF.'?function=delete&id='.$id.'" method="post">
+			<form name="delete" action="'.$PHP_SELF.'?function=delete&amp;id='.$id.'" method="post">
 			<input type="submit" value="Delete" />
 			</form>
 			<form name="cancel" action="'.$PHP_SELF.'" method="post">
@@ -129,14 +129,14 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
  */
 function admin_table_edit($table, $unit, $primary_key, $id) {
 	global $PHP_SELF;
-	
+
 	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
 
 	if ($result) {
 		$cols = db_numfields($result);
-	       
+
 		echo 'Modify the '.$unit.' below:
-			<form name="edit" action="'.$PHP_SELF.'?function=postedit&id='.$id.'" method="post">
+			<form name="edit" action="'.$PHP_SELF.'?function=postedit&amp;id='.$id.'" method="post">
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
@@ -144,7 +144,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 			$value = db_result($result, 0, $i);
 
 			echo '<tr><td><strong>'.$fieldname.'</strong></td>';
-			
+
 			if ($fieldname == $primary_key) {
 				echo "<td>$value</td></tr>";
 			} else {
@@ -209,18 +209,20 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
 		<tr bgcolor="'.$HTML->COLOR_HTMLBOX_TITLE.'">
 		<td colspan="'.($cols+1).'"><strong><span style="color:'. $HTML->FONTCOLOR_HTMLBOX_TITLE .'">'. ucwords($unit) .'s</span></strong>';
 		if ($edit) echo '<a href="'.$PHP_SELF.'?function=add">[add new]</a>';
-		echo '</td></tr>';
+		echo "</td></tr>\n";
 
 		if ($edit) echo '
 			<tr><td width="5%"></td>';
+		else echo '
+			<tr>';
 
                 for ($i = 0; $i < $cols; $i++) {
 			echo '<td><strong>'.db_fieldname($result,$i).'</strong></td>';
 		}
-		echo '</tr>';
+		echo "</tr>\n";
 
                 for ($j = 0; $j < $rows; $j++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '">';
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
                         $id = db_result($result,$j,0);
                         if ($edit) echo '<td><a href="'.$PHP_SELF.'?function=edit&amp;id='.$id.'">[edit]</a>';
@@ -228,9 +230,9 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
 			for ($i = 0; $i < $cols; $i++) {
 				echo '<td>'. db_result($result, $j, $i) .'</td>';
 			}
-			echo '</tr>';
+			echo "</tr>\n";
 		}
-		echo '</table>';
+		echo "</table>\n";
 	} else {
 		echo db_error();
 	}

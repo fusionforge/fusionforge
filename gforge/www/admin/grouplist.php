@@ -6,7 +6,7 @@
 //
 // $Id$
 
-require "pre.php";    
+require "pre.php";
 require($DOCUMENT_ROOT.'/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
@@ -55,7 +55,6 @@ if ($form_catroot == 1) {
 }
 ?>
 </p>
-<p>
 <table width="100%" border="1">
 <tr>
 <td><strong>Group Name (click to edit)</strong></td>
@@ -74,7 +73,7 @@ while ($grp = db_fetch_array($res)) {
 	print "<td>$grp[status]</td>";
 	print "<td>$grp[is_public]</td>";
 	print "<td>$grp[license]</td>";
-	
+
 	// members
 	$res_count = db_query("SELECT user_id FROM user_group WHERE group_id=$grp[group_id]");
 	print "<td>" . db_numrows($res_count) . "</td>";
@@ -83,7 +82,7 @@ while ($grp = db_fetch_array($res)) {
 }
 ?>
 
-</table></p>
+</table>
 
 <?php
 site_admin_footer(array());

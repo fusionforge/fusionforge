@@ -6,7 +6,7 @@
 //
 // $Id$
 
-require "pre.php";    
+require "pre.php";
 session_require(array('group'=>'1','admin_flags'=>'A'));
 $HTML->header(array('title'=>$GLOBALS['system_name'].': User List'));
 
@@ -28,7 +28,6 @@ function show_users_list ($result) {
 		<font color="grey">Deleted</font>
 		<font color="red">Suspended</font>
 		(*)Pending</p>
-		<p>
 		<table width="100%" cellspacing="0" cellpadding="0" border="1">';
 
 	while ($usr = db_fetch_array($result)) {
@@ -41,12 +40,12 @@ function show_users_list ($result) {
 		print "$usr[user_name]</a>";
 		print "</td>";
 		print "\n<td><a href=\"/developer/?form_dev=$usr[user_id]\">[DevProfile]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=activate&user_id=$usr[user_id]\">[Activate]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=delete&user_id=$usr[user_id]\">[Delete]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=suspend&user_id=$usr[user_id]\">[Suspend]</a></td>";
-		print "</td>";
+		print "\n<td><a href=\"userlist.php?action=activate&amp;user_id=$usr[user_id]\">[Activate]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=delete&amp;user_id=$usr[user_id]\">[Delete]</a></td>";
+		print "\n<td><a href=\"userlist.php?action=suspend&amp;user_id=$usr[user_id]\">[Suspend]</a></td>";
+		print "</tr>";
 	}
-	print "</table></p>";
+	print "</table>";
 
 }
 
@@ -73,8 +72,8 @@ if ($action=='add_to_group') {
 print "<p>User list for group: ";
 if (!$group_id) {
 	print "<strong>All Groups</strong>";
-	print "\n<p>";
-	
+	print "\n</p>";
+
 	if ($user_name_search) {
 	  // [RM] LIKE is case-sensitive, and we don't want that
 	  //		$result = db_query("SELECT user_name,user_id,status FROM users WHERE user_name LIKE '$user_name_search%' ORDER BY user_name");
@@ -87,9 +86,8 @@ if (!$group_id) {
 	/*
 		Show list for one group
 	*/
-	print "<strong>" . group_getname($group_id) . "</strong>";
-	
-	print "\n<p>";
+	print "<strong>" . group_getname($group_id) . "</strong></p>";
+
 
 	$result = db_query("SELECT users.user_id AS user_id,users.user_name AS user_name,users.status AS status "
 		. "FROM users,user_group "
@@ -104,17 +102,17 @@ if (!$group_id) {
 	<hr />
 	<p>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
-	<input type="hidden" name="action" value="add_to_group">
-	<input name="user_id" type="TEXT" value="">
-	<p>
+	<input type="hidden" name="action" value="add_to_group" />
+	<input name="user_id" type="TEXT" value="" />
+	<br />
 	Add User to Group (<?php print group_getname($group_id); ?>):
 	<br />
-	<input type="hidden" name="group_id" value="<?php print $group_id; ?>">
-	<p>
-	<input type="submit" name="Submit" value="Submit">
+	<input type="hidden" name="group_id" value="<?php print $group_id; ?>" />
+	<br />
+	<input type="submit" name="Submit" value="Submit" />
 	</form>
-
-	<?php	
+	</p>
+	<?php
 }
 
 $HTML->footer(array());

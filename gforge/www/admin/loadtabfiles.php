@@ -61,7 +61,7 @@ site_admin_header(array('title'=>"Site Admin"));
 
 </form>
 
-<p>
+<p />
 
 <?php
 $result=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
@@ -83,11 +83,11 @@ if (db_numrows($result)>0) {
 		printf("<td>(%d)</td><td>[%3.2f",$howmany,$rate);
 		echo "%]</td>"
 ?>
-<td><a href=/admin/seetabfiles.php?lang=<?php echo "$language_id"; ?>>[see translations]</a>
+<td><a href="/admin/seetabfiles.php?lang=<?php echo "$language_id"; ?>">[see translations]</a>
 </td>
-<td><a href=/admin/notranstabfiles.php?lang=<?php echo "$language_id"; ?>>[see untranslated]</a>
+<td><a href="/admin/notranstabfiles.php?lang=<?php echo "$language_id"; ?>">[see untranslated]</a>
 </td>
-<td><a href=/admin/edittabfiles.php?lang=<?php echo "$language_id"; ?>>[edit(don t work)]</a>
+<td><a href="/admin/edittabfiles.php?lang=<?php echo "$language_id"; ?>">[edit(don t work)]</a>
 </td>
 <?php
 		echo "</tr>";
@@ -108,7 +108,7 @@ if (db_numrows($result)>0) {
 			echo "<tr>";
 		}
 	}
-	echo "\n</table></p>";
+	echo "\n</table>";
 }
 
 site_admin_footer(array());

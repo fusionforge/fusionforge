@@ -21,13 +21,13 @@
  */
 function admin_table_add($table, $unit, $primary_key) {
 	global $PHP_SELF;
-	
+
 	// This query may return no rows, but the field names are needed.
 	$result = db_query('SELECT * FROM '.$table.' WHERE '.$primary_key.'=0');
 
 	if ($result) {
 		$cols = db_numfields($result);
-	       
+
 		echo 'Create a new '.$unit.' below:
 			<form name="add" action="'.$PHP_SELF.'?function=postadd" method="post">
 			<table>';
@@ -92,7 +92,7 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}
 		echo '</ul>
-			<form name="delete" action="'.$PHP_SELF.'?function=delete&id='.$id.'" method="post">
+			<form name="delete" action="'.$PHP_SELF.'?function=delete&amp;id='.$id.'" method="post">
 			<input type="submit" value="Delete" />
 			</form>
 			<form name="cancel" action="'.$PHP_SELF.'" method="post">
@@ -129,14 +129,14 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
  */
 function admin_table_edit($table, $unit, $primary_key, $id) {
 	global $PHP_SELF;
-	
+
 	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
 
 	if ($result) {
 		$cols = db_numfields($result);
-	       
+
 		echo 'Modify the '.$unit.' below:
-			<form name="edit" action="'.$PHP_SELF.'?function=postedit&id='.$id.'" method="post">
+			<form name="edit" action="'.$PHP_SELF.'?function=postedit&amp;id='.$id.'" method="post">
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
@@ -144,7 +144,7 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 			$value = db_result($result, 0, $i);
 
 			echo '<tr><td><strong>'.$fieldname.'</strong></td>';
-			
+
 			if ($fieldname == $primary_key) {
 				echo "<td>$value</td></tr>";
 			} else {
@@ -204,11 +204,11 @@ function admin_table_show($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 
 		$cell_data=array();
-		$cell_data[]=array(ucwords($unit).'<a href="'.$PHP_SELF.'?function=add">[add new]</a>', 
+		$cell_data[]=array(ucwords($unit).'<a href="'.$PHP_SELF.'?function=add">[add new]</a>',
 			'colspan="'.($cols+1).'"');
 
                 echo '<table border="0" width="100%">';
-				echo $HTML->multiTableRow('',$cell_data, TRUE);
+		echo $HTML->multiTableRow('',$cell_data, TRUE);
 
                 echo '
 			<tr><td width="5%"></td>';
@@ -218,7 +218,7 @@ function admin_table_show($table, $unit, $primary_key) {
 		echo '</tr>';
 
                 for ($j = 0; $j < $rows; $j++) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '">';
+			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
                         $id = db_result($result,$j,0);
                         echo '<td><a href="'.$PHP_SELF.'?function=edit&amp;id='.$id.'">[edit]</a>';
@@ -241,7 +241,7 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 $HTML->header(array('title'=>'Edit the '. ucwords($unit) .'s Table'));
 
 echo '<h3>Edit '. ucwords($unit) .'s</h3>
-<p><a href="/admin/">Site Admin Home</a>
+<p><a href="/admin/">Site Admin Home</a></p>
 <p>&nbsp;</p>';
 
 switch ($function) {

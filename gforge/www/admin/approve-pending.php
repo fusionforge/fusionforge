@@ -15,7 +15,7 @@
 // Show no more pending projects per page than specified here
 $LIMIT = 50;
 
-require_once('pre.php');	 
+require_once('pre.php');
 require_once('common/include/vars.php');
 require_once('common/include/account.php');
 require_once('www/include/proj_email.php');
@@ -46,7 +46,7 @@ function activate_group($group_id) {
 		$feedback .= $group->getErrorMessage();
 		return false;
 	}
-	
+
 	return true;
 }
 
@@ -108,16 +108,16 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	?>
 	<h2><?php echo $row_grp['group_name']; ?></h2>
 
-	<p>
-	<a href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>"><h3>[Edit Project Details]</h3></a>
+	<p />
+	<h3><a href="/admin/groupedit.php?group_id=<?php echo $row_grp['group_id']; ?>">[Edit Project Details]</a></h3>
 
-	<p>
-	<a href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>"><h3>[Project Admin]</h3></a>
+	<p />
+	<h3><a href="/project/admin/?group_id=<?php echo $row_grp['group_id']; ?>">[Project Admin]</a></h3>
 
-	<p>
-	<a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>"><h3>[View/Edit Project Members]</h3></a>
+	<p />
+	<h3><a href="userlist.php?group_id=<?php print $row_grp['group_id']; ?>">[View/Edit Project Members]</a></h3>
 
-	<p>
+	<p />
 	<table><tr><td>
 	<form action="<?php echo $PHP_SELF; ?>" method="post">
 	<input type="hidden" name="action" value="activate" />
@@ -157,14 +157,14 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	print "<p><strong>Other Information</strong></p>";
 	print "<p>Unix Group Name: $row_grp[unix_group_name]</p>";
 
-	print "<p>Submitted Description:<blockquote>$row_grp[register_purpose]</blockquote></p>";
+	print "<p>Submitted Description:</p><blockquote>$row_grp[register_purpose]</blockquote>";
 
 	if ($row_grp[license]=="other") {
-		print "<p>License Other: <blockquote>$row_grp[license_other]</blockquote></p>";
+		print "<p>License Other:</p><blockquote>$row_grp[license_other]</blockquote>";
 	}
-	
+
 	if ($row_grp[status_comment]) {
-		print "<p>Pending reason: <span style=\"color:red\">$row_grp[status_comment]</span>";
+		print "<p>Pending reason:</p><span style=\"color:red\">$row_grp[status_comment]</span>";
 	}
 
 	echo "<p>&nbsp;</p><hr /><p>&nbsp;</p>";
@@ -183,7 +183,7 @@ echo '
 	<input type="submit" name="submit" value="Approve All On This Page" />
 	</form></div>
 	';
-	
+
 site_admin_footer(array());
 
 ?>

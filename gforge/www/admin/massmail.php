@@ -104,10 +104,10 @@ print '
 <br /><input type="text" name="mail_subject" size="50" value="['.$GLOBALS['sys_name'].'] " /></p>
 
 <p><strong>Text of Message:</strong>'.utils_requiredField().' (will be appended with unsubscription
-information, if applicable)
-<pre><textarea name="mail_message" cols="70" rows="20" wrap="physical">
+information, if applicable)</p>
+<pre><textarea name="mail_message" cols="70" rows="20">
 </textarea>
-</pre></p>
+</pre>
 
 <p><input type="submit" name="submit" value="Schedule for Mailing" /></p>
 

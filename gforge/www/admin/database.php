@@ -51,16 +51,16 @@ if ($submit) {
 		$feedback .=	"<strong>Unable to insert already active database.</strong>";
 
 	}
-			
-}			
+
+}
 
 
 site_admin_header(array('title'=>"Site Admin: Groups' DB Maintenance"));
 
 $res_db = db_query("
-	SELECT stateid,statename,COUNT(*) 
-	FROM prdb_dbs,prdb_states 
-	WHERE stateid=state 
+	SELECT stateid,statename,COUNT(*)
+	FROM prdb_dbs,prdb_states
+	WHERE stateid=state
 	GROUP BY statename,stateid
 ");
 
@@ -89,8 +89,8 @@ if (db_numrows($res_db) > 0) {
 if ($displaydb) {
 
 	$res_db = db_query("
-		SELECT statename 
-		FROM prdb_states 
+		SELECT statename
+		FROM prdb_states
 		WHERE stateid=".$dbstate."
 	");
 
@@ -99,8 +99,8 @@ if ($displaydb) {
 	print '<hr /><h3>Displaying Databases of Type: '.$row_db['statename'].' </h3><ul>';
 
 	$res_db = db_query("
-		SELECT * 
-		FROM prdb_dbs 
+		SELECT *
+		FROM prdb_dbs
 		WHERE state=".$dbstate."
 		ORDER BY dbname
 	");
@@ -111,7 +111,7 @@ if ($displaydb) {
 
 	}
 	print "</ul>";
-	
+
 
 }
 
@@ -128,16 +128,16 @@ if ($displaydb) {
 
 <tr>
 <td>Group Unix Name:<?php echo utils_requiredField(); ?></td>
-<td><input type="text" name="groupname"></td>
+<td><input type="text" name="groupname" /></td>
 </tr>
 
 <tr>
 <td>Database Name:<?php echo utils_requiredField(); ?></td>
-<td><input type="text" name="dbname"></td>
+<td><input type="text" name="dbname" /></td>
 </tr>
 
 </table>
-<input type="submit" name="submit" value="Add">
+<input type="submit" name="submit" value="Add" />
 </form>
 
 <?php

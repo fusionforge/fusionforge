@@ -26,91 +26,94 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 
 ?>
- 
-<p><strong>User Maintenance</strong>
+
+<p><strong>User Maintenance</strong></p>
 <ul>
-	<li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;
-	<li>Display Users Beginning with : 
+	<li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;</li>
+	<li>Display Users Beginning with :
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo "<a href=\"search.php?usersearch=1&search=$abc_array[$i]%\">$abc_array[$i]</a>|";
+		echo "<a href=\"search.php?usersearch=1&amp;search=$abc_array[$i]%\">$abc_array[$i]</a>|";
 	}
 ?>
-<br />
-<form name="usersrch" action="search.php" method="POST">
-Search <em>(userid, username, realname, email)</em>:
-  <input type="text" name="search">
-  <input type="hidden" name="substr" value="1">
-  <input type="hidden" name="usersearch" value="1">
-  <input type="submit" value="get">
-</form>
+	<br />
+		<form name="usersrch" action="search.php" method="post">
+		Search <em>(userid, username, realname, email)</em>:
+		<input type="text" name="search" />
+		<input type="hidden" name="substr" value="1" />
+		<input type="hidden" name="usersearch" value="1" />
+		<input type="submit" value="get" />
+		</form>
+	</li>
 </ul>
 <p>
 <strong>Group Maintenance</strong>
-<p>
+</p>
 <ul>
-	<li><a href="grouplist.php">Display Full Group List/Edit Groups</a>
+	<li><a href="grouplist.php">Display Full Group List/Edit Groups</a></li>
 
-<li>Display Groups Beginning with : 
+	<li>Display Groups Beginning with :
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
-		echo "<a href=\"search.php?groupsearch=1&search=$abc_array[$i]%\">$abc_array[$i]</a>|";
+		echo "<a href=\"search.php?groupsearch=1&amp;search=$abc_array[$i]%\">$abc_array[$i]</a>|";
 	}
 ?>
-<form name="gpsrch" action="search.php" method="POST">
-Search <em>(groupid, group unix name, full name)</em>:
-  <input type="text" name="search">
-  <input type="hidden" name="substr" value="1">
-  <input type="hidden" name="groupsearch" value="1">
-  <input type="submit" value="get">
-</form>
-
-<p>
-
-
-<li><a href="/register/">Register New Project</a>
-<li>Groups with <a href="approve-pending.php"><strong>P</strong> (pending) Status</a> <em>(New Project Approval)</em>
-<li>Groups with <a href="search.php?groupsearch=1&search=%&status=D"><strong>D</strong> (deleted) Status</a>
-<li><a href="search.php?groupsearch=1&search=%&is_public=0">Private Groups </a>
+	<br />
+		<form name="gpsrch" action="search.php" method="post">
+		Search <em>(groupid, group unix name, full name)</em>:
+		<input type="text" name="search" />
+		<input type="hidden" name="substr" value="1" />
+		<input type="hidden" name="groupsearch" value="1" />
+		<input type="submit" value="get" />
+		</form>
+	</li>
+</ul>
+<ul>
+	<li><a href="/register/">Register New Project</a></li>
+	<li>Groups with <a href="approve-pending.php"><strong>P</strong> (pending) Status</a> <em>(New Project Approval)</em></li>
+	<li>Groups with <a href="search.php?groupsearch=1&amp;search=%&amp;status=D"><strong>D</strong> (deleted) Status</a></li>
+	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0">Private Groups </a></li>
 </ul>
 
 <p>
 <strong>News</strong>
-<p>
+</p>
 <ul>
-	<li><a href="/news/admin/">Approve/Reject</a> Front-page news
+	<li><a href="/news/admin/">Approve/Reject</a> Front-page news</li>
 </ul>
 
 <p>
 <strong>Stats</strong>
-<p>
+</p>
 <ul>
-	<li><a href="/stats/">Site-Wide Stats</a>
+	<li><a href="/stats/">Site-Wide Stats</a></li>
 </ul>
 
 <p>
 <strong>Trove Project Tree</strong>
+</p>
 <ul>
-	<li><a href="trove/trove_cat_list.php">Display Trove Map</a>
-	<li><a href="trove/trove_cat_add.php">Add to the Trove Map</a>
+	<li><a href="trove/trove_cat_list.php">Display Trove Map</a></li>
+	<li><a href="trove/trove_cat_add.php">Add to the Trove Map</a></li>
 </ul>
 
-<p><strong>Site Utilities</strong>
+<p><strong>Site Utilities</strong></p>
 <ul>
-	<li><a href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</a>
-	<li><a href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</a>
-	<li><a href="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</a>
-	<li><a href="edit_frs_filetype.php">Add, Delete, or Edit File Types</a>
-	<li><a href="edit_frs_processor.php">Add, Delete, or Edit Processors</a>
-	<li><a href="edit_frs_theme.php">Add, Delete, or Edit Themes</a>
-	<li><a href="loadtabfiles.php">Translation file tool</a>
+	<li><a href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</a></li>
+	<li><a href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</a></li>
+	<li><a href="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</a></li>
+	<li><a href="edit_frs_filetype.php">Add, Delete, or Edit File Types</a></li>
+	<li><a href="edit_frs_processor.php">Add, Delete, or Edit Processors</a></li>
+	<li><a href="edit_frs_theme.php">Add, Delete, or Edit Themes</a></li>
+	<li><a href="loadtabfiles.php">Translation file tool</a></li>
 </ul>
 
 <p>
 <strong>Global Admin Tools / Mass Insert Tools</strong>
+</p>
 <ul>
-	<li><a href="vhost.php">Virtual Host Administration Tool</a>
-	<li><a href="database.php">Project Database Administration</a>
+	<li><a href="vhost.php">Virtual Host Administration Tool</a></li>
+	<li><a href="database.php">Project Database Administration</a></li>
 </ul>
 
 <p><strong>Quick Site Statistics</strong></p>
@@ -119,7 +122,7 @@ Search <em>(groupid, group unix name, full name)</em>:
 
 $res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
 $row = db_fetch_array($res);
-print "<p>Active site users: <strong>$row[count]</strong>";
+print "<p>Active site users: <strong>$row[count]</strong></p>";
 
 $res=db_query("SELECT count(*) AS count FROM groups");
 $row = db_fetch_array($res);

@@ -45,7 +45,7 @@ if ($submit && $user_name) {
 			'type',false,false
 		); ?>
 		<input type="submit" name="submit" value="Unsubscribe" />
-		</form>         
+		</form>
 
 		<?php
 		site_admin_footer(array());
@@ -117,7 +117,7 @@ if ($pattern) {
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>&nbsp;</td>
 		<td>'.$row['user_id'].'</td>
-		<td><a href="unsubscribe.php?submit=1&user_name='.$row['user_name'].'">'.$row['user_name'].'</a></td>
+		<td><a href="unsubscribe.php?submit=1&amp;user_name='.$row['user_name'].'">'.$row['user_name'].'</a></td>
 		<td>'.$row['realname'].'</td>
 		<td> '.$row['email'].'</td>
 		<td>'.$row['mail_siteupdates'].'</td>

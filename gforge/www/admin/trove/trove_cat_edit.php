@@ -29,7 +29,7 @@ if ($GLOBALS["submit"]) {
 
 	if ($GLOBALS[form_shortname]) {
 		$res = db_query("
-			UPDATE trove_cat 
+			UPDATE trove_cat
 			SET	shortname='".htmlspecialchars($form_shortname)."',
 				fullname='".htmlspecialchars($form_fullname)."',
 				description='".htmlspecialchars($form_description)."',
@@ -45,7 +45,7 @@ if ($GLOBALS["submit"]) {
 				db_error()
 			);
 		}
-	} 
+	}
 	// update full paths now
 	if($newroot!=0) {
 		trove_genfullpaths($newroot,trove_getfullname($newroot),$newroot);
@@ -55,10 +55,10 @@ if ($GLOBALS["submit"]) {
 		trove_genfullpaths($form_trove_cat_id,trove_getfullname($form_trove_cat_id),$form_trove_cat_id);
 		trove_updaterootparent($form_trove_cat_id,$form_trove_cat_id);
 	}
-	db_query("update trove_group_link set trove_cat_root=(select root_parent from trove_cat where trove_cat_id=trove_group_link.trove_cat_id)");	
+	db_query("update trove_group_link set trove_cat_root=(select root_parent from trove_cat where trove_cat_id=trove_group_link.trove_cat_id)");
 
 	session_redirect("/admin/trove/trove_cat_list.php");
-} 
+}
 
 if ($GLOBALS["delete"]) {
 	if ($form_trove_cat_id==$default_trove_cat){
@@ -67,7 +67,7 @@ if ($GLOBALS["delete"]) {
 	$res = db_query("
 		SELECT trove_cat_id FROM trove_cat WHERE parent='$form_trove_cat_id'
 	");
-		
+
 	if (!$res) {
 		exit_error( 'Error In Trove Operation', db_error());
 	}
@@ -131,7 +131,7 @@ while ($row_parent = db_fetch_array($res_parent)) {
 <p>New category description (VARCHAR 255):
 <br /><input type="text" name="form_description" size="80" value="<?php print $row_cat["description"]; ?>" /></p>
 
-<br /><input type="submit" name="submit" value="Update" /><input type="submit" name="delete" value="Delete" /></p>
+<br /><input type="submit" name="submit" value="Update" /><input type="submit" name="delete" value="Delete" />
 </form>
 
 <?php
