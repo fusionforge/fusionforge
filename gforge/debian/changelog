@@ -1,4 +1,4 @@
-sourceforge (2.5-15+) unstable; urgency=low
+sourceforge (2.5-16) unstable; urgency=low
 
   * [Christian] Added proper chmod for cp -r of www
   * [Roland] Replaced last instances of x-cvsShell by the correct form
@@ -6,7 +6,7 @@ sourceforge (2.5-15+) unstable; urgency=low
     (closes: #121633).
   * [Justin] Fix displayed file sizes in the FRS.
 
- -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 15:35:38 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 16:01:43 +0100
 
 sourceforge (2.5-15) unstable; urgency=medium
 
