@@ -14,10 +14,10 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 #
 # Update the Serial Number
 #
-$date_line = $dns_zone[5];
+$date_line = $dns_zone[6];
 
 $date_line =~ s/\t\t\t/\t/;
-        
+
 ($blah,$date_str,$comments) = split("	", $date_line);
 
 $date = $date_str;
@@ -34,7 +34,7 @@ if ($old_day != $new_day) { $serial = "01"; }
 
 $new_serial = $now_string.$serial;
 
-$dns_zone[5] = "		$blah	$new_serial	$comments";
+$dns_zone[6] = "		$blah	$new_serial	$comments";
 
 write_array_file($file_dir."/bind/dns.head", @dns_zone);
 

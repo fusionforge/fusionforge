@@ -3,4 +3,4 @@
 #
 
 # DNS Update
-0 * * * * root [ -f /var/lib/gforge/bind/dns.head ] && [ -x /usr/lib/gforge/bin/install-dns.sh ] && /usr/lib/gforge/bin/install-dns.sh configure > /dev/null 2>&1
+0 * * * * root [ -f /var/lib/gforge/bind/dns.head ] && [ -x /usr/lib/gforge/bin/dns_conf.pl ] && /usr/sbin/invoke-rc.d bind9 reload &>/dev/null

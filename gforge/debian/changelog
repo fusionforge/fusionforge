@@ -9,6 +9,8 @@ gforge (3.3.0-3woody6) stable; urgency=low
   gforge upstream bug #751)
   * [Christian] Adjust cvs_dump rights
   * [Christian] Try to fix problems when dbname and dbuser are not gforge
+  * [Christian] Applied blindly (I red the diff) Mathieu Peltier patch #641
+  that fix DNS configuration problem
 
  -- Christian Bayle <bayle@debian.org>  Sun, 18 Apr 2004 00:25:03 +0200
 
