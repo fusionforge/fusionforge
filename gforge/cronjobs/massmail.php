@@ -103,7 +103,7 @@ $mail_id = db_result($mail_res, 0, 'id');
 
 //$err .= "Got mail to send: ".$subj."\n";
 
-$sql = "SELECT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash
+$sql = "SELECT DISTINCT users.user_id,users.user_name,users.realname,users.email,users.confirm_hash
 	FROM $table_mapping[$type]
 	WHERE users.user_id>".db_result($mail_res, 0, 'last_userid')."
 	AND users.status='A'

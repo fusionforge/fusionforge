@@ -4,6 +4,8 @@
 	841 - Basque language file.
 	* www/snippet/package.php: Fixed bug #750: Dead links 
 	on the snippet package page
+	* cronjobs/massmail.php: Fixed bug #837: Mass mailing 
+	sends duplicate emails.
 
 2004-07-20  Christian Bayle <bayle@aist.enst.fr>
 
