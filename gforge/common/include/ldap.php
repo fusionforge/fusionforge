@@ -135,7 +135,7 @@ function sf_ldap_connect() {
 		}
 		ldap_bind($ldap_conn,$sys_ldap_bind_dn,$sys_ldap_passwd);
 		if ($sys_ldap_version) {
-			ldap_set_option($ldapdatads, LDAP_OPT_PROTOCOL_VERSION, $sys_ldap_version);
+			ldap_set_option($ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $sys_ldap_version);
 		}
 	}
 	return true;
