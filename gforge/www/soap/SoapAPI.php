@@ -7,6 +7,7 @@ require_once('www/include/BaseLanguage.class');
 // includes for bug operations
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 require_once('www/tracker/include/ArtifactHtml.class');
+require_once('common/tracker/ArtifactFactory.class');
 require_once('common/tracker/ArtifactTypeFactory.class');
 
 $uri = 'http://'.$sys_default_domain;
@@ -31,9 +32,9 @@ $server->wsdl->addComplexType(
 	'complexType',
 	'array',
 	'',
-	'SOAP-ENC:Array',
+	'',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'string[]')),
+	array(array('ref'=>'SOAP-ENC:Array','wsdl:arrayType'=>'string[]')),
 	'xsd:string'
 );
 //
@@ -54,6 +55,31 @@ $server->wsdl->addComplexType(
 	)
 );
 
+// Add the definition of a Bug object
+$server->wsdl->addComplexType(
+	'Bug',
+	'complexType',
+	'struct',
+	'',
+	'',
+	array(
+	'id' => array('name'=>'id', 'type' => 'xsd:string'), 
+	'summary' => array('name'=>'summary', 'type' => 'xsd:string')
+	)
+);
+
+// And here's the definition of an array of bugs - for use in bugList, for example
+$server->wsdl->addComplexType(
+	'ArrayOfBug',
+	'complexType',
+	'array',
+	'sequence',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:Bug[]')),
+	'tns:Bug'
+	);
+
 $server->wsdl->addComplexType(
 	'ArrayOfGroupObject',
 	'complexType',
@@ -61,8 +87,7 @@ $server->wsdl->addComplexType(
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupObject[]')),
-	'tns:GroupObject');
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupObject[]')), 'tns:GroupObject');
 
 //
 // TODO: Create and add a definition for a bug object
@@ -88,14 +113,26 @@ $server->register(
 	$uri);
 
 $server->register(
+	'bugFetch',
+	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string','bugid'=>'xsd:string'),
+	array('bugFetchResponse'=>'tns:Bug'),
+	$uri);
+
+$server->register(
+	'bugList',
+	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string'),
+	array('bugListResponse'=>'tns:ArrayOfstring'),
+	$uri);
+
+$server->register(
 	'bugAdd',
-	array('groupid'=>'xsd:string','summary'=>'xsd:string','details'=>'xsd:string'),
+	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string','summary'=>'xsd:string','details'=>'xsd:string'),
 	array('bugAddResponse'=>'xsd:string'),
 	$uri);
 
 $server->register(
 	'bugUpdate',
-	array('groupid'=>'xsd:string','bugid'=>'xsd:string','comment'=>'xsd:string'),
+	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string','bugid'=>'xsd:string','comment'=>'xsd:string'),
 	array('bugUpdateResponse'=>'xsd:string'),
 	$uri);
 
@@ -174,6 +211,69 @@ function logout($sessionkey) {
 }
 
 /**
+ * bugList - Lists all open bugs for a project
+ * 
+ * @param	string	sessionkey	The current session key
+ * @param	string 	groupid		The project that the bug is in
+ */
+function bugList($sessionkey, $groupid) {
+        continueSession($sessionkey);
+
+        $group =& group_get_object($groupid);
+        if (!$group) {
+                return new soapval('tns:soapVal','string',"Couldn't create group");
+        }
+
+        $atf = new ArtifactTypeFactory($group);
+        $atf->setDataType("1"); // TODO reference a constant or something here
+        $artifactType = $atf->getArtifactTypes();
+        if (!$artifactType) {
+                return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
+        }
+	$af = new ArtifactFactory($artifactType[0]);
+	if (!$af) {
+    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactFactory: ".$af->getErrorMessage());
+	}
+	
+	$af->setup('','','','','',0,1,'',$groupid);
+	$art_arr =& $af->getArtifacts();
+
+	$result = array();
+	for ($i = 0;$i < count($art_arr); $i++) {
+		$result[$i] = $art_arr[$i]->getID();	
+	}
+
+	return new soapval('tns:ArrayOfString', 'ArrayOfstring', $result);
+    	#return new soapval('tns:Bug','Bug', $inner_result);
+}
+
+function bugFetch($sessionkey, $groupid, $bugid) {
+        continueSession($sessionkey);
+
+        $group =& group_get_object($groupid);
+        if (!$group) {
+                return new soapval('tns:soapVal','string',"Couldn't create group");
+        }
+
+        $atf = new ArtifactTypeFactory($group);
+        $atf->setDataType("1"); // TODO reference a constant or something here
+        $artifactType = $atf->getArtifactTypes();
+	if (!$artifactType) {
+    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
+	}
+
+	$bug = new Artifact($artifactType[0], $bugid);
+	if (!$bug) {
+    		return new soapval('tns:soapVal','string',"Couldn't fetch bug");
+	}
+
+	$result = array();
+	$result["id"] = $bug->getID();
+	$result["summary"] = $bug->getSummary();
+	return new soapval('tns:Bug', 'Bug', $result);
+}
+
+/**
  * bugUpdate - Update a bug
  *
  * @param	string	sessionkey	The current session key
@@ -247,7 +347,7 @@ function bugAdd($sessionkey, $groupid, $summary, $details) {
 }
 
 function hello($inputString){
-    return new soapval('tns:soapVal','string',$inputString.'echoed back to you');
+    return new soapval('tns:soapVal','string',$inputString.' echoed back to you');
 }
 
 function user($func, $params){

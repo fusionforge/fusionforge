@@ -13,6 +13,16 @@
     targetNamespace="http://gforge.org/">
     <types xmlns:s="http://www.w3.org/2001/XMLSchema">
     <s:schema elementFormDefault="qualified" targetNamespace="http://gforge.org/">
+    <s:complexType name="ArrayOfBug">
+      	<s:complexContent>
+	   	<s:restriction base="SOAP-ENC:Array">
+                    <s:sequence>
+                            <s:element minOccurs="0" maxOccurs="unbounded" name="bugs" type="s:Bug" />
+                    </s:sequence>
+	            <s:attribute ref="SOAP-ENC:arrayType" wsdl:arrayType="Bug[]"/>
+	    	</s:restriction>
+    	</s:complexContent>
+    </s:complexType>
     <s:complexType name="ArrayOfstring">
       <s:complexContent>
       <s:restriction base="SOAP-ENC:Array">
@@ -53,6 +63,23 @@
         <part name="statusCode" type="xsd:string" />
     </message>
 
+<message name="bugFetch">
+        <part name="sessionkey" type="xsd:string" />
+        <part name="groupid" type="xsd:string" />
+        <part name="bugid" type="xsd:string" />
+    </message>
+    <message name="bugFetchResponse">
+        <part name="bug" type="tns:Bug" />
+    </message>
+
+<message name="bugList">
+        <part name="sessionkey" type="xsd:string" />
+        <part name="groupid" type="xsd:string" />
+    </message>
+    <message name="bugListResponse">
+        <part name="bug" type="tns:ArrayOfBug" />
+    </message>
+
 <message name="bugAdd">
         <part name="sessionkey" type="xsd:string" />
         <part name="groupid" type="xsd:string" />
@@ -81,6 +108,16 @@
     <operation name="user">
     <input message="s0:userRequest"/>
     <output message="s0:userResponse"/>
+    </operation>
+
+    <operation name="bugFetch">
+    <input message="s0:bugFetchRequest"/>
+    <output message="s0:bugFetchResponse"/>
+    </operation>
+
+    <operation name="bugList">
+    <input message="s0:bugListRequest"/>
+    <output message="s0:bugListResponse"/>
     </operation>
 
     <operation name="bugAdd">
@@ -115,6 +152,26 @@
     </output>
     </operation>
 
+    <operation name="bugFetch">
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+    <input>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </input>
+    <output>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </output>
+    </operation>
+    
+    <operation name="bugList">
+    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+    <input>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </input>
+    <output>
+    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+    </output>
+    </operation>
+    
     <operation name="bugAdd">
     <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
     <input>
