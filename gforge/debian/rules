@@ -19,9 +19,12 @@ build: configure-stamp build-stamp
 build-stamp:
 	dh_testdir
 
-	# The only things that need to be built are man pages
+	# Build man pages from Docbook sources
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
 	/usr/bin/docbook-to-man debian/sourceforge-config.sgml > sourceforge-config.1
+
+	# Uudecode binary files
+	$(CURDIR)/deb-specific/manage-uufiles.sh decode
 
 	touch build-stamp
 
@@ -32,6 +35,7 @@ clean:
 	rm -f cvssh.1 sourceforge-config.1
 
 	$(CURDIR)/deb-specific/dsf-helper.pl --clean
+	$(CURDIR)/deb-specific/manage-uufiles.sh clean
 
 	dh_clean
 
@@ -68,11 +72,9 @@ install: build
 
 	# sourceforge-web-apache
 	cp -r www $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/
-	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
-	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/clear.png deb-specific/clear.png.uu
-	uudecode -o $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www/images/debian-sf-icon.png deb-specific/debian-sf-icon.png.uu
 	cp -r common $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/ -name CVS -type d | xargs rm -rf
+	find $(CURDIR)/debian/sourceforge-web-apache -name \*.uu -type f | xargs rm
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www -type f -exec chmod 0644 {} \;
 	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/common -type d -exec chmod 0755 {} \;
@@ -118,18 +120,12 @@ install: build
 	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/sourceforge-cvs/bin/cvssh 
 	install -m 755 deb-specific/cvsweb/cvsweb.cgi $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cgi-bin/
-	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/back.png deb-specific/cvsweb/icons/back.png.uu
-	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/back.png
-	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/dir.png deb-specific/cvsweb/icons/dir.png.uu
-	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/dir.png
-	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minidir.png deb-specific/cvsweb/icons/minidir.png.uu
-	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minidir.png
-	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/text.png deb-specific/cvsweb/icons/text.png.uu
-	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/text.png
-	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/miniback.png deb-specific/cvsweb/icons/miniback.png.uu
-	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/miniback.png
-	uudecode -o $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minitext.png deb-specific/cvsweb/icons/minitext.png.uu
-	chmod 644 $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minitext.png
+	install -m 644 deb-specific/cvsweb/icons/back.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/back.png 
+	install -m 644 deb-specific/cvsweb/icons/dir.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/dir.png 
+	install -m 644 deb-specific/cvsweb/icons/minidir.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minidir.png 
+	install -m 644 deb-specific/cvsweb/icons/text.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/text.png 
+	install -m 644 deb-specific/cvsweb/icons/miniback.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/miniback.png 
+	install -m 644 deb-specific/cvsweb/icons/minitext.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minitext.png 
 	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/sourceforge-cvs/etc/sourceforge/
 	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/bin/
 
