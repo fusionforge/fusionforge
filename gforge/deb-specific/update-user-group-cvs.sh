@@ -5,7 +5,8 @@ then
 	su -c $0
 else
 	# Fill ldap tables
-	#CB#/usr/lib/gforge/bin/install-ldap.sh update > /dev/null 2>&1
+	# Should be safe to uncomment this soon
+	/usr/lib/gforge/bin/install-ldap.sh update > /dev/null 2>&1
 
 	[ -d /var/lib/gforge/dumps ] || \
 	mkdir /var/lib/gforge/dumps && \
