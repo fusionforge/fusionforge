@@ -124,13 +124,13 @@ if(session_loggedin()) {
 	$displayCvsBrowser = $project->enableAnonSCM();
 }
  
+echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
+echo $this->display_stats(array('group_id'=>$group_id)).'<p>';
 if ($displayCvsBrowser){
-	echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
-
 	echo $Language->getText('plugin_scmcvs', 'browsetree');
 	echo '<p><a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a></p>' ;
-	echo $HTML->boxBottom();
 }
+echo $HTML->boxBottom();
 
 ?>
 		</td>
@@ -203,11 +203,6 @@ if ($displayCvsBrowser){
 			$add_num=0;
 		}
 		echo ' (CVS: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
-		if ($commit_num || $add_num) {
-			echo '
-		<br /> &nbsp; -
-			<a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>';
-        }
 	}
 
 	/**
