@@ -1,3 +1,7 @@
+2004-07-10  Christian Bayle <bayle@aist.enst.fr>
+
+	* reorganisation of submenu with intensive use of $HTML->subMenu()
+
 2004-07-07  Tom Copeland <tom@infoether.com>
 
 	* common/include/constants.php: Removed duplicate declaration.
