@@ -342,7 +342,7 @@ if ($group_id && $atid) {
 			'&group_id='.$group_id.'&func=browse">' .
 			html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 			$at_arr[$j]->getName() .'</a>
-			( <strong>'. $at_arr[$j]->getOpenCount() .' '.$Language->getText('general','open').' / '. $at_arr[$j]->getTotalCount() .' '.$Language->getText('general','total').' </strong> )<br />'.
+			( <strong>'. (int) $at_arr[$j]->getOpenCount() .'</strong> '.$Language->getText('general','open').' / <strong>'. (int) $at_arr[$j]->getTotalCount() .'</strong> '.$Language->getText('general','total').' )<br />'.
 			$at_arr[$j]->getDescription() .'<p>';
 		}
 	}
