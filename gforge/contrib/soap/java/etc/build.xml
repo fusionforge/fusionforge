@@ -1,0 +1,49 @@
+<project name="gforge-soap-client" default="compile" basedir="../">
+
+	<property name="src" value="src/"/>
+	<property name="lib" value="lib/"/>
+	<property name="etc" value="etc/"/>
+	<property name="build" value="build/"/>
+	<property name="version" value="0.1"/>
+	<property name="jarname" value="${ant.project.name}-${version}.jar"/>
+
+	<path id="project.class.path">
+		<pathelement location="${lib}/axis.jar"/>
+		<pathelement location="${lib}/commons-discovery.jar"/>
+		<pathelement location="${lib}/commons-logging.jar"/>
+		<pathelement location="${lib}/jaxrpc.jar"/>
+		<pathelement location="${lib}/saaj.jar"/>
+		<pathelement location="${build}"/>
+	</path>
+
+    <target name="delete">
+        <delete file="${lib}/${jarname}.jar"/>
+		<delete dir="${build}"/>
+        <mkdir dir="${build}"/>
+    </target>
+
+	<target name="compile">
+		<javac srcdir="${src}"	destdir="${build}" debug="on" deprecation="on">
+			<classpath refid="project.class.path"/>
+		</javac>
+	</target>
+
+    <target name="jar">
+		<jar jarfile="${lib}/${jarname}">
+			<fileset dir="${build}"/>
+		</jar>
+    </target>
+
+    <target name="release" depends="clean,jar">
+        <mkdir dir="tmp/jars"/>
+        <copy file="${lib}/${jarname}" todir="tmp/jars"/>
+        <copy file="${lib}/axis.jar" todir="tmp/jars"/>
+        <zip zipfile="${ant.project.name}-bin-${version}.zip" basedir="tmp"/>
+        <move file="${ant.project.name}-bin-${version}.zip" todir="/home/tom/tmp"/>
+        <delete dir="tmp"/>
+    </target>
+
+	<target name="clean" depends="delete,compile">
+	</target>
+
+</project>
