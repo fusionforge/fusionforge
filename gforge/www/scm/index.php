@@ -15,7 +15,7 @@
 require_once('pre.php');    
 require_once('common/include/account.php');
 
-//only projects can use the bug tracker, and only if they have it turned on
+//only projects can use cvs, and only if they have it turned on
 $project =& group_get_object($group_id);
 
 if (!$project->isProject()) {
@@ -27,21 +27,17 @@ if (!$project->usesCVS()) {
 
 site_project_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$group_id,'toptab'=>'scm_index','pagename'=>'scm_index','sectionvals'=>array($project->getPublicName())));
 
-$res_grp = db_query("SELECT * FROM groups WHERE group_id='$group_id'");
-
-$row_grp = db_fetch_array($res_grp);
-
 // ######################## table for summary info
 
 print '<table width="100%"><tr valign="top"><td width="65%">'."\n";
 
 // ######################## anonymous CVS instructions
 
-if ($row_grp['is_public']) {
+if ($project->enableAnonCVS() && $project->enablePserver()) {
   if($GLOBALS['sys_cvs_single_host']) {
     print $Language->getText('scm_index', 'anoncvs').' 
-    <p><tt>cvs -d:pserver:anonymous@' . $GLOBALS['sys_cvs_host'] . ':/cvsroot/'.$row_grp['unix_group_name'].' login <br><br>
-cvs -z3 -d:pserver:anonymous@' . $GLOBALS['sys_cvs_host'] . ':/cvsroot/'.$row_grp['unix_group_name'].' co  <i>'.$Language->getText('scm_index','modulename').'</i>
+     <p><tt>cvs -d:pserver:anonymous@' . $GLOBALS['sys_cvs_host'] . ':/cvsroot/'.$project->getUnixName().' login <br><br>
+cvs -z3 -d:pserver:anonymous@' . $GLOBALS['sys_cvs_host'] . ':/cvsroot/'.$project->getUnixName().' co  <i>modulename</i>
 </tt>
 
 
@@ -65,7 +61,7 @@ if($GLOBALS['sys_cvs_single_host']) {
 print $Language->getText('scm_index', 'devcvs').'
 
 <p><tt>export CVS_RSH=ssh
-<br><br>cvs -z3 -d:ext:<i>'.$Language->getText('scm_index','developername').'</i>@'.$GLOBALS['sys_cvs_host'].':/cvsroot/'.$row_grp['unix_group_name'].' co <i>'.$Language->getText('scm_index','modulename').'</i>
+<br><br>cvs -z3 -d:ext:<i>developername</i>@'.$GLOBALS['sys_cvs_host'].':/cvsroot/'.$project->getUnixName().' co <i>modulename</i>
 </tt>';
 
 } else {
@@ -73,7 +69,7 @@ print $Language->getText('scm_index', 'devcvs').'
 print $Language->getText('scm_index', 'devcvs').' 
 
 <p><tt>export CVS_RSH=ssh
-<br><br>cvs -z3 -d:ext:<i>'.$Language->getText('scm_index','developername').'</i>@cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <i>'.$Language->getText('scm_index','modulename').'</i>
+<br><br>cvs -z3 -d:ext:<i>developername</i>@cvs.'.$project->getUnixName().'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$project->getUnixName().' co <i>modulename</i>
 </tt>';
 }
 // ################## summary info
@@ -100,10 +96,16 @@ while ($row_cvshist = db_fetch_array($res_cvshist)) {
 
 // ############################## CVS Browsing
 
-if ($row_grp['is_public']) {
+ $anonymous = 1;
+ if (session_loggedin()) {
+   $perm =& $project->getPermission(session_get_user());
+   $anonymous = !$perm->isMember();
+ }
+ 
+ if ($project->enableAnonCVS() || !$anonymous) {
 	print $Language->getText('scm_index', 'browsetree').' 
 <UL>
-<li><a href="'.account_group_cvsweb_url($row_grp['unix_group_name']).'">
+<li><a href="'.account_group_cvsweb_url($project->getUnixName()).'">
 <b>'.$Language->getText('scm_index', 'browseit').'</b></a></li>';
 }
 
