@@ -1,3 +1,10 @@
+sourceforge (2.5-10+1) unstable; urgency=low
+
+  * Fixed /etc/alias entry for sourceforge user.  Really, this time.
+  * Fixed Trove software map (closes: #108297).
+
+ -- Roland Mas <lolando@debian.org>  Mon, 13 Aug 2001 18:48:30 +0200
+
 sourceforge (2.5-10) unstable; urgency=low
 
   * I am starting to get rather confident in this package, to the point

@@ -145,7 +145,7 @@ EOF
 	fi
 	# Redirect "sourceforge" mail to the site admin
 	db_get sourceforge/server_admin
-	if ! grep -q "^noreply:" /etc/aliases ; then
+	if ! grep -q "^sourceforge:" /etc/aliases ; then
 	    echo "### Next line inserted by Sourceforge install" >> /etc/aliases
 	    echo "sourceforge: $RET" >> /etc/aliases
 	fi
