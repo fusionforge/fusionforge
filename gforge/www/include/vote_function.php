@@ -131,8 +131,8 @@ function show_survey ($group_id,$survey_id) {
 
 ?>
 <form action="/survey/survey_resp.php" method="post">
-<input type="radio" name="group_id" value="<?php echo $group_id; ?>" />
-<input type="radio" name="survey_id" value="<?php echo $survey_id; ?>" />
+<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
+<input type="hidden" name="survey_id" value="<?php echo $survey_id; ?>" />
 <?php
 
 /*
