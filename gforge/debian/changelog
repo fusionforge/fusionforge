@@ -27,11 +27,10 @@ sourceforge (2.5-14+) unstable; urgency=low
     change their passwords and personal info.
   * Fixed install-cvs.sh so that it no longer inserts too many lines in
     the inetd.conf file.
-  * Slightly rewrote the template handling in postinst script, to allow
-    parsing for files not in /etc/sourceforge (not needed yet, but it
-    might come in handy).
+  * Rewrote the config file handling, so that it does not overwrite local
+    changes (closes: #120442).
 
- -- Roland Mas <lolando@debian.org>  Sun, 18 Nov 2001 19:15:17 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 13:38:32 +0100
 
 sourceforge (2.5-14) unstable; urgency=low
 
