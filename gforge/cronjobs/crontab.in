@@ -104,7 +104,14 @@ MAILTO=""
 #20 * * * * $PHP $GFORGE/cronjobs/cvs-cron/cvs.php
 
 #
+#       Create the blank cvs trees for SVN-over-SSH
+#	(all repositories owned by corresponding groups)
+#
+#21 * * * * $PHP $GFORGE/plugins/scmsvn/bin/svn-create.php
+
+#
 #       Create the blank svn trees for SVN-over-DAV
+#	(all repositories owned by apache)
 #
 #21 * * * * $PHP $GFORGE/cronjobs/dav-svn/create_svn.php
 
@@ -127,3 +134,8 @@ MAILTO=""
 #   Send email to users with pending tasks
 #
 30 5 * * 1,2,3,4,5 $PHP $GFORGE/cronjobs/daily_task_email.php
+
+#
+#	Enable the cvs<->tracker link
+#
+#35 1 * * * $PHP $GFORGE/plugins/cvstracker/bin/update_loginfo.php

@@ -63,8 +63,8 @@ and ask your Apache, mailman, and postgresql installation questions in the
 corresponding mailing lists rather than on the gforge forums where little
 help is available.
 
-  CVS
-  ---
+  CVS Overview
+  ------------
   CVS is now managed via the scmcvs plugin which is included in the 
 plugins/ directory in the tarball downloaded from gforge.org. Most 
 of the files in scmcvs are intended for auto-installation on debian 
@@ -81,8 +81,8 @@ Make sure these files are executed as root, and have proper execution bits
 set.  Each of these cronjobs has configuration parameters which you may 
 have to edit manually for your specific system.
 
-  SVN
-  ---
+  SVN Overview
+  ------------
   SVN is also managed via plugin - the scmsvn plugin is included and 
 activated by default in gforge. As with scmcvs/ you have to move the 
 scmcvs/etc/plugins/* files to /etc/gforge/plugins/* and may have to
@@ -96,6 +96,23 @@ mod_auth_gforge is available from gforge.org. The cronjobs to manage
 SVN are in cronjobs/dav-svn/ and so are sample httpd.conf VHOST settings.
 Each of these cronjobs has configuration parameters which you may have to 
 edit manually for your specific system.
+
+  CVSTracker Overview
+  -------------------
+  The cvstracker plugin allows for some integration between CVS 
+commits and the bug tracker and task manager. So, for example, 
+when you commit, you can reference bug and task IDs in your 
+commit message and have the commit linked to the corresponding
+bug and task.
+
+  See the plugins/cvstracker/README file for details. This 
+plugin is enabled by default in the gforge.sql database file. 
+As with the other plugins, you may manually place the config 
+files in /etc/gforge/plugins/cvstracker/ and uncomment the 
+cronjob in crontab.in.
+
+  You will also have to copy the newcommit.php file to your 
+gforge www/plugins/cvstracker/ dir
 
   PHP
   ---
@@ -234,6 +251,10 @@ to change the cvsroot location:
 
 #copy the scmsvn config files to /etc/gforge/
 cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
+
+#copy the cvstracker config files to /etc/gforge/
+cp -R gforge/plugins/cvstracker/etc/plugins/cvstracker/ /etc/gforge/plugins/
+cp -R gforge/plugins/cvstracker/www/ gforge/www/plugins/cvstracker/
 
 #make sure the cvs crons are executable
 cd www/gforge/cronjobs/cvs-cron/
