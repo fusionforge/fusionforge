@@ -50,7 +50,7 @@ $server->register(
 
 $server->register(
 	'logout',
-	null,
+	array('$sessionkey'=>'xsd:string'),
 	array('logoutResponse'=>'xsd:string'),
 	$uri);
 

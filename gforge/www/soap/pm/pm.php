@@ -30,7 +30,7 @@ require_once('common/pm/ProjectGroupFactory.class');
 require_once('common/pm/ProjectTaskFactory.class');
 require_once('common/pm/ProjectTask.class');
 require_once('common/pm/ProjectCategory.class');
-require_once('common/pm/ProjectMessage.class');
+//require_once('common/pm/ProjectMessage.class');
 
 //
 //	ProjectGroup
@@ -137,15 +137,14 @@ $server->register(
 		'category_id'=>'xsd:integer',
 		'percent_complete'=>'xsd:integer',
 		'assigned_to'=>'ArrayOfInteger',
-		'dependent_on'=>'ArrayOfInteger',
+		'dependent_on'=>'ArrayOfInteger'),
 		array('addProjectTaskResponse'=>'xsd:integer'),
 		$uri
-	)
 );
 
 //updateProjectTask
 $server->register(
-	'addProjectTask',
+	'updateProjectTask',
 	array(
 		'session_ser'=>'xsd:string',
 		'group_id'=>'xsd:integer',
@@ -162,10 +161,9 @@ $server->register(
 		'percent_complete'=>'xsd:integer',
 		'assigned_to'=>'ArrayOfInteger',
 		'dependent_on'=>'ArrayOfInteger',
-		'new_group_project_id'=>'integer',
+		'new_group_project_id'=>'integer'),
 		array('addProjectTaskResponse'=>'xsd:integer'),
 		$uri
-	)
 );
 
 //
