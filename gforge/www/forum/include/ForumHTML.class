@@ -59,7 +59,7 @@ function forum_header($params) {
 				$user = user_get_object(db_result($result,0,'submitted_by'));
 				echo '
 				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.$user->getRealName().'<br />
-				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'date')).'<br />
+				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
 				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</a>
 				<p>
 				'. (util_make_links(nl2br(db_result($result,0,'details'))));

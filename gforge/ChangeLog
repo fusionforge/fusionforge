@@ -1,3 +1,6 @@
+2004-02-19  Tom Copeland <tom@infoether.com>
+	* Fixed bug [ #693 ] News dates showing up as Jan 1 1970
+
 2004-02-19  Sung Kim <hunkim@cs.ucsc.edu>
 	* Rewrite the Survey module
 	* Added a general graph module for Survey results
