@@ -61,10 +61,11 @@ echo $HTML->boxTop('Getting GForge');
 <a href="http://gforge.org/tracker/?func=browse&amp;group_id=1&amp;atid=106"><strong>Patch Submissions</strong></a><br />
 <a href="http://gforge.org/tracker/?func=browse&amp;group_id=1&amp;atid=119"><strong>Feature Requests</strong></a>
 <p />
-<a href="http://www.debian.org/"><strong>Debian Users</strong></a> can simply add
-"http://people.debian.org/~bayle/" to /etc/apt/sources.list and type
-"apt-get install gforge" to
-install a working GForge-3.0pre9 system, thanks to Christian Bayle and
+<a href="http://www.debian.org/"><strong>Debian Users</strong></a>
+can simply add some lines to /etc/apt/sources.list found at
+<a href="http://people.debian.org/~bayle/">"http://people.debian.org/~bayle/"</a>
+and type "apt-get install gforge" to
+install a working GForge-3.0rc1 system, thanks to Christian Bayle, Roland Mas and
 the Debian-SF project.
 <p />
 <?php
