@@ -129,7 +129,7 @@ echo license_selectbox('license',$license);
 		if(count($scm_plugins)!=0) {	
 			echo $Language->getText('register','choose_scm');
 			if(count($scm_plugins)==1) {
-				echo $Language->getText('register','one_scm',$scm_plugins[0]);
+				echo $Language->getText('register','one_scm',$scm_plugins[0]).'<br /><br />';
 				echo '<input type=\'hidden\' name=\'scm\' value=\''. $scm_plugins[0].'\'/>';
 			} else {
 				$checked=true;
@@ -144,6 +144,8 @@ echo license_selectbox('license',$license);
 					$checked=false;
 				}
 			}
+		} else {
+			echo "Error - Site has SCM but no plugins registered";
 		}
 	}
 
