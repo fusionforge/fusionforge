@@ -72,9 +72,9 @@ function exit_missing_param() {
  */
 function exit_assert_object($obj, $expected_class) {
 	if (!$obj || !is_object($obj)) {
-		exit_error('Error', 'Error creating '.$expected_class.' object');
+		exit_error($Language->getText('general','error'), $Language->getText('error','error_creating').$expected_class.' object');
 	} else if ($obj->isError()) {
-		exit_error('Error', $obj->getErrorMessage());
+		exit_error($Language->getText('general','error'), $obj->getErrorMessage());
 	}
 }
 
