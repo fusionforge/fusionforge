@@ -62,7 +62,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 	}
 
 	$sql="SELECT groups.group_name,groups.unix_group_name,
-		groups.type,users.user_name,users.realname,
+		groups.type_id,users.user_name,users.realname,
 		news_bytes.forum_id,news_bytes.summary,news_bytes.post_date,news_bytes.details 
 		FROM users,news_bytes,groups 
 		WHERE $wclause 
