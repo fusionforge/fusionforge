@@ -1,23 +1,22 @@
-#!/usr/bin/perl
-#/**
-#  *
-#  * cvs_history_parse.pl - NIGHTLY SCRIPT
-#  *
-#  * Recurses through the /cvsroot directory tree and parses each projects
-#  * '~/CVSROOT/history' file, building agregate stats on the number of
-#  * checkouts, commits, and adds to each project over the past 24 hours.
-#  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
-#  * Copyright 1999-2001 (c) VA Linux Systems
-#  * http://sourceforge.net
-#  *
-#  * @version   $Id$
-#  *
-#  */
+#!/usr/bin/php
+<?php
 
-use strict;
-use Time::Local;
-use POSIX qw( strftime );
+require_once('squal_pre.php');
+/**
+ *
+ * Recurses through the /cvsroot directory tree and parses each projects
+ * '~/CVSROOT/history' file, building agregate stats on the number of
+ * checkouts, commits, and adds to each project over the past 24 hours.
+ *
+ * @version   $Id$
+ */
+
+/*
+
+//
+//	TRANSLATE TO PHP
+//
+
 
 my ($year, $month, $day, $day_begin, $day_end);
 my ($group, $histline, $daily_log_file, $key, $verbose);
@@ -128,6 +127,10 @@ foreach $group ( glob("*") ) {
 	}
 	close( HISTORY );
 
+                $sql = "INSERT INTO stats_cvs_group
+                        (month,day,group_id,checkouts,commits,adds)
+                        VALUES ('$year$mon','$day','$group_id','$checkouts','$commits','$adds')";
+
 	   ## Now, we'll print all of the results for that project, in the following format:
 	   ## (G|U|E)::proj_name::user_name::checkouts::commits::adds
 	   ## If 'G', then record is group statistics, and field 2 is a space...
@@ -144,8 +147,5 @@ foreach $group ( glob("*") ) {
 		}
 	}
 }
-print "Done processing cvs history file for this date.\n" if $verbose;
-
-##
-## EOF
-##
+*/
+?>
