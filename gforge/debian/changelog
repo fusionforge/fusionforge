@@ -1,3 +1,11 @@
+gforge (3.1-17) unstable; urgency=low
+
+  * [Roland] Fixed docman/view.php to display filenames appropriately in
+    case of files with spaces in their name (patch from Emmanuel Lacour
+    <elacour@home-dn.net>) (closes: #241874).
+
+ -- Roland Mas <lolando@debian.org>  Fri, 28 May 2004 18:54:09 +0200
+
 gforge (3.1-16) unstable; urgency=low
 
   * [Roland] Fix for create-mailing-lists.pl and fix-mailing-lists.pl from
