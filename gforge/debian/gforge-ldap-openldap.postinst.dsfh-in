@@ -40,8 +40,7 @@ case "$1" in
 	db_stop
 
         # Setup our LDAP
-	/usr/lib/gforge/bin/install-ldap.sh configure
-	err=$?
+	/usr/lib/gforge/bin/install-ldap.sh configure || err=$?
 	case $err in
 	    0)
 		exit $err
@@ -75,7 +74,7 @@ case "$1" in
 		;;
 	    *)
 		echo "WARNING WARNING WARNING: LDAP Configuration Failed"
-		echo "An unknown error happened."
+		echo "An unknown error happened (code $err)."
 		echo "Please report this bug, and include the previous messages, if any."
 		exit $err
 		;;
