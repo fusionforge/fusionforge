@@ -1,4 +1,4 @@
-sourceforge (2.5-30+) unstable; urgency=low
+sourceforge (2.5-31) unstable; urgency=low
 
   * [Soon-Son] added method="post" to massmail.php which was missing so
     far so that the admin can send email to the users
@@ -7,7 +7,7 @@ sourceforge (2.5-30+) unstable; urgency=low
     works.  Yay!
   * [Roland] Various other cleanings in install-ldap.sh.
 
- -- Roland Mas <lolando@debian.org>  Fri,  2 Aug 2002 22:18:46 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 26 Aug 2002 13:01:49 +0200
 
 sourceforge (2.5-30) unstable; urgency=high
 
