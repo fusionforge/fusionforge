@@ -42,6 +42,8 @@ echo '<P>';
 // echo $HTML->box1_top($Language->GROUP_LONG_FOUNDRIES);
 ?>
 
+<!--
+
 <br><b>SourceForge Development Foundries</b><br><br>
 <table bgcolor="White" border="0" cellpadding="0" cellspacing="0" valign="top" width="100%">
 <tr>
@@ -73,6 +75,8 @@ echo '<P>';
 </tr>
 </table>
 <br>
+
+-->
 
 <?php
 echo $HTML->box1_top($Language->GROUP_LONG_NEWS);

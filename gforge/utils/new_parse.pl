@@ -6,39 +6,63 @@
 #		 accounts on the client machines
 use Sys::Hostname;
 
-$hostname = hostname();
+#$hostname = hostname();
 
-require("include.pl");  # Include all the predefined functions and variables
+require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions and variables
+require $db_include ;
 
-my $user_file = $file_dir . "user_dump";
-my $group_file = $file_dir . "group_dump";
+$hostname = "cvs";
+
+my $user_file = $file_dir . "dumps/user_dump";
+my $group_file = $file_dir . "dumps/group_dump";
 my ($uid, $status, $username, $shell, $passwd, $realname);
 my ($gname, $gstatus, $gid, $userlist);
 
 # Open up all the files that we need.
 @userdump_array = open_array_file($user_file);
 @groupdump_array = open_array_file($group_file);
-@passwd_array = open_array_file("/etc/passwd");
-@shadow_array = open_array_file("/etc/shadow");
-@group_array = open_array_file("/etc/group");
+
+open (FD,'>'.$file_dir."chroot/etc/passwd"); close(FD);
+open (FD,'>'.$file_dir."chroot/etc/shadow"); close(FD);
+open (FD,'>'.$file_dir."chroot/etc/group"); close(FD);
+
+@passwd_array = open_array_file($file_dir."chroot/etc/passwd");
+push @passwd_array, "root:x:0:0:Root:/:/bin/bash\n";
+push @passwd_array, "dummy:x:$dummy_uid:$dummy_uid:Dummy User:/:/bin/false\n";
+push @passwd_array, "nobody:x:65534:65534:nobody:/:/bin/false\n";
+
+@shadow_array = open_array_file($file_dir."chroot/etc/shadow");
+push @shadow_array, "root:*:11142:0:99999:7:::\n";
+push @shadow_array, "dummy:*:11142:0:99999:7:::\n";
+push @shadow_array, "nobody:*:11142:0:99999:7:::\n";
+
+@group_array = open_array_file($file_dir."chroot/etc/group");
+push @group_array, "root:x:0\n";
+push @group_array, "dummy:x:$dummy_uid:\n";
+push @group_array, "nogroup:x:65534:\n";
 
 #
 # Loop through @userdump_array and deal w/ users.
 #
-print ("\n\n	Processing Users\n\n");
+#CB# Let's make this silent
+#print ("\n\n	Processing Users\n\n");
 while ($ln = pop(@userdump_array)) {
 	chop($ln);
 	($uid, $status, $username, $shell, $passwd, $realname) = split(":", $ln);
 
-	if (substr($hostname,0,3) eq "cvs") {
-		$shell = "/bin/cvssh";
-	}
+#CB# Shell is now taken in the database
+#	if (substr($hostname,0,3) eq "cvs") {
+#		$shell = "/bin/cvssh";
+#	}
 	
 	$uid += $uid_add;
 
 	$username =~ tr/A-Z/a-z/;
 	
-	$user_exists = getpwnam($username);
+#	$user_exists = getpwnam($username);
+#	$user_exists = stat($homedir_prefix . $username);
+	$user_exists = (-d $homedir_prefix . $username);
+#	$user_exists = 0;
 	
 	if ($status eq 'A' && $user_exists) {
 		update_user($uid, $username, $realname, $shell, $passwd);
@@ -66,7 +90,8 @@ while ($ln = pop(@userdump_array)) {
 #
 # Loop through @groupdump_array and deal w/ users.
 #
-print ("\n\n	Processing Groups\n\n");
+#CB# Let's make this silent
+#print ("\n\n	Processing Groups\n\n");
 while ($ln = pop(@groupdump_array)) {
 	chop($ln);
 	($gname, $gstatus, $gid, $userlist) = split(":", $ln);
@@ -75,7 +100,10 @@ while ($ln = pop(@groupdump_array)) {
 	$gid += $gid_add;
 	$userlist =~ tr/A-Z/a-z/;
 
-	$group_exists = getgrnam($gname);
+#	$group_exists = getgrnam($gname);
+#	$group_exists = stat($grpdir_prefix . $gname);
+	$group_exists = (-d $grpdir_prefix . $gname);
+#	$group_exists = 0;
 
 	if ($gstatus eq 'A' && $group_exists) {
 		update_group($gid, $gname, $userlist);
@@ -86,17 +114,26 @@ while ($ln = pop(@groupdump_array)) {
 	} elsif ($gstatus eq 'D' && $group_exists) {
 		delete_group($gname);
 
-	} elsif ($gstatus eq 'D' && !$group_exists) {
-		print("Error trying to delete group: $gname\n");
-	}
+	} 
+	#CB# these lines cause a bug.
+	#elsif ($gstatus eq 'D' && !$group_exists) {
+	#	print("Error trying to delete group: $gname\n");
+	#}
 
-	if ((substr($hostname,0,3) eq "cvs") && $gstatus eq 'A' && !(-e "/cvsroot/$gname")) {
+	if ((substr($hostname,0,3) eq "cvs") && $gstatus eq 'A' && !(-e "$cvs_root$gname/CVSROOT")) {
+		#CB# Added this for the first time
+		if (!(-d "$cvs_root")) {
+			print("Creating $cvs_root\n");
+			system("mkdir -p $cvs_root");
+		}
 		print("Creating a CVS Repository for: $gname\n");
 		# Let's create a CVS repository for this group
-		$cvs_dir = "/cvsroot/$gname";
+		$cvs_dir = "$cvs_root$gname";
 
 		# Firce create the repository
+		#CB# Let's make this more paranoia, not yet for cvsweb
 		mkdir $cvs_dir, 0775;
+		#mkdir $cvs_dir, 0770;
 		system("/usr/bin/cvs -d$cvs_dir init");
 	
 		# turn off pserver writers, on anonymous readers
@@ -105,25 +142,31 @@ while ($ln = pop(@groupdump_array)) {
 		system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:anoncvs_$gname\" > $cvs_dir/CVSROOT/passwd");
 
 		# setup loginfo to make group ownership every commit
-		system("echo \"ALL chgrp -R $gname $cvs_dir\" > $cvs_dir/CVSROOT/loginfo");
+		#CB# This cause a bug on the client
+		##system("echo \"ALL chgrp -R $gname /cvsroot/$gname\" > $cvs_dir/CVSROOT/loginfo");
 		system("echo \"\" > $cvs_dir/CVSROOT/val-tags");
 		chmod 0644, "$cvs_dir/CVSROOT/val-tags";
 
 		# set group ownership, anonymous group user
 		system("chown -R nobody:$gid $cvs_dir");
-		system("chmod g+rw $cvs_dir");
+		#CB# Added s bit to have all owned by group
+		#system("chmod g+rw $cvs_dir");
+		system("chmod g+rws $cvs_dir");
 
 		# And finally add a user for this repository
-		push @passwd_array, "anoncvs_$gname:x:$cvs_id:$gid:Anonymous CVS User for $gname:/cvsroot/$gname:/bin/false\n";
+		#CB# Do it all the time
+		#CB# push @passwd_array, "anoncvs_$gname:x:$cvs_id:$gid:Anonymous CVS User for $gname:/cvsroot/$gname:/bin/false\n";
 	}
+	#CB# Do it all the time
+	push @passwd_array, "anoncvs_$gname:x:$cvs_id:$gid:Anonymous CVS User for $gname:/cvsroot/$gname:/bin/false\n";
 }
 
 #
 # Now write out the new files
 #
-write_array_file("/etc/passwd", @passwd_array);
-write_array_file("/etc/shadow", @shadow_array);
-write_array_file("/etc/group", @group_array);
+write_array_file($file_dir."chroot/etc/passwd", @passwd_array);
+write_array_file($file_dir."chroot/etc/shadow", @shadow_array);
+write_array_file($file_dir."chroot/etc/group", @group_array);
 
 
 
@@ -138,54 +181,53 @@ sub add_user {
 	my ($uid, $username, $realname, $shell, $passwd) = @_;
 	my $skel_array = ();
 	
-	$home_dir = $homedir_prefix.$username;
-
 	print("Making a User Account for : $username\n");
+
+	$home_dir = $homedir_prefix.$username;
+	$incoming_dir = $home_dir."/incoming" ;
+	foreach my $dir ($home_dir, $incoming_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0755;
+	    }
+	    chmod 0755, $dir;
+	    chown $uid, $uid, $dir;
+	}
 		
-	push @passwd_array, "$username:x:$uid:$uid:$realname:$home_dir:$shell\n";
+	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
 	push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
 	push @group_array, "$username:x:$uid:\n";
 	
 	# Now lets create the homedir and copy the contents of /etc/skel into it.
 	mkdir $home_dir, 0751;
+        chown $uid, $uid, $home_dir;
 	
-       chown $uid, $uid, $home_dir;
+	mkdir $home_dir.'/incoming', 0755;
+	chown $uid, $uid, $home_dir.'/incoming' ;
+	chmod 0755, $home_dir.'/incoming';
 }
 
 #############################
-# User Add Function
+# User Update Function
 #############################
 sub update_user {
 	my ($uid, $username, $realname, $shell, $passwd) = @_;
-	my ($p_uid, $p_junk, $p_uid, $p_gid, $p_realname, $p_homedir, $p_shell);
 	my ($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv, $counter);
 	
-	print("Updating Account for: $username\n");
-	
-	foreach (@passwd_array) {
-		($p_uid, $p_junk, $p_uid, $p_gid, $p_realname, $p_homedir, $p_shell) = split(":", $_);
+	# print("Updating User Account for : $username\n");
 		
-		if ($uid == $p_uid) {
-			if ($realname ne $p_realname) {
-				$passwd_array[$counter] = "$username:x:$uid:$uid:$realname:$p_homedir:$shell\n";
-			} elsif ($shell ne $t_shell) {
-				$passwd_array[$counter] = "$username:x:$uid:$uid:$p_realname:$p_homedir:$p_shell";
-			}
-		}
-		$counter++;
+        $home_dir = $homedir_prefix.$username;
+	$incoming_dir = $home_dir."/incoming" ;
+	foreach my $dir ($home_dir, $incoming_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0755;
+	    }
+	    chmod 0755, $dir;
+	    chown $uid, $uid, $dir;
 	}
-	
-	$counter = 0;
-	
-	foreach (@shadow_array) {
-		($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv) = split(":", $_);
-		if ($username eq $s_username) {
-			if ($passwd ne $s_passwd) {
-				$shadow_array[$counter] = "$username:$passwd:$s_date:$s_min:$s_max:$s_inact:$s_expire:$s_flag:$s_resv";
-			}
-		}
-		$counter++;
-	}
+
+	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
+	push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
+	push @group_array, "$username:x:$uid:\n";
 }
 
 #############################
@@ -195,17 +237,21 @@ sub delete_user {
 	my ($username, $junk, $uid, $gid, $realname, $homedir, $shell, $counter);
 	my $this_user = shift(@_);
 	
-	foreach (@passwd_array) {
-		($username, $junk, $uid, $gid, $realname, $homedir, $shell) = split(":", $_);
-		if ($this_user eq $username) {
-			$passwd_array[$counter] = '';
-		}
-		$counter++;
-	}
+#	foreach (@passwd_array) {
+#		($username, $junk, $uid, $gid, $realname, $homedir, $shell) = split(":", $_);
+#		if ($this_user eq $username) {
+#			$passwd_array[$counter] = '';
+#		}
+#		$counter++;
+#	}
 	
 	print("Deleting User : $this_user\n");
-	system("cd $homedir_prefix ; /bin/tar -czf $tar_dir/$username.tar.gz $username");
-	system("rm -fr $homedir_prefix/$username");
+# Find a better solution
+# I don't like this with vars
+#	system("cd $homedir_prefix ; /bin/tar -czf $tar_dir/$username.tar.gz $username");
+#	system("rm -fr $homedir_prefix/$username");
+	system("/bin/mv /var/lib/sourceforge/cvsroot/home/users/$username /var/lib/sourceforge/cvsroot/home/users/deleted_$username");
+	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/home/users/deleted_$username");
 }
 
 #############################
@@ -217,13 +263,15 @@ sub suspend_user {
 	
 	my $new_pass = "!!" . $s_passwd;
 	
-	foreach (@shadow_array) {
-		($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv) = split(":", $_);
-		if ($username eq $s_username) {
-		       $shadow_array[$counter] = "$s_username:$new_pass:$s_date:$s_min:$s_max:$s_inact:$s_expire:$s_flag:$s_resv";
-		}
-		$counter++;
-	}
+#	foreach (@shadow_array) {
+#		($s_username, $s_passwd, $s_date, $s_min, $s_max, $s_inact, $s_expire, $s_flag, $s_resv) = split(":", $_);
+#		if ($username eq $s_username) {
+#		       $shadow_array[$counter] = "$s_username:$new_pass:$s_date:$s_min:$s_max:$s_inact:$s_expire:$s_flag:$s_resv";
+#		}
+#		$counter++;
+#	}
+	push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
+	push @shadow_array, "$username:!!$passwd:$date:0:99999:7:::\n";
 }
 
 
@@ -232,24 +280,23 @@ sub suspend_user {
 #############################
 sub add_group {  
 	my ($gid, $gname, $userlist) = @_;
-	my ($log_dir, $cgi_dir, $ht_dir, $cvs_dir, $cvs_id);
+	my ($log_dir, $cgi_dir, $ht_dir, $cvs_dir, $cvs_id, $dl_dir);
 	
 	$group_dir = $grpdir_prefix.$gname;
 	$log_dir = $group_dir."/log";
 	$cgi_dir = $group_dir."/cgi-bin";
 	$ht_dir = $group_dir."/htdocs";
+	$dl_dir = $FTPFILES_DIR."/".$gname;
 
 	print("Making a Group for : $gname\n");
-		
 	push @group_array, "$gname:x:$gid:$userlist\n";
 	
-	if (substr($hostname,0,3) ne "cvs") {
-		# Now lets create the group's homedir.
-		mkdir $group_dir, 0775;
-		mkdir $log_dir, 0775;
-		mkdir $cgi_dir, 0775;
-		mkdir $ht_dir, 0775;
-		chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
+	foreach my $dir ($group_dir, $log_dir, $cgi_dir, $ht_dir, $dl_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0775;
+	    }
+	    chmod 0775, $dir;
+	    chown $dummy_uid, $gid, $dir;
 	}
 }
 
@@ -258,20 +305,24 @@ sub add_group {
 #############################
 sub update_group {
 	my ($gid, $gname, $userlist) = @_;
-	my ($p_gname, $p_junk, $p_gid, $p_userlist, $counter);
+	my ($log_dir, $cgi_dir, $ht_dir, $cvs_dir, $cvs_id, $dl_dir);
+	# my ($p_gname, $p_junk, $p_gid, $p_userlist, $counter);
+
+	$group_dir = $grpdir_prefix.$gname;
+	$log_dir = $group_dir."/log";
+	$cgi_dir = $group_dir."/cgi-bin";
+	$ht_dir = $group_dir."/htdocs";
+	$dl_dir = $FTPFILES_DIR."/".$gname;
 	
-	print("Updating Group: $gname\n");
-	
-	foreach (@group_array) {
-		($p_gname, $p_junk, $p_gid, $p_userlist) = split(":", $_);
-		
-		if ($gid == $p_gid) {
-			if ($userlist ne $p_userlist) {
-				$group_array[$counter] = "$gname:x:$gid:$userlist\n";
-			}
-		}
-		$counter++;
+	foreach my $dir ($group_dir, $log_dir, $cgi_dir, $ht_dir, $dl_dir) {
+	    unless (-d $dir) {
+		mkdir $dir, 0755;
+	    }
+	    chmod 0775, $dir;
+	    chown $dummy_uid, $gid, $dir;
 	}
+
+	push @group_array, "$gname:x:$gid:$userlist\n";
 }
 
 #############################
@@ -282,17 +333,12 @@ sub delete_group {
 	my $this_group = shift(@_);
 	$counter = 0;
 	
-	foreach (@group_array) {
-		($gname, $x, $gid, $userlist) = split(":", $_);
-		if ($this_user eq $gname) {
-			$group_array[$counter] = '';
-		}
-		$counter++;
-	}
-
 	if (substr($hostname,0,3) ne "cvs") {
 		print("Deleting Group: $this_group\n");
-		system("cd $grpdir_prefix ; /bin/tar -czf $tar_dir/$this_group.tar.gz $this_group");
-		system("rm -fr $grpdir_prefix/$this_group");
+# Find a better solution
+#		system("cd $grpdir_prefix ; /bin/tar -czf $tar_dir/$this_group.tar.gz $this_group");
+#		system("rm -fr $grpdir_prefix/$this_group");
+		system("/bin/mv /var/lib/sourceforge/cvsroot/home/groups/$this_group /var/lib/sourceforge/cvsroot/home/groups/deleted_group_$this_group");
+		system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_group.tar.gz /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/sourceforge/home/groups/deleted_group_$this_group");
 	}
 }

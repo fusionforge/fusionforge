@@ -1,0 +1,159 @@
+<?php
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+
+
+/*
+
+	Shawn Kwon(Soon-Son, Kwon), 2002/02/23
+	kss@kldp.org 
+
+	If you find any mistake, don't hesistate to email me.
+
+        This is the Korean class that overrides BaseLanguage
+
+        Each Language extends BaseLanguage
+
+*/
+
+class Korean extends BaseLanguage {
+
+	function Korean() {
+
+	$this-> BaseLanguage();
+
+	$this->content_encoding='EUC-KR';
+
+	$this->language_id=15;
+
+	$this->language_code='kr';
+
+	//default font which can be overridden on a language-by-language basis
+	//var $default_font='verdana,arial,helvetica,sans-serif';
+
+	//navigation menu strings
+	$this->SEARCH='찾기';
+	$this->LOGOUT='로그아웃';
+	$this->LOGIN='SSL을 통한 로그인';
+	$this->NEW_USER='SSL을 통한 사용자 등록';
+	$this->NEW_PROJECT='새 프로젝트 등록';
+	$this->ACCOUNT_MAINTENANCE='사용자 정보';
+	$this->CHANGE_MY_THEME='테마 바꾸기';
+	$this->MY_PERSONAL_PAGE='나의 페이지';
+	$this->BOOKMARK_PAGE='북마크하기';
+	$this->PROJECT_SUMMARY='프로젝트 요약';
+	$this->PROJECT_ADMIN='프로젝트 관리';
+	$this->FOUNDRY_SUMMARY='Foundry 요약';
+	$this->FOUNDRY_ADMIN='Foundry 관리';
+	$this->SOFTWARE_MAP='소프트웨어 맵';
+	$this->NEW_RELEASES='New Releases';
+	$this->OTHER_SITE_MIRRORS='Other Site Mirrors';
+	$this->CODE_SNIPPET_LIBRARY='Code Snippet Library';
+	$this->DOCUMENTATION='사이트 문서';
+	$this->DISCUSSION_FORUMS='논의의 공간';
+	$this->PROJECT_HELP_WANTED='도움을 기다리는 프로젝트';
+	$this->TOP_PROJECTS='Top Projects';
+	$this->COMPILE_FARM='Compile Farm';
+	$this->CONTACT_US='SourceForge와 연락하기';
+
+        // 2000-11-24
+ 	$this->ABOUT_SOURCEFORGE='SourceForge에 관해';
+ 	$this->ABOUT_FOUNDRIES='Foundry에 관해';
+
+	//tool short names as in HTML_TABS()
+	$this->GROUP_SHORT_MAIN ='메인';
+	$this->GROUP_SHORT_SUMMARY='요약';
+	$this->GROUP_SHORT_HOMEPAGE='홈페이지';
+	$this->GROUP_SHORT_FORUM='포럼';
+	$this->GROUP_SHORT_BUGS='버그';
+	$this->GROUP_SHORT_SUPPORT='지원';
+	$this->GROUP_SHORT_PATCH='패치';
+	$this->GROUP_SHORT_MAIL='메일링리스트';
+	$this->GROUP_SHORT_PM='할당임무';
+	$this->GROUP_SHORT_DOCMAN='문서';
+	$this->GROUP_SHORT_SURVEY='여론조사';
+	$this->GROUP_SHORT_NEWS='뉴스';
+	$this->GROUP_SHORT_CVS='CVS';
+	$this->GROUP_SHORT_FILES='파일';
+        // 2000-11-24
+	$this->GROUP_SHORT_MEMBERLIST='개발자';
+
+	//tool long names for summary page
+	$this->LATEST_FILE_RELEASES='최근 릴리즈된 파일';
+	$this->FILE_PACKAGE='패키지';
+	$this->FILE_VERSION='버전';
+	$this->FILE_REL_DATE='날짜';
+	$this->FILE_MONITOR='모니터링';
+	$this->FILE_NOTES='Notes';
+	$this->FILE_DOWNLOAD='내려받기';
+
+	$this->DEVELOPER_INFO='개발자 정보';
+	$this->PROJECT_ADMINS='프로젝트 관리';
+	$this->DEVELOPERS='개발자';
+	$this->PUBLIC_AREA='열린 공간';
+
+	$this->GROUP_LONG_HOMEPAGE='프로젝트 홈페이지';
+	$this->GROUP_LONG_FORUM='공개 포럼';
+	$this->GROUP_LONG_BUGS='버그 트래킹';
+	$this->GROUP_LONG_SUPPORT='기술지원 매니저';
+	$this->GROUP_LONG_PATCH='패치 매니저';
+	$this->GROUP_LONG_MAIL='메일링 리스트';
+	$this->GROUP_LONG_PM='임무 관리자';
+	$this->GROUP_LONG_DOCMAN='DocManager: 프로젝트 문서화';
+	$this->GROUP_LONG_SURVEY='여론조사';
+	$this->GROUP_LONG_NEWS='최근 뉴스';	
+	$this->GROUP_LONG_CVS='CVS 저장소';
+	$this->GROUP_LONG_FTP='익명 FTP 공간';
+	$this->GROUP_LONG_FOUNDRIES='SourceForge Development Foundries';
+
+
+	//
+	// New strings for home page added 10/1
+	//
+	$this->BREAKING_DOWN_BARRIERS='Open Source 개발의 장벽을 허물며';
+	$this->SOURCEFORGE_STATISTICS='SourceForge 통계';
+	$this->TOP_PROJECT_DOWNLOADS='최다 다운로드';
+	$this->HIGHEST_RANKED_USERS='활발한 사용자';
+	$this->MOST_ACTIVE_THIS_WEEK='금주 가장 활발한 프로젝트';
+	$this->SFOS='SourceForge OnSite';
+
+
+//temporary hack until
+//content manager is ready
+
+	$this->HOME_PAGE_ABOUT_BLURB='
+
+SourceForge는 <B>
+<A href="http://www.opensource.org">Open Source</A>개발자들을 위한
+무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 포럼,
+임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를
+포함한 완전한 웹 기반의 관리 인터페이스를 제공합니다.
+<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 자세히 ]</font></A>
+<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A>
+<BR>
+&nbsp;
+<P>
+<B>사이트에 대한 피드백 및 참여방법</B>
+<P>
+SourceForge를 최대한으로 활용하기 위해서는 
+<A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다.
+사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다.
+물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에
+대해 접근 권한을 갖지는 못할 것입니다.
+<P>
+&nbsp;
+<BR>
+<B>여러분의 프로젝트를 설정하십시오.</B>
+<P>
+<A href="/account/register.php">사용자 등록</A>을 하시고,
+<A HREF="/account/login.php">로그인</A>하시면 
+<A HREF="/register/">여러분의 프로젝트를 등록</A>하실 수 있습니다.
+감사합니다. 즐거운 시간 되십시오.';
+
+	}
+}
+
+?>

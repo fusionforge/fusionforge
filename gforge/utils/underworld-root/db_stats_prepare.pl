@@ -6,7 +6,7 @@ use DBI;
 
 my $verbose = 1;
 
-require("../include.pl");
+require("/usr/lib/sourceforge/utils/include.pl");
 $dbh = &db_connect();
 
 ## 

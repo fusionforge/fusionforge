@@ -48,8 +48,8 @@ if ($group_id) {
 		"<TR><TD VALIGN=\"TOP\">\n"; 
 
 	for ($j = 0; $j < $rows; $j++) {
-		echo '<A HREF="http://www.geocrawler.com/redir-sf.php3?list='.
-			db_result($result, $j, 'list_name').'">' . 
+		echo '<A HREF="http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.
+			db_result($result, $j, 'list_name').'/">' . 
 			html_image("images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp; '.
 			db_result($result, $j, 'list_name').' Archives</A>'; 
 		echo ' (go to <A HREF="http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.

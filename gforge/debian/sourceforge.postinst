@@ -1,0 +1,242 @@
+#! /bin/sh
+# postinst script for sourceforge
+#
+# see: dh_installdeb(1)
+
+set -e
+# set -x				# Be verbose, be very verbose.
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see /usr/share/doc/packaging-manual/
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+. /usr/share/debconf/confmodule
+
+case "$1" in
+    configure)
+	adduser --system --group --home /var/www/sourceforge sourceforge &> /dev/null
+	
+	pattern=$(basename $0).XXXXXX
+	
+	# "Fill in the blanks" in main config file
+        vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host download_host newsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list do_config"
+	mainconffile=/etc/sourceforge/sourceforge.conf
+        if [ ! -e $mainconffile ] ; then
+	    touch $mainconffile
+	    chmod 600 $mainconffile
+	fi
+	for i in $vars ; do
+	    if ! grep -q "^$i=" $mainconffile ; then
+		db_get sourceforge/$i
+		echo "$i=$RET" >> $mainconffile
+	    fi
+	done
+	/usr/sbin/sourceforge-config
+    	
+    	db_get sourceforge/do_config
+	do_config=$RET
+
+	# Create the appropriate database user
+	tmp1=$(mktemp /tmp/$pattern)
+	tmp2=$(mktemp /tmp/$pattern)
+	if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser sourceforge" 1> $tmp1 2> $tmp2 \
+	    && [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
+	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE USER: user name "sourceforge" already exists' ] ; then
+	    # Creation OK or user already existing -- no problem here
+	    echo -n ""
+	else
+	    echo "Cannot create PostgreSQL user...  This shouldn't have happened."
+	    echo "Maybe a problem in your PostgreSQL configuration?"
+	    echo "Please report a bug to the Debian bug tracking system"
+	    cat $tmp1 $tmp2
+	    exit 1
+	fi
+	rm -f $tmp1 $tmp2
+
+        # Create the appropriate database
+	tmp1=$(mktemp /tmp/$pattern)
+	tmp2=$(mktemp /tmp/$pattern)
+	if su -s /bin/sh postgres -c "createdb sourceforge" 1> $tmp1 2> $tmp2 \
+	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
+	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE DATABASE: database "sourceforge" already exists' ] ; then
+	    # Creation OK of database already existing -- no problem here
+	    echo -n ""
+	else
+	    echo "Cannot create PostgreSQL database...  This shouldn't have happened."
+	    echo "Maybe a problem in your PostgreSQL configuration?"
+	    echo "Please report a bug to the Debian bug tracking system"
+	    cat $tmp1 $tmp2
+	    exit 1
+	fi
+	rm -f $tmp1 $tmp2
+	
+	# Tell PostgreSQL to let us use the database
+    	db_get sourceforge/db_password
+	su -s /bin/sh postgres -c "touch /var/lib/postgres/data/sourceforge_passwd"
+	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/sourceforge_passwd > /dev/null" <<-EOF
+sourceforge
+$RET
+$RET
+EOF
+	db_get sourceforge/ip_address
+	ip_address=$RET
+	if [ "$do_config" = "true" ] ; then
+	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.sourceforge-old
+	    if grep -q "^host.*sourceforge_passwd$" /etc/postgresql/pg_hba.conf ; then
+		perl -pi -e "s/^host.*sourceforge_passwd$/host sourceforge $ip_address 255.255.255.255 password sourceforge_passwd/" /etc/postgresql/pg_hba.conf
+	    else
+		cur=$(mktemp /tmp/$pattern)
+		echo "### Next line inserted by Sourceforge install" > $cur
+		echo "host sourceforge $ip_address 255.255.255.255 password sourceforge_passwd" >> $cur
+		cat /etc/postgresql/pg_hba.conf >> $cur
+		cat $cur > /etc/postgresql/pg_hba.conf
+		rm -f $cur
+	    fi
+	    kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
+	fi
+
+	# Install/upgrade the database contents (tables and data)
+	/usr/lib/sourceforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE:
+	
+	if [ "$do_config" = "true" ] ; then
+	    cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.sourceforge-old
+	    # Make sure Apache sees us
+	    perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf
+	    if [ -e /usr/lib/apache/1.3/mod_ssl.so ] ; then
+		perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf
+	    fi
+	    if [ -e /usr/lib/apache/1.3/libssl.so ] ; then
+		perl -pi -e "s/# *LoadModule apache_ssl_module/LoadModule apache_ssl_module/gi" /etc/apache/httpd.conf
+	    fi
+	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf
+	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf
+	    
+	    if ! grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
+		echo "### Next line inserted by Sourceforge install" >> /etc/apache/httpd.conf
+		echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache/httpd.conf
+	    fi
+	fi
+	
+	if [ "$do_config" = "true" ] ; then
+	    cp -a /etc/php4/apache/php.ini /etc/php4/apache/php.ini.sourceforge-old
+	    cp -a /etc/php4/cgi/php.ini /etc/php4/cgi/php.ini.sourceforge-old
+            # Make sure pgsql,ldap and gd are enabled in the PHP config files
+	    if [ -f /etc/php4/apache/php.ini ]; then
+		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/apache/php.ini; then
+		    echo "Enabling pgsql in /etc/php4/apache/php.ini"
+		    echo "extension=pgsql.so" >> /etc/php4/apache/php.ini
+		fi
+		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*gd.so" /etc/php4/apache/php.ini; then
+		    echo "Enabling gd in /etc/php4/apache/php.ini"
+		    echo "extension=gd.so" >> /etc/php4/apache/php.ini
+		fi
+		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*ldap.so" /etc/php4/apache/php.ini; then
+		    echo "Enabling ldap in /etc/php4/apache/php.ini"
+		    echo "extension=ldap.so" >> /etc/php4/apache/php.ini
+		fi
+	    fi
+	    if [ -f /etc/php4/cgi/php.ini ]; then
+		if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/cgi/php.ini; then
+		    echo "Enabling pgsql in /etc/php4/cgi/php.ini"
+		    echo "extension=pgsql.so" >> /etc/php4/cgi/php.ini
+		fi
+	    fi
+	fi
+
+	if [ "$do_config" = "true" ] ; then
+	    cp -a /etc/aliases /etc/aliases.sourceforge-old
+  	    # Redirect "noreply" mail to the bit bucket
+	    db_get sourceforge/noreply_to_bitbucket
+	    if [ "$RET" = "true" ] ; then
+		if ! grep -q "^noreply:" /etc/aliases ; then
+		    echo "### Next line inserted by Sourceforge install" >> /etc/aliases
+		    echo "noreply: /dev/null" >> /etc/aliases
+		fi
+	    fi
+	    # Redirect "sourceforge" mail to the site admin
+	    db_get sourceforge/server_admin
+	    if ! grep -q "^sourceforge:" /etc/aliases ; then
+		echo "### Next line inserted by Sourceforge install" >> /etc/aliases
+		echo "sourceforge: $RET" >> /etc/aliases
+	    fi
+	    [ -x /usr/bin/newaliases ] && newaliases
+	fi
+
+	# Prepare a few variables for the DNS stuff
+	db_get sourceforge/domain_name
+	domain_name=$RET
+	db_get sourceforge/ip_address
+	ip_address=$RET
+
+	# Clean debconf after ourselves
+	db_stop
+
+	# Install the chroot environment
+	/usr/lib/sourceforge/bin/install-chroot.sh
+	
+	# Create the DNS zone
+	# echo "Installing Sourceforge DNS zone"
+	/usr/lib/sourceforge/bin/install-dns.sh $domain_name $ip_address
+	
+        # Setup our CVS
+	/usr/lib/sourceforge/bin/install-cvs.sh configure
+
+        # Setup our LDAP
+	/usr/lib/sourceforge/bin/install-ldap.sh configure
+
+        # Setup our SSH
+	/usr/lib/sourceforge/bin/install-ssh.sh
+
+        # Setup our mail forwarding
+	/usr/lib/sourceforge/bin/install-exim.sh configure # Not ready yet
+
+        # Setup our FTP
+	/usr/lib/sourceforge/bin/install-ftp.sh configure 
+
+        # Setup our FRS
+	chown root:root /var/lib/sourceforge/download
+
+	# Setup our CVS
+	# Making user group and cvs update from database 
+	/usr/lib/sourceforge/bin/update-user-group-cvs.sh
+	# logs
+	chown root:sourceforge /var/log/sourceforge/cvs
+	chmod 775 /var/log/sourceforge/cvs
+
+	# Restart some services
+	/etc/init.d/bind9 restart
+	# This is equivalent but require some signature, not always there
+	#/usr/sbin/rndc reload
+	/etc/init.d/ssh start
+	/etc/init.d/apache restart
+	
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+        echo "postinst called with unknown argument \`$1'" >&2
+        exit 0
+    ;;
+esac
+
+# dh_installdeb will replace this with shell code automatically
+# generated by other debhelper scripts.
+
+#DEBHELPER#
+
+exit 0
