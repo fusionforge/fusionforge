@@ -1,4 +1,4 @@
-gforge (3.3.0-57) unstable; urgency=low
+gforge (3.3.0-58) unstable; urgency=low
 
   * [Christian] Added a call to migrateform.php and migraterbac.php in
     db-upgrade
@@ -22,8 +22,9 @@ gforge (3.3.0-57) unstable; urgency=low
   * [Roland] Don't die in install-db.sh if postgresql is not running, but
     start it instead.
   * [Roland] Various fixes in several scripts.
+  * [Christian] Added 20041104 and 20041108 to db-upgrade.pl
 
- -- Roland Mas <lolando@debian.org>  Mon, 29 Nov 2004 15:33:27 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue, 30 Nov 2004 16:09:50 +0100
 
 gforge (3.3.0-12) unstable; urgency=low
 
