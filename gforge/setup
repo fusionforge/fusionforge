@@ -82,6 +82,7 @@ computedefault(){
 	DEFAULTsys_use_mail=true
 	DEFAULTsys_use_survey=true
 	DEFAULTsys_use_frs=true
+	DEFAULTsys_use_fti=false
 	DEFAULTsys_use_ftp=true
 	DEFAULTsys_use_trove=true
 	DEFAULTsys_use_snippet=true
