@@ -50,7 +50,7 @@ class BaseLanguage {
 		$fname = 'languages/'.$lang.'.tab' ;
 		$this->loadLanguageFile($fname) ;
 		$fname = '/etc/sourceforge/languages-local/'.$lang.'.tab' ;
-		if (file_exists ($fname) {
+		if (file_exists ($fname)) {
 			$this->loadLanguageFile($fname) ;
 		}
 	}
