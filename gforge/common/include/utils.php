@@ -85,7 +85,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 		"\n\n$body";
 
 	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
-		  "\" | /usr/sbin/sendmail -f'$from' -t -i >& /dev/null &");
+		  "\" | /usr/sbin/sendmail -f'$from' -t -i > /dev/null 2>&1 &");
 }
 
 function util_send_jabber($to,$subject,$body) {
