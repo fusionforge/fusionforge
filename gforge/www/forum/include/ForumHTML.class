@@ -315,7 +315,8 @@ class ForumHTML extends Error {
 			} 
 			?>
 			<BR>
-			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>">
+			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>"><?php
+				echo ((session_loggedin()) ? '&nbsp;&nbsp;&nbsp;<input type="checkbox" value="1" name="monitor">&nbsp;Receive followups via email.' : ''); ?>
 			</TD></TR></TABLE>
 			</FORM>
 			</CENTER>

@@ -70,6 +70,9 @@ if ($forum_id) {
 			$feedback=$Language->getText('forum_forum','postsuccess');
 			$style='';
 			$thread_id='';
+			if ($monitor) {
+				$f->setMonitor();
+			}
 		}
 	}
 
