@@ -199,7 +199,7 @@ if (db_numrows($res_db) > 0) {
 				     <td><input type="text" name="pw" size="8" maxlength="16" /></td>
 				     <td><input type="text" name="pwconfirm" size="8" maxlength="16" /></td>
 				     <td>
-				       <input type="submit" name="submit" value="'.$Language->getText('project_admin_database','update').' />
+				       <input type="submit" name="submit" value="'.$Language->getText('project_admin_database','update').'" />
 				     </td>
 				  </form> 
 			';

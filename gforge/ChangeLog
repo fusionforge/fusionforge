@@ -1,5 +1,8 @@
 2003-11-29  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/project/admin/database.php: Added missing " (patch #595 from
+	Soon Son Kwon <kss@kldp.org>.
+
 	* www/include/languages/French.tab: Patch #611, again from
 	Guillaume Smet.
 
