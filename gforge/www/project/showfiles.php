@@ -69,21 +69,6 @@ $cell_data[] = array('Type');
 
 echo $GLOBALS[HTML]->multiTableRow("",$cell_data, TRUE);
 
-/*
-<tr align="middle" BGCOLOR="'. $HTML->COLOR_HTMLBOX_TITLE .'">'.
-'<td rowspan="2">'.col_heading('Package').'</td>'.
-'<td rowspan="2">'.col_heading('Release<BR>&amp; Notes').'</td>'.
-'<td rowspan="2">'.col_heading('Filename').'</td>'.
-'<td colspan="4">'.col_heading('Date').'</td>'.
-'</tr>
-<tr align="middle" BGCOLOR="'. $HTML->COLOR_HTMLBOX_TITLE .'">'.
-'<td>'.col_heading('Size').'</td>'.
-'<td>'.col_heading('D/L').'</td>'.
-'<td>'.col_heading('Arch.').'</td>'.
-'<td>'.col_heading('Type').'</td>'.
-'</tr>
-';
-*/
 $proj_stats['packages'] = $num_packages;
 
    // Iterate and show the packages
@@ -115,7 +100,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 
 		    	// Highlight the release if one was chosen
 		      	if ( $release_id && $release_id == $package_release['release_id'] ) {
-		      		$bgstyle = "BGCOLOR=pink";
+		      		$bgstyle = 'BGCOLOR="pink"';
 		      	} else {
 		      		$bgstyle = $cur_style;
 		      	}
