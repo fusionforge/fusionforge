@@ -312,9 +312,9 @@ if ($forum_id) {
 	$ret_val .= '<table width="100%" border="0">
 		<tr bgcolor="'.$HTML->COLOR_LTBACK1.'"><td width="50%">';
 	if ($offset != 0) {
-		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
+		$ret_val .= '<span style="font-family:arial,helvetica;font-size:small;text-decoration:none">
 		<a href="javascript:history.back()"><strong>' .
-		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . $Language->getText('forum_forum','previous_messages').'</a></strong></span>';
+		html_image('t2.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) .$Language->getText('forum_forum','previous_messages').'</a></strong></span>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -322,7 +322,7 @@ if ($forum_id) {
 	$ret_val .= '</td><td>&nbsp;</td><td align="right" width="50%">';
 
 	if ($avail_rows > $max_rows) {
-		$ret_val .= '<span style="font-family:arial,helvetica;font-size:3;text-decoration:none">
+		$ret_val .= '<span style="font-family:arial,helvetica;font-size:small;text-decoration:none">
 		<a href="/forum/forum.php?max_rows='.$max_rows.'&amp;style='.$style.'&amp;offset='.($offset+$i).'&amp;forum_id='.$forum_id.'">
 		<strong> '.$Language->getText('forum_forum','next_messages') .
 		html_image('t.png',"15","15",array("border"=>"0","ALIGN"=>"MIDDLE")) . '</strong></a>';
