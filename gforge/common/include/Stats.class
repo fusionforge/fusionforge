@@ -32,11 +32,11 @@ class Stats extends Error {
 	}
 
 	/**
-	 * Returns a resultset consisting of the month, day, total_users, and sessions
+	 * Returns a resultset consisting of the month, day, total_users, pageviews, and sessions
 	 * from the stats_site table
 	 */
 	function getSiteStats() {
-		$res = db_query("select month, day, total_users, sessions from stats_site");
+		$res = db_query("select byday.month,byday.day,byday.site_page_views as pageviews, ss.total_users, ss.sessions from stats_site_pages_by_day byday, stats_site ss where byday.month=ss.month and byday.day = ss.day order by byday.month asc, byday.day asc");
 		if (!$res) {
 			$this->setError('Unable to get stats: '.db_error());
 			return false;

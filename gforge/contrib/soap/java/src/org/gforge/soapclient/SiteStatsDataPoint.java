@@ -8,7 +8,16 @@ public class SiteStatsDataPoint {
 
     private String date;
     private String users;
+    private String pageviews;
     private String sessions;
+
+    public String getPageviews() {
+        return pageviews;
+    }
+
+    public void setPageviews(String pageviews) {
+        this.pageviews = pageviews;
+    }
 
     public String getDate() {
         return date;
@@ -35,6 +44,6 @@ public class SiteStatsDataPoint {
     }
 
     public String toString() {
-        return "date - " + date + ": users - " + users + ": sessions - " + sessions;
+        return "date - " + date + ": users - " + users + ": pageviews - " + pageviews + ": sessions - " + sessions;
     }
 }

@@ -66,6 +66,7 @@ $server->wsdl->addComplexType(
 	array(
 	'date' => array('name'=>'date', 'type' => 'xsd:string'), 
 	'users' => array('name'=>'users', 'type' => 'xsd:string'), 
+	'pageviews' => array('name'=>'pageviews', 'type' => 'xsd:string'), 
 	'sessions' => array('name'=>'sessions', 'type' => 'xsd:string') 
 	)
 );
@@ -280,6 +281,7 @@ function getSiteStats() {
 		$yearmonth = db_result($res, $i, 'month');
 		$result['date']= substr($yearmonth, 0, 4)."-".substr($yearmonth, 4,5)."-".db_result($res, $i, 'day');
 		$result['users']= db_result($res, $i, 'total_users');
+		$result['pageviews']= db_result($res, $i, 'pageviews');
 		$result['sessions']= db_result($res, $i, 'sessions');
 		$resultwrapper[$i] = new soapval('tns:SiteStatsDataPoint', 'SiteStatsDataPoint', $result);
 	}

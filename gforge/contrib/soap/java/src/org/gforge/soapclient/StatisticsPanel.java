@@ -30,9 +30,7 @@ public class StatisticsPanel extends JPanel {
                     JOptionPane.showMessageDialog(null, "Please fill in a server name on the Configuration tab (i.e., cougaarforge.cougaar.org)");
                     return;
                 }
-                Client client = new Client(Settings.getInstance().get(ConfigurationPanel.SERVER_PROPERTY),
-                        Settings.getInstance().get(ConfigurationPanel.GROUP_PROPERTY)
-                        );
+                Client client = new Client(Settings.getInstance().get(ConfigurationPanel.SERVER_PROPERTY), Settings.getInstance().get(ConfigurationPanel.GROUP_PROPERTY));
                 stats = client.getSiteStats();
                 refresh();
             }  catch (Exception ex) {
@@ -64,15 +62,12 @@ public class StatisticsPanel extends JPanel {
         topRow.add(createUsersOverTimeChart());
         topRow.add(createSessionsPerDayChart());
 
-        /*
-                JPanel nextRow = new JPanel();
-                nextRow.add(createSessionsPerDayChart());
-                nextRow.add(createUsersOverTimeChart());
-        */
+        JPanel nextRow = new JPanel();
+        nextRow.add(createPageViewsPerDayChart());
 
         JPanel all = new JPanel(new BorderLayout());
         all.add(topRow, BorderLayout.NORTH);
-        //        all.add(nextRow, BorderLayout.SOUTH);
+        all.add(nextRow, BorderLayout.SOUTH);
 
         setLayout(new BorderLayout());
         JPanel buttonPanel = new JPanel();
@@ -101,8 +96,17 @@ public class StatisticsPanel extends JPanel {
         }
         TimePeriodValuesCollection data = new TimePeriodValuesCollection();
         data.addSeries(tpv);
-
         return wrapPlot(createPlot(data, "Sessions", "Day"), "Sessions Per Day");
+    }
+
+    private JPanel createPageViewsPerDayChart() {
+        TimePeriodValues tpv = new TimePeriodValues("PageViewsPerDay");
+        for (int i=0; i<stats.length; i++) {
+            tpv.add(Day.parseDay(stats[i].getDate()), new Integer(stats[i].getPageviews()));
+        }
+        TimePeriodValuesCollection data = new TimePeriodValuesCollection();
+        data.addSeries(tpv);
+        return wrapPlot(createPlot(data, "Pageviews", "Day"), "Pageviews Per Day");
     }
 
     private XYPlot createPlot(TimePeriodValuesCollection data, String y, String x) {
