@@ -180,42 +180,52 @@ class User extends Error {
 	 */
 	function create($unix_name,$realname,$password1,$password2,$email,
 		$mail_site,$mail_va,$language_id,$timezone) {
+		global $Language;
 		if (!$unix_name) {
-			$this->setError('You must supply a username');
+			//$this->setError('You must supply a username');
+			$this->setError($Language->getText('account_register','err_username'));
 			return false;
 		}
 		if (!$realname) {
-			$this->setError('You must supply a real name');
+			//$this->setError('You must supply a real name');
+			$this->setError($Language->getText('account_register','err_realname'));
 			return false;
 		}
 		if (!$password1) {
-			$this->setError('You must supply a password');
+			//$this->setError('You must supply a password');
+			$this->setError($Language->getText('account_register','err_passwd'));
 			return false;
 		}
 		if ($password1 != $password2) {
-			$this->setError('Passwords do not match');
+			//$this->setError('Passwords do not match');
+			$this->setError($Language->getText('account_register','err_passwd2'));
 			return false;
 		}
 		if (!account_pwvalid($password1)) {
-			$this->setError('Password must be at least 6 characters');
+			//$this->setError('Password must be at least 6 characters');
+			$this->setError($Language->getText('account_register','err_passwd3'));
 			return false;
 		}
 		$unix_name=strtolower($unix_name);
 		if (!account_namevalid($unix_name)) {
-			$this->setError('Invalid Unix Name. ');
+			//$this->setError('Invalid Unix Name. ');
+			$this->setError($Language->getText('account_register','err_unixname'));
 			return false;
 		}
 		if (!validate_email($email)) {
-			$this->setError('Invalid Email Address');
+			//$this->setError('Invalid Email Address');
+			$this->setError($Language->getText('account_register','err_email'));
 			return false;
 		}
 		if (db_numrows(db_query("SELECT user_id FROM users WHERE user_name LIKE '$unix_name'")) > 0) {
-			$this->setError('That username already exists.');
+			//$this->setError('That username already exists.');
+			$this->setError($Language->getText('account_register','err_userexist'));
 			return false;
 		}
 		if ($GLOBALS['sys_require_unique_email']) {
 			if (db_numrows(db_query("SELECT user_id FROM users WHERE email='$email'")) > 0) {
-				$this->setError('User with this email already exists - use people search to recover your login.');
+				//$this->setError('User with this email already exists - use people search to recover your login.');
+				$this->setError($Language->getText('account_register','err_mailexist'));
 				return false;
 			}
 		}
@@ -239,7 +249,8 @@ class User extends Error {
 		$this->user_id = db_insertid($result,'users','user_id');
 	
 		if (!$result || !$this->user_id) {
-			$this->setError('Insert Failed '.db_error());
+			//$this->setError('Insert Failed '.db_error());
+			$this->setError($Language->getText('account_register','err_badinsert') .db_error());
 			return false;
 		} else {
 
@@ -258,20 +269,12 @@ class User extends Error {
 	 *	@return true or false
 	 */
 	function sendRegistrationEmail() {
-		$message = "Thank you for registering on the GForge web site. You have\n"
-		. "account with username '".$this->getUnixName()."' created for you. In order\n"
-		. "to complete your registration, visit the following url: \n\n"
-		. "<http://". $GLOBALS['sys_default_domain'] ."/account/verify.php?confirm_hash=_".$this->getConfirmHash().">\n\n"
-		. "(If you don't see any URL above, it is likely due to bug in your mail client.\n"
-		. "Use one below, but make sure it is entered as the single line.)\n\n"
-		. "http://". $GLOBALS['sys_default_domain']."/account/verify.php?confirm_hash=_".$this->getConfirmHash()."\n\n"
-		. "Enjoy the site.\n\n";
-
-		mail(
+		global $Language;
+		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$GLOBALS['sys_default_domain'],$this->getConfirmHash())));
+		util_send_mail(
 			$this->getEmail(),
-			"GForge Account Registration",
-			$message,
-			"From: noreply@".$GLOBALS['sys_default_domain']
+			$Language->getText('account_register','message_header'),
+			$message
 		);
 	}
 
@@ -300,7 +303,7 @@ class User extends Error {
 			mail_siteupdates=$mail_site,
 			mail_va=$mail_va,
 			block_ratings='$block_ratings'
-			WHERE user_id=".$this->getID()."
+			WHERE user_id='".$this->getID()."'
 		");
 
 		if (!$res) {
@@ -436,6 +439,10 @@ class User extends Error {
 	 */
 	function setUnixStatus($status) {
 		db_begin();
+		if ($status != 'N') {
+			$this->setUpUnixUID () ;
+		}
+
 		$res=db_query("
 			UPDATE users 
 			SET unix_status='$status' 
@@ -585,7 +592,7 @@ class User extends Error {
 			UPDATE users
 			SET confirm_hash='$hash',
 			email_new='$email'
-			WHERE user_id=".$this->getID()."
+			WHERE user_id='".$this->getID()."'
 		");
 
 		if (!$res) {
@@ -642,6 +649,7 @@ class User extends Error {
 	 */
 	function setShell($shell) {
 		$shells = file('/etc/shells');
+		$shells[count($shells)] = "/bin/cvssh";
 		$out_shells = array();
 		foreach ($shells as $s) {
 			if (substr($s, 0, 1) == '#') {
@@ -924,11 +932,14 @@ class User extends Error {
 	        }
 
 		db_begin();
-		$unix_pw=account_genunixpw($passwd);
+		$unix_pw = account_genunixpw($passwd);
 
-		$res=db_query("UPDATE users SET user_pw='" . md5($passwd) . "',"
-		. "unix_pw='" . $unix_pw . "' WHERE "
-		. "user_id=" . $this->getID());
+		$res=db_query("
+			UPDATE users
+			SET user_pw='" . md5($passwd) . "',
+				unix_pw='$unix_pw'
+			WHERE user_id='".$this->getID()."'
+		");
 
 		if (!$res || db_affected_rows($res) < 1) {
 			$this->setError('ERROR - Could Not Change User Password: '.db_error());
@@ -987,16 +998,16 @@ class User extends Error {
 			UPDATE users
 			SET mail_siteupdates=0,
 				mail_va=0
-			WHERE user_id=".$this->getID()."
+			WHERE user_id='".$this->getID()."'
 		");
 		if ($all) {
 			$res2 = db_query("
 				DELETE FROM forum_monitored_forums
-				WHERE user_id=".$this->getID()."
+				WHERE user_id='".$this->getID()."'
 			");
 			$res3 = db_query("
 				DELETE FROM filemodule_monitor
-				WHERE user_id=".$this->getID()."
+				WHERE user_id='".$this->getID()."'
 			");
 		}
 
