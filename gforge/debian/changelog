@@ -8,8 +8,9 @@ gforge (3.3.0-28) unstable; urgency=low
   * [Christian] Changed default sys_theme to gforge, so web frontend is not
     broken when theme pack is not installed
   * [Christian] sys_project_reg_restricted=false by default
+  * [Roland] Added views for NSS-PGSQL (form Wichert Akkerman).
 
- -- Christian Bayle <bayle@debian.org>  Mon, 20 Sep 2004 12:48:07 +0200
+ -- Roland Mas <lolando@debian.org>  Fri,  1 Oct 2004 13:25:09 +0200
 
 gforge (3.3.0-12) unstable; urgency=low
 

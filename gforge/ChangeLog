@@ -1,3 +1,8 @@
+2004-10-01  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* db/20041001.sql, deb-specific/db-upgrade.pl: Created new views
+	for NSS-PGSQL.
+
 2004-09-29  Francisco Gimeno <kikov@kikov.org>
 
 	* gforge-plugin-scmsvn/include/SVNPlugin.class,
