@@ -303,8 +303,6 @@ menu	contact_us	Contact $1
 menu	diary_notes	Diary &amp; Notes
 menu	discussion_forums	Discussion Forums
 menu	documentation	Site Docs
-menu	hosted_projects_list	Hosted Projects List
-menu	logged_in_as	Logged in as $1
 menu	login	Login
 menu	login_ssl	Login via SSL
 menu	logout	Logout
@@ -328,14 +326,6 @@ menu	projectree	Project&nbsp;Tree
 menu	mypage	My&nbsp;Page
 menu	code_snippet	Code&nbsp;Snippets
 menu	admin	Admin
-menu	admin_main_page	Main Page
-menu	admin_group_type_admin	Group Type Admin
-menu	admin_group_list	Group Admin
-menu	admin_user_list	User Admin
-menu	admin_pending_projects	Pending Projects
-menu	admin_news_approval	Site News Approval
-menu	admin_mass_mail	Mass Mail
-menu	admin_people_help_admin	People Help Admin
 my	about_blurb	Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.
 my	no_bookmarks	You currently do not have any bookmarks saved
 my	no_monitored_filemodules	<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp

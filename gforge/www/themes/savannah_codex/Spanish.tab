@@ -1,0 +1,14 @@
+#
+# Savannah-theme specific strings
+# Textos especial para los temas de savannah
+#
+menu	logged_in_as	Autenticado como $1
+menu	hosted_projects_list	Lista de proyectos
+menu	admin_main_page	P&aacute;gina de admin
+menu	admin_group_type_admin	Admin de clases de grupos
+menu	admin_group_list	Admin de grupos
+menu	admin_user_list	Admin de usarios
+menu	admin_pending_projects	Proyectos pendientes
+menu	admin_news_approval	Aprobar de noticias
+menu	admin_mass_mail	E-mail a todos
+menu	admin_people_help_admin	Admin de las peticiones de ayuda

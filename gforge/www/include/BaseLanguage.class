@@ -20,7 +20,7 @@
 	Base language is english - an english class will extend this one,
 	but won't override anything
 
-	As new languages are added, they can override what they wish, and 
+	As new languages are added, they can override what they wish, and
 		as we extend our class, other languages can follow suit
 		as they are translated without holding up our progress
 
@@ -42,8 +42,16 @@ class BaseLanguage {
 			if (substr($ary[$i], 0, 1) == '#') {
 				continue;
 			}
-			$line = explode("\t", $ary[$i], 3);
-			$this->text_array[$line[0]][$line[1]] = chop($line[2]);
+			// Language files can include others for defaults.
+			// e.g. an English-Canada.tab file might "include English" first,
+			// then override all those whacky American spellings.
+			if (preg_match("/^include ([a-zA-Z]+)/", $ary[$i], $matches)) {
+				$dir = dirname($fname);
+				$this->loadLanguageFile($dir."/".$matches[1].".tab");
+			} else {
+				$line = explode("\t", $ary[$i], 3);
+				$this->text_array[$line[0]][$line[1]] = chop($line[2]);
+			}
 		}
 	}
 
@@ -53,14 +61,16 @@ class BaseLanguage {
 	}
 
 	function loadLanguage($lang) {
+		global $sys_theme;
 		$fname = 'languages/'.$lang.'.tab' ;
 		$this->loadLanguageFile($fname) ;
+		// Site-local customizations
 		$fname = '/etc/gforge/languages-local/'.$lang.'.tab' ;
 		if (file_exists ($fname)) {
 			$this->loadLanguageFile($fname) ;
 		}
 		//Customization by theme
-		$ftname = '/etc/gforge/languages-local/'.$GLOBALS['sys_theme'].'/'.$lang.'.tab' ;
+		$ftname = '../themes/'.$sys_theme.'/'.$lang.'.tab' ;
 		if (file_exists ($ftname)) {
 			$this->loadLanguageFile($ftname) ;
 		}
@@ -138,7 +148,7 @@ function language_code_to_result($alang) {
 		Determine which language file to use
 
 		It depends on whether the user has set a cookie or not using
-		the account page or the left-hand nav or how their browser is 
+		the account page or the left-hand nav or how their browser is
 		set or whether they are logged in or not
 
 		if logged in, use language from users table

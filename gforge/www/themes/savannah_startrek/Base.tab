@@ -1,0 +1,14 @@
+#
+# Savannah-theme specific strings
+#
+# $Id$
+menu	logged_in_as	Logged in as $1
+menu	hosted_projects_list	Hosted Projects List
+menu	admin_main_page	Main Page
+menu	admin_group_type_admin	Group Type Admin
+menu	admin_group_list	Group Admin
+menu	admin_user_list	User Admin
+menu	admin_pending_projects	Pending Projects
+menu	admin_news_approval	Site News Approval
+menu	admin_mass_mail	Mass Mail
+menu	admin_people_help_admin	People Help Admin

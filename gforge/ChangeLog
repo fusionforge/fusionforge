@@ -1,5 +1,17 @@
 2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/languages/Base.tab: move Savannah-specific strings
+	into their own .tab files.
+
+	* www/include/languages/Spanish.tab: ditto.
+
+	* www/themes/savannah_*/{Base,Spanish}.tab: new files with
+	Savannah-specific strings.
+
+	* www/include/BaseLanguage.class(loadLanguage): allow
+	customisations of strings on a per-theme basis.
+	(loadLanguageFile): implement "include" functionality.
+
 	* www/survey/survey_resp.php: Audit: escape special characters
 	from user input before submitting to database.
 
