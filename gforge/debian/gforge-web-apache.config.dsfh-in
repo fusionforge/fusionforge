@@ -13,6 +13,7 @@ init_debconf_from_mainconffile
 
 #DSFHELPER:host-variables#
 #DSFHELPER:common-variables#
+#DSFHELPER:web-variables#
 # [Disabled] DSFHELPER:cvshost-variables#
 # [Disabled] DSFHELPER:users-variables#
 # [Disabled] DSFHELPER:lists-variables#

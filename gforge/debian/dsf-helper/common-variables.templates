@@ -24,21 +24,3 @@ Description: The Gforge system name
  This name is used in various places throughout the system.
 Description-fr_FR.UTF-8: Nom de votre système Gforge
  Ce nom est utilisé à divers endroits au travers du système.
-
-Template: gforge/shared/sys_lang
-Type: string
-Default: English
-Default-fr_FR.UTF-8: French
-Description: Default language
- Here is the default language for web pages, be carreful to enter a valid language.
-Description-fr_FR.UTF-8: Langage par défaut
- Ceci est le langage par défaut des pages web, attention de bien entrer une langue valide.
-
-Template: gforge/shared/sys_theme
-Type: string
-Default: debian
-Default-fr_FR.UTF-8: debian
-Description: Default theme
- Here is the default theme for web pages, be carreful to enter a valid name.
-Description-fr_FR.UTF-8: Thème par défaut
- Ceci est le thème par défaut des pages web, attention de bien entrer un nom valide.

@@ -25,3 +25,21 @@ Default: 4
 Default-fr_FR.UTF-8: 4
 Description: The peer rating admin group id
 Description-fr_FR.UTF-8: Le numéro du groupe d'administration des notations
+
+Template: gforge/shared/sys_lang
+Type: string
+Default: English
+Default-fr_FR.UTF-8: French
+Description: Default language
+ Here is the default language for web pages, be carreful to enter a valid language.
+Description-fr_FR.UTF-8: Langage par défaut
+ Ceci est le langage par défaut des pages web, attention de bien entrer une langue valide.
+
+Template: gforge/shared/sys_theme
+Type: string
+Default: debian
+Default-fr_FR.UTF-8: debian
+Description: Default theme
+ Here is the default theme for web pages, be carreful to enter a valid name.
+Description-fr_FR.UTF-8: Thème par défaut
+ Ceci est le thème par défaut des pages web, attention de bien entrer un nom valide.

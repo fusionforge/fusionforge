@@ -25,26 +25,11 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
 	adduser --system --group --home /var/www/gforge gforge > /dev/null 2>&1
 	[ ! -f /var/lib/gforge/reowned ] && find /var/lib/gforge/ -user sourceforge -exec chown gforge {} \; && find /var/lib/gforge/ -group sourceforge -exec chgrp gforge {} \; && touch /var/lib/gforge/reowned
 	
-	if [ -c /dev/urandom ]; then  # ...using /dev/urandom when possible
-	    sys_session_key=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-32)
-	else			# ...or something else if need be.
-	    # Last I was told, the Hurd had no /dev/urandom
-	    # (Correct me if it has changed)
-	    # Suggestions form something more random than $(date) are welcome
-	    tmp=$(date | md5sum | cut -b1-8)
-	fi
-
-	add_onevar_mainconfile default_trove_cat 18
-	add_onevar_mainconfile sys_show_source 0
-	add_onevar_mainconfile newsadmin_groupid 2
-	add_onevar_mainconfile sys_session_key $sys_session_key
-
 	/usr/sbin/gforge-config
     ;;
 
