@@ -1,4 +1,4 @@
-gforge (3.1-4+6) unstable; urgency=low
+gforge (3.1-4+7) unstable; urgency=low
 
   * [Roland] Tightened the versioned dependency on Apache so that we can
     rely on modules-config (closes: #220872).
@@ -19,7 +19,7 @@ gforge (3.1-4+6) unstable; urgency=low
   * [Roland] Added "--encoding=UNICODE" to the restore action of
     install-db.sh.
 
- -- Roland Mas <lolando@debian.org>  Sun, 23 Nov 2003 15:01:46 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 12 Dec 2003 00:01:42 +0100
 
 gforge (3.1-4) unstable; urgency=low
 
