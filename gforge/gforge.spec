@@ -212,17 +212,17 @@ if [ "$1" -eq "1" ]; then
 	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1
 	
 	# creating the database
-	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl >/dev/null 2>&1"
+	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl 2>&1" | grep -v ^NOTICE
 	su -l postgres -c "psql -c 'UPDATE groups SET register_time=EXTRACT(EPOCH FROM NOW());' %{dbname} >/dev/null 2>&1"
 	%changepassword $SITEADMIN_PASSWORD
 
 	service httpd graceful >/dev/null 2>&1
 else
 	# upgrading database
-	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl >/dev/null 2>&1"
+	su -l %{gfuser} -c "%{_libdir}/gforge/bin/db-upgrade.pl 2>&1" | grep -v ^NOTICE
 
 	# updating configuration
-	cd %{_datadir}/gforge && ./setup -confdir %{_sysconfdir}/gforge/ -input %{_sysconfdir}/gforge/gforge.conf -noapache >/dev/null 2>&1 || :
+	%{_sbindir}/gforge-config || :
 fi
 
 %postun
@@ -268,6 +268,7 @@ fi
 * Thu Mar 03 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - removed useless stuff thanks to Christian's work on db-upgrade.pl
 - s/refresh.sh/gforge-config to improve consistency with debian packaging
+- it's better to display the output of db-upgrade.pl
 * Sun Feb 20 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - added a dependency on gforge-lib-jpgraph
 - added gforge-4.1-project_task_sql.patch
