@@ -264,8 +264,3 @@ group_artifact_id int not null,
 count int not null
 );
 CREATE INDEX artifactcountsagg_groupartid ON artifact_counts_agg(group_artifact_id);
-
-GRANT SELECT ON 
-artifact,
-artifact_group_list
-TO stats;

@@ -57,6 +57,7 @@ UPDATE bug SET status_id=2 WHERE status_id=3;
 DELETE FROM bug_status WHERE status_id=3;
 
 UPDATE bug SET close_date=0 WHERE close_date is NULL;
+UPDATE bug SET summary=0 WHERE summary is NULL;
 
 INSERT INTO artifact 
 (artifact_id,group_artifact_id,status_id,category_id,artifact_group_id,priority,
