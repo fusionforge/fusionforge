@@ -3093,8 +3093,8 @@ COPY "group_type"  FROM stdin;
 --CB \.
 COPY "groups"  FROM stdin;
 1	Master Group	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
-2	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
-3	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
+2	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
+3	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
 4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	1	\N	1	1	1	1	1	1		0	1
 \.
 --
