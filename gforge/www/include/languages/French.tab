@@ -88,12 +88,15 @@ account_lostpw	title	Perdu votre mot de passe ?
 account_lostpw	user_dont_exist	Cet utilisateur n'existe pas.
 account_lostpw	warn	<p>Perdre son mot de passe n'est pas sans conséquence. Cela compromet la sécurité de votre compte, de vos projets et de ce site.</p><p>Cliquer sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous déclenchera l'envoi d'une URL à l'adresse que vous nous avez fournie. Celle-ci contient une clé de confirmation de 128 bits pour votre compte. An allant à cette URL, vous pourrez changer votre mot de passe en ligne et vous connecter.</p>
 account_options	address		Adresse complète :
+account_options	ccode	Indicatif du pays :
 account_options	change_email_address	Modifier mon adresse e-mail
 account_options	change_password	Modifier mon mot de passe
 account_options	edit_skills_profile	Éditer mon profil de compétences
 account_options	email_address	Adresse e-mail :
 account_options	fax		Fax :
+account_options	firstname	Prénom :
 account_options	language	Langue :
+account_options	lastname	Nom de famille :
 account_options	login_name	Identifiant :
 account_options	member_since	Membre depuis le :
 account_options	phone		Téléphone :
@@ -107,10 +110,13 @@ account_options	welcome	Bienvenue
 account_register	Preferences	Préférences
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <i>(Faible trafic)</i>
 account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.</p><p>Vous allez recevoir un courrier électronique de confirmation pour vérifier votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer votre compte.</p>
+account_register	country	Pays :
 account_register	emailaddr	Adresse e-mail : <span><font color="red">*</font></span><br /><i>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Une adresse de la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse vous sera attribuée.</i>
 account_register	err_badinsert	L'insertion a échouée.
 account_register	err_email	Adresse e-mail non valide
+account_register	err_firstname	Vous devez saisir votre prénom
 account_register	err_jabber	Adresse Jabber non valide
+account_register	err_lastname	Vous devez saisir votre nom de famille
 account_register	err_mailexist	Un utilisateur avec cette adresse existe déjà : utilisez la recherche des utilisateurs pour retrouver votre login.
 account_register	err_passwd	Vous devez fournir un mot de passe
 account_register	err_passwd2	Les mots de passe ne concordent pas
@@ -119,9 +125,11 @@ account_register	err_realname	Vous devez entrer votre nom complet
 account_register	err_unixname	Nom unix non valide
 account_register	err_userexist	Ce nom d'utilisateur existe déjà.
 account_register	err_username	Vous devez fournir un nom d'utilisateur
+account_register	firstname	Prénom :
 account_register	jabberaddr	Adresse Jabber :
 account_register	jabberonly	N'envoyer les notifications automatiques qu'à mon adresse Jabber
 account_register	language	Langue :
+account_register	lastname	Nom de famille :
 account_register	loginname	Nom du compte (ne pas utiliser de majuscules) :
 account_register	mandatory	Les champs suffixés de $1 sont obligatoires.
 account_register	message_body	Merci de vous être enregistré sur le site $4. \nVous avez maintenant un compte du nom de $1. \nPour terminer votre inscription, suivez le lien : \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n (Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un bogue de votre client de messagerie.\nUtilisez le lien ci-dessous en prenant garde qu'il soit entré sur une seule ligne)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nProfitez du site.\n\n-- L'équipe de $4\n

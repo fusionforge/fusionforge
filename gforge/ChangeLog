@@ -6,6 +6,7 @@
 	modified version of deb-specific/tarballs.sh (not added yet in README.root)
 	* added $sys_cvs_tarballs_path in config to make tarballs generation and
 	download work in mainstream
+	* updated French localization
 
 2004-03-24  Guillaume Smet <guillaume-gforge@smet.org>
 
