@@ -19,8 +19,10 @@ sourceforge (2.5-29+) unstable; urgency=low
   * [Soon-Son] i18n patch for *many* pages (not all yet)
   * [Soon-Son] removed "sourceforge.net" & "VA linux" specific pages
     like .../contest/*, .../mirrors/* and simplified/generalized footer
+  * [Roland] Fixed search results page for Software/Group: the link was
+    wrong in the case of foundries.
 
- -- Roland Mas <lolando@debian.org>  Thu, 30 May 2002 17:27:18 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 14 Jun 2002 13:40:09 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 

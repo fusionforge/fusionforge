@@ -88,7 +88,7 @@ if ($type_of_search == "soft") {
 	$words3=implode($array,"%' $crit unix_group_name ILIKE '%");
 
         if (!$rss) {
-		$sql = "SELECT group_name,unix_group_name,group_id,short_description "
+		$sql = "SELECT group_name,unix_group_name,group_id,short_description,type "
 		       ."FROM groups "
 		       ."WHERE status='A' AND is_public='1' AND ((group_name ILIKE '%$words1%') OR (short_description ILIKE '%$words2%') OR (unix_group_name ILIKE '%$words3%'))";
 	} else {
@@ -160,8 +160,13 @@ if ($type_of_search == "soft") {
 		echo "\n";
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/projects/"
-                                .db_result($result, $i, 'unix_group_name')."/\">"
+			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/" ;
+			if ( db_result($result, $i, 'type') == 1) {
+				print "projects" ;
+			} else {
+				print "foundry" ;
+			}
+			print "/" . db_result($result, $i, 'unix_group_name')."/\">"
 				. html_image("images/msg.gif","10","12",array("BORDER"=>"0")) 
 				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
 				. "<TD>".highlight_target_words($array,db_result($result,$i,'short_description'))."</TD></TR>\n";
