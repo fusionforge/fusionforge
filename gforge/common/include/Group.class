@@ -1244,6 +1244,7 @@ class Group extends Error {
 		if (user_getid() == $user_id) {
 			$admin_flags='A';
 		}
+		$release_flags = ((!$release_flags) ? "0" : $release_flags);
 
 		db_begin();
 		$res = db_query("UPDATE user_group SET
