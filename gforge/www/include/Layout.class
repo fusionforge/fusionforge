@@ -181,8 +181,8 @@ class Layout extends Error {
 
 	pre,tt { font-family: courier,sans-serif }
 
-	a:link { text-decoration:none }
-	a:visited { text-decoration:none }
+	a:link { text-decoration:none; color: #0000be }
+	a:visited { text-decoration:none; color: #0000be }
 	a:active { text-decoration:none }
 	a:hover { text-decoration:underline; color:red }
 
@@ -190,9 +190,9 @@ class Layout extends Error {
 	a.tablink { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	a.tablink:visited { color: black; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	a.tablink:hover { text-decoration: none; color: black; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink { color: #00007e; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink:visited { color: #00007e; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
-	a.tabsellink:hover { text-decoration: none; color: #00007e; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	a.tabsellink { color: #0000be; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	a.tabsellink:visited { color: #0000be; text-decoration: none; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	a.tabsellink:hover { text-decoration: none; color: #0000be; font-weight: bold; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	<?php plugin_hook ("cssstyle",$this) ; ?>
 	-->
 </style>
@@ -680,10 +680,12 @@ if (isset($params['group']) && $params['group']) {
 				$wassel=false;
 				$issel=($selected==$i);
 				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
+		//		$rowspan=(($issel)?'rowspan="2" ' : '');
+
 				$return .= '
-					<td rowspan="2" valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png">'.
+					<td '.$rowspan.'valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-end-'.(($issel) ? '' : 'not').'selected.png">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="25" width="10" alt="" /></td>'.
-						'<td background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 			} elseif ($i==$count-1) {
 				//
 				//	this is the last tab, choose an image with name-end
@@ -691,18 +693,19 @@ if (isset($params['group']) && $params['group']) {
 				$wassel=($selected==$i-1);
 				$issel=($selected==$i);
 				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
+		//		$rowspan=(($issel)?'rowspan="2" ' : '');
 				//
 				//	Build image between current and prior tab
 				//
 				$return .= '
-					<td rowspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
+					<td '.$rowspan.'colspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 				//
 				//	Last graphic on right-side
 				//
 				$return .= '
-					<td rowspan="2" valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png">'.
+					<td '.$rowspan.'valign="top" width="10" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($issel) ? '' : 'not').'selected-end.png">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="10" alt="" /></td>';
 
 			} else {
@@ -712,16 +715,43 @@ if (isset($params['group']) && $params['group']) {
 				$wassel=($selected==$i-1);
 				$issel=($selected==$i);
 				$bgimg=(($issel)?'theme-'.$inner.'-selected-bg.png':'theme-'.$inner.'-notselected-bg.png');
+		//		$rowspan=(($issel)?'rowspan="2" ' : '');
 				//
 				//	Build image between current and prior tab
 				//
 				$return .= '
-					<td rowspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
+					<td '.$rowspan.'colspan="2" valign="top" width="20" background="'.$this->imgroot . 'theme-'.$inner.'-'.(($wassel) ? '' : 'not').'selected-'.(($issel) ? '' : 'not').'selected.png">'.
 						'<img src="'.$this->imgroot . 'clear.png" height="2" width="20" alt="" /></td>'.
-						'<td background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
+						'<td '.$rowspan.'background="'.$this->imgroot . $bgimg.'" width="'.$width.'%" align="center"><a class="'. (($issel)?'tabsellink':'tablink') .'" href="'.$TABS_DIRS[$i].'">'.$TABS_TITLES[$i].'</a></td>';
 
 			}
 		}
+		$return .= '</tr>';
+
+		//
+		//	Building a bottom row in this table, which will be darker
+		//
+		if ($selected == 0) {
+			$beg_cols=0;
+			$end_cols=((count($TABS_DIRS)*3)-3);
+		} elseif ($selected == (count($TABS_DIRS)-1)) {
+			$beg_cols=((count($TABS_DIRS)*3)-3);
+			$end_cols=0;
+		} else {
+			$beg_cols=($selected*3);
+			$end_cols=(((count($TABS_DIRS)*3)-3)-$beg_cols);
+		}
+		$return .= '<tr>';
+		if ($beg_cols > 0) {
+			$return .= '<td colspan="'.$beg_cols.'" height="1" bgcolor="#909090"><img src="'.$this->imgroot.'clear.png" height="1" width="10"></td>';
+		}
+		$return .= '<td colspan="3" height="1" bgcolor="'.$sel_tab_bgcolor.'"><img src="'.$this->imgroot.'clear.png" height="1" width="10"></td>';
+		if ($end_cols > 0) {
+			$return .= '<td colspan="'.$end_cols.'" height="1" bgcolor="#909090"><img src="'.$this->imgroot.'clear.png" height="1" width="10"></td>';
+		}
+		$return .= '</tr>';
+
+
 /*
 			$bgcolor=(($selected==$i)?$light:$dark);
 			$imgcolor=(($selected==$i)?'':'-dark');
@@ -756,7 +786,10 @@ if (isset($params['group']) && $params['group']) {
 */
 		return $return.'
 		</tr>
-		</table>';
+		</table> 
+
+		<!-- end tabs -->
+';
 	}
 
 	function searchBox() {
