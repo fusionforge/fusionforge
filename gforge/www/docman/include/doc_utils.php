@@ -35,7 +35,7 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 
 function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='xyz') {
 	
-	global $group_id, $Language, $sys_use_docman;
+	global $group_id, $Language, $HTML, $sys_use_docman;
 
 	if (!$sys_use_docman) {
 		exit_disabled();
@@ -52,9 +52,20 @@ function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='
 
 	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman','pagename'=>$pagename,'titlevals'=>array($titleval),'sectionvals'=>array($sectionval)));
 
-	print "<p><strong><a href=\"/docman/new.php?group_id=".$group_id."\">".$Language->getText('docman','submit_new')."</a> | ".
-		"<a href=\"/docman/index.php?group_id=".$group_id."\">".$Language->getText('docman','view_doc')."</a> | ".
-		"<a href=\"/docman/admin/index.php?group_id=".$group_id."\">".$Language->getText('docman','admin')."</a></strong></p>";
+	echo ($HTML->subMenu(
+		array(
+			$Language->getText('group','short_docman'),
+			$Language->getText('docman','submit_new'),
+			$Language->getText('docman','view_doc'),
+			$Language->getText('docman','admin')
+		),
+		array(
+			'/docman/?group_id='.$group_id,
+			'/docman/new.php?group_id='.$group_id,
+			'/docman/index.php?group_id='.$group_id,
+			'/docman/admin/index.php?group_id='.$group_id
+		)
+	));
 }
 
 function doc_droplist_count($l_group_id, $language_id, $g) {
