@@ -184,8 +184,8 @@ if ($type_of_search == "soft") {
 //		echo $sql;
 	} else {
 
-		if ( $rows_returned > 25) {
-			$rows = 25;
+		if ( $rows_returned > $limit) {
+			$rows = $limit;
 		}
 
 		echo "<h3>Search results for $words</h3><p>\n\n";

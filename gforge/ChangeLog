@@ -1,3 +1,8 @@
+2003-08-08 Tom Copeland  <tom@infoether.com>
+
+	* www/search/index.php:
+	Fixed bug [ #477 ] www/search/index.php ignores $limit
+
 2003-08-05 Tom Copeland  <tom@infoether.com>
 
 	* cronjobs/cvs-cron/history_parse.php:
