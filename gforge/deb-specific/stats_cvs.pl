@@ -25,13 +25,9 @@ $|=0 if $verbose;
 $|++;
 
 sub drop_tables {
-	my ($sql);
-	$sql = "DROP TABLE deb_cvs_dump";
-	$dbh->do( $sql );
-	$sql = "DROP TABLE deb_cvs_group";
-	$dbh->do( $sql );
-	$sql = "DROP TABLE deb_cvs_group_user";
-	$dbh->do( $sql );
+    db_drop_table_if_exists ("deb_cvs_dump") ;
+    db_drop_table_if_exists ("deb_cvs_group") ;
+    db_drop_table_if_exists ("deb_cvs_group_user") ;
 }
 
 sub create_dump_table {
@@ -162,4 +158,5 @@ sub print_stats {
 &dump_history;
 &parse_history;
 &print_stats;
+&drop_tables;
 
