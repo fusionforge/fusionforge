@@ -114,25 +114,25 @@ $server->register(
 
 $server->register(
 	'bugFetch',
-	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string','bugid'=>'xsd:string'),
+	array('sessionkey'=>'xsd:string','project'=>'xsd:string','bugid'=>'xsd:string'),
 	array('bugFetchResponse'=>'tns:Bug'),
 	$uri);
 
 $server->register(
 	'bugList',
-	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string'),
+	array('sessionkey'=>'xsd:string','project'=>'xsd:string'),
 	array('bugListResponse'=>'tns:ArrayOfstring'),
 	$uri);
 
 $server->register(
 	'bugAdd',
-	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string','summary'=>'xsd:string','details'=>'xsd:string'),
+	array('sessionkey'=>'xsd:string','project'=>'xsd:string','summary'=>'xsd:string','details'=>'xsd:string'),
 	array('bugAddResponse'=>'xsd:string'),
 	$uri);
 
 $server->register(
 	'bugUpdate',
-	array('sessionkey'=>'xsd:string','groupid'=>'xsd:string','bugid'=>'xsd:string','comment'=>'xsd:string'),
+	array('sessionkey'=>'xsd:string','project'=>'xsd:string','bugid'=>'xsd:string','comment'=>'xsd:string'),
 	array('bugUpdateResponse'=>'xsd:string'),
 	$uri);
 
@@ -214,12 +214,12 @@ function logout($sessionkey) {
  * bugList - Lists all open bugs for a project
  * 
  * @param	string	sessionkey	The current session key
- * @param	string 	groupid		The project that the bug is in
+ * @param	string 	project		The project that the bug is in
  */
-function bugList($sessionkey, $groupid) {
+function bugList($sessionkey, $project) {
         continueSession($sessionkey);
 
-        $group =& group_get_object($groupid);
+        $group =& group_get_object_by_name($project);
         if (!$group) {
                 return new soapval('tns:soapVal','string',"Couldn't create group");
         }
@@ -235,7 +235,7 @@ function bugList($sessionkey, $groupid) {
     		return new soapval('tns:soapVal','string',"Couldn't create ArtifactFactory: ".$af->getErrorMessage());
 	}
 	
-	$af->setup('','','','','',0,1,'',$groupid);
+	$af->setup('','','','','',0,1,'',$group->getID());
 	$art_arr =& $af->getArtifacts();
 
 	$result = array();
@@ -247,10 +247,10 @@ function bugList($sessionkey, $groupid) {
     	#return new soapval('tns:Bug','Bug', $inner_result);
 }
 
-function bugFetch($sessionkey, $groupid, $bugid) {
+function bugFetch($sessionkey, $project, $bugid) {
         continueSession($sessionkey);
 
-        $group =& group_get_object($groupid);
+        $group =& group_get_object_by_name($project);
         if (!$group) {
                 return new soapval('tns:soapVal','string',"Couldn't create group");
         }
@@ -277,14 +277,14 @@ function bugFetch($sessionkey, $groupid, $bugid) {
  * bugUpdate - Update a bug
  *
  * @param	string	sessionkey	The current session key
- * @param	string 	groupid		The group id that the bug is in
+ * @param	string 	project		The project that the bug is in
  * @param	string	bugid		The bug id to be updated
  * @param	string	comment		The comment to add
  */
-function bugUpdate($sessionkey, $groupid, $bugid, $comment) {
+function bugUpdate($sessionkey, $project, $bugid, $comment) {
 	continueSession($sessionkey);
 
-	$group =& group_get_object($groupid);
+	$group =& group_get_object_by_name($project);
 	if (!$group) {
     		return new soapval('tns:soapVal','string',"Couldn't create group");
 	}
@@ -320,16 +320,16 @@ function bugUpdate($sessionkey, $groupid, $bugid, $comment) {
  * bugAdd - Add a new bug
  *
  * @param	string	sessionkey	The current session key
- * @param	string 	groupid		The group id that the bug is in
+ * @param	string 	project		The project that the bug is in
  * @param 	string	summary		The bug summary
  * @param 	string	details		The bug details
  */
-function bugAdd($sessionkey, $groupid, $summary, $details) {
+function bugAdd($sessionkey, $project, $summary, $details) {
 	continueSession($sessionkey);
 	
-	$group =& group_get_object($groupid);
+	$group =& group_get_object_by_name($project);
 	if (!$group) {
-    		return new soapval('tns:soapVal','string',"Couldn't create group using id ".$groupid);
+    		return new soapval('tns:soapVal','string',"Couldn't find a project named ".$project);
 	}
 
 	$atf = new ArtifactTypeFactory($group);

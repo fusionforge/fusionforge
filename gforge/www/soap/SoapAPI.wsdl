@@ -65,7 +65,7 @@
 
 <message name="bugFetch">
         <part name="sessionkey" type="xsd:string" />
-        <part name="groupid" type="xsd:string" />
+        <part name="project" type="xsd:string" />
         <part name="bugid" type="xsd:string" />
     </message>
     <message name="bugFetchResponse">
@@ -74,7 +74,7 @@
 
 <message name="bugList">
         <part name="sessionkey" type="xsd:string" />
-        <part name="groupid" type="xsd:string" />
+        <part name="project" type="xsd:string" />
     </message>
     <message name="bugListResponse">
         <part name="bug" type="tns:ArrayOfBug" />
@@ -82,7 +82,7 @@
 
 <message name="bugAdd">
         <part name="sessionkey" type="xsd:string" />
-        <part name="groupid" type="xsd:string" />
+        <part name="project" type="xsd:string" />
         <part name="summary" type="xsd:string" />
         <part name="details" type="xsd:string" />
     </message>
@@ -92,7 +92,7 @@
 
 <message name="bugUpdate">
         <part name="sessionkey" type="xsd:string" />
-        <part name="groupid" type="xsd:string" />
+        <part name="project" type="xsd:string" />
         <part name="bugid" type="xsd:string" />
         <part name="comment" type="xsd:string" />
     </message>

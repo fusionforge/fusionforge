@@ -11,29 +11,29 @@ soapClient.addMethod( 'login', 'userid', 'passwd')
 soapClient.addMethod( 'logout', 'sessionkey')
 
 # set up bug operations
-soapClient.addMethod( 'bugList', 'sessionkey', 'groupid')
-soapClient.addMethod( 'bugFetch', 'sessionkey', 'groupid', 'bugid')
-soapClient.addMethod( 'bugAdd', 'sessionkey', 'groupid', 'summary', 'details')
-soapClient.addMethod( 'bugUpdate', 'sessionkey', 'groupid', 'bugid', 'comment')
+soapClient.addMethod( 'bugList', 'sessionkey', 'project')
+soapClient.addMethod( 'bugFetch', 'sessionkey', 'project', 'bugid')
+soapClient.addMethod( 'bugAdd', 'sessionkey', 'project', 'summary', 'details')
+soapClient.addMethod( 'bugUpdate', 'sessionkey', 'project', 'bugid', 'comment')
 
 func = ARGV.shift
 
 if (func == "add") 
  sessionKey = soapClient.login("tom", "tomtom") 
- soapClient.bugAdd(sessionKey, "18", "a summary", "a comment")
+ soapClient.bugAdd(sessionKey, "othello", "a summary", "a comment")
  soapClient.logout(sessionKey) 
 elsif (func == "update") 
  sessionKey = soapClient.login("tom", "tomtom") 
- soapClient.bugUpdate(sessionKey, "18", "16", "Bizbuz")
+ soapClient.bugUpdate(sessionKey, "othello", "16", "Bizbuz")
  soapClient.logout(sessionKey) 
 elsif (func == "log")
  soapClient.login("tom", "tomtom") 
  soapClient.logout(sessionKey) 
 elsif (func == "list")
  sessionKey = soapClient.login("tom", "tomtom") 
- bugs= soapClient.bugList(sessionKey, "18")
+ bugs= soapClient.bugList(sessionKey, "othello")
  bugs.each {|bugid|
-  bug = soapClient.bugFetch(sessionKey, "18", bugid)
+  bug = soapClient.bugFetch(sessionKey, "othello", bugid)
   puts bug.summary
   puts bugid
  }
