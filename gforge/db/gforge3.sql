@@ -238,7 +238,7 @@ CREATE TABLE "group_history" (
 	"field_name" text DEFAULT '' NOT NULL,
 	"old_value" text DEFAULT '' NOT NULL,
 	"mod_by" integer DEFAULT '0' NOT NULL,
-	"date" integer,
+	"adddate" integer,
 	Constraint "group_history_pkey" Primary Key ("group_history_id")
 );
 
@@ -320,7 +320,7 @@ CREATE TABLE "news_bytes" (
 	"group_id" integer DEFAULT '0' NOT NULL,
 	"submitted_by" integer DEFAULT '0' NOT NULL,
 	"is_approved" integer DEFAULT '0' NOT NULL,
-	"date" integer DEFAULT '0' NOT NULL,
+	"post_date" integer DEFAULT '0' NOT NULL,
 	"forum_id" integer DEFAULT '0' NOT NULL,
 	"summary" text,
 	"details" text,
@@ -337,7 +337,7 @@ CREATE TABLE "people_job" (
 	"created_by" integer DEFAULT '0' NOT NULL,
 	"title" text,
 	"description" text,
-	"date" integer DEFAULT '0' NOT NULL,
+	"post_date" integer DEFAULT '0' NOT NULL,
 	"status_id" integer DEFAULT '0' NOT NULL,
 	"category_id" integer DEFAULT '0' NOT NULL,
 	Constraint "people_job_pkey" Primary Key ("job_id")
@@ -592,7 +592,7 @@ CREATE TABLE "snippet_package_version" (
 	"changes" text,
 	"version" text,
 	"submitted_by" integer DEFAULT '0' NOT NULL,
-	"date" integer DEFAULT '0' NOT NULL,
+	"post_date" integer DEFAULT '0' NOT NULL,
 	Constraint "snippet_package_version_pkey" Primary Key ("snippet_package_version_id")
 );
 
@@ -606,7 +606,7 @@ CREATE TABLE "snippet_version" (
 	"changes" text,
 	"version" text,
 	"submitted_by" integer DEFAULT '0' NOT NULL,
-	"date" integer DEFAULT '0' NOT NULL,
+	"post_date" integer DEFAULT '0' NOT NULL,
 	"code" text,
 	Constraint "snippet_version_pkey" Primary Key ("snippet_version_id")
 );
@@ -659,7 +659,7 @@ CREATE TABLE "survey_rating_response" (
 	"type" integer DEFAULT '0' NOT NULL,
 	"id" integer DEFAULT '0' NOT NULL,
 	"response" integer DEFAULT '0' NOT NULL,
-	"date" integer DEFAULT '0' NOT NULL
+	"post_date" integer DEFAULT '0' NOT NULL
 );
 
 
@@ -669,7 +669,7 @@ CREATE TABLE "survey_responses" (
 	"survey_id" integer DEFAULT '0' NOT NULL,
 	"question_id" integer DEFAULT '0' NOT NULL,
 	"response" text DEFAULT '' NOT NULL,
-	"date" integer DEFAULT '0' NOT NULL
+	"post_date" integer DEFAULT '0' NOT NULL
 );
 
 
@@ -1511,12 +1511,6 @@ CREATE TABLE "supported_languages" (
 );
 
 
-CREATE VIEW "forum_user_vw" as SELECT forum.msg_id, forum.group_forum_id, forum.posted_by, forum.subject, forum.body, forum.date, forum.is_followup_to, forum.thread_id, forum.has_followups, forum.most_recent_date, users.user_name, users.realname FROM forum, users WHERE (forum.posted_by = users.user_id);
-
-
-CREATE VIEW "forum_group_list_vw" as SELECT forum_group_list.group_forum_id, forum_group_list.group_id, forum_group_list.forum_name, forum_group_list.is_public, forum_group_list.description, forum_group_list.allow_anonymous, forum_group_list.send_all_posts_to, forum_agg_msg_count.count AS total, (SELECT max(forum.date) AS recent FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent, (SELECT count(*) AS count FROM (SELECT forum.thread_id FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id) GROUP BY forum.thread_id) tmp) AS threads FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
-
-
 CREATE SEQUENCE "skills_data_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
 
 
@@ -1856,6 +1850,12 @@ CREATE TABLE "cron_history" (
 
 
 CREATE VIEW "artifact_vw" as SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name, CASE WHEN (max(artifact_history.entrydate) IS NOT NULL) THEN max(artifact_history.entrydate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::int4 END AS update_date, CASE WHEN (max(artifact_message.adddate) IS NOT NULL) THEN max(artifact_message.adddate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::int4 END AS message_date FROM users u, users u2, artifact_status, artifact_category, artifact_group, artifact_resolution, ((artifact LEFT JOIN artifact_history ON ((artifact.artifact_id = artifact_history.artifact_id))) LEFT JOIN artifact_message ON ((artifact.artifact_id = artifact_message.artifact_id))) WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id)) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name, u.realname, u.email, u2.user_name, u2.realname, u2.email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name;
+
+
+CREATE VIEW "forum_group_list_vw" as SELECT forum_group_list.group_forum_id, forum_group_list.group_id, forum_group_list.forum_name, forum_group_list.is_public, forum_group_list.description, forum_group_list.allow_anonymous, forum_group_list.send_all_posts_to, forum_agg_msg_count.count AS total, (SELECT max(forum.post_date) AS recent FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent, (SELECT count(*) AS count FROM (SELECT forum.thread_id FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id) GROUP BY forum.thread_id) tmp) AS threads FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
+
+
+CREATE VIEW "forum_user_vw" as SELECT forum.msg_id, forum.group_forum_id, forum.posted_by, forum.subject, forum.body, forum.post_date, forum.is_followup_to, forum.thread_id, forum.has_followups, forum.most_recent_date, users.user_name, users.realname FROM forum, users WHERE (forum.posted_by = users.user_id);
 
 
 
@@ -2820,10 +2820,10 @@ CREATE INDEX news_bytes_approved ON news_bytes USING btree (is_approved);
 CREATE INDEX news_bytes_forum ON news_bytes USING btree (forum_id);
 
 
-CREATE INDEX news_group_date ON news_bytes USING btree (group_id, date);
+CREATE INDEX news_group_date ON news_bytes USING btree (group_id, post_date);
 
 
-CREATE INDEX news_approved_date ON news_bytes USING btree (is_approved, date);
+CREATE INDEX news_approved_date ON news_bytes USING btree (is_approved, post_date);
 
 
 CREATE INDEX people_job_group_id ON people_job USING btree (group_id);
