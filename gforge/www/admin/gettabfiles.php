@@ -13,7 +13,8 @@ require_once('www/include/BaseLanguage.class');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-//header('Content-Type: text/plain');
+header('Content-Type: application/octet-stream');
+header("Content-Disposition: attachment; filename=$lang.tab");
 
 $result=db_query("SELECT * from tmp_lang WHERE language_id='".$lang."' AND tmpid!='-1' ORDER BY seq");
 for ($i=0; $i<db_numrows($result) ; $i++) {
