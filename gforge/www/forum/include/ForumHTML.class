@@ -299,10 +299,10 @@ class ForumHTML extends Error {
 			<input type="hidden" name="is_followup_to" value="<?php echo $is_followup_to; ?>">
 			<table>
 			<tr>
-			<td><strong><?php echo $Language->getText('forum_utils','subject'); echo utils_requiredField(); ?></strong><br />
+			<td><strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="TEXT" name="subject" value="<?php echo $subject; ?>" SIZE="45" MAXLENGTH="45">
 			</td></tr>
-			<tr><td><strong><?php echo $Language->getText('forum_utils','message'); echo utils_requiredField(); ?></strong><br />
+			<tr><td><strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<textarea name="body" value="" ROWS="10" COLS="50" WRAP="SOFT"></textarea>
 			</td></tr>
 			<tr><td align="MIDDLE">

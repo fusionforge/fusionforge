@@ -48,12 +48,12 @@ $ath->header(array ('title'=>'Submit','pagename'=>'tracker_add','sectionvals'=>a
 		echo '</td></tr>';
 	}
 	?>
-	<tr><td colspan="2"><strong>Summary: <?php echo utils_requiredField(); ?> <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
+	<tr><td colspan="2"><strong>Summary: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"></strong><?php echo utils_requiredField(); ?><strong>(?)</strong></a><br />
 		<input type="text" name="summary" size="35" maxlength="40" />
 	</td></tr>
 
 	<tr><td colspan="2">
-		<strong>Detailed Description: <?php echo utils_requiredField(); ?> </strong>
+		<strong>Detailed Description:</strong><?php echo utils_requiredField(); ?>
 		<p>
 		<textarea name="details" rows="30" cols="55" wrap="hard"></textarea></p>
 	</td></tr>
