@@ -11,6 +11,10 @@ here have been transferred onto the Savannah project, at
 
 * [CB] ViewCVS instead of CVSWEB?
 
+* [CB] When a project is private, cvsweb access should be too, this means
+  implementing access control a la sourceforge in perl for CVSWEB or python 
+  for ViewCVS. At the occasion give the sourceforge look to CVS Browsing.
+
 * [CB] Find how to use libnss-lwres.  [RM] ??? [CB] It is not doing what I 
   was thinking. It may be possible to make the dns server to use directly
   postgres-db or ldap (Look at sdb driver /usr/share/doc/bind9-doc/misc/sdb.gz )
