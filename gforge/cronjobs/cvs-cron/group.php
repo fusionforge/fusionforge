@@ -1,17 +1,20 @@
 #!/usr/bin/php
 <?php
-
+//
+//	unix_group_id is database_group_id+50000
+//
 //this reads the database and creates groups in /etc/group
 //this script must be ran before you run the add users to groups first,
-//because you need a group to be a memeber of it
+//because you need a group to be a member of it
 
 require_once('squal_pre.php');
 
 //1) read in groups from db
 $groups = array();
-$res=db_query("SELECT unix_group_name FROM groups");
+$res=db_query("SELECT group_id,unix_group_name FROM groups");
 for($i = 0; $i < db_numrows($res); $i++) {
 	$groups[] = db_result($res,$i,'unix_group_name');
+	$gids[db_result($res,$i,'unix_group_name')]=db_result($res,$i,'group_id')+50000;
 }
 
 //2) read in groups from /etc/group
@@ -49,28 +52,9 @@ foreach($groups as $group) {
 		}
 	}
 
-	$gid = random_gid(100,60000);
+	$gid = $gids[$group];
 	$writegrouptofile = "$group:x:$gid:\n";
 	fwrite($h2,$writegrouptofile);
-}
-
-function random_gid($start,$finish) {
-	global $lines;
-
-	$searching = true;
-
-	while($searching) {
-		$temp = rand($start,$finish);
-
-		foreach($lines as $line) {
-			$temp1 = explode(":",$line);
-
-			if($temp1[2] == $temp)
-				continue 2;
-		}
-
-		return $temp;
-	}
 }
 
 fclose($h2);	

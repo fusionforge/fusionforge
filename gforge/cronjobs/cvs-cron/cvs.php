@@ -24,43 +24,27 @@ if(is_dir($maincvsroot)) {
 }
 
 function addProjectRepositories() {
-	$res = db_query("select unix_group_name from groups where status='A'");
-	$activegroups = array();
+	global $maincvsroot;
+
+	$res = db_query("select group_id,unix_group_name from groups where status='A'");
 	
 	for($i = 0; $i < db_numrows($res); $i++) {
-		$activegroups[] = db_result($res,$i,'unix_group_name');
-	}
+		/*
+			Simply call cvscreate.sh
+		*/
+		if (is_dir("$maincvsroot/".db_result($res,$i,'unix_group_name'))) {
 
-	global $maincvsroot;
-	
-	$dir = opendir($maincvsroot);
-	$dirlisting = array();
+			//already exists
 
-	while (($file = readdir($dir)) !== false) {
-		$dirlisting[] = $file;
-	}  
-	
-	closedir($dir);
+		} else(is_file("$maincvsroot/".db_result($res,$i,'unix_group_name'))) {
 
-	for($i = 0; $i < count($activegroups); $i++) {
-		for($k = 0; $k < count($dirlisting); $k++) {
-			if($activegroups[$i] == $dirlisting[$k]) {
-				continue 2;
-			}	
+			echo "$maincvsroot/".db_result($res,$i,'unix_group_name')." Already Exists As A File";
+
+		} else {
+
+			system("cvscreate.sh ".db_result($res,$i,'unix_group_name')." ".(db_result($res,$i,'group_id')+50000));
+
 		}
-
-		mkdir($maincvsroot . $activegroups[$i]);
-/*
-Date: 2003-02-25 14:46
-Sender: reinhard
-Collegato: no 
-user_id=226
-
-for the chmod part:
-you can set the s flag
-(chmod -R +s /cvs/myrepository), so all files, dirs, 
-subdirectories will be created with the same permissions
-*/
 	}
 }
 
