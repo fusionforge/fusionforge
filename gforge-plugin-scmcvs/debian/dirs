@@ -21,3 +21,7 @@ usr/share/gforge
 usr/share/gforge/www
 usr/share/gforge/www/plugins
 usr/share/gforge/www/plugins/scmcvs
+var
+var/log
+var/log/gforge
+var/log/gforge/cvs

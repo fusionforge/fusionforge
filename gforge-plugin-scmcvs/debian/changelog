@@ -1,3 +1,16 @@
+gforge-plugin-scmcvs (0.1-22) unstable; urgency=low
+
+  * Added dependency on cvs.
+  * Added missing dirs.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 28 Nov 2004 15:02:23 +0100
+
+gforge-plugin-scmcvs (0.1-21) unstable; urgency=low
+
+  * Added /var/log/gforge/cvs to prevent postinst from breaking.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 23 Oct 2004 17:29:32 +0200
+
 gforge-plugin-scmcvs (0.1-20) unstable; urgency=low
 
   * CVS Tab is now commented
