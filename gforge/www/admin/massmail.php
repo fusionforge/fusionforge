@@ -38,7 +38,7 @@ print '<P><B>Mail Engine for '.$GLOBALS["sys_name"].' Subscribers (MESS)</B>
 <P>Be <FONT color=#FF0000><B>VERY</B></FONT> careful with this form,
 because sutmitting it WILL send email to lots of users.
 
-<FORM action="massmail_execute.php">
+<FORM action="massmail_execute.php" method="post">
 <INPUT type="radio" name="destination" value="comm">
 Send only to users subscribed to "Additional Community Mailings" ('
 .$count_comm
