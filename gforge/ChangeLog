@@ -1,3 +1,15 @@
+2003-07-20 Reinhard Spisser <reinhard@spisser.it>
+
+	* Italian.tab:
+		Some translations
+	* www/themes/gforge/images/it_*.png:
+		Corrected background problems
+		
+	* www/admin/index.php:
+		Added dropdown to select project status (D, P, A, H)
+	* www/include/languages/Base.tab,www/include/languages/Italian.tab
+	Changed string admin_index groups_with to admin_index groups_with_status
+
 2003-07-18 Christian Bayle	<bayle@debian.org>
 
 	* Applied patch for controlleroo.php. Bug [ #443 ]
