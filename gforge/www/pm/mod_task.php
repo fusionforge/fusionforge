@@ -26,7 +26,7 @@ if ($report->isError()) {
 }
 echo notepad_func();
 
-pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
+pm_header(array('title'=>$Language->getText('pm_modtask','title'),'group_project_id'=>$group_project_id));
 
 ?>
 

@@ -812,7 +812,7 @@ class Group extends Error {
 	 *  @return	string	The name of the unix machine for the group.
 	 */
 	function getSCMBox() {
-		if ( $GLOBALS['sys_scm_single_host'] == '1' ) {
+		if ( $GLOBALS['sys_scm_single_host'] ) {
 			return $GLOBALS['sys_scm_host'];
 		} else {
 			return $this->data_array['scm_box'];
