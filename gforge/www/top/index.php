@@ -31,7 +31,7 @@ $HTML->header(array('title'=>'Top Project Listings'));
 <LI><A href="mostactive.php"><?php echo $Language->getText('top','active_all_time'); ?></A>
 <BR>&nbsp;
 <LI><A href="toplist.php?type=downloads"><?php echo $Language->getText('top','downloads'); ?></A>
-<LI><A href="toplist.php?type=downloads_week"><?php echo $Language->getText('top','download_7_days'); ?></A>
+<LI><A href="toplist.php?type=downloads_week"><?php echo $Language->getText('top','downloads_7_days'); ?></A>
 <BR>&nbsp;
 <LI><A href="toplist.php?type=pageviews_proj"><?php echo $Language->getText('top','pageviews', $GLOBALS[sys_name]); ?>
 <BR>&nbsp;
