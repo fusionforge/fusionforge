@@ -58,7 +58,7 @@ docman_header($Language->getText('docman_display_doc','title'),$Language->getTex
 if (!$d_arr || count($d_arr) < 1) {
 	print "<strong>".$Language->getText('docman','error_no_docs')."</strong>";
 } else {
-	doc_droplist_count($group_id, $language_id);
+	doc_droplist_count($group_id, $language_id, $g);
 
 	print "\n<ul>";
 	for ($i=0; $i<count($d_arr); $i++) {
