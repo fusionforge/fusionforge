@@ -1,3 +1,8 @@
+2003-10-08 Tom Copeland  <tom@infoether.com>
+
+	* www/mail/admin/index.php:
+	Fixed bug [ #538 ] Password not sent for new mailing-lists
+
 2003-10-05  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/French.tab: Fixed truncated about_blurb on
