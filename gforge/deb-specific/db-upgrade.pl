@@ -2048,9 +2048,29 @@ $dbh->{RaiseError} = 1;
         &debug ("Committing.") ;
         $dbh->commit () ;
     }
+    
+    $version = &get_db_version ;
+    $target = "4.1-2" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050311.sql") ;
 
-    &debug ("It seems your database $action went well and smoothly.  That's cool.") ;
-    &debug ("Please enjoy using Gforge.") ;
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050311.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    &debug ("It seems your database $action went well and smoothly. That's cool.") ;
+    &debug ("Please enjoy using GForge.") ;
 
     # There should be a commit at the end of every block above.
     # If there is not, then it might be symptomatic of a problem.
