@@ -39,7 +39,7 @@ case "$1" in
 	/usr/lib/gforge/bin/install-ftp.sh configure 
 
         # Setup our FRS
-	chown root:root /var/lib/gforge/download
+	chown www-data:www-data /var/lib/gforge/download
 	
     ;;
 
