@@ -171,10 +171,12 @@ objectclass ( 1.3.6.1.4.1.9586.100.3.1.2.1 NAME 'debGforgeAccount' SUP top AUXIL
 
 objectclass ( 1.3.6.1.4.1.9586.100.3.1.2.2 NAME 'debGforgeMailingList' SUP top AUXILIARY
 	DESC 'Abstraction of a Sourceforge Mailing List' 
+	MUST ( cn )
 	MAY ( debGforgeListPostAddress $ debGforgeListOwnerAddress $ debGforgeListRequestAddress ) )
 
 objectclass ( 1.3.6.1.4.1.9586.100.3.1.2.3 NAME 'debGforgeMailingListMM21' SUP top AUXILIARY
-	DESC 'Abstraction of a Sourceforge Mailing List' 
+	DESC 'Abstraction of a Sourceforge Mailing List'
+	MUST ( cn )
 	MAY ( debGforgeListPostAddress $ debGforgeListOwnerAddress $ debGforgeListRequestAddress
 	$ debGforgeListAdminAddress $ debGforgeListBouncesAddress $ debGforgeListConfirmAddress $ debGforgeListJoinAddress
 	$ debGforgeListLeaveAddress $ debGforgeListSubscribeAddress $ debGforgeListUnsubscribeAddress) )
