@@ -63,16 +63,17 @@ case "$1" in
 	
 	# Create the DNS zone
 	# echo "Installing Sourceforge DNS zone"
-	/usr/lib/sourceforge/bin/install-dns.sh $domain_name $ip_address
+	#/usr/lib/sourceforge/bin/install-dns.sh $domain_name $ip_address
+	/usr/lib/sourceforge/bin/install-dns.sh configure
 	
         # Setup our CVS
 	/usr/lib/sourceforge/bin/install-cvs.sh configure
 
         # Setup our LDAP
-	/usr/lib/sourceforge/bin/install-ldap.sh
+	/usr/lib/sourceforge/bin/install-ldap.sh configure
 
         # Setup our SSH
-	/usr/lib/sourceforge/bin/install-ssh.sh
+	/usr/lib/sourceforge/bin/install-ssh.sh configure
 
         # Setup our mail forwarding
 	/usr/lib/sourceforge/bin/install-exim.sh configure
