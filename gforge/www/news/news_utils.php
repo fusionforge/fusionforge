@@ -38,7 +38,7 @@ function news_footer($params) {
 	$HTML->footer($params);
 }
 
-function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0) {
+function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0,$show_forum=true) {
 	global $sys_datefmt,$sys_news_group,$Language;
 	if (!$group_id) {
 		$group_id=$sys_news_group;
@@ -92,11 +92,20 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 			}
 
 			if (!$limit) {
-				$return .= '<li><A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
+				if ($show_forum) {
+					$return .= '<li><A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
+				} else {
+					$return .= '<li><B>'. db_result($result,$i,'summary') . '</B>';
+				}
 				$return .= ' &nbsp; <I>'. date($sys_datefmt,db_result($result,$i,'date')).'</I><br>';
 			} else {
-				$return .= '
+				if ($show_forum) {
+					$return .= '
 					<A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><B>'. db_result($result,$i,'summary') . '</B></A>';
+				} else {
+					$return .= '
+					<B>'. db_result($result,$i,'summary') . '</B>';
+				}
 				if (!$flat) {
 					$return .= '
 					<BR>&nbsp;';
@@ -122,7 +131,11 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$comments_txt = " Comments";
 				}
 
-				$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><HR width="100%" size="1" noshade>';
+				if ($show_forum){
+					$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <A HREF="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><HR width="100%" size="1" noshade>';
+				} else {
+					$return .= '<HR width="100%" size="1" noshade>';
+				}
 			}
 
 			if ($limit==1 && $tail_headlines) {
@@ -140,12 +153,16 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		  $archive_url='/news/';
 	}
 
-	if ($tail_headlines) {
-		$return .= '</ul><HR width="100%" size="1" noshade>'."\n";
-	}
+	if ($show_forum) {
+		if ($tail_headlines) {
+			$return .= '</ul><HR width="100%" size="1" noshade>'."\n";
+		}
 
-	$return .= '<div align="center">'
+		$return .= '<div align="center">'
 	           .'<a href="'.$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
+	} else {
+		$return .= '<div align="center">.....</div>';
+	}
 
 	if ($allow_submit && $group_id != $sys_news_group) {
 		//you can only submit news from a project now
