@@ -71,9 +71,10 @@ sourceforge (2.5-10+15+) unstable; urgency=low
   * Fixed searches: broken SQL syntax in the admin-only search, and
     removed case-sensitiveness in the other search.
   * www/include/theme.php: fixed SQL (removed quotes from integer fields).
+  * www/include/theme.php: Changed the default user theme to a saner one.
   * www/include/cache.php: removed warning when the page is not cached.
 
- -- Roland Mas <lolando@debian.org>  Tue, 30 Oct 2001 18:56:26 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 30 Oct 2001 19:20:54 +0100
 
 sourceforge (2.5-10) unstable; urgency=low
 
