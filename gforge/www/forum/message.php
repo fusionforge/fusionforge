@@ -39,8 +39,8 @@ if ($msg_id) {
 		/*
 			Message not found
 		*/
-		exit_error("Message Not Found",
-				"This message does not (any longer) exist.");
+		exit_error($Language->getText('forum_message','message_not_found_title'),
+				$Language->getText('forum_message','message_not_found_body'));
 	}
 
 	$group_id=db_result($result,0,'group_id');
@@ -56,23 +56,23 @@ if ($msg_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error('Error','Error Getting Forum');
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','Forum'));
 	} elseif ($f->isError()) {
-		exit_error('Error',$f->getErrorMessage());
+		exit_error($Language->getText('general','error'),$f->getErrorMessage());
 	}
 
 	$fm=new ForumMessage($f,$msg_id);
 	if (!$fm || !is_object($fm)) {
-		exit_error('Error','Error Getting ForumMessage');
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumMessage'));
 	} elseif ($fm->isError()) {
-		exit_error('Error',$fm->getErrorMessage());
+		exit_error($Language->getText('general','error'),$fm->getErrorMessage());
 	}
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error('Error','Error Getting New ForumMessageFactory');
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumMessageFactory'));
 	} elseif ($fmf->isError()) {
-		exit_error('Error',$fmf->getErrorMessage());
+		exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
 	}
 
 	$fmf->setUp(0,'threaded',200,'');
@@ -82,9 +82,9 @@ if ($msg_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error('Error','Error Getting New ForumHTML');
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumHTML'));
 	} elseif ($fh->isError()) {
-		exit_error('Error',$fh->getErrorMessage());
+		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
 	}
 
 	forum_header(array('title'=>db_result($result,0,'subject'),'pagename'=>'forum_message','forum_id'=>$forum_id));
@@ -183,9 +183,8 @@ if ($msg_id) {
 	$fh->showPostForm($fm->getThreadID(), $msg_id, $fm->getSubject());
 
 } else {
-
-	forum_header(array('title'=>'Must choose a message first','pagename'=>'forum_message'));
-	echo '<h1>You must choose a message first</h1>';
+	forum_header(array('title'=>$Language->getText('forum_message','must_choose_message_title'),'pagename'=>'forum_message'));
+	echo '<h1>'.$Language->getText('forum_message','must_choose_message_body').'</h1>';
 
 }
 
