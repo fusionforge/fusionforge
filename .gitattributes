@@ -1,12 +1,7 @@
 * text=auto !eol
 gforge/backend/shell/apache.sh svneol=native#unset
-gforge/docs/architecture/sf2.sda svneol=native#unset
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
-gforge/docs/architecture/tour/img0.jpg svneol=native#unset
-gforge/docs/architecture/tour/img1.jpg svneol=native#unset
-gforge/docs/architecture/tour/img2.jpg svneol=native#unset
 gforge/docs/images/sflogo2-105a.png -text
-gforge/docs/project_management/source_branching.sda svneol=native#unset
 gforge/www/forum/forum-er-diagram.sda svneol=native#unset
 gforge/www/images/favicon.ico svneol=native#unset
 gforge/www/images/ic/caret.png -text
