@@ -84,6 +84,8 @@ account_register	realname	Nom complet *:
 account_register	language	Langue:
 account_register	timezone	Fuseau horaire:
 account_register	emailaddr	Adresse de courrier électronique *:<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
+account_register	jabberaddr	Addresse electronique:
+account_register	jabberonly	Envoyer les messages automatiques seulement à cette adresse
 account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I>(Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
 account_register	mandatory	Les champs avec * sont obligatoires.
@@ -94,6 +96,7 @@ account_register	err_passwd	Vous devez fournir un mot de passe
 account_register	err_passwd2	Les mots de passe ne concordent pas
 account_register	err_passwd3	Mot de passe non valide:
 account_register	err_unixname	Nom unix invalide
+account_register	err_jabber	Adresse Jabber incorrecte
 account_register	err_email	Courriel invalide
 account_register	err_userexist	Ce nom d'utilisateur existe déjà.
 account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
