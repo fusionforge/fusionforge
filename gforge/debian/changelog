@@ -1,4 +1,4 @@
-gforge (3rc2-1+) unstable; urgency=low
+gforge (3rc2-2) unstable; urgency=low
 
   * [Roland] Added db/20030513.sql, to add an "enabled" column to the
     themes table.  Fixed register-theme accordingly, and wrote a new
@@ -21,7 +21,7 @@ gforge (3rc2-1+) unstable; urgency=low
     1.3.6.1.4.1.9586.1.1.1.2.3 for Mailman 2.1.  Fixed sql2ldif.pl
     accordingly.
 
- -- Roland Mas <lolando@debian.org>  Mon, 19 May 2003 16:46:54 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 20 May 2003 23:18:47 +0200
 
 gforge (3rc2-1) unstable; urgency=low
 
