@@ -14,8 +14,17 @@ require ('common/include/cron_utils.php');
  */
 
 $ARGV = $GLOBALS['argv'];
+$err = '';
 $verbose = 1;
+$debug = 1;
 $cvsroot = "/cvsroot";
+
+function debug($message) {
+	global $debug, $err;
+	if($debug) {
+		$err .= $message."\n";
+	}
+}
 
 if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 
@@ -42,20 +51,18 @@ if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
 	$day	= gmstrftime("%d", $day_begin );
 }
 
-/*
-$err .= <<<EOF
-db: $day_begin
-de: $day_end
-dy: $day
-mn: $month
-yr: $year
-EOF;
-*/
+debug(<<<EOF
+day begin: $day_begin
+day end: $day_end
+day: $day
+month: $month
+year: $year
+EOF
+);
 
 $month_string = sprintf( "%04d%02d", $year, $month );
-// $err .= "$month_string\n";
 
-if ( $verbose ) {
+if($verbose) {
 	$err .= "Parsing cvs logs looking for traffic on day $day, " .
 	"month $month, year $year.\n";
 }
@@ -71,8 +78,9 @@ while ( $group = readdir( $root_dir ) ) {
 	if ( ! is_dir( "$cvsroot/$group" ) ) 
 		continue;
 
-	//$err .= "\n$group\n\n";
+	debug('Working on group '.$group);
 
+	// trying to find the id of the group matching current repository name
 	$group_res = db_query( "SELECT group_id FROM groups WHERE
 		unix_group_name='$group' AND
 		status='A'" );
@@ -93,56 +101,61 @@ while ( $group = readdir( $root_dir ) ) {
 	$usr_commit = array();
 	$usr_add	= array();
 
-
+	// opening CVSROOT/history file for the current repository
 	$hist_file_path = $cvsroot.'/'.$group.'/CVSROOT/history';
 	if( !file_exists($hist_file_path) || !is_readable($hist_file_path) || filesize($hist_file_path) == 0) {
+		debug('History file for group '.$group.' does not exist or is not readable');
 		continue;
 	}
 	$hist_file =& fopen( $hist_file_path, 'r' );
-	if ( ! $hist_file ) 
+	if ( ! $hist_file ) {
+		debug('Cannot open history file');
 		continue;
+	}
 	$hist_cont = fread( $hist_file, filesize( $hist_file_path ) );
 	fclose( $hist_file );
 	$hist_lines = explode( "\n", $hist_cont );
 
+	// cleaning stats_cvs_* table for the current day to avoid conflicting index problem
+	$sql = "DELETE FROM stats_cvs_group
+		WHERE month = '$month_string'
+		AND day = '$day'
+		AND group_id = '$group_id'";
+	$res = db_query($sql);
+	if(!$res) {
+		$err .= 'Error cleaning stats_cvs_group for current day and current group: '.db_error();
+	}
+
+	$sql = "DELETE FROM stats_cvs_user
+		WHERE month = '$month_string'
+		AND day = '$day'
+		AND group_id = '$group_id'";
+	$res = db_query($sql);
+	if(!$res) {
+		$err .= 'Error cleaning stats_cvs_user for current day and current group: '.db_error();
+	}
+
+	// analyzing history file
 	foreach ( $hist_lines as $hist_line ) {
-		if ( preg_match( '/^\s*$/', $hist_line ) ) 
+		if ( preg_match( '/^\s*$/', $hist_line ) ) {
 			continue;
+		}
 		list( $cvstime,$user,$curdir,$module,$rev,$file ) = explode( '|', $hist_line );
 
 		$type = substr($cvstime, 0, 1);
 		$time_parsed = hexdec( substr($cvstime, 1, 8) );
 
 		if ( ($time_parsed > $day_begin) && ($time_parsed < $day_end) ) {
-			// $err .= "type = $type, tp = $time_parsed\n";
-
-			if ( $type == "M" ) {
+			if ( $type == 'M' ) {
 				$cvs_commit++;
-				$usr_commit{$user}++;
-
-				// $err .= "Commit:	$cvs_commit\n";
-				// $err .= "User:		$user\n";
-				// $err .= "UserCom: " . $usr_commit{$user} . "\n";
-				next;
-			}
-
-			if ( $type == "A" ) {
+				$usr_commit[$user]++;
+			} elseif ( $type == 'A' ) {
 				$cvs_add++;
-				$usr_add{$user}++;
-				// $err .= "Add	 :	$cvs_add\n";
-				// $err .= "User:		$user\n";
-				// $err .= "UserAdd: " . $usr_add{$user} . "\n";
-				next;
-			}
-
-			if ( $type == "O" ) {
+				$usr_add[$user]++;
+			} elseif ( $type == 'O' ) {
 				$cvs_co++;
-				// we don't care about checkouts on a per-user
-				// most of them will be anon anyhow.
-				// $err .= "CO		:	$cvs_co\n";
-				next;
+				// ignoring checkouts on a per-user
 			}
-
 		} elseif ( $time_parsed > $day_end ) {
 			if ( $verbose >= 2 ) {
 				$err .= "Short circuting execution, parsed date " .
@@ -150,9 +163,15 @@ while ( $group = readdir( $root_dir ) ) {
 			}
 			break;
 		}
-
 	}
 
+	// if we don't have any stats, skipping to next project
+	if($cvs_co == 0 && $cvs_add == 0 && $cvs_commit == 0) {
+		$err .= "No CVS stats for group ".$group.", skipping to next project";
+		continue;
+	}
+
+	// inserting group results in stats_cvs_groups
 	$sql = "INSERT INTO stats_cvs_group
 		(month,day,group_id,checkouts,commits,adds)
 		VALUES
@@ -163,19 +182,18 @@ while ( $group = readdir( $root_dir ) ) {
 		'$cvs_commit',
 		'$cvs_add')";
 
-	if ( $verbose ) 
-		$err .= "$sql\n";
+	debug($sql);
 	if ( !db_query( $sql ) ) {
-		$err .= db_error();
+		$err .= 'Insertion in stats_cvs_group failed: '.$sql.' - '.db_error();
 		$rollback = true;
 		break;
 	}
 
+	// building the user list
 	$user_list = array_unique( array_merge( array_keys( $usr_add ), array_keys( $usr_commit ) ) );
 
 	foreach ( $user_list as $user ) {
-		//$err .= "$user\n";
-
+		// trying to get user id from user name
 		$user_res = db_query( "SELECT user_id FROM users WHERE
 			user_name='$user'" );
 		if ( $user_row = db_fetch_array($user_res) ) {
@@ -194,18 +212,14 @@ while ( $group = readdir( $root_dir ) ) {
 			'" . ($usr_commit{$user}?$usr_commit{$user}:0) . "',
 			'" . ($usr_add{$user}?$usr_add{$user}:0) . "')";
 
-		if ( $verbose ) {
-			$err .= "$sql\n";
-		}
+		debug($sql);
 		if ( !db_query( $sql )) {
-			$err .= db_error();
+			$err .= 'Insertion in stats_cvs_user failed: '.$sql.' - '.db_error();
 			$rollback = true;
 			break 2;
 		}
 
 	}
-	
-
 }
 
 if ( $rollback ) {
