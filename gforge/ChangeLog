@@ -1,5 +1,8 @@
 2003-09-21  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/register/projectinfo.php: Removed unnecessary hardcoded <h3>
+	tag.  It's in the *.tab files anyway.
+
 	* www/account/editsshkeys.php: Mentioned the delay in updating the
 	authorized_keys file.
 
