@@ -153,28 +153,22 @@ Description-fr: Le serveur LDAP
 
 Template: sourceforge/web_only
 Type: boolean
-Default: true
+Default: false
 Description: Do you want only the web-related features?
  Answering "yes" here will only install the web-related part of
  Sourceforge, giving you features such as the bug tracker, task manager,
  forums, news, support requests, etc.
  .
  Answering "no" will also install support for automated DNS, CVS, shell
- accounts, LDAP, etc.  It is currently not fully working.
- .
- Since this package is trying to provide only working features, the default
- answer is "yes" for now.
+ accounts, LDAP, etc. (default).
 Description-fr: Voulez-vous vous limiter aux fonctions web ?
  Si vous répondez "oui", seules les fonctions web de Sourceforge seront
  activées : l'outil de gestion de bogues, le gestionnaire de tâches, les
  forums, les nouvelles, les requêtes de support, etc.
  .
  Si vous répondez "non", seront également installées les automatisations
- de DNS, CVS, les comptes Unix, l'annuaire LDAP, etc.  Ces aspects ne
- fonctionnent pas encore tous.
- .
- Afin de ne proposer que des outils qui fonctionnent, la réponse par défaut
- est "oui" pour le moment.
+ de DNS, CVS, les comptes Unix, l'annuaire LDAP, etc.  C'est l'option par
+ défaut.
 
 Template: sourceforge/noreply_to_bitbucket
 Type: boolean
