@@ -133,7 +133,7 @@ switch ($func) {
 		} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
-			if (!$ath->userIsAdmin() && $ath->userIsTechnician()) {
+			if ((!$ath->userIsAdmin() && $ath->userIsTechnician()) || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
 //				&& !(session_loggedin() && ($ah->getSubmittedBy() == user_getid())) 
 //				&& (session_loggedin() && ($ah->getAssignedTo() == user_getid()))) {
 				$priority=$ah->getPriority();
@@ -145,6 +145,8 @@ switch ($func) {
 				$add_file=false;
 				$delete_file=false;
 			}
+//echo "$priority|$status_id|$category_id|$artifact_group_id|$resolution_id|
+//                $assigned_to|$summary|$canned_response|$details|$new_artfact_type_id";
 			if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
 				$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id,$extra_fields)) {
 				$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
@@ -230,7 +232,8 @@ switch ($func) {
 		$ah=new ArtifactHtml($ath,$artifact_id);
 		if (!$ah || !is_object($ah)) {
 			exit_error('ERROR','Artifact Could Not Be Created');
-		} else if ($ah->isError()) {				exit_error('ERROR',$ah->getErrorMessage());
+		} else if ($ah->isError()) {				
+			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
 			$ah->setMonitor();
 			$feedback=$ah->getErrorMessage();
@@ -258,7 +261,8 @@ switch ($func) {
 		//
 		$ah=new ArtifactHtml($ath,$aid);
 		if (!$ah || !is_object($ah)) {
-			exit_error('ERROR','Artifact Could Not Be Created');			} else if ($ah->isError()) {
+			exit_error('ERROR','Artifact Could Not Be Created');
+		} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
 			if ($ath->userIsAdmin()) {
