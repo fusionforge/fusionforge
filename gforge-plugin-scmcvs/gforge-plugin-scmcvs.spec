@@ -62,6 +62,10 @@ install -m 755 -d ${PLUGIN_CONF_DIR}
 install -m 664 etc/plugins/%{plugin}/config.php $PLUGIN_CONF_DIR/
 install -m 664 etc/plugins/%{plugin}/cvsweb.conf $PLUGIN_CONF_DIR/
 
+# installing installation specific language files
+mkdir -p $PLUGIN_CONF_DIR/languages
+cp rpm-specific/languages/*.tab $PLUGIN_CONF_DIR/languages/
+
 %pre
 
 %post
@@ -84,6 +88,7 @@ fi
 %doc AUTHORS COPYING README
 %attr(0660, apache, gforge) %config(noreplace) %{pluginconfdir}/config.php
 %attr(0660, apache, gforge) %config(noreplace) %{pluginconfdir}/cvsweb.conf
+%{pluginconfdir}/languages
 %{pluginlibdir}/cgi-bin
 %{pluginlibdir}/cronjobs
 %{pluginlibdir}/include
@@ -93,5 +98,7 @@ fi
 /etc/cron.d/%{name}
 
 %changelog
+* Mon Jan 03 2005 Guillaume Smet <guillaume-gforge@smet.org>
+- it's now possible to add specific language files in the RPM
 * Sun Sep 26 2004  Guillaume Smet <guillaume-gforge@smet.org>
 Initial RPM packaging
