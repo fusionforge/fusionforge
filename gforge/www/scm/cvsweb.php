@@ -1,12 +1,10 @@
 <?php
 
-exit;
-
 /**
   *
   * Gforge cvsweb php wrapper
   *
-  * Copyright 2003 (c) Gforge 
+  * Copyright 2003-2004 (c) Gforge 
   * http://gforge.org
   *
   * @version   $Id$
@@ -15,27 +13,40 @@ exit;
 
 require_once('pre.php');    // Initial db and session library, opens session
 
-if ("${contenttype}" != "text/plain") {
-	$HTML->header(array('title'=>$Language->getText('index','welcome'),'pagename'=>'home'));
-} else {
-	header("Content-type: $contenttype" );
+if (!$sys_use_cvs) {
+	exit_disabled();
 }
 
-/*
-echo "<H3>QUERY_STRING    =====> $QUERY_STRING <=====</H3>";
-echo "<H3>PATH_INFO       =====> $PATH_INFO <=====</H3>";
-echo "<H3>HTTP_USER_AGENT =====> $HTTP_USER_AGENT <=====</H3>";
-echo "<H3>SCRIPT_NAME     =====> $SCRIPT_NAME <=====</H3>";
-echo "<H3>contenttype     =====> ${contenttype} <=====</H3>";
-*/
+$projectName = getStringFromGet('cvsroot');
 
-passthru("PHPWRAPPER=$SCRIPT_NAME $sys_path_to_cvsweb/cvsweb \"$PATH_INFO\" \"$QUERY_STRING\" ");
-//putenv("PHPWRAPPER=/scm/cvsweb.php");
-//passthru("/usr/lib/gforge/cgi-bin/cvsweb.cgi \"$PATH_INFO\" \"$QUERY_STRING\" ");
-//passthru("PHPWRAPPER=/scm/cvsweb.php /usr/lib/gforge/cgi-bin/cvsweb.cgi \"$PATH_INFO\" \"$QUERY_STRING\" ");
+if ($projectName) {
+	$Group =& group_get_object_by_name($projectName);
+	if (!$Group || !is_object($Group) || $Group->isError()) {
+		exit_no_group();
+	}
+	if (!$Group->isProject()) {
+		exit_error('Error',$Language->getText('scm_index','error_only_projects_can_use_cvs'));
+	}
+	if (!$Group->usesCVS()) {
+		exit_error('Error',$Language->getText('scm_index','error_this_project_has_turned_off'));
+	}
+	$perm = & $Group->getPermission(session_get_user());
+	if ((!$Group->enableAnonCVS() && !($perm && is_object($perm) && $perm->isMember())) || !isset($GLOBALS['sys_path_to_cvsweb']) || !is_file($GLOBALS['sys_path_to_cvsweb'].'/cvsweb')) {
+		exit_permission_denied();
+	}
+	if ($contenttype != 'text/plain') {
+		site_project_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID(),'toptab'=>'scm_index','pagename'=>'scm_index','sectionvals'=>array($Group->getPublicName())));
+	} else {
+		header("Content-type: $contenttype" );
+	}
 
-if ("$contenttype" != "text/plain") {
-$HTML->footer(array());
+	passthru('PHPWRAPPER='.getStringFromServer('SCRIPT_NAME').' '.$GLOBALS['sys_path_to_cvsweb'].'/cvsweb "'.getStringFromServer('PATH_INFO').'" "'.getStringFromServer('QUERY_STRING').'" ');
+
+	if ($contenttype != 'text/plain') {
+		site_project_footer(array());
+	}
+} else {
+	exit_no_group();
 }
 
 ?>
