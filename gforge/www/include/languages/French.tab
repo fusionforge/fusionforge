@@ -2713,7 +2713,7 @@ tracker_admin_add_users	technician	Technicien
 tracker_admin_add_users	title	Ajouter/Mettre à jour les permission d'un utilisateur de traceur pour $1</s>
 tracker_admin_add_users	update_permissions	Mise à jour des permissions de développeur
 tracker_admin_add_users	user_name	Nom d'utilisateur
-tracker_admin_build_boxes	box_add_choices	ajouter des choix
+tracker_admin_build_boxes	box_add_choices	ajouter des éléments
 tracker_admin_build_boxes	box_change_warning	Il n'est pas recommandé que vous changiez le nom d'un champ car d'autres éléments peuvent en dépendre. Quand vous changez le nom d'un champ, tous les éléments concernés seront mis à jour avec le nouveau nom.
 tracker_admin_build_boxes	box_name	Nom du champ
 tracker_admin_build_boxes	box_name_inserted	Champ ajouté
@@ -2721,28 +2721,34 @@ tracker_admin_build_boxes	box_name_updated	Nom du champ modifié
 tracker_admin_build_boxes	box_update_title	Modifier un champ dans : $1
 tracker_admin_build_boxes	box_warning	Une fois que vous avez ajouté un champ, il ne peut être supprimé.
 tracker_admin_build_boxes	choice_change_warning	Il n'est pas recommandé que vous changiez le nom d'un choix car d'autres éléments peuvent en dépendre. Quand vous changez le nom d'un choix, tous les éléments concernés seront mis à jour avec le nouveau nom.
-tracker_admin_build_boxes	choice_inserted	Choix ajouté
-tracker_admin_build_boxes	choice_updated		Choix mis à jour
-tracker_admin_build_boxes	choice_warning	Une fois que vous avez ajouté un nouveau choix, il ne peut être supprimé
+tracker_admin_build_boxes	choice_inserted	Elément ajouté
+tracker_admin_build_boxes	choice_updated		Elément mis à jour
+tracker_admin_build_boxes	choice_warning	Une fois que vous avez ajouté un nouvel élément, il ne peut être supprimé
+tracker_admin_build_boxes	edit	Modifier
 tracker_admin_build_boxes	error_inserting_box	Erreur lors de l'ajout d'un champ
-tracker_admin_build_boxes	error_inserting_choice	Erreur lors de l'ajout d'un choix
+tracker_admin_build_boxes	error_inserting_choice	Erreur lors de l'ajout d'un élément
 tracker_admin_build_boxes	error_updating	Erreur lors de la mise à jour du nom du champ
 tracker_admin_build_boxes	no_box	Vous n'avez pas défini de champ.
-tracker_admin_build_boxes	no_choice	Vous n'avez pas défini de choix.
-tracker_admin_build_boxes	opt_add_name	Ajouter un nouveau choix
-tracker_admin_build_boxes	opt_name	Choix
-tracker_admin_build_boxes	opt_title	Ajouter des choix à la liste déroulante de : $1
-tracker_admin_build_boxes	opt_update_title	Modifier un choix d'une liste déroulante de : $1
+tracker_admin_build_boxes	no_choice	Vous n'avez pas défini d'élément.
+tracker_admin_build_boxes	opt_add_name	Ajouter un nouvel l'élément
+tracker_admin_build_boxes	opt_name	Elément
+tracker_admin_build_boxes	opt_title	Ajouter/Modifier les éléments du champ supplémentaire : $1
+tracker_admin_build_boxes	opt_update_title	Modifier un élément d'un champ supplémentaire de : $1
 tracker_admin_build_boxes	required_box_name	Un nom de champ est nécessaire
-tracker_admin_build_boxes	required_choice_name	Un nom de choix est nécessaire
+tracker_admin_build_boxes	required_choice_name	Un nom d'élément est nécessaire
 tracker_admin_build_boxes	status_any	Tous
-tracker_admin_build_boxes	title	 Ajouter/Modifier les listes déroulantes et les choix
+tracker_admin_build_boxes	title	 Ajouter/Modifier les champs supplémentaires
 tracker_admin_build_boxes	tracker_box_id	Identifiant
 tracker_admin_build_boxes	tracker_box_option_add	Ajouter/Modifier
-tracker_admin_build_boxes	tracker_box_option_title	Choix définis
-tracker_admin_build_boxes	tracker_box_title	Champs définis
+tracker_admin_build_boxes	tracker_box_option_title	Eléments définis
+tracker_admin_build_boxes	tracker_box_title	Champs supplémentaires définis
 tracker_admin_build_boxes	tracker_choice_id	Identifiant
 tracker_admin_choose	title	Administration des traceurs
+tracker_admin_copy	choices_title	Copier les choix �|  partir du champ supplémentaire $1
+tracker_admin_copy	copy_choices	Cliquer ici pour copier ces éléments dans un autre outil de suivi
+tracker_admin_copy	from_box	Copier �|  partir de
+tracker_admin_copy	into_box	Dans les outils de suivi et les champs supplémentaires
+tracker_admin_copy_cat	title	Copier les catégories �|  partir de $1
 tracker_admin_update_canned	title	Modification des réponses-types de $1
 tracker_admin_update_cat	auto_assign_to	Confier automatiquement à
 tracker_admin_update_cat	category_change_warning	Il n'est pas recommandé de changer le nom d'une catégorie car d'autres éléments en dépendent. Quand vous changez le nom d'une catégorie, tous les éléments en dépendant vont prendre le nouveau nom.
