@@ -176,9 +176,9 @@ function doc_droplist_count($l_group_id, $language_id) {
 
 	if (db_numrows($gresult) >= 1) {
 
-		print "<table border=\"0\">"
+		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"POST\"><table border=\"0\">"
 			." <tr><td valign=\"center\"><b>Language:</b></td>"
-			." <td valign=\"center\"><form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"POST\"><select name=\"language_id\">\n\n"; 
+			." <td valign=\"center\"><select name=\"language_id\">\n\n"; 
 		while($grow = db_fetch_array($gresult)) {
 
 			if ($language_id == $grow['language_id']) {
@@ -188,7 +188,7 @@ function doc_droplist_count($l_group_id, $language_id) {
 				print "<option value=\"".$grow['language_id']."\">".$grow['name']." (".$grow['count'].") </option>";
 			}	
 		}	
-		print "</select></td><td valign=\"center\"><input type=\"submit\" value=\"Go\"></form></td></tr></table>"; 
+		print "</select></td><td valign=\"center\"><input type=\"submit\" value=\"Go\"></td></tr></table></form>"; 
 	} else {
 		echo db_error();
 	}
