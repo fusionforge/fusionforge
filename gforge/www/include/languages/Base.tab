@@ -1515,7 +1515,7 @@ source	invalid_argument	Invalid File Argument
 source	invalid_argument_text	The file argument is invalid.
 source	file_not_found	File Not Found
 source	file_not_found_text	Cannot find specified file to display.
-stats_graph	sitewide_statistics_graphs      Sitewide Statistics Graphs
+stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
 stats_graph	joverview_stats	OVERVIEW STATS
 stats_graph	project_stats	PROJECT STATS
 stats_graph	site_graphs	SITE GRAPHS
@@ -1530,9 +1530,9 @@ stats_lastlogins	most_recent_open	Most Recent Opened Sessions
 stats_lastlogins	date	Date
 stats_lastlogins	username	Username
 stats_lastlogins	source_ip	Source IP
-stats	overview_stats  OVERVIEW STATS
-stats	project_stats   PROJECT STATS
-stats	site_graphs     SITE GRAPHS
+stats	overview_stats	OVERVIEW STATS
+stats	project_stats	PROJECT STATS
+stats	site_graphs	SITE GRAPHS
 stats	title	$1 Site Statistics
 stats_i18n	title	$1 I18n Statistics
 stats_i18n	language	Language
@@ -1540,15 +1540,15 @@ stats_i18n	users	Users
 stats_i18n	language_distribution	Languages Distributions
 stats_i18n	total_non_english	Total Non-English
 stats_i18n	language_text	This is a list of the preferences that users have chosen in their user preferences; it does not include languages which are selected via cookies or browser preferences
-stats_graph     sitewide_statistics_graphs      Sitewide Statistics Graphs
-stats_index     sitewide_aggregate_statistics   Sitewide Aggregate Statistics
-stats_index     other_statistics        Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
-stats_lastlogins        no_records      No records found","Database error: "
-stats_lastlogins        last_logins     Last Logins
-stats_lastlogins        most_recent_open        Most Recent Opened Sessions
-stats_lastlogins        date    Date
-stats_lastlogins        username        Username
-stats_lastlogins        source_ip       Source IP
+stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
+stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
+stats_index	other_statistics	Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
+stats_lastlogins	no_records	No records found","Database error: "
+stats_lastlogins	last_logins	Last Logins
+stats_lastlogins	most_recent_open	Most Recent Opened Sessions
+stats_lastlogins	date	Date
+stats_lastlogins	username	Username
+stats_lastlogins	source_ip	Source IP
 stats_projects	project_comparision	Project Statistical Comparisons
 stats_site_utils	all_projects	All Projects
 stats_site_utils	special_project_list	Special Project List
@@ -1584,7 +1584,7 @@ stats_site_utils	day	Day
 stats_site_utils	site_views	Site Views
 stats_site_utils	subdomain_views	Subdomain Views
 stats_site_utils	no_data	No Data
-stats_site_utils        statistics_for_the_past_months Statistics for the past $1 months.
+stats_site_utils	statistics_for_the_past_months Statistics for the past $1 months.
 stats_site_utils	month	Month
 stats_site_utils	current_statistic_all_time	Current Aggregate Statistics for All Time
 stats_site_utils	developers	Developers
@@ -1837,16 +1837,16 @@ scm_index	cvs_repository	CVS Repository
 scm_index	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
 scm_index	developername	developername
 scm_index	modulename	modulename
-admin   successfully_added      Successfully Added
-admin   are_you_sure_delete     Are you sure you want to delete this
+admin	successfully_added	Successfully Added
+admin	are_you_sure_delete	Are you sure you want to delete this
 admin	delete	Delete
-admin   cancel  Cancel
-admin   successfully_deleted    Successfully Deleted.
-admin   submit_changes  Submit Changes
-admin	submit_new      Submit New
-admin	successfully_modified   successfully modified
+admin	cancel  Cancel
+admin	successfully_deleted	Successfully Deleted.
+admin	submit_changes	Submit Changes
+admin	submit_new	Submit New
+admin	successfully_modified	successfully modified
 admin	add_new [add new]
-admin	edit    [edit]
+admin	edit	[edit]
 admin	site_admin_home Site Admin Home
 admin	yes	yes
 admin	reject	Reject
@@ -1857,19 +1857,19 @@ admin	other	Other
 admin	edit	Edit
 admin	http_domain	HTTP Domain:
 admin	license_other	License Other:
-admin_add_language      add_new_language        Add New Languages
-admin_add_language      existing_language       Existing Language
-admin_add_language      add_new_language        Add New Language
-admin_add_language      name    Name:
-admin_add_language      class_filename  Class Filename:
-admin_add_language      classname       Classname:
-admin_add_language      submit  Submit
-admin_tabfiles	modify_the      Modify the $1 below:
-admin_tabfiles	language        Language
-admin_tabfiles	delete_lang     [delete]
-admin_tabfiles	edit_the_language       Edit The Language
-admin_tabfiles	language        Language
-admin_tabfiles	edit_the_langfile       Edit The $1 Language
+admin_add_language	add_new_language	Add New Languages
+admin_add_language	existing_language	Existing Language
+admin_add_language	add_new_language	Add New Language
+admin_add_language	name	Name:
+admin_add_language	class_filename	Class Filename:
+admin_add_language	classname	Classname:
+admin_add_language	submit	Submit
+admin_tabfiles	modify_the	Modify the $1 below:
+admin_tabfiles	language	Language
+admin_tabfiles	delete_lang	[delete]
+admin_tabfiles	edit_the_language	Edit The Language
+admin_tabfiles	language	Language
+admin_tabfiles	edit_the_langfile	Edit The $1 Language
 admin_table	edit_the	Edit The
 admin_table	table	Table
 admin_approve_pending	error_creating_group	Error creating group object
@@ -2153,3 +2153,134 @@ admin_massmail	subject	Subject
 admin_massmail	date	Date
 admin_massmail	last_user_id_mailed	Last user_id mailed
 admin_massmail	active_deliveries	Active Deliveries
+survey	title	Survey
+survey	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
+survey	permission_denied	Permission Denied
+survey	low	Low
+survey	high	High
+survey	survey_privacy	Survey Privacy
+survey_add_question	title	Add A Question
+survey_add_question	question_added	Question Added
+survey_add_question	error_insert_question	Error inserting question
+survey_add_question	add_this_question	Add This Question.
+survey_add_question	show_existing_questions Show Existing Questions.
+survey_add_question	question	Question
+survey_add_question	question_type	Question type
+survey_add_survey	title	Add A Survey
+survey_add_survey	title_is_required	Survey title is required
+survey_add_survey	survey_inserted	Survey Inserted
+survey_add_survey	error_in_insert	Error in Survey Insert
+survey_add_survey	name_of_survey	Name Of Survey:
+survey_add_survey	list_questions_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
+survey_add_survey	yes	Yes
+survey_add_survey	no	No
+survey_add_survey	add_this_survey	Add This Survey
+survey_add_survey	show_existing_question	Show Existing Questions
+survey_add_survey	existing_surveys	Existing Surveys
+survey_add_survey	is_active	Is Active?
+survey_add_survey	existing_surveys	Sondaggi esistenti:
+survey_admin_utils	found	$1 surveys found
+survey_admin_utils	survey_id	Survey Id
+survey_admin_utils	group_id	Group Id
+survey_admin_utils	survey_title	Title of survey
+survey_admin_utils	survey_questions	Survey questions
+
+survey_edit_question	title	Edit A Question
+survey_edit_question	permission_denied	Permission Denied
+survey_edit_question	update_failed	UPDATE FAILED
+survey_edit_question	update_successful	UPDATE SUCCESSFUL
+survey_edit_question	error_finding_question	Error finding question
+survey_edit_question	editing_question	Editing Question
+survey_edit_question	warning_change_after_response	WARNING! It is a bad idea to change a question after responses to it have been submitted
+survey_edit_question	if_you_change_after	If you change a question after responses have been posted, your results pages may be misleading
+survey_edit_question	question	Question
+survey_edit_question	question_type	Question Type
+survey_edit_question	submit_changes	Submit Changes
+survey_edit_question	show_existing_question	Show Existing Questions
+survey_edit	tilte	Edit A Survey
+survey_edit	permission_denied	Permission Denied
+survey_edit	survey_title_required	UPDATE FAILED: Survey Title Required
+survey_edit	survey_question_required	UPDATE FAILED: Survey Questions Required
+survey_edit	missing_date	UPDATE FAILED: Missing Data
+survey_edit	update_failed	UPDATE FAILED
+survey_edit	update_successful	UPDATE SUCCESSFUL
+survey_edit	warning_survey_after_response	WARNING! It is a bad idea to edit a survey after responses have been posted
+survey_edit	change_after_already_response	If you change a survey after you already have responses, your results pages could be misleading or messed up
+survey_edit	name_off_survey	Name of Survey
+survey_edit	question	Questions
+survey_edit	list_question_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view	the question id's. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7
+survey_edit	is_active	Is Active
+survey_edit	yes	Yes
+survey_edit	no	No
+survey_edit	submit_changes	Submit Changes
+survey_edit	show_existing_questions	Show Existing Questions
+survey_edit	existing_surveys	Existing Surveys
+survey_utils	error_this_group_has_turned_off	Error, This Group Has Turned Off Surveys
+survey_utils	add_survey	Add Survey
+survey_utils	edit_survey	Edit Survey
+survey_utils	add_question	Add Questions
+survey_utils	edit_questions	Edit Questions
+survey_utils	show_results	Show Results
+survey_utils	admin	Admin
+survey_resp	title	Survey Complete
+survey_resp	error_some_reason	Error - For some reason group_id and/or survey_id did not make it he
+survey_resp	you_nedd_to_be_logged_in	You need to be logged in
+survey_resp	unfortunately_you_have_to_be	Unfortunately, you have to be logged in to participate in surveys.
+survey_resp	thank_you	Thank you for taking time to complete this survey.
+survey_resp	regards	Regards
+survey_resp	the_crew	The $1 Crew
+survey_resp	error	Error
+survey_rating_resp	title	Voting
+survey_rating_resp	you_must_be_logged_in	You must be logged in to vote
+survey_rating_resp	error	ERROR
+survey_rating_resp	error_in_insert	Error in insert
+survey_rating_resp	vote_reg	Vote registered
+survey_rating_resp	vote_regsitered	Vote Registered
+survey_rating_resp	click_to_resturn	Click to return to previous page
+survey_rating_resp	if_you_vote_again	If you vote again, your old vote will be erased.
+survey_rating_resp	error_missing	ERROR!!! MISSING PARAMS
+survey_privacy	title	Survey
+survey_privacy	survey_privacy	Survey Privacy
+survey_privacy	the_privacy_information	<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
+survey_privacy	the_team	The $1 Team
+survey_index	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
+survey_index	title	Survey
+survey_index	survey_id	Survey ID
+survey_index	survey_title	Survey Title
+survey_index	this_group_has	This Group Has No Active Surveys
+survey_admin_index	title	Survey Administration
+survey_admin_index	permission_denied	Permission Denied
+survey_admin_index	add_survey	Add Surveys
+survey_admin_index	edir_existing_survey	Edit Existing Surveys
+survey_admin_index	add_question	Add Questions
+survey_admin_index	edit_existing_question	Edit Existing Questions
+survey_admin_index	show_results	Show Survey Results
+survey_admin_index	its_simple_to_create	<p>It's simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: $1 where XX is the survey number
+survey_admin_index	you_can_now_activate	You can now activate/deactivate surveys on the $1 Edit Existing Surveys $2 page
+survey_show_result_comment	title	Survey Aggregate Results
+survey_show_result_comment	permission_denied	Permission Denied
+survey_show_result_comment	found	Found
+survey_show_result_comment	question	Question:
+survey_show_results_csv	permission_denied	Permission Denied
+survey_show_questions	title	Survey Questions
+survey_show_questions	permission_denied	Permission Denied
+survey_show_questions	you_may_use_any_of_these	You may use any of these questions on your surveys
+survey_show_questions	note_use_these_questions_id	NOTE: use these question_id's when you create a new survey
+survey_show_questions	found	$1 questions found
+survey_show_results_aggregate	title	Survey Aggregate Results
+survey_show_results_aggregate	permission_denied	Permission Denied
+survey_show_results_aggregate	error	error
+survey_show_results_aggregate	responses	Responses
+survey_show_results_aggregate	average	Average
+survey_show_results_aggregate	view_comments	View Comments
+survey_show_results_aggregate	yes_no	Yes / No
+survey_show_results_aggregate	yes	Yes
+survey_show_results_aggregate	no	No
+survey_show_results_aggregate	view_comments	View Comments
+survey_show_results_individual	title	Results
+survey_show_results_individual	permission_denied	Permission Denied
+survey_show_results_individual	yes_no	Yes / No
+survey_show_results	title	Survey Results
+survey_show_results	permission_denied	Permission Denied
+survey_show_results	found	Found
+survey_show_results	view_aggregate_responses	View Aggregate Responses
