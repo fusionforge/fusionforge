@@ -44,7 +44,7 @@ Import the SourceForge Database
 
 # psql alexandria < db/gforge3.sql
 
-Web Setup
+WEB SETUP
 ---------
 
 Move the GForge tarball into position and make the www/ directory 
@@ -53,7 +53,7 @@ the "Document Root".
 Apache's http.conf file should have these values:
 
 ErrorDocument 404 /404.php
-php_value include_path ".:/path/to/:/path/to/www/include/"
+php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
 <Location /projects>
   ForceType application/x-httpd-php
 </Location>
@@ -61,10 +61,33 @@ php_value include_path ".:/path/to/:/path/to/www/include/"
   ForceType application/x-httpd-php
 </Location>
 
+PHP setup
+---------
+
+Your php.ini file should have "register_globals" set to on.
+You may also add the include_path to the php.ini, as it will be 
+necessary for your php cgi to run the cron jobs.
+
+It is also recommended, for fastest possible performance, that you 
+use a php caching accelerator, such as the Ion Cube Accelerator.
+http://www.php-accelerator.co.uk/
+
+In addition, in your php.ini file, you may wish to set 
+output_handler = ob_gzhandler 
+
+FRS - File Release System
+-------------------------
+
+FRS has been radically simplified. Simply create a directory and 
+make it owned by the webserver-user. Usually "chown -R nobody:nobody mydir" 
+will do the trick.
+
+This directory will be referenced in the SF Config File as $sys_upload_dir
+
 SF Config File
 --------------
 
-In the GForge distribution, you will find etc/local.inc. Move it to /etc/local.inc 
+In the GForge distribution, you will find etc/local.inc. Move it to /etc/gforge/local.inc 
 and edit all of the settings.
 
 Giving the first user "Site Admin" privileges. Register a new user, and confirm 
@@ -78,9 +101,17 @@ update user_group set admin_flags='A' where group_id=1
 /etc/aliases - add this line and run "newaliases"
 noreply:        /dev/null
 
-STATS
------
+CRON JOBS
+---------
 
-Setting up stats is a truly complex endeavor, and is not being tackled just yet.
-However, you can look in the cron/ directory to look at the various processes 
-involved and attempt to set it up yourself.
+Cron jobs are in the cronjobs/ directory and the README file contains a 
+sample crontab. This gives you the basic cronjobs for updating certain 
+statistics and data on the site.
+
+More advanced cron jobs are being re-written to create the user email 
+aliases, mailing lists, Unix groups/passwords, etc. Many of these 
+scripts are available in the util/ directory, although they will not 
+yet run without some polishing. If you polish up and make all these 
+scripts work, please submit them back for inclusion at 
+
+http://gforge.org/
