@@ -203,10 +203,12 @@ function admin_table_show($table, $unit, $primary_key) {
 		$rows = db_numrows($result);
 		$cols = db_numfields($result);
 
-                echo '<table border="0" width="100%">
-		<tr bgcolor="'.$HTML->COLOR_HTMLBOX_TITLE.'">
-		<td colspan="'.($cols+1).'"><strong><span style="color:'. $HTML->FONTCOLOR_HTMLBOX_TITLE .'">'. ucwords($unit) .'s</span></strong>
-		<a href="'.$PHP_SELF.'?function=add">[add new]</a></td></tr>';
+		$cell_data=array();
+		$cell_data[]=array(ucwords($unit).'<a href="'.$PHP_SELF.'?function=add">[add new]</a>', 
+			'colspan="'.($cols+1).'"');
+
+                echo '<table border="0" width="100%">';
+				echo $HTML->multiTableRow('',$cell_data, TRUE);
 
                 echo '
 			<tr><td width="5%"></td>';
