@@ -97,7 +97,7 @@ CREATE TABLE "forum" (
 	"posted_by" integer DEFAULT '0' NOT NULL,
 	"subject" text DEFAULT '' NOT NULL,
 	"body" text DEFAULT '' NOT NULL,
-	"date" integer DEFAULT '0' NOT NULL,
+	"post_date" integer DEFAULT '0' NOT NULL,
 	"is_followup_to" integer DEFAULT '0' NOT NULL,
 	"thread_id" integer DEFAULT '0' NOT NULL,
 	"has_followups" integer DEFAULT '0',
@@ -533,7 +533,7 @@ CREATE TABLE "project_weekly_metric" (
 );
 
 
-CREATE TABLE "session" (
+CREATE TABLE "user_session" (
 	"user_id" integer DEFAULT '0' NOT NULL,
 	"session_hash" character(32) DEFAULT '' NOT NULL,
 	"ip_addr" character(15) DEFAULT '' NOT NULL,
@@ -860,6 +860,10 @@ CREATE TABLE "users" (
 	"block_ratings" integer DEFAULT 0,
 	"jabber_address" text,
 	"jabber_only" integer,
+	"address" text,
+	"phone" text,
+	"fax" text,
+	"title" text,
 	Constraint "users_pkey" Primary Key ("user_id")
 );
 
@@ -1026,9 +1030,6 @@ CREATE TABLE "artifact" (
 	"details" text NOT NULL,
 	Constraint "artifact_pkey" Primary Key ("artifact_id")
 );
-
-
-CREATE VIEW "artifact_vw" as SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name FROM users u, users u2, artifact, artifact_status, artifact_category, artifact_group, artifact_resolution WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id));
 
 
 CREATE SEQUENCE "artifact_history_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1 cache 1;
@@ -1454,7 +1455,8 @@ CREATE TABLE "frs_dlstats_file" (
 	"ip_address" text,
 	"file_id" integer,
 	"month" integer,
-	"day" integer
+	"day" integer,
+	"user_id" integer
 );
 
 
@@ -1846,6 +1848,16 @@ CREATE FUNCTION "project_sums" () RETURNS opaque AS '
 ' LANGUAGE 'plpgsql';
 
 
+CREATE TABLE "cron_history" (
+	"rundate" integer NOT NULL,
+	"job" text,
+	"output" text
+);
+
+
+CREATE VIEW "artifact_vw" as SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name, CASE WHEN (max(artifact_history.entrydate) IS NOT NULL) THEN max(artifact_history.entrydate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::int4 END AS update_date, CASE WHEN (max(artifact_message.adddate) IS NOT NULL) THEN max(artifact_message.adddate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::int4 END AS message_date FROM users u, users u2, artifact_status, artifact_category, artifact_group, artifact_resolution, ((artifact LEFT JOIN artifact_history ON ((artifact.artifact_id = artifact_history.artifact_id))) LEFT JOIN artifact_message ON ((artifact.artifact_id = artifact_message.artifact_id))) WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id)) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name, u.realname, u.email, u2.user_name, u2.realname, u2.email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name;
+
+
 
 COPY "canned_responses" FROM stdin;
 \.
@@ -2046,13 +2058,12 @@ COPY "project_metric_tmp1" FROM stdin;
 COPY "project_status" FROM stdin;
 1	Open
 2	Closed
-100	None
 3	Deleted
 \.
 
 
 COPY "project_task" FROM stdin;
-1	1			0	0	0	0	0	100	100	100
+1	1			0	0	0	0	0	100	1	100
 \.
 
 
@@ -2060,7 +2071,7 @@ COPY "project_weekly_metric" FROM stdin;
 \.
 
 
-COPY "session" FROM stdin;
+COPY "user_session" FROM stdin;
 \.
 
 
@@ -2468,8 +2479,8 @@ COPY "user_ratings" FROM stdin;
 
 
 COPY "users" FROM stdin;
-2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N
-100	None	noreply@sourceforge.net	*********34343	Nobody	A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N
+2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N
+100	None	noreply@sourceforge.net	*********34343	Nobody	A	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -2724,6 +2735,10 @@ COPY "group_plugin" FROM stdin;
 COPY "user_plugin" FROM stdin;
 \.
 
+
+COPY "cron_history" FROM stdin;
+\.
+
 CREATE INDEX db_images_group ON db_images USING btree (group_id);
 
 
@@ -2847,10 +2862,10 @@ CREATE INDEX projectweeklymetric_ranking ON project_weekly_metric USING btree (r
 CREATE INDEX project_metric_weekly_group ON project_weekly_metric USING btree (group_id);
 
 
-CREATE INDEX session_user_id ON "session" USING btree (user_id);
+CREATE INDEX session_user_id ON user_session USING btree (user_id);
 
 
-CREATE INDEX session_time ON "session" USING btree ("time");
+CREATE INDEX session_time ON user_session USING btree ("time");
 
 
 CREATE INDEX snippet_language ON snippet USING btree ("language");
@@ -3172,6 +3187,9 @@ CREATE UNIQUE INDEX project_messa_project_messa_key ON project_messages USING bt
 
 
 CREATE UNIQUE INDEX plugins_plugin_name_key ON plugins USING btree (plugin_name);
+
+
+CREATE INDEX cronhist_rundate ON cron_history USING btree (rundate);
 
 
 CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER INSERT OR UPDATE ON "user_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
