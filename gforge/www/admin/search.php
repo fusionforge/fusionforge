@@ -23,6 +23,10 @@ require_once('www/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
+if(!isset($search) || empty($search)) {
+	exit_error($Language->getText('general','error'), $Language->getText('admin_search','refusing_to_display_whole_db'));
+}
+
 site_admin_header(array('title'=>$Language->getText('admin_search','index')));
 
 function format_name($name, $status) {
@@ -44,12 +48,6 @@ function format_name($name, $status) {
 /*
 	Main code
 */
-
-if ($search == "") {
-
-  exit_error( $Language->getText('admin_search','refusing_to_display_whole_db'));
-
-}
 
 if ($substr) {
 	$search = "%$search%";
@@ -128,7 +126,7 @@ if ($groupsearch) {
 		$crit_desc = "($crit_desc )";
 	}
 	print '<p><strong>' .$Language->getText('admin_search','group_search_criteria').'"<em>'.$search.'</em>" '.$crit_desc.': '
-	      .db_numrows($result).$Language->getText('admin_search','matches').'</strong></p>';
+	      .db_numrows($result).' '.$Language->getText('admin_search','matches').'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();
