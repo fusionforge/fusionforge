@@ -1,3 +1,9 @@
+2004-09-18  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* removed typos from Base.tab introduced by tracker boxes patch
+	* internationalized admin/admin_table.php and so all admin/edit_*.php
+	* updated french translation
+
 2004-09-15  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* fixed [#552] by improving language negotiation
