@@ -7,22 +7,45 @@ $Id$
 XML Docbook
 --
 
-You must have the docbook DTDs installed on your computer.
-On many distros, there are some docbook packages to install them easily.
+You must have the docbook DTDs installed on your computer.  On many
+distros, there are some docbook packages to install them easily.
 
-Download docbook XSL stylesheets from http://sourceforge.net/projects/docbook/ .
-Install them anywhere you want then add a symlink to them called docbook in xsl/ folder.
+Download docbook XSL stylesheets from
+http://sourceforge.net/projects/docbook/ .  Install them anywhere you
+want then add a symlink to them called docbook in xsl/ folder.
+
+In Debian, it's enough if you install docbook-xml, docbook-xsl,
+libxml2-utils (for xmllint), and xsltproc packages.  Then making the
+symbolic link is like that (in docs/docbook/xsl):
+
+$ ln -s /usr/share/xml/docbook/stylesheet/nwalsh docbook
 
 
 DB2LaTeX
 --
 
-Download DB2LaTeX XSL stylesheets from http://sourceforge.net/projects/db2latex/ .
-Install them anywhere you want then add a symlink to them called db2latex in xsl/ folder.
+Download DB2LaTeX XSL stylesheets from
+http://sourceforge.net/projects/db2latex/ .  Install them anywhere you
+want then add a symlink to them called db2latex in xsl/ folder.
 
 
 PDFLatex
 --
 
-You have to install PDFLatex to generate the pdf output. It's distributed in tetex-latex package.
-I personnaly installed a lot of tetex packages as I don't know which ones I really need :).
+You have to install PDFLatex to generate the pdf output. It's
+distributed in tetex-latex package.  I personally installed a lot of
+tetex packages as I don't know which ones I really need :).
+
+
+PDF Generation in Debian
+--
+
+In Debian, you can just
+
+# apt-get install db2latex-xsl tetex-extra latex-ucs
+
+Then make the symbolic link (in docs/docbook/xsl):
+
+$ mkdir db2latex
+$ ln -s /usr/share/xml/docbook/stylesheet/db2latex/latex db2latex/xsl
+
