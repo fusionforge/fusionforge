@@ -142,7 +142,7 @@ docman	error_no_docs	This project has no visible documents
 docman	error_invalid_file_attack	Invalid file attack attempt $1
 docman	error_no_groups_defined	No Document Groups defined
 docman	description	Description
-docman_admin	section	$1
+docman_admin	section	Project: $1
 docman_admin	title	Document Manager: Administration
 docman_admin	add_edit_docgroups	Add/Edit Document Groups
 docman_admin_docedit	section	Document Manager
@@ -152,6 +152,7 @@ docman_admin_editdocs	title	Edit Docs
 docman_admin_editdocs	state	State
 docman_admin_editdocs	upload	OPTIONAL: Upload new file
 docman_admin_editdocs	doc_contents	Document Contents
+docman_admin_addgroups	section	Document Manager Administration
 docman_admin_addgroups	title	Add Document Groups
 docman_admin_editgroups	section	Document Manager Administration
 docman_admin_editgroups	title	Edit Groups
@@ -269,10 +270,13 @@ general	update_successful	Updated successfully
 general	create_successful	Created successfully
 general	no_valid_group	No Valid $1 Group was selected
 general	no_valid_filename	No valid Filename
+general	no_valid_group_object	$1 No valid group object
 general	submitted_successfully	$1 Submitted Successfully
 general	language	Language
 general	submit_edit	Submit Edit
 general	edit	Edit
+general	add	Add
+general	go	Go
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking

@@ -136,6 +136,8 @@ docman_admin_editdocs	title	Modifica documenti
 docman_admin_editdocs	state	Stato
 docman_admin_editdocs	upload	OPZIONALE: Invia nuovo file
 docman_admin_editdocs	doc_contents	Contenuto Documenti
+docman_admin_addgroups	section	Amministrazione Document Manager
+docman_admin_addgroups	title	Aggiungi gruppi di documenti
 docman_admin_editgroups	section	Document Manager Administration
 docman_admin_editgroups	title	Modifica gruppi
 docman_admin_editgroups	new_group_name	Nuovo nome del gruppo
@@ -146,6 +148,7 @@ docman_admin_groupdelete	section	Document Manager Administration
 docman_admin_groupdelete	title	Delete Document Group
 docman_admin_groupedit	section	Document Manager Administration
 docman_admin_groupedit	title	Rename Document Group
+docman_admin_groupedit	group_name	Nome gruppo
 docman_display_doc	section	Progetto: $1 
 docman_display_doc	title	Document Manager: Visualizza documenti
 docman_display_doc	all_languages	Tutte
@@ -210,6 +213,8 @@ general	submitted_successfully	$1 inserito con successo
 general	language	Lingua
 general	submit_edit	Invia Modifiche
 general	edit	Modifica
+general	go	Vai
+general	add	Aggiungi
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	CVS Repository
