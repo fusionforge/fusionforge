@@ -73,16 +73,25 @@ eval {
 
 	$version = &get_db_version ;
 	if (is_lesser $version, "2.5.9999") {
-	    debug "Upgrading your database scheme from 2.5" ;
+	    debug "Found an old (2.5) database, will upgrade to 2.6" ;
 	    
-	    debug "Updating debian_meta_data table." ;
-	    $query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', '2.5-to-2.6')" ;
+	    $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
 	    # debug $query ;
 	    $sth = $dbh->prepare ($query) ;
 	    $sth->execute () ;
+	    @array = $sth->fetchrow_array () ;
 	    $sth->finish () ;
-	    debug "Committing." ;
-	    $dbh->commit () ;
+
+	    if ($array[0] == 0) {
+		# debug "Updating debian_meta_data table." ;
+		$query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', '2.5-to-2.6')" ;
+		# debug $query ;
+		$sth = $dbh->prepare ($query) ;
+		$sth->execute () ;
+		$sth->finish () ;
+		debug "Committing." ;
+		$dbh->commit () ;
+	    }
 	}
     }
 
@@ -225,7 +234,7 @@ eval {
 	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
-		  # debug $query ;
+		  debug $query ;
 		  $sth = $dbh->prepare ($query) ;
 		  $sth->execute () ;
 		  $sth->finish () ;
