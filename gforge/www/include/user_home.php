@@ -92,15 +92,13 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	<P>
 <?php
 	// now get listing of groups for that user
-	$res_cat = db_query("SELECT groups.group_name, "
-	. "groups.unix_group_name, "
-	. "groups.group_id, "
-	. "user_group.admin_flags, "
-	. "user_group.bug_flags FROM "
-	. "groups,user_group WHERE user_group.user_id='$user_id' AND "
-	// We don't need to block out foundries from displaying.
-	//. "groups.group_id=user_group.group_id AND groups.is_public='1' AND groups.status='A' AND groups.type='1'");
-	. "groups.group_id=user_group.group_id AND groups.is_public='1' AND groups.status='A'");
+	$res_cat = db_query("SELECT groups.group_name, 
+	 groups.unix_group_name, 
+	 groups.group_id, 
+	 user_group.admin_flags 
+	 FROM 
+	 groups,user_group WHERE user_group.user_id='$user_id' AND 
+	 groups.group_id=user_group.group_id AND groups.is_public='1' AND groups.status='A'");
 
 // see if there were any groups
 if (db_numrows($res_cat) < 1) {

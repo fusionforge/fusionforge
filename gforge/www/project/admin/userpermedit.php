@@ -124,11 +124,8 @@ if ($submit || $form_unix_name) {
 		$cvs_flags = 1;
 
 		//call to control function in the $Group object
-		if ($group->updateUser($user_id,
-			$admin_flags, $bug_flags, $forum_flags,
-			$project_flags, $patch_flags, $support_flags,
-			$doc_flags, $cvs_flags, $release_flags,
-			$member_role, $artifact_flags)) {
+		if ($group->updateUser($user_id, $admin_flags, $forum_flags, $project_flags, 
+				$doc_flags, $cvs_flags, $release_flags, $member_role, $artifact_flags)) {
 
 			group_add_history ('Changed Permissions for',$u->getUnixName(),$group_id);
 

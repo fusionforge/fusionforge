@@ -769,11 +769,11 @@ CREATE TABLE "user_group" (
 	"user_id" integer DEFAULT '0' NOT NULL,
 	"group_id" integer DEFAULT '0' NOT NULL,
 	"admin_flags" character(16) DEFAULT '' NOT NULL,
-	"bug_flags" integer DEFAULT '0' NOT NULL,
+	"dead1" integer DEFAULT '0' NOT NULL,
 	"forum_flags" integer DEFAULT '0' NOT NULL,
 	"project_flags" integer DEFAULT '2' NOT NULL,
-	"patch_flags" integer DEFAULT '1' NOT NULL,
-	"support_flags" integer DEFAULT '1' NOT NULL,
+	"dead2" integer DEFAULT '1' NOT NULL,
+	"dead3" integer DEFAULT '1' NOT NULL,
 	"doc_flags" integer DEFAULT '0' NOT NULL,
 	"cvs_flags" integer DEFAULT '1' NOT NULL,
 	"member_role" integer DEFAULT '100' NOT NULL,
@@ -2951,9 +2951,6 @@ CREATE INDEX user_diary_monitor_monitored_us ON user_diary_monitor USING btree (
 CREATE INDEX user_group_group_id ON user_group USING btree (group_id);
 
 
-CREATE INDEX bug_flags_idx ON user_group USING btree (bug_flags);
-
-
 CREATE INDEX project_flags_idx ON user_group USING btree (project_flags);
 
 
@@ -3279,15 +3276,6 @@ CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER DELETE ON "grou
 
 
 CREATE CONSTRAINT TRIGGER "project_group_list_group_id_fk" AFTER UPDATE ON "groups"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('project_group_list_group_id_fk', 'project_group_list', 'groups', 'FULL', 'group_id', 'group_id');
-
-
-CREATE CONSTRAINT TRIGGER "project_task_group_project_id_f" AFTER INSERT OR UPDATE ON "project_task"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('project_task_group_project_id_f', 'project_task', 'project_group_list', 'FULL', 'group_project_id', 'group_project_id');
-
-
-CREATE CONSTRAINT TRIGGER "project_task_group_project_id_f" AFTER DELETE ON "project_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('project_task_group_project_id_f', 'project_task', 'project_group_list', 'FULL', 'group_project_id', 'group_project_id');
-
-
-CREATE CONSTRAINT TRIGGER "project_task_group_project_id_f" AFTER UPDATE ON "project_group_list"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('project_task_group_project_id_f', 'project_task', 'project_group_list', 'FULL', 'group_project_id', 'group_project_id');
 
 
 CREATE CONSTRAINT TRIGGER "project_task_created_by_fk" AFTER INSERT OR UPDATE ON "project_task"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('project_task_created_by_fk', 'project_task', 'users', 'FULL', 'created_by', 'user_id');

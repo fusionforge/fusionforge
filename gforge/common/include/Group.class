@@ -1221,15 +1221,10 @@ class Group extends Error {
 	/**	 
 	 *  updateUser - controls updating a user's perms in this group.
 	 *
-	 *	NOTE - bug_flags,patch_flags,support flags are deprecated.
-	 *
 	 *  @param	int		The ID of the user.
 	 *  @param	string	The admin flag for the user.
-	 *  @param	int		The bug flag for the user  DEPRECATED.
 	 *  @param	int		The forum flag for the user.
 	 *  @param	int		The project flag for the user.
-	 *  @param	int		The patch flag for the user  DEPRECATED.
-	 *  @param	int		The support flag for the user  DEPRECATED.
 	 *  @param	int		The doc flag for the user.
 	 *  @param	int		The CVS flag for the user.
 	 *  @param	int		The release flag for the user.
@@ -1237,7 +1232,7 @@ class Group extends Error {
 	 *	@param	int		The artifact flags for the user.
 	 *	@return	boolean	success.
 	 */	 
-	function updateUser($user_id,$admin_flags='',$bug_flags=1,$forum_flags=0,$project_flags=1,$patch_flags=1,$support_flags=1,$doc_flags=0,$cvs_flags=1,$release_flags=1,$member_role=100,$artifact_flags=0) {
+	function updateUser($user_id,$admin_flags='',$forum_flags=0,$project_flags=1,$doc_flags=0,$cvs_flags=1,$release_flags=1,$member_role=100,$artifact_flags=0) {
 
 	$perm =& $this->getPermission( session_get_user() );
 
