@@ -8,21 +8,21 @@ class CVSPlugin extends SCM {
 		$this->name = "scmcvs";
 		$this->text = "CVS";
 		$this->hooks[] = "scm_page";
-/*		$this->hooks[] = "scm_admin_update";
+		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
-*/
+
 		$this->hooks[] = "scm_plugin";
-//		$this->hooks[] = "group_approved";
+		$this->hooks[] = "group_approved";
 		$this->hooks[] = "cssstyle";
 		//$this->hooks[] = "groupmenu_scm";
 
-        require_once('/etc/gforge/plugins/scmcvs/config.php') ;
-		
+		require_once('/etc/gforge/plugins/scmcvs/config.php') ;
+
 		//$this->default_cvs_server = $default_cvs_server ;
 		//$this->this_server = $this_server ;
 		$this->enabled_by_default = $enabled_by_default ;
-		
+
 		$this->register () ;
 	}
 
@@ -34,7 +34,7 @@ class CVSPlugin extends SCM {
 			$group_id = $params['group_id'] ;
 			$this->display_scm_page ($group_id) ;
 			break ;
-/*		case "scm_admin_update":
+		case "scm_admin_update":
 			$this->scm_admin_update ($params) ;
 			break ;
 		case "scm_admin_page":
@@ -49,7 +49,6 @@ class CVSPlugin extends SCM {
 //		case "groupmenu_scm":
 //			$this->display_groupmenu_scm ($params) ;
 //			break;
-*/
 		case "cssstyle":
 			$this->cssstyle_scm ($params) ;
 			break;
@@ -346,7 +345,7 @@ if ($project->enableAnonSCM()){
 		}
 
 	}
-/*
+
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
  		if ($params['scmcvs_enable_anoncvs']) {
@@ -360,9 +359,7 @@ if ($project->enableAnonSCM()){
 			$group->SetUsesPserver(false);
  		}
 ////		if ($params['scmradio'] == 'scmcvs') {
-//// THIS IS NOT THE PLACE FOR THIS //////// TODO
 ////			$group->setPluginUse("scmcvs", 1) ;
-////			
 ////		} else {
 ////			$group->setPluginUse("scmcvs", 0) ;
 ////		}
@@ -442,7 +439,6 @@ if ($project->enableAnonSCM()){
 	        }
 		
 	}
-*/
 
 	/**
 	 *      account_group_cvsweb_url() - Returns URL for group's CVS interface WWW
@@ -455,7 +451,6 @@ if ($project->enableAnonSCM()){
 		return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot=cvsroot/'.$project->getUnixName();
 	}
 
-/*
 	function display_groupmenu_scm($params) {
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);
@@ -484,6 +479,7 @@ if ($project->enableAnonSCM()){
 		}
 	}
 
+/*
 	function GetDefaultServer () {
 		return $this->default_cvs_server ;
 	}
