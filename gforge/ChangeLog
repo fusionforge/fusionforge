@@ -1,9 +1,3 @@
-2003-11-30  Tim Perdue  <tim@perdue.net>
-
-	* Adding switches for turning tools on/off
-	* Adding phone/fax/address/title to user
-	* Couple of date -> post_date field changes
-
 2003-12-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* deb-specific/db-upgrade.pl: Upgrade database using 20031126.sql.
@@ -12,6 +6,10 @@
 	<schmidtmarco@web.de> improving German localisation.
 
 2003-11-30  Tim Perdue  <tim@perdue.net>
+
+	* Adding switches for turning tools on/off
+	* Adding phone/fax/address/title to user
+	* Couple of date -> post_date field changes
 
 	* added cronjob logging and viewing apparatus
 
