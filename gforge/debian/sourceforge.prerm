@@ -44,6 +44,9 @@ case "$1" in
         # DNS config removal
 	/usr/lib/sourceforge/bin/install-dns.sh purge
 
+        # CVS config removal
+	/usr/lib/sourceforge/bin/install-cvs.sh purge
+
         # Exim config removal
 	/usr/lib/sourceforge/bin/install-exim.sh purge # Not ready yet
 

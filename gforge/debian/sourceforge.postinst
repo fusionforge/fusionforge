@@ -177,6 +177,9 @@ EOF
 	    ip_address=$RET
 	    /usr/lib/sourceforge/bin/install-dns.sh $domain_name $ip_address
 
+            # Setup our CVS
+	    /usr/lib/sourceforge/bin/install-cvs.sh configure
+
             # Setup our LDAP
 	    /usr/lib/sourceforge/bin/install-ldap.sh
 

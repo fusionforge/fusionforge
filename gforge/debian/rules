@@ -113,6 +113,7 @@ install: build
 	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 
 	# CVS stuff
+	install -m 755 deb-specific/install-cvs.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install utils/underworld-dummy/dump_database.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install utils/new_parse.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/

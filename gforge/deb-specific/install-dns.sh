@@ -58,15 +58,4 @@ EOF
   	echo "	-Suppose that all servers are in the same box"
   	echo "	-Wizards advices are welcome"
 	/usr/lib/sourceforge/bin/dns_conf.pl
-
-	# Setup our own CVS
-	echo "Modifying inetd for cvs server"
-	echo "CVS usual config is changed for sourceforge one"
-	# To easily support xinetd but don't now if it's like inetd
-	inetdname=inetd
-	if ! grep -q "#Sourceforge comment#" /etc/${inetdname}.conf ; then
-	    perl -pi -e "s/^cvspserver/#Sourceforge comment#cvspserver/" /etc/${inetdname}.conf
-	    echo "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	/usr/lib/sourceforge/bin/cvs-pserver" >> /etc/${inetdname}.conf
-	    /etc/init.d/${inetdname} restart
-	fi
 fi
