@@ -187,7 +187,7 @@ class Forum extends Error {
 		} else {
 			if (session_loggedin()) {
 				$sql="SELECT save_date FROM forum_saved_place
-					WHERE user_id='".user_getid()."' AND forum_id='$forum_id';";
+					WHERE user_id='".user_getid()."' AND forum_id='". $this->getID() ."';";
 				$result = db_query($sql);
 				if ($result && db_numrows($result) > 0) {
 					$this->save_date=db_result($result,0,'save_date');

@@ -86,7 +86,7 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1">' . 
-				html_image($GLOBALS['HTML']->imgproj.'mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</A> | ';
+				html_image($GLOBALS['HTML']->imgproj.'xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</A> | ';
 			} else {
 				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1">' . 
 				html_image($GLOBALS['HTML']->imgproj.'mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</A> | ';
@@ -111,24 +111,24 @@ function forum_footer($params) {
 
 **/
 class ForumHTML extends Error {
-    /**
-     * The Forum object.
-     *
-     * @var  object  $Forum
-     */
-    var $Forum;
+	/**
+	 * The Forum object.
+	 *
+	 * @var  object  $Forum
+	 */
+	var $Forum;
 
 	function ForumHTML(&$Forum) {
-        $this->Error();
-        if (!$Forum || !is_object($Forum)) {
-            $this->setError('ForumMessage:: No Valid Forum Object');
-            return false;
-        }
-        if ($Forum->isError()) {
-            $this->setError('ForumMessage:: '.$Forum->getErrorMessage());
-            return false;
-        }
-        $this->Forum =& $Forum;
+		$this->Error();
+		if (!$Forum || !is_object($Forum)) {
+			$this->setError('ForumMessage:: No Valid Forum Object');
+			return false;
+		}
+		if ($Forum->isError()) {
+			$this->setError('ForumMessage:: '.$Forum->getErrorMessage());
+			return false;
+		}
+		$this->Forum =& $Forum;
 		return true;
 	}
 
@@ -189,14 +189,14 @@ class ForumHTML extends Error {
 
 			*/
 			for ($i=($rows-1); $i >= 0; $i--) {
-				//      increment the global total count
+				//	  increment the global total count
 				$total_rows++;
 
-				//      show the actual nested message
+				//	  show the actual nested message
 				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<P>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups()) {
-					//      Call yourself if there are followups
+					//	  Call yourself if there are followups
 					$ret_val .= $this->showNestedMessages ( $msg_arr,$msg_arr["$msg_id"][$i]->getID() );
 				}
 			}
@@ -239,18 +239,28 @@ class ForumHTML extends Error {
 				/*
 					If it this is the message being displayed, don't show a link to it
 				*/
-				$ret_val .= (($current_message != $msg_arr["$msg_id"][$i]->getID())?
-					'<A HREF="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID().'">':'').
+				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
+					$ah_begin='<A HREF="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'">';
+					$ah_end='</A>';
+				} else {
+					$ah_begin='';
+					$ah_end='';
+				}
+
+				$ret_val .= $ah_begin .
 					html_image($GLOBALS['HTML']->imgproj.'msg.png',"10","12",array("BORDER"=>"0"));
 				/*
 					See if this message is new or not
 				*/
 				if ($this->Forum->getSavedDate() < $msg_arr["$msg_id"][$i]->getPostDate()) { 
 					$bold_begin='<B>';
-            		$bold_end='</B>';
+					$bold_end='</B>';
+				} else {
+					$bold_begin='';
+					$bold_end='';
 				}
 
-				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.'</A></TD>'.
+				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</TD>'.
 					'<TD>'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</TD>'.
 					'<TD>'.date($sys_datefmt, $msg_arr["$msg_id"][$i]->getPostDate() ).'</TD></TR>';
 

@@ -222,6 +222,9 @@ if ($forum_id) {
 			if ($f->getSavedDate() < $msg->getPostDate()) {
 				$bold_begin='<B>';
 				$bold_end='</B>';
+			} else {
+				$bold_begin='';
+				$bold_end='';
 			}
 			/*	  
 				show the subject and poster
@@ -288,6 +291,9 @@ if ($forum_id) {
 			if ($f->getSavedDate() < $row['recent']) {
 				$bold_begin='<B>';
 				$bold_end='</B>';
+			} else {
+				$bold_begin='';
+				$bold_end='';
 			}
 			/* 
 					show the subject and poster

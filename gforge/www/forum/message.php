@@ -122,25 +122,38 @@ if ($msg_id) {
 	if ($rows > $max_rows) {
 		$rows=$max_rows;
 	}
+
+	$current_message=$msg_id;
 	$i=0;
 	while (($i < $rows) && ($total_rows < $max_rows)) {
 		$msg =& $msg_arr["0"][$i];
 		$total_rows++;
 
+		if ($fm->getID() != $msg->getID()) {
+			$ah_begin='<A HREF="/forum/message.php?msg_id='.$msg->getID().'">';
+			$ah_end='</A>';
+		} else {
+			$ah_begin='';
+			$ah_end='';
+		}
 		$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'">
-			<TD>'. (($fm->getID() != $msg->getID()) ? '<A HREF="/forum/message.php?msg_id='.$msg->getID().'">' : '') .
+			<TD>'. $ah_begin .
 			html_image($GLOBALS['HTML']->imgproj.'msg.png',"10","12",array("BORDER"=>"0"));
 		/*
 			See if this message is new or not
 			If so, highlite it in bold
 		*/
 		if ($f->getSavedDate() < $msg->getPostDate()) {
-			$ret_val .= '<B>';
+			$bold_begin . '<B>';
+			$bold_end . '<B>';
+		} else {
+			$bold_begin='';
+			$bold_end='';
 		}
 		/*
 			show the subject and poster
 		*/
-		$ret_val .= $msg->getSubject() .'</A></TD>'.
+		$ret_val .= $bold_begin . $msg->getSubject() . $bold_end.$ah_end.'</TD>'.
 			'<TD>'. $msg->getPosterRealName() .'</TD>'.
 			'<TD>'. date($sys_datefmt,$msg->getPostDate()) .'</TD></TR>';
 
