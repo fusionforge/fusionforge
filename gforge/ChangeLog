@@ -1,3 +1,9 @@
+2005-01-16  Christian Bayle <bayle@debian.org>
+
+	* Added a Makefile, that make easy to build debian package and phpdoc
+	* Just give a try to make phpdoc
+	* Fixed many lintian error in debian packages, tried also to improve upgrade
+
 2005-01-15  Tim Perdue <tim@gforge.org>
 
 	* added link and page to allow a person to request membership in a project
