@@ -45,6 +45,7 @@ eval {
 	@array = @{$line} ;
 	my ($group_list_id, $listname, $user_name, $password, $description) ;
 	my ($tmp) ;
+	my ($cmd) ;
 
 	($group_list_id, $listname, $user_name, $password, $description)= @array ;
 
@@ -53,7 +54,7 @@ eval {
 	#print "cmd = <$cmd>\n" ;
 	system ($cmd) ;
 	open CONFIG, ">>$tmp" ;
-	print CONFIG "description = '$description'\n" ;
+	print CONFIG "description = \"$description\"\n" ;
 	print CONFIG "host_name = '$sys_lists_host'\n" ;
 	close CONFIG ;
 	$cmd = "/usr/lib/mailman/bin/config_list -i $tmp $listname" ;
