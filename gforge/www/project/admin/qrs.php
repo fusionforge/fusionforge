@@ -144,6 +144,9 @@ if( $submit ) {
 						           	$feedback .= '<br>Email Notice Sent';
 									?>
 									<p>
+									You can now <A HREF="/project/admin/editrelease.php?release_id=<?php echo "$release_id&group_id=$group_id&package_id=$package_id"; ?>"><B>Add Files To This Release</B></A> if you wish, 
+									or edit the release.
+									<p>
 									Please note that file(s) may not appear immediately
 									on the <a href="/project/showfiles.php?group_id=<?php echo $group_id;?>">
 									download page</a>. Allow several hours for propogation.
@@ -164,6 +167,7 @@ if( $submit ) {
 		}
 	}
 } else {
+
 ?>
 
 <FORM ENCTYPE="multipart/form-data" METHOD="POST" ACTION="<?php echo $PHP_SELF; ?>">
@@ -183,9 +187,10 @@ if( $submit ) {
 	} else {
 		
 		echo '<SELECT NAME="package_id">';
-		echo '<OPTION VALUE="">(select)</OPTION>';
 		for ($i=0; $i<$rows; $i++) {
-			echo '<OPTION VALUE="' . db_result($res,$i,'package_id') . '">' . db_result($res,$i,'name') . '</OPTION>';
+			echo '<OPTION VALUE="' . db_result($res,$i,'package_id') . 
+				((db_result($res,$i,'package_id') ==$package_id) ? ' SELECTED' : '').'">' . 
+				db_result($res,$i,'name') . '</OPTION>';
 		}
 		echo '</SELECT>';
 	}

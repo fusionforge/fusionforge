@@ -82,7 +82,10 @@ $proj_stats['packages'] = $num_packages;
    // Iterate and show the packages
 for ( $p = 0; $p < $num_packages; $p++ ) {
 	$cur_color = html_get_alt_row_color($p);
-	print '<TR bgcolor="'.$cur_color.'"><TD colspan="3"><h3>'.db_result($res_package,$p,'name').'</h3></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
+	print '<TR bgcolor="'.$cur_color.'"><TD colspan="3"><H3>'.db_result($res_package,$p,'name').'
+	<A HREF="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'">'.
+		html_image('ic/mail16w.png','20','20',array('alt'=>'Monitor This Package')) .
+		'</A></H3></TD><TD COLSPAN="4">&nbsp;</TD></TR>';
 
 	   // get the releases of the package
 	$sql	= "SELECT * FROM frs_release WHERE package_id='". db_result($res_package,$p,'package_id') . "' "
