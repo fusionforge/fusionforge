@@ -197,6 +197,7 @@ if (session_loggedin()) {
 setlocale (LC_TIME, $Language->getText('system','locale'));
 $sys_strftimefmt = $Language->getText('system','strftimefmt');
 $sys_datefmt = $Language->getText('system','datefmt');
+$sys_shortdatefmt = $Language->getText('system','shortdatefmt');
 
 /*
 
@@ -209,6 +210,7 @@ $Language
 $LUSER - Logged in user object
 $HTML
 $sys_datefmt
+$sys_shortdatefmt
 
 */
 
