@@ -88,6 +88,7 @@ my $query = "
 SELECT user_name,realname,unix_pw,unix_uid,email
 FROM users
 WHERE unix_status!='A'
+AND status != 'P'
 ";
 my $rel = $dbh->prepare($query);
 $rel->execute();
