@@ -109,8 +109,6 @@ class ArtifactType extends Error {
 			} else {
 				return true;
 			}
-		} else {
-			$this->setError('No ID Passed');
 		}
 	}
 

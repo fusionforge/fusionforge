@@ -90,8 +90,6 @@ class Artifact extends Error {
 					return true;
 				}
 			}
-		} else {
-			$this->setError('No ID Present');
 		}
 	}
 
