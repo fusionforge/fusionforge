@@ -158,6 +158,7 @@ function account_genunixpw($plainpw) {
  */
 function account_shellselects($current) {
 	$shells = file("/etc/shells");
+	$shells[count($shells)] = "/bin/cvssh";
 
 	for ($i = 0; $i < count($shells); $i++) {
 		$this_shell = chop($shells[$i]);
@@ -165,7 +166,9 @@ function account_shellselects($current) {
 		if ($current == $this_shell) {
 			echo "<option selected value=$this_shell>$this_shell</option>\n";
 		} else {
-			echo "<option value=$this_shell>$this_shell</option>\n";
+			if (! ereg("^#",$this_shell)){
+				echo "<option value=$this_shell>$this_shell</option>\n";
+			}
 		}
 	}
 }
