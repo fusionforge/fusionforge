@@ -651,6 +651,7 @@ forum	forums_for	Forums for $1
 forum	html	HTML tags will display in your post as text
 forum	section	Project: $1
 forum	title	Forums
+forum	check_upload	Check to Upload & Attach File
 forum_admin	add_forum	Add Forum
 forum_admin	delete_message	Delete Message
 forum_admin	section	Project: $1 
@@ -658,6 +659,7 @@ forum_admin	title	Forums: Administration
 forum_admin	update_forum	Update Forum Info/Status
 forum_admin_addforum	add_forum	Add This Forum
 forum_admin_addforum	allow_anonymous	Allow Anonymous Posts?
+forum_admin_addforum	allow_attach	Allow File Attachment?
 forum_admin_addforum	email_posts	Email All Posts To:
 forum_admin_addforum	existing_forums	Existing Forums
 forum_admin_addforum	forum_created	Forum created successfully
@@ -724,6 +726,7 @@ forum_forum	threads	Threads
 forum_forum	title	Forums: View Forum
 forum_forum	topic	Topic
 forum_forum	topicstarter	Topic Starter
+forum_forum	views	Views
 forum_forum	ultimate	Ultimate
 forum_forum_thread	section	Forums
 forum_forum_thread	title	View Thread
@@ -784,6 +787,7 @@ forum_utils	postcomment	Post Comment
 forum_utils	posted	Message Posted
 forum_utils	postedby	Posted By
 forum_utils	reply	reply
+forum_utils	attach	attach
 forum_utils	saveplace	Save Place
 forum_utils	stopmonitor	Stop Monitoring
 forum_utils	subject	Subject:
@@ -900,6 +904,9 @@ group	short_survey	Surveys
 group	short_tracker	Tracker
 help	page_information	Page Information
 help	title	Welcome to $1
+help_forum	close_window	Close Window
+help_forum	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
+help_forum	unknown_help_request	UNKNOWN HELP REQUEST:
 help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
 help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
 help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
@@ -2108,6 +2115,8 @@ survey_add_survey	title_is_required	Survey title is required
 survey_add_survey	yes	Yes
 survey_admin	section	Survey Tool
 survey_admin	title	Administration
+survey_admin	edit	Edit
+survey_admin	delete	Delete
 survey_admin_add_question	section	Survey Tool Administration
 survey_admin_add_question	title	Add Survey Question
 survey_admin_add_survey	section	Survey Tool Administration
@@ -2153,11 +2162,15 @@ survey_edit	show_existing_questions	Show Existing Questions
 survey_edit	submit_changes	Submit Changes
 survey_edit	survey_question_required	UPDATE FAILED: Survey Questions Required
 survey_edit	survey_title_required	UPDATE FAILED: Survey Title Required
-survey_edit	tilte	Edit A Survey
+survey_edit	title	Edit A Survey
 survey_edit	update_failed	UPDATE FAILED
 survey_edit	update_successful	UPDATE SUCCESSFUL
+survey_edit	delete_failed	DELETE FAILED
+survey_edit	delete_successful	DELETE SUCCESSFUL
 survey_edit	warning_survey_after_response	WARNING! It is a bad idea to edit a survey after responses have been posted
 survey_edit	yes	Yes
+survey_edit	addable_question	Addable Questions
+survey_edit	existing_question	Questions in this Survey
 survey_edit_question	editing_question	Editing Question
 survey_edit_question	error_finding_question	Error finding question
 survey_edit_question	if_you_change_after	If you change a question after responses have been posted, your results pages may be misleading
@@ -2173,6 +2186,13 @@ survey_edit_question	warning_change_after_response	WARNING! It is a bad idea to 
 survey_index	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
 survey_index	survey_id	Survey ID
 survey_index	survey_title	Survey Title
+survey_index	survey_questions	Questions
+survey_index	survey_number_questions	Number of Questions
+survey_index	survey_number_votes	Number of Votes
+survey_index	survey_vote	Vote
+survey_index	survey_edit	Edit
+survey_index	survey_result	Result
+survey_index	survey_result_graph	Result with Graph
 survey_index	this_group_has	This Group Has No Active Surveys
 survey_index	title	Survey
 survey_privacy	survey_privacy	Survey Privacy
@@ -2209,13 +2229,15 @@ survey_show_results	found	Found
 survey_show_results	permission_denied	Permission Denied
 survey_show_results	title	Survey Results
 survey_show_results	view_aggregate_responses	View Aggregate Responses
+survey_show_results_aggregate	no_votes	No Votes
 survey_show_results_aggregate	average	Average
 survey_show_results_aggregate	error	error
 survey_show_results_aggregate	no	No
 survey_show_results_aggregate	permission_denied	Permission Denied
 survey_show_results_aggregate	responses	Responses
 survey_show_results_aggregate	title	Survey Aggregate Results
-survey_show_results_aggregate	view_comments	View Comments
+survey_show_results_aggregate	view_comments	View All $1 Comments
+survey_show_results_aggregate	comments	Comments
 survey_show_results_aggregate	yes	Yes
 survey_show_results_aggregate	yes_no	Yes / No
 survey_show_results_csv	permission_denied	Permission Denied
@@ -2228,11 +2250,22 @@ survey_survey_resp	section	Survey Tool
 survey_survey_resp	title	Survey Processing / Response
 survey_utils	add_question	Add Questions
 survey_utils	add_survey	Add Survey
+survey_utils	add_edit_question	Add/Edit Questions
+survey_utils	add_edit_survey	Add/Edit Survey
 survey_utils	admin	Admin
 survey_utils	edit_questions	Edit Questions
 survey_utils	edit_survey	Edit Survey
 survey_utils	error_this_group_has_turned_off	Error, This Group Has Turned Off Surveys
 survey_utils	show_results	Show Results
+survey_error	min_question_length Question is too short
+survey_error	error_no_valid_group_object	No valid Group Object
+survey_error	error_no_valid_survey_object	No valid Survey Object
+survey_error	error_no_valid_question_object	No valid Question Object
+survey_error	no_question_found	No Survey Question is found
+survey_error	no_survey_found		No Survey is found
+survey_error	no_survey_response_found		No Survey Response is found
+survey_error	permission_denied	You don't have a permission to access this page
+survey_error	no_survey_data_filled	The Survey data is not filled
 system	datefmt	Y-m-d H:i
 system	locale	en_US
 system	strftimefmt	%Y %B %e  %H:%M
