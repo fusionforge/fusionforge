@@ -54,7 +54,7 @@ if ($project->getDescription()) {
 
 // trove info
 print "<br />\n";
-print trove_getcatlisting($group_id,0,1);
+print stripslashes(trove_getcatlisting($group_id,0,1));
 
 // registration date
 print($Language->getText('group', 'registered') . date($sys_datefmt, $project->getStartDate()));

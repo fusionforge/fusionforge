@@ -5,6 +5,9 @@
 	by running it with an argument in days, like "./history_parse.php 120",
 	which would populate the past 120 days of stats.
 
+	* www/include/project_home.php:
+	Fixed bug [ #476 ] Trove descriptions have slashes in them
+
 2003-07-29 Christian Bayle	<bayle@debian.org>
 
 	* Don't allow to go in QRS if no package is defined or activ
