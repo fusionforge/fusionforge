@@ -98,6 +98,9 @@ function &user_get_objects($id_arr) {
 		//
 		//  See if this ID already has been fetched in the cache
 		//
+		if (!$id_arr[$i]) {
+			continue;
+		}
 		if (!isset($USER_OBJ["_".$id_arr[$i]."_"])) {
 			$fetch[]=$id_arr[$i];
 		} else {
@@ -105,7 +108,8 @@ function &user_get_objects($id_arr) {
 		}
 	}
 	if (count($fetch) > 0) {
-		$res=db_query("SELECT * FROM users WHERE user_id IN ('".implode($fetch,'\',\'') ."')");
+		$sql="SELECT * FROM users WHERE user_id IN ('".implode($fetch,'\',\'') ."')";
+		$res=db_query($sql);
 		while ($arr =& db_fetch_array($res)) {
 			$USER_OBJ["_".$arr['user_id']."_"] = new User($arr['user_id'],$arr);
 			$return[] =& $USER_OBJ["_".$arr['user_id']."_"];

@@ -1,15 +1,13 @@
 <?php
 /**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * SourceForge Generic Tracker facility
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 echo $ath->header(array ('title'=>$Language->getText('tracker_detail','title').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'pagename'=>'tracker_detail','atid'=>$ath->getID(),'sectionvals'=>array($ath->getName())));
 
@@ -19,29 +17,32 @@ echo notepad_func();
 	<h2>[#<?php echo $ah->getID(); ?>] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h2>
 
 	<table cellpadding="0" width="100%">
-<?php
-if (session_loggedin()) {
-?>
 		<tr>
 			<td><?php
-				if ($ah->isMonitoring()) {
-					$img="xmail16w.png";
-					$key="stop_monitoring";
-				} else {
-					$img="mail16w.png";
-					$key="monitor";
-				}
-				echo '
-				<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
-					html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
-				?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
+				if (session_loggedin()) {
+
+					if ($ah->isMonitoring()) {
+						$img="xmail16w.png";
+						$key="stop_monitoring";
+					} else {
+						$img="mail16w.png";
+						$key="monitor";
+					}
+					echo '
+					<a href="index.php?group_id='.$group_id.'&artifact_id='.$ah->getID().'&atid='.$ath->getID().'&func=monitor"><strong>'.
+						html_image('ic/'.$img.'','20','20',array()).' '.$Language->getText('tracker_utils',$key).'</strong></a>';
+					?>&nbsp;<a href="javascript:help_window('/help/tracker.php?helpname=monitor')"><strong>(?)</strong></a>
+
+				<?php } else { ?>
+
+				<h3><FONT COLOR="RED">
+				<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></FONT></h3><br />
+
+				<?php } ?>
+		<p>
 			</td>
-			<td>
-				<a href="<?php echo "$PHP_SELF?func=taskmgr&group_id=$group_id&atid=$atid&aid=$aid"; ?>"><?php echo
-					html_image('ic/taskman20w.png','20','20',array()); ?><strong><?php echo $Language->getText('tracker_detail','build_task_relation') ?></strong></a>
-			</td>
+			<td><strong><?php echo $Language->getText('tracker','status') ?>:</strong><br /><?php echo $ah->getStatusName(); ?></td>
 		</tr>
-<?php } ?>
 		<tr>
 			<td><strong><?php echo $Language->getText('tracker','date') ?>:</strong><br /><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></td>
 			<td><strong><?php echo $Language->getText('tracker','priority') ?>:</strong><br /><?php echo $ah->getPriority(); ?></td>
@@ -57,53 +58,39 @@ if (session_loggedin()) {
 				(<tt><a href="/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
 			<?php } ?>
 			</td>
-			<td><strong><?php echo $Language->getText('tracker','assigned_to') ?>:</strong><br /><?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
+			<td><strong><?php echo $Language->getText('tracker','assigned_to') ?>:</strong><br />
+			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
 		</tr>
 
 		<tr>
 			<td><strong><?php echo $Language->getText('tracker','category') ?>:</strong><br /><?php echo $ah->getCategoryName(); ?></td>
-			<td><strong><?php echo $Language->getText('tracker','status') ?>:</strong><br /><?php echo $ah->getStatusName(); ?></td>
+			<td><strong><?php echo $Language->getText('tracker','resolution') ?>:</strong><br /><?php echo $ah->getResolutionName(); ?></td>
 		</tr>
 
-    <?php
-        $ath->renderExtraFields($ah->getExtraFieldData(),true);
-    ?>
+	<?php
+		$ath->renderExtraFields($ah->getExtraFieldData(),true);
+	?>
 
 		<tr><td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
 
-		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
+		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
 		<tr><td colspan="2">
 			<br />
 			<?php echo $ah->showDetails(); ?>
 
-			<input type="hidden" name="func" value="postaddcomment">
+			<input type="hidden" name="func" value="postmod">
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 			<p>
 			<strong><?php echo $Language->getText('tracker_detail','add_comment') ?>:</strong> 
 			<?php echo notepad_button('document.forms[1].details') ?><br />
 			<textarea name="details" ROWS="10" COLS="60" WRAP="SOFT"></textarea>
+			<?php if (!session_loggedin()) { ?>
+				<?php echo $Language->getText('tracker','insert_email') ?>
+				<p>
+				<input type="text" name="user_email" SIZE="20" MAXLENGTH="40">
+			<?php } ?>
 		</td></tr>
-
-		<tr><td colspan="2">
-	<?php
-
-	if (!session_loggedin()) {
-		?>
-		<h3><FONT COLOR="RED">
-		<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></FONT></h3><br />
-		<?php echo $Language->getText('tracker','insert_email') ?>
-		<p>
-		<input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="40">
-		<?php
-	}
-	?>
-		<p>
-		<h3><?php echo $Language->getText('tracker_detail','security_note') ?></h3>
-		<p>
-		<input type="SUBMIT" name="SUBMIT" value="<?php echo $Language->getText('general','submit') ?>">
-		</form>
-	</td></tr>
 
 	<tr><td colspan="2">
 	<h3><?php echo $Language->getText('tracker','followups') ?></h3>
@@ -116,6 +103,13 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan=2>
+	<?php if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) { ?>
+		<strong><?php echo $Language->getText('tracker','check_upload') ?>:</strong> <input type="checkbox" name="add_file" value="1" /><br />
+		<input type="file" name="input_file" size="30" /></p>
+		<p>
+		<strong><?php echo $Language->getText('tracker','file_description') ?>:</strong><br />
+		<input type="text" name="file_description" size="40" maxlength="255" /></p>
+	<?php } ?>
 	<h4><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h4>
 	<?php
 	//
@@ -149,6 +143,13 @@ if (session_loggedin()) {
 
 	?>
 	</td></tr>
+	<tr><td colspan="2">
+		<h3><?php echo $Language->getText('tracker_detail','security_note') ?></h3>
+		<p>
+		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>">
+		</form>
+	</td></tr>
+
 	<?php
 		$hookParams['artifact_id']=$aid;
 		plugin_hook("artifact_extra_detail",$hookParams);
@@ -164,7 +165,7 @@ if (session_loggedin()) {
 	?>
 	</td>
 	</tr>
-</TABLE>
+</table>
 <?php
 
 $ath->footer(array());

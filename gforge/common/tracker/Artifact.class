@@ -807,6 +807,29 @@ class Artifact extends Error {
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields=array()) {
 
 		global $Language;
+		/*
+			Field-level permission checking
+		*/
+		if ($this->ArtifactType->userIsAdmin()) {
+			//admin can do everything
+		} else {
+			//everyone else cannot modify these fields
+			$priority=$this->getPriority();
+			$summary=addslashes($this->getSummary());
+			$canned_response=100;
+			$new_artifact_type_id=$this->ArtifactType->getID();
+			$assigned_to=$this->getAssignedTo();
+
+			if ($this->ArtifactType->userIsTechnician()) {
+				//technician can update only certain fields
+				//which were not overridden above
+			} else {
+				//submitter can no longer call this function
+				$this->setPermissionDeniedError();
+				return false;
+			}
+
+		}
 		if (!$this->getID() 
 			|| !$assigned_to 
 			|| !$status_id 
@@ -819,19 +842,6 @@ class Artifact extends Error {
 			return false;
 		}
 
-		// If the current status is Pending then auto-reset it to 'Open'
-		// Assumes the status ID for 'Pending' is '4'
-		/*
-		//This was unexpected behavior - best to let the admin set their own status
-		if ($status_id != '2' && $status_id != '3'  && $this->getStatusID() == '4') {
-			$status_id = '1';
-		}
-		*/
-		//	original submitter can always modify his/her items now
-		if (!$this->ArtifactType->userIsAdmin() && ($this->getSubmittedBy() != user_getid()) && (!$this->ArtifactType->userIsTechnician())) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
 
 		// Array to record which properties were changed
 		$changes = array();
@@ -951,12 +961,10 @@ class Artifact extends Error {
 				WHERE 
 				artifact_id='". $this->getID() ."'
 				AND group_artifact_id='$artifact_type_id'";
-
 			$result=db_query($sql);
 
 			if (!$result || db_affected_rows($result) < 1) {
 				$this->setError('Error - update failed!'.db_error());
-				echo db_error();
 				db_rollback();
 				return false;
 			} else {
@@ -1049,8 +1057,8 @@ class Artifact extends Error {
 			} else {
 				//determine the type of field and whether it should have multiple rows supporting it
 				$ef =& $this->ArtifactType->getExtraFields();
-                $type=$ef[$efid]['field_type'];
-                if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
+				$type=$ef[$efid]['field_type'];
+				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					$multi_rows=true;
 					$count=count($extra_fields[$efid]);
 					for ($fin=0; $fin<$count; $fin++) {

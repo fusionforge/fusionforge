@@ -65,6 +65,9 @@ switch ($func) {
 //					} elseif ($afh->isError()) {
 //						$feedback .= $afh->getErrorMessage();
 					} else {
+						if (!util_check_fileupload($input_file)) {
+							exit_error("Error","Invalid filename");
+						}
 						if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
 							$feedback .= ' Could Not Attach File to Item: '.$afh->getErrorMessage();
 						}
@@ -133,24 +136,51 @@ switch ($func) {
 		} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
-			if (!$ath->userIsAdmin() && ($ath->userIsTechnician() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid())))) {
-//				&& !(session_loggedin() && ($ah->getSubmittedBy() == user_getid())) 
-//				&& (session_loggedin() && ($ah->getAssignedTo() == user_getid()))) {
-				$priority=$ah->getPriority();
-				$category_id=$ah->getCategoryID();
-				$artifact_group_id=$ah->getArtifactGroupID();
-				$summary=addslashes($ah->getSummary());
-				$canned_response=100;
-				$new_artfact_type_id=$ath->getID();
-				$delete_file=false;
-			}
-//echo "$priority|$status_id|$category_id|$artifact_group_id|$resolution_id|
-//                $assigned_to|$summary|$canned_response|$details|$new_artfact_type_id";
-			if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
-				$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id,$extra_fields)) {
-				$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
-				$ah->clearError();
-				$was_error=true;
+
+			/*
+
+				The following logic causes fields to be overridden
+				in the event that someone tampered with the HTML form
+
+			*/
+			if ($ath->userIsAdmin() || $ath->userIsTechnician()) {
+
+				//admin and techs can do everything
+				//techs will have certain fields overridden inside the update() function call
+				if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
+					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id,$extra_fields)) {
+					$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
+					$ah->clearError();
+					$was_error=true;
+				}
+
+			} else {
+
+				if (session_loggedin() && ($ah->getSubmittedBy() == user_getid())) {
+
+					//submitter can only add files & comments
+
+					$delete_file=false;
+					if ($ah->addMessage($details,$user_email,true)) {
+						$feedback=$Language->getText('tracker','comment_added');
+					} else {
+						//some kind of error in creation
+						exit_error('ERROR',$feedback);
+					}
+
+				} else {
+
+					//everyone else can only add comments
+					$delete_file=false;
+					$add_file=false;
+					if ($ah->addMessage($details,$user_email,true)) {
+						$feedback=$Language->getText('tracker','comment_added');
+					} else {
+						//some kind of error in creation
+						exit_error('ERROR',$feedback);
+					}
+
+				}
 			}
 
 			//
@@ -203,27 +233,6 @@ switch ($func) {
 				$feedback = $Language->getText('general','update_successful');
 			}
 			include ('browse.php');
-		}
-		break;
-	}
-	case 'postaddcomment' : {
-		/*
-			Attach a comment to an artifact
-			Used by non-admins
-		*/
-		$ah=new ArtifactHtml($ath,$artifact_id);
-		if (!$ah || !is_object($ah)) {
-			exit_error('ERROR','Artifact Could Not Be Created');
-		} else if ($ah->isError()) {
-			exit_error('ERROR',$ah->getErrorMessage());
-		} else {
-			if ($ah->addMessage($details,$user_email,true)) {
-				$feedback=$Language->getText('tracker','comment_added');
-				include ('browse.php');
-			} else {
-				//some kind of error in creation
-				exit_error('ERROR',$feedback);
-			}
 		}
 		break;
 	}
@@ -323,7 +332,7 @@ switch ($func) {
 		} else {
 			if ($ath->userIsAdmin()) {
 				include 'mod.php';
-			} elseif ($ath->userIsTechnician() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
+			} elseif ($ath->userIsTechnician()) {
 				include 'mod-limited.php';
 			} else {
 				include 'detail.php';

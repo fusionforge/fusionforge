@@ -158,7 +158,7 @@ class ArtifactFile extends Error {
 	 *	@return	boolean	success.
 	 */
 	function delete() {
-		if (!$this->Artifact->ArtifactType->userIsAdmin()) {
+		if (!$this->Artifact->ArtifactType->userIsTechnician()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

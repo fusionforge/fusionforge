@@ -1,15 +1,13 @@
 <?php
 /**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * SourceForge Generic Tracker facility
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 
 $ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'pagename'=>'tracker','atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName()) ));
@@ -72,14 +70,14 @@ if (session_loggedin()) {
 		<td><strong><?php echo $Language->getText('tracker','category') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=category')"><strong>(?)</strong></a></strong><br />
 		<?php
 
-		echo $ah->getCategoryName();
+		echo $ath->categoryBox('category_id', $ah->getCategoryID() );
 
 		?>
 		</td>
 		<td><strong><?php echo $Language->getText('tracker','group') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=group')"><strong>(?)</strong></a></strong><br />
 		<?php
 		
-		echo $ah->getArtifactGroupName();
+		echo $ath->artifactGroupBox('artifact_group_id', $ah->getArtifactGroupID() );
 		
 		?>
 		</td>
@@ -91,12 +89,8 @@ if (session_loggedin()) {
 
 	<tr>
 		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
-		<?php
-
-		echo $ath->technicianBox('assigned_to', $ah->getAssignedTo() );
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;update_users=1">('.$Language->getText('tracker','admin').')</a>';
-		?>
-		</td><td>
+            <?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
+		<td>
 		<strong><?php echo $Language->getText('tracker','priority') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=priority')"><strong>(?)</strong></a></strong><br />
 		<?php
 		/*
@@ -145,7 +139,6 @@ if (session_loggedin()) {
 		<br /><strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60" wrap="hard"></textarea></p>
 		<p>
-		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>"></p>
 		<h3><?php echo $Language->getText('tracker','followups') ?>:</h3>
 		<?php
 			echo $ah->showMessages(); 
@@ -170,6 +163,7 @@ if (session_loggedin()) {
 		$count=count($file_list);
 
 		$title_arr=array();
+		$title_arr[]=$Language->getText('tracker_mod','delete');
 		$title_arr[]=$Language->getText('tracker_detail','name');
 		$title_arr[]=$Language->getText('tracker_detail','description');
 		$title_arr[]=$Language->getText('tracker_detail','download');
@@ -179,6 +173,7 @@ if (session_loggedin()) {
 
 			for ($i=0; $i<$count; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td><input type="CHECKBOX" name="delete_file[]" value="'. $file_list[$i]->getID() .'">'.$Language->getText('tracker_mod','delete').' </td>
 				<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 				<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
 				<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'.$Language->getText('tracker_mod','download').'</a></td>

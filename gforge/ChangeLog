@@ -1,3 +1,10 @@
+2005-02-27  Tim Perdue <tim@gforge.org>
+
+	* mopping up permission logic for the different tracker roles -
+	admin, tech, submitter, everyone else. The logic is clearer now 
+	and is enforced at the Artifact.class level, rather than at 
+	www interface.
+
 2005-02-28  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* fixed an array initialization bug in ArtifactType
