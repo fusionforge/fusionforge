@@ -172,7 +172,7 @@ function handle_multi_edit($skill_ids) {
 						'<input type="text" name="title[]" size="100" value="'.db_result($result, $i,'title').'" /></td>'.
 					'</tr>'.
 					'<tr>'.
-						'<td style="background-color:'.$HTML->COLOR_HTMLBOX_TITLE.'>'.$Language->getText('people_editprofile','keywords_max_255_chars').'</td>'.
+						'<td style="background-color:'.$HTML->COLOR_HTMLBOX_TITLE.'">'.$Language->getText('people_editprofile','keywords_max_255_chars').'</td>'.
 					'</tr>'.
 					'<tr>'.
 						'<td><textarea name="keywords[]" rows="3" cols="85" wrap="soft">'.db_result($result, $i,'keywords').'</textarea></td>'.
