@@ -1,3 +1,11 @@
+gforge (3.0-1) experimental; urgency=low
+
+  * [Christian] Merged mostly all change from gforge tree
+    now changing the package name
+  * [Christian] Applied Francisco Gimeno alias kikov supposed corrected patch
+
+ -- Christian Bayle <bayle@debian.org>  Mon,  2 Dec 2002 14:45:40 +0100
+
 sourceforge (gforge-1) experimental; urgency=low
 
   * [Roland] Started the "gforge" branch, to temporarily host all the

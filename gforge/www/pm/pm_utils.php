@@ -228,6 +228,23 @@ function pm_show_hour_box($name,$hour=1) {
 
 }
 
+function pm_show_minute_box($name,$minute=0) {
+
+	echo '	<select name="'.$name.'" size="1">';
+	for ($i=0; $i<=45; $i=$i+15) {
+		if ($i == $minute) {
+			echo '	<option selected value="'.$i.'">'.$i;
+		} else {
+			echo '
+				<option value="'.$i.'">'.$i;
+		}
+	}
+	echo '
+		</select>';
+
+}
+
+
 function pm_show_tasklist ($result,$offset,$set='open') {
 	global $sys_datefmt,$group_id,$group_project_id,$PHP_SELF;
 	/*
