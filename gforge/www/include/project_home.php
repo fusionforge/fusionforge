@@ -373,7 +373,7 @@ if ($project->usesFTP()) {
 	}
 }
 
-$HTML->boxBottom();
+echo $HTML->boxBottom();
 
 if ($project->usesNews()) {
 	// COLUMN BREAK
