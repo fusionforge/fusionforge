@@ -1,7 +1,12 @@
-2003-05-23 Reinhard Spisser <reinhard@spisser.it>
+2003-05-21 Tom Copeland <tom@infoether.com>
+
+	* common/frs/FRSRelease.class
+	Fixed bug # 343; release name field checks were a bit strict.
+
+2003-05-21 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/languages/Spanish.tab:
-	Applied patch #350: Spanish tranlsation. Thanks to Vincente Ruiz and 
+	Applied patch #350: Spanish translation. Thanks to Vincente Ruiz and 
  	his team.
    
 2003-05-20 Tom Copeland <tom@infoether.com>
@@ -12,7 +17,7 @@
 	Jeff Fynboh for the code.
 	
 	* www/top/toplist.php,index.php:
-	Made the "Top forum posts" work again.
+	Made the "Top forum posts" work.
 
 2003-05-19 Tom Copeland <tom@infoether.com>
 
