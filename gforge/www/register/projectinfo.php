@@ -69,7 +69,9 @@ if ($submit) {
 			$description,
 			$license,
 			$license_other,
-			$purpose
+			$purpose,
+			'shell1',
+			$sys_cvs_host
 		);
 		if ($sys_use_scm) {
 			$res = $res && $group->setPluginUse($scm,true);
