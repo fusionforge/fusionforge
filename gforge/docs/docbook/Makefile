@@ -20,7 +20,7 @@ html: validate prepare
 		xsltproc --xinclude --output ${TARGET}$$book/$$book.plain.html ${XSL}book_html.xsl ${SRC}$$book.xml; \
 		tar -czf ${TARGET}$$book/$$book.plain.tar.gz ${TARGET}$$book/$$book.plain.html; \
 	done;
-	
+
 	@for article in ${ARTICLES}; do \
 		echo '# . Generating HTML output for article '$$article; \
 		xsltproc --xinclude --output ${TARGET}$$article/$$article.plain.html ${XSL}article_html.xsl ${SRC}$$article/$$article.xml; \
@@ -63,7 +63,7 @@ pdf: validate prepare
 		(cd ${TARGET}$$book; pdflatex -interaction=batchmode $$book.tex ${DEVNULL};); \
 		(cd ${TARGET}$$book; rm -f *.aux *.glo *.idx *.log *.out *.tex *.toc ${DEVNULL};); \
 	done;
-	
+
 	@for article in ${ARTICLES}; do \
 		echo '# . Generating PDF output for article '$$article; \
 		xsltproc --xinclude --output ${TARGET}$$article/$$article.tex ${XSL}article_pdf.xsl ${SRC}$$article/$$article.xml ${DEVNULL}; \
@@ -128,7 +128,7 @@ clean:
 	# Done
 	##
 	@[ -L xsl/docbook ] && rm xsl/docbook || true
-	@[ -L xsl/db2latex/latex ] && rm xsl/db2latex/latex || true
+	@[ -L xsl/db2latex/xsl ] && rm xsl/db2latex/xsl || true
 	@[ -d xsl/db2latex ] && rmdir xsl/db2latex || true
 
 
@@ -147,6 +147,5 @@ debianpdf:
 	@echo "Making db2latex dir"
 	@[ ! -d xsl/db2latex ] && mkdir xsl/db2latex || echo "db2latex dir already done"
 	@echo "=====> Link to docbook"
-	@[ ! -L xsl/db2latex/latex ] && ln -s /usr/share/xml/docbook/stylesheet/db2latex/latex xsl/db2latex/xsl || echo "docbook link already done"
+	@[ ! -L xsl/db2latex/xsl ] && ln -s /usr/share/xml/docbook/stylesheet/db2latex/latex xsl/db2latex/xsl || echo "docbook link already done"
 	@make pdf
-	
