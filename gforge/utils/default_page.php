@@ -59,7 +59,7 @@ $headers = getallheaders();
 <table width="100%" border="0" cellspacing="0" cellpadding="2" bgcolor="737b9c">
   <tr>
     <td align="center"><FONT color="#ffffff"><SPAN class="titlebar">
-      All trademarks and copyrights on this page are properties of their respective owners. Forum comments are owned by the poster. The rest is copyright �1999-2000 VA Linux Systems, Inc.</SPAN></FONT>
+      All trademarks and copyrights on this page are properties of their respective owners. Forum comments are owned by the poster. The rest is copyright &copy; 1999-2000 VA Linux Systems, Inc.</SPAN></FONT>
     </td>
   </tr>
 </TABLE>
