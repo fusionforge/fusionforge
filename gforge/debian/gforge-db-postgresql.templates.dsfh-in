@@ -18,7 +18,7 @@ Type: string
 Description: Your download server
  The hostname of the server that will host your Gforge packages. 
  It should not be the same as your main SF host.
-Description-fr_FR.UTF-8: Votre serveur de telechargement
+Description-fr.UTF-8: Votre serveur de telechargement
  Le nom du serveur qui hébergera vos paquetages Gforge.
  Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
 
@@ -27,11 +27,11 @@ Description-fr_FR.UTF-8: Votre serveur de telechargement
 Template: gforge/shared/admin_login
 Type: string
 Default: admin
-Default-fr_FR.UTF-8: admin
+Default-fr.UTF-8: admin
 Description: The Gforge administrator login
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.
-Description-fr_FR.UTF-8: Le nom du compte de l'administrateur
+Description-fr.UTF-8: Le nom du compte de l'administrateur
  Ce compte Gforge a tous les privilèges sur le système Gforge.
  Il sert entre autres à approuver la création de projets.
 
@@ -40,7 +40,7 @@ Type: string
 Description: Your IP address
  The IP address of the server that will host your Gforge installation.
  This is needed for the Apache virtualhosting configuration.
-Description-fr_FR.UTF-8: Votre adresse IP
+Description-fr.UTF-8: Votre adresse IP
  L'adresse IP du serveur qui hébergera votre installation de Gforge.
  Cette information est requise pour la configuration des hôtes virtuels
  d'Apache.
@@ -51,7 +51,7 @@ Description: The Gforge administrator password
  This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.  Please
  type a password here.
-Description-fr_FR.UTF-8: Mot de passe de l'administrateur
+Description-fr.UTF-8: Mot de passe de l'administrateur
  Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le
  saisir ici.
 
@@ -59,19 +59,19 @@ Template: gforge/shared/admin_password_confirm
 Type: password
 Description: The Gforge administrator password - again
  Please re-type the password for confirmation.
-Description-fr_FR.UTF-8: Mot de passe administrateur - confirmation
+Description-fr.UTF-8: Mot de passe administrateur - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-Default-fr_FR.UTF-8: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Default-fr.UTF-8: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 Description: The initial list of skills
  Gforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of
  skills that will enter the database.  Please enter the skill names
  separated by semi-colons `;'.
-Description-fr_FR.UTF-8: Liste de compétences
+Description-fr.UTF-8: Liste de compétences
  Les utilisateurs de Gforge peuvent afficher leurs niveaux de compétence
  dans différents domaines.  Cette liste est la liste initiale de ces domaines.
  Veuillez entrer les noms de ces domaines de compétence séparés par des

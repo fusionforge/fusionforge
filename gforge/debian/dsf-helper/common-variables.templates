@@ -3,7 +3,7 @@ Type: string
 Description: Your SF domain or subdomain name
  The domain that will host your Gforge installation.  Some services
  will be given their own subdomain in that domain (cvs, lists, etc.).
-Description-fr_FR.UTF-8: Votre nom de domaine
+Description-fr.UTF-8: Votre nom de domaine
  Le nom du domaine qui héberge votre Gforge.  Certains services auront
  leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
 
@@ -12,15 +12,15 @@ Type: string
 Description: The SF admin email address.
  The email address of the Gforge administrator of your site.  Needed
  in case a problem occurs.
-Description-fr_FR.UTF-8: L'adresse e-mail de l'administrateur SF
+Description-fr.UTF-8: L'adresse e-mail de l'administrateur SF
  L'adresse e-mail de l'administrateur de votre Gforge, requise au cas
  où un problème survendrait.
 
 Template: gforge/shared/system_name
 Type: string
 Default: Gforge
-Default-fr_FR.UTF-8: Gforge
+Default-fr.UTF-8: Gforge
 Description: The Gforge system name
  This name is used in various places throughout the system.
-Description-fr_FR.UTF-8: Nom de votre système Gforge
+Description-fr.UTF-8: Nom de votre système Gforge
  Ce nom est utilisé à divers endroits au travers du système.

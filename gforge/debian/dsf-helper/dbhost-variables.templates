@@ -4,7 +4,7 @@ Description: Your database server
  The IP address (or host name) of the server that will host your
  GForge database.  This is needed for virtually all the
  subpackages.
-Description-fr_FR.UTF-8: Votre serveur de base de données
+Description-fr.UTF-8: Votre serveur de base de données
  L'adresse IP (ou le nom DNS) du serveur qui hébergera votre base
  de données de GForge.  Cette information est requise pour la
  configuration de quasiment tous les sous-paquets.
@@ -16,7 +16,7 @@ Description: Your database name
  The name of the database that will host your
  GForge database.  This is needed for virtually all the
  subpackages.
-Description-fr_FR.UTF-8: Votre nom de base de données
+Description-fr.UTF-8: Votre nom de base de données
  Le nom de la base de donnée qui hébergera votre base
  de données de GForge.  Cette information est requise pour la
  configuration de quasiment tous les sous-paquets.
@@ -28,7 +28,7 @@ Description: Your database admin username
  The admin username of the database that will host your
  GForge database.  This is needed for virtually all the
  subpackages.
-Description-fr_FR.UTF-8: Votre nom de l'administrateur de base de données
+Description-fr.UTF-8: Votre nom de l'administrateur de base de données
  Le nom de l'administrateur de base de données  qui hébergera votre base
  de données de GForge.  Cette information est requise pour la
  configuration de quasiment tous les sous-paquets.

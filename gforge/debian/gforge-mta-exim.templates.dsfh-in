@@ -14,7 +14,7 @@ Description: Do you want mail to ${noreply} to be deleted?
  black hole (/dev/null), unless you have another use for that address.
  .
  Answering "yes" here will perform that redirection.
-Description-fr_FR.UTF-8: Supprimer les e-mails pour ${noreply} ?
+Description-fr.UTF-8: Supprimer les e-mails pour ${noreply} ?
  Gforge envoie fréquemment des e-mails depuis (et vers) l'adresse
  "${noreply}".
  .

@@ -11,7 +11,7 @@ Description: Gforge requires appropriate PAM-LDAP configuration
  admin=yes, root login account="cn=admin,dc=<your-dc-here>", crypt to
  use for passwords=crypt.  Make sure that you type the same password
  for the libpam-ldap root password and the Gforge LDAP password.
-Description-fr_FR.UTF-8: Gforge a besoin d'une configuration PAM-LDAP correcte
+Description-fr.UTF-8: Gforge a besoin d'une configuration PAM-LDAP correcte
  Gforge repose sur PAM-LDAP, et a donc besoin d'une configuration
  appropriée de cette bibliothèque.  Il se peut que vous ayez besoin
  d'utiliser "dpkg-reconfigure libpam-ldap" pour corriger des

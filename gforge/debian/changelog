@@ -1,4 +1,4 @@
-gforge (3rc2-4+) unstable; urgency=low
+gforge (3.0-0+13) unstable; urgency=low
 
   * [Roland] The much-awaited 3.0 release!  Yay!
   * [Roland] This Debian release is dedicated to Christian and his wife,
@@ -8,8 +8,10 @@ gforge (3rc2-4+) unstable; urgency=low
   * [Roland] Bumped Standards-Version: to 3.5.10 (no changes needed).
   * [Christian] added sys_ldap_version variable and take it in account if
     defined in common/include/ldap.php after bind
+  * [Roland] Rename French versions of the fields in Debconf templates
+    from *-fr_FR to *-fr (closes: #199743).
 
- -- Christian Bayle <bayle@debian.org>  Sun, 29 Jun 2003 14:14:43 +0200
+ -- Roland Mas <lolando@debian.org>  Thu,  3 Jul 2003 21:06:13 +0200
 
 gforge (3rc2-4) unstable; urgency=low
 

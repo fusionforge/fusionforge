@@ -11,7 +11,7 @@ Description: Do you want ${file} to be updated?
  ${file} yourself.
  .
  Shall I modify ${file} automatically?
-Description-fr_FR.UTF-8: Voulez-vous mettre à jour ${file} ?
+Description-fr.UTF-8: Voulez-vous mettre à jour ${file} ?
  Pour que Gforge fonctionne complètement, des modifications
  doivent être apportées au fichier ${file}.
  .
@@ -35,7 +35,7 @@ Description: Do you want ${file} to be updated?
  ${file} yourself.
  .
  Shall I modify the ${file} automatically?
-Description-fr_FR.UTF-8: Voulez-vous mettre à jour ${file} ?
+Description-fr.UTF-8: Voulez-vous mettre à jour ${file} ?
  Pour désinstaller complètement Gforge, des modifications
  doivent être apportées au fichier ${file}.
  .
@@ -54,7 +54,7 @@ Description: Please check ${file}
  I have written the suggested changes into ${file}.gforge-new.
  Please check this file and apply the appropriate changes
  to ${file}.
-Description-fr_FR.UTF-8: Veuillez vérifier ${file}
+Description-fr.UTF-8: Veuillez vérifier ${file}
  Vous avez choisi de ne pas laisser le paquet Gforge modifier
  le fichier ${file}.  Conformément à ce choix, les modifications ont
  été sauvegardées dans ${file}.gforge-new.  Veuillez vérifier
