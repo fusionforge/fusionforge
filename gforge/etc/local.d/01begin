@@ -31,13 +31,9 @@
 // might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = '{domain_name}';
 //$sys_fallback_domain = 'gforge2.company.com';
-//$sys_internal_network = '192.168.1.';
 
 // Machine used for downloading sources/packages
 $sys_download_host = '{download_host}';
-
-// Machine used for uploading sources/packages
-$sys_upload_host = '{upload_host}';
 
 // Machine(s) that host users' shell accounts
 //  N.B. to the SourceForge Crew: What's the difference between the user
@@ -46,21 +42,7 @@ $sys_upload_host = '{upload_host}';
 $sys_shell_host = '{shell_host}';
 $sys_users_host = '{users_host}';
 
-// Machine that hosts docs (such as the FAQs and the various software
-// licenses (*BSD, [L]GPL, etc.).  You REALLY want this to be the same
-// machine that the GForge code is running on because all of the
-// PHP makes reference to these documents in terms of relative paths that
-// are part of the GForge code tree.
-$sys_docs_host = '{docs_host}';
-
 // Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
 $sys_lists_host = '{lists_host}';
-
-// Domain Name Servers
-//    N.B.: Use terminated FQDNs here (with the final ".") so the resolver
-//    doesn't attempt to recurse in the case of a slightly broken DNS
-//    configuration
-$sys_dns1_host = 'ns1.{domain_name}';
-$sys_dns2_host = 'ns2.{domain_name}';
 

@@ -4,10 +4,6 @@
 //If this is null (i.e. ""), then gforge will use Unix sockets to connect
 //to the database.
 $sys_dbhost='{db_host}';
-//whether or not to use replication
-$sys_db_use_replication=false;
-$sys_dbreadhost='localhost';
-$sys_dbreaddb='stats';
 $sys_dbname='{db_name}';
 $sys_dbuser='{db_user}';
 // You can also specify a database port if you're using something other than 5432
