@@ -99,7 +99,7 @@ my $gf_block = "# BEGIN GFORGE BLOCK -- DO NOT EDIT #
 # third occurences of a line containing only the word \"end\")
 
 forward_for_gforge:
-  domains = users.$domain_name
+  domains = $sys_users_host
   driver = redirect
   file_transport = address_file
   data = \${lookup pgsql {select email from mta_users where login=".chr(39)."\$local_part".chr(39)."}{\$value}}
