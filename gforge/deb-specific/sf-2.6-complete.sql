@@ -7030,7 +7030,7 @@ SELECT setval ('"project_status_pk_seq"', 1, 'f');
 -- Name: project_task_pk_seq Type: SEQUENCE SET Owner: 
 --
 
-SELECT setval ('"project_task_pk_seq"', 1, 't');
+SELECT setval ('"project_task_pk_seq"', 100, 't');
 
 --
 -- TOC Entry ID 87 (OID 20881)

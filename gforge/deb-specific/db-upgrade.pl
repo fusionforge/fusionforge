@@ -327,6 +327,24 @@ eval {
 	  }
 
 	  $version = &get_db_version ;
+	  $target = "2.5.9999.4+sequences+bumped" ;
+	  if (is_lesser $version, $target) {
+	      debug "Fixing sequence for task ids" ;
+
+	      do {
+		  $query = "select nextval ('project_task_pk_seq')" ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  @array = $sth->fetchrow_array () ;
+		  $sth->finish () ;
+	      } until $array[0] >= 100 ;
+
+	      &update_db_version ($target) ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
 	  $target = "2.6-0" ;
 	  if (is_lesser $version, $target) {
 	      debug "Database has successfully been converted." ;

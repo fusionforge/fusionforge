@@ -5,8 +5,13 @@ sourceforge (2.6-0+8+) unstable; urgency=low
   * [Roland] Renamed db-upgrade26.pl to db-upgrade.pl.
   * [Roland] Split the parse_sql_file function out of db-upgrade.pl and
     into its own file (sqlparser.pm).
+  * [Roland] [From 2.5] Bumped the sequences for task ids so that they are
+    greater than 100.  If they are not, the 100th task will have a wrong
+    list or reverse dependencies (since 100 is the id of "None", and all
+    tasks depend on this "None" by default.  Note: there seems to be no
+    more dependencies in the artifact manager.
 
- -- Roland Mas <lolando@debian.org>  Mon, 18 Mar 2002 22:09:12 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Mar 2002 14:48:15 +0100
 
 sourceforge (2.6-0+8) unstable; urgency=low
 
