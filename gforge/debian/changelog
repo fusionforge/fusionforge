@@ -6,8 +6,19 @@ sourceforge (2.5-25+) unstable; urgency=low
   * [Roland] Recalculated $version in db-upgrade.pl.
   * [Roland] Mentioned the .sourceforge-old backup files in the debconf
     question.
+  * [Roland] Versioned Depends: on slapd (the admin dn seems to have
+    changed).
+  * [Roland] Fixed cleaning of LDAP-related files on purge.
+  * [Roland] Also fixed cleaning of LDAP directory on remove.
+  * [Roland] Fixed SGML in sourceforge-config.sgml.
+  * [Roland] Updated debian/TODO a bit.  It seems we mostly have "can wait
+    until / will be done in / already done in the 2.6 series" entries now,
+    which is cool.
+  * [Roland] Removed an invalid (and useless) request from
+    approve-pending.php.  Should remove a few lines in PostgreSQL error
+    logs.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Mon, 25 Feb 2002 22:21:21 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 28 Feb 2002 23:01:55 +0100
 
 sourceforge (2.5-25) unstable; urgency=low
 
