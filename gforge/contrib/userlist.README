@@ -5,6 +5,9 @@ Contributor:
 Jim Nutt
 
 Changelog:
+2003-04-29: Tom Copeland
+	* This patch no longer cleanly applies
+
 2003-01-22: Tom Copeland
 	* Added documentation
 
