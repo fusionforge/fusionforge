@@ -97,7 +97,7 @@ echo db_error();
 
 db_commit();
 
-echo "Error: ".db_error();
+echo db_error();
 
 //
 //	populate stats_site table

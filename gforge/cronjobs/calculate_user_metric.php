@@ -89,7 +89,7 @@ for ($i=1; $i<9; $i++) {
 		Now grab/average trusted ratings into this table
 	*/
 
-	if ($j) {
+//	if ($j) {
 	    $sql="INSERT INTO user_metric_tmp1_$i
 	    	SELECT user_ratings.user_id,count(*) AS count,
 		avg(user_metric$j.importance_factor),
@@ -97,7 +97,7 @@ for ($i=1; $i<9; $i++) {
 		FROM user_ratings,user_metric$j
 		WHERE user_ratings.rated_by=user_metric$j.user_id
 		GROUP BY user_ratings.user_id";
-	} else {
+/*	} else {
 	    $sql="INSERT INTO user_metric_tmp1_$i
 		SELECT user_ratings.user_id,count(*) AS count,
 		1.6,
@@ -105,7 +105,7 @@ for ($i=1; $i<9; $i++) {
 		FROM user_ratings
 		GROUP BY user_ratings.user_id";
 	}
-
+*/
 	$res=db_query($sql);
 	if (!$res) {
 		echo "Error in round $i inserting average ratings: ";
