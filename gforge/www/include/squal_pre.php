@@ -30,6 +30,10 @@ require_once('common/include/Permission.class');
 require_once('common/include/utils.php');
 require_once('common/include/Group.class');
 
+// Plugins subsystem
+require_once('common/include/Plugin.class') ;
+require_once('common/include/PluginManager.class') ;
+
 //plain text version of exit_error();
 require_once('squal_exit.php');
 
