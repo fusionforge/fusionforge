@@ -1,4 +1,4 @@
-gforge (4.0.2-5x) unstable; urgency=low
+gforge (4.0.2-5z) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
   * [Christian] Had to add a db_stop before gforge-config in
@@ -21,6 +21,7 @@ gforge (4.0.2-5x) unstable; urgency=low
   * [Christian] Added conflict to gforge-cvs
   * [Christian] Move common dir and some files from web-apache to common
     so postgresql can upgrade without web-apache
+  * [Christian] added from 20041211 to 20050212 db stuffs
 
  -- Christian Bayle <bayle@debian.org>  Fri, 11 Feb 2005 01:19:12 +0100
 
