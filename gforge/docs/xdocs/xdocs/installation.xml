@@ -478,7 +478,7 @@ cvspserver      2401/tcp                        # CVS client/server operations
 cvspserver      2401/udp                        # CVS client/server operations
 [tom@cougaarforge tom]$
 </source>
-<p>Ensure the following info is in <code>/etc/xinetd.d/cvspserver</code>:</p>
+<p>Ensure the following info is in <code>/etc/xinetd.d/cvspserver</code> (if it doesn't exist create a new file with the following text to enable anonymous access):</p>
 <source>
 [tom@cougaarforge xinetd.d]$ cat /etc/xinetd.d/cvspserver
 service cvspserver
