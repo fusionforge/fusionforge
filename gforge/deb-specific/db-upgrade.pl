@@ -405,7 +405,7 @@ eval {
                            use_cvs, use_news, type, use_docman,
                            new_task_address, send_all_tasks,
                            use_pm_depend_box)
-       	                   VALUES ('Stats', '$domain_name/top/', 1,
+       	                   VALUES ('Stats', '$domain_name/top/', 0,
        	    	           'A', 'stats', 'shell', NULL, NULL, 'cvs',
        	    	           'website', NULL, NULL, 0, NULL, 1, 0, 0, 0, 0,
        	    	           1, 1, 1, '', 0, 0)",
@@ -454,7 +454,27 @@ eval {
 	  
 	  last PATH_SWITCH ;
       } ;
-  }
+  } # PATH_SWITCH
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+2" ;
+    if (is_lesser $version, $target) {
+	debug "Updating permissions on system groups." ;
+	$query = "UPDATE groups SET is_public=1 WHERE group_id=1" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+	$query = "UPDATE groups SET is_public=1 WHERE group_id=$sys_news_group" ;
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+	
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
     
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;

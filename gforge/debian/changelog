@@ -5,6 +5,9 @@ sourceforge (2.6-0+9+) unstable; urgency=low
     applied, many thanks.
   * [Roland] Changed about.php page so that it now speaks about Debian
     Sourceforge.
+  * [Roland] Fixed links in the Site News page.
+  * [Roland] Made groups siteadmin and newsadmin public to prevent
+    problems with submitting of news.
 
  -- Christian Bayle <bayle@debian.org>  Wed, 17 Apr 2002 00:27:54 +0200
 
