@@ -1,3 +1,8 @@
+2003-01-15  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/include/languages/Spanish.tab: translations for Reinhard's
+	new strings.
+
 2003-01-15
 
 	***** PRE9
@@ -25,12 +30,12 @@
 
 	* deb-specific/install-postfix.sh: Applied patch #102 by Julien
 	Goodwin.  Should have a better chance of a working
-	gforge-mta-postfix now.  Thanks, Julien. 
+	gforge-mta-postfix now.  Thanks, Julien.
 
 2003-01-13 Reinhard Spisser (reinhard@spisser.it)
 
 	* www/docman/*: fully localized
-	
+
 	* www/include/languages/Base.tab: added missing strings
 
 	* www/include/language/Italian.tab: Italian Docman Localization
@@ -38,8 +43,8 @@
 2003-01-13 Tom Copeland (tom@infoether.com)
 
 	* www/survey/admin/add_survey.php: Survey title is now a required field.
-	
-	* www/project/admin/qrs.php: File name/type/release name/processor 
+
+	* www/project/admin/qrs.php: File name/type/release name/processor
 	type are now required fields.
 
 2003-01-13  Tim Perdue (tim@gforge.org)

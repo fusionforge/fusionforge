@@ -100,22 +100,46 @@ cvs	browsetree	<HR><B>Navegue por el &aacute;rbol CVS</B> <P>Navegar por el dire
 cvs	browseit	Navegar por el repositorio CVS
 docman	section	Proyecto: $1
 docman	title	Administrador de documentos
+docman	submit_new	Publicar Nuevo Documento
+docman	view_doc	Leer Documentos
+docman	admin	Administraci&oacute;n
 docman_admin	section	$1
 docman_admin	title	Administrador de documentos: Administraci&oacute;n
+docman_admin	add_edit_docgroups	Crear/Editar Grupos de Documentos
 docman_admin_docedit	section	Administrador de documentos
 docman_admin_docedit	title	Edita documento
 docman_admin_editdocs	section	Administraci&oacute;n del encargado de documentos
 docman_admin_editdocs	title	Edita documentos
+docman_admin_editdocs	state	Estado
+docman_admin_editdocs	upload	OPCIONAL: Enviar nuevo documento
+docman_admin_editdocs	doc_contents	Continento de documento
+docman_admin_addgroups	title	Crear Groupos de Documentos
 docman_admin_editgroups	section	Administraci&oacute;n del encargado de documentos
 docman_admin_editgroups	title	Edita grupos
+docman_admin_editgroups	new_group_name	Nombre del Nuevo Grupo
+docman_admin_editgroups	add_group	Crear Grupo
+docman_admin_editgroups	edit_group	Editar Grupo
+docman_admin_editgroups	description	El nombre del grupo ser&aacute; usado como t&iacute;tulo, entonces se necesita formatearlo as&iacute;.
 docman_admin_groupdelete	section	Administraci&oacute;n del encargado de documentos
 docman_admin_groupdelete	title	Borra grupo de documentos
 docman_admin_groupedit	section	Administraci&oacute;n del encargado de documentos
 docman_admin_groupedit	title	Renombrar grupo de documentos
+docman_admin_groupedit	group_name	Nombre del Grupo
 docman_display_doc	section	Proyecto: $1 
 docman_display_doc	title	Administrador de documentos: Mostrar documentos
+docman_display_doc	all_languages	Todos los idiomas.
 docman_new	section	Proyecto: $1 
 docman_new	title	Administrador de documentos: Enviar un nuevo documento
+docman_new	intro	<strong>T&iacute;tulo del Documento</strong>: Se refiere al t&iacute;tulo breve del documento (ej. Como usar el servidor de downloads)<br /><strong>Descripci&oacute;n</strong>: Una descripci&oacute;n que estar&aacute; debajo del t&iacute;tulo.
+docman_new	doc_title	T&iacute;tulo del Documento
+docman_new	description	Descripci&oacute;n
+docman_new	upload_file	Enviar Archivo
+docman_new	language	Idioma
+docman_new	group	El grupo de este documento:
+docman_new	submit	Enviar Informaci&oacute;n
+docman_new	file	Archivo
+docman_new	state	Estado
+docman_new	error_blank_document	Error: el documento est&acute; vac&iacute;o.
 forum	section	Proyecto: $1
 forum	title	Foros
 forum	choose	<p>Elije un foro y podr&aacute;s navegar, buscar y enviar mensajes.<p>
@@ -143,9 +167,18 @@ frs	file_package	Paquetes
 frs	file_rel_date	D&iacute;a
 frs	file_version	Versi&oacute;n
 frs	latest_file_releases	&Uacute;ltimas Publicaciones de Ficheros
-general	return	[Retornar]
+general	return	[Retornar a $1]
 general	sitename	$1
 general	footer	Esto es $1. Para mayor informaci&oacute;n incluido informaci&oacute;n de copyright, ver <a href="/about.php">esta p&aacute;gina</a>.
+general	error	Error
+general	turned_off	Este proyecto no se usa $1.
+general update_successful	Actualizado con exito.
+general	create_successful	Creado con exito.
+general	no_valid_group	El grupo de $1 no fue selecionado.
+general	no_valid_filename	El nombre del archivo es invalido.
+general	submitted_successfully	$1 fue enviado con exito.
+general	language	idioma
+general	edit	Editar
 group	developer_info	Informaci&oacute;n del colaborador
 group	developers	Colaboradores
 group	long_bugs	Registro de errores
@@ -561,6 +594,12 @@ news_utils	nonews	Ninguna nueva noticia encontrada
 news_utils	archive	Archivo de Noticias
 news_utils	submit	Enviar Noticias
 news_utils	readmore	<NOBR>Leer m&aacute;s/Comentar</NOBR>
+searchbox	softwaregroup	Software/Grupos
+searchbox	skill	Habilidad
+searchbox	people	Personas
+searchbox	search	Buscar
+searchbox	forum	Este foro
+searchbox	task	Tarea
 calendar	title	Manejo del Proyecto: Calendario
 calendar	january	enero
 calendar	february	febreo
