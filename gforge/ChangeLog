@@ -1,3 +1,6 @@
+2004-02-03  Tom Copeland <tom@infoether.com>
+	* Applied patch [ #662 ] New german localization diff file
+
 2004-01-24  Christian Bayle <bayle@debian.org>
 	* cvs admin -kb on all .png files and added according rule in
 	CVSROOT/cvswrappers
