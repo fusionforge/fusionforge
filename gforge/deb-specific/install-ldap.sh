@@ -81,7 +81,7 @@ configure_slapd(){
 			else
 				echo "Commenting $schema"
 				export schema
-				perl -pi -e "s/^include[ 	]*\$schema/#Comment by Sourceforge install#include	\$schema/g" /etc/ldap/slapd.conf
+				perl -pi -e "s/^include[ 	]*\$schema/#Comment by Sourceforge install#include	\$schema/g" /etc/ldap/slapd.conf.sourceforge-new
 				echo "include	$schema	#Added by Sourceforge install" >>/etc/ldap/slapd.conf.sourceforge
 				echo "Adding $schema"
 			fi
