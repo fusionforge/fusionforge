@@ -123,7 +123,7 @@ class BaseLanguage {
 	 * @param int $languageId language id
 	 */
 	function loadLanguageID($languageId) {
-		$res = db_query('SELECT * FROM supported_languages WHERE language_id=\''.$languageId.'\'');
+		$res = db_query('SELECT classname FROM supported_languages WHERE language_id=\''.$languageId.'\'');
 		$this->loadLanguage(db_result($res, 0, 'classname'));
 	}
 
