@@ -101,7 +101,7 @@ function getLog($Input)
 		if ($Lines[$i]=='Log Message:')
 			$Logging=true;
 	}
-	return $Log;
+	return trim($Log);
 }
 
 $files = array();
@@ -164,7 +164,7 @@ foreach ( $files as $file )
 	$SubmitVars["Log"]             = $Log;
 	$SubmitVars["TaskNumbers"]     = getInvolvedTasks($Log);
 	$SubmitVars["ArtifactNumbers"] = getInvolvedArtifacts($Log);
-	$SubmitVars["CvsDate"]         = date("D M j G:i:s T Y");
+	$SubmitVars["CvsDate"]         = time();
 /*	if (isset($SubmitVars['TaskNumbers']) &&
 		isset($SubmitVars['ArtifactNumbers'])) {
 		exit(0);

@@ -48,7 +48,7 @@ class cvstrackerPlugin extends Plugin {
 	*
 	*/
 	function getCommitEntries($Query,$group_id) {
-		global $Language;
+		global $Language, $sys_shortdatefmt;
 
 		$group = &group_get_object($group_id);
 		$DBResult = db_query($Query);
@@ -63,11 +63,10 @@ class cvstrackerPlugin extends Plugin {
 		
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
-
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 				'<td>'. $this->getFileLink($group->getUnixName(),
 						$Row['file']). '</td>'.
-				'<td>'. htmlspecialchars($Row['cvs_date']).'</td>'.
+				'<td>'. date($sys_shortdatefmt, $Row['cvs_date']).'</td>'.
 				'<td>'. $this->getDiffLink($group->getUnixName(),
 						$Row['file'],
 						$Row['prev_version'],
