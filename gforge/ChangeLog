@@ -1,3 +1,8 @@
+2004-08-12  Francisco Gimeno <kikov@kikov.org>
+	* cronjobs/tracker_gateway.php: it's just a migration from forum to
+	tracker. It works in the same way. Need to be integrated into
+	cronjobs/mail/mailaliases.php.
+	
 2004-08-09  Tom Copeland <tom@infoether.com>
 
 	* cronjobs/db_project_sums.php: Fixed bug # 868: Deleted lists are
