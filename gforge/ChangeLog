@@ -5,6 +5,7 @@
 	* fixed minor issues in RPM packaging
 	* updated French translation
 	* fixed minor layout problems
+	* fixed the email encoding problem
 
 2005-02-27  Tim Perdue <tim@gforge.org>
 
