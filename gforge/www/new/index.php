@@ -14,7 +14,7 @@
 require_once('pre.php');
 require_once('vote_function.php');
 
-$HTML->header(array("title"=>"New File Releases",'pagename'=>'new'));
+$HTML->header(array("title"=>$Language->getText('new','title'),'pagename'=>'new'));
 
 if ( !$offset || $offset < 0 ) {
 	$offset = 0;
@@ -48,7 +48,7 @@ $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 if (!$res_new || db_numrows($res_new) < 1) {
 	// echo $query . "<br /><br />";
 	echo db_error();
-	echo "<h1>No new releases found. </h1>";
+	echo "<h1>".$Language->getText('new','no_new_release_found')."</h1>";
 } else {
 
 	if ( db_numrows($res_new) > 20 ) {
@@ -65,11 +65,11 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			print "<tr valign=\"top\">";
 			print "<td colspan=\"2\">";
 			print "<a href=\"/projects/$row_new[unix_group_name]/\"><strong>$row_new[group_name]</strong></a>"
-				. "\n</td><td nowrap=\"nowrap\"><em>Released by: <a href=\"/users/$row_new[user_name]/\">"
+				. "\n</td><td nowrap=\"nowrap\"><em>".$Language->getText('new','released_by')."<a href=\"/users/$row_new[user_name]/\">"
 				. "$row_new[user_name]</a></em></td></tr>\n";
 
-			print "<tr><td>Module: $row_new[module_name]</td>\n";
-			print "<td>Version: $row_new[release_version]</td>\n";
+			print "<tr><td>".$Language->getText('new','module').": "."$row_new[module_name]</td>\n";
+			print "<td>".$Language->getText('new','version').": "."$row_new[release_version]</td>\n";
 			print "<td>" . date("M d, h:iA",$row_new[release_date]) . "</td>\n";
 			print "</tr>";
 
@@ -78,7 +78,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			if ($row_new['short_description']) {
 				print "<em>$row_new[short_description]</em>";
 			} else {
-				print "<em>This project has not submitted a description.</em>";
+				print "<em>".$Language->getText('new','this_project_has_not')."</em>";
 			}
 			// print "<p>Release rating: ";
 			// print vote_show_thumbs($row_new[filerelease_id],2);
@@ -92,11 +92,11 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			print '<tr><td colspan="3">';
 			// link to whole file list for downloads
 			print "&nbsp;<br /><a href=\"/project/showfiles.php?group_id=$row_new[group_id]&release_id=$row_new[release_id]\">";
-			print "Download</a> ";
-			print '(Project Total: '.$row_new['downloads'].') | ';
+			print $Language->getText('new','download'). "</a> ";
+			print '('.$Language->getText('new','projects_total') .$row_new['downloads'].') | ';
 			// notes for this release
 			print "<a href=\"/project/shownotes.php?release_id=".$row_new[release_id]."\">";
-			print "Notes & Changes</a>";
+			print $Language->getText('new','notes_changes'). "</a>";
 			print '<hr /></td></tr>';
 
 			$G_RELEASE["$row_new[group_id]"] = 1;
@@ -108,7 +108,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 		echo "<span style=\"text-decoration: none;font-family: arial, helvetica\">";
         	echo "<a href=\"/new/?offset=".($offset-20)."\">" .
 			html_image("t2.png","15","15",array("border"=>"0","align"=>"middle")) .
-			" <strong>Newer Releases</strong></a></span>";
+			" <strong>".$Language->getText('new','newer_releases')."</strong></a></span>";
         } else {
         	echo "&nbsp;";
         }
@@ -116,7 +116,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	echo "</td><td colspan=\"2\" align=\"right\">";
 	if (db_numrows($res_new)>$rows) {
 		echo "<span style=\"text-decoration: none;font-family: arial, helvetica\">";
-		echo "<a href=\"/new/?offset=".($offset+20)."\"><strong>Older Releases</strong> " .
+		echo "<a href=\"/new/?offset=".($offset+20)."\"><strong>".$Language->getText('new','older_releases')."</strong> " .
 		html_image("t.png","15","15",array("border"=>"0","align"=>"middle")) .
 		"</a></span>";
 	} else {
