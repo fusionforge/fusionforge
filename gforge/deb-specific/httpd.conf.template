@@ -207,7 +207,7 @@ Include /etc/gforge/httpd.common
     allow from all
   </Location>
 
-  RedirectMatch permanent ^/$ http://{lists_host}/cgi-bin/mailman/listinfo
+  RedirectMatch permanent ^/$ http://{lists_host}/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
   CustomLog "|{cronolog_path} /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
