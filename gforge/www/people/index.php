@@ -14,10 +14,11 @@
 
 require_once('pre.php');
 require_once('www/people/people_utils.php');
+require_once('www/project/admin/project_admin_utils.php');
 
 if ($group_id) {
-
-	people_header(array('title'=>$Language->getText('people','title'),'pagename'=>'people_proj','titlevals'=>array(group_getname($group_id))));
+	
+	project_admin_header(array());
 
 	echo '
 	<p>'.$Language->getText('people','here_is_list_position').'</p>

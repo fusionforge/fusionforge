@@ -14,14 +14,15 @@
 
 require_once('pre.php');
 require_once('www/people/people_utils.php');
+require_once('www/project/admin/project_admin_utils.php');
 
 if ($group_id && (user_ismember($group_id, 'A'))) {
+
+	project_admin_header(array());
 
 	/*
 		Fill in the info to create a job
 	*/
-	people_header(array('title'=>$Language->getText('people_createjob','title'),'pagename'=>'people_createjob'));
-
 	echo '
 		<p>'.$Language->getText('people_createjob','explains').'	</p>
 		<p>
