@@ -1,7 +1,7 @@
-Installation of GForge has been made much easier than the old SF2.x codebase.
-A great deal of unnecessary code and scalability hacks have been removed to 
-make the installation and use of GForge practical for just about any 
-Linux admin.
+Installation of GForge has been made much easier than the old SF2.x
+codebase.  A great deal of unnecessary code and scalability hacks have
+been removed to make the installation and use of GForge practical for
+just about any Linux admin.
 
 *
 *  If you need professional installation, customization,  
@@ -27,14 +27,16 @@ You will need:
 	Optional Gantt Charting and Graphing Support:
 	JPGraph: ( http://www.aditus.nu/jpgraph/ )
 
-Compile and install PostgreSQL, then PHP/Apache as per the instructions. PHP should 
-be compiled into Apache, as well as compiled as a separate CGI. When compiling PHP, 
-don't forget the --with-pgsql option for PostgreSQL support. 
+Compile and install PostgreSQL, then PHP/Apache as per the
+instructions. PHP should be compiled into Apache, as well as compiled
+as a separate CGI. When compiling PHP, don't forget the --with-pgsql
+option for PostgreSQL support.
 
-If you are going to use Gantt charting and other graphing features, your PHP must be 
-compiled --with-gd. Follow the JPGraph installation instructions (extra fonts for 
-JPGraph are not necessary). Be sure your /etc/gforge/local.inc file contains the 
-proper path to the jpgraph/src/ directory.
+If you are going to use Gantt charting and other graphing features,
+your PHP must be compiled --with-gd. Follow the JPGraph installation
+instructions (extra fonts for JPGraph are not necessary). Be sure your
+/etc/gforge/local.inc file contains the proper path to the jpgraph/src/
+directory.
 
 Install Python and MailMan as per the instructions.
 
@@ -46,20 +48,30 @@ Create a blank database for postgres
 
 # createdb alexandria
 
-Be certain that plpgsql.so is present in your Postgres library path.  Import the database schema:
+You may need to add Pl/Pgsql as a language.  To do so:
+
+[user]$ su -
+[root]# su postgres
+[postgres]$ createlang plpgsql template1
+[postgres]$ exit
+[root]# exit
+
+Next, import the database schema:
 
 # psql alexandria < db/gforge3.sql
 
 WEB SETUP
 ---------
 
-Move the GForge tarball into position and make the www/ directory 
-the "Document Root".
+Move the GForge tarball into position and make the www/ directory the
+"Document Root".
 
 Apache's http.conf file should have these values:
 
 ErrorDocument 404 /404.php
 php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
+php_flag register_globals on
+php_flag file_uploads on
 <Location /projects>
   ForceType application/x-httpd-php
 </Location>
@@ -70,24 +82,23 @@ php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
 PHP setup
 ---------
 
-Your php.ini file should have "register_globals=on", as well 
-as file uploads.
+You may also add the include_path to the php.ini, as it will be
+necessary for your php cgi to run the cron jobs.  Alternatively, you
+may run the cronjobs with:
 
-You may also add the include_path to the php.ini, as it will be 
-necessary for your php cgi to run the cron jobs.
+/usr/bin/php -dinclude_path='.:/path/to/gforge/:/path/to/gforge/www/include/' -q <file>
 
-It is also recommended, for fastest possible performance, that you 
+if you do not want to edit your php.ini file.
+
+It is also recommended, for fastest possible performance, that you
 use a php caching accelerator, such as the Ion Cube Accelerator.
 http://www.php-accelerator.co.uk/
-
-In addition, in your php.ini file, you may wish to set 
-output_handler = ob_gzhandler 
 
 FRS - File Release System
 -------------------------
 
-FRS has been radically simplified. Simply create a directory and 
-make it owned by the webserver-user. Usually "chown -R nobody:nobody mydir" 
+FRS has been radically simplified. Simply create a directory and make
+it owned by the webserver-user. Usually "chown -R nobody:nobody mydir"
 will do the trick.
 
 This directory will be referenced in the SF Config File as $sys_upload_dir
@@ -95,12 +106,12 @@ This directory will be referenced in the SF Config File as $sys_upload_dir
 SF Config File
 --------------
 
-In the GForge distribution, you will find etc/local.inc. Move it to /etc/gforge/local.inc 
-and edit all of the settings.
+In the GForge distribution, you will find etc/local.inc. Move it to
+/etc/gforge/local.inc and edit all of the settings.
 
-Giving the first user "Site Admin" privileges. Register a new user, and confirm 
-it via the email link. Then enter the postgres command line and issue these 
-commands:
+Giving the first user "Site Admin" privileges. Register a new user,
+and confirm it via the email link. Then enter the postgres command
+line and issue these commands:
 
 insert into user_group (user_id,group_id) values (*****YOUR NEW ID*****,1);
 update user_group set admin_flags='A' where group_id=1 
@@ -112,34 +123,35 @@ noreply:        /dev/null
 PEER RATINGS
 ------------
 
-Add yourself, and any others you wish, to the "Peer Ratings" project, which 
-should be at /projects/peerrating/ on the website. Make yourself an "admin" 
-of the project, and then proceed to "rate" other users on the website.
+Add yourself, and any others you wish, to the "Peer Ratings" project,
+which should be at /projects/peerrating/ on the website. Make yourself
+an "admin" of the project, and then proceed to "rate" other users on
+the website.
 
-Members of the "Peer Ratings" project, who are "admins" of the project 
-become the first trusted users. This is the only way to prime the pump 
+Members of the "Peer Ratings" project, who are "admins" of the project
+become the first trusted users. This is the only way to prime the pump
 for the peer ratings system.
 
 CRON JOBS
 ---------
 
-Cron jobs are in the cronjobs/ directory and the README file contains a 
-sample crontab. This gives you the basic cronjobs for updating certain 
-statistics and data on the site.
+Cron jobs are in the cronjobs/ directory and the README file contains
+a sample crontab. This gives you the basic cronjobs for updating
+certain statistics and data on the site.
 
-More advanced cron jobs are being re-written to create the user email 
-aliases, mailing lists, Unix groups/passwords, etc. Many of these 
-scripts are available in the util/ directory, although they will not 
-yet run without some polishing. If you polish up and make all these 
-scripts work, please submit them back for inclusion at 
+More advanced cron jobs are being re-written to create the user email
+aliases, mailing lists, Unix groups/passwords, etc. Many of these
+scripts are available in the util/ directory, although they will not
+yet run without some polishing. If you polish up and make all these
+scripts work, please submit them back for inclusion at
 
 http://gforge.org/
 
 BACKEND PROCESSES
 -----------------
 
-Backend processes, such as creating home directories and cvs trees are 
-still incomplete. Stubbed out sample cronjobs exist in /cronjobs/mail/ 
-and some of the old SourceForge-specific cronjobs are still in /utils/ 
-and /backend/ If you wish to contribute fixes to this functionality, 
-please visit http://gforge.org/ 
+Backend processes, such as creating home directories and cvs trees are
+still incomplete. Stubbed out sample cronjobs exist in /cronjobs/mail/
+and some of the old SourceForge-specific cronjobs are still in /utils/
+and /backend/ If you wish to contribute fixes to this functionality,
+please visit http://gforge.org/

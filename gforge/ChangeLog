@@ -1,3 +1,13 @@
+2003-01-19  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* INSTALL: it is possible to install gforge without having to edit
+	/etc/php.ini: add instructions for people who do not like to edit
+	their php.ini file.  Also reformat paragraphs so that they wrap at
+	column 79.  Also mention the "createlang" step.  Remove
+	recommendation about ob_gzhandler, since following that advice
+	causes PHP to spew warnings at the bottom of each page (we already
+	load ob_gzhandler dynamically in pre.php).
+
 2003-01-18  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/include/languages/Spanish.tab: bunch o' translations.
