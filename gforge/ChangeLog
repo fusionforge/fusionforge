@@ -1,5 +1,8 @@
 2003-10-05  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/languages/Esperanto.tab, Spanish.tab: Replaced HTML
+	escape codes with proper UTF-8 encoded characters.
+
 	* www/include/languages/Base.tab, French.tab: Fixed duplicate
 	"Project Public Description" in the registration page: the first
 	one should read "Project Purpose And Summarization".

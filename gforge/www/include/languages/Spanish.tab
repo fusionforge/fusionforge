@@ -910,7 +910,7 @@ home	most_active_this_week	Los más activos esta semana
 home	no_stats_available	No hay estadísticas disponibles
 home	none_found	Ningún hallado
 home	registered_users	Usuarios registrados
-home	sfos	$1 <span class="wikiunknown"><a href="modules.php&#63;op=modload&amp;name=phpWiki&amp;file=index&amp;pagename=OnSite&amp;action=edit">&#63;</a><u>OnSite</u></span>
+home	sfos	$1 <span class="wikiunknown"><a href="modules.php?op=modload&amp;name=phpWiki&amp;file=index&amp;pagename=OnSite&amp;action=edit">?</a><u>OnSite</u></span>
 home	top_project_downloads	Proyectos más descargados
 include_html	no_change	No Cambiar
 include_html	none	No
