@@ -1440,7 +1440,7 @@ class Group extends Error {
 		*/
 
 		$member_res = db_query("
-			SELECT *
+			SELECT users.user_id
 			FROM users,user_group
 			WHERE user_group.group_id='".$this->getID()."'
 			AND users.user_id=user_group.user_id
