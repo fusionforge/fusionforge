@@ -37,9 +37,9 @@ site_project_header(array('title'=>$Language->getText('project_memberlist','titl
 echo $Language->getText('project_memberlist', 'joining');
 
 // list members
-$query = "SELECT users.*,user_group.admin_flags,people_job_category.name AS role
+$query = "SELECT users.*,user_group.admin_flags,role.role_name AS role
 	FROM users,user_group 
-	LEFT JOIN people_job_category ON user_group.member_role=people_job_category.category_id
+	LEFT JOIN role ON user_group.role_id=role.role_id
 	WHERE users.user_id=user_group.user_id 
 	AND user_group.group_id='$group_id' 
 	AND users.status='A'
