@@ -1,11 +1,17 @@
+2003-01-18  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/people/editjob.php: Audit: escape special characters from
+	user input before submitting to database.
+
+
 2003-01-17  Reinhard Spisser   <reinhard@spisser.it>
 
-	* www/forum/*: there were still a lot of unlocalized strings.  
+	* www/forum/*: there were still a lot of unlocalized strings.
 	Now there should be no more hardcoded strings. The forum
 	localization should be now complete.
 
 	* www/include/languages/Base.tab: Added labels for forums
-	and general error messages 
+	and general error messages
 
 	* www/include/languages/Italian.tab: Added translations for italian
 
@@ -36,7 +42,7 @@
 	* www/include/languages/Base.tab: added forum labels
 
         * www/forum/*: localized forum
- 
+
         * www/include/languages/Italian.tab: translations of new forum strings
 
 2003-01-15  Ryan T. Sammartino  <ryants@shaw.ca>

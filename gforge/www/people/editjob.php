@@ -1,7 +1,7 @@
 <?php
 /**
   *
-  * SourceForge Jobs (aka Help Wanted) Board 
+  * SourceForge Jobs (aka Help Wanted) Board
   *
   * SourceForge: Breaking Down the Barriers to Open Source Development
   * Copyright 1999-2001 (c) VA Linux Systems
@@ -25,7 +25,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			exit_error('Error - missing information','Fill in all required fields');
 		}
 		$sql="INSERT INTO people_job (group_id,created_by,title,description,date,status_id,category_id) ".
-			"VALUES ('$group_id','". user_getid() ."','$title','$description','".time()."','1','$category_id')";
+			"VALUES ('$group_id','". user_getid() ."','".htmlspecialchars($title)."','".htmlspecialchars($description)."','".time()."','1','$category_id')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
 			$feedback .= ' JOB insert FAILED ';
@@ -44,7 +44,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 			exit_error('error - missing info','Fill in all required fields');
 		}
 
-		$sql="UPDATE people_job SET title='$title',description='$description',status_id='$status_id',category_id='$category_id' ".
+		$sql="UPDATE people_job SET title='".htmlspecialchars($title)."',description='".htmlspecialchars($description)."',status_id='$status_id',category_id='$category_id' ".
 			"WHERE job_id='$job_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {
