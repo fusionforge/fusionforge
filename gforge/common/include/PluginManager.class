@@ -97,6 +97,9 @@ class PluginManager extends Error {
 			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
 			if (file_exists ($filename)) {
 				require_once ($filename) ;
+			} else {
+				// we can't find the plugin so we remove it from the array
+				unset($this->plugins_data[$p_id]);
 			}
 		}
 		return true ;
