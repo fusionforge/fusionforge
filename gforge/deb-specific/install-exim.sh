@@ -63,7 +63,7 @@ forward_for_gforge:
   domains = users.$domain_name
   driver = aliasfile
   file_transport = address_file
-  query = \"ldap:///uid=\$local_part,ou=People,$sys_ldap_base_dn?debSfForwardEmail\"
+  query = \"ldap:///uid=\$local_part,ou=People,$sys_ldap_base_dn?debGforgeForwardEmail\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -72,7 +72,7 @@ forward_for_gforge_lists:
   domains = $sys_lists_host
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListPostaddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListPostaddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -82,7 +82,7 @@ forward_for_gforge_lists_owner:
   suffix = -owner
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListOwnerAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListOwnerAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -92,7 +92,7 @@ forward_for_gforge_lists_request:
   suffix = -request
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListRequestAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListRequestAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -102,7 +102,7 @@ forward_for_sourceforge_lists_admin:
   suffix = -admin
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListAdminAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListAdminAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -112,7 +112,7 @@ forward_for_sourceforge_lists_bounces:
   suffix = -bounces
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListBouncesAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListBouncesAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -122,7 +122,7 @@ forward_for_sourceforge_lists_confirm:
   suffix = -confirm
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListConfirmAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListConfirmAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -132,7 +132,7 @@ forward_for_sourceforge_lists_join:
   suffix = -join
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListJoinAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListJoinAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -142,7 +142,7 @@ forward_for_sourceforge_lists_leave:
   suffix = -leave
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListLeaveAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListLeaveAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -152,7 +152,7 @@ forward_for_sourceforge_lists_subscribe:
   suffix = -subscribe
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListSubscribeAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListSubscribeAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -162,7 +162,7 @@ forward_for_sourceforge_lists_unsubscribe:
   suffix = -unsubscribe
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListUnsubscribeAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListUnsubscribeAddress\"
   search_type = ldap
   user = nobody
   group = nogroup

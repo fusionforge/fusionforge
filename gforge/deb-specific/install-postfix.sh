@@ -65,7 +65,7 @@ $gf_block = "### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
 ldap_gforge_users_server_host = $sys_ldap_host
 ldap_gforge_users_server_port = 389
 ldap_gforge_users_query_filter = (uid=\%s,ou=People)
-ldap_gforge_users_result_attribute = debSfForwardEmail
+ldap_gforge_users_result_attribute = debGforgeForwardEmail
 ldap_gforge_users_search_base = $sys_ldap_base_dn
 ldap_gforge_users_bind = no
 ldap_gforge_users_domain = users.$domain_name
@@ -73,7 +73,7 @@ ldap_gforge_users_domain = users.$domain_name
 ldap_gforge_lists_server_host = $sys_ldap_host
 ldap_gforge_lists_server_port = 389
 ldap_gforge_lists_query_filter = (cn=\%s,ou=mailingList)
-ldap_gforge_lists_result_attribute = debSfListPostAddress
+ldap_gforge_lists_result_attribute = debGforgeListPostAddress
 ldap_gforge_lists_search_base = $sys_ldap_base_dn
 ldap_gforge_lists_bind = no
 ldap_gforge_lists_domain = users.$domain_name
@@ -83,7 +83,7 @@ ldap_gforge_lists_domain = users.$domain_name
 # suffix = -owner : -admin
 # driver = aliasfile
 # pipe_transport = address_pipe
-# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListOwnerAddress\"
+# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListOwnerAddress\"
 # search_type = ldap
 # user = nobody
 # group = nogroup
@@ -93,7 +93,7 @@ ldap_gforge_lists_domain = users.$domain_name
 # suffix = -request
 # driver = aliasfile
 # pipe_transport = address_pipe
-# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListRequestAddress\"
+# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debGforgeListRequestAddress\"
 # search_type = ldap
 # user = nobody
 # group = nogroup

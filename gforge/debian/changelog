@@ -2,8 +2,14 @@ gforge (3rc2-3+) unstable; urgency=low
 
   * [Roland] Install README.Debian into all packages (Gforge bug #340),
     and README.Multipack into gforge-common.
+  * [Roland] We can even quit using the OID 1.3.6.1.4.1.9586.1.1
+    (iso.org.dod.internet.private.enterprise.Debian.package.sourceforge)
+    and start using the newly assigned 1.3.6.1.4.1.9586.100.3
+    (iso.org.dod.internet.private.enterprise.Debian.package.gforge)
+    instead.  That means a global s/debSf/debGforge/ in attribute types
+    and object classes, in all the files that use LDAP.
 
- -- Roland Mas <lolando@debian.org>  Sun, 25 May 2003 18:31:46 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 30 May 2003 10:24:46 +0200
 
 gforge (3rc2-3) unstable; urgency=low
 
