@@ -250,10 +250,17 @@ switch ($func) {
 				include 'browse.php';
 			}
 		} else {
-			$ath->setMonitor();
-			$feedback=$ath->getErrorMessage();	
-			$ath->clearError();
-			include 'browse.php';
+			$at=new ArtifactType($group,$atid);
+			if (!$at || !is_object($at)) {
+				exit_error('ERROR','Artifact Could Not Be Created');
+			} else if ($at->isError()) {				
+				exit_error('ERROR',$at->getErrorMessage());
+			} else {
+				$at->setMonitor();
+				$feedback=$at->getErrorMessage();	
+				$at->clearError();
+				include 'browse.php';
+			}
 		}
 		break;
 	}
