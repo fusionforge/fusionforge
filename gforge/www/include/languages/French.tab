@@ -1,3 +1,30 @@
+# /*		
+#  *		
+#  * GForge French message catalog		
+#  *
+#  * Copyright 1999-2001 (c) VA Linux Systems		
+#  * Copyright 2002-2004 (c) Christian Bayle, Roland Mas, Benoit Sibaud, Guillaume Smet
+#  * http://gforge.org
+#  *
+#  * @version   $Id$
+#  * @author Olivier Gerard, Alexandre Aufrere, Roland Mas, Christian Bayle, Benoit Sibaud, Guillaume Smet
+#  *
+#  */		
+#		
+# ChangeLog:		
+#		
+# 2000-09-25  Olivier Gerard		
+#	* Initial translation	
+# 2000-10-15  Alexandre Aufrere  <nikopol@users.sourceforge.net>		
+#	* Translation and correction	
+# 2002-04-10 Roland Mas <lolando@debian.org>		
+#	* Translation from Base.tab	
+# 2002-04-17 Roland Mas <lolando@debian.org>		
+#	* Added about/about_blurb, plus a few minor fixes	
+# 2002-09-25 Christian Bayle <bayle@debian.org>		
+#	* Added more account_register/blurb	
+#	* Added all Base.tab strings
+# Please check global Changelog file or CVS logs for more recent changes
 account	title	Préférences de votre compte
 account	updated	Mis à jour
 account_change_email	desc	<p>Modifier votre adresse e-mail nécessite une confirmation de votre nouvelle adresse, afin que nous puissions vérifier que nous enregistrons une adresse valide. </p><p>Nous avons besoin d'une adresse valide pour chaque utilisateur en raison du niveau d'accès accordé via ce compte. Si nous avons besoin de joindre un utilisateur à cause de problèmes en provenance d'un compte shell ou projet, il est important que nous puissions le faire.</p><p>Valider le formulaire déclenchera l'envoi d'une URL de confirmation à votre nouvelle adresse e-mail. Cliquer sur ce lien finalisera la modification d'adresse.</p>
@@ -1831,11 +1858,11 @@ rbac_edit	scmpublic	Privilèges sur le SCM
 rbac_edit	title1	Section
 rbac_edit	title2	Sous-section
 rbac_edit	title3	Paramètrage
-rbac_edit	tracker	Tracker
+rbac_edit	tracker	Suivi
 rbac_edit	trackeradmin	Administration du suivi du projet
 rbac_edit	trackerpublic	Privilèges sur le suivi
 rbac_edit	update	Mettre à jour
-rbac_vals	docman0	Lire/Poster
+rbac_vals	docman0	Lire/Ajouter
 rbac_vals	docman1	Administration
 rbac_vals	forum-1	Pas d'accès
 rbac_vals	forum0	Lire
