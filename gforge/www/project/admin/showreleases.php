@@ -50,8 +50,8 @@ $res=db_query("SELECT p.name AS package_name,r.*
 	FROM frs_release r, frs_package p 
 	WHERE 
 	p.package_id=r.package_id
-	AND group_id='$group_id' 
-	AND frs_release.package_id='$package_id'");
+	AND p.group_id='$group_id' 
+	AND p.package_id='$package_id'");
 if (!$res || db_numrows($res) < 1) {
 	exit_error('Error','No Releases Of This Package Are Available');
 }
