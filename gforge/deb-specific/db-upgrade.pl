@@ -60,12 +60,20 @@ eval {
 
 	&create_metadata_table ("2.5.9999") ;
 
-	debug "Updating debian_meta_data table." ;
-	$query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', 'scratch-to-2.6')" ;
+	$query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
 	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
+	if ($array[0] == 0) {
+	    debug "Updating debian_meta_data table." ;
+	    $query = "INSERT INTO debian_meta_data (key, value) VALUES ('current-path', 'scratch-to-2.6')" ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
 	debug "Committing." ;
 	$dbh->commit () ;
 
@@ -742,17 +750,29 @@ eval {
     $target = "2.6-0+checkpoint+10" ;
     if (is_lesser $version, $target) {
  	debug "Updating supported_languages table." ;
+	
+	my $pg_version = &get_pg_version ;
 
- 	@reqlist = (
-		    "ALTER TABLE supported_languages RENAME TO supported_languages_old",
-		    "CREATE TABLE supported_languages (language_id integer DEFAULT nextval('supported_languages_pk_seq'::text) NOT NULL, name text, filename text, classname text, language_code character(5))",
-		    "INSERT INTO supported_languages SELECT * FROM supported_languages_old",
-		    "DROP TABLE supported_languages_old",
-		    "ALTER TABLE supported_languages ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id)",
-		    "ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL",
-		    "ALTER TABLE doc_data ADD CONSTRAINT docdata_languageid_fk FOREIGN KEY (language_id) REFERENCES supported_languages(language_id) MATCH FULL",
-		    "UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
- 		    ) ;
+	if (is_lesser $pg_version, "7.3") {
+	    @reqlist = (
+			"ALTER TABLE supported_languages RENAME TO supported_languages_old",
+			"CREATE TABLE supported_languages (language_id integer DEFAULT nextval('supported_languages_pk_seq'::text) NOT NULL, name text, filename text, classname text, language_code character(5))",
+			"INSERT INTO supported_languages SELECT * FROM supported_languages_old",
+			"DROP TABLE supported_languages_old",
+			"ALTER TABLE supported_languages ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id)",
+			"ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL",
+			"ALTER TABLE doc_data ADD CONSTRAINT docdata_languageid_fk FOREIGN KEY (language_id) REFERENCES supported_languages(language_id) MATCH FULL",
+			"UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
+			) ;
+	} else {
+	    @reqlist = (
+			"ALTER TABLE supported_languages RENAME COLUMN language_code TO language_code_old",
+			"ALTER TABLE supported_languages ADD COLUMN language_code character(5)",
+			"UPDATE supported_languages SET language_code = language_code_old",
+			"ALTER TABLE supported_languages DROP COLUMN language_code_old",
+			"UPDATE supported_languages SET language_code='pt_BR', classname='PortugueseBrazilian', name='Pt. Brazilian', filename='PortugueseBrazilian.class' where classname='PortugueseBrazillian'",
+			) ;
+	}
  	foreach my $s (@reqlist) {
  	    $query = $s ;
  	    # debug $query ;
@@ -1075,6 +1095,13 @@ sub is_greater ( $$ ) {
     my $rc = system "dpkg --compare-versions $v1 gt $v2" ;
 
     return (! $rc) ;
+}
+
+sub get_pg_version () {
+    my $command = q(dpkg -s postgresql | awk '/^Version: / { print $2 }') ;
+    my $version = qx($command) ;
+    chomp $version ;
+    return $version ;
 }
 
 sub debug ( $ ) {

@@ -29,23 +29,44 @@ case "$target" in
 	db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
 	ip_address=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbhost\n";')
 	pattern=$(basename $0).XXXXXX
-	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
-	if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-	    perl -pi -e "s/^host.*gforge_passwd$/host gforge $ip_address 255.255.255.255 password gforge_passwd/" /etc/postgresql/pg_hba.conf.gforge-new
-	else
-	    cur=$(mktemp /tmp/$pattern)
-	    echo "### Next line inserted by GForge install" > $cur
-	    echo "host gforge $ip_address 255.255.255.255 password gforge_passwd" >> $cur
-	    cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
-	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
-	    rm -f $cur
-	fi
-	su -s /bin/sh postgres -c "touch /var/lib/postgres/data/gforge_passwd"
-	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/gforge_passwd > /dev/null" <<-EOF
+	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
+	if dpkg --compare-versions $pg_version lt 7.3 ; then
+            # PostgreSQL configuration for versions prior to 7.3
+	    echo "Configuring for PostgreSQL 7.2"
+	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	    if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
+		perl -pi -e "s/^host.*gforge_passwd$/host gforge $ip_address 255.255.255.255 password gforge_passwd/" /etc/postgresql/pg_hba.conf.gforge-new
+	    else
+		cur=$(mktemp /tmp/$pattern)
+		echo "### Next line inserted by GForge install" > $cur
+		echo "host gforge $ip_address 255.255.255.255 password gforge_passwd" >> $cur
+		cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
+		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		rm -f $cur
+	    fi
+	    su -s /bin/sh postgres -c "touch /var/lib/postgres/data/gforge_passwd"
+	    su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/gforge_passwd > /dev/null" <<-EOF
 gforge
 $db_passwd
 $db_passwd
 EOF
+	else
+            # PostgreSQL configuration for versions from 7.3 on
+	    echo "Configuring for PostgreSQL 7.3"
+	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	    if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
+		perl -pi -e "s/^host.*gforge_passwd$/host gforge gforge $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
+	    elif grep -q "^host gforge gforge.*password$" /etc/postgresql/pg_hba.conf.gforge-new ; then
+		perl -pi -e "s/^host gforge gforge.*password$/host gforge gforge $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
+	    else
+		cur=$(mktemp /tmp/$pattern)
+		echo "### Next line inserted by GForge install" > $cur
+		echo "host gforge gforge $ip_address 255.255.255.255 password" >> $cur
+		cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
+		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		rm -f $cur
+	    fi
+	fi
 	;;
     configure)
 	# Create the appropriate database user
@@ -54,34 +75,72 @@ EOF
 	tmp2=$(mktemp /tmp/$pattern)
 	if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser gforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
-	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE USER: user name "gforge" already exists' ] ; then
+	    || grep -q '^ERROR:  CREATE USER: user name "gforge" already exists$' $tmp2 ; then
 	    # Creation OK or user already existing -- no problem here
 	    echo -n ""
+	    rm -f $tmp1 $tmp2
 	else
 	    echo "Cannot create PostgreSQL user...  This shouldn't have happened."
 	    echo "Maybe a problem in your PostgreSQL configuration?"
 	    echo "Please report a bug to the Debian bug tracking system"
-	    cat $tmp1 $tmp2
+	    echo "Please include the following output:"
+	    echo "createuser's STDOUT:"
+	    cat $tmp1
+	    echo "createuser's STDERR:"
+	    cat $tmp2
+	    rm -f $tmp1 $tmp2
 	    exit 1
 	fi
-	rm -f $tmp1 $tmp2
+
+	# Set the password for the user
+	db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
+	su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
+update pg_shadow set passwd='$db_passwd' where usename='gforge' ;
+EOF
 
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
 	if su -s /bin/sh postgres -c "createdb gforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
-	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE DATABASE: database "gforge" already exists' ] ; then
+	    || grep -q '^ERROR:  CREATE DATABASE: database "gforge" already exists$' $tmp2 ; then
 	    # Creation OK or database already existing -- no problem here
 	    echo -n ""
+	    rm -f $tmp1 $tmp2
 	else
 	    echo "Cannot create PostgreSQL database...  This shouldn't have happened."
 	    echo "Maybe a problem in your PostgreSQL configuration?"
 	    echo "Please report a bug to the Debian bug tracking system"
-	    cat $tmp1 $tmp2
+	    echo "Please include the following output:"
+	    echo "createdb's STDOUT:"
+	    cat $tmp1
+	    echo "createdb's STDERR:"
+	    cat $tmp2
+	    rm -f $tmp1 $tmp2
 	    exit 1
 	fi
-	rm -f $tmp1 $tmp2
+
+	pattern=$(basename $0).XXXXXX
+	tmp1=$(mktemp /tmp/$pattern)
+	tmp2=$(mktemp /tmp/$pattern)
+	if su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/enable_lang plpgsql gforge" 1> $tmp1 2> $tmp2 \
+	    || grep -q '^plpgsql added to gforge$' $tmp1 \
+	    || grep -q '^plpgsql is already enabled in gforge$' $tmp1 ; then
+	    # Creation OK or user already existing -- no problem here
+	    echo -n ""
+	    rm -f $tmp1 $tmp2
+	else
+	    echo "Cannot enable the PLPGSQL language in the database...  This shouldn't have happened."
+	    echo "Maybe a problem in your PostgreSQL configuration?"
+	    echo "Please report a bug to the Debian bug tracking system"
+	    echo "Please include the following output:"
+	    echo "enable_lang's STDOUT:"
+	    cat $tmp1
+	    echo "enable_lang's STDERR:"
+	    cat $tmp2
+	    rm -f $tmp1 $tmp2
+	    exit 1
+	fi
 	
 	# Install/upgrade the database contents (tables and data)
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
@@ -96,8 +155,9 @@ EOF
 	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
         if grep -q "### Next line inserted by GForge install" /etc/postgresql/pg_hba.conf.gforge-new
         then
-                perl -pi -e "s/### Next line inserted by GForge install\n//" /etc/postgresql/pg_hba.conf.gforge-new
-                perl -pi -e "s/^host.*gforge_passwd\n//" /etc/postgresql/pg_hba.conf.gforge-new
+	    perl -pi -e "s/### Next line inserted by GForge install\n//" /etc/postgresql/pg_hba.conf.gforge-new
+	    perl -pi -e "s/^host gforge gforge.*password\n//" /etc/postgresql/pg_hba.conf.gforge-new
+	    perl -pi -e "s/^host.*gforge_passwd\n//" /etc/postgresql/pg_hba.conf.gforge-new
         fi
 	;;
     purge)

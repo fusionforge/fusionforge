@@ -11,8 +11,13 @@ gforge (3pre8-0+) experimental; urgency=low
     doesn't provide one.
   * [Christian] Applied Olafur Osvaldsson patch #143, Incorrect user
     permissions on upload dir 
+  * [Roland] Several changes occured in PostgreSQL between versions 7.2
+    and 7.3: the pg_hba.conf file syntax, the way users are authenticated,
+    and data checking is stricter.  The installation process should now
+    work with both versions (provided the PostgreSQL server is installed
+    correctly).
 
- -- Christian Bayle <bayle@debian.org>  Thu,  9 Jan 2003 21:13:02 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 12 Jan 2003 20:00:05 +0100
 
 gforge (3.0-0+8) experimental; urgency=low
 
