@@ -301,7 +301,7 @@ class Theme extends Layout {
 					$hint = $Language->getText('menu',
 								  'bookmark_not_allowed');
 					echo '
-			<img src="'.$this->imgroot.'toolbar/bookmark_add_dark.png" alt="'.$hint.'" border="0" /></a>';
+			<img src="'.$this->imgroot.'toolbar/bookmark_add_dark.png" alt="'.$hint.'" border="0" />';
 				} else {
 					$bookmark_title=urlencode(str_replace($sys_name.': ', '', $params['title'] ? $params['title'] : "Untitled"));
 					$hint = $Language->getText('menu',
@@ -544,7 +544,7 @@ class Theme extends Layout {
 		}
 		$return .= '
 		</tr>
-		<tr height="1" align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+		<tr align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
 			<td colspan="'.$count.'" height="1"><img src="'.$this->imgroot.'clear.png" height="1" width="1" alt="" /></td>
 		</tr>';
 		return $return;

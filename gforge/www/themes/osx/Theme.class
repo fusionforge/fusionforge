@@ -481,7 +481,7 @@ class Theme extends Layout {
 		}
 		$return .= '
 		</tr>
-		<tr height="1" align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+		<tr align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
 			<td colspan="'.$count.'" height="1"><img src="'.$this->imgroot.'clear.png" height="1" width="1" alt="" /></td>
 		</tr>';
 		return $return;
