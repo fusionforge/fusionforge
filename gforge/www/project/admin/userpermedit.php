@@ -69,13 +69,12 @@ if ($submit || $form_unix_name) {
 		}
 
 		if (!$group->addUser($u->getUnixName())) {
-			exit_error('Error', $u->getErrorMessage());
+			exit_error('Error', $group->getErrorMessage());
 		} else {
 			$feedback = ' User Added Successfully<br>';
 		}
 
 		$user_id = $u->getID();
-
 	} elseif ($addtotracker) {
 
 		$u =& user_get_object($user_id);
