@@ -1,5 +1,11 @@
 2005-03-14  Tim Perdue <tim@gforge.org>
 
+	* privatize_list.py - mailing lists set to private by default at 
+	creation time and if they are set to private by www code
+	* svn-stats.php fixed
+
+2005-03-14  Tim Perdue <tim@gforge.org>
+
 	* New "delete" function to permanently purge an entire project
 	from the database and mailing lists and move cvs tree into a .deleted director
 	* Ability to upload docs using the new FTP upload functionality

@@ -41,7 +41,7 @@ pclose($fp);
 
 $res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
 	mail_group_list.password,mail_group_list.status, 
-	mail_group_list.group_list_id 
+	mail_group_list.group_list_id,mail_group_list.is_public
 	FROM mail_group_list,users
 	WHERE mail_group_list.list_admin=users.user_id");
 $err .= db_error();
@@ -59,8 +59,13 @@ for ($i=0; $i<$rows; $i++) {
 	$listname = strtolower(db_result($res,$i,'list_name'));
 	$listpassword = db_result($res,$i,'password');
 	$grouplistid = db_result($res,$i,'group_list_id');
-
-	if (! in_array($listname,$mailing_lists)) {
+	$public = db_result($res,$i,'is_public');
+	
+	// Here we assume that the privatize_list.py script is located in the same dir as this script
+	$script_dir = dirname(__FILE__);
+	$privatize_cmd = escapeshellcmd(MAILMAN_DIR.'bin/config_list -i '.$script_dir.'/privatize_list.py '.$listname);
+	
+	if (! in_array($listname,$mailing_lists)) {		// New list?
 		$err .= "Creating Mailing List: $listname\n";
 		//$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname@$sys_lists_host $email $listpassword &> /dev/null";
 		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname $email $listpassword";
@@ -69,8 +74,18 @@ for ($i=0; $i<$rows; $i++) {
 		if($failed) {
 			$err .= 'Failed to create '.$listname.", skipping\n";
 			continue;
+		} else {
+			// Privatize the new list
+			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
+			passthru($privatize_cmd,$res);
 		}
 		$mailingListIds[] = $grouplistid;
+	} else {	// Old list
+		// Privatize only if it is marked as private
+		if (!$public) {
+			$err .= "Privatizing ".$listname.": ".$privatize_cmd."\n";
+			passthru($privatize_cmd,$res);
+		}
 	}
 	
 	if(file_exists(MAILMAN_DIR.'mail/mailman')) {
