@@ -32,7 +32,7 @@ setup_vars() {
 
     [ -f /etc/ldap.secret ] && ldap_passwd=$(cat /etc/ldap.secret) || ldap_passwd=$sf_ldap_passwd
     cryptedpasswd=`slappasswd -s "$ldap_passwd" -h {CRYPT}`
-    ldap_suffix=$(grep suffix /etc/ldap/slapd.conf | cut -d\" -f2)
+    ldap_suffix=$(grep ^suffix /etc/ldap/slapd.conf | cut -d\" -f2)
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
