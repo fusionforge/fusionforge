@@ -93,7 +93,7 @@ access to */" /etc/ldap/slapd.conf
 purge_slapd(){
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
-	ex /etc/ldap/slapd.conf <<-FIN
+	vi -e /etc/ldap/slapd.conf <<-FIN
 /# Next lines added by Sourceforge install
 :ma a
 /# End of sourceforge add
@@ -189,7 +189,8 @@ FIN
 
 # Setup SF_robot Passwd
 setup_robot() {
-	echo "Changing SF_robot passwd using admin account"
+	sys_ldap_base_dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+	#echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
 	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
 	sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
@@ -199,6 +200,28 @@ setup_robot() {
 	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret)
 	cryptedpasswd=`slappasswd -s $sys_ldap_passwd -h {CRYPT}`
 	#echo "=====>$cryptedpasswd"
+
+# The first accunt is only used in a multiserver SF
+echo "Adding robot accounts"
+ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w$secret <<-FIN
+dn: cn=Replicator,$sys_ldap_base_dn
+cn: Replicator
+sn: Replicator the Robot
+description: empty
+objectClass: top
+objectClass: person
+userPassword: {crypt}x
+
+dn: cn=SF_robot,$sys_ldap_base_dn
+cn: SF_robot
+sn: SF the Robot
+description: empty
+objectClass: top
+objectClass: person
+userPassword: {crypt}x
+FIN
+
+echo "Changing SF_robot passwd using admin account"
 	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w$secret <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
@@ -208,10 +231,10 @@ userPassword: $cryptedpasswd
 FIN
 
 # Test!
+#naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 echo "Changing dummy cn using SF_robot account"
-naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w$sys_ldap_passwd <<-FIN
-dn: uid=dummy,ou=People,$naming_context
+dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
 cn: Dummy User Tested
@@ -283,11 +306,10 @@ else
 				# The command will be 
 				# ldapdelete -D "cn=admin,ou=People,$naming_context" -W -r "$naming_context"
 				#
-				for target in Aliases Hosts Roaming Group cvsGroup People
+				for target in ou=Aliases ou=Hosts ou=Roaming ou=Group ou=cvsGroup cn=SF_robot cn=Replicator ou=People 
 				do 
-					echo "Destroying LDAP database ou=$target, $naming_context ..."
-					ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w$secret -r "ou=$target, $naming_context"
-					#ldapdelete -D "cn=admin,ou=People,$naming_context" -W -w$secret -r "ou=$target, $naming_context"
+					echo "Destroying LDAP database $target, $naming_context ..."
+					ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w$secret -r "$target, $naming_context"
 				done
 				;;
 			init)
