@@ -1,8 +1,16 @@
+2005-03-05  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* cvstracker plugin: lots of fixes and improvements. RPM packaging.
+	* externalsearch plugin: RPM packaging
+	* fixed localization in project stats
+	* moved CVSWeb CSS from the plugin class to an external file
+
 2005-03-04  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* fixed tracker soap stuff based on [#1090] Tracker wrapper for Soap
 	by Steve Hawkins
 	* fixed more typos in French translation
+	* added ANALYZE in vacuum.php
 
 2005-03-04  Thales <guillaume.smet@openwide.fr>
 
