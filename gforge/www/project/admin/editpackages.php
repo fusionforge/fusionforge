@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: editpackages.php,v 1.22 2001/05/22 19:48:40 pfalcon Exp $
+  * @version   $Id: editpackages.php.patched,v 1.1.2.1 2002/11/30 09:57:58 cbayle Exp $
   *
   */
 
@@ -69,7 +69,12 @@ if ($submit) {
 project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
 
 ?>
-<P>
+<h3>QRS:</h3>
+<?
+echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
+
+$user_unix_name=user_getname();
+?>
 <H3>Packages</H3>
 <P>
 You can use packages to group different file releases together, or use them however you like. 
@@ -83,7 +88,7 @@ You can use packages to group different file releases together, or use them howe
 <h4>Your Packages:</H4>
 <P>
 Start by defining your packages, then you can upload files with FTP to the <B>incoming</B> directory on 
-<B>upload.sourceforge.net</B>. Once you have the files uploaded, you can then <B>create releases</B> 
+<B><a href=ftp://$user_unix_name@$sys_upload_host/incoming/>$sys_upload_host</a></B>. Once you have the files uploaded, you can then <B>create releases</B> 
 of your packages.
 <P>
 Once you have packages defined, you can start creating new <B>releases of packages.</B>
@@ -98,11 +103,9 @@ A release of a package can contain multiple files.
 <B>3.22.2</B><BR>
 <B>3.22.3</B><BR>
 <P>
-You can create new releases of packages by clicking on <B>Edit Releases</B> 
-next to your package name.
+You can create new releases of packages by clicking on <B>Add/Edit Releases</B> next to your package name.
 <P>
-<?php
-
+<?
 /*
 
 	Show a list of existing packages
