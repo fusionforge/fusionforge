@@ -117,7 +117,7 @@ class Layout extends Error {
 		if (!$params['title']) {
 			$params['title'] =  $GLOBALS['sys_name'];
 		} else {
-			$params['title'] =  $GLOBALS['sys_name'] . ":" . $params['title'];
+			$params['title'] =  $GLOBALS['sys_name'] . ': ' . $params['title'];
 		}
 		print '<?xml version="1.0" encoding="' . $Language->getEncoding(). '"?>';
 		?>
