@@ -1,18 +1,12 @@
 <?php
-/**
-  *
-  * SourceForge Top-Statistics
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id$
 
-
-require_once('pre.php');
+require "pre.php";    
 
 if ($GLOBALS[type] == 'downloads_week') {
 	$rankfield = 'downloads_week';
@@ -37,9 +31,9 @@ else {
 }
 
 
-$HTML->header(array('title'=>$title,'pagename'=>'top_toplist'));
+$HTML->header(array('title'=>$title));
 
-print '
+print '<P><B><FONT size="+1">'.$title.'</FONT></B>
 <BR><I>(Updated Daily)</I>
 
 <P><A href="/top/">[View Other Top Categories]</A>
