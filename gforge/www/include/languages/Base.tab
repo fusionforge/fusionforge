@@ -63,18 +63,18 @@ account_register	title	New Account Registration
 account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
 account_register	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
 account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>
-account_register	loginname	Login Name (do not use uppercase letters) *:
-account_register	password	Password (min. 6 chars) *:
-account_register	password2	Password (repeat) *:
-account_register	realname	Full/Real Name *:
+account_register	loginname	Login Name (do not use uppercase letters):
+account_register	password	Password (min. 6 chars):
+account_register	password2	Password (repeat):
+account_register	realname	Full/Real Name:
 account_register	language	Language Choice:
 account_register	timezone	Timezone:
-account_register	emailaddr	Email Address *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
+account_register	emailaddr	Email Address:<span><font color="red">*</font></span> <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
 account_register	jabberaddr	Jabber Address:
 account_register	jabberonly	Send auto-generated notices only to my Jabber address
 account_register	siteupdate	Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>
 account_register	communitymail	Receive additional community mailings. <I>(Low traffic.)</I>
-account_register	mandatory	Fields marked with * are mandatory.
+account_register	mandatory	Fields marked with $1 are mandatory.
 account_register	register	Register
 account_register	err_username	You must supply a username
 account_register	err_realname	You must supply a real name

@@ -399,6 +399,15 @@ function utils_buildcheckboxarray($options,$name,$checked_array) {
 }
 
 /**
+ * utils_requiredField() - Adds the required field marker
+ *
+ * @return	a string holding the HTML to mark a required field
+ */
+function utils_requiredField() {
+	return '<span><font color="red">*</font></span>'; 
+}
+
+/**
  * GraphResult() - Takes a database result set and builds a graph.
  * The first column should be the name, and the second column should be the values
  * Be sure to include HTL_Graphs.php before using this function

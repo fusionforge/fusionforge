@@ -53,16 +53,16 @@ if ($timezone == ''){
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <p>
-<?php echo $Language->getText('account_register','loginname'); ?><br />
+<?php echo $Language->getText('account_register','loginname'); echo utils_requiredField(); ?><br />
 <input type="text" name="unix_name" value="<?php print($unix_name); ?>">
 <p>
-<?php echo $Language->getText('account_register','password'); ?><br />
+<?php echo $Language->getText('account_register','password'); echo utils_requiredField(); ?><br />
 <input type="password" name="password1">
 <p>
-<?php echo $Language->getText('account_register','password2'); ?><br />
+<?php echo $Language->getText('account_register','password2'); echo utils_requiredField(); ?><br />
 <input type="password" name="password2">
 <p>
-<?php echo $Language->getText('account_register','realname'); ?><br />
+<?php echo $Language->getText('account_register','realname'); echo utils_requiredField(); ?><br />
 <input size=30 type="text" name="realname" value="<?php print($realname); ?>">
 <p>
 <?php echo $Language->getText('account_register','language'); ?><br />
@@ -89,7 +89,7 @@ if ($sys_use_jabber) {
 <input type="checkbox" name="mail_va" value="1">
 <?php echo $Language->getText('account_register','communitymail'); ?>
 <p>
-<?php echo $Language->getText('account_register','mandatory'); ?>
+<?php echo $Language->getText('account_register','mandatory', utils_requiredField()); ?>
 </p>
 <p>
 <input type="submit" name="submit" value="<?php echo $Language->getText('account_register','register'); ?>">
