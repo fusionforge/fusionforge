@@ -273,7 +273,6 @@ class Layout extends Error {
 	function header($params) {
 		global $Language;
 
-		$this->generic_header_start($params); 
 /*
 
 
