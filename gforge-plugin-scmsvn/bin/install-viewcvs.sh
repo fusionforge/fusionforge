@@ -14,6 +14,8 @@ for d in l:
   l2.append (d + ": svn://localhost/" + d)
 r.set ("general","svn_roots",string.join (l2, ', '))
 r.set ("general","cvs_roots","")
+if len(l) == 0:
+  sys.exit("No svn repository found. I dunno what to set for default_root")
 r.set ("general","default_root", l [0])
 r.write (open ("/var/lib/gforge/etc/viewcvs.conf", "w"))
 EOF
