@@ -562,7 +562,7 @@ class ArtifactType extends Error {
 	 *	getExtraFields - List of possible user built extra fields
 	 *	set up for this artifact type.
 	 *
-	 *	@return database result set.
+	 *	@return arrays of data;
 	 */
 	function getExtraFields() {
 		if (!isset($this->extra_fields)) {
@@ -571,9 +571,8 @@ class ArtifactType extends Error {
 				WHERE group_artifact_id='".$this->getID() ."'
 				ORDER BY field_type ASC";
 			$res=db_query($sql);
-			$i=0;
 			while($arr =& db_fetch_array($res)) {
-				$this->extra_fields[$i++] = $arr;
+				$this->extra_fields[$arr['extra_field_id']] = $arr;
 			}
 		}
 		return $this->extra_fields;
@@ -613,9 +612,9 @@ class ArtifactType extends Error {
 			while($arr =& db_fetch_array($res)) {
 				$this->extra_field[$id][$i++] = $arr;
 			}
-			if (count($this->extra_field[$id]) == 0) {
-				return;
-			}
+//			if (count($this->extra_field[$id]) == 0) {
+//				return;
+//			}
 		}
 				
 		return $this->extra_field[$id];

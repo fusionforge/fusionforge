@@ -24,6 +24,7 @@
  */
 require_once('common/include/Error.class');
 require_once('common/tracker/ArtifactMessage.class');
+require_once('common/tracker/ArtifactExtraField.class');
 
 	/**
 	*	Factory method which creates an Artifact from an artifact ID
@@ -492,9 +493,9 @@ class Artifact extends Error {
 	}
 
 	/**
-	 *      getLastModifiedDate - the last_modified_date of this task.
+	 *	  getLastModifiedDate - the last_modified_date of this task.
 	 *
-	 *      @return int     the last_modified_date.
+	 *	  @return int	 the last_modified_date.
 	 */
 	function getLastModifiedDate() {
 		return $this->data_array['last_modified_date'];
@@ -1028,42 +1029,51 @@ class Artifact extends Error {
 		}
 		//get a list of extra fields for this artifact_type
 		$ef =& $this->ArtifactType->getExtraFields();
-
+		$efk=array_keys($ef);
 		//now we'll update this artifact for each extra field
-		for ($i=0; $i<count($ef); $i++) {
+		for ($i=0; $i<count($efk); $i++) {
+			$efid=$efk[$i];
+
 			//
-			//	First we want to get old value of this element
+			//	Delete the old rows of data
 			//
-			$res=db_query("SELECT field_data FROM artifact_extra_field_data
+			$res=db_query("DELETE FROM artifact_extra_field_data
 				WHERE
 				artifact_id='".$this->getID()."'
-				AND extra_field_id='".$ef[$i]['extra_field_id']."'");
-			//	make sure we have a corresponding row in 
-			//	artifact_extra_field_data - if not we'll create one
-			if ($res && db_numrows($res) > 0) {
-
-				// if this field changed, update the db
-				if (addslashes(db_result($res,0,'field_data')) != htmlspecialchars($extra_fields[$ef[$i]['extra_field_id']])) {
-//TODO add history
-					$res=db_query("UPDATE artifact_extra_field_data
-						SET
-						field_data='".$extra_fields[$ef[$i]['extra_field_id']]."'
-						WHERE
-						artifact_id='".$this->getID()."'
-						AND extra_field_id='".$ef[$i]['extra_field_id']."'");
+				AND extra_field_id='".$efid."'");
+			//
+			//	See if anything was even passed for this extra_field_id
+			//
+			if (!$extra_fields[$efid]) {
+				//nothing in field to update
+			} else {
+				//determine the type of field and whether it should have multiple rows supporting it
+				$ef =& $this->ArtifactType->getExtraFields();
+                $type=$ef[$efid]['field_type'];
+                if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
+					$multi_rows=true;
+					$count=count($extra_fields[$efid]);
+					for ($fin=0; $fin<$count; $fin++) {
+						$sql="INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) 
+							values ('".$this->getID()."','".$efid."',
+							'".$extra_fields[$efid][$fin]."')";
+						$res=db_query($sql);
+						if (!$res) {
+							$this->setError('Artifact::updateExtraFields:: '.$sql.db_error());
+							return false;
+						}
+					}
+				} else {
+					$multi_rows=false;
+					$count=1;
+					$res=db_query("INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) 
+						values ('".$this->getID()."','".$efid."',
+						'".htmlspecialchars($extra_fields[$efid])."')");
 					if (!$res) {
 						$this->setError('Artifact::updateExtraFields:: '.db_error());
 						return false;
 					}
 				}
-			} else {
-				//insert a fresh row since one does not exist for this extra field yet
-				$res=db_query("INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) 
-					values ('".$this->getID()."','".$ef[$i]['extra_field_id']."','".htmlspecialchars($extra_fields[$ef[$i]['extra_field_id']])."')");
-					if (!$res) {
-						$this->setError('Artifact::updateExtraFields:: '.db_error());
-						return false;
-					}
 			}
 		}
 		unset($this->extra_field_data);
@@ -1078,9 +1088,16 @@ class Artifact extends Error {
 	function &getExtraFieldData() {
 		if (!isset($this->extra_field_data)) {
 			$res=db_query("SELECT * FROM artifact_extra_field_data 
-				WHERE artifact_id='".$this->getID()."'");
+				WHERE artifact_id='".$this->getID()."' ORDER BY extra_field_id");
+			$ef =& $this->ArtifactType->getExtraFields();
 			while ($arr =& db_fetch_array($res)) {
-				$this->extra_field_data[$arr['extra_field_id']]=$arr['field_data'];
+				$type=$ef[$arr['extra_field_id']]['field_type'];
+				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
+					//accumulate a sub-array of values in cases where you may have multiple rows
+					$this->extra_field_data[$arr['extra_field_id']][]=$arr['field_data'];
+				} else {
+					$this->extra_field_data[$arr['extra_field_id']]=$arr['field_data'];
+				}
 			}
 		}
 		return $this->extra_field_data;

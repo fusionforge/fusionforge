@@ -29,9 +29,9 @@ class ArtifactExtraFieldElement extends Error {
 	/** 
 	 * The artifact type object.
 	 *
-	 * @var		object	$ArtifactType.
+	 * @var		object	$ArtifactExtraField.
 	 */
-	var $ArtifactType; //object
+	var $ArtifactExtraField; //object
 
 	/**
 	 * Array of artifact data.
@@ -40,29 +40,29 @@ class ArtifactExtraFieldElement extends Error {
 	 */
 	var $data_array;
 	/**
-	 *	ArtifactExtraField - Constructer
+	 *	ArtifactExtraFieldElement - Constructer
 	 *
-	 *	@param	object	ArtifactType object.
+	 *	@param	object	ArtifactExtraField object.
 	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
 	 *  @return	boolean	success.
 	 */
-	function ArtifactExtraFieldElement(&$ArtifactType,$data=false) {
-//TODO remove $id from here - the constructor for this object should require ExtraField as only argument
+	function ArtifactExtraFieldElement(&$ArtifactExtraField,$data=false) {
 		$this->Error(); 
 		
-		//was ArtifactType legit?
-		if (!$ArtifactType || !is_object($ArtifactType)) {
-			$this->setError('ArtifactExtraField: No Valid ArtifactType');
+		//was ArtifactExtraField legit?
+		if (!$ArtifactExtraField || !is_object($ArtifactExtraField)) {
+			$this->setError('ArtifactExtraField: No Valid ArtifactExtraField');
 			return false;
 		}
-		//did ArtifactType have an error?
-		if ($ArtifactType->isError()) {
-			$this->setError('ArtifactExtraField: '.$Artifact->getErrorMessage());
+		//did ArtifactExtraField have an error?
+		if ($ArtifactExtraField->isError()) {
+			$this->setError('ArtifactExtraField: '.$ArtifactExtraField->getErrorMessage());
 			return false;
 		}
-		$this->ArtifactType =& $ArtifactType;
+		$this->ArtifactExtraField =& $ArtifactExtraField;
 		if ($data) {
 			if (is_array($data)) {
+//TODO validate that data actually belongs in this ArtifactExtraField
 				$this->data_array =& $data;
 				return true;
 			} else {
@@ -85,11 +85,8 @@ class ArtifactExtraFieldElement extends Error {
 	 *  @return 	true on success / false on failure.
 	 */
 	
-	function create($name,$id) {
+	function create($name) {
 		global $Language;
-//settype($id,"integer");	
-//TODO remove $id from here - the constructor for this object should require ExtraField as only argument
-//TODO AT MINIMUM $id should be validated to == field_id that belongs to this tracker!
 		//
 		//	data validation
 		//
@@ -97,30 +94,32 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setError($Language->getText('tracker_admin_build_boxes','required_choice_name'));
 			return false;
 		}
-		if (!$this->ArtifactType->userIsAdmin()) {
+		if (!$this->ArtifactExtraField->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 		$sql="INSERT INTO artifact_extra_field_elements (extra_field_id,element_name) 
-			VALUES ('$id','".htmlspecialchars($name)."')";
-
+			VALUES ('".$this->ArtifactExtraField->getID()."','".htmlspecialchars($name)."')";
+		db_begin();
 		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
-			return true;
+			$id=db_insertid($result,'artifact_extra_field_elements','element_id');
+			//
+			//	Now set up our internal data structures
+			//
+			if (!$this->fetchData($id)) {
+				db_rollback();
+				return false;
+			} else {
+				db_commit();
+				return $id;
+			}
 		} else {
 			$this->setError(db_error());
+			db_rollback();
 			return false;
 		}
-
-
-		//
-		//	Now set up our internal data structures
-		//
-		if (!$this->fetchData($id)) {
-			return false;
-		}
-
 	}
 
 
@@ -142,12 +141,12 @@ class ArtifactExtraFieldElement extends Error {
 	}
 
 	/**
-	 *	getArtifactType - get the ArtifactType Object this ArtifactExtraField is associated with.
+	 *	getArtifactExtraField - get the ArtifactExtraField Object this ArtifactExtraField is associated with.
 	 *
-	 *	@return object	ArtifactType.
+	 *	@return object	ArtifactExtraField.
 	 */
-	function &getArtifactType() {
-		return $this->ArtifactType;
+	function &getArtifactExtraField() {
+		return $this->ArtifactExtraField;
 	}
 	
 	/**
@@ -184,12 +183,10 @@ class ArtifactExtraFieldElement extends Error {
 	 *  boxes and fields configured by the admin
 	 *
 	 *  @param	string	Name of the choice in a box.
-	 *  @param	int	Id of the box 
-	 *  @param	int	id of the row
 	 *  @return	boolean	success.
 	 */
-	function update($name,$boxid,$id) {
-		if (!$this->ArtifactType->userIsAdmin()) {
+	function update($name) {
+		if (!$this->ArtifactExtraField->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -199,8 +196,7 @@ class ArtifactExtraFieldElement extends Error {
 		}   
 		$sql="UPDATE artifact_extra_field_elements 
 			SET element_name='".htmlspecialchars($name)."' 
-			WHERE element_id='$id'"; 
-//			AND extra_field_id='$boxid'";
+			WHERE element_id='".$this->getID()."'"; 
 		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {
 			return true;

@@ -1,3 +1,12 @@
+2005-02-27  Tim Perdue <tim@gforge.org>
+
+	* Trying to enhance INSTALL file with detailed manual installation
+	instructions
+	* modifications to cvstracker to make it activated by default in gforge
+	* "Extra Fields" code enhancements allow for copying extra fields to 
+	other trackers, deleting extra fields, and supporting "Multi-select" boxes
+	and "checkboxes" as extra-field types.
+
 2005-02-25  Christian Bayle <bayle@debian.org>
 
 	* nss-pgsql optimization
@@ -18,7 +27,7 @@
 	  new UNIX.class and pgsql.class for nss
 	
 
-2005-02-17  Tim Perdue <tim@gforge.org>
+2005-02-24  Tim Perdue <tim@gforge.org>
 
 	* massive cleanup of PKEYS and INDEXES throughout db
 

@@ -2733,6 +2733,7 @@ tracker_add	title	Submit Tracker Item
 tracker_admin	permanently_delete_info	Permanently delete this tracker.
 tracker_admin	deleted	Successfully Deleted.
 tracker_admin	delete_warning	You are about to permanently and irretrievably delete this tracker and all its contents!
+tracker_admin	delete_extrafieldwarning	You are about to permanently and irretrievably delete this extra field and all its contents!
 tracker_admin	sure	I'm Sure.
 tracker_admin	really_sure	I'm Really Sure.
 tracker_admin	delete	Delete.
@@ -2797,8 +2798,10 @@ tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
 tracker_admin_add_users	update_permissions	Update Developer Permissions
 tracker_admin_add_users	user_name	User Name
 tracker_admin_build_boxes	box_type_select	Select Box
+tracker_admin_build_boxes	box_type_checkbox	Check Box
 tracker_admin_build_boxes	box_type_radio	Radio Buttons
 tracker_admin_build_boxes	box_type_text	Text Field
+tracker_admin_build_boxes	box_type_multiselect	Multi-Select Box
 tracker_admin_build_boxes	box_type_textarea	Text Area
 tracker_admin_build_boxes	box_type	Type of extra field
 tracker_admin_build_boxes	box_sizerows	Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.
@@ -2806,6 +2809,9 @@ tracker_admin_build_boxes	box_sizeattr1	Text Field Size/Text Area Rows
 tracker_admin_build_boxes	box_sizeattr2	Text Field Maxlength/Text Area Columns
 tracker_admin_build_boxes	title	 Add/Update Extra Fields
 tracker_admin_build_boxes	edit	Edit
+tracker_admin_build_boxes	delete	Delete
+tracker_admin_build_boxes	copy	Copy
+tracker_admin_build_boxes	extrafield_deleted	Extra Field Deleted
 tracker_admin_build_boxes	opt_title	Add/Update Extra Field Elements in: $1
 tracker_admin_build_boxes	box_add_choices	add choices
 tracker_admin_build_boxes	tracker_box_id	ID

@@ -18,26 +18,48 @@
 					$feedback .= $Language->getText('tracker_admin_build_boxes','box_name_inserted');
 				}
 			}
+		//
+		//	Delete an extra field and its contents
+		//
+		} elseif ($deleteextrafield) {
+			$ab = new ArtifactExtraField($ath,$id);
+		
+			if (!$ab || !is_object($ab)) {
+				$feedback .= 'Unable to create ArtifactExtraField Object';
+			} elseif ($ab->isError()) {
+				$feedback .= $ab->getErrorMessage();			
+			} else {
+				if (!$ab->delete($sure,$really_sure)) {
+					$feedback .= $ab->getErrorMessage();
+				} else {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','extrafield_deleted');
+					$deleteextrafield=false;
+				}
+			}
 
 		//
 		//	Add an option to a box
 		//
 		} elseif ($add_opt) {
-			$ao = new ArtifactExtraFieldElement($ath);
-			if (!$ao || !is_object($ao)) {
-				$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
-//			} elseif ($ao->isError())
-//				$feedback .= $ao->getErrorMessage();			
+			$ab = new ArtifactExtraField($ath,$boxid);
+			if (!$ab || !is_object($ab)) {
+				$feedback .= 'Unable to create ArtifactExtraField Object';
+			} elseif ($ab->isError()) {
+				$feedback .= $ab->getErrorMessage();			
 			} else {
-				if (!$ao->create($name,$boxid)) {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$ao->getErrorMessage();
-					$ao->clearError();
+				$ao = new ArtifactExtraFieldElement($ab);
+				if (!$ao || !is_object($ao)) {
+					$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+//				} elseif ($ao->isError())
+//					$feedback .= $ao->getErrorMessage();			
 				} else {
-					$feedback .= $Language->getText('tracker_admin_build_boxes','choice_inserted');
+					if (!$ao->create($name)) {
+						$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$ao->getErrorMessage();
+						$ao->clearError();
+					} else {
+						$feedback .= $Language->getText('tracker_admin_build_boxes','choice_inserted');
+					}
 				}
-		//		$add_opt= false;
-		//		$build_box= true;
-				
 			}
 
 		//
@@ -123,75 +145,55 @@
 		//
 		} elseif ($copy_opt) {
 			$copy_rows=count($copyid);
-			$tracker_rows=count($selectid);
-			if ($tracker_rows > 0 && $copy_rows > 0) {
-				for ($i=0; $i < $tracker_rows; $i++) {
-					//
-					// create an object for each selected type
-					//
-					$result = db_query("SELECT * FROM artifact_extra_field_list 
-						WHERE extra_field_id='$selectid[$i]'");
-					$typeid = db_result($result,0,'group_artifact_id');
-					$athcp = new ArtifactTypeHtml($group,$typeid);
-					if (!$athcp || !is_object($athcp)) {
-						exit_error('Error','ArtifactType could not be created');
-					}
-					if ($athcp->isError()) {
-						exit_error($Language->getText('general','error'),$athcp->getErrorMessage());
-					}
-					//
-					//  Copy choices into a field (box) for each tracker selected 
-					//
-					$feedback .= 'From Tracker: ';
-					$feedback .= $athcp->getName();				
-					$feedback .= ' into Tracker: ';
-					$feedback .= $athcp->getName();
-					$aef =new ArtifactExtraField($athcp,$selectid[$i]);
+			if ($copy_rows > 0) {
+				//
+				// create an object for each selected type
+				//
+				$result = db_query("SELECT * FROM artifact_extra_field_list 
+					WHERE extra_field_id='$selectid'");
+				$typeid = db_result($result,0,'group_artifact_id');
+				$dest_tracker =& artifactType_get_object($typeid);
+				if (!$dest_tracker || !is_object($dest_tracker)) {
+					exit_error('Error','ArtifactType could not be created');
+				} elseif ($dest_tracker->isError()) {
+					exit_error($Language->getText('general','error'),$dest_tracker->getErrorMessage());
+				}
+				//
+				//  Copy choices into a field (box) for each tracker selected 
+				//
+				$feedback .= 'Copy into Tracker: ';
+				$feedback .= $dest_tracker->getName();
+				$aef =new ArtifactExtraField($dest_tracker,$selectid);
+				if (!$aef || !is_object($aef)) {
+					$feedback .= 'Unable to create ArtifactExtraField Object';
+				} elseif ($aef->isError()) {
+					$feedback .= $aefe->getErrorMessage();
+				} else {
 					$feedback .= ', Box: ';
 					$feedback .= $aef->getName();
 					$feedback .= '<br />';
-			
-					$aefe = new ArtifactExtraFieldElement($athcp);
-					if (!$aefe || !is_object($aefe)) {
-						$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
-					} elseif ($aefe->isError()) {
-						$feedback .= $aefe->getErrorMessage();			
-					} else {
-						for ($k=0; $k < $copy_rows; $k++) {
+
+					for ($k=0; $k < $copy_rows; $k++) {
+					$aefe = new ArtifactExtraFieldElement($aef);
+						if (!$aefe || !is_object($aefe)) {
+							$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
+						} elseif ($aefe->isError()) {
+							$feedback .= $aefe->getErrorMessage();			
+						} else {
 							$name=$ath->getElementName($copyid[$k]);
-							if (!$aefe->create($name,$selectid[$i])) {
+							if (!$aefe->create($name)) {
 								$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$aefe->getErrorMessage();
 								$aefe->clearError();
 							} else {
-/*
-//WTF IS THIS?
-								unset ($abo);
-								$abo = new ArtifactExtraFieldElement($athcp);
-								if (!$abo || !is_object($abo)) {
-									$feedback .= 'Unable to create ArtifactExtraFieldElement Object';
-								} elseif ($abo->isError()) {
-									$feedback .= $abo->getErrorMessage();			
-								} else { 
-*/
-									$feedback .= '- Copied choice:';
-									$feedback .= $name;
-/*
-								}
-								$feedback .= '<br />';
-								unset($ab);
-*/
+								$feedback .= '- Copied choice:';
+								$feedback .= $name;
 							}
-						} 
-					}
+						}
+					} 
 				}
-//				unset ($abo);
-//				unset ($athcp);
-				$feedback .= '<br />';
-			
-			} else {
-				$feedback .= 'you are required to select both one or more choices and one or more trackers';
 			}
-
+			$feedback .= '<br />';
+			
 		//
 		//	Update an extra field
 		//

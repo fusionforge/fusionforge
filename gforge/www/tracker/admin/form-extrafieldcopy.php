@@ -3,11 +3,11 @@
 //
 //  FORM TO COPY Choices configured by admin for extra_field BOXES 
 //
-		$fb= new ArtifactExtraField($ath,$boxid);
+		$fb= new ArtifactExtraField($ath,$id);
 		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_copy','choices_title',$fb->getName())));
 		echo "<h3>".$Language->getText('tracker_admin_copy','choices_title',$fb->getName())."</h3>";
 		
-		$efearr =& $ath->getExtraFieldElements($boxid);
+		$efearr =& $ath->getExtraFieldElements($id);
 		for ($i=0; $i<count($efearr); $i++) {
 			$field_id_arr[] = $efearr[$i]['element_id'];
 			$field_arr[] = $efearr[$i]['element_name'];
@@ -26,28 +26,39 @@
 		echo '<td valign=top>';
 		?>
 		
-		<form action="<?php echo $PHP_SELF .'?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(); ?>" method="post" >
+		<form action="<?php echo $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post" >
 		<input type="hidden" name="copy_opt" value="copy" >
-		<input type="hidden" value="$return">
+		<input type="hidden" name="id" value="<?php echo $id; ?>">
 		<?php
 		echo html_build_multiple_select_box_from_arrays($field_id_arr,$field_arr,'copyid[]',array(),10,false);
 		echo '</td><td><strong><center>';
-		$atf = new ArtifactTypeFactory($group);
-		$at_arr =& $atf->getArtifactTypes();
-		for ($j=0; $j < count($at_arr); $j++) {
-			$athcp= new ArtifactTypeHtml($group,$at_arr[$j]->getID());
-			$efarr =& $athcp->getExtraFields();
-			$ct=count($efarr);
-			for ($k=0; $k < $ct; $k++) {
-				$id_arr[]=$efarr[$k]['extra_field_id'];
-				$name_arr[]=$athcp->getName() .' - '.$efarr[$k]['field_name'];
-			}
-			unset ($athcp);	
+		//get a list of all extra fields in trackers and groups that you have perms to admin
+		$sql="SELECT g.unix_group_name, agl.name AS tracker_name, aefl.field_name, aefl.extra_field_id
+			FROM groups g, 
+			artifact_group_list agl, 
+			artifact_extra_field_list aefl,
+			user_group ug,
+			artifact_perm ap
+			WHERE 
+			(ug.admin_flags='A' OR ug.artifact_flags='2' OR ap.perm_level>='2')
+			AND ug.user_id='".user_getid()."'
+			AND ug.group_id=g.group_id
+			AND g.group_id=agl.group_id 
+			AND agl.group_artifact_id=ap.group_artifact_id
+			AND ap.user_id='".user_getid()."'
+			AND aefl.group_artifact_id=agl.group_artifact_id
+			AND aefl.field_type IN (1,2,3,5)";
+		$res=db_query($sql);
+
+//		echo db_error().$sql;
+
+		while($arr =db_fetch_array($res)) {
+				$name_arr[]=$arr['unix_group_name']. '::'. $arr['tracker_name'] . '::'. $arr['field_name'];
+				$id_arr[]=$arr['extra_field_id'];
 		}
 		echo '<td valign=top>';
 
-		$cat_count=count($id_arr);
-		echo html_build_multiple_select_box_from_arrays($id_arr,$name_arr,'selectid[]',array(),10,false);
+		echo html_build_select_box_from_arrays($id_arr,$name_arr,'selectid',$selectid,false);
 		echo '</td></tr>';
 		echo '<tr><td>';
 		?>

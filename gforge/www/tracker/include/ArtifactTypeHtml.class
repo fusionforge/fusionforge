@@ -83,7 +83,6 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	function renderExtraFields($selected=array(),$show_100=false,$text_100='none') {
 		$efarr =& $this->getExtraFields();
-		$count=count($efarr);
 		//each two columns, we'll reset this and start a new row
 
 //TODO - add code for "display only" such as mod-limited and detail.php pages
@@ -92,7 +91,10 @@ class ArtifactTypeHtml extends ArtifactType {
 			<!-- Start Extra Fields Rendering -->
 			<tr>';
 		$col_count=0;
-		for ($i=0; $i<$count; $i++) {
+
+		$keys=array_keys($efarr);
+		for ($k=0; $k<count($keys); $k++) {
+			$i=$keys[$k];
 //echo "|||$col_count***".$efarr[$i]['attribute2'];
 			if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT) {
 
@@ -100,9 +102,12 @@ class ArtifactTypeHtml extends ArtifactType {
 					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
 						$this->renderSelect($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
 
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
 
-	//		} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) {
-//TODO - requires schema change to store multiple choices for a given artifact
+				echo '
+					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
+						$this->renderCheckbox($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100,$text_100).'</td>';
+
 			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
 
 				echo '
@@ -143,8 +148,11 @@ class ArtifactTypeHtml extends ArtifactType {
 					<td width="50%" colspan="'.$colspan.'" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
 						$this->renderTextArea($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$efarr[$i]['attribute1'],$efarr[$i]['attribute2']).'</td>';
 
-//			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
-//TODO - requires schema change to store multiple choices for a given artifact
+			} elseif ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) {
+
+				echo '
+					<td width="50%" valign="top"><strong>'.$efarr[$i]['field_name'].':</strong><br />'.
+					$this->renderMultiSelectBox ($efarr[$i]['extra_field_id'],$selected[$efarr[$i]['extra_field_id']],$show_100).'</td>';
 
 			}
 			$col_count++;
@@ -214,6 +222,62 @@ class ArtifactTypeHtml extends ArtifactType {
 			(($checked==$arr[$i]['element_id']) ? 'CHECKED' : '').'>&nbsp;'.$arr[$i]['element_name'].'<br />';
 		}
 		return $return;
+	}
+
+	/**
+	 *	renderCheckbox - this function builds checkboxes.
+	 *	
+	 *	@param		int 	The ID of this field.
+	 *	@param 		array	The items that should be checked
+	 *	@param		string	Whether to show the '100 row'
+	 *	@param		string	What to call the '100 row'
+	 *	@return		radio buttons
+	 */	
+	function renderCheckbox ($extra_field_id,$checked=array(),$show_100=false,$text_100='none') {
+		global $Language;
+		if ($text_100 == 'none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
+		if (!$checked || !is_array($checked)) {
+			$checked=array();
+		}
+		$arr =& $this->getExtraFieldElements($extra_field_id);
+		if ($show_100) {
+			$return .= '
+				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="100" '.
+			((in_array(100,$checked)) ? 'CHECKED' : '').'>'.$text_100.'<br />';
+		}
+		for ($i=0; $i<count($arr); $i++) {
+			$return .= '
+				<input type="checkbox" name="extra_fields['.$extra_field_id.'][]" value="'.$arr[$i]['element_id'].'" '.
+			((in_array($arr[$i]['element_id'],$checked)) ? 'CHECKED' : '').'>&nbsp;'.$arr[$i]['element_name'].'<br />';
+		}
+		return $return;
+	}
+
+	/**
+	 *	renderMultiSelectBox - this function builds checkboxes.
+	 *	
+	 *	@param		int 	The ID of this field.
+	 *	@param 		array	The items that should be checked
+	 *	@param		string	Whether to show the '100 row'
+	 *	@param		string	What to call the '100 row'
+	 *	@return		radio multiselectbox
+	 */	
+	function renderMultiSelectBox ($extra_field_id,$checked=array(),$show_100=false) {
+		global $Language;
+		$arr =& $this->getExtraFieldElements($extra_field_id);
+		if (!$checked || !is_array($checked)) {
+			$checked=array();
+		}
+		$keys=array();
+		$vals=array();
+		$arr =& $this->getExtraFieldElements($extra_field_id);
+		for ($i=0; $i<count($arr); $i++) {
+			$keys[]=$arr[$i]['element_id'];
+			$vals[]=$arr[$i]['element_name'];
+		}
+		return html_build_multiple_select_box_from_arrays($keys,$vals,"extra_fields[$extra_field_id][]",$checked,15,$show_100);
 	}
 
 	/**

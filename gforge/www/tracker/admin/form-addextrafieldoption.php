@@ -16,10 +16,6 @@
 		$rows=count($efearr);
 		if ($rows > 0) {
 			
-			echo '<a href="'.$PHP_SELF.'?copy_opt=1&amp;boxid='.$boxid.'&amp;group_id='.
-				$group_id.'&amp;atid='. $ath->getID() .'">'.
-				$Language->getText('tracker_admin_copy','copy_choices'). '</a><p>';
-
 			$title_arr=array();
 			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');
 

@@ -25,10 +25,10 @@
 require_once('common/include/Error.class');
 
 define('ARTIFACT_EXTRAFIELDTYPE_SELECT',1);
+define('ARTIFACT_EXTRAFIELDTYPE_CHECKBOX',2);
 define('ARTIFACT_EXTRAFIELDTYPE_RADIO',3);
 define('ARTIFACT_EXTRAFIELDTYPE_TEXT',4);
-//define('ARTIFACT_EXTRAFIELDTYPE_CHECKBOX',2);
-//define('ARTIFACT_EXTRAFIELDTYPE_MULTISELECT',5);
+define('ARTIFACT_EXTRAFIELDTYPE_MULTISELECT',5);
 define('ARTIFACT_EXTRAFIELDTYPE_TEXTAREA',6);
 
 class ArtifactExtraField extends Error {
@@ -202,8 +202,10 @@ class ArtifactExtraField extends Error {
 		global $Language;
 		return array(
 			1=>$Language->getText('tracker_admin_build_boxes','box_type_select'),
+			2=>$Language->getText('tracker_admin_build_boxes','box_type_checkbox'),
 			3=>$Language->getText('tracker_admin_build_boxes','box_type_radio'),
 			4=>$Language->getText('tracker_admin_build_boxes','box_type_text'),
+			5=>$Language->getText('tracker_admin_build_boxes','box_type_multiselect'),
 			6=>$Language->getText('tracker_admin_build_boxes','box_type_textarea')
 		);
 	}
@@ -239,6 +241,53 @@ class ArtifactExtraField extends Error {
 			return false;
 		}
 	}
+
+	/**
+	 *
+	 *
+	 */
+	function delete($sure, $really_sure) {
+		if (!$sure || !$really_sure) {
+			$this->setError('You Must Be Really Sure');
+			return false;
+		}
+		if (!$this->ArtifactType->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		db_begin();
+		$sql="DELETE FROM artifact_extra_field_data 
+			WHERE extra_field_id='".$this->getID()."'";
+		$result=db_query($sql);
+		if ($result) {
+			$sql="DELETE FROM artifact_extra_field_elements
+				WHERE extra_field_id='".$this->getID()."'";
+			$result=db_query($sql);
+			if ($result) {
+				$sql="DELETE FROM artifact_extra_field_list
+                WHERE extra_field_id='".$this->getID()."'";
+				$result=db_query($sql);
+				if ($result) {
+					db_commit();
+					return true;
+				} else {
+					$this->setError(db_error());
+					db_rollback();
+					return false;
+				}
+			} else {
+				$this->setError(db_error());
+				db_rollback();
+				return false;
+			}
+		} else {
+			$this->setError(db_error());
+			db_rollback();
+			return false;
+		}
+
+	}
+
 }
 
 ?>

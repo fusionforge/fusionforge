@@ -107,6 +107,10 @@ if ($group_id && $atid) {
 
 		include ('form-deletetracker.php');
 
+	} elseif ($deleteextrafield) {
+
+		include ('form-deleteextrafield.php');
+
 	} elseif ($update_type) {
 
 		include ('form-updatetracker.php');

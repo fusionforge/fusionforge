@@ -10,8 +10,9 @@
 			List of possible user built Selection Boxes for an ArtifactType
 		*/
 		$efarr =& $ath->getExtraFields();
+		$keys=array_keys($efarr);
 		echo "<br />";
-		$rows=count($efarr);
+		$rows=count($keys);
 		if ($rows > 0) {
 
 			$title_arr=array();
@@ -19,12 +20,19 @@
 			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');	
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-			for ($i=0; $i < $rows; $i++) {
-
+			for ($k=0; $k < $rows; $k++) {
+				$i=$keys[$k];
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-					'<td><a href="'.$PHP_SELF.'?update_box=1&amp;id='.
+					'<td>'.$efarr[$i]['field_name'].'<a href="'.$PHP_SELF.'?update_box=1&amp;id='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
-						$efarr[$i]['field_name'].' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a></td>';
+						' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a>'.
+					'<a href="'.$PHP_SELF.'?deleteextrafield=1&amp;id='.
+                        $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+                        ' ['.$Language->getText('tracker_admin_build_boxes','delete').']</a>'.
+					'<a href="'.$PHP_SELF.'?copy_opt=1&amp;id='.
+                        $efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+                        ' ['.$Language->getText('tracker_admin_build_boxes','copy').']</a>'.
+					'</td>';
 				/*
 		  			List of possible options for a user built Selection Box
 		  		*/
@@ -45,7 +53,10 @@
 				}
 				echo '</td>';
 				echo '<td>';
-				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT || $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
+				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT
+					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO 
+					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX
+					|| $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT ) {
 					echo '<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
 						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
 						$Language->getText('tracker_admin_build_boxes', 'box_add_choices').']</a>';
@@ -67,8 +78,10 @@
 		<p>
 		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_type') ?>:</strong><br />
 		<input type="radio" name="field_type" value="1"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_select'); ?><br />
+		<input type="radio" name="field_type" value="2"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_checkbox'); ?><br />
 		<input type="radio" name="field_type" value="3"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_radio'); ?><br />
 		<input type="radio" name="field_type" value="4"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_text'); ?><br />
+		<input type="radio" name="field_type" value="5"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_multiselect'); ?><br />
 		<input type="radio" name="field_type" value="6"> <?php echo $Language->getText('tracker_admin_build_boxes','box_type_textarea'); ?><br />
 		<p>
 		<?php echo $Language->getText('tracker_admin_build_boxes','box_sizerows'); ?><br />
