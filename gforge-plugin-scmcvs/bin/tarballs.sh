@@ -2,26 +2,40 @@
 # 
 # $Id$
 #
-# Generate CVS repositories tarballs
+# Generate SCM repositories tarballs
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
-
 set -e
-#set -x 
+# Default values
+
+SCMROOT=/var/lib/gforge/chroot/cvsroot
+SCMTARDIR=/var/lib/gforge/scmtarballs
+SCMNAME=scmroot
+
+usage(){
+	echo "usage:"
+	echo "  tarballs.sh [action] [cvsroot] [cvstardir]"
+	echo ""
+	exit 1 
+}
 
 if [  $(id -u) != 0 ] ; then
     echo "You must be root to run this, please enter passwd"
-    exec su -c "$0 $1"
+    exec su -c "$0 $1 $2 $3"
 fi
-
-CVSROOT=/var/lib/gforge/chroot/cvsroot
-SCMTARDIR=/var/lib/gforge/scmtarballs
+if test $# -lt 3; then 
+	if test $# -lt 1; then
+		usage
+	else
+		exec su -c "$0 $1 $SCMROOT $SCMTARDIR"
+	fi
+fi
 
 case "$1" in
     generate)
-	cd $CVSROOT
+	cd $SCMROOT
 	ls | while read dir ; do
-	    tar czf $SCMTARDIR/${dir}-scmroot.tar.gz.new ${dir}
-	    mv $SCMTARDIR/${dir}-scmroot.tar.gz.new $SCMTARDIR/${dir}-scmroot.tar.gz
+	    tar czf $SCMTARDIR/${dir}-${SCMNAME}.tar.gz.new ${dir}
+	    mv $SCMTARDIR/${dir}-${SCMNAME}.tar.gz.new $SCMTARDIR/${dir}-${SCMNAME}.tar.gz
 	done
 	;;
     
@@ -32,7 +46,6 @@ case "$1" in
 	;;
 
     *)
-	echo "Usage: $0 {generate}"
-	exit 1
+    	usage
 	;;
 esac
