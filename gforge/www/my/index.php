@@ -360,7 +360,8 @@ if (!session_loggedin()) { // || $sf_user_hash) {
 		. "FROM groups,user_group "
 		. "WHERE groups.group_id=user_group.group_id "
 		. "AND user_group.user_id='". user_getid() ."' "
-		. "AND groups.status='A'");
+		. "AND groups.status='A' "
+		. "ORDER BY group_name");
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<strong>'.$Language->getText('my', 'no_projects').'</strong>';
