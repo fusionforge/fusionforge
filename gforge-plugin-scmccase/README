@@ -1,0 +1,31 @@
+gforge-plugin-scmccase
+----------------------
+
+This is the Clear Case plugin for Gforge.  It creates Clear Case
+repositories for projects.
+
+Prerequisite:
+
+- install Perl, DBI and DBD::Pg as per Gforge's INSTALL file
+
+Installation:
+
+- files from etc/ go to /etc/gforge/plugins/scmsvn
+- files from bin/ go to /usr/lib/gforge/plugins/scmsvn/bin
+- files from include/ go to /usr/lib/gforge/plugins/scmsvn/include
+- files from lib/ go to  /usr/lib/gforge/plugins/scmsvn/lib
+
+Setup:
+
+- customise files in /etc/gforge/plugins/scmsvn to match your
+preferences (Clear Case server, and whether to enable Clear Case by
+default for new projects)
+- setup the crontab from debian/cron.d
+- /usr/lib/gforge/plugins/scmsvn/bin/db-upgrade.pl
+- /usr/lib/gforge/bin/register-plugin scmccase "Clear Case"
+
+ -- Roland Mas <lolando@debian.org>, Tue May 18 22:14:38 2004
+
+Local Variables:
+mode: readme-debian
+End:
