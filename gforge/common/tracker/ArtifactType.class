@@ -508,7 +508,11 @@ class ArtifactType extends Error {
 			while($arr =& db_fetch_array($res)) {
 				$this->extra_field[$id][$i++] = $arr;
 			}
+			if (count($this->extra_field[$id]) == 0) {
+				return;
+			}
 		}
+				
 		return $this->extra_field[$id];
 	}
 

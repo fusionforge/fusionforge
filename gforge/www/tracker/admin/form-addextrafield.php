@@ -28,9 +28,10 @@
 				/*
 		  			List of possible options for a user built Selection Box
 		  		*/
-				$elearray =& $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);
-				$optrows=count($elearray);
-				if ($optrows > 0) {
+				$elearray =& $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);	
+				if (!empty($elearray)) {
+					$optrows=count($elearray);
+
 					echo '<td>';
 					for ($j=0; $j <$optrows; $j++)
 				
@@ -42,7 +43,6 @@
 					} else {
 						echo '<td>';
 				}
-			
 				echo '</td>';
 				echo '<td>';
 				if ($efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_SELECT || $efarr[$i]['field_type'] == ARTIFACT_EXTRAFIELDTYPE_RADIO) {
