@@ -72,7 +72,7 @@ if ($feedback) {
 <?php echo $Language->getText('account_register','language'); ?><br>
 <?php echo html_get_language_popup ($Language,'language_id',1); ?>
 <P>
-Timezone:<BR>
+<?php echo $Language->getText('account_register','timezone'); ?><br>
 <?php echo html_get_timezone_popup('timezone', 'GMT'); ?>
 <P>
 @<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
