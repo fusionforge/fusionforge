@@ -1,3 +1,9 @@
+sourceforge (2.6-0+14+) experimental; urgency=low
+
+  * [Christian] Add the possibility to hide forum in news_show_latest
+
+ -- Christian Bayle <bayle@debian.org>  Thu, 14 Nov 2002 03:05:36 +0100
+
 sourceforge (2.6-0+14) experimental; urgency=low
 
   * [Roland] Uuencoded all binary files in the source package, so that
