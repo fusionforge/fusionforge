@@ -75,6 +75,8 @@ class ProjectTaskFactory extends Error {
 			return false;
 		}
 		$this->ProjectGroup =& $ProjectGroup;
+		$this->order='project_task_id';
+		$this->offset=0;
 
 		return true;
 	}
@@ -199,7 +201,7 @@ WHERE project_assigned_to.project_task_id=project_task_vw.project_task_id;
 		$rows = db_numrows($result);
 		$this->fetched_rows=$rows;
 		if (db_error()) {
-			$this->setError('Database Error: '.db_error());
+			$this->setError('Database Error: '.db_error().$sql);
 			return false;
 		} else {
 			while ($arr =& db_fetch_array($result)) {
