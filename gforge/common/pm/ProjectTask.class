@@ -438,11 +438,27 @@ class ProjectTask extends Error {
 		}
 	}
 
+	function checkCircular($depend_on_id, $original_id) {
+		if ($depend_on_id == $original_id) {
+			$this->setError('Circular Dependency Detected');
+	 		return false;
+		}
+
+		$res=db_query("SELECT is_dependent_on_task_id AS id 
+			FROM project_dependencies 
+			WHERE project_task_id='$depend_on_id'");
+		$rows=db_numrows($res);
+
+		for ($i=0; $i<$rows; $i++) {
+			if (!$this->checkCircular(db_result($res,$i,'id'), $original_id)) {
+				return false;
+			}
+		}
+	}
 
 	function setDependentOn(&$arr) {
 //
 //	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!! 
-//	Simplest way is to ensure this start_date, is >= dependent_on end_date
 //
 		//get existing dependencies to diff against
 		$arr2 =& $this->getDependentOn();
@@ -461,6 +477,12 @@ class ProjectTask extends Error {
 				}
 			}
 			for ($i=0; $i<count($add_arr); $i++) {
+				//
+				//	Check task for circular dependencies
+				//
+				if (!$this->checkCircular($add_arr[$i],$this->getID())) {
+					return false;
+				}
 				db_query("INSERT INTO project_dependencies (project_task_id,is_dependent_on_task_id) 
 					VALUES ('".$this->getID()."','". $add_arr[$i] ."')");
 				if (db_error()) {
