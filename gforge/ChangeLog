@@ -1,5 +1,7 @@
 2005-03-02  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
 
+	* www/include/languages/Bulgarian.tab: Pulled translation from
+	OpenFMI GForge.
 	* Content of INSTALL file is merged into Installation Guide.
 	Other small improvements.  /var/www is recommended instead of
 	/usr/share as place to install.
