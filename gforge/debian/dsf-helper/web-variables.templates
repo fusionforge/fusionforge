@@ -9,5 +9,5 @@ Template: gforge/shared/sys_theme
 Type: string
 Default: debian
 _Description: Default theme
- Here is the default theme for web pages, be carreful to enter a valid
+ Here is the default theme for web pages, be careful to enter a valid
  name.

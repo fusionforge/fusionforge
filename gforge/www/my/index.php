@@ -158,7 +158,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 		"FROM groups,filemodule_monitor,frs_package ".
 		"WHERE groups.group_id=frs_package.group_id AND groups.status = 'A' ".
 		"AND frs_package.package_id=filemodule_monitor.filemodule_id ".
-		"AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name DESC";
+		"AND filemodule_monitor.user_id='".user_getid()."' ORDER BY group_name ASC";
 	$result=db_query($sql);
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -348,7 +348,8 @@ if (session_loggedin()) { // || $sf_user_hash) {
 		. "FROM groups,user_group "
 		. "WHERE groups.group_id=user_group.group_id "
 		. "AND user_group.user_id='". user_getid() ."' "
-		. "AND groups.status='A'");
+		. "AND groups.status='A' "
+		. "ORDER BY groups.group_name ASC"   );
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '<strong>'.$Language->getText('my', 'no_projects').'</strong>';

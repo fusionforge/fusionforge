@@ -73,7 +73,14 @@ case "$1" in
 		db_fset gforge/shared/ldap_base_dn seen false
 		exit $err
 		;;
-	    4)
+	    5)
+		echo "WARNING WARNING WARNING: LDAP Configuration Failed"
+		sf_ldap_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
+		echo "It seems the LDAP load failed, possibly due to a password mismatch"
+		echo "Please check your passwords (especially /etc/ldap.secret) and try again."
+		exit $err
+		;;
+	    99)
 		echo "WARNING WARNING WARNING: LDAP Configuration Failed"
 		sf_ldap_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
 		echo "It seems the LDAP load failed for some unknown reason."
