@@ -136,7 +136,7 @@ if ($add_cat && $group_project_id) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
 	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories_title'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
-	echo "<h1>".$Language->getText('pm_admin_projects','add_categories_to').": ". $pg->getName() ."</h1>";
+	echo "<h2>".$Language->getText('pm_admin_projects','add_categories_to').": ". $pg->getName() ."</h2>";
 
 	/*
 		List of possible categories for this ArtifactType
@@ -162,7 +162,7 @@ if ($add_cat && $group_project_id) {
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
-		echo "\n<h1>".$Language->getText('pm_admin_projects','no_categories')."</h1>";
+		echo "\n<h3>".$Language->getText('pm_admin_projects','no_categories')."</h3>";
 	}
 
 	?>
@@ -198,8 +198,7 @@ if ($add_cat && $group_project_id) {
 	}
 	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
 
-	echo '
-		<h1>'.$Language->getText('pm_admin_projects','modify_category').': '. $pg->getName() .'</h1>';
+	echo '<h2>'.$Language->getText('pm_admin_projects','modify_category').': '. $pg->getName() .'</h2>';
 
 	$ac = new ProjectCategory($pg,$id);
 	if (!$ac || !is_object($ac)) {
@@ -240,9 +239,13 @@ if ($add_cat && $group_project_id) {
 	$result=db_query($sql);
 	echo "<p />";
 	if ($result && db_numrows($result) > 0) {
-		ShowResultSet($result,$Language->getText('pm_admin_projects','existing_subprojects'));
+		$headerMapping = array(
+			'group_project_id' => $Language->getText('pm_admin_projects','col_project_id'),
+			'project_name' => $Language->getText('pm_admin_projects','col_project_name')
+		);
+		ShowResultSet($result, $Language->getText('pm_admin_projects','existing_subprojects'), false, true, $headerMapping);
 	} else {
-		echo "\n<h1>".$Language->getText('pm_admin_projects','no_subprojects')."</h1>";
+		echo "\n<h2>".$Language->getText('pm_admin_projects','no_subprojects')."</h2>";
 	}
 	?>
 	<p><?php echo $Language->getText('pm_admin_projects','projects_intro') ?></p>

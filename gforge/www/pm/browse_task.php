@@ -43,6 +43,7 @@ if ($ptf->isError()) {
 $_assigned_to=$ptf->assigned_to;
 $_status=$ptf->status;
 $_order=$ptf->order;
+$_category_id=$ptf->category;
 
 pm_header(array('title'=>$Language->getText('pm_browsetask','title'),'pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>$g->getPublicName()));
 
@@ -96,7 +97,7 @@ echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id
 	<table width="10%" border="0">
 	<tr>
 		<td><font size="-1">'.$Language->getText('pm_modtask','assignee').'<br />'. $tech_box .'</font></td>
-		<td><font size="-1">'.$Language->getText('pm','status').'<br />'. $pg->statusBox('_status',$_status,true,'Any') .'</font></td>
+		<td><font size="-1">'.$Language->getText('pm','status').'<br />'. $pg->statusBox('_status',$_status,true, $Language->getText('pm','status_any')) .'</font></td>
 		<td><font size="-1">'.$Language->getText('pm','category').'<br />'. $cat_box .'</font></td>
 		<td><font size="-1">'.$Language->getText('pm_modtask','sort_on').'<br />'. $order_box .'</font></td>
 		<td><font size="-1"><input type="submit" name="submit" value="'.$Language->getText('pm_browsetask','browse').'" /></font></td>
@@ -142,9 +143,9 @@ if ($rows < 1) {
 			$pt_arr[$i]->getID() .'"> ':'').
 			$pt_arr[$i]->getID() .'</td>'.
 			'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
-			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
+			'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
 			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
-				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</strong></td>'.
+				date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
 			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td>'.
 			'<td>'. $pt_arr[$i]->getPriority() .'</td></tr>';
 

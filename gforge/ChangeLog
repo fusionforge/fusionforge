@@ -1,3 +1,10 @@
+2004-02-19  Guillaume Smet <guillaume-gforge@smet.org>
+	
+	* merged [ #690 ] by Benoît Sibaud with French.tab cvs version
+	* updated french localization again
+	* improved localization of task manager
+	* fixed ShowResultSet function
+
 2004-02-18  Guillaume Smet <guillaume-gforge@smet.org>
 	
 	* updated french localization

@@ -636,7 +636,7 @@ Function GraphIt($name_string,$value_string,$title) {
  * @param	array   Don't display these cols
  *
  */
-function  ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$headerMapping=array(), $excludedCols=array())  {
+function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$headerMapping=array(), $excludedCols=array())  {
 	global $group_id,$HTML;
 
 	if($result)  {
@@ -655,7 +655,7 @@ function  ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$h
 			}
 			$colsToKeep[] = $i;
 			if(isset($headerMapping[$fieldName])) {
-				$headersCellData[] = $headerMapping[$fieldName];
+				$headersCellData[] = array($headerMapping[$fieldName]);
 			}
 			else {
 				$headersCellData[] = array($fieldName);

@@ -94,7 +94,7 @@ function reports_header($group_id, $vals, $titles, $html='') {
 
 	if (!$period) $period="lifespan";
 
-	print " for ";
+	print $Language->getText('include_toolreport','for');
 	print html_build_select_box_from_arrays (
 		array('','1','4','7','12','14','30','52'),
 		array('','1','4','7','12','14','30','52'),

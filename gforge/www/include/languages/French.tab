@@ -89,7 +89,7 @@ account_lostpw	user_dont_exist	Cet utilisateur n'existe pas.
 account_lostpw	warn	<p>Perdre son mot de passe n'est pas sans conséquence. Cela compromet la sécurité de votre compte, de vos projets et de ce site.</p><p>Cliquer sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous déclenchera l'envoi d'une URL à l'adresse que vous nous avez fournie. Celle-ci contient une clé de confirmation de 128 bits pour votre compte. An allant à cette URL, vous pourrez changer votre mot de passe en ligne et vous connecter.</p>
 account_options	change_email_address	Modifier mon adresse e-mail
 account_options	change_password	Modifier mon mot de passe
-account_options	edit_skills_profile	Editer mon profil de compétences
+account_options	edit_skills_profile	Éditer mon profil de compétences
 account_options	email_address	Adresse e-mail :
 account_options	address		Adresse complète :
 account_options	language	Langue :
@@ -141,7 +141,7 @@ account_register	timezone	Fuseau horaire :
 account_register	title	Nouvelle inscription
 account_register	update	Mettre à jour
 account_shell	autorized_keys	Clés publiques CVS/SSH autorisées
-account_shell	edit_keys	Editer les clés
+account_shell	edit_keys	Éditer les clés
 account_shell	shell_box	Serveur shell
 account_shell	title	Informations relatives au compte shell
 account_unsubscribe	all_mailings	Toutes les notifications et envois de courriers de $1
@@ -184,7 +184,7 @@ admin	add_new	[Ajouter une annonce]
 admin	are_you_sure_delete	Etes vous sûr de vouloir effacer ceci ?
 admin	cancel	Annuler
 admin	delete	Supprimer
-admin	edit	Editer
+admin	edit	Éditer
 admin	http_domain	Domaine HTTP :
 admin	license	Licence :
 admin	license_other	Autre licence :
@@ -211,7 +211,7 @@ admin_approve_pending	approve_all_on_this_page	Tout approuver sur cette page
 admin_approve_pending	approving_group	Groupe à approuver :
 admin_approve_pending	approving_pending_projects	Projets en attente d'approbation
 admin_approve_pending	custom_response_title	Personnaliser le titre et le texte de la réponse
-admin_approve_pending	edit_project_details	[Editer les informations du projet]
+admin_approve_pending	edit_project_details	[Éditer les informations du projet]
 admin_approve_pending	error_creating_group	Erreur lors de la création d'un objet groupe
 admin_approve_pending	error_group_rejection	Erreur lors du refus d'un groupe
 admin_approve_pending	home_box	Interpréteur maison :
@@ -224,7 +224,7 @@ admin_approve_pending	pending_reason	Motif de l'attente :
 admin_approve_pending	project_admin	Administration du projet
 admin_approve_pending	submitted_description	Description proposée :
 admin_approve_pending	unix_group_name	Nom du groupe Unix :
-admin_approve_pending	view_edit_project_members	[Voir/Editer les membres du projet]
+admin_approve_pending	view_edit_project_members	[Voir/Éditer les membres du projet]
 admin_database	add_an_already_active_database	Ajouter une base de données déjà active
 admin_database	added_already_active_database	Base de données déjà active ajoutée
 admin_database	count	Nombre
@@ -273,10 +273,10 @@ admin_index	add_edit_delete_processors	Ajouter, Supprimer ou Modifier les proces
 admin_index	add_edit_delete_themes	Ajouter, Supprimer ou Modifier les thèmes
 admin_index	add_to_trove_map	Ajouter à l'arbre des projets
 admin_index	approve_reject	Approuver/Rejeter
-admin_index	cronman	Gestion des tâches planifiées (Cron)
+admin_index	cronman	Gestion des tâches répétitives (Cron)
 admin_index	deleted_status	(supprimé) Statut
-admin_index	display_full_group	Afficher/Editer les groupes
-admin_index	display_full_user_list	Afficher/Editer les utilisateurs
+admin_index	display_full_group	Afficher/Éditer les groupes
+admin_index	display_full_user_list	Afficher/Éditer les utilisateurs
 admin_index	display_groups_beginning_with	Afficher les groupes commençant par :&nbsp;
 admin_index	display_trove_map	Afficher l'arbre des projets
 admin_index	display_user_beginning_with	Afficher les utilisateurs commençant par :&nbsp;
@@ -353,13 +353,13 @@ admin_responses	create	Créer
 admin_responses	create_new_response	Créer une nouvelle réponse :
 admin_responses	deleted_resposes	Réponse effacée
 admin_responses	edit_response	Réponse modifiée
-admin_responses	edit_response_other	Editer la réponse :
+admin_responses	edit_response_other	Éditer la réponse :
 admin_responses	existing_responses	Réponses existantes :
 admin_responses	go	Aller
 admin_responses	not_sure_dont_click	Si vous n'êtes pas sûr, pourquoi avoir cliqué sur « Supprimer » ?
 admin_responses	response_text	Texte de la réponse
 admin_responses	response_title	Titre de la réponse
-admin_responses	title	Editer les réponses de refus.
+admin_responses	title	Éditer les réponses de refus.
 admin_responses	yes_im_sure	Oui, j'en suis sûr
 admin_responses	you_cant	Vous ne pouvez $1 \"None\" !
 admin_search	email	E-mail
@@ -377,11 +377,11 @@ admin_search	unix_name	Nom Unix
 admin_search	user_search_criteria	Recherche d'utilisateurs par critères
 admin_search	username	Nom d'utilisateur
 admin_tabfiles	delete_lang	[Supprimer]
-admin_tabfiles	edit_the_langfile	Editer la langue $1
-admin_tabfiles	edit_the_language	Editer la langue
+admin_tabfiles	edit_the_langfile	Éditer la langue $1
+admin_tabfiles	edit_the_language	Éditer la langue
 admin_tabfiles	language	Langue
 admin_tabfiles	modify_the	Modifier le $1 ci-dessous
-admin_table	edit_the	Editer le
+admin_table	edit_the	Éditer le
 admin_table	table	Table
 admin_trove_cat_add	add	Ajouter
 admin_trove_cat_add	add_new_trove_category	Ajouter une nouvelle branche
@@ -393,7 +393,7 @@ admin_trove_cat_add	parent_category	Catégorie mère
 admin_trove_cat_add	title	Administration du site : Ajouter un noeud à l'arbre
 admin_trove_cat_edit	cant_delete_has_subcategories	Suppression impossible : cette catégorie a des sous-catégories
 admin_trove_cat_edit	delete	Supprimer
-admin_trove_cat_edit	edit_trove_category	Editer une branche
+admin_trove_cat_edit	edit_trove_category	Éditer une branche
 admin_trove_cat_edit	error_trove_equal_parent	Erreur : la catégorie mère ne peut être identique à la catégorie courante
 admin_trove_cat_edit	error_in_trove_operation	Erreur lors d'une opération sur l'arbre
 admin_trove_cat_edit	error_in_trove_operation_cant_delete	Erreur lors d'une opération sur l'arbre : il est impossible de supprimer la catégorie par défaut définie dans <i>local.inc</i>
@@ -402,10 +402,10 @@ admin_trove_cat_edit	new_category_full_name	Nom complet de la nouvelle catégori
 admin_trove_cat_edit	new_category_short_name	Nom court de la nouvelle catégorie (pas d'espace, à la Unix)
 admin_trove_cat_edit	no_such_category	Cette catégorie n'existe pas
 admin_trove_cat_edit	parent_category	Catégorie mère :
-admin_trove_cat_edit	title	Administration du site : Editer une branche
+admin_trove_cat_edit	title	Administration du site : Éditer une branche
 admin_trove_cat_edit	update	Mettre à jour
 admin_trove_cat_list	browse_trove_tree	Afficher l'arbre des projets
-admin_trove_cat_list	edit	Editer
+admin_trove_cat_list	edit	Éditer
 admin_trove_cat_list	add	Ajouter
 admin_trove_cat_list	title	Administration du site : Liste des catégories de l'arbre
 admin_unsubscribe	admin_initiaded_mail	Courriers à l'initiative de l'administrateur
@@ -562,6 +562,9 @@ conf	language_id	7
 conf	mail_charset	ISO-8859-1
 contact	about_blurb	<p>Ceci est la page de prise de contact pour <b>$1</b> : si vous avez des problèmes avec un projet hébergé ici, veuillez poser vos questions sur le gestionnaire de support ou de bug de ce projet. Vous pouvez accéder à ces fonctionnalités en vous rendant sur la page d'accueil du projet à l'adresse : <tt>http://$2/projects/&lt;nom du projet&gt;</tt> et en cliquant sur l'outil approprié.</p><p>Si vous avez besoin d'aide, que vous souhaitez signaler un bug ou communiquer directement avec l'équipe de $1, merci de vous rendre sur le <a href="/projects/siteadmin">Projet Principal de $1</a>.</p>
 contact	title	Contacter $1
+cronman	date	Date
+cronman	job	Tâche
+cronman	message	Message
 developer	body	Corps
 developer	date	Date
 developer	diary_and_notes	Journal et notes pour
@@ -592,7 +595,7 @@ docman	error_no_groups_defined	Aucun groupe de document défini
 docman	submit_new	Soumettre un nouveau document
 docman	turned_off	Ce projet a désactivé la gestion de documents
 docman	view_doc	Voir les documents
-docman_admin	add_edit_docgroups	Ajouter/Editer des groupes de documents
+docman_admin	add_edit_docgroups	Ajouter/Éditer des groupes de documents
 docman_admin	section	Projet : $1
 docman_admin	title	Gestionnaire de documents : Administration
 docman_admin_addgroups	section	Administration de la gestion de documents
@@ -934,7 +937,7 @@ home	gforge_statistics	Statistiques de $1
 home	highest_ranked_users	Développeurs les mieux classés
 home	hosted_projects	Projets hébergés&nbsp;
 home	most_active_this_week	Projets les plus actifs cette semaine
-home	no_stats_available	Pas de statististiques disponibles
+home	no_stats_available	Pas de statistiques disponibles
 home	none_found	Rien trouvé
 home	registered_users	Utilisateurs inscrits&nbsp;
 home	sfos	$1 On-Site
@@ -947,11 +950,12 @@ include_html	priority_highest	Maximum
 include_html	priority_lowest	Minimum
 include_html	priority_medium	Moyen
 include_toolreport	all	Tout
+include_toolreport	for	pour
 include_toolreport	key	Légende&nbsp;
 include_toolreport	last_days	Dernier(s) jour(s)
 include_toolreport	last_months	Dernier(s) mois
 include_toolreport	last_weeks	Dernière(s) semaine(s)
-include_toolreport	last_years	Derniere(s) année
+include_toolreport	last_years	Dernière(s) année(s)
 include_toolreport	no_data	Aucune donnée à afficher
 include_toolreport	open	Ouvert(s)
 include_toolreport	project_lifespan	Durée de vie du projet
@@ -1013,7 +1017,6 @@ menu	change_my_theme	Changer de thème
 menu	code_snippet	Boite à outils
 menu	code_snippet_library	Bibliothèque de code
 menu	compile_farm	Ferme de compilation
-menu	contact_us	Contacter $1
 menu	diary_notes	Journal et notes
 menu	discussion_forums	Forums de discussion
 menu	documentation	Documentations sur le site
@@ -1159,7 +1162,7 @@ people	level	Niveau
 people	long_description	Description longue&nbsp;
 people	more_latest_posts	Encore ...
 people	must_be_loggin	Vous devez être logué d'abord
-people	must_select_a_skill	Vous devez choisir un NРde compétence.
+people	must_select_a_skill	Vous devez choisir un numéro de compétence.
 people	no_categories_found	Aucune catégorie trouvée
 people	no_skill_inventory_setup_up	Aucun référentiel de compétences n'est défini
 people	none_found	Aucune demande trouvée
@@ -1211,12 +1214,12 @@ people_editprofile	cancel_skills_update	Mise à jour de la compétence annulée
 people_editprofile	change_required_fields	Modifiez les champs requis, et cliquez sur "C'est fait&nbsp;!" en bas de la page
 people_editprofile	confirm_delete	Confirmez L'Effacement 
 people_editprofile	confirm_skill_delete	Confirmation de l'effacement d'une compétence
-people_editprofile	edit_delete_your_skills	Editer/Effacer vos compétences
-people_editprofile	edit_public_permissions	Editer les permissions publiques
-people_editprofile	edit_skills	Edition des compétences
+people_editprofile	edit_delete_your_skills	Éditer/Effacer vos compétences
+people_editprofile	edit_public_permissions	Éditer les permissions publiques
+people_editprofile	edit_skills	Édition des compétences
 people_editprofile	edit_your_profile	Éditez Votre Profil 
 people_editprofile	end_date	Date de fin
-people_editprofile	error	Eerreur - informations manquantes
+people_editprofile	error	Erreur - informations manquantes
 people_editprofile	failed_delete_skills	Echec de l'effacement de n'importe quelle compétence
 people_editprofile	failed_to_add_skill	Echec lors de l'ajout de la compétence
 people_editprofile	failed_update_skills	Echec lors de la mise à jour de la compétence
@@ -1236,7 +1239,7 @@ people_editprofile	section	Besoin d'aide
 people_editprofile	skill_added_ok	Compétences ajoutée avec succès
 people_editprofile	skill_delete_successfully	Compétence $1 effacée avec succès
 people_editprofile	skill_deletion_cancelled	Effacement de compétence annulé
-people_editprofile	skills_edit	Edition de la compétence
+people_editprofile	skills_edit	Édition de la compétence
 people_editprofile	start_date	Date de début
 people_editprofile	title	Édition de votre profil
 people_editprofile	title_max_100_chars	Titre (max 100 caractères)
@@ -1256,7 +1259,7 @@ people_viewjob	fetch_failed	La récupération de l'affectation a échoué.
 people_viewjob	for_project	Pour le projet&nbsp;
 people_viewjob	no_such_posting	Rien d'affecté à ce projet.
 people_viewjob	open_date	Date de dépot&nbsp;
-people_viewjob	posting_id_not_found	NРd'affectation introuvable
+people_viewjob	posting_id_not_found	Numéro d'affectation introuvable
 people_viewjob	required_skills	Compétences requises&nbsp;
 people_viewjob	section	Besoin d'aide
 people_viewjob	title	On recherche $1 pour $2
@@ -1269,9 +1272,9 @@ people_viewprofile	title	Affichage d'un profil de développeur
 people_viewprofile	user_fetch_failed	La récupération de l'utilisateur a échoué.
 pm	admin	Gérer les catégories
 pm	any	Tous
-pm	assigned_to	Assignées à&nbsp;
-pm	cat_any	Tous
-pm	cat_none	Aucun
+pm	assigned_to	Assignée à&nbsp;
+pm	cat_any	Toutes
+pm	cat_none	Aucune
 pm	category	Catégorie
 pm	date_note	
 pm	dependent	Dépendant de la tâche
@@ -1281,18 +1284,19 @@ pm	end_date	Date de fin
 pm	hours	Durée horaire estimée
 pm	intro	Choisissez un sous projet pour pouvoir naviguer/éditer/modifier les tâches.
 pm	no_tasks_found	Aucune tâche correspondante trouvée
-pm	no_tasks_found_text	Ajouter des tâches en utilisant le lien au dessus
-pm	noprj	<H1>Aucun sous-projet trouvé</H1><P><B>Aucun sous-projet n'a été défini, ou vous ne pouvez les voir.<P><FONT COLOR=RED>L'administrateur de ce projet définira les projets en utilisant la page d'administration</FONT></B>
+pm	no_tasks_found_text	Vous pouvez ajouter des tâches en utilisant le lien ci-dessus.
+pm	noprj	<h2>Aucun sous-projet trouvé</h2><p><b>Aucun sous-projet n'a été défini, ou vous ne pouvez les voir.</b></p><p><span style="color:red"><b>L'administrateur de ce projet peut définir les projets en utilisant la page d'administration.</b></span></p>
 pm	percent_complete	Taux d'avancement
 pm	priority	Priorité
 pm	section	Projet : $1
 pm	start_date	Date de début
 pm	status	Etat
+pm	status_any	Tous
 pm	summary	Tâche
-pm	task_id	Numéro d'identification de tâche
+pm	task_id	Numéro
 pm	tech_any	Tous
 pm	title	Gestion de projet : sous-projets et tâches
-pm	unassigned	non assignée
+pm	unassigned	Non assignée
 pm	view_calendar	Voir le calendrier
 pm_addtask	task_added_relationship	La relation a été ajoutée avec succés
 pm_addtask	task_created_successfully	Tâche crée avec succès
@@ -1304,58 +1308,65 @@ pm_admin_change_status	title	Modifier une information
 pm_admin_projects	add_categories	Ajouter des catégories
 pm_admin_projects	add_categories_title	Ajouter une catégorie
 pm_admin_projects	add_categories_to	Ajouter des catégories à
-pm_admin_projects	add_edit_categories	Ajouter/Editer catégories
+pm_admin_projects	add_edit_categories	Ajouter/Éditer catégories
 pm_admin_projects	add_project	Ajouter un projet
-pm_admin_projects	add_project_intro	Ajouter un projet
+pm_admin_projects	add_project_intro	Il s'agit ici d'ajouter un projet, qui peut contenir un ensemble de tâches. Ce n'est pas la même chose que la création d'une tâche.
 pm_admin_projects	add_subprojects	Ajouter des projets
 pm_admin_projects	admin_title	Administration de Project/Gestionnaire de tâches
-pm_admin_projects	category_inserted	Catégorie insérée
+pm_admin_projects	category_inserted	Catégorie ajoutée
 pm_admin_projects	category_name	Nom de catégorie
 pm_admin_projects	category_note	Dès lors que vous aurez ajouté une catégorie, vous ne pourrez la supprimer.
 pm_admin_projects	category_note2	Il n'est pas recommandé que vous changiez le nom de la catégorie parce que d'autres choses en dépendent. Quand vous changez le nom de la catégorie, tous les items prendront le nouveau nom.</font></strong>
 pm_admin_projects	category_updated	Catégorie mise à jour
-pm_admin_projects	change_project_intro	Vous pouvez modifier un projet existant en utilisant ce formulaire. Notez que les projets privés ne peuvent être vus que par les membres, et non des visiteurs.
-pm_admin_projects	change_project_title	Changer le statut du manager de projet/tâche
+pm_admin_projects	change_project_intro	Vous pouvez modifier un projet existant en utilisant ce formulaire. Notez que les projets privés ne peuvent être vus que par les membres, et pas par les visiteurs.
+pm_admin_projects	change_project_title	Changer le statut du gestionnaire de projet/tâche
+pm_admin_projects	col_project_id	Numéro du projet
+pm_admin_projects	col_project_name	Nom du projet
 pm_admin_projects	description	Description
-pm_admin_projects	edit_update	Editer/Mettre à jour Projet
+pm_admin_projects	edit_update	Éditer/Mettre à jour le projet
 pm_admin_projects	existing_subprojects	Sous projets existants
 pm_admin_projects	id	Numéro d'identifiant
-pm_admin_projects	is_public	C'est public ?
+pm_admin_projects	is_public	Public ?
 pm_admin_projects	modify_category	Modifier une catégorie en
 pm_admin_projects	no_categories	Aucune catégorie définie
-pm_admin_projects	no_projects_found	<h2>Aucun projet trouvé</h2><p>Rien n'a été trouvé pour ce groupe. Vous pouvez ajouter un nouveau projet en utilisant le lien 'ajouter un projet' ci-dessus.</p>
+pm_admin_projects	no_projects_found	<h2>Aucun projet trouvé</h2><p>Rien n'a été trouvé pour ce groupe. Vous pouvez ajouter un nouveau projet en utilisant le lien 'Ajouter un projet' ci-dessus.</p>
 pm_admin_projects	no_subprojects	Pas de sous projet dans ce groupe
-pm_admin_projects	project_inserted	Projet inséré
-pm_admin_projects	project_name	Nouveau nom de projet
+pm_admin_projects	project_inserted	Projet ajouté
+pm_admin_projects	project_name	Nom du projet
 pm_admin_projects	project_title	Titre
-pm_admin_projects	projects_intro	Ajouter un nouveau projet - gestionnaire de tâches. <strong>ce n'est pas la même chose que d'ajouter une tâche à un projet.</strong>
+pm_admin_projects	projects_intro	Ajouter un nouveau projet au Projet/gestionnaire de tâches. <strong>Ce n'est pas la même chose que l'ajout d'une tâche à un projet.</strong>
 pm_admin_projects	section	Administration du gestionnaire de projets
 pm_admin_projects	send_updates	Envoyer toutes les mises à jour à
 pm_admin_projects	title	Ajout de sous-projets
-pm_admin_projects	updated_successfully	Mise à jour réussie « ;
 pm_browse_custom	section	Gestion de projet
 pm_browse_custom	title	Naviguer dans les tâches
 pm_browse_my	section	Gestion de projet pour $1
 pm_browse_my	title	Mes tâches
 pm_browse_open	section	Gestion de projet
 pm_browse_open	title	Tâches ouvertes
+pm_browsetask	admin_mass_update	<strong>Administration&nbsp;:</strong></font> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
 pm_browsetask	browse	Parcourir
-pm_browsetask	next	50 précédentes
+pm_browsetask	check_all	Cocher tout
+pm_browsetask	clear_all	Décocher tout
+pm_browsetask	mass_update	Mise à jour massive
+pm_browsetask	next	50 suivantes
+pm_browsetask	no_change	Aucun changement
 pm_browsetask	overdue_tasks	* indique les tâches en retard
-pm_browsetask	previous	50 suivantes
+pm_browsetask	previous	50 précédentes
 pm_browsetask	title	Afficher les tâches
 pm_detailtask	assigned_to	Assignée à :
 pm_detailtask	category	Catégorie
 pm_detailtask	dependend_on_task	Dépend de la tâche
 pm_detailtask	end_date	Date de fin
 pm_detailtask	hours	Heures
-pm_detailtask	original_comment	Commentaire original
+pm_detailtask	original_comment	Commentaire initial
 pm_detailtask	pct_complete	Pourcentage réalisé
 pm_detailtask	priority	Priorité
 pm_detailtask	section	Gestion de projet
 pm_detailtask	start_date	Date de début
 pm_detailtask	status	Statut
 pm_detailtask	submitted_by	Soumis par
+pm_detailtask	subproject	Sous-projet
 pm_detailtask	task_summary	Sommaire des tâches
 pm_detailtask	title	Détails d'une tâche
 pm_ganttpage	assignee	responsable
@@ -1392,7 +1403,7 @@ pm_include_taskhtml	task_history	Historique de tâche
 pm_include_taskhtml	tracker	Traceur
 pm_modtask	add_comment	Ajouter un commentaire
 pm_modtask	assignee	Responsable
-pm_modtask	original_comment	Commentaire original
+pm_modtask	original_comment	Commentaire initial
 pm_modtask	sort_on	Trier par
 pm_modtask	submitted_by	Demandée par
 pm_modtask	title	Modification d'une tâche
@@ -1424,8 +1435,8 @@ pm_task	create_successfully	Tâche crée avec succès
 project_admin	add_user	Ajouter un utilisateur
 project_admin	docmanager_admin	Administration de la documentation
 project_admin	download_tarball	Télécharger une archive de votre CVS (mise à jour chaque nuit)
-project_admin	edit_file_releases	Editer/Ajouter Versions de fichier
-project_admin	edit_member_permissions	Editer les permissions des membres
+project_admin	edit_file_releases	Éditer/Ajouter Versions de fichier
+project_admin	edit_member_permissions	Éditer les permissions des membres
 project_admin	file_releases	Versions de fichier
 project_admin	forum_admin	Administration des forums
 project_admin	frs_admin	Administration du système de publication de fichiers
@@ -1493,7 +1504,7 @@ project_admin_editimages	add_file	Ajouter un fichier
 project_admin_editimages	del	Suppr
 project_admin_editimages	description	Description
 project_admin_editimages	dims	Dim
-project_admin_editimages	edit	Editer
+project_admin_editimages	edit	Éditer
 project_admin_editimages	error_length	Erreur : la taille du fichier doit être comprise entre 20 et 256000 octets
 project_admin_editimages	file_deleted	Fichier multimédia effacé
 project_admin_editimages	file_description_required	Description de fichier requise
@@ -1512,12 +1523,12 @@ project_admin_editimages	uploaded	Téléchargé
 project_admin_editpackages	add_release	Ajouter une version
 project_admin_editpackages	added_package	Paquet ajouté
 project_admin_editpackages	create_package	Créer ce paquet
-project_admin_editpackages	edit_releases	Editer les versions
+project_admin_editpackages	edit_releases	Éditer les versions
 project_admin_editpackages	new_package_name	Nouveau nom de paquet
 project_admin_editpackages	no_packages_defined	Vous n'avez aucun paquet défini
 project_admin_editpackages	no_packages_status	Statut
 project_admin_editpackages	package_name	Nom du paquet
-project_admin_editpackages	packages_info	<h3>Paquets</h3><p>Vous pouvez utiliser les paquets pour grouper différentes versions de fichiers ensemble, ou les utiliser comme bon vous semble. <p><H4>Un exemple de paquets&nbsp;:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Vos paquets&nbsp;:</H4><p><ol><li>Définissez vos paquets</li><li>Créer de nouvelles versions de paquets</li></ol><p><h3>Version de paquets</h3><p>Une version de paquet peut contenir de multiple fichiers.<p><H4>Exemples de versions</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Vous pouvez créer de nouvelles versions de paquets en cliquant sur <strong>Ajouter/Editer versions</strong> à coté du nom de votre paquet.<p>
+project_admin_editpackages	packages_info	<h3>Paquets</h3><p>Vous pouvez utiliser les paquets pour grouper différentes versions de fichiers ensemble, ou les utiliser comme bon vous semble. <p><H4>Un exemple de paquets&nbsp;:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Vos paquets&nbsp;:</H4><p><ol><li>Définissez vos paquets</li><li>Créer de nouvelles versions de paquets</li></ol><p><h3>Version de paquets</h3><p>Une version de paquet peut contenir de multiple fichiers.<p><H4>Exemples de versions</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Vous pouvez créer de nouvelles versions de paquets en cliquant sur <strong>Ajouter/Éditer versions</strong> à coté du nom de votre paquet.<p>
 project_admin_editpackages	qrs	NVR&nbsp;
 project_admin_editpackages	qrs_a_file	Cliquer ici pour faire une $1 Nouvelle Version Rapide $2 de vos paquets
 project_admin_editpackages	releases	Versions
@@ -1537,7 +1548,7 @@ project_admin_editrelease	file_updated	Fichier mis à jour
 project_admin_editrelease	filename_release	Nom de fichier<br />Version
 project_admin_editrelease	i_am_sure	Je suis sûr.
 project_admin_editrelease	no_files_in_release	Aucun fichier dans cette version
-project_admin_editrelease	note	Editer les notes ou les modifications apportées à cette version de paquet. Ces changements seront appliqués à tous les fichiers contenus dans cette version de paquet.<br />Vous pouvez indépendamment télécharger les notes de versions, les modifications individuellement, ou les coller ensemble ci-dessous.
+project_admin_editrelease	note	Éditer les notes ou les modifications apportées à cette version de paquet. Ces changements seront appliqués à tous les fichiers contenus dans cette version de paquet.<br />Vous pouvez indépendamment télécharger les notes de versions, les modifications individuellement, ou les coller ensemble ci-dessous.
 project_admin_editrelease	paste_changelog	Coller les modifications dans &nbsp;
 project_admin_editrelease	paste_release_notes	Coller les notes dans&nbsp;
 project_admin_editrelease	preserve_preformatted	Préserver mon texte pré formatté
@@ -1547,16 +1558,16 @@ project_admin_editrelease	release_date	Date de la version&nbsp;
 project_admin_editrelease	release_name	Nom de la version&nbsp;
 project_admin_editrelease	release_notes_too_small	Notes de version trop courtes
 project_admin_editrelease	status	Statut&nbsp;
-project_admin_editrelease	step_1	Etape 1&nbsp;:&nbsp;Editer la version
+project_admin_editrelease	step_1	Etape 1&nbsp;:&nbsp;Éditer la version
 project_admin_editrelease	step_2	Etape 2&nbsp;:&nbsp;Ajouter des fichiers à cette version</h3><p>Maintenant
-project_admin_editrelease	step_3	Etape 3&nbsp;:&nbsp;Editer les fichiers dans cette version
+project_admin_editrelease	step_3	Etape 3&nbsp;:&nbsp;Éditer les fichiers dans cette version
 project_admin_editrelease	submit_refresh	Soumettre/rafraîchir
-project_admin_editrelease	title	Editer les versions
+project_admin_editrelease	title	Éditer les versions
 project_admin_editrelease	update_refresh	Mettre à jour/Rafraîchir
 project_admin_editrelease	upload_change_log	Télécharger les modifications&nbsp;
 project_admin_editrelease	upload_new_file	Télécharger vers le serveur un nouveau fichier&nbsp;
 project_admin_editrelease	upload_release_notes	Télécharger les notes&nbsp;
-project_admin_group_trove	intro	<h3>Editer les catégories</h3><p>Choisissez jusqu'à trois emplacements pour ce projet dans chaque categorie. Si le projet ne rentre pas dans aucune, choisissez simplement "None Selected".</p><p> IMPORTANT: les projets doivent être rangés dans les emplacements les plus précis possibles. Le choix simultané d'une catégorie ET d'une catégorie parente ne servira à rien : seule la catégorie la plus plus précise sera acceptée.
+project_admin_group_trove	intro	<h3>Éditer les catégories</h3><p>Choisissez jusqu'à trois emplacements pour ce projet dans chaque categorie. Si le projet ne rentre pas dans aucune, choisissez simplement "None Selected".</p><p> IMPORTANT: les projets doivent être rangés dans les emplacements les plus précis possibles. Le choix simultané d'une catégorie ET d'une catégorie parente ne servira à rien : seule la catégorie la plus plus précise sera acceptée.
 project_admin_group_trove	title	Information sur le groupe
 project_admin_group_trove	update_changes	Mettre à jour tous les changements de catégories
 project_admin_history	info	Cet état vous montre quels changements significatifs et quand ils ont été apportés à votre projet.
@@ -1590,6 +1601,7 @@ project_admin_qrs	exceed_file_size	Le fichier transmis dépasse la taille maxima
 project_admin_qrs	partial_file	Le fichier n'a été que partiellement transmis.
 project_admin_qrs	unknown_file_error	Erreur inconnue lors de la transmission du fichier.
 project_admin_qrs	maximum_file_size	Taille maximale du fichier :
+project_admin_rmuser	cancel	Annuler
 project_admin_rmuser	cannot_remove_admin	Vous ne pouvez pas supprimer l'adminstrateur de $1.
 project_admin_rmuser	info	<h3>Supprimer un développeur de $1</h3><p>Vous êtes sur le point de supprimer un développeur de $1. Veuillez confirmer cette action.
 project_admin_rmuser	operation_not_permitted	Opération non autorisée
@@ -1604,14 +1616,17 @@ project_admin_userpermedit	add_to_all	Ajouter à tous
 project_admin_userpermedit	add_to_tracker	Ajouter au traceur
 project_admin_userpermedit	admin	Administrateur
 project_admin_userpermedit	admin_only	Administrateur seulement
-project_admin_userpermedit	admin_tech	Administrateur & Technicien
+project_admin_userpermedit	admin_tech	Administrateur et Technicien
 project_admin_userpermedit	developer_not_found	Développeur introuvable dans ce groupe.
 project_admin_userpermedit	docman	Gestionnaire de documentation
 project_admin_userpermedit	editing_permissions	Vous éditez les permissions de l'utilisateur $1 ($2)
-project_admin_userpermedit	editor	Editeur
+project_admin_userpermedit	editor	Éditeur
+project_admin_userpermedit	file_release_role	Rôle dans la publication de fichiers
 project_admin_userpermedit	forums	Forums
 project_admin_userpermedit	invalid_user	Utilisateur invalide.
 project_admin_userpermedit	moderator	Modérateur
+project_admin_userpermedit	no_permissions	Pas de permissions
+project_admin_userpermedit	not_available	Non disponible
 project_admin_userpermedit	permissions_updated	Permissions mises à jour
 project_admin_userpermedit	pm	Gestion des outils (Project/Task Manager)
 project_admin_userpermedit	project_admin	Administrateur de projet
@@ -1630,7 +1645,7 @@ project_admin_userpermedit	user_added	Utilisateur ajouté avec succès
 project_admin_userpermedit	user_does_not_exist	Utilisateur inexistant.
 project_admin_userpermedit	value	Valeur
 project_admin_userperms	docman	Gestionnaire<br />de Documents
-project_admin_userperms	editor	Editeur
+project_admin_userperms	editor	Éditeur
 project_admin_userperms	forums	Forums
 project_admin_userperms	general	Général
 project_admin_userperms	info	Cliquez sur le nom du développeur pour éditer ses permissions
@@ -1645,13 +1660,13 @@ project_admin_utils	by	Par
 project_admin_utils	change_history	Historique des changements apportés au groupe
 project_admin_utils	database_admin	Bases de données
 project_admin_utils	date	Date
-project_admin_utils	edit_jobs	Editer les travaux
-project_admin_utils	edit_public_info	Edition infos  publiques
-project_admin_utils	edit_release_files	Edition des versions
+project_admin_utils	edit_jobs	Éditer les travaux
+project_admin_utils	edit_public_info	Édition infos  publiques
+project_admin_utils	edit_release_files	Édition des versions
 project_admin_utils	field	Champ
 project_admin_utils	multimedia_data	Données multimedia
 project_admin_utils	old_value	Ancienne valeur
-project_admin_utils	permission_blurb	<strong>NOTE :</strong><dl><dt><strong>Administrateurs de projet (en gras)</strong></dt><dd>ont accès à cette page et aux autres pages d'administration du projet</dd><dt><strong>Techniciens de version</strong></dt><dd>peuvent fabriquer les versions (tout administrateur de projet est aussi un technicien de version)</dd><dt><strong>Techniciens des outils (T)</strong></dt><dd>peuvent être affectés aux Bugs/Tâches/Patches</dd><dt><strong>Administrateurs des outils (A)</strong></dt><dd>peuvent faire des modifications aux Bugs/Tâches/Patches et utiliser les pages de /toolname/admin/ </dd><dt><strong>Outils sans permission (N/A)</strong></dt><dd>Développeurs sans autorisation spécifiques (couramment équivalent a '-')</dd><dt><strong>Modérateurs</strong> (forums)</dt><dd>peuvent effacer les messages des forums du projet</dd><dt><strong>Editeurs</strong> (Gestionnaire de documentation)</dt><dd>mettent à jour/éditent/effacent les  documentations du projet.</dd></dl>
+project_admin_utils	permission_blurb	<strong>NOTE :</strong><dl><dt><strong>Administrateurs de projet (en gras)</strong></dt><dd>ont accès à cette page et aux autres pages d'administration du projet</dd><dt><strong>Techniciens de version</strong></dt><dd>peuvent fabriquer les versions (tout administrateur de projet est aussi un technicien de version)</dd><dt><strong>Techniciens des outils (T)</strong></dt><dd>peuvent être affectés aux Bugs/Tâches/Patches</dd><dt><strong>Administrateurs des outils (A)</strong></dt><dd>peuvent faire des modifications aux Bugs/Tâches/Patches et utiliser les pages de /toolname/admin/ </dd><dt><strong>Outils sans permission (N/A)</strong></dt><dd>Développeurs sans autorisation spécifiques (couramment équivalent a '-')</dd><dt><strong>Modérateurs</strong> (forums)</dt><dd>peuvent effacer les messages des forums du projet</dd><dt><strong>Éditeurs</strong> (Gestionnaire de documentation)</dt><dd>mettent à jour/éditent/effacent les  documentations du projet.</dd></dl>
 project_admin_utils	post_jobs	Nouveau poste
 project_admin_utils	project_history	Historique du projet
 project_admin_utils	stats	Statistiques
@@ -1739,6 +1754,7 @@ project_stats_graph	views	Visites (rouge) / Téléchargements (bleu)
 project_stats_utils	CVS	CVS
 project_stats_utils	all_tracker	Trac.
 project_stats_utils	bugs	Bugs
+project_stats_utils	date	Date
 project_stats_utils	days	Jours
 project_stats_utils	dl	D/l
 project_stats_utils	month	mois
@@ -1789,7 +1805,7 @@ scm_index	anoncvsup	Les mises à jour (update) ne nécessite pas l'utilisation d
 scm_index	browseit	Parcourir le dépôt CVS
 scm_index	browsetree	<hr /><b>Parcourir l'arbre CVS</b><p>Parcourir l'arbre CVS vous donne une vue d'ensemble du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt.</p>
 scm_index	cvs_repository	dépôt CVS
-scm_index	devcvs	<p><b>Accès CVS pour développeur via SSH</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <i>modulename</i> et <i>developername</i> par les valeurs appropriées. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
+scm_index	devcvs	<p><b>Accès CVS pour développeur via SSH</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH doit être installé sur votre machine cliente. Remplacez <i>modulename</i> et <i>developername</i> par les valeurs appropriées. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
 scm_index	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 scm_index	developername	développeur
 scm_index	error_only_projects_can_use_cvs	ERREUR
@@ -1900,7 +1916,7 @@ snippet_detail	date_posted	Date d'envoi
 snippet_detail	delete	Effacer
 snippet_detail	download_a_raw_text	Téléchargez une version en texte brut du code en cliquant sur &quot;<strong>Download Version</strong>&quot;
 snippet_detail	download_version	Version téléchargée
-snippet_detail	edit_del	Edition / Effacement
+snippet_detail	edit_del	Édition / Effacement
 snippet_detail	error_no_version_found	Erreur : aucune version trouvée
 snippet_detail	error_was_the_url_mangled	Erreur.
 snippet_detail	latest_package_version	Derniére version du paquet
@@ -2030,6 +2046,7 @@ stats_lastlogins	source_ip	IP source
 stats_lastlogins	username	utilisateur
 stats_projects	project_comparision	Comparaison statistiques des projets
 stats_site_utils	adds	Ajouts
+stats_site_utils	all	Tout
 stats_site_utils	all_projects	Tous les projets
 stats_site_utils	all_trkr	Tous les suivis
 stats_site_utils	bugs	Bugs
@@ -2045,9 +2062,10 @@ stats_site_utils	downloads	Téléchargements
 stats_site_utils	generate_report	Produire le rapport d'activité
 stats_site_utils	group_name	Nom du groupe
 stats_site_utils	in_trove_category	Catégorie de projets :
-stats_site_utils	last_30	derniers 30
+stats_site_utils	last_30	30 derniers
+stats_site_utils	month	Mois
 stats_site_utils	no_data	Aucune données
-stats_site_utils	no_valid_data	La requête ne retourne de pas de données valdes.
+stats_site_utils	no_valid_data	La requête ne retourne pas de données valides.
 stats_site_utils	opn	**Opn
 stats_site_utils	or_special_project_list	OU entrez une liste spéciale&nbsp:
 stats_site_utils	page_views	pages
@@ -2112,13 +2130,13 @@ survey_admin_edit_survey	section	Administration des sondages
 survey_admin_edit_survey	title	Édition d'un sondage
 survey_admin_index	add_question	Ajouter des questions
 survey_admin_index	add_survey	Ajouter un sondage
-survey_admin_index	edir_existing_survey	Editer les sondages existants
-survey_admin_index	edit_existing_question	Editer les résultats du sondage
+survey_admin_index	edir_existing_survey	Éditer les sondages existants
+survey_admin_index	edit_existing_question	Éditer les résultats du sondage
 survey_admin_index	its_simple_to_create	Créer un sondage est simple.<ol><li>Créez des questions en utilisant les formulaires ci-dessus.</li><li>Créez un sondage, en indiquant la liste ordonnées des questions (prises dans <strong>votre</strong> liste de questions).</li><li>L'URL du sondage est $1 o?est le numéro du sondage.
 survey_admin_index	permission_denied	Permission refusée
 survey_admin_index	show_results	Voir les résultats du sondage
 survey_admin_index	title	Administration de sondages
-survey_admin_index	you_can_now_activate	Vous pouvez activer/désactiver les sondages dans $1Editer les sondages existants
+survey_admin_index	you_can_now_activate	Vous pouvez activer/désactiver les sondages dans $1Éditer les sondages existants
 survey_admin_show_questions	section	Administration des sondages
 survey_admin_show_questions	title	Affichage des questions dans un sondage
 survey_admin_show_results	section	Administration des sondages
@@ -2137,8 +2155,8 @@ survey_admin_utils	survey_title	Titre du sondage
 survey_edit	change_after_already_response	A traduire
 survey_edit	existing_surveys	Sondage(s) existant(s)
 survey_edit	is_active	Est actif
-survey_edit	list_question_numbers	Liste des numéros de questions, dans l'ordre souhaité, séparés par des virgules. <strong>Référez-vous à votre liste de fonctions</strong> pour voir les NРdes questions. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7</s>
-survey_edit	missing_date	LA MISE A JOUR A ECHOUE : Il manque des données
+survey_edit	list_question_numbers	Liste des numéros de questions, dans l'ordre souhaité, séparés par des virgules. <strong>Référez-vous à votre liste de fonctions</strong> pour voir les numéros des questions. Ne mettez pas d'espace et ne terminez pas votre liste par une virgule.<br /> Ex: 1,2,3,4,5,6,7
+survey_edit	missing_date	LA MISE A JOUR A ECHOUE : il manque des données
 survey_edit	name_off_survey	Nom du sondage
 survey_edit	no	Non
 survey_edit	permission_denied	Permission refusée
@@ -2147,12 +2165,12 @@ survey_edit	show_existing_questions	Voir les questions existantes
 survey_edit	submit_changes	Valider les changements
 survey_edit	survey_question_required	LA MISE A JOUR A ECHOUE : Des questions sont requises
 survey_edit	survey_title_required	LA MISE A JOUR A ECHOUE : Le titre du sondage est requis
-survey_edit	tilte	Editer un sondage
+survey_edit	tilte	Éditer un sondage
 survey_edit	update_failed	LA MISE A JOUR A ECHOUE
 survey_edit	update_successful	MISE A JOUR REUSSIE
 survey_edit	warning_survey_after_response	Attention !!! C'est une mauvaise idée que de modifier un sondage qui à déjà des questions
 survey_edit	yes	Oui
-survey_edit_question	editing_question	Edition d'une question
+survey_edit_question	editing_question	Édition d'une question
 survey_edit_question	error_finding_question	Erreur lors de la recherche de la question
 survey_edit_question	if_you_change_after	Si vous changez une question qui a déjà des réponses
 survey_edit_question	permission_denied	Permission refusée
@@ -2212,9 +2230,9 @@ survey_show_results_aggregate	view_comments	Voir les commentaires
 survey_show_results_aggregate	yes	Oui
 survey_show_results_aggregate	yes_no	Oui / Non
 survey_show_results_csv	permission_denied	Permission refusée
-survey_show_results_individual	permission_denied	Permisssion refusée
+survey_show_results_individual	permission_denied	Permission refusée
 survey_show_results_individual	title	Résultats
-survey_show_results_individual	yes_no	Oui/Non A vérifier
+survey_show_results_individual	yes_no	Oui/Non À vérifier
 survey_survey	section	Outil de sondages
 survey_survey	title	Affichage d'un sondage
 survey_survey_resp	section	Outil de sondages
@@ -2222,8 +2240,8 @@ survey_survey_resp	title	Réponse à un sondage
 survey_utils	add_question	Ajouter des questions
 survey_utils	add_survey	Ajouter un sondage
 survey_utils	admin	Administration
-survey_utils	edit_questions	Editer les questions
-survey_utils	edit_survey	Editer un sondage
+survey_utils	edit_questions	Éditer les questions
+survey_utils	edit_survey	Éditer un sondage
 survey_utils	error_this_group_has_turned_off	ERREUR
 survey_utils	show_results	Voir les résultats
 system	datefmt	d/m/Y H:i
@@ -2264,9 +2282,9 @@ top_toplist	section	Les meilleurs projets
 top_toplist	title	Listes des meilleurs projets
 top_toplist	top_download	Top téléchargement
 top_toplist	top_download_7_days	Projets les plus téléchargés ces 7 derniers jours
-top_toplist	top_forum_post_count	Le plus de message inscris dans les forums
-top_toplist	top_weekly_pagesviews	Top Weekly Project Pageviews at *.$1 (from impressions of $2 logo)
-top_topusers	change	Changemenent
+top_toplist	top_forum_post_count	Le plus de messages inscrits dans les forums
+top_toplist	top_weekly_pagesviews	Le plus de pages vues sur *.$1 (hebdomadaire, à partir de l'affichage du logo $2)
+top_topusers	change	Changement
 top_topusers	info_not_available	Pas d'information disponible
 top_topusers	info_not_available_more	Les informations sur les développeurs les mieux classés ne sont pas disponibles.
 top_topusers	last_rank	Dernier rang
@@ -2285,6 +2303,8 @@ tracker	changed	Modifié
 tracker	check_upload	Cochez pour envoyer un fichier attaché&nbsp;
 tracker	choose	Choisissez un outil de suivi et vous pourrez le parcourir, l'éditer, lui ajouter des éléments.
 tracker	close_date	Date de fermeture
+tracker	comment	commentaire
+tracker	comments	commentaires
 tracker	comment_added	Commentaire ajouté
 tracker	date	Date
 tracker	detailed_description	Description détaillée
@@ -2316,7 +2336,7 @@ tracker	submitter	Soumis par
 tracker	summary	Résumé
 tracker	title	Suivi&nbsp;
 tracker	tracker_item	Elément à suivre
-tracker	unassigned	Personne !
+tracker	unassigned	Personne
 tracker	updated_successful	Mise à jour réussie
 tracker_add	for_project	Pour le projet&nbsp;
 tracker_add	submit	Soumettre
@@ -2383,7 +2403,7 @@ tracker_admin_update_canned	title	Modification des réponses-types de $1
 tracker_admin_update_cat	auto_assign_to	Confier automatiquement à
 tracker_admin_update_cat	category_change_warning	Il n'est pas recommandé de changer le nom d'une catégorie car d'autres éléments en dépendent. Quand vous changez le nom d'une catégorie, tous les éléments en dépendant vont prendre le nouveau nom.
 tracker_admin_update_cat	category_name	Nom de la catégorie
-tracker_admin_update_cat	title	Modification d'une catagorie de $1
+tracker_admin_update_cat	title	Modification d'une catégorie de $1
 tracker_admin_update_group	title	Modification d'un groupe de $1
 tracker_admin_update_group	warning	Il n'est pas recommandé de changer le nom d'un groupe, parce que d'autres choses en dépendent. Quand vous chengez le nom du groupe, tous les éléments vont prendre le nouveau nom.
 tracker_admin_update_type	allow_anonymous	Soumissions anonymes autorisées
@@ -2425,13 +2445,13 @@ tracker_artifacttype	add_artifact_types	Ajouter/Mettre à jour les outils de sui
 tracker_artifacttype	admin	Administration
 tracker_artifacttype	admin_functions	Fonctions d'administration
 tracker_artifacttype	browse	Parcourir
-tracker_artifacttype	edit_options	Editer/Mettre à jour les options de&nbsp;
+tracker_artifacttype	edit_options	Éditer/Mettre à jour les options de&nbsp;
 tracker_artifacttype	nobody	Personne
 tracker_artifacttype	none	Aucun(e)
 tracker_artifacttype	reporting	Rapport
 tracker_artifacttype	required_fields	Type de trace : nom, description, délai avant retard, persistance.
 tracker_artifacttype	submit_new	Nouveau
-tracker_browse	admin_mass_update	<strong>Administration&nbsp;:</strong></FONT> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
+tracker_browse	admin_mass_update	<strong>Administration&nbsp;:</strong></font> Si vous voulez appliquer les changements à tous les éléments sélectionnés ci-dessus, utilisez le formulaire ci-dessous pour changer leurs propriétés et cliquez sur "Mise à jour massive".
 tracker_browse	ascending	Croissant
 tracker_browse	canned_response	Réponses types
 tracker_browse	check_all	Cocher tous
@@ -2454,7 +2474,7 @@ tracker_browse	week2	La dernière quinzaine
 tracker_browse	month1	Le mois dernier
 tracker_detail	add_comment	Ajouter un commentaire
 tracker_detail	attached_files	Fichiers attachés
-tracker_detail	build_task_relation	Etablir une relation avec des tâches
+tracker_detail	build_task_relation	Établir une relation avec des tâches
 tracker_detail	changes	Changements
 tracker_detail	description	Description
 tracker_detail	download	Télécharger (download)
@@ -2462,7 +2482,7 @@ tracker_detail	name	Nom
 tracker_detail	no_files_attached	Pas de fichier attaché
 tracker_detail	title	Vue détaillée d'un traceur
 tracker_mod	attach_comment	Ou rédiger un commentaire
-tracker_mod	build_task_relation	Etablir une relation avec des tâches
+tracker_mod	build_task_relation	Établir une relation avec des tâches
 tracker_mod	canned_response	Utiliser une réponse type
 tracker_mod	changelog	Journaux
 tracker_mod	data_type	Type de données
@@ -2476,7 +2496,7 @@ tracker_mod	name	Nom
 tracker_mod	no_files	Pas de fichier attaché
 tracker_mod	title	Modifier
 tracker_reporting	aging_report	Ordre chronologique
-tracker_reporting	all_by_group	Tous, par groups
+tracker_reporting	all_by_group	Tous, par groupe
 tracker_reporting	all_by_resolution	Tous, par direction
 tracker_reporting	all_by_technician	Tous, par catégorie
 tracker_reporting	all_items_by_technician	Tous, par responsable
@@ -2489,20 +2509,20 @@ tracker_reporting	dist_by_technician	Répartition par responsable
 tracker_reporting	items_open	Nombre d'items toujours ouverts
 tracker_reporting	items_submitted	Nombre d'items soumis
 tracker_reporting	open_by_group	Ouverts, par groupes
-tracker_reporting	open_items_by_category	Ouverts,par catégories
+tracker_reporting	open_items_by_category	Ouverts, par catégorie
 tracker_reporting	open_items_by_resolution	Ouverts, par direction
 tracker_reporting	open_items_by_technician	Ouverts, par responsable
 tracker_reporting	title	Rapports sur les trackers
 tracker_taskmgr	add_relation_to_task	Ajouter une relation avec une tâche existante
 tracker_taskmgr	add_relationship	Ajouter une relation à la tâche sélectionnée
-tracker_taskmgr	build_relationships	Etablir une relation entre une trace et le gestionnaire de tâches.
+tracker_taskmgr	build_relationships	Établir une relation entre le suivi et le gestionnaire de tâches.
 tracker_taskmgr	create_task	Créer une nouvelle tâche
 tracker_taskmgr	task	Tâche
 tracker_taskmgr	task_manager_project	Gestionnaire de tâche
 tracker_taskmgr	tracker_item	Trace
 tracker_utils	monitor	Suivi
 tracker_utils	stop_monitoring	Arrêter le suivi
-trove	not_categorized	Ce projet ne s'est pas encore classé dans l'
+trove	not_categorized	Ce projet n'a pas encore été classé dans l'
 trove	title	Arbre des projets
 trove_list	browse_by	Afficher par&nbsp;
 trove_list	invalid_category_text	Cette catégorie n'existe pas.
@@ -2540,8 +2560,8 @@ user_home	title	Profil de développeur
 user_home	user_id	Identifiant d'utilisateur
 users	no_user_name	Pas de nom d'utilisateur
 users	optout	Vous avez quitté le système d'évaluation par les pairs. Vous pouviez évaluer l'utilisateur. Voir <a href="/account/">la page de gestion de votre compte</a> pour de plus amples informations.
-users	peerinfo1	Si vous connaissez cet utilisateur, prenez le temps de l'évaluer selon les critères suivants. Gardez à l'esprit que votre évaluation sera visible de l'utilisateur et des autres.  <P> Le système d'évaluation mutuelle de $1 est basé sur les concepts de <A HREF="http://www.advogato.com">Advogato.</A> Ce système a été réimplémenté et étendu.
-users	peerinfo2	L'évaluation par les pairs vous montre tous les évaluations moyennes (et les taux de réponse) pour chaque critère. En raison des traitements mathématiques induits, ces nombres tiennent compte des réponses des utilisateurs authentifiés ou non.  <ul> <li> Le champ 'Niveau dans le site" montre le rang de l'utilisateur comparé à tous les utilisateurs de $1.  <li>Le champ 'Score agrégé' montre une moyenne pondérée de tous les scores, reposant sur les réponses authentifiées seulement.  <li>Le champ 'Importance' montre les bons scores donnés par d'autres développeurs (entre 1 and 1.5). Les réponses des utilisateurs de haut rang ont plus de poids.  </ul> <p> <i> Si vous voulez sortir du système dévaluation par les pairs (cela affectera votre capacité à noter et être noté), voir la <a href="/account/">page de gestion de votre compte</a>. Si vous choisissez de cesser votre participation, votre évaluation des autres sera détruite définitivement et vous n'aurez plus d'affichage de cela sur votre page d'accueil. </i></p></s>
+users	peerinfo1	<p>Si vous connaissez cet utilisateur, prenez le temps de l'évaluer selon les critères suivants. Gardez à l'esprit que votre évaluation sera visible de l'utilisateur et des autres.</p><p>Le système d'évaluation mutuelle de $1 est basé sur les concepts de <a href="http://www.advogato.com">Advogato</a>. Ce système a été réimplémenté et étendu.</p>
+users	peerinfo2	L'évaluation par les pairs vous montre tous les évaluations moyennes (et les taux de réponse) pour chaque critère. En raison des traitements mathématiques induits, ces nombres tiennent compte des réponses des utilisateurs authentifiés ou non.  <ul> <li> Le champ 'Niveau dans le site" montre le rang de l'utilisateur comparé à tous les utilisateurs de $1.  <li>Le champ 'Score agrégé' montre une moyenne pondérée de tous les scores, reposant sur les réponses authentifiées seulement.  <li>Le champ 'Importance' montre les bons scores donnés par d'autres développeurs (entre 1 and 1.5). Les réponses des utilisateurs de haut rang ont plus de poids.  </ul> <p> <i> Si vous voulez sortir du système dévaluation par les pairs (cela affectera votre capacité à noter et être noté), voir la <a href="/account/">page de gestion de votre compte</a>. Si vous choisissez de cesser votre participation, votre évaluation des autres sera détruite définitivement et vous n'aurez plus d'affichage de cela sur votre page d'accueil. </i></p>
 users	title	Résumé d'un utilisateur
 users	user_not_exist_text	Utilisateur invalide
 users	user_not_exist_title	Cet utilisateur n'existe pas

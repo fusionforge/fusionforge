@@ -937,7 +937,8 @@ include_html	none	None
 include_html	priority_highest	Highest
 include_html	priority_lowest	Lowest
 include_html	priority_medium	Medium
-include_toolreport	all	All 
+include_toolreport	all	All
+include_toolreport	for	for
 include_toolreport	key	Key
 include_toolreport	last_days	Last day(s)
 include_toolreport	last_months	Last month(s)
@@ -1278,6 +1279,7 @@ pm	priority	Priority
 pm	section	Project: $1 
 pm	start_date	Start Date
 pm	status	Status
+pm	status_any	Any
 pm	summary	Task Summary
 pm	task_id	Task Id
 pm	tech_any	Any
@@ -1306,6 +1308,8 @@ pm_admin_projects	category_note2	It is not recommended that you change the categ
 pm_admin_projects	category_updated	Category Updated
 pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.
 pm_admin_projects	change_project_title	Change Project/Task Manager Status
+pm_admin_projects	col_project_id	Project id
+pm_admin_projects	col_project_name	Project name
 pm_admin_projects	description	Description
 pm_admin_projects	edit_update	Edit/Update Project
 pm_admin_projects	existing_subprojects	Existing Subprojects
@@ -1322,7 +1326,6 @@ pm_admin_projects	projects_intro	Add a new project to the Project/Task Manager. 
 pm_admin_projects	section	Task Manager Administration
 pm_admin_projects	send_updates	Send All Updates To
 pm_admin_projects	title	Add Subprojects
-pm_admin_projects	updated_successfully	Updated Successfully ";
 pm_browse_custom	section	Task Manager
 pm_browse_custom	title	Browse Custom Tasks
 pm_browse_my	section	Project $1 Task Manager
