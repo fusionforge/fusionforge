@@ -112,6 +112,24 @@ cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/debian-sf co -r Branch_g
 <pre>
 debuild
 </pre>
+The debuild tool is in the devscripts Debian package. If you run this
+        command on Debian Woody (stable), you may have to upgrade some
+        needed tools (debconf, debhelper, ...). To do that, add the
+        lines for Debian testing in your apt sources file and then try
+        something like:
+<pre>
+apt-get -t &lt;needed version&gt; install debhelper
+</pre>
+
+When the packages are built, do the following:
+<pre>
+mkdir /directory_of_your_choice/debian
+cd /directory_of_your_choice
+dpkg-scanpackages debian /dev/null | gzip > debian/Packages.gz
+echo "deb file:/directory_of_your_choice debian/" >> /etc/apt/sources.conf
+apt-get update
+apt-get install gforge
+</pre>
 </blockquote>
 
 <b>Question:</b> Where do I find help?
