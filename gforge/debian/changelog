@@ -1,5 +1,6 @@
-gforge (3.0-9+3) unstable; urgency=low
+gforge (3.1-1) unstable; urgency=low
 
+  * New upstream release.
   * [Roland] Patch #558 from Patrick McFarland to fix hardwiring problem
     in install-db.sh.
   * [Roland] Patch #561 from Patrick McFarland to fix "access to *'" bug
@@ -7,7 +8,7 @@ gforge (3.0-9+3) unstable; urgency=low
   * [Roland] Fixed a few occurences of SF in the Debconf templates (Gforge
     bug #555).
 
- -- Roland Mas <lolando@debian.org>  Tue, 21 Oct 2003 21:35:57 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 26 Oct 2003 23:01:26 +0100
 
 gforge (3.0-9) unstable; urgency=low
 
