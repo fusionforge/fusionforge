@@ -7,6 +7,7 @@
     <menu name="GForge 3.0">
       <item name="Introduction"		href="/introduction.html"/>
       <item name="Installation"          href="/installation.html"/>
+      <item name="Configuring"		href="/admin_guide/index.html"/>
     </menu>
   
    <menu name="User Guide">

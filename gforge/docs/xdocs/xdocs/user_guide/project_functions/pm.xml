@@ -3,7 +3,8 @@
 
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
-    <title>Gforge User Guide - Task Manager</title>
+     <author>Ken McCullagh</author>
+   <title>Gforge User Guide - Task Manager</title>
   </properties>
 
   <body>
@@ -21,16 +22,23 @@ The Task Manager is similar to the tracker, with the following differences:
 
 Tasks are organized on subprojects. Before inserting a new task, you must first create a subproject. You can use the "Admin" link to create new subprojects.
 
+Tasks allows you to create and manage tasks, or blocks of work, 
+similar to the way projects are broken down in eg MS Project.
+
 </p>
 </section>
 <section name="Inserting a new Task">
 <p>
-
+This allows you to add tasks to the sub projects - e.g. Write Design Doc, 
+Review Doc, Update Doc, Write Code, Review Code, Update Code, Test, Log Test 
+Results, etc. They can be assigned to members of the team, and start and end 
+dates set up for them, dependencies on other tasks set, percentage 
+completion etc.
+<br/>
 You need to select first a subproject from the subproject list and then select the "Add Task" link.
 
 A form appears, where you are requested to insert the following data:
-
-Solo un amministratore di progetto può inserire una nuova attività per un sottoprogetto. Quando seleziona Add new Task, viene visualizzata una maschera dove si possono inserire i seguenti dati:
+<br/>
 
 <ul>
 <li><b>Percent Complete</b><br/>
@@ -80,6 +88,9 @@ The Admin section allows you to:
 <ol>
 <li><b>create new subprojects</b><br/>
 You can select if the subproject is public (visibile to everyone) or not (visibile only to project memebers).
+This allows you to add a subproject to a project, such as modules, 
+documentation, etc. 
+
 <br/>
 Required arguments are Project Name and description.
 </li>

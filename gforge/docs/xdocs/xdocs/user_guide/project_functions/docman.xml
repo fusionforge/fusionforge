@@ -36,8 +36,15 @@ You should select here the language of the document.
 You should select here the group of the document.
 </li>
 
+Fill in all the fields, select the group from the drop down list and click 
+<b>Submit Information</b>. The document will then be placed in the <b>Pending 
+Submissions</b> section of the <b>DocManager Admin</b> page, to be approved 
+or rejected.
+
 
 </ul>
+
+
 </p>
 </section>
 <section name="Viewing existing docs">
@@ -49,6 +56,11 @@ The viewing existing docs shows you a list of documents published and approved f
 </section>
 <section name="Admin Doc">
 <p>
+
+Clicking on this will present you with a page showing pending and active 
+documents.  In order to 
+allow users to submit a document, you must first set up the document groups 
+for the project.
 
 The Admin section allows you to:
 
@@ -78,7 +90,12 @@ Deleted Documents are old, outdated documents.
 </ul>
 </li>
 <li><b>Edit Document Groups</b><br/>
-Document groups allows you to organize the documents in groups, e.g. Developer Docs, User docs, etc.
+Clicking on this will present you with a box and a button to add document 
+groups, and it also shows the document groups associated with this project. 
+Submit as many document classes as you wish - eg Howto, Release notes, FAQ, 
+etc. These groups will be the catagories the documents will fall into when 
+users submit documents.
+
 </li>
 </ol>
 

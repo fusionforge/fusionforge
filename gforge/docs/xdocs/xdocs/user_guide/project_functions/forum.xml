@@ -3,7 +3,8 @@
 
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
-    <title>Gforge User Guide - Forums</title>
+   <author>Ken McCullagh</author>
+      <title>Gforge User Guide - Forums</title>
   </properties>
 
   <body>
@@ -77,6 +78,36 @@ If this option is enabled, every post to the forum will be sent to you by email.
 
 
 
+</p>
+</section>
+<section name="Forum admin">
+<p>
+Clicking on the <b>Forum Admin</b> link presents you with links to <b>Add 
+Forum, Delete Message</b> or <b>Update Forum Info/Status</b>.
+
+<subsection name="Add Forum">
+<p>
+This allows you to add a new discussion forum. You can select if it is 
+public or private (only members of the project can see it).
+</p>
+</subsection>
+
+<subsection name="Delete Message">
+<p>
+This allows you to delete a message (and any followups) from a forum. 
+You <b><i>must</i></b> know the message id of the message you wish to remove. 
+This can be obtained by viewing the message in the forums web page and noting 
+the message id of the message.
+</p>
+</subsection>
+
+<subsection name="Update Forum Info/Status">
+<p>
+This allows you to alter the properties of the forum such as the name and 
+description, whether or not anonymous posts are allowed, if it\'s public and 
+you can enter an address to which all messages are posted.
+</p>
+</subsection>
 </p>
 </section>
 

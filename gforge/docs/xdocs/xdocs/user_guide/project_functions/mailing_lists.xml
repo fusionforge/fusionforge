@@ -3,6 +3,8 @@
 
   <properties>
     <author email="reinhard@spisser.it">Reinhard Spisser</author>
+  <author>Ken McCullagh</author>
+  
     <title>Gforge User Guide - Mailing Lists</title>
   </properties>
 
@@ -10,7 +12,31 @@
 
 <section name="Mailing Lists">
 <p>
-The Mailing Lists section allows you to create mailing lists for your project
+
+This is where you will set up and administer the mailing lists associated 
+with the project.
+</p>
+</section>
+<section name="Admin">
+<p>
+This brings you to the Mail Admin page, where the following options are 
+available to you.
+ 
+<subsection name="Add Mailing List">
+<p>
+Clicking here will allow you to create a new mailing list. You can specify 
+if it is to be made public (people who are not members of the project can 
+see and/or join it) or not. You can also add a description of the list.
+</p>
+</subsection>
+<subsection name="Administrate/Update Lists">
+<p>
+This allows you to change the description of the list, the state of the list, 
+and by clicking on <b>Administrate this list in GNU Mailman</b> you can add 
+members to the mailing list, set the properties of the list, posting 
+policies and so forth.
+</p>
+</subsection>
 
 </p>
 </section>
