@@ -20,7 +20,7 @@ if (!$group_id) {
 	echo "<H1>For some reason, the Group ID or Survey ID did not make it to this page</H1>";
 }
 
-survey_header(array('title'=>'Survey','pagename'=>'survey','sectionvals'=>array(group_getname($group_id))));
+survey_header(array('title'=>'Survey','pagename'=>'survey','titlevals'=>array(group_getname($group_id))));
 
 Function  ShowResultsGroupSurveys($result) {
 	global $group_id;
