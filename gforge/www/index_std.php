@@ -10,7 +10,8 @@ creates a repository and controls access to it depending on the role
 settings of the project.
 </p>
 <p>
-Additional Tools:<br />
+Additional Tools:
+</p>
 <ul>
 	<li>Manage File Releases</li>
 	<li>Document Management</li>
@@ -19,18 +20,17 @@ Additional Tools:<br />
 	<li>Issue tracking with "unlimited" numbers of categories, text fields, etc</li>
 	<li>Task management</li>
 </ul>
-</p>
 <h3>Professional Services</h3>
 <p>
-The GForge project is supported and mainted by the GForgeGroup: 
+The GForge project is supported and mainted by the GForgeGroup:
+</p>
 <ul>
 	<li>Installation</li>
 	<li>Support</li>
 	<li>Online Training</li>
-	<li>Integration into your network, with LDAP authentication
+	<li>Integration into your network, with LDAP authentication</li>
 	<li>See <a href="http://gforgegroup.com/"><strong>GForge Group Professional Services</strong></a> for more info.</li>
 </ul>
-</p>
 
 <?php
 echo $HTML->boxTop($Language->getText('group','long_news'));
@@ -43,7 +43,7 @@ echo $HTML->boxBottom();
 <td width="35%" valign="top">
 <?php
 echo $HTML->boxTop('Ad');
-echo '<center><a target="_blank" href="http://gforgegroup.com/training/"><img src="/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150"></a></center>';
+echo '<center><a target="_blank" href="http://gforgegroup.com/training/"><img src="/pro/gfgtraining_button_75x150.gif" border="0" height="75" width="150" alt="GForge Training" /></a></center>';
 echo $HTML->boxMiddle('Getting GForge');
 
 ?>
