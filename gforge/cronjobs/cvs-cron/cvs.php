@@ -39,7 +39,12 @@ function writeFile($filePath, $content) {
 function addProjectRepositories() {
 	global $maincvsroot;
 
-	$res = db_query("select group_id,unix_group_name,enable_anonscm,enable_pserver from groups where status='A' AND group_id NOT IN (2,3,4)");
+	$res = db_query("select groups.group_id,groups.unix_group_name,groups.enable_anonscm,groups.enable_pserver 
+	FROM groups, plugins, group_plugin
+    WHERE groups.status != 'P'
+    AND groups.group_id=group_plugin.group_id
+    AND group_plugin.plugin_id=plugins.plugin_id
+    AND plugins.plugin_name='scmcvs'");
 	
 	for($i = 0; $i < db_numrows($res); $i++) {
 		/*
