@@ -70,7 +70,7 @@ if ($action=='add_to_group') {
 /*
 	Show list of users
 */
-print "<p>Alexandria user List for Group: ";
+print "<p>User list for group: ";
 if (!$group_id) {
 	print "<strong>All Groups</strong>";
 	print "\n<p>";
