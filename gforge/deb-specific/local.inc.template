@@ -73,6 +73,11 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 } else {
 	require ('/etc/sourceforge/database.inc');
 }
+//whether or not to use replication
+//$sys_db_use_replication=false;
+//$sys_dbreadhost='localhost';
+//$sys_dbreaddb='stats';
+//$sys_server="pgsql";
 
 //
 // LDAP configuration
