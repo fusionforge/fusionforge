@@ -43,8 +43,9 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     it's used to have a default language corresponding to browser language settings
   * [Christian] more i18n on trove map (work in progress)
   * [Christian] more i18n in group, French translation added too
+  * [Christian] added choice for default language and theme in debconf 
 
- -- Christian Bayle <bayle@debian.org>  Fri,  6 Sep 2002 00:48:43 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 18 Sep 2002 14:47:00 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 

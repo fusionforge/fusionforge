@@ -24,3 +24,21 @@ Description: The Sourceforge system name
  This name is used in various places throughout the system.
 Description-fr: Nom de votre système Sourceforge
  Ce nom est utilisé à divers endroits au travers du système.
+
+Template: sourceforge/shared/sys_lang
+Type: string
+Default: English
+Default-fr: French
+Description: Default language
+ Here is the default language for web pages, be carreful to enter a valid language.
+Description-fr: Langage par defaut
+ Ceci est le langage par defaut des pages web, attention de bien entrer une langue valide.
+
+Template: sourceforge/shared/sys_theme
+Type: string
+Default: debian
+Default-fr: debian
+Description: Default theme
+ Here is the default theme for web pages, be carreful to enter a valid name.
+Description-fr: Theme par defaut
+ Ceci est le theme par defaut des pages web, attention de bien entrer un nom valide.
