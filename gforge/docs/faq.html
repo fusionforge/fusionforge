@@ -208,6 +208,13 @@ VACUUM
 <p>Go to the site admin page and click on "Add to the Trove Map".  Then select "License" in the top drop-down box and type in the rest of the information on your license in the other boxes.  Then you can go to a project and select "Admin" and "Trove Categorization::Edit" to change the project to the new license.</p>
 </li>
 
+<li>
+<b>When I update a task with a comment I get the following error: 
+update():: AddMessage():: ERROR: pg_aclcheck: class "project_messa_project_messa_seq" not found.  In fact, poking around my database a bit, there seem to be a lot of sequences missing.  What gives?</b>
+<p>Are you running an old version of Postgres - i.e. 7.1?  Since then, the maximum size of a sequence changed from an int to a long (when?) and the GForge database creation script is set up to use the newer limits.  So, edit the db/gforge3.sql script and do a search and replace of <code>9223372036854775807</code> with <code>2147483647</code>.  Then rerun gforge3.sql and see if the sequences get created and the problems go away.</p>
+</li>
+
+
 </ol>
 
 <a name="developers"></a>
