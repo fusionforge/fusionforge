@@ -1,4 +1,4 @@
-gforge-plugin-scmsvn (1.0-1) experimental; urgency=low
+gforge-plugin-scmsvn (1.0-1) unstable; urgency=low
 
   * Initial packaging.
 
