@@ -1591,7 +1591,7 @@ project_admin	shell_server	Server shell SSH
 project_admin	shell_server_group_directory	Directory sul serverr shell: 
 project_admin	www_directory	Directory www WWW sul server shell
 project_admin	download_tarball	Scarica l'archivio CVS creato giornalmente
-project_admin	trove_categorization	Categoria Trove:
+project_admin	trove_categorization	Categoria Trove
 project_admin	group_members	Membri del gruppo
 project_admin	add_user	Aggiungi utente
 project_admin	edit_member_permissions	Modifica permessi utente
@@ -1700,7 +1700,7 @@ project_admin_editrelease	paste_release_notes	Incolla le note di rilascio
 project_admin_editrelease	paste_changelog	Incolla il changelog
 project_admin_editrelease	preserve_preformatted	Mantieni il testo preformattato
 project_admin_editrelease	submit_refresh	Invia/Refresh
-project_admin_editrelease	step_2	Fase 2: Aggiungi file a questo rilascio</h3><p>Now, choose a file to upload into the system. The maximum file size is determined by the site administrator, but defaults to 2MB. If you need to upload large files, contact your site administrator.</p>
+project_admin_editrelease	step_2	Fase 2: Aggiungi file a questo rilascio</h3><p>Adesso, scegli un file da inviare. La dimensione massima di un file &egrave; stabilita dall'amministratore del sistema, di default &egrave; di 2 MB. Se hai bisogno di inviare file pi&ugrandi; contatta l'amministratore del sito.</p>
 project_admin_editrelease	add_files_note	NOTE: In alcuni browser &egrave; necessario selezionare il file nella casella di upload e cliccare "OK".  Double-clicking doesn't register the file.</strong></span>
 project_admin_editrelease	upload_new_file	Upload di un nuovo file
 project_admin_editrelease	file_type	Tipo file
@@ -1757,7 +1757,7 @@ project_admin_userpermedit	title	Modifica permessi utente
 project_admin_userpermedit	undefined	Non definito
 project_admin_userpermedit	invalid_user	Utente non valido
 project_admin_userpermedit	user_does_not_exist	L'utente non esiste
-project_admin_userpermedit	user_added	User Added Successfully
+project_admin_userpermedit	user_added	Utente aggiunto
 project_admin_userpermedit	permissions_updated	Permessi aggiornati
 project_admin_userpermedit	editing_permissions	Stai modificando i permessi per l'utente $1 ($2)
 project_admin_userpermedit	developer_not_found	Utente non trovato in questo progetto
@@ -1769,7 +1769,7 @@ project_admin_userpermedit	release_technician	Tecnico per i rilasci
 project_admin_userpermedit	tracker_manager	Tracker Manager
 project_admin_userpermedit	technician	Tecnico (T)
 project_admin_userpermedit	admin_tech	Amministratore e tecnico (A/T)
-project_admin_userpermedit	no_permissions	Nessun permesso (N/A)
+project_admin_userpermedit	not_available	Non disponibile (N/A)
 project_admin_userpermedit	admin	Amministratore (A)
 project_admin_userpermedit	pm	Gestore Attivit&agrave;
 project_admin_userpermedit	forums	Forum
@@ -1798,7 +1798,7 @@ project_admin_vhost	title	Gestione host virtuali
 project_admin_vhost	vhost_scheduled	Host virtuale schedulato per la creazione
 project_admin_vhost	not_valid_hostname	Nome host non valido - $1
 project_admin_vhost	vhost_deleted	Host virtuale cancellato
-project_admin_vhost	info	<strong><span style="text-decoration:underline">Aggiungi nuovo virtual host</span></strong><p>Per aggiungere un nuovo virtualhost, inserisci un <strong>CNAME</strong> per il tuo <em>yourhost.org</em> a <strong>$1.$2</strong>.  $3 attualmente non ospita mail (non pu&ograve; essere un MX) oppure DNS</strong>.  <p>Cliccando su "crea" la creazione del virtual host verr&agrave; schedulata.  This will be synced to the project webservers - such that <em>yourhost.org</em> will display the material at <em>$4.$5</em>.
+project_admin_vhost	info	<strong><span style="text-decoration:underline">Aggiungi nuovo virtual host</span></strong><p>Per aggiungere un nuovo virtualhost, inserisci un <strong>CNAME</strong> per il tuo <em>yourhost.org</em> a <strong>$1.$2</strong>.  $3 attualmente non ospita mail (non pu&ograve; essere un MX) oppure DNS</strong>.  <p>Cliccando su "crea" la creazione del virtual host verr&agrave; schedulata.  Questa operazione sincronizzer&agrave; i server web in modo tale che il tuo host virtuale sar&egrave; disponibile alle ore <em>$4.$5</em>.
 project_admin_vhost	create	Crea
 project_admin_vhost	vhost	Host virtuale
 project_admin_vhost	operations	Operazioni
@@ -1837,7 +1837,7 @@ project_stats_graph	page_view_days	Pagine visualizzate (rosso) e download (blu) 
 project_stats_graph	page_view_months	Pagine visualizzate (rosso) e download (blu) per gli ultimi $1 mesi
 project_stats_graph	date	Data
 project_stats_graph	views	Viste (rosso) / Download (blu)
-people	about_blurb	<P>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non &egrave; consentito un uso commerciale.<P>L'elenco dei progetti rimane attivo per due settimane oppure se viene chiusa la posozione (amministratori di progetto possono ri-postare posizioni scadute)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
+people	about_blurb	<P>I progetti in ricerca di aiuto di $1 sono disponibile per progetti non commerciali. Non &egrave; consentito un uso commerciale.<P>L'elenco dei progetti rimane attivo per due settimane oppure se viene chiusa la posizione. Gli amministratori di progetto possono ri-postare posizioni scadute.<P>Scorri i menu di categoria per trovare i progetti in cerca di aiuto. <p> Se sei un amministratore di progetto, fai il login e inserisci le tue richieste d'aiuto tramite la tua pagina di amminstrazione progetto. 
 people	section	Progetti in ricerca di aiuto
 people	title	Sistema per la ricerca di aiuto
 people	here_is_list_position	Di seguito &egrave; elencato un elenco di posizioni disponibili per il progetto.
@@ -1893,7 +1893,6 @@ people_editjob	job_skill_update_no_wrong_id	Aggiornamento competenza posizione f
 people_editjob	job_skill_delete_no	Cancellazione competenza posizione fallita
 people_editjob	job_skill_delete_ok	Cancellazione competenza posizione effettuata
 people_editjob	job_skill_delete_no_wrong_id	Cancellazione competenza posizione fallita - project_id errato
-people_editjob	posting_fetch_failed	POSTING fetch FAILED
 people_editjob	no_such	Nessuna posizione disponibile per il progetto
 people_editjob	skill_explains	<p>&Egrave; possibile cambiare l'elenco delle competenze necessarie per questa posizione. </p><p>Tutte le posizioni verranno chiuse automaticamente dopo due settimane.</p>
 people_editjob	update_description	Aggiorna descrizioni
@@ -1912,7 +1911,7 @@ people_editprofile	failed_update_skills	Aggiornamento competenze fallita
 people_editprofile	fill_all_required_fields	Riempire tutti i campi obbligatori
 people_editprofile	skills_edit	Modifica comptetenze
 people_editprofile	edit_skills	Modifica posizione
-people_editprofile	change_required_fields	Change the required fields, and press "Done" at the bottom of the page
+people_editprofile	change_required_fields	Cambia i campi richiesti e premi "Invia" alla fine della pagina
 people_editprofile	cancel_skills_update	Aggiornamento competenze cancellato
 people_editprofile	no_skills_selected_to_delete	Nessuna competenza da cancellare selezionata
 people_editprofile	failed_delete_skills	Cancellazione competenze fallita
@@ -1950,10 +1949,9 @@ people_helpwanted_latest	title	Ultimi inserimenti
 people_proj	section	Progetti in ricerca d'aiuto
 people_proj	title	Progetti in ricerca di aiuto
 people_viewjob	section	Progetti in ricerca di aiuto
-people_viewjob	title	$1 wanted for $2
-people_viewjob	posting_id_not_found	Posting ID not found
+people_viewjob	title	$1 cercato per $2
+people_viewjob	posting_id_not_found	ID non trovato
 people_viewjob	view_a_job	Visualizza una posizione
-people_viewjob	fetch_failed	POSTING fetch FAILED
 people_viewjob	no_such_posting	Questa posizione non &egrave; disponibile per questo progetto
 people_viewjob	view_a_job	Visualizza posizione
 people_viewjob	contact_info	Informazioni sul contatto
@@ -1962,7 +1960,6 @@ people_viewjob	for_project	Per il progetto
 people_viewjob	required_skills	Competenze richieste
 people_viewprofile	section	Informazioni utente
 people_viewprofile	title	Visualizza un profilo utente
-people_viewprofile	user_fetch_failed	User fetch FAILED
 people_viewprofile	no_such_user	L'utente non esiste
 people_viewprofile	set_private	L'utente ha impostato il suo profilo a privato
 people_viewprofile	skills_profile_for	Profilo delle competenze
@@ -1984,7 +1981,7 @@ survey_add_survey	title_is_required	Il titolo del sondaggio &egrave; un parametr
 survey_add_survey	survey_inserted	Sondaggio inserito
 survey_add_survey	error_in_insert	Errore nell'inserimento del sondaggio
 survey_add_survey	name_of_survey	Nome del sondaggio
-survey_add_survey	list_questions_numbers	Elenca il numero di domane, nell'ordine desiderato, separato da virgole. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
+survey_add_survey	list_questions_numbers	Elenca il numero di domane, nell'ordine desiderato, separato da virgole. <strong>Fai riferimento alla lista delle domande</strong>in modo che puoi visualizzare gli ID delle domande.  <strong>Non</strong> includere spazi e non terminare la lista con una virgola. <br />Esempio: 1,2,3,4,5,6,7
 survey_add_survey	yes	S&igrave;
 survey_add_survey	no	No
 survey_add_survey	is_active	attivo?
@@ -2035,24 +2032,24 @@ survey_utils	show_results	Visualizza risultati
 survey_utils	admin	Amministra
 survey_resp	title	Sondaggio completo
 survey_resp	error_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non &egrave; arrivato a questa pagina.
-survey_resp	you_nedd_to_be_logged_in	You need to be logged in
-survey_resp	unfortunately_you_have_to_be	Unfortunately, you have to be logged in to participate in surveys.
+survey_resp	you_nedd_to_be_logged_in	Devi essere loggato 
+survey_resp	unfortunately_you_have_to_be	Sfortunatamente, devi essere collegato per poter partecipare ai sondaggi.
 survey_resp	thank_you	Grazie per aver partecipato al sondaggio
 survey_resp	regards	Saluti
 survey_resp	the_crew	Il team $1
 survey_resp	error	Errore
-survey_rating_resp	title	Voting
-survey_rating_resp	you_must_be_logged_in	You must be logged in to vote
-survey_rating_resp	error	ERROR
-survey_rating_resp	error_in_insert	Error in insert
-survey_rating_resp	vote_reg	Vote registered
-survey_rating_resp	vote_regsitered	Vote Registered
-survey_rating_resp	click_to_resturn	Click to return to previous page
-survey_rating_resp	if_you_vote_again	If you vote again, your old vote will be erased.
-survey_rating_resp	error_missing	ERROR!!! MISSING PARAMS
+survey_rating_resp	title	Votazioni
+survey_rating_resp	you_must_be_logged_in	Devi essere collegato per poter votare
+survey_rating_resp	error	ERRORE
+survey_rating_resp	error_in_insert	Errore nell'inserimento
+survey_rating_resp	vote_reg	Voto registrato
+survey_rating_resp	vote_regsitered	Voto registrato
+survey_rating_resp	click_to_resturn	Clicca qui per tornare alla pagina precedente
+survey_rating_resp	if_you_vote_again	Se voti nuovamente, il tuo vecchio voto verr&agrave; cancellato.
+survey_rating_resp	error_missing	ERRORE!!! PARAMETRI MANCANTI
 survey_privacy	title	Sondaggio
 survey_privacy	survey_privacy	Privacy del sondaggio
-survey_privacy	the_privacy_information	<p>Le informazioni raccolte in questi sondaggi non saranno mai vendute a terze parti oppure utilizzate per sollecitare l'acquisto di prodotti o servizi.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
+survey_privacy	the_privacy_information	<p>Le informazioni raccolte in questi sondaggi non saranno mai vendute a terze parti oppure utilizzate per sollecitare l'acquisto di prodotti o servizi.</p><p>Questa informazione viene raccolta per costruire un profilo dei progetti e degli sviluppator. Questo profilo dar&agrave; la possibilit&agrave; a visitatori del sito di percepire la qualit&agrave; di un determinato progetto.</p><p>Non &egrave; possibile per gli amministratori dei progetti vedere quali ripsoste sono state date dei singoli partecipanti.</p><p>Le informazioni raccolte vengono usate solo in modalit&agrave; aggregata e non per visualizzare dati su singoli utenti o sviluppatori.</p>.<p>Se in futuro questa policy dovesse cambiare, riguarder&agrave; comunque solo dati futuri, mai quelli inseriti prima.</p>
 survey_privacy	the_team	Il team $1 
 survey_index	for_some_reason	Per qualche ragione, l'ID del gruppo o del sondaggio non &egrave; arrivato a questa pagina.
 survey_index	title	Sondaggio
@@ -2068,9 +2065,9 @@ survey_admin_index	edit_existing_question	Modifica domande esistenti
 survey_admin_index	show_results	Visualizza risultati sondaggi
 survey_admin_index	its_simple_to_create	<p>&Egrave; semplice aggiiungere un sondaggio.<ol><li>Crea domande e commenti utilizzando i form.</li><li>Crea un sondaggio, elenca le domande (seleziona dal <strong>tuo</strong> elenco di domande).</li><li>Linka al sondaggio usando il formato: $1 dove XX &egrave; il numero del sondaggio
 survey_admin_index	you_can_now_activate	&Egrave; adesso possibile attivare/disattivare i sondaggi sulla pagina di $1 Modifica sondaggi esistenti $2
-survey_show_result_comment	title	RisuSurvey Aggregate Results
+survey_show_result_comment	title	RisuSurvey Risultati aggregati
 survey_show_result_comment	permission_denied	Utente non autorizzato
-survey_show_result_comment	found	Found
+survey_show_result_comment	found	Trovato
 survey_show_result_comment	question	Domanda
 survey_show_results_csv	permission_denied	Utente non autorizzato
 survey_show_questions	title	Domande sondaggi
@@ -2106,14 +2103,14 @@ new	notes_changes	Note di rilascio & Changelog
 new	newer_releases	Nuovo rilasci
 new	older_releases	Rilasci precedenti
 add_snippet	title	Inserisci un nuovo frammento
-add_snippet	error_snippet_id_missing	Error - snippet_package_version_id missing
-add_snippet	error_only_creator_can_add	Error - Only the creator of a package version can add snippets to it.
-add_snippet	error_snippet_doesnt_exist	Error - That snippet doesn't exist.
+add_snippet	error_snippet_id_missing	Errore - snippet_package_version_id mancante
+add_snippet	error_only_creator_can_add	Errore - Solo chi ha creato una versione di un package pu&ograve; aggiungere frammenti.
+add_snippet	error_snippet_doesnt_exist	Errore - Questo frammento non esiste.
 add_snippet	back_to_add_page	Torna 
-add_snippet	error_snippet_already_added	Error - That snippet was already added to this package.
-add_snippet	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+add_snippet	error_snippet_already_added	Errore - Questo frammento &egrave; gi&agrave; stato aggiunto a questo package.
+add_snippet	error_doing_snippet_version_insert	ERRORE NELL'INSERIMENTO DELLA VERSIONE DEL FRAMMENTO!
 add_snippet	snippet_version_added_successfully	Versione del frammento inserita
-add_snippet	error_go_back_and_fill_all	Error - Go back and fill in all the information
+add_snippet	error_go_back_and_fill_all	Errore - Torna indietro e riempi tutti i campi
 add_snippet	package	Package
 add_snippet	you_can_use_this_form	Puoi usare questo form per aggiungere frammenti al package.</p><p>Il campo "Id versione frammento" &egrave; l'ID del frammento.
 add_snippet	add_this_snippet_version_id	Aggiungi questo ID versione di un frammento
@@ -2122,28 +2119,28 @@ add_snippet	submit	INVIA
 add_snippet	no_snippets_in_this_package	Nessun frammento nel package
 add_snippet	snippets_in_this_package	Frammenti presenti nel package
 snippet_addversion	error_snippet_doesnt_exist	Error, Errore - il frammento non esiste
-snippet_addversion	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_addversion	error_doing_snippet_version_insert	ERRORE NELL'INSERMENTO DELLA VERSIONE DEL FRAMMENTO
 snippet_addversion	snippet_version_added_successfully	Versione del frammento aggiunto
-snippet_addversion	error_go_back_and_fill_in_all	Errore - Go back and fill in all the information
-snippet_addversion	title	Submit A New Snippet Version
-snippet_addversion	if_you_have_modified_a_version	If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.
-snippet_addversion	version	Versione:
+snippet_addversion	error_go_back_and_fill_in_all	Errore - Torna indietro e riempi tutti i campi
+snippet_addversion	title	Inserisci una nuova versione di un frammento	
+snippet_addversion	if_you_have_modified_a_version	Se hai modificato una versione di un frammento e pensi che valga la pena di condividere queste modifiche, aggiungi una nuova versione.
+snippet_addversion	version	Versione
 snippet_addversion	changes	Cambiamenti
 snippet_addversion	paste_the_code_here	Incolla qui il codice
 snippet_addversion	make_sure_all_info_is_complete	Assicurati che tutte le informazioni siano accurate e complete
 snippet_addversion	submit	INVIA
-snippet_addversion	error_snippet_package_doesnt_exist	Error, Error - snippet_package doesn't exist
-snippet_addversion	error_doing_snippet_package_version_insert	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
-snippet_addversion	title_submit_a_new_snippet_package	Submit A New Snippet Package
-snippet_addversion	snippet_package_version_added_successfully	Snippet Package Version Added Successfully.
-snippet_addversion	title_add_snippet_to_package	Add Snippets to Package
-snippet_addversion	important	IMPORTANT!
-snippet_addversion	if_new_window_opened	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
-snippet_addversion	link_add_snippets_to_package	Add Snippets To Package
-snippet_addversion	browse_the_library	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
-snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
-snippet_addversion	if_you_have_modified	If you have modified a version of a package and you feel it is significant enough to share with others, please do so.
-snippet_addversion	error_url_or_form	Error, Error - was the URL or form mangled??	
+snippet_addversion	error_snippet_package_doesnt_exist	Errore, Errore - il package non esiste
+snippet_addversion	error_doing_snippet_package_version_insert	ERRORE NELL'INSERIMENTO DELLA VERSIONE DEL PACKAGE
+snippet_addversion	title_submit_a_new_snippet_package	Inserisci un nuovo package di frammenti
+snippet_addversion	snippet_package_version_added_successfully	Versione del package aggiunto.
+snippet_addversion	title_add_snippet_to_package	Aggiunti frammenti al package
+snippet_addversion	important	IMPORTANTE!
+snippet_addversion	if_new_window_opened	Se si &egrave; aperta una nuova finestra, usa quella per aggiungere il frammento. Se non si &egrave; aperta, usa il link seguente per aggiungere il frammento PRIMA di uscire da questa pagina.
+snippet_addversion	link_add_snippets_to_package	Aggiungi frammenti al package
+snippet_addversion	browse_the_library	<strong>Scorri la libreria</strong> per trovare i frammenti da aggiungere e poi utuizza questi nella nuova finestra.
+snippet_addversion	title_submit_a_new_snippet_version	Inserisci una nuova versione di un frammento
+snippet_addversion	if_you_have_modified	Se hai modificato una versione di un package e pensi che valga la pena di condividere questa modifica con altri, inserisci una nuova versione.
+snippet_addversion	error_url_or_form	Errore, Errore nella URL o nel Form	
 snippet_browse	title	Libreria dei frammenti di codice
 snippet_browse	snippets_by_language	Frammenti per linguaggio: $1 
 snippet_browse	snippet_by_category	Frammenti per categoria: $1
@@ -2155,13 +2152,13 @@ snippet_browse	creator	Autore
 snippet_browse	packages_of_snippets	Package di frammenti
 snippet_browse	snippets	Frammenti
 snippet_delete	title	Cancella Frammenti
-snippet_delete	error_only_the_creator	Error - Only the creator of a package version can delete snippets from it.
+snippet_delete	error_only_the_creator	Errore - Solo chi crea una versione di un package pu&ograve; cancellare frammenti da esso.
 snippet_delete	that_snippet_doesnt_exist	Errore - questo frammento non esiste in questo package
 snippet_delete	item_removed_from	Frammento rimosso dal package
 snippet_delete	snippet_removed	Snippet Removed
-snippet_delete	error_only_creator_of_package_version_can_delete	Error - Only the creator of a package version can delete it.
-snippet_delete	package_removed	Package Removed
-snippet_delete	error_mangled_url	Error, Error - mangled URL?
+snippet_delete	error_only_creator_of_package_version_can_delete	Errore - Solo chi crea una versione di un package pu&ograve; cancellarla.
+snippet_delete	package_removed	Package Rimosso
+snippet_delete	error_mangled_url	Errore, Errore - URL non valida
 snippet_detail	title	Raccolta dei frammenti di codice
 snippet_detail	error_no_version_found	Errore - nessuna verisone trovata
 snippet_detail	version_of_this_snippet	Versioni del frammento
@@ -2181,14 +2178,14 @@ snippet_detail	edit_del	Modifica/cancella
 snippet_detail	latest_package_version	Ultima versione del package
 snippet_detail	submit_a_new_version	Inserisci una nuova versione
 snippet_detail	you_can_submit_a_new_version_of_package	Puoi inserire una nuova versione del frammento se questo &grave; stato modificato e ti sembra appropriato condividerlo con gli altri.
-snippet_detail	error_was_the_url_mangled	Error, Error - was the URL mangled?
-snippet_download	nothing_in_here	nothing in here
-snippet_download	error	Error
+snippet_detail	error_was_the_url_mangled	Errore, Errore nell'URL
+snippet_download	nothing_in_here	non c'e' niente
+snippet_download	error	Errore
 snippet_index	title	Libreria dei frammenti di codice
-snippet_package	error_doing_snippet_package_insert	ERROR DOING SNIPPET PACKAGE INSERT!
+snippet_package	error_doing_snippet_package_insert	ERRORE NELL'INSERIMENTO DEL PACKAGE!
 snippet_package	title	Nuovo package di frammenti
 snippet_package	snippet_package_added_succssfull	Package aggiunto
-snippet_package	error_doing_snippet_package_version	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_package	error_doing_snippet_package_version	ERRORE NELL'INSERIMENTO DELLA VERSIONE DEL PACKAGE!
 snippet_package	title_new_snippet_package	Inserisi un nuovo package di frammenti
 snippet_package	snippet_version_added_successfull	Versione del package creata con successo
 snippet_package	add_snippet_to_package	Aggiungi frammenti ai package
@@ -2315,7 +2312,3 @@ contact	about_blurb	<p>Questa &egrave; la pagina di contatti per <b>$1</b> -- se
 contact	title	Contatta $1
 docman	error_invalid_file_attack	Errore: attacco file non valido $1
 docman_admin_addgroups	section	Amministrazione document Manager
-
-
-
-
