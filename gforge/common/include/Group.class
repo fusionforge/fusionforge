@@ -793,7 +793,6 @@ class Group extends Error {
 		} else {
 			db_begin();
 			$sql = "UPDATE groups SET scm_box = '$scm_box' WHERE group_id = ".$this->getID();
-			var_dump($sql);
 			$res = db_query($sql);
 			if ($res) {
 				$this->data_array['scm_box']=$scm_box;
