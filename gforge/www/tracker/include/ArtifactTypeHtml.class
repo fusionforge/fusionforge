@@ -27,7 +27,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function header($params) {
-		global $DOCUMENT_ROOT, $Language, $sys_use_tracker;
+		global $DOCUMENT_ROOT, $HTML, $Language, $sys_use_tracker;
 		if (!$sys_use_tracker) {
 			exit_disabled();
 		}
@@ -39,16 +39,28 @@ class ArtifactTypeHtml extends ArtifactType {
 		$params['tabtext']=$this->getName();
 
 		site_project_header($params);
-		echo '<h3>'.$Language->getText('tracker', 'pagetitle').': <a href="/tracker/?group_id='.$group_id.'&atid='.$this->getID().'">'.$this->getName().'</a></h3><p>';
 
-		echo '<strong><a href="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','submit_new').'</a>';
-		echo ' | <a href="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','browse').'</a>';
+		$labels = array();
+		$links  = array();
+
+		$labels[] = $Language->getText('group','short_tracker');
+		$links[]  = '/tracker/?group_id='.$group_id;
+
+		$labels[] = $Language->getText('tracker_artifacttype','submit_new');
+		$links[]  = '/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID();
+		$labels[] = $Language->getText('tracker_artifacttype','browse');
+		$links[]  = '/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID();
+
 		if (session_loggedin()) {
-			echo ' | <a href="/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','reporting').'</a>';
+			$labels[] = $Language->getText('tracker_artifacttype','reporting');
+			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID();
 		}
-		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker_artifacttype','admin').'</a>';
+		$labels[] = $Language->getText('tracker_artifacttype','admin');
+		$links[]  = '/tracker/admin/?group_id='.$group_id;
 
-		echo '</strong><p>';
+		echo $HTML->subMenu($labels,$links);
+
+		echo '<h3>'.$Language->getText('tracker', 'pagetitle').': <a href="/tracker/?group_id='.$group_id.'&atid='.$this->getID().'">'.$this->getName().'</a></h3><p>';
 	}
 
 	function footer($params) {
