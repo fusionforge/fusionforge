@@ -525,6 +525,16 @@ admin_vhost	virtual_host	Hôte virtuel :
 admin_vhost	virtual_host_administration	Administration de l'hôte virtuel
 admin_vhost	virtual_host_entry_updated	Hôte virtuel mis à jour
 admin_vhost	virtual_host_name	Nom de l'hôte virtuel
+advanced_search	and_search	tous les mots
+advanced_search	all	tous
+advanced_search	or_search	au moins un mot
+advanced_search	none	aucun
+advanced_search	search_button	Chercher
+advanced_search	search_in	Chercher dans
+advanced_search	select	Selectionner
+advanced_search	headline	Résultats de la recherche dans : $1
+advanced_search	no_matches_found	Aucun résultat trouvé
+advanced_search	no_matches_found_no_under_section	Aucun résultat trouvé - Aucune section disponible (vérifiez vos permissions)
 artifact_canned	required_fields	ArtifactCanned : un nom et un responsable sont requis.
 artifact_category	required_fields	ArtifactCategory : un nom et un responsable sont requis.
 calendar	april	Avril
@@ -2161,6 +2171,7 @@ search	tasks_start_date	Date de début
 search	tasks_summary	Résumé
 search	title	Recherche
 search	tasks_id	#
+searchbox	advanced_search	Recherche avancée
 searchbox	docs	Les documents de ce projet
 searchbox	forum	Ce forum
 searchbox	forums	Les forums de ce projet
@@ -2465,7 +2476,7 @@ survey_admin_index	add_question	Ajouter des questions
 survey_admin_index	add_survey	Ajouter un sondage
 survey_admin_index	edir_existing_survey	Éditer les sondages existants
 survey_admin_index	edit_existing_question	Éditer les résultats du sondage
-survey_admin_index	its_simple_to_create	Créer un sondage est simple.<ol><li>Créez des questions en utilisant les formulaires ci-dessus.</li><li>Créez un sondage, en indiquant la liste ordonnées des questions (prises dans <strong>votre</strong> liste de questions).</li><li>L'URL du sondage est $1 o?est le numéro du sondage.
+survey_admin_index	its_simple_to_create	Créer un sondage est simple.<ol><li>Créez des questions en utilisant les formulaires ci-dessus.</li><li>Créez un sondage, en indiquant la liste ordonnées des questions (prises dans <strong>votre</strong> liste de questions).</li><li>L'URL du sondage est $1 où XX est le numéro du sondage.
 survey_admin_index	permission_denied	Permission refusée
 survey_admin_index	show_results	Voir les résultats du sondage
 survey_admin_index	title	Administration de sondages
