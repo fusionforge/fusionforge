@@ -316,7 +316,7 @@ if ($project->enableAnonSCM()){
 	echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
 
 	echo $Language->getText('plugin_scmcvs', 'browsetree');
-	echo '<p><a href="'.$this->account_group_cvsweb_url($group_id).'">Browse CVS Tree</a></p>' ;
+	echo '<p><a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a></p>' ;
 	echo $HTML->boxBottom();
 }
 
@@ -426,7 +426,7 @@ if ($project->enableAnonSCM()){
 		if ($commit_num || $add_num) {
 			echo '
 		<br /> &nbsp; -
-			<a href="'.$this->account_group_cvsweb_url($group_id).'">Browse CVS</a>';
+			<a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>';
 	        }
 		
 	}
