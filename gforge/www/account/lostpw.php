@@ -36,7 +36,7 @@ if ($loginname) {
 
 		$message = stripcslashes($Language->getText('account_lostpw', 'message', array($GLOBALS['HTTP_HOST'], $confirm_hash, $GLOBALS[sys_name])));
 
-		mail($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS[sys_name]),$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+		util_send_mail($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS[sys_name]),$message);
 
 		$HTML->header(array('title'=>"Lost Password Confirmation",'pagename'=>'account_lostpw'));
 

@@ -63,6 +63,9 @@ function util_check_fileupload($filename) {
  *
  */
 function util_send_mail($to,$subject,$body,$from='',$BCC='') {
+	if (!$to) {
+		$to='noreply@'.$GLOBALS['sys_default_domain'];
+	}
 	if (!$from) {
 		$from='noreply@'.$GLOBALS['sys_default_domain'];
 	}

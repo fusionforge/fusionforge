@@ -74,14 +74,13 @@ if (!$mail_res) {
 	// Send reminder every second day at 11am
 	if (($hrs%24)==11 && (($hrs/24)%2)==1) {
 	        global $sys_default_domain;
-		mail(
+		util_send_mail(
 			"admin@$sys_default_domain",
 			"ATT: Problems with massmail cron script",
 			"This is automatically generated message from\n"
 			."the mass mailing cron script of SourceForge\n"
 			."installation. There was error querying massmail_queue\n"
 			."database table. Please take appropriate actions.\n",
-			"From: noreply@$sys_default_domain"
 		);
 	}
 

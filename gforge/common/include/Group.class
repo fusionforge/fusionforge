@@ -1396,9 +1396,7 @@ if there is anything we can do to help you.
 
  -- the SourceForge crew';
 	
-			mail($row_admins['email'],"SourceForge Project Approved",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
-			usleep(250000); // TODO: This is dirty. If sendmail required pause, let send_new... handle it
-
+			util_send_mail($row_admins['email'],"SourceForge Project Approved",$message);
 		}
 
 		return true;
@@ -1449,7 +1447,7 @@ Reasons for negative decision:
 			"), 0, "response_text");
 		}
 
-		mail($email, "SourceForge Project Denied", $response, "From: noreply@sourceforge.net");
+		util_send_mail($email, "SourceForge Project Denied", $response);
 
 		return true;
 	}

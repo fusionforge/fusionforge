@@ -78,7 +78,7 @@ if there is anything we can do to help you.
 
  -- the '.$GLOBALS['sys_name'].' crew';
 	
-	mail($row_admins['email'],$GLOBALS['sys_name']." Project Approved",$message,"From: noreply@$GLOBALS[HTTP_HOST]");
+	util_send_mail($row_admins['email'],$GLOBALS['sys_name']." Project Approved",$message);
 
 }
 
@@ -103,7 +103,7 @@ function send_project_rejection($group_id, $response_id, $message="zxcv")
 		$response = db_result(db_query("SELECT response_text FROM canned_responses WHERE response_id='$response_id'"),0,"response_text");
 	}
 
-	mail($email, $GLOBALS['sys_name']." Project Denied", $response, "From: noreply@".$GLOBALS['sys_default_domain']);
+	util_send_mail($email, $GLOBALS['sys_name']." Project Denied", $response);
 
 	return true;
 }

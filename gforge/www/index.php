@@ -11,7 +11,7 @@
   *
   */
 
-require_once('pre.php');    // Initial db and session library, opens session
+require_once('www/include/pre.php');    // Initial db and session library, opens session
 require_once('www/include/cache.php');
 require_once('www/forum/forum_utils.php');
 require_once('www/include/features_boxes.php');

@@ -32,6 +32,9 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     an UID too.
   * [Roland] [From 2.5] deb-specific/db-upgrade.pl: Fixed the backlog of
     wrong UIDs.
+  * [Roland] Applied patch #417 from Chris Rudd <chris@omegaware.com>
+    (very slightly modified) to spread the use of the util_send_mail()
+    function.  Thanks, Chris.
 
  --
 

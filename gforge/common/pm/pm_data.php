@@ -599,9 +599,7 @@ function mail_followup($project_task_id,$group_project_id,$more_addresses=false,
 			$to .= ', ' . db_result($result,0,'new_task_address');
 		}
 		
-		$more='From: noreply@'.$GLOBALS['sys_default_domain'];
-		
-		mail($to,$subject,$body,$more);
+		util_send_mail($to,$subject,$body);
 		
 		$feedback .= " Task Update Sent ";
 		

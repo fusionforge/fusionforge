@@ -268,11 +268,10 @@ class User extends Error {
 		. "Enjoy the site.\n\n"
 		. " -- the SourceForge staff\n";
 
-		mail(
+		util_send_mail(
 			$this->getEmail(),
 			"SourceForge Account Registration",
-			$message,
-			"From: noreply@".$GLOBALS['sys_default_domain']
+			$message
 		);
 	}
 

@@ -77,6 +77,6 @@ if(!count($data)) {
 
 if ($errors) {
 	$msg = "The following errors ocurred with kt_dump.php:\n     - " . $errors;
-	mail('alexandria-staff@lists.sourceforge.net','kt_dump Failed',$msg);
+	util_send_mail('alexandria-staff@lists.sourceforge.net','kt_dump Failed',$msg);
 }
 ?>

@@ -47,8 +47,8 @@ if ($send_mail) {
 			send it to the toaddress
 		*/
 		$to=eregi_replace('_maillink_','@',$toaddress);
-		$from='From: '. $name .' <'. $email .'>';
-		mail($to, stripslashes($subject),stripslashes($body) ,$from);
+		$from=$name .' <'. $email .'>';
+		util_send_mail($to, stripslashes($subject),stripslashes($body) ,$from);
 		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($to)));
 		echo '<p>Message has been sent.</p>';
 		$HTML->footer(array());
@@ -58,8 +58,8 @@ if ($send_mail) {
 			figure out the user's email and send it there
 		*/
 		$to=db_result($result,0,'email');
-		$from='From: '. $name .' <'. $email .'>';
-		mail($to, stripslashes($subject), stripslashes($body),$from);
+		$from=$name .' <'. $email .'>';
+		util_send_mail($to, stripslashes($subject), stripslashes($body),$from);
 		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($touser)));
 		echo '<p>Message has been sent.</p>';
 		$HTML->footer(array());
