@@ -373,6 +373,44 @@ SELECT
 */
 
 
+//
+//  total file downloads by file
+//
+db_begin(SYS_DB_STATS);
+
+echo "\n\nBeginning frs_dlstats_file_agg: ".date('Y-m-d H:i:s',time());
+$year=date('Y');
+$day=date('d');
+$month=date('m');
+
+$rel = db_query("DELETE FROM frs_dlstats_file_agg WHERE month='$month' AND day='$day';", -1, 0, SYS_DB_STATS);
+echo db_error(SYS_DB_STATS);
+
+$rel=db_query("INSERT INTO frs_dlstats_file_agg
+SELECT * FROM (
+    SELECT
+        '$year$month'::int AS month,
+        '$day'::int AS day,
+        frs_file.file_id,
+        (coalesce(sf.downloads,0) + coalesce(sh.downloads,0)) AS downloads
+    FROM frs_file
+        LEFT JOIN stats_http_downloads sh ON (sh.day='$year$month$day'
+            AND frs_file.file_id=sh.filerelease_id)
+        LEFT JOIN stats_ftp_downloads sf ON (sf.day='$year$month$day'
+            AND frs_file.file_id=sf.filerelease_id)
+) mess
+WHERE downloads > 0;", -1, 0, SYS_DB_STATS);
+
+if (!$rel) {
+    echo "ERROR IN frs_dlstats_file_agg";
+}
+
+echo db_error(SYS_DB_STATS);
+
+db_commit(SYS_DB_STATS);
+
+db_query("VACUUM ANALYZE frs_dlstats_file_agg;", -1, 0, SYS_DB_STATS);
+
 
 //
 //  total file downloads by file
