@@ -1,6 +1,8 @@
 2004-07-29  Francisco Gimeno <kikov@kikov.org>
 	* www/pm/mod_task.php and detail_task.php: Added task_extra_detail 
 	hook to Task Manager detail. Applied patch#851
+	* tools/createplugin: Changed httpd.conf.d installation path to 
+	httpd.d. Added languages path in include/languages. Applied [#850]
 
 2004-07-28  Tim Perdue  <tim@gforge.org>
 
