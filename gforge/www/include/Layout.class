@@ -171,6 +171,10 @@ class Layout extends Error {
 		echo $this->FONTSIZE_SMALLER; ?>; }
 	A.tabsellink:hover { text-decoration: none; color: #000000; font-weight: bold; font-size: <?php
 		echo $this->FONTSIZE_SMALLER; ?>; }
+
+	A.showsource { color: #FFFFFF; text-decoration: none; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	A.showsource:visited { color: #FFFFFF; text-decoration: none; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
+	A.showsource:hover { color: #FFFFFF; text-decoartion: none; font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; }
 	-->
 </style>
 
@@ -318,6 +322,13 @@ if ($params['group']) {
 		<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $this->imgroot; ?>tabs/bottomright.png" HEIGHT=9 WIDTH=9></TD>
 	</TR>
 </TABLE>
+<?php
+	global $sys_show_source;
+	if ($sys_show_source) {
+		global $SCRIPT_NAME;
+		print '<A CLASS=showsource HREF="/source.php?file=' . $SCRIPT_NAME . '"> Show Source</A>\n';
+	}
+?>
 </body>
 </html>
 <?php

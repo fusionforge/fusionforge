@@ -169,5 +169,9 @@ $default_trove_cat=18;
 //	JPGRAPH Package
 $sys_path_to_jpgraph='/path/to/jpgraph/src/';
 
+//  Show Source
+//  Setting this to 1 will add a "Show Source" link to the bottom of each page
+$sys_show_source=0;
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
