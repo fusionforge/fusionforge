@@ -1,3 +1,16 @@
+2003-02-06 Reinhard Spisser <reinhard@spiser.it>
+
+	* www/include/project_home.php,
+	www/include/languages/Base.tab,
+	Localizing some strings
+
+	* www/stats/*
+	www/include/language/Base.tab:
+	Committing Reiner Jungs'  localization of stats
+
+	* www/include/languages/Italian.tab:
+	Translation in italian of new strings
+	
 2003-02-04 Reinhard Spisser <reinhard@spisser.it>
 
 	* common/tracker/*,
