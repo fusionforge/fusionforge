@@ -2286,6 +2286,7 @@ survey_index	survey_vote	Vote
 survey_index	survey_edit	Edit
 survey_index	survey_result	Result
 survey_index	survey_result_graph	Result with Graph
+survey_index	survey_result_comments	Result with Graph and Comments
 survey_index	this_group_has	This Group Has No Active Surveys
 survey_index	title	Survey
 survey_privacy	survey_privacy	Survey Privacy
