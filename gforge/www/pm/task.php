@@ -39,10 +39,6 @@ if (!$pg || !is_object($pg)) {
 	exit_error('Error',$pg->getErrorMessage());
 }
 
-if (session_loggedin()) {
-	$perm =& $g->getPermission( session_get_user() );
-}
-
 /*
 	Figure out which function we're dealing with here
 */
@@ -52,7 +48,7 @@ switch ($func) {
 	//	Show blank form to add new task
 	//
 	case 'addtask' : {
-		if (session_loggedin() && $perm->isPMAdmin()) {
+		if ($pg->userIsAdmin()) {
 			$pt=new ProjectTaskHTML($pg);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get ProjectTask');
@@ -70,7 +66,7 @@ switch ($func) {
 	//	Insert the task into the database
 	//
 	case 'postaddtask' : {
-		if (session_loggedin() && $perm->isPMAdmin()) {
+		if ($pg->userIsAdmin()) {
 			$pt = new ProjectTask($pg);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get Empty ProjectTask');
@@ -102,7 +98,7 @@ switch ($func) {
 	//	Modify an existing task
 	//
 	case 'postmodtask' : {
-		if (session_loggedin() && $perm->isPMAdmin()) {
+		if ($pg->userIsAdmin()) {
 			$pt = new ProjectTask($pg,$project_task_id);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get ProjectTask');
@@ -133,7 +129,7 @@ switch ($func) {
 	case 'massupdate' : {
 		$count=count($project_task_id_list);
 
-		if (session_loggedin() && $perm->isPMAdmin()) {
+		if ($pg->userIsAdmin()) {
 
 			for ($i=0; $i < $count; $i++) {
 				$pt=new ProjectTask($pg,$project_task_id_list[$i]);
@@ -184,7 +180,7 @@ switch ($func) {
 	//	Add an artifact relationship to an existing task
 	//
 	case 'addartifact' : {
-		if (session_loggedin() && $perm->isPMAdmin()) {
+		if ($pg->userIsAdmin()) {
 			$pt = new ProjectTask($pg,$project_task_id);
 			if (!$pt || !is_object($pt)) {
 				exit_error('Error','Could Not Get ProjectTask');
