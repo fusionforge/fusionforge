@@ -280,6 +280,19 @@ class Layout extends Error {
 	}
 
 	/**
+	 * box1_get_alt_row_style() - Get an alternating row style for tables
+	 *
+	 * @param               int             Row number
+	 */
+	function box1_get_alt_row_style($i) {
+		if ($i % 2 == 0) {
+			return 'BGCOLOR="#FFFFFF"';
+		} else {
+			return 'BGCOLOR="' . $this->COLOR_LTBACK1 . '"';
+		}
+	}
+
+	/**
 	 * box1_bottom() - Box Bottom, equivalent to html_box1_bottom()
 	 *
 	 * @param	bool	Whether to echo or return the output
