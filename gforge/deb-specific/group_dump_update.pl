@@ -93,6 +93,11 @@ sub add_group {
 	mkdir $log_dir, 0775;
 	mkdir $cgi_dir, 0775;
 	mkdir $ht_dir, 0775;
+	# perl is sometime fucked to create with right permission
+	system("chmod 0755 $group_dir");
+	system("chmod 0755 $log_dir");
+	system("chmod 0755 $cgi_dir");
+	system("chmod 0755 $ht_dir");
 	chown $dummy_uid, $gid, ($group_dir, $log_dir, $cgi_dir, $ht_dir);
 }
 
