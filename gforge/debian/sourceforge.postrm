@@ -18,10 +18,8 @@ set -e
 
 case "$1" in
     purge)
-	su postgres -c "dropdb sourceforge" &> /dev/null || true
-	su postgres -c "dropuser sourceforge" &> /dev/null || true
-	rm -f /var/lib/postgres/data/sourceforge_passwd
 	rm -rf /var/lib/sourceforge
+	/usr/lib/sourceforge/bin/install-db.sh purge
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
 	;;
