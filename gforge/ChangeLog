@@ -1,5 +1,8 @@
 2003-02-17  Reinhard Spisser <reinhard@spisser.it>
 
+	* www/people:
+	committing Philippe Kiener's i18n of people
+	
 	*  www/project/admin/*.php, www/project/stats/*.php:
 	i18n
 		
