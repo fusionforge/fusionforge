@@ -1,0 +1,79 @@
+#!/usr/bin/perl -w
+#
+# Debian-specific script to unregister a plugin from the SF database
+
+use DBI ;
+use strict ;
+use diagnostics ;
+
+use vars qw/$dbh @reqlist $plugin_name $plugin_desc $plugin_id/ ;
+
+sub debug ( $ ) ;
+
+require ("/usr/lib/sourceforge/lib/include.pl") ; # Include all the predefined functions
+
+&db_connect ;
+
+if ($#ARGV < 0) {
+    debug "Usage: sf-unregister-plugin <plugin name>" ;
+    exit 1 ;
+}
+
+$plugin_name = $ARGV [0] ;
+
+if ($pluginname =~ /[^a-z]/) {
+    debug "Error: the plugin name must contain only [a-z] characters" ;
+    exit 1 ;
+}
+
+$dbh->{AutoCommit} = 0;
+$dbh->{RaiseError} = 1;
+eval {
+    my ($query, $sth, @array, $version, $action) ;
+
+    $query = "SELECT count(*) FROM plugins WHERE plugin_name = '$plugin_name'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+
+    if ($array[0] == 1) {
+	$query = "DELETE FROM plugins WHERE plugin_name = '$plugin_name'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	$plugin_id = $array[0] ;
+	debug "Plugin '$plugin_name' successfully unregistered." ;
+
+	# debug "Committing." ;
+	$dbh->commit () ;
+    } else {
+	debug "No plugin '$plugin_name' found, skipping." ;
+    }
+
+    # There should be a commit at the end of every block above.
+    # If there is not, then it might be symptomatic of a problem.
+    # For safety, we roll back.
+    $dbh->rollback ();
+};
+
+if ($@) {
+    warn "Transaction aborted because $@" ;
+    debug "Transaction aborted because $@" ;
+    $dbh->rollback ;
+    debug "Please report this bug on the Debian bug-tracking system." ;
+    debug "Please include the previous messages as well to help debugging." ;
+    debug "You should not worry too much about this," ;
+    debug "your DB is still in a consistent state and should be usable." ;
+    exit 1 ;
+}
+
+$dbh->rollback ;
+$dbh->disconnect ;
+
+sub debug ( $ ) {
+    my $v = shift ;
+    chomp $v ;
+    print STDERR "$v\n" ;
+}
