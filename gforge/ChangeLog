@@ -1,6 +1,32 @@
-2004-10-26  Tim Perdue <tim@gforge.org>
+2004-11-04  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed bug when updating forum due to RBAC refactoring
+	* fixed [#972] SCM Plug in & Unified Diff
+	* fixed [#983] "Remember me" didn't work
+	* fixed notices in various places
+	* technicians and submitter of a tracker item can now upload files
+
+2004-11-04  Tim Perdue <tim@gforge.org>
 
 	* db/20041104/sql - new file expands size of groups.scm_box field
+
+2004-11-03  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed bugs in new RPM packaging
+	* fixed references problem in various places
+
+2004-11-01  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* introduced CONFFILEOUTDIR in setup script
+	* fixed usage of register-plugin
+	* fixed a syntax error in 20041001.sql
+	* commited preliminary work on new RPM packaging
+	* fixed localization in groupedit.php
+
+2004-10-28  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed a html problem in /my/ page
+	* fixed a remaining cvs instead of scm in config templates
 
 2004-10-31  Roland Mas  <99.roland.mas@aist.enst.fr>
 
