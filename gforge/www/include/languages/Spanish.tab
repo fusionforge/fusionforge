@@ -568,3 +568,42 @@ news_utils	nonews	Ninguna nueva noticia encontrada
 news_utils	archive	Archivo de Noticias
 news_utils	submit	Enviar Noticias
 news_utils	readmore	<NOBR>Leer m&aacute;s/Comentar</NOBR>
+calendar	title	Manejo del Proyecto: Calendario
+calendar	january	enero
+calendar	february	febreo
+calendar	march	marzo
+calendar	april	abril
+calendar	may	mayo
+calendar	june	junio
+calendar	july	julio
+calendar	august	augosto
+calendar	september	septiembre
+calendar	october	octubre
+calendar	november	noviembre
+calendar	december	diciembre
+calendar	sunday	domingo
+calendar	monday	lunes
+calendar	tuesday	martes
+calendar	wednesday	mi&eacute;rcoles
+calendar	thursday	jueves
+calendar	friday	viernes
+calendar	saturday	s&aacute;bado
+calendar	view	Ense&ntilde;e:
+calendar	onemonth	Un mes
+calendar	threemonth	Tr&eacute;s meses
+calendar	currentyear	El a&ntilde;o actual
+calendar	comingyear	El a&ntilde;o que viene
+calendar	fordate	Para la fecha:
+calendar	update	Actualice
+calendar	todaysdate	Hoy.
+calendar	selecteddate	Fecha escogida (si es diferente de hoy).
+calendar	invalidyear	A&ntilde; inv&aacute;lido
+calendar	invalidyearexplain	El a&ntilde;o tiene que ser entre 1990 y 2020.
+calendar	invalidmonth	Mes inv&aacute;lido
+calendar	invalidmonthexplain	El mes tiene que ser entre 1 y 12.
+calendar	invalidday	D&iacute;a inv&aacute;lido
+calendar	invaliddayexplain	El d&iacute;a tiene que ser entre 1 y 31.
+calendar	invaliddate	Fecha inv&aacute;lida
+calendar	invaliddateexplain	$1 es una fecha inv&aacute;lida.
+calendar	invalidtype	"Type" inv&aacute;lido
+calendar	invalidtypeexplain	El "type" est&aacute; inv&aacute;lido.

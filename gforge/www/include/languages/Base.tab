@@ -607,3 +607,42 @@ common_include_account	cvsreserved	Name is reserved for CVS.
 common_include_account	dnsreserved	Name is reserved for DNS purposes.
 common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.
 survey title Developer Survey
+calendar	title	Project Management: Calendar
+calendar	january	January
+calendar	february	February
+calendar	march	March
+calendar	april	April
+calendar	may	May
+calendar	june	June
+calendar	july	July
+calendar	august	August
+calendar	september	September
+calendar	october	October
+calendar	november	November
+calendar	december	December
+calendar	sunday	Sunday
+calendar	monday	Monday
+calendar	tuesday	Tuesday
+calendar	wednesday	Wednesday
+calendar	thursday	Thursday
+calendar	friday	Friday
+calendar	saturday	Saturday
+calendar	view	View:
+calendar	onemonth	One Month
+calendar	threemonth	Three Month
+calendar	currentyear	Current Year
+calendar	comingyear	Coming Year
+calendar	fordate	For date:
+calendar	update	Update
+calendar	todaysdate	Today's date.
+calendar	selecteddate	Selected date (if different from today).
+calendar	invalidyear	Invalid year
+calendar	invalidyearexplain	Year must be between 1990 and 2020.
+calendar	invalidmonth	Invalid month
+calendar	invalidmonthexplain	Month must be between 1 and 12.
+calendar	invalidday	Invalid day
+calendar	invaliddayexplain	Day must be between 1 and 31.
+calendar	invaliddate	Invalid date
+calendar	invaliddateexplain	$1 is an invalid date.
+calendar	invalidtype	Invalid type
+calendar	invalidtypeexplain	Type is invalid.
