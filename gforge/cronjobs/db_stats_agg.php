@@ -24,6 +24,23 @@ require ('squal_pre.php');
 
 /*
 	FIRST TIME RUN:
+--
+--
+--
+--	
+--
+--BEGIN;
+--UPDATE frs_dlstats_file SET MONTH=('2002'::text || month::text)::int;
+--COMMIT;
+
+INSERT INTO frs_dlstats_file_agg
+    SELECT
+        month,
+        day,
+        file_id,
+        count(*) AS downloads
+    FROM frs_dlstats_file
+        GROUP BY month,day,file_id;
 
 --
 --	Create a table of total downloads by file
@@ -374,7 +391,7 @@ SELECT
 
 
 //
-//  total file downloads by file
+//  total file downloads by file / day
 //
 db_begin(SYS_DB_STATS);
 
@@ -383,26 +400,24 @@ $year=date('Y');
 $day=date('d');
 $month=date('m');
 
-$rel = db_query("DELETE FROM frs_dlstats_file_agg WHERE month='$month' AND day='$day';", -1, 0, SYS_DB_STATS);
+$rel = db_query("DELETE FROM frs_dlstats_file_agg 
+	WHERE month='$year$month' AND day='$day';", -1, 0, SYS_DB_STATS);
 echo db_error(SYS_DB_STATS);
 
-$rel=db_query("INSERT INTO frs_dlstats_file_agg
-SELECT * FROM (
+$sql="INSERT INTO frs_dlstats_file_agg
     SELECT
-        '$year$month'::int AS month,
-        '$day'::int AS day,
-        frs_file.file_id,
-        (coalesce(sf.downloads,0) + coalesce(sh.downloads,0)) AS downloads
-    FROM frs_file
-        LEFT JOIN stats_http_downloads sh ON (sh.day='$year$month$day'
-            AND frs_file.file_id=sh.filerelease_id)
-        LEFT JOIN stats_ftp_downloads sf ON (sf.day='$year$month$day'
-            AND frs_file.file_id=sf.filerelease_id)
-) mess
-WHERE downloads > 0;", -1, 0, SYS_DB_STATS);
+        month,
+        day,
+        file_id,
+        count(*) AS downloads
+    FROM frs_dlstats_file
+	WHERE month='$year$month' AND day='$day'
+    GROUP BY month,day,file_id;";
+$rel=db_query($sql, -1, 0, SYS_DB_STATS);
 
 if (!$rel) {
     echo "ERROR IN frs_dlstats_file_agg";
+	echo $sql;
 }
 
 echo db_error(SYS_DB_STATS);

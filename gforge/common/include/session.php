@@ -328,12 +328,13 @@ function session_require($req) {
  *	@return none
  */
 function session_set_new($user_id) {
-	global $G_SESSION;
+	global $G_SESSION,$session_ser;
 
 	// set session cookie
   //
 	$cookie = session_build_session_cookie($user_id);
 	session_cookie("session_ser", $cookie);
+	$session_ser=$cookie;
 
 	db_query("
 		INSERT INTO session (session_hash, ip_addr, time, user_id) 
