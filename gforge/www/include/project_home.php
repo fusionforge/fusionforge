@@ -1,5 +1,14 @@
-<?php /** * project_home.php * * SourceForge: Breaking Down the Barriers to Open Source Development * Copyright 1999-2001 (c) VA Linux Systems * http://sourceforge.net * * @version   $Id: project_home.php.patched,v 1.1.2.1 2002/11/30 09:57:57 cbayle
-Exp $ */
+<?php 
+
+/** 
+* project_home.php 
+* 
+* SourceForge: Breaking Down the Barriers to Open Source Development 
+* Copyright 1999-2001 (c) VA Linux Systems 
+* http://sourceforge.net 
+* 
+* @version   $Id$ 
+*/
 
 require_once('www/include/vote_function.php');
 require_once('common/include/vars.php');
@@ -7,16 +16,10 @@ require_once('www/news/news_utils.php');
 require_once('www/include/trove.php');
 require_once('www/include/project_summary.php');
 
-//make sure this project is NOT a foundry
-if (!$project->isProject()) {
-	header ("Location: /foundry/". $project->getUnixName() ."/");
-	exit;
-}
-
 // Icons theming
 $imgproj=$HTML->imgproj;
 
-$title = 'Project Info - '. $project->getPublicName();
+$title = $Language->getText('project_home','title').'- '. $project->getPublicName();
 
 site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home','pagename'=>'projects','sectionvals'=>array(group_getname($group_id))));
 
@@ -40,9 +43,7 @@ $res_admin = db_query("SELECT users.user_id,users.user_name,users.realname
 	AND users.status='A'");
 
 if ($project->getStatus() == 'H') {
-	print "<p>NOTE: This project entry is maintained by the ".$GLOBALS['sys_name']." staff. We are not "
-		. "the official site "
-		. "for this product. Additional copyright information may be found on this project's homepage.</p>\n";
+	print "<p>".$Language->getText('project_home','holding_note',$GLOBALS['sys_name'])."</p>\n";
 }
 
 if ($project->getDescription()) {
@@ -79,11 +80,11 @@ $jobs_res = db_query("SELECT name
 if ($jobs_res) {
 	$num=db_numrows($jobs_res);
 		if ($num>0) {
-			print '<br /><br />HELP WANTED: This project is looking for ';
+			print '<br /><br />'.$Language->getText('project_home','help_wanted').'  ';
 				if ($num==1) {
 					print '<a href="/people/?group_id='.$group_id.'">'. db_result($jobs_res,0,"name").'(s)</a>';
 				} else {
-					print 'People to fill <a href="/people/?group_id='.$group_id.'">several different positions</a>';
+					print $Language->getText('project_home','help_wanted_multiple', '<a href="/people/?group_id='.$group_id.'">').' </a>';
 				}
 		}
 }
@@ -122,7 +123,7 @@ print db_result($res_count,0,'count');
 
 ?>
 
-<a href="/project/memberlist.php?group_id=<?php print $group_id; ?>">[View Members]</a>
+<a href="/project/memberlist.php?group_id=<?php print $group_id; ?>">[<?php echo $Language->getText('project_home','view_members') ?>]</a>
 <?php
 
 echo $HTML->boxBottom();
@@ -194,9 +195,9 @@ if ($project->usesFRS()) {
 					</td>
 					<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
 					<td><a href="/project/shownotes.php?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id') . '">';
-					echo html_image('ic/manual16c.png','15','15',array('alt'=>'Release Notes'));
+					echo html_image('ic/manual16c.png','15','15',array('alt'=>$Language->getText('project_home','release_notes')));
 					echo '</a> - <a href="/project/filemodule_monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '&amp;group_id='.$group_id.'&amp;start=1">';
-					echo html_image('ic/mail16d.png','15','15',array('alt'=>'Monitor This Package'));
+					echo html_image('ic/mail16d.png','15','15',array('alt'=>$Language->getText('project_home','monitor_package')));
 					echo '</a>
 					</td>
 					<td><a href="/project/showfiles.php?group_id=' . $group_id . '&amp;release_id=' . db_result($res_files,$f,'release_id') . '">'.$Language->getText('frs','file_download').'</a></td></tr>';
@@ -206,7 +207,7 @@ if ($project->usesFRS()) {
 		}
 		?></table>
 	<div align="center">
-	<a href="/project/showfiles.php?group_id=<?php print $group_id; ?>">[View ALL Project Files]</a>
+	<a href="/project/showfiles.php?group_id=<?php print $group_id; ?>">[<?php echo $Language->getText('project_home','view_project_files')?>]</a>
 	</div>
 <?php
 	echo $HTML->boxBottom();
@@ -247,7 +248,7 @@ if ($project->usesTracker()) {
 	$rows = db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		echo '<br /><em>There are no public trackers available</em>';
+		echo '<br /><em>'.$Language->getText('project_home','no_trackers').'</em>';
 	} else {
 		for ($j = 0; $j < $rows; $j++) {
 			echo '<p />
@@ -265,9 +266,8 @@ if ($project->usesForum()) {
 	print '<hr size="1" noshade="noshade" /><a href="/forum/?group_id='.$group_id.'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>$Language->getText('group','short_forum')));
 	print '&nbsp;'.$Language->getText('group','long_forum').'</a>';
-	print " ( <strong>". project_get_public_forum_message_count($group_id) ."</strong> messages in ";
-
-	print "<strong>". project_get_public_forum_count($group_id) ."</strong> forums )\n";
+	print " ( <strong>". project_get_public_forum_message_count($group_id) ."</strong> ".$Language->getText('project_home','messages_in')." ";
+	print "<strong>". project_get_public_forum_count($group_id) ."</strong> ".$Language->getText('project_home','forums')." )\n";
 }
 
 // ##################### Doc Manager
@@ -286,7 +286,7 @@ if ($project->usesMail()) {
 	print '<hr size="1" noshade="noshade" /><a href="/mail/?group_id='.$group_id.'">';
 	print html_image('ic/mail16b.png','20','20',array('alt'=>$Language->getText('group','short_mail')));
 	print '&nbsp;'.$Language->getText('group','long_mail').'</a>';
-	print " ( <strong>". project_get_mail_list_count($group_id) ."</strong> public mailing lists )";
+	print " ( <strong>". project_get_mail_list_count($group_id) ."</strong> ".$Language->getText('project_home','public_mailing_lists').")";
 }
 
 // ##################### Task Manager
@@ -299,7 +299,7 @@ if ($project->usesPm()) {
 	$result = db_query ($sql);
 	$rows = db_numrows($result);
 	if (!$result || $rows < 1) {
-		echo '<br /><em>There are no public subprojects available</em>';
+		echo '<br /><em>'.$Language->getText('project_home','no_subprojects').'</em>';
 	} else {
 		for ($j = 0; $j < $rows; $j++) {
 			echo '
@@ -316,7 +316,7 @@ if ($project->usesSurvey()) {
 	print '<hr size="1" noshade="noshade" /><a href="/survey/?group_id='.$group_id.'">';
 	print html_image('ic/survey16b.png','20','20',array('alt'=>$Language->getText('group','short_survey')));
 	print " ".$Language->getText('group','long_survey')."</a>";
-	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> surveys )';
+	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> '.$Language->getText('project_home','surveys').'  )';
 }
 
 // ######################### CVS
