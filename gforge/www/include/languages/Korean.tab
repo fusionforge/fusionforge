@@ -45,8 +45,6 @@
 # 2002-05-25	Soon-Son Kwon	<kss@kldp.org>
 #   * Added more translation including Forum, Tracker, CVS
 #
-about_foundries	about_blurb	Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >저희에게 연락해</a> 주십시오.
-about_foundries	foundries_list	시스템의 모든 Foundry에 관한 정보입니다. 어떤 것은 다른 것에 비해 좀더 완성도가 높습니다. 만약 여러분께서 공헌하고자 하시는 Foundry가 있다면 해당 Foundry의 관리자에게 연락하시기 바랍니다.
 account	title	사용자 등록 정보
 account_change_email	message	$3의 이메일 주소를 변경하는 과정입니다.\n다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
 account_change_email	section	사용자 등록 정보
