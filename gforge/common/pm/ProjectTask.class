@@ -159,9 +159,13 @@ class ProjectTask extends Error {
 			return false;
  		}
 
-		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
-
-		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+		if (!$parent_id) {
+			$parent_id=0;
+		}
+		if (!$duration) {
+			$duration=0;
+		}
+		if (!$this->ProjectGroup->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -768,6 +772,9 @@ class ProjectTask extends Error {
 
 		if (!$parent_id) {
 			$parent_id=0;
+		}
+		if (!$duration) {
+			$duration=0;
 		}
 		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
 
