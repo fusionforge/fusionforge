@@ -106,24 +106,27 @@ install: build
 	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	#
+	install -m 755 cronjobs/calculate_user_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/project_cleanup.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/rating_stats.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/calculate_user_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/db_project_sums.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/check_stale_tracker_items.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	#
-	install -m 755 deb-specific/get_news_notapproved.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
-	install -m 755 deb-specific/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	#
 	install -m 755 cronjobs/site_stats.php        $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/stats_site.inc        $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
 	install -m 755 cronjobs/stats_projects.inc    $(CURDIR)/debian/gforge-db-postgresql/usr/share/gforge/cronjobs/
+	#
+	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	
+	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	#
+	install -m 755 deb-specific/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	#
+	install -m 755 deb-specific/get_news_notapproved.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	#
 	install -m 755 deb-specific/install-db.sh     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 deb-specific/db-upgrade.pl     $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
