@@ -144,6 +144,8 @@ function project_summary($group_id,$mode,$no_table) {
 		}
 	}
 
+	// ##################### Doc Manager
+
 	if ($project->usesForum()) {
 		$return .= '
 
