@@ -475,8 +475,17 @@ class ProjectTask extends Error {
 		return true;
 	}
 
-	function delete() {
-
+	/**
+	 *  delete - delete this tracker and all its related data.
+	 *
+	 *  @param  bool	I'm Sure.
+	 *  @return bool true/false;
+	 */
+	function delete($sure) {
+		if (!$sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
 		if (!$this->ProjectGroup->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -572,12 +581,23 @@ class ProjectTask extends Error {
 	 * @returns	boolean	success.
 	 */
 	function addMessage($message) {
-		$sql="INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
-			VALUES ('". $this->getID() ."','". htmlspecialchars($message) ."','".user_getid()."','". time() ."')";
-		$res=db_query($sql);
-		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('AddMessage():: '.db_error());
-			return false;
+		//prevent posting the same message
+		if ($this->getDetails() == htmlspecialchars($message)) {
+			return true;
+		}
+		$res=db_query("SELECT * FROM project_messages 
+			WHERE project_task_id='".$this->getID()."'
+			AND body='". htmlspecialchars($message) ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$sql="INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
+				VALUES ('". $this->getID() ."','". htmlspecialchars($message) ."','".user_getid()."','". time() ."')";
+			$res=db_query($sql);
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError('AddMessage():: '.db_error());
+				return false;
+			} else {
+				return true;
+			}
 		} else {
 			return true;
 		}
@@ -640,6 +660,9 @@ class ProjectTask extends Error {
 //
 //	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!! 
 //
+		if (!$arr_ || empty($arr_)) {
+			$arr_=array('100'=>PM_LINK_DEFAULT);
+		}
 		$arr =& array_keys($arr_);
 		//get existing dependencies to diff against
 		$arr2 =& array_keys($this->getDependentOn());
