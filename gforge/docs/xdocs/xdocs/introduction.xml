@@ -70,7 +70,7 @@ The system provides also  a classification system of the projects and a user pro
 <p>
 GForge is a fork of the 2.61 SourceForge code, which was only available via anonymous CVS from VA (Research|Linux|Software).
 <br/>
-<a href="http://gforge.org">gforge.org</a> is not a project hosting platform, it is merely an implementation of the GForge code, which is available for public download on the right hand side of this page. 
+<a href="http://gforge.org">gforge.org</a> is not a project hosting platform, it is merely an implementation of the GForge code.
 <br/>
 We believe that the GForge functionality is important not only to the Open Source community, but to the wider business community. Since VA has not released the source in over one year, despite their promises to the contrary, a fork was necessary to ensure a viable open source version of the codebase.
 <br/>
@@ -78,19 +78,19 @@ The GForge project was formed and is maintained by Tim Perdue, the original auth
 <br/>
 Major changes are present in the current GForge 3.0 codebase:
 <ul>
-<li><b>Jabber Support!</b><br/>
+<li><b>Jabber Support</b><br/>
  System events, such as bug submissions, are optionally sent via jabber and email
 </li>
-<li><b>Radically easier to install!</b><br/>
- By removing SF.net-specific code, like caching and image servers, many install dependencies could be eliminated.
+<li><b>Radically easier to install</b><br/>
+ By removing SF.net-specific code, like caching and image servers, many install dependencies have been eliminated.
 </li>
-<li><b>New interface.</b><br/>
- The interface should make it easier to navigate as well as know your present location.
+<li><b>New interface</b><br/>
+ The interface makes it easier to navigate as well as know your present location.
 </li>
-<li><b> Code cleanup.</b><br/>
- Since GForge does not need to scale to 500,000+ users, many hacks and optimizations can be removed.
+<li><b>Code cleanup</b><br/>
+ Since GForge does not need to scale to 500,000+ users, many hacks and optimizations have been removed
 </li>
-<li><b>Foundries and related nonsense have been removed.</b><br/> 
+<li><b>Foundries and related nonsense have been removed</b><br/> 
 </li>
 </ul>
 
