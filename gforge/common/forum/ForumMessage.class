@@ -98,6 +98,9 @@ class ForumMessage extends Error {
 				return false;
 			}
 		}
+		if (!$is_followup_to) { 
+			$is_followup_to=0; 
+		}
 
 		//see if that message has been posted already for all the idiots that double-post
 		$res3=db_query("SELECT * FROM forum 
