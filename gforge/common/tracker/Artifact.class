@@ -750,7 +750,8 @@ class Artifact extends Error {
 		if ($new_artifact_type_id != $artifact_type_id) {
 			$newArtifactType= new ArtifactType($this->ArtifactType->getGroup(), $new_artifact_type_id);
 			if (!is_object($newArtifactType) || $newArtifactType->isError()) {
-				$this->setError('Artifact: Could not move to new ArtifactType'.$newArtifactType->getErrorMessage());
+				$this->setError('Artifact: Could not move to new ArtifactType'. $newArtifactType->getErrorMessage());
+				db_rollback();
 				return false;
 			}
 			//	do they have perms for new ArtifactType?
