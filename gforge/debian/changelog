@@ -10,6 +10,7 @@ sourceforge (2.5-29+) unstable; urgency=low
   * [Roland] Fixed user in crontab (for the DNS stuff) (closes: #147434).
   * [Roland] Fixed bug in the "Submit a bug" form: all bug admins are able
     to assign a bug from the start, not just project admins.
+  * [Soon-Son] applied patch for bug # 148(savannah project page).
 
  -- Roland Mas <lolando@debian.org>  Thu, 30 May 2002 17:27:18 +0200
 

@@ -191,7 +191,7 @@ $HTML->box1_top("File Releases"); ?>
 	</CENTER>
 
 	<HR>
-	<B>Packages:</B> <A href="/docman/display_doc.php?docid=780&group_id=1">Documentation</A> (Very Important!)
+	<B>Packages:</B>
 
 	<P><?php
 
