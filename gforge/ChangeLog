@@ -1,3 +1,7 @@
+2003-12-30  Tim Perdue  <tim@perdue.net>
+
+	* Adding cvs history_parse.php written by Brett N DiFrischia (orderthruchaos)
+
 2003-12-18  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* common/include/GForge.class: Only count public projects and

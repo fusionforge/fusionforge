@@ -1,176 +1,202 @@
-#! /usr/bin/php4 -f
+#!/usr/bin/php -q
 <?php
 
 require_once('squal_pre.php');
 require ('common/include/cron_utils.php');
+
 /**
  *
  * Recurses through the /cvsroot directory tree and parses each projects
  * '~/CVSROOT/history' file, building agregate stats on the number of
  * checkouts, commits, and adds to each project over the past 24 hours.
  *
- * @version   $Id$
+ * @version	 $Id$
  */
 
-$cvsroot="/cvsroot";
-if (!chdir($cvsroot)) {
-	$err .=("Unable to make $cvsroot the working directory.\n");
-	exit;
+$ARGV = $GLOBALS['argv'];
+$verbose = 1;
+$base_log_dir = "/home/bnd/cvs_log";
+$cvsroot = "/cvsroot";
+
+if ( $ARGV[1] && $ARGV[2] && $ARGV[3] ) {
+
+	$day_begin = gmmktime( 0, 0, 0, $ARGV[2], $ARGV[3], $ARGV[1] );
+	//	$day_begin = timegm( 0, 0, 0, $ARGV[2], $ARGV[1] - 1, $ARGV[0] - 1900 );
+	$day_end = $day_begin + 86400;
+
+	$year = $ARGV[1];
+	$month = $ARGV[2];
+	$day = $ARGV[3];
+
+} else {
+	$local_time = localtime();
+		## Start at midnight last night.
+	$day_end = gmmktime( 0, 0, 0, $local_time[4] + 1, $local_time[3], $local_time[5] );
+
+	//	$day_end = gmmktime( 0, 0, 0, (gmtime( time() ))[3,4,5] );
+					 ## go until midnight yesterday.
+	$day_begin = $day_end - 86400;
+	//	$day_begin = timegm( 0, 0, 0, (gmtime( time() - 86400 ))[3,4,5] );
+
+	$year	= gmstrftime("%Y", $day_begin );
+	$month	= gmstrftime("%m", $day_begin );
+	$day	= gmstrftime("%d", $day_begin );
 }
 
-function rundate($historyfile, $group_id, $mon, $day, $year, $day_begin, $day_end) {
-	global $cvsroot;
-	$cvs_co=$cvs_commit=$cvs_add=0;
-	
-	for ($i=0; $i<=count($historyfile)-1; $i++) {
-		# Split the cvs history entry into its 6 fields.
-		$fields = explode('|',trim($historyfile[$i]));
-		$cvstime=$fields[0];	
-		$user=$fields[1];	
-		$curdir=$fields[2];	
-		$module=$fields[3];	
-		$rev=$fields[4];	
-		$file=$fields[5];	
+/*
+$err .= <<<EOF
+db: $day_begin
+de: $day_end
+dy: $day
+mn: $month
+yr: $year
+EOF;
+*/
+
+$month_string = sprintf( "%04d%02d", $year, $month );
+// $err .= "$month_string\n";
+
+if ( $verbose ) {
+	$err .= "Parsing cvs logs looking for traffic on day $day, " .
+	"month $month, year $year.\n";
+}
+
+db_begin();
+
+$root_dir =& opendir( $cvsroot );
+while ( $group = readdir( $root_dir ) ) {
+	if ( $group == '.' || $group == '..' ) 
+		continue;
+	if ( ! is_dir( "$cvsroot/$group" ) ) 
+		continue;
+
+	//$err .= "\n$group\n\n";
+
+	$group_res = db_query( "SELECT group_id FROM groups WHERE
+		unix_group_name='$group' AND
+		status='A'" );
+	$group_id_row_count = db_numrows($group_res);
+	if ( $group_id_row = db_fetch_array($group_res) ) {
+		$group_id = $group_id_row['group_id'];
+	} else {
+		$err .= "Group $group does not appear to be active...	skipping.\n";
+		continue;
+	}
+	if ( $group_id_row_count > 1 ) {
+		$err .= "Group results are ambiguous... using group_id $group_id.\n";
+	}
+
+	$cvs_co		= 0;
+	$cvs_commit = 0;
+	$cvs_add	= 0;
+	$usr_commit = array();
+	$usr_add	= array();
+
+	$hist_file =& fopen( "$cvsroot/$group/CVSROOT/history", 'r' );
+	if ( ! $hist_file ) 
+		continue;
+	$hist_cont = fread( $hist_file, filesize( "$cvsroot/$group/CVSROOT/history" ) );
+	fclose( $hist_file );
+	$hist_lines = explode( "\n", $hist_cont );
+
+	foreach ( $hist_lines as $hist_line ) {
+		if ( preg_match( '/^\s*$/', $hist_line ) ) 
+			continue;
+		list( $cvstime,$user,$curdir,$module,$rev,$file ) = explode( '|', $hist_line );
 
 		$type = substr($cvstime, 0, 1);
 		$time_parsed = hexdec( substr($cvstime, 1, 8) );
-	
-		## See if the entry was made for the specified day
-		if ($time_parsed > $day_begin && $time_parsed < $day_end) {
-			if ($type == "M") {
+
+		if ( ($time_parsed > $day_begin) && ($time_parsed < $day_end) ) {
+			// $err .= "type = $type, tp = $time_parsed\n";
+
+			if ( $type == "M" ) {
 				$cvs_commit++;
-			} elseif ( $type == "A" ) {
-				$cvs_add++;
-			} elseif ( $type == "O" ) {
-				$cvs_co++;
+				$usr_commit{$user}++;
+
+				// $err .= "Commit:	$cvs_commit\n";
+				// $err .= "User:		$user\n";
+				// $err .= "UserCom: " . $usr_commit{$user} . "\n";
+				next;
 			}
+
+			if ( $type == "A" ) {
+				$cvs_add++;
+				$usr_add{$user}++;
+				// $err .= "Add	 :	$cvs_add\n";
+				// $err .= "User:		$user\n";
+				// $err .= "UserAdd: " . $usr_add{$user} . "\n";
+				next;
+			}
+
+			if ( $type == "O" ) {
+				$cvs_co++;
+				// we don't care about checkouts on a per-user
+				// most of them will be anon anyhow.
+				// $err .= "CO		:	$cvs_co\n";
+				next;
+			}
+
+		} elseif ( $time_parsed > $day_end ) {
+			if ( $verbose >= 2 ) {
+				$err .= "Short circuting execution, parsed date " .
+					"exceeded current threshold.\n";
+			}
+			break;
 		}
+
 	}
 
-	$sql = "INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ('$year$mon','$day','$group_id',$cvs_co,$cvs_commit,$cvs_add)";
-	#$err .= $sql."\n";
-	$res = db_query($sql);	
+	$sql = "INSERT INTO stats_cvs_group
+		(month,day,group_id,checkouts,commits,adds)
+		VALUES
+		('$month_string',
+		'$day',
+		'$group_id',
+		'$cvs_co',
+		'$cvs_commit',
+		'$cvs_add')";
+
+	if ( $verbose ) 
+		$err .= "$sql\n";
+	db_query( $sql );
 	$err .= db_error();
-}
 
-function generateTodayStats($historyfile, $group_id) {
-	$today=mktime();
-	$yesterday=mktime(0,0,0,strftime("%m", $today), strftime("%d", $today)-1, strftime("%Y", $today));
-	$day = strftime("%d", $yesterday);
-	$month = strftime("%m", $yesterday);
-	$year = strftime("%Y", $yesterday);
-	rundate($historyfile, $group_id, $month, $day, $year, $yesterday, $today);
-}
+	$user_list = array_unique( array_merge( array_keys( $usr_add ), array_keys( $usr_commit ) ) );
 
-function generateStats($historyfile, $group_id, $days) {
-	for ($i =0; $i<$days; $i++) {
-		$day_begin=mktime(0,0,0,5,1 + $i, 2003);
-		$day_end=mktime(0,0,0,5,1 + $i +1, 2003);
-		$day = strftime("%d", $day_begin);
-		$month = strftime("%m", $day_begin);
-		$year = strftime("%Y", $day_begin);
-		rundate($historyfile, $group_id, $month, $day, $year, $day_begin, $day_end);
-	}
-}
-function delete() {
-	$sql = "delete from stats_cvs_group";
-	$res = db_query($sql);	
-	$err .= db_error();
-}
+	foreach ( $user_list as $user ) {
+		//$err .= "$user\n";
 
-if ($argv[1] != nil && $argv[1] == "delete") {
-	delete();
-	exit();
-}
+		$user_res = db_query( "SELECT user_id FROM users WHERE
+			user_name='$user'" );
+		if ( $user_row = db_fetch_array($user_res) ) {
+			$user_id = $user_row['user_id'];
+		} else {
+			$err .= "User $user was not found...	skipping.\n";
+			continue;
+		}
 
-# get each group
-$sql = "select group_id, unix_group_name from groups where status='A'";
-$result = db_query($sql);
-$ids = util_result_column_to_array($result,0);
-$names = util_result_column_to_array($result,1);
-for ($i=0; $i<count($ids); $i++) {
-	$group_id=$ids[$i];
-	$group=$names[$i];
-	if (!file_exists($group)) {
-		continue;
+		$sql = "INSERT INTO stats_cvs_user
+			(month,day,group_id,user_id,commits,adds) VALUES
+			('$month_string',
+			'$day',
+			'$group_id',
+			'$user_id',
+			'" . ($usr_commit{$user}?$usr_commit{$user}:0) . "',
+			'" . ($usr_add{$user}?$usr_add{$user}:0) . "')";
+
+		if ( $verbose ) {
+			$err .= "$sql\n";
+		}
+		db_query( $sql );
+		$err .= db_error();
+
 	}
 	
-	$err .= "Processing group $group\n";
-	$historyfile = file("$cvsroot/$group/CVSROOT/history");
-	if (!$historyfile) {
-		$err .= "Unable to open history for $group\n";
-		continue;
-	}
-	if ($argv[1] == nil || $argv[1] == "") {
-		generateTodayStats($historyfile, $group_id);
-	} else {
-		generateStats($historyfile, $group_id, $argv[1]);
-	}
+
 }
 
-exit;
-
-
-/*
-## Set the time to collect stats for
-if ( $ARGV[0] && $ARGV[1] && $ARGV[2] ) {
-
-        $day_begin = mktime( 0, 0, 0, $ARGV[2], $ARGV[1] - 1, $ARGV[0] - 1900 );
-        $day_end = mktime( 0, 0, 0, (gmtime( $day_begin + 86400 ))[3,4,5] );
-	
-$year = $ARGV[0];
-$month = $ARGV[1];
-	$day = $ARGV[2];
-
-} else {
-## Start at midnight last night.
-$day_end = mktime( 0, 0, 0, 8,4,2003);
-## go until midnight yesterday.
-$day_begin = mktime( 0, 0, 0, 8,3,2003);
-$year	= strftime("%Y", mktime( $day_begin ) );
-$month	= strftime("%m", mktime( $day_begin ) );
-$day	= strftime("%d", mktime( $day_begin ) );
-}
-*/
-/*
-if (file_exists("$base_log_dir")) {
-	$daily_log_file = $base_log_dir."/".s$err .=f("%04d", $year);
-	if (!file_exists("$daily_log_file")) {
-		$err .= "Making dest dir \'$daily_log_file\'\n";
-		mkdir( $daily_log_file, 0755 ) || die("Could not mkdir $daily_log_file");
-	} 
-	$daily_log_file = $daily_log_file."/".s$err .=f("%02d", $month);
-	if (!file_exists("$daily_log_file")) {
-		$err .= "Making dest dir \'$daily_log_file\'\n";
-		mkdir( $daily_log_file, 0755 ) || die("Could not mkdir $daily_log_file");
-	}
-	$daily_log_file = $daily_log_file."/cvs_traffic_".s$err .=f("%04d%02d%02d",$year,$month,$day).".log";
-} else {
-	die("Base log directory $base_log_dir does not exist!");
-}
-
-if (!fopen($daily_log_file, "w")) {
-	$err .= "Unable to open the log file $daily_log_file\n\n";
-	exit;
-}
-$err .= "Opened log file at \'$daily_log_file\' for writing...\n";
-*/
-/*
-	 ## Now, we'll $err .= all of the results for that project, in the following format:
-	 ## (G|U|E)::proj_name::user_name::checkouts::commits::adds
-	 ## If 'G', then record is group statistics, and field 2 is a space...
-	 ## If 'U', then record is per-user stats, and field 2 is the user name...
-	 ## If 'E', then record is an error, and field 1 is a description, there are no other fields.
-	if ( $cvs_co || $cvs_commit || $cvs_add ) {
-		$err .= "DATA\n";
-		$err .= 'DAYS_LOG "G::" . $group . ":: ::" . ($cvs_co?$cvs_co:"0") . "::" . ($cvs_commit?$cvs_commit:"0") . "::" . ($cvs_add?$cvs_add:"0") . "\n"';
-		$keys = array_keys($usr_commit);
-		foreach ($keys as $key) {
-			$err .= 'DAYS_LOG "U::" . $group . "::" . $key . "::0::" . ($usr_commit[$key]?$usr_commit[$key]:"0") . "::" . ($usr_add[$key]?$usr_add[$key]:"0") . "\n"';
-		}
-	}
-*/
-
+db_commit();
 cron_entry(14,$err);
 
 ?>
