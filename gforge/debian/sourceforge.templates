@@ -151,25 +151,6 @@ Description: The LDAP host
 Description-fr: Le serveur LDAP
  Le nom d'hôte de votre serveur LDAP.
 
-Template: sourceforge/web_only
-Type: boolean
-Default: false
-Description: Do you want only the web-related features?
- Answering "yes" here will only install the web-related part of
- Sourceforge, giving you features such as the bug tracker, task manager,
- forums, news, support requests, etc.
- .
- Answering "no" will also install support for automated DNS, CVS, shell
- accounts, LDAP, etc. (default).
-Description-fr: Voulez-vous vous limiter aux fonctions web ?
- Si vous répondez "oui", seules les fonctions web de Sourceforge seront
- activées : l'outil de gestion de bogues, le gestionnaire de tâches, les
- forums, les nouvelles, les requêtes de support, etc.
- .
- Si vous répondez "non", seront également installées les automatisations
- de DNS, CVS, les comptes Unix, l'annuaire LDAP, etc.  C'est l'option par
- défaut.
-
 Template: sourceforge/noreply_to_bitbucket
 Type: boolean
 Default: true
@@ -224,3 +205,27 @@ Description-fr: N'oubliez pas de générer un certificat SSL
  .
  NB : vous ne pourrez pas démarrer Apache si vous n'avez pas de
  certificat.
+
+Template: sourceforge/pam_ldap_config
+Type: note
+Description: Sourceforge requires appropriate PAM-LDAP configuration
+ Sourceforge requires the libpam-ldap package to be configured
+ appropriately.  You might need to "dpkg-reconfigure libpam-ldap" in
+ order to fix incorrect parameters.
+ .
+ Known good values are: LDAP protocol version=3, make root database
+ admin=yes, root login account="cn=admin,dc=<your-dc-here>", crypt to
+ use for passwords=crypt.  Make sure that you type the same password
+ for the libpam-ldap root password and the Sourceforge LDAP password.
+Description-fr: Sourceforge a besoin d'une configuration PAM-LDAP correcte
+ Sourceforge repose sur PAM-LDAP, et a donc besoin d'une configuration
+ appropriée de cette bibliothèque.  Il se peut que vous ayez besoin
+ d'utiliser "dpkg-reconfigure libpam-ldap" pour corriger des
+ paramètres incorrects.
+ .
+ Un jeu de paramètrs réputés corrects est le suivant: LDAP protocol
+ version="3", make root database admin="yes", root login
+ account="cn=admin,dc=<votre-dc>", crypt to use for
+ passwords="crypt".  En outre, vous devrez utiliser le même mot de
+ passe pour le compte administrateur de libpam-ldap et pour le mot de
+ passe LDAP de Sourceforge.
