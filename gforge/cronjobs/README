@@ -1,7 +1,8 @@
 #
-# SourceForge: Breaking Down the Barriers to Open Source Development
+# GForge
 # Copyright 1999-2001 (c) VA Linux Systems
-# http://sourceforge.net
+# Copyright 2002-2003 (c) GForge, LLC
+# http://gforge.org/
 #
 # @version   $Id$
 #
@@ -9,59 +10,59 @@
 #
 #       recalculate user popularity metric
 #
-10 1 * * * ~/alexandria/cronjobs/calculate_user_metric.php
+10 1 * * * ~/gforge3/cronjobs/calculate_user_metric.php
 
 #
 #  daily project_weekly_metric recalc
 #
-12 1 * * * ~/alexandria/cronjobs/project_weekly_metric.php
+12 1 * * * ~/gforge3/cronjobs/project_weekly_metric.php
 
 #
 #   daily deletion of sessions, closing jobs, etc
 #
-15 1 * * * ~/alexandria/cronjobs/project_cleanup.php
+15 1 * * * ~/gforge3/cronjobs/project_cleanup.php
 
 #
 #  daily crunching of survey data and other associated ratings
 #
-41 1 * * * ~/alexandria/cronjobs/rating_stats.php
+41 1 * * * ~/gforge3/cronjobs/rating_stats.php
 
 #
 #  daily crunching of project summary data (counts)
 #
-45 1 * * * ~/alexandria/cronjobs/db_project_sums.php
+45 1 * * * ~/gforge3/cronjobs/db_project_sums.php
 
 #
 #   daily recalculate of the sums under the trove map
 #
-50 1 * * * ~/alexandria/cronjobs/db_trove_maint.php
+50 1 * * * ~/gforge3/cronjobs/db_trove_maint.php
 
 #
 #	daily close pending artifacts
 #
-57 1 * * * ~/alexandria/cronjobs/check_stale_tracker_items.php
+57 1 * * * ~/gforge3/cronjobs/check_stale_tracker_items.php
 
 #
 #       VACUUM should be done after ALL OTHER JOBS
 #
-0 2 * * * ~/alexandria/cronjobs/vacuum.php
+0 2 * * * ~/gforge3/cronjobs/vacuum.php
 
 #
 #       Stats aggregation work
 #
-15 07 * * * ~/alexandria/cronjobs/db_stats_agg.php
+15 07 * * * ~/gforge3/cronjobs/db_stats_agg.php
 
 #
 #       daily rotation of the activity_log
 #
-0 0 * * * ~/alexandria/cronjobs/rotate_activity.php
+0 0 * * * ~/gforge3/cronjobs/rotate_activity.php
 
 #
 #       daily aggregating of the numbers
 #
-15 0 * * * ~/alexandria/cronjobs/site_stats.php
+15 0 * * * ~/gforge3/cronjobs/site_stats.php
 
 #
 # Hourly send pending massmailings, if any
 #
-47 * * * * ~/alexandria/cronjobs/massmail.php
+47 * * * * ~/gforge3/cronjobs/massmail.php

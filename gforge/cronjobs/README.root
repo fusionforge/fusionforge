@@ -21,24 +21,28 @@ same for /etc/shadow -> /etc/shadow.org /etc/passwd -> /etc/passwd.org
 The usergroup.php script will build on the .org file and place them in .new
 files.
 
+WHEN YOU ARE SURE IT WORKS AS EXPECTED, you can change usergroup.php 
+FILE_EXTENSION to '' instead of '.new'
+
+
 SAMPLE CRON ENTRIES
 
 #
 #	Create the /etc/* files
 #
-10 * * * * ~/alexandria/cronjobs/cvs-cron/usergroup.php
+10 * * * * ~/gforge3/cronjobs/cvs-cron/usergroup.php
 
 #
 #	Upload the SSH key files
 #
-15 * * * * ~/alexandria/cronjobs/cvs-cron/ssh_create.php
+15 * * * * ~/gforge3/cronjobs/cvs-cron/ssh_create.php
 
 #
 #	Create the blank cvs trees
 #
-20 * * * * ~/alexandria/cronjobs/cvs-cron/cvs.php
+20 * * * * ~/gforge3/cronjobs/cvs-cron/cvs.php
 
 #
 #	Daily stats collection
 #
-###incomplete 20 1 * * * ~/alexandria/cronjobs/cvs-cron/history_parse.php
+###incomplete 20 1 * * * ~/gforge3/cronjobs/cvs-cron/history_parse.php

@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -q -f
+#! /usr/bin/php4 -f
 <?php
 
 require_once('squal_pre.php');
@@ -10,7 +10,7 @@ define('DEFAULT_SHELL','/bin/bash'); //use /bin/grap for cvs-only
 define('USER_ID_ADD',10000);
 define('GROUP_ID_ADD',50000);
 define('USER_DEFAULT_GROUP','users');
-define('FILE_EXTENSION',''); // use .new when testing
+define('FILE_EXTENSION','.new'); // use .new when testing
 define('CVS_ROOT','/cvsroot/');
 
 if (!file_exists('/etc/passwd.org') || !file_exists('/etc/shadow.org') || file_exists('/etc/group.org')) {
