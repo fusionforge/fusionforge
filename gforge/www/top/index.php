@@ -28,6 +28,7 @@ $HTML->header(array('title'=>$Language->getText('top','title')));
 <li><a href="mostactive.php?type=week"><?php echo $Language->getText('top','active_weekly'); ?></a>
 <li><a href="mostactive.php"><?php echo $Language->getText('top','active_all_time'); ?></a>
 <br />&nbsp;
+<!--
 <li><a href="toplist.php?type=downloads"><?php echo $Language->getText('top','downloads'); ?></a>
 <li><a href="toplist.php?type=downloads_week"><?php echo $Language->getText('top','downloads_7_days'); ?></a>
 <br />&nbsp;
@@ -37,6 +38,7 @@ Measured by impressions of the <?php echo $GLOBALS['sys_name']?> 'button' logo
 <li><a href="toplist.php?type=forumposts_week"><?php echo $Language->getText('top','forum_posts'); ?></a>
 <br />&nbsp;
 <li><a href="topusers.php"><?php echo $Language->getText('top','highest_ranked_users'); ?></a>
+-->
 </ul>
 
 <?php
