@@ -1,3 +1,9 @@
+gforge (3.0-4+) unstable; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Wed, 20 Aug 2003 23:44:49 +0200
+
 gforge (3.0-4) unstable; urgency=low
 
   * [Roland] Make sure the $gforge_base_dn, ou=People,$gforge_base_dn and
