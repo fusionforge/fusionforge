@@ -396,6 +396,9 @@ class Jabber
 			if ($content["thread"]) {
 				$xml .= "<thread>" . $content["thread"] . "</thread>\n";
 			}
+			if ($content['subject']) { 
+				$xml .= "<subject>" . $content['subject'] . "</subject>\n"; 
+			}
 			
 			$xml .= "<body>" . $content["body"] . "</body>\n";
 			$xml .= $payload;
