@@ -28,7 +28,9 @@
 function report_header($title) {
 	global $HTML,$sys_name,$Language;
 	echo $HTML->header(array('title'=>" ".$Language->getText('reporting','title').": " . $title));
-	echo html_feedback_top($GLOBALS['feedback']);
+	if (isset($GLOBALS['feedback'])) {
+		echo html_feedback_top($GLOBALS['feedback']);
+	}
 	echo "<h2>".$Language->getText('reporting','subtitle',$sys_name)."</h2><p>";
 }
 
