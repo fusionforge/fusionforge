@@ -116,6 +116,9 @@ install: build
 	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/sf-register-theme $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
 
+	install -m 644 deb-specific/view_bug.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
+	install -m 644 deb-specific/view_patch.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
+
 	# sourceforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/sourceforge-mta-exim/usr/lib/sourceforge/bin/
 

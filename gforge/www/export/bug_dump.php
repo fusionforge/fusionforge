@@ -35,7 +35,7 @@ project</error>\n");
                   print(" <category_id>" . $row["category_id"] . "</category_id>\n");
                   print(" <submitted_by id='" . $row["submitted_by"] ."' name='$submitted_by'/>\n");
                   print(" <assigned_to id='" . $row["assigned_to"] ."' name='$assigned_to'/>\n");
-                  print(" <date>" . $row["date"] . "</date>\n");
+                  print(" <open_date>" . $row["open_date"] . "</open_date>\n");
                   print(" <summary>" . $row["summary"] . "</summary>\n");
                   print(" <details>" . $row["details"] . "</details>\n");
                   print(" <close_date>" . $row["close_date"] ."</close_date>\n");

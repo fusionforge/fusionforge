@@ -30,13 +30,16 @@ print("<?xml version=\"1.0\"?>
                  print(" <patch id='" . $row["patch_id"] . "'>\n");
                  print(" <group_id>" . $row["group_id"] . "</group_id>\n");
                  print(" <status_id>" . $row["status_id"] . "</status_id>\n");
+		 print(" <priority>" . $row["priority"] . "</priority>\n");
                  print(" <category_id>" . $row["category_id"] . "</category_id>\n");
                  print(" <submitted_by id='" . $row["submitted_by"] . "' name='$submitted_by'/>\n");
                  print(" <assigned_to id='" . $row["assigned_to"] . "' name='$assigned_to'/>\n");
                  print(" <open_date>" . $row["open_date"] . "</open_date>\n");
                  print(" <summary>" . $row["summary"] . "</summary>\n");
-                 print(" <code>" . $row["code"] . "</code>\n");
+                 print(" <details>" . $row["details"] . "</details>\n");
                  print(" <close_date>" . $row["close_date"] . "</close_date>\n");
+                 print(" <bug_group_id>" . $row["bug_group_id"] ."</bug_group_id>\n");
+                 print(" <resolution>" . $row["resolution"] ."</resolution>\n");
 
                  $res_hist = db_query("SELECT * FROM patch_history WHERE patch_id='" . $row["patch_id"] . "'");
                  while( $row2=db_fetch_array($res_hist) ) {
