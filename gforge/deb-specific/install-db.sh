@@ -218,8 +218,10 @@ EOF
 	else
 		DB=$db_name
 	fi
+	mkdir -p $(dirname $DUMPFILE)
 	echo "Dumping $DB database in $DUMPFILE"
-	su -s /bin/sh $DB -c /usr/lib/postgresql/bin/pg_dump $DB > $DUMPFILE
+	su -s /bin/sh $DB -c /usr/lib/postgresql/bin/pg_dump $DB > $DUMPFILE \
+	    || true
 	;;
     restore)
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
@@ -243,13 +245,17 @@ EOF
 	else
 		RESTFILE=/var/lib/gforge/dumps/db_dump
 	fi
-	echo "Restoring $RESTFILE"
-	su -s /bin/sh postgres -c "dropdb $db_name" || true
-	su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name"  || true
-	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE $db_name"
-        perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
-        perl -pi -e "s/$localtrust\n//" /etc/postgresql/pg_hba.conf
-        #perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf
-	/etc/init.d/postgresql reload
+	if [ -e $RESTFILE ] ; then
+	    echo "Restoring $RESTFILE"
+	    su -s /bin/sh postgres -c "dropdb $db_name" || true
+	    su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name"  || true
+	    su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE $db_name"
+	    perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
+	    perl -pi -e "s/$localtrust\n//" /etc/postgresql/pg_hba.conf
+            # perl -pi -e "s/host all 127.0.0.1 255.255.255.255 trust\n//" /etc/postgresql/pg_hba.conf
+	    /etc/init.d/postgresql reload
+	else
+	    echo "No $RESTFILE to restore, skipping"
+	fi
 	;;
 esac

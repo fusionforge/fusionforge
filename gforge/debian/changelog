@@ -1,8 +1,12 @@
-gforge (3.1-18+1) unstable; urgency=low
+gforge (3.1-19) unstable; urgency=medium
 
-  * 
+  * [Roland] Evidently *sigh* I now have to protect users against
+    themselves now.  You'd think they'd read package description, and not
+    deliberately install empty packages.  Fixed database dump for
+    transition so it doesn't fail (or do anything) if the database doesn't
+    exist (closes: #263349).
 
- -- Roland Mas <lolando@debian.org>  Tue,  3 Aug 2004 16:51:22 +0200
+ -- Roland Mas <lolando@debian.org>  Wed,  4 Aug 2004 21:03:09 +0200
 
 gforge (3.1-18) unstable; urgency=low
 
