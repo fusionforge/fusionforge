@@ -24,11 +24,12 @@ session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 // Builds role selection box with given selected item
 function member_role_box($name, $checked) {
 	global $member_roles;
+	global $Language;
 	if (!$member_roles) {
 		$sql="SELECT category_id,name FROM people_job_category";
 		$member_roles=db_query($sql);
 	}
-	return html_build_select_box($member_roles,$name,$checked,true,'Undefined');
+	return html_build_select_box($member_roles,$name,$checked,true,$Language->getText('project_admin_userpermedit','undefined'));
 }
 
 // Since there're lot of permissions, and each of them has complex
@@ -63,15 +64,15 @@ if ($submit || $form_unix_name) {
 		$u =& user_get_object_by_name($form_unix_name);
 		if (!$u || !is_object($u)){
 			exit_error(
-				'Invalid user',
-				'User does not exist.'
+				$Language->getText('project_admin_userpermedit','invalid_user'),
+				$Language->getText('project_admin_userpermedit','user_does_not_exist')
 			);
 		}
 
 		if (!$group->addUser($u->getUnixName())) {
 			exit_error('Error', $group->getErrorMessage());
 		} else {
-			$feedback = ' User Added Successfully<br />';
+			$feedback = $Language->getText('project_admin_userpermedit','user_added').' <br />';
 		}
 
 		$user_id = $u->getID();
@@ -173,7 +174,7 @@ if ($submit || $form_unix_name) {
 			//if no errors occurred, show just one feedback message
 			//instead of the coredump of messages;
 			if (!$was_error) {
-				$feedback = ' Permissions Updated<br />';
+				$feedback = $Language->getText('project_admin_userpermedit','permissions_updated').' <br />';
 			}
 		} else {
 			$feedback .= $group->getErrorMessage();
@@ -193,12 +194,11 @@ if ($submit || $form_unix_name) {
 	}
 }
 
-project_admin_header(array('title'=>'Project Developer Permissions','group'=>$group_id,'pagename'=>'project_admin_userpermedit','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_userpermedit','title'),'group'=>$group_id,'pagename'=>'project_admin_userpermedit','sectionvals'=>array(group_getname($group_id))));
 
 $u =& user_get_object($user_id);
 if ($u && is_object($u)){
-	print "You are editing permissions for user " . $u->getUnixName()
-		. " (" . $u->getRealName() . ").</p>
+	print $Language->getText('project_admin_userpermedit','editing_permissions',array($u->getUnixName(), $u->getRealName())). ".</p>
 <p>" ;
 }
 
@@ -213,7 +213,7 @@ $res_dev = db_query("
 ");
 
 if (!$res_dev || db_numrows($res_dev) < 1) {
-	echo '<h2>Developer Not Found In This Group</h2>';
+	echo '<h2>'.$Language->getText('project_admin_userpermedit','developer_not_found').'</h2>';
 	echo db_error();
 } else {
 	echo '
@@ -223,25 +223,25 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	$row_dev = db_fetch_array($res_dev);
 
 	$arr=array();
-	$arr[]='Property';
-	$arr[]='Value';
+	$arr[]=$Language->getText('project_admin_userpermedit','property');
+	$arr[]=$Language->getText('project_admin_userpermedit','value');
 
 	echo $GLOBALS['HTML']->listTableTop($arr);
 
 	render_row(
-		'Project role',
+		$Language->getText('project_admin_userpermedit','project_role'),
 		member_role_box('member_role',$row_dev['member_role']),
 		$i++
 	);
 
 	render_row(
-		'Project Admin',
+		$Language->getText('project_admin_userpermedit','project_admin'),
 		html_build_checkbox('admin_flags', 'A', stristr($row_dev['admin_flags'],'A')),
 		$i++
 	);
 
 	render_row(
-		'Release Technician',
+		$Language->getText('project_admin_userpermedit','release_technician'),
 		html_build_checkbox('release_flags', '1', $row_dev['release_flags']==1),
 		$i++
 	);
@@ -259,7 +259,7 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 */
 
 	render_row(
-		'Tracker Manager',
+		$Language->getText('project_admin_userpermedit','tracker_manager'),
 		html_build_select_box_from_arrays(
 			array(0,2),
 			array('-','Admin'),
@@ -269,10 +269,13 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	);
 
 	$tracker_ids   = array(0,1,2,3);
-	$tracker_texts = array('-','Technician','Admin & Tech','Admin');
+	$tracker_texts = array('-',
+		$Language->getText('project_admin_userpermedit','technician'),
+		$Language->getText('project_admin_userpermedit','admin_tech'),
+		$Language->getText('project_admin_userpermedit','admin'));
 
 	render_row(
-		'Project/Task Manager',
+		$Language->getText('project_admin_userpermedit','pm'),
 		html_build_select_box_from_arrays(
 			$tracker_ids,
 			$tracker_texts,
@@ -282,20 +285,20 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	);
 
 	render_row(
-		'Forums',
+		$Language->getText('project_admin_userpermedit','forums'),
 		html_build_select_box_from_arrays(
 			array(0,2),
-			array('-','Moderator'),
+			array('-',$Language->getText('project_admin_userpermedit','moderator')),
 			'forum_flags',$row_dev['forum_flags'],false
 		),
 		$i++
 	);
 
 	render_row(
-		'Documentation Manager',
+		$Language->getText('project_admin_userpermedit','docman'),
 		html_build_select_box_from_arrays(
 			array(0,1),
-			array('-','Editor'),
+			array('-',$Language->getText('project_admin_userpermedit','editor')),
 			'doc_flags',$row_dev['doc_flags'],false
 		),
 		$i++
@@ -321,10 +324,10 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 
 		<td><select name="updateperms['.$i.'][1]" style="font-size:smaller">
 		<option value="0"'.((db_result($res,$i,'perm_level')==0)?' selected="selected"':'').'>-</option>
-		<option value="1"'.((db_result($res,$i,'perm_level')==1)?' selected="selected"':'').'>Technician</option>
-		<option value="2"'.((db_result($res,$i,'perm_level')==2)?' selected="selected"':'').'>Tech & Admin</option>
-		<option value="3"'.((db_result($res,$i,'perm_level')==3)?' selected="selected"':'').'>Admin Only</option>
-		</select>  <input type="checkbox" name="deletefrom[]" value="'. db_result($res,$i,'group_artifact_id').'" /> Remove</td>
+		<option value="1"'.((db_result($res,$i,'perm_level')==1)?' selected="selected"':'').'>'.$Language->getText('project_admin_userpermedit','technician').'</option>
+		<option value="2"'.((db_result($res,$i,'perm_level')==2)?' selected="selected"':'').'>'.$Language->getText('project_admin_userpermedit','admin_tech').'</option>
+		<option value="3"'.((db_result($res,$i,'perm_level')==3)?' selected="selected"':'').'>'.$Language->getText('project_admin_userpermedit','admin_only').'</option>
+		</select>  <input type="checkbox" name="deletefrom[]" value="'. db_result($res,$i,'group_artifact_id').'" /> '.$Language->getText('project_admin_userpermedit','remove').'</td>
 
 		</tr>';
 	}
@@ -332,18 +335,15 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	?>
 
 	<tr><td colspan="2"><p align="center">
-		<input type="submit" name="submit" value="Update Developer Permissions" />
-		<input type="reset" value="Reset Changes" />
+		<input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_userpermedit','update_permissions') ?>" />
+		<input type="reset" value="<?php echo $Language->getText('project_admin_userpermedit','reset_changes') ?>" />
 		</form></p>
 	</td></tr>
 
 	<?php echo $GLOBALS['HTML']->listTableBottom(); ?>
 
 	<p>&nbsp;</p>
-	<h3>Add User To These Trackers:</h3>
-	<p>
-	You can pick and choose which trackers this user has any privileges in,
-	or simply add the user to all trackers by checking "Add To All".</p>
+	<?php echo $Language->getText('project_admin_userpermedit','tracker_info') ?>
 	<div align="center">
 	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&user_id='.$user_id ?>" method="post">
 	<input type="hidden" name="addtotracker" value="y" />
@@ -360,7 +360,7 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	echo db_error();
 	echo html_build_multiple_select_box ($res,'addtoids[]',array(),8,false);
 	echo '<p>
-	<input type="submit" name="submit" value="Add To Tracker" />&nbsp;<input type="checkbox" name="add_all" /> Add To All</p>
+	<input type="submit" name="submit" value="'.$Language->getText('project_admin_userpermedit','add_to_tracker').'" />&nbsp;<input type="checkbox" name="add_all" /> '.$Language->getText('project_admin_userpermedit','add_to_all').'</p>
 	</form></div>';
 
 }

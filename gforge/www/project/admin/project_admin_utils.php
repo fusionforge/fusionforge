@@ -42,17 +42,17 @@ function project_admin_header($params) {
 	if ($is_admin) {
 		echo ($HTML->subMenu(
 			array(
-			'Admin',
-			'User Permissions',
-			'Edit Public Info',
-			'Project History',
-			'VHOSTs',
-			'Edit/Release Files',
-			'Post Jobs',
-			'Edit Jobs',
-			'Edit Multimedia Data',
-			'Database Admin',
-			'Stats'),
+			$Language->getText('project_admin_utils','admin'),
+			$Language->getText('project_admin_utils','user_permissions'),
+			$Language->getText('project_admin_utils','edit_public_info'),
+			$Language->getText('project_admin_utils','project_history'),
+			$Language->getText('project_admin_utils','vhosts'),
+			$Language->getText('project_admin_utils','edit_release_files'),
+			$Language->getText('project_admin_utils','post_jobs'),
+			$Language->getText('project_admin_utils','edit_jobs'),
+			$Language->getText('project_admin_utils','multimedia_data'),
+			$Language->getText('project_admin_utils','database_admin'),
+			$Language->getText('project_admin_utils','stats')),
 			array   (
 			'/project/admin/?group_id='.$group_id,
 			'/project/admin/userperms.php?group_id='.$group_id,
@@ -68,9 +68,9 @@ function project_admin_header($params) {
 	} else {
 		echo ($HTML->subMenu(
 			array(
-			'Admin',
-			'Edit/Release Files',
-			'Stats'),
+			$Language->getText('project_admin_utils','admin'),
+			$Language->getText('project_admin_utils','edit_release_files'),
+			$Language->getText('project_admin_utils','stats')),
 			array   (
 			'/project/admin/?group_id='.$group_id,
 			'/project/admin/editpackages.php?group_id='.$group_id,
@@ -233,20 +233,20 @@ function show_grouphistory ($group_id) {
 		show the group_history rows that are relevant to 
 		this group_id
 	*/
-	global $sys_datefmt;
+	global $sys_datefmt, $Language;
 	$result=group_get_history($group_id);
 	$rows=db_numrows($result);
 	
 	if ($rows > 0) {
 	
 		echo '
-		<h3>Group Change History</h3>
+		<h3>'.$Language->getText('project_admin_utils','change_history').'</h3>
 		<p>';
 		$title_arr=array();
-		$title_arr[]='Field';
-		$title_arr[]='Old Value';
-		$title_arr[]='Date';
-		$title_arr[]='By';
+		$title_arr[]=$Language->getText('project_admin_utils','field');
+		$title_arr[]=$Language->getText('project_admin_utils','old_value');
+		$title_arr[]=$Language->getText('project_admin_utils','date');
+		$title_arr[]=$Language->getText('project_admin_utils','by');
 		
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
@@ -269,7 +269,7 @@ function show_grouphistory ($group_id) {
 
 	} else {
 		echo '  
-		<h3>No Changes Have Been Made to This Group</h3>';
+		<h3>'.$Language->getText('project_admin_utils','no_changes').'</h3>';
 	}	   
 }	   
 
@@ -334,40 +334,9 @@ function random_pwgen() {
 }
 
 function permissions_blurb() {
-	return '
-	<strong>NOTE:</strong>
-
-	<dl>
-	<dt><strong>Project Admins (bold)</strong></dt>
-	<dd>can access this page and other project administration pages</dd>
-
-	<dt><strong>Release Technicians</strong></dt>
-	<dd>can make the file releases (any project admin also a release technician)</dd>
-	'.
-
-	/*
-	'<dt><strong>CVS Admins</strong></dt>
-	<dd><!-- can --> <em>will</em> be able to access repository files directly (in addition to standard write access)</dd>
-	'.
-	*/
-
-	'<dt><strong>Tool Technicians (T)</strong></dt>
-	<dd>can be assigned Bugs/Tasks/Patches</dd>
-
-	<dt><strong>Tool Admins (A)</strong></dt>
-	<dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd>
-
-	<dt><strong>Tool No Permission (N/A)</strong></dt>
-	<dd>Developer doesn\'t have specific permission (currently
-	equivalent to \'-\')</dd>
-
-	<dt><strong>Moderators</strong> (forums)</dt>
-	<dd>can delete messages from the project forums</dd>
-
-	<dt><strong>Editors</strong> (doc. manager)</dt>
-	<dd>can update/edit/remove documentation from the project.</dd>
-	</dl>
-	';
+	global $Language;
+	
+	return $Language->getText('project_admin_utils','permission_blurb');
 }
 
 ?>

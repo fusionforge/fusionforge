@@ -45,7 +45,7 @@ function role_id2str($role_id) {
 // Render table row of developer's permissions
 function show_permissions_row($i, $row_dev) {
 	global $group_id;
-
+	global $Language;
 	// Show admins in bold
 	if (stristr($row_dev['admin_flags'],'A')) {
 		$name = '<strong>'.$row_dev['user_name'].' ('.$row_dev['realname'].')</strong>';
@@ -59,7 +59,7 @@ function show_permissions_row($i, $row_dev) {
 	.'<a href="userpermedit.php?group_id='.$group_id
 	.'&amp;user_id='.$row_dev['user_id'].'">'.$name.'</a><br />'
 	.role_id2str($row_dev['member_role'])
-	.(($row_dev['release_flags']==1)?', Rel.Tech.':'')
+	.(($row_dev['release_flags']==1)?', '.$Language->getText('project_admin_userperms','rel_tech'):'')
 	.'</td>';
 
 /*
@@ -77,11 +77,11 @@ function show_permissions_row($i, $row_dev) {
 	print '<td>'.$flag2perm[$row_dev['project_flags']].'</td>';
 
 	// forum permissions
-	$forum2perm = array(0=>'-',2=>'Moderator');
+	$forum2perm = array(0=>'-',2=>$Language->getText('project_admin_userperms','moderator'));
 	print '<td>'.$forum2perm[$row_dev['forum_flags']].'</td>';
 
 	// documenation manager permissions
-	$forum2perm = array(0=>'-',1=>'Editor');
+	$forum2perm = array(0=>'-',1=>$Language->getText('project_admin_userperms','editor'));
 
 	print '<td>'.$forum2perm[$row_dev['doc_flags']].'</td>';
 
@@ -96,25 +96,25 @@ function show_permissions_row($i, $row_dev) {
 $group =& group_get_object($group_id);
 exit_assert_object($group, 'Group');
 
-project_admin_header(array('title'=>'Project Developer Permissions','group'=>$group_id,'pagename'=>'project_admin_userperms','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_userperms','title'),'group'=>$group_id,'pagename'=>'project_admin_userperms','sectionvals'=>array(group_getname($group_id))));
 
 ?>
 
 <p>&nbsp;</p>
-<p>Click developer's name below to edit permissions.</p>
+<p><?php echo $Language->getText('project_admin_userperms','info') ?>.</p>
 <p>&nbsp;</p>
 
 <table width="100%" cellspacing="0" cellpadding="2" border="0">
 
 <tr align="center">
-<td><span style="font-size:smaller"><strong>General</strong></span></td>
+<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','general') ?></strong></span></td>
 <?php /*
 <td><font size="-1"><strong>CVS</strong></font></td>
 */ ?>
-<td><span style="font-size:smaller"><strong>Tracker<br />Manager</strong></span></td>
-<td><span style="font-size:smaller"><strong>Task<br />Manager</strong></span></td>
-<td><span style="font-size:smaller"><strong>Forums</strong></span></td>
-<td><span style="font-size:smaller"><strong>Doc.<br />Manager</strong></span></td>
+<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','tracker_manager') ?></strong></span></td>
+<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','task_manager') ?></strong></span></td>
+<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','forums') ?></strong></span></td>
+<td><span style="font-size:smaller"><strong><?php echo $Language->getText('project_admin_userperms','docman') ?></strong></span></td>
 </tr>
 <?php
 
@@ -137,7 +137,7 @@ project_admin_header(array('title'=>'Project Developer Permissions','group'=>$gr
 	");
 
 	if (!$res_dev || db_numrows($res_dev) < 1) {
-		echo '<h2>No Developers Found</h2>';
+		echo '<h2>'.$Language->getText('project_admin_userperms','no_developers').'</h2>';
 	} else {
 		$i = 0;
 

@@ -108,10 +108,17 @@ $graph->addDebug( $db_error );
 $graph->DrawGrid('gray');
 $graph->LineGraph( $data1, 'red' );
 $graph->LineGraph( $data2, 'blue' );
-$graph->SetTitle( "Sourceforge Statistics: " . group_getname($group_id) );
-$graph->SetSubTitle("Page Views (red) and Downloads (blue) for the past $j $unit");
-$graph->SetxTitle('Date');
-$graph->SetyTitle('Views (red) / Downloads (blue)');
+$graph->SetTitle($Language->getText('project_stats_graph','statistics', array($GLOBALS['sys_name'],group_getname($group_id))) );
+if ($unit=='days'){
+	$graph->SetSubTitle($Language->getText('project_stats_graph','page_view_days',array($j)));
+	}
+if ($unit=='months'){
+	$graph->SetSubTitle($Language->getText('project_stats_graph','page_view_months',array($j)));
+}
+
+$graph->SetxTitle($Language->getText('project_stats_graph','date'));
+$graph->SetyTitle($Language->getText('project_stats_graph','views'));
+
 $graph->DrawAxis();
 //$graph->showDebug();
 $graph->ShowGraph('png');

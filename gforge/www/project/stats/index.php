@@ -19,7 +19,7 @@ if ( !$group_id ) {
 	exit_no_group();
 }
 
-site_project_header(array('title'=>"Project statistics ".$groupname,'group'=>$group_id,'toptab'=>'home'));
+site_project_header(array('title'=>$Language->getText('project_stats','title')."".$groupname,'group'=>$group_id,'toptab'=>'home'));
 
 //
 // BEGIN PAGE CONTENT CODE
@@ -30,7 +30,7 @@ if (!$report) {
 }
 
 print '<div align="center">';
-print '<span style="font-size:bigger"><strong>Usage Statistics </strong></span><br />';
+print '<span style="font-size:bigger"><strong>'.$Language->getText('project_stats','usage_statistics').'</strong></span><br />';
 print '<img src="stats_graph.php?group_id='.$group_id.'&amp;report='. $report .'" />';
 print '</div>';
 
@@ -66,22 +66,22 @@ $reports_ids[]='last_30';
 $reports_ids[]='months';
 
 $reports_names=array();
-$reports_names[]='Last 7 Days';
-$reports_names[]='Last 30 Days';
-$reports_names[]='Monthly';
+$reports_names[]=$Language->getText('project_stats','last_7_days');
+$reports_names[]=$Language->getText('project_stats','last_30_days');
+$reports_names[]=$Language->getText('project_stats','monthly');
 
 ?>
 </p>
 <div align="center">
 <form action="index.php" method="get">
-View Reports:
+<?php echo $Language->getText('project_stats','view_reports') ?>:
 <?php
 
 	echo html_build_select_box_from_arrays($reports_ids, $reports_names, 'report', $report, false);
 
 ?>
 &nbsp; 
-<input type="submit" value="Change Stats View" />
+<input type="submit" value="<?php echo $Language->getText('project_stats','change_stats_view') ?>" />
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 </form>
 </div>
@@ -91,10 +91,10 @@ View Reports:
 if ($group_id && user_ismember($group_id)) {
 	print "
 	<p>
-	Detailed statistics for:
+	".$Language->getText('project_stats','detailed_statistics').":
 	<ul>
-	<li><a href=\"/tracker/?group_id=$group_id&period=$view&span=$span\">Tracker</a></li>
-	<li><a href=\"/pm/reporting/?group_id=$group_id&period=$view&span=$span\">Tasks</a></li>
+	<li><a href=\"/tracker/?group_id=$group_id&period=$view&span=$span\">".$Language->getText('project_stats','tracker')."</a></li>
+	<li><a href=\"/pm/reporting/?group_id=$group_id&period=$view&span=$span\">".$Language->getText('project_stats','tasks')."</a></li>
 	</ul>
 	</p>";
 }

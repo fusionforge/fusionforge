@@ -52,18 +52,18 @@ $res=db_query("SELECT p.name AS package_name,r.*
 	AND p.group_id='$group_id' 
 	AND p.package_id='$package_id'");
 if (!$res || db_numrows($res) < 1) {
-	exit_error('Error','No Releases Of This Package Are Available');
+	exit_error($Language->getText('general','error'),$Language->getText('project_admin_showreleases','no_release'));
 }
 
 /*
 	Display a list of releases in this package
 */
-project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_showreleases','title'),'group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
 
 $title_arr=array();
-$title_arr[]='Package Name';
-$title_arr[]='Release Name';
-$title_arr[]='Date';
+$title_arr[]=$Language->getText('project_admin_showreleases','package_name');
+$title_arr[]=$Language->getText('project_admin_showreleases','release_name');
+$title_arr[]=$Language->getText('project_admin_showreleases','date');
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -73,7 +73,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			<td><a href="editrelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id
 				.'&amp;release_id='.db_result($res,$i,'release_id').'">'. 
-				db_result($res,$i,'name').' [edit]</a></td><td>'.
+				db_result($res,$i,'name').' ['.$Language->getText('general','edit').']</a></td><td>'.
 				date('Y-m-d',db_result($res,$i,'release_date')).'</td></tr>';
 }
 

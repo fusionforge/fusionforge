@@ -44,24 +44,10 @@ if ($GLOBALS['submit'] && $root1) {
 	session_redirect('/project/admin/?group_id='.$group_id);
 }
 
-project_admin_header(array('title'=>'Group Trove Information','group'=>$group_id));
+project_admin_header(array('title'=>$Language->getText('project_admin_group_trove','title'),'group'=>$group_id));
 
 ?>
-
-<h3>Edit Trove Categorization</h3>
-
-<p>
-Select up to three locations for this project in each of the
-Trove root categories. If the project does not require any or all of these
-locations, simply select "None Selected".
-</p>
-
-<p>
-IMPORTANT: Projects should be categorized in the most specific locations
-available in the map. Simulteneous categorization in a specific category
-AND a parent category will result in only the more specific categorization
-being accepted.
-</p>
+<?php echo $Language->getText('project_admin_group_trove','intro') ?>
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 
@@ -93,7 +79,7 @@ while (list($catroot,$fullname) = each($CATROOTS)) {
 ?>
 
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<p><input type="submit" name="submit" value="Update All Category Changes" /></p>
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_group_trove','update_changes') ?>" /></p>
 </form>
 
 <?php

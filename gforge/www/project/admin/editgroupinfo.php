@@ -54,11 +54,11 @@ if ($submit) {
 	if (!res) {
 		$feedback .= $group->getErrorMessage();
 	} else {
-		$feedback .= 'Group information updated';
+		$feedback .= $Language->getText('project_admin_editgroupinfo','group_updated');
 	}
 }
 
-project_admin_header(array('title'=>'Edit Group Info','group'=>$group->getID(),'pagename'=>'project_admin_editgroupinfo','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_editgroupinfo','title').'','group'=>$group->getID(),'pagename'=>'project_admin_editgroupinfo','sectionvals'=>array(group_getname($group_id))));
 
 /* NOT ACTIVE YET
 
@@ -78,14 +78,14 @@ $images_res = db_query("
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group->getID(); ?>" />
 
-<p>Descriptive Group Name:
+<p><?php echo $Language->getText('project_admin_editgroupinfo','group_name') ?>:
 <br /><input type="text" name="form_group_name" value="<?php echo $group->getPublicName(); ?>" maxlength="40"></p>
 
-<p>Short Description (255 Character Max, HTML will be stripped from this description):
+<p><?php echo $Language->getText('project_admin_editgroupinfo','short_description') ?>:
 <br /><textarea cols="80" rows="3" wrap="virtual" name="form_shortdesc">
 <?php echo $group->getDescription(); ?></textarea></p>
 
-<p>Homepage Link:
+<p><?php echo $Language->getText('project_admin_editgroupinfo','homepage_link') ?>:
 <br /><tt>http://</tt><input type="text" name="form_homepage" size="40" value="<?php echo $group->getHomePage(); ?>" />
 <br />
 
@@ -103,7 +103,7 @@ $images_res = db_query("
 
 <hr />
 
-<h3>Active Features:</h3>
+<h3><?php echo $Language->getText('project_admin_editgroupinfo','active_features') ?>:</h3>
 <p>
 
 
@@ -130,7 +130,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> ><br />
 </td>
 <td>
-<strong>Use Mailing Lists</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_mailing_lists') ?></strong>
 </td>
 </tr>
 
@@ -139,7 +139,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> ><br />
 </td>
 <td>
-<strong>Use Surveys</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_surveys') ?></strong>
 </td>
 </tr>
 
@@ -148,7 +148,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_forum" value="1" <?php echo c($group->usesForum()); ?>  ><br />
 </td>
 <td>
-<strong>Use Forums</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_forums') ?></strong>
 </td>
 </tr>
 
@@ -157,7 +157,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> ><br />
 </td>
 <td>
-<strong>Use Project/Task Manager</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_pm') ?></strong>
 </td>
 </tr>
 
@@ -166,7 +166,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_cvs" value="1" <?php echo c($group->usesCVS()); ?> ><br />
 </td>
 <td>
-<strong>Use CVS</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_pm') ?></strong>
 </td>
 </tr>
 
@@ -175,7 +175,7 @@ function c($v) {
  <input type="CHECKBOX" name="enable_pserver" value="1" <?php echo c($group->enablePserver()); ?> ><br />
 </td>
 <td>
-<strong>Enable pserver</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_pserver') ?></strong>
 </td>
 </tr>
 
@@ -184,7 +184,7 @@ function c($v) {
  <input type="CHECKBOX" name="enable_anoncvs" value="1" <?php echo c($group->enableAnonCVS()); ?> ><br />
 </td>
 <td>
-<strong>Enable anonymous CVS</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_anonymous_cvs') ?></strong>
 </td>
 </tr>
 
@@ -193,7 +193,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_news" value="1" <?php echo c($group->usesNews()); ?> ><br />
 </td>
 <td>
-<strong>Use News</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_news') ?> </strong>
 </td>
 </tr>
 
@@ -202,7 +202,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> >
 </td>
 <td>
-<strong>Use Doc Mgr</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_docman') ?></strong>
 </td>
 </tr>
 
@@ -211,7 +211,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> >
 </td>
 <td>
-<strong>Use FTP</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_ftp') ?></strong>
 </td>
 </tr>
 
@@ -220,7 +220,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> >
 </td>
 <td>
-<strong>Use Tracker</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_tracker') ?></strong>
 </td>
 </tr>
 
@@ -229,7 +229,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> >
 </td>
 <td>
-<strong>Use File Release System</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_frs') ?></strong>
 </td>
 </tr>
 
@@ -238,7 +238,7 @@ function c($v) {
  <input type="CHECKBOX" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> >
 </td>
 <td>
-<strong>Use Statistics</strong>
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','use_stats') ?></strong>
 </td>
 </tr>
 
@@ -246,13 +246,13 @@ function c($v) {
 
 
 <p>
-If you wish, you can provide default email addresses to which new submissions will be sent.<br />
-<strong>New Document Submissions:</strong><br /><input type="TEXT" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" SIZE="25" MAXLENGTH="250">
-(send on all updates)
+<?php echo $Language->getText('project_admin_editgroupinfo','new_doc_info') ?>.<br />
+<strong><?php echo $Language->getText('project_admin_editgroupinfo','new_doc') ?>:</strong><br /><input type="TEXT" name="new_doc_address" value="<?php echo $group->getDocEmailAddress(); ?>" SIZE="25" MAXLENGTH="250">
+<?php echo $Language->getText('project_admin_editgroupinfo','send_on_all_updates') ?>
 <input type="CHECKBOX" name="send_all_docs" value="1" <?php echo c($group->docEmailAll()); ?> ><br />
 
 <hr />
-<p><input type="submit" name="submit" value="Update">
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('general','update') ?>">
 </form>
 
 <?php

@@ -34,6 +34,7 @@ function week_to_dates( $week, $year = 0 ) {
    // stats_project_daily
 function stats_project_daily( $group_id, $span = 7 ) {
 	global $HTML;
+	global $Language;
 
 	//
 	//	We now only have 30 & 7-day views
@@ -56,20 +57,20 @@ function stats_project_daily( $group_id, $span = 7 ) {
    // if there are any days, we have valid data.
 	if ( ($valid_days = db_numrows( $res )) > 0 ) {
 		?>
-		<p><strong>Statistics for the past <?php echo $valid_days; ?> days</strong></p>
+		<p><strong><?php echo $Language->getText('project_stats_utils','stats_for_days',array($valid_days )) ?></strong></p>
 
 		<p><table width="100%" cellpadding="0" cellspacing="1" border="0">
 			<tr valign="top">
-			<td><strong>Date</strong></td>
-			<td><strong>Rank</strong></td>
-			<td align="right"><strong>Page Views</strong></td>
-			<td align="right"><strong>D/l</strong></td>
-			<td align="right"><strong>Bugs</strong></td>
-			<td align="right"><strong>Support</strong></td>
-			<td align="right"><strong>Patches</strong></td>
-			<td align="right"><strong>All Trkr</strong></td>
-			<td align="right"><strong>Tasks</strong></td>
-			<td align="right"><strong>CVS</strong></td>
+			<td><strong><?php echo $Language->getText('project_stats_utils','date') ?></strong></td>
+			<td><strong><?php echo $Language->getText('project_stats_utils','rank') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','page_views') ?> </strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','dl') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','bugs') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','support') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','patches') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','all_tracker') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','tasks') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','CVS') ?></strong></td>
 			</tr>
 
 		<?php
@@ -96,7 +97,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 		<?php
 
 	} else {
-		echo "Project did not exist on this date.<p>";
+		echo $Language->getText('project_stats_utils','project_did_not_exits');
 		echo db_error() .'</p>';
 	}
 
@@ -105,6 +106,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
    // stats_project_monthly
 function stats_project_monthly( $group_id ) {
 	global $HTML;
+	global $Language;
 	$res = db_query("
 		SELECT * FROM stats_project_months 
 		WHERE group_id='$group_id'
@@ -115,20 +117,20 @@ function stats_project_monthly( $group_id ) {
 	if ( ($valid_months = db_numrows( $res )) > 1 ) {
 
 		?>
-		<p><strong>Statistics for the past <?php echo $valid_months; ?> months.</strong></p>
+		<p><strong><?php echo $Language->getText('project_stats_utils','stats_for_months',array($valid_months )) ?></strong></p>
 
 		<p><table width="100%" cellpadding="0" cellspacing="1" border="0">
 			<tr valign="top">
-			<td><strong>Month</strong></td>
-			<td><strong>Rank</strong></td>
-			<td align="right"><strong>Page Views</strong></td>
-			<td align="right"><strong>D/l</strong></td>
-			<td align="right"><strong>Bugs</strong></td>
-			<td align="right"><strong>Support</strong></td>
-			<td align="right"><strong>Patches</strong></td>
-			<td align="right"><strong>All Trkr</strong></td>
-			<td align="right"><strong>Tasks</strong></td>
-			<td align="right"><strong>CVS</strong></td>
+			<td><strong><?php echo $Language->getText('project_stats_utils','month') ?></strong></td>
+			<td><strong><?php echo $Language->getText('project_stats_utils','rank') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','page_views') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','dl') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','bugs') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','support') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','patches') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','all_tracker') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','tasks') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','CVS') ?></strong></td>
 			</tr>
 
 		<?php
@@ -155,13 +157,14 @@ function stats_project_monthly( $group_id ) {
 		<?php
 
 	} else {
-		echo "Project did not exist on this date.";
+		echo $Language->getText('project_stats_utils','project_did_not_exits')."<p>";
 		echo db_error();
 	}
 }
 
 function stats_project_all( $group_id ) {
 	global $HTML;
+	global $Language;
 	$res = db_query("
 		SELECT *
 		FROM stats_project_all_vw
@@ -171,24 +174,24 @@ function stats_project_all( $group_id ) {
 //	echo db_error();
 
 	?>
-	<p><strong>Statistics for All Time</strong></p>
+	<p><strong><?php echo $Language->getText('project_stats_utils','stats_all_time') ?></strong></p>
 
 	<p><table width="100%" cellpadding="0" cellspacing="1" border="0">
 		<tr valign="top">
-		<td><strong>Lifespan</strong></td>
-		<td><strong>Rank</strong></td>
-		<td align="right"><strong>Page Views</strong></td>
-		<td align="right"><strong>D/l</strong></td>
-		<td align="right"><strong>Bugs</strong></td>
-		<td align="right"><strong>Support</strong></td>
-		<td align="right"><strong>Patches</strong></td>
-		<td align="right"><strong>All Trkr</strong></td>
-		<td align="right"><strong>Tasks</strong></td>
-		<td align="right"><strong>CVS</strong></td>
+			<td><strong><?php echo $Language->getText('project_stats_utils','month') ?></strong></td>
+			<td><strong><?php echo $Language->getText('project_stats_utils','rank') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','page_views') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','dl') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','bugs') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','support') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','patches') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','all_tracker') ?> </strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','tasks') ?></strong></td>
+			<td align="right"><strong><?php echo $Language->getText('project_stats_utils','CVS') ?></strong></td>
 		</tr>
 
 	<tr <?php echo $HTML->boxGetAltRowStyle(1); ?>>
-		<td><?php echo $row["day"]; ?> days </td>
+		<td><?php echo $row["day"]; ?> <?php echo $Language->getText('project_stats_utils','days') ?> </td>
 		<td><?php echo sprintf("%d", $row["group_ranking"]) . " ( " . sprintf("%0.2f", $row["group_metric"]); ?> ) </td>
 		<td align="right"><?php echo number_format( $row["subdomain_views"] + $row['site_views'],0); ?></td>
 		<td align="right"><?php echo number_format( $row["downloads"],0); ?></td>

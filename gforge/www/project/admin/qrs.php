@@ -35,15 +35,15 @@ if (!$perm->isReleaseTechnician()) {
 
 if( $submit ) {
 	if (!$release_name) {
-		$feedback .= ' Must define a release name. ';
+		$feedback .= $Language->getText('project_admin_qrs','required_release_name');
 	} else 	if (!$package_id) {
-		$feedback .= ' Must select a package. ';
+		$feedback .= $Language->getText('project_admin_qrs','required_package');
 	} else 	if (!$userfile) {
-		$feedback .= ' Must select a file. ';
+		$feedback .= $Language->getText('project_admin_qrs','required_file');
 	} else 	if (!$type_id || $type_id == "100") {
-		$feedback .= ' Must select a file type. ';
+		$feedback .= $Language->getText('project_admin_qrs','required_file_type');
 	} else 	if (!$processor_id || $processor_id == "100")  {
-		$feedback .= ' Must select a processor type. ';
+		$feedback .= $Language->getText('project_admin_qrs','required_processor_type');
 	} else {
 
 		//
@@ -88,18 +88,15 @@ if( $submit ) {
 							exit_error('Error',$frsf->getErrorMessage());
 						}
 						$frsr->sendNotice();
-						$feedback='File Released: You May Choose To Edit the Release Now';
+						$feedback=$Language->getText('project_admin_qrs','file_released');
 
-						project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+						project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 						?>
 						<p>
-						You can now <a href="/project/admin/editrelease.php?release_id=<?php echo $frsr->getID()."&amp;group_id=$group_id&amp;package_id=$package_id"; ?>"><strong>Add Files To This Release</strong></a> if you wish,
-						or edit the release.</p>
-						<p>
-						Please note that file(s) may not appear immediately
-						on the <a href="/project/showfiles.php?group_id=<?php echo $group_id;?>">
-						download page</a>. Allow several hours for propagation.
-						</p>
+						<?php echo $Language->getText('project_admin_qrs','qrs_info',
+							array('<a href="/project/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id.' "><strong>',
+							'</strong></a>',
+							'<a href="/project/showfiles.php?group_id='.$group_id.'">','</a>')) ?>
 						<?php
 						db_commit();
 						
@@ -114,7 +111,7 @@ if( $submit ) {
 	}
 } else {
 
-project_admin_header(array('title'=>'Release New File Version','group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 
 ?>
 
@@ -122,7 +119,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	<table border="0" cellpadding="2" cellspacing="2">
 	<tr>
 		<td>
-			<h4>Package ID:</h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','package_id') ?>:</h4>
 		</td>
 		<td>
 <?php
@@ -130,7 +127,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows < 1) {
-		echo '<h4>No File Types Available</h4>';
+		echo '<h4>'.$Language->getText('project_admin_qrs','no_file_types_available').'</h4>';
 	} else {
 		
 		echo '<select name="package_id">';
@@ -142,12 +139,14 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 		echo '</select>';
 	}
 ?>
-			&nbsp;&nbsp;Or, <a href="editpackages.php?group_id=<?php echo $group_id; ?>">create a new package</a>.
+			&nbsp;&nbsp;
+			
+			<?php echo $Language->getText('project_admin_qrs','create_new_package',array('<a href="editpackages.php?group_id='.$group_id.'">','</a>')) ?>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<h4>Release Name:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','release_name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 			<input type="text" name="release_name" />
@@ -155,7 +154,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td>
-			<h4>Release Date:</h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','release_date') ?>:</h4>
 		</td>
 		<td>
 			<input type="text" name="release_date" value="<?php echo date('Y-m-d'); ?>" size="10" maxlength="10" />
@@ -163,17 +162,16 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td>
-			<h4>File Name:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','file_name') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
-		<span style="color:red"><strong>NOTE: In some browsers you must select the file in
-		the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</strong></span><br />
-		Upload a new file: <input type="file" name="userfile"  size="30" />
+		<span style="color:red"><strong><?php echo $Language->getText('project_admin_qrs','release_note') ?></strong></span><br />
+		<?php echo $Language->getText('project_admin_qrs','upload_new_file') ?>: <input type="file" name="userfile"  size="30" />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<h4>File Type:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','file_type') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 <?php
@@ -183,7 +181,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td>
-			<h4>Processor Type:<?php echo utils_requiredField();?></h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','processor_type') ?>:<?php echo utils_requiredField();?></h4>
 		</td>
 		<td>
 <?php
@@ -193,7 +191,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td valign="top">
-			<h4>Release Notes:</h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','release_notes') ?>:</h4>
 		</td>
 		<td>
 			<textarea name="release_notes" rows="7" cols="50"></textarea>
@@ -201,7 +199,7 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td valign="top">
-			<h4>Change Log:</h4>
+			<h4><?php echo $Language->getText('project_admin_qrs','changelog') ?>:</h4>
 		</td>
 		<td>
 			<textarea name="release_changes" rows="7" cols="50"></textarea>
@@ -209,8 +207,8 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 	</tr>
 	<tr>
 		<td colspan="2" align="center">
-			<input type="checkbox" name="preformatted" value="1" /> Preserve my pre-formatted text.
-			<p><input type="submit" name="submit" value="Release File" /></p>
+			<input type="checkbox" name="preformatted" value="1" /> <?php echo $Language->getText('project_admin_qrs','preserve_text') ?>
+			<p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_qrs','release_file') ?>" /></p>
 		</td>
 	</tr>
 	</table>

@@ -44,19 +44,16 @@ $perm = $group->getPermission($rm_user);
 
 if ($perm->isAdmin()) {
 	exit_error(
-		'Operation Not Permitted',
-		'You cannot remove '.$type.' admin.'
+		$Language->getText('project_admin_rmuser','operation_not_permitted').'',
+		$Language->getText('project_admin_rmuser','cannot_remove_admin',array($type))
 	);
 }
 
 
-project_admin_header(array('title'=>"Project Admin: ".group_getname($group_id),'group'=>$group_id));
+project_admin_header(array('title'=>$Language->getText('project_admin_rmuser','title').": ".group_getname($group_id),'group'=>$group_id));
 
 ?>
-
-<h3>Removing Developer from <?php echo ucfirst($type); ?></h3>
-<p>You are about to remove developer from the <?php echo $type; ?>. Please
-confirm your action:</p>
+<?php echo $Language->getText('project_admin_rmuser','info',array(ucfirst($type), $type)) ?>
 
 <table>
 <tr><td>
@@ -65,14 +62,14 @@ confirm your action:</p>
 <input type="hidden" name="func" value="rmuser" />
 <?php echo $passed_group_id; ?>
 <input type="hidden" name="rm_id" value="<?php echo $rm_id; ?>" />
-<input type="submit" value="Remove" />
+<input type="submit" value="<?php echo $Language->getText('project_admin_rmuser','remove') ?>" />
 </form>
 
 </td><td>
 
 <form action="<?php echo $return_to; ?>" method="get">
 <?php echo $passed_group_id; ?>
-<input type="submit" value="Cancel" />
+<input type="submit" value="<?php echo $Language->getText('project_admin_rmuser','cancel') ?>" />
 </form>
 
 </td></tr>

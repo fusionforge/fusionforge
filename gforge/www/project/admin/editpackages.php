@@ -45,7 +45,7 @@ if ($submit) {
 		//create a new package
 		db_query("INSERT INTO frs_package (group_id,name,status_id) ".
 			"VALUES ('$group_id','". htmlspecialchars($package_name)  ."','1')");
-		$feedback .= ' Added Package ';
+		$feedback .=$Language->getText('project_admin_editpackages','added_package');
 
 	} else if ($func=='update_package' && $package_id && $package_name && $status_id) {
 		if ($status_id != 1) {
@@ -59,48 +59,21 @@ if ($submit) {
 		//update an existing package
 		db_query("UPDATE frs_package SET name='". htmlspecialchars($package_name)  ."', status_id='$status_id' ".
 			"WHERE package_id='$package_id' AND group_id='$group_id'");
-		$feedback .= ' Updated Package ';
+		$feedback .= $Language->getText('project_admin_editpackages','updated_package');
 
 	}
 
 }
 
 
-project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
 
 ?>
-<h3>QRS:</h3>
+<h3><?php echo $Language->getText('project_admin_editpackages','qrs') ?>:</h3>
 <?php
-echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br />';
+echo $Language->getText('project_admin_editpackages','qrs_a_file', array('<a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">','</a>') ).'<br />';
 ?>
-<h3>Packages</h3>
-<p>
-You can use packages to group different file releases together, or use them however you like. 
-<p>
-<H4>An example of packages:</h4>
-<p>
-<strong>Mysql-win</strong><br />
-<strong>Mysql-unix</strong><br />
-<strong>Mysql-odbc</strong>
-<p>
-<h4>Your Packages:</H4>
-<p>
-<ol>
-<li>Define your packages</li>
-<li>Create new releases of packages</li>
-</ol>
-<p>
-<h3>Releases of Packages</h3>
-<p>
-A release of a package can contain multiple files.
-<p>
-<H4>Examples of Releases</h4>
-<p>
-<strong>3.22.1</strong><br />
-<strong>3.22.2</strong><br />
-<strong>3.22.3</strong><br />
-<p>
-You can create new releases of packages by clicking on <strong>Add/Edit Releases</strong> next to your package name.
+<?php echo  $Language->getText('project_admin_editpackages','packages_info') ?>
 <p>
 <?php
 /*
@@ -114,12 +87,12 @@ You can create new releases of packages by clicking on <strong>Add/Edit Releases
 $res=db_query("SELECT status_id,package_id,name AS package_name FROM frs_package WHERE group_id='$group_id'");
 $rows=db_numrows($res);
 if (!$res || $rows < 1) {
-	echo '<h4>You Have No Packages Defined</h4>';
+	echo '<h4>'.$Language->getText('project_admin_editpackages','no_packages_defined').'</h4>';
 } else {
 	$title_arr=array();
-	$title_arr[]='Releases';
-	$title_arr[]='Package Name';
-	$title_arr[]='Status';
+	$title_arr[]=$Language->getText('project_admin_editpackages','releases');
+	$title_arr[]=$Language->getText('project_admin_editpackages','package_name');
+	$title_arr[]=$Language->getText('project_admin_editpackages','no_packages_status');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -133,19 +106,19 @@ if (!$res || $rows < 1) {
 			<td nowrap="nowrap" align="center">
 				<span style="font-size:smaller">
 					<a href="qrs.php?package_id='. 
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>[Add Release]</strong>
+						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('project_admin_editpackages','add_release').']</strong>
 					</a>
 				</span>
 				<span style="font-size:smaller">
 					<a href="showreleases.php?package_id='. 
-						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>[Edit Releases]</strong>
+						db_result($res,$i,'package_id') .'&amp;group_id='. $group_id .'"><strong>['.$Language->getText('project_admin_editpackages','edit_releases').']</strong>
 					</a>
 				</span>
 
 			</td>
 			<td><span style="font-size:smaller"><input type="text" name="package_name" value="'.db_result($res,$i,'package_name') .'" size="20" maxlength="30" /></span></td>
 			<td><span style="font-size:smaller">'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</span></td>
-			<td><input type="submit" name="submit" value="Update" /></td>
+			<td><input type="submit" name="submit" value="'.$Language->getText('general','update').'" /></td>
 			</tr></form>';
 	}
 
@@ -161,13 +134,13 @@ if (!$res || $rows < 1) {
 
 ?>
 </p>
-<h3>New Package Name:</h3>
+<h3><?php echo $Language->getText('project_admin_editpackages','new_package_name') ?>:</h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="func" value="add_package" />
 <input type="text" name="package_name" value="" size="20" maxlength="30" />
-<p><input type="submit" name="submit" value="Create This Package" /></p>
+<p><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editpackages','create_package') ?>" /></p>
 </form></p>
 
 <?php

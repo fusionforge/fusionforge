@@ -17,11 +17,11 @@ require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
-project_admin_header(array('title'=>'Project History','group'=>$group_id,'pagename'=>'project_admin_history','sectionvals'=>array(group_getname($group_id))));
+project_admin_header(array('title'=>$Language->getText('project_admin_history','title'),'group'=>$group_id,'pagename'=>'project_admin_history','sectionvals'=>array(group_getname($group_id))));
 
 ?>
 
-<p>This log will show who made significant changes to your project and when.</p>
+<p><?php echo $Language->getText('project_admin_history','info') ?>.</p>
 <?php
 echo show_grouphistory($group_id);
 
