@@ -399,6 +399,27 @@ eval {
 	  if (is_lesser $version, $target) {
 	      debug "Upgrading your database scheme from 2.5" ;
 
+	      my $pg_version = &get_pg_version ;
+
+	      if (is_lesser $pg_version, "7.3") {
+		  @reqlist = (
+			      "DROP INDEX groups_pkey",
+			      "DROP INDEX users_pkey",
+			      ) ;
+	      } else {
+		  @reqlist = (
+			      "ALTER TABLE groups DROP CONSTRAINT groups_pkey",
+			      "ALTER TABLE users DROP CONSTRAINT users_pkey",
+			      ) ;
+	      }
+	      foreach my $s (@reqlist) {
+		  $query = $s ;
+		  # debug $query ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  $sth->finish () ;
+	      }
+
 	      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;

@@ -168,10 +168,6 @@ CREATE TABLE "artifact_perm" (
 );
 CREATE INDEX artperm_groupartifactid on artifact_perm (group_artifact_id);
 CREATE UNIQUE INDEX artperm_groupartifactid_userid on artifact_perm (group_artifact_id,user_id);
-CREATE VIEW artifactperm_user_vw AS 
-SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname
-	FROM artifact_perm ap, users 
-	WHERE users.user_id=ap.user_id;
 CREATE VIEW artifactperm_artgrouplist_vw AS
 SELECT agl.group_artifact_id,agl.name,agl.description,agl.group_id,ap.user_id, ap.perm_level
 FROM artifact_perm ap, artifact_group_list agl
@@ -223,28 +219,6 @@ CREATE INDEX art_groupartid_submit ON artifact (group_artifact_id,submitted_by);
 CREATE INDEX art_submit_status ON artifact(submitted_by,status_id);
 CREATE INDEX art_assign_status ON artifact(assigned_to,status_id);
 CREATE INDEX art_groupartid_artifactid ON artifact (group_artifact_id,artifact_id);
-CREATE VIEW artifact_vw AS
-SELECT 
-artifact.*,
-u.user_name AS assigned_unixname,
-u.realname AS assigned_realname,
-u.email AS assigned_email,
-u2.user_name AS submitted_unixname,
-u2.realname AS submitted_realname,
-u2.email AS submitted_email,
-artifact_status.status_name, 
-artifact_category.category_name, 
-artifact_group.group_name, 
-artifact_resolution.resolution_name 
-FROM 
-users u, users u2, artifact, artifact_status, artifact_category, artifact_group, artifact_resolution
-WHERE 
-artifact.assigned_to=u.user_id
-AND artifact.submitted_by=u2.user_id
-AND artifact.status_id=artifact_status.id 
-AND artifact.category_id=artifact_category.id 
-AND artifact.artifact_group_id=artifact_group.id
-AND artifact.resolution_id=artifact_resolution.id;
 CREATE SEQUENCE "artifact_history_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
 CREATE TABLE "artifact_history" (
 	"id" integer DEFAULT nextval('"artifact_history_id_seq"'::text) NOT NULL,
@@ -257,10 +231,6 @@ CREATE TABLE "artifact_history" (
 );
 CREATE INDEX arthistory_artid on artifact_history(artifact_id);
 CREATE INDEX arthistory_artid_entrydate on artifact_history(artifact_id,entrydate);
-CREATE VIEW artifact_history_user_vw AS
-SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name 
-FROM artifact_history ah, users 
-WHERE ah.mod_by=users.user_id; 
 CREATE SEQUENCE "artifact_file_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
 CREATE TABLE "artifact_file" (
 	"id" integer DEFAULT nextval('"artifact_file_id_seq"'::text) NOT NULL,
@@ -276,11 +246,6 @@ CREATE TABLE "artifact_file" (
 );
 CREATE INDEX artfile_artid on artifact_file(artifact_id);
 CREATE INDEX artfile_artid_adddate on artifact_file(artifact_id,adddate);
-CREATE VIEW artifact_file_user_vw AS
-SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, 
-	af.adddate, af.submitted_by, users.user_name, users.realname
-FROM artifact_file af,users 
-WHERE af.submitted_by=users.user_id;
 CREATE SEQUENCE "artifact_message_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
 CREATE TABLE "artifact_message" (
 	"id" integer DEFAULT nextval('"artifact_message_id_seq"'::text) NOT NULL,
@@ -293,11 +258,6 @@ CREATE TABLE "artifact_message" (
 );
 CREATE INDEX artmessage_artid on artifact_message(artifact_id);
 CREATE INDEX artmessage_artid_adddate on artifact_message(artifact_id,adddate);
-CREATE VIEW artifact_message_user_vw AS
-SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, 
-users.user_id, users.email, users.user_name, users.realname
-FROM artifact_message am,users 
-WHERE am.submitted_by=users.user_id;
 CREATE SEQUENCE "artifact_monitor_id_seq" start 1 increment 1 maxvalue 2147483647 minvalue 1  cache 1 ;
 CREATE TABLE "artifact_monitor" (
 	"id" integer DEFAULT nextval('"artifact_monitor_id_seq"'::text) NOT NULL,
@@ -559,7 +519,6 @@ ORDER BY group_id ASC;
 -- 2. Get rid of the undeleteable foreign key constraints with old tables
 
 ALTER TABLE groups RENAME TO old_groups ;
-DROP INDEX groups_pkey ;
 DROP INDEX groups_type ;
 DROP INDEX groups_public ;
 DROP INDEX groups_status ;
@@ -616,7 +575,6 @@ DROP INDEX users_status ;
 DROP INDEX user_user ;
 DROP INDEX idx_users_username ;
 DROP INDEX users_user_pw ;
-DROP INDEX users_pkey ;
 
 CREATE TABLE "users" (
 	"user_id" integer DEFAULT nextval('users_pk_seq'::text) NOT NULL,
@@ -642,6 +600,46 @@ CREATE TABLE "users" (
 	"language" integer DEFAULT '1' NOT NULL,
 	CONSTRAINT "users_pkey" PRIMARY KEY ("user_id")
 );
+CREATE VIEW artifactperm_user_vw AS 
+SELECT ap.id, ap.group_artifact_id, ap.user_id, ap.perm_level, users.user_name, users.realname
+	FROM artifact_perm ap, users 
+	WHERE users.user_id=ap.user_id;
+CREATE VIEW artifact_vw AS
+SELECT 
+artifact.*,
+u.user_name AS assigned_unixname,
+u.realname AS assigned_realname,
+u.email AS assigned_email,
+u2.user_name AS submitted_unixname,
+u2.realname AS submitted_realname,
+u2.email AS submitted_email,
+artifact_status.status_name, 
+artifact_category.category_name, 
+artifact_group.group_name, 
+artifact_resolution.resolution_name 
+FROM 
+users u, users u2, artifact, artifact_status, artifact_category, artifact_group, artifact_resolution
+WHERE 
+artifact.assigned_to=u.user_id
+AND artifact.submitted_by=u2.user_id
+AND artifact.status_id=artifact_status.id 
+AND artifact.category_id=artifact_category.id 
+AND artifact.artifact_group_id=artifact_group.id
+AND artifact.resolution_id=artifact_resolution.id;
+CREATE VIEW artifact_history_user_vw AS
+SELECT ah.id, ah.artifact_id, ah.field_name, ah.old_value, ah.entrydate, users.user_name 
+FROM artifact_history ah, users 
+WHERE ah.mod_by=users.user_id; 
+CREATE VIEW artifact_file_user_vw AS
+SELECT af.id, af.artifact_id, af.description, af.bin_data, af.filename, af.filesize, af.filetype, 
+	af.adddate, af.submitted_by, users.user_name, users.realname
+FROM artifact_file af,users 
+WHERE af.submitted_by=users.user_id;
+CREATE VIEW artifact_message_user_vw AS
+SELECT am.id, am.artifact_id, am.from_email, am.body, am.adddate, 
+users.user_id, users.email, users.user_name, users.realname
+FROM artifact_message am,users 
+WHERE am.submitted_by=users.user_id;
 
 INSERT INTO users
 SELECT user_id, user_name, email, user_pw, realname, status, shell,
