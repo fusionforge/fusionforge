@@ -117,12 +117,12 @@ ls etc/[0-9][0-9]* | sort | xargs cat > etc/httpd.conf
 rm etc/[0-9][0-9]*
 
 echo "Create etc/local.inc"
-for i in etc/local.d/01* etc/local.d/10*simple etc/local.d/20*
+for i in etc/local.d/01* etc/local.d/10*simple etc/local.d/[2-9]*
 do
 	utils/fill-in-the-blanks.pl $i etc/`basename $i` etc/gforge.conf
 done
-ls etc/01* etc/10*simple etc/20* | sort | xargs cat > etc/local.inc
-rm etc/01* etc/10*simple etc/20*
+ls etc/01* etc/10*simple etc/[2-9]* | sort | xargs cat > etc/local.inc
+rm etc/01* etc/10*simple etc/[2-9]*
 
 
 export etcgforge=`pwd`/etc

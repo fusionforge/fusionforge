@@ -111,6 +111,3 @@ $sys_force_login={sys_force_login};
 //$gantt_task_font_family="FF_ARIAL";
 //$gantt_task_font_style="FS_NORMAL";
 //$gantt_task_font_size=12;
-
-// End of customizations -- place nothing after the closing PHP tag!
-?>
