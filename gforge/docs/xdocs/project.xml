@@ -11,9 +11,6 @@
   <logo>/images/logo.png</logo>
   </organization>
   <inceptionYear>2002</inceptionYear>
- <!-- <package>com</package>
- <logo>/images/logo.png</logo>
--->
   <description>Gforge </description>
   <shortDescription>Software for collaborative development</shortDescription>
   <url>http://gforge.org/</url>
@@ -34,32 +31,19 @@
         <role>Project Manager</role>
       </roles>
     </developer>
-
-
-
-  
-
-
   </developers>
-
    
-
   <dependencies>
-
-
-
   </dependencies>
+	
 	<mailingLists>
-
 	<mailingList>
 	<name>gforge-devel.nongnu.org</name>
 	<archive>http://mail.nongnu.org/archive/html/gforge-devel/</archive>
 	</mailingList>
-
 	</mailingLists>
 
   <build>
     <nagEmailAddress>bigdisk@gforge.org</nagEmailAddress>
-  
    </build>
 </project>
