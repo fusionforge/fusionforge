@@ -1,5 +1,8 @@
 2003-01-22  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/languages/Spanish.tab: more translations, sorted the
+	file to more easily find strings, spell check again.
+
 	* www/project/admin/editrelease.php: what happens when no
 	file is uploaded seems to be browser specific (?)... catch
 	more cases.
