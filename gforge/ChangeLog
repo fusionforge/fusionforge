@@ -1,3 +1,9 @@
+2003-02-13  Roland Mas  <lolando@debian.org>
+
+	* deb-specific/install-exim.sh, utils/ldap/sql2ldif.pl,
+	deb-specific/gforge.schema and a few other files: adapted to
+	Mailman 2.1.
+
 2003-02-13  Reinhard Spisser <reinhard@spisser.it>
 	
 	* www/tracker/browse.php:
