@@ -31,11 +31,11 @@ class SVNPlugin extends SCM {
 		$this->name = "scmsvn";
 		$this->text = "SVN";
 		$this->hooks[] = "scm_page";
-/*		$this->hooks[] = "scm_admin_update";
+		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
 		$this->hooks[] = "group_approved";
-*/
+
 		$this->hooks[] = "scm_plugin";
 
 		require_once('/etc/gforge/plugins/scmsvn/config.php') ;
@@ -58,17 +58,15 @@ class SVNPlugin extends SCM {
 			$group_id = $params['group_id'] ;
 			$this->display_scm_page ($group_id) ;
 			break ;
-/*
-		case "scm_admin_update":
-			$this->scm_admin_update ($params) ;
-			break ;
-		case "scm_admin_page":
-			$this->display_scm_admin_page ($params) ;
-			break ;
+//		case "scm_admin_update":
+//			$this->scm_admin_update ($params) ;
+//			break ;
+//		case "scm_admin_page":
+//			$this->display_scm_admin_page ($params) ;
+//			break ;
 		case "scm_stats":
 			$this->display_stats ($params) ;
 			break;
-*/
 		case "group_approved":
 			$this->group_approved ($params) ;
 			break;
@@ -186,7 +184,7 @@ if ($project->enableAnonSCM()) {
 
 	}
 
-/*
+
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
 
@@ -198,7 +196,6 @@ if ($project->enableAnonSCM()) {
 		}
 // 		if ($params['scmsvn_use_svn']) {
 // 			$group->setPluginUse("scmsvn", 1) ;
-			
 // 		} else {
 // 			$group->setPluginUse("scmsvn", 0) ;
 // 		}
@@ -207,15 +204,15 @@ if ($project->enableAnonSCM()) {
 		} else {
 			$this->SetUsesAnonSVN ($params['group_id'], false) ;
 		}
-		if ($params['scmsvn_svn_server'] && $params['scmsvn_svn_server'] != "") {
-			$this->SetGroupServer ($params['group_id'], $params['scmsvn_svn_server']) ;
-		} else {
-			$this->SetGroupServer ($params['group_id'], $this->GetDefaultServer ()) ;
-		}
+//		if ($params['scmsvn_svn_server'] && $params['scmsvn_svn_server'] != "") {
+//			$this->SetGroupServer ($params['group_id'], $params['scmsvn_svn_server']) ;
+//		} else {
+//			$this->SetGroupServer ($params['group_id'], $this->GetDefaultServer ()) ;
+//		}
 	}
-*/
 
-/*
+
+
 	function display_scm_admin_page ($params) {
 		$group =& group_get_object($params['group_id']);
 ?>
@@ -226,9 +223,9 @@ if ($project->enableAnonSCM()) {
 <?php
 
 	}
-*/
 
-/*
+
+
 	function display_stats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
@@ -247,9 +244,9 @@ if ($project->enableAnonSCM()) {
 		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
 		
 	}
-*/
 
-/*
+
+
 	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
 		
@@ -266,7 +263,7 @@ if ($project->enableAnonSCM()) {
 		}
 		return true;
 	}
-*/
+
 
 /*
 	function GetDefaultServer () {
