@@ -1272,10 +1272,13 @@ class User extends Error {
 		if (!$this->data_array['dirname']) {
 			$res=db_query("SELECT dirname FROM themes WHERE theme_id='".$this->getThemeID()."'");
 			$this->theme=db_result($res,0,'dirname');
-			$GLOBALS['sys_theme']=$this->theme;
 		} else {
 			$this->theme=$this->data_array['dirname'];
+		}
+		if (is_file($GLOBALS['sys_themeroot'].$this->theme.'/Theme.class')) {
 			$GLOBALS['sys_theme']=$this->theme;
+		} else {
+			$this->theme=$GLOBALS['sys_theme'];
 		}
 		return $this->theme;
 	}
