@@ -2,6 +2,7 @@
 
 	* Added DirectoryIndex in etc/httpd.d/40virtualhost
 	* Take in account sys_session_expire when setting cookie 
+	* Default page only requires a simple copy now and is used in debian
 
 2004-04-21  Tom Copeland <tom@infoether.com>
 
