@@ -548,8 +548,8 @@ menu	code_snippet	Code&nbsp;Snippets
 menu	admin	Admin
 my	about_blurb	Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.
 my	no_bookmarks	You currently do not have any bookmarks saved
-my	no_monitored_filemodules	<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp
-my	no_monitored_forums	<H3>You are not monitoring any forums</H3><P>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.<P>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.<BR>&nbsp;
+my	no_monitored_filemodules	<h3>You are not monitoring any files</h3><p>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.</p><p>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.</p>
+my	no_monitored_forums	<h3>You are not monitoring any forums</h3><p>If you monitor forums, you will be sent new posts in the form of an email, with a link to the new message.</p><p>You can monitor forums by clicking &quot;Monitor Forum&quot; in any given discussion forum.</p>
 my	no_open_tasks	You have no open tasks assigned to you.
 my	no_projects	You're not a member of any active projects
 my	no_tracker_items_assigned	You have no open tracker items assigned to you.
@@ -575,7 +575,7 @@ my	pending_news_bytes_3	Click here.
 my_bookmark	return	Return
 my_bookmark_add	section	My Personal Page
 my_bookmark_add	title	Add Bookmark
-my_bookmark_add	added_bookmark Added bookmark for <strong>$1</strong> with title <strong>$2</strong>
+my_bookmark_add	added_bookmark	Added bookmark for <strong>$1</strong> with title <strong>$2</strong>
 my_bookmark_add	bookmark_title	Bookmark Title
 my_bookmark_add	bookmark_url	Bookmark URL
 my_bookmark_add	visit_page	Visit the bookmarked page
@@ -585,6 +585,8 @@ my_bookmark_delete	title	Delete Bookmark
 my_bookmark_delete	bookmark_deleted	Bookmark deleted
 my_bookmark_edit	section	My Personal Page
 my_bookmark_edit	title	Edit Bookmark
+my_bookmark_edit	bookmark_updated	Bookmark Updated
+my_bookmark_edit	failed_to_update_bookmark	Failed to update bookmark.
 my_rmproject	title	Quitting Project
 my_rmproject	operation_not_permitted_title	Operation Not Permitted
 my_rmproject	operation_not_permitted_text	You cannot remove yourself from this project, because you are admin of it. You should ask other admin to reset your admin privilege first. If you are the only admin of the project, please consider posting availability notice to <a href="/people/">Help Wanted Board</a> and be ready to pass admin privilege to interested party.
@@ -2167,7 +2169,7 @@ survey_add_question	title	Add A Question
 survey_add_question	question_added	Question Added
 survey_add_question	error_insert_question	Error inserting question
 survey_add_question	add_this_question	Add This Question.
-survey_add_question	show_existing_questions Show Existing Questions.
+survey_add_question	show_existing_questions	Show Existing Questions.
 survey_add_question	question	Question
 survey_add_question	question_type	Question type
 survey_add_survey	title	Add A Survey
@@ -2182,7 +2184,6 @@ survey_add_survey	add_this_survey	Add This Survey
 survey_add_survey	show_existing_question	Show Existing Questions
 survey_add_survey	existing_surveys	Existing Surveys
 survey_add_survey	is_active	Is Active?
-survey_add_survey	existing_surveys	Sondaggi esistenti:
 survey_admin_utils	found	$1 surveys found
 survey_admin_utils	survey_id	Survey Id
 survey_admin_utils	group_id	Group Id
