@@ -163,6 +163,29 @@ then <A HREF="/account/login.php">Login</A> and finally,
 <A HREF="/register/">Register Your Project.</A>
 Thanks... and enjoy the site.';
 
+	// New strings added on 2002/06/10 by Soon-Son Kwon
+	var $FOOTER='
+<font face="arial, helvetica" size="1" color="#cccccc">
+VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.
+Linux is a registered trademark of Linus Torvalds.  All other trademarks and
+copyrights on this page are property of their respective owners.
+For information about other site Content ownership and sitewide
+terms of service, please see the
+<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>.
+For privacy
+policy information, please see the <a href="/tos/privacy.php" class="legallink"
+>SourceForge Privacy Policy</a>.
+Content owned by VA Linux Systems is copyright
+1999-2000 VA Linux Systems, Inc.  All rights reserved.
+</font>';
+
+	var $IEWARN='<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>';
+	var $MACWARN='<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>';
+	var $ACCOUNTLOGIN='SourceForge Site Login';
+	var $COOKIEWARN='Cookies must be enabled past this point.';
+	var $USESSL='Stay in SSL mode after login';
+	var $SSLNOTICE='<p><B><FONT COLOR="RED">You will be connected with an SSL server when you submit this form and your password will not be visible to other users.</FONT></B> <small style="font-size: x-small"> (If you wonder why very this page is not loaded via SSL, please read next paragraph. Thank you.) </small> <P> <B>Internet Explorer</B> users will have intermittent SSL problems, so they should leave SSL after login. Netscape users should stay in SSL mode permanently for maximum security.  Visit <A HREF="http://www.microsoft.com/">Microsoft</A> for more information about this known problem.  <P>';
+
 	/*
 		returns database result
 		of supported languages

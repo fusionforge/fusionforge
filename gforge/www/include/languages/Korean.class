@@ -18,6 +18,9 @@
 
 	Soon-Son Kwon, 2002/06/09
 	*fine-tuned expressions
+
+	Soon-Son Kwon, 2002/06/10
+	*added more strings
 */
 
 class Korean extends BaseLanguage {
@@ -68,7 +71,7 @@ class Korean extends BaseLanguage {
 	$this->GROUP_SHORT_MAIN ='메인';
 	$this->GROUP_SHORT_SUMMARY='요약';
 	$this->GROUP_SHORT_HOMEPAGE='홈페이지';
-	$this->GROUP_SHORT_FORUM='포럼';
+	$this->GROUP_SHORT_FORUM='게시판';
 	$this->GROUP_SHORT_BUGS='버그';
 	$this->GROUP_SHORT_SUPPORT='지원';
 	$this->GROUP_SHORT_PATCH='패치';
@@ -76,7 +79,7 @@ class Korean extends BaseLanguage {
 	$this->GROUP_SHORT_PM='프로젝트';
 	$this->GROUP_SHORT_DOCMAN='문서';
 	$this->GROUP_SHORT_SURVEY='여론조사';
-	$this->GROUP_SHORT_NEWS='뉴스';
+	$this->GROUP_SHORT_NEWS='새소식';
 	$this->GROUP_SHORT_CVS='CVS';
 	$this->GROUP_SHORT_FILES='파일';
         // 2000-11-24
@@ -127,8 +130,8 @@ class Korean extends BaseLanguage {
 
 	$this->HOME_PAGE_ABOUT_BLURB='
 
-이곳은 <B><A href="http://www.fsf.org">자유 소프트웨어</A> / 
-<A href="http://www.opensource.org">오픈 소스 소프트웨어</A>개발자들을 위한
+이곳은 <B><A href="http://www.gnu.org">자유 소프트웨어</A>, 
+<A href="http://www.opensource.org">오픈 소스 소프트웨어</A> 개발자들을 위한
 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 게시판,
 하위 프로젝트, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를
 포함한 완전한 웹 기반의 관리 인터페이스를 제공합니다.
@@ -151,6 +154,27 @@ class Korean extends BaseLanguage {
 <A HREF="/account/login.php">로그인</A>하시면 
 <A HREF="/register/">여러분의 프로젝트를 등록</A>하실 수 있습니다.
 감사합니다. 즐거운 시간 되십시오.';
+
+    // New strings added on 2002/06/10 by Soon-Son Kwon
+	$this->FOOTER='
+<font face="굴림체, arial, helvetica" size="1" color="#cccccc">
+SourceForge는 VA Software의 등록 상표입니다. 
+Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
+저작권은 해당 소유자에게 있습니다.
+컨텐트에 대한 소유 정보와 사용에 대한 자세한 사항은 
+<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>를 
+참고하십시오. 개인 정보 보호 정책은
+<a href="/tos/privacy.php" class="legallink">SourceForge Privacy Policy</a>를
+참고하십시오. Content owned by VA Software is copyright
+1999-2002 VA Software, Inc.  All rights reserved.
+</font>';
+
+	$this->IEWARN='<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>';
+	$this->MACWARN='<H2><FONT COLOR="RED">현재 매킨토시에서의 인터넷 익스플로러는 지원되지 않습니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용해 주십시오.</FONT></H2>';
+	$this->ACCOUNTLOGIN='사이트 로그인';
+	$this->COOKIEWARN='여기서부터는 쿠키를 사용합니다.';
+	$this->USESSL='로그인후 SSL 계속 사용';
+	$this->SSLNOTICE='<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 구현되어 있는 웹서버로 진입하시게 되며, 입력하신 비밀번호는 다른 사람이 볼 수 없습니다.</FONT></B> <small style="font-size: x-small"> (이 페이지 자체가 SSL로 보이지 않는 이유가 궁금하시다면 다음 절을 읽어 보십시오. 감사합니다.) </small> <P> <B>인터넷 익스플로러</B>를 사용하고 계실 경우 일시적으로 SSL에 관한 문제가 있을수도 있습니다. 넷스케이프 사용자는 보안을 위해 SSL을 계속 사용하시기 바랍니다. 이 문제에 관해서는 <A HREF="http://www.microsoft.com/">Microsoft의 웹사이트</A>를 참고하십시오.<P>';
 
 	}
 }
