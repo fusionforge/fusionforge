@@ -1,9 +1,11 @@
 sourceforge (2.6-0+14+) experimental; urgency=low
 
   * [Christian] Add the possibility to hide forum in news_show_latest
-  * [Christian] Added the possibility of a language by theme customization 
+  * [Christian] Added the possibility of a language by theme customization
+  * [Christian] Included full Spanish translation from Vicente Ruiz.  Thanks
+    again
 
- -- Christian Bayle <bayle@debian.org>  Tue, 26 Nov 2002 00:08:02 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue, 26 Nov 2002 00:13:55 +0100
 
 sourceforge (2.6-0+14) experimental; urgency=low
 
