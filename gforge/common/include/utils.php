@@ -353,7 +353,7 @@ function show_priority_colors_key() {
 
 	for ($i=1; $i<10; $i++) {
 		echo '
-			<td bgcolor="'.get_priority_color($i).'">'.$i.'</td>';
+			<td bgcolor="'.html_get_priority_color($i).'">'.$i.'</td>';
 	}
 	echo '</tr></table>';
 }

@@ -133,7 +133,7 @@ if ($rows < 1) {
 	for ($i=0; $i < $rows; $i++) {
 
 		echo '
-			<tr bgcolor="'.get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
 			'<td><a href="/pm/task.php?func=detailtask'.
 			'&project_task_id='. $pt_arr[$i]->getID() .
 			'&group_id='.$group_id.

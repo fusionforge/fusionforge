@@ -47,15 +47,6 @@ function html_feedback_bottom($feedback) {
 }
 
 /**
- * html_a_group() - Turn a group name into a link to that groups summary page.
- *
- * @param		string	The group name.
- */
-function html_a_group($grp) {
-	print '<a /project/?group_id='.$grp.'>' . group_getname($grp) . '</a>';
-}
-
-/**
  * html_blankimage() - Show the blank spacer image.
  *
  * @param		int		The height of the image
@@ -122,17 +113,6 @@ function html_image($src,$width,$height,$args,$display=1) {
 
 	$return .= (' />');
 	return $return;
-}
-
-/**
- * url_image() - Build an image url of an image contained in $src
- *
- * @param		string	The source location of the image
- */
-function url_image($src) {
-	global $sys_images_url;
-	$s = ((session_issecure()) ? 's' : '' );
-	return ('"http'. $s .':' . $sys_images_url . $src .'"');
 }
 
 /**
@@ -329,15 +309,6 @@ function html_build_checkbox($name, $value, $checked) {
 	return '<input type="checkbox" name="'.$name.'"'
 		.' value="'.$value.'"'
 		.($checked ? 'checked="checked"' : '').'>';
-}
-
-/**
- * get_priority_color() - Wrapper for html_get_priority_color().
- *
- * @see	html_get_priority_color()
- */
-function get_priority_color ($index) {
-	return html_get_priority_color ($index);
 }
 
 /**

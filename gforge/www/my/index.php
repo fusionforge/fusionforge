@@ -79,7 +79,7 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'name').'</a></strong></td></tr>';
 			}   
 			echo '
-			<tr style="background-color:'.get_priority_color(db_result($result,$i,'priority')).'">
+			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
 			<td><a href="/tracker/?func=detail&amp;aid='.
 			db_result($result, $i, 'artifact_id').
 			'&amp;group_id='.db_result($result, $i, 'group_id').
@@ -123,7 +123,7 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'name').'</a></strong></td></tr>';
 			}	
 			echo '
-			<tr style="background-color:'.get_priority_color(db_result($result,$i,'priority')).'">
+			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
 			<td><a href="/tracker/?func=detail&amp;aid='.
 			db_result($result, $i, 'artifact_id').
 			'&amp;group_id='.db_result($result, $i, 'group_id').
@@ -259,7 +259,7 @@ if (session_loggedin() || $sf_user_hash) {
 				db_result($result,$i,'project_name').'</a></strong></td></tr>';
 			}
 			echo '
-			<tr style="background-color:'.get_priority_color(db_result($result,$i,'priority')).'">
+			<tr style="background-color:'.html_get_priority_color(db_result($result,$i,'priority')).'">
 			<td><a href="/pm/task.php?func=detailtask&amp;project_task_id='.
 			db_result($result, $i, 'project_task_id').
 			'&amp;group_id='.db_result($result, $i, 'group_id').
