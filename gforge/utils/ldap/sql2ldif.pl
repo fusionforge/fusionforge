@@ -228,14 +228,7 @@ sub dump_header {
         my $dc=$sys_ldap_base_dn;
         $dc =~ s/,.*// ;
         $dc =~ s/.*=// ;
-	print "dn: $sys_ldap_base_dn
-dc: $dc
-objectClass: top
-objectClass: domain
-objectClass: domainRelatedObject
-associatedDomain: $sys_default_domain
-
-dn: ou=Hosts,$sys_ldap_base_dn
+	print "dn: ou=Hosts,$sys_ldap_base_dn
 ou: Hosts
 objectClass: top
 objectClass: organizationalUnit

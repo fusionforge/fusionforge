@@ -272,6 +272,45 @@ purge_nsswitch()
 # Load ldap database from gforge database
 load_ldap(){
     if [ "x$ldap_passwd" != "x" ] ; then
+	
+	# First, let's make sure our base DN exists
+	nr=$(ldapsearch -LLL -x -b "$sf_ldap_base_dn" -s base '' dn | grep ^dn: | wc -l)
+	if [ $nr = 0 ] ; then
+	    tmpldif=$(mktemp $tmpfile_pattern)
+	    tmpldifadd=$(mktemp $tmpfile_pattern)
+	    tmpldifmod=$(mktemp $tmpfile_pattern)
+	    dc=$(echo $sf_ldap_base_dn | cut -d, -f1 | cut -d= -f2)
+	    echo >> $tmpldif <<EOF
+dn: $sys_ldap_base_dn
+dc: $dc
+objectClass: top
+objectClass: domain
+objectClass: domainRelatedObject
+associatedDomain: $sys_default_domain
+EOF
+            # echo "Filling LDAP with database"
+	    if ! eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
+                # Some entries could not be added (already there?)
+                # Therefore, we try to modify them
+		if ! eval "ldapmodify -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
+		    echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
+		    echo "please check and report following error"
+		    echo ========================================================================================
+		    cat $tmpldifmod | perl -pi -e 's/^\n//' | perl -pi -e 's/modifying.*\"\n//'
+		    echo ========================================================================================
+		    echo SEE ALSO result of ldapadd in:
+		    echo $tmpldifadd
+		    echo AND result of ldapmodify in:
+		    echo $tmpldifmod
+		    echo AND ldif file in:
+		    echo $tmpldif
+		    echo ========================================================================================
+		    exit 4
+		fi
+	    fi
+	    rm -f $tmpldif $tmpldifadd $tmpldifmod
+	fi
+
         # This loads the ldap database
         # echo "Our base DN is $sf_ldap_base_dn"
         # echo "Creating ldif file from database"

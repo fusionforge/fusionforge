@@ -22,8 +22,10 @@ gforge (3rc2-3+) unstable; urgency=low
     bug.
   * [Roland] and [Christian] Added cn: fiend in LDAP entries for
     mailing-lists.
+  * [Roland] Stopped trying to create/modify the base DN of the LDAP
+    directory if it already exists.
 
- -- Roland Mas <lolando@debian.org>  Wed, 18 Jun 2003 23:20:41 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 19 Jun 2003 23:28:54 +0200
 
 gforge (3rc2-3) unstable; urgency=low
 
