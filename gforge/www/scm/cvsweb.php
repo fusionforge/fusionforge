@@ -31,7 +31,7 @@ if ($projectName) {
 		exit_error('Error',$Language->getText('scm_index','error_this_project_has_turned_off'));
 	}
 	$perm = & $Group->getPermission(session_get_user());
-	if ((!$Group->enableAnonCVS() && !($perm && is_object($perm) && $perm->isMember())) || !isset($GLOBALS['sys_path_to_cvsweb']) || !is_file($GLOBALS['sys_path_to_cvsweb'].'/cvsweb')) {
+	if ((!$Group->enableAnonCVS() && !($perm && is_object($perm) && $perm->isMember())) || !isset($GLOBALS['sys_path_to_cvsweb']) || !is_file($GLOBALS['sys_path_to_cvsweb'].'/cvsweb.cgi')) {
 		exit_permission_denied();
 	}
 	if ($contenttype != 'text/plain') {
@@ -40,7 +40,7 @@ if ($projectName) {
 		header("Content-type: $contenttype" );
 	}
 
-	passthru('PHPWRAPPER='.getStringFromServer('SCRIPT_NAME').' '.$GLOBALS['sys_path_to_cvsweb'].'/cvsweb "'.getStringFromServer('PATH_INFO').'" "'.getStringFromServer('QUERY_STRING').'" ');
+	passthru('PHPWRAPPER='.getStringFromServer('SCRIPT_NAME').' '.$GLOBALS['sys_path_to_cvsweb'].'/cvsweb.cgi "'.getStringFromServer('PATH_INFO').'" "'.getStringFromServer('QUERY_STRING').'" ');
 
 	if ($contenttype != 'text/plain') {
 		site_project_footer(array());
