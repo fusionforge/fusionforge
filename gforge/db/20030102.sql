@@ -3,6 +3,7 @@
 --
 ALTER TABLE doc_data ADD COLUMN group_id INT;
 UPDATE doc_data SET group_id=(SELECT group_id FROM doc_groups WHERE doc_group=doc_data.doc_group);
+UPDATE doc_data SET stateid=4 WHERE stateid=100;
 --
 --	Add fkey constraints
 --

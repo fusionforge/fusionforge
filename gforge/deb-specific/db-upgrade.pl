@@ -1065,6 +1065,17 @@ eval {
     $version = &get_db_version ;
     $target = "2.6-0+checkpoint+24" ;
     if (is_lesser $version, $target) {
+
+      debug "Adjusting language sequense" ;
+
+	$query = "SELECT max(language_id) FROM supported_languages" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	@array = $sth->fetchrow_array () ;
+	$sth->finish () ;
+	my $maxid = $array [0] ;
+	&bump_sequence_to ("supported_languages_pk_seq", $maxid) ;
+
       debug "Upgrading with 20030112.sql" ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030112.sql") } ;
