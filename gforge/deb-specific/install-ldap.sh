@@ -200,7 +200,7 @@ load_ldap(){
 		# add with -r don't modify and modify don't add so i do add and modify
  		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
  		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
-		# rm -f $tmpldif
+		rm -f $tmpldif
 	else
 		echo "WARNING: Can't load ldap table without /etc/lapd.secret file"
 		echo "AFAIK  : This file should be installed by libpam-ldap"
