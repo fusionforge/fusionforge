@@ -89,24 +89,17 @@ class ArtifactTypeFactory extends Error {
 		if ($this->ArtifactTypes) {
 			return $this->ArtifactTypes;
 		}
+		$permissions='';
 		if (session_loggedin()) {
 			$perm =& $this->Group->getPermission( session_get_user() );
-			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$public_flag='=1';
-			} else {
-				$public_flag='<3';
-				$exists=' AND EXISTS (SELECT group_artifact_ID
-					FROM artifact_perm
-					WHERE perm_level >= 0 AND group_artifact_id=artifact_group_list.group_artifact_id) ';
+			if ($perm && is_object($perm) && $perm->isMember()) {
+			   $permissions="OR group_artifact_id IN (SELECT group_artifact_id FROM artifact_perm WHERE perm_level >= 0 AND group_artifact_id=artifact_group_list_vw.group_artifact_id AND user_id='".user_getid()."') ";
 			}
-		} else {
-			$public_flag='=1';
 		}
 
 		$sql="SELECT * FROM artifact_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."'
-			AND is_public $public_flag
-			$exists
+			AND is_public=1 $permissions
 			ORDER BY group_artifact_id ASC";
 
 		$result = db_query ($sql);
@@ -118,7 +111,12 @@ class ArtifactTypeFactory extends Error {
 			return false;
 		} else {
 			while ($arr =& db_fetch_array($result)) {
-				$this->ArtifactTypes[] = new ArtifactType($this->Group, $arr['group_artifact_id'], $arr);
+				$artifactType = new ArtifactType($this->Group, $arr['group_artifact_id'], $arr);
+				if($artifactType->isError()) {
+					$this->setError($artifactType->getErrorMessage());
+				} else {
+					$this->ArtifactTypes[] = $artifactType;
+				}
 			}
 		}
 		return $this->ArtifactTypes;

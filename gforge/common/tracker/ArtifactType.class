@@ -977,7 +977,7 @@ class ArtifactType extends Error {
 				//
 				//	You must have an entry in artifact_perm if this tracker is not public
 				//
-				if ($this->userIsAdmin() || $this->getCurrentUserPerm() >= 1) {
+				if ($this->userIsAdmin() || $this->getCurrentUserPerm() >= 0) {
 					return true;
 				} else {
 					return false;
