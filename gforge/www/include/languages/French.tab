@@ -217,7 +217,7 @@ admin_approve_pending	none_found	Introuvable
 admin_approve_pending	other_information	Autres informations
 admin_approve_pending	pending_projects	Projets en attente :
 admin_approve_pending	pending_reason	Motif de l'attente :
-admin_approve_pending	project_admin	Administrateur du projet
+admin_approve_pending	project_admin	Administration du projet
 admin_approve_pending	submitted_description	Description proposée :
 admin_approve_pending	unix_group_name	Nom du groupe Unix :
 admin_approve_pending	view_edit_project_members	[Voir/Editer les membres du projet]
@@ -243,7 +243,7 @@ admin_groupedit	instruction_email_sent	Courrier contenant les instructions envoy
 admin_groupedit	new_project_instruction_email	Courrier contenant les instructions à propos de nouveaux projets envoyé à nouveau
 admin_groupedit	no	Non
 admin_groupedit	pending	En attente (E)
-admin_groupedit	project_admin	[Administrateur du projet]
+admin_groupedit	project_admin	[Administration du projet]
 admin_groupedit	public	Public ?
 admin_groupedit	registration_application	Demande d'inscription
 admin_groupedit	status	Statut
@@ -424,7 +424,7 @@ admin_useredit	name	Nom
 admin_useredit	no_unix_account	Pas de compte Unix (N)
 admin_useredit	operations	Opérations
 admin_useredit	pending	En attente (E)
-admin_useredit	project_admin	Administrateur de projet
+admin_useredit	project_admin	Administration du projet
 admin_useredit	real_name	Nom complet
 admin_useredit	suspended	Suspendu (S)
 admin_useredit	this_page_allows	Cette page permet uniquement de changer les propriétés directes d'un utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un groupe spécifique, rendez vous à la page d'administration de ce groupe (ci-dessous). 
@@ -543,166 +543,169 @@ conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
 conf	language_id	7
 conf	mail_charset	ISO-8859-1
-contact	about_blurb	<p>Ceci est page de prise de contact pour <b>$1</b> - si vous avez un problème acev un projet hébergé par nous, adressez vos questions/informations au gestionnaire de bogue/aide pour ce projet. Vous pouvez accéder à ces fonctions en allant sur la page d'accueil du projet à <tt>http://$2/projects/&lt;nom du projet&gt;</tt> et en cliquant sur le menu adéquat.</p> Si vous avez besoin d'aide, si vous voulez faire remonter un bogue ou si vous souhaitez communiquer directement avec l'équipe de $1, dirigez-vous vers le <a href="/projects/siteadmin">Projet maître de $1</a>.</p>
+contact	about_blurb	<p>Ceci est la page de prise de contact pour <b>$1</b> : si vous avez des problèmes avec un projet hébergé ici, veuillez poser vos questions sur le gestionnaire de support ou de bug de ce projet. Vous pouvez accéder à ces fonctionnalités en vous rendant sur la page d'accueil du projet à l'adresse : <tt>http://$2/projects/&lt;nom du projet&gt;</tt> et en cliquant sur l'outil approprié.</p><p>Si vous avez besoin d'aide, que vous souhaitez signaler un bug ou communiquer directement avec l'équipe de $1, merci de vous rendre sur le <a href="/projects/siteadmin">Projet Principal de $1</a>.</p>
 contact	title	Contacter $1
 developer	body	Corps
 developer	date	Date
 developer	diary_and_notes	Journal et notes pour
-developer	entry_not_found	Données non trouvées pour cet utilisateur
-developer	no_entries	Cet utilisateur n'a pas d'entrées dans le jourmnal
+developer	entry_not_found	Données non disponibles pour cet utilisateur
+developer	no_entries	Cet utilisateur n'a pas d'entrées dans le journal
 developer	no_user_selected	Pas d'utilisateur sélectionné
 developer	subject	Sujet
 developer_monitor	error_inserting	Erreur d'insertion de l'utilisateur dans le suivi journalier
 developer_monitor	monitoring_user	L'utilisateur est maintenant suivi
-developer_monitor	monitoring_user_expl	<p>Vous recevrez maintenant un e-mail sur l 'activité journalière du développeur.</p><p>Pour arreter le monitoring, cliquez simplement à nouveau sur le lien « Suivre cet utilisateur »</p> 
+developer_monitor	monitoring_user_expl	<p>Vous recevrez désormais un e-mail sur l 'activité journalière du développeur.</p><p>Pour arrêter le suivi, cliquez à nouveau sur le lien « Suivre cet utilisateur »</p> 
 developer_monitor	monitoring_user_off	Le suivi a été arrété
-developer_monitor	monitoring_user_off_expl	Vous ne recevrez plus aucun mail de cet utilisateur
+developer_monitor	monitoring_user_off_expl	Vous ne recevrez plus de mail de cet utilisateur
 developer_monitor	title	Suivre un utilisateur
 developer_monitor_choose_user	body	Erreur - Choisissez d'abord un utilisateur à suivre
 developer_monitor_choose_user	title	Choisissez d'abord un utilisateur
-developer_rate	cannot_rate_yourself	Vous ne pouvez pas vous classez vous-même
-developer_rate	invalid_rating_value	ERREUR - Valeur de classement invalide
-developer_rate	ratings_recorded	Classements enregistrés
-developer_rate	ratings_recorded_body	Vous pouvez modifier votre classement en retournant sur la page, et en soumettant à nouveau un classement
+developer_rate	cannot_rate_yourself	Vous ne pouvez pas vous évaluer vous-même
+developer_rate	invalid_rating_value	ERREUR - Valeur d'évaluation invalide
+developer_rate	ratings_recorded	Evaluation enregistrée
+developer_rate	ratings_recorded_body	Vous pouvez réévaluer cette personne en retournant sur la page, et en soumettant une nouvelle évaluation.
 developer_rate	title	Classement de l'utilisateur
 developer_rate	turned_off_body	Vious avez choisi de ne pas participer aux classements
 developer_rate	turned_off_title	Classements désactivés
 docman	admin	Administration
 docman	description	Description
 docman	error_invalid_file_attack	Tentative d'atteindre un fichier invalide $1
-docman	error_no_docs	Ce projet n'a pas de documentation visible
-docman	error_no_groups_defined	Aucun document de groupe défini
-docman	submit_new	Soumettre une nouvelle documentation
-docman	turned_off	Ce projet à désactivé la gestion de documentation
-docman	view_doc	Voir la documentation
-docman_admin	add_edit_docgroups	Ajouter/Editer des documents de groupe
+docman	error_no_docs	Ce projet n'a pas de document visible
+docman	error_no_groups_defined	Aucun groupe de document défini
+docman	submit_new	Soumettre un nouveau document
+docman	turned_off	Ce projet a désactivé la gestion de documents
+docman	view_doc	Voir le document
+docman_admin	add_edit_docgroups	Ajouter/Editer des groupes de documents
 docman_admin	section	Projet : $1
-docman_admin	title	Gestionnaire de documentation : administration
+docman_admin	title	Gestionnaire de documents : Administration
 docman_admin_addgroups	section	Administration de la gestion de documents
-docman_admin_addgroups	title	Ajouter des documents de groupe
-docman_admin_docedit	section	Gestionnaire de documentation
-docman_admin_docedit	title	Édition d'un document
+docman_admin_addgroups	title	Ajouter des groupes de documents
+docman_admin_docedit	section	Gestionnaire de documents
+docman_admin_docedit	title	Modifier un document
 docman_admin_editdocs	doc_contents	Contenu du document
-docman_admin_editdocs	section	Gestionnaire de documentation : administration
+docman_admin_editdocs	section	Gestionnaire de documents : Administration
 docman_admin_editdocs	state	Etat
-docman_admin_editdocs	title	Édition de documents
+docman_admin_editdocs	title	Modifier des documents
 docman_admin_editdocs	upload	Optionnel : Uploader un nouveau fichier
 docman_admin_editgroups	add_group	Ajouter un groupe&nbsp;
-docman_admin_editgroups	description	Le nom du groupe sera utilisé comme titre
-docman_admin_editgroups	edit_group	Editer un groupe
-docman_admin_editgroups	group_id	Numéro d'identifiant
-docman_admin_editgroups	group_name	Nom de groupe
-docman_admin_editgroups	new_group_name	Nouveau nom de groupe&nbsp;
-docman_admin_editgroups	section	Gestionnaire de documentation : administration
+docman_admin_editgroups	description	Le nom du groupe sera utilisé comme titre. Il doit donc être formaté en conséquence.
+docman_admin_editgroups	edit_group	Modifier un groupe
+docman_admin_editgroups	group_id	Identifiant
+docman_admin_editgroups	group_name	Nom du groupe
+docman_admin_editgroups	new_group_name	Nouveau nom du groupe&nbsp;
+docman_admin_editgroups	section	Gestionnaire de documents : Administration
 docman_admin_editgroups	title	Édition des groupes de documents
-docman_admin_groupedit	section	Gestionnaire de documentation : administration
-docman_admin_groupedit	title	Renommage d'un groupe de documents
+docman_admin_groupedit	section	Gestionnaire de documents : Administration
+docman_admin_groupedit	title	Renommer un groupe de documents
 docman_common	error_min_desc_length	La description du document doit faire au moins 10 caractères
 docman_common	error_min_title_length	Le titre doit avoir au moins 5 caractères
 docman_common	no_docs	Aucun document trouvé
 docman_common_doc	invalid_docid	Document : n° de document invalide
 docman_common_docgroup	invalid_id	Groupe de documents : n° de groupe de documents invalide
-docman_common_docgroup	name_required	Groupe de Document : Le nom est requis
+docman_common_docgroup	name_required	Groupe de documents : le nom est obligatoire
 docman_display_doc	all_languages	Toutes les langues
 docman_display_doc	docmoved	Ce document se trouve maintenant <a href="/docman/view.php/$1/$2">ici</a>
 docman_display_doc	no_document_data_text	Pas de document à afficher - N° de document invalide ou inactif
 docman_display_doc	no_document_data_title	Pas de données dans le document
 docman_display_doc	section	Projet : $1
-docman_display_doc	title	Gestionnaire de documentation : affichage d'un document
+docman_display_doc	title	Gestionnaire de documents : affichage d'un document
 docman_new	description	Description
 docman_new	doc_title	Titre du document :
 docman_new	error_blank_document	Erreur en prenant un document vide
 docman_new	file	Fichier
 docman_new	group	Groupe auquel le document appartient
-docman_new	intro	<strong>Titre du document :</strong>  Se rapporte au titre relativement bref du document  (par exemple Comment utiliser le serveur de téléchargement)<br /><strong>Description:</strong> Une brève description à placer juste sous le titre.
+docman_new	intro	<strong>Titre du document</strong> : se rapporte au titre (relativement bref) du document  (par exemple : Comment utiliser le serveur de téléchargement)<br /><strong>Description</strong> : une brève description placée juste en dessous du titre.
 docman_new	language	Langue
-docman_new	no_valid_group	Aucun document de groupe sélectionné
+docman_new	no_valid_group	Aucun groupe de documents n'a été sélectionné
 docman_new	section	Projet : $1
 docman_new	state	Etat
-docman_new	submit	Soumettre l'information
+docman_new	submit	Soumettre les informations
 docman_new	submitted_successfully	Le document a été soumis avec succès
-docman_new	title	Gestionnaire de documentation : soumission d'un nouveau document
+docman_new	title	Gestionnaire de documents : Soumettre un nouveau document
 docman_new	upload_file	Télécharger vers le serveur
 error	error_creating	Erreur de création
 error	not_found	PAGE NON TROUVEE
 error	title	La page demandée  n'a pas été trouvée (Erreur 404)
 exit	choose_a_group	Erreur - Choisissez un groupe
-exit	choose_group_body	Aucun numéro d'identification de groupe choisi
-exit	choose_group_title	Erreur - aucun n° de groupe n'a été choisi
+exit	choose_group_body	Aucun identifiant de groupe n'a été choisi
+exit	choose_group_title	Erreur - Aucun identifiant de groupe n'a été choisi
 exit	exiting_with_error	Sortie avec erreur
-exit	missing_parameters_body	Erreur - Il manque des paramètres requis
-exit	missing_parameters_title	Erreur  Il manque des paramètres
-forum	choose	<p>Choisissez un forum, et vous pourrez consulter, rechercher et poster des messages
+exit	missing_parameters_body	Erreur - Il manque des paramètres obligatoires
+exit	missing_parameters_title	Erreur - Il manque des paramètres
+forum	choose	<p>Choisissez un forum : vous pourrez consulter, rechercher et ajouter des messages</p>
 forum	error_forum_not_found	Forum non trouvé
-forum	error_invalid_group_forum_id	$1 : n° de groupe de forum invalide
-forum	error_no_forums_found	Pas de forums trouvés pour $1
+forum	error_invalid_group_forum_id	$1 : identifiant de groupe de forum invalide
+forum	error_no_forums_found	Pas de forum trouvé pour $1
 forum	error_no_valid_forum_object	$1 : pas d'objet forum valide
-forum	error_no_valid_group_object	Forum:: pas d'objet groupe valide
+forum	error_no_valid_group_object	Forum:: Pas d'objet groupe valide
 forum	forum	Forum
-forum	forums_for	Forums pour $1
-forum	html	Le balises HTML seront affichées dans votre envoi comme du texte.
+forum	forums_for	Forums de $1
+forum	html	Les balises HTML de votre message seront affichées comme du texte.
 forum	section	Projet : $1
 forum	title	Forums
-forum_admin	add_forum	Ajout d'un forum
+forum_admin	add_forum	Ajouter un forum
 forum_admin	delete_message	Effacer le message
 forum_admin	section	Projet : $1
-forum_admin	title	Forums : administration
-forum_admin	update_forum	Mise à jour des informations/statut de forum
+forum_admin	title	Forums : Administration
+forum_admin	update_forum	Mettre à jour les informations et le statut du forum
 forum_admin_addforum	add_forum	Ajouter ce forum
-forum_admin_addforum	allow_anonymous	Envois anonymes autorisés ?
-forum_admin_addforum	email_posts	Adresser tous les envois à :
+forum_admin_addforum	allow_anonymous	Messages anonymes autorisés ?
+forum_admin_addforum	email_posts	Adresser tous les messages à :
 forum_admin_addforum	existing_forums	Forums existants
-forum_admin_addforum	forum_created	Le forum a été correctement créé
+forum_admin_addforum	forum_created	Le forum a été créé
 forum_admin_addforum	forum_description	Description
-forum_admin_addforum	forum_name	Nom de forum
-forum_admin_addforum	is_public	C'est public ?
+forum_admin_addforum	forum_name	Nom du forum
+forum_admin_addforum	is_public	Public ?
 forum_admin_addforum	section	Administration des forums
-forum_admin_addforum	title	Ajout d'un forum
-forum_admin_changestatus	change_status	Changement de statut du forum
+forum_admin_addforum	title	Ajouter un forum
+forum_admin_changestatus	change_status	Modifier le statut du forum
 forum_admin_changestatus	forum	Forum
-forum_admin_changestatus	intro	Vous pouvez ajuster le comportement du forum ici. Notez que les forums privés peuvent toujours être vus par les membres de votre projet, mais non par le public.
+forum_admin_changestatus	intro	Vous pouvez ajuster le comportement du forum ici. Notez que les forums privés peuvent toujours être vus par les membres de votre projet, mais pas par les autres utilisateurs.
 forum_admin_changestatus	no_forums_found	Aucun forum trouvé
 forum_admin_changestatus	section	Administration des forums
 forum_admin_changestatus	status	Statut
-forum_admin_changestatus	title	Changement d'état du forum
-forum_admin_changestatus	update_successful	Le forum a été correctement mis à jour
+forum_admin_changestatus	title	Modifier le statut du forum
+forum_admin_changestatus	update_successful	Le forum a été mis à jour
 forum_admin_delete	section	Administration des forums
-forum_admin_delete	title	Suppression d'un forum
-forum_admin_delete_message	section	Administration de forum
-forum_admin_delete_message	warning	ATTENTION ! Vous allez détruire un message et toute la file !!
+forum_admin_delete	title	Supprimer un forum
+forum_admin_delete_message	section	Administration des forums
+forum_admin_delete_message	title	Supprimer un message
+forum_admin_delete_message	enter_message_id	Saisissez l'identifiant d'un message
+forum_admin_delete_message	warning	ATTENTION ! Vous allez détruire un message et tous les messages qui lui sont rattachés !!
 forum_admin_delete_messages	messages_deleted	$1 messages effacés
 forum_common	error_adding_forum	Erreur lors de l'ajout d'un forum
-forum_common	error_min_desc_length	La description d'un forum doit comprendre au moins 10 caractères
-forum_common	error_min_name_length	Le nom d'un forum doit comprendre au moins 3 caractères
-forum_common	error_save_when_logged_in	Vous ne pouvez pas sauvegarder cet endroit sans être connecté
-forum_common	error_set_monitor	Vous ne pouvez pas surveiller ce forum sans être connecté
+forum_common	error_min_desc_length	La description d'un forum doit compter au moins 10 caractères
+forum_common	error_min_name_length	Le nom d'un forum doit compter au moins 3 caractères
+forum_common	error_save_when_logged_in	Vous ne pouvez pas sauvegarder cette position sans être identifié
+forum_common	error_set_monitor	Vous ne pouvez pas surveiller ce forum sans être identifié
 forum_common	error_unable_to_add_monitor	Impossible d'ajouter la surveillance
 forum_common	welcome_to	Bienvenue sur $1
 forum_common_forum	error_save_place	Forum::savePlace()
-forum_common_forummessage	error_cannot_update_master_thread	Échec de la mise à jour du fil maître avec la date courante
+forum_common_forummessage	error_cannot_update_master_thread	Echec lors de la mise à jour du fil de discussion principal avec la date courante
 forum_common_forummessage	error_cannot_update_parent	Échec lors de la mise à jour du parent
-forum_common_forummessage	error_get_message_id	ForumMessage::create() n'arrive pas à obtenir d'identifiant de message
-forum_common_forummessage	error_group_forum_id	L'identifiant group_forum_id de la BD ne correspond pas à celui de l'objet Forum
-forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() identifiant de message invalide
-forum_common_forummessage	error_no_valid_parent_message	Message de forum : « create() No Valid ParentMessage Object »
-forum_common_forummessage	error_not_logged	Vous ne pouvez pas poster sans être connecté
-forum_common_forummessage	error_posting_failed	ForumMessage::create() le postage a échoué
-forum_common_forummessage	error_required_fields	Vous devez inclure un objet et un corps de message
+forum_common_forummessage	error_get_message_id	ForumMessage::create() Impossible d'obtenir un nouvel identifiant de message
+forum_common_forummessage	error_getting_next_thread	Echec lors de la récupération du thread_id suivant
+forum_common_forummessage	error_group_forum_id	L'identifiant group_forum_id de la BDD ne correspond pas à celui de l'objet Forum
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Identifiant de message invalide
+forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() Pas d'objet ParentMessage valide
+forum_common_forummessage	error_not_logged	Vous devez être identifié pour poster des messages
+forum_common_forummessage	error_posting_failed	ForumMessage::create() L'ajout de message a échoué
+forum_common_forummessage	error_required_fields	Doit contenir un sujet et un corps de message
 forum_common_forummessage	forum_message	Message de forum
 forum_common_forummessage	no_valid_forum_object	ForumMessage:: Pas d'objet Forum valide
-forum_errors	error_determining_forum_id	Erreur de détermination de l'identitité du forum
+forum_errors	error_determining_forum_id	Erreur lors de la détermination de forum_id
 forum_errors	error_getting_forum	Erreur de lecture du forum
 forum_forum	author	Auteur
 forum_forum	changeview	Changer de visualisation
 forum_forum	date	Date
-forum_forum	flat	Liste plate
+forum_forum	flat	Plat
 forum_forum	forum	Forum
-forum_forum	lastpost	Dernier(s) envoi(s)
-forum_forum	nested	Liste emboitée
+forum_forum	lastpost	Dernier(s) messages(s)
+forum_forum	nested	Hiérarchisé
 forum_forum	next_messages	Messages suivants
 forum_forum	no_forum_chosen	Aucun forum choisi
-forum_forum	posts	Envois
-forum_forum	postsuccess	Message Envoyé
+forum_forum	posts	Messages
+forum_forum	postsuccess	Message envoyé
 forum_forum	previous_messages	Messages précédents
 forum_forum	replies	Réponses
 forum_forum	section	Projet : $1
@@ -712,8 +715,8 @@ forum_forum	threaded	Sous forme de fils de discussions
 forum_forum	threads	Fils de discussions
 forum_forum	title	Forums : affichage d'un forum
 forum_forum	topic	Sujet
-forum_forum	topicstarter	Initiateur
-forum_forum	ultimate	De la fin
+forum_forum	topicstarter	Sujet initial
+forum_forum	ultimate	Ultimate
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
 forum_message	by	Par :
