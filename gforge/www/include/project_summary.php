@@ -72,7 +72,12 @@ function project_get_survey_count($group_id) {
  * @param		int		The group ID
  */
 function project_get_public_forum_count($group_id) {
-	return project_getaggvalue($group_id,'fora'); 
+	$res = db_query("SELECT count(forum.msg_id) AS count FROM forum,forum_group_list WHERE "
+	. "forum_group_list.group_id=$group_id AND forum.group_forum_id=forum_group_list.group_forum_id "
+	. "AND forum_group_list.is_public=1");
+	$count=db_result($res,0,'count');
+	db_free_result($res);
+	return $count;
 }
 
 /**
@@ -81,7 +86,10 @@ function project_get_public_forum_count($group_id) {
  * @param		int		The group ID
  */
 function project_get_public_forum_message_count($group_id) {
-	return project_getaggvalue($group_id,'fmsg'); 
+	$res = db_query("SELECT count(*) AS count FROM forum_group_list WHERE group_id=$group_id AND is_public=1");
+	$count=db_result($res,0,'count');
+	db_free_result($res);
+	return $count;
 }
 
 /**
