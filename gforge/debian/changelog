@@ -7,7 +7,8 @@ sourceforge (2.6-0+5+) unstable; urgency=low
   * [Roland] Added migration capability to the db-upgrade26.pl script.
     Database upgrades smoothly from 2.5 to 2.6.  Hopefully.  Not very well
     tested yet.
-
+  * [Christian] Removed libmcrypt bug workaround
+ 
  -- Roland Mas <lolando@debian.org>  Thu,  7 Feb 2002 14:50:31 +0100
 
 sourceforge (2.6-0+5) unstable; urgency=low
