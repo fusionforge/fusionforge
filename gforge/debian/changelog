@@ -1,6 +1,7 @@
 sourceforge (2.5-32+) unstable; urgency=low
 
-  * 
+  * [Roland] Fixed the fix in db-upgrade.pl, which caused an error to
+    occur when upgrading (closes: #159277).
 
  --
 

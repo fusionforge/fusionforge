@@ -342,7 +342,6 @@ eval {
                     and unix_uid = 0" ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
 	$sth->finish () ;
 	
 	debug "Updating debian_meta_data table." ;
