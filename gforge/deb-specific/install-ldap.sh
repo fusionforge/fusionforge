@@ -9,7 +9,10 @@
 
 set -e
 
-DEBSFDEBUG=$GFORGEDEBUG
+# This is purely for compatibility, and will be removed sometime
+if [ "$DEBSFDEBUG" = 1 ] ; then
+    GFORGEDEBUG=1
+fi
 
 if [ "$GFORGEDEBUG" != 1 ] ; then
     DEVNULL12="> /dev/null 2>&1"
