@@ -1,8 +1,11 @@
 sourceforge (2.5-25+) unstable; urgency=low
 
   * [Roland] Removed unused dir /usr/lib/sourceforge/templates.
+  * [Roland] Recalculated $version in db-upgrade.pl.
+  * [Roland] Mentioned the .sourceforge-old backup files in the debconf
+    question.
 
- --
+ -- Roland Mas <lolando@debian.org>  Sat, 23 Feb 2002 15:08:42 +0100
 
 sourceforge (2.5-25) unstable; urgency=low
 

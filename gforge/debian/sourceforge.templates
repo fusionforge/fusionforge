@@ -238,7 +238,8 @@ Description: Do you want to let sourceforge install modify some config files?
  be changed.  The debian policy forbids us to fiddle with them automatically,
  so the default answer is "no", leaving you to update them.  If, however, you'd
  like me to update them, just answer "yes" here.  It should be safe, unless
- you have a particularly tricky system.
+ you have a particularly tricky system.  If you choose to answer "yes" here,
+ backups of your previous files will be made, named <file>.sourceforge-old.
  .
  Modified files are: /etc/ldap/slapd.conf, /etc/nsswitch.conf,
  /etc/libnss-ldap.conf, /etc/apache/httpd.conf,
@@ -247,16 +248,14 @@ Description: Do you want to let sourceforge install modify some config files?
  /etc/exim/main.cf, /etc/proftpd.conf, /etc/bind/named.conf,
  /etc/init.d/ssh.
  .
- Notice: usage of NIS is not recommended, since you can have
- duplicated users, groups.
- .
  We will maybe have a better support for this in the future,
  feel free to send a patch :-)
 Description-fr: Modifier automatiquement certains fichiers ?
  Voulez-vous laisser l'intallation de sourceforge modifier certains
  fichiers de configuration ?  La modification est non recommandée,
  et les règles Debian l'empêchent d'être systématique, elle est donc
- non activée par défaut.
+ non activée par défaut.  Si vous répondez "oui" ici, des sauvegardes
+ des fichiers modifiés seront faites sous le nom <fichier>.sourceforge-old.
  .
  Les fichiers modifiés sont: /etc/ldap/slapd.conf, /etc/nsswitch.conf,
  /etc/libnss-ldap.conf, /etc/apache/httpd.conf
@@ -264,8 +263,5 @@ Description-fr: Modifier automatiquement certains fichiers ?
  /etc/postgresql/pg_hba.conf, /etc/exim/main.cf, /etc/bind/named.conf,
  /etc/exim/main.cf, /etc/proftpd.conf, /etc/bind/named.conf,
  /etc/init.d/ssh.
- .
- Attention: l'usage de NIS n'est pas recommandé car cela peut créer
- des duplications d'utilisateurs et de groupes.
  .
  Nous supporterons peut etre cela de meilleure façon, envoyez vos patch :-)
