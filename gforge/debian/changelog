@@ -1,10 +1,10 @@
-sourceforge (2.5-23+) unstable; urgency=low
+sourceforge (2.5-24) unstable; urgency=low
 
   * [Roland] Fixed a few errors (SQL syntax, queries on nonexistant
     tables) in project_metric.php.
   * [Roland] Marked the templates as conffiles (closes: #130239).
 
- -- Roland Mas <lolando@debian.org>  Thu, 14 Feb 2002 16:49:07 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 14 Feb 2002 17:17:26 +0100
 
 sourceforge (2.5-23) unstable; urgency=low
 
