@@ -564,6 +564,10 @@ class Forum extends Error {
 	 *	@return boolean success.
 	 */
 	function addAllUsers() {
+		global $sys_news_group;
+		if ($this->Group->getID() == $sys_news_group) {
+			return true;
+		}
 		if (!$this->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
