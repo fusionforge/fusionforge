@@ -34,35 +34,39 @@
     </s:complexType>>
     </s:schema>
     </types>
-    <message name="helloRequest">
-    <part name="parm" type="xsd:string" />
-    </message>
-    <message name="helloResponse">
-    <part name="parameters" type="xsd:string" />
-    </message>
-    <message name="userRequest">
-        <part name="func" type="xsd:string" />
-        <part name="params" type="s0:ArrayOfstring" />
-    </message>
-    <message name="userResponse">
-        <part name="userResponse" type="s0:ArrayOfstring" />
-    </message>
+
+<message name="helloRequest">
+	<part name="parm" type="xsd:string" />
+</message>
+
+<message name="helloResponse">
+	<part name="parameters" type="xsd:string" />
+</message>
+
+<message name="userRequest">
+	<part name="func" type="xsd:string" />
+	<part name="params" type="s0:ArrayOfstring" />
+</message>
+
+<message name="userResponse">
+	<part name="userResponse" type="s0:ArrayOfstring" />
+</message>
     
 <message name="login">
-        <part name="userid" type="xsd:string" />
-        <part name="passwd" type="xsd:string" />
-    </message>
-    <message name="loginResponse">
-        <part name="sessionKey" type="xsd:string" />
-    </message>
+	<part name="userid" type="xsd:string" />
+	<part name="passwd" type="xsd:string" />
+</message>
+<message name="loginResponse">
+	<part name="sessionKey" type="xsd:string" />
+</message>
 
 <message name="logout">
-        <part name="sessionkey" type="xsd:string" />
-    </message>
-    <message name="logoutResponse">
-        <part name="statusCode" type="xsd:string" />
-    </message>
-
+	<part name="sessionkey" type="xsd:string" />
+</message>
+<message name="logoutResponse">
+	<part name="statusCode" type="xsd:string" />
+</message>
+	
 <message name="bugFetch">
         <part name="sessionkey" type="xsd:string" />
         <part name="project" type="xsd:string" />
@@ -100,35 +104,37 @@
         <part name="result" type="xsd:string" />
     </message>
 
-    <portType name="Service1PortType">
-    <operation name="hello">
-    <input message="s0:helloRequest"/>
-    <output message="s0:helloResponse"/>
-    </operation>
-    <operation name="user">
-    <input message="s0:userRequest"/>
-    <output message="s0:userResponse"/>
-    </operation>
+<portType name="Service1PortType">
 
-    <operation name="bugFetch">
-    <input message="s0:bugFetchRequest"/>
-    <output message="s0:bugFetchResponse"/>
-    </operation>
+<operation name="hello">
+	<input message="s0:helloRequest"/>
+	<output message="s0:helloResponse"/>
+</operation>
 
-    <operation name="bugList">
-    <input message="s0:bugListRequest"/>
-    <output message="s0:bugListResponse"/>
-    </operation>
+<operation name="user">
+	<input message="s0:userRequest"/>
+	<output message="s0:userResponse"/>
+</operation>
 
-    <operation name="bugAdd">
-    <input message="s0:bugAddRequest"/>
-    <output message="s0:bugAddResponse"/>
-    </operation>
+<operation name="bugFetch">
+	<input message="s0:bugFetchRequest"/>
+	<output message="s0:bugFetchResponse"/>
+</operation>
+
+<operation name="bugList">
+	<input message="s0:bugListRequest"/>
+	<output message="s0:bugListResponse"/>
+</operation>
+
+<operation name="bugAdd">
+	<input message="s0:bugAddRequest"/>
+	<output message="s0:bugAddResponse"/>
+</operation>
     
 <operation name="bugUpdate">
-    <input message="s0:bugUpdateRequest"/>
-    <input message="s0:bugUpdateResponse"/>
-    </operation>
+	<input message="s0:bugUpdateRequest"/>
+	<input message="s0:bugUpdateResponse"/>
+</operation>
 
     </portType>
     <binding name="Service1Binding" type="s0:Service1PortType">
@@ -193,29 +199,29 @@
     </operation>
 
 <operation name="login">
-    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
-    <input>
-    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-    </input>
-    <output>
-    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-    </output>
-    </operation>
+	<soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+	<input>
+		<soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	</input>
+	<output>
+		<soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	</output>
+</operation>
 
 <operation name="logout">
-    <soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
-    <input>
-    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-    </input>
-    <output>
-    <soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
-    </output>
-    </operation>
+	<soap:operation soapAction="http://gforge.org/soap/SoapAPI.php" style="rpc"/>
+	<input>
+		<soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	</input>
+	<output>
+		<soap:body use="encoded" namespace="http://gforge.org" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+	</output>
+</operation>
 
-    </binding>
-    <service name="Service1">
-    <port name="Service1Port" binding="s0:Service1Binding">
-    <soap:address location="http://gforge.org/soap/SoapAPI.php"/>
-    </port>
-    </service>
+	</binding>
+	<service name="Service1">
+		<port name="Service1Port" binding="s0:Service1Binding">
+			<soap:address location="http://gforge.org/soap/SoapAPI.php"/>
+		</port>
+	</service>
 </definitions>

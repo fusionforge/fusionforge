@@ -159,7 +159,7 @@ $server->register(
 
 $server->register(
 	'logout',
-	array(),
+	null,
 	array('logoutResponse'=>'xsd:string'),
 	$uri);
 
