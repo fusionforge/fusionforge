@@ -807,9 +807,9 @@ class Group extends Error {
 	function getSCMBox() {
 		if ( $GLOBALS['sys_scm_single_host'] == '1' ) {
 			return $GLOBALS['sys_scm_host'];
-		else
+		} else {
 			return $this->data_array['scm_box'];
-		fi
+		}
 	}
 
 	/**
