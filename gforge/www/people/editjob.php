@@ -132,8 +132,8 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 	} else {
 
 		echo $Language->getText('people_editjob','skill_explains').'
-		
-		<p><form action="'.$PHP_SELF.'" method="post">
+
+		<p /><form action="'.$PHP_SELF.'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<input type="hidden" name="job_id" value="'.$job_id.'" />
 		<strong>'.$Language->getText('people','category').':</strong><br />
@@ -146,14 +146,14 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		<input type="text" name="title" value="'. db_result($result,0,'title') .'" size="40" maxlength="60" /></p>
 		<p>
 		<strong>'.$Language->getText('people','long_description').':</strong><br />
-		<textarea name="description" rows="10" cols="60" wrap="soft">'. db_result($result,0,'description') .'</textarea></p>
+		<textarea name="description" rows="10" cols="60">'. db_result($result,0,'description') .'</textarea></p>
 		<p>
-		<input type="submit" name="update_job" value="'.$Language->getText('people_editjob','update_description').'" />
-		</form></p>';
+		<input type="submit" name="update_job" value="'.$Language->getText('people_editjob','update_description').'" /></p>
+		</form>';
 
 		//now show the list of desired skills
 		echo '<p>'.people_edit_job_inventory($job_id,$group_id) . '</p>';
-		echo '<p><form action="/people/" method="post"><input type="submit" name="submit" value="'.$Language->getText('people_editjob','finished').'" /></form>';
+		echo '<p /><form action="/people/" method="post"><input type="submit" name="submit" value="'.$Language->getText('people_editjob','finished').'" /></form>';
 
 	}
 

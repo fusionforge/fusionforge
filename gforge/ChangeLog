@@ -1,14 +1,24 @@
+2003-03-08  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/people/index.php: valid XHTML 1.0 Transitional.
+
+	* www/people/people_utils.php(people_header): remove
+	unneeded </strong>.
+	(people_show_job_inventory): valid XHTML.
+
+	* www/include/languages/Base.tab(people:about_blurb): XHTML-ise.
+
 2003-03-07  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/include/languages/Italian.tab:
 	more translations
-	
+
 	* www/include/languages/SimplifiedChinese.tab:
 	applied patch #242
-	
+
 	* docs/xdocs/*:
 	documentation improvements
-	
+
 	* install
 	SF->GForge
 

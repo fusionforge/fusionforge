@@ -1,8 +1,8 @@
 <?php
 /**
- * SourceForge Jobs (aka Help Wanted) Board 
+ * SourceForge Jobs (aka Help Wanted) Board
  *
- * Job/People finder 
+ * Job/People finder
  *
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
@@ -27,7 +27,6 @@ function people_header($params) {
 	if ($group_id && $job_id) {
 		echo ' | <a href="/people/editjob.php?group_id='. $group_id .'&amp;job_id='. $job_id .'">Edit Job</a>';
 	}
-	echo '</strong>';
 }
 
 function people_footer($params) {
@@ -180,7 +179,7 @@ function people_edit_skill_inventory($user_id) {
 	}
 	//add a new skill
 	$i++; //for row coloring
-	
+
 	echo '
 	<tr><td colspan="4"><h3>'.$Language->getText('people','add_new_skill').'</h3></td></tr>
 	<form action="'.$PHP_SELF.'" method="post">
@@ -237,13 +236,13 @@ function people_show_job_inventory($job_id) {
 	$title_arr[]=$Language->getText('people','skill');
 	$title_arr[]=$Language->getText('people','level');
 	$title_arr[]=$Language->getText('people','experience');
-	
+
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<h2>'.$Language->getText('people','no_skill_inventory_setup_up').'</h2>';
+			<tr><td><h2>'.$Language->getText('people','no_skill_inventory_setup_up').'</h2></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i < $rows; $i++) {
@@ -291,8 +290,12 @@ function people_get_category_name($category_id) {
 	}
 }
 
+// FIXME
+// This function does not produce valid XHTML; however, I could not
+// think of a way of turning into valid XHTML without the resulting
+// table looking like poo.
 function people_edit_job_inventory($job_id,$group_id) {
-	global $PHP_SELF, $Language;
+	global $PHP_SELF, $Language, $HTML;
 	$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id'";
 	$result=db_query($sql);
 
@@ -301,8 +304,8 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$title_arr[]=$Language->getText('people','level').utils_requiredField();
 	$title_arr[]=$Language->getText('people','experience').utils_requiredField();
 	$title_arr[]=$Language->getText('people','action');
-			
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+	echo $HTML->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -312,17 +315,17 @@ function people_edit_job_inventory($job_id,$group_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
+			<tr '. $HTML->boxGetAltRowStyle($i) . '>
 			<form action="'.$PHP_SELF.'" method="post">
 			<input type="hidden" name="job_inventory_id" value="'. db_result($result,$i,'job_inventory_id') .'" />
 			<input type="hidden" name="job_id" value="'. db_result($result,$i,'job_id') .'" />
 			<input type="hidden" name="group_id" value="'.$group_id.'" />
-			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-				<td><span style="font-size:smaller">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</span></td>
-				<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</span></td>
-				<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</span></td>
-				<td nowrap="nowrap"><input type="submit" name="update_job_inventory" value="'.$Language->getText('general','update').'" /> &nbsp;
+				<td width="25%"><span style="font-size:smaller">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</span></td>
+				<td width="25%"><span style="font-size:smaller">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</span></td>
+				<td width="25%"><span style="font-size:smaller">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</span></td>
+				<td width="25%" nowrap="nowrap"><input type="submit" name="update_job_inventory" value="'.$Language->getText('general','update').'" /> &nbsp;
 					<input type="submit" name="delete_from_job_inventory" value="'.$Language->getText('general','delete').'" /></td>
-				</tr></form>';
+				</form></tr>';
 		}
 
 	}
@@ -331,17 +334,17 @@ function people_edit_job_inventory($job_id,$group_id) {
 
 	echo '
 	<tr><td colspan="4"><h3>'.$Language->getText('people','add_new_skill').'</h3></td></tr>
+	<tr '. $HTML->boxGetAltRowStyle($i) . '>
 	<form action="'.$PHP_SELF.'" method="post">
 	<input type="hidden" name="job_id" value="'. $job_id .'" />
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
-	<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
-		<td><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>
-		<td><span style="font-size:smaller">'. people_skill_level_box('skill_level_id'). '</span></td>
-		<td><span style="font-size:smaller">'. people_skill_year_box('skill_year_id'). '</span></td>
-		<td nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="'.$Language->getText('people','add_skill').'" /></td>
-	</tr></form>';
+		<td width="25%"><span style="font-size:smaller">'. people_skill_box('skill_id'). '</span></td>
+		<td width="25%"><span style="font-size:smaller">'. people_skill_level_box('skill_level_id'). '</span></td>
+		<td width="25%"><span style="font-size:smaller">'. people_skill_year_box('skill_year_id'). '</span></td>
+		<td width="25%" nowrap="nowrap"><input type="submit" name="add_to_job_inventory" value="'.$Language->getText('people','add_skill').'" /></td>
+	</form></tr>';
 
-	echo $GLOBALS['HTML']->listTableBottom();
+	echo $HTML->listTableBottom();
 }
 
 function people_show_category_table() {
@@ -377,7 +380,7 @@ function people_show_category_table() {
 		for ($i=0; $i<$rows; $i++) {
 			echo db_error();
 			$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/people/?category_id='.
-				db_result($result,$i,'category_id') .'">'. 
+				db_result($result,$i,'category_id') .'">'.
 				db_result($result,$i,'name') .'</a> ('. db_result($result,$i,'total') .')</td></tr>';
 		}
 	}
@@ -429,14 +432,14 @@ function people_show_job_list($result) {
 	if ($rows < 1) {
 		$return .= '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="3"><h2>'.$Language->getText('people','none_found').'</h2>'. db_error() .'</td></tr>';
 	} else {
-		for ($i=0; $i < $rows; $i++) {	
+		for ($i=0; $i < $rows; $i++) {
 			$return .= '
 				<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .
 					'><td><a href="/people/viewjob.php?group_id='.
 					db_result($result,$i,'group_id') .'&amp;job_id='.
-					db_result($result,$i,'job_id') .'">'. 
+					db_result($result,$i,'job_id') .'">'.
 					db_result($result,$i,'title') .'</a></td><td>'.
-					db_result($result,$i,'category_name') .'</td><td>'. 
+					db_result($result,$i,'category_name') .'</td><td>'.
 					date($sys_datefmt,db_result($result,$i,'date')) .
 					'</td><td><a href="/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/">'.
 					db_result($result,$i,'group_name') .'</a></td></tr>';

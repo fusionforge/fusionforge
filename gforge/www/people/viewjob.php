@@ -1,7 +1,7 @@
 <?php
 /**
   *
-  * SourceForge Jobs (aka Help Wanted) Board 
+  * SourceForge Jobs (aka Help Wanted) Board
   *
   * SourceForge: Breaking Down the Barriers to Open Source Development
   * Copyright 1999-2001 (c) VA Linux Systems
@@ -42,10 +42,10 @@ if ($group_id && $job_id) {
 		people_header(array('title'=>$Language->getText('people_viewjob','view_a_job'),'pagename'=>'people_viewjob',
 								'titlevals'=>array(db_result($result,0,'category_name'),db_result($result,0,'group_name')),
 								'sectionvals'=>array(db_result($result,0,'group_name'))));
-								
+
 //		<h2>'. db_result($result,0,'category_name') .' wanted for '. db_result($result,0,'group_name') .'</h2>
 		echo '
-		<p>
+		<p />
 		<table border="0" width="100%">
                 <tr><td colspan="2">
 			<strong>'. db_result($result,0,'title') .'</strong>
@@ -53,7 +53,7 @@ if ($group_id && $job_id) {
 
 		<tr><td>
 			<strong>'.$Language->getText('people_viewjob','contact_info').':<br />
-			<a href="/sendmessage.php?touser='. db_result($result,0,'user_id') .'&subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
+			<a href="/sendmessage.php?touser='. db_result($result,0,'user_id') .'&amp;subject='. urlencode( 'RE: '.db_result($result,0,'title')) .'">'. db_result($result,0,'user_name') .'</a></strong>
 		</td><td>
 			<strong>'.$Language->getText('people','status').':</strong><br />
 			'. db_result($result,0,'status_name') .'
@@ -75,7 +75,7 @@ if ($group_id && $job_id) {
 		<h2>'.$Language->getText('people_viewjob','required_skills').':</h2>';
 
 		//now show the list of desired skills
-		echo '<p>'.people_show_job_inventory($job_id).'</p></td></tr></table></p>';
+		echo people_show_job_inventory($job_id).'</td></tr></table>';
 	}
 
 	people_footer(array());

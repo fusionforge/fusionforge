@@ -1,7 +1,7 @@
 <?php
 /**
   *
-  * SourceForge Jobs (aka Help Wanted) Board 
+  * SourceForge Jobs (aka Help Wanted) Board
   *
   * SourceForge: Breaking Down the Barriers to Open Source Development
   * Copyright 1999-2001 (c) VA Linux Systems
@@ -24,15 +24,15 @@ if ($group_id) {
 	<p>';
 
 	echo people_show_project_jobs($group_id) . '</p>';
-	
+
 } else if ($category_id) {
 
 	people_header(array('title'=>$Language->getText('people','title'),'pagename'=>'people_cat','titlevals'=>array(people_get_category_name($category_id))));
 
 	echo '
 		<p>'.$Language->getText('people','click_job_titles').'</p>
-		<p>';
-	echo people_show_category_jobs($category_id) . '</p>';
+';
+	echo people_show_category_jobs($category_id);
 
 } else {
 
