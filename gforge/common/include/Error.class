@@ -140,6 +140,20 @@ class Error {
 		exit_error($Language->getText('general','error'),$Language->getText('general','error_group_id'));
 		
 	}
+
+	/**
+	 * setMissingParamsError() - sets an Group ID Error
+	 *  retrieves the localized error string for missing pparamsand calls exit_error()
+	 *
+	 *
+	 */
+
+	function setMissingParamsError(){
+		global $Language;
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_missing_params'));
+		
+	}
+
 }
 
 ?>
