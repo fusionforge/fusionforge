@@ -46,7 +46,7 @@ if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
 
 	readfile($sys_upload_dir.$group_name.'/'.$filename);
 	$res=db_query("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day) 
-		VALUES ('$REMOTE_ADDR','$file_id','".date('m')."','".date('d')."')");
+		VALUES ('$REMOTE_ADDR','$file_id','".date('Ym')."','".date('d')."')");
 } else {
 	Header("Status: 404");
 }
