@@ -59,7 +59,7 @@ class TasksSearchQuery extends SearchQuery {
 			. ' AND project_task.group_project_id = project_group_list.group_project_id '
 			. ' AND project_group_list.group_id  ='.$this->groupId;
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= 'AND project_group_list.project_name in ('.$this->sections.') ';
+			$sql .= 'AND project_group_list.group_project_id in ('.$this->sections.') ';
 		}
 		if (!$this->showNonPublic) {
 			$sql .= 'AND project_group_list.is_public = 1 ';

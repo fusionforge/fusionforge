@@ -57,7 +57,7 @@ class DocsSearchQuery extends SearchQuery {
 			.' WHERE doc_data.doc_group = doc_groups.doc_group'
 			.' AND doc_data.group_id ='.$this->groupId;
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= ' AND doc_groups.groupname IN ('.$this->sections.') ';
+			$sql .= ' AND doc_groups.doc_group IN ('.$this->sections.') ';
 		}
 		if ($this->showNonPublic) {
 			$sql .= ' AND doc_data.stateid IN (1, 4, 5)';

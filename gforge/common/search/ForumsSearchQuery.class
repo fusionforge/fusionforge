@@ -59,7 +59,7 @@ class ForumsSearchQuery extends SearchQuery {
 			. 'AND forum_group_list.is_public <> 9 '			
 			. 'AND forum.group_forum_id IN (SELECT group_forum_id FROM forum_group_list WHERE group_id = '.$this->groupId.') ';
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= 'AND forum_group_list.forum_name IN ('.$this->sections.') ';
+			$sql .= 'AND forum_group_list.group_forum_id IN ('.$this->sections.') ';
 		}
 		if (!$this->showNonPublic) {
 			$sql .= 'AND forum_group_list.is_public = 1 ';

@@ -59,7 +59,7 @@ class FrsSearchQuery extends SearchQuery {
 			. ' AND frs_package.group_id='.$this->groupId;
 		
 		if ($this->sections != SEARCH__ALL_SECTIONS) {
-			$sql .= ' AND frs_package.name IN ('.$this->sections.') ';
+			$sql .= ' AND frs_package.package_id IN ('.$this->sections.') ';
 		}
 		if(!$this->showNonPublic) {
 			$sql .= ' AND is_public=1';
