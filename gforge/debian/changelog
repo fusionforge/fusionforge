@@ -1,4 +1,4 @@
-sourceforge (2.6-0+2+) unstable; urgency=low
+sourceforge (2.6-0+3) unstable; urgency=low
 
   * [Christian] Added proper chmod for cp -r www and common
   * [Christian] Added homedir_prefix and groupdir_prefix in
@@ -8,7 +8,7 @@ sourceforge (2.6-0+2+) unstable; urgency=low
     not overwrite local changes.
   * [Roland] [From 2.5] Added cvssh.pl.
 
- -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 17:32:06 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Mon,  3 Dec 2001 20:09:39 +0100
 
 sourceforge (2.6-0+2) unstable; urgency=low
 
