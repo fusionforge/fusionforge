@@ -72,7 +72,7 @@ Description-fr: Mot de passe pour la base de données - confirmation
 Template: sourceforge/system_name
 Type: string
 Default: Sourceforge
-Default-fr: 
+Default-fr: Sourceforge
 Description: The Sourceforge system name
  This name is used in various places throughout the system.
 Description-fr: Nom de votre système Sourceforge
