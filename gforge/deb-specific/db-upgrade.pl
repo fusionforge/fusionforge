@@ -1179,7 +1179,38 @@ eval {
     if (is_lesser $version, $target) {
       debug "Upgrading with 20030312.sql" ;
 
-      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030312.sql") } ;
+      my $pg_version = &get_pg_version ;
+      
+      if (is_lesser $pg_version, "7.3") {
+	  @reqlist = (
+		      "DROP TRIGGER projtask_insert_depend_trig ON project_task",
+		      "DROP FUNCTION projtask_insert_depend ()",
+		      "CREATE OR REPLACE FUNCTION projtask_insert_depend () RETURNS OPAQUE AS '
+DECLARE
+	dependon RECORD;
+	delta INTEGER;
+BEGIN
+	IF NEW.start_date > NEW.end_date THEN
+		RAISE EXCEPTION ''START DATE CANNOT BE AFTER END DATE'';
+	END IF;
+	FOR dependon IN SELECT * FROM project_dependon_vw
+				WHERE project_task_id=NEW.project_task_id LOOP
+		IF dependon.end_date > NEW.start_date THEN
+			delta := dependon.end_date-NEW.start_date;
+			RAISE NOTICE ''Bumping Back: % Delta: % '',NEW.project_task_id,delta;
+			NEW.start_date := NEW.start_date+delta;
+			NEW.end_date := NEW.end_date+delta;
+		END IF;
+	END LOOP;
+	RETURN NEW;
+END;
+' LANGUAGE 'plpgsql'",
+"CREATE TRIGGER projtask_insert_depend_trig BEFORE INSERT OR UPDATE ON project_task
+	FOR EACH ROW EXECUTE PROCEDURE projtask_insert_depend()",
+		      ) ;
+      } else {
+	  @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030312.sql") } ;
+      }
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
