@@ -72,8 +72,10 @@ group:          files ldap
 shadow:         files ldap
 FIN
 	# Copy miscellaneous files
-	find /etc/ssh | cpio --quiet -pdumLB $CHROOTDIR
-	cp /etc/pam.d/ssh $CHROOTDIR/etc/pam.d
+	[ -d /etc/ssh ] && find /etc/ssh | cpio --quiet -pdumLB $CHROOTDIR
+	[ -d /etc/ssh-nonfree ] && find /etc/ssh-nonfree | cpio --quiet -pdumLB $CHROOTDIR
+	[ -f /etc/pam.d/ssh ] && cp /etc/pam.d/ssh $CHROOTDIR/etc/pam.d
+	[ -f /etc/pam.d/ssh-nonfree ] && cp /etc/pam.d/ssh-nonfree $CHROOTDIR/etc/pam.d
 	cp /etc/pam.d/login $CHROOTDIR/etc/pam.d
 	cp /etc/pam.d/su $CHROOTDIR/etc/pam.d
 	cp /lib/libpam* $CHROOTDIR/lib

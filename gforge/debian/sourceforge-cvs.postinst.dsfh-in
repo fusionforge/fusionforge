@@ -43,7 +43,8 @@ case "$1" in
 	chmod 775 /var/log/sourceforge/cvs
 
 	# Restart some services
-	invoke-rc.d ssh start
+	[ -d /etc/ssh ] && invoke-rc.d ssh start
+	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree start
 	
     ;;
 
