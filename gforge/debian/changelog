@@ -1,3 +1,12 @@
+gforge (3.1-8) unstable; urgency=low
+
+  * [Roland] It seems the new organisation of the apache (and related)
+    packages managed to break quite a lot of things.  Still trying to
+    catch up, this time removing a "Listen" directive that would turn out
+    to be a duplicate one, thus preventing Apache from running.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 11 Jan 2004 12:15:33 +0100
+
 gforge (3.1-7) unstable; urgency=low
 
   * [Roland] Yet another LDAP fix.  This one would completely prevent
