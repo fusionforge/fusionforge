@@ -79,15 +79,15 @@ textarea { background-color:  #314f4f; color: #fff3e0; }
 
 
 /* priority  */
-.priora { background-color: #000000; }
-.priorb { background-color: #2b0000; }
-.priorc { background-color: #3a0000; }
-.priord { background-color: #510000; }
-.priore { background-color: #660000; }
-.priorf { background-color: #7c0000; }
-.priorg { background-color: #930000; }
-.priorh { background-color: #a50000; }
-.priori { background-color: #bf0000; }
+.prior1 { background-color: #000000; }
+.prior2 { background-color: #2b0000; }
+.prior3 { background-color: #3a0000; }
+.prior4 { background-color: #510000; }
+.prior5 { background-color: #660000; }
+.prior6 { background-color: #7c0000; }
+.prior7 { background-color: #930000; }
+.prior8 { background-color: #a50000; }
+.prior9 { background-color: #bf0000; }
 
 /* page specific */
   /* index.php */

@@ -80,15 +80,15 @@ textarea { background-color: #ffffff; border: thin solid #006666; color: #006666
 
 
 /* priority  */
-.priora { background-color: #d8ffeb; }
-.priorb { background-color: #cbffe4; }
-.priorc { background-color: #bcffdc; }
-.priord { background-color: #adffd4; }
-.priore { background-color: #a3ffcf; }
-.priorf { background-color: #93ffc7; }
-.priorg { background-color: #87ffc1; }
-.priorh { background-color: #77ffb9; }
-.priori { background-color: #6bffb2; }
+.prior1 { background-color: #d8ffeb; }
+.prior2 { background-color: #cbffe4; }
+.prior3 { background-color: #bcffdc; }
+.prior4 { background-color: #adffd4; }
+.prior5 { background-color: #a3ffcf; }
+.prior6 { background-color: #93ffc7; }
+.prior7 { background-color: #87ffc1; }
+.prior8 { background-color: #77ffb9; }
+.prior9 { background-color: #6bffb2; }
 
 /* page specific */
   /* index.php */

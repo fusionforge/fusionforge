@@ -38,7 +38,7 @@ if (user_isloggedin()) {
 				//unrated on this criteria
 			} else {
 				//ratings can only be between +3 and -3
-				if ($rating > 3 || $rating < '-3') {
+				if ($rating > 3 || $rating < -3) {
 					$feedback .= ' ERROR - invalid rating value ';
 				} else {
 					if ($rating) {
@@ -59,7 +59,9 @@ if (user_isloggedin()) {
 			}
 		}
 	} else {
-		exit_error('ERROR','You can\'t rate yourself');
+		global $G_SESSION;
+//		exit_error('ERROR','You can\'t rate yourself');
+		exit_error('ERROR',$rated_user);
 	}
 
 	echo $HTML->header(array('title'=>'User Ratings Page'));

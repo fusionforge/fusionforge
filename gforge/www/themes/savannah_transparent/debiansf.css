@@ -78,15 +78,15 @@ textarea { background-color: #000000; border: thin solid #e73943; color: #98dbff
 
 
 /* priority  */
-.priora { background-image: url("/themes/savannah_transparent/images/bgpri1.png");  }
-.priorb { background-image: url("/themes/savannah_transparent/images/bgpri2.png"); }
-.priorc { background-image: url("/themes/savannah_transparent/images/bgpri3.png"); }
-.priord { background-image: url("/themes/savannah_transparent/images/bgpri4.png"); }
-.priore { background-image: url("/themes/savannah_transparent/images/bgpri5.png"); }
-.priorf { background-image: url("/themes/savannah_transparent/images/bgpri6.png"); }
-.priorg { background-image: url("/themes/savannah_transparent/images/bgpri7.png"); }
-.priorh { background-image: url("/themes/savannah_transparent/images/bgpri8.png"); }
-.priori { background-image: url("/themes/savannah_transparent/images/bgpri9.png"); }
+.prior1 { background-image: url("/themes/savannah_transparent/images/bgpri1.png");  }
+.prior2 { background-image: url("/themes/savannah_transparent/images/bgpri2.png"); }
+.prior3 { background-image: url("/themes/savannah_transparent/images/bgpri3.png"); }
+.prior4 { background-image: url("/themes/savannah_transparent/images/bgpri4.png"); }
+.prior5 { background-image: url("/themes/savannah_transparent/images/bgpri5.png"); }
+.prior6 { background-image: url("/themes/savannah_transparent/images/bgpri6.png"); }
+.prior7 { background-image: url("/themes/savannah_transparent/images/bgpri7.png"); }
+.prior8 { background-image: url("/themes/savannah_transparent/images/bgpri8.png"); }
+.prior9 { background-image: url("/themes/savannah_transparent/images/bgpri9.png"); }
 
 /* page specific */
   /* index.php */

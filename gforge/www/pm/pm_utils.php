@@ -242,7 +242,7 @@ function pm_show_tasklist ($result,$offset,$set='open') {
 	for ($i=0; $i < $rows; $i++) {
 
 		echo '
-			<TR BGCOLOR="'.get_priority_color(db_result($result, $i, 'priority')).'">'.
+			<TR class="'.get_priority_color(db_result($result, $i, 'priority')).'">'.
 			'<TD><A HREF="'.$PHP_SELF.'?func=detailtask'.
 			'&project_task_id='.db_result($result, $i, 'project_task_id').
 			'&group_id='.$group_id.

@@ -287,7 +287,7 @@ function show_priority_colors_key() {
 
 	for ($i=1; $i<10; $i++) {
 		echo '
-			<TD BGCOLOR="'.get_priority_color($i).'">'.$i.'</TD>';
+			<TD class="'.get_priority_color($i).'">'.$i.'</TD>';
 	}
 	echo '</tr></table>';
 }

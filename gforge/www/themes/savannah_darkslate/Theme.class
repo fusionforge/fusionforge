@@ -65,21 +65,6 @@ class Theme extends Layout {
 			'CVS' => 'ic/convert.png',
 			'Files' => 'ic/save.png'
 		);
-
-		$this->bgpri = array();
-
-		/*
-	        Set up the priority color array one time only
-		*/
-		$bgpri[1] = 'priora';
-		$bgpri[2] = 'priorb';
-		$bgpri[3] = 'priorc';
-		$bgpri[4] = 'priord';
-		$bgpri[5] = 'priore';
-		$bgpri[6] = 'priorf';
-		$bgpri[7] = 'priorg';
-		$bgpri[8] = 'priorh';
-		$bgpri[9] = 'priori';
 	}
 
 	// Box Top, equivalent to html_box1_top()

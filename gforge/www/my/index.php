@@ -79,7 +79,7 @@ if (user_isloggedin() || $sf_user_hash) {
 				db_result($result,$i,'name').'</A></TD></TR>';
 			}   
 			echo '
-			<TR BGCOLOR="'.get_priority_color(db_result($result,$i,'priority')).'">
+			<TR class="'.get_priority_color(db_result($result,$i,'priority')).'">
 			<TD><A HREF="/tracker/?func=detail&aid='.
 			db_result($result, $i, 'artifact_id').
 			'&group_id='.db_result($result, $i, 'group_id').
@@ -123,7 +123,7 @@ if (user_isloggedin() || $sf_user_hash) {
 				db_result($result,$i,'name').'</A></TD></TR>';
 			}	
 			echo '
-			<TR BGCOLOR="'.get_priority_color(db_result($result,$i,'priority')).'">
+			<TR class="'.get_priority_color(db_result($result,$i,'priority')).'">
 			<TD><A HREF="/tracker/?func=detail&aid='.
 			db_result($result, $i, 'artifact_id').
 			'&group_id='.db_result($result, $i, 'group_id').
@@ -259,7 +259,7 @@ if (user_isloggedin() || $sf_user_hash) {
 				db_result($result,$i,'project_name').'</A></TD></TR>';
 			}
 			echo '
-			<TR BGCOLOR="'.get_priority_color(db_result($result,$i,'priority')).'">
+			<TR class="'.get_priority_color(db_result($result,$i,'priority')).'">
 			<TD><A HREF="/pm/task.php?func=detailtask&project_task_id='.
 			db_result($result, $i, 'project_task_id').
 			'&group_id='.db_result($result, $i, 'group_id').

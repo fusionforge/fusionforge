@@ -385,8 +385,6 @@ function get_priority_color ($index) {
  * @param		int		Index
  */
 function html_get_priority_color ($index) {
-	global $bgpri;
-
 	/* make sure that index is of appropriate type and range */
 	$index = (int)$index;
 	if ($index<1) {
@@ -394,7 +392,7 @@ function html_get_priority_color ($index) {
 	} else if ($index>9) {
 		$index=9;
 	}   
-	return $bgpri[$index];
+	return "prior$index";
 }
 
 /**
