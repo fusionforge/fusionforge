@@ -48,13 +48,13 @@ if($GLOBALS['sys_cvs_single_host']) {
 if ($project->enableAnonCVS() && $project->enablePserver()) {
 ?>
 		<?php echo $Language->getText('scm_index', 'anoncvs'); ?>
-     			<p>
+		<p>
 			<tt>cvs -d:pserver:anonymous@<?php echo $cvsrootend; ?> login 
-			<br>
-			<br>
+			<br />
+			<br />
 			cvs -z3 -d:pserver:anonymous@<?php echo $cvsrootend; ?> co  <i>modulename</i>
 			</tt>
-			<p>
+		</p>
 		<?php echo $Language->getText('scm_index', 'anoncvsup'); ?>
 <?php
 }
@@ -63,24 +63,19 @@ if ($project->enableAnonCVS() && $project->enablePserver()) {
 <?php
 // ############################ developer access
 ?>
-
-		<? echo $Language->getText('scm_index', 'devcvs'); ?>
-
-			<p>
+		<?php echo $Language->getText('scm_index', 'devcvs'); ?>
+		<p>
 			<tt>export CVS_RSH=ssh
-			<br>
-			<br>cvs -z3 -d:ext:<i>developername</i>@<?php echo $cvsrootend; ?> co <i>modulename</i>
+			<br />
+			<br />cvs -z3 -d:ext:<i>developername</i>@<?php echo $cvsrootend; ?> co <i>modulename</i>
 			</tt>
-			<p>
-
+		</p>
 <?php
 // ################## summary info
 ?>
-
 		</td>
 		<td width="35%">
 		<?php echo $HTML->boxTop($Language->getText('scm_index', 'history')); ?>
-
 <?php
 // ######################### CVS
 
@@ -117,22 +112,20 @@ if (session_loggedin()) {
 if ($project->enableAnonCVS() || !$anonymous) {
 	echo $Language->getText('scm_index', 'browsetree');
 ?>
-		<UL>
-		<LI>Christian Bayle did it<BR><a href=/scm/cvsweb.php/?cvsroot=<?php print $project->getUnixName(); ?> >
-			<b><?php echo $Language->getText('scm_index', 'browseit'); ?>(cvsweb php wrapper)</b></a>
-		</UL>
-		<UL>
-		<LI><a href=<?php print account_group_cvsweb_url($project->getUnixName()); ?> >
-			<b><?php echo $Language->getText('scm_index', 'browseit'); ?>(cvsweb)</b></a>
-		</UL>
-		<UL>
-		<LI>Ronald Petty contrib<BR><a href=/scm/controller.php?group_id=<?php echo $group_id; ?> >
+	<ul>
+		<li>Christian Bayle did it<br /><a href="/scm/cvsweb.php/?cvsroot=<?php print $project->getUnixName(); ?>">
+			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (cvsweb php wrapper)</b></a>
+		</li>
+		<li><a href="<?php print account_group_cvsweb_url($project->getUnixName()); ?>">
+			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (cvsweb)</b></a>
+		</li>
+		<li>Ronald Petty contrib<br /><a href="/scm/controller.php?group_id=<?php echo $group_id; ?>">
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (php)</b></a>
-		</UL>
-		<UL>
-		<LI>Dragos Moinescu contrib<BR><a href="/scm/controlleroo.php?group_id=<?php echo $group_id; ?>&hide_attic=0" >
+		</li>
+		<li>Dragos Moinescu contrib<br /><a href="/scm/controlleroo.php?group_id=<?php echo $group_id; ?>&amp;hide_attic=0">
 			<b><?php echo $Language->getText('scm_index', 'browseit'); ?> (php OO)</b></a>
-		</UL>
+		</li>
+	</ul>
 <?php
 }
 

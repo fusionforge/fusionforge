@@ -1764,12 +1764,12 @@ register_requirements	section	Nouveau projet
 register_requirements	title	Services et conditions requises
 register_tos	section	Nouveau projet
 register_tos	title	Accord sur les conditions générales
-scm_index	anoncvs	<P><B>Accès CVS anonyme</b> <P>Ce dépôt CVS peut-être interrogé (par la méthode pserver) CVS avec les instructions suivantes. le module que vous voulez récupérer doit être spécifié comme <I>modulename</i>. Lorsqu'on vous demande un mot de passe pour <I>anonymous</i>, tapez simplement 'Entrée'.
-scm_index	anoncvsup	Les mises à jour (update) quand on se trouve à l'intérieur du répertoire du module n'ont pas besoin du paramètre -d
+scm_index	anoncvs	<p><b>Accès CVS anonyme</b></p><p>Ce dépôt CVS peut-être récupéré (check out) anonymement (avec la méthode pserver) à l'aide des instructions suivantes. Le module que vous voulez récupérer doit être spécifié comme <i>modulename</i>. Lorsqu'on vous demande un mot de passe pour <i>anonymous</i>, tapez simplement 'Entrée'.</p>
+scm_index	anoncvsup	Les mises à jour (update) ne nécessite pas l'utilisation du paramètre -d quand on se trouve à l'intérieur du répertoire du module.
 scm_index	browseit	Parcourir le dépôt CVS
-scm_index	browsetree	<HR><B>Parcourir l'arbre CVS</B> <P>Parcourir l'arbre CVS vous donne un vue d'ensemble sur l'état du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt
+scm_index	browsetree	<hr /><b>Parcourir l'arbre CVS</b><p>Parcourir l'arbre CVS vous donne une vue d'ensemble du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt.</p>
 scm_index	cvs_repository	dépôt CVS
-scm_index	devcvs	<P><B>Accès CVS pour développeur via SSH</B> <P>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <I>module</I> et <I>développeur</I> par les valeurs appropriées. Fournissez votre mot de passe pour le site lorsqu'on vous le demande.
+scm_index	devcvs	<p><b>Accès CVS pour développeur via SSH</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <i>modulename</i> et <i>developername</i> par les valeurs appropriées. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
 scm_index	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 scm_index	developername	développeur
 scm_index	error_only_projects_can_use_cvs	ERREUR

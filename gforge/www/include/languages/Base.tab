@@ -1770,12 +1770,12 @@ register_requirements	section	New Project Registration
 register_requirements	title	Services & Requirements
 register_tos	section	New Project Registration
 register_tos	title	Terms Of Service Agreement
-scm_index	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
+scm_index	anoncvs	<p><b>Anonymous CVS Access</b></p><p>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <i>modulename</i>. When prompted for a password for <i>anonymous</i>, simply press the Enter key.</p>
 scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 scm_index	browseit	Browse CVS Repository
-scm_index	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
+scm_index	browsetree	<hr /><b>Browse the CVS Tree</b><p>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>
 scm_index	cvs_repository	CVS Repository
-scm_index	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
+scm_index	devcvs	<p><b>Developer CVS Access via SSH</b></p><p>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <i>modulename</i> and <i>developername</i> with the proper values. Enter your site password when prompted.</p>
 scm_index	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
 scm_index	developername	developername
 scm_index	error_only_projects_can_use_cvs	Error, Only Projects Can Use CVS
