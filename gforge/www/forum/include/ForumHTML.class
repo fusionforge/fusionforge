@@ -86,13 +86,13 @@ function forum_header($params) {
 		if ($f) {
 			if ($f->isMonitoring()) {
 				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1">' . 
-				html_image($GLOBALS['HTML']->imgproj.'xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</A> | ';
+				html_image('ic/xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</A> | ';
 			} else {
 				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1">' . 
-				html_image($GLOBALS['HTML']->imgproj.'mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</A> | ';
+				html_image('ic/mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</A> | ';
 			}
 			echo '<A HREF="/forum/save.php?forum_id='.$forum_id.'&group_id='.$group_id.'">' .
-			html_image($GLOBALS['HTML']->imgproj.'save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</A> | ';
+			html_image('ic/save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</A> | ';
 		}
 	}
 
@@ -157,7 +157,7 @@ class ForumHTML extends Error {
 					' ( '. $msg->getPosterRealName() . ' ) '.
 					'<BR><A HREF="/forum/message.php?msg_id='.
 					$msg->getID() .'">'.
-					html_image($GLOBALS['HTML']->imgproj.'msg.png',"10","12",array("BORDER"=>"0")) .
+					html_image('ic/msg.png',"10","12",array("BORDER"=>"0")) .
 					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</A> &nbsp; '.
 					'<BR>'. date($sys_datefmt,$msg->getPostDate()) .'
 				</TD>   
@@ -248,7 +248,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $ah_begin .
-					html_image($GLOBALS['HTML']->imgproj.'msg.png',"10","12",array("BORDER"=>"0"));
+					html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
 				/*
 					See if this message is new or not
 				*/

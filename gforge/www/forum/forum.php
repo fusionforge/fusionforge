@@ -218,7 +218,7 @@ if ($forum_id) {
 
 			$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'">
 				<TD><A HREF="/forum/message.php?msg_id='.$msg->getID().'">'.
-				html_image($GLOBALS['HTML']->imgproj.'msg.png',"10","12",array("BORDER"=>"0"));
+				html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
 			/*	  
 				See if this message is new or not
 				If so, highlite it in bold
@@ -290,7 +290,7 @@ if ($forum_id) {
 			$ret_val .= '
 				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/forum/forum.php?thread_id='.
 				$row['thread_id'].'&forum_id='.$forum_id.'">'.
-				html_image($GLOBALS['HTML']->imgproj.'cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
+				html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
 			/*	  
 					See if this message is new or not
 					If so, highlite it in bold
@@ -324,7 +324,7 @@ if ($forum_id) {
 	if ($offset != 0) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE="3" STYLE="text-decoration: none"><B>
 		<A HREF="javascript:history.back()"><B>' .
-		html_image($GLOBALS['HTML']->imgroot.'t2.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
+		html_image('t2.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -335,7 +335,7 @@ if ($forum_id) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE=3 STYLE="text-decoration: none"><B>
 		<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
 		<B>Next Messages ' .
-		html_image($GLOBALS['HTML']->imgroot.'t.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
+		html_image('t.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}

@@ -322,7 +322,7 @@ if ($group_id && $atid) {
 			echo '
 			<A HREF="/tracker/?atid='.db_result($result, $j, 'group_artifact_id').
 			'&group_id='.$group_id.'&func=browse">' .
-			html_image("/images/ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+			html_image("ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
 			db_result($result, $j, 'name').'</A> 
 			( <B>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</B> )<BR>'.
 			db_result($result, $j, 'description').'<P>';

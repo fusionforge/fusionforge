@@ -207,9 +207,9 @@ if ($project->usesFRS()) {
 					</TD>
 					<td>' . $rel_date["month"] . ' ' . $rel_date["mday"] . ', ' . $rel_date["year"] . '</td>
 					<TD><A href="/project/shownotes.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">';
-					echo html_image($imgproj . "manual16c.png",'15','15',array('alt'=>'Release Notes'));
+					echo html_image('ic/manual16c.png','15','15',array('alt'=>'Release Notes'));
 					echo '</A> - <A HREF="/project/filemodule_monitor.php?filemodule_id=' .	db_result($res_files,$f,'package_id') . '">';
-					echo html_image($imgproj . "mail16d.png",'15','15',array('alt'=>'Monitor This Package'));
+					echo html_image('ic/mail16d.png','15','15',array('alt'=>'Monitor This Package'));
 					echo '</A>
 					</TD>
 					<TD><A HREF="/project/showfiles.php?group_id=' . $group_id . '&release_id=' . db_result($res_files,$f,'release_id') . '">'.$Language->getText('frs','file_download').'</A></TD></TR>';
@@ -239,7 +239,7 @@ echo $HTML->boxTop($Language->getText('group','public_area'));
 // ################# Homepage Link
 
 print "<A href=\"http://" . $project->getHomePage() . "\">";
-print html_image($imgproj . "home16b.png",'20','20',array('alt'=>$Language->getText('group','short_homepage')));
+print html_image('ic/home16b.png','20','20',array('alt'=>$Language->getText('group','short_homepage')));
 print '&nbsp;'.$Language->getText('group','long_homepage').'</A>';
 
 // ################## ArtifactTypes
@@ -247,7 +247,7 @@ print '&nbsp;'.$Language->getText('group','long_homepage').'</A>';
 // CB hide tracker if desired
 if ($project->usesTracker()) {
 	print '<HR SIZE="1" NoShade><A href="/tracker/?group_id='.$group_id.'">';
-	print html_image($imgproj . "taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_tracker')));
+	print html_image('ic/taskman16b.png','20','20',array('alt'=>$Language->getText('group','short_tracker')));
 	print $Language->getText('group', 'short_tracker').'</A>';
 
 	$result=db_query("SELECT agl.*,aca.count,aca.open_count
@@ -276,7 +276,7 @@ if ($project->usesTracker()) {
 
 if ($project->usesForum()) {
 	print '<HR SIZE="1" NoShade><A href="/forum/?group_id='.$group_id.'">';
-	print html_image($imgproj . "notes16.png",'20','20',array('alt'=>$Language->getText('group','short_forum'))); 
+	print html_image('ic/notes16.png','20','20',array('alt'=>$Language->getText('group','short_forum'))); 
 	print '&nbsp;'.$Language->getText('group','long_forum').'</A>';
 	print " ( <B>". project_get_public_forum_message_count($group_id) ."</B> messages in ";
 
@@ -289,7 +289,7 @@ if ($project->usesDocman()) {
 	print '
 	<HR SIZE="1" NoShade>
 	<A href="/docman/?group_id='.$group_id.'">';
-	print html_image($imgproj . "docman16b.png",'20','20',array('alt'=>$Language->getText('group','short_docman')));
+	print html_image('ic/docman16b.png','20','20',array('alt'=>$Language->getText('group','short_docman')));
 	print '&nbsp;'.$Language->getText('group','long_docman').'</A>';
 }
 
@@ -297,7 +297,7 @@ if ($project->usesDocman()) {
 
 if ($project->usesMail()) {
 	print '<HR SIZE="1" NoShade><A href="/mail/?group_id='.$group_id.'">';
-	print html_image($imgproj . "mail16b.png",'20','20',array('alt'=>$Language->getText('group','short_mail'))); 
+	print html_image('ic/mail16b.png','20','20',array('alt'=>$Language->getText('group','short_mail'))); 
 	print '&nbsp;'.$Language->getText('group','long_mail').'</A>';
 	print " ( <B>". project_get_mail_list_count($group_id) ."</B> public mailing lists )";
 }
@@ -306,7 +306,7 @@ if ($project->usesMail()) {
 
 if ($project->usesPm()) {
 	print '<HR SIZE="1" NoShade><A href="/pm/?group_id='.$group_id.'">';
-	print html_image($imgproj . "taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_pm')));
+	print html_image('ic/taskman16b.png','20','20',array('alt'=>$Language->getText('group','short_pm')));
 	print '&nbsp;'.$Language->getText('group','long_pm').'</A>';
 	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
 	$result = db_query ($sql);
@@ -327,7 +327,7 @@ if ($project->usesPm()) {
 
 if ($project->usesSurvey()) {
 	print '<HR SIZE="1" NoShade><A href="/survey/?group_id='.$group_id.'">';
-	print html_image($imgproj . "survey16b.png",'20','20',array('alt'=>$Language->getText('group','short_survey')));
+	print html_image('ic/survey16b.png','20','20',array('alt'=>$Language->getText('group','short_survey')));
 	print " ".$Language->getText('group','long_survey')."</A>";
 	echo ' ( <B>'. project_get_survey_count($group_id) .'</B> surveys )';
 }
@@ -336,7 +336,7 @@ if ($project->usesSurvey()) {
 
 if ($project->usesCVS()) {
 	print '<HR SIZE="1" NoShade><A href="/cvs/?group_id='.$group_id.'">';
-	print html_image($imgproj . "cvs16b.png",'20','20',array('alt'=>$Language->getText('group','short_cvs')));
+	print html_image('ic/cvs16b.png','20','20',array('alt'=>$Language->getText('group','short_cvs')));
 	print " ".$Language->getText('group','long_cvs')."</A>";
 
 	$result = db_query("
@@ -368,7 +368,7 @@ if ($project->usesFTP()) {
 	if ($project->isActive()) {
 		print '<HR SIZE="1" NoShade>';
 		print "<A href=\"ftp://" . $project->getUnixName() . "." . $GLOBALS['sys_default_domain'] . "/pub/". $project->getUnixName() ."/\">";
-		print html_image($imgproj . "ftp16b.png",'20','20',array('alt'=>$Language->getText('group','long_ftp')));
+		print html_image('ic/ftp16b.png','20','20',array('alt'=>$Language->getText('group','long_ftp')));
 		print $Language->getText('group','long_ftp')."</A>";
 	}
 }

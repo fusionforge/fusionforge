@@ -54,7 +54,7 @@ if ($rows < 1) {
 	for ($j = 0; $j < $rows; $j++) { 
 		echo '
 		<A HREF="/forum/forum.php?forum_id='.db_result($result, $j, 'forum_id').'">'.
-			html_image("/images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+			html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
 			stripslashes(db_result($result, $j, 'summary')).'</A> ';
 		echo '
 		<BR>';

@@ -99,9 +99,9 @@ function html_dbimage($id, $args=0) {
  * @param		bool	DEPRECATED
  */
 function html_image($src,$width,$height,$args,$display=1) {
-	global $sys_images_url,$sys_images_secure_url;
+	global $sys_images_url,$sys_images_secure_url,$HTML;
 	$s = ((session_issecure()) ? $sys_images_secure_url : $sys_images_url );
-	$return = ('<IMG src="' . $s . $src .'"');
+	$return = ('<IMG src="' . $s . $HTML->imgroot . $src .'"');
 	reset($args);
 	while(list($k,$v) = each($args)) {
 		$return .= ' '.$k.'="'.$v.'"';

@@ -138,7 +138,7 @@ if ($msg_id) {
 		}
 		$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'">
 			<TD>'. $ah_begin .
-			html_image($GLOBALS['HTML']->imgproj.'msg.png',"10","12",array("BORDER"=>"0"));
+			html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
 		/*
 			See if this message is new or not
 			If so, highlite it in bold

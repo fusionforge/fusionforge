@@ -56,7 +56,7 @@ if ($group_id) {
 			echo $farr->getErrorMessage();
 		} else {
 			echo '<A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
-				html_image("/images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
+				html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
 				'&nbsp;' .
 				$farr[$j]->getName() .'</A> ('. $farr[$j]->getMessageCount() .' msgs)
 				<BR>'.
