@@ -42,7 +42,7 @@ if (!$result || db_numrows($result) < 1) {
 		echo '<pre><strong>'.$Language->getText('project_shownotes','notes').'</strong>
 '.db_result($result,0,'notes').'
 
-<hr noshade="noshade" />
+<hr />
 <strong>'.$Language->getText('project_shownotes','changes').'</strong>
 '.db_result($result,0,'changes').'</pre>';
 
@@ -50,7 +50,7 @@ if (!$result || db_numrows($result) < 1) {
 		echo '<strong>'.$Language->getText('project_shownotes','notes').'</strong>
 '.db_result($result,0,'notes').'
 
-<hr noshade="noshade" />
+<hr />
 <strong>'.$Language->getText('project_shownotes','changes').'</strong>
 '.db_result($result,0,'changes') . '</p>';
 

@@ -226,7 +226,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 </table>
 </form>
 <p>&nbsp;</p>
-<hr noshade="noshade" />
+<hr />
 <h3><?php echo $Language->getText('project_admin_editrelease','step_2') ?></h3>
 <p>
 <form enctype="multipart/form-data" method="post" action="<?php echo $PHP_SELF."?group_id=$group_id&release_id=$release_id&package_id=$package_id"; ?>">
@@ -255,7 +255,7 @@ frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','
 <input type="submit" name="submit" value="<?php echo $Language->getText('project_admin_editrelease','add_file') ?>" /></p>
 </form></p>
 <p>&nbsp;</p>
-<hr noshade="noshade" />
+<hr />
 <p>&nbsp;</p>
 <h3><?php echo $Language->getText('project_admin_editrelease','step_3') ?></h3>
 

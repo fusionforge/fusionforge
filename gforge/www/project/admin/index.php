@@ -91,7 +91,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 <p align="center">
 <a href="/tarballs.php?group_id=<?php echo $group_id; ?>">[ <?php echo $Language->getText('project_admin','download_tarball') ?>]</a></p>
 <p>&nbsp;</p>
-<hr noshade="noshade" />
+<hr />
 <p>&nbsp;</p>
 <h4><?php echo $Language->getText('project_admin','trove_categorization') ?><a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('general','edit') ?>]</a></h4>
 <p>
@@ -147,7 +147,7 @@ if ($is_admin) {
 
 	// After adding user, we go to the permission page for one
 ?>
-	<hr noshade="noshade size="1" />
+	<hr size="1" />
 	<form action="userpermedit.php?group_id=<?php echo $group->getID(); ?>" method="post">
 	<input type="hidden" name="func" value="adduser" />
 	<table width="100%" border="0">
@@ -155,7 +155,7 @@ if ($is_admin) {
 	<tr><td colspan="2" align="center"><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin','add_user') ?>" /></td></tr></form>
 	</table>
 
-	<hr noshade="noshade size="1" />
+	<hr size="1" />
 	<div align="center">
 	<a href="/project/admin/userperms.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('project_admin','edit_member_permissions') ?>]</a>
 	</div>

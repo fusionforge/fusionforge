@@ -49,7 +49,6 @@ class ArtifactTypeHtml extends ArtifactType {
 		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker_artifacttype','admin').'</a>';
 
 		echo '</strong><p>';
-		//echo '<HR NoShade SIZE="1" SIZE="90%">';
 	}
 
 	function footer($params) {

@@ -88,7 +88,7 @@ $result = db_query("
 ");
 
 if (db_numrows($result) > 0) {
-	print '<hr size="1" noshade="noshade" />';
+	print '<hr size="1" />';
 
 	$headerMapping = array(
 	'realname' => array("Name", 'width="60%"'),

@@ -43,7 +43,7 @@ if (db_numrows($res_trove_cat) < 1) {
 $HTML->header(array('title'=>$Language->getText('trove_list','title'),'pagename'=>'softwaremap'));
 
 echo'
-	<HR NoShade>';
+	<hr />';
 
 $row_trove_cat = db_fetch_array($res_trove_cat);
 
@@ -209,7 +209,7 @@ while ($row_rootcat = db_fetch_array($res_rootcat)) {
 }
 print '</span></td></tr></table>';
 ?>
-<hr noshade="noshade" />
+<hr />
 <?php
 // one listing for each project
 

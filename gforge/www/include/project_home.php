@@ -109,7 +109,7 @@ if (db_numrows($res_admin) > 0) {
 			print $GLOBALS['HTML']->createLinkToUserHome($row_admin[user_name], $row_admin[realname])."<br />";
 		}
 	?>
-	<hr width="100%" size="1" noshade="noshade" />
+	<hr width="100%" size="1" />
 	<?php
 
 }
@@ -234,7 +234,7 @@ print '&nbsp;'.$Language->getText('group','long_homepage').'</a>';
 
 // CB hide tracker if desired
 if ($project->usesTracker()) {
-	print '<hr size="1" noshade="noshade" /><a href="/tracker/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="/tracker/?group_id='.$group_id.'">';
 	print html_image('ic/tracker20g.png','20','20',array('alt'=>$Language->getText('group','short_tracker')));
 	print $Language->getText('group', 'long_tracker').'</a>';
 
@@ -263,7 +263,7 @@ if ($project->usesTracker()) {
 // ################## forums
 
 if ($project->usesForum()) {
-	print '<hr size="1" noshade="noshade" /><a href="/forum/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="/forum/?group_id='.$group_id.'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>$Language->getText('group','short_forum')));
 	print '&nbsp;'.$Language->getText('group','long_forum').'</a>';
 	print " ( ".$Language->getText('project_home','forum_messages',array(project_get_public_forum_message_count($group_id), project_get_public_forum_count($group_id) ))." ";
@@ -274,7 +274,7 @@ if ($project->usesForum()) {
 
 if ($project->usesDocman()) {
 	print '
-	<hr size="1" noshade="noshade" />
+	<hr size="1" />
 	<a href="/docman/?group_id='.$group_id.'">';
 	print html_image('ic/docman16b.png','20','20',array('alt'=>$Language->getText('group','short_docman')));
 	print '&nbsp;'.$Language->getText('group','long_docman').'</a>';
@@ -283,7 +283,7 @@ if ($project->usesDocman()) {
 // ##################### Mailing lists
 
 if ($project->usesMail()) {
-	print '<hr size="1" noshade="noshade" /><a href="/mail/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="/mail/?group_id='.$group_id.'">';
 	print html_image('ic/mail16b.png','20','20',array('alt'=>$Language->getText('group','short_mail')));
 	print '&nbsp;'.$Language->getText('group','long_mail').'</a>';
 	print " ( <strong>". project_get_mail_list_count($group_id) ."</strong> ".$Language->getText('project_home','public_mailing_lists').")";
@@ -292,7 +292,7 @@ if ($project->usesMail()) {
 // ##################### Task Manager
 
 if ($project->usesPm()) {
-	print '<hr size="1" noshade="noshade" /><a href="/pm/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="/pm/?group_id='.$group_id.'">';
 	print html_image('ic/taskman20g.png','20','20',array('alt'=>$Language->getText('group','short_pm')));
 	print '&nbsp;'.$Language->getText('group','long_pm').'</a>';
 	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public=1";
@@ -313,7 +313,7 @@ if ($project->usesPm()) {
 // ######################### Surveys
 
 if ($project->usesSurvey()) {
-	print '<hr size="1" noshade="noshade" /><a href="/survey/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="/survey/?group_id='.$group_id.'">';
 	print html_image('ic/survey16b.png','20','20',array('alt'=>$Language->getText('group','short_survey')));
 	print " ".$Language->getText('group','long_survey')."</a>";
 	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> '.$Language->getText('project_home','surveys').'  )';
@@ -322,7 +322,7 @@ if ($project->usesSurvey()) {
 // ######################### CVS
 
 if ($project->usesCVS()) {
-	print '<hr size="1" noshade="noshade" /><a href="/scm/?group_id='.$group_id.'">';
+	print '<hr size="1" /><a href="/scm/?group_id='.$group_id.'">';
 	print html_image('ic/cvs16b.png','20','20',array('alt'=>$Language->getText('group','short_cvs')));
 	print " ".$Language->getText('group','long_cvs')."</a>";
 
@@ -353,7 +353,7 @@ if ($project->usesCVS()) {
 // CB hide FTP if desired
 if ($project->usesFTP()) {
 	if ($project->isActive()) {
-		print '<hr size="1" noshade="noshade" />';
+		print '<hr size="1" />';
 		print "<a href=\"ftp://" . $project->getUnixName() . "." . $GLOBALS['sys_default_domain'] . "/pub/". $project->getUnixName() ."/\">";
 		print html_image('ic/ftp16b.png','20','20',array('alt'=>$Language->getText('group','long_ftp')));
 		print $Language->getText('group','long_ftp')."</a>";

@@ -133,9 +133,9 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				}
 
 				if ($show_forum){
-					$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" noshade="noshade" />';
+					$return .= '<div align="center">(' . $num_comments . $comments_txt . ') <a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'">[' . $Language->getText('news_utils', 'readmore') . ']</a></div><hr width="100%" size="1" />';
 				} else {
-					$return .= '<hr width="100%" size="1" noshade="noshade" />';
+					$return .= '<hr width="100%" size="1" />';
 				}
 			}
 
@@ -159,7 +159,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 	if ($show_forum) {
 		if ($tail_headlines) {
-			$return .= '<hr width="100%" size="1" noshade="noshade" />'."\n";
+			$return .= '<hr width="100%" size="1" />'."\n";
 		}
 
 		$return .= '<div align="center">'
