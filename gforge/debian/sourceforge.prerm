@@ -32,10 +32,10 @@ case "$1" in
   	fi
 
         # POSTGRES
-        if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf
-        then
-                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf
-                perl -pi -e "s/^host.*sourceforge_passwd\n//" /etc/postgresql/pg_hba.conf
+        if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf ; then
+	    perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf
+	    perl -pi -e "s/^host.*sourceforge_passwd\n//" /etc/postgresql/pg_hba.conf
+	    kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
         fi
 	
         # FTP config removal

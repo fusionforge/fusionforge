@@ -78,6 +78,7 @@ eval {
 	chomp $md5pwd ;
 	$email = $server_admin ;
 	$shellbox = $domain_name ;
+	$shellbox =~ s/\..*$// ;
 	$noreplymail="noreply\@$domain_name" ;
 	$date = time () ;
 	
@@ -89,7 +90,7 @@ eval {
                      new_patch_address, new_support_address, type, use_docman, send_all_bugs,
                      send_all_patches, send_all_support, new_task_address, send_all_tasks,
                      use_bug_depend_box, use_pm_depend_box)
- 	    VALUES (1, 'Site Admin', '$domain_name/admin/', 1, 'A', 'siteadmin', 'shell1', 
+ 	    VALUES (1, 'Site Admin', '$domain_name/admin/', 1, 'A', 'siteadmin', '$shellbox', 
  	    	    NULL, NULL, 'cvs1', 'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0, 1, 1, '', '', '', 1, 1, 0, 0, 0, '', 0, 0, 0)",
  	    "INSERT INTO groups (group_id, group_name, homepage, is_public, status, unix_group_name, unix_box,
                      http_domain, short_description, cvs_box, license, register_purpose,
@@ -98,7 +99,7 @@ eval {
                      new_patch_address, new_support_address, type, use_docman, send_all_bugs,
                      send_all_patches, send_all_support, new_task_address, send_all_tasks,
                      use_bug_depend_box, use_pm_depend_box)
- 	    VALUES ($newsadmin_groupid, 'Site News Admin', '$domain_name/news/', 0, 'A', 'newsadmin', 'shell1',
+ 	    VALUES ($newsadmin_groupid, 'Site News Admin', '$domain_name/news/', 0, 'A', 'newsadmin', '$shellbox',
                      NULL, NULL, 'cvs1', 'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0, 1, 1, '', '',
                      '', 1, 0, 0, 0, 0, '', 0, 0, 0)",
  	    "INSERT INTO users (user_id, user_name, email, user_pw)  
@@ -240,6 +241,41 @@ eval {
 
 	debug "Updating debian_meta_data table." ;
 	$query = "UPDATE debian_meta_data SET value = '2.5-25' where key = 'db-version'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
+    $query = "select value from debian_meta_data where key = 'db-version'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    $version = $array [0] ;
+
+    if (is_lesser $version, "2.5-26") {
+	debug "Found version $version lesser than 2.5-26, fixing unix_box entries." ;
+
+	do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
+	my $shellbox = $domain_name ;
+	$shellbox =~ s/\..*$// ;
+
+	$query = "update groups set unix_box = '$shellbox'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	$query = "update users set unix_box = '$shellbox'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	debug "Updating debian_meta_data table." ;
+	$query = "UPDATE debian_meta_data SET value = '2.5-26' where key = 'db-version'" ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
