@@ -3,6 +3,10 @@
 	* www/survey/admin/show_questions.php:
 	Applied patch [ #498 ] Patch to fix tab problem in surveys
 
+	* www/tracker/add.php:
+	Applied patch [ #504 ] May Detailed description be wider 
+	in tracker submissions?
+
 2003-09-12 Tom Copeland  <tom@infoether.com>
 
 	* gforge.spec:
