@@ -1502,7 +1502,7 @@ project_admin	no_matching_user	<p>Aucun utilisateur correspondant</p>
 project_admin	packages	Paquet&nbsp;
 project_admin	plugins_admin	Administration des plugins
 project_admin	project_information	Informations diverses sur le projet
-project_admin	scm_admin	Administration de la Gestion de configuration
+project_admin	scm_admin	Administration de la gestion de configuration
 project_admin	section	Projet : $1
 project_admin	shell_server	Serveur shell (pour SSH)&nbsp;:&nbsp;
 project_admin	shell_server_group_directory	Répertoire système du groupe&nbsp;:&nbsp;
