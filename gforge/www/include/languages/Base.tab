@@ -1019,6 +1019,7 @@ mail_common	mailing_lists	Mailing lists
 mail_utils	admin	Admin
 mail_utils	turned_off	This Project Has Turned Off The Mailing Lists
 menu	about_gforge	About $1
+menu	reporting	Reporting
 menu	account_maintenance	Account Maintenance
 menu	admin	Admin
 menu	bookmark_page	Bookmark Page
