@@ -10,15 +10,15 @@ require ('pre.php');
 
 session_require(array('isloggedin'=>'1'));
 
-site_user_header(array('title'=>"Account Maintenance"));
+site_user_header(array('title'=>$Language->ACCOUNT_MAINTENANCE));
 
 // get global users vars
 $res_user = db_query("SELECT * FROM users WHERE user_id=" . user_getid());
 $row_user = db_fetch_array($res_user);
 
-$HTML->box1_top("Account Maintenance: " . user_getname()); ?>
+$HTML->box1_top($Language->ACCOUNT_MAINTENANCE.": " . $user->getRealName()); ?>
 
-<p>Welcome, <b><?php print user_getname(); ?></b>. 
+<p>Welcome, <b><?php print $user->getUnixName(); ?></b>. 
 <p>You can view/change all of your account features from here. You may also wish
 to view your developer/consultant profiles and ratings.
 

@@ -421,7 +421,7 @@ function site_project_footer($params) {
 	@result text - echos HTML to the screen directly
 */
 function site_user_header($params) {
-	GLOBAL $HTML;
+	GLOBAL $HTML, $Language;
 
 	/*
 		Check to see if active user
@@ -431,7 +431,7 @@ function site_user_header($params) {
 	echo html_feedback_top($GLOBALS['feedback']);
 	echo '
 	<P>
-	<A HREF="/my/">My Personal Page</A> | <A HREF="/my/diary.php">Diary &amp; Notes</A> | <A HREF="/account/">Account Options</A>
+	<A HREF="/my/">'.$Language->MY_PERSONAL_PAGE.'</A> | <A HREF="/my/diary.php">'.$Language->DIARY.'</A> | <A HREF="/account/">'.$Language->ACCOUNT_MAINTENANCE.'</A>
 	<P>';
 
 }

@@ -4,7 +4,6 @@
 // Copyright 1999-2000 (c) The SourceForge Crew
 // http://sourceforge.net
 //
-// $Id$
 
 
 /*
@@ -56,6 +55,7 @@ class BaseLanguage {
 	var $NEW_USER='New User via SSL';
 	var $NEW_PROJECT='Register New Project';
 	var $ACCOUNT_MAINTENANCE='Account Maintenance';
+	var $DIARY='Diary & Notes';
 	var $CHANGE_MY_THEME='Change My Theme';
 	var $MY_PERSONAL_PAGE='My Personal Page';
 	var $BOOKMARK_PAGE='Bookmark Page';

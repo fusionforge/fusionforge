@@ -48,6 +48,7 @@ class Korean extends BaseLanguage {
 	$this->NEW_USER='사용자 등록';
 	$this->NEW_PROJECT='새 프로젝트 등록';
 	$this->ACCOUNT_MAINTENANCE='사용자 등록 정보';
+	$this->DIARY='일기쓰기 및 메모';
 	$this->CHANGE_MY_THEME='테마 바꾸기';
 	$this->MY_PERSONAL_PAGE='개인 페이지';
 	$this->BOOKMARK_PAGE='책갈피';
