@@ -125,7 +125,7 @@ install: build
 	# gforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
 
-	# gforge-mta-exim
+	# gforge-mta-postfix
 	install -m 755 deb-specific/install-postfix.sh $(CURDIR)/debian/gforge-mta-postfix/usr/lib/gforge/bin/
 
 	# gforge-shell-ldap
