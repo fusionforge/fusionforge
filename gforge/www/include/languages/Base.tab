@@ -2447,7 +2447,7 @@ snippet_submit	submit_a_new_snippet	Submit A New Snippet
 snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
 snippet_submit	suggest_a_language	Suggest a Language
 snippet_submit	suggest_a_category	Suggest a Category
-snippet_submit	paste_the_code_here	Paste the Code Here:
+snippet_submit	paste_the_code_here	Paste the Code Here
 snippet_submit	make_sure_all_info	Make sure all info is complete and accurate
 snippet_submit	submit	SUBMIT
 snippet_submit	type	Script Type
