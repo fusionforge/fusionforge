@@ -1,3 +1,17 @@
+2003-04-26  Reinhard Spisser	<reinhard@spisser.it>
+
+	* common/include/utils.php:
+	bug 52: Path to sendmail is hardcoded
+
+	* www/top/index.php:
+	bug 70: commented links to not-working stats pages
+
+	* www/include/languages/German.tab: 
+	fixed bug #303: Statistikien->Statistiken
+
+	* www/include/languages/Italian.tab:
+	some translations, fixes, removed double strings
+
 2003-04-28 Tom Copeland <tom@infoether.com>
 
 	* www/include/project_home.php: Bug #320: Developer count 
