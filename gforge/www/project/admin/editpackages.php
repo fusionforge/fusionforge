@@ -72,8 +72,6 @@ project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group
 <h3>QRS:</h3>
 <?php
 echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br />';
-
-$user_unix_name=user_getname();
 ?>
 <h3>Packages</h3>
 <p>
