@@ -15,13 +15,13 @@
 require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 
-survey_header(array('title'=>'Survey Complete','pagename'=>'survey_survey_resp'));
+survey_header(array('title'=>$Language->getText('survey_resp','title'),'pagename'=>'survey_survey_resp'));
 
 if (!$survey_id || !$group_id) {
 	/*
 		Quit if params are not provided
 	*/
-	echo "<h1>Error - For some reason group_id and/or survey_id did not make it here</h1>";
+	echo "<h1>".$Language->getText('survey_resp','error_some_reason')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -30,19 +30,19 @@ if (!session_loggedin()) {
 	/*
 		Tell them they need to be logged in
 	*/
-	echo "<h1>You need to be logged in</h1>";
-	echo "<p>Unfortunately, you have to be logged in to participate in surveys.</p>";
+	echo "<h1>".$Language->getText('survey_resp','you_nedd_to_be_logged_in')."</h1>";
+	echo "<p>".$Language->getText('survey_resp','unfortunately_you_have_to_be')."</p>";
 	survey_footer(array());
 	exit;
 }
 
 ?>
 
-<p>Thank you for taking time to complete this survey.</p>
+<p><?php echo $Language->getText('survey_resp','thank_you'); ?></p>
 <p>&nbsp;</p>
-Regards,
+<?php echo $Language->getText('survey_resp','regards'); ?>,
 <p>&nbsp;</p>
-<strong>The <?php echo $GLOBALS['sys_name']; ?> Crew</strong>
+<strong><?php echo $Language->getText('survey_resp','the_crew',array($GLOBALS['sys_name'])); ?></strong>
 <p>&nbsp;</p>
 <?php
 /*
@@ -81,7 +81,7 @@ for ($i=0; $i<$count; $i++) {
 		"VALUES ('".user_getid()."','" . addslashes($group_id) . "','" . addslashes($survey_id) . "','" . addslashes($quest_array[$i]) . "','". htmlspecialchars(addslashes($$val)) . "','$now')";
 	$result=db_query($sql);
 	if (!$result) {
-		echo "<h1>Error</h1>";
+		echo $language->getText('survey_resp','error');
 	}
 }
 

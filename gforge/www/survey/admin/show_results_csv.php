@@ -17,7 +17,7 @@ require_once('HTML_Graphs.php');
 require_once('www/survey/survey_utils.php');
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<h1>Permission Denied</h1>";
+        echo "<h1>".$Language->getText('survey_show_results_csv','permission_denied')."</h1>";
 	exit;
 }
 

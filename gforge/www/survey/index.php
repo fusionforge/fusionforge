@@ -17,19 +17,20 @@ require_once('vote_function.php');
 require_once('www/survey/survey_utils.php');
 
 if (!$group_id) {
-	echo "<h1>For some reason, the Group ID or Survey ID did not make it to this page</h1>";
+	echo "<h1>".$Language->getText('survey_index','for_some_reason')."</h1>";
 }
 
-survey_header(array('title'=>'Survey','pagename'=>'survey','titlevals'=>array(group_getname($group_id))));
+survey_header(array('title'=>$Language->getText('survey_index','title'),'pagename'=>'survey','titlevals'=>array(group_getname($group_id))));
 
 Function  ShowResultsGroupSurveys($result) {
 	global $group_id;
+	global $Language;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
 
 	$title_arr=array();
-	$title_arr[]='Survey ID';
-	$title_arr[]='Survey Title';
+	$title_arr[]=$Language->getText('survey_index','survey_id');
+	$title_arr[]=$Language->getText('survey_index','survey_title');
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -56,7 +57,7 @@ $sql="SELECT survey_id,survey_title FROM surveys WHERE group_id='$group_id' AND 
 $result=db_query($sql);
 
 if (!$result || db_numrows($result) < 1) {
-	echo "<h2>This Group Has No Active Surveys</h2>";
+	echo "<h2>".$Language->getText('survey_index','this_group_has')."</h2>";
 	echo db_error();
 } else {
 	ShowResultsGroupSurveys($result);

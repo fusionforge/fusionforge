@@ -16,33 +16,15 @@ require_once('pre.php');
 require_once('vote_function.php');
 require_once('www/survey/survey_utils.php');
 
-echo $HTML->header(array('title'=>'Survey'));
+echo $HTML->header(array('title'=>$Language->getText('survey_privacy','title')));
 
 ?>
 
-<h1>Survey Privacy</h1>
+<h1><?php echo $Language->getText('survey_privacy','survey_privacy'); ?></h1>
+<?php echo $Language->getText('survey_privacy','the_privacy_information'); ?>
+</p>
 
-<p>The information collected in these surveys will never be
-sold to third parties or used to solicit you to purchase
-any goods or services.</p>
-
-<p>This information is being gathered to build a profile
-of the projects and developers being surveyed. That profile
-will help visitors to the site understand the quality of a
-given project.</p>
-
-<p>The ID's of those who answer surveys are suppressed
-and not viewable by project administrators or the public
-or third parties.</p>
-
-<p>The information gathered is used only in aggregate
-form, not to single out specific users or developers.</p>
-
-<p>If any changes are made to this policy, it will affect
-only future data that is collected and the user will of
-course have the ability to 'opt-out'.</p>
-
-<p><strong>The <?php echo $GLOBALS['sys_name']; ?> Team</strong></p>
+<p><strong><?php echo $Language->getText('survey_privacy','the_team',array($GLOBALS['sys_name'])); ?></strong></p>
 
 <?php
 

@@ -15,10 +15,10 @@
 require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
-survey_header(array('title'=>'Survey Results','pagename'=>'survey_admin_show_results'));
+survey_header(array('title'=>$Language->getText('survey_show_results','title'),'pagename'=>'survey_admin_show_results'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>Permission Denied</h1>";
+	echo "<h1>".$Language->getText('survey_show_results','permission_denied')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -27,7 +27,7 @@ Function  ShowResultsSurvey($result) {
 	global $group_id,$PHP_SELF;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
-	echo "<h3>$rows Found</h3>";
+	echo "<h3>$rows" .$Language->getText('survey_show_results','found')."</h3>";
 
 	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
@@ -62,9 +62,10 @@ Function  ShowResultsSurvey($result) {
 
 Function  ShowResultsAggregate($result) {
 	global $group_id;
+	global $Language;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
-	echo "<h3>$rows Found</h3>";
+	echo "<h3>$rows" .$Language->getText('survey_show_results','found')."</h3>";
 
 	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
@@ -99,10 +100,10 @@ Function  ShowResultsAggregate($result) {
 
 Function  ShowResultsCustomer($result) {
 	global $survey_id,$group_id;
-
+	global $Language;
 	$rows  =  db_numrows($result);
 	$cols  =  db_numfields($result);
-	echo "<h3>$rows Found</h3>";
+	echo "<h3>$rows".$Language->getText('survey_show_results','found')."</h3>";
 
 	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
 	/*  Create  the  headers  */
@@ -149,7 +150,7 @@ if (!$survey_id) {
 //	echo "\n<h2>View Individual Responses</h2>\n\n";
 //	ShowResultsSurvey($result);
 
-	echo "\n<h2>View Aggregate Responses</h2>\n\n";
+	echo "\n<h2>".$Language->getText('survey_show_results','view_aggregate_responses')."</h2>\n\n";
 	ShowResultsAggregate($result);
 
 } /* else {

@@ -14,12 +14,13 @@
 
 require_once('pre.php');
 require_once('www/survey/survey_utils.php');
+require_once('www/survey/admin/survey_utils.php');
 
 $is_admin_page='y';
-survey_header(array('title'=>'Edit A Survey','pagename'=>'survey_admin_edit_survey'));
+survey_header(array('title'=>$Language->getText('survey_edit','tilte'),'pagename'=>'survey_admin_edit_survey'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-	echo "<h1>Permission Denied</h1>";
+	echo "<h1>" .$Language->getText('survey_edit','permission_denied')."</h1>";
 	survey_footer(array());
 	exit;
 }
@@ -27,15 +28,15 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 if ($post_changes) {
 	if (!isset($survey_title) || $survey_title == "")
 	{
-		$feedback .= ' UPDATE FAILED: Survey Title Required';
+		$feedback .= $Language->getText('survey_edit','survey_title_required');
 	}
 	elseif (!isset($survey_questions) || $survey_questions == "")
 	{
-		$feedback .= ' UPDATE FAILED: Survey Questions Required';
+		$feedback .= $Language->getText('survey_edit','survey_question_required');
 	}
 	if (!isset($survey_id) || !isset($group_id) || $survey_id == "" || $group_id == "")
 	{
-		$feedback .= ' UPDATE FAILED: Missing Data';
+		$feedback .= $Language->getText('survey_edit','missing_date');
 	}
 	else
 	{
@@ -48,10 +49,10 @@ if ($post_changes) {
 			 "WHERE survey_id='$survey_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_affected_rows($result) < 1) {
-			$feedback .= ' UPDATE FAILED ';
+			$feedback .= $Language->getText('survey_edit','update_failed');
 			echo db_error();
 		} else {
-			$feedback .= ' UPDATE SUCCESSFUL ';
+			$feedback .= $Language->getText('survey_edit','update_successful');
 		}
 	}
 }
@@ -79,70 +80,32 @@ function show_questions() {
 // -->
 </script>
 
-<h3><span style="color:red">WARNING! It is a bad idea to edit a survey after responses have been posted</span></h3>
+<h3><span style="color:red"><?php echo $Language->getText('survey_edit','warning_survey_after_response'); ?></span></h3>
 
-<p>If you change a survey after you already have responses, your results pages could be misleading or messed up.</p>
+<p><?php echo $Language->getText('survey_edit','change_after_already_response'); ?>.</p>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
 <input type="hidden" name="post_changes" value="y" />
-<strong>Name of Survey:</strong>
+<strong><?php echo $Language->getText('survey_edit','name_off_survey'); ?>:</strong>
 <br />
 <input type="hidden" name="survey_id" value="<?php echo $survey_id; ?>" />
 <input type="text" name="survey_title" value="<?php echo $survey_title; ?>" length="60" maxlength="150" />
 <p>
-<strong>Questions:</strong>
+<strong><?php echo $Language->getText('survey_edit','question'); ?>:</strong>
 <br />
-List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view 
-the question id's. Do <strong>not</strong> include spaces or end your list with a comma.
-<br />
-Ex: 1,2,3,4,5,6,7
+<?php echo $Language->getText('survey_edit','list_question_numbers'); ?>
 <br /><input type="text" name="survey_questions" value="<?php echo $survey_questions; ?>" length="90" maxlength="1500" /></p>
 <p>
-<strong>Is Active</strong>
-<br /><input type="radio" name="is_active" value="1"<?php if ($is_active=='1') { echo ' checked="checked"'; } ?> /> Yes
-<br /><input type="radio" name="is_active" value="0"<?php if ($is_active=='0') { echo ' hecked="checked"'; } ?> /> No</p>
+<strong><?php echo $Language->getText('survey_edit','is_active'); ?></strong>
+<br /><input type="radio" name="is_active" value="1"<?php if ($is_active=='1') { echo ' checked="checked"'; } ?> /> <?php echo $Language->getText('survey_edit','yes'); ?>
+<br /><input type="radio" name="is_active" value="0"<?php if ($is_active=='0') { echo ' hecked="checked"'; } ?> /> <?php echo $Language->getText('survey_edit','no'); ?></p>
 <p>
-<input type="submit" name="submit" value="Submit Changes"></p>
+<input type="submit" name="submit" value="<?php echo $Language->getText('survey_edit','submit_changes'); ?>"></p>
 </form></p>
 
 <?php
 
-Function  ShowResultsEditSurvey($result) {
-	global $group_id,$PHP_SELF;
-	$rows  =  db_NumRows($result);
-	$cols  =  db_NumFields($result);
-	echo "<h3>$rows Found</h3>";
-
-	if ($rows > 0) {
-		echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
-		/*  Create  the  headers  */
-		echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
-		for ($i = 0; $i < $cols; $i++)  {
-			printf( "<th><span><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
-		}
-		echo "</tr>";
-		for ($j=0; $j<$rows; $j++)  {
-
-			if ($j%2==0) {
-				$row_bg="white";
-			} else {
-				$row_bg="$GLOBALS[COLOR_LTBACK1]";
-			}
-
-			echo "<tr style=\"background-color:$row_bg\">\n";
-
-			echo "<td><a href=\"$PHP_SELF?group_id=$group_id&amp;survey_id=".
-				db_result($result,$j,0)."\">".db_result($result,$j,0)."</a></td>";
-			for ($i = 1; $i < $cols; $i++)  {
-				printf("<td>%s</td>\n",db_result($result,$j,$i));
-			}
-
-			echo "</tr>";
-		}
-		echo "</table>"; //</td></tr></TABLE>";
-	}
-}
 
 /*
 	Select all surveys from the database
@@ -155,10 +118,10 @@ $result=db_query($sql);
 ?>
 <p>
 <form>
-<input type="button" name="none" value="Show Existing Questions" onclick="show_questions()" />
+<input type="button" name="none" value="<?php echo $Language->getText('survey_edit','show_existing_questions'); ?>" onclick="show_questions()" />
 </form></p>
 <p>&nbsp;</p>
-<h2>Existing Surveys</h2>
+<h2><?php echo $Language->getText('survey_edit','existing_surveys'); ?></h2>
 <?php
 
 ShowResultsEditSurvey($result);

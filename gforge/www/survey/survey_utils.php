@@ -19,25 +19,26 @@
 
 function survey_header($params) {
 	global $group_id,$is_admin_page,$DOCUMENT_ROOT;
-
+	global $Language;
+	
 	$params['toptab']='surveys';
 	$params['group']=$group_id;
 
 	if ($project =& group_get_object($group_id)){
 		if (!$project->usesSurvey()) {
-			exit_error('Error','This Group Has Turned Off Surveys');
+			exit_error($Language->getText('survey_utils','error_this_group_has_turned_off'));
 		}
 		
 		site_project_header($params);
 		
-		echo "<p><strong><a href=\"/survey/admin/?group_id=$group_id\">Admin</a>";
+		echo "<p><strong><a href=\"/survey/admin/?group_id=$group_id\">".$Language->getText('survey_utils','admin')."</a>";
 		
 		if ($is_admin_page && $group_id) {
-			echo " | <a href=\"/survey/admin/add_survey.php?group_id=$group_id\">Add Surveys</a>";
-			echo " | <a href=\"/survey/admin/edit_survey.php?group_id=$group_id\">Edit Surveys</a>";
-			echo " | <a href=\"/survey/admin/add_question.php?group_id=$group_id\">Add Questions</a>";
-			echo " | <a href=\"/survey/admin/show_questions.php?group_id=$group_id\">Edit Questions</a>";
-			echo " | <a href=\"/survey/admin/show_results.php?group_id=$group_id\">Show Results</a></strong>";
+			echo " | <a href=\"/survey/admin/add_survey.php?group_id=$group_id\">".$Language->getText('survey_utils','add_survey')."</a>";
+			echo " | <a href=\"/survey/admin/edit_survey.php?group_id=$group_id\">".$Language->getText('survey_utils','edit_survey')."</a>";
+			echo " | <a href=\"/survey/admin/add_question.php?group_id=$group_id\">".$Language->getText('survey_utils','add_question')."</a>";
+			echo " | <a href=\"/survey/admin/show_questions.php?group_id=$group_id\">".$Language->getText('survey_utils','edit_questions')."</a>";
+			echo " | <a href=\"/survey/admin/show_results.php?group_id=$group_id\">".$Language->getText('survey_utils','show_results')."</a></strong>";
 		}
 		
 		echo "</p>";

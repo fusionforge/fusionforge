@@ -21,10 +21,10 @@ if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-survey_header(array('title'=>'Survey','pagename'=>'survey_survey'));
+survey_header(array('title'=>$Language->getText('survey','title'),'pagename'=>'survey_survey'));
 
 if (!$survey_id || !$group_id) {
-	echo "<h1>For some reason, the Group ID or Survey ID did not make it to this page</h1>";
+	echo "<h1>".$Language->getText('survey','for_some_reason')."</h1>";
 } else {
 	show_survey($group_id,$survey_id);
 }

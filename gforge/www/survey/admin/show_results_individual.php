@@ -16,10 +16,10 @@ require_once('pre.php');
 require_once('www/survey/survey_utils.php');
 
 $is_admin_page='y';
-survey_header(array('title'=>'Results','pagename'=>'survey_admin_show_results_individual'));
+survey_header(array('title'=>$Language->getText('survey_show_results_individual','title'),'pagename'=>'survey_admin_show_results_individual'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<h1>Permission Denied</h1>";
+        echo "<h1>".Language->getText('survey_show_results_individual','permission_denied')."</h1>";
         survey_footer(array());
 	exit;
 }
@@ -186,7 +186,7 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		if ($question_type != $last_question_type) {
-	                echo "<strong>Yes / No</strong><br />\n";
+	                echo "<strong>".$Language->getText('survey_show_results_individual','yes_no').Yes / No"</strong><br />\n";
 		}
 
 		echo "\n<input type=\"radio\" name=\"_".$quest_array[$i]."\" value=\"1\"";
