@@ -1,18 +1,31 @@
 <?php
 /**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Generic Tracker facility
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems; 2005 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 
-$ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagename'=>'tracker_add','sectionvals'=>array($ath->getName())));
+$ath->header(array ('title'=>$Language->getText('tracker_add','submit')));
 
 	/*
 		Show the free-form text submitted by the project admin
@@ -41,23 +54,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	<tr>
 		<td valign="top"><strong>'.$Language->getText('tracker_add','for_project').':</strong><br />'.$group->getPublicName().'</td>
 		<td valign="top"><input type="submit" name="submit" value="'. $Language->getText('general','submit').'" /></td>
-	</tr>
-	<tr>
-		<td <valign="top"><strong>'.$Language->getText('tracker','category').': <a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a></strong><br />';
-
-		echo $ath->categoryBox('category_id');
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_cat=1">('.$Language->getText('tracker','admin').')</a>';
-	?>
-		</td>
-		<td><strong><?php echo $Language->getText('tracker','item_group') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=group')"><strong>(?)</strong></a></strong><br />
-	<?php
-		echo $ath->artifactGroupBox('artifact_group_id');
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_group=1">('.$Language->getText('tracker','admin').')</a>';
-	?>
-		</td>
-	</tr>
-	
-	<?php
+	</tr>';
 	
 	$ath->renderExtraFields(true,'none');
  

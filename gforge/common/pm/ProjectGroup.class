@@ -306,14 +306,14 @@ class ProjectGroup extends Error {
 	}
 
 	/**
-	 *  getCategoryObjects - Array of ArtifactCategory objects set up for this artifact type.
+	 *  getCategoryObjects - Array of ProjectCategory objects set up for this artifact type.
 	 *
-	 *  @return array   Of ArtifactCategory objects.
+	 *  @return array   Of ProjectCategory objects.
 	 */
 	function &getCategoryObjects() {
 		$res = $this->getCategories();
 		while ($arr =& db_fetch_array($res)) {
-			$cats[] =& new ArtifactCategory($this,$arr);
+			$cats[] =& new ProjectCategory($this,$arr);
 		}
 		return $cats[];
 	}

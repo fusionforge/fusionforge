@@ -11,12 +11,6 @@
 			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_extrafield=1"><strong>'.$Language->getText('tracker_admin','build_selection_box').'</strong></a><br />
 			'.$Language->getText('tracker_admin','build_selection_box_info').'</p>';
 		echo '<p>
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_cat=1"><strong>'.$Language->getText('tracker_admin','add_categories').'</strong></a><br />
-			'.$Language->getText('tracker_admin','add_categories_info').'</p>';
-		echo '<p>
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_group=1"><strong>'.$Language->getText('tracker_admin','add_groups').'</strong></a><br />
-			'.$Language->getText('tracker_admin','add_group_infos').'</p>';
-		echo '<p>
 			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_canned=1"><strong>'.$Language->getText('tracker_admin','add_canned_responses').'</strong></a><br />
 			'.$Language->getText('tracker_admin','add_canned_responses_info').'</p>';
 		echo '<p>

@@ -19,8 +19,10 @@
 
 require_once('pre.php');
 require_once('www/docman/include/doc_utils.php');
+require_once('www/docman/include/DocumentGroupHTML.class');
 require_once('common/docman/DocumentFactory.class');
 require_once('common/docman/DocumentGroup.class');
+require_once('common/docman/DocumentGroupFactory.class');
 
 if (!$group_id) {
 	exit_no_group();
@@ -45,7 +47,6 @@ $upload_dir = $sys_ftp_upload_dir . "/" . $g->getUnixName();
 //
 
 if ($submit) {
-
 	if ($editdoc) {
 
 		$d= new Document($g,$docid);
@@ -82,7 +83,7 @@ if ($submit) {
 		if ($dg->isError()) {
 			exit_error('Error',$dg->getErrorMessage());
 		}
-		if (!$dg->update($groupname)) {
+		if (!$dg->update($groupname,$parent_doc_group)) {
 			exit_error('Error',$dg->getErrorMessage());
 		}
 		$feedback = $Language->getText('general','update_successful');
@@ -94,10 +95,24 @@ if ($submit) {
 		if ($dg->isError()) {
 			exit_error('Error',$dg->getErrorMessage());
 		}
-		if (!$dg->create($groupname)) {
+		if (!$dg->create($groupname, $parent_doc_group)) {
 			exit_error('Error',$dg->getErrorMessage());
 		}
 		$feedback = $Language->getText('general','create_successful');
+	
+	} elseif ($deletedoc && $docid && $sure && $really_sure) {
+		$d= new Document($g,$docid);
+		if ($d->isError()) {
+			exit_error('Error',$d->getErrorMessage());
+		}
+		
+		if (!$d->delete()) {
+			exit_error('Error',$d->getErrorMessage());
+		}
+		
+		$feedback = $Language->getText('general','deleted');
+		header('Location: index.php?group_id='.$d->Group->getID().'&feedback='.urlencode($feedback));
+		die();	// End parsing file and redirect
 	}
 
 }
@@ -114,6 +129,17 @@ if ($editdoc && $docid) {
 		exit_error('Error',$d->getErrorMessage());
 	}
 
+	$dgf = new DocumentGroupFactory($g);
+	if ($dgf->isError()) {
+		exit_error('Error',$dgf->getErrorMessage());
+	}
+	
+	$dgh = new DocumentGroupHTML($g);
+	if ($dgh->isError()) {
+		exit_error('Error',$dgh->getErrorMessage());
+	}
+
+	
 	docman_header($Language->getText('docman_admin_editdocs','section'),$Language->getText('docman_admin_editdocs','title'),'docman_admin_docedit','admin',$g->getPublicName(),'');
 
 	?>
@@ -163,7 +189,8 @@ if ($editdoc && $docid) {
 		<strong><?php echo $Language->getText('docman_new','group') ?></strong><br />
 		<?php
 
-			echo display_groups_option($group_id,$d->getDocGroupID());
+			//echo display_groups_option($group_id,$d->getDocGroupID());
+			$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $d->getDocGroupID());
 
 		?></td>
 	</tr>
@@ -217,7 +244,8 @@ if ($editdoc && $docid) {
 	</table>
 
 	<input type="hidden" name="docid" value="<?php echo $d->getID(); ?>" />
-	<input type="submit" value="<?php echo $Language->getText('general','submit_edit') ?>" name="submit" />
+	<input type="submit" value="<?php echo $Language->getText('general','submit_edit') ?>" name="submit" /><br /><br />
+	<a href="index.php?deletedoc=1&amp;docid=<?php echo $d->getID() ?>&amp;group_id=<?php echo $d->Group->getID() ?>"><?php echo $Language->getText('docman_admin_editdocs', 'delete_doc') ?></a>
 
 	</form>
 	<?php
@@ -234,33 +262,34 @@ if ($editdoc && $docid) {
 	docman_header($Language->getText('docman_admin_addgroups','section'),$Language->getText('docman_admin_addgroups','title'),'docman_admin_addgroups','admin',$g->getPublicName(),'');
 
 	echo "<h1>".$Language->getText('docman_admin_addgroups','title')."</h1>";
-
-	/*
-		List of possible categories for this ArtifactType
-	*/
-	$result=db_query("SELECT * FROM doc_groups WHERE group_id='$group_id'");
-	$rows=db_numrows($result);
-	if ($result && $rows > 0) {
+	
+	$dgf = new DocumentGroupFactory($g);
+	if ($dgf->isError()) {
+		exit_error('Error',$dgf->getErrorMessage());
+	}
+	
+	$dgh = new DocumentGroupHTML($g);
+	if ($dgh->isError()) {
+		exit_error('Error',$dgh->getErrorMessage());
+	}
+	
+	$nested_groups =& $dgf->getNested();
+	
+	if (count($nested_groups) > 0) {
 		$title_arr=array();
 		$title_arr[]=$Language->getText('docman_admin_editgroups','group_id');
 		$title_arr[]=$Language->getText('docman_admin_editgroups','group_name');
 
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
-
-		for ($i=0; $i < $rows; $i++) {
-			echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
-				'<td>'.db_result($result, $i, 'doc_group').'</td>'.
-				'<td><a href="index.php?editgroup=1&amp;doc_group='.
-					db_result($result, $i, 'doc_group').'&amp;group_id='.$group_id.'">'.
-					db_result($result, $i, 'groupname').'</a></td></tr>';
-		}
-
+		
+		$row = 0;
+		$dgh->showTableNestedGroups(&$nested_groups, &$row);
+		
 		echo $GLOBALS['HTML']->listTableBottom();
-
+		
 	} else {
 		echo "\n<h1>".$Language->getText('docman','error_no_groups_defined')."</h1>";
 	}
-
 	?>
 	<p><strong><?php echo $Language->getText('docman_admin_editgroups','add_group') ?>:</strong></p>
 	<form name="addgroup" action="index.php?addgroup=1&amp;group_id=<?php echo $group_id; ?>" method="post">
@@ -268,6 +297,14 @@ if ($editdoc && $docid) {
 		<tr>
 			<th><?php echo $Language->getText('docman_admin_editgroups','new_group_name') ?>:</th>
 			<td><input type="text" name="groupname" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<th><?php echo $Language->getText('docman_admin_editgroups','new_group_parent') ?>:</th>
+			<td>
+				<?php echo $dgh->showSelectNestedGroups(&$nested_groups, 'parent_doc_group') ?>
+			</td>
+
 			<td><input type="submit" value="<?php echo $Language->getText('general','add') ?>" name="submit" /></td>
 		</tr>
 	</table>
@@ -290,6 +327,16 @@ if ($editdoc && $docid) {
 	if ($dg->isError()) {
 		exit_error('Error',$dg->getErrorMessage());
 	}
+	
+	$dgf = new DocumentGroupFactory($g);
+	if ($dgf->isError()) {
+		exit_error('Error',$dgf->getErrorMessage());
+	}
+	
+	$dgh = new DocumentGroupHTML($g);
+	if ($dgh->isError()) {
+		exit_error('Error',$dgh->getErrorMessage());
+	}
 
 	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'docman_admin_editgroups','admin',$g->getPublicName(),'');
 	?>
@@ -300,6 +347,15 @@ if ($editdoc && $docid) {
 		<tr>
 			<th><?php echo $Language->getText('docman_admin_editgroups','group_name') ?>:</th>
 			<td><input type="text" name="groupname" value="<?php echo $dg->getName(); ?>" /></td>
+			<td>&nbsp;</td>
+		</tr>
+		<tr>
+			<th><?php echo $Language->getText('docman_admin_editgroups','group_parent') ?>:</th>
+			<td>
+			<?php
+				$dgh->showSelectNestedGroups($dgf->getNested(), "parent_doc_group", true, $dg->getParentId(), array($dg->getID()));
+			?>
+			</td>
 			<td><input type="submit" value="<?php echo $Language->getText('general','edit') ?>" name="submit" /></td>
 		</tr>
 	</table>
@@ -309,6 +365,26 @@ if ($editdoc && $docid) {
 	</p>
 	</form>
 	<?php
+	docman_footer(array());
+} else if ($deletedoc && $docid) {
+	$d= new Document($g,$docid);
+	if ($d->isError()) {
+		exit_error('Error',$d->getErrorMessage());
+	}
+	
+	docman_header($Language->getText('docman_admin_editgroups','section'),$Language->getText('docman_admin_editgroups','title'),'docman_admin_editgroups','admin',$g->getPublicName(),'');
+?>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?deletedoc=1&amp;docid='.$d->getID().'&amp;group_id='.$d->Group->getID() ?>" method="post">
+		<input type="hidden" name="submit" value="1" /><br />
+		<?php echo $Language->getText('docman_admin_deletedoc','delete_warning'); ?>
+		<p>
+		<input type="checkbox" name="sure" value="1"><?php echo $Language->getText('docman_admin_deletedoc','sure') ?><br />
+		<input type="checkbox" name="really_sure" value="1"><?php echo $Language->getText('docman_admin_deletedoc','really_sure') ?><br />
+		<p>
+		<input type="submit" name="post_changes" value="<?php echo $Language->getText('docman_admin_deletedoc','delete') ?>" /></p>
+		</form></p>
+<?php
 	docman_footer(array());
 
 //
@@ -322,8 +398,15 @@ if ($editdoc && $docid) {
 	if ($df->isError()) {
 		exit_error($Language->getText('general','error'),$df->getErrorMessage());
 	}
+	
+	$dgf = new DocumentGroupFactory($g);
+	if ($dgf->isError()) {
+		exit_error($Language->getText('general','error'),$dgf->getErrorMessage());
+	}
+	
+
 	$df->setStateID('ALL');
-	$df->setSort('stateid');
+//	$df->setSort('stateid');
 	$d_arr =& $df->getDocuments();
 
 	docman_header($Language->getText('docman_admin','section', $g->getPublicName()),$Language->getText('docman_admin','title'),'docman_admin','admin',$g->getPublicName(),'admin');
@@ -334,30 +417,20 @@ if ($editdoc && $docid) {
 	<a href="index.php?group_id=<?php echo $group_id; ?>&amp;addgroup=1"><?php echo $Language->getText('docman_admin','add_edit_docgroups') ?></a>
 	</p>
 	<?php
-
+	
 	if (!$d_arr || count($d_arr) < 1) {
 		print "<p><strong>".$Language->getText('docman','error_no_docs').".</strong></p>";
 	} else {
-	//	  doc_droplist_count($group_id, $language_id);
-
-		print "\n<ul>";
-		$last_state = "";
-		for ($i=0; $i<count($d_arr); $i++) {
-
-			//
-			//  If we're starting a new "group" of docs, put in the
-			//  docGroupName and start a new <ul>
-			//
-			if ($d_arr[$i]->getStateID() != $last_state) {
-				print (($i==0) ? '' : '</ul></li>');
-				print "\n\n<li><strong>". $d_arr[$i]->getStateName() ."</strong></li><li style=\"list-style: none\"><ul>";
-				$last_state=$d_arr[$i]->getStateID();
-			}
-			print "\n<li><a href=\"index.php?editdoc=1&amp;docid=".$d_arr[$i]->getID()."&amp;group_id=$group_id\">".
-				$d_arr[$i]->getName()." [ ".((!$d_arr[$i]->isURL()) ? $d_arr[$i]->getFileName() : 'URL')." ]</a>".
-				"\n<br /><em>".$Language->getText('docman_new','description').":</em> ".$d_arr[$i]->getDescription()."</li>\n";
+		// get a list of used document states
+		$states = $df->getUsedStates();
+		$nested_groups =& $dgf->getNested();
+		echo "<ul>";
+		foreach ($states as $state) {
+			echo "<li><strong>".$state["name"]."</strong>";
+			docman_display_documents(&$nested_groups, &$df, true, $state["stateid"], true);
+			echo "</li>";
 		}
-		print "\n</ul></li></ul>\n";
+		echo "</ul>";
 	}
 
 	docman_footer(array());

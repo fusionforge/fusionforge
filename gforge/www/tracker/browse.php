@@ -1,16 +1,15 @@
 <?php
 /**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * SourceForge Generic Tracker facility
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 require_once('common/tracker/ArtifactFactory.class');
+require_once('common/tracker/ArtifactQuery.class');
 //
 //  make sure this person has permission to view artifacts
 //
@@ -25,15 +24,12 @@ if (!$af || !is_object($af)) {
 	exit_error('Error',$af->getErrorMessage());
 }
 
-$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_category,$_group,$_changed_from, $_resolution);
+$af->setup($offset,$_sort_col,$_sort_ord,$max_rows,$set,$_assigned_to,$_status,$_changed_from);
 $_sort_col=$af->order_col;
 $_sort_ord=$af->sort;
 $_status=$af->status;
 $_assigned_to=$af->assigned_to;
-$_category=$af->category;
-$_group=$af->group;
 $_changed_from=$af->changed_from;
-$_resolution=$af->resolution;
 
 $art_arr =& $af->getArtifacts();
 
@@ -44,8 +40,7 @@ if (!$art_arr && $af->isError()) {
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
-$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse',
-	'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
+$ath->header(array('titlevals'=>array($ath->getName()),'atid'=>$ath->getID()));
 
 /**
  *
@@ -128,11 +123,6 @@ echo '
 	<tr>
 		<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a><br />'. $tech_box .'</span></td>'.
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a><br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any')) .'</span></td>';
-	if ($ath->useResolution()) {
-		echo '<td><span style="font-size:smaller">'.$Language->getText('tracker','resolution').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><strong>(?)</strong></a><br />'. $ath->resolutionBox('_resolution',$_resolution,true,$Language->getText('tracker','status_any')) .'</span></td>';
-	}
-	echo '<td><span style="font-size:smaller">'.$Language->getText('tracker','category').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a><br />'. $ath->categoryBox ('_category',$_category,$Language->getText('tracker','category_any')) .'</span></td>'.
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','group').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a><br />'. $ath->artifactGroupBox ('_group',$_group,$Language->getText('tracker','group_any')) .'</span></td>' .
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','changed').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=changed\')"><strong>(?)</strong></a><br />'. html_build_select_box_from_arrays($changed_arr,$changed_name_arr,'_changed_from',$_changed_from,false) .'</span></td>
 	</tr>';
 
@@ -153,7 +143,7 @@ echo $ath->getBrowseInstructions();
 if ($art_arr && count($art_arr) > 0) {
 
 	if ($set=='custom') {
-		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_category='.$_category.'&_group='.$_group.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
+		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
 	}
 
 
@@ -167,11 +157,8 @@ if ($art_arr && count($art_arr) > 0) {
 
 	$display_col=array('summary'=>1,
 		'open_date'=>1,
-		'category'=>0,
-		'resolution'=>0,
 		'status'=>0,
 		'priority'=>0,
-		'artifact'=>0,
 		'assigned_to'=>1,
 		'submitted_by'=>1);
 
@@ -181,16 +168,10 @@ if ($art_arr && count($art_arr) > 0) {
 		$title_arr[]=$Language->getText('tracker','summary');
 	if ($display_col['open_date'])
 		$title_arr[]=$Language->getText('tracker','open_date');
-	if ($display_col['category'])
-		$title_arr[]=$Language->getText('tracker','category');
-	if ($display_col['resolution'])
-		$title_arr[]=$Language->getText('tracker','resolution');
 	if ($display_col['status'])
 		$title_arr[]=$Language->getText('tracker','status');
 	if ($display_col['priority'])
 		$title_arr[]=$Language->getText('tracker','priority');
-	if ($display_col['artifact'])
-		$title_arr[]=$Language->getText('tracker','item_group');
 	if ($display_col['assigned_to'])
 		$title_arr[]=$Language->getText('tracker','assigned_to');
 	if ($display_col['submitted_by'])
@@ -219,16 +200,10 @@ if ($art_arr && count($art_arr) > 0) {
 		if ($display_col['open_date'])
 			echo '<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
 				date($sys_datefmt,$art_arr[$i]->getOpenDate()) .'</td>';
-		if ($display_col['category'])
-			echo '<td>'. $art_arr[$i]->getCategoryName() .'</td>';
-		if ($display_col['resolution'])
-			echo '<td>'. $art_arr[$i]->getResolutionName() .'</td>';
 		if ($display_col['status'])
 			echo '<td>'. $art_arr[$i]->getStatusName() .'</td>';
 		if ($display_col['priority'])
 			echo '<td>'. $art_arr[$i]->getPriority() .'</td>';
-		if ($display_col['artifact'])
-			echo '<td>'. $art_arr[$i]->getArtifactGroupName() .'</td>';
 		if ($display_col['assigned_to'])
 			echo '<td>'. $art_arr[$i]->getAssignedRealName() .'</td>';
 		if ($display_col['submitted_by'])
@@ -286,49 +261,30 @@ if ($art_arr && count($art_arr) > 0) {
 </font>
 <p>
 <FONT COLOR="#FF0000">'.$Language->getText('tracker_browse','admin_mass_update').'
-			</td></tr>
-
-			<tr>
-			<td><strong>'.$Language->getText('tracker','category').': <a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a>
-				</strong><br />'. $ath->categoryBox ('category_id','xzxz',$Language->getText('tracker_browse','no_change')) .'</td>
-			<td><strong>'.$Language->getText('tracker','group').': <a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a></strong>
-				<br />'. $ath->artifactGroupBox ('artifact_group_id','xzxz',$Language->getText('tracker_browse','no_change')) .'</td>
-			</tr>';
+			</td></tr>';
 
 
-/*		//
-		//	build input pop-up boxes for boxes and choices configured by ADMIN
 		//
-		$result=$ath->getSelectionBoxes();
-		echo "<p>&nbsp;</p>";
-		$rows=db_numrows($result);
-		if ($result &&$rows > 0) {
-			echo '<tr>';
-			for ($i=0; $i < $rows; $i++) {
-				$newrow= is_integer($i/2);
-				echo '<td><strong>'.db_result($result,$i,'field_name').'</strong><br \>';
-				echo $ath->selectionBox(db_result($result,$i,'id'),'xzxz',$Language->getText('tracker_browse','no_change'));
-		
-				if (!$newrow) {
-					echo '</tr><tr>';
-				}
-			}
+		//	build custom fields
+		//
+	$ef =& $ath->getExtraFields(ARTIFACT_EXTRAFIELD_FILTER_INT);
+	$keys=array_keys($ef);
+
+	$sel=array();
+	for ($i=0; $i<count($keys); $i++) {
+		if (($ef[$keys[$i]]['field_type']==ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($ef[$keys[$i]]['field_type']==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
+			$sel[$keys[$i]]=array('100');
+		} else {
+			$sel[$keys[$i]]='100';
 		}
-*/
+	}
+	$ath->renderExtraFields($sel,true,$Language->getText('tracker_browse','no_change'),false,'',ARTIFACT_EXTRAFIELD_FILTER_INT);
+
 		echo   '<tr>
 			<td><strong>'.$Language->getText('tracker','priority').': <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a>
 				</strong><br />';
 		echo build_priority_select_box ('priority', '100', true);
 		echo '</td><td>';
-		if ($ath->useResolution()) {
-			echo '
-				<strong>'.$Language->getText('tracker_browse','resolution').': <a href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><strong>(?)</strong></a>
-					</strong><br />';
-			echo $ath->resolutionBox('resolution_id','xzxz',true,$Language->getText('tracker_browse','no_change'));
-		} else {
-			echo '&nbsp;
-				<input type="hidden" name="resolution_id" value="100">';
-		}
 
 		echo '</td>
 			</tr>
@@ -336,8 +292,12 @@ if ($art_arr && count($art_arr) > 0) {
 			<tr>
 			<td><strong>'.$Language->getText('tracker','assigned_to').': <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a>
 				</strong><br />'. $ath->technicianBox ('assigned_to','100.1',true,$Language->getText('tracker_artifacttype','nobody'),'100.1',$Language->getText('tracker_browse','no_change')) .'</td>
-			<td><strong>'.$Language->getText('tracker','status').': <a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a></strong>
-				<br />'. $ath->statusBox ('status_id','xzxz',true,$Language->getText('tracker_browse','no_change')) .'</td>
+			<td>';
+		if (!$ath->usesCustomStatuses()) {
+		echo '<strong>'.$Language->getText('tracker','status').': <a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a></strong>
+				<br />'. $ath->statusBox ('status_id','xzxz',true,$Language->getText('tracker_browse','no_change'));
+		}
+		echo '</td>
 			</tr>
 
 			<tr><td colspan="2"><strong>'.$Language->getText('tracker_browse','canned_response').':

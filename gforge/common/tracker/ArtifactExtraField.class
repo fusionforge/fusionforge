@@ -24,12 +24,15 @@
  */
 require_once('common/include/Error.class');
 
-define('ARTIFACT_EXTRAFIELDTYPE_SELECT',1);
-define('ARTIFACT_EXTRAFIELDTYPE_CHECKBOX',2);
-define('ARTIFACT_EXTRAFIELDTYPE_RADIO',3);
-define('ARTIFACT_EXTRAFIELDTYPE_TEXT',4);
-define('ARTIFACT_EXTRAFIELDTYPE_MULTISELECT',5);
-define('ARTIFACT_EXTRAFIELDTYPE_TEXTAREA',6);
+define(ARTIFACT_EXTRAFIELD_FILTER_INT,'1,2,3,5,7');
+define(ARTIFACT_EXTRAFIELDTYPE_SELECT,1);
+define(ARTIFACT_EXTRAFIELDTYPE_CHECKBOX,2);
+define(ARTIFACT_EXTRAFIELDTYPE_RADIO,3);
+define(ARTIFACT_EXTRAFIELDTYPE_TEXT,4);
+define(ARTIFACT_EXTRAFIELDTYPE_MULTISELECT,5);
+define(ARTIFACT_EXTRAFIELDTYPE_TEXTAREA,6);
+define(ARTIFACT_EXTRAFIELDTYPE_STATUS,7);
+//define(ARTIFACT_EXTRAFIELDTYPE_ASSIGNEE,8);
 
 class ArtifactExtraField extends Error {
 
@@ -92,11 +95,12 @@ class ArtifactExtraField extends Error {
 	 *	@param	int	The type of field - radio, select, text, textarea
 	 *	@param	int	Attribute1 - for text (size) and textarea (rows)
 	 *	@param	int	Attribute2 - for text (maxlength) and textarea (cols)
+	 *	@param	int	is_required - true or false whether this is a required field or not.
 	 *  @return 	true on success / false on failure.
 	 */
-	function create($name,$field_type,$attribute1,$attribute2) {
+	function create($name,$field_type,$attribute1,$attribute2,$is_required=0) {
 		global $Language;
-		
+
 		//
 		//	data validation
 		//
@@ -108,25 +112,49 @@ class ArtifactExtraField extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,field_type,attribute1,attribute2) 
+		if ($is_required) {
+			$is_required=1;
+		} else {
+			$is_required=0;
+		}	
+		$sql="INSERT INTO artifact_extra_field_list (group_artifact_id,field_name,
+			field_type,attribute1,attribute2,is_required) 
 			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."',
-			'$field_type','$attribute1','$attribute2')";
+			'$field_type','$attribute1','$attribute2','$is_required')";
 
+		db_begin();
 		$result=db_query($sql);
 
 		if ($result && db_affected_rows($result) > 0) {
 			$this->clearError();
-			return true;
+			$id=db_insertid($result,'artifact_extra_field_list','extra_field_id');
+			//
+			//	Now set up our internal data structures
+			//
+			if (!$this->fetchData($id)) {
+				db_rollback();
+				return false;
+			}
+			if ($field_type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+				if (!$this->ArtifactType->setCustomStatusField($id)) {
+					db_rollback();
+					return false;
+				} else {
+					db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) 
+						values ('$id','Open','1')");
+					echo db_error();
+					db_query("INSERT INTO artifact_extra_field_elements(extra_field_id,element_name,status_id) 
+						values ('$id','Closed','2')");
+					echo db_error();
+				}
+			}
+			db_commit();
+			return $id;
 		} else {
 			$this->setError(db_error());
+			db_rollback();
 			return false;
 		}
-		//
-		//	Now set up our internal data structures
-		//
-		if (!$this->fetchData($id)) {
-			return false;
-		} 
 	}
 
 	/**
@@ -194,6 +222,34 @@ class ArtifactExtraField extends Error {
 	}
 
 	/**
+	 *	getType - the type of field.
+	 *
+	 *	@return	int	type.
+	 */
+	function getType() {
+		return $this->data_array['field_type'];
+	}
+
+	/**
+	 *	getTypeName - the name of type of field.
+	 *
+	 *	@return	string	type.
+	 */
+	function getTypeName() {
+		$arr=&$this->getAvailableTypes();
+		return $arr[$this->data_array['field_type']];
+	}
+
+	/**
+	 *	isRequired - whether this field is required or not.
+	 *
+	 *	@return	boolean required.
+	 */
+	function isRequired() {
+		return $this->data_array['is_required'];
+	}
+
+	/**
 	 *	getAvailableTypes - the types of text fields and their names available.
 	 *
 	 *	@return	array	types.
@@ -206,7 +262,8 @@ class ArtifactExtraField extends Error {
 			3=>$Language->getText('tracker_admin_build_boxes','box_type_radio'),
 			4=>$Language->getText('tracker_admin_build_boxes','box_type_text'),
 			5=>$Language->getText('tracker_admin_build_boxes','box_type_multiselect'),
-			6=>$Language->getText('tracker_admin_build_boxes','box_type_textarea')
+			6=>$Language->getText('tracker_admin_build_boxes','box_type_textarea'),
+			7=>$Language->getText('tracker_admin_build_boxes','box_type_status')
 		);
 	}
 
@@ -219,18 +276,32 @@ class ArtifactExtraField extends Error {
 	 *  @param	string	Name of the field.
 	 *	@param	int	Attribute1 - for text (size) and textarea (rows)
 	 *	@param	int	Attribute2 - for text (maxlength) and textarea (cols)
+	 *	@param	int	is_required - true or false whether this is a required field or not.
 	 *  @return	boolean	success.
 	 */
-	function update($name,$attribute1,$attribute2) {
+	function update($name,$attribute1,$attribute2,$is_required=0) {
 		if (!$this->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
-		}   
+		}
+		//
+		//	data validation
+		//
+		if (!$name) {
+			$this->setError($Language->getText('tracker_admin_build_boxes','required_box_name'));
+			return false;
+		}
+		if ($is_required) {
+			$is_required=1;
+		} else {
+			$is_required=0;
+		}	
 		$sql="UPDATE artifact_extra_field_list 
 			SET 
 			field_name='".htmlspecialchars($name)."',
 			attribute1='$attribute1',
-			attribute2='$attribute2'
+			attribute2='$attribute2',
+			is_required='$is_required'
 			WHERE extra_field_id='". $this->getID() ."' 
 			AND group_artifact_id='".$this->ArtifactType->getID()."'";
 		$result=db_query($sql);
@@ -248,7 +319,7 @@ class ArtifactExtraField extends Error {
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {
-			$this->setError('You Must Be Really Sure');
+			$this->setMissingParamsError();
 			return false;
 		}
 		if (!$this->ArtifactType->userIsAdmin()) {
@@ -268,6 +339,12 @@ class ArtifactExtraField extends Error {
                 WHERE extra_field_id='".$this->getID()."'";
 				$result=db_query($sql);
 				if ($result) {
+					if ($this->getType() == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+						if (!$this->ArtifactType->setCustomStatusField(0)) {
+							db_rollback();
+							return false;
+						}
+					}
 					db_commit();
 					return true;
 				} else {

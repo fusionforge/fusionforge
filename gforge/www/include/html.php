@@ -234,6 +234,73 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
 }
 
 /**
+ * html_build_radio_buttons_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
+ * array being the text you want displayed.
+ *
+ * The infamous '100 row' has to do with the SQL Table joins done throughout all this code.
+ * There must be a related row in users, categories, et	, and by default that
+ * row is 100, so almost every pop-up box has 100 as the default
+ * Most tables in the database should therefore have a row with an id of 100 in it so that joins are successful
+ *
+ * @param		array	The ID or value
+ * @param		array	Text to be displayed
+ * @param		string	Name to assign to this form element
+ * @param		string	The item that should be checked
+ * @param		bool	Whether or not to show the '100 row'
+ * @param		string	What to call the '100 row' defaults to none
+ * @param		bool	Whether or not to show the 'Any row'
+ * @param		string	What to call the 'Any row' defaults to any
+ */
+function html_build_radio_buttons_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
+	global $Language;
+	if ($text_100=='none'){
+		$text_100=$Language->getText('include_html','none');
+	}
+	$return = '';
+
+	$rows=count($vals);
+	if (count($texts) != $rows) {
+		$return .= 'ERROR - uneven row counts';
+	}
+
+	//we don't always want the default Any row shown
+	if ($show_any) {
+		$return .= '
+		<input type="radio" name="'.$select_name.'" value=""'.(($checked_val=='') ? ' checked' : '').'>&nbsp;'. $text_any .'<br />';
+	}
+	//we don't always want the default 100 row shown
+	if ($show_100) {
+		$return .= '
+		<input type="radio" name="'.$select_name.'" value="100"'.(($checked_val==100) ? ' checked' : '').'>&nbsp;'. $text_100 .'<br />';
+	}
+
+	$checked_found=false;
+
+	for ($i=0; $i<$rows; $i++) {
+		//  uggh - sorry - don't show the 100 row
+		//  if it was shown above, otherwise do show it
+		if (($vals[$i] != '100') || ($vals[$i] == '100' && !$show_100)) {
+			$return .= '
+				<input type="radio" name="'.$select_name.'" value="'.$vals[$i].'"';
+			if ($vals[$i] == $checked_val) {
+				$checked_found=true;
+				$return .= ' checked';
+			}
+			$return .= '>&nbsp;'.htmlspecialchars($texts[$i]).'<br />';
+		}
+	}
+	//
+	//	If the passed in "checked value" was never "SELECTED"
+	//	we want to preserve that value UNLESS that value was 'xzxz', the default value
+	//
+	if (!$checked_found && $checked_val != 'xzxz' && $checked_val && $checked_val != 100) {
+		$return .= '
+		<input type="radio" value="'.$checked_val.'" checked>&nbsp;'.$Language->getText('include_html','no_change').'<br />';
+	}
+
+	return $return;
+}
+/**
  * html_build_select_box_from_arrays() - Takes two arrays, with the first array being the "id" or value and the other
  * array being the text you want displayed.
  *
@@ -248,26 +315,33 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
  * @param		string	The item that should be checked
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row' defaults to none
+ * @param		bool	Whether or not to show the 'Any row'
+ * @param		string	What to call the 'Any row' defaults to any
  */
-function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none') {
+function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none',$show_any=false,$text_any='any') {
 	global $Language;
 	if ($text_100=='none'){
 		$text_100=$Language->getText('include_html','none');
 	}
 	$return = '';
-	
-	$return .= '
-		<select name="'.$select_name.'">';
-
-	//we don't always want the default 100 row shown
-	if ($show_100) {
-		$return .= '
-		<option value="100">'. $text_100 .'</option>';
-	}
 
 	$rows=count($vals);
 	if (count($texts) != $rows) {
 		$return .= 'ERROR - uneven row counts';
+	}
+
+	$return .= '
+		<select name="'.$select_name.'">';
+
+	//we don't always want the default Any row shown
+	if ($show_any) {
+		$return .= '
+		<option value=""'.(($checked_val=='') ? ' SELECTED' : '').'>'. $text_any .'</option>';
+	}
+	//we don't always want the default 100 row shown
+	if ($show_100) {
+		$return .= '
+		<option value="100"'.(($checked_val==100) ? ' SELECTED' : '').'>'. $text_100 .'</option>';
 	}
 
 	$checked_found=false;
@@ -377,12 +451,15 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
  * @param		int		The size of this box
  * @param		bool	Whether or not to show the '100 row'
  */
-function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_array,$size='8',$show_100=true) {
+function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_array,$size='8',$show_100=true,$text_100='none') {
 	global $Language;
 	$checked_count=count($checked_array);
 	$return .='
 		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
+		if ($text_100=='none') {
+			$text_100=$Language->getText('include_html','none');
+		}
 		/*
 			Put in the default NONE box
 		*/
@@ -393,7 +470,7 @@ function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_a
 				$return .= ' selected="selected"';
 			}
 		}
-		$return .= '>'.$Language->getText('include_html','none').'</option>';
+		$return .= '>'.$text_100.'</option>';
 	}
 
 	$rows=count($ids);

@@ -147,4 +147,78 @@ function docman_footer($params) {
 	site_project_footer($params);
 }
 
+/**
+ * docman_display_documents - Recursive function to show the documents inside the groups tree
+ */
+function docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid=0, $from_admin=false, $parent_group=0) {
+	global $selected_doc_group_id,$Language;
+
+	if (!is_array($nested_groups["$parent_group"])) {
+		return;
+	}
+	
+	echo "<ul style='list-style-type: none'>";
+	$child_count = count($nested_groups["$parent_group"]);
+	
+	for ($i=0; $i < $child_count; $i++) {
+		$doc_group =& $nested_groups["$parent_group"][$i];
+		
+		// Display group and subgroups only if it has associated documents
+		if ($doc_group->hasDocuments(&$nested_groups, &$document_factory, $stateid)) {
+			// Recursive call
+			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup(&$nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $GLOBALS['selected_stateid'])) {
+				$icon = 'ofolder15.png';
+			} else {
+				$icon = 'cfolder15.png';
+			}
+			echo "<li>".html_image('ic/'.$icon,"15","13",array("border"=>"0"))." <a href='index.php?group_id=".$doc_group->Group->getID()."&selected_doc_group_id=".$doc_group->getID()."&amp;language_id=".$GLOBALS['selected_language'];
+			if ($from_admin && $stateid) {	// if we're sorting by the state, pass the state as a variable
+				echo "&amp;selected_stateid=".$stateid;
+			}
+			echo "'>".$doc_group->getName()."</a>";
+				
+			// display link to add a document to the current group
+			echo " &nbsp;&nbsp;&nbsp;&nbsp;<a href='".($from_admin ? "../" : "")."new.php?group_id=".$doc_group->Group->getID()."&amp;selected_doc_group=".$doc_group->getID()."'>";
+			echo html_image('ic/adddoc12.png',"12","14",array("border"=>"0"))." ";
+			echo $Language->getText('docman_admin', 'add_docs');
+			echo "</a>";
+			
+			if (($doc_group->getID() == $selected_doc_group_id || $doc_group->hasSubgroup(&$nested_groups, $selected_doc_group_id)) && (!$stateid || $stateid == $GLOBALS['selected_stateid'])) {
+				docman_display_documents(&$nested_groups, &$document_factory, $is_editor, $stateid, $from_admin, $doc_group->getID());
+			}
+		}
+		
+		// Display this group's documents
+		if (($doc_group->hasSubgroup(&$nested_groups, $selected_doc_group_id) || $selected_doc_group_id == $doc_group->getID()) && (!$stateid || $stateid == $GLOBALS['selected_stateid'])) {
+			// Retrieve all the docs from this category
+			if ($stateid) {
+				$document_factory->setStateID($stateid);
+			}
+			$document_factory->setDocGroupID($doc_group->getID());
+			$docs = $document_factory->getDocuments();
+			if (is_array($docs)) {
+				$docs_count = count($docs);
+				
+				echo "<ul style='list-style-type: none'>";
+				for ($j=0; $j < $docs_count; $j++) {
+					if ($from_admin) {
+						$link = "index.php?editdoc=1&amp;docid=".$docs[$j]->getID()."&amp;group_id=".$docs[$j]->Group->getID();
+					} else {
+						$link = (( $docs[$j]->isURL() ) ? $docs[$j]->getFileName() : "view.php/".$docs[$j]->Group->getID()."/".$docs[$j]->getID()."/".$docs[$j]->getFileName() );
+					}
+				
+					echo "<li>".
+							html_image('ic/docman16b.png',"20","20",array("border"=>"0")).
+							" ".
+							"<a href=\"".$link."\">".
+							$docs[$j]->getName().
+							"</a>";
+				}
+				echo "</ul>";
+			}
+		}
+	}
+	echo "</ul>\n";
+}
+
 ?>

@@ -147,8 +147,6 @@ class Artifact extends Error {
 	/**
 	 *	create - construct a new Artifact in the database.
 	 *
-	 *	@param	int		The category ID.
-	 *	@param	int		The artifact group ID.
 	 *	@param	string	The artifact summary.
 	 *	@param	string	Details of the artifact.
 	 *	@param	int		The ID of the user to which this artifact is to be assigned.
@@ -156,7 +154,7 @@ class Artifact extends Error {
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 *  @return id on success / false on failure.
 	 */
-	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array()) {
+	function create( $summary, $details, $assigned_to=100, $priority=3, $extra_fields=array()) {
 		global $Language;
 		
 		//
@@ -198,39 +196,20 @@ class Artifact extends Error {
 			return false;
 		}
 		if (!$assigned_to) {
-			if ($category_id == 100) {
-				$assigned_to=100;
-			} else {
-				//create an ArtifactCategory to determine who to auto-assign to
-				$ac=new ArtifactCategory($this->ArtifactType,$category_id);
-				if (!$ac || !is_object($ac) || $ac->isError()) {
-					$assigned_to=100;
-				} else {
-					$assigned_to=$ac->getAssignee();
-				}
-			}
-		}
-		if ($assigned_to==100 && $category_id != 100) {
-			//create an ArtifactCategory to determine who to auto-assign to
-			$ac=new ArtifactCategory($this->ArtifactType,$category_id);
-			if (!$ac || !is_object($ac) || $ac->isError()) {
-				$assigned_to=100;
-			} else {
-				$assigned_to=$ac->getAssignee();
-			}
+			$assigned_to=100;
 		}
 		if (!$priority) {
 			$priority=3;
 		}
-		if (!$category_id) {
-			$category_id=100;
+		if (!$status_id) {
+			$status_id=1;
 		}
-		if (!$artifact_group_id) {
-			$artifact_group_id=100;
-		}
-		if (!$resolution_id) {
-			$resolution_id=100;
-		}
+		//
+		//	They may be using an extra field "status" box so we have to remap
+		//	the status_id based on the extra field - this keeps the counters
+		//	accurate
+		//
+		$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
 
 		db_begin();
 
@@ -248,13 +227,21 @@ class Artifact extends Error {
 			return false;
 		}
 
-		$res=db_query("INSERT INTO artifact 
-			(group_artifact_id,status_id,category_id,artifact_group_id,priority,
-			submitted_by,assigned_to,open_date,summary,details,resolution_id) 
+		$sql="INSERT INTO artifact 
+			(group_artifact_id,status_id,priority,
+
+			resolution_id,artifact_group_id,category_id,
+
+			submitted_by,assigned_to,open_date,summary,details) 
 			VALUES 
-			('".$this->ArtifactType->getID()."','1','$category_id','$artifact_group_id',
-			'$priority','$user','$assigned_to','". time() ."','". 
-			htmlspecialchars($summary)."','". htmlspecialchars($details)."','$resolution_id')");
+			('".$this->ArtifactType->getID()."','$status_id','$priority',
+
+			'100','100','100',
+
+			'$user','$assigned_to','". time() ."','". htmlspecialchars($summary)."','". htmlspecialchars($details)."')";
+		$res=db_query($sql);
+echo $sql;
+echo db_error();
 
 		$artifact_id=db_insertid($res,'artifact','artifact_id');
 
@@ -337,60 +324,6 @@ class Artifact extends Error {
 	 */
 	function getStatusName() {
 		return $this->data_array['status_name'];
-	}
-
-	/**
-	 *	getResolutionID - get resolution flag.
-	 *
-	 *	@return int	resolution.
-	 */
-	function getResolutionID() {
-		return $this->data_array['resolution_id'];
-	}
-
-	/**
-	 *	getResolutionName - get resolution name.
-	 *
-	 *	@return	string	The resolution name.
-	 */
-	function getResolutionName() {
-		return $this->data_array['resolution_name'];
-	}
-
-	/**
-	 *	getCategoryID - get category_id flag.
-	 *
-	 *	@return int category_id.
-	 */
-	function getCategoryID() {
-		return $this->data_array['category_id'];
-	}
-
-	/**
-	 *	getCategoryName - get category text name.
-	 *
-	 *	@return	string	The category name.
-	 */
-	function getCategoryName() {
-		return $this->data_array['category_name'];
-	}
-
-	/**
-	 *	getArtifactGroupID - get artifact_group_id flag.
-	 *
-	 *	@return int artifact_group_id
-	 */
-	function getArtifactGroupID() {
-		return $this->data_array['artifact_group_id'];
-	}
-
-	/**
-	 *	getArtifactGroupName - get artifact_group_name text.
-	 *
-	 *	@return	string	The artifact_group name.
-	 */
-	function getArtifactGroupName() {
-		return $this->data_array['group_name'];
 	}
 
 	/**
@@ -740,7 +673,6 @@ class Artifact extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-
 		if (session_loggedin()) {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
@@ -792,9 +724,6 @@ class Artifact extends Error {
 	 *
 	 *	@param	int		The artifact priority.
 	 *	@param	int		The artifact status ID.
-	 *	@param	int		The artifact category ID.
-	 *	@param	int		The artifact group ID.
-	 *	@param	int		The artifact resolution ID.
 	 *	@param	int		The person to which this artifact is to be assigned.
 	 *	@param	string	The artifact summary.
 	 *	@param	int		The canned response.
@@ -803,7 +732,7 @@ class Artifact extends Error {
 	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 *	@return	boolean	success.
 	 */
-	function update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
+	function update($priority,$status_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields=array()) {
 
 		global $Language;
@@ -830,12 +759,17 @@ class Artifact extends Error {
 			}
 
 		}
+		//
+		//	They may be using an extra field "status" box so we have to remap
+		//	the status_id based on the extra field - this keeps the counters
+		//	accurate
+		//
+		if (count($extra_fields) > 0) {
+			$status_id=$this->ArtifactType->remapStatus($status_id,$extra_fields);
+		}
 		if (!$this->getID() 
 			|| !$assigned_to 
 			|| !$status_id 
-			|| !$category_id 
-			|| !$artifact_group_id 
-			|| !$resolution_id
 			|| !$canned_response 
 			|| !$new_artifact_type_id) {
 			$this->setMissingParamsError();
@@ -873,11 +807,9 @@ class Artifact extends Error {
 				return false;
 			}
 			//
-			//	Now set ArtifactGroup, Category, and Assigned to 100 in the new ArtifactType
+			//	Now set Assigned to 100 in the new ArtifactType
 			//
 			$status_id=1;
-			$category_id='100';
-			$artifact_group_id='100';
 			$assigned_to='100';
 			//can't send a canned response when changing ArtifactType
 			$canned_response=100;
@@ -894,24 +826,6 @@ class Artifact extends Error {
 			$this->addHistory('status_id',$this->getStatusID());
 			$sqlu .= " status_id='$status_id', ";
 			$changes['status'] = 1;
-			$update = true;
-		}
-		if (($this->getResolutionID() != $resolution_id) && ($resolution_id != 100)) {
-			$this->addHistory('resolution_id',$this->getResolutionID());
-			$sqlu .= " resolution_id='$resolution_id', ";
-			$changes['resolution'] = 1;
-			$update = true;
-		}
-		if ($this->getCategoryID() != $category_id) {
-			$this->addHistory('category_id',$this->getCategoryID());
-			$sqlu .= " category_id='$category_id', ";
-			$changes['category'] = 1;
-			$update = true;
-		}
-		if ($this->getArtifactGroupID() != $artifact_group_id) {
-			$this->addHistory('artifact_group_id',$this->getArtifactGroupID());
-			$sqlu .= " artifact_group_id='$artifact_group_id', ";
-			$changes['artifact_group'] = 1;
 			$update = true;
 		}
 		if ($this->getPriority() != $priority) {
@@ -956,6 +870,9 @@ class Artifact extends Error {
 		if ($update){
 			$sql = "UPDATE artifact 
 				SET 
+
+				resolution_id='100',category_id='100',artifact_group_id='100',
+
 				$sqlu
 				group_artifact_id='$new_artifact_type_id'
 				WHERE 
@@ -968,15 +885,17 @@ class Artifact extends Error {
 				db_rollback();
 				return false;
 			} else {
-				$this->fetchData($this->getID());
-//TODO error check the data fetching??
+				if (!$this->fetchData($this->getID())) {
+					db_rollback();
+					return false;
+				}
 			}
 		}
 
 		//extra field handling
 		$update=true;
 		if (!$this->updateExtraFields($extra_fields)) {
-//TODO - see if anything actualyl did change
+//TODO - see if anything actually did change
 			db_rollback();
 			return false;
 		}
@@ -1032,6 +951,21 @@ class Artifact extends Error {
 	 *	@return true on success / false on failure
 	 */
 	function updateExtraFields($extra_fields){
+/*
+	This is extremely complex code - we have take the passed array
+	and see if we need to insert it into the db, and may have to 
+	add history rows for the audit trail
+
+	start by getting all the available extra fields from ArtifactType
+		For each field from ArtifacType, check the passed array - 
+			This prevents someone from passing bogus extra field entries - they will be ignored
+			if the passed entry is blank, may have to force a default value
+			if the passed array is different from the existing data in db, 
+				delete old entry and insert new entries, along with possible audit trail
+			else
+				skip it and continue to next item
+
+*/
 		if (empty($extra_fields)) {
 			return true;
 		}
@@ -1041,22 +975,87 @@ class Artifact extends Error {
 		//now we'll update this artifact for each extra field
 		for ($i=0; $i<count($efk); $i++) {
 			$efid=$efk[$i];
+			$type=$ef[$efid]['field_type'];
 
+//
+//	Force each field to have some value if it is a numeric field
+//	text fields will just be purged and skipped
+//
+			if (!$extra_fields[$efid]) {
+				if ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS) {
+					$this->setError('Status Custom Field Must Be Set');
+					return false;
+				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO)) {
+					$extra_fields[$efid]='100';
+				} elseif (($type == ARTIFACT_EXTRAFIELDTYPE_MULTISELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX)) {
+					$extra_fields[$efid]=array('100');
+				} else {
+					$resdel=db_query("DELETE FROM artifact_extra_field_data
+					WHERE
+					artifact_id='".$this->getID()."'
+					AND extra_field_id='".$efid."'");
+					continue;
+				}
+			}
 			//
-			//	Delete the old rows of data
+			//	get the old rows of data
 			//
-			$res=db_query("DELETE FROM artifact_extra_field_data
+			$resd=db_query("SELECT * FROM artifact_extra_field_data
 				WHERE
 				artifact_id='".$this->getID()."'
 				AND extra_field_id='".$efid."'");
+			$rows=db_numrows($resd);
+			if ($resd && $rows) {
+//
+//POTENTIAL PROBLEM - no entry was there before, but adding one now - may need history
+//
+				//
+				//	Compare for history purposes
+				//
+				if ($rows > 1) {
+					//do the array_diff thing that is so complex, 
+					//but required for checkboxes/multi-select
+//currently not adding history for these
+//TODO ADD array_diff and history trail
+					$resdel=db_query("DELETE FROM artifact_extra_field_data
+					WHERE
+					artifact_id='".$this->getID()."'
+					AND extra_field_id='".$efid."'");
+				} else {
+					if (is_array($extra_fields[$efid])) {
+//currently not adding history for these
+//TODO ADD array_diff and history trail
+						$resdel=db_query("DELETE FROM artifact_extra_field_data
+						WHERE
+						artifact_id='".$this->getID()."'
+						AND extra_field_id='".$efid."'");
+					} elseif (addslashes(db_result($resd,0,'field_data')) == htmlspecialchars($extra_fields[$efid])) {
+						//element did not change
+						continue;
+					} else {
+						//element DID change - do a history entry
+						$resdel=db_query("DELETE FROM artifact_extra_field_data
+						WHERE
+						artifact_id='".$this->getID()."'
+						AND extra_field_id='".$efid."'");
+						if (($type == ARTIFACT_EXTRAFIELDTYPE_SELECT) || ($type == ARTIFACT_EXTRAFIELDTYPE_RADIO) || ($type == ARTIFACT_EXTRAFIELDTYPE_STATUS)) {
+//don't add history for text fields
+							$this->addHistory($ef[$efid]['field_name'],$this->ArtifactType->getElementName(db_result($resd,0,'field_data')));
+						}
+					}
+				}
+			} else {
+
+//no history for this extra field exists
+
+			}
 			//
 			//	See if anything was even passed for this extra_field_id
 			//
 			if (!$extra_fields[$efid]) {
-				//nothing in field to update
+				//nothing in field to update - text fields may be blank
 			} else {
 				//determine the type of field and whether it should have multiple rows supporting it
-				$ef =& $this->ArtifactType->getExtraFields();
 				$type=$ef[$efid]['field_type'];
 				if (($type == ARTIFACT_EXTRAFIELDTYPE_CHECKBOX) || ($type==ARTIFACT_EXTRAFIELDTYPE_MULTISELECT)) {
 					$multi_rows=true;
@@ -1140,24 +1139,14 @@ class Artifact extends Error {
 			$changes=array();
 		}
 
-		if ($this->ArtifactType->useResolution()) {
-			$resolution_text = $this->marker('resolution',$changes).
-			 "Resolution: ". $this->getResolutionName() ."\n";
-		}
-
 		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( $sys_datefmt, $this->getOpenDate() ). 
 			"\nYou can respond by visiting: ".
 			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 				"&aid=". $this->getID() .
 				"&group_id=". $this->ArtifactType->Group->getID() .
 			"\n\n".
-			$this->marker('category',$changes).
-			 "Category: ". $this->getCategoryName() ."\n".
-			$this->marker('artifact_group',$changes).
-			 "Group: ". $this->getArtifactGroupName() ."\n".
 			$this->marker('status',$changes).
 			 "Status: ". $this->getStatusName() ."\n".
-			$resolution_text.
 			$this->marker('priority',$changes).
 			 "Priority: ". $this->getPriority() ."\n".
 			"Submitted By: ". $this->getSubmittedRealName() .

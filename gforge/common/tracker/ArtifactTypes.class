@@ -26,8 +26,7 @@
  */
 require_once('common/include/Error.class');
 require_once('common/tracker/ArtifactType.class');
-require_once('common/tracker/ArtifactGroup.class');
-require_once('common/tracker/ArtifactCategory.class');
+require_once('common/tracker/ArtifactExtraField.class');
 
 class ArtifactTypes extends Error {
 
@@ -111,17 +110,35 @@ class ArtifactTypes extends Error {
 			return false;
 		} else {
 			if ($at->create('Bugs','Bug Tracking System',1,0,0,'',30,1,'','',1)) {
+
 				//
 				//	create a default category
 				//	
-				$ac=new ArtifactCategory($at);
-				$ac->create('Interface (example)',100);
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Category',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('Interface (example)',100);
 
 				//
 				//	create a default group
 				//	
-				$ag=new ArtifactGroup($at);
-				$ag->create('v1.0 (example)');
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Version',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('v1.0 (example)');
+
+//TODO - make from template
+				//
+				//	create resolutions
+				//	
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Resolution',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('Accepted');
+				$aef->create('Rejected');
+				$aef->create('Works For Me');
+				$aef->create('Postponed');
+				$aef->create('Out of date');
 				return true;
 			} else {
 				$this->setError('Failed to create bug tracker: '.$at->getErrorMessage());
@@ -146,14 +163,18 @@ class ArtifactTypes extends Error {
 				//
 				//  create a default category
 				//  
-				$ac=new ArtifactCategory($at);
-				$ac->create('Install Problem (example)',100);
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Category',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('Install Problem (example)',100);
 
 				//
 				//  create a default group
 				//  
-				$ag=new ArtifactGroup($at);
-				$ag->create('v1.0 (example)');
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Version',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('v1.0 (example)');
 				return true;
 			} else {
 				$this->setError('Failed to create support tracker: '.$at->getErrorMessage());
@@ -181,14 +202,18 @@ class ArtifactTypes extends Error {
 				//
 				//  create a default category
 				//
-				$ac=new ArtifactCategory($at);
-				$ac->create('Widget (example)',100);
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Category',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('Widget (example)',100);
 
 				//  
 				//  create a default group
 				//
-				$ag=new ArtifactGroup($at);
-				$ag->create('Unstable (example)');
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Version',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('Unstable (example)');
 				return true;
 			} else {
 				$this->setError('Failed to create support tracker: '.$at->getErrorMessage());
@@ -216,14 +241,18 @@ class ArtifactTypes extends Error {
 				//
 				//  create a default category
 				//
-				$ac=new ArtifactCategory($at);
-				$ac->create('Interface Improvements (example)',100);
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Category',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('Interface Improvements (example)');
 
 				//  
 				//  create a default group
 				//
-				$ag=new ArtifactGroup($at);
-				$ag->create('Next Release (example)');
+				$ac=new ArtifactExtraField($at);
+				$ac->create('Version',ARTIFACT_EXTRAFIELDTYPE_SELECT,0,0);
+				$aef=new ArtifactExtraFieldElement($ac);
+				$aef->create('Next Release (example)');
 				return true;
 			} else {
 				$this->setError('Failed to create support tracker: '.$at->getErrorMessage());

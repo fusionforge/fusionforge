@@ -78,9 +78,6 @@ echo db_error();
 $vals=array();
 $labels=array();
 $vals[]='activity'; $labels[]='Response Time';
-$vals[]='category'; $labels[]='By Category';
-$vals[]='group'; $labels[]='By Group';
-$vals[]='resolution'; $labels[]='By Resolution';
 $vals[]='assignee'; $labels[]='By Assignee';
 
 
@@ -88,8 +85,6 @@ $vals[]='assignee'; $labels[]='By Assignee';
 $params=array();
 $params['group']=$group_id;
 $params['toptab']='tracker';
-$params['pagename']='tracker';
-$params['sectionvals']=array($group->getPublicName());
 
 echo site_project_header($params);
 

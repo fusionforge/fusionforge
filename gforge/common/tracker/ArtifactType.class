@@ -91,27 +91,6 @@ class ArtifactType extends Error {
 	var $choice_name_res;
 
 	/**
-	 * Categories db resource ID.
-	 *
-	 * @var		int		$categories_res.
-	 */
-	var $categories_res;
-
-	/**
-	 * Resolutions db resource ID.
-	 *
-	 * @var		int		$resolutions_res.
-	 */
-	var $resolutions_res;
-
-	/**
-	 * Groups db resource ID.
-	 *
-	 * @var		int		$groups_res.
-	 */
-	var $groups_res;
-
-	/**
 	 * Current user permissions.
 	 *
 	 * @var		int		$current_user_perm.
@@ -145,6 +124,13 @@ class ArtifactType extends Error {
 	 * @var		array	$data_array.
 	 */
 	var $data_array;
+
+	/**
+	 * Array of element names so they only have to be fetched once from db.
+	 *
+	 * @var		array	$data_array.
+	 */
+	var	$element_name;
 
 	/**
 	 *	ArtifactType - constructor.
@@ -246,7 +232,6 @@ class ArtifactType extends Error {
 			email_address,
 			due_period,
 			status_timeout,
-			use_resolution,
 			submit_instructions,
 			browse_instructions,
 			datatype) 
@@ -260,7 +245,6 @@ class ArtifactType extends Error {
 			'$email_address',
 			'". ($due_period*(60*60*24)) ."',
 			'1209600',
-			'$use_resolution',
 			'".htmlspecialchars($submit_instructions)."',
 			'".htmlspecialchars($browse_instructions)."',
 			'$datatype')";
@@ -474,12 +458,57 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  useResolution - whether this ArtifactType uses the resolution feature.
+	 *	  getCustomStatusField - return the extra_field_id of the field containing the custom status.
 	 *
-	 *	  @return boolean	use_resolution.
+	 *	  @return	int	extra_field_id.
 	 */
-	function useResolution() {
-		return $this->data_array['use_resolution'];
+	function getCustomStatusField() {
+		return $this->data_array['custom_status_field'];
+	}
+
+	/**
+	 *	setCustomStatusField - set the extra_field_id of the field containing the custom status.
+	 *	@param	int	The extra field id.
+	 *	@return	boolean	success.
+	 */
+	function setCustomStatusField($extra_field_id) {
+		$res=db_query("UPDATE artifact_group_list SET custom_status_field='$extra_field_id'
+			WHERE group_artifact_id='".$this->getID()."'");
+		return $res;
+	}
+
+	/**
+	 *	  usesCustomStatuses - boolean
+	 *
+	 *	  @return	boolean	use_custom_statues.
+	 */
+	function usesCustomStatuses() {
+		return $this->getCustomStatusField();
+	}
+
+	/**
+	 *	remap status	- pass the extra_fields array and return the status_id, either open/closed
+	 *	@param	int	The status_id
+	 *	@param	array	Complex array of extra_field_data
+	 *	@return	int	status_id.
+	 */
+	function remapStatus($status_id,$extra_fields) {
+		if ($this->usesCustomStatuses()) {
+			//get the selected element for the extra_field_status element
+			$element_id=$extra_fields[$this->getCustomStatusField()];
+			//convert that element_id into the status_id
+			$res=db_query("SELECT status_id FROM artifact_extra_field_elements WHERE element_id='$element_id'");
+			if (!$res) {
+				$this->setError('Error Remapping Status: '.db_error());
+			}
+			$status_id=db_result($res,0,'status_id');
+			if ($status_id < 1 || $status_id > 4) {
+				echo "INVALID STATUS REMAP: $status_id FROM SELECTED ELEMENT: $element_id";
+			}
+			return $status_id;
+		} else {
+			return $status_id;
+		}
 	}
 
 	/**
@@ -564,19 +593,23 @@ class ArtifactType extends Error {
 	 *
 	 *	@return arrays of data;
 	 */
-	function getExtraFields() {
-		if (!isset($this->extra_fields)) {
-			$this->extra_fields = array();
+	function getExtraFields($filter='') {
+		if (!isset($this->extra_fields["$filter"])) {
+			$this->extra_fields["$filter"] = array();
+			if ($filter) {
+				$filter_str=" AND field_type IN ($filter) ";
+			}
 			$sql="select *
 				FROM artifact_extra_field_list 
 				WHERE group_artifact_id='".$this->getID() ."'
+				$filter_str
 				ORDER BY field_type ASC";
 			$res=db_query($sql);
 			while($arr =& db_fetch_array($res)) {
-				$this->extra_fields[$arr['extra_field_id']] = $arr;
+				$this->extra_fields["$filter"][$arr['extra_field_id']] = $arr;
 			}
 		}
-		return $this->extra_fields;
+		return $this->extra_fields["$filter"];
 	}
 
 	/**
@@ -604,7 +637,7 @@ class ArtifactType extends Error {
 			return false;
 		}
 		if (!isset($this->extra_field[$id])) {
-			$sql="select element_id,element_name
+			$sql="select element_id,element_name,status_id
 				FROM artifact_extra_field_elements
 				WHERE extra_field_id ='".$id."'  
 				ORDER BY element_name";
@@ -627,11 +660,28 @@ class ArtifactType extends Error {
 	 *	@return	string	The name.
 	 */
 	function getElementName($choiceid) {
-		$sql="select element_id,extra_field_id,element_name
-			FROM artifact_extra_field_elements
-			WHERE element_id ='$choiceid'";
-		$res=db_query($sql);
-		return db_result($res,0,'element_name');
+		if (!$choiceid) {
+			return '';
+		}
+		if (is_array($choiceid)) {
+			$choiceid=implode(',',$choiceid);
+		}
+		if ($choiceid == 100) {
+			return 'None';
+		}
+		if (!$this->element_name["$choiceid"]) {
+			$sql="select element_id,extra_field_id,element_name
+				FROM artifact_extra_field_elements
+				WHERE element_id IN ($choiceid)";
+			$res=db_query($sql);
+			if (db_numrows($res) > 1) {
+				$arr=util_result_column_to_array($res,2);
+				$this->element_name["$choiceid"]=implode(',',$arr);
+			} else {
+				$this->element_name["$choiceid"]=db_result($res,0,'element_name');
+			}
+		}
+		return $this->element_name["$choiceid"];
 	}
 
 	/**
@@ -695,12 +745,6 @@ class ArtifactType extends Error {
 //echo '9'.db_error();
 		db_query("DELETE FROM artifact
 			WHERE group_artifact_id='".$this->getID()."'");
-//echo '10'.db_error();
-		db_query("DELETE FROM artifact_category
-			WHERE group_artifact_id='".$this->getID()."'");
-//echo '2'.db_error();
-		db_query("DELETE FROM artifact_group
-			WHERE group_artifact_id='".$this->getID()."'");
 //echo '4'.db_error();
 		db_query("DELETE FROM artifact_group_list
 			WHERE group_artifact_id='".$this->getID()."'");
@@ -708,90 +752,6 @@ class ArtifactType extends Error {
 		
 		db_commit();
 		return true;
-	}
-
-	/**
-	 *	getCategories - List of possible categories set up for this artifact type.
-	 *
-	 *	@return database result set.
-	 */
-	function getCategories() {
-		if (!isset($this->categories_res)) {
-			$sql="select id,category_name,auto_assign_to
-				FROM artifact_category 
-				WHERE group_artifact_id='". $this->getID() ."'
-				ORDER BY category_name";
-			$this->categories_res=db_query($sql);
-		}
-		return $this->categories_res;
-	}
-
-	/**
-	 *	getCategoryObjects - Array of ArtifactCategory objects set up for this artifact type.
-	 *
-	 *	@return	array	Of ArtifactCategory objects.
-	 */
-	function &getCategoryObjects() {
-		$res = $this->getCategories();
-		while ($arr =& db_fetch_array($res)) {
-			$cats[] =& new ArtifactCategory($this,$arr);
-		}
-		return $cats[];
-	}
-
-	/**
-	 *	getGroups - List of possible groups set up for this artifact type.
-	 *
-	 *	@return database result set.
-	 */
-	function getGroups() {
-		if (!isset($this->groups_res)) {
-			$sql="select id,group_name 
-				FROM artifact_group 
-				WHERE group_artifact_id='". $this->getID() ."'";
-			$this->groups_res=db_query($sql);
-		}
-		return $this->groups_res;
-	}
-
-	/**
-	 *	getGroupObjects - Array of ArtifactGroup objects set up for this artifact type.
-	 *
-	 *	@return	array	Of ArtifactGroup objects.
-	 */
-	function &getGroupObjects() {
-		$res = $this->getGroups();
-		while ($arr =& db_fetch_array($res)) {
-			$grps[] =& new ArtifactGroup($this,$arr);
-		}
-		return $grps[];
-	}
-
-	/**
-	 *	getResolutions - List of possible resolutions.
-	 *
-	 *	@return database result set.
-	 */
-	function getResolutions() {
-		if (!isset($this->resolutions_res)) {
-			$sql="select id,resolution_name 
-				FROM artifact_resolution";
-			$this->resolutions_res=db_query($sql);
-		}
-		return $this->resolutions_res;
-	}
-
-	/**
-	 *	getResolutionObjects - Array of ArtifactResolution objects set up for this artifact type.
-	 *
-	 *	@return	array	Of ArtifactResolution objects.
-	 */
-	function &getResolutionObjects() {
-		$res = $this->getResolutions();
-		while ($arr =& db_fetch_array($res)) {
-			$grps[] =& new ArtifactResolutions($this,$arr);
-		}
-		return $grps[];
 	}
 
 	/**
@@ -840,6 +800,12 @@ class ArtifactType extends Error {
 	/**
 	 *	getStatuses - returns a result set of statuses.
 	 *
+	 *	These statuses are either the default open/closed or any number of 
+	 *	custom statuses that are stored in the extra fields. On insert/update
+	 *	to an artifact the status_id is remapped from the extra_field_element_id to
+	 *	the standard open/closed id.
+	 *
+	 *	@param	boolean	Whether to show the real statuses or not.
 	 *	@return database result set.
 	 */
 	function getStatuses() {
@@ -1130,7 +1096,6 @@ class ArtifactType extends Error {
 			email_address='$email_address',
 			due_period='". ($due_period * (60*60*24)) ."',
 			status_timeout='". ($status_timeout * (60*60*24)) . "',
-			use_resolution='$use_resolution',
 			submit_instructions='". htmlspecialchars($submit_instructions)."',
 			browse_instructions='" .htmlspecialchars($browse_instructions)."'
 			WHERE 

@@ -11,7 +11,7 @@
 //			} elseif ($ab->isError())
 //				$feedback .= $ab->getErrorMessage();			
 			} else {
-				if (!$ab->create($name,$field_type,$attribute1,$attribute2)) {
+				if (!$ab->create($name,$field_type,$attribute1,$attribute2,$is_required)) {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_box').': '.$ab->getErrorMessage();
 					$ab->clearError();
 				} else {
@@ -38,7 +38,7 @@
 			}
 
 		//
-		//	Add an option to a box
+		//	Add an element to an extra field
 		//
 		} elseif ($add_opt) {
 			$ab = new ArtifactExtraField($ath,$boxid);
@@ -53,50 +53,12 @@
 //				} elseif ($ao->isError())
 //					$feedback .= $ao->getErrorMessage();			
 				} else {
-					if (!$ao->create($name)) {
+					if (!$ao->create($name,$status_id)) {
 						$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$ao->getErrorMessage();
 						$ao->clearError();
 					} else {
 						$feedback .= $Language->getText('tracker_admin_build_boxes','choice_inserted');
 					}
-				}
-			}
-
-		//
-		//	Add a category
-		//
-		} elseif ($add_cat) {
-
-			$ac = new ArtifactCategory($ath);
-			if (!$ac || !is_object($ac)) {
-				$feedback .= 'Unable to create ArtifactCategory Object';
-//			} elseif ($ac->isError()) {
-//				$feedback .= $ac->getErrorMessage();			
-			} else {
-				if (!$ac->create($name,$assign_to)) {
-					$feedback .= $Language->getText('tracker_admin','error_inserting').': '.$ac->getErrorMessage();
-					$ac->clearError();
-				} else {
-					$feedback .= $Language->getText('tracker_admin','category_inserted');
-				}
-			}
-
-		//
-		//	Add a group
-		//
-		} elseif ($add_group) {
-
-			$ag = new ArtifactGroup($ath);
-			if (!$ag || !is_object($ag)) {
-				$feedback .= 'Unable to create ArtifactGroup Object';
-//			} elseif ($ag->isError()) {
-//				$feedback .= $ag->getErrorMessage();
-			} else {
-				if (!$ag->create($name)) {
-					$feedback .= $Language->getText('tracker_admin','error_inserting').' : '.$ag->getErrorMessage();
-					$ag->clearError();
-				} else {
-					$feedback .= $Language->getText('tracker_admin','group_inserted');
 				}
 			}
 
@@ -159,7 +121,7 @@
 					exit_error($Language->getText('general','error'),$dest_tracker->getErrorMessage());
 				}
 				//
-				//  Copy choices into a field (box) for each tracker selected 
+				//  Copy elements into a field (box) for each tracker selected 
 				//
 				$feedback .= 'Copy into Tracker: ';
 				$feedback .= $dest_tracker->getName();
@@ -205,7 +167,7 @@
 			} elseif ($ac->isError()) {
 				$feedback .= $ac->getErrorMessage();
 			} else {
-				if (!$ac->update($name,$attribute1,$attribute2)) {
+				if (!$ac->update($name,$attribute1,$attribute2,$is_required)) {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
@@ -216,7 +178,7 @@
 			}
 
 		//
-		//	Update an option 
+		//	Update an Element
 		//
 		} elseif ($update_opt) {
 
@@ -226,55 +188,13 @@
 			} elseif ($ao->isError()) {
 				$feedback .= $ao->getErrorMessage();
 			} else {
-				if (!$ao->update($name,$boxid,$id)) {
+				if (!$ao->update($name,$boxid,$id,$status_id)) {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ao->getErrorMessage();
 					$ao->clearError();
 				} else {
 					$feedback .= $Language->getText('tracker_admin_build_boxes','choice_updated');
 					$update_opt=false;
 					$add_extrafield=true;
-				}
-			}
-
-		//
-		//	Update ArtifactCategory
-		//
-		} elseif ($update_cat) {
-
-			$ac = new ArtifactCategory($ath,$id);
-			if (!$ac || !is_object($ac)) {
-				$feedback .= 'Unable to create ArtifactCategory Object';
-			} elseif ($ac->isError()) {
-				$feedback .= $ac->getErrorMessage();
-			} else {
-				if (!$ac->update($name,$assign_to)) {
-					$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ac->getErrorMessage();
-					$ac->clearError();
-				} else {
-					$feedback .= $Language->getText('tracker_admin','category_updated');
-					$update_cat=false;
-					$add_cat=true;
-				}
-			}
-
-		//
-		//	Update an artifact group select box
-		//
-		} elseif ($update_group) {
-
-			$ag = new ArtifactGroup($ath,$id);
-			if (!$ag || !is_object($ag)) {
-				$feedback .= 'Unable to create ArtifactGroup Object';
-			} elseif ($ag->isError()) {
-				$feedback .= $ag->getErrorMessage();
-			} else {
-				if (!$ag->update($name)) {
-					$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ag->getErrorMessage();
-					$ag->clearError();
-				} else {
-					$feedback .= $Language->getText('tracker_admin','group_updated');
-					$update_group=false;
-					$add_group=true;
 				}
 			}
 
@@ -304,6 +224,22 @@
 			} else {
 				$feedback .= $Language->getText('tracker_admin','deleted');
 			}
+
+		//
+		//	Upload template
+		//
+		} elseif ($uploadtemplate) {
+
+			if (!util_check_fileupload($input_file)) {
+				echo ('Invalid filename');
+				exit;
+			}
+			$size = @filesize($input_file);
+			$input_data = fread(fopen($input_file, 'r'), $size);
+
+			db_query("UPDATE artifact_group_list SET custom_renderer='$input_data' WHERE group_artifact_id='".$ath->getID()."'");
+			echo db_error();
+			$feedback .= 'Renderer Uploaded';
 
 		}
 

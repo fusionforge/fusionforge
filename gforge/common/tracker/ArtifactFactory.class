@@ -26,6 +26,7 @@
 
 require_once('common/include/Error.class');
 require_once('common/tracker/Artifact.class');
+require_once('common/tracker/ArtifactType.class');
 
 class ArtifactFactory extends Error {
 
@@ -45,15 +46,13 @@ class ArtifactFactory extends Error {
 	var $order_col;
 	var $sort;
 	var $status;
-	var $category;
-	var $group;
 	var $changed_from;
 	var $last_changed;
 	var $assigned_to;
-	var $resolution;
 	var $offset;
 	var $max_rows;
 	var $fetched_rows;
+	var $extra_fields;
 
 	/**
 	 *  Constructor.
@@ -86,12 +85,10 @@ class ArtifactFactory extends Error {
 	 *	@param	int	The max number of rows to return.
 	 *	@param	string	Whether to set these prefs into the user_prefs table - use "custom".
 	 *	@param	int	Include this param if you want to limit to a certain assignee.
-	 *	@param	int	Include this param if you want to limit to a certain category.
-	 *	@param	int	Include this param if you want to limit to a certain group.
-	 *	@param	int	Include this param if you want to limit to a certain resolution.
+	 *	@param	array	Array of extra fields & elements to limit the query to.
 	 */
-	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status,$_category,$_group,$_changed,$_resolution = 100) {
-//echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status|_category_id: $_category_id|_resolution: $_resolution +";
+	function setup($offset,$order_col,$sort,$max_rows,$set,$_assigned_to,$_status) {
+//echo "<BR>offset: $offset| order: $order|max_rows: $max_rows|_assigned_to: $_assigned_to|_status: $_status";
 
 		if ((!$offset) || ($offset < 0)) {
 			$this->offset=0;
@@ -102,6 +99,7 @@ class ArtifactFactory extends Error {
 		if (session_loggedin()) {
 			$u =& session_get_user();
 		}
+		$_extra_fields=array();
 
 		if (!$set) {
 			/*
@@ -109,23 +107,30 @@ class ArtifactFactory extends Error {
 				if no preference or not logged in, use open set
 			*/
 			if (session_loggedin()) {
-				$custom_pref=$u->getPreference('art_cust'.$this->ArtifactType->getID());
-				if ($custom_pref) {
-					$pref_arr=explode('|',$custom_pref);
-					$_assigned_to=$pref_arr[0];
-					$_status=$pref_arr[1];
-					$_category=$pref_arr[2];
-					$_group=$pref_arr[3];
-					$order_col=$pref_arr[4];
-					$sort=$pref_arr[5];
-					$_changed=$pref_arr[6];
-					$_resolution=$pref_arr[7];
-					$set='custom';
+				$default_query=$u->getPreference('art_query'.$this->ArtifactType->getID());
+				if ($default_query) {
+					$aq = new ArtifactQuery($this->ArtifactType,$default_query);
+					$_extra_fields=$aq->getExtraFields();
+					$order_col=$aq->getSortCol();
+					$sort=$aq->getSortOrd();
+					$_assigned_to=$aq->getAssignee();
+					$_status=$aq->getStatus();
 				} else {
-					//default to open
-					$_assigned_to=0;
-					$_status=1;
-					$_changed=0;
+					$custom_pref=$u->getPreference('art_cust'.$this->ArtifactType->getID());
+					if ($custom_pref) {
+						$pref_arr=explode('|',$custom_pref);
+						$_assigned_to=$pref_arr[0];
+						$_status=$pref_arr[1];
+						$order_col=$pref_arr[3];
+						$sort=$pref_arr[4];
+						$_changed=$pref_arr[5];
+						$set='custom';
+					} else {
+						//default to open
+						$_assigned_to=0;
+						$_status=1;
+						$_changed=0;
+					}
 				}
 			} else {
 				//default to open
@@ -156,9 +161,13 @@ class ArtifactFactory extends Error {
 				/*
 					if this custom set is different than the stored one, reset preference
 				*/
-				$pref_=$_assigned_to.'|'.$_status.'|'.$_category.'|'.$_group.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed.'|'.$_resolution;
+				$pref_=$_assigned_to.'|'.$_status.'|'.$_order_col.'|'.$_sort_ord.'|'.$_changed;
 				if ($pref_ != $u->getPreference('art_cust'.$this->ArtifactType->getID())) {
 					$u->setPreference('art_cust'.$this->ArtifactType->getID(),$pref_);
+				}
+				$default_query=$u->getPreference('art_query'.$this->ArtifactType->getID());
+				if ($default_query) {
+					$u->deletePreference('art_query'.$this->ArtifactType->getID());
 				}
 			}
 		}
@@ -167,10 +176,8 @@ class ArtifactFactory extends Error {
 		$this->order_col=$_order_col;
 		$this->status=$_status;
 		$this->assigned_to=$_assigned_to;
-		$this->category=$_category;
-		$this->group=$_group;
+		$this->extra_fields=$_extra_fields;
 		$this->setChangedFrom($_changed);
-		$this->resolution=$_resolution;
 
 		if (!$max_rows || $max_rows < 5) {
 			$max_rows=50;
@@ -178,6 +185,7 @@ class ArtifactFactory extends Error {
 		$this->max_rows=$max_rows;
 	}
 
+	
 	/**
 	 *	setChangedFrom - sets up changed-from and last-changed before you call getTasks().
 	 *
@@ -216,35 +224,37 @@ class ArtifactFactory extends Error {
 			$assigned_str='';
 		}
 
-		if ($this->category && ($this->category != 100)) {
-			$category_str="AND category_id='". $this->category ."'";
+		if (is_array($this->extra_fields)) {
+			$keys=array_keys($this->extra_fields);
+			$vals=array_values($this->extra_fields);
+			for ($i=0; $i<count($keys); $i++) {
+				if (is_array($vals[$i])) {
+					$vals[$i]=implode(',',$vals[$i]);
+				}
+				$ef_table_str.=", artifact_extra_field_data aefd$i ";
+				$ef_where_str.=" AND aefd$i.extra_field_id='".$keys[$i]."' AND aefd$i.field_data IN (".$vals[$i].") AND aefd$i.artifact_id=artifact_vw.artifact_id ";
+			}
+		} else {
+			$ef_table_str='';
+			$ef_where_str='';
 		}
 
-		//if artgroup selected, add to where clause
-		if ($this->group && ($this->group != 100)) {
-			$group_str="AND artifact_group_id='". $this->group ."'";
+		if ($this->last_changed > 0) {
+			$last_changed_str=" AND last_modified_date > '" . $this->last_changed . "' ";
 		} else {
-			//no artgroup to was chosen, so don't add it to where clause
-			$group_str='';
-		}
-
-		//if resolution selected, add to where clause
-		if($this->resolution && ($this->resolution != 100)) {
-			$resolution_str = "AND resolution_id='".$this->resolution."'";
-		} else {
-			$resolution_str ='';
+			$last_changed_str='';
 		}
 
 		//
 		//  now run the query using the criteria chosen above
 		//
-		$sql="SELECT * FROM artifact_vw
+		$sql="SELECT artifact_vw.* FROM artifact_vw $ef_table_str
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
-			 $status_str $assigned_str $category_str $group_str $resolution_str
-			and last_modified_date > '" . $this->last_changed . "'
+			 $status_str $assigned_str $last_changed_str $ef_where_str
 			ORDER BY group_artifact_id ".$this->sort.", ". $this->order_col ." ".$this->sort;
 
+//echo "$sql";
 
 		$result=db_query($sql,($this->max_rows),$this->offset);
 		$rows = db_numrows($result);

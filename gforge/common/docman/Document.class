@@ -430,7 +430,24 @@ class Document extends Error {
 	function sendNotice ($true=true) {
 		return true;
 	}
-
+	
+	function delete() {
+		$perm =& $this->Group->getPermission( session_get_user() );
+		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		
+		$sql = 'DELETE FROM doc_data WHERE docid='.$this->getID();
+		$result = db_query($sql);
+		if (!$result) {
+			$this->setError('Error Deleting Document: '.db_error());
+			db_rollback();
+			return false;
+		}
+		
+		return true;
+	}
 }
 
 ?>

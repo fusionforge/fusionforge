@@ -98,8 +98,9 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #<VirtualHost *:80>
 #  ServerName projects.gforge.company.com
 #  ServerAlias *.gforge.company.com
-#  DocumentRoot /var/www/homedirs/groups
-#  VirtualDocumentRoot /var/www/homedirs/groups/%1
+#  DocumentRoot /home/groups
+#  VirtualDocumentRoot /home/groups/%1/htdocs
+#  VirtualScriptAlias /home/groups/%1/cgi-bin
 #  <Directory /var/www/homedirs/groups>
 #    Options Indexes
 #
@@ -185,7 +186,7 @@ DirectoryIndex index.php index.cgi index.html index.htm
 #</VirtualHost>
 #<VirtualHost *:443>
 #  ServerName edit.gforge.company.com
-#  ServerAdmin webmaster@edit.gforge.sj.pioneer-pra.com
+#  ServerAdmin webmaster@edit.gforge.company.com
 #  DocumentRoot /var/www/homedirs
 #  DAVLockDB    /tmp/projvhost-DAVLockDB
 #  # Needed for windows web folders

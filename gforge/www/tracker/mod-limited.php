@@ -66,23 +66,6 @@ if (session_loggedin()) {
 		</td>
 	</tr>
 
-	<tr>
-		<td><strong><?php echo $Language->getText('tracker','category') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=category')"><strong>(?)</strong></a></strong><br />
-		<?php
-
-		echo $ath->categoryBox('category_id', $ah->getCategoryID() );
-
-		?>
-		</td>
-		<td><strong><?php echo $Language->getText('tracker','group') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=group')"><strong>(?)</strong></a></strong><br />
-		<?php
-		
-		echo $ath->artifactGroupBox('artifact_group_id', $ah->getArtifactGroupID() );
-		
-		?>
-		</td>
-	</tr>
-
     <?php
         $ath->renderExtraFields($ah->getExtraFieldData(),true);
     ?>
@@ -103,24 +86,15 @@ if (session_loggedin()) {
 
 	<tr>
 		<td>
+		<?php if (!$ath->usesCustomStatuses()) { ?>
 		<strong><?php echo $Language->getText('tracker','status') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=status')"><strong>(?)</strong></a></strong><br />
 		<?php
 
 		echo $ath->statusBox ('status_id', $ah->getStatusID() );
-
+		}
 		?>
 		</td>
 		<td>
-		<?php
-		if ($ath->useResolution()) {
-			echo '
-			<strong>'.$Language->getText('tracker','resolution').': <a href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><strong>(?)</strong></a></strong><br />';
-			echo $ath->resolutionBox('resolution_id',$ah->getResolutionID());
-		} else {
-			echo '&nbsp;
-			<input type="hidden" name="resolution_id" value="100">';
-		}
-		?>
 		</td>
 	</tr>
 

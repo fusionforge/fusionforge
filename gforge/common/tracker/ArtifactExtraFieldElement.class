@@ -82,10 +82,11 @@ class ArtifactExtraFieldElement extends Error {
 	 *
 	 *	@param	string		Name of the choice
 	 *	@param	int		Id the box that contains the choice.
+	 *  @param  int status_id - optional for status box - maps to either open/closed.
 	 *  @return 	true on success / false on failure.
 	 */
 	
-	function create($name) {
+	function create($name,$status_id=0) {
 		global $Language;
 		//
 		//	data validation
@@ -94,12 +95,20 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setError($Language->getText('tracker_admin_build_boxes','required_choice_name'));
 			return false;
 		}
+		if ($status_id) {
+			if ($status_id==1) {
+			} else {
+				$status_id=2;
+			}
+		} else {
+			$status_id=0;
+		}
 		if (!$this->ArtifactExtraField->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_extra_field_elements (extra_field_id,element_name) 
-			VALUES ('".$this->ArtifactExtraField->getID()."','".htmlspecialchars($name)."')";
+		$sql="INSERT INTO artifact_extra_field_elements (extra_field_id,element_name,status_id) 
+			VALUES ('".$this->ArtifactExtraField->getID()."','".htmlspecialchars($name)."','$status_id')";
 		db_begin();
 		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {
@@ -176,6 +185,14 @@ class ArtifactExtraFieldElement extends Error {
 		return $this->data_array['element_name'];
 	}
 
+	/**
+	 *  getStatus - the status equivalent of this field (open or closed).
+	 *
+	 *  @return int status.
+	 */
+	function getStatusID() {
+		return $this->data_array['status_id'];
+	}
 
 	/**
 	 *  update - update rows in the table used to store the choices 
@@ -183,9 +200,10 @@ class ArtifactExtraFieldElement extends Error {
 	 *  boxes and fields configured by the admin
 	 *
 	 *  @param	string	Name of the choice in a box.
+	 *  @param  int status_id - optional for status box - maps to either open/closed.
 	 *  @return	boolean	success.
 	 */
-	function update($name) {
+	function update($name,$status_id=0) {
 		if (!$this->ArtifactExtraField->ArtifactType->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
@@ -194,8 +212,17 @@ class ArtifactExtraFieldElement extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}   
+		if ($status_id) {
+			if ($status_id==1) {
+			} else {
+				$status_id=2;
+			}
+		} else {
+			$status_id=0;
+		}
 		$sql="UPDATE artifact_extra_field_elements 
-			SET element_name='".htmlspecialchars($name)."' 
+			SET element_name='".htmlspecialchars($name)."',
+			status_id='$status_id' 
 			WHERE element_id='".$this->getID()."'"; 
 		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {

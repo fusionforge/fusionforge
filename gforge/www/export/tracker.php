@@ -19,10 +19,7 @@ require_once('common/tracker/Artifact.class');
 require_once('common/tracker/Artifacts.class');
 require_once('common/tracker/ArtifactFile.class');
 require_once('common/tracker/ArtifactType.class');
-require_once('common/tracker/ArtifactGroup.class');
-require_once('common/tracker/ArtifactCategory.class');
 require_once('common/tracker/ArtifactCanned.class');
-require_once('common/tracker/ArtifactResolution.class');
 
 function beginDocument() {
 	global $sys_default_domain;
@@ -114,8 +111,6 @@ if ($group_id && $atid) {
 		<submitted_by><?php echo $alist[$i]->getSubmittedUnixName(); ?></submitted_by>
 		<submitted_date><?php echo date( $sys_datefmt, $alist[$i]->getOpenDate() ); ?></submitted_date>
 		<artifact_type id="<?php echo $ath->getID(); ?>"><?php echo $ath->getID(); ?></artifact_type>
-		<category id="<?php echo $alist[$i]->getCategoryID(); ?>"><?php echo $alist[$i]->getCategoryName(); ?></category>
-		<artifact_group id="<?php echo $alist[$i]->getArtifactGroupID(); ?>"><?php echo $alist[$i]->getArtifactGroupID; ?></artifact_group>
 		<assigned_to><?php echo $alist[$i]->getAssignedRealName(); ?></assigned_to>
 		<priority id="<?php echo $alist[$i]->getPriority(); ?>"><?php echo $alist[$i]->getPriority(); ?></priority>
 		<status><?php echo $alist[$i]->getStatusName(); ?></status>

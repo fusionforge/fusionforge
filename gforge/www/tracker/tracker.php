@@ -52,7 +52,7 @@ switch ($func) {
 					exit_error('ERROR', $Language->getText('general','invalid_email'));
 				}
 			}
-			if (!$ah->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority,$extra_fields)) {
+			if (!$ah->create($summary,$details,$assigned_to,$priority,$extra_fields)) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
 				//
@@ -87,6 +87,7 @@ switch ($func) {
 		}
 
 		$artifact_type_id=$ath->getID();
+		$keys=array_keys($extra_fields);
 
 		for ($i=0; $i < $count; $i++) {
 			$ah=new Artifact($ath,$artifact_id_list[$i]);
@@ -97,15 +98,34 @@ switch ($func) {
 			} else {
 				$_priority=(($priority != 100) ? $priority : $ah->getPriority());
 				$_status_id=(($status_id != 100) ? $status_id : $ah->getStatusID());
-				$_category_id=(($category_id != 100) ? $category_id : $ah->getCategoryID());
-				$_artifact_group_id=(($artifact_group_id != 100) ? $artifact_group_id : $ah->getArtifactGroupID());
-				$_resolution_id=(($resolution_id != 100) ? $resolution_id : $ah->getResolutionID());
 				//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
 				//conflicts with the "no change" ID! Sorry for messy use of 100.1
 				$_assigned_to=(($assigned_to != '100.1') ? $assigned_to : $ah->getAssignedTo());
 				$_summary=addslashes($ah->getSummary());
 
-				if (!$ah->update($_priority,$_status_id,$_category_id,$_artifact_group_id,$_resolution_id,$_assigned_to,$_summary,$canned_response,'',$artifact_type_id)) {
+				//
+				//	get existing extra field data
+				//	we will then override individual elements if needed
+				//
+				$ef =& $ah->getExtraFieldData();
+				for ($k=0; $k<count($keys); $k++) {
+					$f=$extra_fields[$keys[$k]];
+					if (is_array($f)) {
+						if (in_array('100',$f)) {
+							//no change
+						} else {
+							$ef[$keys[$k]]=$f;
+						}
+					} else {
+						if ($f == '100') {
+							//no change
+						} else {
+							$ef[$keys[$k]]=$f;
+						}
+					}
+				}
+
+				if (!$ah->update($_priority,$_status_id,$_assigned_to,$_summary,$canned_response,'',$artifact_type_id,$ef)) {
 					$was_error=true;
 				}
 
@@ -147,7 +167,7 @@ switch ($func) {
 
 				//admin and techs can do everything
 				//techs will have certain fields overridden inside the update() function call
-				if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
+				if (!$ah->update($priority,$status_id,
 					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id,$extra_fields)) {
 					$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
 					$ah->clearError();
@@ -177,7 +197,7 @@ switch ($func) {
 						$feedback=$Language->getText('tracker','comment_added');
 					} else {
 						//some kind of error in creation
-						exit_error('ERROR',$feedback);
+						exit_error('ERROR',$ah->getErrorMessage());
 					}
 
 				}
@@ -322,13 +342,21 @@ switch ($func) {
 		include 'browse.php';
 		break;
 	}
+	case 'query' : {
+		include ('query.php');
+		include ('opener_tasks.js');
+		break;
+	}
+	case 'downloadcsv' : {
+		include ('downloadcsv.php');
+	}
 	case 'download' : {
 		Header("Redirect: /tracker/download.php?group_id=$group_id&atid=$atid&aid=$aid&file_id=$file_id");
 		break;
 	}
 	case 'detail' : {
 		//
-		//	users can modify their own tickets if they submitted them
+		//	users can modify their own tickets in a limited way if they submitted them
 		//	even if they are not artifact admins
 		//
 		$ah=new ArtifactHtml($ath,$aid);

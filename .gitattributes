@@ -82,6 +82,7 @@ gforge/www/themes/gforge/images/box-grad.png -text
 gforge/www/themes/gforge/images/box-topleft.png -text
 gforge/www/themes/gforge/images/box-topright.png -text
 gforge/www/themes/gforge/images/clear.png -text
+gforge/www/themes/gforge/images/ic/adddoc12.png -text
 gforge/www/themes/gforge/images/ic/caret.png -text
 gforge/www/themes/gforge/images/ic/cfolder15.png -text
 gforge/www/themes/gforge/images/ic/check.png -text
@@ -162,6 +163,7 @@ gforge/www/themes/osx/images/ic/Support.png -text
 gforge/www/themes/osx/images/ic/Surveys.png -text
 gforge/www/themes/osx/images/ic/Tasks.png -text
 gforge/www/themes/osx/images/ic/Tracker.png -text
+gforge/www/themes/osx/images/ic/adddoc12.png -text
 gforge/www/themes/osx/images/ic/caret.png -text
 gforge/www/themes/osx/images/ic/cfolder15.png -text
 gforge/www/themes/osx/images/ic/check.png -text

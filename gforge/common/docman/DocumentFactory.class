@@ -46,9 +46,9 @@ class DocumentFactory extends Error {
 	var $Group;
 
 	/**
-	 * The Documents array.
+	 * The Documents dictionary.
 	 *
-	 * @var	 array	Documents.
+	 * @var	 array	Contains doc_group_id as key and the array of documents associated to that id. 
 	 */
 	var $Documents;
 	var $stateid;
@@ -129,10 +129,71 @@ class DocumentFactory extends Error {
 	 */
 	function &getDocuments() {
 		global $Language;
-		if ($this->Documents) {
-			return $this->Documents;
+		if (!$this->Documents) {
+			$this->getFromDB();
+		}
+		
+		$return = array();
+		// If the document group is specified, we should only check that group in
+		// the Documents array. If not, we should check ALL the groups.
+		if ($this->docgroupid) {
+			$keys = array($this->docgroupid);
+		} else {
+			$keys = array_keys($this->Documents);
+		}
+		
+		foreach ($keys as $key) {
+			if (!array_key_exists($key, $this->Documents)) continue;	// Should not happen
+			$count = count($this->Documents[$key]);
+			
+			for ($i=0; $i < $count; $i++) {
+				$valid = true;		// do we need to return this document?
+				$doc =& $this->Documents[$key][$i];
+				
+				if (!$this->stateid) {
+					if (session_loggedin()) {
+						$perm =& $this->Group->getPermission( session_get_user() );
+						if (!$perm || !is_object($perm) || !$perm->isMember()) {
+							if ($doc->getStateID() != 1) {		// non-active document?
+								$valid = false;
+							}
+						} else {
+							if ($doc->getStateID() != 1 &&		/* not active */
+								$doc->getStateID() != 4 &&			/* not hidden */
+								$doc->getStateID() != 5) {			/* not private */
+								$valid = false;
+							}
+						}
+					} else {
+						if ($doc->getStateID() != 1) {		// non-active document?
+							$valid = false;
+						}
+					}
+				} else {
+					if ($this->stateid != "ALL" && $doc->getStateID() != $this->stateid) {
+						$valid = false;
+					}
+				}
+				
+				if ($this->languageid && $doc->getLanguageID() != $this->languageid) {
+					$valid = false;
+				}
+				
+				
+				if ($valid) {
+					$return[] =& $doc;
+				}
+			}
+		}
+		
+		if (count($return) == 0) {
+			$this->setError($Language->getText('docman_common','no_docs'));
+			return false;
 		}
 
+		return $return;
+
+/*
 		if (!$this->stateid) {
 			if (session_loggedin()) {
 				$perm =& $this->Group->getPermission( session_get_user() );
@@ -155,6 +216,7 @@ class DocumentFactory extends Error {
 		if ($this->docgroupid) {
 			$docgroupsql="AND doc_group='".$this->docgroupid."'";
 		}
+
 		if ($this->languageid) {
 			$languagesql="AND language_id='".$this->languageid."'";
 		}
@@ -169,8 +231,6 @@ class DocumentFactory extends Error {
 
 		$result = db_query ($sql);
 
-//echo "$sql<br>".db_error();
-
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
@@ -182,6 +242,49 @@ class DocumentFactory extends Error {
 			}
 		}
 		return $this->Documents;
+*/
+	}
+	
+	/**
+	 * getFromDB - Retrieve documents from database.
+	 */
+	function getFromDB() {
+		$this->Documents = array();
+		$sql = 'SELECT * FROM docdata_vw ORDER BY title';
+		$result = db_query($sql);
+		if (!$result) {
+			exit_error('Error', db_error());
+		}
+		
+		while ($arr =& db_fetch_array($result)) {
+			$doc_group_id = $arr['doc_group'];
+			if (!is_array($this->Documents[$doc_group_id])) {
+				$this->Documents[$doc_group_id] = array();
+			}
+			
+			$this->Documents[$doc_group_id][] = new Document($this->Group, $arr['docid'], $arr);
+		}
+	}
+	
+	/**
+	 * getStates - Return an array of states that have documents associated to them
+	 */
+	function getUsedStates() {
+		$sql = "SELECT DISTINCT doc_states.stateid,doc_states.name 
+			FROM doc_states,doc_data
+			WHERE doc_data.stateid=doc_states.stateid
+			ORDER BY doc_states.name ASC";
+		$result = db_query($sql);
+		if (!$result) {
+			exit_error('error', db_error());
+		}
+		
+		$return = array();
+		while ($arr = db_fetch_array($result)) {
+			$return[] = $arr;
+		}
+		
+		return $return;
 	}
 
 }

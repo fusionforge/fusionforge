@@ -18,6 +18,8 @@ echo notepad_func();
 
 	<table cellpadding="0" width="100%">
 		<tr>
+		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
+
 			<td><?php
 				if (session_loggedin()) {
 
@@ -37,10 +39,15 @@ echo notepad_func();
 
 				<h3><FONT COLOR="RED">
 				<?php echo $Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')) ?></FONT></h3><br />
+                <?php echo $Language->getText('tracker','insert_email') ?>
+                <p>
+                <input type="TEXT" name="user_email" SIZE="20" MAXLENGTH="40">
+
 
 				<?php } ?>
 		<p>
 			</td>
+			<!-- <td><?php /* if (!$ath->usesCustomStatuses()) { ?><strong><?php echo $Language->getText('tracker','status') ?>:</strong><br /><?php echo $ah->getStatusName(); }*/ ?></td> -->
 			<td><strong><?php echo $Language->getText('tracker','status') ?>:</strong><br /><?php echo $ah->getStatusName(); ?></td>
 		</tr>
 		<tr>
@@ -62,18 +69,11 @@ echo notepad_func();
 			<?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
 		</tr>
 
-		<tr>
-			<td><strong><?php echo $Language->getText('tracker','category') ?>:</strong><br /><?php echo $ah->getCategoryName(); ?></td>
-			<td><strong><?php echo $Language->getText('tracker','resolution') ?>:</strong><br /><?php echo $ah->getResolutionName(); ?></td>
-		</tr>
-
 	<?php
-		$ath->renderExtraFields($ah->getExtraFieldData(),true);
+		//$ath->renderExtraFields($ah->getExtraFieldData(),true);
 	?>
 
 		<tr><td colspan="2"><strong><?php echo $Language->getText('tracker','summary') ?>:</strong><br /><?php echo $ah->getSummary(); ?></td></tr>
-
-		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" method="post" enctype="multipart/form-data">
 
 		<tr><td colspan="2">
 			<br />
@@ -85,11 +85,6 @@ echo notepad_func();
 			<strong><?php echo $Language->getText('tracker_detail','add_comment') ?>:</strong> 
 			<?php echo notepad_button('document.forms[1].details') ?><br />
 			<textarea name="details" ROWS="10" COLS="60" WRAP="SOFT"></textarea>
-			<?php if (!session_loggedin()) { ?>
-				<?php echo $Language->getText('tracker','insert_email') ?>
-				<p>
-				<input type="text" name="user_email" SIZE="20" MAXLENGTH="40">
-			<?php } ?>
 		</td></tr>
 
 	<tr><td colspan="2">

@@ -98,7 +98,7 @@ class DocumentGroup extends Error {
 	 *	@param	string	Item name.
 	 *  @return id on success / false on failure.
 	 */
-	function create($name) {
+	function create($name,$parent_doc_group=0) {
 		global $Language;
 		//
 		//	data validation
@@ -107,14 +107,25 @@ class DocumentGroup extends Error {
 			$this->setError($Language->getText('docman_common_docgroup','name_required'));
 			return false;
 		}
+		
+		if ($parent_doc_group) {
+			// check if parent group exists
+			$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$parent_doc_group' AND group_id=".$this->Group->getID());
+			if (!$res || db_numrows($res) < 1) {
+				$this->setError($Language->getText('docman_common_docgroup','invalid_parent_id'));
+				return false;
+			}
+		} else {
+			$parent_doc_group = 0;
+		}
 
 		$perm =& $this->Group->getPermission (session_get_user());
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO doc_groups (group_id,groupname)
-			VALUES ('".$this->Group->getID()."','".htmlspecialchars($name)."')";
+		$sql="INSERT INTO doc_groups (group_id,groupname,parent_doc_group)
+			VALUES ('".$this->Group->getID()."','".htmlspecialchars($name)."','".$parent_doc_group."')";
 
 		$result=db_query($sql);
 
@@ -171,6 +182,15 @@ class DocumentGroup extends Error {
 	function getID() {
 		return $this->data_array['doc_group'];
 	}
+	
+	/**
+	 *	getID - get parent DocumentGroup's id.
+	 *
+	 *	@return	int	The id #.
+	 */
+	function getParentID() {
+		return $this->data_array['parent_doc_group'];
+	}
 
 	/**
 	 *	getName - get the name.
@@ -187,7 +207,9 @@ class DocumentGroup extends Error {
 	 *  @param	string	Name of the category.
 	 *  @return boolean.
 	 */
-	function update($name) {
+	function update($name,$parent_doc_group) {
+		global $Language;
+
 		$perm =& $this->Group->getPermission (session_get_user());
 		if (!$perm || !$perm->isDocEditor()) {
 			$this->setPermissionDeniedError();
@@ -197,8 +219,21 @@ class DocumentGroup extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
+		
+		if ($parent_doc_group) {
+			// check if parent group exists
+			$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$parent_doc_group' AND group_id=".$this->Group->getID());
+			if (!$res || db_numrows($res) < 1) {
+				$this->setError($Language->getText('docman_common_docgroup','invalid_parent_id'));
+				return false;
+			}
+		} else {
+			$parent_doc_group=0;
+		}
+
 		$sql="UPDATE doc_groups
-			SET groupname='".htmlspecialchars($name)."'
+			SET groupname='".htmlspecialchars($name)."',
+			parent_doc_group='".$parent_doc_group."'
 			WHERE doc_group='". $this->getID() ."'
 			AND group_id='".$this->Group->getID()."'";
 		$result=db_query($sql);
@@ -208,6 +243,81 @@ class DocumentGroup extends Error {
 			$this->setError(db_error());
 			return false;
 		}
+	}
+		
+	/**
+	* hasDocuments - Recursive function that checks if this group or any of it childs has documents associated to it
+	*
+	* A group has associated documents if and only if there are documents associated to this
+	* group or to any of its childs
+	*
+	* @param array	Array of nested groups information, fetched from DocumentGroupFactory class
+	* @param object	The DocumentFactory object
+	* @param int	(optional) State of the documents
+	*/
+	function hasDocuments(&$nested_groups, &$document_factory, $stateid=0) {
+		static $result = array();	// this function will probably be called several times so we better store results in order to speed things up
+		if (!is_array($result[$stateid])) $result[$stateid] = array();
+		if (array_key_exists($doc_group_id, $result[$stateid])) return $result[$stateid][$doc_group_id];
+
+		$doc_group_id = $this->getID();
+		
+		// check if it has documents
+		if ($stateid) {
+			$document_factory->setStateID($stateid);
+		}
+		$document_factory->setDocGroupID($doc_group_id);
+		$docs = $document_factory->getDocuments();
+		if (is_array($docs) && count($docs) > 0) {		// this group has documents
+			$result[$stateid][$doc_group_id] = true;
+			return true;
+		}
+		
+		// this group doesn't have documents... check recursively on the childs
+		if (is_array($nested_groups["$doc_group_id"])) {
+			$count = count($nested_groups["$doc_group_id"]);
+			for ($i=0; $i < $count; $i++) {
+				//if (docman_group_has_documents(&$nested_groups, &$document_factory, $stateid, $nested_groups["$doc_group_id"][$i]->getID())) {
+				if ($nested_groups["$doc_group_id"][$i]->hasDocuments(&$nested_groups, &$document_factory, $stateid)) {
+					// child has documents
+					$result[$stateid][$doc_group_id] = true;
+					return true;
+				}
+			}
+			// no child has documents, then this group doesn't have associated documents
+			$result[$stateid][$doc_group_id] = false;
+			return false;
+		} else {	// this group doesn't have childs
+			$result[$stateid][$doc_group_id] = false;
+			return false;
+		}
+	}
+
+	/**
+	* hasSubgroup - Checks if this group has a specified subgroup associated to it
+	*
+	* @param array Array of nested groups information, fetched from DocumentGroupFactory class
+	* @param int	ID of the subgroup
+	*/
+	function hasSubgroup(&$nested_groups, $doc_subgroup_id) {
+		$doc_group_id = $this->getID();
+
+		if (is_array($nested_groups["$doc_group_id"])) {
+			$count = count($nested_groups["$doc_group_id"]);
+			for ($i=0; $i < $count; $i++) {
+				// child is a match?
+				if ($nested_groups["$doc_group_id"][$i]->getID() == $doc_subgroup_id) {
+					return true;
+				} else {
+					// recursively check if this child has this subgroup
+					if ($nested_groups["$doc_group_id"][$i]->hasSubgroup(&$nested_groups, $doc_subgroup_id)) {
+						return true;
+					}
+				}
+			}
+		}
+		
+		return false;
 	}
 }
 

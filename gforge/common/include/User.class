@@ -1059,9 +1059,10 @@ class User extends Error {
 	function deletePreference($preference_name) {
 		$preference_name=strtolower(trim($preference_name));
 		unset($this->user_pref["$preference_name"]);
-		return db_query("DELETE FROM user_preferences 
+		$res= db_query("DELETE FROM user_preferences 
 			WHERE user_id='". $this->getID() ."'
 			AND preference_name='$preference_name'");
+		return $res;
 	}
 
 	/**

@@ -20,7 +20,9 @@
 
 require_once('pre.php');
 require_once('common/docman/Document.class');
+require_once('common/docman/DocumentGroupFactory.class');
 require_once('include/doc_utils.php');
+require_once('include/DocumentGroupHTML.class');
 
 if (!$group_id) {
 	exit_no_group();
@@ -132,7 +134,18 @@ if ($submit){
 		<td>
 		<strong>	<?php echo $Language->getText('docman_new','group') ?> :</strong><br />
 		<?php
-			display_groups_option($group_id);
+			$dgf = new DocumentGroupFactory($g);
+			if ($dgf->isError()) {
+				exit_error('Error',$dgf->getErrorMessage());
+			}
+			
+			$dgh = new DocumentGroupHTML($g);
+			if ($dgh->isError()) {
+				exit_error('Error',$dgh->getErrorMessage());
+			}
+
+			//display_groups_option($group_id);
+			$dgh->showSelectNestedGroups($dgf->getNested(), 'doc_group', false, $selected_doc_group);
 		?>
 		</td>
 	</tr>

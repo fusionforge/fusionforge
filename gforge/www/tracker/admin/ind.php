@@ -115,7 +115,6 @@
 	<p>
 	<input type="checkbox" name="is_public" value="1" /> <strong><?php echo $Language->getText('tracker_admin_update_type','publicy_available') ?></strong><br />
 	<input type="checkbox" name="allow_anon" value="1" /> <strong><?php echo $Language->getText('tracker_admin_update_type','allow_anonymous') ?></strong><br />
-	<input type="checkbox" name="use_resolution" value="1" /> <strong><?php echo $Language->getText('tracker_admin_update_type','display_resolution') ?></strong></p>
 	<p>
 	<strong><?php echo $Language->getText('tracker_admin_update_type','send_submissions') ?>:</strong><br />
 	<input type="text" name="email_address" value="" /></p>

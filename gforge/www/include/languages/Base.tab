@@ -634,6 +634,7 @@ docman	view_doc	View Documentation
 docman_admin	add_edit_docgroups	Add/Edit Document Groups
 docman_admin	section	Project: $1
 docman_admin	title	Document Manager: Administration
+docman_admin	add_docs	[Add document here]
 docman_admin_addgroups	section	Document Manager Administration
 docman_admin_addgroups	title	Add Document Groups
 docman_admin_docedit	section	Document Manager
@@ -645,21 +646,29 @@ docman_admin_editdocs	state	State
 docman_admin_editdocs	title	Edit Docs
 docman_admin_editdocs	upload	OPTIONAL: Upload new file
 docman_admin_editdocs	upload_ftp	OR choose one form FTP $1
+docman_admin_editdocs	delete_doc	Permanently delete this document
 docman_admin_editgroups	add_group	Add a group
 docman_admin_editgroups	description	Group name will be used as a title, so it should be formatted correspondingly.
 docman_admin_editgroups	edit_group	Edit a group
 docman_admin_editgroups	group_id	ID
 docman_admin_editgroups	group_name	Group Name
+docman_admin_editgroups	group_parent	Belongs to
 docman_admin_editgroups	new_group_name	New Group Name
+docman_admin_editgroups	new_group_parent	Belongs to
 docman_admin_editgroups	section	Document Manager Administration
 docman_admin_editgroups	title	Edit Groups
 docman_admin_groupedit	section	Document Manager Administration
 docman_admin_groupedit	title	Rename Document Group
+docman_admin_deletedoc	delete_warning	You are about to permanently delete this document.
+docman_admin_deletedoc	sure	I'm Sure.
+docman_admin_deletedoc	really_sure	I'm Really Sure.
+docman_admin_deletedoc	delete	Delete
 docman_common	error_min_desc_length	Document Description Must Be At Least 10 Characters
 docman_common	error_min_title_length	Title Must Be At Least 5 Characters
 docman_common	no_docs	No Documents Found
 docman_common_doc	invalid_docid	Document:: Invalid docid
 docman_common_docgroup	invalid_id	DocumentGroup: Invalid DocumentGroup ID
+docman_common_docgroup	invalid_parent_id	DocumentGroup: Invalid DocumentGroup parent ID
 docman_common_docgroup	name_required	DocumentGroup: name is Required
 docman_display_doc	all_languages	All Languages
 docman_display_doc	docmoved	This document was moved to <a href="/docman/view.php/$1/$2">this new location</a>
@@ -672,7 +681,7 @@ docman_new	description	Description
 docman_new	doc_title	Document Title
 docman_new	error_blank_document	Error getting blank document
 docman_new	file	File
-docman_new	group	Group that document belongs in:
+docman_new	group	Group that document belongs in
 docman_new	intro	<strong>Document Title</strong>:  Refers to the relatively brief title of the document (e.g. How to use the download server)<br /><strong>Description:</strong> A brief description to be placed just under the title.
 docman_new	language	Language
 docman_new	no_valid_group	No valid Document Group was selected
@@ -2711,6 +2720,15 @@ tracker	check_upload	Check to Upload & Attach File
 tracker	choose	Choose a tracker and you can browse/edit/add items to it.
 tracker	close_date	Close Date
 tracker	comment	comment
+tracker	saved_queries	Apply & Run
+tracker	query_name	Name and Save Query
+tracker	query_update	Update Query
+tracker	query_make_default	Make this Query the Default
+tracker	query_load	Load Query
+tracker	query_delete	Delete Query
+tracker	query_default	Last Query
+tracker_artifacttype	query	Query
+tracker_artifacttype	csv	Download .csv
 tracker	comments	comments
 tracker	comment_added	Comment Added
 tracker	date	Date
@@ -2751,7 +2769,7 @@ tracker_add	title	Submit Tracker Item
 tracker_admin	permanently_delete_info	Permanently delete this tracker.
 tracker_admin	deleted	Successfully Deleted.
 tracker_admin	delete_warning	You are about to permanently and irretrievably delete this tracker and all its contents!
-tracker_admin	delete_extrafieldwarning	You are about to permanently and irretrievably delete this extra field and all its contents!
+tracker_admin	delete_extrafieldwarning	You are about to permanently and irretrievably delete this custom field and all its contents!
 tracker_admin	sure	I'm Sure.
 tracker_admin	really_sure	I'm Really Sure.
 tracker_admin	delete	Delete.
@@ -2765,7 +2783,7 @@ tracker_admin	add_permissions	Add/Update Users &amp; Permissions
 tracker_admin	add_permissions_info	Add/remove users to/from this tracker
 tracker_admin	admin	Admin
 tracker_admin	auto_assign_to	Auto-Assign To
-tracker_admin	build_selection_box	Add/Update Pop-Up Boxes
+tracker_admin	build_selection_box	Manage Custom Fields
 tracker_admin	build_selection_box_info	Add new boxes like Phases, Quality Metrics, Components, etc.  Once added they can be used with other selection boxes (for example, Categories or Groups) to describe and browse bugs or other artifact types
 tracker_admin	canned_response_inserted	Canned Response Inserted
 tracker_admin	canned_response_updated	Canned Response Updated
@@ -2821,47 +2839,55 @@ tracker_admin_build_boxes	box_type_radio	Radio Buttons
 tracker_admin_build_boxes	box_type_text	Text Field
 tracker_admin_build_boxes	box_type_multiselect	Multi-Select Box
 tracker_admin_build_boxes	box_type_textarea	Text Area
-tracker_admin_build_boxes	box_type	Type of extra field
+tracker_admin_build_boxes	box_type_status	Status
+tracker_admin_build_boxes	box_status	Status
+tracker_admin_build_boxes	box_type	Type of custom field
 tracker_admin_build_boxes	box_sizerows	Text Fields and Text Areas need to have Size/Maxlength and Rows/Cols defined, respectively.
 tracker_admin_build_boxes	box_sizeattr1	Text Field Size/Text Area Rows
 tracker_admin_build_boxes	box_sizeattr2	Text Field Maxlength/Text Area Columns
-tracker_admin_build_boxes	title	 Add/Update Extra Fields
+tracker_admin_build_boxes	title	Manage Custom Fields 
 tracker_admin_build_boxes	edit	Edit
 tracker_admin_build_boxes	delete	Delete
 tracker_admin_build_boxes	copy	Copy
-tracker_admin_build_boxes	extrafield_deleted	Extra Field Deleted
-tracker_admin_build_boxes	opt_title	Add/Update Extra Field Elements in: $1
+tracker_admin_build_boxes	add_field	Add New Custom Field
+tracker_admin_build_boxes	manage_template	Custom Field Rendering Template
+tracker_admin_build_boxes	upload_template	Add/Update template
+tracker_admin_build_boxes	download_template	Download default template
+tracker_admin_build_boxes	delete_template	Delete template
+tracker_admin_build_boxes	extrafield_deleted	Custom Field Deleted
+tracker_admin_build_boxes	opt_title	Add/Update Custom Field Elements in: $1
 tracker_admin_build_boxes	box_add_choices	add choices
 tracker_admin_build_boxes	tracker_box_id	ID
 tracker_admin_build_boxes	tracker_choice_id	ID
-tracker_admin_build_boxes	tracker_box_title	Extra Fields Defined
+tracker_admin_build_boxes	tracker_box_title	Custom Fields Defined
 tracker_admin_build_boxes	tracker_box_option_add	Add/Update 
 tracker_admin_build_boxes	tracker_box_option_title	Elements Defined
-tracker_admin_build_boxes	box_name	Extra Field Name
+tracker_admin_build_boxes	tracker_box_type	Type
+tracker_admin_build_boxes	tracker_box_add_options	Add Options
+tracker_admin_build_boxes	box_name	Custom Field Name
 tracker_admin_build_boxes	opt_add_name	Add New Element
 tracker_admin_build_boxes	choice_warning	Once you add a new element, it cannot be deleted
-tracker_admin_build_boxes	box_warning	Once you add a new extra field, it cannot be deleted
 tracker_admin_build_boxes	required_box_name	a field name is required
 tracker_admin_build_boxes	required_choice_name	an element name is required
-tracker_admin_build_boxes	no_box	You have not defined any extra fields
+tracker_admin_build_boxes	no_box	You have not defined any custom fields
 tracker_admin_build_boxes	no_choice	You have not defined any elements
-tracker_admin_build_boxes	error_inserting_box	Error inserting an extra field
+tracker_admin_build_boxes	error_inserting_box	Error inserting a custom field
 tracker_admin_build_boxes	error_inserting_choice	Error inserting an element
 tracker_admin_build_boxes	box_name_inserted	Extra field inserted
 tracker_admin_build_boxes	choice_inserted	Element inserted
-tracker_admin_build_boxes	box_update_title	Modify an extra field In: $1
-tracker_admin_build_boxes	opt_update_title	Modify an extra field element In: $1
+tracker_admin_build_boxes	box_update_title	Modify a custom field In: $1
+tracker_admin_build_boxes	opt_update_title	Modify a custom field element In: $1
 tracker_admin_build_boxes	opt_name	Element
 tracker_admin_build_boxes	status_any	Any
-tracker_admin_build_boxes	box_name_updated	Extra Field updated
+tracker_admin_build_boxes	box_name_updated	Custom Field updated
 tracker_admin_build_boxes	choice_updated		Element updated	
-tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the extra field name because other things are dependent upon it. When you change the extra field name, all related items will be changed to the new name
+tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the custom field name because other things are dependent upon it. When you change the custom field name, all related items will be changed to the new name
 tracker_admin_build_boxes	choice_change_warning	It is not recommended that you change the element name because other things are dependent upon it. When you change the element name, all related items will be changed to the new name
-tracker_admin_build_boxes	error_updating	Error updating an extra field name
+tracker_admin_build_boxes	error_updating	Error updating a custom field name
 tracker_admin_copy	copy_choices	Click here to copy these elements to other trackers
-tracker_admin_copy	choices_title	Copy Choices from Extra Field $1
+tracker_admin_copy	choices_title	Copy choices from custom field $1
 tracker_admin_copy	from_box	Copy From 
-tracker_admin_copy	into_box	Into Trackers and Extra Fields
+tracker_admin_copy	into_box	Into trackers and custom fields
 tracker_admin_choose	title	Tracker Admin
 tracker_admin_update_canned	title	Modify Canned Responses In: $1
 tracker_admin_update_cat	auto_assign_to	Auto-Assign To

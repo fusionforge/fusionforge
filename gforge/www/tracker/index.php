@@ -1,15 +1,13 @@
 <?php
 /**
-  *
-  * SourceForge Generic Tracker facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * SourceForge Generic Tracker facility
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 
 require_once('pre.php');
@@ -20,10 +18,7 @@ require_once('www/tracker/include/ArtifactFileHtml.class');
 require_once('common/tracker/ArtifactType.class');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 require_once('www/tracker/include/ArtifactHtml.class');
-require_once('common/tracker/ArtifactGroup.class');
-require_once('common/tracker/ArtifactCategory.class');
 require_once('common/tracker/ArtifactCanned.class');
-require_once('common/tracker/ArtifactResolution.class');
 require_once('common/tracker/ArtifactTypeFactory.class');
 
 if (!$sys_use_tracker) {

@@ -14,10 +14,7 @@ require_once('common/tracker/ArtifactType.class');
 require_once('common/tracker/ArtifactTypeFactory.class');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 require_once('www/tracker/include/ArtifactHtml.class');
-require_once('common/tracker/ArtifactGroup.class');
-require_once('common/tracker/ArtifactCategory.class');
 require_once('common/tracker/ArtifactCanned.class');
-require_once('common/tracker/ArtifactResolution.class');
 require_once('common/tracker/ArtifactExtraField.class');
 require_once('common/tracker/ArtifactExtraFieldElement.class');
 
@@ -67,21 +64,28 @@ if ($group_id && $atid) {
 
 		include ('form-addextrafieldoption.php');
 
-	} elseif ($add_cat) {
-
-		include ('form-addcategory.php');
-
 	} elseif ($copy_opt) {
 
 		include ('form-extrafieldcopy.php');
 
-	} elseif ($add_group) {
-
-		include ('form-addgroup.php');
-
 	} elseif ($add_canned) {
 
 		include ('form-addcanned.php');
+
+	} elseif ($uploadtemplate) {
+
+		include ('form-uploadtemplate.php');
+
+	} elseif ($downloadtemplate) {
+
+		echo $ath->getRenderHTML();
+
+	} elseif ($deletetemplate) {
+
+		db_query("UPDATE artifact_group_list SET custom_renderer='' WHERE group_artifact_id='".$ath->getID()."'");
+		echo db_error();
+		$feedback .= 'Renderer Deleted';
+		include ('form-addextrafield.php');
 
 	} elseif ($update_canned) {
 
@@ -94,14 +98,6 @@ if ($group_id && $atid) {
 	} elseif ($update_opt) {
 
 		include ('form-updateextrafieldelement.php');
-
-	} elseif ($update_cat) {
-
-		include ('form-updatecategory.php');
-
-	} elseif ($update_group) {
-
-		include ('form-updategroup.php');
 
 	} elseif ($delete) {
 
