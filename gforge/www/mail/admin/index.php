@@ -126,9 +126,9 @@ if ($group_id && user_ismember($group_id,'A')) {
 
 		echo 	'<p>
 			<form method="post" action="'.$PHP_SELF.'">
-			<input type="hidden name="post_changes" value="y" />
-			<input type="hidden name="add_list" value="y" />
-			<input type="hidden name="group_id" value="'.$group_id.'" />
+			<input type="hidden" name="post_changes" value="y" />
+			<input type="hidden" name="add_list" value="y" />
+			<input type="hidden" name="group_id" value="'.$group_id.'" />
 			<strong>Mailing List Name:</strong><br />
 			<strong>'.group_getunixname($group_id).'-<input type="text" name="list_name" value="" size="10" maxlength="12" />@'.$GLOBALS['sys_lists_host'].'</strong><br /></p>
 			<p>
@@ -181,10 +181,10 @@ if ($group_id && user_ismember($group_id,'A')) {
 					<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td>'.db_result($result,$i,'list_name').'</td>';
 				echo '
 					<form action="'.$PHP_SELF.'" method="post">
-					<input type="hidden name="post_changes" value="y" />
-					<input type="hidden name="change_status" value="y" />
-					<input type="hidden name="group_list_id" value="'.db_result($result,$i,'group_list_id').'" />
-					<input type="hidden name="group_id" value="'.$group_id.'" />
+					<input type="hidden" name="post_changes" value="y" />
+					<input type="hidden" name="change_status" value="y" />
+					<input type="hidden" name="group_list_id" value="'.db_result($result,$i,'group_list_id').'" />
+					<input type="hidden" name="group_id" value="'.$group_id.'" />
 					<td>
 						<div style="font-size:smaller">
 						<strong>Is Public?</strong><br />
