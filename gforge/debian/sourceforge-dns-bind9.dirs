@@ -1,9 +1,0 @@
-etc/sourceforge
-etc/sourceforge/templates
-usr/bin
-usr/lib/sourceforge/bin
-usr/lib/sourceforge/lib
-usr/sbin
-var/lib/sourceforge
-var/lib/sourceforge/bind
-var/lib/sourceforge/tmp
