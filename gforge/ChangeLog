@@ -1,8 +1,8 @@
-2003-05-22 Tom Copeland <tom@infoether.com>
+2003-05-23 Tom Copeland <tom@infoether.com>
 
 	* common/include/Stats.class, www/top/toplist.php, www/top/mostactive.php,
 	www/top/index.php.
-	"Top pageviews" works now.
+	"Top pageviews" and "Top downloads" both work now.
 
 2003-05-21 Christian Bayle	<bayle@debian.org>
 

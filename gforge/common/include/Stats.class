@@ -91,4 +91,14 @@ class Stats extends Error {
 			." group by g.group_name, g.unix_group_name "
 			." order by items desc", 100);
 	}
+	
+	function getTopDownloads() {
+		return db_query("select g.group_name, g.unix_group_name, sum(frs.downloads) as items "
+			." from frs_dlstats_grouptotal_vw frs, groups g "
+			." where g.group_id = frs.group_id "
+			." and g.status='A' "
+			." and g.is_public='1' "
+			." group by g.group_name, g.unix_group_name "
+			." order by items desc", 100);
+	}
 }

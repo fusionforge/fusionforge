@@ -27,6 +27,7 @@ else if ($GLOBALS[type] == 'forumposts_week') {
 }
 // default to downloads
 else {
+	$res_top = $stats->getTopDownloads();
 	$title = $Language->getText('top_toplist','top_download');
 	$column1 = $Language->getText('top_toplist','download');
 }
