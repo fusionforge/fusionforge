@@ -327,6 +327,21 @@ eval {
  	  }
 
 	  $version = &get_db_version ;
+	  $target = "2.5-32" ;
+	  if (is_lesser $version, $target) {
+	      debug "Fixing unix_uid entries." ;
+
+	      $query = "UPDATE users SET unix_uid = nextval ('unix_uid_seq') WHERE unix_status != 'N' AND status != 'P' AND unix_uid = 0" ;
+	      $sth = $dbh->prepare ($query) ;
+	      $sth->execute () ;
+	      $sth->finish () ;
+
+	      &update_db_version ($target) ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+temp+data+dropped" ;
 	  if (is_lesser $version, $target) {
 	      debug "Preparing to upgrade your database - dropping temporary tables" ;
