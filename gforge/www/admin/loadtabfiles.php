@@ -32,13 +32,13 @@ if ($loadall) {
 			for ($i=0; $i<sizeof($ary); $i++) {
 				$seq=$i*10;
 				if (substr($ary[$i], 0, 1) == '#') {
-					$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'#','#','" . $ary[$i] . "')";
+					$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'#','#" . $seq . "','" . $ary[$i] . "')";
 					$tmpid++;
 					db_query($query);
 					continue;
 				}
 				$line = explode("\t", $ary[$i], 3);
-#				//$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . $line[2] ."')";
+				//$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . $line[2] ."')";
 				$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . addslashes(quotemeta(htmlspecialchars($line[2]))) ."')";
 				//$query="INSERT INTO tmp_lang values(". $seq . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . base64_encode($line[2]) ."')";
 				$tmpid++;
@@ -77,9 +77,9 @@ site_admin_header(array('title'=>"Site Admin"));
 <p />
 
 <?php
-$result=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' and tmpid!='-1' group by language_id");
+$result1=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' and tmpid!='-1' group by language_id");
 $result2=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
-if (db_numrows($result)>0) {
+if (db_numrows($result1)>0) {
 ?>
 	<h3 style="color:red">Tables loaded:</h3>
 <?php
@@ -89,6 +89,7 @@ if (db_numrows($result)>0) {
 			<td><b><font color="white">Language</b></font></td>
 			<td colspan=2><b><font color="white">Translated</b></font></td>
 			<td colspan=2><b><font color="white">Extra</b></font></td>
+			<td><b><font color="white">Double</b></font></td>
 			<td><b><font color="white">Translation</b></font></td>
 			<td><b><font color="white">To Translate</b></font></td>
 			<td><b><font color="white">Not in Base</b></font></td>
@@ -96,20 +97,20 @@ if (db_numrows($result)>0) {
 		</tr>';
 		
 	$maxtrans=0;
-	for ($i=0; $i<db_numrows($result) ; $i++) {
-		$howmany=db_result($result, $i, 'count');
+	for ($i=0; $i<db_numrows($result1) ; $i++) {
+		$howmany1=db_result($result1, $i, 'count');
 		//if ($howmany>$maxtrans) $maxtrans=$howmany;
-		$lang=db_result($result, $i, 'language_id');
-		if ($lang=='Base') $maxtrans=$howmany;
+		$lang=db_result($result1, $i, 'language_id');
+		if ($lang=='Base') $maxtrans=$howmany1;
 	}
-	for ($i=0; $i<db_numrows($result) ; $i++) {
-		$howmany=db_result($result,$i,'count');
+	for ($i=0; $i<db_numrows($result1) ; $i++) {
+		$howmany1=db_result($result1,$i,'count');
 		$howmany2=db_result($result2,$i,'count')-$maxtrans;
-		$rate=$howmany * 100 / $maxtrans;
+		$rate1=$howmany1 * 100 / $maxtrans;
 		$rate2=$howmany2 * 100 / $maxtrans;
-		$language_id=db_result($result,$i,'language_id');
+		$language_id=db_result($result1,$i,'language_id');
 		echo "\n<tr bgcolor=lightblue><td>$language_id</td>";
-		printf("<td>%d</td><td>%3.2f",$howmany,$rate);
+		printf("<td>%d</td><td>%3.2f",$howmany1,$rate1);
 		echo "%</td>";
 		if ($rate2!=0) {
 			printf("<td>%d</td><td>%3.2f",$howmany2,$rate2);
@@ -118,6 +119,9 @@ if (db_numrows($result)>0) {
 			printf("<td colspan=2></td>");
 		}
 ?>
+<td>
+	<a href="/admin/editdouble.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>
+</td>
 <td>
 	<a href="/admin/seetranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[see]</a>
 	<a href="/admin/edittranstabfiles.php?function=show&lang=<?php echo "$language_id"; ?>">[edit]</a>

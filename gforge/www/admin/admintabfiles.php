@@ -111,12 +111,14 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id, $lang) {
  *	@param $primary_key - the primary key of the table
  *	@param $id - the id of the record to act on
  */
-function admin_table_delete($table, $unit, $primary_key, $id, $lang) {
+//function admin_table_delete($table, $unit, $primary_key, $id, $lang) {
+function admin_table_delete($table, $unit, $primary_key, $whereclause, $columns, $edit, $id, $lang) {
 	if (db_query("DELETE FROM $table WHERE $primary_key=$id AND language_id='".$lang."'")) {
 		echo ucfirst($unit).' successfully deleted.';
 	} else {
 		echo db_error();
 	}
+	admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit, $lang);
 }
 
 /**
@@ -275,7 +277,8 @@ switch ($function) {
 		break;
 	}
 	case 'delete' : {
-		admin_table_delete($table, $unit, $primary_key, $id, $lang);
+		//admin_table_delete($table, $unit, $primary_key, $id, $lang);
+		admin_table_delete($table, $unit, $primary_key, $whereclause, $columns, $edit, $id, $lang);
 		break;
 	}
 	case 'edit' : {
@@ -284,11 +287,11 @@ switch ($function) {
 	}
 	case 'postedit' : {
 		//admin_table_postedit($table, $unit, $primary_key, $id, $lang);
-		echo admin_table_postedit($table, $unit, $primary_key, $whereclause, $columns, $edit, $id, $lang);
+		admin_table_postedit($table, $unit, $primary_key, $whereclause, $columns, $edit, $id, $lang);
 		break;
 	}
 	case 'show' : {
-		echo admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit, $lang);
+		admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit, $lang);
 		break;
 	}
 }
