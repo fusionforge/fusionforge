@@ -25,6 +25,18 @@
 
 
 /**
+ * removeCRLF() - remove any Cariage Return-Line Feed from a string. 
+ * That function is usefull to remove the possibility of a CRLF Injection when sending mail
+ * All the data that we will send should be passed through that function
+ *
+ * @param	   string  The string that we want to empty from any CRLF 
+ */
+function util_remove_CRLF($str) {
+	return strtr($str, "\015\012", '  ');
+}
+
+
+/**
  * util_check_fileupload() - determines if a filename is appropriate for upload
  *
  * @param	   string  The name of the file being uploaded

@@ -11,7 +11,6 @@
   *
   */
 
-
 require_once('pre.php');
 
 if (!$toaddress && !$touser) {
@@ -41,13 +40,20 @@ if ($send_mail) {
 		*/
 		exit_missing_param();
 	}
-
+	
+	$from=$name .' <'. $email .'>';
+	
+	// we remove the CRLF in all thoses vars. This is to make sure that there will be no CRLF Injection	
+	$from = util_remove_CRLF($from);
+	$subject = util_remove_CRLF($subject);
+	$body = util_remove_CRLF($body);
+	
 	if ($toaddress) {
 		/*
 			send it to the toaddress
 		*/
 		$to=eregi_replace('_maillink_','@',$toaddress);
-		$from=$name .' <'. $email .'>';
+		$to = util_remove_CRLF($to);
 		util_send_message($to, stripslashes($subject),stripslashes($body) ,$from);
 		$HTML->header(array('title'=>$GLOBALS['sys_name'].' ' .$Language->getText('sendmessage','contact')   ,'pagename'=>'sendmessage','titlevals'=>array($to)));
 		echo '<p>'.$Language->getText('sendmessage','message_sent').'.</p>';
@@ -58,7 +64,7 @@ if ($send_mail) {
 			figure out the user's email and send it there
 		*/
 		$to=db_result($result,0,'email');
-		$from=$name .' <'. $email .'>';
+		$to = util_remove_CRLF($to);
 		util_send_message($to, stripslashes($subject), stripslashes($body),$from);
 		$HTML->header(array('title'=>$GLOBALS['sys_name'].' '.$Language->getText('sendmessage','contact'),'pagename'=>'sendmessage','titlevals'=>array($touser)));
 		echo '<p>'.$Language->getText('sendmessage','message_sent').'</p>';
@@ -104,3 +110,4 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 $HTML->footer(array());
 
 ?>
+
