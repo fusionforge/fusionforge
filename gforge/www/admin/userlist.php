@@ -28,26 +28,44 @@ function show_users_list ($result) {
 	echo '<p>' .$Language->getText('admin_userlist','key') .':
 		<font color="#00ff00">'.$Language->getText('admin_userlist','active'). '</font>
 		<font color="grey">' .$Language->getText('admin_userlist','deleted') .'</font>
-		<font color="red">' .$Language->getText('admin_userlist','suspended'). '</font>'
-		.$Language->getText('admin_userlist','pending').'</p>
-		<table width="100%" cellspacing="0" cellpadding="0" border="1">';
+		<font color="red">' .$Language->getText('admin_userlist','suspended'). '</font> '
+		.$Language->getText('admin_userlist','pending').'</p>';
+
+	$tableHeaders = array(
+		$Language->getText('admin_userlist', 'login'),
+		$Language->getText('admin_userlist', 'add_date'),
+		'&nbsp;',
+		'&nbsp;',
+		'&nbsp;',
+		'&nbsp;'
+	);
+
+	echo $GLOBALS['HTML']->listTableTop($tableHeaders);
+
+	$count = 0;
 
 	while ($usr = db_fetch_array($result)) {
-		print "\n<tr><td bgcolor=\"";
-		if ($usr[status] == 'A') print "#00ff00";
-		if ($usr[status] == 'D') print "grey";
-		if ($usr[status] == 'S') print "red";
+		print '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($count) . '><td bgcolor="';
+		if ($usr['status'] == 'A') print "#00ff00";
+		if ($usr['status'] == 'D') print "grey";
+		if ($usr['status'] == 'S') print "red";
 		print "\"><a href=\"useredit.php?user_id=$usr[user_id]\">";
 		if ($usr[status] == 'P') print "*";
-		print "$usr[user_name]</a>";
-		print "</td>";
-		print "\n<td><a href=\"/developer/?form_dev=$usr[user_id]\">[" .$Language->getText('admin_userlist','devprofile'). "]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=activate&amp;user_id=$usr[user_id]\">[" .$Language->getText('admin_userlist','activate'). "]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=delete&amp;user_id=$usr[user_id]\">[" .$Language->getText('admin_userlist','delete') ."]</a></td>";
-		print "\n<td><a href=\"userlist.php?action=suspend&amp;user_id=$usr[user_id]\">[" .$Language->getText('admin_userlist','suspend'). "]</a></td>";
-		print "</tr>";
+		echo $usr['user_name'].'</a>';
+		echo '</td>';
+		echo '<td width="15%" align="center">';
+		echo ($usr['add_date'] ? date($GLOBALS['sys_datefmt'], $usr['add_date']) : '-');
+		echo '</td>';
+		echo '<td width="15%" align="center"><a href="/developer/?form_dev='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','devprofile'). ']</a></td>';
+		echo '<td width="15%" align="center"><a href="userlist.php?action=activate&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','activate'). ']</a></td>';
+		echo '<td width="15%" align="center"><a href="userlist.php?action=delete&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','delete') .']</a></td>';
+		echo '<td width="15%" align="center"><a href="userlist.php?action=suspend&amp;user_id='.$usr['user_id'].'">[' .$Language->getText('admin_userlist','suspend'). ']</a></td>';
+		echo '</tr>';
+		
+		$count ++;
 	}
-	print "</table>";
+	
+	echo $GLOBALS['HTML']->listTableBottom();
 
 }
 
@@ -79,9 +97,9 @@ if (!$group_id) {
 	if ($user_name_search) {
 	  // [RM] LIKE is case-sensitive, and we don't want that
 	  //		$result = db_query("SELECT user_name,user_id,status FROM users WHERE user_name LIKE '$user_name_search%' ORDER BY user_name");
-		$result = db_query("SELECT user_name,user_id,status FROM users WHERE user_name ~* '^$user_name_search' ORDER BY user_name");
+		$result = db_query("SELECT user_name,user_id,status,add_date FROM users WHERE user_name ~* '^$user_name_search' ORDER BY user_name");
 	} else {
-		$result = db_query("SELECT user_name,user_id,status FROM users ORDER BY user_name");
+		$result = db_query("SELECT user_name,user_id,status,add_date FROM users ORDER BY user_name");
 	}
 	show_users_list ($result);
 } else {
@@ -91,7 +109,7 @@ if (!$group_id) {
 	print "<strong>" . group_getname($group_id) . "</strong></p>";
 
 
-	$result = db_query("SELECT users.user_id AS user_id,users.user_name AS user_name,users.status AS status "
+	$result = db_query("SELECT users.user_id AS user_id,users.user_name AS user_name,users.status AS status, users.add_date AS add_date "
 		. "FROM users,user_group "
 		. "WHERE users.user_id=user_group.user_id AND "
 		. "user_group.group_id=$group_id ORDER BY users.user_name");

@@ -1,3 +1,8 @@
+2004-02-13  Guillaume Smet <guillaume-gforge@smet.org>
+	* Improved newest projects box localization and sql query
+	* Improved /admin/ localization and UI
+	* Improved /admin/ french localization
+
 2004-02-10  Tim Perdue  <tim@perdue.net>
 
 	* re-organize and mild cleanup of FRS - all files

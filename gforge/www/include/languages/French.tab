@@ -261,30 +261,41 @@ admin_grouplist	members	Membres
 admin_grouplist	public	Public ?
 admin_grouplist	status	Statut
 admin_grouplist	unix_name	Nom Unix
-admin_index	add_delete_edit_file_types	Ajouter, Supprimer ou Modifier des types de fichiers
-admin_index	add_delete_edit_laguage	Ajouter, Supprimer ou Modifier des langages acceptés
-admin_index	add_edit_delete_processors	Ajouter, Supprimer ou Modifier des processeurs
-admin_index	add_edit_delete_themes	Ajouter, Supprimer ou Modifier des thèmes
+admin_index	active_projects_count	Projets actifs : <strong>$1</strong>
+admin_index	active_users_count	Utilisateurs actifs : <strong>$1</strong>
+admin_index	add_delete_edit_file_types	Ajouter, Supprimer ou Modifier les types de fichiers
+admin_index	add_delete_edit_laguage	Ajouter, Supprimer ou Modifier les langues disponibles
+admin_index	add_edit_delete_processors	Ajouter, Supprimer ou Modifier les processeurs
+admin_index	add_edit_delete_themes	Ajouter, Supprimer ou Modifier les thèmes
 admin_index	add_to_trove_map	Ajouter à l'arbre des projets
 admin_index	approve_reject	Approuver/Rejeter
+admin_index	cronman	Gestion des tâches planifiées (Cron)
 admin_index	deleted_status	(supprimé) Statut
 admin_index	display_full_group	Afficher/Editer les groupes
 admin_index	display_full_user_list	Afficher/Editer les utilisateurs
-admin_index	display_groups_beginning_with	Afficher les groupes commençant par :
+admin_index	display_groups_beginning_with	Afficher les groupes commençant par :&nbsp;
 admin_index	display_trove_map	Afficher l'arbre des projets
-admin_index	display_user_beginning_with	Afficher les utilisateurs commençant par :
+admin_index	display_user_beginning_with	Afficher les utilisateurs commençant par :&nbsp;
 admin_index	front_page_news	Annonces de la page d'accueil
-admin_index	get	Prendre
-admin_index	group_maintaince	Gestion du groupe
-admin_index	groups_with_status	Groupes avec statut
+admin_index	get	Chercher
+admin_index	group_maintaince	Gestion des groupes
+admin_index	groups_with_status	Groupes au statut
 admin_index	mail_engine	Moteur de messagerie pour les adhérents à $1
 admin_index	new_project_approval	(Approbation d'un nouveau projet)
 admin_index	news	Annonces
+admin_index	pending_projects_count	Projets en attente : <strong>$1</strong>
 admin_index	pending_status	(en attente) Statut
 admin_index	private_groups	Groupes privés
+admin_index	project_active	Actif (A)
+admin_index	project_deleted	Supprimé (D)
+admin_index	project_pending	En attente (P)
+admin_index	project_hold	Réservé (H)
 admin_index	project_database_administration	Administration de la base de données du projet
 admin_index	register_new_project	Enregistrer un nouveau projet
 admin_index	recent_logins	Dernières authentifications
+admin_index	registered_projects_count	Projets enregistrés : <strong>$1</strong>
+admin_index	search_groups	Rechercher <em>(identifiant, nom unix, nom complet)</em>&nbsp;
+admin_index	search_users	Rechercher <em>(identifiant, nom d'utilisateur, nom complet, email)</em>&nbsp;
 admin_index	site_mailing_maintaince	Gestion des envois de courrier
 admin_index	site_utilities	Outils
 admin_index	site_wide_stats	Statistiques globales du site
@@ -292,7 +303,7 @@ admin_index	stats	Statistiques
 admin_index	title	Administration du site
 admin_index	translation_file_tool	Outil de traduction de fichier
 admin_index	trove_project_tree	Arbre des projets
-admin_index	user_maintaince	Gestion utilisateur
+admin_index	user_maintaince	Gestion des utilisateurs
 admin_index	virtual_host_admin_tool	Outil d'administration des hôtes virtuels
 admin_loadtabfile	availaible_tables	Tables disponibles :
 admin_loadtabfile	edit_dont_work	[modifier (ne fonctionne pas)]
@@ -352,7 +363,7 @@ admin_search	full_name	Nom complet
 admin_search	group_search_criteria	Recherche de groupe par critères
 admin_search	id	Identifiant
 admin_search	index	Résultats de recherche
-admin_search	matches	Correspondances
+admin_search	matches	résultat(s) correspondant(s)
 admin_search	member_since	Membre depuis le 
 admin_search	real_name	Nom
 admin_search	refusing_to_display_whole_db	Refus d'afficher la base complète. Cette action afficherait toute la base. Merci d'effectuer une requête CLI si vous souhaitez le faire.
@@ -416,42 +427,44 @@ admin_useredit	account_info	Informations du compte
 admin_useredit	active	Actif (A)
 admin_useredit	could_not_complete_operation	Impossible de terminer l'opération
 admin_useredit	current_confirm_bash	Clé de confirmation actuelle :
-admin_useredit	deleted	Supprimé (S)
+admin_useredit	deleted	Supprimé (D)
 admin_useredit	email	E-mail :
 admin_useredit	group_memerbership	Participation aux groupes
 admin_useredit	membership_permissions	Autorisations des membres
 admin_useredit	name	Nom
 admin_useredit	no_unix_account	Pas de compte Unix (N)
 admin_useredit	operations	Opérations
-admin_useredit	pending	En attente (E)
+admin_useredit	pending	En attente (P)
 admin_useredit	project_admin	Administration du projet
-admin_useredit	real_name	Nom complet
+admin_useredit	real_name	Nom complet :
 admin_useredit	suspended	Suspendu (S)
-admin_useredit	this_page_allows	Cette page permet uniquement de changer les propriétés directes d'un utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un groupe spécifique, rendez vous à la page d'administration de ce groupe (ci-dessous). 
+admin_useredit	this_page_allows	Cette page permet uniquement de changer les propriétés directes d'un utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un groupe spécifique, rendez vous sur la page d'administration de ce groupe (voir ci-dessous). 
 admin_useredit	title	Administration du site : Informations Utilisateur
 admin_useredit	unix_account_status	Statut du compte Unix
 admin_useredit	unix_name	Nom Unix
-admin_useredit	unix_shell	Shell Unix
+admin_useredit	unix_shell	Shell Unix :
 admin_useredit	unix_status_updated_mirroring	Statut Unix mis à jour en copiant le statut web, sauf s'il a la valeur 'Pas de compte Unix (N)'.
 admin_useredit	update	Mettre à jour
 admin_useredit	updated	Mis à jour
 admin_useredit	user_id	Identifiant utilisateur :
-admin_useredit	user_name	Nom d'utilisateur
-admin_useredit	web_account_status	Statut du compte Web
+admin_useredit	user_name	Nom d'utilisateur :
+admin_useredit	web_account_status	Statut du compte Web :
 admin_userlist	activate	Activer
 admin_userlist	active	Actif
+admin_userlist	add_date	Date d'ajout
 admin_userlist	all_groups	Tous les groupes
 admin_userlist	delete	Supprimer
 admin_userlist	deleted	Supprimé
 admin_userlist	devprofile	Profil du développeur
 admin_userlist	key	Clé
-admin_userlist	pending	(*)En attente
+admin_userlist	login	Utilisateur
+admin_userlist	pending	En attente (*)
 admin_userlist	submit	Valider
 admin_userlist	suspend	Suspendre
 admin_userlist	suspended	Suspendu
-admin_userlist	user_list_for_group	Liste des membres de ce groupe : 
+admin_userlist	user_list_for_group	Liste des membres de ce groupe :&nbsp; 
 admin_userlist	user_updated	Utilisateur mis à jour au statut $1
-admin_userlist	userlist	: Liste des utilisateurs
+admin_userlist	userlist	Liste des utilisateurs
 admin_vhost	add_virtual_host	Ajouter un hôte virtuel
 admin_vhost	cgi_dir	Répertoire CGI
 admin_vhost	error_adding_vhost	Erreur lors de l'ajout de l'hôte virtuel :

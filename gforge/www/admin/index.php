@@ -24,10 +24,16 @@ site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
 
-
 ?>
 
 <p><strong><?php echo $Language->getText('admin_index','user_maintaince'); ?></strong></p>
+<ul>
+	<li><?php
+		$res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
+		$row = db_fetch_array($res);
+		echo $Language->getText('admin_index','active_users_count', array($row[count]));
+	?></li>
+</ul>
 <ul>
 	<li><a href="userlist.php"><?php echo $Language->getText('admin_index','display_full_user_list'); ?></a>&nbsp;&nbsp;</li>
 	<li><?php echo $Language->getText('admin_index','display_user_beginning_with') ?>
@@ -38,7 +44,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 ?>
 	<br />
 		<form name="usersrch" action="search.php" method="post">
-		Search <em>(userid, username, realname, email)</em>:
+		<?php echo $Language->getText('admin_index','search_users'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="usersearch" value="1" />
@@ -50,6 +56,23 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <strong><?php echo $Language->getText('admin_index','group_maintaince'); ?></strong>
 </p>
 <ul>
+	<li><?php
+		$res=db_query("SELECT count(*) AS count FROM groups");
+		$row = db_fetch_array($res);
+		echo $Language->getText('admin_index','registered_projects_count', array($row[count]));
+	?></li>
+	<li><?php
+		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
+		$row = db_fetch_array($res);
+		echo $Language->getText('admin_index','active_projects_count', array($row[count]));
+	?></li>
+	<li><?php
+		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
+		$row = db_fetch_array($res);
+		echo $Language->getText('admin_index','pending_projects_count', array($row[count]));
+	?></li>
+</ul>
+<ul>
 	<li><a href="grouplist.php"><?php echo $Language->getText('admin_index','display_full_group'); ?></a></li>
 
 	<li><?php echo $Language->getText('admin_index','display_groups_beginning_with'); ?>
@@ -60,7 +83,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 ?>
 	<br />
 		<form name="gpsrch" action="search.php" method="post">
-		Search <em>(groupid, group unix name, full name)</em>:
+		<?php echo $Language->getText('admin_index','search_groups'); ?>:
 		<input type="text" name="search" />
 		<input type="hidden" name="substr" value="1" />
 		<input type="hidden" name="groupsearch" value="1" />
@@ -71,20 +94,18 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <ul>
 	<li><a href="/register/"><?php echo $Language->getText('admin_index','register_new_project'); ?></a></li>
 	<li><?php echo $Language->getText('admin_index','groups_with'); ?> <a href="approve-pending.php"><strong>P</strong> <?php echo $Language->getText('admin_index','pending_status'); ?></a> <em><?php echo $Language->getText('admin_index','new_project_approval'); ?></em></li>
-	<li>
+	<li><form name="projectsearch" action="search.php">
 	<?php echo $Language->getText('admin_index','groups_with_status'); ?>
-	<form name="projectsearch" action="search.php">
 	<select name="status">
-			<option value="D">D</option>
-			<option value="A">A</option>
-			<option value="H">H</option>
-			<option value="P">P</option>
+			<option value="D"><?php echo $Language->getText('admin_index','project_deleted'); ?></option>
+			<option value="A"><?php echo $Language->getText('admin_index','project_active'); ?></option>
+			<option value="H"><?php echo $Language->getText('admin_index','project_hold'); ?></option>
+			<option value="P"><?php echo $Language->getText('admin_index','project_pending'); ?></option>
 	</select>
 	<input type="hidden" name="groupsearch" value="1">
 	<input type="hidden" name="search" value="%">
 	<input type="submit" value="<?php echo $Language->getText('general','submit');?> "/>
-	</form>
-	</li>
+	</form></li>
 	<li><a href="search.php?groupsearch=1&amp;search=%&amp;is_public=0"><?php echo $Language->getText('admin_index','private_groups'); ?></a></li>
 </ul>
 
@@ -134,22 +155,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 <p><strong><?php echo $Language->getText('admin_index','quick_site_statistic'); ?></strong></p>
 
 <?php
-
-$res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
-$row = db_fetch_array($res);
-print "<p>Active site users: <strong>$row[count]</strong></p>";
-
-$res=db_query("SELECT count(*) AS count FROM groups");
-$row = db_fetch_array($res);
-print "<br />Registered projects: <strong>$row[count]</strong>";
-
-$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
-$row = db_fetch_array($res);
-print "<br />Active projects: <strong>$row[count]</strong>";
-
-$res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
-$row = db_fetch_array($res);
-print "<br />Pending projects: <strong>$row[count]</strong>";
 
 site_admin_footer(array());
 

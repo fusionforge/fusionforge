@@ -67,8 +67,8 @@ if ($usersearch) {
 	    OR realname ILIKE '%$search%'
 	"); 
 
-	print '<p><strong>' .$Language->getText('admin_search','user_search_criteria').'"<em>'.$search.'</em>": '
-	      .db_numrows($result) .$Language->getText('admin_search','matches').'</strong></p>';
+	print '<p><strong>' .$Language->getText('admin_search','user_search_criteria').' "<em>'.$search.'</em>": '
+	      .db_numrows($result) .' '. $Language->getText('admin_search','matches').'</strong></p>';
 
 	if (db_numrows($result) < 1) {
 		echo db_error();

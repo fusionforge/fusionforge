@@ -254,6 +254,8 @@ admin_grouplist	unix_name	Unix Name
 cronman	date	Date
 cronman	job	Job
 cronman	message	Message
+admin_index	active_projects_count	Active projects: <strong>$1</strong>
+admin_index	active_users_count	Active site users: <strong>$1</strong>
 admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
 admin_index	add_delete_edit_laguage	Add, Delete, or Edit Supported Languages
 admin_index	add_edit_delete_processors	Add, Delete, or Edit Processors
@@ -274,11 +276,19 @@ admin_index	groups_with_status	Groups with status
 admin_index	mail_engine	Mail Engine for $1 Subscribers
 admin_index	new_project_approval	(New Project Approval)
 admin_index	news	News
+admin_index	pending_projects_count	Pending projects: <strong>$1</strong>
 admin_index	pending_status	 (pending) Status
 admin_index	private_groups	Private Groups
+admin_index	project_active	Active (A)
+admin_index	project_deleted	Deleted (D)
+admin_index	project_pending	Pending (P)
+admin_index	project_hold	Hold (H)
 admin_index	project_database_administration	Project Database Administration
 admin_index	register_new_project	Register New Project
 admin_index	recent_logins	Recent logins
+admin_index	registered_projects_count	Registered projects: <strong>$1</strong>
+admin_index	search_groups	Search <em>(groupid, group unix name, full name)</em>
+admin_index	search_users	Search <em>(userid, username, realname, email)</em>
 admin_index	site_mailing_maintaince	Site Mailings Maintenance
 admin_index	site_utilities	Site Utilities
 admin_index	site_wide_stats	Site-Wide Stats
@@ -435,11 +445,13 @@ admin_useredit	user_name	User name:
 admin_useredit	web_account_status	Web account status
 admin_userlist	activate	Activate
 admin_userlist	active	Active
+admin_userlist	add_date	Add date
 admin_userlist	all_groups	All Groups
 admin_userlist	delete	Delete
 admin_userlist	deleted	Deleted
 admin_userlist	devprofile	DevProfile
 admin_userlist	key	Key
+admin_userlist	login	Login
 admin_userlist	pending	(*)Pending
 admin_userlist	submit	Submit
 admin_userlist	suspend	Suspend
