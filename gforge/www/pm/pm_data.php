@@ -280,7 +280,7 @@ function pm_data_create_task ($group_project_id,$start_month,$start_day,$start_y
 			$feedback .= ' ERROR inserting assigned to ';
 			return false;
 		}
-		mail_followup($project_task_id,$group_project_id,1);
+		mail_followup($project_task_id,$group_project_id);
 		db_commit();
 		return $project_task_id;
 	}
@@ -453,6 +453,7 @@ function mail_followup($project_task_id,$group_project_id,$more_addresses=false,
 		$result3=db_query($sql);
 		$rows=db_numrows($result3);
 		if ($result3 && $rows > 0) {
+                        $to .= ', ';
 			$to .= implode(result_column_to_array($result3),', ');
 		}
 

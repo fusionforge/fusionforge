@@ -52,13 +52,14 @@ function account_register_new($unix_name,$realname,$password1,$password2,$email,
 	$confirm_hash = substr(md5($session_hash . $HTTP_POST_VARS['form_pw'] . time()),0,16);
 
 	$result=db_query("INSERT INTO users (user_name,user_pw,unix_pw,realname,email,add_date,"
-		. "status,confirm_hash,mail_siteupdates,mail_va,language,timezone) "
+		. "shell,status,confirm_hash,mail_siteupdates,mail_va,language,timezone) "
 		. "VALUES ('$unix_name',".
 		"'". md5($password1) . "',".
 		"'". account_genunixpw($password1) . "',".
 		"'". "$realname',".
 		"'$email',".
 		"'" . time() . "',".
+		"'/bin/cvssh',".
 		"'P',".
 		"'$confirm_hash',".
 		"'". (($mail_site)?"1":"0") . "',".
@@ -187,6 +188,7 @@ function account_genunixpw($plainpw) {
 // print out shell selects
 function account_shellselects($current) {
 	$shells = file("/etc/shells");
+	$shells[count($shells)] = "/bin/cvssh";
 
 	for ($i = 0; $i < count($shells); $i++) {
 		$this_shell = chop($shells[$i]);
@@ -194,7 +196,9 @@ function account_shellselects($current) {
 		if ($current == $this_shell) {
 			echo "<option selected value=$this_shell>$this_shell</option>\n";
 		} else {
-			echo "<option value=$this_shell>$this_shell</option>\n";
+			if (! ereg("^#",$this_shell)){
+				echo "<option value=$this_shell>$this_shell</option>\n";
+			}
 		}
 	}
 }
