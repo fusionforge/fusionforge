@@ -81,6 +81,10 @@ if ($GLOBALS["delete"]) {
 	if (db_numrows($res)>0) {
 		exit_error( $Language->getText('admin_trove_cat_edit','cant_delete_has_subcategories'), db_error());
 	} else {
+		$res=db_query(" DELETE FROM trove_treesums WHERE trove_cat_id='$form_trove_cat_id'");
+		if (!$res || db_affected_rows($res)<1) {
+			 exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
+		}
 		$res=db_query(" DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
 		if (!$res || db_affected_rows($res)<1) {
 			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
