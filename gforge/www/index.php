@@ -22,8 +22,6 @@ $HTML->header(array('title'=>'Welcome','pagename'=>'home'));
 // Default is index_std.php;
 include ( $HTML->getRootIndex() );
 
-include ('index_std.php');
-
 $HTML->footer(array());
 
 ?>
