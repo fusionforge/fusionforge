@@ -275,11 +275,6 @@ class FRSRelease extends Error {
 			$this->setError($Language->getText('frs_release','error_min_name_length'));
 			return false;
 		}
-		if (!util_is_valid_filename($name)) {
-			$this->setError($Language->getText('frs_release','error_name_format'));
-			return false;
-		}
-
 		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {

@@ -79,7 +79,7 @@ if ($step1) {
 		$notes = $release_notes;
 	}
 
-	// Check for uplaoded change logs
+	// Check for uploaded change logs
 	if ($uploaded_changes != "" && $uploaded_changes != "none") {
 		if (!is_uploaded_file($uploaded_changes)) {
 			exit_error('Error','Attempted File Upload Attack');
