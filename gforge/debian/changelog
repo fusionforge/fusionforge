@@ -1,14 +1,15 @@
-gforge (3.3.0-21) unstable; urgency=low
+gforge (3.3.0-28) unstable; urgency=low
 
+  * [Christian] Added a call to migrateform.php and migraterbac.php in db-upgrade
   * [Christian] Added 20040804.sql and 20040826.sql to db-upgrade.pl
   * [Christian] Removed dc: field in install-ldap.sh  since this generate
   an attribute 'dc' not allowed at install
   * [Christian] Create an empty /var/lib/gforge/etc/httpd.vhosts if necessary
   * [Christian] Changed default sys_theme to gforge, so web frontend is not
     broken when theme pack is not installed
-  * [Christian] sys_project_reg_restricted=false by default 
+  * [Christian] sys_project_reg_restricted=false by default
 
- -- Christian Bayle <bayle@debian.org>  Sun, 12 Sep 2004 20:30:58 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon, 20 Sep 2004 12:48:07 +0200
 
 gforge (3.3.0-12) unstable; urgency=low
 
