@@ -1,3 +1,14 @@
+2005-03-11  Tim Perdue <tim@gforge.org>
+
+	* fixed possible long-standing RBAC bug in Role.class so 
+	all changes to roles result in updates to the db - removed the 
+	optimization where it would only update if it thought something 
+	had changed
+	* cvs-cron/history_parse.php is working and tested
+	* plugins/scmsvn/cronjobs/svn-stats.php is converted to PHP 
+	and is UNTESTED
+	* fixed scmcvs stats
+
 2005-03-05  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* cvstracker plugin: lots of fixes and improvements. RPM packaging.
