@@ -6,20 +6,22 @@
 2003-01-07 Tom Copeland <tom@infoether.com>
 
 	* Added "submitted by" info to the task detail view.  Modified project_task_vw
-	to include user name and realname from user table.
+	to include user name and realname from user table.  [tom] DB changes are in 
+	20030107.sql.
 
 2003-01-06  Richard Offer
 
 	* www/include/Layout.class, www/project/showfiles.php: patch #134:
 	fix bug #131 - fix bad quotes and missing close bracket.
 
-2003-01-05 Richard Offer
-
-	* Contributed OSX theme.
-
 2003-01-06 Tom Copeland <tom@infoether.com>
 
 	* Modifier tracker monitor buttons so they show current monitoring status.
+
+2003-01-05 Richard Offer
+
+	* Contributed OSX theme.  [tom] DB changes (along with some other misc changes)
+	are in 20030105.sql.
 
 2003-01-05  Roland Mas  <99.roland.mas@aist.enst.fr>
 
@@ -47,7 +49,7 @@
 2003-01-02  Tim Perdue <tim@gforge.org>
 
 	* Added interface to tracker so you can build relationships w/Task
-	manager.
+	manager.  [tom] DB changes are in 20030102.sql and 20030102-drops.sql.
 
 2003-01-02  Tim Perdue <tim@gforge.org>
 
