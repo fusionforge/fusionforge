@@ -1,5 +1,12 @@
 2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/survey/survey_resp.php: Audit: escape special characters
+	from user input before submitting to database.
+
+	* www/survey/admin/edit_survey.php: ditto.
+
+	* www/survey/admin/add_survey.php: ditto.
+
 	* www/survey/admin/add_survey.php: add missing <, don't display
 	empty table if there are no existing surveys.
 

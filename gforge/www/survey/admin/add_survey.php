@@ -25,7 +25,7 @@ if (!session_loggedin() || !user_ismember($group_id,'A')) {
 
 if ($post_changes) {
 	//$survey_questions=trim(ltrim($survey_questions));
-	$sql="insert into surveys (survey_title,group_id,survey_questions) values ('$survey_title','$group_id','$survey_questions')";
+	$sql="insert into surveys (survey_title,group_id,survey_questions) values ('".htmlspecialchars($survey_title)."','$group_id','$survey_questions')";
 	$result=db_query($sql);
 	if ($result) {
 		$feedback .= " Survey Inserted ";

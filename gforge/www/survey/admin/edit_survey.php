@@ -44,7 +44,7 @@ if ($post_changes) {
 		} else {
 			$is_active = 0;
 		}
-		$sql="UPDATE surveys SET survey_title='$survey_title', survey_questions='$survey_questions', is_active='$is_active' ".
+		$sql="UPDATE surveys SET survey_title='".htmlspecialchars($survey_title)."', survey_questions='$survey_questions', is_active='$is_active' ".
 			 "WHERE survey_id='$survey_id' AND group_id='$group_id'";
 		$result=db_query($sql);
 		if (db_affected_rows($result) < 1) {
@@ -114,32 +114,34 @@ Function  ShowResultsEditSurvey($result) {
 	$cols  =  db_NumFields($result);
 	echo "<h3>$rows Found</h3>";
 
-	echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
-	/*  Create  the  headers  */
-	echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
-	for ($i = 0; $i < $cols; $i++)  {
-		printf( "<th><span style=\"color:white\"><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
-	}
-	echo "</tr>";
-	for ($j=0; $j<$rows; $j++)  {
-
-		if ($j%2==0) {
-			$row_bg="white";
-		} else {
-			$row_bg="$GLOBALS[COLOR_LTBACK1]";
+	if ($rows > 0) {
+		echo /*"<table bgcolor=\"NAVY\"><tr><td bgcolor=\"NAVY\">*/ "<table border=\"0\">\n";
+		/*  Create  the  headers  */
+		echo "<tr style=\"background-color:$GLOBALS[COLOR_MENUBARBACK]\">\n";
+		for ($i = 0; $i < $cols; $i++)  {
+			printf( "<th><span><strong>%s</strong></span></th>\n",  db_fieldname($result,$i));
 		}
-
-		echo "<tr style=\"background-color:$row_bg\">\n";
-
-		echo "<td><a href=\"$PHP_SELF?group_id=$group_id&amp;survey_id=".
-			db_result($result,$j,0)."\">".db_result($result,$j,0)."</a></td>";
-		for ($i = 1; $i < $cols; $i++)  {
-			printf("<td>%s</td>\n",db_result($result,$j,$i));
-		}
-
 		echo "</tr>";
+		for ($j=0; $j<$rows; $j++)  {
+
+			if ($j%2==0) {
+				$row_bg="white";
+			} else {
+				$row_bg="$GLOBALS[COLOR_LTBACK1]";
+			}
+
+			echo "<tr style=\"background-color:$row_bg\">\n";
+
+			echo "<td><a href=\"$PHP_SELF?group_id=$group_id&amp;survey_id=".
+				db_result($result,$j,0)."\">".db_result($result,$j,0)."</a></td>";
+			for ($i = 1; $i < $cols; $i++)  {
+				printf("<td>%s</td>\n",db_result($result,$j,$i));
+			}
+
+			echo "</tr>";
+		}
+		echo "</table>"; //</td></tr></TABLE>";
 	}
-	echo "</table>"; //</td></tr></TABLE>";
 }
 
 /*
