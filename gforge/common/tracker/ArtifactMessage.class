@@ -79,45 +79,57 @@ class ArtifactMessage extends Error {
 	/**
 	 *	create - create a new item in the database.
 	 *
-	 *	@param	string	Item name.
-	 *	@param	int		User_id of assignee.
+	 *	@param	string	Body.
+	 *	@param	string	email of submitter (obsolete?).
 	 *  @return id on success / false on failure.
-	 * /
-	function create($name, $auto_assign_to) {
+	 */
+	function create($body,$by=false) {
 		global $Language;
 		
-		//
-		//	data validation
-		//
-		if (!$name || !$auto_assign_to) {
-			$this->setError($Language->getText('artifact_category','required_fields'));
-			return false;
-		}
-		if (!$this->Artifact->userIsAdmin()) {
-			$this->setPermissionDeniedError();
-			return false;
-		}
-		$sql="INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to) 
-			VALUES ('".$this->Artifact->getID()."','".htmlspecialchars($name)."','$auto_assign_to')";
-
-		$result=db_query($sql);
-
-		if ($result && db_affected_rows($result) > 0) {
-			$this->clearError();
-			return true;
-		} else {
-			$this->setError(db_error());
+		if (!$body) {
+			$this->setMissingParamsError();
 			return false;
 		}
 
-/*
-			//
-			//	Now set up our internal data structures
-			//
-			if (!$this->fetchData($id)) {
+		if (session_loggedin()) {
+			$user_id=user_getid();
+			$user =& user_get_object($user_id);
+			if (!$user || !is_object($user)) {
+				$this->setError('ERROR - Logged In User Bug Could Not Get User Object');
 				return false;
 			}
-*/
+			$body=$Language->getText('tracker_artifact','logged_in_yes')." \nuser_id=$user_id\n\n".$body;
+
+			//  we'll store this email even though it will likely never be used -
+			//  since we have their correct user_id, we can join the USERS table to get email
+			$by=$user->getEmail();
+		} else {
+			$body=$Language->getText('tracker_artifact','logged_in_no')." \n\n".$body;
+			$user_id=100;
+			if (!$by || !validate_email($by)) {
+				$this->setMissingParamsError();
+				return false;
+			}
+		}
+
+		$sql="insert into artifact_message (artifact_id,submitted_by,from_email,adddate,body) 
+			VALUES ('". $this->getID() ."','$user_id','$by','". time() ."','". htmlspecialchars($body). "')";
+		$res = db_query($sql);
+
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		} else {
+			$id=db_insertid($res,'artifact_message','id');
+		}
+
+		//
+		//	Now set up our internal data structures
+		//
+		if (!$this->fetchData($id)) {
+			return false;
+		}
+		return $id;
 	}
 
 	/**
@@ -181,10 +193,6 @@ class ArtifactMessage extends Error {
 	function getUserID() {
 		return $this->data_array['user_id'];
 	}
-
-//TODO email
-//user_name
-//realname
 
 }
 
