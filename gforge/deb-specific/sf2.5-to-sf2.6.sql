@@ -28,7 +28,6 @@ CREATE INDEX bug_status_assignedto ON bug(status_id,assigned_to);
 -- DROP TABLE system_machines;
 -- create index foundrynews_foundry_date_approved on foundry_news(foundry_id,approve_date,is_approved);
 -- create index news_group_date on news_bytes(group_id,date);
-CREATE INDEX news_date ON news_bytes(date);
 -- create index news_approved_date on news_bytes(is_approved,date);
 
 -- 20001220
@@ -624,7 +623,6 @@ ALTER TABLE project_task ADD CONSTRAINT project_task_created_by_fk FOREIGN KEY (
 ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL ;
 
 CREATE INDEX users_status ON users USING BTREE (status bpchar_ops);
-CREATE INDEX user_user ON users USING BTREE (status bpchar_ops);
 CREATE INDEX idx_users_username ON users USING BTREE (user_name text_ops);
 CREATE INDEX users_user_pw ON users USING BTREE (user_pw varchar_ops);
 
@@ -1105,3 +1103,20 @@ CREATE INDEX "user_pref_user_id" on "user_preferences" using btree ( "user_id" "
 -- Fix some hostnames
 UPDATE groups SET unix_box = 'shell', cvs_box = 'cvs' ;
 UPDATE users SET unix_box = 'shell' ;
+
+-- Drop a few indexes
+DROP INDEX frs_dlstats_group_agg_day ;
+DROP INDEX frs_file_name ;
+DROP INDEX frs_file_processor ;
+DROP INDEX frs_file_release_id ;
+DROP INDEX frs_file_type ;
+DROP INDEX frs_release_by ;
+DROP INDEX frs_release_date ;
+DROP INDEX frs_release_package ;
+DROP INDEX frsdlstatsgroupagg_day_dls ;
+DROP INDEX ftpdl_day ;
+DROP INDEX group_id_idx ;
+DROP INDEX httpdl_day ;
+DROP INDEX idx_users_username ;
+DROP INDEX stats_agr_tmp_fid ;
+DROP INDEX stats_agr_tmp_gid ;
