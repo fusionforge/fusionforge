@@ -10,6 +10,14 @@
 	* www/register/editgroupinfo.php: Added radio buttons to select
 	the SCM for the project being created. If there is just one 
 	SCM in the system, this is selected by default automatically.
+	
+	Fixes [#858]
+	* common/include/Group.class: Added a new function to support
+	SetSCMBox to fix [#859]
+
+	Fixes [#859]
+	* www/admin/groupedit.php: Add a EditBox for adding SCMBox to a
+	group if $sys_scm_single_host is false.
 
 2004-07-29  Francisco Gimeno <kikov@kikov.org>
 	* www/pm/mod_task.php and detail_task.php: Added task_extra_detail 
