@@ -26,7 +26,9 @@ die "Cannot connect to database: $!" if ( ! $dbh );
 
 if($verbose) {print ("\nGetting group list");}
 # Dump the Groups Table information
-$query = "SELECT group_id,unix_group_name,status,use_scm,enable_pserver,enable_anonscm FROM groups WHERE unix_group_name !=''";
+#$query = "SELECT group_id,unix_group_name,status,use_scm,enable_pserver,enable_anonscm FROM groups WHERE unix_group_name !=''";
+$query= "SELECT groups.group_id,groups.unix_group_name,groups.status,groups.use_scm,groups.enable_pserver,groups.enable_anonscm FROM groups,group_plugin,plugins WHERE groups.unix_group_name !='' AND groups.group_id=group_plugin.group_id AND group_plugin.plugin_id=plugins.plugin_id AND plugins.plugin_name='scmcvs'"
+
 # AND cvs_box=$hostname to be added for multi-cvs server support
 
 $c = $dbh->prepare($query);
