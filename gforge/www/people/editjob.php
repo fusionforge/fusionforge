@@ -58,9 +58,9 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		/*
 			add item to job inventory
 		*/
-		if ($skill_id==100 || $skill_level_id==100 || $skill_year_id==100  || !$job_id) {
+		if ($skill_id == "xyxy" || $skill_level_id==100 || $skill_year_id==100  || !$job_id) {
 			//required info
-			exit_error('error - missing info','Fill in all required fields');
+			exit_error('Error - Missing information','Fill in all required fields');
 		}
 
 		if (people_verify_job_group($job_id,$group_id)) {

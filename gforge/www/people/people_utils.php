@@ -43,7 +43,7 @@ function people_skill_box($name='skill_id',$checked='xyxy') {
 		$sql="SELECT * FROM people_skill ORDER BY name ASC";
 		$PEOPLE_SKILL=db_query($sql);
 	}
-	return html_build_select_box ($PEOPLE_SKILL,$name,$checked);
+	return html_build_select_box($PEOPLE_SKILL,$name,$checked);
 }
 
 function people_skill_level_box($name='skill_level_id',$checked='xyxy') {
@@ -81,6 +81,10 @@ function people_job_category_box($name='category_id',$checked='xyxy') {
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
 	global $feedback;
 	if (session_loggedin()) {
+		// check required fields
+		if (!$skill_id || $skill_id == "xyxy") {
+			$feedback .= " Must select a skill ID";
+		} else {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_skill_inventory WHERE user_id='". user_getid() ."' AND skill_id='$skill_id'";
 		$result=db_query($sql);
@@ -97,6 +101,7 @@ function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id)
 			}
 		} else {
 			$feedback .= ' ERROR - skill already in your inventory ';
+		}
 		}
 	} else {
 		echo '<h1>You must be logged in first</h1>';
@@ -287,9 +292,9 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$result=db_query($sql);
 
 	$title_arr=array();
-	$title_arr[]='Skill';
-	$title_arr[]='Level';
-	$title_arr[]='Experience';
+	$title_arr[]='Skill'.utils_requiredField();
+	$title_arr[]='Level'.utils_requiredField();
+	$title_arr[]='Experience'.utils_requiredField();
 	$title_arr[]='Action';
 			
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
