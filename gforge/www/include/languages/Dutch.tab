@@ -765,7 +765,7 @@ frs	file_notes	Notities
 frs	file_package	Pakket
 frs	file_rel_date	Datum
 frs	file_version	Versie
-#frs	latest_file_releases	Latest File Releases
+frs	latest_file_releases	Laatste bestandsuitgaven
 #frs_file	error_already_exists	That filename already exists in this project space 
 #frs_file	error_cannot_move	File cannot be moved to the permanent location
 #frs_file	error_invalid_file	FRSFile Appears to be invalid
@@ -892,7 +892,6 @@ home	about_blurb		GForge is een <B>gratis service voor 		<A href="http://www.ope
 #home	breaking_down_barriers	Breaking Down the Barriers to Open Source Development
 home	gforge_statistics	$1 Statistieken
 home	highest_ranked_users	Gebruikers met de hoogste rang
-#home	hosted_projects		Hosted Projects
 home	most_active_this_week	Meest actief deze week
 home	no_stats_available	Geen statistieken beschikbaar
 home	none_found		Niet gevonden
@@ -940,8 +939,8 @@ menu	diary_notes		Dagboek notities
 menu	discussion_forums	Discussie forums
 menu	documentation		Site documentatie
 menu	home			Thuis
-menu	login			Login
-menu	login_ssl		Login via SSL
+menu	login			Inloggen
+menu	login_ssl		Inloggen via SSL
 menu	logout			Uitloggen
 menu	my_account		Mijn Account
 menu	my_personal_page	Mijn persoonlijke pagina
