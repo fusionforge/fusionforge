@@ -1,7 +1,7 @@
 #! /bin/sh
 
 usage() {
-	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-home homepath] [-group grouppath]"
+	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example|-fhs] [-clean] [-noapache] [-dovhost] [-home homepath] [-group grouppath] [-listen80|nolisten80]"
 }
 
 getval(){
@@ -10,21 +10,6 @@ getval(){
 }
 
 computedefault(){
-	# look for which version of apache is installed
-	for apache_root_var in /etc/apache2 /etc/apache /etc/apache-ssl /etc/apache-perl ; do
-	    if [ -d ${apache_root_var} ]; then
-	        apache_root=${apache_root_var}
-	        break
-	    fi
-	done
-	# this removes Listen 80 from gforge httpd.conf for apache2 
-	# because it's already enabled and 
-	if [ ${apache_root} = '/etc/apache2' ] ; then
-	    apache_listen80='#Listen 80 #apache2 already listens on port 80'
-	else
-	    apache_listen80='Listen 80'
-	fi
-
 	echo "Calculating defaults"
 	# This is used to make a default working gforge.conf
 	DEFAULTsystem_name=MyGForge
@@ -110,8 +95,8 @@ computedefault(){
 	DEFAULTsys_localinc=$ETCDIR/local.inc
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTsys_plugins_path=/usr/lib/gforge/plugins/
-	DEFAULTapache_root=${apache_root}
-	DEFAULTapache_listen80=${apache_listen80}
+	DEFAULTsys_sslcrt=/etc/apache/ssl.crt/server.crt
+	DEFAULTsys_sslkey=/etc/apache/ssl.key/server.key
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR
@@ -186,6 +171,11 @@ setupinout(){
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i`.gforge-new $CONFFILEOUT
 	done
 	
+	if [ $listen80 == false ]
+	then
+		rm -f $ETCDIR/00listen80.gforge-new
+	fi
+
 	echo "Creating $HTTPDCONF"
 	ls $ETCDIR/[0-9][0-9]*.gforge-new | sort | xargs cat > $HTTPDCONF
 	rm $ETCDIR/[0-9][0-9]*.gforge-new
@@ -260,6 +250,7 @@ interact=false
 noapache=false
 database=env
 dovhost=false
+listen80=true
 
 while [ $# -ne 0 ]
 do
@@ -329,6 +320,12 @@ do
 			;;
 		-dovhost )
 			dovhost=true
+			;;
+		-listen80 )
+			listen80=true
+			;;
+		-nolisten80 )
+			listen80=false
 			;;
 		-example )
 			shift

@@ -4,7 +4,6 @@
 </Files>
 
 <IfModule mod_ssl.c>
-  {apache_listen80}
   Listen 443
 </IfModule>
 

@@ -4,7 +4,6 @@
 </Files>
 
 <IfModule mod_ssl.c>
-  Listen 80
   Listen 443
 </IfModule>
 
@@ -45,7 +44,20 @@ UseCanonicalName Off
 
 	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/lib/gforge/plugins/$1/cgi-bin/$2
 
-	# Debian Sourceforge without the DNS delegation
+	# Projects and Users script
+	<Location /projects>
+		ForceType application/x-httpd-php
+	</Location>
+	<Location /users>
+		ForceType application/x-httpd-php
+	</Location>
+
+	# 404 Error document
+	ErrorDocument 404 /404.php
+	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+	CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+
+	# GForge without the DNS delegation
 	# Project home pages are in a virtual /www/<group> location
 	AliasMatch ^/www/([^/]*)/(.*) /home/groups/$1/htdocs/$2
 	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /home/groups/$1/cgi-bin/$2
@@ -56,21 +68,6 @@ UseCanonicalName Off
 		allow from all
 	</Directory>
 
-	# Projects and Users script
-	<Location /projects>
-		ForceType application/x-httpd-php
-	</Location>
-	<Location /users>
-		ForceType application/x-httpd-php
-	</Location>
-
-	# This for cgi not on vhosts
-	ScriptAlias /cgi-bin/ /path/to/cgidir/
-
-	# 404 Error document
-	ErrorDocument 404 /404.php
-	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 	# Ensure that we don't try to use SSL on SSL Servers
 	<IfModule apache_ssl.c>
 		SSLDisable
@@ -91,6 +88,25 @@ UseCanonicalName Off
 
 	php_admin_value default_charset "UTF-8"
 
+	<Directory /path/to/gforge/www>
+		Include   /etc/httpd.secrets
+	</Directory>
+
+	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/lib/gforge/plugins/$1/cgi-bin/$2
+
+	# Projects and Users script
+	<Location /projects>
+		ForceType application/x-httpd-php
+	</Location>
+	<Location /users>
+		ForceType application/x-httpd-php
+	</Location>
+
+	# 404 Error document
+	ErrorDocument 404 /404.php
+	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+	CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+
 	<IfModule mod_ssl.c>
 		SSLEngine on
 		SSLCertificateFile /etc/apache/ssl.crt/server.crt
@@ -108,26 +124,6 @@ UseCanonicalName Off
 		SSLEnable
 		SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
 	</IfModule>
-
-	<Directory /path/to/gforge/www>
-		Include   /etc/httpd.secrets
-	</Directory>
-
-	# Projects and Users script
-	<Location /projects>
-		ForceType application/x-httpd-php
-	</Location>
-	<Location /users>
-		ForceType application/x-httpd-php
-	</Location>
-
-	# This for cgi not on vhosts
-	ScriptAlias /cgi-bin/ /path/to/cgidir/
-
-	# 404 Error document
-	ErrorDocument 404 /404.php
-	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 #

@@ -1,4 +1,4 @@
-gforge (3.3.0-42) unstable; urgency=low
+gforge (3.3.0-49) unstable; urgency=low
 
   * [Christian] Added a call to migrateform.php and migraterbac.php in db-upgrade
   * [Christian] Added 20040804.sql and 20040826.sql to db-upgrade.pl
@@ -12,7 +12,7 @@ gforge (3.3.0-42) unstable; urgency=low
   * [Christian] Added 20040914.sql, 20041005.sql, 20041006.sql.
   * [Hal] Maded changes to support apache2
 
- -- Christian Bayle <bayle@debian.org>  Wed, 20 Oct 2004 22:53:50 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon, 25 Oct 2004 16:04:20 +0200
 
 gforge (3.3.0-12) unstable; urgency=low
 

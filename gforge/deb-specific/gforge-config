@@ -4,15 +4,18 @@
 #
 # Parse all template files and expand them into real files
 # Roland Mas, debian-sf (Sourceforge for Debian)
+#
+# For apache2 we have to remove the Listen 80 directive 
+# This is to test if apache2 is started and listen on port 80
+#
+[ -f /etc/default/apache2 ] && . /etc/default/apache2
+if [ "x$NO_START" == "x0" ]
+then
+	/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system LDAP -nolisten80
+else
+	/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system LDAP -listen80
+fi	
 
-#filenames="local.inc database.inc httpd.conf httpd.secrets local.pl httpd.common"
-#for i in $filenames ; do
-#    [ -f /etc/gforge/templates/${i}.template ] && \
-#    /usr/lib/gforge/bin/fill-in-the-blanks.pl \
-#	/etc/gforge/templates/${i}.template \
-#	/etc/gforge/$i
-#done
-/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system LDAP
 
 [ -f /etc/gforge/local.inc ] && chmod 644 /etc/gforge/local.inc
 [ -f /etc/gforge/httpd.conf ] && chmod 644 /etc/gforge/httpd.conf
