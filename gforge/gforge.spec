@@ -5,7 +5,7 @@
 Summary: Collaborative Development Tool
 Name: gforge
 Version: 3.1
-Release: 1
+Release: 2
 BuildArch: noarch
 Copyright: GPL
 Group: Development/Tools
@@ -186,7 +186,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-, root, root)
 %doc AUTHORS COPYING ChangeLog INSTALL README*
 %doc docs/*
-%attr(0600, apache, apache) %config(noreplace) /etc/%{name}/local.inc
+%attr(0660, apache, gforge) %config(noreplace) /etc/%{name}/local.inc
 %attr(0640, apache, apache) %config(noreplace) /etc/httpd/conf.d/%{name}.conf
 %attr(0775, apache, apache) %dir %{_datadir}/%{name}/www/incoming
 %{_datadir}/%{name}/backend
