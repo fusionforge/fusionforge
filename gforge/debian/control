@@ -8,7 +8,7 @@ Standards-Version: 3.5.8
 Package: gforge
 Architecture: all
 Conflicts: sourceforge
-Depends: debconf (>= 1.2.9), gforge-common (= ${Source-Version}), gforge-web-apache | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim | gforge-mta, gforge-shell-ldap | gforge-shell, gforge-cvs, gforge-ftp-proftpd | gforge-ftp, gforge-ldap-openldap | gforge-ldap, gforge-dns-bind9 | gforge-dns, gforge-lists-mailman | gforge-lists
+Depends: debconf (>= 1.0.32), gforge-common (= ${Source-Version}), gforge-web-apache | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim | gforge-mta, gforge-shell-ldap | gforge-shell, gforge-cvs, gforge-ftp-proftpd | gforge-ftp, gforge-ldap-openldap | gforge-ldap, gforge-dns-bind9 | gforge-dns, gforge-lists-mailman | gforge-lists
 Description: Collaborative development tool - meta-package
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
