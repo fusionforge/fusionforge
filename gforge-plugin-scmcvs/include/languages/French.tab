@@ -4,13 +4,18 @@ plugin_scmcvs	browseit	Parcourir le dépôt CVS
 plugin_scmcvs	browsetree	<b>Parcourir l'arbre CVS</b><p>Parcourir l'arbre CVS vous donne une vue d'ensemble du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt.</p>
 plugin_scmcvs	cvs_repository	dépôt CVS
 plugin_scmcvs	devcvs	<p><b>Accès CVS pour développeur via SSH</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH doit être installé sur votre machine cliente. Remplacez <i>modulename</i> et <i>developername</i> par les valeurs appropriées. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
-plugin_scmcvs	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 plugin_scmcvs	developername	développeur
-plugin_scmcvs	error_only_projects_can_use_cvs	ERREUR
+plugin_scmcvs	error_only_projects_can_use_cvs	Erreur : seuls les projets peuvent utiliser CVS.
 plugin_scmcvs	error_this_project_has_turned_off	Erreur : ce projet a désactivé son CVS.
 plugin_scmcvs	history	Historique du dépôt
 plugin_scmcvs	modulename	module
 plugin_scmcvs	nohistory	Ce projet n'a pas d'historique CVS
 plugin_scmcvs	section	Projet : $1
-plugin_scmcvs	title	SCM
+plugin_scmcvs	title	Sources
 plugin_scmcvs	admin	Administration
+plugin_scmcvs	download_snapshot	Télécharger le snapshot nocturne de l'arbre CVS
+plugin_scmcvs	enable_cvs	Utiliser CVS
+plugin_scmcvs	enable_anonymous_cvs	Activer l'accès anonyme
+plugin_scmcvs	enable_pserver	Activer l'accès pserver
+plugin_scmcvs	server	Serveur :
+plugin_scmcvs	cvs_commits	<strong>$1</strong> commits, <strong>$2</strong> ajouts
