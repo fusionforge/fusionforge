@@ -38,7 +38,7 @@ RedHat Linux 8.0 with the following software configured (already bundled with RH
 <li>openssl 0.9.6b</li>
 <li>mod_ssl 2.0.40</li>
 <li>PHP 4.2.2</li>
-<li>php_pgsql 4.2.2</li>
+<li>php-pgsql 4.2.2</li>
 </ol>
 </p>
 <p>
@@ -49,7 +49,7 @@ RedHat Linux 7.3:
 <li>openssl 0.9.6b</li>
 <li>mod_ssl 2.0.40</li>
 <li>PHP 4.1.2</li>
-<li>php_pgsql 4.1.2</li>
+<li>php-pgsql 4.1.2</li>
 </ol>
 </p>
     </section>
@@ -244,7 +244,7 @@ su - postgres<br/>
 
 <p/>Open <code>/var/lib/pgsql/data/pg_hba.conf</code> and insert the following lines:
 <br/>
-For PostgreSQL 7.3:
+For PostgreSQL 7.3 (note that you can figure out your Postgres version by opening <code>/etc/init.d/postgresql</code> and looking for the string <code>PG_VERSION=</code>):
 <source>
 local all all trust
 host all all 127.0.0.1 255.255.255.255 crypt
@@ -310,24 +310,30 @@ psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
 </li>
 </ol>
 
-<b>Mandrake 9 installation notes (thanks to Francois Elie)</b>
+<ul>
+<li>
+
+<b>Mandrake 9-specific installation notes (thanks to Francois Elie)</b>
 
 <ul>
- <li>Edit /var/lib/pgsql/data/postgresql.conf:<br/>
-  <ul>
-  <li><code>set tcpip_socket=true</code></li>
-  <li><code>local all md5</code></li>
- </ul>
- </li>
+	<li>Edit /var/lib/pgsql/data/postgresql.conf:<br/>
+		<ul>
+			<li><code>set tcpip_socket=true</code></li>
+			<li><code>local all md5</code></li>
+		</ul>
+	</li>
 
+	<li>Edit /var/lib/pgsql/data/pg_hba.conf:<br/>
+ 		<ul>
+  		<li>Set for example access right to</li>
+  		<li><code>host     all     0.0.0.0   0.0.0.0   md5</code></li>
+ 		</ul>
+	</li>
+</ul>
 
- <li>Edit /var/lib/pgsql/data/pg_hba.conf:<br/>
- <ul>
-  <li>Set for example access right to</li>
-  <li><code>host     all     0.0.0.0   0.0.0.0   md5</code></li>
- </ul>
 </li>
 </ul>
+
 </li>
 <li>Then restart the server <code>/etc/rc.d/init.d/postgresql restart</code></li>
 
@@ -404,7 +410,7 @@ This directory will contain all files/patches uploaded to your gforge site.
 </li>
 
 <li>Create a directory<code> /etc/gforge</code><br/></li>
-<li>Copy the file <code>local.inc</code> from <code>/var/www/gforge-3.0/etc/</code> to <code>/etc/gforge/</code> </li>
+<li>Copy the file <code>local.inc</code> from <code>/var/www/gforge-3.1/etc/</code> to <code>/etc/gforge/</code> </li>
 <li>Open <code>/etc/gforge/local.inc</code>, configuring the following basic parameters:
 <ol>
 <li>Database configuration:
