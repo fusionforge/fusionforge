@@ -246,8 +246,8 @@ LEFT JOIN (
 	SELECT group_id,COUNT(job_id) AS count
     FROM people_job
     WHERE 
-		date > '$day_begin' 
-		AND date < '$day_end'
+		post_date > '$day_begin' 
+		AND post_date < '$day_end'
     GROUP BY group_id
 	) helpr USING (group_id)
 
