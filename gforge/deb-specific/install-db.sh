@@ -19,7 +19,7 @@ else
     target=$1
 fi
 
-LC_ALL=C
+export LC_ALL=C
 
 case "$target" in
     default)
