@@ -120,7 +120,7 @@ a 40 character limit).
 
 Full Name:
 <BR>
-<INPUT size="40" maxlength="40" type=text name="full_name" value="<?php echo $full_name; ?>">
+<INPUT size="40" maxlength="40" type=text name="full_name" value="<?php echo stripslashes($full_name); ?>">
 
 <H3>2. Project Purpose and Summarization</H3>
 <P>
@@ -230,7 +230,7 @@ for such project, since we will need to check that license is compatible
 with the OpenSource definition.
 <BR>
 <TEXTAREA name="license_other" wrap=virtual cols=60 rows=5>
-<?php echo $license_other; ?>
+<?php echo stripslashes($license_other); ?>
 </TEXTAREA>
 <P>
 
@@ -245,7 +245,7 @@ length is 255 chars.
 </p>
 <font size="-1">
 <TEXTAREA name="description" wrap="virtual" cols="70" rows="5">
-<?php echo $description; ?>
+<?php echo stripslashes($description); ?>
 </TEXTAREA>
 </font>
 
