@@ -40,6 +40,7 @@ function rss_dump_project_result_set ($res,$title,$desription='',$callback=0) {
         if (!$desription) $desription=$title;
 	// ## one time output
 	print " <channel>\n";
+	print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 	print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
 	print "  <description>$desription</description>\n";
 	print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
