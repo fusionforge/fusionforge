@@ -268,6 +268,10 @@ admin_database	site_admin_groups_maintance	Administration du site : gestion des 
 admin_database	statistics_for_project_database	Statistiques pour les bases de données des projets
 admin_database	type	Type
 admin_database	unable_to_insert	Impossible d'insérer une base de donnée déjà active
+admin_groupdelete	delete	Confirmer la suppression
+admin_groupdelete	permanentlydelete	Supprimer de manière permanente
+admin_groupdelete	permanentlydeleteproject	Supprimer le projet définitivement
+admin_groupdelete	title	Supprimer le projet définitivement
 admin_groupedit	active	Actif (A)
 admin_groupedit	deleted	Supprimé (D)
 admin_groupedit	error	Erreur
@@ -655,6 +659,7 @@ docman_admin_editdocs	section	Gestionnaire de documents : Administration
 docman_admin_editdocs	state	Etat
 docman_admin_editdocs	title	Modifier des documents
 docman_admin_editdocs	upload	Optionnel : Uploader un nouveau fichier
+docman_admin_editdocs	upload_ftp	Ou choisir un fichier préalablement uploadé sur $1 par FTP
 docman_admin_editdocs	upload_url	Spécifier une URL externe pour le fichier
 docman_admin_editgroups	add_group	Ajouter un groupe&nbsp;
 docman_admin_editgroups	description	Le nom du groupe sera utilisé comme titre. Il doit donc être formaté en conséquence.
@@ -682,6 +687,8 @@ docman_new	description	Description
 docman_new	doc_title	Titre du document
 docman_new	error_blank_document	Erreur en prenant un document vide
 docman_new	file	Fichier
+docman_new	ftpupload_choosefile	Choisir un fichier FTP au lieu d'uploader :
+docman_new	ftpupload_new_file	Alternativement, vous pouvez utiliser FTP pour uploader un nouveau fichier sur $1
 docman_new	group	Groupe auquel le document appartient
 docman_new	intro	<strong>Titre du document</strong> : se rapporte au titre (relativement bref) du document  (par exemple : Comment utiliser le serveur de téléchargement)<br /><strong>Description</strong> : une brève description placée juste en dessous du titre.
 docman_new	language	Langue
@@ -1066,6 +1073,9 @@ mail_admin_addlist	pagetitle	Ajouter une liste de diffusion
 mail_admin_addlist	section	Administration des listes de diffusion
 mail_admin_addlist	title	Ajouter une liste
 mail_admin_addlist	warning	Une fois créée, cette liste sera TOUJOURS attachée à votre projet et ne pourra pas être supprimée !
+mail_admin_deletelist	confirmdelete	Confirmer la suppression
+mail_admin_deletelist	permanentlydelete	Supprimer définitivement
+mail_admin_deletelist	title	Supprimer la liste définitivement
 mail_admin_updatelist	form_description	Description :
 mail_admin_updatelist	form_ispublic	Publique ?
 mail_admin_updatelist	form_updatelist	Modifier
