@@ -109,8 +109,6 @@ class ArtifactType extends Error {
 			} else {
 				return true;
 			}
-		} else {
-			$this->setError('No ID Passed');
 		}
 	}
 
@@ -182,15 +180,20 @@ class ArtifactType extends Error {
 			'$browse_instructions',
 			'$datatype')");
 
+		db_begin();
+
 		$this->artifact_type_id = db_insertid($res,'artifact_group_list','group_artifact_id');
 		
 		if (!$res || !$this->artifact_type_id) {
 			$this->setError('ArtifactType: '.db_error());
+			db_rollback();
 			return false;
 		} else {
 			if (!$this->fetchData($this->artifact_type_id)) {
+				db_rollback();
 				return false;
 			} else {
+				db_commit();
 				$this->clearError();
 				return $this->artifact_type_id;
 			}
@@ -540,7 +543,7 @@ class ArtifactType extends Error {
 		if ($this->isPublic()) {
 			return true;
 		} else {
-			if (!user_isloggedin()) {
+			if (!session_loggedin()) {
 				return false;
 			} else {
 				//
@@ -575,7 +578,7 @@ class ArtifactType extends Error {
 	 *	@return int perm level for the logged-in user
 	 */
 	function getCurrentUserPerm() {
-		if (!user_isloggedin()) {
+		if (!session_loggedin()) {
 			return 0;
 		} else {
 			if (!isset($this->current_user_perm)) {

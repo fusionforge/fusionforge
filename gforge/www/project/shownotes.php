@@ -27,7 +27,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	site_project_header(array('title'=>"File Release Notes and Changelog",'group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_shownotes','sectionvals'=>array(group_getname($group_id))));
 
-	$HTML->box1_top('Notes');
+	echo $HTML->boxTop('Notes');
 
 	echo '<h3>Release Name: <A HREF="showfiles.php?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</A></H3>
 		<P>';
@@ -53,7 +53,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	}
 
-	$HTML->box1_bottom();
+	echo $HTML->boxBottom();
 
 	site_project_footer(array());
 

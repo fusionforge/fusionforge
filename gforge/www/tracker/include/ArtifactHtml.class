@@ -38,15 +38,17 @@ class ArtifactHtml extends Artifact {
 			$title_arr=array();
 			$title_arr[]='Message';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><PRE>
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><PRE>
 Date: '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
 Sender: '. db_result($result,$i,'user_name') . '
 '. util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</PRE></TD></TR>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		} else {
 			echo '
 				<H3>No Followups Have Been Posted</H3>';
@@ -66,14 +68,14 @@ Sender: '. db_result($result,$i,'user_name') . '
 			$title_arr[]='Date';
 			$title_arr[]='By';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			$artifactType =& $this->getArtifactType();
 
 			for ($i=0; $i < $rows; $i++) {
 				$field=db_result($result, $i, 'field_name');
 				echo '
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.$field.'</TD><TD>';
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.$field.'</TD><TD>';
 
 				if ($field == 'status_id') {
 
@@ -121,9 +123,8 @@ Sender: '. db_result($result,$i,'user_name') . '
 					'<TD>'. db_result($result, $i, 'user_name'). '</TD></TR>';
 			}
 
-			echo '
-				</TABLE>';
-	
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		} else {
 			echo '
 			<H3>No Changes Have Been Made to This Item</H3>';

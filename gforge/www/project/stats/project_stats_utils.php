@@ -33,6 +33,7 @@ function week_to_dates( $week, $year = 0 ) {
 
    // stats_project_daily
 function stats_project_daily( $group_id, $span = 7 ) {
+	global $HTML;
 
 	//
 	//	We now only have 30 & 7-day views
@@ -75,7 +76,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 		
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
-			print	'<TR bgcolor="' . html_get_alt_row_color($i) . '">'
+			print	'<TR ' . $HTML->boxGetAltRowStyle($i) . '>'
 				. '<TD>' . gmstrftime("%e %b %Y", gmmktime(0,0,0,substr($row["month"],4,2),$row["day"],substr($row["month"],0,4)) ) . '</TD>'
 				//. '<TD>' . $row["month"] . " " . $row["day"] . '</TD>'
 				. '<TD>' . sprintf("%d", $row["group_ranking"]) . " ( " . sprintf("%0.2f", $row["group_metric"]) . ' ) </TD>'
@@ -103,7 +104,7 @@ function stats_project_daily( $group_id, $span = 7 ) {
 
    // stats_project_monthly
 function stats_project_monthly( $group_id ) {
-
+	global $HTML;
 	$res = db_query("
 		SELECT * FROM stats_project_months 
 		WHERE group_id='$group_id'
@@ -135,7 +136,7 @@ function stats_project_monthly( $group_id ) {
 		while ( $row = db_fetch_array($res) ) {
 			$i++;
 
-			print	'<TR bgcolor="' . html_get_alt_row_color($i) . '">'
+			print	'<TR ' . $HTML->boxGetAltRowStyle($i) . '>'
 				. '<TD>' . gmstrftime("%B %Y", mktime(0,0,1,substr($row["month"],4,2),1,substr($row["month"],0,4)) ) . '</TD>'
 				. '<TD>' . sprintf("%d", $row["group_ranking"]) . " ( " . sprintf("%0.2f", $row["group_metric"]) . ' ) </TD>'
 				. '<TD align="right">' . number_format( $row["subdomain_views"] + $row['site_views'],0 ) . '</TD>'
@@ -160,7 +161,7 @@ function stats_project_monthly( $group_id ) {
 }
 
 function stats_project_all( $group_id ) {
-
+	global $HTML;
 	$res = db_query("
 		SELECT *
 		FROM stats_project_all
@@ -186,7 +187,7 @@ function stats_project_all( $group_id ) {
 		<TD align="right"><B>CVS</B></TD>
 		</TR>
 
-	<TR bgcolor="<?php echo html_get_alt_row_color(1); ?>">
+	<TR <?php echo $HTML->boxGetAltRowStyle(1); ?>>
 		<TD><?php echo $row["day"]; ?> days </TD>
 		<TD><?php echo sprintf("%d", $row["group_ranking"]) . " ( " . sprintf("%0.2f", $row["group_metric"]); ?> ) </TD>
 		<TD align="right"><?php echo number_format( $row["subdomain_views"] + $row['site_views'],0); ?></TD>

@@ -2,7 +2,7 @@
 #  *
 #  * Indonesian message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -58,7 +58,7 @@ group	short_summary	Ringkasan
 group	short_support	Support
 group	short_survey	Survey
 home	highest_ranked_users	Pengguna Peringkat Tertinggi
-home	about_blurb	  SourceForge adalah <B>layanan gratis untuk developer <A href="http://opensource.or.id">Open Source</A></B> yang menawarkan akses mudah ke gudang CVS terbaik, milis, pencarian bug, papan pesan/forum-forum, manajemen tugas, hosting situs, pengarsipan file permanen, backup lengkap, dan semua diatur lewat web.  <BR> &nbsp; <P> <B>Site Feedback and Partisipasi</B> <P> Untuk dapat menggunakan SourceForge secara maksimal, anda perlu  <A href="/account/register.php"> mendaftarkan diri</A> sebagai pengguna situs.   Ini berarti memperbolehkan anda untuk berpartisipasi penuh dalam semua yang kami tawarkan.  Walaupun tanpa pendaftaran anda dapat menggunakan SourceForge, akan tetapi  tanpa mendaftarkan diri anda tidak dapat berpartisipasi secara penuh. <P> &nbsp; <BR> <B>Mendirikan Proyek Pribadi Anda</B> <P> <A href="/account/register.php">Pendaftaran sebagai pengguna situs</A>, then <A HREF="/account/login.php">Login</A> dan terakhir, <A HREF="/register/">Mendaftarkan Proyek Anda.</A> <P> Terima Kasih... dan selamat bergabung dengan SourceForge.
+home	about_blurb	  GForge adalah <B>layanan gratis untuk developer <A href="http://opensource.or.id">Open Source</A></B> yang menawarkan akses mudah ke gudang CVS terbaik, milis, pencarian bug, papan pesan/forum-forum, manajemen tugas, hosting situs, pengarsipan file permanen, backup lengkap, dan semua diatur lewat web.  <BR> &nbsp; <P> <B>Site Feedback and Partisipasi</B> <P> Untuk dapat menggunakan GForge secara maksimal, anda perlu  <A href="/account/register.php"> mendaftarkan diri</A> sebagai pengguna situs.   Ini berarti memperbolehkan anda untuk berpartisipasi penuh dalam semua yang kami tawarkan.  Walaupun tanpa pendaftaran anda dapat menggunakan GForge, akan tetapi  tanpa mendaftarkan diri anda tidak dapat berpartisipasi secara penuh. <P> &nbsp; <BR> <B>Mendirikan Proyek Pribadi Anda</B> <P> <A href="/account/register.php">Pendaftaran sebagai pengguna situs</A>, then <A HREF="/account/login.php">Login</A> dan terakhir, <A HREF="/register/">Mendaftarkan Proyek Anda.</A> <P> Terima Kasih... dan selamat bergabung dengan GForge.
 frs	latest_file_releases	File Keluaran Terbaru
 menu	login	Login lewat SSL
 menu	logout	Logout
@@ -75,7 +75,7 @@ menu	project_summary	Ringkasan Proyek
 group	public_area	Area Publik
 menu	search	Cari
 menu	software_map	Peta Software
-home	sourceforge_statistics	Statistik SourceForge
+home	sourceforge_statistics	Statistik GForge
 menu	top_projects	Proyek-proyek Top
 home	top_project_downloads	Proyek Top Downloads
 conf	content_encoding	iso-8859-1

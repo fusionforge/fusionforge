@@ -17,23 +17,19 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 	<H2>[ #<?php echo $ah->getID(); ?> ] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></H2>
 
 	<TABLE CELLPADDING="0" WIDTH="100%">
+<?php
+if (session_loggedin()) {
+?>
 			<FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
 			<INPUT TYPE="HIDDEN" NAME="func" VALUE="monitor">
 			<INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
 		<TR>
 			<TD COLSPAN=2">
-			<?php
-			if (!user_isloggedin()) {
-				?>
-				<B>Email:</B> &nbsp;
-				<INPUT TYPE="TEXT" NAME="user_email" SIZE="20" MAXLENGTH="40">
-				<?php
-			}
-			?>
 			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Monitor">&nbsp;<A href="javascript:help_window('/help/tracker.php?helpname=monitor')"><B>(?)</B></A>
 			</FORM>
 			</TD>
 		</TR>
+<?php } ?>
 		<TR>
 			<TD><B>Date:</B><BR><?php echo date( $sys_datefmt, $ah->getOpenDate() ); ?></TD>
 			<TD><B>Priority:</B><BR><?php echo $ah->getPriority(); ?></TD>
@@ -65,7 +61,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 		<TR><TD COLSPAN="2">
 	<?php
 
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 		?>
 		<h3><FONT COLOR="RED">Please <A HREF="/account/login.php?return_to=<?php echo urlencode($REQUEST_URI); ?>">log in!</A></FONT></h3><BR>
 		If you <B>cannot</B> login, then enter your email address here:<P>
@@ -104,15 +100,15 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 	$title_arr[]='Name';
 	$title_arr[]='Description';
 	$title_arr[]='Download';
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	if ($count > 0) {
 
 		for ($i=0; $i<$count; $i++) {
-			echo '<TR>
+			echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<TD>'. $file_list[$i]->getName() .'</TD>
 			<TD>'.  $file_list[$i]->getDescription() .'</TD>
-			<TD><A HREF="/tracker/download.php?group_id='.$group_id.'&atid='. $ath->getID().'&file_id='.$file_list[$i]->getID().'&aid='. $ah->getID() .'">Download</A></TD>
+			<TD><A HREF="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'. $file_list[$i]->getName() .'">Download</A></TD>
 			</TR>';
 		}
 
@@ -120,7 +116,8 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 		echo '<TR><TD COLSPAN=3>No Files Currently Attached</TD></TR>';
 	}
 	
-	echo '</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
+
 	?>
 	</TD></TR>
 

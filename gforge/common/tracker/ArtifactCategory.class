@@ -62,8 +62,6 @@ class ArtifactCategory extends Error {
 					return true;
 				}
 			}
-		} else {
-			$this->setError('No ID Passed');
 		}
 	}
 

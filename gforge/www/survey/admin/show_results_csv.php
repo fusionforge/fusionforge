@@ -16,7 +16,7 @@ require_once('pre.php');
 require_once('HTML_Graphs.php');
 require_once('www/survey/survey_utils.php');
 
-if (!user_isloggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !user_ismember($group_id,'A')) {
         echo "<H1>Permission Denied</H1>";
 	exit;
 }

@@ -6,14 +6,14 @@
 #
 use DBI;
 
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $ssh_array = ();
 
 &db_connect;
 
 # Dump the Table information
-$query = "SELECT user_name,unix_uid,authorized_keys FROM users WHERE authorized_keys != ''";
+$query = "SELECT user_name,unix_uid,authorized_keys FROM users WHERE authorized_keys != '' AND status !='D'";
 $c = $dbh->prepare($query);
 $c->execute();
 while(my ($username, $unix_uid, $ssh_key) = $c->fetchrow()) {

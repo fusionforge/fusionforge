@@ -1,67 +1,64 @@
 <?php
 /**
-  *
-  * SourceForge Forums Facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
 
+
+/*
+    Message Forums
+    By Tim Perdue, Sourceforge, 11/99
+
+    Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
+
+    Complete OO rewrite by Tim Perdue 12/2002
+*/
 
 require_once('pre.php');
-require_once('www/forum/forum_utils.php');
+require_once('www/forum/include/ForumHTML.class');
+require_once('common/forum/Forum.class');
 
-if (user_isloggedin()) {
-	/*
-		User obviously has to be logged in to monitor
-		a thread
-	*/
 
-	if ($forum_id) {
-		/*
-			First check to see if they are already monitoring
-			this thread. If they are, say so and quit.
-			If they are NOT, then insert a row into the db
-		*/
-
-		$sql="SELECT * FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='$forum_id';";
-
-		$result = db_query($sql);
-
-		if (!$result || db_numrows($result) < 1) {
-			/*
-				User is not already monitoring thread, so 
-				insert a row so monitoring can begin
-			*/
-			$sql="INSERT INTO forum_monitored_forums (forum_id,user_id) VALUES ('$forum_id','".user_getid()."')";
-
-			$result = db_query($sql);
-
-			if (!$result) {
-				exit_error("ERROR","ERROR - could not insert into database");
-			} else {
-				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Is Now Being Monitored"));
-			}
-
-		} else {
-
-			$sql="DELETE FROM forum_monitored_forums WHERE user_id='".user_getid()."' AND forum_id='$forum_id';";
-			$result = db_query($sql);
-			header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Monitoring Deactivated"));
+if (session_loggedin()) {
+	if ($forum_id && $group_id) {
+		//
+		//  Set up local objects
+		//
+		$g =& group_get_object($group_id);
+		if (!$g || !is_object($g) || $g->isError()) {
+			exit_no_group();
 		}
-		forum_footer(array());
+
+		$f=new Forum($g,$forum_id);
+		if (!$f || !is_object($f)) {
+			exit_error('Error','Error Getting Forum');
+		} elseif ($f->isError()) {
+			exit_error('Error',$f->getErrorMessage());
+		}
+
+		if ($stop) {
+			if (!$f->stopMonitor()) {
+				exit_error('Error',$f->getErrorMessage());
+			} else {
+				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Monitoring Deactivated"));
+			}
+		} elseif($start) {
+			if (!$f->setMonitor()) {
+				exit_error('Error',$f->getErrorMessage());
+			} else {
+				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Monitoring Started"));
+			}
+		}
 	} else {
-		forum_header(array('title'=>'Choose a forum First','pagename'=>'forum'));
-		echo '
-			<H1>Error - Choose a forum First</H1>';
-		forum_footer(array());
-	} 
+		exit_missing_params();
+	}
 
 } else {
 	exit_not_logged_in();
 }
+
 ?>

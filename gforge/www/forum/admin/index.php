@@ -13,10 +13,25 @@
 
 
 require_once('pre.php');
-require_once('../forum_utils.php');
-$is_admin_page='y';
+require_once('www/forum/include/ForumHTML.class');
+require_once('common/forum/Forum.class');
+require_once('common/forum/ForumFactory.class');
+require_once('common/forum/ForumMessageFactory.class');
+require_once('common/forum/ForumMessage.class');
 
-if ($group_id && (user_ismember($group_id, 'F2'))) {
+if ($group_id) {
+	//
+	//  Set up local objects
+	//
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g) || $g->isError()) {
+		exit_no_group();
+	}
+
+	$p =& $g->getPermission( session_get_user() );
+	if (!$p || !is_object($p) || $p->isError() || !$p->isForumAdmin()) {
+		exit_permission_denied();
+	}
 
 	if ($post_changes) {
 		/*
@@ -27,47 +42,60 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 			/*
 				Deleting messages or threads
 			*/
+			$res=db_query("SELECT group_forum_id 
+				FROM forum 
+				WHERE msg_id='$msg_id'");
 
-			/*
-				Get this forum_id, checking to make sure this forum is in this group
-			*/
-			$sql="SELECT forum.group_forum_id FROM forum,forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id ".
-				"AND forum_group_list.group_id='$group_id' AND forum.msg_id='$msg_id'";
-
-			$result=db_query($sql);
-
-			if (db_numrows($result) > 0) {
-				$feedback .= recursive_delete($msg_id,db_result($result,0,'group_forum_id'))." messages deleted ";
+			if (!$res || db_numrows($res) < 1) {
+				exit_error('Error','Error Determining forum_id');
+			}
+			$f=new Forum($g,db_result($res,0,'group_forum_id'));
+			if (!$f || !is_object($f)) {
+				exit_error('Error','Error Getting Forum');
+			} elseif ($f->isError()) {
+				exit_error('Error',$f->getErrorMessage());
+			}
+			$fm=new ForumMessage($f,$msg_id);
+			if (!$fm || !is_object($fm)) {
+				exit_error('Error','Error Getting Forum');
+			} elseif ($fm->isError()) {
+				exit_error('Error',$fm->getErrorMessage());
+			}
+			$count=$fm->delete();
+			if (!$count || $fm->isError()) {
+				exit_error('Error',$fm->getErrorMessage());
 			} else {
-				$feedback .= " Message not found or message is not in your group ";
+				$feedback .= " $count messages deleted ";
 			}
 
 		} else if ($add_forum) {
 			/*
 				Adding forums to this group
 			*/
-			forum_create_forum($group_id,$forum_name,$is_public,1,$description);
+			$f=new Forum($g);
+			if (!$f || !is_object($f)) {
+				exit_error('Error','Error Getting Forum');
+			} elseif ($f->isError()) {
+				exit_error('Error',$f->getErrorMessage());
+			}
+			if (!$f->create($forum_name,$description,$is_public,$send_all_posts_to,1,$allow_anonymous)) {
+				exit_error('Error',$f->getErrorMessage());
+			} else {
+				$feedback .= ' Forum Created Successfully ';
+			}
 
 		} else if ($change_status) {
 			/*
 				Change a forum to public/private
 			*/
-			if ($send_all_posts_to) {
-				if (!validate_email($send_all_posts_to)) {
-					$send_all_posts_to='';
-					$feedback .= 'The Email Address You Provided Was Invalid';
-				}
+			$f=new Forum($g,$group_forum_id);
+			if (!$f || !is_object($f)) {
+				exit_error('Error','Error Getting Forum');
+			} elseif ($f->isError()) {
+				exit_error('Error',$f->getErrorMessage());
 			}
-			$sql="UPDATE forum_group_list ".
-				"SET is_public='$is_public',".
-				"forum_name='". htmlspecialchars($forum_name) ."',".
-				"description='". htmlspecialchars($description) ."', ".
-				"allow_anonymous='$allow_anonymous', ".
-				"send_all_posts_to='$send_all_posts_to' ".
-				"WHERE group_forum_id='$group_forum_id' AND group_id='$group_id'";
-			$result=db_query($sql);
-			if (!$result || db_affected_rows($result) < 1) {
-				$feedback .= " Error Updating Forum Info ";
+			if (!$f->update($forum_name,$description,$is_public,$send_all_posts_to,$allow_anonymous)) {
+				exit_error('Error',$f->getErrorMessage());
 			} else {
 				$feedback .= " Forum Info Updated Successfully ";
 			}
@@ -106,7 +134,6 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 		ShowResultSet($result,'Existing Forums');
 
 		echo '
-
 			<FORM METHOD="POST" ACTION="'.$PHP_SELF.'">
 			<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
 			<INPUT TYPE="HIDDEN" NAME="add_forum" VALUE="y">
@@ -119,7 +146,12 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 			<INPUT TYPE="RADIO" NAME="is_public" VALUE="1" CHECKED> Yes<BR>
 			<INPUT TYPE="RADIO" NAME="is_public" VALUE="0"> No<P>
 			<P>
-			<B><FONT COLOR="RED">Once you add a forum, it cannot be modified or deleted!</FONT></B>
+			<B>Allow Anonymous Posts?</B><BR>
+			<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="1"> Yes<BR>
+			<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="0" CHECKED> No<BR>
+			<P>
+			<B>Email All Posts To:</B><BR>
+			<INPUT TYPE="TEXT" NAME="send_all_posts_to" VALUE="" SIZE="30" MAXLENGTH="50">
 			<P>
 			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Add This Forum">
 			</FORM>';
@@ -130,16 +162,18 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 		/*
 			Change a forum to public/private
 		*/
-		forum_header(array('title'=>'Change Forum Status','pagename'=>'forum_admin_changestatus','sectionvals'=>group_getname($group_id)));
 
-		$sql="SELECT * FROM forum_group_list WHERE group_id='$group_id'";
-		$result=db_query($sql);
-		$rows=db_numrows($result);
+		$ff = new ForumFactory($g);
+		if (!$ff || !is_object($ff) || $ff->isError()) {
+			exit_error('Error',$ff->getErrorMessage());
+		}
+		$farr =& $ff->getForums();
 
-		if (!$result || $rows < 1) {
-			echo '
-				<P>No forums found for this project';
+		$rows=count($farr);
+		if ($ff->isError() || count($farr) < 1) {
+			exit_error('Error','No Forums Found: '.$ff->getErrorMessage());
 		} else {
+			forum_header(array('title'=>'Change Forum Status','pagename'=>'forum_admin_changestatus','sectionvals'=>group_getname($group_id)));
 			echo '
 			<P>
 			You can adjust forum features from here. Please note that private forums 
@@ -150,47 +184,50 @@ if ($group_id && (user_ismember($group_id, 'F2'))) {
 			$title_arr[]='Status';
 			$title_arr[]='Update';
 		
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="3"><B>'.db_result($result,$i,'forum_name').'</B></TD></TR>';
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3"><B>'. $farr[$i]->getName() .'</B></TD></TR>';
 				echo '
 					<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
 					<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
 					<INPUT TYPE="HIDDEN" NAME="change_status" VALUE="y">
-					<INPUT TYPE="HIDDEN" NAME="group_forum_id" VALUE="'.db_result($result,$i,'group_forum_id').'">
+					<INPUT TYPE="HIDDEN" NAME="group_forum_id" VALUE="'. $farr[$i]->getID() .'">
 					<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+					<TD>
 						<FONT SIZE="-1">
-                                                <B>Allow Anonymous Posts?</B><BR>
-                                                <INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="1"'.((db_result($result,$i,'allow_anonymous')=='1')?' CHECKED':'').'> Yes<BR>
-                                                <INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="0"'.((db_result($result,$i,'allow_anonymous')=='0')?' CHECKED':'').'> No<BR>
+						<B>Allow Anonymous Posts?</B><BR>
+						<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="1"'.(($farr[$i]->AllowAnonymous() == 1)?' CHECKED':'').'> Yes<BR>
+						<INPUT TYPE="RADIO" NAME="allow_anonymous" VALUE="0"'.(($farr[$i]->AllowAnonymous() == 0)?' CHECKED':'').'> No<BR>
 						</FONT>
 					</TD>
 					<TD>
 						<FONT SIZE="-1">
 						<B>Is Public?</B><BR>
-						<INPUT TYPE="RADIO" NAME="is_public" VALUE="1"'.((db_result($result,$i,'is_public')=='1')?' CHECKED':'').'> Yes<BR>
-						<INPUT TYPE="RADIO" NAME="is_public" VALUE="0"'.((db_result($result,$i,'is_public')=='0')?' CHECKED':'').'> No<BR>
-						<INPUT TYPE="RADIO" NAME="is_public" VALUE="9"'.((db_result($result,$i,'is_public')=='9')?' CHECKED':'').'> Deleted<BR>
+						<INPUT TYPE="RADIO" NAME="is_public" VALUE="1"'.(($farr[$i]->isPublic() == 1)?' CHECKED':'').'> Yes<BR>
+						<INPUT TYPE="RADIO" NAME="is_public" VALUE="0"'.(($farr[$i]->isPublic() == 0)?' CHECKED':'').'> No<BR>
+						<INPUT TYPE="RADIO" NAME="is_public" VALUE="9"'.(($farr[$i]->isPublic() == 9)?' CHECKED':'').'> Deleted<BR>
 					</TD><TD>
 						<FONT SIZE="-1">
 						<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Update Info">
 					</TD></TR>
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>
 						<B>Forum Name:</B><BR>
-						<INPUT TYPE="TEXT" NAME="forum_name" VALUE="'. db_result($result,$i,'forum_name').'" SIZE="20" MAXLENGTH="30">
+						<INPUT TYPE="TEXT" NAME="forum_name" VALUE="'. $farr[$i]->getName() .'" SIZE="20" MAXLENGTH="30">
 					</TD><TD COLSPAN="2">
 						<B>Email All Posts To:</B><BR>
-                                                <INPUT TYPE="TEXT" NAME="send_all_posts_to" VALUE="'. db_result($result,$i,'send_all_posts_to').'" SIZE="30" MAXLENGTH="50">
+						<INPUT TYPE="TEXT" NAME="send_all_posts_to" VALUE="'. $farr[$i]->getSendAllPostsTo() .'" SIZE="30" MAXLENGTH="50">
 					</TD></TR>
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="3">
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3">
 						<B>Description:</B><BR>
-						<INPUT TYPE="TEXT" NAME="description" VALUE="'. db_result($result,$i,'description') .'" SIZE="40" MAXLENGTH="80"><BR>
+						<INPUT TYPE="TEXT" NAME="description" VALUE="'. $farr[$i]->getDescription() .'" SIZE="40" MAXLENGTH="80"><BR>
 					</TD></TR></FORM>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 
 		forum_footer(array());

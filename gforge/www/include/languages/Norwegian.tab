@@ -2,7 +2,7 @@
 #  *
 #  * Norwegian message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -58,7 +58,7 @@ group	short_summary	Overblikk
 group	short_support	Brukerst&oslash;tte
 group	short_survey	Sp&oslash;rreunders&oslash;kelser
 home	highest_ranked_users	H&oslash;yest rangerte brukere
-home	about_blurb	  SourceForge er en <B>fri tjeneste som tilbys utviklere av <A href="http://www.opensource.org">Open Source</A>-programvare</B>. Her f&aring;r du enkel tilgang til det beste innen CVS, epostlister, feilkontroll, meldingsforum, prosjektstyring, webhosting, filarkiver, backup-l&oslash;sninger og web-basert administrering. <BR> &nbsp; <P> <B>Tilbakemelding og deltakelse</B> <P> For &aring; f&aring; mest igjen fra Sourceforge m&aring; du <A href="/account/register.php">registrere deg som bruker hos oss</A>. Da kan du ta del i alt vi kan tilby. Du kan selvsagt bla deg gjennom sidene uten &aring; v&aelig;re registrert, men du vil ikke kunne delta p&aring; linje med registrerte brukere. <P> &nbsp; <BR> <B>Sett opp dine egne prosjekter</B> <P> <A href="/account/register.php">Registrer deg som bruker</A>, then <A HREF="/account/login.php">Login</A> til slutt, <A HREF="/register/">Registrer ditt eget prosjekt.</A> <P> Takk... og velkommen som bruker
+home	about_blurb	  GForge er en <B>fri tjeneste som tilbys utviklere av <A href="http://www.opensource.org">Open Source</A>-programvare</B>. Her f&aring;r du enkel tilgang til det beste innen CVS, epostlister, feilkontroll, meldingsforum, prosjektstyring, webhosting, filarkiver, backup-l&oslash;sninger og web-basert administrering. <BR> &nbsp; <P> <B>Tilbakemelding og deltakelse</B> <P> For &aring; f&aring; mest igjen fra Sourceforge m&aring; du <A href="/account/register.php">registrere deg som bruker hos oss</A>. Da kan du ta del i alt vi kan tilby. Du kan selvsagt bla deg gjennom sidene uten &aring; v&aelig;re registrert, men du vil ikke kunne delta p&aring; linje med registrerte brukere. <P> &nbsp; <BR> <B>Sett opp dine egne prosjekter</B> <P> <A href="/account/register.php">Registrer deg som bruker</A>, then <A HREF="/account/login.php">Login</A> til slutt, <A HREF="/register/">Registrer ditt eget prosjekt.</A> <P> Takk... og velkommen som bruker
 frs	latest_file_releases	Nyeste filutgivelser
 menu	login	Logg inn via SSL
 menu	logout	Logg av
@@ -75,7 +75,7 @@ menu	project_summary	Prosjektoversikt
 group	public_area	Fellesområde
 menu	search	S&oslash;k
 menu	software_map	Programvareoversikt
-home	sourceforge_statistics	SourceForge statistikk
+home	sourceforge_statistics	GForge statistikk
 menu	top_projects	Topp-prosjekter
 home	top_project_downloads	Flest nedlastinger
 conf	content_encoding	iso-8859-1

@@ -16,8 +16,8 @@
  * @param		string	Error text
  */
 function exit_error($title,$text) {
-	GLOBAL $HTML;
-	$HTML->header(array('title'=>'Exiting with Error'));
+	GLOBAL $HTML,$group_id;
+	$HTML->header(array('title'=>'Exiting with Error','group'=>$group_id));
 	print '<H2><font color="#FF3333">'.$title.'</font></H2><P>'.$text;
 	$HTML->footer(array());
 	exit;

@@ -1,11 +1,11 @@
 SOURCEFORGE_DOMAINS = users.{domain_name}:{lists_host}
 local_domains = localhost:SOURCEFORGE_DOMAINS
-hide pgsql_servers = "localhost/sourceforge/some_user/some_password"
+hide pgsql_servers = "localhost/gforge/some_user/some_password"
 
 #Mail director
 #------------
 
-forward_for_sourceforge:
+forward_for_gforge:
   domains = users.{domain_name}
   driver = aliasfile
   file_transport = address_file

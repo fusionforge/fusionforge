@@ -33,48 +33,29 @@ if($group_id) {
 			exit_missing_param();
 		}
 
-		if (!$upload_instead && !$data) {
+		if (!$uploaded_data) {
 			exit_missing_param();
 		}
 
-		if (!user_isloggedin()) {
+		if (!session_loggedin()) {
 			$user_id=100;
 		} else {
 			$user_id=user_getid();
 		}
 
-		if ($upload_instead) {
-			if (!util_check_fileupload($uploaded_data)) {
-				exit_error("Error","Invalid filename");
-			}
-		        $data = addslashes(fread( fopen($uploaded_data, 'r'), filesize($uploaded_data)));
-        		if ((strlen($data) > 20) && (strlen($data) < 512000)) {
-                		//size is fine
-                		$feedback .= ' Document Uploaded ';
-        		} else {
-                		//too big or small
-                		$feedback .= ' ERROR - document must be > 20 chars and < 512000 chars in length ';
-                		exit_error('Missing Info',$feedback.' - Please click back and fix the error.');
-        		}
+		if (!util_check_fileupload($uploaded_data)) {
+			exit_error("Error","Invalid filename");
 		}
-
+		$data = fread(fopen($uploaded_data, 'r'), filesize($uploaded_data));
 		
 		docman_header('Documentation - Add Information - Processing','Documentation - New submission','docman_new','',group_getname($group_id));
 
-		$query = "insert into doc_data(stateid,title,data,createdate,updatedate,created_by,doc_group,description,language_id) "
-		."values('3',"
-		// state = 3 == pending
-		."'".htmlspecialchars($title)."',"
-		."'".htmlspecialchars($data)."',"
-		."'".time()."',"
-		."'".time()."',"
-		."'".$user_id."',"
-		."'".$doc_group."',"			
-		."'".htmlspecialchars($description)."',"
-		."'".$language_id."')";
+		$query = "insert into doc_data(stateid,title,data,filename,filetype,createdate,
+			updatedate,created_by,doc_group,description,language_id) 
+		values('3','". htmlspecialchars($title). "','". base64_encode($data) ."','$uploaded_data_name','$uploaded_data_type','".time()."',
+		'".time()."', '$user_id', '$doc_group', '".htmlspecialchars($description)."', '$lang_id')";
 	
 		$res = db_query($query); 
-		//PROBLEM check the query
 
 		if (!$res || db_affected_rows($res)<1) {
 			print '<p><b><font color="red">Error adding new document: '.db_error().'</font></b></p>';
@@ -112,7 +93,7 @@ if($group_id) {
 			</tr>
 
 			<tr>
-			<th> <input type="checkbox" name="upload_instead" value="1"> <B>Upload Text File:</B></th>
+			<th><B>Upload File:</B></th>
 			<td> <input type="file" name="uploaded_data" size="30"></td>
 			</tr>
 
@@ -120,14 +101,9 @@ if($group_id) {
 			<th> Language:</th>
 			<td>';
 			
-			echo html_get_language_popup($Language,'language_id',1);
+			echo html_get_language_popup($Language,'lang_id',1);
 			
 			echo	'</td>
-			</tr>
-
-			<tr>
-			<th>OR Paste Document (in html format):</th>
-			<td><textarea cols="60" rows="10" name="data"></textarea></td>
 			</tr>
 
 			<tr>

@@ -1,0 +1,356 @@
+<?php
+/**
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+
+/*
+	Message Forums
+	By Tim Perdue, Sourceforge, 11/99
+
+	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
+
+	Complete OO rewrite by Tim Perdue 12/2002
+*/
+
+require_once('pre.php');
+require_once('www/news/news_utils.php');
+
+function forum_header($params) {
+	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f;
+
+	$params['group']=$group_id;
+	$params['toptab']='forums';
+
+	/*
+		bastardization for news
+
+		Show icon bar unless it's a news forum
+	*/
+	if ($group_id == $sys_news_group) {
+	  
+		//this is a news item, not a regular forum
+		if ($forum_id) {
+			/*
+				Show this news item at the top of the page
+			*/
+			$sql="SELECT * FROM news_bytes WHERE forum_id='$forum_id'";
+			$result=db_query($sql);
+
+
+			$HTML->header($params);
+			echo '
+				<H2>'.$GLOBALS['sys_name'].' <A HREF="/news/">'.$Language->getText('forum_utils','news').'</A></H2><P>';
+
+			echo '<TABLE><TR><TD VALIGN="TOP">';
+			if (!$result || db_numrows($result) < 1) {
+				echo '
+					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
+			} else {
+				echo '
+				<B>'.$Language->getText('forum_utils','postedby').':</B> '.user_getname( db_result($result,0,'submitted_by')).'<BR>
+				<B>'.$Language->getText('forum_utils','date').':</B> '. date($sys_datefmt,db_result($result,0,'date')).'<BR>
+				<B>'.$Language->getText('forum_utils','summary').':</B> <A HREF="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</A>
+				<P>
+				'. util_make_links( nl2br( db_result($result,0,'details')));
+
+				echo '<P>';
+			}
+			echo '</TD><TD VALIGN="TOP" WIDTH="35%">';
+			echo $HTML->boxTop($Language->getText('forum_utils','latest'));
+			echo news_show_latest($sys_news_group,5,false);
+			echo $HTML->boxBottom();
+			echo '</TD></TR></TABLE>';
+		} else {
+			site_project_header($params);
+		}
+	} else {
+		site_project_header($params);
+	}
+
+
+	/*
+		Show horizontal forum links
+	*/
+	if ($f && $forum_id) {
+		echo '<H3>'.$Language->getText('forum_utils','discussionforum').' <A HREF="/forum/forum.php?forum_id='.$forum_id.'">'.$f->getName().'</A></H3>';
+	}
+	echo '<P><B>';
+
+	if (session_loggedin() ) {
+		if ($f) {
+			if ($f->isMonitoring()) {
+				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&stop=1">' . 
+				html_image('ic/xmail16w.png','20','20',array()).' '.$Language->getText('forum_utils','stopmonitor').'</A> | ';
+			} else {
+				echo '<A HREF="/forum/monitor.php?forum_id='.$forum_id.'&group_id='.$group_id.'&start=1">' . 
+				html_image('ic/mail16w.png','20','20',array()).' '.$Language->getText('forum_utils','monitor').'</A> | ';
+			}
+			echo '<A HREF="/forum/save.php?forum_id='.$forum_id.'&group_id='.$group_id.'">' .
+			html_image('ic/save.png','24','24',array()) .' '.$Language->getText('forum_utils','saveplace').'</A> | ';
+		}
+	}
+
+	if ($f && $forum_id) {
+		echo '<A HREF="/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id.'">' .
+			html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
+			$Language->getText('forum_message','thread').'</A> | ';
+	}
+	echo '  <A HREF="/forum/admin/?group_id='.$group_id.'">'.$Language->getText('forum_utils','admin').'</A></B>';
+	echo '<P>';
+}
+
+function forum_footer($params) {
+	site_project_footer($params);
+}
+
+
+/**
+
+	Wrap many forum functions in this class
+
+**/
+class ForumHTML extends Error {
+	/**
+	 * The Forum object.
+	 *
+	 * @var  object  $Forum
+	 */
+	var $Forum;
+
+	function ForumHTML(&$Forum) {
+		$this->Error();
+		if (!$Forum || !is_object($Forum)) {
+			$this->setError('ForumMessage:: No Valid Forum Object');
+			return false;
+		}
+		if ($Forum->isError()) {
+			$this->setError('ForumMessage:: '.$Forum->getErrorMessage());
+			return false;
+		}
+		$this->Forum =& $Forum;
+		return true;
+	}
+
+	function showNestedMessage ( &$msg ) {
+		/*
+	
+		accepts a database result handle to display a single message
+		in the format appropriate for the nested messages
+
+		*/
+		global $sys_datefmt,$Language;
+		/*
+			See if this message is new or not
+			If so, highlite it in bold
+		*/
+		if ($this->Forum->getSavedDate() < $msg->getPostDate()) {
+			$bold_begin='<B>';
+			$bold_end='</B>';
+		}
+		$ret_val = '
+		<TABLE BORDER="0">
+			<TR>
+				<TD BGCOLOR="#DDDDDD" NOWRAP>'.$Language->getText('forum_utils','by').' <A HREF="/users/'.
+					$msg->getPosterName() .'/">'. 
+					$msg->getPosterName() .'</A>'.
+					' ( '. $msg->getPosterRealName() . ' ) '.
+					'<BR><A HREF="/forum/message.php?msg_id='.
+					$msg->getID() .'">'.
+					html_image('ic/msg.png',"10","12",array("BORDER"=>"0")) .
+					$bold_begin. $msg->getSubject() .' [ '.$Language->getText('forum_utils','reply').' ]'. $bold_end .'</A> &nbsp; '.
+					'<BR>'. date($sys_datefmt,$msg->getPostDate()) .'
+				</TD>   
+			</TR>
+			<TR>
+				<TD>
+					'. util_make_links( nl2br ( $msg->getBody() ) ) .'
+				</TD>
+			</TR>
+		</TABLE>';
+		return $ret_val;
+	}
+
+	function showNestedMessages ( &$msg_arr, $msg_id ) {
+		global $total_rows,$sys_datefmt;
+
+		$rows=count($msg_arr["$msg_id"]);
+		$ret_val='';
+
+		if ($msg_arr["$msg_id"] && $rows > 0) {
+			$ret_val .= '
+			<UL>';
+
+			/*
+
+			iterate and show the messages in this result
+
+			for each message, recurse to show any submessages
+
+			*/
+			for ($i=($rows-1); $i >= 0; $i--) {
+				//	  increment the global total count
+				$total_rows++;
+
+				//	  show the actual nested message
+				$ret_val .= $this->showNestedMessage ($msg_arr["$msg_id"][$i]).'<P>';
+
+				if ($msg_arr["$msg_id"][$i]->hasFollowups()) {
+					//	  Call yourself if there are followups
+					$ret_val .= $this->showNestedMessages ( $msg_arr,$msg_arr["$msg_id"][$i]->getID() );
+				}
+			}
+			$ret_val .= '
+			</UL>';
+		} else {
+			//$ret_val .= "<P><B>no messages actually follow up to $msg_id</B>";
+		}
+
+		return $ret_val;
+	}
+
+	function showSubmessages(&$msg_arr, $msg_id, $level) {
+		/*
+			Recursive. Selects this message's id in this thread, 
+			then checks if any messages are nested underneath it. 
+			If there are, it calls itself, incrementing $level
+			$level is used for indentation of the threads.
+		*/
+		global $total_rows,$sys_datefmt,$forum_id,$current_message;
+
+		$rows=count($msg_arr["$msg_id"]);
+//echo "<P>ShowSubmessages() $msg_id | $rows";
+		if ($rows > 0) {
+			for ($i=($rows-1); $i >= 0; $i--) {
+				/*
+					Is this row's background shaded or not?
+				*/
+				$total_rows++;
+
+				$ret_val .= '
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'><TD NOWRAP>';
+				/*
+					How far should it indent?
+				*/
+				for ($i2=0; $i2<$level; $i2++) {
+					$ret_val .= ' &nbsp; &nbsp; &nbsp; ';
+				}
+
+				/*
+					If it this is the message being displayed, don't show a link to it
+				*/
+				if ($current_message != $msg_arr["$msg_id"][$i]->getID()) {
+					$ah_begin='<A HREF="/forum/message.php?msg_id='. $msg_arr["$msg_id"][$i]->getID() .'">';
+					$ah_end='</A>';
+				} else {
+					$ah_begin='';
+					$ah_end='';
+				}
+
+				$ret_val .= $ah_begin .
+					html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
+				/*
+					See if this message is new or not
+				*/
+				if ($this->Forum->getSavedDate() < $msg_arr["$msg_id"][$i]->getPostDate()) { 
+					$bold_begin='<B>';
+					$bold_end='</B>';
+				} else {
+					$bold_begin='';
+					$bold_end='';
+				}
+
+				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</TD>'.
+					'<TD>'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</TD>'.
+					'<TD>'.date($sys_datefmt, $msg_arr["$msg_id"][$i]->getPostDate() ).'</TD></TR>';
+
+				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
+					/*
+						Call yourself, incrementing the level
+					*/
+					$ret_val .= $this->showSubmessages($msg_arr,$msg_arr["$msg_id"][$i]->getID(),($level+1));
+				}
+			}
+		}
+		return $ret_val;
+	}
+
+	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
+		global $REQUEST_URI,$Language;
+
+		if (session_loggedin() || $this->Forum->allowAnonymous()) {
+			if ($subject) {
+				//if this is a followup, put a RE: before it if needed
+				if (!eregi('RE:',$subject,$test)) {
+					$subject ='RE: '.$subject;
+				}
+			}
+
+			?>
+			<CENTER>
+			<FORM ACTION="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" METHOD="POST">
+			<INPUT TYPE="HIDDEN" NAME="post_message" VALUE="y">
+			<INPUT TYPE="HIDDEN" NAME="thread_id" VALUE="<?php echo $thread_id; ?>">
+			<INPUT TYPE="HIDDEN" NAME="msg_id" VALUE="<?php echo $is_followup_to; ?>">
+			<INPUT TYPE="HIDDEN" NAME="is_followup_to" VALUE="<?php echo $is_followup_to; ?>">
+			<TABLE>
+			<TR>
+			<TD><B><?php echo $Language->getText('forum_utils','subject'); ?></B><BR>
+				<INPUT TYPE="TEXT" NAME="subject" VALUE="<?php echo $subject; ?>" SIZE="45" MAXLENGTH="45">
+			</TD></TR>
+			<TR><TD><B><?php echo $Language->getText('forum_utils','message'); ?></B><BR>
+				<TEXTAREA NAME="body" VALUE="" ROWS="10" COLS="50" WRAP="SOFT"></TEXTAREA>
+			</TD></TR>
+			<TR><TD ALIGN="MIDDLE">
+				<B><FONT COLOR="RED"><?php echo $Language->getText('forum_utils','htmltag'); ?></FONT></B>
+				<P>
+			<?php 
+			if (!session_loggedin()) {
+				echo '<B><FONT COLOR="RED">'.$Language->getText('forum_utils','postanon').' <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</A></FONT></B>';
+			} 
+			?>
+			<BR>
+			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="<?php echo $Language->getText('forum_utils','postcomment'); echo ((!session_loggedin())?' '.$Language->getText('forum_utils','anonymously'):''); ?>">
+			</TD></TR></TABLE>
+			</FORM>
+			</CENTER>
+			<?php
+
+		} else {
+			echo "<CENTER>";
+			echo '<H3><FONT COLOR="RED">'.$Language->getText('forum_utils','couldpostif').' '.
+				'<A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">['.$Language->getText('forum_utils','loggedin').']</A></FONT></H3>';
+			echo "</CENTER>";
+		}
+
+	}
+
+}
+/*
+			$messagelink='http://'.$GLOBALS[sys_default_domain].'/forum/message.php?msg_id='.$msg_id;
+			$messagesender=db_result($result,0, 'user_name');
+			$messagebody=util_line_wrap(util_unconvert_htmlspecialchars(db_result($result,0, 'body')));
+			$messagesys=$GLOBALS['sys_name'];
+			$messagemonitor='http://'.$GLOBALS[sys_default_domain].'/forum/monitor.php?forum_id='.$forum_id;
+			$body = stripcslashes($Language->getText('forum_utils', 'mailmonitor', array($messagelink, $messagesender, $messagebody, $messagesys, $messagemonitor)));
+			/*
+			$body = "\nRead and respond to this message at: ".
+				"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$msg_id.
+				"\nBy: " . db_result($result,0, 'user_name') .
+				"\n\n" . util_line_wrap(util_unconvert_htmlspecialchars(db_result($result,0, 'body'))).
+				"\n\n______________________________________________________________________".
+				"\nYou are receiving this email because you elected to monitor this forum.".
+				"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
+				"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
+			* /
+
+			$subject="[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject'));
+			util_handle_message(array_unique($tolist),$subject,$body,$send_all_posts_to);
+*/
+
+?>

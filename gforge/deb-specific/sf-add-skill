@@ -12,7 +12,7 @@ use vars qw/@skills/ ;
 
 sub debug ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include all the predefined functions 
+require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functions 
 
 &db_connect ;
 

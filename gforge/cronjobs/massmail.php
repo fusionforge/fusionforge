@@ -74,7 +74,7 @@ if (!$mail_res) {
 	// Send reminder every second day at 11am
 	if (($hrs%24)==11 && (($hrs/24)%2)==1) {
 	        global $sys_default_domain;
-		util_send_mail(
+		util_send_message(
 			"admin@$sys_default_domain",
 			"ATT: Problems with massmail cron script",
 			"This is automatically generated message from\n"

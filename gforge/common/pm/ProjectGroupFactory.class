@@ -1,0 +1,97 @@
+<?php
+/**
+ * GForge Project Manager Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+require_once('common/include/Error.class');
+require_once('common/forum/ProjectGroup.class');
+
+class ProjectGroupFactory extends Error {
+
+	/**
+	 * The Group object
+	 *
+	 * @var	 object  $Group
+	 */
+	var $Group;
+
+	/**
+	 * The projectGroups array.
+	 *
+	 * @var	 array	projectGroups
+	 */
+	var $projectGroups;
+
+	/**
+	 *  Constructor.
+	 *
+	 *	@param	object	The Group object to which this forum is associated
+	 */
+	function ProjectGroupFactory(&$Group) {
+		$this->Error();
+		if (!$Group || !is_object($Group)) {
+			$this->setError('ProjectGroup:: No Valid Group Object');
+			return false;
+		}
+		if ($Group->isError()) {
+			$this->setError('ProjectGroup:: '.$Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $Group;
+
+		return true;
+	}
+
+	/**
+	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *
+	 *	@return the Group object
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+
+	function &getProjectGroups() {
+		if ($this->projectGroups) {
+			return $this->projectGroups;
+		}
+		if (session_loggedin()) {
+			$perm =& $this->Group->getPermission( session_get_user() );
+			if (!$perm || !is_object($perm) || !$perm->isMember()) {
+				$public_flag='=1';
+			} else {
+				$public_flag='<3';
+			}
+		} else {
+			$public_flag='=1';
+		}
+
+		$sql="SELECT *
+			FROM project_group_list
+			WHERE group_id='". $this->Group->getID() ."' 
+			AND is_public $public_flag 
+			ORDER BY group_project_id;";
+
+		$result = db_query ($sql);
+
+		$rows = db_numrows($result);
+
+		if (!$result || $rows < 1) {
+			$this->setError('No ProjectGroups Found '.db_error());
+			return false;
+		} else {
+			while ($arr = db_fetch_array($result)) {
+				$this->projectGroups[] = new ProjectGroup($this->Group, $arr['group_project_id'], $arr);
+			}
+		}
+		return $this->projectGroups;
+	}
+
+}
+
+?>

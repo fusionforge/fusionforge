@@ -1,6 +1,5 @@
 <?php
 /**
-  *
   * SourceForge login page
   *
   * This is main SF login page. It takes care of different account states
@@ -12,7 +11,6 @@
   * http://sourceforge.net
   *
   * @version   $Id$
-  *
   */
 
 Header( "Expires: Wed, 11 Nov 1998 11:11:11 GMT"); 
@@ -20,8 +18,6 @@ Header( "Cache-Control: no-cache");
 Header( "Cache-Control: must-revalidate"); 
 
 require_once('pre.php');
-
-$CACHE_TIME = -1;
 
 /*
 
@@ -40,25 +36,11 @@ if ($login) {
 		/*
 			You can now optionally stay in SSL mode
 		*/
-		if ($stay_in_ssl) {
-			$ssl_='s';
-		} else {
-			$ssl_='';
-		}
 		if ($return_to) {
-
-			// check for external redirection 
-			//
-			if (substr($return_to, 0, 4) == "http") {
-				header ("Location: " . $return_to);
-				exit;
-			} else {
-				header ("Location: http".$ssl_."://". $HTTP_HOST . $return_to);
-				exit;
-			}
-
+			header ("Location: " . $return_to);
+			exit;
 		} else {
-			header ("Location: http".$ssl_."://". $HTTP_HOST ."/my/");
+			header ("Location: /my/");
 			exit;
 		}
 	}
@@ -70,7 +52,7 @@ if ($session_hash) {
 }
 
 //echo "\n\n$session_hash";
-//echo "\n\nlogged in: ".user_isloggedin();
+//echo "\n\nlogged in: ".session_loggedin();
 
 $HTML->header(array('title'=>'Login','pagename'=>'account_login'));
 
@@ -90,21 +72,12 @@ if ($login && !$success) {
 
 }
 
-if (browser_is_windows() && browser_is_ie() && browser_get_version() < '5.6') {
-	echo $Language->getText('account_login', 'iewarn');
-}
-
-if (browser_is_ie() && browser_is_mac()) {
-	echo $Language->getText('account_login', 'macwarn');
-}
-
-
 ?>
 	
 <p>
 <font color="red"><B><?php echo $Language->getText('account_login', 'cookiewarn'); ?></B></font>
 <P>
-<form action="https://<?php echo $HTTP_HOST; ?>/account/login.php" method="post">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<?php echo $return_to; ?>">
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>
@@ -113,8 +86,7 @@ if (browser_is_ie() && browser_is_mac()) {
 <?php echo $Language->getText('account_login', 'passwd'); ?>
 <br><input type="password" name="form_pw">
 <P>
-<INPUT TYPE="CHECKBOX" NAME="stay_in_ssl" VALUE="1" <?php echo ((browser_is_ie() && browser_get_version() < '5.5')?'':'CHECKED') ?>> <?php echo $Language->getText('account_login', 'usessl'); ?>
-<?php echo $Language->getText('account_login', 'sslnotice'); ?>
+</FONT></B>
 <input type="submit" name="login" value="<?php echo $Language->getText('account_login', 'login'); ?>">
 </form>
 <P>

@@ -21,23 +21,24 @@ require_once('pre.php');
 $HTML->header(array('title'=>'Top Project Listings'));
 ?>
 
-<P><B>Top <?php echo $GLOBALS['sys_name']; ?> Projects</B></P>
+<P><B>Top GForge Projects</B></P>
 
-<P>
-<?php echo $Language->getText('top','about_blurb', $GLOBALS[sys_name]); ?>
+<P>We track many project usage statistics on GForge, and display here
+the top ranked projects in several categories.
 
 <UL>
-<LI><A href="mostactive.php?type=week"><?php echo $Language->getText('top','active_weekly'); ?></A>
-<LI><A href="mostactive.php"><?php echo $Language->getText('top','active_all_time'); ?></A>
+<LI><A href="mostactive.php?type=week">Most Active This Week</A>
+<LI><A href="mostactive.php">Most Active All Time</A>
 <BR>&nbsp;
-<LI><A href="toplist.php?type=downloads"><?php echo $Language->getText('top','downloads'); ?></A>
-<LI><A href="toplist.php?type=downloads_week"><?php echo $Language->getText('top','downloads_7_days'); ?></A>
+<LI><A href="toplist.php?type=downloads">Top Downloads</A>
+<LI><A href="toplist.php?type=downloads_week">Top Downloads (Past 7 Days)</A>
 <BR>&nbsp;
-<LI><A href="toplist.php?type=pageviews_proj"><?php echo $Language->getText('top','pageviews', $GLOBALS[sys_name]); ?>
+<LI><A href="toplist.php?type=pageviews_proj">Top Project Pageviews</A> -
+Measured by impressions of the GForge 'button' logo
 <BR>&nbsp;
-<LI><A href="toplist.php?type=forumposts_week"><?php echo $Language->getText('top','forum_posts'); ?></A>
+<LI><A href="toplist.php?type=forumposts_week">Top Forum Post Counts</A>
 <BR>&nbsp;
-<LI><A href="topusers.php"><?php echo $Language->getText('top','highest_ranked_users'); ?></A>
+<LI><A href="topusers.php">Highest Ranked Users</A>
 </UL>
 
 <?php

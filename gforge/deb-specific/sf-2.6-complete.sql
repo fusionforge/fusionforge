@@ -3915,7 +3915,7 @@ COPY "user_ratings"  FROM stdin;
 
 
 COPY "users"  FROM stdin;
-100	None	noreply@sourceforge.net	*********34343		A	/bin/bash		N	0	shell	0	\N	0	0	\N	\N	0		GMT	1	0
+100	None	noreply@gforge.net	*********34343		A	/bin/bash		N	0	shell	0	\N	0	0	\N	\N	0		GMT	1	0
 \.
 --
 -- Data for TOC Entry ID 549 (OID 22336)

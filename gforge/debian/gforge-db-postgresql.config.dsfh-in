@@ -1,0 +1,24 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:get-pw-from-debconf#
+#DSFHELPER:create-random-pw#
+#DSFHELPER:common-variables#
+#DSFHELPER:dbhost-variables#
+#DSFHELPER:dbpasswd-variables#
+
+db_input low gforge/shared/admin_login || true
+get_pw gforge/shared/admin_password critical
+
+#DSFHELPER:host-variables#
+#DSFHELPER:cvshost-variables#
+#DSFHELPER:shellhost-variables#
+#DSFHELPER:users-variables#
+#DSFHELPER:lists-variables#
+#DSFHELPER:downloadhost-variables#
+
+db_input low gforge/shared/skill_list || true
+
+db_go || true

@@ -14,9 +14,6 @@
 
 require_once('pre.php');    // Initial db and session library, opens session
 
-$CACHE_ON=0;
-$CACHE_TIME=-1;
-
 $HTML->header(array('title'=>"Requested Page not Found (Error 404)"));
 
 if (session_issecure()) {
@@ -25,15 +22,13 @@ if (session_issecure()) {
 	echo "<a href=\"http://$GLOBALS[sys_default_domain]\">";
 }
 
-echo "<CENTER><H1>PAGE NOT FOUND</H1></CENTER>";
+echo "<CENTER><H1>PAGE NOT FOUND</H1>";
 
 echo "<P>";
 
-$HTML->box1_top('Search');
-menu_show_search_box();
-$HTML->box1_bottom();
+echo $HTML->searchBox();
 
-echo "<P>";
+echo "<P></CENTER>";
 
 $HTML->footer(array());
 

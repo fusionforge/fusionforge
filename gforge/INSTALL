@@ -1,14 +1,130 @@
-#
-# SourceForge: Breaking Down the Barriers to Open Source Development
-# Copyright 1999-2001 (c) VA Linux Systems
-# http://sourceforge.net
-#
-# $Id$
-#
+Installation of GForge has been made much easier than the old SF2.x codebase.
+A great deal of unnecessary code and scalability hacks have been removed to 
+make the installation and use of GForge practical for just about any 
+Linux admin.
 
-To get help setting up your copy of SourceForge, visit the "SF Offsite
-Talk" discussion boards at:
+Even at that, it could be a daunting process for the uninitiated. If you need 
+professional help installing GForge, visit:
 
-http://sourceforge.net/forum/forum.php?forum_id=21304
+http://perdue.net/
 
-                    - The SourceForge Crew <staff@sourceforge.net>
+
+BASICS OF INSTALLATION
+----------------------
+
+You will need: 
+	PostgreSQL 7.1 or higher ( http://postgresql.org/ )
+	PHP 4.x or higher ( http://www.php.net/ )
+	Apache 1.2x or higher ( http://www.apache.org/ )
+
+	Optional Mailing list support:
+	GNU MailMan ( http://www.gnu.org/software/mailman/ )
+	Python ( http://www.python.org/ )
+
+	Optional Jabber Support:
+	Jabberd ( http://jabberd.jabberstudio.org/ )
+
+Compile and install PostgreSQL, then PHP/Apache as per the instructions. PHP should 
+be compiled into Apache, as well as compiled as a separate CGI. When compiling PHP, 
+don't forget the --with-pgsql option for PostgreSQL support
+
+Install Python and MailMan as per the instructions.
+
+
+Database Setup
+--------------
+
+Create a blank database for postgres
+
+# createdb alexandria
+
+Be certain that plpgsql.so is present in your Postgres library path
+
+Import the database schema
+
+# psql alexandria < db/gforge3.sql
+
+WEB SETUP
+---------
+
+Move the GForge tarball into position and make the www/ directory 
+the "Document Root".
+
+Apache's http.conf file should have these values:
+
+ErrorDocument 404 /404.php
+php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
+<Location /projects>
+  ForceType application/x-httpd-php
+</Location>
+<Location /users>
+  ForceType application/x-httpd-php
+</Location>
+
+PHP setup
+---------
+
+Your php.ini file should have "register_globals=on", as well 
+as file uploads.
+
+You may also add the include_path to the php.ini, as it will be 
+necessary for your php cgi to run the cron jobs.
+
+It is also recommended, for fastest possible performance, that you 
+use a php caching accelerator, such as the Ion Cube Accelerator.
+http://www.php-accelerator.co.uk/
+
+In addition, in your php.ini file, you may wish to set 
+output_handler = ob_gzhandler 
+
+FRS - File Release System
+-------------------------
+
+FRS has been radically simplified. Simply create a directory and 
+make it owned by the webserver-user. Usually "chown -R nobody:nobody mydir" 
+will do the trick.
+
+This directory will be referenced in the SF Config File as $sys_upload_dir
+
+SF Config File
+--------------
+
+In the GForge distribution, you will find etc/local.inc. Move it to /etc/gforge/local.inc 
+and edit all of the settings.
+
+Giving the first user "Site Admin" privileges. Register a new user, and confirm 
+it via the email link. Then enter the postgres command line and issue these 
+commands:
+
+insert into user_group (user_id,group_id) values (*****YOUR NEW ID*****,1);
+update user_group set admin_flags='A' where group_id=1 
+	AND user_id='*****YOUR NEW ID*****';
+
+/etc/aliases - add this line and run "newaliases"
+noreply:        /dev/null
+
+PEER RATINGS
+------------
+
+Add yourself, and any others you wish, to the "Peer Ratings" project, which 
+should be at /projects/peerrating/ on the website. Make yourself an "admin" 
+of the project, and then proceed to "rate" other users on the website.
+
+Members of the "Peer Ratings" project, who are "admins" of the project 
+become the first trusted users. This is the only way to prime the pump 
+for the peer ratings system.
+
+CRON JOBS
+---------
+
+Cron jobs are in the cronjobs/ directory and the README file contains a 
+sample crontab. This gives you the basic cronjobs for updating certain 
+statistics and data on the site.
+
+More advanced cron jobs are being re-written to create the user email 
+aliases, mailing lists, Unix groups/passwords, etc. Many of these 
+scripts are available in the util/ directory, although they will not 
+yet run without some polishing. If you polish up and make all these 
+scripts work, please submit them back for inclusion at 
+
+http://gforge.org/

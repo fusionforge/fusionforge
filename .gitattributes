@@ -1,14 +1,9 @@
 * text=auto !eol
 gforge/backend/shell/apache.sh svneol=native#unset
-gforge/docs/architecture/sf2.sda svneol=native#unset
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
-gforge/docs/architecture/tour/img0.jpg svneol=native#unset
-gforge/docs/architecture/tour/img1.jpg svneol=native#unset
-gforge/docs/architecture/tour/img2.jpg svneol=native#unset
 gforge/docs/images/sflogo2-105a.png -text
-gforge/docs/project_management/source_branching.sda svneol=native#unset
-gforge/www/forum/forum-er-diagram.sda svneol=native#unset
 gforge/www/images/favicon.ico svneol=native#unset
+gforge/www/images/gforge.jpg svneol=native#unset
 gforge/www/images/ic/caret.png -text
 gforge/www/images/ic/cfolder15.png -text
 gforge/www/images/ic/check.png -text
@@ -20,6 +15,7 @@ gforge/www/images/ic/home16b.png -text
 gforge/www/images/ic/index.png -text
 gforge/www/images/ic/mail16b.png -text
 gforge/www/images/ic/mail16d.png -text
+gforge/www/images/ic/mail16w.png -text
 gforge/www/images/ic/manual16c.png -text
 gforge/www/images/ic/notes16.png -text
 gforge/www/images/ic/ofolder15.png -text
@@ -30,19 +26,7 @@ gforge/www/images/ic/survey16b.png -text
 gforge/www/images/ic/taskman16b.png -text
 gforge/www/images/ic/trash-x.png -text
 gforge/www/images/ic/trash.png -text
-gforge/www/images/mail16d.png svneol=native#unset
-gforge/www/images/manual16c.png svneol=native#unset
-gforge/www/images/osdn_logo_grey.png svneol=native#unset
-gforge/www/images/others/gnome1.png svneol=native#unset
-gforge/www/images/others/kde-logotp3.png svneol=native#unset
-gforge/www/images/others/suse_g_sm.png svneol=native#unset
-gforge/www/images/rateit.png svneol=native#unset
-gforge/www/images/sflogo-88-1.png svneol=native#unset
-gforge/www/images/sflogo2-105a.png svneol=native#unset
-gforge/www/images/sflogo2-steel.png svneol=native#unset
-gforge/www/images/steel3.jpg svneol=native#unset
-gforge/www/images/va-btn-small-light.png svneol=native#unset
-gforge/www/images/valogo3.png svneol=native#unset
+gforge/www/images/ic/xmail16w.png -text
 gforge/www/include/group-model-er-diagram.sda svneol=native#unset
 gforge/www/people/people-er-diagram.sda svneol=native#unset
 gforge/www/pm/pm-er-diagram.sda svneol=native#unset
@@ -60,4 +44,9 @@ gforge/www/themes/forged/images/tbar1.png svneol=native#unset
 gforge/www/themes/forged/images/tleft1.png svneol=native#unset
 gforge/www/themes/forged/images/tright1.png svneol=native#unset
 gforge/www/themes/forged/images/valogo5.jpg svneol=native#unset
-gforge/www/tracker/tracker-er-diagram.sda svneol=native#unset
+gforge/www/themes/gforge/images/ic/mail16w.png -text
+gforge/www/themes/gforge/images/ic/write16w.png -text
+gforge/www/themes/gforge/images/ic/xmail16w.png -text
+gforge/www/themes/gforge/images/logo.png -text
+gforge/www/themes/gforge/images/t.png -text
+gforge/www/themes/gforge/images/t2.png -text

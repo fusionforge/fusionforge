@@ -2,7 +2,7 @@
 #  *
 #  * Default message catalog (English)
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -12,11 +12,8 @@
 system	locale	en_US
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	Y-m-d H:i
-about	about_blurb	<h2>About Sourceforge</h2>This site runs Debian Sourceforge, a derivative of the code that runs the <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  The information present on this page is only authoritative for Debian Sourceforge, please refer to <a href="http://www.sourceforge.net/">Sourceforge.net</a> for information on their code.<br><br><b>People</b><br>The Sourceforge <a href="staff.php">staff</a> has worked hard to make Sourceforge a reality, here's your chance to meet the people behind the site.<br><br><b>Thanks</b><br>We owe a lot of thanks to the people that wrote the software that runs Sourceforge.  We'd also like to give <a href="thanks.php">Kudos</a> to the following people and organizations for helping make Sourceforge happen.<br><br><b>More Information</b><br>If you have further questions, please contact the <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">Debian Sourceforge users mailing-list</a>.  You might also have a look at the <a href="http://savannah.gnu.org/projects/debian-sf/">project page</a> for Debian Sourceforge on Savannah (another Sourceforge derivative, run and hosted by the GNU project and the FSF).<br><br><b>Copyrights</b><br>The code behind Sourceforge was originally written by folks at VA Linux Systems (now called "VA Software") and released under the GNU General Public License.  It is thus mostly copyrighted by them.<br>The code behind this site, on the other hand, is Debian Sourceforge, a derivative of the original Sourceforge code, adapted for Debian systems.  The "visible" changes are mostly fixes for bugs and typos, but much work has also been done to provide a package: Debian Sourceforge is easy to setup and run, you only need a system running Debian.  Debian Sourceforge has been done by Christian Bayle and Roland Mas, with contributions from various people.<br><br><br><b>Trademarks and suchlikes</b><br>VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.  Linux is a registered trademark of Linus Torvalds.  All other trademarks and copyrights on this page are property of their respective owners.  Content owned by VA Linux Systems is copyright 1999-2001 VA Linux Systems, Inc.  All rights reserved.<br><br>
-about_foundries	about_blurb	SourceForge Foundries serve as places for developers to congregate, share expertise and news, get and give advice, and generally help each other develop  better software faster (this is Open Source, after all).<br>&nbsp;<br>If you're interested in volunteering to help support or start a foundry, or have suggestions, ideas, or gripes please <a href="/contact.php" >contact SourceForge</a>.
-about_foundries	foundries_list	Here is a list of all foundries on the system.  Some are more complete than others.  If you see a foundry you may want to contribute to, contact the existing foundry admins for that foundry.
 account	title	Account Preferences
-account_change_email	message	You have requested a change of email address on $1.\nPlease visit the following URL to complete the email change:\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
+account_change_email	message	You have requested a change of email address on $1.\nPlease visit the following URL to complete the email change:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- the $1 staff
 account_change_email	section	Account Preferences
 account_change_email	subject	$1 Verification
 account_change_email	title	Change Email Address
@@ -42,7 +39,7 @@ account_login	sslnotice	<p><B><FONT COLOR="RED">You will be connected with an SS
 account_login	login	Login with SSL
 account_login	lostpw	[Lost your password?]
 account_login	newaccount	[New Account]
-account_lostpw	message	Someone (presumably you) on the $3 site requested a\npassword change through email verification. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the $3 staff\n
+account_lostpw	message	Someone (presumably you) on the $3 site requested a\npassword change through email verification. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- the $3 staff\n
 account_lostpw	subject	$1 Verification
 account_lostpw	title	Lost Your Password?
 account_lostpw	notify	<P>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password. <P><A href="/">[ Home ]</A>
@@ -69,6 +66,8 @@ account_register	realname	Full/Real Name *:
 account_register	language	Language Choice:
 account_register	timezone	Timezone:
 account_register	emailaddr	Email Address *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
+account_register	jabberaddr	Jabber Address:
+account_register	jabberonly	Send auto-generated notices only to my Jabber address
 account_register	siteupdate	Receive Email about Site Updates <I>(Very low traffic and includes security notices. Highly Recommended.)</I>
 account_register	communitymail	Receive additional community mailings. <I>(Low traffic.)</I>
 account_register	mandatory	Fields marked with * are mandatory.
@@ -80,16 +79,20 @@ account_register	err_passwd2	Passwords do not match
 account_register	err_passwd3	Invalid Password:
 account_register	err_unixname	Invalid Unix Name. 
 account_register	err_email	Invalid Email Address
+account_register	err_jabber	Invalid Jabber Address
 account_register	err_userexist	That username already exists.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
 account_register	err_badinsert	Insert Failed 
-account_register	message_header	SourceForge Account Registration
-account_register	message_body	Thank you for registering on the SourceForge web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
-account_unsubscribe	all_mailings	all SourceForge mailings and notifications
-account_unsubscribe	site_mailings	SourceForge site mailings
-account_verify	title	SourceForge Account Verification
+account_register	message_header	$1 Account Registration
+account_register	partecipate_peer_ratings	Participate in peer ratings. <I>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your $1 user page </a> if you have chosen to partecipate in ratings).
+account_register	remember_me	"Remember me". <I>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</I>
+account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to a bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
+account_register	update	Update
+account_register	reset	Reset Changes
+account_unsubscribe	all_mailings	all GForge mailings and notifications
+account_unsubscribe	site_mailings	GForge site mailings
+account_verify	title	GForge Account Verification
 account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>
-account_verify	loginname	Login Name:
 account_verify	password	Password:
 account_verify	login		Login
 account_verify	missingparam	Missing paramater
@@ -104,12 +107,25 @@ account_verify	accessdenied	Access denied
 account_verify	invalidcred	Credentials you entered do not correspond to valid account.
 account_verify	cannotactivate	Could not activate account
 account_verify	erroractivate	Error while activiting account
+account_options	title		Account Maintenance
+account_options	welcome		Welcome
+account_options	member_since	Member since
+account_options	view_developer_profile	View My Developer Profile
+account_options	edit_skills_profile	Edit My Skills Profile
+account_options	user_id	User Id
+account_options	login_name	Login Name
+account_options	change_password	Change Password
+account_options	real_name	Real Name
+account_options	language	Language
+account_options	timezone	Timezone
+account_options	email_address		Email Addr:
+account_options	change_email_address	Change Email Addr
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
-contact	about_blurb	<p>This is the contact page for <b>SourceForge.net</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: sourceforge.net/projects/&lt;project name&gt; and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the SourceForge <A href="staff.php">staff</a>, please take care in using the appropriate means:</p><ul><li>To Request support for your project or account, visit the <a href="/support/?func=addsupport&group_id=1">SourceForge Support Manager</a></li><li>If you've found a bug in SourceForge, please use the <a href="/bugs/?func=addbug&group_id=1">SourceForge Bug Tracker</a></li><li>All press inquiries should be directed to <a href="mailto:eureka@valinux.com">Eureka Endo</a>, Press Relations Manager, VA Linux Systems.</li></ul>
-contact	title	Contact SourceForge
+contact	about_blurb	<p>This is the contact page for <b>GForge.net</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: sourceforge.net/projects/&lt;project name&gt; and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the GForge <A href="staff.php">staff</a>, please take care in using the appropriate means:</p><ul><li>To Request support for your project or account, visit the <a href="/support/?func=addsupport&group_id=1">GForge Support Manager</a></li><li>If you've found a bug in GForge, please use the <a href="/bugs/?func=addbug&group_id=1">GForge Bug Tracker</a></li><li>All press inquiries should be directed to <a href="mailto:eureka@valinux.com">Eureka Endo</a>, Press Relations Manager, VA Linux Systems.</li></ul>
+contact	title	Contact GForge
 cvs	section	Project: $1
 cvs	title	CVS
 cvs	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
@@ -164,12 +180,13 @@ forum_forum	lastpost	Last Post
 forum_message	section	Forums
 forum_message	title	View Message
 forum_message	msg	Post A Message To This Thread:
-forum_message	thread	Start a New Thread:
+forum_message	thread	Start New Thread
 forum_utils	news	News
 forum_utils	discussionforum	Discussion Forums:
 forum_utils	nonewsitem	Error - this news item was not found
 forum_utils	latest	Latest News
 forum_utils	monitor	Monitor Forum
+forum_utils	stopmonitor	Stop Monitoring
 forum_utils	admin	Admin
 forum_utils	saveplace	Save Place
 forum_utils	erroradd	Error Adding Forum
@@ -224,8 +241,8 @@ frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
 general	return	[Return to $1]
-general	sitename	Sourceforge
-general	footer	This is Debian SourceForge.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
+general	sitename	GForge
+general	footer	This is Debian GForge.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
 general	permdenied	Permission Denied.
 general	permnotget	Could not get permission
 general	permexcuse	This project's administrator will have to grant you permission to view this page.
@@ -272,10 +289,10 @@ home	about_blurb	$1 is a <B>free service to <A href="http://www.opensource.org">
 home	breaking_down_barriers	Breaking Down the Barriers to Open Source Development
 home	highest_ranked_users	Highest Ranked Users
 home	most_active_this_week	Most Active This Week
-home	sfos	SourceForge OnSite
+home	sfos	GForge OnSite
 home	sourceforge_statistics	$1 Statistics
 home	top_project_downloads	Top Project Downloads
-mail	provided_by	<P>Mailing lists provided via a SourceForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
+mail	provided_by	<P>Mailing lists provided via a GForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
 mail	section	Project: $1
 mail	title	Mailing Lists
 mail_admin	section	Mailing Lists
@@ -285,7 +302,7 @@ mail_admin_add_list	title	Add List
 mail_admin_change_status	section	Mailing List Admin
 mail_admin_change_status	title	Admin / Update Lists
 menu	about_foundries	About Foundries
-menu	about_sourceforge	About SourceForge
+menu	about_sourceforge	About GForge
 menu	account_maintenance	Account Maintenance
 menu	bookmark_page	Bookmark Page
 menu	change_my_theme	Change My Theme
@@ -305,7 +322,7 @@ menu	new_releases	New Releases
 menu	new_user	New User via SSL
 menu	other_site_mirrors	Other Site Mirrors
 menu	project_admin	Project Admin
-menu	project_help_wanted	Project Help Wanted
+menu	project_help_wanted	Project&nbsp;Openings
 menu	project_summary	Project Summary
 menu	search	Search
 menu	site_status	Site Status
@@ -313,6 +330,11 @@ menu	software_map	Software Map
 menu	top_projects	Top Projects
 menu	admin	Admin
 menu	submit	Submit
+menu	home	Home
+menu	projectree	Project&nbsp;Tree
+menu	mypage	My&nbsp;Page
+menu	code_snippet	Code&nbsp;Snippets
+menu	admin	Admin
 my	about_blurb	Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.
 my	no_bookmarks	You currently do not have any bookmarks saved
 my	no_monitored_filemodules	<H3>You are not monitoring any files</H3><P>If you monitor files, you will be sent new release notices via email, with a link to the new file on our download server.<P>You can monitor files by visiting a project's &quot;Summary Page&quot; and clicking on the check box in the files section.<BR>&nbsp
@@ -328,8 +350,18 @@ my	monitoredforum	Monitored Forums
 my	monitoredfile	Monitored FileModules
 my	tasks	My Tasks
 my	survey	Quick Survey
+my	survey_taken	You have taken your Developer Survey
 my	bookmarks	My Bookmarks
 my	projects	My Projects
+my	pending_projects	Pending Projects
+my	pending_projects_1	There is one pending project awaiting review
+my	pending_projects_2	There are $1 pending projects awaiting review.
+my	pending_projects_3	Click here.
+my	pending_news_bytes	Pending News Bytes
+my	pending_news_bytes_1	There is one pending project awaiting review
+my	pending_news_bytes_2	There are $1 news bytes awaiting review
+my	pending_news_bytes_3	Click here.
+
 my_bookmark_add	section	My Personal Page
 my_bookmark_add	title	Add Bookmark
 my_bookmark_delete	section	My Personal Page
@@ -366,7 +398,6 @@ news_utils	nonews	No News Items Found
 news_utils	archive	News archive
 news_utils	submit	Submit News
 news_utils	readmore	<NOBR>Read More/Comment</NOBR>
-partners	about_blurb	<P>SourceForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
 people	about_blurb	<P>The $1 Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
 people	section	Project Help Wanted
 people	title	Projects Needing Help
@@ -474,8 +505,9 @@ snippet_package	title	Create Snippet Package
 snippet_submit	section	Code Snippet Library
 snippet_submit	title	Submit Snippet
 softwaremap	title	Trove
-staff	about_blurb	<P><h2>SourceForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">SourceForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for SourceForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on SourceForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the SourceForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for SourceForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the SourceForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
+staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 survey	title	Surveys For $1
+survey 	survey_not_found	Survey not found
 survey_admin	section	Survey Tool
 survey_admin	title	Administration
 survey_admin_add_question	section	Survey Tool Administration
@@ -500,7 +532,6 @@ survey_survey	section	Survey Tool
 survey_survey	title	Display Survey
 survey_survey_resp	section	Survey Tool
 survey_survey_resp	title	Survey Processing / Response
-thanks	about_blurb	<P><h2>SourceForge Acknowledgements</h2>The Developers of SourceForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Account Preferences
 themes	title	View/Change Theme
 top	about_blurb	We track many project usage statistics on $1, and display here the top ranked projects in several categories.
@@ -553,12 +584,12 @@ users	peerinfo2	The Peer rating box shows all rating averages (and response leve
 users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.
 trove	not_categorized	This project has not yet categorized itself in the
 trove	title	Trove Software Map
-classgroup	acceptedproject	Your project registration for SourceForge has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in SourceForge while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit SourceForge and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on SourceForge which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about SourceForge. Let us know\nif there is anything we can do to help you.\n\n-- the SourceForge crew
-classgroup	rejectedproject	Your project registration for SourceForge has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
-classgroup	newprojectnotification	New SourceForge Project Submitted\n\nProject Full Name:  $1\nSubmitted Description: $2\nLicense: $3\n\nPlease visit the following URL to approve or reject this project:\nhttp://$4/admin/approve-pending.php
-classgroup	acceptedprojecttitle	SourceForge Project Approved
-classgroup	rejectedprojecttitle	SourceForge Project Denied
-classgroup	newprojectnotificationtitle	New SourceForge Project Submitted
+classgroup	acceptedproject	Your project registration for GForge has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in GForge while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit GForge and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on GForge which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about GForge. Let us know\nif there is anything we can do to help you.\n\n-- the GForge crew
+classgroup	rejectedproject	Your project registration for GForge has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
+classgroup	newprojectnotification	New GForge Project Submitted\n\nProject Full Name:  $1\nSubmitted Description: $2\nLicense: $3\n\nPlease visit the following URL to approve or reject this project:\nhttp://$4/admin/approve-pending.php
+classgroup	acceptedprojecttitle	GForge Project Approved
+classgroup	rejectedprojecttitle	GForge Project Denied
+classgroup	newprojectnotificationtitle	New GForge Project Submitted
 session	missingpasswd	Missing Password Or Users Name
 session	invalidpasswd	Invalid Password Or User Name
 session	suspended	Account Suspended
@@ -575,3 +606,4 @@ common_include_account	illegal	Illegal character in name.
 common_include_account	cvsreserved	Name is reserved for CVS.
 common_include_account	dnsreserved	Name is reserved for DNS purposes.
 common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.
+survey title Developer Survey

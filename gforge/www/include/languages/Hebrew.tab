@@ -2,7 +2,7 @@
 #  *
 #  * Hebrew message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -57,7 +57,7 @@ group	short_summary	םיטרפ
 group	short_support	הכימת
 group	short_survey	תוריקס
 home	highest_ranked_users	םיליעפ יכה םישמתשמה
-home	about_blurb	  <P ALIGN="right"> <BR>.ישפוח רוקמ דוק יחתפמל תורש אוה SourceForge <BR> ,םימורופ ,םיגאב רחא בקעמ ,רוויד תומישר ,CVS ל הטושפו הבוט השיג םיקפסמ ונחנא <BR>.בווהמ לוהינל השיגו ,םיאלמ םייוביג ,עובק םיצבק רגאמ ,םירתא תנסחא ,תומישמ ילהנמ <BR> </P>  &nbsp; <P ALIGN="RIGHT"> <B>תופתתשהו בושמ</B> <P ALIGN="RIGHT"> ךרתצת התא SourceForge מ רתויב בוטה תא לבקל ליבשב <BR>.םיעיצמ ונחנאש המ לכל האלמ השיג ךל איבי הז <A href="/account/register.php">.רתאב שמתשמכ םשרהל</A> <BR>.האלמ השיג ךל היהת אל לבא ,םשריהל ילב רתאב שולגל ןבומכ לוכי התא  <P ALIGN="RIGHT" >  &nbsp; <BR> <B>ךלש טקיורפה תא םושר</B> <P ALIGN="RIGHT"> <A HREF="/register/">.ךלש טקיורפה תא םושר</A> ףוסבלו  ,<A HREF="/account/login.php">סנכת</A> זאו <A href="/account/register.php">רתאב שמתשימכ םשרה</A> <BR> <P ALIGN="RIGHT"> .רתאה ךתייהשמ הנהתו ..הדות </P> 
+home	about_blurb	  <P ALIGN="right"> <BR>.ישפוח רוקמ דוק יחתפמל תורש אוה GForge <BR> ,םימורופ ,םיגאב רחא בקעמ ,רוויד תומישר ,CVS ל הטושפו הבוט השיג םיקפסמ ונחנא <BR>.בווהמ לוהינל השיגו ,םיאלמ םייוביג ,עובק םיצבק רגאמ ,םירתא תנסחא ,תומישמ ילהנמ <BR> </P>  &nbsp; <P ALIGN="RIGHT"> <B>תופתתשהו בושמ</B> <P ALIGN="RIGHT"> ךרתצת התא GForge מ רתויב בוטה תא לבקל ליבשב <BR>.םיעיצמ ונחנאש המ לכל האלמ השיג ךל איבי הז <A href="/account/register.php">.רתאב שמתשמכ םשרהל</A> <BR>.האלמ השיג ךל היהת אל לבא ,םשריהל ילב רתאב שולגל ןבומכ לוכי התא  <P ALIGN="RIGHT" >  &nbsp; <BR> <B>ךלש טקיורפה תא םושר</B> <P ALIGN="RIGHT"> <A HREF="/register/">.ךלש טקיורפה תא םושר</A> ףוסבלו  ,<A HREF="/account/login.php">סנכת</A> זאו <A href="/account/register.php">רתאב שמתשימכ םשרה</A> <BR> <P ALIGN="RIGHT"> .רתאה ךתייהשמ הנהתו ..הדות </P> 
 frs	latest_file_releases	תונורחא הנכות תואסרג
 menu	login	חטבואמ תרש ךרד הסינכ
 menu	logout	האיצי
@@ -71,7 +71,7 @@ menu	project_help_wanted	םיטקיורפל םישורד
 menu	project_summary	טקיורפ תוצמת
 menu	search	שופיח
 menu	software_map	תונכות תפמ
-home	sourceforge_statistics	SourceForge תוקיטסיטס
+home	sourceforge_statistics	GForge תוקיטסיטס
 home	top_project_downloads	םיליעפ יכה םיטקיורפה
 conf	content_encoding	iso-8859-8
 conf	default_font	xxzx-random-font\" size=\"1

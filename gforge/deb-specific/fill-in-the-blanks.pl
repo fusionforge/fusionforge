@@ -16,7 +16,7 @@ $ifile = shift @ARGV ;
 $ofile = shift @ARGV ;
 %hash = () ;
 
-open CONF, "/etc/sourceforge/sourceforge.conf" ;
+open CONF, "/etc/gforge/gforge.conf" ;
 while ($line = <CONF>) {
     chomp $line ;
     next if $line =~ m/^\s*#/ ;

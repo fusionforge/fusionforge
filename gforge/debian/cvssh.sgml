@@ -10,7 +10,7 @@
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
   <!ENTITY dhemail     "<email>bayle@aist.enst.fr</email>">
   <!ENTITY dhusername  "Christian Bayle">
-  <!ENTITY dhucpackage "<refentrytitle>Sourceforge</refentrytitle>">
+  <!ENTITY dhucpackage "<refentrytitle>GForge</refentrytitle>">
   <!ENTITY dhpackage   "cvssh">
 
   <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
@@ -40,7 +40,7 @@
   <refnamediv>
     <refname>&dhpackage;</refname>
 
-    <refpurpose>CVS shell for Sourceforge / General execution wRAPper LITE!
+    <refpurpose>CVS shell for GForge / General execution wRAPper LITE!
     </refpurpose>
   </refnamediv>
 
@@ -109,7 +109,7 @@
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>Sourceforge package documentation.</para>
+    <para>GForge package documentation.</para>
   </refsect1>
   <refsect1>
     <title>AUTHOR</title>

@@ -12,15 +12,17 @@
   */
 
 require_once('www/include/pre.php');    // Initial db and session library, opens session
-require_once('www/include/cache.php');
-require_once('www/forum/forum_utils.php');
+require_once('www/news/news_utils.php');
+require_once('common/forum/Forum.class');
 require_once('www/include/features_boxes.php');
 
 $HTML->header(array('title'=>'Welcome','pagename'=>'home'));
 
 // Main page content is now themeable;
 // Default is index_std.php;
-include ($HTML->rootindex);
+include ( $HTML->getRootIndex() );
+
+include ('index_std.php');
 
 $HTML->footer(array());
 

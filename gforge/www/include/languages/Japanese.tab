@@ -2,7 +2,7 @@
 #  *
 #  * Japanese message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -19,7 +19,7 @@
 #	* Update
 #
 about_foundries	about_blurb	ファンドリーについて
-menu	about_sourceforge	SourceForgeについて
+menu	about_sourceforge	GForgeについて
 menu	account_maintenance	アカウント管理
 menu	bookmark_page	ブックマーク
 home	breaking_down_barriers	Breaking Down the Barriers to Open Source Development
@@ -62,7 +62,7 @@ group	short_summary	サマリ
 group	short_support	サポート
 group	short_survey	調査
 home	highest_ranked_users	ユーザ別ランキング
-home	about_blurb	 SourceForgeとは<a href="http://www.opensource.org/">オープンソース</A>開 発者にCVS、メーリングリスト、バグ追跡、掲示板・フォーラム、タスク管理、 ホストホスティング、永久的なファイルの保管、完全なバックアップさらにWebベース の総合的な管理への容易で最高な利用を提供する無料のサービスです。 <BR> &nbsp; <P> <B>サイトへの意見と参加</B> <P> SourceForgeを最大限活用するには<a href="http://sourceforge.net/account/register.php">ユーザ登録</a>する必 要があります。そうすることによりわれわれが提供するすべてのサービスに参加 することができます。もちろん登録しなくともサイトを閲覧することはできます が、利用に制限があります。 <P> &nbsp; <BR> <B>自分のプロジェクトを作る</B> <P> まず<a href="http://sourceforge.net/account/register.php">ユーザ登録 </a>し、<a href="http://sourceforge.net/account/login.php">ログイン </a>します。そして<a href="http://sourceforge.net/register/">プロジェク トを登録</a>します。 <P> ありがとうございます。そしてこのサイトでぜひ楽しんでください。
+home	about_blurb	 GForgeとは<a href="http://www.opensource.org/">オープンソース</A>開 発者にCVS、メーリングリスト、バグ追跡、掲示板・フォーラム、タスク管理、 ホストホスティング、永久的なファイルの保管、完全なバックアップさらにWebベース の総合的な管理への容易で最高な利用を提供する無料のサービスです。 <BR> &nbsp; <P> <B>サイトへの意見と参加</B> <P> GForgeを最大限活用するには<a href="http://sourceforge.net/account/register.php">ユーザ登録</a>する必 要があります。そうすることによりわれわれが提供するすべてのサービスに参加 することができます。もちろん登録しなくともサイトを閲覧することはできます が、利用に制限があります。 <P> &nbsp; <BR> <B>自分のプロジェクトを作る</B> <P> まず<a href="http://sourceforge.net/account/register.php">ユーザ登録 </a>し、<a href="http://sourceforge.net/account/login.php">ログイン </a>します。そして<a href="http://sourceforge.net/register/">プロジェク トを登録</a>します。 <P> ありがとうございます。そしてこのサイトでぜひ楽しんでください。
 frs	latest_file_releases	最新の File リリース
 menu	login	SSL経由でログイン
 menu	logout	ログアウト
@@ -79,7 +79,7 @@ menu	project_summary	プロジェクトサマリ
 group	public_area	公開エリア
 menu	search	検索
 menu	software_map	ソフトウェアマップ
-home	sourceforge_statistics	SourceForge統計
+home	sourceforge_statistics	GForge統計
 menu	top_projects	トッププロジェクト
 home	top_project_downloads	プロジェクトダウンロード数
 conf	content_encoding	EUC-JP

@@ -1,13 +1,94 @@
-sourceforge (2.6-0+14+) experimental; urgency=low
+gforge (3.0-0+7+) experimental; urgency=low
+
+  * [Christian] Reintroduce the possibility to define default home page in
+    Themes
+  * [Christian] Added subMenu in Layout 
+  * [Roland] Merged in everything that was done on the trunk since
+    Branch_gforge was started.  That includes the plugin subsystem.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 23 Dec 2002 12:58:56 +0100
+
+gforge (3.0-0+7) experimental; urgency=low
+
+  * [Christian] Added db upgrade 20021125-debian.sql
+  * [Christian] See upstream Changelog
+  * [Christian] Replacing html_get_alt_row_color with boxGetAltRowStyle
+  * [Christian] Removed obsolete html_get_alt_row_color function
+  * [Christian] FRS/QRS in gforge fashion
+  * [Christian] Added Peerating parameter management
+
+ -- Christian Bayle <bayle@debian.org>  Thu, 19 Dec 2002 00:27:27 +0100
+
+gforge (3.0-0+5) experimental; urgency=low
+
+  * [Christian] Merged mostly all change from gforge tree
+    now changing the package name
+  * [Christian] Applied Francisco Gimeno alias kikov supposed corrected patch
+  * [Christian] Big renaming from sourceforge to gforge
+  * [Christian] Added Jabber related French translation
+  * [Christian] Added Jabber stuffs in local.inc.template
+  * [Christian] Made sys_dbname sys_dbuser sys_dbhost debconf param
+  * [Christian] Added gforge-sourceforge-transition package for smooth upgrade
+  * [Christian] First pre-pre-realease
+
+ -- Christian Bayle <bayle@debian.org>  Wed, 11 Dec 2002 00:08:07 +0100
+
+sourceforge (2.6-0+17+gforge-1) experimental; urgency=low
+
+  * [Roland] Started the "gforge" branch, to temporarily host all the
+    changes made by Tim Perdue (a.k.a. Bigdisk) in his Gforge fork.
+    Hopefully, we'll eventually merge them into the trunk and drop that
+    branch, but since his changes seem to be rather large, we can't do
+    that instantly.
+
+ -- Roland Mas <roland.mas@free.fr>  Wed, 27 Nov 2002 22:42:02 +0100
+
+sourceforge (2.6-0+17+) experimental; urgency=low
+
+  * [Roland] Introducing the plugin subsystem: some infrastructure is now
+    in place to add plugins to Sourceforge.  Currently implemented: a
+    table containing a list of installed plugins, a table for a list of
+    "this group uses that plugin" relations, one for "this user uses that
+    plugin" relations, and a usesPlugin() method for the User and Group
+    classes (in PHP).
+  * [Roland] Also implemented: a PluginManager class, a Plugin class.
+  * [Roland] Also, a hook system.  Read README.Plugins for more info.
+  
+ -- Roland Mas <lolando@debian.org>  Sat, 14 Dec 2002 19:29:04 +0100
+
+sourceforge (2.6-0+17) experimental; urgency=low
+
+  * [Christian] repared broken delete function in new_parse.pl (again)
+  * [Christian] Fixed install-chroot.sh incomplete copy of libs for ldap
+  * [Roland] DSF-Helperised a bit of Debconf for sourceforge-dns-bind9
+    that had previously been forgotten.
+
+ -- Christian Bayle <bayle@debian.org>  Tue, 10 Dec 2002 23:03:18 +0100
+
+sourceforge (2.6-0+16) experimental; urgency=low
+
+  * [Christian] repared broken delete function in new_parse.pl
+  * [Christian] made that ssh_dump.pl don't try to create key files for
+    deleted user
+  * [Christian] Applied an repared Francisco Gimeno alias kikov task 
+    manager patch
+
+ -- Christian Bayle <bayle@debian.org>  Tue,  3 Dec 2002 10:11:31 +0100
+
+sourceforge (2.6-0+15) experimental; urgency=low
 
   * [Christian] Add the possibility to hide forum in news_show_latest
   * [Christian] Added the possibility of a language by theme customization
-  * [Christian] Included full Spanish translation from Vicente Ruiz.  Thanks
-    again
+    and updated README.Custom
+  * [Christian] Included full Spanish translation from Vicente Ruiz.
+    Thanks again
   * [Christian] Removed the unused categories column in
-    www/admin/grouplist.php 
+    www/admin/grouplist.php
+  * [Christian] Added stats_getprojects_active_public function in
+    www/include/features_boxes.php
+  * [Christian] Applied Francisco Gimeno patch as is 
 
- -- Christian Bayle <bayle@debian.org>  Tue, 26 Nov 2002 00:18:01 +0100
+ -- Christian Bayle <bayle@debian.org>  Wed, 27 Nov 2002 22:08:19 +0100
 
 sourceforge (2.6-0+14) experimental; urgency=low
 

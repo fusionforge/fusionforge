@@ -61,6 +61,33 @@ $threshhold='1.6';
 
 db_begin();
 
+db_query("DELETE FROM user_metric0");
+echo db_error();
+
+db_query("select setval('user_metric0_pk_seq',1)");
+echo db_error();
+
+db_query("INSERT INTO user_metric0 
+(user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
+SELECT user_id,5,1.25,3,0,0,1.25
+FROM user_group
+WHERE
+user_group.group_id='$sys_peer_rating_group'
+AND user_group.admin_flags='A';");
+
+echo db_error();
+
+db_query("UPDATE user_metric0 SET ranking=ranking-1");
+
+db_query("UPDATE user_metric0 SET
+metric=(log(times_ranked::float)*avg_rating::float)::float,
+percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float;");
+echo db_error();
+
+db_query("UPDATE user_metric0 SET
+importance_factor=(1+((percentile::float/100)*.5))::float;");
+echo db_error();
+
 for ($i=1; $i<9; $i++) {
 	// echo '<BR>Starting round: '.$i;
 
@@ -89,22 +116,13 @@ for ($i=1; $i<9; $i++) {
 		Now grab/average trusted ratings into this table
 	*/
 
-	if ($j) {
-	    $sql="INSERT INTO user_metric_tmp1_$i
-	    	SELECT user_ratings.user_id,count(*) AS count,
+    $sql="INSERT INTO user_metric_tmp1_$i
+	   	SELECT user_ratings.user_id,count(*) AS count,
 		avg(user_metric$j.importance_factor),
 		avg(user_ratings.rating),0
 		FROM user_ratings,user_metric$j
 		WHERE user_ratings.rated_by=user_metric$j.user_id
 		GROUP BY user_ratings.user_id";
-	} else {
-	    $sql="INSERT INTO user_metric_tmp1_$i
-		SELECT user_ratings.user_id,count(*) AS count,
-		1.6,
-		avg(user_ratings.rating),0
-		FROM user_ratings
-		GROUP BY user_ratings.user_id";
-	}
 
 	$res=db_query($sql);
 	if (!$res) {

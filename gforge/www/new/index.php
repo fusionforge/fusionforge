@@ -42,10 +42,6 @@ $query	= "SELECT groups.group_name,"
 	. "AND frs_release.released_by = users.user_id "
 	. "AND frs_package.group_id = frs_dlstats_grouptotal_agg.group_id "
 	. "AND frs_release.status_id=1 ) "
-//
-//appears that this group by is unnecessary in this query
-//	. "GROUP BY groups.group_name,groups.group_id,groups.unix_group_name,"
-//	."groups.short_description,users.user_name,users.user_id,frs_release.release_id "
 	. "ORDER BY frs_release.release_date DESC";
 $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 
@@ -79,7 +75,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 
 			print "<TR valign=top>";
 			print "<TD colspan=2>&nbsp;<BR>";
-			if ($row_new[short_description]) {
+			if ($row_new['short_description']) {
 				print "<I>$row_new[short_description]</I>";
 			} else {
 				print "<I>This project has not submitted a description.</I>";
@@ -97,7 +93,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			// link to whole file list for downloads
 			print "&nbsp;<BR><A href=\"/project/showfiles.php?group_id=$row_new[group_id]&release_id=$row_new[release_id]\">";
 			print "Download</A> ";
-			print '(Project Total: '.$row_new[downloads].') | ';
+			print '(Project Total: '.$row_new['downloads'].') | ';
 			// notes for this release
 			print "<A href=\"/project/shownotes.php?release_id=".$row_new[release_id]."\">";
 			print "Notes & Changes</A>";
@@ -111,7 +107,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
         if ($offset != 0) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
         	echo "<A HREF=\"/new/?offset=".($offset-20)."\"><B>" . 
-			html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+			html_image("t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
 			" Newer Releases</A></B></FONT>";
         } else {
         	echo "&nbsp;";
@@ -121,7 +117,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 	if (db_numrows($res_new)>$rows) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
 		echo "<A HREF=\"/new/?offset=".($offset+20)."\"><B>Older Releases " .
-		html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+		html_image("t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
 		"</A></B></FONT>";
 	} else {
 		echo "&nbsp;";

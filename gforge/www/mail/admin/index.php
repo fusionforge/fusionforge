@@ -174,11 +174,11 @@ if ($group_id && user_ismember($group_id,'A')) {
 			$title_arr[]='Update';
 			$title_arr[]='List Admin';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.db_result($result,$i,'list_name').'</TD>';
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.db_result($result,$i,'list_name').'</TD>';
 				echo '
 					<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
 					<INPUT TYPE="HIDDEN" NAME="post_changes" VALUE="y">
@@ -198,13 +198,15 @@ if ($group_id && user_ismember($group_id,'A')) {
 					<TD><A href="https://'. $GLOBALS['sys_lists_host'] .'/mailman/admin/'
 					.db_result($result,$i,'list_name').'">[Administrate this list in GNU Mailman]</A>
 				       </TD></TR>
-				       <TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="3">
+				       <TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3">
 				       		<B>Description:</B><BR>
 						<INPUT TYPE="TEXT" NAME="description" VALUE="'.
 						db_result($result,$i,'description') .'" SIZE="40" MAXLENGTH="80"><BR>
 					</TD></TR></FORM>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 
 		mail_footer(array());

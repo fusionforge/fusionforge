@@ -1,30 +1,24 @@
 <?php
-/**
-  *
-  * SourceForge Top-Statistics
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+//
+// SourceForge: Breaking Down the Barriers to Open Source Development
+// Copyright 1999-2000 (c) The SourceForge Crew
+// http://sourceforge.net
+//
+// $Id$
 
+require "pre.php";    
 
-require_once('pre.php');
-
-if ($GLOBALS[type] == 'downloads_week') {
+if ($type == 'downloads_week') {
 	$rankfield = 'downloads_week';
 	$title = 'Top Downloads in the Past 7 Days';
 	$column1 = 'Downloads';
 }
-else if ($GLOBALS[type] == 'pageviews_proj') {
+else if ($type == 'pageviews_proj') {
 	$rankfield = 'pageviews_proj';
 	$title = 'Top Weekly Project Pageviews at *.'.$GLOBALS['sys_default_domain'].' (from impressions of SF logo)';
 	$column1 = 'Pageviews';
 }
-else if ($GLOBALS[type] == 'forumposts_week') {
+else if ($type == 'forumposts_week') {
 	$rankfield = 'forumposts_week';
 	$title = 'Top Forum Post Counts';
 	$column1 = 'Posts';
@@ -37,21 +31,17 @@ else {
 }
 
 
-$HTML->header(array('title'=>$title,'pagename'=>'top_toplist'));
+$HTML->header(array('title'=>$title));
 
-print '
+print '<P><B><FONT size="+1">'.$title.'</FONT></B>
 <BR><I>(Updated Daily)</I>
 
 <P><A href="/top/">[View Other Top Categories]</A>
-
-<P><TABLE width="100%" cellpadding=0 cellspacing=0 border=0>
-<TR valign="top">
-<TD><B>Rank</B></TD>
-<TD><B>Project Name<BR>&nbsp;</B></TD>
-<TD align="right"><B>'.$column1.'</B></TD>
-<TD align="right"><B>Last Rank</B></TD>
-<TD align="right"><B>Change</B>&nbsp;&nbsp;&nbsp;</TD></TR>
 ';
+
+$arr=array('Rank','Project Name',"$column1",'Last Rank','Change');
+
+echo $HTML->listTableTop($arr);
 
 $res_top = db_query("SELECT groups.group_id,groups.group_name,groups.unix_group_name,top_group.$rankfield,".
 	"top_group.rank_$rankfield,top_group.rank_".$rankfield."_old ".
@@ -64,7 +54,7 @@ echo db_error();
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
-	print '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>&nbsp;&nbsp;'.$row_top["rank_$rankfield"]
+	print '<TR '. $HTML->boxGetAltRowStyle($i) .'><TD>&nbsp;&nbsp;'.$row_top["rank_$rankfield"]
 		.'</TD><TD><A href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
 		.stripslashes($row_top['group_name'])."</A>"
 		.'</TD><TD align="right">'.$row_top["$rankfield"]
@@ -91,7 +81,7 @@ while ($row_top = db_fetch_array($res_top)) {
 ';
 }
 
-print '</TABLE>';
+echo $HTML->listTableBottom();
 
 $HTML->footer(array());
 ?>

@@ -130,11 +130,12 @@ $title[]='Date';
 $title[]='Last user_id mailed';
 
 print '<a name="active">Active Deliveries:</a>';
-echo html_build_list_table_top($title);
+
+echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row = db_fetch_array($res)) {
 	echo '
-	<tr bgcolor="'.html_get_alt_row_color($i++).'">
+	<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 	<td>&nbsp;<a href="massmail-del.php?id='.$row['id'].'"></a></td>
 	<td>'.$row['id'].'</td>
 	<td>'.$row['type'].'</td>
@@ -145,7 +146,7 @@ while ($row = db_fetch_array($res)) {
 	';
 }
 
-echo '</table>';
+echo $GLOBALS['HTML']->listTableBottom();
 
 site_admin_footer(array());
 

@@ -80,7 +80,7 @@ function people_job_category_box($name='category_id',$checked='xyxy') {
 
 function people_add_to_skill_inventory($skill_id,$skill_level_id,$skill_year_id) {
 	global $feedback;
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_skill_inventory WHERE user_id='". user_getid() ."' AND skill_id='$skill_id'";
 		$result=db_query($sql);
@@ -117,7 +117,7 @@ function people_show_skill_inventory($user_id) {
 	$title_arr[]='Level';
 	$title_arr[]='Experience';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -127,15 +127,15 @@ function people_show_skill_inventory($user_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD>'.db_result($result,$i,'skill_name').'</TD>
 				<TD>'.db_result($result,$i,'level_name').'</TD>
 				<TD>'.db_result($result,$i,'year_name').'</TD></TR>';
 
 		}
 	}
-	echo '
-		</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
 }
 
 function people_edit_skill_inventory($user_id) {
@@ -149,7 +149,7 @@ function people_edit_skill_inventory($user_id) {
 	$title_arr[]='Experience';
 	$title_arr[]='Action';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -161,7 +161,7 @@ function people_edit_skill_inventory($user_id) {
 			echo '
 			<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
 			<INPUT TYPE="HIDDEN" NAME="skill_inventory_id" VALUE="'.db_result($result,$i,'skill_inventory_id').'">
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD><FONT SIZE="-1">'. people_get_skill_name(db_result($result,$i,'skill_id')) .'</TD>
 				<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</TD>
 				<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</TD>
@@ -177,21 +177,21 @@ function people_edit_skill_inventory($user_id) {
 	echo '
 	<TR><TD COLSPAN="4"><H3>Add A New Skill</H3></TD></TR>
 	<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
-	<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+	<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 		<TD><FONT SIZE="-1">'. people_skill_box('skill_id'). '</TD>
 		<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id'). '</TD>
 		<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id'). '</TD>
 		<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="add_to_skill_inventory" VALUE="Add Skill"></TD>
 	</TR></FORM>';
 
-	echo '
-		</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 
 function people_add_to_job_inventory($job_id,$skill_id,$skill_level_id,$skill_year_id) {
 	global $feedback;
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		//check if they've already added this skill
 		$sql="SELECT * FROM people_job_inventory WHERE job_id='$job_id' AND skill_id='$skill_id'";
 		$result=db_query($sql);
@@ -229,7 +229,7 @@ function people_show_job_inventory($job_id) {
 	$title_arr[]='Level';
 	$title_arr[]='Experience';
 			
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -239,15 +239,16 @@ function people_show_job_inventory($job_id) {
 	} else {
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD>'.db_result($result,$i,'skill_name').'</TD>
 				<TD>'.db_result($result,$i,'level_name').'</TD>
 				<TD>'.db_result($result,$i,'year_name').'</TD></TR>';
 
 		}
 	}
-	echo '
-		</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 function people_verify_job_group($job_id,$group_id) {
@@ -291,7 +292,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$title_arr[]='Experience';
 	$title_arr[]='Action';
 			
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -305,7 +306,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 			<INPUT TYPE="HIDDEN" NAME="job_inventory_id" VALUE="'. db_result($result,$i,'job_inventory_id') .'">
 			<INPUT TYPE="HIDDEN" NAME="job_id" VALUE="'. db_result($result,$i,'job_id') .'">
 			<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD><FONT SIZE="-1">'. people_get_skill_name(db_result($result,$i,'skill_id')) . '</TD>
 				<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id',db_result($result,$i,'skill_level_id')). '</TD>
 				<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id',db_result($result,$i,'skill_year_id')). '</TD>
@@ -323,15 +324,14 @@ function people_edit_job_inventory($job_id,$group_id) {
 	<FORM ACTION="'.$PHP_SELF.'" METHOD="POST">
 	<INPUT TYPE="HIDDEN" NAME="job_id" VALUE="'. $job_id .'">
 	<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-	<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+	<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 		<TD><FONT SIZE="-1">'. people_skill_box('skill_id'). '</TD>
 		<TD><FONT SIZE="-1">'. people_skill_level_box('skill_level_id'). '</TD>
 		<TD><FONT SIZE="-1">'. people_skill_year_box('skill_year_id'). '</TD>
 		<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="add_to_job_inventory" VALUE="Add Skill"></TD>
 	</TR></FORM>';
 
-	echo '
-		</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
 }
 
 function people_show_category_table() {
@@ -342,7 +342,7 @@ function people_show_category_table() {
 	$title_arr=array();
 	$title_arr[]='Category';
 
-	$return .= html_build_list_table_top ($title_arr);
+	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 /*
 	$sql="SELECT pjc.category_id, pjc.name, count(*) as total ". //, max(date) AS latest ".
@@ -365,12 +365,12 @@ function people_show_category_table() {
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo db_error();
-			$return .= '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/people/?category_id='. 
+			$return .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/people/?category_id='. 
 				db_result($result,$i,'category_id') .'">'. 
 				db_result($result,$i,'name') .'</A> ('. db_result($result,$i,'total') .')</TD></TR>';
 		}
 	}
-	$return .= '</TABLE>';
+	$return .= $GLOBALS['HTML']->listTableBottom();
 	return $return;
 }
 
@@ -412,16 +412,16 @@ function people_show_job_list($result) {
 	$title_arr[]='Date Opened';
 	$title_arr[]='SF Project';
 
-	$return .= html_build_list_table_top ($title_arr);
+	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if ($rows < 1) {
-		$return .= '<TR><TD COLSPAN="3"><H2>None Found</H2>'. db_error() .'</TD></TR>';
+		$return .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3"><H2>None Found</H2>'. db_error() .'</TD></TR>';
 	} else {
 		for ($i=0; $i < $rows; $i++) {	
 			$return .= '
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .
-					'"><TD><A HREF="/people/viewjob.php?group_id='. 
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .
+					'><TD><A HREF="/people/viewjob.php?group_id='. 
 					db_result($result,$i,'group_id') .'&job_id='. 
 					db_result($result,$i,'job_id') .'">'. 
 					db_result($result,$i,'title') .'</A></TD><TD>'. 
@@ -432,7 +432,7 @@ function people_show_job_list($result) {
 		}
 	}
 
-	$return .= '</TABLE>';
+	$return .= $GLOBALS['HTML']->listTableBottom();
 
 	return $return;
 }

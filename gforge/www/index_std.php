@@ -1,77 +1,45 @@
 <!-- whole page table -->
 <TABLE width=100% cellpadding=5 cellspacing=0 border=0>
 <TR><TD width="65%" VALIGN="TOP">
-
-	<hr width="100%" size="1" noshade>
-	<span class="slogan">
-	<div align="center">
-	<?php echo $Language->getText('home','breaking_down_barriers'); ?>
-	</div>
-	</span>
-        <hr width="100%" size="1" noshade>
-	&nbsp;<br>
 <P>
-<?php
- 
-/*
-
-       Temp way of getting
-
-       blurb before the content mgr is ready
-
-*/
-
-echo $Language->getText('home','about_blurb', $GLOBALS[sys_name]);
-echo '<P>';
-// echo $HTML->box1_top($Language->getText('menu','long_foundries'));
-?>
-
-<!--
-
-<br><b><?php echo $GLOBALS['sys_name']; ?> Development Foundries</b><br><br>
-<table bgcolor="White" border="0" cellpadding="0" cellspacing="0" valign="top" width="100%">
-<tr>
-	<td>Essentials:</td>
-</tr>
-<tr>
-	<td><font size="-1"><a href="/foundry/linuxkernel/">Linux Kernel</a>, <a href="/foundry/linuxdrivers/"><b>Linux Drivers</b></a></font></td>
-</tr>
-<tr>
-	<td>Hardware:</td>
-	<td>Programming:</td>
-</tr>
-<tr>
-	<td><font size="-1"><a href="/foundry/printing/">Printing</a>, <a href="/foundry/storage/">Storage</a></font></td>
-	<td><font size="-1"><a href="/foundry/java/">Java</a>, <a href="/foundry/perl-foundry/">Perl</a>, <a href="/foundry/php-foundry/">PHP</a>, <a href="/foundry/python-foundry/">Python</a>, <a href="/foundry/tcl-foundry/">Tcl/Tk</a>, <a href="/foundry/gnome-foundry/">GNOME</a></font></td>
-</tr>
-<tr>
-	<td>International:</td>
-	<td>Services:</td>
-</tr>
-<tr>
-	<td><font size="-1"><a href="/foundry/french/">French</a>, <a href="/foundry/spanish/">Espanol</a>, <a href="/foundry/japanese/">Japanese</a></font></td>
-	<td><font size="-1"><a href="/foundry/databases/">Database</a>, <a href="/foundry/web/">Web</a></font></td>
-</tr>
-<tr>
-	<td>Graphics:</td>
-	<td>Fun:</td>
-</tr>
-<tr>
-	<td><font size="-1"><a href="/foundry/vectorgraphics/">Vector Graphics</a>, <a href="/foundry/3d/">3D</a></font></td>
-	<td><font size="-1"><a href="/foundry/games/">Games</a></font></td>
-</tr>
-<tr>
-		<td>&nbsp;</td><td align="right"><font size="-1"><a href="about_foundries.php">[ More ]</a></font></td>
-</tr>
-</table>
-<br>
-
--->
+<H2>Welcome to the GForge 3.0 Project!</H2>
+<P>
+GForge is a fork of the 2.61 SourceForge code, which was only available via anonymous 
+CVS from VA (Research|Linux|Software).
+<P>
+GForge.org is <B>not</B> a project hosting platform, it is merely an implementation of
+the GForge code, which is available for public download on the right hand side of this
+page.
+<P>
+<A HREF="/tracker/?atid=101&group_id=5&func=browse"><IMG SRC="/images/gforge.jpg" WIDTH=450 HEIGHT=268 BORDER=0></A>
+<P>
+We believe that the GForge functionality is important not only to the Open Source 
+community, but to the wider business community. Since VA has not released the 
+source in over one year, despite their promises to the contrary,
+a fork was necessary to ensure a viable open source version of the codebase.
+<P>
+The GForge project was formed and is maintained by Tim Perdue,
+the original author of much of the original SourceForge web code.
+<P>
+Major changes are present in the current GForge 3.0 codebase
+<P>
+<UL>
+<LI><B>Jabber Support!</B> System events, such as bug submissions, are optionally sent 
+via jabber and email
+<LI><B>Radically easier to install!</B> By removing SF.net-specific code, like caching 
+and image servers, many install dependencies could be eliminated.
+<LI><B>New interface.</B> The interface should make it easier to navigate as well as know 
+your present location.
+<LI>Code cleanup. Since GForge does not need to scale to 500,000+ users, many 
+hacks and optimizations can be removed.
+<LI>Foundries and related nonsense have been removed.
+</UL>
+<P>
 
 <?php
-echo $HTML->box1_top($Language->getText('group','long_news'));
+echo $HTML->boxTop($Language->getText('group','long_news'));
 echo news_show_latest($sys_news_group,5,true,false,false,5);
-echo $HTML->box1_bottom();
+echo $HTML->boxBottom();
 ?>
 
 </TD>
@@ -79,10 +47,34 @@ echo $HTML->box1_bottom();
 <TD width="35%" VALIGN="TOP">
 
 <?php
-
-echo cache_display('show_features_boxes','show_features_boxes()',(24*3600));
-
+echo $HTML->boxTop('Getting GForge');
+?>
+<B>Download:</B><BR>
+<A HREF="/project/showfiles.php?group_id=1">GForge3.0pre7</A><BR>
+<A HREF="http://postgresql.org/">PostgreSQL</A><BR>
+<A HREF="http://www.php.net/">PHP 4.x</A><BR>
+<A HREF="http://www.apache.org/">Apache</A><BR>
+<A HREF="http://www.gnu.org/software/mailman/">Mailman *</A><BR>
+<A HREF="http://www.python.org/">Python *</A><BR>
+<A HREF="http://jabberd.jabberstudio.org/">Jabber Server *</A><BR>
+* optional
+<P>
+<A HREF="http://gforge.org/projects/gforge/"><B>GForge Project Page</B></A><BR>
+<A HREF="http://gforge.org/forum/forum.php?forum_id=6"><B>Help Board</B></A><BR>
+<A HREF="http://gforge.org/forum/forum.php?forum_id=5"><B>Developer Board</B></A><BR>
+<A HREF="http://gforge.org/forum/forum.php?forum_id=29"><B>Oracle Board</B></A><BR>
+<A HREF="http://gforge.org/tracker/?atid=105&group_id=1&func=browse"><B>Bug Tracker</B></A><BR>
+<A HREF="http://gforge.org/tracker/?func=browse&group_id=1&atid=106"><B>Patch Submissions</B></A>
+<P>
+<A HREF="http://www.debian.org/"><B>Debian Users</B></A> can simply add 
+"http://people.debian.org/~bayle/" to /etc/apt/sources.list and type 
+"apt-get install gforge" to 
+install a working GForge-3.0pre7 system, thanks to Christian Bayle and 
+the Debian-SF project.
+<P>
+<?php
+echo $HTML->boxBottom();
+echo show_features_boxes();
 ?>
 
-</TD></TR>
-</TABLE>
+</TD></TR></TABLE>

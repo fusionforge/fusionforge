@@ -1,0 +1,97 @@
+<?php
+/**
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+require_once('common/include/Error.class');
+require_once('common/forum/Forum.class');
+
+class ForumFactory extends Error {
+
+	/**
+	 * The Group object
+	 *
+	 * @var	 object  $Group
+	 */
+	var $Group;
+
+	/**
+	 * The forums array.
+	 *
+	 * @var	 array	forums
+	 */
+	var $forums;
+
+	/**
+	 *  Constructor.
+	 *
+	 *	@param	object	The Group object to which this forum is associated
+	 */
+	function ForumFactory(&$Group) {
+		$this->Error();
+		if (!$Group || !is_object($Group)) {
+			$this->setError('Forum:: No Valid Group Object');
+			return false;
+		}
+		if ($Group->isError()) {
+			$this->setError('Forum:: '.$Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $Group;
+
+		return true;
+	}
+
+	/**
+	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *
+	 *	@return the Group object
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+
+	function &getForums() {
+		if ($this->forums) {
+			return $this->forums;
+		}
+		if (session_loggedin()) {
+			$perm =& $this->Group->getPermission( session_get_user() );
+			if (!$perm || !is_object($perm) || !$perm->isMember()) {
+				$public_flag='=1';
+			} else {
+				$public_flag='<3';
+			}
+		} else {
+			$public_flag='=1';
+		}
+
+		$sql="SELECT *
+			FROM forum_group_list_vw
+			WHERE group_id='". $this->Group->getID() ."' 
+			AND is_public $public_flag 
+			ORDER BY group_forum_id;";
+
+		$result = db_query ($sql);
+
+		$rows = db_numrows($result);
+
+		if (!$result || $rows < 1) {
+			$this->setError('No Forums Found '.db_error());
+			return false;
+		} else {
+			while ($arr = db_fetch_array($result)) {
+				$this->forums[] = new Forum($this->Group, $arr['group_forum_id'], $arr);
+			}
+		}
+		return $this->forums;
+	}
+
+}
+
+?>

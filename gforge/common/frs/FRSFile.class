@@ -1,0 +1,308 @@
+<?php
+/**
+ * GForge File Release Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+require_once('common/include/Error.class');
+
+class FRSFile extends Error {
+
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var  array   $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The FRSRelease
+	 *
+	 * @var  object  FRSPacakge
+	 */
+	var $FRSRelease;
+
+	/**
+	 *  Constructor.
+	 *
+	 *  @param  object  The FRSRelease object to which this release is associated
+	 *  @param  int  The file_id
+	 *  @param  array   The associative array of data
+	 */
+	function FRSFile(&$FRSRelease, $file_id=false, $arr=false) {
+		$this->Error();
+		if (!$FRSRelease || !is_object($FRSRelease)) {
+			$this->setError('FRSFile:: No Valid FRSRelease Object');
+			return false;
+		}
+		if ($FRSRelease->isError()) {
+			$this->setError('FRSFile:: '.$FRSRelease->getErrorMessage());
+			return false;
+		}
+		$this->FRSRelease =& $FRSRelease;
+
+		if ($file_id) {
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($file_id)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				if ($this->data_array['release_id'] != $this->FRSRelease->getID()) {
+					$this->setError('FRSRelease_id in db result does not match FRSRelease Object');
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
+		if (strlen($name) < 3) {
+			$this->setError('FRSFile Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (!util_is_valid_filename($name)) {
+			$this->setError('FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2 '.$name);
+			return false;
+		}
+//
+//	Can't really use is_uploaded_file() or move_uploaded_file()
+//	since we want this to be generalized code
+//	This is potentially exploitable
+//
+		if (!is_file($file_location) || !file_exists($file_location)) {
+			$this->setError('FRSFile Appears to be invalid');
+			return false;
+		}
+
+		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		//
+		//	Filename must be unique in this project space
+		//
+		$resfile=db_query("SELECT frs_file.filename 
+			FROM frs_file,frs_release,frs_package
+			WHERE frs_file.release_id=frs_release.release_id 
+			AND frs_release.package_id=frs_package.package_id 
+			AND frs_file.filename='$name'
+			AND frs_package.group_id='".$this->FRSRelease->FRSPackage->Group->getId()."'");
+		if (!$resfile || db_numrows($resfile) > 0) {
+			$this->setError('That Filename already exists in this projectspace '.db_error());
+			return false;
+		}
+
+		$file_location=escapeshellcmd($file_location);
+		$newfilelocation = $GLOBALS['sys_upload_dir'].$this->FRSRelease->FRSPackage->Group->getUnixName().'/';
+
+		system("/bin/mkdir $newfilelocation");
+		system("/bin/mv $file_location $newfilelocation$name");
+		if (!file_exists("$newfilelocation$name")) {
+			echo $newfilelocation.$name;
+			$this->setError('File could not be moved to permanent location.');
+			return false;
+		}
+
+		if (!$release_time) {
+			$release_time=time();
+		}
+		$file_size=filesize("$newfilelocation$name");
+		$sql="INSERT INTO frs_file(release_id,filename,release_time,
+				type_id,processor_id,file_size,post_date)
+			VALUES ('".$this->FRSRelease->getId()."','$name','$release_time',
+				'$type_id','$processor_id','$file_size','".time()."')";
+
+		db_begin();
+		$result=db_query($sql);
+		if (!$result) {
+			db_rollback();
+			$this->setError('FRSFile::create() Error Adding Release: '.db_error());
+			return false;
+		}
+		$this->file_id=db_insertid($result,'frs_file','file_id');
+		if (!$this->fetchData($this->file_id)) {
+			return false;
+		} else {
+			db_commit();
+			return true;
+		}
+	}
+
+	/**
+	 *  fetchData() - re-fetch the data for this Package from the database
+	 *
+	 *  @param  int  The artifact type ID
+	 *  @return true/false
+	 */
+	function fetchData($file_id) {
+		$res=db_query("SELECT * FROM frs_file_vw
+			WHERE file_id='$file_id'
+			AND release_id='". $this->FRSRelease->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('FRSFile::fetchData()  Invalid file_id');
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *  getFRSRelease() - get the FRSRelease object this file is associated with
+	 *
+	 *  @return the FRSRelease object
+	 */
+	function &getFRSRelease() {
+		return $this->FRSRelease;
+	}
+
+	/**
+	 *  getID() - get this file_id
+	 *
+	 *  @return the id of this package
+	 */
+	function getID() {
+		return $this->data_array['file_id'];
+	}
+
+	/**
+	 *  getName - get the name of this package.
+	 *
+	 *  @return string  The name of this package.
+	 */
+	function getName() {
+		return $this->data_array['filename'];
+	}
+
+	/**
+	 *  getSize - get the size of this file.
+	 *
+	 *  @return int	The size.
+	 */
+	function getSize() {
+		return $this->data_array['size'];
+	}
+
+	/**
+	 *  getTypeID - the filetype id.
+	 *
+	 *  @return int the filetype id.
+	 */
+	function getTypeID() {
+		return $this->data_array['type_id'];
+	}
+
+	/**
+	 *  getTypeName - the filetype name.
+	 *
+	 *  @return string	The filetype name.
+	 */
+	function getFileType() {
+		return $this->data_array['filetype'];
+	}
+
+	/**
+	 *  getProcessorID - the processor id.
+	 *
+	 *  @return int the processor id.
+	 */
+	function getProcessorID() {
+		return $this->data_array['processor_id'];
+	}
+
+	/**
+	 *  getProcessor - the processor name.
+	 *
+	 *  @return string	The processor name.
+	 */
+	function getProcessor() {
+		return $this->data_array['processor'];
+	}
+
+	/**
+	 *  getDownloads - the number of downloads.
+	 *
+	 *  @return int  The number of downloads.
+	 */
+	function getDownloads() {
+		return $this->data_array['downloads'];
+	}
+
+	/**
+	 *  getReleaseTime - get the releasetime of this file.
+	 *
+	 *  @return int	The release time in unix time.
+	 */
+	function getReleaseTime() {
+		return $this->data_array['release_time'];
+	}
+
+	/**
+	 *  getPostDate - get the post time of this file.
+	 *
+	 *  @return int	The post time in unix time.
+	 */
+	function getPostDate() {
+		return $this->data_array['post_time'];
+	}
+
+	function delete() {
+		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$file=$GLOBALS['sys_upload_dir']. $this->FRSRelease->FRSPackage->Group->getUnixName() . '/' . $this->getName();
+		if (!unlink($file)) {
+			$this->setError("frsDeleteFile()::$file ".db_error());
+			return false;
+		} else {
+			$result = db_query("DELETE FROM frs_file WHERE file_id='".$this->getID()."'");
+			if (!$result || db_affected_rows($result) < 1) {
+				$this->setError("frsDeleteFile()::2 ".db_error());
+				return false;
+			} else {
+				return true;
+			}
+		}
+	}
+
+	function update($type_id,$processor_id,$release_time) {
+
+		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$res=db_query("UPDATE frs_file SET
+			type_id='$type_id',
+			processor_id='$processor_id',
+			release_time='$release_time'
+			WHERE release_id='".$this->FRSRelease->getID()."'
+			AND file_id='".$this->getID()."'");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('FRSFile::update() Error On Update: '.db_error());
+			return false;
+		}
+
+		return true;
+
+	}
+
+}
+
+?>

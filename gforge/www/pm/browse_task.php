@@ -21,7 +21,7 @@ if (!$offset || $offset < 0) {
 //
 $g =& group_get_object($group_id);
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	$u =& session_get_user();
 	$perm =& $g->getPermission($u);
 }
@@ -32,14 +32,14 @@ if (user_isloggedin()) {
 //
 if ($order) {
 	if ($order=='project_task_id' || $order=='percent_complete' || $order=='summary' || $order=='start_date' || $order=='end_date' || $order=='priority') {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$u->setPreference('pm_task_order', $order);
 		}
 	} else {
 		$order = false;
 	}
 } else {
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		$order = $u->getPreference('pm_task_order');
 	}
 }
@@ -57,7 +57,7 @@ if (!$set) {
 		if no set is passed in, see if a preference was set
 		if no preference or not logged in, use open set
 	*/
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		$custom_pref=$u->getPreference('pm_brow_cust'.$group_id);
 		if ($custom_pref) {
 			$pref_arr=explode('|',$custom_pref);
@@ -85,7 +85,7 @@ if ($set=='my') {
 		if this custom set is different than the stored one, reset preference
 	*/
 	$pref_=$_assigned_to.'|'.$_status;
-	if (user_isloggedin() && ($pref_ != $u->getPreference('pm_brow_cust'.$group_id))) {
+	if (session_loggedin() && ($pref_ != $u->getPreference('pm_brow_cust'.$group_id))) {
 		//echo 'setting pref';
 		$u->setPreference('pm_brow_cust'.$group_id,$pref_);
 	}
