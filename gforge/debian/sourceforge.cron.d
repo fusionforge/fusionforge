@@ -2,8 +2,6 @@
 # Regular cron jobs for the sourceforge package
 #
 
-web_only=true
-
 # Clean cached files older than 60 minutes
 25 * * * * root [ -d /var/cache/sourceforge ] && find /var/cache/sourceforge/ -type f -and -cmin +60 -exec /bin/rm -f "{}" \; &> /dev/null
 
@@ -39,16 +37,16 @@ web_only=true
 15 0 * * * sourceforge [ -x /usr/lib/sourceforge/bin/site_stats.php ] && /usr/lib/sourceforge/bin/site_stats.php -d include_path=/usr/lib/sourceforge/www/include &> /dev/null
 
 # DNS Update
-0 * * * * sourceforge [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/dns_conf.pl ] && /usr/lib/sourceforge/bin/dns_conf.pl && /etc/init.d/bind9 restart &>/dev/null
+0 * * * * sourceforge [ -x /usr/lib/sourceforge/bin/dns_conf.pl ] && /usr/lib/sourceforge/bin/dns_conf.pl && /etc/init.d/bind9 restart &>/dev/null
 
 # Mailing-list creation
-55 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl
+55 * * * * root [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl
 
 # FTP update
-0 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update
+0 * * * * root [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update
 
 # CVS tarballs
-5 2 * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/tarballs.sh ] && /usr/lib/sourceforge/bin/tarballs.sh
+5 2 * * * root [ -x /usr/lib/sourceforge/bin/tarballs.sh ] && /usr/lib/sourceforge/bin/tarballs.sh
 
 # CVS/user/group update
-0 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh
+0 * * * * root [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh
