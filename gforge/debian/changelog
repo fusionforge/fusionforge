@@ -1,8 +1,9 @@
 sourceforge (2.6-0+8+) unstable; urgency=low
 
   * Let's continue
+  * [Christian] Added dependancy on rcs for our patched cvsweb
 
- -- Christian Bayle <bayle@aist.enst.fr>  Mon, 11 Mar 2002 23:59:08 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Tue, 12 Mar 2002 07:34:03 +0100
 
 sourceforge (2.6-0+8) unstable; urgency=low
 
