@@ -98,7 +98,7 @@ if (!$group_id) {
 	print "\n</p>";
 
 	if ($user_name_search) {
-		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR realname ILIKE '".$user_name_search."%' OR realname ILIKE '".$user_name_search."%' ORDER BY user_name");
+		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR lastname ILIKE '".$user_name_search."%' ORDER BY lastname");
 	} else {
 		$sortorder = $_GET['sortorder'];
 		if (!isset($sortorder) || empty($sortorder)) {
