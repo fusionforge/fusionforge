@@ -3,8 +3,12 @@
 %define dbuser			gforge
 %define dbpassword		gforge
 
-%{!?hostname:%define hostname localhost}
-%{!?sitename:%define sitename MyGForge}
+%if %{?hostname:0}%{!?hostname:1}
+	%define hostname localhost
+%endif
+%if %{?sitename:0}%{!?sitename:1}
+	%define sitename MyGForge
+%endif
 
 %define httpduser		apache
 %define gfuser			gforge
