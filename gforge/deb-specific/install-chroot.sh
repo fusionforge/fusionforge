@@ -70,8 +70,10 @@ group:          files
 shadow:         files
 FIN
 		# Copy miscellaneous files
-		find /etc/ssh | cpio --quiet -pdumLB $target
-		cp /etc/pam.d/ssh $target/etc/pam.d
+		[ -d /etc/ssh ] && find /etc/ssh | cpio --quiet -pdumLB $target
+		[ -d /etc/ssh-nonfree ] && find /etc/ssh-nonfree | cpio --quiet -pdumLB $target
+		[ -f /etc/pam.d/ssh ] && cp /etc/pam.d/ssh $target/etc/pam.d
+		[ -f /etc/pam.d/ssh-nonfree ] && cp /etc/pam.d/ssh-nonfree $target/etc/pam.d
 		cp /etc/pam.d/login $target/etc/pam.d
 		cp /etc/pam.d/su $target/etc/pam.d
 		cp /lib/libpam* $target/lib
