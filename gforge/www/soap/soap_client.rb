@@ -20,7 +20,7 @@ func = ARGV.shift
 
 if (func == "add") 
  sessionKey = soapClient.login("tom", "tomtom") 
- soapClient.bugAdd(sessionKey, "othello", "a summary", "a comment")
+ puts soapClient.bugAdd(sessionKey, "othello", "a summary #{Time.now}", "a comment #{Time.now}")
  soapClient.logout(sessionKey) 
 elsif (func == "update") 
  sessionKey = soapClient.login("tom", "tomtom") 
