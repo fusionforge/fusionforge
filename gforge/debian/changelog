@@ -1,8 +1,8 @@
-gforge (3.0-8+) unstable; urgency=low
+gforge (3.0-8+1) unstable; urgency=low
 
-  * 
+  * CVS snapshot.
 
- -- Roland Mas <lolando@debian.org>  Mon,  6 Oct 2003 16:45:17 +0200
+ -- Roland Mas <lolando@debian.org>  Wed,  8 Oct 2003 23:20:42 +0200
 
 gforge (3.0-8) unstable; urgency=low
 
