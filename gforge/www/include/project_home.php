@@ -67,7 +67,7 @@ if ($project->usesStats()) {
 	if (!$actv_res) {
 		$actv_res=0;
 	}
-	print '<br />'.$Language->getText('group', 'activity'). $actv_res . '%';
+	print '<br />'.$Language->getText('group', 'activity'). substr($actv_res, 0, 5). '%';
 	print '<br />'.$Language->getText('group', 'activitystat', $group_id);
 }
 
