@@ -40,11 +40,10 @@ $err .= 'Existing mailing lists : '.implode(', ', $mailing_lists)."\n";
 pclose($fp);
 
 $res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
-        mail_group_list.password,mail_group_list.status, 
-        mail_group_list.group_list_id 
+	mail_group_list.password,mail_group_list.status, 
+	mail_group_list.group_list_id 
 	FROM mail_group_list,users
-        WHERE mail_group_list.list_admin=users.user_id
-        ");
+	WHERE mail_group_list.list_admin=users.user_id");
 $err .= db_error();
 
 $rows=db_numrows($res);
@@ -63,7 +62,8 @@ for ($i=0; $i<$rows; $i++) {
 
 	if (! in_array($listname,$mailing_lists)) {
 		$err .= "Creating Mailing List: $listname\n";
-		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname@$sys_lists_host $email $listpassword &> /dev/null";
+		//$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname@$sys_lists_host $email $listpassword &> /dev/null";
+		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		passthru($lcreate_cmd, $failed);
 		if($failed) {
