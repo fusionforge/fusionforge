@@ -1,3 +1,10 @@
+sourceforge-plugin-helloworld (0.3-1) experimental; urgency=low
+
+  * Added database install/remove support with db-upgrade.pl and
+    db-delete.pl scripts.
+
+ -- Roland Mas <lolando@debian.org>  Sun,  8 Dec 2002 19:03:58 +0100
+
 sourceforge-plugin-helloworld (0.2-2) experimental; urgency=low
 
   * Moved to experimental.

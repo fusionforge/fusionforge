@@ -21,6 +21,7 @@ case "$1" in
     remove|deconfigure)
 	/usr/lib/sourceforge/bin/sf-unregister-plugin helloworld
 	invoke-rc.d apache reload
+	/usr/lib/sourceforge/plugins/helloworld/bin/db-delete.pl
         ;;
     upgrade|failed-upgrade)
         ;;

@@ -43,7 +43,7 @@ install: build
 
 	cp -r bin/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/bin/
 	cp -r include/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/include/
-	# cp -r lib/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/
+	cp -r lib/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/
 	# cp -r cgi-bin/* $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/cgi-bin/
 	cp -r etc/* $(DESTDIR)/etc/sourceforge/plugins/$(PLUGIN)/
 	cp -r www/* $(DESTDIR)/usr/lib/sourceforge/www/plugins/$(PLUGIN)/
@@ -52,7 +52,7 @@ install: build
 	find $(DESTDIR)/ -name CVS -type d | xargs rm -rf
 	find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
 	find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
-	# find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
+	find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
 	# find $(DESTDIR)/usr/lib/sourceforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
 	find $(DESTDIR)/etc/sourceforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/lib/sourceforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
