@@ -1,33 +1,5 @@
 
 //
-// LDAP configuration
-//
-// enable(1) or disable(0) ldap use altogether
-$sys_use_ldap={sys_use_ldap};
-$sys_ldap_host="{ldap_host}";
-$sys_ldap_port=389;
-$sys_ldap_version=3;
-// this is dn under which all information stored
-$sys_ldap_base_dn="{ldap_base_dn}";
-// and this, how we do access it (add permission required)
-$sys_ldap_bind_dn="cn=SF_robot,{ldap_base_dn}";
-// admin dn - login dn which has permissions to delete entries
-// NOT used by web code, only by support utilities
-// note that password NOT stored here
-$sys_ldap_admin_dn="cn=admin,{ldap_base_dn}";
-
-//
-// Jabber Configuration
-//
-$sys_use_jabber={sys_use_jabber};
-//messages from the system will be sent to this address
-$sys_jabber_server="{jabber_host}";
-$sys_jabber_port="5222";
-// messages sent to jabber accounts will come from this user
-// It is similar to the "From: noreply@gforge.org" used in emails
-$sys_jabber_user="noreply";
-
-//
 // Groups and Homes dir prefix
 //
 $homedir_prefix="{homedir}";
@@ -92,10 +64,10 @@ $sys_peer_rating_group={peerrating_groupid};
 $default_trove_cat={default_trove_cat};
 
 // JPGRAPH Package
-$sys_path_to_jpgraph='/usr/share/jpgraph/';
+$sys_path_to_jpgraph='{sys_path_to_jpgraph}';
 
 // CVSWEB
-$sys_path_to_cvsweb='/usr/lib/gforge/bin/';
+$sys_path_to_cvsweb='{sys_path_to_cvsweb}';
 
 // Show Source
 //	Setting this to 1 will add a "Show Source" link to the bottom of each page

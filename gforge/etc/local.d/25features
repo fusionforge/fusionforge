@@ -1,6 +1,7 @@
+
 //
-//      FEATURES
-//      You can turn features on/off sitewide
+//	FEATURES
+//	You can turn features on/off sitewide
 //
 $sys_use_cvs={sys_use_cvs};
 $sys_use_tracker={sys_use_tracker};
@@ -16,8 +17,7 @@ $sys_use_trove={sys_use_trove};
 $sys_use_snippet={sys_use_snippet};
 
 //
-//      Restricted project registration
-//      If set to true, only a site admin can register projects
+//	Restricted project registration
+//	If set to true, only a site admin can register projects
 //
 $sys_project_reg_restricted={sys_project_reg_restricted};
-
