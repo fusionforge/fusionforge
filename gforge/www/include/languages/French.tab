@@ -1409,7 +1409,7 @@ pm	view_type	Vue détaillée
 pm	view_type_detail	Détail
 pm	view_type_summary	Résumé
 pm_addtask	task_added_relationship	La relation a été ajoutée avec succés
-pm_addtask	task_created_successfully	Tâche crée avec succès
+pm_addtask	task_created_successfully	Tâche créée avec succès
 pm_addtask	task_updated_successfully	Tâche mise à jour avec succès
 pm_addtask	title	Ajout d'une tâche
 pm_admin	title	Gestion de projet : administration
@@ -1433,7 +1433,7 @@ pm_admin_projects	change_project_title	Changer le statut du gestionnaire de proj
 pm_admin_projects	col_project_id	Numéro du projet
 pm_admin_projects	col_project_name	Nom du projet
 pm_admin_projects	delete	Supprimer
-pm_admin_projects	delete_info	Supprimer irrémédiablement ce sous-projet and toutes ses données.
+pm_admin_projects	delete_info	Supprimer irrémédiablement ce sous-projet et toutes ses données.
 pm_admin_projects	delete_warning	Vous êtes sur le point de supprimer irrémédiablement ce sous-projet et toutes ses données !
 pm_admin_projects	deleted	Supprimé avec succès
 pm_admin_projects	description	Description
@@ -2492,7 +2492,7 @@ survey_add_survey	list_questions_numbers	Liste des numéros de questions, dans l
 survey_add_survey	name_of_survey	Nom du sondage
 survey_add_survey	no	Non
 survey_add_survey	show_existing_question	Voir les questions existantes
-survey_add_survey	survey_inserted	sondage crée
+survey_add_survey	survey_inserted	sondage créé
 survey_add_survey	title	Ajouter un sondage
 survey_add_survey	title_is_required	Le titre du sondage est requis
 survey_add_survey	yes	Oui
