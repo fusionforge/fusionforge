@@ -31,7 +31,7 @@ replace_file () {
 
 propose_update () {
     file=$1
-    if diff -q ${file} ${file}.sourceforge-new &> /dev/null ; then
+    if diff -q ${file} ${file}.sourceforge-new 2>&1 > /dev/null ; then
 	# Old file and new file are identical
 	rm -f ${file}.sourceforge-new
     else
@@ -57,7 +57,7 @@ propose_update () {
 
 case "$1" in
     configure)
-	adduser --system --group --home /var/www/sourceforge sourceforge &> /dev/null
+	adduser --system --group --home /var/www/sourceforge sourceforge 2>&1 > /dev/null
 	
 	pattern=$(basename $0).XXXXXX
 	
