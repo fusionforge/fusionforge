@@ -8,8 +8,10 @@ sourceforge (2.5-29+) unstable; urgency=low
   * [Roland] Fixed LDAP entries for mailing-lists (attribute cn: is not in
     the schema).
   * [Roland] Fixed user in crontab (for the DNS stuff) (closes: #147434).
+  * [Roland] Fixed bug in the "Submit a bug" form: all bug admins are able
+    to assign a bug from the start, not just project admins.
 
- -- Roland Mas <lolando@debian.org>  Fri, 24 May 2002 18:18:14 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 30 May 2002 17:27:18 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
