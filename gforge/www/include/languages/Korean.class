@@ -27,6 +27,18 @@
 
 	Soon-Son Kwon, 2002/06/12
 	*added more strings
+
+	Soon-Son Kwon, 2002/06/13
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/14
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/16
+	*added more strings
+
+	Soon-Son Kwon, 2002/06/20
+	*translated project registration process
 */
 
 class Korean extends BaseLanguage {
@@ -297,87 +309,81 @@ class Korean extends BaseLanguage {
 <H2>단계 1: 제공되는 서비스와 필요 조건</H2>
 
 <p>
-We are now offering a full suite of services for Sourceforge projects. If
-you haven\'t already, please be sure to browse the most recent revision of
-the Sourceforge Services.
+이곳에서는 여러분의 프로젝트가 원활하게 운영될 수 있도록 가능한 모든
+서비스를 제공하고 있습니다. 이미 운영되고 있는 다른 프로젝트들을 참고하여
+어떤 기능들이 제공되고 있는지 살펴 보시면 좀더 빠르게 이해하실 수 있을 것입니다.
 </p>
 
 <p>
-<b>Use of Project Account</b>
+<b>프로젝트 계정의 사용</b>
 </p>
 
 <p>
-The space given to you on the original Sourceforge servers is given
-for the expressed purpose of Open Source development or, in the case
-of web sites, the advancement of Open Source.  The space given to you
-on this server, on the other hand, is given for the expressed purpose
-of whatever the local Sourceforge maintainer has decided.
+이곳은 개발자 여러분들이 자유 소프트웨어/오픈소스 소프트웨어의
+개발에 다양한 방법으로 참여하고 서로 협력하여 발전시킬 수 있도록
+하기 위하여 제공됩니다.
 </p>
 
 <p>
-<b>Creative Freedom</b>
+<b>창조의 자유</b>
 </p>
 
 <p>
-It is the intent of the Sourceforge software to allow you creative
-freedom on your project.  However, for the legal protection of this
-site and yours there might be limits imposed by the local Sourceforge
-administrator.  Details about these restrictions are described in the
-Terms of Service.
+이 사이트의 여러 자원들을 여러분에제 제공하는 것은 여러분의 프로젝트에
+여러분을 포함한 좀더 많은 사람들이 창조의 자유를 함께 누릴 수 있도록
+하기 위함이며 이 사이트 및 여러분의 프로젝트가 법적인 보호를 받을 수
+있도록 하기 위해서는 몇 가지 제약 사항과 지켜야 할 규칙이 있습니다.
+이는 프로젝트 등록 다음 단계에 상세히 기술되어 있습니다.
 </p>
 
 <p>
-<b>Advertisements</b>
+<b>광고</b>
 </p>
 
 <p>
-You may not place any revenue-generating advertisements on a site
-hosted at sourceforge.net.  Contact the local Sourceforge
-administrator about the present site.
+운영하시게 될 프로젝트의 웹사이트에 불특정 영리 목적의 광고 배너는 
+게재하실 수 없습니다.
 </p>
 
 <p>
-<b>Sourceforge Link</b>
+<b>본 사이트로의 링크</b>
 </p>
 
 <p>
-If you host a web site at this Sourceforge site, you might want to
-place one of our approved graphic images on your site with a link back
-to the Sourceforge site.  The graphic may either link to the main
-Sourceforge site or to your project page on the site.  For information
-about how to insert a SourceForge logo which will track your
-pageviews, please read the Sourceforge documentation.  Again, this
-condition is subject to the will of the local Sourceforge
-administrator.
+이곳을 통하여 웹사이트를 운영하게 된다면 적절한 이미지 파일을
+사용하여 이곳으로의 링크를 거실 수 있습니다. 링크는 본 사이트의
+메인 페이지가 될수도 있고 여러분이 운영하시는 프로젝트 페이지가
+될 수도 있습니다. 여러분의 프로젝트에 대한 페이지뷰를 계산할 수 있도록
+로고를 사용하여 링크하는 방법에 대한 자세한 정보는 프로젝트 관리자가
+프로젝트 관리시에 쉽게 찾아보실 수 있습니다.
 </p>
 
 <p>
-<b>Open Source/Rights to Code</b>
+<b>오픈 소스/프로그래밍의 자유</b>
 </p>
 
 <p>
-You will be presented with a choice of licenses for your project.
-Some of them are Open Source approved, some are not.  The ones that
-are Open Source approved also allow us to make your code available to
-the general public: although you may choose to stop hosting your
-project with us, the nature of these licenses will allow us to
-continue to make your code available.  It is therefore advised to
-think twice before you choose a license, especially if you choose one
-the local Sourceforge administrator might have added to the default
-ones.
+여러분은 여러분의 프로젝트에 적용할 저작권을 선택하는 과정을 아울러
+밟게 될 것입니다. 어떤 것은 오픈 소스(Open Source)의 정의에 합치되는
+것들도 있고, 그렇지 않은 것들도 있습니다. 오픈소스의 정의에 합치되는
+저작권을 적용하시게 된다면 여러분의 코드를 저희가 다른 사람들에게 합법적으로 
+공개할 수 있도록 해 주며 만약 여러분이 프로젝트를 더이상 이곳에서
+운영하지 않겠다고 결정하시더라도 저희가 여러분의 코드를 계속해서 제공할 
+수 있도록 해줄 수 있습니다. 그러므로 저작권을 선택하실 때는 꼭 심사숙고해 
+주시기 바랍니다.
 </p>
 
 <p>
-If you wish to use another license that is not currently listed, let
-the local Sourceforge administrator know and he will review these
-requests on a case-by-case basis.
+만약 현재 제공되지 않는 다른 저작권을 적용하고자 하신다면 별도로
+관리자이게 연락해 주십시오. 관리자가 해당 사항에 대해 개별적으로 검토한
+후 승인 여부를 결정하게 됩니다.
 </p>
 
 <p>
-It is the intent of the software to provide a permanent home for all
-versions of your code.  The Sourceforge administrator does reserve the
-right, however, to terminate your project if there is due cause, in
-accordance with the Terms of Service.
+이곳은 여러분의 코드에 대한 모든 버전의 영구적인 저장 장소가
+되고자 합니다. 그렇지만 관리자는 다음의 사용 규정에 따라
+여러분의 프로젝트 및 그에 관련된 자료들을 삭제하게 될 수도 있습니다.
+다음 내용을 자세히 읽어 보시기 바랍니다.
 </p>';
 	$this->REGISTER_step2_title='단계 2: 사용에 관한 규정';
 	$this->REGISTER_step2_bottom='
