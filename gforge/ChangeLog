@@ -1,3 +1,8 @@
+2005-03-16  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml: 
+	Heavy restructuring and other changes.
+
 2005-03-14  Tim Perdue <tim@gforge.org>
 
 	* privatize_list.py - mailing lists set to private by default at 
