@@ -375,7 +375,7 @@ admin_trove_cat_edit	delete	Delete
 admin_trove_cat_edit	edit_trove_category	Edit Trove Category
 admin_trove_cat_edit	error_trove_equal_parent	Error Parent Category can not be same as current
 admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
-admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation, can't delete trove category define as default in local.inc
 admin_trove_cat_edit	error_in_trove_operation_cant_delete_in_use	Can't delete that category since it's currently referenced by a project.
 admin_trove_cat_edit	new_category_description	New category description (VARCHAR 255)
 admin_trove_cat_edit	new_category_full_name	New category full name (VARCHAR 80)
