@@ -66,7 +66,7 @@ if ($group_id && $atid) {
 						$user_email=false;
 				} else {
 					if (!validate_email($user_email)) {
-						exit_error('ERROR', 'Invalid email address');
+						exit_error('ERROR', $Language->getText('general','invalid_email'));
 					}
 				}
 				if (!$ah->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority, $user_email)) {
@@ -87,7 +87,7 @@ if ($group_id && $atid) {
 							}
 						}
 					}
-					$feedback .= ' Item Successfully Created ';
+					$feedback .= $Language->getText('tracker','item_created');
 					include 'browse.php';
 				}
 			}
@@ -123,7 +123,7 @@ if ($group_id && $atid) {
 				unset($ah);
 			}
 			if (!$was_error) {
-				$feedback = 'Updated Successfully ';
+				$feedback = $Language->getText('tracker','updated_successful');
 			}
 			include 'browse.php';
 			break;
@@ -140,7 +140,7 @@ if ($group_id && $atid) {
 			} else {
 				if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
 					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id)) {
-					$feedback = 'Tracker Item: '.$ah->getErrorMessage();
+					$feedback =$Language->getText('tracker','tracker_item'). 'Tracker Item: '.$ah->getErrorMessage();
 					$ah->clearError();
 					$was_error=true;
 				}
@@ -159,10 +159,10 @@ if ($group_id && $atid) {
 							exit_error("Error","Invalid filename");
 						}
 						if (!$afh->upload($input_file,$input_file_name,$input_file_type,$file_description)) {
-							$feedback .= ' <br />File Upload: '.$afh->getErrorMessage();
+							$feedback .= ' <br />'.$Language->getText('tracker','file_upload_upload').':'.$afh->getErrorMessage();
 							$was_error=true;
 						} else {
-							$feedback .= ' <br />File Upload: Successful ';
+							$feedback .= ' <br />'.$Language->getText('tracker','file_upload_successful');
 						}
 					}
 				}
@@ -180,10 +180,10 @@ if ($group_id && $atid) {
 							$feedback .= $afh->getErrorMessage().'::'.$delete_file[$i];
 						} else {
 							if (!$afh->delete()) {
-								$feedback .= ' <br />File Delete: '.$afh->getErrorMessage();
+								$feedback .= ' <br />'.$Language->getText('tracker','file_delete').': '.$afh->getErrorMessage();
 								$was_error=true;
 							} else {
-								$feedback .= ' <br />File Delete: Successful ';
+								$feedback .= ' <br />'.$Language->getText('tracker','file_delete_successful');
 							}
 						}
 					}
@@ -192,7 +192,7 @@ if ($group_id && $atid) {
 				//	Show just one feedback entry if no errors
 				//
 				if (!$was_error) {
-					$feedback = 'Successfully Updated';
+					$feedback = $Language->getText('general','update_successful');
 				}
 				include 'browse.php';
 			}
@@ -211,7 +211,7 @@ if ($group_id && $atid) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
 				if ($ah->addMessage($details,$user_email,true)) {
-					$feedback='Comment Added';
+					$feedback=$Language->getText('tracker','comment_added');
 					include 'browse.php';
 				} else {
 					//some kind of error in creation
@@ -293,8 +293,8 @@ if ($group_id && $atid) {
 	$params['sectionvals']=array($group->getPublicName());
 	
 	echo site_project_header($params);
-	echo '<strong><a href="/tracker/reporting/?group_id='.$group_id.'">Reporting</a> | '
-		 .'<a href="/tracker/admin/?group_id='.$group_id.'">Admin</a>'
+	echo '<strong><a href="/tracker/reporting/?group_id='.$group_id.'">'.$Language->getText('tracker','reporting').'Reporting</a> | '
+		 .'<a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker','admin').'</a>'
 		 .'</strong><p>';
 
 	if (!$at_arr || count($at_arr) < 1) {

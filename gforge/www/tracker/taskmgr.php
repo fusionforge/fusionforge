@@ -64,21 +64,21 @@ if ($add_to_task) {
 		'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
 
 	echo '
-		<h3>Build Relationship Between Tracker Items and Task Manager</h3>
+		<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
 		<p>
 		<form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
-		<strong>Tracker Item:</strong> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
-		<strong>Task Manager Project:</strong><br />';
+		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
+		<strong>'.$Language->getText('tracker_taskmgr','task_manager_project').':</strong><br />';
 	echo $pg->getName().'
 		<input type="hidden" name="group_project_id" value="'.$pg->getID().'">
 		<p>
-		<strong>Task:</strong><br />
+		<strong>'.$Language->getText('tracker_taskmgr','task').':</strong><br />
 		<select name="project_task_id">';
 	for ($i=0; $i<count($pt_arr); $i++) {
 		echo '<option value="'.$pt_arr[$i]->getID().'">'.$pt_arr[$i]->getSummary().'</option>';
 	}
 	echo '</select><br />
-		<input type="submit" name="done_adding" value="Add Relationship To Selected Task">
+		<input type="submit" name="done_adding" value="'.$Language->getText('tracker_taskmgr','add_relationship')'">
 		</form>';
 
 //
@@ -115,17 +115,17 @@ if ($add_to_task) {
 	$ath->header(array('titlevals'=>array($ath->getName()),'pagename'=>'tracker_browse',
 		'atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName())));
 
-	echo '<h3>Build Relationship Between Tracker Items and Task Manager</h3>
+	echo '<h3>'.$Language->getText('tracker_taskmgr','build_relationships').'</h3>
 		<p><form name="foo" action="'. $PHP_SELF .'?func=taskmgr&group_id='.$group_id.'&atid='.$atid.'&aid='.$aid.'" method="post">
-		<strong>Tracker Item:</strong> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
-		<strong>Task Manager Project:</strong><br />
+		<strong>'.$Language->getText('tracker_taskmgr','tracker_item').':</strong> [ #'.$a->getID().' ] '.$a->getSummary().'<p>
+		<strong>'.$Language->getText('tracker_taskmgr','task_manager_project').':</strong><br />
 		<select name="group_project_id">';
 	for ($i=0; $i<count($pg_arr); $i++) {
 		echo '<option value="'.$pg_arr[$i]->getID().'">'.$pg_arr[$i]->getName().'</option>';
 	}
 	echo '</select><br />
-		<input type="submit" name="add_to_task" value="Add Relation To Existing Task"><br />
-		<input type="submit" name="new_task" value="Create New Task">
+		<input type="submit" name="add_to_task" value="'.$Language->getText('tracker_taskmgr','add_relation_to_task').'."><br />
+		<input type="submit" name="new_task" value="'.$Language->getText('tracker_taskmgr','create_task').'">
 		</form>';
 
 }

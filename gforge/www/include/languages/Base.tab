@@ -357,7 +357,7 @@ forum_utils	postcomment	Post Comment
 forum_utils	anonymously	Anonymously
 forum_utils	couldpostif	You could post if you were
 forum_utils	reply	reply
-forum_utils	mailmonitor	\nRead and respond to this message at: \n$1\nBy: $2 \n\n$3\n\n______________________________________________________________________\nRead and respond to this message at: \n$1\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5
+forum_utils	mailmonitor	\nRead and respond to this message at: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5
 forum_utils	mailsent	email sent - people monitoring
 forum_utils	mailnotsent	email not sent - people monitoring
 forum_utils	mailnotsent2	email not sent - no one monitoring
@@ -850,28 +850,6 @@ project_filemodule_monitor	start_monitor_title	Monitoring started
 project_filemodule_monitor	start_monitor_body	Monitoring Has Been Started
 projects	section	Project: $1
 projects	title	Summary
-register	invalid_full_name	Invalid Full Name
-register	invalid_unix_name	Invalid Unix Name
-register	unix_group_name_already_taken	Unix group name already taken
-register	describe_registration	Please describe your Registration Purpose in a more comprehensive manner
-register	comprehensive_description	Please use more comprehensive Project Description
-register	maximum_description	Maximum length for Project Description is 255 chars.
-register	no_license_chosen	You have not chosen a license
-register	conflicting_licenses_choice	Conflicting licenses choice
-register	more_license_description	Please give more comprehensive licensing description
-register	registration_complete	Registration Complete
-register	project_submitted	Your project has been submitted to the $1 administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing $1
-register	project_information	Project Information
-register	apply_for_registration	To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory.
-register	project_full_name	</h3>1. Project Full Name</h3><p>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).</p>Full Name:<br/>
-register	purpose_and_summarization	2. Project Purpose and Summarization</h3><p><strong></strong><p><strong> Please provide detailed, accurate description of your project and what $1 resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on $1, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>
-register	project_license	<h3>3. License</h3> <p><strong><em>If you are applying for a website-only project, please select "website-only" from the choices below and proceed.</em></strong><p>$1 was created to advance Open Source software development. To keep things simple, we are relying on the outstanding work of the <a href="http://www.opensource.org">Open Source Initiative</a> for our licensing choices. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p>Choosing a license is a serious decision. Please take some time to read the text (and our explanations) of several licenses before making a choice about your project. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
-register	license_type	Public Domain</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><strong>Your License:</strong><br />
-register	other_license	If you selected "other", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.
-register	project_description	<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
-register	project_unix_name	<h3>5. Project Unix Name</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Unix Name:<br/>
-register	i_agree	I Agree
-register	i_disagree	I Disagree
 register	title	New Project Registration
 register_complete	section	New Project Registration
 register_complete	title	Registration Complete
@@ -942,39 +920,6 @@ top_mostactive	section	Top Projects
 top_mostactive	title	Most Active Projects: $1
 top_toplist	section	Top Projects
 top_toplist	title	Top Project Lists
-tracker	section	Project: $1
-tracker	title	Trackers
-tracker	choose	Choose a tracker and you can browse/edit/add items to it.
-tracker_add	section	$1
-tracker_add	title	Submit Tracker Item
-tracker_admin	section	Tracker
-tracker_admin	title	Administration
-tracker_admin_choose	section	Project: $1
-tracker_admin_choose	title	Tracker Admin
-tracker_admin_add_canned	section	Tracker Administration
-tracker_admin_add_canned	title	Add Canned Responses To: $1
-tracker_admin_add_cat	section	Tracker Administration
-tracker_admin_add_cat	title	Add Categories To: $1
-tracker_admin_add_group	section	Tracker Administration
-tracker_admin_add_group	title	Add Groups To: $1
-tracker_admin_update_canned	section	Tracker Administration
-tracker_admin_update_canned	title	Modify Canned Responses In: $1
-tracker_admin_update_cat	section	Tracker Administration
-tracker_admin_update_cat	title	Modify Category In: $1
-tracker_admin_update_group	section	Tracker Administration
-tracker_admin_update_group	title	Modify A Group In: $1
-tracker_admin_update_type	section	Tracker Administration
-tracker_admin_update_type	title	Update $1
-tracker_admin_update_users	section	Tracker Administration
-tracker_admin_update_users	title	Add/Update Tracker User Permissions
-tracker_browse	section	Project: $1
-tracker_browse	title	Browse $1
-tracker_detail	section	$1
-tracker_detail	title	Tracker Detailed View
-tracker_reporting	section	Project: $1
-tracker_reporting	title	Tracker Reporting
-tracker_utils	monitor		Monitor
-tracker_utils	stop_monitoring		Stop Monitoring
 users	title	User Summary
 users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
 users	peerinfo2	The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
@@ -1114,3 +1059,202 @@ source	invalid_argument	Invalid File Argument
 source	invalid_argument_text	The file argument is invalid.
 source	file_not_found	File Not Found
 source	file_not_found_text	Cannot find specified file to display.
+stats_graph	sitewide_statistics_graphs      Sitewide Statistics Graphs
+stats_graph	joverview_stats	OVERVIEW STATS
+stats_graph	project_stats	PROJECT STATS
+stats_graph	site_graphs	SITE GRAPHS
+stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
+stats_index	overview_stats	OVERVIEW STATS
+stats_index	project_stats	PROJECT STATS
+stats_index	site_graphs	SITE GRAPHS
+stats_index	other_statistics	Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
+stats_lastlogins	no_records	No records found","Database error: "
+stats_lastlogins	last_logins	Last Logins
+stats_lastlogins	most_recent_open	Most Recent Opened Sessions
+stats_lastlogins	date	Date
+stats_lastlogins	username	Username
+stats_lastlogins	source_ip	Source IP
+tracker	title	Trackers
+tracker	choose	Choose a tracker and you can browse/edit/add items to it.
+tracker_add	title	Submit Tracker Item
+tracker_admin	admin	Admin
+tracker_admin	choose_datatype	Choose a data type and you can set up prefs, categories, groups, users, and permissions
+tracker_admin	section	Tracker
+tracker_admin	title	Administration
+tracker_admin	category_inserted	Category Inserted
+tracker_admin	group_inserted	Group Inserted
+tracker_admin	canned_response_inserted	Canned Response Inserted
+tracker_admin	users_added	User(s) Added
+tracker_admin	users_updated	User(s) Updated
+tracker_admin	users_deleted	User(s) Deleted
+tracker_admin	canned_response_updated	Canned Response Updated
+tracker_admin	category_updated	Category Updated
+tracker_admin	group_updated	Group Updated
+tracker_admin	tracker_updated	Tracker Updated
+tracker_admin	tracker_id	ID
+tracker_admin	tracker_title	Title
+tracker_admin	category_name	Category Name
+tracker_admin	auto_assign_to	Auto-Assign To
+tracker_admin	category_add_warning	Once you add a category, it cannot be deleted
+tracker_admin	group_name	New group Name
+tracker_admin	intro	<h3>Create a new tracker</h3><p>You can use this system to track virtually any kind of data, with each tracker having separate user, group, category, and permission lists. You can also easily move items between trackers when needed.</p><p>Trackers are referred to as "Artifact Types" and individual pieces of data are "Artifacts". "Bugs" might be an Artifact Type, whiles a bug report would be an Artifact. You can create as many Artifact Types as you want, but remember you need to set up categories, groups, and permission for each type, which can get time-consuming
+tracker_admin_add_cat	title	Add Categories to $1
+tracker_admin_add_cat	no_categories	No categories defined
+tracker_admin_add_group	title	Add/Change Groups to $1
+tracker_admin_add_group	no_groups_defined	No groups defined
+tracker_admin_add_group	group_add_warning	Once you add a group, it cannot be deleted
+tracker_admin_add_canned	no_responses	No responses set up in this group
+tracker_admin_add_canned	canned_response_info	Creating useful generic messages can save you a lot of time when handling common artifact requests.
+tracker_admin_add_canned	canned_response_title	Title
+tracker_admin_add_canned	canned_response_body	Message Body
+tracker_admin_add_canned	title	Add/Change Canned Responses to $1
+tracker_admin_add_canned	existing_responses	Existing Responses
+tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
+tracker_admin_add_users	no_developers	No Developers Found
+tracker_admin_add_users	developers_info	<p>Each tracker that you define has separate user lists and user permissions.</p><p>Simply add developers to this tracker, then update their permissions.</p><p><dl><dt><strong>Technicians</strong></dt><dd>can be assigned items</dd><dt><strong>Admins</strong></dt><dd>can make changes to items</dd></dl></p>
+tracker_admin_add_users	delete	Delete
+tracker_admin_add_users	user_name	User Name
+tracker_admin_add_users	category_permission	Permission
+tracker_admin_add_users	technician	Technician
+tracker_admin_add_users	tech_admin	Tech & Admin
+tracker_admin_add_users	admin_only	Admin Only
+tracker_admin_add_users	update_permissions	Update Developer Permissions
+tracker_admin_add_users	add_user_info	<h3>Add These Users:</h3><p>You can pick and choose users for your tracker, or simply add them all by checking "Add All Users".</p>
+tracker_admin_add_users	add_users	Add Users
+tracker_admin_add_users	add_all_users	Add All Users
+tracker_admin_update_canned	title	Modify Canned Responses In: $1
+tracker_admin_update_users	title	Add/Update Tracker User Permissions
+tracker_admin_choose	title	Tracker Admin
+tracker_admin_update_cat	title	Modify Category In: $1
+tracker_admin_update_cat	category_name	Category Name
+tracker_admin_update_cat	auto_assign_to	Auto-Assign To
+tracker_admin_update_cat	category_change_warning	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name
+tracker_admin_update_group	title	Modify A Group In: $1
+tracker_admin_update_group	warning	It is not recommended that you change the artifact group name because other things are dependent upon it. When you change the group name, all related items will be changed to the new name.				
+tracker_admin_update_type	title	Update $1
+tracker_admin_update_type	name	<strong> Name:</strong> (examples: meeting minutes, test results, RFP Docs)
+tracker_admin_update_type	description	Description
+tracker_admin_update_type	publicy_available	Publicly Available
+tracker_admin_update_type	allow_anonymous	Allow non-logged-in postings
+tracker_admin_update_type	display_resolution	Display the "Resolution" box
+tracker_admin_update_type	send_submissions	Send email on new submission to address
+tracker_admin_update_type	email_all_changes	Send email on all changes
+tracker_admin_update_type	days_overdue	Days till considered overdue
+tracker_admin_update_type	pending_timeout	Days till pending tracker items time out
+tracker_admin_update_type	submit_item_form_text	Free form text for the "submit new item" page
+tracker_admin_update_type	browse_item_form_text	Free form text for the "browse items" page
+tracker_admin	add_categories	Add/Update Categories
+tracker_admin	add_categories_info	Add categories like, 'mail module','gant chart module','cvs', etc
+tracker_admin	add_groups	Add/Update Groups
+tracker_admin	add_group_infos	Add groups like, 'v1.2','unsupported','unverified', etc
+tracker_admin	add_canned_responses	Add/Update Canned Responses
+tracker_admin	add_canned_responses_info	Create/Change generic response messages for the tracker
+tracker_admin	add_permissions	Add/Update Users &amp; Permissions
+tracker_admin	add_permissions_info	Add/remove users to/from this tracker
+tracker_admin	update_preferences	Update preferences
+tracker_admin	update_preferences_info	Set up prefs like expiration times, email addresses
+tracker_browse	title	Browse $1
+tracker_detail	section	$1
+tracker_detail	title	Tracker Detailed View
+tracker_reporting	section	Project: $1
+tracker_reporting	title	Tracker Reporting
+tracker_utils	monitor		Monitor
+tracker_utils	stop_monitoring		Stop Monitoring
+tracker	title	Trackers
+tracker	choose	Choose a tracker and you can browse/edit/add items to it.
+tracker	item_created	Item Successfully Created
+tracker	updated_successful	Updated Successfully
+tracker	tracker_item	Tracker Item
+tracker	file_upload_successful	File Upload: Successful
+tracker	file_delete_upload	File Upload
+tracker	file_delete	File Delete: 
+tracker	file_delete_successful	File Delete: Successful
+tracker	comment_added	Comment Added
+tracker	reporting	Report
+tracker	admin	Admin
+tracker_add	submit		Submit
+tracker_add	for_project	For project
+tracker	category	Category
+tracker	item_group	Group
+tracker	assigned_to	Assigned To
+tracker	priority	Priority
+tracker	summary	Summary
+tracker	detailed_description	Detailed description
+tracker	security_note	DO NOT enter passwords or confidential information in your message!
+tracker	check_upload	Check to Upload & Attach File
+tracker	file_description	File description
+tracker	unassigned	Unassigned
+tracker	any	Any
+tracker	id	ID
+tracker	date	Data
+tracker	open_date	Open Date
+tracker	close_date	Close Date
+tracker	submitter	Submitter
+tracker	assignee	Assignee
+tracker	submitted_by	Submitted By
+tracker_browse	ascending	Ascending
+tracker_browse	descending	Descending
+tracker	status	State
+tracker	group	Group
+tracker	followups	Followup
+tracker_browse	sort_by	Order by
+tracker_browse	request_id	Request ID
+tracker_browse	previous	Previous 50
+tracker_browse	next	Next 50
+tracker_browse	check_all	Check &nbsp;all
+tracker_browse	clear_all	Clear &nbsp;all
+tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
+tracker_browse	no_change	No Change
+tracker_browse	resolution	Resolution 
+tracker_browse	canned_response	Canned Response
+tracker_browse	mass_update	Mass update
+tracker_browse	old_requests	* Denotes requests > $1 Days Old
+tracker_browse	no_items	No items found
+tracker_detail	title	Detail
+tracker_detail	build_task_relation	Build Task Relation
+tracker_detail	add_comment	Add A Comment
+tracker_detail	please_login	Please $1 log in!</a></FONT></h3><br />If you <strong>cannot</strong> login, then enter your email address here:<p>
+tracker_detail	attached_files	Attached Files
+tracker_detail	name	Name
+tracker_detail	description	Description
+tracker_detail	download	Download
+tracker_detail	no_files_attached	No Files Currently Attached
+tracker_detail	changes	Changes
+tracker_taskmgr	build_relationships	Build Relationship Between Tracker Items and Task Manager
+tracker_taskmgr	add_relationship	Add Relationship To Selected Task
+tracker_taskmgr	add_relation_to_task	Add Relation To Existing Task.
+tracker_taskmgr	create_task	Create New Task
+tracker_taskmgr	tracker_item	Tracker Item
+tracker_taskmgr	task_manager_project	Task Manager Project
+tracker_taskmgr	task	Task
+tracker_mod	title	Modify
+tracker_mod	date_submitted	Date Submitted
+tracker_mod	date_closed	Date Closed
+tracker_mod	data_type	Data Type
+tracker_mod	canned_response	Use Canned Response
+tracker_mod	attach_comment	OR Attach A Comment
+tracker_mod	existing_files	Existing Files
+tracker_mod	delete	Delete
+tracker_mod	name	Name
+tracker_mod	description	Description
+tracker_mod	download	Download
+tracker_mod	no_files	No Files Currently Attached
+tracker_mod	changelog	Change Log
+tracker_mod	build_task_relation	Build Task Relation
+tracker_artifacthtml	date	Date
+tracker_artifacthtml	sender	Sender
+tracker_artifacthtml	no_followups	No Followups Have Been Posted
+tracker_artifacthtml	field	Field
+tracker_artifacthtml	old_value	Old Value
+tracker_artifacthtml	date	Date
+tracker_artifacthtml	by	By
+tracker_artifacthtml	no_changes	No Changes Have Been Made to This Item
+tracker_artifacthtml	message	Message
+tracker_artifacttype	none	None
+tracker_artifacttype	admin	Admin
+tracker_artifacttype	reporting	Reporting
+tracker_artifacttype	browse	Browse
+tracker_artifacttype	submit_new	Submit New
+tracker_artifacttype	admin_functions	Admin Functions
+tracker_artifacttype	add_artifact_types	Add/Browse Artifact Types
+tracker_artifacttype	edit_options	Edit/Update Options in

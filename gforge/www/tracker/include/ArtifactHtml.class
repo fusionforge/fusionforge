@@ -31,19 +31,20 @@ class ArtifactHtml extends Artifact {
 
 	function showMessages() {
 		global $sys_datefmt;
+		global $Language;
 		$result= $this->getMessages();
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
 			$title_arr=array();
-			$title_arr[]='Message';
+			$title_arr[]=$Language->getText('tracker_artifacthtml','message');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><PRE>
-Date: '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
-Sender: '. db_result($result,$i,'user_name') . '
+'.$Language->getText('tracker_artifacthtml','date').': '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
+'.$Language->getText('tracker_artifacthtml','sender').': '. db_result($result,$i,'user_name') . '
 '. util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</PRE></td></tr>';
 			}
 
@@ -51,22 +52,22 @@ Sender: '. db_result($result,$i,'user_name') . '
 
 		} else {
 			echo '
-				<h3>No Followups Have Been Posted</h3>';
+				<h3>'.$Language->getText('tracker_artifacthtml','no_followups').'</h3>';
 		}
 	}
 
 	function showHistory() {
-		global $sys_datefmt,$artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr;
+		global $sys_datefmt,$artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr, $Language;
 		$result=$this->getHistory();
 		$rows= db_numrows($result);
 
 		if ($rows > 0) {
 
 			$title_arr=array();
-			$title_arr[]='Field';
-			$title_arr[]='Old Value';
-			$title_arr[]='Date';
-			$title_arr[]='By';
+			$title_arr[]=$Language->getText('tracker_artifacthtml','field');
+			$title_arr[]=$Language->getText('tracker_artifacthtml','old_value');
+			$title_arr[]=$Language->getText('tracker_artifacthtml','date');
+			$title_arr[]=$Language->getText('tracker_artifacthtml','by');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -127,7 +128,7 @@ Sender: '. db_result($result,$i,'user_name') . '
 
 		} else {
 			echo '
-			<h3>No Changes Have Been Made to This Item</h3>';
+			<h3>'.$Language->getText('tracker_artifacthtml','no_changes').'</h3>';
 		}
 
 	}

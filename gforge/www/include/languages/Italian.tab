@@ -71,7 +71,7 @@ account_register	jabberonly	Send auto-generated notices only to this address
 account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito  <I>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione).</I>
 account_register	communitymail	Desidero ricevere email dalla comunit&agrave <I>(poco traffico).</I>
 account_register	mandatory	I campi indicati con  * sono obbligatori.
-account_register	register	Registrag
+account_register	register	Registra
 account_register	err_username	Campo login obbligatorio
 account_register	err_realname	You must supply a real name
 account_register	err_passwd	You must supply a password
@@ -832,3 +832,190 @@ register_requirements	section	New Project Registration
 register_requirements	title	Services & Requirements
 register_tos	section	New Project Registration
 register_tos	title	Terms Of Service Agreement
+tracker	title	Trackers
+tracker	choose	Choose a tracker and you can browse/edit/add items to it.
+tracker	item_created	Item Successfully Created
+tracker	updated_successful	Updated Successfully
+tracker	tracker_item	Tracker Item
+tracker	file_upload_successful	File Upload: Successful
+tracker	file_delete_upload	File Upload
+tracker	file_delete	File Delete: 
+tracker	file_delete_successful	File Delete: Successful
+tracker	comment_added	Comment Added
+tracker	reporting	Reportistica
+tracker	admin	Amministra
+tracker_add	submit		Invia
+tracker_add	for_project	Per il progetto
+tracker	category	Categoria
+tracker	item_group	Gruppo
+tracker	assigned_to	Assegnato a
+tracker	priority	Priorit&agrave;
+tracker	summary	Sommario
+tracker	detailed_description	Descrizione dettagliata
+tracker	security_note	NON inserire password o informazioni confidenziali!
+tracker	check_upload	Seleziona per fare l'upload del file
+tracker	file_description	Descrizione File
+tracker	unassigned	Non assegnato
+tracker	any	Tutti
+tracker	id	ID
+tracker	date	Data
+tracker	open_date	Data inserimento
+tracker	close_date	Data fine
+tracker	submitter	Submitter
+tracker	assignee	Assegnatario
+tracker	submitted_by	Inserito da
+tracker_browse	ascending	Ascendente
+tracker_browse	descending	Discendente
+tracker	status	Stato
+tracker	group	Gruppo
+tracker	followups	Commenti
+tracker_browse	sort_by	Ordina per
+tracker_browse	request_id	Request ID
+tracker_browse	previous	Indietro
+tracker_browse	next	Avanti 
+tracker_browse	check_all	Seleziona&nbsp;tutti
+tracker_browse	clear_all	Deseleziona&nbsp;tutti
+tracker_browse	admin_mass_update	<strong>Amministratore:</strong></FONT>  Se vuoi fare dei cambiamenti a tutti gli elementi elencati, usa i campi sottostanti per cambiare le propriet&agrave; e seleziona "Aggiornamento multiplo".
+tracker_browse	no_change	No Change
+tracker_browse	resolution	Resolution 
+tracker_browse	canned_response	Canned Response
+tracker_browse	mass_update	Aggiornamento multiplo
+tracker_browse	old_requests	* indica richieste pi&ugrave; di > $1 giorni
+tracker_browse	no_items	Nessun elemento trovato
+tracker_detail	title	Dettaglio
+tracker_detail	build_task_relation	Build Task Relation
+tracker_detail	add_comment	Add A Comment
+tracker_detail	please_login	Please $1 log in!</a></FONT></h3><br />If you <strong>cannot</strong> login, then enter your email address here:<p>
+tracker_detail	security_note	DO NOT enter passwords or confidential information in your message!
+tracker_detail	attached_files	Attached Files
+tracker_detail	name	Name
+tracker_detail	description	Description
+tracker_detail	download	Download
+tracker_detail	no_files_attached	No Files Currently Attached
+tracker_detail	changes	Changes
+tracker_taskmgr	build_relationships	Costruisce relazione tra attivit&agrave; e elementi del tracker
+tracker_taskmgr	add_relationship	Aggiungi relazione alla attivit&agrave; selezionata
+tracker_taskmgr	add_relation_to_task	Aggiungi relazione ad attivit&agrave; esistente
+tracker_taskmgr	create_task	Crea nuova attivit&agrave;
+tracker_taskmgr	tracker_item	Elemento tracker
+tracker_taskmgr	task_manager_project	Progetto Attivit&agrave;
+tracker_taskmgr	task	Attivit&agrave;
+tracker_mod	title	Modifica
+tracker_mod	date_submitted	Data di inserimento
+tracker_mod	date_closed	Data di chiusura
+tracker_mod	data_type	Tipo dato
+tracker_mod	canned_response	Usa risposta predefinita
+tracker_mod	attach_comment	OPPURE attacca un commento
+tracker_mod	existing_files	File esistenti
+tracker_mod	delete	Cancella
+tracker_mod	name	Nome
+tracker_mod	description	Descrizione
+tracker_mod	download	Download
+tracker_mod	no_files	Nessun file inserito
+tracker_mod	changelog	Change Log
+tracker_mod	build_task_relation	Costruisce relazione con attivit&agrave;
+tracker_artifacthtml	date	Data
+tracker_artifacthtml	sender	Autore
+tracker_artifacthtml	no_followups	Non sono stati inseriti commenti
+tracker_artifacthtml	field	Campo
+tracker_artifacthtml	old_value	Valore precedente
+tracker_artifacthtml	date	Data
+tracker_artifacthtml	by	Da:
+tracker_artifacthtml	no_changes	Non sono stati effettuati cambiamenti
+tracker_artifacthtml	message	Messaggio
+tracker_artifacttype	none	Nessuno
+tracker_artifacttype	admin	Amministra
+tracker_artifacttype	reporting	Reportistica
+tracker_artifacttype	browse	Visualizza
+tracker_artifacttype	submit_new	Inserisci nuovo
+tracker_admin	admin	Amministra
+tracker_admin	choose_datatype	Scelgi un tipo dato e puoi impostare preferenze, gruppi, categorie, utenti e permessi
+tracker_admin	section	Tracker
+tracker_admin	title	Amministrazione
+tracker_admin	category_inserted	Categoria inserita
+tracker_admin	group_inserted	Gruppo inserito
+tracker_admin	canned_response_inserted	Risposta predefinita inserita
+tracker_admin	users_added	Utenti aggiunti
+tracker_admin	users_updated	Utenti aggiornati
+tracker_admin	users_deleted	Utenti cancellati
+tracker_admin	canned_response_updated	Risposta predefinita aggiornata
+tracker_admin	category_updated	Categoria aggiornata
+tracker_admin	group_updated	Gruppo aggiornato
+tracker_admin	tracker_updated	Tracker aggiornato
+tracker_admin	tracker_id	ID
+tracker_admin	tracker_title	Titolo
+tracker_admin	category_name	Nome categoria
+tracker_admin	auto_assign_to	Assegna automaticamente a:
+tracker_admin	category_add_warning	Una volta inserita una categoria, non pu&ograve; essere cancellata.
+tracker_admin	group_name	Nome gruppo 
+tracker_admin	intro	<h3>Crea un nuovo tracker</h3><p>Questo sistema permette di tracciare virtualmente qualsiasi tipo di dato. Ogni tracker ha differenti gruppi, categorie, utenti e permissi. Si possono anche spostare elementi tra un tracker e l'altro.</p>
+tracker_admin_add_cat	title	Aggiungi categorie a $1
+tracker_admin_add_cat	no_categories	Nessuna categoria definita
+tracker_admin_add_group	title	Aggiungi/modifica gruppi per $1
+tracker_admin_add_group	no_groups_defined	Nessun gruppo definito
+tracker_admin_add_group	group_add_warning	Una volta aggiunto un gruppo, non pu&ograve; essere cancellato
+tracker_admin_add_canned	no_responses	Nessuna risposta predefinita inserita
+tracker_admin_add_canned	canned_response_info	Pu&ograve; essere molto utile creare messaggi generici che ti permettono di risparmiare molto tempo quando bisogna trattare molte richieste simili.
+tracker_admin_add_canned	canned_response_title	Titolo
+tracker_admin_add_canned	canned_response_body	Contenuto del messaggio
+tracker_admin_add_canned	title	Aggiungi/modifica risposte predefinite per $1
+tracker_admin_add_canned	existing_responses	Risposte esistenti
+tracker_admin_add_users	title	Aggiungi/aggiorna permessi utenti per $1
+tracker_admin_add_users	no_developers	Nessuno sviluppatore inserito
+tracker_admin_add_users	developers_info	<p>Ogni tracker definito ha un elenco di utenti e permessi proprio.</p><p>Aggiungi utenti al tracker aggiorna i permessi.</p><p><dl><dt><strong>Tecnici</strong></dt><dd>A tecnici pu&ograve; essere assegnato un elemento</dd><dt><strong>Amministratore</strong></dt><dd>Un amministrazione pu&ograve; cambiare gli elementi</dd></dl></p>
+tracker_admin_add_users	delete	Cancella
+tracker_admin_add_users	user_name	Nome utente
+tracker_admin_add_users	category_permission	Permessi
+tracker_admin_add_users	technician	Tecnici
+tracker_admin_add_users	tech_admin	Tecnico & Amministratore
+tracker_admin_add_users	admin_only	Amministratore
+tracker_admin_add_users	update_permissions	Aggiorna permessi utenti
+tracker_admin_add_users	add_user_info	<h3>Aggiungi utenti:</h3><p>Puoi selezionare gli utenti da aggiungere al tracker oppure aggiungere tutti gli utenti al tracker selezionando "Aggiungi tutti gli utenti".</p>
+tracker_admin_add_users	add_users	Aggiungi utenti
+tracker_admin_add_users	add_all_users	Aggiungi tutti gli utenti
+tracker_admin_update_canned	title	Modifica risposte predefinite per : $1
+tracker_admin_update_users	title	Aggiungi/modifica permessi utenti
+tracker_admin_choose	title	Amministrazione tracker
+tracker_admin_update_cat	title	Modifica categoria in : $1
+tracker_admin_update_cat	category_name	Nome categoria
+tracker_admin_update_cat	auto_assign_to	Assegna automaticamente a
+tracker_admin_update_cat	category_change_warning	Non &egrave; raccomandato che si cambia la categoria dato che altri dati dipendono da questo. Quando cambi il nome di una categoria, verr&agrave; cambiato il nome a tutti i dati relativi.
+tracker_admin_update_group	title	Modifica un gruppo: $1
+tracker_admin_update_group	warning	Non &egrave; raccomandato che si cambia il gruppo dato che altri dati dipendono da questo. Quando cambi il nome di un gruppo, verr&agrave; cambiato il nome a tutti i dati relativi.
+tracker_admin_update_type	title	Aggiorna $1
+tracker_admin_update_type	name	<strong> Nome:</strong> (esempio: verbali, risultati di test, documenti, etc.)
+tracker_admin_update_type	description	Descrizione
+tracker_admin_update_type	publicy_available	Publico
+tracker_admin_update_type	allow_anonymous	Permetti inserimenti anonimi
+tracker_admin_update_type	display_resolution	Visualizza la casella "Risoluzione"
+tracker_admin_update_type	send_submissions	Invia email per nuovi inserimenti all'indirizzo
+tracker_admin_update_type	email_all_changes	Invia email per tutti i cambiamenti
+tracker_admin_update_type	days_overdue	Numero giorni dopo il quale l'elemento &egrave; da considerarsi fuori tempo
+tracker_admin_update_type	pending_timeout	Numero giorni dopo i quali elementi fuori tempo scadono
+tracker_admin_update_type	submit_item_form_text	Testo libero per la pagina di inserimento
+tracker_admin_update_type	browse_item_form_text	Testo libero per la pagina di visualizzazione
+tracker_admin	add_categories	Aggiorna/modifica Categoria
+tracker_admin	add_categories_info	Aggiungi categorie come 'modulo mail', 'diagramma di gantt', etc.
+tracker_admin	add_groups	Aggiorna/modifica gruppi
+tracker_admin	add_group_infos	Aggiungi gruppi come, 'v1.2','non supportata','non verificata', etc
+tracker_admin	add_canned_responses	Aggiungi/modifica risposte predefinite
+tracker_admin	add_canned_responses_info	Crea/cambia risposte predefinite per il tracker
+tracker_admin	add_permissions	Aggiungi/modifica permessi utente
+tracker_admin	add_permissions_info	Aggiungi/rimuovi utenti a/da questo tracker
+tracker_admin	update_preferences	Aggiorna preferenze
+tracker_admin	update_preferences_info	Imposta preferenze come tempi di scadenza, indirizzi email, etc
+stats_graph	sitewide_statistics_graphs      Statistiche sul sito
+stats_graph	overview_stats	Sommario sulle statistiche
+stats_graph	project_stats	Statistiche del progetto
+stats_graph	site_graphs	Grafici del sito
+stats_index	sitewide_aggregate_statistics	Statistiche sul sito aggregate
+stats_index	overview_stats	Sommario sulle statistiche
+stats_index	project_stats	Grafici del sito
+stats_index	site_graphs	Statistiche sul sito aggregate
+stats_index	other_statistics	Altre statistiche :<ul><li><a href="lastlogins.php">Login pi&ugrave; recenti</a></li><li><a href="i18n.php">Statistiche sulle lingue</a></li></ul>
+stats_lastlogins	no_records	Nessun record trovato
+stats_lastlogins	last_logins	Ultimi login
+stats_lastlogins	most_recent_open	Sessioni pi&ugrave; aperte di recente
+stats_lastlogins	date	Data
+stats_lastlogins	username	Nome utente
+stats_lastlogins	source_ip	Indirizzo IP

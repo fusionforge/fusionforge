@@ -28,7 +28,7 @@ class ArtifactTypeHtml extends ArtifactType {
 
 	function header($params) {
 		global $DOCUMENT_ROOT;
-
+		global $Language;
 		$group_id= $this->Group->getID();
 
 		//required by new site_project_header
@@ -39,12 +39,12 @@ class ArtifactTypeHtml extends ArtifactType {
 		site_project_header($params);
 		echo '<h3>Tracker: <a href="/tracker/?group_id='.$group_id.'&atid='.$this->getID().'">'.$this->getName().'</a></h3><p>';
 
-		echo '<strong><a href="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">Submit New</a>';
-		echo ' | <a href="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">Browse</a>';
+		echo '<strong><a href="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','submit_new').'</a>';
+		echo ' | <a href="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','browse').'</a>';
 		if (session_loggedin()) {
-			echo ' | <a href="/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID() .'">Reporting</a>';
+			echo ' | <a href="/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','reporting').'</a>';
 		}
-		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'">Admin</a>';
+		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker_artifacttype','admin').'</a>';
 
 		echo '</strong><p>';
 		//echo '<HR NoShade SIZE="1" SIZE="90%">';
@@ -55,21 +55,34 @@ class ArtifactTypeHtml extends ArtifactType {
 	}
 
 	function adminHeader($params) {
+		global $Language;
 		echo $this->header($params);
 		$group_id= $this->Group->getID();
-		echo '<strong>Admin Functions: <a href="/tracker/admin/?group_id='.$group_id.'">Add/Browse Artifact Types</a>';
-		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">Edit/Update Options in: '. $this->getName() .'</a></strong>';
+		echo '<strong>'.$Language->getText('tracker_artifacttype','admin_functions').': <a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker_artifacttype','add_artifact_types').'</a>';
+		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','edit_options').': '. $this->getName() .'</a></strong>';
 	}
 
-	function categoryBox ($name='category_id',$checked='xzxz',$text_100='None') {
+	function categoryBox ($name='category_id',$checked='xzxz',$text_100='none') {
+		global $Language;
+		if ($text_100 == 'none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
 		return html_build_select_box ($this->getCategories(),$name,$checked,true,$text_100);
 	}
 
-	function artifactGroupBox ($name='artifact_group_id',$checked='xzxz',$text_100='None') {
+	function artifactGroupBox ($name='artifact_group_id',$checked='xzxz',$text_100='none') {
+		global $Language;
+		if ($text_100=='none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
 		return html_build_select_box ($this->getGroups(),$name,$checked,true,$text_100);
 	}
 
-	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='None') {
+	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='none') {
+		global $Language;
+		if ($text_100=='none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
 		return html_build_select_box ($this->getTechnicians(),$name,$checked,$show_100,$text_100);
 	}
 
@@ -77,11 +90,19 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_build_select_box ($this->getCannedResponses(),$name,$checked);
 	}
 
-	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100='None') {
+	function statusBox ($name='status_id',$checked='xzxz',$show_100=false,$text_100='none') {
+		global $Language;
+		if ($text_100=='none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
 		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
 	}
 
-	function resolutionBox ($name='resolution_id',$checked='xzxz',$show_100=false,$text_100='None') {
+	function resolutionBox ($name='resolution_id',$checked='xzxz',$show_100=false,$text_100='none') {
+		global $Language;
+		if ($text_100=='none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
 		return html_build_select_box($this->getResolutions(),$name,$checked,$show_100,$text_100);
 	}
 
