@@ -49,6 +49,8 @@ if ($submit) {
 		$use_frs,
 		$use_stats
 	);
+	
+	plugin_hook("groupisactivecheckboxpost",false);
 	//100 $logo_image_id
 
 	if (!$res) {
@@ -241,6 +243,8 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_stats') ?></strong>
 </td>
 </tr>
+
+<?php plugin_hook("groupisactivecheckbox", false) ?>
 
 </table>
 

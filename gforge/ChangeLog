@@ -1,3 +1,8 @@
+2003-06-17 Christian Bayle	<bayle@debian.org>
+
+	* Applied patch #395 and #394 for groupisactivecheckboxpost
+	and groupisactivecheckbox hooks
+
 2003-06-17 Tom Copeland  <tom@infoether.com>
 
 	* www/project/stats_graph.php:

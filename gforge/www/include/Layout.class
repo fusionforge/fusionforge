@@ -590,6 +590,13 @@ if ($params['group']) {
 		$TABS_TITLES[]=$Language->getText('group','short_files');
 		(($toptab == 'downloads') ? $selected=(count($TABS_TITLES)-1) : '' );
 
+		// groupmenu Hook
+		$hookParams['DIRS'] = &$TABS_DIRS;
+		$hookParams['TITLES'] = &$TABS_TITLES;
+		$hookParams['toptab'] = &$toptab;
+		$hookParams['selected'] = &$selected;
+				
+		plugin_hook ("groupmenu", $hookParams) ; 
 		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,true,$selected,'white','100%');
 
 	}
