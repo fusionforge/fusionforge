@@ -800,6 +800,15 @@ class Group extends Error {
 	}
 
 	/**
+	 *  getSCMBox - the hostname of the scm box where this project is located.
+	 *
+	 *  @return	string	The name of the unix machine for the group.
+	 */
+	function getSCMBox() {
+		return $this->data_array['scm_box'];
+	}
+
+	/**
 	 *  getDomain - the hostname.domain where their web page is located.
 	 *
 	 *  @return	string	The name of the group [web] domain.
