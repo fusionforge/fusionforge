@@ -221,7 +221,7 @@ class RoleObserver extends Error {
 						}
 						$sql="UPDATE groups
 							SET
-							enable_anoncvs='".$data['scmpublic'][0]."',
+							enable_anonscm='".$data['scmpublic'][0]."',
 							is_public='".$data['projectpublic'][0]."'
 							WHERE group_id='".$this->Group->getID()."'";
 //echo "\n<br>$sql";
