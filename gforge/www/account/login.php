@@ -104,37 +104,25 @@ if (browser_is_ie() && browser_is_mac()) {
 ?>
 	
 <p>
-<font color="red"><B>Cookies must be enabled past this point.</B></font>
+<font color="red"><B><?php echo $Language->getText('account_login', 'cookiewarn'); ?></B></font>
 <P>
 <form action="https://<?php echo $HTTP_HOST; ?>/account/login.php" method="post">
 <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<?php echo $return_to; ?>">
 <p>
-Login Name:
+<?php echo $Language->getText('account_login', 'loginname'); ?>
 <br><input type="text" name="form_loginname" VALUE="<?php echo $form_loginname; ?>">
 <p>
-Password:
+<?php echo $Language->getText('account_login', 'passwd'); ?>
 <br><input type="password" name="form_pw">
 <P>
-<INPUT TYPE="CHECKBOX" NAME="stay_in_ssl" VALUE="1" <?php echo ((browser_is_ie() && browser_get_version() < '5.5')?'':'CHECKED') ?>> Stay in SSL mode after login
-<p>
-<B><FONT COLOR="RED">You will be connected with an SSL server when you submit this form and your password will not be visible to other users.
-</FONT></B> 
-<small style="font-size: x-small">
-(If you wonder why very this page is not loaded via SSL, please read
-next paragraph. Thank you.)
-</small>
-
-<P>
-<B>Internet Explorer</B> users will have intermittent SSL problems, so they should leave SSL 
-after login. Netscape users should stay in SSL mode permanently for maximum security.
-Visit <A HREF="http://www.microsoft.com/">Microsoft</A> for more information about this known problem.
-<P>
-<input type="submit" name="login" value="Login With SSL">
+<INPUT TYPE="CHECKBOX" NAME="stay_in_ssl" VALUE="1" <?php echo ((browser_is_ie() && browser_get_version() < '5.5')?'':'CHECKED') ?>> <?php echo $Language->getText('account_login', 'usessl'); ?>
+<?php echo $Language->getText('account_login', 'sslnotice'); ?>
+<input type="submit" name="login" value="<?php echo $Language->getText('account_login', 'login'); ?>">
 </form>
 <P>
-<A href="lostpw.php">[Lost your password?]</A>
+<A href="lostpw.php"><?php echo $Language->getText('account_login', 'lostpw'); ?></A>
 <P>
-<A HREF="register.php">[New Account]</A>
+<A HREF="register.php"><?php echo $Language->getText('account_login', 'newaccount'); ?></A>
 
 <?php
 

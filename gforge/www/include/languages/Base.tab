@@ -27,6 +27,14 @@ account_first	title	Welcome to SourceForge!
 account_login	deleted_account	<p>Your SourceForge account has been removed by SourceForge staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a<a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>SourceForge Staff</p>
 account_login	pending_account	<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
 account_login	title	SourceForge Site Login
+account_login	cookiewarn	Cookies must be enabled past this point.
+account_login	loginname	Login Name:
+account_login	passwd	Password:
+account_login	usessl	Stay in SSL mode after login
+account_login	sslnotice	<p><B><FONT COLOR="RED">You will be connected with an SSL server when you submit this form and your password will not be visible to other users.</FONT></B> <small style="font-size: x-small"> (If you wonder why very this page is not loaded via SSL, please read next paragraph. Thank you.) </small> <P> <B>Internet Explorer</B> users will have intermittent SSL problems, so they should leave SSL after login. Netscape users should stay in SSL mode permanently for maximum security.  Visit <A HREF="http://www.microsoft.com/">Microsoft</A> for more information about this known problem.  <P>
+account_login	login	Login with SSL
+account_login	lostpw	[Lost your password?]
+account_login	newaccount	[New Account]
 account_lostpw	message	Someone (presumably you) on the SourceForge site requested a\npassword change through email verification. If this was not you,\nignore this message and nothing will happen.\n\nIf you requested this verification, visit the following URL\nto change your password:\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- the SourceForge staff\n
 account_lostpw	subject	SourceForge Verification
 account_lostpw	title	Lost Your Password?
@@ -63,6 +71,7 @@ docman_new	section	Project: $1
 docman_new	title	Document Manager: Submit New Documentation
 forum	section	Project: $1
 forum	title	Forums
+forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
 forum_admin	section	Project: $1 
 forum_admin	title	Forums: Administration
 forum_admin_addforum	section	Forum Administration
@@ -191,6 +200,7 @@ my_diary	title	Diary And Notes
 new	title	New Releases
 news	section	Project: $1
 news	title	News
+news	choose	<P>Choose a News item and you can browse, search, and post messages.<P>
 news_admin	section	News
 news_admin	title	News Admin
 news_main	title	SourceForge News
@@ -225,6 +235,7 @@ people_viewprofile	section	User Info
 people_viewprofile	title	View Developer Profile
 pm	section	Project: $1 
 pm	title	Task Manager: Subprojects And Tasks
+pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project will have to set up projects using the admin page</FONT></B>
 pm_addtask	section	Task Manager
 pm_addtask	title	Add A Task 
 pm_admin	section	$1

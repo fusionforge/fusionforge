@@ -17,8 +17,7 @@ require_once('www/forum/forum_utils.php');
 
 news_header(array('title'=>'News','pagename'=>'news','sectionvals'=>array(group_getname($group_id))));
 
-echo '
-	<P>Choose a News item and you can browse, search, and post messages.<P>';
+echo $Language->getText('news', 'choose');
 
 /*
 	Put the result set (list of forums for this group) into a column with folders

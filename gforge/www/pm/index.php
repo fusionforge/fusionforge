@@ -30,10 +30,7 @@ if ($group_id) {
 	$result = db_query ($sql);
 	$rows = db_numrows($result); 
 	if (!$result || $rows < 1) {
-		echo "<H1>No Subprojects Found</H1>";
-		echo "<P>
-			<B>No subprojects have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project ".
-			"will have to set up projects using the admin page</FONT></B>";
+		echo $Language->getText('pm', 'noprj');
 		pm_footer(array());
 		exit;
 	}

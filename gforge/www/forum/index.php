@@ -41,7 +41,7 @@ if ($group_id) {
 		exit;
 	}
 
-	echo '<P>Choose a forum and you can browse, search, and post messages.<P>';
+	echo $Language->getText('forum', 'choose');
 
 	/*
 		Put the result set (list of forums for this group) into a column with folders

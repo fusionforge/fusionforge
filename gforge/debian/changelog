@@ -4,8 +4,10 @@ sourceforge (2.6-0+11+) unstable; urgency=low
     translation files.  See README.Custom for details.
   * [Roland] Applied Olafur's "Making DNS simpler" patch, with a few
     changes.
+  * [Roland] Applied Soon-Son's patch #281 increasing internationalisation
+    and the Korean translation.
 
- -- Roland Mas <lolando@debian.org>  Mon, 29 Apr 2002 13:55:04 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 29 Apr 2002 14:00:50 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
