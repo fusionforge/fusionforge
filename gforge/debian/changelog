@@ -1,4 +1,4 @@
-sourceforge (2.5-10+11) unstable; urgency=low
+sourceforge (2.5-10+12) unstable; urgency=low
 
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
@@ -37,8 +37,13 @@ sourceforge (2.5-10+11) unstable; urgency=low
   * [Christian] Download server added
   * [Christian] File Release FRS support added (closes: #108173)
   * [Christian] Added CVS nightly tarballs 
+  * Fixed errors in LDAP configuration so that the online creation of
+    groups and users works.
+  * Fixed a thinko in debian/sourceforge/cron.d.
+  * Added a periodical check for the presence of an incoming directory in
+    the users' home dir.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Thu, 20 Sep 2001 02:00:34 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Oct 2001 17:49:51 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 
