@@ -8,9 +8,6 @@
 ##############################
 $db_include	=	"/etc/gforge/local.pl";	# Local Include file for database username and password
 $tar_dir	=	"/tmp";			# Place to put deleted user's accounts
-$uid_add	=	"20000";		# How much to add to the database uid to get the unix uid
-$gid_add	=	"10000";		# How much to add to the database gid to get the unix uid
-$anoncvs_uid_add	=	"50000";
 $homedir_prefix =	"/var/lib/gforge/chroot/home/users/";		# What prefix to add to the user's homedir
 $grpdir_prefix  =	"/var/lib/gforge/chroot/home/groups/";	# What prefix to add to the user's homedir
 $file_dir	=	"/var/lib/gforge/";	# Where should we stick files we're working with
