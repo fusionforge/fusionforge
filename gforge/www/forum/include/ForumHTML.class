@@ -96,9 +96,11 @@ function forum_header($params) {
 		}
 	}
 
-	echo '<A HREF="/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id.'">' .
-		html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
-		$Language->getText('forum_message','thread').'</A> | ';
+	if ($f && $forum_id) {
+		echo '<A HREF="/forum/new.php?forum_id='.$forum_id.'&group_id='.$group_id.'">' .
+			html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
+			$Language->getText('forum_message','thread').'</A> | ';
+	}
 	echo '  <A HREF="/forum/admin/?group_id='.$group_id.'">'.$Language->getText('forum_utils','admin').'</A></B>';
 	echo '<P>';
 }

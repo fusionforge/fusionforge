@@ -119,20 +119,6 @@ if ($forum_id) {
 		$public_flag='1';
 	}
 
-	//
-	//Bastard hack for news forums
-	//
-	if ($group_id==$GLOBALS['sys_news_group']) {
-		echo '<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">';
-	} else {
-		$res=db_query("SELECT group_forum_id,forum_name ".
-			"FROM forum_group_list ".
-			"WHERE group_id='$group_id' AND is_public IN ($public_flag)");
-		$vals=util_result_column_to_array($res,0);
-		$texts=util_result_column_to_array($res,1);
-
-		$forum_popup = html_build_select_box_from_arrays ($vals,$texts,'forum_id',$forum_id,false);
-	}
 	//create a pop-up select box showing options for viewing threads
 
 	$vals=array('nested','flat','threaded','ultimate');
@@ -148,17 +134,17 @@ if ($forum_id) {
 
 	//now show the popup boxes in a form
 	$ret_val .= '
-	<TABLE BORDER="0" WIDTH="50%">
+	<TABLE BORDER="0" WIDTH="33%">
 	<FORM ACTION="'. $PHP_SELF .'" METHOD="GET">
 	<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
 	<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">
-		<TR><TD><FONT SIZE="-1">'. $forum_popup .
-			'</TD><TD><FONT SIZE="-1">'. $options_popup .
+		<TR><TD><FONT SIZE="-1">'. $options_popup .
 			'</TD><TD><FONT SIZE="-1">'. $max_row_popup .
 			'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.
 			$Language->getText('forum_forum','changeview').'">
 		</TD></TR>
-	</TABLE></FORM>';
+	</TABLE></FORM>
+	<P>';
 
 	if ($style=='nested') {
 
