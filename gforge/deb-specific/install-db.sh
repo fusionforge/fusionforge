@@ -66,6 +66,14 @@ EOF
 		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 		rm -f $cur
 	    fi
+	    # Set the password for the user
+            db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
+	    su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
+update pg_shadow set passwd='$db_passwd' where usename='gforge' ;
+EOF
+	    # Remove old password file
+	    [ -e /var/lib/postgres/data/gforge_passwd ] && rm -f /var/lib/postgres/data/gforge_passwd
+
 	fi
 	;;
     configure)
@@ -91,12 +99,6 @@ EOF
 	    rm -f $tmp1 $tmp2
 	    exit 1
 	fi
-
-	# Set the password for the user
-	db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
-	su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
-update pg_shadow set passwd='$db_passwd' where usename='gforge' ;
-EOF
 
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
