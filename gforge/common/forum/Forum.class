@@ -8,6 +8,7 @@
  * @version   $Id$
  */
 
+require_once('pre.php');
 require_once('common/include/Error.class');
 require_once('common/forum/ForumMessage.class');
 
@@ -105,11 +106,22 @@ class Forum extends Error {
 			return false;
 		}
 
-		$perm =& $this->Group->getPermission( session_get_user() );
+		// This is a hack to allow non-site-wide-admins to post
+		// news.  The news/submit.php checks for proper permissions.
+		// This needs to be revisited.
+		global $sys_news_group;
+		if ($this->Group->getID() == $sys_news_group) {
+			// Future check will be added.
 
-		if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
-			$this->setError('Permission Denied');
-			return false;
+		} else {
+			// Current permissions check.
+
+			$perm =& $this->Group->getPermission( session_get_user() );
+
+			if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
+				$this->setError('Permission Denied');
+				return false;
+			}
 		}
 
 		$sql="INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous)
@@ -296,7 +308,7 @@ class Forum extends Error {
 			$this->setError('You Can Only Monitor If You Are Logged In');
 			return false;
 		}
-		$sql="SELECT * FROM forum_monitored_forums 
+		$sql="SELECT * FROM forum_monitored_forums
 			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
 		$result = db_query($sql);
 
@@ -305,7 +317,7 @@ class Forum extends Error {
 				User is not already monitoring thread, so
 				insert a row so monitoring can begin
 			*/
-			$sql="INSERT INTO forum_monitored_forums (forum_id,user_id) 
+			$sql="INSERT INTO forum_monitored_forums (forum_id,user_id)
 				VALUES ('".$this->getID()."','".user_getid()."')";
 
 			$result = db_query($sql);
@@ -324,7 +336,7 @@ class Forum extends Error {
 			$this->setError('You Can Only Monitor If You Are Logged In');
 			return false;
 		}
-		$sql="DELETE FROM forum_monitored_forums 
+		$sql="DELETE FROM forum_monitored_forums
 			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
 		return db_query($sql);
 	}
@@ -333,7 +345,7 @@ class Forum extends Error {
 		if (!session_loggedin()) {
 			return false;
 		}
-		$sql="SELECT * FROM forum_monitored_forums 
+		$sql="SELECT * FROM forum_monitored_forums
 			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."';";
 
 		$result = db_query($sql);
@@ -350,7 +362,7 @@ class Forum extends Error {
 			$this->setError('You Can Only Save Your Place If You Are Logged In');
 			return false;
 		}
-		$sql="SELECT * FROM forum_saved_place 
+		$sql="SELECT * FROM forum_saved_place
 			WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."'";
 
 		$result = db_query($sql);
@@ -371,7 +383,7 @@ class Forum extends Error {
 			}
 
 		} else {
-			$sql="UPDATE forum_saved_place 
+			$sql="UPDATE forum_saved_place
 				SET save_date='".time()."'
 				WHERE user_id='".user_getid()."' AND forum_id='".$this->getID()."'";
 			$result = db_query($sql);
