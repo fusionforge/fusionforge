@@ -91,7 +91,7 @@ $sys_path_to_scmweb='/usr/lib/gforge/bin/';
 //server to use for updates and reads
 //If this is null (i.e. ""), then gforge will use Unix sockets to connect
 //to the database.
-$sys_dbhost="localhost";
+$sys_dbhost="";
 //whether or not to use replication
 $sys_db_use_replication=false;
 $sys_dbreadhost='localhost';

@@ -1,6 +1,6 @@
 <?php
 	// PLEASE DO NOT REMOVE THIS LINE
-	$sys_dbhost="localhost";
+	$sys_dbhost="";
 	$sys_dbname="alexandria";
 	$sys_dbuser="www";
 	$sys_dbpasswd="";

@@ -20,7 +20,7 @@ UseCanonicalName Off
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "/path/to/gforge/etc/custom:/path/to/gforge:/path/to/gforge/www/include:."
+  php_admin_value include_path "/path/to/gforge/etc/custom:/etc/gforge:/path/to/gforge:/path/to/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
   php_flag register_globals "On"
 </Directory>
@@ -135,7 +135,7 @@ UseCanonicalName Off
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "/path/to/gforge/etc/custom:/path/to/gforge:/path/to/gforge/www/include:."
+  php_admin_value include_path "/path/to/gforge/etc/custom:/etc/gforge:/path/to/gforge:/path/to/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
 </Directory>
 
