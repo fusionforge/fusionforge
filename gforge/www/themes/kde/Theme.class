@@ -468,7 +468,8 @@ class Theme extends Layout {
 					<td colspan="2" height="1"></td>
 				</tr>
 				<tr align="left">
-					<td colspan="2">';
+					<td colspan="2">
+		<!-- /boxTop -->';
 	}
 
 	/**
@@ -490,7 +491,8 @@ class Theme extends Layout {
 					<td colspan="2" height="1"></td>
 				</tr>
 				<tr>
-					<td colspan="2">';
+					<td colspan="2">
+				<!-- /boxMiddle -->';
 	}
 
 	/**
