@@ -102,7 +102,7 @@ forward_for_gforge:
   domains = users.$domain_name
   driver = redirect
   file_transport = address_file
-  data = \${lookup pgsql {select email from mta_users where login=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select email from mta_users where login=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -110,7 +110,7 @@ forward_for_gforge_lists:
   domains = $sys_lists_host
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select post_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select post_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -119,7 +119,7 @@ forward_for_gforge_lists_owner:
   local_part_suffix = -owner
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select owner_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select owner_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -128,7 +128,7 @@ forward_for_gforge_lists_request:
   local_part_suffix = -request
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select request_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select request_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -137,7 +137,7 @@ forward_for_gforge_lists_admin:
   local_part_suffix = -admin
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select admin_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select admin_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -146,7 +146,7 @@ forward_for_gforge_lists_bounces:
   local_part_suffix = -bounces
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select bounces_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select bounces_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -155,7 +155,7 @@ forward_for_gforge_lists_confirm:
   local_part_suffix = -confirm
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select confirm_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select confirm_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -164,7 +164,7 @@ forward_for_gforge_lists_join:
   local_part_suffix = -join
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select join_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select join_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -173,7 +173,7 @@ forward_for_gforge_lists_leave:
   local_part_suffix = -leave
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select leave_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select leave_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -182,7 +182,7 @@ forward_for_gforge_lists_subscribe:
   local_part_suffix = -subscribe
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select subscribe_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select subscribe_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 
@@ -191,7 +191,7 @@ forward_for_gforge_lists_unsubscribe:
   local_part_suffix = -unsubscribe
   driver = redirect
   pipe_transport = address_pipe
-  data = \${lookup pgsql {select unsubscribe_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{$value}{fail}}
+  data = \${lookup pgsql {select unsubscribe_address from mta_lists where list_name=".chr(39)."\$local_part".chr(39)."}{\$value}}
   user = nobody
   group = nogroup
 # END GFORGE BLOCK #
