@@ -39,10 +39,8 @@ function forum_header($params) {
 	if ($group_id == $sys_news_group) {
 		//this is a news item, not a regular forum
 		if ($forum_id) {
-			/*
-				Show this news item at the top of the page
-			*/
-			$sql="SELECT * FROM news_bytes WHERE forum_id='$forum_id'";
+			// Show this news item at the top of the page
+			$sql="SELECT submitted_by, post_date, group_id, forum_id, summary, details FROM news_bytes WHERE forum_id='$forum_id'";
 			$result=db_query($sql);
 
 			$params['group']=db_result($result,0,'group_id');
@@ -52,8 +50,7 @@ function forum_header($params) {
 
 			echo '<table><tr><td valign="top">';
 			if (!$result || db_numrows($result) < 1) {
-				echo '
-					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
+				echo '<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
 			} else {
 				$user = user_get_object(db_result($result,0,'submitted_by'));
 				$group =& group_get_object($params['group']);

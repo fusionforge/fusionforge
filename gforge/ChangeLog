@@ -1,5 +1,11 @@
-2004-04-08
+2004-04-06  Tom Copeland <tom@infoether.com>
 	
+	* www/forum/include/ForumHTML.class: SQL optimization - replaced a 'select *'
+	with explicit field selection.  This really didn't save that much, since only
+	only field was unused, but every little bit helps.
+
+2004-04-08
+
 	* Better management of symlink in apache config (install-apache.sh and
 	setup)
 	* sys_localinc variable has now priority on all others local.inc
