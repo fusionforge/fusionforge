@@ -20,33 +20,12 @@ here have been transferred onto the Savannah project, at
 
 * [RM] Decide on whether to use a chroot or not.
 
-* [RM] Implement a (more) secure way of moving the files from the
-  incoming dir to the published location.  Probably involves a
-  root:root setuid program that checks the availability of some secret
-  that's only given to a restricted set of PHP files (for instance,
-  the correct database password), and changing said incoming dirs to
-  user:user, perms 755.
-
-* [RM] Use update-inetd(8) in install-dns.sh instead of modifying the
-  inetd config file by hand.  Less error-prone, and we'll also
-  probably get more portable (I'm thinking xinetd here).
-  [CB] It's now in install-cvs.sh. Unfortunatly update-inetd
-  doesn't seems to do anything for xinetd and it doesn't restore old 
-  cvs config. We should contact cvs packager for a sourceforge-friendly install
-  cvs install breaks sourceforge cvs replacement.
-
 * [RM] Split DB-related part from sourceforge.postinst into an
   install-db.sh script.
 
-* [RM] Add a cron job to remove released files from the database if
-  the file is erased.  (Maybe not needed: if users are chrooted, they
-  should not be able to remove files there.)
-
 * [RM] Provide a way to un-release a file, and (why not?) to modify a
-  released file afterwards.  Maybe.
-
-* [RM] Fix the QRS so that it does not create a new release by the
-  same name if it already exists.
+  released file afterwards.  Maybe.  [RM] Already supposed to work
+  (edit releases), needs testing.
 
 # Local variables:
 # mode: indented-text
