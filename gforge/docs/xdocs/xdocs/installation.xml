@@ -492,14 +492,12 @@ Connect to the gforge, and register a new account.
 
 
 <ol>
-<li>Insert a valid email address, it is needed for the account confirmation.<br/>
+<li>Insert a valid email address; this will be used for the account confirmation.<br/>
 </li>
-<li>Open your e-mail client, wait for the email from gforge site and follow the link that appears on the message.<br/>
+<li>Open your e-mail client, wait for the email from GForge site and follow the link that appears on the message.<br/>
 </li>
-<li>Verify in Account Maintenance the User Id of the user registered.<br/>
-Usually this is 102, but you can verify this by 
-running the following SQL query via the Postgres psql 
-utility:
+<li>Verify in Account Maintenance the user id of the user registered.<br/>
+Usually this is 102, but you can verify this by running the following SQL query via the Postgres <code>psql</code> utility:
 <br/>
 <code>
 psql -c "select user_id from users where user_name='***YOUR USER NAME***'" gforge gforge
@@ -507,7 +505,7 @@ psql -c "select user_id from users where user_name='***YOUR USER NAME***'" gforg
 </code>
 <br/>
 </li>
-<li>Now set the newly added user up to be a GForge administrator
+<li>Now set up the newly added user to be a GForge administrator
 <code>
 <br/>
 psql -U gforge -d gforge
