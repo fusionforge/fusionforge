@@ -286,7 +286,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	exit_assert_object($newsgroup,'Group');
 	$perm =& $newsgroup->getPermission( session_get_user() );
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
-		$sql="SELECT * FROM news_bytes WHERE is_approved=0";
+		$sql="SELECT * FROM news_bytes nb, groups g WHERE nb.is_approved=0 and nb.group_id = g.group_id and g.status = 'A'";
 		$result=db_query($sql);
 		$rows=db_numrows($result);
 		if ($rows) {

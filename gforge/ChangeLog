@@ -1,3 +1,8 @@
+2004-05-04  Tom Copeland <tom@infoether.com>
+
+	* www/my/index.php: Fixed bug #788: Site admin's 'my page' shows 
+	news postings from deleted projects
+
 2004-04-16  Christian Bayle <bayle@debian.org>
 
 	* Added DirectoryIndex in etc/httpd.d/40virtualhost
