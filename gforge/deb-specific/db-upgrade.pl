@@ -675,6 +675,30 @@ eval {
 	$dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+8" ;
+    if (is_lesser $version, $target) {
+	debug "Adding integrity constraints between the Trove map tables." ;
+
+	@reqlist = (
+		    "ALTER TABLE trove_group_link ADD CONSTRAINT tgl_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
+		    "ALTER TABLE trove_group_link ADD CONSTRAINT tgl_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
+		    "ALTER TABLE trove_agg ADD CONSTRAINT trove_agg_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
+		    "ALTER TABLE trove_agg ADD CONSTRAINT trove_agg_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
+		    "ALTER TABLE trove_treesums ADD CONSTRAINT trove_treesums_cat_id_fk FOREIGN KEY (trove_cat_id) REFERENCES trove_cat(trove_cat_id) MATCH FULL",
+		    ) ;
+	foreach my $s (@reqlist) {
+	    $query = $s ;
+	    # debug $query ;
+	    $sth = $dbh->prepare ($query) ;
+	    $sth->execute () ;
+	    $sth->finish () ;
+	}
+	@reqlist = () ;
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
 
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
