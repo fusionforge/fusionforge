@@ -1,3 +1,6 @@
+2004-03-08  Tom Copeland <tom@infoether.com>
+	* SQL optimization: Replaced 'select *' in User.class
+
 2004-03-05  Tom Copeland <tom@infoether.com>
 	* Added group_id parameter to rss_sfnews.php; did
 	some more date->post_date, too.

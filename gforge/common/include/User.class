@@ -1179,9 +1179,9 @@ class User extends Error {
 	 */
 	function setUpTheme() {
 		if (!$this->theme) {
-			$res=db_query("SELECT * FROM themes WHERE theme_id='".$this->getThemeID()."'");
+			$res=db_query("SELECT dirname FROM themes WHERE theme_id='".$this->getThemeID()."'");
 			$this->theme=db_result($res,0,'dirname');
-			$GLOBALS['sys_theme']=db_result($res,0,'dirname');
+			$GLOBALS['sys_theme']=$this->theme;
 		}
 		return $this->theme;
 	}
