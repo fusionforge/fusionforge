@@ -38,7 +38,7 @@ class Document extends Error {
 	/**
 	 *  Constructor.
 	 *
-	 *	@param	object	The Group object to which this forum is associated.
+	 *	@param	object	The Group object to which this document is associated.
 	 *  @param  int	 The docid.
 	 *  @param  array	The associative array of data.
 	 */
@@ -80,46 +80,39 @@ class Document extends Error {
 		return true;
 	}
 
-	function create($forum_name,$description,$is_public=1,$send_all_posts_to='',$create_default_message=1,$allow_anonymous=1) {
+	function create($filename,$filetype,$data,$doc_group,$title,$language_id,$description) {
 
-		if (strlen($forum_name) < 3) {
-			$this->setError('Document Name Must Be At Least 3 Characters');
+		if (strlen($title) < 5) {
+			$this->setError('Title Must Be At Least 5 Characters');
 			return false;
 		}
 		if (strlen($description) < 10) {
 			$this->setError('Document Description Must Be At Least 10 Characters');
 			return false;
 		}
-		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
-			$this->setError('Invalid Email Address');
+
+/*
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isDocumentAdmin()) {
+			$this->setError('Permission Denied');
 			return false;
 		}
+*/
+		$user_id = ((session_loggedin()) ? user_getid() : 100);
 
-		// This is a hack to allow non-site-wide-admins to post
-		// news.  The news/submit.php checks for proper permissions.
-		// This needs to be revisited.
-		global $sys_news_group;
-		if ($this->Group->getID() == $sys_news_group) {
-			// Future check will be added.
-
-		} else {
-			// Current permissions check.
-
-			$perm =& $this->Group->getPermission( session_get_user() );
-
-			if (!$perm || !is_object($perm) || !$perm->isDocumentAdmin()) {
-				$this->setError('Permission Denied');
-				return false;
-			}
-		}
-
-		$sql="INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous)
+		$sql="INSERT INTO doc_data (group_id,title,description,createdate,
+			stateid,language_id,filename,filetype,data,created_by)
 			VALUES ('".$this->Group->getId()."',
-			'". htmlspecialchars($forum_name) ."',
-			'$is_public',
+			'". htmlspecialchars($title) ."',
 			'". htmlspecialchars($description) ."',
-			'$send_all_posts_to',
-			'$allow_anonymous')";
+			'". time() ."',
+			'3',
+			'$language_id',
+			'$filename',
+			'$filetype',
+			'". base64_encode($data) ."',
+			'$user_id')";
 
 		db_begin();
 		$result=db_query($sql);
@@ -128,17 +121,12 @@ class Document extends Error {
 			$this->setError('Error Adding Document: '.db_error());
 			return false;
 		}
-		$this->docid=db_insertid($result,'forum_group_list','docid');
-		$this->fetchData($this->docid);
-
-		if ($create_default_message) {
-			$fm=new DocumentMessage($this);
-			if (!$fm->create('Welcome To '.$forum_name,'Welcome To '.$forum_name)) {
-				$this->setError($fm->getErrorMessage());
-				return false;
-//Error check?
-			}
+		$docid=db_insertid($result,'doc_data','docid');
+		if (!$this->fetchData($docid)) {
+			db_rollback();
+			return false;
 		}
+		$this->sendNotice(true);
 		db_commit();
 		return true;
 	}
@@ -243,20 +231,81 @@ class Document extends Error {
 		return $this->data_array['group_name'];
 	}
 
+	/**
+	 *	getCreatorID - get this creator's user_id.
+	 *
+	 *	@return	int	The user_id.
+	 */
+	function getCreatorID() {
+		return $this->data_array['created_by'];
+	}
 
+	/**
+	 *	getCreatorUserName - the unix name of the person who created this document.
+	 *
+	 *	@return string	The unix name of the creator.
+	 */
+	function getCreatorUserName() {
+		return $this->data_array['user_name'];
+	}
 
-	function update($forum_name,$description,$is_public=1,$send_all_posts_to='',$allow_anonymous=0) {
+	/**
+	 *	getCreatorRealName - the real name of the person who created this document.
+	 *
+	 *	@return string	The real name of the creator.
+	 */
+	function getCreatorRealName() {
+		return $this->data_array['realname'];
+	}
 
-		if (strlen($forum_name) < 3) {
-			$this->setError('Document Name Must Be At Least 3 Characters');
+	/**
+	 *	getCreatorEmail - the email of the person who created this document.
+	 *
+	 *	@return string	The email of the creator.
+	 */
+	function getCreatorEmail() {
+		return $this->data_array['email'];
+	}
+
+	/**
+	 *	getFileName - the filename of this document.
+	 *
+	 *	@return string	The filename.
+	 */
+	function getFileName() {
+		return $this->data_array['filename'];
+	}
+
+	/**
+	 *	getFileType - the filetype of this document.
+	 *
+	 *	@return string	The filetype.
+	 */
+	function getFileType() {
+		return $this->data_array['filetype'];
+	}
+
+	/**
+	 *	getFileData - the filedata of this document.
+	 *
+	 *	@return string	The filedata.
+	 */
+	function getFileData() {
+		//
+		//	Because this could be a large string, we only fetch if we actually need it
+		//
+		$res=db_query("SELECT data FROM doc_data WHERE docid='".$this->getID()."'");
+		return base64_decode(db_result($res,0,'data'));
+	}
+
+	function update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid) {
+
+		if (strlen($title) < 5) {
+			$this->setError('Title Must Be At Least 5 Characters');
 			return false;
 		}
 		if (strlen($description) < 10) {
 			$this->setError('Document Description Must Be At Least 10 Characters');
-			return false;
-		}
-		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
-			$this->setError('Invalid Email Address');
 			return false;
 		}
 
@@ -267,12 +316,16 @@ class Document extends Error {
 			return false;
 		}
 
-		$res=db_query("UPDATE forum_group_list SET
-			forum_name='". htmlspecialchars($forum_name) ."',
+		$res=db_query("UPDATE doc_data SET
+			title='". htmlspecialchars($title) ."',
 			description='". htmlspecialchars($description) ."',
-			is_public='$is_public',
-			send_all_posts_to='$send_all_posts_to',
-			allow_anonymous='$allow_anonymous'
+			stateid='$stateid',
+			doc_group='$doc_group',
+			filetype='$filetype',
+			filename='$filename',
+			data='$data',
+			language_id='$language_id',
+			updatedate='". time() ."'
 			WHERE group_id='".$this->Group->getID()."'
 			AND docid='".$this->getID()."'");
 
@@ -280,6 +333,11 @@ class Document extends Error {
 			$this->setError('Error On Update: '.db_error());
 			return false;
 		}
+		$this->sendNotice(false);
+		return true;
+	}
+
+	function sendNotice ($true=true) {
 		return true;
 	}
 

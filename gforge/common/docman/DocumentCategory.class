@@ -1,0 +1,197 @@
+<?php
+/**
+ * GForge Doc Mgr Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+
+/*
+	Document Manager
+
+	by Quentin Cregan, SourceForge 06/2000
+
+	Complete OO rewrite by Tim Perdue 1/2003
+*/
+
+require_once('common/include/Error.class');
+
+class DocumentCategory extends Error {
+
+	/** 
+	 * The artifact type object
+	 *
+	 * @var		object	$Group
+	 */
+	var $Group; //object
+
+	/**
+	 * Array of artifact data
+	 *
+	 * @var		array	$data_array
+	 */
+	var $data_array;
+
+	/**
+	 *  DocumentCategory - constructor.
+	 *
+	 *  Use this constructor if you are modifying an existing doc_group.
+	 *
+	 *	@param	object	Group object.
+	 *  @param	array	(all fields from doc_groups) OR doc_group from database.
+	 *  @return boolean.
+	 */
+	function DocumentCategory(&$Group, $data=false) {
+		$this->Error(); 
+
+		//was Group legit?
+		if (!$Group || !is_object($Group)) {
+			$this->setError('DocumentCategory: No Valid Group');
+			return false;
+		}
+		//did Group have an error?
+		if ($Group->isError()) {
+			$this->setError('DocumentCategory: '.$Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $Group;
+
+		if ($data) {
+			if (is_array($data)) {
+				$this->data_array =& $data;
+//
+//	should verify group_id
+//
+				return true;
+			} else {
+				if (!$this->fetchData($data)) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+	}
+
+	/**
+	 *	create() - create a new item in the database
+	 *
+	 *	@param	string	Item name
+	 *	@param	int		User_id of assignee
+	 *  @return id on success / false on failure
+	 */
+	function create($name) {
+		//
+		//	data validation
+		//
+		if (!$name) {
+			$this->setError('DocumentCategory: name is Required');
+			return false;
+		}
+
+		$perm =& $this->Group->getPermission (session_get_user());
+		if (!$perm || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+		$sql="INSERT INTO doc_groups (group_id,groupname) 
+			VALUES ('".$this->Group->getID()."','$name')";
+
+		$result=db_query($sql);
+
+		if ($result && db_affected_rows($result) > 0) {
+			$this->clearError();
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+
+/*
+			//
+			//	Now set up our internal data structures
+			//
+			if (!$this->fetchData($id)) {
+				return false;
+			}
+*/
+	}
+
+	/**
+	 *	fetchData() - re-fetch the data for this DocumentCategory from the database
+	 *
+	 *	@param	int		ID of the category
+	 *	@return true/false
+	 */
+	function fetchData($id) {
+		$res=db_query("SELECT * FROM doc_groups WHERE doc_group='$id'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('DocumentCategory: Invalid DocumentCategory ID');
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *	getGroup - get the Group Object this DocumentCategory is associated with.
+	 *
+	 *	@return Object Group.
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+	
+	/**
+	 *	getID - get this DocumentCategory's ID.
+	 *
+	 *	@return	int	The id #.
+	 */
+	function getID() {
+		return $this->data_array['doc_group'];
+	}
+
+	/**
+	 *	getName - get the name.
+	 *
+	 *	@return	String	The name.
+	 */
+	function getName() {
+		return $this->data_array['groupname'];
+	}
+
+	/**
+	 *  update - update an DocumentCategory.
+	 *
+	 *  @param	string	Name of the category.
+	 *  @return boolean.
+	 */
+	function update($name) {
+		$perm =& $this->Group->getPermission (session_get_user());
+		if (!$perm || !$perm->isDocAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+		if (!$name) {
+			$this->setError('Missing Params');
+			return false;
+		}   
+		$sql="UPDATE doc_groups 
+			SET groupname='$name'
+			WHERE doc_group='". $this->getID() ."' 
+			AND group_id='".$this->Group->getID()."'";
+		$result=db_query($sql);
+		if ($result && db_affected_rows($result) > 0) {
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+	}
+}
+
+?>
