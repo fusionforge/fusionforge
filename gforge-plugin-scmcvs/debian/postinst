@@ -30,8 +30,16 @@ case "$1" in
 	# Prepare database
 	/usr/lib/gforge/plugins/scmcvs/bin/db-upgrade.pl
 	/usr/lib/gforge/bin/register-plugin scmcvs "CVS"
-	invoke-rc.d apache reload
-
+	test -f /etc/default/apache2 && . /etc/default/apache2
+	if [ "$NO_START" != "0" ]; then
+		if [ -x /usr/sbin/apache ]; then
+			/usr/sbin/invoke-rc.d apache reload > /dev/null 2>&1
+		fi
+	else
+		if [ -x /usr/sbin/apache2 ]; then
+			/usr/sbin/invoke-rc.d apache2 reload > /dev/null 2>&1
+		fi
+	fi
         # Setup our CVS
 	/usr/lib/gforge/plugins/scmcvs/bin/install-cvs.sh configure
 
