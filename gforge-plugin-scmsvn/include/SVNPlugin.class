@@ -28,15 +28,15 @@ require_once('common/include/User.class');
 class SVNPlugin extends SCM {
 	function SVNPlugin () {
 		$this->SCM () ;
-		$this->name = "scmsvn";
-		$this->text = "SVN";
-		$this->hooks[] = "scm_page";
-		$this->hooks[] = "scm_admin_update";
-		$this->hooks[] = "scm_admin_page";
-// to be revised		$this->hooks[] = "scm_stats";
-//		$this->hooks[] = "group_approved";
-
-		$this->hooks[] = "scm_plugin";
+		$this->name = 'scmsvn';
+		$this->text = 'SVN';
+		$this->hooks[] = 'scm_page';
+		$this->hooks[] = 'scm_admin_update';
+		$this->hooks[] = 'scm_admin_page';
+// to be revised		
+// 		$this->hooks[] = "scm_stats";
+// 		$this->hooks[] = "group_approved";
+		$this->hooks[] = 'scm_plugin';
 
 		require_once('plugins/scmsvn/config.php') ;
 		
@@ -54,24 +54,23 @@ class SVNPlugin extends SCM {
 		global $Language, $HTML ;
 		
 		switch ($hookname) {
-		case "scm_page":
+		case 'scm_page':
 			$group_id = $params['group_id'] ;
 			$this->display_scm_page ($group_id) ;
 			break ;
-		case "scm_admin_update":
+		case 'scm_admin_update':
 			$this->scm_admin_update ($params) ;
 			break ;
-		case "scm_admin_page":
+		case 'scm_admin_page':
 			$this->display_scm_admin_page ($params) ;
 			break ;
-		case "scm_stats":
+		case 'scm_stats':
 			$this->display_stats ($params) ;
 			break;
-/*		case "group_approved":
-			$this->group_approved ($params) ;
-			break;
-*/
-		case "scm_plugin":
+// 		case "group_approved":
+// 			$this->group_approved ($params) ;
+// 			break;
+		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
 			break;
@@ -90,99 +89,76 @@ class SVNPlugin extends SCM {
 			return false;
 		}
 
-		if ($project->usesPlugin ("scmsvn")) {
-			
-			
+		if ($project->usesPlugin ($this->name)) {
 
+			// Should svn browser links to be displayed?
+			$displaySvnBrowser = false;
+			if(session_loggedin()) {
+				$perm =& $project->getPermission(session_get_user());
+				if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
+					$displaySvnBrowser = true;
+				}
+			} else {
+				$displaySvnBrowser = $project->enableAnonSCM();
+			}
 
-// ######################## table for summary info
+			// ######################## Table for summary info
+			?>
+			<table width="100%">
+			<tr valign="top">
+				<td width="65%">
+				<?php
+				print $Language->getText('plugin_scmsvn','documentation');
 
-?>
-<table width="100%">
-	<tr valign="top">
-		<td width="65%">
-<?php
-// ######################## anonymous SVN instructions
+				// ######################## Anonymous SVN Instructions
+				if ($project->enableAnonSCM()) {
+					print $Language->getText('plugin_scmsvn', 'anonsvn');
+					print '<p>';
+					if ($this->use_ssh) {
+						print '<tt>svn checkout svn://' . $project->getSCMBox(). '/'. $this->svn_root .'/'. $project->getUnixName() .'</tt>';
+					}
+					if ($this->use_dav) {
+						print '<tt>http'.(($this->use_ssl) ? 's' : '').'://' . $project->getSCMBox(). '/'. $this->svn_root .'/'. $project->getUnixName() .'</tt>';
+					}
+					print '</p>';
+				}
+	
+				// ######################## Developer Access
+				if ($this->use_ssh) {
+					echo $Language->getText('plugin_scmsvn', 'devsvnssh');
+					print '<p><tt>svn checkout svn+ssh://<i>'.$Language->getText('plugin_scmcvs', 'developername').'</i>@' . $project->getSCMBox() . '/'. $this->svn_root .'/'. $project->getUnixName().'</tt></p>' ;
+				}
+				if ($this->use_dav) {
+					echo $Language->getText('plugin_scmsvn', 'devsvndav');
+					print '<p><tt>svn checkout --username <i>'.$Language->getText('plugin_scmcvs', 'developername').'</i> http'.(($this->use_ssl) ? 's' : '').'://'. $project->getSCMBox() .'/'. $this->svn_root .'/'.$project->getUnixName().'</tt></p>' ;
+				}
 
-	 print '<h2>Subversion</h2>
-	<p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.
-	</p>' ;
+				// ######################## SVN Snapshot
+				if ($displaySvnBrowser) {
+					print '
+						<p>
+						[<a href="/snapshots.php?group_id='.$group_id.'">'.$Language->getText('plugin_scmsvn', 'download_snapshot').'</a>]
+						</p>';
+				}
+				?>
+				</td>
 
-	if ($project->enableAnonSCM()) {
-		// echo $Language->getText('scm_index', 'anoncvs');
-		print "<b>Anonymous Subversion Access</b>
-						<p>";
-		if ($this->use_ssh) {
-			print "<tt>svn checkout svn://" . $project->getSCMBox(). "/". $this->svn_root ."/". $project->getUnixName() ."</tt>";
+				<td width="35%" valign="top">
+				<?php
+				// ######################## SVN Browsing
+				echo $HTML->boxTop($Language->getText('plugin_scmsvn', 'history'));
+				echo $this->display_stats(array('group_id'=>$group_id)).'<p>';
+				if ($displaySvnBrowser) {
+					echo $Language->getText('plugin_scmsvn', 'browsetree');
+					echo '<p>[<a href="http://' . $project->getSCMBox() . '/plugins/scmsvn/cgi-bin/viewcvs.cgi?root=' . $project->getUnixName() . '">' . $Language->getText('plugin_scmsvn', 'browseit') . '</a>]</p>';
+				}
+				echo $HTML->boxBottom();
+				?>
+				</td>
+			</tr>
+			</table>
+			<?php
 		}
-		if ($this->use_dav) {
-			print "<tt>http".(($this->use_ssl) ? 's' : '')."://" . $project->getSCMBox(). "/". $this->svn_root ."/". $project->getUnixName() ."</tt>";
-		}
-		print "</p>";
-	}
-
-// ############################ developer access
-
-	if ($this->use_ssh) {
-		// echo $Language->getText('scm_index', 'devcvs');
-		print "<b>Developer Subversion Access via SSH</b>" ;
-
-		print "<p>
-		<tt>svn checkout svn+ssh://<i>developername</i>@" . $project->getSCMBox() . "/". $this->svn_root ."/". $project->getUnixName()."</tt></p>" ;
-	}
-	if ($this->use_dav) {
-		print "<b>Developer Subversion Access via DAV</b>" ;
-
-		print "<p>
-		<tt>svn checkout --username <i>developername</i> http".(($this->use_ssl) ? 's' : '')."://". $project->getSCMBox() ."/". $this->svn_root ."/".$project->getUnixName()."</tt></p>" ;
-	}
-
-// ################## summary info
-
-?>
-
-		</td>
-		<td width="35%">
-
-<?php
-
-// ############################## SVN Browsing
-
-$anonymous = 1 ;
-if (session_loggedin()) {
-   $perm =& $project->getPermission(session_get_user());
-	if (!$perm || !is_object($perm)) {
-		return false;
-	} elseif ($perm->isError()) {
-		return false;
-	}
-	$anonymous = !$perm->isMember();
-}
- 
-if ($project->enableAnonSCM()) {
-	echo $HTML->boxTop($Language->getText('scm_index', 'history'));
-
-	// echo $Language->getText('scm_index', 'browsetree');
-	echo "<b>Browse the Subversion Tree</b><p>Browsing the Subversion tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>" ;
-
-	echo "<p><a href=\"http://" . $project->getSCMBox() . "/plugins/scmsvn/cgi-bin/viewcvs.cgi?root=".$project->getUnixName()."\">Browse SVN tree</a></p>" ;
-
-	echo $HTML->boxBottom();
-}
-
-?>
-		</td>
-	</tr>
-</table>
-
-<?php
-
-// ************************************************
-
-
-
-		}
-
 	}
 
 	function scm_admin_update ($params) {
@@ -199,7 +175,7 @@ if ($project->enableAnonSCM()) {
 	// This function is used to render checkboxes below
 	function c($v) {
 		if ($v) {
-			return 'CHECKED';
+			return 'checked';
 		} else {
 			return '';
 		}
@@ -207,14 +183,12 @@ if ($project->enableAnonSCM()) {
 
 	function display_scm_admin_page ($params) {
 		$group =& group_get_object($params['group_id']);
+		global $Language ;
 		if ( $group->usesPlugin ( $this->name ) ) {
-?>
-		<input type="CHECKBOX" name="scmsvn_enable_anon_svn" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> >
-		<strong>Allow anonymous Subversion</strong>
-		<br />
-<?php
+			?>
+			<p><input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> ><strong><?php echo $Language->getText('plugin_scmsvn', 'enable_anonymous_svn') ?></strong></p>
+			<?php
 		}
-
 	}
 
 	function display_stats ($params) {
@@ -232,7 +206,7 @@ if ($project->enableAnonSCM()) {
 		if (!$add_num) {
 			$add_num=0;
 		}
-		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
+		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).')';
 	}
 
 	// Not used at the moment and probably useless
@@ -246,9 +220,9 @@ if ($project->enableAnonSCM()) {
 			return false;
 		}
 		if ($this->enabled_by_default) {
-			$project->setPluginUse("scmsvn", 1) ;
+			$project->setPluginUse('scmsvn', 1) ;
 		} else {
-			$project->setPluginUse("scmsvn", 0) ;
+			$project->setPluginUse('scmsvn', 0) ;
 		}
 		return true;
 	}

@@ -5,16 +5,16 @@ require_once('common/include/User.class');
 class CVSPlugin extends SCM {
 	function CVSPlugin () {
 		$this->SCM () ;
-		$this->name = "scmcvs";
-		$this->text = "CVS";
-		$this->hooks[] = "scm_page";
-		$this->hooks[] = "scm_admin_update";
-		$this->hooks[] = "scm_admin_page";
-		$this->hooks[] = "scm_stats";
+		$this->name = 'scmcvs';
+		$this->text = 'CVS';
+		$this->hooks[] = 'scm_page';
+		$this->hooks[] = 'scm_admin_update';
+		$this->hooks[] = 'scm_admin_page';
+		$this->hooks[] = 'scm_stats';
 
-		$this->hooks[] = "scm_plugin";
-//		$this->hooks[] = "group_approved";
-		$this->hooks[] = "cssfile";
+		$this->hooks[] = 'scm_plugin';
+//		$this->hooks[] = 'group_approved';
+		$this->hooks[] = 'cssfile';
 
 		require_once('plugins/scmcvs/config.php') ;
 
@@ -29,27 +29,26 @@ class CVSPlugin extends SCM {
 		global $Language, $HTML;
 		
 		switch ($hookname) {
-		case "scm_page":
+		case 'scm_page':
 			$group_id = $params['group_id'] ;
 			$this->display_scm_page ($group_id) ;
 			break ;
-		case "scm_admin_update":
+		case 'scm_admin_update':
 			$this->scm_admin_update ($params) ;
 			break ;
-		case "scm_admin_page":
+		case 'scm_admin_page':
 			$this->display_scm_admin_page ($params) ;
 			break ;
-		case "scm_stats":
+		case 'scm_stats':
 			$this->display_stats ($params) ;
 			break;
-/*		case "group_approved":
-			$this->group_approved ($params) ;
-			break;
-*/
-		case "cssfile":
+// 		case "group_approved":
+// 			$this->group_approved ($params) ;
+// 			break;
+		case 'cssfile':
 			$this->cssfile_scm ($params) ;
 			break;
-		case "scm_plugin":
+		case 'scm_plugin':
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
 			break;
@@ -74,77 +73,71 @@ class CVSPlugin extends SCM {
 		
 		if ($project->usesPlugin($this->name)) {
 		
-		print $Language->getText('plugin_scmcvs','documentation');
+			print $Language->getText('plugin_scmcvs','documentation');
 
-		$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
+			$cvsrootend=$project->getSCMBox().':/cvsroot/'.$project->getUnixName();
 
-		// ######################## table for summary info
+			// Should cvs browser links to be displayed?
+			$displayCvsBrowser = false;
+			if(session_loggedin()) {
+				$perm =& $project->getPermission(session_get_user());
+				if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
+					$displayCvsBrowser = true;
+				}
+			} else {
+				$displayCvsBrowser = $project->enableAnonSCM();
+			}
 
-?>
-<table width="100%">
-	<tr valign="top">
-		<td width="65%">
-<?php
-// ######################## anonymous CVS instructions
+			// ######################## Table for summary info
+			?>
+			<table width="100%">
+			<tr valign="top">
+				<td width="65%">
+			 	<?php
+				// ######################## Anonymous CVS Instructions
+				if ($project->enableAnonSCM()){
+					echo $Language->getText('plugin_scmcvs', 'anoncvs');
+					print '
+						<p>
+						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' login</tt><br/>
+						<tt>cvs -d :pserver:anonymous@' . $cvsrootend.' checkout <em>'.$Language->getText('plugin_scmcvs', 'modulename').'</em></tt>
+						</p>';
+				}
 
-	if ($project->enableAnonSCM()){
-		echo $Language->getText('plugin_scmcvs', 'anoncvs');
-		print "
-			<p>
-				<tt>cvs -d :pserver:anonymous@" . $cvsrootend." login</tt><br>
-				<tt>cvs -d :pserver:anonymous@" . $cvsrootend." checkout <em>modulename</em></tt>
-			</p>" ;
-	 }
+				// ######################## Developer Access
+				echo $Language->getText('plugin_scmcvs', 'devcvs');
+				print '
+					<p>
+					<tt>export CVS_RSH=ssh</tt><br/>
+					<tt>cvs -d :ext:<em>'.$Language->getText('plugin_scmcvs', 'developername').'</em>@'.$cvsrootend.' checkout <em>'.$Language->getText('plugin_scmcvs', 'modulename').'</em></tt>
+					</p>';
 
-// ############################ developer access
-			
-	echo $Language->getText('plugin_scmcvs', 'devcvs');
-		print "
-			<p>
-				<tt>export CVS_RSH=ssh</tt><br>
-				<tt>cvs -d :ext:<em>username</em>@".$cvsrootend." checkout <em>modulename</em></tt>
-			</p>" ;
+				// ######################## CVS Snapshot
+				if ($project->enableAnonSCM() or $displayCvsBrowser) {
+					print '
+						<p>
+						[<a href="/snapshots.php?group_id='.$group_id.'">'.$Language->getText('plugin_scmcvs', 'download_snapshot').'</a>]
+						</p>';
+	 			}
+				?>
+				</td>
 
-?>
-
-		</td>
-		<td width="35%">
-
-<?php
-
-// ############################## CVS Browsing
-
-$displayCvsBrowser = false;
-if(session_loggedin()) {
-	$perm =& $project->getPermission(session_get_user());
-	if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
-		$displayCvsBrowser = true;
-	}
-} else {
-	$displayCvsBrowser = $project->enableAnonSCM();
-}
- 
-echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
-echo $this->display_detailed_stats(array('group_id'=>$group_id)).'<p>';
-if ($displayCvsBrowser){
-	echo $Language->getText('plugin_scmcvs', 'browsetree');
-	echo '<p><a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a></p>' ;
-}
-echo $HTML->boxBottom();
-
-?>
-		</td>
-	</tr>
-</table>
-
-<?php
-
-// ************************************************
-
-
-
-		}
-
+				<td width="35%" valign="top">
+				<?php
+				// ######################## CVS Browsing 
+				echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
+				echo $this->display_detailed_stats(array('group_id'=>$group_id)).'<p>';
+				if ($displayCvsBrowser){
+					echo $Language->getText('plugin_scmcvs', 'browsetree');
+					echo '<p>[<a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>]</p>' ;
+				}
+				echo $HTML->boxBottom();
+				?>
+				</td>
+			</tr>
+			</table>
+			<?php
+		}	
 	}
 
 	function scm_admin_update ($params) {
@@ -166,7 +159,7 @@ echo $HTML->boxBottom();
 	// This function is used to render checkboxes below
 	function c($v) {
 		if ($v) {
-			return 'CHECKED';
+			return 'checked';
 		} else {
 			return '';
 		}
@@ -175,15 +168,15 @@ echo $HTML->boxBottom();
 	function display_scm_admin_page ($params) {
 		global $Language;
 		$group =& group_get_object($params['group_id']);
+
 		if ($group->usesPlugin($this->name)) {
-	?>
-		<input type="CHECKBOX" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?> >
-		<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_anonymous_cvs') ?></strong>
-		<br />
-		<input type="CHECKBOX" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?> >
-		<strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_pserver') ?></strong>
-		<br />
-	<?php
+			?>
+			<p>
+			<input type="checkbox" name="scmcvs_enable_anoncvs" value="1" <?php echo $this->c($group->enableAnonSCM()); ?>><strong><?php echo $Language->getText('plugin_scmcvs','enable_anonymous_cvs') ?></strong>
+			<br />
+			<input type="checkbox" name="scmcvs_enable_pserver" value="1" <?php echo $this->c($group->enablePserver()); ?>><strong><?php echo $Language->getText('plugin_scmcvs','enable_pserver') ?></strong>
+			</p>
+			<?php
 		}
 	}
 
@@ -202,7 +195,7 @@ echo $HTML->boxBottom();
 		if (!$add_num) {
 			$add_num=0;
 		}
-		echo ' (CVS: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
+		echo ' (CVS: '.$Language->getText('plugin_scmcvs','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
 	}
 	
 	function display_detailed_stats ($params) {
