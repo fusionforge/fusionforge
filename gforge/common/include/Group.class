@@ -299,16 +299,17 @@ class Group extends Error {
 	 *	@access public
 	 */
 	function updateAdmin(&$user, $is_public, $license, $type, $unix_box, $http_domain) {
+		global $Language;
 
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
-			$this->setError('Could not get permission');
+			$this->setError($Language->getText('general','permnotget'));
 			return false;
 		}
 
 		if (!$perm->isSuperUser()) {
-			$this->setError('Permission Denied');
+			$this->setError($Language->getText('general','permdenied'));
 			return false;
 		}
 
@@ -396,16 +397,17 @@ class Group extends Error {
 		$new_task_address,$send_all_tasks,$logo_image_id,
 		$enable_pserver,$enable_anoncvs,
 		$use_ftp,$use_tracker,$use_frs,$use_stats) {
+		global $Language;
 
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
-			$this->setError('Could not get permission');
+			$this->setError($Language->getText('general','permnotget'));
 			return false;
 		}
 
 		if (!$perm->isAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setError($Language->getText('general','permdenied'));
 			return false;
 		}
 
@@ -555,16 +557,17 @@ class Group extends Error {
 	 *	@access public
 	 */
 	function setStatus(&$user, $status) {
+		global $Language;
 
 		$perm =& $this->getPermission($user);
 
 		if (!$perm || !is_object($perm)) {
-			$this->setError('Could not get permission');
+			$this->setError($Language->getText('general','permnotget'));
 			return false;
 		}
 
 		if (!$perm->isSuperUser()) {
-			$this->setError('Permission Denied');
+			$this->setError($Language->getText('general','permdenied'));
 			return false;
 		}
 

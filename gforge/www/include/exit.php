@@ -29,8 +29,9 @@ function exit_error($title,$text) {
  * @param		string	$reason_descr
  */
 function exit_permission_denied($reason_descr='') {
-	if (!$reason_descr) $reason_descr='This project\'s administrator will have to grant you permission to view this page.';
-	exit_error('Permission Denied',$reason_descr);
+	global $Language;
+	if (!$reason_descr) $reason_descr=$Language->getText('general','permexcuse');
+	exit_error($Language->getText('general','permdenied'),$reason_descr);
 }
 
 /**

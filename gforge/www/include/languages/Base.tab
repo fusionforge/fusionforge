@@ -194,6 +194,9 @@ frs	latest_file_releases	Latest File Releases
 general	return	[Return to $1]
 general	sitename	Sourceforge
 general	footer	This is Debian SourceForge.  For more about it, including copyright info, see <a href="/about.php">this page</a>.
+general	permdenied	Permission Denied.
+general	permnotget	Could not get permission
+general	permexcuse	This project's administrator will have to grant you permission to view this page.
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
@@ -311,7 +314,6 @@ news	nonewsfor	No News Found For $1
 news	noitems	No items were found
 news_admin	section	News
 news_admin	title	News Admin
-news_admin	permdeniedtitle	Permission Denied.
 news_admin	permdenied	You have to be an admin on the project you are editing or a member of the $1 News team.
 news_main	title	News
 news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the news team before they will appear on the $1 home page.

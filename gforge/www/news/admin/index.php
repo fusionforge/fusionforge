@@ -273,7 +273,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 } else {
 
-	exit_error($Language->getText('news_admin','permdeniedtitle'),$Language->getText('news_admin','permdenied',$GLOBALS['sys_name']));
+	exit_error($Language->getText('general','permdenied'),$Language->getText('news_admin','permdenied',$GLOBALS['sys_name']));
 
 }
 ?>

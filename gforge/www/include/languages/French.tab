@@ -201,6 +201,9 @@ frs	latest_file_releases	Sorties récentes
 general	return	[Retour à la page d'acceuil]
 general	sitename	Sourceforge
 general	footer	Vous êtes sur Debian Sourceforge.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
+general	permdenied	Accés Interdit.
+general	permnotget	Accés non permis
+general	permexcuse	Vous devez obtenir l'autorisation de l'administrateur de ce projet pour voir cette page.
 group	developer_info	Information sur les développeurs
 group	developers	Développeurs
 group	long_bugs	Gestion des bogues
@@ -318,7 +321,6 @@ news	nonewsfor	Aucune nouveauté trouvée pour: $1
 news	noitems	Aucun enregistrement trouvé
 news_admin	section	Nouveautés
 news_admin	title	Administration des nouveautés
-news_admin	permdeniedtitle	Accés Interdit.
 news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe $1 des nouveautés.
 news_main	title	Nouveautés de Sourceforge
 news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe de Sourceforge pour apparaître sur la page d'accueil de Sourceforge.
