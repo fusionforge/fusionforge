@@ -185,7 +185,7 @@ if($sys_use_pm) {
 <?php
 }
 
-if($sys_use_cvs) {
+if($sys_use_scm) {
 ?>
 <tr>
 <td>

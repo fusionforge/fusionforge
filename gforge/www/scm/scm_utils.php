@@ -26,8 +26,8 @@
  */
 
 function scm_header($params) {
-	global $DOCUMENT_ROOT, $HTML, $Language, $sys_use_cvs;
-	if (!$sys_use_cvs) {
+	global $DOCUMENT_ROOT, $HTML, $Language, $sys_use_scm;
+	if (!$sys_use_scm) {
 		exit_disabled();
 	}
 

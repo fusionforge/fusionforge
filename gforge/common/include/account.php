@@ -215,17 +215,4 @@ function account_group_homedir($group) {
 	return $GLOBALS['groupdir_prefix'].'/'.$group;
 }
 
-/**
- *	account_group_cvsweb_url() - Returns URL for group's CVS interface WWW
- *
- *  @param		string	The group name
- *	@return URL to access CVS over HTTP
- */
-function account_group_cvsweb_url($group) {
-	/*
-	return 'http://'.$GLOBALS['sys_cvs_host'].'/cgi-bin/viewcvs.cgi/'.$group;
-	*/
-	return 'http://'.$GLOBALS['sys_cvs_host'].'/cgi-bin/cvsweb.cgi?cvsroot='.$group;
-}
-
 ?>

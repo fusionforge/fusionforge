@@ -1,4 +1,4 @@
-Template: gforge/shared/cvs_host
+Template: gforge/shared/scm_host
 Type: string
 _Description: Your CVS server
  The hostname of the server that will host your Gforge CVS repositories. 

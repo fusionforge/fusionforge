@@ -1,0 +1,18 @@
+//
+// SCM configuration
+//
+
+// Machine that hosts SCM
+$sys_scm_host = "{scm_host}";
+
+// Force the use of a single scm host instead of scm.project.domain.com
+// Set to 1 to use scm.domain.com for all projects
+// Set to 0 to use scm.project.domain.com
+$sys_scm_single_host = 1;
+
+// Path to tarballs directory
+$sys_scm_tarballs_path='{sys_cvs_tarballs_path}';
+
+// Path to SCMWEB
+$sys_path_to_scmweb='{sys_path_to_scmweb}';
+

@@ -425,7 +425,7 @@ setup_robot() {
 	tmpldifmod=$(mktemp $tmpfile_pattern)
 	cat > $tmpldif <<-FIN
 dn: $gforge_base_dn
-objectClass: domain
+objectClass: organization
 dc: $dc
 
 dn: ou=People,$gforge_base_dn

@@ -895,8 +895,8 @@ class Group extends Error {
 	 *	@return	boolean	uses_cvs.
 	 */
 	function usesCVS() {
-		global $sys_use_cvs;
-		if ($sys_use_cvs) {
+		global $sys_use_scm;
+		if ($sys_use_scm) {
 			return $this->data_array['use_cvs'];
 		} else {
 			return false;
@@ -1618,7 +1618,7 @@ class Group extends Error {
 			$l->loadLanguageID($row_admins['language']);
 
 			//																			   $1					  $2					$3							  $4						  $5						$6
-			$message=stripcslashes($l->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_cvs_host'], $this->getID(), $GLOBALS['sys_name'])));
+			$message=stripcslashes($l->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_scm_host'], $this->getID(), $GLOBALS['sys_name'])));
 	
 			util_send_message($row_admins['email'], $l->getText('classgroup', 'acceptedprojecttitle', array($GLOBALS['sys_name'])), $message);
 		}

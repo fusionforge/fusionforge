@@ -1,7 +1,7 @@
 # PLEASE DO NOT REMOVE THIS LINE
 
 $sys_default_domain = '{domain_name}' ;
-$sys_cvs_host = '{cvs_host}' ;
+$sys_scm_host = '{scm_host}' ;
 $sys_download_host = 'download.{domain_name}' ;
 $sys_shell_host = '{shell_host}' ;
 $sys_users_host = '{users_host}' ;

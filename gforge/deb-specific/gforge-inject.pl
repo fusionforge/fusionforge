@@ -18,7 +18,7 @@ use vars qw/ %passwd %group %shadow
 use DBI ;
 use Data::Dumper ;
 use vars qw/$dbh @reqlist $query/ ;
-use vars qw/$sys_default_domain $sys_cvs_host $sys_download_host
+use vars qw/$sys_default_domain $sys_scm_host $sys_download_host
     $sys_shell_host $sys_users_host $sys_docs_host $sys_lists_host
     $sys_dns1_host $sys_dns2_host $FTPINCOMING_DIR $FTPFILES_DIR
     $sys_urlroot $sf_cache_dir $sys_name $sys_themeroot

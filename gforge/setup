@@ -20,7 +20,7 @@ computedefault(){
 	DEFAULTdb_user=gforge
 	DEFAULTdb_password=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTip_address=`hostname -i`
-	DEFAULTcvs_host=cvs.$DEFAULTdomain_name
+	DEFAULTscm_host=scm.$DEFAULTdomain_name
 	DEFAULTshell_host=shell.$DEFAULTdomain_name
 	DEFAULTusers_host=users.$DEFAULTdomain_name
 	DEFAULTlists_host=lists.$DEFAULTdomain_name
@@ -41,7 +41,7 @@ computedefault(){
 	DEFAULTcgidir=$CGIDIR
 	DEFAULTcronolog_path=`which cronolog || echo /usr/sbin/cronolog`
 	DEFAULTsys_path_to_jpgraph=/usr/share/jpgraph/
-	DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
+	DEFAULTsys_path_to_scmweb=/usr/lib/gforge/bin/
 	DEFAULTgforge_chroot=$CHROOT
 	DEFAULTgforge_etc=$ETCDIR
 	DEFAULTsys_custom_path=$ETCDIR/custom
@@ -68,8 +68,8 @@ computedefault(){
 	DEFAULTsys_ldap_auth_port=389
 	DEFAULTsys_ldap_auth_version=3
 	DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
-	DEFAULTsys_cvs_tarballs_path=$GFGDIR/var/lib/gforge/cvstarballs
-	DEFAULTsys_use_cvs=true
+	DEFAULTsys_scm_tarballs_path=$GFGDIR/var/lib/gforge/scmtarballs
+	DEFAULTsys_use_scm=true
 	DEFAULTsys_use_tracker=true
 	DEFAULTsys_use_forum=true
 	DEFAULTsys_use_pm=true

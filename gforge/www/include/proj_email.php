@@ -39,16 +39,16 @@ while ($row_admins = db_fetch_array($res_admins)) {
 
 Project Full Name:  '.$row_grp['group_name'].'
 Project Unix Name:  '.$row_grp['unix_group_name'].'
-CVS Server:         cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].'
+SCM Server:         cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].'
 Shell/Web Server:   '.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].'
 
 Your DNS will take up to a day to become active on our site.
 While waiting for your DNS to resolve, you may try shelling into 
-'. $GLOBALS['sys_shell_host']. ' and pointing CVS to '. $GLOBALS['sys_cvs_host'].'.
+'. $GLOBALS['sys_shell_host']. ' and pointing SCM to '. $GLOBALS['sys_scm_host'].'.
 
-If after 6 hours your shell/CVS accounts still do not work, please
+If after 6 hours your shell/SCM accounts still do not work, please
 open a support ticket so that we may take a look at the problem.
-Please note that all shell/CVS accounts are closed to telnet and 
+Please note that all shell/SCM accounts are closed to telnet and 
 work with both SSH1 and SSH2.
 
 Your web site is accessible through your shell account. Please read

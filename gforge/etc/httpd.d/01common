@@ -10,4 +10,5 @@
 
 NameVirtualHost {ip_address}:80
 NameVirtualHost {ip_address}:443
-
+# This is magic for virtual hosting!
+UseCanonicalName Off

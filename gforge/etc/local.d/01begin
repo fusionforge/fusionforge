@@ -33,14 +33,6 @@ $sys_default_domain = "{domain_name}";
 //$sys_fallback_domain = "gforge2.company.com";
 //$sys_internal_network = '192.168.1.';
 
-// Machine that hosts CVS
-$sys_cvs_host = "{cvs_host}";
-
-// Force the use of a single cvs host instead of cvs.project.domain.com
-// Set to 1 to use cvs.domain.com:/cvsroot/project for all projects
-// Set to 0 to use cvs.project.domain.com:/cvsroot/project
-$sys_cvs_single_host = 1;
-
 // Machine used for downloading sources/packages
 $sys_download_host = "{download_host}";
 
@@ -71,3 +63,4 @@ $sys_lists_host = "{lists_host}";
 //    configuration
 $sys_dns1_host = "ns1.{domain_name}";
 $sys_dns2_host = "ns2.{domain_name}";
+

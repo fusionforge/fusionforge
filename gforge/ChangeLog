@@ -1,3 +1,9 @@
+2004-07-21  Christian Bayle <bayle@aist.enst.fr>
+	
+	* Some renaming cvs -> scm
+	* Rebuild etc/*.example without cvs stuffs at the moment
+	more work needed on setup
+
 2004-07-21  Tom Copeland <tom@infoether.com>
 	
 	* common/pm/ProjectTask.class: Applied patch # 

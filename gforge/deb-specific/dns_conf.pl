@@ -55,7 +55,7 @@ while(my ($http_domain,$unix_group_name,$group_name,$unix_box) = $c->fetchrow())
 		push @dns_zone, sprintf("%-24s%-16s",$unix_group_name,"IN\tA\t" . "$ip\n");
 		# Does not work with bind9  or bad syntax ???
 		#push @dns_zone, sprintf("%-24s%-28s","", "IN\tMX\t" . "mail." . $sys_default_domain . ".\n");
-		push @dns_zone, sprintf("%-24s%-20s","cvs.".$unix_group_name,"IN\tCNAME\t".$sys_cvs_host.".\n\n");
+		push @dns_zone, sprintf("%-24s%-20s","cvs.".$unix_group_name,"IN\tCNAME\t".$sys_scm_host.".\n\n");
 	} else {
 		push @dns_zone, sprintf("; Could not get ip for %s","$unix_box".".".$sys_default_domain."\n");
 	}

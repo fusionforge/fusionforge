@@ -32,7 +32,7 @@ EOF
 	ip_address=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_ip_address\n";')
 	sys_simple_dns=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_simple_dns\n";')
   	serial=`date '+%Y%m%d'`01
-  	# cvs_host lists_host are useless for now
+  	# scm_host lists_host are useless for now
   	for i in domain_name ip_address serial ; do
   	    eval "sedexpr=\"$sedexpr|sed 's/{$i}/\${$i}/g'\""
  	done

@@ -347,17 +347,9 @@ if ($project->usesCVS()) {
 	if (!$cvs_add_num) {
 		$cvs_add_num=0;
 	}
-	//echo ' (CVS: '.$Language->getText('project_home','cvs_commits',array(number_format($cvs_commit_num,0),number_format($cvs_add_num,0))).")";
 	$hook_params = array () ;
 	$hook_params['group_id'] = $group_id ;
 	plugin_hook ("scm_stats", $hook_params) ;
-
-	if ($cvs_commit_num || $cvs_add_num) {
-		echo '<br /> &nbsp; -
-			<a href="'.account_group_cvsweb_url($project->getUnixName()).'">
-			Browse SCM</a>';
-	}
-
 }
 
 // ######################## AnonFTP
