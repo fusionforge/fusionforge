@@ -5,6 +5,8 @@
 
 	* common/frs/FRSPackage.class: ditto.
 
+	* common/docman/DocumentGroup.class: ditto.
+
 	* common/frs/FRSRelease.class: ditto, plus re-fetch data on
 	update.
 

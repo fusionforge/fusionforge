@@ -21,7 +21,7 @@ require_once('common/include/Error.class');
 
 class DocumentGroup extends Error {
 
-	/** 
+	/**
 	 * The Group object.
 	 *
 	 * @var		object	$Group.
@@ -45,7 +45,7 @@ class DocumentGroup extends Error {
 	 *  @return boolean	success.
 	 */
 	function DocumentGroup(&$Group, $data=false) {
-		$this->Error(); 
+		$this->Error();
 
 		//was Group legit?
 		if (!$Group || !is_object($Group)) {
@@ -96,8 +96,8 @@ class DocumentGroup extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO doc_groups (group_id,groupname) 
-			VALUES ('".$this->Group->getID()."','$name')";
+		$sql="INSERT INTO doc_groups (group_id,groupname)
+			VALUES ('".$this->Group->getID()."','".htmlspecialchars($name)."')";
 
 		$result=db_query($sql);
 
@@ -144,7 +144,7 @@ class DocumentGroup extends Error {
 	function &getGroup() {
 		return $this->Group;
 	}
-	
+
 	/**
 	 *	getID - get this DocumentGroup's ID.
 	 *
@@ -178,10 +178,10 @@ class DocumentGroup extends Error {
 		if (!$name) {
 			$this->setError('Missing Params');
 			return false;
-		}   
-		$sql="UPDATE doc_groups 
-			SET groupname='$name'
-			WHERE doc_group='". $this->getID() ."' 
+		}
+		$sql="UPDATE doc_groups
+			SET groupname='".htmlspecialchars($name)."'
+			WHERE doc_group='". $this->getID() ."'
 			AND group_id='".$this->Group->getID()."'";
 		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {
