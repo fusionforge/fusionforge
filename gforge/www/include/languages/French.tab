@@ -1178,7 +1178,7 @@ my_diary	no_entries	Vous n'avez pas de données
 my_diary	nothing_updated	Pas de modifications
 my_diary	section	Ma page personnelle
 my_diary	submit_only_once	Soumettez une fois seulement
-my_diary	summary	Sommaire&nbsp;
+my_diary	summary	Résumé&nbsp;
 my_diary	title	Journal et notes
 my_diary	update_entry	Mise à jour d'une donnée
 my_rmproject	operation_not_permitted_text	Vous ne pouvez pas vous supprimer vous même de ce projet
