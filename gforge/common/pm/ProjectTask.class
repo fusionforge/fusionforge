@@ -615,10 +615,11 @@ class ProjectTask extends Error {
 				if (!$lnk) {
 					$lnk=PM_LINK_DEFAULT;
 				}
-				db_query("INSERT INTO project_dependencies (project_task_id,is_dependent_on_task_id,link_type) 
-					VALUES ('".$this->getID()."','". $add_arr[$i] ."','$lnk')");
+				$sql="INSERT INTO project_dependencies (project_task_id,is_dependent_on_task_id,link_type) 
+					VALUES ('".$this->getID()."','". $add_arr[$i] ."','$lnk')";
+				db_query($sql);
 				if (db_error()) {
-					$this->setError('setDependentOn()-2:: '.db_error());
+					$this->setError('setDependentOn()-2:: '.db_error().$sql);
 					return false;
 				}
 			}
@@ -765,6 +766,9 @@ class ProjectTask extends Error {
 			return false;
 		}
 
+		if (!$parent_id) {
+			$parent_id=0;
+		}
 		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
@@ -849,7 +853,7 @@ class ProjectTask extends Error {
 			}
 		}
 		
-		if (!$this->setDependentOn($depend_arr)) {
+		if (!$this->setDependentOn($this->convertDependentOn($depend_arr))) {
 			db_rollback();
 			return false;
 		} elseif (!$this->setAssignedTo($assigned_arr)) {
@@ -873,12 +877,12 @@ class ProjectTask extends Error {
 
 			$res=db_query($sql);
 			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('Error On Update: '.db_error());
+				$this->setError('Error On ProjectTask::update-5: '.db_error().$sql);
 				db_rollback();
 				return false;
 			} else {
 				if (!$this->fetchData($this->getID())) {
-					$this->setError('Error On Update: '.db_error());
+					$this->setError('Error On ProjectTask::update-6: '.db_error());
 					db_rollback();
 					return false;
 				} else {
