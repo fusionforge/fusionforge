@@ -1,4 +1,4 @@
-sourceforge (2.6-0+13+) experimental; urgency=low
+sourceforge (2.6-0+14) experimental; urgency=low
 
   * [Roland] Uuencoded all binary files in the source package, so that
     dpkg-source can build a .diff.gz from the .orig.tar.gz.  debian/rules
@@ -121,9 +121,9 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     sent as e-mails (should fix Savannah bug #1401).
   * [Christian] applied paddington patch #644 missing rotate_activity.php,
     generate artifact stats
-  * [Christian] more i18n in account management 
+  * [Christian] more i18n in account management
 
- -- Roland Mas <lolando@debian.org>  Tue, 12 Nov 2002 13:20:41 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue, 12 Nov 2002 21:49:11 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
