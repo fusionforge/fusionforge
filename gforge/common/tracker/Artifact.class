@@ -1172,10 +1172,11 @@ class Artifact extends Error {
 		$subject='[ '. $this->ArtifactType->Group->getUnixName() . '-' . $this->ArtifactType->getName() . '-' . $this->getID() .' ] '. util_unconvert_htmlspecialchars( $this->getSummary() );
 
 		if ($type > 1) {
-			/*
-				get all the email addresses that are monitoring this request
-			*/
+			// get all the email addresses that are monitoring this request or the ArtifactType
 			$monitor_ids =& $this->getMonitorIds();
+		} else {
+			// initial creation, we just get the users monitoring the ArtifactType
+			$monitor_ids =& $this->ArtifactType->getMonitorIds();
 		}
 
 		if ($more_addresses) {
