@@ -1,3 +1,8 @@
+2003-07-21 Tom Copeland  <tom@infoether.com>
+
+	* www/account/index.php:
+	Bug [ #441 ] Missing time tracker page
+
 2003-07-18 Christian Bayle	<bayle@debian.org>
 
 	* Reordered and commented loadLanguage in BaseLanguage.tab
