@@ -653,13 +653,10 @@ class Artifact extends Error {
 				$this->setError('ERROR - Logged In User Bug Could Not Get User Object');
 				return false;
 			}
-			$body=$Language->getText('tracker_artifact','logged_in_yes')." \nuser_id=$user_id\n\n".$body;
-
 			//	we'll store this email even though it will likely never be used - 
 			//	since we have their correct user_id, we can join the USERS table to get email
 			$by=$user->getEmail();
 		} else {
-			$body=$Language->getText('tracker_artifact','logged_in_no')." \n\n".$body;
 			$user_id=100;
 			if (!$by || !validate_email($by)) {
 				$this->setMissingParamsError();
