@@ -3,22 +3,16 @@
 # $Id$
 #
 # Configure exim for Sourceforge
-# Roland Mas, debian-sf (Sourceforge for Debian)
+# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 
 set -e
 
-if [ $# != 1 ] 
-    then 
-    exec $0 default
-else
-    target=$1
+if [ $(id -u) != 0 ] ; then
+    echo "You must be root to run this, please enter passwd"
+    exec su -c "$0 $1"
 fi
 
-case "$target" in
-    default)
-	echo "Usage: $0 {configure|purge}"
-	exit 1
-	;;
+case "$1" in
     configure)
 	# Make sure Apache sees us
 	perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf
@@ -53,7 +47,10 @@ case "$target" in
 		echo "extension=pgsql.so" >> /etc/php4/cgi/php.ini
 	    fi
 	fi
+
+	/etc/init.d/apache restart
 	;;
+
     purge)
   	if grep -q "Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
 	    pattern=$(basename $0)
@@ -63,6 +60,11 @@ case "$target" in
 	    rm -f $tmp
 	    /etc/init.d/apache restart
   	fi
-	
 	;;
+
+    *)
+	echo "Usage: $0 {configure|purge}"
+	exit 1
+	;;
+	
 esac

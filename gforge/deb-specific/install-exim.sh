@@ -2,23 +2,17 @@
 # 
 # $Id$
 #
-# Configure exim for Sourceforge
-# Roland Mas, debian-sf (Sourceforge for Debian)
+# Configure Exim for Sourceforge
+# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 
 set -e
 
-if [ $# != 1 ] 
-    then 
-    exec $0 default
-else
-    target=$1
+if [ $(id -u) != 0 ] ; then
+    echo "You must be root to run this, please enter passwd"
+    exec su -c "$0 $1"
 fi
 
-case "$target" in
-    default)
-	echo "Usage: $0 {configure|purge}"
-	exit 1
-	;;
+case "$1" in
     configure)
 	# Redirect "noreply" mail to the bit bucket (if need be)
 	noreply_to_bitbucket=$(perl -e'require "/etc/sourceforge/local.pl"; print "$noreply_to_bitbucket\n";')
@@ -136,6 +130,7 @@ while ($l = <>) { print $l; };
 	cat $tmp2 > /etc/exim/exim.conf
 	rm $tmp2
 	;;
+
     purge)
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
@@ -172,4 +167,10 @@ while ($l = <>) { print $l; };
 	cat $tmp2 > /etc/exim/exim.conf
 	rm $tmp2
 	;;
+
+    *)
+	echo "Usage: $0 {configure|purge}"
+	exit 1
+	;;
+
 esac

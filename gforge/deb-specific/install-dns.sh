@@ -2,8 +2,15 @@
 # 
 # $Id$
 #
-# Configure exim for Sourceforge
+# Configure Bind 9 for Sourceforge
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+
+set -e
+
+if [ $(id -u) != 0 ] ; then
+    echo "You must be root to run this, please enter passwd"
+    exec su -c "$0 $1"
+fi
 
 case "$1" in
     configure)
@@ -35,12 +42,22 @@ EOF
   	echo "	-Suppose that all servers are in the same box"
   	echo "	-Wizards advices are welcome"
 	/usr/lib/sourceforge/bin/dns_conf.pl
+
+	/etc/init.d/bind9 restart
+	# This is equivalent but require some signature, not always there
+	# /usr/sbin/rndc reload
+
 	;;
 
     purge)
 	if grep -q "// Next line inserted by Sourceforge install" /etc/bind/named.conf ; then
 	    perl -pi -e "s:zone.*sourceforge.*};\n::" /etc/bind/named.conf
 	    perl -pi -e "s:// Next line inserted by Sourceforge install\n::" /etc/bind/named.conf
+
+	    /etc/init.d/bind9 restart
+	    # This is equivalent but require some signature, not always there
+	    # /usr/sbin/rndc reload
+
 	fi
 	;;
 

@@ -7,8 +7,12 @@ sourceforge (2.6-0+0+) unstable; urgency=low
     postinst/prerm and into an install-db.sh script.
   * Cleaned the exim configuration a bit.
   * Cleaned the DNS configuration a bit.
+  * Cleaned the install-*.sh scripts a lot.  They now all look the same,
+    are more readable (well, they are more readable to me), and work
+    approximately the same way.  Added a install-skel.sh template for
+    future such scripts.
 
- -- Roland Mas <lolando@debian.org>  Fri,  2 Nov 2001 18:55:10 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  2 Nov 2001 19:45:41 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 

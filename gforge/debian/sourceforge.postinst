@@ -23,14 +23,14 @@ set -e
 #     installation fails and the `postinst' is called with `abort-upgrade',
 #     `abort-remove' or `abort-deconfigure'.
 
-. /usr/share/debconf/confmodule
-
 case "$1" in
     configure)
 	adduser --system --group --home /var/www/sourceforge sourceforge &> /dev/null
 	
 	pattern=$(basename $0).XXXXXX
 	
+	. /usr/share/debconf/confmodule
+
 	# "Fill in the blanks" in config files
         # files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl exim.directors"
         files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
@@ -49,23 +49,17 @@ case "$1" in
 	chmod 640 /etc/sourceforge/local.pl
 	# chmod 644 /etc/sourceforge/exim.directors
     	
+	# Clean debconf after ourselves
+	db_stop
+
         # Setup our DB
 	/usr/lib/sourceforge/bin/install-db.sh configure
 	
         # Setup our Apache
 	/usr/lib/sourceforge/bin/install-apache.sh configure
 
-	# Prepare a few variables for the DNS stuff
-	db_get sourceforge/domain_name
-	domain_name=$RET
-	db_get sourceforge/ip_address
-	ip_address=$RET
-
-	# Clean debconf after ourselves
-	db_stop
-
 	# Install the chroot environment
-	/usr/lib/sourceforge/bin/install-chroot.sh
+	/usr/lib/sourceforge/bin/install-chroot.sh configure
 	
 	# Create the DNS zone
 	# echo "Installing Sourceforge DNS zone"
@@ -97,11 +91,7 @@ case "$1" in
 	chmod 775 /var/log/sourceforge/cvs
 
 	# Restart some services
-	/etc/init.d/bind9 restart
-	# This is equivalent but require some signature, not always there
-	#/usr/sbin/rndc reload
 	/etc/init.d/ssh start
-	/etc/init.d/apache restart
 	
     ;;
 

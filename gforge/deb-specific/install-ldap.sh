@@ -1,9 +1,16 @@
-#!/bin/sh
+#! /bin/sh
 # 
 # $Id$
 #
-# Configure ldap for Sourceforge
+# Configure LDAP for Sourceforge
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+
+set -e
+
+if [  $(id -u) != 0 -a  "x$1" != "xlist" ] ; then
+    echo "You must be root to run this, please enter passwd"
+    exec su -c "$0 $1"
+fi
 
 PATH=$PATH:/usr/sbin
 
@@ -180,9 +187,9 @@ load_ldap(){
 }
 
 print_ldif_default(){
-dn=$1
-cryptedpasswd=$2
-cat <<-FIN
+    dn=$1
+    cryptedpasswd=$2
+    cat <<-FIN
 dn: $dn
 objectClass: top
 objectClass: domain
@@ -205,26 +212,26 @@ FIN
 }
 
 setup_vars() {
-	sys_ldap_base_dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.inc | cut -d\" -f2)
-	#echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
-	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
-	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
-	sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
-	#echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
-	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/local.inc | cut -d\" -f2)
-	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
-	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
-	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
-	#echo "=====>$cryptedpasswd"
+    sys_ldap_base_dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+    #echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
+    sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+    #echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
+    sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+    #echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
+    sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/local.inc | cut -d\" -f2)
+    #echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
+    [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
+    cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
+    #echo "=====>$cryptedpasswd"
 }
 
 # Setup SF_robot Passwd
 setup_robot() {
     setup_vars
 
-# The first account is only used in a multiserver SF
-echo "Adding robot accounts"
-ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
+    # The first account is only used in a multiserver SF
+    echo "Adding robot accounts"
+    ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
 dn: cn=Replicator,$sys_ldap_base_dn
 cn: Replicator
 sn: Replicator the Robot
@@ -242,8 +249,8 @@ objectClass: person
 userPassword: {crypt}x
 FIN
 
-echo "Changing SF_robot passwd using admin account"
-	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
+    echo "Changing SF_robot passwd using admin account"
+    ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
@@ -251,10 +258,10 @@ userPassword: $cryptedpasswd
 -
 FIN
 
-# Test!
-#naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-echo "Changing dummy cn using SF_robot account"
-	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" <<-FIN
+    # Test!
+    #naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+    echo "Changing dummy cn using SF_robot account"
+    ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
@@ -264,149 +271,76 @@ FIN
 }
 
 # Main
-if [ $# != 1 ] 
-then 
-	$0 default
-else
-	target=$1
-	if [  $(id -u) != 0 -a  "x$target" != "xlist" ] #-a "x$target" != "xclean"  ]
-	then
-	        echo "You must be root to run this, please enter passwd"
-	        su -c "$0 $target"
-	else
-		case "$target" in
-			default)
-				#
-				# This initialize LDAP
-				#
-				dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
-				setup_vars
-				# This secret file comes from libpam-ldap
-				# It is probably the value asked 
-				# by slapd install. If no value is supplied
-				# it will be prompted
-				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=""
-				# [ -f /etc/ldap.secret ] || secret=""
-
-				echo "Modifying /etc/ldap/slapd.conf"
-				purge_slapd
-				modify_slapd $dn
-				echo "Modifying /etc/libnss-ldap.conf"
-				modify_libnss_ldap $dn
-				echo "Modifying /etc/nsswitch.conf"
-				modify_nsswitch
-				echo "Load ldap"
-				load_ldap $dn "$secret"
+case "$1" in
+    configure)
+	dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
+	setup_vars
+	
+	echo "Modifying /etc/ldap/slapd.conf"
+	purge_slapd
+	modify_slapd $dn
+	echo "Modifying /etc/libnss-ldap.conf"
+	modify_libnss_ldap $dn
+	echo "Modifying /etc/nsswitch.conf"
+	modify_nsswitch
+	echo "Load ldap"
+	load_ldap $dn "$secret"
 				# Restarting ldap 
-				/etc/init.d/slapd restart
-				sleep 5
-				echo "Setup SF_robot account"
-				setup_robot
-				;;
-			update)
-				dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
-				setup_vars
-				load_ldap $dn "$secret"
-				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && load_ldap $dn $secret &>/dev/null
-				# [ -f /etc/ldap.secret ] || load_ldap $dn $secret
-				;;
-			purge)
-				echo "Purging /etc/ldap/slapd.conf"
-				purge_slapd
-				echo "Purging /etc/nsswitch.conf"
-				purge_nsswitch
-				echo "Purging /etc/libnss-ldap.conf"
-				purge_libnss_ldap
-				;;
-			list)
-				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-				# Display what is now in the database
-				#ldapsearch -x -b "$naming_context" '(objectclass=*)' 
-				ldapsearch -x -b "$naming_context" '(objectclass=*)' 
-				;;
-			clean)
-			        setup_vars
-				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) 
-				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-				# This should work with SASL auth if i find how to make it work
-				# See saslpasswd, /usr/share/doc/libsasl7/sysadmin.html
-				# The command will be 
-				# ldapdelete -D "cn=admin,ou=People,$naming_context" -W -r "$naming_context"
-				#
-				for target in ou=Aliases ou=Hosts ou=Roaming ou=Group ou=cvsGroup cn=SF_robot cn=Replicator ou=People 
-				do 
-					echo "Destroying LDAP database $target, $naming_context ..."
-					ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -r "$target, $naming_context"
-				done
-				;;
-			init)
-				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-				setup_vars
-				# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
-				# [ -f /etc/ldap.secret ] || secret=""
-				print_ldif_default $naming_context $cryptedpasswd > /tmp/ldif$$ 
-				slapadd -l /tmp/ldif$$
-				rm -f /tmp/ldif$$
-				/etc/init.d/slapd restart
-				$0 default
-				;;
-			test)	
-				setup_robot
-				;;
-		esac
-	fi
-fi
+	/etc/init.d/slapd restart
+	sleep 5
+	echo "Setup SF_robot account"
+	setup_robot
+	;;
 
-# Ancient ldaptest follow
+    update)
+	dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
+	setup_vars
+	load_ldap $dn "$secret"
+	;;
+    
+    purge)
+	echo "Purging /etc/ldap/slapd.conf"
+	purge_slapd
+	echo "Purging /etc/nsswitch.conf"
+	purge_nsswitch
+	echo "Purging /etc/libnss-ldap.conf"
+	purge_libnss_ldap
+	;;
 
-# All info found in /usr/share/doc/openldap-guide
+    list)
+	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	ldapsearch -x -b "$naming_context" '(objectclass=*)' 
+	;;
 
-# This is testing local ldap server
-##echo "============ LDAP SEARCH ==================="
-##ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts
-##echo "============ LDAP SEARCH ==================="
+    clean)
+	setup_vars
+	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	# This should work with SASL auth if i find how to make it work
+	# See saslpasswd, /usr/share/doc/libsasl7/sysadmin.html
+	# The command will be 
+	# ldapdelete -D "cn=admin,ou=People,$naming_context" -W -r "$naming_context"
+	#
+	for target in ou=Aliases ou=Hosts ou=Roaming ou=Group ou=cvsGroup \
+	    cn=SF_robot cn=Replicator ou=People ; do
+	  echo "Destroying LDAP database $target, $naming_context ..."
+	  ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -r "$target, $naming_context"
+	done
+	;;
 
-# Then you need LDIF file and run ldapadd
-# To fill this you need to get your namingContexts
-# This do this and should be used a the sourceforge base DN
-##naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-##echo "Naming Context is: ===>$naming_context<=="
+    init)
+	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts \
+	    | grep "namingContexts:" | cut -d" " -f2)
+	setup_vars
+	print_ldif_default $naming_context $cryptedpasswd > /tmp/ldif$$ 
+	slapadd -l /tmp/ldif$$
+	rm -f /tmp/ldif$$
+	/etc/init.d/slapd restart
+	$0 configure
+	;;
 
-# Un fichier ldif d'exemple
-##echo "============ Example ldif file =============="
-##tee /tmp/example.ldif <<-FIN
-##dn: cn=Bob Smith,ou=People,$naming_context
-##objectClass: person
-##cn: Bob Smith
-##sn: Smith
-##FIN
-##echo "============ Example ldif file =============="
-##echo "============ Adding this to the database ===="
-#/usr/sbin/slapadd -v -d2 -l /tmp/example.ldif
-#ldapadd -U admin -D "cn=admin,ou=People,$naming_context" -W -f /tmp/example.ldif
-#ldapadd -v -D "cn=admin,ou=People,$naming_context" -X u:admin  -f /tmp/example.ldif
-##ldapadd -v -D "cn=admin,ou=People,$naming_context" -x -W -f /tmp/example.ldif
-##echo "============ Checking the database =========="
-##ldapsearch -x -b "$naming_context" '(objectclass=*)'
-
-##Un ACL exemple pour la partie web
-#access to dn=".*,ou=People,dc=dragoninc,dc=on,dc=ca" 
-#attr=userpassword,ntpassword,lmpassword 
-#        by dn="uid=root,ou=People,dc=dragoninc,dc=on,dc=ca" write 
-#        by * none 
-#
-#access to dn=".*,ou=Group,dc=dragoninc,dc=on,dc=ca" attr=userpassword 
-#        by dn="uid=root,ou=People,dc=dragoninc,dc=on,dc=ca" write 
-#        by * none
-#
-# La mine d'or http://www.bayour.com/LDAPv3-HOWTO.html
-# http://www.ameritech.net/users/mhwood/ldap-sec-setup.html
-# A lire /usr/share/doc/openssl/README.Debian
-# /usr/share/doc/libsasl7/sysadmin.html
-# 
-# To create the certificate that OpenLDAP will use, we issue the command openssl like this:
-# openssl req -new -x509 -nodes -out server.pem -keyout server.pem -days 365
-# openssl x509 -in server.pem -text
-#
-#
-# Until this work:  ldapsearch -b "dc=g-tt,dc=rd,dc=francetelecom,dc=fr" '(objectclass=*)'
+    *)
+	echo "Usage: $0 {configure|update|purge|list|clean|init}"
+	exit 1
+	;;
+	
+esac

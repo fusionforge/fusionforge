@@ -1,29 +1,38 @@
-#!/bin/sh
+#! /bin/sh
+# 
+# $Id$
+#
+# Generate CVS repositories tarballs
+# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+
+set -e
+
+if [  $(id -u) != 0 ] ; then
+    echo "You must be root to run this, please enter passwd"
+    exec su -c "$0 $1"
+fi
+
 CVSROOT=/var/lib/sourceforge/chroot/cvsroot
 CVSTARDIR=/var/lib/sourceforge/cvstarballs
-if [ $# != 1 ] 
-then 
-	$0 default
-else
-	target=$1
-	if [  $(id -u) != 0 -a  "x$target" != "xlist" ] #-a "x$target" != "xclean"  ]
-	then
-	        echo "You must be root to run this, please enter passwd"
-	        su -c "$0 $target"
-	else
-		case "$target" in
-			default|configure)
-				cd $CVSROOT
-				ls | while read dir
-				do
-					tar czf $CVSTARDIR/${dir}-cvsroot.tar.gz.new ${dir}
-					mv $CVSTARDIR/${dir}-cvsroot.tar.gz.new $CVSTARDIR/${dir}-cvsroot.tar.gz
-				done
-				;;
-			update)
-				;;
-			purge)
-				;;
-		esac
-	fi
-fi
+
+case "$1" in
+    generate)
+	cd $CVSROOT
+	ls | while read dir ; do
+	    tar czf $CVSTARDIR/${dir}-cvsroot.tar.gz.new ${dir}
+	    mv $CVSTARDIR/${dir}-cvsroot.tar.gz.new $CVSTARDIR/${dir}-cvsroot.tar.gz
+	done
+	;;
+    
+    update)
+	;;
+
+    purge)
+	;;
+
+    *)
+	echo "Usage: $0 {generate}"
+	exit 1
+	;;
+	
+esac
