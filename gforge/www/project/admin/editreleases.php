@@ -88,11 +88,13 @@ if ($step1) {
 // Add file(s) to the release
 if ($step2) {	
 	$group_unix_name=group_getunixname($group_id);
+	$user_unix_name=user_getname();
 	$project_files_dir=$FTPFILES_DIR . '/' . $group_unix_name;
+	$user_incoming_dir=ereg_replace("<USER>",$user_unix_name,$FTPINCOMING_DIR);
 
 	// For every file selected add that file to this release
 	for($x=0;$x<count($file_list);$x++) {
-		$frs->frsAddFile(time(), $file_list[$x], $group_unix_name, $user_unix_name, filesize("$project_files_dir/$file_list[$x]"), time(), $release_id, $package_id, $type_id, $proc_id);
+		$frs->frsAddFile(time(), $file_list[$x], $group_unix_name, $user_unix_name, filesize("$user_incoming_dir/$file_list[$x]"), time(), $release_id, $package_id);
 		if( !$frs->isError() ) {
 			$feedback .= " File(s) Added ";
 		}
@@ -102,11 +104,15 @@ if ($step2) {
 // Edit/Delete files in a release
 if ($step3) {	
 	// If the user chose to delete the file and he's sure then delete the file
-	if( $step3 == "Delete File" && $im_sure ) {
-		// delete the file from the database
-		$frs->frsDeleteFile($file_id, $group_id);
-		if( !$frs->isError() ) {
-			$feedback .= " File Deleted ";
+	if( $step3 == "Delete File") {
+		if ( $im_sure ) {
+			// delete the file from the database
+			$frs->frsDeleteFile($file_id, $group_id);
+			if( !$frs->isError() ) {
+				$feedback .= " File Deleted ";
+			}
+		} else {
+			$feedback .= " File Not Deleted, you must be sure ";
 		}
 	// Otherwise update the file information
 	} else {

@@ -103,14 +103,15 @@ class FRS extends Error {
 	 * frsAddFile() - Add a new file
 	 *
 	 * @param	int		Time of the release
-	 * @param	string	The name of the file to add
-	 * @param	int		The ID of the release this file to which this file is associated
+	 * @param	string		The name of the file to add
+	 * @param	string		The groups unix name
+	 * @param	string		The users unix name
 	 * @param	int		The file size
 	 * @param	int		The post date
-	 * @param	int		The ide of the release
+	 * @param	int		The ID of the release
 	 * @param	int		The ID of the package
 	 */
-	function frsAddFile($release_time, $filename, $file_size, $post_date, $release_id, $package_id) {
+	function frsAddFile($release_time, $filename, $group_unix_name, $user_unix_name, $file_size, $post_date, $release_id, $package_id) {
 		if( !$this->frsVerifyRelease($release_id, $package_id) ) {
 			$this->setError(' FRS Add File Failed: ' . $this->getErrorMessage());
 			return false;
@@ -126,7 +127,7 @@ class FRS extends Error {
 		// I know.  I tried it.
 		// [RM]
 		putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
-		exec ("/usr/lib/sourceforge/bin/fileforge.pl ".escapeshellarg($file)." ".escapeshellarg($user_unix_name)." ".escapeshellarg($group_unix_name)." 2>&1", $exec_res);
+		exec ("/usr/lib/sourceforge/bin/fileforge.pl ".escapeshellarg($filename)." ".escapeshellarg($user_unix_name)." ".escapeshellarg($group_unix_name)." 2>&1", $exec_res);
 		putenv ('sys_dbpasswd=') ;
 		if ($exec_res[0]) {
 			$this->setError("FRS Add File Failed:<br>$exec_res[0]<br>$exec_res[1]<br>$exec_res[2]");
@@ -141,8 +142,8 @@ class FRS extends Error {
 								'$release_id',
 								'$file_size',
 								'$post_date',
-								'100',
-								'100') ");
+								'9999',
+								'9999') ");
 		if (!$res) {
 			$this->setError(' FRS Add File Failed: ' . db_error());
 			return false;

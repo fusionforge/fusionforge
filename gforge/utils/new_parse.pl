@@ -168,12 +168,11 @@ sub add_user {
 	#LDAP_NOW#push @group_array, "$username:x:$uid:\n";
 	
 	# Now lets create the homedir and copy the contents of /etc/skel into it.
-	mkdir $home_dir, 0751;
+	mkdir $home_dir, 0755;
         chown $uid, $uid, $home_dir;
 	
-	mkdir $home_dir.'/incoming', 0771;
+	mkdir $home_dir.'/incoming', 0755;
 	chown $uid, $uid, $home_dir.'/incoming' ;
-	chmod 0755, $home_dir.'/incoming';
 }
 
 #############################
@@ -189,10 +188,10 @@ sub update_user {
 	
         $home_dir = $homedir_prefix.$username;
 	unless (-d $home_dir.'/incoming') {
-	    mkdir $home_dir.'/incoming', 0771;
+	    mkdir $home_dir.'/incoming', 0755;
 	}
         system("chown $username:$username $home_dir/incoming");
-	system("chmod 0771 $home_dir/incoming");
+	system("chmod 0755 $home_dir/incoming");
 
 	#LDAP_NOW#push @passwd_array, "$username:x:$uid:$uid:$realname:/home/users/$username:$shell\n";
 	#LDAP_NOW#push @shadow_array, "$username:$passwd:$date:0:99999:7:::\n";
