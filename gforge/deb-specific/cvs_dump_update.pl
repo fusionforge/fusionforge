@@ -74,7 +74,8 @@ while ($ln = pop(@group_array)) {
 
 	$userlist =~ tr/A-Z/a-z/;
 
-	$group_exists = (-d $grpdir_prefix . $group_name);
+	#$group_exists = (-d $grpdir_prefix . $group_name);
+	$group_exists = ($status eq 'A');
 	$cvs_exists = (-d "$cvs_root$group_name/CVSROOT");
 
 	if (!$group_exists && $use_cvs && $status eq 'A' ) {
