@@ -50,7 +50,7 @@ forward_for_sourceforge:
   domains = users.$domain_name
   driver = aliasfile
   file_transport = address_file
-  query = \"ldap:///uid=\$local_part,ou=People,$sys_ldap_base_dn?x-forward-email\"
+  query = \"ldap:///uid=\$local_part,ou=People,$sys_ldap_base_dn?debSfForwardEmail\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -59,7 +59,7 @@ forward_for_sourceforge_lists:
   domains = $sys_lists_host
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?listPostaddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListPostaddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -69,7 +69,7 @@ forward_for_sourceforge_lists_admin:
   suffix = -owner : -admin
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?listOwnerAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListOwnerAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
@@ -79,7 +79,7 @@ forward_for_sourceforge_lists_request:
   suffix = -request
   driver = aliasfile
   pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?listRequestAddress\"
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListRequestAddress\"
   search_type = ldap
   user = nobody
   group = nogroup
