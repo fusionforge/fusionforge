@@ -1,8 +1,13 @@
+2003-04-25 Tom Copeland <tom@infoether.com>
+
+	* contrib/cmd-line-prototype.tar.gz: Patch #160 - Richard's 
+	command line API prototype
+
 2003-04-24 Tom Copeland <tom@infoether.com>
 
 	* www/survey/admin show_results_aggregate.php: Fixed bug 315: survey a
 	results were not displayed correctly in PG 7.2
-	* common/tracker Artifact.class: Fixed bug 311: double-submitting code 
+	* common/tracker/Artifact.class: Fixed bug 311: double-submitting code 
 	was catching similar items that were in different projects
 
 2003-04-20  Roland Mas  <lolando@debian.org>
