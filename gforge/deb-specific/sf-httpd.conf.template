@@ -42,13 +42,17 @@ NameVirtualHost {ip_address}:443
       allow from all
     </Directory>
 
-  # This for cvsweb 
+  # This for cvsweb
   ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
 
   # 404 Error document
   ErrorDocument 404 /404.php
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
   CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+
+  # Include the configuration files provided by the plugins
+  Include /etc/sourceforge/httpd.conf.d/
+  Include /etc/sourceforge/httpd.secrets.d/
 </VirtualHost>
 
 <VirtualHost {ip_address}>
@@ -169,6 +173,10 @@ NameVirtualHost {ip_address}:443
   ErrorDocument 404 /404.php
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
   CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+
+  # Include the configuration files provided by the plugins
+  Include /etc/sourceforge/httpd.conf.d/
+  Include /etc/sourceforge/httpd.secrets.d/
 </VirtualHost>
 
 # This is magic for virtual hosting!
@@ -193,7 +201,7 @@ UseCanonicalName Off
   CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
 </VirtualHost>
 
-#This may be used 
+#This may be used
 #ServerPath /sub1/
 #RewriteEngine On
 #RewriteRule ^(/sub1/.*) /www/subdomain$1
