@@ -110,7 +110,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$rows=db_numrows($result);
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. get_priority_color(db_result($result, $i, 'priority')) .'">'.
+			<TR class="'. get_priority_color(db_result($result, $i, 'priority')) .'">'.
 			'<TD NOWRAP>'.
 			($IS_ADMIN?'<INPUT TYPE="CHECKBOX" NAME="artifact_id_list[]" VALUE="'.
 			db_result($result, $i, 'artifact_id') .'"> ':'').
