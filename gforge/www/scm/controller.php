@@ -83,8 +83,7 @@
 		echo $HTML->boxTop($Language->getText('cvs','search')." for $group -- " . splithref($dir));	
 		listing($files);
 		echo $HTML->boxBottom();
-	}
-	else {
+	} else {
 		$files = retrieveDir($dir);
 		echo $HTML->boxTop($Language->getText('cvs','search')." for $group -- " . splithref($dir));
 		listing($files);
@@ -95,8 +94,11 @@
 	site_project_footer(array());
 	exit;	//not sure if you need an exit here, but it works 
 
-	//this function lists the directory/files and color coats them, I have a feeling
-	//one day people will want to change this around
+	/**
+	* listing - Lists directories and files with color coding
+	*
+	* @param	list	the list of directories and files
+	*/
 	function listing($list) {
 		global $group_id;
 		global $filecolor;
@@ -106,16 +108,12 @@
 			if(is_dir($list[$i])) {
 				if(tail($list[$i]) == ".") {
 					print "<TR><TD BGCOLOR=$directorycolor><A HREF=$PHP_SELF?group_id=$group_id&dir=".path($list[$i]).">$list[$i]</A></TD></TR>";
-				}
-				else if(tail($list[$i]) == ".." && ereg("^$cvsroot",$list[$i])) {
+				} else if(tail($list[$i]) == ".." && ereg("^$cvsroot",$list[$i])) {
 					print "<TR><TD BGCOLOR=$directorycolor><A HREF=$PHP_SELF?group_id=$group_id&dir=".path(path($list[$i])).">$list[$i]</A></TD></TR>";
-				}
-				else {
+				} else {
 					print "<TR><TD BGCOLOR=$directorycolor><A HREF=$PHP_SELF?group_id=$group_id&dir=$list[$i]>$list[$i]</A></TD></TR>";
 				}
-			}
-			//assume it is a file not a dir
-			else {
+			} else {
 				$p = new parser($list[$i]);
 				$t = $p->getPath("-1");
 		
@@ -131,28 +129,38 @@
 		}
 	}
 
-	//this function goes from a root directory and then finds all the dir/files and creates paths
+	/**
+	* retrieveDir - gets all the dirs/files in a root directory
+	*
+	* @param 	rootdirpath 	the root directory
+	*	@return	an array of dirs/files/
+	*/
 	function retrieveDir($rootdirpath) {
 		if($dir = @opendir($rootdirpath)) {
 			$array[] = $rootdirpath;	
-			
 			while(($file = readdir($dir)) !== false) {
 				$array[] = $rootdirpath."/".$file;
 			}
 		}
-
 		closedir($dir);
-
 		return $array;
 	}
 
-	//return what is following the last / in a path
+	/**
+	* tail - gets what's following the last / in a path
+	*
+	* @param	path	the path to parse
+	*/
 	function tail($path) {
 		$path = explode("/",$path);
 		return array_pop($path);
 	}
 
-	//return everything in front of the last / the stem of a file path
+	/**
+	* head - gets what's preceding the last / in a path
+	*
+	* @param	path	the path to parse
+	*/
 	function head($path) {
 		$path = explode("/",$path);
 		array_pop($path);
@@ -160,7 +168,11 @@
 		return $path;
 	}
 
-	//return everything in front of the last / same as head , don't know which name to use yet for the function
+	/**
+	* path - gets what's preceding the last / in a path
+	*
+	* @param	path	the path to parse
+	*/
 	function path($path) {
 		$path = explode("/",$path);
 		array_pop($path);
@@ -168,9 +180,14 @@
 		return $path;
 	}
 
-	//I have not verified if this function works on cvsroot_stem that contains multible directories
-	//right now it is checking to see if the first section $i = 0 of a path is contained in the cvsroot_stem
-	//if so it doesn't link to it, need more thought, later
+	/**
+	* splithref - I have not verified if this function works on cvsroot_stem that 
+	*	contains multible directories right now it is checking to see if the first 
+	* section $i = 0 of a path is contained in the cvsroot_stem 
+	* if so it doesn't link to it, need more thought, later
+	*
+	* @param	path	the path
+	*/
 	function splithref($path) {
 		global $group_id;
 		global $cvsroot_stem;
@@ -183,43 +200,47 @@
 		for($i = 0; $i < count($path); $i++) {
 			if(strlen($previous)>1) {
 				$previous = $previous . "/" . $path[$i];
-			}
-			else {
-				$previous = "/".$path[$i];
+			} else {
+					$previous = "/".$path[$i];
 			}
 
 			if(strpos($cvsroot_stem,$path[$i]) && $i == 0) {
 				$href = $href . "$path[$i] / ";
-			}
-			else	{
+			} else	{
 				$href = $href . "<A HREF=$PHP_SELF?group_id=$group_id&dir=$previous>$path[$i]</A> / ";
 			}
 		}
-
 		return $href;
 	}
 
-	//function is good for large flat listing, need smaller one
+	/**
+	*	retrieveDirs - gets an array of files
+	* function is good for large flat listing, need smaller one
+	*
+	* @param	rootdirpath	the root directory path
+	*	@return	an array of files
+	*/
 	function retrieveDirs($rootdirpath) {
 		if ($dir = @opendir($rootdirpath)) {
 			$array[] = $rootdirpath;
-			
 			while (($file = readdir($dir)) !== false) {
 				if (is_dir($rootdirpath."/".$file) && $file != "." && $file != "..") {
 					$array = array_merge($array, retrieveDirs($rootdirpath."/".$file));
 				}
 			}
-			
 			closedir($dir);
 		}
-
 		return $array;
 	}
 
-	//function gets the files paths for a given list of directories
+	/**
+	* retrieveFiles - retrieves a the files paths for a given list of directories
+	*
+	* @param 	directories	the directories to load
+	*	@return an array of files
+	*/
 	function retrieveFiles($directories) {
 		$array = array();
-
 		foreach($directories as $directory) {
 			if($dir = @opendir($directory)) {
 				while(($file = readdir($dir)) !== false) {
@@ -227,12 +248,14 @@
 				}
 			}
 		}
-
 		return $array;
 	}
 
-	//this replaces rlog, I bet most of the slowdown is from here, so any optimization time
-	//should be spend here.	
+	/**
+	* parser - an rlog replacement.
+	* this replaces rlog, I bet most of the slowdown is from here, so any optimization 
+	* time should be spend here.	
+	*/
 	class parser {
 		var $rev; //the revision we are finding and doing.
 
@@ -284,7 +307,11 @@
 		var $delta_array;
 		var $deltaText_array;
 
-		//gotta love php, have to init it all in the constructor
+		/**
+		* parser - Creates a new parser object
+		*
+		* @param	filename	the file to parse
+		*/
 		function parser($filename) {
 			$this->filecontent = null;
 			$this->filename = $filename;
@@ -334,31 +361,36 @@
 			fclose($fd);
 
 			//validate REALLY slows it down, this makes sure it is an RCS file, however
-			//we can trust cvs to do its job so only uncomment this if worried
-	//		if($this->validate())
-			{
+			//we can trust cvs to do its job so only uncomment this if worried	
+			/*
+			if($this->validate()) {
 				$this->getAdmin();	//parses the admin section, dont use now
 				$this->getDelta();	//this gets the deltas to do revisions
 				$this->getDescription();	//this gets the description, dont use now
 				$this->getDeltaText();	//this gets the deltatex to do revision
 			}
+			*/
 		}
 
-		//make sure it is an rcs file
-		function validate()
-		{
+		/**
+		* validate - ensures this is an RCS file
+		*/
+		function validate() {
 			$temp = array();
-
 			if(ereg("$this->admin$this->delta$this->desc$this->deltatext",$this->filecontent,$temp)) {
 				if(strlen($this->$filecontent) == $temp[0]) {
 					return true;
 				}
 			}
-
 			return false;
 		}
 
-		//this gets a specific revision, this is really the rlog replacement
+		/**
+		*	this gets a specific revision, this is really the rlog replacement
+		*
+		* @param 	rev	the revision to get
+		* @return the revision
+		*/
 		function getRev($rev) {
 			$this->path = $this->getPath($rev);
 			$t = null;
@@ -368,8 +400,7 @@
 				//this is the head so just get the text
 				if($i == 0) {
 					$t = explode("\n",($this->deltaText_array[$this->path[$i]]["text"]));
-				}
-				else {
+				} else {
 					//get the text for this node
 					$a = explode("\n",($this->deltaText_array[$this->path[$i]]["text"]));
 		
@@ -423,11 +454,17 @@
 			//if it will fix things like this
 			$t = implode("<BR>",$t);
 			$t = ereg_replace("\t","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$t);
-
 			return $t;
 		}
 
-		//this lets getRevision add lines when a0 2 for example, since php doesn't have an array_insert
+		/**
+		* array_insert - inserts items in an array
+		*	this lets getRevision add lines when a0 2 for example, since php doesn't have an array_insert
+		*
+		* @param	array	the array	
+		*	@param	value	the value to insert
+		*	@param	pos	the position
+		*/
 		function array_insert(&$array, $value, $pos) {
 			if (!is_array($array)) {
 				return FALSE;
@@ -438,13 +475,16 @@
 			$array = array_merge($array, $last);
 		}
 
-		//this function gets the path to a certain revision (including branches)
+		/**
+		* getPath - gets the path to a certain revision (including branches)
+		*
+		* @param	rev	the revision to get
+		* @return	the path
+		*/
 		function getPath($rev) {
 			if($rev == "-1") {
 				$rev = $this->getHead();
-			}
-			else
-			{
+			} else {
 				$this->rev = $rev;
 			}
 
@@ -459,11 +499,17 @@
 				$path[] = $next;
 				$node = $next;
 			}
-
 			return $path;
 		}
 
-		//getPath calls this to follow branches/trunk to next revision
+		/**
+		* getNext - follows branches/links to the next revision
+		* getPath calls this to follow branches/trunk to next revision
+		*
+		* @param	node	the node	
+		* @param	rev	the revision
+		*	@return	the next path
+		*/
 		function getNext($node,$rev) {
 			//we found it
 			if($node != $rev) {
@@ -494,15 +540,13 @@
 
 							//means that no branch matched 
 							return $t["next"];
-						}
+						} else {
 						//no branch to follow goto next (if there is a next)
-						else {
 							return $t["next"];
 						}
 					}
 				}
 			}
-
 			return false;
 		}
 
@@ -529,8 +573,10 @@
 			}
 		}
 
-		//this parses the rcsfile (file,v) and get the path information ready for getPath	
-		//we are only doing path/revision now, so until we see what people want for date/author/sym etc
+		/**
+		* getDelta - this parses the rcsfile (file,v) and get the path information ready for getPath	
+		* we are only doing path/revision now, so until we see what people want for date/author/sym etc
+		*/ 
 		function getDelta() {
 			$temp = array();	//scratch
 			$f = $this->filecontent;
@@ -564,11 +610,11 @@
 				list($state,$id) = explode(" ",$temp);
 				$t["state"] = substr($id,0,strlen($id)-1);
 
-//the reason next is done before branches is because the grammer states
-//there always (num,date,author,state,branches,next), however branches is the only
-//value that can have multible values, and thus, thanks to PHP being wierd, allows 
-//you use string keys for some and ordinal for non defined keys (in this case the multible
-//branches, so later we know all branches start at $t[5], $[6] ... etc
+			//the reason next is done before branches is because the grammer states
+			//there always (num,date,author,state,branches,next), however branches is the only
+			//value that can have multible values, and thus, thanks to PHP being wierd, allows 
+			//you use string keys for some and ordinal for non defined keys (in this case the multible
+			//branches, so later we know all branches start at $t[5], $[6] ... etc
 				ereg($this->delta_next,$two,$temp); //next
 				$temp = trim($temp[0]);
 				$temp = ereg_replace("(\n| |\t)+"," ",$temp);
@@ -590,14 +636,14 @@
 						$t[] = $list[$i];
 					}
 				}
-
 				$this->delta_array[] = $t;
 			}
-
 		}
 
-		//parses admin section, for now just getHead
-		//users will define where this is going depending on info they want to see
+		/**
+		* getAdmin - parses admin section, for now just getHead users will define where this is
+		*	going depending on info they want to see
+		*/
 		function getAdmin() {
 			$temp = array();
 			$one = null;
@@ -683,10 +729,11 @@
 				}
 */
 			}
-
 		}
 
-		//I believe this is the initial import / add of a file
+		/**
+		* getDescription - gets the initial import/add of a file
+		*/
 		function getDescription() {
 			$temp = array();
 
@@ -702,7 +749,9 @@
 			}
 		}
 
-		//get the revision info ready to create a revision
+		/**
+		* getDeltaText - get the revision info ready to create a revision
+		*/
 		function getDeltaText() {
 			$temp = array();
 			$f = $this->filecontent;
@@ -726,8 +775,7 @@
 
 				if(strlen($temp) == 2) {
 					$a["log"] = "";
-				}
-				else {
+				} else {
 					ereg_replace("@@","@",$temp[0]);	//replace any inner doubling with single
 					$a["log"] = substr($temp[0],1,strlen($temp[0])-2); //remove the surronding @
 				}
@@ -738,12 +786,10 @@
 
 				if(strlen($temp) == 2) {
 					$a["text"] = "";
-				}
-				else {
+				} else {
 					ereg_replace("@@","@",$temp[0]);	//replace any inner doubling with single
 					$a["text"] = substr($temp[0],1,strlen($temp[0])-2); //remove the surronding @
 				}
-
 				$this->deltaText_array[$a["num"]] = $a;
 			}
 		}
