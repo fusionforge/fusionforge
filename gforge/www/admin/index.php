@@ -11,7 +11,7 @@ require($DOCUMENT_ROOT.'/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-site_admin_header(array('title'=>"Alexandria Admin"));
+site_admin_header(array('title'=>$GLOBALS['system_name']." Admin"));
 
 $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','0','1','2','3','4','5','6','7','8','9');
 
@@ -25,9 +25,7 @@ fields blank, etc... Also, navigating the admin functions with the
 
 <p><B>User/Group/Category Maintenance</B>
 <ul>
-<!--
 <li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;
--->
 <li>Display Users Beginning with : 
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
@@ -43,9 +41,7 @@ Search <i>(email,username,realname,userid)</i>:
   <input type="submit" value="get">
 </form>
 <BR>&nbsp;
-<!-- 
 <li><a href="grouplist.php">Display Full Group List/Edit Groups</a>
--->
 
 <li>Display Groups Beginning with : 
 <?php

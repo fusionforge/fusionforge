@@ -1,0 +1,84 @@
+#!/usr/bin/perl -w
+#
+# Debian-specific script to register a new theme into the SF database
+
+use DBI ;
+use strict ;
+use diagnostics ;
+
+use vars qw/$dbh @reqlist $thdir $thname/ ;
+
+use vars qw/@skills/ ;
+
+sub debug ( $ ) ;
+
+require ("/usr/lib/sourceforge/lib/include.pl") ; # Include all the predefined functions 
+
+&db_connect ;
+
+if ($#ARGV < 1) {
+    debug "Usage: sf-register-theme <dirname> <theme name>" ;
+    debug "The theme must be in /usr/lib/sourceforge/www/themes/<dirname>/" ;
+    exit 1 ;
+}
+
+$thdir = $ARGV [0] ;
+$thname = $ARGV [1] ;
+
+unless (-d "/usr/lib/sourceforge/www/themes/$thdir") {
+    debug "The directory /usr/lib/sourceforge/www/themes/$thdir does not exist" ;
+    exit 1 ;
+}
+unless (-e "/usr/lib/sourceforge/www/themes/$thdir/theme.php") {
+    debug "The file /usr/lib/sourceforge/www/themes/$thdir/theme.php does not exist" ;
+    exit 1 ;
+}
+unless (-e "/usr/lib/sourceforge/www/themes/$thdir/Theme.class") {
+    debug "The file /usr/lib/sourceforge/www/themes/$thdir/Theme.class does not exist" ;
+    exit 1 ;
+}
+
+$dbh->{AutoCommit} = 0;
+$dbh->{RaiseError} = 1;
+eval {
+    my ($query, $sth, @array, $version, $action) ;
+
+    $thdir = $dbh->quote ($thdir) ;
+    $thname = $dbh->quote ($thname) ;
+    
+    $query = "INSERT INTO themes (dirname, fullname) VALUES ($thdir, $thname)" ;
+    
+    # debug $query ;
+    
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    $sth->finish () ;
+    
+    # debug "Committing." ;
+    $dbh->commit () ;
+
+    # There should be a commit at the end of every block above.
+    # If there is not, then it might be symptomatic of a problem.
+    # For safety, we roll back.
+    $dbh->rollback ();
+};
+
+if ($@) {
+    warn "Transaction aborted because $@" ;
+    debug "Transaction aborted because $@" ;
+    $dbh->rollback ;
+    debug "Please report this bug on the Debian bug-tracking system." ;
+    debug "Please include the previous messages as well to help debugging." ;
+    debug "You should not worry too much about this," ;
+    debug "your DB is still in a consistent state and should be usable." ;
+    exit 1 ;
+}
+
+$dbh->rollback ;
+$dbh->disconnect ;
+
+sub debug ( $ ) {
+    my $v = shift ;
+    chomp $v ;
+    print STDERR "$v\n" ;
+}
