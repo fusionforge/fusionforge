@@ -1,3 +1,8 @@
+2003-01-13  Scott Armstrong (scottbird7)
+
+	* Fixed/completed /cronjobs/mail/* mailing list and alias creation
+	scripts.
+
 2003-01-12  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* README.Custom: update theme info add add info about "include".
