@@ -107,7 +107,7 @@ $size_title_arr[]='800 x 600';
 $size_title_arr[]='1024 x 768';
 $size_title_arr[]='1600 x 1200';
 if (!$_size) {
-	$_size='1600';
+	$_size='800';
 }
 $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_size',$_size,false);
 
