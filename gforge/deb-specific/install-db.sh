@@ -35,8 +35,8 @@ case "$target" in
 	    cat $cur > /etc/postgresql/pg_hba.conf.sourceforge-new
 	    rm -f $cur
 	fi
-	su postgres -c "touch /var/lib/postgres/data/sourceforge_passwd"
-	su postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/sourceforge_passwd > /dev/null" <<-EOF
+	su -s /bin/sh postgres -c "touch /var/lib/postgres/data/sourceforge_passwd"
+	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/sourceforge_passwd > /dev/null" <<-EOF
 sourceforge
 $db_passwd
 $db_passwd
@@ -47,7 +47,7 @@ EOF
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su postgres -c "createuser --no-createdb --no-adduser sourceforge" 1> $tmp1 2> $tmp2 \
+	if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser sourceforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
 	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE USER: user name "sourceforge" already exists' ] ; then
 	    # Creation OK or user already existing -- no problem here
@@ -64,7 +64,7 @@ EOF
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su postgres -c "createdb sourceforge" 1> $tmp1 2> $tmp2 \
+	if su -s /bin/sh postgres -c "createdb sourceforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
 	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE DATABASE: database "sourceforge" already exists' ] ; then
 	    # Creation OK of database already existing -- no problem here
@@ -94,8 +94,8 @@ EOF
         fi
 	;;
     purge)
-	su postgres -c "dropdb sourceforge" &> /dev/null || true
-	su postgres -c "dropuser sourceforge" &> /dev/null || true
+	su -s /bin/sh postgres -c "dropdb sourceforge" &> /dev/null || true
+	su -s /bin/sh postgres -c "dropuser sourceforge" &> /dev/null || true
 	rm -f /var/lib/postgres/data/sourceforge_passwd
 	;;
 esac
