@@ -13,7 +13,7 @@ use Sys::Hostname;
 require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $group_array = ();
-my $verbose = 1;
+my $verbose = 0;
 my $cvs_file = $file_dir . "dumps/cvs_dump";
 
 if($verbose) {print ("\nConnecting to database");}
@@ -61,9 +61,9 @@ if($verbose) {print ("\nReading list");}
 @group_array = open_array_file($cvs_file);
 
 #
-# Loop through @groupdump_array and deal w/ users.
+# Loop through @group_array and deal w/ cvs.
 #
-if($verbose) {print ("\n\nProcessing Groups\n\n");}
+if($verbose) {print ("\n\nProcessing CVS\n\n");}
 while ($ln = pop(@group_array)) {
 	chop($ln);
 	($group_name, $status, $group_id, $use_cvs, $enable_pserver, $enable_anoncvs, $userlist) = split(":", $ln);

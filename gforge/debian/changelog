@@ -1,16 +1,18 @@
-gforge (3rc1-0+) experimental; urgency=low
+gforge (3rc1-1) experimental; urgency=low
 
   * [Christian] Added support for content encoding in util_send_mail
   * [Christian] Removed .htaccess and put appropriate lines in httpd template
   * [Christian] Renamed sf-(un)register functions in (un)register
-  * [Christian] Some cvs improvement 
+  * [Christian] Some cvs improvement
   * [Roland] Fixed several database upgrading bugs.
   * [Roland] Don't fail or hang in postinst with recent ssh.
   * [Roland] Added a few diagnostic tests in the LDAP isntallation
     scripts.  That should help pointing out errors caused by the user
     inputting invalid data.
+  * [Christian] rewrote partly user/group/cvs/ssh backend, now there 
+    are four separate scripts [user|group|cvs|ssh]_dump_update.pl
 
- -- Roland Mas <lolando@debian.org>  Sun, 16 Mar 2003 15:57:16 +0100
+ -- Christian Bayle <bayle@debian.org>  Sun, 16 Mar 2003 21:51:42 +0100
 
 gforge (3pre9-0+2) experimental; urgency=low
 

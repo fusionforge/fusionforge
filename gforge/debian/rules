@@ -60,16 +60,18 @@ install: build
 	install -m 644 deb-specific/httpd.common.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 644 deb-specific/httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/gforge-config $(CURDIR)/debian/gforge-common/usr/sbin/
 	install -m 644 utils/include.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
-	install utils/underworld-dummy/ssh_dump.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install utils/ssh_create.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install utils/underworld-dummy/dump_database.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
-	install utils/new_parse.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+
+	install -m 755 deb-specific/user_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/group_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/ssh_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+
 	install -m 4755 deb-specific/fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	ln -sf fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/tmpfilemove.pl
+
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 
 	# gforge-web-apache
@@ -147,6 +149,7 @@ install: build
 	install -m 644 deb-specific/cvsweb/icons/minitext.png $(CURDIR)/debian/gforge-cvs/usr/share/gforge/cvs/icons/minitext.png 
 	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/gforge-cvs/etc/gforge/
 	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
+	install -m 755 deb-specific/cvs_dump_update.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 
 	# gforge-ftp-proftpd
 	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
