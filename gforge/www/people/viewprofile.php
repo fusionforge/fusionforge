@@ -14,6 +14,9 @@ require_once('pre.php');
 require_once('people_utils.php');
 require_once('skills_utils.php');
 
+if (!$sys_use_people) {
+	exit_disabled();
+}
 
 if ($user_id) {
 

@@ -51,7 +51,7 @@ function project_admin_header($params) {
 	$labels[] = $Language->getText('project_admin_utils','edit_public_info');
 	$labels[] = $Language->getText('project_admin_utils','project_history');
 	$labels[] = $Language->getText('project_admin_utils','vhosts');
-	if($GLOBALS['$sys_use_people']) {
+	if($GLOBALS['sys_use_people']) {
 		$labels[] = $Language->getText('project_admin_utils','post_jobs');
 		$labels[] = $Language->getText('project_admin_utils','edit_jobs');
 	}

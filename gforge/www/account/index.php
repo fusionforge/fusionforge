@@ -69,14 +69,16 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 ?>
 
 
-<p> <?php echo $Language->getText('account_options', 'welcome'); ?> <strong><?php print $u->getUnixName(); ?></strong>. </p>
+<p> <?php echo $Language->getText('account_options', 'welcome'); ?> <strong><?php print $u->getRealName(); ?></strong>. </p>
 <p>
 
 <?php echo $Language->getText('account_options', 'intro'); ?>
 </p>
 <ul>
 <li><a href="/users/<?php print $u->getUnixName(); ?>/"><strong><?php echo $Language->getText('account_options', 'view_developer_profile'); ?></strong></a></li>
-<li><a href="/people/editprofile.php"><strong><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></strong></a></li>
+<?php if($GLOBALS['sys_use_people']) { ?>
+	<li><a href="/people/editprofile.php"><strong><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></strong></a></li>
+<?php } ?>
 <li><a href="/themes/"><strong><?php echo $Language->getText('menu', 'change_my_theme'); ?></strong></a></li>
 </ul>
 <?php echo $HTML->boxBottom(); ?>

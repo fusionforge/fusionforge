@@ -15,6 +15,10 @@
 require_once('pre.php');
 require_once('www/people/people_utils.php');
 
+if (!$sys_use_people) {
+	exit_disabled();
+}
+
 people_header(array('title'=>$Language->getText('people_help_wanted_latest','title'),'pagename'=>'people_helpwanted_latest'));
 
 {

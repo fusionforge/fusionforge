@@ -16,6 +16,10 @@ require_once('pre.php');
 require_once('www/people/people_utils.php');
 require_once('www/project/admin/project_admin_utils.php');
 
+if (!$sys_use_people) {
+	exit_disabled();
+}
+
 if ($group_id && (user_ismember($group_id, 'A'))) {
 
 	project_admin_header(array());

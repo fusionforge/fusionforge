@@ -71,22 +71,24 @@ if ($project->usesStats()) {
 	print '<br />'.$Language->getText('group', 'activitystat', $group_id);
 }
 
-$jobs_res = db_query("SELECT name 
-				FROM people_job,people_job_category 
-				WHERE people_job.category_id=people_job_category.category_id 
-				AND people_job.status_id=1 
-				AND group_id='$group_id' 
-				GROUP BY name",2);
-if ($jobs_res) {
-	$num=db_numrows($jobs_res);
-		if ($num>0) {
-			print '<br /><br />'.$Language->getText('project_home','help_wanted').'  ';
-				if ($num==1) {
-					print '<a href="/people/?group_id='.$group_id.'">'. db_result($jobs_res,0,"name").'(s)</a>';
-				} else {
-					print $Language->getText('project_home','help_wanted_multiple', '<a href="/people/?group_id='.$group_id.'">').' </a>';
-				}
-		}
+if($GLOBALS['sys_use_people']) {
+	$jobs_res = db_query("SELECT name 
+					FROM people_job,people_job_category 
+					WHERE people_job.category_id=people_job_category.category_id 
+					AND people_job.status_id=1 
+					AND group_id='$group_id' 
+					GROUP BY name",2);
+	if ($jobs_res) {
+		$num=db_numrows($jobs_res);
+			if ($num>0) {
+				print '<br /><br />'.$Language->getText('project_home','help_wanted').'  ';
+					if ($num==1) {
+						print '<a href="/people/?group_id='.$group_id.'">'. db_result($jobs_res,0,"name").'(s)</a>';
+					} else {
+						print $Language->getText('project_home','help_wanted_multiple', '<a href="/people/?group_id='.$group_id.'">').' </a>';
+					}
+			}
+	}
 }
 plugin_hook ("project_after_description",false) ;
 

@@ -25,7 +25,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=
 <?php echo $HTML->boxTop($Language->getText('user_home','personal_information')); ?>
 <tr>
 	<td><?php echo $Language->getText('user_home','user_id') ?> </td>
-	<td><strong><?php print $user_id; ?></strong> ( <a href="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><strong><?php echo $Language->getText('user_home','skills_profile') ?></strong></a> )</td>
+	<td><strong><?php print $user_id; ?></strong> <?php if($GLOBALS['sys_use_people']) { ?>( <a href="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><strong><?php echo $Language->getText('user_home','skills_profile') ?></strong></a> )<?php } ?></td>
 </tr>
 
 <tr valign="top">

@@ -15,6 +15,10 @@
 require_once('pre.php');
 require_once('www/people/people_utils.php');
 
+if (!$sys_use_people) {
+	exit_disabled();
+}
+
 if ($group_id && $job_id) {
 
 	/*
