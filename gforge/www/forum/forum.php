@@ -48,7 +48,7 @@ if ($forum_id) {
 
 	$f=new Forum($g,$forum_id);
 	if (!$f || !is_object($f)) {
-		exit_error($Language->getText('general','error'),$Language->getText('forum','error_getting_forum'));
+		exit_error($Language->getText('general','error'),"Error getting new Forum");
 	} elseif ($f->isError()) {
 		exit_error($Language->getText('general','error'),$f->getErrorMessage());
 	}
@@ -59,13 +59,13 @@ if ($forum_id) {
 	if ($post_message) {
 		$fm=new ForumMessage($f);
 		if (!$fm || !is_object($fm)) {
-			exit_error($Language->getText('general','error'),$Language->getText('forum','error_getting_new','ForumMessage'));
+			exit_error($Language->getText('general','error'), "Error getting new ForumMessage");
 		} elseif ($fm->isError()) {
-			exit_error($Language->getText('general','error'),$Language->getText('forum','error_getting_new','ForumMessage').': '.$fm->getErrorMessage());
+			exit_error($Language->getText('general','error'),"Error getting new ForumMessage: ".$fm->getErrorMessage());
 		}
 
 		if (!$fm->create($subject, $body, $thread_id, $is_followup_to) || $fm->isError()) {
-			exit_error($Language->getText('general','error'),$Language->getText('forum','error_creating','ForumMessage').': '.$fm->getErrorMessage());
+			exit_error($Language->getText('general','error'),'Error creating ForumMessage: '.$fm->getErrorMessage());
 		} else {
 			$feedback=$Language->getText('forum_forum','postsuccess');
 			$style='';
@@ -79,7 +79,7 @@ if ($forum_id) {
 
 	$fmf = new ForumMessageFactory($f);
 	if (!$fmf || !is_object($fmf)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumMessageFactory'));
+		exit_error($Language->getText('general','error'), "Error getting new ForumMessageFactory");
 	} elseif ($fmf->isError()) {
 		exit_error($Language->getText('general','error'),$fmf->getErrorMessage());
 	}
@@ -95,7 +95,7 @@ if ($forum_id) {
 
 	$fh = new ForumHTML($f);
 	if (!$fh || !is_object($fh)) {
-		exit_error($Language->getText('general','error'),$Language->getText('general','error_getting_new','ForumHTML'));
+		exit_error($Language->getText('general','error'), "Error getting new ForumHTML");
 	} elseif ($fh->isError()) {
 		exit_error($Language->getText('general','error'),$fh->getErrorMessage());
 	}
