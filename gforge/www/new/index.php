@@ -91,11 +91,11 @@ if (!$res_new || db_numrows($res_new) < 1) {
 
 			print '<tr><td colspan="3">';
 			// link to whole file list for downloads
-			print "&nbsp;<br /><a href=\"/project/showfiles.php?group_id=$row_new[group_id]&amp;release_id=$row_new[release_id]\">";
+			print "&nbsp;<br /><a href=\"/frs/?group_id=$row_new[group_id]&amp;release_id=$row_new[release_id]\">";
 			print $Language->getText('new','download'). "</a> ";
 			print '('.$Language->getText('new','projects_total') .$row_new['downloads'].') | ';
 			// notes for this release
-			print "<a href=\"/project/shownotes.php?release_id=".$row_new[release_id]."\">";
+			print "<a href=\"/frs/shownotes.php?release_id=".$row_new[release_id]."\">";
 			print $Language->getText('new','notes_changes'). "</a>";
 			print "<hr /></td></tr>\n";
 

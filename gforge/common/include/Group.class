@@ -924,8 +924,8 @@ class Group extends Error {
 	 *  @return	boolean	uses_frs.
 	 */
 	function usesFRS() {
-		global $sys_use_file;
-		if ($sys_use_file) {
+		global $sys_use_frs;
+		if ($sys_use_frs) {
 			return $this->data_array['use_frs'];
 		} else {
 			return false;

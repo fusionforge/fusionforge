@@ -172,10 +172,10 @@ if (session_loggedin()) { // || $sf_user_hash) {
 				db_result($result,$i,'group_name').'</a></td></tr>';
 			}
 			echo '
-			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="MIDDLE"><a href="/project/filemodule_monitor.php?filemodule_id='.
+			<tr '. $HTML->boxGetAltRowStyle($i) .'><td align="MIDDLE"><a href="/frs/monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
 			'&amp;group_id='.db_result($result,$i,'group_id'). '&amp;stop=1"><img src="'. $HTML->imgroot.'/ic/trash.png" height="16" width="16" '.
-			'BORDER=0"></a></td><td width="99%"><a href="/project/showfiles.php?group_id='.
+			'BORDER=0"></a></td><td width="99%"><a href="/frs/?group_id='.
 			db_result($result,$i,'group_id').'">'.
 			db_result($result,$i,'name').'</a>';
 

@@ -5,11 +5,12 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: forum_utils.php.patched,v 1.1.2.1 2002/11/30 09:57:57 cbayle Exp $
+ * @version   $Id$
  */
 
 require_once('pre.php');
 require_once('common/frs/FRSPackage.class');
+require_once('www/frs/include/frs_utils.php');
 
 
 if (session_loggedin()) {
@@ -24,7 +25,7 @@ if (session_loggedin()) {
 
 		$f=new FRSPackage($g,$filemodule_id);
 		if (!$f || !is_object($f)) {
-			exit_error('Error','Error Getting Forum');
+			exit_error('Error','Error Getting FRSPackage');
 		} elseif ($f->isError()) {
 			exit_error('Error',$f->getErrorMessage());
 		}
@@ -33,13 +34,17 @@ if (session_loggedin()) {
 			if (!$f->stopMonitor()) {
 				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			} else {
-				exit_error($Language->getText('project_filemodule_monitor','stop_monitor_title'),$Language->getText('project_filemodule_monitor','stop_monitor_body'));
+				frs_header(array('title'=>$Language->getText('project_filemodule_monitor','stop_monitor_title'),'group'=>$group_id));
+				echo $Language->getText('project_filemodule_monitor','stop_monitor_body');
+				frs_footer();
 			}
 		} elseif($start) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				exit_error($Language->getText('project_filemodule_monitor','start_monitor_title'),$Language->getText('project_filemodule_monitor','start_monitor_body'));
+				frs_header(array('title'=>$Language->getText('project_filemodule_monitor','start_monitor_title'),'group'=>$group_id));
+				echo $Language->getText('project_filemodule_monitor','start_monitor_body');
+				frs_footer();
 			}
 		}
 	} else {

@@ -33,23 +33,13 @@ if (!$group_id || !$project) {
 		exit();
 	} else if ($subpage == "files" || $subpage == "download" || $subpage == "dl") {
 		if ($subpage2 == "release") {
-			session_redirect("/project/admin/qrs.php?group_id=$group_id");
+			session_redirect("/frs/admin/qrs.php?group_id=$group_id");
 		} else {
-//			include('www/project/showfiles.php');
-			session_redirect("/project/showfiles.php?group_id=$group_id");
+			session_redirect("/frs/?group_id=$group_id");
 		}
 		exit();
 	} else if ($subpage == "cvs") {
 		header("Location: ".account_group_cvsweb_url($project->getUnixName()));
-		exit();
-	} else if ($subpage == "bug" || $subpage == "bugs") {
-		session_redirect("/bugs/?group_id=$group_id");
-		exit();
-	} else if ($subpage == "patch") {
-		session_redirect("/patch/?group_id=$group_id");
-		exit();
-	} else if ($subpage == "support") {
-		session_redirect("/support/?group_id=$group_id");
 		exit();
 	}  else {
 		//show the project summary page

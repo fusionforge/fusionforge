@@ -89,7 +89,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 <p><?php echo $Language->getText('project_admin','www_directory') ?><br /><strong><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?></p>
 
 <p align="center">
-<a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/tarballs.php/?group_id=<?php echo $group_id; ?>">[ <?php echo $Language->getText('project_admin','download_tarball') ?>]</a></p>
+<a href="/tarballs.php?group_id=<?php echo $group_id; ?>">[ <?php echo $Language->getText('project_admin','download_tarball') ?>]</a></p>
 <p>&nbsp;</p>
 <hr noshade="noshade" />
 <p>&nbsp;</p>
@@ -168,22 +168,7 @@ if ($is_admin) {
 
 </td>
 <td width="50%">
-<?php echo $HTML->boxTop($Language->getText('project_admin','file_releases')); ?>
-	&nbsp;<br />
-	<div align="center">
-	<a href="editpackages.php?group_id=<?php print $group_id; ?>"><strong>[<?php echo $Language->getText('project_admin','edit_file_releases') ?>]</strong></a>
-	</div>
-	<hr />
-	<strong><?php echo $Language->getText('project_admin','packages') ?>:</strong>
-	<p>
-	<?php
-	$res_module = db_query("SELECT * FROM frs_package WHERE group_id='$group_id'");
-	while ($row_module = db_fetch_array($res_module)) {
-		print "$row_module[name]<br />";
-	}
-	echo $HTML->boxBottom();
-	?>
-</p>
+&nbsp;
 </td>
 <?php echo $HTML->boxBottom();?>
 </tr>
@@ -207,6 +192,7 @@ echo $HTML->boxTop($Language->getText('project_admin','tool_admin').'');
 <a href="/news/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','news_admin') ?></a><br />
 <a href="/pm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','task_manager_admin') ?></a><br />
 <a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','forum_admin') ?></a><br />
+<a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','frs_admin') ?></a><br />
 
 <?php echo $HTML->boxBottom(); ?>
 

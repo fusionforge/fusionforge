@@ -610,10 +610,11 @@ if (isset($params['group']) && $params['group']) {
 		}
 
 		// Downloads
-		$TABS_DIRS[]='/project/showfiles.php?group_id='.$group;
-		$TABS_TITLES[]=$Language->getText('group','short_files');
-		(($toptab == 'downloads') ? $selected=(count($TABS_TITLES)-1) : '' );
-
+		if ($project->usesFRS()) {
+			$TABS_DIRS[]='/frs/?group_id='.$group;
+			$TABS_TITLES[]=$Language->getText('group','short_files');
+			(($toptab == 'frs') ? $selected=(count($TABS_TITLES)-1) : '' );
+		}
 		// groupmenu Hook
 		$hookParams['DIRS'] = &$TABS_DIRS;
 		$hookParams['TITLES'] = &$TABS_TITLES;

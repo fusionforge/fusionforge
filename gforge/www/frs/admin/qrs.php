@@ -5,14 +5,28 @@
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
- * @version   $Id: forum_utils.php.patched,v 1.1.2.1 2002/11/30 09:57:57 cbayle Exp $
+ * @version   $Id$
  */
 
 require_once('pre.php');	
-require_once('www/project/admin/project_admin_utils.php');
 require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
+require_once('www/frs/include/frs_utils.php');
+
+if (!$group_id) {
+	exit_no_group();
+}
+
+$g =& group_get_object($group_id);
+if (!$g || $g->isError()) {
+	exit_error('Error',$g->getErrorMessage());
+}
+$perm =& $g->getPermission(session_get_user());
+if (!$perm->isReleaseTechnician()) {
+	exit_permission_denied();
+}
+
 
 /*
 	Quick file release system , Darrell Brogdon, SourceForge, Aug, 2000
@@ -20,41 +34,28 @@ require_once('common/frs/FRSFile.class');
 	With much code horked from editreleases.php
 */
 
-session_require(array('group'=>$group_id));
-
-$g =& group_get_object($group_id);
-
-exit_assert_object($g, 'Project');
-
-$perm =& $g->getPermission(session_get_user());
-
-if (!$perm->isReleaseTechnician()) {
-	exit_permission_denied();
-}
-
-
 if( $submit ) {
 	if (!$release_name) {
 		$feedback .= $Language->getText('project_admin_qrs','required_release_name');
 	} else 	if (!$package_id) {
 		$feedback .= $Language->getText('project_admin_qrs','required_package');
 	} else 	if (!$userfile || $userfile == 'none') {
-	    // Check errors
-	    switch($_FILES['userfile']['error']) {
-	    case UPLOAD_ERR_INI_SIZE:
-	    case UPLOAD_ERR_FORM_SIZE:
-	        $feedback .= $Language->getText('project_admin_qrs','exceed_file_size');
-		break;
-	    case UPLOAD_ERR_PARTIAL:
-		$feedback .= $Language->getText('project_admin_qrs','partial_file');
-		break;
-	    case UPLOAD_ERR_NO_FILE:
-		$feedback .= $Language->getText('project_admin_qrs','required_file');
-		break;
-	    default:
-		$feedback .= $Language->getText('project_admin_qrs','unknown_file_error');
-		break;
-	    }
+		// Check errors
+		switch($_FILES['userfile']['error']) {
+			case UPLOAD_ERR_INI_SIZE:
+			case UPLOAD_ERR_FORM_SIZE:
+				$feedback .= $Language->getText('project_admin_qrs','exceed_file_size');
+			break;
+			case UPLOAD_ERR_PARTIAL:
+				$feedback .= $Language->getText('project_admin_qrs','partial_file');
+			break;
+			case UPLOAD_ERR_NO_FILE:
+				$feedback .= $Language->getText('project_admin_qrs','required_file');
+			break;
+			default:
+				$feedback .= $Language->getText('project_admin_qrs','unknown_file_error');
+			break;
+		}
 	} else 	if (!$type_id || $type_id == "100") {
 		$feedback .= $Language->getText('project_admin_qrs','required_file_type');
 	} else 	if (!$processor_id || $processor_id == "100")  {
@@ -105,16 +106,16 @@ if( $submit ) {
 						$frsr->sendNotice();
 						$feedback .= $Language->getText('project_admin_qrs','file_released');
 
-						project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+						frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 						?>
 						<p>
 						<?php echo $Language->getText('project_admin_qrs','qrs_info',
 							array('<a href="/project/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id.' "><strong>',
 							'</strong></a>',
-							'<a href="/project/showfiles.php?group_id='.$group_id.'">','</a>')) ?>
+							'<a href="/frs/?group_id='.$group_id.'">','</a>')) ?>
 						<?php
 						db_commit();
-						project_admin_footer(array());
+						frs_admin_footer(array());
 						exit(); //quite dirty but less that a buggy output like before
 						
 					}
@@ -131,7 +132,7 @@ if( $submit ) {
 
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_qrs','title'),'group'=>$group_id,'pagename'=>'project_admin_qrs','sectionvals'=>array(group_getname($group_id))));
 
 ?>
 
@@ -161,7 +162,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 ?>
 			&nbsp;&nbsp;
 			
-			<?php echo $Language->getText('project_admin_qrs','create_new_package',array('<a href="editpackages.php?group_id='.$group_id.'">','</a>')) ?>
+			<?php echo $Language->getText('project_admin_qrs','create_new_package',array('<a href="/frs/admin/?group_id='.$group_id.'">','</a>')) ?>
 		</td>
 	</tr>
 	<tr>
@@ -237,5 +238,6 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 
 <?php
 
-project_admin_footer(array());
+frs_admin_footer();
+
 ?>

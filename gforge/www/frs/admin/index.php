@@ -1,35 +1,35 @@
 <?php
 /**
-  *
-  * Project Admin: Edit Packages
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id: editpackages.php.patched,v 1.1.2.1 2002/11/30 09:57:58 cbayle Exp $
-  *
-  */
+ *
+ * Project Admin: Edit Packages
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2004 (c) GForge, LLC
+ *
+ * @version   $Id$
+ *
+ */
 
 require_once('pre.php');	
-require_once('www/project/admin/project_admin_utils.php');
+require_once('www/frs/include/frs_utils.php');
 
-session_require(array('group'=>$group_id));
+if (!$group_id) {
+	exit_no_group();
+}
+
 $project =& group_get_object($group_id);
-
-exit_assert_object($project,'Project');
-
+if (!$project || $project->isError()) {
+	exit_error('Error',$project->getErrorMessage());
+}
 $perm =& $project->getPermission(session_get_user());
-
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
 }
 
 /*
 
-
 	Relatively simple form to edit/add packages of releases
-
 
 */
 
@@ -66,7 +66,7 @@ if ($submit) {
 }
 
 
-project_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_editpackages','title'),'group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
 
 $res=db_query("SELECT status_id,package_id,name AS package_name FROM frs_package WHERE group_id='$group_id' AND status_id=1");
 $rows=db_numrows($res);
@@ -147,6 +147,6 @@ if (!$res || $rows < 1) {
 
 <?php
 
-project_admin_footer(array());
+frs_admin_footer();
 
 ?>

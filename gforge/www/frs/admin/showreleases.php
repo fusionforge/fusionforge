@@ -1,15 +1,15 @@
 <?php
 /**
-  *
-  * Project Admin: Edit Releases of Packages
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ *
+ * Project Admin: Edit Releases of Packages
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2004 (c) GForge, LLC
+ *
+ * @version   $Id$
+ *
+ */
 
 
 /* Updated rewrite of the File Release System to clean up the UI 
@@ -17,29 +17,24 @@
  */
 
 require_once('pre.php');	
-require_once('www/project/admin/project_admin_utils.php');
+require_once('www/frs/include/frs_utils.php');
 
 if (!$group_id) {
 	exit_no_group();
 }
-if (!$package_id) {
-	header("Location editpackages.php?group_id=$group_id?feedback=Choose+Package");
-	exit;
-}
-
-/*
-	Set up and verify permissions
-*/
-session_require(array('group'=>$group_id));
 
 $project =& group_get_object($group_id);
-
-exit_assert_object($project,'Project');
-
+if (!$project || $project->isError()) {
+	exit_error('Error',$project->getErrorMessage());
+}
 $perm =& $project->getPermission(session_get_user());
-
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
+}
+
+if (!$package_id) {
+	header("Location /frs/admin/?group_id=$group_id?feedback=Choose+Package");
+	exit;
 }
 
 /*
@@ -58,7 +53,7 @@ if (!$res || db_numrows($res) < 1) {
 /*
 	Display a list of releases in this package
 */
-project_admin_header(array('title'=>$Language->getText('project_admin_showreleases','title'),'group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_showreleases','title'),'group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
 
 $title_arr=array();
 $title_arr[]=$Language->getText('project_admin_showreleases','package_name');
@@ -79,6 +74,6 @@ for ($i=0; $i<db_numrows($res); $i++) {
 
 echo $GLOBALS['HTML']->listTableBottom();
 
-project_admin_footer(array());
+frs_admin_footer(array());
 
 ?>

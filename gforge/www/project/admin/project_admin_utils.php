@@ -23,9 +23,6 @@ function project_admin_header($params) {
 
 	$params['toptab']='admin';
 	$params['group']=$group_id;
-	site_project_header($params);
-
-	$group_id=$params['group'];
 
 	$project =& group_get_object($group_id);
 	if (!$project || !is_object($project)) {
@@ -37,45 +34,40 @@ function project_admin_header($params) {
 		return;
 	}
 
-	$is_admin=$perm->isAdmin();
-
-	if ($is_admin) {
-		echo ($HTML->subMenu(
-			array(
-			$Language->getText('project_admin_utils','admin'),
-			$Language->getText('project_admin_utils','user_permissions'),
-			$Language->getText('project_admin_utils','edit_public_info'),
-			$Language->getText('project_admin_utils','project_history'),
-			$Language->getText('project_admin_utils','vhosts'),
-			$Language->getText('project_admin_utils','edit_release_files'),
-			$Language->getText('project_admin_utils','post_jobs'),
-			$Language->getText('project_admin_utils','edit_jobs'),
-			$Language->getText('project_admin_utils','multimedia_data'),
-			$Language->getText('project_admin_utils','database_admin'),
-			$Language->getText('project_admin_utils','stats')),
-			array   (
-			'/project/admin/?group_id='.$group_id,
-			'/project/admin/userperms.php?group_id='.$group_id,
-			'/project/admin/editgroupinfo.php?group_id='.$group_id,
-			'/project/admin/history.php?group_id='.$group_id,
-			'/project/admin/vhost.php?group_id='.$group_id,
-			'/project/admin/editpackages.php?group_id='.$group_id,
-			'/people/createjob.php?group_id='.$group_id,
-			'/people/?group_id='.$group_id,
-			'/project/admin/editimages.php?group_id='.$group_id,
-			'/project/admin/database.php?group_id='.$group_id,
-			'/project/stats/?group_id='.$group_id)));
-	} else {
-		echo ($HTML->subMenu(
-			array(
-			$Language->getText('project_admin_utils','admin'),
-			$Language->getText('project_admin_utils','edit_release_files'),
-			$Language->getText('project_admin_utils','stats')),
-			array   (
-			'/project/admin/?group_id='.$group_id,
-			'/project/admin/editpackages.php?group_id='.$group_id,
-			'/project/stats/?group_id='.$group_id)));
+	/*
+		Enforce Project Admin Perms
+	*/
+	if (!$perm->isAdmin()) {
+		exit_permission_denied();
 	}
+
+	site_project_header($params);
+
+	echo ($HTML->subMenu(
+		array(
+		$Language->getText('project_admin_utils','admin'),
+		$Language->getText('project_admin_utils','user_permissions'),
+		$Language->getText('project_admin_utils','edit_public_info'),
+		$Language->getText('project_admin_utils','project_history'),
+		$Language->getText('project_admin_utils','vhosts'),
+		$Language->getText('project_admin_utils','edit_release_files'),
+		$Language->getText('project_admin_utils','post_jobs'),
+		$Language->getText('project_admin_utils','edit_jobs'),
+		$Language->getText('project_admin_utils','multimedia_data'),
+		$Language->getText('project_admin_utils','database_admin'),
+		$Language->getText('project_admin_utils','stats')),
+		array   (
+		'/project/admin/?group_id='.$group_id,
+		'/project/admin/userperms.php?group_id='.$group_id,
+		'/project/admin/editgroupinfo.php?group_id='.$group_id,
+		'/project/admin/history.php?group_id='.$group_id,
+		'/project/admin/vhost.php?group_id='.$group_id,
+		'/frs/admin/?group_id='.$group_id,
+		'/people/createjob.php?group_id='.$group_id,
+		'/people/?group_id='.$group_id,
+		'/project/admin/editimages.php?group_id='.$group_id,
+		'/project/admin/database.php?group_id='.$group_id,
+		'/project/stats/?group_id='.$group_id)));
 }
 
 /*
@@ -86,116 +78,6 @@ function project_admin_header($params) {
 
 function project_admin_footer($params) {
 	site_project_footer($params);
-}
-
-
-/*
-
-
-	The following functions are for the FRS (File Release System)
-
-
-*/
-
-
-/*
-
-	pop-up box of supported frs statuses
-
-*/
-
-function frs_show_status_popup ($name='status_id', $checked_val="xzxz") {
-	/*
-		return a pop-up select box of statuses
-	*/
-	global $FRS_STATUS_RES;
-	if (!isset($FRS_STATUS_RES)) {
-		$FRS_STATUS_RES=db_query("SELECT * FROM frs_status");
-	}
-	return html_build_select_box ($FRS_STATUS_RES,$name,$checked_val,false);
-}
-
-/*
-
-	pop-up box of supported frs filetypes
-
-*/
-
-function frs_show_filetype_popup ($name='type_id', $checked_val="xzxz") {
-	/*
-		return a pop-up select box of the available filetypes
-	*/
-	global $FRS_FILETYPE_RES, $Language;
-	if (!isset($FRS_FILETYPE_RES)) {
-		$FRS_FILETYPE_RES=db_query("SELECT * FROM frs_filetype");
-	}
-	return html_build_select_box ($FRS_FILETYPE_RES,$name,$checked_val,true,$Language->getText('project_admin_qrs', 'must_choose_one'));
-}
-
-/*
-
-	pop-up box of supported frs processor options
-
-*/
-
-function frs_show_processor_popup ($name='processor_id', $checked_val="xzxz") {
-	/*
-		return a pop-up select box of the available processors 
-	*/
-	global $FRS_PROCESSOR_RES, $Language;
-	if (!isset($FRS_PROCESSOR_RES)) {
-		$FRS_PROCESSOR_RES=db_query("SELECT * FROM frs_processor");
-	}
-	return html_build_select_box ($FRS_PROCESSOR_RES,$name,$checked_val,true,$Language->getText('project_admin_qrs', 'must_choose_one'));
-}
-
-/*
-
-	pop-up box of packages:releases for this group
-
-*/
-
-
-function frs_show_release_popup ($group_id, $name='release_id', $checked_val="xzxz") {
-	/*
-		return a pop-up select box of releases for the project
-	*/
-	global $FRS_RELEASE_RES;
-	if (!$group_id) {
-		return 'ERROR - GROUP ID REQUIRED';
-	} else {
-		if (!isset($FRS_RELEASE_RES)) {
-			$FRS_RELEASE_RES=db_query("SELECT frs_release.release_id,(frs_package.name || ' : ' || frs_release.name) ".
-				"FROM frs_release,frs_package ".
-				"WHERE frs_package.group_id='$group_id' ".
-				"AND frs_release.package_id=frs_package.package_id");
-			echo db_error();
-		}
-		return html_build_select_box ($FRS_RELEASE_RES,$name,$checked_val,false);
-	}
-}
-
-/*
-
-	pop-up box of packages for this group
-
-*/
-
-function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xzxz") {
-	/*
-		return a pop-up select box of packages for this project
-	*/
-	global $FRS_PACKAGE_RES;
-	if (!$group_id) {
-		return 'ERROR - GROUP ID REQUIRED';
-	} else {
-		if (!isset($FRS_PACKAGE_RES)) {
-			$FRS_PACKAGE_RES=db_query("SELECT package_id,name 
-				FROM frs_package WHERE group_id='$group_id'");
-			echo db_error();
-		}
-		return html_build_select_box ($FRS_PACKAGE_RES,$name,$checked_val,false);
-	}
 }
 
 /*

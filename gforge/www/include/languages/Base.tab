@@ -1411,6 +1411,7 @@ project_admin	edit_file_releases	Edit/Add File Releases
 project_admin	edit_member_permissions	Edit Member Permissions
 project_admin	file_releases	File Releases
 project_admin	forum_admin	Forum Admin
+project_admin	frs_admin	FRS Admin
 project_admin	group_members	Group Members
 project_admin	homepage_link	Homepage Link:&nbsp;
 project_admin	mail_admin	Mail Admin

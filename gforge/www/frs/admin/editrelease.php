@@ -14,26 +14,24 @@ require_once('pre.php');
 require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
-require_once('www/project/admin/project_admin_utils.php');
+require_once('www/frs/include/frs_utils.php');
 
 if (!$group_id) {
 	exit_no_group();
 }
-if (!$package_id || !$release_id) {
-	header("Location: ./editpackages.php?group_id=$group_id");
-	exit;
-}
-
-session_require(array('group'=>$group_id));
 
 $g =& group_get_object($group_id);
-
-exit_assert_object($g,'Project');
-
+if (!$g || $g->isError()) {
+	exit_error('Error',$g->getErrorMessage());
+}
 $perm =& $g->getPermission(session_get_user());
-
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
+}
+
+if (!$package_id || !$release_id) {
+	header("Location: /frs/admin/?group_id=$group_id");
+	exit;
 }
 
 //
@@ -164,7 +162,7 @@ if ($step3) {
 	}
 }
 
-project_admin_header(array('title'=>$Language->getText('project_admin_editrelease','title'),'group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
+frs_admin_header(array('title'=>$Language->getText('project_admin_editrelease','title'),'group'=>$group_id,'pagename'=>'project_admin_editreleases','sectionvals'=>array(group_getname($group_id))));
 /*
  * Show the forms for each step
  */
@@ -324,6 +322,6 @@ project_admin_header(array('title'=>$Language->getText('project_admin_editreleas
 print "<br>There are ".$frsp->getMonitorCount()." users monitoring this package.";
 print "<hr>";
 
-project_admin_footer(array());
+frs_admin_footer();
 
 ?>

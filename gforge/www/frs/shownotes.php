@@ -7,16 +7,19 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: shownotes.php,v 1.8 2001/05/22 19:42:19 pfalcon Exp $
+  * @version   $Id$
   *
   */
 
 
 require_once('pre.php');
+require_once('www/frs/include/frs_utils.php');
 
-$result=db_query("SELECT frs_release.notes,frs_release.changes,frs_release.preformatted,frs_release.name,frs_package.group_id ".
-		"FROM frs_release,frs_package ".
-		"WHERE frs_release.package_id=frs_package.package_id AND frs_release.release_id='$release_id'");
+$result=db_query("SELECT frs_release.notes,frs_release.changes,
+		frs_release.preformatted,frs_release.name,frs_package.group_id
+		FROM frs_release,frs_package 
+		WHERE frs_release.package_id=frs_package.package_id 
+		AND frs_release.release_id='$release_id'");
 
 if (!$result || db_numrows($result) < 1) {
 	echo db_error();
@@ -25,11 +28,11 @@ if (!$result || db_numrows($result) < 1) {
 
 	$group_id=db_result($result,0,'group_id');
 
-	site_project_header(array('title'=>$Language->getText('project_shownotes','title'),'group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_shownotes','sectionvals'=>array(group_getname($group_id))));
+	frs_header(array('title'=>$Language->getText('project_shownotes','title'),'group'=>$group_id,'pagename'=>'project_shownotes','sectionvals'=>array(group_getname($group_id))));
 
 	echo $HTML->boxTop($Language->getText('project_shownotes','notes'));
 
-	echo '<h3>'.$Language->getText('project_shownotes','release_name').' <a href="showfiles.php?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
+	echo '<h3>'.$Language->getText('project_shownotes','release_name').' <a href="/frs/?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
 		<p>';
 
 /*
@@ -55,7 +58,7 @@ if (!$result || db_numrows($result) < 1) {
 
 	echo $HTML->boxBottom();
 
-	site_project_footer(array());
+	frs_footer();
 
 }
 

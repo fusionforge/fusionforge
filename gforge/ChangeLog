@@ -1,3 +1,9 @@
+2004-02-10  Tim Perdue  <tim@perdue.net>
+
+	* re-organize and mild cleanup of FRS - all files
+	are in new /frs/ directory. NOTE - the sys_use_files
+	switch is changes to sys_use_frs for consistency!
+
 2004-02-09  Tom Copeland <tom@infoether.com>
 	* Implemented RFE [ #657 ] Trove Deletion Error
 	 Message Unclear - Could Improve
