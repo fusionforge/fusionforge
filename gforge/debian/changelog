@@ -6,8 +6,9 @@ sourceforge (2.6-0+0+) unstable; urgency=low
   * Split the Apache installation/deinstallation process out of
     postinst/prerm and into an install-db.sh script.
   * Cleaned the exim configuration a bit.
+  * Cleaned the DNS configuration a bit.
 
- -- Roland Mas <lolando@debian.org>  Fri,  2 Nov 2001 18:40:53 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  2 Nov 2001 18:55:10 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 
