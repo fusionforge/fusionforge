@@ -44,16 +44,18 @@ function pm_header($params) {
 	if ($pg) {
 		echo "<h3>".$Language->getText('pm_include_grouphtml','project').": ". $pg->getName() ."</h3>";
 	}
-	echo "<p><strong>";
 
 	if ($group_project_id) {
-		$gantt_height=680;
 		$gantt_width=820;
+		$gantt_height=680;
 		$gantt_url="/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage";
-		$gantt_title=$Language->getText('pm_include_grouphtml','gantt_chart');
+		// The following make an error in IE
+		//$gantt_title=$Language->getText('pm_include_grouphtml','gantt_chart');
+		// Quite dirty replacement
+		$gantt_title='GanttChart';
 		$gantt_winopt='scrollbars=yes,resizable=yes,toolbar=no,height=' . $gantt_height . ',width=' . $gantt_width;
 
-		echo  '<script language="JavaScript" type="text/javascript">' 
+		echo '<script language="JavaScript" type="text/javascript">' 
 			.'<!-- ' . "\n"
 			.'function gantt_window() {'
 			.'GanttWin = window.open(\''
@@ -65,7 +67,11 @@ function pm_header($params) {
 			. '}' . "\n"
 			. ' -->'
 			. '</script>';
+	}
 
+	echo "<p><strong>";
+
+	if ($group_project_id) {
 		if (session_loggedin()) {
 			echo "<a href=\"/pm/task.php?group_id=$group_id&amp;group_project_id=$group_project_id&amp;func=addtask\">".$Language->getText('pm_include_grouphtml','add_task')."</a> | ";
 		}
