@@ -1,3 +1,8 @@
+2004-08-30  Francisco Gimeno <kikov@kikov.org>
+
+	* www/reporting/toolpie_graph.php: Change Forum.date to 
+	Forum.postdate.
+
 2004-08-26  Tony Pugliese <lpajp@pacbell.net>
 	* nice patch to add "unlimited extra fields" to tracker.
 
