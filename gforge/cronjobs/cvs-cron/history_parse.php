@@ -62,6 +62,8 @@ if ( $verbose ) {
 
 db_begin();
 
+$rollback = false;
+
 $root_dir =& opendir( $cvsroot );
 while ( $group = readdir( $root_dir ) ) {
 	if ( $group == '.' || $group == '..' ) 
@@ -91,10 +93,15 @@ while ( $group = readdir( $root_dir ) ) {
 	$usr_commit = array();
 	$usr_add	= array();
 
-	$hist_file =& fopen( "$cvsroot/$group/CVSROOT/history", 'r' );
+
+	$hist_file_path = $cvsroot.'/'.$group.'/CVSROOT/history';
+	if( !file_exists($hist_file_path) || !is_readable($hist_file_path) || filesize($hist_file_path) == 0) {
+		continue;
+	}
+	$hist_file =& fopen( $hist_file_path, 'r' );
 	if ( ! $hist_file ) 
 		continue;
-	$hist_cont = fread( $hist_file, filesize( "$cvsroot/$group/CVSROOT/history" ) );
+	$hist_cont = fread( $hist_file, filesize( $hist_file_path ) );
 	fclose( $hist_file );
 	$hist_lines = explode( "\n", $hist_cont );
 
@@ -158,8 +165,11 @@ while ( $group = readdir( $root_dir ) ) {
 
 	if ( $verbose ) 
 		$err .= "$sql\n";
-	db_query( $sql );
-	$err .= db_error();
+	if ( !db_query( $sql ) ) {
+		$err .= db_error();
+		$rollback = true;
+		break;
+	}
 
 	$user_list = array_unique( array_merge( array_keys( $usr_add ), array_keys( $usr_commit ) ) );
 
@@ -187,15 +197,23 @@ while ( $group = readdir( $root_dir ) ) {
 		if ( $verbose ) {
 			$err .= "$sql\n";
 		}
-		db_query( $sql );
-		$err .= db_error();
+		if ( !db_query( $sql )) {
+			$err .= db_error();
+			$rollback = true;
+			break 2;
+		}
 
 	}
 	
 
 }
 
-db_commit();
+if ( $rollback ) {
+	db_rollback();
+} else {
+	db_commit();
+}
+
 cron_entry(14,$err);
 
 ?>
