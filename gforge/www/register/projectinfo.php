@@ -73,8 +73,8 @@ if ($submit) {
 			'shell1',
 			$sys_cvs_host
 		);
-		if ($sys_use_scm) {
-			$res = $res && $group->setPluginUse($scm,true);
+		if ($res && $sys_use_scm) {
+			$res = $group->setPluginUse($scm,true);
 		}
 		if (!$res) {
 			$feedback .= $group->getErrorMessage();
