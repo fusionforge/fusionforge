@@ -26,7 +26,7 @@
  */
 
 function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
-
+	global $Language;
         /*
        		Show list of waiting news items
        	*/
@@ -34,22 +34,21 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	// function to show single news item
        	// factored out because called 3 time below
        	function show_news_item($result,$i,$approved,$selectable) {
+	        global $PHP_SELF,$HTML, $sys_shortdatefmt;
 
-	        global $PHP_SELF,$HTML;
-
-		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td>';
+		echo '<tr '. $HTML->boxGetAltRowStyle($i) . '><td width="20%">';
        		if ($selectable) {
        			echo '<input type="checkbox" '
        			     .'name="news_id[]" value="'
        			     .db_result($result, $i, 'id').'" />';
        		}
-       		echo date('Y-m-d', db_result($result,$i,'post_date')).'</td>
-       		<td>';
+       		echo date($sys_shortdatefmt, db_result($result,$i,'post_date')).'</td>
+       		<td width="45%">';
        		echo '
        		<a href="'.$PHP_SELF.'?approve=1&amp;id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a>
        		</td>
 
-       		<td>
+       		<td width="35%">
        		<a href="/projects/'
        		.db_result($result,$i,'unix_group_name').'/">'
        		.db_result($result,$i,'group_name')
@@ -60,10 +59,11 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        		;
        	}
 
-       	$title_arr=array();
-       	$title_arr[]='Date';
-       	$title_arr[]='Title';
-       	$title_arr[]='Project';
+       	$title_arr=array(
+       		$Language->getText('news_admin', 'date'),
+       		$Language->getText('news_admin', 'subject'),
+       		$Language->getText('news_admin', 'project')
+       	);
 
        	$result=db_query($sql_pending);
        	$rows=db_numrows($result);
@@ -74,15 +74,15 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
 
        	if ($rows < 1) {
        		echo '
-       			<h4>No Queued Items Found</h4>';
+       			<h4>'.$Language->getText('news_admin', 'noqueued').'</h4>';
        	} else {
-       		echo '<h4>These items need to be approved (total: '.$rows.')</h4>';
+       		echo '<h4>'.$Language->getText('news_admin', 'newsbytes_to_approve', array($rows)).'</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,true);
        		}
        		echo $GLOBALS['HTML']->listTableBottom();
-       		echo '<br /><input type="submit" name="submit" value="Reject Selected" />';
+       		echo '<br /><input type="submit" name="submit" value="'.$Language->getText('news_admin', 'reject_selected').'" />';
        	}
        	echo '</form>';
 
@@ -94,9 +94,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '
-       			<h4>No rejected items found for this week</h4>';
+       			<h4>'.$Language->getText('news_admin', 'norejected').'</h4>';
        	} else {
-       		echo '<h4>These items were rejected this past week (total: '.$rows.')</h4>';
+       		echo '<h4>'.$Language->getText('news_admin', 'rejected_newsbytes', array($rows)).'</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,false);
@@ -112,9 +112,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	$rows=db_numrows($result);
        	if ($rows < 1) {
        		echo '
-       			<h4>No approved items found for this week</h4>';
+       			<h4>'.$Language->getText('news_admin', 'noapproved').'</h4>';
        	} else {
-       		echo '<h4>These items were approved this past week (total: '.$rows.')</h4>';
+       		echo '<h4>'.$Language->getText('news_admin', 'approved_newsbytes', array($rows)).'</h4>';
        		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,true,false);

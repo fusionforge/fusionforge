@@ -29,7 +29,7 @@ require_once('pre.php');
 require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');
 
-news_header(array('title'=>'News','pagename'=>'news','sectionvals'=>array(group_getname($group_id))));
+news_header(array('title'=>$Language->getText('news', 'title'),'pagename'=>'news','sectionvals'=>array(group_getname($group_id))));
 
 echo $Language->getText('news', 'choose');
 
@@ -76,7 +76,7 @@ if ($rows < 1) {
         if ($more) {
         	echo '<br /><a href="'
                      .'?group_id='.$group_id.'&amp;limit='.$limit
-                     .'&amp;offset='. (string)($offset+$limit) .'">[Older headlines]</a>';
+                     .'&amp;offset='. (string)($offset+$limit) .'">['.$Language->getText('news', 'olderheadlines').']</a>';
         }
 
         echo '

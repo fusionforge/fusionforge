@@ -679,7 +679,7 @@ docman_new	title	Gestionnaire de documents : Soumettre un nouveau document
 docman_new	upload_file	Télécharger vers le serveur
 docman_new	upload_url	OU spécifier une URL externe pour le fichier
 error	error_creating	Erreur de création
-error	not_found	PAGE NON TROUVEE
+error	not_found	Page non trouvée
 error	title	La page demandée  n'a pas été trouvée (Erreur 404)
 exit	choose_a_group	Erreur - Choisissez un groupe
 exit	choose_group_body	Aucun identifiant de groupe n'a été choisi
@@ -1183,12 +1183,37 @@ news	choose	<p>Choisissez une annonce pour visualiser, chercher ou soumettre des
 news	noitems	Aucune annonce trouvée
 news	nonews	Aucune annonce
 news	nonewsfor	Aucune annonce trouvée pour $1
+news	olderheadlines	Anciennes annonces
 news	section	Projet : $1
 news	title	Annonces
-news_admin	noqueued	Pas d'annonce soumise pour le projet
+news_admin	approve_for_frontpage	Approuver pour la page d'accueil
+news_admin	approve_newsbyte	Approuver une annonce pour le projet : $1
+news_admin	approved_newsbytes	Ces annonces ont été approuvées la semaine passée (total : $1)
+news_admin	date	Date
+news_admin	details	Détails
+news_admin	do_nothing	Ne rien faire
+news_admin	newsbyte_deleted	Annonce supprimée.
+news_admin	newsbyte_not_found	Annonce non trouvée.
+news_admin	newsbyte_rejected	Annonce rejetée.
+news_admin	newsbytes_to_approve	Ces annonces ont besoin d'être approuvées (total : $1)
+news_admin	newsbyte_updated	Annonce mise à jour.
+news_admin	noapproved	Aucune annonce approuvée cette semaine
+news_admin	noqueued	Pas d'annonce en attente
+news_admin	norejected	Aucune annonce rejetée cette semaine
 news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe des annonces de $1.
-news_admin	queued	Annonces soumises pour le projet
+news_admin	project	Projet
+news_admin	queued	Annonces en attente de validation pour le projet
+news_admin	reject	Rejeter
+news_admin	reject_selected	Rejeter les annonces sélectionnées
+news_admin	rejected_newsbytes	Ces annonces ont été rejetées la semaine passée (total : $1)
+news_admin	removal_when_edit	Si cette annonce se trouve sur la page d'accueil de $1 et que vous la modifiez, elle sera retirée de la page d'accueil.
 news_admin	section	Annonces
+news_admin	status	Etat
+news_admin	status_delete	Supprimée
+news_admin	status_displayed	Affichée
+news_admin	subject	Sujet
+news_admin	submitted_by	Proposée par
+news_admin	submitted_for_group	Proposée pour le projet
 news_admin	title	Administration des Annonces
 news_main	title	Annonces
 news_submit	cannot	Vous ne pouvez soumettre une annonce sans être administrateur de ce projet
@@ -1201,8 +1226,7 @@ news_submit	newsadded	Annonce ajoutée.
 news_submit	post_blurb	Vous pouvez publier une annonce concernant votre projet si vous en êtes administrateur. Vous pouvez également publier des annonces si votre projet a besoin d'aide.</p><p>Toutes les annonces <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet. Les annonces d'intérêt général peuvent être sélectionnées par l'équipe $1 pour apparaître sur la page d'accueil $1.</p><p>Vous pouvez inclure des URLs dans vos annonces.
 news_submit	section	Annonces
 news_submit	subject	Sujet&nbsp;
-news_submit	submit	Envoyer
-news_submit	title	Soumettre une annonce pour $1
+news_submit	title	Proposer une annonce pour $1
 news_utils	archive	Archive des annonces
 news_utils	comment_1	commentaire
 news_utils	comment_2	commentaires

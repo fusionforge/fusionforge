@@ -84,16 +84,17 @@ if (session_loggedin()) {
 	/*
 		Show the submit form
 	*/
-	news_header(array('title'=>'News','pagename'=>'news_submit','titlevals'=>array(group_getname($group_id))));
+	news_header(array('title'=>$Language->getText('news', 'title'),'pagename'=>'news_submit','titlevals'=>array(group_getname($group_id))));
 
 	$jsfunc = notepad_func();
+	$group = group_get_object($group_id);
 	echo '
 		<p>
 		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS['sys_name']) .'</p>' . $jsfunc . 
 		'<p>
 		<form action="'.$PHP_SELF.'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
-		<strong>'.$Language->getText('news_submit', 'forproject').': '. group_getname($group_id) .'</strong>
+		<strong>'.$Language->getText('news_submit', 'forproject').': '.$group->getPublicName().'</strong>
 		<input type="hidden" name="post_changes" value="y" /></p>
 		<p>
 		<strong>'.$Language->getText('news_submit', 'subject').':</strong>'.utils_requiredField().'<br />
@@ -101,7 +102,7 @@ if (session_loggedin()) {
 		<p>
 		<strong>'.$Language->getText('news_submit', 'details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />
 		<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />
-		<input type="submit" name="submit" value="'.$Language->getText('news_submit', 'submit').'" />
+		<input type="submit" name="submit" value="'.$Language->getText('general', 'submit').'" />
 		</form></p>';
 
 	news_footer(array());

@@ -1157,16 +1157,41 @@ new	released_by	Released by:
 new	this_project_has_not	This project has not submitted a description
 new	title	New File Releases
 new	version	Version:
-news	choose	<P>Choose a News item and you can browse, search, and post messages.<P>
+news	choose	<p>Choose a News item and you can browse, search, and post messages.</p>
 news	noitems	No items were found
 news	nonews	No News Found
 news	nonewsfor	No News Found For $1
+news	olderheadlines	Older headlines
 news	section	Project: $1
 news	title	News
-news_admin	noqueued	No Queued Items Found For Project
+news_admin	approve_for_frontpage	Approve For Front Page
+news_admin	approve_newsbyte	Approve a NewsByte For Project: $1
+news_admin	approved_newsbytes	These items were approved this past week (total: $1)
+news_admin	date	Date
+news_admin	details	Details
+news_admin	do_nothing	Do Nothing
+news_admin	newsbyte_deleted	NewsByte Deleted.
+news_admin	newsbyte_not_found	NewsByte Not Found.
+news_admin	newsbyte_rejected	NewsBytes Rejected.
+news_admin	newsbytes_to_approve	These items need to be approved (total: $1)
+news_admin	newsbyte_updated	NewsByte Updated.
+news_admin	noapproved	No approved items found for this week
+news_admin	noqueued	No Queued Items Found
+news_admin	norejected	No rejected items found for this week
 news_admin	permdenied	You have to be an admin on the project you are editing or a member of the $1 News team.
+news_admin	project	Project
 news_admin	queued	These News Items Were Submitted For Project
+news_admin	reject	Reject
+news_admin	reject_selected	Reject Selected
+news_admin	rejected_newsbytes	These items were rejected this past week (total: $1)
+news_admin	removal_when_edit	If this item is on the $1 home page and you edit it, it will be removed from the home page.
 news_admin	section	News
+news_admin	status	Status
+news_admin	status_delete	Delete
+news_admin	status_displayed	Displayed
+news_admin	subject	Subject
+news_admin	submitted_by	Submitted by
+news_admin	submitted_for_group	Submitted for group
 news_admin	title	News Admin
 news_main	title	News
 news_submit	cannot	You cannot submit news for a project unless you are an admin on that project
@@ -1179,7 +1204,6 @@ news_submit	newsadded	News Added.
 news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the $1 news team before they will appear on the $1 home page.<P>You may include URLs, but not HTML in your submissions.<P>URLs that start with http:// are made clickable.
 news_submit	section	News
 news_submit	subject	Subject
-news_submit	submit	SUBMIT
 news_submit	title	Submit News for $1
 news_utils	archive	News archive
 news_utils	comment_1	Comment
