@@ -142,11 +142,13 @@ sub print_stats {
 		print "$cvsgroup $cvsuser $year $month $day $total=$modified+$added+$others\n";
 	}
 	print "-----------------------------------------------------\n";
-	$sql = "SELECT cvsgroup, cvsuser, SUM(modified), SUM(added) FROM deb_cvs_group_user group by cvsgroup,cvsuser";
+	print "cvsgroup\tcvsuser\tmodified\tadded\tothers\n";
+	print "-----------------------------------------------------\n";
+	$sql = "SELECT cvsgroup, cvsuser, SUM(modified), SUM(added), SUM(others) FROM deb_cvs_group_user group by cvsgroup,cvsuser";
 	$res = $dbh->prepare($sql);
 	$res->execute();
-	while ( my ($cvsgroup, $cvsuser, $modified, $added) = $res->fetchrow()) {
-		print "$cvsgroup $cvsuser $modified $added\n";
+	while ( my ($cvsgroup, $cvsuser, $modified, $added, $others) = $res->fetchrow()) {
+		print "$cvsgroup\t$cvsuser\t$modified\t$added\n";
 	}
 	print "-----------------------------------------------------\n";
 }
