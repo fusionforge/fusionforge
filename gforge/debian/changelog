@@ -1,4 +1,4 @@
-gforge (3.0-7+11) unstable; urgency=low
+gforge (3.0-8) unstable; urgency=low
 
   * [Roland] Fixed redirection URL for Mailman.
   * [Roland] Made the create-vhosts cronjob silent.
@@ -10,7 +10,7 @@ gforge (3.0-7+11) unstable; urgency=low
     from the gforge.org home page).  Patch from Francisco Gimeno.
   * [Roland] Fixed images alias for Mailman (closes: #213052).
 
- -- Roland Mas <lolando@debian.org>  Mon,  6 Oct 2003 13:38:51 +0200
+ -- Roland Mas <lolando@debian.org>  Mon,  6 Oct 2003 16:27:38 +0200
 
 gforge (3.0-7) unstable; urgency=low
 
