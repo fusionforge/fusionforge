@@ -55,10 +55,8 @@ please report them via e-mail to <root@%L>.
                 			perl -pi -e "s/^#SF#//" /etc/proftpd.conf
         			fi
 				/etc/init.d/proftpd restart
-				rmdir $FTPROOT/pub
-				rm $FTPROOT/welcome.msg
-				deluser sfftp
-				rmdir $FTPROOT/
+				rm -rf $FTPROOT
+				deluser sfftp || true
 				;;
 		esac
 	fi
