@@ -283,7 +283,7 @@ if ($editdoc && $docid) {
 		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
 		$row = 0;
-		$dgh->showTableNestedGroups(&$nested_groups, &$row);
+		$dgh->showTableNestedGroups($nested_groups, $row);
 		
 		echo $GLOBALS['HTML']->listTableBottom();
 		
@@ -302,7 +302,7 @@ if ($editdoc && $docid) {
 		<tr>
 			<th><?php echo $Language->getText('docman_admin_editgroups','new_group_parent') ?>:</th>
 			<td>
-				<?php echo $dgh->showSelectNestedGroups(&$nested_groups, 'parent_doc_group') ?>
+				<?php echo $dgh->showSelectNestedGroups($nested_groups, 'parent_doc_group') ?>
 			</td>
 
 			<td><input type="submit" value="<?php echo $Language->getText('general','add') ?>" name="submit" /></td>
@@ -427,7 +427,7 @@ if ($editdoc && $docid) {
 		echo "<ul>";
 		foreach ($states as $state) {
 			echo "<li><strong>".$state["name"]."</strong>";
-			docman_display_documents(&$nested_groups, &$df, true, $state["stateid"], true);
+			docman_display_documents($nested_groups, $df, true, $state["stateid"], true);
 			echo "</li>";
 		}
 		echo "</ul>";
