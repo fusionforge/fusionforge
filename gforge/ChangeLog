@@ -1,3 +1,7 @@
+2004-10-17  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* made cron manager usable by adding pagination
+
 2004-10-16  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* reorganized search engine code and made it more flexible
