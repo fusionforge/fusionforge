@@ -1,18 +1,19 @@
-sourceforge (2.5-10+7) unstable; urgency=low
+sourceforge (2.5-10+8) unstable; urgency=low
 
-  * Fixed /etc/alias entry for sourceforge user.  Really, this time.
+  * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
   * Added sf-add-skill and sf-register-theme scripts.
   * Removed the need for chsh sourceforge in update-user-group-cvs.sh.
   * Fixed user list and group list.
-  * Added support for sites without DNS delegation.
+  * [Christian] Added support for sites without DNS delegation.
   * Included patch from Olivier Garcia <olivier@linux-nerd.com>: support
     for multiple network cards.
   * Made sourceforge.config ash-compatible.
   * Fixed User.class (closes: #108682).
   * Added the alias for the Mailman images in sf-httpd.conf.template.
+  * Fixed the most important entry in the zone file (ours).
 
- -- Roland Mas <lolando@debian.org>  Fri, 31 Aug 2001 17:39:51 +0200
+ -- Roland Mas <lolando@debian.org>  Tue,  4 Sep 2001 20:07:27 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 
