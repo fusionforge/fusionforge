@@ -1,4 +1,4 @@
-sourceforge (2.5-17+) unstable; urgency=low
+sourceforge (2.5-18) unstable; urgency=low
 
   * [Roland] Fixed speling error in Description: field (closes: #125372).
   * [Roland] Added dependencies on packages providing the vi editor
@@ -6,7 +6,7 @@ sourceforge (2.5-17+) unstable; urgency=low
   * [Roland] deb-specific/install-exim.sh: Fixed LDAP queries to match the
     real attribute names from the new schema introduced in 2.5-15.
 
- -- Roland Mas <lolando@debian.org>  Wed, 26 Dec 2001 13:59:04 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 28 Dec 2001 10:12:30 +0100
 
 sourceforge (2.5-17) unstable; urgency=low
 
