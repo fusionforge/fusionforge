@@ -264,7 +264,7 @@ forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting Fa
 forum_common_forummessage	error_get_message_id	ForumMessage::create() Unable to get new message id
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Invalid MessageID
 forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() No Valid ParentMessage Object
-forum_common_forummessage	error_getting_next_thread	Getting next thread_id failed
+		forum_common_forummessage	error_getting_next_thread	Getting next thread_id failed
 forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
 forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
 forum_common_forum	error_save_place	Forum::savePlace() 
@@ -296,7 +296,7 @@ forum_admin_changestatus	status	Status
 forum_admin_delete	section	Forum Administration
 forum_admin_delete	title	Delete Forum
 forum_admin_delete_message	section Forum Administration
-forum_admin_delete_message	title	Delete a Message
+		forum_admin_delete_message	title	Delete a Message
 forum_admin_delete_message	warning	WARNING! You are about to permanently delete a message and all of its followups!!
 forum_errors	error_getting_forum	Error getting Forum
 forum_errors	error_determining_forum_id	Error Determining forum_id
@@ -540,7 +540,6 @@ menu	search	Search
 menu	site_status	Site Status
 menu	software_map	Software Map
 menu	top_projects	Top Projects
-menu	admin	Admin
 menu	submit	Submit
 menu	home	Home
 menu	projectree	Project&nbsp;Tree
@@ -609,7 +608,6 @@ my_diary	update_entry	Update An Entry
 my_diary	entry_not_found	Entry not found or does not belong to you
 my_diary	item_added	Item Added
 my_diary	no_entries	You Have No Diary Entries
-new	title	New Releases
 news	section	Project: $1
 news	title	News
 news	choose	<P>Choose a News item and you can browse, search, and post messages.<P>
@@ -709,7 +707,6 @@ people_editprofile	failed_to_add_skill	Failed to add the skill
 people_editprofile	skill_added_ok	Skill added successfully
 people_editprofile	no_skills_selected	No skills selected to edit.
 people_editprofile	failed_update_skills	Failed to update skills
-people_editprofile	fill_all_required_fields	Skill$1 updated successfully
 people_editprofile	skills_edit	Skills edit
 people_editprofile	edit_skills	Edit Skills
 people_editprofile	change_required_fields	Change the required fields, and press "Done" at the bottom of the page
@@ -752,7 +749,6 @@ people_proj	title	Project Help Wanted For $1
 people_viewjob	section	Project Help Wanted
 people_viewjob	title	$1 wanted for $2
 people_viewjob	posting_id_not_found	Posting ID not found
-people_viewjob	view_a_job	View a Job
 people_viewjob	fetch_failed	POSTING fetch FAILED
 people_viewjob	no_such_posting	No Such Posting For This Project
 people_viewjob	view_a_job	View a Job
@@ -799,17 +795,13 @@ pm_admin_change_status	section	Task Manager Administration
 pm_admin_change_status	title	Update Information
 pm_admin_projects	section	Task Manager Administration
 pm_admin_projects	title	Add Subprojects
-pm_admin_projects	project_inserted	Project Inserted
 pm_admin_projects	add_categories_title	Add Categories
 pm_admin_projects	project_inserted	Project Inserted 
 pm_admin_projects	category_inserted	Category Inserted
 pm_admin_projects	category_updated	Category Updated
 pm_admin_projects	updated_successfully	Updated Successfully ";
-pm_admin_projects	add_categories_title	Add Categories'
-pm_admin_projects	add_categories	Add Categories to
 pm_admin_projects	id	Id
 pm_admin_projects	no_categories	No categories defined
-pm_admin_projects	category_name	New Category Name
 pm_admin_projects	category_note	Once you add a category, it cannot be deleted
 pm_admin_projects	add_categories	Add Categories
 pm_admin_projects	modify_category	Modify an Category in
@@ -874,9 +866,6 @@ pm_reporting	not_completed	Number of tasks still not completed
 pm_reporting	tasks_by_category	Tasks By Category
 pm_reporting	open_tasks_by_category	Open Tasks By Category
 pm_reporting	all_tasks_by_category	All Tasks By Category
-pm_reporting	not_completed	Number of Tasks Still Not Completed
-pm_reporting	started_tasks	Number of Tasks Started
-pm_reporting	average_duration	Average Duration For Closed Tasks (days)
 pm_reporting	tasks_by_technician	Tasks By Technician
 pm_reporting	open_tasks_by_technician	Open Tasks By Technician
 pm_reporting	all_tasks_by_technician	All Tasks By Technician
@@ -1002,11 +991,8 @@ project_admin_editimages	file_description_required	File description is required
 project_admin_editimages	properties_updated	Multimedia File Properties Updated
 project_admin_editimages	intro	You can store up to $1 MB of multimedia data (bitmap and vector graphics, sound clips, 3D models) in the database. Use this page to add/delete your project multimedia data.
 project_admin_editimages	replace	Replace with new file (optional)
-project_admin_editimages	description	Description
-project_admin_editimages	mime_type	MIME Type
 project_admin_editimages	add_data	Add Multimedia Data
 project_admin_editimages	local_filename	Local filename
-project_admin_editimages	description	Description
 project_admin_editimages	add_file	Add File
 project_admin_editimages	edit	Edit
 project_admin_editimages	id	ID
@@ -1074,7 +1060,6 @@ project_admin_qrs	required_package	Must select a package.
 project_admin_qrs	required_file	Must select a file.
 project_admin_qrs	required_file_type	Must select a file type.
 project_admin_qrs	required_processor_type	Must select a processor type. 
-project_admin_qrs	title	Release New File Version
 project_admin_qrs	qrs_info	You can now $1 Add Files To This Release $2 if you wish, or edit the release.</p> <p>Please note that file(s) may not appear immediately on the $3 download page $4. Allow several hours for propagation.						
 project_admin_qrs	no_file_types_available	No File Types Available
 project_admin_qrs	create_new_package	Or $1 create a new package $2
@@ -1146,7 +1131,7 @@ project_admin_vhost	no_vhosts	No VHOSTs defined
 project_admin_vhost	name	New Virtual Host <em>(e.g. vhost.org)</em>
 project_admin_vhost	delete	Delete
 project_admin_rmuser	title Remove user
-project_admin_rmuser	cancel	Cancel
+		project_admin_rmuser	cancel	Cancel
 project_admin_rmuser	remove	Remove
 project_admin_rmuser	info	<h3>Removing Developer from $1</h3><p>You are about to remove developer from the $1. Please confirm your action:</p>
 project_admin_rmuser	operation_not_permitted	Operation Not Permitted
@@ -1184,7 +1169,7 @@ project_stats	detailed_statistics	Detailed statistics for
 project_stats	tracker	Tracker
 project_stats	tasks	Tasks
 project_stats_utils	stats_for_days Statistics for the past $1 days
-project_stats_utils	date	Date
+		project_stats_utils	date	Date
 project_stats_utils	rank	Rank
 project_stats_utils	page_views	Page Views
 project_stats_utils	dl	D/l
@@ -1196,7 +1181,6 @@ project_stats_utils	tasks	Tasks
 project_stats_utils	CVS	CVS
 project_stats_utils	project_did_not_exits	Project did not exist on this date.
 project_stats_utils	stats_for_months	Statistics for the past $1 months.
-project_stats_utils	month	Month
 project_stats_utils	stats_all_time	Statistics for All Time
 project_stats_utils	month	Lifespan
 project_stats_utils	days	Days
@@ -1205,7 +1189,6 @@ project_stats_graph	page_view_days	Page Views (red) and Downloads (blue) for the
 project_stats_graph	page_view_months	Page Views (red) and Downloads (blue) for the past $1 months
 project_stats_graph	date	Date
 project_stats_graph	views	Views (red) / Downloads (blue)
-
 project_memberlist	joining	<P>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.<br><br>
 project_memberlist	title	Project Member List
 project_memberlist	developer	Developer
@@ -1214,9 +1197,7 @@ project_memberlist	role	Role/Position
 project_memberlist	skills	Skills
 project_memberlist	view	View
 project_showfiles	section	Project: $1
-project_showfiles	title	File List
 project_shownotes	section	Project: $1
-project_shownotes	title	Release Notes
 project_home	title	Project Info
 project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
 project_home	help_wanted	HELP WANTED: This project is looking for
@@ -1299,7 +1280,6 @@ sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to 
 sendmessage	title	Send $1 A Message
 softwaremap	title	Trove
 staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
-survey	title	Surveys For $1
 survey	survey_not_found	Survey not found
 survey_admin	section	Survey Tool
 survey_admin	title	Administration
@@ -1383,7 +1363,6 @@ user_home	skills_profile	Skills Profile
 user_home	user_id	User Id
 user_home	login_name	Login Name
 user_home	real_name	Real Name
-user_home	email	Email Addr.
 user_home	jabber_address	Jabber Address
 user_home	personal_information	Personal Information
 user_home	site_member_since	Site Member Since
@@ -1447,7 +1426,6 @@ common_include_account	illegal	Illegal character in name.
 common_include_account	cvsreserved	Name is reserved for CVS.
 common_include_account	dnsreserved	Name is reserved for DNS purposes.
 common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.
-survey	title	Developer Survey
 image	logout	logout.png
 image	login	login.png
 image	myaccount	myaccount.png
@@ -1523,21 +1501,12 @@ source	invalid_argument	Invalid File Argument
 source	invalid_argument_text	The file argument is invalid.
 source	file_not_found	File Not Found
 source	file_not_found_text	Cannot find specified file to display.
-stats_graph	sitewide_statistics_graphs	Sitewide Statistics Graphs
 stats_graph	joverview_stats	OVERVIEW STATS
 stats_graph	project_stats	PROJECT STATS
 stats_graph	site_graphs	SITE GRAPHS
-stats_index	sitewide_aggregate_statistics	Sitewide Aggregate Statistics
 stats_index	overview_stats	OVERVIEW STATS
 stats_index	project_stats	PROJECT STATS
 stats_index	site_graphs	SITE GRAPHS
-stats_index	other_statistics	Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
-stats_lastlogins	no_records	No records found","Database error: "
-stats_lastlogins	last_logins	Last Logins
-stats_lastlogins	most_recent_open	Most Recent Opened Sessions
-stats_lastlogins	date	Date
-stats_lastlogins	username	Username
-stats_lastlogins	source_ip	Source IP
 stats	overview_stats	OVERVIEW STATS
 stats	project_stats	PROJECT STATS
 stats	site_graphs	SITE GRAPHS
@@ -1566,7 +1535,7 @@ stats_site_utils	or_special_project_list	OR enter Special Project List:
 stats_site_utils 	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
 stats_site_utils	report	Report: 
 stats_site_utils	last_30 last_30
-stats_site_utils	all	all
+		stats_site_utils	all	all
 stats_site_utils	view_by	View by: 
 stats_site_utils	generate_report	Generate Report
 stats_site_utils	group_name	Group Name
@@ -1593,7 +1562,7 @@ stats_site_utils	site_views	Site Views
 stats_site_utils	subdomain_views	Subdomain Views
 stats_site_utils	no_data	No Data
 stats_site_utils	statistics_for_the_past_months Statistics for the past $1 months.
-stats_site_utils	month	Month
+		stats_site_utils	month	Month
 stats_site_utils	current_statistic_all_time	Current Aggregate Statistics for All Time
 stats_site_utils	developers	Developers
 stats_site_utils	projects	Projects
@@ -1605,8 +1574,6 @@ stats_view_graph	page_views	Gforge Page Views
 stats_view_graph	total_views	Total Page Views (RED) ($1 days)
 stats_view_graph	views	Views (RED)
 stats_view_graph	date	Date
-tracker	title	Trackers
-tracker	choose	Choose a tracker and you can browse/edit/add items to it.
 tracker_add	title	Submit Tracker Item
 tracker_admin	admin	Admin
 tracker_admin	choose_datatype	Choose a data type and you can set up prefs, categories, groups, users, and permissions
@@ -1687,7 +1654,6 @@ tracker_admin	add_permissions_info	Add/remove users to/from this tracker
 tracker_admin	update_preferences	Update preferences
 tracker_admin	update_preferences_info	Set up prefs like expiration times, email addresses
 tracker_browse	title	Browse $1
-tracker_detail	title	Tracker Detailed View
 tracker_reporting	title	Artifact Reporting System
 tracker_reporting	aging_report	Aging Report
 tracker_reporting	dist_by_technician	Distribution by Technician
@@ -1700,7 +1666,7 @@ tracker_reporting	items_submitted	Number of Items Submitted
 tracker_reporting	items_open	Number of Items Still Open
 tracker_reporting	open_items_by_technician	Open Items By Technician
 tracker_reporting	all_items_by_technician	All Items By Technician
-tracker_reporting	open_items_by_technician	Open Items By Category
+tracker_reporting	open_items_by_category	Open Items By Category
 tracker_reporting	all_by_technician	All Items By Category
 tracker_reporting	open_by_group	Open By Artifact Group
 tracker_reporting	all_by_group	All Items By Artifact Group
@@ -1796,7 +1762,6 @@ tracker_mod	download	Download
 tracker_mod	no_files	No Files Currently Attached
 tracker_mod	changelog	Change Log
 tracker_mod	build_task_relation	Build Task Relation
-tracker_artifacthtml	date	Date
 tracker_artifacthtml	sender	Sender
 tracker_artifacthtml	no_followups	No Followups Have Been Posted
 tracker_artifacthtml	field	Field
@@ -1850,14 +1815,13 @@ admin	successfully_added	Successfully Added
 admin	are_you_sure_delete	Are you sure you want to delete this
 admin	delete	Delete
 admin	cancel  Cancel
-admin	successfully_deleted	Successfully Deleted.
+		admin	successfully_deleted	Successfully Deleted.
 admin	submit_changes	Submit Changes
 admin	submit_new	Submit New
 admin	successfully_modified	successfully modified
 admin	add_new [add new]
-admin	edit	[edit]
-admin	site_admin_home Site Admin Home
-admin	yes	yes
+		admin	site_admin_home Site Admin Home
+	admin	yes	yes
 admin	reject	Reject
 admin	license	License:
 admin	add	Add
@@ -1866,7 +1830,6 @@ admin	other	Other
 admin	edit	Edit
 admin	http_domain	HTTP Domain:
 admin	license_other	License Other:
-admin_add_language	add_new_language	Add New Languages
 admin_add_language	existing_language	Existing Language
 admin_add_language	add_new_language	Add New Language
 admin_add_language	name	Name:
@@ -1874,7 +1837,6 @@ admin_add_language	class_filename	Class Filename:
 admin_add_language	classname	Classname:
 admin_add_language	submit	Submit
 admin_tabfiles	modify_the	Modify the $1 below:
-admin_tabfiles	language	Language
 admin_tabfiles	delete_lang	[delete]
 admin_tabfiles	edit_the_language	Edit The Language
 admin_tabfiles	language	Language
@@ -1945,7 +1907,7 @@ admin_grouplist	group_list_for_category	Group List for Category:
 admin_grouplist	groups_that_begin_with	Groups that begin with
 admin_grouplist	group_name_click_to_edit	Group Name (click to edit)
 admin_grouplist unix_name	Unix Name
-admin_grouplist	status	Status
+		admin_grouplist	status	Status
 admin_grouplist	public	Public?
 admin_grouplist	license	License
 admin_grouplist	members	Members
@@ -1987,7 +1949,6 @@ admin_search	username	Username
 admin_search	real_name	Real Name
 admin_search	email	Email
 admin_search	member_since	Member since
-admin_search	status	Status (Web/Unix)
 admin_search	group_search_criteria	Group search with criteria
 admin_search	unix_name	UNIX Name
 admin_search	full_name	Full Name
@@ -2013,9 +1974,6 @@ admin_unsubscribe	email	Email
 admin_unsubscribe	site_mail	Site Mail.
 admin_unsubscribe	comm_mail	Comm. Mail.
 admin_useredit	no_unix_account	No Unix account (N)
-admin_useredit	active	Active (A)
-admin_useredit	suspended	Suspended (S)
-admin_useredit	deleted	Deleted (D)
 admin_useredit	could_not_complete_operation	Could Not Complete Operation
 admin_useredit	updated	Updated
 admin_useredit	title	Site Admin: User Info
@@ -2038,18 +1996,16 @@ admin_useredit	unix_status_updated_mirroring	Unix status updated mirroring web s
 admin_useredit	group_memerbership	Groups Membership
 admin_useredit	name	Name
 admin_useredit	unix_name Unix Name
-admin_useredit	operations	Operations
+		admin_useredit	operations	Operations
 admin_useredit	project_admin	Project Admin
 admin_useredit	membership_permissions	Member Permissions
 admin_vhost	error_adding_vhost	Error adding VHOST: 
-admin_vhost	virtual_host	Virtual Host
 admin_vhost	scheduled_for_creation	scheduled for creation on group
 admin_vhost	the_provided_group	The provided group name does not exist
 admin_vhost	error_updating_vhost	Error updating VHOST entry: 
 admin_vhost	virtual_host_entry_updated	Virtual Host entry updated.
 admin_vhost	title	Site Admin
 admin_vhost	virtual_host_administration	Virtual Host Administration
-admin_vhost	add_virtual_host	Add Virtual Host
 admin_vhost	group_unix_name	Group Unix Name
 admin_vhost	virtual_host_name	Virtual Host Name
 admin_vhost	add_virtual_host	Add Virtual Host
@@ -2082,7 +2038,6 @@ admin_userlist	suspend	Suspend
 admin_userlist	user_list_for_group	User list for group:
 admin_userlist	all_groups	All Groups
 admin_userlist	submit	Submit
-admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
 admin_trove_cat_edit	error_in_trove_operation_cant_delete	Error In Trove Operation , Can t delete trove category define as default in local.inc
 admin_trove_cat_edit	cant_delete_has_subcategories	Can't delete, That trove cat has sub categories
 admin_trove_cat_edit	error_in_trove_operation	Error In Trove Operation
@@ -2112,7 +2067,6 @@ admin_index	group_maintaince	Group Maintenance
 admin_index	display_full_group	Display Full Group List/Edit Groups
 admin_index	display_groups_beginning_with	Display Groups Beginning with :
 admin_index	register_new_project	Register New Project
-admin_index	groups_with	Groups with
 admin_index	pending_status	 (pending) Status
 admin_index	new_project_approval	(New Project Approval)
 admin_index	groups_with	Groups with
@@ -2143,16 +2097,14 @@ admin_massmail	error_scheduling_mailing	Error Scheduling Mailing, Could not sche
 admin_massmail	title	Administrative Mass Mail Engine
 admin_massmail	mailing_successfully_scheduled	Mailing successfully scheduled for delivery
 admin_massmail	mail_engine_for	Mail Engine for $1 Subscribers
-admin_massmail	active_deliveries	Active deliveries
 admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
 admin_massmail	select	(select)
 admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
 admin_massmail 	subscribers_to_additional_community Subscribers to "Additional Community Mailings"
-admin_massmail	all_project_developers	All Project Developers
+		admin_massmail	all_project_developers	All Project Developers
 admin_massmail	all_project_admins	All Project Admins
 admin_massmail	all_users	All Users
 admin_massmail	developers_test	Developers (test)
-admin_massmail	subject	Subject
 admin_massmail	text_of_message	Text of Message
 admin_massmail	will_be_append	(will be appended with unsubscription information, if applicable)
 admin_massmail	schedule_for_mailing	Schedule for Mailing
@@ -2193,7 +2145,7 @@ survey_admin_utils	group_id	Group Id
 survey_admin_utils	survey_title	Title of survey
 survey_admin_utils	survey_questions	Survey questions
 
-survey_edit_question	title	Edit A Question
+				survey_edit_question	title	Edit A Question
 survey_edit_question	permission_denied	Permission Denied
 survey_edit_question	update_failed	UPDATE FAILED
 survey_edit_question	update_successful	UPDATE SUCCESSFUL
@@ -2280,7 +2232,6 @@ survey_show_results_aggregate	permission_denied	Permission Denied
 survey_show_results_aggregate	error	error
 survey_show_results_aggregate	responses	Responses
 survey_show_results_aggregate	average	Average
-survey_show_results_aggregate	view_comments	View Comments
 survey_show_results_aggregate	yes_no	Yes / No
 survey_show_results_aggregate	yes	Yes
 survey_show_results_aggregate	no	No
@@ -2435,7 +2386,6 @@ snippet_utils	download_version	Download Version
 snippet_utils	snippet_title	Title
 snippet_utils	author	Author
 snippet_utils	no_snippets_are_in_this_package	No Snippets Are In This Package Yet
-snippet_utils	category	Category:
 snippet_utils	language	Language:
 snippet_utils	description	Description:
 snippet_utils	type	Type:
@@ -2463,7 +2413,6 @@ snippet_submit	language	Language
 snippet_caching	intro	<p>The purpose of this archive is to let you share your code snippets, scripts,	and functions with the Open Source Software Community.</p><p>You can create a "new snippet", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>	<p>You can browse the snippet library quickly:</p>
 snippet_caching	browse_by_category	Browse by Category
 snippet_caching	browse_by_language	Browse by Language
-help	title	Welcome to
 help	page_information	Page Information
 help	title	Welcome to $1
 help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
@@ -2473,7 +2422,7 @@ help_tracker	group	This drop-down box represents the Group of the tracker items 
 help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
 help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which
 one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
-help_tracker	data_type	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
+				help_tracker	data_type	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
 help_tracker	resolution	The resolution option represents a tracker items resolution if any.
 help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
 help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
