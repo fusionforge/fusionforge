@@ -241,22 +241,6 @@ objectClass: organizationalUnit
 objectClass: domainRelatedObject
 associatedDomain: $sys_lists_host
 
-dn: cn=Replicator,$sys_ldap_base_dn
-cn: Replicator
-sn: Replicator the Robot
-description: empty
-objectClass: top
-objectClass: person
-userPassword: {crypt}x
-
-dn: cn=SF_robot,$sys_ldap_base_dn
-cn: SF_robot
-sn: SF the Robot
-description: empty
-objectClass: top
-objectClass: person
-userPassword: {crypt}x
-
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 uid: dummy
 cn: Dummy User
