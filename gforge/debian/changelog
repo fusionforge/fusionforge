@@ -1,3 +1,10 @@
+gforge (3.1-17+4) unstable; urgency=low
+
+  * [Roland] Re-added the Debconf note about the need for an SSL
+    certificate, which seems to have been lost in time at some point.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 31 May 2004 13:10:55 +0200
+
 gforge (3.1-17) unstable; urgency=low
 
   * [Roland] Fixed docman/view.php to display filenames appropriately in
