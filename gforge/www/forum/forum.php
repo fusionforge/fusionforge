@@ -413,13 +413,13 @@ if ($forum_id) {
 		//
 		//	Viewing a particular thread in nested view
 		//
-		echo '<CENTER><h3>Post A Message To This Thread:</H3></CENTER>';
+		echo '<CENTER><h3>'.$Language->getText('forum_message', 'msg').'</H3></CENTER>';
 				show_post_form($forum_id,$thread_id,$msg_arr["0"][0]['msg_id'],$msg_arr["0"][0]['subject']);
 	} else {
 		//
 		//	Viewing an entire message forum in a given format
 		//
-		echo '<CENTER><h3>Start a New Thread:</H3></CENTER>';
+		echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</H3></CENTER>';
 		show_post_form($forum_id);
 	}
 

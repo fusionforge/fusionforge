@@ -313,10 +313,7 @@ if ($group_id && $atid) {
 			"will have to set up data types using the <A HREF=\"/tracker/admin/?group_id=$group_id\">admin page</A></FONT></B>";
 	} else {
 
-		echo '
-		<P>
-		Choose a tracker and you can browse/edit/add items to it.
-		<P>';
+		echo '<P>'.$Language->getText('tracker', 'choose').'<P>';
 
 		/*
 			Put the result set (list of forums for this group) into a column with folders

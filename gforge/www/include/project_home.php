@@ -71,9 +71,9 @@ if (!$actv_res) {
 	$actv_res=0;
 }
 
-print("Registered: " . date($sys_datefmt, $project->getStartDate()));
-print '<br>Activity Percentile: ' . $actv_res . '%';
-print '<br>View project activity <a href="/project/stats/?group_id='.$group_id.'">statistics</a>';
+print($Language->getText('group', 'registered') . date($sys_datefmt, $project->getStartDate()));
+print '<br>'.$Language->getText('group', 'activity'). $actv_res . '%';
+print '<br>'.$Language->getText('group', 'activitystat', $group_id);
 
 $jobs_res = db_query("SELECT name ".
 				"FROM people_job,people_job_category ".
@@ -174,7 +174,7 @@ echo $HTML->box1_top($Language->getText('frs','latest_file_releases'));
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<TR BGCOLOR="'.$HTML->COLOR_LTBACK1.'"><TD COLSPAN="4"><B>'.$Language->getText('general', 'norelease').'</B></TD></TR>';
+			echo '<TR BGCOLOR="'.$HTML->COLOR_LTBACK1.'"><TD COLSPAN="4"><B>'.$Language->getText('group', 'norelease').'</B></TD></TR>';
 
 		} else {
 			/*
@@ -232,7 +232,7 @@ print '&nbsp;'.$Language->getText('group','long_homepage').'</A>';
 
 print '<HR SIZE="1" NoShade><A href="/tracker/?group_id='.$group_id.'">';
 print html_image($imgproj . "taskman16b.png",'20','20',array('alt'=>$Language->getText('group','short_tracker')));
-print ' Tracker</A>';
+print $Language->getText('group', 'short_tracker').'</A>';
 
 $result=db_query("SELECT agl.*,aca.count,aca.open_count
 FROM artifact_group_list agl

@@ -38,36 +38,29 @@ print '<TABLE width="100%"><TR valign="top"><TD width="65%">'."\n";
 // ######################## anonymous CVS instructions
 
 if ($row_grp['is_public']) {
-	print '<P><B>Anonymous CVS Access</B>
-<P>This project\'s ' . $GLOBALS['sys_name'] . ' CVS repository can be checked out through anonymous
-(pserver) CVS with the following instruction set. The module you wish
-to check out must be specified as the <I>modulename</I>. When prompted
-for a password for <I>anonymous</I>, simply press the Enter key.
+	print $Language->getText('cvs', 'anoncvs').' 
 
-<P><tt>cvs -d:pserver:anonymous@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' login
+<P><tt>cvs -d:pserver:anonymous@cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' login
 <BR>&nbsp;<BR>
-cvs -z3 -d:pserver:anonymous@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
+cvs -z3 -d:pserver:anonymous@cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
 </tt>
 
-<P>Updates from within the module\'s directory do not need the -d parameter.';
+ 
+<P>'.$Language->getText('cvs', 'anoncvsup');
 }
 
 // ############################ developer access
 
-print '<P><B>Developer CVS Access via SSH</B>
-<P>Only project developers can access the CVS tree via this method. SSH1 must
-be installed on your client machine. Substitute <I>modulename</I> and
-<I>developername</I> with the proper values. Enter your site password when
-prompted.
+print $Language->getText('cvs', 'devcvs').' 
 
 <P><tt>export CVS_RSH=ssh
-<BR>&nbsp;<BR>cvs -z3 -d:ext:<I>developername</I>@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
+<BR>&nbsp;<BR>cvs -z3 -d:ext:<I>developername</I>@cvs.'.$row_grp['unix_group_name'].'.'.$GLOBALS['sys_default_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
 </tt>';
 
 // ################## summary info
 
 print '</TD><TD width="35%">';
-print $HTML->box1_top("Repository History");
+print $HTML->box1_top($Language->getText('cvs', 'history'));
 
 // ################ is there commit info?
 
@@ -89,13 +82,10 @@ while ($row_cvshist = db_fetch_array($res_cvshist)) {
 // ############################## CVS Browsing
 
 if ($row_grp['is_public']) {
-	print '<HR><B>Browse the CVS Tree</B>
-<P>Browsing the CVS tree gives you a great view into the current status
-of this project\'s code. You may also view the complete histories of any
-file in the repository.
+	print $Language->getText('cvs', 'browsetree').' 
 <UL>
 <LI><A href="'.account_group_cvsweb_url($row_grp['unix_group_name']).'">
-<B>Browse CVS Repository</B></A>';
+<B>'.$Language->getText('cvs', 'browseit').'</B></A>';
 }
 
 print $HTML->box1_bottom();

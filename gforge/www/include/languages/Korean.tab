@@ -43,7 +43,7 @@
 #     Code Snippet Library-->코드 라이브러리 로 변경
 #
 # 2002-05-25	Soon-Son Kwon	<kss@kldp.org>
-#   * Added a few more trivial message translation
+#   * Added more translation including Forum, Tracker, CVS
 #
 about_foundries	about_blurb	Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >저희에게 연락해</a> 주십시오.
 about_foundries	foundries_list	시스템의 모든 Foundry에 관한 정보입니다. 어떤 것은 다른 것에 비해 좀더 완성도가 높습니다. 만약 여러분께서 공헌하고자 하시는 Foundry가 있다면 해당 Foundry의 관리자에게 연락하시기 바랍니다.
@@ -106,6 +106,12 @@ contact	about_blurb	<p>이것은 <b>SourceForge.net</b>의 연락 페이지입니다. -- 이�
 contact	title	SourceForge와 연락하기
 cvs	section	프로젝트: $1
 cvs	title	CVS
+cvs	anoncvs	<P><B>익명 CVS 사용 방법</B> <P>다음 방법을 사용하시면 익명으로 이 프로젝트의 CVS 저장소로부터 소스코드를 체크아웃하실 수 있습니다. 체크아웃하고자 하는 모듈을 반드시 <I>modulename</I>부분에 써 주셔야 합니다. <I>anonymous</I>에 대한 비밀번호를 물어보면 그냥 Enter를 누르시면 됩니다.
+cvs	anoncvsup	해당 모듈 디렉토리 안에서 업데이트를 할 때는 -d 옵션이 필요 없습니다.
+cvs	devcvs	<P><B>SSH를 통한 개발자의 CVS 사용 방법</B> <P>프로젝트의 개발자로 지정된 사람만이 이 방법을 사용할 수 있습니다. SSH1이 클라이언트 측에 반드시 설치되어 있어야 합니다. <I>modulename</I>과 <I>developername</I> 부분을 상황에 맞게 바꾸어 주십시오. 비밀번호는 사이트 이용시 지정한 비밀번호와 동일합니다.
+cvs	history	저장소 히스토리
+cvs	browsetree	<HR><B>CVS 트리 살펴보기</B> <P>CVS 트리를 살펴보시면 이 프로젝트의 소스코드가 어떻게 운영되고 있는지 잘 알 수 있습니다. 또한 저장소 내의 모든 파일에 대한 완전한 히스토리도 살펴보실 수 있습니다.
+cvs	browseit	CVS 저장소(Repository)
 docman	section	프로젝트: $1
 docman	title	문서 관리자
 docman_admin	section	$1
@@ -127,6 +133,7 @@ docman_new	title	문서 관리자: 새로운 문서 제출하기
 forum	section	프로젝트: $1
 forum	title	게시판
 forum	choose	<p>원하시는 게시판을 선택하십시오. 글을 읽거나, 새로운 글을 올리거나, 혹은 답글을 올리실 수도 있습니다.<p>
+forum	html	HTML 태그는 사용하실 수 없습니다.
 forum_admin	section	프로젝트: $1 
 forum_admin	title	게시판: 관리
 forum_admin_addforum	section	게시판 관리
@@ -141,6 +148,8 @@ forum_forum_thread	section	게시판
 forum_forum_thread	title	스레드 보기
 forum_message	section	게시판
 forum_message	title	메시지 보기
+forum_message	msg	답글 올리기
+forum_message	thread	새글 올리기
 foundry	section	Foundry: $1
 foundry	title	요약
 foundry_admin	section	Foundry: $1
@@ -193,7 +202,10 @@ group	short_summary	요약
 group	short_support	지원
 group	short_survey	설문조사
 group	short_tracker	문제점 추적
-group	norelease	이 프로젝트에서는 아직 릴리즈된 파일이 없습니다.
+group	registered	등록된 날짜: 
+group	activity	프로젝트 활동 상황: 
+group	activitystat	활동상황 <a href="/project/stats/?group_id=$1">통계</a> 보기
+group	norelease	이 프로젝트는 아직 릴리즈한 파일이 없습니다.
 home	about_blurb	$1는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>$1를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
 home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	highest_ranked_users	활발한 사용자
@@ -415,6 +427,7 @@ top_toplist	section	상위 프로젝트
 top_toplist	title	상위 프로젝트 보기
 tracker	section	프로젝트: $1
 tracker	title	문제점 추적
+tracker	choose	추적할 항목을 선택하십시오. 각 아이템을 살펴보시거나 편집하실 수 있고 새로운 아이템을 추가하실 수도 있습니다.
 tracker_add	section	$1
 tracker_add	title	문제점 추적 아이템 제출
 tracker_admin	section	문제점 추적

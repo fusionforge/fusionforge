@@ -21,6 +21,7 @@
 
 */
 
+require_once('pre.php');
 require_once('www/news/news_utils.php');
 
 function forum_header($params) {
