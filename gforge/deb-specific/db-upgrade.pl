@@ -1297,12 +1297,7 @@ END;
     if (&is_lesser ($version, $target)) {
 	&debug ("Upgrading with 20030822.sql") ;
 
-	@reqlist = (
-		    "DROP TRIGGER artifactgroup_update_trig ON artifact",
-		    "DROP FUNCTION artifactgroup_update_agg ()",
-		    @{ &parse_sql_file ("/usr/lib/gforge/db/20030822.sql") },
-		    "CREATE TRIGGER artifactgroup_update_trig AFTER UPDATE ON artifact FOR EACH ROW EXECUTE PROCEDURE artifactgroup_update_agg()",
-		    ) ;
+	@reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030822.sql") } ;
 	foreach my $s (@reqlist) {
 	    $query = $s ;
 	    # debug $query ;
