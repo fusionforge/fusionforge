@@ -3,6 +3,9 @@
 # Source debconf library.
 . /usr/share/debconf/confmodule
 
+#DSFHELPER:get-pw-from-debconf#
+#DSFHELPER:create-random-pw#
+
 #DSFHELPER:host-variables#
 #DSFHELPER:common-variables#
 #DSFHELPER:cvshost-variables#
@@ -10,3 +13,4 @@
 #DSFHELPER:lists-variables#
 #DSFHELPER:downloadhost-variables#
 #DSFHELPER:shellhost-variables#
+#DSFHELPER:dbpasswd-variables#
