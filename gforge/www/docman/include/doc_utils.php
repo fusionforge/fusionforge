@@ -58,7 +58,7 @@ function doc_droplist_count($l_group_id, $language_id, $g) {
 	global $Language;
 
 	if (session_loggedin()) {
-		$perm =& ->getPermission( session_get_user() );
+		$perm =& $g->getPermission( session_get_user() );
 		if (!$perm || !is_object($perm) || !$perm->isMember()) {
 			$public_flag='AND dd.stateid=1';
 		} else {
