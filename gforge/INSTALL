@@ -185,11 +185,8 @@ There may also be migration scripts that have to be run. In the
 db/ folder, look for migrate-*.php scripts and run them.
 
 
-WEB SETUP
----------
-
-Move the GForge tarball into position and make the www/ directory the
-"Document Root".
+WEB SETUP - MANUAL INSTALLATION
+-------------------------------
 
 The following are sample commands commonly issued for a manual installation:
 
@@ -198,116 +195,65 @@ mv gforge-4.0.2 /var/www/
 cd /var/www/
 ln -s gforge-4.0.2 gforge
 mkdir mailman
-mkdir cvs
 mkdir uploads
 mkdir jpgraph
 mkdir localizationcache
-mkdir svn
+
+#Create default location for SVN repositories
 mkdir /var/svn
-mkdir /etc/gforge
+
+#Create default location for CVS repositories
 mkdir /cvsroot
-cp /var/www/gforge/etc/local.inc.example /etc/gforge/local.inc
+
+# Optional - Set up some basic files for SVN-over-DAV only
+mkdir svn
+cp gforge/cronjobs/dav-svn/www/* svn/
+
+# Optional - Set up basic index.php file for CVS vhost if desired
+mkdir cvs
+cp gforge/cronjobs/cvs-cron/www/* cvs/
 
 tar -xzf jpgraph-1.9.1.tar.gz
 mv jpgraph-1.9.1/src/* /var/www/jpgraph/
+
+#Create default location for gforge config files
+mkdir /etc/gforge
+cp gforge/etc/local.inc.example /etc/gforge/local.inc
 chown -R apache:apache /etc/gforge/
 chmod 600 /etc/gforge/local.inc
-cd /var/www/gforge/cronjobs/cvs-cron/
-chmod 755 *.php
-chmod 755 *.sh
+
+#copy the scmcvs plugin config to /etc/gforge/
+cp -R gforge/plugins/scmcvs/etc/plugins/ /etc/gforge/
+
+#you will likely have to edit the cvsweb.conf file
+vim /etc/gforge/plugins/scmcvs/cvsweb.conf
+
+to change the cvsroot location:
+
+'gforge'  => ['GForge-CVS',       '/home/chroot/cvsroot/'],
+
+#copy the scmsvn config files to /etc/gforge/
+cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
+
+#make sure the cvs crons are executable
+cd www/gforge/cronjobs/cvs-cron/
+chmod 755 gforge/cronjobs/cvs-cron/*.php
+chmod 755 gforge/cronjobs/cvs-cron/*.sh
 chown -R apache:apache /var/www
 
 
-The following are sample Apache 2.0 httpd.conf entries:
+The following will provide an example httpd.conf for apache:
 
-NameVirtualHost 192.168.1.1
+cp etc/gforge-httpd.conf.example /etc/gforge-httpd.conf
 
-#
-#	Primary GForge vhost
-#
-<VirtualHost 192.168.1.1>
-ServerName gforge.company.com
-ServerAdmin webmaster@gforge.company.com
-DocumentRoot /var/www/gforge/www
-ErrorDocument 404 /404.php
-php_value include_path ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gforge/"
-<Files projects>
-SetOutputFilter PHP
-SetInputFilter PHP
-AcceptPathInfo on
-</Files>
-<Files users>
-SetOutputFilter PHP
-SetInputFilter PHP
-AcceptPathInfo on
-</Files>
-<Files *.php>
-    SetOutputFilter PHP
-    SetInputFilter PHP
-    AcceptPathInfo On
-    LimitRequestBody 2097152
-</Files>
-#
-#	LOCATION may have to be used instead of FILES for some installs
-#
-#<Location /projects>
-#  ForceType application/x-httpd-php
-#</Location>
-#<Location /users>
-#  ForceType application/x-httpd-php
-#</Location>
-DirectoryIndex index.php
-</VirtualHost>
+Now edit that file to change the hostnames to match your setup.
 
-#
-#	Lists vhosts - where mailman lives
-#
-<VirtualHost 192.168.1.1>
-ServerName lists.gforge.company.com
-ServerAdmin mailman@lists.gforge.company.com
-DocumentRoot /var/www/mailman
-ScriptAlias   /mailman/ /var/mailman/cgi-bin/
-Alias /pipermail/ /var/mailman/archives/public/
-DirectoryIndex index.php
-</VirtualHost>
+Apache will need to have a line added to its httpd.conf:
 
-#
-#	CVS Vhost - allows viewing of CVSWeb for each project
-#
-<VirtualHost 192.168.1.1>
-ServerName cvs.gforge.company.com
-ServerAdmin webmaster@cvs.gforge.company.com
-DocumentRoot /var/www/cvs
-DirectoryIndex index.php index.cgi index.html index.htm
-</VirtualHost>
+Include /etc/gforge-httpd.conf
 
-#
-#	*.gforge.company.com vhosts
-#	Each project can have its own vhost
-#
-#	WARNING - security is degraded by having this
-#	on the same machine as the primary GForge
-#
-<VirtualHost 192.168.1.1>
-  ServerName projects.gforge.company.com
-  ServerAlias *.gforge.company.com
-  DocumentRoot /var/www/homedirs/groups
-  VirtualDocumentRoot /var/www/homedirs/groups/%1
-  <Directory /var/www/homedirs/groups>
-    Options Indexes
-#
-#	WARNING - turning on php will allow any user
-#	to upload a php file to your server, and include 
-#	the gforge local.inc file and get your password to 
-#	connect to the database and have total control.
-#
-    php_flag engine off
-    AllowOverride None
-    order allow,deny
-    allow from all
-  </Directory>
-  DirectoryIndex index.html index.htm
-</VirtualHost>
+Restart apache when you are done editing the file so the 
+changes can be picked up.
 
 
 PHP setup
