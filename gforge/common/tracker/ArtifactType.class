@@ -189,8 +189,8 @@ class ArtifactType extends Error {
 			'". ($due_period*(60*60*24)) ."',
 			'1209600',
 			'$use_resolution',
-			'$submit_instructions',
-			'$browse_instructions',
+			'".htmlspecialchars($submit_instructions)."',
+			'".htmlspecialchars($browse_instructions)."',
 			'$datatype')";
 		//echo $sql;
 		$res = db_query($sql);
@@ -672,7 +672,7 @@ class ArtifactType extends Error {
 		$is_public = ((!$is_public) ? 0 : $is_public); 
 
 		$sql="UPDATE artifact_group_list SET 
-			name='$name',
+			name='". htmlspecialchars($name). "',
 			description='". htmlspecialchars($description) ."',
 			is_public='$is_public',
 			allow_anon='$allow_anon',
@@ -681,8 +681,8 @@ class ArtifactType extends Error {
 			due_period='". ($due_period * (60*60*24)) ."',
 			status_timeout='". ($status_timeout * (60*60*24)) . "',
 			use_resolution='$use_resolution',
-			submit_instructions='$submit_instructions',
-			browse_instructions='$browse_instructions'
+			submit_instructions='". htmlspecialchars($submit_instructions)."',
+			browse_instructions='" .htmlspecialchars($browse_instructions)."'
 			WHERE 
 			group_artifact_id='". $this->getID() ."' 
 			AND group_id='". $this->Group->getID() ."'";

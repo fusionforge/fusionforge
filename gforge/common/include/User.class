@@ -232,7 +232,7 @@ class User extends Error {
 			VALUES ('$unix_name',
 			'". md5($password1) . "',
 			'". account_genunixpw($password1) . "',
-			'". "$realname',
+			'". htmlspecialchars($realname). "',
 			'$email',
 			'" . time() . "',
 			'P',
@@ -314,7 +314,7 @@ class User extends Error {
 		$res = db_query("
 			UPDATE users
 			SET
-			realname='$realname',
+			realname='".htmlspecialchars($realname)."',
 			language='$language_id',
 			timezone='$timezone',
 			mail_siteupdates=$mail_site,

@@ -83,7 +83,7 @@ class ArtifactCategory extends Error {
 			return false;
 		}
 		$sql="INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to) 
-			VALUES ('".$this->ArtifactType->getID()."','$name','$auto_assign_to')";
+			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."','$auto_assign_to')";
 
 		$result=db_query($sql);
 
@@ -175,7 +175,7 @@ class ArtifactCategory extends Error {
 			return false;
 		}   
 		$sql="UPDATE artifact_category 
-			SET category_name='$name',auto_assign_to='$assign_to' 
+			SET category_name='".htmlspecialchars($name)."',auto_assign_to='$assign_to' 
 			WHERE id='". $this->getID() ."' 
 			AND group_artifact_id='".$this->ArtifactType->getID()."'";
 		$result=db_query($sql);

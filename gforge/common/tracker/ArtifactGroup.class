@@ -82,7 +82,7 @@ class ArtifactGroup extends Error {
 			return false;
 		}
 		$sql="INSERT INTO artifact_group (group_artifact_id,group_name) 
-			VALUES ('".$this->ArtifactType->getID()."','$name')";
+			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."')";
 		$result=db_query($sql);
 
 		if ($result && db_affected_rows($result) > 0) {
@@ -162,7 +162,7 @@ class ArtifactGroup extends Error {
 			return false;
 		}   
 		$sql="UPDATE artifact_group
-			SET group_name='$name'
+			SET group_name='".htmlspecialchars($name)."'
 			WHERE id='". $this->getID() ."' 
 			AND group_artifact_id='". $this->ArtifactType->getID() ."'";
 

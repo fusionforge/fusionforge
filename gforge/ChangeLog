@@ -7,6 +7,16 @@
 
 	* common/docman/DocumentGroup.class: ditto.
 
+	* common/tracker/ArtifactType.class: ditto.
+
+	* common/tracker/ArtifactGroup.class: ditto.
+
+	* common/tracker/ArtifactCategory.class: ditto.
+
+	* common/include/User.class: ditto.
+
+	* common/include/Group.class: ditto.
+
 	* common/frs/FRSRelease.class: ditto, plus re-fetch data on
 	update.
 

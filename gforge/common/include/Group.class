@@ -216,10 +216,10 @@ class Group extends Error {
 				rand_hash
 			)
 			VALUES (
-				'$full_name',
+				'".htmlspecialchars($full_name)."',
 				1,
 				'$unix_name',
-				'$description',
+				'".htmlspecialchars($description)."',
 				'$unix_name.".$GLOBALS['sys_default_domain']."',
 				'$unix_name.".$GLOBALS['sys_default_domain']."',
 				'P',
@@ -459,9 +459,9 @@ class Group extends Error {
 		$sql = "
 			UPDATE groups
 			SET 
-				group_name='$group_name',
+				group_name='".htmlspecialchars($group_name)."',
 				homepage='$homepage',
-				short_description='$short_description',
+				short_description='".htmlspecialchars($short_description)."',
 				use_mail='$use_mail',
 				use_survey='$use_survey',
 				use_forum='$use_forum',
