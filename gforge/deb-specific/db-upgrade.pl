@@ -1469,9 +1469,9 @@ END;
     $version = &get_db_version ;
     $target = "3.3.0-0+0" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20040325.sql") ;
+        &debug ("Upgrading with 200403251.sql") ;
 
-        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20040325.sql") } ;
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/200403251.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
