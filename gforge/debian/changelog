@@ -1,4 +1,4 @@
-gforge (3.0-2+) unstable; urgency=low
+gforge (3.0-3) unstable; urgency=low
 
   * [Roland] Make sure the $gforge_base_dn, ou=People,$gforge_base_dn and
     other needed LDAP records exist before we try to insert new
@@ -6,7 +6,7 @@ gforge (3.0-2+) unstable; urgency=low
   * [Christian] Corrected my stupid error in ldap.php that made a warning
     on changing ldap protocol version
 
- -- Roland Mas <lolando@debian.org>  Fri, 18 Jul 2003 11:17:55 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri, 18 Jul 2003 13:49:13 +0200
 
 gforge (3.0-2) unstable; urgency=low
 
