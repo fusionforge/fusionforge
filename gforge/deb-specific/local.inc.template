@@ -70,6 +70,7 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 	$sys_dbuser=getenv('sys_dbuser');
 	$sys_dbpasswd=getenv('sys_dbpasswd');
 	$sys_ldap_passwd=getenv('sys_ldap_passwd');
+	$sys_jabber_pass=getenv('sys_jabber_pass');
 } else {
 	require ('/etc/gforge/database.inc');
 }
@@ -105,7 +106,6 @@ $sys_jabber_port=5222;
 // messages sent to jabber accounts will come from this user
 // It is similar to the "From: noreply@gforge.org" used in emails
 $sys_jabber_user="noreply";
-$sys_jabber_pass="{jabber_passwd}";
 
  
 // If you change something here don't forget to update fileforge
