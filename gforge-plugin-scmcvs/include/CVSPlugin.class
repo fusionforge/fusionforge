@@ -232,7 +232,8 @@ if ($project->enableAnonSCM()){
 		} else {
 			$scm_server = $this->GetGroupServer($group_id);
 		}
-		return 'http://'.$scm_server.'/plugins/scmcvs/cgi-bin/cvsweb.cgi?cvsroot='.$project->getUnixName();
+		//return 'http://'.$scm_server.'/cgi-bin/cvsweb?cvsroot=cvsroot/'.$project->getUnixName();
+		return 'http://'.$scm_server.'/plugins/scmcvs/cvsweb.php/?cvsroot=cvsroot/'.$project->getUnixName();
 	}
 
 	function display_groupmenu_scm($params) {
