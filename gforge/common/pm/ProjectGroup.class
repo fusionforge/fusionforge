@@ -24,7 +24,6 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 /*
-
 	Project/Task Manager
 	By Tim Perdue, Sourceforge, 11/99
 	Heavy rewrite by Tim Perdue April 2000
@@ -35,28 +34,32 @@
 
 require_once('common/include/Error.class');
 
-function &projectgroup_get_object($group_project_id,$data=false) {
-        global $PROJECTGROUP_OBJ;
-        if (!isset($PROJECTGROUP_OBJ["_".$group_project_id."_"])) {
-                if ($data) {
-                        //the db result handle was passed in
-                } else {
-                        $res=db_query("SELECT * FROM project_group_list
-			WHERE group_project_id='$group_project_id'");
-
-                        if (db_numrows($res) <1 ) {
-                                $PROJECTGROUP_OBJ["_".$group_project_id."_"]=false;
-                                return false;
-                        }
-                        $data =& db_fetch_array($res);
-
-                }
-                $Group =& group_get_object($data["group_id"]);
-                $PROJECTGROUP_OBJ["_".$group_project_id."_"]= new ProjectGroup($Group,$group_project_id,$data);
-        }
-
-        return $PROJECTGROUP_OBJ["_".$group_project_id."_"];
-}
+	/**
+	*	Fetches a ProjectGroup object from the database
+	*
+	* @param group_project_id	the projectgroup id  
+	*	@param data	whether or not the db result handle is passed in
+	*	@return	the ProjectGroup object
+	*/
+	function &projectgroup_get_object($group_project_id,$data=false) {
+		global $PROJECTGROUP_OBJ;
+		if (!isset($PROJECTGROUP_OBJ["_".$group_project_id."_"])) {
+			if ($data) {
+				//the db result handle was passed in
+			} else {
+				$res=db_query("SELECT * FROM project_group_list
+				WHERE group_project_id='$group_project_id'");
+				if (db_numrows($res) <1 ) {
+					$PROJECTGROUP_OBJ["_".$group_project_id."_"]=false;
+					return false;
+				}
+				$data =& db_fetch_array($res);
+			}
+			$Group =& group_get_object($data["group_id"]);
+			$PROJECTGROUP_OBJ["_".$group_project_id."_"]= new ProjectGroup($Group,$group_project_id,$data);
+		}
+		return $PROJECTGROUP_OBJ["_".$group_project_id."_"];
+	}
 
 
 class ProjectGroup extends Error {
