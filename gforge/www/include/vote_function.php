@@ -315,50 +315,50 @@ function vote_show_a_question ($question,$element_name) {
 $USER_RATING_QUESTIONS=array();
 //sorry - array starts at 1 so we can test for the questions on the receiving page
 $USER_RATING_QUESTIONS[1]='Teamwork / Attitude';
-$USER_RATING_QUESTIONS[2]='Code (Code-Fu)';
+$USER_RATING_QUESTIONS[2]='Code';
 $USER_RATING_QUESTIONS[3]='Design / Architecture';
 $USER_RATING_QUESTIONS[4]='Follow-Through / Reliability';
 $USER_RATING_QUESTIONS[5]='Leadership / Management';
 
-$USER_RATING_POPUP1[]='0 - Q';
+$USER_RATING_POPUP1[]='0 - Soloist';
 $USER_RATING_POPUP1[]='1';
-$USER_RATING_POPUP1[]='2 - Ferengi';
+$USER_RATING_POPUP1[]='2';
 $USER_RATING_POPUP1[]='3';
-$USER_RATING_POPUP1[]='4 - Federation';
+$USER_RATING_POPUP1[]='4';
 $USER_RATING_POPUP1[]='5';
-$USER_RATING_POPUP1[]='6 - Borg';
+$USER_RATING_POPUP1[]='6 - Team Player';
 
-$USER_RATING_POPUP2[]='0 - White Belt';
+$USER_RATING_POPUP2[]='0 - Beginner';
 $USER_RATING_POPUP2[]='1';
-$USER_RATING_POPUP2[]='2 - Orange Belt';
+$USER_RATING_POPUP2[]='2';
 $USER_RATING_POPUP2[]='3';
-$USER_RATING_POPUP2[]='4 - Green Belt';
+$USER_RATING_POPUP2[]='4';
 $USER_RATING_POPUP2[]='5';
-$USER_RATING_POPUP2[]='6 - Black Belt';
+$USER_RATING_POPUP2[]='6 - Master';
 
-$USER_RATING_POPUP3[]='0 - Block-Stacker';
+$USER_RATING_POPUP3[]='0 - Basic';
 $USER_RATING_POPUP3[]='1';
-$USER_RATING_POPUP3[]='2 - Lego (r) Maniac';
+$USER_RATING_POPUP3[]='2';
 $USER_RATING_POPUP3[]='3';
-$USER_RATING_POPUP3[]='4 - Frank Lloyd Wright';
+$USER_RATING_POPUP3[]='4';
 $USER_RATING_POPUP3[]='5';
-$USER_RATING_POPUP3[]='6 - Leonardo Da Vinci';
+$USER_RATING_POPUP3[]='6 - Elaborate';
 
-$USER_RATING_POPUP4[]='0 - None';
+$USER_RATING_POPUP4[]='0 - Unreliable';
 $USER_RATING_POPUP4[]='1';
-$USER_RATING_POPUP4[]='2 - Politician';
+$USER_RATING_POPUP4[]='2';
 $USER_RATING_POPUP4[]='3';
-$USER_RATING_POPUP4[]='4 - Firefighter';
+$USER_RATING_POPUP4[]='4';
 $USER_RATING_POPUP4[]='5';
-$USER_RATING_POPUP4[]='6 - Robot';
+$USER_RATING_POPUP4[]='6 - Dependable';
 
-$USER_RATING_POPUP5[]='0 - Dr. Evil';
+$USER_RATING_POPUP5[]='0 - Weak';
 $USER_RATING_POPUP5[]='1';
-$USER_RATING_POPUP5[]='2 - Monty Burns';
+$USER_RATING_POPUP5[]='2';
 $USER_RATING_POPUP5[]='3';
-$USER_RATING_POPUP5[]='4 - Don Corleone';
+$USER_RATING_POPUP5[]='4';
 $USER_RATING_POPUP5[]='5';
-$USER_RATING_POPUP5[]='6 - Muad\'Dib';
+$USER_RATING_POPUP5[]='6 - Strong';
 
 $USER_RATING_VALUES[]='-3';
 $USER_RATING_VALUES[]='-2';
