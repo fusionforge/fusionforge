@@ -157,6 +157,10 @@ forum_forum	author	Author
 forum_forum	date	Date
 forum_forum	changeview	Change View
 forum_forum	postsuccess	Message Posted Successfully
+forum_forum	topic	Topic
+forum_forum	topicstarter	Topic Starter
+forum_forum	replies	Replies
+forum_forum	lastpost	Last Post
 forum_message	section	Forums
 forum_message	title	View Message
 forum_message	msg	Post A Message To This Thread:

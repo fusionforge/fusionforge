@@ -162,6 +162,10 @@ forum_forum	author	Auteur
 forum_forum	date	Date
 forum_forum	changeview	Changer de visualisation
 forum_forum	postsuccess	Message Envoyé
+forum_forum	topic	Sujet
+forum_forum	topicstarter	Initiateur
+forum_forum	replies	Réponses
+forum_forum	lastpost	Dernier(s) envoi(s)
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
 forum_message	section	Forums

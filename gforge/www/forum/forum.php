@@ -347,10 +347,10 @@ if ($forum_id) {
 		echo db_error();
 
 		$title_arr=array();
-		$title_arr[]='Topic';
-		$title_arr[]='Topic Starter';
-		$title_arr[]='Replies';
-		$title_arr[]='Last Post';
+		$title_arr[]=$Language->getText('forum_forum','topic');
+		$title_arr[]=$Language->getText('forum_forum','topicstarter');
+		$title_arr[]=$Language->getText('forum_forum','replies');
+		$title_arr[]=$Language->getText('forum_forum','lastpost');
 	
 		$ret_val .= html_build_list_table_top ($title_arr);
 		$i=0;
