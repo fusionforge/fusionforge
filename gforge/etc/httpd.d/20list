@@ -36,8 +36,8 @@
 
   <IfModule mod_ssl.c>
     SSLEngine on
-    SSLCertificateFile /etc/apache/ssl.crt/server.crt
-    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    SSLCertificateFile {apache_root}/ssl.crt/server.crt
+    SSLCertificateKeyFile {apache_root}/ssl.key/server.key
     <Files ~ "\.(cgi|shtml)$">
       SSLOptions +StdEnvVars
     </Files>

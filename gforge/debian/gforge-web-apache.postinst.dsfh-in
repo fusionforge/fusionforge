@@ -42,9 +42,15 @@ case "$1" in
 	add_onevar_mainconfile sys_show_source 0
 	add_onevar_mainconfile sys_force_login 0
 
-	[ -f /usr/bin/cronolog ] && add_onevar_mainconfile cronolog_path /usr/bin/cronolog
-	[ -f /usr/sbin/cronolog ] && add_onevar_mainconfile cronolog_path /usr/sbin/cronolog
-
+	if [ -f /usr/bin/cronolog ]; then  # this is the preferred location for debian
+	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
+	elif [ -f /usr/sbin/cronolog ]	   # this location is deprecated in debian
+	    add_onevar_mainconfile cronolog_path /usr/sbin/cronolog
+	else
+	    echo "can't find cronolog in usual places" >&2
+	    add_onevar_mainconfile cronolog_path /usr/bin/cronolog
+	fi
+	
         /usr/sbin/gforge-config
 
         # Patch Apache configuration files

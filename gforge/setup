@@ -10,6 +10,21 @@ getval(){
 }
 
 computedefault(){
+	# look for which version of apache is installed
+	for apache_root_var in /etc/apache2 /etc/apache /etc/apache-ssl /etc/apache-perl ; do
+	    if [ -d ${apache_root_var} ]; then
+	        apache_root=${apache_root_var}
+	        break
+	    fi
+	done
+	# this removes Listen 80 from gforge httpd.conf for apache2 
+	# because it's already enabled and 
+	if [ ${apache_root} = '/etc/apache2' ] ; then
+	    apache_listen80='#Listen 80 #apache2 already listens on port 80'
+	else
+	    apache_listen80='Listen 80'
+	fi
+
 	echo "Calculating defaults"
 	# This is used to make a default working gforge.conf
 	DEFAULTsystem_name=MyGForge
@@ -95,6 +110,8 @@ computedefault(){
 	DEFAULTsys_localinc=$ETCDIR/local.inc
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 	DEFAULTsys_plugins_path=/usr/lib/gforge/plugins/
+	DEFAULTapache_root=${apache_root}
+	DEFAULTapache_listen80=${apache_listen80}
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR

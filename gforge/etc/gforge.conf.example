@@ -79,3 +79,5 @@ sys_localization_enable_timestamp_checking=true
 sys_localinc=/path/to/local.inc
 sys_jabber_pass=
 sys_plugins_path=/usr/lib/gforge/plugins/
+apache_root=/etc/apache2
+apache_listen80=#Listen 80 #apache2 already listens on port 80'
