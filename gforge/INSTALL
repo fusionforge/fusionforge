@@ -220,6 +220,8 @@ ln -s gforge-4.0.2 gforge
 mkdir mailman
 mkdir uploads
 mkdir jpgraph
+mkdir scmtarballs
+mkdir scmsnapshots
 mkdir localizationcache
 
 #Create default location for SVN repositories
@@ -235,6 +237,13 @@ cp gforge/cronjobs/dav-svn/www/* svn/
 # Optional - Set up basic index.php file for CVS vhost if desired
 mkdir cvs
 cp gforge/cronjobs/cvs-cron/www/* cvs/
+
+#restricted shell for cvs accounts
+cp gforge/cronjobs/cvs-cron/cvssh.pl /bin/
+chmod 755 /bin/cvssh.pl
+
+#copy cvsweb and make sure it's in the local.inc sys_scmweb path
+cp gforge/plugins/scmcvs/cgi-bin/cvsweb /etc/gforge/
 
 tar -xzf jpgraph-1.9.1.tar.gz
 mv jpgraph-1.9.1/src/* /var/www/jpgraph/
@@ -253,7 +262,7 @@ vim /etc/gforge/plugins/scmcvs/cvsweb.conf
 
 to change the cvsroot location:
 
-'gforge'  => ['GForge-CVS',       '/home/chroot/cvsroot/'],
+'gforge'  => ['GForge-CVS',       '/cvsroot/'],
 
 #copy the scmsvn config files to /etc/gforge/
 cp -R gforge/plugins/scmsvn/etc/plugins/scmsvn/ /etc/gforge/plugins/
@@ -271,13 +280,13 @@ chown -R apache:apache /var/www
 
 The following will provide an example httpd.conf for apache:
 
-cp etc/gforge-httpd.conf.example /etc/gforge-httpd.conf
+cp etc/gforge/gforge-httpd.conf.example /etc/gforge/httpd.conf
 
 Now edit that file to change the hostnames to match your setup.
 
 Apache will need to have a line added to its httpd.conf:
 
-Include /etc/gforge-httpd.conf
+Include /etc/gforge/httpd.conf
 
 Restart apache when you are done editing the file so the 
 changes can be picked up.
