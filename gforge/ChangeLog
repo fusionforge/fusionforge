@@ -1,6 +1,8 @@
 2004-02-18  Guillaume Smet <guillaume-gforge@smet.org>
 	
 	* updated french localization
+	* with Christian : applied admin -kkv to enable cvs keywords substitution
+	on files which were in -ko mode
 
 2004-02-17  Guillaume Smet <guillaume-gforge@smet.org>
 
