@@ -18,7 +18,7 @@ require_once('site_stats_utils.php');
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>$GLOBALS['sys_name']." Site Statistics "));
+$HTML->header(array('title'=>$Language->getText('stats','title',array($GLOBALS['sys_name']))));
 
 //
 // BEGIN PAGE CONTENT CODE

@@ -18,14 +18,14 @@ require_once('site_stats_utils.php');
 // require you to be a member of the sfstats group
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>$GLOBALS['sys_name']." I18n Statistics"));
+$HTML->header(array($Language->getText('stats_i18n','title',array($GLOBALS['sys_name']))));
 
 //
 // BEGIN PAGE CONTENT CODE
 //
 
-echo $GLOBALS['HTML']->listTableTop(array("Language","Users","%"));
-echo "<h1>".$GLOBALS['sys_name']." Languages Distribution</h1>";
+echo $GLOBALS['HTML']->listTableTop(array($Language->getText('stats_i18n','language')."",$Language->getText('stats_i18n','users')."","%"));
+echo "<h1>".$Language->getText('stats_i18n','language_distribution',array($GLOBALS['sys_name']))." </h1>";
 
 $sql='
 SELECT count(user_name) AS total
@@ -49,16 +49,13 @@ while ($lang_stat = db_fetch_array($res)) {
         if ($lang_stat['lang']!='English') $non_english+=$lang_stat['cnt'];
 }
 
-echo '<tr><td><strong>Total Non-English</strong></td>'.
+echo '<tr><td><strong>'.$Language->getText('stats_i18n','total_non_english').'</strong></td>'.
 '<td align="right"><strong>'.$non_english.' </strong></td>'.
 '<td align="right"><strong>'.sprintf("%.2f",$non_english*100/$total).' </strong></td></tr>';
 
 echo $GLOBALS['HTML']->listTableBottom();
 
-echo "<p>This is a list of the preferences that users have chosen in \n".
-     "their sourceforge user preferences; it \n".
-     "does not include languages which are selected via cookies or \n".
-     "browser preferences.</p>";
+echo "<p>".$Language->getText('stats_i18n','language_text');
 
 //
 // END PAGE CONTENT CODE
