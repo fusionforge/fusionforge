@@ -2,10 +2,7 @@
 #  *
 #  * Italian Message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
-#  * Copyright 1999-2001 (c) VA Linux Systems
-#  * http://sourceforge.net
-#  *
+#  * 
 #  * @version   $Id$
 #  * 
 #  * Changelog:
@@ -13,7 +10,8 @@
 #  *		Translation from Base.tab
 #  * 2003-01-04 rspisser <reinhard@spisser.it>
 #  * 		removed all not used entries
-#  *
+#	* 2003-01-17 rspisser <reinhard@spisser.it>
+#  *		adding localization strings for forums
 #  */
 system	locale	it_IT
 system	strftimefmt	%Y %B %e  %H:%M
@@ -163,6 +161,9 @@ docman_new	group	Gruppo al quale appartiene il documento:
 docman_new	submit	Invia Informazioni
 forum	title	Forum
 forum	choose	<p>Seleziona un forum e puoi scorrere, cercare e inserire messaggi.<p>
+forum	error_no_forums_found	Nessun forum trovato per 
+forum	forums_for	Forum per 
+forum	error_forum_not_found	Forum non trovato
 forum_save	saved	Posizione del forum salvato. I nuovi messaggi verranno evidenziati al prossimo collegamento 
 forum_admin	section	Progetto: $1 
 forum_admin	title	Amministrazione forum
@@ -194,6 +195,27 @@ forum_admin_delete_message	section Amministrazione forum
 forum_admin_delete_message	title	Cancella un messaggio
 forum_admin_delete_message	warning	ATTENZIONE! Stai per cancellare in modo permanente il messaggio e tutte le risposte!!
 forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da cancellare
+forum_common	error_adding_forum	Error Adding Forum
+forum_common	error_invalid_group_forum_id	Forum:: Invalid group_forum_id
+forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
+forum_common	error_min_name_lenght	Il nome del forum deve essere almeno di 3 caratteri
+forum_common	error_min_desc_lenght	La descrizione del forum deve essere almeno di 10 caratteri
+forum_common	error_set_monitor	Puoi monitorare il forum solo se sei collegato
+forum_common	error_unable_to_add_monitor	Impossibile monitorare
+forum_common	welcome_to	Benvenuto a
+forum_common_forumfactory	error_no_forums_found	Nessun forum trovato
+forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
+forum_common_forummessage	forum_message	Messaggio Forum
+forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does not match Forum Object
+forum_common_forummessage	error_required_fields	Deve includere un titolo e il contenuto
+forum_common_forummessage	error_not_logged	Devi essere collegato per poter inserire messaggi
+forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting Failed 
+forum_common_forummessage	error_get_message_id	ForumMessage::create() Unable to get new message id
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Invalid MessageID
+forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() No Valid ParentMessage Object
+forum_common_forummessage	error_getting_next_thread	Getting next thread_id failed
+forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
+forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
 forum_errors	error_getting_forum	Errore nel recupero del forum
 forum_errors	error_determining_forum_id Errore nel determinare il forum_id
 forum_forum	section	Progetto: $1 
@@ -226,6 +248,8 @@ forum_message	by	DA
 forum_message	date	DATA
 forum_message	subject	SOGGETTO
 forum_message	message	Messaggio
+forum_message	message_not_found_title	Messaggio non trovato
+forum_message	message_not_found_body	Il messaggio non esiste.
 forum_monitor	activated	Monitoraggio forum attivato
 forum_monitor	deactivated	Monitoraggio forum disattivato
 forum_utils	discussionforum	Forum di discussione:
@@ -253,7 +277,7 @@ frs	file_package	Package
 frs	file_rel_date	Data
 frs	file_version	Versione
 frs	latest_file_releases	Ultimi rilasci
-general	return	[Return to $1]
+general	return	[Ritorna  a 1]
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Could not get permission
 general	update_successful	Aggiornato con successo
@@ -265,6 +289,7 @@ general	create_successful	Creato con successo
 general	no_valid_group	Non &egrave; stato selezionato un gruppo valido $1
 general	no_valid_filename	Nome file non valido
 general	submitted_successfully	$1 inserito con successo
+general	invalid_email	Indirizzo email non valido
 general	language	Lingua
 general	submit_edit	Invia Modifiche
 general	edit	Modifica
@@ -275,6 +300,7 @@ general	no	No
 general	deleted	Cancellato
 general	update	Aggiorna
 general	submit	Invia
+general	error	Errore
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	CVS Repository

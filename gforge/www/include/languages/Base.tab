@@ -182,6 +182,36 @@ forum	section	Project: $1
 forum	title	Forums
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
 forum	html	HTML tags will display in your post as text
+forum	error_no_forums_found	No Forums Found For
+forum	forums_for	Forums for
+forum	error_no_valid_group_object	Forum:: No Valid Group Object
+forum	forum	Forum
+forum	error_no_valid_forum_object	$1:: No Valid Forum Object
+forum	error_invalid_group_forum_id	$1:: Invalid group_forum_id
+forum	error_forum_not_found	Forum Not Found
+forum_common	error_adding_forum	Error Adding Forum
+forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
+forum_common	error_min_name_lenght	Forum Name Must Be At Least 3 Characters
+forum_common	error_min_desc_lenght	Forum Description Must Be At Least 10 Characters
+forum_common	error_set_monitor	You can Only Monitor If You Are Logged In
+forum_common	error_unable_to_add_monitor	Unable To Add Monitor
+forum_common	welcome_to	Welcome to
+
+forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
+forum_common_forummessage	forum_message	Forum Message
+forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does not match Forum Object
+forum_common_forummessage	error_required_fields	Must Include A Message Body And Subject
+forum_common_forummessage	error_not_logged	Must Be Logged In to Post Messages
+forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting Failed 
+forum_common_forummessage	error_get_message_id	ForumMessage::create() Unable to get new message id
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Invalid MessageID
+forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() No Valid ParentMessage Object
+forum_common_forummessage	error_getting_next_thread	Getting next thread_id failed
+forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
+forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
+
+
+forum_common_forum	error_save_place	Forum::savePlace() 
 forum_save	saved	Forum Position Saved. New messages will be highlighted when you return
 forum_admin	section	Project: $1 
 forum_admin	title	Forums: Administration
@@ -213,7 +243,7 @@ forum_admin_delete_message	section Forum Administration
 forum_admin_delete_message	title	Delete a Message
 forum_admin_delete_message	warning	WARNING! You are about to permanently delete a message and all of its followups!!
 forum_errors	error_getting_forum	Error getting Forum
-forum_errors	error_determining_forum_id Error Determining forum_id
+forum_errors	error_determining_forum_id	Error Determining forum_id
 forum_forum	section	Project: $1 
 forum_forum	title	Forums: View Forum
 forum_forum_thread	section	Forums
@@ -249,6 +279,10 @@ forum_message	by	BY
 forum_message	date	DATE
 forum_message	subject	SUBJECT
 forum_message	message	Message
+forum_message	message_not_found_title	Message Not Found
+forum_message	message_not_found_body	This message does not (any longer) exist
+forum_message	must_choose_message_title	Must Choose A Message First
+forum_message	must_choose_message_body	You Must Choose A Message First
 forum_monitor	deactivated	Forum monitoring deactivated
 forum_monitor	activated	Forum monitoring started
 forum_utils	news	News
@@ -316,6 +350,7 @@ general	no_valid_group	No Valid $1 Group was selected
 general	no_valid_filename	No valid Filename
 general	no_valid_group_object	$1 No valid group object
 general	submitted_successfully	$1 Submitted Successfully
+general	invalid_email	Invalid Email Address
 general	language	Language
 general	submit_edit	Submit Edit
 general	edit	Edit
@@ -326,6 +361,12 @@ general	yes	Yes
 general	no	No
 general	deleted	Deleted
 general	update	Update
+general	error_on_update	Error On Update: 
+general	error_group_id	Group_id in db result does not match Group Object
+general	error_no_valid_group_object	$1:: No Valid Group Object
+general	error_creating	Error Creating $1
+general	error_getting	Error Getting $1
+general	error_getting_new	Error Getting New $1
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
