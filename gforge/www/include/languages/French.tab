@@ -87,7 +87,7 @@ account_lostpw	subject	$1 - Vérification
 account_lostpw	title	Perdu votre mot de passe ?
 account_lostpw	user_dont_exist	Cet utilisateur n'existe pas.
 account_lostpw	warn	<p>Perdre son mot de passe n'est pas sans conséquence. Cela compromet la sécurité de votre compte, de vos projets et de ce site.</p><p>Cliquer sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous déclenchera l'envoi d'une URL à l'adresse que vous nous avez fournie. Celle-ci contient une clé de confirmation de 128 bits pour votre compte. An allant à cette URL, vous pourrez changer votre mot de passe en ligne et vous connecter.</p>
-account_options	address		Adresse complète :
+account_options	address		Adresse :
 account_options	ccode	Pays :
 account_options	change_email_address	Modifier mon adresse e-mail
 account_options	change_password	Modifier mon mot de passe
