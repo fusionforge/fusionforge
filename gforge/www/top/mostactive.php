@@ -67,30 +67,29 @@ $HTML->header(
 
 <P><A href="/top/">[View Other Top Categories]</A>
 
-<P><TABLE width="100%" cellpadding=0 cellspacing=0 border=0>
-<TR valign="top">
-<TD><B>Rank</B></TD>
-<TD><B>Project Name<BR>&nbsp;</B></TD>
-<TD align="right"><B>Percentile</B></TD>
-</TR>
-
 <?php
+$arr=array('Rank','Project Name','Percentile');
+
+echo $HTML->listTableTop($arr);
 
 $res_top = db_query($sql, $LIMIT, $offset);
+$rows=db_numrows($res_top);
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
-	print '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>&nbsp;&nbsp;'.$row_top['ranking']
+	print '<TR '. $HTML->boxGetAltRowStyle($i) .'><TD>&nbsp;&nbsp;'.$row_top['ranking']
 		.'</TD><TD><A href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
 		.$row_top['group_name']."</A>"
 		.'</TD><TD align="right">'.sprintf('%.3f', $row_top['percentile']).'</TD></TR>';
 }
 
+if ($i<$rows) {
 print '<TR BGCOLOR="'.$HTML->COLOR_LTBACK2.'"><TD>'.(($offset>0)?'<A HREF="mostactive.php?type='.$type.'&offset='.($offset-$LIMIT).'"><B><-- More</B></A>':'&nbsp;').'</TD>
 	<TD>&nbsp;</TD>
 	<TD ALIGN="RIGHT"><A HREF="mostactive.php?type='.$type.'&offset='.($offset+$LIMIT).'"><B>More --></B></A></TD></TR>';
+}
 
-print '</TABLE>';
+echo $HTML->listTableBottom();
 
 $HTML->footer(array());
 

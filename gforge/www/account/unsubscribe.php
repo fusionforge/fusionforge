@@ -53,7 +53,7 @@ and visit your Account Maintenance page.
 </p>
 
 <p>
-<A href="/"><?php echo $Language->getText('general', 'return'); ?></A>
+<A href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></A>
 </p>
 
 <?php

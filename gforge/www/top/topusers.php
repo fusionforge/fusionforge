@@ -57,10 +57,12 @@ print '<h1>Highest Ranked Users</h1>
 <TD align="right"><B>Last Rank</B></TD>
 <TD align="right"><B>Change</B>&nbsp;&nbsp;&nbsp;</TD></TR>
 ';
+$arr=array('Rank','User Name','Real Name','Rating','Last Rank','Change');
+echo $HTML->listTableTop($arr);
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
-	print '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>&nbsp;&nbsp;'.$row_top['ranking']
+	print '<TR '. $HTML->boxGetAltRowStyle($i) .'><TD>&nbsp;&nbsp;'.$row_top['ranking']
 		.'</TD><TD><A href="/users/'. $row_top['user_name'] .'/">'
 		.$row_top['user_name'].'</A></td>'
 		.'<td>'.$row_top['realname'].'</td>'
@@ -88,14 +90,13 @@ while ($row_top = db_fetch_array($res_top)) {
 ';
 }
 
-print '</TABLE>';
+echo $HTML->listTableBottom();
 
-print ' <table width="100%">
+/*
 	<TR BGCOLOR="'.$HTML->COLOR_LTBACK2.'">
         <TD>'.(($offset>=$LIMIT)?'<A HREF="topusers.php?&offset='.($offset-50).'"><B><-- More</B></A>':'&nbsp;').'</TD>
 	<TD ALIGN="RIGHT"><A HREF="topusers.php?offset='.($offset+50).'"><B>More --></B></A></TD></TR>
-	</table>
-';
+';*/
 
 $HTML->footer(array());
 ?>

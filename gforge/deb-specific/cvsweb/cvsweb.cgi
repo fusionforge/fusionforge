@@ -78,7 +78,7 @@ use vars qw (
 ##### Start of Configuration Area ########
 # == EDIT this == 
 # User configuration is stored in
-$config = $ENV{'CVSWEB_CONFIG'} || '/etc/sourceforge/cvsweb.conf';
+$config = $ENV{'CVSWEB_CONFIG'} || '/etc/gforge/cvsweb.conf';
 
 # == Configuration defaults ==
 # Defaults for configuration variables that shouldn't need

@@ -18,7 +18,7 @@ if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	$u =& session_get_user();
 }
 
@@ -31,7 +31,7 @@ if (!$set) {
 		if no set is passed in, see if a preference was set
 		if no preference or not logged in, use open set
 	*/
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		$custom_pref=$u->getPreference('art_cust'.$ath->getID());
 		if ($custom_pref) {
 			$pref_arr=explode('|',$custom_pref);
@@ -71,7 +71,7 @@ if ($order=='artifact_id' || $order=='summary' || $order=='open_date' || $order=
 }
 
 if ($set=='custom') {
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		/*
 			if this custom set is different than the stored one, reset preference
 		*/

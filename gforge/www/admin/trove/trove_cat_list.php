@@ -28,7 +28,7 @@ function printnode ($nodeid,$text) {
 		print "&nbsp; &nbsp; ";
 	}
 
-	print html_image('images/ic/cfolder15.png','15','13',array());
+	print html_image('ic/cfolder15.png','15','13',array());
 	print ('&nbsp; '.$text." ");
 	if ($nodeid != 0) {
                 print ('<A href="trove_cat_edit.php?trove_cat_id='.$nodeid.'">[Edit]</A> ');

@@ -16,7 +16,7 @@ require_once('pre.php');
 
 $HTML->header(array('title'=>'Voting'));
 
-if (!user_isloggedin()) {
+if (!session_loggedin()) {
 	echo "<H2>You must be logged in to vote</H2>";
 } else {
 	if ($vote_on_id && $response && $flag) {

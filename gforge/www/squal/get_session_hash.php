@@ -14,26 +14,10 @@
 
 require_once('squal_pre.php');
 
-/*
-
-	MUST USE SSL
-
-	params: $user, $pass
-
-	returns: either valid session_hash or ERROR string
-
-*/
-
-if (!session_issecure()) {
-	//force use of SSL for login
-	echo 'ERROR - MUST USE SSL';
-	exit;
-}
-
 $success=session_login_valid($user,$pass);
 
 if ($success) {
-	echo $session_hash;
+	echo $session_ser;
 } else {
 	echo 'ERROR - '.$feedback;
 }

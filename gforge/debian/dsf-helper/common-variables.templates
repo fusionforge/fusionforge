@@ -1,4 +1,4 @@
-Template: sourceforge/shared/domain_name
+Template: gforge/shared/domain_name
 Type: string
 Description: Your SF domain or subdomain name
  The domain that will host your Sourceforge installation.  Some services
@@ -7,7 +7,7 @@ Description-fr: Votre nom de domaine
  Le nom du domaine qui héberge votre Sourceforge.  Certains services auront
  leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
 
-Template: sourceforge/shared/server_admin
+Template: gforge/shared/server_admin
 Type: string
 Description: The SF admin email address.
  The email address of the Sourceforge administrator of your site.  Needed
@@ -16,7 +16,7 @@ Description-fr: L'adresse e-mail de l'administrateur SF
  L'adresse e-mail de l'administrateur de votre Sourceforge, requise au cas
  où un problème survendrait.
 
-Template: sourceforge/shared/system_name
+Template: gforge/shared/system_name
 Type: string
 Default: Sourceforge
 Default-fr: Sourceforge
@@ -25,7 +25,7 @@ Description: The Sourceforge system name
 Description-fr: Nom de votre système Sourceforge
  Ce nom est utilisé à divers endroits au travers du système.
 
-Template: sourceforge/shared/sys_lang
+Template: gforge/shared/sys_lang
 Type: string
 Default: English
 Default-fr: French
@@ -34,7 +34,7 @@ Description: Default language
 Description-fr: Langage par defaut
  Ceci est le langage par defaut des pages web, attention de bien entrer une langue valide.
 
-Template: sourceforge/shared/sys_theme
+Template: gforge/shared/sys_theme
 Type: string
 Default: debian
 Default-fr: debian

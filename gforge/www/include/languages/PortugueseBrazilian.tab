@@ -2,7 +2,7 @@
 #  *
 #  * Portuguese Brazillian message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -19,7 +19,7 @@
 #	* Updates
 #
 about_foundries	about_blurb	Sobre as Foundries
-menu	about_sourceforge	Sobre o SourceForge
+menu	about_sourceforge	Sobre o GForge
 menu	account_maintenance	Manutenção da Conta
 menu	bookmark_page	Adicionar aos Favoritos
 home	breaking_down_barriers	Quebrando as Barreiras para o Desenvolvimento em Código Aberto
@@ -41,7 +41,7 @@ group	long_bugs	Mapeamento de Bugs
 group	long_cvs	Repositório CVS
 group	long_docman	DocManager: Documentação do Projeto
 group	long_forum	Fórums Públicos
-group	long_foundries	Foundries de Desenvolvimento do SourceForge
+group	long_foundries	Foundries de Desenvolvimento do GForge
 group	long_ftp	Espaço de FTP Anônimo
 group	long_homepage	Home Page do Projeto
 group	long_mail	Mailing Lists
@@ -65,7 +65,7 @@ group	short_summary	Sumário
 group	short_support	Suporte
 group	short_survey	Pesquisas
 home	highest_ranked_users	Usuários Mais Pontuados
-home	about_blurb	  SourceForge é um <B>serviço gratuido para desenvolvedores em <A href="http://www.opensource.org">Código Aberto</A> </B> oferecendo fácil acesso ao que há de melhor em CVS, listas, controle de bugs, quadro de mensagens/fórums, gerenciador de tarefas, hospedagem, arquivamento permanente de arquivos, backups completos, e administração totalmente baseado na web.  <BR> &nbsp; <P> <B>Conteúdo do Site e Participação</B> <P> Para tirar o máximo proveito do SourceForge, você deve se  <A href="/account/register.php">registrar como um usuário do site</A>.  Isso permitirá que você participe plenamente em tudo o que temos a oferecer.  É claro que você pode ver o conteúdo do site sem se registrar, mas não terá accesso para participar plenamente. <P> &nbsp; <BR> <B>Registre seu próprio Projeto</B> <P> <A href="/account/register.php">Registre-se como um usuário do site</A>, em seguida efetue <A HREF="/account/login.php">Login</A> e finalmente, <A HREF="/register/">Registre seu Projeto.</A> <P> Obrigado... e aproveite o site.
+home	about_blurb	  GForge é um <B>serviço gratuido para desenvolvedores em <A href="http://www.opensource.org">Código Aberto</A> </B> oferecendo fácil acesso ao que há de melhor em CVS, listas, controle de bugs, quadro de mensagens/fórums, gerenciador de tarefas, hospedagem, arquivamento permanente de arquivos, backups completos, e administração totalmente baseado na web.  <BR> &nbsp; <P> <B>Conteúdo do Site e Participação</B> <P> Para tirar o máximo proveito do GForge, você deve se  <A href="/account/register.php">registrar como um usuário do site</A>.  Isso permitirá que você participe plenamente em tudo o que temos a oferecer.  É claro que você pode ver o conteúdo do site sem se registrar, mas não terá accesso para participar plenamente. <P> &nbsp; <BR> <B>Registre seu próprio Projeto</B> <P> <A href="/account/register.php">Registre-se como um usuário do site</A>, em seguida efetue <A HREF="/account/login.php">Login</A> e finalmente, <A HREF="/register/">Registre seu Projeto.</A> <P> Obrigado... e aproveite o site.
 frs	latest_file_releases	Últimos Arquivos Enviados
 menu	login	Login via SSL
 menu	logout	Logout
@@ -82,7 +82,7 @@ menu	project_summary	Sumário do Projeto
 group	public_area	Áreas Públicas
 menu	search	Procurar
 menu	software_map	Mapa dos Softwares
-home	sourceforge_statistics	Estatísticas do SourceForge
+home	sourceforge_statistics	Estatísticas do GForge
 menu	top_projects	Principais Projetos
 home	top_project_downloads	Projetos Mais Baixados
 conf	language_code	pt

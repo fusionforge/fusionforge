@@ -18,7 +18,7 @@ $is_admin_page='y';
 
 $HTML->header(array('title'=>'Survey Questions','pagename'=>'survey_admin_show_questions'));
 
-if (!user_isloggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<H1>Permission Denied</H1>";
 	survey_footer(array());
 	exit;
@@ -48,7 +48,7 @@ Function  ShowResultsEditQuestion($result) {
 	echo( "</tr>");
 	for($j  =  0;  $j  <  $rows;  $j++)  {
 
-		echo( "<tr BGCOLOR=\"". html_get_alt_row_color($j) ."\">\n");
+		echo( "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($j) .">\n");
 
 		echo "<TD><A HREF=\"edit_question.php?group_id=$group_id&question_id=".db_result($result,$j,"question_id")."\">".db_result($result,$j,"question_id")."</A></TD>\n";
 

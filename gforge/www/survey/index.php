@@ -31,11 +31,11 @@ Function  ShowResultsGroupSurveys($result) {
 	$title_arr[]='Survey ID';
 	$title_arr[]='Survey Title';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	for($j=0; $j<$rows; $j++)  {
 
-		echo "<tr BGCOLOR=\"". html_get_alt_row_color($j) ."\">\n";
+		echo "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($j) .">\n";
 
 		echo "<TD><A HREF=\"survey.php?group_id=$group_id&survey_id=".db_result($result,$j,"survey_id")."\">".
 			db_result($result,$j,"survey_id")."</TD>";
@@ -46,7 +46,9 @@ Function  ShowResultsGroupSurveys($result) {
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</TD></TR></TABLE>");
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 $sql="SELECT survey_id,survey_title FROM surveys WHERE group_id='$group_id' AND is_active='1'";

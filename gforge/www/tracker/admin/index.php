@@ -256,16 +256,18 @@ if ($group_id && $atid) {
 			$title_arr[]='ID';
 			$title_arr[]='Title';
 			
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<TD>'.db_result($result, $i, 'id').'</TD>'.
 					'<TD><A HREF="'.$PHP_SELF.'?update_cat=1&id='.
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'category_name').'</A></TD></TR>';
 			}		   
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		} else {
 			echo "\n<H1>No categories defined</H1>";
 		}
@@ -304,16 +306,18 @@ if ($group_id && $atid) {
 			$title_arr[]='ID';
 			$title_arr[]='Title';
 			
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<TD>'.db_result($result, $i, 'id').'</TD>'.
 					'<TD><A HREF="'.$PHP_SELF.'?update_group=1&id='.
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'group_name').'</A></TD></TR>';
 			}		   
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		} else {
 			echo "\n<H1>No groups defined</H1>";
 		}
@@ -356,16 +360,17 @@ if ($group_id && $atid) {
 			$title_arr[]='ID';
 			$title_arr[]='Title';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
-				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
+				echo '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
 					'<TD>'.db_result($result, $i, 'id').'</TD>'.
 					'<TD><A HREF="'.$PHP_SELF.'?update_canned=1&id='.
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'title').'</A></TD></TR>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
 			echo "\n<H1>No responses set up in this group</H1>";
@@ -423,7 +428,7 @@ if ($group_id && $atid) {
 			$arr[]='User Name';
 			$arr[]='Permission';
 
-			echo html_build_list_table_top($arr);
+			echo $GLOBALS['HTML']->listTableTop($arr);
 
 			$i=0;
 			//
@@ -432,7 +437,7 @@ if ($group_id && $atid) {
 			while ($row_dev = db_fetch_array($res)) {
 				print '
 				<INPUT TYPE="HIDDEN" NAME="updateids['.$i.'][0]" VALUE="'.$row_dev['user_id'].'">
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD><INPUT TYPE="CHECKBOX" NAME="deleteids[]" VALUE="'.$row_dev['user_id'].'"> Delete</TD>
 
 				<TD>'.$row_dev['realname'].' ( '. $row_dev['user_name'] .' )</TD>
@@ -449,7 +454,9 @@ if ($group_id && $atid) {
 			}
 			echo '<TR><TD COLSPAN=3 ALIGN=MIDDLE><INPUT type="submit" name="post_changes" value="Update Developer Permissions">
 			</FORM></TD></TR>';
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 		?>
 		<P>
@@ -734,7 +741,7 @@ if ($group_id && $atid) {
 			echo '
 			<A HREF="/tracker/admin/?atid='.db_result($result, $j, 'group_artifact_id').
 			'&group_id='.$group_id.'">' .
-			html_image("images/ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+			html_image("ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
 			db_result($result, $j, 'name').'</A><BR>'.
 			db_result($result, $j, 'description').'<P>';
 		}

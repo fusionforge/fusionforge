@@ -5,17 +5,17 @@ then
 	su -c $0
 else
 	# Fill ldap tables
-	/usr/lib/sourceforge/bin/install-ldap.sh update > /dev/null 2>&1
+	/usr/lib/gforge/bin/install-ldap.sh update > /dev/null 2>&1
 
-	[ -d /var/lib/sourceforge/dumps ] || \
-	mkdir /var/lib/sourceforge/dumps && \
-	chown sourceforge:sourceforge /var/lib/sourceforge/dumps
-	su sourceforge -c /usr/lib/sourceforge/bin/dump_database.pl -s /bin/sh
-	su sourceforge -c /usr/lib/sourceforge/bin/ssh_dump.pl -s /bin/sh
+	[ -d /var/lib/gforge/dumps ] || \
+	mkdir /var/lib/gforge/dumps && \
+	chown gforge:gforge /var/lib/gforge/dumps
+	su gforge -c /usr/lib/gforge/bin/dump_database.pl -s /bin/sh
+	su gforge -c /usr/lib/gforge/bin/ssh_dump.pl -s /bin/sh
 
 	# Create user, groups and cvs archives
-	/usr/lib/sourceforge/bin/new_parse.pl
+	/usr/lib/gforge/bin/new_parse.pl
 
 	# Fill ssh authorized_keys
-	/usr/lib/sourceforge/bin/ssh_create.pl
+	/usr/lib/gforge/bin/ssh_create.pl
 fi

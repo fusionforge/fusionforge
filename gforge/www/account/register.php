@@ -24,7 +24,7 @@ if ($submit) {
 	*/
 	$new_user = new User();
 	$register = $new_user->create($unix_name,$realname,$password1,$password2,
-		$email,$mail_site,$mail_va,$language_id,$timezone);
+		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only);
 	if ($register) {
 		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
 
@@ -37,14 +37,7 @@ if ($submit) {
 }
 
 
-$HTML->header(array('title'=>'Register','pagename'=>'account_register'));
-
-if (browser_is_windows() && browser_is_ie() && browser_get_version() < '5.1') {
-	echo $Language->getText('account_register','iewarn');
-}
-if (browser_is_ie() && browser_is_mac()) {
-	echo $Language->getText('account_register','macwarn');
-}
+$HTML->header(array('title'=>'Gforge: Register','pagename'=>'account_register'));
 
 
 ?>
@@ -55,7 +48,7 @@ if ($feedback) {
 } 
 ?>
 
-<form action="https://<?php echo $HTTP_HOST.$PHP_SELF; ?>" method="post">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 <p>
 <?php echo $Language->getText('account_register','loginname'); ?><br>
 <input type="text" name="unix_name" value="<?php print($unix_name); ?>">
@@ -77,6 +70,15 @@ if ($feedback) {
 <P>
 @<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
 <BR><INPUT size=30 type="text" name="email" value="<?php print($email); ?>">
+<p>
+<?php
+if ($sys_use_jabber) {
+	echo $Language->getText('account_register','jabberaddr').'<BR>
+	<INPUT size=30 type="text" name="jabber_address" value="'. $jabber_address .'"><BR>
+    <INPUT type="checkbox" name="jabber_only" value="1">
+    '.$Language->getText('account_register','jabberonly').'.';
+}
+?>
 <P>
 <INPUT type="checkbox" name="mail_site" value="1" checked>
 <?php echo $Language->getText('account_register','siteupdate'); ?>

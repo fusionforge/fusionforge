@@ -22,9 +22,9 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        	// factored out because called 3 time below
        	function show_news_item($result,$i,$approved,$selectable) {
 
-	        global $PHP_SELF;
+	        global $PHP_SELF,$HTML;
 
-       		echo '<tr bgcolor="'.html_get_alt_row_color($i).'"><td>';
+		echo '<TR '. $HTML->boxGetAltRowStyle($i) . '><td>';
        		if ($selectable) {
        			echo '<input type="checkbox" '
        			     .'name="news_id[]" value="'
@@ -64,11 +64,11 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        			<H4>No Queued Items Found</H4>';
        	} else {
        		echo '<H4>These items need to be approved (total: '.$rows.')</H4>';
-       		echo html_build_list_table_top($title_arr);
+       		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,true);
        		}
-       		echo '</table>';
+       		echo $GLOBALS['HTML']->listTableBottom();
        		echo '<br><input type="submit" name="submit" value="Reject Selected">';
        	}
        	echo '</form>';
@@ -84,11 +84,11 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        			<H4>No rejected items found for this week</H4>';
        	} else {
        		echo '<H4>These items were rejected this past week (total: '.$rows.')</H4>';
-       		echo html_build_list_table_top($title_arr);
+       		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,false,false);
        		}
-       		echo '</table>';
+       		echo $GLOBALS['HTML']->listTableBottom();
        	}
 
        	/*
@@ -102,11 +102,11 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        			<H4>No approved items found for this week</H4>';
        	} else {
        		echo '<H4>These items were approved this past week (total: '.$rows.')</H4>';
-       		echo html_build_list_table_top($title_arr);
+       		echo $GLOBALS['HTML']->listTableTop($title_arr);
        		for ($i=0; $i<$rows; $i++) {
        			show_news_item($result,$i,true,false);
        		}
-       		echo '</table>';
+       		echo $GLOBALS['HTML']->listTableBottom();
        	}
 
 }

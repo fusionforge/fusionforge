@@ -1,71 +1,71 @@
 <?php
 /**
-  *
-  * SourceForge Forums Facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
 
 /*
+	Message Forums
+	By Tim Perdue, Sourceforge, 11/99
 
-	Forum written 11/99 by Tim Perdue
-	Massive re-write 7/2000 by Tim Perdue (nesting/multiple views/etc)
+	Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
 
-	Massive optimization 11/00 to eliminate recursive queries
-
+	Complete OO rewrite by Tim Perdue 12/2002
 */
 
 require_once('pre.php');
-require_once('www/forum/forum_utils.php');
+require_once('www/forum/include/ForumHTML.class');
+require_once('common/forum/Forum.class');
+require_once('common/forum/ForumFactory.class');
+require_once('common/forum/ForumMessageFactory.class');
+require_once('common/forum/ForumMessage.class');
 
 if ($forum_id) {
 
 	/*
-		Set up global vars that are expected by some forum functions
+		Get the group_id based on this forum_id
 	*/
-	$result=db_query("SELECT group_id,forum_name,is_public,allow_anonymous,send_all_posts_to ".
-		"FROM forum_group_list ".
-		"WHERE group_forum_id='$forum_id'");
+	$result=db_query("SELECT group_id
+		FROM forum_group_list
+		WHERE group_forum_id='$forum_id'");
 	if (!$result || db_numrows($result) < 1) {
 		exit_error('ERROR','Forum not found '.db_error());
 	}
 	$group_id=db_result($result,0,'group_id');
-	$forum_name=db_result($result,0,'forum_name');
-	$allow_anonymous=db_result($result,0,'allow_anonymous');
-	$send_all_posts_to=db_result($result,0,'send_all_posts_to');
 
 	//
 	//	Set up local objects
 	//
 	$g =& group_get_object($group_id);
-
-	if (user_isloggedin()) {
-		$u =& session_get_user();
-		$perm =& $g->getPermission($u);
+	if (!$g || !is_object($g) || $g->isError()) {
+		exit_no_group();
 	}
 
-	//private forum check
-	if (db_result($result,0,'is_public') != 1) {
-		if (!user_isloggedin() || (user_isloggedin() && !$perm->isMember())) {
-			/*
-				If this is a private forum, kick 'em out
-			*/
-			exit_error('ERROR','Forum is restricted to members of this group');
-		}	 
+	$f=new Forum($g,$forum_id);
+	if (!$f || !is_object($f)) {
+		exit_error('Error','Error Getting Forum');
+	} elseif ($f->isError()) {
+		exit_error('Error',$f->getErrorMessage());
 	}
-
 
 	/*
 		if necessary, insert a new message into the forum
 	*/
 	if ($post_message) {
-		if (!post_message($thread_id, $is_followup_to, $subject, $body, $forum_id)) {
-			exit_error('ERROR',$feedback);
+		$fm=new ForumMessage($f);
+		if (!$fm || !is_object($fm)) {
+			exit_error('Error','Error Getting New ForumMessage');
+		} elseif ($fm->isError()) {
+			exit_error('Error','Error Getting New ForumMessage: '.$fm->getErrorMessage());
+		}
+
+		if (!$fm->create($subject, $body, $thread_id, $is_followup_to) || $fm->isError()) {
+			exit_error('ERROR','Error Creating Forum Message: '.$fm->getErrorMessage());
 		} else {
 			$feedback=$Language->getText('forum_forum','postsuccess');
 			$style='';
@@ -73,66 +73,32 @@ if ($forum_id) {
 		}
 	}
 
-	/*
-		set up some defaults if they aren't provided
-	*/
-	if ((!$offset) || ($offset < 0)) {
-		$offset=0;
-	} 
-	if ($thread_id) {
-		$style='nested';
-	}
-	if (!$style || ($style != 'ultimate' && $style != 'flat' && $style != 'nested' && $style != 'threaded')) {
-		$style='ultimate';
+
+	$fmf = new ForumMessageFactory($f);
+	if (!$fmf || !is_object($fmf)) {
+		exit_error('Error','Error Getting New ForumMessageFactory');
+	} elseif ($fmf->isError()) {
+		exit_error('Error',$fmf->getErrorMessage());
 	}
 
-	if (!$max_rows || $max_rows < 5) {
-		$max_rows=25;
+//echo "<BR> style: $style|max_rows: $max_rows|offset: $offset+";
+	$fmf->setUp($offset,$style,$max_rows,$set);
+
+	$style=$fmf->getStyle();
+	$max_rows=$fmf->max_rows;
+	$offset=$fmf->offset;
+
+//echo "<BR> style: $style|max_rows: $max_rows|offset: $offset+";
+
+	$fh = new ForumHTML($f);
+	if (!$fh || !is_object($fh)) {
+		exit_error('Error','Error Getting New ForumHTML');
+	} elseif ($fh->isError()) {
+		exit_error('Error',$fh->getErrorMessage());
 	}
 
-	/*
-		take care of setting up/saving prefs
-
-		If they're logged in and a "custom set" was NOT just POSTed,
-			see if they have a pref set
-				if so, use it
-			if it was a custom set just posted && logged in, set pref if it's changed
-	*/
-	if (!$thread_id && user_isloggedin()) {
-		$_pref=$style.'|'.$max_rows;
-		if ($set=='custom') {
-			if ($u->getPreference('forum_style')) {
-				if ($_pref == $u->getPreference('forum_style')) {
-					//do nothing - pref already stored
-				} else {
-					//set the pref
-					$u->setPreference ('forum_style',$_pref);
-				}
-			} else {
-					//set the pref
-					$u->setPreference ('forum_style',$_pref);
-			}
-		} else {
-			if ($u->getPreference('forum_style')) {
-				$_pref_arr=explode ('|',$u->getPreference('forum_style'));
-				$style=$_pref_arr[0];
-				$max_rows=$_pref_arr[1];
-			} else {
-				//no saved pref and we're not setting 
-				//one because this is all default settings
-			}
-		}
-	}
-	if (!$style || ($style != 'ultimate' && $style != 'flat' && $style != 'nested' && $style != 'threaded')) {
-		$style='ultimate';
-	}
-
-	if (!$max_rows || $max_rows < 5) {
-		$max_rows=25; 
-	}
-
-//echo "<P>style: $style";
-	forum_header(array('title'=>$forum_name,'pagename'=>'forum_forum','sectionvals'=>group_getname($group_id),'forum_id'=>$forum_id));
+	forum_header(array('title'=>$f->getName(),'pagename'=>'forum_forum',
+	'sectionvals'=>$g->getPublicName(),'forum_id'=>$forum_id));
 
 /**
  *
@@ -145,117 +111,79 @@ if ($forum_id) {
  *
  */
 
-	//
-	//	Don't show the forum view prefs in thread mode
-	//
-	if (!$thread_id) {
-		//create a pop-up select box listing the forums for this project
-		//determine if this person can see private forums or not
-		if (user_isloggedin() && user_ismember($group_id)) {
-			$public_flag='0,1';
-		} else {
-			$public_flag='1';
-		}
-		if ($group_id==$GLOBALS['sys_news_group']) {
-			echo '<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">';
-		} else {
-			$res=db_query("SELECT group_forum_id,forum_name ".
-				"FROM forum_group_list ".
-				"WHERE group_id='$group_id' AND is_public IN ($public_flag)");
-			$vals=util_result_column_to_array($res,0);
-			$texts=util_result_column_to_array($res,1);
-
-			$forum_popup = html_build_select_box_from_arrays ($vals,$texts,'forum_id',$forum_id,false);
-		}
-		//create a pop-up select box showing options for viewing threads
-
-		$vals=array('nested','flat','threaded','ultimate');
-		$texts=array('Nested','Flat','Threaded','Ultimate');
-
-		$options_popup=html_build_select_box_from_arrays ($vals,$texts,'style',$style,false);
-
-		//create a pop-up select box showing options for max_row count
-		$vals=array(25,50,75,100);
-		$texts=array('Show 25','Show 50','Show 75','Show 100');
-
-		$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
-
-		//now show the popup boxes in a form
-		$ret_val .= '
-		<TABLE BORDER="0" WIDTH="50%">
-			<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
-			<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
-			<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">
-			<TR><TD><FONT SIZE="-1">'. $forum_popup .
-				'</TD><TD><FONT SIZE="-1">'. $options_popup .
-				'</TD><TD><FONT SIZE="-1">'. $max_row_popup .
-				'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.$Language->getText('forum_forum','changeview').'">
-			</TD></TR>
-		</TABLE></FORM>';
+	//create a pop-up select box listing the forums for this project
+	//determine if this person can see private forums or not
+	if (session_loggedin() && user_ismember($group_id)) {
+		$public_flag='0,1';
+	} else {
+		$public_flag='1';
 	}
 
+	//create a pop-up select box showing options for viewing threads
+
+	$vals=array('nested','flat','threaded','ultimate');
+	$texts=array('Nested','Flat','Threaded','Ultimate');
+
+	$options_popup=html_build_select_box_from_arrays ($vals,$texts,'style',$style,false);
+
+	//create a pop-up select box showing options for max_row count
+	$vals=array(25,50,75,100);
+	$texts=array('Show 25','Show 50','Show 75','Show 100');
+
+	$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
+
+	//now show the popup boxes in a form
+	$ret_val .= '
+	<TABLE BORDER="0" WIDTH="33%">
+	<FORM ACTION="'. $PHP_SELF .'" METHOD="GET">
+	<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
+	<INPUT TYPE="HIDDEN" NAME="forum_id" VALUE="'.$forum_id.'">
+		<TR><TD><FONT SIZE="-1">'. $options_popup .
+			'</TD><TD><FONT SIZE="-1">'. $max_row_popup .
+			'</TD><TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="'.
+			$Language->getText('forum_forum','changeview').'">
+		</TD></TR>
+	</TABLE></FORM>
+	<P>';
+
 	if ($style=='nested') {
-		//
-		//	if viewing a particular thread, add some limiting SQL
-		//
-		if ($thread_id) {
-			$thread_sql=" AND forum.thread_id='$thread_id' ";
+
+		$msg_arr =& $fmf->nestArray($fmf->getNested());
+
+		if ($fmf->isError()) {
+			echo $fmf->getErrorMessage();
 		}
 
-		$sql="SELECT users.user_name,users.realname,forum.has_followups, ".
-		"users.user_id,forum.msg_id,forum.subject,forum.thread_id, ".
-		"forum.body,forum.date,forum.is_followup_to,forum.most_recent_date,forum.group_forum_id ".
-		"FROM forum,users ".
-		"WHERE forum.group_forum_id='$forum_id' ".
-		$thread_sql .
-		"AND users.user_id=forum.posted_by ".
-		"ORDER BY forum.most_recent_date DESC";
-
-		$result=db_query($sql,($max_rows+25),$offset);
-
-		echo db_error();
-
-		while ($row=db_fetch_array($result)) {
-			$msg_arr["$row[is_followup_to]"][]=$row;
-		}
-
-		$rows=count($msg_arr[0]);
+		$rows=count($msg_arr["0"]);
+		$avail_rows=$fmf->fetched_rows;
 		if ($rows > $max_rows) {
 			$rows=$max_rows;
 		}
+
 		$i=0;
 		while (($i < $rows) && ($total_rows < $max_rows)) {
-			$thread=$msg_arr["0"][$i];
-			
+
 			$total_rows++;
 			/* 
 				New slashdot-inspired nested threads,
 				showing all submessages and bodies
 			*/
-			$ret_val .= forum_show_a_nested_message ( $thread ).'<BR>';
+			$ret_val .= $fh->showNestedMessage ( $msg_arr["0"][$i] ).'<BR>';
 				
-			if ($thread['has_followups'] > 0) {
+			if ( $msg_arr["0"][$i]->hasFollowups() ) {
 				//show submessages for this message
-				$ret_val .= forum_show_nested_messages ( $msg_arr, $thread['msg_id'] );
+				$tempid=$msg_arr["0"][$i]->getID();
+//				echo "<P>before showNestedMessages() $tempid | ". count( $msg_arr["$tempid"] );
+				$ret_val .= $fh->showNestedMessages ( $msg_arr, $tempid );
 			}
 			$i++;
 		}
 
 	} else if ($style=='threaded') {
 
-		$sql="SELECT users.user_name,users.realname,forum.has_followups, ".
-		"users.user_id,forum.msg_id,forum.subject,forum.thread_id, ".
-		"forum.body,forum.date,forum.is_followup_to,forum.most_recent_date,forum.group_forum_id ".
-		"FROM forum,users ".
-		"WHERE forum.group_forum_id='$forum_id' AND users.user_id=forum.posted_by ".
-		"ORDER BY forum.most_recent_date DESC";
-		
-		$result=db_query($sql,($max_rows+25),$offset);
-
-		echo db_error();
-
-		while ($row=db_fetch_array($result)) {
-			$msg_arr["$row[is_followup_to]"][]=$row;
+		$msg_arr =& $fmf->nestArray($fmf->getThreaded());
+		if ($fmf->isError()) {
+			echo $fmf->getErrorMessage();
 		}
 
 		$title_arr=array();
@@ -263,68 +191,57 @@ if ($forum_id) {
 		$title_arr[]=$Language->getText('forum_forum','author');
 		$title_arr[]=$Language->getText('forum_forum','date');
 
-		$ret_val .= html_build_list_table_top ($title_arr);
+		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$rows=count($msg_arr[0]);
-			 
+		$avail_rows=$fmf->fetched_rows;
 		if ($rows > $max_rows) {
 			$rows=$max_rows;
 		}	   
 		$i=0;	 
 		while (($i < $rows) && ($total_rows < $max_rows)) {
-			$thread=$msg_arr["0"][$i];
+			$msg =& $msg_arr["0"][$i];
 			$total_rows++;
 
-			$ret_val .= '<TR BGCOLOR="'. html_get_alt_row_color($total_rows) .'"><TD><A HREF="/forum/message.php?msg_id='.
-				$thread['msg_id'].'">'.
-				html_image("images/msg.png","12","10",array("BORDER"=>"0"));
+			$ret_val .= '<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($total_rows) .'>
+				<TD><A HREF="/forum/message.php?msg_id='.$msg->getID().'">'.
+				html_image('ic/msg.png',"10","12",array("BORDER"=>"0"));
 			/*	  
 				See if this message is new or not
 				If so, highlite it in bold
 			*/
-			if (get_forum_saved_date($forum_id) < $thread['date']) {
-				$ret_val .= '<B>';
+			if ($f->getSavedDate() < $msg->getPostDate()) {
+				$bold_begin='<B>';
+				$bold_end='</B>';
+			} else {
+				$bold_begin='';
+				$bold_end='';
 			}
 			/*	  
 				show the subject and poster
 			*/
-			$ret_val .= $thread['subject'] .'</A></TD>'.
-				'<TD>'. $thread['user_name'] .'</TD>'.
-				'<TD>'.date($sys_datefmt,$thread['date']).'</TD></TR>';
+			$ret_val .= $bold_begin.$msg->getSubject() .$bold_end.'</A></TD>'.
+				'<TD>'. $msg->getPosterRealName() .'</TD>'.
+				'<TD>'. date($sys_datefmt,$msg->getPostDate()) .'</TD></TR>';
 				 
-			/*
-			 
-				Show subjects for submessages in this thread
-
-				show_submessages() is recursive
-
-			*/
-			if ($thread['has_followups'] > 0) {
-				$ret_val .= show_submessages($msg_arr,$thread['msg_id'],1);
+			if ($msg->hasFollowups()) {
+				$ret_val .= $fh->showSubmessages($msg_arr,$msg->getID(),1);
 			}
 			$i++;
 		}
 
-		$ret_val .= '</TABLE>';
+		$ret_val .= $GLOBALS['HTML']->listTableBottom();
 
-	} else if ($style=='flat') {
+	} else if ($style=='flat' || ($style=='ultimate' && $thread_id)) {
 
-		$sql="SELECT users.user_name,users.realname,forum.has_followups, ".
-		"users.user_id,forum.msg_id,forum.subject,forum.thread_id, ".
-		"forum.body,forum.date,forum.is_followup_to,forum.group_forum_id ".
-		"FROM forum,users ".
-		"WHERE forum.group_forum_id='$forum_id' AND users.user_id=forum.posted_by ".
-		"ORDER BY forum.msg_id DESC";
+		$msg_arr =& $fmf->getFlat($thread_id);
+		if ($fmf->isError()) {
+			echo $fmf->getErrorMessage();
+		}
+		$avail_rows=$fmf->fetched_rows;
 
-		$result=db_query($sql,($max_rows+1),$offset);
-
-		echo db_error();
-
-		$i=0;	 
-		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
-			$ret_val .= forum_show_a_nested_message ( $row ).'<BR>';
-
-			$i++;
+		for ($i=0; ($i<count($msg_arr) && ($i < $max_rows)); $i++) {
+			$ret_val .= $fh->showNestedMessage ( $msg_arr[$i] ).'<BR>';
 		}
 
 	} else {
@@ -344,6 +261,8 @@ if ($forum_id) {
 
 		$result=db_query($sql,($max_rows+1),$offset);
 
+		$avail_rows=db_numrows($result);
+
 		echo db_error();
 
 		$title_arr=array();
@@ -352,31 +271,35 @@ if ($forum_id) {
 		$title_arr[]=$Language->getText('forum_forum','replies');
 		$title_arr[]=$Language->getText('forum_forum','lastpost');
 	
-		$ret_val .= html_build_list_table_top ($title_arr);
+		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 		$i=0;
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 			$ret_val .= '
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/forum/forum.php?thread_id='.
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/forum/forum.php?thread_id='.
 				$row['thread_id'].'&forum_id='.$forum_id.'">'.
-				html_image("images/ic/cfolder15.png","15","13",array("border"=>"0")) . '  &nbsp; ';
+				html_image('ic/cfolder15.png',"15","13",array("border"=>"0")) . '  &nbsp; ';
 			/*	  
 					See if this message is new or not
 					If so, highlite it in bold
 			*/
-			if (get_forum_saved_date($forum_id) < $row['recent']) {
-					$ret_val .= '<B>';
+			if ($f->getSavedDate() < $row['recent']) {
+				$bold_begin='<B>';
+				$bold_end='</B>';
+			} else {
+				$bold_begin='';
+				$bold_end='';
 			}
 			/* 
 					show the subject and poster
 			*/
-			$ret_val .= $row['subject'] .'</A></TD>'.
+			$ret_val .= $bold_begin.$row['subject'] .$bold_end.'</A></TD>'.
 				'<TD>'. $row['user_name'] .'</TD>'.
 				'<TD>'. $row['followups'] .'</TD>'.
 				'<TD>'.date($sys_datefmt,$row['recent']).'</TD></TR>';
 			$i++;
 		}
 
-		$ret_val .= '</TABLE>';
+		$ret_val .= $GLOBALS['HTML']->listTableBottom();
 
 	}
 
@@ -388,18 +311,18 @@ if ($forum_id) {
 	if ($offset != 0) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE="3" STYLE="text-decoration: none"><B>
 		<A HREF="javascript:history.back()"><B>' .
-		html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
+		html_image('t2.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . ' Previous Messages</A></B></FONT>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
 
 	$ret_val .= '</TD><TD>&nbsp;</TD><TD ALIGN="RIGHT" WIDTH="50%">';
 
-	if (db_numrows($result) > $max_rows) {
+	if ($avail_rows > $max_rows) {
 		$ret_val .= '<FONT face="Arial, Helvetica" SIZE=3 STYLE="text-decoration: none"><B>
 		<A HREF="/forum/forum.php?max_rows='.$max_rows.'&style='.$style.'&offset='.($offset+$i).'&forum_id='.$forum_id.'">
 		<B>Next Messages ' .
-		html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
+		html_image('t.png',"15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . '</A>';
 	} else {
 		$ret_val .= '&nbsp;';
 	}
@@ -407,23 +330,17 @@ if ($forum_id) {
 	$ret_val .= '</TABLE>';
 
 	echo $ret_val;
-
+/*
 	echo '<P>&nbsp;<P>';
 
-	if ($thread_id) {
-		//
-		//	Viewing a particular thread in nested view
-		//
-		echo '<CENTER><h3>'.$Language->getText('forum_message', 'msg').'</H3></CENTER>';
-				show_post_form($forum_id,$thread_id,$msg_arr["0"][0]['msg_id'],$msg_arr["0"][0]['subject']);
-	} else {
+	if (!$thread_id) {
 		//
 		//	Viewing an entire message forum in a given format
 		//
 		echo '<CENTER><h3>'.$Language->getText('forum_message', 'thread').'</H3></CENTER>';
-		show_post_form($forum_id);
+		$fh->showPostForm();
 	}
-
+*/
 	forum_footer(array());
 
 } else {

@@ -1,0 +1,128 @@
+<html>
+<head>
+<title>
+Mini GForge/Sourceforge FAQ
+</title>
+</head>
+<body>
+
+<b>Question:</b> What is available?
+
+<blockquote>
+	<b>Answer:</b>
+	<BR>
+	You can have a look <a href=http://people.debian.org/~bayle/debian/Packages/>there</a> to see what's available
+</blockquote>
+
+<b>Question:</b> How to get the packages?
+
+<blockquote>
+	<b>Answer:</b>
+	<BR>
+	Add the following lines to you /etc/apt/sources.list
+<pre>
+deb http://people.debian.org/~bayle/debian binary-i386/
+deb-src http://people.debian.org/~bayle/debian source/
+</pre>
+	or
+<pre>
+deb http://christian.bayle.free.fr/debian binary-i386/
+deb-src http://christian.bayle.free.fr/debian source/
+</pre>
+	Then run:
+<pre>
+apt-get update
+</pre>
+	<BR>
+	You have now several possibilities:
+	<UL>
+		<LI>
+		You never installed any sourceforge or gforge package, just:
+<pre>
+apt-get install gforge
+</pre>
+		and answer carefully to all the questions, it is preferable to let the install touch your config files,
+		though it's not the default because of debian policy.
+		<LI>
+		You want old sourceforge (more tested than gforge, with themes and foundries, almost the classical 2.6.1 coming from the last known
+		cvs snapshot from VA.
+<pre>
+apt-get install sourceforge
+</pre>
+		<LI>
+		You want new gforge, but you have already sourceforge installed 
+		<BR>
+<pre>
+apt-get install gforge-sourceforge-transition
+</pre>
+		will dump your db and move your files, then 
+<pre>
+apt-get install gforge
+</pre>
+		will uninstall sourceforge and install gforge with the dumped data
+	
+	</UL>
+</blockquote>
+
+<b>Question:</b> How to get the gforge source code?
+
+<blockquote>
+	<b>Answer:</b>
+	<BR>
+	<UL>
+		<LI>
+		From debian distro
+	<BR>
+<pre>
+apt-get source gforge
+</pre>
+	<LI>
+	From CVS
+	<BR>
+<pre>
+cvs -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/debian-sf login
+</pre>
+	And just return for the password
+<pre>
+cvs -z3 -d:pserver:anoncvs@subversions.gnu.org:/cvsroot/debian-sf co -r Branch_gforge -d gforge-3.0 sourceforge
+</pre>
+</blockquote>
+
+<b>Question:</b> Where is the savannah project page?
+
+<blockquote>
+	<b>Answer:</b>
+	<BR>
+	<A href=http://savannah.nongnu.org/projects/debian-sf/>http://savannah.nongnu.org/projects/debian-sf/</A>
+</blockquote>
+
+<b>Question:</b> Where is the debian-sf home page?
+
+<blockquote>
+	<b>Answer:</b>
+	<BR>
+	<A href=http://www.nongnu.org/debian-sf/>http://www.nongnu.org/debian-sf/</A>
+</blockquote>
+
+<b>Question:</b> How do I build this packages?
+<blockquote>
+	<b>Answer:</b>
+	<BR>
+	go into gforge-3.0 dir and run
+<pre>
+debuild
+</pre>
+</blockquote>
+
+<b>Question:</b> Where do I find help?
+
+<blockquote>
+	<b>Answer:</b>
+	<BR>
+	For more info you can join me on IRC at irc.openprojects.net on #debian-sf (Sourceforge/GForge package) or #debian-devel-fr (French)
+	<BR>
+	Mailing lists are there: <A HREF=http://savannah.nongnu.org/mail/?group=debian-sf>http://savannah.nongnu.org/mail/?group=debian-sf</A>
+
+</blockquote>
+</body>
+</html>

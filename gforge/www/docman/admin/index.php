@@ -75,18 +75,16 @@ function main_page($group_id) {
 
 			</tr>
 			<tr>
+				<th>File:</th>
+				<td><a target="_blank" href="../display_doc.php/'.$row['docid'].'/'.$row['filename'].'">'.$row['title'].'</A>
+			</tr>
+			<tr>
 				<th>Language:</th>
 				<td>';
 
 		echo html_get_language_popup($Language,'language_id',$row['language_id']);
 
 		echo	'
-
-			<tr>
-			        <th>Document Information (in html format):</th>
-			        <td><textarea cols="60" rows="10" name="data">'.$row['data'].'</textarea></td>
-			</tr>
-
 			<tr>
 			        <th>Group doc belongs in:</th>
         			<td>';
@@ -183,7 +181,7 @@ function main_page($group_id) {
 			// data in DB stored in htmlspecialchars()-encoded form
 			$query = "update doc_data "
 				."set title = '".htmlspecialchars($title)."', "
-				."data = '".htmlspecialchars($data)."', "
+		//		."data = '".htmlspecialchars($data)."', "
 				."updatedate = '".time()."', "
 				."doc_group = '".$doc_group."', "
 				."stateid = '".$stateid."', "

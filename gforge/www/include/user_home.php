@@ -22,7 +22,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 <TABLE width=100% cellpadding=2 cellspacing=2 border=0><TR valign=top>
 <TD width=50%>
 
-<?php echo $HTML->box1_top("Personal Information"); ?>
+<?php echo $HTML->boxTop("Personal Information"); ?>
 <TR>
 	<TD>User ID: </TD>
 	<TD><B><?php print $user_id; ?></B> ( <A HREF="/people/viewprofile.php?user_id=<?php print $user_id; ?>"><B>Skills Profile</B></A> )</TD>
@@ -45,7 +45,14 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 		?>"><?php print $user->getUnixName(); ?> at users.<?php print $GLOBALS['sys_default_domain']; ?></A></B>
 	</TD>
 </TR>
-
+<?php if ($user->getJabberAddress()) { ?>
+<TR valign=top>
+	<TD>Jabber Addr: </TD>
+	<TD>
+	<A HREF="jabber:<?php print $user->getJabberAddress().'"><B>'.$user->getJabberAddress().'</B></A>'; ?>
+	</TD>
+</TR>
+<?php } ?>
 <TR>
 	<TD>
 	Site Member Since: 
@@ -53,7 +60,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	<TD><B><?php print date($sys_datefmt, $user->getAddDate()); ?></B>
 	<?php
 
-	echo $HTML->box1_middle('Peer Rating',false,false);
+	echo $HTML->boxMiddle('Peer Rating',false,false);
 
 	if ($user->usesRatings()) {
 		echo vote_show_user_rating($user_id);
@@ -61,7 +68,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 		echo 'User chose not to participate in peer rating';
 	}
 
-	echo $HTML->box1_middle('Diary And Notes');
+	echo $HTML->boxMiddle('Diary And Notes');
  
 	/*
 
@@ -75,7 +82,7 @@ $HTML->header(array('title'=>'Developer Profile','pagename'=>'users'));
 	<P>
 	<A HREF="/developer/diary.php?diary_user='. $user_id .'">View Diary & Notes</A>
 	<P>
-	<A HREF="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("images/ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
+	<A HREF="/developer/monitor.php?diary_user='. $user_id .'">'. html_image("ic/check.png",'15','13',array(),0) .'Monitor This Diary</A>';
 
 	?>
 </TD></TR>
@@ -108,7 +115,7 @@ if (db_numrows($res_cat) < 1) {
 	print "</ul>";
 } // end if groups
 
-$HTML->box1_bottom(); ?>
+echo $HTML->boxBottom(); ?>
 
 </TD>
 
@@ -146,7 +153,7 @@ echo $Language->getText('users','peerinfo1', $GLOBALS[sys_name]);
 
 <?php 
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	$u =& session_get_user();
 

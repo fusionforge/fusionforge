@@ -1,7 +1,7 @@
 <?
-	$sys_dbhost="{domain_name}";
-	$sys_dbname="sourceforge";
-	$sys_dbuser="sourceforge";
+	$sys_dbhost="{db_host}";
+	$sys_dbname="{db_name}";
+	$sys_dbuser="{db_user}";
 	$sys_dbpasswd="{db_password}";
 	$sys_ldap_passwd="{ldap_web_add_password}";
 ?>

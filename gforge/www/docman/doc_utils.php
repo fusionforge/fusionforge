@@ -51,11 +51,11 @@ function display_groups($group_id) {
 		$title_arr[]='Group Name';
 		$title_arr[]='Controls';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$i = 0;
 		while ($row = db_fetch_array($result)) {
-			$output = "<tr bgcolor=\"".html_get_alt_row_color($i)."\">".
+			$output = "<tr ".$GLOBALS['HTML']->boxGetAltRowStyle($i).">".
 				"<td>".$row['doc_group']."</td>\n".
 				"<td>".$row['groupname']."</td>\n".
 				"<td>[ <a href=\"index.php?mode=groupdelete&doc_group=".$row['doc_group']."&group_id=".$group_id."\">Delete</A> ] [ <a href=\"index.php?mode=groupedit&doc_group=".$row['doc_group']."&group_id=".$group_id."\">Change Name</a> ]\n</td>".
@@ -64,7 +64,9 @@ function display_groups($group_id) {
 			print "$output";
 			$i++;
 		}
-		echo '</table>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 		
 	docman_footer($params);
@@ -119,17 +121,19 @@ function display_docs($style,$group_id) {
 		$title_arr[]='Name';
 		$title_arr[]='Create Date';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$i = 0;
 		while ($row = db_fetch_array($result)) {
-			print 	"<tr bgcolor=\"".html_get_alt_row_color($i)."\">"
+			print 	"<tr ".$GLOBALS['HTML']->boxGetAltRowStyle($i).">"
 				."<td>".$row['docid']."</td>"
 				."<td><a href=\"index.php?docid=".$row['docid']."&mode=docedit&group_id=".$group_id."\">".$row['title']."</a></td>"
 				."<td>".date($sys_datefmt,$row['createdate'])."</td></tr>";
 			$i++;
-		}	
-		echo '</table>';
+		}
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}//end else
 
 } //end function display_docs($style)

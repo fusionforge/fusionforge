@@ -19,7 +19,7 @@ if ($group_id) {
 
 	pm_header(array('title'=>'Projects for '.group_getname($group_id),'pagename'=>'pm','sectionvals'=>group_getname($group_id)));
 
-	if (user_isloggedin() && user_ismember($group_id)) {
+	if (session_loggedin() && user_ismember($group_id)) {
 		$public_flag='0,1';
 	} else {
 		$public_flag='1';
@@ -48,7 +48,7 @@ if ($group_id) {
 		echo '
 		<A HREF="/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').
 		'&group_id='.$group_id.'&func=browse">' .
-		html_image("images/ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+		html_image("ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
 		db_result($result, $j, 'project_name').'</A><BR>'.
 		db_result($result, $j, 'description').'<P>';
 	}

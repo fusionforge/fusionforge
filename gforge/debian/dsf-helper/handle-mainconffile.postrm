@@ -1,7 +1,7 @@
 ###
 # Functions to handle the main Sourceforge confguration file
 ###
-mainconffile=/etc/sourceforge/sourceforge.conf
+mainconffile=/etc/gforge/gforge.conf
 # Delete the main configuration file
 delete_mainconffile () {
     rm -f $mainconffile

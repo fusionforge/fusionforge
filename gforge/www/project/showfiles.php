@@ -52,7 +52,7 @@ $title_arr[] = 'Date';
 $group_unix_name=group_getunixname($group_id);
 
    // print the header row
-//echo html_build_list_table_top($title_arr) . "\n";
+//echo $GLOBALS[HTML]->listTableTop($title_arr) . "\n";
 function col_heading($title)
 {
   global $HTML;
@@ -81,8 +81,11 @@ $proj_stats['packages'] = $num_packages;
 
    // Iterate and show the packages
 for ( $p = 0; $p < $num_packages; $p++ ) {
-	$cur_color = html_get_alt_row_color($p);
-	print '<TR bgcolor="'.$cur_color.'"><TD colspan="3"><h3>'.db_result($res_package,$p,'name').'</h3></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
+	$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
+	print '<TR '.$cur_style.'><TD colspan="3"><H3>'.db_result($res_package,$p,'name').'
+	<A HREF="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
+		html_image('ic/mail16w.png','20','20',array('alt'=>'Monitor This Package')) .
+		'</A></H3></TD><TD COLSPAN="4">&nbsp;</TD></TR>';
 
 	   // get the releases of the package
 	$sql	= "SELECT * FROM frs_release WHERE package_id='". db_result($res_package,$p,'package_id') . "' "
@@ -93,7 +96,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	$proj_stats['releases'] += $num_releases;
 
 	if ( !$res_release || $num_releases < 1 ) {
-		print '<TR bgcolor="'.$cur_color.'"><TD colspan="3">&nbsp;&nbsp;<i>No Releases</i></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
+		print '<TR '.$cur_style.'><TD colspan="3">&nbsp;&nbsp;<i>No Releases</i></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
 	} else {
 		   // iterate and show the releases of the package
 		for ( $r = 0; $r < $num_releases; $r++ ) {
@@ -101,11 +104,11 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 
 		    	// Highlight the release if one was chosen
 		      	if ( $release_id && $release_id == $package_release['release_id'] ) {
-		      		$bgcolor = "pink";
+		      		$bgstyle = "BGCOLOR=pink";
 		      	} else {
-		      		$bgcolor = $cur_color;
+		      		$bgstyle = $cur_style;
 		      	}
-			print "\t" . '<TR BGCOLOR="'. $bgcolor .'"><TD colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<B>'
+			print "\t" . '<TR '. $bgstyle .'><TD colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<B>'
 				. '<A HREF="shownotes.php?release_id='.$package_release['release_id'].'">'
 				. $package_release['name'] .'</A></B></TD><TD COLSPAN="4" align="middle">'
 				. '<b>'.date( 'Y-m-d H:i'/*$sys_datefmt*/, $package_release['release_date'] ) .'</b></TD></TR>'."\n";
@@ -130,14 +133,14 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 			$proj_stats['files'] += $num_files;
 
 			if ( !$res_file || $num_files < 1 ) {
-				print '<TR bgcolor="'.$bgcolor.'"><TD colspan="3"><dd><i>No Files</i></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
+				print '<TR '.$bgstyle.'><TD colspan="3"><dd><i>No Files</i></TD><TD COLSPAN="4">&nbsp;</TD></TR>'."\n";
 			} else {
 				   // now iterate and show the files in this release....
 				for ( $f = 0; $f < $num_files; $f++ ) {
 					$file_release = db_fetch_array( $res_file );
-					print "\t\t" . '<TR bgcolor="' . $bgcolor .'">'
+					print "\t\t" . '<TR ' . $bgstyle .'>'
 						. '<TD colspan=3><dd>'
-						. '<A HREF="http://'.$sys_download_host.'/'.$group_unix_name.'/'.$file_release['filename'].'">'
+						. '<A HREF="/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
 						. $file_release['filename'] .'</A></TD>'
 						. '<TD align="right">'. $file_release['file_size'] .' </TD>'
 						. '<TD align="right">'. ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0') .' </TD>'

@@ -16,11 +16,6 @@ require_once('pre.php');
 require_once('common/include/vars.php');
 require_once('www/include/trove.php');
 
-$HTML->header(array('title'=>'Software Map','pagename'=>'softwaremap'));
-
-echo'
-	<HR NoShade>';
-
 // assign default. 18 is 'topic'
 if (!$form_cat) {
 	$form_cat = $default_trove_cat;
@@ -40,6 +35,12 @@ if (db_numrows($res_trove_cat) < 1) {
 		'That Trove category does not exist: '.db_error()
 	);
 }
+
+$HTML->header(array('title'=>'Software Map','pagename'=>'softwaremap'));
+
+echo'
+	<HR NoShade>';
+
 $row_trove_cat = db_fetch_array($res_trove_cat);
 
 // #####################################
@@ -132,7 +133,7 @@ for ($i=0;$i<$folders_len;$i++) {
 	for ($sp=0;$sp<($i*2);$sp++) {
 		print " &nbsp; ";
 	}
-	echo html_image("images/ic/ofolder15.png",'15','13',array());
+	echo html_image("ic/ofolder15.png",'15','13',array());
 	print "&nbsp; ";
 	// no anchor for current cat
 	if ($folders_ids[$i] != $form_cat) {
@@ -170,7 +171,7 @@ while ($row_sub = db_fetch_array($res_sub)) {
 		print " &nbsp; ";
 	}
 	print ('<a href="trove_list.php?form_cat='.$row_sub['trove_cat_id'].$discrim_url.'">');
-	echo html_image("images/ic/cfolder15.png",'15','13',array());
+	echo html_image("ic/cfolder15.png",'15','13',array());
 	print ('&nbsp; '.$row_sub['fullname'].'</a> <I>('
 		.($row_sub['subprojects']?$row_sub['subprojects']:'0')
 		.' projects)</I><BR>');
@@ -193,12 +194,12 @@ while ($row_rootcat = db_fetch_array($res_rootcat)) {
 	print ('<BR>');
 	if (($row_rootcat['trove_cat_id'] == $row_trove_cat['root_parent'])
 		|| ($row_rootcat['trove_cat_id'] == $row_trove_cat['trove_cat_id'])) {
-		echo html_image('images/ic/ofolder15.png','15','13',array());
+		echo html_image('ic/ofolder15.png','15','13',array());
 		print ('&nbsp; <B>'.$row_rootcat['fullname']."</B>\n");
 	} else {
 		print ('<A href="/softwaremap/trove_list.php?form_cat='
 			.$row_rootcat['trove_cat_id'].$discrim_url.'">');
-		echo html_image('images/ic/cfolder15.png','15','13',array());
+		echo html_image('ic/cfolder15.png','15','13',array());
 		print ('&nbsp; '.$row_rootcat['fullname']."\n");
 		print ('</A>');
 	}

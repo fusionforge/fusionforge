@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	if ($type=='snippet') {
 		/*
 			See if the snippet exists first

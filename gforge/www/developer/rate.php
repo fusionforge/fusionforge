@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('vote_function.php');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	$me = session_get_user();
 	if (!$me->usesRatings()) {

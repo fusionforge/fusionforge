@@ -99,9 +99,9 @@ function html_dbimage($id, $args=0) {
  * @param		bool	DEPRECATED
  */
 function html_image($src,$width,$height,$args,$display=1) {
-	global $sys_images_url;
-	$s = ((session_issecure()) ? 's' : '' );
-	$return = ('<IMG src="http'. $s .':' . $sys_images_url . $src .'"');
+	global $sys_images_url,$sys_images_secure_url,$HTML;
+	$s = ((session_issecure()) ? $sys_images_secure_url : $sys_images_url );
+	$return = ('<IMG src="' . $s . $HTML->imgroot . $src .'"');
 	reset($args);
 	while(list($k,$v) = each($args)) {
 		$return .= ' '.$k.'="'.$v.'"';
@@ -155,50 +155,6 @@ function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
 	  $selected = str_replace ("\n", '', $r[0]);
 	}
 	return html_build_select_box_from_arrays ($TZs,$TZs,$title,$selected,false);
-}
-
-/**
- * html_build_list_table_top() - Takes an array of titles and builds the first row of a new table.
- *
- * @param		array	The array of titles
- * @param		array	The array of title links
- */
-function html_build_list_table_top ($title_arr,$links_arr=false) {
-	GLOBAL $HTML;
-
-	$return = '
-	<TABLE WIDTH="100%" BORDER="0" CELLSPACING="1" CELLPADDING="2">
-		<TR BGCOLOR="'. $HTML->COLOR_HTMLBOX_TITLE .'">';
-
-	$count=count($title_arr);
-	if ($links_arr) {
-		for ($i=0; $i<$count; $i++) {
-			$return .= '
-			<TD ALIGN="MIDDLE"><a class=sortbutton href="'.$links_arr[$i].'"><FONT COLOR="'.
-			$HTML->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title_arr[$i].'</B></FONT></A></TD>';
-		}
-	} else {
-		for ($i=0; $i<$count; $i++) {
-			$return .= '
-			<TD ALIGN="MIDDLE"><FONT COLOR="'.
-			$HTML->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title_arr[$i].'</B></FONT></TD>';
-		}
-	}
-	return $return.'</TR>';
-}
-
-/**
- * html_get_alt_row_color() - Get an alternating row color for tables.
- *
- * @param		int		Row number
- */
-function html_get_alt_row_color ($i) {
-	GLOBAL $HTML;
-	if ($i % 2 == 0) {
-		return '#FFFFFF';
-	} else {
-		return $HTML->COLOR_LTBACK1;
-	}
 }
 
 /**
@@ -385,6 +341,8 @@ function get_priority_color ($index) {
  * @param		int		Index
  */
 function html_get_priority_color ($index) {
+	global $bgpri;
+	
 	/* make sure that index is of appropriate type and range */
 	$index = (int)$index;
 	if ($index<1) {
@@ -392,7 +350,8 @@ function html_get_priority_color ($index) {
 	} else if ($index>9) {
 		$index=9;
 	}   
-	return "prior$index";
+	//return "prior$index";
+	return $bgpri[$index];
 }
 
 /**
@@ -521,7 +480,7 @@ function site_project_header($params) {
 
 	echo $HTML->header($params);
 	echo html_feedback_top($GLOBALS['feedback']);
-	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
+//	echo $HTML->project_tabs($params['toptab'],$params['group'],$params['tabtext']);
 }
 
 /**

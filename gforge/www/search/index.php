@@ -32,12 +32,6 @@ if (!$type_of_search) {
 	$type_of_search='soft';
 }
 
-// For freshmeat searh, redirect immediately
-if ($type_of_search == 'freshmeat') {
-	header('Location: http://freshmeat.net/search/?q='.urlencode($words));
-	exit();
-}
-
 require_once('pre.php');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 
@@ -67,7 +61,7 @@ if (!$rss) {
 
 	// show search box which will return results on
 	// this very page (default is to open new window)
-	menu_show_search_box(false, false);
+	echo $HTML->searchBox();
 }
 
 /*
@@ -161,7 +155,7 @@ if ($type_of_search == "soft") {
 	if ($rss) {
 		include_once('www/export/rss_utils.inc');
 		function callback($data_row) {
-                        // trove_cat_root=18 - Topic subtree
+						// trove_cat_root=18 - Topic subtree
 			// [CB] now $default_trove_cat defined in local.inc
 			$res = db_query("
 				SELECT trove_cat.fullpath 
@@ -200,9 +194,7 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'Group Name';
 		$title_arr[] = 'Description';
 
-		echo html_build_list_table_top($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			if (db_result($result, $i, 'type') == 2) {
@@ -211,13 +203,15 @@ if ($type_of_search == "soft") {
 				$what = 'projects';
 			}
 			
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/$what/"
+			print	"<TR ". $HTML->boxGetAltRowStyle($i)."><TD><A HREF=\"/$what/"
 				. db_result($result, $i, 'unix_group_name')."/\">"
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0")) 
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) 
 				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
 				. "<TD>".highlight_target_words($array,db_result($result,$i,'short_description'))."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == "people") {
@@ -257,16 +251,16 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'User Name';
 		$title_arr[] = 'Real Name';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
+			print	"<TR ". $HTML->boxGetAltRowStyle($i) ."><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
 				. "<TD>".db_result($result,$i,'realname')."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == 'forums' && $forum_id && $group_id) {
@@ -303,19 +297,19 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'Author';
 		$title_arr[] = 'Date';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/forum/message.php?msg_id="
+			print	"<TR ". $HTML->boxGetAltRowStyle($i) ."><TD><A HREF=\"/forum/message.php?msg_id="
 				. db_result($result, $i, "msg_id")."\">"
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0"))
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0"))
 				. db_result($result, $i, "subject")."</A></TD>"
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>".date($sys_datefmt,db_result($result,$i,"date"))."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == 'artifact' && $atid && $group_id) {
@@ -370,23 +364,94 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 		$title_arr[] = 'Submitted By';
 		$title_arr[] = 'Date';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
-			print	"\n<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\">
+			print	"\n<TR ". $HTML->boxGetAltRowStyle($i) .">
 				<td>".db_result($result, $i, "artifact_id")."</td>
 				<TD><A HREF=\"/tracker/?group_id=$group_id&atid="
 				. db_result($result, $i, "group_artifact_id") 
 				. "&func=detail&aid="
 				. db_result($result, $i, "artifact_id")."\"> "
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0"))
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0"))
 				. db_result($result, $i, "summary")."</A></TD>"
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>". date($sys_datefmt,db_result($result,$i,"open_date"))."</TD></TR>";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
+	}
+
+} else if ($type_of_search == "skill") {
+	/*
+		Query to find users with a particular skill
+	*/
+
+	// If multiple words, separate them and put LIKE in between
+	$array=explode(" ",$words);
+	$words1=implode($array,"%' $crit title ILIKE '%");
+	$words2=implode($array,"%' $crit keywords ILIKE '%");
+
+	$sql =	"SELECT * 
+		FROM skills_data,users, skills_data_types 
+		WHERE ((title ILIKE '%$words1%') OR (keywords ILIKE '%$words2%')) 
+		AND (skills_data.user_id=users.user_id) 
+		AND (skills_data.type=skills_data_types.type_id) ORDER BY finish DESC";
+	$result = db_query($sql);
+	$rows = $rows_returned = db_numrows($result);
+
+	if (!$result || $rows < 1) {
+		$no_rows = 1;
+		echo "<H2>No matches found for '$words'</H2>";
+		echo db_error();
+//		echo $sql;
+	} else {
+
+/*		if ( $rows_returned > 25) {
+			$rows = 25;
+		}
+*/
+		echo "<H3>Search results for <B><I>$words</I></B></H3><P>\n\n";
+
+		$title_arr = array();
+		$title_arr[] = 'Name';
+		$title_arr[] = 'Type';
+		$title_arr[] = 'Title';
+		$title_arr[] = 'Keywords';
+		$title_arr[] = 'From';
+		$title_arr[] = 'To';
+
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+		$monthArray = array();
+		for($i = 1; $i <= 12; $i++) {
+			array_push($monthArray,date("M", mktime(0,0,0,$i,10,1980)));
+		}		
+		
+		for ( $i = 0; $i < $rows; $i++ ) {
+
+		   $start = db_result($result, $i, 'start');
+		   $startY = substr($start, 0, 4);
+		   $startM = substr($start, 4, 2);
+		   
+		   $finish = db_result($result, $i, 'finish');
+		   $finishY = substr($finish, 0, 4);
+		   $finishM = substr($finish, 4, 2);
+				
+		   echo '<TR '.$HTML->boxGetAltRowStyle($i+1).'>';
+		   echo '<TD><A HREF="/users/'.db_result($result, $i, 'user_name').'/">'.
+				  db_result($result, $i, 'realname').'</a></TD>';
+		   echo '<TD>'.db_result($result, $i, 'type_name').'</TD>';
+		   echo '<TD>'.db_result($result, $i, 'title').'</TD>';
+		   echo '<TD>'.db_result($result, $i, 'keywords').'</TD>';
+		   echo '<TD>'.$monthArray[$startM-1].' '.$startY.'</TD>';
+		   echo '<TD>'.$monthArray[$finishM-1].' '.$finishY.'</TD>';
+		   echo '<TR>';
+		}
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else {
@@ -406,7 +471,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 	if ($offset != 0) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
 		echo "<A HREF=\"javascript:history.back()\"><B>" 
-			. html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) 
+			. html_image("t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) 
 			. " Previous Results </A></B></FONT>";
 	} else {
 		echo "&nbsp;";
@@ -421,7 +486,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 		if ( $type_of_search == 'forums' ) {
 			echo "&group_id=$group_id&forum_id=$forum_id";
 		}
-		echo "\"><B>Next Results " . html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . "</A></B></FONT>";
+		echo "\"><B>Next Results " . html_image("t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . "</A></B></FONT>";
 	} else {
 		echo "&nbsp;";
 	}

@@ -11,7 +11,7 @@ no locale ;
 delete @ENV{qw(IFS CDPATH ENV BASH_ENV PATH)};
 
 # Check access to secret
-require ("/etc/sourceforge/local.pl") ;
+require ("/etc/gforge/local.pl") ;
 unless ( (defined $sys_dbpasswd)
 	 and (defined $ENV{'sys_dbpasswd'})
 	 and ($sys_dbpasswd eq $ENV{'sys_dbpasswd'}) ) {
@@ -19,23 +19,23 @@ unless ( (defined $sys_dbpasswd)
 }
 
 # Initialize a constant
-$homedir_prefix = "/var/lib/sourceforge/chroot/home/users/" ;
+$homedir_prefix = "/var/lib/gforge/chroot/home/users/" ;
 
 # Check which mode we're in
 # Normal fileforge
-if ($0 eq "/usr/lib/sourceforge/bin/fileforge.pl") {
+if ($0 eq "/usr/lib/gforge/bin/fileforge.pl") {
     &fileforge ;
     exit 0 ;
 }
 # Temporary moving of files (for quick release system)
-if ($0 eq "/usr/lib/sourceforge/bin/tmpfilemove.pl") {
+if ($0 eq "/usr/lib/gforge/bin/tmpfilemove.pl") {
     &tmpfilemove ;
     exit 0 ;
 }
 # If we're not in one of these two modes, then fail
 print STDERR "You must call this script as one of:
-* /usr/lib/sourceforge/bin/fileforge.pl (normal execution)
-* /usr/lib/sourceforge/bin/tmpfilemove.pl (for QRS)" ;
+* /usr/lib/gforge/bin/fileforge.pl (normal execution)
+* /usr/lib/gforge/bin/tmpfilemove.pl (for QRS)" ;
 die "Unauthorized invocation '$0'" ;
 
 sub fileforge {
@@ -62,7 +62,7 @@ sub fileforge {
     $group = &wash_string ($dirty_group, "group") ;
 
     # Compute and test destination dir name
-    $dest_dir = "/var/lib/sourceforge/download/" ;
+    $dest_dir = "/var/lib/gforge/download/" ;
     $dest_dir .= $group ;
     $dest_dir .= "/" ;
     unless ( -d $dest_dir ) {

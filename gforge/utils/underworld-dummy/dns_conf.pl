@@ -5,7 +5,7 @@
 use DBI;
 use POSIX qw(strftime);
 
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 &db_connect;
 

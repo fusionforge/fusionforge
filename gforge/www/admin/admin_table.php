@@ -216,7 +216,7 @@ function admin_table_show($table, $unit, $primary_key) {
 		echo '</TR>';
 
                 for ($j = 0; $j < $rows; $j++) {
-			echo '<TR BGCOLOR="'. html_get_alt_row_color($j) .'">';
+			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '">';
 
                         $id = db_result($result,$j,0);
                         echo '<TD><A HREF="'.$PHP_SELF.'?function=edit&id='.$id.'">[edit]</A>';

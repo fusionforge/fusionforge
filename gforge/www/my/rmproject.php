@@ -16,7 +16,7 @@
 
 require_once('pre.php');
 
-if (!user_isloggedin()) {
+if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 

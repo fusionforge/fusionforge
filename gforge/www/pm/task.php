@@ -20,7 +20,7 @@ if ($group_id && $group_project_id) {
 
 	$project=&group_get_object($group_id);
 
-	if (user_isloggedin()) {
+	if (session_loggedin()) {
 		$perm =& $project->getPermission( session_get_user() );
 	}
 
@@ -29,7 +29,7 @@ if ($group_id && $group_project_id) {
 	*/
 
 	//can this person view these tasks? they may have hacked past the /pm/index.php page
-	if (user_isloggedin() && $perm->isMember()) {
+	if (session_loggedin() && $perm->isMember()) {
 		$public_flag='0,1';
 	} else {
 		$public_flag='1';
@@ -54,7 +54,7 @@ if ($group_id && $group_project_id) {
 	switch ($func) {
 
 		case 'addtask' : {
-			if (user_isloggedin() && $perm->isPMAdmin()) {
+			if (session_loggedin() && $perm->isPMAdmin()) {
 				include '../pm/add_task.php';
 			} else {
 				exit_permission_denied();
@@ -63,9 +63,10 @@ if ($group_id && $group_project_id) {
 		}
 
 		case 'postaddtask' : {
-			if (user_isloggedin() && $perm->isPMAdmin()) {
+			if (session_loggedin() && $perm->isPMAdmin()) {
 				if (pm_data_create_task ($group_project_id,$start_month,$start_day,$start_year,
-					$end_month,$end_day,$end_year,$summary,$details,$percent_complete,
+					$start_hour,$start_minute,$end_month,$end_day,$end_year,
+					$end_hour,$end_minute,$summary,$details,$percent_complete,
 					$priority,$hours,$assigned_to,$dependent_on)) {
 					$feedback='Task Created Successfully';
 					include '../pm/browse_task.php';
@@ -79,11 +80,11 @@ if ($group_id && $group_project_id) {
 		}
 
 		case 'postmodtask' : {
-			if (user_isloggedin() && $perm->isPMAdmin()) {
+			if (session_loggedin() && $perm->isPMAdmin()) {
 				if (pm_data_update_task ($group_project_id,$project_task_id,$start_month,$start_day,
-					$start_year,$end_month,$end_day,$end_year,$summary,$details,
-					$percent_complete,$priority,$hours,$status_id,$assigned_to,
-					$dependent_on,$new_group_project_id,$group_id)) {
+					$start_year,$start_hour,$start_minute,$end_month,$end_day,$end_year,$end_hour,
+					$end_minute,$summary,$details,$percent_complete,$priority,$hours,$status_id,
+					$assigned_to,$dependent_on,$new_group_project_id,$group_id)) {
 					$feedback='Task Updated Successfully';
 					include '../pm/browse_task.php';
 				} else {
@@ -101,7 +102,7 @@ if ($group_id && $group_project_id) {
 		}
 
 		case 'detailtask' : {
-			if (user_isloggedin() && $perm->isPMAdmin()) {
+			if (session_loggedin() && $perm->isPMAdmin()) {
 				include '../pm/mod_task.php';
 			} else {
 				include '../pm/detail_task.php';

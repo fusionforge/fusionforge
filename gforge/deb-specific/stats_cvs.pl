@@ -18,8 +18,8 @@ use POSIX qw( strftime );
 
 # For the database
 use DBI;
-require("/usr/lib/sourceforge/lib/include.pl");
-my $cvsroot = "/var/lib/sourceforge/chroot/cvsroot";
+require("/usr/lib/gforge/lib/include.pl");
+my $cvsroot = "/var/lib/gforge/chroot/cvsroot";
 my $verbose = 1;
 $|=0 if $verbose;
 $|++;
