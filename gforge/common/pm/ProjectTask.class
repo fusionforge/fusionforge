@@ -612,8 +612,10 @@ class ProjectTask extends Error {
 		if ($this->getEndDate() != $end_date)
 			{ $this->addHistory ('end_date',$this->getEndDate());  }
 		if (!$this->setDependentOn($depend_arr)) {
+			db_rollback();
 			return false;
 		} elseif (!$this->setAssignedTo($assigned_arr)) {
+			db_rollback();
 			return false;
 		} else {
 			$sql="UPDATE project_task SET
