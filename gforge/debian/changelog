@@ -8,8 +8,10 @@ sourceforge (2.6-0+7+) unstable; urgency=low
   * [Roland] [From 2.5] Added man page for sourceforge-config (from a
     Docbook SGML file).  This fixes a lintian error.
   * [Christian] Added ldap support for chrooted anonymous cvs 
+  * [Roland] Minor typo-fixes here and there, and a few cosmetic changes.
+  * [Roland] [From 2.5] Fixed unix_box entries.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Fri,  1 Mar 2002 13:55:12 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  7 Mar 2002 12:10:11 +0100
 
 sourceforge (2.6-0+7) unstable; urgency=low
 
