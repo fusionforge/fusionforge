@@ -35,11 +35,11 @@ propose_update () {
 	# Old file and new file are identical
 	rm -f ${file}.sourceforge-new
     else
-	db_fset sourceforge/internal/replace_file seen false
-	db_subst sourceforge/internal/replace_file file $file
-	db_input high sourceforge/internal/replace_file || true
+	db_fset sourceforge/internal/replace_file_install seen false
+	db_subst sourceforge/internal/replace_file_install file $file
+	db_input high sourceforge/internal/replace_file_install || true
 	db_go || true
-	db_get sourceforge/internal/replace_file || true
+	db_get sourceforge/internal/replace_file_install || true
 	case "$RET" in
 	    "true")
 		echo >&2 "Replacing file $file with changed version"
@@ -75,13 +75,23 @@ case "$1" in
         done
 	/usr/sbin/sourceforge-config
     	
-        # Setup our Apache files
+        # Patch Apache configuration files
 	/usr/lib/sourceforge/bin/install-apache.sh configure-files
 
 	propose_update /etc/apache/httpd.conf
 	propose_update /etc/php4/apache/php.ini
 	propose_update /etc/php4/cgi/php.ini
 
+        # Patch DB configuration files
+	/usr/lib/sourceforge/bin/install-db.sh configure-files
+
+	propose_update /etc/postgresql/pg_hba.conf
+	
+	# Patch Bind configuration files
+	/usr/lib/sourceforge/bin/install-dns.sh configure-files
+
+	propose_update /etc/bind/named.conf
+	
 	# Clean debconf after ourselves
 	db_stop
 

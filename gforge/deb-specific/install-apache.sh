@@ -6,7 +6,6 @@
 # Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
 
 set -e
-set -x
 
 if [ $(id -u) != 0 ] ; then
     echo "You must be root to run this, please enter passwd"
@@ -57,19 +56,22 @@ case "$1" in
 	invoke-rc.d apache restart
 	;;
 
-    purge)
-  	if grep -q "Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
+    purge-files)
+	cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.sourceforge-new
+  	if grep -q "Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf.sourceforge-new ; then
 	    pattern=$(basename $0)
 	    tmp=$(mktemp /tmp/$pattern.XXXXXX)
-	    grep -v "Include /etc/sourceforge/sf-httpd.conf\|### Next line inserted by Sourceforge install" /etc/apache/httpd.conf > $tmp
-	    cat $tmp > /etc/apache/httpd.conf
+	    grep -v "Include /etc/sourceforge/sf-httpd.conf\|### Next line inserted by Sourceforge install" /etc/apache/httpd.conf.sourceforge-new > $tmp
+	    cat $tmp > /etc/apache/httpd.conf.sourceforge-new
 	    rm -f $tmp
-	    invoke-rc.d apache restart
   	fi
+	;;
+    purge)
+	invoke-rc.d apache restart
 	;;
 
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|configure-files|purge|purge-files}"
 	exit 1
 	;;
 	

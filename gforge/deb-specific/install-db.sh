@@ -19,6 +19,29 @@ case "$target" in
 	echo "Usage: $0 {configure|purge}"
 	exit 1
 	;;
+    configure-files)
+	# Tell PostgreSQL to let us use the database
+	db_passwd=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbpasswd\n";')
+	ip_address=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbhost\n";')
+	pattern=$(basename $0).XXXXXX
+	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.sourceforge-new
+	if grep -q "^host.*sourceforge_passwd$" /etc/postgresql/pg_hba.conf.sourceforge-new ; then
+	    perl -pi -e "s/^host.*sourceforge_passwd$/host  sourceforge        $ip_address     255.255.255.255           password sourceforge_passwd/" /etc/postgresql/pg_hba.conf.sourceforge-new
+	else
+	    cur=$(mktemp /tmp/$pattern)
+	    echo "### Next line inserted by Sourceforge install" > $cur
+	    echo "host  sourceforge        $ip_address     255.255.255.255           password sourceforge_passwd" >> $cur
+	    cat /etc/postgresql/pg_hba.conf.sourceforge-new >> $cur
+	    cat $cur > /etc/postgresql/pg_hba.conf.sourceforge-new
+	    rm -f $cur
+	fi
+	su postgres -c "touch /var/lib/postgres/data/sourceforge_passwd"
+	su postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/sourceforge_passwd > /dev/null" <<-EOF
+sourceforge
+$db_passwd
+$db_passwd
+EOF
+	;;
     configure)
 	# Create the appropriate database user
 	pattern=$(basename $0).XXXXXX
@@ -55,26 +78,6 @@ case "$target" in
 	fi
 	rm -f $tmp1 $tmp2
 	
-	# Tell PostgreSQL to let us use the database
-	db_passwd=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbpasswd\n";')
-	ip_address=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbhost\n";')
-	su postgres -c "touch /var/lib/postgres/data/sourceforge_passwd"
-	su postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/sourceforge_passwd > /dev/null" <<-EOF
-sourceforge
-$db_passwd
-$db_passwd
-EOF
-	if grep -q "^host.*sourceforge_passwd$" /etc/postgresql/pg_hba.conf ; then
-	    perl -pi -e "s/^host.*sourceforge_passwd$/host  sourceforge        $ip_address     255.255.255.255           password sourceforge_passwd/" /etc/postgresql/pg_hba.conf
-	else
-	    cur=$(mktemp /tmp/$pattern)
-	    echo "### Next line inserted by Sourceforge install" > $cur
-	    echo "host  sourceforge        $ip_address     255.255.255.255           password sourceforge_passwd" >> $cur
-	    cat /etc/postgresql/pg_hba.conf >> $cur
-	    cat $cur > /etc/postgresql/pg_hba.conf
-	    rm -f $cur
-	fi
-
 	# Install/upgrade the database contents (tables and data)
 	# Dirty scripting for testing purpose
 #	psql -U sourceforge -h $ip_address sourceforge -f /usr/lib/sourceforge/db/sf-2.6-complete.sql <<-FIN
@@ -82,12 +85,15 @@ EOF
 #FIN
 	/usr/lib/sourceforge/bin/db-upgrade26.pl 2>&1 | grep -v ^NOTICE:
 	;;
-    purge)
-        if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf
+    purge-files)
+	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.sourceforge-new
+        if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf.sourceforge-new
         then
-                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf
-                perl -pi -e "s/^host.*sourceforge_passwd\n//" /etc/postgresql/pg_hba.conf
+                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf.sourceforge-new
+                perl -pi -e "s/^host.*sourceforge_passwd\n//" /etc/postgresql/pg_hba.conf.sourceforge-new
         fi
+	;;
+    purge)
 	su postgres -c "dropdb sourceforge" &> /dev/null || true
 	su postgres -c "dropuser sourceforge" &> /dev/null || true
 	rm -f /var/lib/postgres/data/sourceforge_passwd

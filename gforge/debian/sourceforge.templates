@@ -237,12 +237,26 @@ Description-fr: Sourceforge a besoin d'une configuration PAM-LDAP correcte
  passe pour le compte administrateur de libpam-ldap et pour le mot de
  passe LDAP de Sourceforge.
 
-Template: sourceforge/internal/replace_file
+Template: sourceforge/internal/replace_file_install
 Type: boolean
 Default: false
 Description: Do you want ${file} to be updated?
  In order for Sourceforge to fully work, some changes must be made to
  the ${file} file.
+ .
+ I can either do them for you (and backup the current version in
+ ${file}.sourceforge-old), or write the changes to another file
+ (${file}.sourceforge-new) and let you propagate the changes to
+ ${file} yourself.
+ .
+ Shall I modify the ${file} automatically?
+
+Template: sourceforge/internal/replace_file_remove
+Type: boolean
+Default: false
+Description: Do you want ${file} to be updated?
+ In order for Sourceforge to be fully deinstalled, some changes must
+ be made to the ${file} file.
  .
  I can either do them for you (and backup the current version in
  ${file}.sourceforge-old), or write the changes to another file

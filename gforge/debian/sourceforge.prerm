@@ -19,9 +19,57 @@ if [ \( "$1" = "upgrade" -o "$1" = "remove" \) -a -L /usr/doc/pkg ]; then
     rm -f /usr/doc/pkg
 fi
 
+replace_file () {
+    file=$1
+    cp $file ${file}.sourceforge-old
+    mv ${file}.sourceforge-new $file
+}
+
+propose_update () {
+    file=$1
+    if diff -q ${file} ${file}.sourceforge-new &> /dev/null ; then
+	# Old file and new file are identical
+	rm -f ${file}.sourceforge-new
+    else
+	db_fset sourceforge/internal/replace_file_remove seen false
+	db_subst sourceforge/internal/replace_file_remove file $file
+	db_input high sourceforge/internal/replace_file_remove || true
+	db_go || true
+	db_get sourceforge/internal/replace_file_remove || true
+	case "$RET" in
+	    "true")
+		echo >&2 "Replacing file $file with changed version"
+		replace_file $file
+		;;
+	    "false")
+		# Do nothing
+		;;
+	esac
+    fi
+}
+
 case "$1" in
     remove)
-#       install-info --quiet --remove /usr/info/sourceforge.info.gz
+	. /usr/share/debconf/confmodule
+
+        # Unpatch Apache configuration files
+	/usr/lib/sourceforge/bin/install-apache.sh purge-files
+
+	propose_update /etc/apache/httpd.conf
+
+        # Unpatch DB configuration files
+	/usr/lib/sourceforge/bin/install-db.sh purge-files
+
+	propose_update /etc/postgresql/pg_hba.conf
+	
+	# Unpatch Bind configuration files
+	/usr/lib/sourceforge/bin/install-dns.sh purge-files
+
+	propose_update /etc/bind/named.conf
+	
+	# Clean debconf after ourselves
+	db_stop
+
         # FTP config removal
 	/usr/lib/sourceforge/bin/install-ftp.sh purge
 
