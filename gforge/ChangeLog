@@ -1,7 +1,9 @@
 2004-09-12  Guillaume Smet <guillaume-gforge@smet.org>
 
-	* Applied [#845] by Florent Guilleux
-	* Adapted [#866] by Matt Hope for mainstream
+	* applied [#845] by Florent Guilleux
+	* applied [#866] Comment in generated .ssh/authorized_keys by Matt Hope
+	and adapted it for mainstream
+	* applied [#883"] sys_show_contact_info by Rob Lanphier
 
 2004-09-09  Francisco Gimeno <kikov@kikov.org>
 
