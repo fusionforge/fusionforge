@@ -33,14 +33,14 @@
 
 	# GForge without the DNS delegation
 	# Project home pages are in a virtual /www/<group> location
-	AliasMatch ^/www/([^/]*)/(.*) {gforge_chroot}{groupdir}/$1/htdocs/$2
-	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {gforge_chroot}{groupdir}/$1/cgi-bin/$2
-	<Directory {gforge_chroot}{groupdir}>
-		Options Indexes FollowSymlinks
-		AllowOverride All
-		order allow,deny
-		allow from all
-	</Directory>
+#	AliasMatch ^/www/([^/]*)/(.*) {gforge_chroot}{groupdir}/$1/htdocs/$2
+#	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {gforge_chroot}{groupdir}/$1/cgi-bin/$2
+#	<Directory {gforge_chroot}{groupdir}>
+#		Options Indexes FollowSymlinks
+#		AllowOverride All
+#		order allow,deny
+#		allow from all
+#	</Directory>
 
 	# Ensure that we don't try to use SSL on SSL Servers
 	<IfModule apache_ssl.c>
