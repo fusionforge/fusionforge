@@ -208,22 +208,18 @@ class Permission extends Error {
 	 *  @return	boolean	is_super_user.
 	 */
 	function isSuperUser() {
-	        if (isset($this->is_site_admin)) {
-	        	return $this->is_site_admin;
-	        }
+		if (isset($this->is_site_admin)) {
+			return $this->is_site_admin;
+		}
 
-		$res = db_query("SELECT * FROM user_group
+		$res = db_query("SELECT count(*) FROM user_group
 			WHERE user_id='". $this->User->getID() ."'
 			AND group_id='1'
 			AND admin_flags='A'");
-
-		if (!$res || db_numrows($res) < 1) {
-			$this->is_site_admin = false;
-		} else {
-			$this->is_site_admin = true;
-		}
-
+		$row_count = db_fetch_array($result);
+		$this->is_site_admin = $res && $row_count['count'] > 0;
 		db_free_result($res);
+
 		return $this->is_site_admin;
 	}
 
