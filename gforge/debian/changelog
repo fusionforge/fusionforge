@@ -1,4 +1,4 @@
-gforge (3.1-14+1) unstable; urgency=low
+gforge (3.1-15) unstable; urgency=low
 
   * [Roland] Fixed override disparity.
   * [Roland] Fixed redirection of createuser's output (used to be to
@@ -6,7 +6,7 @@ gforge (3.1-14+1) unstable; urgency=low
   * [Roland] Fixed install-db.sh, which would blindly overwrite lines in
     pg_hba.conf which it wasn't entitled to overwrite.
 
- -- Roland Mas <lolando@debian.org>  Thu,  1 Apr 2004 14:07:26 +0200
+ -- Roland Mas <lolando@debian.org>  Thu,  1 Apr 2004 23:18:01 +0200
 
 gforge (3.1-14) unstable; urgency=low
 
