@@ -30,6 +30,8 @@ sub drop_tables {
 	$dbh->do( $sql );
 	$sql = "DROP TABLE deb_cvs_group";
 	$dbh->do( $sql );
+	$sql = "DROP TABLE deb_cvs_group_user";
+	$dbh->do( $sql );
 }
 
 sub create_dump_table {
@@ -102,49 +104,49 @@ sub parse_history {
 #R               Commit (the removal of a file)
 #E               Export
 	$sql = "
-	CREATE TABLE deb_cvs_group AS
-        	SELECT agg.cvsgroup,agg.year,agg.month,agg.day,agg.total AS total,m.modified AS modified,a.added AS added,o.others AS others
+	CREATE TABLE deb_cvs_group_user AS
+        	SELECT agg.cvsgroup,agg.cvsuser,agg.year,agg.month,agg.day,agg.total AS total,m.modified AS modified,a.added AS added,o.others AS others
         	FROM (
-        		SELECT cvsgroup,year,month,day,COUNT(*) AS total
+        		SELECT cvsgroup,cvsuser,year,month,day,COUNT(*) AS total
         		FROM deb_cvs_dump
-        		GROUP BY year,month,day,cvsgroup
+        		GROUP BY year,month,day,cvsgroup,cvsuser
 		) agg
 		LEFT JOIN (
-        	SELECT cvsgroup,year,month,day,COUNT(*) AS modified
+        	SELECT cvsgroup,cvsuser,year,month,day,COUNT(*) AS modified
         	FROM deb_cvs_dump
 		WHERE type='M'
-        	GROUP BY year,month,day,cvsgroup
-		) m USING (cvsgroup,year,month,day)
+        	GROUP BY year,month,day,cvsgroup,cvsuser
+		) m USING (cvsgroup,cvsuser,year,month,day)
 		LEFT JOIN (
-        	SELECT cvsgroup,year,month,day,COUNT(*) AS added
+        	SELECT cvsgroup,cvsuser,year,month,day,COUNT(*) AS added
         	FROM deb_cvs_dump
 		WHERE type='A'
-        	GROUP BY year,month,day,cvsgroup
-		) a USING (cvsgroup,year,month,day)
+        	GROUP BY year,month,day,cvsgroup,cvsuser
+		) a USING (cvsgroup,cvsuser,year,month,day)
 		LEFT JOIN (
-        	SELECT cvsgroup,year,month,day,COUNT(*) AS others
+        	SELECT cvsgroup,cvsuser,year,month,day,COUNT(*) AS others
         	FROM deb_cvs_dump
 		WHERE type!='A' and type!='M' 
-        	GROUP BY year,month,day,cvsgroup
-		) o USING (cvsgroup,year,month,day)
+        	GROUP BY year,month,day,cvsgroup,cvsuser
+		) o USING (cvsgroup,cvsuser,year,month,day)
 	";
 	$dbh->do( $sql );
 }
 
 sub print_stats {
 	my ($sql,$res,$temp);
-	$sql = "SELECT * FROM deb_cvs_group order by year, month, day";
+	$sql = "SELECT * FROM deb_cvs_group_user order by year, month, day";
 	$res = $dbh->prepare($sql);
 	$res->execute();
-	while ( my ($cvsgroup, $year, $month, $day, $total, $modified, $added, $others) = $res->fetchrow()) {
-		print "$cvsgroup $year $month $day $total=$modified+$added+$others\n";
+	while ( my ($cvsgroup, $cvsuser, $year, $month, $day, $total, $modified, $added, $others) = $res->fetchrow()) {
+		print "$cvsgroup $cvsuser $year $month $day $total=$modified+$added+$others\n";
 	}
 	print "-----------------------------------------------------\n";
-	$sql = "SELECT cvsgroup, SUM(modified), SUM(added) FROM deb_cvs_group group by cvsgroup";
+	$sql = "SELECT cvsgroup, cvsuser, SUM(modified), SUM(added) FROM deb_cvs_group_user group by cvsgroup,cvsuser";
 	$res = $dbh->prepare($sql);
 	$res->execute();
-	while ( my ($cvsgroup, $modified, $added) = $res->fetchrow()) {
-		print "$cvsgroup $modified $added\n";
+	while ( my ($cvsgroup, $cvsuser, $modified, $added) = $res->fetchrow()) {
+		print "$cvsgroup $cvsuser $modified $added\n";
 	}
 	print "-----------------------------------------------------\n";
 }
