@@ -1,8 +1,11 @@
 sourceforge (2.6-0+14+plugin+) experimental; urgency=low
 
-  * [Christian] Applied kikov task manager patch 
+  * [Christian] Applied kikov task manager patch
+  * [Roland] Implemented the PluginManager class, as well as a sample
+    Plugin class that can be subclassed by plugins.  These two classes
+    will be used for the hooks subsystem.
 
- -- Christian Bayle <bayle@debian.org>  Mon,  2 Dec 2002 14:16:33 +0100
+ -- Roland Mas <lolando@debian.org>  Wed,  4 Dec 2002 23:21:00 +0100
 
 sourceforge (2.6-0+14+plugins) experimental; urgency=low
 

@@ -98,6 +98,10 @@ require_once('www/include/menu.php');
 //theme functions like get_themename, etc
 require_once('www/include/theme.php');
 
+// Plugins subsystem
+require_once('common/include/Plugin.class') ;
+require_once('common/include/PluginManager.class') ;
+
 //$sys_datefmt = "Y-m-d H:i";
 
 // #### Connect to db

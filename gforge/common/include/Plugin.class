@@ -1,0 +1,37 @@
+<?php
+/**
+ *	Plugin object
+ *
+ *	Provides an base class for a plugin
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * This file is copyright (c) Roland Mas <lolando@debian.org>, 2002
+ *
+ * $Id$
+ *
+ */
+
+class Plugin extends Error {
+	var $plugin_name ;
+	var $hooks ;
+
+	function Plugin () {
+		$this->Error() ;
+		$this->hooks = array () ;
+	}
+
+	function GetHooks () {
+		return $this->hooks ;
+	}
+
+	function CallHook ($hookname, $params) {
+		return true ;
+	}
+}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

@@ -408,16 +408,14 @@ class Layout extends Error {
 	 * @param	array	Header parameters array
 	 */
 	function user_menu($params){
-		global $Language, $G_SESSION;
+		global $Language, $G_SESSION ;
 		echo '
 		<P>
 		<A HREF="/my/">' . $Language->getText('menu','my_personal_page')
 			. '</A> | <A HREF="/my/diary.php">' . $Language->getText('menu', 'diary_notes')
 			. '</A> | <A HREF="/account/">' . $Language->getText('menu', 'account_maintenance')
 			. '</A>' ;
-		if ($G_SESSION->usesPlugin("helloworld")) {
-			echo ' | <A HREF="/plugins/helloworld/index.php?user_id=' . $G_SESSION->getId() . '">Hello world</A>' ;
-		}
+		plugin_manager_get_object()->RunHooks ("usermenu", false) ;
 		'<P>';
 	}
 
