@@ -81,6 +81,34 @@ if ($sys_use_forum) {
 	}
 }
 
+
+//
+//	Set up the tracker aliases
+//
+if ($sys_use_tracker) {
+	$restracker=db_query("SELECT groups.unix_group_name,lower(agl.name) AS tracker_name,group_artifact_id
+		FROM artifact_group_list agl, groups
+		WHERE agl.group_id=groups.group_id
+		AND groups.status='A'");
+	for ($forres=0; $forres<db_numrows($restracker); $forres++) {
+		// first we remove non-alphanumeric characters (spaces and other stuff)
+		$formatted_tracker_name = preg_replace('/[^[:alnum:]]/','',db_result($restracker,$forres,'tracker_name'));
+		$formatted_tracker_name = strtolower($formatted_tracker_name);
+		
+		$trackername=strtolower(db_result($restracker,$forres,'unix_group_name'))."-".$formatted_tracker_name;
+		// enclose tracker name with quotes if it has whitespaces
+		if (strpos($trackername, ' ') !== false) {
+			$trackername = '"'.$trackername.'"';
+		}
+		if ($def_aliases[$trackername]) {
+			//alias is already taken - perhaps by default
+		} else {
+			$def_aliases[$trackername]=1;
+			fwrite($fp,"$trackername:	|\"".CRON_PATH."/tracker_gateway.php ".db_result($restracker,$forres,'unix_group_name')." ".strtolower(db_result($restracker,$forres,'group_artifact_id'))."\"\n");
+		}
+	}
+}
+
 if ($sys_use_mail) {
 	//
 	//	Read in the mailman aliases

@@ -53,6 +53,12 @@ class ArtifactTypeHtml extends ArtifactType {
 		if (session_loggedin()) {
 			$labels[] = $Language->getText('tracker_artifacttype','reporting');
 			$links[]  = '/tracker/reporting/?group_id='.$group_id.'&atid='. $this->getID();
+			if ($this->isMonitoring()) {
+				$labels[] = $Language->getText('tracker_monitor','monitorstop');
+			} else {
+				$labels[] = $Language->getText('tracker_monitor','monitor');
+			}
+			$links[]  = '/tracker/?group_id='.$group_id.'&atid='. $this->getID().'&func=monitor';
 		}
 		$labels[] = $Language->getText('tracker_artifacttype','admin');
 		$links[]  = '/tracker/admin/?group_id='.$group_id.'&atid='.$this->getID();

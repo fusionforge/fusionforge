@@ -1734,6 +1734,8 @@ project_admin_qrs	exceed_file_size	The uploaded file exceeds the maximum file si
 project_admin_qrs	partial_file	The uploaded file was only partially uploaded.
 project_admin_qrs	unknown_file_error	Unknown file upload error.
 project_admin_qrs	maximum_file_size	Maximum upload file size:
+project_admin_qrs	notify_list	Notify list
+project_admin_qrs	separate_emails	Separate e-mails with a comma (,)
 project_admin_rmuser	cancel	Cancel
 project_admin_rmuser	cannot_remove_admin	You cannot remove $1 admin
 project_admin_rmuser	info	<h3>Removing Developer from $1</h3><p>You are about to remove developer from the $1. Please confirm your action:</p>
@@ -2870,6 +2872,10 @@ tracker_artifact	error_summary_required	Artifact: Message Summary Is Required
 tracker_artifact	error_valid_email_required	SetMonitor::Valid Email Address Required
 tracker_artifact	logged_in_no	Logged In: NO
 tracker_artifact	logged_in_yes	Logged In: YES
+tracker_monitor	monitoring_activated	Now Monitoring
+tracker_monitor	monitoring_deactivated	Monitoring Deactivated
+tracker_monitor	monitor	Monitor
+tracker_monitor	monitorstop	Stop Monitor
 tracker_artifact	monitoring_activated	Now Monitoring
 tracker_artifact	monitoring_deactivated	Monitoring Deactivated
 tracker_artifact	nothing_changed	Nothing Changed - Update Cancelled
@@ -2894,6 +2900,7 @@ tracker_artifacttype	none	None
 tracker_artifacttype	reporting	Reporting
 tracker_artifacttype	required_fields	ArtifactType: Name, Description, Due Period, and Status Timeout are required
 tracker_artifacttype	submit_new	Submit New
+tracker_artifacttype	invalid_emails	E-mail address(es) appeared invalid
 tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> If you wish to apply changes to all items selected above, use these controls to change their properties and click once on "Mass Update".
 tracker_browse	ascending	Ascending
 tracker_browse	canned_response	Canned Response

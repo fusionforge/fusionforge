@@ -475,9 +475,12 @@ class Group extends Error {
 			return false;
 		}
 
-		if ($new_doc_address && !validate_email($new_doc_address)) {
-			$this->setError('New Doc Address Appeared Invalid');
-			return false;
+		if ($new_doc_address) {
+			$invalid_mails = validate_emails($new_doc_address);
+			if (count($invalid_mails) > 0) {
+				$this->setError('New Doc Address(es) Appeared Invalid: '.implode(',',$invalid_mails));
+				return false;
+			}
 		}
 
 		// in the database, these all default to '1',
@@ -1184,7 +1187,7 @@ class Group extends Error {
 	}
 
 	/**
-	 *  getDocEmailAddress - get email address to send doc notifications to.
+	 *  getDocEmailAddress - get email address(es) to send doc notifications to.
 	 *
 	 *  @return	string	email address.
 	 */

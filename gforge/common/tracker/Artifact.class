@@ -661,7 +661,7 @@ class Artifact extends Error {
 		$res=db_query("SELECT user_id
 			FROM artifact_monitor 
 			WHERE artifact_id='". $this->getID() ."'");
-		return util_result_column_to_array($res);
+		return array_unique(array_merge($this->ArtifactType->getMonitorIds(),util_result_column_to_array($res)));
 	}
 
 	/**
@@ -1228,20 +1228,34 @@ class Artifact extends Error {
 			return true;
 		}
 
-		//now remove all duplicates from the email list
-		if (count($emails) > 0) {
-			$BCC=implode(',',array_unique($emails));
-		}
-
 		if (count($monitor_ids) < 1) {
 			$monitor_ids=array();
 		} else {
 			$monitor_ids=array_unique($monitor_ids);
 		}
-		/*
-			Send the email
-		*/
-		util_handle_message($monitor_ids,$subject,$body,$BCC);
+		
+		// alias to which replies to the e-mail will go (see cronjobs/mailaliases.php)
+		$formatted_tracker_name = preg_replace('/[^[:alnum:]]/','',$this->ArtifactType->getName());
+		$formatted_tracker_name = strtolower($formatted_tracker_name);
+
+		$from = strtolower($this->ArtifactType->Group->getUnixName()).'-'.$formatted_tracker_name.'@'.$GLOBALS['sys_default_domain'];
+		$extra_headers = 'Reply-to: '.$from;
+		
+		// load the e-mail addresses of the users
+		$users =& user_get_objects($monitor_ids);
+		foreach ($users as $user) {
+			$emails[] = $user->getEmail();
+		}
+
+		//now remove all duplicates from the email list
+		if (count($emails) > 0) {
+			$BCC=implode(',',array_unique($emails));
+			util_send_message('',$subject,$body,$from,$BCC,'',$extra_headers);			
+		}
+		
+		
+		//util_handle_message($monitor_ids,$subject,$body,$BCC);
+		
 		return true;
 	}
 

@@ -22,13 +22,7 @@ $sys_localinc=getenv('sys_localinc');
 if (is_file($sys_localinc)) {
 	require($sys_localinc);
 } else {
-	if (is_file('/etc/gforge/local.inc')) {
-		require ('/etc/gforge/local.inc');
-	} else {
-		if (is_file('etc/local.inc')) {
-			require('etc/local.inc');
-		}
-	}
+	require('etc/gforge/local.inc');
 }
 
 /*

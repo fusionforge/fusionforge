@@ -220,12 +220,13 @@ class ArtifactType extends Error {
 			$this->setError($Language->getText('tracker_artifacttype','required_fields'));
 			return false;
 		}
-
-		if ($email_address && !validate_email($email_address)) {
-			$email_address='';
-		}
-		if ($email_all && !$email_address) {
-			$email_all=0;
+		
+		if ($email_address) {
+			$invalid_emails = validate_emails($email_address);
+			if (count($invalid_emails) > 0) {
+				$this->SetError($Language->getText('tracker_artifacttype','invalid_emails').': '.implode(',',$invalid_emails));
+				return false;
+			}
 		}
 
 		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
@@ -451,6 +452,73 @@ class ArtifactType extends Error {
 	 */
 	function getDataType() {
 		return $this->data_array['datatype'];
+	}
+
+	/**
+	 *  setMonitor - user can monitor this artifact.
+	 *
+	 *  @return false - always false - always use the getErrorMessage() for feedback
+	 */
+	function setMonitor() {
+		global $Language;
+		if (session_loggedin()) {
+
+			$user_id=user_getid();
+			$user =& user_get_object(user_getid());
+
+		} else {
+
+			$this->setError($Language->getText('tracker_artifact','error_valid_email_required'));
+			return false;
+
+		}
+
+		$res=db_query("SELECT * FROM artifact_type_monitor
+			WHERE group_artifact_id='". $this->getID() ."'
+			AND user_id='$user_id'");
+
+		if (!$res || db_numrows($res) < 1) {
+			//not yet monitoring
+			$res=db_query("INSERT INTO artifact_type_monitor (group_artifact_id,user_id)
+				VALUES ('". $this->getID() ."','$user_id')");
+			if (!$res) {
+				$this->setError(db_error());
+				return false;
+			} else {
+				$this->setError($Language->getText('tracker_artifact','monitoring_activated'));
+				return false;
+			}
+		} else {
+			//already monitoring - remove their monitor
+			db_query("DELETE FROM artifact_type_monitor
+				WHERE group_artifact_id='". $this->getID() ."'
+				AND user_id='$user_id'");
+			$this->setError($Language->getText('tracker_artifact','monitoring_deactivated'));
+			return false;
+		}
+	}
+
+	function isMonitoring() {
+		if (!session_loggedin()) {
+			return false;
+		}
+		$sql="SELECT count(*) FROM artifact_type_monitor 
+			WHERE user_id='".user_getid()."' AND group_artifact_id='".$this->getID()."';";
+		$result = db_query($sql);
+		$row_count = db_fetch_array($result);
+		return $result && $row_count['count'] > 0;
+	}
+
+	/**
+	 *  getMonitorIds - array of email addresses monitoring this Artifact.
+	 *
+	 *  @return array of email addresses monitoring this Artifact.
+	 */
+	function &getMonitorIds() {
+		$res=db_query("SELECT user_id
+			FROM artifact_type_monitor
+			WHERE group_artifact_id='". $this->getID() ."'");
+		return util_result_column_to_array($res);
 	}
 
 	/**
@@ -1007,11 +1075,12 @@ class ArtifactType extends Error {
 			return false;
 		}
 		
-		if ($email_address && !validate_email($email_address)) {
-			$email_address='';
-		}
-		if ($email_all && !$email_address) {
-			$email_all=0;
+		if ($email_address) {
+			$invalid_emails = validate_emails($email_address);
+			if (count($invalid_emails) > 0) {
+				$this->SetError($Language->getText('tracker_artifacttype','invalid_emails').': '.implode(',',$invalid_emails));
+				return false;
+			}
 		}
 
 		$email_all = ((!$email_all) ? 0 : $email_all); 

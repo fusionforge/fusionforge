@@ -738,6 +738,30 @@ function validate_email ($address) {
 }
 
 /**
+ * validate_emails() - Validate a list of e-mail addresses
+ *
+ * @param	string	E-mail list
+ * @param	char	Separator
+ * @returns	array	Array of invalid e-mail addresses (if empty, all addresses are OK)
+*/
+function validate_emails ($addresses, $separator=',') {
+	if (strlen($addresses) == 0) return array();
+	
+	$emails = explode($separator, $addresses);
+	$ret 	= array();
+	
+	if (is_array($emails)) {
+		foreach ($emails as $email) {
+			$email = trim($email);		// This is done so we can validate lists like "a@b.com, c@d.com"
+			if (!validate_email($email)) $ret[] = $email;
+		}
+	}
+	return $ret;
+}
+
+
+
+/**
  * util_is_valid_filename() - Verifies whether a file has a valid filename
  *
  * @param		string	The file to verify

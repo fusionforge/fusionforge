@@ -228,15 +228,22 @@ switch ($func) {
 		break;
 	}
 	case 'monitor' : {
-		$ah=new ArtifactHtml($ath,$artifact_id);
-		if (!$ah || !is_object($ah)) {
-			exit_error('ERROR','Artifact Could Not Be Created');
-		} else if ($ah->isError()) {				
-			exit_error('ERROR',$ah->getErrorMessage());
-		} else {
-			$ah->setMonitor();
-			$feedback=$ah->getErrorMessage();
+		if ($artifact_id) {
+			$ah=new ArtifactHtml($ath,$artifact_id);
+			if (!$ah || !is_object($ah)) {
+				exit_error('ERROR','Artifact Could Not Be Created');
+			} else if ($ah->isError()) {				
+				exit_error('ERROR',$ah->getErrorMessage());
+			} else {
+				$ah->setMonitor();
+				$feedback=$ah->getErrorMessage();
 
+				include 'browse.php';
+			}
+		} else {
+			$ath->setMonitor();
+			$feedback=$ath->getErrorMessage();	
+			$ath->clearError();
 			include 'browse.php';
 		}
 		break;

@@ -1,3 +1,15 @@
+2005-02-12  Tim Perdue <tim@gforge.org>
+
+	* Adding new function validate_emails() which accepts multiple 
+	emails which are comma-separated. This was used so we could accept
+	multiple addresses for the notify features when new docs, tasks, 
+	artifacts, and forum messages are submitted
+	* Monitor an entire tracker in addition to just an individual item
+	* Finished tracker_gateway.php so you can send emails to the tracker
+	similar to the forum_gateway.php
+	* Full text indexing is now an option for searches. Rather than using 
+	the exact-match regex functions, we now use tsearch2 functions
+
 2005-01-27  Tim Perdue <tim@gforge.org>
 
 	* FRS file reorganization - files are stored in /group_name/package_name/release_name/
@@ -15,7 +27,7 @@
 
 2005-01-16  Tim Perdue <tim@gforge.org>
 
-	* added BBC-all address to all email can be copied to a 
+	* added BCC-all address so all email can be copied to a 
 	certain address for archiving
 	* added ability to release files in FRS system that were 
 	uploaded via FTP instead of the HTTP upload. Requires several new 
