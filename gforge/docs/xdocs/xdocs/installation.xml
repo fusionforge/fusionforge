@@ -23,8 +23,8 @@ GForge should work correctly on any system configured like this:
 <li>Apache 1.3.22 or later</li>
 <li>openssl >0.9.4</li>
 <li>mod_ssl >2.4.10</li>
-<li>PHP 4.0.4 or later</li>
-<li>php_pgsql 4.0.4</li>
+<li>PHP 4.0.4 or later - note that you'll need to have PHP built with the command line interface support, which only comes standard with PHP 4.3 or later</li>
+<li>php-pgsql 4.0.4</li>
 </ol>
 </p>
 <p>
@@ -283,7 +283,7 @@ createuser gforge -W
 Shall the new user be allowed to create databases? (y/n) y
 Shall the new user be allowed to create more new users? (y/n) n
 </source>
-and insert a password for the user to be created.
+and insert a password (most people use 'gforge') for the user to be created.
 
 <p/>Create the database using the command:
 <source>
@@ -374,7 +374,7 @@ tar -zxvf cvsweb-1.112.tar.gz
 <li>TODO: should we tweak cvsweb.cgi so it doesn't have a default repository?</li>
 <li>Edit cvsweb.cgi</li>
 <li>Change the $config variable to point the cvsweb.conf file</li>
-<li>Change the $PATH variable to point to the directory that contains rlog</li>
+<li>Change the $PATH variable in <code>cvsweb.conf</code> to point to the directory that contains rlog</li>
 </ul>
 <p>Possible problems:
 <ul>
@@ -407,11 +407,10 @@ This directory will contain all files/patches uploaded to your gforge site.
 <li>Copy the file <code>local.inc</code> from <code>/var/www/gforge-3.0/etc/</code> to <code>/etc/gforge/</code> </li>
 <li>Open <code>/etc/gforge/local.inc</code>, configuring the following basic parameters:
 <ol>
-<li>
-Database configuration:
+<li>Database configuration:
 
 <source>
-$sys_dbhost="localhost"
+$sys_dbhost="localhost" # some folks suggest setting this to "", your mileage may vary
 $sys_dbname="gforge"
 $sys_dbuser="gforge"
 $sys_dbpasswd="gforge"
@@ -459,7 +458,10 @@ should contain the domain of your server, e.g. gforge.org.
 Alias /pipermail/ /usr/local/mailman/archives/public/
 ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
 </source>
-<p>Run the script <code>gforge/cronjobs/mail/mailing_lists_create.php</code>; this creates any lists that are already in the database.</p>
+<p>Run the script <code>gforge-3.1/cronjobs/mail/mailing_lists_create.php</code>; this creates any lists that are already in the database.  Note that to run the script you need to invoke the PHP interpreter with the <code>-f</code> flag, i.e.:</p>
+<source>
+php -f mailing_lists_create.php
+</source>
 </subsection>
 
 <subsection name="Configuring CVS">
@@ -467,14 +469,13 @@ ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
 <p>Download and install the latest CVS RPM</p>
 <p>Ensure the following info is in <code>/etc/services</code>:</p>
 <source>
-[tom@cougaarforge tom]$ cat /etc/services | grep cvspserver
+[tom@cougaar tom]$ cat /etc/services | grep cvspserver
 cvspserver      2401/tcp                        # CVS client/server operations
 cvspserver      2401/udp                        # CVS client/server operations
-[tom@cougaarforge tom]$
+[tom@cougaar tom]$
 </source>
 <p>Ensure the following info is in <code>/etc/xinetd.d/cvspserver</code> (if it doesn't exist create a new file with the following text to enable anonymous access):</p>
 <source>
-[tom@cougaarforge xinetd.d]$ cat /etc/xinetd.d/cvspserver
 service cvspserver
 {
         disable = no
@@ -485,7 +486,6 @@ service cvspserver
         server   = /usr/bin/cvs
         server_args  = -f --allow-root=/path/to/my/cvsroot pserver
 }
-[tom@cougaarforge xinetd.d]$
 </source>
 <p>Now add an <code>anonymous</code> user to your system with a blank password, or one of <code>anonymous</code></p>
 <p>TODO - does the CVSROOT/readers file get added via a cronjob or something?</p>
@@ -500,7 +500,7 @@ To verify if everything was installed correctly, use the browser and connect to 
 <br/>
 <code> Could Not Connect to Database:</code>
 <br/>
-Check if you have followed all installation instructions for the database.
+Check if you have followed all installation instructions for the database.  Also, you can experiment with making the settings in pg_hba.conf a bit more trusting - for example, change the last work of the second line from "md5" to "trust".
 </p>
 
     </section>
@@ -508,7 +508,6 @@ Check if you have followed all installation instructions for the database.
 <p>
 Connect to GForge and register a new account.
 <br/>
-
 
 <ol>
 <li>Insert a valid email address; this will be used for the account confirmation.<br/>
@@ -518,25 +517,19 @@ Connect to GForge and register a new account.
 <li>Verify in Account Maintenance the user id of the user registered.<br/>
 Usually this is 102, but you can verify this by running the following SQL query via the Postgres <code>psql</code> utility:
 <br/>
-<code>
+<source>
 psql -c "select user_id from users where user_name='***YOUR USER NAME***'" gforge gforge
-
-</code>
+</source>
 <br/>
 </li>
 <li>Now set up the newly added user to be a GForge administrator
-<code>
-<br/>
+<source>
 psql -U gforge -d gforge
-<br/>
 insert into user_group (user_id,group_id,admin_flags) values (102,1,'A');
-<br/>
-
-</code>
+</source>
 </li>
 </ol>
 </p>
 </section>
-
-  </body>
+</body>
 </document>
