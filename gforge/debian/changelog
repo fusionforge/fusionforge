@@ -1,10 +1,4 @@
-gforge (3.3.0+scm-0+1) experimental; urgency=low
-
-  * [Roland] First try at the pluginification of SCM.
-
- -- Roland Mas <lolando@debian.org>  Sun, 25 Apr 2004 21:12:11 +0200
-
-gforge (3.3.0-4woody9) stable; urgency=low
+gforge (3.3.0-5) unstable; urgency=low
 
   * [Christian] Added new sql upgrade (2004*.sql)
   * [Christian] Stable backbort
@@ -20,8 +14,9 @@ gforge (3.3.0-4woody9) stable; urgency=low
   * [Christian] Added default project home page generation
   * [Christian] Added get_news_notapproved cron
   * [Christian] Made system management OO (see Changelog)
+  * [Roland] SCM systems are now pluginified.
 
- -- Christian Bayle <bayle@debian.org>  Sun,  9 May 2004 18:50:43 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 16 May 2004 18:53:06 +0200
 
 gforge (3.2.1-4) experimental; urgency=low
 

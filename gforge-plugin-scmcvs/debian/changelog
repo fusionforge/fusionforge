@@ -1,6 +1,6 @@
-gforge-plugin-scmcvs (0.1-0+5) experimental; urgency=low
+gforge-plugin-scmcvs (0.1-1) unstable; urgency=low
 
   * Initial packaging.
 
- -- Roland Mas <lolando@debian.org>  Sun, 14 Mar 2004 14:07:01 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 16 May 2004 18:54:46 +0200
 
