@@ -4,15 +4,15 @@
 
 Summary: Collaborative Development Tool
 Name: gforge
-Version: 3.0
-Release: 2
+Version: 3.1
+Release: 1
 BuildArch: noarch
 Copyright: GPL
 Group: Development/Tools
 %if %{bzip}
-Source0: http://gforge.org/download.php/37/gforge-3.0.tar.bz2
+Source0: http://gforge.org/download.php/44/%{name}-%{version}.tar.bz2
 %else
-Source0: gforge-3.0.tar.gz
+Source0: %{name}-%{version}.tar.gz
 %endif
 Source1: gforge.conf
 Patch1000: gforge-3.0-local_config.patch
