@@ -22,10 +22,6 @@ fi
 case "$1" in
     remove)
 #       install-info --quiet --remove /usr/info/sourceforge.info.gz
-	rm -f /var/cache/sourceforge/*
-	rm -f /etc/sourceforge/local.inc /etc/sourceforge/sf-httpd.conf \
-	    /etc/sourceforge/database.inc /etc/sourceforge/sf-httpd.secrets \
-	    /etc/sourceforge/local.pl
   	if grep -q "Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
 	    pattern=$(basename $0)
 	    tmp=$(mktemp /tmp/$pattern.XXXXXX)
@@ -64,6 +60,11 @@ case "$1" in
                 perl -pi -e "s/^sourceforge:.*\n//" /etc/aliases
 		[ -x /usr/bin/newaliases ] && newaliases
         fi
+
+	rm -f /var/cache/sourceforge/*
+	rm -f /etc/sourceforge/local.inc /etc/sourceforge/sf-httpd.conf \
+	    /etc/sourceforge/database.inc /etc/sourceforge/sf-httpd.secrets \
+	    /etc/sourceforge/local.pl
 
 	;;
     upgrade|deconfigure|failed-upgrade)
