@@ -30,8 +30,14 @@ function exit_error($title,$text) {
  */
 function exit_permission_denied($reason_descr='') {
 	global $Language;
-	if (!$reason_descr) $reason_descr=$Language->getText('general','permexcuse');
-	exit_error($Language->getText('general','permdenied'),$reason_descr);
+	if(!session_loggedin()) {
+		exit_not_logged_in();
+	} else {
+		if (!$reason_descr) {
+			$reason_descr=$Language->getText('general','permexcuse');
+		}
+		exit_error($Language->getText('general','permdenied'),$reason_descr);
+	}
 }
 
 /**

@@ -4,8 +4,15 @@
 //	get the Group object
 //
 $group =& group_get_object($group_id);
-if (!$group || !is_object($group) || $group->isError()) {
+if (!$group || !is_object($group)) {
 	exit_no_group();
+}
+if ($group->isError()) {
+	if($group->isPermissionDeniedError()) {
+		exit_permission_denied($group->getErrorMessage());
+	} else {
+		exit_error($Language->getText('general','error'), $group->getErrorMessage());
+	}
 }
 
 //
@@ -17,7 +24,11 @@ if (!$ath || !is_object($ath)) {
 	exit_error('Error','ArtifactType could not be created');
 }
 if ($ath->isError()) {
-	exit_error('Error',$ath->getErrorMessage());
+	if($ath->isPermissionDeniedError()) {
+		exit_permission_denied($group->getErrorMessage());
+	} else {
+		exit_error($Language->getText('general','error'), $ath->getErrorMessage());
+	}
 }
 
 switch ($func) {
