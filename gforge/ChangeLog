@@ -7,6 +7,11 @@
 	* www/stats/i18n.php: Now it doesn't display unused
 	languages.
 
+2004-07-22  Tim Perdue	<tim@gforge.org>
+
+	* Moved licenses out of vars.php and into table which
+	can be edited easily by site admin
+
 2004-07-21  Christian Bayle <bayle@aist.enst.fr>
 	
 	* Some renaming cvs -> scm
