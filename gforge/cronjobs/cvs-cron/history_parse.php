@@ -2,6 +2,7 @@
 <?php
 
 require_once('squal_pre.php');
+require ('common/include/cron_utils.php');
 /**
  *
  * Recurses through the /cvsroot directory tree and parses each projects
@@ -13,7 +14,7 @@ require_once('squal_pre.php');
 
 $cvsroot="/cvsroot";
 if (!chdir($cvsroot)) {
-	print("Unable to make $cvsroot the working directory.\n");
+	$err .=("Unable to make $cvsroot the working directory.\n");
 	exit;
 }
 
@@ -47,9 +48,9 @@ function rundate($historyfile, $group_id, $mon, $day, $year, $day_begin, $day_en
 	}
 
 	$sql = "INSERT INTO stats_cvs_group (month,day,group_id,checkouts,commits,adds) VALUES ('$year$mon','$day','$group_id',$cvs_co,$cvs_commit,$cvs_add)";
-	#print $sql."\n";
+	#$err .= $sql."\n";
 	$res = db_query($sql);	
-	print db_error();
+	$err .= db_error();
 }
 
 function generateTodayStats($historyfile, $group_id) {
@@ -74,7 +75,7 @@ function generateStats($historyfile, $group_id, $days) {
 function delete() {
 	$sql = "delete from stats_cvs_group";
 	$res = db_query($sql);	
-	print db_error();
+	$err .= db_error();
 }
 
 if ($argv[1] != nil && $argv[1] == "delete") {
@@ -94,10 +95,10 @@ for ($i=0; $i<count($ids); $i++) {
 		continue;
 	}
 	
-	print "Processing group $group\n";
+	$err .= "Processing group $group\n";
 	$historyfile = file("$cvsroot/$group/CVSROOT/history");
 	if (!$historyfile) {
-		print "Unable to open history for $group\n";
+		$err .= "Unable to open history for $group\n";
 		continue;
 	}
 	if ($argv[1] == nil || $argv[1] == "") {
@@ -133,40 +134,43 @@ $day	= strftime("%d", mktime( $day_begin ) );
 */
 /*
 if (file_exists("$base_log_dir")) {
-	$daily_log_file = $base_log_dir."/".sprintf("%04d", $year);
+	$daily_log_file = $base_log_dir."/".s$err .=f("%04d", $year);
 	if (!file_exists("$daily_log_file")) {
-		print "Making dest dir \'$daily_log_file\'\n";
+		$err .= "Making dest dir \'$daily_log_file\'\n";
 		mkdir( $daily_log_file, 0755 ) || die("Could not mkdir $daily_log_file");
 	} 
-	$daily_log_file = $daily_log_file."/".sprintf("%02d", $month);
+	$daily_log_file = $daily_log_file."/".s$err .=f("%02d", $month);
 	if (!file_exists("$daily_log_file")) {
-		print "Making dest dir \'$daily_log_file\'\n";
+		$err .= "Making dest dir \'$daily_log_file\'\n";
 		mkdir( $daily_log_file, 0755 ) || die("Could not mkdir $daily_log_file");
 	}
-	$daily_log_file = $daily_log_file."/cvs_traffic_".sprintf("%04d%02d%02d",$year,$month,$day).".log";
+	$daily_log_file = $daily_log_file."/cvs_traffic_".s$err .=f("%04d%02d%02d",$year,$month,$day).".log";
 } else {
 	die("Base log directory $base_log_dir does not exist!");
 }
 
 if (!fopen($daily_log_file, "w")) {
-	print "Unable to open the log file $daily_log_file\n\n";
+	$err .= "Unable to open the log file $daily_log_file\n\n";
 	exit;
 }
-print "Opened log file at \'$daily_log_file\' for writing...\n";
+$err .= "Opened log file at \'$daily_log_file\' for writing...\n";
 */
 /*
-	 ## Now, we'll print all of the results for that project, in the following format:
+	 ## Now, we'll $err .= all of the results for that project, in the following format:
 	 ## (G|U|E)::proj_name::user_name::checkouts::commits::adds
 	 ## If 'G', then record is group statistics, and field 2 is a space...
 	 ## If 'U', then record is per-user stats, and field 2 is the user name...
 	 ## If 'E', then record is an error, and field 1 is a description, there are no other fields.
 	if ( $cvs_co || $cvs_commit || $cvs_add ) {
-		print "DATA\n";
-		print 'DAYS_LOG "G::" . $group . ":: ::" . ($cvs_co?$cvs_co:"0") . "::" . ($cvs_commit?$cvs_commit:"0") . "::" . ($cvs_add?$cvs_add:"0") . "\n"';
+		$err .= "DATA\n";
+		$err .= 'DAYS_LOG "G::" . $group . ":: ::" . ($cvs_co?$cvs_co:"0") . "::" . ($cvs_commit?$cvs_commit:"0") . "::" . ($cvs_add?$cvs_add:"0") . "\n"';
 		$keys = array_keys($usr_commit);
 		foreach ($keys as $key) {
-			print 'DAYS_LOG "U::" . $group . "::" . $key . "::0::" . ($usr_commit[$key]?$usr_commit[$key]:"0") . "::" . ($usr_add[$key]?$usr_add[$key]:"0") . "\n"';
+			$err .= 'DAYS_LOG "U::" . $group . "::" . $key . "::0::" . ($usr_commit[$key]?$usr_commit[$key]:"0") . "::" . ($usr_add[$key]?$usr_add[$key]:"0") . "\n"';
 		}
 	}
 */
+
+cron_entry(14,$err);
+
 ?>

@@ -2,9 +2,10 @@
 <?php
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 if (!file_exists('/etc/aliases.org')) {
-	echo "CANNOT PROCEED - you must first backup your /etc/aliases file";
+	$err .= "CANNOT PROCEED - you must first backup your /etc/aliases file";
 	exit;
 }
 
@@ -13,7 +14,7 @@ if (!file_exists('/etc/aliases.org')) {
 //
 $fp = fopen("/etc/aliases","w");
 if (!($fp)) {
-	print ("ERROR: unable to open target file\n");
+	$err .= ("ERROR: unable to open target file\n");
 	exit;
 }
 
@@ -28,7 +29,7 @@ for($k = 0; $k < count($aliaslines); $k++) {
 	$def_aliases[strtolower($aliasline[0])]=1;
 	fwrite($fp,$aliaslines[$k]."\n");
 }
-echo "\n$k Alias Lines";
+$err .= "\n$k Alias Lines";
 fclose($h);
 
 //
@@ -46,7 +47,7 @@ for($k = 0; $k < count($mailmanlines); $k++) {
 		fwrite($fp,$mailmanlines[$k]."\n");
 	}
 }
-echo "\n$k Mailman Lines";
+$err .= "\n$k Mailman Lines";
 fclose($h2);
 
 
@@ -54,7 +55,7 @@ fclose($h2);
 //	Write out the user aliases
 //
 $res=db_query("SELECT user_name,email FROM users WHERE status = 'A' AND email != ''");
-echo db_error();
+$err .= db_error();
 
 $rows=db_numrows($res);
 
@@ -73,6 +74,8 @@ fclose($fp);
 
 db_free_result($res);
 $ok = `newaliases`;
-echo $ok;
+$err .= $ok;
+
+cron_entry(17,$err);
 
 ?>

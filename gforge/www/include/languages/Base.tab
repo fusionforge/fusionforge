@@ -246,12 +246,16 @@ admin_grouplist	members	Members
 admin_grouplist	public	Public?
 admin_grouplist	status	Status
 admin_grouplist	unix_name	Unix Name
+cronman	date	Date
+cronman	job	Job
+cronman	message	Message
 admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
 admin_index	add_delete_edit_laguage	Add, Delete, or Edit Supported Languages
 admin_index	add_edit_delete_processors	Add, Delete, or Edit Processors
 admin_index	add_edit_delete_themes	Add, Delete, or Edit Themes
 admin_index	add_to_trove_map	Add to the Trove Map
 admin_index	approve_reject	Approve/Reject
+admin_index	cronman	Cron Manager
 admin_index	deleted_status	(deleted) Status
 admin_index	display_full_group	Display Full Group List/Edit Groups
 admin_index	display_full_user_list	Display Full User List/Edit Users

@@ -2,6 +2,7 @@
 <?php
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 $maincvsroot = "/cvsroot/";
 
@@ -10,14 +11,14 @@ if(is_dir($maincvsroot)) {
 	addProjectRepositories();
 } else {
 	if(is_file($maincvsroot)) {
-		print "$maincvsroot exists but is a file\n";
+		$err .= "$maincvsroot exists but is a file\n";
 		exit;
 	} else {
 		if (mkdir($maincvsroot)) {
 			//need to update group permissions using chmod
 			addProjectRepositories();
 		} else {
-			print "unable to make $maincvsroot directory\n";
+			$err .= "unable to make $maincvsroot directory\n";
 			exit;
 		}	
 	}
@@ -38,7 +39,7 @@ function addProjectRepositories() {
 
 		} elseif (is_file("$maincvsroot".db_result($res,$i,'unix_group_name'))) {
 
-			echo "$maincvsroot".db_result($res,$i,'unix_group_name')." Already Exists As A File";
+			$err .= "$maincvsroot".db_result($res,$i,'unix_group_name')." Already Exists As A File";
 
 		} else {
 
@@ -47,5 +48,7 @@ function addProjectRepositories() {
 		}
 	}
 }
+
+cron_entry(13,$err);
 
 ?>

@@ -22,7 +22,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 
-require ('squal_pre.php');    
+require ('squal_pre.php');	
+require ('common/include/cron_utils.php');
 
 
 /*
@@ -34,14 +35,14 @@ CREATE TABLE trove_agg AS
 	SELECT tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name,
 		g.status, g.register_time, g.short_description,
 		project_weekly_metric.percentile, project_weekly_metric.ranking
-        FROM groups g
-        LEFT JOIN project_weekly_metric USING (group_id) ,
-        trove_group_link tgl
-        WHERE
-        tgl.group_id=g.group_id
-        AND (g.is_public=1)
-        AND (g.type=1)
-        AND (g.status='A')
+		FROM groups g
+		LEFT JOIN project_weekly_metric USING (group_id) ,
+		trove_group_link tgl
+		WHERE
+		tgl.group_id=g.group_id
+		AND (g.is_public=1)
+		AND (g.type=1)
+		AND (g.status='A')
 	ORDER BY trove_cat_id ASC, ranking ASC;
 
 CREATE INDEX troveagg_trovecatid ON trove_agg(trove_cat_id);
@@ -49,10 +50,10 @@ create index troveagg_trovecatid_ranking ON trove_agg(trove_cat_id,ranking);
 
 DROP TABLE trove_treesums;
 CREATE TABLE "trove_treesums" (
-        "trove_treesums_id" serial primary key,
-        "trove_cat_id" integer DEFAULT '0' NOT NULL,
-        "limit_1" integer DEFAULT '0' NOT NULL,
-        "subprojects" integer DEFAULT '0' NOT NULL
+		"trove_treesums_id" serial primary key,
+		"trove_cat_id" integer DEFAULT '0' NOT NULL,
+		"limit_1" integer DEFAULT '0' NOT NULL,
+		"subprojects" integer DEFAULT '0' NOT NULL
 );
 
 */
@@ -74,17 +75,17 @@ db_begin(SYS_DB_TROVE);
 db_query("DELETE FROM trove_agg;", -1, 0, SYS_DB_TROVE);
 
 $sql="INSERT INTO trove_agg
-      (SELECT tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name, g.status, g.register_time, g.short_description, project_weekly_metric.percentile, project_weekly_metric.ranking
-       FROM groups g
-       LEFT JOIN project_weekly_metric USING (group_id), trove_group_link tgl 
-       WHERE tgl.group_id=g.group_id 
-         AND (g.is_public=1) 
-         AND (g.type=1) 
-         AND (g.status='A') 
-       ORDER BY trove_cat_id ASC, ranking ASC)";
+	(SELECT tgl.trove_cat_id, g.group_id, g.group_name, g.unix_group_name, g.status, g.register_time, g.short_description, project_weekly_metric.percentile, project_weekly_metric.ranking
+	FROM groups g
+	LEFT JOIN project_weekly_metric USING (group_id), trove_group_link tgl 
+	WHERE tgl.group_id=g.group_id 
+	AND (g.is_public=1) 
+	AND (g.type=1) 
+	AND (g.status='A') 
+	ORDER BY trove_cat_id ASC, ranking ASC)";
 
 db_query($sql, -1, 0, SYS_DB_TROVE);
-echo db_error(SYS_DB_TROVE);
+$err .= db_error(SYS_DB_TROVE);
 
 db_commit(SYS_DB_TROVE);
 
@@ -108,18 +109,17 @@ $cat_counts=array();
 $parent_list=array();
 
 $q = "SELECT trove_cat.trove_cat_id,trove_cat.parent
-      FROM trove_cat
-      WHERE trove_cat.trove_cat_id!=0
-      GROUP BY trove_cat.trove_cat_id,trove_cat.parent;" ;
+	FROM trove_cat
+	WHERE trove_cat.trove_cat_id!=0
+	GROUP BY trove_cat.trove_cat_id,trove_cat.parent;" ;
 $res=db_query($q);
 $rows=db_numrows($res);
 
 for ($i=0; $i<$rows; $i++) {
-  $parent_list[db_result($res,$i,'parent')][]=db_result($res,$i,'trove_cat_id');
+	$parent_list[db_result($res,$i,'parent')][]=db_result($res,$i,'trove_cat_id');
 }
 
-$res=db_query("
-	SELECT trove_cat.trove_cat_id,trove_cat.parent,count(groups.group_id) AS count
+$res=db_query("SELECT trove_cat.trove_cat_id,trove_cat.parent,count(groups.group_id) AS count
 	FROM  trove_cat LEFT JOIN trove_group_link ON
 		trove_cat.trove_cat_id=trove_group_link.trove_cat_id
 	LEFT JOIN groups ON
@@ -127,8 +127,7 @@ $res=db_query("
 	WHERE (groups.status='A' OR groups.status IS NULL)
 	AND ( groups.type='1' OR groups.status IS NULL)
 	AND ( groups.is_public='1' OR groups.is_public IS NULL)
-	GROUP BY trove_cat.trove_cat_id,trove_cat.parent
-", -1, 0, SYS_DB_TROVE);
+	GROUP BY trove_cat.trove_cat_id,trove_cat.parent", -1, 0, SYS_DB_TROVE);
 
 $rows = db_numrows($res);
 
@@ -144,7 +143,7 @@ function get_trove_sub_projects($cat_id) {
 
 	//number of groups that were in this trove_cat
 	$count=$cat_counts[$cat_id][1];
-        if ($count == '') { $count = 0 ; }
+	if ($count == '') { $count = 0 ; }
  
 	//number of children of this trove_cat
 	$rows=count( $parent_list[$cat_id] );
@@ -165,26 +164,26 @@ for ($i=0; $i< db_numrows($res2); $i++) {
 
 db_begin(SYS_DB_TROVE);
 db_query("DELETE FROM trove_treesums", -1, 0, SYS_DB_TROVE);
-echo db_error(SYS_DB_TROVE);
+$err .= db_error(SYS_DB_TROVE);
 
-//echo "<table>";
+//$err .= "<table>";
 while (list($k,$v) = each($sum_totals)) {
-	$res = db_query("
-		INSERT INTO trove_treesums (trove_cat_id,subprojects) 
-		VALUES ($k,$v)
-	", -1, 0, SYS_DB_TROVE);
+	$res = db_query("INSERT INTO trove_treesums (trove_cat_id,subprojects) 
+		VALUES ($k,$v)", -1, 0, SYS_DB_TROVE);
 	if (!$res || db_affected_rows($res)!=1) {
-		echo db_error(SYS_DB_TROVE);
+		$err .= db_error(SYS_DB_TROVE);
 	}
-//	echo "<tr><td>$k</td><td>$v</td></tr>\n";
+//	$err .= "<tr><td>$k</td><td>$v</td></tr>\n";
 
 }
-//echo "</TABLE>";
+//$err .= "</TABLE>";
 
 db_commit(SYS_DB_TROVE);
 
 if (db_error(SYS_DB_TROVE)) {
-	echo "Error: ".db_error(SYS_DB_TROVE);
+	$err .= "Error: ".db_error(SYS_DB_TROVE);
 }
+
+cron_entry(5,$err)
 
 ?>

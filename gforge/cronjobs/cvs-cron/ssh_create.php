@@ -2,6 +2,7 @@
 <?php
 
 require_once('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 $res=db_query("SELECT user_name,user_id,authorized_keys 
 	FROM users 
@@ -34,5 +35,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 	system("chown $uid:$uid $ssh_dir/authorized_keys");
 
 }
+
+cron_entry(15,$err);
 
 ?>

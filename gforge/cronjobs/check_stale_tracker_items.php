@@ -31,6 +31,7 @@
  */
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 $time = time();
 
@@ -49,5 +50,7 @@ $sql = "UPDATE
 				AND
 					a.status_id=4);";
 $res = db_query($sql);
+
+cron_entry(2,db_error());
 
 ?>

@@ -31,6 +31,7 @@
  */
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 // SMTP server to connect to
 //$MAILSERVER = "sf-list1";
@@ -79,7 +80,7 @@ $mail_res = db_query("SELECT *
 
 /* If there was error, notify admins, but don't be pesky */
 if (!$mail_res) {
-	print "cannot execute quesry to select pending mailings\n";
+	$err .= "cannot execute quesry to select pending mailings\n";
 	$hrs = time()/(60*60);
 	// Send reminder every second day at 11am
 	if (($hrs%24)==11 && (($hrs/24)%2)==1) {
@@ -97,7 +98,7 @@ if (!$mail_res) {
 	exit(1);
 }
 
-// print "Got ".db_numrows($mail_res)." rows\n";
+// $err .= "Got ".db_numrows($mail_res)." rows\n";
 
 if (db_numrows($mail_res)<1) {
 	// Nothing to send
@@ -106,14 +107,14 @@ if (db_numrows($mail_res)<1) {
 
 $type = db_result($mail_res, 0, 'type');
 if (!$table_mapping[$type]) {
-	print "Unknown mailing type\n";
+	$err .= "Unknown mailing type\n";
 	exit(1);
 }
 
 $subj = db_result($mail_res, 0, 'subject');
 $mail_id = db_result($mail_res, 0, 'id');
 
-//print "Got mail to send: ".$subj."\n";
+//$err .= "Got mail to send: ".$subj."\n";
 
 $sql = "SELECT users.user_id,user_name,realname,email,confirm_hash
 	FROM ".$table_mapping[$type]."
@@ -122,12 +123,12 @@ $sql = "SELECT users.user_id,user_name,realname,email,confirm_hash
 	".$cond_mapping[$type]."
 	ORDER BY users.user_id";
 
-//echo $sql;
+//$err .= $sql;
 
 // Get next chunk of users to mail
 $users_res = db_query($sql, $CHUNK);
 
-print "Mailing ".db_numrows($users_res)." users.\n";
+$err .= "Mailing ".db_numrows($users_res)." users.\n";
 
 // If no more users left, we've finished with this mailing
 if ($users_res && db_numrows($users_res)==0) {
@@ -161,7 +162,7 @@ function get_resp() {
 	global $response;
 	
 	$response = fgets($out, 500);
-//	print ">$response";
+//	$err .= ">$response";
 	return substr($response, 0, 3);
 }
 
@@ -172,7 +173,7 @@ function expect($diag, $resp) {
 	
 	if (!$PIPELINE) {
 		if (get_resp()!=$resp) {
-			print "Error: $diag: $response";
+			$err .= "Error: $diag: $response";
 			exit(1);
 		}
 	}
@@ -193,13 +194,13 @@ function start_batch() {
 	}
 	
 	if (!$out) {
-		print "Error connecting to SMTP: $errstr\n";
+		$err .= "Error connecting to SMTP: $errstr\n";
 		exit(1);
 	}
 	if (!$TEST) {
 		$resp = fgets($out,200);
 		if (substr($resp,0,3)!="220") {
-			print "Server is not ready to receive messages\n";
+			$err .= "Server is not ready to receive messages\n";
 			exit(1);
 		}
 	}
@@ -232,7 +233,7 @@ function flush_batch() {
 			SET failed_date=0,
 			last_userid=$last_userid
 			WHERE id=$mail_id";
-//		print $sql;
+//		$err .= $sql;
 		db_query($sql);
 
 		sleep($SLEEP);
@@ -248,7 +249,7 @@ while ($row = db_fetch_array($users_res)) {
 		start_batch();
 	}
 
-//	print "Sending for: ".$row['user_id']."\n";
+//	$err .= "Sending for: ".$row['user_id']."\n";
 
 //	$row['email'] = 'test@email';
 
@@ -266,7 +267,7 @@ while ($row = db_fetch_array($users_res)) {
 		."\r\n"
 		.$body
 		."\r\n"
-		.sprintf($tail,$row['confirm_hash'] )
+		.s$err .=f($tail,$row['confirm_hash'] )
 		."\r\n.\r\n"
 	);
 	expect("DATA end", "250");
@@ -280,6 +281,8 @@ while ($row = db_fetch_array($users_res)) {
 
 flush_batch();
 
-// print "end\n";
+// $err .= "end\n";
+
+cron_entry(6,$err);
 
 ?>

@@ -13,6 +13,8 @@
 define('MAILMAN_DIR','/var/mailman/');
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
+
 //
 // Extract the mailing lists that already exist on the system and create
 // a "list" of them for use later so we don't try to create ones that 
@@ -20,7 +22,7 @@ require ('squal_pre.php');
 //
 $mailing_lists=array();
 $mlists_cmd = escapeshellcmd(MAILMAN_DIR."bin/list_lists");
-echo "Command to be executed is $mlists_cmd\n";
+$err .= "Command to be executed is $mlists_cmd\n";
 $fp = popen ($mlists_cmd,"r");
 while (!feof($fp)) {
 	$mlist = fgets($fp, 4096);
@@ -31,7 +33,7 @@ while (!feof($fp)) {
 	if ($mlist <> "") {
 		list($listname, $listdesc) = explode(" ",$mlist);	
 		$mailing_lists[] = strtolower($listname);
-		echo "Existing mailing List $listname found\n";	
+		$err .= "Existing mailing List $listname found\n";	
 	}
 }
 pclose($fp);
@@ -40,23 +42,23 @@ $res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
         mail_group_list.password,mail_group_list.status 
 		FROM mail_group_list,users
         WHERE mail_group_list.list_admin=users.user_id");
-echo db_error();
+$err .= db_error();
 
 $rows=db_numrows($res);
-echo "$rows rows returned from query\n";
+$err .= "$rows rows returned from query\n";
 
 $h1 = fopen("/tmp/mailman-aliases","w");
 
 for ($i=0; $i<$rows; $i++) {
-	echo "Processing row $i\n";
+	$err .= "Processing row $i\n";
 	$listadmin = db_result($res,$i,'user_name');
 	$email = db_result($res,$i,'email');
 	$listname = strtolower(db_result($res,$i,'list_name'));
 	$listpassword = db_result($res,$i,'password');
 	if (! in_array($listname,$mailing_lists)) {
-		echo "Creating Mailing List: $listname\n";
+		$err .= "Creating Mailing List: $listname\n";
 		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname $email $listpassword";
-		echo "Command to be executed is $lcreate_cmd\n";
+		$err .= "Command to be executed is $lcreate_cmd\n";
 		$fp = popen($lcreate_cmd,"r");
 	}
 	$list_str="$listname:       \"|/var/mailman/mail/wrapper post $listname\"
@@ -77,7 +79,7 @@ $listname-request: \"|/var/mailman/mail/wrapper mailcmd $listname\"\n";
 			if (stristr($resline,"Entry for aliases file") !== FALSE) {
 				continue;
 			}
-			echo "New alias line - $resline\n";
+			$err .= "New alias line - $resline\n";
 			fwrite($h1,$resline."\n");
 		}
 		pclose($fp);
@@ -87,6 +89,6 @@ $listname-request: \"|/var/mailman/mail/wrapper mailcmd $listname\"\n";
 
 fclose($h1);
 
-db_free_result($res);
+cron_entry(18,$err);
 
 ?>

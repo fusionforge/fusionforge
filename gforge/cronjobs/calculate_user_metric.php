@@ -2,6 +2,7 @@
 <?php
 /**
  * Copyright 1999-2001 (c) VA Linux Systems
+ * Copyright 2003 (c) GForge, LLC
  *
  * @version   $Id$
  *
@@ -62,22 +63,17 @@ ON user_metric_history(month,day,user_id);
 */
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 $threshhold='1.6';
-
-/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-	exit_permission_denied();
-}*/
-
-// echo '<br />Starting... ';
 
 db_begin();
 
 db_query("DELETE FROM user_metric0");
-echo db_error();
+$err .= db_error();
 
 db_query("select setval('user_metric0_pk_seq',1)");
-echo db_error();
+$err .= db_error();
 
 db_query("INSERT INTO user_metric0 
 (user_id,times_ranked,avg_raters_importance,avg_rating,metric,percentile,importance_factor)
@@ -87,21 +83,21 @@ WHERE
 user_group.group_id='$sys_peer_rating_group'
 AND user_group.admin_flags='A';");
 
-echo db_error();
+$err .= db_error();
 
 db_query("UPDATE user_metric0 SET ranking=ranking-1");
 
 db_query("UPDATE user_metric0 SET
 metric=(log(times_ranked::float)*avg_rating::float)::float,
 percentile=(100-(100*((ranking::float-1)/(select count(*) from user_metric0))))::float;");
-echo db_error();
+$err .= db_error();
 
 db_query("UPDATE user_metric0 SET
 importance_factor=(1+((percentile::float/100)*.5))::float;");
-echo db_error();
+$err .= db_error();
 
 for ($i=1; $i<9; $i++) {
-	// echo '<br />Starting round: '.$i;
+	// $err .= '<br />Starting round: '.$i;
 
 	$j=($i-1);
 
@@ -118,9 +114,9 @@ for ($i=1; $i<9; $i++) {
 		metric float(8) not null default 0);";
 	$res=db_query($sql);
         if (!$res) {
-                echo "Error in round $i inserting final data: ";
-                echo '<p>'.$sql.'<p>';
-                echo db_error();
+                $err .= "Error in round $i inserting final data: ";
+                $err .= '<p>'.$sql.'<p>';
+                $err .= db_error();
                 exit;
         }
 
@@ -138,9 +134,9 @@ for ($i=1; $i<9; $i++) {
 
 	$res=db_query($sql);
 	if (!$res) {
-		echo "Error in round $i inserting average ratings: ";
-		echo '<p>'.$sql.'<p>';
-		echo db_error();
+		$err .= "Error in round $i inserting average ratings: ";
+		$err .= '<p>'.$sql.'<p>';
+		$err .= db_error();
 		exit;
 		
 	}
@@ -154,9 +150,9 @@ for ($i=1; $i<9; $i++) {
 	$sql="UPDATE user_metric_tmp1_$i SET metric=(log(times_ranked)*avg_raters_importance*avg_rating);";
 	$res=db_query($sql);
 	if (!$res) {
-		echo "Error in round $i calculating metric: ";
-		echo '<p>'.$sql.'<p>';
-		echo db_error();
+		$err .= "Error in round $i calculating metric: ";
+		$err .= '<p>'.$sql.'<p>';
+		$err .= db_error();
 		exit;
 		
 	}
@@ -164,9 +160,9 @@ for ($i=1; $i<9; $i++) {
 	$sql="DELETE FROM user_metric_tmp1_$i WHERE metric < $threshhold";
 	$res=db_query($sql);
 	if (!$res) {
-                echo "Error in round $i deleting < threshhold ids: ";
-		echo '<p>'.$sql.'<p>';
-                echo db_error();
+                $err .= "Error in round $i deleting < threshhold ids: ";
+		$err .= '<p>'.$sql.'<p>';
+                $err .= db_error();
                 exit;
                 
         }
@@ -186,9 +182,9 @@ for ($i=1; $i<9; $i++) {
 
 	$res=db_query($sql);
         if (!$res) {
-                echo "Error in round $i inserting final data: ";
-                echo '<p>'.$sql.'<p>';
-                echo db_error();
+                $err .= "Error in round $i inserting final data: ";
+                $err .= '<p>'.$sql.'<p>';
+                $err .= db_error();
                 exit;
         }
 
@@ -198,7 +194,7 @@ for ($i=1; $i<9; $i++) {
 		Create the final table, then insert the data
 	*/
 
-	// echo '<br />Starting Final Metric';
+	// $err .= '<br />Starting Final Metric';
 
 	db_drop_table_if_exists ("user_metric".$i);
 	db_drop_sequence_if_exists ("user_metric".$i."_ranking_seq");
@@ -215,9 +211,9 @@ for ($i=1; $i<9; $i++) {
 
 	$res=db_query($sql);
 	if (!$res) {
-                echo "Error in round $i inserting final data: ";
-                echo '<p>'.$sql.'<p>';
-                echo db_error();
+                $err .= "Error in round $i inserting final data: ";
+                $err .= '<p>'.$sql.'<p>';
+                $err .= db_error();
                 exit;
         }
 
@@ -231,9 +227,9 @@ for ($i=1; $i<9; $i++) {
 		ORDER BY metric DESC;";
 	$res=db_query($sql);
 	if (!$res) {
-		echo "Error in round $i inserting final data: ";
-		echo '<p>'.$sql.'<p>';
-		echo db_error();
+		$err .= "Error in round $i inserting final data: ";
+		$err .= '<p>'.$sql.'<p>';
+		$err .= db_error();
 		exit;
 	}
 
@@ -242,13 +238,13 @@ for ($i=1; $i<9; $i++) {
 	*/
 	$res=db_query("SELECT COUNT(*) FROM user_metric$i");
 	if (!$res) {
-		echo "Error in round $i getting row count: ";
-		echo '<p>'.$sql.'<p>';
-		echo db_error();
+		$err .= "Error in round $i getting row count: ";
+		$err .= '<p>'.$sql.'<p>';
+		$err .= db_error();
 		exit;
 	}
 
-	//echo '<br />Issuing Final Update';
+	//$err .= '<br />Issuing Final Update';
 	// Only do final percentile if row count is not zero
 	if (db_result($res,0,0)) {
 
@@ -259,18 +255,18 @@ for ($i=1; $i<9; $i++) {
 		percentile=(100-(100*((ranking::float-1)/". db_result($res,0,0) .")))";
 	    $res=db_query($sql);
 	    if (!$res || db_affected_rows($res) < 1) {
-		echo "Error in round $i setting percentile: ";
-		echo '<p>'.$sql.'<p>';
-		echo db_error();
+		$err .= "Error in round $i setting percentile: ";
+		$err .= '<p>'.$sql.'<p>';
+		$err .= db_error();
 		exit;
 	    }
 	    $sql="UPDATE user_metric$i SET
 		importance_factor=(1+((percentile/100)*.5));";
 	    $res=db_query($sql);
 	    if (!$res || db_affected_rows($res) < 1) {
-		echo "Error in round $i setting importance factor: ";
-		echo '<p>'.$sql.'<p>';
-		echo db_error();
+		$err .= "Error in round $i setting importance factor: ";
+		$err .= '<p>'.$sql.'<p>';
+		$err .= db_error();
 		exit;
 	    }
 	}
@@ -279,12 +275,12 @@ for ($i=1; $i<9; $i++) {
 db_commit();
 db_query("DELETE FROM user_metric;");
 db_query("INSERT INTO user_metric SELECT * FROM user_metric".($i-1).";");
-//echo '<p>'.db_error().'<p>';
+//$err .= '<p>'.db_error().'<p>';
 
 /*
 	Now run through and drop the tmp tables
 */
-// echo "<p>Cleaning up tables<p>";
+// $err .= "<p>Cleaning up tables<p>";
 
 for ($i=1; $i<9; $i++) {
 	db_drop_table_if_exists ("user_metric_tmp1_".$i);
@@ -292,7 +288,7 @@ for ($i=1; $i<9; $i++) {
 	db_drop_table_if_exists ("user_metric".$i);
 };
 
-echo db_error();
+$err .= db_error();
 
 $t = time();
 $ts_month = date('Ym', $t);
@@ -305,7 +301,10 @@ db_query("
 	SELECT '$ts_month','$ts_day',user_id,ranking,metric
 	FROM user_metric
 ");
-echo db_error();
+$err .= db_error();
+
+cron_entry(1,$err);
+
 db_commit();
 
 ?>

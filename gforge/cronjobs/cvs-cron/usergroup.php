@@ -2,6 +2,7 @@
 <?php
 
 require_once('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 //
 //	Default values for the script
@@ -14,7 +15,7 @@ define('FILE_EXTENSION','.new'); // use .new when testing
 define('CVS_ROOT','/cvsroot/');
 
 if (!file_exists('/etc/passwd.org') || !file_exists('/etc/shadow.org') || file_exists('/etc/group.org')) {
-	echo "CANNOT PROCEED - You must first copy/backup your /etc/shadow, /etc/group, and /etc/passwd files";
+	$err .= "CANNOT PROCEED - You must first copy/backup your /etc/shadow, /etc/group, and /etc/passwd files";
 	exit;
 }
 
@@ -37,7 +38,7 @@ $user_pws =& util_result_column_to_array($res,'unix_pw');
 //	Get anonymous pserver users
 //
 $res7=db_query("SELECT unix_group_name FROM groups WHERE status='A' AND is_public='1' AND enable_anoncvs='1';");
-echo db_error();
+$err .= db_error();
 $rows = db_numrows($res7);
 for($k = 0; $k < $rows; $k++) {
 	$pserver_anon[db_result($res7,$k,'unix_group_name')]=',anonymous';
@@ -188,5 +189,7 @@ foreach($users as $user) {
 	}
 	system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
 }
+
+cron_entry(16,$err);
 
 ?>

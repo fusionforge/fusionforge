@@ -23,10 +23,7 @@
  */
         
 require ('squal_pre.php');
-
-/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-        exit_permission_denied();
-}*/
+require ('common/include/cron_utils.php');
 
 #
 #    aggregate the ratings
@@ -35,7 +32,7 @@ require ('squal_pre.php');
 db_begin();
 
 $rel = db_query("DELETE FROM survey_rating_aggregate;");
-echo db_error();
+$err .= db_error();
 
 
 $query = "INSERT INTO survey_rating_aggregate SELECT type,id,avg(response),count(*) FROM survey_rating_response GROUP BY type,id;";
@@ -44,7 +41,9 @@ $rel = db_query($query);
 db_commit();
 
 if (db_error()) {
-	echo "Error: ".db_error();
+	$err .= "Error: ".db_error();
 }
+
+cron_entry(9,$err);
 
 ?>

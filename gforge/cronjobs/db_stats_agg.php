@@ -3,7 +3,7 @@
 /**
  * GForge
  * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright (c) GForeg, LLC
+ * The rest Copyright (c) GForge, LLC
  *
  * @version   $Id$
  *
@@ -25,6 +25,7 @@
  */
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 $year=date('Y');
 $day=date('d');
@@ -35,10 +36,10 @@ $month=date('m');
 //	project stats by month
 //
 db_begin(SYS_DB_STATS);
-echo "\n\nBeginning stats_project_months: ".date('Y-m-d H:i:s',time());
+$err .= "\n\nBeginning stats_project_months: ".date('Y-m-d H:i:s',time());
 
 $rel = db_query("DELETE FROM stats_project_months;", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
+$err .= db_error(SYS_DB_STATS);
 
 $rel=db_query("INSERT INTO stats_project_months
 SELECT month,
@@ -71,7 +72,7 @@ SELECT month,
 FROM stats_project_vw
 GROUP BY month,group_id
 ", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
+$err .= db_error(SYS_DB_STATS);
 
 db_commit(SYS_DB_STATS);
 
@@ -83,10 +84,10 @@ db_query("VACUUM ANALYZE stats_project_months;", -1, 0, SYS_DB_STATS);
 //
 db_begin(SYS_DB_STATS);
 
-echo "\n\nBeginning stats_site_pages_by_month: ".date('Y-m-d H:i:s',time());
+$err .= "\n\nBeginning stats_site_pages_by_month: ".date('Y-m-d H:i:s',time());
 
 $rel = db_query("DELETE FROM stats_site_pages_by_month;", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
+$err .= db_error(SYS_DB_STATS);
 
 $rel=db_query("INSERT INTO stats_site_pages_by_month
 select month,sum(site_page_views) as site_page_views
@@ -94,10 +95,10 @@ select month,sum(site_page_views) as site_page_views
 ", -1, 0, SYS_DB_STATS);
 
 if (!$rel) {
-	echo "ERROR IN stats_site_pages_by_month";
+	$err .= "ERROR IN stats_site_pages_by_month";
 }
 
-echo db_error(SYS_DB_STATS);
+$err .= db_error(SYS_DB_STATS);
 
 db_commit(SYS_DB_STATS);
 
@@ -109,10 +110,10 @@ db_query("VACUUM ANALYZE stats_site_pages_by_month;", -1, 0, SYS_DB_STATS);
 //
 db_begin(SYS_DB_STATS);
 
-echo "\n\nBeginning stats_site_months: ".date('Y-m-d H:i:s',time());
+$err .= "\n\nBeginning stats_site_months: ".date('Y-m-d H:i:s',time());
 
 $rel = db_query("DELETE FROM stats_site_months;", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
+$err .= db_error(SYS_DB_STATS);
 
 $rel=db_query("INSERT INTO stats_site_months
 SELECT spm.month,
@@ -140,10 +141,12 @@ SELECT spm.month,
 	ORDER BY spm.month ASC;
 ", -1, 0, SYS_DB_STATS);
 
-echo db_error(SYS_DB_STATS);
+$err .= db_error(SYS_DB_STATS);
 
 db_commit(SYS_DB_STATS);
 
 db_query("VACUUM ANALYZE stats_site_months;", -1, 0, SYS_DB_STATS);
+
+cron_entry(4,$err);
 
 ?>

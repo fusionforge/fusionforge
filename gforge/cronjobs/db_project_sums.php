@@ -1,16 +1,15 @@
 #! /usr/bin/php4 -f
 <?php
 /**
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ */
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 /*
 
@@ -34,7 +33,7 @@ db_query("LOCK TABLE forum_group_list IN ACCESS EXCLUSIVE MODE;");
 
 $res = db_query("DELETE FROM forum_agg_msg_count;");
 if (!$res) {
-	echo "DELETE FROM forum_agg_msg_count : ".db_error();
+	$err .= "DELETE FROM forum_agg_msg_count : ".db_error();
 }
 
 $res = db_query("INSERT INTO forum_agg_msg_count
@@ -43,7 +42,7 @@ FROM forum_group_list fgl
 LEFT JOIN forum f USING (group_forum_id)
 GROUP BY fgl.group_forum_id;");
 if (!$res) {
-	echo "INSERT INTO forum_agg_msg_count : ".db_error();
+	$err .= "INSERT INTO forum_agg_msg_count : ".db_error();
 }
 
 db_commit();
@@ -61,7 +60,7 @@ db_query("LOCK TABLE artifact IN ACCESS EXCLUSIVE MODE;");
 db_query("LOCK TABLE artifact_group_list IN ACCESS EXCLUSIVE MODE;");
 
 $rel = db_query("DELETE FROM artifact_counts_agg;");
-echo db_error();
+$err .= db_error();
 
 $rel=db_query("INSERT INTO artifact_counts_agg
 SELECT agl.group_artifact_id,
@@ -70,7 +69,7 @@ SELECT agl.group_artifact_id,
 FROM artifact_group_list agl 
 LEFT JOIN artifact a USING (group_artifact_id)
 GROUP BY agl.group_artifact_id;");
-echo db_error();
+$err .= db_error();
 
 db_commit();
 
@@ -96,7 +95,7 @@ $sql="INSERT INTO project_sums_agg
 	GROUP BY group_id,type;";
 
 $res=db_query($sql);
-echo db_error();
+$err .= db_error();
 
 
 /*
@@ -109,7 +108,7 @@ $sql="INSERT INTO project_sums_agg
 	GROUP BY group_id,type;";
 
 $res=db_query($sql);
-echo db_error();
+$err .= db_error();
 
 
 /*
@@ -123,7 +122,7 @@ $sql="INSERT INTO project_sums_agg
 	GROUP BY group_id,type;";
 
 $res=db_query($sql);
-echo db_error();
+$err .= db_error();
 
 
 /*
@@ -136,16 +135,18 @@ $sql="INSERT INTO project_sums_agg
 	GROUP BY group_id,type;";
 
 $res=db_query($sql);
-echo db_error();
+$err .= db_error();
 
 
 db_commit();
-echo db_error();
+$err .= db_error();
 
 db_query("VACUUM ANALYZE project_sums_agg;");
 
 if (db_error()) {
-	echo "Error: ".db_error();
+	$err .= "Error: ".db_error();
 }
+
+cron_entry(3,$err);
 
 ?>

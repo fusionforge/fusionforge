@@ -25,6 +25,7 @@
  */
 
 require ('squal_pre.php');
+require ('common/include/cron_utils.php');
 
 //
 //	PG 7.1 and earlier
@@ -37,7 +38,9 @@ $res = db_query("VACUUM FULL;");
 
 
 if (!$res) {
-	echo "Error on DB1: " . db_error();
+	$err .= "Error on DB1: " . db_error();
 }
+
+cron_entry(12,$err);
 
 ?>
