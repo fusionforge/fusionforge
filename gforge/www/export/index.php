@@ -53,7 +53,7 @@ project property, require project admin privilege.
 
 <ul>
 <li><a href="nitf_sfforums.php">Project Forums</a>
-(<a href="sf_forum_0.1.dtd.txt">&lt;sf_forum_0.1.dtd&gt;</a>)</li>
+(<a href="sf_forum_0.1.dtd">&lt;sf_forum_0.1.dtd&gt;</a>)</li>
 <li><a href="bug_dump.php">Project Bugs</a>
 (<a href="sf_bugs_0.1.dtd">&lt;sf_bugs_0.1.dtd&gt;</a>)</li>
 <li><a href="patch_dump.php">Project Patches</a>
