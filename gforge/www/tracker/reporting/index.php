@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   index.php,v 1.1 2001/11/01 19:19:19 lo-lan-do Exp
+  * @version   index.php,v 1.2 2002/10/04 00:09:59 cbayle Exp
   *
   */
 
@@ -286,6 +286,7 @@ if ($perm->isMember()) {
 		$params['toptab'] = 'tracker';
 		$params['title'] = $page_title;
 		$params['pagename'] = 'tracker_reporting';
+		$params['sectionvals']=array(group_getname($group_id));
 	
 		echo site_project_header($params);
 

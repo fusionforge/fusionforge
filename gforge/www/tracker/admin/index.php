@@ -708,6 +708,8 @@ if ($group_id && $atid) {
 	$params['group']=$group_id;
 	$params['toptab']='tracker';
 	$params['pagename']='tracker_admin_choose';
+	$params['title'] = $page_title;
+	$params['sectionvals']=array(group_getname($group_id));
 	
 	echo site_project_header($params);
 	echo '<B><A HREF="/tracker/admin/?group_id='.$group_id.'">Admin</A></B><P>';
