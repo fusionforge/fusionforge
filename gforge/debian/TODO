@@ -1,0 +1,42 @@
+This is a TODO list for the packaging.  Some items that used to be
+here have been transferred onto the Savannah project, at
+<http://savannah.gnu.org/support/?group_id=259>.
+
+* [CB] Make /stats/ work.  [RM] It seems the tables don't get filled
+  up, so I'd be tempted to blame the cronjobs.
+
+* [CB] Add documentation pointed in project admin page.  [RM] Has to
+  wait for smooth DB upgrade.  [RM] Even though, most of the
+  documentation is VA-centric and should not be used as is.
+
+* [CB] Create CVS tarballs.
+
+* [CB] ViewCVS instead of CVSWEB?
+
+* [CB] Find how to use libnss-lwres.  [RM] ???
+
+* [CB] Repair /admin/useredit.php.  [RM] Works for me.
+
+* [CB] Repair /admin/editpackages.php (Create FTP_INCOMING in
+  /var/lib/sourceforge/ftp)
+
+* [CB] language_code is missing in language table.  [RM] Probably a
+  matter of data.  Has to wait for smooth DB upgrade.
+
+* [RM] Check permissions on the ftp directory, in accordance with
+  section 4.9 of the Policy.
+
+* [RM] Think about where to put the FTP root directory:
+  /var/lib/sourceforge/ftp or /usr/lib/sourceforge/ftp or maybe
+  /home/sourceforge/ftp?
+
+* [RM] Check the PHP warnings in the projects statistics page.  [RM]
+  That's an old item, is it still current?
+
+* [RM] Do not create CVS repositories if the projet does not use CVS.
+
+* [RM] Decide on whether to use a chroot or not.
+
+# Local variables:
+# mode: indented-text
+# End:

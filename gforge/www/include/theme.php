@@ -31,7 +31,7 @@ function user_getthemeid($user_id = 0) {
                         } else {
                                 //invalid theme - store and return
                                 $USER_THEME["user_$user_id"]="<B>Invalid User ID</B>";
-                                return $USER_THEME["user_$user_id"];
+                                return -1;
                         }
                 }
         }

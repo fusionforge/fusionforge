@@ -1,0 +1,223 @@
+Template: sourceforge/domain_name
+Type: string
+Description: Your SF domain or subdomain name
+ The domain that will host your Sourceforge installation.  Some services
+ will be given their own subdomain in that domain (cvs, lists, etc.).
+Description-fr: Votre nom de domaine
+ Le nom du domaine qui héberge votre Sourceforge.  Certains services auront
+ leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, etc.).
+
+Template: sourceforge/cvs_host
+Type: string
+Description: Your CVS server
+ The hostname of the server that will host your Sourceforge CVS
+ repositories.  It should not be the same as your main SF host.
+Description-fr: Votre serveur CVS
+ Le nom du serveur CVS de votre Sourceforge.
+ Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
+
+Template: sourceforge/lists_host
+Type: string
+Description: Your mailing-lists server
+ The hostname of the server that will host your Sourceforge mailing-lists. 
+ It should not be the same as your main SF host.
+Description-fr: Votre serveur de listes de diffusion
+ Le nom du serveur qui hébergera vos listes de diffusion de Sourceforge.
+ Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
+
+Template: sourceforge/ip_address
+Type: string
+Description: Your IP address
+ The IP address of the server that will host your Sourceforge installation.
+ This is needed for the Apache virtualhosting configuration.
+Description-fr: Votre adresse IP
+ L'adresse IP du serveur qui hébergera votre installation de Sourceforge.
+ Cette information est requise pour la configuration des hôtes virtuels
+ d'Apache.
+
+Template: sourceforge/server_admin
+Type: string
+Description: The SF admin email address.
+ The email address of the Sourceforge administrator of your site.  Needed
+ in case a problem occurs.
+Description-fr: L'adresse e-mail de l'administrateur SF
+ L'adresse e-mail de l'administrateur de votre Sourceforge, requise au cas
+ où un problème survendrait.
+
+Template: sourceforge/db_password
+Type: password
+Description: Password used for the database
+ The connecton to the DB system requires a password.  Please choose a
+ password here.
+Description-fr: Mot de passe utilisé pour la base de données
+ La connexion à la base de données doit être authentifiée par un mot de
+ passe.  Veuillez le choisir ici.
+
+Template: sourceforge/db_password_confirm
+Type: password
+Description: Password used for the database - again
+ Please re-type the password for confirmation.
+Description-fr: Mot de passe pour la base de données - confirmation
+ Veuillez saisir le mot de passe de nouveau, pour confirmation.
+
+Template: sourceforge/system_name
+Type: string
+Default: Sourceforge
+Default-fr: 
+Description: The Sourceforge system name
+ This name is used in various places throughout the system.
+Description-fr: Nom de votre système Sourceforge
+ Ce nom est utilisé à divers endroits au travers du système.
+
+Template: sourceforge/admin_login
+Type: string
+Default: admin
+Default-fr: admin
+Description: The Sourceforge administrator login
+ This Sourceforge account will have all privileges on the Sourceforge
+ system.  It is needed to approve the creation of the projects.
+Description-fr: Le nom du compte de l'administrateur
+ Ce compte Sourceforge a tous les privilèges sur le système Sourceforge.
+ Il sert entre autres à approuver la création de projets.
+
+Template: sourceforge/admin_password
+Type: password
+Description: The Sourceforge administrator password
+ This Sourceforge account will have all privileges on the Sourceforge
+ system.  It is needed to approve the creation of the projects.  Please
+ type a password here.
+Description-fr: Mot de passe de l'administrateur
+ Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le
+ saisir ici.
+
+Template: sourceforge/admin_password_confirm
+Type: password
+Description: The Sourceforge administrator password - again
+ Please re-type the password for confirmation.
+Description-fr: Mot de passe administrateur - confirmation
+ Veuillez saisir le mot de passe de nouveau, pour confirmation.
+
+Template: sourceforge/newsadmin_groupid
+Type: string
+Default: 2
+Default-fr: 2
+Description: The news admin group id
+ Members of the news admin group can approve news for the Sourceforge main
+ page.  This group id MUST NOT be 1. You only need to touch this group if
+ you upgrade from a previous version and want to keep your data.
+Description-fr: Le numéro du groupe d'administration des nouvelles
+ Les membres du groupe d'administration des nouvelles peuvent approuver des
+ nouvelles pour les publier sur la page d'accueil de Sourceforge.  Le numéro
+ de ce groupe NE DOIT PAS être 1.  Cette information n'est requise que si vous
+ mettez à jour une installation précédente et voulez garder vos données.
+
+Template: sourceforge/skill_list
+Type: string
+Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Default-fr: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Description: The initial list of skills
+ Sourceforge allows users to define a list of their skills, to be chosen
+ amongst those present in the database.  This list is the initial list of
+ skills that will enter the database.  Please enter the skill names
+ separated by semi-colons `;'.
+Description-fr: Liste de compétences
+ Les utilisateurs de Sourceforge peuvent afficher leurs niveaux de compétence
+ dans différents domaines.  Cette liste est la liste initiale de ces domaines.
+ Veuillez entrer les noms de ces domaines de compétence séparés par des
+ points-virgules `;'.
+
+Template: sourceforge/ldap_base_dn
+Type: string
+Description: The LDAP base DN
+ The DN is used to refer to the LDAP directory unambiguously.  You could use,
+ for instance, "dc=sourceforge,dc=example,dc=com"
+Description-fr: Le nom du répertoire LDAP (DN)
+ Le nom DN est utilisé pour identifier l'annuaire LDAP de manière unique.
+ Par exemple, vous pourriez utiliser le DN "dc=sourceforge,dc=exemple,dc=com".
+
+Template: sourceforge/ldap_host
+Type: string
+Description: The LDAP host
+ The hostname of the LDAP server.
+Description-fr: Le serveur LDAP
+ Le nom d'hôte de votre serveur LDAP.
+
+Template: sourceforge/web_only
+Type: boolean
+Default: true
+Description: Do you want only the web-related features?
+ Answering "yes" here will only install the web-related part of
+ Sourceforge, giving you features such as the bug tracker, task manager,
+ forums, news, support requests, etc.
+ .
+ Answering "no" will also install support for automated DNS, CVS, shell
+ accounts, LDAP, etc.  It is currently not fully working.
+ .
+ Since this package is trying to provide only working features, the default
+ answer is "yes" for now.
+Description-fr: Voulez-vous vous limiter aux fonctions web ?
+ Si vous répondez "oui", seules les fonctions web de Sourceforge seront
+ activées : l'outil de gestion de bogues, le gestionnaire de tâches, les
+ forums, les nouvelles, les requêtes de support, etc.
+ .
+ Si vous répondez "non", seront également installées les automatisations
+ de DNS, CVS, les comptes Unix, l'annuaire LDAP, etc.  Ces aspects ne
+ fonctionnent pas encore tous.
+ .
+ Afin de ne proposer que des outils qui fonctionnent, la réponse par défaut
+ est "oui" pour le moment.
+
+Template: sourceforge/noreply_to_bitbucket
+Type: boolean
+Default: true
+Description: Do you want mail to ${noreply} to be deleted?
+ Sourceforge sends plenty of e-mail from the "${noreply}" address,
+ and maybe even some e-mail to that address too.
+ .
+ It is advised that you let the package direct e-mail to that address to a
+ black hole (/dev/null), unless you have another use for that address.
+ .
+ Answering "yes" here will perform that redirection.
+Description-fr: Supprimer les e-mails pour ${noreply} ?
+ Sourceforge envoie fréquemment des e-mails depuis (et vers) l'adresse
+ "${noreply}".
+ .
+ Il est conseillé de rediriger les e-mails vers cette adresse vers un trou
+ noir, sauf si vous avez un autre usage pour cette adresse.
+ .
+ Répondre "oui" ici mettra en place cette redirection.
+
+Template: sourceforge/ldap_web_add_password
+Type: password
+Description: LDAP password used to add users from the web
+ In order to add users into the LDAP directory from the web, you need to
+ provide a password.
+Description-fr: Mot de passe LDAP pour l'ajout d'utilisateurs
+ Vous avez besoin d'un mot de passe pour ajouter des utilisateurs à
+ l'annuaire LDAP depuis le web.  Veuillez le saisir ici.
+
+Template: sourceforge/ldap_web_add_password_confirm
+Type: password
+Description: LDAP password - again
+ Please re-type the password for confirmation.
+Description-fr: Mot de passe LDAP - confirmation
+ Veuillez saisir le mot de passe de nouveau, pour confirmation.
+
+Template: sourceforge/mod_ssl_cert
+Type: note
+Description: Generate an SSL certificate
+ You need a valid SSL/TLS certificate to run Sourceforge.
+ If you don't already have one, you'll have to run the
+ "mod-ssl-makecert" command to generate one, and restart Apache
+ afterwards.
+ .
+ Please note you will not be able to start Apache if you have no
+ such certificate.
+Description-fr: N'oubliez pas de générer un certificat SSL
+ Sourceforge a besoin d'un certificat de cryptographie SSL/TLS
+ pour fonctionner.  Si vous n'en avez pas déjà un, vous devrez
+ vous en fabriquer un à l'aide de la commande "mod-ssl-makecert".
+ N'oubliez pas de redémarrer Apache par la suite.
+ .
+ NB : vous ne pourrez pas démarrer Apache si vous n'avez pas de
+ certificat.

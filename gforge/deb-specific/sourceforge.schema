@@ -1,0 +1,19 @@
+#Thanks to Olafur Osvaldson on Offsite talk
+#Sourceforge Project's directory schema items 
+# by Olafur Osvaldsson (osvaldsson@users.sourceforge.net) 
+# 
+# depends upon: 
+# core.schema 
+# cosine.schema 
+# inetorgperson.schema 
+# nis.schema 
+# 
+attributetype ( 1.1.2.2.2 NAME 'x-cvsShell' 
+	DESC 'The path to the CVS login shell' 
+	EQUALITY caseExactIA5Match 
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
+
+objectclass ( 1.1.2.2.1 NAME 'x-sourceforgeAccount' SUP top AUXILIARY
+	DESC 'Abstraction of a Sourceforge account' 
+	MAY ( x-cvsShell ) ) 
+
