@@ -73,7 +73,7 @@ function doc_droplist_count($l_group_id, $language_id) {
 		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"post\"><table border=\"0\">"
 			." <tr><td valign=\"middle\"><strong>".$Language->getText('general','language')." </strong></td>"
 			." <td valign=\"middle\"><select name=\"language_id\">\n\n";
-		print "<option value=\"0\">".$Language->getText('docman_display_doc','all_languages')." </option>";
+		print "<option value=\"*\">".$Language->getText('docman_display_doc','all_languages')." </option>";
 		while($grow = db_fetch_array($gresult)) {
 
 			if ($language_id == $grow['language_id']) {

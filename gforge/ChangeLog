@@ -1,3 +1,14 @@
+2003-10-21  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/docman/include/doc_utils.php: "All languages" in language
+	selection dropdown menu is now * rather than 0.
+
+	* www/docman/index.php: Taking that change into consideration, we
+	now set $language_id to 0 if we get "*" as a CGI value.  This
+	means we can distinguish between undefined $language_id and "all
+	languages", so that selecting "All languages" in a docman really
+	shows documents from all languages.
+
 2003-10-18 Christian Bayle <bayle@debian.org>
 	
 	* Applied various patch

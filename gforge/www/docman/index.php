@@ -42,6 +42,10 @@ if (!$language_id) {
 	}
 }
 
+if ($language_id == "*") {
+  $language_id = 0 ;
+}
+
 $df->setLanguageID($language_id);
 $d_arr =& $df->getDocuments();
 if (!$_arr || count($d_arr) <1){
