@@ -17,12 +17,14 @@ $HTML->header(array('title'=>'Basic Project Information'));
 needs to contain the purpose of the project and a summarization of your
 goals.
 
-<P>If the SourceForge staff approves your project account, the account
-is to be used purely to meet the goals set forth in this statement.
-Use of the project account for anything other than 
-the purposes and goals in this statement is prohibited.
-If you need to change this statement at any time, please inform a
-staff member and we will assist you in getting a new statement approved.
+<p>
+If the local Sourceforge administrator approves your project account,
+the account is to be used purely to meet the goals set forth in this
+statement.  Use of the project account for anything other than the
+purposes and goals in this statement is probably prohibited by local
+policy.  If you need to change this statement at any time, please
+inform a staff member and he will assist you in getting a new
+statement approved.
 
 <P>
 <B>Project Purpose and Summarization</B>

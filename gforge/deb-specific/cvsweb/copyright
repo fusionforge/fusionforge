@@ -1,0 +1,15 @@
+This package was created by Karl M. Hegbloom <karlheg@debian.org> in
+1998 for the Debian GNU/Linux distribution. It is now maintained
+by Joey Hess <joeyh@debian.org>.
+
+The upstream source can be downloaded from:
+	http://linux.fh-heilbronn.de/~zeller/cgi/cvsweb.cgi/
+
+# Copyright (c) 1996-1998 Bill Fenner   
+#           (c) 1998-1999 Henner Zeller   
+#           (c) 1999      Henrik Nordström   
+# All rights reserved.   
+
+The copyright terms are the BSD license, with the removal of condition 3,
+the advertising clause. The full test of the BSD license is available in
+/usr/share/common-licenses/BSD

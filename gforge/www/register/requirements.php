@@ -14,9 +14,9 @@ $HTML->header(array(title=>"Project Requirements"));
 <H2>Step 1: SourceForge Services & Requirements (Service Specific Rules)</H2>
 
 <p>
-We are now offering a full suite of services for SourceForge projects. If
+We are now offering a full suite of services for Sourceforge projects. If
 you haven't already, please be sure to browse the most recent revision of
-the SourceForge Services.
+the Sourceforge Services.
 </p>
 
 <p>
@@ -24,10 +24,11 @@ the SourceForge Services.
 </p>
 
 <p>
-The space given to you on this server is given for the expressed purpose of
-Open Source development or, in the case of web sites, the advancement of
-Open Source. For more information, please read the SourceForge Terms of
-Service ("Terms of Service").
+The space given to you on the original Sourceforge servers is given
+for the expressed purpose of Open Source development or, in the case
+of web sites, the advancement of Open Source.  The space given to you
+on this server, on the other hand, is given for the expressed purpose
+of whatever the local Sourceforge maintainer has decided.
 </p>
 
 <p>
@@ -35,10 +36,10 @@ Service ("Terms of Service").
 </p>
 
 <p>
-It is our intent to allow you creative freedom on your project. This is not
-a totally free license, though. For our legal protection and yours there are
-limits. Please know, however that we too are Open Source developers that
-value our freedom. Details about these restrictions are described in the
+It is the intent of the Sourceforge software to allow you creative
+freedom on your project.  However, for the legal protection of this
+site and yours there might be limits imposed by the local Sourceforge
+administrator.  Details about these restrictions are described in the
 Terms of Service.
 </p>
 
@@ -47,21 +48,24 @@ Terms of Service.
 </p>
 
 <p>
-You may not place any revenue-generating advertisements on a site hosted at
-SourceForge.
+You may not place any revenue-generating advertisements on a site
+hosted at sourceforge.net.  Contact the local Sourceforge
+administrator about the present site.
 </p>
 
 <p>
-<b>SourceForge Link</b>
+<b>Sourceforge Link</b>
 </p>
 
 <p>
-If you host a web site at SourceForge, you must place one of our approved
-graphic images on your site with a link back to SourceForge. The graphic may
-either link to the main SourceForge site or to your project page on
-SourceForge. We will leave placement up to you.  For information about how
-to insert a SourceForge logo which will track your pageviews, please read
-the SourceForge documentation.
+If you host a web site at this Sourceforge site, you might want to
+place one of our approved graphic images on your site with a link back
+to the Sourceforge site.  The graphic may either link to the main
+Sourceforge site or to your project page on the site.  For information
+about how to insert a SourceForge logo which will track your
+pageviews, please read the Sourceforge documentation.  Again, this
+condition is subject to the will of the local Sourceforge
+administrator.
 </p>
 
 <p>
@@ -69,24 +73,28 @@ the SourceForge documentation.
 </p>
 
 <p>
-You will be presented with a choice of Open Source approved licenses for
-your project. You will still own the code, but all of these licenses also
-allow us to make your code available to the general public. Although you may
-choose to stop hosting your project with us, the nature of these licenses
-will allow us to continue to make your code available. Details about content
-ownership are described in the Terms of Service.
+You will be presented with a choice of licenses for your project.
+Some of them are Open Source approved, some are not.  The ones that
+are Open Source approved also allow us to make your code available to
+the general public: although you may choose to stop hosting your
+project with us, the nature of these licenses will allow us to
+continue to make your code available.  It is therefore advised to
+think twice before you choose a license, especially if you choose one
+the local Sourceforge administrator might have added to the default
+ones.
 </p>
 
 <p>
-If you wish to use another license that is not currently approved by the
-Open Source Initiative, let us know and we will review these requests on a
-case-by-case basis.
+If you wish to use another license that is not currently listed, let
+the local Sourceforge administrator know and he will review these
+requests on a case-by-case basis.
 </p>
 
 <p>
-It is our intent to provide a permanent home for all versions of your code.
-We do reserve the right, however, to terminate your project if there is due
-cause, in accordance with the Terms of Service.
+It is the intent of the software to provide a permanent home for all
+versions of your code.  The Sourceforge administrator does reserve the
+right, however, to terminate your project if there is due cause, in
+accordance with the Terms of Service.
 </p>
 
 <BR><H3 align=center><a href="tos.php">Step 2: Terms of Service Agreement</a></H
