@@ -335,11 +335,10 @@ function bugAdd($sessionkey, $project, $summary, $details) {
 	$atf = new ArtifactTypeFactory($group);
 	$atf->setDataType("1"); // TODO reference a constant or something here
 	$artifactType = $atf->getArtifactTypes();
-	if (!$artifactType) {
+	if (!$artifactType[0]) {
     		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$artifactTypeFactory->getErrorMessage());
 	}
-	
-	$artifact=new Artifact($artifactType);
+	$artifact=new Artifact($artifactType[0]);
 	if (!$artifact->create('100', '100', $summary, $details)) {
     		return new soapval('tns:soapVal','string',"Couldn't create bug: ".$artifact->getErrorMessage());
 	}
