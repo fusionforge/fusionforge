@@ -316,8 +316,8 @@ admin_massmail_execute	sending_to			stuur naar
 admin_massmail_execute	user_id				Gebruikers id:
 #admin_responses	add_response			Added Response
 #admin_responses	by_the_way			By the way, I didn't delete... just in case...
-admin_responses	create					Creëer
-admin_responses	create_new_response			Creëer nieuw antwoord:
+admin_responses	create					CreÃ«er
+admin_responses	create_new_response			CreÃ«er nieuw antwoord:
 #admin_responses	deleted_resposes		Deleted Response
 admin_responses	edit_response				Bewerkte antwoorden
 admin_responses	edit_response_other			Bewerk antwoord: 
@@ -789,7 +789,7 @@ general	add			Voeg toe
 #general	browse		Browse
 #general	cancel		Cancel
 general	confirm			Bevestig
-general	create_successful	Succesvol gecreëerd
+general	create_successful	Succesvol gecreÃ«erd
 #general	delete		Delete
 #general	deleted		Deleted
 general	done			Klaar
@@ -844,7 +844,7 @@ group	long_news		Laatste Nieuws
 group	long_patch		Patch Manager
 group	long_pm			Taken Manager
 #group	long_support		Tech Support Manager
-group	long_survey		Enquêtes
+group	long_survey		EnquÃªtes
 group	nodescription		Dit project heeft nog geen beschrijving ingediend.
 group	norelease		Dit project heeft nog geen Files gepubliseerd.
 group	project_admins		Project Administators
@@ -865,7 +865,7 @@ group	short_patch		Patches
 group	short_pm		Taken
 group	short_summary		Samenvatting
 group	short_support		Ondersteuning
-group	short_survey		Enquêtes
+group	short_survey		EnquÃªtes
 #group	short_tracker		Tracker
 help	page_information	Pagina Informatie
 help	title			Welkom bij $1
@@ -982,8 +982,8 @@ my	pending_news_bytes_3	Klik hier.
 my	pending_projects_3	Klik hier.
 my	projects		Mijn Projecten
 my	submitteditems		Mijn ingediende items
-my	survey			Snelle Enquête
-my	survey_taken		Je hebt je ontwikkelaars Enquête afgerond
+my	survey			Snelle EnquÃªte
+my	survey_taken		Je hebt je ontwikkelaars EnquÃªte afgerond
 my	tasks			Mijn Taken
 my	title			Persoonlijke pagina voor: $1
 my_bookmark	return				Terug
@@ -1405,7 +1405,7 @@ project_admin_database	new_password	Nieuw Wachtwoord
 #project_admin_editgroupinfo	use_news	Use News
 #project_admin_editgroupinfo	use_pm	Use Project/Task Manager
 project_admin_editgroupinfo	use_stats	Gebruiks statistieken
-project_admin_editgroupinfo	use_surveys	Gebruiks Enquête
+project_admin_editgroupinfo	use_surveys	Gebruiks EnquÃªte
 #project_admin_editgroupinfo	use_tracker	Use Tracker
 #project_admin_editimages	add_data	Add Multimedia Data
 #project_admin_editimages	add_file	Add File
@@ -1600,7 +1600,7 @@ project_admin_showreleases	date	Datum
 #project_home	no_trackers	There are no public trackers available
 #project_home	public_mailing_lists	public mailing lists
 #project_home	release_notes	Release Notes
-project_home	surveys		Enquêtes
+project_home	surveys		EnquÃªtes
 #project_home	title	Project Info
 #project_home	tracker_open	$1 open /$2 total
 #project_home	view_members	View Members
@@ -1973,8 +1973,8 @@ stats_site_utils	developers	Ontwikkelaars
 #survey	low	Low
 survey	permission_denied	Permissie geweigerd
 #survey	survey_not_found	Survey not found
-survey	survey_privacy		Enquête Privacy
-survey	title			Enquête
+survey	survey_privacy		EnquÃªte Privacy
+survey	title			EnquÃªte
 #survey_add_question	add_this_question	Add This Question.
 #survey_add_question	error_insert_question	Error inserting question
 #survey_add_question	question	Question
@@ -1982,17 +1982,17 @@ survey	title			Enquête
 #survey_add_question	question_type	Question type
 survey_add_question	show_existing_questions		Vertoon bestaande vragen.
 survey_add_question	title				Voeg een vraag toe
-survey_add_survey	add_this_survey			Voeg deze Enquête toe
+survey_add_survey	add_this_survey			Voeg deze EnquÃªte toe
 #survey_add_survey	error_in_insert			Error in Survey Insert
-survey_add_survey	existing_surveys	Bestaaande Enquêtes
+survey_add_survey	existing_surveys	Bestaaande EnquÃªtes
 survey_add_survey	is_active		Is actief?
 #survey_add_survey	list_questions_numbers	List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view the question id's. Do <strong>not</strong> include spaces or end your list with a comma. <br />Ex: 1,2,3,4,5,6,7
-survey_add_survey	name_of_survey		Naam van de Enquête:
+survey_add_survey	name_of_survey		Naam van de EnquÃªte:
 survey_add_survey	no			Nee
 survey_add_survey	show_existing_question	Vertoon bestaande vragen
 survey_add_survey	survey_inserted	Survey	Toegevoegd
-survey_add_survey	title			Voeg een Enquête toe
-survey_add_survey	title_is_required	Enquête titel is verplicht
+survey_add_survey	title			Voeg een EnquÃªte toe
+survey_add_survey	title_is_required	EnquÃªte titel is verplicht
 survey_add_survey	yes			Ja
 #survey_admin	section				Survey Tool
 #survey_admin	title	Administration
@@ -2003,37 +2003,37 @@ survey_add_survey	yes			Ja
 #survey_admin_edit_question	section	Survey Tool Administration
 #survey_admin_edit_question	title	Edit A Survey Question
 #survey_admin_edit_survey	section	Survey Tool Administration
-survey_admin_edit_survey	title		Bewerk Enquête
+survey_admin_edit_survey	title		Bewerk EnquÃªte
 #survey_admin_index	add_question	Add Questions
-survey_admin_index	add_survey		Voeg Enquêtes toe
-survey_admin_index	edir_existing_survey	Bewerk bestaande Enquêtes
+survey_admin_index	add_survey		Voeg EnquÃªtes toe
+survey_admin_index	edir_existing_survey	Bewerk bestaande EnquÃªtes
 survey_admin_index	edit_existing_question	Bewerk bestaande vragen
 #survey_admin_index	its_simple_to_create	<p>It's simple to create a survey.<ol><li>Create questions and comments using the forms above.</li><li>Create a survey, listing the questions in order (choose from <strong>your</strong> list of questions).</li><li>Link to the survey using this format: $1 where XX is the survey number
 survey_admin_index	permission_denied	Permissie geweigerd
-survey_admin_index	show_results		Vertoon Enquête Resultaten
-survey_admin_index	title			Enquête administratie
+survey_admin_index	show_results		Vertoon EnquÃªte Resultaten
+survey_admin_index	title			EnquÃªte administratie
 #survey_admin_index	you_can_now_activate	You can now activate/deactivate surveys on the $1 Edit Existing Surveys $2 page
 #survey_admin_show_questions	section		Survey Tool Administration
-survey_admin_show_questions	title		Vertoon enquête vragen
+survey_admin_show_questions	title		Vertoon enquÃªte vragen
 #survey_admin_show_results	section		Survey Tool Administration
-survey_admin_show_results	title		Vertoon enquête resultaten
+survey_admin_show_results	title		Vertoon enquÃªte resultaten
 #survey_admin_show_results_aggregate	section	Survey Tool Administration
-survey_admin_show_results_aggregate	title	Vertoon enquête resultaten
+survey_admin_show_results_aggregate	title	Vertoon enquÃªte resultaten
 #survey_admin_show_results_comments	section	Survey Tool Administration
-survey_admin_show_results_comments	title	Vertoon enquête commentaren
+survey_admin_show_results_comments	title	Vertoon enquÃªte commentaren
 #survey_admin_show_results_individual	section	Survey Tool Administration
-survey_admin_show_results_individual	title	Vertoon individuele enquête resultaten
-survey_admin_utils	found			$1 enquêtes gevonden
+survey_admin_show_results_individual	title	Vertoon individuele enquÃªte resultaten
+survey_admin_utils	found			$1 enquÃªtes gevonden
 #survey_admin_utils	group_id		Group Id
 #survey_admin_utils	survey_id		Survey Id
-survey_admin_utils	survey_questions	enquête vragen
-survey_admin_utils	survey_title		Enquête titel
+survey_admin_utils	survey_questions	enquÃªte vragen
+survey_admin_utils	survey_title		EnquÃªte titel
 #survey_edit	change_after_already_response	If you change a survey after you already have responses, your results pages could be misleading or messed up
-survey_edit	existing_surveys		Bestaaande enquêtes
+survey_edit	existing_surveys		Bestaaande enquÃªtes
 survey_edit	is_active			Is Actief
 #survey_edit	list_question_numbers		List question numbers, in desired order, separated by commas. <strong>Refer to your list of questions</strong> so you can view	the question id's. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7
 #survey_edit	missing_date			UPDATE FAILED: Missing Data
-survey_edit	name_off_survey			Enquête naam
+survey_edit	name_off_survey			EnquÃªte naam
 survey_edit	no				Nee
 survey_edit	permission_denied		Permissie geweigerd
 survey_edit	question			Vragen
@@ -2041,7 +2041,7 @@ survey_edit	show_existing_questions		Vertoon bestaande vragen
 #survey_edit	submit_changes			Submit Changes
 #survey_edit	survey_question_required	UPDATE FAILED: Survey Questions Required
 #survey_edit	survey_title_required		UPDATE FAILED: Survey Title Required
-survey_edit	tilte				Bewerk een enquête
+survey_edit	tilte				Bewerk een enquÃªte
 #survey_edit	update_failed			UPDATE FAILED
 #survey_edit	update_successful		UPDATE SUCCESSFUL
 #survey_edit	warning_survey_after_response	WARNING! It is a bad idea to edit a survey after responses have been posted
@@ -2060,13 +2060,13 @@ survey_edit_question	title			Bewerk een vraag
 survey_edit_question	warning_change_after_response	WAARSCHUWING! Het is geen goed idee vragen te veranderen nadat respons is ingediend
 #survey_index	for_some_reason	For some reason, the Group ID or Survey ID did not make it to this page
 #survey_index	survey_id			Survey ID
-survey_index	survey_title			Enquête titel
-survey_index	this_group_has			Deze Groep heeft geen actieve enquêtes
-survey_index	title				Enquête
-survey_privacy	survey_privacy			Enquête privacy
+survey_index	survey_title			EnquÃªte titel
+survey_index	this_group_has			Deze Groep heeft geen actieve enquÃªtes
+survey_index	title				EnquÃªte
+survey_privacy	survey_privacy			EnquÃªte privacy
 #survey_privacy	the_privacy_information		<p>The information collected in these surveys will never be sold to third parties or used to solicit you to purchase any goods or services.</p><p>This information is being gathered to build a profile of the projects and developers being surveyed. That profile will help visitors to the site understand the quality of a given project.</p><p>The ID's of those who answer surveys are suppressed and not viewable by project administrators or the public or third parties.</p><p>The information gathered is used only in aggregate form, not to single out specific users or developers.</p><p>If any changes are made to this policy, it will affect only future data that is collected and the user will of course have the ability to 'opt-out'.
 survey_privacy	the_team			Het $1 Team
-survey_privacy	title				Enquête
+survey_privacy	title				EnquÃªte
 survey_rating_resp	click_to_resturn	Klik om terug te keren naar de vorige pagina
 #survey_rating_resp	error			ERROR
 #survey_rating_resp	error_in_insert		Error in insert
@@ -2079,30 +2079,30 @@ survey_rating_resp	you_must_be_logged_in	Je moet ingelogd zijn om te stemmen
 #survey_resp	error				Error
 #survey_resp	error_some_reason		Error - For some reason group_id and/or survey_id did not make it he
 survey_resp	regards				Betreft
-survey_resp	thank_you			Bedankt voor voor het nemen van de tijd om deze enquête in te vullen.
+survey_resp	thank_you			Bedankt voor voor het nemen van de tijd om deze enquÃªte in te vullen.
 survey_resp	the_crew			Het $1 Team
-survey_resp	title				Enquête Compleet
-survey_resp	unfortunately_you_have_to_be	Helaas, je moet ingelogd zijn om deel te kunnen nemen aan enquêtes.
+survey_resp	title				EnquÃªte Compleet
+survey_resp	unfortunately_you_have_to_be	Helaas, je moet ingelogd zijn om deel te kunnen nemen aan enquÃªtes.
 survey_resp	you_nedd_to_be_logged_in	Je moet hiervoor ingelogd zijn
 survey_show_questions	found			$1 vragen gevonden
 #survey_show_questions	note_use_these_questions_id	NOTE: use these question_id's when you create a new survey
 survey_show_questions	permission_denied	Permissie geweigerd
-survey_show_questions	title			Enquête Vragen
-survey_show_questions	you_may_use_any_of_these	Je mag elke van deze vragen gebruiken in je enquêtes
+survey_show_questions	title			EnquÃªte Vragen
+survey_show_questions	you_may_use_any_of_these	Je mag elke van deze vragen gebruiken in je enquÃªtes
 survey_show_result_comment	found			Gevonden
 survey_show_result_comment	permission_denied	Permissie geweigerd
 survey_show_result_comment	question	Vraag:
-survey_show_result_comment	title		Geaggregeerde enquête resultaten
+survey_show_result_comment	title		Geaggregeerde enquÃªte resultaten
 survey_show_results	found			Gevonden
 survey_show_results	permission_denied	Permissie geweigerd
-survey_show_results	title			enquête resultaten
+survey_show_results	title			enquÃªte resultaten
 #survey_show_results	view_aggregate_responses	View Aggregate Responses
 survey_show_results_aggregate	average		Gemiddeld
 #survey_show_results_aggregate	error		error
 survey_show_results_aggregate	no		Nee
 survey_show_results_aggregate	permission_denied	Permissie geweigerd
 #survey_show_results_aggregate	responses	Responses
-survey_show_results_aggregate	title		Geaggregeerde enquête resultaten
+survey_show_results_aggregate	title		Geaggregeerde enquÃªte resultaten
 survey_show_results_aggregate	view_comments	Laat commentaar zien
 survey_show_results_aggregate	yes		Ja
 survey_show_results_aggregate	yes_no		Ja / Nee
@@ -2110,15 +2110,15 @@ survey_show_results_csv	permission_denied	Permissie geweigerd
 survey_show_results_individual	permission_denied	Permissie geweigerd
 survey_show_results_individual	title		Resultaten
 survey_show_results_individual	yes_no		Ja / Nee
-survey_survey	section				Enquête hulp
-survey_survey	title				Vertoon enquête
-survey_survey_resp	section			Enquête hulp
+survey_survey	section				EnquÃªte hulp
+survey_survey	title				Vertoon enquÃªte
+survey_survey_resp	section			EnquÃªte hulp
 #survey_survey_resp	title			Survey Processing / Response
 urvey_utils	add_question			Voeg vragen toe
-survey_utils	add_survey			Voeg enquête toe
+survey_utils	add_survey			Voeg enquÃªte toe
 #survey_utils	admin				Admin
 survey_utils	edit_questions			Bewerk vragen
-survey_utils	edit_survey			Bewerk enquête
+survey_utils	edit_survey			Bewerk enquÃªte
 survey_utils	error_this_group_has_turned_off		Error, This Group Has Turned Off Surveys
 survey_utils	show_results			Vertoon Resultaten
 #system	datefmt					Y-m-d H:i
