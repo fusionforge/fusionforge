@@ -1,3 +1,10 @@
+2003-06-09  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* common/include/Group.class: Send a different project submission
+	email to the submitter and the site admins.  Submitter was sent a
+	link to approve-pending.php, which she could of course not use.
+	Added entries to Base.tab and French.tab accordingly.
+
 2003-05-30 Tom Copeland  <tom@infoether.com>
 
 	* www/my/index.php:

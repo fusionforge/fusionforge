@@ -260,13 +260,13 @@ admin_index	add_delete_edit_file_types	Ajouter, Supprimer ou Modifier les types 
 admin_index	add_delete_edit_laguage	Ajouter, Supprimer ou Modifier les languages accepctés
 admin_index	add_edit_delete_processors	Ajouter, Supprimer ou Modifier les processeurs
 admin_index	add_edit_delete_themes	Ajouter, Supprimer ou Modifier les thèmes
-admin_index	add_to_trove_map	Ajouter à l'arbre des� projets
+admin_index	add_to_trove_map	Ajouter à l'arbre des projets
 admin_index	approve_reject	Approuver/Rejeter
 admin_index	deleted_status	(supprimé) Statut
 admin_index	display_full_group	Affichier/Editer les groupes
 admin_index	display_full_user_list	Afficher/Editer les utilisateurs
 admin_index	display_groups_beginning_with	Affichier les groupes commençant par :
-admin_index	display_trove_map	Afficher l'arbre des� projets
+admin_index	display_trove_map	Afficher l'arbre des projets
 admin_index	display_user_beginning_with	Afficher les utilisateurs commençant par :
 admin_index	front_page_news	Annonces importantes
 admin_index	get	Prendre
@@ -508,9 +508,10 @@ calendar	tuesday	Mardi
 calendar	update	Mise à jour
 calendar	view	Vue :
 calendar	wednesday	Mercredi
-classgroup	acceptedproject	Votre demande d'enregistrement pour <b>$7</b> a été acceptée.\n\nNom complet du projet : $1\nNom unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nLe DNS prendra prendre jusqu'�  une journée pour pointer sur votre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne marche toujours pas, veuillez nous le signaler (traceurs | support technique) afin que nous puissions y regarder.\nNotez que tous les comptes Shell/CVS ne peuvent utiliser telnet mais seulement SSH 1.\n\nVotre site web est accessible �  travers votre compte. Vous pouvez lire la documentation du site (lien ci-dessus) pour prendre connaissance des services disponibles et de leur usage, ainsi que des répertoires du compte.\n\nPrenez le temps de lire la documentation concernant l'administration d'un projet. (http://$3/docs/site/). Si vous allez sur la page de votre projet en $7 en étant connecté, vous trouverez un menu supplémentaire �  gauche :  'Administration'. Nous vous suggérons de vous y rendre afin de créer une description publique de votre projet. cela peut être fait en aller sur la page de votre projet (en étant connecté), et en allant dans l''Administration' (menu �  gauche) ou en allant directement sur http://$3projet/admin/?group_id=$6\naprès vous être connecté.\n\nVotre projet n'appara�tra dans l'arbre des projets (qui recense les projects hébergés dans $7 et qui offre des possibilités étendues d'affichage et de recherche) que lorsque vous l'aurez catégorisé. Afin qu'on puisse trouver votre projet, vous devriez le faire maintenant (en étant connecté, et dans la zone d'administration)\n\nEncore bienvenue dans $7. Nous espérons que le système vous donnera satisfaction. A votre discposition\n\n- L'équipe de $7.
+classgroup	acceptedproject	Votre demande d'enregistrement pour <b>$7</b> a été acceptée.\n\nNom complet du projet : $1\nNom unix du projet : $2\nServeur CVS : cvs.$2.$3\nShell / serveur web : $2.$3\n\nLe DNS prendra prendre jusqu'à une journée pour pointer sur votre site.\nEn attendant, vous pouvez essayer de vous connecter sur $4 et de pointer CVS sur $5\n\nSi après 6 heures votre compte Shell/CVS ne marche toujours pas, veuillez nous le signaler (traceurs | support technique) afin que nous puissions y regarder.\nNotez que tous les comptes Shell/CVS ne peuvent utiliser telnet mais seulement SSH 1.\n\nVotre site web est accessible à travers votre compte. Vous pouvez lire la documentation du site (lien ci-dessus) pour prendre connaissance des services disponibles et de leur usage, ainsi que des répertoires du compte.\n\nPrenez le temps de lire la documentation concernant l'administration d'un projet. (http://$3/docs/site/). Si vous allez sur la page de votre projet en $7 en étant connecté, vous trouverez un menu supplémentaire à gauche :  'Administration'. Nous vous suggérons de vous y rendre afin de créer une description publique de votre projet. cela peut être fait en aller sur la page de votre projet (en étant connecté), et en allant dans l''Administration' (menu à gauche) ou en allant directement sur http://$3projet/admin/?group_id=$6\naprès vous être connecté.\n\nVotre projet n'apparaa dans l'arbre des projets (qui recense les projects hébergés dans $7 et qui offre des possibilités étendues d'affichage et de recherche) que lorsque vous l'aurez catégorisé. Afin qu'on puisse trouver votre projet, vous devriez le faire maintenant (en étant connecté, et dans la zone d'administration)\n\nEncore bienvenue dans $7. Nous espérons que le système vous donnera satisfaction. A votre discposition\n\n- L'équipe de $7.
 classgroup	acceptedprojecttitle	Projet $1 Approuvé
 classgroup	newprojectnotification	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou rejeter ce projet:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification_submitter	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\L'équipe d'administration de $1 va maintenant examiner votre\nsoumission de projet, et vous serez tenu informé de sa décision.
 classgroup	newprojectnotificationtitle	Projet $1 Soumis
 classgroup	rejectedproject	Votre enregistrement de projet a été rejeté.\n\nNom long du projet:  $1\nNom UNIX du projet:  $2\n\nRaison de notre refus:\n\n
 classgroup	rejectedprojecttitle	Projet $1 Refusé
@@ -798,7 +799,7 @@ general	edit	Editer
 general	error	Erreur
 general	error_creating	ERREUR pendant la création de $1
 general	error_getting	Erreur en accédant à $1
-general	error_getting_new	Erreur en accédant �  un nouvel objet $1
+general	error_getting_new	Erreur en accédant à un nouvel objet $1
 general	error_group_id	L'identifiant du groupe dans la base de données ne correspond pas avec l'objet groupe.
 general	error_missing_params	Pas assez de paramètres
 general	error_no_valid_group_object	$1 Groupe d'objet non valide
@@ -870,18 +871,18 @@ group	short_survey	Sondages
 group	short_tracker	Traceurs
 help	page_information	Page d'information
 help	title	Bienvenue sur $1
-help_tracker	assignee	Cette liste déroulante recueille l'administrateur �  qui une trace est confiée.
-help_tracker	attach_file	Si vous souhaitez annexer un fichier �  une trace, vous devez cocher cette case avant se soumettre les changements.
-help_tracker	canned_response	La liste déroulante de réponses pré-enregistrées recence les réponses définies par les administrateurs pour réagir �  des traces.<br /><br /> Si vous es administrateur du projet, vous pouvez suivre le lien 'admin' pour définir vos propres réponses pré-enregistrées.
+help_tracker	assignee	Cette liste déroulante recueille l'administrateur à qui une trace est confiée.
+help_tracker	attach_file	Si vous souhaitez annexer un fichier à une trace, vous devez cocher cette case avant se soumettre les changements.
+help_tracker	canned_response	La liste déroulante de réponses pré-enregistrées recence les réponses définies par les administrateurs pour réagir à des traces.<br /><br /> Si vous es administrateur du projet, vous pouvez suivre le lien 'admin' pour définir vos propres réponses pré-enregistrées.
 help_tracker	category	Cette liste déroulante recense les catégories de traces possibles ici.<br /><br />Choisir 'tous' pour l'ensemble.
 help_tracker	close_window	Fermer la fenêtre.
-help_tracker	comment	La zone de texte 'commentaire' vous permet d'attacher un commentaire �  une trace lorsqu'il n'y a pas de réponse automatique appropriée.
-help_tracker	priority	L'option de priorité permet �  un utilisateur une priorité (de 1 �  9) pour sa trace.<br /><br />C'est particulièrement utilie pour des bugs ou des soucis pour lesquels un utilisateur peut avoir découvert un problème critique pour le projet.
+help_tracker	comment	La zone de texte 'commentaire' vous permet d'attacher un commentaire à une trace lorsqu'il n'y a pas de réponse automatique appropriée.
+help_tracker	priority	L'option de priorité permet à un utilisateur une priorité (de 1 à 9) pour sa trace.<br /><br />C'est particulièrement utilie pour des bugs ou des soucis pour lesquels un utilisateur peut avoir découvert un problème critique pour le projet.
 help_tracker	group	Cette liste déroulante recense les groupes de traces définis par les adminstrateurs.<br /><br />Si vous êtes administrateur du projet, vous pouvez définir vos propres groupes.
-help_tracker	monitor	Vous pouvez démarrer ou arrêter un suivi de cette trace en cliquant sur 'Suivi'. <br /><br /><strong>Note!</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires �  cette trace, ou que vous l'avez soumise, ou si elle vous est confiée, vous aurez de toutes fa�on des courriers pour ces motifs aussi bien.
+help_tracker	monitor	Vous pouvez démarrer ou arrêter un suivi de cette trace en cliquant sur 'Suivi'. <br /><br /><strong>Note!</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires à cette trace, ou que vous l'avez soumise, ou si elle vous est confiée, vous aurez de toutes fa篮 des courriers pour ces motifs aussi bien.
 help_tracker	resolution	Aiguillage (s'il y a lieu)
-help_tracker	sort_by	L'option 'trié par' vous permet de précider le type d'affichage.<br /><br /> Vous pouveez trier par N�, priorité, titre, date d'ouverture, date de fermeture, auteur, responsable.  Vous pouvez aussi choisir l'ordre ascendant ou descendant.
-help_tracker	status	Cette liste déroulante recense les status possible d'une trace.<br /><br />'Pending' si vous attendez une réponse de l'auteur.  Quand l'auteur aura répondu, le statut repassera �  'Ouvert'. Toutefois, si l'auteur ne répond pas en u temp défini par l'administrateur (par défaut 14 jours), alors le statut passe �  'Supprimé'.
+help_tracker	sort_by	L'option 'trié par' vous permet de précider le type d'affichage.<br /><br /> Vous pouveez trier par NЬ priorité, titre, date d'ouverture, date de fermeture, auteur, responsable.  Vous pouvez aussi choisir l'ordre ascendant ou descendant.
+help_tracker	status	Cette liste déroulante recense les status possible d'une trace.<br /><br />'Pending' si vous attendez une réponse de l'auteur.  Quand l'auteur aura répondu, le statut repassera à 'Ouvert'. Toutefois, si l'auteur ne répond pas en u temp défini par l'administrateur (par défaut 14 jours), alors le statut passe à 'Supprimé'.
 help_tracker	summary	Le champ titre doit contenir un résumé précis de la traca. C'est très utile lorsque l'on parcourt plusieurs éléments.
 help_tracker	unknown_help_request	Aide introuvable : 
 help_trove_cat	description	Description
@@ -914,7 +915,7 @@ include_toolreport	last_days	Dernier(s) jour(s)
 include_toolreport	last_months	Dernier(s) mois
 include_toolreport	last_weeks	Dernière(s) semaine(s)
 include_toolreport	last_years	Derniere(s) année
-include_toolreport	no_data	Aucune donnée �  afficher
+include_toolreport	no_data	Aucune donnée à afficher
 include_toolreport	open	Ouvert(s)
 include_toolreport	project_lifespan	Durée de vie du projet
 include_toolreport	show	Montrer
@@ -1062,7 +1063,7 @@ news_utils	archive	Archive des nouvelles
 news_utils	nonews	<H3>Pas de nouvelles</H3>
 news_utils	readmore	<NOBR>Lire plus/Commenter</NOBR>
 news_utils	submit	Proposer une nouvelle
-help_tracker	data_type	L'option 'Tpe de données' détermine le genre de trace dont il s'agit. Comme le traceur reste dans un genre de trace, il est important de conna�tre son genre item.<br /><br />Cela permet en outre aux administrateurs de convertir d'un genre à l'autre (un bug en support par exemple).
+help_tracker	data_type	L'option 'Tpe de données' détermine le genre de trace dont il s'agit. Comme le traceur reste dans un genre de trace, il est important de connae son genre item.<br /><br />Cela permet en outre aux administrateurs de convertir d'un genre à l'autre (un bug en support par exemple).
 people	about_blurb	<p>Le système « Besoin d'aide » est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus
 people	action	Action
 people	add_new_skill	Ajouter une nouvelle competence
@@ -1081,7 +1082,7 @@ people	level	Niveau
 people	long_description	Description longue&nbsp;
 people	more_latest_posts	Encore ...
 people	must_be_loggin	Vous devez être logué d'abord
-people	must_select_a_skill	Vous devez choisir un N� de compétence.
+people	must_select_a_skill	Vous devez choisir un NРde compétence.
 people	no_categories_found	Aucune catégorie trouvée
 people	no_skill_inventory_setup_up	Aucun référentiel de compétences n'est défini
 people	none_found	Rien trouvé
@@ -1118,7 +1119,7 @@ people_editjob	job_skill_update_ok	La compétence demandée pour ce poste a ét�
 people_editjob	job_update_no	La mise à jour de ce travail a échoué
 people_editjob	job_update_no_wrong_id	La mise à jour de ce travail a échoué - mauvais numéro d'identification de projet
 people_editjob	job_update_ok	 Le travail a été mis à jour correctement
-people_editjob	no_such	Rien n'est affecté �  ce projet
+people_editjob	no_such	Rien n'est affecté à ce projet
 people_editjob	posting_fetch_failed	La récupération de l'affectation a échoué
 people_editjob	section	Besoin d'aide
 people_editjob	skill_explains	<p>Vous pouvez maintenant éditer/changer la liste des compétences liée à cet envoi. Les développeurs devraient être capables de savoir s'ils peuvent répondre à vos attentes.</p><p>Tous les envois sont automatiquement fermés après deux semaines.</p>
@@ -1176,9 +1177,9 @@ people_proj	title	Besoin d'aide pour $1
 people_viewjob	contact_info	Contact pour informations&nbsp;
 people_viewjob	fetch_failed	La récupération de l'affectation a échoué.
 people_viewjob	for_project	Pour le projet&nbsp;
-people_viewjob	no_such_posting	Rien d'affecté �  ce projet.
+people_viewjob	no_such_posting	Rien d'affecté à ce projet.
 people_viewjob	open_date	Date de dépot&nbsp;
-people_viewjob	posting_id_not_found	N� d'affectation introuvable
+people_viewjob	posting_id_not_found	NРd'affectation introuvable
 people_viewjob	required_skills	Compétences requises&nbsp;
 people_viewjob	section	Besoin d'aide
 people_viewjob	title	On recherche $1 pour $2
@@ -1250,7 +1251,7 @@ pm_admin_projects	no_subprojects	Pas de sous projet dans ce groupe
 pm_admin_projects	project_inserted	Projet inséré
 pm_admin_projects	project_name	Nouveau nom de projet
 pm_admin_projects	project_title	Titre
-pm_admin_projects	projects_intro	Ajouter un nouveau projet - gestionnaire de tâches. <strong>ce n'est pas la même chose que d'ajouter une tâche �  un projet.</strong>
+pm_admin_projects	projects_intro	Ajouter un nouveau projet - gestionnaire de tâches. <strong>ce n'est pas la même chose que d'ajouter une tâche à un projet.</strong>
 pm_admin_projects	section	Administration du gestionnaire de projets
 pm_admin_projects	send_updates	Envoyer toutes les mises à jour à
 pm_admin_projects	title	Ajout de sous-projets
@@ -1337,7 +1338,7 @@ pm_reporting	by_tech	Rapport d'activité par technicien
 pm_reporting	not_completed	Nombre de tâches toujours inachevées
 pm_reporting	open_tasks_by_category	Tâches commencées par catégorie
 pm_reporting	open_tasks_by_technician	Tâches commencées par le technicien
-pm_reporting	report_note	<p>Notez que des tâches peuvent être assignées �  plusieurs techniciens. Ces tâches leur seront attribuées �  chacun.</p>
+pm_reporting	report_note	<p>Notez que des tâches peuvent être assignées à plusieurs techniciens. Ces tâches leur seront attribuées à chacun.</p>
 pm_reporting	started_tasks	Nombre de tâches commencées
 pm_reporting	tasks_by_category	Tâches par catégories
 pm_reporting	tasks_by_technician	Tâches par technicien
@@ -1345,7 +1346,7 @@ pm_reporting	title	Rapports sur les tâches
 pm_task	create_successfully	Tâche crée avec succès
 project_admin	add_user	Ajouter un utilisateur
 project_admin	docmanager_admin	Administrateur de documentation
-project_admin	download_tarball	Télécharger une archive de votre CVS (mise �  jour chaque nuit)
+project_admin	download_tarball	Télécharger une archive de votre CVS (mise à jour chaque nuit)
 project_admin	edit_file_releases	Editer/Ajouter Versions de fichier
 project_admin	edit_member_permissions	Editer les permissions des membres
 project_admin	file_releases	Versions de fichier
@@ -1420,7 +1421,7 @@ project_admin_editimages	file_deleted	Fichier multimédia effacé
 project_admin_editimages	file_description_required	Description de fichier requise
 project_admin_editimages	file_uploaded	Fichier multimédia téléchargé
 project_admin_editimages	id	Numério d'identification
-project_admin_editimages	intro	Vous pouvez stocker jusqu'�  1Mo de données multimedia (imges vectorisées ou non, son, modèles 3D) dans la base de données. Utiliser cette page pour Ajouter/Supprimer les données mutimedia de votre projet.
+project_admin_editimages	intro	Vous pouvez stocker jusqu'à 1Mo de données multimedia (imges vectorisées ou non, son, modèles 3D) dans la base de données. Utiliser cette page pour Ajouter/Supprimer les données mutimedia de votre projet.
 project_admin_editimages	local_filename	Nom de fichier local
 project_admin_editimages	mime_type	Type MIME
 project_admin_editimages	name	Nom
@@ -1451,7 +1452,7 @@ project_admin_editrelease	data_saved	Données sauvegardées
 project_admin_editrelease	delete_file	Effacer le fichier
 project_admin_editrelease	file_deleted	Fichier effacé
 project_admin_editrelease	file_list_note	Une fois que vous avez ajouté les fichiers à cette version, vous <strong>devez</strong> mettre à jour chacun de ces fichiers avec les informations correctes ou ils n'apparaîtront pas dans la page de sommaire de téléchargement.
-project_admin_editrelease	file_released	Fichier mis �  jour
+project_admin_editrelease	file_released	Fichier mis à jour
 project_admin_editrelease	file_type	Type de fichier&nbsp;
 project_admin_editrelease	file_type_update	Type de fichier<br />Mise à jour
 project_admin_editrelease	file_updated	Fichier mis à jour
@@ -1477,9 +1478,9 @@ project_admin_editrelease	update_refresh	Mis à jour/Rafraîchir
 project_admin_editrelease	upload_change_log	Télécharger les modifications&nbsp;
 project_admin_editrelease	upload_new_file	Télécharger vers le serveur un nouveau fichier&nbsp;
 project_admin_editrelease	upload_release_notes	Télécharger les notes&nbsp;
-project_admin_group_trove	intro	<h3>Editer les catégories</h3><p>Choisissez jusqu'�  trois emplacements pour ce projet dans chaque categorie. Si le projet ne rentre pas dans aucune, choisissez simplement "None Selected".</p><p> IMPORTANT: les projets doivent être rangés dans les emplacements les plus précis possibles. Le choix simultané d'une catégorie ET d'une catégorie parente ne servira �  rien : seule la catégorie la plus plus précise sera acceptée.
+project_admin_group_trove	intro	<h3>Editer les catégories</h3><p>Choisissez jusqu'à trois emplacements pour ce projet dans chaque categorie. Si le projet ne rentre pas dans aucune, choisissez simplement "None Selected".</p><p> IMPORTANT: les projets doivent être rangés dans les emplacements les plus précis possibles. Le choix simultané d'une catégorie ET d'une catégorie parente ne servira à rien : seule la catégorie la plus plus précise sera acceptée.
 project_admin_group_trove	title	Information sur le groupe
-project_admin_group_trove	update_changes	Mise �  jour de toutes changements pour la catégorie.
+project_admin_group_trove	update_changes	Mise à jour de toutes changements pour la catégorie.
 project_admin_history	info	Cet état vous montre quels changements significatifs et quand ils ont été apportés à votre projet.
 project_admin_history	title	Historique
 project_admin_newrelease	section	Projet $1 -- administration
@@ -1487,13 +1488,13 @@ project_admin_newrelease	title	Création d'une révision
 project_admin_qrs	changelog	Changements apportés&nbsp;
 project_admin_qrs	create_new_package	Ou $1 créer un nouveau paquet $2
 project_admin_qrs	file_name	Nom de fichier&nbsp;
-project_admin_qrs	file_released	Fichier mis �  jour : vous pouvez choisir d'éditer la version maintenant.
+project_admin_qrs	file_released	Fichier mis à jour : vous pouvez choisir d'éditer la version maintenant.
 project_admin_qrs	file_type	Type de fichier&nbsp;
 project_admin_qrs	no_file_types_available	Pas de types de fichiers disponibles.
 project_admin_qrs	package_id	numéro&nbsp;
 project_admin_qrs	preserve_text	Conserver mon texte pré-formaté
 project_admin_qrs	processor_type	Type de microprocesseur&nbsp;
-project_admin_qrs	qrs_info	$1, Vous pouvez maintenant ajouter des fichier �  cette version $2 si vous le souhaitez,  ou modifier la version.</p> <p>Remarquez que le(s) fichier(s) peuvent ne pas appara�tre immédiatement dans la page de téléchargement $1 page $4. Prévoir plusieurs heures pour la propagation.
+project_admin_qrs	qrs_info	$1, Vous pouvez maintenant ajouter des fichier à cette version $2 si vous le souhaitez,  ou modifier la version.</p> <p>Remarquez que le(s) fichier(s) peuvent ne pas apparae immédiatement dans la page de téléchargement $1 page $4. Prévoir plusieurs heures pour la propagation.
 project_admin_qrs	release_date	Date de la version&nbsp;
 project_admin_qrs	release_file	Publier le paquet
 project_admin_qrs	release_name	Nom de version&nbsp;
@@ -1515,7 +1516,7 @@ project_admin_showreleases	date	Date
 project_admin_showreleases	no_release	Aucune version de ce paquet n'est disponible.
 project_admin_showreleases	package_name	Nom du paquet
 project_admin_showreleases	release_name	Nom de la version
-project_admin_showreleases	title	Mise �  jour d'une nouvelle version de fichier.
+project_admin_showreleases	title	Mise à jour d'une nouvelle version de fichier.
 project_admin_userpermedit	add_to_all	Ajouter à tous
 project_admin_userpermedit	add_to_tracker	Ajouter au traceur
 project_admin_userpermedit	admin	Administrateur
@@ -1575,10 +1576,10 @@ project_admin_utils	user_permissions	Permissions de l'utilisateur
 project_admin_utils	vhosts	Hôtes virtuels
 project_admin_vhost	create	Créer
 project_admin_vhost	delete	Effacer
-project_admin_vhost	info	<b>Ajouter un nouvel hôte virtuel</b><p>Pour ajouter un nouvel un nouvel hôte virtuel, faites pointer simplement un <strong>CNAME</strong> pour <em>votreh�te.org</em> sur <strong>$1.$2</strong> (chez le gestionnaire de DNS de votreh�te.org).  $3 n'accepte pas les h�tes de courrier (autrement dit ne supporte pas qu'on fasse pointer les champs MX) ou les h�tes DNS.  <p>Cliquer sur 'Créer' programmera la création de l'hôte virtuel.  Ce sera synchronisé avec le serveur web du projet de manière que <em>yourhost.org</em> affichera ce qui se trouve sur <em>$4.$5</em>.
+project_admin_vhost	info	<b>Ajouter un nouvel hôte virtuel</b><p>Pour ajouter un nouvel un nouvel hôte virtuel, faites pointer simplement un <strong>CNAME</strong> pour <em>votreh����org</em> sur <strong>$1.$2</strong> (chez le gestionnaire de DNS de votreh����org).  $3 n'accepte pas les h���� de courrier (autrement dit ne supporte pas qu'on fasse pointer les champs MX) ou les h���� DNS.  <p>Cliquer sur 'Créer' programmera la création de l'hôte virtuel.  Ce sera synchronisé avec le serveur web du projet de manière que <em>yourhost.org</em> affichera ce qui se trouve sur <em>$4.$5</em>.
 project_admin_vhost	name	Nouvel hôte virtuel <em>(par ex. vhost.org)</em>
 project_admin_vhost	no_vhosts	aucun hôte virtuel défini
-project_admin_vhost	not_valid_hostname	$1 n'est pas un nom d'h�te valide
+project_admin_vhost	not_valid_hostname	$1 n'est pas un nom d'h����valide
 project_admin_vhost	operations	Opérations
 project_admin_vhost	title	Gestion des hôtes virtuels
 project_admin_vhost	vhost	Hôte virtuel
@@ -1607,7 +1608,7 @@ project_home	view_members	Voir les membres
 project_home	view_project_files	Voir tous les fichiers du projet
 project_memberlist	developer	Développeur
 project_memberlist	joining	<P>Si vous désirez contribuer à ce projet
-project_memberlist	role	R�le/Fonction
+project_memberlist	role	R����Fonction
 project_memberlist	skills	Compétences
 project_memberlist	title	Liste des membres du projet
 project_memberlist	username	Nom d'utilisateur
@@ -1669,7 +1670,7 @@ project_stats_utils	support	Aides
 project_stats_utils	tasks	Tâches
 projects	section	Projet : $1
 projects	title	Résumé
-register	apply_for_registration	Pour demander l'enregistrement d'un projet, vous devez remplir un certain nombre d'information de base �  son propos. Veuillez lire attentivement les descriptions ci-dessous et fournir des données précises et complètes. Tous les champs sont obligatoires.
+register	apply_for_registration	Pour demander l'enregistrement d'un projet, vous devez remplir un certain nombre d'information de base à son propos. Veuillez lire attentivement les descriptions ci-dessous et fournir des données précises et complètes. Tous les champs sont obligatoires.
 register	comprehensive_description	Décrivez de manière plus compréhensive votre projet
 register	conflicting_licenses_choice	Conflit dans le choix de licence
 register	describe_registration	Veuillez décrire de manière la plus précise l'objet de votre enregistrement.
@@ -1682,12 +1683,12 @@ register	maximum_description	La longueur maximum pour une description de projet 
 register	more_license_description	Veuillez fournir une description plus précise de la licence.
 register	no_license_chosen	Vous n'avez pas choisi de licence
 register	other_license	Si vous avez choisi 'Autre', veuillez founir une explication ainsi qu'une description de votre licence. Sachez que d'autres licences peuvent ne pas être acceptées. Cela peut aussi prendre plus de temps de prendre une décision d'agrément pour un tel projet, puisque nous devrons vérifier que cette licence est compatible avec la définition de l'OpenSource.
-register	project_description	<h3>4. Description publique du projet</h3><p>C'est la description de votre projet qui appara�tra sur la page 'résumé du projet', dans les résultats des recherches, etc. Elle ne doit pas être aussi précise et étendue que la description du projet (étape 2), donc permettez-vous des formulation concises et des abréviations. La longueur maximale est de 255 caractères.
-register	project_full_name	</h3>1. Nom complet du projet</h3><p>Vous devez commencer par indiquer le nom de votre projet. Le nom complet est descriptif, et n'est pas contraint (il est toutefois limité �  40 caractères).</p>Nom complet :<br/>
+register	project_description	<h3>4. Description publique du projet</h3><p>C'est la description de votre projet qui apparaa sur la page 'résumé du projet', dans les résultats des recherches, etc. Elle ne doit pas être aussi précise et étendue que la description du projet (étape 2), donc permettez-vous des formulation concises et des abréviations. La longueur maximale est de 255 caractères.
+register	project_full_name	</h3>1. Nom complet du projet</h3><p>Vous devez commencer par indiquer le nom de votre projet. Le nom complet est descriptif, et n'est pas contraint (il est toutefois limité à 40 caractères).</p>Nom complet :<br/>
 register	project_information	Information du projet
-register	project_license	<h3>3. Licence</h3> <p><strong><em>Si vous déposez un projet qui est un site web seulement, choisissez 'site web seulement' parmi les choix ci-dessous. et continuez.</em></strong><p>$1 est consacré �  faire avancer le développement de logiciels en Open Source. Pour faire simple, nous sommes reliés �  l'oeuvre extraordinaire de l'<a href="http://www.opensource.org">Open Source Initiative</a> pour les choix de licences. <p>Nous avons conscience, toutefois, qu'il peut y avoir d'autres licences en dehors de cela qui peuvent être meilleures pour vous. Si vous souhaitez utiliser une licence qui n'est pas certifiée OSI, faites-nous savoir pourquoi.<p>Le choix d'une licence est une décision sérieuse. Prenez le temps de lire le texte (et nos explications) de quelques licences avant de faire un choix pour votre projet. <p>Vous pouvez changer de licence plus tard, �  condition d'avoir la possibilité légale de le faire, les versions de vos fichiers traduiront intégreront clairement ce changement relates this change, et votre classement dans l'arbre des projets sera mis �  jour de manière appropriée. <em>Notez que ces changements de licence ne sont pas rétrocatifs (i.e. ne s'appliqueront pas aux productions déj�  réalisées sous licence OpenSource).</em> <p>$1 n'est pas responsable des incohérences de licences.<p><strong>Licences</strong></s>
+register	project_license	<h3>3. Licence</h3> <p><strong><em>Si vous déposez un projet qui est un site web seulement, choisissez 'site web seulement' parmi les choix ci-dessous. et continuez.</em></strong><p>$1 est consacré à faire avancer le développement de logiciels en Open Source. Pour faire simple, nous sommes reliés à l'oeuvre extraordinaire de l'<a href="http://www.opensource.org">Open Source Initiative</a> pour les choix de licences. <p>Nous avons conscience, toutefois, qu'il peut y avoir d'autres licences en dehors de cela qui peuvent être meilleures pour vous. Si vous souhaitez utiliser une licence qui n'est pas certifiée OSI, faites-nous savoir pourquoi.<p>Le choix d'une licence est une décision sérieuse. Prenez le temps de lire le texte (et nos explications) de quelques licences avant de faire un choix pour votre projet. <p>Vous pouvez changer de licence plus tard, à condition d'avoir la possibilité légale de le faire, les versions de vos fichiers traduiront intégreront clairement ce changement relates this change, et votre classement dans l'arbre des projets sera mis à jour de manière appropriée. <em>Notez que ces changements de licence ne sont pas rétrocatifs (i.e. ne s'appliqueront pas aux productions déjà réalisées sous licence OpenSource).</em> <p>$1 n'est pas responsable des incohérences de licences.<p><strong>Licences</strong></s>
 register	project_submitted	Votre projet a été soumis aux administrateurs de $1. Dans les 72 heures, vous recevrez la notification de leur décision, et des instructions supplémentaires.</p><p>Merci d'avoir choisi $1.
-register	project_unix_name	<h3>5. Nom unix du projet</h3><p>En plus du nom complet du projer vous aurez besoin de choisir un nom court, un nom 'Unix' pour votre projet.</p><p> Le 'nom Unix' a plusieurs contraintes parce qu'il est utilisé �  beaucoup d'occasion sur le site. Ces contraintes sont :<ul><li>Doit être différent du 'nom unix' de tous les autres projets<li>doit avoir une longueur comprise entre 3 et 15 caractères<li>doit être en minuscules<li>peut seulement contenir des lettres, des nombres, et des tirets<li>doit être un 'username' unix valide<li>ne peut pas être un de nos doamines réservés<li>le nom unix ne changera jamais pour ce projet</ul><p>Votre 'nom unix' est important. parce qu'il sera utilisé pour de nombreuses choses, parmi lesquelles :<ul><li>un site wev �  <tt>'nom unix'.$1</tt><li>un dépot racine CVS de <tt>/cvsroot/'nom unix'</tt> sur <tt>cvs.'nom unix'.$1</tt><li>un compte Shell sur <tt>'nom unix'.$1</tt><li>Les moteurs de recherche parcourant le site</ul><p>Nom Unix :<br/></s>
+register	project_unix_name	<h3>5. Nom unix du projet</h3><p>En plus du nom complet du projer vous aurez besoin de choisir un nom court, un nom 'Unix' pour votre projet.</p><p> Le 'nom Unix' a plusieurs contraintes parce qu'il est utilisé à beaucoup d'occasion sur le site. Ces contraintes sont :<ul><li>Doit être différent du 'nom unix' de tous les autres projets<li>doit avoir une longueur comprise entre 3 et 15 caractères<li>doit être en minuscules<li>peut seulement contenir des lettres, des nombres, et des tirets<li>doit être un 'username' unix valide<li>ne peut pas être un de nos doamines réservés<li>le nom unix ne changera jamais pour ce projet</ul><p>Votre 'nom unix' est important. parce qu'il sera utilisé pour de nombreuses choses, parmi lesquelles :<ul><li>un site wev à <tt>'nom unix'.$1</tt><li>un dépot racine CVS de <tt>/cvsroot/'nom unix'</tt> sur <tt>cvs.'nom unix'.$1</tt><li>un compte Shell sur <tt>'nom unix'.$1</tt><li>Les moteurs de recherche parcourant le site</ul><p>Nom Unix :<br/></s>
 register	purpose_and_summarization	2. <h3>Decription publique du projet</h3><p><p><strong> Veuillez fournir une description précise et détaillée de votre projet et quelles resources de $1 et de quelle manière vous prévoyez d'utiliser. L'appobation ou le rejet de l'hébergement de votre projet sur $1 reposera sur cette descriptiont, commen plus tard son maintien, conditionné par l'usage approprié des services. Cette description ne sera pas utilisée comme description publique de votre projet. Elle doit être rédigée en anglais.</strong></s>
 register	registration_complete	Enregistrement complet
 register	title	Nouveau projet
@@ -1700,18 +1701,16 @@ register_requirements	section	Nouveau projet
 register_requirements	title	Services et conditions requises
 register_tos	section	Nouveau projet
 register_tos	title	Accord sur les conditions générales
-scm_index	anoncvs	<P><B>Accès CVS anonyme</B> <P>Ce dép�t CVS peut-être interrogé (par la méthode pserver) CVS avec les instructions suivantes. le module que vous voulez récupérert doit être spécifié comme <I>modulename</I>. Lorsqu'on vous demande un mot de passe pour <I>anonymous</I>, tapez simplement 'Entrée'.
+scm_index	anoncvs	<P><B>Accès CVS anonyme</B> <P>Ce dép����VS peut-être interrogé (par la méthode pserver) CVS avec les instructions suivantes. le module que vous voulez récupérert doit être spécifié comme <I>modulename</I>. Lorsqu'on vous demande un mot de passe pour <I>anonymous</I>, tapez simplement 'Entrée'.
 scm_index	anoncvsup	Les mises à jour (update) quand on se trouve à l'intérieur du répertoire du module n'ont pas besoin du paramètre -d
-scm_index	browseit	Parcourir le dép�t CVS
-scm_index	browsetree	<HR><B>Parcourir l'arbre CVS</B> <P>Parcourir l'arbre CVS vous donne un vue d'ensemble sur l'état du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dép�t.
-scm_index	cvs_repository	Dép�t CVS
-scm_index	devcvs	<P><B>Accès CVS pour développeur via SSH</B> <P>Seuls les développeurs d'un projet peuvent accéder �  l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <I>module</I> et <I>développeuer</I> par les valeurs appropriées. Fournissez votre mot de passe pour le site lorsqu'on vous le demande.
+scm_index	browseit	Parcourir le dép����VS
+scm_index	browsetree	<HR><B>Parcourir l'arbre CVS</B> <P>Parcourir l'arbre CVS vous donne un vue d'ensemble sur l'état du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dép����scm_index	cvs_repository	Dép����VS
+scm_index	devcvs	<P><B>Accès CVS pour développeur via SSH</B> <P>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH1 doit être installé sur votre machine cliente. Remplacez <I>module</I> et <I>développeuer</I> par les valeurs appropriées. Fournissez votre mot de passe pour le site lorsqu'on vous le demande.
 scm_index	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 scm_index	developername	développeur
 scm_index	error_only_projects_can_use_cvs	ERREUR
 scm_index	error_this_project_has_turned_off	Erreur : ce projet a désactivé son CVS.
-scm_index	history	Historique du dép�t
-scm_index	modulename	module
+scm_index	history	Historique du dép����cm_index	modulename	module
 scm_index	nohistory	Ce projet n'a pas d'historique CVS
 scm_index	section	Projet : $1
 scm_index	title	CVS
@@ -2005,7 +2004,7 @@ survey_admin_index	add_question	Ajouter des questions
 survey_admin_index	add_survey	Ajouter un sondage
 survey_admin_index	edir_existing_survey	Editer les sondages existants
 survey_admin_index	edit_existing_question	Editer les résultats du sondage
-survey_admin_index	its_simple_to_create	Créer un sondage est simple.<ol><li>Créez des questions en utilisant les formulaires ci-dessus.</li><li>Créez un sondage, en indiquant la liste ordonnées des questions (prises dans <strong>votre</strong> liste de questions).</li><li>L'URL du sondage est $1 o� XX est le numéro du sondage.
+survey_admin_index	its_simple_to_create	Créer un sondage est simple.<ol><li>Créez des questions en utilisant les formulaires ci-dessus.</li><li>Créez un sondage, en indiquant la liste ordonnées des questions (prises dans <strong>votre</strong> liste de questions).</li><li>L'URL du sondage est $1 o�����est le numéro du sondage.
 survey_admin_index	permission_denied	Permission refusée
 survey_admin_index	show_results	Voir les résultats du sondage
 survey_admin_index	title	Administration de sondages
@@ -2028,7 +2027,7 @@ survey_admin_utils	survey_title	Titre du sondage
 survey_edit	change_after_already_response	A traduire
 survey_edit	existing_surveys	Sondage(s) existant(s)
 survey_edit	is_active	Est actif
-survey_edit	list_question_numbers	Liste des numéros de questions, dans l'ordre souhaité, séparés par des virgules. <strong>Référez-vous à votre liste de fonctions</strong> pour voir les N� des questions. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7</s>
+survey_edit	list_question_numbers	Liste des numéros de questions, dans l'ordre souhaité, séparés par des virgules. <strong>Référez-vous à votre liste de fonctions</strong> pour voir les NРdes questions. Do <strong>not</strong> include spaces or end your list with a comma.<br /> Ex: 1,2,3,4,5,6,7</s>
 survey_edit	missing_date	LA MISE A JOUR A ECHOUE : Il manque des données
 survey_edit	name_off_survey	Nom du sondage
 survey_edit	no	Non
@@ -2193,7 +2192,7 @@ tracker	item_group	Groupe
 tracker	no_trackers	Aucun traceur trouvé
 tracker	no_trackers_text	Aucun traceur n'a été défini, ou alors vous ne pouvez pas les voir.</p><p><FONT COLOR=RED>L'administrateur de ce projet devra préciser les types de données en utilisant la page d'administration $1 admin page $2</FONT></strong></s>
 tracker	open_date	Date d'ouverture :
-tracker	please_login	$1 : connectez-vous �  $2
+tracker	please_login	$1 : connectez-vous à $2
 tracker	priority	Priorité
 tracker	reporting	Affichage
 tracker	resolution	précision
@@ -2210,22 +2209,22 @@ tracker	updated_successful	Mise à jour réussie
 tracker_add	for_project	Pour le projet
 tracker_add	submit	Soumettre
 tracker_add	title	Soumission d'un objet de tracker
-tracker_admin	add_canned_responses	Ajouter/Mettre �  jour des réponses pré-enregistrées
+tracker_admin	add_canned_responses	Ajouter/Mettre à jour des réponses pré-enregistrées
 tracker_admin	add_canned_responses_info	Créer/Modifier des messages de réponses pré-enregistrés pour le traceur.
 tracker_admin	add_categories	Ajouter/modifier les catégories
 tracker_admin	add_categories_info	L'ajout de catégories du genre 'module courrier','module de diagramme de Gantt','cvs', etc. n'est pas accepté.
 tracker_admin	add_group_infos	L'ajout de groupes du genre 'v1.2', 'sans support', 'non vérifié', etc. n'est pas accepté.
-tracker_admin	add_groups	Ajouter/Mettre �  jour les groupes
-tracker_admin	add_permissions	Ajouter/Mettre �  jour les droits des utilisateurs
-tracker_admin	add_permissions_info	Ajouter/Retirer des utilisateurs �  ce traceur
+tracker_admin	add_groups	Ajouter/Mettre à jour les groupes
+tracker_admin	add_permissions	Ajouter/Mettre à jour les droits des utilisateurs
+tracker_admin	add_permissions_info	Ajouter/Retirer des utilisateurs à ce traceur
 tracker_admin	admin	Administration
-tracker_admin	auto_assign_to	Confié automatiquement �  :
+tracker_admin	auto_assign_to	Confié automatiquement à :
 tracker_admin	canned_response_inserted	Réponse pré-enregistrée insérée.
-tracker_admin	canned_response_updated	Réponse pré-enregistrée mise �  jour.
+tracker_admin	canned_response_updated	Réponse pré-enregistrée mise à jour.
 tracker_admin	category_add_warning	Dès lors que vous avez ajouté une catégorie, elle ne peut être supprimée.
 tracker_admin	category_inserted	Catégorie insérée.
 tracker_admin	category_name	Nom de catégorie
-tracker_admin	category_updated	Category mise �  jour.
+tracker_admin	category_updated	Category mise à jour.
 tracker_admin	choose_datatype	Choisissez un type de données et vous pourrez régler les préférences, catégories, groupes, membres, et permissions.
 tracker_admin	error_inserting	Erreur d'insertion
 tracker_admin	error_updating	Erreur de mise à jour
@@ -2235,11 +2234,11 @@ tracker_admin	group_updated	Groupe mis à jour
 tracker_admin	intro	<h3>Créer un nouveau traceur</h3><p>Vous pouvez utiliser ce système pour suivre la trace de n'importe quel type de données, chaque traceur ayant ses listes séparées d'utilisateur, de groupes, de catégories et de permissions. Vous pouvez aussi facilement déplacer des 'traces' entre les traceurs quand vous le voulez.</p><p>Les traceurs sont désignés comme étant des "types de traces" et les parties individuelles de données sont des "traces". "Bugs" pourrait être un type de trace, bien qu'un rapport de bug puisse être une trace. Vous pouvez créer autant de types de trace que vous voulez, mais rappelez-vous qu'administrer les catégories, groupes et permissions pour chaque type peut prendre rapidement beaucoup de temps
 tracker_admin	section	Traceur&nbsp;
 tracker_admin	title	Administration
-tracker_admin	tracker_id	num�ro de traceur
+tracker_admin	tracker_id	num鲯 de traceur
 tracker_admin	tracker_title	Titre
-tracker_admin	tracker_updated	Traceur mis �  jour
+tracker_admin	tracker_updated	Traceur mis à jour
 tracker_admin	update_preferences	Mettre à jour les préférences
-tracker_admin	update_preferences_info	Mettre �  jour les préférences (date d'expiration, e-mail)
+tracker_admin	update_preferences_info	Mettre à jour les préférences (date d'expiration, e-mail)
 tracker_admin	users_added	Utilisateur(s) ajouté(s)
 tracker_admin	users_deleted	Utilisateur(s) effacé(s)
 tracker_admin	users_updated	Utilisateur(s) mis à jour
@@ -2260,16 +2259,16 @@ tracker_admin_add_users	add_users	Ajout d'utilisateur
 tracker_admin_add_users	admin_only	Administrateurs seulement
 tracker_admin_add_users	category_permission	Permission
 tracker_admin_add_users	delete	Effacer
-tracker_admin_add_users	developers_info	Chaque traceur que vous définissez a des listes séparées de membres et de permissions.</p><p>Ajoutez simplement des développeurs �  ce traceur, puis mettez �  jour leurs permissions.</p><p><dl><dt><strong>Les techniciens</strong></dt><dd>peuvent se voir confier des traces �  suivre.</dd><dt><strong>Les administrateurs</strong></dt><dd>peuvent y effectuer des changements.</dd></dl></p></s>
+tracker_admin_add_users	developers_info	Chaque traceur que vous définissez a des listes séparées de membres et de permissions.</p><p>Ajoutez simplement des développeurs à ce traceur, puis mettez à jour leurs permissions.</p><p><dl><dt><strong>Les techniciens</strong></dt><dd>peuvent se voir confier des traces à suivre.</dd><dt><strong>Les administrateurs</strong></dt><dd>peuvent y effectuer des changements.</dd></dl></p></s>
 tracker_admin_add_users	no_developers	Aucun développeur trouvé
 tracker_admin_add_users	tech_admin	Tech & Admin
 tracker_admin_add_users	technician	Technicien
-tracker_admin_add_users	title	Ajouter/Mettre �  jour les permission d'un utilisateur de traceur pour $1</s>
-tracker_admin_add_users	update_permissions	Mise �  jour des permissions de développeur
+tracker_admin_add_users	title	Ajouter/Mettre à jour les permission d'un utilisateur de traceur pour $1</s>
+tracker_admin_add_users	update_permissions	Mise à jour des permissions de développeur
 tracker_admin_add_users	user_name	Nom d'utilisateur
 tracker_admin_choose	title	Administration des traceurs
 tracker_admin_update_canned	title	Modification des réponses-types de $1
-tracker_admin_update_cat	auto_assign_to	Confié automatiquement �  :
+tracker_admin_update_cat	auto_assign_to	Confié automatiquement à :
 tracker_admin_update_cat	category_change_warning	Il n'est pas recommandé de change le nom d'une catégorie, parce qu' d'autres choses en dépendent. Quand vous changez le nom de la catégorie, tous les éléments vont prendre le nouveau nom.
 tracker_admin_update_cat	category_name	Nom de la catégorie
 tracker_admin_update_cat	title	Modification d'une catagorie de $1
@@ -2298,7 +2297,7 @@ tracker_artifact	logged_in_no	non-connecté
 tracker_artifact	logged_in_yes	connecté
 tracker_artifact	monitoring_activated	Suivi activé
 tracker_artifact	monitoring_deactivated	Suivi arrêté
-tracker_artifact	nothing_changed	Aucun changement à�� Mise à jour annulée
+tracker_artifact	nothing_changed	Aucun changement à Mise à jour annulée
 tracker_artifact	private_error	Traces : seul un groupe de membres peut voir les traces d'un type privé.
 tracker_artifactfile	required_fields	Fichier-trace : un nom de fichier, un type, une taille, and une donnée sont requis.
 tracker_artifactgroup	required_field	Groupe de trace : il faut un nom.
@@ -2310,11 +2309,11 @@ tracker_artifacthtml	no_changes	Aucun changement
 tracker_artifacthtml	no_followups	Aucun passage de témoin n'a été posté.
 tracker_artifacthtml	old_value	Ancienne valeur
 tracker_artifacthtml	sender	Expéditeur
-tracker_artifacttype	add_artifact_types	Ajouter/Mettre �  jour les types de traces
+tracker_artifacttype	add_artifact_types	Ajouter/Mettre à jour les types de traces
 tracker_artifacttype	admin	Administration
 tracker_artifacttype	admin_functions	Fonctions d'administration
 tracker_artifacttype	browse	Parcourir
-tracker_artifacttype	edit_options	Editer/Mettre �  jour les options dans
+tracker_artifacttype	edit_options	Editer/Mettre à jour les options dans
 tracker_artifacttype	nobody	Personne
 tracker_artifacttype	none	Aucun(e)
 tracker_artifacttype	reporting	Rapport
@@ -2378,7 +2377,7 @@ tracker_reporting	open_items_by_resolution	Ouverts, par direction
 tracker_reporting	open_items_by_technician	Ouverts, par responsable
 tracker_reporting	title	Rapports sur les trackers
 tracker_taskmgr	add_relation_to_taskk	Ajouter une relation entre des tâches existantes
-tracker_taskmgr	add_relationship	Ajouter une relation �  la tâche sélectionnée
+tracker_taskmgr	add_relationship	Ajouter une relation à la tâche sélectionnée
 tracker_taskmgr	build_relationships	Etablir une relation entre une trace et le gestionnaire de tâches.
 tracker_taskmgr	create_task	Créer un nouvelle tâche
 tracker_taskmgr	task	Tâche
@@ -2424,8 +2423,8 @@ user_home	title	Profil de développeur
 user_home	user_id	Identifiant d'utilisateur
 users	no_user_name	Pas de nom d'utilisateur
 users	optout	Vous avez quitté le système d'évaluation par les pairs. Vous pouviez évaluer l'utilisateur. Voir <a href="/account/">la page de gestion de votre compte</a> pour de plus amples informations.
-users	peerinfo1	Si vous connaissez cet utilisateur, prenez le temps de l'évaluer selon les critères suivants. Gardez �  l'esprit que votre évaluation sera visible de l'utilisateur et des autres.  <P> Le système d'évaluation mutuelle de $1 est basé is sur les concepts de <A HREF="http://www.advogato.com">Advogato.</A> Ce système a été réimplémenté et étendu.
-users	peerinfo2	L'évaluation par les pairs vous montre tous les évaluations moyennes (et les taux de réponse) pour chaque critère. En raison des traitements mathématiques induits, ces nombres tiennent compte des réponses des utilisateurs authentifiés ou non.  <ul> <li> Le champ 'Niveau dans le site" montre le rang de l'utilisateur comparé �  tous les utilisateurs de $1.  <li>Le champ 'Score agrégé' montre une moyenne pondérée de tous les scores, reposant sur les réponses authentifiées seulement.  <li>Le champ 'Importance' montre les bons scores donnés par d'autres développeurs (entre 1 and 1.5). Les réponses des utilisateurs de haut rang ont plus de poids.  </ul> <p> <i> Si vous voulez sortir du système dévaluation par les pairs (cela affectera votre capacité à noter et être noté), voir la <a href="/account/">page de gestion de votre compte</a>. Si vous choisissez de cesser votre participation, votre évaluation des autres sera détruite définitivement et vous n'aurez plus d'affichage de cela sur votre page d'accueil. </i></p></s>
+users	peerinfo1	Si vous connaissez cet utilisateur, prenez le temps de l'évaluer selon les critères suivants. Gardez à l'esprit que votre évaluation sera visible de l'utilisateur et des autres.  <P> Le système d'évaluation mutuelle de $1 est basé is sur les concepts de <A HREF="http://www.advogato.com">Advogato.</A> Ce système a été réimplémenté et étendu.
+users	peerinfo2	L'évaluation par les pairs vous montre tous les évaluations moyennes (et les taux de réponse) pour chaque critère. En raison des traitements mathématiques induits, ces nombres tiennent compte des réponses des utilisateurs authentifiés ou non.  <ul> <li> Le champ 'Niveau dans le site" montre le rang de l'utilisateur comparé à tous les utilisateurs de $1.  <li>Le champ 'Score agrégé' montre une moyenne pondérée de tous les scores, reposant sur les réponses authentifiées seulement.  <li>Le champ 'Importance' montre les bons scores donnés par d'autres développeurs (entre 1 and 1.5). Les réponses des utilisateurs de haut rang ont plus de poids.  </ul> <p> <i> Si vous voulez sortir du système dévaluation par les pairs (cela affectera votre capacité à noter et être noté), voir la <a href="/account/">page de gestion de votre compte</a>. Si vous choisissez de cesser votre participation, votre évaluation des autres sera détruite définitivement et vous n'aurez plus d'affichage de cela sur votre page d'accueil. </i></p></s>
 users	title	Résumé d'un utilisateur
 users	user_not_exist_text	Utilisateur invalide
 users	user_not_exist_title	Cet utilisateur n'existe pas
