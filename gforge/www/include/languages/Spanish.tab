@@ -23,7 +23,7 @@ system	strftimefmt	%H:%M %e %B %Y
 system	datefmt	H:i d-m-Y
 about	about_blurb	<h2>Sobre Sourceforge</h2>Este portal usa Debian Sourceforge, un derivado del código que usa <a href=""http://www.sourceforge.net/"">Sourceforge.net</a>.  La información mostrada en este página es solo aplicable a Debian Sourceforge, por favor consulte <a href="http://www.sourceforge.net/">Sourceforge.net</a> para más información sobre su código.<br><br><b>El equipo</b><br><a href="staff.php">El equipo</a> de Sourceforge ha trabajado duro para hacer Sourceforge una realidad, puedes contactar con la gente que hay detrás de Sourceforge.<br><br><b>Agradecimientos</b><br>Debemos dar un montón de gracias a la gente que escribió el software que usa Sourceforge. También queremos dar las gracias a la siguientes <a href="thanks.php">personas y organizaciones</a> que hicieron posible Sourceforge.<br><br><b>Más información</b><br>Si tienes más cuestiones, por favor contacta la <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">Lista de usuarios de Debian Sourceforge</a>.  También puedes echar un vistazo a la <a href="http://savannah.gnu.org/projects/debian-sf/">página del proyecto</a> de Debian Sourceforge y Savannah (otro derivado de Sourceforge, alojado y usado por el projecto GNU y la FSF).<br><br><b>Copyrights</b><br>El código de Sourceforge fue originalmente desarrollado por la gente de VA Linux Systems (ahora llamada "VA Software") y liberado bajo la licencia GNU General Public License. En su mayoría los derechos son de ellos.<br>El código de este portal sin embargo es Debian Sourceforge, un derivado del código original, adaptado para sistemas Debian. Los cambios visibles son principalmente soluciones de errores, pero el mayor trabajo se ha realizado para proporcionar un paquete: Debian Sourceforge es fácil de instalar y ejecutar, solo necesitas un sistema con el sistema operativo Debian. Debian Sourceforge ha sido escrito por Christian Bayle y Roland Mas, con contribuciones variadas de gente. <br><br><br><b>Marcas y cosas relacionadas</b><br>VA Linux Systems y GForge son marcas registradas por VA Linux Systems, Inc.  Linux es una marca registrada por Linus Torvalds.  Todas las demás marcas y derechos de esta página son propiedad de sus propietarios respectivos. El contenido en propiedad de VA Linux Systems tiene el copyright 1999-2001 VA Linux Systems, Inc.  Todos los derechos reservados.<br><br>
 account	title	Preferencias de cuenta
-account_change_email	message	Ha solicitado un cambio de correo en $1.\nPor favor, visita la siguiente dirección para completar el cambio de correo:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- el equipo de $1
+account_change_email	message	Ha solicitado un cambio de correo en $1.\nPor favor, visite la siguiente dirección para completar el cambio de correo:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- el equipo de $1
 account_change_email	section	Preferencias de la cuenta
 account_change_email	subject	$1 Verificación
 account_change_email	title	Cambiar dirección de correo
@@ -36,7 +36,7 @@ account_editsshkeys	section	Preferencias de cuenta
 account_editsshkeys	title	Editar claves compartidas CVS/SSH
 account_first	about_blurb	<p>Ahora usted es un usuario registrado en $1, el entorno de desarrollo de proyectos de código abierto en línea.</p><p>Como un usuario registrado, puede participar totalmente en las actividades de este portal. Ahora puede enviar mensajes en los foros de mensajes de proyectos, enviar errores de código en $1, registrarse como un desarrollador de un proyecto, o incluso comenzar su propio proyecto.</p><p>Tiene que dedicar cierto tiempo a leer la <a href="/docs/site/"><b>documentación</b></a> de forma que pueda tomar partido totalmente de $1.</p><p>Disfruta de este sitio, y por favor proporcionanos comentarios de forma que podamos mejorar $1.</p><p>-- el equipo de $1.</p>
 account_first	title	¡Bienvenido!
-account_login	deleted_account	<p>Tu cuenta de $1 ha sido borrada por el equipo de $1. Esto puede suceder por dos razones, ó 1) solicitaste que se borrara la cuenta; ó 2) se ha realizado alguna acción cuestionable usando tu cuenta (por ejemplo, violar los términos de uso) por lo que ha sido eliminada por motivos administrativos. Si tiene preguntas referentes a este asunto, déjanos una <a href="/support/?group_id=1">petición de soporte</a>.</p><p>Gracias, <br><br>el equipo de $1</p>
+account_login	deleted_account	<p>Tu cuenta de $1 ha sido borrada por el equipo de $1. Esto puede suceder por dos razones, o 1) solicitaste que se borrara la cuenta; o 2) se ha realizado alguna acción cuestionable usando tu cuenta (por ejemplo, violar los términos de uso) por lo que ha sido eliminada por motivos administrativos. Si tiene preguntas referentes a este asunto, déjanos una <a href="/support/?group_id=1">petición de soporte</a>.</p><p>Gracias, <br><br>el equipo de $1</p>
 account_login	iewarn	<H2><FONT COLOR="RED">Los usuarios de Internet Explorer necesitan actualizar el IExplorer a la versión 5.01 o superior, preferiblemente con encriptación SSL de 128 bits o usar Netscape 4.7 o superior</FONT></H2>
 account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer en Macintosh no está soportado actualmente. Use Netscape 4.7 o superior</FONT></H2>
 account_login	pending_account	<P>Tu cuenta está pendiente de que tu confirmación por correo.		Si accedes al enlace que hemos enviado a tu correo, se te activará tu cuenta. 		<P>Si necesitas que se te reenvíe ese correo, por favor pulsa abajo y un correo de confirmación		se te enviará a la cuenta de correo que proporcionaste durante tu registro.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
@@ -541,7 +541,7 @@ account_verify	invalidparam	Parámetro inválido
 account_verify	cannotconfirm	No puedo confirmar su identidad de cuenta - \'hash\' de confirmación inválido (o nombre de usuario)
 account_verify	accessdenied	Acceso denegado
 account_verify	invalidcred	Las credenciales que has introducido no corresponden con ninguna cuenta válida.
-account_verify	cannotactivate	No puedo activar la cuenta
+account_verify	cannotactivate	No se puede activar la cuenta
 account_verify	erroractivate	Error mientras activaba la cuenta
 forum_forum	section	Proyecto: $1 
 forum_forum	title	Forums: Ver un foro
@@ -564,11 +564,11 @@ forum_forum	postsuccess	El mensaje ha sido publicado correctamente
 forum_forum	topic	Tema
 forum_forum	topicstarter	Quien escribio 1º
 forum_forum	replies	Contestaciones
-forum_forum	lastpost	última publicación
+forum_forum	lastpost	Última publicación
 forum_utils	news	Noticias
 forum_utils	discussionforum	Foros de discusión:
 forum_utils	nonewsitem	Error - este elemento de noticias no se ha encontrado
-forum_utils	latest	últimas noticias
+forum_utils	latest	Últimas noticias
 forum_utils	monitor	Monitorizar Foro
 forum_utils	admin	Administración
 forum_utils	saveplace	Guardar Sitio
@@ -631,7 +631,7 @@ news_submit	submit	ENVIAR
 news_utils	nonews	Ninguna nueva noticia encontrada
 news_utils	archive	Archivo de Noticias
 news_utils	submit	Enviar Noticias
-news_utils	readmore	<NOBR>Leer más/Comentar</NOBR>
+news_utils	readmore	Leer&nbsp;más/Comentar
 searchbox	softwaregroup	Software/Grupos
 searchbox	skill	Habilidad
 searchbox	people	Personas
@@ -670,7 +670,7 @@ calendar	selecteddate	Fecha escogida (si es diferente de hoy).
 calendar	task_link_title	Resumen: $1
 calendar	task_begins	Tarea $1 empieza
 calendar	task_ends	Tarea $1 termina
-calendar	invalidyear	Añ inválido
+calendar	invalidyear	Año inválido
 calendar	invalidyearexplain	El año tiene que ser entre 1990 y 2020.
 calendar	invalidmonth	Mes inválido
 calendar	invalidmonthexplain	El mes tiene que ser entre 1 y 12.
