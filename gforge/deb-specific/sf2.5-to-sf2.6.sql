@@ -1,6 +1,3 @@
--- Roland Mas 20020307
-create unique index group_unix_uniq on groups (unix_group_name);
-
 -- 20001209
 -- drop index downloads_idx;
 -- create index frsdlstatsgroupagg_day_dls on  frs_dlstats_group_agg (day,downloads);
@@ -519,6 +516,62 @@ FROM groups
 WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 
+----- 
+-- Roland Mas 20020307
+-- Copy the groups table to groups2, drop groups, then rename groups2 to groups
+-- Goals: 
+-- 1. Remove the dead columns
+-- 2. Get rid of the undeleteable foreign key constraints with old tables
+--    (like, support_category...)
+
+ALTER TABLE groups RENAME TO old_groups ;
+DROP INDEX groups_pkey ;
+DROP INDEX groups_type ;
+DROP INDEX groups_public ;
+DROP INDEX groups_status ;
+
+CREATE TABLE "groups" (
+	"group_id" integer DEFAULT nextval('groups_pk_seq'::text) NOT NULL,
+	"group_name" character varying(40),
+	"homepage" character varying(128),
+	"is_public" integer DEFAULT '0' NOT NULL,
+	"status" character(1) DEFAULT 'A' NOT NULL,
+	"unix_group_name" character varying(30) DEFAULT '' NOT NULL,
+	"unix_box" character varying(20) DEFAULT 'shell' NOT NULL,
+	"http_domain" character varying(80),
+	"short_description" character varying(255),
+	"cvs_box" character varying(20) DEFAULT 'cvs' NOT NULL,
+	"license" character varying(16),
+	"register_purpose" text,
+	"license_other" text,
+	"register_time" integer DEFAULT '0' NOT NULL,
+	"rand_hash" text,
+	"use_mail" integer DEFAULT '1' NOT NULL,
+	"use_survey" integer DEFAULT '1' NOT NULL,
+	"use_forum" integer DEFAULT '1' NOT NULL,
+	"use_pm" integer DEFAULT '1' NOT NULL,
+	"use_cvs" integer DEFAULT '1' NOT NULL,
+	"use_news" integer DEFAULT '1' NOT NULL,
+	"type" integer DEFAULT '1' NOT NULL,
+	"use_docman" integer DEFAULT '1' NOT NULL,
+	"new_task_address" text DEFAULT '' NOT NULL,
+	"send_all_tasks" integer DEFAULT '0' NOT NULL,
+	"use_pm_depend_box" integer DEFAULT '1' NOT NULL
+);
+
+INSERT INTO groups
+SELECT group_id, group_name, homepage, is_public, status, unix_group_name,
+unix_box, http_domain, short_description, cvs_box, license,
+register_purpose, license_other, register_time, rand_hash, use_mail,
+use_survey, use_forum, use_pm, use_cvs, use_news, type, use_docman,
+new_task_address, send_all_tasks, use_pm_depend_box
+FROM old_groups ;
+
+DROP TABLE old_groups ;
+
+-- End of Roland Mas 20020307
+-----
+
 -- vacuum analyze artifact_perm;
 -- vacuum analyze artifact_group_list;
 -- vacuum analyze artifact;
@@ -529,9 +582,6 @@ ORDER BY group_id ASC;
 -- vacuum analyze artifact_message;
 
 -- artifact-fkeys
-ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk 
-	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL;
-
 ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk 
         FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL;
 DELETE from artifact_perm 
@@ -650,22 +700,6 @@ DROP TABLE support_category         ;
 DROP TABLE support_history          ;
 DROP TABLE support_messages         ;
 DROP TABLE support_status           ;
-
-alter table groups rename column use_bugs to dead1;
-alter table groups rename column use_patch to dead2;
-alter table groups rename column use_support to dead3;
-alter table groups rename column new_bug_address to dead4;
-alter table groups rename column new_patch_address to dead5;
-alter table groups rename column new_support_address to dead6;
-alter table groups rename column send_all_bugs to dead7;
-alter table groups rename column send_all_patches to dead8;
-alter table groups rename column send_all_support to dead9;
-alter table groups rename column use_bug_depend_box to dead10;
-alter table groups rename column bug_due_period to dead11;
-alter table groups rename column patch_due_period to dead12;
-alter table groups rename column support_due_period to dead13;
-
-drop index groups_unix; 
 
 -- 20010313
 create unique index users_namename_uniq on users(user_name);
@@ -979,8 +1013,6 @@ ALTER TABLE frs_file ADD CONSTRAINT frsfile_typeid_fk
 ALTER TABLE frs_file ADD CONSTRAINT frsfile_processorid_fk
 	FOREIGN KEY (processor_id) REFERENCES frs_processor(processor_id) MATCH FULL;
 
-ALTER TABLE frs_package ADD CONSTRAINT frspackage_groupid_fk
-	FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL;
 ALTER TABLE frs_package ADD CONSTRAINT frspackage_statusid_fk
 	FOREIGN KEY (status_id) REFERENCES frs_status(status_id) MATCH FULL;
 

@@ -13,8 +13,17 @@ sourceforge (2.6-0+7+) unstable; urgency=low
   * [Roland] Fixed leftover cruft in /etc/nsswitch.conf purging.
   * [Roland] Made the header somewhat customizable (display/hide the
     banner, mainly).
+  * [Roland] Transitioned to PostgreSQL 7.2.  That was far from easy,
+    since PG 7.2 is much more anal retentive than 7.1.3.  In particular,
+    foreign key constraints and indices are not automagically dropped,
+    which caused strange errors and deep frustration in the upgrade path
+    from the 2.5 series.
+  * [Roland] While I was fixing that, I also took the opportunity to add
+    some code to drop the "deadXX" columns that are introduced by the
+    2.5->2.6 upgrade (ALTER TABLE/DROP COLUMN not being implemented in
+    PostgreSQL yet).
 
- -- Roland Mas <lolando@debian.org>  Thu,  7 Mar 2002 15:48:18 +0100
+ --
 
 sourceforge (2.6-0+7) unstable; urgency=low
 

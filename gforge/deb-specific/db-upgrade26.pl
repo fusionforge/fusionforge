@@ -234,7 +234,7 @@ eval {
 	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
-		  # debug $query ;
+		  debug $query ;
 		  $sth = $dbh->prepare ($query) ;
 		  $sth->execute () ;
 		  $sth->finish () ;
@@ -274,7 +274,46 @@ eval {
 
 
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.3+shellbox+fixed") {
+	  if (is_lesser $version, "2.5.9999.3+indices+fkeys+created") {
+	      debug "Creating varous indices and foreign key constraints" ;
+
+	      @reqlist = (
+			  "ALTER TABLE groups ADD CONSTRAINT groups_pkey PRIMARY KEY (group_id)",
+			  "CREATE UNIQUE INDEX group_unix_uniq ON groups USING BTREE (unix_group_name varchar_ops)",
+			  "CREATE INDEX groups_type ON groups USING BTREE (type int4_ops)",
+			  "CREATE INDEX groups_public ON groups USING BTREE (is_public int4_ops)",
+			  "CREATE INDEX groups_status ON groups USING BTREE (status bpchar_ops)",
+			  "ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
+			  "ALTER TABLE frs_package ADD CONSTRAINT frspackage_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL"
+# TODO
+# fkey from user_group to user
+#           forums
+#           project_task
+#           user et supported_languages
+# Drop following indices and recreate them thusly:
+# CREATE INDEX users_status ON users USING BTREE (status bpchar_ops);
+# CREATE INDEX user_user ON users USING BTREE (status bpchar_ops);
+# CREATE INDEX idx_users_username ON users USING BTREE (user_name text_ops);
+# CREATE INDEX users_user_pw ON users USING BTREE (user_pw varchar_ops);
+			  ) ;
+	      
+	      foreach my $s (@reqlist) {
+		  $query = $s ;
+		  debug $query ;
+		  $sth = $dbh->prepare ($query) ;
+		  $sth->execute () ;
+		  $sth->finish () ;
+	      }
+	      @reqlist = () ;
+	      
+	      &update_db_version ("2.5.9999.3+indices+fkeys+created") ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
+
+	  $version = &get_db_version ;
+	  if (is_lesser $version, "2.5.9999.4+shellbox+fixed") {
 	      debug "Fixing the unix_box fields" ;
 
 	      $query = "update groups set unix_box = 'shell'" ;
@@ -289,7 +328,7 @@ eval {
 	      $sth->execute () ;
 	      $sth->finish () ;
 
-	      &update_db_version ("2.5.9999.3+shellbox+fixed") ;
+	      &update_db_version ("2.5.9999.4+shellbox+fixed") ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
