@@ -154,7 +154,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 
 			if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
 				// Even the (crypt) unix_pw does not patch
-				// This one has clearly typed a bas passwd
+				// This one has clearly typed a bad passwd
 				$feedback=$Language->getText('session','invalidpasswd');
 				return false;
 			}
