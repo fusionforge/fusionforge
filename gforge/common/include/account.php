@@ -199,7 +199,10 @@ function account_group_homedir($group) {
  *	@return URL to access CVS over HTTP
  */
 function account_group_cvsweb_url($group) {
+	/*
 	return 'http://'.$GLOBALS['sys_cvs_host'].'/cgi-bin/viewcvs.cgi/'.$group;
+	*/
+	return 'http://'.$GLOBALS['sys_cvs_host'].'/cgi-bin/cvsweb.cgi?cvsroot='.$group;
 }
 
 ?>
