@@ -26,8 +26,14 @@ set -e
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:replace-files#
+#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
+    	# Get some essential vars
+	vars="domain_name ip_address cvs_host download_host lists_host"
+	update_mainconffile $vars
+	/usr/sbin/sourceforge-config
+
         # Patch Apache configuration files
 	/usr/lib/sourceforge/bin/install-apache.sh configure-files
 	[ -e /etc/apache/httpd.conf ] && propose_update_install /etc/apache/httpd.conf
