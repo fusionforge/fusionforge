@@ -415,7 +415,7 @@ admin_useredit	pending	En attente (E)
 admin_useredit	project_admin	Administrateur de projet
 admin_useredit	real_name	Nom réel
 admin_useredit	suspended	Suspendu (S)
-admin_useredit	this_page_allows	Ces pages permettent de changer seulement les propriétés directes d'un utilisateur. Pour éditer les propriété d'une utilisateur au sein d'un groupe sépcifique, aller àa la page d'administration de ce groupe (ci-dessous). 
+admin_useredit	this_page_allows	Ces pages permettent de changer seulement les propriétés directes d'un utilisateur. Pour éditer les propriétés d'un utilisateur au sein d'un groupe sépcifique, aller à la page d'administration de ce groupe (ci-dessous). 
 admin_useredit	title	Information Utilisateur
 admin_useredit	unix_account_status	Statuts des comptes Unix
 admin_useredit	unix_name	Nom Unix
