@@ -1615,26 +1615,22 @@ END;
     $target = "3.3.0-2+1" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with migrateforum.php") ;
-	if (system("/usr/lib/gforge/db/20040826_migrateforum.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include")){
+	system("/usr/lib/gforge/db/20040826_migrateforum.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0 
+	or die "system call of 20040826_migrateforum.php failed: $?" ;
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
-    	} else {
-		exit 1;
-	}
     }
 
     $version = &get_db_version ;
     $target = "3.3.0-2+2" ;
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with migraterbac.php") ;
-	if (system("/usr/lib/gforge/db/20040826_migraterbac.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include")){
+	system("/usr/lib/gforge/db/20040826_migraterbac.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0
+	or die "system call of 20040826_migraterbac.php failed: $?" ;
         &update_db_version ($target) ;
         &debug ("Committing.") ;
         $dbh->commit () ;
-    	} else {
-		exit 1;
-	}
     }
 
 
