@@ -246,22 +246,23 @@ add the -i option to the pg_ctl command so that the result is:
  su -l postgres -s /bin/sh -c "/usr/bin/pg_ctl -o -i -D $PGDATA -p /usr/bin/postmaster start  &gt; /dev/null 2>&amp;1" &lt; /dev/null
 </code>
 <p/>
-On some systems, PostgreSQL is configured with the ident clause, allowing you only to access to the database if the username/password of your server is identical to the database username/password.
-
-You should either create a user called gforge on your server or disable this feature:
+On some systems, PostgreSQL is configured with the ident clause, allowing you only to access to the database if the username/password of your server is identical to the database username/password.  You should either create a user called gforge on your server or disable this feature:
 <br/>
 <code>
 su - postgres<br/>
 </code>
-open <code>/var/lib/pgsql/data/pg_hba.conf</code>
-<br/>
-and insert the following lines:
-<br/>
-<code>
-local all              trust
-<br/>
+open <code>/var/lib/pgsql/data/pg_hba.conf</code> and insert the following lines:
+<br></br>
+For PostgreSQL 7.3:
+<source>
+local all all trust
+host all all 127.0.0.1 255.255.255.255 crypt
+</source>
+For PostgreSQL 7.2:
+<source>
+local all trust
 host all 127.0.0.1 255.255.255.255 crypt
-</code>
+</source>
 
 <p/>
 and comment out all other directives.
@@ -273,19 +274,19 @@ Restart the PostgreSQL server as root user:
 
 Create the database user:
 <br/>
-<code>
-su - postgres<br/>
-<br/>createuser gforge -W 
-</code>
+<source>
+su - postgres
+createuser gforge -W 
+</source>
 <br/>
 
 <br/>
 Answer the following two questions:
 
-<code><br/>
-Shall the new user be allowed to create databases? (y/n) y<br/>
-Shall the new user be allowed to create more new users? (y/n) n<br/>
-</code>
+<source>
+Shall the new user be allowed to create databases? (y/n) y
+Shall the new user be allowed to create more new users? (y/n) n
+</source>
 and insert a password for the user to be created.
 
 <p/>
@@ -432,7 +433,7 @@ Change the value of the $sys_upload_dir to:
 </li>
 <li>
 Change the value of the $sys_urlroot to:<br/>
-<code>$sys_urlroot="/var/www/gforge-3.0/www";</code>
+<code>$sys_urlroot="/var/www/gforge-3.0/www/";</code>
 <br/>
 </li>
 
