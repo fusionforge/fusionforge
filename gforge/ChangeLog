@@ -1,3 +1,32 @@
+2003-02-02  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/include/exit.php(exit_assert_object): declare $Language
+	as a global.
+	(exit_error): use lower-case global.
+
+	* www/themes/osx/Theme.class(listTableTop): no height attribute
+	for tr tag in XHTML.
+
+	* www/themes/kde/Theme.class(listTableTop): ditto plus remove
+	erroneous </a> tag.
+
+	* www/admin/index.php: valid XHTML 1.0 Transitional.
+
+	* www/admin/search.php: ditto.
+
+	* www/admin/trove/trove_cat_edit.php: ditto.
+
+	* www/admin/massmail.php: ditto.
+
+	* www/admin/admin_table.php: ditto.
+
+	* www/admin/admintabfiles.php: ditto.
+
+	* www/admin/database.php: ditto.
+
+	* www/news/admin/index.php: ditto.
+
+
 2003-02-02 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/tracker/browse.php, www/tracker/add.php,
@@ -7,7 +36,6 @@
 	www/admin/index.php, www/include/languages/Base.tab,
 	www/include/languages/Italian.tab
 	Localization of the tracker
-	
 
 2003-02-01  Ryan T. Sammartino  <ryants@shaw.ca>
 
