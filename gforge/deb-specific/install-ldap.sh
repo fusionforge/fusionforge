@@ -259,7 +259,7 @@ userPassword: {crypt}x
 FIN
 
 	echo "Changing SF_robot passwd using admin account"
-	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
+	{ ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
@@ -269,7 +269,7 @@ FIN
 	echo "Testing LDAP"
 	#naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 	echo "Changing dummy cn using SF_robot account"
-	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
+	{ ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
@@ -338,7 +338,7 @@ case "$1" in
 			| grep -v "^ou=Roaming," \
 			| grep -v "$admin_regexp"
 		}
-		get_our_entries
+		get_our_entries || true
 		get_our_entries | ldapdelete -D "cn=admin,ou=People,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
 		;;
 	reset)
