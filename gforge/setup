@@ -1,65 +1,17 @@
 #! /bin/sh
-apacheconf=/etc/apache/httpd.conf
 
 usage() {
-	echo "$0: [-interact] [-help] [-debug] [-input conffile] [-output conffile] [-example] [-clean]"
+	echo "$0: [-interact] [-help] [-debug] [-confdir confdir] [-input conffile] [-output conffile] [-httpdconf gforgehttpdconf] [-httpdsecrets gforgehttpdsecrets] [-localinc gforgelocalinc] [-example] [-clean]"
 }
-
-CONFFILEIN=etc/gforge.conf
-CONFFILEOUT=etc/gforge.conf
-LOCALINC=etc/local.inc
-HTTPDCONF=etc/httpd.conf
-
-while [ $# -ne 0 ]
-do
-	case "$1" in
-		-interact )
-			interact=true
-			shift
-			;;
-		-help )
-			usage
-			exit 0
-			;;
-		-input )
-			shift
-			CONFFILEIN=$1
-			;;
-		-output )
-			shift
-			CONFFILEOUT=$1
-			;;
-		-example )
-			CONFFILEIN=etc/gforge.conf.example
-			CONFFILEOUT=etc/gforge.conf.example
-			LOCALINC=etc/local.inc.example
-			HTTPDCONF=etc/httpd.conf.example
-			;;
-		-clean )
-			rm -f $HTTPDCONF
-			rm -f etc/httpd.secrets
-			rm -f $LOCALINC
-			rm -f $CONFFILEIN
-			exit 0
-			;;
-		-debug )
-			set -x
-			;;
-		*)
-			echo "Bad Parameter"
-			usage
-			;;
-	esac
-	shift
-done
 
 getval(){
 	echo -n $1 \[$2\] ?
 	read $1
 }
 
-# This is used to make a default working gforge.conf
 computedefault(){
+echo "Calculating defaults"
+# This is used to make a default working gforge.conf
 DEFAULTsystem_name=Gforge
 DEFAULTdomain_name=`hostname -f`
 DEFAULTserver_admin=webmaster@$DEFAULTdomain_name
@@ -125,9 +77,10 @@ DEFAULTsys_use_trove=true
 DEFAULTsys_use_snippet=true
 DEFAULTsys_project_reg_restricted=true
 DEFAULTsys_localization_enable_caching=true
-DEFAULTsys_localization_cache_path=/var/cache/gforge/
+DEFAULTsys_localization_cache_path=`pwd`/var/cache/gforge/
 DEFAULTsys_localization_enable_timestamp_checking=true
-
+DEFAULTsys_localinc=`pwd`/etc/local.inc
+#
 # TODO
 #usr_lib_gforge=`pwd`
 #vhost_name
@@ -151,14 +104,16 @@ readdefault() {
 	rm -f $1.$$readdefault
 }
 
-echo "Setting defaults"
+setupinout(){
 
 computedefault
+
 writedefault etc/gforge.conf.new
+
 if [ -f $CONFFILEIN ]
 then
+	echo "Reading defaults from $CONFFILEIN"
 	readdefault $CONFFILEIN
-	echo "Red default from $CONFFILEIN"
 else
 	readdefault etc/gforge.conf.new
 fi
@@ -176,6 +131,8 @@ fi
 . $tmpfile
 rm -f $tmpfile
 
+echo "Creating $CONFFILEOUT"
+[ ! -d `dirname $CONFFILEOUT` ] && (mkdir -p `dirname $CONFFILEOUT` || (echo "Could not create `dirname $CONFFILEOUT`" && exit 1))
 writedefault etc/gforge.conf.new
 mv etc/gforge.conf.new $CONFFILEOUT
 #cat $0 | grep '^DEFAULT' | sed 's/^DEFAULT\(.[^=]*\)=.*/DEFAULT\1 \1/' | while read defvar var
@@ -188,15 +145,19 @@ mv etc/gforge.conf.new $CONFFILEOUT
 cat $CONFFILEIN | sed 's/ *$//' > etc/gforge.conf.new
 mv etc/gforge.conf.new $CONFFILEIN
 
-echo "Create $HTTPDCONF and etc/httpd.secrets"
+# Fill in the blanks
 for i in etc/httpd.d/[0-4][0-9]* etc/httpd.d/httpd.secrets
 do
-	utils/fill-in-the-blanks.pl $i etc/`basename $i` $CONFFILEOUT
+	utils/fill-in-the-blanks.pl $i etc/`basename $i`.tmp $CONFFILEOUT
 done
-ls etc/[0-9][0-9]* | sort | xargs cat > $HTTPDCONF
-rm etc/[0-9][0-9]*
+echo "Creating $HTTPDCONF"
+ls etc/[0-9][0-9]*.tmp | sort | xargs cat > $HTTPDCONF
+rm etc/[0-9][0-9]*.tmp
+echo "Creating $HTTPDSECRETS"
+cat etc/httpd.secrets.tmp > $HTTPDSECRETS
+rm etc/httpd.secrets.tmp
 
-echo "Create $LOCALINC"
+echo "Creating $LOCALINC"
 for i in etc/local.d/01* etc/local.d/10*simple etc/local.d/[2-9]*
 do
 	utils/fill-in-the-blanks.pl $i etc/`basename $i` $CONFFILEOUT
@@ -205,9 +166,97 @@ ls etc/01* etc/10*simple etc/[2-9]* | sort | xargs cat > $LOCALINC
 rm etc/01* etc/10*simple etc/[2-9]*
 
 
-export GFORGE_ETC_SEARCH=`pwd`/etc/httpd.conf
-if [ -f $apacheconf ] ; then
-	if ! grep -q "^Include $GFORGE_ETC_SEARCH" $apacheconf ; then
+if [ -f `pwd`/$HTTPDCONF ] 
+then
+	# Set full path
+	GFORGE_ETC_SEARCH=`pwd`/$HTTPDCONF
+else
+	# Full path already
+	GFORGE_ETC_SEARCH=$HTTPDCONF
+fi
+export GFORGE_ETC_SEARCH
+if [ -f $APACHECONF ] ; then
+	if ! grep -q "^Include $GFORGE_ETC_SEARCH" $APACHECONF ; then
 		utils/install-apache.sh setup
+	else 
+		echo "Found Include $GFORGE_ETC_SEARCH in $APACHECONF"
 	fi
 fi
+}
+
+
+APACHECONF=/etc/apache/httpd.conf
+export APACHECONF
+CONFFILEIN=etc/gforge.conf
+CONFFILEOUT=etc/gforge.conf
+LOCALINC=etc/local.inc
+HTTPDCONF=etc/httpd.conf
+HTTPDSECRETS=etc/httpd.secrets
+export CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS
+
+while [ $# -ne 0 ]
+do
+	case "$1" in
+		-interact )
+			interact=true
+			shift
+			;;
+		-help )
+			usage
+			exit 0
+			;;
+		-httpdsecrets )
+			shift
+			HTTPDSECRETS=$1
+			;;
+		-httpdconf )
+			shift
+			HTTPDCONF=$1
+			;;
+		-localinc )
+			shift
+			LOCALINC=$1
+			;;
+		-input )
+			shift
+			CONFFILEIN=$1
+			;;
+		-output )
+			shift
+			CONFFILEOUT=$1
+			;;
+		-confdir )
+			shift
+			CONFFILEIN=$1/gforge.conf
+			CONFFILEOUT=$1/gforge.conf
+			LOCALINC=$1/local.inc
+			HTTPDCONF=$1/httpd.conf
+			HTTPDSECRETS=$1/httpd.secrets
+			;;
+		-example )
+			CONFFILEIN=etc/gforge.conf.example
+			CONFFILEOUT=etc/gforge.conf.example
+			LOCALINC=etc/local.inc.example
+			HTTPDCONF=etc/httpd.conf.example
+			HTTPDSECRETS=etc/httpd.secrets.example
+			;;
+		-clean )
+			[ -f $CONFFILEIN ] && echo Removing $CONFFILEIN && rm -f $CONFFILEIN
+			[ -f $CONFFILEOUT ] && echo Removing $CONFFILEOUT && rm -f $CONFFILEOUT
+			[ -f $LOCALINC ] && echo Removing $LOCALINC && rm -f $LOCALINC
+			[ -f $HTTPDCONF ] && echo Removing $HTTPDCONF && rm -f $HTTPDCONF
+			[ -f $HTTPDSECRETS ] && echo Removing $HTTPDSECRETS && rm -f $HTTPDSECRETS
+			exit 0
+			;;
+		-debug )
+			set -x
+			;;
+		*)
+			echo "Bad Parameter"
+			usage
+			exit 1
+			;;
+	esac
+	shift
+done
+setupinout
