@@ -1,4 +1,4 @@
-gforge (3.0-6+9) unstable; urgency=low
+gforge (3.0-7) unstable; urgency=low
 
   * [Roland] Added 20030822.sql.
   * [Roland] Added scripts to generate a /var/lib/gforge/etc/httpd.vhosts
@@ -26,7 +26,7 @@ gforge (3.0-6+9) unstable; urgency=low
     doesn't allow the user to change that return type afterwards.  Fix:
     drop trigger and function, re-create function and trigger.
 
- -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 13:18:00 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 14:43:14 +0200
 
 gforge (3.0-6) unstable; urgency=low
 
