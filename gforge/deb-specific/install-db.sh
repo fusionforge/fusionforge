@@ -105,7 +105,7 @@ EOF
         # Create the appropriate database
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
-	if su -s /bin/sh postgres -c "createdb gforge" 1> $tmp1 2> $tmp2 \
+	if su -s /bin/sh postgres -c "createdb --encoding=UNICODE gforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
 	    || grep -q '^ERROR:  CREATE DATABASE: database "gforge" already exists$' $tmp2 ; then
 	    # Creation OK or database already existing -- no problem here
