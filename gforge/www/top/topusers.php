@@ -59,12 +59,18 @@ $HTML->header(array('title'=>$Language->getText('top_topusers','title')));
 print '<h1>'.$Language->getText('top_topusers','title').'</h1>
 <br /><em>('.$Language->getText('top','updated_daily').')</em>
 
-<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a>
+<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a></p>';
 
-<p>';
-$arr=array($Language->getText('top','rank'),$Language->getText('top','user_name'),$Language->getText('top','real_name'),$Language->getText('top','rating'),
-					$Language->getText('top','last_rank'),$Language->getText('top','change'));
-echo $HTML->listTableTop($arr);
+$tableHeaders = array(
+	$Language->getText('top_topusers','rank'),
+	$Language->getText('top_topusers','user_name'),
+	$Language->getText('top_topusers','real_name'),
+	$Language->getText('top_topusers','rating'),
+	$Language->getText('top_topusers','last_rank'),
+	$Language->getText('top_topusers','change')
+);
+
+echo $HTML->listTableTop($tableHeaders);
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;

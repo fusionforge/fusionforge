@@ -59,7 +59,7 @@ while ($row_top = db_fetch_array($res_top)) {
 	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$i
 		.'</td><td><a href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
 		.$row_top['group_name']."</a>"
-		.'</td><td align="right">'.substr($row_top['percentile'],0,5).'</td></tr>';
+		.'</td><td align="right">'.substr($row_top['percentile'],0,5).'%</td></tr>';
 }
 
 if ($i<$rows) {
