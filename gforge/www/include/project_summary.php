@@ -19,7 +19,7 @@ $project_agg_arr=array();
  */
 function project_setup_agg($group_id) {
 	global $project_agg_arr,$project_agg_arr_is_set;
-	$res=db_query("SELECT * FROM project_sums_agg WHERE group_id=$group_id");
+	$res=db_query("SELECT type, count FROM project_sums_agg WHERE group_id=$group_id");
 	$rows=db_numrows($res);
 	if ($res && $rows > 0) {
 		for ($i=0; $i<$rows; $i++) {
@@ -130,9 +130,9 @@ function project_summary($group_id,$mode,$no_table) {
 		ORDER BY group_artifact_id ASC");
 
 		$rows = db_numrows($result);
-
+	
 		if (!$result || $rows < 1) {
-			$return .= '<br /><em>There are no public trackers available</em>';
+			$return .= '<br /><em>'.$Language->getText('project_home','no_trackers').'</em>';
 		} else {
 			for ($j = 0; $j < $rows; $j++) {
 				$return .= '<p>

@@ -1,6 +1,7 @@
 2004-03-11  Tom Copeland <tom@infoether.com>
 	* SQL optimization: Replaced a 'select *' with a 'select count(*)'
-	in Forum.class.
+	in Forum.class.  Modified query in project_summary.php to limit columns
+	returned to those used.
 
 2004-03-08  Tom Copeland <tom@infoether.com>
 	* SQL optimization: Replaced 'select *' occurrences in User.class
