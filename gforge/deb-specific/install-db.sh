@@ -245,9 +245,11 @@ EOF
 	fi
 	# Must be root to reorg these files, but only have to do it once
 	[ ! -f /var/lib/gforge/db/20050127-frs-reorg.done ] &&\
-	/usr/lib/gforge/db/20050127-frs-reorg.php \
+	(/usr/lib/gforge/db/20050127-frs-reorg.php \
 	-d include_path=/usr/share/gforge/:/usr/share/gforge/www/include &&\
-	touch /var/lib/gforge/db/20050127-frs-reorg.done
+	touch /var/lib/gforge/db/20050127-frs-reorg.done) || true
+	# Le last line had the bad idea to create a cache file owned by root
+	rm -f /var/cache/gforge/English.cache
 	
 	;;
     purge-files)
