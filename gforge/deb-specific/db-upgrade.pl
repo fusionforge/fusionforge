@@ -578,6 +578,10 @@ eval {
 	    $sth->finish () ;
 	}
 	@reqlist = () ;
+
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
     }
     
     $version = &get_db_version ;
