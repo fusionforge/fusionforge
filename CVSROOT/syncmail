@@ -104,7 +104,7 @@ from cStringIO import StringIO
 # Which SMTP server to do we connect to?  Empty string means localhost.
 MAILHOST = 'gforge.org'
 MAILPORT = 25
-
+ 
 # Diff trimming stuff
 DIFF_HEAD_LINES = 20
 DIFF_TAIL_LINES = 20
