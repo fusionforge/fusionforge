@@ -1,6 +1,14 @@
 #! /usr/bin/php4 -f
 <?php
+/*
 
+This file creates user / group permissions by editing 
+the /etc/passwd /etc/shadow and /etc/group files
+
+It also creates blank user home directories and 
+creates a group home directory with a template in it.
+
+*/
 require_once('squal_pre.php');
 require ('common/include/cron_utils.php');
 
@@ -200,6 +208,57 @@ foreach($users as $user) {
 //		system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
 	}
 	system("chown $user:".USER_DEFAULT_GROUP." /home/".$user);
+}
+
+
+//
+//	Create home dir for groups
+//
+foreach($groups as $group) {
+	if (is_dir($groupdir_prefix."/".$group)) {
+
+	} else {
+		@mkdir($groupdir_prefix."/".$group);
+		$g =& group_get_object_by_name($group);
+
+		//
+		//	Read in the template file
+		//
+		$fo=fopen('default_page.php','r');
+		$contents = '';
+		while (!feof($fo)) {
+    		$contents .= fread($fo, 8192);
+		}
+		fclose($fo);
+		//
+		//	Change some defaults in the template file
+		//
+		$contents=str_replace('<domain>',$sys_default_domain,$contents);
+		$contents=str_replace('<project_description>',$g->getDescription(),$contents);
+		$contents=str_replace('<project_name>',$g->getPublicName(),$contents);
+		$contents=str_replace('<group_id>',$g->getID(),$contents);
+		$contents=str_replace('<group_name>',$g->getUnixName(),$contents);
+
+		//
+		//	Write the file back out to the project home dir
+		//
+		$fw=fopen($groupdir_prefix."/".$group."/index.php",'w');
+		fwrite($fw,$contents);
+		fclose($fw);
+		
+	}
+	$resgroupadmin=db_query("SELECT u.user_name FROM users u,user_group ug,groups g
+		WHERE u.user_id=ug.user_id 
+		AND ug.group_id=g.group_id 
+		AND g.unix_group_name='$group'
+		AND ug.admin_flags='A'
+		AND u.status='A'");
+	if (!$resgroupadmin || db_numrows($resgroupadmin) < 1) {
+		//group has no members, so cannot create dir
+	} else {
+		$user=db_result($resgroupadmin,0,'user_name');
+		system("chown $user:$group $groupdir_prefix/$group");
+	}
 }
 
 cron_entry(16,$err);
