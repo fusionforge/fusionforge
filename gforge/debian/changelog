@@ -1,15 +1,18 @@
 sourceforge (2.6-0+2+) unstable; urgency=low
 
-  * Added proper chmod for cp -r www and common
-  * Added homedir_prefix and groupdir_prefix in local.inc.template
-    and made the change in account.php to take this in account 
+  * [Christian] Added proper chmod for cp -r www and common
+  * [Christian] Added homedir_prefix and groupdir_prefix in
+    local.inc.template and made the change in account.php to take this in
+    account
+  * [Roland] [From 2.5] Rewrote the config file handling, so that it does
+    not overwrite local changes.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Thu, 29 Nov 2001 20:38:01 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 30 Nov 2001 17:19:30 +0100
 
 sourceforge (2.6-0+2) unstable; urgency=low
 
-  * Patch for db init
-  * Repared bad db init 
+  * [Christian] Patch for db init
+  * [Christian] Repared bad db init 
 
  -- Christian Bayle <bayle@aist.enst.fr>  Sat, 17 Nov 2001 01:29:25 +0100
 
@@ -56,8 +59,6 @@ sourceforge (2.6-0+1) unstable; urgency=low
     parsing for files not in /etc/sourceforge (not needed yet, but it
     might come in handy).
   * Removed an unneeded dependency on bash (in install-chroot.sh).
-  * [Christian] Patch for db init.
-  * [Christian] Repared bad db init.
   * Added resolution data.  Fixes the "Can't submit a bug/patch/whatever"
     bug.
 

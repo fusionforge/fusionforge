@@ -19,7 +19,8 @@ set -e
 case "$1" in
     purge)
 	rm -rf /var/lib/sourceforge
-	#/usr/lib/sourceforge/bin/install-db.sh purge
+	rm -f /etc/sourceforge/sourceforge.conf
+	[ -d /etc/sourceforge ] && rmdir --ignore-fail-on-non-empty /etc/sourceforge
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
 	;;

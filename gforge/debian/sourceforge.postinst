@@ -31,27 +31,20 @@ case "$1" in
 	
 	. /usr/share/debconf/confmodule
 
-	# "Fill in the blanks" in config files
-        # files="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl exim.directors"
+	# "Fill in the blanks" in main config file
         vars="domain_name ip_address server_admin db_password system_name admin_login admin_password cvs_host lists_host download_host newsadmin_groupid statsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list noreply_to_bitbucket"
-        
-	files=""
-        etcfiles="local.inc database.inc sf-httpd.conf sf-httpd.secrets local.pl"
-	for i in $etcfiles ; do
-	    files="$files /etc/sourceforge/$i"
-	done
-	# Invoke our magic script
-	# Parameters are input file, output file, debconf prefix, list of vars
-	for i in $files ; do
-	    perl -w '-MDebconf::Client::ConfModule qw/:all/' /usr/lib/sourceforge/bin/fill-in-the-blanks.pl $i.template $i sourceforge/ $vars
-	done
-	chmod 644 /etc/sourceforge/local.inc
-	chmod 644 /etc/sourceforge/sf-httpd.conf
-	chown sourceforge:sourceforge /etc/sourceforge/database.inc
-	chmod 640 /etc/sourceforge/database.inc
-	chown sourceforge:sourceforge /etc/sourceforge/local.pl
-	chmod 640 /etc/sourceforge/local.pl
-	# chmod 644 /etc/sourceforge/exim.directors
+	mainconffile=/etc/sourceforge/sourceforge.conf
+        if [ ! -e $mainconffile ] ; then
+	    touch $mainconffile
+	    chmod 600 $mainconffile
+	fi
+	for i in $vars ; do
+	    if ! grep -q "^$i=" $mainconffile ; then
+		db_get sourceforge/$i
+		echo "$i=$RET" >> $mainconffile
+	    fi
+        done
+	/usr/sbin/sourceforge-config
     	
 	# Clean debconf after ourselves
 	db_stop

@@ -1,5 +1,1 @@
 /etc/cron.d/sourceforge
-/etc/sourceforge/sf-httpd.conf.template
-/etc/sourceforge/local.inc.template
-/etc/sourceforge/local.pl.template
-/etc/sourceforge/database.inc.template

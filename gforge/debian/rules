@@ -16,10 +16,11 @@ configure-stamp:
 	touch configure-stamp
 
 build: configure-stamp build-stamp
-	gcc -o  utils/cvssh utils/grap.c
-	# The following are no longer needed since we have fileforge.pl
-	#gcc -o  utils/fileforge utils/fileforge.c
-	#gcc -o  utils/tmpfilemove utils/tmpfilemove.c
+	# The following are no longer needed since we have rewritten
+	# the utils in Perl (fileforge.pl and cvssh.pl)
+	# gcc -o  utils/cvssh utils/grap.c
+	# gcc -o  utils/fileforge utils/fileforge.c
+	# gcc -o  utils/tmpfilemove utils/tmpfilemove.c
 build-stamp:
 	dh_testdir
 
@@ -35,7 +36,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-	rm -f utils/cvssh
+	# rm -f utils/cvssh
 	# rm -f utils/fileforge
 	# rm -f utils/tmpfilemove
 	rm -f cvssh.1
@@ -90,11 +91,11 @@ install: build
 	#install utils/underworld-root/db_stats_site_nightly.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_stats_site_nightly.pl
 	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
 	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/clear.gif deb-specific/clear.gif.uu
-	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
-	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
-	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
-	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
-	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
+	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/
+	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/
+	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/
+	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/
+	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
@@ -104,6 +105,7 @@ install: build
 	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	# install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/sourceforge/usr/bin/
 	# install -m 755 deb-specific/sf-register-theme $(CURDIR)/debian/sourceforge/usr/bin/
+	install -m 755 deb-specific/sourceforge-config $(CURDIR)/debian/sourceforge/usr/sbin/
 	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/sf-register-theme $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 644 utils/include.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/lib/
@@ -124,7 +126,7 @@ install: build
 	install utils/underworld-dummy/dump_database.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install utils/new_parse.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
-	install -m 755 utils/cvssh $(CURDIR)/debian/sourceforge/bin/cvssh 
+	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/sourceforge/bin/cvssh 
 
 	# FRS stuff
 	install -m 4755 deb-specific/fileforge.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
