@@ -51,6 +51,7 @@
       <!-- <arg><option>-e <replaceable>"foo"</replaceable></option></arg> -->
     </cmdsynopsis>
   </refsynopsisdiv>
+
   <refsect1>
     <title>DESCRIPTION</title>
 
@@ -67,18 +68,21 @@
     </para>
 
   </refsect1>
+
   <refsect1>
     <title>OPTIONS</title>
 
     <para>
       None yet.
     </para>
+  </refsect1>
 
   <refsect1>
     <title>SEE ALSO</title>
 
     <para>Sourceforge package documentation (ahem).</para>
   </refsect1>
+
   <refsect1>
     <title>AUTHOR</title>
 
