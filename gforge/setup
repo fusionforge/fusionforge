@@ -59,7 +59,6 @@ computedefault(){
 	DEFAULTsys_session_expire='60 * 60 * 24 * 7'
 	DEFAULTsys_show_contact_info=1
 	DEFAULTsys_theme=gforge
-	DEFAULTsys_default_theme_id=1
 	DEFAULTsys_lang=English
 	DEFAULTsys_default_timezone=GMT
 	DEFAULTsys_default_country_code=US

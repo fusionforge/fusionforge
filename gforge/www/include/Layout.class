@@ -1078,8 +1078,18 @@ if (isset($params['group']) && $params['group']) {
 		';
 
 		return $return;
-	 }
+	}
 
+	/**
+	 * getThemeIdFromName()
+	 *
+	 * @param	string  the dirname of the theme
+	 * @return	integer the theme id	
+	 */
+	function getThemeIdFromName($dirname) {
+	 	$res=db_query("SELECT theme_id FROM themes WHERE dirname='$dirname'");
+	        return db_result($res,0,'theme_id');
+	}
 }
 
 // Local Variables:

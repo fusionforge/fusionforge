@@ -32,7 +32,7 @@ if ($sys_user_reg_restricted) {
 }
 
 if (!$theme_id) {
-	$theme_id=$sys_default_theme_id;
+	$theme_id=$HTML->getThemeIdFromName($sys_theme);
 }
 
 if ($submit) {
