@@ -35,37 +35,37 @@ session_require( array('group'=>$sys_stats_group) );
 echo report_header('Main Page');
 
 ?>
-<h3>Users</h3>
+<h3><?php echo $Language->getText('reporting','users'); ?></h3>
 <p>
-<a href="useradded.php?SPAN=1">Users Added Weekly (graph)</a><br />
-<a href="usercum.php?SPAN=1">Cumulative Users Weekly (graph)</a><br />
-<a href="useract.php">Activity (graph)</a><br />
+<a href="useradded.php?SPAN=1"><?php echo $Language->getText('reporting','users_added_weekly'); ?></a><br />
+<a href="usercum.php?SPAN=1"><?php echo $Language->getText('reporting','cumulative_users'); ?></a><br />
+<a href="useract.php"><?php echo $Language->getText('reporting','user_activity'); ?></a><br />
 <p>
-<h3>Projects</h3>
+<h3><?php echo $Language->getText('reporting','projects'); ?></h3>
 <p>
-Project-specific reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads<br />
-<a href="projectact.php">Activity (graph)</a><br />
+<?php echo $Language->getText('reporting','project_specific'); ?><br />
+<a href="projectact.php"><?php echo $Language->getText('reporting','project_activity'); ?></a><br />
 <p>
-<h3>Site-Wide</h3>
+<h3><?php echo $Language->getText('reporting','site_wide'); ?></h3>
 <p>
-Site-wide reports: Tracker, Task Mgr, Forums, Doc Mgr, Downloads<br />
-<a href="toolspie.php">Pie (graph)</a><br />
-<a href="siteact.php">Line (graph)</a><br />
+<?php echo $Language->getText('reporting','site_wide_reports'); ?><br />
+<a href="toolspie.php"><?php echo $Language->getText('reporting','site_wide_pie'); ?></a><br />
+<a href="siteact.php"><?php echo $Language->getText('reporting','site_wide_line'); ?></a><br />
 <p>
-<h3>Time-Tracking</h3>
+<h3><?php echo $Language->getText('reporting','time_tracking'); ?></h3>
 <p>
-<a href="usertime.php">Individual User Time Report (graph)</a> <a href="usertime.php?typ=r">(report)</a><br />
-<a href="projecttime.php">Individual Project Time Report (graph)</a> <a href="projecttime.php?typ=r">(report)</a><br />
-<a href="sitetime.php">Site-Wide Time Report (graph)</a> <a href="sitetime.php?typ=r">(report)</a><br />
-<a href="sitetimebar.php">Site-Wide Total Hours Graph (graph)</a> <a href="sitetimebar.php?typ=r">(report)</a><br />
-<a href="usersummary.php">Site-Wide Task &amp; Hours (report)</a><br />
+<a href="usertime.php"><?php echo $Language->getText('reporting','time_tracking_usertime'); ?></a> <a href="usertime.php?typ=r">(report)</a><br />
+<a href="projecttime.php"><?php echo $Language->getText('reporting','time_tracking_projecttime'); ?></a> <a href="projecttime.php?typ=r">(report)</a><br />
+<a href="sitetime.php"><?php echo $Language->getText('reporting','time_tracking_sitetime'); ?></a> <a href="sitetime.php?typ=r">(report)</a><br />
+<a href="sitetimebar.php"><?php echo $Language->getText('reporting','time_tracking_sitetimebar'); ?></a> <a href="sitetimebar.php?typ=r">(report)</a><br />
+<a href="usersummary.php"><?php echo $Language->getText('reporting','time_tracking_usersummary'); ?></a><br />
 <p>
-<h3>Administrative</h3>
+<h3><?php echo $Language->getText('reporting','administrative'); ?></h3>
 <p>
-<a href="rebuild.php">Initialize / Rebuild Reporting Tables</a><br />
-<a href="timecategory.php">Manage Time Tracker Categories</a><br />
-<a href="http://gforge.org/tracker/?atid=116&group_id=7&func=browse">File Support Request</a><br />
-<a href="http://gforge.org/tracker/?atid=118&group_id=7&func=browse">File Feature Request</a><br />
+<a href="rebuild.php"><?php echo $Language->getText('reporting','initialize'); ?></a><br />
+<a href="timecategory.php"><?php echo $Language->getText('reporting','manage'); ?></a><br />
+<a href="http://gforge.org/tracker/?atid=116&group_id=7&func=browse"><?php echo $Language->getText('reporting','file_support'); ?></a><br />
+<a href="http://gforge.org/tracker/?atid=118&group_id=7&func=browse"><?php echo $Language->getText('reporting','file_feature'); ?></a><br />
 <p>
 <?php
 
