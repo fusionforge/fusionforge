@@ -1,5 +1,5 @@
 GForge for Debian
-======================
+=================
 
 Status
 ------
@@ -113,8 +113,9 @@ errors of mine.  In particular, thanks to all who submitted patches.
 adapted and fixed all the scripts related to CVS, DNS, SSH accounts,
 and probably more.
 
-  -- Roland Mas <lolando@debian.org>, 2001-2002
+ -- Roland Mas <lolando@debian.org>, Thu Jul 24 21:33:33 2003
 
 # Local Variables:
 # mode: text
 # End:
+
