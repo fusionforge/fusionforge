@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: gforge 3.0-2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-19 14:38+0100\n"
-"PO-Revision-Date: 2004-11-20 09:33+0100\n"
+"PO-Revision-Date: 2004-12-30 07:30+0100\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,8 @@ msgstr "Serveur interactif (« shell server ») :"
 #: ../dsf-helper/shellhost-variables.templates:3
 msgid "The hostname of the server that will host your Gforge shell accounts"
 msgstr ""
-"Il s'agit du nom du serveur qui hébergera vos comptes interactifs Gforge."
+"Veuillez choisir le nom du serveur qui hébergera vos comptes interactifs "
+"Gforge."
 
 #. Type: string
 #. Description
@@ -54,8 +55,8 @@ msgid ""
 "The hostname of the server that will host your Gforge packages.  It should "
 "not be the same as your main Gforge host."
 msgstr ""
-"Il s'agit du serveur qui hébergera vos paquets Gforge. Il devrait être "
-"différent de votre serveur Gforge principal."
+"Veuillez choisir le serveur qui hébergera vos paquets Gforge. Il devrait "
+"être différent de votre serveur Gforge principal."
 
 #. Type: string
 #. Default
@@ -79,8 +80,8 @@ msgid ""
 "This Gforge account will have all privileges on the Gforge system.  It is "
 "needed to approve the creation of the projects."
 msgstr ""
-"Ce compte Gforge a tous les privilèges sur le système Gforge. Il sert entre "
-"autres à approuver la création de projets."
+"Le compte d'administrateur Gforge a tous les privilèges sur le système "
+"Gforge. Il sert entre autres à approuver la création de projets."
 
 #. Type: string
 #. Description
@@ -97,8 +98,8 @@ msgid ""
 "The IP address of the server that will host your Gforge installation. This "
 "is needed for the Apache virtualhosting configuration."
 msgstr ""
-"Il s'agit de l'adresse IP du serveur qui hébergera votre installation de "
-"Gforge. Cette information est requise pour la configuration des hôtes "
+"Veuillez indiquer l'adresse IP du serveur qui hébergera votre installation "
+"de Gforge. Cette information est requise pour la configuration des hôtes "
 "virtuels d'Apache."
 
 #. Type: password
@@ -116,7 +117,7 @@ msgid ""
 "This Gforge account will have all privileges on the Gforge system.  It is "
 "needed to approve the creation of the projects.  Please type a password here."
 msgstr ""
-"Le compte de l'administrateur Gforge possedera tous les privilèges sur le "
+"Le compte de l'administrateur Gforge possédera tous les privilèges sur le "
 "système Gforge. Ce compte est nécessaire pour la création de projets. "
 "Veuillez indiquer un mot de passe pour ce compte."
 
@@ -134,9 +135,7 @@ msgstr "Confirmation du mot de passe administrateur :"
 #: ../dsf-helper/dbpasswd-variables.templates:9
 #: ../dsf-helper/ldap-variables.templates:20
 msgid "Please re-type the password for confirmation."
-msgstr ""
-"Veuillez entrer à nouveau le mot de passe de l'administrateur, pour "
-"confirmation."
+msgstr "Veuillez confirmer le mot de passe de l'administrateur."
 
 #. Type: string
 #. Description
@@ -174,8 +173,8 @@ msgid ""
 "The connection to the DB system requires a password.  Please choose a "
 "password here."
 msgstr ""
-"Il s'agit du mot de passe à utiliser pour vous connecter à la basede "
-"données. Veuillez l'indiquer ici."
+"Veuillez indiquer le mot de passe à utiliser pour vous connecter à la base "
+"de données."
 
 #. Type: password
 #. Description
@@ -189,7 +188,7 @@ msgstr "Confirmation du mot de passe pour la base de données :"
 #: ../gforge-dns-bind9.templates.dsfh-in:51
 #: ../dsf-helper/ldap-variables.templates:3
 msgid "The LDAP base DN"
-msgstr "Nom du répertoire LDAP (DN)"
+msgstr "Nom du répertoire LDAP (DN) :"
 
 #. Type: string
 #. Description
@@ -199,9 +198,9 @@ msgid ""
 "The DN is used to refer to the LDAP directory unambiguously.  You could use, "
 "for instance, \"dc=gforge,dc=example,dc=com\""
 msgstr ""
-"Ce nom est utilisé pour identifier l'annuaire LDAP de manière unique. Par "
-"exemple, vous pourriez utiliser le DN suivant : « dc=gforge,dc=exemple,"
-"dc=com »."
+"Veuillez indiquer le nom qui sera utilisé pour identifier l'annuaire LDAP de "
+"manière unique. Par exemple, vous pourriez utiliser le DN suivant : "
+"« dc=gforge,dc=exemple,dc=com »."
 
 #. Type: string
 #. Description
@@ -215,7 +214,7 @@ msgstr "Serveur LDAP :"
 #: ../gforge-dns-bind9.templates.dsfh-in:57
 #: ../dsf-helper/ldap-variables.templates:9
 msgid "The hostname of the LDAP server."
-msgstr "Il s'agit du nom d'hôte de votre serveur LDAP."
+msgstr "Veuillez indiquer le nom d'hôte de votre serveur LDAP."
 
 #. Type: boolean
 #. Description
@@ -255,7 +254,7 @@ msgstr ""
 #: ../gforge-mta-exim.templates.dsfh-in:9
 #: ../gforge-mta-postfix.templates.dsfh-in:9
 msgid "Accepting this option will perform that redirection."
-msgstr "Si vous acceptez, la redirection sera mise en place."
+msgstr "Si vous choisissez cette option, la redirection sera mise en place."
 
 #. Type: password
 #. Description
@@ -329,7 +328,6 @@ msgstr "Souhaitez-vous une configuration DNS simplifiée ?"
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:98
-#, fuzzy
 msgid ""
 "You can have a simple DNS setup which uses wildcards to map all project web-"
 "hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
@@ -428,9 +426,9 @@ msgid ""
 "The domain that will host your Gforge installation.  Some services will be "
 "given their own subdomain in that domain (cvs, lists, etc.)."
 msgstr ""
-"Il s'agit du nom du domaine qui héberge votre Gforge. Certains services "
-"auront leur propre sous-domaine à l'intérieur de ce domaine (cvs, lists, "
-"etc.)."
+"Veuillez indiquer le nom du domaine qui héberge votre Gforge. Certains "
+"services auront leur propre sous-domaine à l'intérieur de ce domaine (cvs, "
+"lists, etc.)."
 
 #. Type: string
 #. Description
@@ -445,7 +443,7 @@ msgid ""
 "The email address of the Gforge administrator of your site.  Needed in case "
 "a problem occurs."
 msgstr ""
-"Il s'agit de l'adresse de l'administrateur de Gforge. Elle est utilisée "
+"Veuillez indiquer l'adresse de l'administrateur de Gforge. Elle est utilisée "
 "quand un problème se produit."
 
 #. Type: string
@@ -458,7 +456,8 @@ msgstr "Nom du système Gforge :"
 #. Description
 #: ../dsf-helper/common-variables.templates:16
 msgid "This name is used in various places throughout the system."
-msgstr "Ce nom est utilisé dans certains endroits du système."
+msgstr ""
+"Le « nom du système Gforge » est utilisé dans certains endroits du système."
 
 #. Type: string
 #. Description
@@ -473,8 +472,8 @@ msgid ""
 "The hostname of the server that will host your Gforge CVS repositories.  It "
 "should not be the same as your main Gforge host."
 msgstr ""
-"Il s'agit du nom du serveur CVS pour Gforge. Ce nom ne devrait pas être le "
-"même que celui de votre serveur Gforge principal."
+"Veuillez indiquer le nom du serveur CVS pour Gforge. Ce nom ne devrait pas "
+"être le même que celui de votre serveur Gforge principal."
 
 #. Type: string
 #. Description
@@ -489,8 +488,8 @@ msgid ""
 "The IP address (or host name) of the server that will host your GForge "
 "database.  This is needed for virtually all the subpackages."
 msgstr ""
-"Il s'agit de l'adresse IP ou du nom du serveur qui hébergera votre base de "
-"données de Gforge. Cette information est requise pour la configuration de "
+"Veuillez indiquer l'adresse IP ou du nom du serveur qui hébergera votre base "
+"de données de Gforge. Cette information est requise pour la configuration de "
 "quasiment tous les sous-paquets."
 
 #. Type: string
@@ -506,8 +505,9 @@ msgid ""
 "The name of the database that will host your GForge database.  This is "
 "needed for virtually all the subpackages."
 msgstr ""
-"Il s'agit de la base qui contiendra les données de Gforge. Cette information "
-"est requise pour la configuration de quasiment tous les sous-paquets."
+"Veuillez indiquer le nom de la base qui contiendra les données de Gforge. "
+"Cette information est requise pour la configuration de quasiment tous les "
+"sous-paquets."
 
 #. Type: string
 #. Description
@@ -522,9 +522,9 @@ msgid ""
 "The admin username of the database that will host your GForge database.  "
 "This is needed for virtually all the subpackages."
 msgstr ""
-"Il s'agit de l'administrateur du serveur de base de données qui hébergera "
-"votre base de données de Gforge. Cette information est requise pour la "
-"configuration de quasiment tous les sous-paquets."
+"Veuillez choisir l'identifiant de l'administrateur du serveur de base de "
+"données qui hébergera votre base de données de Gforge. Cette information est "
+"requise pour la configuration de quasiment tous les sous-paquets."
 
 #. Type: password
 #. Description
@@ -533,8 +533,8 @@ msgid ""
 "The connecton to the DB system requires a password.  Please choose a "
 "password here."
 msgstr ""
-"Il s'agit du mot de passe à utiliser pour vous connecter à la basede "
-"données. Veuillez l'indiquer ici."
+"Veuillez choisir le mot de passe à utiliser pour vous connecter à la base de "
+"données."
 
 #. Type: string
 #. Description
@@ -543,8 +543,8 @@ msgid ""
 "The hostname of the server that will host your Gforge packages. It should "
 "not be the same as your main Gforge host."
 msgstr ""
-"Il s'agit du nom du serveur qui hébergera vos paquets Gforge. Ce nom ne "
-"devrait pas être identique au nom de votre serveur Gforge principal."
+"Veuillez indiquer le nom du serveur qui hébergera vos paquets Gforge. Ce nom "
+"ne devrait pas être identique au nom de votre serveur Gforge principal."
 
 #. Type: string
 #. Description
@@ -576,7 +576,7 @@ msgstr "Numéro du groupe d'administration des statistiques :"
 #. Description
 #: ../dsf-helper/groupid-variables.templates:17
 msgid "The peer rating admin group id"
-msgstr "Numéro du groupe d'administration des notations (« rating »)"
+msgstr "Numéro du groupe d'administration des notations (« rating ») :"
 
 #. Type: string
 #. Description
@@ -591,8 +591,8 @@ msgid ""
 "The hostname of the server that will host your Gforge mailing-lists. It "
 "should not be the same as your main Gforge host."
 msgstr ""
-"Il s'agit du nom du serveur qui hébergera vos listes de diffusion de Gforge. "
-"Ce nom ne devrait pas être identique au nom de votre serveur Gforge "
+"Veuillez indiquer le nom du serveur qui hébergera vos listes de diffusion de "
+"Gforge. Ce nom ne devrait pas être identique au nom de votre serveur Gforge "
 "principal."
 
 #. Type: boolean
@@ -685,9 +685,9 @@ msgid ""
 "The hostname of the server that will host your Gforge user mail redirector. "
 "It should not be the same as your main Gforge host."
 msgstr ""
-"Il s'agit du nom du serveur qui hébergera le redirecteur de courrier de vos "
-"utilisateurs. Ce nom ne devrait pas être identique au nom de votre serveur "
-"Gforge principal."
+"Veuillez indiquer le nom du serveur qui hébergera le redirecteur de courrier "
+"de vos utilisateurs. Ce nom ne devrait pas être identique au nom de votre "
+"serveur Gforge principal."
 
 #. Type: select
 #. Choices
@@ -843,7 +843,7 @@ msgstr "Langue par défaut :"
 #. Description
 #: ../dsf-helper/web-variables.templates:5
 msgid "Here is the default language for web pages."
-msgstr "Il s'agit de la langue par défaut des pages web."
+msgstr "Veuillez choisir la langue par défaut des pages web."
 
 #. Type: string
 #. Description
@@ -854,12 +854,11 @@ msgstr "Thème par défaut :"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:11
-#, fuzzy
 msgid ""
 "Here is the default theme for web pages, be careful to enter a valid name."
 msgstr ""
-"Il s'agit du thème par défaut des pages web. Veillez à indiquer un nom "
-"valide."
+"Veuillez indiquer le thème par défaut des pages web. Veillez à choisir un "
+"nom valide."
 
 #~ msgid "Generate an SSL certificate"
 #~ msgstr "Génération d'un certificat SSL"

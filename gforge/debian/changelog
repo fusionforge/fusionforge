@@ -1,9 +1,11 @@
-gforge (3.1-24+1) unstable; urgency=low
+gforge (3.1-24+2) unstable; urgency=low
 
   * Moved db_stop back a bit later in gforge-web-apache.postinst, because
     it seems modules-config uses Debconf.  Grr.
+  * Updated French and Japanese Debconf translations to fix fuzziness
+    (closes: #286999, #287799).
 
- -- Roland Mas <lolando@debian.org>  Mon, 10 Jan 2005 15:24:12 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 10 Jan 2005 15:28:09 +0100
 
 gforge (3.1-24) unstable; urgency=low
 

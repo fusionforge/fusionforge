@@ -14,10 +14,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: gforge 3.1-23\n"
+"Project-Id-Version: gforge 3.1-24\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2004-12-19 14:38+0100\n"
-"PO-Revision-Date: 2004-12-07 02:02+0900\n"
+"PO-Revision-Date: 2004-12-23 02:02+0900\n"
 "Last-Translator: Hideki Yamane <henrich@samba.gr.jp>\n"
 "Language-Team: Japanese <debian-japanese@lists.debian.org>\n"
 "MIME-Version: 1.0\n"
@@ -833,7 +833,6 @@ msgstr "標準のテーマ"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:11
-#, fuzzy
 msgid ""
 "Here is the default theme for web pages, be careful to enter a valid name."
 msgstr ""
