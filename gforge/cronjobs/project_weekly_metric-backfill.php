@@ -52,8 +52,6 @@ if (!$rel) {
 	echo db_error();
 }
 
-
-
 #forum messages
 $sql="INSERT INTO project_counts_weekly_tmp 
 SELECT forum_group_list.group_id,'forum',log(3 * count(forum.msg_id)::float) AS count 
@@ -170,8 +168,6 @@ if (!$rel) {
 	echo db_error();
 }
 
-
-
 #insert the rows into the table in order, adding a sequential rank #
 $sql="INSERT INTO project_metric_weekly_tmp1 (group_id,value) 
 SELECT project_counts_weekly_tmp.group_id,sum(project_counts_weekly_tmp.count) AS value 
@@ -209,7 +205,7 @@ if (!$rel) {
 
 
 $sql="INSERT INTO project_weekly_metric (ranking,percentile,group_id)
-SELECT ranking,to_char((100-(100*((ranking::float-1)/$counts))), '999D9999'),group_id
+SELECT ranking,100-(100*((ranking::float-1)/$counts)),group_id
 FROM project_metric_weekly_tmp1
 ORDER BY ranking ASC";
 $rel = db_query($sql);
