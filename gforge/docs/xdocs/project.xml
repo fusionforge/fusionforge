@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+  <pomVersion>3</pomVersion>
+  <id>gforge</id>
+  <name>gforge</name>
+  <currentVersion>3.0</currentVersion>
+  <organization>
+    <name>Gforge.org</name>
+    <url>http://gforge.org/</url>
+  <logo>/images/logo.png</logo>
+  </organization>
+  <inceptionYear>2002</inceptionYear>
+ <!-- <package>com</package>
+ <logo>/images/logo.png</logo>
+-->
+  <description>Gforge </description>
+  <shortDescription>Software for collaborative development</shortDescription>
+  <url>http://gforge.org/</url>
+  <issueTrackingUrl>http://gforge.org</issueTrackingUrl>
+ 
+  <repository>
+    <connection>scm:cvs:pserver:anonymous@cvs.gforge.gforge.org:/cvsroot/gforge:gforge</connection>
+    <url>http://gforge.org/cgi-bin/viewcvs.cgi/gforge/</url>
+  </repository>
+
+  <developers>
+    <developer>
+      <name>Tim Perdue</name>
+      <id>bigdisk</id>
+      <email></email>
+      <organization/>
+      <roles>
+        <role>Project Manager</role>
+      </roles>
+    </developer>
+
+
+
+  
+
+
+  </developers>
+
+   
+
+  <dependencies>
+
+
+
+  </dependencies>
+
+  <build>
+    <nagEmailAddress>bigdisk@gforge.org</nagEmailAddress>
+  
+   </build>
+</project>
