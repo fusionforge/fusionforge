@@ -19,7 +19,8 @@ set -e
 
 case "$1" in
     remove|upgrade|deconfigure)
-#       install-info --quiet --remove /usr/info/sourceforge-plugin-helloworld.info.gz
+	/usr/lib/sourceforge/bin/sf-register-plugin helloworld "Hello world"
+    ;;
         ;;
     failed-upgrade)
         ;;

@@ -25,7 +25,7 @@ set -e
 
 case "$1" in
     configure)
-
+	/usr/lib/sourceforge/bin/sf-register-plugin helloworld "Hello world"
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

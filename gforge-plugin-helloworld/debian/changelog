@@ -1,8 +1,9 @@
 sourceforge-plugin-helloworld (0.2-1) unstable; urgency=low
 
   * Rewrote to use the new hooks system.
+  * Fixed postinst and prerm to actually register the plugin.
 
- -- Roland Mas <lolando@debian.org>  Thu,  5 Dec 2002 18:45:27 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  6 Dec 2002 14:41:25 +0100
 
 sourceforge-plugin-helloworld (0.1-1) unstable; urgency=low
 
