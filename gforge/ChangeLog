@@ -2,6 +2,9 @@
 
 	* www/top/most_active.php:
 	Shortened the activity percentage to two decimal places.
+	
+	* www/include/languages/Base.tab:
+	Applied patch #348, thanks to Vicente Ruiz for the patch.
 
 2003-05-14 Tom Copeland <tom@infoether.com>
 

@@ -40,7 +40,7 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 			print( $Language->getText('help_tracker','data_type'));
 			break;
 		case 'priority':
-			print( $Language->getText('help_tracker','data_type'));
+			print( $Language->getText('help_tracker','priority'));
 			break;
 		case 'resolution':
 			print( $Language->getText('help_tracker','resolution'));
