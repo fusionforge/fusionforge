@@ -492,6 +492,15 @@ class Artifact extends Error {
 	}
 
 	/**
+	 *      getLastModifiedDate - the last_modified_date of this task.
+	 *
+	 *      @return int     the last_modified_date.
+	 */
+	function getLastModifiedDate() {
+		return $this->data_array['last_modified_date'];
+	}
+
+	/**
 	 *	getSummary - get text summary of artifact.
 	 *
 	 *	@return	string The summary (subject).

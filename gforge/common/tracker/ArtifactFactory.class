@@ -242,8 +242,7 @@ class ArtifactFactory extends Error {
 			WHERE 
 			group_artifact_id='". $this->ArtifactType->getID() ."'
 			 $status_str $assigned_str $category_str $group_str $resolution_str
-			and (update_date>'" . $this->last_changed . "'
-			or message_date >'" . $this->last_changed . "')   
+			and last_modified_date > '" . $this->last_changed . "'
 			ORDER BY group_artifact_id ".$this->sort.", ". $this->order_col ." ".$this->sort;
 
 
