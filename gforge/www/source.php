@@ -19,6 +19,8 @@ if (file_exists($page_name) && !is_dir($page_name)) {
 	show_source($page_name);
 } else if (is_dir($page_name)) {
 	exit_error('ERROR','Trying to show source for a directory');
+} else {
+        exit_error('ERROR','Trying to show source for inadequate URL');
 }
 
 echo $HTML->footer(array());
