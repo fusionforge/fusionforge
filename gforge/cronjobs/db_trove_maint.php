@@ -97,6 +97,7 @@ $parent_list=array();
 
 $q = "SELECT trove_cat.trove_cat_id,trove_cat.parent
       FROM trove_cat
+      WHERE trove_cat.trove_cat_id!=0
       GROUP BY trove_cat.trove_cat_id,trove_cat.parent;" ;
 $res=db_query($q);
 $rows=db_numrows($res);
