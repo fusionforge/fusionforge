@@ -1,3 +1,8 @@
+2003-12-03  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/languages/German.tab: Patch #623 from Marco Schmidt
+	<schmidtmarco@web.de> improving German localisation.
+
 2003-11-30  Tim Perdue  <tim@perdue.net>
 
 	* added cronjob logging and viewing apparatus

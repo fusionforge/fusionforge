@@ -7,35 +7,348 @@
 #  * http://sourceforge.net
 #  *
 #  * @version   $Id$
-#  * @author Matthias Bauer
+#  * @author Matthias Bauer, Marco Schmidt
 #  *
 #  */
 #
 # ChangeLog:
 #
-# 2000-10-15  Matthias Bauer
-#	* Initial translation
+# 2003-11-07  Marco Schmidt
+#	* changed translation
 #
-menu	about_gforge	&Uuml;ber GForge
-menu	account_maintenance	Accountverwaltung
-menu	bookmark_page	Lesezeichen
-home	breaking_down_barriers	Wir reissen die Mauern zu Open-Source-Entwicklung nieder
-menu	change_my_theme	Theme &auml;ndern
-menu	code_snippet_library	Codeschnipsel-Sammlung
-menu	compile_farm	Compile-Farm
-group	developers	Entwickler
-group	developer_info	Entwicklerinformationen
-menu	discussion_forums	Diskussionsforen
-menu	documentation	Dokumentation
+account	title	Account Einstellungen
+account	updated	Aktualisiert
+account_change_email	desc	<p>Das Ändern Ihrer EMail-Adresse erfordert eine Bestätigung von Ihrem neu angegebenen EMail-Konto aus, damit wir sicherstellen können, dass wir eine korrekte EMail-Adresse gespeichert haben.</p><p>Wir müssen für jeden Benutzer eine korrekte EMail-Adresse pflegen, weil wir über diese die Zugriffsberechtigung regeln. Falls wir aus projektbezogenen Gründen einen Benutzer erreichen müssen, ist es wichtig, dass uns das auch möglich ist.</p>  <p>Durch das Abschicken des unten stehenden Formulars wird Ihnen eine EMail mit einem Bestätigungs-Link  an Ihre neue EMail-Adresse zugeschickt. Das Besuchen dieses Links wird die Änderung der EMail-Adresse endgültig übernehmen.</p>
+account_change_email	invalid_email	Ungültige EMail-Adresse
+account_change_email	mailsent	<p>Eine EMail wurde an Ihre neue Adresse gesendet. Folgen Sie den Anweisungen in der EMail, um die Änderung abzuschließen.</p><a href="/">[ Startseite ]</a> 
+account_change_email	message	Sie haben einen Wechsel der EMail-Adresse auf $1 angefordert.\nBitte besuchen Sie den folgenden Link, um die Änderung zu vervollständigen:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- Die $1 Leitung\n
+account_change_email	new_address	Neue E-Mail Adresse:
+account_change_email	section	Account Einstellungen
+account_change_email	send_confirmation	Sende Bestätigung an die neue Addresse
+account_change_email	subject	$1 Überprüfung
+account_change_email	title	Ändere EMail-Adresse
+account_change_email-complete	confirm	Willkommen, $1. Ihr EMail-Wechsel wurde komplett vollzogen. Ihre neue EMail-Adresse wurde wie folgt: <strong>$2</strong> gespeichert. EMails, die an $3 geschickt werden, werden an diese EMail-Adresse weiter geleitet.
+account_change_email-complete	title	EMail-Änderung abgeschlossen
+account_change_email_confirm	title	Bestätigung der EMail-Änderung
+account_change_pw	confirmation	<h2>$1 Passwort-Änderungsbestätigung</h2><p>Gratulation. Sie haben Ihre Passwort geändert.</p>
+account_change_pw	new_password	Neues Passwort (mind. 6 Buchstaben)
+account_change_pw	new_password_repeat	Neues Passwort (Wiederholung)
+account_change_pw	not_valid_password	Sie müssen ein gültiges Passwort (mind. 6 Buchstaben) eingeben.
+account_change_pw	old_password	Altes Passwort
+account_change_pw	old_password_incorrect	Altes Passwort ist falsch
+account_change_pw	passwords_dont_match	Die neuen Passworte sind nicht gleich.
+account_change_pw	section	Account-Einstellungen
+account_change_pw	title	Ändere Passwort
+account_change_pw	update	Aktualisiere Passwort
+account_change_pw_changed	return_to	Sie sollten jetzt $1 zu den Benutzereinstellungen zurückkehren $2.
+account_change_pw_changed	title	Erfolgreiche Passwort-Änderung
+account_editsshkeys	section	Account-Einstellungen
+account_editsshkeys	title	Bearbeite die gemeinsam benutzten CVS/SSH-Schlüssel
+account_first	about_blurb	<p>Sie sind jetzt ein registrierter Benutzer auf $1, der Online-Entwicklungsumgebung für Open Source Projekte.</p><p>Als registrierter Benutzer können Sie sich an allen Aktivitäten auf der Site beteiligen. Sie können jetzt Nachrichten an Projekt-Foren abschicken, Software-Fehler in $1 melden, sich als Projekt-Entwickler anmelden oder Ihr eigenes Projekt starten.</p><p>Genießen Sie die Site und helfen Sie uns, durch Feedback $1 zu verbessern.</p><p>--the $1 staff.</p>
+account_first	title	Willkommen bei $1
+account_login	cookiewarn	Cookies müssen ab hier eingeschaltet sein.
+account_login	deleted_account	<p>Ihr $1 Account wurde von $1 Verantwortlichen gelöscht. Dies kann zwei Ursachen haben, entweder 1) Sie wollten Ihren Account gelöscht haben; oder 2) es hat einige Ereignisse bei Ihrer Account-Nutzung gegeben, die nicht zulässig waren (möglicherweise haben Sie die Nutzungsbedingungen missachtet) und Ihr Account wurde aus administrativen Gründen widerrufen. Sollten Sie Fragen dazu haben, stellen Sie bitte eine <a href="/support/?group_id=1">Support-Anfrage</a>.</p><p>Danke, <br><br>$1 Leitung</p>
+account_login	iewarn	<H2><FONT COLOR="RED">Internet Explorer Benutzer benötigen mindestens die Version IE 5.01 oder höher, am Besten mit 128-bit-SSL-Verschlüsselung oder benutzen Sie den Netscape 4.7 oder höher</font></h2>
+account_login	login	Anmelden mit SSL-Verschlüsselung
+account_login	loginname	Anmelde-Name:
+account_login	lostpw	[Passwort vergessen?]
+account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer auf Macintosh wird zur Zeit nicht unterstützt. Benutzen Sie bitte Netscape 4.7 oder höher</font></h2>
+account_login	newaccount	[Neuer Account]
+account_login	passwd	Passwort:
+account_login	pending_account	<P>Ihr Account wird freigeschaltet, sobald Sie den Bestätigungslink besuchen, der Ihnen per EMail zugeschickt wurde.</P><P>Falls Sie diese EMail noch einmal zugeschickt bekommen möchten, klicken Sie bitte unten und eine Bestätigungs-EMail wird an die von Ihnen während der Registrierung angegebene EMail-Adresse gesendet.</P><P><A href="pending-resend.php?form_user=$1">[Sende Bestätigungs-Email noch einmal]</a>		<br><hr>		</P>
+account_login	sslnotice	<p><B><FONT COLOR="RED">Sie werden mit einem SSL-Server verbunden, wenn Sie dieses Formular abschicken. Ihr Passwort wird für andere Benutzer nicht sichtbar sein.</font></b> <small style="font-size: x-small"> (Falls Sie sich sehr wundern, weshalb diese Seite nicht über SSL geladen wurde, lesen Sie bitte den folgenden Absatz. Danke.) </small> <P> <B>Internet Explorer</b>-Benutzer werden Probleme mit SSL-Aussetzern haben, so dass Sie SSL nach dem Anmelden weglassen sollten. Netscape-Benutzer für maximale Sicherheit im SSL-Modus bleiben. Besuchen Sie <A HREF="http://www.microsoft.com/">Microsoft</a> für weitere Informationen über dieses bekannte Problem.</P>
+account_login	title	Site-Anmeldung
+account_login	usessl	Bleibe im SSL-Modus nach der Anmeldung
+account_lostlogin	invalidconfirm	Ungültiger Hash-Wert der Bestätigung
+account_lostlogin	newpasswd	Neues Passwort (mind. 6 Buchstaben)
+account_lostlogin	newpasswd2	Neues Passwort (Wiederholung)
+account_lostlogin	notmatch	Die neuen Passworte sind nicht identisch.
+account_lostlogin	passwdchanged	<h2>Passwort geändert</h2><p>Gratulation, Sie haben Ihr Account-Passwort geändert. Sie können sich jetzt an der Site <a href="/account/login.php">anmelden</a>.</p>
+account_lostlogin	severalconfirm	Dieser Bestätigungs-Hash-Wert existiert mehr als einmal.
+account_lostlogin	sixchars	Sie müssen ein gültiges Passwort eingeben (mind. 6 Buchstaben).
+account_lostlogin	title	Passwort-Bestätigung vergessen
+account_lostlogin	update	Aktualisierung
+account_lostlogin	welcome	<h2>Anmeldung trotz vergessenem Passwort</h2><p>Willkommen, $1. Sie können jetzt Ihr Passwort ändern.</p>
+account_lostpw	invalid_user	Ungültiger Benutzer
+account_lostpw	message	Jemand (vermutlich Sie) hat auf der $3 Site einen\nPasswortwechsel per EMailüberprüfung angefordert. Falls Sie das nicht waren,\nignorieren Sie diese Nachricht und nichts wird passieren.\n\nFalls Sie diese Überprüfung angefordert haben, besuchen Sie den folgenden Link,\num Ihr Passwort zu ändern:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- Die $3 Leitung\n
+account_lostpw	notify	<p>Es wurde eine EMail an die Adresse gesendet, die Sie bei uns gespeichert haben. Folgen Sie den Anweisungen in dieser EMail, um das Account-Passwort zu ändern.</p><p><a href="/">[ Startseite ]</a></p>
+account_lostpw	sendhash	Sende vergessenen Passwort-Hash
+account_lostpw	subject	$1 Überprüfung
+account_lostpw	title	Sie haben Ihr Passwort vergessen?
+account_lostpw	user_dont_exist	Dieser Benutzer existiert nicht.
+account_lostpw	warn	<p>Hey... wenn Sie Ihr Passwort vergessen, ist das gefährlich. Es kompromittiert die Sicherheit Ihres Accounts bzw. Zugriffskontos, Ihrer Projekte und dieser Site.</p><p>Wenn Sie unten auf "Sende vergessenen Passwort-Hash" klicken, wird Ihnen per EMail ein Link an Ihre bei uns gespeicherte EMail-Adresse gesendet. Dieser Link enth/auml;lt einen 128-bit Bestätigungs-Hash für Ihren Account. Das Besuchen dieses Links wird Ihnen ermöglichen, Ihr Passwort online zu ändern und sich anzumelden.</p>
+account_options	change_email_address	Ändere EMail-Adresse
+account_options	change_password	Ändere Passwort
+account_options	edit_skills_profile	Bearbeite mein Fähigkeiten-Profil
+account_options	email_address		EMail-Adr:
+account_options	language	Sprache:
+account_options	login_name	Anmelde-Name:
+account_options	member_since	Mitglied seit:
+account_options	real_name	wirklicher Name:
+account_options	timezone	Zeitzone:
+account_options	title		Account-Verwaltung
+account_options	user_id	Benutzer-Id:
+account_options	view_developer_profile	Mein Entwickler-Profil ansehen
+account_options	welcome		Willkommen
+account_register	Preferences	Einstellungen
+account_register	communitymail	Erhalte außerplanmäßige Community-Mailings. <i>(Sehr wenige.)</i>
+account_register	congrat	<p>Gratulation. Sie haben sich auf $1 registrieren lassen.</p><p> Ihnen wurde eine Bestätigungs-EMail zugesendet, um Ihre EMail-Adresse zu überprüfen. Das Besuchen des Links, der in dieser EMail steht, wird Ihren Account aktivieren.
+account_register	emailaddr	EMail-Adresse:<span><font color="red">*</font></span> <BR><I>Diese EMail-Adresse wird überprüft, bevor der Account aktiviert wird. Das wird nicht auf dieser Web-Site angezeigt. Sie werden einen Mail-Weiterleitungsaccount (<anmeldename@$1>) erhalten, der auf diese EMail-Adresse weitergeleitet wird.</i>
+account_register	err_badinsert	Eingabe fehlgeschlagen 
+account_register	err_email	Ungültige EMail-Adresse
+account_register	err_jabber	Ungültige Jabber-Adresse
+account_register	err_mailexist	Ein Benutzer mit dieser EMail-Adresse existiert bereits - benutzen Sie die Personen-Suche,um Ihren Ihren Anmeldenamen wiederzufinden.
+account_register	err_passwd	Sie müssen ein Passwort eingeben
+account_register	err_passwd2	Die Passworte sind nicht identisch
+account_register	err_passwd3	Ungültiges Passwort:
+account_register	err_realname	Sie müsseneinen einen realen Namen eingeben
+account_register	err_unixname	Ungültiger Unix-Name. 
+account_register	err_userexist	Dieser Benutzername existiert bereits.
+account_register	err_username	Sie müssen einen Benutzernamen eingeben
+account_register	iewarn	<H2><FONT COLOR="RED">Benutzer des Internet Explorers sollten auf IE 5.01 oder höher aktualisieren, vorzugsweise mit 128-bit SSL-Verschlüsselung oder den Netscape 4.7 oder höher (bzw. Mozilla) benutzen</font></h2>
+account_register	jabberaddr	Jabber-Adresse:
+account_register	jabberonly	Sende automatisch generierte Notizen ausschließlich an meine Jabber-Adresse
+account_register	language	Auswahl der Sprache:
+account_register	loginname	Anmelde-Name (keine Großbuchstaben):
+account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer für Macintosh wird zur Zeit nicht unterstützt. Benutzen Sie Netscape 4.7 oder höher oder Mozilla.</font></h2>
+account_register	mandatory	Felder die mit $1 markiert sind, müssen zwingend ausgefüllt werden.
+account_register	message_body	Wir danken Ihnen für Ihre Registrierung auf der $4 Web-Site. Sie haben\neinen Account mit dem Benutzernamen $1 angelegt. Um Ihre\nRegistrierung zu vervollständigen, besuchen Sie bitte den folgenden Link: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Falls Sie oben keinen Link sehen, ist möglicherweise Ihr Mailprogramm fehlerhaft.\nKopieren Sie den unten stehenden Link als _eine Zeile_ in die Adressleiste Ihres Browsers.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nViel Spaß mit der Site.\n\n-- Die $4 Leitung\n
+account_register	message_header	$1 Account-Registrierung
+account_register	partecipate_peer_ratings	Sie nehmen  am Mitgliederbewertungsverfahren teil. <i>(Es erlaubt Ihnen, andere Benutzer über verschiedene Kriterien zu bewerten, ebenso wie diese Sie bewerten können. Weitere Informationen können Sie auf Ihrer $1 Benutzerseite nachlesen </a>, falls Sie die Teilnahme am Bewertungsverfahren ausgewählt haben)</i>.
+account_register	password	Passwort (mind. 6 Buchstaben):
+account_register	password2	Passwort (Wiederholung):
+account_register	realname	voller/realer Name:
+account_register	register	Registrieren
+account_register	remember_me	"Meine Anmeldung merken". <i>(Erlaubt, auf Ihre $1 personalisierte Seite zuzugreifen</a> ohne dass Sie  angemeldet sein müssen. Sie müssen sich aber weiterhin explizit anmelden, wenn Sie irgendwelche Änderungen vornehmen wollen.)</i>
+account_register	reset	Änderungen zurücksetzten
+account_register	siteupdate	Erhalte EMails über Site-Updates <i>(Sehr sehr wenige und sie enthalten Sicherheitshinweise. Diese Option wird sehr empfohlen.)</i>
+account_register	timezone	Zeitzone:
+account_register	title	Neue Account-Registrierung
+account_register	update	Aktualisierung
+account_shell	autorized_keys	gemeinsam benutzte, authorisierte CVS/SSH Schlüssel
+account_shell	edit_keys	Bearbeite Schlüssel
+account_shell	shell_box	Kommandozeilenbox
+account_shell	title	Kommandozeilen-Account Information
+account_unsubscribe	all_mailings	alle $1 Mailings und Benachrichtigungen
+account_unsubscribe	site_mailings	$1 Web-Site Mailings
+account_verify	accessdenied	Zugriff verweigert
+account_verify	accountactive	Der Account wird derzeitig aktiv benutzt.
+account_verify	cannotactivate	Konnte den Account nicht aktivieren
+account_verify	cannotconfirm	Konnte die Account-Identität nicht bestätigen - ungültiger Passwort-Hash (oder Anmelde-Name)
+account_verify	erroractivate	Fehler während der Account-Aktivierung
+account_verify	invalidcred	Die Legitimation, die Sie eingegeben haben, passt nicht zu einem gültigen Account.
+account_verify	invalidop	Ungültige Operation
+account_verify	invalidparam	Ungültiger Parameter
+account_verify	invaliduser	Ungültiger Benutzer
+account_verify	login		Anmeldung
+account_verify	loginname	Anmelde-Name:
+account_verify	missingparam	Fehlende Paramater
+account_verify	nouser	Benutzer existiert nicht.
+account_verify	password	Passwort:
+account_verify	title	$1 Account-Überprüfung
+account_verify	usermandatory	Sie müssen einen Benutzernamen eingeben.
+account_verify	verify_blurb	<p>Melden Sie sich jetzt an, um Ihre Registrierung zu vervollständigen. Ihr Account dann für normale Anmeldungen aktiviert sein.</p>
+add_snippet	add_this_snippet_version_id	Füge diese Code-Schnipsel Version (ID) hinzu:
+add_snippet	back_to_add_page	Zurück zur "Hinzufügen"-Seite
+add_snippet	error_doing_snippet_version_insert	FEHLER BEIM CODE-STÜCK EINFÜGEN!
+add_snippet	error_go_back_and_fill_all	Fehler - Gehen Sie zurück und füllen Sie alle Informationsfelder aus
+add_snippet	error_only_creator_can_add	Fehler - Nur der Ersteller einer Paket-Version kann Code-Stücke dort hinzufügen.
+add_snippet	error_snippet_already_added	Fehler - Dieses Schnipsel wurde diesem Paket schon hinzugefügt.
+add_snippet	error_snippet_doesnt_exist	Fehler - Dieses Schnipsel existiert nicht.
+add_snippet	error_snippet_id_missing	Fehler - snippet_package_version_id fehlt (Schnipsel ID)
+add_snippet	make_sure_all_info	Stellen Sie sicher, dass alle Informationen vollständig und richtig sind.
+add_snippet	no_snippets_in_this_package	In diesem Paket sind zur Zeit noch keine Code-Schnipsel
+add_snippet	package	Paket:
+add_snippet	snippet_version_added_successfully	Schnipsel-Version erfolgreich hinzugefügt.
+add_snippet	snippets_in_this_package	Code-Schnipsel in diesem Paket
+add_snippet	submit	ABSCHICKEN
+add_snippet	title	Schicke ein neues Code-Schnipsel
+add_snippet	you_can_use_this_form	Sie können dieses Formular mehrfach benutzen, um Code-Schnipsel zu Ihrem Paket hinzuzufügen.</p><p>Die "Schnipsel Version ID" ist die eindeutige ID-Nummer, die direkt neben einer bestimmten Version eines Schnipsels auf der Web-Seite angezeigt wird.
+admin	add	Hinzufügen
+admin	add_new	[füge neue hinzu]
+admin	are_you_sure_delete	Sind Sie sicher, dass Sie das löschen wollen?
+admin	cancel	Abbrechen
+admin	delete	Löschen
+admin	edit	Bearbeiten
+admin	http_domain	HTTP Domain:
+admin	license	Lizenz:
+admin	license_other	andere Lizenz:
+admin	na	k.A.
+admin	other	Andere
+admin	reject	Ablehnen
+admin	site_admin_home	Site Admin Startseite
+admin	submit_changes	Änderungen abschicken
+admin	submit_new	Neues abschicken
+admin	successfully_added	erfolgreich Hinzugefügt
+admin	successfully_deleted	erfolgreich gelöscht.
+admin	successfully_modified	erfolgreich bearbeitet
+admin	yes	Ja
+admin_add_language	add_new_language	Füge neue Sprache hinzu
+admin_add_language	class_filename	Dateiname der Klasse:
+admin_add_language	classname	Klassenname:
+admin_add_language	existing_language	Existierende Sprache
+admin_add_language	name	Name:
+admin_add_language	submit	Abschicken
+admin_approve_pending	add_this_custom_response	Füge diese spezifische Antwort zu den gespeicherten Antworten hinzu.
+admin_approve_pending	admin_approve_pending	Aktivieren
+admin_approve_pending	approve	Genehmigen
+admin_approve_pending	approve_all_on_this_page	Alles auf dieser Seite genehmigen
+admin_approve_pending	approving_group		Genehmigungsgruppe:
+admin_approve_pending	approving_pending_projects	Wartende Projekte genehmigen
+admin_approve_pending	custom_response_title	Bearbeite Antwort-Titel und -Text
+admin_approve_pending	edit_project_details	[Bearbeite Projekt-Details]
+admin_approve_pending	error_creating_group	Fehler beim erstellen des Gruppen-Objektes
+admin_approve_pending	error_group_rejection	Fehler bei der Ablehnung der Gruppe
+admin_approve_pending	home_box	Home-Bereich:
+admin_approve_pending	manage_responses	(Antworten verwalten)
+admin_approve_pending	no_pending_projects_to_approve	Es sind keine wartenden Projekte zu genehmigen.
+admin_approve_pending	none_found	Keine gefunden
+admin_approve_pending	other_information	Weitere Information
+admin_approve_pending	pending_projects	wartende Projekte:
+admin_approve_pending	pending_reason	Wartegrund:
+admin_approve_pending	project_admin	[Projekt-Admin]
+admin_approve_pending	submitted_description	Eingegebene Beschreibung:
+admin_approve_pending	unix_group_name	Unix-Gruppen-Name:
+admin_approve_pending	view_edit_project_members	[Zeige/Bearbeite Projekt-Mitglieder]
+admin_database	add_an_already_active_database	Füge eine bereits aktive Datenbank hinzu
+admin_database	added_already_active_database	bereits aktive Datenbank hinzugefügt
+admin_database	display_database_type	Zeige Datenbanken vom Typ:
+admin_database	error_adding_database	Fehler beim Hinzufügen der Datenbank
+admin_database	group	Gruppe
+admin_database	group_unix_name	Gruppen-Unix-Name:
+admin_database	no_databases_defined	Keine Datenbanken definiert
+admin_database	site_admin_groups_maintance	Site Admin: Grupen-DB Verwaltung
+admin_database	statistics_for_project_database	Statistiken für Projekt-Datenbanken
+admin_database	type	Typ
+admin_database	unable_to_insert	Es war nicht möglich, die bereits aktive Datenbank einzufügen.
+admin_groupedit	active	Aktiv (A)
+admin_groupedit	deleted	Gelöscht (D)
+admin_groupedit	error	Fehler
+admin_groupedit	error_creating_group_object	Fehler beim Erstellen des Gruppen-Objektes
+admin_groupedit	holding	Haltend (H)
+admin_groupedit	incomplete	Unvollständig (I)
+admin_groupedit	instruction_email_sent	EMail mit Anweisungen abgeschickt
+admin_groupedit	new_project_instruction_email	Sende nocheinmal neue EMail mit Projekt-Anweisungen
+admin_groupedit	no	Nein
+admin_groupedit	pending	Wartend (P)
+admin_groupedit	project_admin	[Projekt-Admin]
+admin_groupedit	public	Öffentlich?
+admin_groupedit	registration_application	Projektbeschreibung:
+admin_groupedit	status	Status
+admin_groupedit	title	Site Admin: Gruppen-Informationen
+admin_groupedit	unix_group_name	Unix-Gruppen-Name:
+admin_groupedit	update	Aktualisieren
+admin_groupedit	updated	Aktualisiert
+admin_groupedit	yes	Ja
+admin_grouplist	group_list	Grupenliste
+admin_grouplist	group_list_for_category	Gruppenliste für die Kategorie:
+admin_grouplist	group_name_click_to_edit	Gruppen-Name (anklicken zum Bearbeiten)
+admin_grouplist	groups_that_begin_with	Gruppen die anfangen mit
+admin_grouplist	license	Lizenz
+admin_grouplist	members	Mitglieder
+admin_grouplist	public	Öffentlich?
+admin_grouplist	status	Status
+admin_grouplist	unix_name	Unix-Name
+admin_index	add_delete_edit_file_types	Hinzufügen, Löschen, oder Bearbeiten von Datei-Typen
+admin_index	add_delete_edit_laguage	Hinzufügen, Löschen, oder Bearbeiten von unterstützten Sprachen
+admin_index	add_edit_delete_processors	Hinzufügen, Löschen, oder Bearbeiten von Prozessoren
+admin_index	add_edit_delete_themes	Hinzufügen, Löschen, oder Bearbeiten von Site-Designs
+admin_index	add_to_trove_map	Füge neue Kategorie zur Projekt-Karte hinzu
+admin_index	approve_reject	Genehmigen/Ablehnen
+admin_index	deleted_status	(gelöscht) Status
+admin_index	display_full_group	Zeige vollständige Gruppenliste/Bearbeite Gruppen
+admin_index	display_full_user_list	Zeige vollständige Benutzerliste/Bearbeite Benutzer
+admin_index	display_groups_beginning_with	Zeige Gruppen die anfangen mit :
+admin_index	display_trove_map	Zeige generierte Projekt-Karte
+admin_index	display_user_beginning_with	Zeige Benutzer die anfangen mit :
+admin_index	front_page_news	von Titelseiten Neuigkeiten
+admin_index	get	abrufen
+admin_index	group_maintaince	Gruppen-Verwaltung
+admin_index	groups_with_status	Gruppen mit Status:
+admin_index	mail_engine	Mailserver-Formular (Engine) für $1-Abonnenten
+admin_index	new_project_approval	(Neue Projekte genehmigen)
+admin_index	news	Neuigkeiten
+admin_index	pending_status	 (auf Freischaltung wartend) Status
+admin_index	private_groups	Private Gruppen
+admin_index	project_database_administration	Projekt-Datenbank Administration
+admin_index	recent_logins	Letzte Logins/Anmeldungen
+admin_index	register_new_project	Registriere neues Projekt
+admin_index	site_mailing_maintaince	Site-Mailinglisten Verwaltung
+admin_index	site_utilities	Site-Hilfsprogramme
+admin_index	site_wide_stats	Site-weite Statistiken
+admin_index	stats	Statistiken
+admin_index	title	Site Administration
+admin_index	translation_file_tool	Übersetzungswerkzeug
+admin_index	trove_project_tree	Baumstruktur gefundener Projekt
+admin_index	user_maintaince	Benutzer-Verwaltung
+admin_index	virtual_host_admin_tool	Administrations-Werkzeug für virtuelle Hosts
+admin_loadtabfile	availaible_tables	Verfügbare Tabellen:
+admin_loadtabfile	edit_dont_work	[bearbeiten (funktioniert nicht)]
+admin_loadtabfile	purge_loaded_data	geladene Daten säubern
+admin_loadtabfile	reload_all_language_files	(nocheinmal) Laden aller Sprach-Dateien
+admin_loadtabfile	see_translations	[übersetzte ansehen]
+admin_loadtabfile	see_untranslated	[nicht-übersetzte ansehen]
+admin_loadtabfile	tables_loaded	geladene Tabellen
+admin_loadtabfile	title	Site Administration
+admin_massmail	active_deliveries	Aktive Mailjobs
+admin_massmail	all_project_admins	Alle Projekt-Admins
+admin_massmail	all_project_developers	Alle Projekt-Entwickler
+admin_massmail	all_users	Alle Benutzer
+admin_massmail	be_verry_carefull	Seien Sie <span style="color:red"><strong>SEHR</strong></span> vorsichtig mit diesem Formular, weil durch das Abschicken vielen Benutzern eine EMail gesendet wird.
+admin_massmail	date	Datum
+admin_massmail	developers_test	Entwickler (test)
+admin_massmail	error_scheduling_mailing	Fehler beim Vorbereiten des Mailings, Konnte Mailing nicht vorbereiten, Datenbankfehler:
+admin_massmail	id	ID
+admin_massmail	last_user_id_mailed	zuletzt angemailte user_id
+admin_massmail	mail_engine_for	Mailserver-Formular (Engine) für $1 Abonnenten
+admin_massmail	mailing_successfully_scheduled	Mailing erfolgreich für Auslieferung vorbereitet
+admin_massmail	missing_parameter_empty_message	Parameter fehlt, Sie versuchen eine leere Nachricht zu verschicken.
+admin_massmail	missing_parameter_proper_subject	Parameter fehlt, Sie müssen dem Mailing einen passenden Betreff geben.
+admin_massmail	missing_parameter_select_target	Parameter fehlt, Sie müssen einen Empfängerkreis für das Mailing auswählen.
+admin_massmail	schedule_for_mailing	Vorbereiten zum Abschicken
+admin_massmail	select	(auswählen)
+admin_massmail	subject	Betreff
+admin_massmail	text_of_message	Text der Nachricht
+admin_massmail	title	Administrative Massen-Mail-Engine
+admin_massmail	type	Typ
+admin_massmail	will_be_append	(gegebenenfalls wird eine Information zum Abmelden angehängt)
+admin_massmail_execute	completed_successfully	ERFOLGREICH ABGESCHLOSSEN
+admin_massmail_execute	querry_complete	Abfrage vollständig. Starte Mailings an 
+admin_massmail_execute	receive_post	Nachricht erhalten. Starte Abfrage.
+admin_massmail_execute	sending_to	senden an
+admin_massmail_execute	unrecognized_post	Nachricht wurde nicht erkannt, kann nicht ausgeführt werden.
+admin_massmail_execute	user_id	Benutzer-ID:
+admin_responses	add_response	Antwort hinzugefügt
+admin_responses	by_the_way	Nebenbei, ich habe's nicht gelöscht... für alle Fälle...
+admin_search	EMail	Email
+admin_search	registered	Registrierte
+admin_search	status	Status
+admin_tabfiles	edit_the_langfile	Bearbeite die $1 Sprache
+admin_tabfiles	edit_the_language	Bearbeite die Sprache
+admin_table	edit_the	Bearbeite die
+admin_userlist	active	Aktiv
+admin_userlist	key	Schlüssel
+admin_userlist	user_list_for_group	Benutzerliste für die Gruppe:
+common	myaccount	Mein Account
+common_utils	priority_colors	Prioritätsfarben
+conf	content_encoding	UTF-8
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	de
+conf	language_id	6
+conf	mail_charset	ISO-8859-1
+forum_utils	monitor	Überwache Forum
 frs	file_download	Downloaden
-frs	file_monitor	&Uuml;berwachen
+frs	file_monitor	Überwachen
 frs	file_notes	Anmerkungen
 frs	file_package	Paket
 frs	file_version	Version
+frs	latest_file_releases	Letzte Dateireleases
+group	developer_info	Entwicklerinformationen
+group	developers	Entwickler
 group	long_bugs	Bugtracking
 group	long_cvs	CVS-Baum
 group	long_docman	DocManager: Projekt-Dokumentation
-group	long_forum	&Ouml;ffentliche Foren
+group	long_forum	Öffentliche Foren
 group	long_ftp	Anonymer FTP-Zugriff
 group	long_homepage	Projekthomepage
 group	long_mail	Mailinglisten
@@ -44,41 +357,74 @@ group	long_patch	Patch-Verwaltung
 group	long_pm	Aufgaben-Verwaltung
 group	long_support	Support-Verwaltung
 group	long_survey	Umfragen
+group	project_admins	Projektbetreuer
+group	public_area	Öffentliche Bereiche
 group	short_bugs	Bugs
 group	short_cvs	CVS
 group	short_docman	Dokumentation
-group	short_files	Filesgroup	short_forum	Foren
+group	short_files	Files
+group	short_forum	Foren
 group	short_homepage	Homepage
 group	short_mail	Mailinglisten
 group	short_news	Neuigkeiten
 group	short_patch	Patches
 group	short_pm	Aufgaben
-group	short_summary	&Uuml;berblick
+group	short_summary	Überblick
 group	short_support	Support
 group	short_survey	Umfragen
-home	highest_ranked_users	Am h&ouml;chsten eingestufte Benutzer
-home	about_blurb	  GForge ist ein <b>freier Dienst</b> f&uuml;r <a href="http://www.opensource.org">Open Source</a> Entwickler und bietet einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking, Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte Dateiarchivierung, Backups und vollst&auml;ndige Verwaltung per Web-Interface.  <br> &nbsp; <p> <b>Feedback und Teilnahme an der Site</b> <p> Um GForge bestm&ouml;glich zu nutzen, sollten Sie sich <a href="/account/register.php">als Benutzer anmelden</a>. Mit einem Benutzeraccount k&ouml;nnen Sie am vollen Spektrum der Website teilhaben. Nat&uuml;rlich k&ouml;nnen Sie GForge auch ohne Registrierung nutzen, haben dann allerdings nicht auf alle Bereiche vollen Zugriff. <p> &nbsp; <br> <b>Starten Sie Ihr eigenes Projekt</b> <p> <a href="/account/register.php">Melden Sie sich als Benutzer an</a>, <a href="/account/login.php">loggen Sie sich ein</a> und <a href="/register/">registrieren Sie Ihr Projekt</a>! <p> Vielen Dank. Sie machen eine einfache Webseite sehr gl&uuml;cklich. 
-frs	latest_file_releases	Letzte Dateireleases
-menu	login	Einloggen (SSL)
-menu	logout	Ausloggen
+home	about_blurb	  GForge ist ein <b>freier Dienst</b> für <a href="http://www.opensource.org">Open Source</a> Entwickler und bietet einfachen Zugang zu dem Besten aus CVS, Mailinglisten, Bug-Tracking, Diskussionsforen, Aufgabenverwaltung, Webhosting, dauerhafte Dateiarchivierung, Backups und vollständige Verwaltung per Web-Interface.  <br> &nbsp; <p> <b>Feedback und Teilnahme an der Site</b> <p> Um GForge bestmöglich zu nutzen, sollten Sie sich <a href="/account/register.php">als Benutzer anmelden</a>. Mit einem Benutzeraccount können Sie am vollen Spektrum der Website teilhaben. Natürlich können Sie GForge auch ohne Registrierung nutzen, haben dann allerdings nicht auf alle Bereiche vollen Zugriff. <p> &nbsp; <br> <b>Starten Sie Ihr eigenes Projekt</b> <p> <a href="/account/register.php">Melden Sie sich als Benutzer an</a>, <a href="/account/login.php">loggen Sie sich ein</a> und <a href="/register/">registrieren Sie Ihr Projekt</a>! <p> Vielen Dank. Sie machen eine einfache Webseite sehr glücklich. 
+home	breaking_down_barriers	Wir reissen die Hindernisse zur Open-Source-Entwicklung nieder
+home	gforge_statistics	GForge Statistiken
+home	highest_ranked_users	Am höchsten eingestufte Benutzer
 home	most_active_this_week	Aktivste Projekte in dieser Woche
+home	top_project_downloads	Populärste Downloads (nach Projekten)
+menu	about_gforge	Über GForge
+menu	account_maintenance	Accountverwaltung
+menu	bookmark_page	Lesezeichen
+menu	change_my_theme	Theme ändern
+menu	code_snippet_library	Codeschnipsel-Sammlung
+menu	compile_farm	Compile-Farm
+menu	diary_notes	Tagebuch &amp; Notizen
+menu	discussion_forums	Diskussionsforen
+menu	documentation	Dokumentation
+menu	login	Einloggen (SSL)
+menu	login_ssl	Einloggen mit SSL
+menu	logout	Ausloggen
+menu	my_account	Mein Account
 menu	my_personal_page	Personalisierte Seite
+menu	mypage	Persönliche Seite
 menu	new_project	Neues Projekt
 menu	new_releases	Neue Releases
 menu	new_user	Neuer Benutzer (SSL)
 menu	other_site_mirrors	Mirrors
 menu	project_admin	Projektadministrator
-group	project_admins	Projektbetreuer
 menu	project_help_wanted	Projekthilfe gesucht
-menu	project_summary	Projekt&uuml;bersicht
-group	public_area	&Ouml;ffentliche Bereiche
+menu	project_summary	Projektübersicht
+menu	projectree	Projekt Baum
+menu	register_project	Registriere Projekt
 menu	search	Suche
 menu	software_map	Softwarekarte
-home	gforge_statistics	GForge Statistiken
 menu	top_projects	Top-Projekte
-home	top_project_downloads	Popul&auml;rste Downloads (nach Projekten)
-conf	content_encoding	UTF-8
-conf	default_font	verdana,arial,helvetica,sans-serif
-conf	language_code	de
-conf	language_id	6
-conf	mail_charset	ISO-8859-1
+my	about_blurb	Ihre personalisierte Seite enthält Buglisten und Aufgaben, die Ihnen zugeordnet sind, sowie eine Liste der Gruppen in denen Sie Mitglied sind.
+my	assigneditems	Mir zugeordnete Elemente
+my	bookmarks	Meine Bookmarks
+my	monitoredfile	Überwachte Dateimodule
+my	monitoredforum	Überwachte Foren
+my	no_bookmarks	Sie haben zur Zeit keine Bookmarks gespeichert.
+my	no_monitored_filemodules	Sie überwachen keine Dateien.
+my	no_monitored_filemodules_details	<p>Wenn Sie Dateien überwachen, bekommen Sie im Falle einer neuen Version/Release per EMail eine Nachricht mit einem Link zu der neuen Datei auf unserm Download-Server.</p><p>Um Dateien zu überwachen, besuchen Sie die "Zusammenfassungsseite" und klicken in die Auswahlbox im Abschnitt: Dateien.</p>
+my	no_monitored_forums	Sie beobachten keine Foren.
+my	no_monitored_forums_details	<p>Wenn Sie Foren beobachten, werden Sie bei neuen Nachrichten über eine EMail benachrichtigt, die einen Link zu der neuen Nachricht enthält.</p><p>Sie können Foren beobachten, indem Sie "Überwache Forum" im jeweiligen Diskussionsforum anklicken.</p>
+my	no_open_tasks	Sie haben keine offenen Aufgaben, die Ihnen zugeordnet sind.
+my	no_projects	Sie sind in keinem aktiven Projekt Mitglied.
+my	no_tracker_items_assigned	Sie haben keine offenen Tracker Elemente, die Ihnen zugeordnet sind.
+my	no_tracker_items_submitted	Sie haben keine offenen Tracker Elemente, die von Ihnen übermittelt wurden.
+my	pending_news_bytes_3	Klicken Sie hier.
+my	projects	Meine Projekte
+my	submitteditems	Meine übermittelten Elemente
+my	tasks	Meine Aufgaben
+my	title	personalisierte Seite für: $1
+project_showfiles	size	Größe
+user_home	title	Entwicklerprofil
+user_home	user_id	Benutzer-ID
+users	no_user_name	Kein Benutzername angegeben
