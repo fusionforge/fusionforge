@@ -32,6 +32,10 @@ You will need:
 	Optional Gantt Charting and Graphing Support:
 	JPGraph: ( http://www.aditus.nu/jpgraph/ )
 
+        Optional (required for some plugins):
+        Perl ( http://www.perl.org/ )
+        the DBI module ( http://dbi.perl.org/ ) and associated DBD::Pg
+
 Compile and install PostgreSQL, then PHP/Apache as per the
 instructions. PHP should be compiled into Apache, as well as compiled
 as a separate CGI. When compiling PHP, don't forget the --with-pgsql
@@ -157,3 +161,23 @@ See /cronjobs/README.root for more info.
 /cronjobs/mail/ contains files useful for the creation of new mailing 
 lists in mailman and creating the /etc/aliases file.
 
+
+PERL
+----
+
+If you want to use some of the Perl scripts that access the database,
+you'll need the DBI and DBD::Pg Perl modules.  On Red Hat systems (and
+variants), you can get them by installing the libdbi and libdbd-pgsql
+packages.  On Debian systems (and variants), the packages are called
+libdbi-perl and libdbd-pg-perl.
+
+  You'll also need to install utils/include.pl to
+/usr/lib/gforge/lib/, and put some configuration variables into
+/etc/gforge/local.pl.  In particular, you'll need something like:
+,----[ local.pl ]
+| $sys_default_domain = 'gforge.example.com' ;
+| $sys_dbhost = '192.168.12.34' ;
+| $sys_dbname = 'gforge' ;
+| $sys_dbuser = 'gforge' ;
+| $sys_dbpasswd = 'p455w0rd' ;
+`----
