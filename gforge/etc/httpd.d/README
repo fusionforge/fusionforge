@@ -1,0 +1,4 @@
+This dir contains templates files
+Edit carefully and use the gforge.conf defined var 
+as much as possible
+These files are used to build a proper httpd.conf file

@@ -1,0 +1,35 @@
+# PLEASE DO NOT REMOVE THIS LINE
+
+$sys_default_domain = '{domain_name}' ;
+$sys_cvs_host = '{cvs_host}' ;
+$sys_download_host = 'download.{domain_name}' ;
+$sys_shell_host = '{shell_host}' ;
+$sys_users_host = '{users_host}' ;
+$sys_docs_host = '{domain_name}' ;
+$sys_lists_host = '{lists_host}' ;
+$sys_dns1_host = 'ns1.{domain_name}' ;
+$sys_dns2_host = 'ns2.{domain_name}' ;
+$FTPINCOMING_DIR = '/usr/lib/gforge/ftp/incoming' ;
+$FTPFILES_DIR = '/usr/lib/gforge/download' ;
+$sys_urlroot='/usr/share/gforge/www/' ;
+$sf_cache_dir = '/var/cache/gforge' ;
+$sys_name = '{system_name}' ;
+$sys_themeroot = $sys_urlroot.'themes/' ;
+$sys_news_group = '{newsadmin_groupid}' ;
+$sys_dbhost = '{db_host}' ;
+$sys_dbname = '{db_name}' ;
+$sys_dbuser = '{db_user}' ;
+$sys_dbpasswd = '{db_password}' ;
+$sys_ldap_base_dn = '{ldap_base_dn}' ;
+$sys_ldap_host = '{ldap_host}' ;
+$skill_list = '{skill_list}' ;
+$admin_login = '{admin_login}' ;
+$admin_password = '{admin_password}' ;
+$server_admin = '{server_admin}' ;
+$domain_name = '{domain_name}' ;
+$newsadmin_groupid = '{newsadmin_groupid}' ;
+$statsadmin_groupid = '{statsadmin_groupid}' ;
+$peerrating_groupid = '{peerrating_groupid}' ;
+$noreply_to_bitbucket = '{noreply_to_bitbucket}' ;
+$sys_simple_dns = '{simple_dns}';
+$sys_ip_address = '{ip_address}';

@@ -1,0 +1,54 @@
+#
+# CVS host
+#
+<Directory {usr_share_gforge}/cvs>
+  Options Indexes FollowSymlinks
+  AllowOverride All
+  order allow,deny
+  allow from all
+  php_admin_value include_path "{usr_share_gforge}:{usr_share_gforge}/www/include:."
+  php_admin_value default_charset "UTF-8"
+</Directory>
+
+<VirtualHost {ip_address}:80>
+  ServerName {cvs_host}
+  DocumentRoot {usr_share_gforge}/cvs
+  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+<VirtualHost {ip_address}:443>
+  ServerName {cvs_host}
+
+  <IfModule mod_ssl.c>
+    SSLEngine on
+    SSLCertificateFile /etc/apache/ssl.crt/server.crt
+    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    <Files ~ "\.(cgi|shtml)$">
+      SSLOptions +StdEnvVars
+    </Files>
+    <Directory "/usr/lib/cgi-bin">
+      SSLOptions +StdEnvVars
+    </Directory>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <IfModule apache_ssl.c>
+    SSLEnable
+  </IfModule>
+
+  DocumentRoot {usr_share_gforge}/cvs
+  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+

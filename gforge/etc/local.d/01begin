@@ -1,0 +1,73 @@
+<?php
+// PLEASE DO NOT REMOVE THIS LINE
+
+// GForge Universal Site Modifications
+// by David HM Spector <spector@zeitgeist.com>
+//
+// Really Important Safety Tip: --> DO NOT LEAVE ANY WHITE
+// SPACE AFTER THE CLOSING PHP TAG AT THE END OF THIS FILE!
+//
+// Doing so will really confuse the software and cause
+// 1) cookies to fail and 2) HTML page headers to fail
+// which will give you some preally hard-to-debug problems.
+// Why? PHP is a *pre-processor* -- anything that's not PHP gets
+// emitted as part of the HTML stream and processed by the browser,
+// so white space is meaningful!
+//
+//
+// GForge hostnames
+//
+// Hostnames should be fully qualified domain names (FQDNs); using short names
+// would be prettier but would stop you from distributing your SourceForge
+// implementation across multiple domains.
+//
+// Of course, if you have a lot of machines serving a particular purpose
+// such as FTP or for shell accounts, the "hostname" here might be in
+// reality an addr_list of machines that is serviced by a round-robin
+// mechanism or something fancy like a local-director.
+//
+// The default GForge domain
+// this is used where ever the "naked" form of the GForge domain
+// might be used.  E.g., "mailto:admin@gforge.net"
+$sys_default_domain = "{domain_name}";
+//$sys_fallback_domain = "gforge2.company.com";
+//$sys_internal_network = '192.168.1.';
+
+// Machine that hosts CVS
+$sys_cvs_host = "{cvs_host}";
+
+// Force the use of a single cvs host instead of cvs.project.domain.com
+// Set to 1 to use cvs.domain.com:/cvsroot/project for all projects
+// Set to 0 to use cvs.project.domain.com:/cvsroot/project
+$sys_cvs_single_host = 1;
+
+// Machine used for downloading sources/packages
+$sys_download_host = "{download_host}";
+
+// Machine used for uploading sources/packages
+$sys_upload_host = "{upload_host}";
+
+// Machine(s) that host users' shell accounts
+//  N.B. to the SourceForge Crew: What's the difference between the user
+// host and the shell host?  They are clearly two different hostnames
+// in the source code, but they seem to serve the same purpose..?
+$sys_shell_host = "{shell_host}";
+$sys_users_host = "{users_host}";
+
+// Machine that hosts docs (such as the FAQs and the various software
+// licenses (*BSD, [L]GPL, etc.).  You REALLY want this to be the same
+// machine that the GForge code is running on because all of the
+// PHP makes reference to these documents in terms of relative paths that
+// are part of the GForge code tree.
+$sys_docs_host = "{docs_host}";
+
+// Machine that hosts the GForge mailing lists (This could also be
+// the mail host if you have enough horsepower & bandwidth)
+$sys_lists_host = "{lists_host}";
+
+// Domain Name Servers
+//    N.B.: Use terminated FQDNs here (with the final ".") so the resolver
+//    doesn't attempt to recurse in the case of a slightly broken DNS
+//    configuration
+$sys_dns1_host = "ns1.{domain_name}";
+$sys_dns2_host = "ns2.{domain_name}";

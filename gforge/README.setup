@@ -1,0 +1,23 @@
+This is a very first implementation of setup from cvs
+Just run 
+./setup
+and this will generate etc/local.inc and etc/httpd.conf
+
+This will try to include etc/httpd.conf in your $etcapache/httpd.conf
+$etcapache is set to /etc/apache by default
+
+The intention of this is to allow the use of debian tools to install gforge
+on non debian systems
+
+You will find install-apache.sh and fill-in-the-blanks.pl
+in both utils and deb-specific dir at the moment
+
+etc/local.inc is generated from files in etc/local.d
+etc/httpd.conf is generated from files in etc/httpd.d
+
+Let me know if this was usefull and the change you had to do to make it run
+on your system
+
+Christian
+
+<bayle@debian.org>

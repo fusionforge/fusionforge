@@ -1,0 +1,52 @@
+# HTTPS
+<VirtualHost {ip_address}:443>
+  ServerName {domain_name}
+  ServerAlias www.{domain_name}
+  ServerAdmin {server_admin}
+  DocumentRoot {usr_share_gforge}/www
+  DirectoryIndex index.html index.php
+  <IfModule mod_userdir.c>
+    UserDir disabled
+  </IfModule>
+
+  php_admin_value default_charset "UTF-8"
+
+  <IfModule mod_ssl.c>
+    SSLEngine on
+    SSLCertificateFile /etc/apache/ssl.crt/server.crt
+    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    <Files ~ "\.(cgi|shtml)$">
+      SSLOptions +StdEnvVars
+    </Files>
+    <Directory "/usr/lib/cgi-bin">
+      SSLOptions +StdEnvVars
+    </Directory>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <IfModule apache_ssl.c>
+    SSLEnable
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <Directory {usr_share_gforge}/www>
+    Include   {gforge_etc}/httpd.secrets
+  </Directory>
+
+  # Projects an Users script
+  <Location /projects>
+    ForceType application/x-httpd-php
+  </Location>
+  <Location /users>
+    ForceType application/x-httpd-php
+  </Location>
+
+  # This for cvsweb 
+  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+
+  # 404 Error document
+  ErrorDocument 404 /404.php
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+</VirtualHost>
+
