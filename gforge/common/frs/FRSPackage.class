@@ -232,6 +232,21 @@ class FRSPackage extends Error {
 	}
 
 	/**
+	 *	getMonitorCount - Get the count of people monitoring this package
+	 *
+	 *	@return int the count
+	 */
+	function getMonitorCount() {
+		$sql = "select id from filemodule_monitor where filemodule_id = ".$this->getID();
+		$res = db_numrows(db_query($sql));
+		if (!$res) {
+			$this->setError('FRSPackage::getMonitorCount() Error On querying monitor count: '.db_error());
+			return false;
+		}
+		return $res;
+	}	
+
+	/**
 	 *  isMonitoring - Is the current user in the list of people monitoring this package.
 	 *
 	 *  @return	boolean	is_monitoring.
