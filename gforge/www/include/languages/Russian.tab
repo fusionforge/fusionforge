@@ -16,75 +16,75 @@
 # 2000-10-08  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
 #	* Initial translation
 #
-about_foundries	about_blurb	О цехах GForge
-menu	about_sourceforge	О GForge
-menu	account_maintenance	Мои настройки
-menu	bookmark_page	Пометить тек. страницу закладкой
-home	breaking_down_barriers	Преодолевая барьеры на пути разработки с открытым исходным кодом
-menu	change_my_theme	Изменить web-тему
-menu	code_snippet_library	Бибиотека Code Snippet'ов
-menu	compile_farm	Фабрика компиляции
-menu	contact_us	Обратная связь
-group	developers	Разработчики
-group	developer_info	Участники проекта
-menu	discussion_forums	Дискуссионные форумы
-menu	documentation	Документация сайта
-frs	file_download	Скачать
-frs	file_monitor	Следить
-frs	file_notes	Информация
-frs	file_package	Модуль
-frs	file_version	Версия
-group	long_bugs	Менеджер ошибок
-group	long_cvs	CVS репозиторий
-group	long_docman	Менеджер документации
-group	long_forum	Общедоступные форумы
-group	long_ftp	Анонимный FTP проекта
-group	long_homepage	Домашняя страница проекта
-group	long_mail	Списки рассылки
-group	long_news	Новости
-group	long_patch	Менеджер патчей (исправлений)
-group	long_pm	Задачи проекта
-group	long_support	Менеджер тех. поддержки
-group	long_survey	Опросы
-group	short_admin	Админ
-group	short_bugs	Ошибки
+about_foundries	about_blurb	Рћ С†РµС…Р°С… GForge
+menu	about_sourceforge	Рћ GForge
+menu	account_maintenance	РњРѕРё РЅР°СЃС‚СЂРѕР№РєРё
+menu	bookmark_page	РџРѕРјРµС‚РёС‚СЊ С‚РµРє. СЃС‚СЂР°РЅРёС†Сѓ Р·Р°РєР»Р°РґРєРѕР№
+home	breaking_down_barriers	РџСЂРµРѕРґРѕР»РµРІР°СЏ Р±Р°СЂСЊРµСЂС‹ РЅР° РїСѓС‚Рё СЂР°Р·СЂР°Р±РѕС‚РєРё СЃ РѕС‚РєСЂС‹С‚С‹Рј РёСЃС…РѕРґРЅС‹Рј РєРѕРґРѕРј
+menu	change_my_theme	РР·РјРµРЅРёС‚СЊ web-С‚РµРјСѓ
+menu	code_snippet_library	Р‘РёР±РёРѕС‚РµРєР° Code Snippet'РѕРІ
+menu	compile_farm	Р¤Р°Р±СЂРёРєР° РєРѕРјРїРёР»СЏС†РёРё
+menu	contact_us	РћР±СЂР°С‚РЅР°СЏ СЃРІСЏР·СЊ
+group	developers	Р Р°Р·СЂР°Р±РѕС‚С‡РёРєРё
+group	developer_info	РЈС‡Р°СЃС‚РЅРёРєРё РїСЂРѕРµРєС‚Р°
+menu	discussion_forums	Р”РёСЃРєСѓСЃСЃРёРѕРЅРЅС‹Рµ С„РѕСЂСѓРјС‹
+menu	documentation	Р”РѕРєСѓРјРµРЅС‚Р°С†РёСЏ СЃР°Р№С‚Р°
+frs	file_download	РЎРєР°С‡Р°С‚СЊ
+frs	file_monitor	РЎР»РµРґРёС‚СЊ
+frs	file_notes	РРЅС„РѕСЂРјР°С†РёСЏ
+frs	file_package	РњРѕРґСѓР»СЊ
+frs	file_version	Р’РµСЂСЃРёСЏ
+group	long_bugs	РњРµРЅРµРґР¶РµСЂ РѕС€РёР±РѕРє
+group	long_cvs	CVS СЂРµРїРѕР·РёС‚РѕСЂРёР№
+group	long_docman	РњРµРЅРµРґР¶РµСЂ РґРѕРєСѓРјРµРЅС‚Р°С†РёРё
+group	long_forum	РћР±С‰РµРґРѕСЃС‚СѓРїРЅС‹Рµ С„РѕСЂСѓРјС‹
+group	long_ftp	РђРЅРѕРЅРёРјРЅС‹Р№ FTP РїСЂРѕРµРєС‚Р°
+group	long_homepage	Р”РѕРјР°С€РЅСЏСЏ СЃС‚СЂР°РЅРёС†Р° РїСЂРѕРµРєС‚Р°
+group	long_mail	РЎРїРёСЃРєРё СЂР°СЃСЃС‹Р»РєРё
+group	long_news	РќРѕРІРѕСЃС‚Рё
+group	long_patch	РњРµРЅРµРґР¶РµСЂ РїР°С‚С‡РµР№ (РёСЃРїСЂР°РІР»РµРЅРёР№)
+group	long_pm	Р—Р°РґР°С‡Рё РїСЂРѕРµРєС‚Р°
+group	long_support	РњРµРЅРµРґР¶РµСЂ С‚РµС…. РїРѕРґРґРµСЂР¶РєРё
+group	long_survey	РћРїСЂРѕСЃС‹
+group	short_admin	РђРґРјРёРЅ
+group	short_bugs	РћС€РёР±РєРё
 group	short_cvs	CVS
-group	short_docman	Документация
-group	short_files	Файлы
-group	short_forum	Форумы
-group	short_homepage	Дом.страница
-group	short_mail	Сп.рассылки
+group	short_docman	Р”РѕРєСѓРјРµРЅС‚Р°С†РёСЏ
+group	short_files	Р¤Р°Р№Р»С‹
+group	short_forum	Р¤РѕСЂСѓРјС‹
+group	short_homepage	Р”РѕРј.СЃС‚СЂР°РЅРёС†Р°
+group	short_mail	РЎРї.СЂР°СЃСЃС‹Р»РєРё
 group	short_main 	Main
-group	short_memberlist	Разработчики
-group	short_news	Новости
-group	short_patch	Патчи
-group	short_pm	Задачи
-group	short_summary	Резюме
-group	short_support	Поддержка
-group	short_survey	Опросы
-group	short_tracker	Унив.Трекер
-home	highest_ranked_users	Пользователи с высоким рейтингом
-home	about_blurb	  GForge - <B>свободный и бесплатный сервис для разработчиков, работающих по принципу Открытого Исходного Кода/Наполнения (<A href="http://www.opensource.org">Open Source</A>)</B> и предлагающий быстрый и легкий доступ к таким сервисам, как CVS (система управления версиями файлов), спиcки рассылки, система регистрации ошибок, доски сообщений и форумы, менеджер проектов, web-хостинг, постоянное файловое хранилище, автоматическое резервное копирование - все вместе управляемое через Web.<br> <BR> &nbsp; <P> <B>Использование сервисов и участие в проектах</B> <P> Для того, чтобы получить доступ ко всему многообразию сервисов, предлагаемых на GForge, вам нужно  <A href="/account/register.php">зарегистрироваться в качестве пользователя сайта</A>. Конечно же, вы можете путешествовать по сайту без регистрации, но вы не будете иметь доступ ко многим возможностям. <P> &nbsp; <BR> <B>Создание собственного проекта</B> <P> <A href="/account/register.php">Зарегистрируйтесь как пользователь сайта</A>, <A HREF="/account/login.php">войдите в систему</A> и наконец, <A HREF="/register/">зарегистрируйте ваш проект</A>. <P> Спасибо за выбор GForge... И мы желаем вам приятного и полезного времяпровождения!
-frs	latest_file_releases	Последние файл-релизы
-menu	login	Логин (ч/з защищенное соединение)
-menu	logout	Выход
-home	most_active_this_week	Наиболее активные за эту неделю
-menu	my_personal_page	Моя персональная страница
-menu	new_project	Зарегистрировать проект
-menu	new_releases	Последние релизы
-menu	new_user	Новый пользователь
-menu	other_site_mirrors	Зеркала других сайтов
-menu	project_admin	Администрирование проекта
-group	project_admins	Администраторы
-menu	project_help_wanted	Проекты, нуждающиеся в помощи
-menu	project_summary	База проекта
-group	public_area	Сервисы проекта
-menu	search	Поиск
-menu	site_status	Статус Сайта
-menu	software_map	Карта проектов
-home	sourceforge_statistics	Статистика GForge
-menu	top_projects	Топ-проекты
-home	top_project_downloads	Наиболее загружаемые проекты
-conf	content_encoding	windows-1251
+group	short_memberlist	Р Р°Р·СЂР°Р±РѕС‚С‡РёРєРё
+group	short_news	РќРѕРІРѕСЃС‚Рё
+group	short_patch	РџР°С‚С‡Рё
+group	short_pm	Р—Р°РґР°С‡Рё
+group	short_summary	Р РµР·СЋРјРµ
+group	short_support	РџРѕРґРґРµСЂР¶РєР°
+group	short_survey	РћРїСЂРѕСЃС‹
+group	short_tracker	РЈРЅРёРІ.РўСЂРµРєРµСЂ
+home	highest_ranked_users	РџРѕР»СЊР·РѕРІР°С‚РµР»Рё СЃ РІС‹СЃРѕРєРёРј СЂРµР№С‚РёРЅРіРѕРј
+home	about_blurb	  GForge - <B>СЃРІРѕР±РѕРґРЅС‹Р№ Рё Р±РµСЃРїР»Р°С‚РЅС‹Р№ СЃРµСЂРІРёСЃ РґР»СЏ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєРѕРІ, СЂР°Р±РѕС‚Р°СЋС‰РёС… РїРѕ РїСЂРёРЅС†РёРїСѓ РћС‚РєСЂС‹С‚РѕРіРѕ РСЃС…РѕРґРЅРѕРіРѕ РљРѕРґР°/РќР°РїРѕР»РЅРµРЅРёСЏ (<A href="http://www.opensource.org">Open Source</A>)</B> Рё РїСЂРµРґР»Р°РіР°СЋС‰РёР№ Р±С‹СЃС‚СЂС‹Р№ Рё Р»РµРіРєРёР№ РґРѕСЃС‚СѓРї Рє С‚Р°РєРёРј СЃРµСЂРІРёСЃР°Рј, РєР°Рє CVS (СЃРёСЃС‚РµРјР° СѓРїСЂР°РІР»РµРЅРёСЏ РІРµСЂСЃРёСЏРјРё С„Р°Р№Р»РѕРІ), СЃРїРёcРєРё СЂР°СЃСЃС‹Р»РєРё, СЃРёСЃС‚РµРјР° СЂРµРіРёСЃС‚СЂР°С†РёРё РѕС€РёР±РѕРє, РґРѕСЃРєРё СЃРѕРѕР±С‰РµРЅРёР№ Рё С„РѕСЂСѓРјС‹, РјРµРЅРµРґР¶РµСЂ РїСЂРѕРµРєС‚РѕРІ, web-С…РѕСЃС‚РёРЅРі, РїРѕСЃС‚РѕСЏРЅРЅРѕРµ С„Р°Р№Р»РѕРІРѕРµ С…СЂР°РЅРёР»РёС‰Рµ, Р°РІС‚РѕРјР°С‚РёС‡РµСЃРєРѕРµ СЂРµР·РµСЂРІРЅРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ - РІСЃРµ РІРјРµСЃС‚Рµ СѓРїСЂР°РІР»СЏРµРјРѕРµ С‡РµСЂРµР· Web.<br> <BR> &nbsp; <P> <B>РСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ СЃРµСЂРІРёСЃРѕРІ Рё СѓС‡Р°СЃС‚РёРµ РІ РїСЂРѕРµРєС‚Р°С…</B> <P> Р”Р»СЏ С‚РѕРіРѕ, С‡С‚РѕР±С‹ РїРѕР»СѓС‡РёС‚СЊ РґРѕСЃС‚СѓРї РєРѕ РІСЃРµРјСѓ РјРЅРѕРіРѕРѕР±СЂР°Р·РёСЋ СЃРµСЂРІРёСЃРѕРІ, РїСЂРµРґР»Р°РіР°РµРјС‹С… РЅР° GForge, РІР°Рј РЅСѓР¶РЅРѕ  <A href="/account/register.php">Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ РІ РєР°С‡РµСЃС‚РІРµ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ СЃР°Р№С‚Р°</A>. РљРѕРЅРµС‡РЅРѕ Р¶Рµ, РІС‹ РјРѕР¶РµС‚Рµ РїСѓС‚РµС€РµСЃС‚РІРѕРІР°С‚СЊ РїРѕ СЃР°Р№С‚Сѓ Р±РµР· СЂРµРіРёСЃС‚СЂР°С†РёРё, РЅРѕ РІС‹ РЅРµ Р±СѓРґРµС‚Рµ РёРјРµС‚СЊ РґРѕСЃС‚СѓРї РєРѕ РјРЅРѕРіРёРј РІРѕР·РјРѕР¶РЅРѕСЃС‚СЏРј. <P> &nbsp; <BR> <B>РЎРѕР·РґР°РЅРёРµ СЃРѕР±СЃС‚РІРµРЅРЅРѕРіРѕ РїСЂРѕРµРєС‚Р°</B> <P> <A href="/account/register.php">Р—Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№С‚РµСЃСЊ РєР°Рє РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ СЃР°Р№С‚Р°</A>, <A HREF="/account/login.php">РІРѕР№РґРёС‚Рµ РІ СЃРёСЃС‚РµРјСѓ</A> Рё РЅР°РєРѕРЅРµС†, <A HREF="/register/">Р·Р°СЂРµРіРёСЃС‚СЂРёСЂСѓР№С‚Рµ РІР°С€ РїСЂРѕРµРєС‚</A>. <P> РЎРїР°СЃРёР±Рѕ Р·Р° РІС‹Р±РѕСЂ GForge... Р РјС‹ Р¶РµР»Р°РµРј РІР°Рј РїСЂРёСЏС‚РЅРѕРіРѕ Рё РїРѕР»РµР·РЅРѕРіРѕ РІСЂРµРјСЏРїСЂРѕРІРѕР¶РґРµРЅРёСЏ!
+frs	latest_file_releases	РџРѕСЃР»РµРґРЅРёРµ С„Р°Р№Р»-СЂРµР»РёР·С‹
+menu	login	Р›РѕРіРёРЅ (С‡/Р· Р·Р°С‰РёС‰РµРЅРЅРѕРµ СЃРѕРµРґРёРЅРµРЅРёРµ)
+menu	logout	Р’С‹С…РѕРґ
+home	most_active_this_week	РќР°РёР±РѕР»РµРµ Р°РєС‚РёРІРЅС‹Рµ Р·Р° СЌС‚Сѓ РЅРµРґРµР»СЋ
+menu	my_personal_page	РњРѕСЏ РїРµСЂСЃРѕРЅР°Р»СЊРЅР°СЏ СЃС‚СЂР°РЅРёС†Р°
+menu	new_project	Р—Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊ РїСЂРѕРµРєС‚
+menu	new_releases	РџРѕСЃР»РµРґРЅРёРµ СЂРµР»РёР·С‹
+menu	new_user	РќРѕРІС‹Р№ РїРѕР»СЊР·РѕРІР°С‚РµР»СЊ
+menu	other_site_mirrors	Р—РµСЂРєР°Р»Р° РґСЂСѓРіРёС… СЃР°Р№С‚РѕРІ
+menu	project_admin	РђРґРјРёРЅРёСЃС‚СЂРёСЂРѕРІР°РЅРёРµ РїСЂРѕРµРєС‚Р°
+group	project_admins	РђРґРјРёРЅРёСЃС‚СЂР°С‚РѕСЂС‹
+menu	project_help_wanted	РџСЂРѕРµРєС‚С‹, РЅСѓР¶РґР°СЋС‰РёРµСЃСЏ РІ РїРѕРјРѕС‰Рё
+menu	project_summary	Р‘Р°Р·Р° РїСЂРѕРµРєС‚Р°
+group	public_area	РЎРµСЂРІРёСЃС‹ РїСЂРѕРµРєС‚Р°
+menu	search	РџРѕРёСЃРє
+menu	site_status	РЎС‚Р°С‚СѓСЃ РЎР°Р№С‚Р°
+menu	software_map	РљР°СЂС‚Р° РїСЂРѕРµРєС‚РѕРІ
+home	sourceforge_statistics	РЎС‚Р°С‚РёСЃС‚РёРєР° GForge
+menu	top_projects	РўРѕРї-РїСЂРѕРµРєС‚С‹
+home	top_project_downloads	РќР°РёР±РѕР»РµРµ Р·Р°РіСЂСѓР¶Р°РµРјС‹Рµ РїСЂРѕРµРєС‚С‹
+conf	content_encoding	UTF-8
 conf	language_code	ru
 conf	language_id	17

@@ -82,7 +82,7 @@ menu	software_map	Programvaru&ouml;versikt
 home	sourceforge_statistics	GForge-statistik
 menu	top_projects	Topprojekt
 home	top_project_downloads	Projekt med flest h&auml;mtningar
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	sv
 conf	language_id	10

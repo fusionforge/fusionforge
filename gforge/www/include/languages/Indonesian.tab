@@ -78,7 +78,7 @@ menu	software_map	Peta Software
 home	sourceforge_statistics	Statistik GForge
 menu	top_projects	Proyek-proyek Top
 home	top_project_downloads	Proyek Top Downloads
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	id
 conf	language_id	21

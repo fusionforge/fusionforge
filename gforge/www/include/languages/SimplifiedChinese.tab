@@ -20,76 +20,76 @@
 #	* Change the language code from zh-CN to zh-cn
 #	* Add some new variables that BaseLanguage added
 #
-about_foundries	about_blurb	¹ØÓÚ Foundries
-menu	about_sourceforge	¹ØÓÚ GForge
-menu	account_maintenance	ÕÊºÅÎ¬»¤
-menu	bookmark_page	ÊéÇ©
-home	breaking_down_barriers	Îª¿ª·ÅÔ´ÂëµÄ·¢Õ¹¿ª±ÙÒ»ÌõÌ¹Í¾
-menu	change_my_theme	¸ü»»Íâ¹Û
-menu	code_snippet_library	´úÂëÆ¬¶Ï
-menu	compile_farm	±àÒë¹¤³§
-menu	contact_us	ÁªÏµÎÒÃÇ
-group	developers	¿ª·¢Õß
-group	developer_info	¿ª·¢ÕßĞÅÏ¢
-menu	discussion_forums	ÂÛÌ³
-menu	documentation	ÎÄµµ
-frs	file_download	ÏÂÔØ
-frs	file_monitor	¸ú×Ù
-frs	file_notes	±¸×¢
-frs	file_package	Èí¼ş°ü
-frs	file_rel_date	ÈÕÆÚ
-frs	file_version	°æ±¾
-group	long_bugs	BUG¸ú×Ù
-group	long_cvs	CVS²Ö¿â
-group	long_docman	ÏîÄ¿ÎÄµµ
-group	long_forum	¹«¹²ÂÛÌ³
-group	long_ftp	ÄäÃûFTP
-group	long_homepage	ÏîÄ¿Ê×Ò³
-group	long_mail	ÓÊ¼şÁĞ±í
-group	long_news	×îĞÂÏûÏ¢
-group	long_patch	²¹¶¡¹ÜÀí
-group	long_pm	ÈÎÎñ¹ÜÀí
-group	long_support	¼¼ÊõÖ§³Ö
-group	long_survey	µ÷²é
-group	short_admin	¹ÜÀí
+about_foundries	about_blurb	å…³äº Foundries
+menu	about_sourceforge	å…³äº GForge
+menu	account_maintenance	å¸å·ç»´æŠ¤
+menu	bookmark_page	ä¹¦ç­¾
+home	breaking_down_barriers	ä¸ºå¼€æ”¾æºç çš„å‘å±•å¼€è¾Ÿä¸€æ¡å¦é€”
+menu	change_my_theme	æ›´æ¢å¤–è§‚
+menu	code_snippet_library	ä»£ç ç‰‡æ–­
+menu	compile_farm	ç¼–è¯‘å·¥å‚
+menu	contact_us	è”ç³»æˆ‘ä»¬
+group	developers	å¼€å‘è€…
+group	developer_info	å¼€å‘è€…ä¿¡æ¯
+menu	discussion_forums	è®ºå›
+menu	documentation	æ–‡æ¡£
+frs	file_download	ä¸‹è½½
+frs	file_monitor	è·Ÿè¸ª
+frs	file_notes	å¤‡æ³¨
+frs	file_package	è½¯ä»¶åŒ…
+frs	file_rel_date	æ—¥æœŸ
+frs	file_version	ç‰ˆæœ¬
+group	long_bugs	BUGè·Ÿè¸ª
+group	long_cvs	CVSä»“åº“
+group	long_docman	é¡¹ç›®æ–‡æ¡£
+group	long_forum	å…¬å…±è®ºå›
+group	long_ftp	åŒ¿åFTP
+group	long_homepage	é¡¹ç›®é¦–é¡µ
+group	long_mail	é‚®ä»¶åˆ—è¡¨
+group	long_news	æœ€æ–°æ¶ˆæ¯
+group	long_patch	è¡¥ä¸ç®¡ç†
+group	long_pm	ä»»åŠ¡ç®¡ç†
+group	long_support	æŠ€æœ¯æ”¯æŒ
+group	long_survey	è°ƒæŸ¥
+group	short_admin	ç®¡ç†
 group	short_bugs	BUG
 group	short_cvs	CVS
-group	short_docman	ÎÄµµ
-group	short_files	Filesgroup	short_forum	ÂÛÌ³
-group	short_homepage	Ê×Ò³
-group	short_mail	µç×ÓÓÊ¼ş
-group	short_main 	Ö÷Òª
-group	short_memberlist	¿ª·¢Õß
-group	short_news	ĞÂÎÅ
-group	short_patch	²¹¶¡
-group	short_pm	ÈÎÎñ
-group	short_summary	ÕªÒª
-group	short_support	Ö§³Ö
-group	short_survey	µ÷²é
-group	short_tracker	¸ú×Ù
-home	highest_ranked_users	ÓÃ»§ÆÀ¼ÛÅÅĞĞ°ñ
-home	about_blurb	 GForgeÎª<b><a href="http://www.opensource.org">¿ª·ÅÔ´´úÂëÈí¼ş</a>¿ª·¢ÕßÌá¹©È«·½ÃæµÄÃâ·Ñ·şÎñ</b>£¬°üÀ¨CVS²Ö¿â, ÓÊ¼şÁĞ±í, BUG¸ú×Ù, ÔÚÏßÂÛÌ³, ÈÎÎñ¹ÜÀí, ÍøÕ¾¿Õ¼ä, ÏîÄ¿´æ´¢¼°ÍêÕûµÄ±¸·İ, ²¢ÇÒÍêÈ«ÊÇÍ¨¹ıWEB·½Ê½À´¹ÜÀíµÄ¡£ <BR> &nbsp; <P> <B>ÇëÁ¢¼´¼ÓÈë£¬²¢Ìá³öÄúµÄ±¦¹óÒâ¼û</B> <P> ÎªÁË³ä·ÖÀûÓÃGForgeËùÌá¹©µÄ·şÎñ, <A href="/account/register.php">ÇëÁ¢¼´×¢²á³ÉÎª ±¾Õ¾ÓÃ»§</A>£¬ÕâÑùÄú¾Í¿ÉÒÔ²ÎÓë±¾Õ¾µÄ¸÷Ïî»î¶¯¡£ÈôÄúÉĞ²»ÊÇ×¢²áÓÃ»§, ÈÔÄÜä¯ÀÀ±¾Õ¾, µ«ÎŞÈ¨²ÎÓë±¾Õ¾µÄ»î¶¯¡£ <P> &nbsp; <BR> <B>¿ªÊ¼Äú×Ô¼ºµÄÏîÄ¿</B> <P> <A href="/account/register.php">ÏÈ×¢²á³ÉÎª±¾Õ¾ÓÃ»§</A>, È»ºó<A HREF="/account/login.php">µÇÂ¼</A>×îºó<A HREF="/register/">¿ªÊ¼ÄúµÄÏîÄ¿¡£</A> <P> Ğ»Ğ»²ÎÓë£¬Çë³ä·ÖÏíÊÜ±¾Õ¾Ìá¹©µÄ·şÎñ°É£¡
-frs	latest_file_releases	×îĞÂ·¢²¼ÏîÄ¿
-menu	login	Í¨¹ıSSLµÇÂ¼
-menu	logout	ÍË³öµÇÂ¼
-home	most_active_this_week	±¾ÖÜ»î¶¯Á¦×îÇ¿ÅÅĞĞ°ñ
-menu	my_personal_page	ÎÒµÄÊ×Ò³
-menu	new_project	µÇ¼ÇĞÂÏîÄ¿
-menu	new_releases	ĞÂ·¢²¼Èí¼ş
-menu	new_user	ĞÂÓÃ»§Í¨¹ıSSL×¢²á
-menu	other_site_mirrors	ÆäËüÍøÕ¾¾µÏñ
-menu	project_admin	ÏîÄ¿Î¬»¤
-group	project_admins	ÏîÄ¿¹ÜÀíÔ±
-menu	project_help_wanted	Ñ°ÇóĞ­Öú
-menu	project_summary	ÏîÄ¿ÕªÒª
-group	public_area	¹«¹²ÇøÓò
-menu	search	²éÕÒ
-menu	site_status	Õ¾µã×´Ì¬
-menu	software_map	Èí¼ş·ÖÀà±í
-home	sourceforge_statistics	GForgeÍ³¼Æ×ÊÁÏ
-menu	top_projects	ÈÈµãÏîÄ¿
-home	top_project_downloads	ÏîÄ¿ÏÂÔØÅÅĞĞ°ñ
-conf	content_encoding	gb2312
+group	short_docman	æ–‡æ¡£
+group	short_files	Filesgroup	short_forum	è®ºå›
+group	short_homepage	é¦–é¡µ
+group	short_mail	ç”µå­é‚®ä»¶
+group	short_main 	ä¸»è¦
+group	short_memberlist	å¼€å‘è€…
+group	short_news	æ–°é—»
+group	short_patch	è¡¥ä¸
+group	short_pm	ä»»åŠ¡
+group	short_summary	æ‘˜è¦
+group	short_support	æ”¯æŒ
+group	short_survey	è°ƒæŸ¥
+group	short_tracker	è·Ÿè¸ª
+home	highest_ranked_users	ç”¨æˆ·è¯„ä»·æ’è¡Œæ¦œ
+home	about_blurb	 GForgeä¸º<b><a href="http://www.opensource.org">å¼€æ”¾æºä»£ç è½¯ä»¶</a>å¼€å‘è€…æä¾›å…¨æ–¹é¢çš„å…è´¹æœåŠ¡</b>ï¼ŒåŒ…æ‹¬CVSä»“åº“, é‚®ä»¶åˆ—è¡¨, BUGè·Ÿè¸ª, åœ¨çº¿è®ºå›, ä»»åŠ¡ç®¡ç†, ç½‘ç«™ç©ºé—´, é¡¹ç›®å­˜å‚¨åŠå®Œæ•´çš„å¤‡ä»½, å¹¶ä¸”å®Œå…¨æ˜¯é€šè¿‡WEBæ–¹å¼æ¥ç®¡ç†çš„ã€‚ <BR> &nbsp; <P> <B>è¯·ç«‹å³åŠ å…¥ï¼Œå¹¶æå‡ºæ‚¨çš„å®è´µæ„è§</B> <P> ä¸ºäº†å……åˆ†åˆ©ç”¨GForgeæ‰€æä¾›çš„æœåŠ¡, <A href="/account/register.php">è¯·ç«‹å³æ³¨å†Œæˆä¸º æœ¬ç«™ç”¨æˆ·</A>ï¼Œè¿™æ ·æ‚¨å°±å¯ä»¥å‚ä¸æœ¬ç«™çš„å„é¡¹æ´»åŠ¨ã€‚è‹¥æ‚¨å°šä¸æ˜¯æ³¨å†Œç”¨æˆ·, ä»èƒ½æµè§ˆæœ¬ç«™, ä½†æ— æƒå‚ä¸æœ¬ç«™çš„æ´»åŠ¨ã€‚ <P> &nbsp; <BR> <B>å¼€å§‹æ‚¨è‡ªå·±çš„é¡¹ç›®</B> <P> <A href="/account/register.php">å…ˆæ³¨å†Œæˆä¸ºæœ¬ç«™ç”¨æˆ·</A>, ç„¶å<A HREF="/account/login.php">ç™»å½•</A>æœ€å<A HREF="/register/">å¼€å§‹æ‚¨çš„é¡¹ç›®ã€‚</A> <P> è°¢è°¢å‚ä¸ï¼Œè¯·å……åˆ†äº«å—æœ¬ç«™æä¾›çš„æœåŠ¡å§ï¼
+frs	latest_file_releases	æœ€æ–°å‘å¸ƒé¡¹ç›®
+menu	login	é€šè¿‡SSLç™»å½•
+menu	logout	é€€å‡ºç™»å½•
+home	most_active_this_week	æœ¬å‘¨æ´»åŠ¨åŠ›æœ€å¼ºæ’è¡Œæ¦œ
+menu	my_personal_page	æˆ‘çš„é¦–é¡µ
+menu	new_project	ç™»è®°æ–°é¡¹ç›®
+menu	new_releases	æ–°å‘å¸ƒè½¯ä»¶
+menu	new_user	æ–°ç”¨æˆ·é€šè¿‡SSLæ³¨å†Œ
+menu	other_site_mirrors	å…¶å®ƒç½‘ç«™é•œåƒ
+menu	project_admin	é¡¹ç›®ç»´æŠ¤
+group	project_admins	é¡¹ç›®ç®¡ç†å‘˜
+menu	project_help_wanted	å¯»æ±‚ååŠ©
+menu	project_summary	é¡¹ç›®æ‘˜è¦
+group	public_area	å…¬å…±åŒºåŸŸ
+menu	search	æŸ¥æ‰¾
+menu	site_status	ç«™ç‚¹çŠ¶æ€
+menu	software_map	è½¯ä»¶åˆ†ç±»è¡¨
+home	sourceforge_statistics	GForgeç»Ÿè®¡èµ„æ–™
+menu	top_projects	çƒ­ç‚¹é¡¹ç›®
+home	top_project_downloads	é¡¹ç›®ä¸‹è½½æ’è¡Œæ¦œ
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	zh-cn
 conf	language_id	23

@@ -42,7 +42,7 @@ group	long_news	Laatste nieuws
 group	long_patch	Patch Manager
 group	long_pm	Takenmanager
 group	long_support	Technische ondersteuningsmanager
-group	long_survey	Enquêtes
+group	long_survey	EnquÃªtes
 group	short_bugs	Bugs
 group	short_cvs	CVS
 group	short_docman	Documentatie
@@ -55,7 +55,7 @@ group	short_patch	Patches
 group	short_pm	Taken
 group	short_summary	Samenvatting
 group	short_support	Ondersteuning
-group	short_survey	Enquêtes
+group	short_survey	EnquÃªtes
 home	highest_ranked_users	Gebruikers met de hoogste rang
 home	about_blurb	  		GForge is een <B>gratis service voor 		<A href="http://www.opensource.org">Open Source</A> ontwikkelaars</B> die 		gemakkelijke toegang tot het beste in CVS, mailing lijsen, bug tracking, berichtborden/forums, 		task management, site hosting, permanent file archival, full backups, 		en totale web-gebaseerde administratie geeft.  		 		<BR> 		&nbsp; 		<P> 		<B>Site feedback en hoe mee te doen</B> 		<P> 		Om het meeste uit GForge te halen, moet u naar 		<A href="/account/register.php">registreren als een site 		gebruiker</A> gaan. Dit stelt u in staat om volledig mee te doen met alles 		wat we te bieden hebben. U kan natuurlijk de site doorkijken zonder te 		registreren, maar u kan niet volledig meedoen. 		<P> 		&nbsp; 		<BR> 		<B>Uw eigen project opzetten</B> 		<P> 		<A href="/account/register.php">Registreren als een site 		gebruiker</A>, 		dan <A HREF="/account/login.php">Inloggen</A> en uiteindelijk, 		<A HREF="/register/">Nieuw project registreren.</A> 		<P> 		Bendankt... en veel succes met de site.
 frs	latest_file_releases	Laatste bestandsuitgaven
@@ -77,7 +77,7 @@ menu	software_map	Software kaart
 home	sourceforge_statistics	GForge Statistieken
 menu	top_projects	Top Projecten
 home	top_project_downloads	Top projectendownloads
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	nl
 conf	language_id	12

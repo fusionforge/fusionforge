@@ -1,27 +1,27 @@
 Template: gforge/shared/newsadmin_groupid
 Type: string
 Default: 2
-Default-fr: 2
+Default-fr_FR.UTF-8: 2
 Description: The news admin group id
  Members of the news admin group can approve news for the Sourceforge main
  page.  This group id MUST NOT be 1. You only need to touch this group if
  you upgrade from a previous version and want to keep your data.
-Description-fr: Le numéro du groupe d'administration des nouvelles
+Description-fr_FR.UTF-8: Le numÃ©ro du groupe d'administration des nouvelles
  Les membres du groupe d'administration des nouvelles peuvent approuver des
- nouvelles pour les publier sur la page d'accueil de Sourceforge.  Le numéro
- de ce groupe NE DOIT PAS être 1.  Cette information n'est requise que si vous
- mettez à jour une installation précédente et voulez garder vos données.
+ nouvelles pour les publier sur la page d'accueil de Sourceforge.  Le numÃ©ro
+ de ce groupe NE DOIT PAS Ãªtre 1.  Cette information n'est requise que si vous
+ mettez Ã  jour une installation prÃ©cÃ©dente et voulez garder vos donnÃ©es.
 
 Template: gforge/shared/statsadmin_groupid
 Type: string
 Default: 3
-Default-fr: 3
+Default-fr_FR.UTF-8: 3
 Description: The stats admin group id
-Description-fr: Le numéro du groupe d'administration des statistiques
+Description-fr_FR.UTF-8: Le numÃ©ro du groupe d'administration des statistiques
 
 Template: gforge/shared/peerrating_groupid
 Type: string
 Default: 4
-Default-fr: 4
+Default-fr_FR.UTF-8: 4
 Description: The peer rating admin group id
-Description-fr: Le numéro du groupe d'administration des notations
+Description-fr_FR.UTF-8: Le numÃ©ro du groupe d'administration des notations

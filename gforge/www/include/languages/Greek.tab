@@ -16,69 +16,69 @@
 # 2000-10-15  Simos Xenitellis
 #	* Initial translation
 #
-menu	account_maintenance	Ενημέρωση Λογαριασμού
-menu	bookmark_page	Σελίδα Αγαπημένων
-home	breaking_down_barriers	Καταλύωντας τους φραγμούς στην Ανάπτυξη Ελεύθερου Λογισμικού
-menu	change_my_theme	Αλλαγή του Θέματός Μου
-menu	code_snippet_library	Βιβλιοθήκη Ψηγμάτων Κώδικα
-menu	compile_farm	Φάρμα Μεταγλώττισης
-menu	contact_us	Επικοινωνίστε μαζί μας
-group	developers	Προγραμματιστές
-group	developer_info	Πληροφορίες Προγραμματιστή
-menu	discussion_forums	Βήμα Συζητήσεων
-menu	documentation	Τεκμηρίωση Συστήματος
-frs	file_download	Μεταφόρτωση
-frs	file_monitor	Παρακολούθηση
-frs	file_notes	Σημειώσεις
-frs	file_package	Πακέτο
-frs	file_version	Έκδοση
-group	long_bugs	Παρακολούθηση Σφαλμάτων
-group	long_cvs	Αποθήκη CVS
+menu	account_maintenance	Ξ•Ξ½Ξ·ΞΌΞ­ΟΟ‰ΟƒΞ· Ξ›ΞΏΞ³Ξ±ΟΞΉΞ±ΟƒΞΌΞΏΟ
+menu	bookmark_page	Ξ£ΞµΞ»Ξ―Ξ΄Ξ± Ξ‘Ξ³Ξ±Ο€Ξ·ΞΌΞ­Ξ½Ο‰Ξ½
+home	breaking_down_barriers	ΞΞ±Ο„Ξ±Ξ»ΟΟ‰Ξ½Ο„Ξ±Ο‚ Ο„ΞΏΟ…Ο‚ Ο†ΟΞ±Ξ³ΞΌΞΏΟΟ‚ ΟƒΟ„Ξ·Ξ½ Ξ‘Ξ½Ξ¬Ο€Ο„Ο…ΞΎΞ· Ξ•Ξ»ΞµΟΞΈΞµΟΞΏΟ… Ξ›ΞΏΞ³ΞΉΟƒΞΌΞΉΞΊΞΏΟ
+menu	change_my_theme	Ξ‘Ξ»Ξ»Ξ±Ξ³Ξ® Ο„ΞΏΟ… ΞΞ­ΞΌΞ±Ο„ΟΟ‚ ΞΞΏΟ…
+menu	code_snippet_library	Ξ’ΞΉΞ²Ξ»ΞΉΞΏΞΈΞ®ΞΊΞ· Ξ¨Ξ·Ξ³ΞΌΞ¬Ο„Ο‰Ξ½ ΞΟΞ΄ΞΉΞΊΞ±
+menu	compile_farm	Ξ¦Ξ¬ΟΞΌΞ± ΞΞµΟ„Ξ±Ξ³Ξ»ΟΟ„Ο„ΞΉΟƒΞ·Ο‚
+menu	contact_us	Ξ•Ο€ΞΉΞΊΞΏΞΉΞ½Ο‰Ξ½Ξ―ΟƒΟ„Ξµ ΞΌΞ±Ξ¶Ξ― ΞΌΞ±Ο‚
+group	developers	Ξ ΟΞΏΞ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΉΟƒΟ„Ξ­Ο‚
+group	developer_info	Ξ Ξ»Ξ·ΟΞΏΟ†ΞΏΟΞ―ΞµΟ‚ Ξ ΟΞΏΞ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΉΟƒΟ„Ξ®
+menu	discussion_forums	Ξ’Ξ®ΞΌΞ± Ξ£Ο…Ξ¶Ξ·Ο„Ξ®ΟƒΞµΟ‰Ξ½
+menu	documentation	Ξ¤ΞµΞΊΞΌΞ·ΟΞ―Ο‰ΟƒΞ· Ξ£Ο…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚
+frs	file_download	ΞΞµΟ„Ξ±Ο†ΟΟΟ„Ο‰ΟƒΞ·
+frs	file_monitor	Ξ Ξ±ΟΞ±ΞΊΞΏΞ»ΞΏΟΞΈΞ·ΟƒΞ·
+frs	file_notes	Ξ£Ξ·ΞΌΞµΞΉΟΟƒΞµΞΉΟ‚
+frs	file_package	Ξ Ξ±ΞΊΞ­Ο„ΞΏ
+frs	file_version	ΞΞΊΞ΄ΞΏΟƒΞ·
+group	long_bugs	Ξ Ξ±ΟΞ±ΞΊΞΏΞ»ΞΏΟΞΈΞ·ΟƒΞ· Ξ£Ο†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰Ξ½
+group	long_cvs	Ξ‘Ο€ΞΏΞΈΞ®ΞΊΞ· CVS
 group	long_docman	DocManager: Project Documentation
-group	long_forum	Δημόσια Βήματα
-group	long_ftp	Χώρος Ανώνυμου FTP
-group	long_homepage	Αρχική Σελίδα Έργου
-group	long_mail	Λίστες Συνδρομητών
-group	long_news	Τελευταία Νέα
-group	long_patch	Διαχειριστής Επιρραμάτων
-group	long_pm	Διαχειριστής Εργασιών
-group	long_support	Διαχειριστής Υποστήριξης Προγράμματος
-group	long_survey	Έρευνες
-group	short_bugs	Σφάλματα
+group	long_forum	Ξ”Ξ·ΞΌΟΟƒΞΉΞ± Ξ’Ξ®ΞΌΞ±Ο„Ξ±
+group	long_ftp	Ξ§ΟΟΞΏΟ‚ Ξ‘Ξ½ΟΞ½Ο…ΞΌΞΏΟ… FTP
+group	long_homepage	Ξ‘ΟΟ‡ΞΉΞΊΞ® Ξ£ΞµΞ»Ξ―Ξ΄Ξ± ΞΟΞ³ΞΏΟ…
+group	long_mail	Ξ›Ξ―ΟƒΟ„ΞµΟ‚ Ξ£Ο…Ξ½Ξ΄ΟΞΏΞΌΞ·Ο„ΟΞ½
+group	long_news	Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―Ξ± ΞΞ­Ξ±
+group	long_patch	Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ξ•Ο€ΞΉΟΟΞ±ΞΌΞ¬Ο„Ο‰Ξ½
+group	long_pm	Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ξ•ΟΞ³Ξ±ΟƒΞΉΟΞ½
+group	long_support	Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ Ξ¥Ο€ΞΏΟƒΟ„Ξ®ΟΞΉΞΎΞ·Ο‚ Ξ ΟΞΏΞ³ΟΞ¬ΞΌΞΌΞ±Ο„ΞΏΟ‚
+group	long_survey	ΞΟΞµΟ…Ξ½ΞµΟ‚
+group	short_bugs	Ξ£Ο†Ξ¬Ξ»ΞΌΞ±Ο„Ξ±
 group	short_cvs	CVS
-group	short_docman	Τεκμηρίωση
-group	short_files	Filesgroup	short_forum	Βήματα
-group	short_homepage	Πρώτη Σελίδα
-group	short_mail	Λίστες
-group	short_main 	Κύριο
-group	short_news	Νέα
-group	short_patch	Επιρράματα
-group	short_pm	Εργασίες
-group	short_summary	Περιλήψη
-group	short_support	Υποστήριξη
-group	short_survey	Έρευνες
-home	highest_ranked_users	Χρήστες Μεγαλύτερης Αξιολόγησης
-home	about_blurb	  Το GForge είναι μια <B>ελεύθερη υπηρεσία για <A href="http://www.opensource.org">Open Source</A> προγραμματιστές</B> που προσφέρει εύκολη πρόσβαση στα καλύτερα χαρακτηριστικά του CVS, των λιστών συνδρομητών, της παρακολούθησης σφαλμάτων,  των βημάτων συζητήσεων, της διαχείρησης εργασιών, της εξυπηρέτησης δικτυακών τόπων, της μόνιμης αρχειοθέτησης αρχείων,  της δημιουργίας πλήρων αντιγράφων ασφαλείας και της ολικής διαχείρισης μέσα από το WWW.  <BR> &nbsp; <P> <B>Ανάδραση Δικτυακού Τόπου και Συμμετοχή</B> <P> Για να επωφεληθείτε τα μέγιστα από το GForge, θα πρέπει να <A href="/account/register.php"> εγγραφείτε ως χρήστης συστήματος</A>.  Αυτό θα σας επιτρέψει να συμμετάσχετε πλήρως σε όλα όσα έχουμε να προσφέρουμε. Φυσικά, μπορείτε να περιηγηθήτε σε αυτό το δικτυακό τόπο χωρίς εγγραφή, ωστόσο δε θα έχετε πρόσβαση να συμμετάσχετε πλήρως. <P> &nbsp; <BR> <B>Εκκίνηση του Δικού σας Έργου</B> <P> <A href="/account/register.php">Εγγραφείτε ως χρήστης συστήματος</A>, έπειτα <A HREF="/account/login.php">Σύνδεθείτε</A> και τέλος, <A HREF="/register/">Εγγράψετε το Έργο σας.</A> <P> Ευχαριστούμε... και να περάσετε καλά στο δικτυακό σας τόπο.
-frs	latest_file_releases	Τελευταίες Εκδόσεις Αρχείων
-menu	login	Σύνδεση μέσω SSL
-menu	logout	Αποσύνδεση
-home	most_active_this_week	Περισσότερο Ενεργό για Αυτήν την Εβδομάδα
-menu	my_personal_page	Η Προσωπική μου Σελίδα
-menu	new_project	Καταχώριση Νέου Έργου
-menu	new_releases	Νέες Εκδόσεις
-menu	new_user	Νέος Χρήσης μέσω SSL
-menu	other_site_mirrors	¶λλα Συστήματα Καθεπτρισμού
-menu	project_admin	Διαχειριστής Έργου
-group	project_admins	Διαχειριστές Έργου
-menu	project_help_wanted	Ζητείτε Βοήθεια Έργου
-menu	project_summary	Περίληψη Έργου
-group	public_area	Δημόσιες Περιοχές
-menu	search	Αναζήτηση
-menu	software_map	Χάρτης Λογισμικού
-home	sourceforge_statistics	Στατιστικά GForge
-menu	top_projects	Κορυφαία Έργα
-home	top_project_downloads	Κορυφαίες Μεταφορτώσεις Έργων
-conf	content_encoding	iso-8859-7
+group	short_docman	Ξ¤ΞµΞΊΞΌΞ·ΟΞ―Ο‰ΟƒΞ·
+group	short_files	Filesgroup	short_forum	Ξ’Ξ®ΞΌΞ±Ο„Ξ±
+group	short_homepage	Ξ ΟΟΟ„Ξ· Ξ£ΞµΞ»Ξ―Ξ΄Ξ±
+group	short_mail	Ξ›Ξ―ΟƒΟ„ΞµΟ‚
+group	short_main 	ΞΟΟΞΉΞΏ
+group	short_news	ΞΞ­Ξ±
+group	short_patch	Ξ•Ο€ΞΉΟΟΞ¬ΞΌΞ±Ο„Ξ±
+group	short_pm	Ξ•ΟΞ³Ξ±ΟƒΞ―ΞµΟ‚
+group	short_summary	Ξ ΞµΟΞΉΞ»Ξ®ΟΞ·
+group	short_support	Ξ¥Ο€ΞΏΟƒΟ„Ξ®ΟΞΉΞΎΞ·
+group	short_survey	ΞΟΞµΟ…Ξ½ΞµΟ‚
+home	highest_ranked_users	Ξ§ΟΞ®ΟƒΟ„ΞµΟ‚ ΞΞµΞ³Ξ±Ξ»ΟΟ„ΞµΟΞ·Ο‚ Ξ‘ΞΎΞΉΞΏΞ»ΟΞ³Ξ·ΟƒΞ·Ο‚
+home	about_blurb	  Ξ¤ΞΏ GForge ΞµΞ―Ξ½Ξ±ΞΉ ΞΌΞΉΞ± <B>ΞµΞ»ΞµΟΞΈΞµΟΞ· Ο…Ο€Ξ·ΟΞµΟƒΞ―Ξ± Ξ³ΞΉΞ± <A href="http://www.opensource.org">Open Source</A> Ο€ΟΞΏΞ³ΟΞ±ΞΌΞΌΞ±Ο„ΞΉΟƒΟ„Ξ­Ο‚</B> Ο€ΞΏΟ… Ο€ΟΞΏΟƒΟ†Ξ­ΟΞµΞΉ ΞµΟΞΊΞΏΞ»Ξ· Ο€ΟΟΟƒΞ²Ξ±ΟƒΞ· ΟƒΟ„Ξ± ΞΊΞ±Ξ»ΟΟ„ΞµΟΞ± Ο‡Ξ±ΟΞ±ΞΊΟ„Ξ·ΟΞΉΟƒΟ„ΞΉΞΊΞ¬ Ο„ΞΏΟ… CVS, Ο„Ο‰Ξ½ Ξ»ΞΉΟƒΟ„ΟΞ½ ΟƒΟ…Ξ½Ξ΄ΟΞΏΞΌΞ·Ο„ΟΞ½, Ο„Ξ·Ο‚ Ο€Ξ±ΟΞ±ΞΊΞΏΞ»ΞΏΟΞΈΞ·ΟƒΞ·Ο‚ ΟƒΟ†Ξ±Ξ»ΞΌΞ¬Ο„Ο‰Ξ½,  Ο„Ο‰Ξ½ Ξ²Ξ·ΞΌΞ¬Ο„Ο‰Ξ½ ΟƒΟ…Ξ¶Ξ·Ο„Ξ®ΟƒΞµΟ‰Ξ½, Ο„Ξ·Ο‚ Ξ΄ΞΉΞ±Ο‡ΞµΞ―ΟΞ·ΟƒΞ·Ο‚ ΞµΟΞ³Ξ±ΟƒΞΉΟΞ½, Ο„Ξ·Ο‚ ΞµΞΎΟ…Ο€Ξ·ΟΞ­Ο„Ξ·ΟƒΞ·Ο‚ Ξ΄ΞΉΞΊΟ„Ο…Ξ±ΞΊΟΞ½ Ο„ΟΟ€Ο‰Ξ½, Ο„Ξ·Ο‚ ΞΌΟΞ½ΞΉΞΌΞ·Ο‚ Ξ±ΟΟ‡ΞµΞΉΞΏΞΈΞ­Ο„Ξ·ΟƒΞ·Ο‚ Ξ±ΟΟ‡ΞµΞ―Ο‰Ξ½,  Ο„Ξ·Ο‚ Ξ΄Ξ·ΞΌΞΉΞΏΟ…ΟΞ³Ξ―Ξ±Ο‚ Ο€Ξ»Ξ®ΟΟ‰Ξ½ Ξ±Ξ½Ο„ΞΉΞ³ΟΞ¬Ο†Ο‰Ξ½ Ξ±ΟƒΟ†Ξ±Ξ»ΞµΞ―Ξ±Ο‚ ΞΊΞ±ΞΉ Ο„Ξ·Ο‚ ΞΏΞ»ΞΉΞΊΞ®Ο‚ Ξ΄ΞΉΞ±Ο‡ΞµΞ―ΟΞΉΟƒΞ·Ο‚ ΞΌΞ­ΟƒΞ± Ξ±Ο€Ο Ο„ΞΏ WWW.  <BR> &nbsp; <P> <B>Ξ‘Ξ½Ξ¬Ξ΄ΟΞ±ΟƒΞ· Ξ”ΞΉΞΊΟ„Ο…Ξ±ΞΊΞΏΟ Ξ¤ΟΟ€ΞΏΟ… ΞΊΞ±ΞΉ Ξ£Ο…ΞΌΞΌΞµΟ„ΞΏΟ‡Ξ®</B> <P> Ξ“ΞΉΞ± Ξ½Ξ± ΞµΟ€Ο‰Ο†ΞµΞ»Ξ·ΞΈΞµΞ―Ο„Ξµ Ο„Ξ± ΞΌΞ­Ξ³ΞΉΟƒΟ„Ξ± Ξ±Ο€Ο Ο„ΞΏ GForge, ΞΈΞ± Ο€ΟΞ­Ο€ΞµΞΉ Ξ½Ξ± <A href="/account/register.php"> ΞµΞ³Ξ³ΟΞ±Ο†ΞµΞ―Ο„Ξµ Ο‰Ο‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚</A>.  Ξ‘Ο…Ο„Ο ΞΈΞ± ΟƒΞ±Ο‚ ΞµΟ€ΞΉΟ„ΟΞ­ΟΞµΞΉ Ξ½Ξ± ΟƒΟ…ΞΌΞΌΞµΟ„Ξ¬ΟƒΟ‡ΞµΟ„Ξµ Ο€Ξ»Ξ®ΟΟ‰Ο‚ ΟƒΞµ ΟΞ»Ξ± ΟΟƒΞ± Ξ­Ο‡ΞΏΟ…ΞΌΞµ Ξ½Ξ± Ο€ΟΞΏΟƒΟ†Ξ­ΟΞΏΟ…ΞΌΞµ. Ξ¦Ο…ΟƒΞΉΞΊΞ¬, ΞΌΟ€ΞΏΟΞµΞ―Ο„Ξµ Ξ½Ξ± Ο€ΞµΟΞΉΞ·Ξ³Ξ·ΞΈΞ®Ο„Ξµ ΟƒΞµ Ξ±Ο…Ο„Ο Ο„ΞΏ Ξ΄ΞΉΞΊΟ„Ο…Ξ±ΞΊΟ Ο„ΟΟ€ΞΏ Ο‡Ο‰ΟΞ―Ο‚ ΞµΞ³Ξ³ΟΞ±Ο†Ξ®, Ο‰ΟƒΟ„ΟΟƒΞΏ Ξ΄Ξµ ΞΈΞ± Ξ­Ο‡ΞµΟ„Ξµ Ο€ΟΟΟƒΞ²Ξ±ΟƒΞ· Ξ½Ξ± ΟƒΟ…ΞΌΞΌΞµΟ„Ξ¬ΟƒΟ‡ΞµΟ„Ξµ Ο€Ξ»Ξ®ΟΟ‰Ο‚. <P> &nbsp; <BR> <B>Ξ•ΞΊΞΊΞ―Ξ½Ξ·ΟƒΞ· Ο„ΞΏΟ… Ξ”ΞΉΞΊΞΏΟ ΟƒΞ±Ο‚ ΞΟΞ³ΞΏΟ…</B> <P> <A href="/account/register.php">Ξ•Ξ³Ξ³ΟΞ±Ο†ΞµΞ―Ο„Ξµ Ο‰Ο‚ Ο‡ΟΞ®ΟƒΟ„Ξ·Ο‚ ΟƒΟ…ΟƒΟ„Ξ®ΞΌΞ±Ο„ΞΏΟ‚</A>, Ξ­Ο€ΞµΞΉΟ„Ξ± <A HREF="/account/login.php">Ξ£ΟΞ½Ξ΄ΞµΞΈΞµΞ―Ο„Ξµ</A> ΞΊΞ±ΞΉ Ο„Ξ­Ξ»ΞΏΟ‚, <A HREF="/register/">Ξ•Ξ³Ξ³ΟΞ¬ΟΞµΟ„Ξµ Ο„ΞΏ ΞΟΞ³ΞΏ ΟƒΞ±Ο‚.</A> <P> Ξ•Ο…Ο‡Ξ±ΟΞΉΟƒΟ„ΞΏΟΞΌΞµ... ΞΊΞ±ΞΉ Ξ½Ξ± Ο€ΞµΟΞ¬ΟƒΞµΟ„Ξµ ΞΊΞ±Ξ»Ξ¬ ΟƒΟ„ΞΏ Ξ΄ΞΉΞΊΟ„Ο…Ξ±ΞΊΟ ΟƒΞ±Ο‚ Ο„ΟΟ€ΞΏ.
+frs	latest_file_releases	Ξ¤ΞµΞ»ΞµΟ…Ο„Ξ±Ξ―ΞµΟ‚ Ξ•ΞΊΞ΄ΟΟƒΞµΞΉΟ‚ Ξ‘ΟΟ‡ΞµΞ―Ο‰Ξ½
+menu	login	Ξ£ΟΞ½Ξ΄ΞµΟƒΞ· ΞΌΞ­ΟƒΟ‰ SSL
+menu	logout	Ξ‘Ο€ΞΏΟƒΟΞ½Ξ΄ΞµΟƒΞ·
+home	most_active_this_week	Ξ ΞµΟΞΉΟƒΟƒΟΟ„ΞµΟΞΏ Ξ•Ξ½ΞµΟΞ³Ο Ξ³ΞΉΞ± Ξ‘Ο…Ο„Ξ®Ξ½ Ο„Ξ·Ξ½ Ξ•Ξ²Ξ΄ΞΏΞΌΞ¬Ξ΄Ξ±
+menu	my_personal_page	Ξ— Ξ ΟΞΏΟƒΟ‰Ο€ΞΉΞΊΞ® ΞΌΞΏΟ… Ξ£ΞµΞ»Ξ―Ξ΄Ξ±
+menu	new_project	ΞΞ±Ο„Ξ±Ο‡ΟΟΞΉΟƒΞ· ΞΞ­ΞΏΟ… ΞΟΞ³ΞΏΟ…
+menu	new_releases	ΞΞ­ΞµΟ‚ Ξ•ΞΊΞ΄ΟΟƒΞµΞΉΟ‚
+menu	new_user	ΞΞ­ΞΏΟ‚ Ξ§ΟΞ®ΟƒΞ·Ο‚ ΞΌΞ­ΟƒΟ‰ SSL
+menu	other_site_mirrors	Ξ†Ξ»Ξ»Ξ± Ξ£Ο…ΟƒΟ„Ξ®ΞΌΞ±Ο„Ξ± ΞΞ±ΞΈΞµΟ€Ο„ΟΞΉΟƒΞΌΞΏΟ
+menu	project_admin	Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ®Ο‚ ΞΟΞ³ΞΏΟ…
+group	project_admins	Ξ”ΞΉΞ±Ο‡ΞµΞΉΟΞΉΟƒΟ„Ξ­Ο‚ ΞΟΞ³ΞΏΟ…
+menu	project_help_wanted	Ξ–Ξ·Ο„ΞµΞ―Ο„Ξµ Ξ’ΞΏΞ®ΞΈΞµΞΉΞ± ΞΟΞ³ΞΏΟ…
+menu	project_summary	Ξ ΞµΟΞ―Ξ»Ξ·ΟΞ· ΞΟΞ³ΞΏΟ…
+group	public_area	Ξ”Ξ·ΞΌΟΟƒΞΉΞµΟ‚ Ξ ΞµΟΞΉΞΏΟ‡Ξ­Ο‚
+menu	search	Ξ‘Ξ½Ξ±Ξ¶Ξ®Ο„Ξ·ΟƒΞ·
+menu	software_map	Ξ§Ξ¬ΟΟ„Ξ·Ο‚ Ξ›ΞΏΞ³ΞΉΟƒΞΌΞΉΞΊΞΏΟ
+home	sourceforge_statistics	Ξ£Ο„Ξ±Ο„ΞΉΟƒΟ„ΞΉΞΊΞ¬ GForge
+menu	top_projects	ΞΞΏΟΟ…Ο†Ξ±Ξ―Ξ± ΞΟΞ³Ξ±
+home	top_project_downloads	ΞΞΏΟΟ…Ο†Ξ±Ξ―ΞµΟ‚ ΞΞµΟ„Ξ±Ο†ΞΏΟΟ„ΟΟƒΞµΞΉΟ‚ ΞΟΞ³Ο‰Ξ½
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	el
 conf	language_id	19

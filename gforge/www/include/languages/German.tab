@@ -78,7 +78,7 @@ menu	software_map	Softwarekarte
 home	sourceforge_statistics	GForge Statistieken
 menu	top_projects	Top-Projekte
 home	top_project_downloads	Popul&auml;rste Downloads (nach Projekten)
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	de
 conf	language_id	6

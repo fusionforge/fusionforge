@@ -23,7 +23,7 @@
 #   * Added translation for .../account/login.php and various basic modules
 #
 # 2002-04-30	Soon-Son Kwon	<kss@kldp.org>
-#   * Changed fontname from gulim to ±¼¸²Ã¼ to prevent ugly screen on mozilla
+#   * Changed fontname from gulim to êµ´ë¦¼ì²´ to prevent ugly screen on mozilla
 #   * Modified to use $GLOBALS[sys_name] instead of hardcoded "GForge"
 #     as much as possible 
 #   * Added/Modified/Updated translation for many pages including messge
@@ -39,408 +39,408 @@
 #   * Added a few more trivial message translation
 #
 # 2002-05-19	Soon-Son Kwon	<kss@kldp.org>
-#   * µµ¿òÀ» ±â´Ù¸®´Â ÇÁ·ÎÁ§Æ®-->¸â¹ö ±¸ÇÔ, 
-#     Code Snippet Library-->ÄÚµå ¶óÀÌºê·¯¸® ·Î º¯°æ
+#   * ë„ì›€ì„ ê¸°ë‹¤ë¦¬ëŠ” í”„ë¡œì íŠ¸-->ë©¤ë²„ êµ¬í•¨, 
+#     Code Snippet Library-->ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬ ë¡œ ë³€ê²½
 #
 # 2002-05-25	Soon-Son Kwon	<kss@kldp.org>
 #   * Added more translation including Forum, Tracker, CVS
 #
-account	title	»ç¿ëÀÚ µî·Ï Á¤º¸
-account_change_email	message	$3ÀÇ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ º¯°æÇÏ´Â °úÁ¤ÀÔ´Ï´Ù.\n´ÙÀ½ URLÀ» ¹æ¹®ÇÏ¼Å¼­ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ º¯°æÇÏ½Ê½Ã¿À.\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
-account_change_email	section	»ç¿ëÀÚ µî·Ï Á¤º¸
-account_change_email	subject	$1 È®ÀÎ
-account_change_email	title	ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æ
-account_change_email	mailsent	<P>»õ·Î ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î ¸ŞÀÏÀÌ Àü¼ÛµÇ¾ú½À´Ï´Ù. ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æÀ» ¿Ï·áÇÏ½Ã·Á¸é Áö±İ º¸³»µå¸° ÀÌ¸ŞÀÏ ³»¿ëÀ» Àß ÀĞ¾î º¸½Ã±â ¹Ù¶ø´Ï´Ù. <P><A href="/">[ È¨À¸·Î µÇµ¹¾Æ°¡±â ]</A>
-account_change_email	desc	<P>ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ º¯°æÇÏ½Ã·Á¸é, À¯È¿ÇÑ ÀÌ¸ŞÀÏ ÁÖ¼ÒÀÓÀ» È®ÀÎÇÏ±â À§ÇØ »õ ÁÖ¼Ò·ÎºÎÅÍ È®ÀÎÇÏ´Â ÀıÂ÷¸¦ ¹â¾Æ¾ß ÇÕ´Ï´Ù. <P>Á¦°øµÇ´Â ¼­ºñ½ºÀÇ ¼º°İ»ó Á¤È®ÇÑ ÀÌ¸ŞÀÏ ÁÖ¼Ò¸¦ À¯ÁöÇÒ ÇÊ¿ä°¡ ÀÖ½À´Ï´Ù. ½© °èÁ¤ Á¢¼ÓÀÌ³ª ÇÁ·ÎÁ§Æ® °ü¸® µîÀÇ Áß¿äÇÑ ÀÌ½´ »çÇ×µé¿¡ ´ëÇØ¼­ Ç×»ó »ç¿ëÀÚ ¿©·¯ºĞ°ú ¿¬¶ôÀÌ °¡´ÉÇÏµµ·Ï º¸ÀåÇÏ´Â °ÍÀº Áß¿äÇÑ ÀÏÀÔ´Ï´Ù. <P>¾Æ·¡ ¾ç½ÄÀ» Ã¤¿ö ÁÖ½Ã¸é º¯°æ È®ÀÎ ÀıÂ÷¿¡ »ç¿ëµÇ´Â URLÀÌ ÇØ´ç ¸ŞÀÏ ÁÖ¼Ò·Î ¹è´ŞµÇ¸ç, ±× URLÀ» ¹æ¹®ÇÏ¼Å¾ß ÀÌ¸ŞÀÏ ÁÖ¼Ò º¯°æÀÌ ¿Ï·áµË´Ï´Ù.
-account_change_pw	confirmation	<h2>$1 ºñ¹Ğ¹øÈ£ º¯°æ È®ÀÎ</h2>	<p>	ÃàÇÏÇÕ´Ï´Ù. ºñ¹Ğ¹øÈ£°¡ º¯°æµÇ¾ú½À´Ï´Ù.	</p>
-account_change_pw	section	»ç¿ëÀÚ µî·Ï Á¤º¸
-account_change_pw	title	ºñ¹Ğ¹øÈ£ º¯°æ
-account_editsshkeys	section	»ç¿ëÀÚ µî·Ï Á¤º¸
-account_editsshkeys	title	CVS/SSH Å° ÆíÁı
-account_first	about_blurb	¿©·¯ºĞÀº ÀÌÁ¦ ¿Â¶óÀÎ ¿ÀÇÂ¼Ò½º °³¹ß È¯°æÀÎ $1ÀÇ µî·Ï »ç¿ëÀÚÀÔ´Ï´Ù.<P>µî·Ï »ç¿ëÀÚ·Î¼­ ¿©·¯ºĞÀº ÀÌ°÷ÀÇ ¸ğµç È°µ¿¿¡ Âü¿©ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. °¢ ÇÁ·ÎÁ§Æ®ÀÇ °Ô½ÃÆÇ¿¡ ±ÛÀ» ¿Ã¸± ¼öµµ ÀÖ°í, $1¿¡ ÀÖ´Â ¼ÒÇÁÆ®¿ş¾îµé¿¡ ´ëÇØ ¹ö±× ¸®Æ÷ÆÃÀ» ÇÒ ¼öµµ ÀÖ°í, ÇÁ·ÎÁ§Æ®ÀÇ °³¹ßÀÚ·Î µî·ÏÇÏ½Ç ¼öµµ ÀÖ°í, ¿©·¯ºĞ¸¸ÀÇ ÇÁ·ÎÁ§Æ®¸¦ °³¼³ÇÏ½Ã´Â °Íµµ °¡´ÉÇÕ´Ï´Ù. <P>$1(ÀÌ)°¡ Á¦°øÇÏ´Â ¸ğµç ¼­ºñ½º¸¦ È°¿ëÇÏ½Ã±â À§ÇØ¼­ ¿©·¯ºĞÀº ¾à°£ÀÇ ½Ã°£À» ³»¾î ´ÙÀ½ <A href="/docs/site/"><b>»çÀÌÆ® °ü·Ã ¹®¼­</b></A>¸¦ ÂùÂùÈ÷ ÀĞ¾î º¸½Ã±â ¹Ù¶ø´Ï´Ù.<P>ºÎµğ ÁÁÀº ½Ã°£ÀÌ µÇ½Ã±â¸¦ ¹Ù¶ó¸ç ÀúÈñ°¡ $1(À»)¸¦ Çâ»ó½ÃÅ³ ¼ö ÀÖµµ·Ï ¾ğÁ¦µçÁö ÇÇµå¹éÀ» º¸³» ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.<P>--$1
-account_first	title	È¯¿µÇÕ´Ï´Ù!
-account_login	deleted_account	<p>¿©·¯ºĞÀÇ $1 °èÁ¤ÀÌ °ü¸®ÀÚ¿¡ ÀÇÇØ »èÁ¦µÇ¾ú½À´Ï´Ù. ÀÌ´Â º¸Åë µÎ°¡Áö·Î ³ª´­ ¼ö ÀÖ´Âµ¥ 1) ¿©·¯ºĞ ½º½º·Î °èÁ¤À» »èÁ¦ÇØ ´Ş¶ó°í ¿äÃ»ÇÏ¼Ì°Å³ª 2) ¿©·¯ºĞÀÇ °èÁ¤ÀÌ ¼­ºñ½º °è¾à¿¡ À§¹èµÇ´Â ÇàÀ§¿¡ ÀÌ¿ëµÇ¾î ½Ã½ºÅÛ °ü¸®¸¦ À§ÇØ °ü¸®ÀÚ¿¡ ÀÇÇØ °èÁ¤ÀÌ »èÁ¦µÇ´Â °ÍÀÔ´Ï´Ù. ¸¸¾à ÀÇ¹® »çÇ×ÀÌ³ª ÀÇ½ÉµÇ´Â Á¡ÀÌ ÀÖ´Ù¸é <a href="/support/?group_id=1">Áö¿ø ¿äÃ»</a>À» ÇÏ½Ã¸é µË´Ï´Ù.</p><p>°¨»çÇÕ´Ï´Ù, <br><br>$1</p>
-account_login	iewarn	<H2><FONT COLOR="RED">ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯ »ç¿ëÀÚ´Â 5.01 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ¼Å¾ß ÇÏ¸ç 128-bit SSLÀÇ »ç¿ëÀ» ±ÇÀåÇÕ´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ½Ã´Â °Íµµ ÁÁ½À´Ï´Ù.</FONT></H2>
-account_login	macwarn	<H2><FONT COLOR="RED">ÇöÀç ¸ÅÅ²Åä½Ã¿¡¼­ÀÇ ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯´Â Áö¿øµÇÁö ¾Ê½À´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇØ ÁÖ½Ê½Ã¿À.</FONT></H2>
-account_login	pending_account	<P>¿©·¯ºĞÀÇ °èÁ¤Àº ÇöÀç ÀÌ¸ŞÀÏÀ» ÅëÇÑ È®ÀÎ ÀÛ¾÷À» ±â´Ù¸®°í ÀÖ´Â ÁßÀÔ´Ï´Ù.		ÀÌ¸ŞÀÏ¿¡ Æ÷ÇÔµÇ¾î ÀÖ´Â ¸µÅ©¸¦ ¹æ¹®ÇÏ½Ã¸é °èÁ¤ÀÌ °ğ¹Ù·Î È°¼ºÈ­µË´Ï´Ù.		<P>¸¸¾à ÀÌ ÀÌ¸ŞÀÏÀ» ´Ù½Ã ¹Ş°í ½ÍÀ¸½Ã´Ù¸é ¾Æ·¡¿¡ ÀÖ´Â ¸µÅ©¸¦ Å¬¸¯ÇÏ¼¼¿ä. ¿©·¯ºĞÀÌ µî·Ï °úÁ¤ Áß¿¡ ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ·Î È®ÀÎ ¸ŞÀÏÀÌ ´Ù½ÃÇÑ¹ø ¹ß¼ÛµË´Ï´Ù.		<P><A href="pending-resend.php?form_user=$1">[È®ÀÎ ¸ŞÀÏ ´Ù½Ã º¸³»±â]</A>		<br><hr>		<p>
-account_login	title	»çÀÌÆ® ·Î±×ÀÎ
-account_login	cookiewarn	¿©±â¼­ºÎÅÍ´Â ÄíÅ°¸¦ »ç¿ëÇÕ´Ï´Ù.
-account_login	loginname	·Î±×ÀÎ³×ÀÓ:
-account_login	passwd	ºñ¹Ğ¹øÈ£:
-account_login	usessl	·Î±×ÀÎÈÄ SSL °è¼Ó »ç¿ë
-account_login	sslnotice	<p><B><FONT COLOR="RED">¾Æ·¡ ¹öÆ°À» ´©¸£½Ã¸é SSL±â´ÉÀÌ ±¸ÇöµÇ¾î ÀÖ´Â À¥¼­¹ö·Î ÁøÀÔÇÏ½Ã°Ô µÇ¸ç, ÀÔ·ÂÇÏ½Å ºñ¹Ğ¹øÈ£´Â ´Ù¸¥ »ç¶÷ÀÌ º¼ ¼ö ¾ø½À´Ï´Ù.</FONT></B> <small style="font-size: x-small"> (ÀÌ ÆäÀÌÁö ÀÚÃ¼°¡ SSL·Î º¸ÀÌÁö ¾Ê´Â ÀÌÀ¯°¡ ±Ã±İÇÏ½Ã´Ù¸é ´ÙÀ½ ÀıÀ» ÀĞ¾î º¸½Ê½Ã¿À. °¨»çÇÕ´Ï´Ù.) </small> <P> <B>ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯</B>¸¦ »ç¿ëÇÏ°í °è½Ç °æ¿ì ÀÏ½ÃÀûÀ¸·Î SSL¿¡ °üÇÑ ¹®Á¦°¡ ÀÖÀ»¼öµµ ÀÖ½À´Ï´Ù. ³İ½ºÄÉÀÌÇÁ »ç¿ëÀÚ´Â º¸¾ÈÀ» À§ÇØ SSLÀ» °è¼Ó »ç¿ëÇÏ½Ã±â ¹Ù¶ø´Ï´Ù. ÀÌ ¹®Á¦¿¡ °üÇØ¼­´Â <A HREF="http://www.microsoft.com/">MicrosoftÀÇ À¥»çÀÌÆ®</A>¸¦ Âü°íÇÏ½Ê½Ã¿À.<P>
-account_login	login	SSLÀ» ÅëÇØ ·Î±×ÀÎÇÏ±â
-account_login	lostpw	[ºñ¹Ğ¹øÈ£¸¦ ÀØÀ¸¼Ì³ª¿ä?]
-account_login	newaccount	[»õ·Î¿î °èÁ¤ ¸¸µé±â(°¡ÀÔÇÏ±â)]
-account_lostpw	message	$3 »çÀÌÆ®ÀÇ ´©±º°¡°¡ (¾Æ¸¶µµ º»ÀÎ?) ÀÌ¸ŞÀÏÀ» ÀÌ¿ëÇÑ\nºñ¹Ğ¹øÈ£ º¯°æÀ» ¿äÃ»ÇÏ¿´½À´Ï´Ù. ¸¸¾à ¿©·¯ºĞÀÌ Á÷Á¢ ÇÏ½Å °ÍÀÌ ¾Æ´Ï¶ó¸é\nÀÌ ¸Ş½ÃÁö´Â ±×³É ¹«½ÃÇÏ½Ê½Ã¿À. ±×·¯¸é ¾Æ¹«°Íµµ ¹Ù²îÁö ¾Ê½À´Ï´Ù.\n\n¸¸¾à º»ÀÎÀÌ Á÷Á¢ ¿äÃ»ÇÏ½Å °ÍÀÌ¶ó¸é ´ÙÀ½ URLÀ» ¹æ¹®ÇÏ¿© ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ½Ê½Ã¿À.\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
-account_lostpw	subject	$1 È®ÀÎ
-account_lostpw	title	ºñ¹Ğ¹øÈ£¸¦ ÀØÀ¸¼Ì½À´Ï±î?
-account_lostpw	notify	<P>ÀÔ·ÂÇÏ½Å ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î ¸ŞÀÏÀ» º¸³Â½À´Ï´Ù. ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ½Ã·Á¸é Áö±İ º¸³½ ¸ŞÀÏÀÇ ³»¿ëÀ» Âü°íÇÏ½Ã±â ¹Ù¶ø´Ï´Ù. <P><A href="/">[ È¨À¸·Î ]</A>
-account_lostpw	warn	<P>ºñ¹Ğ¹øÈ£¸¦ ºĞ½ÇÇÏ´Â °ÍÀº »ç¿ëÇÏ°í °è½Å °èÁ¤°ú, ¿î¿µÁßÀÎ ÇÁ·ÎÁ§Æ®, ±×¸®°í ÀÌ »çÀÌÆ® ÀüÃ¼ÀûÀ¸·Î ÁÁÁö¾ÊÀº ¿µÇâÀ» ¹ÌÄ¥ ¼ö ÀÖ½À´Ï´Ù. <P>¾Æ·¡ "Send Lost PW Hash" ¸¦ ´©¸£½Ã¸é ¿©·¯ºĞ¿¡°Ô ÇÒ´çµÇ¾î ÀÖ´Â ÀÌ¸ŞÀÏ ÁÖ¼Ò·Î URLÀ» ¾Ë·Á µå¸®°Ú½À´Ï´Ù. ±× URLÀº ¿©·¯ºĞÀÇ °èÁ¤¿¡ ÇÒ´çµÇ¾î ÀÖ´Â 128-bit ÇØ½¬ Á¤º¸ÀÔ´Ï´Ù. ±× URLÀ» ¹æ¹®ÇÏ½Ã¸é ºñ¹Ğ¹øÈ£¸¦ º¯°æÇÏ½Ã°í »çÀÌÆ®¿¡ ´Ù½Ã ·Î±×ÀÎÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
-account_register	title	»ç¿ëÀÚ µî·Ï
-account_register	congrat	<p>ÃàÇÏÇÕ´Ï´Ù. $1¿¡ µî·ÏÇÏ¼Ì½À´Ï´Ù. <p> ±ÍÇÏ´Â ÀÌÁ¦ °ğ ¸ŞÀÏ ÁÖ¼Ò¸¦ È®ÀÎÇÏ±â À§ÇÑ È®ÀÎ ¸ŞÀÏÀ» ¹ŞÀ¸½Ã°Ô µË´Ï´Ù. ¸ŞÀÏ¿¡ Æ÷ÇÔµÇ¾î ÀÖ´Â URLÀ» Å¬¸¯ÇÏ½Ã¸é °èÁ¤À» »ç¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.
-account_register	iewarn	<H2><FONT COLOR="RED">ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯ »ç¿ëÀÚ´Â 5.01 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ¼Å¾ß ÇÏ¸ç 128-bit SSLÀÇ »ç¿ëÀ» ±ÇÀåÇÕ´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇÏ½Ã´Â °Íµµ ÁÁ½À´Ï´Ù.</FONT></H2>
-account_register	macwarn	<H2><FONT COLOR="RED">ÇöÀç ¸ÅÅ²Åä½Ã¿¡¼­ÀÇ ÀÎÅÍ³İ ÀÍ½ºÇÃ·Î·¯´Â Áö¿øµÇÁö ¾Ê½À´Ï´Ù. ³İ½ºÄÉÀÌÇÁ 4.7 ¶Ç´Â ±× ÀÌ»óÀÇ ¹öÀüÀ» »ç¿ëÇØ ÁÖ½Ê½Ã¿À.</FONT></H2>
-account_register	loginname	·Î±×ÀÎ ³×ÀÓ (´ë¹®ÀÚ´Â ¾²Áö ¸¶½Ê½Ã¿À.) *:
-account_register	password	ºñ¹Ğ¹øÈ£ (ÃÖ¼Ò 6 ±ÛÀÚ) *:
-account_register	password2	ºñ¹Ğ¹øÈ£ (´Ù½Ã) *:
-account_register	realname	ÀÌ¸§ *:
-account_register	language	¾ğ¾î ¼±ÅÃ:
-account_register	timezone	½Ã°£´ë:
-account_register	emailaddr	ÀÌ¸ŞÀÏ ÁÖ¼Ò *: <BR><I>ÀÌ ÀÌ¸ŞÀÏ ÁÖ¼Ò´Â °èÁ¤ÀÌ È°¼ºÈ­µÇ±â Àü¿¡ È®ÀÎÀÌ ÇÊ¿äÇÕ´Ï´Ù. ÀÔ·ÂÇÏ½Å ÁÖ¼Ò´Â »çÀÌÆ® »ó¿¡¼­ ³ëÃâµÇÁö ¾Ê½À´Ï´Ù. ¿©·¯ºĞÀº &lt;loginname\@$1&gt;¶ó´Â °èÁ¤À» ¹ß±Ş¹Ş°Ô µÇ¸ç ÀÌ°÷À¸·Î º¸³»Áø ¸ğµç ¸ŞÀÏÀº ÀÔ·ÂÇÏ½Å ¸ŞÀÏ ÁÖ¼Ò·Î ÀçÀü¼ÛµË´Ï´Ù.</I>
-account_register	siteupdate	»çÀÌÆ® ¾÷µ¥ÀÌÆ®¿¡ °üÇÑ ¼Ò½Ä ¸ŞÀÏ·Î ¹Ş±â <I>(Æ®·¡ÇÈÀÌ °ÅÀÇ ¾øÀ¸¸ç º¸¾È °ü·Ã °øÁö»çÇ×À» Æ÷ÇÔÇÏ¹Ç·Î ¸ŞÀÏÀ» ¹Ş¾Æ º¸½Ã±â¸¦ ±ÇÀåÇÕ´Ï´Ù.)</I>
-account_register	communitymail	Ä¿¹Â´ÏÆ¼ °ü·Ã ¸ŞÀÏ ¹Ş±â. <I>(Æ®·¡ÇÈ º°·Î ¾øÀ½.)</I>
-account_register	mandatory	º°Ç¥(*)°¡ ÀÖ´Â ºÎºĞÀº ÇÊ¼ö Ç×¸ñÀÔ´Ï´Ù.
-account_register	register	µî·ÏÇÏ±â
-account_unsubscribe	all_mailings	¸ğµç GForge ¸ŞÀÏ ¹× °øÁö»çÇ×
-account_unsubscribe	site_mailings	GForge ¸ŞÀÏ
-account_verify	title	GForge »ç¿ëÀÚ È®ÀÎ
-account_verify	verify_blurb	<p>»ç¿ëÀÚ µî·Ï ÀıÂ÷¸¦ ¿Ï·áÇÏ½Ã·Á¸é Áö±İ ·Î±×ÀÎÇÏ½Ê½Ã¿À. ÀÏ¹İ ·Î±×ÀÎ ±â´ÉÀº °ğ¹Ù·Î È°¼ºÈ­µË´Ï´Ù.</p>
-conf	content_encoding	EUC-KR
-conf	default_font	±¼¸²Ã¼,verdana,arial,helvetica,sans-serif
+account	title	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
+account_change_email	message	$3ì˜ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ë³€ê²½í•˜ëŠ” ê³¼ì •ì…ë‹ˆë‹¤.\në‹¤ìŒ URLì„ ë°©ë¬¸í•˜ì…”ì„œ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ë³€ê²½í•˜ì‹­ì‹œì˜¤.\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
+account_change_email	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
+account_change_email	subject	$1 í™•ì¸
+account_change_email	title	ì´ë©”ì¼ ì£¼ì†Œ ë³€ê²½
+account_change_email	mailsent	<P>ìƒˆë¡œ ì…ë ¥í•˜ì‹  ì´ë©”ì¼ ì£¼ì†Œë¡œ ë©”ì¼ì´ ì „ì†¡ë˜ì—ˆìŠµë‹ˆë‹¤. ì´ë©”ì¼ ì£¼ì†Œ ë³€ê²½ì„ ì™„ë£Œí•˜ì‹œë ¤ë©´ ì§€ê¸ˆ ë³´ë‚´ë“œë¦° ì´ë©”ì¼ ë‚´ìš©ì„ ì˜ ì½ì–´ ë³´ì‹œê¸° ë°”ëë‹ˆë‹¤. <P><A href="/">[ í™ˆìœ¼ë¡œ ë˜ëŒì•„ê°€ê¸° ]</A>
+account_change_email	desc	<P>ì´ë©”ì¼ ì£¼ì†Œë¥¼ ë³€ê²½í•˜ì‹œë ¤ë©´, ìœ íš¨í•œ ì´ë©”ì¼ ì£¼ì†Œì„ì„ í™•ì¸í•˜ê¸° ìœ„í•´ ìƒˆ ì£¼ì†Œë¡œë¶€í„° í™•ì¸í•˜ëŠ” ì ˆì°¨ë¥¼ ë°Ÿì•„ì•¼ í•©ë‹ˆë‹¤. <P>ì œê³µë˜ëŠ” ì„œë¹„ìŠ¤ì˜ ì„±ê²©ìƒ ì •í™•í•œ ì´ë©”ì¼ ì£¼ì†Œë¥¼ ìœ ì§€í•  í•„ìš”ê°€ ìˆìŠµë‹ˆë‹¤. ì‰˜ ê³„ì • ì ‘ì†ì´ë‚˜ í”„ë¡œì íŠ¸ ê´€ë¦¬ ë“±ì˜ ì¤‘ìš”í•œ ì´ìŠˆ ì‚¬í•­ë“¤ì— ëŒ€í•´ì„œ í•­ìƒ ì‚¬ìš©ì ì—¬ëŸ¬ë¶„ê³¼ ì—°ë½ì´ ê°€ëŠ¥í•˜ë„ë¡ ë³´ì¥í•˜ëŠ” ê²ƒì€ ì¤‘ìš”í•œ ì¼ì…ë‹ˆë‹¤. <P>ì•„ë˜ ì–‘ì‹ì„ ì±„ì›Œ ì£¼ì‹œë©´ ë³€ê²½ í™•ì¸ ì ˆì°¨ì— ì‚¬ìš©ë˜ëŠ” URLì´ í•´ë‹¹ ë©”ì¼ ì£¼ì†Œë¡œ ë°°ë‹¬ë˜ë©°, ê·¸ URLì„ ë°©ë¬¸í•˜ì…”ì•¼ ì´ë©”ì¼ ì£¼ì†Œ ë³€ê²½ì´ ì™„ë£Œë©ë‹ˆë‹¤.
+account_change_pw	confirmation	<h2>$1 ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ í™•ì¸</h2>	<p>	ì¶•í•˜í•©ë‹ˆë‹¤. ë¹„ë°€ë²ˆí˜¸ê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤.	</p>
+account_change_pw	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
+account_change_pw	title	ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
+account_editsshkeys	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
+account_editsshkeys	title	CVS/SSH í‚¤ í¸ì§‘
+account_first	about_blurb	ì—¬ëŸ¬ë¶„ì€ ì´ì œ ì˜¨ë¼ì¸ ì˜¤í”ˆì†ŒìŠ¤ ê°œë°œ í™˜ê²½ì¸ $1ì˜ ë“±ë¡ ì‚¬ìš©ìì…ë‹ˆë‹¤.<P>ë“±ë¡ ì‚¬ìš©ìë¡œì„œ ì—¬ëŸ¬ë¶„ì€ ì´ê³³ì˜ ëª¨ë“  í™œë™ì— ì°¸ì—¬í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ê° í”„ë¡œì íŠ¸ì˜ ê²Œì‹œíŒì— ê¸€ì„ ì˜¬ë¦´ ìˆ˜ë„ ìˆê³ , $1ì— ìˆëŠ” ì†Œí”„íŠ¸ì›¨ì–´ë“¤ì— ëŒ€í•´ ë²„ê·¸ ë¦¬í¬íŒ…ì„ í•  ìˆ˜ë„ ìˆê³ , í”„ë¡œì íŠ¸ì˜ ê°œë°œìë¡œ ë“±ë¡í•˜ì‹¤ ìˆ˜ë„ ìˆê³ , ì—¬ëŸ¬ë¶„ë§Œì˜ í”„ë¡œì íŠ¸ë¥¼ ê°œì„¤í•˜ì‹œëŠ” ê²ƒë„ ê°€ëŠ¥í•©ë‹ˆë‹¤. <P>$1(ì´)ê°€ ì œê³µí•˜ëŠ” ëª¨ë“  ì„œë¹„ìŠ¤ë¥¼ í™œìš©í•˜ì‹œê¸° ìœ„í•´ì„œ ì—¬ëŸ¬ë¶„ì€ ì•½ê°„ì˜ ì‹œê°„ì„ ë‚´ì–´ ë‹¤ìŒ <A href="/docs/site/"><b>ì‚¬ì´íŠ¸ ê´€ë ¨ ë¬¸ì„œ</b></A>ë¥¼ ì°¬ì°¬íˆ ì½ì–´ ë³´ì‹œê¸° ë°”ëë‹ˆë‹¤.<P>ë¶€ë”” ì¢‹ì€ ì‹œê°„ì´ ë˜ì‹œê¸°ë¥¼ ë°”ë¼ë©° ì €í¬ê°€ $1(ì„)ë¥¼ í–¥ìƒì‹œí‚¬ ìˆ˜ ìˆë„ë¡ ì–¸ì œë“ ì§€ í”¼ë“œë°±ì„ ë³´ë‚´ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.<P>--$1
+account_first	title	í™˜ì˜í•©ë‹ˆë‹¤!
+account_login	deleted_account	<p>ì—¬ëŸ¬ë¶„ì˜ $1 ê³„ì •ì´ ê´€ë¦¬ìì— ì˜í•´ ì‚­ì œë˜ì—ˆìŠµë‹ˆë‹¤. ì´ëŠ” ë³´í†µ ë‘ê°€ì§€ë¡œ ë‚˜ëˆŒ ìˆ˜ ìˆëŠ”ë° 1) ì—¬ëŸ¬ë¶„ ìŠ¤ìŠ¤ë¡œ ê³„ì •ì„ ì‚­ì œí•´ ë‹¬ë¼ê³  ìš”ì²­í•˜ì…¨ê±°ë‚˜ 2) ì—¬ëŸ¬ë¶„ì˜ ê³„ì •ì´ ì„œë¹„ìŠ¤ ê³„ì•½ì— ìœ„ë°°ë˜ëŠ” í–‰ìœ„ì— ì´ìš©ë˜ì–´ ì‹œìŠ¤í…œ ê´€ë¦¬ë¥¼ ìœ„í•´ ê´€ë¦¬ìì— ì˜í•´ ê³„ì •ì´ ì‚­ì œë˜ëŠ” ê²ƒì…ë‹ˆë‹¤. ë§Œì•½ ì˜ë¬¸ ì‚¬í•­ì´ë‚˜ ì˜ì‹¬ë˜ëŠ” ì ì´ ìˆë‹¤ë©´ <a href="/support/?group_id=1">ì§€ì› ìš”ì²­</a>ì„ í•˜ì‹œë©´ ë©ë‹ˆë‹¤.</p><p>ê°ì‚¬í•©ë‹ˆë‹¤, <br><br>$1</p>
+account_login	iewarn	<H2><FONT COLOR="RED">ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ ì‚¬ìš©ìëŠ” 5.01 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì…”ì•¼ í•˜ë©° 128-bit SSLì˜ ì‚¬ìš©ì„ ê¶Œì¥í•©ë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì‹œëŠ” ê²ƒë„ ì¢‹ìŠµë‹ˆë‹¤.</FONT></H2>
+account_login	macwarn	<H2><FONT COLOR="RED">í˜„ì¬ ë§¤í‚¨í† ì‹œì—ì„œì˜ ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ëŠ” ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•´ ì£¼ì‹­ì‹œì˜¤.</FONT></H2>
+account_login	pending_account	<P>ì—¬ëŸ¬ë¶„ì˜ ê³„ì •ì€ í˜„ì¬ ì´ë©”ì¼ì„ í†µí•œ í™•ì¸ ì‘ì—…ì„ ê¸°ë‹¤ë¦¬ê³  ìˆëŠ” ì¤‘ì…ë‹ˆë‹¤.		ì´ë©”ì¼ì— í¬í•¨ë˜ì–´ ìˆëŠ” ë§í¬ë¥¼ ë°©ë¬¸í•˜ì‹œë©´ ê³„ì •ì´ ê³§ë°”ë¡œ í™œì„±í™”ë©ë‹ˆë‹¤.		<P>ë§Œì•½ ì´ ì´ë©”ì¼ì„ ë‹¤ì‹œ ë°›ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´ ì•„ë˜ì— ìˆëŠ” ë§í¬ë¥¼ í´ë¦­í•˜ì„¸ìš”. ì—¬ëŸ¬ë¶„ì´ ë“±ë¡ ê³¼ì • ì¤‘ì— ì…ë ¥í•˜ì‹  ì´ë©”ì¼ë¡œ í™•ì¸ ë©”ì¼ì´ ë‹¤ì‹œí•œë²ˆ ë°œì†¡ë©ë‹ˆë‹¤.		<P><A href="pending-resend.php?form_user=$1">[í™•ì¸ ë©”ì¼ ë‹¤ì‹œ ë³´ë‚´ê¸°]</A>		<br><hr>		<p>
+account_login	title	ì‚¬ì´íŠ¸ ë¡œê·¸ì¸
+account_login	cookiewarn	ì—¬ê¸°ì„œë¶€í„°ëŠ” ì¿ í‚¤ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
+account_login	loginname	ë¡œê·¸ì¸ë„¤ì„:
+account_login	passwd	ë¹„ë°€ë²ˆí˜¸:
+account_login	usessl	ë¡œê·¸ì¸í›„ SSL ê³„ì† ì‚¬ìš©
+account_login	sslnotice	<p><B><FONT COLOR="RED">ì•„ë˜ ë²„íŠ¼ì„ ëˆ„ë¥´ì‹œë©´ SSLê¸°ëŠ¥ì´ êµ¬í˜„ë˜ì–´ ìˆëŠ” ì›¹ì„œë²„ë¡œ ì§„ì…í•˜ì‹œê²Œ ë˜ë©°, ì…ë ¥í•˜ì‹  ë¹„ë°€ë²ˆí˜¸ëŠ” ë‹¤ë¥¸ ì‚¬ëŒì´ ë³¼ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.</FONT></B> <small style="font-size: x-small"> (ì´ í˜ì´ì§€ ìì²´ê°€ SSLë¡œ ë³´ì´ì§€ ì•ŠëŠ” ì´ìœ ê°€ ê¶ê¸ˆí•˜ì‹œë‹¤ë©´ ë‹¤ìŒ ì ˆì„ ì½ì–´ ë³´ì‹­ì‹œì˜¤. ê°ì‚¬í•©ë‹ˆë‹¤.) </small> <P> <B>ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬</B>ë¥¼ ì‚¬ìš©í•˜ê³  ê³„ì‹¤ ê²½ìš° ì¼ì‹œì ìœ¼ë¡œ SSLì— ê´€í•œ ë¬¸ì œê°€ ìˆì„ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ ì‚¬ìš©ìëŠ” ë³´ì•ˆì„ ìœ„í•´ SSLì„ ê³„ì† ì‚¬ìš©í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤. ì´ ë¬¸ì œì— ê´€í•´ì„œëŠ” <A HREF="http://www.microsoft.com/">Microsoftì˜ ì›¹ì‚¬ì´íŠ¸</A>ë¥¼ ì°¸ê³ í•˜ì‹­ì‹œì˜¤.<P>
+account_login	login	SSLì„ í†µí•´ ë¡œê·¸ì¸í•˜ê¸°
+account_login	lostpw	[ë¹„ë°€ë²ˆí˜¸ë¥¼ ìŠìœ¼ì…¨ë‚˜ìš”?]
+account_login	newaccount	[ìƒˆë¡œìš´ ê³„ì • ë§Œë“¤ê¸°(ê°€ì…í•˜ê¸°)]
+account_lostpw	message	$3 ì‚¬ì´íŠ¸ì˜ ëˆ„êµ°ê°€ê°€ (ì•„ë§ˆë„ ë³¸ì¸?) ì´ë©”ì¼ì„ ì´ìš©í•œ\në¹„ë°€ë²ˆí˜¸ ë³€ê²½ì„ ìš”ì²­í•˜ì˜€ìŠµë‹ˆë‹¤. ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ ì§ì ‘ í•˜ì‹  ê²ƒì´ ì•„ë‹ˆë¼ë©´\nì´ ë©”ì‹œì§€ëŠ” ê·¸ëƒ¥ ë¬´ì‹œí•˜ì‹­ì‹œì˜¤. ê·¸ëŸ¬ë©´ ì•„ë¬´ê²ƒë„ ë°”ë€Œì§€ ì•ŠìŠµë‹ˆë‹¤.\n\në§Œì•½ ë³¸ì¸ì´ ì§ì ‘ ìš”ì²­í•˜ì‹  ê²ƒì´ë¼ë©´ ë‹¤ìŒ URLì„ ë°©ë¬¸í•˜ì—¬ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì‹­ì‹œì˜¤.\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
+account_lostpw	subject	$1 í™•ì¸
+account_lostpw	title	ë¹„ë°€ë²ˆí˜¸ë¥¼ ìŠìœ¼ì…¨ìŠµë‹ˆê¹Œ?
+account_lostpw	notify	<P>ì…ë ¥í•˜ì‹  ì´ë©”ì¼ ì£¼ì†Œë¡œ ë©”ì¼ì„ ë³´ëƒˆìŠµë‹ˆë‹¤. ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì‹œë ¤ë©´ ì§€ê¸ˆ ë³´ë‚¸ ë©”ì¼ì˜ ë‚´ìš©ì„ ì°¸ê³ í•˜ì‹œê¸° ë°”ëë‹ˆë‹¤. <P><A href="/">[ í™ˆìœ¼ë¡œ ]</A>
+account_lostpw	warn	<P>ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¶„ì‹¤í•˜ëŠ” ê²ƒì€ ì‚¬ìš©í•˜ê³  ê³„ì‹  ê³„ì •ê³¼, ìš´ì˜ì¤‘ì¸ í”„ë¡œì íŠ¸, ê·¸ë¦¬ê³  ì´ ì‚¬ì´íŠ¸ ì „ì²´ì ìœ¼ë¡œ ì¢‹ì§€ì•Šì€ ì˜í–¥ì„ ë¯¸ì¹  ìˆ˜ ìˆìŠµë‹ˆë‹¤. <P>ì•„ë˜ "Send Lost PW Hash" ë¥¼ ëˆ„ë¥´ì‹œë©´ ì—¬ëŸ¬ë¶„ì—ê²Œ í• ë‹¹ë˜ì–´ ìˆëŠ” ì´ë©”ì¼ ì£¼ì†Œë¡œ URLì„ ì•Œë ¤ ë“œë¦¬ê² ìŠµë‹ˆë‹¤. ê·¸ URLì€ ì—¬ëŸ¬ë¶„ì˜ ê³„ì •ì— í• ë‹¹ë˜ì–´ ìˆëŠ” 128-bit í•´ì‰¬ ì •ë³´ì…ë‹ˆë‹¤. ê·¸ URLì„ ë°©ë¬¸í•˜ì‹œë©´ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë³€ê²½í•˜ì‹œê³  ì‚¬ì´íŠ¸ì— ë‹¤ì‹œ ë¡œê·¸ì¸í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+account_register	title	ì‚¬ìš©ì ë“±ë¡
+account_register	congrat	<p>ì¶•í•˜í•©ë‹ˆë‹¤. $1ì— ë“±ë¡í•˜ì…¨ìŠµë‹ˆë‹¤. <p> ê·€í•˜ëŠ” ì´ì œ ê³§ ë©”ì¼ ì£¼ì†Œë¥¼ í™•ì¸í•˜ê¸° ìœ„í•œ í™•ì¸ ë©”ì¼ì„ ë°›ìœ¼ì‹œê²Œ ë©ë‹ˆë‹¤. ë©”ì¼ì— í¬í•¨ë˜ì–´ ìˆëŠ” URLì„ í´ë¦­í•˜ì‹œë©´ ê³„ì •ì„ ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+account_register	iewarn	<H2><FONT COLOR="RED">ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ ì‚¬ìš©ìëŠ” 5.01 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì…”ì•¼ í•˜ë©° 128-bit SSLì˜ ì‚¬ìš©ì„ ê¶Œì¥í•©ë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•˜ì‹œëŠ” ê²ƒë„ ì¢‹ìŠµë‹ˆë‹¤.</FONT></H2>
+account_register	macwarn	<H2><FONT COLOR="RED">í˜„ì¬ ë§¤í‚¨í† ì‹œì—ì„œì˜ ì¸í„°ë„· ìµìŠ¤í”Œë¡œëŸ¬ëŠ” ì§€ì›ë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë„·ìŠ¤ì¼€ì´í”„ 4.7 ë˜ëŠ” ê·¸ ì´ìƒì˜ ë²„ì „ì„ ì‚¬ìš©í•´ ì£¼ì‹­ì‹œì˜¤.</FONT></H2>
+account_register	loginname	ë¡œê·¸ì¸ ë„¤ì„ (ëŒ€ë¬¸ìëŠ” ì“°ì§€ ë§ˆì‹­ì‹œì˜¤.) *:
+account_register	password	ë¹„ë°€ë²ˆí˜¸ (ìµœì†Œ 6 ê¸€ì) *:
+account_register	password2	ë¹„ë°€ë²ˆí˜¸ (ë‹¤ì‹œ) *:
+account_register	realname	ì´ë¦„ *:
+account_register	language	ì–¸ì–´ ì„ íƒ:
+account_register	timezone	ì‹œê°„ëŒ€:
+account_register	emailaddr	ì´ë©”ì¼ ì£¼ì†Œ *: <BR><I>ì´ ì´ë©”ì¼ ì£¼ì†ŒëŠ” ê³„ì •ì´ í™œì„±í™”ë˜ê¸° ì „ì— í™•ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤. ì…ë ¥í•˜ì‹  ì£¼ì†ŒëŠ” ì‚¬ì´íŠ¸ ìƒì—ì„œ ë…¸ì¶œë˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ì—¬ëŸ¬ë¶„ì€ &lt;loginname\@$1&gt;ë¼ëŠ” ê³„ì •ì„ ë°œê¸‰ë°›ê²Œ ë˜ë©° ì´ê³³ìœ¼ë¡œ ë³´ë‚´ì§„ ëª¨ë“  ë©”ì¼ì€ ì…ë ¥í•˜ì‹  ë©”ì¼ ì£¼ì†Œë¡œ ì¬ì „ì†¡ë©ë‹ˆë‹¤.</I>
+account_register	siteupdate	ì‚¬ì´íŠ¸ ì—…ë°ì´íŠ¸ì— ê´€í•œ ì†Œì‹ ë©”ì¼ë¡œ ë°›ê¸° <I>(íŠ¸ë˜í”½ì´ ê±°ì˜ ì—†ìœ¼ë©° ë³´ì•ˆ ê´€ë ¨ ê³µì§€ì‚¬í•­ì„ í¬í•¨í•˜ë¯€ë¡œ ë©”ì¼ì„ ë°›ì•„ ë³´ì‹œê¸°ë¥¼ ê¶Œì¥í•©ë‹ˆë‹¤.)</I>
+account_register	communitymail	ì»¤ë®¤ë‹ˆí‹° ê´€ë ¨ ë©”ì¼ ë°›ê¸°. <I>(íŠ¸ë˜í”½ ë³„ë¡œ ì—†ìŒ.)</I>
+account_register	mandatory	ë³„í‘œ(*)ê°€ ìˆëŠ” ë¶€ë¶„ì€ í•„ìˆ˜ í•­ëª©ì…ë‹ˆë‹¤.
+account_register	register	ë“±ë¡í•˜ê¸°
+account_unsubscribe	all_mailings	ëª¨ë“  GForge ë©”ì¼ ë° ê³µì§€ì‚¬í•­
+account_unsubscribe	site_mailings	GForge ë©”ì¼
+account_verify	title	GForge ì‚¬ìš©ì í™•ì¸
+account_verify	verify_blurb	<p>ì‚¬ìš©ì ë“±ë¡ ì ˆì°¨ë¥¼ ì™„ë£Œí•˜ì‹œë ¤ë©´ ì§€ê¸ˆ ë¡œê·¸ì¸í•˜ì‹­ì‹œì˜¤. ì¼ë°˜ ë¡œê·¸ì¸ ê¸°ëŠ¥ì€ ê³§ë°”ë¡œ í™œì„±í™”ë©ë‹ˆë‹¤.</p>
+conf	content_encoding	UTF-8
+conf	default_font	êµ´ë¦¼ì²´,verdana,arial,helvetica,sans-serif
 conf	language_code	ko
 conf	language_id	22
-contact	about_blurb	<p>ÀÌ°ÍÀº <b>GForge.net</b>ÀÇ ¿¬¶ô ÆäÀÌÁöÀÔ´Ï´Ù. -- ÀÌ°÷¿¡¼­ È£½ºÆÃµÇ°í ÀÖ´Â ÇÁ·ÎÁ§Æ®¿¡ ´ëÇØ ¹®Á¦°¡ ÀÖ´Ù¸é ÇØ´ç ÇÁ·ÎÁ§Æ®ÀÇ ¹ö±× Æ®·¡Å· ½Ã½ºÅÛÀÌ³ª ±â¼úÁö¿ø °ü¸®ÀÚ ±â´ÉÀ» È°¿ëÇÏ½Ê½Ã¿À. ÀÌ·¯ÇÑ ±â´ÉµéÀº ÇØ´ç ÇÁ·ÎÁ§Æ®ÀÇ È¨ÆäÀÌÁöÀÎ sourceforge.net/projects/&lt;ÇÁ·ÎÁ§Æ® ÀÌ¸§&gt; À» ¹æ¹®ÇÏ½Ã¸é ÀÌ¿ëÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù.</p><p>±â¼úÁö¿ø ¿äÃ»ÀÌ³ª ¹ö±× ¸®Æ÷Æ® È¤Àº GForgeÀÇ <A href="staff.php">staff</a>µé°ú Á÷Á¢ ¿¬¶ôÇÏ°í ½ÍÀ¸½Ã´Ù¸é, ÀûÀıÇÑ ¹æ¹ıÀ» ÀÌ¿ëÇÏ¿© ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.</p><ul><li>¿©·¯ºĞÀÇ ÇÁ·ÎÁ§Æ®³ª °èÁ¤¿¡ ´ëÇÑ Áö¿ø¿äÃ»Àº <a href="/support/?func=addsupport&group_id=1">GForge ±â¼úÁö¿ø °ü¸®ÀÚ</a>¸¦ ¹æ¹®ÇÏ½Ê½Ã¿À.</li><li>GForge¿¡ ¹ö±×¸¦ ¹ß°ßÇÏ¼Ì´Ù¸é, <a href="/bugs/?func=addbug&group_id=1">GForge ¹ö±× Æ®·¡Å·</a>À» ÀÌ¿ëÇÏ½Ê½Ã¿À.</li><li>º¸µµÀÚ·á ¿äÃ»Àº VA Linux SystemsÀÇ ÇØ´ç ´ã´çÀÚÀÎ <a href="mailto:eureka@valinux.com">Eureka Endo</a>¿¡°Ô ¿¬¶ôÇÏ½Ã¸é µË´Ï´Ù.</li></ul>
-contact	title	GForge¿Í ¿¬¶ôÇÏ±â
-cvs	section	ÇÁ·ÎÁ§Æ®: $1
+contact	about_blurb	<p>ì´ê²ƒì€ <b>GForge.net</b>ì˜ ì—°ë½ í˜ì´ì§€ì…ë‹ˆë‹¤. -- ì´ê³³ì—ì„œ í˜¸ìŠ¤íŒ…ë˜ê³  ìˆëŠ” í”„ë¡œì íŠ¸ì— ëŒ€í•´ ë¬¸ì œê°€ ìˆë‹¤ë©´ í•´ë‹¹ í”„ë¡œì íŠ¸ì˜ ë²„ê·¸ íŠ¸ë˜í‚¹ ì‹œìŠ¤í…œì´ë‚˜ ê¸°ìˆ ì§€ì› ê´€ë¦¬ì ê¸°ëŠ¥ì„ í™œìš©í•˜ì‹­ì‹œì˜¤. ì´ëŸ¬í•œ ê¸°ëŠ¥ë“¤ì€ í•´ë‹¹ í”„ë¡œì íŠ¸ì˜ í™ˆí˜ì´ì§€ì¸ sourceforge.net/projects/&lt;í”„ë¡œì íŠ¸ ì´ë¦„&gt; ì„ ë°©ë¬¸í•˜ì‹œë©´ ì´ìš©í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.</p><p>ê¸°ìˆ ì§€ì› ìš”ì²­ì´ë‚˜ ë²„ê·¸ ë¦¬í¬íŠ¸ í˜¹ì€ GForgeì˜ <A href="staff.php">staff</a>ë“¤ê³¼ ì§ì ‘ ì—°ë½í•˜ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´, ì ì ˆí•œ ë°©ë²•ì„ ì´ìš©í•˜ì—¬ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.</p><ul><li>ì—¬ëŸ¬ë¶„ì˜ í”„ë¡œì íŠ¸ë‚˜ ê³„ì •ì— ëŒ€í•œ ì§€ì›ìš”ì²­ì€ <a href="/support/?func=addsupport&group_id=1">GForge ê¸°ìˆ ì§€ì› ê´€ë¦¬ì</a>ë¥¼ ë°©ë¬¸í•˜ì‹­ì‹œì˜¤.</li><li>GForgeì— ë²„ê·¸ë¥¼ ë°œê²¬í•˜ì…¨ë‹¤ë©´, <a href="/bugs/?func=addbug&group_id=1">GForge ë²„ê·¸ íŠ¸ë˜í‚¹</a>ì„ ì´ìš©í•˜ì‹­ì‹œì˜¤.</li><li>ë³´ë„ìë£Œ ìš”ì²­ì€ VA Linux Systemsì˜ í•´ë‹¹ ë‹´ë‹¹ìì¸ <a href="mailto:eureka@valinux.com">Eureka Endo</a>ì—ê²Œ ì—°ë½í•˜ì‹œë©´ ë©ë‹ˆë‹¤.</li></ul>
+contact	title	GForgeì™€ ì—°ë½í•˜ê¸°
+cvs	section	í”„ë¡œì íŠ¸: $1
 cvs	title	CVS
-cvs	anoncvs	<P><B>ÀÍ¸í CVS »ç¿ë ¹æ¹ı</B> <P>´ÙÀ½ ¹æ¹ıÀ» »ç¿ëÇÏ½Ã¸é ÀÍ¸íÀ¸·Î ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ CVS ÀúÀå¼Ò·ÎºÎÅÍ ¼Ò½ºÄÚµå¸¦ Ã¼Å©¾Æ¿ôÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. Ã¼Å©¾Æ¿ôÇÏ°íÀÚ ÇÏ´Â ¸ğµâÀ» ¹İµå½Ã <I>modulename</I>ºÎºĞ¿¡ ½á ÁÖ¼Å¾ß ÇÕ´Ï´Ù. <I>anonymous</I>¿¡ ´ëÇÑ ºñ¹Ğ¹øÈ£¸¦ ¹°¾îº¸¸é ±×³É Enter¸¦ ´©¸£½Ã¸é µË´Ï´Ù.
-cvs	anoncvsup	ÇØ´ç ¸ğµâ µğ·ºÅä¸® ¾È¿¡¼­ ¾÷µ¥ÀÌÆ®¸¦ ÇÒ ¶§´Â -d ¿É¼ÇÀÌ ÇÊ¿ä ¾ø½À´Ï´Ù.
-cvs	devcvs	<P><B>SSH¸¦ ÅëÇÑ °³¹ßÀÚÀÇ CVS »ç¿ë ¹æ¹ı</B> <P>ÇÁ·ÎÁ§Æ®ÀÇ °³¹ßÀÚ·Î ÁöÁ¤µÈ »ç¶÷¸¸ÀÌ ÀÌ ¹æ¹ıÀ» »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù. SSH1ÀÌ Å¬¶óÀÌ¾ğÆ® Ãø¿¡ ¹İµå½Ã ¼³Ä¡µÇ¾î ÀÖ¾î¾ß ÇÕ´Ï´Ù. <I>modulename</I>°ú <I>developername</I> ºÎºĞÀ» »óÈ²¿¡ ¸Â°Ô ¹Ù²Ù¾î ÁÖ½Ê½Ã¿À. ºñ¹Ğ¹øÈ£´Â »çÀÌÆ® ÀÌ¿ë½Ã ÁöÁ¤ÇÑ ºñ¹Ğ¹øÈ£¿Í µ¿ÀÏÇÕ´Ï´Ù.
-cvs	history	ÀúÀå¼Ò È÷½ºÅä¸®
-cvs	browsetree	<HR><B>CVS Æ®¸® »ìÆìº¸±â</B> <P>CVS Æ®¸®¸¦ »ìÆìº¸½Ã¸é ÀÌ ÇÁ·ÎÁ§Æ®ÀÇ ¼Ò½ºÄÚµå°¡ ¾î¶»°Ô ¿î¿µµÇ°í ÀÖ´ÂÁö Àß ¾Ë ¼ö ÀÖ½À´Ï´Ù. ¶ÇÇÑ ÀúÀå¼Ò ³»ÀÇ ¸ğµç ÆÄÀÏ¿¡ ´ëÇÑ ¿ÏÀüÇÑ È÷½ºÅä¸®µµ »ìÆìº¸½Ç ¼ö ÀÖ½À´Ï´Ù.
-cvs	browseit	CVS ÀúÀå¼Ò(Repository)
-docman	section	ÇÁ·ÎÁ§Æ®: $1
-docman	title	¹®¼­ °ü¸®ÀÚ
+cvs	anoncvs	<P><B>ìµëª… CVS ì‚¬ìš© ë°©ë²•</B> <P>ë‹¤ìŒ ë°©ë²•ì„ ì‚¬ìš©í•˜ì‹œë©´ ìµëª…ìœ¼ë¡œ ì´ í”„ë¡œì íŠ¸ì˜ CVS ì €ì¥ì†Œë¡œë¶€í„° ì†ŒìŠ¤ì½”ë“œë¥¼ ì²´í¬ì•„ì›ƒí•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ì²´í¬ì•„ì›ƒí•˜ê³ ì í•˜ëŠ” ëª¨ë“ˆì„ ë°˜ë“œì‹œ <I>modulename</I>ë¶€ë¶„ì— ì¨ ì£¼ì…”ì•¼ í•©ë‹ˆë‹¤. <I>anonymous</I>ì— ëŒ€í•œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¬¼ì–´ë³´ë©´ ê·¸ëƒ¥ Enterë¥¼ ëˆ„ë¥´ì‹œë©´ ë©ë‹ˆë‹¤.
+cvs	anoncvsup	í•´ë‹¹ ëª¨ë“ˆ ë””ë ‰í† ë¦¬ ì•ˆì—ì„œ ì—…ë°ì´íŠ¸ë¥¼ í•  ë•ŒëŠ” -d ì˜µì…˜ì´ í•„ìš” ì—†ìŠµë‹ˆë‹¤.
+cvs	devcvs	<P><B>SSHë¥¼ í†µí•œ ê°œë°œìì˜ CVS ì‚¬ìš© ë°©ë²•</B> <P>í”„ë¡œì íŠ¸ì˜ ê°œë°œìë¡œ ì§€ì •ëœ ì‚¬ëŒë§Œì´ ì´ ë°©ë²•ì„ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. SSH1ì´ í´ë¼ì´ì–¸íŠ¸ ì¸¡ì— ë°˜ë“œì‹œ ì„¤ì¹˜ë˜ì–´ ìˆì–´ì•¼ í•©ë‹ˆë‹¤. <I>modulename</I>ê³¼ <I>developername</I> ë¶€ë¶„ì„ ìƒí™©ì— ë§ê²Œ ë°”ê¾¸ì–´ ì£¼ì‹­ì‹œì˜¤. ë¹„ë°€ë²ˆí˜¸ëŠ” ì‚¬ì´íŠ¸ ì´ìš©ì‹œ ì§€ì •í•œ ë¹„ë°€ë²ˆí˜¸ì™€ ë™ì¼í•©ë‹ˆë‹¤.
+cvs	history	ì €ì¥ì†Œ íˆìŠ¤í† ë¦¬
+cvs	browsetree	<HR><B>CVS íŠ¸ë¦¬ ì‚´í´ë³´ê¸°</B> <P>CVS íŠ¸ë¦¬ë¥¼ ì‚´í´ë³´ì‹œë©´ ì´ í”„ë¡œì íŠ¸ì˜ ì†ŒìŠ¤ì½”ë“œê°€ ì–´ë–»ê²Œ ìš´ì˜ë˜ê³  ìˆëŠ”ì§€ ì˜ ì•Œ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë˜í•œ ì €ì¥ì†Œ ë‚´ì˜ ëª¨ë“  íŒŒì¼ì— ëŒ€í•œ ì™„ì „í•œ íˆìŠ¤í† ë¦¬ë„ ì‚´í´ë³´ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.
+cvs	browseit	CVS ì €ì¥ì†Œ(Repository)
+docman	section	í”„ë¡œì íŠ¸: $1
+docman	title	ë¬¸ì„œ ê´€ë¦¬ì
 docman_admin	section	$1
-docman_admin	title	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
-docman_admin_docedit	section	¹®¼­ °ü¸®ÀÚ
-docman_admin_docedit	title	¹®¼­ ÆíÁı
-docman_admin_editdocs	section	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
-docman_admin_editdocs	title	¹®¼­ ÆíÁı
-docman_admin_editgroups	section	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
-docman_admin_editgroups	title	±×·ì ÆíÁı
-docman_admin_groupdelete	section	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
-docman_admin_groupdelete	title	¹®¼­ ±×·ì Áö¿ì±â
-docman_admin_groupedit	section	¹®¼­ °ü¸®ÀÚ °ü¸®ÇÏ±â
-docman_admin_groupedit	title	¹®¼­ ±×·ì ÀÌ¸§ ¹Ù²Ù±â
-docman_display_doc	section	ÇÁ·ÎÁ§Æ®: $1 
-docman_display_doc	title	¹®¼­ °ü¸®ÀÚ: ¹®¼­ º¸¿©ÁÖ±â
-docman_new	section	ÇÁ·ÎÁ§Æ®: $1 
-docman_new	title	¹®¼­ °ü¸®ÀÚ: »õ·Î¿î ¹®¼­ Á¦ÃâÇÏ±â
-forum	section	ÇÁ·ÎÁ§Æ®: $1
-forum	title	°Ô½ÃÆÇ
-forum	choose	<p>¿øÇÏ½Ã´Â °Ô½ÃÆÇÀ» ¼±ÅÃÇÏ½Ê½Ã¿À. ±ÛÀ» ÀĞ°Å³ª, »õ·Î¿î ±ÛÀ» ¿Ã¸®°Å³ª, È¤Àº ´ä±ÛÀ» ¿Ã¸®½Ç ¼öµµ ÀÖ½À´Ï´Ù.<p>
-forum	html	HTML ÅÂ±×´Â »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.
-forum_admin	section	ÇÁ·ÎÁ§Æ®: $1 
-forum_admin	title	°Ô½ÃÆÇ: °ü¸®
-forum_admin_addforum	section	°Ô½ÃÆÇ °ü¸®
-forum_admin_addforum	title	°Ô½ÃÆÇ Ãß°¡
-forum_admin_changestatus	section	°Ô½ÃÆÇ °ü¸®
-forum_admin_changestatus	title	°Ô½ÃÆÇ »óÅÂ º¯°æ
-forum_admin_delete	section	°Ô½ÃÆÇ °ü¸®
-forum_admin_delete	title	°Ô½ÃÆÇ Áö¿ì±â
-forum_forum	section	ÇÁ·ÎÁ§Æ®: $1 
-forum_forum	title	°Ô½ÃÆÇ: °Ô½ÃÆÇ º¸±â
-forum_forum_thread	section	°Ô½ÃÆÇ
-forum_forum_thread	title	½º·¹µå º¸±â
-forum_message	section	°Ô½ÃÆÇ
-forum_message	title	¸Ş½ÃÁö º¸±â
-forum_message	msg	´ä±Û ¿Ã¸®±â
-forum_message	thread	»õ±Û ¿Ã¸®±â
-frs	file_download	´Ù¿î·Îµå
-frs	file_monitor	¸ğ´ÏÅÍ
-frs	file_notes	³ëÆ®
-frs	file_package	ÆĞÅ°Áö
-frs	file_rel_date	³¯Â¥
-frs	file_version	¹öÀü
-frs	latest_file_releases	ÃÖ±Ù ÆÄÀÏ ¸±¸®Áî
-general	return	[$1·Î µÇµ¹¾Æ°¡±â]
+docman_admin	title	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
+docman_admin_docedit	section	ë¬¸ì„œ ê´€ë¦¬ì
+docman_admin_docedit	title	ë¬¸ì„œ í¸ì§‘
+docman_admin_editdocs	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
+docman_admin_editdocs	title	ë¬¸ì„œ í¸ì§‘
+docman_admin_editgroups	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
+docman_admin_editgroups	title	ê·¸ë£¹ í¸ì§‘
+docman_admin_groupdelete	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
+docman_admin_groupdelete	title	ë¬¸ì„œ ê·¸ë£¹ ì§€ìš°ê¸°
+docman_admin_groupedit	section	ë¬¸ì„œ ê´€ë¦¬ì ê´€ë¦¬í•˜ê¸°
+docman_admin_groupedit	title	ë¬¸ì„œ ê·¸ë£¹ ì´ë¦„ ë°”ê¾¸ê¸°
+docman_display_doc	section	í”„ë¡œì íŠ¸: $1 
+docman_display_doc	title	ë¬¸ì„œ ê´€ë¦¬ì: ë¬¸ì„œ ë³´ì—¬ì£¼ê¸°
+docman_new	section	í”„ë¡œì íŠ¸: $1 
+docman_new	title	ë¬¸ì„œ ê´€ë¦¬ì: ìƒˆë¡œìš´ ë¬¸ì„œ ì œì¶œí•˜ê¸°
+forum	section	í”„ë¡œì íŠ¸: $1
+forum	title	ê²Œì‹œíŒ
+forum	choose	<p>ì›í•˜ì‹œëŠ” ê²Œì‹œíŒì„ ì„ íƒí•˜ì‹­ì‹œì˜¤. ê¸€ì„ ì½ê±°ë‚˜, ìƒˆë¡œìš´ ê¸€ì„ ì˜¬ë¦¬ê±°ë‚˜, í˜¹ì€ ë‹µê¸€ì„ ì˜¬ë¦¬ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<p>
+forum	html	HTML íƒœê·¸ëŠ” ì‚¬ìš©í•˜ì‹¤ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.
+forum_admin	section	í”„ë¡œì íŠ¸: $1 
+forum_admin	title	ê²Œì‹œíŒ: ê´€ë¦¬
+forum_admin_addforum	section	ê²Œì‹œíŒ ê´€ë¦¬
+forum_admin_addforum	title	ê²Œì‹œíŒ ì¶”ê°€
+forum_admin_changestatus	section	ê²Œì‹œíŒ ê´€ë¦¬
+forum_admin_changestatus	title	ê²Œì‹œíŒ ìƒíƒœ ë³€ê²½
+forum_admin_delete	section	ê²Œì‹œíŒ ê´€ë¦¬
+forum_admin_delete	title	ê²Œì‹œíŒ ì§€ìš°ê¸°
+forum_forum	section	í”„ë¡œì íŠ¸: $1 
+forum_forum	title	ê²Œì‹œíŒ: ê²Œì‹œíŒ ë³´ê¸°
+forum_forum_thread	section	ê²Œì‹œíŒ
+forum_forum_thread	title	ìŠ¤ë ˆë“œ ë³´ê¸°
+forum_message	section	ê²Œì‹œíŒ
+forum_message	title	ë©”ì‹œì§€ ë³´ê¸°
+forum_message	msg	ë‹µê¸€ ì˜¬ë¦¬ê¸°
+forum_message	thread	ìƒˆê¸€ ì˜¬ë¦¬ê¸°
+frs	file_download	ë‹¤ìš´ë¡œë“œ
+frs	file_monitor	ëª¨ë‹ˆí„°
+frs	file_notes	ë…¸íŠ¸
+frs	file_package	íŒ¨í‚¤ì§€
+frs	file_rel_date	ë‚ ì§œ
+frs	file_version	ë²„ì „
+frs	latest_file_releases	ìµœê·¼ íŒŒì¼ ë¦´ë¦¬ì¦ˆ
+general	return	[$1ë¡œ ë˜ëŒì•„ê°€ê¸°]
 general	sitename	GForge
-general	footer	ÀÌ°ÍÀº Debian¿¡¼­ ÀÛµ¿ÇÏ´Â GForgeÀÔ´Ï´Ù. ÀúÀÛ±Ç µîÀÇ ÀÚ¼¼ÇÑ »çÇ×Àº <a href="/about.php">ÀÌ°÷</a>À» Âü°íÇÏ½Ê½Ã¿À.
-group	developer_info	°³¹ßÀÚ Á¤º¸
-group	developers	°³¹ßÀÚ
-group	long_bugs	¹ö±× Æ®·¡Å·
-group	long_cvs	CVS ÀúÀå¼Ò
-group	long_docman	¹®¼­ °ü¸®ÀÚ: ÇÁ·ÎÁ§Æ® ¹®¼­È­
-group	long_forum	°ø°³ °Ô½ÃÆÇ
-group	long_ftp	ÀÍ¸í FTP °ø°£
-group	long_homepage	ÇÁ·ÎÁ§Æ® È¨ÆäÀÌÁö
-group	long_mail	¸ŞÀÏ¸µ ¸®½ºÆ®
-group	long_news	ÃÖ½Å ¼Ò½Ä
-group	long_patch	ÆĞÄ¡ °ü¸®ÀÚ
-group	long_pm	ÀÓ¹« °ü¸®ÀÚ
-group	long_support	±â¼úÁö¿ø °ü¸®ÀÚ
-group	long_survey	¼³¹®Á¶»ç
-group	project_admins	ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ
-group	public_area	°ø°³ ±¸¿ª
-group	short_admin	ÇÁ·ÎÁ§Æ® °ü¸®
-group	short_bugs	¹ö±×
+general	footer	ì´ê²ƒì€ Debianì—ì„œ ì‘ë™í•˜ëŠ” GForgeì…ë‹ˆë‹¤. ì €ì‘ê¶Œ ë“±ì˜ ìì„¸í•œ ì‚¬í•­ì€ <a href="/about.php">ì´ê³³</a>ì„ ì°¸ê³ í•˜ì‹­ì‹œì˜¤.
+group	developer_info	ê°œë°œì ì •ë³´
+group	developers	ê°œë°œì
+group	long_bugs	ë²„ê·¸ íŠ¸ë˜í‚¹
+group	long_cvs	CVS ì €ì¥ì†Œ
+group	long_docman	ë¬¸ì„œ ê´€ë¦¬ì: í”„ë¡œì íŠ¸ ë¬¸ì„œí™”
+group	long_forum	ê³µê°œ ê²Œì‹œíŒ
+group	long_ftp	ìµëª… FTP ê³µê°„
+group	long_homepage	í”„ë¡œì íŠ¸ í™ˆí˜ì´ì§€
+group	long_mail	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
+group	long_news	ìµœì‹  ì†Œì‹
+group	long_patch	íŒ¨ì¹˜ ê´€ë¦¬ì
+group	long_pm	ì„ë¬´ ê´€ë¦¬ì
+group	long_support	ê¸°ìˆ ì§€ì› ê´€ë¦¬ì
+group	long_survey	ì„¤ë¬¸ì¡°ì‚¬
+group	project_admins	í”„ë¡œì íŠ¸ ê´€ë¦¬ì
+group	public_area	ê³µê°œ êµ¬ì—­
+group	short_admin	í”„ë¡œì íŠ¸ ê´€ë¦¬
+group	short_bugs	ë²„ê·¸
 group	short_cvs	CVS
-group	short_docman	¹®¼­
-group	short_files	´Ù¿î·Îµå
-group	short_forum	°Ô½ÃÆÇ
-group	short_homepage	È¨ÆäÀÌÁö
-group	short_mail	¸ŞÀÏ¸µ ¸®½ºÆ®
-group	short_main 	¸ŞÀÎ
-group	short_memberlist	°³¹ßÀÚ
-group	short_news	»õ¼Ò½Ä
-group	short_patch	ÆĞÄ¡
-group	short_pm	ÇÏÀ§ ÇÁ·ÎÁ§Æ®
-group	short_summary	¿ä¾à
-group	short_support	Áö¿ø
-group	short_survey	¼³¹®Á¶»ç
-group	short_tracker	¹®Á¦Á¡ ÃßÀû
-group	registered	µî·ÏµÈ ³¯Â¥: 
-group	activity	ÇÁ·ÎÁ§Æ® È°µ¿ »óÈ²: 
-group	activitystat	È°µ¿»óÈ² <a href="/project/stats/?group_id=$1">Åë°è</a> º¸±â
-group	norelease	ÀÌ ÇÁ·ÎÁ§Æ®´Â ¾ÆÁ÷ ¸±¸®ÁîÇÑ ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.
-home	about_blurb	$1´Â <B><A href="http://www.opensource.org">Open Source</A> °³¹ßÀÚ¿¡°Ô Á¦°øµÇ´Â ¹«·á ¼­ºñ½º</B>·Î¼­, CVS, ¸ŞÀÏ¸µ ¸®½ºÆ®, ¹ö±× Æ®·¡Å·, °ø°³ °Ô½ÃÆÇ, ÀÓ¹« °ü¸®, À¥»çÀÌÆ® È£½ºÆÃ, ¿µ±¸ÀûÀÎ ÆÄÀÏ ¾ÆÄ«ÀÌºê, ¹é¾÷ ¼­ºñ½º¸¦ Æ÷ÇÔÇÑ ¿ÏÀüÇÑ À¥±â¹İ °ü¸® ÀÎÅÍÆäÀÌ½º¸¦ Á¦°øÇÕ´Ï´Ù. <BR>&nbsp;<P><B>»çÀÌÆ®¿¡ ´ëÇÑ ÇÇµå¹é ¹× Âü¿© ¹æ¹ı</B><P>$1¸¦ ÃÖ´ëÇÑÀ¸·Î È°¿ëÇÏ±â À§ÇØ¼­´Â <A href="/account/register.php">»ç¿ëÀÚ µî·Ï</A>À» ÇÏ½Ã´Â°Ô ÁÁ½À´Ï´Ù. »ç¿ëÀÚ µî·ÏÀ» ÇÏ½Ã¸é ÀÌ°÷¿¡¼­ Á¦°øµÇ´Â ¸ğµç °ø°£¿¡ Âü¿©ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. ¹°·Ğ µî·ÏÇÏÁö ¾ÊÀ¸¼Åµµ »çÀÌÆ®¸¦ µÑ·¯º¸½Ç ¼ö´Â ÀÖÁö¸¸ ¸ğµç ºÎºĞ¿¡ ´ëÇÑ Á¢±Ù ±ÇÇÑÀ» °®Áö´Â ¸øÇÒ °ÍÀÔ´Ï´Ù.<P>&nbsp;<BR><B>¿©·¯ºĞ¸¸ÀÇ ÇÁ·ÎÁ§Æ®¸¦ ±¸¼ºÇÏ½Ê½Ã¿À.</B><P><A href="/account/register.php">»ç¿ëÀÚ µî·Ï</A>À» ÇÏ½Ã°í, <A HREF="/account/login.php">·Î±×ÀÎ</A>ÇÏ½Å ÈÄ, <A HREF="/register/">ÇÁ·ÎÁ§Æ® µî·Ï</A>À» ÇÏ½Ã¸é µË´Ï´Ù. °¨»çÇÕ´Ï´Ù. Áñ°Å¿î ½Ã°£ µÇ½Ê½Ã¿À.
-home	breaking_down_barriers	Open Source °³¹ßÀÇ Àåº®À» ³Ñ¾î
-home	highest_ranked_users	È°¹ßÇÑ »ç¿ëÀÚ
-home	most_active_this_week	±İÁÖ °¡Àå È°¹ßÇÑ °÷
+group	short_docman	ë¬¸ì„œ
+group	short_files	ë‹¤ìš´ë¡œë“œ
+group	short_forum	ê²Œì‹œíŒ
+group	short_homepage	í™ˆí˜ì´ì§€
+group	short_mail	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
+group	short_main 	ë©”ì¸
+group	short_memberlist	ê°œë°œì
+group	short_news	ìƒˆì†Œì‹
+group	short_patch	íŒ¨ì¹˜
+group	short_pm	í•˜ìœ„ í”„ë¡œì íŠ¸
+group	short_summary	ìš”ì•½
+group	short_support	ì§€ì›
+group	short_survey	ì„¤ë¬¸ì¡°ì‚¬
+group	short_tracker	ë¬¸ì œì  ì¶”ì 
+group	registered	ë“±ë¡ëœ ë‚ ì§œ: 
+group	activity	í”„ë¡œì íŠ¸ í™œë™ ìƒí™©: 
+group	activitystat	í™œë™ìƒí™© <a href="/project/stats/?group_id=$1">í†µê³„</a> ë³´ê¸°
+group	norelease	ì´ í”„ë¡œì íŠ¸ëŠ” ì•„ì§ ë¦´ë¦¬ì¦ˆí•œ íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.
+home	about_blurb	$1ëŠ” <B><A href="http://www.opensource.org">Open Source</A> ê°œë°œìì—ê²Œ ì œê³µë˜ëŠ” ë¬´ë£Œ ì„œë¹„ìŠ¤</B>ë¡œì„œ, CVS, ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸, ë²„ê·¸ íŠ¸ë˜í‚¹, ê³µê°œ ê²Œì‹œíŒ, ì„ë¬´ ê´€ë¦¬, ì›¹ì‚¬ì´íŠ¸ í˜¸ìŠ¤íŒ…, ì˜êµ¬ì ì¸ íŒŒì¼ ì•„ì¹´ì´ë¸Œ, ë°±ì—… ì„œë¹„ìŠ¤ë¥¼ í¬í•¨í•œ ì™„ì „í•œ ì›¹ê¸°ë°˜ ê´€ë¦¬ ì¸í„°í˜ì´ìŠ¤ë¥¼ ì œê³µí•©ë‹ˆë‹¤. <BR>&nbsp;<P><B>ì‚¬ì´íŠ¸ì— ëŒ€í•œ í”¼ë“œë°± ë° ì°¸ì—¬ ë°©ë²•</B><P>$1ë¥¼ ìµœëŒ€í•œìœ¼ë¡œ í™œìš©í•˜ê¸° ìœ„í•´ì„œëŠ” <A href="/account/register.php">ì‚¬ìš©ì ë“±ë¡</A>ì„ í•˜ì‹œëŠ”ê²Œ ì¢‹ìŠµë‹ˆë‹¤. ì‚¬ìš©ì ë“±ë¡ì„ í•˜ì‹œë©´ ì´ê³³ì—ì„œ ì œê³µë˜ëŠ” ëª¨ë“  ê³µê°„ì— ì°¸ì—¬í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë¬¼ë¡  ë“±ë¡í•˜ì§€ ì•Šìœ¼ì…”ë„ ì‚¬ì´íŠ¸ë¥¼ ë‘˜ëŸ¬ë³´ì‹¤ ìˆ˜ëŠ” ìˆì§€ë§Œ ëª¨ë“  ë¶€ë¶„ì— ëŒ€í•œ ì ‘ê·¼ ê¶Œí•œì„ ê°–ì§€ëŠ” ëª»í•  ê²ƒì…ë‹ˆë‹¤.<P>&nbsp;<BR><B>ì—¬ëŸ¬ë¶„ë§Œì˜ í”„ë¡œì íŠ¸ë¥¼ êµ¬ì„±í•˜ì‹­ì‹œì˜¤.</B><P><A href="/account/register.php">ì‚¬ìš©ì ë“±ë¡</A>ì„ í•˜ì‹œê³ , <A HREF="/account/login.php">ë¡œê·¸ì¸</A>í•˜ì‹  í›„, <A HREF="/register/">í”„ë¡œì íŠ¸ ë“±ë¡</A>ì„ í•˜ì‹œë©´ ë©ë‹ˆë‹¤. ê°ì‚¬í•©ë‹ˆë‹¤. ì¦ê±°ìš´ ì‹œê°„ ë˜ì‹­ì‹œì˜¤.
+home	breaking_down_barriers	Open Source ê°œë°œì˜ ì¥ë²½ì„ ë„˜ì–´
+home	highest_ranked_users	í™œë°œí•œ ì‚¬ìš©ì
+home	most_active_this_week	ê¸ˆì£¼ ê°€ì¥ í™œë°œí•œ ê³³
 home	sfos	GForge OnSite
-home	sourceforge_statistics	$1 Åë°è
-home	top_project_downloads	ÃÖ´Ù ´Ù¿î·Îµå
-mail	provided_by	<P>¸ŞÀÏ¸µ ¸®½ºÆ®´Â GForge¿¡ ¾Ë¸Â°Ô ±¸ÇöµÈ <A href="http://www.list.org">GNU Mailman</A>À» ÅëÇØ ¿î¿µµË´Ï´Ù.  ¸ÚÁø ¼ÒÇÁÆ®¿ş¾î¸¦ ¸¸µé¾î³½  Mailman°ú <A href="http://www.python.org">Python</A> °³¹ßÀÚ ¿©·¯ºĞµé²² °¨»çµå¸³´Ï´Ù.
-mail	section	ÇÁ·ÎÁ§Æ®: $1
-mail	title	¸ŞÀÏ¸µ ¸®½ºÆ®
-mail_admin	section	¸ŞÀÏ¸µ ¸®½ºÆ®
-mail_admin	title	¸ŞÀÏ¸µ ¸®½ºÆ® °ü¸®
-mail_admin_add_list	section	¸ŞÀÏ¸µ ¸®½ºÆ® °ü¸®
-mail_admin_add_list	title	¸®½ºÆ® Ãß°¡
-mail_admin_change_status	section	¸ŞÀÏ¸µ ¸®½ºÆ® °ü¸®
-mail_admin_change_status	title	¸®½ºÆ® °ü¸® ¹× °»½Å
-menu	about_sourceforge	GForge ¼Ò°³
-menu	account_maintenance	»ç¿ëÀÚ µî·Ï Á¤º¸
-menu	bookmark_page	Ã¥°¥ÇÇ
-menu	change_my_theme	Å×¸¶ º¯°æ
-menu	code_snippet_library	ÄÚµå ¶óÀÌºê·¯¸®
+home	sourceforge_statistics	$1 í†µê³„
+home	top_project_downloads	ìµœë‹¤ ë‹¤ìš´ë¡œë“œ
+mail	provided_by	<P>ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ëŠ” GForgeì— ì•Œë§ê²Œ êµ¬í˜„ëœ <A href="http://www.list.org">GNU Mailman</A>ì„ í†µí•´ ìš´ì˜ë©ë‹ˆë‹¤.  ë©‹ì§„ ì†Œí”„íŠ¸ì›¨ì–´ë¥¼ ë§Œë“¤ì–´ë‚¸  Mailmanê³¼ <A href="http://www.python.org">Python</A> ê°œë°œì ì—¬ëŸ¬ë¶„ë“¤ê»˜ ê°ì‚¬ë“œë¦½ë‹ˆë‹¤.
+mail	section	í”„ë¡œì íŠ¸: $1
+mail	title	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
+mail_admin	section	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸
+mail_admin	title	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬
+mail_admin_add_list	section	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬
+mail_admin_add_list	title	ë¦¬ìŠ¤íŠ¸ ì¶”ê°€
+mail_admin_change_status	section	ë©”ì¼ë§ ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬
+mail_admin_change_status	title	ë¦¬ìŠ¤íŠ¸ ê´€ë¦¬ ë° ê°±ì‹ 
+menu	about_sourceforge	GForge ì†Œê°œ
+menu	account_maintenance	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
+menu	bookmark_page	ì±…ê°ˆí”¼
+menu	change_my_theme	í…Œë§ˆ ë³€ê²½
+menu	code_snippet_library	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
 menu	compile_farm	Compile Farm
-menu	contact_us	$1¿¡ ¿¬¶ôÇÏ±â
-menu	discussion_forums	°Ô½ÃÆÇ
-menu	documentation	Âü°í ¹®¼­
-menu	login	·Î±×ÀÎ
-menu	logout	·Î±×¾Æ¿ô
-menu	my_personal_page	°³ÀÎ ÆäÀÌÁö
-menu	new_project	»õ ÇÁ·ÎÁ§Æ® µî·Ï
-menu	new_releases	»õ·Î¿î ¸±¸®Áî
-menu	new_user	»ç¿ëÀÚ µî·Ï
-menu	other_site_mirrors	±âÅ¸ »çÀÌÆ® ¹Ì·¯
-menu	project_admin	ÇÁ·ÎÁ§Æ® °ü¸®
-menu	project_help_wanted	¸â¹ö ±¸ÇÔ
-menu	project_summary	ÇÁ·ÎÁ§Æ® ¿ä¾à
-menu	search	Ã£±â
-menu	site_status	»çÀÌÆ® »óÅÂ
-menu	software_map	¼ÒÇÁÆ®¿ş¾î ¸Ê
-menu	top_projects	»óÀ§ ÇÁ·ÎÁ§Æ®
-my	about_blurb	¿©·¯ºĞÀÇ °³ÀÎ ÆäÀÌÁö´Â ¿©·¯ºĞ¿¡°Ô ÇÒ´çµÈ ¹ö±×³ª ÀÓ¹«µé°ú ¿©·¯ºĞÀÌ Âü¿©ÇÏ°í °è½Å ±×·ì¿¡ °üÇÑ Á¤º¸¸¦ º¸¿©Áİ´Ï´Ù.
-my	no_bookmarks	ÇöÀç ÀúÀåµÈ Ã¥°¥ÇÇ°¡ ¾ø½À´Ï´Ù.
-my	no_monitored_filemodules	<H3>¸ğ´ÏÅÍÇÏ°í ÀÖ´Â ÆÄÀÏÀÌ ¾ø½À´Ï´Ù.</H3><P>¸¸¾à ¿©·¯ºĞÀÌ ÆÄÀÏÀ» ¸ğ´ÏÅÍÇÏ½Ã°Ô µÇ¸é »õ·Î¿î ÆÄÀÏÀÌ ¸±¸®ÁîµÉ ¶§ ÀÌ°÷ÀÇ ´Ù¿î·Îµå ¼­¹ö·Î ÆÄÀÏÀ» ¹ŞÀ» ¼ö ÀÖ´Â ¸µÅ©°¡ Æ÷ÇÔµÈ ÀÌ¸ŞÀÏÀ» ¹Ş¾Æº¸½Ç ¼ö ÀÖ½À´Ï´Ù.<P>ÆÄÀÏÀ» ¸ğ´ÏÅÍÇÏ½Ã·Á¸é ÇÁ·ÎÁ§Æ®ÀÇ &quot;¿ä¾à ÆäÀÌÁö&quot;¿¡ °¡¼­ ÆÄÀÏ ¼½¼ÇÀÇ Ã¼Å©¹Ú½º¸¦ Å¬¸¯ÇÏ½Ã¸é µË´Ï´Ù.<BR>&nbsp;
-my	no_monitored_forums	<H3>¸ğ´ÏÅÍÇÏ°í ÀÖ´Â °Ô½ÃÆÇÀÌ ¾ø½À´Ï´Ù.</H3><P>¸¸¾à ¿©·¯ºĞÀÌ °Ô½ÃÆÇÀ» ¸ğ´ÏÅÍÇÏ½Ã°Ô µÇ¸é »õ·Î¿î ±ÛÀÌ ¿Ã¶ó¿Ã ¶§ ±× ±ÛÀ» ÀĞÀ» ¼ö ÀÖ´Â ¸µÅ©°¡ Æ÷ÇÔµÈ ÀÌ¸ŞÀÏÀ» ¹Ş¾Æº¸½Ç ¼ö ÀÖ½À´Ï´Ù.<P>°Ô½ÃÆÇÀ» ¸ğ´ÏÅÍÇÏ½Ã·Á¸é ¾Æ¹« °Ô½ÃÆÇ¿¡¼­³ª &quot;°Ô½ÃÆÇ ¸ğ´ÏÅÍ&quot;¸¦ Å¬¸¯ÇÏ½Ã¸é µË´Ï´Ù.<BR>&nbsp;
-my	no_open_tasks	ÇÒ´çµÈ ÀÓ¹«°¡ ¾ø½À´Ï´Ù.
-my	no_projects	¾ÆÁ÷ ¾î¶² ÇÁ·ÎÁ§Æ®¿¡µµ ¼Ò¼ÓµÇ¾î ÀÖÁö ¾Ê½À´Ï´Ù.
-my	no_tracker_items_assigned	ÇÒ´çµÈ ¹®Á¦Á¡ ÃßÀû ¾ÆÀÌÅÛÀÌ ¾ø½À´Ï´Ù.
-my	no_tracker_items_submitted	Á¦ÃâÇÏ½Å ¹®Á¦Á¡ ÃßÀû ¾ÆÀÌÅÛÀÌ ¾ø½À´Ï´Ù.
-my	title	°³ÀÎ ÆäÀÌÁö: $1
-my_bookmark_add	section	°³ÀÎ ÆäÀÌÁö
-my_bookmark_add	title	Ã¥°¥ÇÇ Ãß°¡
-my_bookmark_delete	section	°³ÀÎ ÆäÀÌÁö
-my_bookmark_delete	title	Ã¥°¥ÇÇ Áö¿ì±â
-my_bookmark_edit	section	°³ÀÎ ÆäÀÌÁö
-my_bookmark_edit	title	Ã¥°¥ÇÇ ÆíÁı
-my_diary	section	°³ÀÎ ÆäÀÌÁö
-my_diary	title	ÀÏ±â¾²±â ¹× ³ëÆ®
-new	title	»õ ¸±¸®Áî
-news	section	ÇÁ·ÎÁ§Æ®: $1
-news	title	»õ¼Ò½Ä
-news	choose	<p>¿øÇÏ½Ã´Â ´º½º¸¦ ¼±ÅÃÇÏ½Ê½Ã¿À. ´º½º¸¦ ÀĞ°Å³ª °Ë»ö, È¤Àº ¿Ã¶ó¿Í ÀÖ´Â ´º½º¿¡ ´ëÇØ ´ä±ÛÀ» ¿Ã¸®½Ç ¼öµµ ÀÖ½À´Ï´Ù.<p>
-news_admin	section	»õ¼Ò½Ä
-news_admin	title	»õ¼Ò½Ä Admin
-news_main	title	»õ¼Ò½Ä
-news_submit	post_blurb	¿©·¯ºĞÀÌ ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ¶ó¸é »õ¼Ò½ÄÀ» µî·ÏÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. ¸¸¾à ´Ù¸¥ »ç¶÷ÀÇ µµ¿òÀÌ ÇÊ¿äÇÏ´Ù¸é "µµ¿ò ¿äÃ»" ¸Ş½ÃÁö¸¦ ¿Ã¸®½Ç ¼öµµ ÀÖ½À´Ï´Ù.<P><B>¿©·¯ºĞÀÇ ÇÁ·ÎÁ§Æ®</B>¿¡ °üÇÑ ¸ğµç »õ¼Ò½ÄÀº °ğ¹Ù·Î ÇÁ·ÎÁ§Æ® ¿ä¾à ÆäÀÌÁö¿¡ ¿Ã¶ó°¡°Ô µË´Ï´Ù. ¸¸¾à $1 È¨ÆäÀÌÁö¿¡ »õ¼Ò½ÄÀ» ¿Ã¸®½Ã·Á¸é »õ¼Ò½Ä °ü¸® ÆÀÀ¸·ÎºÎÅÍ ½ÂÀÎÀ» ¹Ş¾Æ¾ß ÇÕ´Ï´Ù.
-news_submit	section	»õ¼Ò½Ä
-news_submit	title	»õ¼Ò½Ä ¿Ã¸®±â: $1
+menu	contact_us	$1ì— ì—°ë½í•˜ê¸°
+menu	discussion_forums	ê²Œì‹œíŒ
+menu	documentation	ì°¸ê³  ë¬¸ì„œ
+menu	login	ë¡œê·¸ì¸
+menu	logout	ë¡œê·¸ì•„ì›ƒ
+menu	my_personal_page	ê°œì¸ í˜ì´ì§€
+menu	new_project	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
+menu	new_releases	ìƒˆë¡œìš´ ë¦´ë¦¬ì¦ˆ
+menu	new_user	ì‚¬ìš©ì ë“±ë¡
+menu	other_site_mirrors	ê¸°íƒ€ ì‚¬ì´íŠ¸ ë¯¸ëŸ¬
+menu	project_admin	í”„ë¡œì íŠ¸ ê´€ë¦¬
+menu	project_help_wanted	ë©¤ë²„ êµ¬í•¨
+menu	project_summary	í”„ë¡œì íŠ¸ ìš”ì•½
+menu	search	ì°¾ê¸°
+menu	site_status	ì‚¬ì´íŠ¸ ìƒíƒœ
+menu	software_map	ì†Œí”„íŠ¸ì›¨ì–´ ë§µ
+menu	top_projects	ìƒìœ„ í”„ë¡œì íŠ¸
+my	about_blurb	ì—¬ëŸ¬ë¶„ì˜ ê°œì¸ í˜ì´ì§€ëŠ” ì—¬ëŸ¬ë¶„ì—ê²Œ í• ë‹¹ëœ ë²„ê·¸ë‚˜ ì„ë¬´ë“¤ê³¼ ì—¬ëŸ¬ë¶„ì´ ì°¸ì—¬í•˜ê³  ê³„ì‹  ê·¸ë£¹ì— ê´€í•œ ì •ë³´ë¥¼ ë³´ì—¬ì¤ë‹ˆë‹¤.
+my	no_bookmarks	í˜„ì¬ ì €ì¥ëœ ì±…ê°ˆí”¼ê°€ ì—†ìŠµë‹ˆë‹¤.
+my	no_monitored_filemodules	<H3>ëª¨ë‹ˆí„°í•˜ê³  ìˆëŠ” íŒŒì¼ì´ ì—†ìŠµë‹ˆë‹¤.</H3><P>ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ íŒŒì¼ì„ ëª¨ë‹ˆí„°í•˜ì‹œê²Œ ë˜ë©´ ìƒˆë¡œìš´ íŒŒì¼ì´ ë¦´ë¦¬ì¦ˆë  ë•Œ ì´ê³³ì˜ ë‹¤ìš´ë¡œë“œ ì„œë²„ë¡œ íŒŒì¼ì„ ë°›ì„ ìˆ˜ ìˆëŠ” ë§í¬ê°€ í¬í•¨ëœ ì´ë©”ì¼ì„ ë°›ì•„ë³´ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.<P>íŒŒì¼ì„ ëª¨ë‹ˆí„°í•˜ì‹œë ¤ë©´ í”„ë¡œì íŠ¸ì˜ &quot;ìš”ì•½ í˜ì´ì§€&quot;ì— ê°€ì„œ íŒŒì¼ ì„¹ì…˜ì˜ ì²´í¬ë°•ìŠ¤ë¥¼ í´ë¦­í•˜ì‹œë©´ ë©ë‹ˆë‹¤.<BR>&nbsp;
+my	no_monitored_forums	<H3>ëª¨ë‹ˆí„°í•˜ê³  ìˆëŠ” ê²Œì‹œíŒì´ ì—†ìŠµë‹ˆë‹¤.</H3><P>ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ ê²Œì‹œíŒì„ ëª¨ë‹ˆí„°í•˜ì‹œê²Œ ë˜ë©´ ìƒˆë¡œìš´ ê¸€ì´ ì˜¬ë¼ì˜¬ ë•Œ ê·¸ ê¸€ì„ ì½ì„ ìˆ˜ ìˆëŠ” ë§í¬ê°€ í¬í•¨ëœ ì´ë©”ì¼ì„ ë°›ì•„ë³´ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤.<P>ê²Œì‹œíŒì„ ëª¨ë‹ˆí„°í•˜ì‹œë ¤ë©´ ì•„ë¬´ ê²Œì‹œíŒì—ì„œë‚˜ &quot;ê²Œì‹œíŒ ëª¨ë‹ˆí„°&quot;ë¥¼ í´ë¦­í•˜ì‹œë©´ ë©ë‹ˆë‹¤.<BR>&nbsp;
+my	no_open_tasks	í• ë‹¹ëœ ì„ë¬´ê°€ ì—†ìŠµë‹ˆë‹¤.
+my	no_projects	ì•„ì§ ì–´ë–¤ í”„ë¡œì íŠ¸ì—ë„ ì†Œì†ë˜ì–´ ìˆì§€ ì•ŠìŠµë‹ˆë‹¤.
+my	no_tracker_items_assigned	í• ë‹¹ëœ ë¬¸ì œì  ì¶”ì  ì•„ì´í…œì´ ì—†ìŠµë‹ˆë‹¤.
+my	no_tracker_items_submitted	ì œì¶œí•˜ì‹  ë¬¸ì œì  ì¶”ì  ì•„ì´í…œì´ ì—†ìŠµë‹ˆë‹¤.
+my	title	ê°œì¸ í˜ì´ì§€: $1
+my_bookmark_add	section	ê°œì¸ í˜ì´ì§€
+my_bookmark_add	title	ì±…ê°ˆí”¼ ì¶”ê°€
+my_bookmark_delete	section	ê°œì¸ í˜ì´ì§€
+my_bookmark_delete	title	ì±…ê°ˆí”¼ ì§€ìš°ê¸°
+my_bookmark_edit	section	ê°œì¸ í˜ì´ì§€
+my_bookmark_edit	title	ì±…ê°ˆí”¼ í¸ì§‘
+my_diary	section	ê°œì¸ í˜ì´ì§€
+my_diary	title	ì¼ê¸°ì“°ê¸° ë° ë…¸íŠ¸
+new	title	ìƒˆ ë¦´ë¦¬ì¦ˆ
+news	section	í”„ë¡œì íŠ¸: $1
+news	title	ìƒˆì†Œì‹
+news	choose	<p>ì›í•˜ì‹œëŠ” ë‰´ìŠ¤ë¥¼ ì„ íƒí•˜ì‹­ì‹œì˜¤. ë‰´ìŠ¤ë¥¼ ì½ê±°ë‚˜ ê²€ìƒ‰, í˜¹ì€ ì˜¬ë¼ì™€ ìˆëŠ” ë‰´ìŠ¤ì— ëŒ€í•´ ë‹µê¸€ì„ ì˜¬ë¦¬ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<p>
+news_admin	section	ìƒˆì†Œì‹
+news_admin	title	ìƒˆì†Œì‹ Admin
+news_main	title	ìƒˆì†Œì‹
+news_submit	post_blurb	ì—¬ëŸ¬ë¶„ì´ í”„ë¡œì íŠ¸ ê´€ë¦¬ìë¼ë©´ ìƒˆì†Œì‹ì„ ë“±ë¡í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë§Œì•½ ë‹¤ë¥¸ ì‚¬ëŒì˜ ë„ì›€ì´ í•„ìš”í•˜ë‹¤ë©´ "ë„ì›€ ìš”ì²­" ë©”ì‹œì§€ë¥¼ ì˜¬ë¦¬ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<P><B>ì—¬ëŸ¬ë¶„ì˜ í”„ë¡œì íŠ¸</B>ì— ê´€í•œ ëª¨ë“  ìƒˆì†Œì‹ì€ ê³§ë°”ë¡œ í”„ë¡œì íŠ¸ ìš”ì•½ í˜ì´ì§€ì— ì˜¬ë¼ê°€ê²Œ ë©ë‹ˆë‹¤. ë§Œì•½ $1 í™ˆí˜ì´ì§€ì— ìƒˆì†Œì‹ì„ ì˜¬ë¦¬ì‹œë ¤ë©´ ìƒˆì†Œì‹ ê´€ë¦¬ íŒ€ìœ¼ë¡œë¶€í„° ìŠ¹ì¸ì„ ë°›ì•„ì•¼ í•©ë‹ˆë‹¤.
+news_submit	section	ìƒˆì†Œì‹
+news_submit	title	ìƒˆì†Œì‹ ì˜¬ë¦¬ê¸°: $1
 partners	about_blurb	<P>GForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
-people	about_blurb	<P>ÀÌ°÷Àº ºñ¿µ¸® ¸ñÀûÀÇ ÀÚ¿øºÀ»çÀÚµéÀ» À§ÇÑ °ø°£ÀÌ¸ç »ó¾÷ÀûÀÎ ¸ñÀûÀ¸·ÎÀÇ È°¿ëÀº ±İÁöÇÕ´Ï´Ù.<P>ÀÌ°÷¿¡ ¿Ã¸° ±ÛÀº 2ÁÖ µ¿¾È À¯È¿ÇÏ°í, ¸¸¾à ÇÊ¿ä¾ø°Ô µÇ¸é ±Û¾´ÀÌ°¡ ±× Àü¿¡¶óµµ »èÁ¦ÇÒ ¼ö ÀÖ½À´Ï´Ù. (¹°·Ğ ¸¸·áµÈ ¸Ş½ÃÁö¸¦ ´Ù½Ã ¿Ã¸± ¼öµµ ÀÖ½À´Ï´Ù.)<P>¿©·¯ºĞÀÇ µµ¿òÀ» ÇÊ¿ä·Î ÇÏ´Â ÇÁ·ÎÁ§Æ®µéÀÌ ÀÖ´ÂÁö µÑ·¯ º¸½Ê½Ã¿À.<P>¸¸¾à ¿©·¯ºĞÀÌ ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ¶ó¸é ·Î±×ÀÎÇÏ½Å ÈÄ ¿©·¯ºĞÀÌ °ü¸®ÇÏ°í °è½Ã´Â ÇÁ·ÎÁ§Æ®·Î °¡½Å ÈÄ ±×°÷¿¡¼­ ±ÛÀ» ¿Ã¸®¼Å¾ß ÇÕ´Ï´Ù.<P>¸¸¾à »õ·Î¿î JobÀ» Á¦¾ÈÇÏ°í ½ÍÀ¸½Ã´Ù¸é ±â¼úÁö¿ø °ü¸®ÀÚ ±â´ÉÀ» ÀÌ¿ëÇÏ¿© ÁÖ½Ê½Ã¿À.<P>
-people	section	¸â¹ö ±¸ÇÔ
-people	title	µµ¿òÀÌ ÇÊ¿äÇÑ ÇÁ·ÎÁ§Æ®
+people	about_blurb	<P>ì´ê³³ì€ ë¹„ì˜ë¦¬ ëª©ì ì˜ ìì›ë´‰ì‚¬ìë“¤ì„ ìœ„í•œ ê³µê°„ì´ë©° ìƒì—…ì ì¸ ëª©ì ìœ¼ë¡œì˜ í™œìš©ì€ ê¸ˆì§€í•©ë‹ˆë‹¤.<P>ì´ê³³ì— ì˜¬ë¦° ê¸€ì€ 2ì£¼ ë™ì•ˆ ìœ íš¨í•˜ê³ , ë§Œì•½ í•„ìš”ì—†ê²Œ ë˜ë©´ ê¸€ì“´ì´ê°€ ê·¸ ì „ì—ë¼ë„ ì‚­ì œí•  ìˆ˜ ìˆìŠµë‹ˆë‹¤. (ë¬¼ë¡  ë§Œë£Œëœ ë©”ì‹œì§€ë¥¼ ë‹¤ì‹œ ì˜¬ë¦´ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.)<P>ì—¬ëŸ¬ë¶„ì˜ ë„ì›€ì„ í•„ìš”ë¡œ í•˜ëŠ” í”„ë¡œì íŠ¸ë“¤ì´ ìˆëŠ”ì§€ ë‘˜ëŸ¬ ë³´ì‹­ì‹œì˜¤.<P>ë§Œì•½ ì—¬ëŸ¬ë¶„ì´ í”„ë¡œì íŠ¸ ê´€ë¦¬ìë¼ë©´ ë¡œê·¸ì¸í•˜ì‹  í›„ ì—¬ëŸ¬ë¶„ì´ ê´€ë¦¬í•˜ê³  ê³„ì‹œëŠ” í”„ë¡œì íŠ¸ë¡œ ê°€ì‹  í›„ ê·¸ê³³ì—ì„œ ê¸€ì„ ì˜¬ë¦¬ì…”ì•¼ í•©ë‹ˆë‹¤.<P>ë§Œì•½ ìƒˆë¡œìš´ Jobì„ ì œì•ˆí•˜ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´ ê¸°ìˆ ì§€ì› ê´€ë¦¬ì ê¸°ëŠ¥ì„ ì´ìš©í•˜ì—¬ ì£¼ì‹­ì‹œì˜¤.<P>
+people	section	ë©¤ë²„ êµ¬í•¨
+people	title	ë„ì›€ì´ í•„ìš”í•œ í”„ë¡œì íŠ¸
 people_admin	section	Help Wanted
-people_admin	title	Help Wanted °ü¸®
-people_admin_people_cat	section	Help Wanted °ü¸®
-people_admin_people_cat	title	Job ºĞ·ù Ãß°¡ÇÏ±â
-people_admin_people_skills	section	Help Wanted °ü¸®
-people_admin_people_skills	title	Job ½ºÅ³ Ãß°¡ÇÏ±â
+people_admin	title	Help Wanted ê´€ë¦¬
+people_admin_people_cat	section	Help Wanted ê´€ë¦¬
+people_admin_people_cat	title	Job ë¶„ë¥˜ ì¶”ê°€í•˜ê¸°
+people_admin_people_skills	section	Help Wanted ê´€ë¦¬
+people_admin_people_skills	title	Job ìŠ¤í‚¬ ì¶”ê°€í•˜ê¸°
 people_cat	section	Help Wanted
-people_cat	title	ºĞ·ùº° Job ³ª¿­ÇÏ±â
-people_createjob	section	¸â¹ö ±¸ÇÔ
-people_createjob	title	»õ·Î¿î Job ¸¸µé±â
-people_editjob	section	¸â¹ö ±¸ÇÔ
-people_editjob	title	Job ÆíÁı
-people_editprofile	section	¸â¹ö ±¸ÇÔ
-people_editprofile	title	³ªÀÇ ÇÁ·ÎÇÊ ÆíÁı
-people_helpwanted_latest	section	¸â¹ö ±¸ÇÔ
-people_helpwanted_latest	title	¸¶Áö¸· Æ÷½ºÆÃ
-people_proj	section	¸â¹ö ±¸ÇÔ
-people_proj	title	¸â¹ö ±¸ÇÔ: $1
-people_viewjob	section	¸â¹ö ±¸ÇÔ
-people_viewjob	title	$1 ÀÌ(°¡) $2 ¿¡ ÇÊ¿äÇÕ´Ï´Ù.
-people_viewprofile	section	»ç¿ëÀÚ Á¤º¸
-people_viewprofile	title	°³¹ßÀÚ ÇÁ·ÎÇÊ º¸±â
-pm	section	ÇÁ·ÎÁ§Æ®: $1 
-pm	title	ÀÓ¹« °ü¸®ÀÚ: ÇÏÀ§ ÇÁ·ÎÁ§Æ® ¹× ÀÓ¹«
-pm	noprj	<H1>ÇÏÀ§ ÇÁ·ÎÁ§Æ®°¡ ¾ø½À´Ï´Ù.</H1><P><B>¼³Á¤µÇ¾î ÀÖ´Â ÇÏÀ§ ÇÁ·ÎÁ§Æ®°¡ ¾ø°Å³ª, ¿­¶÷ÇÒ ¼ö ÀÖ´Â ±ÇÇÑÀÌ ¾ø½À´Ï´Ù.<P><FONT COLOR=RED>ÇÁ·ÎÁ§Æ® °ü¸®ÀÚ°¡ °ü¸® ÆäÀÌÁö¸¦ ÅëÇØ ÇÏÀ§ ÇÁ·ÎÁ§Æ®¸¦ ¼³Á¤ÇØ ÁÖ¾î¾ß »ç¿ëÇÒ ¼ö ÀÖ½À´Ï´Ù.</FONT></B>
-pm_addtask	section	ÀÓ¹« °ü¸®ÀÚ
-pm_addtask	title	ÀÓ¹« Ãß°¡ÇÏ±â
+people_cat	title	ë¶„ë¥˜ë³„ Job ë‚˜ì—´í•˜ê¸°
+people_createjob	section	ë©¤ë²„ êµ¬í•¨
+people_createjob	title	ìƒˆë¡œìš´ Job ë§Œë“¤ê¸°
+people_editjob	section	ë©¤ë²„ êµ¬í•¨
+people_editjob	title	Job í¸ì§‘
+people_editprofile	section	ë©¤ë²„ êµ¬í•¨
+people_editprofile	title	ë‚˜ì˜ í”„ë¡œí•„ í¸ì§‘
+people_helpwanted_latest	section	ë©¤ë²„ êµ¬í•¨
+people_helpwanted_latest	title	ë§ˆì§€ë§‰ í¬ìŠ¤íŒ…
+people_proj	section	ë©¤ë²„ êµ¬í•¨
+people_proj	title	ë©¤ë²„ êµ¬í•¨: $1
+people_viewjob	section	ë©¤ë²„ êµ¬í•¨
+people_viewjob	title	$1 ì´(ê°€) $2 ì— í•„ìš”í•©ë‹ˆë‹¤.
+people_viewprofile	section	ì‚¬ìš©ì ì •ë³´
+people_viewprofile	title	ê°œë°œì í”„ë¡œí•„ ë³´ê¸°
+pm	section	í”„ë¡œì íŠ¸: $1 
+pm	title	ì„ë¬´ ê´€ë¦¬ì: í•˜ìœ„ í”„ë¡œì íŠ¸ ë° ì„ë¬´
+pm	noprj	<H1>í•˜ìœ„ í”„ë¡œì íŠ¸ê°€ ì—†ìŠµë‹ˆë‹¤.</H1><P><B>ì„¤ì •ë˜ì–´ ìˆëŠ” í•˜ìœ„ í”„ë¡œì íŠ¸ê°€ ì—†ê±°ë‚˜, ì—´ëŒí•  ìˆ˜ ìˆëŠ” ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤.<P><FONT COLOR=RED>í”„ë¡œì íŠ¸ ê´€ë¦¬ìê°€ ê´€ë¦¬ í˜ì´ì§€ë¥¼ í†µí•´ í•˜ìœ„ í”„ë¡œì íŠ¸ë¥¼ ì„¤ì •í•´ ì£¼ì–´ì•¼ ì‚¬ìš©í•  ìˆ˜ ìˆìŠµë‹ˆë‹¤.</FONT></B>
+pm_addtask	section	ì„ë¬´ ê´€ë¦¬ì
+pm_addtask	title	ì„ë¬´ ì¶”ê°€í•˜ê¸°
 pm_admin	section	$1
-pm_admin	title	ÀÓ¹« °ü¸®ÀÚ: °ü¸®
-pm_admin_change_status	section	ÀÓ¹« °ü¸®ÀÚ °ü¸®
-pm_admin_change_status	title	Á¤º¸ °»½Å
-pm_admin_projects	section	ÀÓ¹« °ü¸®ÀÚ °ü¸®
-pm_admin_projects	title	ÇÏÀ§ ÇÁ·ÎÁ§Æ® Ãß°¡
-pm_browse_custom	section	ÀÓ¹« °ü¸®ÀÚ
-pm_browse_custom	title	º°µµ ÀÓ¹« º¸±â
-pm_browse_my	section	ÇÁ·ÎÁ§Æ® $1 ÀÓ¹« °ü¸®ÀÚ
-pm_browse_my	title	³ªÀÇ ÀÓ¹« º¸±â
-pm_browse_open	section	ÀÓ¹« °ü¸®ÀÚ
-pm_browse_open	title	ÇÒ´çµÈ ÀÓ¹« º¸±â
-pm_detailtask	section	ÀÓ¹« °ü¸®ÀÚ
-pm_detailtask	title	ÀÓ¹« ¼¼ºÎ»çÇ×
-pm_modtask	section	ÀÓ¹« °ü¸®ÀÚ
-pm_modtask	title	ÀÓ¹« ¼öÁ¤
-pm_reporting	section	ÀÓ¹« °ü¸®ÀÚ
-pm_reporting	title	ÀÓ¹« ¸®Æ÷ÆÃ ½Ã½ºÅÛ
-project_admin	section	ÇÁ·ÎÁ§Æ®: $1
-project_admin	title	°ü¸® ¿ä¾à
-project_admin_database	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_database	title	µ¥ÀÌÅÍº£ÀÌ½º Á¤º¸
-project_admin_editgroupinfo	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_editgroupinfo	title	°ø°³Á¤º¸ ÆíÁı
-project_admin_editimages	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_editimages	title	¸ÖÆ¼¹Ìµğ¾î µ¥ÀÌÅÍ ÆíÁı
-project_admin_editpackages	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_editpackages	title	ÆĞÅ°Áö ÆíÁı
-project_admin_editreleases	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_editreleases	title	¸±¸®Áî ÆíÁı
-project_admin_history	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_history	title	È÷½ºÅä¸®
-project_admin_newrelease	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_newrelease	title	»õ ¸±¸®Áî Ãß°¡
-project_admin_qrs	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_qrs	title	QRS: Äü ¸±¸®Áî ½Ã½ºÅÛ
-project_admin_userpermedit	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_userpermedit	title	°³¹ßÀÚ°£ ±ÇÇÑ ÆíÁı
-project_admin_userperms	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_userperms	title	»ç¿ëÀÚ°£ ±ÇÇÑ º¸±â
-project_admin_vhost	section	ÇÁ·ÎÁ§Æ® $1 - °ü¸®
-project_admin_vhost	title	¹öÃß¾ó È£½ºÆ® °ü¸®
-project_memberlist	joining	<P>ÀÌ ÇÁ·ÎÁ§Æ®¿¡ °³¹ßÀÚ·Î¼­ Âü¿©ÇÏ°í ½ÍÀ¸½Ã´Ù¸é, ¾Æ·¡ ±½Àº ±Û¾¾Ã¼·Î º¸ÀÌ´Â ÇÁ·ÎÁ§Æ® °ü¸®ÀÚµé Áß ÇÑ»ç¶÷°ú ¿¬¶ôÇÏ½Ã¸é µË´Ï´Ù.<br><br>
-project_showfiles	section	ÇÁ·ÎÁ§Æ®: $1
-project_showfiles	title	ÆÄÀÏ º¸±â
-project_shownotes	section	ÇÁ·ÎÁ§Æ®: $1
-project_shownotes	title	¸±¸®Áî ³ëÆ®
-projects	section	ÇÁ·ÎÁ§Æ®: $1
-projects	title	¿ä¾à
-register	title	»õ ÇÁ·ÎÁ§Æ® µî·Ï
-register_complete	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
-register_complete	title	µî·Ï ¿Ï·á
-register_projectinfo	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
-register_projectinfo	title	ÇÁ·ÎÁ§Æ® Á¤º¸
-register_requirements	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
-register_requirements	title	Á¦°øµÇ´Â ¼­ºñ½º ¹× ¿ä±¸»çÇ×
-register_tos	section	»õ ÇÁ·ÎÁ§Æ® µî·Ï
-register_tos	title	¼­ºñ½º¿¡ °üÇÑ °è¾à»çÇ×
-search	title	Ã£±â
-sendmessage	about_blurb	½ºÆÔÀ» ÁÙÀÌ±â À§ÇØ ¾Æ·¡ ¾ç½ÄÀ» »ç¿ëÇÕ´Ï´Ù.<p>¾Æ·¡ ¾ç½ÄÀ» ¸ğµÎ Á¦´ë·Î Ã¤¿ö ÁÖ½Ê½Ã¿À. ¸¸¾à ±×·¸Áö ¾Ê´Ù¸é ¼ö½ÅÀÎÀÌ Á¦´ë·Î ÀÀ´äÇÏÁö ¸øÇÏ°Ô µÉ¼öµµ ÀÖ½À´Ï´Ù.<P><FONT COLOR="RED"><B>¸¸¾à ¾î¶² µµ¿òÀ» ¿äÃ»ÇÏ´Â °æ¿ì¶ó¸é:</B> »çÀÌÆ® °ü·Ã ¹®¼­¸¦ ÀĞ¾î º¸¼Ì½À´Ï±î? ¿©·¯ºĞÀÇ <B>»ç¿ëÀÚ ID</B>¿Í <B>ÀÌ¸§</B>À» Á¦´ë·Î ¸í½ÃÇÏ¼Ì´ÂÁö¿ä? ¾î´À Æ¯Á¤ ÇÁ·ÎÁ§Æ®¿¡ °üÇÑ °ÍÀÌ¶ó¸é <B>ÇÁ·ÎÁ§Æ® ID</B> (<B>±×·ì ID</B>) ¹× <B>ÇÁ·ÎÁ§Æ® ÀÌ¸§</B>À» ¸í½ÃÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù.</FONT>
-sendmessage	title	¸Ş½ÃÁö º¸³»±â: $1
-snippet	title	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_add_snippet_to_package	section	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_add_snippet_to_package	title	ÆĞÅ°Áö¿¡ ÄÚµå Ãß°¡
-snippet_addversion	section	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_addversion	title	»õ ¹öÀü ¿Ã¸®±â
-snippet_browse	section	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_browse	title	ÄÚµå µÑ·¯º¸±â
-snippet_delete	section	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_delete	title	ÄÚµå Áö¿ì±â
-snippet_detail	section	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_detail	title	ÄÚµå ÀÚ¼¼È÷ º¸±â
-snippet_package	section	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_package	title	ÄÚµå ÆĞÅ°Áö ¸¸µé±â
-snippet_submit	section	ÄÚµå ¶óÀÌºê·¯¸®
-snippet_submit	title	ÄÚµå Á¦Ãâ
+pm_admin	title	ì„ë¬´ ê´€ë¦¬ì: ê´€ë¦¬
+pm_admin_change_status	section	ì„ë¬´ ê´€ë¦¬ì ê´€ë¦¬
+pm_admin_change_status	title	ì •ë³´ ê°±ì‹ 
+pm_admin_projects	section	ì„ë¬´ ê´€ë¦¬ì ê´€ë¦¬
+pm_admin_projects	title	í•˜ìœ„ í”„ë¡œì íŠ¸ ì¶”ê°€
+pm_browse_custom	section	ì„ë¬´ ê´€ë¦¬ì
+pm_browse_custom	title	ë³„ë„ ì„ë¬´ ë³´ê¸°
+pm_browse_my	section	í”„ë¡œì íŠ¸ $1 ì„ë¬´ ê´€ë¦¬ì
+pm_browse_my	title	ë‚˜ì˜ ì„ë¬´ ë³´ê¸°
+pm_browse_open	section	ì„ë¬´ ê´€ë¦¬ì
+pm_browse_open	title	í• ë‹¹ëœ ì„ë¬´ ë³´ê¸°
+pm_detailtask	section	ì„ë¬´ ê´€ë¦¬ì
+pm_detailtask	title	ì„ë¬´ ì„¸ë¶€ì‚¬í•­
+pm_modtask	section	ì„ë¬´ ê´€ë¦¬ì
+pm_modtask	title	ì„ë¬´ ìˆ˜ì •
+pm_reporting	section	ì„ë¬´ ê´€ë¦¬ì
+pm_reporting	title	ì„ë¬´ ë¦¬í¬íŒ… ì‹œìŠ¤í…œ
+project_admin	section	í”„ë¡œì íŠ¸: $1
+project_admin	title	ê´€ë¦¬ ìš”ì•½
+project_admin_database	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_database	title	ë°ì´í„°ë² ì´ìŠ¤ ì •ë³´
+project_admin_editgroupinfo	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_editgroupinfo	title	ê³µê°œì •ë³´ í¸ì§‘
+project_admin_editimages	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_editimages	title	ë©€í‹°ë¯¸ë””ì–´ ë°ì´í„° í¸ì§‘
+project_admin_editpackages	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_editpackages	title	íŒ¨í‚¤ì§€ í¸ì§‘
+project_admin_editreleases	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_editreleases	title	ë¦´ë¦¬ì¦ˆ í¸ì§‘
+project_admin_history	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_history	title	íˆìŠ¤í† ë¦¬
+project_admin_newrelease	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_newrelease	title	ìƒˆ ë¦´ë¦¬ì¦ˆ ì¶”ê°€
+project_admin_qrs	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_qrs	title	QRS: í€µ ë¦´ë¦¬ì¦ˆ ì‹œìŠ¤í…œ
+project_admin_userpermedit	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_userpermedit	title	ê°œë°œìê°„ ê¶Œí•œ í¸ì§‘
+project_admin_userperms	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_userperms	title	ì‚¬ìš©ìê°„ ê¶Œí•œ ë³´ê¸°
+project_admin_vhost	section	í”„ë¡œì íŠ¸ $1 - ê´€ë¦¬
+project_admin_vhost	title	ë²„ì¶”ì–¼ í˜¸ìŠ¤íŠ¸ ê´€ë¦¬
+project_memberlist	joining	<P>ì´ í”„ë¡œì íŠ¸ì— ê°œë°œìë¡œì„œ ì°¸ì—¬í•˜ê³  ì‹¶ìœ¼ì‹œë‹¤ë©´, ì•„ë˜ êµµì€ ê¸€ì”¨ì²´ë¡œ ë³´ì´ëŠ” í”„ë¡œì íŠ¸ ê´€ë¦¬ìë“¤ ì¤‘ í•œì‚¬ëŒê³¼ ì—°ë½í•˜ì‹œë©´ ë©ë‹ˆë‹¤.<br><br>
+project_showfiles	section	í”„ë¡œì íŠ¸: $1
+project_showfiles	title	íŒŒì¼ ë³´ê¸°
+project_shownotes	section	í”„ë¡œì íŠ¸: $1
+project_shownotes	title	ë¦´ë¦¬ì¦ˆ ë…¸íŠ¸
+projects	section	í”„ë¡œì íŠ¸: $1
+projects	title	ìš”ì•½
+register	title	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
+register_complete	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
+register_complete	title	ë“±ë¡ ì™„ë£Œ
+register_projectinfo	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
+register_projectinfo	title	í”„ë¡œì íŠ¸ ì •ë³´
+register_requirements	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
+register_requirements	title	ì œê³µë˜ëŠ” ì„œë¹„ìŠ¤ ë° ìš”êµ¬ì‚¬í•­
+register_tos	section	ìƒˆ í”„ë¡œì íŠ¸ ë“±ë¡
+register_tos	title	ì„œë¹„ìŠ¤ì— ê´€í•œ ê³„ì•½ì‚¬í•­
+search	title	ì°¾ê¸°
+sendmessage	about_blurb	ìŠ¤íŒ¸ì„ ì¤„ì´ê¸° ìœ„í•´ ì•„ë˜ ì–‘ì‹ì„ ì‚¬ìš©í•©ë‹ˆë‹¤.<p>ì•„ë˜ ì–‘ì‹ì„ ëª¨ë‘ ì œëŒ€ë¡œ ì±„ì›Œ ì£¼ì‹­ì‹œì˜¤. ë§Œì•½ ê·¸ë ‡ì§€ ì•Šë‹¤ë©´ ìˆ˜ì‹ ì¸ì´ ì œëŒ€ë¡œ ì‘ë‹µí•˜ì§€ ëª»í•˜ê²Œ ë ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.<P><FONT COLOR="RED"><B>ë§Œì•½ ì–´ë–¤ ë„ì›€ì„ ìš”ì²­í•˜ëŠ” ê²½ìš°ë¼ë©´:</B> ì‚¬ì´íŠ¸ ê´€ë ¨ ë¬¸ì„œë¥¼ ì½ì–´ ë³´ì…¨ìŠµë‹ˆê¹Œ? ì—¬ëŸ¬ë¶„ì˜ <B>ì‚¬ìš©ì ID</B>ì™€ <B>ì´ë¦„</B>ì„ ì œëŒ€ë¡œ ëª…ì‹œí•˜ì…¨ëŠ”ì§€ìš”? ì–´ëŠ íŠ¹ì • í”„ë¡œì íŠ¸ì— ê´€í•œ ê²ƒì´ë¼ë©´ <B>í”„ë¡œì íŠ¸ ID</B> (<B>ê·¸ë£¹ ID</B>) ë° <B>í”„ë¡œì íŠ¸ ì´ë¦„</B>ì„ ëª…ì‹œí•´ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤.</FONT>
+sendmessage	title	ë©”ì‹œì§€ ë³´ë‚´ê¸°: $1
+snippet	title	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_add_snippet_to_package	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_add_snippet_to_package	title	íŒ¨í‚¤ì§€ì— ì½”ë“œ ì¶”ê°€
+snippet_addversion	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_addversion	title	ìƒˆ ë²„ì „ ì˜¬ë¦¬ê¸°
+snippet_browse	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_browse	title	ì½”ë“œ ë‘˜ëŸ¬ë³´ê¸°
+snippet_delete	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_delete	title	ì½”ë“œ ì§€ìš°ê¸°
+snippet_detail	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_detail	title	ì½”ë“œ ìì„¸íˆ ë³´ê¸°
+snippet_package	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_package	title	ì½”ë“œ íŒ¨í‚¤ì§€ ë§Œë“¤ê¸°
+snippet_submit	section	ì½”ë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
+snippet_submit	title	ì½”ë“œ ì œì¶œ
 softwaremap	title	Trove
 staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
-survey	title	¼³¹®Á¶»ç: $1
-survey_admin	section	¼³¹®Á¶»ç µµ±¸
-survey_admin	title	°ü¸®ÇÏ±â
-survey_admin_add_question	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_add_question	title	¼³¹® Ãß°¡
-survey_admin_add_survey	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_add_survey	title	¼³¹®Á¶»ç Ãß°¡
-survey_admin_edit_question	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_edit_question	title	Áú¹®³»¿ë ÆíÁı
-survey_admin_edit_survey	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_edit_survey	title	¼³¹®Á¶»ç ÆíÁı
-survey_admin_show_questions	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_show_questions	title	Áú¹®³»¿ë º¸±â
-survey_admin_show_results	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_show_results	title	¼³¹®Á¶»ç °á°ú º¸±â
-survey_admin_show_results_aggregate	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_show_results_aggregate	title	¼³¹®Á¶»ç °á°ú º¸±â
-survey_admin_show_results_comments	section	¼³¹®Á¶»ç °ü¸®
-survey_admin_show_results_comments	title	¼³¹®¿¡ ´ëÇÑ ´ä±Û º¸±â
-survey_admin_show_results_individual	section	¼³¹®Á¶»ç µµ±¸ °ü¸®
-survey_admin_show_results_individual	title	°¢°¢ÀÇ ¼³¹®Á¶»ç °á°ú º¸±â
-survey_survey	section	¼³¹®Á¶»ç
-survey_survey	title	¼³¹®Á¶»ç º¸±â
-survey_survey_resp	section	¼³¹®Á¶»ç µµ±¸
-survey_survey_resp	title	¼³¹®Á¶»ç Ã³¸® ¹× ¹İÀÀ
+survey	title	ì„¤ë¬¸ì¡°ì‚¬: $1
+survey_admin	section	ì„¤ë¬¸ì¡°ì‚¬ ë„êµ¬
+survey_admin	title	ê´€ë¦¬í•˜ê¸°
+survey_admin_add_question	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_add_question	title	ì„¤ë¬¸ ì¶”ê°€
+survey_admin_add_survey	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_add_survey	title	ì„¤ë¬¸ì¡°ì‚¬ ì¶”ê°€
+survey_admin_edit_question	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_edit_question	title	ì§ˆë¬¸ë‚´ìš© í¸ì§‘
+survey_admin_edit_survey	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_edit_survey	title	ì„¤ë¬¸ì¡°ì‚¬ í¸ì§‘
+survey_admin_show_questions	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_show_questions	title	ì§ˆë¬¸ë‚´ìš© ë³´ê¸°
+survey_admin_show_results	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_show_results	title	ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ ë³´ê¸°
+survey_admin_show_results_aggregate	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_show_results_aggregate	title	ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ ë³´ê¸°
+survey_admin_show_results_comments	section	ì„¤ë¬¸ì¡°ì‚¬ ê´€ë¦¬
+survey_admin_show_results_comments	title	ì„¤ë¬¸ì— ëŒ€í•œ ë‹µê¸€ ë³´ê¸°
+survey_admin_show_results_individual	section	ì„¤ë¬¸ì¡°ì‚¬ ë„êµ¬ ê´€ë¦¬
+survey_admin_show_results_individual	title	ê°ê°ì˜ ì„¤ë¬¸ì¡°ì‚¬ ê²°ê³¼ ë³´ê¸°
+survey_survey	section	ì„¤ë¬¸ì¡°ì‚¬
+survey_survey	title	ì„¤ë¬¸ì¡°ì‚¬ ë³´ê¸°
+survey_survey_resp	section	ì„¤ë¬¸ì¡°ì‚¬ ë„êµ¬
+survey_survey_resp	title	ì„¤ë¬¸ì¡°ì‚¬ ì²˜ë¦¬ ë° ë°˜ì‘
 thanks	about_blurb	<P><h2>GForge Acknowledgements</h2>The Developers of GForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
-themes	section	»ç¿ëÀÚ µî·Ï Á¤º¸
-themes	title	Å×¸¶ º¸±â/¹Ù²Ù±â
-top	about_blurb	ÀÌ°÷ $1¿¡¼­ ¿î¿µµÇ°í ÀÖ´Â ¿©·¯ ÇÁ·ÎÁ§Æ®µé¿¡ ´ëÇÑ »ç¿ë ±â·ÏÀ» Áı°èÇÏ¿© ¿©·¯°¡Áö ºĞ·ù¸¦ ÅëÇØ º¸½Ç ¼ö ÀÖµµ·Ï ÇÏ°í ÀÖ½À´Ï´Ù.
-top	active_all_time	ÇöÀç °¡Àå È°¹ßÇÑ ÇÁ·ÎÁ§Æ®
-top	active_weekly	±İÁÖ °¡Àå È°¹ßÇÑ ÇÁ·ÎÁ§Æ®
-top	downloads	ÃÖ´Ù ´Ù¿î·Îµå
-top	downloads_7_days	ÃÖ´Ù ´Ù¿î·Îµå (ÃÖ±Ù 7ÀÏµ¿¾È)
-top	forum_posts	È°¹ßÇÑ °Ô½ÃÆÇ
-top	pageviews	ÆäÀÌÁöºä°¡ ¸¹Àº ÇÁ·ÎÁ§Æ® - $1 ¹öÆ° ·Î°í¸¦ Å¬¸¯ÇÑ È½¼ö·Î ÃøÁ¤µÊ
-top	highest_ranked_users	È°¹ßÇÑ »ç¿ëÀÚ
-top	title	»óÀ§ ÇÁ·ÎÁ§Æ®
-top_mostactive	section	»óÀ§ ÇÁ·ÎÁ§Æ®
-top_mostactive	title	°¡Àå È°¹ßÇÑ ÇÁ·ÎÁ§Æ®: $1
-top_toplist	section	»óÀ§ ÇÁ·ÎÁ§Æ®
-top_toplist	title	»óÀ§ ÇÁ·ÎÁ§Æ® º¸±â
-tracker	section	ÇÁ·ÎÁ§Æ®: $1
-tracker	title	¹®Á¦Á¡ ÃßÀû
-tracker	choose	ÃßÀûÇÒ Ç×¸ñÀ» ¼±ÅÃÇÏ½Ê½Ã¿À. °¢ ¾ÆÀÌÅÛÀ» »ìÆìº¸½Ã°Å³ª ÆíÁıÇÏ½Ç ¼ö ÀÖ°í »õ·Î¿î ¾ÆÀÌÅÛÀ» Ãß°¡ÇÏ½Ç ¼öµµ ÀÖ½À´Ï´Ù.
+themes	section	ì‚¬ìš©ì ë“±ë¡ ì •ë³´
+themes	title	í…Œë§ˆ ë³´ê¸°/ë°”ê¾¸ê¸°
+top	about_blurb	ì´ê³³ $1ì—ì„œ ìš´ì˜ë˜ê³  ìˆëŠ” ì—¬ëŸ¬ í”„ë¡œì íŠ¸ë“¤ì— ëŒ€í•œ ì‚¬ìš© ê¸°ë¡ì„ ì§‘ê³„í•˜ì—¬ ì—¬ëŸ¬ê°€ì§€ ë¶„ë¥˜ë¥¼ í†µí•´ ë³´ì‹¤ ìˆ˜ ìˆë„ë¡ í•˜ê³  ìˆìŠµë‹ˆë‹¤.
+top	active_all_time	í˜„ì¬ ê°€ì¥ í™œë°œí•œ í”„ë¡œì íŠ¸
+top	active_weekly	ê¸ˆì£¼ ê°€ì¥ í™œë°œí•œ í”„ë¡œì íŠ¸
+top	downloads	ìµœë‹¤ ë‹¤ìš´ë¡œë“œ
+top	downloads_7_days	ìµœë‹¤ ë‹¤ìš´ë¡œë“œ (ìµœê·¼ 7ì¼ë™ì•ˆ)
+top	forum_posts	í™œë°œí•œ ê²Œì‹œíŒ
+top	pageviews	í˜ì´ì§€ë·°ê°€ ë§ì€ í”„ë¡œì íŠ¸ - $1 ë²„íŠ¼ ë¡œê³ ë¥¼ í´ë¦­í•œ íšŸìˆ˜ë¡œ ì¸¡ì •ë¨
+top	highest_ranked_users	í™œë°œí•œ ì‚¬ìš©ì
+top	title	ìƒìœ„ í”„ë¡œì íŠ¸
+top_mostactive	section	ìƒìœ„ í”„ë¡œì íŠ¸
+top_mostactive	title	ê°€ì¥ í™œë°œí•œ í”„ë¡œì íŠ¸: $1
+top_toplist	section	ìƒìœ„ í”„ë¡œì íŠ¸
+top_toplist	title	ìƒìœ„ í”„ë¡œì íŠ¸ ë³´ê¸°
+tracker	section	í”„ë¡œì íŠ¸: $1
+tracker	title	ë¬¸ì œì  ì¶”ì 
+tracker	choose	ì¶”ì í•  í•­ëª©ì„ ì„ íƒí•˜ì‹­ì‹œì˜¤. ê° ì•„ì´í…œì„ ì‚´í´ë³´ì‹œê±°ë‚˜ í¸ì§‘í•˜ì‹¤ ìˆ˜ ìˆê³  ìƒˆë¡œìš´ ì•„ì´í…œì„ ì¶”ê°€í•˜ì‹¤ ìˆ˜ë„ ìˆìŠµë‹ˆë‹¤.
 tracker_add	section	$1
-tracker_add	title	¹®Á¦Á¡ ÃßÀû ¾ÆÀÌÅÛ Á¦Ãâ
-tracker_admin	section	¹®Á¦Á¡ ÃßÀû
-tracker_admin	title	°ü¸®
-tracker_admin_add_canned	section	¹®Á¦Á¡ ÃßÀû °ü¸®
-tracker_admin_add_canned	title	´ä±Û Ãß°¡: $1
-tracker_admin_add_cat	section	¹®Á¦Á¡ ÃßÀû °ü¸®
-tracker_admin_add_cat	title	$1 ¿¡ ºĞ·ù Ãß°¡
-tracker_admin_add_group	section	¹®Á¦Á¡ ÃßÀû °ü¸®
-tracker_admin_add_group	title	$1 ¿¡ ±×·ì Ãß°¡
-tracker_admin_update_canned	section	¹®Á¦Á¡ ÃßÀû °ü¸®
-tracker_admin_update_canned	title	´ä±Û ¼öÁ¤: $1
-tracker_admin_update_cat	section	¹®Á¦Á¡ ÃßÀû °ü¸®
-tracker_admin_update_cat	title	ºĞ·ù ¼öÁ¤: $1
-tracker_admin_update_group	section	¹®Á¦Á¡ ÃßÀû °ü¸®
-tracker_admin_update_group	title	±×·ì ¼öÁ¤: $1
-tracker_admin_update_type	section	¹®Á¦Á¡ ÃßÀû °ü¸®
+tracker_add	title	ë¬¸ì œì  ì¶”ì  ì•„ì´í…œ ì œì¶œ
+tracker_admin	section	ë¬¸ì œì  ì¶”ì 
+tracker_admin	title	ê´€ë¦¬
+tracker_admin_add_canned	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_admin_add_canned	title	ë‹µê¸€ ì¶”ê°€: $1
+tracker_admin_add_cat	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_admin_add_cat	title	$1 ì— ë¶„ë¥˜ ì¶”ê°€
+tracker_admin_add_group	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_admin_add_group	title	$1 ì— ê·¸ë£¹ ì¶”ê°€
+tracker_admin_update_canned	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_admin_update_canned	title	ë‹µê¸€ ìˆ˜ì •: $1
+tracker_admin_update_cat	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_admin_update_cat	title	ë¶„ë¥˜ ìˆ˜ì •: $1
+tracker_admin_update_group	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_admin_update_group	title	ê·¸ë£¹ ìˆ˜ì •: $1
+tracker_admin_update_type	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
 tracker_admin_update_type	title	Update $1
-tracker_admin_update_users	section	¹®Á¦Á¡ ÃßÀû °ü¸®
-tracker_admin_update_users	title	¹®Á¦Á¡ ÃßÀû »ç¿ëÀÚ ±ÇÇÑ Ãß°¡/ÆíÁı
-tracker_browse	section	ÇÁ·ÎÁ§Æ®: $1
-tracker_browse	title	$1 º¸±â
+tracker_admin_update_users	section	ë¬¸ì œì  ì¶”ì  ê´€ë¦¬
+tracker_admin_update_users	title	ë¬¸ì œì  ì¶”ì  ì‚¬ìš©ì ê¶Œí•œ ì¶”ê°€/í¸ì§‘
+tracker_browse	section	í”„ë¡œì íŠ¸: $1
+tracker_browse	title	$1 ë³´ê¸°
 tracker_detail	section	$1
-tracker_detail	title	¹®Á¦Á¡ ÃßÀû ÀÚ¼¼È÷ º¸±â
+tracker_detail	title	ë¬¸ì œì  ì¶”ì  ìì„¸íˆ ë³´ê¸°
 tracker_reporting	section	$1
-tracker_reporting	title	¹®Á¦Á¡ ÃßÀû ¸®Æ÷ÆÃ
-users	title	»ç¿ëÀÚ Á¤º¸
-users	peerinfo1	¸¸¾à ÀÌ »ç¿ëÀÚ¿¡ ´ëÇØ Àß ¾Ë°í °è½Å´Ù¸é ¾à°£ÀÇ ½Ã°£À» µé¿© ´ÙÀ½ ±âÁØ¿¡ µû¶ó ÀÌ »ç¿ëÀÚ¸¦ Æò°¡ÇØ ÁÖ½Ã±â ¹Ù¶ø´Ï´Ù. ¿©·¯ºĞÀÇ Æò°¡ °á°ú´Â ´Ù¸¥ ¸ğµç »ç¿ëÀÚµé¿¡°Ô º¸¿©Áø´Ù´Â °ÍÀ» ¸í½ÉÇÏ½Ê½Ã¿À. <p> $1 Peer Rating SystemÀº <A HREF="http://www.advogato.com">Advogato</A>¿¡¼­ ÈùÆ®¸¦ ¾òÀº °ÍÀÔ´Ï´Ù. Áö±İ »ç¿ëÇÏ°í °è½Å °ÍÀº ±×¸¦ ±â¹İÀ¸·Î È®Àå, Àç±¸ÇöµÈ °ÍÀÔ´Ï´Ù.
-users	peerinfo2	Peer Rating ¹Ú½º´Â °¢ Ç×¸ñ¿¡ ´ëÇÑ Æò°¡ °á°úÀÇ Æò±Õ°ú ·¹º§À» ÇÔ²² ³ªÅ¸³À´Ï´Ù. ÀÌ °á°ú´Â "trusted" »ç¿ëÀÚ¿Í "non-trusted" »ç¿ëÀÚÀÇ Æò°¡°¡ ÇÔ²² ¹İ¿µµÇ¾î ÀÖ½À´Ï´Ù. <ul><li>"ÀüÃ¼ ¼øÀ§" ÇÊµå´Â $1ÀÇ ¸ğµç »ç¿ëÀÚ¿Í ºñ±³ÇÑ ¼øÀ§¸¦ ³ªÅ¸³À´Ï´Ù. <li>"Á¾ÇÕÁ¡¼ö"´Â trusted »ç¿ëÀÚÀÇ ÀÀ´äÀ» ±âÁØÀ¸·Î ÇÑ Æò±ÕÀÔ´Ï´Ù. <li>"°³ÀÎ Áß¿äµµ" ÇÊµå´Â ´Ù¸¥ °³¹ßÀÚ¸¦ Æò°¡ÇÒ ¶§ Àû¿ëµÇ´Â °¡ÁßÄ¡ÀÌ¸ç 1ºÎÅÍ 1.5»çÀÌÀÇ °ªÀ» °¡Áı´Ï´Ù. Á¡¼ö°¡ ³ôÀº »ç¿ëÀÚ´Â °¡ÁßÄ¡µµ ´õ ³ô½À´Ï´Ù. </ul> <p> <i> Peer Rating System¿¡ Âü¿©ÇÏ°í ½ÍÁö ¾ÊÀ¸½Ã´Ù¸é, (ÀÌ´Â ´Ù¸¥ »ç¶÷¿¡°Ô Æò°¡¹Ş´Â °Í, ´Ù¸¥ »ç¶÷À» Æò°¡ÇÏ´Â °Í ¾çÂÊ ¸ğµÎ¿¡°Ô ¿µÇâÀ» ¹ÌÄ¨´Ï´Ù.) <a href="/account/">»ç¿ëÀÚ µî·Ï Á¤º¸</a> ÆäÀÌÁö¿¡¼­ ¼³Á¤ÇÏ½Ã¸é µË´Ï´Ù. ¸¸¾à ÀÌ Æò°¡ ½Ã½ºÅÛ¿¡¼­ Å»ÅğÇÏ½Ã¸é ´Ù¸¥ »ç¿ëÀÚ¸¦ Æò°¡Çß´ø Á¤º¸µéµµ ¸ğµÎ ¿µ±¸ÀûÀ¸·Î »èÁ¦µÇ°í ¿©·¯ºĞÀÇ °³ÀÎ ÆäÀÌÁö¿¡¼­ 'Peer Rating' ¹Ú½ºµµ »ç¶óÁö°Ô µÇ´Ï´Ù. </i></p>
-users	optout	¿©·¯ºĞÀº Peer Rating ½Ã½ºÅÛ¿¡¼­ Å»ÅğÇÏ½Å »óÅÂÀÌ¸ç ±×·¸Áö ¾Ê´Ù¸é ´Ù¸¥ »ç¿ëÀÚ¸¦ Æò°¡ÇÏ½Ç ¼ö ÀÖ½À´Ï´Ù. ÀÚ¼¼ÇÑ »çÇ×Àº <a href="/account/">»ç¿ëÀÚ µî·Ï Á¤º¸</a>¸¦ Âü°íÇÏ¼¼¿ä.
+tracker_reporting	title	ë¬¸ì œì  ì¶”ì  ë¦¬í¬íŒ…
+users	title	ì‚¬ìš©ì ì •ë³´
+users	peerinfo1	ë§Œì•½ ì´ ì‚¬ìš©ìì— ëŒ€í•´ ì˜ ì•Œê³  ê³„ì‹ ë‹¤ë©´ ì•½ê°„ì˜ ì‹œê°„ì„ ë“¤ì—¬ ë‹¤ìŒ ê¸°ì¤€ì— ë”°ë¼ ì´ ì‚¬ìš©ìë¥¼ í‰ê°€í•´ ì£¼ì‹œê¸° ë°”ëë‹ˆë‹¤. ì—¬ëŸ¬ë¶„ì˜ í‰ê°€ ê²°ê³¼ëŠ” ë‹¤ë¥¸ ëª¨ë“  ì‚¬ìš©ìë“¤ì—ê²Œ ë³´ì—¬ì§„ë‹¤ëŠ” ê²ƒì„ ëª…ì‹¬í•˜ì‹­ì‹œì˜¤. <p> $1 Peer Rating Systemì€ <A HREF="http://www.advogato.com">Advogato</A>ì—ì„œ íŒíŠ¸ë¥¼ ì–»ì€ ê²ƒì…ë‹ˆë‹¤. ì§€ê¸ˆ ì‚¬ìš©í•˜ê³  ê³„ì‹  ê²ƒì€ ê·¸ë¥¼ ê¸°ë°˜ìœ¼ë¡œ í™•ì¥, ì¬êµ¬í˜„ëœ ê²ƒì…ë‹ˆë‹¤.
+users	peerinfo2	Peer Rating ë°•ìŠ¤ëŠ” ê° í•­ëª©ì— ëŒ€í•œ í‰ê°€ ê²°ê³¼ì˜ í‰ê· ê³¼ ë ˆë²¨ì„ í•¨ê»˜ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤. ì´ ê²°ê³¼ëŠ” "trusted" ì‚¬ìš©ìì™€ "non-trusted" ì‚¬ìš©ìì˜ í‰ê°€ê°€ í•¨ê»˜ ë°˜ì˜ë˜ì–´ ìˆìŠµë‹ˆë‹¤. <ul><li>"ì „ì²´ ìˆœìœ„" í•„ë“œëŠ” $1ì˜ ëª¨ë“  ì‚¬ìš©ìì™€ ë¹„êµí•œ ìˆœìœ„ë¥¼ ë‚˜íƒ€ëƒ…ë‹ˆë‹¤. <li>"ì¢…í•©ì ìˆ˜"ëŠ” trusted ì‚¬ìš©ìì˜ ì‘ë‹µì„ ê¸°ì¤€ìœ¼ë¡œ í•œ í‰ê· ì…ë‹ˆë‹¤. <li>"ê°œì¸ ì¤‘ìš”ë„" í•„ë“œëŠ” ë‹¤ë¥¸ ê°œë°œìë¥¼ í‰ê°€í•  ë•Œ ì ìš©ë˜ëŠ” ê°€ì¤‘ì¹˜ì´ë©° 1ë¶€í„° 1.5ì‚¬ì´ì˜ ê°’ì„ ê°€ì§‘ë‹ˆë‹¤. ì ìˆ˜ê°€ ë†’ì€ ì‚¬ìš©ìëŠ” ê°€ì¤‘ì¹˜ë„ ë” ë†’ìŠµë‹ˆë‹¤. </ul> <p> <i> Peer Rating Systemì— ì°¸ì—¬í•˜ê³  ì‹¶ì§€ ì•Šìœ¼ì‹œë‹¤ë©´, (ì´ëŠ” ë‹¤ë¥¸ ì‚¬ëŒì—ê²Œ í‰ê°€ë°›ëŠ” ê²ƒ, ë‹¤ë¥¸ ì‚¬ëŒì„ í‰ê°€í•˜ëŠ” ê²ƒ ì–‘ìª½ ëª¨ë‘ì—ê²Œ ì˜í–¥ì„ ë¯¸ì¹©ë‹ˆë‹¤.) <a href="/account/">ì‚¬ìš©ì ë“±ë¡ ì •ë³´</a> í˜ì´ì§€ì—ì„œ ì„¤ì •í•˜ì‹œë©´ ë©ë‹ˆë‹¤. ë§Œì•½ ì´ í‰ê°€ ì‹œìŠ¤í…œì—ì„œ íƒˆí‡´í•˜ì‹œë©´ ë‹¤ë¥¸ ì‚¬ìš©ìë¥¼ í‰ê°€í–ˆë˜ ì •ë³´ë“¤ë„ ëª¨ë‘ ì˜êµ¬ì ìœ¼ë¡œ ì‚­ì œë˜ê³  ì—¬ëŸ¬ë¶„ì˜ ê°œì¸ í˜ì´ì§€ì—ì„œ 'Peer Rating' ë°•ìŠ¤ë„ ì‚¬ë¼ì§€ê²Œ ë˜ë‹ˆë‹¤. </i></p>
+users	optout	ì—¬ëŸ¬ë¶„ì€ Peer Rating ì‹œìŠ¤í…œì—ì„œ íƒˆí‡´í•˜ì‹  ìƒíƒœì´ë©° ê·¸ë ‡ì§€ ì•Šë‹¤ë©´ ë‹¤ë¥¸ ì‚¬ìš©ìë¥¼ í‰ê°€í•˜ì‹¤ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ìì„¸í•œ ì‚¬í•­ì€ <a href="/account/">ì‚¬ìš©ì ë“±ë¡ ì •ë³´</a>ë¥¼ ì°¸ê³ í•˜ì„¸ìš”.

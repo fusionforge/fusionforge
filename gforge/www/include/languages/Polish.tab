@@ -18,17 +18,17 @@
 # 2000-10-16  Max Gilead  <gilead@linart.pl>
 #	* Better translation, added new strings
 #
-about_foundries	about_blurb	O dzia³ach
+about_foundries	about_blurb	O dziaÅ‚ach
 menu	about_sourceforge	About GForge
-menu	account_maintenance	Zarz±dzanie kontem
-menu	bookmark_page	Zrób zak³adkê
-home	breaking_down_barriers	Prze³amujemy bariery w rozwoju oprogramowania Open Source
-menu	change_my_theme	Zmieñ wygl±d
-menu	code_snippet_library	Teczka wycinków kodu
+menu	account_maintenance	ZarzÄ…dzanie kontem
+menu	bookmark_page	ZrÃ³b zakÅ‚adkÄ™
+home	breaking_down_barriers	PrzeÅ‚amujemy bariery w rozwoju oprogramowania Open Source
+menu	change_my_theme	ZmieÅ„ wyglÄ…d
+menu	code_snippet_library	Teczka wycinkÃ³w kodu
 menu	compile_farm	Kompilatory
 menu	contact_us	Kontakt z nami
-group	developers	Programi¶ci
-group	developer_info	Informacja o programi¶cie
+group	developers	ProgramiÅ›ci
+group	developer_info	Informacja o programiÅ›cie
 menu	discussion_forums	Forum dyskusyjne
 menu	documentation	Dokumentacja serwera
 frs	file_download	Download
@@ -36,41 +36,41 @@ frs	file_monitor	Monitor
 frs	file_notes	Notatki
 frs	file_package	Pakiet
 frs	file_version	Wersja
-group	long_bugs	¶ledzenie pluskiew
+group	long_bugs	Å›ledzenie pluskiew
 group	long_cvs	Repozytorium CVS
 group	long_docman	DocManager: dokumentacja projektu
 group	long_forum	Forum publiczne
 group	long_ftp	Anonimowy FTP
 group	long_homepage	Strona domowa projektu
 group	long_mail	Listy dyskusyjne
-group	long_news	Naj¶wie¿sze wie¶ci
-group	long_patch	Centrum ³at
-group	long_pm	Centrum zadañ
+group	long_news	NajÅ›wieÅ¼sze wieÅ›ci
+group	long_patch	Centrum Å‚at
+group	long_pm	Centrum zadaÅ„
 group	long_support	Centrum pomocy technicznej
-group	long_survey	Sonda¿e
+group	long_survey	SondaÅ¼e
 group	short_bugs	Pluskwy
 group	short_cvs	CVS
 group	short_docman	Dokumentacja
 group	short_files	Filesgroup	short_forum	Forum
 group	short_homepage	Strona domowa
 group	short_mail	Listy dyskusyjne
-group	short_main 	G³ówna
-group	short_news	Nowo¶ci
-group	short_patch	£aty
+group	short_main 	GÅ‚Ã³wna
+group	short_news	NowoÅ›ci
+group	short_patch	Åaty
 group	short_pm	Zadania
 group	short_summary	Podsumowanie
 group	short_support	Wsparcie
-group	short_survey	Sonda¿e
-home	highest_ranked_users	Najwy¿ej oceniani u¿ytkownicy
-home	about_blurb	  GForge to <B>wolny serwis dla programistów  <A href="http://www.opensource.org">Open Source</A></B> oferuj±cy ³atwy dostêp to najlepszego CVS, list dyskusyjnych, ¶ledzenia b³êdów, grup i forum dyskusyjnych, zarz±dzania zadaniami, hostingu stron, sta³ego archiwizowania plików, pe³nego backupu; zarz±dzni ca³kowicie z poziomu WWW. <BR> &nbsp; <P> <B>Opinie i wspó³praca nad serwisem</B> <P> Aby w pe³ni skorzystaæ z GForge, powiniene¶ <A href="/account/register.php">zarejestrowaæ siê jako u¿ytkownik serwisu</A>. Pozwoli Ci to korzystaæ ze wszystkiego, co mamy do zaoferowania. Oczywi¶cie mo¿esz korzystaæ z serwisu tak¿e bez rejestracji, jednak pewne opcje bêd± niedostêpne. <P> &nbsp; <BR> <B>Za³ó¿ Swój W³asny Projekt</B> <P> <A href="/account/register.php">Zarejestruj siê jako u¿ytkownik serwisu</A>, nastêpnie <A HREF="/account/login.php">zaloguj siê</A> i <A HREF="/register/">Za³ó¿ swój w³asny projekt.</A> <P> Dziêkujemy. Przyjemnego korzystania z serwisu.
+group	short_survey	SondaÅ¼e
+home	highest_ranked_users	NajwyÅ¼ej oceniani uÅ¼ytkownicy
+home	about_blurb	  GForge to <B>wolny serwis dla programistÃ³w  <A href="http://www.opensource.org">Open Source</A></B> oferujÄ…cy Å‚atwy dostÄ™p to najlepszego CVS, list dyskusyjnych, Å›ledzenia bÅ‚Ä™dÃ³w, grup i forum dyskusyjnych, zarzÄ…dzania zadaniami, hostingu stron, staÅ‚ego archiwizowania plikÃ³w, peÅ‚nego backupu; zarzÄ…dzni caÅ‚kowicie z poziomu WWW. <BR> &nbsp; <P> <B>Opinie i wspÃ³Å‚praca nad serwisem</B> <P> Aby w peÅ‚ni skorzystaÄ‡ z GForge, powinieneÅ› <A href="/account/register.php">zarejestrowaÄ‡ siÄ™ jako uÅ¼ytkownik serwisu</A>. Pozwoli Ci to korzystaÄ‡ ze wszystkiego, co mamy do zaoferowania. OczywiÅ›cie moÅ¼esz korzystaÄ‡ z serwisu takÅ¼e bez rejestracji, jednak pewne opcje bÄ™dÄ… niedostÄ™pne. <P> &nbsp; <BR> <B>ZaÅ‚Ã³Å¼ SwÃ³j WÅ‚asny Projekt</B> <P> <A href="/account/register.php">Zarejestruj siÄ™ jako uÅ¼ytkownik serwisu</A>, nastÄ™pnie <A HREF="/account/login.php">zaloguj siÄ™</A> i <A HREF="/register/">ZaÅ‚Ã³Å¼ swÃ³j wÅ‚asny projekt.</A> <P> DziÄ™kujemy. Przyjemnego korzystania z serwisu.
 frs	latest_file_releases	Najnowsze pliki
 menu	login	Zaloguj przez SSL
 menu	logout	Wyloguj
 home	most_active_this_week	Najbardziej aktywny w tym tygodniu
 menu	my_personal_page	Moja strona osobista
 menu	new_project	Zarejestruj nowy projekt
-menu	new_releases	Nowo¶ci
-menu	new_user	Nowy u¿ytkownik przez SSL
+menu	new_releases	NowoÅ›ci
+menu	new_user	Nowy uÅ¼ytkownik przez SSL
 menu	other_site_mirrors	Inne mirrory
 menu	project_admin	Admin projektu
 group	project_admins	Admini projektu
@@ -78,10 +78,10 @@ menu	project_help_wanted	Potrzeba pomoc do projektu
 menu	project_summary	Podsumowanie projektu
 group	public_area	Obszar publiczny
 menu	search	Szukaj
-menu	software_map	Mapa projektów
+menu	software_map	Mapa projektÃ³w
 home	sourceforge_statistics	Statystyki GForge
 menu	top_projects	Najlepsze projekty
-home	top_project_downloads	Najczê¶ciej pobierane projekty
-conf	content_encoding	iso-8859-2
+home	top_project_downloads	NajczÄ™Å›ciej pobierane projekty
+conf	content_encoding	UTF-8
 conf	language_code	pl
 conf	language_id	15

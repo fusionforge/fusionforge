@@ -1,3 +1,7 @@
+2003-01-16  Roland Mas  <lolando@debian.org>
+
+	* www/include/languages/*.tab: Recoded everything to UTF-8.
+
 2003-01-15  Reinhard Spisser   <reinhard@spisser.it>
 
 	* www/include/languages/Base.tab: added forum labels
@@ -15,7 +19,7 @@
 
 	***** PRE9
 
-2003-01-15  Roland Mas  <mas@echo.fr>
+2003-01-15  Roland Mas  <lolando@debian.org>
 
 	* common/include/Plugin.class: PHPdoc.
 

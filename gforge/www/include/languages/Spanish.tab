@@ -7,12 +7,12 @@
 #  * http://sourceforge.net
 #  *
 #  * @version   $Id$
-#  * @author Enric Mart≠nez <exter@users.sourceforge.net> 
+#  * @author Enric Mart¬≠nez <exter@users.sourceforge.net> 
 #  *
 #  */
 # ChangeLog:
 #
-# 2000-09-23  Enric Mart≠nez  <exter@users.sourceforge.net>
+# 2000-09-23  Enric Mart¬≠nez  <exter@users.sourceforge.net>
 # * Initial translation
 # 2002-10-27  Vicente Ruiz <vjrj@ourproject.org>
 # * Translation until 2002-10
@@ -84,7 +84,7 @@ account_unsubscribe	all_mailings	todas las notificaciones y correos de $1
 account_unsubscribe	site_mailings	Correos de $1
 account_verify	title	$1 Verificaci&oacute;n de la cuenta
 account_verify	verify_blurb	<p>Para completar tu registro, autent&iacute;cate ahora. De esta forma tu cuenta se activar&aacute;</p>
-conf	content_encoding	utf-8
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	es
 conf	language_id	4
@@ -485,13 +485,13 @@ users	peerinfo2	El cuadro de puntuaci&oacute;n muestra todas las medias de puntu
 users	optout	Tu elegiste no aparecer en el sistema de puntuaci&oacute;n, si no podr&iacute;s puntuar a este usuario. Visita <a href="/account/">tu p&aacute;gina de mantenimiento</a> para m&aacute;s informaci&oacute;n.
 trove	not_categorized	Este proyecto todav&iacute;a no ha sido categorizado en el
 trove	title	Mapa de Proyectos
-classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardar· m·s de un dÌa en estar activo en nuestro sitio.\nMientras esperas que funcione su nombre DNS, puedes intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi despuÈs de seis horas su cuenta shell/CVS no funcionan, por favor\nabre una peticiÛn de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas est·n cerradas para el \'telnet\' y solo\nfuncionar· con \'ssh\'.\n\nSu espacio web es accesible a travÈs de esta cuenta de \'shell\'. Por favor, lea la\ndocumentaciÛn (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribucion de directorios de la cuenta.\n\nPor favor, tÛmese un tiempo para leer la documentaciÛn del portal sobre la administraciÛn de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia p·gina de proyectos en $3 mientras est· autenticado, encontrar·\nfunciones adicionales de men˙ con un titulo llamado \'AdministraciÛn de Proyectos\'.\n\nLe recomendamos altamente que visite ahora la p·gina de $3 y cree una descripciÛn\np˙blica de tu proyecto. Esto puede hacerlo visitando su p·gina\nde proyecto mientras est· autenticado, y seleccionando \'AdministraciÛn\' del men˙ de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespuÈs de autenticarse).\n\nSu proyecto no aparecer· tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegaciÛn y b˙squeda) hasta que no lo categorice en la pantalla de administraciÛn\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisita su proyecto, mientras est· autenticado, y seleccione \'AdministraciÛn\' en el\nmen˙.\n\nDisfruta del sistema, y por favor, dÌgales a otras personas de $3. Comentanos tambiÈn\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
-classgroup	rejectedproject	Su registraciÛn de su projecto en $3 ha sido negada.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\n\nLas razones para negarla:\n\n
+classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardar√° m√°s de un d√≠a en estar activo en nuestro sitio.\nMientras esperas que funcione su nombre DNS, puedes intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi despu√©s de seis horas su cuenta shell/CVS no funcionan, por favor\nabre una petici√≥n de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas est√°n cerradas para el \'telnet\' y solo\nfuncionar√° con \'ssh\'.\n\nSu espacio web es accesible a trav√©s de esta cuenta de \'shell\'. Por favor, lea la\ndocumentaci√≥n (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribucion de directorios de la cuenta.\n\nPor favor, t√≥mese un tiempo para leer la documentaci√≥n del portal sobre la administraci√≥n de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia p√°gina de proyectos en $3 mientras est√° autenticado, encontrar√°\nfunciones adicionales de men√∫ con un titulo llamado \'Administraci√≥n de Proyectos\'.\n\nLe recomendamos altamente que visite ahora la p√°gina de $3 y cree una descripci√≥n\np√∫blica de tu proyecto. Esto puede hacerlo visitando su p√°gina\nde proyecto mientras est√° autenticado, y seleccionando \'Administraci√≥n\' del men√∫ de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespu√©s de autenticarse).\n\nSu proyecto no aparecer√° tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegaci√≥n y b√∫squeda) hasta que no lo categorice en la pantalla de administraci√≥n\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisita su proyecto, mientras est√° autenticado, y seleccione \'Administraci√≥n\' en el\nmen√∫.\n\nDisfruta del sistema, y por favor, d√≠gales a otras personas de $3. Comentanos tambi√©n\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
+classgroup	rejectedproject	Su registraci√≥n de su projecto en $3 ha sido negada.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\n\nLas razones para negarla:\n\n
 classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\nNombre completo del Proyecto:  $2\nDescripcion registrada: $3\nLicencia: $4\n\nPor favor, visita esta direccion para aprobar o rechazar este proyecto:\nhttp://$5/admin/approve-pending.php
 classgroup	acceptedprojecttitle	Proyecto Aprobado por $1
 classgroup	rejectedprojecttitle	Proyecto Denegado por $1 
 classgroup	newprojectnotificationtitle	Proyecto Sometado a $1
-account_lostlogin	title	ConfirmaciÛn de perdida de contrase&ntilde;a
+account_lostlogin	title	Confirmaci√≥n de perdida de contrase&ntilde;a
 account_lostlogin	severalconfirm	Este \'hash\' de confirmaci&oacute;n existe m&aacute;s de una vez.
 account_lostlogin	invalidconfirm	\'Hash\' de confirmaci&oacute;n invalido
 account_lostlogin	sixchars	Debes proporcionar una contrase&ntilde;a valida (por lo menos seis caracteres).
@@ -502,7 +502,7 @@ account_lostlogin	newpasswd	Nueva contrase&ntilde;a (min. 6 caracteres)
 account_lostlogin	newpasswd2	Nueva contrase&ntilde;a (rep&iacute;tala)
 account_lostlogin	update	Actualice
 account_register	message_header	Registro de una cuenta en $1
-account_register	message_body	Gracias por registrarte en el sitio Web de $4. Tienes\nuna cuenta con nombre $1 creada para ti. Para completar\ntu registro, visita la siguiente direcciÛn: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si no ves ninguna direcciÛn URL arriba, se debe a un error en tu cliente de correo.\nUsa la direcciÛn de abajo, pero asegurate que lo escribes todo en una misma lÌnea.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nDisfruta de este sitio.\n\n-- el equipo de $4\n
+account_register	message_body	Gracias por registrarte en el sitio Web de $4. Tienes\nuna cuenta con nombre $1 creada para ti. Para completar\ntu registro, visita la siguiente direcci√≥n: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si no ves ninguna direcci√≥n URL arriba, se debe a un error en tu cliente de correo.\nUsa la direcci√≥n de abajo, pero asegurate que lo escribes todo en una misma l√≠nea.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nDisfruta de este sitio.\n\n-- el equipo de $4\n
 account_verify	loginname	Nombre de usuario:
 account_verify	password	Contrase&ntilde;a:
 account_verify	login		Acceso
@@ -524,7 +524,7 @@ forum_forum	date	D&iacute;a
 forum_forum	changeview	Cambiar la vista
 forum_forum	postsuccess	El mensaje ha sido publicado correctamente
 forum_forum	topic	Tema
-forum_forum	topicstarter	Quien escribio 1∫
+forum_forum	topicstarter	Quien escribio 1¬∫
 forum_forum	replies	Contestaciones
 forum_forum	lastpost	&Uacute;ltima publicaci&oacute;n
 forum_utils	news	Noticias

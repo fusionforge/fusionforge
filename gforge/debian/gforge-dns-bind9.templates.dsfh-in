@@ -12,27 +12,27 @@ Type: password
 Description: Password used for the database
  The connecton to the DB system requires a password.  Please choose a
  password here.
-Description-fr: Mot de passe utilisé pour la base de données
- La connexion à la base de données doit être authentifiée par un mot de
+Description-fr_FR.UTF-8: Mot de passe utilisÃ© pour la base de donnÃ©es
+ La connexion Ã  la base de donnÃ©es doit Ãªtre authentifiÃ©e par un mot de
  passe.  Veuillez le choisir ici.
 
 Template: gforge/shared/db_password_confirm
 Type: password
 Description: Password used for the database - again
  Please re-type the password for confirmation.
-Description-fr: Mot de passe pour la base de données - confirmation
+Description-fr_FR.UTF-8: Mot de passe pour la base de donnÃ©es - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/admin_login
 Type: string
 Default: admin
-Default-fr: admin
+Default-fr_FR.UTF-8: admin
 Description: The Sourceforge administrator login
  This Sourceforge account will have all privileges on the Sourceforge
  system.  It is needed to approve the creation of the projects.
-Description-fr: Le nom du compte de l'administrateur
- Ce compte Sourceforge a tous les privilèges sur le système Sourceforge.
- Il sert entre autres à approuver la création de projets.
+Description-fr_FR.UTF-8: Le nom du compte de l'administrateur
+ Ce compte Sourceforge a tous les privilÃ¨ges sur le systÃ¨me Sourceforge.
+ Il sert entre autres Ã  approuver la crÃ©ation de projets.
 
 Template: gforge/shared/admin_password
 Type: password
@@ -40,7 +40,7 @@ Description: The Sourceforge administrator password
  This Sourceforge account will have all privileges on the Sourceforge
  system.  It is needed to approve the creation of the projects.  Please
  type a password here.
-Description-fr: Mot de passe de l'administrateur
+Description-fr_FR.UTF-8: Mot de passe de l'administrateur
  Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le
  saisir ici.
 
@@ -48,22 +48,22 @@ Template: gforge/shared/admin_password_confirm
 Type: password
 Description: The Sourceforge administrator password - again
  Please re-type the password for confirmation.
-Description-fr: Mot de passe administrateur - confirmation
+Description-fr_FR.UTF-8: Mot de passe administrateur - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-Default-fr: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Default-fr_FR.UTF-8: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 Description: The initial list of skills
  Sourceforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of
  skills that will enter the database.  Please enter the skill names
  separated by semi-colons `;'.
-Description-fr: Liste de compétences
- Les utilisateurs de Sourceforge peuvent afficher leurs niveaux de compétence
- dans différents domaines.  Cette liste est la liste initiale de ces domaines.
- Veuillez entrer les noms de ces domaines de compétence séparés par des
+Description-fr_FR.UTF-8: Liste de compÃ©tences
+ Les utilisateurs de Sourceforge peuvent afficher leurs niveaux de compÃ©tence
+ dans diffÃ©rents domaines.  Cette liste est la liste initiale de ces domaines.
+ Veuillez entrer les noms de ces domaines de compÃ©tence sÃ©parÃ©s par des
  points-virgules `;'.
 
 Template: gforge/shared/ldap_base_dn
@@ -71,16 +71,16 @@ Type: string
 Description: The LDAP base DN
  The DN is used to refer to the LDAP directory unambiguously.  You could use,
  for instance, "dc=gforge,dc=example,dc=com"
-Description-fr: Le nom du répertoire LDAP (DN)
- Le nom DN est utilisé pour identifier l'annuaire LDAP de manière unique.
+Description-fr_FR.UTF-8: Le nom du rÃ©pertoire LDAP (DN)
+ Le nom DN est utilisÃ© pour identifier l'annuaire LDAP de maniÃ¨re unique.
  Par exemple, vous pourriez utiliser le DN "dc=gforge,dc=exemple,dc=com".
 
 Template: gforge/shared/ldap_host
 Type: string
 Description: The LDAP host
  The hostname of the LDAP server.
-Description-fr: Le serveur LDAP
- Le nom d'hôte de votre serveur LDAP.
+Description-fr_FR.UTF-8: Le serveur LDAP
+ Le nom d'hÃ´te de votre serveur LDAP.
 
 Template: gforge/shared/noreply_to_bitbucket
 Type: boolean
@@ -93,29 +93,29 @@ Description: Do you want mail to ${noreply} to be deleted?
  black hole (/dev/null), unless you have another use for that address.
  .
  Answering "yes" here will perform that redirection.
-Description-fr: Supprimer les e-mails pour ${noreply} ?
- Sourceforge envoie fréquemment des e-mails depuis (et vers) l'adresse
+Description-fr_FR.UTF-8: Supprimer les e-mails pour ${noreply} ?
+ Sourceforge envoie frÃ©quemment des e-mails depuis (et vers) l'adresse
  "${noreply}".
  .
- Il est conseillé de rediriger les e-mails vers cette adresse vers un trou
+ Il est conseillÃ© de rediriger les e-mails vers cette adresse vers un trou
  noir, sauf si vous avez un autre usage pour cette adresse.
  .
- Répondre "oui" ici mettra en place cette redirection.
+ RÃ©pondre "oui" ici mettra en place cette redirection.
 
 Template: gforge/shared/ldap_web_add_password
 Type: password
 Description: LDAP password used to add users from the web
  In order to add users into the LDAP directory from the web, you need to
  provide a password.
-Description-fr: Mot de passe LDAP pour l'ajout d'utilisateurs
- Vous avez besoin d'un mot de passe pour ajouter des utilisateurs à
+Description-fr_FR.UTF-8: Mot de passe LDAP pour l'ajout d'utilisateurs
+ Vous avez besoin d'un mot de passe pour ajouter des utilisateurs Ã 
  l'annuaire LDAP depuis le web.  Veuillez le saisir ici.
 
 Template: gforge/shared/ldap_web_add_password_confirm
 Type: password
 Description: LDAP password - again
  Please re-type the password for confirmation.
-Description-fr: Mot de passe LDAP - confirmation
+Description-fr_FR.UTF-8: Mot de passe LDAP - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/mod_ssl_cert
@@ -128,13 +128,13 @@ Description: Generate an SSL certificate
  .
  Please note you will not be able to start Apache if you have no
  such certificate.
-Description-fr: N'oubliez pas de générer un certificat SSL
+Description-fr_FR.UTF-8: N'oubliez pas de gÃ©nÃ©rer un certificat SSL
  Sourceforge a besoin d'un certificat de cryptographie SSL/TLS
- pour fonctionner.  Si vous n'en avez pas déjà un, vous devrez
- vous en fabriquer un à l'aide de la commande "mod-ssl-makecert".
- N'oubliez pas de redémarrer Apache par la suite.
+ pour fonctionner.  Si vous n'en avez pas dÃ©jÃ  un, vous devrez
+ vous en fabriquer un Ã  l'aide de la commande "mod-ssl-makecert".
+ N'oubliez pas de redÃ©marrer Apache par la suite.
  .
- NB : vous ne pourrez pas démarrer Apache si vous n'avez pas de
+ NB : vous ne pourrez pas dÃ©marrer Apache si vous n'avez pas de
  certificat.
 
 Template: gforge/shared/pam_ldap_config
@@ -148,16 +148,16 @@ Description: Sourceforge requires appropriate PAM-LDAP configuration
  admin=yes, root login account="cn=admin,dc=<your-dc-here>", crypt to
  use for passwords=crypt.  Make sure that you type the same password
  for the libpam-ldap root password and the Sourceforge LDAP password.
-Description-fr: Sourceforge a besoin d'une configuration PAM-LDAP correcte
+Description-fr_FR.UTF-8: Sourceforge a besoin d'une configuration PAM-LDAP correcte
  Sourceforge repose sur PAM-LDAP, et a donc besoin d'une configuration
- appropriée de cette bibliothèque.  Il se peut que vous ayez besoin
+ appropriÃ©e de cette bibliothÃ¨que.  Il se peut que vous ayez besoin
  d'utiliser "dpkg-reconfigure libpam-ldap" pour corriger des
- paramètres incorrects.
+ paramÃ¨tres incorrects.
  .
- Un jeu de paramètrs réputés corrects est le suivant: LDAP protocol
+ Un jeu de paramÃ¨trs rÃ©putÃ©s corrects est le suivant: LDAP protocol
  version="3", make root database admin="yes", root login
  account="cn=admin,dc=<votre-dc>", crypt to use for
- passwords="crypt".  En outre, vous devrez utiliser le même mot de
+ passwords="crypt".  En outre, vous devrez utiliser le mÃªme mot de
  passe pour le compte administrateur de libpam-ldap et pour le mot de
  passe LDAP de Sourceforge.
 
@@ -188,14 +188,14 @@ Description: Do you want ${file} to be updated?
  ${file} yourself.
  .
  Shall I modify the ${file} automatically?
-Description-fr: Voulez-vous mettre à jour ${file} ?
- Pour désinstaller complètement Sourceforge, des modifications
- doivent être apportées au fichier ${file}.
+Description-fr_FR.UTF-8: Voulez-vous mettre Ã  jour ${file} ?
+ Pour dÃ©sinstaller complÃ¨tement Sourceforge, des modifications
+ doivent Ãªtre apportÃ©es au fichier ${file}.
  .
  Je peux soit les faire automatiquement (en sauvegardant la version
- actuelle dans ${file}.gforge-old, soit écrire les modifications
- proposées dans ${file}.gforge-new, et vous laisser propager
- ces modifications vers ${file} à votre guise.
+ actuelle dans ${file}.gforge-old, soit Ã©crire les modifications
+ proposÃ©es dans ${file}.gforge-new, et vous laisser propager
+ ces modifications vers ${file} Ã  votre guise.
  .
  Dois-je modifier ${file} automatiquement ?
 
@@ -207,9 +207,9 @@ Description: Please check ${file}
  I have written the suggested changes into ${file}.gforge-new.
  Please check this file and apply the appropriate changes
  to ${file}.
-Description-fr: Veuillez vérifier ${file}
+Description-fr_FR.UTF-8: Veuillez vÃ©rifier ${file}
  Vous avez choisi de ne pas laisser le paquet Sourceforge modifier
- le fichier ${file}.  Conformément à ce choix, les modifications ont
- été sauvegardées dans ${file}.gforge-new.  Veuillez vérifier
- ce fichier et appliquer les changements adéquats à ${file},
- le cas échéant.
+ le fichier ${file}.  ConformÃ©ment Ã  ce choix, les modifications ont
+ Ã©tÃ© sauvegardÃ©es dans ${file}.gforge-new.  Veuillez vÃ©rifier
+ ce fichier et appliquer les changements adÃ©quats Ã  ${file},
+ le cas Ã©chÃ©ant.

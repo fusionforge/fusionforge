@@ -14,11 +14,11 @@ Description: Do you want mail to ${noreply} to be deleted?
  black hole (/dev/null), unless you have another use for that address.
  .
  Answering "yes" here will perform that redirection.
-Description-fr: Supprimer les e-mails pour ${noreply} ?
- Sourceforge envoie fréquemment des e-mails depuis (et vers) l'adresse
+Description-fr_FR.UTF-8: Supprimer les e-mails pour ${noreply} ?
+ Sourceforge envoie frÃ©quemment des e-mails depuis (et vers) l'adresse
  "${noreply}".
  .
- Il est conseillé de rediriger les e-mails vers cette adresse vers un trou
+ Il est conseillÃ© de rediriger les e-mails vers cette adresse vers un trou
  noir, sauf si vous avez un autre usage pour cette adresse.
  .
- Répondre "oui" ici mettra en place cette redirection.
+ RÃ©pondre "oui" ici mettra en place cette redirection.

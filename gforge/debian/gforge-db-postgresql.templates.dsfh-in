@@ -18,31 +18,31 @@ Type: string
 Description: Your download server
  The hostname of the server that will host your Sourceforge packages. 
  It should not be the same as your main SF host.
-Description-fr: Votre serveur de telechargement
- Le nom du serveur qui hébergera vos paquetages Sourceforge.
- Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
+Description-fr_FR.UTF-8: Votre serveur de telechargement
+ Le nom du serveur qui hÃ©bergera vos paquetages Sourceforge.
+ Ce nom ne devrait pas Ãªtre identique au nom de votre serveur SF principal.
 
 #DSFHELPER:dbpasswd-variables#
 
 Template: gforge/shared/admin_login
 Type: string
 Default: admin
-Default-fr: admin
+Default-fr_FR.UTF-8: admin
 Description: The Sourceforge administrator login
  This Sourceforge account will have all privileges on the Sourceforge
  system.  It is needed to approve the creation of the projects.
-Description-fr: Le nom du compte de l'administrateur
- Ce compte Sourceforge a tous les privilèges sur le système Sourceforge.
- Il sert entre autres à approuver la création de projets.
+Description-fr_FR.UTF-8: Le nom du compte de l'administrateur
+ Ce compte Sourceforge a tous les privilÃ¨ges sur le systÃ¨me Sourceforge.
+ Il sert entre autres Ã  approuver la crÃ©ation de projets.
 
 Template: gforge/shared/ip_address
 Type: string
 Description: Your IP address
  The IP address of the server that will host your Sourceforge installation.
  This is needed for the Apache virtualhosting configuration.
-Description-fr: Votre adresse IP
- L'adresse IP du serveur qui hébergera votre installation de Sourceforge.
- Cette information est requise pour la configuration des hôtes virtuels
+Description-fr_FR.UTF-8: Votre adresse IP
+ L'adresse IP du serveur qui hÃ©bergera votre installation de Sourceforge.
+ Cette information est requise pour la configuration des hÃ´tes virtuels
  d'Apache.
 
 Template: gforge/shared/admin_password
@@ -51,7 +51,7 @@ Description: The Sourceforge administrator password
  This Sourceforge account will have all privileges on the Sourceforge
  system.  It is needed to approve the creation of the projects.  Please
  type a password here.
-Description-fr: Mot de passe de l'administrateur
+Description-fr_FR.UTF-8: Mot de passe de l'administrateur
  Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le
  saisir ici.
 
@@ -59,22 +59,22 @@ Template: gforge/shared/admin_password_confirm
 Type: password
 Description: The Sourceforge administrator password - again
  Please re-type the password for confirmation.
-Description-fr: Mot de passe administrateur - confirmation
+Description-fr_FR.UTF-8: Mot de passe administrateur - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
 
 Template: gforge/shared/skill_list
 Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
-Default-fr: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Default-fr_FR.UTF-8: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 Description: The initial list of skills
  Sourceforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of
  skills that will enter the database.  Please enter the skill names
  separated by semi-colons `;'.
-Description-fr: Liste de compétences
- Les utilisateurs de Sourceforge peuvent afficher leurs niveaux de compétence
- dans différents domaines.  Cette liste est la liste initiale de ces domaines.
- Veuillez entrer les noms de ces domaines de compétence séparés par des
+Description-fr_FR.UTF-8: Liste de compÃ©tences
+ Les utilisateurs de Sourceforge peuvent afficher leurs niveaux de compÃ©tence
+ dans diffÃ©rents domaines.  Cette liste est la liste initiale de ces domaines.
+ Veuillez entrer les noms de ces domaines de compÃ©tence sÃ©parÃ©s par des
  points-virgules `;'.
 
 #DSFHELPER:dbhost-variables#

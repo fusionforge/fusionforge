@@ -3,42 +3,42 @@ Type: string
 Description: Your SF domain or subdomain name
  The domain that will host your Sourceforge installation.  Some services
  will be given their own subdomain in that domain (cvs, lists, etc.).
-Description-fr: Votre nom de domaine
- Le nom du domaine qui hÈberge votre Sourceforge.  Certains services auront
- leur propre sous-domaine ‡ l'intÈrieur de ce domaine (cvs, lists, etc.).
+Description-fr_FR.UTF-8: Votre nom de domaine
+ Le nom du domaine qui h√©berge votre Sourceforge.  Certains services auront
+ leur propre sous-domaine √† l'int√©rieur de ce domaine (cvs, lists, etc.).
 
 Template: gforge/shared/server_admin
 Type: string
 Description: The SF admin email address.
  The email address of the Sourceforge administrator of your site.  Needed
  in case a problem occurs.
-Description-fr: L'adresse e-mail de l'administrateur SF
+Description-fr_FR.UTF-8: L'adresse e-mail de l'administrateur SF
  L'adresse e-mail de l'administrateur de votre Sourceforge, requise au cas
- o˘ un problËme survendrait.
+ o√π un probl√®me survendrait.
 
 Template: gforge/shared/system_name
 Type: string
 Default: Sourceforge
-Default-fr: Sourceforge
+Default-fr_FR.UTF-8: Sourceforge
 Description: The Sourceforge system name
  This name is used in various places throughout the system.
-Description-fr: Nom de votre systËme Sourceforge
- Ce nom est utilisÈ ‡ divers endroits au travers du systËme.
+Description-fr_FR.UTF-8: Nom de votre syst√®me Sourceforge
+ Ce nom est utilis√© √† divers endroits au travers du syst√®me.
 
 Template: gforge/shared/sys_lang
 Type: string
 Default: English
-Default-fr: French
+Default-fr_FR.UTF-8: French
 Description: Default language
  Here is the default language for web pages, be carreful to enter a valid language.
-Description-fr: Langage par defaut
- Ceci est le langage par defaut des pages web, attention de bien entrer une langue valide.
+Description-fr_FR.UTF-8: Langage par d√©faut
+ Ceci est le langage par d√©faut des pages web, attention de bien entrer une langue valide.
 
 Template: gforge/shared/sys_theme
 Type: string
 Default: debian
-Default-fr: debian
+Default-fr_FR.UTF-8: debian
 Description: Default theme
  Here is the default theme for web pages, be carreful to enter a valid name.
-Description-fr: Theme par defaut
- Ceci est le theme par defaut des pages web, attention de bien entrer un nom valide.
+Description-fr_FR.UTF-8: Th√®me par d√©faut
+ Ceci est le th√®me par d√©faut des pages web, attention de bien entrer un nom valide.

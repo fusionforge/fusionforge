@@ -11,6 +11,7 @@
 #  */
 # 
 # I'm surprised to find Latin has an ISO 639 Language code!
+conf	content_encoding	UTF-8
 conf	language_code	la
 conf	language_id	24
 forum	title	Fora

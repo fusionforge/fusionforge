@@ -7,84 +7,85 @@
 #  * http://sourceforge.net
 #  *
 #  * @version   $Id$
-#  * @author Enric Mart≠nez
+#  * @author Enric Mart¬≠nez
 #  *
 #  */
 # 
 # ChangeLog:
 #
-# 2000-09-23  Enric Mart≠nez
+# 2000-09-23  Enric Mart¬≠nez
 #	* Initial translation
 # 2000-10-16  Evilio del Rio
 #	* Corrections:
-#        Els meus criteris de correcci„ s'han basat en els
-#        segÏents punts:
+#        Els meus criteris de correcci√£ s'han basat en els
+#        seg√¨ents punts:
 #
-#                . Correci„ ortogr†fica (catal† central)
-#                . Correci„ teminol‚gica (programari, etc.)
-#                . Nom©s hi majÍscules a la lletra inicial i noms propis.
-#                . D'altres criteris trets de Soft Catal† (utilitzaci„ del "vos").
+#                . Correci√£ ortogr¬†fica (catal¬† central)
+#                . Correci√£ teminol√¢gica (programari, etc.)
+#                . Nom¬©s hi maj√™scules a la lletra inicial i noms propis.
+#                . D'altres criteris trets de Soft Catal¬† (utilitzaci√£ del "vos").
 #
 menu	account_maintenance	Manteniment de compte
-menu	bookmark_page	P·gina de marcadors
+menu	bookmark_page	P√°gina de marcadors
 home	breaking_down_barriers	Trencant les barreres per al desenvolupament de codi obert
 menu	change_my_theme	Canviar el meu tema
 menu	code_snippet_library	Biblioteca de bocinets de codi
-menu	compile_farm	Granja de compilaciÛ
+menu	compile_farm	Granja de compilaci√≥
 menu	contact_us	Contacteu
 group	developers	Desenvolupadors
-group	developer_info	InformaciÛ del desenvolupador
-menu	discussion_forums	 FÚrums de discussiÚ 
-menu	documentation	DocumentaciÛ local
-frs	file_download	Desc‡rrega
+group	developer_info	Informaci√≥ del desenvolupador
+menu	discussion_forums	 F√≤rums de discussi√≤ 
+menu	documentation	Documentaci√≥ local
+frs	file_download	Desc√†rrega
 frs	file_monitor	Monitor
 frs	file_notes	Notes
 frs	file_package	Paquet
-frs	file_version	VersiÛ
+frs	file_version	Versi√≥
 group	long_bugs	Seguiment d'errors
 group	long_cvs	Repositori CVS
 group	long_docman	Gestor de documents
-group	long_forum	 FÚrums p˙blics
-group	long_ftp	Espai de FTP anÚnim
-group	long_homepage	P‡gina d'inici del projecte
+group	long_forum	 F√≤rums p√∫blics
+group	long_ftp	Espai de FTP an√≤nim
+group	long_homepage	P√†gina d'inici del projecte
 group	long_mail	Llistas de correu
-group	long_news	⁄ltimes notÌcies
+group	long_news	√öltimes not√≠cies
 group	long_patch	Gestor de pegats
 group	long_pm	Gestor de tasques
-group	long_support	Gestor de suport tËcnic
+group	long_support	Gestor de suport t√®cnic
 group	long_survey	Enquestes
 group	short_bugs	Errades
 group	short_cvs	CVS
 group	short_docman	Documents
-group	short_files	Filesgroup	short_forum	FÚrums
-group	short_homepage	P‡gina de inici
+group	short_files	Filesgroup	short_forum	F√≤rums
+group	short_homepage	P√†gina de inici
 group	short_mail	Llistes
-group	short_news	NotÌcies
+group	short_news	Not√≠cies
 group	short_patch	Pegats
 group	short_pm	Tasques
 group	short_summary	Sumari
-group	short_support	Suport tËcnic
+group	short_support	Suport t√®cnic
 group	short_survey	Enquestes
-home	highest_ranked_users	Usuaris mÈs actius
-home	about_blurb	  GForge Ès un<B>servei gratuÔt per a desenvolupadors de<A href="http://www.opensource.org">Codi obert</A></B> oferint f‡Áil accÈs als millors repositoris CVS, llistes de discussiÛ, seguiment d'errors, taulers de anuncis, fÚrums, gestiÛ de tasques, hostatge de llocs web, arxius permanent de fitxers, cÚpies de seguretat completes i administraciÛ totalment basada en web. <BR> &nbsp; <P> <B>Retorn i participaciÛ</B> <P> Per poder obtenir el m‡xim de GForge, haureu  d'<A href="/account/register.php">enregistrar-vos com a  usuari del lloc</A>. AixÚ us permetr‡ participar plenament en tot el que tenim per oferir. Podreu, Ès clar, navegar pel lloc sense enregistrar-vos, perÚ no tindreu l'opciÛ de participar plenament. <P> &nbsp; <BR> <B>Feu el vostre propi projecte</B> <P> <A href="/account/register.php">Enregistreu-vos com a usuari del lloc</A>,  <A HREF="/account/login.php"entreu </A>amb el vostre usuari i finalment, <A HREF="/register/">Doneu d'alta el vostre projecte.</A> <P> Moltes Gr‡cies... i gaudiu del lloc.
-frs	latest_file_releases	⁄ltimes versions dels arxius
-menu	login	AccÈs via SSL
+home	highest_ranked_users	Usuaris m√©s actius
+home	about_blurb	  GForge √©s un<B>servei gratu√Øt per a desenvolupadors de<A href="http://www.opensource.org">Codi obert</A></B> oferint f√†√ßil acc√©s als millors repositoris CVS, llistes de discussi√≥, seguiment d'errors, taulers de anuncis, f√≤rums, gesti√≥ de tasques, hostatge de llocs web, arxius permanent de fitxers, c√≤pies de seguretat completes i administraci√≥ totalment basada en web. <BR> &nbsp; <P> <B>Retorn i participaci√≥</B> <P> Per poder obtenir el m√†xim de GForge, haureu  d'<A href="/account/register.php">enregistrar-vos com a  usuari del lloc</A>. Aix√≤ us permetr√† participar plenament en tot el que tenim per oferir. Podreu, √©s clar, navegar pel lloc sense enregistrar-vos, per√≤ no tindreu l'opci√≥ de participar plenament. <P> &nbsp; <BR> <B>Feu el vostre propi projecte</B> <P> <A href="/account/register.php">Enregistreu-vos com a usuari del lloc</A>,  <A HREF="/account/login.php"entreu </A>amb el vostre usuari i finalment, <A HREF="/register/">Doneu d'alta el vostre projecte.</A> <P> Moltes Gr√†cies... i gaudiu del lloc.
+frs	latest_file_releases	√öltimes versions dels arxius
+menu	login	Acc√©s via SSL
 menu	logout	Sortir
-home	most_active_this_week	El mÈs actiu aquesta setmana
-menu	my_personal_page	La meva p‡gina personal
+home	most_active_this_week	El m√©s actiu aquesta setmana
+menu	my_personal_page	La meva p√†gina personal
 menu	new_project	Enregistrar un projecte nou
 menu	new_releases	Noves sortides
 menu	new_user	Usuari nou via SSL
 menu	other_site_mirrors	Miralls d'altres llocs
-menu	project_admin	AdmininstraciÛ de projectes
+menu	project_admin	Admininstraci√≥ de projectes
 group	project_admins	Administradors del projecte
 menu	project_help_wanted	Es necessita ajuda per projectes
 menu	project_summary	Sumari de projectes
-group	public_area	¡rea p˙blica
+group	public_area	√Årea p√∫blica
 menu	search	Cercar
 menu	software_map	Mapa de programari
-home	sourceforge_statistics	EstadÌstiques de GForge
+home	sourceforge_statistics	Estad√≠stiques de GForge
 menu	top_projects	Projectes senyers
-home	top_project_downloads	Projectes mÈs descarregats
+home	top_project_downloads	Projectes m√©s descarregats
+conf	content_encoding	UTF-8
 conf	language_code	ca
 conf	language_id	14

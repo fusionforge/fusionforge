@@ -20,72 +20,72 @@
 #
 about_foundries	about_blurb	Sobre as Foundries
 menu	about_sourceforge	Sobre a GForge
-menu	account_maintenance	ManutenÁ„o da Conta
-menu	bookmark_page	P·gina de Bookmarks
+menu	account_maintenance	Manuten√ß√£o da Conta
+menu	bookmark_page	P√°gina de Bookmarks
 home	breaking_down_barriers	Quebrando as Barreiras contra o Desenvolvimento do Open Source
 menu	change_my_theme	Mudar Tema
-menu	code_snippet_library	Biblioteca de CÛdigo
-menu	compile_farm	ColecÁ„o de Compiladores
+menu	code_snippet_library	Biblioteca de C√≥digo
+menu	compile_farm	Colec√ß√£o de Compiladores
 menu	contact_us	Contacte a GForge
 group	developers	Programadores
-group	developer_info	InformaÁ„o s/ Programador
-menu	discussion_forums	FÛruns de Discuss„o
-menu	documentation	DocumentaÁ„o do Site
+group	developer_info	Informa√ß√£o s/ Programador
+menu	discussion_forums	F√≥runs de Discuss√£o
+menu	documentation	Documenta√ß√£o do Site
 frs	file_download	Download
 frs	file_monitor	Monitor
-frs	file_notes	ObservaÁıes
+frs	file_notes	Observa√ß√µes
 frs	file_package	Pacotes
 frs	file_rel_date	Data
-frs	file_version	Vers„o
+frs	file_version	Vers√£o
 group	long_bugs	Procura de Bugs
 group	long_cvs	Arquivo do CVS
-group	long_docman	Gestor da DocumentaÁ„o do Projecto
-group	long_forum	FÛruns P˙blicos
+group	long_docman	Gestor da Documenta√ß√£o do Projecto
+group	long_forum	F√≥runs P√∫blicos
 group	long_foundries	Foundries de Desenvolvimento da GForge
-group	long_ftp	EspaÁo p/ FTP AnÛnimo
+group	long_ftp	Espa√ßo p/ FTP An√≥nimo
 group	long_homepage	Home Page do Projecto
 group	long_mail	Mailing Lists
-group	long_news	NotÌcias Mais Recentes
+group	long_news	Not√≠cias Mais Recentes
 group	long_patch	Gestor dos Patches
 group	long_pm	Gestor de Tarefas
-group	long_support	Gestor do Suporte TÈcnico
-group	long_survey	InquÈritos
+group	long_support	Gestor do Suporte T√©cnico
+group	long_survey	Inqu√©ritos
 group	short_bugs	Bugs
 group	short_cvs	CVS
-group	short_docman	DocumentaÁ„o
+group	short_docman	Documenta√ß√£o
 group	short_files	Files
-group	short_forum	FÛruns
-group	short_homepage	P·gina de Entrada
+group	short_forum	F√≥runs
+group	short_homepage	P√°gina de Entrada
 group	short_mail	Listas
 group	short_main 	Principal
 group	short_memberlist	Programadores
-group	short_news	NotÌcias
+group	short_news	Not√≠cias
 group	short_patch	Patches
 group	short_pm	Tarefas
 group	short_summary	Resumo
 group	short_support	Suporte
-group	short_survey	InquÈritos
+group	short_survey	Inqu√©ritos
 home	highest_ranked_users	Utilizadores mais Destacados
-home	about_blurb	  A GForge È um <B>serviÁo gratuito para os programadores em <A href="http://www.opensource.org">Open Source</A></B> que oferece f·cil acesso ao que melhor se faz em CVS, Mailing Lists, Procura de bugs, FÛruns, AdministraÁ„o de Tarefas, Alojamento de Sites, Arquivo permanente de Ficheiros, Backups completos e ainda AdministraÁ„o dos Projectos totalmente baseada numa interface web. <BR> &nbsp; <P> <B>Contacto e ParticipaÁ„o no Site</B> <P> De forma a obter o m·ximo da GForge, vai precisar de se <A href="/account/register.php">registar como utilizador do site</A>. Isto permitir· que participe em todos os serviÁos que temos disponÌveis. Pode obviamente visitar o site sem se registar mas n„o ter· acesso a uma participaÁ„o completa. <P> &nbsp;  <BR> <B>Crie o Seu PrÛprio Projecto</B> <P> <A href="/account/register.php">Registe-se como utilizador do site</A>, faÁa o respectivo <A HREF="/account/login.php">Login</A> e por fim, <A HREF="/register/">Registe o Seu Projecto.</A>  <P> Obrigado... e tire bom partido do site.
-frs	latest_file_releases	LanÁamentos Mais Recentes
+home	about_blurb	  A GForge √© um <B>servi√ßo gratuito para os programadores em <A href="http://www.opensource.org">Open Source</A></B> que oferece f√°cil acesso ao que melhor se faz em CVS, Mailing Lists, Procura de bugs, F√≥runs, Administra√ß√£o de Tarefas, Alojamento de Sites, Arquivo permanente de Ficheiros, Backups completos e ainda Administra√ß√£o dos Projectos totalmente baseada numa interface web. <BR> &nbsp; <P> <B>Contacto e Participa√ß√£o no Site</B> <P> De forma a obter o m√°ximo da GForge, vai precisar de se <A href="/account/register.php">registar como utilizador do site</A>. Isto permitir√° que participe em todos os servi√ßos que temos dispon√≠veis. Pode obviamente visitar o site sem se registar mas n√£o ter√° acesso a uma participa√ß√£o completa. <P> &nbsp;  <BR> <B>Crie o Seu Pr√≥prio Projecto</B> <P> <A href="/account/register.php">Registe-se como utilizador do site</A>, fa√ßa o respectivo <A HREF="/account/login.php">Login</A> e por fim, <A HREF="/register/">Registe o Seu Projecto.</A>  <P> Obrigado... e tire bom partido do site.
+frs	latest_file_releases	Lan√ßamentos Mais Recentes
 menu	login	Login por SSL
 menu	logout	Logout
 home	most_active_this_week	O Mais Activo nesta Semana
-menu	my_personal_page	P·gina Pessoal
+menu	my_personal_page	P√°gina Pessoal
 menu	new_project	Criar um Projecto Novo
-menu	new_releases	Novos LanÁamentos
+menu	new_releases	Novos Lan√ßamentos
 menu	new_user	Utilizador Novo por SSL
 menu	other_site_mirrors	Outros Mirrors
-menu	project_admin	AdministraÁ„o do Projecto
+menu	project_admin	Administra√ß√£o do Projecto
 group	project_admins	Administradores do Projecto
 menu	project_help_wanted	Projectos que Precisam de Ajuda
 menu	project_summary	Resumo do Projecto
-group	public_area	¡reas P˙blicas
+group	public_area	√Åreas P√∫blicas
 menu	search	Procurar
 menu	software_map	Listagem do Software
-home	sourceforge_statistics	EstatÌsticas da GForge
+home	sourceforge_statistics	Estat√≠sticas da GForge
 menu	top_projects	Projectos Principais
 home	top_project_downloads	Projectos com mais Downloads
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	language_code	pt
 conf	language_id	18

@@ -18,7 +18,7 @@
 system	locale	it_IT
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	d-m-Y H:i
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
@@ -83,7 +83,7 @@ account_register	update	Applica Modifiche
 account_register	reset	Annulla
 account_unsubscribe	all_mailings	tutti i e-mail ed annunci di $1
 account_unsubscribe	site_mailings	tutti i e-mail di $1
-account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo conto ser� attivato.</p>
+account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo conto serà attivato.</p>
 account_verify	loginname	Nome Login:
 account_verify	password	Password:
 account_verify	login		Login
@@ -353,7 +353,7 @@ my	pending_projects_3	Premere qui
 my	pending_news_bytes_1	C'e' una news in attesa di approvazione
 my	pending_news_bytes_2	Ci sono  $1 news in attesa di approvazione
 my	pending_news_bytes_3	Premere qui.
-news	choose	<P>Seleziona una news e pu� visualizzare, ricercare e inviare messaggi.<P>
+news	choose	<P>Seleziona una news e può visualizzare, ricercare e inviare messaggi.<P>
 news	nonews	Nessuna news
 news	nonewsfor	Nessuna news per $1
 news	noitems	Non sono state trovate news

@@ -16,74 +16,69 @@
 # 2000-09-25  Korakot Chaovavanich
 #	* Initial translation:
 #	National Electronic and Computer Technology Center.
-#	็R ม๔๚๒๚iๆ, 25 ๓ฟ๗๔๗ฟ 2543
-#	้ýฟ๗อมืฟืๅ๗่๎ๆมๅ็๎ฟๆ๋อยๅ๒๎โ?ๆ๚มÞ๎็อย์ษ๔Þๆ
-#
-#	According to Information Technology Vocabulary version of Royal Acadamy
-#	๎ๆÞ๔โ ้๓?อมืฟืๅ๗่๋๔็๋ฟม้ c๓็๔๓i+ๆÞ๗๋๔ฟ
 #	Sorry that I can't translate all of them... There seems no standard translation
 #	for Software Development Vocab. Some thai may even prefer English than translation.
 #
-menu	account_maintenance	ดูแลบัญชีผู้ใช้
-menu	bookmark_page	ใส่ที่คั่นหน้า
-home	breaking_down_barriers	ทะลายอุปสรรคสู่การพัฒนาแบบโอเพ่นซอร์ส
-menu	change_my_theme	เปลี่ยน Theme
-menu	code_snippet_library	คลังโปรแกรมเล็ก
-menu	contact_us	ติดต่อพวกเรา
-group	developers	ผู้พัฒนา
-group	developer_info	ข้อมูลผู้พัฒนา
-menu	discussion_forums	กระดานสนทนา
-menu	documentation	เอกสารคู่มือไซต์
-frs	file_download	ดาวโหลด
-frs	file_monitor	เฝ้าสังเกต
-frs	file_notes	บันทึกข้อความ
-frs	file_package	แพ็กเกจ
-frs	file_version	รุ่น
-group	long_bugs	ติดตามบั๊ก
-group	long_cvs	ที่รวม CVS
-group	long_docman	จัดการเอกสาร: คู่มือโปรเจกต์
-group	long_forum	กระดานสาธารณะ
-group	long_ftp	พื้นที่ FTP นิรนาม
-group	long_homepage	โฮมเพจโครงการ
-group	long_mail	จดหมายกลุ่ม
-group	long_news	ข่าวล่าสุด
-group	long_patch	จัดการแพตช์
-group	long_pm	จัดการภารกิจ
-group	long_support	บริการทางเทคนิก
-group	long_survey	แบบสำรวจ
-group	short_bugs	บั๊ก
-group	short_docman	เอกสาร
-group	short_files	Filesgroup	short_forum	สนทนา
-group	short_homepage	โฮมเพจ
-group	short_mail	จดหมาย
-group	short_news	ข่าว
-group	short_patch	แพตช์
-group	short_pm	ภารกิจ
-group	short_summary	สรุป
-group	short_support	บริการ
-group	short_survey	สำรวจ
-home	highest_ranked_users	คนคะแนนสูงสุด
-home	about_blurb	  GForge เป็น <B>บริการฟรีแก่นักพัฒนา <A href="http://opensource.thai.net">โอเพ่นซอร์ส</A></B> โดยมีบริการที่สะดวกและดีที่สุด ทั้ง ระบบ CVS, จดหมายกลุ่ม, ระบบติดตามบั๊ก, กระดานสนทนา, ระบบจัดการภารกิจ, ให้เนื้อที่เว็บไซต์,  ระบบจัดเก็บไฟล์ถาวร, มีการสำรองไฟล์ทั้งหมด, รวมทั้งให้บริหารระบบต่าง ๆ ได้ผ่านเว็บทั้งหมด. <BR> &nbsp; <P> <B>การมีส่วนร่วม และป้อนกลับกับไซต์</B> <P> เพื่อให้ได้รับประโยชน์จาก GForge สูงสุด, คุณจำเป็นต้อง <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>. คุณจะได้รับอนุญาตให้เข้ามีส่วนร่วมเต็มที่ในทุกสิ่งที่เรามีบริการ. คุณสามารถเข้าชมไซต์ไปเรื่อย ๆ โดยไม่จำเป็นต้องลงทะเบียน แต่คุณอาจไม่สามารถเข้าใช้บริการบางอย่างได้ครบทั้งหมด. <P> &nbsp; <BR> <B>ตั้งโปรเจกต์ของคุณเอง</B> <P> <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>, แล้ว <A HREF="/account/login.php">ลงบันทึกเข้า</A> และสุดท้ายก็ <A HREF="/register/">ตั้งโปรเจกต์ใหม่ของคุณเอง</A>. <P> ขอบคุณครับ... ขอให้สนุกกับบริการของเรา.
-frs	latest_file_releases	ไฟล์ออกใหม่ล่าสุด
-menu	login	ลงบันทึกเข้าด้วย SSL
-menu	logout	ลงบันทึกออก
-home	most_active_this_week	ตื่นตัวสูงสุดในสัปดาห์
-menu	my_personal_page	หน้าส่วนตัว
-menu	new_project	ตั้งโปรเจกต์ใหม่
-menu	new_releases	ชุดออกใหม่
-menu	new_user	สมัครสมาชิกใหม่
-menu	other_site_mirrors	Mirror ที่อื่น ๆ
-menu	project_admin	บริหารโปรเจกต์
-group	project_admins	ผู้ดูแลโปรเจกต์
-menu	project_help_wanted	ต้องการคนช่วย
-menu	project_summary	สรุปโปรเจกต์
-group	public_area	พื้นที่สาธารณะ
-menu	search	ค้นหา
-menu	software_map	แผนที่ซอฟต์แวร์
-home	sourceforge_statistics	สถิติ GForge
-menu	top_projects	โปรเจกต์สุดยอด
-home	top_project_downloads	โปรเจกต์ดาวโหลดสูงสุด
-conf	content_encoding	tis-620
+menu	account_maintenance	เธ”เธนเนเธฅเธเธฑเธเธเธตเธเธนเนเนเธเน
+menu	bookmark_page	เนเธชเนเธ—เธตเนเธเธฑเนเธเธซเธเนเธฒ
+home	breaking_down_barriers	เธ—เธฐเธฅเธฒเธขเธญเธธเธเธชเธฃเธฃเธเธชเธนเนเธเธฒเธฃเธเธฑเธ’เธเธฒเนเธเธเนเธญเน€เธเนเธเธเธญเธฃเนเธช
+menu	change_my_theme	เน€เธเธฅเธตเนเธขเธ Theme
+menu	code_snippet_library	เธเธฅเธฑเธเนเธเธฃเนเธเธฃเธกเน€เธฅเนเธ
+menu	contact_us	เธ•เธดเธ”เธ•เนเธญเธเธงเธเน€เธฃเธฒ
+group	developers	เธเธนเนเธเธฑเธ’เธเธฒ
+group	developer_info	เธเนเธญเธกเธนเธฅเธเธนเนเธเธฑเธ’เธเธฒ
+menu	discussion_forums	เธเธฃเธฐเธ”เธฒเธเธชเธเธ—เธเธฒ
+menu	documentation	เน€เธญเธเธชเธฒเธฃเธเธนเนเธกเธทเธญเนเธเธ•เน
+frs	file_download	เธ”เธฒเธงเนเธซเธฅเธ”
+frs	file_monitor	เน€เธเนเธฒเธชเธฑเธเน€เธเธ•
+frs	file_notes	เธเธฑเธเธ—เธถเธเธเนเธญเธเธงเธฒเธก
+frs	file_package	เนเธเนเธเน€เธเธ
+frs	file_version	เธฃเธธเนเธ
+group	long_bugs	เธ•เธดเธ”เธ•เธฒเธกเธเธฑเนเธ
+group	long_cvs	เธ—เธตเนเธฃเธงเธก CVS
+group	long_docman	เธเธฑเธ”เธเธฒเธฃเน€เธญเธเธชเธฒเธฃ: เธเธนเนเธกเธทเธญเนเธเธฃเน€เธเธเธ•เน
+group	long_forum	เธเธฃเธฐเธ”เธฒเธเธชเธฒเธเธฒเธฃเธ“เธฐ
+group	long_ftp	เธเธทเนเธเธ—เธตเน FTP เธเธดเธฃเธเธฒเธก
+group	long_homepage	เนเธฎเธกเน€เธเธเนเธเธฃเธเธเธฒเธฃ
+group	long_mail	เธเธ”เธซเธกเธฒเธขเธเธฅเธธเนเธก
+group	long_news	เธเนเธฒเธงเธฅเนเธฒเธชเธธเธ”
+group	long_patch	เธเธฑเธ”เธเธฒเธฃเนเธเธ•เธเน
+group	long_pm	เธเธฑเธ”เธเธฒเธฃเธ เธฒเธฃเธเธดเธ
+group	long_support	เธเธฃเธดเธเธฒเธฃเธ—เธฒเธเน€เธ—เธเธเธดเธ
+group	long_survey	เนเธเธเธชเธณเธฃเธงเธ
+group	short_bugs	เธเธฑเนเธ
+group	short_docman	เน€เธญเธเธชเธฒเธฃ
+group	short_files	Filesgroup	short_forum	เธชเธเธ—เธเธฒ
+group	short_homepage	เนเธฎเธกเน€เธเธ
+group	short_mail	เธเธ”เธซเธกเธฒเธข
+group	short_news	เธเนเธฒเธง
+group	short_patch	เนเธเธ•เธเน
+group	short_pm	เธ เธฒเธฃเธเธดเธ
+group	short_summary	เธชเธฃเธธเธ
+group	short_support	เธเธฃเธดเธเธฒเธฃ
+group	short_survey	เธชเธณเธฃเธงเธ
+home	highest_ranked_users	เธเธเธเธฐเนเธเธเธชเธนเธเธชเธธเธ”
+home	about_blurb	  GForge เน€เธเนเธ <B>เธเธฃเธดเธเธฒเธฃเธเธฃเธตเนเธเนเธเธฑเธเธเธฑเธ’เธเธฒ <A href="http://opensource.thai.net">เนเธญเน€เธเนเธเธเธญเธฃเนเธช</A></B> เนเธ”เธขเธกเธตเธเธฃเธดเธเธฒเธฃเธ—เธตเนเธชเธฐเธ”เธงเธเนเธฅเธฐเธ”เธตเธ—เธตเนเธชเธธเธ” เธ—เธฑเนเธ เธฃเธฐเธเธ CVS, เธเธ”เธซเธกเธฒเธขเธเธฅเธธเนเธก, เธฃเธฐเธเธเธ•เธดเธ”เธ•เธฒเธกเธเธฑเนเธ, เธเธฃเธฐเธ”เธฒเธเธชเธเธ—เธเธฒ, เธฃเธฐเธเธเธเธฑเธ”เธเธฒเธฃเธ เธฒเธฃเธเธดเธ, เนเธซเนเน€เธเธทเนเธญเธ—เธตเนเน€เธงเนเธเนเธเธ•เน,  เธฃเธฐเธเธเธเธฑเธ”เน€เธเนเธเนเธเธฅเนเธ–เธฒเธงเธฃ, เธกเธตเธเธฒเธฃเธชเธณเธฃเธญเธเนเธเธฅเนเธ—เธฑเนเธเธซเธกเธ”, เธฃเธงเธกเธ—เธฑเนเธเนเธซเนเธเธฃเธดเธซเธฒเธฃเธฃเธฐเธเธเธ•เนเธฒเธ เน เนเธ”เนเธเนเธฒเธเน€เธงเนเธเธ—เธฑเนเธเธซเธกเธ”. <BR> &nbsp; <P> <B>เธเธฒเธฃเธกเธตเธชเนเธงเธเธฃเนเธงเธก เนเธฅเธฐเธเนเธญเธเธเธฅเธฑเธเธเธฑเธเนเธเธ•เน</B> <P> เน€เธเธทเนเธญเนเธซเนเนเธ”เนเธฃเธฑเธเธเธฃเธฐเนเธขเธเธเนเธเธฒเธ GForge เธชเธนเธเธชเธธเธ”, เธเธธเธ“เธเธณเน€เธเนเธเธ•เนเธญเธ <A href="/account/register.php">เธฅเธเธ—เธฐเน€เธเธตเธขเธเน€เธเนเธเธชเธกเธฒเธเธดเธเนเธเธ•เน</A>. เธเธธเธ“เธเธฐเนเธ”เนเธฃเธฑเธเธญเธเธธเธเธฒเธ•เนเธซเนเน€เธเนเธฒเธกเธตเธชเนเธงเธเธฃเนเธงเธกเน€เธ•เนเธกเธ—เธตเนเนเธเธ—เธธเธเธชเธดเนเธเธ—เธตเนเน€เธฃเธฒเธกเธตเธเธฃเธดเธเธฒเธฃ. เธเธธเธ“เธชเธฒเธกเธฒเธฃเธ–เน€เธเนเธฒเธเธกเนเธเธ•เนเนเธเน€เธฃเธทเนเธญเธข เน เนเธ”เธขเนเธกเนเธเธณเน€เธเนเธเธ•เนเธญเธเธฅเธเธ—เธฐเน€เธเธตเธขเธ เนเธ•เนเธเธธเธ“เธญเธฒเธเนเธกเนเธชเธฒเธกเธฒเธฃเธ–เน€เธเนเธฒเนเธเนเธเธฃเธดเธเธฒเธฃเธเธฒเธเธญเธขเนเธฒเธเนเธ”เนเธเธฃเธเธ—เธฑเนเธเธซเธกเธ”. <P> &nbsp; <BR> <B>เธ•เธฑเนเธเนเธเธฃเน€เธเธเธ•เนเธเธญเธเธเธธเธ“เน€เธญเธ</B> <P> <A href="/account/register.php">เธฅเธเธ—เธฐเน€เธเธตเธขเธเน€เธเนเธเธชเธกเธฒเธเธดเธเนเธเธ•เน</A>, เนเธฅเนเธง <A HREF="/account/login.php">เธฅเธเธเธฑเธเธ—เธถเธเน€เธเนเธฒ</A> เนเธฅเธฐเธชเธธเธ”เธ—เนเธฒเธขเธเน <A HREF="/register/">เธ•เธฑเนเธเนเธเธฃเน€เธเธเธ•เนเนเธซเธกเนเธเธญเธเธเธธเธ“เน€เธญเธ</A>. <P> เธเธญเธเธเธธเธ“เธเธฃเธฑเธ... เธเธญเนเธซเนเธชเธเธธเธเธเธฑเธเธเธฃเธดเธเธฒเธฃเธเธญเธเน€เธฃเธฒ.
+frs	latest_file_releases	เนเธเธฅเนเธญเธญเธเนเธซเธกเนเธฅเนเธฒเธชเธธเธ”
+menu	login	เธฅเธเธเธฑเธเธ—เธถเธเน€เธเนเธฒเธ”เนเธงเธข SSL
+menu	logout	เธฅเธเธเธฑเธเธ—เธถเธเธญเธญเธ
+home	most_active_this_week	เธ•เธทเนเธเธ•เธฑเธงเธชเธนเธเธชเธธเธ”เนเธเธชเธฑเธเธ”เธฒเธซเน
+menu	my_personal_page	เธซเธเนเธฒเธชเนเธงเธเธ•เธฑเธง
+menu	new_project	เธ•เธฑเนเธเนเธเธฃเน€เธเธเธ•เนเนเธซเธกเน
+menu	new_releases	เธเธธเธ”เธญเธญเธเนเธซเธกเน
+menu	new_user	เธชเธกเธฑเธเธฃเธชเธกเธฒเธเธดเธเนเธซเธกเน
+menu	other_site_mirrors	Mirror เธ—เธตเนเธญเธทเนเธ เน
+menu	project_admin	เธเธฃเธดเธซเธฒเธฃเนเธเธฃเน€เธเธเธ•เน
+group	project_admins	เธเธนเนเธ”เธนเนเธฅเนเธเธฃเน€เธเธเธ•เน
+menu	project_help_wanted	เธ•เนเธญเธเธเธฒเธฃเธเธเธเนเธงเธข
+menu	project_summary	เธชเธฃเธธเธเนเธเธฃเน€เธเธเธ•เน
+group	public_area	เธเธทเนเธเธ—เธตเนเธชเธฒเธเธฒเธฃเธ“เธฐ
+menu	search	เธเนเธเธซเธฒ
+menu	software_map	เนเธเธเธ—เธตเนเธเธญเธเธ•เนเนเธงเธฃเน
+home	sourceforge_statistics	เธชเธ–เธดเธ•เธด GForge
+menu	top_projects	เนเธเธฃเน€เธเธเธ•เนเธชเธธเธ”เธขเธญเธ”
+home	top_project_downloads	เนเธเธฃเน€เธเธเธ•เนเธ”เธฒเธงเนเธซเธฅเธ”เธชเธนเธเธชเธธเธ”
+conf	content_encoding	UTF-8
 conf	default_font	MS Sans Serif,Thonburi,sans-serif
 conf	language_code	th
 conf	language_id	5

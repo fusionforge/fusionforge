@@ -72,11 +72,11 @@ menu	project_admin	Prosjektadministrator
 group	project_admins	Prosjektadministratorer
 menu	project_help_wanted	Prosjekthjelp s&oslash;kes
 menu	project_summary	Prosjektoversikt
-group	public_area	Fellesområde
+group	public_area	FellesomrÃ¥de
 menu	search	S&oslash;k
 menu	software_map	Programvareoversikt
 home	sourceforge_statistics	GForge statistikk
 menu	top_projects	Topp-prosjekter
 home	top_project_downloads	Flest nedlastinger
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	language_id	9

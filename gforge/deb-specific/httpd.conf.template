@@ -4,6 +4,7 @@
   order allow,deny
   allow from all
   php_admin_value include_path "/usr/share/gforge:/usr/share/gforge/www/include:."
+  php_admin_value default_charset "UTF-8"
 </Directory>
 
 Include /etc/gforge/httpd.common
@@ -15,6 +16,8 @@ Include /etc/gforge/httpd.common
   DocumentRoot /usr/share/gforge/www
   DirectoryIndex index.html index.php
   UserDir disabled
+
+  php_admin_value default_charset "UTF-8"
 
   <Directory /usr/share/gforge/www>
     Include /etc/gforge/httpd.secrets
@@ -142,6 +145,8 @@ Include /etc/gforge/httpd.common
   DocumentRoot /usr/share/gforge/www
   DirectoryIndex index.html index.php
   UserDir disabled
+
+  php_admin_value default_charset "UTF-8"
 
   <IfModule mod_ssl.c>
     SSLEngine on

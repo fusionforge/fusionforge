@@ -16,63 +16,63 @@
 # 2000-09-24  Sagi Bashari  <sagi@users.sourceforge.net>
 #	* Initial translation
 #
-menu	account_maintenance	οεαωη ϊχεζηϊ
-menu	bookmark_page	νιτγςεξ
-home	breaking_down_barriers	ιωτεη γεχ ηεϊιτμ νερηξδ ϊΰ νιψαεω
-menu	change_my_theme	ψϊΰδ δΰψξ ϊΰ δπω
-menu	code_snippet_library	γεχ ιςθχ ϊιιψτρ
-menu	compile_farm	διφιμτξεχ ϊεεη
-menu	contact_us	ψωχ ψεφ
-group	developers	νιηϊτξ
-group	developer_info	ηϊτξδ ιθψτ
-menu	discussion_forums	νιξεψετ
-menu	documentation	νιπεω νιλξρξ
-frs	file_download	δγψεδ
-frs	file_monitor	ηιβωξ
-frs	file_notes	ϊεψςδ
-frs	file_package	ϊεμιαη
-frs	file_version	ϊεΰρψβ
-group	long_bugs	ϊεμχϊ ψηΰ αχςξ
-group	long_cvs	CVS ψβΰξ
-group	long_docman	νιλξρξ μδπξ
-group	long_forum	νιηεϊτ νιξεψετ
-group	long_ftp	ιξιπεπΰ ιτιθτΰ ϊεψω
-group	long_homepage	θχιεψτδ ψϊΰ
-group	long_mail	ψεειγ ϊεξιωψ
-group	long_news	ϊεπεψηΰ ϊεωγη
-group	long_patch	νιπεχιϊ μδπξ
-group	long_pm	ϊεξιωξ μδπξ
-group	long_support	ϊιπλθ δλιξϊ μδπξ
-group	long_survey	ϊεψιχρ
-group	short_bugs	ϊεμχϊ
+menu	account_maintenance	ΧΧ•Χ‘Χ©Χ— ΧªΧ§Χ•Χ–Χ—Χª
+menu	bookmark_page	ΧΧ™Χ¤Χ“ΧΆΧ•Χ
+home	breaking_down_barriers	Χ™Χ©Χ¤Χ•Χ— Χ“Χ•Χ§ Χ—Χ•ΧªΧ™Χ¤Χ ΧΧ•Χ΅Χ—ΧΧ” ΧªΧ ΧΧ™Χ¨Χ‘Χ•Χ©
+menu	change_my_theme	Χ¨ΧªΧΧ” Χ”ΧΧ¨Χ ΧªΧ Χ”Χ Χ©
+menu	code_snippet_library	Χ“Χ•Χ§ Χ™ΧΆΧΧ§ ΧªΧ™Χ™Χ¨Χ¤Χ΅
+menu	compile_farm	Χ”Χ™Χ¦Χ™ΧΧ¤ΧΧ•Χ§ ΧªΧ•Χ•Χ—
+menu	contact_us	Χ¨Χ©Χ§ Χ¨Χ•Χ¦
+group	developers	ΧΧ™Χ—ΧªΧ¤Χ
+group	developer_info	Χ—ΧªΧ¤ΧΧ” Χ™ΧΧ¨Χ¤
+menu	discussion_forums	ΧΧ™ΧΧ•Χ¨Χ•Χ¤
+menu	documentation	ΧΧ™Χ Χ•Χ© ΧΧ™Χ›ΧΧ΅Χ
+frs	file_download	Χ”Χ“Χ¨Χ•Χ”
+frs	file_monitor	Χ—Χ™Χ’Χ©Χ
+frs	file_notes	ΧªΧ•Χ¨ΧΆΧ”
+frs	file_package	ΧªΧ•ΧΧ™Χ‘Χ—
+frs	file_version	ΧªΧ•ΧΧ΅Χ¨Χ’
+group	long_bugs	ΧªΧ•ΧΧ§Χª Χ¨Χ—Χ Χ‘Χ§ΧΆΧ
+group	long_cvs	CVS Χ¨Χ’ΧΧ
+group	long_docman	ΧΧ™Χ›ΧΧ΅Χ ΧΧ”Χ Χ
+group	long_forum	ΧΧ™Χ—Χ•ΧªΧ¤ ΧΧ™ΧΧ•Χ¨Χ•Χ¤
+group	long_ftp	Χ™ΧΧ™Χ Χ•Χ Χ Χ™Χ¤Χ™ΧΧ¤Χ ΧªΧ•Χ¨Χ©
+group	long_homepage	ΧΧ§Χ™Χ•Χ¨Χ¤Χ” Χ¨ΧªΧ
+group	long_mail	Χ¨Χ•Χ•Χ™Χ“ ΧªΧ•ΧΧ™Χ©Χ¨
+group	long_news	ΧªΧ•Χ Χ•Χ¨Χ—Χ ΧªΧ•Χ©Χ“Χ—
+group	long_patch	ΧΧ™Χ Χ•Χ§Χ™Χª ΧΧ”Χ Χ
+group	long_pm	ΧªΧ•ΧΧ™Χ©Χ ΧΧ”Χ Χ
+group	long_support	ΧªΧ™Χ Χ›Χ Χ”Χ›Χ™ΧΧª ΧΧ”Χ Χ
+group	long_survey	ΧªΧ•Χ¨Χ™Χ§Χ΅
+group	short_bugs	ΧªΧ•ΧΧ§Χª
 group	short_cvs	CVS
-group	short_docman	νιλξρξ
-group	short_files	Filesgroup	short_forum	νιξεψετ
-group	short_homepage	ϊια ψϊΰ
-group	short_mail	ϊεξιωψ
-group	short_news	ϊεωγη
-group	short_patch	νιπεχιϊ
-group	short_pm	ϊεξιωξ
-group	short_summary	νιθψτ
-group	short_support	δλιξϊ
-group	short_survey	ϊεψιχρ
-home	highest_ranked_users	νιμιςτ ιλδ νιωξϊωξδ
-home	about_blurb	  <P ALIGN="right"> <BR>.ιωτεη ψεχξ γεχ ιηϊτξμ ϊεψω ΰεδ GForge <BR> ,νιξεψετ ,νιβΰα ψηΰ αχςξ ,ψεειγ ϊεξιωψ ,CVS μ δθεωτε δαεθ δωιβ νιχτρξ επηπΰ <BR>.αεεδξ μεδιπμ δωιβε ,νιΰμξ νιιεαιβ ,ςεαχ νιφαχ ψβΰξ ,νιψϊΰ ϊπρηΰ ,ϊεξιωξ ιμδπξ <BR> </P>  &nbsp; <P ALIGN="RIGHT"> <B>ϊετϊϊωδε αεωξ</B> <P ALIGN="RIGHT"> κψϊφϊ δϊΰ GForge ξ ψϊεια αεθδ ϊΰ μαχμ μιαωα <BR>.νιςιφξ επηπΰω δξ μλμ δΰμξ δωιβ κμ ΰιαι δζ <A href="/account/register.php">.ψϊΰα ωξϊωξλ νωψδμ</A> <BR>.δΰμξ δωιβ κμ διδϊ ΰμ μαΰ ,νωψιδμ ιμα ψϊΰα ωεμβμ οαεξλ μελι δϊΰ  <P ALIGN="RIGHT" >  &nbsp; <BR> <B>κμω θχιεψτδ ϊΰ νεωψ</B> <P ALIGN="RIGHT"> <A HREF="/register/">.κμω θχιεψτδ ϊΰ νεωψ</A> σεραμε  ,<A HREF="/account/login.php">ρπλϊ</A> ζΰε <A href="/account/register.php">ψϊΰα ωξϊωιξλ νωψδ</A> <BR> <P ALIGN="RIGHT"> .ψϊΰδ κϊιιδωξ δπδϊε ..δγεϊ </P> 
-frs	latest_file_releases	ϊεπεψηΰ δπλεϊ ϊεΰρψβ
-menu	login	ηθαεΰξ ϊψω κψγ δριπλ
-menu	logout	δΰιφι
-home	most_active_this_week	ςεαωδ νιμιςτ ιλδ
-menu	my_personal_page	ιωιΰ γεξς
-menu	new_project	ωγη θχιεψτ νεωψ
-menu	new_releases	ϊεωγη ϊεΰρψβ
-menu	project_admin	θχιεψτ μδπξ
-group	project_admins	νιθχιεψτ ιμδπξ
-menu	project_help_wanted	νιθχιεψτμ νιωεψγ
-menu	project_summary	θχιεψτ ϊεφξϊ
-menu	search	ωετιη
-menu	software_map	ϊεπλεϊ ϊτξ
-home	sourceforge_statistics	GForge ϊεχιθριθρ
-home	top_project_downloads	νιμιςτ ιλδ νιθχιεψτδ
-conf	content_encoding	iso-8859-8
+group	short_docman	ΧΧ™Χ›ΧΧ΅Χ
+group	short_files	Filesgroup	short_forum	ΧΧ™ΧΧ•Χ¨Χ•Χ¤
+group	short_homepage	ΧªΧ™Χ‘ Χ¨ΧªΧ
+group	short_mail	ΧªΧ•ΧΧ™Χ©Χ¨
+group	short_news	ΧªΧ•Χ©Χ“Χ—
+group	short_patch	ΧΧ™Χ Χ•Χ§Χ™Χª
+group	short_pm	ΧªΧ•ΧΧ™Χ©Χ
+group	short_summary	ΧΧ™ΧΧ¨Χ¤
+group	short_support	Χ”Χ›Χ™ΧΧª
+group	short_survey	ΧªΧ•Χ¨Χ™Χ§Χ΅
+home	highest_ranked_users	ΧΧ™ΧΧ™ΧΆΧ¤ Χ™Χ›Χ” ΧΧ™Χ©ΧΧªΧ©ΧΧ”
+home	about_blurb	  <P ALIGN="right"> <BR>.Χ™Χ©Χ¤Χ•Χ— Χ¨Χ•Χ§Χ Χ“Χ•Χ§ Χ™Χ—ΧªΧ¤ΧΧ ΧªΧ•Χ¨Χ© ΧΧ•Χ” GForge <BR> ,ΧΧ™ΧΧ•Χ¨Χ•Χ¤ ,ΧΧ™Χ’ΧΧ‘ Χ¨Χ—Χ Χ‘Χ§ΧΆΧ ,Χ¨Χ•Χ•Χ™Χ“ ΧªΧ•ΧΧ™Χ©Χ¨ ,CVS Χ Χ”ΧΧ•Χ©Χ¤Χ• Χ”Χ‘Χ•Χ Χ”Χ©Χ™Χ’ ΧΧ™Χ§Χ¤Χ΅Χ Χ•Χ Χ—Χ Χ <BR>.Χ‘Χ•Χ•Χ”Χ ΧΧ•Χ”Χ™Χ Χ Χ”Χ©Χ™Χ’Χ• ,ΧΧ™ΧΧΧ ΧΧ™Χ™Χ•Χ‘Χ™Χ’ ,ΧΆΧ•Χ‘Χ§ ΧΧ™Χ¦Χ‘Χ§ Χ¨Χ’ΧΧ ,ΧΧ™Χ¨ΧªΧ ΧªΧ Χ΅Χ—Χ ,ΧªΧ•ΧΧ™Χ©Χ Χ™ΧΧ”Χ Χ <BR> </P>  &nbsp; <P ALIGN="RIGHT"> <B>ΧªΧ•Χ¤ΧªΧªΧ©Χ”Χ• Χ‘Χ•Χ©Χ</B> <P ALIGN="RIGHT"> ΧΧ¨ΧªΧ¦Χª Χ”ΧªΧ GForge Χ Χ¨ΧªΧ•Χ™Χ‘ Χ‘Χ•ΧΧ” ΧªΧ ΧΧ‘Χ§Χ ΧΧ™Χ‘Χ©Χ‘ <BR>.ΧΧ™ΧΆΧ™Χ¦Χ Χ•Χ Χ—Χ ΧΧ© Χ”Χ ΧΧ›Χ Χ”ΧΧΧ Χ”Χ©Χ™Χ’ ΧΧ ΧΧ™Χ‘Χ™ Χ”Χ– <A href="/account/register.php">.Χ¨ΧªΧΧ‘ Χ©ΧΧªΧ©ΧΧ› ΧΧ©Χ¨Χ”Χ</A> <BR>.Χ”ΧΧΧ Χ”Χ©Χ™Χ’ ΧΧ Χ”Χ™Χ”Χª ΧΧ ΧΧ‘Χ ,ΧΧ©Χ¨Χ™Χ”Χ Χ™ΧΧ‘ Χ¨ΧªΧΧ‘ Χ©Χ•ΧΧ’Χ ΧΧ‘Χ•ΧΧ› ΧΧ•Χ›Χ™ Χ”ΧªΧ  <P ALIGN="RIGHT" >  &nbsp; <BR> <B>ΧΧΧ© ΧΧ§Χ™Χ•Χ¨Χ¤Χ” ΧªΧ ΧΧ•Χ©Χ¨</B> <P ALIGN="RIGHT"> <A HREF="/register/">.ΧΧΧ© ΧΧ§Χ™Χ•Χ¨Χ¤Χ” ΧªΧ ΧΧ•Χ©Χ¨</A> Χ£Χ•Χ΅Χ‘ΧΧ•  ,<A HREF="/account/login.php">Χ΅Χ Χ›Χª</A> Χ–ΧΧ• <A href="/account/register.php">Χ¨ΧªΧΧ‘ Χ©ΧΧªΧ©Χ™ΧΧ› ΧΧ©Χ¨Χ”</A> <BR> <P ALIGN="RIGHT"> .Χ¨ΧªΧΧ” ΧΧªΧ™Χ™Χ”Χ©Χ Χ”Χ Χ”ΧªΧ• ..Χ”Χ“Χ•Χª </P> 
+frs	latest_file_releases	ΧªΧ•Χ Χ•Χ¨Χ—Χ Χ”Χ Χ›Χ•Χª ΧªΧ•ΧΧ΅Χ¨Χ’
+menu	login	Χ—ΧΧ‘Χ•ΧΧ ΧªΧ¨Χ© ΧΧ¨Χ“ Χ”Χ΅Χ™Χ Χ›
+menu	logout	Χ”ΧΧ™Χ¦Χ™
+home	most_active_this_week	ΧΆΧ•Χ‘Χ©Χ” ΧΧ™ΧΧ™ΧΆΧ¤ Χ™Χ›Χ”
+menu	my_personal_page	Χ™Χ©Χ™Χ Χ“Χ•ΧΧΆ
+menu	new_project	Χ©Χ“Χ— ΧΧ§Χ™Χ•Χ¨Χ¤ ΧΧ•Χ©Χ¨
+menu	new_releases	ΧªΧ•Χ©Χ“Χ— ΧªΧ•ΧΧ΅Χ¨Χ’
+menu	project_admin	ΧΧ§Χ™Χ•Χ¨Χ¤ ΧΧ”Χ Χ
+group	project_admins	ΧΧ™ΧΧ§Χ™Χ•Χ¨Χ¤ Χ™ΧΧ”Χ Χ
+menu	project_help_wanted	ΧΧ™ΧΧ§Χ™Χ•Χ¨Χ¤Χ ΧΧ™Χ©Χ•Χ¨Χ“
+menu	project_summary	ΧΧ§Χ™Χ•Χ¨Χ¤ ΧªΧ•Χ¦ΧΧª
+menu	search	Χ©Χ•Χ¤Χ™Χ—
+menu	software_map	ΧªΧ•Χ Χ›Χ•Χª ΧªΧ¤Χ
+home	sourceforge_statistics	GForge ΧªΧ•Χ§Χ™ΧΧ΅Χ™ΧΧ΅
+home	top_project_downloads	ΧΧ™ΧΧ™ΧΆΧ¤ Χ™Χ›Χ” ΧΧ™ΧΧ§Χ™Χ•Χ¨Χ¤Χ”
+conf	content_encoding	UTF-8
 conf	default_font	xxzx-random-font\" size=\"1
 conf	language_id	3

@@ -27,65 +27,65 @@
 system	locale	en_US
 system	strftimefmt	%e %B %Y %H:%M
 system	datefmt	d/m/Y H:i
-about	about_blurb	<h2>À propos de Sourceforge</h2>Ce site tourne avec Debian Sourceforge, un dérivatif du code sous lequel tourne <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  Les informations présentes sur cette page ne documentent que Debian Sourceforge.  Veuillez vous référer à <a href="http://www.sourceforge.net/">Sourceforge.net</a> pour obtenir des informations sur leur code.<br><br><b>Auteurs</b><br><a href="staff.php">L'équipe</a> Sourceforge a travaillé dur pour que le projet Sourceforge aboutisse.  Si vous voulez savoir qui est derrière ce projet, en voici l'occasion.<br><br><b>Remerciements</b><br>Nous devons beaucoup aux auteurs du code qui permet à Sourceforge de tourner, mais nous aimerions également étendre notre gratitude aux personnes et organisations listées <a href="thanks.php">ici</a> pour l'aide qu'elles nous ont apportée.<br><br><b>Pour plus d'information</b><br>Si vous avez d'autres questions, contactez la <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">liste de diffusion des utilisateurs de Debian Sourceforge</a>.  Vous pouvez également jeter un oeil sur la <a href="http://savannah.gnu.org/projects/debian-sf/">page du projet</a> Debian Sourceforge sur Savannah (un autre dérivé de Sourceforge, hébergé par le projet GNU et la FSF).<br><br><b>Copyrights</b><br>Le code originel de Sourceforge a été écrit par la société VA Linux Systems (qui a depuis changé son nom en VA Software) et publié sous la licence publique générale (GPL) GNU.  Le copyright leur appartient donc en grande partie.<br>Le code qui permet de faire fonctionner ce site, en revanche, est Debian Sourceforge, une version modifiée pour fonctionner sur des systèmes Debian.  Les changements visibles sont principalement des corrections typographiques et des bugs, mais nous avons également développé un système d'installation: Debian Sourceforge est facile à installer, configurer et exploiter dès que vous avez un système Debian.  Debian Sourceforge a été réalisé par Christian Bayle et Roland Mas, avec diverses contributions ponctuelles apportées par diverses personnes.<br><br><b>Marques déposées et autres</b><br>VA Linux Systems et Sourceforge sont des marques de la société VA Linux Systems (actuellement VA Software).  Linux est une marque déposée de Linus Torvalds.  Les autres marques déposées et copyrights sont les propriétés de leurs propriétaires respectifs.  Le contenu appartenant à VA Linux Systems est copyright 1999-2001 VA Linux Systems, tous droits réservés.<br><br>
-account	title	Préférences de votre compte
-account_change_email	message	Vous avez demandé un changement d'adresse e-mail pour votre compte sur Sourceforge.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- l'équipe Sourceforge
-account_change_email	section	Préférences de votre compte
-account_change_email	subject	Sourceforge -- vérification
+about	about_blurb	<h2>Ã€ propos de Sourceforge</h2>Ce site tourne avec Debian Sourceforge, un dÃ©rivatif du code sous lequel tourne <a href="http://www.sourceforge.net/">Sourceforge.net</a>.  Les informations prÃ©sentes sur cette page ne documentent que Debian Sourceforge.  Veuillez vous rÃ©fÃ©rer Ã  <a href="http://www.sourceforge.net/">Sourceforge.net</a> pour obtenir des informations sur leur code.<br><br><b>Auteurs</b><br><a href="staff.php">L'Ã©quipe</a> Sourceforge a travaillÃ© dur pour que le projet Sourceforge aboutisse.  Si vous voulez savoir qui est derriÃ¨re ce projet, en voici l'occasion.<br><br><b>Remerciements</b><br>Nous devons beaucoup aux auteurs du code qui permet Ã  Sourceforge de tourner, mais nous aimerions Ã©galement Ã©tendre notre gratitude aux personnes et organisations listÃ©es <a href="thanks.php">ici</a> pour l'aide qu'elles nous ont apportÃ©e.<br><br><b>Pour plus d'information</b><br>Si vous avez d'autres questions, contactez la <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">liste de diffusion des utilisateurs de Debian Sourceforge</a>.  Vous pouvez Ã©galement jeter un oeil sur la <a href="http://savannah.gnu.org/projects/debian-sf/">page du projet</a> Debian Sourceforge sur Savannah (un autre dÃ©rivÃ© de Sourceforge, hÃ©bergÃ© par le projet GNU et la FSF).<br><br><b>Copyrights</b><br>Le code originel de Sourceforge a Ã©tÃ© Ã©crit par la sociÃ©tÃ© VA Linux Systems (qui a depuis changÃ© son nom en VA Software) et publiÃ© sous la licence publique gÃ©nÃ©rale (GPL) GNU.  Le copyright leur appartient donc en grande partie.<br>Le code qui permet de faire fonctionner ce site, en revanche, est Debian Sourceforge, une version modifiÃ©e pour fonctionner sur des systÃ¨mes Debian.  Les changements visibles sont principalement des corrections typographiques et des bugs, mais nous avons Ã©galement dÃ©veloppÃ© un systÃ¨me d'installation: Debian Sourceforge est facile Ã  installer, configurer et exploiter dÃ¨s que vous avez un systÃ¨me Debian.  Debian Sourceforge a Ã©tÃ© rÃ©alisÃ© par Christian Bayle et Roland Mas, avec diverses contributions ponctuelles apportÃ©es par diverses personnes.<br><br><b>Marques dÃ©posÃ©es et autres</b><br>VA Linux Systems et Sourceforge sont des marques de la sociÃ©tÃ© VA Linux Systems (actuellement VA Software).  Linux est une marque dÃ©posÃ©e de Linus Torvalds.  Les autres marques dÃ©posÃ©es et copyrights sont les propriÃ©tÃ©s de leurs propriÃ©taires respectifs.  Le contenu appartenant Ã  VA Linux Systems est copyright 1999-2001 VA Linux Systems, tous droits rÃ©servÃ©s.<br><br>
+account	title	PrÃ©fÃ©rences de votre compte
+account_change_email	message	Vous avez demandÃ© un changement d'adresse e-mail pour votre compte sur Sourceforge.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- l'Ã©quipe Sourceforge
+account_change_email	section	PrÃ©fÃ©rences de votre compte
+account_change_email	subject	Sourceforge -- vÃ©rification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
-account_change_email	desc	<P>Changer votre adresse de courrier électronique va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
-account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
-account_change_pw	section	Préférences de votre compte
+account_change_email	mailsent	<P>Un courrier Ã©lectronique a Ã©tÃ© envoyÃ© Ã  votre nouvelle adresses. Suivez les instructions du courrier Ã©lectronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
+account_change_email	desc	<P>Changer votre adresse de courrier Ã©lectronique va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
+account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe</h2><p>FÃ©licitations.  Vous venez de changer votre mot de passe.</p>
+account_change_pw	section	PrÃ©fÃ©rences de votre compte
 account_change_pw	title	Changement de mot de passe
-account_editsshkeys	section	Préférences de votre compte
-account_editsshkeys	title	Édition des clefs CVS/SSH
-account_first	about_blurb	Vous êtes maintenant un utilisateur enregistré de Sourceforge, l'environnement de dévelopement en ligne pour les projets de logiciels libres.<p>En tant qu'utilisateur enregistré, vous pouvez participer pleinement aux activités du site.  Vous pouvez maintenant poster des messages dans les forums des projets, rapporter des bogues aux logiciels hébergés par Sourceforge, vous enregistrer pour faire partie de projets, ou même démarrer votre propre projet.<p>Nous vous conseillons de prendre le temps de lire la <a href="/docs/site/"><b>documentation du site</b></a> pour tirer pleinement parti de Sourceforge.<p>Profitez bien du site, et n'hésitez pas à nous faire part de vos remarques et de vos idées d'amélioration pour Sourceforge.<p> -- l'équipe Sourceforge
+account_editsshkeys	section	PrÃ©fÃ©rences de votre compte
+account_editsshkeys	title	Ã‰dition des clefs CVS/SSH
+account_first	about_blurb	Vous Ãªtes maintenant un utilisateur enregistrÃ© de Sourceforge, l'environnement de dÃ©velopement en ligne pour les projets de logiciels libres.<p>En tant qu'utilisateur enregistrÃ©, vous pouvez participer pleinement aux activitÃ©s du site.  Vous pouvez maintenant poster des messages dans les forums des projets, rapporter des bogues aux logiciels hÃ©bergÃ©s par Sourceforge, vous enregistrer pour faire partie de projets, ou mÃªme dÃ©marrer votre propre projet.<p>Nous vous conseillons de prendre le temps de lire la <a href="/docs/site/"><b>documentation du site</b></a> pour tirer pleinement parti de Sourceforge.<p>Profitez bien du site, et n'hÃ©sitez pas Ã  nous faire part de vos remarques et de vos idÃ©es d'amÃ©lioration pour Sourceforge.<p> -- l'Ã©quipe Sourceforge
 account_first	title	Bienvenue!
-account_login	deleted_account	<p>Votre compte sur Sourceforge a été supprimé par l'équipe Sourceforge.  Ceci peut être dû à deux raisons : soit vous avez demandé à ce que votre compte soit supprimé, soit votre compte a été utilisé à des fins non autorisées et nous avons dû le fermer.  Si vous avez des questions ou des remarques à ce propos, veuillez soumettre une <a href="/support/?group_id=1">requête au support</a>.<p>Merci.<p> -- l'équipe Sourceforge
-account_login	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préference avec SSL 128-bit ou utiliser Netscape 4.7 ou supérieur</FONT></H2>
-account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
-account_login	pending_account	<p>Votre compte est en attente de confirmation.  Un e-mail vous a été envoyé, contenant un lien vers la page qui activera votre compte.<p>Si vous avez besoin d'un nouvel envoi de ce message, cliquez ci-dessous et il vous sera renvoyé à l'adresse que vous avez donnée pendant la phase d'enregistrement.<p><a href="pending-resend.php?form_user=$1">[Renvoyer le message de confirmation]</a><br><hr><p>
+account_login	deleted_account	<p>Votre compte sur Sourceforge a Ã©tÃ© supprimÃ© par l'Ã©quipe Sourceforge.  Ceci peut Ãªtre dÃ» Ã  deux raisons : soit vous avez demandÃ© Ã  ce que votre compte soit supprimÃ©, soit votre compte a Ã©tÃ© utilisÃ© Ã  des fins non autorisÃ©es et nous avons dÃ» le fermer.  Si vous avez des questions ou des remarques Ã  ce propos, veuillez soumettre une <a href="/support/?group_id=1">requÃªte au support</a>.<p>Merci.<p> -- l'Ã©quipe Sourceforge
+account_login	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supÃ©rieur, de prÃ©ference avec SSL 128-bit ou utiliser Netscape 4.7 ou supÃ©rieur</FONT></H2>
+account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supportÃ© sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
+account_login	pending_account	<p>Votre compte est en attente de confirmation.  Un e-mail vous a Ã©tÃ© envoyÃ©, contenant un lien vers la page qui activera votre compte.<p>Si vous avez besoin d'un nouvel envoi de ce message, cliquez ci-dessous et il vous sera renvoyÃ© Ã  l'adresse que vous avez donnÃ©e pendant la phase d'enregistrement.<p><a href="pending-resend.php?form_user=$1">[Renvoyer le message de confirmation]</a><br><hr><p>
 account_login	title	Connexion
-account_login	cookiewarn	Les Cookies doivent être activés aprés ce point.
+account_login	cookiewarn	Les Cookies doivent Ãªtre activÃ©s aprÃ©s ce point.
 account_login	loginname	Nom de Login:
 account_login	passwd	Mot de passe:
-account_login	usessl	Rester en mode SSL aprés la connexion
-account_login	sslnotice	<p><B><FONT COLOR="RED">Vous allez être connecté avec un serveur SSL quand vous allez soumettre ce formulaire et votre mot de passe ne sera pas visible aux autres utilisateurs.</FONT></B> <small style="font-size: x-small"> (Si vous vous demandez pourquoi cette page n'est pas chargée en SSL, lisez le paragraphe suivant. Merci.) </small> <P> Les utilisateurs de <B>Internet Explorer</B> ont des problèmes intermittents avec SSL, aussi il est préférable de quitter le mode SSL aprés le login. Les utilisateurs de Netscape doivent rester en SSL pour un maximum de sécurité.  Visitez <A HREF="http://www.microsoft.com/">Microsoft</A> pour plus d'information au sujet de ce problème connu.  <P>
+account_login	usessl	Rester en mode SSL aprÃ©s la connexion
+account_login	sslnotice	<p><B><FONT COLOR="RED">Vous allez Ãªtre connectÃ© avec un serveur SSL quand vous allez soumettre ce formulaire et votre mot de passe ne sera pas visible aux autres utilisateurs.</FONT></B> <small style="font-size: x-small"> (Si vous vous demandez pourquoi cette page n'est pas chargÃ©e en SSL, lisez le paragraphe suivant. Merci.) </small> <P> Les utilisateurs de <B>Internet Explorer</B> ont des problÃ¨mes intermittents avec SSL, aussi il est prÃ©fÃ©rable de quitter le mode SSL aprÃ©s le login. Les utilisateurs de Netscape doivent rester en SSL pour un maximum de sÃ©curitÃ©.  Visitez <A HREF="http://www.microsoft.com/">Microsoft</A> pour plus d'information au sujet de ce problÃ¨me connu.  <P>
 account_login	login	Connexion avec SSL
 account_login	lostpw	[Perdu votre mot de passe?]
 account_login	newaccount	[Nouveau Compte]
-account_lostpw	message	  Quelqu'un, probablement vous, a demandé un changement de mot de passe par\nvérification d'adresse e-mail.  Si ce n'était pas vous, ignorez ce message et\nrien ne se passera.\n\n  Si vous avez demandé cette vérification, visitez la page à l'adresse suivante\npour que votre demande soit prise en compte :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- l'équipe Sourceforge
-account_lostpw	subject	$1 Vérification
+account_lostpw	message	  Quelqu'un, probablement vous, a demandÃ© un changement de mot de passe par\nvÃ©rification d'adresse e-mail.  Si ce n'Ã©tait pas vous, ignorez ce message et\nrien ne se passera.\n\n  Si vous avez demandÃ© cette vÃ©rification, visitez la page Ã  l'adresse suivante\npour que votre demande soit prise en compte :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- l'Ã©quipe Sourceforge
+account_lostpw	subject	$1 VÃ©rification
 account_lostpw	title	Perdu votre mot de passe ?
-account_lostpw	notify	<P>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions du courrier électronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'acceuil ]</A>
-account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Cela compromet la sécurité de votre compte, de vos projets, et de ce site. <P>Cliquez sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous vous enverra un lien à l'adresse de courrier électronique enregistrée. Dans ce lien il y a une clé de Hachage de 128 bits pour votre compte. Suivre le lien vous autorisera à changer votre mot de passe en ligne et à vous connecter.
-account_lostpw	sendhash	Envoyer une clé de Hachage pour mot de passe perdu
+account_lostpw	notify	<P>Un courrier Ã©lectronique a Ã©tÃ© envoyÃ© Ã  l'adresse enregistrÃ©e. Suivez les instructions du courrier Ã©lectronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'acceuil ]</A>
+account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sÃ©rieuse. Cela compromet la sÃ©curitÃ© de votre compte, de vos projets, et de ce site. <P>Cliquez sur "Envoyer une clÃ© de Hachage pour mot de passe perdu" ci-dessous vous enverra un lien Ã  l'adresse de courrier Ã©lectronique enregistrÃ©e. Dans ce lien il y a une clÃ© de Hachage de 128 bits pour votre compte. Suivre le lien vous autorisera Ã  changer votre mot de passe en ligne et Ã  vous connecter.
+account_lostpw	sendhash	Envoyer une clÃ© de Hachage pour mot de passe perdu
 account_lostlogin	title	Confirmation pour mot de passe perdu
 account_lostlogin	severalconfirm	Il existe plus d'un hash de confirmation.
 account_lostlogin	invalidconfirm	Hash de confirmation invalide
-account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (Au moins 6 caractères).
-account_lostlogin	notmatch	Les nouveaux mots de passe diffèrent.
-account_lostlogin	passwdchanged	<h2>Mot de passe changé</h2><p>Félicitation, vous avez reinitialisé votre mot de passe.Vous pouvez <a href="/account/login.php">vous connecter</a> au site\nmaintenant.</p>
+account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (Au moins 6 caractÃ¨res).
+account_lostlogin	notmatch	Les nouveaux mots de passe diffÃ¨rent.
+account_lostlogin	passwdchanged	<h2>Mot de passe changÃ©</h2><p>FÃ©licitation, vous avez reinitialisÃ© votre mot de passe.Vous pouvez <a href="/account/login.php">vous connecter</a> au site\nmaintenant.</p>
 account_lostlogin	welcome	<h2>Mot de passe perdu</h2><P>Bienvenu, $1. vous pouvez changer votre mot de passe maintenant.
-account_lostlogin	newpasswd	Nouveau mot de passe (6 caractères minimum)
+account_lostlogin	newpasswd	Nouveau mot de passe (6 caractÃ¨res minimum)
 account_lostlogin	newpasswd2	Nouveau mot de passe (confirmation)
 account_lostlogin	update	Valider
 account_register	title	Enregistrement d'un nouvel utilisateur Sourceforge
-account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
-account_register	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préference avec SSL 128-bit ou utiliser Netscape 4.7 ou supérieur</FONT></H2>
-account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
+account_register	congrat	<p>FÃ©licitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier Ã©lectronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyÃ© pour valider votre compte.
+account_register	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supÃ©rieur, de prÃ©ference avec SSL 128-bit ou utiliser Netscape 4.7 ou supÃ©rieur</FONT></H2>
+account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supportÃ© sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
 account_register	loginname	Nom de login (en minuscule) *:
-account_register	password	Mot de passe (6 caractères minimum) *:
-account_register	password2	Mot de passe (vérification) *:
+account_register	password	Mot de passe (6 caractÃ¨res minimum) *:
+account_register	password2	Mot de passe (vÃ©rification) *:
 account_register	realname	Nom complet *:
 account_register	language	Langue:
 account_register	timezone	Fuseau horaire:
-account_register	emailaddr	Adresse de courrier électronique *:<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
+account_register	emailaddr	Adresse de courrier Ã©lectronique *:<BR><I>Cette adresse sera vÃ©rifiÃ©e avant l'activation de votre compte. Elle ne sera pas affichÃ©e sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
 account_register	jabberaddr	Addresse electronique:
-account_register	jabberonly	Envoyer les messages automatiques seulement à cette adresse
-account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I>(Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
-account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
+account_register	jabberonly	Envoyer les messages automatiques seulement Ã  cette adresse
+account_register	siteupdate	Recevoir du courrier Ã©lectronique Ã  propos des mises Ã  jour du site<I>(Faible trafic et informations relatives Ã  la sÃ©curitÃ©. Fortement RecommandÃ©.)</I>
+account_register	communitymail	Recevoir du courrier Ã©lectronique supplÃ©mentaire au sujet de la communautÃ©. <I>(Faible trafic.)</I>
 account_register	mandatory	Les champs avec * sont obligatoires.
 account_register	register	S'enregistrer
 account_register	err_username	Vous devez fournir un nom d'utilisateur
@@ -96,35 +96,35 @@ account_register	err_passwd3	Mot de passe non valide:
 account_register	err_unixname	Nom unix invalide
 account_register	err_jabber	Adresse Jabber incorrecte
 account_register	err_email	Courriel invalide
-account_register	err_userexist	Ce nom d'utilisateur existe déjà.
+account_register	err_userexist	Ce nom d'utilisateur existe dÃ©jÃ .
 account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
-account_register	err_badinsert	L'insertion a échouée.
+account_register	err_badinsert	L'insertion a Ã©chouÃ©e.
 account_register	message_header	Enregistrement au site $1
-account_register	message_body	Merci de vous être enregistré au site $4. \nVous avez maintenant un compte avec pour nom $1. \nPour terminer votre inscription suivez le lien: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si vous ne voyez rien ci-dessus, c'est probablement un bug de votre logiciel de mail.\nUtilisez le lien ci-dessous, mais assurez vous qu'il est sur une seule ligne.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nProfiter du site.\n\n-- l'équipe $4\n
+account_register	message_body	Merci de vous Ãªtre enregistrÃ© au site $4. \nVous avez maintenant un compte avec pour nom $1. \nPour terminer votre inscription suivez le lien: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si vous ne voyez rien ci-dessus, c'est probablement un bug de votre logiciel de mail.\nUtilisez le lien ci-dessous, mais assurez vous qu'il est sur une seule ligne.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nProfiter du site.\n\n-- l'Ã©quipe $4\n
 account_unsubscribe	all_mailings	toutes les notifications concernant $1
 account_unsubscribe	site_mailings	les messages concernant le site $1
-account_verify	title	Vérification de votre compte $1
-account_verify	verify_blurb	<p>Pour valider votre enregistrement, connectez-vous maintenant.  Votre compte sera alors activé pour les connexions ultérieures.
+account_verify	title	VÃ©rification de votre compte $1
+account_verify	verify_blurb	<p>Pour valider votre enregistrement, connectez-vous maintenant.  Votre compte sera alors activÃ© pour les connexions ultÃ©rieures.
 account_verify	loginname	Nom de login:
 account_verify	password	Mot de passe:
 account_verify	login		Connexion
-account_verify	missingparam	Paramètre manquant
+account_verify	missingparam	ParamÃ¨tre manquant
 account_verify	usermandatory	Vous devez rentrer un nom de user
 account_verify	invaliduser	Utilisateur non valide
 account_verify	nouser	L'utilisateur n'existe pas
-account_verify	invalidop	Opération non valide
-account_verify	accountactive	Le compte est déjà activé.
-account_verify	invalidparam	Paramètre non valide
-account_verify	cannotconfirm	Ne peut confirmer l'identité du compte - hash erroné ou login non valide
-account_verify	accessdenied	Accés interdit
-account_verify	invalidcred	Le mot de passe entré n'est pas valide.
+account_verify	invalidop	OpÃ©ration non valide
+account_verify	accountactive	Le compte est dÃ©jÃ  activÃ©.
+account_verify	invalidparam	ParamÃ¨tre non valide
+account_verify	cannotconfirm	Ne peut confirmer l'identitÃ© du compte - hash erronÃ© ou login non valide
+account_verify	accessdenied	AccÃ©s interdit
+account_verify	invalidcred	Le mot de passe entrÃ© n'est pas valide.
 account_verify	cannotactivate	Impossible d'activer le compte
 account_verify	erroractivate	Erreur durant l'activation du compte
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	fr
 conf	language_id	7
-contact	about_blurb	<p>Ceci est la page de contacts pour <b>$1</b>.  Si vous avez un problème concernant un projet que nous hébergeons, veuillez soumettre vos questions et/ou vos informations à l'outil de suivi de bogues ou de support de ce projet.  Ces outils sont accessibles en visitant la page d'accueil du projet et en choisissant l'outil approprié.<p>Si vous avez une requête de support, un bogue à soumettre sur $1, ou si vous voulez communiquer avec l'équipe $1, veuillez visiter <a href="/projets/sourceforge">la page de $1</a>.
+contact	about_blurb	<p>Ceci est la page de contacts pour <b>$1</b>.  Si vous avez un problÃ¨me concernant un projet que nous hÃ©bergeons, veuillez soumettre vos questions et/ou vos informations Ã  l'outil de suivi de bogues ou de support de ce projet.  Ces outils sont accessibles en visitant la page d'accueil du projet et en choisissant l'outil appropriÃ©.<p>Si vous avez une requÃªte de support, un bogue Ã  soumettre sur $1, ou si vous voulez communiquer avec l'Ã©quipe $1, veuillez visiter <a href="/projets/sourceforge">la page de $1</a>.
 contact	title	Contacter $1
 cvs	section	Projet : $1
 cvs	title	CVS
@@ -133,11 +133,11 @@ docman	title	Gestionnaire de documentation
 docman_admin	section	$1
 docman_admin	title	Gestionnaire de documentation : administration
 docman_admin_docedit	section	Gestionnaire de documentation
-docman_admin_docedit	title	Édition d'un document
+docman_admin_docedit	title	Ã‰dition d'un document
 docman_admin_editdocs	section	Gestionnaire de documentation : administration
-docman_admin_editdocs	title	Édition de documents
+docman_admin_editdocs	title	Ã‰dition de documents
 docman_admin_editgroups	section	Gestionnaire de documentation : administration
-docman_admin_editgroups	title	Édition des groupes de documents
+docman_admin_editgroups	title	Ã‰dition des groupes de documents
 docman_admin_groupdelete	section	Gestionnaire de documentation : administration
 docman_admin_groupdelete	title	Suppression d'un groupe de documents
 docman_admin_groupedit	section	Gestionnaire de documentation : administration
@@ -153,7 +153,7 @@ forum_admin	title	Forums : administration
 forum_admin_addforum	section	Administration des forums
 forum_admin_addforum	title	Ajout d'un forum
 forum_admin_changestatus	section	Administration des forums
-forum_admin_changestatus	title	Changement d'état du forum
+forum_admin_changestatus	title	Changement d'Ã©tat du forum
 forum_admin_delete	section	Administration des forums
 forum_admin_delete	title	Suppression d'un forum
 forum_forum	section	Projet : $1
@@ -162,10 +162,10 @@ forum_forum	thread	File de message
 forum_forum	author	Auteur
 forum_forum	date	Date
 forum_forum	changeview	Changer de visualisation
-forum_forum	postsuccess	Message Envoyé
+forum_forum	postsuccess	Message EnvoyÃ©
 forum_forum	topic	Sujet
 forum_forum	topicstarter	Initiateur
-forum_forum	replies	Réponses
+forum_forum	replies	RÃ©ponses
 forum_forum	lastpost	Dernier(s) envoi(s)
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
@@ -173,72 +173,72 @@ forum_message	section	Forums
 forum_message	title	Affichage d'un message
 forum_message	msg	Poster un message dans cette file de message:
 forum_message	thread	Commencer une nouvelle file de message:
-forum_utils	news	Nouveautés
+forum_utils	news	NouveautÃ©s
 forum_utils	discussionforum	Forums de discution:
-forum_utils	nonewsitem	Erreur - Cette nouveauté n'a pas été trouvée
-forum_utils	latest	Dernières Nouveautés
+forum_utils	nonewsitem	Erreur - Cette nouveautÃ© n'a pas Ã©tÃ© trouvÃ©e
+forum_utils	latest	DerniÃ¨res NouveautÃ©s
 forum_utils	monitor	Surveiller le forum
-forum_utils	admin	Gérer
+forum_utils	admin	GÃ©rer
 forum_utils	saveplace	Sauvegarder cet endroit
 forum_utils	erroradd	Erreur dans l'ajout du Forum
-forum_utils	added	Forum ajouté
-forum_utils	notfound	Non trouvé
+forum_utils	added	Forum ajoutÃ©
+forum_utils	notfound	Non trouvÃ©
 forum_utils	by	Par:
-forum_utils	brokenthread	File de message cassé
+forum_utils	brokenthread	File de message cassÃ©
 forum_utils	thread	File de message
 forum_utils	author	Auteur
-forum_utils	postedby	Posté par
+forum_utils	postedby	PostÃ© par
 forum_utils	date	Date
 forum_utils	summary	Titre
 forum_utils	error	Erreur!
 forum_utils	noid	Envoi sans identifiant de forum
-forum_utils	mustinclude	Doit inclure un corps et un entête de message
-forum_utils	doublepost	Il semble que ce message soit un doublon compte tenu du fait qu'il a le même sujet et les mêmes informations de suivi qu'un précédent message.
+forum_utils	mustinclude	Doit inclure un corps et un entÃªte de message
+forum_utils	doublepost	Il semble que ce message soit un doublon compte tenu du fait qu'il a le mÃªme sujet et les mÃªmes informations de suivi qu'un prÃ©cÃ©dent message.
 forum_utils	nextfailed	Impossible de trouver le thread_id suivant
-forum_utils	errormaster	Impossible de mettre à jour le thread maître avec l'heure courante
-forum_utils	errorparent	Impossible de mettre à jour le parent
+forum_utils	errormaster	Impossible de mettre Ã  jour le thread maÃ®tre avec l'heure courante
+forum_utils	errorparent	Impossible de mettre Ã  jour le parent
 forum_utils	errorfollowup	Essai de suivi d'un message qui n'existe pas.
 forum_utils	errorfollowup2	Pas d'identifiant de suivi
-forum_utils	errorpost	L'envoi a échoué
+forum_utils	errorpost	L'envoi a Ã©chouÃ©
 forum_utils	errorinsert	Impossible d'obtenir insertid()
-forum_utils	posted	Message envoyé
-forum_utils	feedbacklogin	Vous pourriez répondre si vous étiez connecté
+forum_utils	posted	Message envoyÃ©
+forum_utils	feedbacklogin	Vous pourriez rÃ©pondre si vous Ã©tiez connectÃ©
 forum_utils	subject	Sujet:
 forum_utils	message	Message:
 forum_utils	htmltag	les tags HTML s'afficheront comme du texte dans votre envoi
-forum_utils	postanon	Vous faites un envoi anonyme car vous n'êtes pas
-forum_utils	loggedin	Authentifié
+forum_utils	postanon	Vous faites un envoi anonyme car vous n'Ãªtes pas
+forum_utils	loggedin	AuthentifiÃ©
 forum_utils	postcomment	Envoyer un commentaire
 forum_utils	anonymously	Anonymement
-forum_utils	couldpostif	Vous pourriez répondre si vous êtiez
-forum_utils	reply	répondre
-forum_utils	mailmonitor	\nLisez et répondez à ce message à: \n$1\nPar: $2 \n\n $3\n\n______________________________________________________________________\nVous recevez ce message parce que vous surveillez ce forum.\nPour arrêter la surveillance, authentifiez vous à $4 \net visitez: $5
-forum_utils	mailsent	courrier envoyé - surveillé par des utilisateurs
-forum_utils	mailnotsent	courrier non envoyé - surveillé par des utilisateurs
-forum_utils	mailnotsent2	courrier non envoyé - personne ne surveille
-frs	file_download	Téléchargement
+forum_utils	couldpostif	Vous pourriez rÃ©pondre si vous Ãªtiez
+forum_utils	reply	rÃ©pondre
+forum_utils	mailmonitor	\nLisez et rÃ©pondez Ã  ce message Ã : \n$1\nPar: $2 \n\n $3\n\n______________________________________________________________________\nVous recevez ce message parce que vous surveillez ce forum.\nPour arrÃªter la surveillance, authentifiez vous Ã  $4 \net visitez: $5
+forum_utils	mailsent	courrier envoyÃ© - surveillÃ© par des utilisateurs
+forum_utils	mailnotsent	courrier non envoyÃ© - surveillÃ© par des utilisateurs
+forum_utils	mailnotsent2	courrier non envoyÃ© - personne ne surveille
+frs	file_download	TÃ©lÃ©chargement
 frs	file_monitor	Surveillance
 frs	file_notes	Remarques
 frs	file_package	Paquet
 frs	file_rel_date	Date
 frs	file_version	Version
-frs	latest_file_releases	Sorties récentes
-general	return	[Retour à la page d'acceuil $1]
+frs	latest_file_releases	Sorties rÃ©centes
+general	return	[Retour Ã  la page d'acceuil $1]
 general	sitename	$1
-general	footer	Vous êtes sur $1.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
-general	permdenied	Accés Interdit.
-general	permnotget	Accés non permis
+general	footer	Vous Ãªtes sur $1.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
+general	permdenied	AccÃ©s Interdit.
+general	permnotget	AccÃ©s non permis
 general	permexcuse	Vous devez obtenir l'autorisation de l'administrateur de ce projet pour voir cette page.
-group	developer_info	Information sur les développeurs
-group	developers	Développeurs
+group	developer_info	Information sur les dÃ©veloppeurs
+group	developers	DÃ©veloppeurs
 group	long_bugs	Gestion des bogues
-group	long_cvs	Référentiel CVS
+group	long_cvs	RÃ©fÃ©rentiel CVS
 group	long_docman	Gestionnnaire de documentation
 group	long_forum	Forums de discussion
 group	long_ftp	Espace FTP anonyme
 group	long_homepage	Page d'accueil
 group	long_mail	Listes de diffusion
-group	long_news	Dernières nouveautés
+group	long_news	DerniÃ¨res nouveautÃ©s
 group	long_patch	Gestionnnaire de corrections
 group	long_pm	Gestion de projet
 group	long_support	Support technique
@@ -253,28 +253,28 @@ group	short_files	Fichiers
 group	short_forum	Forums
 group	short_homepage	Accueil
 group	short_mail	Mailing-listes
-group	short_main 	Écran principal
-group	short_memberlist	Développeurs
-group	short_news	Nouveautés
+group	short_main 	Ã‰cran principal
+group	short_memberlist	DÃ©veloppeurs
+group	short_news	NouveautÃ©s
 group	short_patch	Patches
-group	short_pm	Tâches
+group	short_pm	TÃ¢ches
 group	short_summary	Survol
 group	short_support	Support
 group	short_survey	Sondages
 group	short_tracker	Tracker
-group	registered	Enregistré le:
-group	activity	Pourcentage d'activité:
-group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activité du projet
-group	norelease	Ce projet n'a pas réalisé de fichier
+group	registered	EnregistrÃ© le:
+group	activity	Pourcentage d'activitÃ©:
+group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activitÃ© du projet
+group	norelease	Ce projet n'a pas rÃ©alisÃ© de fichier
 group	nodescription	Ce project n'a pas encore soumis de description.
-home	about_blurb	$1 est un <b>service gratuit pour les développeurs <A href="http://www.opensource.org">open source</A></b>. $1 offre l'accès le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des tâches, hébergement de site, archivage de fichiers, sauvegardes complètes, etc. via une interface d'administration entièrement par le web. <BR> &nbsp; <P> <B>Participation des développeurs</B> <P>  Pour pouvoir utiliser $1 au mieux, il est nécéssaire de <A href="/account/register.php">s'enregistrer comme un développeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons à vous offrir. Vous pouvez bien entendu parcourir le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>Créer un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme développeur</A>, puis <A HREF="/account/login.php">connectez-vous</A>, puis <a href="/register/">enregistrez votre projet.</a> <p> Merci... et nous espérons que vous aimerez $1 !
-home	breaking_down_barriers	Abaisser les barrières du développement open source
-home	highest_ranked_users	Les développeurs les mieux classés
+home	about_blurb	$1 est un <b>service gratuit pour les dÃ©veloppeurs <A href="http://www.opensource.org">open source</A></b>. $1 offre l'accÃ¨s le plus simple aux meilleurs services CVS, listes de diffusion, gestion des bugs, forums de discussion, gestion des tÃ¢ches, hÃ©bergement de site, archivage de fichiers, sauvegardes complÃ¨tes, etc. via une interface d'administration entiÃ¨rement par le web. <BR> &nbsp; <P> <B>Participation des dÃ©veloppeurs</B> <P>  Pour pouvoir utiliser $1 au mieux, il est nÃ©cÃ©ssaire de <A href="/account/register.php">s'enregistrer comme un dÃ©veloppeur officiel</a>.  Cela vous permettra de profiter de tous ce que nous avons Ã  vous offrir. Vous pouvez bien entendu parcourir le site sans vous enregistrer, mais vous ne pourrez pas y participer pleinement. <P> &nbsp; <BR>  <B>CrÃ©er un nouveau projet</B> <P> <A href="/account/register.php">Enregistrez-vous comme dÃ©veloppeur</A>, puis <A HREF="/account/login.php">connectez-vous</A>, puis <a href="/register/">enregistrez votre projet.</a> <p> Merci... et nous espÃ©rons que vous aimerez $1 !
+home	breaking_down_barriers	Abaisser les barriÃ¨res du dÃ©veloppement open source
+home	highest_ranked_users	Les dÃ©veloppeurs les mieux classÃ©s
 home	most_active_this_week	Les plus actifs cette semaine
 home	sfos	$1 On-Site
 home	sourceforge_statistics	Statistiques de $1
-home	top_project_downloads	Projets les plus téléchargés
-mail	provided_by	<p>Les listes de diffusion sont fournies par <a href="http://www.list.org/">GNU Mailman</a>.  Merci aux équipes de Mailman et de <a href="http://www.python.org/">Python</a> pour leurs excellents logiciels.
+home	top_project_downloads	Projets les plus tÃ©lÃ©chargÃ©s
+mail	provided_by	<p>Les listes de diffusion sont fournies par <a href="http://www.list.org/">GNU Mailman</a>.  Merci aux Ã©quipes de Mailman et de <a href="http://www.python.org/">Python</a> pour leurs excellents logiciels.
 mail	section	Projet : $1
 mail	title	Listes de diffusion
 mail_admin	section	Listes de diffusion
@@ -283,11 +283,11 @@ mail_admin_add_list	section	Administration des listes de diffusion
 mail_admin_add_list	title	Ajout d'une liste
 mail_admin_change_status	section	Administration des listes de diffusion
 mail_admin_change_status	title	Administration / modification des listes
-menu	about_sourceforge	À propos de $1
+menu	about_sourceforge	Ã€ propos de $1
 menu	account_maintenance	Gestion du compte
 menu	bookmark_page	Ajouter aux favoris
-menu	change_my_theme	Changer de thème
-menu	code_snippet_library	Bibliothèque de code
+menu	change_my_theme	Changer de thÃ¨me
+menu	code_snippet_library	BibliothÃ¨que de code
 menu	compile_farm	Ferme de compilation
 menu	contact_us	Contacter $1
 menu	diary_notes	Journal et notes
@@ -297,37 +297,37 @@ menu	login	Connexion via SSL
 menu	logout	Sortir
 menu	my_personal_page	Ma page personnelle
 menu	new_project	Nouveau projet
-menu	new_releases	Sorties récentes
+menu	new_releases	Sorties rÃ©centes
 menu	new_user	Nouvel utilisateur via SSL
 menu	other_site_mirrors	Miroirs d'autres sites
 menu	project_admin	Admin. du projet
 menu	project_help_wanted	Demande d'aide
-menu	project_summary	Résumé du projet
+menu	project_summary	RÃ©sumÃ© du projet
 menu	search	Recherche
-menu	site_status	État du site
-menu	software_map	Recherche thématique
+menu	site_status	Ã‰tat du site
+menu	software_map	Recherche thÃ©matique
 menu	top_projects	Meilleurs projets
-menu	admin	Gérer
+menu	admin	GÃ©rer
 menu	submit	Proposer
 menu	home	Accueil
 menu	projectree	Arbre des projets
 menu	mypage	Ma page
-menu	code_snippet	Bibliothèque
+menu	code_snippet	BibliothÃ¨que
 menu	admin	Administration
-my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés, ainsi que la liste des groupes dont vous faites partie.
+my	about_blurb	Votre page personnelle contient la liste des bogues et des tÃ¢ches qui vous sont assignÃ©s, ainsi que la liste des groupes dont vous faites partie.
 my	no_bookmarks	Vous n'avez pas encore de favoris
-my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de téléchargement.<p>Vous pouvez déclencher la surveillance de fichiers en visitant la page de résumé d'un projet et en cliquant sur le lien dans la section « Fichiers ».<br>
-my	no_monitored_forums	<h3>Vous ne surveillez pas de forums</h3>Si vous surveillez des forums, vous recevrez par les nouveaux messages dans un e-mail contenant également un lien vers le message.<p>Vous pouvez déclencher la surveillance d'un forum en cliquant sur le lien adéquat dans un forum quelconque.<br>
-my	no_open_tasks	Aucune tâche ne vous est assignée.
+my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prÃ©venu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de tÃ©lÃ©chargement.<p>Vous pouvez dÃ©clencher la surveillance de fichiers en visitant la page de rÃ©sumÃ© d'un projet et en cliquant sur le lien dans la section Â« Fichiers Â».<br>
+my	no_monitored_forums	<h3>Vous ne surveillez pas de forums</h3>Si vous surveillez des forums, vous recevrez par les nouveaux messages dans un e-mail contenant Ã©galement un lien vers le message.<p>Vous pouvez dÃ©clencher la surveillance d'un forum en cliquant sur le lien adÃ©quat dans un forum quelconque.<br>
+my	no_open_tasks	Aucune tÃ¢che ne vous est assignÃ©e.
 my	no_projects	Vous ne faites partie d'aucun projet.
-my	no_tracker_items_assigned	Aucun objet de tracker ne vous est assigné.
+my	no_tracker_items_assigned	Aucun objet de tracker ne vous est assignÃ©.
 my	no_tracker_items_submitted	Vous n'avez soumis aucun objet de tracker.
 my	title	Page personnelle de $1
-my	assigneditems	Mes tâches assignées
-my	submitteditems	Mes tâches proposées
+my	assigneditems	Mes tÃ¢ches assignÃ©es
+my	submitteditems	Mes tÃ¢ches proposÃ©es
 my	monitoredforum	Forums que vous surveillez
 my	monitoredfile	Fichiers que vous surveillez
-my	tasks	Mes tâches
+my	tasks	Mes tÃ¢ches
 my	survey	Sondages rapides
 my	bookmarks	Mes signets
 my	projects	Mes projets
@@ -336,67 +336,67 @@ my_bookmark_add	title	Ajout d'un favori
 my_bookmark_delete	section	Ma page personnelle
 my_bookmark_delete	title	Suppression d'un favori
 my_bookmark_edit	section	Ma page personnelle
-my_bookmark_edit	title	Édition d'un favori
+my_bookmark_edit	title	Ã‰dition d'un favori
 my_diary	section	Ma page personnelle
 my_diary	title	Journal et notes
-new	title	Sorties récentes
+new	title	Sorties rÃ©centes
 news	section	Projet : $1
-news	title	Nouveautés
-news	choose	<P>Choisissez une nouveauté et vous pouvez visualiser, chercher et poster des messages.<P>
-news	nonews	Aucune nouveauté
-news	nonewsfor	Aucune nouveauté trouvée pour: $1
-news	noitems	Aucun enregistrement trouvé
-news_admin	section	Nouveautés
-news_admin	title	Administration des nouveautés
-news_admin	permdenied	Vous devez être administrateur du projet que vous éditez ou être membre de l'équipe $1 des nouveautés.
+news	title	NouveautÃ©s
+news	choose	<P>Choisissez une nouveautÃ© et vous pouvez visualiser, chercher et poster des messages.<P>
+news	nonews	Aucune nouveautÃ©
+news	nonewsfor	Aucune nouveautÃ© trouvÃ©e pour: $1
+news	noitems	Aucun enregistrement trouvÃ©
+news_admin	section	NouveautÃ©s
+news_admin	title	Administration des nouveautÃ©s
+news_admin	permdenied	Vous devez Ãªtre administrateur du projet que vous Ã©ditez ou Ãªtre membre de l'Ã©quipe $1 des nouveautÃ©s.
 news_admin	noqueued	Pas de message soumis pour le projet
 news_admin	queued	Messages soumis pour le projet
-news_main	title	Nouveautés
-news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe $1 pour apparaître sur la page d'accueil $1.<P>Vous pouvez inclure dans vos envois des URLs, mais pas de HTML.<P>Les URLs commençants par http:// sont rendues clickables.
-news_submit	section	Nouveautés
-news_submit	title	Soumettre une nouveauté pour $1
-news_submit	cannot	Vous ne pouvez soumettre une nouveauté sans être administrateur de ce projet
+news_main	title	NouveautÃ©s
+news_submit	post_blurb	Vous pouvez publier une nouveautÃ© concernant votre projet si vous en Ãªtes administrateur.  Vous pouvez Ã©galement publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaÃ®tront immÃ©diatement sur la page de rÃ©sumÃ© de votre projet.  Les publications d'intÃ©rÃªt gÃ©nÃ©ral peuvent Ãªtre sÃ©lectionnÃ©es par l'Ã©quipe $1 pour apparaÃ®tre sur la page d'accueil $1.<P>Vous pouvez inclure dans vos envois des URLs, mais pas de HTML.<P>Les URLs commenÃ§ants par http:// sont rendues clickables.
+news_submit	section	NouveautÃ©s
+news_submit	title	Soumettre une nouveautÃ© pour $1
+news_submit	cannot	Vous ne pouvez soumettre une nouveautÃ© sans Ãªtre administrateur de ce projet
 news_submit	forproject	Pour le projet
 news_submit	subject	Sujet
 news_submit	details	Detail
 news_submit	errorinsert	ERREUR d'insertion
 news_submit	errorboth	ERREUR - le sujet et le corps sont requis
-news_submit	newsadded	Nouveauté ajoutée.
+news_submit	newsadded	NouveautÃ© ajoutÃ©e.
 news_submit	submit	ENVOYER
-news_utils	nonews	<H3>Pas de nouveauté<H3>
-news_utils	archive	Archive des nouveautés
-news_utils	submit	Proposer une nouveauté
+news_utils	nonews	<H3>Pas de nouveautÃ©<H3>
+news_utils	archive	Archive des nouveautÃ©s
+news_utils	submit	Proposer une nouveautÃ©
 news_utils	readmore	<NOBR>Lire plus/Commenter</NOBR>
-partners	about_blurb	<p>Sourceforge est fier d'être partenaire avec <a href="http://www.cosource.com/">Cosource.com</a>.  Cosource.com est un site web collaboratif d'enchères inversées, permettant aux clients et aux développeurs de logiciels libres de travailler ensemble afin de financer les solutions logicielles innovantes.
-people	about_blurb	<p>Le système « Besoin d'aide » de Sourceforge est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus, sauf si l'émetteur décide de les fermer.  Les administrateurs de projet peuvent toujours re-proposer des postes si les propositions précédentes ont expiré.<p>Naviguez dans le menu des catégories pour trouver les projets qui ont besoin de vous.<p>Si vous êtes administrateur d'un projet, connectez-vous et proposez vos offres de postes par la page d'administration de votre projet.<p>Pour proposer de nouvelles catégories de postes, soumettez une requête par le gestionnaire de support technique.
+partners	about_blurb	<p>Sourceforge est fier d'Ãªtre partenaire avec <a href="http://www.cosource.com/">Cosource.com</a>.  Cosource.com est un site web collaboratif d'enchÃ¨res inversÃ©es, permettant aux clients et aux dÃ©veloppeurs de logiciels libres de travailler ensemble afin de financer les solutions logicielles innovantes.
+people	about_blurb	<p>Le systÃ¨me Â« Besoin d'aide Â» de Sourceforge est destinÃ© aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce systÃ¨me d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus, sauf si l'Ã©metteur dÃ©cide de les fermer.  Les administrateurs de projet peuvent toujours re-proposer des postes si les propositions prÃ©cÃ©dentes ont expirÃ©.<p>Naviguez dans le menu des catÃ©gories pour trouver les projets qui ont besoin de vous.<p>Si vous Ãªtes administrateur d'un projet, connectez-vous et proposez vos offres de postes par la page d'administration de votre projet.<p>Pour proposer de nouvelles catÃ©gories de postes, soumettez une requÃªte par le gestionnaire de support technique.
 people	section	Besoin d'aide
 people	title	Les projets ayant besoin d'aide
 people_admin	section	Besoin d'aide
 people_admin	title	Administration des offres
 people_admin_people_cat	section	Administration des offres
-people_admin_people_cat	title	Ajout de catégories de postes
+people_admin_people_cat	title	Ajout de catÃ©gories de postes
 people_admin_people_skills	section	Administration des offres
-people_admin_people_skills	title	Ajout de compétences
+people_admin_people_skills	title	Ajout de compÃ©tences
 people_cat	section	Besoin d'aide
-people_cat	title	Liste des offres par catégorie
+people_cat	title	Liste des offres par catÃ©gorie
 people_createjob	section	Besoin d'aide
-people_createjob	title	Création d'une nouvelle offre
+people_createjob	title	CrÃ©ation d'une nouvelle offre
 people_editjob	section	Besoin d'aide
-people_editjob	title	Édition d'une offre
+people_editjob	title	Ã‰dition d'une offre
 people_editprofile	section	Besoin d'aide
-people_editprofile	title	Édition de votre profil
+people_editprofile	title	Ã‰dition de votre profil
 people_helpwanted_latest	section	Besoin d'aide
-people_helpwanted_latest	title	Dernières offres
+people_helpwanted_latest	title	DerniÃ¨res offres
 people_proj	section	Besoin d'aide
 people_proj	title	Besoin d'aide pour $1
 people_viewjob	section	Besoin d'aide
 people_viewjob	title	On recherche $1 pour $2
 people_viewprofile	section	Information sur un utilisateur
-people_viewprofile	title	Affichage d'un profil de développeur
+people_viewprofile	title	Affichage d'un profil de dÃ©veloppeur
 pm	section	Projet : $1
-pm	title	Gestion de projet : sous-projets et tâches
+pm	title	Gestion de projet : sous-projets et tÃ¢ches
 pm_addtask	section	Gestion de projet
-pm_addtask	title	Ajout d'une tâche
+pm_addtask	title	Ajout d'une tÃ¢che
 pm_admin	section	$1
 pm_admin	title	Gestion de projet : administration
 pm_admin_change_status	section	Administration du gestionnaire de projets
@@ -404,76 +404,76 @@ pm_admin_change_status	title	Modifier une information
 pm_admin_projects	section	Administration du gestionnaire de projets
 pm_admin_projects	title	Ajout de sous-projets
 pm_browse_custom	section	Gestion de projet
-pm_browse_custom	title	Naviguer dans les tâches
+pm_browse_custom	title	Naviguer dans les tÃ¢ches
 pm_browse_my	section	Gestion de projet pour $1
-pm_browse_my	title	Mes tâches
+pm_browse_my	title	Mes tÃ¢ches
 pm_browse_open	section	Gestion de projet
-pm_browse_open	title	Tâches ouvertes
+pm_browse_open	title	TÃ¢ches ouvertes
 pm_detailtask	section	Gestion de projet
-pm_detailtask	title	Détails d'une tâche
+pm_detailtask	title	DÃ©tails d'une tÃ¢che
 pm_modtask	section	Gestion de projet
-pm_modtask	title	Modification d'une tâche
+pm_modtask	title	Modification d'une tÃ¢che
 pm_reporting	section	Gestion de projet
-pm_reporting	title	Rapports sur les tâches
+pm_reporting	title	Rapports sur les tÃ¢ches
 project_admin	section	Projet : $1
-project_admin	title	Résumé de l'administration
+project_admin	title	RÃ©sumÃ© de l'administration
 project_admin_database	section	Projet $1 -- administration
-project_admin_database	title	Information sur les bases de données
+project_admin_database	title	Information sur les bases de donnÃ©es
 project_admin_editgroupinfo	section	Projet $1 -- administration
-project_admin_editgroupinfo	title	Édition des infos publiques
+project_admin_editgroupinfo	title	Ã‰dition des infos publiques
 project_admin_editimages	section	Projet $1 -- administration
-project_admin_editimages	title	Édition des données multimédia
+project_admin_editimages	title	Ã‰dition des donnÃ©es multimÃ©dia
 project_admin_editpackages	section	Projet $1 -- administration
-project_admin_editpackages	title	Édition des paquets
+project_admin_editpackages	title	Ã‰dition des paquets
 project_admin_editreleases	section	Projet $1 -- administration
-project_admin_editreleases	title	Édition des révisions
+project_admin_editreleases	title	Ã‰dition des rÃ©visions
 project_admin_history	section	Projet $1 -- administration
 project_admin_history	title	Historique
 project_admin_newrelease	section	Projet $1 -- administration
-project_admin_newrelease	title	Création d'une révision
+project_admin_newrelease	title	CrÃ©ation d'une rÃ©vision
 project_admin_qrs	section	Projet $1 -- administration
-project_admin_qrs	title	Système de publication rapide
+project_admin_qrs	title	SystÃ¨me de publication rapide
 project_admin_userpermedit	section	Projet $1 -- administration
-project_admin_userpermedit	title	Édition des droits des développeurs
+project_admin_userpermedit	title	Ã‰dition des droits des dÃ©veloppeurs
 project_admin_userperms	section	Projet $1 -- administration
-project_admin_userperms	title	Liste des droits des développeurs
+project_admin_userperms	title	Liste des droits des dÃ©veloppeurs
 project_admin_vhost	section	Projet $1 -- administration
-project_admin_vhost	title	Gestion des hôtes virtuels
-project_memberlist	joining	<P>Si vous désirez contribuer à ce projet, contactez un des administrateurs du projet, ci-dessous en gras.<br><br>
+project_admin_vhost	title	Gestion des hÃ´tes virtuels
+project_memberlist	joining	<P>Si vous dÃ©sirez contribuer Ã  ce projet, contactez un des administrateurs du projet, ci-dessous en gras.<br><br>
 project_showfiles	section	Projet : $1
 project_showfiles	title	Liste de fichiers
 project_shownotes	section	Projet : $1
-project_shownotes	title	Remarques sur les révisions
+project_shownotes	title	Remarques sur les rÃ©visions
 projects	section	Projet : $1
-projects	title	Résumé
+projects	title	RÃ©sumÃ©
 register	title	Nouveau projet
 register_complete	section	Nouveau projet
-register_complete	title	Enregistrement terminé
+register_complete	title	Enregistrement terminÃ©
 register_projectinfo	section	Nouveau projet
 register_projectinfo	title	Informations sur le projet
 register_requirements	section	Nouveau projet
 register_requirements	title	Services et conditions requises
 register_tos	section	Nouveau projet
-register_tos	title	Accord sur les conditions générales
+register_tos	title	Accord sur les conditions gÃ©nÃ©rales
 search	title	Recherche
-sendmessage	about_blurb	Afin de limiter le spam, nous utilisons ce formulaire pour l'envoi d'e-mails.<p>Remplissez-le consciencieusement, faute de quoi le destinataire risque de ne pas pouvoir vous répondre.<p><b>Si vous avez besoin d'aide :</b> avez-vous lu la documentation du site, avez-vous inclus votre <b>user_id</b> et votre <b>user_name</b> ?  Si vous écrivez à propos d'un projet particulier, incluez aussi le <b>group_id</b> et le nom de ce projet.
-sendmessage	title	Envoi d'un message à $1
-snippet	title	Bibliothèque de code
-snippet_add_snippet_to_package	section	Bibliothèque de code
-snippet_add_snippet_to_package	title	Ajout d'un bout de code à un paquet
-snippet_addversion	section	Bibliothèque de code
+sendmessage	about_blurb	Afin de limiter le spam, nous utilisons ce formulaire pour l'envoi d'e-mails.<p>Remplissez-le consciencieusement, faute de quoi le destinataire risque de ne pas pouvoir vous rÃ©pondre.<p><b>Si vous avez besoin d'aide :</b> avez-vous lu la documentation du site, avez-vous inclus votre <b>user_id</b> et votre <b>user_name</b> ?  Si vous Ã©crivez Ã  propos d'un projet particulier, incluez aussi le <b>group_id</b> et le nom de ce projet.
+sendmessage	title	Envoi d'un message Ã  $1
+snippet	title	BibliothÃ¨que de code
+snippet_add_snippet_to_package	section	BibliothÃ¨que de code
+snippet_add_snippet_to_package	title	Ajout d'un bout de code Ã  un paquet
+snippet_addversion	section	BibliothÃ¨que de code
 snippet_addversion	title	Publier une nouvelle version
-snippet_browse	section	Bibliothèque de code
-snippet_browse	title	Navigation dans la bibliothèque
-snippet_delete	section	Bibliothèque de code
+snippet_browse	section	BibliothÃ¨que de code
+snippet_browse	title	Navigation dans la bibliothÃ¨que
+snippet_delete	section	BibliothÃ¨que de code
 snippet_delete	title	Suppression un bout de code
-snippet_detail	section	Bibliothèque de code
-snippet_detail	title	Affichage des détails d'un bout de code
-snippet_package	section	Bibliothèque de code
-snippet_package	title	Création d'un paquet de bouts de code
-snippet_submit	section	Bibliothèque de code
+snippet_detail	section	BibliothÃ¨que de code
+snippet_detail	title	Affichage des dÃ©tails d'un bout de code
+snippet_package	section	BibliothÃ¨que de code
+snippet_package	title	CrÃ©ation d'un paquet de bouts de code
+snippet_submit	section	BibliothÃ¨que de code
 snippet_submit	title	Soumission d'un bout de code
-softwaremap	title	Recherche thématique
+softwaremap	title	Recherche thÃ©matique
 staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 survey	title	Sondages pour $1
 survey_admin	section	Outil de sondages
@@ -483,15 +483,15 @@ survey_admin_add_question	title	Ajout d'une question
 survey_admin_add_survey	section	Administration des sondages
 survey_admin_add_survey	title	Ajout d'un sondage
 survey_admin_edit_question	section	Administration des sondages
-survey_admin_edit_question	title	Édition d'une question
+survey_admin_edit_question	title	Ã‰dition d'une question
 survey_admin_edit_survey	section	Administration des sondages
-survey_admin_edit_survey	title	Édition d'un sondage
+survey_admin_edit_survey	title	Ã‰dition d'un sondage
 survey_admin_show_questions	section	Administration des sondages
 survey_admin_show_questions	title	Affichage des questions dans un sondage
 survey_admin_show_results	section	Administration des sondages
-survey_admin_show_results	title	Affichage des résultats
+survey_admin_show_results	title	Affichage des rÃ©sultats
 survey_admin_show_results_aggregate	section	Administration des sondages
-survey_admin_show_results_aggregate	title	Affichage des résultats d'un sondage
+survey_admin_show_results_aggregate	title	Affichage des rÃ©sultats d'un sondage
 survey_admin_show_results_comments	section	Administration des sondages
 survey_admin_show_results_comments	title	Affichage des commentaires
 survey_admin_show_results_individual	section	Administration des sondages
@@ -499,17 +499,17 @@ survey_admin_show_results_individual	title	Affichage des commentaires d'un sonda
 survey_survey	section	Outil de sondages
 survey_survey	title	Affichage d'un sondage
 survey_survey_resp	section	Outil de sondages
-survey_survey_resp	title	Réponse à un sondage
-thanks	about_blurb	<p><h2>Remerciements</h2>Les développeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements :<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
-themes	section	Préférences de votre compte
-themes	title	Changer de thème
-top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichés ici.
+survey_survey_resp	title	RÃ©ponse Ã  un sondage
+thanks	about_blurb	<p><h2>Remerciements</h2>Les dÃ©veloppeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements :<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
+themes	section	PrÃ©fÃ©rences de votre compte
+themes	title	Changer de thÃ¨me
+top	about_blurb	Diverses statistiques d'utilisations sont collectÃ©es sur Sourceforge.  Les projets les mieux classÃ©s dans certaines catÃ©gories sont affichÃ©s ici.
 top	active_all_time	Les plus actifs de tous les temps
 top	active_weekly	Les plus actifs cette semaine
-top	downloads	Les plus téléchargés
-top	downloads_7_days	Les plus téléchargés cette semaine
+top	downloads	Les plus tÃ©lÃ©chargÃ©s
+top	downloads_7_days	Les plus tÃ©lÃ©chargÃ©s cette semaine
 top	forum_posts	Les forums les plus actifs
-top	pageviews	Les projets les plus visités
+top	pageviews	Les projets les plus visitÃ©s
 top	title	Les meilleurs projets
 top_mostactive	section	Les meilleurs projets
 top_mostactive	title	Les projets les plus actifs : $1
@@ -524,52 +524,52 @@ tracker_admin	title	Administration
 tracker_admin_choose	section	Projet: $1
 tracker_admin_choose	title	Administration du Tracker
 tracker_admin_add_canned	section	Administration d'un tracker
-tracker_admin_add_canned	title	Ajout d'une réponse-type à $1
+tracker_admin_add_canned	title	Ajout d'une rÃ©ponse-type Ã  $1
 tracker_admin_add_cat	section	Administration d'un tracker
-tracker_admin_add_cat	title	Ajout d'une catégorie à $1
+tracker_admin_add_cat	title	Ajout d'une catÃ©gorie Ã  $1
 tracker_admin_add_group	section	Administration d'un tracker
-tracker_admin_add_group	title	Ajout de groups à $1
+tracker_admin_add_group	title	Ajout de groups Ã  $1
 tracker_admin_update_canned	section	Administration d'un tracker
-tracker_admin_update_canned	title	Modification des réponses-types de $1
+tracker_admin_update_canned	title	Modification des rÃ©ponses-types de $1
 tracker_admin_update_cat	section	Administration d'un tracker
 tracker_admin_update_cat	title	Modification d'une catagorie de $1
 tracker_admin_update_group	section	Administration d'un tracker
 tracker_admin_update_group	title	Modification d'un groupe de $1
 tracker_admin_update_type	section	Administration d'un tracker
-tracker_admin_update_type	title	Mise à jour de $1
+tracker_admin_update_type	title	Mise Ã  jour de $1
 tracker_admin_update_users	section	Administration d'un tracker
-tracker_admin_update_users	title	Édition des permissions des utilisateurs
+tracker_admin_update_users	title	Ã‰dition des permissions des utilisateurs
 tracker_browse	section	Projet : $1
 tracker_browse	title	Navigation dans $1
 tracker_detail	section	$1
-tracker_detail	title	Vue détaillée d'un tracker
+tracker_detail	title	Vue dÃ©taillÃ©e d'un tracker
 tracker_reporting	section	Projet: $1
 tracker_reporting	title	Rapports sur les trackers
-users	title	Résumé d'un utilisateur
-trove	not_categorized	Ce projet ne s'est pas encore classifié dans la 
-trove	title	Carte de Recherche thématique
-classgroup	acceptedproject	Votre enregistrement de projet $7 a été accepté.\n\nNom complet du projet:  $1\nNom unix du projet:  $2\nServeur CVS:         cvs.$2.$3\nServeur Shell/Web:   $2.$3\n\nVotre DNS va prendre jusqu'à une journée pour devenir actif sur notre site.\nEn attendant que la résolution DNS soit effective, vous pouvez essayer de vous connecter à \n$4 et pointer CVS à $5\n\nSi au bout de 6 heures vos comptes shell/CVS ne fonctionnent toujours pas, s'il vous plait\nouvrez un ticket support pour que nous examinions le problème.\nNotez que les comptes shell/CVS sont fermés à telnet et\nfonctionnent avec SSH.\n\nVotre site web est accessible à travers votre compte shell. S'il vous plait lisez\nla documentation du site (voir le lien ci-dessous) au sujet de l'usage attendu, des services\ndisponibles, et de l'organisation des repertoires du compte.\n\nS'il vous plait prenez quelques temps pour lire la documentation du site au sujet de l'administration \ndes projets (http://$3/docs/site/). Si vous visitez votre\npropre page projet dans $7 alors que vous êtes authentifiés, vous trouverez \ndes menus supplémentaires à votre gauche libellés \'Administration de projet\'.\n\nNous vous recommendons fortement de visiter maintenant $7 et de créer une description \npublique de votre projet. Cela peut se faire en visitant votre page projet en étant authentifié\net en selectionnant \'Administration du projet\' depuis le menu\nà votre gauche (ou en visitant http://$3/project/admin/?group_id=$6\naprés authentification).\n\nVotre projet n'apparaitra pas dans la Recherche Thématique (liste\ndes projets hebergés par $7 qui offre une grande flexibilité de\nparcours et recherche) tant que vous n'aurez pas catégorisé votre projet dans les pages d'administration.\nAinsi pour que l'on puisse trouver votre projet, vous devriez faire ceci maintenant.\nVisiter votre projet en étant authentifié, et selectionnez \'Administration de projet\' depuis le menu de gauche.\n\n\nAppréciez le système, et faites part aux autres de votre expérience de $7. Faites nous savoir\nsi il y a quelque chose que nous puissions faire pour vous aider.\n\n-- L'équipe $7 
-classgroup	rejectedproject	Votre enregistrement de projet a été rejeté.\n\nNom long du projet:  $1\nNom UNIX du projet:  $2\n\nRaison de notre refus:\n\n
-classgroup	newprojectnotification	Un nouveau projet $1 a été soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou rejeter ce projet:\nhttp://$5/admin/approve-pending.php
-classgroup	acceptedprojecttitle	Projet $1 Approuvé
-classgroup	rejectedprojecttitle	Projet $1 Refusé
+users	title	RÃ©sumÃ© d'un utilisateur
+trove	not_categorized	Ce projet ne s'est pas encore classifiÃ© dans la 
+trove	title	Carte de Recherche thÃ©matique
+classgroup	acceptedproject	Votre enregistrement de projet $7 a Ã©tÃ© acceptÃ©.\n\nNom complet du projet:  $1\nNom unix du projet:  $2\nServeur CVS:         cvs.$2.$3\nServeur Shell/Web:   $2.$3\n\nVotre DNS va prendre jusqu'Ã  une journÃ©e pour devenir actif sur notre site.\nEn attendant que la rÃ©solution DNS soit effective, vous pouvez essayer de vous connecter Ã  \n$4 et pointer CVS Ã  $5\n\nSi au bout de 6 heures vos comptes shell/CVS ne fonctionnent toujours pas, s'il vous plait\nouvrez un ticket support pour que nous examinions le problÃ¨me.\nNotez que les comptes shell/CVS sont fermÃ©s Ã  telnet et\nfonctionnent avec SSH.\n\nVotre site web est accessible Ã  travers votre compte shell. S'il vous plait lisez\nla documentation du site (voir le lien ci-dessous) au sujet de l'usage attendu, des services\ndisponibles, et de l'organisation des repertoires du compte.\n\nS'il vous plait prenez quelques temps pour lire la documentation du site au sujet de l'administration \ndes projets (http://$3/docs/site/). Si vous visitez votre\npropre page projet dans $7 alors que vous Ãªtes authentifiÃ©s, vous trouverez \ndes menus supplÃ©mentaires Ã  votre gauche libellÃ©s \'Administration de projet\'.\n\nNous vous recommendons fortement de visiter maintenant $7 et de crÃ©er une description \npublique de votre projet. Cela peut se faire en visitant votre page projet en Ã©tant authentifiÃ©\net en selectionnant \'Administration du projet\' depuis le menu\nÃ  votre gauche (ou en visitant http://$3/project/admin/?group_id=$6\naprÃ©s authentification).\n\nVotre projet n'apparaitra pas dans la Recherche ThÃ©matique (liste\ndes projets hebergÃ©s par $7 qui offre une grande flexibilitÃ© de\nparcours et recherche) tant que vous n'aurez pas catÃ©gorisÃ© votre projet dans les pages d'administration.\nAinsi pour que l'on puisse trouver votre projet, vous devriez faire ceci maintenant.\nVisiter votre projet en Ã©tant authentifiÃ©, et selectionnez \'Administration de projet\' depuis le menu de gauche.\n\n\nApprÃ©ciez le systÃ¨me, et faites part aux autres de votre expÃ©rience de $7. Faites nous savoir\nsi il y a quelque chose que nous puissions faire pour vous aider.\n\n-- L'Ã©quipe $7 
+classgroup	rejectedproject	Votre enregistrement de projet a Ã©tÃ© rejetÃ©.\n\nNom long du projet:  $1\nNom UNIX du projet:  $2\n\nRaison de notre refus:\n\n
+classgroup	newprojectnotification	Un nouveau projet $1 a Ã©tÃ© soumis\n\nNom long du projet:  $2\nDescription soumise: $3\nLicense: $4\n\nVisitez l'URL suivante pour approuver ou rejeter ce projet:\nhttp://$5/admin/approve-pending.php
+classgroup	acceptedprojecttitle	Projet $1 ApprouvÃ©
+classgroup	rejectedprojecttitle	Projet $1 RefusÃ©
 classgroup	newprojectnotificationtitle	Projet $1 Soumis
 session	missingpasswd	Mot de passe ou Login manquant
 session	invalidpasswd	Mot de passe ou Login non valide
 session	suspended	Compte suspendu
 session	pending	Compte en attente
-session	deleted	Compte supprimé
+session	deleted	Compte supprimÃ©
 session	notactive	Compte non actif
 session	cannotinit	ERREUR - Impossible d'initialiser la session
 global	error	ERREUR
-common_include_account	sixchar	Le mot de passe doit comporter au moins 6 caractères.
+common_include_account	sixchar	Le mot de passe doit comporter au moins 6 caractÃ¨res.
 common_include_account	nospace	Il ne peut y avoir d'espace dans un nom de login.
-common_include_account	tooshort	Le nom est trop court, il doit comporter au moins 3 caractères.
-common_include_account	toolong	Le nom est trop long, il doit comporter au plus 15 caractères.
-common_include_account	illegal	Caractère interdit dans le nom.
-common_include_account	cvsreserved	Nom réservé pour CVS.
-common_include_account	dnsreserved	Nom réservé pour le DNS.
-common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractère souligné à cause des règles imposées par le DNS.
+common_include_account	tooshort	Le nom est trop court, il doit comporter au moins 3 caractÃ¨res.
+common_include_account	toolong	Le nom est trop long, il doit comporter au plus 15 caractÃ¨res.
+common_include_account	illegal	CaractÃ¨re interdit dans le nom.
+common_include_account	cvsreserved	Nom rÃ©servÃ© pour CVS.
+common_include_account	dnsreserved	Nom rÃ©servÃ© pour le DNS.
+common_include_account	nounderscore	Le nom de groupe ne peut comporter de caractÃ¨re soulignÃ© Ã  cause des rÃ¨gles imposÃ©es par le DNS.
 image	logout	fr_logout.png
 image	login	fr_login.png
 image	myaccount	fr_myaccount.png

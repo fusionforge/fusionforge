@@ -12,7 +12,7 @@
 system	locale	en_US
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	Y-m-d H:i
-conf	content_encoding	iso-8859-1
+conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
 conf	language_id	1
