@@ -549,18 +549,17 @@ Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 
 		/*  Create the title  */
 
-		echo '
-		<TR BGCOLOR="'.$HTML->COLOR_HTMLBOX_TITLE.'">
-		<TD COLSPAN="'.$cols.'"><B><FONT COLOR="'. $HTML->FONTCOLOR_HTMLBOX_TITLE .'">'.$title.'</B></TD></TR>';
+		$cell_data=array();
+		$cell_data[] = array($title, 'colspan='.$cols);
+		echo $HTML->multiTableRow('',$cell_data, TRUE);
 
 		/*  Create  the  headers  */
-		echo '
-			<tr>';
+		$cell_data=array();
 		for ($i=0; $i < $cols; $i++) {
-			echo '<td><B>'.db_fieldname($result,  $i).'</B></TD>';
+			$cell_data[] = array(db_fieldname($result,$i));
 		}
-		echo '</tr>';
-
+		echo $HTML->multiTableRow('',$cell_data, TRUE);
+		
 		/*  Create the rows  */
 		for ($j = 0; $j < $rows; $j++) {
 			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '>';

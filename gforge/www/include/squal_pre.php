@@ -7,7 +7,7 @@
  * Sets up database connection and session
  * 
  * NOTE:
- *		You cannot call HTML, user, group or related functions
+ *		You cannot call HTML-related functions
  * 
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
@@ -27,6 +27,7 @@ require_once('common/include/Error.class');
 require_once('common/include/User.class');
 require_once('common/include/Permission.class');
 require_once('common/include/utils.php');
+require_once('common/include/Group.class');
 
 //plain text version of exit_error();
 require_once('squal_exit.php');
