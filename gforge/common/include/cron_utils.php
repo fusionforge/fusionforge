@@ -22,6 +22,7 @@ $cron_arr[15]='ssh_create.php';
 $cron_arr[16]='usergroup.php';
 $cron_arr[17]='mailaliases.php';
 $cron_arr[18]='mailing_lists_create.php';
+$cron_arr[19]='tarballs.php';
 
 function cron_entry($job,$output) {
 	$sql="INSERT INTO cron_history (rundate,job,output) 

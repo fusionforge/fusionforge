@@ -1,15 +1,13 @@
 <?php
+
 /**
-  *
-  * Fetch a multimedia data from database
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge CVS Tarballs download page
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2003-2004 (c) GForge
+ *
+ * @version $Id$
+ */
 
 $no_gz_buffer=true;
 
@@ -24,20 +22,19 @@ exit_assert_object($group,'Group');
 $perm =& $group->getPermission( session_get_user() );
 exit_assert_object($perm,'Permission');
 
-$sys_tar_dir='/var/lib/gforge/cvstarballs';
-
 $group_name=$group->getUnixName();
 
 $filename=$group_name.'-cvsroot.tar.gz';
 
-if (file_exists($sys_tar_dir.'/'.$filename)) {
+if (file_exists($sys_cvs_tarballs_path.'/'.$filename)) {
 	Header("Content-disposition: filename=".$filename);
-	Header("Content-type: application/binary");
-	$length = filesize($sys_tar_dir.'/'.$filename);
-	Header("Content-length: $length");
+	Header("Content-type: application/x-gzip");
+	$length = filesize($sys_cvs_tarballs_path.'/'.$filename);
+	Header("Content-length: ".$length);
 
-	readfile($sys_tar_dir.'/'.$filename);
+	readfile($sys_cvs_tarballs_path.'/'.$filename);
 } else {
 	session_redirect("/404.php");
 }
+
 ?>
