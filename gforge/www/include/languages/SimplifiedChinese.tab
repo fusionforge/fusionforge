@@ -493,7 +493,7 @@ group	activity	活力百分比：
 group	activitystat	查看项目活动<a href="/project/stats/?group_id=$1">统计</a>
 group	norelease	该项目没有发布任何文件
 group	nodescription	该项目还没有提交描述
-home	about_blurb	$1 为<b><a href="http://www.opensource.org">开放源代码软件</a>开发者提供全方面的免费服务</b>，包括CVS仓库, 邮件列表, BUG跟踪, 在线论坛, 任务管理, 网站空间, 项目存储及完整的备份, 并且完全是通过WEB方式来管理的。 <BR> &nbsp; <P> <B>请立即加入，并提出您的宝贵意见</B> <P> 为了充分利用 $1 所提供的服务, <A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户, 仍能浏览本站, 但无权参与本站的活动。 <P> &nbsp; <BR> <B>开始您自己的项目</B> <P> <A href="/account/register.php">先注册成为本站用户</A>, 然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A> <P> 谢谢参与，请充分享受本站提供的服务吧！
+home	about_blurb	<P>$1 为<b><a href="http://www.opensource.org/">开放源代码软件</a>开发者提供全方面的免费服务</b>，包括CVS仓库, 邮件列表, BUG跟踪, 在线论坛, 任务管理, 网站空间, 项目存储及完整的备份, 并且完全是通过WEB方式来管理的。</P><P><B>请立即加入，并提出您的宝贵意见</B></P><P>为了充分利用 $1 所提供的服务, <A href="/account/register.php">请立即注册成为 本站用户</A>，这样您就可以参与本站的各项活动。若您尚不是注册用户, 仍能浏览本站, 但无权参与本站的活动。</P><P><B>开始您自己的项目</B></P><P><A href="/account/register.php">先注册成为本站用户</A>, 然后<A HREF="/account/login.php">登录</A>最后<A HREF="/register/">开始您的项目。</A></P><P>谢谢参与，请充分享受本站提供的服务吧！</P>
 home	breaking_down_barriers	为开放源码的发展开辟一条坦途
 home	highest_ranked_users	用户评价排行榜
 home	most_active_this_week	本周活力最强排行榜
@@ -505,7 +505,7 @@ home	hosted_projects	入住项目
 home	registered_users	注册用户
 home	none_found	没有发现
 index	welcome	欢迎
-mail	provided_by	<p>邮件列表通过一个GForge版本的<a href="http://www.list.org">GNU Mailman</a>. 感谢Mailman 和<a href="http://www.python.org">Python</a> 全体工作人员，感谢他们卓越的软件。</p>
+mail	provided_by	<p>邮件列表通过一个GForge版本的<a href="http://www.list.org/">GNU Mailman</a>. 感谢Mailman 和<a href="http://www.python.org/">Python</a> 全体工作人员，感谢他们卓越的软件。</p>
 mail	section	项目： $1
 mail	title	邮件列表
 mail_admin	section	邮件列表

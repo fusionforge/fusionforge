@@ -976,7 +976,7 @@ mail	external_administration	Harpidetu/Harpidetza desegin/Aukerak
 mail	help_to_request	Projektu administrariak admin lotura erabiltzen dute posta zerrendak eskatzeko.
 mail	mailinglists_for	Posta zerrendak $1 -entzako
 mail	no_list_found	Ez da zerrendarik topatu $1 -entzako
-mail	provided_by	<p>Posta zerrendak Gfore bertsio honek emanak <A href="http://www.list.org">GNU Mailman</A>. Mailman-i esker eta <a href="http://www.python.org">Python</a> -i bere software bikainarengatik.</p>
+mail	provided_by	<p>Posta zerrendak Gfore bertsio honek emanak <A href="http://www.list.org/">GNU Mailman</A>. Mailman-i esker eta <a href="http://www.python.org/">Python</a> -i bere software bikainarengatik.</p>
 mail	section	Proiektua: $1
 mail	title	Posta zerrendak
 mail	unable_to_get_lists	Ezin da zerrenda lortu
@@ -2676,8 +2676,8 @@ user_home	title	Perfil del Desarrollador
 user_home	user_id	Erabiltzaile ID-a
 users	no_user_name	Ez duzu erabiltzaile izena eman
 users	optout	Zuk puntuaketa sisteman ez azaltzea erabaki zenuen, bestela erabiltzaile hau puntuatzeko baimena izango zenuke. Bisitatu <a href="/account/">zure mantentze orria</a> informazio gehiago lortzeko.
-users	peerinfo1	<p>Erabiltzaile hau ezagutzen baduzu, mesedez har ezazu une bat ondorengo hirizpideak ebaluatzeko. Gogoratu zure ebaluaketa erabiltzaile horrentzako eta besteentzako ikusgai egongo dela.</p><p>$1 -en ebaluaketa sistema ondorengo kontzeptuetan oinarritua dago <a href="http://www.advogato.com">Advogato.</a> Sistema ber-ezarria izan da eta zentzu anitzetan zabaldua.</p>
-users	peerinfo2	Ebaluaketa laukiak ebaluaketen bataz bestekoak erakusten ditu eta (erantzun mailak) hirizpide bakoitzeko. Erantzun kopuru hauetan izenpetuak eta izenpetu gabeak zenbatu dira. <ul> <li> "Sitewide Rank" eremuak erabiltzailearen jarrera gainontzeko $1 erabiltzaileekin alderatzen du.</li><li>"Aggregate Score"-ak erabiltzaile izenpetuen bataz bestekoa erakusten du.</li><li>"Personal Importance" eremuak erakusten du nola erabiltzaileak beste lankideak baloratzen dituzten (1 eta 1.5 artean) -- Balio gehiago duten erabiltzeen erantzunak pisu gehiago dute.</li></ul><p><i>Ebaluaketa sisteman ez baduzu azaldu nahi (ondorioz ezingo dituzu besteak baloratu eta alderantziz), sartu <a href="/account/">zure kontuaren mantentze orrira</a>. Aukeratzen baduzu ez partehartzea, zure puntuaketak beste erabiltzaileei buruz ezabatu egingo dira eta puntuaketen taula desagertu egingo da zure orri pertsonaletik.</i></p>
+users	peerinfo1	<p>Erabiltzaile hau ezagutzen baduzu, mesedez har ezazu une bat ondorengo hirizpideak ebaluatzeko. Gogoratu zure ebaluaketa erabiltzaile horrentzako eta besteentzako ikusgai egongo dela.</p><p>$1 -en ebaluaketa sistema ondorengo kontzeptuetan oinarritua dago <a href="http://www.advogato.com/">Advogato.</a> Sistema ber-ezarria izan da eta zentzu anitzetan zabaldua.</p>
+users	peerinfo2	<p>Ebaluaketa laukiak ebaluaketen bataz bestekoak erakusten ditu eta (erantzun mailak) hirizpide bakoitzeko. Erantzun kopuru hauetan izenpetuak eta izenpetu gabeak zenbatu dira.</p><ul><li>"Sitewide Rank" eremuak erabiltzailearen jarrera gainontzeko $1 erabiltzaileekin alderatzen du.</li><li>"Aggregate Score"-ak erabiltzaile izenpetuen bataz bestekoa erakusten du.</li><li>"Personal Importance" eremuak erakusten du nola erabiltzaileak beste lankideak baloratzen dituzten (1 eta 1.5 artean) -- Balio gehiago duten erabiltzeen erantzunak pisu gehiago dute.</li></ul><p><i>Ebaluaketa sisteman ez baduzu azaldu nahi (ondorioz ezingo dituzu besteak baloratu eta alderantziz), sartu <a href="/account/">zure kontuaren mantentze orrira</a>. Aukeratzen baduzu ez partehartzea, zure puntuaketak beste erabiltzaileei buruz ezabatu egingo dira eta puntuaketen taula desagertu egingo da zure orri pertsonaletik.</i></p>
 users	title	Erabiltzailearen laburpena
 users	user_not_exist_text	Erabiltzaile baliogabea
 users	user_not_exist_title	Erabiltzaile hau ez da aurkitzen

@@ -919,7 +919,7 @@ help_trove_cat	description	설명
 help_trove_cat	full_category_name	Full Category Name
 help_trove_cat	no_such_category	No such trove category
 help_trove_cat	short_name	Short Name
-home	about_blurb	$1는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>$1를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
+home	about_blurb	<P>$1 는 <B><A href="http://www.opensource.org/">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다.</P><P><B>사이트에 대한 피드백 및 참여 방법</B></P><P>$1 를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.</P><P><B>여러분만의 프로젝트를 구성하십시오.</B></P><P><A href="/account/register.php">사용자 등록</A>을 하시� , <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.</P>
 home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	gforge_statistics	$1 통계
 home	highest_ranked_users	우수 사용자
@@ -946,7 +946,7 @@ include_toolreport	open	Open
 include_toolreport	project_lifespan	Project lifespan
 include_toolreport	show	Show
 index	welcome	환영합니다.
-mail	provided_by	<p>메일링 리스트는 GForge에 알맞게 구현된 <a href="http://www.list.org">GNU Mailman</a>을 통해 운영됩니다.  멋진 소프트웨어를 만들어낸  Mailman과 <a href="http://www.python.org">Python</a> 개발자 여러분들께 감사드립니다.</p>
+mail	provided_by	<p>메일링 리스트는 GForge에 알맞게 구현된 <a href="http://www.list.org/">GNU Mailman</a>을 통해 운영됩니다.  멋진 소프트웨어를 만들어낸  Mailman과 <a href="http://www.python.org/">Python</a> 개발자 여러분들께 감사드립니다.</p>
 mail	section	프로젝트: $1
 mail	title	메일링 리스트
 mail_admin	section	메일링 리스트
@@ -2501,8 +2501,8 @@ user_home	title	개발자 프로필
 user_home	user_id	사용자 번호
 users	no_user_name	사용자 이름이 없습니다.
 users	optout	여러분은 사용자간 평가 시스템에서 탈퇴하신 상태이기 때문에 다른 사용자를 평가하실 수 없습니다. 자세한 사항은 <a href="/account/">사용자 등록 정보</a>를 참고하세요.
-users	peerinfo1	만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오. <p> $1 사용자간 평가 시스템은 <A HREF="http://www.advogato.com">Advogato</A>에서 힌트를 얻은 것입니다. 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.
-users	peerinfo2	사용자간 평가 정보는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다. <ul><li>"전체 순위" 필드는 $1의 모든 사용자와 비교한 순위를 나타냅니다. <li>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다. <li>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다.</ul><p><i>사용자간 평가 시스템에 참여하고 싶지 않으시다면, (이는 다른 사람에게 평가받는 것, 다른 사람을 평가하는 것 양쪽 모두에 영향을 미칩니다.) <a href="/account/">사용자 등록 정보</a> 페이지에서 설정하시면 됩니다. 만약 이 평가 시스템에서 탈퇴하시면 다른 사용자를 평가했던 정보들도 모두 영구적으로 삭제되고 여러분의 개인 페이지에서 '사용자간 평가' 박스도 사라지게 되니다. </i></p>
+users	peerinfo1	<P>만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오.</P><P>$1 사용자간 평가 시스템은 <A HREF="http://www.advogato.com/">Advogato</A>에서 힌트를 얻은 것입니다. 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.</P>
+users	peerinfo2	<P>사용자간 평가 정보는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다.</P><UL><LI>"전체 순위" 필드는 $1의 모든 사용자와 비교한 순위를 나타냅니다.</LI><LI>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다.</LI><LI>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다.</LI></UL><P><I>사용자간 평가 시스템에 참여하고 싶지 않으시다면, (이는 다른 사람에게 평가받는 것, 다른 사람을 평가하는 것 양쪽 모두에 영향을 미칩니다.) <a href="/account/">사용자 등록 정보</a> 페이지에서 설정하시면 됩니다. 만약 이 평가 시스템에서 탈퇴하시면 다른 사용자를 평가했던 정보들도 모두 영구적으로 삭제되고 여러분의 개인 페이지에서 '사용자간 평가' 박스도 사라지게 되니다.</I></P>
 users	title	사용자 정보
 users	user_not_exist_text	잘못된 사용자
 users	user_not_exist_title	사용자가 존재하지 않습니다.

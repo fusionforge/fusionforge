@@ -307,14 +307,14 @@ group	activity	活動率:
 group	activitystat	プロジェクトの活動 <a href="/project/stats/?group_id=$1">統計</a>
 group	norelease	このプロジェクトはファイルをひとつもリリースしていません。
 group	nodescription	このプロジェクトはまだ記述を提出していません。
-home	about_blurb	(未訳:home.about_blurb)$1 is a <B>free service to <A href="http://www.opensource.org">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration. <BR>&nbsp;<P><B>Site Feedback and Participation</B><P>In order to get the most out of $1, you'll need to <A href="/account/register.php">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully. <P>&nbsp;<BR><B>Set Up Your Own Project</B><P><A href="/account/register.php">Register as a site user</A>, then <A HREF="/account/login.php">Login</A> and finally, <A HREF="/register/">Register Your Project.</A> Thanks... and enjoy the site. 
+home	about_blurb	<P>(未訳:home.about_blurb)$1 is a <B>free service to <A href="http://www.opensource.org/">Open Source</A> developers</B> offering easy access to the best in CVS, mailing lists, bug tracking, message boards/forums, task management, site hosting, permanent file archival, full backups, and total web-based administration.</P><P><B>Site Feedback and Participation</B></P><P>In order to get the most out of $1, you'll need to <A href="/account/register.php">register as a site user</A>. This will allow you to participate fully in all we have to offer. You may of course browse the site without registering, but will not have access to participate fully.</P><P><B>Set Up Your Own Project</B></P><P><A href="/account/register.php">Register as a site user</A>, then <A HREF="/account/login.php">Login</A> and finally, <A HREF="/register/">Register Your Project</A>.</P><P>Thanks... and enjoy the site.</P>
 home	breaking_down_barriers	障害を乗り越え、オープンソース開発の道へ\n
 home	highest_ranked_users	ランキングの最も高いユーザ
 home	most_active_this_week	今週最も活発なプロジェクト
 home	sfos	$1 オンサイト
 home	gforge_statistics	$1 統計
 home	top_project_downloads	トッププロジェクトダウンロード
-mail	provided_by	<p>メーリングリストは<A href="http://www.list.org">GNU Mailman</a>のGForgeバージョンを利用して提供します。優れたソフトを作成したMailmanおよび<A href="http://www.python.org">Python</a>の皆さんに感謝します。
+mail	provided_by	<p>メーリングリストは<A href="http://www.list.org/">GNU Mailman</a>のGForgeバージョンを利用して提供します。優れたソフトを作成したMailmanおよび<A href="http://www.python.org/">Python</a>の皆さんに感謝します。</p>
 mail	section	プロジェクト: $1
 mail	title	 メーリングリスト
 mail_admin	section	 メーリングリスト

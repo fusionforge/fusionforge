@@ -991,7 +991,7 @@ help_trove_cat	description	說明
 help_trove_cat	full_category_name	完整的分類名稱
 help_trove_cat	no_such_category	沒有這種分類
 help_trove_cat	short_name	簡短名稱
-home	about_blurb	$1 為<b><a href="http://www.opensource.org">開放源代碼軟體</a>開發者提供全方面的免費服務</b>，包括CVS檔案庫, 通信論壇, BUG追蹤, 線上討論區, 任務管理, 網站空間, 專案存儲及完整的備份, 並且完全是透過WEB方式來管理的。 <BR>   <P> <B>請立即加入，並提出您的寶貴意見</B> <P> 為了充分利用 $1 所提供的服務, <A href="/account/register.php">請立即註冊成為 本站會員</A>，這樣您就可以參與本站的各項活動。若您尚不是註冊會員, 仍能瀏覽本站, 但無權參與本站的活動。 <P>   <BR> <B>開始您自己的專案</B> <P> <A href="/account/register.php">先註冊成為本站會員</A>, 然後<A HREF="/account/login.php">登入</A>最後<A HREF="/register/">開始您的專案。</A> <P> 謝謝參與，請充分享受本站提供的服務吧！
+home	about_blurb	<P>$1 為<b><a href="http://www.opensource.org/">開放源代碼軟體</a>開發者提供全方面的免費服務</b>，包括CVS檔案庫, 通信論壇, BUG追蹤, 線上討論區, 任務管理, 網站空間, 專案存儲及完整的備份, 並且完全是透過WEB方式來管理的。</P><P><B>請立即加入，並提出您的寶貴意見</B></P><P>為了充分利用 $1 所提供的服務, <A href="/account/register.php">請立即註冊成為 本站會員</A>，這樣您就可以參與本站的各項活動。若您尚不是註冊會員, 仍能瀏覽本站, 但無權參與本站的活動。</P><P><B>開始您自己的專案</B></P><P><A href="/account/register.php">先註冊成為本站會員</A>, 然後<A HREF="/account/login.php">登入</A>最後<A HREF="/register/">開始您的專案。</A></P><P>謝謝參與，請充分享受本站提供的服務吧！</P>
 home	breaking_down_barriers	為開放源碼的發展開闢一條坦途
 home	gforge_statistics	$1 統計資料
 home	highest_ranked_users	會員評價排行榜
@@ -1027,7 +1027,7 @@ mail	external_administration	訂閱/取消訂閱/設定
 mail	help_to_request	專案管理員使用管理連結取得通信論壇
 mail	mailinglists_for	 $1 的通信論壇
 mail	no_list_found	 $1 沒有任何通信論壇
-mail	provided_by	<p>通信論壇透過一個GForge版本的<a href="http://www.list.org">GNU Mailman</a>建置. 感謝Mailman 和<a href="http://www.python.org">Python</a> 全體工作人員，感謝他們卓越的軟體。</p>
+mail	provided_by	<p>通信論壇透過一個GForge版本的<a href="http://www.list.org/">GNU Mailman</a>建置. 感謝Mailman 和<a href="http://www.python.org/">Python</a> 全體工作人員，感謝他們卓越的軟體。</p>
 mail	section	專案： $1
 mail	title	通信論壇
 mail	unable_to_get_lists	無法取得通信論壇
@@ -2989,8 +2989,8 @@ user_home	title	開發人員資料
 user_home	user_id	使用者編號
 users	no_user_name	沒有提供使用者名稱
 users	optout	您選擇退出對等評分系統，否則您會有機會評量這位使用者，請參考 <a href="/account/">您的帳號維護網頁</a> 獲得更多資訊。
-users	peerinfo1	如果你熟悉這一位使用者，請花一些時間評價他／她在下列的評量項目上。請用心，您的評量對使用者和其它人是看得見的。<P> $1 對等評量系統來自 <A HREF="http://www.advogato.com">Advogato</A> 的觀念為基礎，本系統以一些方式已經再被推行而且擴大。
-users	peerinfo2	對等評分系統表格為每個個別的標準顯示全部的評分平均(與回應等級)。由於評分數值運算和處理需求，這些數字混合來自於 "trusted" 與 "non-trusted" 使用者的反應。  <ul> <li>"Sitewide Rank" 欄位顯示使用者的排名相較所有已排名$1個使用者。<li>"Aggregate Score" 顯示著重於整體得分的平均，並基於可信賴的反應。<li>"Personal Importance" 欄位顯示其他開發人員的使用者評分等級將給予的影響力(在 1 與 1.5 之間) -- 使用者反應的評分越高越有更多的影響力。</ul> <p> <i>如果您選擇退出對等評分系統(這將影響您評分別人或被評分的能力)，請參考 <a href="/account/">您的帳號維護網頁</a>。如果你選擇不要參加，你的其他使用者評分等級將永久地刪除和 "對等評分" 表格將從你的使用者頁消失。</i></p>
+users	peerinfo1	<P>如果你熟悉這一位使用者，請花一些時間評價他／她在下列的評量項目上。請用心，您的評量對使用者和其它人是看得見的。</P><P>$1 對等評量系統來自 <A HREF="http://www.advogato.com/">Advogato</A> 的觀念為基礎，本系統以一些方式已經再被推行而且擴大。</P>
+users	peerinfo2	<p>對等評分系統表格為每個個別的標準顯示全部的評分平均(與回應等級)。由於評分數值運算和處理需求，這些數字混合來自於 "trusted" 與 "non-trusted" 使用者的反應。</p><ul><li>"Sitewide Rank" 欄位顯示使用者的排名相較所有已排名$1個使用者。</li><li>"Aggregate Score" 顯示著重於整體得分的平均，並基於可信賴的反應。</li><li>"Personal Importance" 欄位顯示其他開發人員的使用者評分等級將給予的影響力(在 1 與 1.5 之間) -- 使用者反應的評分越高越有更多的影響力。</li></ul><p><i>如果您選擇退出對等評分系統(這將影響您評分別人或被評分的能力)，請參考 <a href="/account/">您的帳號維護網頁</a>。如果你選擇不要參加，你的其他使用者評分等級將永久地刪除和 "對等評分" 表格將從你的使用者頁消失。</i></p>
 users	title	使用者概要
 users	user_not_exist_text	錯誤的會員
 users	user_not_exist_title	那個會員不存在。
