@@ -473,7 +473,8 @@ if ($params['group']) {
 					$selected=count($TABS_DIRS)-1;
 				}
 			}
-		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || strstr($GLOBALS['REQUEST_URI'],'/account/')) {
+		} elseif (strstr($GLOBALS['REQUEST_URI'],'/my/') || strstr($GLOBALS['REQUEST_URI'],'/account/') || 
+			    strstr($GLOBALS['REQUEST_URI'],'/themes/') ) {
 			$selected=array_search("/my/", $TABS_DIRS);
 		} elseif (strstr($GLOBALS['REQUEST_URI'],'softwaremap')) {
 			$selected=array_search("/softwaremap/", $TABS_DIRS);

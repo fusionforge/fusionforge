@@ -2,6 +2,8 @@
 
 	* Applied patch #395 and #394 for groupisactivecheckboxpost
 	and groupisactivecheckbox hooks
+	* Applied patch #407 Tab problem: To Solve Bug #396 thanks to
+	Francisco Gimeno
 
 2003-06-17 Tom Copeland  <tom@infoether.com>
 
