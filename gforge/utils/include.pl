@@ -41,8 +41,7 @@ sub db_connect {
 	&parse_local_inc;
 	
 	# connect to the database
-	$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname;host=$sys_dbhost;user=$sys_dbuser;password=$sys_dbpasswd");
-	#$dbh ||= DBI->connect("DBI:mysql:$sys_dbname:$sys_dbhost", "$sys_dbuser", "$sys_dbpasswd");
+	$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname;host=$sys_dbhost", "$sys_dbuser", "$sys_dbpasswd");
 
 	die "Cannot connect to database: $!" if ( ! $dbh );
 }
