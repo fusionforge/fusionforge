@@ -649,6 +649,21 @@ class ArtifactType extends Error {
 	}
 
 	/**
+	 *	userIsTechnician - see if the logged-in user's perms are >= 1 or Group ArtifactAdmin.
+	 *
+	 *	@return boolean	user_is_technician.
+	 */
+	function userIsTechnician() { 
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (($this->getCurrentUserPerm() >= 1) || ($perm->isArtifactAdmin())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 *	getCurrentUserPerm - get the logged-in user's perms from artifact_perm.
 	 *
 	 *	@return int perm level for the logged-in user.

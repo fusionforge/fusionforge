@@ -96,6 +96,10 @@ if ($group_id && $atid) {
 		case 'massupdate' : {
 			$count=count($artifact_id_list);
 
+			if (!$ath->userIsAdmin()) {
+				exit_permission_denied();
+			}
+
 			$artifact_type_id=$ath->getID();
 
 			for ($i=0; $i < $count; $i++) {
@@ -132,7 +136,9 @@ if ($group_id && $atid) {
 		}
 		case 'postmod' : {
 			/*
-				Modify an Artifact
+				Technicians can modify limited fields - to be certain
+				no one is hacking around, we override any fields they don't have
+				permission to change.
 			*/
 			$ah=new ArtifactHtml($ath,$artifact_id);
 			if (!$ah || !is_object($ah)) {
@@ -140,6 +146,18 @@ if ($group_id && $atid) {
 			} else if ($ah->isError()) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
+				if (!$ath->userIsAdmin() && $ath->userIsTechnician()) {
+//					&& !(session_loggedin() && ($ah->getSubmittedBy() == user_getid())) 
+//					&& (session_loggedin() && ($ah->getAssignedTo() == user_getid()))) {
+					$priority=$ah->getPriority();
+					$category_id=$ah->getCategoryID();
+					$artifact_group_id=$ah->getArtifactGroupID();
+					$summary=$ah->getSummary();
+					$canned_response=100;
+					$new_artfact_type_id=$ath->getID();
+					$add_file=false;
+					$delete_file=false;
+				}
 				if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
 					$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id)) {
 					$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
@@ -260,6 +278,8 @@ if ($group_id && $atid) {
 			} else {
 				if ($ath->userIsAdmin() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
 					include 'mod.php';
+				} elseif ($ath->userIsTechnician()) {
+					include 'mod-limited.php';
 				} else {
 					include 'detail.php';
 				}

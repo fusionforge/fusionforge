@@ -61,49 +61,17 @@ if (session_loggedin()) {
 	</tr>
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker_mod','data_type') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=data_type')"><strong>(?)</strong></a></strong><br />
-		<?php
-
-//
-//  kinda messy - but works for now
-//  need to get list of data types this person can admin
-//
-	if ($ath->userIsAdmin()) {
-		$alevel=' >= 0';	
-	} else {
-		$alevel=' > 1';	
-	}
-	$sql="SELECT agl.group_artifact_id,agl.name 
-		FROM artifact_group_list agl,artifact_perm ap
-		WHERE agl.group_artifact_id=ap.group_artifact_id 
-		AND ap.user_id='". user_getid() ."' 
-		AND ap.perm_level $alevel
-		AND agl.group_id='$group_id'";
-	$res=db_query($sql);
-
-	echo html_build_select_box ($res,'new_artfact_type_id',$ath->getID(),false);
-
-		?>
-		</td>
-		<td>
-			<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>" />
-		</td>
-	</tr>
-
-	<tr>
 		<td><strong><?php echo $Language->getText('tracker','category') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=category')"><strong>(?)</strong></a></strong><br />
 		<?php
 
-		echo $ath->categoryBox('category_id', $ah->getCategoryID() );
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_cat=1">('.$Language->getText('tracker','admin').')</a>';
+		echo $ah->getCategoryName();
 
 		?>
 		</td>
 		<td><strong><?php echo $Language->getText('tracker','group') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=group')"><strong>(?)</strong></a></strong><br />
 		<?php
 		
-		echo $ath->artifactGroupBox('artifact_group_id', $ah->getArtifactGroupID() );
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&atid='. $ath->getID() .'&add_group=1">('.$Language->getText('tracker','admin').')</a>';
+		echo $ah->getArtifactGroupName();
 		
 		?>
 		</td>
@@ -122,7 +90,7 @@ if (session_loggedin()) {
 		/*
 			Priority of this request
 		*/
-		build_priority_select_box('priority',$ah->getPriority());
+		echo $ah->getPriority();
 		?>
 		</td>
 	</tr>
@@ -152,9 +120,7 @@ if (session_loggedin()) {
 
 	<tr>
 		<td colspan="2"><strong><?php echo $Language->getText('tracker','summary')?>: <a href="javascript:help_window('/help/tracker.php?helpname=summary')"><strong>(?)</strong></a></strong><br />
-		<input type="text" name="summary" size="80" value="<?php
-			echo $ah->getSummary(); 
-			?>" maxlength="255" />
+			<?php echo $ah->getSummary(); ?>
 		</td>
 	</tr>
 
@@ -164,14 +130,10 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2">
-		<br /><strong><?php echo $Language->getText('tracker_mod','canned_response') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=canned_response')"><strong>(?)</strong></a></strong><br />
-		<?php
-		echo $ath->cannedResponseBox('canned_response');
-		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">('.$Language->getText('tracker','admin').')</a>';
-		?>
-		<p>
-		<strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
+		<br /><strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60" wrap="hard"></textarea></p>
+		<p>
+		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>"></p>
 		<h3><?php echo $Language->getText('tracker','followups') ?>:</h3>
 		<?php
 			echo $ah->showMessages(); 
@@ -179,6 +141,37 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2">
+		<h4><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h4>
+		<?php
+		//
+		//  print a list of files attached to this Artifact
+		//
+		$file_list =& $ah->getFiles();
+
+		$count=count($file_list);
+
+		$title_arr=array();
+		$title_arr[]=$Language->getText('tracker_detail','name');
+		$title_arr[]=$Language->getText('tracker_detail','description');
+		$title_arr[]=$Language->getText('tracker_detail','download');
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+		if ($count > 0) {
+
+			for ($i=0; $i<$count; $i++) {
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
+				<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
+				<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
+				<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.
+					$file_list[$i]->getName() .'">'.$Language->getText('tracker_detail','download').'</a></td>
+				</tr>';
+			}
+
+		} else {
+			echo '<tr><td colspan=3>'.$Language->getText('tracker_detail','no_files_attached').'</td></tr>';
+		}
+
+/*
 		<strong><?php echo $Language->getText('tracker','check_upload') ?>:</strong> <input type="checkbox" name="add_file" value="1" />
 		<a href="javascript:help_window('/help/tracker.php?helpname=attach_file')"><strong>(?)</strong></a><br />
 		<p>
@@ -217,6 +210,7 @@ if (session_loggedin()) {
 			echo '<tr><td colspan=3>'.$Language->getText('tracker_mod','no_files').'</td></tr>';
 		}
 
+*/
 		echo $GLOBALS['HTML']->listTableBottom();
 		?>
 	</td><tr>
@@ -228,10 +222,7 @@ if (session_loggedin()) {
 		?>
 	</td></tr>
 
-	<tr><td colspan="2" align="middle">
-		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>">
-		</form>
-	</td></tr>
+	</form>
 
 	</table>
 

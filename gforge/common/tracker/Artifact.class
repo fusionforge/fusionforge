@@ -726,7 +726,7 @@ class Artifact extends Error {
 		}
 		*/
 		//	original submitter can always modify his/her items now
-		if (!$this->ArtifactType->userIsAdmin() && ($this->getSubmittedBy() != user_getid())) {
+		if (!$this->ArtifactType->userIsAdmin() && ($this->getSubmittedBy() != user_getid()) && (!$this->ArtifactType->userIsTechnician())) {
 			$this->setPermissionDeniedError();
 			return false;
 		}

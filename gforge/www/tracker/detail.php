@@ -60,6 +60,7 @@ if (session_loggedin()) {
 		<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
 
 		<tr><td colspan="2">
+			<br /><strong><?php echo $Language->getText('tracker','detailed_description')?>:</strong><br />
 			<?php echo nl2br( $ah->getDetails() ); ?>
 			<input type="hidden" name="func" value="postaddcomment">
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
@@ -99,7 +100,7 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan=2>
-	<H4><?php echo $Language->getText('tracker_detail','attached_files') ?>:</H4>
+	<h4><?php echo $Language->getText('tracker_detail','attached_files') ?>:</h4>
 	<?php
 	//
 	//  print a list of files attached to this Artifact
