@@ -16,10 +16,11 @@ configure-stamp:
 	touch configure-stamp
 
 build: configure-stamp build-stamp
-	gcc -o  utils/cvssh utils/grap.c
-	# The following are no longer needed since we have fileforge.pl
-	#gcc -o  utils/fileforge utils/fileforge.c
-	#gcc -o  utils/tmpfilemove utils/tmpfilemove.c
+	# The following are no longer needed since we have rewritten
+	# the utils in Perl (fileforge.pl and cvssh.pl)
+	# gcc -o  utils/cvssh utils/grap.c
+	# gcc -o  utils/fileforge utils/fileforge.c
+	# gcc -o  utils/tmpfilemove utils/tmpfilemove.c
 build-stamp:
 	dh_testdir
 
@@ -35,7 +36,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-	rm -f utils/cvssh
+	# rm -f utils/cvssh
 	# rm -f utils/fileforge
 	# rm -f utils/tmpfilemove
 	rm -f cvssh.1
@@ -115,7 +116,7 @@ install: build
 	install utils/underworld-dummy/dump_database.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install utils/new_parse.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
-	install -m 755 utils/cvssh $(CURDIR)/debian/sourceforge/bin/cvssh 
+	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/sourceforge/bin/cvssh 
 
 	# FRS stuff
 	install -m 4755 deb-specific/fileforge.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/

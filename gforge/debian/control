@@ -6,7 +6,7 @@ Build-Depends: debhelper (>= 3.0), sharutils, docbook-to-man
 Standards-Version: 3.5.2.0
 
 Package: sourceforge
-Architecture: any
+Architecture: all
 Depends: apache (>= 1.3.9), php4, php4-pgsql, php4-gd, php4-cgi, php4-ldap, libapache-mod-ssl | apache-ssl, postgresql (>= 7.1.2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap, bind9, slapd, ldap-utils, exim, libpam-ldap, cvs, mailman, proftpd
 Description: Integrated development project framework
  This package provides many services a development project can use,
