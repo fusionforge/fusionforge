@@ -11,50 +11,49 @@
 <section name="Introduction">
 <p>
 This document is intended to be a guide for administering projects on 
-Gforge. It is not intended to describe how to administer the 
-Gforge site itself. It is assumed that the reader will have also read 
-the Gforge Users Guide before reading this document.
+GForge. It is not intended to describe how to administer the 
+GForge site itself. It is assumed that the reader will have also read 
+the GForge Users Guide before reading this document.
 </p>
 </section>
-<section name="What is Gforge?">
+<section name="What is GForge?">
 <p>
-Gforge was developed by the Open Source (OS) Community as an environment 
-in which to host OS projects, in a way that the code, documentation, binaries 
+GForge was developed by the Open Source community as an environment 
+in which to host projects in a way that the code, documentation, binaries 
 etc. were publicly accessible to all who wished to see them, and members of 
 the public could use the software that was developed, and contribute feedback, 
-bugs, ideas and suggestions, and even help to develop code / modules / 
-documentation / resources for the software.
+bugs, ideas and suggestions, and even help to develop code/modules/documentation/resources 
+for the software.
 <br/><br/>
 
 Traditionally it was used for software projects, although there is really no 
 reason why it cannot be used to develop hardware or silicon projects also. 
 <br/><br/>
 
-Generally the world and it\'s mother have read access to the data associated 
+Generally the world and it's mother have read access to the data associated 
 with a project, with (some of) the developers having write access to the data. 
-Usually there would be a maintainer(s) of the code (the project leader or 
-the person who registered the project) and contributers would email him/her 
-any changes to the code that they developed eg to fix a bug, or to add 
-additional functionality, which the maintainer would add to the code in the 
-CVS tree upon verification that it was correct / clean / maintanable / 
-useful.
+Usually there is a maintainer(s) of the code (the project leader or 
+the person who registered the project) and contributers who email  
+any changes to the code that they developed - bug fixes, additional functionality - 
+which the maintainer adds to the code in the 
+CVS tree upon verification that it was correct/clean/maintainable/useful.
 </p>
 </section>
-<section name="What can Gforge do for me?">
+<section name="What can GForge do for me?">
 <p>
-Gforge can provide a centralized access point for several useful 
+GForge can provide a centralized access point for several useful 
 utilities and tools which could be used in a project. Some of these tools 
 include:
 <ol>
 <li>A version control repository (CVS)</li>
 <li>Mailing lists</li>
-<li>Discussion Forums</li>
+<li>Discussion forums</li>
 <li>Bug tracking</li>
 <li>A web interface to CVS</li>
 <li>Task lists</li>
 <li>A website which provides some statistics, including the members of the 
     project, the number of mailing lists, the number of CVS checkins/
-    checkouts/adds, the number of items in the discussion Forums etc.</li>
+    checkouts/adds, the number of items in the discussion forums, etc.</li>
 </ol>
 <br/><br/>
 </p>
@@ -62,15 +61,15 @@ include:
 <section name="Setting up a new project">
 <p>
 In order to get a project up and running, you must be registered as a user 
-of Gforge. This is described in the document Gforge Users Guide.
+of GForge. This is described in the GForge Users Guide.
 </p>
 </section>
 <section name="Registering a new project">
 <p>
-It is quite straightforward to register a new project on Gforge. The 
+It is quite straightforward to register a new project on GForge. The 
 steps involved are:
 <ol>
-<li>Login to Gforge</li>
+<li>Login to GForge</li>
 <li>Select Register New Project from the menu on the left hand side of the 
     page.</li>
 <li>Fill in the Full Name, Unix Name, Project Purpose and Summarization 
@@ -83,21 +82,21 @@ steps involved are:
 <li>Assuming that the project is approved, you will be sent back an email 
     confirming that this is the case, and listing the website, cvsroot etc 
     of the project you created. It will take some time for the cvsroot to be 
-    created - usually overnight run on a cronjob.</li>
+    created - usually by an overnight cronjob.</li>
 </ol>
 <br/><br/>
 Once you have received the email confirming the project has been accepted, 
 you will be able to find your project through the search box by entering
-your projects name or details. Clicking on the project link provided will 
+your project's name or details. Clicking on the project link provided will 
 bring you to the project summary page, the default starting point for all 
 the project administration.
 </p>
 </section>
 <section name="Administering a new project">
 <p>
-This section provides an oversight on how to set up the Gforge utilities 
-so that they can be used by your project, once the project has been approved. 
-Typically the cvs space etc. will have been allocated by the morning after 
+This section provides an oversight on how to set up the GForge utilities 
+so that they can be used by your project once it has been approved. 
+Typically the cvs space will have been allocated by the morning after 
 the confirmation email is sent to the project requester. In order to get the 
 project into a useable state, the project administrator will need to perform 
 some steps.
@@ -106,8 +105,8 @@ some steps.
 <section name="CVS repository">
 <p>
 If the project does not already have a CVS repository in place (eg if an 
-existing project is being added to Gforge mid-life, rather than a brand 
-new project being started) the CVS repository will need to be setup. 
+existing project is being added to GForge mid-life, rather than a brand 
+new project being started) the CVS repository will need to be set up. 
 There are plenty of resources on CVS around so this document will not attempt 
 to describe how to use CVS, but will provide just enough information to get 
 started.
@@ -162,7 +161,7 @@ accessing each other. The last line of the file may optionally be<br/>
 
 to allow UNIX (not Linux) machines to use wildcard matching to allow access 
 from all hosts on the network. This does NOT work on Linux, which is what 
-the Gforge server runs. Also, if the wildcard entry is before the machine
+the GForge server runs. Also, if the wildcard entry is before the machine
 you wish to use, then it will not work either.
 <br/><br/>
 
@@ -184,21 +183,21 @@ can be done.<br/>
 ]]></source>
 <br/>
 
-e.g. suppose we wish to import a directory structure called code, which was 
-obtained from "customer" and is labelled "rel1" we would do:<br/>
+e.g. suppose we wish to import a directory structure called myproject, which was 
+obtained from "customer" and is labelled "releaseone" we would do:<br/>
 <source><![CDATA[
-	$ cd path/to/code
-	$ cvs import code customer rel1
+	$ cd path/to/myproject
+	$ cvs import myproject customer releaseone
 ]]></source>
 
 <br/>
 
-If we wanted to create a clean, new directory structure called src we could 
+If we wanted to create a clean, new directory structure called mynewproject we could 
 do something like this.<br/>
 <source><![CDATA[
-	$ mkdir src
-	$ cd src
-	$ cvs import src S3 r0
+	$ mkdir mynewproject
+	$ cd mynewproject
+	$ cvs import mynewproject mycompany start
 ]]></source>
 <br/>
 
@@ -215,12 +214,11 @@ to import several modules to the same CVS repository. e.g.<br/>
 <br/>
 
 But as was said earlier, this is not the place to provide a complete
-introduction to CVS. Go out and find some of the abundant documentation that
+introduction to CVS.  Go out and find some of the abundant documentation that
 is available for it on the web and elsewhere. Most importantly, if you run
-into a problem with CVS, it is NOT the Gforge administrators fault so
-don\'t go running to them every time. Try to figure it out yourself or go
+into a problem with CVS, it is NOT the GForge administrator's fault so
+don't go running to them every time. Try to figure it out yourself or go
 looking for help on CVS related news groups.
-
 
 </p>
 </section>
