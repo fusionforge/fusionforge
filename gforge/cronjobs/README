@@ -7,6 +7,8 @@
 # @version   $Id$
 #
 
+MAILTO=""
+
 #
 #       recalculate user popularity metric
 #

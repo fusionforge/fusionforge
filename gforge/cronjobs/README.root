@@ -27,6 +27,8 @@ FILE_EXTENSION to '' instead of '.new'
 
 SAMPLE CRON ENTRIES
 
+MAILTO=""
+
 #
 #	Create the /etc/* files
 #
