@@ -18,7 +18,6 @@ ALTER TABLE frs_package ADD COLUMN is_public INT;
 ALTER TABLE frs_package ALTER COLUMN is_public SET DEFAULT 1;
 UPDATE frs_package SET is_public=1;
 
-DROP TABLE role;
 CREATE TABLE role (
 role_id serial unique,
 group_id int not null REFERENCES groups(group_id) ON DELETE CASCADE,
@@ -91,7 +90,6 @@ INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level)
 --
 --	example; 1,'docman',$category_id,1
 --
-DROP TABLE role_setting;
 CREATE TABLE role_setting (
 role_id int not null REFERENCES role(role_id) ON DELETE CASCADE,
 section_name text not null,
