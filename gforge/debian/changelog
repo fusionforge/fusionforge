@@ -1,11 +1,12 @@
-sourceforge (2.6-0+14+plugin+) experimental; urgency=low
+sourceforge (2.6-0+14+plugins+) experimental; urgency=low
 
   * [Christian] Applied kikov task manager patch
   * [Roland] Implemented the PluginManager class, as well as a sample
-    Plugin class that can be subclassed by plugins.  These two classes
-    will be used for the hooks subsystem.
+    Plugin class that can be subclassed by plugins.  These two classes are
+    used for the hooks subsystem.
+  * [Roland] Bumped Standards-Version to 3.5.8.
 
- -- Roland Mas <lolando@debian.org>  Thu,  5 Dec 2002 18:14:36 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  5 Dec 2002 22:14:25 +0100
 
 sourceforge (2.6-0+14+plugins) experimental; urgency=low
 

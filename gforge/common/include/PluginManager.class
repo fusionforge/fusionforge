@@ -15,37 +15,33 @@
  *  plugin_manager_get_object() - Get the Plugin Manager object.
  */
 function &plugin_manager_get_object() {
-	//create a common set of group objects
-	//saves a little wear on the database
-
-	//automatically checks group_type and 
-	//returns appropriate object
-
+	// echo "Entered plugin_manager_get_object " ;
 	global $PLUGINMANAGER_OBJ;
 	if (!isset($PLUGINMANAGER_OBJ)) {
+		// echo "Creating object " ;
 		$PLUGINMANAGER_OBJ = new PluginManager() ;
 	}
 	return $PLUGINMANAGER_OBJ ;
 }
 
 class PluginManager extends Error {
-	var $data_array ;
-	var $db_result ;
-	var $plugins_array ;
 	var $plugins_objects ;
 	var $plugins_to_hooks ;
 	var $hooks_to_plugins ;
 
 	function PluginManager () {
+		// echo "Entered PluginManager " ;
 		$this->Error() ;
 		$this->plugins_objects = array () ;
+		$this->plugins_to_hooks = array () ;
+		$this->hooks_to_plugins = array () ;
 	}
 
 	function GetPlugins () {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
-			$sql="SELECT * FROM plugins" ;
-			$res=db_query($sql);
+			$sql = "SELECT * FROM plugins" ;
+			$res = db_query($sql);
 			$rows = db_numrows($res);
 
 			for ($i=0; $i<$rows; $i++) {
@@ -67,19 +63,20 @@ class PluginManager extends Error {
 	}
 
 	function RegisterPlugin ($pluginname, $pluginobject) {
-		$this->plugins_objects[$pluginname] = $pluginobject ;
-	}
-
-	function Init () {
-		$this->LoadPlugins ;
-		$this->SetupHooks ;
+		global $PLUGINMANAGER_OBJ ;
+		// echo "Registering plugin $pluginname " ;
+		$PLUGINMANAGER_OBJ->plugins_objects[$pluginname] = $pluginobject ;
+		// echo count($PLUGINMANAGER_OBJ->plugins_objects) . " objects in plugins_objects " ;
+		// echo "<br>--- " . serialize($this) . " ---<br>" ;
 	}
 
 	function LoadPlugins () {
-		$plugins_data = $this->getPlugins() ;
+		// echo "Entered LoadPlugins " ;
+		$plugins_data = $this->GetPlugins() ;
 		$include_path = "/usr/lib/sourceforge/plugins/" ;
 		foreach ($plugins_data as $p_id => $p_name) {
 			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
+			// echo "Trying $filename " ;
 			if (file_exists ($filename)) {
 				require_once ($filename) ;
 			}
@@ -87,30 +84,45 @@ class PluginManager extends Error {
 	}
 
 	function SetupHooks () {
+		global $PLUGINMANAGER_OBJ ;
+		// echo "Entered SetupHooks " ;
+		// echo count($this->plugins_objects) . " objects in plugins_objects " ;
+		// echo "<br>--- " . serialize($this) . " ---<br>" ;
 		$this->plugins_to_hooks = array ();
 		foreach ($this->plugins_objects as $p_name => $p_obj) {
+			// echo "Reading hooks for plugin $p_name " ;
 			$this->plugins_to_hooks [$p_name] = $p_obj->GetHooks () ;
 		}
 		$this->hooks_to_plugins = array () ;
-		foreach ($this->plugins_to_hooks as $p_name => $hook_name) {
-			if (!isset ($this->hooks_to_plugins[$hook_name])) {
-				$this->hooks_to_plugins[$hook_name] = array () ;
+		foreach ($this->plugins_to_hooks as $p_name => $hook_list) {
+			foreach ($hook_list as $hook_name) {
+				if (!isset ($this->hooks_to_plugins[$hook_name])) {
+					$this->hooks_to_plugins[$hook_name] = array () ;
+				}
+				$this->hooks_to_plugins[$hook_name][] = $p_name ;
 			}
-			$this->hooks_to_plugins[$hook_name][] = $p_name ;
 		}
+	}
+
+	function Init () {
+		// echo "Entered Init " ;
+		$this->LoadPlugins () ;
+		// echo count($this->plugins_objects) . " objects in plugins_objects " ;
+		// echo "<br>--- " . serialize($this) . " ---<br>" ;
+		$this->SetupHooks () ;
 	}
 
 	function RunHooks ($hookname, $params=false) {
 		echo "\n<!-- Starting hook $hookname -->" ;
 		$p_list = $this->hooks_to_plugins[$hookname] ;
 		if (isset ($p_list)) {
-			echo "hooks_to_plugins: --" . $this->hooks_to_plugins . "-- <br>\n" ;
-			echo "p_list: --" . $p_list . "-- <br>\n" ;
 			foreach ($p_list as $p_name) {
+				echo "<!-- Hook $hookname for plugin $p_name -->" ;
 				$p_obj = $this->plugins_objects[$p_name] ;
 				$p_obj->CallHook ($hookname, $params) ;
+				echo "<!-- End of hook $hookname for plugin $p_name -->" ;
 			}
-		} 
+		}
 		echo "<!-- End of hook $hookname -->\n" ;
 	}
 }
