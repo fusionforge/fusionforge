@@ -662,7 +662,7 @@ function &getArtifacts($session_ser,$group_id,$group_artifact_id,$assigned_to,$s
 		return new soap_fault ('','getArtifacts',$af->getErrorMessage(),$af->getErrorMessage());
 	}
 
-	$af->setup(0,0,0,0,$assigned_to,$status,$category,$group);
+	$af->setup(0,0,0,0,false,$assigned_to,$status,$category,$group,0);
 	return artifacts_to_soap($af->getArtifacts());
 
 }
