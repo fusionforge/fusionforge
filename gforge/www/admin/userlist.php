@@ -51,7 +51,7 @@ function show_users_list ($result) {
 		if ($usr['status'] == 'S') print "red";
 		print "\"><a href=\"useredit.php?user_id=$usr[user_id]\">";
 		if ($usr[status] == 'P') print "*";
-		echo $usr['user_name'].'</a>';
+		echo $usr['firstname'].' '.$usr['lastname'].'('.$usr['user_name'].')</a>';
 		echo '</td>';
 		echo '<td width="15%" align="center">';
 		echo ($usr['add_date'] ? date($GLOBALS['sys_datefmt'], $usr['add_date']) : '-');
@@ -83,7 +83,7 @@ if ($action=='delete') {
 	Add a user to this group
 */
 if ($action=='add_to_group') {
-	db_query("INSERT INTO user_group (user_id,group_id) VALUES ($user_id,$group_id)");
+	echo "ACTION NOT SUPPORTED";
 }
 
 /*
@@ -95,9 +95,9 @@ if (!$group_id) {
 	print "\n</p>";
 
 	if ($user_name_search) {
-		$result = db_query("SELECT user_name,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR realname ILIKE '".$user_name_search."%' OR realname ILIKE '% ".$user_name_search."%' ORDER BY user_name");
+		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users WHERE user_name ILIKE '".$user_name_search."%' OR realname ILIKE '".$user_name_search."%' OR realname ILIKE '".$user_name_search."%' ORDER BY user_name");
 	} else {
-		$result = db_query("SELECT user_name,user_id,status,add_date FROM users ORDER BY user_name");
+		$result = db_query("SELECT user_name,lastname,firstname,user_id,status,add_date FROM users ORDER BY user_name");
 	}
 	show_users_list ($result);
 } else {
@@ -110,7 +110,7 @@ if (!$group_id) {
 	$result = db_query("SELECT users.user_id AS user_id,users.user_name AS user_name,users.status AS status, users.add_date AS add_date "
 		. "FROM users,user_group "
 		. "WHERE users.user_id=user_group.user_id AND "
-		. "user_group.group_id=$group_id ORDER BY users.user_name");
+		. "user_group.group_id='$group_id' ORDER BY users.user_name");
 	show_users_list ($result);
 
 	/*
