@@ -99,7 +99,7 @@ if ($group_id && $atid) {
 	}
 
 } else {
-	exit_missing_params();
+	exit_missing_param();
 }
 
 ?>';

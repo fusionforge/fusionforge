@@ -43,7 +43,7 @@ if (session_loggedin()) {
 			}
 		}
 	} else {
-		exit_missing_params();
+		exit_missing_param();
 	}
 
 } else {

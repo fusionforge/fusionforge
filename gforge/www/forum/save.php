@@ -25,7 +25,7 @@ require_once('common/forum/Forum.class');
 
 if (session_loggedin()) {
 	/*
-		User obviously has to be logged in to save place 
+		User obviously has to be logged in to save place
 	*/
 
 	if ($forum_id && $group_id) {
@@ -50,7 +50,7 @@ if (session_loggedin()) {
 			header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Position Saved. New messages will be highlighted when you return"));
 		}
 	} else {
-		exit_missing_params();
+		exit_missing_param();
 	}
 
 } else {

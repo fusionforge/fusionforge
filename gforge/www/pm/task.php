@@ -22,7 +22,7 @@ require_once('www/pm/include/ProjectTaskHTML.class');
 require_once('common/pm/ProjectGroupFactory.class');
 
 if (!$group_id || !$group_project_id) {
-	exit_missing_params();
+	exit_missing_param();
 }
 
 $g =& group_get_object($group_id);

@@ -24,7 +24,7 @@ require_once('www/forum/include/ForumHTML.class');
 require_once('common/forum/Forum.class');
 
 /*
-	User obviously has to be logged in to save place 
+	User obviously has to be logged in to save place
 */
 
 if ($forum_id && $group_id) {
@@ -64,7 +64,7 @@ if ($forum_id && $group_id) {
 		exit_not_logged_in();
 	}
 } else {
-	exit_missing_params();
+	exit_missing_param();
 }
 
 

@@ -1,3 +1,10 @@
+2003-01-04  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/pm/task.php www/forum/save.php www/forum/new.php
+	www/forum/monitor.php www/project/filemodule_monitor.php
+	docs/xdocs/xdocs/contributions/templating.xml: fix typo:
+	exit_missing_params --> exit_missing_param
+
 2003-01-02  Tim Perdue <tim@gforge.org>
 
 	* Added interface to tracker so you can build relationships w/Task
