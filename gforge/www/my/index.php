@@ -293,7 +293,7 @@ if (session_loggedin() || $sf_user_hash) {
 		show_survey(1,1);
 	} else {
 		echo '
-		<TR><TD COLSPAN="2"><b>s'.$Language->getText('my','survey_taken').'</b></TD></TR>';
+		<TR><TD COLSPAN="2"><b>'.$Language->getText('my','survey_taken').'</b></TD></TR>';
 	}
 
 	/*
