@@ -189,6 +189,9 @@ EOF
             # Setup our FTP
 	    /usr/lib/sourceforge/bin/install-ftp.sh configure 
 
+            # Setup our FRS
+	    chown www-data /var/lib/sourceforge/download
+
 	    # Setup our CVS
 	    # Making user group and cvs update from database 
 	    /usr/lib/sourceforge/bin/update-user-group-cvs.sh
