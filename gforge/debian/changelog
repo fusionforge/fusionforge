@@ -1,8 +1,9 @@
-sourceforge (2.5-34+) unstable; urgency=low
+sourceforge (2.5-35) unstable; urgency=low
 
-  * 
+  * Recompiled on unstable, to be more policy-compliant (at least one
+    lintian warning goes away this way).
 
- -- Roland Mas <lolando@debian.org>  Tue, 12 Nov 2002 19:27:49 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 13 Nov 2002 18:57:14 +0100
 
 sourceforge (2.5-34) unstable; urgency=low
 
