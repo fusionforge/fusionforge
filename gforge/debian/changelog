@@ -1,3 +1,10 @@
+gforge (3.1-29) unstable; urgency=low
+
+  * Fixed discrepancy in pending news items (to be approved on the front
+    page) between /my/ and /news/admin/.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 14 Mar 2005 10:03:06 +0100
+
 gforge (3.1-28) unstable; urgency=low
 
   * Updated Czech Debconf translations (mostly fuzziness) from Miroslav

@@ -290,7 +290,9 @@ if (session_loggedin()) { // || $sf_user_hash) {
 	exit_assert_object($newsgroup,'Group');
 	$perm =& $newsgroup->getPermission( session_get_user() );
 	if ($perm && is_object($perm) && $perm->isAdmin()) {
-		$sql="SELECT * FROM news_bytes WHERE is_approved=0";
+	        $old_date = time()-60*60*24*30;
+		$sql="SELECT * FROM news_bytes
+                      WHERE is_approved=0 AND date > '$old_date'";
 		$result=db_query($sql);
 		$rows=db_numrows($result);
 		if ($rows) {
