@@ -154,7 +154,17 @@ $server->register(
 // bugs
 
 // RFEs
+$server->register(
+	'rfeAdd',
+	array('sessionkey'=>'xsd:string','project'=>'xsd:string','summary'=>'xsd:string','details'=>'xsd:string'),
+	array('rfeAddResponse'=>'xsd:string'),
+	$uri);
 
+$server->register(
+	'rfeAddMessage',
+	array('sessionkey'=>'xsd:string','project'=>'xsd:string','rfeid'=>'xsd:string','message'=>'xsd:string'),
+	array('rfeAddMessageResponse'=>'xsd:string'),
+	$uri);
 // RFEs
 
 // session/authentication
@@ -230,9 +240,15 @@ if ($wsdl) {
  * @param 	string		The session key
  */
 function continueSession($sessionKey) {
-	global $session_ser;
+	global $session_ser, $Language;
 	$session_ser = $sessionKey;
 	session_set();
+	$Language=new BaseLanguage();
+	$Language->loadLanguage("English"); // TODO use the user's default language
+	setlocale (LC_TIME, $Language->getText('system','locale'));
+	$sys_strftimefmt = $Language->getText('system','strftimefmt');
+	$sys_datefmt = $Language->getText('system','datefmt');
+
 }
 
 // session/authentication
@@ -445,6 +461,80 @@ function bugAdd($sessionkey, $project, $summary, $details) {
 	return new soapval('tns:soapVal','string',$artifact->getID());
 }
 // bugs
+
+// RFE
+/**
+ * rfeAdd - Add a new RFE
+ *
+ * @param	string	sessionkey	The current session key
+ * @param	string 	project		The project that the RFE is in
+ * @param 	string	summary		The RFE summary
+ * @param 	string	details		The RFE details
+ */
+function rfeAdd($sessionkey, $project, $summary, $details) {
+	continueSession($sessionkey);
+	
+	$group =& group_get_object_by_name($project);
+	if (!$group) {
+    		return new soapval('tns:soapVal','string',"Couldn't find a project named ".$project);
+	}
+
+	$atf = new ArtifactTypeFactory($group);
+	$atf->setDataType("4"); // TODO reference a constant or something here
+	$artifactType = $atf->getArtifactTypes();
+	if (!$artifactType[0]) {
+    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$artifactTypeFactory->getErrorMessage());
+	}
+	$artifact=new Artifact($artifactType[0]);
+	if (!$artifact->create('100', '100', $summary, $details)) {
+		return new soapval('tns:soapVal','string',"Couldn't create RFE: ".$artifact->getErrorMessage());
+	}
+	return new soapval('tns:soapVal','string',$artifact->getID());
+}
+
+/**
+ * rfeAddMessage - Update a RFE
+ *
+ * @param	string	sessionkey	The current session key
+ * @param	string 	project		The project that the RFE is in
+ * @param	string	rfeid		The RFE id to be updated
+ * @param	string	message		The comment to add
+ */
+function rfeAddMessage($sessionkey, $project, $rfeid, $message) {
+	continueSession($sessionkey);
+
+	$group =& group_get_object_by_name($project);
+	if (!$group) {
+    		return new soapval('tns:soapVal','string',"Couldn't create group");
+	}
+	
+	$atf = new ArtifactTypeFactory($group);
+	$atf->setDataType("4"); // TODO reference a constant or something here
+	$artifactType = $atf->getArtifactTypes();
+	if (!$artifactType) {
+    		return new soapval('tns:soapVal','string',"Couldn't create ArtifactType: ".$atf->getErrorMessage());
+	}
+
+	$rfe = new Artifact($artifactType[0], $rfeid);
+	if (!$rfe) {
+    		return new soapval('tns:soapVal','string',"Couldn't fetch RFE");
+	}
+
+	if (!$rfe->update(	$rfe->getPriority(),
+			1,
+			'100',
+			'100',
+			$rfe->getResolutionID(),
+			'100',
+			$rfe->getSummary(),
+			'100',
+			$comment,
+			$artifactType[0]->getID())) {
+    		return new soapval('tns:soapVal','string',"Couldn't update rfe: ".$rfe->getErrorMessage());
+	}
+	return new soapval('tns:soapVal','string',$comment);
+}
+// RFE
 
 // miscellaneous
 function hello($inputString){
