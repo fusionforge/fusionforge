@@ -105,8 +105,9 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     unix_pw when needed.  This allows for better integration with existing
     systems (for instance, if you want to inject some existing accounts
     into the database...).
+  * [Roland] A little i18n in the user's homepage.
 
- -- Roland Mas <lolando@debian.org>  Fri,  8 Nov 2002 21:38:45 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  8 Nov 2002 21:40:02 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

@@ -410,7 +410,10 @@ class Layout extends Error {
 	function user_menu($params){
 		echo '
 		<P>
-		<A HREF="/my/">My Personal Page</A> | <A HREF="/my/diary.php">Diary &amp; Notes</A> | <A HREF="/account/">Account Options</A>
+		<A HREF="/my/">' . $Language->getText('menu','my_personal_page')
+		  . '</A> | <A HREF="/my/diary.php">' . $Language->getText('menu', 'diary_notes')
+		  . '</A> | <A HREF="/account/">' . $Language->getText('menu', 'account_maintenance')
+		  . '</A>
 		<P>';
 	}
 
