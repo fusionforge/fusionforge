@@ -1,20 +1,10 @@
---- /home/tperdue/share/dev.gforge.org/common/include/session.php	2004-09-29 16:49:31.000000000 -0500
-+++ common/include/session.php	2004-09-29 22:04:27.000000000 -0500
-@@ -4,7 +4,7 @@
-  *
-  * Copyright 1999-2001 (c) VA Linux Systems
-  *
-- * @version   $Id$
-+ * @version   $Id$
-  *
-  * This file is part of GForge.
-  *
-@@ -132,8 +132,19 @@
- 	$hook_params['loginname'] = $loginname ;
+--- session.php.orig	2004-12-15 10:11:37.000000000 -0800
++++ session.php	2004-12-15 11:52:55.000000000 -0800
+@@ -133,7 +133,19 @@
  	$hook_params['passwd'] = $passwd ;
  	plugin_hook ("session_before_login", $hook_params) ;
--
--	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;}
+ 
+-	return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;
 +	if ($GLOBALS['ldap_auth_failed']) {
 +		return false;
 +	} elseif ($GLOBALS['ldap_first_login']) {
@@ -27,7 +17,7 @@
 +	} else {
 +		return session_login_valid_dbonly ($loginname, $passwd, $allowpending) ;
 +	}
-+}
++
+ }
  
  function session_login_valid_dbonly ($loginname, $passwd, $allowpending) {
- 	global $feedback,$userstatus,$Language;
