@@ -35,7 +35,7 @@ else
 		install -d -m 1777 $target/tmp
 
 		# Copy needed binaries
-		# For testing /bin/ls /bin/su /usr/bin/strace
+		# For testing /bin/ls /bin/su
 		# Maybe needed /bin/chgrp
 		# Could be restricted /bin/bash
 		# TODO: remove unneeded stuff from that list
@@ -44,7 +44,6 @@ else
 			/usr/bin/cvs \
 			/bin/ls \
 			/bin/bash \
-			/usr/bin/strace \
 			/bin/chgrp 
 		do
 			(echo "$binary"; ldd $binary | cut -d" " -f3) 
