@@ -56,7 +56,7 @@ if (session_loggedin()) {
 
 				db_begin();
 				$f=new Forum(group_get_object($sys_news_group));
-				if (!$f->create(ereg_replace('[^_\.0-9a-z-]','-', strtolower($summary)),$summary,1,'',0,0)) {
+				if (!$f->create(ereg_replace('[^_\.0-9a-z-]','-', strtolower($summary)),$details,1,'',0,0)) {
 					db_rollback();
 					exit_error('Error',$f->getErrorMessage());
 				}

@@ -1,3 +1,8 @@
+2004-10-22  Tom Copeland <tom@infoether.com>
+
+	* www/news/submit.php - Fixed bug [#918] news description 
+	length is wrongly checked.
+
 2004-10-21  Christian Bayle <bayle@aist.enst.fr>
 
 	* replaced PortugueseBrazilian.tab with the one provided by 
