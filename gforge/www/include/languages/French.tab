@@ -51,10 +51,10 @@ account_change_pw	title	Changement de mot de passe
 account_change_pw	update	Mise à jour du mot de passe
 account_change_pw_changed	return_to	Vous devriez maintenant $1 Retourner aux préférences utilisateur $2.
 account_change_pw_changed	title	Changement de mot de passe réussi.
+account_editsshkeys	authorized_keys	Clés autorisées :<br /><em>Important: Vérifiez qu'il n'y ait pas de retour à la ligne sauf pour séparer les différentes clés. Après avoir validé, vérifiez que le nombre de clés dans le fichier correspond bien à ce que vous attendiez.</em>
+account_editsshkeys	intro	<p>Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous utilisez votre compte CVS/SSH, vous pouvez déposer votre clé publique ici et elles seront placées sur le serveur CVS dans votre fichier ~/.ssh/authorized_keys. Cette opération s'effectue à l'aide d'une tâche programmée et n'est donc pas instantanée. Attendez vous à un délai d'une heure.</p><p>Pour générer une clé publique, utilisez le programme ssh-keygen. La clé publique sera placée dans '~/.ssh/identity.pub' (protocole 1) et dans '~/.ssh/id_dsa.pub' ou '~/.ssh/id_rsa.pub' (protocole 2). Consultez la documentation de SSH pour plus d'informations sur le partage de clés.</p>
 account_editsshkeys	section	Mes préférences
 account_editsshkeys	title	Édition des clefs publiques SSH
-account_editsshkeys	intro	<p>Pour éviter d'avoir à saisir votre mot de passe à chaque fois que vous utilisez votre compte CVS/SSH, vous pouvez déposer votre clé publique ici et elles seront placées sur le serveur CVS dans votre fichier ~/.ssh/authorized_keys. Cette opération s'effectue à l'aide d'une tâche programmée et n'est donc pas instantanée. Attendez vous à un délai d'une heure.</p><p>Pour générer une clé publique, utilisez le programme ssh-keygen. La clé publique sera placée dans '~/.ssh/identity.pub' (protocole 1) et dans '~/.ssh/id_dsa.pub' ou '~/.ssh/id_rsa.pub' (protocole 2). Consultez la documentation de SSH pour plus d'informations sur le partage de clés.</p>
-account_editsshkeys	authorized_keys	Clés autorisées :<br /><em>Important: Vérifiez qu'il n'y ait pas de retour à la ligne sauf pour séparer les différentes clés. Après avoir validé, vérifiez que le nombre de clés dans le fichier correspond bien à ce que vous attendiez.</em>
 account_first	about_blurb	<p>Vous êtes maintenant un utilisateur enregistré dans $1, environnement de développement de logiciels libres.</p><p>En tant qu'utilisateur enregistré, vous pouvez participer pleinement aux activités du site. Vous pouvez maintenant adresser des messages dans les forums des projets, faire remonter des bogues dans $1, vous proposer comme développeur d'un projet, et même lancer votre propre projet.</p><p>Profitez du site et n'hésitez pas à nous faire part de vos remarques sur la manière d'améliorer $1.</p><p>-- L'équipe de $1</p>
 account_first	title	Bienvenue sur $1
 account_login	cookiewarn	Vous devez activer les cookies pour aller plus loin.
@@ -1059,6 +1059,7 @@ mail_admin_updatelist	status	Statut
 mail_admin_updatelist	title	Modifier une liste de diffusion
 mail_common	creation_mail_body	Une liste de diffusion va être créée sur $1 dans un \ndélai de 6 à 24 heures et vous en êtes l'administrateur.\n\nCette liste est : $3@$2\n\nLes informations concernant cette liste de diffusion sont disponibles sur :\n$4 .\n\nL'administration de la liste se fait sur :\n$5\n\nLe mot de passe d'administration de la liste est : $6\nVous êtes invités à le changer dès que possible\n\nMerci d'avoir enregistré votre projet sur $1\n\n-- L'équipe de $1\n
 mail_common	creation_mail_subject	Nouvelle liste de diffusion sur $1
+mail_common	description	Description
 mail_common	error_invalid_group_list_id	Identifiant de la liste non valide
 mail_common	error_invalid_name	Nom de la liste non valide
 mail_common	error_list_already_exists	Une liste portant ce nom existe déjà.
@@ -1066,6 +1067,7 @@ mail_common	error_min_name_length	Le nom de la liste doit compter au moins 4 car
 mail_common	list_not_activated	En cours de création
 mail_common	mailing_list	Liste de diffusion
 mail_common	mailing_lists	Listes de diffusion
+mail_common	prefs	Inscription
 mail_utils	admin	Administration
 mail_utils	turned_off	Ce projet a désactivé les listes de diffusion
 menu	about_gforge	À propos de $1
@@ -1469,6 +1471,10 @@ pm_include_taskhtml	related_items	traces liées
 pm_include_taskhtml	remove_relation	Supprimer la relation
 pm_include_taskhtml	task_history	Historique de tâche
 pm_include_taskhtml	tracker	Traceur
+pm_index	description	Description
+pm_index	open	Ouvert(s)
+pm_index	short_name	Nom du sous-projet
+pm_index	total	Total
 pm_modtask	add_comment	Ajouter un commentaire
 pm_modtask	assignee	Responsable
 pm_modtask	original_comment	Commentaire initial
