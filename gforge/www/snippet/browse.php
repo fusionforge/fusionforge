@@ -19,11 +19,11 @@ snippet_header(array('title'=>$Language->getText('snippet_browse','title'), 'hea
 
 if ($by=='lang') {
 
-	$sql="SELECT users.realname,snippet.description,snippet.snippet_id,snippet.name ".
+	$sql="SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name ".
 		"FROM snippet,users ".
 		"WHERE users.user_id=snippet.created_by AND snippet.language='$lang'";
 
-	$sql2="SELECT users.realname,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name ".
+	$sql2="SELECT users.realname,users.user_name,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name ".
 		"FROM snippet_package,users ".
 		"WHERE users.user_id=snippet_package.created_by AND snippet_package.language='$lang'";
 
@@ -31,20 +31,18 @@ if ($by=='lang') {
 
 } else if ($by=='cat') {
 
-	$sql="SELECT users.realname,snippet.description,snippet.snippet_id,snippet.name ".
+	$sql="SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name ".
 		"FROM snippet,users ".
 		"WHERE users.user_id=snippet.created_by AND snippet.category='$cat'";
 
-	$sql2="SELECT users.realname,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name ".
+	$sql2="SELECT users.realname,users.user_name,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name ".
 		"FROM snippet_package,users ".
 		"WHERE users.user_id=snippet_package.created_by AND snippet_package.category='$cat'";
 
 	echo '<h2>' .$Language->getText('snippet_browse','snippet_by_category', array($SCRIPT_CATEGORY[$cat])).'</h2>';
 
 } else {
-
 	exit_error($Language->getText('general','error'),$Language->getText('snippet_browse','error_bad_url'));
-
 }
 
 $result=db_query($sql);
@@ -77,7 +75,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			db_result($result2,$i,'snippet_package_id').'"><strong>'.
 			db_result($result2,$i,'snippet_package_id').'</strong></a></td><td><strong>'.
 			db_result($result2,$i,'name').'</td><td>'.
-			db_result($result2,$i,'realname').'</td></tr>';
+			'<a href="/users/'.db_result($result2, $i, 'user_name').'/">'.db_result($result2, $i, 'realname').'</a></td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</td></tr>';
 	}
@@ -97,7 +95,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			db_result($result,$i,'snippet_id').'"><strong>'.
 			db_result($result,$i,'snippet_id').'</strong></a></td><td><strong><a href="/snippet/detail.php?type=snippet&amp;id='.
 			db_result($result,$i,'snippet_id').'">'.db_result($result,$i,'name').'</a></td><td>'.
-			db_result($result,$i,'realname').'</td></tr>';
+			'<a href="/users/'.db_result($result, $i, 'user_name').'/">'.db_result($result, $i, 'realname').'</a></td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';
 	}

@@ -1,5 +1,6 @@
 2004-03-12  Tom Copeland <tom@infoether.com>
-	* www/snippet/browse.php & detail.php: Replace user_name with realname.
+	* www/snippet/browse.php & detail.php: Replace user_name with realname,
+	added link to user's page.
 
 2004-03-11  Tom Copeland <tom@infoether.com>
 	* SQL optimization: Replaced a 'select *' with a 'select count(*)'
