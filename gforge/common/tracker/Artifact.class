@@ -1135,7 +1135,7 @@ class Artifact extends Error {
 		}
 
 		$body .= "\n\nYou can respond by visiting: ".
-		"\nhttp://$GLOBALS[sys_default_domain]/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
+		"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 			"&aid=". $this->getID() .
 			"&group_id=". $this->ArtifactType->Group->getID();
 

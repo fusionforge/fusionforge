@@ -39,7 +39,7 @@ if ($GLOBALS["submit"]) {
 
 	$newroot = trove_getrootcat($GLOBALS['form_parent']);
 
-	if ($GLOBALS[form_shortname]) {
+	if ($GLOBALS['form_shortname']) {
 		if ($form_trove_cat_id == $form_parent) {
 			exit_error($Language->getText(
 								'admin_trove_cat_edit','error_tove_equal_parent'),

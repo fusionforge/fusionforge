@@ -91,7 +91,7 @@ if ($login && !$success) {
 	} else {
 		echo '<h2 style="color:red">'. $feedback .'</h2>';
 		if ($userstatus == "D") {
-			echo $Language->getText('account_login', 'deleted_account', $GLOBALS[sys_name]);
+			echo $Language->getText('account_login', 'deleted_account', $GLOBALS['sys_name']);
 		}
 	} //end else
 

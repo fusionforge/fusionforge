@@ -66,7 +66,7 @@ if ($form_catroot == 1) {
 		. "COUNT(user_group.group_id) AS members "
 		. "FROM groups LEFT JOIN user_group ON user_group.group_id=groups.group_id,group_category "
 		. "WHERE groups.group_id=group_category.group_id AND "
-		. "group_category.category_id=$GLOBALS[form_catroot] "
+		. "group_category.category_id=".$GLOBALS['form_catroot']." "
 		. "GROUP BY group_name,register_time,unix_group_name,groups.group_id,is_public,status,license "
 		. "ORDER BY $sortorder");
 }

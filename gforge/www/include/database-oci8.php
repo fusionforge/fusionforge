@@ -91,7 +91,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
 				//see if data is being returned && we are 
 				//still within the requested $limit
 				if (count($x) < 1 || (($limit > 0) && ($i >= $limit))) {
-					$more_data=false
+					$more_data=false;
 				}
 			}
 			$sys_db_row_pointer[$res]=0;
@@ -105,7 +105,7 @@ function db_query($qstring,$limit='-1',$offset=0) {
  */
 function db_begin() {
 	global $sys_db_oci_commit_mode;
-	$sys_db_oci_commit_mode='OCI_DEFAULT'
+	$sys_db_oci_commit_mode='OCI_DEFAULT';
 }
 
 /**

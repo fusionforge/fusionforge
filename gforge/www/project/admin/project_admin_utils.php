@@ -241,7 +241,7 @@ function random_pwgen() {
 		}
 
 	}
-	return rnpw;
+	return $rnpw;
 }
 
 function permissions_blurb() {

@@ -14,7 +14,7 @@
 
 require_once('pre.php');
 
-$HTML->header(array(title=>$Language->getText('help','title',array($GLOBALS['sys_name']))));
+$HTML->header(array('title'=>$Language->getText('help','title',array($GLOBALS['sys_name']))));
 
 print "<p>" .$Language->getText('help','page_information')."</p>";
 /**

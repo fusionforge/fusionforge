@@ -179,16 +179,16 @@ while ($row_grp = db_fetch_array($res_grp)) {
 	// ########################## OTHER INFO
 
 	print "<p><strong>" .$Language->getText('admin_approve_pending','other_information')."</strong></p>";
-	print "<p>" .$Language->getText('admin_approve_pending','unix_group_name'). " $row_grp[unix_group_name]</p>";
+	print "<p>" .$Language->getText('admin_approve_pending','unix_group_name'). " ".$row_grp['unix_group_name']."</p>";
 
-	print "<p>" .$Language->getText('admin_approve_pending','submitted_description'). "</p><blockquote>$row_grp[register_purpose]</blockquote>";
+	print "<p>" .$Language->getText('admin_approve_pending','submitted_description'). "</p><blockquote>".$row_grp['register_purpose']."</blockquote>";
 
-	if ($row_grp[license]=="other") {
-		print "<p>" .$Language->getText('admin','license_other'). "</p><blockquote>$row_grp[license_other]</blockquote>";
+	if ($row_grp['license']=="other") {
+		print "<p>" .$Language->getText('admin','license_other'). "</p><blockquote>".$row_grp['license_other']."</blockquote>";
 	}
 
-	if ($row_grp[status_comment]) {
-		print "<p>" .$Language->getText('admin_approve_pending','pending_reason'). "</p><span style=\"color:red\">$row_grp[status_comment]</span>";
+	if ($row_grp['status_comment']) {
+		print "<p>" .$Language->getText('admin_approve_pending','pending_reason'). "</p><span style=\"color:red\">".$row_grp['status_comment']."</span>";
 	}
 
 	echo "<p>&nbsp;</p><hr /><p>&nbsp;</p>";

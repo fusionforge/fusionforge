@@ -870,7 +870,7 @@ class ProjectTask extends Error {
 		}
 		$body .= "\n\n-------------------------------------------------------".
 			"\nFor more info, visit:".
-			"\n\nhttp://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
+			"\n\nhttp://".$GLOBALS['sys_default_domain']."/pm/task.php?func=detailtask&project_task_id=".
 				$this->getID() ."&group_id=".
 				$this->ProjectGroup->Group->getID() ."&group_project_id=". $this->ProjectGroup->getID();
 

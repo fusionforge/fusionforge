@@ -34,9 +34,9 @@ if (db_numrows($res_grp) < 1) {
 }
 
 print '<?xml version="1.0"?>
-<!DOCTYPE sf_forum SYSTEM "http://'.$GLOBALS[sys_default_domain].'/exports/sf_forum_0.1.dtd">
+<!DOCTYPE sf_forum SYSTEM "http://'.$GLOBALS['sys_default_domain'].'/exports/sf_forum_0.1.dtd">
 ';
-print "<group name=\"$row_grp[group_name]\">";
+print '<group name="'.$row_grp['group_name'].'">';
 
 $res_forum = db_query("
 	SELECT group_forum_id,forum_name
@@ -45,7 +45,7 @@ $res_forum = db_query("
 ");
 
 while ($row_forum = db_fetch_array($res_forum)) {
-	print " <forum name=\"$row_forum[forum_name]\">\n";
+	print ' <forum name="'.$row_forum['forum_name'].'">'."\n";
 
 	$res_post = db_query("
 		SELECT forum.msg_id AS msg_id,forum.subject AS subject,
@@ -62,10 +62,10 @@ while ($row_forum = db_fetch_array($res_forum)) {
 	while ($row_post = db_fetch_array($res_post)) {
 		print "  <nitf version=\"XMLNews/DTD XMLNEWS-STORY 1.8//EN\">\n";
 		print "   <head>\n";
-		print "    <title>$row_post[subject]</title>\n";
+		print "    <title>".$row_post['subject']."</title>\n";
 		print "   </head>\n";
 		print "   <body><body.content><block>\n";
-		print $row_post[body];
+		print $row_post['body'];
 		print "   </block></body.content></body>\n";
 		print "  </nitf>\n";
 	}

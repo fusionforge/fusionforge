@@ -34,7 +34,7 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 if ($GLOBALS['submit']) {
 	$newroot = trove_getrootcat($GLOBALS['form_parent']);
 
-	if ($GLOBALS[form_shortname]) {
+	if ($GLOBALS['form_shortname']) {
 		$res = db_query("
 			INSERT INTO trove_cat 
 				(shortname,fullname,description,parent,version,root_parent)

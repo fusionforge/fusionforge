@@ -797,7 +797,7 @@ function horizontal_multisection_graph($names, $multi_rows, $colors, $vals, $add
 	for( $j=0;$j<$subbars_num;$j++ ) {
         	$width=$multi_rows[$j][$i];
                 if (!$additive) $width-=$prev_val;
-                if ($width<=0 && ($j!=$subbars_num-1 || shown)) continue;
+                if ($width<=0 && ($j!=$subbars_num-1 || $shown)) continue;
                 // make sure that we show at least stump, but only one
                 $shown=1;
                 $prev_val=$multi_rows[$j][$i];

@@ -40,7 +40,7 @@ if ($submit) {
 		);
 	}
 	$u->sendRegistrationEmail();
-	$HTML->header(array(title=>"Account Pending Verification"));
+	$HTML->header(array('title'=>"Account Pending Verification"));
 	
 	?>
 

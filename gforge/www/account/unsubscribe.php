@@ -72,7 +72,7 @@ and visit your Account Maintenance page.
 </p>
 
 <p>
-<a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></a>
+<a href="/"><?php echo $Language->getText('general', 'return', $GLOBALS['sys_name']); ?></a>
 </p>
 
 <?php

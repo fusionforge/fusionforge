@@ -103,7 +103,7 @@ if (isset($group_id) && isset($group_project_id)) {
 	}
 }
 
-$HTML->header(array(title=>$Language->getText("calendar", "title"),group=>$group_id));
+$HTML->header(array('title'=>$Language->getText("calendar", "title"),'group'=>$group_id));
 
 /**
  * Create link to a task.

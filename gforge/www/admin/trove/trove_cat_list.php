@@ -33,7 +33,7 @@ function printnode ($nodeid,$text) {
 	global $Language;
 	print ('<br />');
 
-	for ($i=0;$i<$GLOBALS[depth];$i++) {
+	for ($i=0;$i<$GLOBALS['depth'];$i++) {
 		print "&nbsp; &nbsp; ";
 	}
 

@@ -103,7 +103,7 @@ if (!isset($ccode) || empty($ccode)) {
 <?php echo $Language->getText('account_register','ccode'); ?><br />
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
 <p>
-@<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
+@<?php echo $Language->getText('account_register','emailaddr', $GLOBALS['sys_users_host']); ?>
 <br /><input size=30 type="text" name="email" value="<?php print($email); ?>">
 <p>
 <?php

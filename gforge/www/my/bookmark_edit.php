@@ -39,7 +39,7 @@ if (!$bookmark_id) {
 	exit_missing_param();
 }
 
-site_user_header(array(title=>$Language->getText('my_bookmark_edit','title')));
+site_user_header(array('title'=>$Language->getText('my_bookmark_edit','title')));
 
 $result = db_query("SELECT * from user_bookmarks where "
 	. "bookmark_id='".$bookmark_id."' and user_id='".user_getid()."'");

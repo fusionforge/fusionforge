@@ -73,8 +73,8 @@ function show_users_list ($result) {
 		if ($usr['status'] == 'A') print "#00ff00";
 		if ($usr['status'] == 'D') print "grey";
 		if ($usr['status'] == 'S') print "red";
-		print "\"><a href=\"useredit.php?user_id=$usr[user_id]\">";
-		if ($usr[status] == 'P') print "*";
+		print "\"><a href=\"useredit.php?user_id=".$usr['user_id']."\">";
+		if ($usr['status'] == 'P') print "*";
 		echo $usr['firstname'].' '.$usr['lastname'].'('.$usr['user_name'].')</a>';
 		echo '</td>';
 		echo '<td width="15%" align="center">';

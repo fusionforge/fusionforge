@@ -30,9 +30,9 @@ $HTML->header(array('title'=>$Language->getText('error','title')));
 echo "<div align=\"center\">";
 
 if (session_issecure()) {
-	echo "<h1><a href=\"https://$GLOBALS[sys_default_domain]\">";
+	echo '<h1><a href="https://'.$GLOBALS['sys_default_domain'].'">';
 } else {
-	echo "<h1><a href=\"http://$GLOBALS[sys_default_domain]\">";
+	echo '<h1><a href="http://'.$GLOBALS['sys_default_domain'].'">';
 }
 
 echo $Language->getText('error','not_found')."</a></h1>";

@@ -33,7 +33,7 @@ $is_admin_page='y';
 survey_header(array('title'=>$Language->getText('survey_show_results_individual','title'),'pagename'=>'survey_admin_show_results_individual'));
 
 if (!session_loggedin() || !user_ismember($group_id,'A')) {
-        echo "<h1>".Language->getText('survey_show_results_individual','permission_denied')."</h1>";
+        echo "<h1>".$Language->getText('survey_show_results_individual','permission_denied')."</h1>";
         survey_footer(array());
 	exit;
 }

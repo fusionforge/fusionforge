@@ -126,7 +126,7 @@ if (db_numrows($res_cat) < 1) {
 } else { // endif no groups
 	print "<p>".$Language->getText('user_home','member_of')."<br />&nbsp;";
 	while ($row_cat = db_fetch_array($res_cat)) {
-		print ("<br />" . "<a href=\"/projects/$row_cat[unix_group_name]/\">$row_cat[group_name]</a>\n");
+		print ("<br />" . "<a href=\"/projects/".$row_cat['unix_group_name']."/\">".$row_cat['group_name']."</a>\n");
 	}
 	print "</ul></p>";
 } // end if groups
@@ -142,14 +142,14 @@ echo $HTML->boxBottom(); ?>
 $me = session_get_user(); 
 if ($user->usesRatings() && (!$me || $me->usesRatings())) { 
 
-echo $Language->getText('users','peerinfo1', $GLOBALS[sys_name]);
+echo $Language->getText('users','peerinfo1', $GLOBALS['sys_name']);
 ?>
 
 	<div align="center">
         <?php echo vote_show_user_rate_box ($user_id, $me?$me->getID():0); ?>
 	</div>
 
-<?php echo $Language->getText('users','peerinfo2', $GLOBALS[sys_name]);
+<?php echo $Language->getText('users','peerinfo2', $GLOBALS['sys_name']);
 
 } else if ($me && !$me->usesRatings()) { ?>
 <p>

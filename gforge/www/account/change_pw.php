@@ -65,10 +65,10 @@ if ($submit) {
 		);
 	}
 
-	site_user_header(array(title=>$Language->getText('account_change_pw_changed','title')));
+	site_user_header(array('title'=>$Language->getText('account_change_pw_changed','title')));
 	?>
 
-	<?php echo $Language->getText('account_change_pw', 'confirmation', $GLOBALS[sys_name]); ?>
+	<?php echo $Language->getText('account_change_pw', 'confirmation', $GLOBALS['sys_name']); ?>
 
 	<p>
 	<?php echo $Language->getText('account_change_pw_changed','return_to',array('<a href="/account/">','</a>')) ?>
@@ -77,7 +77,7 @@ if ($submit) {
 	<?php
 } else { 
 	// Show change form
-	site_user_header(array(title=>$Language->getText('account_change_pw','title')));
+	site_user_header(array('title'=>$Language->getText('account_change_pw','title')));
 	?>
 
 	<form action="<?php echo $PHP_SELF; ?>" method="post">

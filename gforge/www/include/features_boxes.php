@@ -57,8 +57,8 @@ function show_top_downloads() {
 	$return = "";
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0)
-			$return .= "(" . number_format($row_topdown['downloads']) . ") <a href=\"/projects/$row_topdown[unix_group_name]/\">"
-			. "$row_topdown[group_name]</a><br />\n";
+			$return .= "(" . number_format($row_topdown['downloads']) . ') <a href="/projects/'.$row_topdown['unix_group_name'].'/">'
+			. $row_topdown['group_name']."</a><br />\n";
 	}
 	$return .= '<div align="center"><a href="/top/">[ '.$Language->getText('general','more').' ]</a></div>';
 
@@ -130,8 +130,8 @@ function show_newest_projects() {
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			$return .= "<strong>(" . date($Language->getText('home','recently_registered_date_format'),$row_newproj['register_time'])  . ")</strong> "
-				. "<a href=\"/projects/$row_newproj[unix_group_name]/\">"
-				. "$row_newproj[group_name]</a><br />";
+				. '<a href="/projects/.'.$row_newproj['unix_group_name'].'/">'
+				. $row_newproj['group_name'].'</a><br />';
 		}
 	}
 	/// TODO: Add more link to show all project

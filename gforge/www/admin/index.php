@@ -43,7 +43,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><?php
 		$res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
 		$row = db_fetch_array($res);
-		echo $Language->getText('admin_index','active_users_count', array($row[count]));
+		echo $Language->getText('admin_index','active_users_count', array($row['count']));
 	?></li>
 </ul>
 <ul>
@@ -71,17 +71,17 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><?php
 		$res=db_query("SELECT count(*) AS count FROM groups");
 		$row = db_fetch_array($res);
-		echo $Language->getText('admin_index','registered_projects_count', array($row[count]));
+		echo $Language->getText('admin_index','registered_projects_count', array($row['count']));
 	?></li>
 	<li><?php
 		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
 		$row = db_fetch_array($res);
-		echo $Language->getText('admin_index','active_projects_count', array($row[count]));
+		echo $Language->getText('admin_index','active_projects_count', array($row['count']));
 	?></li>
 	<li><?php
 		$res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
 		$row = db_fetch_array($res);
-		echo $Language->getText('admin_index','pending_projects_count', array($row[count]));
+		echo $Language->getText('admin_index','pending_projects_count', array($row['count']));
 	?></li>
 </ul>
 <ul>

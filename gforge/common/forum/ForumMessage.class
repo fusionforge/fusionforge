@@ -395,8 +395,8 @@ class ForumMessage extends Error {
 		$body = util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
-		"\nTo stop monitoring this forum, login to $GLOBALS[sys_name] and visit: ".
-		"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
+		"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
+		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 
 		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
 

@@ -200,12 +200,12 @@ echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row_cat = db_fetch_array($res_cat)) {
 
-	$row_cat[group_name] = htmlspecialchars($row_cat[group_name]);
+	$row_cat['group_name'] = htmlspecialchars($row_cat['group_name']);
 	print '
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.$row_cat['group_name'].'</td>
 		<td>'.$row_cat['unix_group_name'].'</td>
-		<td width="40%"><a href="/project/admin/?group_id='.$row_cat[group_id].'">['.$Language->getText('admin_useredit','project_admin').']</a></td>
+		<td width="40%"><a href="/project/admin/?group_id='.$row_cat['group_id'].'">['.$Language->getText('admin_useredit','project_admin').']</a></td>
 		</tr>
 	';
 
