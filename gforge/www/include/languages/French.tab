@@ -786,8 +786,8 @@ forum_forum	ultimate	Ultimate
 forum_forum	views	Vues
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
-forum_message	by	PAR
-forum_message	date	DATE
+forum_message	by	Par
+forum_message	date	Date
 forum_message	message	Message
 forum_message	message_not_found_body	Ce message n'existe pas ou plus.
 forum_message	message_not_found_title	Message non trouvé
