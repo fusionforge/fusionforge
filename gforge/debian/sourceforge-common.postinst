@@ -33,7 +33,7 @@ case "$1" in
 
 	# "Fill in the blanks" in main config file
 	create_mainconffile
-	vars=""
+	vars="domain_name ip_address server_admin db_password system_name admin_login admin_password shell_host users_host cvs_host lists_host download_host newsadmin_groupid statsadmin_groupid ldap_host ldap_base_dn ldap_web_add_password skill_list noreply_to_bitbucket simple_dns"
         update_mainconffile $vars
 	/usr/sbin/sourceforge-config
     ;;
