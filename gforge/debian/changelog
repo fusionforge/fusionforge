@@ -5,9 +5,11 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     changed accordingly to uudecode the *.uu files at build time, and to
     remove the resulting files at clean time.
   * [Christian] Made trove cat more editable
-  * [Christian] Added delete capability in trove map edit 
+  * [Christian] Added delete capability in trove map edit
+  * [Christian] Added setup_onevar_mainfile function in dsf helper to add 
+    vars in sourceforge.conf not managed by debconf
 
- -- Christian Bayle <bayle@debian.org>  Sun, 13 Oct 2002 03:30:51 +0200
+ -- Christian Bayle <bayle@debian.org>  Sun, 13 Oct 2002 22:13:48 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
