@@ -1,3 +1,14 @@
+2004-10-16  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* reorganized search engine code and made it more flexible
+	* localized news
+	* fixed a few localization problems
+	* fixed and updated French translation
+
+2004-10-15  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* put back in link to forum in notification mail
+
 2004-10-14  GForge Group <luis@gforgegroup.com>
 
 	* Added a text-only ultralite theme
