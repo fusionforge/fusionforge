@@ -145,7 +145,7 @@
 	* cronjobs/project_weekly_metric.php, 
 	cronjobs/project_weekly_metric-backfill.php:
 	Cleaning up the SQL; it was doing INSERTs into a table that wasn't
-	getting created.  Thanks to Bruce Forsyth for the report.
+	getting created.  Thanks to Ben Forsyth for the report.
 
 2003-05-07  Reinhard Spisser <reinhard@spisser.it>
 
