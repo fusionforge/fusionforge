@@ -72,11 +72,15 @@ function writeFile($filePath, $content) {
 *@date 2004-10-25
 */
 function addsyncmail($unix_group_name) {
-//ruben - this should only write if the loginfo is blank or already completely commented out
+
 	global $sys_lists_host;
-		global $maincvsroot;
-	$pathsyncmail = $unix_group_name." ".dirname($_SERVER['_'])."/syncmail %%s ".$unix_group_name."-commits@".$sys_lists_host;
-	writeFile($maincvsroot.$unix_group_name.'/CVSROOT/loginfo',$pathsyncmail);
+	global $maincvsroot;
+	$loginfo = $maincvsroot.$unix_group_name.'/CVSROOT/loginfo';
+
+	if (checkLoginfo($loginfo)) {
+		$pathsyncmail = $unix_group_name." ".dirname($_SERVER['_'])."/syncmail %%s ".$unix_group_name."-commits@".$sys_lists_host;
+		writeFile($loginfo, $pathsyncmail);
+	}
 }
 
 function addProjectRepositories() {
@@ -120,12 +124,37 @@ function addProjectRepositories() {
 			addsyncmail(db_result($res,$i,'unix_group_name'));
 
  			if ($use_cvs_acl == true) {
- 				system ("cp ".dirname($_SERVER['SCRIPT_FILENAME'])."/aclconfig.default ".$repositoryPath.'/CVSROOT/aclconfig');
+ 				system ("cp ".dirname($_SERVER['_'])."/aclconfig.default ".$repositoryPath.'/CVSROOT/aclconfig');
  				$res_admins = db_query("SELECT users.user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND user_group.group_id='".db_result($res,$i,'group_id')."'");
  				$useradmin_group = db_result($res_admins,0,'user_name');
  				system("cvs -d ".$repositoryPath." racl ".$useradmin_group.":p -r ALL -d ALL");
  			}
 		}
+	}
+}
+
+// return's true if it's ok to write the file
+function checkLoginfo($file_name) {
+	if (!file_exists($file_name)) {
+		// files does't exist, it's ok to write it
+		return true;
+	} else { // check if file is empty or commented out
+		$file = @fopen($file_name, 'r');
+		if (!$file) { // couldn't open file
+			return false;
+		}
+
+		while (!feof($file)) {
+			$content = trim(fgets($file, 4096));
+			if (strlen($content) > 1) {
+				if ($content{0} != '#') { // it's not a comment
+					fclose($file);
+					return false;
+				}
+			}
+		}
+		fclose($file);
+		return true;
 	}
 }
 
