@@ -530,7 +530,7 @@ if (!defined($CVSROOT{$cvstreedefault})) {
         $config);
 }
 
-$DEFAULTVALUE{cvsroot} = $cvstreedefault;
+#$DEFAULTVALUE{cvsroot} = $cvstreedefault;
 
 while (my ($key, $defval) = each %DEFAULTVALUE) {
 
