@@ -668,6 +668,7 @@ if (isset($params['group']) && $params['group']) {
 		} else {
 			$inner='toptab';
 		}
+		$rowspan = '';
 		for ($i=0; $i<$count; $i++) {
 			if ($i == 0) {
 				//
