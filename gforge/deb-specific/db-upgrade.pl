@@ -2072,7 +2072,7 @@ $dbh->{RaiseError} = 1;
     $version = &get_db_version ;
     $target = "4.1-3" ;
     if (&is_lesser ($version, $target)) {
-        &debug ("Upgrading with 20050311.sql") ;
+        &debug ("Upgrading with 20050315.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050315.sql") } ;
         foreach my $s (@reqlist) {
