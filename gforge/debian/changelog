@@ -1,3 +1,9 @@
+sourceforge (2.5-26+) unstable; urgency=low
+
+  * 
+
+ --
+
 sourceforge (2.5-26) unstable; urgency=medium
 
   * [Christian] Made big changes in install-ldap.sh to be ok with
