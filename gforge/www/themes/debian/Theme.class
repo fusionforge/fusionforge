@@ -11,23 +11,6 @@
 
 class Theme extends Layout {
 
-	var $thicons = array(
-		'Summary' => '/images/ic/anvil24.png',
-		'Admin' => '/images/ic/anvil24.png',
-		'Homepage' => '/images/ic/home.png',
-		'Forums' => '/images/ic/notes.png',
-		'Bugs' => '/images/ic/bug.png',
-		'Support' => '/images/ic/support.png',
-		'Patches' => '/images/ic/patch.png',
-		'Lists' => '/images/ic/mail.png',
-		'Tasks' => '/images/ic/index.png',
-		'Docs' => '/images/ic/docman.png',
-		'Surveys' => '/images/ic/survey.png',
-		'News' => '/images/ic/news.png',
-		'CVS' => '/images/ic/convert.png',
-		'Files' => '/images/ic/save.png'
-		);
-
 	/**
 	 * Theme() - Constructor
 	 */
@@ -68,8 +51,6 @@ class Theme extends Layout {
 		$this->FONTSIZE_SMALLEST='xx-small';
 		//The HTML box title font size
 		$this->FONTSIZE_HTMLBOX_TITLE = 'small';
-		//Icons array
-		$this->icons=$theicons;
 
 	}
 
@@ -260,7 +241,7 @@ osdn_print_navbar();
 
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
-			<td width="141" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>steel3.jpg" bgcolor="#cfd1d4" align="left" valign="top">
+			<td width="141" align="left" valign="top">
 
 	<?php
 	print '<IMG src="/images/clear.gif" width=140 height=1 alt="Clear"><BR>';
