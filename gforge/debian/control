@@ -141,7 +141,7 @@ Description: Collaborative development tool - FTP management (using ProFTPd)
 
 Package: sourceforge-ldap-openldap
 Architecture: all
-Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), ldap-utils
+Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), libnss-ldap (>=184-1), ldap-utils
 Replaces: sourceforge (<= 2.6-0+11)
 Provides: sourceforge-ldap
 Conflicts: sourceforge-ldap

@@ -39,8 +39,12 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     use_stats, enable_pserver, enable_anoncvs) in the groups table.
   * [Christian] added web management of these new columns, now you can hide
     almost everything in project page 
+  * [Roland] sourceforge-ldap-openldap now depends on libnss-ldap.  This
+    should not be necessary and will have to be fixed at some point, but
+    for now I'm just too lazy to move the code from install-ldap.sh to
+    another, more appropriately named, script.
 
- -- Christian Bayle <bayle@debian.org>  Sat, 26 Oct 2002 02:32:12 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 28 Oct 2002 19:10:56 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
