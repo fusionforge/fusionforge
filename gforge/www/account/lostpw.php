@@ -55,9 +55,9 @@ echo $Language->getText('account_lostpw','warn');
 
 <FORM action="<?php echo $PHP_SELF; ?>" method="POST">
 <P>
-Login Name:
+<?php echo $Language->getText('account_login', 'loginname'); ?>
 <INPUT type="text" name="loginname"><br>
-<INPUT type="submit" name="submit" value="Send Lost PW Hash">
+<INPUT type="submit" name="submit" value="<? echo $Language->getText('account_lostpw','sendhash'); ?>">
 </FORM>
 
 <P><A href="/"><?php echo $Language->getText('general', 'return'); ?></A>

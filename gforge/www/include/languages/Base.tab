@@ -44,6 +44,7 @@ account_lostpw	subject	$1 Verification
 account_lostpw	title	Lost Your Password?
 account_lostpw	notify	<P>An email has been sent to the address you have on file. Follow the instructions in the email to change your account password. <P><A href="/">[ Home ]</A>
 account_lostpw	warn	<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. <P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.
+account_lostpw	sendhash	Send Lost PW Hash
 account_register	title	New Account Registration
 account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
 account_register	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
@@ -233,6 +234,14 @@ my	no_projects	You're not a member of any active projects
 my	no_tracker_items_assigned	You have no open tracker items assigned to you.
 my	no_tracker_items_submitted	You have no open tracker items submitted by you.
 my	title	Personal Page For: $1
+my	assigneditems	My Assigned Items
+my	submitteditems	My Submitted Items
+my	monitoredforum	Monitored Forums
+my	monitoredfile	Monitored FileModules
+my	tasks	My Tasks
+my	survey	Quick Survey
+my	bookmarks	My Bookmarks
+my	projects	My Projects
 my_bookmark_add	section	My Personal Page
 my_bookmark_add	title	Add Bookmark
 my_bookmark_delete	section	My Personal Page

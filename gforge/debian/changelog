@@ -15,10 +15,11 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     that SSL is enabled on Apache-SSL (as opposed to Apache / mod_ssl)
     servers.  Thanks, Kees Louwen <keeslouwen@hotmail.com>.
   * [Christian] Added delete capability in trove map edit
-  * [Christian] Added setup_onevar_mainfile function in dsf helper to add 
+  * [Christian] Added setup_onevar_mainfile function in dsf helper to add
     vars in sourceforge.conf not managed by debconf
+  * [Christian] More i18n in /my and /account
 
- -- Roland Mas <lolando@debian.org>  Mon, 14 Oct 2002 10:35:31 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon, 14 Oct 2002 17:12:00 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

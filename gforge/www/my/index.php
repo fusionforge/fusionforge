@@ -51,7 +51,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		Artifacts
 	*/
 	$last_group=0;
-	echo $HTML->box1_top('My Assigned Items',false,false,false);
+	echo $HTML->box1_top($Language->getText('my', 'assigneditems'),false,false,false);
 	
 	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
 		a.assigned_to,a.summary,a.artifact_id,a.priority 
@@ -96,7 +96,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	}   
 
 	$last_group=0;
-	echo $HTML->box1_middle('My Submitted Items',false,false);
+	echo $HTML->box1_middle($Language->getText('my', 'submitteditems'),false,false);
 	
 	$sql="SELECT g.group_name,agl.name,agl.group_id,a.group_artifact_id,
 		a.assigned_to,a.summary,a.artifact_id,a.priority 
@@ -144,7 +144,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		Forums that are actively monitored
 	*/
 	$last_group=0;
-	echo $HTML->box1_middle('Monitored Forums',false,false);
+	echo $HTML->box1_middle($Language->getText('my', 'monitoredforum'),false,false);
 	$sql="SELECT groups.group_name,groups.group_id,forum_group_list.group_forum_id,forum_group_list.forum_name ".
 		"FROM groups,forum_group_list,forum_monitored_forums ".
 		"WHERE groups.group_id=forum_group_list.group_id AND groups.status ='A' ".
@@ -182,7 +182,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	*/
 	$last_group=0;
 
-	echo $HTML->box1_middle('Monitored FileModules',false,false);
+	echo $HTML->box1_middle($Language->getText('my', 'monitoredfile'),false,false);
 
 	$sql="SELECT groups.group_name,groups.group_id,frs_package.name,filemodule_monitor.filemodule_id ".
 		"FROM groups,filemodule_monitor,frs_package ".
@@ -227,7 +227,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		Tasks assigned to me
 	*/
 	$last_group=0;
-	echo $HTML->box1_top('My Tasks',false,false,false);
+	echo $HTML->box1_top($Language->getText('my', 'tasks'),false,false,false);
 
 	$sql="SELECT groups.group_name,project_group_list.project_name,project_group_list.group_id, ".
 		"project_task.group_project_id,project_task.priority,project_task.project_task_id,project_task.summary,project_task.percent_complete ".
@@ -287,7 +287,7 @@ if (user_isloggedin() || $sf_user_hash) {
 
 	$result=db_query($sql);
 
-	echo $HTML->box1_middle('Quick Survey',false,false);
+	echo $HTML->box1_middle($Language->getText('my', 'survey'),false,false);
 
 	if (db_numrows($result) < 1) {
 		show_survey(1,1);
@@ -334,7 +334,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	/*
 		   Personal bookmarks
 	*/
-	echo $HTML->box1_middle('My Bookmarks',false,false);
+	echo $HTML->box1_middle($Language->getText('my', 'bookmarks'),false,false);
 
 	$result = db_query("SELECT bookmark_url, bookmark_title, bookmark_id from user_bookmarks where ".
 		"user_id='". user_getid() ."' ORDER BY bookmark_title");
@@ -359,7 +359,7 @@ if (user_isloggedin() || $sf_user_hash) {
 		PROJECT LIST
 	*/
 
-	echo $HTML->box1_middle('My Projects',false,false);
+	echo $HTML->box1_middle($Language->getText('my', 'projects'),false,false);
 	// Include both groups and foundries; developers should be similarly
 	// aware of membership in either.
 	$result = db_query("SELECT groups.group_name,"
