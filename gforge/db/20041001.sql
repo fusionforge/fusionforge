@@ -55,6 +55,6 @@ CREATE VIEW nss_usergroups AS
 	UNION 
 	SELECT unix_uid+20000 AS gid,
 		unix_uid+20000 AS uid
-	FROM users;
+	FROM users
 --         WHERE group_id!=800    -- drop unused and overfull Debian group
 	;
