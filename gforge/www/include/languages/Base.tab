@@ -2715,9 +2715,6 @@ tracker_admin_build_boxes	box_update_title	Modify a Box In: $1
 tracker_admin_build_boxes	opt_update_title	Modify a Pop-Up Box Choice In: $1
 tracker_admin_build_boxes	opt_name	Choice
 tracker_admin_build_boxes	status_any	Any
-tracker_admin_build_boxes	opt_
-tracker_admin_build_boxes	opt_
-tracker_admin_build_boxes	opt_
 tracker_admin_build_boxes	box_name_updated	Box name updated
 tracker_admin_build_boxes	choice_updated		Choice updated	
 tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the artifact box name because other things are dependent upon it. When you change the box name, all related items will be changed to the new name
