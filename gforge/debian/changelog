@@ -37,13 +37,8 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     the STDOUT and STDERR of all commands.
   * [Roland] Added extra columns (use_ftp, use_tracker, use_frs,
     use_stats, enable_pserver, enable_anoncvs) in the groups table.
-<<<<<<< changelog
-  * [Christian] added web management of these new columns, now you can hide
-    almost everything in project page
-=======
   * [Christian] added web management of these new columns, now you can
     hide almost everything in project page.
->>>>>>> 1.187
   * [Roland] sourceforge-ldap-openldap now depends on libnss-ldap.  This
     should not be necessary and will have to be fixed at some point, but
     for now I'm just too lazy to move the code from install-ldap.sh to

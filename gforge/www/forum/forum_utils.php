@@ -610,7 +610,7 @@ function show_post_form($forum_id, $thread_id=0, $is_followup_to=0, $subject="")
  *	assumes $send_all_posts_to var is set up
  */
 function handle_monitoring($forum_id,$msg_id) {
-	global $feedback,$send_all_posts_to;
+	global $feedback,$send_all_posts_to,$Language;
 	/*
 		Checks to see if anyone is monitoring this forum
 		If someone is, it sends them the message in email format
@@ -637,6 +637,13 @@ function handle_monitoring($forum_id,$msg_id) {
 		$result = db_query ($sql);
 
 		if ($result && db_numrows($result) > 0) {
+			$messagelink='http://'.$GLOBALS[sys_default_domain].'/forum/message.php?msg_id='.$msg_id;
+			$messagesender=db_result($result,0, 'user_name');
+			$messagebody=util_line_wrap(util_unconvert_htmlspecialchars(db_result($result,0, 'body')));
+			$messagesys=$GLOBALS['sys_name'];
+			$messagemonitor='http://'.$GLOBALS[sys_default_domain].'/forum/monitor.php?forum_id='.$forum_id;
+			$body = stripcslashes($Language->getText('forum_utils', 'mailmonitor', array($messagelink, $messagesender, $messagebody, $messagesys, $messagemonitor)));
+			/*
 			$body = "\nRead and respond to this message at: ".
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$msg_id.
 				"\nBy: " . db_result($result,0, 'user_name') .
@@ -645,18 +652,19 @@ function handle_monitoring($forum_id,$msg_id) {
 				"\nYou are receiving this email because you elected to monitor this forum.".
 				"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
 				"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=$forum_id";
+			*/
 
 			util_send_mail("noreply@$GLOBALS[sys_default_domain]",
 				"[" .db_result($result,0,'unix_group_name'). " - " . db_result($result,0,'forum_name')."] ".util_unconvert_htmlspecialchars(db_result($result,0,'subject')),
 				$body,"noreply@$GLOBALS[sys_default_domain]",
 				$tolist);
-			$feedback .= ' email sent - people monitoring ';
+			$feedback .= ' '.$Language->getText('forum_utils', 'mailsent').' ';
 		} else {
-			$feedback .= ' email not sent - people monitoring ';
+			$feedback .= ' '.$Language->getText('forum_utils', 'mailnotsent').' ';
 			echo db_error();
 		}
 	} else {
-		$feedback .= ' email not sent - no one monitoring ';
+		$feedback .= ' '.$Language->getText('forum_utils', 'mailnotsent2').' ';
 		echo db_error();
 	}
 }

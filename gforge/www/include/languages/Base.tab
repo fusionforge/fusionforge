@@ -166,6 +166,10 @@ forum_utils	postcomment	Post Comment
 forum_utils	anonymously	Anonymously
 forum_utils	couldpostif	You could post if you were
 forum_utils	reply	reply
+forum_utils	mailmonitor	\nRead and respond to this message at: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5
+forum_utils	mailsent	email sent - people monitoring
+forum_utils	mailnotsent	email not sent - people monitoring
+forum_utils	mailnotsent2	email not sent - no one monitoring
 foundry	section	Foundry: $1
 foundry	title	Summary
 foundry_admin	section	Foundry: $1
