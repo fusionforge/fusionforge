@@ -1,3 +1,13 @@
+2003-03-10  Reinhard Spisser  <reinhard@spisser.it>
+
+
+	* www/include/languages/SimplifiedChinese.tab:
+	Committing Simon Lei's translations to Chines
+	
+	* www/include/languages/Italian.tab
+	translations
+	
+
 2003-03-08  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/people/index.php: valid XHTML 1.0 Transitional.
