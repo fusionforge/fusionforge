@@ -1,3 +1,10 @@
+sourceforge (2.6-0+2) unstable; urgency=low
+
+  * Patch for db init
+  * Repared bad db init 
+
+ -- Christian Bayle <bayle@aist.enst.fr>  Sat, 17 Nov 2001 01:29:25 +0100
+
 sourceforge (2.6-0+1) unstable; urgency=low
 
   * Started working on 2.6.  Don't expect it to work just yet.
