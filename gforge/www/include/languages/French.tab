@@ -724,7 +724,7 @@ forum_utils	anonymously	Anonymement
 forum_utils	author	Auteur
 forum_utils	brokenthread	Fil de message cassé
 forum_utils	by	Par :
-forum_utils	couldpostif	Vous pourriez répondre si vous êtiez
+forum_utils	couldpostif	Vous pourriez répondre si vous étiez $1 connecté $2
 forum_utils	date	Date
 forum_utils	discussionforum	Forums de discussion :
 forum_utils	doublepost	Il semble que ce message soit un doublon compte tenu du fait qu'il a le même sujet et les mêmes informations de suivi qu'un précédent message.
