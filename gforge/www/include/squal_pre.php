@@ -21,6 +21,7 @@ if (!$no_gz_buffer) {
 }
 
 require_once('/etc/gforge/local.inc');
+require('common/include/constants.php');
 require_once('common/include/database.php');
 require_once('common/include/session.php');
 require_once('common/include/Error.class');

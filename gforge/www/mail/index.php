@@ -3,7 +3,7 @@
  * GForge Mailing Lists Facility
  *
  * Portions Copyright 1999-2001 (c) VA Linux Systems
- * The rest Copyright 2003 (c) Guillaume Smet
+ * The rest Copyright 2003-2004 (c) Guillaume Smet - Open Wide
  *
  * @version $Id$
  */
@@ -46,7 +46,7 @@ if ($group_id) {
 	
 	$mlCount = count($mlArray);
 	if($mlCount == 0) {
-		echo '<h1>'.$Language->getText('mail', 'no_list_found', array($Group->getPublicName())) .'</h1>';
+		echo '<p>'.$Language->getText('mail', 'no_list_found', array($Group->getPublicName())) .'</p>';
 		echo '<p>'.$Language->getText('mail', 'help_to_request').'</p>';
 		mail_footer(array());
 		exit;
@@ -63,24 +63,23 @@ if ($group_id) {
 
 	for ($j = 0; $j < $mlCount; $j++) {
 		$currentList =& $mlArray[$j];
+		echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
 		if ($currentList->isError()) {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) .'><td colspan="2">';
-			echo $currentList->getErrorMessage();
-			echo '</td></tr>';
-		} else if($currentList->getStatus()!='2') {
-		        echo '<tr '. $HTML->boxGetAltRowStyle($j) .'><td colspan="2">';
-			echo html_image('ic/cfolder15.png', '15', '13', array('border' => '0')).' &nbsp; ';
-			echo $currentList->getName(). " is not Activated yet.";
-			echo '</td></tr>';
+			echo '<td colspan="2">'.$currentList->getErrorMessage().'</td></tr>';
+		} else if($currentList->getStatus() != MAIL__MAILING_LIST_IS_CREATED) {
+			echo '<td width="60%">'.
+				'<strong>'.$currentList->getName().'</strong><br />'.
+				htmlspecialchars($currentList->getDescription()). '</td>'.
+				'<td width="40%" align="center">'.$Language->getText('mail_common', 'list_not_activated').'</td></tr>';
 		} else {
-			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td width="60%">'.
-				'<a href="'.$currentList->getArchivesUrl().'">' .
-				html_image('ic/cfolder15.png', '15', '13', array('border' => '0')).' &nbsp; '.
-				$Language->getText('mail', 'archives', array($currentList->getName())).'</a><br />'.
-				'&nbsp;'.  htmlspecialchars($currentList->getDescription()). '</td>'.
+			echo '<td width="60%">'.
+				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
+				$Language->getText('mail', 'archives', array($currentList->getName())).'</a></strong><br />'.
+				htmlspecialchars($currentList->getDescription()). '</td>'.
 				'<td width="40%" align="center"><a href="'.$currentList->getExternalInfoUrl().'">'.$Language->getText('mail', 'external_administration').'</a>'.
-				'</td></tr>';
+				'</td>';
 		}
+		echo '</tr>';
 	}
 
 	echo $HTML->listTableBottom();

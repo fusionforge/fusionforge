@@ -33,10 +33,6 @@
 
 require_once('common/include/Error.class');
 
-define('MAIL__MAILING_LIST_IS_PRIVATE', '0');
-define('MAIL__MAILING_LIST_IS_PUBLIC', '1');
-define('MAIL__MAILING_LIST_IS_DELETED', '9');
-
 class MailingList extends Error {
 
 	/**
@@ -118,7 +114,7 @@ class MailingList extends Error {
 	 *
 	 *	@return	boolean	success.
 	 */
-	function create($listName, $description, $isPublic = 1) {
+	function create($listName, $description, $isPublic = MAIL__MAILING_LIST_IS_PUBLIC) {
 		global $Language;
 		
 		if(! MailingListFactory::userCanAdminMailingLists($this->Group)) {
@@ -126,7 +122,7 @@ class MailingList extends Error {
 			return false;
 		}
 		
-		if(!$listName || strlen($listName) < 4) {
+		if(!$listName || strlen($listName) < MAIL__MAILING_LIST_NAME_MIN_LENGTH) {
 			$this->setError($Language->getText('mail_common', 'error_min_name_length'));
 			return false;
 		}
@@ -154,7 +150,7 @@ class MailingList extends Error {
 			. "'".$isPublic."',"
 			. "'".$listPassword."',"
 			. "'".user_getid()."',"
-			. "1,"
+			. "'".MAIL__MAILING_LIST_IS_REQUESTED."',"
 			. "'".$description."')";
 		
 		db_begin();
@@ -226,8 +222,6 @@ class MailingList extends Error {
 				"description='". $description ."' ".
 			"WHERE group_list_id='".$this->groupMailingListId."' ".
 			"AND group_id='".$this->Group->getID()."'";
-			
-		echo $sql;
 			
 		$res = db_query($sql);
 
@@ -305,8 +299,6 @@ class MailingList extends Error {
 	
 	/**
 	 * getStatus - get the status of this mailing list
-	 *
-	 * seems to be useless
 	 *
 	 * @return int The status
 	 */

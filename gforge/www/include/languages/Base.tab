@@ -975,11 +975,12 @@ mail	section	Project: $1
 mail	title	Mailing Lists
 mail	unable_to_get_lists	Unable to get the lists
 mail_admin	add_list	Add Mailing List
+mail_admin	admin_in_mailman	Administrate
 mail_admin	error_getting_list	Error getting the list
 mail_admin	pagetitle	Mailing List Administration
 mail_admin	section	Mailing Lists
 mail_admin	title	Mailing List Admin
-mail_admin	update_list	Administrate/Update Lists
+mail_admin	update_list	Update
 mail_admin_addlist	form_addlist	Add This List
 mail_admin_addlist	form_description	Description:
 mail_admin_addlist	existing_mailing_lists	Existing mailing lists
@@ -991,7 +992,6 @@ mail_admin_addlist	list_information	<p>Lists are named in this manner:<br /><str
 mail_admin_addlist	section	Mailing List Admin
 mail_admin_addlist	title	Add List
 mail_admin_addlist	warning	Once created, this list will ALWAYS be attached to your project and cannot be deleted!
-mail_admin_updatelist	admin_in_mailman	[Administrate this list in GNU Mailman]
 mail_admin_updatelist	form_description	Description:
 mail_admin_updatelist	form_ispublic	Is Public?
 mail_admin_updatelist	form_updatelist	Update
@@ -1001,13 +1001,14 @@ mail_admin_updatelist	list_updated	List Updated Successfully
 mail_admin_updatelist	no_list_found	No lists found for this project
 mail_admin_updatelist	section	Mailing List Admin
 mail_admin_updatelist	status	Status
-mail_admin_updatelist	title	Admin / Update Lists
+mail_admin_updatelist	title	Update Lists
 mail_common	creation_mail_body	A mailing list will be created on $1 in 6-24 hours \nand you are the list administrator.\n\nThis list is: $3@$2 .\n\nYour mailing list info is at:\n$4 .\n\nList administration can be found at:\n$5 .\n\nYour list password is: $6 .\nYou are encouraged to change this password as soon as possible.\n\nThank you for registering your project with $1.\n\n-- the $1 staff\n
 mail_common	creation_mail_subject	$1 New Mailing List
 mail_common	error_min_name_length	Must Provide List Name That Is 4 or More Characters Long
 mail_common	error_invalid_name	Invalid List Name
 mail_common	error_invalid_group_list_id	Invalid list id
 mail_common	error_list_already_exists	List Already Exists
+mail_common	list_not_activated	Not activated yet
 mail_common	mailing_list	Mailing list
 mail_common	mailing_lists	Mailing lists
 mail_utils	admin	Admin
@@ -1144,6 +1145,8 @@ news_submit	subject	Subject
 news_submit	submit	SUBMIT
 news_submit	title	Submit News for $1
 news_utils	archive	News archive
+news_utils	comment_1	Comment
+news_utils	comment_2	Comments
 news_utils	nonews	No News Items Found
 news_utils	readmore	Read&nbsp;More/Comment
 news_utils	submit	Submit News
@@ -1555,6 +1558,7 @@ project_admin_editrelease	file_type_update	File Type<br />Update
 project_admin_editrelease	file_updated	File Updated 
 project_admin_editrelease	filename_release	Filename<br />Release
 project_admin_editrelease	i_am_sure	I'm Sure
+project_admin_editrelease	monitor_count	There are $1 users monitoring this package.
 project_admin_editrelease	no_files_in_release	No Files In This Release
 project_admin_editrelease	note	Edit the Release Notes or Change Log for this release of this package. These changes will apply to all files attached to this release.<br />You can either upload the release notes and change log individually, or paste them in together below.
 project_admin_editrelease	paste_changelog	Paste The Change Log In
@@ -2634,7 +2638,7 @@ tracker_utils	monitor		Monitor
 tracker_utils	stop_monitoring		Stop Monitoring
 trove	not_categorized	This project has not yet categorized itself in the
 trove	title	Trove Software Map
-trove_list	browse_by	Browse By:
+trove_list	browse_by	Browse By
 trove_list	invalid_category_text	That Trove category does not exist
 trove_list	invalid_category_title	Invalid Trove Category
 trove_list	limiting_view	Now limiting view to projects in the following categories

@@ -986,16 +986,17 @@ mail	external_administration	S'abonner/Se désabonner/Préférences
 mail	help_to_request	Les administrateurs de projets doivent utiliser le lien Administration pour demander des listes de diffusion.
 mail	mailinglists_for	Listes de diffusion pour $1
 mail	no_list_found	Pas de listes trouvées pour $1
-mail	provided_by	<p>Listes de diffusion fournies via une version adapté à Gforge de <a href="http://www.list.org">GNU Mailman</a>. Merci aux équipes de Mailman et <a href="http://www.python.org">Python</a> pour ces excellents logiciels.</p>
+mail	provided_by	<p>Le service de listes de diffusion est fourni via une version adaptée à GForge de <a href="http://www.list.org">GNU Mailman</a>. Merci aux équipes de Mailman et <a href="http://www.python.org">Python</a> pour ces excellents logiciels.</p>
 mail	section	Projet : $1
 mail	title	Listes de diffusion
 mail	unable_to_get_lists	Impossible de récupérer les listes
 mail_admin	add_list	Ajouter une liste de diffusion
+mail_admin	admin_in_mailman	Administrer
 mail_admin	error_getting_list	Erreur en récupérant la liste
 mail_admin	pagetitle	Administration des listes de diffusion
 mail_admin	section	Listes de diffusion
 mail_admin	title	Administration des listes de diffusion
-mail_admin	update_list	Administrer/Modifier les listes de diffusion
+mail_admin	update_list	Modifier
 mail_admin_addlist	existing_mailing_lists	Listes de diffusion existantes
 mail_admin_addlist	form_addlist	Ajouter cette liste
 mail_admin_addlist	form_description	Description :
@@ -1007,23 +1008,23 @@ mail_admin_addlist	pagetitle	Ajouter une liste de diffusion
 mail_admin_addlist	section	Administration des listes de diffusion
 mail_admin_addlist	title	Ajouter une liste
 mail_admin_addlist	warning	Une fois créée, cette liste sera TOUJOURS attachée à votre projet et ne pourra pas être supprimée !
-mail_admin_updatelist	admin_in_mailman	[Administrer cette liste dans GNU Mailman]
 mail_admin_updatelist	form_description	Description :
 mail_admin_updatelist	form_ispublic	Publique ?
 mail_admin_updatelist	form_updatelist	Modifier
-mail_admin_updatelist	information	Vous pouvez administrer les listes à partir d'ici. Veuillez noter que les listes privées sont toujours visibles par les membres de votre projets mais ne sont plus listées sur $1.
+mail_admin_updatelist	information	Vous pouvez administrer les listes de diffusion à partir de cette interface. Veuillez noter que les listes privées sont visibles par les membres de votre projet mais pas par les autres utilisateurs de $1.
 mail_admin_updatelist	list	Liste
 mail_admin_updatelist	list_updated	Liste mise à jour avec succès
 mail_admin_updatelist	no_list_found	Aucune liste trouvée pour ce projet
 mail_admin_updatelist	section	Administration des listes de diffusion
 mail_admin_updatelist	status	Statut
-mail_admin_updatelist	title	Administrer/Modifier les listes de diffusion
+mail_admin_updatelist	title	Modifier une liste de diffusion
 mail_common	creation_mail_body	Une liste de diffusion va être créée sur $1 dans un \ndélai de 6 à 24 heures et vous en êtes l'administrateur.\n\nCette liste est : $3@$2\n\nLes informations concernant cette liste de diffusion sont disponibles sur :\n$4 .\n\nL'administration de la liste se fait sur :\n$5\n\nLe mot de passe d'administration de la liste est : $6\nVous êtes invités à le changer dès que possible\n\nMerci d'avoir enregistré votre projet sur $1\n\n-- L'équipe de $1\n
 mail_common	creation_mail_subject	Nouvelle liste de diffusion sur $1
 mail_common	error_invalid_group_list_id	Identifiant de la liste non valide
 mail_common	error_invalid_name	Nom de la liste non valide
 mail_common	error_list_already_exists	Une liste portant ce nom existe déjà.
 mail_common	error_min_name_length	Le nom de la liste doit compter au moins 4 caractères.
+mail_common	list_not_activated	En cours de création
 mail_common	mailing_list	Liste de diffusion
 mail_common	mailing_lists	Listes de diffusion
 mail_utils	admin	Administration
@@ -1065,22 +1066,22 @@ my	assigneditems	Mes tâches assignées
 my	bookmarks	Mes signets
 my	monitoredfile	Fichiers que vous surveillez
 my	monitoredforum	Forums que vous surveillez
-my	no_bookmarks	Vous n'avez pas encore de signets
-my	no_monitored_filemodules	Vous ne surveillez pas de fichiers
+my	no_bookmarks	Vous n'avez pas encore défini de signet.
+my	no_monitored_filemodules	Vous ne surveillez pas de fichier.
 my	no_monitored_filemodules_details	<p>Si vous surveillez des fichiers, vous serez prévenu de toute nouvelle publication par un e-mail qui contiendra un lien vers le nouveau fichier sur le serveur de téléchargement.</p><p>Vous pouvez surveiller des fichiers en visitant la page « En bref » d'un projet ou en cliquant sur l'icône « enveloppe » dans la section fichiers.</p>
 my	no_monitored_forums	Vous ne surveillez pas de forum.
 my	no_monitored_forums_details	<p>Si vous surveillez des forums, les nouveaux articles publiés vous seront envoyés par e-mail. Celui-ci contiendra un lien vers l'article.</p><p>Vous pouvez surveiller des forums en cliquant sur le lien « Surveiller le forum » présent sur chaque forum.</p>
 my	no_open_tasks	Aucune tâche ne vous est confiée.
 my	no_projects	Vous ne faites partie d'aucun projet.
-my	no_tracker_items_assigned	Rien ne vous est confié.
+my	no_tracker_items_assigned	Aucune tâche ne vous est confiée.
 my	no_tracker_items_submitted	Vous n'avez soumis aucun élément à suivre.
 my	pending_news_bytes	Annonces en attente
-my	pending_news_bytes_1	Il y a une annonce en attente de validation
-my	pending_news_bytes_2	Il y a $1 annonce(s) en attente de validation
+my	pending_news_bytes_1	Il y a une annonce en attente de validation.
+my	pending_news_bytes_2	Il y a $1 annonces en attente de validation.
 my	pending_news_bytes_3	Cliquez ici
-my	pending_projects	Projets en instance
-my	pending_projects_1	Ce projet en instance, attends des critiques
-my	pending_projects_2	Projet $1 est en instance, attends des critiques
+my	pending_projects	Projets en attente
+my	pending_projects_1	Il y a un projet en attente de validation.
+my	pending_projects_2	Il y a $1 projets en attente de validation.
 my	pending_projects_3	Cliquez ici
 my	projects	Mes projets
 my	submitteditems	Soumissions
@@ -1160,8 +1161,10 @@ news_submit	subject	Sujet&nbsp;
 news_submit	submit	Envoyer
 news_submit	title	Soumettre une annonce pour $1
 news_utils	archive	Archive des annonces
+news_utils	comment_1	commentaire
+news_utils	comment_2	commentaires
 news_utils	nonews	Pas d'annonces
-news_utils	readmore	Suite/Commenter
+news_utils	readmore	Lire la suite/Commenter
 news_utils	submit	Proposer une annonce
 people	about_blurb	<p>Le système « Demande d'aide » est destiné aux offres non commerciales de postes pour volontaires. Tout usage commercial de ce système d'annonces est interdit.</p><p>Les offres restent visibles pendant deux semaines ou jusqu'à ce qu'elles soient fermées par le demandeur, suivant ce qui arrive en premier. (Les administrateurs de projets peuvent toujours soumettre une nouvelle fois les offres qui ont expiré.)</p><p>Parcourez les catégories pour trouver un projet ayant besoin de votre aide.</p><p>Si vous êtes administrateur de projet, identifiez-vous et soumettez des demandes d'aide à travers l'interface d'administration de votre projet.</p><p>Pour suggérer de nouvelles catégories, soumettez votre demande via le gestionnaire de support.</p>
 people	action	Action
@@ -1566,6 +1569,7 @@ project_admin_editrelease	file_type_update	Type de fichier<br />Mise à jour
 project_admin_editrelease	file_updated	Fichier mis à jour
 project_admin_editrelease	filename_release	Nom de fichier<br />Version
 project_admin_editrelease	i_am_sure	Je suis sûr.
+project_admin_editrelease	monitor_count	$1 utilisateur(s) surveille(nt) ce paquet.
 project_admin_editrelease	no_files_in_release	Aucun fichier dans cette version
 project_admin_editrelease	note	Éditer les notes ou les modifications apportées à cette version de paquet. Ces changements seront appliqués à tous les fichiers contenus dans cette version de paquet.<br />Vous pouvez indépendamment télécharger les notes de versions, les modifications individuellement, ou les coller ensemble ci-dessous.
 project_admin_editrelease	paste_changelog	Coller les modifications dans &nbsp;
@@ -1886,7 +1890,7 @@ session	notactive	Compte non actif
 session	pending	Compte en attente
 session	suspended	Compte suspendu
 snippet_addversion	browse_the_library	<strong>Parcourez la librairie</strong> pour trouver les échantillons que vous voulez ajouter au paquet
-snippet_addversion	changes	Changemenents :
+snippet_addversion	changes	Changements :
 snippet_addversion	error_doing_snippet_package_version_insert	ERREUR pendant l'insertion de version de paquet d'échantillon
 snippet_addversion	error_doing_snippet_version_insert	ERREUR pendant l'insertion de version d'échantillon
 snippet_addversion	error_go_back_and_fill_in_all	Erreur : Revenez en arrière et remplissez toutes les informations

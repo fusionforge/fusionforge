@@ -6,9 +6,6 @@
 //	and, finally, create the lists in a /tmp/mailman-aliases file
 //	The /tmp/mailman-aliases file will then be read by the mailaliases.php file
 //
-//      Status: 1 - list creating request 
-//      Status: 2 - list created
-//      
 //	DEFINE VARS FOR USING THIS SCRIPT
 //
 define('MAILMAN_DIR','/var/mailman/');
@@ -44,7 +41,7 @@ $res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
         mail_group_list.group_list_id 
 	FROM mail_group_list,users
         WHERE mail_group_list.list_admin=users.user_id
-        AND mail_group_list.status = 1
+        AND mail_group_list.status = ".MAIL__MAILING_LIST_IS_REQUESTED."
         ");
 $err .= db_error();
 
@@ -52,6 +49,8 @@ $rows=db_numrows($res);
 $err .= "$rows rows returned from query\n";
 
 $h1 = fopen("/tmp/mailman-aliases","w");
+
+$mailingListIds = array();
 
 for ($i=0; $i<$rows; $i++) {
 	$err .= "Processing row $i\n";
@@ -66,16 +65,23 @@ for ($i=0; $i<$rows; $i++) {
 		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		$fp = popen($lcreate_cmd,"r");
-
-		
+		pclose($fp);
 	}
 	
-	// Update status
-	db_query("UPDATE mail_group_list set status=2 where group_list_id = $grouplistid");
+	$mailingListIds[] = $grouplistid;
 
-	$list_str="$listname:       \"|/var/mailman/mail/wrapper post $listname\"
-$listname-admin: \"|/var/mailman/mail/wrapper mailowner $listname\"
-$listname-request: \"|/var/mailman/mail/wrapper mailcmd $listname\"\n";
+	$list_str =
+$listname.':              "|'.MAILMAN_DIR.'mail/mailman post '.$listname.'"'."\n"
+.$listname.'-admin:        "|'.MAILMAN_DIR.'mail/mailman admin '.$listname.'"'."\n"
+.$listname.'-bounces:      "|'.MAILMAN_DIR.'mail/mailman bounces '.$listname.'"'."\n"
+.$listname.'-confirm:      "|'.MAILMAN_DIR.'mail/mailman confirm '.$listname.'"'."\n"
+.$listname.'-join:         "|'.MAILMAN_DIR.'mail/mailman join '.$listname.'"'."\n"
+.$listname.'-leave:        "|'.MAILMAN_DIR.'mail/mailman leave '.$listname.'"'."\n"
+.$listname.'-owner:        "|'.MAILMAN_DIR.'mail/mailman owner '.$listname.'"'."\n"
+.$listname.'-request:      "|'.MAILMAN_DIR.'mail/mailman request '.$listname.'"'."\n"
+.$listname.'-subscribe:    "|'.MAILMAN_DIR.'mail/mailman subscribe '.$listname.'"'."\n"
+.$listname.'-unsubscribe:  "|'.MAILMAN_DIR.'mail/mailman unsubscribe '.$listname.'"'."\n"
+;
 
 	fwrite($h1,$list_str);
 //
@@ -98,6 +104,9 @@ $listname-request: \"|/var/mailman/mail/wrapper mailcmd $listname\"\n";
 	}
 */
 }
+
+// Update status
+db_query('UPDATE mail_group_list set status='.MAIL__MAILING_LIST_IS_CREATED.' where group_list_id IN('.implode(',', $mailingListIds).')');
 
 fclose($h1);
 
