@@ -1,9 +1,28 @@
 <?php
 /**
- *	GForge Reporting System
- *  Copyright 2003 GForge LLC
+ * Reporting System
  *
- *  THIS SOFTWARE IS PROPRIETARY
+ * Copyright 2004 (c) GForge LLC
+ *
+ * @version   index.php,v 1.11 2004/08/05 20:48:59 tperdue Exp
+ * @author Tim Perdue tim@gforge.org
+ * @date 2003-03-16
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 require_once('pre.php');
 require_once('common/reporting/report_utils.php');
@@ -38,18 +57,20 @@ if (!$perm || !is_object($perm)) {
 //	Get list of trackers this person can see
 //
 if ($perm->isArtifactAdmin()) {
-	$alevel=' >= 0';
+	$alevel='';
 } else {
-	$alevel=' > 1';
+	$alevel=' ap.user_id='. user_getid() ." AND ap.perm_level > 1 AND ";
 }
 
-$sql="SELECT agl.group_artifact_id,agl.name
-	FROM artifact_group_list agl,artifact_perm ap
-	WHERE agl.group_artifact_id=ap.group_artifact_id
-	AND ap.user_id='". user_getid() ."'
-	AND ap.perm_level $alevel
-	AND agl.group_id='$group_id'";
+$sql="SELECT DISTINCT agl.group_artifact_id,agl.name
+	FROM artifact_group_list agl 
+	LEFT JOIN artifact_perm ap
+	ON (ap.group_artifact_id=agl.group_artifact_id)
+	WHERE
+	$alevel
+	agl.group_id='$group_id'";
 $restracker=db_query($sql);
+echo db_error();
 
 //
 //	Build list of reports
