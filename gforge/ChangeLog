@@ -1,3 +1,9 @@
+2004-09-21  Tim Perdue <tim@gforge.org>
+
+	* Unified crontabs to crontab.in
+	* Greatly updated and expanded INSTALL
+	* Massive additions and debugging on www/soap/*
+
 2004-09-20  Christian Bayle <bayle@aist.enst.fr>
 	
 	* Moved some of the ./www/register/projectinfo.php register logic to
@@ -12,6 +18,10 @@
 2004-09-15  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* fixed [#552] by improving language negotiation
+
+2004-09-14  Tim Perdue <tim@gforge.org>
+
+	* Updated theme for 4.0
 
 2004-09-13  Guillaume Smet <guillaume-gforge@smet.org>
 	
@@ -73,7 +83,7 @@
 	no longer included in the project summary aggregate.  This prevents 
 	the wrong number from appearing on the project summary page.
 
-2004-06-08  Guillaume Smet <guillaume-gforge@smet.org>
+2004-08-08  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* added MAILTO="" to example crontabs so that it doesn't send mail anymore
 	* improved transaction management in history_parse.php
