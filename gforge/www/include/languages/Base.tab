@@ -1171,6 +1171,7 @@ tracker	file_delete	File Delete:
 tracker	file_delete_successful	File Delete: Successful
 tracker	comment_added	Comment Added
 tracker	reporting	Report
+tracker	resolution	Resolution
 tracker	admin	Admin
 tracker_add	submit		Submit
 tracker_add	for_project	For project
@@ -1186,7 +1187,7 @@ tracker	file_description	File description
 tracker	unassigned	Unassigned
 tracker	any	Any
 tracker	id	ID
-tracker	date	Data
+tracker	date	Date
 tracker	open_date	Open Date
 tracker	close_date	Close Date
 tracker	submitter	Submitter
@@ -1251,6 +1252,7 @@ tracker_artifacthtml	by	By
 tracker_artifacthtml	no_changes	No Changes Have Been Made to This Item
 tracker_artifacthtml	message	Message
 tracker_artifacttype	none	None
+tracker_artifacttype	nobody	Nobody
 tracker_artifacttype	admin	Admin
 tracker_artifacttype	reporting	Reporting
 tracker_artifacttype	browse	Browse
