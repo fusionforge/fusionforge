@@ -31,11 +31,12 @@ class SVNPlugin extends SCM {
 		$this->name = "scmsvn";
 		$this->text = "SVN";
 		$this->hooks[] = "scm_page";
+/*
 		$this->hooks[] = "scm_admin_update";
 		$this->hooks[] = "scm_admin_page";
 		$this->hooks[] = "scm_stats";
 		$this->hooks[] = "group_approved";
-
+*/
 		$this->hooks[] = "scm_plugin";
 
 		require_once('/etc/gforge/plugins/scmsvn/config.php') ;
@@ -58,18 +59,19 @@ class SVNPlugin extends SCM {
 			$group_id = $params['group_id'] ;
 			$this->display_scm_page ($group_id) ;
 			break ;
-//		case "scm_admin_update":
-//			$this->scm_admin_update ($params) ;
-//			break ;
-//		case "scm_admin_page":
-//			$this->display_scm_admin_page ($params) ;
-//			break ;
+/*		case "scm_admin_update":
+			$this->scm_admin_update ($params) ;
+			break ;
+		case "scm_admin_page":
+			$this->display_scm_admin_page ($params) ;
+			break ;
 		case "scm_stats":
 			$this->display_stats ($params) ;
 			break;
 		case "group_approved":
 			$this->group_approved ($params) ;
 			break;
+*/
 		case "scm_plugin":
 			$scm_plugins=& $params['scm_plugins'];
 			$scm_plugins[]=$this->name;
@@ -184,7 +186,7 @@ if ($project->enableAnonSCM()) {
 
 	}
 
-
+/*
 	function scm_admin_update ($params) {
 		$group =& group_get_object($params['group_id']);
 
@@ -224,8 +226,6 @@ if ($project->enableAnonSCM()) {
 
 	}
 
-
-
 	function display_stats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
@@ -245,8 +245,6 @@ if ($project->enableAnonSCM()) {
 		
 	}
 
-
-
 	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
 		
@@ -264,77 +262,11 @@ if ($project->enableAnonSCM()) {
 		return true;
 	}
 
-
-/*
 	function GetDefaultServer () {
 		return $this->default_svn_server ;
 	}
+
 */
-
-	function GetGroupServer ($group_id) {
-		//$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
-		$sql = "SELECT scm_host FROM groups WHERE group_id = $group_id" ;
-		$res = db_query($sql);
-		if (db_numrows($res) == 0) {
-			return $this->default_svn_server ;
-		} else {
-			//return db_result($res,0,'svn_host');
-			return db_result($res,0,'scm_host');
-		}
-	}
-
-/*
-	function SetGroupServer ($group_id, $server) {
-		db_begin () ;
-		$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
-		$res = db_query($sql);
-		if (db_numrows($res) == 0) {
-			$sql = "INSERT INTO plugin_scmsvn_group_usage (group_id, svn_host) VALUES ($group_id, '$server')" ;
-		} else {
-			$sql = "UPDATE plugin_scmsvn_group_usage SET svn_host = '$server' WHERE group_id = $group_id" ;
-			
-		}
-		$res = db_query($sql);
-		db_commit () ;
-	}
-*/
-
-
-	function UsesAnonSVN ($group_id) {
-		/*
-		$sql = "SELECT anon_svn FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
-		$res = db_query($sql);
-		if (db_numrows($res) == 0) {
-			return false ;
-		} else {
-			return db_result($res,0,'anon_svn');
-		}
-		*/
-		$project =& group_get_object($group_id);
-		return $project->enableAnonSCM();
-	}
-
-
-	function SetUsesAnonSVN ($group_id, $anon_svn) {
-		/*
-		db_begin () ;
-		$anon_svn = $anon_svn ? 1 : 0 ;
-
-		$sql = "SELECT anon_svn FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
-		$res = db_query($sql);
-		if (db_numrows($res) == 0) {
-			$sql = "INSERT INTO plugin_scmsvn_group_usage (group_id, anon_svn) VALUES ($group_id, $anon_svn)" ;
-		} else {
-			$sql = "UPDATE plugin_scmsvn_group_usage SET anon_svn = $anon_svn WHERE group_id = $group_id" ;
-			
-		}
-		$res = db_query($sql);
-		db_commit () ;
-		*/
-		$anon_svn = $anon_svn ? 1 : 0 ;
-		$project =& group_get_object($group_id);
-		$project->SetUsesAnonSCM($anon_svn);
-	}
 }
 
 // Local Variables:
