@@ -779,6 +779,7 @@ forum_errors	error_getting_forum	Erreur de lecture du forum
 forum_forum	author	Auteur
 forum_forum	changeview	Changer de visualisation
 forum_forum	date	Date
+forum_forum	description	Description
 forum_forum	flat	Plat
 forum_forum	forum	Forum
 forum_forum	lastpost	Dernier messages
@@ -963,6 +964,7 @@ group	long_tracker	Outils de suivi
 group	nodescription	Ce projet n'a pas encore soumis de description.
 group	norelease	Ce projet n'a pas encore publié de fichier
 group	project_admins	Administrateurs&nbsp;
+group	project_developers	Développeurs
 group	public_area	Zones publiques
 group	registered	Enregistré le&nbsp;:&nbsp;
 group	short_admin	Administration
@@ -1739,13 +1741,14 @@ project_admin_qrs	qrs_info	$1 Vous pouvez maintenant ajouter des fichiers à cet
 project_admin_qrs	release_date	Date de la version&nbsp;
 project_admin_qrs	release_file	Publier le paquet
 project_admin_qrs	release_name	Nom de version&nbsp;
-project_admin_qrs	release_note	NOTE&nbsp;: Avec certains navigateurs, vous devez sélectionner le fichier, puis cliquer sur OK, le double clic ne fonctionnant pas.
+project_admin_qrs	release_note	Note&nbsp;: Avec certains navigateurs, vous devez sélectionner le fichier, puis cliquer sur OK, le double clic ne fonctionnant pas.
 project_admin_qrs	release_notes	Notes sur la version&nbsp;
 project_admin_qrs	required_file	Vous devez sélectionner un fichier
 project_admin_qrs	required_file_type	Vous devez sélectionner un type de fichier
 project_admin_qrs	required_package	Vous devez sélectionner un paquet
 project_admin_qrs	required_processor_type	Vous devez sélectionner un type de microprocesseur
 project_admin_qrs	required_release_name	Vous devez définir un nom de version
+project_admin_qrs	separate_emails	Séparer les adresses avec une virgule (,)
 project_admin_qrs	title	Système de publication rapide
 project_admin_qrs	unknown_file_error	Erreur inconnue lors de la transmission du fichier.
 project_admin_qrs	upload_new_file	Télécharger un nouveau fichier&nbsp;
@@ -2208,6 +2211,7 @@ searchbox	docs	Les documents de ce projet
 searchbox	forum	Ce forum
 searchbox	forums	Les forums de ce projet
 searchbox	frs	Les fichiers de ce projet
+searchbox	full	Le projet entier
 searchbox	news	Les annonces de ce projet
 searchbox	people	Personne
 searchbox	search	Rechercher
@@ -2907,6 +2911,7 @@ tracker_artifacttype	admin	Administration
 tracker_artifacttype	admin_functions	Fonctions d'administration
 tracker_artifacttype	browse	Parcourir
 tracker_artifacttype	edit_options	Éditer/Mettre à jour les options de&nbsp;
+tracker_artifacttype	invalid_emails	Une ou plusieurs adresses email semblent invalides
 tracker_artifacttype	nobody	Personne
 tracker_artifacttype	none	Aucun(e)
 tracker_artifacttype	reporting	Rapport
@@ -2956,6 +2961,10 @@ tracker_mod	existing_files	Fichiers existants
 tracker_mod	name	Nom
 tracker_mod	no_files	Pas de fichier attaché
 tracker_mod	title	Modifier
+tracker_monitor	monitor	Surveiller
+tracker_monitor	monitoring_activated	Surveillance activée
+tracker_monitor	monitoring_deactivated	Surveillance désactivée
+tracker_monitor	monitorstop	Arrêter la surveillance
 tracker_reporting	aging_report	Ordre chronologique
 tracker_reporting	all_by_group	Tous, par groupe
 tracker_reporting	all_by_resolution	Tous, par direction
