@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge_3.1-13_templates\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-07 19:22+0100\n"
+"POT-Creation-Date: 2004-12-19 14:38+0100\n"
 "PO-Revision-Date: 2004-05-05 19:46GMT\n"
 "Last-Translator: Aleix Badia i Bosch <a.badia@callusdigital.org>\n"
 "Language-Team: Catalan <debian-l10n-catalan@lists.debian.org>\n"
@@ -309,10 +309,11 @@ msgstr "Voleu una configuració de DNS simple?"
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:98
+#, fuzzy
 msgid ""
-"You can have a simple DNS setup wich uses wildcards to map all project web-"
+"You can have a simple DNS setup which uses wildcards to map all project web-"
 "hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
-"or a complex setup wich allows you to have many servers as project web "
+"or a complex setup which allows you to have many servers as project web "
 "servers or CVS servers."
 msgstr ""
 "Podeu disposar d'una configuració de DNS simple que utilitza comodins per "
@@ -822,8 +823,9 @@ msgstr "Tema predeterminat"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:11
+#, fuzzy
 msgid ""
-"Here is the default theme for web pages, be carreful to enter a valid name."
+"Here is the default theme for web pages, be careful to enter a valid name."
 msgstr ""
 "El tema predeterminat de les pàgines web, assegureu-vos d'introduir un nom "
 "vàlid."

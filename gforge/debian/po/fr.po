@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge 3.0-2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-11-07 19:22+0100\n"
+"POT-Creation-Date: 2004-12-19 14:38+0100\n"
 "PO-Revision-Date: 2004-11-20 09:33+0100\n"
 "Last-Translator: Christian Perrier <bubulle@debian.org>\n"
 "Language-Team: French <debian-l10n-french@lists.debian.org>\n"
@@ -329,10 +329,11 @@ msgstr "Souhaitez-vous une configuration DNS simplifiée ?"
 #. Type: boolean
 #. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:98
+#, fuzzy
 msgid ""
-"You can have a simple DNS setup wich uses wildcards to map all project web-"
+"You can have a simple DNS setup which uses wildcards to map all project web-"
 "hosts to a single IP, and direct all the cvs-hosts to a single CVS server, "
-"or a complex setup wich allows you to have many servers as project web "
+"or a complex setup which allows you to have many servers as project web "
 "servers or CVS servers."
 msgstr ""
 "Il est possible de mettre en service une gestion DNS simplifiée qui "
@@ -853,8 +854,9 @@ msgstr "Thème par défaut :"
 #. Type: string
 #. Description
 #: ../dsf-helper/web-variables.templates:11
+#, fuzzy
 msgid ""
-"Here is the default theme for web pages, be carreful to enter a valid name."
+"Here is the default theme for web pages, be careful to enter a valid name."
 msgstr ""
 "Il s'agit du thème par défaut des pages web. Veillez à indiquer un nom "
 "valide."
