@@ -1,3 +1,14 @@
+
+2003-05-07  Reinhard Spisser <reinhard@spisser.it>
+
+	* www/forum/forum.php:
+	fix bug #214: Forums: next 50 and previous 50 on W2000
+
+	* www/themes/gforge/it_login.png, www/themes/gforge/it_logout.png,
+	www/themes/gforge/it_my_account.png, www/themes/gforge/it_newaccount.png
+	www/include/languages/Base.tab:
+	new italian icons for gforge theme, some more translations
+		
 2003-05-06 Tom Copeland <tom@infoether.com>
 
 	* www/soap/SoapAPI.php:
