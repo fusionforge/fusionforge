@@ -51,8 +51,9 @@ function forum_header($params) {
 				echo '
 					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
 			} else {
+				$user = user_get_object(db_result($result,0,'submitted_by'));
 				echo '
-				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.user_getname( db_result($result,0,'submitted_by')).'<br />
+				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.$user->getRealName().'<br />
 				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'date')).'<br />
 				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</a>
 				<p>
