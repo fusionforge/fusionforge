@@ -276,21 +276,31 @@ load_ldap(){
         # echo "Our base DN is $sf_ldap_base_dn"
         # echo "Creating ldif file from database"
 	tmpldif=$(mktemp $tmpfile_pattern)
+	tmpldifadd=$(mktemp $tmpfile_pattern)
+	tmpldifmod=$(mktemp $tmpfile_pattern)
 	dc=$(echo $sf_ldap_base_dn | cut -d, -f1 | cut -d= -f2)
 	/usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
         # echo "Filling LDAP with database"
-	if ! eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif $DEVNULL12" ; then
+	if ! eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
             # Some entries could not be added (already there)
             # Therefore, we have to modify them
-	    if ! eval "ldapmodify -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif $DEVNULL12" ; then
+	    if ! eval "ldapmodify -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
 	    	echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
 		echo "please check and report following error"
 		echo ========================================================================================
-		eval "ldapmodify -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif" | perl -pi -e 's/^\n//' | perl -pi -e 's/modifying.*\"\n//'
+		cat $tmpldifmod | perl -pi -e 's/^\n//' | perl -pi -e 's/modifying.*\"\n//'
 		echo ========================================================================================
+		echo SEE ALSO result of ldapadd in:
+		echo $tmpldifadd
+		echo AND result of ldapmodify in:
+		echo $tmpldifmod
+		echo AND ldif file in:
+		echo $tmpldif
+		echo ========================================================================================
+		exit 4
             fi
 	fi
-	rm -f $tmpldif
+	rm -f $tmpldif $tmpldifadd $tmpldifmod
     else
 	echo "It seems the admin password is not known to me."
 	echo "I can't fill the LDAP directory without it."
