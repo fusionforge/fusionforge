@@ -34,7 +34,8 @@ case "$1" in
 
 	# Making user group and cvs update from database 
 	#/usr/lib/gforge/bin/update-user-group-cvs.sh
-	/usr/lib/gforge/bin/cvs_dump_update.pl
+	su -s /bin/sh gforge -c /usr/lib/gforge/bin/cvs_dump.pl
+	/usr/lib/gforge/bin/cvs_update.pl
 
 	# logs
 	chown root:gforge /var/log/gforge/cvs
