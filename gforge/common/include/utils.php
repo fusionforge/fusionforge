@@ -350,7 +350,7 @@ function util_make_links ($data='') {
 		$line = str_replace('&gt;', "\1", $line);
 		$line = eregi_replace("([ \t]|^)www\."," http://www.",$line);
 		$text = eregi_replace("([[:alnum:]]+)://([^[:space:]]*)([[:alnum:]#?/&=])", "<a href=\"\\1://\\2\\3\" target=\"_blank\" target=\"_new\">\\1://\\2\\3</a>", $line);
-		$text = eregi_replace("(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))", "<a href=\"mailto:\\1\" target=\"_new\">\\1</a>", $text);
+		$text = eregi_replace("([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))", "\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>", $text);
 		$text = str_replace("\1", '&gt;', $text);
 		$newText .= $text;
 	}

@@ -1,5 +1,11 @@
 2003-01-08  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* common/include/utils.php(util_make_links): Change e-mail
+	regular expression so that e-mails must either start a line
+	or be preceeded by whitespace.  This prevents URLs that
+	contain e-mail addresses from getting messed up (e.g.
+	http://mailman/user=foo@bar.com).
+
 	* www/forum/include/ForumHTML.class: first call util_make_links,
 	then do nl2br.  This prevents <br /> from becoming part of a URL
 	that is at the end of a line.
