@@ -29,7 +29,7 @@ function survey_header($params) {
 
 	if ($project =& group_get_object($group_id)){
 		if (!$project->usesSurvey()) {
-			exit_error($Language->getText('survey_utils','error_this_group_has_turned_off'));
+			exit_error($Language->getText('general','error'), $Language->getText('survey_utils','error_this_group_has_turned_off'));
 		}
 		
 		site_project_header($params);
