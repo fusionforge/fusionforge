@@ -1,13 +1,18 @@
 <!-- whole page table -->
 <table width="100%" cellpadding="5" cellspacing="0" border="0">
 <tr><td width="65%" valign="top">
-<h2>Welcome to the GForge Project!</h2>
+<h3>Welcome to the GForge Project!</h3>
 <p>
 GForge is an Open Source collaborative software development tool, which allows you to organize
 and manage any number of software development projects. It's perfect for managing
 large teams of software engineers and/or engineers scattered among multiple locations.
 </p>
-<h2>Professional Services</h2>
+<p>
+GForge is complete with Source Code Management integration (CVS, Subversion), Forums, 
+Mailing Lists, Trackers for Bugs, Patches, Feature Requests, and end-user Support as well as
+task management with Gantt charting.
+</p>
+<h3>Professional Services</h3>
 <p>
 You can support the GForge project by: 
 <ul>
