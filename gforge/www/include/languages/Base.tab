@@ -1293,21 +1293,6 @@ register_tos	title	Terms Of Service Agreement
 search	title	Search
 sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p />Fill it out accurately and completely or the receiver may not be able to respond.<p /><font color="red"><b>IF YOU ARE WRITING FOR HELP:</b> Did you read the site documentation? Did you include your <b>user_id</b> and <b>user_name?</b> If you are writing about a project, include your <b>project id</b> (<b>group_id</b>) and <b>Project Name</b>.</font>
 sendmessage	title	Send $1 A Message
-snippet	title	Code Snippet Library
-snippet_add_snippet_to_package	section	Code Snippet Library
-snippet_add_snippet_to_package	title	Add Snippet To Package
-snippet_addversion	section	Code Snippet Library
-snippet_addversion	title	Post A New Version
-snippet_browse	section	Code Snippet Library
-snippet_browse	title	Browse Snippets
-snippet_delete	section	Code Snippet Library
-snippet_delete	title	Delete A Snippet
-snippet_detail	section	Code Snippet Library
-snippet_detail	title	View Snippet Detail
-snippet_package	section	Code Snippet Library
-snippet_package	title	Create Snippet Package
-snippet_submit	section	Code Snippet Library
-snippet_submit	title	Submit Snippet
 softwaremap	title	Trove
 staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 survey	title	Surveys For $1
@@ -2314,7 +2299,186 @@ new	projects_total	Project Total:
 new	notes_changes	Notes & Changes
 new	newer_releases	Newer Releases
 new	older_releases	Older Releases
-
-
-
-
+add_snippet	title	Submit A New Snippet
+add_snippet	error_snippet_id_missing	Error - snippet_package_version_id missing
+add_snippet	error_only_creator_can_add	Error - Only the creator of a package version can add snippets to it.
+add_snippet	error_snippet_doesnt_exist	Error - That snippet doesn't exist.
+add_snippet	back_to_add_page	Back To Add Page
+add_snippet	error_snippet_already_added	Error - That snippet was already added to this package.
+add_snippet	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+add_snippet	snippet_version_added_successfully	Snippet Version Added Successfully.
+add_snippet	error_go_back_and_fill_all	Error - Go back and fill in all the information
+add_snippet	package	Package:
+add_snippet	you_can_use_this_form	You can use this form repeatedly to keep adding snippets to your package.</p><p>The "Snippet Version ID" is the unique ID number that is shown next to a specific version of a snippet on the browse pages.
+add_snippet	add_this_snippet_version_id	Add This Snippet Version ID:
+add_snippet	make_sure_all_info	Make sure all info is complete and accurate
+add_snippet	submit	SUBMIT
+add_snippet	no_snippets_in_this_package	No Snippets Are In This Package Yet
+add_snippet	snippets_in_this_package	Snippets In This Package
+snippet_addversion	error_snippet_doesnt_exist	Error, Error - snippet doesn't exist
+snippet_addversion	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_addversion	snippet_version_added_successfully	Snippet Version Added Successfully.
+snippet_addversion	error_go_back_and_fill_in_all	Error - Go back and fill in all the information
+snippet_addversion	title	Submit A New Snippet Version
+snippet_addversion	if_you_have_modified_a_version	If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.
+snippet_addversion	version	Version:
+snippet_addversion	changes	Changes:
+snippet_addversion	paste_the_code_here	Paste the Code Here:
+snippet_addversion	make_sure_all_info_is_complete	Make sure all info is complete and accurate
+snippet_addversion	submit	SUBMIT
+snippet_addversion	error_snippet_package_doesnt_exist	Error, Error - snippet_package doesn't exist
+snippet_addversion	error_doing_snippet_package_version_insert	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_addversion	title_submit_a_new_snippet_package	Submit A New Snippet Package
+snippet_addversion	snippet_package_version_added_successfully	Snippet Package Version Added Successfully.
+snippet_addversion	title_add_snippet_to_package	Add Snippets to Package
+snippet_addversion	important	IMPORTANT!
+snippet_addversion	if_new_window_opened	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_addversion	link_add_snippets_to_package	Add Snippets To Package
+snippet_addversion	browse_the_library	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
+snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
+snippet_addversion	if_you_have_modified	If you have modified a version of a package and you feel it is significant enough to share with others, please do so.
+snippet_addversion	error_url_or_form	Error, Error - was the URL or form mangled??	
+snippet_browse	title	Snippet Library
+snippet_browse	snippets_by_language	Snippets by language: $1
+snippet_browse	snippet_by_category	Snippets by category: $1
+snippet_browse	error_bad_url	Error, Error - bad url?
+snippet_browse	no_snippets_found	No snippets found
+snippet_browse	snippet_id	Snippet ID
+snippet_browse	snippet_title	Title
+snippet_browse	creator	Creator
+snippet_browse	packages_of_snippets	Packages Of Snippets
+snippet_browse	snippets	Snippets
+snippet_delete	title	Delete Snippets
+snippet_delete	error_only_the_creator	Error - Only the creator of a package version can delete snippets from it.
+snippet_delete	that_snippet_doesnt_exist	Error - That snippet doesn't exist in this package.
+snippet_delete	item_removed_from	Item Removed From Package
+snippet_delete	snippet_removed	Snippet Removed
+snippet_delete	error_only_creator_of_package_version_can_delete	Error - Only the creator of a package version can delete it.
+snippet_delete	package_removed	Package Removed
+snippet_delete	error_mangled_url	Error, Error - mangled URL?
+snippet_detail	title	Snippet Library
+snippet_detail	error_no_version_found	Error - no versions found
+snippet_detail	version_of_this_snippet	Versions Of This Snippet:
+snippet_detail	snippet_id	Snippet ID
+snippet_detail	download_version	Download Version
+snippet_detail	date_posted	Date Posted
+snippet_detail	author	Author
+snippet_detail	delete	Delete
+snippet_detail	changes_since_last_version	Changes since last version:
+snippet_detail	download_a_raw_text	Download a raw-text version of this code by clicking on &quot;<strong>Download Version</strong>&quot;
+snippet_detail	latest_snippet_version	Latest Snippet Version:
+snippet_detail	submit_a_new_snippet	Submit a new version
+snippet_detail	you_can_submit_a_new	You can submit a new version of this snippet if you have modified it and you feel it is appropriate to share with others.
+snippet_detail	version_of_this_package	Versions Of This Package:
+snippet_detail	package_version	Package Version
+snippet_detail	edit_del	Edit/Del
+snippet_detail	latest_package_version	Latest Package Version:
+snippet_detail	submit_a_new_version	Submit a new version
+snippet_detail	you_can_submit_a_new_version_of_package	You can submit a new version of this package if you have modified it and you feel it is appropriate to share with others.
+snippet_detail	error_was_the_url_mangled	Error, Error - was the URL mangled?
+snippet_download	nothing_in_here	nothing in here
+snippet_download	error	Error
+snippet_index	title	Snippet Library
+snippet_package	error_doing_snippet_package_insert	ERROR DOING SNIPPET PACKAGE INSERT!
+snippet_package	title	Submit A New Snippet Package
+snippet_package	snippet_package_added_successfull	Snippet Package Added Successfully. 
+snippet_package	error_doing_snippet_package_version	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_package	title_new_snippet_package	Submit A New Snippet Package
+snippet_package	snippet_version_added_successfull	Snippet Pacakge Version Added Successfully.
+snippet_package	add_snippet_to_package	Add Snippets to Package
+snippet_package	important	IMPORTANT!
+snippet_package	if_a_new_window	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_package	add_snippet_to	Add Snippets To Package
+snippet_package	browse_the_libary	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
+snippet_package	error_go_back_and_fill	Error, Error - Go back and fill in all the information
+snippet_package	you_can_group	<p>You can group together existing snippets into a package using this interface. Before creating your package, make sure all your snippets are in place and you have made a note of the snippet ID's.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+snippet_package	snippet_title	Title:
+snippet_package	description	Description:
+snippet_package	suggest_a_language	Suggest a Language
+snippet_package	suggest_a_category	Suggest a Category
+snippet_package	make_sure_all_info	Make sure all info is complete and accurate
+snippet_package	submit	SUBMIT
+snippet_package	category	Category
+snippet_package	language	Language
+snippet_package	version	Version
+snippet_utils	browse	Browse
+snippet_utils	choose_one	Choose One
+snippet_utils	unix_admin	UNIX Admin
+snippet_utils	html_manipulation	HTML Manipulation
+snippet_utils	bbs_systems	BBS Systems
+snippet_utils	auctions	Auctions
+snippet_utils	calendars	Calendars
+snippet_utils	database_manipulation	Database Manipulation
+snippet_utils	searching	Searching
+snippet_utils	file_management	File Management
+snippet_utils	games	Games
+snippet_utils	voting	Voting
+snippet_utils	shopping_carts	Shopping Carts
+snippet_utils	other	Other
+snippet_utils	math_functions	Math Functions
+snippet_utils	funktion	Function
+snippet_utils	full_script	Full Script
+snippet_utils	sample_code	Sample Code (HOWTO)
+snippet_utils	readme	README
+snippet_utils	class	Class
+snippet_utils	website_only	WebSite Only
+snippet_utils	other_language	Other Language
+snippet_utils	submit_a_new_snippet	Submit A New Snippet
+snippet_utils	create_a_package	Create A Package
+snippet_utils	snippet_in_this_package	Snippets In This Package:
+snippet_utils	snippet_id	Snippet ID
+snippet_utils	download_version	Download Version
+snippet_utils	snippet_title	Title
+snippet_utils	author	Author
+snippet_utils	no_snippets_are_in_this_package	No Snippets Are In This Package Yet
+snippet_utils	category	Category:
+snippet_utils	language	Language:
+snippet_utils	description	Description:
+snippet_utils	type	Type:
+snippet_utils	category	Category:
+snippet_utils	license	License:
+snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
+snippet_submit	snippet_added_successfull	Snippet Added Successfully.
+snippet_submit	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_submit	snippet_version_added_successfully	Snippet Version Added Successfully
+snippet_submit	error_go_back_and_fill	Error, Error - Go back and fill in all the information
+snippet_submit	submit_a_new_snippet	Submit A New Snippet
+snippet_submit	you_can_post	You can post a new code snippet and share it with other people around the world. Just fill in this information. <strong>Give a good description</strong> and <strong>comment your code</strong> so others can read and understand it.</p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing snippet by browsing the library. You should only use this page if you are submitting an entirely new script or function.
+snippet_submit	suggest_a_language	Suggest a Language
+snippet_submit	suggest_a_category	Suggest a Category
+snippet_submit	paste_the_code_here	Paste the Code Here:
+snippet_submit	make_sure_all_info	Make sure all info is complete and accurate
+snippet_submit	submit	SUBMIT
+snippet_submit	type	Script Type
+snippet_submit	license	License
+snippet_submit	description	Description
+snippet_submit	snippet_title	Title
+snippet_submit	category	Category
+snippet_submit	version	Version
+snippet_submit	language	Language
+snippet_caching	intro	<p>The purpose of this archive is to let you share your code snippets, scripts,	and functions with the Open Source Software Community.</p><p>You can create a "new snippet", then post additional versions of that snippet quickly and easily.</p><p>Once you have snippets posted, you can then create a "Package" of snippets. That package can contain multiple, specific versions of other snippets.</p><p>&nbsp;</p><h3>Browse Snippets</h3>	<p>You can browse the snippet library quickly:</p>
+snippet_caching	browse_by_category	Browse by Category
+snippet_caching	browse_by_language	Browse by Language
+help	title	Welcome to
+help	page_information	Page Information
+help	title	Welcome to $1
+help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
+help_tracker	status	This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'.
+help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
+help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
+help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
+help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which
+one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
+help_tracker	data_type	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
+help_tracker	resolution	The resolution option represents a tracker items resolution if any.
+help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
+help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
+help_tracker	comment	The comment textarea allows you to attach a comment to a tracker item when a canned response isn't appropriate.
+help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
+help_tracker	monitor	You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!
+help_tracker	unknown_help_request	UNKNOWN HELP REQUEST:
+help_tracker	close_window	Close Window
+help_trove_cat	no_such_category	No such trove category
+help_trove_cat	full_category_name	Full Category Name
+help_trove_cat	short_name	Short Name
+help_trove_cat	description	Description
