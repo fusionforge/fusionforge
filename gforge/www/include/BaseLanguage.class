@@ -83,6 +83,10 @@ class BaseLanguage {
 	 * Constructor
 	 */
 	function BaseLanguage() {
+		// disable localization caching system if configuration is wrong
+		if(!isset($GLOBALS['sys_localization_cache_path']) || !is_writable($GLOBALS['sys_localization_cache_path'])) {
+			$GLOBALS['sys_localization_enable_caching'] = false;
+		}
 	}
 
 	/**
