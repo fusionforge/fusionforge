@@ -2,8 +2,8 @@
 /**
  * GForge Plugin CVSTracker Class
  *
- * Portions Copyright 2004 (c) Roland Mas <99.roland.mas @nospam@ aist.enst.fr>
- * The rest Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
+ * Copyright 2004 (c) Francisco Gimeno <kikov @nospam@ kikov.org>
+ * Copyright 2005 (c) Guillaume Smet <guillaume-gforge@smet.org>
  *
  * @version $Id$
  * This file is part of GForge-plugin-cvstracker
@@ -51,15 +51,16 @@ class cvstrackerPlugin extends Plugin {
 		global $Language;
 
 		$group = &group_get_object($group_id);
-		echo "<tr><td colspan='2'>";
-		echo "<p><h4>".$Language->getText('plugin_cvstracker','title')."</h4>";
-
-		$title_arr=$this->getTitleArr();
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
-
 		$DBResult = db_query($Query);
 		$Rows= db_numrows($DBResult);
+		
 		if ($Rows > 0) {
+			echo '<tr><td colspan="2">';
+			echo '<h4>'.$Language->getText('plugin_cvstracker','title').'</h4>';
+
+			$title_arr=$this->getTitleArr();
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		
 			for ($i=0; $i<$Rows; $i++) {
 				$Row = db_fetch_array($DBResult);
 
@@ -79,13 +80,9 @@ class cvstrackerPlugin extends Plugin {
 					$Row['author'].'</a></td>
 				</tr>';
 			}
-		} else {
-			echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).
-			'><td colspan="6">'.
-			$Language->getText('plugin_cvstracker',
-				'no_commits_attached').'</td></tr>';
+			echo $GLOBALS['HTML']->listTableBottom();
+			echo '</td></tr>';
 		}
-		echo $GLOBALS['HTML']->listTableBottom();
 	}
 
 	/**
@@ -117,8 +114,8 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getFileLink($GroupName, $FileName) {
 		global $sys_default_domain;
-		return "<a href=\"http://".$sys_default_domain."/plugins/scmcvs/cgi-bin/cvsweb.cgi/".
-			$GroupName."/".$FileName."\">".$FileName."</a>";
+		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+			$FileName.'?cvsroot='.$GroupName.'">'.$FileName.'</a>';
 	}
 
 	/**
@@ -133,9 +130,9 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getActualVersionLink($GroupName, $FileName, $Version) {
 		global $sys_default_domain;
-		return "<a href=\"http://".$sys_default_domain."/plugins/scmcvs/cgi-bin/cvsweb.cgi/".
-			$GroupName."/".$FileName."?rev=".$Version."&contenttype=text/x-cvsweb-markup\">".
-			$Version."</a>";
+		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+			$FileName.'?cvsroot='.$GroupName.'&rev='.$Version.'&contenttype=text/x-cvsweb-markup">'.
+			$Version.'</a>';
 	}
 
 	/**
@@ -151,10 +148,10 @@ class cvstrackerPlugin extends Plugin {
 	*/
 	function getDiffLink($GroupName, $FileName, $PrevVersion, $ActualVersion) {
 		global $sys_default_domain,$Language;
-		return "<a href=\"http://".$sys_default_domain."/plugins/scmcvs/cgi-bin/cvsweb.cgi/".
-			$GroupName."/".$FileName."?r1=".$PrevVersion."&r2=".
-			$ActualVersion."&contenttype=text/x-cvsweb-markup\">".
-			$Language->getText('plugin_cvstracker','diffto')." ".$PrevVersion."</a>";
+		return '<a href="http://'.$sys_default_domain.'/plugins/scmcvs/cvsweb.php/'.
+			$FileName.'?cvsroot='.$GroupName.'&r1='.$PrevVersion.'&r2='.
+			$ActualVersion.'&contenttype=text/x-cvsweb-markup">'.
+			$Language->getText('plugin_cvstracker','diffto').' '.$PrevVersion.'</a>';
 	}
 
 	/**
