@@ -228,7 +228,7 @@ setup_vars() {
 	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
 	sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
-	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/local.inc | cut -d\" -f2)
+	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/database.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
 	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
 	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
@@ -267,7 +267,6 @@ dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
 userPassword: $cryptedpasswd
--
 FIN
 
 	echo "Testing LDAP"
@@ -278,8 +277,8 @@ dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
 cn: Dummy User Tested
--
 FIN
+	set +x
 }
 
 # Main
@@ -295,6 +294,7 @@ case "$1" in
 		echo "Modifying /etc/nsswitch.conf"
 		modify_nsswitch
 		echo "Load ldap"
+		echo load_ldap $dn "$secret"
 		load_ldap $dn "$secret"
 		# Restarting ldap 
 		/etc/init.d/slapd restart
@@ -316,13 +316,14 @@ case "$1" in
 		purge_nsswitch
 		echo "Purging /etc/libnss-ldap.conf"
 		purge_libnss_ldap
+		$0 init
 		;;
 	list)
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 		# Display what is now in the database
 		ldapsearch -x -b "$naming_context" '(objectclass=*)' 
 		;;
-	clean)
+	empty)
 	        setup_vars
 		# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) 
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
@@ -334,25 +335,25 @@ case "$1" in
 		for target in ou=Aliases ou=Hosts ou=Roaming ou=Group ou=cvsGroup cn=SF_robot cn=Replicator ou=People 
 		do 
 			echo "Destroying LDAP database $target, $naming_context ..."
-					ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -r "$target, $naming_context"
+			set +e
+			ldapdelete -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -r "$target, $naming_context"
+			set -e
 		done
 		;;
 	init)
-		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+		/etc/init.d/slapd stop
+		rm -f /var/lib/ldap/*.dbb
 		setup_vars
-		# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
-		# [ -f /etc/ldap.secret ] || secret=""
-		print_ldif_default $naming_context $cryptedpasswd > /tmp/ldif$$ 
+		/etc/init.d/slapd start
+		print_ldif_default $sys_ldap_base_dn $cryptedpasswd > /tmp/ldif$$ 
 		slapadd -l /tmp/ldif$$
 		rm -f /tmp/ldif$$
-		/etc/init.d/slapd restart
-		$0 configure
 		;;
 	test)	
 		setup_robot
 		;;
 	*)
-		echo "Usage: $0 {configure|update|purge|list|clean|init}"
+		echo "Usage: $0 {configure|update|purge|list|empty|init}"
 		exit 1
 		;;
 esac
