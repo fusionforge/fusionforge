@@ -5,6 +5,8 @@
 	* fixed [#983] "Remember me" didn't work
 	* fixed notices in various places
 	* technicians and submitter of a tracker item can now upload files
+	* fixed [#958] www/tarballs.php removed in SCM refactoring still
+	linked to on project admin page
 
 2004-11-04  Tim Perdue <tim@gforge.org>
 
