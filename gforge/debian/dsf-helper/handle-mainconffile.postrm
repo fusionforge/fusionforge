@@ -2,25 +2,6 @@
 # Functions to handle the main Sourceforge confguration file
 ###
 mainconffile=/etc/sourceforge/sourceforge.conf
-# Create the main configuraion file (unless it already exists)
-create_mainconffile () {
-    if [ ! -e $mainconffile ] ; then
-        touch $mainconffile
-        chmod 600 $mainconffile
-    fi
-}
-
-# Update it for the variables received as parameters
-update_mainconffile () {
-    for i in $@ ; do
-        if ! grep -q "^$i=" $mainconffile ; then
-            db_get sourceforge/shared/$i
-            echo "$i=$RET" >> $mainconffile
-        fi
-    done
-
-}
-
 # Delete the main configuration file
 delete_mainconffile () {
     rm -f $mainconffile
