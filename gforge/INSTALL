@@ -50,26 +50,49 @@ directory.
 Install Python and MailMan as per the instructions.
 
 
-Database Setup
---------------
+BLANK DATABASE - FRESH INSTALL
+------------------------------
 
-Create a blank database for postgres
+First, make sure you create a 'gforge' user at the unix command prompt:
 
-# createdb alexandria
+# adduser gforge
+
+Then create a postgres account for gforge:
+
+[root]# su - postgres
 
 You may need to add Pl/Pgsql as a language.  To do so:
 
-[user]$ su -
-[root]# su postgres
 [postgres]$ createlang plpgsql template1
+
+[postgres]# createuser -A -d -E -P gforge
+
+and enter the password for the user.
+
 [postgres]$ exit
-[root]# exit
 
-Next, import the database schema:
+[root]# su - gforge
+[gforge]# createdb gforge
+[gforge]# psql gforge < db/gforge3.sql > import.log
 
-# psql alexandria < db/gforge3.sql > import.log
+Be sure to watch for any errors during import and check the 
+import.log file.
 
-Be sure to watch for any errors during import.
+Now, find your pg_hba.conf file and edit it to include this line:
+
+local    all         all                                             md5
+
+
+UPGRADING DATABASE - EXISTING INSTALL
+-------------------------------------
+
+You will upgrade your database from a prior version by applying 
+each database schema change, in order, and applying it only once.
+Only apply the schema changes in the db/ folder that are dated 
+AFTER your existing installation.
+
+There may also be migration scripts that have to be run. In the 
+db/ folder, looked for migrate-*.php scripts and run them.
 
 
 WEB SETUP
@@ -108,7 +131,7 @@ AcceptPathInfo on
     LimitRequestBody 2097152
 </Files>
 #
-#	LOCATION may have to be used instead of FILES
+#	LOCATION may have to be used instead of FILES for some installs
 #
 #<Location /projects>
 #  ForceType application/x-httpd-php
@@ -116,7 +139,7 @@ AcceptPathInfo on
 #<Location /users>
 #  ForceType application/x-httpd-php
 #</Location>
-DirectoryIndex index.php index.cgi index.html index.htm
+DirectoryIndex index.php
 </VirtualHost>
 
 #
@@ -169,16 +192,17 @@ DirectoryIndex index.php index.cgi index.html index.htm
   DirectoryIndex index.html index.htm
 </VirtualHost>
 
+
 PHP setup
 ---------
 
 You may also add the include_path to the php.ini, as it will be
-necessary for your php cgi to run the cron jobs.  Alternatively, you
-may run the cronjobs with:
+necessary for your php cgi to run the cron jobs. 
 
-/usr/bin/php -dinclude_path='.:/path/to/gforge/:/path/to/gforge/www/include/' -q <file>
-
-if you do not want to edit your php.ini file.
+register_globals = On
+magic_quotes_gpc = On
+file_uploads = On
+include_path = ".:/var/www/gforge3/:/var/www/gforge3/www/include/"
 
 
 FRS - File Release System
@@ -190,17 +214,35 @@ will do the trick.
 
 This directory will be referenced in the GForge Config File as $sys_upload_dir
 
+
 GForge Config File
 --------------
 
 In the GForge distribution, you will find etc/local.inc. Move it to
 /etc/gforge/local.inc and edit all of the settings.
 
-Giving the first user "Site Admin" privileges. Register a new user,
+Usually, you will want to make it readable only by apache:
+
+[root]# chown -R apache:apache /etc/gforge/
+[root]# chmod 600 /etc/gforge/local.inc
+
+
+Site Admin
+----------
+
+Site admins are anyone who is an admin of group_id=1
+
+To give the first user "Site Admin" privileges, register a new user,
 and confirm it via the email link. Then enter the postgres command
 line and issue these commands:
 
-insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NEW NUMERIC USER ID*****,1,'A');
+[gforge]# psql gforge
+
+psql> insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NEW NUMERIC USER ID*****,1,'A');
+
+
+Mail Aliases
+------------
 
 /etc/aliases - add this line and run "newaliases"
 noreply:        /dev/null
@@ -234,6 +276,36 @@ See /cronjobs/README.root for more info.
 lists in mailman and creating the /etc/aliases file.
 
 
+[root]# adduser anonymous
+[root]# cp /etc/aliases /etc/aliases.org
+[root]# cp /etc/shadow /etc/shadow.org
+[root]# cp /etc/passwd /etc/passwd.org
+[root]# cp /etc/group /etc/group.org
+[root]# mkdir /cvsroot
+
+WARNING!!! the following command will blow away any existing root crontab.
+
+[root]# crontab cronjobs/crontab.in
+
+Now edit the paths to the cron scripts:
+
+[root]# crontab -e
+
+IMPORTANT!!!! - the cvs-cron/usergroup.php cron script will meddle 
+with your /etc/passwd, /etc/group, and /etc/shadow files. By default,
+this cron will save these files with a .new extension. You will have 
+to edit the cron script to remove the .new extension, but you must 
+make sure that it is properly generating your files or your server 
+could be unusable.
+
+
+JPGRAPH
+-------
+
+When you get your preferred version of jpgraph installed, you will 
+have to edit one setting in jpgraph.php: DEFINE("USE_CACHE",false);
+
+
 PERL
 ----
 
@@ -253,3 +325,15 @@ libdbi-perl and libdbd-pg-perl.
 | $sys_dbuser = 'gforge' ;
 | $sys_dbpasswd = 'p455w0rd' ;
 `----
+
+
+Jabber Support
+--------------
+
+GForge supports the sending of messages to jabber accounts. To 
+accomplish this, you must have a user account setup on the jabber 
+server that gforge can connect to and send messages.
+
+Once you have that user account, server, and password set up, 
+just edit /etc/gforge/local.inc and add the information to the 
+jabber section.
