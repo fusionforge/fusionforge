@@ -115,7 +115,7 @@ $sys_jabber_user="noreply";
 $FTPINCOMING_DIR = "/var/lib/gforge/chroot/home/users/<USER>/incoming";
 
 // Where the released files are located
-$FTPFILES_DIR = "/var/lib/gforge/download/<GROUP>";
+//$FTPFILES_DIR = "/var/lib/gforge/download/<GROUP>";
 
 // groups and homes dir prefix
 $homedir_prefix="/var/lib/gforge/chroot/home/users";
@@ -129,7 +129,8 @@ $groupdir_prefix="/var/lib/gforge/chroot/home/groups";
 //	Your php.ini file may have to be modified to allow writing outside
 //	the webserver's directory
 //
-$sys_upload_dir='/var/lib/gforge/uploads/';
+//$sys_upload_dir='/var/lib/gforge/uploads/';
+$sys_upload_dir='/var/lib/gforge/download/';
 
 // Where the GForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME

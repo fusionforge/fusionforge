@@ -53,7 +53,8 @@ case "$1" in
 	fi
 
 	# Set up upload directory
-	chown www-data:www-data /var/lib/gforge/uploads
+	#chown www-data:www-data /var/lib/gforge/uploads
+	chown www-data:www-data /var/lib/gforge/download
 	
     ;;
 

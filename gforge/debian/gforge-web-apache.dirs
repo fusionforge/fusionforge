@@ -12,5 +12,4 @@ usr/share/gforge/common
 usr/sbin
 var/lib/gforge
 var/lib/gforge/download
-var/lib/gforge/uploads
 var/lib/gforge/cvstarballs
