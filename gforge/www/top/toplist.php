@@ -7,6 +7,7 @@
 // $Id$
 
 require "pre.php";    
+require_once "common/include/Stats.class";    
 
 if ($GLOBALS[type] == 'downloads_week') {
 	$rankfield = 'downloads_week';
@@ -39,11 +40,8 @@ $arr=array($Language->getText('top_toplist','rank'),$Language->getText('top_topl
 
 echo $HTML->listTableTop($arr);
 
-$res_top = db_query("select g.unix_group_name, g.group_name, sum(s.$rankfield) as items "
-			." from stats_project s, groups g "
-			." where s.group_id = g.group_id "
-			." group by g.unix_group_name, g.group_name "
-			." order by items desc", 100);
+$stats = new Stats();
+$res_top = $stats->getTopMessagesPosted();
 
 echo db_error();
 

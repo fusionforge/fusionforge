@@ -45,11 +45,10 @@ class Stats extends Error {
 	}
 
 	/**
-	* Returns a resultset consisting of the group name, unix group name, group id, ranking, and percentile
-	* from the groups and project_weekly_metric tables
-	* 
-	* @param type 		either "week" or "" - pass in "" for all time
-	* @param offset		used to get the next $offset rows in a batch	
+	* Returns a result set containing the group_name, unix_group_name, group_id, ranking, and percentile
+	* for either the last week or for all time
+	* @param type	week or null (for all time)
+	*	@param offset	used to page thru the result
 	*/
 	function getMostActiveStats($type, $offset) {
 		$sql="";
@@ -67,5 +66,17 @@ class Stats extends Error {
 			"ORDER BY ranking ASC";
 		}
 		return db_query($sql, $LIMIT, $offset);
+	}
+
+	/**
+	* Returns a resultset containing unix_group_name, group_name, and items - the count of
+	* the messages posted on that group's forums
+	*/
+	function getTopMessagesPosted() {
+		return db_query("select g.unix_group_name, g.group_name, sum(s.msg_posted) as items "
+      ." from stats_project s, groups g "
+      ." where s.group_id = g.group_id "
+      ." group by g.unix_group_name, g.group_name "
+      ." order by items desc", 100);
 	}
 }
