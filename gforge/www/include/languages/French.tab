@@ -101,6 +101,7 @@ account_options	login_name	Identifiant :
 account_options	member_since	Membre depuis le :
 account_options	phone		Téléphone :
 account_options	real_name	Nom complet :
+account_options	themeid	Thème :
 account_options	timezone	Fuseau horaire :
 account_options	title	Gestion de compte
 account_options	title2		Titre :
@@ -122,6 +123,7 @@ account_register	err_passwd	Vous devez fournir un mot de passe
 account_register	err_passwd2	Les mots de passe ne concordent pas
 account_register	err_passwd3	Mot de passe non valide :
 account_register	err_realname	Vous devez entrer votre nom complet
+account_register	err_theme	Vous devez choisir un thème
 account_register	err_unixname	Nom unix non valide
 account_register	err_userexist	Ce nom d'utilisateur existe déjà.
 account_register	err_username	Vous devez fournir un nom d'utilisateur
@@ -143,6 +145,7 @@ account_register	remember_me	"Mémoriser mon identité" <i>(Permet d'accéder à
 account_register	resend_pending	[Renvoyer l'email de confirmation à un compte en attente]
 account_register	reset	Annuler les modifications
 account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site <i>(Faible trafic et informations relatives à la sécurité. Fortement recommandé.)</i>
+account_register	theme	Thème :
 account_register	timezone	Fuseau horaire :
 account_register	title	Nouvelle inscription
 account_register	update	Mettre à jour
