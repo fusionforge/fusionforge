@@ -313,7 +313,7 @@ class User extends Error {
 	 *	@sets user's preferred shell
 	 */
 	function setShell($shell) {
-		if (!sf_ldap_user_change_attribute($this->getUserId(),"loginShell",$shell)) {
+		if (!sf_ldap_user_set_attribute($this->getUserId(),"loginShell",$shell)) {
 		    $this->setError(sf_ldap_get_error_msg());
 		    return false;
 		}
