@@ -86,7 +86,7 @@ echo $HTML->listTableBottom();
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <input type="hidden" name="submit" value="1" />
 <input type="hidden" name="time_code" value="<?php echo $time_code; ?>" />
-<strong>Category Name:</strong><br />
+<strong><?php echo $Language->getText('reporting_tc','category_name'); ?>:</strong><br />
 <input type="text" name="category_name" value="<?php echo $category_name; ?>" >
 <p>
 <?php
