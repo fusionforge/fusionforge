@@ -27,15 +27,10 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 
 ?>
  
-<p><i><b>Warning!</b> These functions currently have minimal error checking,
-if any. They are fine to play with but may not act as expected if you leave
-fields blank, etc... Also, navigating the admin functions with the 
-<b>back</b> button is highly unadvised.</i>
-
-<p><B>User/Group Maintenance</B>
+<p><b>User Maintenance</b>
 <ul>
-<li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;
-<li>Display Users Beginning with : 
+	<li><a href="userlist.php">Display Full User List/Edit Users</a>&nbsp;&nbsp;
+	<li>Display Users Beginning with : 
 <?php
 	for ($i=0; $i < count($abc_array); $i++) {
 		echo "<a href=\"search.php?usersearch=1&search=$abc_array[$i]%\">$abc_array[$i]</a>|";
@@ -49,8 +44,12 @@ Search <i>(userid, username, realname, email)</i>:
   <input type="hidden" name="usersearch" value="1">
   <input type="submit" value="get">
 </form>
-<BR>&nbsp;
-<li><a href="grouplist.php">Display Full Group List/Edit Groups</a>
+</ul>
+<p>
+<b>Group Maintenance</b>
+<p>
+<ul>
+	<li><a href="grouplist.php">Display Full Group List/Edit Groups</a>
 
 <li>Display Groups Beginning with : 
 <?php
@@ -69,55 +68,70 @@ Search <i>(groupid, group unix name, full name)</i>:
 <p>
 
 
-<LI>Groups with <a href="approve-pending.php"><B>P</B> (pending) Status</A> <i>(New Project Approval)</i>
-<LI>Groups with <a href="search.php?groupsearch=1&search=%&status=I"><B>I</B> (incomplete) Status</A>
-<LI>Groups with <a href="search.php?groupsearch=1&search=%&status=D"><B>D</B> (deleted) Status</A>
-<LI><a href="search.php?groupsearch=1&search=%&is_public=0">Private Groups </A>
+<li><a href="/register/">Register New Project</a>
+<li>Groups with <a href="approve-pending.php"><b>P</b> (pending) Status</a> <i>(New Project Approval)</i>
+<li>Groups with <a href="search.php?groupsearch=1&search=%&status=D"><b>D</b> (deleted) Status</a>
+<li><a href="search.php?groupsearch=1&search=%&is_public=0">Private Groups </a>
 </ul>
 
-<p><b><A HREF="/register/">Register New Project</A></b>
-<p><b>Trove</b>
+<p>
+<b>News</b>
+<p>
 <ul>
-<li><a href="trove/trove_cat_list.php">Display Trove Map</a>
-<li><a href="trove/trove_cat_add.php">Add to the Trove Map</a>
+	<li><a href="/news/admin/">Approve/Reject</a> Front-page news
 </ul>
 
-<P><B>Site Utilities</B>
-<UL>
-<LI><A href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</A>
-<LI><A href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</A>
-<LI><A HREF="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</A>
-<LI><A HREF="edit_frs_filetype.php">Add, Delete, or Edit File Types</A>
-<LI><A HREF="edit_frs_processor.php">Add, Delete, or Edit Processors</A>
-<LI><A HREF="edit_frs_theme.php">Add, Delete, or Edit Themes</A>
-<LI><A HREF="loadtabfiles.php">Translation file tool</A>
-</UL>
+<p>
+<b>Stats</b>
+<p>
+<ul>
+	<li><a href="/stats/">Site-Wide Stats</a>
+</ul>
 
-<P><B>Global Admin Tools / Mass Insert Tools</B>
-<UL>
-<LI><A HREF="vhost.php">Virtual Host Administration Tool</A>
-<LI><A HREF="database.php">Project Database Administration</A>
-</UL>
+<p>
+<b>Trove Project Tree</b>
+<ul>
+	<li><a href="trove/trove_cat_list.php">Display Trove Map</a>
+	<li><a href="trove/trove_cat_add.php">Add to the Trove Map</a>
+</ul>
 
-<P><B>Quick Site Statistics</B></P>
+<p><b>Site Utilities</b>
+<ul>
+	<li><A href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</a>
+	<li><A href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</a>
+	<li><a href="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</a>
+	<li><a href="edit_frs_filetype.php">Add, Delete, or Edit File Types</a>
+	<li><a href="edit_frs_processor.php">Add, Delete, or Edit Processors</a>
+	<li><a href="edit_frs_theme.php">Add, Delete, or Edit Themes</a>
+	<li><a href="loadtabfiles.php">Translation file tool</a>
+</ul>
+
+<p>
+<b>Global Admin Tools / Mass Insert Tools</b>
+<ul>
+	<li><a href="vhost.php">Virtual Host Administration Tool</a>
+	<li><a href="database.php">Project Database Administration</a>
+</ul>
+
+<p><b>Quick Site Statistics</b></p>
 
 <?php
 
 $res=db_query("SELECT count(*) AS count FROM users WHERE status='A'");
 $row = db_fetch_array($res);
-print "<P>Active site users: <B>$row[count]</B>";
+print "<p>Active site users: <b>$row[count]</b>";
 
 $res=db_query("SELECT count(*) AS count FROM groups");
 $row = db_fetch_array($res);
-print "<BR>Registered projects: <B>$row[count]</B>";
+print "<BR>Registered projects: <b>$row[count]</b>";
 
 $res=db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
 $row = db_fetch_array($res);
-print "<BR>Active projects: <B>$row[count]</B>";
+print "<BR>Active projects: <b>$row[count]</b>";
 
 $res=db_query("SELECT count(*) AS count FROM groups WHERE status='P'");
 $row = db_fetch_array($res);
-print "<BR>Pending projects: <B>$row[count]</B>";
+print "<BR>Pending projects: <b>$row[count]</b>";
 
 site_admin_footer(array());
 

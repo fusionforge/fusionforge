@@ -37,7 +37,7 @@ if ($group->isError()) {
 
 // This function performs very update
 function do_update(&$group, $is_public, $status, $license,
-		   $group_type, $unix_box, $http_domain) {
+		   1, $unix_box, $http_domain) {
 	global $feedback;
 
 	db_begin();
@@ -89,11 +89,6 @@ echo '<H2>'.$group->getPublicName().'</H2>' ;?>
 
 <tr>
 <td colspan="3">
-
-Group Type:
-<?php
-echo show_group_type_box('group_type', $group->getType());
-?>
 
 Status:
 <?php echo html_build_select_box_from_arrays(

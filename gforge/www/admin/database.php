@@ -27,11 +27,9 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 if ($submit) {
 
-	$group_id = seek_gid($groupname);
-
 	if ($group_id) {
 
-		$group =& group_get_object($group_id);
+		$group =& group_get_object_by_name($groupname);
 		exit_assert_object($group, 'Group');
 
 		$user =& session_get_user();

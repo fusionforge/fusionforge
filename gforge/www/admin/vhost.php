@@ -26,11 +26,9 @@ session_require(array('group'=>'1','admin_flags'=>'A'));
 
 if ($add) {
 
-	$group_id = seek_gid($groupname);
-
 	if ($group_id) {
 
-		$group = &group_get_object($group_id);
+		$group = &group_get_object_by_name($groupname);
 		exit_assert_object($group, 'Group');
 
 		if (valid_hostname($vhost_name)) {
