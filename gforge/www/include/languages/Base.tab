@@ -83,6 +83,9 @@ account_options	language	Language:
 account_options	login_name	Login Name:
 account_options	member_since	Member since:
 account_options	real_name	Real Name:
+account_options	firstname	First Name:
+account_options	lastname	Last Name:
+account_options	ccode	Country Code:
 account_options	timezone	Timezone:
 account_options	title		Account Maintenance
 account_options	user_id	User Id:
