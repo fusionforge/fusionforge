@@ -1,7 +1,5 @@
 Template: sourceforge/shared/users_host
 Type: string
-Template: sourceforge/shared/users_host
-Type: string
 Description: Your user mail redirector server
  The hostname of the server that will host your Sourceforge user mail redirector.
  It should not be the same as your main SF host.
