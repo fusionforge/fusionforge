@@ -250,8 +250,8 @@ sub delete_user {
 # I don't like this with vars
 #	system("cd $homedir_prefix ; /bin/tar -czf $tar_dir/$username.tar.gz $username");
 #	system("rm -fr $homedir_prefix/$username");
-	system("/bin/mv /var/lib/sourceforge/cvsroot/home/users/$username /var/lib/sourceforge/cvsroot/home/users/deleted_$username");
-	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/home/users/deleted_$username");
+	system("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username");
+	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username");
 }
 
 #############################
@@ -338,7 +338,7 @@ sub delete_group {
 # Find a better solution
 #		system("cd $grpdir_prefix ; /bin/tar -czf $tar_dir/$this_group.tar.gz $this_group");
 #		system("rm -fr $grpdir_prefix/$this_group");
-		system("/bin/mv /var/lib/sourceforge/cvsroot/home/groups/$this_group /var/lib/sourceforge/cvsroot/home/groups/deleted_group_$this_group");
-		system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_group.tar.gz /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/sourceforge/home/groups/deleted_group_$this_group");
+		system("/bin/mv /var/lib/sourceforge/chroot/home/groups/$this_group /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group");
+		system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_group.tar.gz /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group");
 	}
 }

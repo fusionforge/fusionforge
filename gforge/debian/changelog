@@ -7,6 +7,8 @@ sourceforge (2.5-31+) unstable; urgency=low
     shell account yet no UID.  Thanks to Otavio Salvador
     <otavio@debian.org> for the report and help in fixing.
   * [Roland] deb-specific/db-upgrade.pl: Fixed the backlog of wrong UIDs.
+  * [Roland] utils/new_parse.pl: Applied patch from Manik Surtani
+    <manik.surtani@conchango.com> fixing a few paths.
 
  --
 
