@@ -90,7 +90,7 @@ if (isset($group_id) && isset($group_project_id)) {
 	} elseif ($ptf->isError()) {
 		exit_error($Language->getText('global', 'error'), $ptf->getErrorMessage());
 	}
-	$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id);
+	$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,1,$_category_id);
 	$pt_arr =& $ptf->getTasks();
 	if ($ptf->isError()) {
 		exit_error($Language->getText('global', 'error'), $ptf->getErrorMessage());
