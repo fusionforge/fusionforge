@@ -96,28 +96,27 @@ class ArtifactType extends Error {
 		}
 		$this->Group =& $Group;
 		if ($artifact_type_id) {
-            if (!$arr || !is_array($arr)) {
-                if (!$this->fetchData($artifact_type_id)) {
-                    return false;
-                }
-            } else {
-                $this->data_array =& $arr;
-                if ($this->data_array['group_id'] != $this->Group->getID()) {
-                    $this->setError('Group_id in db result does not match Group Object');
-                    $this->data_array = null;
-                    return false;
-                }
-            }
-            if (!$this->isPublic()) {
-                $perm =& $this->Group->getPermission( session_get_user() );
-
-                if (!$perm || !is_object($perm) || !$perm->isMember()) {
-                    $this->setError('Permission Denied');
-                    $this->data_array = null;
-                    return false;
-                }
-            }
-        }
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($artifact_type_id)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				if ($this->data_array['group_id'] != $this->Group->getID()) {
+					$this->setError('Group_id in db result does not match Group Object');
+					$this->data_array = null;
+					return false;
+				}
+			}
+			if (!$this->isPublic()) {
+	                	$perm =& $this->Group->getPermission( session_get_user() );
+			        if (!$perm || !is_object($perm) || !$perm->isMember()) {
+	                		$this->setError('Permission Denied');
+					$this->data_array = null;
+	                		return false;
+				}
+			}
+		}
 	}
 
 	/**
@@ -158,7 +157,13 @@ class ArtifactType extends Error {
 			$email_all=0;
 		}
 
-		$res=db_query("INSERT INTO 
+                $use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
+                $is_public = ((!$is_public) ? 0 : $is_public);
+                $allow_anon = ((!$allow_anon) ? 0 : $allow_anon);
+                $email_all = ((!$email_all) ? 0 : $email_all);
+
+
+		$sql="INSERT INTO 
 			artifact_group_list 
 			(group_id,
 			name,
@@ -186,7 +191,9 @@ class ArtifactType extends Error {
 			'$use_resolution',
 			'$submit_instructions',
 			'$browse_instructions',
-			'$datatype')");
+			'$datatype')";
+		echo $sql;
+		$res = db_query($sql);
 
 		db_begin();
 		$id = db_insertid($res,'artifact_group_list','group_artifact_id');
