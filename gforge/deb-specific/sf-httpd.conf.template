@@ -58,6 +58,13 @@ NameVirtualHost {ip_address}
 <VirtualHost {ip_address}>
   ServerName {download_host}
   DocumentRoot /var/lib/sourceforge/download
+
+	<Directory /var/lib/sourceforge/download>
+	  Options Indexes FollowSymLinks
+	  AllowOverride None
+	  order allow,deny
+	  allow from all
+	</Directory>
 </VirtualHost>
 
 <VirtualHost {ip_address}>

@@ -25,6 +25,8 @@ sourceforge (2.5-29+) unstable; urgency=low
   * [Roland] Added missing languages (closes: #150301).
   * [Christian] Added support for ssh-nonfree
   * [Christian] Hope I solved a postrm bug that made uninstall fail
+  * [Soon-Son] fixed "forbidden" error when trying to connect
+    download.foobar.net
 
  -- Christian Bayle <bayle@debian.org>  Sat, 29 Jun 2002 00:57:23 +0200
 
