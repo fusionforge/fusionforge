@@ -1495,7 +1495,7 @@ project_admin_qrs	no_file_types_available	Pas de types de fichiers disponibles.
 project_admin_qrs	package_id	numéro&nbsp;
 project_admin_qrs	preserve_text	Conserver mon texte pré-formaté
 project_admin_qrs	processor_type	Type de microprocesseur&nbsp;
-project_admin_qrs	qrs_info	$1 Vous pouvez maintenant ajouter des fichiers à cette version $2 si vous le souhaitez, ou modifier la version.</p> <p>Remarquez que le(s) fichier(s) peuvent ne pas apparaitre immédiatement dans la $3 page de téléchargement $4. Prévoir plusieurs heures pour la propagation.
+project_admin_qrs	qrs_info	$1 Vous pouvez maintenant ajouter des fichiers à cette version $2 si vous le souhaitez, ou modifier la version.</p> <p>Remarquez que le(s) fichier(s) peuvent ne pas apparaître immédiatement dans la $3 page de téléchargement $4. Prévoir plusieurs heures pour la propagation.
 project_admin_qrs	release_date	Date de la version&nbsp;
 project_admin_qrs	release_file	Publier le paquet
 project_admin_qrs	release_name	Nom de version&nbsp;
@@ -1672,9 +1672,9 @@ project_stats_utils	tasks	Tâches
 projects	section	Projet : $1
 projects	title	Résumé
 register	apply_for_registration	Pour demander l'enregistrement d'un projet, vous devez remplir un certain nombre d'information de base à son propos. Veuillez lire attentivement les descriptions ci-dessous et fournir des données précises et complètes. Tous les champs sont obligatoires.
-register	comprehensive_description	Décrivez de manière plus compréhensive votre projet
+register	comprehensive_description	Décrivez de manière plus complète votre projet
 register	conflicting_licenses_choice	Conflit dans le choix de licence
-register	describe_registration	Veuillez décrire de manière la plus précise l'objet de votre enregistrement.
+register	describe_registration	Veuillez décrire de manière plus précise l'objet de votre enregistrement.
 register	i_agree	JE SUIS D'ACCORD
 register	i_disagree	JE NE SUIS PAS D'ACCORD
 register	invalid_full_name	Nom complet invalide
@@ -1684,7 +1684,7 @@ register	maximum_description	La longueur maximum pour une description de projet 
 register	more_license_description	Veuillez fournir une description plus précise de la licence.
 register	no_license_chosen	Vous n'avez pas choisi de licence
 register	other_license	Si vous avez choisi 'Autre', veuillez founir une explication ainsi qu'une description de votre licence. Sachez que d'autres licences peuvent ne pas être acceptées. Cela peut aussi prendre plus de temps de prendre une décision d'agrément pour un tel projet, puisque nous devrons vérifier que cette licence est compatible avec la définition de l'OpenSource.
-register	project_description	<h3>4. Description publique du projet</h3><p>C'est la description de votre projet qui apparaa sur la page 'résumé du projet', dans les résultats des recherches, etc. Elle ne doit pas être aussi précise et étendue que la description du projet (étape 2), donc permettez-vous des formulation concises et des abréviations. La longueur maximale est de 255 caractères.
+register	project_description	<h3>4. Description publique du projet</h3><p>C'est la description de votre projet qui apparaîtra sur la page 'résumé du projet', dans les résultats des recherches, etc. Elle ne doit pas être aussi précise et étendue que la description du projet (étape 2), donc permettez-vous des formulation concises et des abréviations. La longueur maximale est de 255 caractères.
 register	project_full_name	</h3>1. Nom complet du projet</h3><p>Vous devez commencer par indiquer le nom de votre projet. Le nom complet est descriptif, et n'est pas contraint (il est toutefois limité à 40 caractères).</p>Nom complet :<br/>
 register	project_information	Information du projet
 register	project_license	<h3>3. Licence</h3> <p><strong><em>Si vous déposez un projet qui est un site web seulement, choisissez 'site web seulement' parmi les choix ci-dessous. et continuez.</em></strong><p>$1 est consacré à faire avancer le développement de logiciels en Open Source. Pour faire simple, nous sommes reliés à l'oeuvre extraordinaire de l'<a href="http://www.opensource.org">Open Source Initiative</a> pour les choix de licences. <p>Nous avons conscience, toutefois, qu'il peut y avoir d'autres licences en dehors de cela qui peuvent être meilleures pour vous. Si vous souhaitez utiliser une licence qui n'est pas certifiée OSI, faites-nous savoir pourquoi.<p>Le choix d'une licence est une décision sérieuse. Prenez le temps de lire le texte (et nos explications) de quelques licences avant de faire un choix pour votre projet. <p>Vous pouvez changer de licence plus tard, à condition d'avoir la possibilité légale de le faire, les versions de vos fichiers traduiront intégreront clairement ce changement relates this change, et votre classement dans l'arbre des projets sera mis à jour de manière appropriée. <em>Notez que ces changements de licence ne sont pas rétrocatifs (i.e. ne s'appliqueront pas aux productions déjà réalisées sous licence OpenSource).</em> <p>$1 n'est pas responsable des incohérences de licences.<p><strong>Licences</strong></s>
