@@ -25,7 +25,7 @@ To register a new user, click on the New Account button on the top right side of
 To register as a user, you need to fill out the form with the following data:
 <ul>
 <li><b>Login Name</b><br/>
-you should select an unique user name to access to the system. The name should not contain uppercase letters and usually is a combiation of your name and your surname; e.g. juser for John User.
+You should select an unique user name to access to the system. The name should not contain uppercase letters and usually is a combination of your name and your surname; e.g. juser for John User.  Also, the user name cannot match that of an existing system user account - i.e., you can't have a GForge user named 'root'.
  </li>
 <li><b>Password</b>
 <br/>
