@@ -392,7 +392,11 @@ class ForumMessage extends Error {
 			return true;
 		}
 
-		$body = util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
+		$body = "\nRead and respond to this message at: ".
+		"\nhttp://".$GLOBALS['sys_default_domain']."/forum/message.php?msg_id=".$this->getID().
+		"\nBy: " . $this->getPosterRealName() . "\n\n";
+
+		$body .= util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
 		"\n\n______________________________________________________________________".
 		"\nYou are receiving this email because you elected to monitor this forum.".
 		"\nTo stop monitoring this forum, login to ".$GLOBALS['sys_name']." and visit: ".
