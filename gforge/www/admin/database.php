@@ -48,7 +48,7 @@ if ($submit) {
 
 	} else {
 
-		$feedback .=	"<strong>Unable to insert already active database..</strong>";
+		$feedback .=	"<strong>Unable to insert already active database.</strong>";
 
 	}
 			
@@ -127,12 +127,12 @@ if ($displaydb) {
 <table>
 
 <tr>
-<td>Group Unix Name</td>
+<td>Group Unix Name:<?php echo utils_requiredField(); ?></td>
 <td><input type="text" name="groupname"></td>
 </tr>
 
 <tr>
-<td>Database Name</td>
+<td>Database Name:<?php echo utils_requiredField(); ?></td>
 <td><input type="text" name="dbname"></td>
 </tr>
 
