@@ -1344,7 +1344,6 @@ admin_massmail	text_of_message	Testo del messaggio
 admin_massmail	title	Amministrazione Motore di mail
 admin_massmail	type	Tipo
 admin_massmail	will_be_append	(sar&agrave; aggiunta informazione su come disiscriversi, se applicabile).
-poo
 admin_massmail_execute	receive_post	Ricevuto richiesta. Sto effettuando la query.
 admin_massmail_execute	unrecognized_post	Richiesta sconosciuta
 admin_massmail_execute	querry_complete	Query completa, inizio mailing a 
@@ -2199,7 +2198,6 @@ admin_unsubscribe	all_site_mailing	Tutti i mailing
 admin_unsubscribe	error_unsubscribe_user	Errore, impossibile eliminare abbonamento
 admin_unsubscribe	mail	MAIL
 admin_unsubscribe	show_user_matching	visualizza utenti utilizzando una espressione regolare
-admin_unsubscribe	
 admin_unsubscribe	subscription_maintenance	Manutenzione degli abbonamenti ai mailing del sito
 admin_unsubscribe	title	Manutenzione degli abbonamenti ai mailing del sito
 admin_unsubscribe	unsubscribe	Disdici abbonamento
