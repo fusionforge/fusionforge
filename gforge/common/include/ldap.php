@@ -375,7 +375,7 @@ function sf_ldap_create_user_from_object(&$user) {
 	$entry['debSfCvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
 	$entry['debSfForwardEmail']=$user->getEmail();
 	$entry['uidNumber']=$user->getUnixUID() + $UID_ADD;
-	$entry['gidNumber']=100; // users
+	$entry['gidNumber']=$user->getUnixUID() + $UID_ADD; // users as in debian backend
 	$entry['shadowLastChange']=1; // We don't have expiration, so any non-0
 	$entry['shadowMax']=99999;
 	$entry['shadowWarning']=7;

@@ -15,6 +15,7 @@ sourceforge (2.6-0+8+) unstable; urgency=low
   * [Christian] gig2png conversion to make GNU happy.
   * [Christian] some html cleaning in Layout.class and osdn.php
   * [Christian] added Add, Delete, or Edit Themes in Site Utilities for admin
+  * [Christian] change uid/gid attribution in ldap.php to be backend compliant
 
  -- Roland Mas <lolando@debian.org>  Mon,  1 Apr 2002 20:43:53 +0200
 
