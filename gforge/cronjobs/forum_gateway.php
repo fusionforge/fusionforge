@@ -306,7 +306,7 @@ system("echo \"forum: ".$str."\n\" >> /tmp/forum.log");
  
 
 /* Main routine */
-$debug = 1;
+$debug = 0;
 $listforum = new ForumGateway();
 if ($listforum->isError()) {
 	mail ($listforum->FromEmail,'Forum Post Rejected',$listforum->getErrorMessage());
