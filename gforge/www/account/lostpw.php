@@ -63,7 +63,7 @@ echo $Language->getText('account_lostpw','warn');
 <INPUT type="submit" name="submit" value="<? echo $Language->getText('account_lostpw','sendhash'); ?>">
 </FORM>
 
-<P><A href="/"><?php echo $Language->getText('general', 'return'); ?></A>
+<P><A href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></A>
 
 <?php
 
