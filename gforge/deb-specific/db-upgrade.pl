@@ -223,6 +223,23 @@ eval {
 	$dbh->commit () ;
     }
 
+    if (is_lesser $version, "2.5-25") {
+	debug "Found version $version lesser than 2.5-25, adding row to supported_languages." ;
+	$query = "INSERT INTO supported_languages VALUES (15, 'Korean', 'Korean.class', 'Korean', 'kr')" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	debug "Updating debian_meta_data table." ;
+	$query = "UPDATE debian_meta_data SET value = '2.5-25' where key = 'db-version'" ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     

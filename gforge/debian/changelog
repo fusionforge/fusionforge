@@ -11,8 +11,12 @@ sourceforge (2.5-24+) unstable; urgency=low
     previous entries, makes the package well-behaved (closes: #134058).
   * [Roland] Moved template files to /etc/sourceforge/templates
     (Policy for conffiles) (closes: #134724).
+  * [Roland] Specified shell when su'ing to postgres.  Will hopefully help
+    in resolving #130230, but I'm not sure yet so I don't close it.
+  * [Roland] Added Korean language class provided by Soon-Son Kwon
+    <kss@kldp.org>, many thanks to him.
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Feb 2002 11:14:33 +0100
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Feb 2002 16:42:42 +0100
 
 sourceforge (2.5-24) unstable; urgency=low
 
