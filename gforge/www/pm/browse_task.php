@@ -133,15 +133,11 @@ if ($rows < 1) {
 	$now=time();
 
 	for ($i=0; $i < $rows; $i++) {
-
+		$url = "/pm/task.php?func=detailtask&project_task_id=".$pt_arr[$i]->getID()."&group_id=".$group_id."&group_project_id=".$group_project_id;
 		echo '
 			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
-			'<td><a href="/pm/task.php?func=detailtask'.
-			'&project_task_id='. $pt_arr[$i]->getID() .
-			'&group_id='.$group_id.
-			'&group_project_id='. $group_project_id .'">'.
-			$pt_arr[$i]->getID() .'</a></td>'.
-			'<td>'. $pt_arr[$i]->getSummary() .'</td>'.
+			'<td><a href="'.$url.'">'.$pt_arr[$i]->getID() .'</a></td>'.
+			'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
 			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
 			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
 				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
