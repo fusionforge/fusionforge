@@ -31,6 +31,7 @@ require_once ('common/include/cron_utils.php');
 
 site_admin_header(array('title'=>$Language->getText('admin_index','title')));
 
+$which = getIntFromGet('which');
 if (!$which || $which==100) {
 	$which=100;
 } else {
@@ -38,31 +39,71 @@ if (!$which || $which==100) {
 }
 
 ?>
-<form action="<?php echo $PHP_SELF; ?>" method="post">
+<form action="<?php echo $PHP_SELF; ?>" method="get">
 <?php echo html_build_select_box_from_arrays(array_keys($cron_arr), $cron_arr, 'which', $which,true,'Any'); ?>
-<input type="submit" name="submit" value="Submit">
+<input type="submit" name="submit" value="<?php echo $Language->getText('general', 'submit');?>">
 </form>
 <?php
 
-$title_arr[]=$Language->getText('cronman','date');
-$title_arr[]=$Language->getText('cronman','job');
-$title_arr[]=$Language->getText('cronman','message');
+$title_arr = array(
+	$Language->getText('cronman','date'),
+	$Language->getText('cronman','job'),
+	$Language->getText('cronman','message')
+);
 
 echo $HTML->listTableTop ($title_arr);
 
-$sql="SELECT * FROM cron_history $sql_str ORDER BY rundate DESC";
+$sql = 'SELECT COUNT(*) AS count FROM cron_history '.$sql_str;
+$res = db_query($sql);
+$totalCount = db_result($res, 0, 'count');
 
-$res=db_query($sql);
+$offset = getIntFromGet('offset');
+if($offset > $totalCount) {
+	$offset = 0;
+}
+
+$sql = 'SELECT * FROM cron_history '.$sql_str.' ORDER BY rundate DESC LIMIT '.ADMIN_CRONMAN_ROWS.' OFFSET '.$offset;
+$res = db_query($sql);
+
 for ($i=0; $i<db_numrows($res); $i++) {
 
 	echo '<tr '. $HTML->boxGetAltRowStyle($i+1) .'>
 		<td>'. date($sys_datefmt, db_result($res,$i,'rundate')).'</td>
 		<td>'. $cron_arr[db_result($res,$i,'job')].'</td>
-		<td>'. db_result($res,$i,'output').'</td></tr>';
+		<td>'. nl2br(db_result($res,$i,'output')).'</td></tr>';
 
 }
 
 echo $HTML->listTableBottom();
+
+if($totalCount > ADMIN_CRONMAN_ROWS) {
+?>
+<br />
+<table style="background-color:<?php echo $GLOBALS['HTML']->COLOR_LTBACK1; ?>" width="100%" cellpadding="5" cellspacing="0">
+	<tr>
+		<td><?php
+		if ($offset != 0) {
+			$previousUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset - ADMIN_CRONMAN_ROWS);
+			echo '<a href="'.$previousUrl.'" style="text-decoration: none; font-weight:bold;">'
+				. html_image('t2.png', '15', '15', array('border'=>'0','align'=>'middle'))
+				. ' '.$Language->getText('cronman', 'previous').'</a>';
+		} else {
+			echo '&nbsp;';
+		}
+		echo '</td><td align="right">';
+		if ($totalCount > $offset + ADMIN_CRONMAN_ROWS) {
+			$nextUrl = 'cronman.php?which='.$which.'&amp;offset='.($offset + ADMIN_CRONMAN_ROWS);
+			echo '<a href="'.$nextUrl.'" style="text-decoration: none; font-weight:bold;">'
+				.$Language->getText('cronman', 'next').' '
+				. html_image('t.png', '15', '15', array('border'=>'0','align'=>'middle')) . '</a>';
+		} else {
+			echo '&nbsp;';
+		}
+		?></td>
+	</tr>
+</table>
+<?php
+}
 
 site_admin_footer(array());
 

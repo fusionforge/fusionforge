@@ -598,6 +598,8 @@ contact	title	Contacter $1
 cronman	date	Date
 cronman	job	Tâche
 cronman	message	Message
+cronman	next	Suivants
+cronman	previous	Précédents
 developer	body	Corps
 developer	date	Date
 developer	diary_and_notes	Journal et notes pour

@@ -282,6 +282,8 @@ admin_grouplist	register_time	Register Time
 cronman	date	Date
 cronman	job	Job
 cronman	message	Message
+cronman	next	Next
+cronman	previous	Previous
 admin_index	active_projects_count	Active projects: <strong>$1</strong>
 admin_index	active_users_count	Active site users: <strong>$1</strong>
 admin_index	add_delete_edit_file_types	Add, Delete, or Edit File Types
