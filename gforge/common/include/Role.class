@@ -603,6 +603,8 @@ class Role extends Error {
 						//
 						//  If user acquired at least commit access to CVS,
 						//  one to be promoted to CVS group, else, demoted.
+						//  When we add the user we also check he has a shell as a group member
+						//  When we remove we only check for SCM (cvs_only=1)
 						//
 						if ($uvalue>0) {
 //echo "<h3>Role::setUser SYS->sysGroupAddUser(".$this->Group->getID().",$user_id,1)</h3>";
