@@ -213,8 +213,8 @@ class BaseLanguage {
 	function loadPluginSpecificLanguage($lang, $pluginNames) {
 		foreach($pluginNames AS $pluginName) {
 			$plugin =& plugin_get_object($pluginName);
-			$languagePath = $plugin->getLanguagePath().$lang.'.tab';
-			$specificLanguagePath = $plugin->getSpecificLanguagePath().$lang.'.tab';
+			$languagePath = $plugin->GetLanguagePath().$lang.'.tab';
+			$specificLanguagePath = $plugin->GetSpecificLanguagePath().$lang.'.tab';
 			if(file_exists($languagePath)) {
 				$this->loadLanguageFile($languagePath);
 			}
