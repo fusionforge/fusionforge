@@ -179,7 +179,7 @@ $group_list=implode($arr,',');
 echo '
 	<div align="center">
 	<form action="'.$PHP_SELF.'" method="post">
-	<input type="hidden" name="action" value="'.$Language->getText('admin_approve_pending','activate').'" />
+	<input type="hidden" name="action" value="activate" />
 	<input type="hidden" name="list_of_groups" value="'.$group_list.'" />
 	<input type="submit" name="submit" value="'.$Language->getText('admin_approve_pending','approve_all_on_this_page').'" />
 	</form></div>
