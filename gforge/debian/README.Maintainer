@@ -2,7 +2,15 @@ DEBIAN SOURCEFORGE MAINTAINER HOWTO
 -----------------------------------
 
 Here is a short HOWTO explaining a few of the tricks that are used by
-the Debian Sourceforge packages.
+the Debian Sourceforge packages.  
+
+ATTENTION TO NMUERS
+-------------------
+If you intend to NMU this package, *please* read it thoroughly.  While
+you can make it up as you do it as far as the helpers are organised,
+the database handling is, to say the least, very fragile.  And errors
+are fatal.  So go read the section entitled "THE DATABASE".  Do it
+now.  Don't skip it.  Really.
 
 HELPERS (DEBHELPER & DEBCONF)
 -----------------------------
@@ -120,5 +128,84 @@ code into one external file, and source it at run time, but that
 cannot work for .config, .preinst and .postrm scripts since they are
 executed when the package is not installed (not yet unpacked or
 already removed).
+
+THE DATABASE
+------------
+It is vitally important that extreme care be taken for changes in the
+database.  A smooth upgrade path has been provided so far by carefully
+sequencing the changes in the database and making sure they will not
+conflict with each other or some other trick.  This section is
+targetted at people who touch deb-specific/db-upgrade.pl.  Please read
+it thoroughly, and don't skip paragraphs.  A single mistake can be a
+nightmare to fix (and believe me, I know that).
+
+  The database, as created by the package, has a lot of tables for the
+software proper, plus one especially used to store a version of the
+database scheme.  That one table is named debian_meta_data, and
+contains two fields (named 'key' and 'value').  Two rows are currently
+used: the one for which the key is 'db-version', and the one for which
+the key is 'current-path'.  Together they store the current status of
+the database.
+
+  The value of 'current-path' is only used during the first
+installation of Sourceforge 2.6.  If that installation is done on a
+fresh machine, the value will be 'scratch-to-2.6'.  If the
+installation is done as an upgrade on Sourceforge 2.5, the value will
+be '2.5-to-2.6'.  In any case, when that first installation is
+completed, the row is deleted.  There's currently no other use for
+this row.
+
+  The value of 'db-version' is a string encoding a version.  The
+ordering method for these strings is the one provided by dpkg
+--compare-versions.  The values currently used more or less match the
+package versions, but you shouldn't depend on it.  Special procedures
+(upgrading from 2.5, or installing a fresh 2.6, or future cases maybe)
+involve names not corresponding to a package version.  They still must
+be ordered according to dpkg.
+
+  The database upgrader (db-upgrade.pl) can be seen as walking along a
+path.  Either that path is an explicit one (during first install or
+upgrade from 2.5), or it is the default one (upgrading betwen versions
+of 2.6).  In any case, the walking is made in steps.  Each step has a
+target version (where it leads) and a series of actions to perform to
+reach that target.  If the current version of the database is lesser
+than the target version, the actions are performed, and the current
+version is updated to the target version.  If not, that step is
+skipped.  It is very important that steps are attempted in the correct
+order (ascending order of target versions), otherwise steps will be
+skipped.  It is also very important that the actions are dependable.
+Generally, when executing the actions for step n, you can depend on
+the database being compliant with the last step before n.
+
+  Tip #1: don't assume things unless you are certain they are true.
+Don't assume some value is missing from a table simply because it's
+missing from yours.  Don't assume some value is available.
+
+  Tip #2: test your patch.  Install Sourceforge 2.6 from scratch.
+Install it over a freshly installed Sourceforge 2.5.  Install it over
+a previous version of Sourceforge 2.6.  If at all possible, install it
+over a non-empty database coming from 2.5, then do it again over a
+non-empty database of 2.6.  If *any* of these break, *don't upload*.
+Period.
+
+  Tip #3: remember, there's no way back.  Once your package has been
+installed by some user, the database version has irreversibly been
+bumped up.  While you can sometimes revert changes by hand on your
+local database, you can't provide a rollback for potential thousands
+of users (even it the actual number is more in the tens than in the
+thousands).
+
+  Tip #4: the db-upgrade.pl script has evolved over time to involve a
+few functions, such as get_db_version and update_db_version.  Use
+them.  Your best bet would be to cut and paste a block, change the
+$target, and change the actions.
+
+  Tip #5: pay attention to the ordering of the blocks.  You can't go
+back in time, so all your changes must be at the end of the series of
+actions.
+
+  There.  Thanks for reading.  I know it sounds boring, but I can
+guarantee you will avoid problems if you understand this.  Maybe not
+all problems, but definitely some of them.
 
   -- Roland Mas
