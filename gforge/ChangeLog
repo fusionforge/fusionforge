@@ -1,3 +1,18 @@
+2003-02-07 Reinhard Spisser <reinhard@spisser.it>
+
+	* www/softwaremap/trove_list.php,
+	www/include/languages/Base.tab,
+	www/include/languages/Italian.tab:
+	Localization of softwaremap
+
+	* www/top/*, www/include/languages/Base.tab,
+	www/include/languages/French.tab:
+	Submitting Philippe Kiener's patch for localization
+	of top/
+	
+	* www/include/languages/Italian.tab:
+	adding new strings for localization of top
+	
 2003-02-06 Reinhard Spisser <reinhard@spiser.it>
 
 	* www/include/project_home.php,
