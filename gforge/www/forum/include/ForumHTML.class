@@ -19,6 +19,7 @@
 */
 
 require_once('pre.php');
+require_once('note.php');
 require_once('www/news/news_utils.php');
 
 function forum_header($params) {
@@ -302,8 +303,8 @@ class ForumHTML extends Error {
 			<td><strong><?php echo $Language->getText('forum_utils','subject'); ?></strong><?php echo utils_requiredField(); ?><br />
 				<input type="text" name="subject" value="<?php echo $subject; ?>" size="45" maxlength="45" />
 			</td></tr>
-			<tr><td><strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo utils_requiredField(); ?><br />
-				<textarea name="body" rows="10" cols="50"></textarea>
+			<tr><td><strong><?php echo $Language->getText('forum_utils','message'); ?></strong><?php echo notepad_button('document.forms[1].body') ?><?php echo utils_requiredField(); ?><br />
+				<textarea name="body" rows="10" cols="50" wrap="soft"></textarea>
 			</td></tr>
 			<tr><td align="center">
 				<strong><font color="red"><?php echo $Language->getText('forum_utils','htmltag'); ?></font></strong>

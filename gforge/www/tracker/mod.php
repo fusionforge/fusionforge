@@ -170,8 +170,8 @@ if (session_loggedin()) {
 		echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;add_canned=1">('.$Language->getText('tracker','admin').')</a>';
 		?>
 		<p>
-		<strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
-		<textarea name="details" rows="7" cols="60" wrap="hard"></textarea></p>
+		<strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>:<?php echo notepad_button('document.forms[1].details') ?><a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
+		<textarea name="details" rows="7" cols="60" wrap="soft"></textarea></p>
 		<h3><?php echo $Language->getText('tracker','followups') ?>:</h3>
 		<?php
 			echo $ah->showMessages(); 

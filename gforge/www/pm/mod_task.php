@@ -16,6 +16,8 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
+require_once('note.php');
+
 pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 
 ?>
@@ -68,8 +70,8 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 		<strong><?php echo $Language->getText('pm_modtask','original_comment') ?>:</strong><br />
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p />
-		<strong><?php echo $Language->getText('pm_modtask','add_comment') ?>:</strong><br />
-		<textarea name="details" rows="5" cols="40"></textarea>
+		<strong><?php echo $Language->getText('pm_modtask','add_comment') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?><br />
+		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea>
 		</td>
 	</tr>
 

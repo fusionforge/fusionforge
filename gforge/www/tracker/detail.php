@@ -65,8 +65,9 @@ if (session_loggedin()) {
 			<input type="hidden" name="func" value="postaddcomment">
 			<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 			<p>
-			<strong><?php echo $Language->getText('tracker_detail','add_comment') ?>:</strong><br />
-			<textarea name="details" ROWS="10" COLS="60" WRAP="HARD"></textarea>
+			<strong><?php echo $Language->getText('tracker_detail','add_comment') ?>:</strong> 
+			<?php echo notepad_button('document.forms[1].details') ?><br />
+			<textarea name="details" ROWS="10" COLS="60" WRAP="SOFT"></textarea>
 		</td></tr>
 
 		<tr><td colspan="2">

@@ -54,9 +54,9 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	</td></tr>
 
 	<tr><td colspan="2">
-		<strong><?php echo $Language->getText('tracker','detailed_description') ?>:</strong><?php echo utils_requiredField(); ?>
+		<strong><?php echo $Language->getText('tracker','detailed_description') ?>:</strong><?php echo notepad_button('document.forms[1].details') ?> <?php echo utils_requiredField(); ?>
 		<p>
-		<textarea name="details" rows="30" cols="79" wrap="hard"></textarea></p>
+		<textarea name="details" rows="30" cols="79" wrap="soft"></textarea></p>
 	</td></tr>
 
 	<tr><td colspan="2">

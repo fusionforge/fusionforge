@@ -1,5 +1,12 @@
 2003-11-04  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/notepad.php, www/include/note.php: New files.  *
+	www/forum/include/ForumHTML.class, www/pm/add_task.php,
+	www/pm/mod_task.php, www/tracker/add.php, www/tracker/detail.php,
+	www/tracker/index.php, www/tracker/mod.php: Patch #559 from
+	Hidenari Miwa and Tsutomu Tominaga: add pop-up window providing a
+	larger editing area for texts.  Thanks, guys!
+
 	* www/tracker/reporting/index.php: Fix highlighted tab when
 	viewing tracker reports (patch #565 from Francisco Gimeno).
 
