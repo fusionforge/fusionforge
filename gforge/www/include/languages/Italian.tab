@@ -19,9 +19,7 @@
 #  * 2003-02-04 rspisser <reinhard@spisser.it>
 #  *		localization of the tracker
 #  */
-
-
-
+#
 error	title	Pagina richiesta non trovata (Errore 404)
 error	text	PAGINA NON TROVATA
 error	error_creating	Errore nella creazione
@@ -73,7 +71,6 @@ account_lostpw	warn	<P>Attenzione... perdere la propria password &egrave; una qu
 account_lostpw	sendhash	Invia Hash di password persa
 account_lostpw	invalid_user	Utente non valido
 account_lostpw	user_dont_exist	L'utente specificato non esiste
-
 account_lostlogin	severalconfirm	Il hash di conferma esiste pi&ugrave; volte.
 account_lostlogin	invalidconfirm	Il hash di conferma non &egrave; valido.
 account_lostlogin	sixchars	La password deve essere valida  (minimo 6 caratteri).
@@ -271,7 +268,7 @@ forum_admin_changestatus	status	Stato
 forum_admin_delete_messages	messages_deleted	$1 messaggi cancellati
 forum_admin_delete	section	Amministrazione forum
 forum_admin_delete	title	Cancella forum
-forum_admin_delete_message	section Amministrazione forum
+forum_admin_delete_message	section	Amministrazione forum
 forum_admin_delete_message	title	Cancella un messaggio
 forum_admin_delete_message	warning	ATTENZIONE! Stai per cancellare in modo permanente il messaggio e tutte le risposte!!
 forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da cancellare
@@ -1151,11 +1148,11 @@ stats_projects	project_comparision	Comparazioni statistiche dei progetti
 stats_site_utils	all_projects	Tutti i progetti
 stats_site_utils	special_project_list	Special Project List
 stats_site_utils	returned_no_category	returned no category name
-stats_site_utils 	in_trove_category	Projects in trove category:
+stats_site_utils	in_trove_category	Projects in trove category:
 stats_site_utils	or_special_project_list	OR enter Special Project List: 
 stats_site_utils	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
 stats_site_utils	report	Report: 
-stats_site_utils	last_30 ultimi 30
+stats_site_utils	last_30	ultimi 30
 stats_site_utils	all	tutti
 stats_site_utils	view_by	Visualizza per: 
 stats_site_utils	generate_report	Genera Report
@@ -1182,7 +1179,7 @@ stats_site_utils	day	Giorno
 stats_site_utils	site_views	Viste del sito
 stats_site_utils	subdomain_views	Vista per sottodomino
 stats_site_utils	no_data	Nessun dato
-stats_site_utils	statistics_for_the_past_months Statistiche per gli ultimi $1 mesi
+stats_site_utils	statistics_for_the_past_months	Statistiche per gli ultimi $1 mesi
 stats_site_utils	month	Month
 stats_site_utils	current_statistic_all_time	Statistiche aggregate 
 stats_site_utils	developers	Sviluppatori
@@ -1500,7 +1497,7 @@ admin_trove_cat_edit	new_category_full_name	Nome completo categoria (VARCHAR 80)
 admin_trove_cat_edit	new_category_description	Descrizione categoria (VARCHAR 255)
 admin_trove_cat_edit	update	Aggiorna
 admin_trove_cat_edit	delete	Cancella
-admin_trove_cat_add	error_in_trove_openration Error	In Trove Operation
+admin_trove_cat_add	error_in_trove_openration	Error	In Trove Operation
 admin_trove_cat_add	title	Amministrazione Sito: Trove - Add Node
 admin_trove_cat_add	add_new_trove_category	Add New Trove Category
 admin_trove_cat_add	parent_category	Categoria padre
@@ -1553,7 +1550,7 @@ admin_massmail	active_deliveries	Active deliveries
 admin_massmail	be_verry_carefull	Be <span style="color:red"><strong>VERY</strong></span> careful with this form, because submitting it WILL lead to sending email to lots of users.
 admin_massmail	select	(seleziona)
 admin_massmail	subscribers_to_site_updates	Subscribers to "Site Updates"
-admin_massmail 	subscribers_to_additional_community Subscribers to "Additional Community Mailings"
+admin_massmail	subscribers_to_additional_community	Subscribers to "Additional Community Mailings"
 admin_massmail	all_project_developers	All Project Developers
 admin_massmail	all_project_admins	All Project Admins
 admin_massmail	all_users	All Users
@@ -2286,8 +2283,7 @@ help_tracker	status	This drop-down box represents the current status of a tracke
 help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
 help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
 help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
-help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which
-one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
+help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
 help_tracker	data_type	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
 help_tracker	resolution	The resolution option represents a tracker items resolution if any.
 help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.

@@ -30,15 +30,15 @@ account_change_pw	not_valid_password	Je moet een geldig wachtwoord ingeven (mini
 account_change_pw	old_password		Oude Wachtwoord
 account_change_pw	old_password_incorrect	Het oude wachtwoord is incorrect
 account_change_pw	passwords_dont_match	Nieuwe Wachtwoorden komen niet overeen.
-account_change_pw	sectie 			Account Voorkeuren
-account_change_pw	title			Wijzig Wachtwoord
-#account_change_pw	update			Update Wachtwoord
+account_change_pw	section	Account Voorkeuren
+account_change_pw	title	Wijzig Wachtwoord
+#account_change_pw	update	Update Wachtwoord
 account_change_pw_changed	return_to	Je zou nu $1 terugkeren naar UserPrefs $2.
 account_change_pw_changed	title		Wachtwoord Succesvol Gewijzigd
-account_editsshkeys	sectie 			Account Voorkeuren
-account_editsshkeys	title			Bewerk de CVS/SSH Shared Keys
-account_first	about_blurb			<p>Je bent nu een geregistreerde gebruiker van $1, de online ontwikkel omgeving voor Open Source projecten.</p><p>Als een geregistreerde gebruike kan je volledig deelnemen aan de activiteiten op de site. Je kan nu boodschappen posten in de project forums, bugs melden voor software in $1, je aanmelden als project ontwikkelaar, of je eigen project starten.</p><p>We adviseren dat je in iedere geval de <a href="/docs/site/"><b>Site Documentatie</b></a> doorleest zodat je voldoende informatie hebt om volledig gebruik te maken van $1.</p><p>Veel plezier, en schroom niet om feedback te geven zodat we $1 kunnen blijven verbeteren.</p><p>--the $1 staff.</p>
-account_first	title				Welkom bij $1
+account_editsshkeys	section	Account Voorkeuren
+account_editsshkeys	title	Bewerk de CVS/SSH Shared Keys
+account_first	about_blurb	<p>Je bent nu een geregistreerde gebruiker van $1, de online ontwikkel omgeving voor Open Source projecten.</p><p>Als een geregistreerde gebruike kan je volledig deelnemen aan de activiteiten op de site. Je kan nu boodschappen posten in de project forums, bugs melden voor software in $1, je aanmelden als project ontwikkelaar, of je eigen project starten.</p><p>We adviseren dat je in iedere geval de <a href="/docs/site/"><b>Site Documentatie</b></a> doorleest zodat je voldoende informatie hebt om volledig gebruik te maken van $1.</p><p>Veel plezier, en schroom niet om feedback te geven zodat we $1 kunnen blijven verbeteren.</p><p>--the $1 staff.</p>
+account_first	title	Welkom bij $1
 account_login	cookiewarn			Cookies moeten hierna toegestaan zijn in je browser.
 account_login	deleted_account		<p>Jouw $1 account is verwijderd door de  $1 beheerders. Dit kan gedaan zijn vanwege twee redenen 1) Je hebt zelf verzocht om je account te verwijderen; of 2) Er is een activiteit uitgevoerd vanaf jouw account die als onbehoorlijk wordt beschouwd (m.a.w. je hebt de terms of service overtreden m.b.t. het gebruik van je account) en je account is verwijderd wegens administratieve redenen. Mocht je vragen of opmerkingen hebben hierover maak dan alsjeblieft een <a href="/support/?group_id=1">support verzoek</a> aan.</p><p>Bedankt, <br><br>de $1 beheerders</p>
 account_login	iewarn				<H2><FONT COLOR="RED">Internet Explorer gebruikers moeten upgraden naar IE 5.01 of hoger, bij voorkeur met 128-bit SSL encryptie of overstappen op Netscape 4.7 of hoger</FONT></H2>
@@ -2123,7 +2123,7 @@ survey_utils	show_results			Vertoon Resultaten
 #system	datefmt					Y-m-d H:i
 #system	locale					en_US
 #system	strftimefmt				%Y %B %e  %H:%M
-themes	sectie 					Account Voorkeuren
+themes	section	Account Voorkeuren
 #themes	title					View/Change Theme
 #top	NA					N/A
 #top	about_blurb				We track many project usage statistics on $1, and display here the top ranked projects in several categories.

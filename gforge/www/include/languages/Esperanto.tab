@@ -18,7 +18,7 @@
 # 2000-10-26  FAGOT Alain  <kameleono@users.sourceforge.net>
 #	* surbaze de jam ekzistanta traduko, gxustigoj laux
 #	Komputada Leksikono (spelling/lexical corrections)
-
+#
 about_foundries	about_blurb	Pri fandejoj
 menu	about_gforge	Pri GForge
 menu	account_maintenance	Modifu konton
@@ -54,7 +54,7 @@ group	short_docman	Dokumentoj
 group	short_files	Filesgroup	short_forum	Forumoj
 group	short_homepage	Hejmpaĝo
 group	short_mail	Listoj
-group	short_main 	Ĉefa paĝo
+group	short_main	Ĉefa paĝo
 group	short_news	Novaĵoj
 group	short_patch	Flikoj
 group	short_pm	Taskoj

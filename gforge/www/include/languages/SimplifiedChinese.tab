@@ -264,7 +264,7 @@ forum_common_forummessage	error_not_logged	发帖子之前必须登录
 forum_common_forummessage	error_posting_failed	ForumMessage::create() 张贴失败
 forum_common_forummessage	error_get_message_id	ForumMessage::create() 无法获得帖子编号
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() 无效的帖子编号
-forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() 无效的ParentMessage 对象
+forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() 无效的ParentMessage 对象
 forum_common_forummessage	error_getting_next_thread	无法获取下一个thread_id 
 forum_common_forummessage	error_cannot_update_parent	无法更新父帖子
 forum_common_forummessage	error_cannot_update_master_thread	目前无法更新主线Master Thread parent 
@@ -275,7 +275,7 @@ forum_admin	title	论坛：管理
 forum_admin	add_forum	增加论坛
 forum_admin	delete_message	删除帖子
 forum_admin	update_forum	更新论坛信息/状态
-forum_admin_addforum	section 论坛管理
+forum_admin_addforum	section	论坛管理
 forum_admin_addforum	title	增加论坛
 forum_admin_addforum	forum_created	论坛创建成功
 forum_admin_addforum	existing_forums	论坛已存在
@@ -286,7 +286,7 @@ forum_admin_addforum	allow_anonymous	允许匿名发帖子？
 forum_admin_addforum	email_posts	将帖子用Email发送到：
 forum_admin_addforum	add_forum	增加该论坛
 forum_admin_delete_messages	messages_deleted	$1 帖子已删除
-forum_admin_changestatus	section 论坛管理
+forum_admin_changestatus	section	论坛管理
 forum_admin_changestatus	title	改变论坛状态
 forum_admin_changestatus	update_successful	论坛信息更新成功
 forum_admin_changestatus	no_forums_found	没发现论坛
@@ -295,7 +295,7 @@ forum_admin_changestatus	forum	论坛
 forum_admin_changestatus	status	状态
 forum_admin_delete	section	论坛管理
 forum_admin_delete	title	删除论坛
-forum_admin_delete_message	section 论坛管理
+forum_admin_delete_message	section	论坛管理
 forum_admin_delete_message	title	删除帖子
 forum_admin_delete_message	warning	警告！您打算永久地删除一个帖子以及所有对它的回复！！
 forum_errors	error_getting_forum	获取论坛出错
@@ -478,7 +478,7 @@ group	short_files	文件
 group	short_forum	论坛
 group	short_homepage	首页
 group	short_mail	邮件列表
-group	short_main 	主要
+group	short_main	主要
 group	short_memberlist	开发者
 group	short_news	新闻
 group	short_patch	补丁
