@@ -104,7 +104,7 @@ echo '<table width="10%" BORDER="0">
 		<td><font size="-1">Category:<br>'. $cat_box .'</td>
 		<td><font size="-1">Sort On:<br>'. $order_box .'</td>
 		<td><font size="-1"><input type="SUBMIT" name="SUBMIT" value="Browse"></td>
-	</tr></form></table>';
+	</tr></form></table><p>';
 
 
 $rows=count($pt_arr);
@@ -125,11 +125,6 @@ if ($rows < 1) {
 	/*
 		Now display the tasks in a table with priority colors
 	*/
-
-	echo '
-		<br>
-		<h3>Browsing Tasks In '. $pg->getName() .'</h3>';
-
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 

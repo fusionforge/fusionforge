@@ -19,7 +19,7 @@
 require_once('common/pm/ProjectGroup.class');
 
 function pm_header($params) {
-	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order;
+	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order,$pg;
 
 	//required by site_project_header
 	$params['group']=$group_id;
@@ -37,6 +37,9 @@ function pm_header($params) {
 
 	site_project_header($params);
 
+	if ($pg) {
+		echo "<h3>Project: ". $pg->getName() ."</h3>";
+	}
 	echo "<p><b>";
 
 	if ($group_project_id) {
