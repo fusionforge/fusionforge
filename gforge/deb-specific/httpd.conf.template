@@ -201,8 +201,8 @@ Include /etc/gforge/httpd.common
     Options FollowSymLinks
   </Directory>
 
-  Alias /doc/mailman/images /usr/share/doc/mailman/images
-  <Location /doc/mailman/images>
+  Alias /images/mailman /usr/share/images/mailman
+  <Location /images/mailman>
     order allow,deny
     allow from all
   </Location>
@@ -246,8 +246,8 @@ Include /etc/gforge/httpd.common
     Options FollowSymLinks
   </Directory>
 
-  Alias /doc/mailman/images /usr/share/doc/mailman/images
-  <Location /doc/mailman/images>
+  Alias /images/mailman /usr/share/images/mailman
+  <Location /images/mailman>
     order allow,deny
     allow from all
   </Location>
