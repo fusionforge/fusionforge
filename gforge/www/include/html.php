@@ -520,11 +520,14 @@ function site_user_header($params) {
 	echo html_feedback_top($GLOBALS['feedback']);
 	echo ($HTML->BeginSubMenu());
 	echo ($HTML->PrintSubMenu(
-		      array($Language->getText('menu','my_personal_page'),
-			    $Language->getText('menu','diary_notes'),
-			    $Language->getText('menu','account_maintenance'),
-			    $Language->getText('menu','register_project')),
-		      array('"/my/"','"/my/diary.php"','"/account/"','"/register/"')));
+		array($Language->getText('menu','my_personal_page'),
+			$Language->getText('menu','diary_notes'),
+			$Language->getText('menu','account_maintenance'),
+			$Language->getText('menu','register_project')),
+		array('"/my/"',
+			'"/my/diary.php"',
+			'"/account/"',
+			'"/register/"')));
 	plugin_hook ("usermenu", false) ;
 	echo ($HTML->EndSubMenu());
 }
