@@ -799,10 +799,10 @@ function valid_hostname ($hostname = "xyz") {
  *                  10^3(base10==true) multiple of base units
  */
 function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array(' bytes',  ' KB', ' MB', ' GB')) {
-	if (($bytes <= 0) || (! is_array($labels)) || (count($labels) <= 0)) {
+	if ($bytes <= 0 || !is_array($labels) || (count($labels) <= 0)) {
 		return null;
 	}
-	$step = $base10 ? 3 : 10 ;
+	$step = $base10 ? 3 : 10;
 	$base = $base10 ? 10 : 2;
 	$log = (int)(log10($bytes)/log10($base));
 	krsort($labels);
@@ -810,6 +810,9 @@ function human_readable_bytes ($bytes, $base10=false, $round=0, $labels=array(' 
 		$pow = $p * $step;
 		if ($log < $pow) {
 			continue;
+		}
+		if ($lab == " MB") {
+			$round = 2;
 		}
 		$text = round($bytes/pow($base,$pow),$round).$lab;
 		break;
