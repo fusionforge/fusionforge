@@ -1,3 +1,7 @@
+2004-02-09  Tom Copeland <tom@infoether.com>
+	* Implemented RFE [ #657 ] Trove Deletion Error
+	 Message Unclear - Could Improve
+
 2004-02-09  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* Implemented a new search engine architecture
