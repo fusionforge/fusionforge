@@ -16,6 +16,8 @@ configure-stamp:
 
 	# Remove files in contrib, especially binaries that break dpkg-source
 	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
+	# Also a few images
+	rm www/themes/gforge/images/es_*
 
 	touch configure-stamp
 
