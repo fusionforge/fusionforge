@@ -7,7 +7,7 @@
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * This file is copyright (c) Roland Mas <lolando@debian.org>, 2002
  *
- * $Id$
+ * @version   $Id$
  *
  */
 
@@ -16,6 +16,10 @@ class PluginManager extends Error {
 	var $plugins_to_hooks ;
 	var $hooks_to_plugins ;
 
+	/**
+	 * PluginManager() - constructor
+	 *
+	 */
 	function PluginManager () {
 		$this->Error() ;
 		$this->plugins_objects = array () ;
@@ -23,6 +27,11 @@ class PluginManager extends Error {
 		$this->hooks_to_plugins = array () ;
 	}
 
+	/**
+	 * GetPlugins() - get a list of installed plugins
+	 *
+	 * @return hash of plugin id => plugin names
+	 */
 	function GetPlugins () {
 		if (!isset($this->plugins_data)) {
 			$this->plugins_data = array () ;
@@ -38,6 +47,12 @@ class PluginManager extends Error {
 		return $this->plugins_data ;
 	}
 
+	/**
+	 * PluginIsInstalled() - is a plugin installed?
+	 *
+	 * @param pluginname - name of plugin
+	 * @return boolean, true if installed
+	 */
 	function PluginIsInstalled ($pluginname) {
 		$plugins_data = $this->getPlugins() ;
 		foreach ($plugins_data as $p_id => $p_name) {
@@ -48,6 +63,10 @@ class PluginManager extends Error {
 		return false ;
 	}
 
+	/**
+	 * LoadPlugins() - load available plugins
+	 *
+	 */
 	function LoadPlugins () {
 		$plugins_data = $this->GetPlugins() ;
 		$include_path = "/usr/lib/sourceforge/plugins/" ;
@@ -60,6 +79,10 @@ class PluginManager extends Error {
 		return true ;
 	}
 
+	/**
+	 * SetupHooks() - setup all hooks for installed plugins
+	 *
+	 */
 	function SetupHooks () {
 		foreach ($this->plugins_to_hooks as $p_name => $hook_list) {
 			foreach ($hook_list as $hook_name) {
@@ -72,6 +95,11 @@ class PluginManager extends Error {
 		return true ;
 	}
 
+	/**
+	 * RegisterPlugin() - register a plugin
+	 *
+	 * @param pluginobject - an object of a subclass of the Plugin class
+	 */
 	function RegisterPlugin (&$pluginobject) {
 		if (!$pluginobject->GetName ()) {
 			exit_error ("Some plugin did not provide a name.  I'd gladly tell you which one, but obviously I can't.  Sorry.") ;
@@ -82,6 +110,12 @@ class PluginManager extends Error {
 		return true ;
 	}
 
+	/**
+	 * RunHooks() - call hooks from a particular point
+	 *
+	 * @param hookname - name of the hook
+	 * @param params - array of extra parameters
+	 */
 	function RunHooks ($hookname, $params) {
 		echo "\n<!-- Starting hook $hookname -->" ;
 		$p_list = $this->hooks_to_plugins[$hookname] ;
@@ -98,6 +132,11 @@ class PluginManager extends Error {
 	}
 }
 
+/**
+ * plugin_manager_get_object() - get the PluginManager object
+ *
+ * @return the PluginManager object
+ */
 function &plugin_manager_get_object() {
 	global $PLUGINMANAGER_OBJ;
 	if (!isset($PLUGINMANAGER_OBJ) || !$PLUGINMANAGER_OBJ) {
@@ -106,24 +145,37 @@ function &plugin_manager_get_object() {
 	return $PLUGINMANAGER_OBJ ;
 }
 
+/**
+ * register_plugin () - register a plugin
+ *
+ * @param pluginobject - an object of a subclass of the Plugin class
+ */
 function register_plugin (&$pluginobject) {
 	$pm =& plugin_manager_get_object () ;
 	return $pm->RegisterPlugin ($pluginobject) ;
 }
 
+/**
+ * plugin_hook () - run a set of hooks
+ *
+ * @param hookname - name of the hook
+ * @param params - parameters for the hook
+ */
 function plugin_hook ($hookname, $params=false) {
 	$pm =& plugin_manager_get_object () ;
 	return $pm->RunHooks ($hookname, $params) ;
 }
 
+/**
+ * setup_plugin_manager () - initialise the plugin ingrastructure
+ *
+ */
 function setup_plugin_manager () {
 	$pm =& plugin_manager_get_object() ;
 	$pm->LoadPlugins () ;
 	$pm->SetupHooks () ;
 	return true ;
 }
-
-setup_plugin_manager () ;
 
 // Local Variables:
 // mode: php

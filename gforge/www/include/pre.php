@@ -91,6 +91,8 @@ if (!$conn) {
 require_once('common/include/Plugin.class') ;
 require_once('common/include/PluginManager.class') ;
 
+setup_plugin_manager () ;
+
 //determine if they're logged in
 session_set();
 

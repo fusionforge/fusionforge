@@ -15,20 +15,40 @@ class Plugin extends Error {
 	var $name ;
 	var $hooks ;
 
+	/**
+	 * Plugin() - constructor
+	 *
+	 */
 	function Plugin () {
 		$this->Error() ;
 		$this->name = false ;
 		$this->hooks = array () ;
 	}
 
+	/**
+	 * GetHooks() - get list of hooks to subscribe to
+	 *
+	 * @return List of strings
+	 */
 	function GetHooks () {
 		return $this->hooks ;
 	}
 
+	/**
+	 * GetName() - get plugin name
+	 *
+	 * @return the plugin name
+	 */
 	function GetName () {
 		return $this->name ;
 	}
 
+	/**
+	 * CallHook() - call a particular hook
+	 *
+	 * @param hookname - the "handle" of the hook
+	 * @param params - array of parameters to pass the hook
+	 */
 	function CallHook ($hookname, $params) {
 		return true ;
 	}
