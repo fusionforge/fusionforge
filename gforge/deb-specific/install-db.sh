@@ -30,8 +30,15 @@ case "$target" in
 	ip_address=$(grep ^ip_address= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_name=$(grep ^db_name= /etc/gforge/gforge.conf | cut -d= -f2-)
 	db_user=$(grep ^db_user= /etc/gforge/gforge.conf | cut -d= -f2-)
+	db_host=$(grep ^db_host= /etc/gforge/gforge.conf | cut -d= -f2-)
 	pattern=$(basename $0).XXXXXX
 	pg_version=$(dpkg -s postgresql | awk '/^Version: / { print $2 }')
+	if [ "$db_host" == "127.0.0.1" -o "$db_host" == "localhost" ]
+	then
+		# Otherwise the line wouldn't be used
+		# And postgres auth would fail
+		ip_address=127.0.0.1
+	fi
 	if dpkg --compare-versions $pg_version lt 7.3 ; then
             # PostgreSQL configuration for versions prior to 7.3
 	    echo "Configuring for PostgreSQL 7.2"
