@@ -303,6 +303,7 @@ UseCanonicalName Off
 	ServerAlias *.gforge.company.com
 	VirtualDocumentRoot /home/groups/%1/htdocs
         VirtualScriptAlias /home/groups/%1/cgi-bin
+	DirectoryIndex index.html index.php
         <Directory /home/groups>
                Options Indexes FollowSymlinks
                AllowOverride All
