@@ -72,7 +72,9 @@ EOF
 update pg_shadow set passwd='$db_passwd' where usename='gforge' ;
 EOF
 	    # Remove old password file
-	    [ -e /var/lib/postgres/data/gforge_passwd ] && rm -f /var/lib/postgres/data/gforge_passwd
+	    if [ -e /var/lib/postgres/data/gforge_passwd ] ; then
+		rm -f /var/lib/postgres/data/gforge_passwd
+	    fi
 
 	fi
 	;;
