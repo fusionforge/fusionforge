@@ -35,6 +35,8 @@ sourceforge (2.6-0+12+) unstable; urgency=low
   * [Roland] Applied patch #417 from Chris Rudd <chris@omegaware.com>
     (very slightly modified) to spread the use of the util_send_mail()
     function.  Thanks, Chris.
+  * [Roland] Also applied patch #418 from same Chris Rudd to help
+    portability on Cygwin platforms.  Thanks, Chris.
 
  --
 
