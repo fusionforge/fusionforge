@@ -76,23 +76,21 @@ function html_dbimage($id, $args=0) {
 	if (!$result || $rows < 1) {
 		return db_error();
 	} else {
-		return html_image('/dbimage.php?id='.$id.'&v='.db_result($result,0,'version'),db_result($result,0,'width'),db_result($result,0,'height'),$args);
+		return html_abs_image('/dbimage.php?id='.$id.'&amp;v='.db_result($result,0,'version'),db_result($result,0,'width'),db_result($result,0,'height'),$args);
 	}
 }
 
 /**
- * html_image() - Build an image tag of an image contained in $src
+ * html_abs_image() - Show an image given an absolute URL.
  *
- * @param		string	The source location of the image
- * @param		int		The width of the image
- * @param		int		The height of the image
- * @param		array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
- * @param		bool	DEPRECATED
+ * @param		string	URL
+ * @param		int	width of the image
+ * @param		int 	height of the image
+ * @param		array	Any <img> tag parameters (i.e. 'border', 'alt', etc...)
  */
-function html_image($src,$width,$height,$args,$display=1) {
-	global $sys_images_url,$sys_images_secure_url,$HTML;
-	$s = ((session_issecure()) ? $sys_images_secure_url : $sys_images_url );
-	$return = ('<img src="' . $s . $HTML->imgroot . $src .'"');
+function html_abs_image($url, $width, $height, $args)
+{
+	$return = ('<img src="' . $url . '"');
 	reset($args);
 	while(list($k,$v) = each($args)) {
 		$return .= ' '.$k.'="'.$v.'"';
@@ -113,6 +111,21 @@ function html_image($src,$width,$height,$args,$display=1) {
 
 	$return .= (' />');
 	return $return;
+}
+
+/**
+ * html_image() - Build an image tag of an image contained in $src
+ *
+ * @param		string	The source location of the image
+ * @param		int		The width of the image
+ * @param		int		The height of the image
+ * @param		array	Any IMG tag parameters associated with this image (i.e. 'border', 'alt', etc...)
+ * @param		bool	DEPRECATED
+ */
+function html_image($src,$width,$height,$args,$display=1) {
+	global $sys_images_url,$sys_images_secure_url,$HTML;
+	$s = ((session_issecure()) ? $sys_images_secure_url : $sys_images_url );
+	return html_abs_image($s.$HTML->imgroot.$src, $width, $height, $args);
 }
 
 /**

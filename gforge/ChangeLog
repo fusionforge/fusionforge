@@ -1,5 +1,10 @@
 2003-03-01  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	Bug #229
+	* www/include/html.php(html_abs_image): new function.
+	(html_dbimage): use html_abs_image().  XHTML-ify URL.
+	(html_image): use html_abs_image().
+
 	* www/my/bookmark_add.php: valid XHTML 1.0 Transitional.
 
 	* www/my/bookmark_delete.php: do not go to a separate page and
