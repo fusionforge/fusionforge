@@ -213,7 +213,7 @@ function html_build_select_box_from_assoc ($arr,$select_name,$checked_val='xzxz'
  * @param	string	The value of the item that should be checked.
  */
 function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz',$samevals = 0) {
-	$return .= '
+	$return = '
 		<select name="'.$select_name.'">';
 
 	$rows=count($vals);
@@ -274,6 +274,8 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
 	if (count($texts) != $rows) {
 		$return .= 'ERROR - uneven row counts';
 	}
+
+	$checked_found=false;
 
 	for ($i=0; $i<$rows; $i++) {
 		//  uggh - sorry - don't show the 100 row
