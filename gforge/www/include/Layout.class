@@ -306,6 +306,11 @@ if (isset($params['group']) && $params['group']) {
 
 			<!-- end main body row -->
 
+			<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+			<center>
+			<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Environment" border="0" /></a>
+			</center>
+
 
 				</td>
 				<td width="10" bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
