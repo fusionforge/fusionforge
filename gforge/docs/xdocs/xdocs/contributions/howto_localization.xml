@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Gforge: Localization</title>
+  </properties>
+
+  <body>
+
+
+<section name="Localizing Gforge">
+<p>
+Gforge has been engineered to allow internationalization; the user interface can be viewed and translated in any language.
+<p/>
+The language files are located in the <code>www/include/languages</code> directory.
+<p/>
+
+</p>
+</section>
+<section name="Adding a new language">
+<p>
+These are the steps to add a new language:
+<ol>
+<li>add a row in the <code> supported_languages</code> table in the gforge database:<p/>
+<code>
+
+INSERT INTO SUPPORTED_LANGUAGES (language_id, name, filename, classname, language_code)   VALUES (NEXTVAL('"supported_langu_language_id_seq"'::text), 'German (Austria)', 'Austrian.class', 'Austrian', 'AT');
+
+</code>
+<br/>
+Note that the language_code should follow the international language codings.
+</li>
+<li>Copy the file Base.tab to  Austrian.tab and place it in the
+<code>www/languages/include</code> folder
+
+</li>
+<li>Translate the document</li>
+<li>Submit the translation to the gforge project</li>
+
+</ol>
+
+</p>
+</section>
+<section name="How to localize an existing application">
+<p>
+To localize an existing application, all hard-coded strings in the application must be removed with the corrisponding <code>getText()</code> calls.
+<p/>
+Follow the steps:
+<ol>
+<li>Open Base.tab and add a new entry to the file.<br/>
+The base translation file has, for each line, 3 arguments: module name, locale_label locale_string. You should use a unique name for your module (e.g. forum, tracker, etc), a name for your label (e.g. Title) and the string. E.g. for the title of the forum, you should insert: forum\t title\t Discussion Forums </li>.
+<li>Replace the text in the source code with the call $HTML->getText('forum','title')</li>
+</ol>
+</p>
+
+</section>
+</body>
+</document>

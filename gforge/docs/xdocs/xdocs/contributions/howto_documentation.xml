@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Gforge: Documentation</title>
+   <author email="reinhard@spisser.it">Reinhard Spisser</author>
+  
+  </properties>
+
+  <body>
+
+
+<section name="Writing Documentation for Gforge">
+<p>
+The documentation for the GForge is written in the xdoc format. It is a simple markup language, based on xml.
+<p/>
+xdoc has some big advantages over writing documents in other formats, like html, doc, etc:
+<ol>
+<li>simple to use: the markup language is very simple, with only a small number of tags. It is easy to learn</li>
+<li>multiple output: .html, .pdf, .txt, .ps files can be easily generated from one source file</li> 
+<li>platform independent, language independent, application independent: xml documents are not dependent on specific platforms</li>
+</ol>
+
+
+</p>
+</section>
+<section name="Writing a xdoc">
+<p>
+All xdoc documents should start with the following header:
+
+<source><![CDATA[
+
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+   <author email="your email address">Your name</author>
+  
+    <title>Document title</title>
+  </properties>
+
+  <body>
+
+]]></source>
+
+and end with the following instructions:
+
+<source><![CDATA[
+
+</body>
+</document>
+
+]]></source>
+<br/>
+The xdoc can contain the following tags:
+<ol>
+<li>Section definitions using the <code>section</code> tag</li>
+<li>Ordered lists and unordered lists using <code>ol</code> and <code>ul</code></li>
+<li>code formatting using the <code>source</code> and <code>code</code></li>
+<li>paragraph definitions using the <code>p</code> tag</li>
+<li>line breaks using the <code>br</code> tag</li>
+<li>text formatting using <code>b</code> and <code>i</code> tags</li>
+</ol>
+<br/>
+You can also use html-style tables in your xdoc, this tables will be converted only to html (not to pdf).
+<br/>
+<source><![CDATA[
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+   <author email="John Foo">John Foo</author>
+  
+    <title>Gforge usage</title>
+  </properties>
+
+  <body>
+  <section name="Menu items">
+  <p>
+  Gforge has the following menu items:
+  <ol>
+  <li><b>Project help<b><br/>
+    Here you can obtain <i>help for your Project</i>!</li>
+
+  </ol>
+  </p>
+  </section>
+
+  </body>
+  </document>
+
+]]></source>
+</p>
+
+</section>
+<section name="How to generate pdf and html">
+<p>
+We are currently using <a href="http://jakarta.apache.org/turbine/maven/">maven</a> to create the documentation. 
+<p/>
+the docs/xdocs folder contains all information/files needed to create the output formats. To create the pdf documentation, type
+<p/>
+<source><![CDATA[
+maven pdf
+
+]]></source>
+<p/>
+To create the html documentation, type:
+
+<source><![CDATA[
+maven 
+
+]]></source>
+<p/>
+The documentation will be created in the <code>target/docs</code> subdirectory.
+</p>
+</section>
+</body>
+</document>

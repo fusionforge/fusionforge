@@ -34,5 +34,13 @@
    <item name="Project Help" href="/user_guide/side_wide/project_help.html"/>
 
    </menu> 
+  <menu name="Contributing">
+   <item name="How to Contribute" href="/contributions/howto_contribute.html"/>
+   <item name="Coding Standards" href="/contributions/coding_standards.html"/>
+   <item name="Templating" href="/contributions/templating.html"/>
+   <item name="Documentation" href="/contributions/howto_documentation.html"/>
+   <item name="Localization" href="/contributions/howto_localization.html"/>
+   <item name="XHtml compliance" href="/contributions/howto_xhtml.html"/>
+ </menu>
   </body>
 </project>

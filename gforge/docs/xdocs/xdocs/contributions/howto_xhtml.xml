@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <title>Gforge: XHtml compliance</title>
+  </properties>
+
+  <body>
+
+
+<section name="How to obtain Xhtml compliance for Gforge">
+<p>
+The complete Xhtml specification is available at <a href="http://www.w3.org/TR/xhtml1/">xhtml specification at w3c.org</a>
+
+Here is listed a summary of what is needed to be XHTML compliant:
+
+<ol>
+<li><b>xml declaration</b><br/>
+all pages should have the following xml declaration:
+
+<source><![CDATA[
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+]]></source>
+
+</li>
+<li><b>document must be well-formed</b><br/>
+all open tags must be closed, all tags must stay between &lt; and &gt;
+</li>
+<li><b>all tags must be lowercase</b><br/>
+
+ <code>&lt;HTML&gt; </code> must be converted to  <code>&lt;html&gt; </code>
+
+</li>
+<li><b>empty tags must be closed</b><br/>
+No standalone <code>&lt;br&gt; </code> tag is allowed; <code>  &lt;br/&gt;</code> must be used.
+</li>
+<li><b>attributes must always be quoted</b><br/>
+
+ <code>&lt;td rowspan=3&gt; </code> must be converted to  <code>&lt;rowspan="3"&gt; </code>
+
+</li>
+</ol>
+<p/>
+The differences listed here are the most significant differences between HTML and XHTML, there are other, minor differences. For a complete list, refer to the XMLT specification.
+</p>
+</section>
+</body>
+</document>
