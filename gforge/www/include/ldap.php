@@ -67,6 +67,20 @@ function sf_ldap_modify($dn,$entry) {
 	return @ldap_modify($ldap_conn,$dn,$entry);
 }
 
+function sf_ldap_modify_if_exists($dn,$entry) {
+	$res = sf_ldap_modify($dn,$entry);
+	if ($res) {
+		return true ;
+	} else {
+		$err = ldap_errno ($ldap_conn) ;
+		if ($err == 32) {
+			return true ;
+		} else {
+			return false ;
+		}
+	};
+}
+
 function sf_ldap_mod_add($dn,$entry) {
 	global $ldap_conn;
 	return @ldap_mod_add($ldap_conn,$dn,$entry);
@@ -209,7 +223,7 @@ function sf_ldap_user_set_attribute($user_id,$attr,$value) {
 	$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
 	$entry[$attr]=$value;
 
-	if (!sf_ldap_modify($dn,$entry)) {
+	if (!sf_ldap_modify_if_exists($dn,$entry)) {
 	    sf_ldap_set_error_msg("ERROR: cannot change LDAP attribute '$attr' for user '".
 	                 $user->getUnixName()."': ".sf_ldap_error()."<br>");
 	    return false;
