@@ -161,12 +161,12 @@ if (user_isloggedin() || $sf_user_hash) {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
-				<TR bgcolor="'. html_get_alt_row_color($i) .'"><TD COLSPAN="2"><B><A HREF="/forum/?group_id='.
+				<TR '. $HTML->box1_get_alt_row_style($i) .'><TD COLSPAN="2"><B><A HREF="/forum/?group_id='.
 					db_result($result,$i,'group_id').'">'.
 					db_result($result,$i,'group_name').'</A></TD></TR>';
 			}
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE"><A HREF="/forum/monitor.php?forum_id='.
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE"><A HREF="/forum/monitor.php?forum_id='.
 				db_result($result,$i,'group_forum_id').
 				'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
 				'BORDER=0"></A></TD><TD WIDTH="99%"><A HREF="/forum/forum.php?forum_id='.
@@ -200,12 +200,12 @@ if (user_isloggedin() || $sf_user_hash) {
 		for ($i=0; $i<$rows; $i++) {
 			if (db_result($result,$i,'group_id') != $last_group) {
 				echo '
-				<TR bgcolor="'. html_get_alt_row_color($i) .'"><TD COLSPAN="2"><B><A HREF="/project/?group_id='.
+				<TR '. $HTML->box1_get_alt_row_style($i) .'><TD COLSPAN="2"><B><A HREF="/project/?group_id='.
 				db_result($result,$i,'group_id').'">'.
 				db_result($result,$i,'group_name').'</A></TD></TR>';
 			}
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE"><A HREF="/project/filemodule_monitor.php?filemodule_id='.
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE"><A HREF="/project/filemodule_monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
 			'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
 			'BORDER=0"></A></TD><TD WIDTH="99%"><A HREF="/project/showfiles.php?group_id='.
@@ -346,7 +346,7 @@ if (user_isloggedin() || $sf_user_hash) {
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE">
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE">
 			<A HREF="/my/bookmark_delete.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">
 			<IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD>
 			<TD><B><A HREF="'. db_result($result,$i,'bookmark_url') .'">'.
@@ -393,7 +393,7 @@ if (user_isloggedin() || $sf_user_hash) {
 			}
 
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE">
+			<TR '. $HTML->box1_get_alt_row_style($i) .'><TD ALIGN="MIDDLE">
 			<A href="rmproject.php?group_id='. db_result($result,$i,'group_id') .'">
 			<IMG SRC="/images/ic/'.$img.'" ALT="DELETE" HEIGHT="16" WIDTH="16" BORDER="0"></A></TD>
 			<TD><A href="/'.$type.'/'. db_result($result,$i,'unix_group_name') .'/">'. htmlspecialchars(db_result($result,$i,'group_name')) .'</A></TD></TR>';
