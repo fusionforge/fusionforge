@@ -51,8 +51,8 @@ foreach($baseContent AS $pageName=>$page) {
 
 reset($targetContent);
 foreach($targetContent AS $pageName => $page) {
-	fwrite($stderr, 'TO_REMOVE - added : '.$pageName.' '.$key."\n");
 	foreach($page AS $key => $value) {
+		fwrite($stderr, 'TO_REMOVE - added : '.$pageName.' '.$key."\n");
 		$resultContent[$pageName][$key] = array('value' => $value['value'], 'prefix' => TO_REMOVE);
 	}
 }
