@@ -30,6 +30,7 @@ sub parse_sql_file ( $ ) ;
 
 require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
 require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/lib/gforge/lib/sqlhelper.pm") ; # Our SQL functions
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -45,7 +46,7 @@ $dbh->{RaiseError} = 1;
 eval {
     my ($sth, @array, $version, $path, $target) ;
 
-    &create_metadata_table ("0") ;
+    &create_plugin_metadata_table ($dbh, $pluginname);
     
     $version = &get_db_version ;
     $target = "0.1" ;
@@ -115,72 +116,6 @@ if ($@) {
 $dbh->rollback ;
 $dbh->disconnect ;
 
-sub is_lesser ( $$ ) {
-    my $v1 = shift || 0 ;
-    my $v2 = shift || 0 ;
-
-    my $rc = system "dpkg --compare-versions $v1 lt $v2" ;
-
-    return (! $rc) ;
-}
-
-sub is_greater ( $$ ) {
-    my $v1 = shift || 0 ;
-    my $v2 = shift || 0 ;
-
-    my $rc = system "dpkg --compare-versions $v1 gt $v2" ;
-
-    return (! $rc) ;
-}
-
-sub debug ( $ ) {
-    my $v = shift ;
-    chomp $v ;
-    print STDERR "$v\n" ;
-}
-
-sub create_metadata_table ( $ ) {
-    my $v = shift || "0" ;
-    my $tablename = "plugin_" .$pluginname . "_meta_data" ;
-    # Do we have the metadata table?
-
-    $query = "SELECT count(*) FROM pg_class WHERE relname = '$tablename' and relkind = 'r'";
-    # debug $query ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    # Let's create this table if we have it not
-
-    if ($array [0] == 0) {
-	debug "Creating $tablename table." ;
-	$query = "CREATE TABLE $tablename (key varchar primary key, value text not null)" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-
-    $query = "SELECT count(*) FROM $tablename WHERE key = 'db-version'";
-    # debug $query ;
-    $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    # Empty table?  We'll have to fill it up a bit
-
-    if ($array [0] == 0) {
-	debug "Inserting first data into $tablename table." ;
-	$query = "INSERT INTO $tablename (key, value) VALUES ('db-version', '$v')" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
 sub update_db_version ( $ ) {
     my $v = shift or die "Not enough arguments" ;
     my $tablename = "plugin_" .$pluginname . "_meta_data" ;
@@ -208,89 +143,3 @@ sub get_db_version () {
     return $version ;
 }
 
-sub drop_table_if_exists ( $ ) {
-    my $tname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$tname' AND relkind='r'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping table $tname" ;
-	$query = "DROP TABLE $tname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_sequence_if_exists ( $ ) {
-    my $sname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$sname' AND relkind='S'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping sequence $sname" ;
-	$query = "DROP SEQUENCE $sname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_index_if_exists ( $ ) {
-    my $iname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='i'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping index $iname" ;
-	$query = "DROP INDEX $iname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub drop_view_if_exists ( $ ) {
-    my $iname = shift or die  "Not enough arguments" ;
-    $query = "SELECT count(*) FROM pg_class WHERE relname='$iname' AND relkind='v'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
-
-    if ($array [0] != 0) {
-	# debug "Dropping view $iname" ;
-	$query = "DROP VIEW $iname" ;
-	# debug $query ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	$sth->finish () ;
-    }
-}
-
-sub bump_sequence_to ( $$ ) {
-    my ($sth, @array, $seqname, $targetvalue) ;
-
-    $seqname = shift ;
-    $targetvalue = shift ;
-
-    do {
-	$query = "select nextval ('$seqname')" ;
-	$sth = $dbh->prepare ($query) ;
-	$sth->execute () ;
-	@array = $sth->fetchrow_array () ;
-	$sth->finish () ;
-    } until $array[0] >= $targetvalue ;
-}
