@@ -99,13 +99,16 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$e
 	if (!$charset) {
 		$charset = 'ISO-8859-1';
 	}
+	$body2 = '';
 	if ($extra_headers) {
-		$body2 = $extra_headers."\n";
+		$body2 .= $extra_headers."\n";
 	}
 	$body2 .= "To: $to".
-		"\nFrom: ".util_encode_mailaddr($from,$sendername,$charset).
-		"\nBCC: $BCC".
-		"\nSubject: ".util_encode_mimeheader($subject, $charset).
+		"\nFrom: ".util_encode_mailaddr($from,$sendername,$charset);
+	if(!empty($BCC)) {
+		$body2 .= "\nBCC: $BCC";
+	}
+	$body2 .= "\nSubject: ".util_encode_mimeheader($subject, $charset).
 		"\nContent-type: text/plain; charset=$charset".
 		"\n\n".
 		util_convert_body($body, $charset);
