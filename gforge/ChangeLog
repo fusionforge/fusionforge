@@ -1,3 +1,8 @@
+2003-01-20  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/include/languages/Spanish.tab: change all HTML entities
+	into proper accented characters; fix some XHTML issues.
+
 2003-01-19  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/account/unsubscribe.php: fix syntax error.
