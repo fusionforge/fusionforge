@@ -367,6 +367,12 @@ class Theme extends Layout {
 		<td height="100">&nbsp;</td>
 	</tr>
 </table>
+<!-- PLEASE LEAVE "Powered By GForge" on your site -->
+<br />
+<center>
+<a href="http://gforge.org/"><img src="/images/pow-gforge.png" alt="Powered By GForge Collaborative Development Envir onment" border="0" /></a>
+</center>
+
 <?php
 	global $sys_show_source;
 	if ($sys_show_source) {
