@@ -15,10 +15,8 @@ gforge/docs/architecture/tour/next0.gif svneol=native#unset
 gforge/docs/architecture/tour/next1.gif svneol=native#unset
 gforge/docs/architecture/tour/prev0.gif svneol=native#unset
 gforge/docs/architecture/tour/prev1.gif svneol=native#unset
-gforge/docs/branching.sda svneol=native#unset
 gforge/docs/images/sflogo2-105a.png -text
 gforge/docs/project_management/source_branching.sda svneol=native#unset
-gforge/docs/sourceforge-architecture.sda svneol=native#unset
 gforge/www/bugs/bugs-er-diagram.sda svneol=native#unset
 gforge/www/forum/forum-er-diagram.sda svneol=native#unset
 gforge/www/images/404.png svneol=native#unset
