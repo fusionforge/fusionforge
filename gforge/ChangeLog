@@ -1,3 +1,9 @@
+2005-03-27  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* docs/docbook/docbook/installation_guide/installation_guide.xml:
+	Short section on BIND configuration.
+	/var/www/gforge is inside <replaceable> now.
+
 2005-03-25  Tim Perdue <tim@gforge.org>
 
 	* Major docman changes, including nesting folders, ability to delete a file
