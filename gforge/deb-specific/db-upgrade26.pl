@@ -1,6 +1,9 @@
 #!/usr/bin/perl -w
 #
+# $Id$
+#
 # Debian-specific script to upgrade the database between releases
+# Roland Mas <lolando@debian.org>
 
 use DBI ;
 use strict ;
@@ -154,7 +157,7 @@ eval {
 # 	    }
 # 	} 
 #	@reqlist = () ;
-
+#
 	debug "Inserting skills." ;
 
 	foreach my $skill (split /;/, $skill_list) {
@@ -288,98 +291,354 @@ sub parse_sql_file ( $ ) {
     # This is a state machine to parse potentially complex SQL files
     # into individual SQL requests/statements
     
+    my %states = ('INIT' => 0,
+		  'SCAN' => 1,
+		  'SQL_SCAN' => 2,
+		  'IN_SQL' => 3,
+		  'END_SQL' => 4,
+		  'QUOTE_SCAN' => 5,
+		  'IN_QUOTE' => 6,
+		  'START_COPY' => 7,
+		  'IN_COPY' => 8,
+		  'ERROR' => 666,
+		  'DONE' => 999) ;
+    my ($state, $l, $par_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data) ;
+
     # Init the state machine
 
-    my ($l, $level, $inquote, $chunk, $rest) ;
-    my $sql = "" ;
-    my @sql_list = () ;
+    $state = $states{INIT} ;
     
     # my $n = 0 ;
-
-  FILELOOP: while ($l = <F>) {	# Loop over the file
-      chomp $l ;
-      $level = 0 ;
-      $inquote = 0 ;
-      $chunk = "" ;
-      $rest = "" ;
-      
-    PARSELOOP: while (1) {	# Parse a request
-
-	while ( ($l eq "")
-		or ((! $inquote) and ($l =~ /^\s*$/))
-		or ((! $inquote) and ($l =~ /^--/)) ) {
+    
+  STATE_LOOP: while ($state != $states{DONE}) { # State machine main loop
+    STATE_SWITCH: {		# State machine step processing
+	$state = $states{INIT} && do {
+	    $par_level = 0 ;
+	    $sql = $chunk = $rest = "" ;	 
+	    @sql_list = () ;
+	    $copy_table = $copy_rest = "" ;
+	    @copy_data = () ;
+	    
 	    $l = <F> ;
-	    if ($l) {
- 		chomp $l ;
- 	    } else {
- 		last PARSELOOP ;
- 	    }
-	}
-	($chunk, $rest) = ($l =~ /^([^()\\\';]*)(.*)/) ;
-	$sql .= $chunk ;
-	# debug "level = $level, inquote = $inquote, chunk = <$chunk>, rest = <$rest>, sql = <$sql>";
-
-	# Here come the state transitions
-      SWITCH: {
-	  if ($rest =~ /^\(/) {	# Enter a paren block (unless we're inside a string)
-	      $level += 1 unless $inquote ;
-	      $sql .= '(' ;
-	      $rest = substr $rest, 1 ;
-	      last SWITCH;
-	  }
-	  if ($rest =~ /^\)/) {	# Exit a paren block (unless we're inside a string)
-	      $level -= 1 unless $inquote ;
-	      $sql .= ')' ;
-	      $rest = substr $rest, 1 ;
-	      last SWITCH;
-	  }
-	  if ($rest =~ /^\\\'/) { # Escaped single quote
-	      if (!$inquote) {
-		  debug "Encountered a \' sequence outside of a string." ;
-		  debug "This really shouldn't have happened." ;
-		  debug "I find it more prudent to just die now." ;
-		  die "\' outside of a string -- check SQL file" ;
+	    unless ($l) {
+		debug "Empty file."
+		$state = $states{DONE} ;
+		last INIT_STATE_SWITCH ;
+	    }
+	    chomp $l ;
+	    
+	    $state = $states{SCAN} ;
+	    
+	    last STATE_SWITCH ;
+	}			# End of INIT state
+	
+	$state = $states{SCAN} && do {
+	  SCAN_STATE_SWITCH: {
+	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
+		  $l = <F> ;
+		  unless ($l) {
+		      debug "Detected end of file." ;
+		      $state = $states{DONE} ;
+		      last SCAN_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{SCAN} ;
+		  last SCAN_STATE_SWITCH ;
 	      }
-	      $sql .= '\\\'' ;
-	      $rest = substr $rest, 2 ;
-	      last SWITCH;
-	  }
-	  if ($rest =~ /^\\/) { # Other backslash is a normal character
-	      $sql .= '\\' ;
-	      $rest = substr $rest, 1 ;
-	      last SWITCH;
-	  }
-	  if ($rest =~ /^;/) { # Semi-colon
-	      if ($inquote) { # If inside a string, treat as a normal character
+	      
+	      ( ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) 
+		or ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) ) && do {
+		    # Nothing to do
+		    
+		    $state = $states{START_COPY} ;
+		    last SCAN_STATE_SWITCH ;
+	      }
+
+	      ( 1 ) && do {
+		  $sql = "" ;
+
+		  $state = $states{SQL_SCAN} ;
+		  last SCAN_STATE_SWITCH ;
+	      }
+	      die "Unknown event in SCAN state" ;
+	  }			# SCAN_STATE_SWITCH
+	    last STATE_SWITCH ;
+	}			# End of SCAN state
+	
+	$state = $states{SQL_SCAN} && do {
+	  SQL_SCAN_STATE_SWITCH: {
+	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
+		  $l = <F> ;
+		  unless ($l) {
+		      debug "End of file detected during an SQL statement." ;
+
+		      $state = $states{ERROR} ;
+		      last SQL_SCAN_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{SQL_SCAN} ;
+		  last SQL_SCAN_STATE_SWITCH ;
+	      }
+	      
+	      ( 1 ) && do {
+		  ($chunk, $rest) = ($l =~ /^([^()\';-]*)(.*)/) ;
+		  $sql .= $chunk ;
+		  
+		  $state = $states{IN_SQL} ;
+		  last SQL_SCAN_STATE_SWITCH ;
+	      }
+	      
+	      die "Unknown event in SQL_SCAN state" ;
+	  }			# SQL_SCAN_STATE_SWITCH
+	    last STATE_SWITCH ;
+	}			# End of SQL_SCAN state
+	
+	$state = $states{IN_SQL} && do {
+	  IN_SQL_STATE_SWITCH: {
+	      ($rest =~ /^\(/) && do {
+		  $par_level += 1 ;
+		  $sql .= '(' ;
+		  $rest = substr $rest, 1 ;
+		  $l = $rest ;
+		  
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	      ( ($rest =~ /^\)/) and ($par_level > 0) ) && do {
+		  $par_level -= 1 ;
+		  $sql .= ')' ;
+		  $rest = substr $rest, 1 ;
+		  $l = $rest ;
+		  
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	      ($rest =~ /^\)/) && do {
+		  debug "Detected ')' without any matching '('." ;
+		  
+		  $state = $states{ERROR} ;
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	      ($rest =~ /^--/) && do {
+		  $rest = "" ;
+		  $l = $rest ;
+		  
+		  $state = $states{SQL_SCAN} ;
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	      ($rest =~ /^-[^-]/) && do {
+		  $sql .= '-' ;
+		  $rest = substr $rest, 1 ;
+		  $l = $rest ;
+		  
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	      ( ($rest =~ /^;/) and ($par_level == 0) ) && do {
 		  $sql .= ';' ;
 		  $rest = substr $rest, 1 ;
-	      } elsif ($level == 0) { # If out of a string and toplevel, end of SQL statement
-		  last PARSELOOP;
-	      } else{ # What, a semi-colon by itself not at toplevel?
-		  debug "Encountered a semi-colon outside of a string and not at toplevel" ;
-		  debug "This really shouldn't have happened." ;
-		  debug "I find it more prudent to just die now." ;
-		  die "semi-colon outside of a string and not at toplevel -- check SQL file" ;
+		  
+		  $state = $states{END_SQL} ;
+		  last IN_SQL_STATE_SWITCH ;
 	      }
-	      last SWITCH;
-	  }
-	  if ($rest =~ /^\'/) { # Non-escaped single quote -- string delimiter
-	      $inquote = $inquote ? 0 : 1 ; # Toggle $inquote
-	      $sql .= '\'' ;
-	      $rest = substr $rest, 1 ;
-	      last SWITCH;
-	  }
-      } # SWITCH
-	$l = $rest ;
-    } # PARSELOOP
-      
-      # (Do something with $sql now that we have it :-)
-      push @sql_list, $sql unless $sql eq "" ;
-      # $n++ ; debug "SQL OK $n" ;
-      $sql = "" ;
-  } # FILELOOP
-    
+	      ($rest =~ /^;/) && do {
+		  debug "Detected ';' within a parenthesis." ;
+		  
+		  $state = $states{ERROR} ;
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	      ($rest eq "") && do {
+		  $l = $rest ;
+		  $sql .= " " ;
+
+		  $state = $states{SQL_SCAN} ;
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	      ($rest =~ /^\'/) && do {
+		  $sql .= '\'' ;
+		  $rest = substr $rest, 1 ;
+		  
+		  $state = $states{IN_QUOTE} ;
+		  last IN_SQL_STATE_SWITCH ;
+	      }
+	  }			# IN_SQL_STATE_SWITCH
+	    last STATE_SWITCH ;
+	}			# End of IN_SQL state
+
+	$state = $states{END_SQL} && do {
+	  END_SQL_STATE_SWITCH: {
+	      ($sql =~ /\s*/) && do {
+		  debug "Empty request." ;
+		  $sql = "" ;
+		  $l = $rest ;
+
+		  $state = $states{SQL_SCAN} ;
+		  last END_SQL_STATE_SWITCH ;
+	      }
+	      ( 1 ) && do {
+		  push @sql_list ;
+		  $sql = "" ;
+		  $l = $rest ;
+
+		  $state = $states{SQL_SCAN} ;
+		  last END_SQL_STATE_SWITCH ;
+	      }
+	  }			# END_SQL_STATE_SWITCH
+	      last STATE_SWITCH ;
+	}			# End of END_SQL state
+
+	$state = $states{QUOTE_SCAN} && do {
+	  QUOTE_SCAN_STATE_SWITCH: {
+	      ($l eq "") && do {
+		  $sql .= "\n" ;
+		  $l = <F> ;
+		  unless ($l) {
+		      debug "Detected end of file inside a quoted string." ;
+		      $state = $states{ERROR} ;
+		      last QUOTE_SCAN_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  last QUOTE_SCAN_STATE_SWITCH ;
+	      }
+	      ( 1 ) && do {
+		  ($chunk, $rest) = ($l =~ /^([^\\\']*)(.*)/) ;
+		  $sql .= $chunk ;
+		  
+		  $state = $states{IN_QUOTE} ;
+		  last QUOTE_SCAN_STATE_SWITCH ;
+	      }
+	      die "Unknown event in QUOTE_SCAN state" ;
+	  }			# QUOTE_SCAN_STATE_SWITCH
+	    last STATE_SWITCH ;
+	}			# Enf of QUOTE_SCAN state
+	
+	$state = $states{IN_QUOTE} && do {
+	  IN_QUOTE_STATE_SWITCH: {
+	      ($rest =~ /^\'/) && do {
+		  $sql .= '\'' ;
+		  $rest = substr $rest, 1 ;
+		  
+		  $state = $states{IN_SQL} ;
+		  last IN_QUOTE_STATE_SWITCH ;
+	      }
+	      ($rest =~ /^\\\'/) && do {
+		  $sql .= '\\\'' ;
+		  $rest = substr $rest, 2 ;
+		  
+		  last IN_QUOTE_STATE_SWITCH ;
+	      }
+	      ($rest =~ /^\\[^\\]/) && do {
+		  $sql .= '\\' ;
+		  $rest = substr $rest, 1 ;
+		  
+		  last IN_QUOTE_STATE_SWITCH ;
+	      }
+	      ($rest eq "") && do {
+		  # Nothing to do
+		  
+		  $state = $states{QUOTE_SCAN} ;
+		  last IN_QUOTE_STATE_SWITCH ;
+	      }
+	      ( 1 ) && do {
+		  debug "Unknown event in IN_QUOTE state." ;
+		  $state = $states{ERROR} ;
+		  last IN_QUOTE_STATE_SWITCH ;
+	      }
+	  }			# IN_QUOTE_STATE_SWITCH
+	    last STATE_SWITCH ;
+	}			# End of IN_QUOTE state
+
+	$state = $states{START_COPY} && do {
+	  START_COPY_STATE_SWITCH: {
+	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) && do {
+		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s+from\s+stdin\s*;(.*)/i) ;
+		  $l = <F> ;
+		  unless ($l) {
+		      debug "Detected end of file within a COPY statement." ;
+		      $state = $states{ERROR} ;
+		      last START_COPY_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+		  
+		  $state = $states{IN_COPY} ;
+		  last START_COPY_STATE_SWITCH ;
+	      }
+
+	      ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) && do {
+		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s+from\s+stdin\s*;(.*)/i) ;
+		  $l = <F> ;
+		  unless ($l) {
+		      debug "Detected end of file within a COPY statement." ;
+		      $state = $states{ERROR} ;
+		      last START_COPY_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+
+		  $state = $states{IN_COPY} ;
+		  last START_COPY_STATE_SWITCH ;
+	      }
+     
+	      ( 1 ) && do {
+		  debug "Unknown event in START_COPY state." ;
+		  $state = $states{ERROR} ;
+		  last START_COPY_STATE_SWITCH ;
+	      }
+	  }			# START_COPY_STATE_SWITCH
+	    last STATE_SWITCH ;
+	}			# End of START_COPY state
+
+	$state = $states{IN_COPY} && do {
+	  IN_COPY_SWITCH: {
+	      ($l =~ /^\\\.$/) && do {
+		  $l = $copy_rest ;
+
+		  $state = $states{SCAN} ;
+		  last IN_COPY_STATE_SWITCH ;
+	      }
+	      
+	      ( 1 ) && do {
+		  @copy_data = split /\t/, $l ;
+		  @copy_data = map { s/\'/\\\'/g } @copy_data ;
+		  @copy_data = map { "'" . $_ . "'" } @copy_data ;
+		  $sql = "INSERT INTO \"$copy_table\" VALUES (" ;
+		  $sql .= join (", ", @copy_data) ;
+		  $sql .= ")" ;
+		  push @sql_list, $sql ;
+		  $l = <F> ;
+		  unless ($l) {
+		      debug "Detected end of file within a COPY statement." ;
+		      $state = $states{ERROR} ;
+		      last IN_COPY_STATE_SWITCH ;
+		  }
+		  chomp $l ;
+
+		  last IN_COPY_STATE_SWITCH ;
+	      }
+	  }			# IN_COPY_SWITCH
+	    last STATE_SWITCH ;
+	}			# End of IN_COPY state
+
+	$state = $states{DONE} && do {
+	    debug "End of file detected." ;
+
+	    last STATE_SWITCH ;
+	}			# End of DONE state
+
+	$state = $states{ERROR} && do {
+	    debug "Reached the ERROR state.  Dying." ;
+	    die "State machine is buggy." ;
+	    
+	    last STATE_SWITCH ;
+	}			# End of ERROR state
+
+	( 1 ) && do {
+	    debug "State machine went in an unknown state...  Redirecting to ERROR." ;
+	    $state = $states{ERROR} ;
+	    last STATE_SWITCH ;
+	}
+    }				# STATE_SWITCH
+  }				# STATE_LOOP
+
     close F ;
-    
     return \@sql_list ;
 }

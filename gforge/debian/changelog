@@ -11,13 +11,17 @@ sourceforge (2.6-0+0+) unstable; urgency=low
     are more readable (well, they are more readable to me), and work
     approximately the same way.  Added a install-skel.sh template for
     future such scripts.
-  * Put utils/include.pl utils/sql2ldif.pl utils/underworld-dummy/ssh_dump.pl
-    of 2.5 as 2.6 scripts, sql2ldif will probably have to be re-seen
-  * Added sf-2.6-complete.sql script
-  * Cleaned debian/rules 
-  * Added path in apache template
+  * [Christian] Put utils/include.pl utils/sql2ldif.pl
+    utils/underworld-dummy/ssh_dump.pl of 2.5 as 2.6 scripts, sql2ldif
+    will probably have to be re-seen
+  * [Christian] Added sf-2.6-complete.sql script
+  * [Christian] Cleaned debian/rules
+  * [Christian] Added path in apache template
+  * deb-specific/db-upgrade26.pl: Rewrote the SQL parsing state machine so
+    that it 1. works better, 2. is more readable, 3. knows about comments,
+    4. knows about COPY [...] FROM stdin.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Sat,  3 Nov 2001 11:09:12 +0100
+ -- Roland Mas <lolando@debian.org>  Sat,  3 Nov 2001 22:50:29 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 
