@@ -3972,6 +3972,18 @@ COPY "artifact_group_list"  FROM stdin;
 
 
 COPY "artifact_resolution"  FROM stdin;
+100	None
+1	Accepted
+2	Duplicate
+3	Fixed
+4	Invalid
+5	Later
+6	Out of Date
+7	Postponed
+8	Rejected
+9	Remind
+10	Wont Fix
+11	Works For Me
 \.
 --
 -- Data for TOC Entry ID 556 (OID 22668)
