@@ -1,3 +1,9 @@
+2004-05-07  Tom Copeland <tom@infoether.com>
+
+	* common/tracker/ArtifactsForUser.class: Fixed bug #792: 
+	'My personal page' submitted items includes those 
+	submitted to deleted projects
+
 2004-05-06	Reinhard Spisser
 
 	* Patch #779 send pending tracker/task notifications

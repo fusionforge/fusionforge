@@ -79,7 +79,7 @@ class ArtifactsForUser extends Error {
 	*/
 	function getAssignedArtifactsByGroup() {
 		$sql="SELECT * FROM artifact_vw av WHERE av.assigned_to=".$this->User->getID()."
-			AND av.status_id='1' ORDER BY av.artifact_group_id, av.group_artifact_id, av.assigned_to, av.status_id";
+			AND av.status_id='1', ORDER BY av.artifact_group_id, av.group_artifact_id, av.assigned_to, av.status_id";
 		return $this->getArtifactsFromSQL($sql);
 	}
 
@@ -90,9 +90,11 @@ class ArtifactsForUser extends Error {
 	*/
 	function getSubmittedArtifactsByGroup() {
 		$sql="SELECT *
-			FROM artifact_vw av
+			FROM artifact_vw av, groups g
 			WHERE av.submitted_by=".$this->User->getID()."
 			AND av.status_id='1'
+			AND av.artifact_group_id = g.group_id
+			AND g.status = 'A'
 			ORDER BY av.artifact_group_id,av.group_artifact_id,av.assigned_to,av.status_id";
 		return $this->getArtifactsFromSQL($sql);
 	}
