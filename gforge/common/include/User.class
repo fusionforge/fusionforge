@@ -492,11 +492,9 @@ class User extends Error {
 		}
 
 		db_begin();
-		$res=db_query("
-			UPDATE users 
+		$res=db_query("UPDATE users 
 			SET status='$status' 
-			WHERE user_id='". $this->getID()."'
-		");
+			WHERE user_id='". $this->getID()."'");
 
 		if (!$res) {
 			$this->setError('ERROR - Could Not Update User Status: '.db_error());
@@ -506,12 +504,27 @@ class User extends Error {
 			$this->data_array['status']=$status;
 			if ($status == 'D') {
 				// Remove this user from all groups
-				$res = db_query("
-					DELETE FROM user_group
-					WHERE user_id='".$this->getID()."'
-				");
+				$res = db_query(" DELETE FROM user_group WHERE user_id='".$this->getID()."' ");
 				if (!$res) {
 					$this->setError('ERROR - Could Not Propogate Deleted Status: '.db_error());
+					db_rollback();
+					return false;
+				}
+				$res=db_query("DELETE FROM forum_perm WHERE user_id='".$this->getID()."'");
+				if (!$res) {
+					$this->setError('ERROR - Could Not Propogate Deleted Status to forums: '.db_error());
+					db_rollback();
+					return false;
+				}
+				$res=db_query("DELETE FROM artifact_perm WHERE user_id='".$this->getID()."'");
+				if (!$res) {
+					$this->setError('ERROR - Could Not Propogate Deleted Status to tracker: '.db_error());
+					db_rollback();
+					return false;
+				}
+				$res=db_query("DELETE FROM project_perm WHERE user_id='".$this->getID()."'");
+				if (!$res) {
+					$this->setError('ERROR - Could Not Propogate Deleted Status to task manager: '.db_error());
 					db_rollback();
 					return false;
 				}
