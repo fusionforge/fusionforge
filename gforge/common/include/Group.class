@@ -1524,7 +1524,7 @@ class Group extends Error {
 
 		// Check to see if they want to send a custom rejection response
 		if ($response_id == 0) {
-			$response .= $message;
+			$response .= stripcslashes($message);
 		} else {
 			$response .= db_result(db_query("
 				SELECT response_text
