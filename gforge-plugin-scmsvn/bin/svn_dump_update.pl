@@ -16,6 +16,8 @@ require("/etc/gforge/plugins/scmsvn/config.pl"); # Include plugin config vars
 
 my $svn_root = "/var/lib/gforge/chroot/svnroot" ;
 my $verbose = 0;
+my $anoncvs_uid_add = 50000;
+my $gid_add = 10000;
 
 if($verbose) {print ("\nConnecting to database");}
 &db_connect;
