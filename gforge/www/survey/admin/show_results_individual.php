@@ -1,15 +1,29 @@
 <?php
 /**
-  *
-  * SourceForge Survey Facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Survey Facility
+ *
+ * Portions Copyright 1999-2001 (c) VA Linux Systems
+ * The rest Copyright 2002-2004 (c) GForge Team
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 
 require_once('pre.php');
@@ -134,7 +148,7 @@ for ($i=0; $i<$count; $i++) {
 	if ($question_type == "1") {
 
 		/*
-			This is a rædio-button question. Values 1-5.	
+			This is a rï¿½dio-button question. Values 1-5.	
 		*/
 
 
@@ -186,7 +200,7 @@ for ($i=0; $i<$count; $i++) {
 		*/
 
 		if ($question_type != $last_question_type) {
-	                echo "<strong>".$Language->getText('survey_show_results_individual','yes_no').Yes / No"</strong><br />\n";
+	                echo "<strong>".$Language->getText('survey_show_results_individual','yes_no')."</strong><br />\n";
 		}
 
 		echo "\n<input type=\"radio\" name=\"_".$quest_array[$i]."\" value=\"1\"";
