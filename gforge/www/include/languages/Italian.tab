@@ -729,7 +729,7 @@ project_memberlist	skills	Competenze
 project_memberlist	view	Visualizza
 sendmessage	about_blurb	Stiamo tentando di evitare troppe mail spam, per cui utilizziamo questo form per inviare email.<p>Compila tutti i campi oppure il destinatario non sar&agrave; in grado di rispondere.<P><FONT COLOR="RED"><B>SE STAI CERCANDO AIUTO:</B> Hai letto la documentazione del sito? Hai incluso il tuo <B>user_id</B> e<B>user_name?</B> Se stai scrivendo per un progetto, hai incluso il tuo <B>project id</B> (<B>group_id</B>) e <B>Nome progetto</B>?</FONT>
 users	peerinfo1	Se conosci questo utente, prenditi un minuto per quotarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri. <P> Il sistema di quotazioni $1 si basa su concetti di <A HREF="http://www.advogato.com">Advogato.</A> Il sistema &egrave; stato re-implementato ed espanso.
-users	peerinfo2	La casella delle quotazioni visualizza tutte le quotazioni per ogni criterio. I numeri includono quotazioni sia da utenti verificati che non. <ul> <li> Il campo The "Posizione globale"  mostra la posizione dell'utente rispetto a tutti gli altri utenti quotati di $1 . <li>Il "punteggio aggregato" visualizza una media ponderata basata solo su risposte "trusted". <li>Il campo "Importanza personale" mostra il peso ( tra 1 e 1.5) che sar&agrave; dato alle quotazioni di altri utenti  -- quotazioni di utenti pi&ugrave; quotati avranno un peso maggiore. </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
+users	peerinfo2	La casella delle quotazioni visualizza tutte le quotazioni per ogni criterio. I numeri includono quotazioni sia da utenti verificati che non. <ul> <li> Il campo "Posizione globale"  mostra la posizione dell'utente rispetto a tutti gli altri utenti quotati di $1 . <li>Il "punteggio aggregato" visualizza una media ponderata basata solo su risposte "trusted". <li>Il campo "Importanza personale" mostra il peso ( tra 1 e 1.5) che sar&agrave; dato alle quotazioni di altri utenti  -- quotazioni di utenti pi&ugrave; quotati avranno un peso maggiore. </ul> <p> <i> Se non vuoi partecipare dal sistema di quotazione (ciò avrà effetto sia sulla possibilità di essere votato che sulla possibilità di votare gli altri utenti), vai alla tua pagina di <a href="/account/">opzioni account</a>. Se scegli di non partecipare, le tue quotazioni degli altri utenti saranno cancellati  a la casella delle 'Votazioni' scomparirà dalla tua homepage. </i></p>
 users	optout	Hai selezionato di non partecipare alle quotazioni, perci&ograve; non puoi quotare questo utente. Vai a <a href="/account/">opzioni utente </a> per maggiori informazioni.
 users	user_not_exist_title	L'utente non esiste
 users	no_user_name	Nessun nome utente specificato
@@ -760,7 +760,7 @@ user_home	project_info	Informazioni progetto
 user_home	no_projects	Questo utente non &egrave; membro di nessun progetto.
 user_home	member_of	Questo utente &egrave; membro dei seguenti progetti:
 user_home	send_message_if_logged	Puoi inviare un messaggo se sei collegato
-trove	not_categorized	Questo progetto non &agrave; ancora stato categorizzato nella
+trove	not_categorized	Questo progetto non &egrave; ancora stato categorizzato nella
 trove	title	Mappa del software Trove
 trove_list	invalid_category_title	Categoria non valida
 trove_list	invalid_category_text	La categoria richiesta non &egrave; valida
@@ -890,10 +890,10 @@ register	project_information	Informazioni progetto
 register	apply_for_registration	Per registrare un progetto, compila i campi del form. Leggi attentamente le descrizioni e fornisci informazioni complete. Tutti i campi sono obbligatori.
 register	project_full_name	</h3>1. Nome completo del progetto</h3><p>Inizia col dare un nome al progetto. Il "Nome completo" &egrave; descrittivo e non ha restrizioni, eccetto una lunghezza massima di 40 caratteri.</p>Nome completo:<br/>
 register	purpose_and_summarization	2. Sommario e obiettivo del progetto</h3><p><strong></strong><p><strong> Inserisci una descrizione dettagliata e accurata del tuo progetto e quali risorse di $1 userai. Questa descrizione sar&agrave; la base per la scelta di approvare o rifiutare il tuo progetto su $1 e in futuro se utilizzi le risorse nel modo dovuto. La descrizione non sar&agrave; utilizzata come descrizione pubblica del progetto. Deve essere scritta in inglese.</strong>
-register	license_type	Publico domino</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><strong>Your License:</strong><br />
+register	license_type	Publico domino</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>Licenza per questo progetto: </strong><br />
 register	other_license	Se hai selezionato "altri", inserisci una descrizione della licenza. Considera che altre licenze potrebbero non venir approvate e potrebbe passare pi&ugrave; tempo visto che dovremo controllare se la licenza è compatibile con l'ambiente OpenSource.
-register	project_description	<h3>4. Descrizione pubblica del progetto</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
-register	project_unix_name	<h3>5. Nome unix del progetto</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Nome unix:<br/>
+register	project_description	<h3>4. Descrizione pubblica del progetto</h3><p>Questa è la descrizione del tuo progetto che sarà visualizzata nel sommario del progetto, nei risultati della ricerca, ecc. Non dovrebbe essere così lungo come la descrizione dell'obiettivo del progetto (passo 2). La lunghezza massima è di 255 caratteri.
+register	project_unix_name	<h3>5. Nome unix del progetto</h3><p>In aggiunta al nome del progetto, devi scegliere un nome "Unix" del progetto.</p><p> Il "nome Unix" ha diverse restrizioni perché è usato in molti posti all'interni del sito:<ul><li>non può essere uguale al nome unix di un altro progetto<li>la lunghezza deve essere tra 3 e 15 caratteri<li>deve essere in minuscolo<li>può contenere solo caratteri, numeri e - <li>deve essere un nome di un utente unix valido<li>non può corrispondere a uno dei domini riservatis<li>il nome unix non cambierà mai per l'intera durata del progetto</ul><p>Il nome Unix è importante perché sarà utilizzato per:<ul><li>un sito web: <tt>unixname.$1</tt><li>un repository CVS: <tt>/cvsroot/unixname</tt> sul server <tt>cvs.unixname.$1</tt><li>Accessi shell a <tt>unixname.$1</tt><li>Motore di ricerca </ul><p>Nome unix:<br/>
 register	i_agree	Approvo
 register	i_disagree	Non approvo
 register	title	Registrazione nuovo progetto
@@ -902,7 +902,7 @@ register_complete	title	Registrazione completata
 register_projectinfo	section	Registrazione nuovo progetto
 register_projectinfo	title	Informazioni progetto
 register_requirements	section	Registrazione nuovo progetto
-register_requirements	title	Services & Requirements
+register_requirements	title	Servizi e Requirements
 register_tos	section	Registrazione nuovo progetto
 register_tos	title	Terms Of Service Agreement
 tracker_utils	monitor		Notifica
@@ -1512,16 +1512,17 @@ admin_index	display_full_user_list	Visualizza elenco completo degli utenti
 admin_index	display_user_beginning_with	Visualizza utenti che iniziano con
 admin_index	get	visualizza
 admin_index	group_maintaince	Manutenzione gruppi
-admin_index	display_full_group	Visualizza elenco ceompleto dei gruppi
+admin_index	display_full_group	Visualizza elenco completo dei gruppi
 admin_index	display_groups_beginning_with	Visualizza gruppi che iniziano con
 admin_index	register_new_project	Registra nuovo progetto
-admin_index	groups_with	Gruppo con
+admin_index	groups_with_status	Gruppo con stato
 admin_index	pending_status	 Stato (pendente) 
 admin_index	new_project_approval	(Approvazione nuovi progetti)
 admin_index	groups_with	Gruppi con 
 admin_index	deleted_status	stato (cancellato)
-admin_index	private_groups	Private Groups
+admin_index	private_groups	Gruppi privati
 admin_index	news	News
+admin_index	recent_logins	Ultimi login
 admin_index	approve_reject	Approva/rigetta
 admin_index	front_page_news	News di prima pagina
 admin_index	stats	Statistiche
