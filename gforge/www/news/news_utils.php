@@ -27,13 +27,16 @@ function news_header($params) {
 	*/
 	if ($group_id && ($group_id != $sys_news_group)) {
 		site_project_header($params);
+		echo '<P><B>';
+		echo '<A HREF="/news/submit.php?group_id='.$group_id.'">Submit</A> | <A HREF="/news/admin/?group_id='.$group_id.'">Admin</A></B>';
+		echo '<P>';
 	} else {
 		$params['pagename']='news_main';
 		$HTML->header($params);
+		echo '<P><B>';
+		echo '<A HREF="/news/submit.php?group_id='.$sys_news_group.'">Submit</A> | <A HREF="/news/admin/?group_id='.$sys_news_group.'">Admin</A></B>';
+		echo '<P>';
 	}
-	echo '<P><B>';
-	echo '<A HREF="/news/submit.php?group_id='.$group_id.'">Submit</A> | <A HREF="/news/admin/?group_id='.$group_id.'">Admin</A></B>';
-	echo '<P>';
 }
 
 function news_footer($params) {
