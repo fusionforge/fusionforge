@@ -46,21 +46,21 @@ eval {
     $version = &get_plugin_db_version ($dbh, $pluginname) ;
     $target = "0.1" ;
     if (&is_lesser ($version, $target)) {
-	my @filelist = ( "/usr/lib/gforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
-	
-	foreach my $file (@filelist) {
-	    &debug ("Processing $file") ;
-	    @reqlist = @{ &parse_sql_file ($file) } ;
-	    
-	    foreach my $s (@reqlist) {
-		$query = $s ;
-		# &debug ($query) ;
-		$sth = $dbh->prepare ($query) ;
-		$sth->execute () ;
-		$sth->finish () ;
-	    }
-	}
-	@reqlist = () ;
+#	my @filelist = ( "/usr/lib/gforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
+#	
+#	foreach my $file (@filelist) {
+#	    &debug ("Processing $file") ;
+#	    @reqlist = @{ &parse_sql_file ($file) } ;
+#	    
+#	    foreach my $s (@reqlist) {
+#		$query = $s ;
+#		# &debug ($query) ;
+#		$sth = $dbh->prepare ($query) ;
+#		$sth->execute () ;
+#		$sth->finish () ;
+#	    }
+#	}
+#	@reqlist = () ;
 	
 	&update_plugin_db_version ($dbh, $pluginname, $target) ;
 	&debug ("Committing.") ;

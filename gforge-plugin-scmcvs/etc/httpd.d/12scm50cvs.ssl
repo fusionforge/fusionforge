@@ -1,0 +1,3 @@
+  # CVS begin
+  Alias /plugins/scmcvs/ {usr_share_gforge}/www/plugins/scmcvs/
+  # CVS end
