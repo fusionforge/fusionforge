@@ -36,13 +36,13 @@ require_once('common/frs/FRSPackage.class');
 $res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_id='1'");
 
 if (!$res) {
-	echo db_error();
+	//echo db_error();
 	exit();
 }
 
 if (db_numrows($res) == 0) {
 	// There are no Admins yet, aborting without failing
-	echo "SUCCESS\n";
+	//echo "SUCCESS\n";
 	exit();
 }
 
@@ -57,11 +57,11 @@ for ($g=0; $g<count($groups); $g++) {
 //make group dirs
 	$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$groups[$g]->getUnixName();
 	$cmd="/bin/mkdir $newdirlocation";
-	echo "\n$cmd";
-	//exec($cmd,$out);
+	//echo "\n$cmd";
+	exec($cmd,$out);
 
 	$frsps =& get_frs_packages($groups[$g]);
-	echo count($frsps);
+	//echo count($frsps);
 	for ($p=0; $p<count($frsps); $p++) {
 		if (!is_object($frsps[$p])) {
 			continue;
@@ -69,8 +69,8 @@ for ($g=0; $g<count($groups); $g++) {
 		//make package dirs
 		$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsps[$p]->Group->getUnixName().'/'.$frsps[$p]->getFileName();
 		$cmd="/bin/mkdir $newdirlocation";
-		echo "\n$cmd";
-		//exec($cmd,$out);
+		//echo "\n$cmd";
+		exec($cmd,$out);
 
 		$frsrs =& $frsps[$p]->getReleases();
 
@@ -81,8 +81,8 @@ for ($g=0; $g<count($groups); $g++) {
 			//make release dirs
 			$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsrs[$r]->FRSPackage->Group->getUnixName().'/'.$frsrs[$r]->FRSPackage->getFileName().'/'.$frsrs[$r]->getFileName();
 			$cmd="/bin/mkdir $newdirlocation";
-			echo "\n$cmd";
-			//exec($cmd,$out);
+			//echo "\n$cmd";
+			exec($cmd,$out);
 
 			$frsfs =& $frsrs[$r]->getFiles();
 			for ($f=0; $f<count($frsfs); $f++) {
@@ -93,10 +93,10 @@ for ($g=0; $g<count($groups); $g++) {
 				$newdirlocation = $GLOBALS['sys_upload_dir'].'/'.$frsfs[$f]->FRSRelease->FRSPackage->Group->getUnixName().'/'.$frsfs[$f]->FRSRelease->FRSPackage->getFileName().'/'.$frsfs[$f]->FRSRelease->getFileName().'/';
 				if (!is_file($newdirlocation.'/'.$frsfs[$f]->getName())) {
 					$cmd="/bin/mv $olddirlocation $newdirlocation";
-					echo "\n$cmd";
-					//exec($cmd,$out);
+					//echo "\n$cmd";
+					exec($cmd,$out);
 				} else {
-					echo "Already Exists";
+					//echo "Already Exists";
 				}
 			}
 		}
