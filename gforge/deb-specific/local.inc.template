@@ -65,11 +65,11 @@ $sys_dns2_host = "ns2.{domain_name}";
 
 // Part II - Databases, html/php/other paths
 if (getenv ('SERVER_SOFTWARE')) { // We're on the web
-	$sys_dbhost=getenv('sys_dbhost');
-	$sys_dbname=getenv('sys_dbname');
-	$sys_dbuser=getenv('sys_dbuser');
-	$sys_dbpasswd=getenv('sys_dbpasswd');
-	$sys_ldap_passwd=getenv('sys_ldap_passwd');
+	$sys_dbhost=getenv('sys_gfdbhost');
+	$sys_dbname=getenv('sys_gfdbname');
+	$sys_dbuser=getenv('sys_gfdbuser');
+	$sys_dbpasswd=getenv('sys_gfdbpasswd');
+	$sys_ldap_passwd=getenv('sys_gfldap_passwd');
 	$sys_jabber_pass=getenv('sys_jabber_pass');
 } else {
 	require ('/etc/gforge/database.inc');

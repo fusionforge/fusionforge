@@ -15,3 +15,4 @@
 #DSFHELPER:shellhost-variables#
 #DSFHELPER:dbpasswd-variables#
 #DSFHELPER:ldap-variables#
+#DSFHELPER:dbhost-variables#
