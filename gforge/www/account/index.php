@@ -119,7 +119,7 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 </tr>
 
 <tr valign="top">
-<td><?php echo $Language->getText('account_options', 'ccode'); ?> </td>
+<td><?php echo $Language->getText('account_options', 'country'); ?> </td>
 <td><?php echo html_get_ccode_popup('ccode', $u->getCountryCode()); ?>
 </td>
 </tr>

@@ -75,7 +75,7 @@ if ($timezone == ''){
 <?php echo $Language->getText('account_register','timezone'); ?><br />
 <?php echo html_get_timezone_popup('timezone', $timezone); ?>
 <p>
-<?php echo $Language->getText('account_register','ccode'); ?><br />
+<?php echo $Language->getText('account_register','country'); ?><br />
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
 <p>
 @<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
