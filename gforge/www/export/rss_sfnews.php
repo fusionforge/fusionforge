@@ -21,12 +21,15 @@ print '<?xml version="1.0"?>
 <rss version="0.91">
 ';
 // ## default limit
-if (!$limit) $limit = 10;
-if ($limit > 100) $limit = 100;
+if (!$limit) {
+	$limit = 10;
+} else {
+	$limit = min(100, $limit);
+}
 
 $where_clause = " WHERE is_approved=1 ";
 if ($group_id) {
-	$where_clause = " where group_id=".$group_id;
+	$where_clause = " where group_id=".intval($group_id);
 }
 $sql = "SELECT forum_id,summary,post_date,details,group_id FROM news_bytes ".$where_clause." order by post_date desc";
 $res = db_query($sql, $limit);
