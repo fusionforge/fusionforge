@@ -31,13 +31,6 @@ class Forum extends Error {
 	var $data_array;
 
 	/**
-	 * This is the id of the forum in question.
-	 *
-	 * @var	 array   $data_array
-	 */
-	var $group_forum_id;
-
-	/**
 	 * The Group object.
 	 *
 	 * @var	 object  $Group
@@ -71,7 +64,6 @@ class Forum extends Error {
 		$this->Group =& $Group;
 
 		if ($group_forum_id) {
-			$this->group_forum_id=$group_forum_id;
 			if (!$arr || !is_array($arr)) {
 				if (!$this->fetchData($group_forum_id)) {
 					return false;
@@ -80,6 +72,7 @@ class Forum extends Error {
 				$this->data_array =& $arr;
 				if ($this->data_array['group_id'] != $this->Group->getID()) {
 					$this->setError('Group_id in db result does not match Group Object');
+					$this->data_array = null;
 					return false;
 				}
 			}
@@ -156,7 +149,6 @@ class Forum extends Error {
 			if (!$fm->create('Welcome To '.$forum_name,'Welcome To '.$forum_name)) {
 				$this->setError($fm->getErrorMessage());
 				return false;
-//Error check?
 			}
 		}
 		db_commit();
@@ -164,10 +156,10 @@ class Forum extends Error {
 	}
 
 	/**
-	 *  fetchData() - re-fetch the data for this ArtifactType from the database
+	 *  fetchData - re-fetch the data for this forum from the database.
 	 *
-	 *  @param  int	 The artifact type ID
-	 *  @return true/false
+	 *  @param  int	 The forum_id.
+	 *  @return boolean.
 	 */
 	function fetchData($group_forum_id) {
 		$res=db_query("SELECT * FROM forum_group_list_vw
@@ -183,21 +175,21 @@ class Forum extends Error {
 	}
 
 	/**
-	 *	getGroup() - get the Group object this ArtifactType is associated with
+	 *	getGroup - get the Group object this ArtifactType is associated with.
 	 *
-	 *	@return the Group object
+	 *	@return the Group object.
 	 */
 	function &getGroup() {
 		return $this->Group;
 	}
 
 	/**
-	 *	getID() - get this ArtifactTypeID
+	 *	getID - The id of this forum.
 	 *
-	 *	@return the group_artifact_id #
+	 *	@return	int	The group_forum_id #.
 	 */
 	function getID() {
-		return $this->group_forum_id;
+		return $this->data_array['group_forum_id'];
 	}
 
 	function getNextThreadID() {

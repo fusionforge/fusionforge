@@ -39,3 +39,11 @@ NATURAL JOIN doc_states
 NATURAL JOIN doc_groups 
 JOIN supported_languages sl ON (sl.language_id=d.language_id)
 JOIN users ON (users.user_id=d.created_by);
+
+--
+--	NEW VIEW FOR TRACKER
+--
+CREATE VIEW artifact_group_list_vw AS
+SELECT agl.*,aca.count,aca.open_count
+        FROM artifact_group_list agl
+        LEFT JOIN artifact_counts_agg aca USING (group_artifact_id);

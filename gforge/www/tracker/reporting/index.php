@@ -7,12 +7,13 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   index.php,v 1.3 2002/10/04 16:10:40 cbayle Exp
+  * @version   index.php,v 1.4 2003/01/02 23:17:09 bigdisk Exp
   *
   */
 
 
 require_once('pre.php');
+require_once('www/tracker/include/ArtifactTypeHtml.class');
 require_once('www/project/stats/project_stats_utils.php');
 require_once('tool_reports.php');
 

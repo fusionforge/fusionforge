@@ -23,6 +23,7 @@ require_once('common/tracker/ArtifactGroup.class');
 require_once('common/tracker/ArtifactCategory.class');
 require_once('common/tracker/ArtifactCanned.class');
 require_once('common/tracker/ArtifactResolution.class');
+require_once('common/tracker/ArtifactTypeFactory.class');
 
 if ($group_id && $atid) {
 
@@ -48,7 +49,7 @@ if ($group_id && $atid) {
 	switch ($func) {
 
 		case 'add' : {
-			include '../tracker/add.php';
+			include 'add.php';
 			break;
 		}
 		case 'postadd' : {
@@ -87,7 +88,7 @@ if ($group_id && $atid) {
 						}
 					}
 					$feedback .= ' Item Successfully Created ';
-					include '../tracker/browse.php';
+					include 'browse.php';
 				}
 			}
 			break;
@@ -124,7 +125,7 @@ if ($group_id && $atid) {
 			if (!$was_error) {
 				$feedback = 'Updated Successfully ';
 			}
-			include '../tracker/browse.php';
+			include 'browse.php';
 			break;
 		}
 		case 'postmod' : {
@@ -193,7 +194,7 @@ if ($group_id && $atid) {
 				if (!$was_error) {
 					$feedback = 'Successfully Updated';
 				}
-				include '../tracker/browse.php';
+				include 'browse.php';
 			}
 			break;
 		}
@@ -211,7 +212,7 @@ if ($group_id && $atid) {
 			} else {
 				if ($ah->addMessage($details,$user_email,true)) {
 					$feedback='Comment Added';
-					include '../tracker/browse.php';
+					include 'browse.php';
 				} else {
 					//some kind of error in creation
 					exit_error('ERROR',$feedback);
@@ -228,12 +229,12 @@ if ($group_id && $atid) {
 			} else {
 				$ah->setMonitor();
 				$feedback=$ah->getErrorMessage();
-				include '../tracker/browse.php';
+				include 'browse.php';
 			}
 			break;
 		}
 		case 'browse' : {
-			include '../tracker/browse.php';
+			include 'browse.php';
 			break;
 		}
 		case 'download' : {
@@ -252,15 +253,15 @@ if ($group_id && $atid) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
 				if ($ath->userIsAdmin() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
-					include '../tracker/mod.php';
+					include 'mod.php';
 				} else {
-					include '../tracker/detail.php';
+					include 'detail.php';
 				}
 			}
 			break;
 		}
 		default : {
-			include '../tracker/browse.php';
+			include 'browse.php';
 			break;
 		}
 	}
@@ -274,38 +275,25 @@ if ($group_id && $atid) {
 		exit_no_group();
 	}		   
 
-	$perm =& $group->getPermission( session_get_user() );
-
-	//
-	//	get a list of artifact types they have defined
-	//
-	if (session_loggedin() && $perm->isMember()) {
-		$public_flag='0,1';
-	} else {
-		$public_flag='1';
+	$atf = new ArtifactTypeFactory($group);
+	if (!$group || !is_object($group) || $group->isError()) {
+		exit_error('Error','Could Not Get ArtifactTypeFactory');
 	}
 
-	$sql="SELECT agl.*,aca.count,aca.open_count
-		FROM artifact_group_list agl
-		LEFT JOIN artifact_counts_agg aca USING (group_artifact_id) 
-		WHERE agl.group_id='$group_id'
-		AND agl.is_public IN ($public_flag)
-		ORDER BY group_artifact_id ASC";
+	$at_arr =& $atf->getArtifactTypes();
 
 	//required params for site_project_header();
 	$params['group']=$group_id;
 	$params['toptab']='tracker';
 	$params['pagename']='tracker';
-	$params['sectionvals']=array(group_getname($group_id));
+	$params['sectionvals']=array($group->getPublicName());
 	
 	echo site_project_header($params);
 	echo '<B><A HREF="/tracker/reporting/?group_id='.$group_id.'">Reporting</A> | '
 		 .'<A HREF="/tracker/admin/?group_id='.$group_id.'">Admin</A>'
 		 .'</B><P>';
 
-	$result = db_query ($sql);
-	$rows = db_numrows($result);
-	if (!$result || $rows < 1) {
+	if (!$at_arr || count($at_arr) < 1) {
 		echo "<H1>No Accessible Trackers Found</H1>";
 		echo "<P>
 			<B>No trackers have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project ".
@@ -315,18 +303,17 @@ if ($group_id && $atid) {
 		echo '<P>'.$Language->getText('tracker', 'choose').'<P>';
 
 		/*
-			Put the result set (list of forums for this group) into a column with folders
+			Put the result set (list of trackers for this group) into a column with folders
 		*/
 
-		for ($j = 0; $j < $rows; $j++) {
+		for ($j = 0; $j < count($at_arr); $j++) {
 			echo '
-			<A HREF="/tracker/?atid='.db_result($result, $j, 'group_artifact_id').
+			<A HREF="/tracker/?atid='. $at_arr[$j]->getID() .
 			'&group_id='.$group_id.'&func=browse">' .
 			html_image("ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
-			db_result($result, $j, 'name').'</A> 
-			( <B>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</B> )<BR>'.
-			db_result($result, $j, 'description').'<P>';
-
+			$at_arr[$j]->getName() .'</A> 
+			( <B>'. $at_arr[$j]->getOpenCount() .' open / '. $at_arr[$j]->getTotalCount() .' total</B> )<BR>'.
+			$at_arr[$j]->getDescription() .'<P>';
 		}
 	}
 
