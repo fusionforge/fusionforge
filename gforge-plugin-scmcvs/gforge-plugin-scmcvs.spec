@@ -11,7 +11,7 @@ Release: %{release}
 BuildArch: noarch
 License: GPL
 Group: Development/Tools
-Source0: %{name}-%{version}.tar.gz
+Source0: %{name}-%{version}.tar.bz2
 AutoReqProv: off
 Requires: gforge >= 4.0
 Requires: perl perl-IPC-Run perl-URI
@@ -67,13 +67,13 @@ install -m 664 etc/plugins/%{plugin}/cvsweb.conf $PLUGIN_CONF_DIR/
 %post
 if [ "$1" = "1" ] ; then
 	# register plugin in database
-	%{_libdir}/gforge/bin/register-plugin scmcvs CVS
+	%{_libdir}/gforge/bin/register-plugin %{plugin} CVS
 fi
 
 %postun
 if [ "$1" = "0" ] ; then
 	# unregister plugin in database
-	%{_libdir}/gforge/bin/unregister-plugin scmcvs
+	%{_libdir}/gforge/bin/unregister-plugin %{plugin}
 fi
 
 %clean
