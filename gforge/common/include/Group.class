@@ -691,31 +691,27 @@ class Group extends Error {
 		}
 
 		if ($status=='A') {
-			// Activate LDAP group, if not yet
-			if (!$SYS->sys_check_group($this->getID())) {
-
-				if (!$SYS->sys_create_group($this->getID())) {
+			// Activate system group, if not yet
+			if (!$SYS->sysCheckGroup($this->getID())) {
+				if (!$SYS->sysCreateGroup($this->getID())) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}
 			}
-
 			if (!$this->activateUsers()) {
 				db_rollback();
 				return false;
 			}
 
 		/* Otherwise, the group is not active, and make sure that
-		   LDAP group is not active either */
-		} else if ($SYS->sys_check_group($this->getID())) {
-
-			if (!$SYS->sys_remove_group($this->getID())) {
+		   System group is not active either */
+		} else if ($SYS->sysCheckGroup($this->getID())) {
+			if (!$SYS->sysRemoveGroup($this->getID())) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
-
 		}
 
 		db_commit();
@@ -1334,7 +1330,7 @@ class Group extends Error {
 				//
 				//	check and create if user doesn't exists
 				//
-				if (!$SYS->sys_check_create_user($user_id)) {
+				if (!$SYS->sysCheckCreateUser($user_id)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
@@ -1356,7 +1352,7 @@ class Group extends Error {
 				//
 				//	set up their ldap info
 				//
-				if (!$SYS->sys_group_add_user($this->getID(),$user_id)) {
+				if (!$SYS->sysGroupAddUser($this->getID(),$user_id)) {
 					$this->setError('addUser::ld3::'.$SYS->getErrorMessage());
 					db_rollback();
 					return false;
@@ -1423,7 +1419,7 @@ class Group extends Error {
 				//
 				$user=&user_get_object($user_id,$res_newuser);
 				$user->fetchData($user->getID());
-				if (!$SYS->sys_check_create_user($user_id)) {
+				if (!$SYS->sysCheckCreateUser($user_id)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
@@ -1542,7 +1538,7 @@ class Group extends Error {
 				AND pt.status_id='1' AND pgl.group_id='".$this->getID()."') 
 				AND assigned_to_id='$user_id'");
 
-			if (!$SYS->sys_group_remove_user($this->getID(),$user_id)) {
+			if (!$SYS->sysGroupRemoveUser($this->getID(),$user_id)) {
 				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
@@ -1840,7 +1836,7 @@ class Group extends Error {
 			$l = new BaseLanguage () ;
 			$l->loadLanguageID($row_admins['language']);
 
-			//																			   $1					  $2					$3							  $4						  $5						$6
+			//																			   $2					  $2					$3							  $4						  $5						$6
 			$message=stripcslashes($l->getText('classgroup', 'acceptedproject', array($this->getPublicName(), $this->getUnixName(), $GLOBALS['sys_default_domain'], $GLOBALS['sys_shell_host'], $GLOBALS['sys_scm_host'], $this->getID(), $GLOBALS['sys_name'])));
 	
 			util_send_message($row_admins['email'], $l->getText('classgroup', 'acceptedprojecttitle', array($GLOBALS['sys_name'])), $message);
@@ -1999,6 +1995,62 @@ function &group_get_result($group_id=0) {
 		return $grp->getData();
 	} else {
 		return 0;
+	}
+}
+
+/**
+ *	getUnixStatus - Status of activation of unix account.
+ *
+ *	@return	char	(N)one, (A)ctive, (S)uspended or (D)eleted
+ */
+function getUnixStatus() {
+	return $this->data_array['unix_status'];
+}
+
+/**
+ *	setUnixStatus - Sets status of activation of unix account.
+ *
+ *	@param	string	The unix status.
+ *	N	no_unix_account
+ *	A	active
+ *	S	suspended
+ *	D	deleted
+ *
+ *	@return	boolean success.
+ */
+function setUnixStatus($status) {
+	global $Language,$SYS;
+	db_begin();
+	$res=db_query("
+		UPDATE groups 
+		SET unix_status='$status' 
+		WHERE group_id='". $this->getID()."'
+	");
+
+	if (!$res) {
+		$this->setError('ERROR - Could Not Update Group Unix Status: '.db_error());
+		db_rollback();
+		return false;
+	} else {
+		if ($status == 'A') {
+			if (!$SYS->sysCheckCreateGroup($this->getID())) {
+				$this->setError($SYS->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+		} else {
+			if ($SYS->sysCheckGroup($this->getID())) {
+				if (!$SYS->sysRemoveGroup($this->getID())) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+			}
+		}
+		
+		$this->data_array['unix_status']=$status;
+		db_commit();
+		return true;
 	}
 }
 

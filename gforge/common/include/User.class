@@ -617,14 +617,14 @@ class User extends Error {
 			return false;
 		} else {
 			if ($status == 'A') {
-				if (!$SYS->sys_check_create_user($this->getID())) {
+				if (!$SYS->sysCheckCreateUser($this->getID())) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}
 			} else {
-				if ($SYS->sys_check_user($this->getID())) {
-					if (!$SYS->sys_remove_user($this->getID())) {
+				if ($SYS->sysCheckUser($this->getID())) {
+					if (!$SYS->sysRemoveUser($this->getID())) {
 						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
@@ -864,9 +864,9 @@ class User extends Error {
 		} else {
 			// Now change LDAP attribute, but only if corresponding
 			// entry exists (i.e. if user have shell access)
-			if ($SYS->sys_check_user($this->getID()))
+			if ($SYS->sysCheckUser($this->getID()))
 			{
-				if (!$SYS->sys_user_set_attribute($this->getID(),"loginShell",$shell)) {
+				if (!$SYS->sysUserSetAttribute($this->getID(),"loginShell",$shell)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
@@ -878,8 +878,22 @@ class User extends Error {
 		return true;
 	}
 
+	/**
+	 *	getUnixUID() - Get the unix UID of the user
+	 *
+	 *	@return	int	This user's UID.
+	 */
 	function getUnixUID() {
 		return $this->data_array['unix_uid'];
+	}
+
+	/**
+	 *	getUnixGID() - Get the unix GID of the user
+	 *
+	 *	@return	int	This user's GID.
+	 */
+	function getUnixGID() {
+		return $this->data_array['unix_gid'];
 	}
 
 	/**
@@ -1100,53 +1114,6 @@ class User extends Error {
 	}
 
 	/**
-	 *	setUpUnixUID - Sets up this user's unix_uid for shell access.
-	 *
-	 *	@return	boolean	success.
-	 */
-	function setUpUnixUID() {
-		global $sys_database_type;
-		if ($this->getUnixUID() > 1) {
-			//
-			//	already have unix_uid
-			//
-			return true;
-		}
-		//get the next unix uid
-
-		/*
-			hack to simulate sequences in mysql
-		*/
-		if ($sys_database_type=='mysql') {
-			$res=db_query("INSERT INTO unix_uids (id) values ('')");
-			$unixid=db_insertid($res,'unix_uids','id');
-			db_free_result($res);
-		} else {
-			$res=db_query("SELECT nextval('unix_uid_seq')");
-			$unixid=db_result($res,0,0);
-			db_free_result($res);
-		}
-		if (!$unixid) {
-			$this->setError('ERROR - Could Not Get Next Unix UID');
-			return false;
-		} else {
-			$sql="UPDATE users 
-				SET unix_status='A',unix_uid='$unixid' 
-				WHERE user_id='". $this->getID()."'";
-//echo "\n<br>$sql";
-			$res=db_query($sql);
-
-			if (!$res || db_affected_rows($res) < 1) {
-				$this->setError('ERROR - Could Not Update User Account Flags: '.db_error());
-				return false;
-			} else {
-				$this->data_array['unix_uid'] = $unixid;
-				return true;
-			}
-		}
-	}
-	
-	/**
 	 *	setPasswd - Changes user's password.
 	 *
 	 *	@param	string	The plaintext password.
@@ -1176,8 +1143,8 @@ class User extends Error {
 		} else {
 			// Now change LDAP password, but only if corresponding
 			// entry exists (i.e. if user have shell access)
-			if ($SYS->sys_check_user($this->getID())) {
-				if (!$SYS->sys_user_set_attribute($this->getID(),"userPassword",'{crypt}'.$unix_pw)) {
+			if ($SYS->sysCheckUser($this->getID())) {
+				if (!$SYS->sysUserSetAttribute($this->getID(),"userPassword",'{crypt}'.$unix_pw)) {
 					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;

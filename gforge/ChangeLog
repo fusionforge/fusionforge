@@ -1,8 +1,28 @@
+2005-02-25  Christian Bayle <bayle@debian.org>
+
+	* nss-pgsql optimization
+	* Introduce new field unix_gid in users table and make nss_passwd 
+	  a direct view on users table
+	* Replace nss_group and nss_usergroup views by tables
+	  query is provided for initial fill from users and group tables
+	  using the conventionnal uid_add, gid_add, scm_gid_add
+	  These parameters will be only in System subclasses if used.
+	  *id_add were removed from include.pl and there will be some remaining
+	  in some pl scripts still used in debian packaging that will soon 
+	  use cvs.php and usergroup.php.
+	* nss requires the use of new nss-pgsql1 package available on
+	  alioth.debian.org nsspampgsql svn archive
+	* sql2ldif take in account users.group_id
+	* Removed include of browser.php in squal_pre.php
+	* Global renaming of functions in System class and subclass
+	  new UNIX.class and pgsql.class for nss
+	
+
 2005-02-17  Tim Perdue <tim@gforge.org>
 
 	* massive cleanup of PKEYS and INDEXES throughout db
 
-2005-01-20  Christian Bayle <bayle@debian.org>
+2005-02-20  Christian Bayle <bayle@debian.org>
 
 	* added svndir_prefix and cvsdir_prefix for use in various scripts
 	* addition was made in etc/local.d/30homegroupother and setup scripts

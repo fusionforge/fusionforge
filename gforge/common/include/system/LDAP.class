@@ -26,15 +26,15 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 require_once('common/include/account.php');
-//require_once('common/include/system/UNIX.class');
+require_once('common/include/system/UNIX.class');
 
-class LDAP extends System {
+class LDAP extends UNIX {
 	/**
 	*	LDAP()
 	*
 	*/
 	function LDAP() {
-		$this->System();
+		$this->UNIX();
 		return true;
 	}
 
@@ -66,12 +66,12 @@ class LDAP extends System {
 	 */
 
 	/**
-	 * gf_ldap_connect() - Connect to the LDAP server
+	 * gfLdapConnect() - Connect to the LDAP server
 	 *
 	 * @returns true on success/false on error
 	 *
 	 */
-	function gf_ldap_connect() {
+	function gfLdapConnect() {
 		global $sys_ldap_host,$sys_ldap_port;
 		global $sys_ldap_bind_dn,$sys_ldap_passwd,$ldap_conn,$sys_ldap_version;
 
@@ -91,50 +91,50 @@ class LDAP extends System {
 	}
 
 	/**
-	 * gf_ldap_add() - Wrapper for ldap_add()
+	 * gfLdapAdd() - Wrapper for ldap_add()
 	 * 
 	 * @param		string	dn
 	 * @param		string	entry
 	 *
 	 */
-	function gf_ldap_add($dn, $entry) {
+	function gfLdapAdd($dn, $entry) {
 		global $ldap_conn;
 		return @ldap_add($ldap_conn,$dn,$entry);
 	}
 
 	/**
-	 * gf_ldap_delete() - Wrapper for ldap_delete()
+	 * gfLdapDelete() - Wrapper for ldap_delete()
 	 *
 	 * @param		string	dn
 	 *
 	 */
-	function gf_ldap_delete($dn) {
+	function gfLdapDelete($dn) {
 		global $ldap_conn;
 		return @ldap_delete($ldap_conn,$dn);
 	}
 
 	/**
-	 * gf_ldap_modify() - Wrapper for ldap_modify()
+	 * gfLdapModify() - Wrapper for ldap_modify()
 	 *
 	 * @param		string	dn
 	 * @param		string	entry
 	 *
 	 */
-	function gf_ldap_modify($dn,$entry) {
+	function gfLdapModify($dn,$entry) {
 		global $ldap_conn;
 		return @ldap_modify($ldap_conn,$dn,$entry);
 	}
 	
 	/**
-	 * gf_ldap_modify_if_exists() - Wrapper for ldap_modify()
-	 * works like gf_ldap_modify, but returns true if the LDAP entry does not exist
+	 * gfLdapModifyIfExists() - Wrapper for ldap_modify()
+	 * works like gfLdapModify, but returns true if the LDAP entry does not exist
 	 *
 	 * @param		string	dn
 	 * @param		string	entry
 	 *
 	 */
-	function gf_ldap_modify_if_exists($dn,$entry) {
-        	$res = $this->gf_ldap_modify($dn,$entry);
+	function gfLdapModifyIfExists($dn,$entry) {
+        	$res = $this->gfLdapModify($dn,$entry);
         	if ($res) {
                 	return true ;
         	} else {
@@ -148,76 +148,76 @@ class LDAP extends System {
 	}
 
 	/**
-	 * gf_ldap_mod_add() - Wrapper for ldap_mod_add()
+	 * gfLdapModAdd() - Wrapper for ldap_mod_add()
 	 *
 	 * @param		string	dn
 	 * @param		string	entry
 	 *
 	 */
-	function gf_ldap_mod_add($dn,$entry) {
+	function gfLdapModAdd($dn,$entry) {
 		global $ldap_conn;
 		return @ldap_mod_add($ldap_conn,$dn,$entry);
 	}
 	
 	/**
-	 * gf_ldap_mod_del() - Wrapper for ldap_mod_del()
+	 * gfLdapModDel() - Wrapper for ldap_mod_del()
 	 *
 	 * @param		string	dn
 	 * @param		string	entry
 	 *
 	 */
-	function gf_ldap_mod_del($dn,$entry) {
+	function gfLdapModDel($dn,$entry) {
 		global $ldap_conn;
 		return @ldap_mod_del($ldap_conn,$dn,$entry);
 	}
 	
 	/**
-	 * gf_ldap_read() - Wrapper for ldap_read()
+	 * gfLdapRead() - Wrapper for ldap_read()
 	 *
 	 * @param		string	dn
 	 * @param		string	filter
 	 * @param		int		attrs
 	 *
 	 */
-	function gf_ldap_read($dn,$filter,$attrs=0) {
+	function gfLdapRead($dn,$filter,$attrs=0) {
 		global $ldap_conn;
 		return @ldap_read($ldap_conn,$dn,$filter,$attrs);
 	}
 	
 	/**
-	 * gf_ldap_error() - Wrapper for ldap_error()
+	 * gfLdapError() - Wrapper for ldap_error()
 	 *
 	 * @see ldap_error()
 	 *
 	 */
-	function gf_ldap_error() {
+	function gfLdapError() {
 		global $ldap_conn;
 		return ldap_error($ldap_conn);
 	}
 	
 	/**
-	 * gf_ldap_errno() - Wrapper for ldap_errno()
+	 * gfLdapErrno() - Wrapper for ldap_errno()
 	 *
 	 * @see ldap_errno()
 	 *
 	 */
-	function gf_ldap_errno() {
+	function gfLdapErrno() {
 		global $ldap_conn;
 		return ldap_errno($ldap_conn);
 	}
 	
 	/**
-	 * gf_ldap_already_exists()
+	 * gfLdapAlreadyExists()
 	 */
-	function gf_ldap_already_exists() {
+	function gfLdapAlreadyExists() {
 		global $ldap_conn;
 		return ldap_errno($ldap_conn)==20;
 	}
 	
 	/**
-	 * gf_ldap_does_not_exist()
+	 * gfLdapDoesNotExist()
 	 */
-	function gf_ldap_does_not_exist() {
+	function gfLdapDoesNotExist() {
 		global $ldap_conn;
 		return ldap_errno($ldap_conn)==16;
 	}
@@ -227,37 +227,37 @@ class LDAP extends System {
 	 */
 	
 	/**
-	 * sys_check_user() - Check for the existence of a user
+	 * sysCheckUser() - Check for the existence of a user
 	 * 
 	 * @param		int		The user ID of the user to check
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_check_user($user_id) {
+	function sysCheckUser($user_id) {
 		$user =& user_get_object($user_id);
 		if (!$user) {
 			return false;
 		}
-		return $this->gf_ldap_check_user_by_name($user->getUnixName());
+		return $this->gfLdapcheck_user_by_name($user->getUnixName());
 	}
 	
 	/**
-	 * gf_ldap_check_user_by_name() - Check for a user by the username
+	 * gfLdapcheck_user_by_name() - Check for a user by the username
 	 *
 	 * @param		string	The username 
 	 * @returns true on success/false on error
 	 *
 	 */
-	function gf_ldap_check_user_by_name($user_name) {
+	function gfLdapcheck_user_by_name($user_name) {
 		global $ldap_conn;
 		global $sys_ldap_base_dn;
 	
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 	
 		$dn = 'uid='.$user_name.',ou=People,'.$sys_ldap_base_dn;
-		$res = $this->gf_ldap_read($dn,"objectClass=*",array("uid"));
+		$res = $this->gfLdapRead($dn,"objectClass=*",array("uid"));
 		if ($res) {
 			ldap_free_result($res);
 			return true;
@@ -267,48 +267,47 @@ class LDAP extends System {
 	}
 	
 	/**
-	 * sys_create_user() - Create a user
+	 * sysCreateUser() - Create a user
 	 *
 	 * @param		int	The user ID of the user to create
-	 * @returns The return status of gf_ldap_create_user_from_object()
+	 * @returns The return status of gfLdapcreate_user_from_object()
 	 *
 	 */
-	function sys_create_user($user_id) {
+	function sysCreateUser($user_id) {
 		// Check even if the user shouldn't exist
 		// It can be created by a cron
-		if (!$this->sys_check_user($user_id)){
+		if (!$this->sysCheckUser($user_id)){
 			$user = &user_get_object($user_id);
-			return $this->gf_ldap_create_user_from_object($user);
+			return $this->gfLdapcreate_user_from_object($user);
 		}
 		return true;
 	}
 	
 	/**
-	 * sys_check_create_user() - Check that a user has been created
+	 * sysCheckCreateUser() - Check that a user has been created
 	 *
 	 * @param		int		The ID of the user to check
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_check_create_user($user_id) {
-		if (!$this->sys_check_user($user_id)){
+	function sysCheckCreateUser($user_id) {
+		if (!$this->sysCheckUser($user_id)){
 			$user = &user_get_object($user_id);
-			return $this->gf_ldap_create_user_from_object($user);
+			return $this->gfLdapcreate_user_from_object($user);
 		}
 		return true;
 	}
 	
 	/**
-	 * gf_ldap_create_user_from_object() - Create a user from information contained within an object
+	 * gfLdapcreate_user_from_object() - Create a user from information contained within an object
 	 *
 	 * @param		object	The user object
 	 * @returns true on success/false on error
 	 *
 	 */
-	function gf_ldap_create_user_from_object(&$user) {
+	function gfLdapcreate_user_from_object(&$user) {
 		global $sys_ldap_base_dn;
-		global $UID_ADD;
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 		$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
@@ -325,22 +324,22 @@ class LDAP extends System {
 		$entry['loginShell']=$user->getShell();
 		$entry['debGforgeCvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
 		$entry['debGforgeForwardEmail']=$user->getEmail();
-		$entry['uidNumber']=$user->getUnixUID() + $UID_ADD;
-		$entry['gidNumber']=$user->getUnixUID() + $UID_ADD; // users as in debian backend
+		$entry['uidNumber']=$this->getUnixUID();
+		$entry['gidNumber']=$this->getUnixGID(); // users as in debian backend
 		$entry['shadowLastChange']=1; // We don't have expiration, so any non-0
 		$entry['shadowMax']=99999;
 		$entry['shadowWarning']=7;
 	
-		if (!$this->gf_ldap_add($dn,$entry)) {
+		if (!$this->gfLdapAdd($dn,$entry)) {
 			$this->setError("ERROR: cannot add LDAP user entry '".
-				 $user->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $user->getUnixName()."': ".$this->gfLdapError()."<br />");
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * gf_ldap_create_user_from_props() - Creates an LDAP user from
+	 * gfLdapCreateUserFromProps() - Creates an LDAP user from
 	 *
 	 * @param		string	The username 
 	 * @param		string	????
@@ -348,10 +347,10 @@ class LDAP extends System {
 	 * @returns true on success/false on error
 	 *
 	 */
-	function gf_ldap_create_user_from_props($username, $cn, $crypt_pw,
+	function gfLdapCreateUserFromProps($username, $cn, $crypt_pw,
 						$shell, $cvsshell, $uid, $gid, $email) {
 		global $sys_ldap_base_dn;
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 		$dn = 'uid='.$username.',ou=People,'.$sys_ldap_base_dn;
@@ -374,40 +373,40 @@ class LDAP extends System {
 		$entry['shadowMax']=99999;
 		$entry['shadowWarning']=7;
 	
-		if (!$this->gf_ldap_add($dn,$entry)) {
+		if (!$this->gfLdapAdd($dn,$entry)) {
 			$this->setError("ERROR: cannot add LDAP user entry '".
-				 $username."': ".$this->gf_ldap_error()."<br />");
+				 $username."': ".$this->gfLdapError()."<br />");
 			return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * sys_remove_user() - Remove an LDAP user
+	 * sysRemoveUser() - Remove an LDAP user
 	 *
 	 * @param		int		The user ID of the user to remove
 	 * @returns true on success/false on failure
 	 *
 	 */
-	function sys_remove_user($user_id) {
+	function sysRemoveUser($user_id) {
 		global $sys_ldap_base_dn;
 	
 		$user = &user_get_object($user_id);
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 		$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
 	
-		if (!$this->gf_ldap_delete($dn)) {
+		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP user entry '".
-				 $user->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $user->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    return false;
 		}
 		return true;
 	}
 	
 	/**
-	 * sys_user_set_attribute() - Set an attribute for a user
+	 * sysUserSetAttribute() - Set an attribute for a user
 	 *
 	 * @param		int		The user ID 
 	 * @param		string	The attribute to set
@@ -415,19 +414,19 @@ class LDAP extends System {
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_user_set_attribute($user_id,$attr,$value) {
+	function sysUserSetAttribute($user_id,$attr,$value) {
 		global $sys_ldap_base_dn;
 	
 		$user = &user_get_object($user_id);
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 		$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
 		$entry[$attr]=$value;
 	
-		if (!$this->gf_ldap_modify_if_exists($dn, $entry)) {
+		if (!$this->gfLdapModifyIfExists($dn, $entry)) {
 		    $this->setError("ERROR: cannot change LDAP attribute '$attr' for user '".
-				 $user->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $user->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    return false;
 		}
 		return true;
@@ -438,13 +437,13 @@ class LDAP extends System {
 	 */
 	
 	/**
-	 * sys_check_group() - Check for the existence of a group
+	 * sysCheckGroup() - Check for the existence of a group
 	 * 
 	 * @param		int		The ID of the group to check
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_check_group($group_id) {
+	function sysCheckGroup($group_id) {
 		global $ldap_conn;
 		global $sys_ldap_base_dn;
 	
@@ -453,11 +452,11 @@ class LDAP extends System {
 			$this->setError("ERROR: Cannot find group [$group_id]<br />");
 			return false;
 		}
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
-		$res=$this->gf_ldap_read($dn, "objectClass=*", array("cn"));
+		$res=$this->gfLdapRead($dn, "objectClass=*", array("cn"));
 		if ($res) {
 			ldap_free_result($res);
 			return true;
@@ -466,19 +465,17 @@ class LDAP extends System {
 	}
 	
 	/**
-	 * sys_create_group() - Create a group
+	 * sysCreateGroup() - Create a group
 	 * 
 	 * @param		int		The ID of the group to create
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_create_group($group_id) {
+	function sysCreateGroup($group_id) {
 		global $sys_ldap_base_dn;
-		global $GID_ADD;
-		global $ANONCVS_UID_ADD;
 	
 		$group = &group_get_object($group_id);
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
@@ -486,15 +483,15 @@ class LDAP extends System {
 		$entry['objectClass'][1]='posixGroup';
 		$entry['cn']=$group->getUnixName();
 		$entry['userPassword']='{crypt}x';
-		$entry['gidNumber']=$group->getID() + $GID_ADD;
+		$entry['gidNumber']=$this->getUnixGID();
 	
 		$i=0; $i_cvs=0;
 	
 		$ret_val=true;
 		
-		if (!$this->gf_ldap_add($dn,$entry)) {
+		if (!$this->gfLdapAdd($dn,$entry)) {
 		    $this->setError("ERROR: cannot add LDAP group entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    // If there's error, that's bad. But don't stop.
 		    $ret_val=false;
 		}
@@ -514,9 +511,9 @@ class LDAP extends System {
 			unset($entry['memberUid']);
 		}
 	
-		if (!$this->gf_ldap_add($dn,$entry)) {
+		if (!$this->gfLdapAdd($dn,$entry)) {
 			$this->setError("ERROR: cannot add LDAP CVS group entry '"
-				 .$group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 .$group->getUnixName()."': ".$this->gfLdapError()."<br />");
 			$ret_val=false;
 		}
 	
@@ -524,14 +521,14 @@ class LDAP extends System {
 		// Finally, setup AnonCVS virtual user
 		//
 	
-	        if (!$this->gf_ldap_check_user_by_name('anoncvs_'.$group->getUnixName())
-		    && !$this->gf_ldap_create_user_from_props('anoncvs_'.$group->getUnixName(),
+	        if (!$this->gfLdapcheck_user_by_name('anoncvs_'.$group->getUnixName())
+		    && !$this->gfLdapCreateUserFromProps('scm_'.$group->getUnixName(),
 							'anoncvs', 'x',
 							'/bin/false', '/bin/false',
-							$group_id+$GID_ADD+$ANONCVS_UID_ADD,
-							$group_id+$GID_ADD, "/dev/null")) {
+							$this->getSCMGID(),
+							$this->getUnixGID(), "/dev/null")) {
 			$this->setError("ERROR: cannot add LDAP AnonCVS user entry '"
-				 .$group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 .$group->getUnixName()."': ".$this->gfLdapError()."<br />");
 			$ret_val=false;
 		}
 	
@@ -539,17 +536,17 @@ class LDAP extends System {
 	}
 	
 	/**
-	 * sys_remove_group() - Remove a group
+	 * sysRemoveGroup() - Remove a group
 	 * 
 	 * @param		int		The ID of the group to remove
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_remove_group($group_id) {
+	function sysRemoveGroup($group_id) {
 		global $sys_ldap_base_dn;
 	
 		$group = &group_get_object($group_id);
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 	
@@ -560,9 +557,9 @@ class LDAP extends System {
 		
 		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
 	
-		if (!$this->gf_ldap_delete($dn)) {
+		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP group entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    $ret_val = false;
 		}
 	
@@ -572,9 +569,9 @@ class LDAP extends System {
 	
 		$dn = 'cn='.$group->getUnixName().',ou=cvsGroup,'.$sys_ldap_base_dn;
 	
-		if (!$this->gf_ldap_delete($dn)) {
+		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP CVS group entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    $ret_val = false;
 		}
 	
@@ -583,9 +580,9 @@ class LDAP extends System {
 		//
 	
 		$dn = 'uid=anoncvs_'.$group->getUnixName().',ou=People,'.$sys_ldap_base_dn;
-		if (!$this->gf_ldap_delete($dn)) {
+		if (!$this->gfLdapDelete($dn)) {
 		    $this->setError("ERROR: cannot delete LDAP AnonCVS user entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 		    $ret_val = false;
 		}
 	
@@ -593,7 +590,7 @@ class LDAP extends System {
 	}
 	
 	/**
-	 * sys_group_add_user() - Add a user to an LDAP group
+	 * sysGroupAddUser() - Add a user to an LDAP group
 	 *
 	 * @param		int		The ID of the group two which the user will be added
 	 * @param		int		The ID of the user to add
@@ -601,13 +598,13 @@ class LDAP extends System {
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_group_add_user($group_id,$user_id,$cvs_only=0) {
+	function sysGroupAddUser($group_id,$user_id,$cvs_only=0) {
 		global $ldap_conn;
 		global $sys_ldap_base_dn;
 	
 		$group = &group_get_object($group_id);
 		$user  = &user_get_object($user_id);
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 		$dn = 'cn='.$group->getUnixName().',ou=Group,'.$sys_ldap_base_dn;
@@ -618,7 +615,7 @@ class LDAP extends System {
 		//	Check if user already a member of CVS group
 		//
 	
-		$res=$this->gf_ldap_read($cvs_dn,"memberUid=".$user->getUnixName(),array("cn"));
+		$res=$this->gfLdapRead($cvs_dn,"memberUid=".$user->getUnixName(),array("cn"));
 		if ($res && ldap_count_entries($ldap_conn,$res)>0) {
 			//echo "already a member of CVS<br />";
 		} else {
@@ -626,9 +623,9 @@ class LDAP extends System {
 			//	No, add one
 			//
 	
-			if (!$this->gf_ldap_mod_add($cvs_dn,$entry)) {
+			if (!$this->gfLdapModAdd($cvs_dn,$entry)) {
 				$this->setError("ERROR: cannot add member to LDAP CVS group entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 				return false;
 			}
 		}
@@ -642,7 +639,7 @@ class LDAP extends System {
 		//
 		//	Check if user already a member of shell group
 		//
-		$res = $this->gf_ldap_read($dn, "memberUid=".$user->getUnixName(), array("cn"));
+		$res = $this->gfLdapRead($dn, "memberUid=".$user->getUnixName(), array("cn"));
 	
 		if ($res && ldap_count_entries($ldap_conn,$res)>0) {
 			//echo "already a member<br />";
@@ -651,9 +648,9 @@ class LDAP extends System {
 			//	No, add one
 			//
 	
-			if (!$this->gf_ldap_mod_add($dn,$entry)) {
+			if (!$this->gfLdapModAdd($dn,$entry)) {
 				$this->setError("ERROR: cannot add member to LDAP group entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."<br />");
 				return false;
 			}
 		}
@@ -664,7 +661,7 @@ class LDAP extends System {
 	}
 	
 	/**
-	 * sys_group_remove_user() - Remove a user from an LDAP group
+	 * sysGroupRemoveUser() - Remove a user from an LDAP group
 	 *
 	 * @param		int		The ID of the group from which to remove the user
 	 * @param		int		The ID of the user to remove
@@ -672,12 +669,12 @@ class LDAP extends System {
 	 * @returns true on success/false on error
 	 *
 	 */
-	function sys_group_remove_user($group_id,$user_id,$cvs_only=0) {
+	function sysGroupRemoveUser($group_id,$user_id,$cvs_only=0) {
 		global $sys_ldap_base_dn;
 	
 		$group = &group_get_object($group_id);
 		$user  = &user_get_object($user_id);
-		if (!$this->gf_ldap_connect()) {
+		if (!$this->gfLdapConnect()) {
 			return false;
 		}
 	
@@ -687,9 +684,9 @@ class LDAP extends System {
 	
 		$ret_val=true;
 	
-		if (!$this->gf_ldap_mod_del($cvs_dn,$entry) && !$this->gf_ldap_does_not_exist()) {
+		if (!$this->gfLdapModDel($cvs_dn,$entry) && !$this->gfLdapDoesNotExist()) {
 			$this->setError("ERROR: cannot remove member from LDAP CVS group entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."(".$this->gf_ldap_errno().")"."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."(".$this->gfLdapErrno().")"."<br />");
 			$ret_val=false;
 		}
 		
@@ -697,9 +694,9 @@ class LDAP extends System {
 			return $ret_val;
 		}
 	
-		if (!$this->gf_ldap_mod_del($dn,$entry) && !$this->gf_ldap_does_not_exist()) {
+		if (!$this->gfLdapModDel($dn,$entry) && !$this->gfLdapDoesNotExist()) {
 			$this->setError("ERROR: cannot remove member from LDAP group entry '".
-				 $group->getUnixName()."': ".$this->gf_ldap_error()."(".$this->gf_ldap_errno().")"."<br />");
+				 $group->getUnixName()."': ".$this->gfLdapError()."(".$this->gfLdapErrno().")"."<br />");
 			$ret_val=false;
 		}
 		
