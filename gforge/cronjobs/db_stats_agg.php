@@ -16,7 +16,7 @@ require ('squal_pre.php');
 
 	Aggregation script
 
-	Since we cannot crunch down all the data on the fly anymore, 
+	Since we cannot crunch down all the data on the fly anymore,
 	we need to crunch it down once daily into separate tables
 
 */
@@ -26,72 +26,6 @@ require ('squal_pre.php');
 	FIRST TIME RUN:
 --
 --
---
---	
---
---BEGIN;
---UPDATE frs_dlstats_file SET MONTH=('2002'::text || month::text)::int;
---COMMIT;
-
-INSERT INTO frs_dlstats_file_agg
-    SELECT
-        month,
-        day,
-        file_id,
-        count(*) AS downloads
-    FROM frs_dlstats_file
-        GROUP BY month,day,file_id;
-
---
---	Create a table of total downloads by file
---
---	NOTE: Builds on stats_sum.pl
---
-DROP TABLE frs_dlstats_filetotal_agg;
-CREATE TABLE frs_dlstats_filetotal_agg AS
-SELECT file_id,sum(downloads)::int AS downloads
-FROM frs_dlstats_file_agg
-GROUP BY file_id;
-
-CREATE INDEX frsdlfiletotal_fileid on frs_dlstats_filetotal_agg(file_id);
-
---
---	Create a table of total downloads by group
---
---	NOTE: Builds on prior step (frs_dlstats_filetotal_agg)
---
-DROP TABLE frs_dlstats_grouptotal_agg;
-CREATE TABLE frs_dlstats_grouptotal_agg AS
-SELECT frs_package.group_id, sum(frs_dlstats_filetotal_agg.downloads)::int AS downloads
-FROM frs_package,frs_release,frs_file,frs_dlstats_filetotal_agg
-WHERE frs_package.package_id=frs_release.package_id 
-AND frs_release.release_id=frs_file.release_id 
-AND frs_file.file_id=frs_dlstats_filetotal_agg.file_id
-GROUP BY frs_package.group_id;
-
-CREATE INDEX frsdlgrouptotal_groupid ON frs_dlstats_grouptotal_agg(group_id);
-
---
---	Create table of total downloads by group/day
---
---	NOTE: Builds on frs_dlstats_filetotal_agg
---
-DROP TABLE frs_dlstats_group_agg;
-CREATE TABLE frs_dlstats_group_agg AS
-SELECT 
-frs_package.group_id::int AS group_id, 
-fdfa.month::int AS month, 
-fdfa.day::int AS day, 
-sum(fdfa.downloads)::int AS downloads
-FROM frs_package,frs_release,frs_file,frs_dlstats_file_agg fdfa
-WHERE frs_package.package_id=frs_release.package_id 
-AND frs_release.release_id=frs_file.release_id 
-AND frs_file.file_id=fdfa.file_id
-GROUP BY frs_package.group_id,fdfa.month, fdfa.day;
-
-CREATE INDEX frsdlgroup_groupid ON frs_dlstats_group_agg(group_id);
-CREATE INDEX frsdlgroup_month_day_groupid ON frs_dlstats_group_agg(month,day,group_id);
-
 --
 --	Create a table containing project_stats grouped by month
 --
@@ -125,16 +59,16 @@ SELECT spd.month::int AS month,
 	scg.cvs_commits::int AS cvs_commits,
 	scg.cvs_adds::int AS cvs_adds
 	FROM (
-		SELECT month,group_id,avg(developers)::int AS developers 
-		FROM stats_project_developers GROUP BY month,group_id 
-		) spd 
+		SELECT month,group_id,avg(developers)::int AS developers
+		FROM stats_project_developers GROUP BY month,group_id
+		) spd
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(file_releases) AS file_releases,
 			sum(msg_posted) AS msg_posted,
 			sum(msg_uniq_auth) AS msg_uniq_auth,
 			sum(bugs_opened) AS bugs_opened,
-			sum(bugs_closed) AS bugs_closed, 
+			sum(bugs_closed) AS bugs_closed,
 			sum(support_opened) AS support_opened,
 			sum(support_closed) AS support_closed,
 			sum(patches_opened) AS patches_opened,
@@ -150,38 +84,38 @@ SELECT spd.month::int AS month,
 		) sp USING (month,group_id)
 
 	LEFT JOIN (
-		SELECT month,group_id,sum(count) AS logo_showings 
-		FROM stats_agg_logo_by_group 
+		SELECT month,group_id,sum(count) AS logo_showings
+		FROM stats_agg_logo_by_group
 		GROUP BY month,group_id
 		) salbg USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,avg(ranking)::int AS group_ranking,avg(percentile)::float AS group_metric
-		FROM stats_project_metric 
+		FROM stats_project_metric
 		GROUP BY month,group_id
 		) spm USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(checkouts) AS cvs_checkouts,sum(commits) AS cvs_commits,sum(adds) AS cvs_adds
-		FROM stats_cvs_group 
+		FROM stats_cvs_group
 		GROUP BY month,group_id
 		) scg USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(count) AS site_views
-		FROM stats_agg_site_by_group 
+		FROM stats_agg_site_by_group
 		GROUP BY month,group_id
 		) sasbg USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(pages) AS subdomain_views
-		FROM stats_subd_pages 
+		FROM stats_subd_pages
 		GROUP BY month,group_id
 		) ssp USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(downloads) AS downloads
-		FROM frs_dlstats_group_agg 
+		FROM frs_dlstats_group_agg
 		GROUP BY month,group_id
 		) fdga USING (month,group_id);
 
@@ -198,29 +132,29 @@ CREATE TABLE stats_project_all AS
 SELECT group_id::int AS group_id,
 	AVG(developers)::int AS developers,
 	AVG(group_ranking)::int AS group_ranking,
-	AVG(group_metric)::float AS group_metric, 
+	AVG(group_metric)::float AS group_metric,
 	SUM(logo_showings)::int AS logo_showings,
-	SUM(downloads)::int AS downloads, 
+	SUM(downloads)::int AS downloads,
 	SUM(site_views)::int AS site_views,
 	SUM(subdomain_views)::int AS subdomain_views,
-	SUM(page_views)::int AS page_views, 
-	SUM(msg_posted)::int AS msg_posted, 
+	SUM(page_views)::int AS page_views,
+	SUM(msg_posted)::int AS msg_posted,
 	AVG(msg_uniq_auth)::int AS msg_uniq_auth,
 	SUM(bugs_opened)::int AS bugs_opened,
-	SUM(bugs_closed)::int AS bugs_closed, 
-	SUM(support_opened)::int AS support_opened, 
-	SUM(support_closed)::int AS support_closed, 
-	SUM(patches_opened)::int AS patches_opened, 
-	SUM(patches_closed)::int AS patches_closed, 
-	SUM(artifacts_opened)::int AS artifacts_opened, 
-	SUM(artifacts_closed)::int AS artifacts_closed, 
-	SUM(tasks_opened)::int AS tasks_opened, 
-	SUM(tasks_closed)::int AS tasks_closed, 
-	SUM(help_requests)::int AS help_requests, 
-	SUM(cvs_checkouts)::int AS cvs_checkouts, 
-	SUM(cvs_commits)::int AS cvs_commits, 
-	SUM(cvs_adds)::int AS cvs_adds 
-	FROM stats_project_months 
+	SUM(bugs_closed)::int AS bugs_closed,
+	SUM(support_opened)::int AS support_opened,
+	SUM(support_closed)::int AS support_closed,
+	SUM(patches_opened)::int AS patches_opened,
+	SUM(patches_closed)::int AS patches_closed,
+	SUM(artifacts_opened)::int AS artifacts_opened,
+	SUM(artifacts_closed)::int AS artifacts_closed,
+	SUM(tasks_opened)::int AS tasks_opened,
+	SUM(tasks_closed)::int AS tasks_closed,
+	SUM(help_requests)::int AS help_requests,
+	SUM(cvs_checkouts)::int AS cvs_checkouts,
+	SUM(cvs_commits)::int AS cvs_commits,
+	SUM(cvs_adds)::int AS cvs_adds
+	FROM stats_project_months
 	GROUP BY group_id
 	ORDER BY group_id DESC;
 
@@ -232,7 +166,7 @@ CREATE INDEX statsprojectall_groupid on stats_project_all(group_id);
 --
 DROP TABLE stats_project_developers_last30;
 CREATE TABLE stats_project_developers_last30 AS
-SELECT * FROM stats_project_developers 
+SELECT * FROM stats_project_developers
 WHERE (month = 200104 AND day >= 8 ) OR ( month > 200104 );
 
 --
@@ -287,7 +221,7 @@ CREATE INDEX statsproject30_groupid on stats_project_last_30(group_id);
 --
 DROP TABLE stats_site_pages_by_month;
 CREATE TABLE stats_site_pages_by_month AS
-select month,sum(site_page_views)::int as site_page_views 
+select month,sum(site_page_views)::int as site_page_views
 	from stats_site_pages_by_day group by month;
 
 --
@@ -298,26 +232,26 @@ select month,sum(site_page_views)::int as site_page_views
 --
 DROP TABLE stats_site_last_30;
 CREATE TABLE stats_site_last_30 AS
-SELECT p.month::int AS month, 
-	p.day::int AS day, 
+SELECT p.month::int AS month,
+	p.day::int AS day,
 	sspbd.site_page_views::int AS site_page_views,
-	SUM(p.downloads)::int AS downloads, 
+	SUM(p.downloads)::int AS downloads,
 	SUM(p.subdomain_views)::int AS subdomain_views,
-	SUM(p.msg_posted)::int AS msg_posted, 
-	SUM(p.bugs_opened)::int AS bugs_opened, 
-	SUM(p.bugs_closed)::int AS bugs_closed, 
-	SUM(p.support_opened)::int AS support_opened, 
-	SUM(p.support_closed)::int AS support_closed, 
-	SUM(p.patches_opened)::int AS patches_opened, 
-	SUM(p.patches_closed)::int AS patches_closed, 
+	SUM(p.msg_posted)::int AS msg_posted,
+	SUM(p.bugs_opened)::int AS bugs_opened,
+	SUM(p.bugs_closed)::int AS bugs_closed,
+	SUM(p.support_opened)::int AS support_opened,
+	SUM(p.support_closed)::int AS support_closed,
+	SUM(p.patches_opened)::int AS patches_opened,
+	SUM(p.patches_closed)::int AS patches_closed,
 	SUM(p.artifacts_opened)::int AS artifacts_opened,
 	SUM(p.artifacts_closed)::int AS artifacts_closed,
-	SUM(p.tasks_opened)::int AS tasks_opened, 
-	SUM(p.tasks_closed)::int AS tasks_closed, 
-	SUM(p.help_requests)::int AS help_requests, 
-	SUM(p.cvs_checkouts)::int AS cvs_checkouts, 
-	SUM(p.cvs_commits)::int AS cvs_commits, 
-	SUM(p.cvs_adds)::int AS cvs_adds 
+	SUM(p.tasks_opened)::int AS tasks_opened,
+	SUM(p.tasks_closed)::int AS tasks_closed,
+	SUM(p.help_requests)::int AS help_requests,
+	SUM(p.cvs_checkouts)::int AS cvs_checkouts,
+	SUM(p.cvs_commits)::int AS cvs_commits,
+	SUM(p.cvs_adds)::int AS cvs_adds
 	FROM stats_project_last_30 p, stats_site_pages_by_day sspbd
 		WHERE p.month=sspbd.month AND p.day=sspbd.day
 	GROUP BY p.month, p.day, sspbd.site_page_views;
@@ -332,25 +266,25 @@ CREATE INDEX statssitelast30_month_day on stats_site_last_30 (month,day);
 --
 DROP TABLE stats_site_months;
 CREATE TABLE stats_site_months AS
-SELECT spm.month::int AS month, 
+SELECT spm.month::int AS month,
 	sspbm.site_page_views::int AS site_page_views,
 	SUM(spm.downloads)::int AS downloads,
 	SUM(spm.subdomain_views)::int AS subdomain_views,
-	SUM(spm.msg_posted)::int AS msg_posted, 
-	SUM(spm.bugs_opened)::int AS bugs_opened, 
-	SUM(spm.bugs_closed)::int AS bugs_closed, 
-	SUM(spm.support_opened)::int AS support_opened, 
-	SUM(spm.support_closed)::int AS support_closed, 
-	SUM(spm.patches_opened)::int AS patches_opened, 
-	SUM(spm.patches_closed)::int AS patches_closed, 
+	SUM(spm.msg_posted)::int AS msg_posted,
+	SUM(spm.bugs_opened)::int AS bugs_opened,
+	SUM(spm.bugs_closed)::int AS bugs_closed,
+	SUM(spm.support_opened)::int AS support_opened,
+	SUM(spm.support_closed)::int AS support_closed,
+	SUM(spm.patches_opened)::int AS patches_opened,
+	SUM(spm.patches_closed)::int AS patches_closed,
 	SUM(spm.artifacts_opened)::int AS artifacts_opened,
 	SUM(spm.artifacts_closed)::int AS artifacts_closed,
-	SUM(spm.tasks_opened)::int AS tasks_opened, 
-	SUM(spm.tasks_closed)::int AS tasks_closed, 
+	SUM(spm.tasks_opened)::int AS tasks_opened,
+	SUM(spm.tasks_closed)::int AS tasks_closed,
 	SUM(spm.help_requests)::int AS help_requests,
-	SUM(spm.cvs_checkouts)::int AS cvs_checkouts, 
-	SUM(spm.cvs_commits)::int AS cvs_commits, 
-	SUM(spm.cvs_adds)::int AS cvs_adds 
+	SUM(spm.cvs_checkouts)::int AS cvs_checkouts,
+	SUM(spm.cvs_commits)::int AS cvs_commits,
+	SUM(spm.cvs_adds)::int AS cvs_adds
 	FROM stats_project_months spm, stats_site_pages_by_month sspbm
 		WHERE spm.month=sspbm.month
 	GROUP BY spm.month,sspbm.site_page_views
@@ -366,156 +300,33 @@ CREATE INDEX statssitemonths_month on stats_site_months(month);
 --
 DROP TABLE stats_site_all;
 CREATE TABLE stats_site_all AS
-SELECT 
+SELECT
 	SUM(site_page_views)::int AS site_page_views,
 	SUM(downloads)::int AS downloads,
 	SUM(subdomain_views)::int AS subdomain_views,
-	SUM(msg_posted)::int AS msg_posted, 
-	SUM(bugs_opened)::int AS bugs_opened, 
-	SUM(bugs_closed)::int AS bugs_closed, 
-	SUM(support_opened)::int AS support_opened, 
-	SUM(support_closed)::int AS support_closed, 
-	SUM(patches_opened)::int AS patches_opened, 
-	SUM(patches_closed)::int AS patches_closed, 
+	SUM(msg_posted)::int AS msg_posted,
+	SUM(bugs_opened)::int AS bugs_opened,
+	SUM(bugs_closed)::int AS bugs_closed,
+	SUM(support_opened)::int AS support_opened,
+	SUM(support_closed)::int AS support_closed,
+	SUM(patches_opened)::int AS patches_opened,
+	SUM(patches_closed)::int AS patches_closed,
 	SUM(artifacts_opened)::int AS artifacts_opened,
 	SUM(artifacts_closed)::int AS artifacts_closed,
-	SUM(tasks_opened)::int AS tasks_opened, 
-	SUM(tasks_closed)::int AS tasks_closed, 
+	SUM(tasks_opened)::int AS tasks_opened,
+	SUM(tasks_closed)::int AS tasks_closed,
 	SUM(help_requests)::int AS help_requests,
-	SUM(cvs_checkouts)::int AS cvs_checkouts, 
-	SUM(cvs_commits)::int AS cvs_commits, 
-	SUM(cvs_adds)::int AS cvs_adds 
+	SUM(cvs_checkouts)::int AS cvs_checkouts,
+	SUM(cvs_commits)::int AS cvs_commits,
+	SUM(cvs_adds)::int AS cvs_adds
 	FROM stats_site_months;
 
 */
 
 
-//
-//  total file downloads by file / day
-//
-db_begin(SYS_DB_STATS);
-
-echo "\n\nBeginning frs_dlstats_file_agg: ".date('Y-m-d H:i:s',time());
 $year=date('Y');
 $day=date('d');
 $month=date('m');
-
-$rel = db_query("DELETE FROM frs_dlstats_file_agg 
-	WHERE month='$year$month' AND day='$day';", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
-
-$sql="INSERT INTO frs_dlstats_file_agg
-    SELECT
-        month,
-        day,
-        file_id,
-        count(*) AS downloads
-    FROM frs_dlstats_file
-	WHERE month='$year$month' AND day='$day'
-    GROUP BY month,day,file_id;";
-$rel=db_query($sql, -1, 0, SYS_DB_STATS);
-
-if (!$rel) {
-    echo "ERROR IN frs_dlstats_file_agg";
-	echo $sql;
-}
-
-echo db_error(SYS_DB_STATS);
-
-db_commit(SYS_DB_STATS);
-
-db_query("VACUUM ANALYZE frs_dlstats_file_agg;", -1, 0, SYS_DB_STATS);
-
-
-//
-//  total file downloads by file
-//
-db_begin(SYS_DB_STATS);
-
-echo "\n\nBeginning frs_dlstats_filetotal_agg: ".date('Y-m-d H:i:s',time());
-
-$rel = db_query("DELETE FROM frs_dlstats_filetotal_agg;", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
-
-$rel=db_query("INSERT INTO frs_dlstats_filetotal_agg
-SELECT file_id,sum(downloads) AS downloads
-FROM frs_dlstats_file_agg
-GROUP BY file_id
-;", -1, 0, SYS_DB_STATS);
-
-if (!$rel) {
-    echo "ERROR IN frs_dlstats_filetotal_agg";
-}   
-
-echo db_error(SYS_DB_STATS);
-
-db_commit(SYS_DB_STATS);
-
-db_query("VACUUM ANALYZE frs_dlstats_filetotal_agg;", -1, 0, SYS_DB_STATS);
-
-
-
-//
-//  total downloads by group
-//
-db_begin(SYS_DB_STATS);
-
-echo "\n\nBeginning frs_dlstats_grouptotal_agg: ".date('Y-m-d H:i:s',time());
-
-$rel = db_query("DELETE FROM frs_dlstats_grouptotal_agg;", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
-
-$rel=db_query("INSERT INTO frs_dlstats_grouptotal_agg
-SELECT frs_package.group_id, sum(frs_dlstats_filetotal_agg.downloads) AS downloads
-FROM frs_package,frs_release,frs_file,frs_dlstats_filetotal_agg
-WHERE frs_package.package_id=frs_release.package_id 
-AND frs_release.release_id=frs_file.release_id 
-AND frs_file.file_id=frs_dlstats_filetotal_agg.file_id
-GROUP BY frs_package.group_id
-;", -1, 0, SYS_DB_STATS);
-
-if (!$rel) {
-    echo "ERROR IN frs_dlstats_grouptotal_agg";
-}
-
-echo db_error(SYS_DB_STATS);
-
-db_commit(SYS_DB_STATS);
-
-db_query("VACUUM ANALYZE frs_dlstats_grouptotal_agg;", -1, 0, SYS_DB_STATS);
-
-
-
-//
-//  total downloads by group
-//
-db_begin(SYS_DB_STATS);
-
-echo "\n\nBeginning frs_dlstats_group_agg: ".date('Y-m-d H:i:s',time());
-
-$rel = db_query("DELETE FROM frs_dlstats_group_agg;", -1, 0, SYS_DB_STATS);
-echo db_error(SYS_DB_STATS);
-
-$rel=db_query("INSERT INTO frs_dlstats_group_agg
-SELECT frs_package.group_id, fdfa.month, fdfa.day, sum(fdfa.downloads) AS downloads
-FROM frs_package,frs_release,frs_file,frs_dlstats_file_agg fdfa
-WHERE frs_package.package_id=frs_release.package_id 
-AND frs_release.release_id=frs_file.release_id 
-AND frs_file.file_id=fdfa.file_id
-GROUP BY frs_package.group_id,fdfa.month, fdfa.day
-;", -1, 0, SYS_DB_STATS);
-
-if (!$rel) {
-    echo "ERROR IN frs_dlstats_group_agg";
-}
-
-echo db_error(SYS_DB_STATS);
-
-db_commit(SYS_DB_STATS);
-
-db_query("VACUUM ANALYZE frs_dlstats_group_agg;", -1, 0, SYS_DB_STATS);
-
-?><?php
 
 
 //
@@ -556,16 +367,16 @@ SELECT spd.month,
 	scg.cvs_commits,
 	scg.cvs_adds
 	FROM (
-		SELECT month,group_id,avg(developers)::int AS developers 
-		FROM stats_project_developers GROUP BY month,group_id 
-		) spd 
+		SELECT month,group_id,avg(developers)::int AS developers
+		FROM stats_project_developers GROUP BY month,group_id
+		) spd
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(file_releases) AS file_releases,
 			sum(msg_posted) AS msg_posted,
 			sum(msg_uniq_auth) AS msg_uniq_auth,
 			sum(bugs_opened) AS bugs_opened,
-			sum(bugs_closed) AS bugs_closed, 
+			sum(bugs_closed) AS bugs_closed,
 			sum(support_opened) AS support_opened,
 			sum(support_closed) AS support_closed,
 			sum(patches_opened) AS patches_opened,
@@ -581,38 +392,38 @@ SELECT spd.month,
 		) sp USING (month,group_id)
 
 	LEFT JOIN (
-		SELECT month,group_id,sum(count) AS logo_showings 
-		FROM stats_agg_logo_by_group 
+		SELECT month,group_id,sum(count) AS logo_showings
+		FROM stats_agg_logo_by_group
 		GROUP BY month,group_id
 		) salbg USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,avg(ranking)::int AS group_ranking,avg(percentile)::float AS group_metric
-		FROM stats_project_metric 
+		FROM stats_project_metric
 		GROUP BY month,group_id
 		) spm USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(checkouts) AS cvs_checkouts,sum(commits) AS cvs_commits,sum(adds) AS cvs_adds
-		FROM stats_cvs_group 
+		FROM stats_cvs_group
 		GROUP BY month,group_id
 		) scg USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(count) AS site_views
-		FROM stats_agg_site_by_group 
+		FROM stats_agg_site_by_group
 		GROUP BY month,group_id
 		) sasbg USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(pages) AS subdomain_views
-		FROM stats_subd_pages 
+		FROM stats_subd_pages
 		GROUP BY month,group_id
 		) ssp USING (month,group_id)
 
 	LEFT JOIN (
 		SELECT month,group_id,sum(downloads) AS downloads
-		FROM frs_dlstats_group_agg 
+		FROM frs_dlstats_group_agg
 		GROUP BY month,group_id
 		) fdga USING (month,group_id);
 ", -1, 0, SYS_DB_STATS);
@@ -638,29 +449,29 @@ $rel=db_query("INSERT INTO stats_project_all
 SELECT group_id,
     AVG(developers)::int AS developers,
     AVG(group_ranking)::int AS group_ranking,
-    AVG(group_metric) AS group_metric, 
+    AVG(group_metric) AS group_metric,
     SUM(logo_showings) AS logo_showings,
-    SUM(downloads) AS downloads, 
+    SUM(downloads) AS downloads,
     SUM(site_views) AS site_views,
     SUM(subdomain_views) AS subdomain_views,
-    SUM(page_views) AS page_views, 
-    SUM(msg_posted) AS msg_posted, 
+    SUM(page_views) AS page_views,
+    SUM(msg_posted) AS msg_posted,
     AVG(msg_uniq_auth)::int AS msg_uniq_auth,
     SUM(bugs_opened) AS bugs_opened,
-    SUM(bugs_closed) AS bugs_closed, 
-    SUM(support_opened) AS support_opened, 
-    SUM(support_closed) AS support_closed, 
-    SUM(patches_opened) AS patches_opened, 
-    SUM(patches_closed) AS patches_closed, 
-    SUM(artifacts_opened) AS artifacts_opened, 
-    SUM(artifacts_closed) AS artifacts_closed, 
-    SUM(tasks_opened) AS tasks_opened, 
-    SUM(tasks_closed) AS tasks_closed, 
-    SUM(help_requests) AS help_requests, 
-    SUM(cvs_checkouts) AS cvs_checkouts, 
-    SUM(cvs_commits) AS cvs_commits, 
-    SUM(cvs_adds) AS cvs_adds 
-    FROM stats_project_months 
+    SUM(bugs_closed) AS bugs_closed,
+    SUM(support_opened) AS support_opened,
+    SUM(support_closed) AS support_closed,
+    SUM(patches_opened) AS patches_opened,
+    SUM(patches_closed) AS patches_closed,
+    SUM(artifacts_opened) AS artifacts_opened,
+    SUM(artifacts_closed) AS artifacts_closed,
+    SUM(tasks_opened) AS tasks_opened,
+    SUM(tasks_closed) AS tasks_closed,
+    SUM(help_requests) AS help_requests,
+    SUM(cvs_checkouts) AS cvs_checkouts,
+    SUM(cvs_commits) AS cvs_commits,
+    SUM(cvs_adds) AS cvs_adds
+    FROM stats_project_months
     GROUP BY group_id
     ORDER BY group_id DESC
 ;", -1, 0, SYS_DB_STATS);
@@ -772,7 +583,7 @@ $rel = db_query("DELETE FROM stats_site_pages_by_month;", -1, 0, SYS_DB_STATS);
 echo db_error(SYS_DB_STATS);
 
 $rel=db_query("INSERT INTO stats_site_pages_by_month
-select month,sum(site_page_views) as site_page_views 
+select month,sum(site_page_views) as site_page_views
     from stats_site_pages_by_day group by month;
 ", -1, 0, SYS_DB_STATS);
 
@@ -799,26 +610,26 @@ $rel = db_query("DELETE FROM stats_site_last_30;", -1, 0, SYS_DB_STATS);
 echo db_error(SYS_DB_STATS);
 
 $rel=db_query("INSERT INTO stats_site_last_30
-SELECT p.month, 
-	p.day, 
+SELECT p.month,
+	p.day,
 	sspbd.site_page_views,
-	SUM(p.downloads) AS downloads, 
+	SUM(p.downloads) AS downloads,
 	SUM(p.subdomain_views) AS subdomain_views,
-	SUM(p.msg_posted) AS msg_posted, 
-	SUM(p.bugs_opened) AS bugs_opened, 
-	SUM(p.bugs_closed) AS bugs_closed, 
-	SUM(p.support_opened) AS support_opened, 
-	SUM(p.support_closed) AS support_closed, 
-	SUM(p.patches_opened) AS patches_opened, 
-	SUM(p.patches_closed) AS patches_closed, 
-    SUM(artifacts_opened) AS artifacts_opened, 
-    SUM(artifacts_closed) AS artifacts_closed, 
-	SUM(p.tasks_opened) AS tasks_opened, 
-	SUM(p.tasks_closed) AS tasks_closed, 
-	SUM(p.help_requests) AS help_requests, 
-	SUM(p.cvs_checkouts) AS cvs_checkouts, 
-	SUM(p.cvs_commits) AS cvs_commits, 
-	SUM(p.cvs_adds) AS cvs_adds 
+	SUM(p.msg_posted) AS msg_posted,
+	SUM(p.bugs_opened) AS bugs_opened,
+	SUM(p.bugs_closed) AS bugs_closed,
+	SUM(p.support_opened) AS support_opened,
+	SUM(p.support_closed) AS support_closed,
+	SUM(p.patches_opened) AS patches_opened,
+	SUM(p.patches_closed) AS patches_closed,
+    SUM(artifacts_opened) AS artifacts_opened,
+    SUM(artifacts_closed) AS artifacts_closed,
+	SUM(p.tasks_opened) AS tasks_opened,
+	SUM(p.tasks_closed) AS tasks_closed,
+	SUM(p.help_requests) AS help_requests,
+	SUM(p.cvs_checkouts) AS cvs_checkouts,
+	SUM(p.cvs_commits) AS cvs_commits,
+	SUM(p.cvs_adds) AS cvs_adds
 	FROM stats_project_last_30 p, stats_site_pages_by_day sspbd
 		WHERE p.month=sspbd.month AND p.day=sspbd.day
 	GROUP BY p.month, p.day, sspbd.site_page_views;
@@ -843,25 +654,25 @@ $rel = db_query("DELETE FROM stats_site_months;", -1, 0, SYS_DB_STATS);
 echo db_error(SYS_DB_STATS);
 
 $rel=db_query("INSERT INTO stats_site_months
-SELECT spm.month, 
+SELECT spm.month,
 	sspbm.site_page_views,
 	SUM(spm.downloads) AS downloads,
 	SUM(spm.subdomain_views) AS subdomain_views,
-	SUM(spm.msg_posted) AS msg_posted, 
-	SUM(spm.bugs_opened) AS bugs_opened, 
-	SUM(spm.bugs_closed) AS bugs_closed, 
-	SUM(spm.support_opened) AS support_opened, 
-	SUM(spm.support_closed) AS support_closed, 
-	SUM(spm.patches_opened) AS patches_opened, 
-	SUM(spm.patches_closed) AS patches_closed, 
-	SUM(spm.artifacts_opened) AS artifacts_opened, 
-	SUM(spm.artifacts_closed) AS artifacts_closed, 
-	SUM(spm.tasks_opened) AS tasks_opened, 
-	SUM(spm.tasks_closed) AS tasks_closed, 
-	SUM(spm.help_requests) AS help_requests, 
-	SUM(spm.cvs_checkouts) AS cvs_checkouts, 
-	SUM(spm.cvs_commits) AS cvs_commits, 
-	SUM(spm.cvs_adds) AS cvs_adds 
+	SUM(spm.msg_posted) AS msg_posted,
+	SUM(spm.bugs_opened) AS bugs_opened,
+	SUM(spm.bugs_closed) AS bugs_closed,
+	SUM(spm.support_opened) AS support_opened,
+	SUM(spm.support_closed) AS support_closed,
+	SUM(spm.patches_opened) AS patches_opened,
+	SUM(spm.patches_closed) AS patches_closed,
+	SUM(spm.artifacts_opened) AS artifacts_opened,
+	SUM(spm.artifacts_closed) AS artifacts_closed,
+	SUM(spm.tasks_opened) AS tasks_opened,
+	SUM(spm.tasks_closed) AS tasks_closed,
+	SUM(spm.help_requests) AS help_requests,
+	SUM(spm.cvs_checkouts) AS cvs_checkouts,
+	SUM(spm.cvs_commits) AS cvs_commits,
+	SUM(spm.cvs_adds) AS cvs_adds
 	FROM stats_project_months spm, stats_site_pages_by_month sspbm
 	WHERE spm.month=sspbm.month
 	GROUP BY spm.month,sspbm.site_page_views
@@ -887,25 +698,25 @@ $rel = db_query("DELETE FROM stats_site_all;", -1, 0, SYS_DB_STATS);
 echo db_error(SYS_DB_STATS);
 
 $rel=db_query("INSERT INTO stats_site_all
-SELECT 
+SELECT
 	SUM(site_page_views) AS site_page_views,
 	SUM(downloads) AS downloads,
 	SUM(subdomain_views) AS subdomain_views,
-	SUM(msg_posted) AS msg_posted, 
-	SUM(bugs_opened) AS bugs_opened, 
-	SUM(bugs_closed) AS bugs_closed, 
-	SUM(support_opened) AS support_opened, 
-	SUM(support_closed) AS support_closed, 
-	SUM(patches_opened) AS patches_opened, 
-	SUM(patches_closed) AS patches_closed, 
-	SUM(artifacts_opened) AS artifacts_opened, 
-	SUM(artifacts_closed) AS artifacts_closed, 
-	SUM(tasks_opened) AS tasks_opened, 
-	SUM(tasks_closed) AS tasks_closed, 
-	SUM(help_requests) AS help_requests, 
-	SUM(cvs_checkouts) AS cvs_checkouts, 
-	SUM(cvs_commits) AS cvs_commits, 
-	SUM(cvs_adds) AS cvs_adds 
+	SUM(msg_posted) AS msg_posted,
+	SUM(bugs_opened) AS bugs_opened,
+	SUM(bugs_closed) AS bugs_closed,
+	SUM(support_opened) AS support_opened,
+	SUM(support_closed) AS support_closed,
+	SUM(patches_opened) AS patches_opened,
+	SUM(patches_closed) AS patches_closed,
+	SUM(artifacts_opened) AS artifacts_opened,
+	SUM(artifacts_closed) AS artifacts_closed,
+	SUM(tasks_opened) AS tasks_opened,
+	SUM(tasks_closed) AS tasks_closed,
+	SUM(help_requests) AS help_requests,
+	SUM(cvs_checkouts) AS cvs_checkouts,
+	SUM(cvs_commits) AS cvs_commits,
+	SUM(cvs_adds) AS cvs_adds
 	FROM stats_site_months;
 ", -1, 0, SYS_DB_STATS);
 

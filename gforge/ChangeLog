@@ -1,5 +1,15 @@
 2003-01-11  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/new/index.php: use new frs_dlstats_grouptotal_vw
+
+	* www/include/features_boxes.php(show_top_downloads): use new
+	frs_dlstats_grouptotal_vw.
+
+	* cronjobs/db_stats_agg.php: remove file download stat
+	calculations.
+
+	* db/20030112.sql: new file.
+
 	* common/frs/FRSRelease.class(create): yet another pg_atoi fix.
 
 2003-01-10  Ryan T. Sammartino  <ryants@shaw.ca>

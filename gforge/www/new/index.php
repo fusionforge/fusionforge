@@ -34,13 +34,13 @@ $query	= "SELECT groups.group_name,"
 	. "frs_release.release_date,"
 	. "frs_release.released_by,"
 	. "frs_package.name AS module_name, "
-	. "frs_dlstats_grouptotal_agg.downloads "
-	. "FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_agg "
+	. "frs_dlstats_grouptotal_vw.downloads "
+	. "FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_vw "
 	. "WHERE ( frs_release.release_date > '$start_time' "
 	. "AND frs_release.package_id = frs_package.package_id "
 	. "AND frs_package.group_id = groups.group_id "
 	. "AND frs_release.released_by = users.user_id "
-	. "AND frs_package.group_id = frs_dlstats_grouptotal_agg.group_id "
+	. "AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id "
 	. "AND frs_release.status_id=1 ) "
 	. "ORDER BY frs_release.release_date DESC";
 $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
@@ -66,7 +66,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			print "<td colspan=\"2\">";
 			print "<a href=\"/projects/$row_new[unix_group_name]/\"><strong>$row_new[group_name]</strong></a>"
 				. "\n</td><td nowrap=\"nowrap\"><em>Released by: <a href=\"/users/$row_new[user_name]/\">"
-				. "$row_new[user_name]</a></em></td></tr>\n";	
+				. "$row_new[user_name]</a></em></td></tr>\n";
 
 			print "<tr><td>Module: $row_new[module_name]</td>\n";
 			print "<td>Version: $row_new[release_version]</td>\n";

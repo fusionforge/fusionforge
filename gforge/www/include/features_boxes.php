@@ -35,10 +35,10 @@ function show_top_downloads() {
 		SELECT groups.group_id,
 		groups.group_name,
 		groups.unix_group_name,
-		frs_dlstats_grouptotal_agg.downloads 
-		FROM frs_dlstats_grouptotal_agg,groups 
-		WHERE 
-		frs_dlstats_grouptotal_agg.group_id=groups.group_id 
+		frs_dlstats_grouptotal_vw.downloads
+		FROM frs_dlstats_grouptotal_vw,groups
+		WHERE
+		frs_dlstats_grouptotal_vw.group_id=groups.group_id
 		ORDER BY downloads DESC
 	", 10, 0, SYS_DB_STATS);
 //	echo db_error();
@@ -48,12 +48,12 @@ function show_top_downloads() {
 	}
 	// print each one
 	while ($row_topdown = db_fetch_array($res_topdown)) {
-		if ($row_topdown['downloads'] > 0) 
+		if ($row_topdown['downloads'] > 0)
 			$return .= "(" . number_format($row_topdown[downloads], 0) . ") <a href=\"/projects/$row_topdown[unix_group_name]/\">"
 			. "$row_topdown[group_name]</a><br />\n";
 	}
 	$return .= '<div align="center"><a href="/top/">[ More ]</a></div>';
-	
+
 	return $return;
 
 }
@@ -149,8 +149,8 @@ function show_highest_ranked_users() {
 
 	//select out the users information to show the top users on the site
 	$sql="SELECT users.user_name,users.realname,user_metric.metric
-		FROM user_metric,users 
-		WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11 
+		FROM user_metric,users
+		WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11
 		ORDER BY ranking ASC";
 	$res=db_query($sql);
 	$rows=db_numrows($res);
@@ -158,7 +158,7 @@ function show_highest_ranked_users() {
 		return 'None Found. '.db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
-			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <a href="/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</a><br />'; 
+			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <a href="/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</a><br />';
 		}
 	}
 	$return .= '<div align="center"><a href="/top/topusers.php">[ More ]</a></div>';
