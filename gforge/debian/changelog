@@ -1,12 +1,15 @@
-gforge (3.2.1-2+23) experimental; urgency=low
+gforge (3.2.1-4) experimental; urgency=low
 
   * [Christian] Now use setup script (wrapped in gforge-config)
   * [Christian] Added dependencies in control file so all package of the same version are
     installed when you apt-get install gforge
+  * [Christian] Re-added local.pl and database.inc fill
+  * [Christian] Added dumps dir for gforge-cvs
+  * [Christian] Various change to make work better setup script
 
- -- Christian Bayle <bayle@debian.org>  Wed,  3 Mar 2004 10:08:06 +0100
+ -- Christian Bayle <bayle@debian.org>  Sat, 13 Mar 2004 02:59:35 +0100
 
-gforge (3.2.1-2+4) experimental; urgency=low
+gforge (3.2.1-2) experimental; urgency=low
 
   * [Roland] New upstream release.  Debian packaging still experimental at
     this stage.
