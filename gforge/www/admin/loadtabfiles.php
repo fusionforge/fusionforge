@@ -34,9 +34,13 @@ if ($load) {
 					continue;
 				}
 				$line = explode("\t", $ary[$i], 3);
-				$query="INSERT INTO tmp_lang values(". $tmpid . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . $line[2] ."')";
+#				$query="INSERT INTO tmp_lang values(". $tmpid . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . $line[2] ."')";
+				$query="INSERT INTO tmp_lang values(". $tmpid . ",'" . $language_id . "'," . $seq . ",'" . $line[0] . "','" . $line[1] . "','" . addslashes(quotemeta(htmlspecialchars($line[2]))) ."')";
 				$tmpid++;
-				db_query($query);
+				$res=db_query($query);
+				if (!$res){
+					echo '<BR>'.$query.'<BR>'. db_error();
+				}
 			}
 		}
 	}
