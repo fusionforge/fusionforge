@@ -3488,7 +3488,11 @@ COPY "theme_prefs"  FROM stdin;
 
 
 COPY "themes"  FROM stdin;
-1	offsite	Off Site Theme
+1	forged	Forged Metal
+2	classic	Classic Sourceforge
+3	ultralite	Ultra Lite
+4	debian	Debian
+5	savannah	Savannah
 \.
 --
 -- Data for TOC Entry ID 537 (OID 21700)

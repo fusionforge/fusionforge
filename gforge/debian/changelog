@@ -18,8 +18,9 @@ sourceforge (2.6-0+8+) unstable; urgency=low
   * [Christian] change uid/gid attribution in ldap.php to be backend compliant
   * [Christian] added debian and savannah Themes
   * [Roland] Remove /cvsroot symlink on purge.
+  * [Roland] Insert the appropriate rows in the database for themes.
 
- -- Roland Mas <lolando@debian.org>  Wed, 10 Apr 2002 12:08:51 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 10 Apr 2002 12:34:09 +0200
 
 sourceforge (2.6-0+8) unstable; urgency=low
 

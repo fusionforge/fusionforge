@@ -1399,4 +1399,7 @@ CREATE UNIQUE INDEX statssite_oid ON stats_site USING btree (oid);
 CREATE UNIQUE INDEX statssitepgsbyday_oid ON stats_site_pages_by_day USING btree (oid);
 CREATE UNIQUE INDEX statssubdpages_oid ON stats_subd_pages USING btree (oid);
 
--- Sequences
+-- Add two new themes
+
+INSERT INTO themes (dirname, fullname) VALUES ('debian', 'Debian') ;
+INSERT INTO themes (dirname, fullname) VALUES ('savannah', 'Savannah') ;
