@@ -24,8 +24,10 @@ configure_libnss_ldap(){
     cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-new
 	dn=$1
 	# Check if DN is correct
-	if ! grep -q "^base.[ 	]*$dc=" /etc/libnss-ldap.conf.sourceforge-new ; then
+	if ! grep -q "^base[ 	]*$dn" /etc/libnss-ldap.conf.sourceforge-new ; then
 		echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
+		grep "^base" /etc/libnss-ldap.conf
+		echo "Should be: base $dn"
 	fi
 	# Check bindpw
 	# Should contain the secret
@@ -38,10 +40,10 @@ configure_libnss_ldap(){
 #	fi
 	# Check rootbinddn
 	# This seems to be necessary to display uid/gid
-	# Should be cn=admin,ou=People,dc=...
+	# Should be cn=admin,dc=...
 	if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf.sourceforge-new ; then
 		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf.sourceforge-new
-		echo "rootbinddn cn=admin,ou=People,$dn" >>/etc/libnss-ldap.conf.sourceforge-new
+		echo "rootbinddn cn=admin,$dn" >>/etc/libnss-ldap.conf.sourceforge-new
 	fi
 }
 
@@ -96,19 +98,19 @@ access to attribute=userPassword
 
 		perl -pi -e "s/access to \*/# Next lines added by Sourceforge install
 access to dn=\".*,ou=People,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 access to dn=\"ou=People,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 access to dn=\"ou=Group,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 access to dn=\"ou=cvsGroup,$dn\"		
-	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=admin,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 # End of sourceforge add
@@ -208,8 +210,8 @@ load_ldap(){
 		# authentication.
 		# -r Replace existing values by default.
 		# add with -r don't modify and modify don't add so i do add and modify
- 		ldapadd $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
- 		ldapmodify $VERBOSE -r -c -D "cn=admin,ou=People,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
+ 		ldapadd $VERBOSE -r -c -D "cn=admin,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
+ 		ldapmodify $VERBOSE -r -c -D "cn=admin,$naming_context" -x -w"$secret" -f $tmpldif > /dev/null 2>&1 || true
 		rm -f $tmpldif
 	else
 		echo "WARNING: Can't load ldap table without /etc/lapd.secret file"
@@ -219,31 +221,34 @@ load_ldap(){
 
 print_ldif_default(){
 	dn=$1
+	dc=`echo $1 | sed 's/dc=\(.[^,]*\),.*/\1/'`
 	cryptedpasswd=$2
 	cat <<-FIN
 dn: $dn
 objectClass: top
 objectClass: domain
-dc: rd
+dc: $dc
+
+dn: cn=admin,$dn
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+cn: admin
+userPassword: $cryptedpasswd
+description: LDAP administrator
 
 dn: ou=People, $dn
-objectClass: top
 objectClass: organizationalUnit
 ou: People
 
-dn: cn=admin, ou=People, $dn
-objectClass: top
-userPassword: $cryptedpasswd
-cn: admin
-
 dn: ou=Roaming, $dn
-objectClass: top
 objectCLass: organizationalUnit
+ou=Roaming
 FIN
 }
 
 setup_vars() {
 	sys_ldap_base_dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+	[ "x$sys_ldap_base_dn" == "x" ] && sys_ldap_base_dn=`grep suffix /etc/ldap/slapd.conf | cut -d\" -f2`
 	#echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
 	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
 	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
@@ -257,9 +262,9 @@ setup_vars() {
 }
 # Check Server
 check_server() {
-		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-		[ "x$naming_context" == "x" ] && invoke-rc.d slapd restart && sleep 5 && naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-		[ "x$naming_context" == "x" ] && echo KO || echo $naming_context
+	naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	[ "x$naming_context" == "x" ] && invoke-rc.d slapd restart && sleep 5 && naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	[ "x$naming_context" == "x" ] && echo "LDAP Server KO" || echo "LDAP Server OK : dn=$naming_context"
 }
 
 # Setup SF_robot Passwd
@@ -269,36 +274,33 @@ setup_robot() {
 	# The first account is only used in a multiserver SF
 	echo "Adding robot accounts"
 
-	{ ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
+	{ ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" || true ; } <<-FIN
 dn: cn=Replicator,$sys_ldap_base_dn
+description: Replicator the Robot
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+userPassword: {crypt}xxxxx
 cn: Replicator
-sn: Replicator the Robot
-description: empty
-objectClass: top
-objectClass: person
-userPassword: {crypt}x
 
 dn: cn=SF_robot,$sys_ldap_base_dn
+description: SF the Robot
+objectClass: organizationalRole
+objectClass: simpleSecurityObject
+userPassword: {crypt}xxxxx
 cn: SF_robot
-sn: SF the Robot
-description: empty
-objectClass: top
-objectClass: person
-userPassword: {crypt}x
 FIN
-
+	check_server
 	echo "Changing SF_robot passwd using admin account"
-	{ ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
 userPassword: $cryptedpasswd
 FIN
-
-	echo "Testing LDAP"
 	check_server
+	echo "Testing LDAP"
 	echo "Changing dummy cn using SF_robot account"
-	{ ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
@@ -327,7 +329,6 @@ case "$1" in
 		sleep 5		# Sometimes it takes a bit of time to get out of bed
 		echo "Load ldap"
 		load_ldap $dn "$secret"
-		check_server
 		echo "Setup SF_robot account"
 		setup_robot
 		;;
@@ -358,7 +359,7 @@ case "$1" in
 	        setup_vars
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 		admin_regexp=$(echo $sys_ldap_base_dn | sed 's/, */, */g')
-		admin_regexp="^cn=admin, *ou=People, *$admin_regexp"
+		admin_regexp="^cn=admin, *$admin_regexp"
 		get_our_entries () {
 		    slapcat \
 			| grep "^dn:" \
@@ -375,7 +376,7 @@ case "$1" in
 			| grep -v "$admin_regexp"
 		}
 		get_our_entries || true
-		get_our_entries | ldapdelete -D "cn=admin,ou=People,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
+		get_our_entries | ldapdelete -D "cn=admin,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
 		;;
 	reset)
 		setup_vars

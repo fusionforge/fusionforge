@@ -8,7 +8,7 @@ sourceforge (2.6-0+6+) unstable; urgency=low
   * [Roland] [From 2.5] Moved templates to a Policy-compliant location
     (/etc/sourceforge/templates).
 
- --
+ -- Christian Bayle <bayle@aist.enst.fr>  Thu,  7 Feb 2002 18:30:27 +0100
 
 sourceforge (2.6-0+6) unstable; urgency=low
 
