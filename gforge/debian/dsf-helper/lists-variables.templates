@@ -1,0 +1,8 @@
+Template: sourceforge/shared/lists_host
+Type: string
+Description: Your mailing-lists server
+ The hostname of the server that will host your Sourceforge mailing-lists. 
+ It should not be the same as your main SF host.
+Description-fr: Votre serveur de listes de diffusion
+ Le nom du serveur qui hébergera vos listes de diffusion de Sourceforge.
+ Ce nom ne devrait pas être identique au nom de votre serveur SF principal.

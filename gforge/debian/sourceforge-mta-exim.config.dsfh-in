@@ -4,6 +4,6 @@
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:common-variables#
-#DSFHELPER:cvshost-variables#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
+#DSFHELPER:ldap-variables#

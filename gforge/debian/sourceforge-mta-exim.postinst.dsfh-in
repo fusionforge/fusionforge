@@ -28,6 +28,9 @@ set -e
 #DSFHELPER:replace-files#
 case "$1" in
     configure)
+	vars="server_admin noreply_to_bitbucket users_host lists_host ip_address"
+        update_mainconffile $vars
+	/usr/sbin/sourceforge-config
         # Patch Exim configuration files
 	/usr/lib/sourceforge/bin/install-exim.sh configure-files
 	propose_update_install /etc/aliases

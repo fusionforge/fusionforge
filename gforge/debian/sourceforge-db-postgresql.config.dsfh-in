@@ -37,17 +37,8 @@ if [ "$RET" = "false" ] ; then
     db_set sourceforge/shared/shell_host shell.$RET
 fi
 
-db_fget sourceforge/shared/users_host seen || true
-if [ "$RET" = "false" ] ; then
-    db_get sourceforge/shared/domain_name
-    db_set sourceforge/shared/users_host users.$RET
-fi
-
-db_fget sourceforge/shared/lists_host seen || true
-if [ "$RET" = "false" ] ; then
-    db_get sourceforge/shared/domain_name
-    db_set sourceforge/shared/lists_host lists.$RET
-fi
+#DSFHELPER:users-variables#
+#DSFHELPER:lists-variables#
 
 db_fget sourceforge/shared/download_host seen || true
 if [ "$RET" = "false" ] ; then

@@ -18,10 +18,10 @@ sourceforge (2.6-0+11+) unstable; urgency=low
     code/text is in one file, and is inserted in the appropriate files
     when the package is built.
   * [Roland] Cleaned debian/rules file a bit.
-  * [Christian] Added box1_get_alt_row_style function in Layout.class
-    that replace html_get_alt_row_color from html.php. This will help
-    to solve problems with savannah themes. I also made the necessary changes
-    in savannah styles
+  * [Christian] Added box1_get_alt_row_style function in Layout.class that
+    replace html_get_alt_row_color from html.php. This will help to solve
+    problems with savannah themes. I also made the necessary changes in
+    savannah styles
   * [Soon-Son] fixed bug # 148 (malformed part on dns.zone)
   * [Soon-Son] fixed bug # 431 (Number of public forum/msg are 0)
   * [Soon-Son] removed all links to nonexistent document
@@ -29,10 +29,8 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Soon-Son] removed dtd definition for bug # 120
   * [Christian] Repared trove map count
   * [Roland] Fixed invocation of tarballs.sh in crontab.
-  * [Christian] Added system_name in sourceforge-common.postinst.dsfh-in vars
-    not sure it's done in DSF helper spirit, but this solves the missing var
 
- -- Christian Bayle <bayle@debian.org>  Sat, 25 May 2002 00:27:57 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 31 May 2002 09:57:59 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 

@@ -1,26 +1,12 @@
 #DSFHELPER:common-variables#
-
 #DSFHELPER:cvshost-variables#
-
 Template: sourceforge/shared/shell_host
 Type: string
 Description: Your shell server
  The hostname of the server that will host your Sourceforge shell accounts
 
-Template: sourceforge/shared/users_host
-Type: string
-Description: Your user server
- The hostname of the server that will host your Sourceforge user accounts and mail
-
-Template: sourceforge/shared/lists_host
-Type: string
-Description: Your mailing-lists server
- The hostname of the server that will host your Sourceforge mailing-lists. 
- It should not be the same as your main SF host.
-Description-fr: Votre serveur de listes de diffusion
- Le nom du serveur qui hébergera vos listes de diffusion de Sourceforge.
- Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
-
+#DSFHELPER:users-variables#
+#DSFHELPER:lists-variables#
 Template: sourceforge/shared/download_host
 Type: string
 Description: Your download server
