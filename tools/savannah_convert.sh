@@ -1,6 +1,6 @@
 #!/bin/sh
 DEBIANSF_CVS_PATH=/home/bayle/local/sourceforge/savannah/src2/sourceforge
-SAVANNAH_CVS_PATH=/home/bayle/CVS/savannah/savannah
+SAVANNAH_CVS_PATH=/home/bayle/cvs/savannah/savannah
 for savannah_theme_dir in $SAVANNAH_CVS_PATH/www/images/*.theme
 do
 	theme_name=`basename $savannah_theme_dir '.theme'`
