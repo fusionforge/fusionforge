@@ -7,10 +7,8 @@ else
 	[ -d /var/lib/sourceforge/dumps ] || \
 	mkdir /var/lib/sourceforge/dumps && \
 	chown sourceforge:sourceforge /var/lib/sourceforge/dumps
-	chsh -s /bin/bash sourceforge
-	su sourceforge -c /usr/lib/sourceforge/bin/dump_database.pl
-	su sourceforge -c /usr/lib/sourceforge/bin/ssh_dump.pl
-	chsh -s /bin/false sourceforge
+	su sourceforge -c /usr/lib/sourceforge/bin/dump_database.pl -s /bin/sh
+	su sourceforge -c /usr/lib/sourceforge/bin/ssh_dump.pl -s /bin/sh
 	# Create user, groups and cvs archives
 	/usr/lib/sourceforge/bin/new_parse.pl
 	# Fill ssh authorized_keys
