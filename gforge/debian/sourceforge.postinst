@@ -117,7 +117,7 @@ EOF
 	    echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache/httpd.conf
 	fi
 	
-	# Make sure pgsql and gd are enabled in the PHP config files
+	# Make sure pgsql,ldap and gd are enabled in the PHP config files
 	if [ -f /etc/php4/apache/php.ini ]; then
 	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/apache/php.ini; then
 		echo "Enabling pgsql in /etc/php4/apache/php.ini"
@@ -126,6 +126,10 @@ EOF
 	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*gd.so" /etc/php4/apache/php.ini; then
 		echo "Enabling gd in /etc/php4/apache/php.ini"
 		echo "extension=gd.so" >> /etc/php4/apache/php.ini
+	    fi
+	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*ldap.so" /etc/php4/apache/php.ini; then
+		echo "Enabling ldap in /etc/php4/apache/php.ini"
+		echo "extension=ldap.so" >> /etc/php4/apache/php.ini
 	    fi
 	fi
 	if [ -f /etc/php4/cgi/php.ini ]; then
