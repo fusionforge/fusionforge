@@ -29,6 +29,7 @@ then
 else
 	export domain_name=$1
 	export ip_address=$2
+	echo "Configuring DNS for domain name = $domain_name and IP address = $ip_address..."
   	if ! grep -q "// Next line inserted by Sourceforge install" /etc/bind/named.conf 
   	then
   		cat >> /etc/bind/named.conf <<-EOF
@@ -53,9 +54,10 @@ EOF
   	chown sourceforge:sourceforge /var/lib/sourceforge/bind
   	chown sourceforge:sourceforge /var/lib/sourceforge/bind/dns.head
   	chown sourceforge:sourceforge /var/lib/sourceforge/bind/dns.zone
-  	echo "DNS Config is not complete:"
-  	echo "	-Does not do reverse, maybe not in the state of the art"
-  	echo "	-Suppose that all servers are in the same box"
-  	echo "	-Wizards advices are welcome"
+  	# echo "DNS Config is not complete:"
+  	# echo "	-Does not do reverse, maybe not in the state of the art"
+  	# echo "	-Suppose that all servers are in the same box"
+  	# echo "	-Wizards advices are welcome"
 	/usr/lib/sourceforge/bin/dns_conf.pl
+	echo "DNS configuration done."
 fi
