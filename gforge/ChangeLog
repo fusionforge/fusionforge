@@ -1,7 +1,12 @@
+2003-04-28 Tom Copeland <tom@infoether.com>
+
+	* www/include/project_home.php: Bug #320: Developer count 
+	needs to check user.status.
+
 2003-04-25 Tom Copeland <tom@infoether.com>
 
 	* contrib/cmd-line-prototype.tar.gz: Patch #160 - Richard's 
-	command line API prototype
+	command line API prototype.
 
 2003-04-24 Tom Copeland <tom@infoether.com>
 
