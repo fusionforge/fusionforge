@@ -41,8 +41,11 @@ sourceforge (2.5-29+) unstable; urgency=low
     we now remove all *our* entries but a few.  Sorry about that.
   * [Roland] When exiting on an error, db-upgrade.pl now tells you the
     request that failed.  That should help debugging.
+  * [Roland] Moved the PostgreSQL de-configuration down in the prerm
+    script, since the LDAP de-configuration now uses sql2ldif and
+    therefore needs access to the database.
 
- -- Roland Mas <lolando@debian.org>  Wed, 17 Jul 2002 11:09:21 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Jul 2002 12:09:04 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
