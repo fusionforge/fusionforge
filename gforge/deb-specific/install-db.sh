@@ -107,7 +107,7 @@ EOF
 		exit 1
 	    fi
 	else
-	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
+	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" 1> $tmp1 2> $tmp2 <<-EOF
 CREATE USER $db_user WITH PASSWORD '$db_passwd' ;
 EOF
 		then
