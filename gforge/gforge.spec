@@ -222,6 +222,8 @@ fi
 /var/lib/gforge/scmtarballs
 
 %changelog
+* Thu Jan 27 2005 Thales Information Systems <guillaume.smet@openwide.fr>
+- it's now possible to add custom stuff in /etc/gforge/custom/
 * Sat Dec 25 2004 Guillaume Smet <guillaume-gforge@smet.org>
 - it's now possible to add specific language files in the RPM
 * Fri Dec 03 2004 Dassault Aviation <guillaume.smet@openwide.fr>
