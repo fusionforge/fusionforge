@@ -20,8 +20,9 @@ sourceforge (2.6-0+11+) unstable; urgency=low
   * [Soon-Son] more i18n effort including patch # 283
   * [Soon-Son] removed dtd definition for bug # 120
   * [Christian] Repared trove map count 
+  * [Roland] Fixed invocation of tarballs.sh in crontab.
 
- -- Christian Bayle <bayle@debian.org>  Fri, 24 May 2002 00:49:49 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 24 May 2002 18:31:26 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
