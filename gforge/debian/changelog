@@ -1,4 +1,4 @@
-gforge (3.1-22+6) unstable; urgency=low
+gforge (3.1-23) unstable; urgency=low
 
   * [Roland] Updated Dutch translations for Debconf templates from
     debian-l10n-dutch (closes: #279239).
@@ -15,7 +15,7 @@ gforge (3.1-22+6) unstable; urgency=low
   * [Roland] Updated debian/copyright a bit, including a mention of the
     http://gforge.org upstream website (closes: #281309).
 
- -- Roland Mas <lolando@debian.org>  Wed, 17 Nov 2004 17:31:39 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Nov 2004 20:15:52 +0100
 
 gforge (3.1-22) unstable; urgency=medium
 
