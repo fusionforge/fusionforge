@@ -158,7 +158,7 @@ account_verify	nouser	L'utilisateur n'existe pas
 account_verify	password	Mot de passe :
 account_verify	title	$1 - Vérification de votre compte
 account_verify	usermandatory	Vous devez rentrer un nom d'utilisateur.
-account_verify	verify_blurb	<p>Pour terminer votre inscription, identifiez-vous maintenant. Votre compte sera alors activé pour les identifications normales.</p>
+account_verify	verify_blurb	<p>Pour terminer votre inscription, identifiez-vous. Votre compte sera alors activé pour l'identification standard.</p>
 add_snippet	add_this_snippet_version_id	Ajouter cet identifiant de version d'échantillon 
 add_snippet	back_to_add_page	Retour à la page d'ajout
 add_snippet	error_doing_snippet_version_insert	ERREUR pendant l'insertion de version d'échantillon
@@ -177,109 +177,114 @@ add_snippet	title	Soumettre un nouvel échantillon
 add_snippet	you_can_use_this_form	Vous pouvez utiliser ce formulaire de manière répétitive pour ajouter des échantillons à votre paquet.</p><p>L'identifiant de version d'échantillon est l'identifiant unique qui apparaît après une version données d'un échantillon sur les pages d'affichage.
 admin	add	Ajouter
 admin	add_new	[Ajouter une annonce]
-admin	are_you_sure_delete	Etes vous sûrs de vouloir effacer ceci ?
+admin	are_you_sure_delete	Etes vous sûr de vouloir effacer ceci ?
 admin	cancel	Annuler
 admin	delete	Supprimer
-admin	edit	Edition
+admin	edit	Editer
 admin	http_domain	Domaine HTTP :
 admin	license	Licence :
-admin	license_other	Autre Licence :
+admin	license_other	Autre licence :
 admin	na	N/A
 admin	other	Autre
 admin	reject	Rejeter
-admin	submit_changes	Soumettre les changements
+admin	site_admin_home	Accueil de l'administration
+admin	submit_changes	Soumettre les modifications
 admin	submit_new	Proposer une annonce
-admin	successfully_added	Ajouté correctement
-admin	successfully_modified	Modifié correctement
-admin_add_lang	add_new_language	Ajouter une nouvelle langue
-admin_add_language	class_filename	Ficher-classe :
+admin	successfully_added	Ajouté avec succès
+admin	successfully_deleted	Supprimé avec succès
+admin	successfully_modified	Modifié avec succès
+admin	yes	oui
+admin_add_language	add_new_language	Ajouter une nouvelle langue
+admin_add_language	class_filename	Fichier de la classe :
 admin_add_language	classname	Nom de classe :
-admin_add_language	existing_language	Langage existant
+admin_add_language	existing_language	Langue existante
 admin_add_language	name	Nom :
-admin_add_language	submit	ENVOYER
-admin_approve_pending	add_this_custom_response	Ajouter cette réponse aux réponses toutes faites.
+admin_add_language	submit	Valider
+admin_approve_pending	add_this_custom_response	Ajouter cette réponse personnalisée aux réponses possibles.
 admin_approve_pending	admin_approve_pending	Activer
 admin_approve_pending	approve	Approuver
-admin_approve_pending	approve_all_on_this_page	Approuver tout sur cette page
+admin_approve_pending	approve_all_on_this_page	Tout approuver sur cette page
 admin_approve_pending	approving_group	Groupe à approuver :
-admin_approve_pending	approving_pending_projects	Projets restant à approuver :
-admin_approve_pending	custom_response_title	Personaliser les titres des réponses et le texte
-admin_approve_pending	edit_project_details	[Edition des détails du projet]
-admin_approve_pending	error_creating_group	Erreur dans la création d'un objet groupe
-admin_approve_pending	error_group_rejection	Erreir pendant le rejet d'un groupe
+admin_approve_pending	approving_pending_projects	Projets en attente d'approbation
+admin_approve_pending	custom_response_title	Personnaliser le titre et le texte de la réponse
+admin_approve_pending	edit_project_details	[Editer les informations du projet]
+admin_approve_pending	error_creating_group	Erreur lors de la création d'un objet groupe
+admin_approve_pending	error_group_rejection	Erreur lors du refus d'un groupe
 admin_approve_pending	home_box	Interpréteur maison :
 admin_approve_pending	manage_responses	(Gérer les réponses)
-admin_approve_pending	no_pending_projects_to_approve	Pas de projets en attente
+admin_approve_pending	no_pending_projects_to_approve	Pas de projet en attente
 admin_approve_pending	none_found	Introuvable
-admin_approve_pending	other_information	Autre information
+admin_approve_pending	other_information	Autres informations
 admin_approve_pending	pending_projects	Projets en attente :
-admin_approve_pending	pending_reason	Motif :
-admin_approve_pending	project_admin	Administrateur de projet
+admin_approve_pending	pending_reason	Motif de l'attente :
+admin_approve_pending	project_admin	Administrateur du projet
 admin_approve_pending	submitted_description	Description proposée :
 admin_approve_pending	unix_group_name	Nom du groupe Unix :
 admin_approve_pending	view_edit_project_members	[Voir/Editer les membres du projet]
-admin_database	add_an_already_active_database	Ajouter un base de données déjà active
+admin_database	add_an_already_active_database	Ajouter une base de données déjà active
 admin_database	added_already_active_database	Base de données déjà active ajoutée
 admin_database	count	Nombre
 admin_database	display_database_type	Voir les base de données du type :
-admin_database	error_adding_database	Erreur dans l'ajout d'une base de donnée
+admin_database	error_adding_database	Erreur lors de l'ajout d'une base de donnée
 admin_database	group	Groupe
 admin_database	group_unix_name	Nom de groupe Unix :
 admin_database	no_databases_defined	Aucune base de donnée définie
-admin_database	site_admin_groups_maintance	Gestion des bases de données des groupes
-admin_database	statistics_for_project_database	Statistiques pour les bases de données de projets
+admin_database	site_admin_groups_maintance	Administration du site : gestion des bases de données des groupes
+admin_database	statistics_for_project_database	Statistiques pour les bases de données des projets
 admin_database	type	Type
 admin_database	unable_to_insert	Impossible d'insérer une base de donnée déjà active
 admin_groupedit	active	Actif (A)
 admin_groupedit	deleted	Détruit (D)
 admin_groupedit	error	Erreur
-admin_groupedit	error_creating_group_object	Erreur en créant un objet group
+admin_groupedit	error_creating_group_object	Erreur lors de la création d'un objet groupe
 admin_groupedit	holding	Suspendu
-admin_groupedit	incomplete	Imcomplet (I)
-admin_groupedit	instruction_email_sent	Courrier d'instruction envoyé
-admin_groupedit	new_project_instruction_email	Courrier d'instruction à propos de nouveaux projets envoyé à nouveau
+admin_groupedit	incomplete	Incomplet (I)
+admin_groupedit	instruction_email_sent	Courrier contenant les instructions envoyé
+admin_groupedit	new_project_instruction_email	Courrier contenant les instructions à propos de nouveaux projets envoyé à nouveau
 admin_groupedit	no	Non
 admin_groupedit	pending	En attente (E)
 admin_groupedit	project_admin	[Administrateur du projet]
 admin_groupedit	public	Public ?
-admin_groupedit	registration_application	Enregistrement
+admin_groupedit	registration_application	Demande d'inscription
 admin_groupedit	status	Statut
-admin_groupedit	title	Information sur le groupe
+admin_groupedit	title	Administration du site : Informations sur le groupe
 admin_groupedit	unix_group_name	Nom Unix du groupe :
 admin_groupedit	update	Mise à jour
 admin_groupedit	updated	Mise à jour effectuée
 admin_groupedit	yes	Oui
 admin_grouplist	group_list	Liste des groupes
-admin_grouplist	group_list_for_category	Liste de groupe pour la cétégorie :
+admin_grouplist	group_list_for_category	Liste des groupes de la catégorie :
 admin_grouplist	group_name_click_to_edit	Nom du groupe (cliquez pour modifier)
-admin_grouplist	groups_that_begin_with	Groupes commencant par :
+admin_grouplist	groups_that_begin_with	Groupes commençant par :
 admin_grouplist	license	Licence
 admin_grouplist	members	Membres
 admin_grouplist	public	Public ?
+admin_grouplist	status	Statut
 admin_grouplist	unix_name	Nom Unix
-admin_index	add_delete_edit_file_types	Ajouter, Supprimer ou Modifier les types de fichiers
-admin_index	add_delete_edit_laguage	Ajouter, Supprimer ou Modifier les languages accepctés
-admin_index	add_edit_delete_processors	Ajouter, Supprimer ou Modifier les processeurs
-admin_index	add_edit_delete_themes	Ajouter, Supprimer ou Modifier les thèmes
+admin_index	add_delete_edit_file_types	Ajouter, Supprimer ou Modifier des types de fichiers
+admin_index	add_delete_edit_laguage	Ajouter, Supprimer ou Modifier des langages acceptés
+admin_index	add_edit_delete_processors	Ajouter, Supprimer ou Modifier des processeurs
+admin_index	add_edit_delete_themes	Ajouter, Supprimer ou Modifier des thèmes
 admin_index	add_to_trove_map	Ajouter à l'arbre des projets
 admin_index	approve_reject	Approuver/Rejeter
 admin_index	deleted_status	(supprimé) Statut
-admin_index	display_full_group	Affichier/Editer les groupes
+admin_index	display_full_group	Afficher/Editer les groupes
 admin_index	display_full_user_list	Afficher/Editer les utilisateurs
-admin_index	display_groups_beginning_with	Affichier les groupes commençant par :
+admin_index	display_groups_beginning_with	Afficher les groupes commençant par :
 admin_index	display_trove_map	Afficher l'arbre des projets
 admin_index	display_user_beginning_with	Afficher les utilisateurs commençant par :
-admin_index	front_page_news	Annonces importantes
+admin_index	front_page_news	Annonces de la page d'accueil
 admin_index	get	Prendre
-admin_index	group_maintaince	Maintenance du groupe
-admin_index	groups_with	Groupes avec
-admin_index	mail_engine	Moteur de courrier pour les adhérents à $1
-admin_index	new_project_approval	(Approbation pour un nouveau projet)
+admin_index	group_maintaince	Gestion du groupe
+admin_index	groups_with_status	Groupes avec statut
+admin_index	mail_engine	Moteur de messagerie pour les adhérents à $1
+admin_index	new_project_approval	(Approbation d'un nouveau projet)
 admin_index	news	Annonces
-admin_index	pending_status	(En attente) Statut
+admin_index	pending_status	(en attente) Statut
 admin_index	private_groups	Groupes privés
 admin_index	project_database_administration	Administration de la base de données du projet
 admin_index	register_new_project	Enregistrer un nouveau projet
+admin_index	recent_logins	Dernières authentifications
 admin_index	site_mailing_maintaince	Gestion des envois de courrier
 admin_index	site_utilities	Outils
 admin_index	site_wide_stats	Statistiques globales du site
@@ -288,103 +293,106 @@ admin_index	title	Administration du site
 admin_index	translation_file_tool	Outil de traduction de fichier
 admin_index	trove_project_tree	Arbre des projets
 admin_index	user_maintaince	Gestion utilisateur
-admin_index	virtual_host_admin_tool	Administration des hôtes virtuels
-admin_loadtabfile	availaible_tables	Tables disponibles
-admin_loadtabfile	edit_dont_work	[edition (ne fonctionne pas)]
+admin_index	virtual_host_admin_tool	Outil d'administration des hôtes virtuels
+admin_loadtabfile	availaible_tables	Tables disponibles :
+admin_loadtabfile	edit_dont_work	[modifier (ne fonctionne pas)]
 admin_loadtabfile	purge_loaded_data	Purger les données chargées
 admin_loadtabfile	reload_all_language_files	(Re)charger tous les fichiers de langues
-admin_loadtabfile	see_translations	[Voir les traductions]
+admin_loadtabfile	see_translations	[voir les traductions]
 admin_loadtabfile	see_untranslated	[voir ce qui reste à traduire]
 admin_loadtabfile	tables_loaded	Tables chargées
 admin_loadtabfile	title	Administration du site
 admin_massmail	active_deliveries	Distributions actives
 admin_massmail	all_project_admins	Tous  les administrateurs de projets
+admin_massmail	all_project_developers	Tous les développeurs
 admin_massmail	all_users	Tous les utilisateurs
-admin_massmail	be_verry_carefull	Faites <span style= »color:red »><strong>TRES</strong></span> attention avec ce formulaire, parce que son envoi conduit à envoyer des courriers à vraiment beaucoup d'utilisateurs.
+admin_massmail	be_verry_carefull	Faites <span style="color:red"><strong>TRES</strong></span> attention avec ce formulaire car sa validation entraîne l'envoi d'un message à BEAUCOUP d'utilisateurs.
 admin_massmail	date	Date
-admin_massmail	developers_test	Developeurs (Test)
-admin_massmail	error_scheduling_mailing	Erreur de programmation de courrier. Impossible de programmer le courrier, erreur de base de donnée :
-admin_massmail	id	N°
-admin_massmail	last_user_id_mailed	N° du dernier correspondant
+admin_massmail	developers_test	Développeurs (Test)
+admin_massmail	error_scheduling_mailing	Erreur de programmation de courrier. Impossible de programmer le courrier, erreur de base de données :
+admin_massmail	id	ID
+admin_massmail	last_user_id_mailed	Id du dernier utilisateur contacté
 admin_massmail	mail_engine_for	Courriers pour les adhérents de $1
-admin_massmail	mailing_successfully_scheduled	Courrier correctement programmé
-admin_massmail	missing_parameter_empty_message	Paramètre manquant. Vous essayez d'envoyer un message vide.
-admin_massmail	missing_parameter_proper_subject	Paramètre manquant. Vous devez donner un sujet approprié au courrier.
-admin_massmail	missing_parameter_select_target	Paramètre manquant. Vous devez indiqué à qui le message doit être adressé.
-admin_massmail	schedule_for_mailing	Programmation pour le courrier
+admin_massmail	mailing_successfully_scheduled	Courrier programmé avec succès
+admin_massmail	missing_parameter_empty_message	Paramètre manquant : vous essayez d'envoyer un message vide.
+admin_massmail	missing_parameter_proper_subject	Paramètre manquant : vous devez donner un sujet approprié au message.
+admin_massmail	missing_parameter_select_target	Paramètre manquant : vous devez indiquer à qui le message doit être adressé.
+admin_massmail	schedule_for_mailing	Programmation de l'envoi de messages
 admin_massmail	select	(choisir)
 admin_massmail	subject	Sujet
-admin_massmail	subscribers_to_additional_community	Abonnés aux « courriers de la communuauté »
-admin_massmail	subscribers_to_site_updates	Inscrits aux « mises à jours du site »
+admin_massmail	subscribers_to_additional_community	Abonnés aux « Courriers de la communuauté »
+admin_massmail	subscribers_to_site_updates	Inscrits aux « Mises à jour du site »
 admin_massmail	text_of_message	Texte du message
-admin_massmail	title	Moteur d'envoi en masse de courriers
+admin_massmail	title	Moteur d'envoi massif de courriers
 admin_massmail	type	Type
-admin_massmail	will_be_append	(sera suivi d'une information pour la désinscription, si choisi)
-admin_massmail_execute	completed_successfully	EFFECTUE
-admin_massmail_execute	querry_complete	Interrogation complète. Les envois adressés à
-admin_massmail_execute	receive_post	Envois reçus. Requête.
+admin_massmail	will_be_append	(sera suivi d'une information pour la désinscription, si sélectionné)
+admin_massmail_execute	completed_successfully	EFFECTUE AVEC SUCCES
+admin_massmail_execute	querry_complete	Requête effectuée. Début de l'envoi de messages à
+admin_massmail_execute	receive_post	Envois reçus. Requête en cours.
 admin_massmail_execute	sending_to	Envoyé à
 admin_massmail_execute	unrecognized_post	Envoi non reconnu, exécution impossible
-admin_massmail_execute	user_id	Numéro d'identifiant utilisateur :
+admin_massmail_execute	user_id	Identifiant utilisateur :
 admin_responses	add_response	Réponse ajoutée
-admin_responses	by_the_way	Malgré tout, je ne détruirai pas... on ne sait jamais...
+admin_responses	by_the_way	Malgré tout, je n'ai rien supprimé... On ne sait jamais...
 admin_responses	create	Créer
-admin_responses	create_new_response	Créer une nouvelle réponse
+admin_responses	create_new_response	Créer une nouvelle réponse :
 admin_responses	deleted_resposes	Réponse effacée
-admin_responses	edit_response	Réponse éditée
+admin_responses	edit_response	Réponse modifiée
 admin_responses	edit_response_other	Editer la réponse :
 admin_responses	existing_responses	Réponses existantes :
 admin_responses	go	Aller
-admin_responses	not_sure_dont_click	Si vous n'êtes pas cûr, pouquoi avoir appuyé sur le touche « supprimer » ?
+admin_responses	not_sure_dont_click	Si vous n'êtes pas sûr, pourquoi avoir cliqué sur « Supprimer » ?
 admin_responses	response_text	Texte de la réponse
 admin_responses	response_title	Titre de la réponse
-admin_responses	title	Editer les réponses de rejet.
+admin_responses	title	Editer les réponses de refus.
 admin_responses	yes_im_sure	Oui, j'en suis sûr
-admin_responses	you_cant	Vous ne pouvez $1 \"None\" :-)
+admin_responses	you_cant	Vous ne pouvez $1 \"None\" !
 admin_search	email	E-mail
 admin_search	full_name	Nom complet
-admin_search	group_search_criteria	Recherche de groupe avec crtères
-admin_search	id	Numéro d'identification
+admin_search	group_search_criteria	Recherche de groupe par critères
+admin_search	id	Identifiant
 admin_search	index	Résultats de recherche
 admin_search	matches	Correspondances
-admin_search	member_since	Membre depuis le :
-admin_search	real_name	Nom réel
-admin_search	refusing_to_display_whole_db	Refus d'affichage de la base entière. Cette action afficherait la base entière. S'il vous plait, effectuez une requête CLI si vous souhaitez faire cela.
-admin_search	registered	Enregistré
+admin_search	member_since	Membre depuis le 
+admin_search	real_name	Nom
+admin_search	refusing_to_display_whole_db	Refus d'afficher la base complète. Cette action afficherait toute la base. Merci d'effectuer une requête CLI si vous souhaitez le faire.
+admin_search	registered	Inscrit
 admin_search	status	Etat
 admin_search	unix_name	Nom Unix
-admin_search	user_search_criteria	Recherche d'utilisateur d'après critère
+admin_search	user_search_criteria	Recherche d'utilisateurs par critères
 admin_search	username	Nom d'utilisateur
 admin_tabfiles	delete_lang	[Supprimer]
-admin_tabfiles	edit_the_langfile	Editier la langue $1
-admin_tabfiles	edit_the_language	Edit la langue
+admin_tabfiles	edit_the_langfile	Editer la langue $1
+admin_tabfiles	edit_the_language	Editer la langue
 admin_tabfiles	language	Langue
 admin_tabfiles	modify_the	Modifier le $1 ci-dessous
 admin_table	edit_the	Editer le
 admin_table	table	Table
 admin_trove_cat_add	add	Ajouter
 admin_trove_cat_add	add_new_trove_category	Ajouter une nouvelle branche
-admin_trove_cat_add	error_in_trove_openration	Erreur dans une opération sur l'arbre
-admin_trove_cat_add	new_category_description	Description d'une novuelle catégorie (VARCHAR 255)
-admin_trove_cat_add	new_category_full_name	Nom d'une nouvelle catégorie (VARCHAR 255)
-admin_trove_cat_add	new_category_short_name	Nom court d'une nouvelle catégoeir (pas d'espace, à la Unix)
+admin_trove_cat_add	error_in_trove_openration	Erreur lors d'une opération sur l'arbre
+admin_trove_cat_add	new_category_description	Description d'une nouvelle catégorie (VARCHAR 255)
+admin_trove_cat_add	new_category_full_name	Nom complet d'une nouvelle catégorie (VARCHAR 255)
+admin_trove_cat_add	new_category_short_name	Nom court d'une nouvelle catégorie (pas d'espace, à la Unix)
 admin_trove_cat_add	parent_category	Catégorie mère
-admin_trove_cat_add	title	Ajouter un noeud à l'arbre
-admin_trove_cat_edit	cant_delete_has_subcategories	Impossible de supprimer : cette catégorie a des sous-catégorie
+admin_trove_cat_add	title	Administration du site : Ajouter un noeud à l'arbre
+admin_trove_cat_edit	cant_delete_has_subcategories	Suppression impossible : cette catégorie a des sous-catégories
 admin_trove_cat_edit	delete	Supprimer
 admin_trove_cat_edit	edit_trove_category	Editer une branche
-admin_trove_cat_edit	error_in_trove_operation	Erreur dans une opération sur l'arbre
-admin_trove_cat_edit	error_in_trove_operation_cant_delete	Erreur dans une opération sur l'arbre. Impossible de détruire la catégorie déclarée par défaut dans <i>local.inc</i>
-admin_trove_cat_edit	new_category_description	Description d'une novuelle catégorie (VARCHAR 255)
-admin_trove_cat_edit	new_category_full_name	Nom d'une nouvelle catégorie (VARCHAR 255)
-admin_trove_cat_edit	new_category_short_name	Nom court d'une nouvelle catégoeir (pas d'espace, à la Unix)
+admin_trove_cat_edit	error_trove_equal_parent	Erreur : la catégorie mère ne peut être identique à la catégorie courante
+admin_trove_cat_edit	error_in_trove_operation	Erreur lors d'une opération sur l'arbre
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Erreur lors d'une opération sur l'arbre : il est impossible de supprimer la catégorie par défaut définie dans <i>local.inc</i>
+admin_trove_cat_edit	new_category_description	Description de la nouvelle catégorie (VARCHAR 255)
+admin_trove_cat_edit	new_category_full_name	Nom complet de la nouvelle catégorie (VARCHAR 255)
+admin_trove_cat_edit	new_category_short_name	Nom court de la nouvelle catégorie (pas d'espace, à la Unix)
 admin_trove_cat_edit	no_such_category	Cette catégorie n'existe pas
 admin_trove_cat_edit	parent_category	Catégorie mère :
-admin_trove_cat_edit	title	Editer une branche
+admin_trove_cat_edit	title	Administration du site : Editer une branche
 admin_trove_cat_edit	update	Mettre à jour
 admin_trove_cat_list	browse_trove_tree	Afficher l'arbre des projets
 admin_trove_cat_list	edit	Editer
-admin_trove_cat_list	title	Arbre - liste des catégories
+admin_trove_cat_list	add	Ajouter
+admin_trove_cat_list	title	Administration du site : Liste des catégories de l'arbre
 admin_unsubscribe	admin_initiaded_mail	Courriers à l'initiative de l'administrateur
 admin_unsubscribe	all	TOUS
 admin_unsubscribe	all_site_mailing	Courriers concernant tout le site
