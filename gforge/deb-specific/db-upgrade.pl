@@ -143,7 +143,7 @@ eval {
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+global+data+done" ;
 	  if (&is_lesser ($version, $target)) {
-	      my @filelist = qw{ /usr/lib/gforge/db/sf-2.6-complete.sql } ;
+	      my @filelist = qw{ "/usr/lib/gforge/db/sf-2.6-complete.sql" } ;
 	      # TODO: user_rating.sql
 
 	      foreach my $file (@filelist) {
