@@ -7,7 +7,6 @@ artifact_extra_field_data(artifact_id);
 CREATE INDEX artifactextrafieldlist_groupartid ON
 artifact_extra_field_list(group_artifact_id);
 
-DROP INDEX docdata_groupid;
 CREATE INDEX docdata_groupid ON doc_data (group_id,doc_group); 
 
 CREATE SEQUENCE artifact_extra_field_elements_element_id_seq;
@@ -93,12 +92,8 @@ CREATE INDEX forummonitoredforums_useridforumid ON forum_monitored_forums(user_i
 -- TODO DROP unnecessary sequence/id
 --
 ALTER TABLE forum_perm DROP CONSTRAINT forum_perm_id_key;
-DROP INDEX forumperm_useridgroupforumid;
-DROP INDEX forum_perm_id_key;
 CREATE INDEX forumperm_useridgroupforumid ON forum_perm(user_id,group_forum_id);
-DROP INDEX forumperm_groupforumiduserid;
 ALTER TABLE forum_perm ADD CONSTRAINT forum_perm_pkey PRIMARY KEY (group_forum_id, user_id);
-DROP INDEX forumperm_groupforumiduserid;
 
 --
 -- TODO DROP unnecessary sequence/id
@@ -108,10 +103,9 @@ ALTER TABLE forum_saved_place ADD CONSTRAINT
 	forum_saved_place_pkey PRIMARY KEY (user_id,forum_id);
 
 DROP INDEX frsdlfiletotal_fileid;
+ALTER TABLE frs_dlstats_filetotal_agg DROP CONSTRAINT frs_dlstats_filetotal_agg_pkey;
 ALTER TABLE frs_dlstats_filetotal_agg ADD CONSTRAINT 
 	frs_dlstats_filetotal_agg_pkey PRIMARY KEY (file_id);
-
-DROP INDEX group_cvs_history_id_key;
 
 --
 -- TODO investigate if group_plugin_id is needed at all
@@ -176,7 +170,6 @@ CREATE INDEX projectmsgs_projtaskidpostdate ON project_messages(project_task_id,
 --
 ALTER TABLE project_perm DROP CONSTRAINT project_perm_id_key;
 DROP INDEX projectperm_groupprojiduserid;
-DROP INDEX project_perm_id_key;
 ALTER TABLE project_perm ADD CONSTRAINT project_perm_id_key PRIMARY KEY(group_project_id,user_id);
 CREATE INDEX projectperm_useridgroupprojid ON project_perm(user_id,group_project_id);
 
@@ -187,7 +180,6 @@ ALTER TABLE project_sums_agg ADD CONSTRAINT project_sums_agg_pkey PRIMARY KEY (g
 
 DROP INDEX project_task_group_project_id;
 
-DROP INDEX projecttaskartifact_projecttask;
 DROP INDEX projecttaskartifact_artifactid;
 ALTER TABLE project_task_artifact ADD CONSTRAINT 
 	project_task_artifact_pkey PRIMARY KEY (project_task_id,artifact_id);
@@ -217,7 +209,6 @@ ALTER TABLE role_setting ADD CONSTRAINT role_setting_pkey
 --skills_data ignored - to be dropped 
 --stats tables ignored - to be dropped
 
-DROP INDEX supported_langu_language_id_key;
 CREATE UNIQUE INDEX supportedlanguage_code ON supported_languages(language_code);
 --TODO DROP supported_languages.filename
 
