@@ -143,7 +143,7 @@ switch ($func) {
 					$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
 				} else {
 
-					$_summary=addslashes($pt->getSummary());
+					$_summary=addslashes(util_unconvert_htmlspecialchars($pt->getSummary()));
 					$_details='';
 					$_priority=(($priority != 100) ? $priority : $pt->getPriority());
 					$_hours=$pt->getHours();
