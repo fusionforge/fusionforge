@@ -90,10 +90,10 @@ $group_unix_name=group_getunixname($group_id);
 echo '
 <table width="100%" border="0" cellspacing="1" cellpadding="1">';
 $cell_data=array();
-$cell_data[] = array($Language->getText('project_showfiles','package'),'rowspan=2');
-$cell_data[] = array($Language->getText('project_showfiles','release_notes'),'rowspan=2');
-$cell_data[] = array($Language->getText('project_showfiles','filename'),'rowspan=2');
-$cell_data[] = array($Language->getText('project_showfiles','date'),'colspan=4');
+$cell_data[] = array($Language->getText('project_showfiles','package'),'rowspan="2"');
+$cell_data[] = array($Language->getText('project_showfiles','release_notes'),'rowspan="2"');
+$cell_data[] = array($Language->getText('project_showfiles','filename'),'rowspan="2"');
+$cell_data[] = array($Language->getText('project_showfiles','date'),'colspan="4"');
 
 echo $GLOBALS[HTML]->multiTableRow('', $cell_data, TRUE);
 
@@ -103,11 +103,11 @@ $cell_data[] = array($Language->getText('project_showfiles','downloads'));
 $cell_data[] = array($Language->getText('project_showfiles','architecture'));
 $cell_data[] = array($Language->getText('project_showfiles','file_type'));
 
-echo $GLOBALS[HTML]->multiTableRow("",$cell_data, TRUE);
+echo $GLOBALS[HTML]->multiTableRow('',$cell_data, TRUE);
 
 $proj_stats['packages'] = $num_packages;
 
-   // Iterate and show the packages
+// Iterate and show the packages
 for ( $p = 0; $p < $num_packages; $p++ ) {
 	$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
 	
@@ -143,11 +143,11 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 			}
 			$cell_data[] = array('&nbsp;<strong>
 				<a href="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</a></strong>',
-				"colspan=3");
+				'colspan="3"');
 
 			$cell_data[] = array('&nbsp;<strong>
 				'.date($sys_datefmt, $package_release['release_date'] ) .'</strong>',
-				'colspan=4 align="middle"');
+				'colspan="4" align="middle"');
 			
 			print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
 			// get the files in this release....
@@ -196,7 +196,6 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 			}
 		}
 	}
-
 }
 
 if ( $proj_stats['size'] ) {
