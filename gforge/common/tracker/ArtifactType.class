@@ -192,7 +192,7 @@ class ArtifactType extends Error {
 			'$submit_instructions',
 			'$browse_instructions',
 			'$datatype')";
-		echo $sql;
+		//echo $sql;
 		$res = db_query($sql);
 
 		db_begin();
