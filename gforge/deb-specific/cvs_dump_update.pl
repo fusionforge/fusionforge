@@ -5,27 +5,29 @@
 # cvs_dump_update.pl - script to dump data from the database 
 #		       and update cvs consequently
 #		       inspired from sourceforge scripts
+# Christian Bayle <bayle@debian.org>
+#
 use DBI;
 use Sys::Hostname;
 
 require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $group_array = ();
+my $verbose = 1;
+my $cvs_file = $file_dir . "dumps/cvs_dump";
 
+if($verbose) {print ("\nConnecting to database");}
 &db_connect;
 
-# Get hostname
-#$hostname = hostname();
-$hostname = "cvs";
-
+if($verbose) {print ("\nGetting group list");}
 # Dump the Groups Table information
 $query = "SELECT group_id,unix_group_name,status,use_cvs,enable_pserver,enable_anoncvs FROM groups";
 # AND cvs_box=$hostname to be added for multi-cvs server support
+
 $c = $dbh->prepare($query);
 $c->execute();
 
-my $cvs_file = $file_dir . "dumps/cvs_dump";
-
+if($verbose) {print ("\nGetting user list per group");}
 while(my ($group_id, $group_name, $status, $use_cvs, $enable_pserver, $enable_anoncvs) = $c->fetchrow()) {
 
 	my $new_query = "SELECT users.user_name AS user_name FROM users,user_group WHERE users.user_id=user_group.user_id AND group_id=$group_id";
@@ -45,6 +47,7 @@ while(my ($group_id, $group_name, $status, $use_cvs, $enable_pserver, $enable_an
 }
 
 # Now write out the files (not necessary, but can give info in case of problems)
+if($verbose) {print ("\nWriting list");}
 write_array_file($cvs_file, @group_array);
 $group_array = ();
 
@@ -54,24 +57,32 @@ $group_array = ();
 #
 # Open up all the files that we need.
 #
+if($verbose) {print ("\nReading list");}
 @group_array = open_array_file($cvs_file);
 
 #
 # Loop through @groupdump_array and deal w/ users.
 #
-print ("\n\n	Processing Groups\n\n");
+if($verbose) {print ("\n\nProcessing Groups\n\n");}
 while ($ln = pop(@group_array)) {
 	chop($ln);
 	($group_name, $status, $group_id, $use_cvs, $enable_pserver, $enable_anoncvs, $userlist) = split(":", $ln);
 	
 	$cvs_uid = $group_id + $anoncvs_uid_add;
 	$cvs_gid = $group_id + $gid_add;
+	$cvs_dir = "$cvs_root$group_name";
+
 	$userlist =~ tr/A-Z/a-z/;
 
 	$group_exists = (-d $grpdir_prefix . $group_name);
 
+	if ($group_exists) {
+		if($verbose){print ("$group_name repository already exists\n");}
+	} else {
+		if($verbose){print ("$group_name\tuse_cvs=$use_cvs\tstatus=$status\tfile=$cvs_root$group_name/CVSROOT\n");}
+	}
 	# CVS repository creation
-	if ($group_exists && $use_cvs && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
+	if (!$group_exists && $use_cvs && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
 		# This for the first time
 		if (!(-d "$cvs_root")) {
 			print("Creating $cvs_root\n");
@@ -79,7 +90,6 @@ while ($ln = pop(@group_array)) {
 		}
 		print("Creating a CVS Repository for: $group_name\n");
 		# Let's create a CVS repository for this group
-		$cvs_dir = "$cvs_root$group_name";
 
 		# Firce create the repository
 		# Let's make this more paranoia, cvsweb has to be modified to get access
@@ -99,7 +109,10 @@ while ($ln = pop(@group_array)) {
 	if ($group_exists && $use_cvs && $status eq 'A'){
 		if ($enable_pserver){
 			# turn on pserver writers
-			echo TODO
+			my $userlistcr=join("\n",split(",", $userlist));
+			open WRITERS,">$cvs_dir/CVSROOT/writers";
+			print WRITERS $userlistcr;
+			close WRITERS;
 		} else {
 			# turn off pserver writers
 			system("echo \"\" > $cvs_dir/CVSROOT/writers");
