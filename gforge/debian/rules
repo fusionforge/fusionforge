@@ -96,6 +96,7 @@ install: build
 	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+	install -m 755 deb-specific/db-upgrade26.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	# install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/sourceforge/usr/bin/
 	# install -m 755 deb-specific/sf-register-theme $(CURDIR)/debian/sourceforge/usr/bin/
