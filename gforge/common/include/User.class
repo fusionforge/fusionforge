@@ -189,22 +189,23 @@ class User extends Error {
 	}
 	
 	/**
-	 * create() - Create a new user
+	 * create() - Create a new user.
 	 *
-	 * @param	string	The unix username 
-	 * @param	string	The real firstname
-	 * @param	string	The real lastname
-	 * @param	string	The first password 
-	 * @param	string	The confirmation password 
-	 * @param	string	The users email address
-	 * @param	string	The users preferred default language
-	 * @param	string	The users preferred default timezone
-	 * @param	string	The users preference for receiving site updates by email
-	 * @param	string	The users preference for receiving community updates by email
-	 * @param	int		The ID of the language preference
-	 * @param	string	The users preferred timezone
-	 * @param	string	The users Jabber address
-	 * @param	int		The users Jabber preference
+	 * @param	string	The unix username.
+	 * @param	string	The real firstname.
+	 * @param	string	The real lastname.
+	 * @param	string	The first password.
+	 * @param	string	The confirmation password.
+	 * @param	string	The users email address.
+	 * @param	string	The users preferred default language.
+	 * @param	string	The users preferred default timezone.
+	 * @param	string	The users preference for receiving site updates by email.
+	 * @param	string	The users preference for receiving community updates by email.
+	 * @param	int		The ID of the language preference.
+	 * @param	string	The users preferred timezone.
+	 * @param	string	The users Jabber address.
+	 * @param	int		The users Jabber preference.
+	 * @param	int		The users theme_id.
 	 * @param	string	The users unix_box.
 	 * @param	string	The users address.
 	 * @param	string	The users address part 2.
@@ -216,9 +217,13 @@ class User extends Error {
 	 *
 	 */
 	function create($unix_name,$firstname,$lastname,$password1,$password2,$email,
-		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,
+		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,
 		$unix_box='shell',$address='',$address2,$phone='',$fax='',$title='',$ccode='US') {
 		global $Language;
+		if (!$theme_id) {
+			$this->setError($Language->getText('account_register','err_themeid'));
+			return false;
+		}
 		if (!$unix_name) {
 			$this->setError($Language->getText('account_register','err_username'));
 			return false;
@@ -276,7 +281,7 @@ class User extends Error {
 		db_begin();
 		$sql="INSERT INTO users (user_name,user_pw,unix_pw,realname,firstname,lastname,email,add_date,
 			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only,
-			unix_box,address,address2,phone,fax,title,ccode) 
+			unix_box,address,address2,phone,fax,title,ccode,theme_id) 
 			VALUES ('$unix_name',
 			'". md5($password1) . "',
 			'". account_genunixpw($password1) . "',
@@ -299,7 +304,8 @@ class User extends Error {
 			'". htmlspecialchars($phone) ."',
 			'". htmlspecialchars($fax) ."',
 			'". htmlspecialchars($title) ."',
-			'$ccode')";
+			'$ccode',
+			'$theme_id')";
 
 
 		$result=db_query($sql);
@@ -360,6 +366,7 @@ class User extends Error {
 	 *	@param	string	The users preference for being participating in "peer ratings".
 	 *	@param	string	The users Jabber account address.
 	 *	@param	int	The users Jabber preference.
+	 *	@param	int	The users theme_id preference.
 	 *	@param	string	The users address.
 	 *	@param	string	The users address2.
 	 *	@param	string	The users phone.
@@ -368,7 +375,7 @@ class User extends Error {
 	 *	@param	string	The users ccode.
 	 */
 	function update($firstname,$lastname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,
-		$jabber_address,$jabber_only,$address,$address2,$phone,$fax,$title,$ccode) {
+		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode) {
 		global $Language;
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
@@ -404,7 +411,8 @@ class User extends Error {
 			phone='". htmlspecialchars($phone) ."',
 			fax='". htmlspecialchars($fax) ."',
 			title='". htmlspecialchars($title) ."',
-			ccode='$ccode'
+			ccode='$ccode',
+			theme_id='$theme_id'
 			WHERE user_id='".$this->getID()."'
 		");
 
@@ -1245,39 +1253,12 @@ class User extends Error {
 	}
 
 	/**
-	 *	getThemeID - get the theme_id for this user from the theme_prefs table.
+	 *	getThemeID - get the theme_id for this user.
 	 *
 	 *	@return	int	The theme_id.
 	 */
 	function getThemeID() {
-		global $sys_theme;
-		if (!$this->theme_id) {
-			$res=db_query("SELECT user_theme FROM theme_prefs WHERE user_id='".$this->getID()."'");
-			$row_count = db_numrows($res);
-			if (!$res || $row_count < 1) {
-				$res=db_query("SELECT theme_id FROM themes WHERE dirname='$sys_theme'");
-				$this->theme_id=db_result($res,0,'theme_id');
-			} else {
-				$this->theme_id=db_result($res,0,'user_theme');
-			}
-		}
-		return $this->theme_id;
-	}
-
-	/**
-	 *	setThemeID - set the theme_id for this user in the theme_prefs table.
-	 *
-	 *	@return	boolean	success.
-	 */
-	function setThemeID($id) {
-		db_query("DELETE FROM theme_prefs WHERE user_id='".$this->getID()."'");
-		$result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES ('".$this->getID()."','$id')");
-		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError('Error inserting theme_pre: '.db_error());
-			return false;
-		} else {
-			return true;
-		}
+		return $this->data_array['theme_id'];
 	}
 
 	/**
@@ -1286,9 +1267,15 @@ class User extends Error {
 	 *	@return	int	The theme_id.
 	 */
 	function setUpTheme() {
-		if (!$this->theme) {
+//
+//	An optimization in session_getdata lets us pre-fetch this in most cases.....
+//
+		if (!$this->data_array['dirname']) {
 			$res=db_query("SELECT dirname FROM themes WHERE theme_id='".$this->getThemeID()."'");
 			$this->theme=db_result($res,0,'dirname');
+			$GLOBALS['sys_theme']=$this->theme;
+		} else {
+			$this->theme=$this->data_array['dirname'];
 			$GLOBALS['sys_theme']=$this->theme;
 		}
 		return $this->theme;

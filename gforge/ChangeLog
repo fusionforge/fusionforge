@@ -1,3 +1,11 @@
+2004-03-25  Tim Perdue  <tim@perdue.net>
+
+	* added users.firstname,users.lastname,users.address2,users.ccode 
+	each user now can enter a complete address and choose a country.
+
+	* added users.theme_id and dropped theme_prefs table. session.php
+	now does a join against themes table to get dirname in single query.
+
 2004-03-25  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* implemented some new config flags to enable/disable partially implemented
@@ -20,6 +28,10 @@
 
 	* fixed remaining groups.type (tperdue renamed this field to type_id)
 	* fixed errortext markups in installation guide
+
+2004-03-16  Tim Perdue  <tim@perdue.net>
+
+	* changed groups.type to groups.type_id for database portability reasons
 
 2004-03-16  Guillaume Smet <guillaume-gforge@smet.org>
 

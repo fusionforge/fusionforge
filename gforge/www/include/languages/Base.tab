@@ -86,6 +86,7 @@ account_options	real_name	Real Name:
 account_options	firstname	First Name:
 account_options	lastname	Last Name:
 account_options	ccode	Country:
+account_options	themeid	Theme:
 account_options	timezone	Timezone:
 account_options	title		Account Maintenance
 account_options	user_id	User Id:
@@ -96,6 +97,8 @@ account_register	communitymail	Receive additional community mailings. <i>(Low tr
 account_register	congrat	<p>Congratulations. You have registered on $1.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.
 account_register	emailaddr	Email Address:<span><font color="red">*</font></span> <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
 account_register	err_badinsert	Insert Failed 
+account_register	theme	Theme
+account_register	err_theme	Theme is required
 account_register	err_email	Invalid Email Address
 account_register	err_jabber	Invalid Jabber Address
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.

@@ -392,12 +392,12 @@ function session_set_new($user_id) {
  */
 function session_getdata($user_id) {
 	$res=db_query("SELECT
-
-		u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code
-
+		u.*,sl.language_id, sl.name, sl.filename, sl.classname, sl.language_code, t.dirname, t.fullname
 		FROM users u,
-		supported_languages sl
+		supported_languages sl,
+		themes t
 		WHERE u.language=sl.language_id 
+		AND u.theme_id=t.theme_id
 		AND u.user_id='$user_id'
 	");
 	return $res;

@@ -142,6 +142,18 @@ function html_get_language_popup ($Language,$title='language_id',$selected='xzxz
 }
 
 /**
+ * html_get_theme_popup() - Pop up box of supported themes.
+ *
+ * @param		string	The title of the popup box.
+ * @param		string	Which element of the box is to be selected.
+ * @return	string	The html select box.
+ */
+function html_get_theme_popup ($title='theme_id',$selected='xzxz') {
+	$res=db_query("SELECT theme_id, fullname FROM themes WHERE enabled=true");
+	return html_build_select_box($res,$title,$selected,false);
+}
+
+/**
  * html_get_ccode_popup() - Pop up box of supported country_codes.
  *
  * @param		string	The title of the popup box.

@@ -38,7 +38,7 @@ if ($submit) {
 	}
 
 	if (!$u->update($firstname, $lastname, $language, $timezone, $mail_site, $mail_va, $use_ratings,
-		$jabber_address,$jabber_only,$address,$address2,$phone,$fax,$title,$ccode)) {
+		$jabber_address,$jabber_only,$theme_id,$address,$address2,$phone,$fax,$title,$ccode)) {
 		$feedback .= $u->getErrorMessage().'<br />';
 	} else {
 		$feedback .= $Language->getText('account','updated').'<br />';
@@ -57,8 +57,8 @@ site_user_header(array('title'=>$Language->getText('account_options', 'title'),'
 
 echo '<form action="'.$PHP_SELF.'" method="post">';
 
-
 echo $HTML->boxTop($Language->getText('account_options', 'title'));
+
 ?>
 
 
@@ -72,7 +72,6 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 <?php if($GLOBALS['sys_use_people']) { ?>
 	<li><a href="/people/editprofile.php"><strong><?php echo $Language->getText('account_options', 'edit_skills_profile'); ?></strong></a></li>
 <?php } ?>
-<li><a href="/themes/"><strong><?php echo $Language->getText('menu', 'change_my_theme'); ?></strong></a></li>
 </ul>
 <?php echo $HTML->boxBottom(); ?>
 
@@ -115,6 +114,12 @@ echo $HTML->boxTop($Language->getText('account_options', 'title'));
 <tr valign="top">
 <td><?php echo $Language->getText('account_options', 'timezone'); ?> </td>
 <td><?php echo html_get_timezone_popup('timezone', $u->getTimeZone()); ?>
+</td>
+</tr>
+
+<tr valign="top">
+<td><?php echo $Language->getText('account_options', 'themeid'); ?> </td>
+<td><?php echo html_get_theme_popup('theme_id', $u->getThemeID()); ?>
 </td>
 </tr>
 

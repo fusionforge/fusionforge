@@ -15,6 +15,10 @@ require_once('pre.php');
 require_once('common/include/account.php');
 require_once('common/include/timezones.php');
 
+if (!$theme_id) {
+	$theme_id=$sys_default_theme_id;
+}
+
 if ($submit) {
 	/*
 
@@ -24,7 +28,7 @@ if ($submit) {
 	*/
 	$new_user = new User();
 	$register = $new_user->create($unix_name,$firstname,$lastname,$password1,$password2,
-		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,'',
+		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
 		$address,$address2,$phone,$fax,$title,$ccode);
 	if ($register) {
 		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
@@ -74,6 +78,9 @@ if ($timezone == ''){
 <p>
 <?php echo $Language->getText('account_register','timezone'); ?><br />
 <?php echo html_get_timezone_popup('timezone', $timezone); ?>
+<p>
+<?php echo $Language->getText('account_register','theme'); ?><br />
+<?php echo html_get_theme_popup('theme_id', $theme_id); ?>
 <p>
 <?php echo $Language->getText('account_register','ccode'); ?><br />
 <?php echo html_get_ccode_popup('ccode', $ccode); ?>
