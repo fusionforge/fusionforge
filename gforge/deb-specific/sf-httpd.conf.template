@@ -23,21 +23,25 @@ NameVirtualHost {ip_address}
   ServerAdmin {server_admin}
   DocumentRoot /usr/lib/sourceforge/www
   DirectoryIndex index.html index.php
-  Include /etc/sourceforge/sf-httpd.secrets
   UserDir disabled
-    #
-    # This is done to implement non DNS delegated debian sourceforge
-    # This is for project home pages in a virtual /www/<group> location
-#    AliasMatch ^/www/([^/]*)/(.*) /var/lib/sourceforge/chroot/home/groups/$1/htdocs/$2
-#    ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /var/lib/sourceforge/chroot/home/groups/$1/cgi-bin/$2
-#    <Directory /var/lib/sourceforge/chroot/home/groups>
-#    Options Indexes FollowSymlinks
-#      AllowOverride All
-#      order allow,deny
-#      allow from all
-#    </Directory>
-    # This for cvsweb 
-#    ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
+
+  <Directory /usr/lib/sourceforge/www>
+    Include /etc/sourceforge/sf-httpd.secrets
+  </Directory>
+
+  # Debian Sourceforge without the DNS delegation
+  # Project home pages are in a virtual /www/<group> location
+  AliasMatch ^/www/([^/]*)/(.*) /var/lib/sourceforge/chroot/home/groups/$1/htdocs/$2
+  ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /var/lib/sourceforge/chroot/home/groups/$1/cgi-bin/$2
+  <Directory /var/lib/sourceforge/chroot/home/groups>
+    Options Indexes FollowSymlinks
+      AllowOverride All
+      order allow,deny
+      allow from all
+    </Directory>
+
+  # This for cvsweb 
+  ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
 </VirtualHost>
 
 <VirtualHost {ip_address}>
@@ -57,6 +61,8 @@ NameVirtualHost {ip_address}
   ServerAdmin {server_admin}
   DocumentRoot /usr/lib/sourceforge/www
   DirectoryIndex index.html index.php
+  UserDir disabled
+
   <IfModule mod_ssl.c>
     SSLEngine on
     SSLCertificateFile /etc/apache/ssl.crt/server.crt
@@ -69,8 +75,13 @@ NameVirtualHost {ip_address}
     </Directory>
     SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
   </IfModule>
-  Include /etc/sourceforge/sf-httpd.secrets
-  UserDir disabled
+
+  <Directory /usr/lib/sourceforge/www>
+    Include /etc/sourceforge/sf-httpd.secrets
+  </Directory>
+
+  # This for cvsweb 
+  ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
 </VirtualHost>
 
 # This is magic for virtual hosting!
