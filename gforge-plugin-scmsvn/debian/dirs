@@ -21,6 +21,7 @@ usr/share/gforge
 usr/share/gforge/www
 usr/share/gforge/www/plugins
 usr/share/gforge/www/plugins/scmsvn
+usr/share/gforge/scm
 var
 var/log
 var/log/gforge
