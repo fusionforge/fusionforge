@@ -1,4 +1,4 @@
-sourceforge (2.5-13+4) unstable; urgency=low
+sourceforge (2.5-14) unstable; urgency=low
 
   * Made install-dns.sh a bit more silent.
   * Same for the db-upgrade.pl, which is now piped to an appropriate grep.
@@ -8,7 +8,7 @@ sourceforge (2.5-13+4) unstable; urgency=low
   * Changed Priority: from optional to extra to avoid overrides.
   * Various fixes and cleanups.
 
- -- Roland Mas <lolando@debian.org>  Wed,  7 Nov 2001 14:03:48 +0100
+ -- Roland Mas <lolando@debian.org>  Wed,  7 Nov 2001 19:01:59 +0100
 
 sourceforge (2.5-13) unstable; urgency=low
 
