@@ -1,3 +1,12 @@
+gforge (3.1-15+1) unstable; urgency=low
+
+  * [Roland] Fix for create-mailing-lists.pl and fix-mailing-lists.pl from
+    Matt Hope <dopey@debian.org>: no need to get the previous config
+    before reinjecting it, and it even used to break some versions of
+    Mailman.
+
+ -- Roland Mas <lolando@debian.org>  Sun,  4 Apr 2004 16:10:53 +0200
+
 gforge (3.1-15) unstable; urgency=low
 
   * [Roland] Fixed override disparity.
