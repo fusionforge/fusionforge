@@ -22,7 +22,9 @@ case "$1" in
     purge)
 	rm -rf /var/lib/sourceforge
 	delete_mainconffile
+	[ -d /etc/sourceforge/templates ] && rmdir --ignore-fail-on-non-empty /etc/sourceforge/templates
 	[ -d /etc/sourceforge ] && rmdir --ignore-fail-on-non-empty /etc/sourceforge
+	[ -d /etc/sourceforge ] && rm -rf /etc/sourceforge
 	;;
     remove|upgrade|failed-upgrade|abort-install|abort-upgrade|disappear)
 	;;
