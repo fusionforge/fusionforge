@@ -52,14 +52,14 @@ account_lostpw	notify	<P>An email has been sent to the address you have on file.
 account_lostpw	warn	<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. <P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.
 account_lostpw	sendhash	Send Lost PW Hash
 account_lostlogin	severalconfirm	This confirm hash exists more than once.
-account_lostlogin	invalidconfirm	Invalid confirmation hash
-account_lostlogin	sixchars	You must supply valid password (at least 6 chars).
+account_lostlogin	invalidconfirm	Il hash di conferma non &egrave; valido.
+account_lostlogin	sixchars	La password deve essere valida  (minimo 6 caratteri).
 account_lostlogin	notmatch	Le password non corrispondono.
 account_lostlogin	passwdchanged	<h2>Password changed</h2><p>Congratulations, you have re-set your account password.You may <a href="/account/login.php">login</a> to the sitenow.</p>
 account_lostlogin	welcome	<h2>Lost Password Login</h2><P>Welcome, $1. You may now change your password.
 account_lostlogin	newpasswd	Nuova Password (minimo 6 caratteri)
 account_lostlogin	newpasswd2	Conferma nuova password
-account_lostlogin	update	Update
+account_lostlogin	update	Aggiorna
 account_register	congrat	<p>Congratulazioni. Ti sei registrato su $1.  <p> Ti verr&agrave; inviata una email di conferma per verificare il tuo indirizzo email. Collegati al link indicato nella email per abilitarti.
 account_register	loginname	Login (non usare maiuscole)*:
 account_register	password	Password (minimo 6 caratteri) *:
@@ -68,22 +68,22 @@ account_register	realname	Nome intero *:
 account_register	language	Lingua di preferenza:
 account_register	timezone	Timezone:
 account_register	emailaddr	Indirizzo email *: <BR><I>This email address will be verified before account activation. It will not be displayed on the site. You will receive a mail forward account at &lt;loginname@$1&gt; that will forward to this address.</I>
-account_register	jabberaddr	Email Address:
-account_register	jabberonly	Send auto-generated notices only to this address
+account_register	jabberaddr	Indirizzo Jabber:
+account_register	jabberonly	Invia notifiche solo a questo indirizzo
 account_register	siteupdate	Desidero ricevere email su aggiornamenti del sito  <I>(poco traffico e include informazioni sulla sicurezza. Si raccomanda di attivare questa opzione).</I>
 account_register	communitymail	Desidero ricevere email dalla comunit&agrave <I>(poco traffico).</I>
 account_register	mandatory	I campi indicati con  * sono obbligatori.
 account_register	register	Registra
 account_register	err_username	Campo login obbligatorio
-account_register	err_realname	You must supply a real name
-account_register	err_passwd	You must supply a password
-account_register	err_passwd2	Passwords do not match
+account_register	err_realname	Inserire un nome
+account_register	err_passwd	Inserire una password
+account_register	err_passwd2	Le password non corrispondono
 account_register	err_passwd3	Password non valida
 account_register	err_unixname	Nome utente unix non valido. 
 account_register	err_email	Indirizzo email non valido
 account_register	err_jabber	Indirizzo Jabber non valido
 account_register	err_userexist	Il nome &egrave; gi&agrave; usato da un altro utente.
-account_register	err_mailexist	User with this email already exists - use people search to recover your login.
+account_register	err_mailexist	Sul sistema esiste gi&agrave; un utente con questo indirizzo di posta elettronica - usa la ricerca persone per recuperare la tua login.
 account_register	err_badinsert	Inserimento fallito
 account_register	message_header	Registrazione Account Gforge
 account_register	message_body	Grazie per la tua registrazione. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
@@ -92,8 +92,8 @@ account_register	remember_me	"Ricordami". <I>(Permette di accedere alla $1 pagin
 account_register	update	Applica Modifiche
 account_register	reset	Annulla
 account_register	Preferences	Preferenze
-account_unsubscribe	all_mailings	tutti i e-mail ed annunci di $1
-account_unsubscribe	site_mailings	tutti i e-mail di $1
+account_unsubscribe	all_mailings	tutti le e-mail ed annunci di $1
+account_unsubscribe	site_mailings	tutti le e-mail di $1
 account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo account sar&agrave; attivato.</p>
 account_verify	loginname	Nome Login:
 account_verify	password	Password:
@@ -102,14 +102,14 @@ account_verify	missingparam	Parametro mancante
 account_verify	usermandatory	Nome utente obbligatorio.
 account_verify	invaliduser	Invalid user
 account_verify	nouser	L'utente non esiste.
-account_verify	invalidop	Invalid operation
+account_verify	invalidop	Operazione non valida
 account_verify	accountactive	Utente gi&agrave; attivo.
-account_verify	invalidparam	Invalid parameter
-account_verify	cannotconfirm	Cannot confirm account identity - invalid confirmation hash (or login name)
+account_verify	invalidparam	Parametro non valido
+account_verify	cannotconfirm	Impossibile confermare identi&agrave; hash di conferma o login non valida
 account_verify	accessdenied	Accesso negato 
-account_verify	invalidcred	Credentials you entered do not correspond to valid account.
-account_verify	cannotactivate	Could not activate account
-account_verify	erroractivate	Error while activiting account
+account_verify	invalidcred	Le credenziali non corrispondono ad un account valido
+account_verify	cannotactivate	Impossibile attivare account
+account_verify	erroractivate	Errore durante l'attivazione dell'account
 account_options	title	Opzioni Utente
 account_options	welcome		Benvenuto
 account_options	member_since	Data registrazione:
@@ -124,6 +124,10 @@ account_options	timezone	Timezone
 account_options	email_address		Indirizzo e-mail
 account_options	change_email_address	Cambia indirizzo e-mail
 account_options	intro	Qui puoi modificare le tue opzioni utente. Puoi anche visualizzare il tuo profile e le tue quotazioni
+account_shell	title	Shell Informazioni sull'account
+account_shell	shell_box	macchina per l'account 
+account_shell	autorized_keys	Chiavi di autorizzazione CVS/SSH
+account_shell	edit_keys	Modifica chiavi
 common_utils	priority_colors	Colori di priorit&agrave;
 developer	entry_not_found	Elemento non trovato per questo utente
 developer	date	Data
@@ -133,7 +137,7 @@ developer	diary_and_notes	Diario e note per
 developer	no_entries	Questo utente non ha elementi nel diario
 developer	no_user_selected	Nessun elemento selezionato
 developer_monitor	title	Notifica cambiamenti dell'utente
-developer_monitor	error_inserting	Error inserting into user_diary_monitor
+developer_monitor	error_inserting	Errore nell'inserminto in user_diary_monitor
 developer_monitor	monitoring_user	Attivata notifica utente
 developer_monitor	monitoring_user_expl	<p>Ti verranno inviate per email gli elementi del diario.</p><p>Per disabilitare la notifica, &egrave; sufficiente cliccare <strong>Notifica utente</strong>
 developer_monitor	monitoring_user_off	Notifica utente disabilitata
@@ -153,6 +157,7 @@ docman	admin	Amministra
 docman	error_no_docs	Questo progetto non ha documenti visibili
 docman	description	Descrizione
 docman	error_no_groups_defined	Nessun gruppo di documenti definito
+docman	turned_off	Questo progetto ha disabilitato il Document Manager
 docman_admin	section	$1
 docman_admin	title	Document Manager: Amministrazione
 docman_admin	add_edit_docgroups	Aggiungi/Modifica gruppi di documenti
@@ -164,22 +169,20 @@ docman_admin_editdocs	title	Modifica documenti
 docman_admin_editdocs	state	Stato
 docman_admin_editdocs	upload	OPZIONALE: Invia nuovo file
 docman_admin_editdocs	doc_contents	Contenuto Documenti
-docman_admin_addgroups	section	Amministrazione Document Manager
 docman_admin_addgroups	title	Aggiungi gruppi di documenti
-docman_admin_editgroups	section	Document Manager Administration
 docman_admin_editgroups	title	Modifica gruppi
 docman_admin_editgroups	new_group_name	Nuovo nome del gruppo
 docman_admin_editgroups	add_group	Aggiungi un gruppo
 docman_admin_editgroups	edit_group	Modifica un gruppo
 docman_admin_editgroups	description	Il nome del gruppo sar&agrave; utilizzato come titolo.
-docman_admin_groupdelete	section	Document Manager Administration
+docman_admin_editgroups	group_name	Nome gruppo
+docman_admin_editgroups	group_id	ID gruppo
 docman_admin_groupdelete	title	Delete Document Group
-docman_admin_groupedit	section	Document Manager Administration
-docman_admin_groupedit	title	Rename Document Group
-docman_admin_groupedit	group_name	Nome gruppo
 docman_common	error_min_title_length	Il titolo del documento deve essere almeno di 5 caratteri
 docman_common	error_min_desc_length	La descrizione del documento deve essere almeno di 10 caratteri
 docman_common	no_docs	Nessun documento trovato
+docman_common_docgroup	name_required	Il nome &egrave; un attributo obbligatorio 
+docman_common_docgroup	invalid_id	DocumentGroup: ID del DocumentGroup non valido
 docman_display_doc	section	Progetto: $1 
 docman_display_doc	title	Document Manager: Visualizza documenti
 docman_display_doc	all_languages	Tutte
@@ -192,16 +195,20 @@ docman_new	upload_file	Invia file
 docman_new	language	Lingua
 docman_new	group	Gruppo al quale appartiene il documento:
 docman_new	submit	Invia Informazioni
+docman_new	submitted_successfully	Documento inserito
+docman_display_doc	no_document_data_title	Nessun documento
+docman_display_doc	no_document_data_text	Impossibile visualizzare il documento - ID documento non valido oppure non attivo
+docman_common_doc	invalid_docid	Document:: docid non valido
 exit	exiting_with_error	Uscita con errore
-exit	choose_a_group	Error - Choose A group
-exit	choose_group_text	ERROR - No group_id was chosen.
+exit	choose_a_group	Errore - seleziona un gruppo
+exit	choose_group_title	ERRORE - Gruppo id
 exit	choose_group_body	Non &egrave stato scelto nessun Id gruppo
 exit	missing_parameters_title	Error - parametri obbligatori mancanti
 exit	missing_parameters_body	Error - Mancano alcuni parametri obbligatori
 forum	title	Forum
 forum	choose	<p>Seleziona un forum e puoi scorrere, cercare e inserire messaggi.<p>
-forum	error_no_forums_found	Nessun forum trovato per 
-forum	forums_for	Forum per 
+forum	error_no_forums_found	Nessun forum trovato per $1
+forum	forums_for	Forum per $1
 forum	error_forum_not_found	Forum non trovato
 forum_save	saved	Posizione del forum salvato. I nuovi messaggi verranno evidenziati al prossimo collegamento 
 forum_admin	section	Progetto: $1 
@@ -236,25 +243,17 @@ forum_admin_delete_message	warning	ATTENZIONE! Stai per cancellare in modo perma
 forum_admin_delete_message	enter_message_id	Inserisci l'ID del messaggio da cancellare
 forum_common	error_adding_forum	Error Adding Forum
 forum_common	error_invalid_group_forum_id	Forum:: Invalid group_forum_id
-forum_common	error_save_when_logged_in	You Can Only Save Your Place If You Are Logged In
+forum_common	error_save_when_logged_in	Si pu&ograve; salvare la posizione solo quando si &egrave; loggati
 forum_common	error_min_name_length	Il nome del forum deve essere almeno di 3 caratteri
 forum_common	error_min_desc_length	La descrizione del forum deve essere almeno di 10 caratteri
 forum_common	error_set_monitor	Puoi richiedere la notifica di un forum solo se sei collegato
 forum_common	error_unable_to_add_monitor	Impossibile notificare
-forum_common	welcome_to	Benvenuto a
+forum_common	welcome_to	Benvenuto a $1
 forum_common_forumfactory	error_no_forums_found	Nessun forum trovato
-forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
 forum_common_forummessage	forum_message	Messaggio Forum
 forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does not match Forum Object
 forum_common_forummessage	error_required_fields	Deve includere un titolo e il contenuto
 forum_common_forummessage	error_not_logged	Devi essere collegato per poter inserire messaggi
-forum_common_forummessage	error_posting_failed	ForumMessage::create() Posting Failed 
-forum_common_forummessage	error_get_message_id	ForumMessage::create() Unable to get new message id
-forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() Invalid MessageID
-forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() No Valid ParentMessage Object
-forum_common_forummessage	error_getting_next_thread	Getting next thread_id failed
-forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
-forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
 forum_errors	error_getting_forum	Errore nel recupero del forum
 forum_errors	error_determining_forum_id Errore nel determinare il forum_id
 forum_forum	section	Progetto: $1 
@@ -307,7 +306,7 @@ forum_utils	htmltag	I Tag HTML verranno visualizzati come testo
 forum_utils	postanon	Stai inserendo i messaggi in modalit&agrave; anonima perch&eacute; non sei
 forum_utils	loggedin	collegato
 forum_utils	postcomment	Invia messaggio
-forum_utils	couldpostif	Potresti inviare messaggi se tu fossi 
+forum_utils	couldpostif	Potresti inviare messaggi se tu fossi $1 collegato $2
 forum_utils	reply	rispondi
 forum_utils	mailmonitor	\nLeggi e rispondi a questo messaggio a: \n$1\nBy: $2 \n\n$3\n\n______________________________________________________________________\nLeggi e rispondi a questo messaggio a: \n$1\nRicevi questo messaggio perché hai selezionato di monitare questo forum.\nPer terminare la notifica, fai il login a $4 \n e vai a: $5
 frs	file_download	Scarica
@@ -321,7 +320,7 @@ frs_release	email_title	[Rilascio $1 Release]: $2
 frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link::\n$4\n\nRicevi questa mail\npoich&egrave; hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi pi&ugrave; essere notificato via email,\ncollegati a $5 e segui il link: \n$6
 general	return	[Ritorna  a $1]
 general	permdenied	Autorizzazione Vietata.
-general	permnotget	Could not get permission
+general	permnotget	Impossibile recuparare il permesso
 general	update_successful	Aggiornato con successo
 general	create_successful	Creato con successo
 general	permexcuse	Non hai il permesso di visualizzare questa pagina.
@@ -388,9 +387,9 @@ home	hosted_projects	Progetti ospitati
 home	registered_users	Utenti registrati
 home	none_found	Non trovato
 index	welcome	Benvenuto
-mail	provided_by	<P>Mailing lists provided via a SourceForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
-menu	bookmark_page	Bookmark Page
-menu	contact_us	Contact $1
+mail	provided_by	<P>Le mailing list sono fornite tramite una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>.  Grazie ai team di Mailman and <A href="http://www.python.org">Python</A> per il software eccezionale.
+menu	bookmark_page	Segna pagina
+menu	contact_us	Contatta $1
 menu	change_my_theme	Cambia tema
 menu	diary_notes	Diario &amp; Note
 menu	login	Connetti con SSL
@@ -612,8 +611,8 @@ pm_ganttpage	size	Dimensioni
 pm_ganttpage	assignee	Assegnatario
 pm_projectgroup	error_min_name_length	Il titolo deve essere almeno di 5 caratteri
 pm_projectgroup	error_min_desc_length	La descrizione del documento deve essere almeno di 10 caratteri
-pm_projectgroup	none_found	Nessun ProjectGroups found
-pm_projectcategory	required_fields	ProjectCategory: name and assignee are Required
+pm_projectgroup	none_found	Nessun sottoprogetto trovato
+pm_projectcategory	required_fields	Categorie progetti: nome e assegnatario sono obblitatori
 pm_projecttask	circular_dependency	&Egrave; stata rilevata una dipendenza circolare
 pm_projecttask	mail_notice			L'attività # $1 è stata aggiornata\n\nProgetto: $2\nSottoprogetto: $3\nSommario: $4\nPerc. Completo: $5\nStato: $6\n\nDescrizione: $7
 pm_projecttask	mail_followups_title	\n\\nCommenti
