@@ -1,3 +1,9 @@
+2003-05-23 Reinhard Spisser <reinhard@spisser.it>
+
+	* www/include/languages/Spanish.tab:
+	Applied patch #350: Spanish tranlsation. Thanks to Vincente Ruiz and 
+ 	his team.
+   
 2003-05-20 Tom Copeland <tom@infoether.com>
 
 	* www/my/index.php, common/forum/ForumsForUser.class, 
