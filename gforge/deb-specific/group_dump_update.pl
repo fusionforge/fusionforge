@@ -93,7 +93,7 @@ sub add_group {
 	mkdir $log_dir, 2775;
 	mkdir $cgi_dir, 2775;
 	mkdir $ht_dir, 2775;
-	system("cp /usr/lib/gforge/lib/default_home_page.php $ht_dir/index.php");
+	system("cp /usr/lib/gforge/lib/default_page.php $ht_dir/index.php");
 	# perl is sometime fucked to create with right permission
 	system("chmod 2775 $group_dir");
 	system("chmod 2775 $log_dir");
