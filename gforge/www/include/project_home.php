@@ -32,14 +32,12 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home','p
 		<?php
 
 // ########################################## top area, not in box
-$res_admin = db_query("
-	SELECT users.user_id AS user_id,users.user_name AS user_name
+$res_admin = db_query("SELECT users.user_id,users.user_name,users.realname
 	FROM users,user_group
 	WHERE user_group.user_id=users.user_id
-	AND user_group.group_id=$group_id
+	AND user_group.group_id='$group_id'
 	AND user_group.admin_flags = 'A'
-	AND users.status='A'
-");
+	AND users.status='A'");
 
 if ($project->getStatus() == 'H') {
 	print "<p>NOTE: This project entry is maintained by the ".$GLOBALS['sys_name']." staff. We are not "
@@ -72,23 +70,20 @@ if ($project->usesStats()) {
 	print '<br />'.$Language->getText('group', 'activitystat', $group_id);
 }
 
-$jobs_res = db_query("SELECT name ".
-				"FROM people_job,people_job_category ".
-				"WHERE people_job.category_id=people_job_category.category_id ".
-				"AND people_job.status_id=1 ".
-				"AND group_id='$group_id' ".
-				"GROUP BY name",2);
+$jobs_res = db_query("SELECT name 
+				FROM people_job,people_job_category 
+				WHERE people_job.category_id=people_job_category.category_id 
+				AND people_job.status_id=1 
+				AND group_id='$group_id' 
+				GROUP BY name",2);
 if ($jobs_res) {
 	$num=db_numrows($jobs_res);
 		if ($num>0) {
 			print '<br /><br />HELP WANTED: This project is looking for ';
 				if ($num==1) {
-					print '<a href="/people/?group_id='.$group_id.'">'.
-							  db_result($jobs_res,0,"name").'(s)</a>';
+					print '<a href="/people/?group_id='.$group_id.'">'. db_result($jobs_res,0,"name").'(s)</a>';
 				} else {
-					print 'People to fill '.
-						'<a href="/people/?group_id='.$group_id.'">several '.
-						'different positions</a>';
+					print 'People to fill <a href="/people/?group_id='.$group_id.'">several different positions</a>';
 				}
 		}
 }
@@ -110,7 +105,7 @@ if (db_numrows($res_admin) > 0) {
 	<span class="develtitle"><?php echo $Language->getText('group','project_admins'); ?>:</span><br />
 	<?php
 		while ($row_admin = db_fetch_array($res_admin)) {
-			print "<a href=\"/users/$row_admin[user_name]/\">$row_admin[user_name]</a><br />";
+			print "<a href=\"/users/$row_admin[user_name]/\">$row_admin[realname]</a><br />";
 		}
 	?>
 	<hr width="100%" size="1" noshade="noshade" />
@@ -122,8 +117,8 @@ if (db_numrows($res_admin) > 0) {
 <span class="develtitle"><?php echo $Language->getText('group','developers'); ?>:</span><br />
 <?php
 //count of developers on this project
-$res_count = db_query("SELECT user_id FROM user_group WHERE group_id=$group_id");
-print db_numrows($res_count);
+$res_count = db_query("SELECT count(*) FROM user_group WHERE group_id='$group_id'");
+print db_result($res_count,0,'count');
 
 ?>
 
