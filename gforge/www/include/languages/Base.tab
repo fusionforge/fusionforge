@@ -2670,6 +2670,7 @@ tracker_admin_add_users	update_permissions	Update Developer Permissions
 tracker_admin_add_users	user_name	User Name
 tracker_admin_build_boxes	title	 Add/Update Pop-Up Boxes and Choices
 tracker_admin_build_boxes	opt_title	Add/Update Pop-Up Box Choices in: $1
+tracker_admin_build_boxes	box_add_choices	add choices
 tracker_admin_build_boxes	tracker_box_id	ID
 tracker_admin_build_boxes	tracker_choice_id	ID
 tracker_admin_build_boxes	tracker_box_title	Boxes Defined
@@ -2682,6 +2683,7 @@ tracker_admin_build_boxes	box_warning	Once you add a new box, it cannot be delet
 tracker_admin_build_boxes	required_box_name	a box name is required
 tracker_admin_build_boxes	required_choice_name	a choice name is required
 tracker_admin_build_boxes	no_box	You have not defined any boxes
+tracker_admin_build_boxes	no_choice	You have not defined any choices
 tracker_admin_build_boxes	error_inserting_box	Error inserting a box name
 tracker_admin_build_boxes	error_inserting_choice	Error inserting a choice name
 tracker_admin_build_boxes	box_name_inserted	Box name inserted

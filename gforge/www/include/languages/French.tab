@@ -2633,6 +2633,8 @@ tracker_admin	add_permissions	Ajouter/Modifier les droits des utilisateurs
 tracker_admin	add_permissions_info	Ajouter/Retirer des utilisateurs à cet outil de suivi
 tracker_admin	admin	Administration
 tracker_admin	auto_assign_to	Confier automatiquement à
+tracker_admin	build_selection_box	Ajouter/Modifier les listes déroulantes
+tracker_admin	build_selection_box_info	Ajouter de nouveaux champs comme Phases, Indicateurs de qualité, Composants, etc. Une fois ajoutés, ils peuvent être utilisés avec les autres listes déroulantes (par exemple, Catégories ou Groupes) pour décrire ou parcourir les bugs et autres.
 tracker_admin	canned_response_inserted	Réponse type ajoutée
 tracker_admin	canned_response_updated	Réponse type mise à jour
 tracker_admin	category_add_warning	Une catégorie ajoutée ne peut pas être supprimée.
@@ -2686,6 +2688,35 @@ tracker_admin_add_users	technician	Technicien
 tracker_admin_add_users	title	Ajouter/Mettre à jour les permission d'un utilisateur de traceur pour $1</s>
 tracker_admin_add_users	update_permissions	Mise à jour des permissions de développeur
 tracker_admin_add_users	user_name	Nom d'utilisateur
+tracker_admin_build_boxes	box_add_choices	ajouter des choix
+tracker_admin_build_boxes	box_change_warning	Il n'est pas recommandé que vous changiez le nom d'un champ car d'autres éléments peuvent en dépendre. Quand vous changez le nom d'un champ, tous les éléments concernés seront mis à jour avec le nouveau nom.
+tracker_admin_build_boxes	box_name	Nom du champ
+tracker_admin_build_boxes	box_name_inserted	Champ ajouté
+tracker_admin_build_boxes	box_name_updated	Nom du champ modifié
+tracker_admin_build_boxes	box_update_title	Modifier un champ dans : $1
+tracker_admin_build_boxes	box_warning	Une fois que vous avez ajouté un champ, il ne peut être supprimé.
+tracker_admin_build_boxes	choice_change_warning	Il n'est pas recommandé que vous changiez le nom d'un choix car d'autres éléments peuvent en dépendre. Quand vous changez le nom d'un choix, tous les éléments concernés seront mis à jour avec le nouveau nom.
+tracker_admin_build_boxes	choice_inserted	Choix ajouté
+tracker_admin_build_boxes	choice_updated		Choix mis à jour
+tracker_admin_build_boxes	choice_warning	Une fois que vous avez ajouté un nouveau choix, il ne peut être supprimé
+tracker_admin_build_boxes	error_inserting_box	Erreur lors de l'ajout d'un champ
+tracker_admin_build_boxes	error_inserting_choice	Erreur lors de l'ajout d'un choix
+tracker_admin_build_boxes	error_updating	Erreur lors de la mise à jour du nom du champ
+tracker_admin_build_boxes	no_box	Vous n'avez pas défini de champ.
+tracker_admin_build_boxes	no_choice	Vous n'avez pas défini de choix.
+tracker_admin_build_boxes	opt_add_name	Ajouter un nouveau choix
+tracker_admin_build_boxes	opt_name	Choix
+tracker_admin_build_boxes	opt_title	Ajouter des choix à la liste déroulante de : $1
+tracker_admin_build_boxes	opt_update_title	Modifier un choix d'une liste déroulante de : $1
+tracker_admin_build_boxes	required_box_name	Un nom de champ est nécessaire
+tracker_admin_build_boxes	required_choice_name	Un nom de choix est nécessaire
+tracker_admin_build_boxes	status_any	Tous
+tracker_admin_build_boxes	title	 Ajouter/Modifier les listes déroulantes et les choix
+tracker_admin_build_boxes	tracker_box_id	Identifiant
+tracker_admin_build_boxes	tracker_box_option_add	Ajouter/Modifier
+tracker_admin_build_boxes	tracker_box_option_title	Choix définis
+tracker_admin_build_boxes	tracker_box_title	Champs définis
+tracker_admin_build_boxes	tracker_choice_id	Identifiant
 tracker_admin_choose	title	Administration des traceurs
 tracker_admin_update_canned	title	Modification des réponses-types de $1
 tracker_admin_update_cat	auto_assign_to	Confier automatiquement à

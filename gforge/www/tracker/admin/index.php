@@ -380,7 +380,7 @@ echo '<td>';
 				echo '<td>';
 				echo	'<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
 					db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">';
-				echo ' add choices ';
+				echo ' '.$Language->getText('tracker_admin_build_boxes', 'box_add_choices').' ';
 			}
 			echo   '</tr>';
 			echo $GLOBALS['HTML']->listTableBottom();
@@ -437,7 +437,7 @@ echo '<td>';
 			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else { 
-			echo "\n<h3>".$Language->getText('tracker_admin_build_boxes','no_box')."</h3>";
+			echo "\n<h3>".$Language->getText('tracker_admin_build_boxes','no_choice')."</h3>";
 		}
 		?>
 		<p>
