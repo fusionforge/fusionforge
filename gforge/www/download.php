@@ -11,6 +11,8 @@
   *
   */
 
+$no_gz_buffer=true;
+
 require_once('squal_pre.php');
 
 $arr=explode('/',$REQUEST_URI);

@@ -9,6 +9,10 @@
  * @version   $Id$
  */
 
+if (!$no_gz_buffer) {
+	ob_start("ob_gzhandler");
+}
+
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
 */

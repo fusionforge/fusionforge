@@ -11,6 +11,7 @@
   *
   */
 
+$no_gz_buffer=true;
 
 require_once('squal_pre.php');
 require_once('common/tracker/Artifact.class');

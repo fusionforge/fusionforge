@@ -17,6 +17,8 @@
 	Complete OO rewrite by Tim Perdue 1/2003
 */
 
+$no_gz_buffer=true;
+
 require_once('pre.php');
 require_once('include/doc_utils.php');
 require_once('common/docman/Document.class');
