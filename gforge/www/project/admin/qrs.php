@@ -28,21 +28,37 @@ if( $submit ) {
 		//see if this package belongs to this project
 		$res1=db_query("SELECT * FROM frs_package WHERE package_id='$package_id' AND group_id='$group_id'");
 		if (!$res1 || db_numrows($res1) < 1) {
-			$feedback .= ' | Package Doesn\'t Exist Or Isn\'t Yours ';
-			echo db_error();
+		  $feedback .= ' | Package Doesn\'t Exist Or Isn\'t Yours ';
+		  echo db_error();
 		} else {
-			//package_id was fine - now insert the release
-			$res=db_query("INSERT INTO frs_release (package_id,name,notes,changes,status_id,release_date,released_by) ".
-				"VALUES ('$package_id','$release_name','$release_notes','$release_changes','$status_id','". time() ."','". user_getid() ."')");
-			if (!$res) {
-				$feedback .= ' | Adding Release Failed ';
-				echo db_error();
-				//insert failed - go back to definition screen
-			} else {
-				//release added - now show the detail page for this new release
-				$release_id=db_insertid($res,'frs_release','release_id');
-				$feedback .= ' Added Release <BR>';
-			}
+		  // package_id was fine - now insert the release (if need be)
+		  // see if a release by this name exists and belongs to this project
+		  $sql="SELECT frs_release.release_id FROM frs_package,frs_release ".
+		    "WHERE frs_package.group_id=$group_id ".
+		    "AND frs_release.package_id=frs_package.package_id ".
+		    "AND frs_release.name='$release_name' ".
+		    "ORDER BY frs_release.release_id ASC" ;
+		  // echo "\nSQL = $sql <br>\n" ;
+		  $res1=db_query($sql);
+		  // echo "res1 = $res1 <br>\n" ;
+		  // echo "numrows = " . db_numrows($res1) . " <br>\n" ;
+		  if (!$res1 || db_numrows($res1) < 1) {  // Release does not already exist
+		    $res=db_query("INSERT INTO frs_release (package_id,name,notes,changes,status_id,release_date,released_by) ".
+				  "VALUES ('$package_id','$release_name','$release_notes','$release_changes','$status_id','". time() ."','". user_getid() ."')");
+		    if (!$res) {
+		      $feedback .= ' | Adding Release Failed ';
+		      echo db_error();
+		      //insert failed - go back to definition screen
+		    } else {
+		      //release added - now show the detail page for this new release
+		      $release_id=db_insertid($res,'frs_release','release_id');
+		      $feedback .= ' Added Release <BR>';
+		    }
+		  } else { // A release already exists by the same name in the same project
+		    $row = db_fetch_array($res1) ;
+		    $release_id = $row[release_id] ;
+		    $feedback .= ' Not Adding (Already Existing) Release | ';
+		  }
 		}
 
 		/*
@@ -71,7 +87,13 @@ if( $submit ) {
 				if (is_file($userfile) && file_exists($userfile)) {
 					$new_userfile = explode("tmp/", $userfile);
 					$userfile = $new_userfile[1];
-					exec ("/usr/lib/sourceforge/bin/tmpfilemove $userfile $userfile_name $user_unix_name 2>&1",$exec_res);
+					// The following line is due to PHP braindeadness.
+					// Don't you dare remove it, it'll break.
+					// I know.  I tried it.
+					// [RM]
+					putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
+					exec ("/usr/lib/sourceforge/bin/tmpfilemove.pl ".escapeshellarg($userfile). " ".escapeshellarg($userfile_name)." ".escapeshellarg($user_unix_name)." 2>&1",$exec_res);
+					putenv ('sys_dbpasswd=') ;
 					if ($exec_res[0]) {
 						echo '<H3>' . $exec_res[0],$exec_res[1] . '</H3><P>';
 					}
@@ -107,7 +129,13 @@ if( $submit ) {
 						clearstatcache();
 						if (is_file($user_incoming_dir.'/'.$file_name) && file_exists($user_incoming_dir.'/'.$file_name)) {
 							//move the file to a its project page using a setuid program
-							exec ("/usr/lib/sourceforge/bin/fileforge $file_name $user_unix_name $group_unix_name 2>&1",$exec_res);
+						  // The following line is due to PHP braindeadness.
+						  // Don't you dare remove it, it'll break.
+						  // I know.  I tried it.
+						  // [RM]
+						  putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
+						  exec ("/usr/lib/sourceforge/bin/fileforge.pl ".escapeshellarg($file_name)." ".escapeshellarg($user_unix_name)." ".escapeshellarg($group_unix_name)." 2>&1",$exec_res);
+						  putenv ('sys_dbpasswd=') ;
 							if ($exec_res[0]) {
 								echo '<h3>'.$exec_res[0],$exec_res[1],$exec_res[2].'</H3><P>';
 							}

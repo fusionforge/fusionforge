@@ -92,7 +92,13 @@ class FRS extends Error {
 		//exec is crunching var
 		$file=$filename;
 		//move the file to a its project page using a setuid program
-		exec ("/usr/lib/sourceforge/bin/fileforge $file $user_unix_name $group_unix_name 2>&1", $exec_res);
+		// The following line is due to PHP braindeadness.
+		// Don't you dare remove it, it'll break.
+		// I know.  I tried it.
+		// [RM]
+		putenv ('sys_dbpasswd='.getenv ('sys_dbpasswd')) ;
+		exec ("/usr/lib/sourceforge/bin/fileforge.pl ".escapeshellarg($file)." ".escapeshellarg($user_unix_name)." ".escapeshellarg($group_unix_name)." 2>&1", $exec_res);
+		putenv ('sys_dbpasswd=') ;
 		if ($exec_res[0]) {
 			$this->setError("FRS Add File Failed:<br>$exec_res[0]<br>$exec_res[1]<br>$exec_res[2]");
 			return false;
