@@ -47,3 +47,6 @@
 
 # Daily sweep of the HTTP log files for project activity
 15 0 * * * gforge [ -x /usr/lib/gforge/bin/stats_projects_logparse.pl ] && /usr/lib/gforge/bin/stats_projects_logparse.pl -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+
+# Hourly sending of mass e-mailings
+48 * * * * gforge [ -x /usr/lib/gforge/bin/massmail.php ] && /usr/lib/gforge/bin/massmail.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
