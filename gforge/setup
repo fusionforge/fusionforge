@@ -44,6 +44,7 @@ computedefault(){
 	DEFAULTsys_path_to_cvsweb=/usr/lib/gforge/bin/
 	DEFAULTgforge_chroot=$CHROOT
 	DEFAULTgforge_etc=$ETCDIR
+	DEFAULTsys_custom_path=$ETCDIR/custom
 	DEFAULTgroupdir=$GROUPPATH
 	DEFAULThomedir=$HOMEPATH
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
@@ -167,6 +168,7 @@ setupinout(){
 	echo "Creating $HTTPDSECRETS"
 	cat $ETCDIR/httpd.secrets.gforge-new > $HTTPDSECRETS
 	rm $ETCDIR/httpd.secrets.gforge-new
+	chmod 600 $HTTPDSECRETS
 	
 	echo "Creating $LOCALINC"
 	for i in $ETCDIR/local.d/01* $ETCDIR/local.d/10database.$database $ETCDIR/local.d/[2-9]*
@@ -177,7 +179,8 @@ setupinout(){
 	rm $ETCDIR/01* $ETCDIR/10database.$database $ETCDIR/[2-9]*
 
 	echo "Creating other includes"
-	for i in $ETCDIR/templates/database.inc $ETCDIR/templates/local.pl
+	#for i in $ETCDIR/templates/[a-z]*
+	find $ETCDIR/templates -name '[a-z]*' -maxdepth 1 -type f | while read i 
 	do
 		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
 	done

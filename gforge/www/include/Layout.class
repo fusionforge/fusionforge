@@ -47,8 +47,8 @@ class Layout extends Error {
 	function Layout() {
 		GLOBAL $bgpri;
 		// Constructor for parent class...
-		if ( file_exists('/etc/gforge/custom/index_std.php') )
-			$this->rootindex = '/etc/gforge/custom/index_std.php';
+		if ( file_exists($GLOBALS['sys_custom_path'] . '/index_std.php') )
+			$this->rootindex = $GLOBALS['sys_custom_path'] . '/index_std.php';
 		$this->Error();
 
 		/*

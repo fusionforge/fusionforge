@@ -1,4 +1,4 @@
-gforge (3.3.0-2woody8) stable; urgency=low
+gforge (3.3.0-3woody3) stable; urgency=low
 
   * [Christian] Added new sql upgrade (2004*.sql)
   * [Christian] Stable backbort
@@ -9,7 +9,7 @@ gforge (3.3.0-2woody8) stable; urgency=low
   gforge upstream bug #751)
   * [Christian] Adjust cvs_dump rights
 
- -- Christian Bayle <bayle@debian.org>  Fri,  2 Apr 2004 22:48:49 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri, 16 Apr 2004 09:25:59 +0200
 
 gforge (3.2.1-4) experimental; urgency=low
 

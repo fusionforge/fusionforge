@@ -1,3 +1,18 @@
+2004-04-16  Christian Bayle <bayle@debian.org>
+	* Test if Theme.class is really there, keep the default of local.inc if
+	not in  User.class
+	* Remove test about the presence of /etc/gforge/custom/pre.php in
+	pre.php. Customized pre.php can be loaded by adding a path in apache
+	* Manage a sys_custom_path for gforge customization
+
+2004-04-15  Christian Bayle <bayle@debian.org>
+
+	* Reordered country code by country name and not by country code 
+	(closes bug #762)
+	* Replace squal_pre.php with pre.php in ./www/frs/download.php
+	./www/snippet/download.php ./www/tracker/download.php
+	* utils/fill-in-the-blanks.pl can use more than one conf file
+
 2004-04-14  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* fixed a bug in new cronjob cvs.php. Modes must be in octal.

@@ -247,6 +247,10 @@ $sys_force_login=0;
 //$gantt_task_font_style="FS_NORMAL";
 //$gantt_task_font_size=12;
 
+// Place for customized files
+$sys_custom_path='/path/to/gforge/etc/custom';
+
+
 //
 // Localization caching Configuration
 //

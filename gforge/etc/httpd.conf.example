@@ -19,7 +19,7 @@ NameVirtualHost 10.GF.OR.GE:443
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "/path/to/gforge:/path/to/gforge/www/include:."
+  php_admin_value include_path "/path/to/gforge/etc/custom:/path/to/gforge:/path/to/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
 </Directory>
 
@@ -134,7 +134,7 @@ NameVirtualHost 10.GF.OR.GE:443
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "/path/to/gforge:/path/to/gforge/www/include:."
+  php_admin_value include_path "/path/to/gforge/etc/custom:/path/to/gforge:/path/to/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
 </Directory>
 
