@@ -23,7 +23,9 @@ function user_getthemeid($user_id = 0) {
                         return $USER_THEME["user_$user_id"];
                 } else {
                         //fetch the user theme and store it for future reference
-                        $result = db_query("SELECT * FROM theme_prefs WHERE user_id=$user_id");
+                        $sql = "SELECT * FROM theme_prefs WHERE user_id=$user_id";
+			// echo "<b> $sql </b><br>" ;
+                        $result = db_query($sql) ;
                         if ($result && db_numrows($result) > 0) {
                                 //valid theme - store and return
                                 $USER_THEME["user_$user_id"]=db_result($result,0,"user_theme");
@@ -31,7 +33,7 @@ function user_getthemeid($user_id = 0) {
                         } else {
                                 //invalid theme - store and return
                                 $USER_THEME["user_$user_id"]="<B>Invalid User ID</B>";
-                                return -1;
+                                return $GLOBALS['sys_themeid'];
                         }
                 }
         }
@@ -50,7 +52,9 @@ function get_themedir($theme_id = 0) {
                         return $THEME_DIR["theme_$theme_id"];
                 } else {
                         //fetch the theme name and store it for future reference
-                        $result = db_query("SELECT theme_id,dirname FROM themes WHERE theme_id=$theme_id");
+                        $sql ="SELECT theme_id,dirname FROM themes WHERE theme_id=$theme_id";
+			// echo "<b> $sql </b><br>" ;
+                        $result = db_query($sql) ;
                         if ($result && db_numrows($result) > 0) {
                                 //valid theme - store and return
                                 $THEME_DIR["theme_$theme_id"]=db_result($result,0,"dirname");
@@ -77,7 +81,9 @@ function get_themename($theme_id = 0) {
                         return $THEME_NAME["theme_$theme_id"];
                 } else {
                         //fetch the theme name and store it for future reference
-                        $result = db_query("SELECT theme_id,fullname FROM themes WHERE theme_id=$theme_id");
+                        $sql = "SELECT theme_id,fullname FROM themes WHERE theme_id=$theme_id" ;
+			// echo "<b> $sql </b><br>" ;
+                        $result = db_query($sql) ;
                         if ($result && db_numrows($result) > 0) {
                                 //valid theme - store and return
                                 $THEME_NAME["theme_$theme_id"]=db_result($result,0,"fullname");
