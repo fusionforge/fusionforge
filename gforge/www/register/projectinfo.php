@@ -78,8 +78,8 @@ if ($submit) {
 
 			?>
 
-			<p>Your project has been submitted to the <?php echo $GLOBALS['sys_name']; ?> admininstrators.
-			Within 72 hours, you will receive decision notification and further
+			<p>Your project has been submitted to the <?php echo $GLOBALS['sys_name']; ?> administrators.
+			Within 72 hours, you will receive notification of their decision and further
 			instructions.
 			</p>
 			<p>
