@@ -40,6 +40,7 @@ case "$1" in
 	fi
 	add_onevar_mainconfile sys_session_key $sys_session_key
 	add_onevar_mainconfile sys_show_source 0
+	add_onevar_mainconfile sys_force_login 0
 
 	[ -f /usr/bin/cronolog ] && add_onevar_mainconfile cronolog_path /usr/bin/cronolog
 	[ -f /usr/sbin/cronolog ] && add_onevar_mainconfile cronolog_path /usr/sbin/cronolog
