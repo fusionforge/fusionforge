@@ -7,6 +7,3 @@
 
 # Enable the virtual hosts
 37 7,19 * * * root [ -x /usr/lib/gforge/bin/create-vhosts.sh ] && /usr/lib/gforge/bin/create-vhosts.sh
-
-# New pending
-30 17 * * * root [ -x /usr/lib/gforge/bin/get_news_notapproved.pl ] && /usr/lib/gforge/bin/get_news_notapproved.pl > /dev/null 2>&1
