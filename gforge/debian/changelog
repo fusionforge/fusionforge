@@ -1,11 +1,104 @@
-gforge (3.1-2+2) unstable; urgency=low
+gforge (3.1-10) unstable; urgency=low
+
+  * [Roland] This is a brown-paper-bag type of release.  I broke
+    install-ldap.sh in 3.1-9.  This should fix it.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 16 Feb 2004 14:20:27 +0100
+
+gforge (3.1-9) unstable; urgency=low
+
+  * [Roland] Added permissions for the robot to edit the
+    ou=mailingList,dc=... entries in LDAP.
+  * [Roland] Better detection of strange conditions in cvs_dump_update.pl.
+  * [Roland] Fixed permissions for groups' "home" directories.
+  * [Roland] Added po/nl.po for the Dutch translation (closes: #232236).
+  * [Roland] Don't comment out LDAP schema inclusions in slapd.conf
+    (closes: #227377).
+  * [Roland] Don't count private projects and the None user when
+    displaying numbers on the front page (closes: #211086).
+
+ -- Roland Mas <lolando@debian.org>  Sun, 15 Feb 2004 17:10:11 +0100
+
+gforge (3.1-8) unstable; urgency=low
+
+  * [Roland] It seems the new organisation of the apache (and related)
+    packages managed to break quite a lot of things.  Still trying to
+    catch up, this time removing a "Listen" directive that would turn out
+    to be a duplicate one, thus preventing Apache from running.
+
+ -- Roland Mas <lolando@debian.org>  Tue, 20 Jan 2004 22:45:03 +0100
+
+gforge (3.1-7) unstable; urgency=low
+
+  * [Roland] Yet another LDAP fix.  This one would completely prevent
+    installation from scratch.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 11 Jan 2004 02:12:51 +0100
+
+gforge (3.1-6) unstable; urgency=low
+
+  * [Roland] Detection of wrong passwords, with a message describing how
+    to fix (closes: #223693, #215577, #224257).
+  * [Roland] Insert data into LDAP using the robot DN, so as to minimise
+    the use of the admin DN.
+  * [Roland] Better detection of errors when creating database and user,
+    too.
+  * [Roland] Added cronjobs/massmail.php and enabled it in
+    gforge-db-postgresql.cron.d (closes: #225686).
+  * [Roland] Cleaned up the Apache installation process so that it works
+    more generically with apache{,-perl,-ssl} flavours.  Also use
+    /etc/$flavour/conf.d/ directory (thus removing the hack that changed
+    the /etc/$flavour/httpd.conf file).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 22:41:21 +0100
+
+gforge (3.1-5) unstable; urgency=low
+
+  * [Roland] Tightened the versioned dependency on Apache so that we can
+    rely on modules-config (closes: #220872).
+  * [Roland] Escape special characters like @ and $ before passing strings
+    containing them to a Perl script, for instance e-mail addresses.
+    Should help fix the administrator's e-mail.
+  * [Roland] install-db.sh now uses grep and cut (instead of Perl) to
+    extract the configuration variables from the configuration file, which
+    should help gforge-sourceforge-transition work better.
+  * [Roland] Added full path to invoke-rc.d in create-vhosts.sh.  This
+    script may be called from a very sparse environment (cron), in which
+    $PATH does not include /usr/sbin.
+  * [Roland] Remove .ssh/authorized_keys when they are set to empty,
+    instead of just leaving them as they are.
+  * [Roland] Added support for apache-perl too.
+  * [Roland] Fixed the way we use modules-config so that gforge-web-apache
+    does not hang on install (closes: #221172).
+  * [Roland] Added "--encoding=UNICODE" to the restore action of
+    install-db.sh.
+
+ -- Roland Mas <lolando@debian.org>  Fri,  9 Jan 2004 22:35:34 +0100
+
+gforge (3.1-4) unstable; urgency=low
+
+  * [Roland] Fixed multiline inline Perl script for gforge-mta-postfix's
+    configuration process (I know, I know) (closes: #219379).
+  * [Roland] install-apache.sh now uses the new "modules-config" mechanism
+    provided by Apache packages to enable/disable modules, instead of
+    uncommenting LoadModules lines by script (closes: #219745).
+  * [Roland] Fixed update-user-group-cvs.sh's handling of lockfiles
+    (closes: #219957).
+  * [Christian] corrected SYSLOGD warning to 'you must have
+    SYSLOGD="-p /dev/log -a /var/lib/gforge/chroot/dev/log" in
+    /etc/init.d/sysklogd', since the old advice might have break
+    your syslogd, sorry for this but this is makejail advice.
+
+ -- Roland Mas <lolando@debian.org>  Thu, 13 Nov 2003 23:21:26 +0100
+
+gforge (3.1-3) unstable; urgency=low
 
   * [Roland] Added a lock feature to update-user-group-cvs.sh.  That adds
     a dependency on lockfile-progs.
   * [Roland] Fixed install-postfix.sh for gforge-mta-postfix's
     deconfiguration process (closes: #218637).
 
- -- Roland Mas <lolando@debian.org>  Tue,  4 Nov 2003 20:57:10 +0100
+ -- Roland Mas <lolando@debian.org>  Tue,  4 Nov 2003 23:16:44 +0100
 
 gforge (3.1-2) unstable; urgency=low
 
