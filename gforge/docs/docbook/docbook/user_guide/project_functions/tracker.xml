@@ -107,7 +107,7 @@
 					<para>You can also upload a file as an attachment to the bug. This can be used to attach a screenshot with the error and the log file of the application.</para>
 					<para>To upload the file, Check the checkbox, select a file using the Browse button and insert a file description.</para>
 					<note>
-						<para>Attachments to tracker items can be maximal 256KB.</para>
+						<para>Attachments to tracker items can be no larger than 256KB.</para>
 					</note>
 				</listitem>
 			</varlistentry>
@@ -122,7 +122,7 @@
 			You can sort the items by ID, Priority, Summary, Open Date, Close Date, Submittere, Assignee and the Ordering (Ascending, descending).
 		</para>
 		<para>
-			The different colors indicate the different priorities of the bug; a * near the open date indicates that the request is more than 30 days old. The overdue time (default 30 days) is configurabel for each tracker.
+			The different colors indicate the different priorities of the bug; a * near the open date indicates that the request is more than 30 days old. The overdue time (default 30 days) is configurable for each tracker.
 		</para>
 		<para>
 			When you click on the summary, you go to the detail/modify Bug page.
@@ -348,7 +348,7 @@
 			<varlistentry>
 				<term>Bugs by Technician</term>
 				<listitem>
-					<para>The Bugs by Tecnician report shows for every member of the project: the number of bugs assigned to the user, the number of closed bugs and the number of bugs still open.</para>
+					<para>The Bugs by Technician report shows for every member of the project: the number of bugs assigned to the user, the number of closed bugs and the number of bugs still open.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>

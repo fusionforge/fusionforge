@@ -4,13 +4,13 @@
 		The news section allows you to insert news relative to your project. News can be monitored similar to tracker items, forums. News will be displayed on the project homepage and also on the site homepage, if the site administrators approve the news.
 	</para>
 	<para>
-		News are used generally to announce software releases or to announce significant changes in the software or milestones.
+		News are generally used to announce software releases, milestones, or significant changes in the software.
 	</para>
 	<section>
 		<title>Inserting a news item</title>
 		<para>You can insert a news item by clicking on the Submit link.</para>
 		<para>You can post news about your project if you are an admin on your project.</para>
-		<para>All posts for your project will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the gforge news team before they will appear on the GForge home page.</para>
+		<para>All posts for your project will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the GForge news team before they will appear on the GForge home page.</para>
 		<para>You may include URLs, but not HTML in your submissions. URLs that start with http:// are made clickable.</para>
 		<para>The news item will go to the News Admin for approval for publication.</para>
 	</section>
