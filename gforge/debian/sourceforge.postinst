@@ -112,21 +112,36 @@ EOF
 	/usr/lib/sourceforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE:
 	
 	if [ "$do_config" = "true" ] ; then
-	    cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.sourceforge-old
-	    # Make sure Apache sees us
-	    perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf
-	    if [ -e /usr/lib/apache/1.3/mod_ssl.so ] ; then
-		perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf
+	    if [ -e /etc/apache/httpd.conf ] ; then
+		cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.sourceforge-old
+    	        # Make sure Apache sees us
+		perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf
+		if [ -e /usr/lib/apache/1.3/mod_ssl.so ] ; then
+		    perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf
+		fi
+		perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf
+		perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf
+		
+		if ! grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
+		    echo "### Next line inserted by Sourceforge install" >> /etc/apache/httpd.conf
+		    echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache/httpd.conf
+		fi
 	    fi
-	    if [ -e /usr/lib/apache/1.3/libssl.so ] ; then
-		perl -pi -e "s/# *LoadModule apache_ssl_module/LoadModule apache_ssl_module/gi" /etc/apache/httpd.conf
-	    fi
-	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf
-	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf
-	    
-	    if ! grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf ; then
-		echo "### Next line inserted by Sourceforge install" >> /etc/apache/httpd.conf
-		echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache/httpd.conf
+
+	    if [ -e /etc/apache-ssl/httpd.conf ] ; then
+		cp -a /etc/apache-ssl/httpd.conf /etc/apache-ssl/httpd.conf.sourceforge-old
+    	        # Make sure Apache sees us
+		perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache-ssl/httpd.conf
+		if [ -e /usr/lib/apache/1.3/libssl.so ] ; then
+		    perl -pi -e "s/# *LoadModule apache_ssl_module/LoadModule apache_ssl_module/gi" /etc/apache-ssl/httpd.conf
+		fi
+		perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache-ssl/httpd.conf
+		perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache-ssl/httpd.conf
+		
+		if ! grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache-ssl/httpd.conf ; then
+		    echo "### Next line inserted by Sourceforge install" >> /etc/apache-ssl/httpd.conf
+		    echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache-ssl/httpd.conf
+		fi
 	    fi
 	fi
 	

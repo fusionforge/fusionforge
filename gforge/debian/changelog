@@ -1,6 +1,7 @@
 sourceforge (2.5-27+) unstable; urgency=low
 
-  * 
+  * [Roland] Fixed problem with Apache-SSL: the config file is
+    /etc/apache-ssl/httpd.conf, not /etc/apache/httpd.conf.
 
  --
 
