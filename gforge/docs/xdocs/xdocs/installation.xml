@@ -311,7 +311,7 @@ Now it's time to install the database. The steps are:
 <li>cd to <code>/var/www/gforge-3.0/db</code></li>
 <li>
 <code>
-psql -U gforge -d gforge &lt; gforge3.sql
+psql -a -U gforge gforge &lt; gforge3.sql > /tmp/gforge.sql.log 2&gt;&amp;1
 </code>
 <br/>
 </li>
