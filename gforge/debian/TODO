@@ -13,7 +13,7 @@ here have been transferred onto the Savannah project, at
 
 * [CB] Find how to use libnss-lwres.  [RM] ??? [CB] It is not doing what I 
   was thinking. It may be possible to make the dns server to use directly
-  postgres-db or ldap (Look at sdb driver)
+  postgres-db or ldap (Look at sdb driver /usr/share/doc/bind9-doc/misc/sdb.gz )
 
 * [CB] Repair /admin/editpackages.php (Create FTP_INCOMING in
   /var/lib/sourceforge/ftp)  [RM] Is this still current? [CB] You can remove
