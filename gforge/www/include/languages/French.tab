@@ -49,7 +49,8 @@ group	long_survey	Sondages
 group	short_bugs	Bugs
 group	short_cvs	CVS
 group	short_docman	Documentation
-group	short_files	Filesgroup	short_forum	Forums
+group	short_files	Filesgroup
+group	short_forum	Forums
 group	short_homepage	Accueil
 group	short_mail	Mailing-listes
 group	short_main 	Ecran Principal
