@@ -1,10 +1,12 @@
 sourceforge (2.6-0+9+) unstable; urgency=low
 
   * [Christian] Corrected wrong link in menu.php for lastlogin.php.
-  * [Roland] Various other patches from Olafur Osvaldsson <oli@isnic.is>
-    applied, many thanks.
+  * [Roland] *Lots* of patches from Olafur Osvaldsson <oli@isnic.is>
+    applied, many thanks to him.
   * [Roland] Changed about.php page so that it now speaks about Debian
-    Sourceforge.
+    Sourceforge.  It's internationalised, too.
+  * [Roland] Page footer is now shorter, internationalised, and pointing
+    to the About page.
   * [Roland] Fixed links in the Site News page.
   * [Roland] Made groups siteadmin and newsadmin public to prevent
     problems with submitting of news.  Also, changed their names for
