@@ -1,3 +1,13 @@
+sourceforge (2.5-30+) unstable; urgency=low
+
+  * [Soon-Son] added method="post" to massmail.php which was missing so
+    far so that the admin can send email to the users
+  * [Roland] Revamped install-ftp.sh more or less thoroughly in order to
+    finally get rid of the sneaky LDAP problems.  From what I can see, it
+    works.  Yay!
+
+ -- Roland Mas <lolando@debian.org>  Sun, 28 Jul 2002 19:59:30 +0200
+
 sourceforge (2.5-30) unstable; urgency=high
 
   * [Christian] Change gid/uid attribution in ldap.php to be like in
@@ -55,8 +65,6 @@ sourceforge (2.5-30) unstable; urgency=high
     $cvs up -r xterm-branch 
     cvs [server aborted]: cannot write /cvsroot/hanterm-xf/CVSROOT/val-tags:
     Permission denied 
-  * [Soon-Son] added method="post" to massmail.php which was missing so far
-    so that the admin can send email to the users
 
  -- Roland Mas <lolando@debian.org>  Fri, 19 Jul 2002 20:46:00 +0200
 
