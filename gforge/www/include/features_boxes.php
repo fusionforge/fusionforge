@@ -10,10 +10,8 @@
 
 function show_features_boxes() {
 	GLOBAL $HTML,$Language;
-	$return .= $HTML->boxTop($Language->getText('home','sourceforge_statistics'),0);
+	$return .= $HTML->boxTop($Language->getText('home','sourceforge_statistics', $GLOBALS[sys_name]),0);
 	$return .= show_sitestats();
-	$return .= $HTML->boxMiddle('Newest Projects');
-	$return .= show_newest_projects();
 	$return .= $HTML->boxMiddle($Language->getText('home','top_project_downloads'));
 	$return .= show_top_downloads();
 	$return .= $HTML->boxMiddle($Language->getText('home','highest_ranked_users'));
@@ -61,6 +59,16 @@ function show_top_downloads() {
 
 }
 
+
+function stats_getprojects_active_public() {
+	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A' AND is_public=1");
+	if (db_numrows($res_count) > 0) {
+		$row_count = db_fetch_array($res_count);
+		return $row_count['count'];
+	} else {
+		return "error";
+	}
+}
 
 function stats_getprojects_active() {
 	$res_count = db_query("SELECT count(*) AS count FROM groups WHERE status='A'");
