@@ -322,7 +322,7 @@ case "$1" in
 	        setup_vars
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 		admin_regexp=$(echo $sys_ldap_base_dn | sed 's/, */, */g')
-		admin_regexp="^cn=admin, *ou=People, *$regexp"
+		admin_regexp="^cn=admin, *ou=People, *$admin_regexp"
 		get_our_entries () {
 		    slapcat \
 			| grep "^dn:" \
