@@ -75,12 +75,13 @@ class FRSRelease extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($name,$notes,$changes,$preformatted,$release_date=false) {
+		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError('FRSRelease Name Must Be At Least 3 Characters');
+			$this->setError($Language->getText('frs_release','error_min_name_lenght'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError('FRSRelease Name Should Be in This Example Format: gforge-3.0pre5');
+			$this->setError($Language->getText('frs_release','error_name_format'));
 			return false;
 		}
 
@@ -93,7 +94,7 @@ class FRSRelease extends Error {
 		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
@@ -220,27 +221,28 @@ class FRSRelease extends Error {
 	 *  @return	boolean	success.
 	 */
 	function sendNotice() {
+		global $Language;
 		$arr =& $this->FRSPackage->getMonitorIDs();
 
 		$date = date('Y-m-d H:i',time());
 
-		$subject = '['.$this->FRSPackage->Group->getUnixName().' Release] '.$this->FRSPackage->getName();
-
-		$text = "\n\nProject \"". $this->FRSPackage->Group->getPublicName() ."\" ('". $this->FRSPackage->Group->getUnixName() ."') has "
-			."\nreleased the new version of package '"
-			.$this->FRSPackage->getName()."'. "
-			."\nYou can download it by following this link:\n"
-			."\n<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID() .">\n"
-			."\n\nYou receive this email because you "
-			."\nrequested to be notified when new versions of this package "
-			."\nwere released. If you don't wish to be notified in the "
-			."\nfuture, please login to ".$GLOBALS['sys_name']." and click this link: "
-			."\n<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1> ";
+		$subject = $Language->getText('frs_release','email_title',array(
+			$this->FRSPackage->Group->getUnixName(),
+			$this->FRSPackage->getName()));
+		$text = stripcslashes($Language->getText('frs_release','email_text',array(
+			$this->FRSPackage->Group->getPublicName(),
+			$this->FRSPackage->Group->getUnixName(),
+			$this->FRSPackage->getName(),
+			"<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID(),
+			$GLOBALS['sys_name'],
+			"<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
+			
 
 		$text = util_line_wrap($text);
 		if (count($arr)) {
 			util_handle_message(array_unique($arr),$subject,$text);
 		}
+		
 	}
 
 	/**
@@ -256,19 +258,20 @@ class FRSRelease extends Error {
 	 */
 	function update($status,$name,$notes,$changes,$preformatted,$release_date) {
 
+		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError('Package Name Must Be At Least 3 Characters');
+			$this->setError($Language->getText('frs_release','error_min_name_lenght'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError('FRSRelease Name Should Be in This Example Format: gforge-3.0pre5');
+			$this->setError($Language->getText('frs_release','error_name_format'));
 			return false;
 		}
 
 		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 

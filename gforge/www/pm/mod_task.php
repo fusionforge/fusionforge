@@ -16,7 +16,7 @@
 	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
+pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 
 ?>
 
@@ -27,28 +27,28 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 <table border="0" width="100%">
 
 	<tr>
-		<td><strong>Submitted By:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
+		<td><strong><?php echo $Language->getText('pm_modtask','submitted_by') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
 	</tr>
 
 	<tr>	
 		<td>
-		<strong>Category:</strong><br />
+		<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
 		<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&add_cat=1&group_project_id=$group_project_id"; ?>">(admin)</a>
 		</td>
 
 		<td>
-		<input type="submit" value="Submit Changes" name="submit">
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Percent Complete:</strong><br />
+		<strong><?php echo $Language->getText('pm','percent_complete') ?>:</strong><br />
 		<?php echo $pg->percentCompleteBox('percent_complete',$pt->getPercentComplete()); ?>
 		</td>
 
 		<td>
-		<strong>Priority:</strong><br />
+		<strong><?php echo $Language->getText('pm','priority') ?>:</strong><br />
 		<?php echo build_priority_select_box('priority',$pt->getPriority()); ?>
 		</td>
 
@@ -58,40 +58,38 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 
   	<tr>
 		<td colspan="2">
-		<strong>Task Summary:</strong><br />
+		<strong><?php echo $Language->getText('pm','summary') ?>:</strong><br />
 		<input type="text" name="summary" size="40" MAXLENGTH="65" value="<?php echo $pt->getSummary(); ?>">
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong>Original Comment:</strong><br />
+		<strong><?php echo $Language->getText('pm_modtask','original_comment') ?>:</strong><br />
 		<?php echo nl2br( $pt->getDetails() ); ?>
 		<p>
-		<strong>Add A Comment:</strong><br />
+		<strong><?php echo $Language->getText('pm_modtask','add_comment') ?>:</strong><br />
 		<textarea name="details" rows="5" cols="40" wrap="soft"></textarea>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong>Start Date:</strong><br />
+		<strong><?php echo $Language->getText('pm','start_date') ?>:</strong><br />
 		<?php
 		echo $pg->showMonthBox ('start_month',date('m', $pt->getStartDate()));
 		echo $pg->showDayBox ('start_day',date('d', $pt->getStartDate()));
 		echo $pg->showYearBox ('start_year',date('Y', $pt->getStartDate()));
 		echo $pg->showHourBox ('start_hour',date('G', $pt->getStartDate()));
 		echo $pg->showMinuteBox ('start_minute',date('i',$pt->getStartDate())); 
-		?><br />
-		The system will modify your start/end dates if you attempt to create a start date
-		earlier than the end date of any tasks you depend on.
-		<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank">View Calendar</a>
+		?><br /><?php echo $Language->getText('pm','date_note') ?>
+		<br /><a href="calendar.php?group_id=<?php echo $group_id; ?>&amp;group_project_id=<?php echo $group_project_id; ?>" target="_blank"><?php echo $Language->getText('pm','view_calendar') ?></a>
 		</td>
 	</tr>
 
 	<tr>
 		<td colspan="2">
-		<strong>End Date:</strong><br />
+		<strong><?php echo $Language->getText('pm','end_date') ?>:</strong><br />
 		<?php
 		echo $pg->showMonthBox ('end_month',date('m', $pt->getEndDate()));
 		echo $pg->showDayBox ('end_day',date('d', $pt->getEndDate()));
@@ -104,7 +102,7 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 
 	<tr>
 		<td valign="top">
-		<strong>Assigned To:</strong><br />
+		<strong><?php echo $Language->getText('pm','assigned_to') ?>:</strong><br />
 		<?php
 		/*
 			List of possible users that this one could be assigned to
@@ -114,7 +112,7 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 		</td>
 
 		<td valign="top">
-		<strong>Dependent On Task:</strong><br />
+		<strong><?php echo $Language->getText('pm','dependent') ?>:</strong><br />
 		<?php
 		/*
 			List of possible tasks that this one could depend on
@@ -122,18 +120,18 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 
 		echo $pt->multipleDependBox();
 		?><br />
-		You should choose only tasks which must be completed before this task can start.
+		<?php echo $Language->getText('pm','dependent_note') ?>
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Hours:</strong><br />
+		<strong><?php echo $Language->getText('pm','hours') ?>:</strong><br />
 		<input type="text" name="hours" size="5" value="<?php echo $pt->getHours(); ?>">
 		</td>
 
 		<td>
-		<strong>Status:</strong><br />
+		<strong><?php echo $Language->getText('pm','status') ?>:</strong><br />
 		<?php
 		echo $pg->statusBox('status_id', $pt->getStatusID() );
 		?>
@@ -166,7 +164,7 @@ pm_header(array('title'=>'Modify A Task','pagename'=>'pm_modtask','group_project
 
 	<tr>
 		<td colspan="2" align="MIDDLE">
-		<input type="submit" value="Submit Changes" name="submit">
+		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit">
 		</td>
 		</form>
 	</tr>

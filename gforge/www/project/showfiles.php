@@ -22,50 +22,38 @@ $res_package = db_query( $sql );
 $num_packages = db_numrows( $res_package );
 
 if ( $num_packages < 1) {
-	exit_error("No File Packages","There are no file packages defined for this project.");
+	exit_error($Language->getText('project_showfiles','error_no_packages_defined_title'),$Language->getText('project_showfiles','error_no_packages_defined_text'));
 }
 
-site_project_header(array('title'=>'Project Filelist','group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_showfiles','sectionvals'=>group_getname($group_id)));
+site_project_header(array('title'=>$Language->getText('project_showfiles','title'),'group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_showfiles','sectionvals'=>group_getname($group_id)));
 
-echo '
-<p>
-Below is a list of all files of the project. ';
+echo '<p>'.$Language->getText('project_showfiles','intro').' ';
 if ($release_id) {
-	echo 'The release you have chosen is <span style="background-color:pink">highlighted</span>. ';
+	echo $Language->getText('project_showfiles','release_highlighted').' ';
 }
-echo 'Before downloading, you may want to read Release Notes and ChangeLog
-(accessible by clicking on release version).
+echo $Language->getText('project_showfiles','intro2').'
 </p>
 ';
 
-$title_arr = array();
-$title_arr[] = 'Package';
-$title_arr[] = 'Release<br />&amp; Notes';
-$title_arr[] = 'Filename';
-$title_arr[] = 'Size';
-$title_arr[] = 'D/L';
-$title_arr[] = 'Arch.';
-$title_arr[] = 'Type';
-
-   // get unix group name for path
+// get unix group name for path
 $group_unix_name=group_getunixname($group_id);
 
 global $HTML;
 echo '
 <table width="100%" border="0" cellspacing="1" cellpadding="1">';
 $cell_data=array();
-$cell_data[] = array('Package','rowspan=2');
-$cell_data[] = array('Release<br />&amp; Notes','rowspan=2');
-$cell_data[] = array('Filename','rowspan=2');
-$cell_data[] = array('Date','colspan=4');
+$cell_data[] = array($Language->getText('project_showfiles','package'),'rowspan=2');
+$cell_data[] = array($Language->getText('project_showfiles','release_notes'),'rowspan=2');
+$cell_data[] = array($Language->getText('project_showfiles','filename'),'rowspan=2');
+$cell_data[] = array($Language->getText('project_showfiles','date'),'colspan=4');
 
 echo $GLOBALS[HTML]->multiTableRow('', $cell_data, TRUE);
 
 $cell_data=array();
-$cell_data[] = array('Size');
-$cell_data[] = array('D/L');
-$cell_data[] = array('Arch');
-$cell_data[] = array('Type');
+$cell_data[] = array($Language->getText('project_showfiles','size'));
+$cell_data[] = array($Language->getText('project_showfiles','downloads'));
+$cell_data[] = array($Language->getText('project_showfiles','architecture'));
+$cell_data[] = array($Language->getText('project_showfiles','file_type'));
 
 echo $GLOBALS[HTML]->multiTableRow("",$cell_data, TRUE);
 
@@ -77,7 +65,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	
 	print '<tr '.$cur_style.'><td colspan="3"><h3>'.db_result($res_package,$p,'name').'
 	<a href="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
-		html_image('ic/mail16w.png','20','20',array('alt'=>'Monitor This Package')) .
+		html_image('ic/mail16w.png','20','20',array('alt'=>$Language->getText('project_showfiles','monitor_package').'Monitor This Package')) .
 		'</a></h3></td><td colspan="4">&nbsp;</td></tr>';
 
 	   // get the releases of the package
@@ -89,7 +77,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	$proj_stats['releases'] += $num_releases;
 
 	if ( !$res_release || $num_releases < 1 ) {
-		print '<tr '.$cur_style.'><td colspan="3">&nbsp;&nbsp;<em>No Releases</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
+		print '<tr '.$cur_style.'><td colspan="3">&nbsp;&nbsp;<em>'.$Language->getText('project_showfiles','no_releases').'</em></td><td colspan="4">&nbsp;</td></tr>'."\n";
 	} else {
 		   // iterate and show the releases of the package
 		for ( $r = 0; $r < $num_releases; $r++ ) {
@@ -165,7 +153,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 
 if ( $proj_stats['size'] ) {
 	print '<tr><td colspan="8">&nbsp;</tr>'."\n";
-	print '<tr><td><strong>Project Totals: </strong></td>'
+	print '<tr><td><strong>'.$Language->getText('project_showfiles','project_totals').'</strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['releases'] . '</em></strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['files'] . '</em></strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['size'] . '</em></strong></td>'

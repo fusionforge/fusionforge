@@ -74,12 +74,13 @@ class FRSFile extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($name,$file_location,$type_id,$processor_id,$release_time=false) {
+		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError('FRSFile Name Must Be At Least 3 Characters');
+			$this->setError($Language->getText('frs_file','error_min_name_lenght'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError('FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2 '.$name);
+			$this->setError($Language->getText('frs_file','error_name_format').$name);
 			return false;
 		}
 //
@@ -89,14 +90,14 @@ class FRSFile extends Error {
 //	before calling this function
 //
 		if (!is_file($file_location) || !file_exists($file_location)) {
-			$this->setError('FRSFile Appears to be invalid');
+			$this->setError($Language->getText('frs_file','error_invalid_file'));
 			return false;
 		}
 
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
@@ -110,7 +111,7 @@ class FRSFile extends Error {
 			AND frs_file.filename='$name'
 			AND frs_package.group_id='".$this->FRSRelease->FRSPackage->Group->getId()."'");
 		if (!$resfile || db_numrows($resfile) > 0) {
-			$this->setError('That filename already exists in this project space '.db_error());
+			$this->setError($Language->getText('frs_file','error_already_exists').' '.db_error());
 			return false;
 		}
 
@@ -121,7 +122,7 @@ class FRSFile extends Error {
 		system("/bin/mv $file_location $newfilelocation$name");
 		if (!file_exists("$newfilelocation$name")) {
 			echo $newfilelocation.$name;
-			$this->setError('File could not be moved to permanent location.');
+			$this->setError($Language->getText('frs_file','error_cannot_move'));
 			return false;
 		}
 
@@ -277,7 +278,7 @@ class FRSFile extends Error {
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
@@ -309,7 +310,7 @@ class FRSFile extends Error {
 		$perm =& $this->FRSRelease->FRSPackage->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 

@@ -41,6 +41,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 
 	function showDependentTasks () {
+		global $Language;
 		$sql="SELECT project_task.project_task_id,project_task.summary 
 			FROM project_task,project_dependencies 
 			WHERE project_task.project_task_id=project_dependencies.project_task_id 
@@ -50,12 +51,12 @@ class ProjectTaskHTML extends ProjectTask {
 
 		if ($rows > 0) {
 			echo '
-			<h3>Tasks That Depend on This Task</h3>
+			<h3>'.$Language->getText('pm_include_taskhtml','depend_info').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]='Task ID';
-			$title_arr[]='Summary';
+			$title_arr[]=$Language->getText('pm','task_id');
+			$title_arr[]=$Language->getText('pm','summary');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -74,13 +75,14 @@ class ProjectTaskHTML extends ProjectTask {
 
 		} else {
 			echo '
-				<h3>No Tasks are Dependent on This Task</h3>';
+				<h3>'.$Language->getText('pm_include_taskhtml','no_depend_info').'</h3>';
 			echo db_error();
 		}
 	}
 
 	function showRelatedArtifacts() {
 		global $sys_datefmt;
+		global $Language;
 		$res=$this->getRelatedArtifacts();
 
 		$rows=db_numrows($res);
@@ -94,14 +96,14 @@ class ProjectTaskHTML extends ProjectTask {
 			}
 
 			echo '
-			<h3>Related Tracker Items</h3>
+			<h3>'.$Language->getText('pm_include_taskhtml','related_items').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]='Summary';
-			$title_arr[]='Tracker';
-			$title_arr[]='Open Date';
-			(($is_admin) ? $title_arr[]='Remove Relation' : '');
+			$title_arr[]=$Language->getText('pm','summary');
+			$title_arr[]=$Language->getText('pm_include_taskhtml','tracker');
+			$title_arr[]=$Language->getText('pm_include_taskhtml','open_date');
+			(($is_admin) ? $title_arr[]=$Language->getText('pm_include_taskhtml','remove_relation') : '');
 		
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -118,7 +120,7 @@ class ProjectTaskHTML extends ProjectTask {
 			echo $GLOBALS['HTML']->listTableBottom();
 		} else {
 			echo '
-			<h3>No Related Tracker Items Have Been Added</h3>';
+			<h3>'.$Language->getText('pm_include_taskhtml','no_tracker_items').'</h3>';
 		}
 	}
 
@@ -127,18 +129,20 @@ class ProjectTaskHTML extends ProjectTask {
 			Show the details rows from task_history
 		*/
 		global $sys_datefmt;
+		global $Language;
+	
 		$result=$this->getMessages();
 		$rows=db_numrows($result);
 
 		if ($rows > 0) {
 			echo '
-			<h3>Followups</h3>
+			<h3>'.$Language->getText('pm_include_taskhtml','followups').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]='Comment';
-			$title_arr[]='Date';
-			$title_arr[]='By';
+			$title_arr[]=$Language->getText('pm_include_taskhtml','comment');
+			$title_arr[]=$Language->getText('pm_include_taskhtml','date');
+			$title_arr[]=$Language->getText('pm_include_taskhtml','by');
 		
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -154,7 +158,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		} else {
 			echo '
-			<h3>No Comments Have Been Added</h3>';
+			<h3>'.$Language->getText('pm_include_taskhtml','no_comments').'</h3>';
 		}
 	
 	}
@@ -165,6 +169,7 @@ class ProjectTaskHTML extends ProjectTask {
 			relevant to this project_task_id, excluding details
 		*/
 		global $sys_datefmt;
+		global $Language;
 
 		$result=$this->getHistory();
 		$rows=db_numrows($result);
@@ -172,14 +177,14 @@ class ProjectTaskHTML extends ProjectTask {
 		if ($rows > 0) {
 
 			echo '
-			<h3>Task Change History</h3>
+			<h3>'.$Language->getText('pm_include_taskhtml','task_history').'</h3>
 			<p>';
 
 			$title_arr=array();
-			$title_arr[]='Field';
-			$title_arr[]='Old Value';
-			$title_arr[]='Date';
-			$title_arr[]='By';
+			$title_arr[]=$Language->getText('pm_include_taskhtml','field');
+			$title_arr[]=$Language->getText('pm_include_taskhtml','old_value');
+			$title_arr[]=$Language->getText('pm_include_taskhtml','date');
+			$title_arr[]=$Language->getText('pm_include_taskhtml','by');
 
 			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -219,7 +224,7 @@ class ProjectTaskHTML extends ProjectTask {
 
 		} else {
 			echo '
-			<h3>No Changes Have Been Made</h3>';
+			<h3>'.$Language->getText('pm_include_taskhtml','no_changes').'</h3>';
 		}
 	}
 

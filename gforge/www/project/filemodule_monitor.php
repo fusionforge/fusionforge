@@ -31,15 +31,15 @@ if (session_loggedin()) {
 
 		if ($stop) {
 			if (!$f->stopMonitor()) {
-				exit_error('Error',$f->getErrorMessage());
+				exit_error($Language->getText('general','error'),$f->getErrorMessage());
 			} else {
-				exit_error('Monitoring Stopped','Monitoring Has Been Stopped');
+				exit_error($Language->getText('project_filemodule_monitor','stop_monitor_title'),$Language->getText('project_filemodule_monitor','stop_monitor_body'));
 			}
 		} elseif($start) {
 			if (!$f->setMonitor()) {
 				exit_error('Error',$f->getErrorMessage());
 			} else {
-				exit_error('Monitoring Started','Monitoring Has Been Started');
+				exit_error($Language->getText('project_filemodule_monitor','start_monitor_title'),$Language->getText('project_filemodule_monitor','start_monitor_body'));
 			}
 		}
 	} else {

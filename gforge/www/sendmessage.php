@@ -15,7 +15,7 @@
 require_once('pre.php');
 
 if (!$toaddress && !$touser) {
-	exit_error('Error','Error - some variables were not provided');
+	exit_error($Language->getText('general','error'),$Language->getText('sendmessage','error_variables'));
 }
 
 if ($touser) {
@@ -25,12 +25,12 @@ if ($touser) {
 	*/
 	$result=db_query("SELECT email,user_name FROM users WHERE user_id='$touser'");
 	if (!$result || db_numrows($result) < 1) {
-		exit_error('Error','Error - That user does not exist.');
+		exit_error($Language->getText('general','error'),$Language->getText('sendmessage','error_user_not_exist'));
 	}
 }
 
 if ($toaddress && !eregi($GLOBALS['sys_default_domain'],$toaddress)) {
-	exit_error("error","You can only send to addresses @".$GLOBALS['sys_default_domain']);
+	exit_error($Language->getText('general','error'),$Language->getText('sendmessage','email_only_to')." @".$GLOBALS['sys_default_domain']);
 }
 
 
@@ -49,8 +49,8 @@ if ($send_mail) {
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$from=$name .' <'. $email .'>';
 		util_send_message($to, stripslashes($subject),stripslashes($body) ,$from);
-		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($to)));
-		echo '<p>Message has been sent.</p>';
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' ' .$Language->getText('sendmessage','contact')   ,'pagename'=>'sendmessage','titlevals'=>array($to)));
+		echo '<p>'.$Language->getText('sendmessage','message_sent').'.</p>';
 		$HTML->footer(array());
 		exit;
 	} else if ($touser) {
@@ -60,8 +60,8 @@ if ($send_mail) {
 		$to=db_result($result,0,'email');
 		$from=$name .' <'. $email .'>';
 		util_send_message($to, stripslashes($subject), stripslashes($body),$from);
-		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($touser)));
-		echo '<p>Message has been sent.</p>';
+		$HTML->header(array('title'=>$GLOBALS['sys_name'].' '.$Language->getText('sendmessage','contact'),'pagename'=>'sendmessage','titlevals'=>array($touser)));
+		echo '<p>'.$Language->getText('sendmessage','message_sent').'</p>';
 		$HTML->footer(array());
 		exit;
 	}
@@ -84,7 +84,7 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 <input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
 <input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
-<strong>Your Email Address:</strong><br />
+<strong><?php echo $Language->getText('sendmessage','email') ?>:</strong><br />
 <input type="text" name="email" size="30" maxlength="40" value="" />
 <p />
 <strong>Your Name:</strong><br />
@@ -97,7 +97,7 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 <textarea name="body" rows="15" cols="60"></textarea>
 <p />
 <div align="center">
-<input type="submit" name="send_mail" value="Send Message" />
+<input type="submit" name="send_mail" value="<?php echo $Language->getText('sendmessage','send') ?>" />
 </div>
 </form>
 <?php

@@ -20,35 +20,35 @@ $result=db_query("SELECT frs_release.notes,frs_release.changes,frs_release.prefo
 
 if (!$result || db_numrows($result) < 1) {
 	echo db_error();
-	exit_error("Error - Not Found","That Release Was Not Found");
+	exit_error($Language->getText('general','error'), $Language->getText('project_shownotes','error_release_not_found'));
 } else {
 
 	$group_id=db_result($result,0,'group_id');
 
-	site_project_header(array('title'=>"File Release Notes and Changelog",'group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_shownotes','sectionvals'=>array(group_getname($group_id))));
+	site_project_header(array('title'=>$Language->getText('project_shownotes','title'),'group'=>$group_id,'toptab'=>'downloads','pagename'=>'project_shownotes','sectionvals'=>array(group_getname($group_id))));
 
-	echo $HTML->boxTop('Notes');
+	echo $HTML->boxTop($Language->getText('project_shownotes','notes'));
 
-	echo '<h3>Release Name: <a href="showfiles.php?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
+	echo '<h3>'.$Language->getText('project_shownotes','release_name').' <a href="showfiles.php?group_id='.db_result($result,0,'group_id').'">'.db_result($result,0,'name').'</a></h3>
 		<p>';
 
 /*
 	Show preformatted or plain notes/changes
 */
 	if (db_result($result,0,'preformatted')) {
-		echo '<pre><strong>Notes:</strong>
+		echo '<pre><strong>'.$Language->getText('project_shownotes','notes').'</strong>
 '.db_result($result,0,'notes').'
 
 <hr noshade="noshade" />
-<strong>Changes:</strong>
+<strong>'.$Language->getText('project_shownotes','changes').'</strong>
 '.db_result($result,0,'changes').'</pre>';
 
 	} else {
-		echo '<strong>Notes:</strong>
+		echo '<strong>'.$Language->getText('project_shownotes','notes').'</strong>
 '.db_result($result,0,'notes').'
 
 <hr noshade="noshade" />
-<strong>Changes:</strong>
+<strong>'.$Language->getText('project_shownotes','changes').'</strong>
 '.db_result($result,0,'changes') . '</p>';
 
 	}

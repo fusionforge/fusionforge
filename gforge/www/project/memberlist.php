@@ -18,7 +18,7 @@ if (!$group_id && $form_grp) {
 	$group_id = $form_grp;
 }
 
-site_project_header(array('title'=>"Project Member List",'group'=>$group_id,'toptab'=>'memberlist'));
+site_project_header(array('title'=>$Language->getText('project_memberlist','title'),'group'=>$group_id,'toptab'=>'memberlist'));
 
 print $Language->getText('project_memberlist', 'joining');
 
@@ -33,10 +33,10 @@ $query = "SELECT users.*,user_group.admin_flags,people_job_category.name AS role
 
 
 $title_arr=array();
-$title_arr[]='Developer';
-$title_arr[]='Username';
-$title_arr[]='Role/Position';
-$title_arr[]='Skills';
+$title_arr[]=$Language->getText('project_memberlist', 'developer');
+$title_arr[]=$Language->getText('project_memberlist', 'username');
+$title_arr[]=$Language->getText('project_memberlist', 'role');
+$title_arr[]=$Language->getText('project_memberlist', 'skills');
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -51,7 +51,7 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 	print "
 		<td align=\"center\"><a href=\"/users/$row_memb[user_name]/\">$row_memb[user_name]</a></td>
 		<td align=\"center\">$row_memb[role]</td>
-		<td align=\"center\"><a href=\"/people/viewprofile.php?user_id=$row_memb[user_id]\">View</a></td>
+		<td align=\"center\"><a href=\"/people/viewprofile.php?user_id=$row_memb[user_id]\">".$Language->getText('project_memberlist','view')."</a></td>
 	</tr>";
 }
 

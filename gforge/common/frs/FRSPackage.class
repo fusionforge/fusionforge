@@ -73,17 +73,18 @@ class FRSPackage extends Error {
 	 *	@return	boolean success.
 	 */
 	function create($name) {
+		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError('FRSPackage Name Must Be At Least 3 Characters');
+			$this->setError($Language->getText('frs_package','error_min_name_lenght'));
 			return false;
 		}
 		if (!util_is_valid_filename($name)) {
-			$this->setError('FRSPackage::Update: Package Name can only be alphanumeric');
+			$this->setError($Language->getText('frs_package','error_name_format'));
 		}
 		$perm =& $this->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
@@ -168,8 +169,9 @@ class FRSPackage extends Error {
 	 *  @return	boolean	success.
 	 */
 	function setMonitor() {
+		global $Language;
 		if (!session_loggedin()) {
-			$this->setError('You Can Only Monitor If You Are Logged In');
+			$this->setError($Language->getText('frs_package','error_set_monitor'));
 			return false;
 		}
 		$sql="SELECT * FROM filemodule_monitor
@@ -202,8 +204,9 @@ class FRSPackage extends Error {
 	 *  @return	boolean	success.
 	 */
 	function stopMonitor() {
+		global $Language;
 		if (!session_loggedin()) {
-			$this->setError('You Can Only Monitor If You Are Logged In');
+			$this->setError($Language->getText('frs_package','error_set_monitor'));
 			return false;
 		}
 		$sql="DELETE FROM filemodule_monitor
@@ -254,20 +257,20 @@ class FRSPackage extends Error {
 	 *	@return	boolean success.
 	 */
 	function update($name,$status) {
-
+		global $Language;
 		if (strlen($name) < 3) {
-			$this->setError('Package Name Must Be At Least 3 Characters');
+			$this->setError($Language->getText('frs_package','error_min_name_lenght'));
 			return false;
 		}
 
 		if (!util_is_valid_filename($name)) {
-			$this->setError('FRSPackage::Update: Package Name can only be alphanumeric');
+			$this->setError($Language->getText('frs_package','error_name_format'));
 		}
 
 		$perm =& $this->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 

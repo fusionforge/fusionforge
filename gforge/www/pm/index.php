@@ -43,14 +43,13 @@ if ($pg_arr && $pgf->isError()) {
 	exit_error('Error',$pgf->getErrorMessage());
 }
 
-pm_header(array('title'=>'Projects for '. $g->getPublicName(),'pagename'=>'pm','sectionvals'=>$g->getPublicName()));
+pm_header(array('title'=>$Language->getText('pm','title'). $g->getPublicName(),'pagename'=>'pm','sectionvals'=>$g->getPublicName()));
 
 if (count($pg_arr) < 1 || $pg_arr == false) {
-	echo '<p>No Projects Defined.';
+	echo '<p>'.$Language->getText('pm','noprj');
 } else {
 	echo '
-	<p>
-	Choose a Subproject and you can browse/edit/add tasks to it.
+	<p>'.$Language->getText('pm','intro').'
 	<p>';
 
 	/*

@@ -19,7 +19,7 @@
 require_once('common/pm/ProjectGroup.class');
 
 function pm_header($params) {
-	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order,$pg;
+	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order,$pg, $Language;
 
 	//required by site_project_header
 	$params['group']=$group_id;
@@ -32,26 +32,26 @@ function pm_header($params) {
 	}   
 
 	if (!$project->usesPm()) {
-		exit_error('Error','This Project Has Turned Off The Task Manager');
+		exit_error($Language->getText('general','error'),$Language->getText('pm_include_grouphtml','error_disabled'));
 	}
 
 	site_project_header($params);
 
 	if ($pg) {
-		echo "<h3>Project: ". $pg->getName() ."</h3>";
+		echo "<h3>".$Language->getText('pm_include_grouphtml','project').": ". $pg->getName() ."</h3>";
 	}
 	echo "<p><strong>";
 
 	if ($group_project_id) {
 		if (session_loggedin()) {
-			echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=addtask\">Add Task</a> | ";
+			echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=addtask\">".$Language->getText('pm_include_grouphtml','add_task')."</a> | ";
 		}
-		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse\">Browse Tasks</a> | ";
-		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage\" target=\"_blank\">Gantt Chart</a> | ";
+		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse\">".$Language->getText('pm_include_grouphtml','browse_task')."</a> | ";
+		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage\" target=\"_blank\">".$Language->getText('pm_include_grouphtml','gantt_chart')."</a> | ";
 	}
 	echo '
-		<a href="/pm/reporting/?group_id='.$group_id.'">Reporting</a> | 
-		<a href="/pm/admin/?group_id='.$group_id.'">Admin</a> </strong>';
+		<a href="/pm/reporting/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','reporting').'</a> | 
+		<a href="/pm/admin/?group_id='.$group_id.'">'.$Language->getText('pm_include_grouphtml','admin').'</a> </strong>';
 }
 
 function pm_footer($params) {
@@ -77,10 +77,11 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function percentCompleteBox($name='percent_complete',$selected=0) {
+		global $Language;
 		echo '
 		<select name="'.$name.'">';
 		echo '
-		<option value="0">Not Started';
+		<option value="0">'.$Language->getText('pm_include_grouphtml','not_started');
 		for ($i=5; $i<101; $i+=5) {
 			echo '
 			<option value="'.$i.'"';
@@ -94,20 +95,22 @@ class ProjectGroupHTML extends ProjectGroup {
 	}
 
 	function showMonthBox($name,$select_month=0) {
+		global $Language;
 		echo '
 		<select name="'.$name.'" size="1">';
-		$monthlist = array('1'=>'January',
-			'2'=>'February',
-			'3'=>'March',
-			'4'=>'April',
-			'5'=>'May',
-			'6'=>'June',
-			'7'=>'July',
-			'8'=>'August',
-			'9'=>'September',
-			'10'=>'October',
-			'11'=>'November',
-			'12'=>'December');
+		$monthlist = array(
+			'1'=>$Language->getText('calendar','january'),
+			'2'=>$Language->getText('calendar','february'),
+			'3'=>$Language->getText('calendar','march'),
+			'4'=>$Language->getText('calendar','april'),
+			'5'=>$Language->getText('calendar','may'),
+			'6'=>$Language->getText('calendar','june'),
+			'7'=>$Language->getText('calendar','july'),
+			'8'=>$Language->getText('calendar','august'),
+			'9'=>$Language->getText('calendar','september'),
+			'10'=>$Language->getText('calendar','october'),
+			'11'=>$Language->getText('calendar','november'),
+			'12'=>$Language->getText('calendar','december'));
 
 		for ($i=1; $i<=count($monthlist); $i++) {
 			if ($i == $select_month) {
@@ -183,6 +186,53 @@ class ProjectGroupHTML extends ProjectGroup {
 		}
 		echo '
 		</select>';
+	}
+
+
+	function showbrowseList($pt_arr){
+		global $Language;
+		global $group_id;
+		global $group_project_id;
+
+		$title_arr = array();
+		$title_arr[] = $Language->getText('pm','task_id');
+		$title_arr[] = $Language->getText('pm','summary');
+		$title_arr[] = $Language->getText('pm','start_date');
+		$title_arr[] = $Language->getText('pm','end_date');
+		$title_arr[] = $Language->getText('pm','percent_complete');
+		
+
+		$rows=count($pt_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
+		$now=time();
+
+		for ( $i = 0; $i < $rows; $i++ ) {
+
+			
+		
+			echo '
+			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+			'<td><a href="/pm/task.php?func=detailtask'.
+			'&project_task_id='. $pt_arr[$i]->getID() .
+			'&group_id='.$group_id.
+			'&group_project_id='. $group_project_id .'">'.
+			$pt_arr[$i]->getID() .'</a></td>'.
+			'<td>'. $pt_arr[$i]->getSummary() .'</td>'.
+			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
+			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
+				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
+			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
+
+		       
+			
+		}
+		
+		echo $GLOBALS['HTML']->listTableBottom();
+
+	
+
+
+
 	}
 
 }

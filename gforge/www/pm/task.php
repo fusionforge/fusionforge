@@ -93,7 +93,7 @@ switch ($func) {
 						exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 					}
 				}
-				$feedback='Task Created Successfully';
+				$feedback=$Language->getText('pm_addtask','task_created_successfully');
 				include 'browse_task.php';
 			}
 		} else {
@@ -124,7 +124,7 @@ switch ($func) {
 						exit_error('ERROR','removeRelatedArtifacts():: '.$pt->getErrorMessage());
 					}
 				}
-				$feedback='Task Updated Successfully';
+				$feedback=$Language->getText('pm_addtask','task_updated_successfully');
 				include 'browse_task.php';
 			}
 		} else {
@@ -147,7 +147,7 @@ switch ($func) {
 			if (!$pt->addRelatedArtifacts($add_artifact_id)) {
 				exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
 			} else {
-				$feedback='Successfully Added Tracker Relationship';
+				$feedback=$Language->getText('pm_addtask','task_added_relationship');
 				include 'browse_task.php';
 
 			}
