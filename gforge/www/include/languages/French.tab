@@ -1149,7 +1149,7 @@ news_submit	subject	Sujet&nbsp;
 news_submit	submit	Envoyer
 news_submit	title	Soumettre une annonce pour $1
 news_utils	archive	Archive des annonces
-news_utils	nonews	<h3>Pas d'annonces</h3>
+news_utils	nonews	Pas d'annonces
 news_utils	readmore	Suite/Commenter
 news_utils	submit	Proposer une annonce
 people	about_blurb	<p>Le système « Demande d'aide » est destiné aux offres non commerciales de postes pour volontaires. Tout usage commercial de ce système d'annonces est interdit.</p><p>Les offres restent visibles pendant deux semaines ou jusqu'à ce qu'elles soient fermées par le demandeur, suivant ce qui arrive en premier. (Les administrateurs de projets peuvent toujours soumettre une nouvelle fois les offres qui ont expiré.)</p><p>Parcourez les catégories pour trouver un projet ayant besoin de votre aide.</p><p>Si vous êtes administrateur de projet, identifiez-vous et soumettez des demandes d'aide à travers l'interface d'administration de votre projet.</p><p>Pour suggérer de nouvelles catégories, soumettez votre demande via le gestionnaire de support.</p>
