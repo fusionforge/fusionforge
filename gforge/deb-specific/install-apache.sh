@@ -22,9 +22,9 @@ case "$1" in
 	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf.gforge-new
 	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf.gforge-new
 	    
-	    if ! grep -q "^Include /etc/gforge/sf-httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
+	    if ! grep -q "^Include /etc/gforge/httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
 		echo "### Next line inserted by GForge install" >> /etc/apache/httpd.conf.gforge-new
-		echo "Include /etc/gforge/sf-httpd.conf" >> /etc/apache/httpd.conf.gforge-new
+		echo "Include /etc/gforge/httpd.conf" >> /etc/apache/httpd.conf.gforge-new
 	    fi
 	fi
 
@@ -35,9 +35,9 @@ case "$1" in
 	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache-ssl/httpd.conf.gforge-new
 	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache-ssl/httpd.conf.gforge-new
 	    
-	    if ! grep -q "^Include /etc/gforge/sf-httpd.conf" /etc/apache-ssl/httpd.conf.gforge-new ; then
+	    if ! grep -q "^Include /etc/gforge/httpd.conf" /etc/apache-ssl/httpd.conf.gforge-new ; then
 		echo "### Next line inserted by GForge install" >> /etc/apache-ssl/httpd.conf.gforge-new
-		echo "Include /etc/gforge/sf-httpd.conf" >> /etc/apache-ssl/httpd.conf.gforge-new
+		echo "Include /etc/gforge/httpd.conf" >> /etc/apache-ssl/httpd.conf.gforge-new
 	    fi
 	fi
 
@@ -76,10 +76,10 @@ case "$1" in
 
     purge-files)
 	cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.gforge-new
-  	if grep -q "Include /etc/gforge/sf-httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
+  	if grep -q "Include /etc/gforge/httpd.conf" /etc/apache/httpd.conf.gforge-new ; then
 	    pattern=$(basename $0)
 	    tmp=$(mktemp /tmp/$pattern.XXXXXX)
-	    grep -v "Include /etc/gforge/sf-httpd.conf\|### Next line inserted by GForge install" /etc/apache/httpd.conf.gforge-new > $tmp
+	    grep -v "Include /etc/gforge/httpd.conf\|### Next line inserted by GForge install" /etc/apache/httpd.conf.gforge-new > $tmp
 	    cat $tmp > /etc/apache/httpd.conf.gforge-new
 	    rm -f $tmp
   	fi

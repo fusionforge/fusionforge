@@ -1,9 +1,9 @@
-<Directory /usr/lib/gforge/www>
+<Directory /usr/share/gforge/www>
   Options Indexes FollowSymlinks
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "/usr/lib/gforge:/usr/lib/gforge/www/include:."
+  php_admin_value include_path "/usr/share/gforge:/usr/share/gforge/www/include:."
 </Directory>
 
 <Files .htaccess>
@@ -23,12 +23,12 @@ NameVirtualHost {ip_address}:443
   ServerName {domain_name}
   ServerAlias www.{domain_name}
   ServerAdmin {server_admin}
-  DocumentRoot /usr/lib/gforge/www
+  DocumentRoot /usr/share/gforge/www
   DirectoryIndex index.html index.php
   UserDir disabled
 
-  <Directory /usr/lib/gforge/www>
-    Include /etc/gforge/sf-httpd.secrets
+  <Directory /usr/share/gforge/www>
+    Include /etc/gforge/httpd.secrets
   </Directory>
 
   # Debian Sourceforge without the DNS delegation
@@ -130,7 +130,7 @@ NameVirtualHost {ip_address}:443
   ServerName {domain_name}
   ServerAlias www.{domain_name}
   ServerAdmin {server_admin}
-  DocumentRoot /usr/lib/gforge/www
+  DocumentRoot /usr/share/gforge/www
   DirectoryIndex index.html index.php
   UserDir disabled
 
@@ -158,8 +158,8 @@ NameVirtualHost {ip_address}:443
     SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
   </IfModule>
 
-  <Directory /usr/lib/gforge/www>
-    Include /etc/gforge/sf-httpd.secrets
+  <Directory /usr/share/gforge/www>
+    Include /etc/gforge/httpd.secrets
   </Directory>
 
   # This for cvsweb 

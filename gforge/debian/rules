@@ -55,8 +55,8 @@ install: build
 	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
-	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/httpd.conf.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/gforge-config $(CURDIR)/debian/gforge-common/usr/sbin/
@@ -71,14 +71,14 @@ install: build
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 
 	# gforge-web-apache
-	cp -r www $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/
-	cp -r common $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/
-	find $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/ -name CVS -type d | xargs rm -rf
+	cp -r www $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
+	cp -r common $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name CVS -type d | xargs rm -rf
 	find $(CURDIR)/debian/gforge-web-apache -name \*.uu -type f | xargs rm
-	find $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/www -type d -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/www -type f -exec chmod 0644 {} \;
-	find $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/common -type d -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/common -type f -exec chmod 0644 {} \;
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type d -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type f -exec chmod 0644 {} \;
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/common -type d -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/common -type f -exec chmod 0644 {} \;
 	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache/var/cache/gforge
 	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 

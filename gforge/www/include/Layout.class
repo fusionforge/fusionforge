@@ -19,7 +19,8 @@
 
 class Layout extends Error {
 
-	var $imgroot = '/images/';
+	var $imgroot = '/themes/gforge/images/';
+	var $imgproj = '/themes/gforge/images/ic/';
 	var $COLOR_CONTENT_BACK= '#FFFFFF';
 	var $COLOR_LTBACK1= '#EAECEF';
 	var $COLOR_LTBACK2= '#FAFAFA';
@@ -177,21 +178,21 @@ class Layout extends Error {
 <TABLE BORDER=0 WIDTH="100%" CELLSPACING="0" CELLPADDING=0>
 
 	<TR>
-		<TD><A HREF="/"><?php echo html_image($imgroot.'logo.gif',190,49,array('border'=>'0')); ?></A></TD>
+		<TD><A HREF="/"><?php echo html_image($imgroot.'logo.png',190,49,array('border'=>'0')); ?></A></TD>
 		<TD><?php echo $this->searchBox(); ?></TD>
 		<TD ALIGN="RIGHT"><?php
 			if (session_loggedin()) {
 				?>
-				<A HREF="/account/logout.php"><?php echo html_image($imgroot.'logout.gif',
+				<A HREF="/account/logout.php"><?php echo html_image($imgroot.'logout.png',
 					74,14,array('BORDER'=>'0')); ?></A><BR>
-				<A HREF="/account/"><?php echo html_image($imgroot.'myaccount.gif'
+				<A HREF="/account/"><?php echo html_image($imgroot.'myaccount.png'
 					,74,14,array('BORDER'=>'0')); ?></A>
 				<?php
 			} else {
 				?>
-				<A HREF="/account/login.php"><?php echo html_image($imgroot.'login.gif'
+				<A HREF="/account/login.php"><?php echo html_image($imgroot.'login.png'
 					,74,14,array('BORDER'=>'0')); ?></A><BR>
-				<A HREF="/account/register.php"><?php echo html_image($imgroot.'newaccount.gif'
+				<A HREF="/account/register.php"><?php echo html_image($imgroot.'newaccount.png'
 					,74,14,array('BORDER'=>'0')); ?></A>
 				<?php
 			}
@@ -219,18 +220,18 @@ class Layout extends Error {
 	</TR>
 
 	<TR>
-		<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>topleft.gif" HEIGHT=9 WIDTH=9></TD>
-		<TD BGCOLOR="#E0E0E0" WIDTH=30><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIDTH=30 HEIGHT=1></TD>
-		<TD BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIDTH=1 HEIGHT=1></TD>
-		<TD BGCOLOR="#E0E0E0" WIDTH=30><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIDTH=30 HEIGHT=1></TD>
-		<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>topright.gif" HEIGHT=9 WIDTH=9></TD>
+		<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>tabs/topleft.png" HEIGHT=9 WIDTH=9></TD>
+		<TD BGCOLOR="#E0E0E0" WIDTH=30><IMG SRC="<?php echo $imgroot; ?>clear.png" WIDTH=30 HEIGHT=1></TD>
+		<TD BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $imgroot; ?>clear.png" WIDTH=1 HEIGHT=1></TD>
+		<TD BGCOLOR="#E0E0E0" WIDTH=30><IMG SRC="<?php echo $imgroot; ?>clear.png" WIDTH=30 HEIGHT=1></TD>
+		<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>tabs/topright.png" HEIGHT=9 WIDTH=9></TD>
 	</TR>
 
 	<TR>
 
 		<!-- Outer body row -->
 
-		<TD BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIDTH=10 HEIGHT=1></TD>
+		<TD BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $imgroot; ?>clear.png" WIDTH=10 HEIGHT=1></TD>
 		<TD VALIGN=TOP WIDTH="99%" BGCOLOR="#E0E0E0" COLSPAN=3>
 
 			<!-- Inner Tabs / Shell -->
@@ -259,13 +260,13 @@ if ($params['toptab'] && $params['group']) {
 
 ?>
 			<TR>
-				<TD ALIGN=LEFT BGCOLOR="#FFFFFF" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>topleft-inner.gif" HEIGHT=9 WIDTH=9></TD>
-				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIDTH=1 HEIGHT=1></TD>
-				<TD ALIGN=RIGHT BGCOLOR="#FFFFFF" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>topright-inner.gif" HEIGHT=9 WIDTH=9></TD>
+				<TD ALIGN=LEFT BGCOLOR="#FFFFFF" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>tabs/topleft-inner.png" HEIGHT=9 WIDTH=9></TD>
+				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $imgroot; ?>clear.png" WIDTH=1 HEIGHT=1></TD>
+				<TD ALIGN=RIGHT BGCOLOR="#FFFFFF" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>tabs/topright-inner.png" HEIGHT=9 WIDTH=9></TD>
 			</TR>
 
 			<TR>
-				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIDTH=10 HEIGHT=1></TD>
+				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $imgroot; ?>clear.png" WIDTH=10 HEIGHT=1></TD>
 				<TD VALIGN=TOP WIDTH="99%" BGCOLOR="WHITE">
 
 	<?php
@@ -304,24 +305,24 @@ if ($params['toptab'] && $params['group']) {
 
 
 				</TD>
-				<TD WIDTH=10 BGCOLOR="WHITE"><IMG SRC="<?php echo $imgroot; ?>clear.gif" width=2 height=1></TD>
+				<TD WIDTH=10 BGCOLOR="WHITE"><IMG SRC="<?php echo $imgroot; ?>clear.png" width=2 height=1></TD>
 			</TR>
 			<TR>
-				<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10"><IMG SRC="<?php echo $imgroot; ?>bottomleft-inner.gif" HEIGHT=11 WIDTH=11></TD>
-				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIdTH="1" HEIGHT=1></TD>
-				<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>bottomright-inner.gif" HEIGHT=11 WIDTH=11></TD>
+				<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10"><IMG SRC="<?php echo $imgroot; ?>tabs/bottomleft-inner.png" HEIGHT=11 WIDTH=11></TD>
+				<TD BGCOLOR=WHITE><IMG SRC="<?php echo $imgroot; ?>clear.png" WIdTH="1" HEIGHT=1></TD>
+				<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>tabs/bottomright-inner.png" HEIGHT=11 WIDTH=11></TD>
 			</TR>
 			</TABLE>
 
 		<!-- end inner body row -->
 
 		</TD>
-		<TD WIDTH=10 BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $imgroot; ?>clear.gif" width=2 height=1></TD>
+		<TD WIDTH=10 BGCOLOR="#E0E0E0"><IMG SRC="<?php echo $imgroot; ?>clear.png" width=2 height=1></TD>
 	</TR>
 	<TR>
-		<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>bottomleft.gif" HEIGHT=9 WIDTH=9></TD>
-		<TD BGCOLOR="#E0E0E0" COLSPAN=3><IMG SRC="<?php echo $imgroot; ?>clear.gif" WIDTH="1" HEIGHT=1></TD>
-		<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>bottomright.gif" HEIGHT=9 WIDTH=9></TD>
+		<TD ALIGN=LEFT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>tabs/bottomleft.png" HEIGHT=9 WIDTH=9></TD>
+		<TD BGCOLOR="#E0E0E0" COLSPAN=3><IMG SRC="<?php echo $imgroot; ?>clear.png" WIDTH="1" HEIGHT=1></TD>
+		<TD ALIGN=RIGHT BGCOLOR="#E0E0E0" WIDTH=10><IMG SRC="<?php echo $imgroot; ?>tabs/bottomright.png" HEIGHT=9 WIDTH=9></TD>
 	</TR>
 </TABLE>
 </body>
@@ -544,14 +545,14 @@ if ($params['toptab'] && $params['group']) {
 			$imgcolor=(($selected==$i)?'':'-dark');
 			$return .= '
 				<TD '.$bgcolor.' width=9 ALIGN=TOP VALIGN=TOP>'.
-					'<DIV ALIGN="LEFT">'. html_image($imgroot . 'topleft'.$inner.$imgcolor.'.gif',9,9,array()).'</DIV></TD>
+					'<DIV ALIGN="LEFT">'. html_image($imgroot . 'tabs/topleft'.$inner.$imgcolor.'.png',9,9,array()).'</DIV></TD>
 				<TD '.$bgcolor.' width="'.$width.'%" ROWSPAN=2 ALIGN="MIDDLE">'.
 				'<A class="'. (($selected==$i)?'tabsellink':'tablink') .'" HREF="'. $TABS_DIRS[$i] .
 					'">'. $TABS_TITLES[$i] .'</A></TD>
 				<TD '.$bgcolor.' width=9 ALIGN="TOP" VALIGN="TOP">'.
-				'<DIV ALIGN="RIGHT">'. html_image($imgroot . 'topright'.$inner.$imgcolor.'.gif',9,9,array()).'</DIV></TD>';
+				'<DIV ALIGN="RIGHT">'. html_image($imgroot . 'tabs/topright'.$inner.$imgcolor.'.png',9,9,array()).'</DIV></TD>';
 			if ($i < $count-1) {
-				$return .= '<TD WIDTH=1 ROWSPAN=2><IMG SRC="'.$imgroot . 'clear.gif" HEIGHT=2 WIDTH=1></TD>';
+				$return .= '<TD WIDTH=1 ROWSPAN=2><IMG SRC="'.$imgroot . 'clear.png" HEIGHT=2 WIDTH=1></TD>';
 			}
 		}
 
@@ -568,7 +569,7 @@ if ($params['toptab'] && $params['group']) {
 		<TR>';
 		for ($i=0; $i<$count; $i++) {
 			$bgcolor=(($selected==$i)?$light:'BGCOLOR="#999999"');
-			$return .= '<TD '.$bgcolor.' COLSPAN=4><IMG SRC="'.$imgroot . 'clear.gif" HEIGHT=2 WIDTH=1></TD>';
+			$return .= '<TD '.$bgcolor.' COLSPAN=4><IMG SRC="'.$imgroot . 'clear.png" HEIGHT=2 WIDTH=1></TD>';
 		}
 
 		return $return.'

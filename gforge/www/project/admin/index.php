@@ -97,6 +97,7 @@ Project WWW directory on shell server:
 <A HREF="http://<?php echo $GLOBALS['sys_cvs_host']; ?>/cvstarballs/<?php echo $group->getUnixName(); ?>-cvsroot.tar.gz">[ Download Your Nightly CVS Tree Tarball ]</A>
 <P>
 
+<?php
 $HTML->boxBottom(); 
 
 echo '

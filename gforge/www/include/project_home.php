@@ -151,7 +151,7 @@ echo $HTML->boxBottom();
 
 // CB hide FRS if desired
 if ($project->usesFRS()) {
-	echo $HTML->box1_top($Language->getText('frs','latest_file_releases')); 
+	echo $HTML->boxTop($Language->getText('frs','latest_file_releases')); 
 	$unix_group_name = $project->getUnixName();
 
 	echo '
