@@ -9,8 +9,13 @@ gforge (3rc2-1+) unstable; urgency=low
     Schoeman <alwyn@smart.com.ph>.
   * [Christian] Moved <name> theme in gforge-theme-<name> dir where name not 
     gforge or osx
+  * [Roland] Fixed cvs_dump_update.pl so that it creates the homedirs for
+    the anoncvs_* users when needed.
+  * [Roland] Also fixed database user creation code.
+  * [Roland] Depend on cronolog (>= 1.6.2-1), since the binary was
+    relocated from /usr/sbin to /usr/bin in that version.
 
- -- Christian Bayle <bayle@debian.org>  Fri, 16 May 2003 02:33:22 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 18 May 2003 21:29:16 +0200
 
 gforge (3rc2-1) unstable; urgency=low
 
