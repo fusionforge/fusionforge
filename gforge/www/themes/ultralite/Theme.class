@@ -1,0 +1,89 @@
+<?php   
+/**
+  *
+  * UltraLite inspired Web Theme
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems http://sourceforge.net
+  * Copyright 2002-2003 (c) GForge Development Team.
+  *
+  * @version   $Id: Theme.class,v 1.3 2001/05/22 16:06:38 pfalcon Exp $
+  *
+  */
+
+
+
+/*
+
+
+	Ultralight Theme class, extends basic Layout.class
+
+	Tim Perdue, December 18, 2000
+
+
+*/
+
+
+class Theme extends Layout {
+
+	var $theme_id;
+	var $long_name;
+	var $dir_name;
+
+	var $COLOR_HTMLBOX_TITLE = '#737b9c';
+
+	function Theme() {
+		// Parent constructor
+		$this->Layout();
+
+		//Define deifferences from defaults for this theme
+		$this->COLOR_HTMLBOX_TITLE = '#6C7198'; //GRAY';
+		$this->COLOR_HTMLBOX_BACK = '#EEEEEE';
+		$this->COLOR_LTBACK1 = '#EEEEEE';
+		$this->COLOR_CONTENT_BACK='WHITE';
+
+		$this->FONT_CONTENT = 'Lucida';
+		$this->FONT_HTMLBOX_TITLE = 'Lucida';
+
+		$this->FONTCOLOR_HTMLBOX_TITLE = '#FFFFFF';
+		$this->FONTCOLOR_CONTENT = '#000000';
+
+	}
+
+	function boxTop($title,$echoout=1,$bgcolor='') {
+		$bgcolor=$this->COLOR_HTMLBOX_BACK;
+		$return .= '<TABLE cellspacing="1" cellpadding="2" width="100%" border="0" bgcolor="'.$bgcolor.'">'.
+						'<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">'.
+						'<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD></TR>'.
+						'<TR align=left>
+								<TD colspan=2>';
+			if ($echoout) {
+					print $return;
+			} else {
+					return $return;
+			}
+	}
+
+	function boxMiddle($title) {
+			$bgcolor=$this->COLOR_HTMLBOX_BACK;
+			return '
+								</TD>
+						</TR>
+						<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
+								<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD>
+						</TR>
+						<TR align=left bgcolor="'.$bgcolor.'">
+								<TD colspan=2>';
+	}
+
+	function boxBottom() {
+			$return = '
+								</TD>
+						</TR>
+				</TABLE><P>';
+//</TD></TR></TABLE><P>';
+			return $return;
+	}
+
+}
+?>
