@@ -21,13 +21,13 @@ case "$1" in
 	update-inetd --comment-chars "#SF_WAS_HERE#" --enable cvspserver
         # Then, insinuate ourselves
 	update-inetd --comment-chars "#SF_WAS_HERE#" --disable cvspserver
-	update-inetd --add  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	/usr/lib/gforge/bin/cvs-pserver"
+	update-inetd --add  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	/usr/lib/gforge/plugins/scmcvs/bin/cvs-pserver"
 	;;
 
     purge)
 	echo "Purging inetd for cvs server"
 	# echo "You should dpkg-reconfigure cvs to use std install"
-	update-inetd --remove  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	/usr/lib/gforge/bin/cvs-pserver"
+	update-inetd --remove  "cvspserver	stream	tcp	nowait.400	root	/usr/sbin/tcpd	/usr/lib/gforge/plugins/scmcvs/bin/cvs-pserver"
 	update-inetd --comment-chars "#SF_WAS_HERE#" --enable cvspserver
 	;;
 
