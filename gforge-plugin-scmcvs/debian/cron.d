@@ -3,7 +3,7 @@
 #
 
 # Tarballs
-5 2 * * * root [ -x /usr/lib/gforge/plugins/scmcvs/bin/tarballs.sh ] && /usr/lib/gforge/plugins/scmcvs/bin/tarballs.sh generate
+5 2 * * * root [ -x /usr/lib/gforge/plugins/scmcvs/cronjobs/tarballs.php ] && php -d include_path=/etc/gforge:/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/plugins/scmcvs/cronjobs/tarballs.php
 
 # Snapshots
 35 2 * * * root [ -x /usr/lib/gforge/plugins/scmcvs/bin/snapshots.sh ] && /usr/lib/gforge/plugins/scmcvs/bin/snapshots.sh generate

@@ -40,6 +40,7 @@ install: build
 	#ln -sf /usr/lib/gforge/plugins/$(PLUGIN)/bin/cvssh $(DESTDIR)/bin/
 	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
 	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
+	cp -r cronjobs/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/
 	#cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
 	cp cgi-bin/cvsweb $(DESTDIR)/usr/lib/gforge/bin/
 	chmod 0755 $(DESTDIR)/usr/lib/gforge/bin/cvsweb
