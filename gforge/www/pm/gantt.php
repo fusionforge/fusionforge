@@ -1,7 +1,7 @@
 <?php
 
-require_once('jpgraph/jpgraph.php');
-require_once('jpgraph/jpgraph_gantt.php');
+require_once($sys_path_to_jpgraph.'jpgraph.php');
+require_once($sys_path_to_jpgraph.'jpgraph_gantt.php');
 require_once('common/pm/ProjectTaskFactory.class');
 
 $ptf = new ProjectTaskFactory($pg);

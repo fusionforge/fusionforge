@@ -9,13 +9,28 @@ alter table project_history rename column date to mod_date;
 ALTER TABLE project_task DROP CONSTRAINT "project_task_group_project_id_f" RESTRICT;
 
 ALTER TABLE project_task 
-	ADD CONSTRAINT projecttask_groupprojectid_fk 
+	ADD CONSTRAINT projecttask_groupprojectid_fk FOREIGN KEY (group_project_id)
 	REFERENCES project_group_list(group_project_id) ON DELETE CASCADE;
 
 --
 --	Add email address to send all task updates to
 --
 ALTER TABLE project_group_list ADD COLUMN send_all_posts_to text;
+
+
+--
+--	Each task can be assigned a category
+--
+DROP TABLE project_category;
+DROP SEQUENCE project_categor_category_id_seq;
+CREATE TABLE project_category (
+category_id serial,
+group_project_id int 
+	CONSTRAINT projcat_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
+category_name text);
+CREATE INDEX projectcategory_groupprojectid ON project_category(group_project_id);
+INSERT INTO project_category VALUES ('100','1','None');
+SELECT SETVAL('project_categor_category_id_seq',100);
 
 --
 --	Add category_id
@@ -31,20 +46,6 @@ SELECT project_task.*,project_category.category_name,project_status.status_name
 FROM project_task 
 FULL JOIN project_category ON (project_category.category_id=project_task.category_id) 
 NATURAL JOIN project_status;
-
---
---	Each task can be assigned a category
---
-DROP TABLE project_category;
-DROP SEQUENCE project_categor_category_id_seq;
-CREATE TABLE project_category (
-category_id serial,
-group_project_id int 
-	CONSTRAINT projcat_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
-category_name text);
-CREATE INDEX projectcategory_groupprojectid ON project_category(group_project_id);
-INSERT INTO project_category VALUES ('100','1','None');
-SELECT SETVAL('project_categor_category_id_seq',100);
 
 --
 --	Each task can have multiple artifacts associated with it
@@ -101,11 +102,6 @@ CREATE VIEW project_history_user_vw AS
 	FROM users,project_history 
 	WHERE project_history.mod_by=users.user_id;
 
-DROP VIEW project_message_user_vw;
-CREATE VIEW project_message_user_vw AS
-	SELECT users.realname,users.email,users.user_name,project_messages.*
-	FROM users,project_messages
-	WHERE project_messages.posted_by=users.user_id;
 --
 --	Move project messages into separate table from project_history
 --
@@ -118,7 +114,7 @@ postdate int NOT NULL);
 
 BEGIN;
 INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
-	SELECT project_task_id,old_value,mod_by,date 
+	SELECT project_task_id,old_value,mod_by,mod_date 
 	FROM project_history
 	WHERE field_name='details';
 
@@ -126,6 +122,11 @@ DELETE FROM project_history WHERE field_name='details';
 
 COMMIT;
 
+DROP VIEW project_message_user_vw;
+CREATE VIEW project_message_user_vw AS
+	SELECT users.realname,users.email,users.user_name,project_messages.*
+	FROM users,project_messages
+	WHERE project_messages.posted_by=users.user_id;
 --
 --	Remove all existing dependencies, as they may be problematic.
 --

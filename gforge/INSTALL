@@ -24,9 +24,17 @@ You will need:
 	Optional Jabber Support:
 	Jabberd ( http://jabberd.jabberstudio.org/ )
 
+	Optional Gantt Charting and Graphing Support:
+	JPGraph: ( http://www.aditus.nu/jpgraph/ )
+
 Compile and install PostgreSQL, then PHP/Apache as per the instructions. PHP should 
 be compiled into Apache, as well as compiled as a separate CGI. When compiling PHP, 
-don't forget the --with-pgsql option for PostgreSQL support
+don't forget the --with-pgsql option for PostgreSQL support. 
+
+If you are going to use Gantt charting and other graphing features, your PHP must be 
+compiled --with-gd. Follow the JPGraph installation instructions (extra fonts for 
+JPGraph are not necessary). Be sure your /etc/gforge/local.inc file contains the 
+proper path to the jpgraph/src/ directory.
 
 Install Python and MailMan as per the instructions.
 
@@ -128,3 +136,12 @@ yet run without some polishing. If you polish up and make all these
 scripts work, please submit them back for inclusion at 
 
 http://gforge.org/
+
+BACKEND PROCESSES
+-----------------
+
+Backend processes, such as creating home directories and cvs trees are 
+still incomplete. Stubbed out sample cronjobs exist in /cronjobs/mail/ 
+and some of the old SourceForge-specific cronjobs are still in /utils/ 
+and /backend/ If you wish to contribute fixes to this functionality, 
+please visit http://gforge.org/ 

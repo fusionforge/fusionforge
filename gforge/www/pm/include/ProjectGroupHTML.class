@@ -1,0 +1,187 @@
+<?php
+/**
+ * GForge Project Management Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+/*
+
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
+
+require_once('common/pm/ProjectGroup.class');
+
+function pm_header($params) {
+	global $group_id,$is_pm_page,$words,$group_project_id,$DOCUMENT_ROOT,$order;
+
+	//required by site_project_header
+	$params['group']=$group_id;
+	$params['toptab']='pm';
+
+	//only projects can use the bug tracker, and only if they have it turned on
+	$project =& group_get_object($group_id);
+	if (!$project || !is_object($project)) {
+		exit_no_group();
+	}   
+
+	if (!$project->usesPm()) {
+		exit_error('Error','This Project Has Turned Off The Task Manager');
+	}
+
+	site_project_header($params);
+
+	echo "<p><b>";
+
+	if ($group_project_id) {
+		if (session_loggedin()) {
+			echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=addtask\">Add Task</a> | ";
+		}
+		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse\">Browse Tasks</a> | ";
+		echo "<a href=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=ganttpage\" target=\"_blank\">Gantt Chart</a> | ";
+	}
+	echo '
+		<a href="/pm/reporting/?group_id='.$group_id.'">Reporting</a> | 
+		<a href="/pm/admin/?group_id='.$group_id.'">Admin</a> </b>';
+}
+
+function pm_footer($params) {
+	site_project_footer($params);
+}
+
+class ProjectGroupHTML extends ProjectGroup {
+
+	function ProjectGroupHTML(&$Group, $group_project_id=false, $arr=false) {
+		if (!$this->ProjectGroup($Group,$group_project_id,$arr)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function statusBox($name='status_id',$checked='xyxy',$text_100='None') {
+		return html_build_select_box($this->getStatuses(),$name,$checked,true,$text_100);
+	}
+
+	function categoryBox($name='category_id',$checked='xzxz') {
+		return html_build_select_box($this->getCategories(),$name,$checked);
+	}
+
+	function percentCompleteBox($name='percent_complete',$selected=0) {
+		echo '
+		<select name="'.$name.'">';
+		echo '
+		<option value="0">Not Started';
+		for ($i=5; $i<101; $i+=5) {
+			echo '
+			<option value="'.$i.'"';
+			if ($i==$selected) {
+				echo ' SELECTED';
+			}	
+			echo '>'.$i.'%';
+		}
+		echo '
+		</select>';
+	}
+
+	function showMonthBox($name,$select_month=0) {
+		echo '
+		<select name="'.$name.'" size="1">';
+		$monthlist = array('1'=>'January',
+			'2'=>'February',
+			'3'=>'March',
+			'4'=>'April',
+			'5'=>'May',
+			'6'=>'June',
+			'7'=>'July',
+			'8'=>'August',
+			'9'=>'September',
+			'10'=>'October',
+			'11'=>'November',
+			'12'=>'December');
+
+		for ($i=1; $i<=count($monthlist); $i++) {
+			if ($i == $select_month) {
+				echo '
+				<option selected value="'.$i.'">'.$monthlist[$i];
+			} else {
+				echo '
+				<option value="'.$i.'">'.$monthlist[$i];
+			}
+		}
+		echo '
+		</SELECT>';
+	}
+
+	function showDayBox($name,$day=1) {
+		echo '
+		<select name="'.$name.'" size="1">';
+		for ($i=1; $i<=31; $i++) {
+			if ($i == $day) {
+				echo '
+				<option selected value="'.$i.'">'.$i;
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i;
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function showYearBox($name,$year=1) {
+		echo '
+		<select name="'.$name.'" size="1">';
+		for ($i=1999; $i<=2013; $i++) {
+			if ($i == $year) {
+				echo '
+				<option selected value="'.$i.'">'.$i;
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i;
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function showHourBox($name,$hour=1) {
+
+		echo '
+		<select name="'.$name.'" size="1">';
+		for ($i=0; $i<=23; $i++) {
+			if ($i == $hour) {
+				echo '
+				<option selected value="'.$i.'">'.$i;
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i;
+			}
+		}
+		echo '
+		</select>';
+	}
+
+	function showMinuteBox($name,$minute=0) {
+		echo '	<select name="'.$name.'" size="1">';
+		for ($i=0; $i<=45; $i=$i+15) {
+			if ($i == $minute) {
+				echo '	<option selected value="'.$i.'">'.$i;
+			} else {
+				echo '
+				<option value="'.$i.'">'.$i;
+			}
+		}
+		echo '
+		</select>';
+	}
+
+}
+
+?>

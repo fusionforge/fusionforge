@@ -13,7 +13,7 @@
 // so white space is meaningful!
 //
 //
-// PART I - GForge hostnames
+// GForge hostnames
 //
 // Hostnames should be fully qualified domain names (FQDNs); using short names
 // would be prettier but would stop you from distributing your SourceForge
@@ -46,8 +46,8 @@ $sys_upload_host = "upload.company.com";
 // in the source code, but they seem to serve the same purpose..?
 $sys_shell_host = "shell.company.com";
 $sys_users_host = "users.company.com";
-//$homedir_prefix='/home';
-//$groupdir_prefix='/home/groups';
+$homedir_prefix='/home';
+$groupdir_prefix='/home/groups';
  
 // Machine that hosts docs (such as the FAQs and the various software
 // licenses (*BSD, [L]GPL, etc.).  You REALLY want this to be the same
@@ -67,7 +67,7 @@ $sys_lists_host = "lists.company.com";
 $sys_dns1_host = "ns1.company.com";
 $sys_dns2_host = "ns2.company.com";
 
-// Part II - Databases, html/php/other paths
+//Databases, html/php/other paths
 //server to use for updates and reads
 $sys_dbhost="localhost";
 //whether or not to use replication
@@ -141,10 +141,6 @@ $sys_session_expire     = 60 * 60 * 24 * 7;
 // registration
 $sys_require_unique_email=0;
  
-// Part III - GUI modifications (menu colors, etc.)
-//    See the top of the file include/html.php, this is where the menu colors
-//    and colors used throughout GForge are defined.
- 
 // Themeing related vars... Some of this needs to change in the session stuff
 // The theme base directory, everything else is handled by theme_sysinit()
 $sys_themeroot=$sys_urlroot."themes/";
@@ -157,8 +153,8 @@ $sys_lang='English';
 $sys_images_url = "";
 $sys_images_secure_url = "";
 
-// Part IV - Groups
-//  The SourceForge permission model is based on groups
+//  Groups
+//  The GForge permission model is based on groups
 //  certain parts of the site, like news, stats, etc
 //  are based on special group_id numbers
 //  group_id #1 is the super-user group of sitewide admins
@@ -166,6 +162,9 @@ $sys_news_group=3;
 $sys_stats_group=2;
 $sys_peer_rating_group=4;
 $default_trove_cat=18;
+
+//	JPGRAPH Package
+$sys_path_to_jpgraph='/path/to/jpgraph/src/';
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
