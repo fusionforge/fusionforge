@@ -12,7 +12,7 @@
   */
 
 
-require_once('pre.php');    
+require_once('pre.php');
 
 if (!$toaddress && !$touser) {
 	exit_error('Error','Error - some variables were not provided');
@@ -77,28 +77,28 @@ $HTML->header(array('title'=>$GLOBALS['sys_name'].' Staff','pagename'=>'sendmess
 
 ?>
 
-<p>
+<p />
 <?php echo $Language->getText('sendmessage', 'about_blurb'); ?>
-<p>
-<form action="<?php echo $PHP_SELF; ?>" METHOD="POST">
-<input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>">
-<input type="hidden" name="touser" value="<?php echo $touser; ?>">
+<p />
+<form action="<?php echo $PHP_SELF; ?>" method="post">
+<input type="hidden" name="toaddress" value="<?php echo $toaddress; ?>" />
+<input type="hidden" name="touser" value="<?php echo $touser; ?>" />
 
 <strong>Your Email Address:</strong><br />
-<input type="TEXT" name="email" SIZE="30" MAXLENGTH="40" value="">
-<p>
+<input type="text" name="email" size="30" maxlength="40" value="" />
+<p />
 <strong>Your Name:</strong><br />
-<input type="TEXT" name="name" SIZE="30" MAXLENGTH="40" value="">
-<p>
+<input type="text" name="name" size="30" maxlength="40" value="" />
+<p />
 <strong>Subject:</strong><br />
-<input type="TEXT" name="subject" SIZE="30" MAXLENGTH="40" value="<?php echo $subject; ?>">
-<p>
+<input type="text" name="subject" size="30" maxlength="40" value="<?php echo $subject; ?>" />
+<p />
 <strong>Message:</strong><br />
-<textarea name="body" ROWS="15" COLS="60" WRAP="HARD"></textarea>
-<p>
-<CENTER>
-<input type="SUBMIT" name="send_mail" value="Send Message">
-</CENTER>
+<textarea name="body" rows="15" cols="60"></textarea>
+<p />
+<div align="center">
+<input type="submit" name="send_mail" value="Send Message" />
+</div>
 </form>
 <?php
 $HTML->footer(array());

@@ -1,5 +1,12 @@
 2003-01-18  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/404.php: valid XHTML 1.0 Transitional.
+
+	* www/sendmessage.php: ditto.
+
+	* www/include/languages/Base.tab: valid XHTML 1.0 Transitional
+	for sendmessage string.
+
 	* www/people/editjob.php: Audit: escape special characters from
 	user input before submitting to database.
 
