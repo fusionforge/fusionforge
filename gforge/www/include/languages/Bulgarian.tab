@@ -2,7 +2,7 @@
 #  *
 #  * Bulgarian message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -58,7 +58,7 @@ group	short_summary	Резюме
 group	short_support	Поддръжка
 group	short_survey	Проучвания
 home	highest_ranked_users	Най-популярните потребители
-home	about_blurb	  SourceForge е <B>безплатна услуга за разработващите софтуер с  <A href="http://www.opensource.org">отворен код</A></B>,  предлагаща лесен достъп до най-доброто от CVS, дискусионни форуми,  проследяване на грешки, управление на задачи,  безплатно уеб пространство, постоянно архивиране на файловете,  пълно резервно подсигуряване на проекта,  и напълно уеб базирано администриране. <BR> &nbsp; <P> <B>Включване и обратна връзка</B> <P> За да може да използвате най-ефективно SourceForge, ще трябва да се  <A href="/account/register.php">регистрирате</A> като потребител.  Това ще ви позволи да участвате напълно във всичко, което предлагаме.  Разбира се, можете да разглеждате всичко и без регистриране, но така ще  се лишите от възможността за пълно включване в различните услуги. <P> &nbsp; <BR> <B>Създайте свой проект</B> <P> <A href="/account/register.php">Регистрирайте се като потребител</A>,  след което <A HREF="/account/login.php">влезте</A> в своят профил и накрая  <A HREF="/register/">регистрирайте вашият проект.</A> <P> Благодарим ви... и приятно ползване на услугите ни.
+home	about_blurb	  GForge е <B>безплатна услуга за разработващите софтуер с  <A href="http://www.opensource.org">отворен код</A></B>,  предлагаща лесен достъп до най-доброто от CVS, дискусионни форуми,  проследяване на грешки, управление на задачи,  безплатно уеб пространство, постоянно архивиране на файловете,  пълно резервно подсигуряване на проекта,  и напълно уеб базирано администриране. <BR> &nbsp; <P> <B>Включване и обратна връзка</B> <P> За да може да използвате най-ефективно GForge, ще трябва да се  <A href="/account/register.php">регистрирате</A> като потребител.  Това ще ви позволи да участвате напълно във всичко, което предлагаме.  Разбира се, можете да разглеждате всичко и без регистриране, но така ще  се лишите от възможността за пълно включване в различните услуги. <P> &nbsp; <BR> <B>Създайте свой проект</B> <P> <A href="/account/register.php">Регистрирайте се като потребител</A>,  след което <A HREF="/account/login.php">влезте</A> в своят профил и накрая  <A HREF="/register/">регистрирайте вашият проект.</A> <P> Благодарим ви... и приятно ползване на услугите ни.
 frs	latest_file_releases	Последните излезли файлове
 menu	login	Вход (SSL защитена връзка)
 menu	logout	Изход
@@ -75,7 +75,7 @@ menu	project_summary	Обща информация за проекта
 group	public_area	Общодостъпни места
 menu	search	Търсене
 menu	software_map	Карта на софтуера
-home	sourceforge_statistics	SourceForge статистика
+home	sourceforge_statistics	GForge статистика
 menu	top_projects	Топ проекти
 home	top_project_downloads	Най-популярните проекти
 conf	content_encoding	windows-1251

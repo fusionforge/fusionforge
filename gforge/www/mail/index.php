@@ -18,7 +18,7 @@ if ($group_id) {
 
 	mail_header(array('title'=>'Mailing Lists for '.group_getname($group_id),'pagename'=>'mail','sectionvals'=>array(group_getname($group_id))));
 	
-	if (user_isloggedin() && user_ismember($group_id)) {
+	if (session_loggedin() && user_ismember($group_id)) {
 		$public_flag='0,1';
 	} else {
 		$public_flag='1';
@@ -52,7 +52,7 @@ if ($group_id) {
 	for ($j = 0; $j < $rows; $j++) {
 		echo '<A HREF="http://'.$GLOBALS['sys_lists_host'].'/pipermail/'.
 			db_result($result, $j, 'list_name').'/">' . 
-			html_image("images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp; '.
+			html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp; '.
 			db_result($result, $j, 'list_name').' Archives</A>'; 
 		echo ' (go to <A HREF="http://'.$GLOBALS['sys_lists_host'].'/mailman/listinfo/'.
 			db_result($result, $j, 'list_name').'">Subscribe/Unsubscribe/Preferences</A>)<BR>';

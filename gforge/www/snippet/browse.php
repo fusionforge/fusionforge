@@ -62,7 +62,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	$title_arr[]='Title';
 	$title_arr[]='Creator';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	/*
 		List packages if there are any
@@ -73,13 +73,13 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	}
 	for ($i=0; $i<$rows2; $i++) {
 		echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ROWSPAN="2"><A HREF="/snippet/detail.php?type=package&id='.
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD ROWSPAN="2"><A HREF="/snippet/detail.php?type=package&id='.
 			db_result($result2,$i,'snippet_package_id').'"><B>'.
 			db_result($result2,$i,'snippet_package_id').'</B></A></TD><TD><B>'.
 			db_result($result2,$i,'name').'</TD><TD>'.
 			db_result($result2,$i,'user_name').'</TD></TR>';
 		echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</TD></TR>';
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</TD></TR>';
 	}
 
 
@@ -93,17 +93,16 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	}
 	for ($i=0; $i<$rows; $i++) {
 		echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ROWSPAN="2"><A HREF="/snippet/detail.php?type=snippet&id='.
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD ROWSPAN="2"><A HREF="/snippet/detail.php?type=snippet&id='.
 			db_result($result,$i,'snippet_id').'"><B>'.
 			db_result($result,$i,'snippet_id').'</B></A></TD><TD><B>'.
 			db_result($result,$i,'name').'</TD><TD>'.
 			db_result($result,$i,'user_name').'</TD></TR>';
 		echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</TD></TR>';
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</TD></TR>';
 	}
 
-	echo '
-		</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
 
 }
 

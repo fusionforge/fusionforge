@@ -122,6 +122,9 @@ class User extends Error {
 	 */
 	var $user_pref;
 
+	var $theme;
+	var $theme_id;
+
 	/**
 	 *	User($id,$res) - CONSTRUCTOR - GENERALLY DON'T USE THIS
 	 *
@@ -175,11 +178,13 @@ class User extends Error {
 	 * @param	string	The users preference for receiving community updates by email
 	 * @param	int		The ID of the language preference
 	 * @param	string	The users preferred timezone
+	 * @param	string	The users Jabber address
+	 * @param	int		The users Jabber preference
 	 * @returns The newly created user ID
 	 *
 	 */
 	function create($unix_name,$realname,$password1,$password2,$email,
-		$mail_site,$mail_va,$language_id,$timezone) {
+		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only) {
 		global $Language;
 		if (!$unix_name) {
 			//$this->setError('You must supply a username');
@@ -217,6 +222,15 @@ class User extends Error {
 			$this->setError($Language->getText('account_register','err_email'));
 			return false;
 		}
+		if ($jabber_address && !validate_email($jabber_address)) {
+			$this->setError($Language->getText('account_register','err_jabber'));
+			return false;
+		}
+		if (!$jabber_only) {
+			$jabber_only=0;
+		} else {
+			$jabber_only=1;
+		}
 		if (db_numrows(db_query("SELECT user_id FROM users WHERE user_name LIKE '$unix_name'")) > 0) {
 			//$this->setError('That username already exists.');
 			$this->setError($Language->getText('account_register','err_userexist'));
@@ -231,8 +245,9 @@ class User extends Error {
 		}
 		// if we got this far, it must be good
 		$confirm_hash = substr(md5($session_hash . $password1 . time()),0,16);
+		db_begin();
 		$result=db_query("INSERT INTO users (user_name,user_pw,unix_pw,realname,email,add_date,
-			status,confirm_hash,mail_siteupdates,mail_va,language,timezone) 
+			status,confirm_hash,mail_siteupdates,mail_va,language,timezone,jabber_address,jabber_only) 
 			VALUES ('$unix_name',
 			'". md5($password1) . "',
 			'". account_genunixpw($password1) . "',
@@ -244,11 +259,13 @@ class User extends Error {
 			'". (($mail_site)?"1":"0") . "',
 			'". (($mail_va)?"1":"0") . "',
 			'$language_id',
-			'$timezone')");
-
+			'$timezone',
+			'$jabber_address',
+			'$jabber_only')");
 		$this->user_id = db_insertid($result,'users','user_id');
 	
 		if (!$result || !$this->user_id) {
+			db_rollback();
 			//$this->setError('Insert Failed '.db_error());
 			$this->setError($Language->getText('account_register','err_badinsert') .db_error());
 			return false;
@@ -259,6 +276,7 @@ class User extends Error {
 
 			$this->sendRegistrationEmail();
 
+			db_commit();
 			return $this->user_id;
 		}
 	}
@@ -270,21 +288,10 @@ class User extends Error {
 	 */
 	function sendRegistrationEmail() {
 		global $Language;
-/*		
-		$message = "Thank you for registering on the SourceForge web site. You have\n"
-		. "account with username '".$this->getUnixName()."' created for you. In order\n"
-		. "to complete your registration, visit the following url: \n\n"
-		. "<https://". $GLOBALS['sys_default_domain'] ."/account/verify.php?confirm_hash=_".$this->getConfirmHash().">\n\n"
-		. "(If you don't see any URL above, it is likely due to bug in your mail client.\n"
-		. "Use one below, but make sure it is entered as the single line.)\n\n"
-		. "https://". $GLOBALS['sys_default_domain']."/account/verify.php?confirm_hash=_".$this->getConfirmHash()."\n\n"
-		. "Enjoy the site.\n\n"
-		. " -- the SourceForge staff\n";
-*/
-		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$GLOBALS['sys_default_domain'],$this->getConfirmHash())));
-		util_send_mail(
+		$message=stripcslashes($Language->getText('account_register','message_body',array($this->getUnixName(),$GLOBALS['sys_default_domain'],$this->getConfirmHash(),$GLOBALS['sys_name'])));
+		util_send_message(
 			$this->getEmail(),
-			$Language->getText('account_register','message_header'),
+			$Language->getText('account_register','message_header',array($GLOBALS['sys_name'])),
 			$message
 		);
 	}
@@ -299,11 +306,26 @@ class User extends Error {
 	 *  @param	string	The useres timezone preference
 	 *  @param	string	The users preference for receiving site updates by email
 	 *  @param	string	The users preference for receiving community updates by email
+	 *	@param	string	The users preference for being participating in "peer ratings"
+	 *	@param	string	The users Jabber account address
+	 *	@param	int		The users Jabber preference
 	 */
-	function update($realname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings) {
+	function update($realname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,
+		$jabber_address,$jabber_only) {
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
 		$block_ratings = !$use_ratings;
+
+		if ($jabber_address && !validate_email($jabber_address)) {
+			$this->setError($Language->getText('account_register','err_jabber'));
+			return false;
+		}
+		if (!$jabber_only) {
+			$jabber_only=0;
+		} else {
+			$jabber_only=1;
+		}
+
 
 		$res = db_query("
 			UPDATE users
@@ -313,7 +335,9 @@ class User extends Error {
 			timezone='$timezone',
 			mail_siteupdates=$mail_site,
 			mail_va=$mail_va,
-			block_ratings='$block_ratings'
+			block_ratings='$block_ratings',
+			jabber_address='$jabber_address',
+			jabber_only='$jabber_only'
 			WHERE user_id='".$this->getID()."'
 		");
 
@@ -384,7 +408,7 @@ class User extends Error {
 	function setStatus($status) {
 
 		if ($status != 'P' && $status != 'A'
-		    && $status != 'S' && $status != 'D') {
+			&& $status != 'S' && $status != 'D') {
 			$this->setError('ERROR: Invalid status value');
 			return false;
 		}
@@ -649,7 +673,6 @@ class User extends Error {
 	 *	@return this user's preferred shell
 	 */
 	function getShell() {
-?><?php
 		return $this->data_array['shell'];
 	}
 
@@ -721,37 +744,21 @@ class User extends Error {
 	}
 
 	/**
-	 *	getAuthorizedKeys()
+	 *	getJabberAddress()
 	 *
-	 *	@return this user's SSH authorized (public) keys
+	 *	@return this user's jabber address
 	 */
-	function getAuthorizedKeys() {
-		return ereg_replace("###", "\n", $this->data_array['authorized_keys']);
+	function getJabberAddress() {
+		return $this->data_array['jabber_address'];
 	}
 
 	/**
-	 *	setAuthorizedKeys()
+	 *	getJabberOnly()
 	 *
-	 *	@param	string	The users public keys
-	 *	@sets this user's SSH authorized (public) keys
+	 *	@return this user's jabber preference
 	 */
-	function setAuthorizedKeys($keys) {
-		$keys = trim($keys);
-		$keys = ereg_replace("(\r\n)|(\n)", "###", $keys);
-
-		$res=db_query("
-			UPDATE users 
-			SET authorized_keys='$keys'
-			WHERE user_id='".$this->getID()."'
-		");
-
-		if (!$res) {
-			$this->setError('ERROR - Could Not Update User SSH Keys: '.db_error());
-			return false;
-		} else {
-			$this->data_array['authorized_keys']=$keys;
-			return true;
-		}
+	function getJabberOnly() {
+		return $this->data_array['jabber_only'];
 	}
 
 	/**
@@ -938,10 +945,10 @@ class User extends Error {
 	 *	@return true on success false on failure
 	 */
 	function setPasswd($passwd) {
-	        if (!account_pwvalid($passwd)) {
-	        	$this->setError('Error: '.$GLOBALS['register_error']);
+		if (!account_pwvalid($passwd)) {
+			$this->setError('Error: '.$GLOBALS['register_error']);
 			return false;
-	        }
+		}
 
 		db_begin();
 		$unix_pw = account_genunixpw($passwd);
@@ -960,8 +967,7 @@ class User extends Error {
 		} else {
 			// Now change LDAP password, but only if corresponding
 			// entry exists (i.e. if user have shell access)
-			if (sf_ldap_check_user($this->getID()))
-			{
+			if (sf_ldap_check_user($this->getID())) {
 				if (!sf_ldap_user_set_attribute($this->getID(),"userPassword",'{crypt}'.$unix_pw)) {
 					$this->setError(sf_ldap_get_error_msg());
 					db_rollback();
@@ -1085,6 +1091,36 @@ class User extends Error {
 		return $res1 && $res2 && $res3;
 	}
 
+	function getThemeID() {
+		if (!$this->theme_id) {
+			$res=db_query("SELECT * FROM theme_prefs WHERE user_id='".$this->getID()."'");
+			if (!$res || db_numrows($res) < 1) {
+				$this->theme_id=1;
+			} else {
+				$this->theme_id=db_result($res,0,'user_theme');
+			}
+		}
+		return $this->theme_id;
+	}
+
+	function setThemeID($id) {
+		db_query("DELETE FROM theme_prefs WHERE user_id='".$this->getID()."'");
+		$result=db_query("INSERT INTO theme_prefs (user_id,user_theme) VALUES ('".$this->getID()."','$id')");
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError('Error inserting theme_pre: '.db_error());
+		} else {
+			return true;
+		}
+	}
+
+	function setUpTheme() {
+		if (!$this->theme) {
+			$res=db_query("SELECT * FROM themes WHERE theme_id='".$this->getThemeID()."'");
+			$this->theme=db_result($res,0,'dirname');
+			$GLOBALS['sys_theme']=db_result($res,0,'dirname');
+		}
+		return $this->theme;
+	}
 }
 
 /*
@@ -1112,7 +1148,7 @@ class User extends Error {
  *
  */
 function user_ismember($group_id,$type=0) {
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 		return false;
 	}
 
@@ -1173,7 +1209,7 @@ function user_ismember($group_id,$type=0) {
 function user_getname($user_id = false) {
 	// use current user if one is not passed in
 	if (!$user_id) {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$user=&user_get_object(user_getid());
 			if ($user) {
 				return $user->getUnixName();

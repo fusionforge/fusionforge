@@ -27,8 +27,8 @@ sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
 sub parse_sql_file ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/sourceforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -134,7 +134,7 @@ eval {
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+global+data+done" ;
 	  if (is_lesser $version, $target) {
-	      my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
+	      my @filelist = qw{ /usr/lib/gforge/db/sf-2.6-complete.sql } ;
 	      # TODO: user_rating.sql
 
 	      foreach my $file (@filelist) {
@@ -161,7 +161,7 @@ eval {
 	  if (is_lesser $version, $target) {
 	      debug "Adding local data." ;
 
-	      do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
+	      do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
 
 	      my ($login, $pwd, $md5pwd, $email, $noreplymail, $date) ;
 
@@ -391,7 +391,7 @@ eval {
 	  if (is_lesser $version, $target) {
 	      debug "Upgrading your database scheme from 2.5" ;
 
-	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
+	      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -793,6 +793,181 @@ eval {
  	$dbh->commit () ;
     }
 
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+11" ;
+    if (is_lesser $version, $target) {
+ 	debug "Adding tables for the plugin subsystem." ;
+
+ 	@reqlist = (
+		    "CREATE SEQUENCE plugins_pk_seq",
+		    "CREATE TABLE plugins (plugin_id integer DEFAULT nextval('plugins_pk_seq'::text) NOT NULL, plugin_name varchar(32) UNIQUE NOT NULL, plugin_desc text, CONSTRAINT plugins_pkey PRIMARY KEY (plugin_id))",
+		    "CREATE SEQUENCE group_plugin_pk_seq",
+		    "CREATE TABLE group_plugin (group_plugin_id integer DEFAULT nextval('group_plugin_pk_seq'::text) NOT NULL, group_id integer, plugin_id integer, CONSTRAINT group_plugin_pkey PRIMARY KEY (group_plugin_id), CONSTRAINT group_plugin_group_id_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL, CONSTRAINT group_plugin_plugin_id_fk FOREIGN KEY (plugin_id) REFERENCES plugins(plugin_id) MATCH FULL)",
+		    "CREATE SEQUENCE user_plugin_pk_seq",
+		    "CREATE TABLE user_plugin (user_plugin_id integer DEFAULT nextval('user_plugin_pk_seq'::text) NOT NULL, user_id integer, plugin_id integer, CONSTRAINT user_plugin_pkey PRIMARY KEY (user_plugin_id), CONSTRAINT user_plugin_user_id_fk FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL, CONSTRAINT user_plugin_plugin_id_fk FOREIGN KEY (plugin_id) REFERENCES plugins(plugin_id) MATCH FULL)",
+ 		    ) ;
+ 	foreach my $s (@reqlist) {
+ 	    $query = $s ;
+ 	    # debug $query ;
+ 	    $sth = $dbh->prepare ($query) ;
+ 	    $sth->execute () ;
+ 	    $sth->finish () ;
+ 	}
+ 	@reqlist = () ;
+ 	&update_db_version ($target) ;
+ 	debug "Committing." ;
+ 	$dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+12" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021125-debian.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021125-debian.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+13" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021212.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021212.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+13" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021213.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021213.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+14" ;
+    if (is_lesser $version, $target) {
+      debug "Transcoding documentation data fields" ;
+      $query = "SELECT docid,data FROM doc_data ORDER BY docid ASC" ;
+      # debug $query ;
+      $sth = $dbh->prepare ($query) ;
+      $sth->execute () ;
+      while (@array = $sth->fetchrow_array) {
+	  my $query2 = "UPDATE doc_data SET data='" ;
+	  $query2 .= encode_base64 (decode_entities ($array [1])) ;
+	  $query2 .= "', filename='file".$array [0].".html'";
+	  $query2 .= ", filetype='text/html'"; 
+	  $query2 .= " WHERE docid=" ;
+	  $query2 .= $array [0] ;
+	  $query2 .= "" ;
+	  # debug $query2 ;
+	  my $sth2 =$dbh->prepare ($query2) ;
+	  $sth2->execute () ;
+	  $sth2->finish () ;
+      }
+      $sth->finish () ;
+
+      @reqlist = () ;
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+15" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021214.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021214.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+16" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021215.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021215.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+17" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021216-debian.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021216-debian.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
 
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;

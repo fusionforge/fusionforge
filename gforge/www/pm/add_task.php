@@ -67,7 +67,7 @@ pm_header(array('title'=>'Add a New Task','pagename'=>'pm_addtask','group_projec
 		echo pm_show_day_box ('end_day',date('d', time()));
 		echo pm_show_year_box ('end_year',date('Y', time()));
 		echo pm_show_hour_box ('end_hour',date('G', time()));
-		echo pm_show_minute_box ('end_minute', date('i', 15*(time()%15)));	
+		echo pm_show_minute_box ('end_minute', date('i', 15*(time()%15)));
 		?>
 		</td>
 

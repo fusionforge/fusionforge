@@ -24,6 +24,23 @@ require ('squal_pre.php');
 
 /*
 	FIRST TIME RUN:
+--
+--
+--
+--	
+--
+--BEGIN;
+--UPDATE frs_dlstats_file SET MONTH=('2002'::text || month::text)::int;
+--COMMIT;
+
+INSERT INTO frs_dlstats_file_agg
+    SELECT
+        month,
+        day,
+        file_id,
+        count(*) AS downloads
+    FROM frs_dlstats_file
+        GROUP BY month,day,file_id;
 
 --
 --	Create a table of total downloads by file
@@ -372,6 +389,42 @@ SELECT
 
 */
 
+
+//
+//  total file downloads by file / day
+//
+db_begin(SYS_DB_STATS);
+
+echo "\n\nBeginning frs_dlstats_file_agg: ".date('Y-m-d H:i:s',time());
+$year=date('Y');
+$day=date('d');
+$month=date('m');
+
+$rel = db_query("DELETE FROM frs_dlstats_file_agg 
+	WHERE month='$year$month' AND day='$day';", -1, 0, SYS_DB_STATS);
+echo db_error(SYS_DB_STATS);
+
+$sql="INSERT INTO frs_dlstats_file_agg
+    SELECT
+        month,
+        day,
+        file_id,
+        count(*) AS downloads
+    FROM frs_dlstats_file
+	WHERE month='$year$month' AND day='$day'
+    GROUP BY month,day,file_id;";
+$rel=db_query($sql, -1, 0, SYS_DB_STATS);
+
+if (!$rel) {
+    echo "ERROR IN frs_dlstats_file_agg";
+	echo $sql;
+}
+
+echo db_error(SYS_DB_STATS);
+
+db_commit(SYS_DB_STATS);
+
+db_query("VACUUM ANALYZE frs_dlstats_file_agg;", -1, 0, SYS_DB_STATS);
 
 
 //

@@ -183,13 +183,13 @@ $title=array();
 $title[]='Name';
 $title[]='Unix Name';
 $title[]='Operations';
-echo html_build_list_table_top($title);
+echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row_cat = db_fetch_array($res_cat)) {
 
 	$row_cat[group_name] = htmlspecialchars($row_cat[group_name]);
 	print '
-		<tr bgcolor="'.html_get_alt_row_color($i++).'">
+		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.$row_cat['group_name'].'</td>
 		<td>'.$row_cat['unix_group_name'].'</td>
 		<td><a href="/project/admin/?group_id='.$row_cat[group_id].'">[Project Admin]</a>
@@ -199,7 +199,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 
 }
 
-print "</table>";
+echo $GLOBALS['HTML']->listTableBottom();
 
 html_feedback_bottom($feedback);
 

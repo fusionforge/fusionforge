@@ -1,3 +1,49 @@
+2002-12-14  Tim Perdue <tim@gforge.org>
+
+	* Complete rewrite of FRS using OO style and coding guidelines.
+	Same form and design as tracker.
+
+2002-12-13  Tim Perdue <tim@gforge.org>
+
+	* Quick changes to doc manager to protect binary safe uploads /
+	downloads. Must run a PHP script to migrate your data from pre6 
+	to pre7. The script is in db/doc_data-migrate.php
+
+2002-12-12  Tim Perdue <tim@gforge.org>
+
+	* Added skills/profile system patch submitted by John Maguire
+
+2002-12-09  Tim Perdue <tim@gforge.org>
+
+	* Complete forum rewrite using OO style and coding guidlines.
+	Same form and design as Tracker system.
+
+2002-12-07  Tim Perdue <tim@gforge.org>
+
+	* Moved html_build_list_table_top() into Layout.class, and 
+	created listTableBottom(), so they can be easily themed.
+
+2002-12-06  Tim Perdue <tim@gforge.org>
+
+	* Jabber Support working. Tracker updates and Forum Posts 
+	are now set to use the jabber system. Much more integration 
+	needs to be done.
+
+2002-11-28  Tim Perdue <tim@gforge.org>
+
+	* Cleaned up and simplied File Release System. Still needs 
+	serious OO rewrite, however it is no longer dependent on 
+	setuid "fileforge" and "tempfileforge".
+
+2002-11-25  Tim Perdue <tim@gforge.org>
+
+	* Removed hacky "theming" system and rewrote Layout.class 
+	with new sitewide theme. New theming system can be based on
+	extending Layout.class as they did before. Renamed several 
+	function calls in Layout.class.
+
+	* Foundries and all related code removed
+
 2001-07-13  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
 	* www/include/logger.php: We should allow to access groups

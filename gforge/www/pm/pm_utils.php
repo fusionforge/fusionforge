@@ -47,7 +47,7 @@ function pm_header($params) {
 	echo "<A HREF=\"/pm/?group_id=$group_id\">Subproject List</A>";
         $need_bar=1;
 	if ($group_project_id) {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
                 	if ($need_bar) echo ' | ';
 			echo "<A HREF=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=addtask\">Add Task</A>";
 			echo " | <A HREF=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse&set=my\">My Tasks</A>";
@@ -57,7 +57,7 @@ function pm_header($params) {
 		echo "<A HREF=\"/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse&set=open\">Browse Open Tasks</A>";
                 $need_bar=1;
 	}
-       	if (user_isloggedin()) {
+       	if (session_loggedin()) {
                 if ($need_bar) echo ' | ';
 		echo '<A HREF="/pm/reporting/?group_id='.$group_id.'">Reporting</A>';
                 $need_bar=1;
@@ -270,14 +270,14 @@ function pm_show_tasklist ($result,$offset,$set='open') {
 	$links_arr[]=$url.'end_date';
 	$links_arr[]=$url.'percent_complete';
 
-	echo html_build_list_table_top ($title_arr,$links_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr,$links_arr);
 
 	$now=time();
 
 	for ($i=0; $i < $rows; $i++) {
 
 		echo '
-			<TR class="'.get_priority_color(db_result($result, $i, 'priority')).'">'.
+			<TR BGCOLOR="'.get_priority_color(db_result($result, $i, 'priority')).'">'.
 			'<TD><A HREF="'.$PHP_SELF.'?func=detailtask'.
 			'&project_task_id='.db_result($result, $i, 'project_task_id').
 			'&group_id='.$group_id.
@@ -310,7 +310,10 @@ function pm_show_tasklist ($result,$offset,$set='open') {
 	} else {
 		echo '&nbsp;';
 	}
-	echo '</TD></TR></TABLE>';
+	echo '</TD></TR>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) {
@@ -330,11 +333,11 @@ function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) 
 		$title_arr[]='Task ID';
 		$title_arr[]='Summary';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color ($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD><A HREF="/pm/task.php?func=detailtask&project_task_id='.
 				db_result($result, $i, 'project_task_id').
 				'&group_id='.$group_id.
@@ -342,7 +345,9 @@ function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) 
 				db_result($result, $i, 'project_task_id').'</TD>
 				<TD>'.db_result($result, $i, 'summary').'</TD></TR>';
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	} else {
 		echo '
 			<H3>No Tasks are Dependent on This Task</H3>';
@@ -372,16 +377,18 @@ function pm_show_task_details ($project_task_id) {
 		$title_arr[]='Date';
 		$title_arr[]='By';
 		
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ($i=0; $i < $rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color ($i) .'">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<TD>'. nl2br(db_result($result, $i, 'old_value')).'</TD>
 				<TD VALIGN="TOP">'.date($sys_datefmt,db_result($result, $i, 'date')).'</TD>
 				<TD VALIGN="TOP">'.db_result($result, $i, 'user_name').'</TD></TR>';
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	} else {
 		echo '
 			<H3>No Comments Have Been Added</H3>';
@@ -414,13 +421,13 @@ function pm_show_task_history ($project_task_id) {
 		$title_arr[]='Date';
 		$title_arr[]='By';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ($i=0; $i < $rows; $i++) {
 			$field=db_result($result, $i, 'field_name');
 
 			echo '
-				<TR BGCOLOR="'. html_get_alt_row_color ($i) .'"><TD>'.$field.'</TD><TD>';
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.$field.'</TD><TD>';
 
 			if ($field == 'status_id') {
 
@@ -444,9 +451,8 @@ function pm_show_task_history ($project_task_id) {
 				<TD>'.db_result($result, $i, 'user_name').'</TD></TR>';
 		}
 
-		echo '
-			</TABLE>';
-	
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	} else {
 		echo '
 			<H3>No Changes Have Been Made</H3>';

@@ -26,7 +26,7 @@ function handle_add_exit() {
 	exit;
 }
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	if ($suppress_nav) {
 		echo '
@@ -150,19 +150,19 @@ if (user_isloggedin()) {
 		<P>
 		No Snippets Are In This Package Yet';
 	} else {
-		$HTML->box1_top('Snippets In This Package');
+		echo $HTML->boxTop('Snippets In This Package');
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD ALIGN="MIDDLE">
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD ALIGN="MIDDLE">
 				<A HREF="/snippet/delete.php?type=frompackage&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'&snippet_package_version_id='.$snippet_package_version_id.
-				'">' . html_image("images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD><TD WIDTH="99%">'.
+				'">' . html_image("ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD><TD WIDTH="99%">'.
 				db_result($result,$i,'name').' '.db_result($result,$i,'version')."</TD></TR>";
 
 			$last_group=db_result($result,$i,'group_id');
 		}
-		$HTML->box1_bottom();
+		echo $HTML->boxBottom();
 	}
 	echo '
 	<P>

@@ -23,7 +23,7 @@ require_once('www/include/canned_responses.php');
 require_once('www/admin/admin_utils.php');
 require_once('www/project/admin/project_admin_utils.php');
 require_once('common/tracker/ArtifactTypes.class');
-require_once('www/forum/forum_utils.php');
+require_once('common/forum/Forum.class');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 

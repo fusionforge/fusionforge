@@ -7,11 +7,11 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: editpackages.php,v 1.22 2001/05/22 19:48:40 pfalcon Exp $
+  * @version   $Id: editpackages.php.patched,v 1.1.2.1 2002/11/30 09:57:58 cbayle Exp $
   *
   */
 
-require_once('pre.php');    
+require_once('pre.php');	
 require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>$group_id));
@@ -22,10 +22,8 @@ exit_assert_object($project,'Project');
 $perm =& $project->getPermission(session_get_user());
 
 if (!$perm->isReleaseTechnician()) {
-    exit_permission_denied();
+	exit_permission_denied();
 }
-
-$is_admin=$perm->isAdmin();
 
 /*
 
@@ -36,7 +34,7 @@ $is_admin=$perm->isAdmin();
 */
 
 // only admin can modify packages (vs modifying releases of packages)
-if ($is_admin && $submit) {
+if ($submit) {
 	/*
 
 		make updates to the database
@@ -70,11 +68,14 @@ if ($is_admin && $submit) {
 
 project_admin_header(array('title'=>'Release/Edit File Releases','group'=>$group_id,'pagename'=>'project_admin_editpackages','sectionvals'=>array(group_getname($group_id))));
 
-echo '<h3>QRS:</h3>';
+?>
+<h3>QRS:</h3>
+<?
 echo 'Click here to <a href="qrs.php?package_id=' . $package_id . '&group_id=' . $group_id . '">quick-release a file</a>.<br>';
 
 $user_unix_name=user_getname();
-echo "<H3>Packages</H3>
+?>
+<H3>Packages</H3>
 <P>
 You can use packages to group different file releases together, or use them however you like. 
 <P>
@@ -103,8 +104,8 @@ A release of a package can contain multiple files.
 <B>3.22.3</B><BR>
 <P>
 You can create new releases of packages by clicking on <B>Add/Edit Releases</B> next to your package name.
-<P>";
-
+<P>
+<?
 /*
 
 	Show a list of existing packages
@@ -122,45 +123,36 @@ if (!$res || $rows < 1) {
 	$title_arr[]='Releases';
 	$title_arr[]='Package Name';
 	$title_arr[]='Status';
-	if ($is_admin) $title_arr[]='Update';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	for ($i=0; $i<$rows; $i++) {
-                // If user is not project admin, use static fields whenever possible
-        	if ($is_admin) {
-                	$name_entry='<INPUT TYPE="TEXT" NAME="package_name" VALUE="'. 
-				db_result($res,$i,'package_name') .'" SIZE="20" MAXLENGTH="30">';
-                } else {
-                	$name_entry=db_result($res,$i,'package_name');
-                }
-		$status_entry= frs_show_status_popup ('status_id', db_result($res,$i,'status_id'));
-
 		echo '
 		<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
 		<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
 		<INPUT TYPE="HIDDEN" NAME="func" VALUE="update_package">
 		<INPUT TYPE="HIDDEN" NAME="package_id" VALUE="'. db_result($res,$i,'package_id') .'">
-		<TR BGCOLOR="'. html_get_alt_row_color($i) .'">
+		<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 			<TD NOWRAP ALIGN="center">
 				<FONT SIZE="-1">
-					<A HREF="newrelease.php?package_id='. 
+					<A HREF="qrs.php?package_id='. 
 						db_result($res,$i,'package_id') .'&group_id='. $group_id .'"><B>[Add Release]</B>
 					</A>
 				</FONT>
 				<FONT SIZE="-1">
-					<A HREF="editreleases.php?package_id='. 
+					<A HREF="showreleases.php?package_id='. 
 						db_result($res,$i,'package_id') .'&group_id='. $group_id .'"><B>[Edit Releases]</B>
 					</A>
 				</FONT>
 
 			</TD>
-			<TD><FONT SIZE="-1">'.$name_entry.'</TD>
-			<TD><FONT SIZE="-1">'.$status_entry.'</TD>';
-		if ($is_admin)	echo '<TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Update"></TD>';
-		echo '</TR></FORM>';
+			<TD><FONT SIZE="-1"><INPUT TYPE="TEXT" NAME="package_name" VALUE="'.db_result($res,$i,'package_name') .'" SIZE="20" MAXLENGTH="30"></TD>
+			<TD><FONT SIZE="-1">'.frs_show_status_popup ('status_id', db_result($res,$i,'status_id')).'</TD>
+			<TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Update"></TD>
+			</TR></FORM>';
 	}
-	echo '</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
 
 }
 
@@ -170,17 +162,19 @@ if (!$res || $rows < 1) {
 
 */
 
-if ($is_admin)
-echo '<P>
+?>
+<P>
 <h3>New Package Name:</h3>
 <P>
-<FORM ACTION="'. $PHP_SELF .'" METHOD="POST">
-<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
+<FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
+<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="<?php echo $group_id; ?>">
 <INPUT TYPE="HIDDEN" NAME="func" VALUE="add_package">
 <INPUT TYPE="TEXT" NAME="package_name" VALUE="" SIZE="20" MAXLENGTH="30">
 <P>
 <INPUT TYPE="SUBMIT" NAME="submit" VALUE="Create This Package">
-</FORM>';
+</FORM>
+
+<?php
 
 project_admin_footer(array());
 

@@ -1,0 +1,6 @@
+etc/gforge
+etc/gforge/templates
+usr/bin
+usr/lib/gforge/bin
+usr/lib/gforge/lib
+usr/sbin

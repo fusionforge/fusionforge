@@ -197,12 +197,12 @@ function show_grouphistory ($group_id) {
 		$title_arr[]='Date';
 		$title_arr[]='By';
 		
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 		
 		for ($i=0; $i < $rows; $i++) { 
 			$field=db_result($result, $i, 'field_name');
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.$field.'</TD><TD>';
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.$field.'</TD><TD>';
 			
 			if ($field=='removed user') {
 				echo user_getname(db_result($result, $i, 'old_value'));
@@ -213,10 +213,9 @@ function show_grouphistory ($group_id) {
 				'<TD>'.date($sys_datefmt,db_result($result, $i, 'date')).'</TD>'.
 				'<TD>'.db_result($result, $i, 'user_name').'</TD></TR>';
 		}	       
-				
-		echo '	 
-		</TABLE>';      
-		
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	} else {
 		echo '  
 		<H3>No Changes Have Been Made to This Group</H3>';

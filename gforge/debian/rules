@@ -21,7 +21,7 @@ build-stamp:
 
 	# Build man pages from Docbook sources
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
-	/usr/bin/docbook-to-man debian/sourceforge-config.sgml > sourceforge-config.1
+	/usr/bin/docbook-to-man debian/gforge-config.sgml > gforge-config.1
 
 	# Uudecode binary files
 	$(CURDIR)/deb-specific/manage-uufiles.sh decode
@@ -32,7 +32,7 @@ clean:
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp configure-stamp
-	rm -f cvssh.1 sourceforge-config.1
+	rm -f cvssh.1 gforge-config.1
 
 	$(CURDIR)/deb-specific/dsf-helper.pl --clean
 	$(CURDIR)/deb-specific/manage-uufiles.sh clean
@@ -48,117 +48,119 @@ install: build
 	# Preprocess files with DSF-Helper
 	$(CURDIR)/deb-specific/dsf-helper.pl
 
-	# sourceforge
-	# (sourceforge is a meta-package and needs no files)
+	# gforge
+	# (gforge is a meta-package and needs no files)
 
-	# sourceforge-common
-	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
-	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
-	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
-	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
-	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge-common/etc/sourceforge/templates/
-	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/sourceforge-config $(CURDIR)/debian/sourceforge-common/usr/sbin/
-	install -m 644 utils/include.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/lib/
-	install utils/underworld-dummy/ssh_dump.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install utils/ssh_create.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install utils/underworld-dummy/dump_database.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install utils/new_parse.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install -m 4755 deb-specific/fileforge.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	ln -sf fileforge.pl $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/tmpfilemove.pl
-	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
+	# gforge-common
+	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/httpd.conf.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/httpd.common.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 644 deb-specific/httpd.secrets.template $(CURDIR)/debian/gforge-common/etc/gforge/templates/
+	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/fill-in-the-blanks.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/gforge-config $(CURDIR)/debian/gforge-common/usr/sbin/
+	install -m 644 utils/include.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/lib/
+	install utils/underworld-dummy/ssh_dump.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install utils/ssh_create.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-ssh.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install utils/underworld-dummy/dump_database.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install utils/new_parse.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	install -m 4755 deb-specific/fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
+	ln -sf fileforge.pl $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/tmpfilemove.pl
+	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 
-	# sourceforge-web-apache
-	cp -r www $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/
-	cp -r common $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/
-	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/ -name CVS -type d | xargs rm -rf
-	find $(CURDIR)/debian/sourceforge-web-apache -name \*.uu -type f | xargs rm
-	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www -type d -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/www -type f -exec chmod 0644 {} \;
-	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/common -type d -exec chmod 0755 {} \;
-	find $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/common -type f -exec chmod 0644 {} \;
-	install -o www-data -m 755 -d $(CURDIR)/debian/sourceforge-web-apache/var/cache/sourceforge
-	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/sourceforge-web-apache/usr/lib/sourceforge/bin/
+	# gforge-web-apache
+	cp -r www $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
+	#cp $(CURDIR)/www/project/admin/qrs.php.debian $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/project/admin/qrs.php
+	cp -r common $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/ -name CVS -type d | xargs rm -rf
+	find $(CURDIR)/debian/gforge-web-apache -name \*.uu -type f | xargs rm
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type d -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type f -exec chmod 0644 {} \;
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/common -type d -exec chmod 0755 {} \;
+	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/common -type f -exec chmod 0644 {} \;
+	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache/var/cache/gforge
+	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 
-	# sourceforge-db-postgresql
-	install -m 644 db/SourceForge.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
-	#install -m 644 db/trove_defaults.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
-	install -m 644 db/user_rating.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
-	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
-	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
-	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/project_cleanup.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	#install -m 755 cronjobs/project_metric.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/rating_stats.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/site_stats.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/populate_foundries.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/calculate_user_metric.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/stats/download/stats_ftp_logparse.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/stats/download/stats_http_logparse.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/stats/download/stats_logparse.sh $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/stats/download/stats_sum.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/stats/subdomains/stats_projects_logparse.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 cronjobs/stats/include/stats_site.inc $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/lib/
-	install -m 755 cronjobs/stats/include/stats_projects.inc $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/lib/
-	install utils/underworld-root/db_top_groups_calc.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_top_groups_calc.pl
-	#install utils/underworld-root/stats_nightly.sh $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/stats_nightly.sh
-	#install utils/underworld-root/db_stats_prepare.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_stats_prepare.pl
-	#install utils/underworld-root/db_stats_projects_nightly.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_stats_projects_nightly.pl
-	#install utils/underworld-root/db_stats_site_nightly.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/db_stats_site_nightly.pl
-	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 644 deb-specific/sqlparser.pm $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/lib/
-	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/sf-register-theme $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/sf-register-plugin $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/sf-unregister-plugin $(CURDIR)/debian/sourceforge-common/usr/lib/sourceforge/bin/
+	# gforge-db-postgresql
+	install -m 644 db/SourceForge.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	#install -m 644 db/trove_defaults.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/user_rating.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/project_cleanup.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	#install -m 755 cronjobs/project_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/project_weekly_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/rating_stats.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/site_stats.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/db_stats_agg.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/calculate_user_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/stats/subdomains/stats_projects_logparse.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+#GF	install -m 755 cronjobs/stats/include/stats_site.inc $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
+#GF	install -m 755 cronjobs/stats/include/stats_projects.inc $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
+#GF	install utils/underworld-root/db_top_groups_calc.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/db_top_groups_calc.pl
+	#install utils/underworld-root/stats_nightly.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/stats_nightly.sh
+	#install utils/underworld-root/db_stats_prepare.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/db_stats_prepare.pl
+	#install utils/underworld-root/db_stats_projects_nightly.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/db_stats_projects_nightly.pl
+	#install utils/underworld-root/db_stats_site_nightly.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/db_stats_site_nightly.pl
+	install -m 755 deb-specific/install-db.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 644 deb-specific/sqlparser.pm $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
+	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 deb-specific/sf-register-theme $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 
-	install -m 644 deb-specific/view_bug.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
-	install -m 644 deb-specific/view_patch.sql $(CURDIR)/debian/sourceforge-db-postgresql/usr/lib/sourceforge/db/
+	install -m 644 deb-specific/view_bug.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 deb-specific/view_patch.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
-	# sourceforge-mta-exim
-	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/sourceforge-mta-exim/usr/lib/sourceforge/bin/
+	install -m 644 db/20021125-debian.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021212.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021213.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021214.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021215.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021216-debian.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
-	# sourceforge-shell-ldap
+	# gforge-mta-exim
+	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
 
-	# sourceforge-cvs
-	install -m 755 deb-specific/stats_cvs.pl $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/install-cvs.sh $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/sourceforge-cvs/bin/cvssh 
-	install -m 755 deb-specific/cvsweb/cvsweb.cgi $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cgi-bin/
-	install -m 644 deb-specific/cvsweb/icons/back.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/back.png 
-	install -m 644 deb-specific/cvsweb/icons/dir.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/dir.png 
-	install -m 644 deb-specific/cvsweb/icons/minidir.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minidir.png 
-	install -m 644 deb-specific/cvsweb/icons/text.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/text.png 
-	install -m 644 deb-specific/cvsweb/icons/miniback.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/miniback.png 
-	install -m 644 deb-specific/cvsweb/icons/minitext.png $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/cvs/icons/minitext.png 
-	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/sourceforge-cvs/etc/sourceforge/
-	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/sourceforge-cvs/usr/lib/sourceforge/bin/
+	# gforge-shell-ldap
 
-	# sourceforge-ftp-proftpd
-	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/sourceforge-ftp-proftpd/usr/lib/sourceforge/bin/
-	install -m 644 deb-specific/sf-proftpd.conf $(CURDIR)/debian/sourceforge-ftp-proftpd/etc/sourceforge/
+	# gforge-cvs
+	install -m 755 deb-specific/stats_cvs.pl $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-cvs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
+	install -m 755 deb-specific/cvs-pserver $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
+	install -m 755 deb-specific/cvssh.pl $(CURDIR)/debian/gforge-cvs/bin/cvssh 
+	install -m 755 deb-specific/cvsweb/cvsweb.cgi $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cgi-bin/
+	install -m 644 deb-specific/cvsweb/icons/back.png $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cvs/icons/back.png 
+	install -m 644 deb-specific/cvsweb/icons/dir.png $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cvs/icons/dir.png 
+	install -m 644 deb-specific/cvsweb/icons/minidir.png $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cvs/icons/minidir.png 
+	install -m 644 deb-specific/cvsweb/icons/text.png $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cvs/icons/text.png 
+	install -m 644 deb-specific/cvsweb/icons/miniback.png $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cvs/icons/miniback.png 
+	install -m 644 deb-specific/cvsweb/icons/minitext.png $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/cvs/icons/minitext.png 
+	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/gforge-cvs/etc/gforge/
+	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/
 
-	# sourceforge-ldap-openldap
-	install -m 755 utils/sql2ldif.pl $(CURDIR)/debian/sourceforge-ldap-openldap/usr/lib/sourceforge/bin/
-	install -m 755 deb-specific/install-ldap.sh $(CURDIR)/debian/sourceforge-ldap-openldap/usr/lib/sourceforge/bin/
-	install -m 644 deb-specific/sourceforge.schema $(CURDIR)/debian/sourceforge-ldap-openldap/etc/sourceforge/
+	# gforge-ftp-proftpd
+	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
+	install -m 644 deb-specific/sf-proftpd.conf $(CURDIR)/debian/gforge-ftp-proftpd/etc/gforge/
 
-	# sourceforge-dns-bind9
-	install -m 755 deb-specific/install-dns.sh $(CURDIR)/debian/sourceforge-dns-bind9/usr/lib/sourceforge/bin/
-	install -m 644 deb-specific/dns.head.template $(CURDIR)/debian/sourceforge-dns-bind9/var/lib/sourceforge/bind/
-	install -m 644 deb-specific/dns.simple.template $(CURDIR)/debian/sourceforge-dns-bind9/var/lib/sourceforge/bind/
-	install utils/underworld-dummy/dns_conf.pl $(CURDIR)/debian/sourceforge-dns-bind9/usr/lib/sourceforge/bin/
+	# gforge-ldap-openldap
+	install -m 755 utils/ldap/sql2ldif.pl $(CURDIR)/debian/gforge-ldap-openldap/usr/lib/gforge/bin/
+	install -m 755 deb-specific/install-ldap.sh $(CURDIR)/debian/gforge-ldap-openldap/usr/lib/gforge/bin/
+	install -m 644 deb-specific/gforge.schema $(CURDIR)/debian/gforge-ldap-openldap/etc/gforge/
 
-	# sourceforge-lists-mailman
-	install -m 755 deb-specific/create-mailing-lists.pl $(CURDIR)/debian/sourceforge-lists-mailman/usr/lib/sourceforge/bin/
+	# gforge-dns-bind9
+	install -m 755 deb-specific/install-dns.sh $(CURDIR)/debian/gforge-dns-bind9/usr/lib/gforge/bin/
+	install -m 644 deb-specific/dns.head.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/
+	install -m 644 deb-specific/dns.simple.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/
+	install utils/underworld-dummy/dns_conf.pl $(CURDIR)/debian/gforge-dns-bind9/usr/lib/gforge/bin/
+
+	# gforge-lists-mailman
+	install -m 755 deb-specific/create-mailing-lists.pl $(CURDIR)/debian/gforge-lists-mailman/usr/lib/gforge/bin/
 
 binary-indep: build install
 	dh_testdir

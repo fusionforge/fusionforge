@@ -19,7 +19,7 @@
 use DBI;
 use Time::Local;
 use POSIX qw( strftime );
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 &db_connect;
 
 my ($logfile, $sql, $res, $temp, %groups, $group_id, $errors );
@@ -55,7 +55,7 @@ print "Running week $week, day $day month $mon year $year \n" if $verbose;
 
 
    ## We'll pull down the parsed CVS log from the CVS server via http?! <sigh>
-$logfile = "/var/log/sourceforge/cvs/$year/$mon/cvs_traffic_$year$mon$day.log";
+$logfile = "/var/log/gforge/cvs/$year/$mon/cvs_traffic_$year$mon$day.log";
 print "Using $logfile\n";
 
    ## Now, we will pull all of the project ID's and names into a *massive*

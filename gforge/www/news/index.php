@@ -13,7 +13,8 @@
 
 
 require_once('pre.php');
-require_once('www/forum/forum_utils.php');
+require_once('www/news/news_utils.php');
+require_once('common/forum/Forum.class');
 
 news_header(array('title'=>'News','pagename'=>'news','sectionvals'=>array(group_getname($group_id))));
 
@@ -53,7 +54,7 @@ if ($rows < 1) {
 	for ($j = 0; $j < $rows; $j++) { 
 		echo '
 		<A HREF="/forum/forum.php?forum_id='.db_result($result, $j, 'forum_id').'">'.
-			html_image("images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+			html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
 			stripslashes(db_result($result, $j, 'summary')).'</A> ';
 		echo '
 		<BR>';

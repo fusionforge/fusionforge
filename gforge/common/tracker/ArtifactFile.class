@@ -62,8 +62,6 @@ class ArtifactFile extends Error {
 					return true;
 				}
 			}
-		} else {
-			$this->setError('No ID Passed');
 		}
 	}
 
@@ -94,7 +92,7 @@ class ArtifactFile extends Error {
 			return false;
 		}
 
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$userid=user_getid();
 		} else {
 			$userid=100;
@@ -106,9 +104,12 @@ class ArtifactFile extends Error {
 			('".$this->Artifact->getID()."','$description','". base64_encode($bin_data) ."','$filename',
 			'$filesize','$filetype','". time() ."','$userid')"); 
 
+		db_begin();
+
 		$id=db_insertid($res,'artifact_file','id');
 
 		if (!$res || !$id) {
+			db_rollback();
 			$this->setError('ArtifactFile: '.db_error());
 			return false;
 		} else {
@@ -120,9 +121,11 @@ class ArtifactFile extends Error {
 			//	Now set up our internal data structures
 			//
 			if (!$this->fetchData($id)) {
+				db_rollback();
 				return false;
 			}
 */
+			db_commit();
 			$this->Artifact->addHistory('File Added',$id.': '.$filename);
 			$this->clearError();
 			return $id;

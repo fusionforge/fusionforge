@@ -1,0 +1,373 @@
+<?php
+/**
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+require_once('common/include/Error.class');
+
+class ForumMessage extends Error {
+
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var	 array   $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * This is the id of the forum message in question.
+	 *
+	 * @var	 int	message id
+	 */
+	var $msg_id;
+
+	/**
+	 * The Forum object.
+	 *
+	 * @var	 object  $Forum
+	 */
+	var $Forum;
+
+	/**
+	 *  Constructor.
+	 *
+	 *	@param	object	The Forum object to which this ForumMessage is associated
+	 *  @param  int	 The message_id
+	 *  @param  array   The associative array of data
+	 */
+	function ForumMessage(&$Forum, $msg_id=false, $arr=false) {
+		$this->Error();
+		if (!$Forum || !is_object($Forum)) {
+			$this->setError('ForumMessage:: No Valid Forum Object');
+			return false;
+		}
+		if ($Forum->isError()) {
+			$this->setError('ForumMessage:: '.$Forum->getErrorMessage());
+			return false;
+		}
+		$this->Forum =& $Forum;
+
+		if ($msg_id) {
+			$this->msg_id=$msg_id;
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($msg_id)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				//
+				//	Verify this message truly belongs to this Forum
+				//
+				if ($this->data_array['group_forum_id'] != $this->Forum->getID()) {
+					$this->setError('Group_forum_id in db result does not match Forum Object');
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	function create($subject, $body, $thread_id='', $is_followup_to='') {
+		if (!$body || !$subject) {
+			$this->setError('Must include a message body and subject');
+			return false;
+		}
+		if (!session_loggedin() && !$this->Forum->allowAnonymous()) {
+			$this->setError('Must Be Logged In To Post.');
+			return false;
+		}
+		if (!session_loggedin()) {
+			$user_id=100;
+		} else {
+			$user_id=user_getid();
+		}
+
+		if ($is_follow_up_to) {
+			$ParentMessage=new ForumMessage($this->Forum,$is_followup_to);
+			if (!$ParentMessage || !is_object($ParentMessage)) {
+				$this->setError('ForumMessage::create() No Valid ParentMessage Object');
+				return false;
+			}
+			if ($ParentMessage->isError()) {
+				$this->setError('ForumMessage::create() '.$ParentMessage->getErrorMessage());
+				return false;
+			}
+		}
+		if (!$is_followup_to) { 
+			$is_followup_to=0; 
+		}
+
+		//see if that message has been posted already for all the idiots that double-post
+		$res3=db_query("SELECT * FROM forum 
+			WHERE is_followup_to='$is_followup_to' 
+			AND body='".  htmlspecialchars($body) ."'
+			AND subject='".  htmlspecialchars($subject) ."' 
+			AND group_forum_id='". $this->Forum->getId() ."' 
+			AND posted_by='$user_id'");
+
+		if (db_numrows($res3) > 0) {
+			//already posted this message
+			$this->setError('You appear to be double-posting this message,
+				since it has the same subject and followup information as a prior post.');
+			return false;
+		} else {
+			echo db_error();
+		}
+		db_begin();
+		if (!$thread_id) {
+			$thread_id=$this->Forum->getNextThreadID();
+			$is_followup_to=0;
+			if (!$thread_id) {
+				$this->setError('ForumMessage::create() Getting next thread_id failed');
+				db_rollback();
+				return false;
+			}
+		} else {
+			//
+			//  increment the parent's followup count if necessary
+			//
+			$res4=db_query("UPDATE forum SET most_recent_date='". time() ."' 
+				WHERE thread_id='$thread_id' AND is_followup_to='0'");
+			if (!$res4 || db_affected_rows($res4) < 1) {
+				$this->setError('Couldn\'t Update Master Thread parent with current time');
+				db_rollback();
+				return false;
+			} else {
+				//
+				//  mark the parent with followups as an optimization later
+				//
+				$res3=db_query("UPDATE forum SET has_followups='1',most_recent_date='". time() ."' 
+					WHERE msg_id='$is_followup_to'");
+				if (!$res3) {
+					$this->setError('Could Not Update Parent');
+					db_rollback();
+					return false;
+				}
+			}
+		}
+
+		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
+			body,date,is_followup_to,thread_id,most_recent_date) 
+			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
+			'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."')";
+
+		$result=db_query($sql);
+		if (!$result || db_affected_rows($result) < 1) {
+			$this->setError('ForumMessage::create() Posting Failed '.db_error());
+			db_rollback();
+			return false;
+		} else {
+			$msg_id=db_insertid($result,'forum','msg_id');
+			$this->msg_id=$msg_id;
+			if (!$this->fetchData($msg_id)) {
+				db_rollback();
+				return false;
+			}
+			if (!$msg_id) {
+				db_rollback();
+				$this->setError('ForumMessage::create() Unable to get new message id');
+				return false;
+			} else {
+				if (!$this->sendNotice()) {
+					db_rollback();
+					return false;
+				}
+//echo "Committing";
+				db_commit();
+//echo "db_error()".db_error();
+				return true;
+			}
+		}
+	}
+
+	/**
+	 *  fetchData() - re-fetch the data for this ArtifactType from the database
+	 *
+	 *  @param  int	 The message ID
+	 *  @return true/false
+	 */
+	function fetchData($msg_id) {
+		$res=db_query("SELECT * FROM forum_user_vw
+			WHERE msg_id='$msg_id'
+			AND group_forum_id='". $this->Forum->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('ForumMessage::fetchData() Invalid MessageID'.db_error());
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *	getForum() - get the Forum object this ForumMessage is associated with
+	 *
+	 *	@return the Forum object
+	 */
+	function &getForum() {
+		return $this->Forum;
+	}
+
+	/**
+	 *	getID() - get this message_id.
+	 *
+	 *	@return the message_id
+	 */
+	function getID() {
+		return $this->msg_id;
+	}
+
+	/**
+	 *	getPosterName() - get the unix user_name of this message's poster.
+	 *
+	 *	@return the poster's unix name.
+	 */
+	function getPosterName() {
+		return $this->data_array['user_name'];
+	}
+
+	/**
+	 *	getPosterID() - get this user_id of this message's poster.
+	 *
+	 *	@return the user_id
+	 */
+	function getPosterID() {
+		return $this->data_array['posted_by'];
+	}
+
+	/**
+	 *	getPosterRealName() - get the real name of this message's poster.
+	 *
+	 *	@return the real name.
+	 */
+	function getPosterRealName() {
+		return $this->data_array['realname'];
+	}
+
+	/**
+	 *	getSubject() - get the subject of this message.
+	 *
+	 *	@return the subject
+	 */
+	function getSubject() {
+		return $this->data_array['subject'];
+	}
+
+	/**
+	 *	getBody() - get the body of this message.
+	 *
+	 *	@return the body
+	 */
+	function getBody() {
+		return $this->data_array['body'];
+	}
+
+	/**
+	 *	getPostDate() - get the post date of this message.
+	 *
+	 *	@return the post date
+	 */
+	function getPostDate() {
+		return $this->data_array['date'];
+	}
+
+	/**
+	 *	getParentID() - get the id of the parent message, if this is a followup.
+	 *
+	 *	@return the parent id
+	 */
+	function getParentID() {
+		return $this->data_array['is_followup_to'];
+	}
+
+	/**
+	 *	getThreadID() - get the thread_id of the message.
+	 *
+	 *	@return the thread_id
+	 */
+	function getThreadID() {
+		return $this->data_array['thread_id'];
+	}
+
+	/**
+	 *	getMostRecentDate() - get the date of the most recent followup
+	 *
+	 *	@return the date of the most recent followup
+	 */
+	function getMostRecentDate() {
+		return $this->data_array['most_recent_date'];
+	}
+
+	/**
+	 *	hasFollowups - whether this message has any followups
+	 *
+	 *	@return boolean followups
+	 */
+	function hasFollowups() {
+		return $this->data_array['has_followups'];
+	}
+
+	function delete() {
+		$msg_id=$this->getID();
+		$perm =& $this->Forum->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$sql="SELECT msg_id FROM forum 
+			WHERE is_followup_to='$msg_id' 
+			AND group_forum_id='".$this->Forum->getID()."'";
+		$result=db_query($sql);
+		$rows=db_numrows($result);
+		$count=1;
+
+		for ($i=0;$i<$rows;$i++) {
+			$msg = new ForumMessage($this->Forum,db_result($result,$i,'msg_id'));
+			$count += $msg->delete();
+		}
+		$sql="DELETE FROM forum 
+			WHERE msg_id='$msg_id' 
+			AND group_forum_id='".$this->Forum->getID()."'";
+		$toss=db_query($sql);
+
+		return $count;
+
+	}
+
+	function sendNotice() {
+		$ids =& $this->Forum->getMonitoringIDs();
+
+		//
+		//	See if there is anyone to send messages to
+		//
+		if (!count($ids) > 0 && !$this->Forum->getSendAllPostsTo()) {
+			return true;
+		}
+
+		$body = "\nRead and respond to this message at: ".
+		"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$this->getID().
+		"\nBy: " . $this->getPosterName() .
+		"\n\n" . util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
+		"\n\n______________________________________________________________________".
+		"\nRead and respond to this message at: ".
+		"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$this->getID().
+		"\n\nYou are receiving this email because you elected to monitor this forum.".
+		"\nTo stop monitoring this forum, login to $GLOBALS[$sys_name] and visit: ".
+		"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
+
+		$subject="[" . $this->Forum->Group->getUnixName() . " - " . $this->Forum->getName() ."] ".
+			util_unconvert_htmlspecialchars($this->getSubject());
+		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo());
+		return true;
+	}
+
+}
+
+?>

@@ -36,7 +36,7 @@ these parameters is the language in which you wish to display a piece
 of information, and another is some handle to identify the information
 you want to display.  In Sourceforge, this handle is made up of the
 "page name" and the "category" strings.  Knowing all the needed info,
-the function displays the appropriate text.  How appropiate is this
+the function displays the appropriate text.  How appropriate is this
 text?  Well, that depends.  First, a basic set of texts is loaded.
 Historically, this set is loaded in English.  This set of texts makes
 the Base class, storing texts for all known "handles".  This set of
@@ -55,7 +55,7 @@ file containing your local data.  Debian Sourceforge will read it and
 use it to overload the standard distributed texts.
 
   To customise a language class, say Foobaric, you just have to edit
-the /etc/sourceforge/languages-local/Foobaric.tab file, and fill it
+the /etc/gforge/languages-local/Foobaric.tab file, and fill it
 with your local values.  The new values might not be visible
 immediately (I suspect the old values are cached), but restarting your
 Apache server should bring them to life.
@@ -75,7 +75,7 @@ variables are defined by the script and there's no simple way of
 knowing what they are apart from looking at the script itself.  To
 find out exactly what these variables are filled out with, search for
 the "getText('<pagename>','<category'>" string in the scripts
-contained in the /usr/lib/sourceforge/www/ directory.  This is not
+contained in the /usr/lib/gforge/www/ directory.  This is not
 always easy to do.
 
   Your best bet is to guess the meaning of the $1, $2, etc. variables
@@ -91,8 +91,8 @@ following:
 1. Find the bit of text I want to customise (in either Base.tab or
    Foobaric.tab);
 2. Copy and paste the appropriate line (including the "handle" -- the
-   first two fields) in /etc/sourceforge/languages-local/Foobaric.tab;
-   or /etc/sourceforge/languages-local/<theme_name>/Foobaric.tab 
+   first two fields) in /etc/gforge/languages-local/Foobaric.tab;
+   or /etc/gforge/languages-local/<theme_name>/Foobaric.tab 
    (For this last one the modification will only apply on a given theme)
 3. Read it to find out about the $n variables;
 4. Replace the third field with my own customised version.

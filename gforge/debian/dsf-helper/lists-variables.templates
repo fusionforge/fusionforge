@@ -1,4 +1,4 @@
-Template: sourceforge/shared/lists_host
+Template: gforge/shared/lists_host
 Type: string
 Description: Your mailing-lists server
  The hostname of the server that will host your Sourceforge mailing-lists. 

@@ -82,7 +82,7 @@ for ($i=0; $i<$rows; $i++) {
 	if ($i % 25 == 0) {
 		echo "\nUser id: ".db_result($res_mail,$i,'user_id');
 		//spawn sendmail for 25 addresses at a time
-		util_send_mail( '', stripslashes($mail_subject), stripslashes($mail_message), '', $tolist);
+		util_send_message( '', stripslashes($mail_subject), stripslashes($mail_message), '', $tolist);
 
 		usleep(500000);
 		print "\nsending to $tolist";
@@ -93,7 +93,7 @@ for ($i=0; $i<$rows; $i++) {
 
 //send the last of the messages.
 //spawn sendmail for 25 addresses at a time
-util_send_mail( '', stripslashes($mail_subject), stripslashes($mail_message), '', $tolist);
+util_send_message( '', stripslashes($mail_subject), stripslashes($mail_message), '', $tolist);
 
 usleep(500000);
 print "\nsending to $tolist";

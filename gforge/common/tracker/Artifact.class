@@ -82,6 +82,9 @@ class Artifact extends Error {
 		if ($data) {
 			if (is_array($data)) {
 				$this->data_array =& $data;
+//
+//	Should verify ArtifactType ID
+//
 				return true;
 			} else {
 				if (!$this->fetchData($data)) {
@@ -90,8 +93,6 @@ class Artifact extends Error {
 					return true;
 				}
 			}
-		} else {
-			$this->setError('No ID Present');
 		}
 	}
 
@@ -125,7 +126,7 @@ class Artifact extends Error {
 		//
 		//	get the user_id
 		//
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$user=user_getid();
 		} else {
 			if ($this->ArtifactType->allowsAnon()) {
@@ -225,8 +226,7 @@ class Artifact extends Error {
 			//
 			$this->mailFollowup(1);
 			db_commit();
-			$this->clearError();
-			
+
 			//
 			//  Set up monitoring for the user if requested
 			//
@@ -465,11 +465,10 @@ class Artifact extends Error {
 	/**
 	 *  setMonitor() - user can monitor this artifact
 	 *
-	 *	@param	string	The email address of the user who is monitoring this artifact
 	 *  @return false - always false - always use the getErrorMessage() for feedback
 	 */
-	function setMonitor($email=false) {
-		if (user_isloggedin()) {
+	function setMonitor() {
+		if (session_loggedin()) {
 
 			$user_id=user_getid();
 			$user =& user_get_object(user_getid());
@@ -481,26 +480,19 @@ class Artifact extends Error {
 
 		} else {
 
-			if (!$email || !validate_email($email)) {
-				$this->setError('SetMonitor::Valid Email Address Required');
-				return false;
-			}
-			$user_id=100;
-
-			$email_sql="AND email='$email'";
+			$this->setError('SetMonitor::Valid Email Address Required');
+			return false;
 
 		}
 
-		$email=strtolower($email);
-
 		$res=db_query("SELECT * FROM artifact_monitor 
 			WHERE artifact_id='". $this->getID() ."' 
-			AND user_id='$user_id' $email_sql");
+			AND user_id='$user_id'");
 
 		if (!$res || db_numrows($res) < 1) {
 			//not yet monitoring
-			$res=db_query("INSERT INTO artifact_monitor (artifact_id,user_id,email) 
-				VALUES ('". $this->getID() ."','$user_id','$email')");
+			$res=db_query("INSERT INTO artifact_monitor (artifact_id,user_id) 
+				VALUES ('". $this->getID() ."','$user_id')");
 			if (!$res) {
 				$this->setError(db_error());
 				return false;
@@ -512,36 +504,22 @@ class Artifact extends Error {
 			//already monitoring - remove their monitor
 			db_query("DELETE FROM artifact_monitor 
 				WHERE artifact_id='". $this->getID() ."' 
-				AND user_id='$user_id' $email_sql");
+				AND user_id='$user_id'");
 			$this->setError('Monitoring Deactivated');
 			return false;
 		}
 	}
 
 	/**
-	 *  getMonitorEmails() - 
+	 *  getMonitorIds() - 
 	 *
 	 *  @return array of email addresses monitoring this ArtifactType
 	 */
-	function &getMonitorEmails() {
-		$res=db_query("SELECT artifact_monitor.user_id,users.email,artifact_monitor.email as email2 
-			FROM users,artifact_monitor 
-			WHERE users.user_id=artifact_monitor.user_id 
-			AND artifact_monitor.artifact_id='". $this->getID() ."'");
-
-		$rows=db_numrows($res);
-		$email=array();
-
-		for ($i=0; $i<$rows; $i++) {
-			//
-			//  for monitoring by non-logged-in users, 
-			//  we grab the email they gave us
-			//
-			//  otherwise we use the confirmed one from the users table
-			//
-			$email[]=((db_result($res,$i,'user_id') == 100)?db_result($res,$i,'email2'):db_result($res,$i,'email') );
-		}
-		return $email;
+	function &getMonitorIds() {
+		$res=db_query("SELECT user_id
+			FROM artifact_monitor 
+			WHERE artifact_id='". $this->getID() ."'");
+		return util_result_column_to_array($res);
 	}
 
 	/**
@@ -607,7 +585,7 @@ class Artifact extends Error {
 			return false;
 		}
 
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$user_id=user_getid();
 			$user =& user_get_object($user_id);
 			if (!$user || !is_object($user)) {
@@ -622,8 +600,8 @@ class Artifact extends Error {
 		} else {
 			$body="Logged In: NO \n\n".$body;
 			$user_id=100;
-			if (!$by) {
-				$this->setError('ERROR - addMessage: Missing Email Address');
+			if (!$by || !validate_email($by)) {
+				$this->setError('ERROR - addMessage: Missing Or Invalid Email Address');
 				return false;
 			}
 		}
@@ -646,12 +624,11 @@ class Artifact extends Error {
 	 *  @return true/false
 	 */
 	function addHistory($field_name,$old_value) {
-		if (!user_isloggedin()) {
+		if (!session_loggedin()) {
 			$user=100;
 		} else {
 			$user=user_getid();
 		}
-?><?php
 		$sql="insert into artifact_history(artifact_id,field_name,old_value,mod_by,entrydate) 
 			VALUES ('". $this->getID() ."','$field_name','$old_value','$user','". time() ."')";
 		return db_query($sql);
@@ -905,7 +882,7 @@ class Artifact extends Error {
 
 		$body = $this->ArtifactType->getName() ." item #". $this->getID() .", was opened at ". date( $sys_datefmt, $this->getOpenDate() ). 
 			"\nYou can respond by visiting: ".
-			"\nhttps://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
+			"\nhttp://".$GLOBALS['sys_default_domain']."/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 				"&aid=". $this->getID() .
 				"&group_id=". $this->ArtifactType->Group->getID() .
 			"\n\n".
@@ -933,7 +910,7 @@ class Artifact extends Error {
 			/*
 				get all the email addresses that are monitoring this request
 			*/
-			$emails =& $this->getMonitorEmails();
+			$monitor_ids =& $this->getMonitorIds();
 		}
 
 		if ($more_addresses) {
@@ -941,10 +918,10 @@ class Artifact extends Error {
 		}
 		//we don't email the current user
 		if ($this->getAssignedTo() != user_getid()) {
-			$emails[] = $this->getAssignedEmail();
+			$monitor_ids[] = $this->getAssignedTo();
 		}
 		if ($this->getSubmittedBy() != user_getid()) {
-			$emails[] = $this->getSubmittedEmail();
+			$monitor_ids[] = $this->getSubmittedBy();
 		}
 		//initial submission
 		if ($type==1) {
@@ -983,7 +960,7 @@ class Artifact extends Error {
 					if (db_result($result2,$i,'user_id') == 100) {
 						$emails[] = db_result($result2,$i,'from_email');
 					} else {
-						$emails[] = db_result($result2,$i,'email');
+						$monitor_ids[] = db_result($result2,$i,'user_id');
 					}
 
 
@@ -1002,22 +979,29 @@ class Artifact extends Error {
 		}
 
 		$body .= "\n\nYou can respond by visiting: ".
-		"\nhttps://$GLOBALS[sys_default_domain]/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
+		"\nhttp://$GLOBALS[sys_default_domain]/tracker/?func=detail&atid=". $this->ArtifactType->getID() .
 			"&aid=". $this->getID() .
 			"&group_id=". $this->ArtifactType->Group->getID();
 
 		//only send if some recipients were found
-		if (count($emails) < 1) {
+		if (count($emails) < 1 && count($monitor_ids) < 1) {
 			return true;
 		}
 
 		//now remove all duplicates from the email list
-		$BCC=implode(',',array_unique($emails));
+		if (count($emails) > 0) {
+			$BCC=implode(',',array_unique($emails));
+		}
 
+		if (count($monitor_ids) < 1) {
+			$monitor_ids=array();
+		} else {
+			$monitor_ids=array_unique($monitor_ids);
+		}
 		/*
 			Send the email
 		*/
-		util_send_mail("noreply@$GLOBALS[sys_default_domain]",$subject,$body,"noreply@$GLOBALS[sys_default_domain]",$BCC);
+		util_handle_message($monitor_ids,$subject,$body,$BCC);
 		return true;
 	}
 

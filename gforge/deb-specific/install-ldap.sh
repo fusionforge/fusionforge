@@ -2,8 +2,8 @@
 # 
 # $Id$
 #
-# Configure LDAP for Sourceforge
-# Christian Bayle, Roland Mas, debian-sf (Sourceforge for Debian)
+# Configure LDAP for GForge
+# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
 
 set -e
 
@@ -22,13 +22,13 @@ fi
 PATH=$PATH:/usr/sbin
 
 setup_vars() {
-    sf_ldap_base_dn=$(grep ^ldap_base_dn= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+    sf_ldap_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
     # [ "x$sf_ldap_base_dn" == "x" ] && sf_ldap_base_dn=`grep suffix /etc/ldap/slapd.conf | cut -d\" -f2`
     sf_ldap_admin_dn="cn=admin,${sf_ldap_base_dn}"
     sf_ldap_bind_dn="cn=SF_robot,${sf_ldap_base_dn}"
-    sf_ldap_passwd=$(grep ^ldap_web_add_password= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+    sf_ldap_passwd=$(grep ^ldap_web_add_password= /etc/gforge/gforge.conf | cut -d= -f2-)
     sf_cryptedpasswd=`slappasswd -s "$sf_ldap_passwd" -h {CRYPT}`
-    sf_ldap_host=$(grep ^ldap_host= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
+    sf_ldap_host=$(grep ^ldap_host= /etc/gforge/gforge.conf | cut -d= -f2-)
 
     [ -f /etc/ldap.secret ] && ldap_passwd=$(cat /etc/ldap.secret) || ldap_passwd=$sf_ldap_passwd
     cryptedpasswd=`slappasswd -s "$ldap_passwd" -h {CRYPT}`
@@ -75,9 +75,9 @@ modify_pam_ldap(){
 
 # Check/Modify /etc/libnss-ldap.conf
 configure_libnss_ldap(){
-    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-new
+    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.gforge-new
     # Check if DN is correct
-    if ! grep -q "^base[ 	]*$sf_ldap_dn" /etc/libnss-ldap.conf.sourceforge-new ; then
+    if ! grep -q "^base[ 	]*$sf_ldap_dn" /etc/libnss-ldap.conf.gforge-new ; then
 	echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
 	grep "^base" /etc/libnss-ldap.conf
 	echo "Should be: base $sf_ldap_base_dn"
@@ -85,26 +85,26 @@ configure_libnss_ldap(){
     # Check bindpw
     # Should contain the secret
     # All users can see ldap stored gid/uid
-    chmod 644 /etc/libnss-ldap.conf.sourceforge-new
+    chmod 644 /etc/libnss-ldap.conf.gforge-new
     # It doesn't seem to be necessary, only rootbinddn is necessary
     #	if ! grep -q "^bindpw" /etc/libnss-ldap.conf ; then
-    #		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf
+    #		echo "# Next line added by GForge install" >>/etc/libnss-ldap.conf
     #		echo "bindpw secret" >>/etc/libnss-ldap.conf
     #	fi
     # Check rootbinddn
     # This seems to be necessary to display uid/gid
     # Should be cn=admin,dc=...
-    if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf.sourceforge-new ; then
-	echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf.sourceforge-new
-	echo "rootbinddn cn=admin,$sf_ldap_base_dn" >>/etc/libnss-ldap.conf.sourceforge-new
+    if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf.gforge-new ; then
+	echo "# Next line added by GForge install" >>/etc/libnss-ldap.conf.gforge-new
+	echo "rootbinddn cn=admin,$sf_ldap_base_dn" >>/etc/libnss-ldap.conf.gforge-new
     fi
 }
 
 # Purge /etc/libnss-ldap.conf
 purge_libnss_ldap(){
-    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-new
-    perl -pi -e "s/^# Next line added by Sourceforge install\n/#SF#/g" /etc/libnss-ldap.conf.sourceforge-new
-    perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf.sourceforge-new
+    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.gforge-new
+    perl -pi -e "s/^# Next line added by GForge install\n/#SF#/g" /etc/libnss-ldap.conf.gforge-new
+    perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf.gforge-new
 }
 
 # Modify /etc/ldap/slapd.conf
@@ -114,41 +114,41 @@ configure_slapd(){
 	echo "Please make sure your slapd package is correctly configured."
 	exit 1
     fi
-    cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.sourceforge-new
+    cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-new
     
     # Maybe should comment referral line too
     echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
     
     # Debian config by default only include core schema
-    if ! grep -q "Sourceforge" /etc/ldap/slapd.conf.sourceforge-new ; then
+    if ! grep -q "GForge" /etc/ldap/slapd.conf.gforge-new ; then
 	tmpfile=$(mktemp $tmpfile_pattern)
 	for schema in /etc/ldap/schema/core.schema \
 	    /etc/ldap/schema/cosine.schema \
 	    /etc/ldap/schema/inetorgperson.schema \
 	    /etc/ldap/schema/nis.schema \
-	    /etc/sourceforge/sourceforge.schema
+	    /etc/gforge/gforge.schema
 	  do
-	  if ! grep -q "^include[ 	]*$schema" /etc/ldap/slapd.conf.sourceforge-new ; then
-	      echo "include	$schema	#Added by Sourceforge install" >> $tmpfile
+	  if ! grep -q "^include[ 	]*$schema" /etc/ldap/slapd.conf.gforge-new ; then
+	      echo "include	$schema	#Added by GForge install" >> $tmpfile
 	      # echo "Adding $schema"
 	  else
 	      # echo "Commenting $schema"
-	      perl -pi -e "s/^include[ 	]*\$schema/#Comment by Sourceforge install#include	\$schema/g" /etc/ldap/slapd.conf.sourceforge-new
-	      echo "include	$schema	#Added by Sourceforge install" >> $tmpfile
+	      perl -pi -e "s/^include[ 	]*\$schema/#Comment by GForge install#include	\$schema/g" /etc/ldap/slapd.conf.gforge-new
+	      echo "include	$schema	#Added by GForge install" >> $tmpfile
 	      # echo "Adding $schema"
 	  fi
 	done
 
-	cat /etc/ldap/slapd.conf.sourceforge-new >> $tmpfile
-	cat $tmpfile > /etc/ldap/slapd.conf.sourceforge-new
+	cat /etc/ldap/slapd.conf.gforge-new >> $tmpfile
+	cat $tmpfile > /etc/ldap/slapd.conf.gforge-new
 	rm -f $tmpfile
 
 	# Then write access for SF_robot
-	perl -pi -e "s/access to attribute=userPassword/# Next second line added by Sourceforge install
+	perl -pi -e "s/access to attribute=userPassword/# Next second line added by GForge install
 access to attribute=userPassword
-	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write/" /etc/ldap/slapd.conf.sourceforge-new
+	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write/" /etc/ldap/slapd.conf.gforge-new
 
-	perl -pi -e "s/access to \*/# Next lines added by Sourceforge install
+	perl -pi -e "s/access to \*/# Next lines added by GForge install
 access to dn=\".*,ou=People,$sf_ldap_base_dn\"
 	by dn=\"cn=admin,$sf_ldap_base_dn\" write
 	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write
@@ -169,8 +169,8 @@ access to dn=\"ou=cvsGroup,$sf_ldap_base_dn\"
 	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write
         by dn=\"cn=admin,$ldap_suffix\" write
 	by * read
-# End of sourceforge add
-access to */" /etc/ldap/slapd.conf.sourceforge-new
+# End of gforge add
+access to */" /etc/ldap/slapd.conf.gforge-new
 
 	# invoke-rc.d slapd restart
     fi	
@@ -183,13 +183,13 @@ purge_slapd(){
 	echo "Please make sure your slapd package is correctly configured."
 	exit 1
     fi
-    cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.sourceforge-new
+    cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-new
 	
-    perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf.sourceforge-new
-    perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf.sourceforge-new
-    if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf.sourceforge-new ; then
-	vi -e /etc/ldap/slapd.conf.sourceforge-new <<-FIN
-/# Next second line added by Sourceforge install
+    perl -pi -e "s/^.*#Added by GForge install\n//" /etc/ldap/slapd.conf.gforge-new
+    perl -pi -e "s/#Comment by GForge install#//" /etc/ldap/slapd.conf.gforge-new
+    if grep -q "# Next second line added by GForge install" /etc/ldap/slapd.conf.gforge-new ; then
+	vi -e /etc/ldap/slapd.conf.gforge-new <<-FIN
+/# Next second line added by GForge install
 :d
 /SF_robot
 :d
@@ -197,11 +197,11 @@ purge_slapd(){
 :x
 FIN
     fi
-    if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf.sourceforge-new ; then
-	vi -e /etc/ldap/slapd.conf.sourceforge-new <<-FIN
-/# Next lines added by Sourceforge install
+    if grep -q "Next lines added by GForge install" /etc/ldap/slapd.conf.gforge-new ; then
+	vi -e /etc/ldap/slapd.conf.gforge-new <<-FIN
+/# Next lines added by GForge install
 :ma a
-/# End of sourceforge add
+/# End of gforge add
 :ma b
 :'a,'bd
 :w
@@ -213,31 +213,31 @@ FIN
 # Modify /etc/nsswitch.conf
 configure_nsswitch()
 {
-    cp -a /etc/nsswitch.conf /etc/nsswitch.conf.sourceforge-new
+    cp -a /etc/nsswitch.conf /etc/nsswitch.conf.gforge-new
     # This is sensitive file
     # By security i let priority to files
     # Should maybe enhance this to take in account nis
     # Maybe ask the order db/files/nis/ldap
-    if ! grep -q '^passwd:.*ldap' /etc/nsswitch.conf.sourceforge-new ; then
-	perl -pi -e "s/^(passwd:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf.sourceforge-new
+    if ! grep -q '^passwd:.*ldap' /etc/nsswitch.conf.gforge-new ; then
+	perl -pi -e "s/^(passwd:[^#\n]*)([^\n]*)/\1 ldap \2#Added by GForge install\n#Comment by GForge install#\1\2/gs" /etc/nsswitch.conf.gforge-new
     fi
-    if ! grep -q '^group:.*ldap' /etc/nsswitch.conf.sourceforge-new ; then
-	perl -pi -e "s/^(group:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf.sourceforge-new
+    if ! grep -q '^group:.*ldap' /etc/nsswitch.conf.gforge-new ; then
+	perl -pi -e "s/^(group:[^#\n]*)([^\n]*)/\1 ldap \2#Added by GForge install\n#Comment by GForge install#\1\2/gs" /etc/nsswitch.conf.gforge-new
     fi
-    if ! grep -q '^shadow:.*ldap' /etc/nsswitch.conf.sourceforge-new ; then
-	perl -pi -e "s/^(shadow:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf.sourceforge-new
+    if ! grep -q '^shadow:.*ldap' /etc/nsswitch.conf.gforge-new ; then
+	perl -pi -e "s/^(shadow:[^#\n]*)([^\n]*)/\1 ldap \2#Added by GForge install\n#Comment by GForge install#\1\2/gs" /etc/nsswitch.conf.gforge-new
     fi
 }
 
 # Purge /etc/nsswitch.conf
 purge_nsswitch()
 {
-    cp -a /etc/nsswitch.conf /etc/nsswitch.conf.sourceforge-new
-    perl -pi -e "s/^[^\n]*#Added by Sourceforge install\n//" /etc/nsswitch.conf.sourceforge-new
-    perl -pi -e "s/#Comment by Sourceforge install#//" /etc/nsswitch.conf.sourceforge-new
+    cp -a /etc/nsswitch.conf /etc/nsswitch.conf.gforge-new
+    perl -pi -e "s/^[^\n]*#Added by GForge install\n//" /etc/nsswitch.conf.gforge-new
+    perl -pi -e "s/#Comment by GForge install#//" /etc/nsswitch.conf.gforge-new
 }
 
-# Load ldap database from sourceforge database
+# Load ldap database from gforge database
 load_ldap(){
     if [ "x$ldap_passwd" != "x" ] ; then
         # This loads the ldap database
@@ -245,7 +245,7 @@ load_ldap(){
         # echo "Creating ldif file from database"
 	tmpldif=$(mktemp $tmpfile_pattern)
 	dc=$(echo $sf_ldap_base_dn | cut -d, -f1 | cut -d= -f2)
-	/usr/lib/sourceforge/bin/sql2ldif.pl >> $tmpldif
+	/usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
         # echo "Filling LDAP with database"
 	if ! eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif $DEVNULL12" ; then
             # Some entries could not be added (already there)
@@ -380,13 +380,13 @@ case "$1" in
 	admin_regexp="^cn=admin, *$admin_regexp"
 	get_our_entries () {
 	    {		# List candidates...
-		/usr/lib/sourceforge/bin/sql2ldif.pl \
+		/usr/lib/gforge/bin/sql2ldif.pl \
 		    | grep "^dn:" \
 		    | sed 's/^dn: *//' \
 		    | grep -v "^dc=" \
 		    | grep -v "^ou=" \
 		    | grep -v "$admin_regexp"
-		/usr/lib/sourceforge/bin/sql2ldif.pl \
+		/usr/lib/gforge/bin/sql2ldif.pl \
 		    | grep "^dn:" \
 		    | sed 's/^dn: *//' \
 		    | grep -v "^dc=" \

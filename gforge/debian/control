@@ -1,28 +1,30 @@
-Source: sourceforge
+Source: gforge
 Section: non-US
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Build-Depends-Indep: debhelper (>= 4.0), sharutils, docbook-to-man
 Standards-Version: 3.5.8
 
-Package: sourceforge
+Package: gforge
 Architecture: all
-Depends: debconf (>= 0.5.00), sourceforge-common (= ${Source-Version}), sourceforge-web-apache | sourceforge-web, sourceforge-db-postgresql | sourceforge-db, sourceforge-mta-exim | sourceforge-mta, sourceforge-shell-ldap | sourceforge-shell, sourceforge-cvs, sourceforge-ftp-proftpd | sourceforge-ftp, sourceforge-ldap-openldap | sourceforge-ldap, sourceforge-dns-bind9 | sourceforge-dns, sourceforge-lists-mailman | sourceforge-lists
+Conflicts: sourceforge
+Depends: debconf (>= 0.5.00), gforge-common (= ${Source-Version}), gforge-web-apache | gforge-web, gforge-db-postgresql | gforge-db, gforge-mta-exim | gforge-mta, gforge-shell-ldap | gforge-shell, gforge-cvs, gforge-ftp-proftpd | gforge-ftp, gforge-ldap-openldap | gforge-ldap, gforge-dns-bind9 | gforge-dns, gforge-lists-mailman | gforge-lists
 Description: Collaborative development tool - meta-package
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This meta-package installs a complete Sourceforge site.
+ This meta-package installs a complete GForge site.
 
-Package: sourceforge-common
+Package: gforge-common
 Architecture: all
 Depends: debconf (>= 0.5.00)
-Replaces: sourceforge (<= 2.6-0+11)
+Replaces: sourceforge-common (>> 2.6-0+11)
+Conflicts: sourceforge-common
 Description: Collaborative development tool - shared files
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
@@ -31,155 +33,162 @@ Description: Collaborative development tool - shared files
  This package contains files and programs used by several other
  subpackages.
 
-Package: sourceforge-web-apache
+Package: gforge-web-apache
 Architecture: all
-Depends: sourceforge-common (>=2.6-0+13+) , sourceforge-db-postgresql | sourceforge-db, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-cgi, php4-pgsql, php4-gd, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), cronolog
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-web
-Conflicts: sourceforge-web
+Depends: gforge-common, gforge-db-postgresql | gforge-db, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-cgi, php4-pgsql, php4-gd, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), cronolog
+Replaces: sourceforge-web-apache (>> 2.6-0+11)
+Provides: gforge-web
+Conflicts: gforge-web
 Description: Collaborative development tool - web part (using Apache)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
  This package contains the files needed to run the web part of
- Sourceforge on an Apache webserver.
+ GForge on an Apache webserver.
 
-Package: sourceforge-db-postgresql
+Package: gforge-db-postgresql
 Architecture: all
-Depends: sourceforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), php4, php4-cgi, php4-pgsql
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-db
-Conflicts: sourceforge-db
+Depends: gforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), php4, php4-cgi, php4-pgsql
+Replaces: sourceforge-db-postgresql (>> 2.6-0+11)
+Provides: gforge-db
+Conflicts: gforge-db
 Description: Collaborative development tool - database (using PostgreSQL)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This package installs, configures and maintains the Sourceforge
+ This package installs, configures and maintains the GForge
  database.
 
-Package: sourceforge-mta-exim
+Package: gforge-mta-exim
 Architecture: all
-Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), exim | exim-tls
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-mta
-Conflicts: sourceforge-mta
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), exim | exim-tls
+Replaces: sourceforge-mta-exim (>> 2.6-0+11)
+Provides: gforge-mta
+Conflicts: gforge-mta
 Description: Collaborative development tool - mail tools (using Exim)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
  This package configures the Exim mail transfer agent to run
- Sourceforge.
+ GForge.
 
-Package: sourceforge-mta-postfix
+Package: gforge-mta-postfix
 Architecture: all
-Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), postfix, postfix-ldap
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-mta
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), postfix, postfix-ldap
+Replaces: sourceforge-mta-postfix (>> 2.6-0+11)
+Provides: gforge-mta
 Conflicts: sourceforge-mta
 Description: Collaborative development tool - mail tools (using Postfix)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
  This package configures the Postfix mail transfer agent to run
- Sourceforge.
+ GForge.
 
-Package: sourceforge-shell-ldap
+Package: gforge-shell-ldap
 Architecture: all
-Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-shell
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap
+Replaces: sourceforge-shell-ldap (>> 2.6-0+11)
+Provides: gforge-shell
 Conflicts: sourceforge-shell
 Description: Collaborative development tool - shell accounts (using LDAP)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
  This package provides shell accounts authenticated via LDAP to
- Sourceforge users.
+ GForge users.
 
-Package: sourceforge-cvs
+Package: gforge-cvs
 Architecture: all
-Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, cvs, rcs, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap
-Replaces: sourceforge (<= 2.6-0+11)
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, cvs, rcs, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap
+Replaces: sourceforge-cvs (>> 2.6-0+11)
+Conflicts: sourceforge-cvs
 Description: Collaborative development tool - CVS management
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This package installs and configures CVS for Sourceforge.
+ This package installs and configures CVS for GForge.
 
-Package: sourceforge-ftp-proftpd
+Package: gforge-ftp-proftpd
 Architecture: all
-Depends: sourceforge-common, sourceforge-ldap-openldap | sourceforge-ldap, proftpd, perl, debianutils (>= 1.7), debconf (>= 0.5.00), libnss-ldap (>=184-1), libpam-ldap
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-ftp
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, proftpd, perl, debianutils (>= 1.7), debconf (>= 0.5.00), libnss-ldap (>=184-1), libpam-ldap
+Replaces: sourceforge-ftp-proftpd (>> 2.6-0+11)
+Provides: gforge-ftp
 Conflicts: sourceforge-ftp
 Description: Collaborative development tool - FTP management (using ProFTPd)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This package configures the ProFTPd FTP server for Sourceforge.
+ This package configures the ProFTPd FTP server for GForge.
 
-Package: sourceforge-ldap-openldap
+Package: gforge-ldap-openldap
 Architecture: all
-Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), libnss-ldap (>=184-1), ldap-utils
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-ldap
-Conflicts: sourceforge-ldap
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), libnss-ldap (>=184-1), ldap-utils
+Replaces: sourceforge-ldap-openldap (>> 2.6-0+11)
+Provides: gforge-ldap,sourceforge-ldap
+Conflicts: gforge-ldap,sourceforge-ldap
 Description: Collaborative development tool - LDAP directory (using OpenLDAP)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This package configures and maintains an LDAP directory for Sourceforge.
+ This package configures and maintains an LDAP directory for GForge.
 
-Package: sourceforge-dns-bind9
+Package: gforge-dns-bind9
 Architecture: all
-Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), bind9 
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-dns
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), bind9 
+Replaces: sourceforge-dns-bind9 (>> 2.6-0+11)
+Provides: gforge-dns
 Conflicts: sourceforge-dns
 Description: Collaborative development tool - DNS management (using Bind9)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This package configures and maintains the DNS zones for Sourceforge.
+ This package configures and maintains the DNS zones for GForge.
 
-Package: sourceforge-lists-mailman
+Package: gforge-lists-mailman
 Architecture: all
-Depends: sourceforge-common, sourceforge-db-postgresql | sourceforge-db, sourceforge-ldap-openldap | sourceforge-ldap, sourceforge-mta-exim | sourceforge-mta, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), mailman
-Replaces: sourceforge (<= 2.6-0+11)
-Provides: sourceforge-lists
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-ldap-openldap | gforge-ldap, gforge-mta-exim | gforge-mta, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), mailman
+Replaces: sourceforge-lists-mailman (>> 2.6-0+11)
+Provides: gforge-lists
 Conflicts: sourceforge-lists
 Description: Collaborative development tool - mailing-lists (using Mailman)
- Sourceforge provides many tools to help collaboration in a
+ GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
  mailing-lists, CVS repository, forums, support request helper, web
  page / FTP hosting, release management, etc.  All these services are
  integrated into one web site and managed via a nice web interface.
  .
- This package controls the interaction of Sourceforge and Mailman.
+ This package controls the interaction of GForge and Mailman.
+
+Package: gforge-sourceforge-transition
+Architecture: all
+Depends: sourceforge-common, sourceforge-db-postgresql
+Description: sourceforge to gforge data transition
+ This package will move data from your sourceforge package to your gforge package

@@ -24,7 +24,7 @@ INSERT INTO user_metric0 (user_id,times_ranked,avg_raters_importance,avg_rating,
 SELECT user_id,5,1.25,1,0,0,1.25 
 FROM user_group
 WHERE 
-user_group.group_id=10200 
+user_group.group_id=4
 AND user_group.admin_flags='A';
 
 UPDATE user_metric0 SET 

@@ -10,7 +10,7 @@ use vars qw/$dbh @reqlist $plugin_name $plugin_desc $plugin_id/ ;
 
 sub debug ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include all the predefined functions
+require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functions
 
 &db_connect ;
 

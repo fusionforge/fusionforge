@@ -337,17 +337,32 @@ function pm_data_create_task ($group_project_id,$start_month,$start_day,$start_y
 		exit_error('Error','End Date Must Be Greater Than Begin Date');
 	}
 
-	$sql="INSERT INTO project_task (group_project_id,summary,details,percent_complete,".
+	db_begin();
+	db_query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
+//	echo "SERIALIZABLE ERROR: ".db_error();
+
+	$res=db_query("SELECT nextval('project_task_pk_seq') AS id");
+	$project_task_id=db_result($res,0,'id');
+
+//echo "<BR>$project_task_id";
+
+    if (!pm_data_insert_dependent_tasks($dependent_on,$project_task_id)) {
+        db_rollback();
+        $feedback .= ' ERROR inserting assigned to ';
+        return false;
+    }
+
+	$sql="INSERT INTO project_task (group_project_id,project_task_id,summary,details,percent_complete,".
 		"priority,hours,start_date,end_date,".
-		"created_by,status_id) VALUES ('$group_project_id','".htmlspecialchars($summary)."',".
+		"created_by,status_id) VALUES ('$group_project_id','$project_task_id','".htmlspecialchars($summary)."',".
 		"'".htmlspecialchars($details)."','$percent_complete','$priority','$hours','".
 		mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year)."','".
 		mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year)."','".user_getid()."','1')";
 
-	db_begin();
 
 	$result=db_query($sql);
-	$project_task_id=db_insertid($result,'project_task','project_task_id');
+//	$project_task_id=db_insertid($result,'project_task','project_task_id');
+	echo db_error();
 
 	if (!$result || !$project_task_id) {
 		$feedback .= ' ERROR INSERTING ROW '.db_error();
@@ -360,12 +375,12 @@ function pm_data_create_task ($group_project_id,$start_month,$start_day,$start_y
 			$feedback .= ' ERROR inserting assigned to ';
 			return false;
 		}
-		if (!pm_data_insert_dependent_tasks($dependent_on,$project_task_id)) {
+/*		if (!pm_data_insert_dependent_tasks($dependent_on,$project_task_id)) {
 			db_rollback();
 			$feedback .= ' ERROR inserting assigned to ';
 			return false;
 		}
-		mail_followup($project_task_id,$group_project_id,false,1);
+*/		mail_followup($project_task_id,$group_project_id,false,1);
 		db_commit();
 		return $project_task_id;
 	}
@@ -424,6 +439,12 @@ function pm_data_update_task ($group_project_id,$project_task_id,$start_month,$s
 	}
 
 	db_begin();
+	db_query("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE");
+	if (!pm_data_update_dependent_tasks($dependent_on,$project_task_id)) {
+		db_rollback();
+		$feedback .= ' ERROR updating dependent tasks ';
+		return false;
+	}
 
 	/*
 		If changing subproject, verify the new subproject belongs to this project
@@ -478,11 +499,6 @@ function pm_data_update_task ($group_project_id,$project_task_id,$start_month,$s
 	if ($details != '') 
 		{ pm_data_create_history ('details',htmlspecialchars($details),$project_task_id);  }
 
-	if (!pm_data_update_dependent_tasks($dependent_on,$project_task_id)) {
-		db_rollback();
-		$feedback .= ' ERROR updating dependent tasks ';
-		return false;
-	}
 	if (!pm_data_update_assigned_to($assigned_to,$project_task_id)) {
 		db_rollback();
 		$feedback .= ' ERROR updating assigned to ';
@@ -588,7 +604,7 @@ function mail_followup($project_task_id,$group_project_id,$more_addresses=false,
 		}
 		$body .= "\n\n-------------------------------------------------------".
 			"\nFor more info, visit:".
-			"\n\nhttps://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
+			"\n\nhttp://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
 				db_result($result,0,'project_task_id')."&group_id=".
 				db_result($result,0,'group_id')."&group_project_id=".db_result($result,0,'group_project_id');
 		
@@ -607,7 +623,7 @@ function mail_followup($project_task_id,$group_project_id,$more_addresses=false,
 			$to .= ', ' . db_result($result,0,'new_task_address');
 		}
 		
-		util_send_mail($to,$subject,$body);
+		util_send_message($to,$subject,$body);
 		
 		$feedback .= " Task Update Sent ";
 		

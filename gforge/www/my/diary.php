@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('vote_function.php');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	$u =& session_get_user();
 
@@ -61,7 +61,7 @@ if (user_isloggedin()) {
 						"\nTo stop monitoring this user, login to ".$GLOBALS['sys_name']." and visit: ".
 						"\nhttp://$GLOBALS[sys_default_domain]/developer/monitor.php?diary_user=". user_getid();
 
-						util_send_mail($to, $subject, $body, $to, $tolist); 
+						util_send_message($to, $subject, $body, $to, $tolist); 
 
 						$feedback .= " email sent - ($rows) people monitoring ";
 
@@ -136,7 +136,7 @@ if (user_isloggedin()) {
 
 	<P>';
 
-	echo $HTML->box1_top('Existing Diary And Note Entries');
+	echo $HTML->boxTop('Existing Diary And Note Entries');
 
 	$sql="SELECT * FROM user_diary WHERE user_id='". user_getid() ."' ORDER BY id DESC";
 
@@ -150,7 +150,7 @@ if (user_isloggedin()) {
 		echo '&nbsp;</TD></TR>';
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="'. $PHP_SELF .'?diary_id='.
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="'. $PHP_SELF .'?diary_id='.
 				db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</A></TD>'.
 				'<TD>'. date($sys_datefmt, db_result($result,$i,'date_posted')).'</TD></TR>';
 		}
@@ -158,7 +158,7 @@ if (user_isloggedin()) {
 		<TR><TD COLSPAN="2" BGCOLOR="'.$HTML->COLOR_CONTENT_BACK.'">&nbsp;</TD></TR>';
 	}
 
-	echo $HTML->box1_bottom();
+	echo $HTML->boxBottom();
 
 	echo site_user_footer(array());
 

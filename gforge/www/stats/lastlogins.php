@@ -37,7 +37,7 @@ $title[]='Date';
 $title[]='Username';
 $title[]='Source IP';
 
-echo html_build_list_table_top($title);
+echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row_logins = db_fetch_array($res_logins)) {
 	print '<TR>';
@@ -47,7 +47,7 @@ while ($row_logins = db_fetch_array($res_logins)) {
 	print '</TR>';
 }
 
-print '</table>';
+echo $GLOBALS['HTML']->listTableBottom();
 
 $HTML->footer(array());
 

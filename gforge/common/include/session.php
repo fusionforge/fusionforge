@@ -27,45 +27,10 @@ $G_SESSION = false;
  *	@return cookie value
  */
 function session_build_session_cookie($user_id) {
-
-	$session_serial = $user_id.'-'.time().'-'.$GLOBALS['REMOTE_ADDR'].'-'.$GLOBALS['HTTP_USER_AGENT'];
-	$td = mcrypt_module_open($GLOBALS['sys_session_cypher'], "", $GLOBALS['sys_session_cyphermode'], "");
-	$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
-	mcrypt_generic_init($td, $GLOBALS['sys_session_key'], $iv);
-	$encrypted_session_serial = mcrypt_generic($td, $session_serial);
-	mcrypt_generic_end($td);
-	$session_serial_hash = md5($encrypted_session_serial.$GLOBALS['sys_session_key']);
-	$session_serial_cookie = base64_encode($encrypted_session_serial).'-'.$session_serial_hash;
-
+	$session_serial = $user_id.'-*-'.time().'-*-'.$GLOBALS['REMOTE_ADDR'].'-*-'.$GLOBALS['HTTP_USER_AGENT'];
+	$session_serial_hash = md5($session_serial.$GLOBALS['sys_session_key']);
+	$session_serial_cookie = base64_encode($session_serial).'-*-'.$session_serial_hash;
 	return $session_serial_cookie;
-}
-
-/**
- *	session_build_username_cookie() - Construct username cookie
- *
- *	@param  string username of the logged in user
- *	@return cookie value
- */
-function session_build_username_cookie($username) {
-
-	// check if operating in plaintext or encrytped mode
-	//
-	if ($GLOBALS['sys_username_cookie_plaintext']) {
-
-    return $username;
-
-	} else {
-
-		$td = mcrypt_module_open($GLOBALS['sys_username_cookie_cypher'], "", $GLOBALS['sys_username_cookie_cyphermode'], "");
-		$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
-		mcrypt_generic_init($td, $GLOBALS['sys_username_cookie_key'], $iv);
-		$encrypted_username = mcrypt_generic($td, $username);
-		mcrypt_generic_end($td);
-		$session_username_cookie = base64_encode($encrypted_username);
-
-		return $session_username_cookie;
-
-	} // else
 }
 
 /**
@@ -77,7 +42,7 @@ function session_build_username_cookie($username) {
  *	@return hash
  */
 function session_get_session_cookie_hash($session_cookie) {
-	list ($junk, $hash) = explode('-', $session_cookie);
+	list ($junk, $hash) = explode('-*-', $session_cookie);
 	return $hash;
 }
 
@@ -89,21 +54,15 @@ function session_get_session_cookie_hash($session_cookie) {
  */
 function session_check_session_cookie($session_cookie) {
 
-	list ($encrypted_session_serial, $hash) = explode('-', $session_cookie);
-	$encrypted_session_serial = base64_decode($encrypted_session_serial);
-	$new_hash = md5($encrypted_session_serial.$GLOBALS['sys_session_key']);
+	list ($session_serial, $hash) = explode('-*-', $session_cookie);
+	$session_serial = base64_decode($session_serial);
+	$new_hash = md5($session_serial.$GLOBALS['sys_session_key']);
 
 	if ($hash != $new_hash) {
 		return false;
 	}
 
-	$td = mcrypt_module_open($GLOBALS['sys_session_cypher'], "", $GLOBALS['sys_session_cyphermode'], "");
-	$iv = mcrypt_create_iv(mcrypt_enc_get_iv_size ($td), MCRYPT_RAND);
-	mcrypt_generic_init($td, $GLOBALS['sys_session_key'], $iv);
-	$session_serial = mdecrypt_generic($td, $encrypted_session_serial);
-	mcrypt_generic_end($td);
-
-	list($user_id, $time, $ip, $user_agent) = explode('-', $session_serial, 4);
+	list($user_id, $time, $ip, $user_agent) = explode('-*-', $session_serial, 4);
 
 	if (!session_check_ip($ip, $GLOBALS['REMOTE_ADDR'])) {
 		return false;
@@ -133,11 +92,6 @@ function session_logout() {
 	// NB: cookies must be deleted with the same scope parameters they were set with
 	//
 	session_cookie('session_ser', '');
-	session_cookie('username',
-								 '',
-								 $GLOBALS['sys_username_cookie_urlspace'], 
-								 0);
-
 	return true;
 }
 
@@ -335,7 +289,7 @@ function session_redirect($loc) {
  *
  */
 function session_require($req) {
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 		exit_not_logged_in();	
 		//exit_permission_denied();
 	}
@@ -374,12 +328,13 @@ function session_require($req) {
  *	@return none
  */
 function session_set_new($user_id) {
-	global $G_SESSION;
+	global $G_SESSION,$session_ser;
 
 	// set session cookie
   //
 	$cookie = session_build_session_cookie($user_id);
 	session_cookie("session_ser", $cookie);
+	$session_ser=$cookie;
 
 	db_query("
 		INSERT INTO session (session_hash, ip_addr, time, user_id) 
@@ -407,12 +362,6 @@ function session_set_new($user_id) {
 		}
 	}
 
-	// set username cookie for *.hostname.tld, expiration set in local.inc
-	//
-	session_cookie('username', 
-								 session_build_username_cookie($G_SESSION->getUnixName()),
-								 $GLOBALS['sys_username_cookie_urlspace'], 
-								 time() + $GLOBALS['sys_username_cookie_expiration']);
 }
 
 /**
@@ -508,10 +457,10 @@ function user_getid() {
 }
 
 /**
- *  user_isloggedin()
+ *  session_loggedin()
  *  See if user is logged in
  */
-function user_isloggedin() {
+function session_loggedin() {
 	global $G_SESSION;
 
 	if ($G_SESSION) {

@@ -2,7 +2,7 @@
 #  *
 #  * Korean message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -24,13 +24,13 @@
 #
 # 2002-04-30	Soon-Son Kwon	<kss@kldp.org>
 #   * Changed fontname from gulim to 굴림체 to prevent ugly screen on mozilla
-#   * Modified to use $GLOBALS[sys_name] instead of hardcoded "SourceForge"
+#   * Modified to use $GLOBALS[sys_name] instead of hardcoded "GForge"
 #     as much as possible 
 #   * Added/Modified/Updated translation for many pages including messge
 #     with parameters
 #
 # 2002-05-16	Soon-Son Kwon	<kss@kldp.org>
-#   * Removed most (not all yet) hardcoded "SourceForge"
+#   * Removed most (not all yet) hardcoded "GForge"
 #     and changed them to $GLOBALS[sys_name]
 #   * More i18n on people, account, news, top projects
 #   * i18n'ing user registration page done
@@ -48,7 +48,7 @@
 about_foundries	about_blurb	Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >저희에게 연락해</a> 주십시오.
 about_foundries	foundries_list	시스템의 모든 Foundry에 관한 정보입니다. 어떤 것은 다른 것에 비해 좀더 완성도가 높습니다. 만약 여러분께서 공헌하고자 하시는 Foundry가 있다면 해당 Foundry의 관리자에게 연락하시기 바랍니다.
 account	title	사용자 등록 정보
-account_change_email	message	$3의 이메일 주소를 변경하는 과정입니다.\n다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n\n<https://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
+account_change_email	message	$3의 이메일 주소를 변경하는 과정입니다.\n다음 URL을 방문하셔서 이메일 주소를 변경하십시오.\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $3
 account_change_email	section	사용자 등록 정보
 account_change_email	subject	$1 확인
 account_change_email	title	이메일 주소 변경
@@ -74,7 +74,7 @@ account_login	sslnotice	<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 �
 account_login	login	SSL을 통해 로그인하기
 account_login	lostpw	[비밀번호를 잊으셨나요?]
 account_login	newaccount	[새로운 계정 만들기(가입하기)]
-account_lostpw	message	$3 사이트의 누군가가 (아마도 본인?) 이메일을 이용한\n비밀번호 변경을 요청하였습니다. 만약 여러분이 직접 하신 것이 아니라면\n이 메시지는 그냥 무시하십시오. 그러면 아무것도 바뀌지 않습니다.\n\n만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십시오.\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
+account_lostpw	message	$3 사이트의 누군가가 (아마도 본인?) 이메일을 이용한\n비밀번호 변경을 요청하였습니다. 만약 여러분이 직접 하신 것이 아니라면\n이 메시지는 그냥 무시하십시오. 그러면 아무것도 바뀌지 않습니다.\n\n만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십시오.\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
 account_lostpw	subject	$1 확인
 account_lostpw	title	비밀번호를 잊으셨습니까?
 account_lostpw	notify	<P>입력하신 이메일 주소로 메일을 보냈습니다. 비밀번호를 변경하시려면 지금 보낸 메일의 내용을 참고하시기 바랍니다. <P><A href="/">[ 홈으로 ]</A>
@@ -94,16 +94,16 @@ account_register	siteupdate	사이트 업데이트에 관한 소식 메일로 받기 <I>(트래픽이
 account_register	communitymail	커뮤니티 관련 메일 받기. <I>(트래픽 별로 없음.)</I>
 account_register	mandatory	별표(*)가 있는 부분은 필수 항목입니다.
 account_register	register	등록하기
-account_unsubscribe	all_mailings	모든 SourceForge 메일 및 공지사항
-account_unsubscribe	site_mailings	SourceForge 메일
-account_verify	title	SourceForge 사용자 확인
+account_unsubscribe	all_mailings	모든 GForge 메일 및 공지사항
+account_unsubscribe	site_mailings	GForge 메일
+account_verify	title	GForge 사용자 확인
 account_verify	verify_blurb	<p>사용자 등록 절차를 완료하시려면 지금 로그인하십시오. 일반 로그인 기능은 곧바로 활성화됩니다.</p>
 conf	content_encoding	EUC-KR
 conf	default_font	굴림체,verdana,arial,helvetica,sans-serif
 conf	language_code	ko
 conf	language_id	22
-contact	about_blurb	<p>이것은 <b>SourceForge.net</b>의 연락 페이지입니다. -- 이곳에서 호스팅되고 있는 프로젝트에 대해 문제가 있다면 해당 프로젝트의 버그 트래킹 시스템이나 기술지원 관리자 기능을 활용하십시오. 이러한 기능들은 해당 프로젝트의 홈페이지인 sourceforge.net/projects/&lt;프로젝트 이름&gt; 을 방문하시면 이용하실 수 있습니다.</p><p>기술지원 요청이나 버그 리포트 혹은 SourceForge의 <A href="staff.php">staff</a>들과 직접 연락하고 싶으시다면, 적절한 방법을 이용하여 주시기 바랍니다.</p><ul><li>여러분의 프로젝트나 계정에 대한 지원요청은 <a href="/support/?func=addsupport&group_id=1">SourceForge 기술지원 관리자</a>를 방문하십시오.</li><li>SourceForge에 버그를 발견하셨다면, <a href="/bugs/?func=addbug&group_id=1">SourceForge 버그 트래킹</a>을 이용하십시오.</li><li>보도자료 요청은 VA Linux Systems의 해당 담당자인 <a href="mailto:eureka@valinux.com">Eureka Endo</a>에게 연락하시면 됩니다.</li></ul>
-contact	title	SourceForge와 연락하기
+contact	about_blurb	<p>이것은 <b>GForge.net</b>의 연락 페이지입니다. -- 이곳에서 호스팅되고 있는 프로젝트에 대해 문제가 있다면 해당 프로젝트의 버그 트래킹 시스템이나 기술지원 관리자 기능을 활용하십시오. 이러한 기능들은 해당 프로젝트의 홈페이지인 sourceforge.net/projects/&lt;프로젝트 이름&gt; 을 방문하시면 이용하실 수 있습니다.</p><p>기술지원 요청이나 버그 리포트 혹은 GForge의 <A href="staff.php">staff</a>들과 직접 연락하고 싶으시다면, 적절한 방법을 이용하여 주시기 바랍니다.</p><ul><li>여러분의 프로젝트나 계정에 대한 지원요청은 <a href="/support/?func=addsupport&group_id=1">GForge 기술지원 관리자</a>를 방문하십시오.</li><li>GForge에 버그를 발견하셨다면, <a href="/bugs/?func=addbug&group_id=1">GForge 버그 트래킹</a>을 이용하십시오.</li><li>보도자료 요청은 VA Linux Systems의 해당 담당자인 <a href="mailto:eureka@valinux.com">Eureka Endo</a>에게 연락하시면 됩니다.</li></ul>
+contact	title	GForge와 연락하기
 cvs	section	프로젝트: $1
 cvs	title	CVS
 cvs	anoncvs	<P><B>익명 CVS 사용 방법</B> <P>다음 방법을 사용하시면 익명으로 이 프로젝트의 CVS 저장소로부터 소스코드를 체크아웃하실 수 있습니다. 체크아웃하고자 하는 모듈을 반드시 <I>modulename</I>부분에 써 주셔야 합니다. <I>anonymous</I>에 대한 비밀번호를 물어보면 그냥 Enter를 누르시면 됩니다.
@@ -166,8 +166,8 @@ frs	file_rel_date	날짜
 frs	file_version	버전
 frs	latest_file_releases	최근 파일 릴리즈
 general	return	[$1로 되돌아가기]
-general	sitename	SourceForge
-general	footer	이것은 Debian에서 작동하는 SourceForge입니다. 저작권 등의 자세한 사항은 <a href="/about.php">이곳</a>을 참고하십시오.
+general	sitename	GForge
+general	footer	이것은 Debian에서 작동하는 GForge입니다. 저작권 등의 자세한 사항은 <a href="/about.php">이곳</a>을 참고하십시오.
 group	developer_info	개발자 정보
 group	developers	개발자
 group	long_bugs	버그 트래킹
@@ -210,10 +210,10 @@ home	about_blurb	$1는 <B><A href="http://www.opensource.org">Open Source</A> 개�
 home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	highest_ranked_users	활발한 사용자
 home	most_active_this_week	금주 가장 활발한 곳
-home	sfos	SourceForge OnSite
+home	sfos	GForge OnSite
 home	sourceforge_statistics	$1 통계
 home	top_project_downloads	최다 다운로드
-mail	provided_by	<P>메일링 리스트는 SourceForge에 알맞게 구현된 <A href="http://www.list.org">GNU Mailman</A>을 통해 운영됩니다.  멋진 소프트웨어를 만들어낸  Mailman과 <A href="http://www.python.org">Python</A> 개발자 여러분들께 감사드립니다.
+mail	provided_by	<P>메일링 리스트는 GForge에 알맞게 구현된 <A href="http://www.list.org">GNU Mailman</A>을 통해 운영됩니다.  멋진 소프트웨어를 만들어낸  Mailman과 <A href="http://www.python.org">Python</A> 개발자 여러분들께 감사드립니다.
 mail	section	프로젝트: $1
 mail	title	메일링 리스트
 mail_admin	section	메일링 리스트
@@ -223,7 +223,7 @@ mail_admin_add_list	title	리스트 추가
 mail_admin_change_status	section	메일링 리스트 관리
 mail_admin_change_status	title	리스트 관리 및 갱신
 menu	about_foundries	Foundry 소개
-menu	about_sourceforge	SourceForge 소개
+menu	about_sourceforge	GForge 소개
 menu	account_maintenance	사용자 등록 정보
 menu	bookmark_page	책갈피
 menu	change_my_theme	테마 변경
@@ -275,7 +275,7 @@ news_main	title	새소식
 news_submit	post_blurb	여러분이 프로젝트 관리자라면 새소식을 등록하실 수 있습니다. 만약 다른 사람의 도움이 필요하다면 "도움 요청" 메시지를 올리실 수도 있습니다.<P><B>여러분의 프로젝트</B>에 관한 모든 새소식은 곧바로 프로젝트 요약 페이지에 올라가게 됩니다. 만약 $1 홈페이지에 새소식을 올리시려면 새소식 관리 팀으로부터 승인을 받아야 합니다.
 news_submit	section	새소식
 news_submit	title	새소식 올리기: $1
-partners	about_blurb	<P>SourceForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
+partners	about_blurb	<P>GForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
 people	about_blurb	<P>이곳은 비영리 목적의 자원봉사자들을 위한 공간이며 상업적인 목적으로의 활용은 금지합니다.<P>이곳에 올린 글은 2주 동안 유효하고, 만약 필요없게 되면 글쓴이가 그 전에라도 삭제할 수 있습니다. (물론 만료된 메시지를 다시 올릴 수도 있습니다.)<P>여러분의 도움을 필요로 하는 프로젝트들이 있는지 둘러 보십시오.<P>만약 여러분이 프로젝트 관리자라면 로그인하신 후 여러분이 관리하고 계시는 프로젝트로 가신 후 그곳에서 글을 올리셔야 합니다.<P>만약 새로운 Job을 제안하고 싶으시다면 기술지원 관리자 기능을 이용하여 주십시오.<P>
 people	section	멤버 구함
 people	title	도움이 필요한 프로젝트
@@ -383,7 +383,7 @@ snippet_package	title	코드 패키지 만들기
 snippet_submit	section	코드 라이브러리
 snippet_submit	title	코드 제출
 softwaremap	title	Trove
-staff	about_blurb	<P><h2>SourceForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">SourceForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for SourceForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on SourceForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the SourceForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for SourceForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the SourceForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
+staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 survey	title	설문조사: $1
 survey_admin	section	설문조사 도구
 survey_admin	title	관리하기
@@ -409,7 +409,7 @@ survey_survey	section	설문조사
 survey_survey	title	설문조사 보기
 survey_survey_resp	section	설문조사 도구
 survey_survey_resp	title	설문조사 처리 및 반응
-thanks	about_blurb	<P><h2>SourceForge Acknowledgements</h2>The Developers of SourceForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
+thanks	about_blurb	<P><h2>GForge Acknowledgements</h2>The Developers of GForge would like to thank the following people for their support and encouragement:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	사용자 등록 정보
 themes	title	테마 보기/바꾸기
 top	about_blurb	이곳 $1에서 운영되고 있는 여러 프로젝트들에 대한 사용 기록을 집계하여 여러가지 분류를 통해 보실 수 있도록 하고 있습니다.

@@ -2,7 +2,7 @@
 #  *
 #  * Thai message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -63,7 +63,7 @@ group	short_summary	สรุป
 group	short_support	บริการ
 group	short_survey	สำรวจ
 home	highest_ranked_users	คนคะแนนสูงสุด
-home	about_blurb	  SourceForge เป็น <B>บริการฟรีแก่นักพัฒนา <A href="http://opensource.thai.net">โอเพ่นซอร์ส</A></B> โดยมีบริการที่สะดวกและดีที่สุด ทั้ง ระบบ CVS, จดหมายกลุ่ม, ระบบติดตามบั๊ก, กระดานสนทนา, ระบบจัดการภารกิจ, ให้เนื้อที่เว็บไซต์,  ระบบจัดเก็บไฟล์ถาวร, มีการสำรองไฟล์ทั้งหมด, รวมทั้งให้บริหารระบบต่าง ๆ ได้ผ่านเว็บทั้งหมด. <BR> &nbsp; <P> <B>การมีส่วนร่วม และป้อนกลับกับไซต์</B> <P> เพื่อให้ได้รับประโยชน์จาก SourceForge สูงสุด, คุณจำเป็นต้อง <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>. คุณจะได้รับอนุญาตให้เข้ามีส่วนร่วมเต็มที่ในทุกสิ่งที่เรามีบริการ. คุณสามารถเข้าชมไซต์ไปเรื่อย ๆ โดยไม่จำเป็นต้องลงทะเบียน แต่คุณอาจไม่สามารถเข้าใช้บริการบางอย่างได้ครบทั้งหมด. <P> &nbsp; <BR> <B>ตั้งโปรเจกต์ของคุณเอง</B> <P> <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>, แล้ว <A HREF="/account/login.php">ลงบันทึกเข้า</A> และสุดท้ายก็ <A HREF="/register/">ตั้งโปรเจกต์ใหม่ของคุณเอง</A>. <P> ขอบคุณครับ... ขอให้สนุกกับบริการของเรา.
+home	about_blurb	  GForge เป็น <B>บริการฟรีแก่นักพัฒนา <A href="http://opensource.thai.net">โอเพ่นซอร์ส</A></B> โดยมีบริการที่สะดวกและดีที่สุด ทั้ง ระบบ CVS, จดหมายกลุ่ม, ระบบติดตามบั๊ก, กระดานสนทนา, ระบบจัดการภารกิจ, ให้เนื้อที่เว็บไซต์,  ระบบจัดเก็บไฟล์ถาวร, มีการสำรองไฟล์ทั้งหมด, รวมทั้งให้บริหารระบบต่าง ๆ ได้ผ่านเว็บทั้งหมด. <BR> &nbsp; <P> <B>การมีส่วนร่วม และป้อนกลับกับไซต์</B> <P> เพื่อให้ได้รับประโยชน์จาก GForge สูงสุด, คุณจำเป็นต้อง <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>. คุณจะได้รับอนุญาตให้เข้ามีส่วนร่วมเต็มที่ในทุกสิ่งที่เรามีบริการ. คุณสามารถเข้าชมไซต์ไปเรื่อย ๆ โดยไม่จำเป็นต้องลงทะเบียน แต่คุณอาจไม่สามารถเข้าใช้บริการบางอย่างได้ครบทั้งหมด. <P> &nbsp; <BR> <B>ตั้งโปรเจกต์ของคุณเอง</B> <P> <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>, แล้ว <A HREF="/account/login.php">ลงบันทึกเข้า</A> และสุดท้ายก็ <A HREF="/register/">ตั้งโปรเจกต์ใหม่ของคุณเอง</A>. <P> ขอบคุณครับ... ขอให้สนุกกับบริการของเรา.
 frs	latest_file_releases	ไฟล์ออกใหม่ล่าสุด
 menu	login	ลงบันทึกเข้าด้วย SSL
 menu	logout	ลงบันทึกออก
@@ -80,7 +80,7 @@ menu	project_summary	สรุปโปรเจกต์
 group	public_area	พื้นที่สาธารณะ
 menu	search	ค้นหา
 menu	software_map	แผนที่ซอฟต์แวร์
-home	sourceforge_statistics	สถิติ SourceForge
+home	sourceforge_statistics	สถิติ GForge
 menu	top_projects	โปรเจกต์สุดยอด
 home	top_project_downloads	โปรเจกต์ดาวโหลดสูงสุด
 conf	content_encoding	tis-620

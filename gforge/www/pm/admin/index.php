@@ -136,7 +136,7 @@ if ($group_id && user_ismember($group_id,'P2')) {
 			$title_arr[]='Name';
 			$title_arr[]='Update';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
@@ -146,7 +146,7 @@ if ($group_id && user_ismember($group_id,'P2')) {
 					<INPUT TYPE="HIDDEN" NAME="group_project_id" VALUE="'.db_result($result,$i,'group_project_id').'">
 					<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">';
 				echo '
-					<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>
+					<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>
 						<FONT SIZE="-1">
 						<B>Is Public?</B><BR>
 						<INPUT TYPE="RADIO" NAME="is_public" VALUE="1"'.((db_result($result,$i,'is_public')=='1')?' CHECKED':'').'> Yes<BR>
@@ -158,14 +158,16 @@ if ($group_id && user_ismember($group_id,'P2')) {
 						<FONT SIZE="-1">
 						<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Update">
 					</TD></TR>
-					<TR BGCOLOR="'.html_get_alt_row_color($i) .'"><TD COLSPAN="3">
+					<TR '.$GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD COLSPAN="3">
 						<B>Description:</B><BR>
 						<INPUT TYPE="TEXT" NAME="description" VALUE="'.
 						db_result($result,$i,'description') .'" SIZE="40" MAXLENGTH="80"><BR>
 					</TD></TR>
 					</FORM>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 
 		pm_footer(array());

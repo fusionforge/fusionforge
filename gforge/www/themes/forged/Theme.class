@@ -1,31 +1,11 @@
-<?php   
-/**
-  *
-  * "Forged Metal" Web Theme (default)
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id: Theme.class,v 1.2 2001/05/22 16:06:38 pfalcon Exp $
-  *
-  */
-
-
-/*
-
-	Theme class, extends Tim's basic Error class
-
-	Geoffrey Herteg, August 28, 2000
-
-*/
-
+<?php
 
 class Theme extends Layout {
 
-	function Theme() {
-		// Parent constructor
-		$this->Layout();
+    function Theme() {
+        // Parent constructor
+        $this->Layout();
 	}
 }
+
 ?>

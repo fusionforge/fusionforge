@@ -97,20 +97,20 @@ echo db_error();
 
 db_commit();
 
-echo "Error: ".db_error();
+echo db_error();
 
 //
 //	populate stats_site table
 //
 echo "\n\nBeginning stats_site ".date('Ymd H:i:s',time());
-include('/usr/lib/sourceforge/lib/stats_site.inc');
+include('cronjobs/stats_site.inc');
 site_stats_day($year,$month,$day);
 
 //
 //	populate stats_project table
 //
 echo "\n\nBeginning stats_project ".date('Ymd H:i:s',time());
-include('/usr/lib/sourceforge/lib/stats_projects.inc');
+include('cronjobs/stats_projects.inc');
 project_stats_day($year,$month,$day);
 
 ?>

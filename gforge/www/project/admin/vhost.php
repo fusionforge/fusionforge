@@ -120,12 +120,10 @@ $res_db = db_query("
 	
 if (db_numrows($res_db) > 0) {
 
-        print '<table width="50%"><tr><td>';
-
-       	$title=array();
-       	$title[]='Virtual Host';
-       	$title[]='Operations';
-	echo html_build_list_table_top($title);
+	$title=array();
+	$title[]='Virtual Host';
+	$title[]='Operations';
+	echo $GLOBALS['HTML']->listTableTop($title);
 
 	while ($row_db = db_fetch_array($res_db)) {
 
@@ -134,11 +132,10 @@ if (db_numrows($res_db) > 0) {
 			<td>[ <b><a href="'.$PHP_SELF.'?group_id='.$group->getID().'&vhostid='.$row_db['vhostid'].'&deletevhost=1">Delete</a> </b>]
 			</tr>	
 		';
-			 
-	}
-	print ' </table>';
 
-        print '</td></tr></table>';
+	}
+
+	echo $GLOBALS['HTML']->listTableBottom();
 
 } else {
 	echo '<p>No VHOSTs defined</p>';

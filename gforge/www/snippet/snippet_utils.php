@@ -119,7 +119,7 @@ function snippet_show_package_snippets($version) {
 	$title_arr[]='Title';
 	$title_arr[]='Author';
 
-	echo html_build_list_table_top ($title_arr,$links_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr,$links_arr);
 
 	if (!$result || $rows < 1) {
 		echo db_error();
@@ -132,7 +132,7 @@ function snippet_show_package_snippets($version) {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.db_result($result,$i,'snippet_version_id').
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.db_result($result,$i,'snippet_version_id').
 				'</TD><TD><A HREF="/snippet/download.php?type=snippet&id='.
 				db_result($result,$i,'snippet_version_id').'">'.
 				db_result($result,$i,'version').'</A></TD><TD>'.
@@ -140,7 +140,8 @@ function snippet_show_package_snippets($version) {
 				db_result($result,$i,'user_name').'</TD></TR>';
 		}
 	}
-	echo '</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
 
 }
 

@@ -70,11 +70,10 @@ echo '<h3>Statistics for Project Databases</h3>';
 
 if (db_numrows($res_db) > 0) {
 
-	echo '<table width="50%"><tr><td>';
 	$title=array();
 	$title[]='Type';
 	$title[]='Count';
-	echo html_build_list_table_top($title);
+	echo $GLOBALS['HTML']->listTableTop($title);
 
 	while ($row_db = db_fetch_array($res_db)) {
 
@@ -82,8 +81,7 @@ if (db_numrows($res_db) > 0) {
 
 	}
 
-	echo '</table>';
-	echo '</td></tr></table>';
+	echo $GLOBALS['HTML']->listTableBottom();
 
 } else {
 	echo '<p>No databases defined</p>';

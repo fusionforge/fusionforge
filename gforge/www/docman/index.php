@@ -22,7 +22,7 @@ require_once('pre.php');
 if ($group_id) {
 
 	if (!$language_id) {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$language_id = $LUSER->getLanguage();
 		} else {
 			$language_id = 1;
@@ -46,7 +46,7 @@ if ($group_id) {
 		print "<hr>";
 		// get the groupings and display them with their members.
 		while ($row = db_fetch_array($result)) {
-			$query = "select description, docid, title, doc_group "
+			$query = "select description, docid, title, doc_group, filename "
 				."from doc_data "
 				."where doc_group = '".$row['doc_group']."' "
 				."and stateid='1' "
@@ -65,8 +65,8 @@ if ($group_id) {
 			if (!(db_numrows($subresult) < 1)) {
 				print "<p><b>".$row['groupname']."</b>\n<ul>\n";
 				while ($subrow = db_fetch_array($subresult)) {
-					print "<li><a href=\"display_doc.php?docid=".$subrow['docid']."&group_id=".$group_id."\">".$subrow['title']."</a>".
-					"<BR><i>Description:</i> ".$subrow['description']; 
+					print "<li><a href=\"display_doc.php/$subrow[docid]/$subrow[filename]\">$subrow[title]</a>".
+					"<BR><i>Description:</i> ".$subrow['description'];
 				}
 				print "</ul>\n\n";
 

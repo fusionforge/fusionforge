@@ -36,7 +36,7 @@ if ($loginname) {
 
 		$message = stripcslashes($Language->getText('account_lostpw', 'message', array($GLOBALS['HTTP_HOST'], $confirm_hash, $GLOBALS[sys_name])));
 
-		util_send_mail($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS[sys_name]),$message);
+		util_send_message($u->getEmail(),$Language->getText('account_lostpw', 'subject', $GLOBALS[sys_name]),$message);
 
 		$HTML->header(array('title'=>"Lost Password Confirmation",'pagename'=>'account_lostpw'));
 
@@ -63,7 +63,7 @@ echo $Language->getText('account_lostpw','warn');
 <INPUT type="submit" name="submit" value="<? echo $Language->getText('account_lostpw','sendhash'); ?>">
 </FORM>
 
-<P><A href="/"><?php echo $Language->getText('general', 'return'); ?></A>
+<P><A href="/"><?php echo $Language->getText('general', 'return', $GLOBALS[sys_name]); ?></A>
 
 <?php
 

@@ -1,0 +1,252 @@
+<?php
+/**
+ * GForge File Release Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+require_once('common/include/Error.class');
+
+class FRSPackage extends Error {
+
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var  array   $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The Group object.
+	 *
+	 * @var  object  $Group
+	 */
+	var $Group; //group object
+
+	/**
+	 *  Constructor.
+	 *
+	 *  @param  object  The Group object to which this forum is associated
+	 *  @param  int  The package_id
+	 *  @param  array   The associative array of data
+	 */
+	function FRSPackage(&$Group, $package_id=false, $arr=false) {
+		$this->Error();
+		if (!$Group || !is_object($Group)) {
+			$this->setError('FRSPackage:: No Valid Group Object');
+			return false;
+		}
+		if ($Group->isError()) {
+			$this->setError('FRSPackage:: '.$Group->getErrorMessage());
+			return false;
+		}
+		$this->Group =& $Group;
+
+		if ($package_id) {
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($package_id)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				if ($this->data_array['group_id'] != $this->Group->getID()) {
+					$this->setError('Group_id in db result does not match Group Object');
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	function create($name) {
+		if (strlen($name) < 3) {
+			$this->setError('FRSPackage Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (!util_is_valid_filename($name)) {
+			$this->setError('FRSPackage::Update: Package Name can only be alphanumeric');
+		}
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$sql="INSERT INTO frs_package(group_id,name,status_id)
+			VALUES ('".$this->Group->getId()."','$name','1')";
+
+		db_begin();
+		$result=db_query($sql);
+		if (!$result) {
+			db_rollback();
+			$this->setError('FRSPackage::create() Error Adding Package: '.db_error());
+			return false;
+		}
+		$this->package_id=db_insertid($result,'frs_package','package_id');
+		if (!$this->fetchData($this->package_id)) {
+			db_rollback();
+			return false;
+		} else {
+			db_commit();
+			return true;
+		}
+	}
+
+	/**
+	 *  fetchData() - re-fetch the data for this Package from the database
+	 *
+	 *  @param  int  The artifact type ID
+	 *  @return true/false
+	 */
+	function fetchData($package_id) {
+		$res=db_query("SELECT * FROM frs_package
+			WHERE package_id='$package_id'
+			AND group_id='". $this->Group->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('FRSPackage::fetchData()  Invalid package_id'.db_error());
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *  getGroup() - get the Group object this ArtifactType is associated with
+	 *
+	 *  @return the Group object
+	 */
+	function &getGroup() {
+		return $this->Group;
+	}
+
+	/**
+	 *  getID() - get this package_id
+	 *
+	 *  @return the id of this package
+	 */
+	function getID() {
+		return $this->data_array['package_id'];
+	}
+
+	/**
+	 *  getName - get the name of this package.
+	 *
+	 *  @return string  The name of this package.
+	 */
+	function getName() {
+		return $this->data_array['name'];
+	}
+
+	/**
+	 *  getStatus - get the status of this package.
+	 *
+	 *  @return int	The status.
+	 */
+	function getStatus() {
+		return $this->data_array['status_id'];
+	}
+
+	function setMonitor() {
+		if (!session_loggedin()) {
+			$this->setError('You Can Only Monitor If You Are Logged In');
+			return false;
+		}
+		$sql="SELECT * FROM filemodule_monitor
+			WHERE user_id='".user_getid()."' 
+			AND filemodule_id='".$this->getID()."';";
+		$result = db_query($sql);
+
+		if (!$result || db_numrows($result) < 1) {
+			/*
+				User is not already monitoring thread, so
+				insert a row so monitoring can begin
+			*/
+			$sql="INSERT INTO filemodule_monitor (filemodule_id,user_id)
+				VALUES ('".$this->getID()."','".user_getid()."')";
+
+			$result = db_query($sql);
+
+			if (!$result) {
+				$this->setError('Unable to add monitor: '.db_error());
+				return false;
+			}
+
+		}
+		return true;
+	}
+
+	function stopMonitor() {
+		if (!session_loggedin()) {
+			$this->setError('You Can Only Monitor If You Are Logged In');
+			return false;
+		}
+		$sql="DELETE FROM filemodule_monitor
+			WHERE user_id='".user_getid()."' 
+			AND filemodule_id='".$this->getID()."';";
+		return db_query($sql);
+	}
+
+	function isMonitoring() {
+		if (!session_loggedin()) {
+			return false;
+		}
+		$sql="SELECT * FROM filemodule_monitor
+			WHERE user_id='".user_getid()."' 
+			AND filemodule_id='".$this->getID()."';";
+
+		$result = db_query($sql);
+
+		if (!$result || db_numrows($result) < 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	function &getMonitorIDs() {
+		$res=db_query("SELECT user_id 
+			FROM filemodule_monitor 
+			WHERE filemodule_id='".$this->getID()."'");
+		return util_result_column_to_array($res);
+	}
+
+	function update($name,$status) {
+
+		if (strlen($name) < 3) {
+			$this->setError('Package Name Must Be At Least 3 Characters');
+			return false;
+		}
+
+		if (!util_is_valid_filename($name)) {
+			$this->setError('FRSPackage::Update: Package Name can only be alphanumeric');
+		}
+
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$res=db_query("UPDATE frs_package SET
+			name='$name',
+			status_id='$status'
+			WHERE group_id='".$this->Group->getID()."'
+			AND package_id='".$this->getID()."'");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('FRSPackage::update() Error On Update: '.db_error());
+			return false;
+		}
+		return true;
+
+	}
+
+}
+
+?>

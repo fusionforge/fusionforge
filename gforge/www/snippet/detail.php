@@ -59,7 +59,7 @@ if ($type=='snippet') {
 		$title_arr[]='Author';
 		$title_arr[]='Delete';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		/*
 			get the newest version of this snippet, so we can display its code
@@ -68,14 +68,14 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.db_result($result,$i,'snippet_version_id').
+				<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD>'.db_result($result,$i,'snippet_version_id').
 				'</TD><TD><A HREF="/snippet/download.php?type=snippet&id='.
 				db_result($result,$i,'snippet_version_id').'"><B>'.
 				db_result($result,$i,'version').'</B></A></TD><TD>'. 
 				date($sys_datefmt,db_result($result,$i,'date')).'</TD><TD>'.
 				db_result($result,$i,'user_name').'</TD><TD ALIGN="MIDDLE"><A HREF="/snippet/delete.php?type=snippet&snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
-				'">' . html_image("images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
+				'">' . html_image("ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
 
 				if ($i != ($rows - 1)) {
 					echo '
@@ -83,7 +83,8 @@ if ($type=='snippet') {
 					nl2br(db_result($result,$i,'changes')).'</TD></TR>';
 				}
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
 		<P>
@@ -153,7 +154,7 @@ if ($type=='snippet') {
 		$title_arr[]='Author';
 		$title_arr[]='Edit/Del';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		/*
 			determine the newest version of this package, 
@@ -163,19 +164,20 @@ if ($type=='snippet') {
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
-			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><A HREF="/snippet/detail.php?type=packagever&id='.
+			<TR '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><TD><A HREF="/snippet/detail.php?type=packagever&id='.
 				db_result($result,$i,'snippet_package_version_id').'"><B>'.
 				db_result($result,$i,'version').'</B></A></TD><TD>'.
 				date($sys_datefmt,db_result($result,$i,'date')).'</TD><TD>'.
 				db_result($result,$i,'user_name').
 				'</TD><TD ALIGN="MIDDLE"><A HREF="/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
-				'">' . html_image("images/ic/pencil.png","20","25",array("BORDER"=>"0")) . 
+				'">' . html_image("ic/pencil.png","20","25",array("BORDER"=>"0")) . 
 				'</A> &nbsp; &nbsp; &nbsp; <A HREF="/snippet/delete.php?type=package&snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
-				'">' . html_image("images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
+				'">' . html_image("ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
 		<P>

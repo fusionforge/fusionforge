@@ -10,25 +10,25 @@ use vars qw/$dbh @reqlist $thdir $thname/ ;
 
 sub debug ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include all the predefined functions 
+require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functions 
 
 &db_connect ;
 
 if ($#ARGV < 1) {
     debug "Usage: sf-register-theme <dirname> <theme name>" ;
-    debug "The theme must be in /usr/lib/sourceforge/www/themes/<dirname>/" ;
+    debug "The theme must be in /usr/lib/gforge/www/themes/<dirname>/" ;
     exit 1 ;
 }
 
 $thdir = $ARGV [0] ;
 $thname = $ARGV [1] ;
 
-unless (-d "/usr/lib/sourceforge/www/themes/$thdir") {
-    debug "The directory /usr/lib/sourceforge/www/themes/$thdir does not exist" ;
+unless (-d "/usr/lib/gforge/www/themes/$thdir") {
+    debug "The directory /usr/lib/gforge/www/themes/$thdir does not exist" ;
     exit 1 ;
 }
-unless (-e "/usr/lib/sourceforge/www/themes/$thdir/Theme.class") {
-    debug "The file /usr/lib/sourceforge/www/themes/$thdir/Theme.class does not exist" ;
+unless (-e "/usr/lib/gforge/www/themes/$thdir/Theme.class") {
+    debug "The file /usr/lib/gforge/www/themes/$thdir/Theme.class does not exist" ;
     exit 1 ;
 }
 

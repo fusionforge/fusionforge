@@ -1,62 +1,74 @@
 <?php
 /**
-  *
-  * SourceForge Forums Facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
 
+
+/*
+    Message Forums
+    By Tim Perdue, Sourceforge, 11/99
+
+    Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
+
+    Complete OO rewrite by Tim Perdue 12/2002
+*/
 
 require_once('pre.php');
-require_once('../forum/forum_utils.php');
+require_once('www/forum/include/ForumHTML.class');
+require_once('common/forum/ForumFactory.class');
+require_once('common/forum/Forum.class');
 
 if ($group_id) {
-
-	forum_header(array('title'=>'Forums for '.group_getname($group_id),'pagename'=>'forum','sectionvals'=>array(group_getname($group_id))));
-
-	if (user_isloggedin() && user_ismember($group_id)) {
-		$public_flag='<3';
-	} else {
-		$public_flag='=1';
+	$g =& group_get_object($group_id);
+	if (!$g || !is_object($g) || $g->isError()) {
+		exit_no_group();
 	}
 
-	$sql="SELECT g.group_forum_id,g.forum_name, g.description, famc.count as total
-		FROM forum_group_list g
-		LEFT JOIN forum_agg_msg_count famc USING (group_forum_id)
-		WHERE g.group_id='$group_id' AND g.is_public $public_flag;";
+	$ff=new ForumFactory($g);
+    if (!$ff || !is_object($ff) || $ff->isError()) {
+        exit_error('Error',$ff->getErrorMessage());
+    }
 
-	$result = db_query ($sql);
+	forum_header(array('title'=>'Forums for '. $g->getPublicName() ,'pagename'=>'forum','sectionvals'=>array($g->getPublicName())));
 
-	$rows = db_numrows($result); 
-
-	if (!$result || $rows < 1) {
-		echo '<H1>No forums found for '. group_getname($group_id) .'</H1>';
-		echo db_error();
+	$farr =& $ff->getForums();
+	
+	if ($ff->isError() || count($farr) < 1) {
+		echo '<H1>No forums found for '. $g->getPublicName() .'</H1>';
+		echo $ff->getErrorMessage();
 		forum_footer(array());
 		exit;
 	}
 
-	echo $Language->getText('forum', 'choose');
+//	echo $Language->getText('forum', 'choose');
+
+	$tablearr=array('Forum','Threads','Posts','Last Post');
+	echo $HTML->listTableTop($tablearr);
 
 	/*
 		Put the result set (list of forums for this group) into a column with folders
 	*/
 
-	for ($j = 0; $j < $rows; $j++) { 
-		echo '<A HREF="forum.php?forum_id='. db_result($result, $j, 'group_forum_id') .'">'.
-			html_image("images/ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
-			'&nbsp;' .
-			db_result($result, $j, 'forum_name').'</A> ';
-		//message count
-		echo '('. ((db_result($result, $j, 'total'))?db_result($result, $j, 'total'):'0') .' msgs)';
-		echo "<BR>\n";
-		echo db_result($result,$j,'description').'<P>';
+	for ($j = 0; $j < count($farr); $j++) { 
+		if ($farr[$j]->isError()) {
+			echo $farr->getErrorMessage();
+		} else {
+			echo '<TR '. $HTML->boxGetAltRowStyle($j) . '><TD><A HREF="forum.php?forum_id='. $farr[$j]->getID() .'">'.
+				html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
+				'&nbsp;' .
+				$farr[$j]->getName() .'</A><BR>'.$farr[$j]->getDescription().'</TD>
+				<TD ALIGN=CENTER>'.$farr[$j]->getThreadCount().'</TD>
+				<TD ALIGN=CENTER>'. $farr[$j]->getMessageCount() .'</TD>
+				<TD>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</TD></TR>';
+		}
 	}
+	echo $HTML->listTableBottom();
+
 	forum_footer(array());
 
 } else {

@@ -2,7 +2,7 @@
 #  *
 #  * Russian message catalog
 #  *
-#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * GForge: Breaking Down the Barriers to Open Source Development
 #  * Copyright 1999-2001 (c) VA Linux Systems
 #  * http://sourceforge.net
 #  *
@@ -16,8 +16,8 @@
 # 2000-10-08  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
 #	* Initial translation
 #
-about_foundries	about_blurb	О цехах SourceForge
-menu	about_sourceforge	О SourceForge
+about_foundries	about_blurb	О цехах GForge
+menu	about_sourceforge	О GForge
 menu	account_maintenance	Мои настройки
 menu	bookmark_page	Пометить тек. страницу закладкой
 home	breaking_down_barriers	Преодолевая барьеры на пути разработки с открытым исходным кодом
@@ -64,7 +64,7 @@ group	short_support	Поддержка
 group	short_survey	Опросы
 group	short_tracker	Унив.Трекер
 home	highest_ranked_users	Пользователи с высоким рейтингом
-home	about_blurb	  SourceForge - <B>свободный и бесплатный сервис для разработчиков, работающих по принципу Открытого Исходного Кода/Наполнения (<A href="http://www.opensource.org">Open Source</A>)</B> и предлагающий быстрый и легкий доступ к таким сервисам, как CVS (система управления версиями файлов), спиcки рассылки, система регистрации ошибок, доски сообщений и форумы, менеджер проектов, web-хостинг, постоянное файловое хранилище, автоматическое резервное копирование - все вместе управляемое через Web.<br> <BR> &nbsp; <P> <B>Использование сервисов и участие в проектах</B> <P> Для того, чтобы получить доступ ко всему многообразию сервисов, предлагаемых на SourceForge, вам нужно  <A href="/account/register.php">зарегистрироваться в качестве пользователя сайта</A>. Конечно же, вы можете путешествовать по сайту без регистрации, но вы не будете иметь доступ ко многим возможностям. <P> &nbsp; <BR> <B>Создание собственного проекта</B> <P> <A href="/account/register.php">Зарегистрируйтесь как пользователь сайта</A>, <A HREF="/account/login.php">войдите в систему</A> и наконец, <A HREF="/register/">зарегистрируйте ваш проект</A>. <P> Спасибо за выбор SourceForge... И мы желаем вам приятного и полезного времяпровождения!
+home	about_blurb	  GForge - <B>свободный и бесплатный сервис для разработчиков, работающих по принципу Открытого Исходного Кода/Наполнения (<A href="http://www.opensource.org">Open Source</A>)</B> и предлагающий быстрый и легкий доступ к таким сервисам, как CVS (система управления версиями файлов), спиcки рассылки, система регистрации ошибок, доски сообщений и форумы, менеджер проектов, web-хостинг, постоянное файловое хранилище, автоматическое резервное копирование - все вместе управляемое через Web.<br> <BR> &nbsp; <P> <B>Использование сервисов и участие в проектах</B> <P> Для того, чтобы получить доступ ко всему многообразию сервисов, предлагаемых на GForge, вам нужно  <A href="/account/register.php">зарегистрироваться в качестве пользователя сайта</A>. Конечно же, вы можете путешествовать по сайту без регистрации, но вы не будете иметь доступ ко многим возможностям. <P> &nbsp; <BR> <B>Создание собственного проекта</B> <P> <A href="/account/register.php">Зарегистрируйтесь как пользователь сайта</A>, <A HREF="/account/login.php">войдите в систему</A> и наконец, <A HREF="/register/">зарегистрируйте ваш проект</A>. <P> Спасибо за выбор GForge... И мы желаем вам приятного и полезного времяпровождения!
 frs	latest_file_releases	Последние файл-релизы
 menu	login	Логин (ч/з защищенное соединение)
 menu	logout	Выход
@@ -82,7 +82,7 @@ group	public_area	Сервисы проекта
 menu	search	Поиск
 menu	site_status	Статус Сайта
 menu	software_map	Карта проектов
-home	sourceforge_statistics	Статистика SourceForge
+home	sourceforge_statistics	Статистика GForge
 menu	top_projects	Топ-проекты
 home	top_project_downloads	Наиболее загружаемые проекты
 conf	content_encoding	windows-1251

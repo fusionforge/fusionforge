@@ -1,0 +1,15 @@
+Template: gforge/shared/db_password
+Type: password
+Description: Password used for the database
+ The connecton to the DB system requires a password.  Please choose a
+ password here.
+Description-fr: Mot de passe utilisé pour la base de données
+ La connexion à la base de données doit être authentifiée par un mot de
+ passe.  Veuillez le choisir ici.
+
+Template: gforge/shared/db_password_confirm
+Type: password
+Description: Password used for the database - again
+ Please re-type the password for confirmation.
+Description-fr: Mot de passe pour la base de données - confirmation
+ Veuillez saisir le mot de passe de nouveau, pour confirmation.

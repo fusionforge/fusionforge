@@ -60,7 +60,7 @@ $ath->header(array ('title'=>'Submit','pagename'=>'tracker_add','sectionvals'=>a
 
 	<TR><TD COLSPAN="2">
 	<?php 
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 		echo '
 		<h3><FONT COLOR="RED">Please <A HREF="/account/login.php?return_to='. urlencode($REQUEST_URI) .'">log in!</A></FONT></h3><BR>
 		If you <B>cannot</B> login, then enter your email address here:<P>

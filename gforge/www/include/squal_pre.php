@@ -16,7 +16,7 @@
  * @version   $Id$
  */
 
-require_once('/etc/sourceforge/local.inc');
+require_once('/etc/gforge/local.inc');
 require_once('common/include/database.php');
 require_once('common/include/session.php');
 require_once('common/include/Error.class');

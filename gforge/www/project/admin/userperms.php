@@ -54,7 +54,7 @@ function show_permissions_row($i, $row_dev) {
 	}
 
 	print '
-	<tr align="center" BGCOLOR="'. html_get_alt_row_color($i) .'">'
+	<tr align="center" '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'
 	.'<td align="left">'
 	.'<a href="userpermedit.php?group_id='.$group_id
 	.'&user_id='.$row_dev['user_id'].'">'.$name.'</a><br>'

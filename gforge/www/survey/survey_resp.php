@@ -26,7 +26,7 @@ if (!$survey_id || !$group_id) {
 	exit;
 }
 
-if (!user_isloggedin()) {
+if (!session_loggedin()) {
 	/*
 		Tell them they need to be logged in
 	*/

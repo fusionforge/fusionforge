@@ -12,37 +12,26 @@
 /*
 	redirect to proper hostname to get around certificate problem on IE 5
 */
-if (is_file('/etc/sourceforge/custom/pre.php')){
-	require_once('/etc/sourceforge/custom/pre.php');
+if (is_file('/etc/gforge/custom/pre.php')){
+	require_once('/etc/gforge/custom/pre.php');
 } else {
 
 // Defines all of the Source Forge hosts, databases, etc.
 // This needs to be loaded first becuase the lines below depend upon it.
-require ('/etc/sourceforge/local.inc');
+require ('/etc/gforge/local.inc');
 
-/*
-
-	Override vars are useful during development cycle
-
-	Each developer can set up a file that overrides
-	vars in /etc/local.inc, if needed.
-
-	Each developer has a different hostname, so $sys_default_domain
-	at a minimum must be overridden.
-
-*/
-
-if ($OVERRIDES_PATH) {
-	require_once($OVERRIDES_PATH."overrides.inc");
-}
-
-if (($HTTP_HOST != $GLOBALS['sys_default_domain']) && ($HTTP_HOST != $GLOBALS['sys_fallback_domain']) && ($HTTP_HOST != 'localhost') && ($HTTP_HOST != $GLOBALS['sys_default_domain'].':80')) {
+if ($HTTP_HOST != $GLOBALS['sys_default_domain'] && $HTTP_HOST != $GLOBALS['sys_fallback_domain']) {
 	if ($SERVER_PORT == '443') {
 		header ("Location: https://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
 	} else {
 		header ("Location: http://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
 	}
 	exit;
+}
+
+//
+if ($sys_use_jabber) {
+	require_once('common/include/Jabber.class');
 }
 
 //library to determine browser settings
@@ -54,7 +43,6 @@ require_once('common/include/Error.class');
 // HTML layout class, may be overriden by the Theme class
 require_once('www/include/Layout.class');
 
-$HTML = new Layout();
 
 //various html utilities
 require_once('common/include/utils.php');
@@ -80,9 +68,6 @@ require_once('common/include/Permission.class');
 //Project extends Group and includes preference accessors
 require_once('common/include/Project.class');
 
-//Foundry extends Group and includes preference/data accessors
-require_once('common/include/Foundry.class');
-
 //library to set up context help
 require_once('www/include/help.php');
 
@@ -91,14 +76,6 @@ require_once('www/include/exit.php');
 
 //various html libs like button bar, themable
 require_once('www/include/html.php');
-
-//left-hand nav library, themable
-require_once('www/include/menu.php');
-
-//theme functions like get_themename, etc
-require_once('www/include/theme.php');
-
-//$sys_datefmt = "Y-m-d H:i";
 
 // #### Connect to db
 
@@ -116,12 +93,6 @@ require_once('common/include/PluginManager.class') ;
 //determine if they're logged in
 session_set();
 
-//set up the themes vars
-theme_sysinit($sys_themeid);
-
-// OSDN functions and defs
-require_once('www/include/osdn.php');
-
 //insert this page view into the database
 require_once('www/include/logger.php');
 
@@ -129,10 +100,18 @@ require_once('www/include/logger.php');
 //	If logged in, set up a $LUSER var referencing
 //	the logged in user's object
 //
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	//set up the user's timezone if they are logged in
 	$LUSER =& session_get_user();
+	$LUSER->setUpTheme();
 }
+
+//
+//	Include user Theme
+//
+require_once($sys_themeroot.$sys_theme.'/Theme.class');
+
+$HTML=new Theme();
 
 /*
 
@@ -141,11 +120,11 @@ if (user_isloggedin()) {
 
 */
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	//set up the user's timezone if they are logged in
 	putenv('TZ='. $LUSER->getTimeZone());
 } else {
-	//just user pacific time as always
+	//just use pacific time as always
 }
 
 /*
@@ -159,7 +138,7 @@ require_once('www/include/BaseLanguage.class');
 if (!$sys_lang) {
 	$sys_lang="English";
 }
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	$res=$LUSER->getData();
 		$classname=db_result($res,0,'classname');
 	if ($classname) {
@@ -188,14 +167,6 @@ setlocale (LC_TIME, $Language->getText('system','locale'));
 $sys_strftimefmt = $Language->getText('system','strftimefmt');
 $sys_datefmt = $Language->getText('system','datefmt');
 
-//ob_start(ob_gzhandler);
-
-//
-//	For now, only cache English, non-logged-in pages, with no POST going on
-//
-if (!user_isloggedin() && ($Language->getLanguageId() == 1) && (count($HTTP_POST_VARS) < 1) && !session_issecure()) {
-	include_once('common/include/jpcache.php');
-}
 }
 /*
 

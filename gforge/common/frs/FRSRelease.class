@@ -1,0 +1,264 @@
+<?php
+/**
+ * GForge File Release Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+
+require_once('common/include/Error.class');
+
+class FRSRelease extends Error {
+
+	/**
+	 * Associative array of data from db.
+	 *
+	 * @var  array   $data_array
+	 */
+	var $data_array;
+
+	/**
+	 * The FRSPackage
+	 *
+	 * @var  object  FRSPacakge
+	 */
+	var $FRSPackage;
+
+	/**
+	 *  Constructor.
+	 *
+	 *  @param  object  The FRSPackage object to which this release is associated
+	 *  @param  int  The release_id
+	 *  @param  array   The associative array of data
+	 */
+	function FRSRelease(&$FRSPackage, $release_id=false, $arr=false) {
+		$this->Error();
+		if (!$FRSPackage || !is_object($FRSPackage)) {
+			$this->setError('FRSRelease:: No Valid FRSPackage Object');
+			return false;
+		}
+		if ($FRSPackage->isError()) {
+			$this->setError('FRSRelease:: '.$FRSPackage->getErrorMessage());
+			return false;
+		}
+		$this->FRSPackage =& $FRSPackage;
+
+		if ($release_id) {
+			if (!$arr || !is_array($arr)) {
+				if (!$this->fetchData($release_id)) {
+					return false;
+				}
+			} else {
+				$this->data_array =& $arr;
+				if ($this->data_array['package_id'] != $this->FRSPackage->getID()) {
+					$this->setError('FRSPackage_id in db result does not match FRSPackage Object');
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	function create($name,$notes,$changes,$preformatted,$release_date=false) {
+		if (strlen($name) < 3) {
+			$this->setError('FRSRelease Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (!util_is_valid_filename($name)) {
+			$this->setError('FRSRelease Name Should Be in This Example Format: gforge-3.0pre5');
+			return false;
+		}
+
+		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		if (!$release_date) {
+			$release_date=time();
+		}
+
+		$sql="INSERT INTO frs_release(package_id,notes,changes,
+				preformatted,name,release_date,released_by,status_id)
+			VALUES ('".$this->FRSPackage->getId()."','$notes','$changes',
+				'$preformatted','$name','$release_date','".user_getid()."','1')";
+
+		db_begin();
+		$result=db_query($sql);
+		if (!$result) {
+			db_rollback();
+			$this->setError('FRSRelease::create() Error Adding Release: '.db_error());
+			return false;
+		}
+		$this->release_id=db_insertid($result,'frs_release','release_id');
+		if (!$this->fetchData($this->release_id)) {
+			db_rollback();
+			return false;
+		} else {
+			db_commit();
+			return true;
+		}
+	}
+
+	/**
+	 *  fetchData() - re-fetch the data for this Package from the database
+	 *
+	 *  @param  int  The artifact type ID
+	 *  @return true/false
+	 */
+	function fetchData($release_id) {
+		$res=db_query("SELECT * FROM frs_release
+			WHERE release_id='$release_id'
+			AND package_id='". $this->FRSPackage->getID() ."'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('FRSRelease::fetchData()  Invalid release_id');
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *  getFRSPackage() - get the FRSPackage object this release is associated with
+	 *
+	 *  @return the FRSPackage object
+	 */
+	function &getFRSPackage() {
+		return $this->FRSPackage;
+	}
+
+	/**
+	 *  getID() - get this release_id
+	 *
+	 *  @return the id of this package
+	 */
+	function getID() {
+		return $this->data_array['release_id'];
+	}
+
+	/**
+	 *  getName - get the name of this package.
+	 *
+	 *  @return string  The name of this package.
+	 */
+	function getName() {
+		return $this->data_array['name'];
+	}
+
+	/**
+	 *  getStatus - get the status of this package.
+	 *
+	 *  @return int	The status.
+	 */
+	function getStatus() {
+		return $this->data_array['status_id'];
+	}
+
+	/**
+	 *  getNotes - get the release notes of this package.
+	 *
+	 *  @return string	The release notes.
+	 */
+	function getNotes() {
+		return $this->data_array['notes'];
+	}
+
+	/**
+	 *  getChanges - get the changelog of this package.
+	 *
+	 *  @return string	The changelog.
+	 */
+	function getChanges() {
+		return $this->data_array['changes'];
+	}
+
+	/**
+	 *  getPreformatted - get the preformatted option of this package.
+	 *
+	 *  @return boolean	whether to preserve the preformatted text.
+	 */
+	function getPreformatted() {
+		return $this->data_array['preformatted'];
+	}
+
+	/**
+	 *  getReleaseDate - get the releasedate of this package.
+	 *
+	 *  @return int	The release date in unix time.
+	 */
+	function getReleaseDate() {
+		return $this->data_array['release_date'];
+	}
+
+	function sendNotice() {
+		$arr =& $this->FRSPackage->getMonitorIDs();
+		
+		$date = date('Y-m-d H:i',time());
+
+		$subject = '['.$this->FRSPackage->Group->getUnixName().' Release] '.$this->FRSPackage->getName();
+
+		$text = "\n\nProject \"". $this->FRSPackage->Group->getPublicName() ."\" ('". $this->FRSPackage->Group->getUnixName() ."') has "
+			."\nreleased the new version of package '"
+			.$this->FRSPackage->getName()."'. "
+			."\nYou can download it by following this link:\n"
+			."\n<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID() .">\n"
+			."\n\nYou receive this email because you "
+			."\nrequested to be notified when new versions of this package "
+			."\nwere released. If you don't wish to be notified in the "
+			."\nfuture, please login to ".$GLOBALS['sys_name']." and click this link: "
+			."\n<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1> ";
+
+		$text = util_line_wrap($text);
+		if (count($arr)) {
+			util_handle_message(array_unique($arr),$subject,$text);
+		}
+	}
+
+	function update($status,$name,$notes,$changes,$preformatted,$release_date) {
+
+		if (strlen($name) < 3) {
+			$this->setError('Package Name Must Be At Least 3 Characters');
+			return false;
+		}
+		if (!util_is_valid_filename($name)) {
+			$this->setError('FRSRelease Name Should Be in This Example Format: gforge-3.0pre5');
+			return false;
+		}
+
+		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		$res=db_query("UPDATE frs_release 
+			SET
+			name='$name',
+			status_id='$status',
+			notes='$notes',
+			changes='$changes',
+			preformatted='$preformatted',
+			release_date='$release_date',
+			released_by='". user_getid() ."'
+			WHERE package_id='".$this->FRSPackage->getID()."'
+			AND release_id='".$this->getID()."'");
+
+		if (!$res || db_affected_rows($res) < 1) {
+			$this->setError('FRSRelease::update() Error On Update: '.db_error());
+			return false;
+		}
+
+		return true;
+
+	}
+
+}
+
+?>
