@@ -255,6 +255,12 @@ setup_vars() {
 	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
 	#echo "=====>$cryptedpasswd"
 }
+# Check Server
+check_server() {
+		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+		[ "x$naming_context" == "x" ] && invoke-rc.d slapd restart && sleep 5 && naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+		[ "x$naming_context" == "x" ] && echo KO || echo $naming_context
+}
 
 # Setup SF_robot Passwd
 setup_robot() {
@@ -290,7 +296,7 @@ userPassword: $cryptedpasswd
 FIN
 
 	echo "Testing LDAP"
-	#naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	check_server
 	echo "Changing dummy cn using SF_robot account"
 	{ ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" > /dev/null 2>&1 || true ; } <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
@@ -321,6 +327,7 @@ case "$1" in
 		sleep 5		# Sometimes it takes a bit of time to get out of bed
 		echo "Load ldap"
 		load_ldap $dn "$secret"
+		check_server
 		echo "Setup SF_robot account"
 		setup_robot
 		;;
@@ -378,6 +385,9 @@ case "$1" in
 		print_ldif_default $sys_ldap_base_dn $cryptedpasswd > /tmp/ldif$$ 
 		slapadd -l /tmp/ldif$$
 		rm -f /tmp/ldif$$
+		;;
+	check)	
+		check_server
 		;;
 	test)	
 		setup_robot
