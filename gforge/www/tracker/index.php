@@ -271,13 +271,13 @@ if ($group_id && $atid) {
 	}
 
 } elseif ($group_id) {
-	//	  
+	//
 	//  get the Group object
-	//	  
+	//
 	$group =& group_get_object($group_id);
 	if (!$group || !is_object($group) || $group->isError()) {
 		exit_no_group();
-	}		   
+	}
 
 	$atf = new ArtifactTypeFactory($group);
 	if (!$group || !is_object($group) || $group->isError()) {
@@ -291,9 +291,9 @@ if ($group_id && $atid) {
 	$params['toptab']='tracker';
 	$params['pagename']='tracker';
 	$params['sectionvals']=array($group->getPublicName());
-	
+
 	echo site_project_header($params);
-	echo '<strong><a href="/tracker/reporting/?group_id='.$group_id.'">'.$Language->getText('tracker','reporting').'Reporting</a> | '
+	echo '<strong><a href="/tracker/reporting/?group_id='.$group_id.'">'.$Language->getText('tracker','reporting').'</a> | '
 		 .'<a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker','admin').'</a>'
 		 .'</strong><p>';
 
@@ -315,7 +315,7 @@ if ($group_id && $atid) {
 			<a href="/tracker/?atid='. $at_arr[$j]->getID() .
 			'&group_id='.$group_id.'&func=browse">' .
 			html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
-			$at_arr[$j]->getName() .'</a> 
+			$at_arr[$j]->getName() .'</a>
 			( <strong>'. $at_arr[$j]->getOpenCount() .' open / '. $at_arr[$j]->getTotalCount() .' total</strong> )<br />'.
 			$at_arr[$j]->getDescription() .'<p>';
 		}
