@@ -31,13 +31,10 @@ if ( $group_name ) {
 	if ( ! $group_id && $group ) $group_id=$group->getID();
 }
 
-if ($group_id) {
-
-	if ($limit>20) $limit=20;
-	echo $HTML->boxTop($Language->getText('group','long_news'));
-	echo news_show_latest($sys_news_group,$limit,$show_summaries,false,$flat);
-	echo $HTML->boxBottom();
-
+if ($group) {
+	echo '<h2>Welcome to '.$group->getPublicName().' project!</h2>
+<p>';
+	echo $group->getDescription();
 }
 else echo "No such group";
 ?>

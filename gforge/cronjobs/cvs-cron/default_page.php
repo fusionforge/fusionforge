@@ -1,10 +1,7 @@
 <?php
 
-$domain='<domain>';
-$group_id='<group_id>';
-$project_name='<project_name>';
-$project_description='<project_description>';
-$group_name='<group_name>';
+$domain=ereg_replace('[^\.]*\.(.*)$','\1',$GLOBALS['HTTP_HOST']);
+$group_name=ereg_replace('([^\.]*)\..*$','\1',$GLOBALS['HTTP_HOST']);
 
 echo '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
@@ -68,7 +65,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 <table border="0" width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
-		<td><a href="/"><img src="<?php echo $domain; ?>/themes/gforge/images/logo.png" border="0" alt="" width="198" height="52" /></a></td>
+		<td><a href="/"><img src="http://<?php echo $domain; ?>/themes/gforge/images/logo.png" border="0" alt="" width="198" height="52" /></a></td>
 	</tr>
 
 </table>
@@ -114,34 +111,23 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 	<!-- whole page table -->
 <table width="100%" cellpadding="5" cellspacing="0" border="0">
 <tr><td width="65%" valign="top">
-<h2>Welcome to the <?php echo $project_name; ?> Project!</h2>
-<p>
-<?php echo $project_description; ?>
-</p>
-		<table cellspacing="0" cellpadding="1" width="100%" border="0" bgcolor="#d5d5d7">
-		<tr><td>
-			<table cellspacing="0" cellpadding="2" width="100%" border="0" bgcolor="#eaecef">
-				<tr style="background-color:#d5d5d7" align="center">
-					<td colspan="2"><span class="titlebar">Latest News</span></td>
-				</tr>
-				<tr align="left">
-					<td colspan="2">
-
-
-<?php $handle=fopen($domain.'/export/projnews.php?group_id='.$group_id,'r');
+<?php if ($handle=fopen('http://'.$domain.'/export/projtitl.php?group_name='.$group_name,'r')){
 $contents = '';
 while (!feof($handle)) {
 	$contents .= fread($handle, 8192);
 }
 fclose($handle);
-$contents=str_replace('href="','href="'.$domain,$contents);
-echo $contents; ?>
+echo $contents; } ?>
 
-					</td>
-				</tr>
-			</table>
-		</td></tr>
-		</table><p>&nbsp;</p>
+<?php if ($handle=fopen('http://'.$domain.'/export/projnews.php?group_name='.$group_name,'r')){
+$contents = '';
+while (!feof($handle)) {
+	$contents .= fread($handle, 8192);
+}
+fclose($handle);
+$contents=str_replace('href="/','href="http://'.$domain.'/',$contents);
+echo $contents; } ?>
+
 </td>
 
 <td width="35%" valign="top">
@@ -155,15 +141,15 @@ echo $contents; ?>
 				<tr align="left">
 					<td colspan="2">
 
-<?php $handle=fopen($domain.'/export/projhtml.php?group_id='.$group_id,'r');
+<?php if($handle=fopen('http://'.$domain.'/export/projhtml.php?group_name='.$group_name,'r')){
 $contents = '';
 while (!feof($handle)) {
 	$contents .= fread($handle, 8192);
 }
 fclose($handle);
-$contents=str_replace('href="','href="'.$domain,$contents);
-$contents=str_replace('src="','src="'.$domain,$contents);
-echo $contents; ?>
+$contents=str_replace('href="/','href="http://'.$domain.'/',$contents);
+$contents=str_replace('src=/"','src="http://'.$domain.'/',$contents);
+echo $contents; } ?>
 
 					</td>
 				</tr>
