@@ -11,8 +11,10 @@ sourceforge (2.6-0+7+) unstable; urgency=low
   * [Roland] Minor typo-fixes here and there, and a few cosmetic changes.
   * [Roland] [From 2.5] Fixed unix_box entries.
   * [Roland] Fixed leftover cruft in /etc/nsswitch.conf purging.
+  * [Roland] Made the header somewhat customizable (display/hide the
+    banner, mainly).
 
- -- Roland Mas <lolando@debian.org>  Thu,  7 Mar 2002 15:13:42 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  7 Mar 2002 15:48:18 +0100
 
 sourceforge (2.6-0+7) unstable; urgency=low
 

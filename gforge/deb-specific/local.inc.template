@@ -161,5 +161,9 @@ $sys_images_url="//{domain_name}/";
 $sys_news_group = {newsadmin_groupid};
 $sys_stats_group = {statsadmin_groupid};
 
+// Part V - Stuff added by Debian-SF
+$sys_show_banner_1 = 0 ;
+$sys_show_banner_2 = 1 ;
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

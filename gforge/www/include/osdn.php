@@ -79,8 +79,12 @@ function osdn_print_randpick($sitear, $num_sites = 1) {
  * osdn_print_navbar() - Show the navbar
  */
 function osdn_print_navbar() {
-  // osdn_print_navbar_1 () ;
-  osdn_print_navbar_2 () ;
+  if ($GLOBALS['sys_show_banner_1']) {
+    osdn_print_navbar_1 () ;
+  }
+  if ($GLOBALS['sys_show_banner_1']) {
+    osdn_print_navbar_2 () ;
+  }
 }
 
 function osdn_print_navbar_1() {
