@@ -204,7 +204,7 @@ NameVirtualHost 10.GF.OR.GE:443
   ServerName lists.gforge.company.com
   AddHandler cgi-script .cgi
 
-  ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+  ScriptAlias /mailman/ /var/lib/mailman/cgi-bin/
 
   Alias /pipermail /var/lib/mailman/archives/public
   <Directory /var/lib/mailman/archives/public>
