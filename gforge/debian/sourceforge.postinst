@@ -151,6 +151,7 @@ EOF
 	fi
 	[ -x /usr/bin/newaliases ] && newaliases
 
+
 	db_get sourceforge/web_only
 	if [ "$RET" = "true" ] ; then
 
@@ -176,8 +177,12 @@ EOF
             # Setup our SSH
 	    /usr/lib/sourceforge/bin/install-ssh.sh
 
+	    # Setup our CVS
 	    # Making user group and cvs update from database 
 	    /usr/lib/sourceforge/bin/update-user-group-cvs.sh
+	    # logs
+	    chown root:sourceforge /var/log/sourceforge/cvs
+	    chmod 775 /var/log/sourceforge/cvs
 
 	    # Clean after ourselves
 	    db_stop

@@ -15,4 +15,5 @@ var/lib/sourceforge/download
 var/lib/sourceforge/ftp
 var/lib/sourceforge/ftp/incoming
 var/lib/sourceforge/tmp
-
+var/log/sourceforge
+var/log/sourceforge/cvs
