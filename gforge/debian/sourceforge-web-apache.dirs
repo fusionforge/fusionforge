@@ -2,6 +2,7 @@ bin
 etc/sourceforge
 etc/sourceforge/languages-local
 etc/sourceforge/templates
+etc/sourceforge/custom
 usr/bin
 usr/lib/sourceforge/bin
 usr/lib/sourceforge/lib

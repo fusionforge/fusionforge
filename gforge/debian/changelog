@@ -96,8 +96,10 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     www/include/Layout.class.
   * [??? - patch #637] Removed 'Edit' and '?' links for root trove
     category in the trove map.
+  * [Christian] you can now have a customized pre.php in 
+    /etc/sourceforge/custom/pre.php
 
- -- Roland Mas <lolando@debian.org>  Thu,  7 Nov 2002 13:06:44 +0100
+ -- Christian Bayle <bayle@debian.org>  Thu,  7 Nov 2002 15:57:12 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
