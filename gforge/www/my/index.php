@@ -102,12 +102,11 @@ if (session_loggedin()) { // || $sf_user_hash) {
 			}
 			echo '
 			<tr style="background-color:'.html_get_priority_color($art->getPriority()).'">
+			<td>'.$art->getID().'</td>
 			<td><a href="/tracker/?func=detail&amp;aid='.
-			$art->getID().
-			'&amp;group_id='.$art->ArtifactType->Group->getID().
-			'&amp;atid='.$art->ArtifactType->getID().'">'.
-			$art->getID().'</td>
-			<td>' . stripslashes($art->getSummary());
+      $art->getID().
+      '&amp;group_id='.$art->ArtifactType->Group->getID().
+      '&amp;atid='.$art->ArtifactType->getID().'">' . stripslashes($art->getSummary()) .'</a>';
 
 			$last_group = $art->ArtifactType->getID();
 		}

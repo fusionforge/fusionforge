@@ -3,6 +3,9 @@
 	* www/account/register.php, login.php, pending-resend.php,
 	www/include/languages/Base.tab
 	Implemented RFE #590 Add link for "resend pending confirmation hash"
+	* www/my/index.php
+	Implemented RFE #589 "My personal page" assigned items titles could
+	be linked instead of the row ids
 
 2003-11-16  Michael Jennings <mej@eterm.org>
 
