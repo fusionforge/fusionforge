@@ -11,6 +11,10 @@
 	Fixed bug #374 - There are several $language-> instead of $Language->.  
 	Thanks to Vicente Ruiz for the pointers.
 
+	* www/include/feature_boxes.php
+	Fixed bug #373 - "Top Project Downloads" in feature_boxes should 
+	not show deleted projects
+	
 2003-05-30 Roland Mas  <lolando@debian.org>
 
 	* Changed the LDAP setup: we're now using an official OID space
