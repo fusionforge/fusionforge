@@ -22,19 +22,24 @@ class Theme extends Layout {
 		$this->imgroot = '/themes/debian/images/';
 
 		// The content background color
+		// sky blue
 		$this->COLOR_CONTENT_BACK= '#BBDDFF';
+		//pink #C79FA9;
 
 		// The primary light background color
-		$this->COLOR_LTBACK1= '#BBBBBB';
+		// Alternate list
+		$this->COLOR_LTBACK1= '#C79FA9';
 
 		// The secondary light background color
-		$this->COLOR_LTBACK2= '#CCCCCC';
+		$this->COLOR_LTBACK2= '#C79FA9';
 
 		// The HTML box title color
-		$this->COLOR_HTMLBOX_TITLE = '#DF0451';
+		// Red
+		//$this->COLOR_HTMLBOX_TITLE = '#DF0451';
+		$this->COLOR_HTMLBOX_TITLE = '#C70036';
 
 		// The HTML box background color
-		$this->COLOR_HTMLBOX_BACK = '#EEEEEE';
+		$this->COLOR_HTMLBOX_BACK = '#C79FA9';
 
 		// Font Face Constants
 		// The content font
@@ -42,7 +47,7 @@ class Theme extends Layout {
 		// The HTML box title font
 		$this->FONT_HTMLBOX_TITLE = 'Helvetica';
 		// The HTML box title font color
-		$this->FONTCOLOR_HTMLBOX_TITLE = '#000000';
+		$this->FONTCOLOR_HTMLBOX_TITLE = '#C6BCBF';
 		// The content font color
 		$this->FONTCOLOR_CONTENT = '#000000';
 		//The smaller font size
@@ -66,9 +71,8 @@ class Theme extends Layout {
 		if (!$bgcolor) {
 			$bgcolor=$this->COLOR_HTMLBOX_BACK;
 		}
-		//	<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" BACKGROUND="http:'.$GLOBALS['sys_images_url'].$this->imgroot.'steel3.jpg" align="center">
 		$return = '<TABLE cellspacing="1" cellpadding="5" width="100%" border="0" bgcolor="'.$this->COLOR_HTMLBOX_BACK.'">
-			<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
+			<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" BACKGROUND="http:'.$GLOBALS['sys_images_url'].$this->imgroot.'steel3.jpg" align="center">
 				<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD>
 			</TR>';
 
