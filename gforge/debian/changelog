@@ -1,4 +1,4 @@
-gforge (3.3.0-3woody5) stable; urgency=low
+gforge (3.3.0-3woody6) stable; urgency=low
 
   * [Christian] Added new sql upgrade (2004*.sql)
   * [Christian] Stable backbort
@@ -8,6 +8,7 @@ gforge (3.3.0-3woody5) stable; urgency=low
   * [Christian] Add missing space in update-user-group.sh (closes
   gforge upstream bug #751)
   * [Christian] Adjust cvs_dump rights
+  * [Christian] Try to fix problems when dbname and dbuser are not gforge
 
  -- Christian Bayle <bayle@debian.org>  Sun, 18 Apr 2004 00:25:03 +0200
 

@@ -3,7 +3,7 @@
 use DBI;
 use File::Temp ;
 use strict ;
-use vars qw/$dbh $ifile $ofile @ilist %hash $key $val $cur $line $dbh $sys_dbname $token/ ;
+use vars qw/$dbh $ifile $ofile @ilist %hash $key $val $cur $line $dbh $sys_dbname $sys_dbuser $sys_dbpasswd $token/ ;
 
 require("/etc/gforge/local.pl");  # Include all the predefined functions
 
@@ -18,7 +18,11 @@ while ($line = <CONF>) {
 }
 close CONF ;
 
+if ( "$sys_dbname" ne "gforge" || "$sys_dbuser" ne "gforge" ) {
+$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname","$sys_dbuser","$sys_dbpasswd");
+} else {
 $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
+}
 die "Cannot connect to database: $!" if ( ! $dbh );
 
 $ifile = '/etc/gforge/templates/httpd.vhosts' ;
