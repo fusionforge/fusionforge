@@ -20,7 +20,6 @@ function news_header($params) {
 	global $DOCUMENT_ROOT,$HTML,$group_id,$news_name,$news_id,$sys_news_group,$Language;
 	$params['toptab']='news';
 	$params['group']=$group_id;
-	$params['sysnewsgroup']=$sys_news_group;
 	/*
 		Show horizontal links
 	*/
@@ -34,10 +33,6 @@ function news_header($params) {
 		echo ($HTML->subMenu(
 			array($Language->getText('menu','submit'),$Language->getText('menu','admin')),
 			array('/news/submit.php?group_id='.$group_id,'/news/admin/?group_id='.$group_id)));
-	} else {
-		echo ($HTML->subMenu(
-			array($Language->getText('menu','submit'),$Language->getText('menu','admin')),
-			array('/news/submit.php?group_id='.$sys_news_group,'/news/admin/?group_id='.$sys_news_group)));
 	}
 }
 

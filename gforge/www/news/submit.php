@@ -23,7 +23,7 @@ if (session_loggedin()) {
 		exit_permission_denied($Language->getText('news_submit','cannot'));
 	}
 
-	if (user_ismember($sys_news_group,'A')) {
+	if ($group_id == $sys_news_group) {
 		exit_permission_denied($Language->getText('news_submit','cannotadmin'));
 	}
 

@@ -24,11 +24,6 @@ require_once('www/news/news_utils.php');
 function forum_header($params) {
 	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f;
 
-	/*$sql="SELECT group_id FROM news_bytes WHERE forum_id='$forum_id'";
-        $result=db_query($sql);
-	$new_group_id=db_result($result,0,'group_id');
-*/
-	//$params['group']=$new_group_id;
 	$params['group']=$group_id;
 	$params['toptab']='forums';
 
@@ -46,10 +41,10 @@ function forum_header($params) {
 			$sql="SELECT * FROM news_bytes WHERE forum_id='$forum_id'";
 			$result=db_query($sql);
 
+			$params['group']=db_result($result,0,'group_id');
+			$params['toptab']='news';
 
 			$HTML->header($params);
-			echo '
-				<H2>'.$GLOBALS['sys_name'].' <A HREF="/news/">'.$Language->getText('forum_utils','news').'</A></H2><P>';
 
 			echo '<TABLE><TR><TD VALIGN="TOP">';
 			if (!$result || db_numrows($result) < 1) {
