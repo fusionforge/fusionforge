@@ -1201,7 +1201,7 @@ news_submit	errorboth	ERROR - both subject and body are required
 news_submit	errorinsert	ERROR doing insert
 news_submit	forproject	For Project
 news_submit	newsadded	News Added.
-news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the $1 news team before they will appear on the $1 home page.<P>You may include URLs, but not HTML in your submissions.<P>URLs that start with http:// are made clickable.
+news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.</p><p>All posts <b>for your project</b> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the $1 news team before they will appear on the $1 home page.</p><p>You may include URLs, but not HTML in your submissions.</p><p>URLs that start with http:// are made clickable.
 news_submit	section	News
 news_submit	subject	Subject
 news_submit	title	Submit News for $1
