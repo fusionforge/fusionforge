@@ -167,7 +167,7 @@ if($status == 'P') {
 </td>
 </tr>
 <?php
-if ($group->getLicense() == 'other') {
+if ($group->getLicense() == GROUP_LICENSE_OTHER) {
 ?>
 <tr>
 <td><?php echo $Language->getText('admin','license_other'); ?>

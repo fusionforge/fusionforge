@@ -46,6 +46,24 @@ require_once('www/include/BaseLanguage.class');
 //the license_id of "Other/proprietary" license
 define('GROUP_LICENSE_OTHER',126);
 
+$LICENSE_NAMES=array();
+
+/**
+ * group_get_licences() - get the licenses list
+ *
+ * @return array list of licenses
+ */
+function & group_get_licenses() {
+	global $LICENSE_NAMES;
+	if(empty($LICENSE_NAMES)) {
+		$result = db_query('select * from licenses');
+		while($data = db_fetch_array($result)) {
+			$LICENSE_NAMES[$data['license_id']] = $data['license_name'];
+		}
+	}
+	return $LICENSE_NAMES;
+}
+
 $GROUP_OBJ=array();
 
 /**
@@ -858,10 +876,24 @@ class Group extends Error {
 	/**
 	 *  getLicense	- the license they chose.
 	 *
-	 *  @return	string	ident of group license.
+	 *  @return	int	ident of group license.
 	 */
 	function getLicense() {
 		return $this->data_array['license'];
+	}
+	
+	/**
+	 * getLicenseName - the name of the license
+	 *
+	 * @return string license name
+	 */
+	function getLicenseName() {
+		$licenses =& group_get_licenses();
+		if(isset($licenses[$this->data_array['license']])) {
+			return $licenses[$this->data_array['license']];
+		} else {
+			return '';
+		}
 	}
 
 	/**
@@ -1892,7 +1924,7 @@ class Group extends Error {
 				$l = new BaseLanguage () ;
 				$l->loadLanguageID(db_result($res,$i,'language'));
 				
-				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicense(), $GLOBALS['sys_default_domain'])));
+				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
 				util_send_message($admin_email, $l->getText('classgroup', 'newprojectnotificationtitle', array($GLOBALS['sys_name'])), $message);
 			}
 		}
@@ -1911,7 +1943,7 @@ class Group extends Error {
 				$l = new BaseLanguage () ;
 				$l->loadLanguageID(db_result($res,$i,'language'));
 				
-				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification_submitter', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicense(), $GLOBALS['sys_default_domain'])));
+				$message=stripcslashes($l->getText('classgroup', 'newprojectnotification_submitter', array($GLOBALS['sys_name'], $this->getPublicName(), $this->getRegistrationPurpose(), $this->getLicenseName(), $GLOBALS['sys_default_domain'])));
 				
 				util_send_message($email, $l->getText('classgroup', 'newprojectnotificationtitle', array($GLOBALS['sys_name'])), $message);
 			}
