@@ -17,11 +17,11 @@
   <description>Gforge </description>
   <shortDescription>Software for collaborative development</shortDescription>
   <url>http://gforge.org/</url>
-  <issueTrackingUrl>http://gforge.org</issueTrackingUrl>
+  <issueTrackingUrl>http://gforge.org/tracker/?group_id=1</issueTrackingUrl>
  
   <repository>
-    <connection>scm:cvs:pserver:anonymous@cvs.gforge.gforge.org:/cvsroot/gforge:gforge</connection>
-    <url>http://gforge.org/cgi-bin/viewcvs.cgi/gforge/</url>
+    <connection>scm:cvs:pserver:anoncvs@subversions.gnu.org:/cvsroot/gforge:gforge</connection>
+    <url>http://savannah.nongnu.org/cgi-bin/viewcvs/gforge/</url>
   </repository>
 
   <developers>
@@ -49,6 +49,13 @@
 
 
   </dependencies>
+	<mailingLists>
+
+	<mailingList>
+	<name>gforge-devel.nongnu.org</name>
+	<archive>http://mail.nongnu.org/archive/html/gforge-devel/</archive>
+
+	</mailingLists>
 
   <build>
     <nagEmailAddress>bigdisk@gforge.org</nagEmailAddress>

@@ -165,7 +165,7 @@ AddModule mod_php.c
 <li>Configuring PHP for Apache 2.0
 <br/>
 <ol>
-<li>Open <code>/etc/httpd/conf.d/php.ini</code></li>
+<li>Open <code>/etc/httpd/conf.d/php.conf</code></li>
 <li>Change the existing Files directive to:
 
 <source><![CDATA[
@@ -180,7 +180,7 @@ AddModule mod_php.c
 
 The LimitRequestBody directive allows you to limit the maximum number of bytes of a request (including uploads). The default is
 524288 (512Kb). This means that you cannot upload files with a size >512Kb.
-With this directive we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the upload_max_filesize directive in php.ini.
+With this directive we set it to 2MB. If you wish to set this value higher than 2MB, you must also edit the upload_max_filesize directive in php.conf.
 
 <br/>
 </li>
@@ -265,7 +265,6 @@ host all 127.0.0.1 255.255.255.255 crypt
 
 <p/>
 and comment out all other directives.
-</p>
 <br/>
 Restart the PostgreSQL server as root user:
 <br/>
@@ -276,8 +275,9 @@ Create the database user:
 <br/>
 <code>
 su - postgres<br/>
-<br>createuser gforge -W </br>
+<br/>createuser gforge -W 
 </code>
+<br/>
 
 <br/>
 Answer the following two questions:
@@ -295,6 +295,7 @@ createdb -U gforge gforge<br/>
 </code>
 
 <p/>
+</p>
 
 </li>
 
