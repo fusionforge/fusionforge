@@ -48,7 +48,7 @@ web_only=true
 0 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update
 
 # CVS tarballs
-5 2 * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/tarballs.sh
+5 2 * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/tarballs.sh ] && /usr/lib/sourceforge/bin/tarballs.sh
 
 # CVS/user/group update
 0 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh
