@@ -75,13 +75,13 @@ configure_slapd(){
 			/etc/ldap/schema/nis.schema \
 			/etc/sourceforge/sourceforge.schema
 		do
-			if ! grep -q "^include.[ 	]*$schema" /etc/ldap/slapd.conf.sourceforge-new ; then
+			if ! grep -q "^include[ 	]*$schema" /etc/ldap/slapd.conf.sourceforge-new ; then
 				echo "include	$schema	#Added by Sourceforge install" >>/etc/ldap/slapd.conf.sourceforge
 				echo "Adding $schema"
 			else
 				echo "Commenting $schema"
 				export schema
-				perl -pi -e "s/^include.[        ]*\$schema/#Comment by Sourceforge install#include	\$schema/g" /etc/ldap/slapd.conf
+				perl -pi -e "s/^include[ 	]*\$schema/#Comment by Sourceforge install#include	\$schema/g" /etc/ldap/slapd.conf
 				echo "include	$schema	#Added by Sourceforge install" >>/etc/ldap/slapd.conf.sourceforge
 				echo "Adding $schema"
 			fi
