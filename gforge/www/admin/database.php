@@ -57,7 +57,7 @@ if ($submit) {
 }			
 
 
-site_admin_header(array('title'=>"Site Admin: Groups' DB Maintanance"));
+site_admin_header(array('title'=>"Site Admin: Groups' DB Maintenance"));
 
 $res_db = db_query("
 	SELECT stateid,statename,COUNT(*) 

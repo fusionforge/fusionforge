@@ -1,7 +1,7 @@
 <?php
 /**
   *
-  * Site Mailings Subscription Maintanance page
+  * Site Mailings Subscription Maintenance page
   *
   * This page is used to maintain site mailings (currently, just
   * unsubscribe specific user).
@@ -27,7 +27,7 @@ if ($submit && $user_name) {
 	        	Show form for unsubscription type selection
 		*/
 
-                site_admin_header(array('title'=>'Site Mailings Subscription Maintanance'));
+                site_admin_header(array('title'=>'Site Mailings Subscription Maintenance'));
 		?>
 
 		<h4>Unsubscribe user: <?php echo $user_name; ?></h4>
@@ -69,12 +69,12 @@ if ($submit && $user_name) {
 	}
 }
 
-site_admin_header(array('title'=>"Site Mailings Subscription Maintanance"));
+site_admin_header(array('title'=>"Site Mailings Subscription Maintenance"));
 
 ?>
 
 <h4>
-Site Mailings Subscription Maintanance
+Site Mailings Subscription Maintenance
 </h4>
 
 <p>

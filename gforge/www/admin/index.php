@@ -86,7 +86,7 @@ Search <i>(groupid, group unix name, full name)</i>:
 <P><B>Site Utilities</B>
 <UL>
 <LI><A href="massmail.php">Mail Engine for <?php echo $GLOBALS['sys_name']; ?> Subscribers</A>
-<LI><A href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintanance</A>
+<LI><A href="unsubscribe.php"><?php echo $GLOBALS['sys_name']; ?> Site Mailings Maintenance</A>
 <LI><A HREF="edit_supported_languages.php">Add, Delete, or Edit Supported Languages</A>
 <LI><A HREF="edit_frs_filetype.php">Add, Delete, or Edit File Types</A>
 <LI><A HREF="edit_frs_processor.php">Add, Delete, or Edit Processors</A>
