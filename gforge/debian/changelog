@@ -1,4 +1,4 @@
-sourceforge (2.5-33+) unstable; urgency=low
+sourceforge (2.5-34) unstable; urgency=low
 
   * [Christian] made that adduser don't break postinst
   * [Otavio] Added the possibility to change default language using a
@@ -13,7 +13,7 @@ sourceforge (2.5-33+) unstable; urgency=low
   * [Roland] Otavio's patch #552: better handling of the browser language
     preferences. 
 
- -- Roland Mas <lolando@debian.org>  Wed, 30 Oct 2002 13:44:47 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 12 Nov 2002 19:22:05 +0100
 
 sourceforge (2.5-33) unstable; urgency=low
 
