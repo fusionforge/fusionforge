@@ -523,13 +523,11 @@ function site_user_header($params) {
 		array($Language->getText('menu','my_personal_page'),
 			$Language->getText('menu','diary_notes'),
 			$Language->getText('menu','account_maintenance'),
-			$Language->getText('menu','register_project'),
-			$Language->getText('menu','bookmark_page')),
+			$Language->getText('menu','register_project')),
 		array('"/my/"',
 			'"/my/diary.php"',
 			'"/account/"',
-			'"/register/"',
-			'"/my/bookmark_add.php"')));
+			'"/register/"')));
 	plugin_hook ("usermenu", false) ;
 	echo ($HTML->EndSubMenu());
 }
