@@ -251,6 +251,8 @@ else
 				modify_nsswitch
 				echo "Load ldap"
 				load_ldap $dn $secret
+				# Restarting ldap 
+				/etc/init.d/slapd restart
 				echo "Setup SF_robot account"
 				setup_robot
 				;;
