@@ -1,28 +1,28 @@
-# /*		
-#  *		
-#  * GForge French message catalog		
+# /*
 #  *
-#  * Copyright 1999-2001 (c) VA Linux Systems		
-#  * Copyright 2002-2004 (c) Christian Bayle, Roland Mas, Benoit Sibaud, Guillaume Smet
+#  * GForge French message catalog
+#  *
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * Copyright 2002-2005 (c) Christian Bayle, Roland Mas, Benoit Sibaud, Guillaume Smet
 #  * http://gforge.org
 #  *
 #  * @version   $Id$
 #  * @author Olivier Gerard, Alexandre Aufrere, Roland Mas, Christian Bayle, Benoit Sibaud, Guillaume Smet
 #  *
-#  */		
-#		
-# ChangeLog:		
-#		
-# 2000-09-25  Olivier Gerard		
-#	* Initial translation	
-# 2000-10-15  Alexandre Aufrere  <nikopol@users.sourceforge.net>		
-#	* Translation and correction	
-# 2002-04-10 Roland Mas <lolando@debian.org>		
-#	* Translation from Base.tab	
-# 2002-04-17 Roland Mas <lolando@debian.org>		
-#	* Added about/about_blurb, plus a few minor fixes	
-# 2002-09-25 Christian Bayle <bayle@debian.org>		
-#	* Added more account_register/blurb	
+#  */
+#
+# ChangeLog:
+#
+# 2000-09-25  Olivier Gerard
+#	* Initial translation
+# 2000-10-15  Alexandre Aufrere  <nikopol@users.sourceforge.net>
+#	* Translation and correction
+# 2002-04-10 Roland Mas <lolando@debian.org>
+#	* Translation from Base.tab
+# 2002-04-17 Roland Mas <lolando@debian.org>
+#	* Added about/about_blurb, plus a few minor fixes
+# 2002-09-25 Christian Bayle <bayle@debian.org>
+#	* Added more account_register/blurb
 #	* Added all Base.tab strings
 # Please check global Changelog file or CVS logs for more recent changes
 account	title	Préférences de votre compte
@@ -287,7 +287,6 @@ admin_groupedit	unix_group_name	Nom Unix du groupe :
 admin_groupedit	update	Mettre à jour
 admin_groupedit	updated	Mise à jour effectuée
 admin_groupedit	yes	Oui
-admin_grouplist	all_categories	Toutes les catégories
 admin_grouplist	group_list	Liste des groupes
 admin_grouplist	group_list_for_category	Liste des groupes de la catégorie :
 admin_grouplist	group_name_click_to_edit	Nom du groupe (cliquez pour modifier)
@@ -465,6 +464,8 @@ admin_useredit	account_info	Informations du compte
 admin_useredit	active	Actif (A)
 admin_useredit	could_not_complete_operation	Impossible de terminer l'opération
 admin_useredit	current_confirm_bash	Clé de confirmation actuelle :
+admin_useredit	delete	Supprimer
+admin_useredit	delete_user_confirm	Je confirme la suppression de cet utilisateur
 admin_useredit	deleted	Supprimé (D)
 admin_useredit	email	E-mail :
 admin_useredit	group_memerbership	Participation aux groupes
@@ -525,16 +526,16 @@ admin_vhost	virtual_host	Hôte virtuel :
 admin_vhost	virtual_host_administration	Administration de l'hôte virtuel
 admin_vhost	virtual_host_entry_updated	Hôte virtuel mis à jour
 admin_vhost	virtual_host_name	Nom de l'hôte virtuel
-advanced_search	and_search	tous les mots
 advanced_search	all	tous
-advanced_search	or_search	au moins un mot
-advanced_search	none	aucun
-advanced_search	search_button	Chercher
-advanced_search	search_in	Chercher dans
-advanced_search	select	Selectionner
+advanced_search	and_search	tous les mots
 advanced_search	headline	Résultats de la recherche dans : $1
 advanced_search	no_matches_found	Aucun résultat trouvé
 advanced_search	no_matches_found_no_under_section	Aucun résultat trouvé - Aucune section disponible (vérifiez vos permissions)
+advanced_search	none	aucun
+advanced_search	or_search	au moins un mot
+advanced_search	search_button	Chercher
+advanced_search	search_in	Chercher dans
+advanced_search	select	Selectionner
 artifact_canned	required_fields	ArtifactCanned : un nom et un responsable sont requis.
 artifact_category	required_fields	ArtifactCategory : un nom et un responsable sont requis.
 calendar	april	Avril
@@ -1209,8 +1210,8 @@ news_admin	do_nothing	Ne rien faire
 news_admin	newsbyte_deleted	Annonce supprimée.
 news_admin	newsbyte_not_found	Annonce non trouvée.
 news_admin	newsbyte_rejected	Annonce rejetée.
-news_admin	newsbytes_to_approve	Ces annonces ont besoin d'être approuvées (total : $1)
 news_admin	newsbyte_updated	Annonce mise à jour.
+news_admin	newsbytes_to_approve	Ces annonces ont besoin d'être approuvées (total : $1)
 news_admin	noapproved	Aucune annonce approuvée cette semaine
 news_admin	noqueued	Pas d'annonce en attente
 news_admin	norejected	Aucune annonce rejetée cette semaine
@@ -1401,6 +1402,9 @@ pm	tech_any	Tous
 pm	title	Gestion de projet : sous-projets et tâches
 pm	unassigned	Non assignée
 pm	view_calendar	Voir le calendrier
+pm	view_type	Vue détaillée
+pm	view_type_detail	Détail
+pm	view_type_summary	Résumé
 pm_addtask	task_added_relationship	La relation a été ajoutée avec succés
 pm_addtask	task_created_successfully	Tâche crée avec succès
 pm_addtask	task_updated_successfully	Tâche mise à jour avec succès
@@ -1463,6 +1467,13 @@ pm_browsetask	no_change	Aucun changement
 pm_browsetask	overdue_tasks	* indique les tâches en retard
 pm_browsetask	previous	50 précédentes
 pm_browsetask	title	Afficher les tâches
+pm_deletetask	are_you_sure	Etes-vous sûr de vouloir supprimer cette tâche ?
+pm_deletetask	confirm	Je confirme la suppression de cette tâche
+pm_deletetask	delete	Supprimer cette tâche
+pm_deletetask	task_delete_failed	Erreur lors de la suppression
+pm_deletetask	task_delete_failed_confirm	Vous n'avez pas confirmé : la tâche n'a pas été supprimée.
+pm_deletetask	task_deleted_successfully	Tâche supprimée avec succès
+pm_deletetask	title	Supprimer une tâche
 pm_detailtask	assigned_to	Assignée à :
 pm_detailtask	category	Catégorie
 pm_detailtask	dependend_on_task	Dépend de la tâche
@@ -1488,11 +1499,13 @@ pm_ganttpage	weeks	Semaines
 pm_include_grouphtml	add_task	Ajouter une tâche
 pm_include_grouphtml	admin	Administration
 pm_include_grouphtml	browse_task	Afficher les tâches
+pm_include_grouphtml	downloadcsv	Télécharger un export au format CSV
 pm_include_grouphtml	error_disabled	Ce projet a désactivé le gestionnaire de tâches.
 pm_include_grouphtml	gantt_chart	Diagramme de Gant
 pm_include_grouphtml	not_started	Non débuté
 pm_include_grouphtml	project	Projet
 pm_include_grouphtml	reporting	Rapports d'activité
+pm_include_grouphtml	uploadcsv	Uploader un fichier au format CSV
 pm_include_taskhtml	by	Par
 pm_include_taskhtml	comment	Commentaire
 pm_include_taskhtml	date	Date
@@ -1545,6 +1558,10 @@ pm_reporting	tasks_by_category	Tâches par catégorie
 pm_reporting	tasks_by_technician	Tâches par technicien
 pm_reporting	title	Rapports sur les tâches
 pm_task	create_successfully	Tâche créée avec succès
+pm_uploadcsv	choose_file	Choisissez un fichier au format CSV à charger.
+pm_uploadcsv	explain	Cette page vous permet de choisir un fichier au format CSV pour qu'il soit inséré dans le sous-project courant.
+pm_uploadcsv	title	Charger des données dans le gestionnaire de tâches
+project_admin	acceptpending	Accepter
 project_admin	add_user	Ajouter un utilisateur
 project_admin	addfromlist	Ajouter des utilisateurs à partir de la liste
 project_admin	addfromlist1	Cochez la case à côté du nom de l'utilisateur que vous souhaitez ajouter. Vos sélections seront conservées si vous cliquez sur une des lettres ci-dessous. Quand vous avez terminé votre sélection, cliquez sur "Finir" pour choisir les rôles pour les utilisateurs que vous ajoutez.
@@ -1566,6 +1583,7 @@ project_admin	no_matching_user	<p>Aucun utilisateur correspondant</p>
 project_admin	packages	Paquet&nbsp;
 project_admin	plugins_admin	Administration des plugins
 project_admin	project_information	Informations diverses sur le projet
+project_admin	rejectpending	Rejeter
 project_admin	scm_admin	Administration de la gestion de configuration
 project_admin	section	Projet : $1
 project_admin	shell_server	Serveur shell (pour SSH)&nbsp;:&nbsp;
@@ -1707,6 +1725,8 @@ project_admin_qrs	exceed_file_size	Le fichier transmis dépasse la taille maxima
 project_admin_qrs	file_name	Nom du fichier&nbsp;
 project_admin_qrs	file_released	Fichier mis à jour : vous pouvez maintenant choisir d'éditer la version.
 project_admin_qrs	file_type	Type de fichier&nbsp;
+project_admin_qrs	ftpupload_choosefile	Choisissez un fichier FTP plutôt qu'utiliser l'upload :
+project_admin_qrs	ftpupload_new_file	Vous pouvez également utiliser FTP pour uploader un fichier sur $1
 project_admin_qrs	maximum_file_size	Taille maximale du fichier :
 project_admin_qrs	must_choose_one	Sélection obligatoire
 project_admin_qrs	no_file_types_available	Pas de types de fichiers disponibles.
@@ -1832,6 +1852,17 @@ project_home	title	Information sur le projet
 project_home	tracker_open	<strong>$1</strong> ouvert(s) sur un total de <strong>$2</strong>
 project_home	view_members	Voir les membres
 project_home	view_project_files	Voir tous les fichiers du projet
+project_joinrequest	approved	Vous avez été ajouté au projet $1.
+project_joinrequest	denied	Votre demande pour rejoindre le projet $1 a été refusé par le(s) administrateur(s).
+project_joinrequest	join_notice_body	$1 a demandé à rejoindre votre projet. Vous pouvez approuver sa demande sur la <a href="http://$2/project/admin/?group_id=$3">page d'administration du projet</a>.
+project_joinrequest	join_notice_subject	Demande pour rejoindre le projet $1
+project_joinrequest	joining	Vous pouvez demander à rejoindre le projet en cliquant sur le bouton Valider. Le(s) administrateur(s) recevra(ont) un courrier électronique pour approuver ou refuser votre demande.
+project_joinrequest	nonepending	Aucune demande en attente
+project_joinrequest	pending	Demandes en attentes
+project_joinrequest	pending_requests	Demandes en attente
+project_joinrequest	request_link	Demander à rejoindre le projet
+project_joinrequest	submitted	Votre demande a été soumise.
+project_joinrequest	title	Demander à rejoindre le projet
 project_memberlist	developer	Développeur
 project_memberlist	joining	<p>Si vous désirez contribuer à ce projet en devenant développeur, contactez l'un des administrateurs du projet signalés en gras dans la liste ci-dessous.</p>
 project_memberlist	role	Rôle / Fonction
@@ -2012,14 +2043,16 @@ register_tos	title	Accord sur les conditions générales
 reporting	add	Ajouter
 reporting	administrative	Administration
 reporting	area	Outil
-reporting	cumulative_users	Utilisateurs cumulés (graphique)
-reporting	cumulative_users_title	Utilisateurs cumulés
 reporting	cumulative_groups	Projets cumulés (graphique)
 reporting	cumulative_groups_title	Projets cumulés
+reporting	cumulative_users	Utilisateurs cumulés (graphique)
+reporting	cumulative_users_title	Utilisateurs cumulés
 reporting	daily	Quotidien
 reporting	end	Fin
 reporting	feature_req	Demandes de fonctionnalités
 reporting	forum_messages	Messages dans les forums
+reporting	groups_added_title	Projets ajoutés
+reporting	groups_added_weekly	Projets ajoutés (graphique)
 reporting	initialize	Initialiser/Reconstruire les tables des statistiques
 reporting	manage	Gérer les catégories de suivi temporel
 reporting	monthly	Mensuel
@@ -2056,8 +2089,6 @@ reporting	user_activity_title	Activité d'un utilisateur
 reporting	users	Utilisateurs
 reporting	users_added_title	Utilisateurs ajoutés
 reporting	users_added_weekly	Utilisateurs ajoutés (graphique)
-reporting	groups_added_title	Projets ajoutés
-reporting	groups_added_weekly	Projets ajoutés (graphique)
 reporting	week	Semaine
 reporting	weekly	Hebdomadaire
 reporting_pie	end	Fin
@@ -2167,10 +2198,10 @@ search	skill_type	Type
 search	tasks_completed	Complété
 search	tasks_created_by	Créé par
 search	tasks_end_date	Date de fin
+search	tasks_id	#
 search	tasks_start_date	Date de début
 search	tasks_summary	Résumé
 search	title	Recherche
-search	tasks_id	#
 searchbox	advanced_search	Recherche avancée
 searchbox	docs	Les documents de ce projet
 searchbox	forum	Ce forum
@@ -2841,6 +2872,13 @@ tracker_admin_update_type	send_submissions	Envoyer un courrier pour toute nouvel
 tracker_admin_update_type	submit_item_form_text	Texte pour la page 'Nouveau'&nbsp;
 tracker_admin_update_type	title	Mise à jour de $1
 tracker_admin_update_users	title	Édition des permissions des utilisateurs
+tracker_artifact	are_you_sure_delete	Etes-vous sûr de vouloir supprimer cet élément ?
+tracker_artifact	confirm_delete	Je confirme la suppression de l'élément
+tracker_artifact	delete_failed	Erreur lors de la suppression de l'élément
+tracker_artifact	delete_failed_confirm	Vous n'avez pas confirmé : l'élément n'a pas été supprimé.
+tracker_artifact	delete_text	Supprimer cet élément
+tracker_artifact	deleted_successfully	Element supprimé avec succès
+tracker_artifact	deleted_title	Supprimer un élément
 tracker_artifact	double_submit	Vous avez tenté de soumettre deux fois un formulaire. Merci d'éviter de cliquer deux fois.
 tracker_artifact	error_admin_modify	Trace : Seuls les administrateurs peuvent modifier les types privés.
 tracker_artifact	error_body_required	Trace : il faut un contenu.
