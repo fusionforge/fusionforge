@@ -42,7 +42,9 @@ here have been transferred onto the Savannah project, at
   TABLE ... DROP COLUMN to be implemented in PostgreSQL (it's not in
   7.2, maybe it'll be in 7.3) or do it the hard way (copy the relevant
   fields of the table to a new table, then drop the old table and
-  rename the new one).
+  rename the new one).  [RM] Done.  The hard way.  Had to, since it
+  seems to be the only way PosgreSQL provides of dropping a foreign
+  key constraint.
 
 * [RM] Search and replace "sourceforge.net" with the appropriate
   hostname in all files.  Ditto with "valinux.com".

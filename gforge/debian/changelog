@@ -19,11 +19,13 @@ sourceforge (2.6-0+7+) unstable; urgency=low
     which caused strange errors and deep frustration in the upgrade path
     from the 2.5 series.
   * [Roland] While I was fixing that, I also took the opportunity to add
-    some code to drop the "deadXX" columns that are introduced by the
-    2.5->2.6 upgrade (ALTER TABLE/DROP COLUMN not being implemented in
+    some code to drop the useless "deadXX" columns that are introduced by
+    the 2.5->2.6 upgrade (ALTER TABLE/DROP COLUMN not being implemented in
     PostgreSQL yet).
+  * [Roland] Moved a few SQL statements used only in the 2.5->2.6 upgrade
+    from db-upgrade26.pl to sf2.5-to-sf2.6.sql.
 
- --
+ -- Roland Mas <lolando@debian.org>  Sun, 10 Mar 2002 16:50:20 +0100
 
 sourceforge (2.6-0+7) unstable; urgency=low
 

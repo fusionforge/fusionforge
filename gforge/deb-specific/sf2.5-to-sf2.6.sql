@@ -517,12 +517,11 @@ WHERE status != 'I' AND status != 'P'
 ORDER BY group_id ASC;
 
 ----- 
--- Roland Mas 20020307
--- Copy the groups table to groups2, drop groups, then rename groups2 to groups
+-- Roland Mas 20020307 and 20020308
+-- Drop and recreate the groups and users tables.
 -- Goals: 
--- 1. Remove the dead columns
+-- 1. Remove the dead columns (in groups)
 -- 2. Get rid of the undeleteable foreign key constraints with old tables
---    (like, support_category...)
 
 ALTER TABLE groups RENAME TO old_groups ;
 DROP INDEX groups_pkey ;
@@ -556,7 +555,8 @@ CREATE TABLE "groups" (
 	"use_docman" integer DEFAULT '1' NOT NULL,
 	"new_task_address" text DEFAULT '' NOT NULL,
 	"send_all_tasks" integer DEFAULT '0' NOT NULL,
-	"use_pm_depend_box" integer DEFAULT '1' NOT NULL
+	"use_pm_depend_box" integer DEFAULT '1' NOT NULL,
+	CONSTRAINT "groups_pkey" PRIMARY KEY ("group_id")
 );
 
 INSERT INTO groups
@@ -569,17 +569,67 @@ FROM old_groups ;
 
 DROP TABLE old_groups ;
 
--- End of Roland Mas 20020307
------
+ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
+ALTER TABLE frs_package ADD CONSTRAINT frspackage_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL ;
 
--- vacuum analyze artifact_perm;
--- vacuum analyze artifact_group_list;
--- vacuum analyze artifact;
--- vacuum analyze artifact_history;
--- vacuum analyze artifact_category;
--- vacuum analyze artifact_group;
--- vacuum analyze artifact_file;
--- vacuum analyze artifact_message;
+CREATE UNIQUE INDEX group_unix_uniq ON groups USING BTREE (unix_group_name varchar_ops);
+CREATE INDEX groups_type ON groups USING BTREE (type int4_ops);
+CREATE INDEX groups_public ON groups USING BTREE (is_public int4_ops);
+CREATE INDEX groups_status ON groups USING BTREE (status bpchar_ops);
+
+ALTER TABLE users RENAME TO old_users ;
+DROP INDEX users_status ;
+DROP INDEX user_user ;
+DROP INDEX idx_users_username ;
+DROP INDEX users_user_pw ;
+DROP INDEX users_pkey ;
+
+CREATE TABLE "users" (
+	"user_id" integer DEFAULT nextval('users_pk_seq'::text) NOT NULL,
+	"user_name" text DEFAULT '' NOT NULL,
+	"email" text DEFAULT '' NOT NULL,
+	"user_pw" character varying(32) DEFAULT '' NOT NULL,
+	"realname" character varying(32) DEFAULT '' NOT NULL,
+	"status" character(1) DEFAULT 'A' NOT NULL,
+	"shell" character varying(20) DEFAULT '/bin/bash' NOT NULL,
+	"unix_pw" character varying(40) DEFAULT '' NOT NULL,
+	"unix_status" character(1) DEFAULT 'N' NOT NULL,
+	"unix_uid" integer DEFAULT '0' NOT NULL,
+	"unix_box" character varying(10) DEFAULT 'shell1' NOT NULL,
+	"add_date" integer DEFAULT '0' NOT NULL,
+	"confirm_hash" character varying(32),
+	"mail_siteupdates" integer DEFAULT '0' NOT NULL,
+	"mail_va" integer DEFAULT '0' NOT NULL,
+	"authorized_keys" text,
+	"email_new" text,
+	"people_view_skills" integer DEFAULT '0' NOT NULL,
+	"people_resume" text DEFAULT '' NOT NULL,
+	"timezone" character varying(64) DEFAULT 'GMT',
+	"language" integer DEFAULT '1' NOT NULL,
+	CONSTRAINT "users_pkey" PRIMARY KEY ("user_id")
+);
+
+INSERT INTO users
+SELECT user_id, user_name, email, user_pw, realname, status, shell,
+unix_pw, unix_status, unix_uid, unix_box, add_date, confirm_hash,
+mail_siteupdates, mail_va, authorized_keys, email_new,
+people_view_skills, people_resume, timezone, language
+FROM old_users ;
+
+DROP TABLE old_users ;
+
+ALTER TABLE user_group ADD CONSTRAINT user_group_user_id_fk FOREIGN KEY (user_id) REFERENCES users(user_id) MATCH FULL ;
+ALTER TABLE forum ADD CONSTRAINT forum_posted_by_fk FOREIGN KEY (posted_by) REFERENCES users(user_id) MATCH FULL ;
+ALTER TABLE project_task ADD CONSTRAINT project_task_created_by_fk FOREIGN KEY (created_by) REFERENCES users(user_id) MATCH FULL ;
+ALTER TABLE users ADD CONSTRAINT users_languageid_fk FOREIGN KEY (language) REFERENCES supported_languages(language_id) MATCH FULL ;
+
+CREATE INDEX users_status ON users USING BTREE (status bpchar_ops);
+CREATE INDEX user_user ON users USING BTREE (status bpchar_ops);
+CREATE INDEX idx_users_username ON users USING BTREE (user_name text_ops);
+CREATE INDEX users_user_pw ON users USING BTREE (user_pw varchar_ops);
+
+-- End of Roland Mas 20020307 and 20020308
+-----
 
 -- artifact-fkeys
 ALTER TABLE artifact_perm ADD CONSTRAINT artifactperm_userid_fk 
@@ -645,12 +695,6 @@ SELECT setval('artifact_artifact_id_seq',(SELECT max(artifact_id) FROM artifact)
 --SELECT setval('artifact_message_id_seq',(SELECT max(id) FROM artifact_message));
 --SELECT setval('artifact_monitor_id_seq',(SELECT max(id) FROM artifact_monitor));
 
------ TODO
--- Here should go something to the effect of artifact-convert-files.php
--- I think it is possible to run it after everything else, so maybe there
--- is no need to run this script just here.
------
-
 -- 20010305
 ----- TODO
 -- Re-enable the grants once we are sure the "backend" account exists
@@ -703,8 +747,6 @@ DROP TABLE support_status           ;
 
 -- 20010313
 create unique index users_namename_uniq on users(user_name);
-DROP INDEX user_user;
-DROP INDEX idx_users_username;
 -- CREATE FUNCTION plpgsql_call_handler () RETURNS OPAQUE AS '/usr/local/pgsql/lib/plpgsql.so' LANGUAGE 'C';
 -- CREATE TRUSTED PROCEDURAL LANGUAGE 'plpgsql' HANDLER plpgsql_call_handler LANCOMPILER 'PL/pgSQL';
 CREATE FUNCTION forumgrouplist_insert_agg () RETURNS OPAQUE AS '
@@ -1024,11 +1066,7 @@ ALTER TABLE frs_release ADD CONSTRAINT frsrelease_releasedby_fk
 	FOREIGN KEY (released_by) REFERENCES users(user_id) MATCH FULL;
 
 ALTER TABLE artifact_group_list ADD COLUMN status_timeout integer;
------ TODO
--- This command breaks on my installation
--- Find out why, then fix it
------
--- UPDATE artifact_group_list SET status_timeout='1209600' WHERE status_timeout is NULL;
+UPDATE artifact_group_list SET status_timeout='1209600' WHERE status_timeout is NULL;
 
 INSERT INTO artifact_status VALUES('4','Pending');
 
@@ -1042,3 +1080,28 @@ metric float not null);
 
 CREATE UNIQUE INDEX user_metric_history_date_userid 
 ON user_metric_history(month,day,user_id);
+
+---- From now on, everything comes from Debian-SF
+
+-- Get rid of another dead column
+ALTER TABLE user_preferences RENAME TO old_user_preferences ;
+DROP INDEX user_pref_user_id ;
+
+CREATE TABLE "user_preferences" (
+	"user_id" integer DEFAULT '0' NOT NULL,
+	"preference_name" character varying(20),
+	"preference_value" character varying(20),
+	"set_date" integer DEFAULT '0' NOT NULL
+);
+
+INSERT INTO user_preferences
+SELECT user_id, preference_name, preference_value, set_date
+FROM old_user_preferences ;
+
+DROP TABLE old_user_preferences ;
+
+CREATE INDEX "user_pref_user_id" on "user_preferences" using btree ( "user_id" "int4_ops" );
+
+-- Fix some hostnames
+UPDATE groups SET unix_box = 'shell', cvs_box = 'cvs' ;
+UPDATE users SET unix_box = 'shell' ;

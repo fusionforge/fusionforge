@@ -39,7 +39,7 @@ debug "Do not worry unless told otherwise." ;
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
 eval {
-    my ($query, $sth, @array, $version, $action, $path) ;
+    my ($query, $sth, @array, $version, $action, $path, $target) ;
 
     # Do we have at least the basic schema?
 
@@ -118,7 +118,8 @@ eval {
   PATH_SWITCH: {
       ($path eq 'scratch-to-2.6') && do {
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.1+global+data+done") {
+	  $target = "2.5.9999.1+global+data+done" ;
+	  if (is_lesser $version, $target) {
 	      my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
 	      # TODO: user_rating.sql
 
@@ -136,13 +137,14 @@ eval {
 	      }
 	      @reqlist = () ;
 	      
-	      &update_db_version ("2.5.9999.1+global+data+done") ;
+	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.2+local+data+done") {
+	  $target = "2.5.9999.2+local+data+done" ;
+	  if (is_lesser $version, $target) {
 	      debug "Adding local data." ;
 	      
 	      do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
@@ -181,13 +183,14 @@ eval {
 	      }
 	      @reqlist = () ;
 	      
-	      &update_db_version ("2.5.9999.2+local+data+done") ;
+	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
 	  
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.3+skills+done") {
+	  $target = "2.5.9999.3+skills+done" ;
+	  if (is_lesser $version, $target) {
 	      debug "Inserting skills." ;
 	      
 	      foreach my $skill (split /;/, $skill_list) {
@@ -203,13 +206,14 @@ eval {
 	      }
 	      @reqlist = () ;
 	      
-	      &update_db_version ("2.5.9999.3+skills+done") ;
+	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.6-0") {
+	  $target = "2.6-0" ;
+	  if (is_lesser $version, $target) {
 	      debug "Updating debian_meta_data table." ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
 	      # debug $query ;
@@ -217,7 +221,7 @@ eval {
 	      $sth->execute () ;
 	      $sth->finish () ;
 	      
-	      &update_db_version ("2.6-0") ;
+	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
@@ -228,7 +232,8 @@ eval {
       ($path eq '2.5-to-2.6') && do {
 	  
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.1+data+upgraded") {
+	  $target = "2.5.9999.1+data+upgraded" ;
+	  if (is_lesser $version, $target) {
 	      debug "Upgrading your database scheme from 2.5" ;
 
 	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
@@ -241,13 +246,14 @@ eval {
 	      }
 	      @reqlist = () ;
 
-	      &update_db_version ("2.5.9999.1+data+upgraded") ;
+	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
 
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.2+artifact+transcoded") {
+	  $target = "2.5.9999.2+artifact+transcoded" ;
+	  if (is_lesser $version, $target) {
 	      debug "Transcoding the artifact data fields" ;
 
 	      $query = "SELECT id,bin_data FROM artifact_file ORDER BY id ASC" ;
@@ -267,83 +273,22 @@ eval {
 	      }
 	      $sth->finish () ;
 
-	      &update_db_version ("2.5.9999.2+artifact+transcoded") ;
+	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
 
-
 	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.3+indices+fkeys+created") {
-	      debug "Creating varous indices and foreign key constraints" ;
-
-	      @reqlist = (
-			  "ALTER TABLE groups ADD CONSTRAINT groups_pkey PRIMARY KEY (group_id)",
-			  "CREATE UNIQUE INDEX group_unix_uniq ON groups USING BTREE (unix_group_name varchar_ops)",
-			  "CREATE INDEX groups_type ON groups USING BTREE (type int4_ops)",
-			  "CREATE INDEX groups_public ON groups USING BTREE (is_public int4_ops)",
-			  "CREATE INDEX groups_status ON groups USING BTREE (status bpchar_ops)",
-			  "ALTER TABLE artifact_group_list ADD CONSTRAINT artifactgroup_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL",
-			  "ALTER TABLE frs_package ADD CONSTRAINT frspackage_groupid_fk FOREIGN KEY (group_id) REFERENCES groups(group_id) MATCH FULL"
-# TODO
-# fkey from user_group to user
-#           forums
-#           project_task
-#           user et supported_languages
-# Drop following indices and recreate them thusly:
-# CREATE INDEX users_status ON users USING BTREE (status bpchar_ops);
-# CREATE INDEX user_user ON users USING BTREE (status bpchar_ops);
-# CREATE INDEX idx_users_username ON users USING BTREE (user_name text_ops);
-# CREATE INDEX users_user_pw ON users USING BTREE (user_pw varchar_ops);
-			  ) ;
-	      
-	      foreach my $s (@reqlist) {
-		  $query = $s ;
-		  debug $query ;
-		  $sth = $dbh->prepare ($query) ;
-		  $sth->execute () ;
-		  $sth->finish () ;
-	      }
-	      @reqlist = () ;
-	      
-	      &update_db_version ("2.5.9999.3+indices+fkeys+created") ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-
-	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.5.9999.4+shellbox+fixed") {
-	      debug "Fixing the unix_box fields" ;
-
-	      $query = "update groups set unix_box = 'shell'" ;
-	      debug $query ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-	      
-	      $query = "update users set unix_box = 'shell'" ;
-	      debug $query ;
-	      $sth = $dbh->prepare ($query) ;
-	      $sth->execute () ;
-	      $sth->finish () ;
-
-	      &update_db_version ("2.5.9999.4+shellbox+fixed") ;
-	      debug "Committing." ;
-	      $dbh->commit () ;
-	  }
-
-
-	  $version = &get_db_version ;
-	  if (is_lesser $version, "2.6-0") {
-	      debug "Updating debian_meta_data table." ;
+	  $target = "2.6-0" ;
+	  if (is_lesser $version, $target) {
+	      debug "Database has successfully been converted." ;
 	      $query = "DELETE FROM debian_meta_data WHERE key = 'current-path'" ;
 	      # debug $query ;
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
 	      
-	      &update_db_version ("2.6-0") ;
+	      &update_db_version ($target) ;
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
