@@ -50,8 +50,11 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     than I thought.
   * [Roland] README.Themes: Added a section on theme naming to avoid name
     conflicts.
+  * [Christian] added choice for default language and theme in debconf
+  * [Christian] more i18n for account register
+  * [Christian] cosmetics/i18n in bugtracker
 
- -- Roland Mas <lolando@debian.org>  Tue,  1 Oct 2002 20:58:52 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri,  4 Oct 2002 01:49:01 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 
