@@ -26,8 +26,15 @@ set -x				# Be verbose, be very verbose.
 . /usr/share/debconf/confmodule
 
 #DSFHELPER:replace-files#
+#DSFHELPER:handle-mainconffile#
+
 case "$1" in
     configure)
+	#vars="system_name domain_name server_admin db_password shell_host users_host cvs_host lists_host download_host admin_login ip_address admin_password newsadmin_groupid statsadmin_groupid skill_list"
+	vars="shell_host users_host cvs_host lists_host download_host ip_address newsadmin_groupid statsadmin_groupid"
+	update_mainconffile $vars
+        /usr/sbin/gforge-config
+
         # Patch Apache configuration files
 	/usr/lib/gforge/bin/install-apache.sh configure-files
 	[ -e /etc/apache/httpd.conf ] && propose_update_install /etc/apache/httpd.conf

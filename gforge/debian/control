@@ -65,9 +65,9 @@ Description: Collaborative development tool - database (using PostgreSQL)
 Package: gforge-mta-exim
 Architecture: all
 Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 0.5.00), exim | exim-tls
-Replaces: sourceforge-mta-exim ( >> 2.6-0+11)
+Replaces: sourceforge-mta-exim (>> 2.6-0+11)
 Provides: gforge-mta
-Conflicts: sourceforge-mta
+Conflicts: gforge-mta
 Description: Collaborative development tool - mail tools (using Exim)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
