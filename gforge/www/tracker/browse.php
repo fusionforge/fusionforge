@@ -107,9 +107,9 @@ echo '
 	<input type="hidden" name="set" value="custom" />
 	<tr>
 		<td><span style="font-size:smaller">'.$Language->getText('tracker','assignee').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a><br />'. $tech_box .'</span></td>'.
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a><br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','any')) .'</span></td>'.
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','category').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a><br />'. $ath->categoryBox ('_category',$_category,$Language->getText('tracker','any')) .'</span></td>'.
-	'<td><span style="font-size:smaller">'.$Language->getText('tracker','group').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a><br />'. $ath->artifactGroupBox ('_group',$_group,$Language->getText('tracker','any')) .'</span></td>
+	'<td><span style="font-size:smaller">'.$Language->getText('tracker','status').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a><br />'. $ath->statusBox('_status',$_status,true,$Language->getText('tracker','status_any')) .'</span></td>'.
+	'<td><span style="font-size:smaller">'.$Language->getText('tracker','category').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a><br />'. $ath->categoryBox ('_category',$_category,$Language->getText('tracker','category_any')) .'</span></td>'.
+	'<td><span style="font-size:smaller">'.$Language->getText('tracker','group').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a><br />'. $ath->artifactGroupBox ('_group',$_group,$Language->getText('tracker','group_any')) .'</span></td>
 	</tr>
 	<tr>
 		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
