@@ -81,10 +81,10 @@ if (session_loggedin()) {
 		<strong>'.$Language->getText('news_submit', 'forproject').': '. group_getname($group_id) .'</strong>
 		<input type="hidden" name="post_changes" value="y" /></p>
 		<p>
-		<strong>'.$Language->getText('news_submit', 'subject').':</strong><br />
+		<strong>'.$Language->getText('news_submit', 'subject').':'.utils_requiredField().'</strong><br />
 		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
 		<p>
-		<strong>'.$Language->getText('news_submit', 'details').':</strong><br />
+		<strong>'.$Language->getText('news_submit', 'details').':'.utils_requiredField().'</strong><br />
 		<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />
 		<input type="submit" name="submit" value="'.$Language->getText('news_submit', 'submit').'" />
 		</form></p>';
