@@ -44,8 +44,13 @@ sourceforge (2.5-29+) unstable; urgency=low
   * [Roland] Moved the PostgreSQL de-configuration down in the prerm
     script, since the LDAP de-configuration now uses sql2ldif and
     therefore needs access to the database.
+  * [Roland] Moved back to non-US.  It seems there was a mistake, and not
+    all the dependencies were in main after all.  For some reason, the
+    fact that ProFTPd was still in non-US eluded both me and the
+    ftpmasters at the time the 2.5-29 package made it into main.  I'm
+    sorry about that.
 
- -- Roland Mas <lolando@debian.org>  Wed, 17 Jul 2002 12:09:04 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 17 Jul 2002 22:58:57 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
