@@ -1,3 +1,14 @@
+2005-03-02  Ognyan Kulev  <ogi@fmi.uni-sofia.bg>
+
+	* Content of INSTALL file is merged into Installation Guide.
+	Other small improvements.  /var/www is recommended instead of
+	/usr/share as place to install.
+	* docs/docbook/Makefile: xsl/db2latex/xsl instead of
+	xsl/db2latex/latex.
+	* docs/docbook/INSTALL: Debian-specific instructions are moved in
+	own section.  debianhtml, debianpdf and debian targets are
+	documented.
+
 2005-02-27  Tim Perdue <tim@gforge.org>
 
 	* mopping up permission logic for the different tracker roles -
