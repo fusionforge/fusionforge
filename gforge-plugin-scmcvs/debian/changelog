@@ -1,8 +1,8 @@
-gforge-plugin-scmcvs (4.0-1) unstable; urgency=low
+gforge-plugin-scmcvs (4.0.2-1) unstable; urgency=low
 
-  * [Christian] Align version with gforge 
+  * [Christian] Align version with gforge
 
- -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:57:56 +0100
+ -- Christian Bayle <bayle@debian.org>  Mon, 24 Jan 2005 23:32:10 +0100
 
 gforge-plugin-scmcvs (0.1-22) unstable; urgency=low
 

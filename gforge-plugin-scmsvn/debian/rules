@@ -37,7 +37,8 @@ install: build
 	dh_installdirs
 
 	cp -r bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/
-	ln -sf /usr/lib/gforge/plugins/$(PLUGIN)/bin/svnsh $(DESTDIR)/bin/
+	#ln -sf /usr/lib/gforge/plugins/$(PLUGIN)/bin/svnsh $(DESTDIR)/bin/
+	# Removed svnsh that should be scmsh in gforge-common package
 	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
 	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
 	cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
