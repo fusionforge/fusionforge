@@ -3855,8 +3855,7 @@ $HTML_META$CSS</head>
   <td>
 EOF
 } else {
-print <<EOF;
-<div class="src">
+  print <<EOF;
 <table class="navigate-header" width="100%">
  <tr>
    <td>
@@ -4320,8 +4319,6 @@ $HTML_META$CSS</head>
 <body>
 $l <h1>$title</h1>
 EOH
-} else {
-  print '<div id="#cvsweb">';
 }
 }
 
@@ -4330,8 +4327,6 @@ sub html_footer()
   print "<hr />\n<address>$address</address>\n" if $address;
 if(!defined($ENV{'PHP_WRAPPER'})) {
   print "</body>\n</html>\n";
-} else {
-  print "</div>\n";
 }
 }
 
