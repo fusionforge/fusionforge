@@ -15,29 +15,18 @@
 
 require ('squal_pre.php');
 
-// drop and recreate page cache
 //
-db_query("DROP TABLE cache_store");
-db_query("CREATE TABLE cache_store (
-name varchar(255) primary key,
-data text,
-indate int not null default 0
-);");
+//	PG 7.1 and earlier
+//
+//$res = db_query("VACUUM ANALYZE;");
+//
+//	PG 7.2 and 7.3
+//
+$res = db_query("VACUUM FULL;");
 
-// VACUUM db1
-//
-$res = db_query("VACUUM ANALYZE;");
 
 if (!$res) {
 	echo "Error on DB1: " . db_error();
-}
-
-// VACUUM db2
-//
-$res = db_query("VACUUM ANALYZE;", -1, 0, SYS_DB_STATS);
-
-if (!$res) {
-	echo "Error on DB2: " . db_error();
 }
 
 ?>
