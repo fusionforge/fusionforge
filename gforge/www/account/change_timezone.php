@@ -27,27 +27,20 @@ if ($submit) {
 	}
 }
 
-site_user_header(array('title'=>"Change Timezone &amp; Language"));
+site_user_header(array('title'=>"$Language->LANGUAGE / $Language->TIMEZONE $Language->CHANGE"));
 
 ?>
-<H3>Timezone/Language Change</h3>
-<P>
-Now, no matter where you live, you can see all dates and times throughout SourceForge 
-as if it were in your neighborhood.
+<H3><?php echo "$Language->LANGUAGE / $Language->TIMEZONE $Language->CHANGE"; ?></h3>
 <P>
 <FORM ACTION="<?php echo $PHP_SELF; ?>" METHOD="POST">
 <?php
 
 echo '<H4>'.$feedback.'</H4>';
 
-echo '
-<P>
-Timezone:<BR>';
+echo "<P>$Language->TIMEZONE:<BR>";
 echo html_get_timezone_popup ('timezone',user_get_timezone());
 
-echo '
-<P>
-Language:<BR>';
+echo "<P>$Language->LANGUAGE:<BR>";
 echo html_get_language_popup ($Language,'language_id',user_get_language());
 
 ?>

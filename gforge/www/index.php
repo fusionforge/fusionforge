@@ -42,6 +42,8 @@ echo '<P>';
 // echo $HTML->box1_top($Language->GROUP_LONG_FOUNDRIES);
 ?>
 
+<!--
+
 <br><b>SourceForge Development Foundries</b><br><br>
 <table bgcolor="White" border="0" cellpadding="0" cellspacing="0" valign="top" width="100%">
 <tr>
@@ -74,6 +76,8 @@ echo '<P>';
 </table>
 <br>
 
+-->
+
 <?php
 echo $HTML->box1_top($Language->GROUP_LONG_NEWS);
 echo news_show_latest($sys_news_group,5,true,false,false,5);
@@ -82,15 +86,16 @@ echo $HTML->box1_bottom();
 
 </TD>
 
-<?php
+<TD width="35%" VALIGN="TOP">
 
-echo '<TD width="35%" VALIGN="TOP">';
+<?php
 
 echo cache_display('show_features_boxes','show_features_boxes()',3600);
 
 ?>
 
-</TD></TR></TABLE>
+</TD></TR>
+</TABLE>
 
 <?php
 

@@ -89,10 +89,9 @@ switch ($font_action){
     }
 }
 
-$title = 'Choose Your Theme';
-$HTML->header(array('title'=>$title));
+$HTML->header(array('title'=>$Language->CHANGE_MY_THEME));
 
-echo "<H3>$title</H3>";
+echo "<H3>$Language->CHANGE_MY_THEME</H3>";
 // get global user vars
 $res_user = db_query("SELECT * FROM users WHERE user_id=" . user_getid());
 $row_user = db_fetch_array($res_user);

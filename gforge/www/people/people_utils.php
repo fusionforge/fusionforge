@@ -11,7 +11,7 @@
 	By Tim Perdue, Sourceforge, March 2000
 */
 function people_header($params) {
-	global $group_id,$job_id,$DOCUMENT_ROOT,$HTML;
+	global $group_id,$job_id,$DOCUMENT_ROOT,$HTML, $Language;
 
 	if ($group_id) {
 		$params['toptab']='people';
@@ -21,7 +21,7 @@ function people_header($params) {
 		echo $HTML->header($params);
 	}
 	echo '
-		<H2>Project Help Wanted</H2>
+		<H2>'.$Language->PROJECT_HELP_WANTED.'</H2>
 		<P><B>
 	<A HREF="/people/admin/">Admin</A>';
 	if ($group_id && $job_id) {

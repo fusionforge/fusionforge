@@ -33,13 +33,13 @@ function register_valid()	{
 if (register_valid()) {
 	session_redirect("/account/");
 } else { // not valid registration, or first time to page
-	site_user_header(array(title=>"Change RealName"));
+	site_user_header(array(title=>"$Language->REALNAME $Language->CHANGE"));
 
 	?>
-	<p><b>RealName Change</b>
+	<p><b><?php echo "$Language->REALNAME $Language->CHANGE"; ?></b>
 	<?php if ($register_error) print "<p>$register_error"; ?>
 	<form action="change_realname.php" method="post">
-	<p>New Real Name:
+	<p><?php echo "$Language->NEW $Language->REALNAME"; ?> :
 	<br><input type="text" name="form_realname">
 	<p><input type="submit" name="Update" value="Update">
 	</form>

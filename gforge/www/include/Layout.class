@@ -47,6 +47,7 @@ class Layout extends Error {
 	//Define all the icons for this theme
 	var $icons = array(
 		'Summary' => '/images/ic/anvil24.png',
+		'Admin' => '/images/ic/anvil24.png',
 		'Homepage' => '/images/ic/home.png',
 		'Forums' => '/images/ic/notes.png',
 		'Bugs' => '/images/ic/bug.png',
@@ -122,7 +123,7 @@ class Layout extends Error {
 			$bgcolor=$this->COLOR_HTMLBOX_BACK;
 		}
 		$return = '<TABLE cellspacing="1" cellpadding="5" width="100%" border="0" bgcolor="'.$this->COLOR_HTMLBOX_BACK.'">
-			<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" BACKGROUND="'.$GLOBALS['sys_images_url'].$this->imgroot.'steel3.jpg" align="center">
+			<TR BGCOLOR="'.$this->COLOR_HTMLBOX_TITLE.'" BACKGROUND="http:'.$GLOBALS['sys_images_url'].$this->imgroot.'steel3.jpg" align="center">
 				<TD colspan=2><SPAN class=titlebar>'.$title.'</SPAN></TD>
 			</TR>';
 
@@ -183,13 +184,11 @@ class Layout extends Error {
 		global $G_SESSION, $Language;
 
 		if (!$params['title']) {
-			$params['title'] = "SourceForge";
+			$params['title'] = $GLOBALS[sys_name];
 		} else {
-			$params['title'] = "SourceForge: " . $params['title'];
+			$params['title'] = $GLOBALS[sys_name]. " : " . $params['title'];
 		}
 		?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
-	"http://www.w3.org/TR/REC-html40/loose.dtd">
 
 <html lang="<?php echo $Language->getLanguageCode(); ?>">
   <head>
@@ -223,35 +222,11 @@ class Layout extends Error {
 
 		?>
 <P class="footer">
-<font face="arial, helvetica" size="1" color="#cccccc">
-VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.
-Linux is a registered trademark of Linus Torvalds.  All other trademarks and
-copyrights on this page are property of their respective owners.
-For information about other site Content ownership and sitewide
-terms of service, please see the
-<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>.
-For privacy
-policy information, please see the <a href="/tos/privacy.php" class="legallink"
->SourceForge Privacy Policy</a>.
-Content owned by VA Linux Systems is copyright 
-1999-2000 VA Linux Systems, Inc.  All rights reserved.
-</font>
-<BR>&nbsp;
-
-<?php
-
-//
-//  Actual layer call must be outside of table for some reason
-//
-if (!session_issecure()) {
-
-echo '
-<LAYER SRC="http://sfads.osdn.com/1.html" width=468 height=60 visibility=\'hide\' '.
-'onLoad="moveToAbsolute(adlayer.pageX,adlayer.pageY); clip.height=60; clip.width=468; visibility=\'show\';"></LAYER>';
-
-}
-
+<?php 
+	global $Language;
+	echo $Language->FOOTER; 
 ?>
+<BR>&nbsp;
 
 </body>
 </html>
@@ -338,7 +313,7 @@ echo '
 
 osdn_print_navbar();
 
-echo html_blankimage(5,100);
+	// echo html_blankimage(5,100);
 ?>
 <br>
 <!-- start page body -->
@@ -347,7 +322,7 @@ echo html_blankimage(5,100);
 	<tr>
 		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tleft1.png","17","17",array()); ?></td>
 		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" align="center" colspan="3" width="99%"><?php echo html_image($this->imgroot . "tbar1.png","1","17",array()); ?></td>
-		<td><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
+		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
 	</tr>
 	<tr>
 		<td width="17" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>leftbar1.png" align="left" valign="bottom"><?php echo html_image($this->imgroot . "leftbar1.png","17","25",array()); ?></td>
@@ -358,13 +333,8 @@ echo html_blankimage(5,100);
 		<tr>
 			<td width="141" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>steel3.jpg" bgcolor="#cfd1d4" align="left" valign="top">
 
-	<!-- VA Linux Stats Counter -->
 	<?php
-	if (!session_issecure()) {
-		print '<IMG src="http://www2.valinux.com/clear.gif?id=105" width=140 height=1 alt="Counter"><BR>';
-	} else {
-		print '<IMG src="https://www2.valinux.com/clear.gif?id=105" width=140 height=1 alt="Counter"><BR>';
-	}
+	print '<IMG src="/images/clear.gif" width=140 height=1 alt="Clear"><BR>';
 	?>
 
 	<CENTER>

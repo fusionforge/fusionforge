@@ -31,35 +31,27 @@ print '<TABLE width="100%"><TR valign="top"><TD width="65%">'."\n";
 // ######################## anonymous CVS instructions
 
 if ($row_grp['is_public']) {
-	print '<P><B>Anonymous CVS Access</B>
-<P>This project\'s SourceForge CVS repository can be checked out through anonymous
-(pserver) CVS with the following instruction set. The module you wish
-to check out must be specified as the <I>modulename</I>. When prompted
-for a password for <I>anonymous</I>, simply press the Enter key.
+	print $Language->ANONCVS;
 
-<P><FONT size="-1" face="courier">cvs -d:pserver:anonymous@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' login
+	print '<P><FONT size="-1" face="courier">cvs -d:pserver:anonymous@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' login
 <BR>&nbsp;<BR>cvs -z3 -d:pserver:anonymous@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
-</FONT>
+</FONT><P>';
 
-<P>Updates from within the module\'s directory do not need the -d parameter.';
+	print $Language->ANONCVSUP;
 }
 
 // ############################ developer access
 
-print '<P><B>Developer CVS Access via SSH</B>
-<P>Only project developers can access the CVS tree via this method. SSH1 must
-be installed on your client machine. Substitute <I>modulename</I> and
-<I>developername</I> with the proper values. Enter your site password when
-prompted.
+print $Language->DEVCVS;
 
-<P><FONT size="-1" face="courier">export CVS_RSH=ssh
-<BR>&nbsp;<BR>cvs -z3 -d<I>developername</I>@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
+print '<P><FONT size="-1" face="courier">export CVS_RSH=ssh
+<BR>&nbsp;<BR>cvs -z3 -d:ext:<I>developername</I>@cvs.'.$row_grp['http_domain'].':/cvsroot/'.$row_grp['unix_group_name'].' co <I>modulename</I>
 </FONT>';
 
 // ################## summary info
 
 print '</TD><TD width="35%">';
-print $HTML->box1_top("Repository History");
+print $HTML->box1_top("$Language->CVSHISTORY");
 
 // ################ is there commit info?
 
@@ -81,13 +73,9 @@ while ($row_cvshist = db_fetch_array($res_cvshist)) {
 // ############################## CVS Browsing
 
 if ($row_grp['is_public']) {
-	print '<HR><B>Browse the CVS Tree</B>
-<P>Browsing the CVS tree gives you a great view into the current status
-of this project\'s code. You may also view the complete histories of any
-file in the repository.
-<UL>
-<LI><A href="http://cvs.sourceforge.net/cgi-bin/cvsweb.cgi?cvsroot='
-.$row_grp['unix_group_name'].'"><B>Browse CVS Repository</B>';
+	print $Language->BROWSETREE.'<UL>
+<LI><A href="http://'.$sys_cvs_host.'/cgi-bin/cvsweb.cgi?cvsroot='
+.$row_grp['unix_group_name'].'"><B>'.$Language->BROWSEIT.'</B>';
 }
 
 print $HTML->box1_bottom();

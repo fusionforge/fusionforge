@@ -154,7 +154,9 @@ function support_data_add_comment ($project,$support_id,$details,$user_email) {
 		}
 	} else {
 		//use their user_name if they are logged in
-		$user_email=user_getname().'@'.$GLOBALS['sys_users_host'];
+	  //$user_email=user_getname().'@'.$GLOBALS['sys_users_host'];
+		$user = user_get_object_by_name (user_getname ());
+		$user_email = $user->getEmail ();
 	}
 
 	if ($project && $support_id && $details) {
@@ -202,9 +204,11 @@ function support_data_create_support ($project,$support_category_id,$user_email,
 			return false;
 		}
 	} else {
-		$user=user_getid();
+	        $user=user_getid();
 		//use their user_name if they are logged in
-		$user_email=user_getname().'@'.$GLOBALS['sys_users_host'];
+                //$user_email=user_getname().'@'.$GLOBALS['sys_users_host'];
+		$myuser = user_get_object_by_name (user_getname ());
+		$user_email = $myuser->getEmail ();
 	}
 
 	if (!$group_id || !$summary || !$details) {
@@ -385,7 +389,10 @@ function support_data_update ($project,$support_id,$priority,$support_status_id,
 			*/
 			if ($details != '') {
 				//create the first message for this ticket
-				if (!support_data_create_message($details,$support_id[$i],user_getname().'@'.$GLOBALS['sys_users_host'])) {
+			        $myuser = user_get_object_by_name (user_getname ());
+				$user_email = $myuser->getEmail ();
+
+				if (!support_data_create_message($details,$support_id[$i],$user_email)) {
 					db_rollback();
 					return false;
 				} else {
@@ -401,8 +408,10 @@ function support_data_update ($project,$support_id,$priority,$support_status_id,
 				//don't care if this response is for this group - could be hacked
 				$sql="SELECT * FROM support_canned_responses WHERE support_canned_id='$canned_response'";
 				$result2=db_query($sql);
+			        $myuser = user_get_object_by_name (user_getname ());
+				$user_email = $myuser->getEmail ();
 				if ($result2 && db_numrows($result2) > 0) {
-					if (!support_data_create_message(util_unconvert_htmlspecialchars(db_result($result2,0,'body')),$support_id[$i],user_getname().'@'.$GLOBALS['sys_users_host'])) {
+					if (!support_data_create_message(util_unconvert_htmlspecialchars(db_result($result2,0,'body')),$support_id[$i],$user_email)) {
 						db_rollback();
 						return false;
 					} else {

@@ -14,6 +14,26 @@
  * Auxilary functions
  */
 
+/**
+ *	asciize() - Replace non-ascii characters with question marks
+ *
+ *	LDAP expects utf-8 encoded character string. Since we cannot
+ *	know which encoding 8-bit characters in database use, we
+ *	just replace them with question marks.
+ *
+ *  @param		string	UTF-8 encoded character string.
+ *	@return string which contains only ascii characters
+ */
+function asciize($str) {
+	if (!$str) {
+		// LDAP don't allow empty strings for some attributes
+		return '?';
+	}
+
+	return ereg_replace("[\x80-\xff]","?",$str);
+}
+ 
+
 /*
  * Error message passing facility
  */
@@ -65,6 +85,21 @@ function sf_ldap_delete($dn) {
 function sf_ldap_modify($dn,$entry) {
 	global $ldap_conn;
 	return @ldap_modify($ldap_conn,$dn,$entry);
+}
+
+function sf_ldap_modify_if_exists($dn,$entry) {
+	global $ldap_conn;
+	$res = sf_ldap_modify($dn,$entry);
+	if ($res) {
+		return true ;
+	} else {
+		$err = ldap_errno ($ldap_conn) ;
+		if ($err == 32) {
+			return true ;
+		} else {
+			return false ;
+		}
+	};
 }
 
 function sf_ldap_mod_add($dn,$entry) {
@@ -156,16 +191,17 @@ function sf_ldap_create_user_from_object(&$user) {
 	$entry['objectClass'][1]='account';
 	$entry['objectClass'][2]='posixAccount';
 	$entry['objectClass'][3]='shadowAccount';
-	$entry['objectClass'][4]='x-sourceforgeAccount';
+	$entry['objectClass'][4]='debSfAccount';
 	$entry['uid']=$user->getUnixName();
-	$entry['cn']=$user->getRealName();
-	$entry['gecos']=$user->getRealName();
+	$entry['cn']=asciize($user->getRealName());
+	$entry['gecos']=asciize($user->getRealName());
 	$entry['userPassword']='{crypt}'.$user->getUnixPasswd();
 	$entry['homeDirectory']="/home/users/".$user->getUnixName();
 	$entry['loginShell']=$user->getShell();
-	$entry['x-cvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
-	$entry['uidNumber']=$user->getUnixUID();
-	$entry['gidNumber']=100; // users
+	$entry['debSfCvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
+	$entry['debSfForwardEmail']=$user->getEmail();
+	$entry['uidNumber']=$user->getUnixUID() + 20000;
+	$entry['gidNumber']=$user->getUnixUID() + 20000; // like in debian backend
 	$entry['shadowLastChange']=0; // TODO FIXME
 	$entry['shadowMax']=99999;
 	$entry['shadowWarning']=7;
@@ -199,6 +235,7 @@ function sf_ldap_remove_user($user_id) {
 
 function sf_ldap_user_set_attribute($user_id,$attr,$value) {
 	global $sys_ldap_base_dn;
+	global $ldap_conn;
 
         global $sys_use_ldap;
         if (!$sys_use_ldap) return true;
@@ -209,9 +246,9 @@ function sf_ldap_user_set_attribute($user_id,$attr,$value) {
 	$dn = 'uid='.$user->getUnixName().',ou=People,'.$sys_ldap_base_dn;
 	$entry[$attr]=$value;
 
-	if (!sf_ldap_modify($dn,$entry)) {
+	if (!sf_ldap_modify_if_exists($dn,$entry)) {
 	    sf_ldap_set_error_msg("ERROR: cannot change LDAP attribute '$attr' for user '".
-	                 $user->getUnixName()."': ".sf_ldap_error()."<br>");
+	                 $user->getUnixName()."': ".sf_ldap_error()." (".ldap_errno ($ldap_conn).")<br>");
 	    return false;
 	}
 	return true;

@@ -11,7 +11,7 @@ require('site_stats_utils.php');
    // require you to be a member of the sfstats group (group_id = 11084)
 session_require( array('group'=>$sys_stats_group) );
 
-$HTML->header(array('title'=>"SourceForge Site Statistics "));
+$HTML->header(array('title'=>" Site Statistics "));
 
 //
 // BEGIN PAGE CONTENT CODE
@@ -38,9 +38,9 @@ print '<font size="+1"><b>Sitewide Statistics Graphs</b></font><BR>' . "\n";
 <?php
 
 print '<BR><BR>' . "\n";
-print '<IMG SRC="' . 'stats/views_graph.png">' . "\n";
+print '<IMG SRC="' . 'views_graph.png">' . "\n";
 print '<BR><BR>' . "\n";
-print '<IMG SRC="u' . 'stats/sers_graph.png">' . "\n";
+print '<IMG SRC="u' . 'users_graph.png">' . "\n";
 print '<BR><BR>' . "\n";
 print '</DIV>' . "\n";
 

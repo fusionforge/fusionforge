@@ -51,7 +51,7 @@ if ($Login){
 $HTML->header(array('title'=>'Login'));
 
 ?>
-<p><b>SourceForge Account Verification</b>
+<p><b><?php echo $GLOBALS["sys_name"]; ?> Account Verification</b>
 <P>In order to complete your registration, login now. Your account will
 then be activated for normal logins.
 <?php 
