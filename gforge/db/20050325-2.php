@@ -180,7 +180,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			}
 			$res2=db_query("INSERT INTO artifact_extra_field_data (artifact_id,field_data,extra_field_id)
 				SELECT artifact_id,$efe_id,$resolutionbox_id FROM artifact 
-				WHERE resoloution_id='$resolution_id'");
+				WHERE resolution_id='$resolution_id'");
 			if (!$res2) {
 				echo "Could Not Insert AEFD for resolution " . db_error();
 				db_rollback();
