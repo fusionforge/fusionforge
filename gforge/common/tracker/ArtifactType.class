@@ -426,13 +426,26 @@ class ArtifactType extends Error {
 	 */
 	function getCategories() {
 		if (!isset($this->categories_res)) {
-			$sql="select id,category_name 
+			$sql="select id,category_name,auto_assign_to
 				FROM artifact_category 
 				WHERE group_artifact_id='". $this->getID() ."'
 				ORDER BY category_name";
 			$this->categories_res=db_query($sql);
 		}
 		return $this->categories_res;
+	}
+
+	/**
+	 *	getCategoryObjects - Array of ArtifactCategory objects set up for this artifact type.
+	 *
+	 *	@return	array	Of ArtifactCategory objects.
+	 */
+	function &getCategoryObjects() {
+		$res = $this->getCategories();
+		while ($arr =& db_fetch_array($res)) {
+			$cats[] =& new ArtifactCategory(&$this,$arr);
+		}
+		return $cats[];
 	}
 
 	/**
@@ -451,6 +464,19 @@ class ArtifactType extends Error {
 	}
 
 	/**
+	 *	getGroupObjects - Array of ArtifactGroup objects set up for this artifact type.
+	 *
+	 *	@return	array	Of ArtifactGroup objects.
+	 */
+	function &getGroupObjects() {
+		$res = $this->getGroups();
+		while ($arr =& db_fetch_array($res)) {
+			$grps[] =& new ArtifactGroup(&$this,$arr);
+		}
+		return $grps[];
+	}
+
+	/**
 	 *	getResolutions - List of possible resolutions.
 	 *
 	 *	@return database result set.
@@ -462,6 +488,19 @@ class ArtifactType extends Error {
 			$this->resolutions_res=db_query($sql);
 		}
 		return $this->resolutions_res;
+	}
+
+	/**
+	 *	getResolutionObjects - Array of ArtifactResolution objects set up for this artifact type.
+	 *
+	 *	@return	array	Of ArtifactResolution objects.
+	 */
+	function &getResolutionObjects() {
+		$res = $this->getResolutions();
+		while ($arr =& db_fetch_array($res)) {
+			$grps[] =& new ArtifactResolutions(&$this,$arr);
+		}
+		return $grps[];
 	}
 
 	/**
@@ -481,6 +520,16 @@ class ArtifactType extends Error {
 		return $this->technicians_res;
 	}
 
+	/**
+	 *	getTechnicianObjects - Array of User objects set up for this artifact type.
+	 *
+	 *	@return	array	Of User objects.
+	 */
+	function &getTechnicianObjects() {
+		$res = $this->getTechnicians();
+		$arr =& util_result_column_to_array($res,0);
+		return user_get_objects($arr);
+	}
 	/**
 	 *	getCannedResponses - returns a result set of canned responses.
 	 *

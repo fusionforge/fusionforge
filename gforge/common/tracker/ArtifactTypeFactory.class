@@ -59,11 +59,11 @@ class ArtifactTypeFactory extends Error {
 	function ArtifactTypeFactory(&$Group) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('Forum:: No Valid Group Object');
+			$this->setError('ArtifactTypeFactory:: No Valid Group Object');
 			return false;
 		}
 		if ($Group->isError()) {
-			$this->setError('Forum:: '.$Group->getErrorMessage());
+			$this->setError('ArtifactTypeFactory:: '.$Group->getErrorMessage());
 			return false;
 		}
 		$this->Group =& $Group;

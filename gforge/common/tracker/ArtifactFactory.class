@@ -71,7 +71,7 @@ class ArtifactFactory extends Error {
 			return false;
 		}
 		$this->ArtifactType =& $ArtifactType;
-                $this->changed_from = 0x7ffffff; // Any
+		$this->changed_from = 0x7ffffff; // Any
 
 		return true;
 	}

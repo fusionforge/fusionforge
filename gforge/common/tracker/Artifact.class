@@ -23,6 +23,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
  */
 require_once('common/include/Error.class');
+require_once('common/tracker/ArtifactMessage.class');
 
 	/**
 	* Factory method which creates an Artifact from an artifact ID
@@ -596,6 +597,18 @@ class Artifact extends Error {
 			"FROM artifact_message_user_vw ".
 			"WHERE artifact_id='". $this->getID() ."' ORDER BY adddate DESC";
 		return db_query($sql);
+	}
+
+	/**
+	 *	getMessageObjects - get an array of message objects.
+	 *
+	 *	@return array Of ArtifactMessage objects.
+	 */
+	function &getMessageObjects() {
+		$res=$this->getMessages();
+		while ($arr =& db_fetch_array($res)) {
+			$return[]=new ArtifactMessage($arr['artifact_id'],$arr);
+		}
 	}
 
 	/**
