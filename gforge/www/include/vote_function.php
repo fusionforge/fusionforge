@@ -279,7 +279,7 @@ if (db_numrows($result) > 0) {
 
 } else {
 	echo '<tr><td colspan="2">';
-	echo "<b>".$Language->getText('survey','survey_not_found')."</b>";
+	echo "<strong>".$Language->getText('survey','survey_not_found')."</strong>";
 	echo "</td></tr>";
 }
 
