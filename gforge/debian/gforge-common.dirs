@@ -10,3 +10,4 @@ var
 var/lib
 var/lib/gforge
 var/lib/gforge/etc
+bin
