@@ -1,3 +1,9 @@
+2003-05-30 Roland Mas  <lolando@debian.org>
+
+	* Changed the LDAP setup: we're now using an official OID space
+	inside the Debian OID space.  Fixed attribute and objectclass
+	names in the schema, and other files, accordingly.
+
 2003-05-23 Tom Copeland <tom@infoether.com>
 
 	* common/include/Stats.class, www/top/toplist.php, www/top/mostactive.php,
