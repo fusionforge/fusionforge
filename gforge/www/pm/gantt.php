@@ -4,6 +4,25 @@ require_once($sys_path_to_jpgraph.'jpgraph.php');
 require_once($sys_path_to_jpgraph.'jpgraph_gantt.php');
 require_once('common/pm/ProjectTaskFactory.class');
 
+/**
+ * settitlefont() - Set font setting for GanttGraph object
+ *
+ * @param	GanttGraph	Target GanttGraph object
+ * @param	string		Font family
+ * @param	string		Font style
+ * @param	integer		Font size
+ */
+function settitlefont($graph, $sys_font_family, $sys_font_style, $sys_font_size) {
+	if ($sys_font_family != "" &&
+	    $sys_font_style != "" &&
+	    $sys_font_size != "") {
+		eval("\$font_family=$sys_font_family;");
+		eval("\$font_style=$sys_font_style;");
+		eval("\$font_size=$sys_font_size;");
+		$graph->title->SetFont($font_family,$font_style,$font_size);
+	}
+}
+
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
 	exit_error('Error','Could Not Get ProjectTaskFactory');
@@ -35,7 +54,8 @@ $graph->SetMargin(10,10,25,10);
 
 // Add title and subtitle
 $graph->title-> Set($pg->getName());
-//$graph->title-> SetFont( FF_ARIAL, FS_BOLD, 12);
+global $sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size;
+settitlefont($graph,$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
 //$graph->subtitle-> Set("(Draft version)");
 
 // Show day, week and month scale
@@ -70,6 +90,9 @@ for ($i=0; $i<$rows; $i++) {
 	$activity[$i]->SetFillColor ("red");
 	$activity[$i]->progress->Set( (( $pt_arr[$i]->getPercentComplete() ) ? ($pt_arr[$i]->getPercentComplete()/100) : 0));
 	$activity[$i]->progress->SetPattern(BAND_RDIAG, "blue");
+
+	global $sys_gantt_task_font_family,$sys_gantt_task_font_style,$sys_gantt_task_font_size;
+	settitlefont($activity[$i],$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
 	// Finally add the bar to the graph
 	$graph->Add( $activity[$i] );
 }

@@ -184,5 +184,13 @@ $sys_show_source=0;
 // Force Login
 $sys_force_login=0;
 
+// Truetype font settings
+//$gantt_title_font_family="FF_ARIAL";
+//$gantt_title_font_style="FS_NORMAL";
+//$gantt_title_font_size=12;
+//$gantt_task_font_family="FF_ARIAL";
+//$gantt_task_font_style="FS_NORMAL";
+//$gantt_task_font_size=12;
+
 // End of customizations -- place nothing after the closing PHP tag!
 ?>
