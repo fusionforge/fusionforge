@@ -49,8 +49,11 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 
 	if (check_file_size($size)) {
 		$curtime = time();
+		$sql="";
+		$width = ((!$width) ? "0" : $width);
+		$height = ((!$height) ? "0" : $height);
 		if (!$id) {
-			$res=db_query("	INSERT INTO db_images 
+			$sql="	INSERT INTO db_images 
 					(group_id,description,bin_data, 
 					 filename,filesize,filetype, 
 					 width,height,upload_date,version) 
@@ -58,9 +61,9 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 					('$group_id','$description', 
 					 '$data','$input_file_name', 
 					 '$size','$input_file_type', 
-					 '$width','$height','$curtime',1)");
+					 '$width','$height','$curtime',1)";
 		} else {
-			$res=db_query("	UPDATE db_images 
+			$sql="	UPDATE db_images 
 					SET description='$description', 
 					 bin_data='$data', 
 					 filename='$input_file_name', 
@@ -71,11 +74,13 @@ function store_file($id, $input_file, $input_file_name, $input_file_type) {
 					 upload_date='$curtime',
 					 version=version+1
 					WHERE group_id='$group_id' 
-					AND id='$id' ");
+					AND id='$id' ";
 		}	
 
+		$res = db_query($sql);
+
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= 'ERROR: DB: Cannot store mutimedia file<br />';
+			$feedback .= 'ERROR: DB: Cannot store multimedia file<br />';
 			echo db_error();
 		} else {
 			$feedback .= ' Multimedia File Uploaded ';
@@ -96,13 +101,9 @@ if ($submit) {
 			//see if they have too many data in the system
 			$res=db_query("SELECT sum(filesize) WHERE group_id='$group_id'");
 			if (db_result($res,0,'sum') < $QUOTA) {
-
 				store_file(0, $input_file, $input_file_name, $input_file_type);
-
 			} else {
-
 				$feedback .= ' Sorry - you are over your '.$QUOTA.' quota ';
-
 			}
 		}
 
@@ -111,7 +112,7 @@ if ($submit) {
 		$res=db_query("DELETE FROM db_images WHERE id='$id' AND group_id='$group_id'");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$feedback .= 'ERROR: DB: Cannot delete mutimedia file<br />';
+			$feedback .= 'ERROR: DB: Cannot delete multimedia file<br />';
 			echo db_error();
 		} else {
 			$feedback .= ' Multimedia File Deleted ';
@@ -132,7 +133,7 @@ if ($submit) {
 						AND id='$id' ");
 
 				if (!$res || db_affected_rows($res) < 1) {
-					$feedback .= 'ERROR: DB: Cannot update mutimedia file<br />';
+					$feedback .= 'ERROR: DB: Cannot update multimedia file<br />';
 					echo db_error();
 				} else {
 					$feedback .= 'Multimedia File Properties Updated<br />';
@@ -171,7 +172,7 @@ echo '
 	<p>
 	You can store up to '.sprintf("%.2f",$QUOTA/(1024*1024)).'MB 
 	of multimedia data (bitmap and vector
-	graphics, sound clips, 3D models) in our database. Use this
+	graphics, sound clips, 3D models) in the database. Use this
 	page to add/delete your project multimedia data.</p>
 	<p>
 ';
@@ -198,7 +199,7 @@ if ($mode == "edit") {
 	<input type="file" name="input_file" size="30" />
 	<p>
 
-	<strong>Description ("alt"):</strong><br />
+	<strong>Description:</strong><br />
 	<input type="text" name="description" size="40" maxlength="255" value="'.db_result($result,$i,'description').'" />
 	</p>
 	<p>
@@ -221,10 +222,10 @@ if ($mode == "edit") {
 	<p>
 	<form action="'. $PHP_SELF .'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="group_id" value="'.$group_id.'" />
-	<strong>Local filename:</strong><br />
+	<strong>Local filename:</strong>'.utils_requiredField().'<br />
 	<input type="file" name="input_file" size="30" />
 	<p>
-	<strong>Description ("alt"):</strong><br />
+	<strong>Description:</strong>'.utils_requiredField().'<br />
 	<input type="text" name="description" size="40" maxlength="255" /></p><p>
 	<input type="hidden" name="add" value="1" />
 	<input type="submit" value="Add File" name="submit" /><br /></p>
