@@ -19,12 +19,63 @@
 */
 
 function project_admin_header($params) {
-	global $DOCUMENT_ROOT,$group_id,$feedback;
+	global $DOCUMENT_ROOT,$group_id,$feedback,$HTML,$Language;
 
 	$params['toptab']='admin';
 	$params['group']=$group_id;
 	site_project_header($params);
-	site_project_menu($params);
+
+	$group_id=$params['group'];
+
+	$project =& group_get_object($group_id);
+	if (!$project || !is_object($project)) {
+		return;
+	}
+
+	$perm =& $project->getPermission( session_get_user() );
+	if (!$perm || !is_object($perm)) {
+		return;
+	}
+
+	$is_admin=$perm->isAdmin();
+
+	if ($is_admin) {
+		echo ($HTML->subMenu(
+			array(
+			'Admin',
+			'User Permissions',
+			'Edit Public Info',
+			'Project History',
+			'VHOSTs',
+			'Edit/Release Files',
+			'Post Jobs',
+			'Edit Jobs',
+			'Edit Multimedia Data',
+			'Database Admin',
+			'Stats'),
+			array   (
+			'/project/admin/?group_id='.$group_id,
+			'/project/admin/userperms.php?group_id='.$group_id,
+			'/project/admin/editgroupinfo.php?group_id='.$group_id,
+			'/project/admin/history.php?group_id='.$group_id,
+			'/project/admin/vhost.php?group_id='.$group_id,
+			'/project/admin/editpackages.php?group_id='.$group_id,
+			'/people/createjob.php?group_id='.$group_id,
+			'/people/?group_id='.$group_id,
+			'/project/admin/editimages.php?group_id='.$group_id,
+			'/project/admin/database.php?group_id='.$group_id,
+			'/project/stats/?group_id='.$group_id)));
+	} else {
+		echo ($HTML->subMenu(
+			array(
+			'Admin',
+			'Edit/Release Files',
+			'Stats'),
+			array   (
+			'/project/admin/?group_id='.$group_id,
+			'/project/admin/editpackages.php?group_id='.$group_id,
+			'/project/stats/?group_id='.$group_id)));
+	}
 }
 
 /*
@@ -164,12 +215,12 @@ function group_get_history ($group_id=false) {
 		 "WHERE group_history.mod_by=users.user_id ".
 		 "AND group_id='$group_id' ORDER BY group_history.date DESC";
 	return db_query($sql);
-}	       
+}		   
 	
 function group_add_history ($field_name,$old_value,$group_id) {
 	$group=group_get_object($group_id);
 	$group->addHistory($field_name,$old_value);
-}	       
+}		   
 
 /*
 
@@ -178,7 +229,7 @@ function group_add_history ($field_name,$old_value,$group_id) {
 */
 
 function show_grouphistory ($group_id) {
-	/*      
+	/*	  
 		show the group_history rows that are relevant to 
 		this group_id
 	*/
@@ -212,15 +263,15 @@ function show_grouphistory ($group_id) {
 			echo '</TD>'.
 				'<TD>'.date($sys_datefmt,db_result($result, $i, 'date')).'</TD>'.
 				'<TD>'.db_result($result, $i, 'user_name').'</TD></TR>';
-		}	       
+		}		   
 
 		echo $GLOBALS['HTML']->listTableBottom();
 
 	} else {
 		echo '  
 		<H3>No Changes Have Been Made to This Group</H3>';
-	}       
-}       
+	}	   
+}	   
 
 /*
 	prdb_namespace_seek - check that a projects' potential db name hasn't

@@ -484,28 +484,6 @@ function site_project_header($params) {
 }
 
 /**
- *	site_news_menu() - everything required to handle 
- *	security and state checks for a project news menu
- *
- *	@param params array() must contain $toptab and $group
- */
-function site_news_menu($params) {
-	GLOBAL $HTML;
-	echo $HTML->news_menu($params);
-}
-
-/**
- *	site_project_menu() - everything required to handle 
- *	security and state checks for a project admin menu
- *
- *	@param params array() must contain $toptab and $group
- */
-function site_project_menu($params) {
-	GLOBAL $HTML;
-	echo $HTML->admin_menu($params);
-}
-
-/**
  *	site_project_footer() - currently a simple shim 
  *	that should be on every project page,  rather than 
  *	a direct call to site_footer() or theme_footer()
@@ -526,7 +504,7 @@ function site_project_footer($params) {
  *	@param params array() must contain $user_id
  */
 function site_user_header($params) {
-	GLOBAL $HTML;
+	GLOBAL $HTML,$Language;
 
 	/*
 		Check to see if active user
@@ -534,7 +512,11 @@ function site_user_header($params) {
 	*/
 	echo $HTML->header($params);
 	echo html_feedback_top($GLOBALS['feedback']);
-	echo $HTML->user_menu($params);
+	echo ($HTML->subMenu(
+		array($Language->getText('menu','my_personal_page'),
+		$Language->getText('menu','diary_notes'),$Language->getText('menu','account_maintenance')),
+		array('/my/','/my/diary.php','/account/')));
+
 }
 
 /** 
@@ -564,13 +546,13 @@ function site_user_footer($params) {
  */
 function html_clean_hash_string($hashstr) {
 
-        if (substr($hashstr,0,1)=="_") {
-                $hashstr = substr($hashstr, 1);
-        }
+	if (substr($hashstr,0,1)=="_") {
+		$hashstr = substr($hashstr, 1);
+	}
 				
-        if (substr($hashstr, strlen($hashstr)-1, 1)==">") {
-                $hashstr = substr($hashstr, 0, strlen($hashstr)-1);
-        }
+	if (substr($hashstr, strlen($hashstr)-1, 1)==">") {
+		$hashstr = substr($hashstr, 0, strlen($hashstr)-1);
+	}
 	
 	return $hashstr;
 }

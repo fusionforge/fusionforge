@@ -17,7 +17,7 @@
 */
 
 function news_header($params) {
-	global $DOCUMENT_ROOT,$HTML,$group_id,$news_name,$news_id,$sys_news_group;
+	global $DOCUMENT_ROOT,$HTML,$group_id,$news_name,$news_id,$sys_news_group,$Language;
 	$params['toptab']='news';
 	$params['group']=$group_id;
 	$params['sysnewsgroup']=$sys_news_group;
@@ -30,7 +30,15 @@ function news_header($params) {
 		$params['pagename']='news_main';
 		$HTML->header($params);
 	}
-	site_news_menu($params);
+	if ($group_id && ($group_id != $sys_news_group)) {
+		echo ($HTML->subMenu(
+			array($Language->getText('menu','submit'),$Language->getText('menu','admin')),
+			array('/news/submit.php?group_id='.$group_id,'/news/admin/?group_id='.$group_id)));
+	} else {
+		echo ($HTML->subMenu(
+			array($Language->getText('menu','submit'),$Language->getText('menu','admin')),
+			array('/news/submit.php?group_id='.$sys_news_group,'/news/admin/?group_id='.$sys_news_group)));
+	}
 }
 
 function news_footer($params) {
@@ -159,7 +167,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		}
 
 		$return .= '<div align="center">'
-	           .'<a href="'.$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
+			   .'<a href="'.$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
 	} else {
 		$return .= '<div align="center">.....</div>';
 	}
