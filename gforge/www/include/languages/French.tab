@@ -231,7 +231,7 @@ forum_common_forummessage	error_not_logged	Vous ne pouvez pas poster sans être 
 forum_common_forummessage	error_posting_failed	ForumMessage::create() le postage a échoué
 forum_common_forummessage	error_get_message_id	ForumMessage::create() n'arrive pas à obtenir d'identifiant de message
 forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() identifiant de message invalide
-forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() pas d'objet ParentMessage valide
+forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() pas d'objet ParentMessage valide
 forum_common_forummessage	error_getting_next_thread	Échec de l'obtention du prochain identifiant de fil
 forum_common_forummessage	error_cannot_update_parent	Échec lors de la mise à jour du parent
 forum_common_forummessage	error_cannot_update_master_thread	Échec de la mise à jour du fil maître avec la date courante
