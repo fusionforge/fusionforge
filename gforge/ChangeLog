@@ -1,7 +1,12 @@
-2003-06-10 Christian Bayle	<bayle@debian.org>
+2003-06-13 Christian Bayle	<bayle@debian.org>
 
-	* Added Ronald Petty cvs browser as an alternate cvs browser
-	* Added Dracos Moinescu cvs browser as an alternate cvs browser
+	* Added Patch #307 Ronald Petty cvs browser as an alternate cvs browser
+	* Added Patch #317 Dracos Moinescu cvs browser as an alternate cvs browser
+	* Applied Patch #389 Hidenari Miwa & Tsutomu Tominaga Email i18n patch
+	this is a tricky patch, I hope won't break everything in mail sending
+	rather untested
+	* Applied Patch #388 Speed-ups to www/my/index.php thanks to Jeff Fynboh
+	yet another trick patch.
 
 2003-06-09  Roland Mas  <99.roland.mas@aist.enst.fr>
 
