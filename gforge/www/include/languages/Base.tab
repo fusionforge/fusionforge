@@ -916,6 +916,7 @@ home	none_found	None Found
 home	registered_users	Registered Users
 home	sfos	$1 OnSite
 home	top_project_downloads	Top Project Downloads
+home	recently_registered	Recentely Registered Projects
 include_html	no_change	No Change
 include_html	none	None
 include_html	priority_highest	Highest
