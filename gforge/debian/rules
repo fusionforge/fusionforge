@@ -116,8 +116,8 @@ install: build
 	install -m 755 utils/cvssh $(CURDIR)/debian/sourceforge/bin/cvssh 
 
 	# FRS stuff
-	install -m 4755 utils/fileforge $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/fileforge 
-	install -m 4755 utils/tmpfilemove $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/tmpfilemove 
+	install -m 755 utils/fileforge $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/fileforge 
+	install -m 755 utils/tmpfilemove $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/tmpfilemove 
 
 	# SSH and CVS in one
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
