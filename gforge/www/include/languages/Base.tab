@@ -1363,7 +1363,7 @@ project_admin	shell_server_group_directory	Group directory on shell server:
 project_admin	short_description	Short Description
 project_admin	task_manager_admin	Task Manager Admin
 project_admin	title	Project Admin: $1
-project_admin	tool_admin	Tool Admin');
+project_admin	tool_admin	Tool Admin
 project_admin	tracker_admin	Tracker Admin
 project_admin	trove_categorization	Trove Categorization:
 project_admin	unix_name	Unix Name
