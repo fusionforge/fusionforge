@@ -11,8 +11,8 @@ function show_features_boxes() {
 	GLOBAL $HTML,$Language;
 	$return .= $HTML->box1_top($Language->SOURCEFORGE_STATISTICS,0);
 	$return .= show_sitestats();
-	$return .= $HTML->box1_middle($Language->SFOS);
-	$return .= show_sfos();
+	// $return .= $HTML->box1_middle($Language->SFOS);
+	// $return .= show_sfos();
 	$return .= $HTML->box1_middle($Language->TOP_PROJECT_DOWNLOADS);
 	$return .= show_top_downloads();
 	$return .= $HTML->box1_middle($Language->HIGHEST_RANKED_USERS);

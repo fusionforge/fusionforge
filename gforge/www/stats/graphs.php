@@ -38,9 +38,9 @@ print '<font size="+1"><b>Sitewide Statistics Graphs</b></font><BR>' . "\n";
 <?php
 
 print '<BR><BR>' . "\n";
-print '<IMG SRC="' . 'stats/views_graph.png">' . "\n";
+print '<IMG SRC="' . 'views_graph.png">' . "\n";
 print '<BR><BR>' . "\n";
-print '<IMG SRC="u' . 'stats/sers_graph.png">' . "\n";
+print '<IMG SRC="u' . 'users_graph.png">' . "\n";
 print '<BR><BR>' . "\n";
 print '</DIV>' . "\n";
 

@@ -1,20 +1,23 @@
 <?php
-
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-//
+/**
+  *
+  * SourceForge Documentaion Manager
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
 /*
-        Docmentation Manager
         by Quentin Cregan, SourceForge 06/2000
 */
 
 
-require('doc_utils.php');
-require('pre.php');
+require_once('doc_utils.php');
+require_once('pre.php');
 
 if ($docid) {
 	$query = "select * "
@@ -30,9 +33,10 @@ if ($docid) {
 		$row = db_fetch_array($result);
 	}
 	
-	docman_header($row['title'],$row['title']);
-	//print '<pre>'.$row['data'].'</pre>';
-	print util_unconvert_htmlspecialchars($row['data']);
+	docman_header($row['title'],$row['title'],'docman_display_doc','',group_getname($group_id));
+
+	// data in DB stored in htmlspecialchars()-encoded form
+    	print util_unconvert_htmlspecialchars($row['data']);
 	docman_footer($params);
 
 } else {

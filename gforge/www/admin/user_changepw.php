@@ -37,7 +37,7 @@ function register_valid()	{
 	
 	// if we got this far, it must be good
         $user=user_get_object(user_getid());
-	if (!$user->setPasswd($GLOBALS[form_pw]) {
+	if (!$user->setPasswd($GLOBALS[form_pw])) {
 		$GLOBALS['register_error'] = $user->getErrorMessage();
 		return 0;
 	}
@@ -47,7 +47,7 @@ function register_valid()	{
 // ###### first check for valid login, if so, congratulate
 
 if (register_valid()) {
-	$HTML->header(array(title=>"Alexandria: Change Password"));
+	$HTML->header(array(title=>$GLOBALS['system_name'].": Change Password"));
 ?>
 <p><b>SourceForge Change Confirmation</b>
 <p>Congratulations, genius. You have managed to change this user's password.
