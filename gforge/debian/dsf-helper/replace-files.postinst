@@ -1,0 +1,16 @@
+###
+# Functions to propose changes in configuration files
+###
+# Replace an existing file with the proposed one
+# A copy of the original file is realized in config if we want
+# to change the original file
+replace_file () {
+    file=$1
+    if [ -e ${file}.gforge-old ] ; then
+    	if [ ! -e ${file}.gforge-new ] ; then
+		echo "WARNING: ${file}.gforge-new replacement not generated, this shouldn't happen"
+	else
+    		mv ${file}.gforge-new $file
+	fi
+    fi
+}
