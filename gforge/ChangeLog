@@ -1,5 +1,7 @@
 2003-01-30  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/themes/kde/Theme.class: new KDE-ish theme.
+
 	* www/my/index.php: use $HTML->imgroot to get current theme's
 	icons.
 
