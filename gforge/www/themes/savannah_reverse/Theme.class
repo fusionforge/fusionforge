@@ -123,48 +123,6 @@ class Theme extends Layout {
         	}
 	}
 
-	function generic_header_start($params) {
-
-        	global $G_USER, $G_SESSION;
-
-	        if (!$params['title']) {
-        	        $params['title'] = "Savannah";
-	        } else {
-        	        $params['title'] = "Savannah: " . $params['title'];
-	        }
-        	?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/REC-html40/loose.dtd">
-
-<html lang="en">
-  <head>
-    <title><?php echo $params['title']; ?></title>
-       <SCRIPT language="JavaScript" type="text/javascript">
-        <!--
-        function help_window(helpurl) {
-                HelpWin = window.open(helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=550,width=500');
-		HelpWin.focus();
-        }
-        // -->
-        </SCRIPT>
-    <meta name="Author" content="Copyright (C) 2000, 2001, 2002 Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111, USA Verbatim copying and distribution of this entire article is permitted in any medium, provided this notice is preserved">
-    <meta name="Keywords" content="Savannah,GNU, FSF, Free Software Foundation, Linux, Emacs, GCC, Unix, Free Software, Operating System, GNU Kernel, HURD, GNU HURD, SourceForge">
-    <meta name="Description" content="Savannah is a central point for development, distribution and maintainance of Free Software. It allows contributors to easily join existing Free Software projects.">
-	<?php
-	// 2002-04-15 yeupou@coleumes.org
-	// NOW we stop to use favico.ico read http://bugzilla.mozilla.org/show_bug.cgi?id=110296
-	?>
-    <link rel="stylesheet" type="text/css" href="/themes/savannah_reverse/debiansf.css">
-    <link rel="icon" type="image/png" href="/images/icon.png">
-<?php
-	}
-
-	function generic_header_end($params) {
-	?>
-  </head>
-<?php
-	}
-
 	function generic_footer($params) {
 
 	        global $IS_DEBUG,$QUERY_COUNT,$Language;
@@ -210,14 +168,6 @@ Verbatim copying and distribution of this entire article is permitted in any med
         <table summary="" class="standardtable">
                 <tr>
                         <td class="menutable">
-
-        <?php
-        if (!session_issecure()) {
-                //print '<IMG src="/images/clear.png" width=140 height=1 alt="Counter"><BR>';
-        } else {
-                //print html_blankimage(1,140) . '<br>';
-        }
-        ?>
 
         <a href="/"><?php print html_image($this->imgroot . "floating.png",'150','130',array('alt'=>'Floating GNU')); ?></a>
         <p>
