@@ -15,6 +15,9 @@
 
 	* www/forum/admin/index.php, common/forum/ForumFactory.class:
 	Fixed bug #327: Add problems when you don't have forums
+	
+	* cronjobs/cvs-cron/usergroup.php:
+	Fixed bug #262: First line of CVS cron .php files need "-q" to prevent cron mail on clean runs
 
 2003-05-02  Reinhard Spisser <reinhard@spisser.it>
 

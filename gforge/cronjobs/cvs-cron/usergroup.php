@@ -1,4 +1,4 @@
-#! /usr/bin/php4 -f
+#! /usr/bin/php4 -q -f
 <?php
 
 require_once('squal_pre.php');
