@@ -499,22 +499,54 @@ survey_admin_show_results_individual	title	Affichage des commentaires d'un sonda
 survey_survey	section	Outil de sondages
 survey_survey	title	Affichage d'un sondage
 survey_survey_resp	section	Outil de sondages
-survey_survey_resp	title	Réponse à un sondage
+survey_survey_resp	title	Réponse √† un sondage
 thanks	about_blurb	<p><h2>Remerciements</h2>Les développeurs de Sourceforge voudraient remercier les personnes suivantes pour leur support et leurs encouragements :<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
-top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichés ici.
+top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichées ici.
 top	active_all_time	Les plus actifs de tous les temps
 top	active_weekly	Les plus actifs cette semaine
 top	downloads	Les plus téléchargés
 top	downloads_7_days	Les plus téléchargés cette semaine
 top	forum_posts	Les forums les plus actifs
 top	pageviews	Les projets les plus visités
+top	highest_ranked_users	Les utilisateurs les mieux classés
 top	title	Les meilleurs projets
+top	view_other_top_category	Voir les autres catégories
+top	top_project	Les meilleurs projets de $1
+top	NA	Pas disponible
+top	same	M√™me chose
+top	up	Monte $1
+top	down	Descend $1
 top_mostactive	section	Les meilleurs projets
 top_mostactive	title	Les projets les plus actifs : $1
+top_mostactive	title	Les projets les plus actifs: $1
+top_mostactive	rank	Ranc
+top_mostactive	project_name	Nom du projet
+top_mostactive	percentile	Pourcentage
+top_mostactive	updated_daily	Mis √† jour quotidiennement
 top_toplist	section	Les meilleurs projets
 top_toplist	title	Listes des meilleurs projets
+top_toplist	rank	Ranc
+top_toplist	project_name	Nom du projet
+top_toplist	last_rank	Dernier ranc
+top_toplist	change	Changement
+top_toplist	top_download_7_days	Projets les plus téléchargés ces 7 derniers jours
+top_toplist	download	Téléchargement
+top_toplist	top_weekly_pagesviews	Top Weekly Project Pageviews at *.$1 (from impressions of $2 logo)
+top_toplist	pageviews	Nombre de page vue
+top_toplist	top_forum_post_count	Le plus de message inscris dans les forums
+top_toplist	posts	Messages
+top_toplist	top_download	Top téléchargement
+top_topusers	title	Utilisateurs les mieux classés
+top_topusers	info_not_available	Pas d'information disponible
+top_topusers	info_not_available_more	Les informations sur les utilisateurs les mieux classés ne sont pas disponibles.
+top_topusers	rank	Ranc
+top_topusers	user_name	Nom de l'utilisateur
+top_topusers	real_name	Vrai nom
+top_topusers	rating	Classement
+top_topusers	last_rank	Dernier ranc
+top_topusers	change	Changemenet
 tracker	section	Projet : $1
 tracker	title	Trackers
 tracker_add	section	$1

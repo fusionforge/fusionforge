@@ -16,6 +16,8 @@
 #	*		adding localization strings for my, diary, project_homepage
 #	* 2003-01-25 rspisser <reinhard@spisser.it>
 #  *		adding localization strings for pm
+#  * 2003-02-04 rspisser <reinhard@spisser.it>
+#  *		localization of the tracker
 #  */
 
 
@@ -707,6 +709,15 @@ user_home	member_of	Questo utente &egrave; membro dei seguenti progetti:
 user_home	send_message_if_logged	Puoi inviare un messaggo se sei collegato
 trove	not_categorized	Questo progetto non &agrave; ancora stato categorizzato nella
 trove	title	Mappa del software Trove
+trove_list	invalid_category_title	Categoria non valida
+trove_list	invalid_category_text	La categoria richiesta non &egrave; valida
+trove_list	title	Mappa del software
+trove_list	remove_filter	Elimina filtro
+trove_list	projects	$1 progetti
+trove_list	limiting_view	Filtro impostato sulle seguenti categorie
+trove_list	number_of_projects	<strong>$1</strong> progetti
+trove_list	more_than	Pi&ugrave; di <strong>$1</strong> progetti
+trove_list	browse_by	Visualizza per
 classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\nServer CVS:         cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
 classgroup	rejectedproject	Il tuo progetto $3 &egrave; stato rifiutato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\n\nRagioni per il rifiuto:\n\n
 classgroup	newprojectnotification	Nuovo progetto $1 inserito\n\nNome progetto:  $2\nDescrizione: $3\nLicenza: $4\n\nCollegati all'URL \nhttp://$5/admin/approve-pending.php per approvare o rifiutare il progetto.
@@ -1115,3 +1126,47 @@ stats_view_graph	page_views	Pagine viste di Gforge
 stats_view_graph	total_views	Numero di pagine totale viste (ROSSO) ($1 giorni)
 stats_view_graph	views	Viste (ROSSO)
 stats_view_graph	date	Data
+top	about_blurb	Vengono mantenute statistiche diverse sull'utilizzo di $1.
+top	active_all_time	Progetti pi&ugrave; attivi 
+top	active_weekly	Progetti pi&ugrave; attivi nella scorsa settimana
+top	downloads	Maggiori download
+top	downloads_7_days	Maggiori download (ultimi 7 giorni)
+top	forum_posts	Forum pi&ugrave; utilizzati
+top	pageviews	Viste delle pagine princiapali, misurate sulla quantiti&agrave; di visualizzazione del logo $1 
+top	highest_ranked_users	Utenti pi&ugrave; quotati
+top	title	Progetti principali
+top	view_other_top_category	Visualizza altre statistiche
+top	top_project	Top $1 project
+top	updated_daily	Aggiornato giornalmente
+top	NA	N/A
+top	same	Uguale
+top	up	salito di $1
+top	down	sceso $1
+top_mostactive	rank	Posizione
+top_mostactive	project_name	Nome Progetto
+top_mostactive	percentile	Percentuale
+top_mostactive	section	Progetti principali
+top_mostactive	title	Most Active Projects: $1
+top_mostactive	updated_daily	Aggiornato giornalmente
+top_toplist	section	Top Projects
+top_toplist	title	Top Project Lists
+top_toplist	rank	Posizione
+top_toplist	project_name	Nome progetto
+top_toplist	last_rank	Posizione precedente
+top_toplist	change	Cambio
+top_toplist	top_download_7_days	Maggiori download negli ultimi 7 giorni
+top_toplist	download	Download
+top_toplist	top_weekly_pagesviews	Top Weekly Project Pageviews at *.$1 (from impressions of $2 logo)
+top_toplist	pageviews	Viste delle pagine
+top_toplist	top_forum_post_count	Top Forum Post Counts
+top_toplist	posts	Messaggi inseriti
+top_toplist	top_download	Download principali
+top_topusers	title	Utenti pi&ugrave; quotati
+top_topusers	info_not_available	Informazione non disponibile
+top_topusers	info_not_available_more	Informazione sugli utenti pi&ugrave; quotati non &egrave; disponibile.
+top_topusers	rank	Posizione
+top_topusers	user_name	Nome utente
+top_topusers	real_name	Nome reale
+top_topusers	rating	Quotazione
+top_topusers	last_rank	Ultima posizione
+top_topusers	change	Cambio
