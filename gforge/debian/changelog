@@ -27,8 +27,13 @@ sourceforge (2.6-0+12+) unstable; urgency=low
   * [Roland] Fixed dependencies of the packages.  Not as if it were really
     important before multi-host installations are officially supported,
     but it's good to do it nevertheless.
+  * [Roland] [From 2.5] common/include/User.class: Fixed Unix UID
+    attribution, so that accounts activated by hand by the admin are given
+    an UID too.
+  * [Roland] [From 2.5] deb-specific/db-upgrade.pl: Fixed the backlog of
+    wrong UIDs.
 
- -- Roland Mas <lolando@debian.org>  Fri,  2 Aug 2002 22:33:12 +0200
+ --
 
 sourceforge (2.6-0+12) unstable; urgency=low
 
@@ -306,6 +311,77 @@ sourceforge (2.6-0+1) unstable; urgency=low
     bug.
 
  -- Roland Mas <lolando@debian.org>  Fri, 23 Nov 2001 20:05:11 +0100
+
+sourceforge (2.5-31) unstable; urgency=low
+
+  * [Soon-Son] added method="post" to massmail.php which was missing so
+    far so that the admin can send email to the users
+  * [Roland] Revamped install-ftp.sh more or less thoroughly in order to
+    finally get rid of the sneaky LDAP problems.  From what I can see, it
+    works.  Yay!
+  * [Roland] Various other cleanings in install-ldap.sh.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 26 Aug 2002 13:01:49 +0200
+
+sourceforge (2.5-30) unstable; urgency=high
+
+  * [Christian] Change gid/uid attribution in ldap.php to be like in
+    backend
+  * [Christian] Added asciize function in ldap.php because
+    LDAP expects utf-8 encoded character string (backport from 2.6)
+  * [Roland] Fixed install-ftp.sh so that it actually does install stuff.
+  * [Roland] Fixed a few bashisms in maintainer scripts.
+  * [Roland] Fixed LDAP entries for mailing-lists (attribute cn: is not in
+    the schema).
+  * [Roland] Fixed user in crontab (for the DNS stuff) (closes: #147434).
+  * [Roland] Fixed bug in the "Submit a bug" form: all bug admins are able
+    to assign a bug from the start, not just project admins.
+  * [Roland] May I introduce you to Soon-Son Kwon <kss@kldp.org> who
+    recently got write access to our CVS repository.  He seems to focus on
+    internationalisation and Korean translation, but he is also a source
+    of bugfixes and other interesting patches.
+  * [Soon-Son] applied patch for bug # 148(savannah project page).
+  * [Soon-Son] added "scp" to allowed commands in cvssh.pl
+  * [Soon-Son] changed hardcoded "SourceForge" to $GLOBALS[sys_name]
+    so that the user can define custom site name.
+  * [Soon-Son] modified .../www/forum/message.php so that it can display
+    article subject correctly on the title.
+  * [Soon-Son] i18n patch for *many* pages (not all yet)
+  * [Soon-Son] removed "sourceforge.net" & "VA linux" specific pages
+    like .../contest/*, .../mirrors/* and simplified/generalized footer
+  * [Roland] Fixed search results page for Software/Group: the link was
+    wrong in the case of foundries.
+  * [Roland] Fixed POSIXness of maintainer scripts (closes: #150410).
+  * [Roland] Added missing languages (closes: #150301).
+  * [Christian] Added support for ssh-nonfree
+  * [Christian] Hope I solved a postrm bug that made uninstall fail
+  * [Soon-Son] fixed "forbidden" error when trying to connect
+    download.foobar.net
+  * [Roland] Fixed "value too long for type character varying(32)" in the
+    db-upgrade.pl script (when inserting local data) for a fresh install
+    (closes: #153031).  It was caused by a change of behaviour in the
+    md5sum binary provided by dpkg 1.10 and higher.
+  * [Roland] Be a little less stupid when emptying the LDAP directory on
+    purge (closes: #153032).  Instead of removing all entries but a few,
+    we now remove all *our* entries but a few.  Sorry about that.
+  * [Roland] When exiting on an error, db-upgrade.pl now tells you the
+    request that failed.  That should help debugging.
+  * [Roland] Moved the PostgreSQL de-configuration down in the prerm
+    script, since the LDAP de-configuration now uses sql2ldif and
+    therefore needs access to the database.
+  * [Roland] Moved back to non-US.  It seems there was a mistake, and not
+    all the dependencies were in main after all.  For some reason, the
+    fact that ProFTPd was still in non-US eluded both me and the
+    ftpmasters at the time the 2.5-29 package made it into main.  I'm
+    sorry about that.
+  * [Soon-Son] added group write permission(0664) when creating the val-tags
+    file in the CVSROOT directory of each project. Old configuration (0644)
+    caused an error when the user tries to tag it as follows:
+    $cvs up -r xterm-branch 
+    cvs [server aborted]: cannot write /cvsroot/hanterm-xf/CVSROOT/val-tags:
+    Permission denied 
+
+ -- Roland Mas <lolando@debian.org>  Fri, 19 Jul 2002 20:46:00 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
