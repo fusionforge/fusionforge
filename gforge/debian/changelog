@@ -1,4 +1,4 @@
-gforge (3.1-8+2) unstable; urgency=low
+gforge (3.1-8+3) unstable; urgency=low
 
   * [Roland] Added permissions for the robot to edit the
     ou=mailingList,dc=... entries in LDAP.
@@ -7,8 +7,10 @@ gforge (3.1-8+2) unstable; urgency=low
   * [Roland] Added po/nl.po for the Dutch translation (closes: #232236).
   * [Roland] Don't comment out LDAP schema inclusions in slapd.conf
     (closes: #227377).
+  * [Roland] Don't count private projects and the None user when
+    displaying numbers on the front page (closes: #211086).
 
- -- Roland Mas <lolando@debian.org>  Wed, 11 Feb 2004 23:08:24 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 12 Feb 2004 12:27:57 +0100
 
 gforge (3.1-8) unstable; urgency=low
 
