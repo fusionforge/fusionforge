@@ -75,20 +75,25 @@ while ($ln = pop(@group_array)) {
 	$userlist =~ tr/A-Z/a-z/;
 
 	$group_exists = (-d $grpdir_prefix . $group_name);
+	$cvs_exists = (-d "$cvs_root$group_name/CVSROOT");
 
-	if ($group_exists) {
-		if($verbose){print ("$group_name repository already exists\n");}
-	} else {
-		if($verbose){print ("$group_name\tuse_cvs=$use_cvs\tstatus=$status\tfile=$cvs_root$group_name/CVSROOT\n");}
+	if (!$group_exists && $use_cvs && $status eq 'A' ) {
+		print ("ERROR: $group_name home dir $grpdir_prefix$group_name doesn't exists\n");
+		print ("	but use_cvs=$use_cvs\tstatus=$status\n");
+	}
+	if ($cvs_exists && !$group_exists) {
+		print ("ERROR: CVS $cvs_root$group_name/CVSROOT exists\n");
+		print ("	but no $group_name home dir at $grpdir_prefix$group_name\n");
+		print ("	use_cvs=$use_cvs\tstatus=$status\n");
 	}
 	# CVS repository creation
-	if (!$group_exists && $use_cvs && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
+	if ($group_exists && !$cvs_exists && $use_cvs && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
 		# This for the first time
 		if (!(-d "$cvs_root")) {
-			print("Creating $cvs_root\n");
+			if($verbose){print("Creating $cvs_root\n");}
 			system("mkdir -p $cvs_root");
 		}
-		print("Creating a CVS Repository for: $group_name\n");
+		if($verbose){print("Creating a CVS Repository for: $group_name\n");}
 		# Let's create a CVS repository for this group
 
 		# Firce create the repository
