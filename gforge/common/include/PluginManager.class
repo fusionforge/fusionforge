@@ -1,0 +1,133 @@
+<?php
+/**
+ *	PluginManager object
+ *
+ *	Provides an abstract way to handle plugins
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * This file is copyright (c) Roland Mas <lolando@debian.org>, 2002
+ *
+ * $Id$
+ *
+ */
+
+class PluginManager extends Error {
+	var $plugins_objects ;
+	var $plugins_to_hooks ;
+	var $hooks_to_plugins ;
+
+	function PluginManager () {
+		$this->Error() ;
+		$this->plugins_objects = array () ;
+		$this->plugins_to_hooks = array () ;
+		$this->hooks_to_plugins = array () ;
+	}
+
+	function GetPlugins () {
+		if (!isset($this->plugins_data)) {
+			$this->plugins_data = array () ;
+			$sql = "SELECT * FROM plugins" ;
+			$res = db_query($sql);
+			$rows = db_numrows($res);
+
+			for ($i=0; $i<$rows; $i++) {
+				$plugin_id = db_result($res,$i,'plugin_id');
+				$this->plugins_data[$plugin_id] = db_result($res,$i,'plugin_name');
+			}
+		}
+		return $this->plugins_data ;
+	}
+
+	function PluginIsInstalled ($pluginname) {
+		$plugins_data = $this->getPlugins() ;
+		foreach ($plugins_data as $p_id => $p_name) {
+			if ($p_name == $pluginname) {
+				return true ;
+			}
+		}
+		return false ;
+	}
+
+	function LoadPlugins () {
+		$plugins_data = $this->GetPlugins() ;
+		$include_path = "/usr/lib/sourceforge/plugins/" ;
+		foreach ($plugins_data as $p_id => $p_name) {
+			$filename = $include_path . $p_name . "/include/".$p_name."-init.php" ;
+			if (file_exists ($filename)) {
+				require_once ($filename) ;
+			}
+		}
+		return true ;
+	}
+
+	function SetupHooks () {
+		foreach ($this->plugins_to_hooks as $p_name => $hook_list) {
+			foreach ($hook_list as $hook_name) {
+				if (!isset ($this->hooks_to_plugins[$hook_name])) {
+					$this->hooks_to_plugins[$hook_name] = array () ;
+				}
+				$this->hooks_to_plugins[$hook_name][] = $p_name ;
+			}
+		}
+		return true ;
+	}
+
+	function RegisterPlugin (&$pluginobject) {
+		if (!$pluginobject->GetName ()) {
+			exit_error ("Some plugin did not provide a name.  I'd gladly tell you which one, but obviously I can't.  Sorry.") ;
+		}
+		$p_name = $pluginobject->GetName () ;
+		$this->plugins_objects [$p_name] =& $pluginobject ;
+		$this->plugins_to_hooks [$p_name] = $pluginobject->GetHooks () ;
+		return true ;
+	}
+
+	function RunHooks ($hookname, $params) {
+		echo "\n<!-- Starting hook $hookname -->" ;
+		$p_list = $this->hooks_to_plugins[$hookname] ;
+		if (isset ($p_list)) {
+			foreach ($p_list as $p_name) {
+				echo "<!-- Hook $hookname for plugin $p_name -->" ;
+				$p_obj = $this->plugins_objects[$p_name] ;
+				$p_obj->CallHook ($hookname, $params) ;
+				echo "<!-- End of hook $hookname for plugin $p_name -->" ;
+			}
+		}
+		echo "<!-- End of hook $hookname -->\n" ;
+		return true ;
+	}
+}
+
+function &plugin_manager_get_object() {
+	global $PLUGINMANAGER_OBJ;
+	if (!isset($PLUGINMANAGER_OBJ) || !$PLUGINMANAGER_OBJ) {
+		$PLUGINMANAGER_OBJ = new PluginManager ;
+	}
+	return $PLUGINMANAGER_OBJ ;
+}
+
+function register_plugin (&$pluginobject) {
+	$pm =& plugin_manager_get_object () ;
+	return $pm->RegisterPlugin ($pluginobject) ;
+}
+
+function plugin_hook ($hookname, $params=false) {
+	$pm =& plugin_manager_get_object () ;
+	return $pm->RunHooks ($hookname, $params) ;
+}
+
+function setup_plugin_manager () {
+	$pm =& plugin_manager_get_object() ;
+	$pm->LoadPlugins () ;
+	$pm->SetupHooks () ;
+	return true ;
+}
+
+setup_plugin_manager () ;
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>

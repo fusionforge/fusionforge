@@ -52,6 +52,8 @@ pm_header(array('title'=>'Add a New Task','pagename'=>'pm_addtask','group_projec
 		echo pm_show_month_box ('start_month',date('m', time()));
 		echo pm_show_day_box ('start_day',date('d', time()));
 		echo pm_show_year_box ('start_year',date('Y', time()));
+		echo pm_show_hour_box ('start_hour',date('G', time()));
+		echo pm_show_minute_box ('start_minute', date('i', 15*(time()%15)));
 		?>
 			<BR><a href="calendar.php">View Calendar</a>
 		 </td>
@@ -64,6 +66,8 @@ pm_header(array('title'=>'Add a New Task','pagename'=>'pm_addtask','group_projec
 		echo pm_show_month_box ('end_month',date('m', time()));
 		echo pm_show_day_box ('end_day',date('d', time()));
 		echo pm_show_year_box ('end_year',date('Y', time()));
+		echo pm_show_hour_box ('end_hour',date('G', time()));
+		echo pm_show_minute_box ('end_minute', date('i', 15*(time()%15)));
 		?>
 		</td>
 

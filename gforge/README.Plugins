@@ -4,11 +4,11 @@ DEBIAN SOURCEFORGE PLUGINS HOWTO
 Here is a short HOWTO explaining how plugins work in Debian
 Sourceforge, and how to make a new one.
 
-,-----------------------------------------------------------------------.
-|  This is a DRAFT document!  The plugin system is not implemented yet, |
-| and not completely designed either.  Please read carefully, think     |
-| about it, and submit comments and fixes.                              |
-`-----------------------------------------------------------------------'
+,-------------------------------------------------------------------.
+|  This is a DRAFT document!  The plugin system is not fully        |
+| implemented yet, and not completely designed either.  Please read |
+| carefully, think about it, and submit comments and fixes.         |
+`-------------------------------------------------------------------'
 
   It was written by Roland Mas <lolando@debian.org>.
 
@@ -121,26 +121,33 @@ provided are setPluginUsage() methods, taking a plugin name and a
 boolean value as arguments and returning true on success and false on
 failure.
 
-- A plugin should not change the existing files, except insofar as it
-adds links to its own web pages.  Of course, these additions will have
-to be merged into the pages of the main package, but it should be just
-a matter of inserting lines like
-,----
-| if $this_group->usesPlugin("foo") {
-|    echo [Link to /plugins/foo/index.php?parameters]
-| }
-`----
-in the existing pages.  Most plugins will probably only add these
-links on the project summary page and/or on the user personal pages.
+- A plugin should not change the existing files.  Of course, it will
+need a way to adds links to its own web pages.  This is done by a
+"hook" system.  Each plugin can hook itself up to a number of hook
+points in the main code, and execute arbitrary code when that point is
+reached.  Basically, the plugin registers itself to a global object
+(of the PluginManager class, if you want to know).  You have to call
+the register_plugin() function, providing it an object of a subclass
+of the Plugin class that is provided by the main code.  That object
+must provide a GetHooks() method, which returns a list of hook names.
+Whenever one of these hooks is encountered, the object's CallHook()
+method is called with the hook name and extra parameters that depend
+on the hook.  Adding a link to your page in some place is just a
+matter of "subscribing" yourself to the hook that is in the
+appropriate place, and printing the appropriate link whenever your
+CallHook() method is called from that place.
 
-[TODO: Specify these hooks and how they work, implement]
-  Additionnally, a series of hooks will be provided so that plugins do
-not need to change existing files for simple insertion.  For instance,
-if the "acmecvsinterface" does not have particular needs besides a
-link pointing to it from the project page, it could just register its
-base URL to the "project-menu-features-list-hook", and the project
-menu would display a list of links subscribed to that hook with one
-parameter, "?group_id=<group_id>".
+  Registering your plugin is done by providing a
+/usr/lib/sourceforge/plugins/<pluginname>/include/<pluginname>-init.php.
+It will be parsed by the PluginManager object.  That file should
+contain a call to register_plugin(), passing it an object of the
+appropriate class.  See the helloworld plugin for an example.
+
+  The hooks are managed centrally by the Sourceforge code maintainers.
+If you need one, please ask, we'll add it.  At the time of writing,
+there's only one hook implemented (for the helloworld plugin).  It's
+called "usermenu" and occurs in the user_menu() method of the Layout
+class.  I rely on you plugins developers to provide more ideas :-)
 
 - Plugin-specific web pages should reside either in the /plugin/*/
 URL-space (that is, plugin "foo" will probably put its files in
@@ -181,14 +188,12 @@ in the plugins table) does not fail due to referential integrity errors.
 HOW DO I MAKE A PLUGIN?
 -----------------------
 
-[TODO: Finish implementing it...]
   Your best bet would be to start with the sample "helloworld" plugin
-and change parts of it.  It shows an example of everything you should
-need to make your plugin: PHP pages, Perl CGI pages, configuration
-files, bits of Apache configuration, cron jobs, etc.  If you need
-something else, please ask, we'll discuss it, (hopefully) reach an
-agreement on how to Do It Right, and implement a sample in
-helloworld.
+and change parts of it.  It shows an example of most of the things you
+should need to make your plugin: PHP pages, configuration files, bits
+of Apache configuration, cron jobs, etc.  If you need something else,
+please ask, we'll discuss it, (hopefully) reach an agreement on how to
+Do It Right, and implement a sample in helloworld.
 
 HOW TO NAME MY PLUGIN
 ---------------------

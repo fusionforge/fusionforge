@@ -408,14 +408,15 @@ class Layout extends Error {
 	 * @param	array	Header parameters array
 	 */
 	function user_menu($params){
-		global $Language;
+		global $Language ;
 		echo '
 		<P>
 		<A HREF="/my/">' . $Language->getText('menu','my_personal_page')
-		  . '</A> | <A HREF="/my/diary.php">' . $Language->getText('menu', 'diary_notes')
-		  . '</A> | <A HREF="/account/">' . $Language->getText('menu', 'account_maintenance')
-		  . '</A>
-		<P>';
+			. '</A> | <A HREF="/my/diary.php">' . $Language->getText('menu', 'diary_notes')
+			. '</A> | <A HREF="/account/">' . $Language->getText('menu', 'account_maintenance')
+			. '</A>' ;
+		plugin_hook ("usermenu", false) ;
+		'<P>';
 	}
 
 	/**
@@ -861,4 +862,10 @@ $s = ((session_issecure()) ? 's' : '' );
 
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

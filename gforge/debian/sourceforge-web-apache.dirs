@@ -1,5 +1,7 @@
 bin
 etc/sourceforge
+etc/sourceforge/httpd.conf.d
+etc/sourceforge/httpd.secrets.d
 etc/sourceforge/languages-local
 etc/sourceforge/templates
 etc/sourceforge/custom

@@ -3,7 +3,7 @@ Section: non-US
 Priority: optional
 Maintainer: Roland Mas <lolando@debian.org>
 Build-Depends-Indep: debhelper (>= 4.0), sharutils, docbook-to-man
-Standards-Version: 3.5.7
+Standards-Version: 3.5.8
 
 Package: sourceforge
 Architecture: all
