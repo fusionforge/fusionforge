@@ -46,7 +46,7 @@ class Document extends Error {
 	function Document(&$Group, $docid=false, $arr=false) {
 		$this->Error();
 		if (!$Group || !is_object($Group)) {
-			$this->setError('Document:: No Valid Group Object');
+			$this->setNotValidGroupObjectError();
 			return false;
 		}
 		if ($Group->isError()) {
@@ -72,7 +72,7 @@ class Document extends Error {
 				$perm =& $this->Group->getPermission( session_get_user() );
 
 				if (!$perm || !is_object($perm) || !$perm->isMember()) {
-					$this->setError('Permission Denied');
+					$this->setPermissionDeniedError();
 					$this->data_array = null;
 					return false;
 				}
@@ -108,7 +108,7 @@ class Document extends Error {
 		$perm =& $this->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 */
@@ -357,7 +357,7 @@ class Document extends Error {
 		$perm =& $this->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isDocEditor()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		if ($data) {
@@ -378,7 +378,7 @@ class Document extends Error {
 			AND docid='".$this->getID()."'");
 
 		if (!$res || db_affected_rows($res) < 1) {
-			$this->setError('Error On Update: '.db_error());
+			$this->setOnUpdateError(db_error());
 			return false;
 		}
 		$this->sendNotice(false);

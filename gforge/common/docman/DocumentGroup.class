@@ -93,7 +93,7 @@ class DocumentGroup extends Error {
 
 		$perm =& $this->Group->getPermission (session_get_user());
 		if (!$perm || !$perm->isDocEditor()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		$sql="INSERT INTO doc_groups (group_id,groupname) 
@@ -172,7 +172,7 @@ class DocumentGroup extends Error {
 	function update($name) {
 		$perm =& $this->Group->getPermission (session_get_user());
 		if (!$perm || !$perm->isDocEditor()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		if (!$name) {
