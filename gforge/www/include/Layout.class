@@ -307,9 +307,9 @@ class Layout extends Error {
 		global $G_SESSION, $Language, $sys_name;
 
 		if (!$params['title']) {
-			$params['title'] = "SourceForge";
+			$params['title'] = $GLOBALS['sys_name'];
 		} else {
-			$params['title'] = "SourceForge: " . $params['title'];
+			$params['title'] = $GLOBALS['sys_name'].": " . $params['title'];
 		}
 		?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
