@@ -34,7 +34,7 @@ if ($submit){
 
 	if (!$doc_group || $doc_group ==100) {
 		//cannot add a doc unless an appropriate group is provided
-		exit_error('Error','No Valid Document Group Was Selected');
+		exit_error($Language->getText('general','error'),$Language->getText('general','no_valid_group'),array('Document'));
 	}
 
 	if (!$title || !$description) { 
@@ -46,31 +46,29 @@ if ($submit){
 	}
 
 	if (!is_uploaded_file($uploaded_data)) {
-		exit_error("Error","Invalid filename");
+		exit_error($Language->getText('general','error'),$Language->getText('general','invalid_filename'));
 	}
 	$d = new Document($g);
 	if (!$d || !is_object($d)) {
-		exit_error('Error','Error getting blank document');
+		exit_error($Language->getText('general','error'),$Language->getText('docman_new','error_blank_document'));
 	} elseif ($d->isError()) {
-		exit_error('Error',$d->getErrorMessage());
+		exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	}
 
 	$data = addslashes(fread(fopen($uploaded_data, 'r'), filesize($uploaded_data)));
 	if (!$d->create($uploaded_data_name,$uploaded_data_type,$data,$doc_group,$title,$language_id,$description)) {
-		exit_error('Error',$d->getErrorMessage());
+		exit_error($Language->getText('general','error'),$d->getErrorMessage());
 	} else {
-		Header("Location: /docman/?group_id=$group_id&feedback=Document+Submitted+Successfully");
+		Header("Location: /docman/?group_id=$group_id&feedback=".$Language->getText('general','submitted_successfully','Document'));
 		exit;
 	}
 
 } else {
-	docman_header('Add documentation','Add documentation','docman_new','',$g->getPublicName());
+	docman_header($Language->getText('docman_new','title'),$Language->getText('docman_new','section'),'',$g->getPublicName());
 	?>
 	<p>
-	<strong> Document Title: </strong> Refers to the relatively brief title of the document 
-	(e.g. How to use the download server)
+	<?php echo $Language->getText('docman_new','intro') ?> 
 	<br />
-	<strong> Description: </strong> A brief description to be placed just under the title.<br />
 
 	<form name="adddata" action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="POST" enctype="multipart/form-data">
 
@@ -78,28 +76,28 @@ if ($submit){
 
 	<tr>
 		<td>
-		<strong>Document Title:</strong><?php echo utils_requiredField(); ?><br />
+		<strong>	<?php echo $Language->getText('docman_new','doc_title') ?></strong> <?php echo utils_requiredField(); ?> <br />
 		<input type="text" name="title" size="40" maxlength="255">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Description:</strong><?php echo utils_requiredField(); ?><br />
+		<strong>	<?php echo $Language->getText('docman_new','description') ?> :</strong><?php echo utils_requiredField(); ?><br />
 		<input type="text" name="description" size="50" maxlength="255">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Upload File:</strong><?php echo utils_requiredField(); ?><br />
+		<strong>	<?php echo $Language->getText('docman_new','upload_file') ?> :</strong><?php echo utils_requiredField(); ?><br />
 		<input type="file" name="uploaded_data" size="30">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Language:</strong><br />
+		<strong>	<?php echo $Language->getText('docman_new','language') ?> :</strong><br />
 		<?php
 			echo html_get_language_popup($Language,'language_id',1);
 		?>
@@ -108,7 +106,7 @@ if ($submit){
 
 	<tr>
 		<td>
-		<strong>Group that document belongs in:</strong><br />
+		<strong>	<?php echo $Language->getText('docman_new','group') ?> :</strong><br />
 		<?php
 			display_groups_option($group_id);
 		?>
@@ -116,7 +114,7 @@ if ($submit){
 	</tr>
 
 	</table>
-	<input type="submit" name="submit" value="Submit Information">
+	<input type="submit" name="submit" value="	<?php echo $Language->getText('docman_new','submit') ?> ">
 	</form>
 	<?php
 	docman_footer(array());

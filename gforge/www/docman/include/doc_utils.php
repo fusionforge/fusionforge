@@ -36,6 +36,7 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='xyz') {
 
 	global $group_id;
+	global $Language;
 
 	$project =& group_get_object($group_id);
 	if (!$project || !is_object($project)) {
@@ -43,19 +44,20 @@ function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='
 	}   
 
 	if (!$project->usesDocman()) {
-		exit_error('Error','This Project Has Turned Off The Doc Manager');
+		exit_error($Language->getText('general','error'),$Language->getText('general','turned_off',array('Doc Manager')));
 	}
 
 	site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'docman','pagename'=>$pagename,'titlevals'=>array($titleval),'sectionvals'=>array($sectionval)));
 
-	print "<p><strong><a href=\"/docman/new.php?group_id=".$group_id."\">Submit new documentation</a> | ".
-		"<a href=\"/docman/index.php?group_id=".$group_id."\">View Documentation</a> | ".
-		"<a href=\"/docman/admin/index.php?group_id=".$group_id."\">Admin</a></strong>"; 
+	print "<p><strong><a href=\"/docman/new.php?group_id=".$group_id."\">".$Language->getText('docman','submit_new')."</a> | ".
+		"<a href=\"/docman/index.php?group_id=".$group_id."\">".$Language->getText('docman','view_doc')."</a> | ".
+		"<a href=\"/docman/admin/index.php?group_id=".$group_id."\">".$Language->getText('docman','admin')."</a></strong>"; 
 	
 	print("<br />");
 }
 
 function doc_droplist_count($l_group_id, $language_id) {
+	global $Language;
 
 	$query = "select dd.language_id, sl.name, count(*) as count
 		 from doc_groups as dg, doc_data as dd, supported_languages as sl
@@ -71,9 +73,9 @@ function doc_droplist_count($l_group_id, $language_id) {
 	if (db_numrows($gresult) >= 1) {
 
 		print "<form name=\"langchoice\" action=\"index.php?group_id=".$l_group_id."\" method=\"POST\"><table border=\"0\">"
-			." <tr><td valign=\"center\"><strong>Language:</strong></td>"
+			." <tr><td valign=\"center\"><strong>".$Language->getText('general','language').":</strong></td>"
 			." <td valign=\"center\"><select name=\"language_id\">\n\n"; 
-		print "<option value=\"0\">All Languages</option>";
+		print "<option value=\"0\">".$Language->getText('docman_display_doc','all_languages')." </option>";
 		while($grow = db_fetch_array($gresult)) {
 
 			if ($language_id == $grow['language_id']) {

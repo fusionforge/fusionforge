@@ -31,7 +31,7 @@ if (!$g || !is_object($g) || $g->isError()) {
 
 $df = new DocumentFactory($g);
 if ($df->isError()) {
-	exit_error('Error',$df->getErrorMessage());
+	exit_error($Language->getText('general','error'),$df->getErrorMessage());
 }
 
 if (!$language_id) {
@@ -49,10 +49,10 @@ if (!$_arr || count($d_arr) <1){
 	$d_arr = &$df->getDocuments();
 }
 
-docman_header('Project Documentation','Project Documentation','docman','',$g->getPublicName());
+docman_header($Language->getText('docman_display_doc','title'),$Language->getText('docman_display_doc','section'),'docman','',$g->getPublicName());
 
 if (!$d_arr || count($d_arr) < 1) {
-	print "<strong>This project has no visible documents.</strong><p>";
+	print "<strong>".$Language->getText('docman','error_no_docs')."</strong><p>";
 } else { 
 	doc_droplist_count($group_id, $language_id);
 
@@ -70,7 +70,7 @@ if (!$d_arr || count($d_arr) < 1) {
 		}
 		print "\n<li><a href=\"view.php/$group_id/".$d_arr[$i]->getID()."/".$d_arr[$i]->getFileName()."\">". 
 			$d_arr[$i]->getName()." [ ".$d_arr[$i]->getFileName()." ]</a>".
-			"\n<br /><em>Description:</em> ".$d_arr[$i]->getDescription();
+			"\n<br /><em>".$Language->getText('docman','description').":</em> ".$d_arr[$i]->getDescription();
 
 	}
 	print "\n</ul>\n";
