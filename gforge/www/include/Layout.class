@@ -456,7 +456,7 @@ if ($params['toptab'] && $params['group']) {
 		} else {
 			$selected=0;
 		}
-		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,'#E0E0E0','80%');
+		echo $this->tabGenerator($TABS_DIRS,$TABS_TITLES,false,$selected,'#E0E0E0','100%');
 
 	}
 
