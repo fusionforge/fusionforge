@@ -4,6 +4,8 @@
 //
 $homedir_prefix='{homedir}';
 $groupdir_prefix='{groupdir}';
+$cvsdir_prefix='{cvsdir}';
+$svndir_prefix='{svndir}';
 $sys_chroot='{gforge_chroot}';
 
 //

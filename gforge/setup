@@ -47,6 +47,8 @@ computedefault(){
 	DEFAULTsys_custom_path=$ETCDIR/custom
 	DEFAULTgroupdir=$GROUPPATH
 	DEFAULThomedir=$HOMEPATH
+	DEFAULTcvsdir=$CVSPATH
+	DEFAULTsvndir=$SVNPATH
 	DEFAULTuploaddir=$GFGDIR/var/lib/gforge/download/
 	DEFAULTsys_urlroot=$SHAREDIR/www/
 	DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
@@ -269,6 +271,8 @@ GFGDIR=`pwd`
 CHROOT=''
 HOMEPATH=/home
 GROUPPATH=/home/groups
+CVSPATH=/cvsroot
+SVNPATH=/svnroot
 SHAREDIR=`pwd`
 LIBDIR=`pwd`
 CONFFILEOUTDIR=$ETCDIR
