@@ -10,15 +10,20 @@ class HelloWorldPlugin extends Plugin {
 	function CallHook ($hookname, $params) {
 		global $Language, $G_SESSION ;
 		if ($hookname == "usermenu") {
+			echo ' | <A HREF="/plugins/helloworld/index.php?user_id=' . $G_SESSION->getId() . '">Hello world' ;
 			if ($G_SESSION->usesPlugin("helloworld")) {
-				echo ' | <A HREF="/plugins/helloworld/index.php?user_id=' . $G_SESSION->getId() . '">Hello world</A>' ;
+				echo ' [on]' ;
+			} else {
+				echo ' [off]' ;
 			}
+			echo '</A>' ;
 		} elseif ($hookname == "blah") {
 			// Blah
 		}
 	}
 
 	function GetHooks () {
+		// echo "Entered HelloWorldPlugin->GetHooks" ;
 		$hooks = array () ;
 		$hooks [] = "usermenu" ;
 		return $hooks ;

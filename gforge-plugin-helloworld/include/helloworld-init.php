@@ -4,7 +4,11 @@ require_once ('/usr/lib/sourceforge/plugins/helloworld/include/HelloWorldPlugin.
 
 $HelloWorldPluginObject = new HelloWorldPlugin () ;
 
-plugin_manager_get_object ()->RegisterPlugin ("helloworld", $HelloWorldPluginObject) ;
+// echo "Initialising helloworld-plugin " ;
+
+$pm = plugin_manager_get_object() ;
+
+$pm->RegisterPlugin ("helloworld", $HelloWorldPluginObject) ;
 
 // Local Variables:
 // mode: php

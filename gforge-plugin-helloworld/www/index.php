@@ -27,6 +27,7 @@ if (!$user || !is_object($user) || $user->isError() || !$user->isActive()) {
 	}
 	print '<A HREF="toggle.php?user_id='.$user_id.'">Toggle!</A>' ;
 	print "This is the helloworld plugin.  I hope you enjoy it." ;
+	print '<A HREF="/my/">Back to My Peronal Page.</A>' ;
 	print $HTML->box1_bottom();
 }
 
