@@ -102,9 +102,11 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     field is now unix_pw, even for authenticating web sessions.  We keep
     user_pw for better performance when looking up the user entry in the
     database, but it is just a cached value that is recomputed from the
-    unix_pw when needed.  This allows for better integration with existing
-    systems (for instance, if you want to inject some existing accounts
-    into the database...).
+    unix_pw when possible (except when said unix_pw is empty, in which
+    case user_pw is the reference, and unix_pw is recomputed when
+    possible).  This allows for better integration with existing systems
+    (for instance, if you want to inject some existing accounts into the
+    database...).
   * [Roland] A little i18n in the user's homepage.
   * [Christian] added James Michael DuPont proposed files from
     http://introspector.sourceforge.net/sfexport.tgz . This means 2 files:
@@ -121,7 +123,7 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     generate artifact stats
   * [Christian] more i18n in account management 
 
- -- Christian Bayle <bayle@debian.org>  Tue, 12 Nov 2002 02:36:53 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 12 Nov 2002 13:20:41 +0100
 
 sourceforge (2.6-0+13) experimental; urgency=low
 

@@ -11,6 +11,8 @@
   *
   */
 
+require_once('common/include/account.php');
+
 /**
  * A User object if user is logged in
  *
@@ -189,7 +191,7 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 				// This one has clearly typed a bas passwd
 				$feedback=$Language->getText('session','invalidpasswd');
 				return false;
-			} 
+			}
 			// User exists, (crypt) unix_pw matches
 			// Update the (MD5) user_pw and retry authentication
 			// It should work, except for status errors
@@ -205,14 +207,25 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 		$usr = db_fetch_array($res);
 
 		if (crypt ($passwd, $usr['unix_pw']) != $usr['unix_pw']) {
-			// The (crypt) unix_pw does not patch
-			// Invalidate (MD5) user_pw, refuse authentication
-			$res = db_query ("UPDATE users
-                                          SET user_pw='OUT OF DATE'
-                                          WHERE user_id='".$usr['user_id']."'
-                                          ");
-			$feedback=$Language->getText('session','invalidpasswd');
-			return false;
+			// The (crypt) unix_pw does not match
+			if ($usr['unix_pw'] == '') {
+				// Empty unix_pw, we'll take the MD5 as authoritative
+				// Update the (crypt) unix_pw and retry authentication
+				// It should work, except for status errors
+				$res = db_query ("UPDATE users
+                                                  SET unix_pw='" . account_genunixpw($passwd) . "'
+                                                  WHERE user_id='".$usr['user_id']."'
+                                                  ");
+				return session_login_valid($loginname, $passwd, $allowpending) ;
+			} else {
+				// Invalidate (MD5) user_pw, refuse authentication
+				$res = db_query ("UPDATE users
+                                                  SET user_pw='OUT OF DATE'
+                                                  WHERE user_id='".$usr['user_id']."'
+                                                  ");
+				$feedback='Invalid Password Or User Name';
+				return false;
+			}
 		}
 
 		// Yay.  The provided password matches both fields in the database.
