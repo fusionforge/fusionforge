@@ -136,7 +136,7 @@ if ($forum_id) {
 	$max_row_popup=html_build_select_box_from_arrays ($vals,$texts,'max_rows',$max_rows,false);
 
 	//now show the popup boxes in a form
-	$ret_val .= '
+	$ret_val = '
 	<form action="'. $PHP_SELF .'" method="get">
 	<input type="hidden" name="set" value="custom" />
 	<input type="hidden" name="forum_id" value="'.$forum_id.'" />
