@@ -1,5 +1,8 @@
-2004-03-14  Guillaume Smet <guillaume-gforge@smet.org>
+2004-03-23  Tom Copeland <tom@infoether.com>
+	* www/forum/include/ForumHTML.class: Implemented RFE [ #720 ] Link 
+	news items to project site.
 
+2004-03-14  Guillaume Smet <guillaume-gforge@smet.org>
 	* Some HTML cleanup and bugfixes.
 	* Fixed a bug in theme selection introduced by Tom last week.
 	* Fixed bug [ #718 ] introduced by Tom last week.

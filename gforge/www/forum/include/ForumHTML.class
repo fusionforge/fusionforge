@@ -34,7 +34,6 @@ function forum_header($params) {
 
 	/*
 		bastardization for news
-
 		Show icon bar unless it's a news forum
 	*/
 	if ($group_id == $sys_news_group) {
@@ -48,8 +47,8 @@ function forum_header($params) {
 
 			$params['group']=db_result($result,0,'group_id');
 			$params['toptab']='news';
-
 			$HTML->header($params);
+
 
 			echo '<table><tr><td valign="top">';
 			if (!$result || db_numrows($result) < 1) {
@@ -57,10 +56,15 @@ function forum_header($params) {
 					<h3>'.$Language->getText('forum_utils','nonewsitem').'</h3>';
 			} else {
 				$user = user_get_object(db_result($result,0,'submitted_by'));
+				$group =& group_get_object($params['group']);
+				if (!$group || !is_object($group) || $group->isError()) {
+					exit_no_group();
+				}
 				echo '
 				<strong>'.$Language->getText('forum_utils','postedby').':</strong> '.$user->getRealName().'<br />
 				<strong>'.$Language->getText('forum_utils','date').':</strong> '. date($sys_datefmt,db_result($result,0,'post_date')).'<br />
-				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</a>
+				<strong>'.$Language->getText('forum_utils','summary').':</strong> <a href="/forum/forum.php?forum_id='.db_result($result,0,'forum_id').'">'. db_result($result,0,'summary').'</a><br/>
+				<strong>Project:</strong> <a href="/projects/'.$group->getUnixName().'">'.$group->getPublicName().'</a> <br />
 				<p>
 				'. (util_make_links(nl2br(db_result($result,0,'details'))));
 
