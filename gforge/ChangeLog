@@ -1,5 +1,8 @@
 2004-03-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
+	* www/include/languages/Catalan.tab: Catalan update by Jordi
+	Mallach <jordi@debian.org>.
+
 	* www/include/BaseLanguage.class: Trim the last part of the *.tab
 	lines, instead of just right-trimming it.  This makes it possible
 	to have pretty aligned third columns in these files without
