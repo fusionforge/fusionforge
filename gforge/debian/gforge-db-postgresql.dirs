@@ -1,0 +1,8 @@
+etc/gforge
+usr/bin
+usr/lib/gforge/bin
+usr/lib/gforge/db
+usr/lib/gforge/lib
+usr/sbin
+var/lib/gforge
+var/lib/gforge/tmp

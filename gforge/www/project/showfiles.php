@@ -52,7 +52,7 @@ $title_arr[] = 'Date';
 $group_unix_name=group_getunixname($group_id);
 
    // print the header row
-//echo html_build_list_table_top($title_arr) . "\n";
+//echo $GLOBALS[HTML]->listTableTop($title_arr) . "\n";
 function col_heading($title)
 {
   global $HTML;
@@ -137,7 +137,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 					$file_release = db_fetch_array( $res_file );
 					print "\t\t" . '<TR bgcolor="' . $bgcolor .'">'
 						. '<TD colspan=3><dd>'
-						. '<A HREF="http://'.$sys_download_host.'/'.$group_unix_name.'/'.$file_release['filename'].'">'
+						. '<A HREF="/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
 						. $file_release['filename'] .'</A></TD>'
 						. '<TD align="right">'. $file_release['file_size'] .' </TD>'
 						. '<TD align="right">'. ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0') .' </TD>'

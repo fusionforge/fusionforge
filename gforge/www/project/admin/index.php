@@ -78,7 +78,7 @@ project_admin_header(array('title'=>"Project Admin: ".$group->getPublicName(),'g
 <TABLE width=100% cellpadding=2 cellspacing=2 border=0>
 <TR valign=top><TD width=50%>
 
-<?php $HTML->box1_top("Misc. Project Information");  ?>
+<?php echo $HTML->boxTop("Misc. Project Information");  ?>
 
 &nbsp;
 <BR>
@@ -86,9 +86,9 @@ Short Description: <?php echo $group->getDescription(); ?>
 <P>
 Homepage Link: <b><?php echo $group->getHomepage(); ?></b>
 <p>
-Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?>
+Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_default_domain']; ?></b>
 <p>
-Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?>
+Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?></b>
 <p>
 Project WWW directory on shell server:
 <b><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
@@ -96,38 +96,20 @@ Project WWW directory on shell server:
 <P align=center>
 <A HREF="http://<?php echo $GLOBALS['sys_cvs_host']; ?>/cvstarballs/<?php echo $group->getUnixName(); ?>-cvsroot.tar.gz">[ Download Your Nightly CVS Tree Tarball ]</A>
 <P>
-
 <HR NOSHADE>
 <P>
 <H4>Trove Categorization:
 <A href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">
 [Edit]</A></H4>
 <P>
-<HR NOSHADE>
-<P>
-<H4>Showing The <?php echo $GLOBALS['sys_name']; ?> Logo:</H4>
-<p>
-<font size=-1>
-If you use <?php echo $GLOBALS['sys_name']; ?> services, we ask you to display our logo
-on your project homepage.
-</a>
-</font>
-</p>
-<P>
 <?php
-echo htmlspecialchars('<A href="http://'.$GLOBALS['sys_default_domain'].'"> 
-<IMG src="http://'.$GLOBALS['sys_default_domain'].'/sflogo.php?group_id='. $group_id .'" width="88" height="31"
-border="0" alt="'.$GLOBALS['sys_name'].' Logo"></A>');
-
-echo '<P>'.html_image('images/sflogo-88-1.png','88','31',array(),0);
-
-$HTML->box1_bottom(); 
+echo $HTML->boxBottom(); 
 
 echo '
 </TD><TD>&nbsp;</TD><TD width=50%>';
 
 
-$HTML->box1_top("Group Members");
+echo $HTML->boxTop("Group Members");
 
 /*
 
@@ -190,7 +172,7 @@ if ($is_admin) {
 }
 ?>
  
-<?php $HTML->box1_bottom();?>
+<?php echo $HTML->boxBottom();?>
 
 
 </TD></TR>
@@ -203,7 +185,7 @@ if ($is_admin) {
 	Tool admin pages
 */
 
-$HTML->box1_top('Tool Admin');
+echo $HTML->boxTop('Tool Admin');
 
 ?>
 
@@ -215,7 +197,7 @@ $HTML->box1_top('Tool Admin');
 <A HREF="/pm/admin/?group_id=<?php echo $group->getID(); ?>">Task Manager Admin</A><BR>
 <A HREF="/forum/admin/?group_id=<?php echo $group->getID(); ?>">Forum Admin</A><BR>
 
-<?php $HTML->box1_bottom(); ?>
+<?php echo $HTML->boxBottom(); ?>
 
 
 
@@ -226,20 +208,14 @@ $HTML->box1_top('Tool Admin');
 
 <TD width=50%>
 
-<?php
-/*
-	Show filerelease info
-*/
-?>
-
-<?php $HTML->box1_top("File Releases"); ?>
+<?php echo $HTML->boxTop("File Releases"); ?>
 	&nbsp;<BR>
 	<CENTER>
 	<A href="editpackages.php?group_id=<?php print $group_id; ?>"><B>[Edit/Add File Releases]</B></A>
 	</CENTER>
 
 	<HR>
-	<B>Packages:</B> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<B>Packages:</B>
 
 	<P>
 
@@ -250,7 +226,7 @@ $HTML->box1_top('Tool Admin');
 		print "$row_module[name]<BR>";
 	}
 
-	echo $HTML->box1_bottom();
+	echo $HTML->boxBottom();
 	?>
 </TD>
 </TR>

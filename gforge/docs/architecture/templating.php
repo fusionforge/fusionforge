@@ -112,7 +112,7 @@ echo $ath->header(array (\'title\'=>\'Detail: \'.$ah->getID(). \' \'.$ah->getSum
 		<TR>
 			<TD COLSPAN=2">
 			<?php
-			if (!user_isloggedin()) {
+			if (!session_loggedin()) {
 				?>
 				<B>Email:</B> &nbsp;
 				<INPUT TYPE="TEXT" NAME="user_email" SIZE="20" MAXLENGTH="40">

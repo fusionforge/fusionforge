@@ -15,12 +15,11 @@
 require_once('pre.php');
 require_once('common/include/vars.php');
 require_once('www/snippet/snippet_utils.php');
-require_once('www/include/cache.php');
 require_once('www/include/snippet_caching.php');
 
 snippet_header(array('title'=>'Snippet Library', 'header'=>'Snippet Library','pagename'=>'snippet'));
 
-echo cache_display('snippet_mainpage','snippet_mainpage()',7200);
+echo snippet_mainpage();
 
 snippet_footer(array());
 

@@ -22,7 +22,7 @@ require_once('pre.php');
 if ($group_id) {
 
 	if (!$language_id) {
-		if (user_isloggedin()) {
+		if (session_loggedin()) {
 			$language_id = $LUSER->getLanguage();
 		} else {
 			$language_id = 1;

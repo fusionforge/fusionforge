@@ -1,0 +1,15 @@
+bin
+etc/gforge
+etc/gforge/languages-local
+etc/gforge/templates
+etc/gforge/custom
+usr/bin
+usr/lib/gforge/bin
+usr/lib/gforge/lib
+usr/share
+usr/share/gforge/www
+usr/share/gforge/common
+usr/sbin
+var/lib/gforge
+var/lib/gforge/download
+var/lib/gforge/cvstarballs

@@ -229,7 +229,7 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 	$arr[]='Property';
 	$arr[]='Value';
 
-	echo html_build_list_table_top($arr);
+	echo $GLOBALS['HTML']->listTableTop($arr);
 
 	render_row(
 		'Project role',
@@ -340,7 +340,7 @@ if (!$res_dev || db_numrows($res_dev) < 1) {
 		</FORM>
 	</TD></TR>
 
-	</TABLE>
+	<?php echo $GLOBALS['HTML']->listTableBottom(); ?>
 
 	<P> 
 	<h3>Add User To These Trackers:</H3>

@@ -6,15 +6,15 @@
 ##############################
 # Global Variables
 ##############################
-$db_include	=	"/etc/sourceforge/local.pl";	# Local Include file for database username and password
+$db_include	=	"/etc/gforge/local.pl";	# Local Include file for database username and password
 $tar_dir	=	"/tmp";			# Place to put deleted user's accounts
 $uid_add	=	"20000";		# How much to add to the database uid to get the unix uid
 $gid_add	=	"10000";		# How much to add to the database gid to get the unix uid
 $anoncvs_uid_add	=	"50000";
-$homedir_prefix =	"/var/lib/sourceforge/chroot/home/users/";		# What prefix to add to the user's homedir
-$grpdir_prefix  =	"/var/lib/sourceforge/chroot/home/groups/";	# What prefix to add to the user's homedir
-$file_dir	=	"/var/lib/sourceforge/";	# Where should we stick files we're working with
-$cvs_root       =       "/var/lib/sourceforge/chroot/cvsroot/";    # Where should we stick files we're working with
+$homedir_prefix =	"/var/lib/gforge/chroot/home/users/";		# What prefix to add to the user's homedir
+$grpdir_prefix  =	"/var/lib/gforge/chroot/home/groups/";	# What prefix to add to the user's homedir
+$file_dir	=	"/var/lib/gforge/";	# Where should we stick files we're working with
+$cvs_root       =       "/var/lib/gforge/chroot/cvsroot/";    # Where should we stick files we're working with
 $dummy_uid      =       "9999";                  # UserID of the dummy user that will own group's files
 $date           =       int(time()/3600/24);    # Get the number of days since 1/1/1970 for /etc/shadow
 $ldap_prefix	=	"/usr/local/ldap/bin/";	# Where OpenLDAP tools installed

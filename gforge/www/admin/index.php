@@ -1,6 +1,5 @@
 <?php
 /**
-  *
   * SourceForge Site Admin main page
   *
   * This pages lists all global administration facilities for the
@@ -13,7 +12,6 @@
   * http://sourceforge.net
   *
   * @version   $Id$
-  *
   */
 
 
@@ -77,6 +75,7 @@ Search <i>(groupid, group unix name, full name)</i>:
 <LI><a href="search.php?groupsearch=1&search=%&is_public=0">Private Groups </A>
 </ul>
 
+<p><b><A HREF="/register/">Register New Project</A></b>
 <p><b>Trove</b>
 <ul>
 <li><a href="trove/trove_cat_list.php">Display Trove Map</a>

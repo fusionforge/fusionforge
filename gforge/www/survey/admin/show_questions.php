@@ -18,7 +18,7 @@ $is_admin_page='y';
 
 $HTML->header(array('title'=>'Survey Questions','pagename'=>'survey_admin_show_questions'));
 
-if (!user_isloggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<H1>Permission Denied</H1>";
 	survey_footer(array());
 	exit;

@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: index.php,v 1.40 2001/07/12 21:48:12 dbellizzi Exp $
+  * @version   $Id: index.php.patched,v 1.1.2.1 2002/11/30 09:57:57 cbayle Exp $
   *
   */
 
@@ -60,7 +60,7 @@ print $Language->getText('cvs', 'devcvs').'
 // ################## summary info
 
 print '</TD><TD width="35%">';
-print $HTML->box1_top($Language->getText('cvs', 'history'));
+print $HTML->boxTop($Language->getText('cvs', 'history'));
 
 // ################ is there commit info?
 
@@ -88,7 +88,7 @@ if ($row_grp['is_public']) {
 <B>'.$Language->getText('cvs', 'browseit').'</B></A>';
 }
 
-print $HTML->box1_bottom();
+print $HTML->boxBottom();
 
 print '</TD></TR></TABLE>';
 

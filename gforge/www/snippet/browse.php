@@ -62,7 +62,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 	$title_arr[]='Title';
 	$title_arr[]='Creator';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	/*
 		List packages if there are any
@@ -102,8 +102,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD COLSPAN="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</TD></TR>';
 	}
 
-	echo '
-		</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
 
 }
 

@@ -43,15 +43,9 @@ if ($group_id) {
 		if ($group_id) {
 			$grp =& group_get_object($group_id,$res_grp);
 			if ($grp) {
-				if ($grp->isFoundry()) {
-					//this is a foundry - so set up the foundry var properly
-					$foundry =& $grp;
-					//echo "IS FOUNDRY: ".$group_id;
-				} else {
-					//this is a project - so set up the project var properly
-					$project =& $grp;
-					//echo "IS PROJECT: ".$group_id;
-				}
+				//this is a project - so set up the project var properly
+				$project =& $grp;
+				//echo "IS PROJECT: ".$group_id;
 				$log_group=$group_id;
 			} else {
 				$log_group=0;

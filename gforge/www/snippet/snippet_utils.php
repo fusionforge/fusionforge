@@ -119,7 +119,7 @@ function snippet_show_package_snippets($version) {
 	$title_arr[]='Title';
 	$title_arr[]='Author';
 
-	echo html_build_list_table_top ($title_arr,$links_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr,$links_arr);
 
 	if (!$result || $rows < 1) {
 		echo db_error();
@@ -140,7 +140,8 @@ function snippet_show_package_snippets($version) {
 				db_result($result,$i,'user_name').'</TD></TR>';
 		}
 	}
-	echo '</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
 
 }
 

@@ -1,12 +1,12 @@
 ###
-# Functions to handle the main Sourceforge confguration file
+# Functions to handle the main Sourceforge configuration file
 ###
-mainconffile=/etc/sourceforge/sourceforge.conf
+mainconffile=/etc/gforge/gforge.conf
 # Update it for the variables received as parameters
 update_mainconffile () {
     for i in $@ ; do
         if ! grep -q "^$i=" $mainconffile ; then
-            db_get sourceforge/shared/$i
+            db_get gforge/shared/$i
             echo "$i=$RET" >> $mainconffile
         fi
     done

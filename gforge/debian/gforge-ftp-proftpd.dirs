@@ -1,0 +1,12 @@
+etc/gforge
+etc/gforge/templates
+usr/bin
+usr/lib/gforge/bin
+usr/lib/gforge/db
+usr/lib/gforge/lib
+usr/sbin
+var/lib/gforge
+var/lib/gforge/chroot
+var/lib/gforge/download
+var/lib/gforge/ftp
+var/lib/gforge/ftp/incoming

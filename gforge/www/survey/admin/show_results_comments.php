@@ -19,7 +19,7 @@ require_once('www/survey/survey_utils.php');
 $is_admin_page='y';
 survey_header(array('title'=>'Survey Aggregate Results','pagename'=>'survey_admin_show_results_comments'));
 
-if (!user_isloggedin() || !user_ismember($group_id,'A')) {
+if (!session_loggedin() || !user_ismember($group_id,'A')) {
 	echo "<H1>Permission Denied</H1>";
 	survey_footer(array());
 	exit;

@@ -188,7 +188,7 @@ if (db_numrows($res_db) > 0) {
 	$title[]='Confirm New';
 	$title[]='Operations';
 
-	echo html_build_list_table_top($title);
+	echo $GLOBALS['HTML']->listTableTop($title);
 
 	while ($row_db = db_fetch_array($res_db)) {
 
@@ -226,8 +226,7 @@ if (db_numrows($res_db) > 0) {
 
 	}
 
-
-	print '</table>';
+	echo $GLOBALS['HTML']->listTableBottom();
 
 } else {
 

@@ -1,0 +1,9 @@
+etc/gforge
+etc/gforge/templates
+usr/bin
+usr/lib/gforge/bin
+usr/lib/gforge/lib
+usr/sbin
+var/lib/gforge
+var/lib/gforge/bind
+var/lib/gforge/tmp

@@ -8,7 +8,7 @@ use Sys::Hostname;
 
 #$hostname = hostname();
 
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions and variables
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions and variables
 
 $hostname = "cvs";
 
@@ -206,8 +206,8 @@ sub delete_user {
 	my $this_user = shift(@_);
 	
 	print("Deleting User : $this_user\n");
-	system("/bin/mv /var/lib/sourceforge/chroot/home/users/$username /var/lib/sourceforge/chroot/home/users/deleted_$username");
-	system("/bin/tar -czf /var/lib/sourceforge/tmp/$username.tar.gz /var/lib/sourceforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/sourceforge/chroot/home/users/deleted_$username");
+	system("/bin/mv /var/lib/gforge/chroot/home/users/$username /var/lib/gforge/chroot/home/users/deleted_$username");
+	system("/bin/tar -czf /var/lib/gforge/tmp/$username.tar.gz /var/lib/gforge/chroot/home/users/deleted_$username && /bin/rm -rf /var/lib/gforge/chroot/home/users/deleted_$username");
 }
 
 #############################
@@ -270,7 +270,7 @@ sub delete_group {
 	
 	if (substr($hostname,0,3) ne "cvs") {
 		print("Deleting Group: $this_group\n");
-		system("/bin/mv /var/lib/sourceforge/chroot/home/groups/$this_group /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group");
-		system("/bin/tar -czf /var/lib/sourceforge/tmp/$this_group.tar.gz /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/sourceforge/chroot/home/groups/deleted_group_$this_group");
+		system("/bin/mv /var/lib/gforge/chroot/home/groups/$this_group /var/lib/gforge/chroot/home/groups/deleted_group_$this_group");
+		system("/bin/tar -czf /var/lib/gforge/tmp/$this_group.tar.gz /var/lib/gforge/chroot/home/groups/deleted_group_$this_group && /bin/rm -rf /var/lib/gforge/chroot/home/groups/deleted_group_$this_group");
 	}
 }

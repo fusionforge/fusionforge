@@ -6,7 +6,7 @@
 #		     scripts can process it without needing to access the database.
 use DBI;
 
-require("/usr/lib/sourceforge/lib/include.pl");  # Include all the predefined functions
+require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
 
 my $user_array = ();
 my $group_array = ();

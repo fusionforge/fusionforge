@@ -174,7 +174,7 @@ if ($group_id && user_ismember($group_id,'A')) {
 			$title_arr[]='Update';
 			$title_arr[]='List Admin';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
@@ -204,7 +204,9 @@ if ($group_id && user_ismember($group_id,'A')) {
 						db_result($result,$i,'description') .'" SIZE="40" MAXLENGTH="80"><BR>
 					</TD></TR></FORM>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 
 		mail_footer(array());

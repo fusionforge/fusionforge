@@ -4,18 +4,18 @@
 # Replace an exsting file with the proposed one
 replace_file () {
     file=$1
-    cp $file ${file}.sourceforge-old
-    mv ${file}.sourceforge-new $file
+    cp $file ${file}.gforge-old
+    mv ${file}.gforge-new $file
 }
 
 # Propose a replacement to the user
 propose_update () {
     file=$1
     mode=$2
-    template=sourceforge/shared/replace_file_$mode
-    if diff -q ${file} ${file}.sourceforge-new > /dev/null 2>&1 ; then
+    template=gforge/shared/replace_file_$mode
+    if diff -q ${file} ${file}.gforge-new > /dev/null 2>&1 ; then
         # Old file and new file are identical
-        rm -f ${file}.sourceforge-new
+        rm -f ${file}.gforge-new
     else
         db_fset $template seen false
         db_subst $template file $file
@@ -28,9 +28,9 @@ propose_update () {
                 replace_file $file
                 ;;
             "false")
-                db_fset sourceforge/shared/file_changed seen false
-                db_subst sourceforge/shared/file_changed file $file
-                db_input high sourceforge/shared/file_changed || true
+                db_fset gforge/shared/file_changed seen false
+                db_subst gforge/shared/file_changed file $file
+                db_input high gforge/shared/file_changed || true
                 db_go || true
                 ;;
         esac

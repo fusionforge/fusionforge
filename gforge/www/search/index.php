@@ -32,12 +32,6 @@ if (!$type_of_search) {
 	$type_of_search='soft';
 }
 
-// For freshmeat searh, redirect immediately
-if ($type_of_search == 'freshmeat') {
-	header('Location: http://freshmeat.net/search/?q='.urlencode($words));
-	exit();
-}
-
 require_once('pre.php');
 require_once('www/tracker/include/ArtifactTypeHtml.class');
 
@@ -67,7 +61,7 @@ if (!$rss) {
 
 	// show search box which will return results on
 	// this very page (default is to open new window)
-	menu_show_search_box(false, false);
+	echo $HTML->searchBox();
 }
 
 /*
@@ -200,9 +194,7 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'Group Name';
 		$title_arr[] = 'Description';
 
-		echo html_build_list_table_top($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			if (db_result($result, $i, 'type') == 2) {
@@ -213,11 +205,13 @@ if ($type_of_search == "soft") {
 			
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i)."\"><TD><A HREF=\"/$what/"
 				. db_result($result, $i, 'unix_group_name')."/\">"
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0")) 
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) 
 				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
 				. "<TD>".highlight_target_words($array,db_result($result,$i,'short_description'))."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == "people") {
@@ -257,16 +251,16 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'User Name';
 		$title_arr[] = 'Real Name';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
 				. "<TD>".db_result($result,$i,'realname')."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == 'forums' && $forum_id && $group_id) {
@@ -303,19 +297,19 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'Author';
 		$title_arr[] = 'Date';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/forum/message.php?msg_id="
 				. db_result($result, $i, "msg_id")."\">"
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0"))
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0"))
 				. db_result($result, $i, "subject")."</A></TD>"
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>".date($sys_datefmt,db_result($result,$i,"date"))."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == 'artifact' && $atid && $group_id) {
@@ -370,9 +364,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 		$title_arr[] = 'Submitted By';
 		$title_arr[] = 'Date';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"\n<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\">
@@ -381,12 +373,14 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 				. db_result($result, $i, "group_artifact_id") 
 				. "&func=detail&aid="
 				. db_result($result, $i, "artifact_id")."\"> "
-				. html_image("images/msg.png","10","12",array("BORDER"=>"0"))
+				. html_image("ic/msg.png","10","12",array("BORDER"=>"0"))
 				. db_result($result, $i, "summary")."</A></TD>"
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>". date($sys_datefmt,db_result($result,$i,"open_date"))."</TD></TR>";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else {
@@ -406,7 +400,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 	if ($offset != 0) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
 		echo "<A HREF=\"javascript:history.back()\"><B>" 
-			. html_image("images/t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) 
+			. html_image("t2.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) 
 			. " Previous Results </A></B></FONT>";
 	} else {
 		echo "&nbsp;";
@@ -421,7 +415,7 @@ if ( !$no_rows && ( ($rows_returned > $rows) || ($offset != 0) ) ) {
 		if ( $type_of_search == 'forums' ) {
 			echo "&group_id=$group_id&forum_id=$forum_id";
 		}
-		echo "\"><B>Next Results " . html_image("images/t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . "</A></B></FONT>";
+		echo "\"><B>Next Results " . html_image("t.png","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . "</A></B></FONT>";
 	} else {
 		echo "&nbsp;";
 	}

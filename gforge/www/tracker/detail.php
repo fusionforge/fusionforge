@@ -22,14 +22,6 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 			<INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
 		<TR>
 			<TD COLSPAN=2">
-			<?php
-			if (!user_isloggedin()) {
-				?>
-				<B>Email:</B> &nbsp;
-				<INPUT TYPE="TEXT" NAME="user_email" SIZE="20" MAXLENGTH="40">
-				<?php
-			}
-			?>
 			<INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Monitor">&nbsp;<A href="javascript:help_window('/help/tracker.php?helpname=monitor')"><B>(?)</B></A>
 			</FORM>
 			</TD>
@@ -65,7 +57,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 		<TR><TD COLSPAN="2">
 	<?php
 
-	if (!user_isloggedin()) {
+	if (!session_loggedin()) {
 		?>
 		<h3><FONT COLOR="RED">Please <A HREF="/account/login.php?return_to=<?php echo urlencode($REQUEST_URI); ?>">log in!</A></FONT></h3><BR>
 		If you <B>cannot</B> login, then enter your email address here:<P>
@@ -104,7 +96,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 	$title_arr[]='Name';
 	$title_arr[]='Description';
 	$title_arr[]='Download';
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	if ($count > 0) {
 
@@ -120,7 +112,8 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 		echo '<TR><TD COLSPAN=3>No Files Currently Attached</TD></TR>';
 	}
 	
-	echo '</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
+
 	?>
 	</TD></TR>
 

@@ -35,7 +35,7 @@ account_change_email	message	Vous avez demandé un changement d'adresse e-mail po
 account_change_email	section	Préférences de votre compte
 account_change_email	subject	Sourceforge -- vérification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Home ]</A> 
+account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
 account_change_email	desc	<P>Changer votre adresse de courrier électronique va necessiter une confirmation de votre nouvelle adresse, pour que nous puissions nous assurer que l'adresse est correcte.  <P>Nous avons besoin d'une adresse correcte pour chaque utilisateur compte tenu du niveau de droit que nous donnons aux comptes. Si nous avons besoin de contacter un utilisateur au sujet de problemes sur son compte shell ou son compte projet, il est important que nous puissions le faire.  <P>Soumettre le formulaire ci-dessous vous enverra un lien de confirmation. Suivez le lien pour validez votre changement d'adresse.
 account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
 account_change_pw	section	Préférences de votre compte
@@ -84,6 +84,8 @@ account_register	realname	Nom complet *:
 account_register	language	Langue:
 account_register	timezone	Fuseau horaire:
 account_register	emailaddr	Adresse de courrier électronique *:<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; .</I>
+account_register	jabberaddr	Addresse electronique:
+account_register	jabberonly	Envoyer les messages automatiques seulement à cette adresse
 account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I>(Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
 account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
 account_register	mandatory	Les champs avec * sont obligatoires.
@@ -94,6 +96,7 @@ account_register	err_passwd	Vous devez fournir un mot de passe
 account_register	err_passwd2	Les mots de passe ne concordent pas
 account_register	err_passwd3	Mot de passe non valide:
 account_register	err_unixname	Nom unix invalide
+account_register	err_jabber	Adresse Jabber incorrecte
 account_register	err_email	Courriel invalide
 account_register	err_userexist	Ce nom d'utilisateur existe déjà.
 account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
@@ -230,7 +233,7 @@ frs	file_package	Paquet
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Sorties récentes
-general	return	[Retour à la page d'acceuil]
+general	return	[Retour à la page d'acceuil $1]
 general	sitename	Sourceforge
 general	footer	Vous êtes sur Debian Sourceforge.  Pour plus d'informations (notamment de copyright), consultez <a href="/about.php">cette page</a>.
 general	permdenied	Accés Interdit.
@@ -320,6 +323,11 @@ menu	software_map	Recherche thématique
 menu	top_projects	Meilleurs projets
 menu	admin	Gérer
 menu	submit	Proposer
+menu	home	Accueil
+menu	projectree	Arbre des projets
+menu	mypage	Ma page
+menu	code_snippet	Bibliothèque
+menu	admin	Administration
 my	about_blurb	Votre page personnelle contient la liste des bogues et des tâches qui vous sont assignés, ainsi que la liste des groupes dont vous faites partie.
 my	no_bookmarks	Vous n'avez pas encore de favoris
 my	no_monitored_filemodules	<h3>Vous ne surveillez pas de fichiers</h3><p>Si vous surveillez des fichiers, vous serez prévenu de toutes les nouvelles sorties par un e-mail contenant un lien vers notre serveur de téléchargement.<p>Vous pouvez déclencher la surveillance de fichiers en visitant la page de résumé d'un projet et en cliquant sur le lien dans la section « Fichiers ».<br>

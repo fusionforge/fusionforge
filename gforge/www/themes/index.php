@@ -103,18 +103,18 @@ $HTML->header(array('title'=>$title,'pagename'=>'themes'));
 $res_user = db_query("SELECT * FROM users WHERE user_id='".user_getid()."'");
 $row_user = db_fetch_array($res_user);
 
-$HTML->box1_top("Choosing Theme and Colors for " . user_getname()); ?>
+$HTML->boxTop("Choosing Theme and Colors for " . user_getname()); ?>
 
 <p>Welcome, <b><?php print user_getname(); ?></b>. 
 <p>You can change your theme from here. 
 <P>
 Your profile currently uses the <?php print get_themename(user_getthemeid()); ?> theme.
-<?php $HTML->box1_bottom(); ?>
+<?php $HTML->boxBottom(); ?>
 
 <TABLE width=100% cellpadding=0 cellspacing=0 border=0><TR valign=top>
 <TD width=100%>
 
-<?php $HTML->box1_top("New User Theme");
+<?php $HTML->boxTop("New User Theme");
 echo "<div align='center'>\n";
 // User Theme select form
 theme_usermodform(user_getthemeid(),'https://'.$HTTP_HOST.'/themes/index.php','theme_modform',0);
@@ -127,10 +127,10 @@ theme_usermodform(user_getthemeid(),'https://'.$HTTP_HOST.'/themes/index.php','t
 Applying a theme will also discard any user selected color preferences.
 </FONT>
 */
-$HTML->box1_bottom(); 
+$HTML->boxBottom(); 
 
 /* Font prefs will be added later...
-$HTML->box1_top("User Fonts");
+$HTML->boxTop("User Fonts");
 // User Font select form
 theme_modfontform('https://'.$HTTP_HOST.'/themes/index.php','theme_modfontform',0);
 ? >
@@ -139,7 +139,7 @@ theme_modfontform('https://'.$HTTP_HOST.'/themes/index.php','theme_modfontform',
 Applying fonts will also discard any user selected font preferences.
 </FONT>
 < ?php
-$HTML->box1_bottom();
+$HTML->boxBottom();
 ? >
 * /
 
@@ -149,7 +149,7 @@ $HTML->box1_bottom();
 <TD>&nbsp;</TD>
 <TD width=50%>
 
-< ?php $HTML->box1_top("Color Preferences"); 
+< ?php $HTML->boxTop("Color Preferences"); 
 // Color Pref Function Goes Here
 theme_modcolorform('https://'.$HTTP_HOST.'/themes/index.php','theme_colormodform',0);
 ? >
@@ -157,7 +157,7 @@ theme_modcolorform('https://'.$HTTP_HOST.'/themes/index.php','theme_colormodform
 *NOTE*: Previewing or applying a color scheme will not always alter colors used in the theme selected in the theme form, as images may be used as backgrounds.  Applying a new color scheme only alters the colors applied to your currently set theme indicated above.
 </FONT>
 <?php
-$HTML->box1_bottom(); 
+$HTML->boxBottom(); 
 
 */
 

@@ -31,7 +31,7 @@ Function  ShowResultsGroupSurveys($result) {
 	$title_arr[]='Survey ID';
 	$title_arr[]='Survey Title';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	for($j=0; $j<$rows; $j++)  {
 
@@ -46,7 +46,9 @@ Function  ShowResultsGroupSurveys($result) {
 
 		echo "</tr>";
 	}
-	echo "</table>"; //</TD></TR></TABLE>");
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 $sql="SELECT survey_id,survey_title FROM surveys WHERE group_id='$group_id' AND is_active='1'";

@@ -1,70 +1,60 @@
 <?php
 /**
-  *
-  * SourceForge Forums Facility
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Forums Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+
+
+/*
+    Message Forums
+    By Tim Perdue, Sourceforge, 11/99
+
+    Massive rewrite by Tim Perdue 7/2000 (nested/views/save)
+
+    Complete OO rewrite by Tim Perdue 12/2002
+*/
 
 
 require_once('pre.php');
-require_once('www/forum/forum_utils.php');
+require_once('www/forum/include/ForumHTML.class');
+require_once('common/forum/Forum.class');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 	/*
 		User obviously has to be logged in to save place 
 	*/
 
-	if ($forum_id) {
-		/*
-			First check to see if they already saved their place 
-			If they have NOT, then insert a row into the db
+	if ($forum_id && $group_id) {
+		//
+		//  Set up local objects
+		//
+		$g =& group_get_object($group_id);
+		if (!$g || !is_object($g) || $g->isError()) {
+			exit_no_group();
+		}
 
-			ELSE update the time()
-		*/
+		$f=new Forum($g,$forum_id);
+		if (!$f || !is_object($f)) {
+			exit_error('Error','Error Getting Forum');
+		} elseif ($f->isError()) {
+			exit_error('Error',$f->getErrorMessage());
+		}
 
-		$sql="SELECT * FROM forum_saved_place WHERE user_id='".user_getid()."' AND forum_id='$forum_id'";
-
-		$result = db_query($sql);
-
-		if (!$result || db_numrows($result) < 1) {
-			/*
-				User is not already monitoring thread, so 
-				insert a row so monitoring can begin
-			*/
-			$sql="INSERT INTO forum_saved_place (forum_id,user_id,save_date) VALUES ('$forum_id','".user_getid()."','".time()."')";
-
-			$result = db_query($sql);
-
-			if (!$result) {
-				exit_error("ERROR","ERROR INSERTING PLACE");
-			} else {
-				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Position Saved. New messages will be highlighted when you return"));
-			}
-
+		if (!$f->savePlace()) {
+			exit_error('Error',$f->getErrorMessage());
 		} else {
-			$sql="UPDATE forum_saved_place SET save_date='".time()."' WHERE user_id='".user_getid()."' AND forum_id='$forum_id'";
-			$result = db_query($sql);
-
-			if (!$result) {
-				exit_error("ERROR","ERROR UPDATING PLACE");
-			} else {
-				header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Position Saved. New messages will be highlighted when you return"));
-			}
-		} 
+			header ("Location: /forum/forum.php?forum_id=$forum_id&feedback=".urlencode("Forum Position Saved. New messages will be highlighted when you return"));
+		}
 	} else {
-		forum_header(array('title'=>'Choose a forum First','paganame'=>'forum'));
-		echo '
-			<H1>Error - Choose a forum First</H1>';
-		forum_footer(array());
-	} 
+		exit_missing_params();
+	}
 
 } else {
 	exit_not_logged_in();
 }
+
 ?>

@@ -24,10 +24,10 @@ function vote_number_to_stars($raw) {
 	}
 	$count=intval($raw/2);
 	for ($i=0; $i<$count; $i++) {
-		$return .= html_image("images/ic/check.png","15","16",array());
+		$return .= html_image("ic/check.png","15","16",array());
 	}
 	if ($show_half==1) {
-		$return .= html_image("images/ic/halfcheck.png","15","16",array());
+		$return .= html_image("ic/halfcheck.png","15","16",array());
 	}
 	return $return;
 }
@@ -100,11 +100,11 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 	<INPUT TYPE="HIDDEN" NAME="redirect_to" VALUE="<?php echo urlencode($REQUEST_URI); ?>">
 	<INPUT TYPE="HIDDEN" NAME="flag" VALUE="<?php echo $flag; ?>">
 	<CENTER>
-	<?php echo html_image("images/rateit.png","100","9",array()); ?>
+	<?php echo html_image("rateit.png","100","9",array()); ?>
 	<BR>
 	<?php 
 		echo html_blankimage(1,$rating);
-		echo html_image("images/ic/caret.png","9","6",array());
+		echo html_image("ic/caret.png","9","6",array());
 	?>
 	<BR>
 	<INPUT TYPE="RADIO" NAME="response" VALUE=1>

@@ -1,4 +1,4 @@
-Template: sourceforge/shared/cvs_host
+Template: gforge/shared/cvs_host
 Type: string
 Description: Your CVS server
  The hostname of the server that will host your Sourceforge CVS

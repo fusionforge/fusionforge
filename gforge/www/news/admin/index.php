@@ -14,8 +14,9 @@
 
 require_once('pre.php');
 require_once('news_admin_utils.php');
+require_once('www/news/news_utils.php');
 //common forum tools which are used during the creation/editing of news items
-require_once('www/forum/forum_utils.php');
+require_once('common/forum/Forum.class');
 
 if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 	/*

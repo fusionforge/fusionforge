@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('www/people/people_utils.php');
 
-if (user_isloggedin()) {
+if (session_loggedin()) {
 
 	if ($update_profile) {
 		/*

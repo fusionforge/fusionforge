@@ -27,8 +27,8 @@ sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
 sub parse_sql_file ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include a few predefined functions 
-require ("/usr/lib/sourceforge/lib/sqlparser.pm") ; # Our magic SQL parser
+require ("/usr/lib/gforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/lib/gforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -134,7 +134,7 @@ eval {
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.1+global+data+done" ;
 	  if (is_lesser $version, $target) {
-	      my @filelist = qw{ /usr/lib/sourceforge/db/sf-2.6-complete.sql } ;
+	      my @filelist = qw{ /usr/lib/gforge/db/sf-2.6-complete.sql } ;
 	      # TODO: user_rating.sql
 
 	      foreach my $file (@filelist) {
@@ -161,7 +161,7 @@ eval {
 	  if (is_lesser $version, $target) {
 	      debug "Adding local data." ;
 
-	      do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
+	      do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
 
 	      my ($login, $pwd, $md5pwd, $email, $noreplymail, $date) ;
 
@@ -391,7 +391,7 @@ eval {
 	  if (is_lesser $version, $target) {
 	      debug "Upgrading your database scheme from 2.5" ;
 
-	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
+	      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
 		  # debug $query ;
@@ -764,6 +764,26 @@ eval {
  	&update_db_version ($target) ;
  	debug "Committing." ;
  	$dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+11" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021125-debian.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021125-debian.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
     }
 
 

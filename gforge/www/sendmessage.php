@@ -48,7 +48,7 @@ if ($send_mail) {
 		*/
 		$to=eregi_replace('_maillink_','@',$toaddress);
 		$from=$name .' <'. $email .'>';
-		util_send_mail($to, stripslashes($subject),stripslashes($body) ,$from);
+		util_send_message($to, stripslashes($subject),stripslashes($body) ,$from);
 		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($to)));
 		echo '<p>Message has been sent.</p>';
 		$HTML->footer(array());
@@ -59,7 +59,7 @@ if ($send_mail) {
 		*/
 		$to=db_result($result,0,'email');
 		$from=$name .' <'. $email .'>';
-		util_send_mail($to, stripslashes($subject), stripslashes($body),$from);
+		util_send_message($to, stripslashes($subject), stripslashes($body),$from);
 		$HTML->header(array('title'=>$GLOBALS['sys_name'].' Contact','pagename'=>'sendmessage','titlevals'=>array($touser)));
 		echo '<p>Message has been sent.</p>';
 		$HTML->footer(array());
