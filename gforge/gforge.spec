@@ -71,6 +71,8 @@ mkdir -p $GFORGE_DIR $GFORGE_LIB_DIR
 for i in common cronjobs etc rpm-specific utils www ; do
 	cp -rp $i $GFORGE_DIR/
 done
+chmod 755 $GFORGE_DIR/utils/fill-in-the-blanks.pl
+
 install -m 750 setup $GFORGE_DIR/
 cp -rp db $GFORGE_LIB_DIR/
 cp -p deb-specific/sf-2.6-complete.sql $GFORGE_LIB_DIR/db/
