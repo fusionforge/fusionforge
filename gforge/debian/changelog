@@ -1,4 +1,4 @@
-sourceforge (2.6-0+0+) unstable; urgency=low
+sourceforge (2.6-0+1) unstable; urgency=low
 
   * Started working on 2.6.  Don't expect it to work just yet.
   * Split the DB installation/deinstallation process out of
@@ -21,7 +21,7 @@ sourceforge (2.6-0+0+) unstable; urgency=low
     that it 1. works better, 2. is more readable, 3. knows about comments,
     4. knows about COPY [...] FROM stdin.
 
- -- Roland Mas <lolando@debian.org>  Sat,  3 Nov 2001 22:50:29 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Mon, 12 Nov 2001 00:30:27 +0100
 
 sourceforge (2.5-12) unstable; urgency=low
 
