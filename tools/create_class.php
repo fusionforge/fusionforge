@@ -26,17 +26,14 @@
 
 require ('squal_pre.php');
 
-function capitalize($name)
-{
+function capitalize($name) {
 	$tmp = str_replace ("_", " ", $name );
 	$tmp2 = ucwords ($tmp);
 	return str_replace(" ","", $tmp2);
 }
 
 
-function generateHeader($tableName,$author="Gforge Class Generator by Francisco Gimeno",
-	$project="Gforge" )
-{
+function generateHeader($tableName,$author="Gforge Class Generator by Francisco Gimeno", $project="Gforge" ) {
 	/* In the future, we should be able to read this from a file */
 	$input = "<?php\n".
 		"/**\n".
@@ -64,7 +61,7 @@ function generateHeader($tableName,$author="Gforge Class Generator by Francisco 
 		"/*\n\n\n\t%{TITLE}\n\tBy %{AUTHOR}, %{YEAR}\n\n\tRewrite in OO and coding ".
 		"guidelines 12/2002 by Tim Perdue\n\n\n*/\n".
 		"require_once('common/include/Error.class');\n";
-		"require_once('common/pm/Validator.class');\n\n";
+		"require_once('common/include/Validator.class');\n\n";
 
 	$variables = array("%{CLASS_NAME}","%{YEAR}","%{AUTHOR}",
 			"%{PROJECT}", "%{TITLE}" );
@@ -73,8 +70,7 @@ function generateHeader($tableName,$author="Gforge Class Generator by Francisco 
 	return $output;
 }
 
-function generate_GETOBJECT($tableName)
-{
+function generate_GETOBJECT($tableName) {
 	$input= "function &%{NAME}_get_object($%{ID_FIELD},\$data=false) {\n".
 		"\tglobal $%{OBJECT};\n".
 		"\tif (!isset($%{OBJECT}[\"_\".$%{ID_FIELD}.\"_\"])) {\n".
@@ -106,21 +102,18 @@ function generate_GETOBJECT($tableName)
 
 }
 
-function getIdFieldFromFieldsArr($fields)
-{
+function getIdFieldFromFieldsArr($fields) {
 	$keys=array_keys($fields);
 	return $keys[0];
 }
 
-function generateClassHead($className) 
-{
+function generateClassHead($className) {
 	$output="class ".$className." extends Error {\n\n";
 
 	return $output;
 }
 
-function generateClassVars($className)
-{
+function generateClassVars($className) {
 	$output="\t/**\n".
         	"\t * Associative array of data from db.\n".
         	"\t *\n".
@@ -136,8 +129,7 @@ function generateClassVars($className)
 	return $output;
 }
 
-function generateClassConstructor($className, $fields)
-{
+function generateClassConstructor($className, $fields) {
 	$output="\t/**\n".
          "\t *  Constructor.\n".
          "\t *\n".
@@ -149,11 +141,11 @@ function generateClassConstructor($className, $fields)
 	$output.="\tfunction ".$className."(/*&\$ProjectGroup,*/ \$".getIdFieldFromFieldsArr($fields)."=false, \$arr=false) {\n";
 	$output.="\t\t\$this->error(); \n\n".
 		"\t\t/*if (!\$ProjectGroup || !is_object(\$ProjectGroup)) {\n".
-                "\t\t\t\$this->setError('ProjectTask:: No Valid ProjectGroup Object');\n".
+                "\t\t\t\$this->setError('$className:: No Valid ProjectGroup Object');\n".
                 "\t\t\t\treturn false;\n".
                 "\t\t}\n".
                 "\t\tif (\$ProjectGroup->isError()) {\n".
-                "\t\t\t\$this->setError('ProjectTask:: '.\$ProjectGroup->getErrorMessage());\n".
+                "\t\t\t\$this->setError('$className:: '.\$ProjectGroup->getErrorMessage());\n".
                 "\t\t\t\treturn false;\n".
                 "\t\t}\n".
                 "\t\t\$this->ProjectGroup =& \$ProjectGroup;*/\n";
@@ -182,8 +174,7 @@ function generateClassConstructor($className, $fields)
 	return $output;
 }
 
-function generateClassObjectCreator($tableName,$className,$fields)
-{
+function generateClassObjectCreator($tableName,$className,$fields) {
 	/* Comments */
 	$output="\t/**\n".
 		"\t * create - create a new ".$className." in the database.\n\t *\n";
@@ -301,8 +292,8 @@ function generateClassObjectCreator($tableName,$className,$fields)
 	$output.="\t}\n";
 	return $output;
 }
-function generateClassFetchData($tableName,$className,$fields)
-{
+
+function generateClassFetchData($tableName,$className,$fields) {
 	$input="        /**\n".
         "\t *  fetchData - re-fetch the data for this %{CLASSNAME} from the database.\n".
         "\t *\n".
@@ -314,7 +305,7 @@ function generateClassFetchData($tableName,$className,$fields)
         "\t                WHERE %{ID_FIELD}='$%{ID_FIELD}'\");\n".
         "\t        //        AND group_project_id='\". \$this->ProjectGroup->getID() .\"'\");\n".
         "\t        if (!\$res || db_numrows(\$res) < 1) {\n".
-        "\t                \$this->setError('%{CLASSNAME}::fetchData() Invalid MessageID'.db_error());\n".
+        "\t                \$this->setError('%{CLASSNAME}::fetchData() Invalid ID'.db_error());\n".
         "\t                return false;\n".
         "\t     }\n".
         "\t        \$this->data_array =& db_fetch_array(\$res);\n".
@@ -327,8 +318,8 @@ function generateClassFetchData($tableName,$className,$fields)
 	$output= str_replace($variables, $substitutions, $input );
 	return $output;
 }
-function generateClassGetID($className, $fields)
-{
+
+function generateClassGetID($className, $fields) {
 	$output="\t/**\n".
         "\t *      getID - get this ".$className." ID\n".
         "\t *\n".
@@ -341,8 +332,7 @@ function generateClassGetID($className, $fields)
 	return $output;
 }
 
-function generateClassGetField($className,$fieldName,$field)
-{
+function generateClassGetField($className,$fieldName,$field) {
 	$input="\t/**\n".
         "\t *      %{FUNCTION_NAME} - get the field %{FIELD}.\n".
         "\t *\n".
@@ -360,8 +350,7 @@ function generateClassGetField($className,$fieldName,$field)
 	return $output;
 }
 
-function generateClassUpdate($tableName,$className,$fields)
-{
+function generateClassUpdate($tableName,$className,$fields) {
         /* Comments */
         $output="\t/**\n".
                 "\t * update - update a ".$className." in the database.\n\t *\n";
@@ -395,10 +384,15 @@ function generateClassUpdate($tableName,$className,$fields)
                 "\t\t}\n";
 
         /* Perms Checks */
-        $output.="\t\t/*  CHECK FOR PERMISSION\n".
+        $output.="\t\t/*\n".
+				"\t\t//  CHECK FOR PERMISSION\n".
                 "\t\t\$perm =& \$this->ProjectGroup->Group->getPermission( session_get_user() );\n\n".
-                "\t\tif (!\$perm || !is_object(\$perm) || !\$perm->isXXAdmin()) {\n".
-                "\t\t\$this->setPermissionDeniedError();\n".
+                "\t\tif (!\$perm || !is_object(\$perm)) {\n".
+				"\t\t} elseif (\$perm->isError()) {\n".
+                "\t\t\t\$this->setPermissionDeniedError();\n".
+                "\t\t\treturn false;\n".
+				"\t\t} elseif (!\$perm->isXXXAdmin()) {\n".
+                "\t\t\t\$this->setPermissionDeniedError();\n".
                 "\t\t\treturn false;\n".
                 "\t\t}*/\n";
 
@@ -427,33 +421,68 @@ function generateClassUpdate($tableName,$className,$fields)
 	$output .= "\t\t\t// WHERE group_project_id='$group_project_id'\n".
                    "\t\t\t//         AND ".getIdFieldFromFieldsArr($fields)."='\".\$this->getID().\"'\";\n";
 
-	$output .= "\t\t\t\$res=db_query(\$sql);\n".
-                   "\t\t\tif (!\$res || db_affected_rows(\$res) < 1) {\n".
+	$output .= "\t\t\$res=db_query(\$sql);\n".
+                   "\t\tif (!\$res || db_affected_rows(\$res) < 1) {\n".
+                   "\t\t\t\$this->setError('Error On Update: '.db_error());\n".
+                   "\t\t\tdb_rollback();\n".
+                   "\t\t\treturn false;\n".
+                   "\t\t} else {\n".
+                   "\t\t\tif (!$this->fetchData(\$this->getID())) {\n".
                    "\t\t\t\t\$this->setError('Error On Update: '.db_error());\n".
                    "\t\t\t\tdb_rollback();\n".
                    "\t\t\t\treturn false;\n".
                    "\t\t\t} else {\n".
-                   "\t\t\t\tif (!$this->fetchData(\$this->getID())) {\n".
-                   "\t\t\t\t\t\$this->setError('Error On Update: '.db_error());\n".
-                   "\t\t\t\t\tdb_rollback();\n".
-                   "\t\t\t\t\treturn false;\n".
-                   "\t\t\t\t} else {\n".
-                   "\t\t\t\t\t/* \$this->sendNotice(); */\n".
-                   "\t\t\t\t\tdb_commit();\n".
-                   "\t\t\t\t\treturn true;\n".
-                   "\t\t\t\t}\n".
+                   "\t\t\t\t/* \$this->sendNotice(); */\n".
+                   "\t\t\t\tdb_commit();\n".
+                   "\t\t\t\treturn true;\n".
                    "\t\t\t}\n".
-		   "\t\t}\n";
+                   "\t\t}\n".
+		   "\t}\n";
 
 	return $output;
 }
 
-function generateClassBottom($className)
-{
-	return "}\n\n";
+function generateClassDelete($tableName, $fields) {
+	$output .= '
+	/**
+	 *	delete() - delete this row from the database.
+	 *
+	 *	@param	boolean	I\'m Sure.
+	 *	@return	boolean	true/false.
+	 */
+	function delete($sure) {
+		if (!$sure) {
+			$this->setError(\'Must be sure before deleting\');
+			return false;
+		}
+		$perm =& $this->Group->getPermission( session_get_user() );
+		if (!$perm || !is_object($perm)) {
+			$this->setPermissionDeniedError();
+			return false;
+		} elseif ($perm->isError()) {
+			$this->setPermissionDeniedError();
+			return false;
+		} elseif (!$perm->isAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		} else {
+			$res=db_query("DELETE FROM '.$tableName.' WHERE 
+				'.getIdFieldFromFieldsArr($fields).'=\'".$this->getID()."\'");
+			if (!$res || db_affected_rows($res) < 1) {
+				$this->setError(\'Could Not Delete: \'.db_error());
+			} else {
+				return true;
+			}
+		}
+	}';
+	return $output;
 }
-function generateClass($tableName, $fields )
-{
+
+function generateClassBottom($className) {
+	return "\n}\n\n?>";
+}
+
+function generateClass($tableName, $fields ) {
 	$className = capitalize($tableName);
 	$output=generateClassHead($className); // Done
 	$output.=generateClassVars($className); // Done
@@ -464,6 +493,7 @@ function generateClass($tableName, $fields )
 	foreach($fields as $fieldName => $field) {
 		$output.=generateClassGetField($className,$fieldName,$field); // Done
 	}
+	$output.=generateClassDelete($tableName,$fields);
 	$output.=generateClassUpdate($tableName, $className,$fields); // Done
 	$output.=generateClassBottom($className); // Done
 	return $output;
