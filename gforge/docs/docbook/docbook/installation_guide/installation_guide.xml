@@ -325,7 +325,7 @@ $ createlang plpgsql gforge
 						</listitem>
 						<listitem>
 <screen><![CDATA[
-$ psql -a -U gforge gforge < gforge3.sql &> /tmp/gforge.sql.log
+$ psql -a -U gforge gforge < gforge.sql &> /tmp/gforge.sql.log
 ]]></screen>
 						</listitem>
 					</orderedlist>
