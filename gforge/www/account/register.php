@@ -46,6 +46,9 @@ $HTML->header(array('title'=>'Gforge: Register','pagename'=>'account_register'))
 if ($feedback) {
 	print "<p><FONT color=#FF0000>$feedback $register_error</FONT>";
 } 
+if ($timezone == ''){
+	$timezone='GMT';
+}
 ?>
 
 <form action="<?php echo $PHP_SELF; ?>" method="post">
@@ -66,7 +69,7 @@ if ($feedback) {
 <?php echo html_get_language_popup ($Language,'language_id',1); ?>
 <P>
 <?php echo $Language->getText('account_register','timezone'); ?><br>
-<?php echo html_get_timezone_popup('timezone', 'GMT'); ?>
+<?php echo html_get_timezone_popup('timezone', $timezone); ?>
 <P>
 @<?php echo $Language->getText('account_register','emailaddr', $GLOBALS[sys_users_host]); ?>
 <BR><INPUT size=30 type="text" name="email" value="<?php print($email); ?>">
