@@ -132,6 +132,9 @@ install: build
 	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/cvs/icons/minitext.gif deb-specific/cvsweb/icons/minitext.gif.uu
 	install -m 644 deb-specific/cvsweb/cvsweb.conf $(CURDIR)/debian/sourceforge/etc/sourceforge/
 
+	# CVSTARBALLS
+	install -m 755 deb-specific/tarballs.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
+
 	# LDAP
 	install -m 755 utils/sql2ldif.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/install-ldap.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/

@@ -48,6 +48,7 @@ NameVirtualHost {ip_address}
   ServerName {cvs_host}
   DocumentRoot /usr/lib/sourceforge/cvs
   ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
+  Alias /cvstarballs/ /var/lib/sourceforge/cvstarballs/
 </VirtualHost>
 
 <VirtualHost {ip_address}>
