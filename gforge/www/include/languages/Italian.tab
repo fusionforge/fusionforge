@@ -2087,3 +2087,199 @@ new	projects_total	Totali progetto:
 new	notes_changes	Note di rilascio & Changelog
 new	newer_releases	Nuovo rilasci
 new	older_releases	Rilasci precedenti
+add_snippet	title	Inserisci un nuovo frammento
+add_snippet	error_snippet_id_missing	Error - snippet_package_version_id missing
+add_snippet	error_only_creator_can_add	Error - Only the creator of a package version can add snippets to it.
+add_snippet	error_snippet_doesnt_exist	Error - That snippet doesn't exist.
+add_snippet	back_to_add_page	Torna 
+add_snippet	error_snippet_already_added	Error - That snippet was already added to this package.
+add_snippet	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+add_snippet	snippet_version_added_successfully	Versione del frammento inserita
+add_snippet	error_go_back_and_fill_all	Error - Go back and fill in all the information
+add_snippet	package	Package
+add_snippet	you_can_use_this_form	Puoi usare questo form per aggiungere frammenti al package.</p><p>Il campo "Id versione frammento" &egrave; l'ID del frammento.
+add_snippet	add_this_snippet_version_id	Aggiungi questo ID versione di un frammento
+add_snippet	make_sure_all_info	Assicurati che tutte le informazioni siano accurate e complete
+add_snippet	submit	INVIA
+add_snippet	no_snippets_in_this_package	Nessun frammento nel package
+add_snippet	snippets_in_this_package	Frammenti presenti nel package
+snippet_addversion	error_snippet_doesnt_exist	Error, Errore - il frammento non esiste
+snippet_addversion	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_addversion	snippet_version_added_successfully	Versione del frammento aggiunto
+snippet_addversion	error_go_back_and_fill_in_all	Errore - Go back and fill in all the information
+snippet_addversion	title	Submit A New Snippet Version
+snippet_addversion	if_you_have_modified_a_version	If you have modified a version of a snippet and you feel it is significant enough to share with others, please do so.
+snippet_addversion	version	Versione:
+snippet_addversion	changes	Cambiamenti
+snippet_addversion	paste_the_code_here	Incolla qui il codice
+snippet_addversion	make_sure_all_info_is_complete	Assicurati che tutte le informazioni siano accurate e complete
+snippet_addversion	submit	INVIA
+snippet_addversion	error_snippet_package_doesnt_exist	Error, Error - snippet_package doesn't exist
+snippet_addversion	error_doing_snippet_package_version_insert	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_addversion	title_submit_a_new_snippet_package	Submit A New Snippet Package
+snippet_addversion	snippet_package_version_added_successfully	Snippet Package Version Added Successfully.
+snippet_addversion	title_add_snippet_to_package	Add Snippets to Package
+snippet_addversion	important	IMPORTANT!
+snippet_addversion	if_new_window_opened	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_addversion	link_add_snippets_to_package	Add Snippets To Package
+snippet_addversion	browse_the_library	<strong>Browse the library</strong> to find the snippets you want to add, then add them using the new window link shown above.
+snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
+snippet_addversion	if_you_have_modified	If you have modified a version of a package and you feel it is significant enough to share with others, please do so.
+snippet_addversion	error_url_or_form	Error, Error - was the URL or form mangled??	
+snippet_browse	title	Libreria dei frammenti di codice
+snippet_browse	snippets_by_language	Frammenti per linguaggio: $1 
+snippet_browse	snippet_by_category	Frammenti per categoria: $1
+snippet_browse	error_bad_url	Errore, Errore - URL non valido
+snippet_browse	no_snippets_found	Nessun frammento trovato
+snippet_browse	snippet_id	ID frammento
+snippet_browse	snippet_title	Titolo
+snippet_browse	creator	Autore
+snippet_browse	packages_of_snippets	Package di frammenti
+snippet_browse	snippets	Frammenti
+snippet_delete	title	Cancella Frammenti
+snippet_delete	error_only_the_creator	Error - Only the creator of a package version can delete snippets from it.
+snippet_delete	that_snippet_doesnt_exist	Errore - questo frammento non esiste in questo package
+snippet_delete	item_removed_from	Frammento rimosso dal package
+snippet_delete	snippet_removed	Snippet Removed
+snippet_delete	error_only_creator_of_package_version_can_delete	Error - Only the creator of a package version can delete it.
+snippet_delete	package_removed	Package Removed
+snippet_delete	error_mangled_url	Error, Error - mangled URL?
+snippet_detail	title	Raccolta dei frammenti di codice
+snippet_detail	error_no_version_found	Errore - nessuna verisone trovata
+snippet_detail	version_of_this_snippet	Versioni del frammento
+snippet_detail	snippet_id	Snippet ID
+snippet_detail	download_version	Scarica versione
+snippet_detail	date_posted	Data inserimento
+snippet_detail	author	Autore
+snippet_detail	delete	Cancella
+snippet_detail	changes_since_last_version	Cambiamenti dall'ultima versione
+snippet_detail	download_a_raw_text	Scarica una versione in formato raw-text cliccando su &quot;<strong>Scarica versione</strong>&quot;
+snippet_detail	latest_snippet_version	Ultima versione
+snippet_detail	submit_a_new_snippet	Inserisci una nuova versione del frammento
+snippet_detail	you_can_submit_a_new	Puoi inserire una nuova versione del frammento se questo &grave; stato modificato e ti sembra appropriato condividerlo con gli altri.
+snippet_detail	version_of_this_package	Versioni del package
+snippet_detail	package_version	Versione package
+snippet_detail	edit_del	Modifica/cancella
+snippet_detail	latest_package_version	Ultima versione del package
+snippet_detail	submit_a_new_version	Inserisci una nuova versione
+snippet_detail	you_can_submit_a_new_version_of_package	Puoi inserire una nuova versione del frammento se questo &grave; stato modificato e ti sembra appropriato condividerlo con gli altri.
+snippet_detail	error_was_the_url_mangled	Error, Error - was the URL mangled?
+snippet_download	nothing_in_here	nothing in here
+snippet_download	error	Error
+snippet_index	title	Libreria dei frammenti di codice
+snippet_package	error_doing_snippet_package_insert	ERROR DOING SNIPPET PACKAGE INSERT!
+snippet_package	title	Nuovo package di frammenti
+snippet_package	snippet_package_added_succssfull	Package aggiunto
+snippet_package	error_doing_snippet_package_version	ERROR DOING SNIPPET PACKAGE VERSION INSERT!
+snippet_package	title_new_snippet_package	Inserisi un nuovo package di frammenti
+snippet_package	snippet_version_added_successfull	Versione del package creata con successo
+snippet_package	add_snippet_to_package	Aggiungi frammenti ai package
+snippet_package	important	IMPORTANTE!
+snippet_package	if_a_new_window	If a new window opened, use it to add snippets to your package. If a new window did not open, use the following link to add to your package BEFORE you leave this page.
+snippet_package	add_snippet_to	Aggiungi frammenti ai package
+snippet_package	browse_the_libary	<strong>Scorri la libreria</strong> per trovare i frammenti che vuoi aggiungere  e aggiungili utilizzando il form nella finestra.
+snippet_package	error_go_back_and_fill	Errore, Errore - Riempire tutti i campi obbligatori
+snippet_package	you_can_group	<p>Puoi raggruppare frammenti esistenti in package. Prima di creare il package, assicurati che tutti i frammenti sono stati creati e che sei in possesso di tutti gli ID dei frammenti.</p><p><ol><li>Create the package using this form.</li><li><strong>Then</strong> use the "Add Snippets to Package" link to add files to your package.</li></ol></p><p><span style="color:red"><strong>Note:</strong></span> You can submit a new version of an existing package by browsing the library and using the link on the existing package. You should only use this page if you are submitting an entirely new package.
+snippet_package	snippet_title	Titolo
+snippet_package	description	Descrizione
+snippet_package	suggest_a_language	Suggerisci un nuovo linguaggio
+snippet_package	suggest_a_category	Suggerisci una categoria
+snippet_package	make_sure_all_info	Assicurati che tutte le informazioni siano complete
+snippet_package	submit	INVIA
+snippet_package	category	Categoria
+snippet_package	language	Linguaggio
+snippet_package	version	Versione
+snippet_utils	browse	Visualizza
+snippet_utils	choose_one	Selezionare
+snippet_utils	unix_admim	Amm. UNIX 
+snippet_utils	html_manipulation	HTML Manipulation
+snippet_utils	bbs_systems	BBS Systems
+snippet_utils	auctions	Aste
+snippet_utils	calendars	Calendario
+snippet_utils	database_manipulation	Database 
+snippet_utils	searching	Ricerca
+snippet_utils	file_management	Gestione file
+snippet_utils	games	Giochi
+snippet_utils	voting	Sondaggi
+snippet_utils	shopping_carts	Carelli spesa
+snippet_utils	other	Altro
+snippet_utils	math_functions	Funzioni matematiche
+snippet_utils	funktion	Funzione
+snippet_utils	full_script	Script intero
+snippet_utils	sample_code	Codice d'esempio (HOWTO)
+snippet_utils	readme	README
+snippet_utils	class	Classe
+snippet_utils	website_only	Sito web
+snippet_utils	other_language	Altro linguaggio
+snippet_utils	submit_a_new_snippet	Inserisci un nuovo frammento
+snippet_utils	create_a_package	Crea un package
+snippet_utils	snippet_in_this_package	Frammenti in questo package
+snippet_utils	snippet_id	Id frammento
+snippet_utils	download_version	Scarica versione
+snippet_utils	snippet_title	Titolo
+snippet_utils	author	Autore
+snippet_utils	no_snippets_are_in_this_package	Nessun frammento nel package
+snippet_utils	category	Categoria
+snippet_utils	language	Linguaggio:
+snippet_utils	description	Descrizione
+snippet_utils	type	Tipo
+snippet_utils	category	Categoria
+snippet_utils	license	Licenza
+snippet_submit	error_doing_snippet_insert	ERROR DOING SNIPPET INSERT!
+snippet_submit	snippet_added_successfull	Frammento inserito con successo
+snippet_submit	error_doing_snippet_version_insert	ERROR DOING SNIPPET VERSION INSERT!
+snippet_submit	snippet_version_added_successfully	Nuova versione del frammento inserito con successo
+snippet_submit	error_go_back_and_fill	Errore, Errore - torna indietro e riempi tutti i campi obbligatori
+snippet_submit	submit_a_new_snippet	Inserisi un nuovo framment
+snippet_submit	you_can_post	Puoi inserire un nuovo frammento e condividerlo con altre persone. Riempi i campi con le informazioni richieste. <strong>Inserisci una buona descrizione</strong> e <strong>commenta bene il tuo codice</strong> in modo che altri possono leggere e capire il codice.</p><p><span style="color:red"><strong>Nota:</strong></span> Puoi inserire una nuova versione di un frammento esistente. Dovresti usare questa pagina quando inserisci un frammento nuovo.
+snippet_submit	suggest_a_language	Suggerisci un linguaggio
+snippet_submit	suggest_a_category	Suggerisci una categoria
+snippet_submit	paste_the_code_here	Incolla qui il codice
+snippet_submit	make_sure_all_info	Assicurati che tutte le informazioni siano complete e accurate
+snippet_submit	submit	Invia
+snippet_submit	type	Tipo script
+snippet_submit	license	Licenza
+snippet_submit	description	Descrizione
+snippet_submit	snippet_title	Titolo
+snippet_submit	category	Categoria
+snippet_submit	version	Versione
+snippet_submit	language	Linguaggio
+snippet	title	Raccolta di frammenti di codice
+snippet_add_snippet_to_package	section	Raccolta di frammenti di codice
+snippet_add_snippet_to_package	title	Add Snippet To Package
+snippet_addversion	section	Raccolta di frammenti di codice
+snippet_addversion	title	Post A New Version
+snippet_browse	section	Raccolta di frammenti di codice
+snippet_browse	title	Browse Snippets
+snippet_delete	section	Raccolta di frammenti di codice
+snippet_delete	title	Delete A Snippet
+snippet_detail	section	Raccolta di frammenti di codice
+snippet_detail	title	View Snippet Detail
+snippet_package	section	Raccolta di frammenti di codice
+snippet_package	title	Create Snippet Package
+snippet_submit	section	Raccolta di frammenti di codice
+snippet_submit	title	Inserisci frammento
+snippet_caching	intro	<p>L'obiettivo di questo archivio &egrave; quello di poter condividere frammenti di codice, script e funzioni .</p><p>Puoi creare un nuovo frammento e poi aggiungere versioni aggiuntive dello stesso frammento.</p><p>Una volta creati i frammenti, possono essere raggruppati in "package" di frammenti. Il package pu&ograve; contenere pi&ugrave; versioni dello stesso frammento.</p><p>&nbsp;</p><h3>Visualizza frammenti</h3>	<p>Puoi visualizzare i frammenti:</p>
+snippet_caching	browse_by_category	Visualizza per categoria
+snippet_caching	browse_by_language	Visualizza per linguaggio
+help	page_information	Page Information
+help_tracker	assignee	This drop-down box represents the project administrator to which a tracker item is assigned.
+help_tracker	status	This drop-down box represents the current status of a tracker item.<br /><br />You can set the status to 'Pending' if you are waiting for a response from the tracker item author.  When the author responds the status is automatically reset to that of 'Open'. Otherwise, if the author doesn't respond with an admin-defined amount of time (default is 14 days) then the item is given a status of 'Deleted'.
+help_tracker	category	This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />Select 'Any' for a broader result set.
+help_tracker	group	This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />If you are a project admin you can click the '(admin)' link to define your own groups.
+help_tracker	sort_by	The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the results sorted in Ascending or Descending order.
+help_tracker	data_type	The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the bug, patch, support, etc... managers you need to be able to determine which
+one of these an item should belong.<br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.
+help_tracker	data_type	The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />This is especially helpful for bugs and support requests where a user might find a critical problem with a project.
+help_tracker	resolution	The resolution option represents a tracker items resolution if any.
+help_tracker	summary	The summary text-box represents a short tracker item summary. Useful when browsing through several tracker items.
+help_tracker	canned_response	The canned response drop-down represents a list of project admin-defined canned responses to common support or bug submission.<br /><br /> If you are a project admin you can click the '(admin)' link to define your own canned responses
+help_tracker	comment	The comment textarea allows you to attach a comment to a tracker item when a canned response isn't appropriate.
+help_tracker	attach_file	When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.
+help_tracker	monitor	You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!
+help_tracker	unknown_help_request	UNKNOWN HELP REQUEST:
+help_tracker	close_window	Close Window
+help_trove_cat	no_such_category	No such trove category
+help_trove_cat	full_category_name	Full Category Name
+help_trove_cat	short_name	Short Name
+help_trove_cat	description	Description
