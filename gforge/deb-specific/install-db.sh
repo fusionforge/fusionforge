@@ -91,7 +91,7 @@ EOF
 	if dpkg --compare-versions $pg_version lt 7.3 ; then
 	    if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser $db_user" 1> $tmp1 2> $tmp2 \
 		&& [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
-		|| grep -q "^ERROR:  CREATE USER: user name \"$db_user\" already exists$" $tmp2 ; then
+		|| grep -q "^ERROR: .* user name \"$db_user\" already exists$" $tmp2 ; then
 	        # Creation OK or user already existing -- no problem here
 		rm -f $tmp1 $tmp2
 	    else
@@ -131,7 +131,7 @@ EOF
 	tmp2=$(mktemp /tmp/$pattern)
 	if su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
-	    || grep -q "ERROR:  CREATE DATABASE: database \"$db_name\" already exists" $tmp2 ; then
+	    || grep -q "ERROR: .* database \"$db_name\" already exists" $tmp2 ; then
 	    # Creation OK or database already existing -- no problem here
 	    echo -n ""
 	    rm -f $tmp1 $tmp2
@@ -243,7 +243,7 @@ EOF
 	fi
 	echo "Restoring $RESTFILE"
 	su -s /bin/sh postgres -c "dropdb $db_name" || true
-	su -s /bin/sh postgres -c "createdb $db_name"  || true
+	su -s /bin/sh postgres -c "createdb --encoding=UNICODE $db_name"  || true
 	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/psql -f $RESTFILE $db_name"
         perl -pi -e "s/### Next line inserted by GForge restore\n//" /etc/postgresql/pg_hba.conf
         perl -pi -e "s/$localtrust\n//" /etc/postgresql/pg_hba.conf

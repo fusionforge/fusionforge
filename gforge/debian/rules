@@ -109,6 +109,7 @@ install: build
 	#NOT USED#install -m 644 db/user_rating.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+
 	install -m 755 cronjobs/db_trove_maint.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/project_cleanup.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	#install -m 755 cronjobs/project_metric.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
@@ -122,8 +123,10 @@ install: build
 	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/db_project_sums.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/check_stale_tracker_items.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/massmail.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 #GF	install -m 755 cronjobs/stats/include/stats_site.inc $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
 #GF	install -m 755 cronjobs/stats/include/stats_projects.inc $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
+
 #GF	install utils/underworld-root/db_top_groups_calc.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/db_top_groups_calc.pl
 	#install utils/underworld-root/stats_nightly.sh $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/stats_nightly.sh
 	#install utils/underworld-root/db_stats_prepare.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/db_stats_prepare.pl

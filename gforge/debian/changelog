@@ -1,4 +1,30 @@
-gforge (3.1-4+) unstable; urgency=low
+gforge (3.1-6+) unstable; urgency=low
+
+  * [Roland] Upgrade database schema using 20031105.sql and 20031124.sql.
+  * [Roland] Also use 20031129.sql, for the "last changed XX days ago"
+    patch from Hidenari Miwa and Tsutomu Tominaga.
+  * [Roland] Also use 20031126.sql, for the "cron manager" feature.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 23:08:13 +0100
+
+gforge (3.1-6) unstable; urgency=low
+
+  * [Roland] Detection of wrong passwords, with a message describing how
+    to fix (closes: #223693, #215577, #224257).
+  * [Roland] Insert data into LDAP using the robot DN, so as to minimise
+    the use of the admin DN.
+  * [Roland] Better detection of errors when creating database and user,
+    too.
+  * [Roland] Added cronjobs/massmail.php and enabled it in
+    gforge-db-postgresql.cron.d (closes: #225686).
+  * [Roland] Cleaned up the Apache installation process so that it works
+    more generically with apache{,-perl,-ssl} flavours.  Also use
+    /etc/$flavour/conf.d/ directory (thus removing the hack that changed
+    the /etc/$flavour/httpd.conf file).
+
+ -- Roland Mas <lolando@debian.org>  Sat, 10 Jan 2004 22:41:21 +0100
+
+gforge (3.1-5) unstable; urgency=low
 
   * [Christian] corrected stupid chmod error in user_dump_update.pl
     that was making unwritable htdocs dir to the group
@@ -22,12 +48,10 @@ gforge (3.1-4+) unstable; urgency=low
   * [Roland] Added support for apache-perl too.
   * [Roland] Fixed the way we use modules-config so that gforge-web-apache
     does not hang on install (closes: #221172).
-  * [Roland] Upgrade database schema using 20031105.sql and 20031124.sql.
-  * [Roland] Also use 20031129.sql, for the "last changed XX days ago"
-    patch from Hidenari Miwa and Tsutomu Tominaga.
-  * [Roland] Also use 20031126.sql, for the "cron manager" feature.
+  * [Roland] Added "--encoding=UNICODE" to the restore action of
+    install-db.sh.
 
- -- Roland Mas <lolando@debian.org>  Wed,  3 Dec 2003 22:31:59 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  9 Jan 2004 22:35:34 +0100
 
 gforge (3.1-4) unstable; urgency=low
 

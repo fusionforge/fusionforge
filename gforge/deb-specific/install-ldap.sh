@@ -122,6 +122,22 @@ check_server() {
     fi
 }
 
+# Check admin password
+check_password() {
+    tmpcheckpwd=$(mktemp $tmpfile_pattern)
+    if ldapsearch -D $slapd_admin_dn -x -w$slapd_admin_passwd -n $slapd_admin_dn > $tmpcheckpwd 2>&1 ; then
+	echo "Password checked OK." > /dev/null
+    else
+	if grep -q "ldap_bind: Invalid credentials" $tmpcheckpwd ; then
+	    rm $tmpcheckpwd
+	    exit 5		# Wrong password
+	else
+	    rm $tmpcheckpwd
+	    exit 99		# Unknown error
+	fi
+    fi
+}
+
 # Should I do something for /etc/pam_ldap.conf ?
 modify_pam_ldap(){
     echo -n
@@ -295,15 +311,13 @@ purge_nsswitch()
 
 # Load ldap database from gforge database
 load_ldap(){
-    if [ "x$slapd_admin_passwd" != "x" ] ; then
-
-	# First, let's make sure our base DN exists
-	if ! exists_dn $gforge_base_dn ; then
-	    tmpldif=$(mktemp $tmpfile_pattern)
-	    tmpldifadd=$(mktemp $tmpfile_pattern)
-	    tmpldifmod=$(mktemp $tmpfile_pattern)
-	    dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
-	    echo >> $tmpldif <<EOF
+    # First, let's make sure our base DN exists
+    if ! exists_dn $gforge_base_dn ; then
+	tmpldif=$(mktemp $tmpfile_pattern)
+	tmpldifadd=$(mktemp $tmpfile_pattern)
+	tmpldifmod=$(mktemp $tmpfile_pattern)
+	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
+	echo >> $tmpldif <<EOF
 dn: $sys_ldap_base_dn
 dc: $dc
 objectClass: top
@@ -311,44 +325,12 @@ objectClass: domain
 objectClass: domainRelatedObject
 associatedDomain: $sys_default_domain
 EOF
-            # echo "Filling LDAP with database"
-	    if ! eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
-                # Some entries could not be added (already there?)
-                # Therefore, we try to modify them
-		if ! eval "ldapmodify -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
-		    echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
-		    echo "please check and report following error"
-		    echo ========================================================================================
-		    cat $tmpldifmod | perl -pi -e 's/^\n//' | perl -pi -e 's/modifying.*\"\n//'
-		    echo ========================================================================================
-		    echo SEE ALSO result of ldapadd in:
-		    echo $tmpldifadd
-		    echo AND result of ldapmodify in:
-		    echo $tmpldifmod
-		    echo AND ldif file in:
-		    echo $tmpldif
-		    echo ========================================================================================
-		    exit 4
-		fi
-	    fi
-	    rm -f $tmpldif $tmpldifadd $tmpldifmod
-	fi
-
-# CLEANUP: should be done with the robot
-        # This loads the ldap database
-        # echo "Our base DN is $gforge_base_dn"
-        # echo "Creating ldif file from database"
-	tmpldif=$(mktemp $tmpfile_pattern)
-	tmpldifadd=$(mktemp $tmpfile_pattern)
-	tmpldifmod=$(mktemp $tmpfile_pattern)
-	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
-	/usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
         # echo "Filling LDAP with database"
-	if ! eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
-            # Some entries could not be added (already there)
-            # Therefore, we have to modify them
-	    if ! eval "ldapmodify -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
-	    	echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
+	if ! eval "ldapadd -r -c -D '$robot_dn' -x -w'$robot_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
+            # Some entries could not be added (already there?)
+            # Therefore, we try to modify them
+	    if ! eval "ldapmodify -r -c -D '$robot_dn' -x -w'$robot_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
+		echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
 		echo "please check and report following error"
 		echo ========================================================================================
 		cat $tmpldifmod | perl -pi -e 's/^\n//' | perl -pi -e 's/modifying.*\"\n//'
@@ -360,17 +342,42 @@ EOF
 		echo AND ldif file in:
 		echo $tmpldif
 		echo ========================================================================================
-		exit 4
-            fi
+		exit 99
+	    fi
 	fi
 	rm -f $tmpldif $tmpldifadd $tmpldifmod
-    else
-	echo "It seems the admin password is not known to me."
-	echo "I can't fill the LDAP directory without it."
-	echo "Normally, libpam-ldap stores this password in /etc/ldap.secret."
-	echo "Please check that file."
-	exit 1
     fi
+
+    # CLEANUP: should be done with the robot
+    # This loads the ldap database
+    # echo "Our base DN is $gforge_base_dn"
+    # echo "Creating ldif file from database"
+    tmpldif=$(mktemp $tmpfile_pattern)
+    tmpldifadd=$(mktemp $tmpfile_pattern)
+    tmpldifmod=$(mktemp $tmpfile_pattern)
+    dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
+    /usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
+    # echo "Filling LDAP with database"
+    if ! eval "ldapadd -r -c -D '$robot_dn' -x -w'$robot_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
+        # Some entries could not be added (already there)
+        # Therefore, we have to modify them
+	if ! eval "ldapmodify -r -c -D '$robot_dn' -x -w'$robot_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
+	    echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
+	    echo "please check and report following error"
+	    echo ========================================================================================
+	    cat $tmpldifmod | perl -pi -e 's/^\n//' | perl -pi -e 's/modifying.*\"\n//'
+	    echo ========================================================================================
+	    echo SEE ALSO result of ldapadd in:
+	    echo $tmpldifadd
+	    echo AND result of ldapmodify in:
+	    echo $tmpldifmod
+	    echo AND ldif file in:
+	    echo $tmpldif
+	    echo ========================================================================================
+	    exit 99
+	fi
+    fi
+    rm -f $tmpldif $tmpldifadd $tmpldifmod
 }
 
 print_ldif_default(){
@@ -405,9 +412,13 @@ setup_robot() {
     # The first account is only used in a multiserver SF
     check_server
     if ! exists_dn "$robot_dn" || ! exists_dn "ou=People,$gforge_base_dn" ; then
+	check_password
 	echo "Adding robot accounts and sub-trees"
 	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
-	{ eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' $DEVNULL12" || true ; } <<-FIN
+	tmpldif=$(mktemp $tmpfile_pattern)
+	tmpldifadd=$(mktemp $tmpfile_pattern)
+	tmpldifmod=$(mktemp $tmpfile_pattern)
+	echo > $tmpldif <<-FIN
 dn: $gforge_base_dn
 objectClass: domain
 dc: $dc
@@ -443,20 +454,51 @@ dn: $robot_dn
 description: SF the Robot
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
-userPassword: {CRYPT}xxxxx
+userPassword: $robot_cryptedpasswd
 cn: SF_robot
+
+dn: uid=dummy,ou=People,$gforge_base_dn
+uid: dummy
+cn: Dummy User
+objectClass: account
+objectClass: posixAccount
+objectClass: top
+objectClass: shadowAccount
+objectClass: debGforgeAccount
+userPassword: {crypt}x
+shadowLastChange: 10879
+shadowMax: 99999
+shadowWarning: 7
+loginShell: /bin/false
+debGforgeCvsShell: /bin/false
+uidNumber: 9999
+gidNumber: 9999
+homeDirectory: /tmp
+gecos: Dummy User
+
 FIN
+	
+	if ! eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' > $tmpldifadd 2>&1" < $tmpldif ; then
+	    if ! eval "ldapmodify -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' > $tmpldifadd 2>&1" < $tmpldif ; then
+		echo "WARNING WARNING WARNING Something wrong happened when setting up the robot"
+		echo "please check and report following error"
+		echo ========================================================================================
+		cat $tmpldifmod | perl -pi -e 's/^\n//' | perl -pi -e 's/modifying.*\"\n//'
+		echo ========================================================================================
+		echo SEE ALSO result of ldapadd in:
+		echo $tmpldifadd
+		echo AND result of ldapmodify in:
+		echo $tmpldifmod
+		echo AND ldif file in:
+		echo $tmpldif
+		echo ========================================================================================
+		exit 99
+	    fi
+	fi
     else
 	echo "Robot accounts already present, not adding"
     fi
-    check_server
 
-    eval "ldapmodify -v -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' $DEVNULL12" <<-FIN
-dn: $robot_dn
-changetype: modify
-replace: userPassword
-userPassword: $robot_cryptedpasswd
-FIN
     check_server
     # echo "Testing LDAP"
     if ! exists_dn uid=dummy,ou=People,$gforge_base_dn ; then
@@ -553,6 +595,7 @@ case "$1" in
 		echo $robot_dn
 	    } | sort -u # ...then uniquify that list
 	}
+	check_password
 	get_our_entries | eval "ldapdelete -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -c $DEVNULL12" || true
 	;;
     reset)
