@@ -1,13 +1,16 @@
 #! /usr/bin/php
 <?php
+//ruben - it's missing the copyright at the top
 require_once('squal_pre.php');
 require_once('common/pm/ProjectTasksForUser.class');
 require_once('common/include/cron_utils.php');
 
+//ruben - query should include a join against project_task so you only fetch users that have open tasks
 $res = db_query("SELECT user_id, realname, email FROM users WHERE user_id > 100 ORDER BY user_id");
 $now = time();
 $today = date("n/j/y");
 
+//ruben, no comments
 for ($i=0; $i<db_numrows($res);$i++) {
 
 	$user_id = db_result($res, $i, 'user_id');
@@ -20,6 +23,9 @@ for ($i=0; $i<db_numrows($res);$i++) {
 	} else {
 
 		$projectTasksForUser = new ProjectTasksForUser($user_object);
+		if (!$projectTasksForUser || !is_object($projectTasksForUser) || $projectTasksForUser->isError()) {
+			continue;
+		}
 		$userTasks =& $projectTasksForUser->getTasksForToday();
 	
 		$subject = 'Tasks for '.$realname.' for '.$today;
@@ -27,13 +33,15 @@ for ($i=0; $i<db_numrows($res);$i++) {
 		if (count($userTasks) > 0) {
 	
 			ob_start();
-	
+
 			foreach ($userTasks as $task) {
 	
 				$end_date = date("n/j/y", $task->getEndDate());
 	
 				$projectGroup =& $task->getProjectGroup();
+//No error checks
 				$group =& $projectGroup->getGroup();
+//No error checks
 				if ($group->getID() != $last_group) {
 					echo $group->getPublicName().":\n";
 				}
@@ -54,7 +62,8 @@ for ($i=0; $i<db_numrows($res);$i++) {
 	
 			$messagebody = ob_get_contents();
 			ob_end_clean();
-			util_send_message($email, $subject, $messagebody);
+//			util_send_message($email, $subject, $messagebody);
+			echo "\n\n\n***************************************************\n$messagebody";
 		}
 	}
 }
