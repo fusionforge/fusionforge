@@ -58,8 +58,8 @@ function menu_show_search_box($show_horizontally=false, $new_window=true) {
 		<OPTION value="soft"'.( $type_of_search == 'soft' ? ' SELECTED' : '' ).'>Software/Group</OPTION>';
 	print '
 		<OPTION value="people"'.( $type_of_search == 'people' ? ' SELECTED' : '' ).'>People</OPTION>';
-	print '
-		<OPTION value="freshmeat"'.( $type_of_search == 'freshmeat' ? ' SELECTED' : '' ).'>Freshmeat.net</OPTION>';
+	/* print '
+		<OPTION value="freshmeat"'.( $type_of_search == 'freshmeat' ? ' SELECTED' : '' ).'>Freshmeat.net</OPTION>'; */
 	print '
 		</SELECT>';
 
@@ -151,8 +151,6 @@ function menu_sourceforge() {
 		$HTML->menu_entry('/people/',$Language->getText('menu','project_help_wanted'));
 		$HTML->menu_entry('/top/',$Language->getText('menu','top_projects'));
 		$HTML->menu_entry('/docman/display_doc.php?docid=2352&group_id=1',$Language->getText('menu','site_status'));
-		print '<P>';
-		$HTML->menu_entry('http://jobs.osdn.com', 'jobs.osdn.com');
 		print '<P>';
 		// $HTML->menu_entry('/compilefarm/',$Language->getText('menu','compile_farm'));
 		// print '<P>';
