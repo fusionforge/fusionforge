@@ -19,7 +19,9 @@ Include /etc/gforge/httpd.common
   ServerAdmin {server_admin}
   DocumentRoot /usr/share/gforge/www
   DirectoryIndex index.html index.php
-  UserDir disabled
+  <IfModule mod_userdir.c>
+    UserDir disabled
+  </IfModule>
 
   php_admin_value default_charset "UTF-8"
 
@@ -66,7 +68,9 @@ Include /etc/gforge/httpd.common
   ServerAdmin {server_admin}
   DocumentRoot /usr/share/gforge/www
   DirectoryIndex index.html index.php
-  UserDir disabled
+  <IfModule mod_userdir.c>
+    UserDir disabled
+  </IfModule>
 
   php_admin_value default_charset "UTF-8"
 
