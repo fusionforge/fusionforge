@@ -55,7 +55,8 @@ group	short_admin	管理
 group	short_bugs	BUG
 group	short_cvs	CVS
 group	short_docman	文档
-group	short_files	Filesgroup	short_forum	论坛
+group	short_files	Files
+group	short_forum	论坛
 group	short_homepage	首页
 group	short_mail	电子邮件
 group	short_main 	主要
