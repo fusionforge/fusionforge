@@ -86,9 +86,24 @@ sub dump_history {
 
 sub parse_history {
 	my ($sql);
+# CVS doc says the meaning of the code letters.
+#
+#Letter          Meaning
+#======          =========================================================
+#O               Checkout
+#T               Tag
+#F               Release
+#W               Update (no user file, remove from entries file)
+#U               Update (file overwrote unmodified user file)
+#G               Update (file was merged successfully into modified user file)
+#C               Update (file was merged, but conflicts w/ modified user file)
+#M               Commit (from modified file)
+#A               Commit (an added file)
+#R               Commit (the removal of a file)
+#E               Export
 	$sql = "
 	CREATE TABLE deb_cvs_group AS
-        	SELECT agg.cvsgroup,agg.year,agg.month,agg.day,agg.total AS total,c.commits AS commits,a.adds AS adds,ch.checkouts AS checkouts,e.errors AS errors
+        	SELECT agg.cvsgroup,agg.year,agg.month,agg.day,agg.total AS total,c.commits AS commits,a.adds AS adds,o.others AS others
         	FROM (
         		SELECT cvsgroup,year,month,day,COUNT(*) AS total
         		FROM deb_cvs_dump
@@ -107,17 +122,11 @@ sub parse_history {
         	GROUP BY year,month,day,cvsgroup
 		) a USING (cvsgroup,year,month,day)
 		LEFT JOIN (
-        	SELECT cvsgroup,year,month,day,COUNT(*) AS checkouts
+        	SELECT cvsgroup,year,month,day,COUNT(*) AS others
         	FROM deb_cvs_dump
-		WHERE type='O'
+		WHERE type!='A' and type!='M' 
         	GROUP BY year,month,day,cvsgroup
-		) ch USING (cvsgroup,year,month,day)
-		LEFT JOIN (
-        	SELECT cvsgroup,year,month,day,COUNT(*) AS errors
-        	FROM deb_cvs_dump
-		WHERE type='E'
-        	GROUP BY year,month,day,cvsgroup
-		) e USING (cvsgroup,year,month,day)
+		) o USING (cvsgroup,year,month,day)
 	";
 	$dbh->do( $sql );
 }
@@ -127,8 +136,8 @@ sub print_stats {
 	$sql = "SELECT * FROM deb_cvs_group order by year, month, day";
 	$res = $dbh->prepare($sql);
 	$res->execute();
-	while ( my ($cvsgroup, $year, $month, $day, $total, $commits, $adds, $checkouts, $errors) = $res->fetchrow()) {
-		print "$cvsgroup $year $month $day $total=$commits+$adds+$checkouts+$errors\n";
+	while ( my ($cvsgroup, $year, $month, $day, $total, $commits, $adds, $others) = $res->fetchrow()) {
+		print "$cvsgroup $year $month $day $total=$commits+$adds+$others\n";
 	}
 }
 
