@@ -76,6 +76,18 @@ access to dn=\".*,ou=People,$dn\"
 	by dn=\"cn=admin,ou=People,$dn\" write	
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
+access to dn=\"ou=People,$dn\"		
+	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=SF_robot,$dn\" write		
+	by * read				
+access to dn=\"ou=Group,$dn\"		
+	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=SF_robot,$dn\" write		
+	by * read				
+access to dn=\"ou=cvsGroup,$dn\"		
+	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=SF_robot,$dn\" write		
+	by * read				
 # End of sourceforge add
 access to */" /etc/ldap/slapd.conf
 
