@@ -1,3 +1,10 @@
+2005-02-15  Mathieu Peltier <mathieu.peltier@gmail.com>
+
+	* applied [#775] Patch for not able to change file to another
+	release/package by Jader Marasca (fixed bug [#663]). Added tests
+	on the new release id in order to be sure that the new release
+	belongs to a package of the same group.
+
 2005-02-12  Tim Perdue <tim@gforge.org>
 
 	* Adding new function validate_emails() which accepts multiple 

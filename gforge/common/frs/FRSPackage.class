@@ -37,6 +37,33 @@ function &get_frs_packages($Group) {
 	return $ps;
 }
 
+/**
+ * Gets a FRSPackage object from the given package id
+ * 
+ * @param package_id	the package id
+ * @param data	the DB handle if passed in (optional)
+ * @return	the FRSPackage object	
+ */
+function &frspackage_get_object($package_id, $data=false) {
+	global $FRSPACKAGE_OBJ;
+	if (!isset($FRSPACKAGE_OBJ['_'.$package_id.'_'])) {
+		if ($data) {
+			//the db result handle was passed in
+		} else {
+			$res=db_query("SELECT * FROM frs_package
+				WHERE package_id='$package_id'");
+			if (db_numrows($res)<1) {
+				$FRSPACKAGE_OBJ['_'.$package_id.'_']=false;
+				return false;
+			}
+			$data =& db_fetch_array($res);			
+		}
+		$Group =& group_get_object($data['group_id']);
+		$FRSPACKAGE_OBJ['_'.$package_id.'_']= new FRSPackage($Group,$data['package_id'],$data);
+	}
+	return $FRSPACKAGE_OBJ['_'.$package_id.'_'];
+}
+
 class FRSPackage extends Error {
 
 	/**
