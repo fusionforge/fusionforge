@@ -24,28 +24,32 @@
  */
 require_once('common/include/Error.class');
 
-function &artifact_get_object($artifact_id,$data=false) {
-	global $ARTIFACT_OBJ;
-	if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
-		if ($data) {
-			//the db result handle was passed in
-		} else {
-			$res=db_query("SELECT * FROM artifact_vw
-					WHERE artifact_id='$artifact_id'");
-			if (db_numrows($res) <1 ) {
-				$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
-				return false;
+	/**
+	* Factory method which creates an Artifact from an artifact ID
+	*	
+	* @param artifact_id	the artifact ID
+	*	@param data	the DB handle, if it's passed in
+	*	@return an Artifact object
+	*/
+	function &artifact_get_object($artifact_id,$data=false) {
+		global $ARTIFACT_OBJ;
+		if (!isset($ARTIFACT_OBJ["_".$artifact_id."_"])) {
+			if ($data) {
+				//the db result handle was passed in
+			} else {
+				$res=db_query("SELECT * FROM artifact_vw WHERE artifact_id='$artifact_id'");
+				if (db_numrows($res) <1 ) {
+					$ARTIFACT_OBJ["_".$artifact_id."_"]=false;
+					return false;
+				}
+				$data =& db_fetch_array($res);
 			}
-			$data =& db_fetch_array($res);
-
+			$Group =& group_get_object($data["group_id"]);
+			$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
+			$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
 		}
-		$Group =& group_get_object($data["group_id"]);
-		$ArtifactType =& artifactType_get_object($data["group_artifact_id"]);
-		$ARTIFACT_OBJ["_".$artifact_id."_"]= new Artifact($ArtifactType,$data);
-	}
-	
-	return $ARTIFACT_OBJ["_".$artifact_id."_"];
-}	
+		return $ARTIFACT_OBJ["_".$artifact_id."_"];
+	}	
 
 class Artifact extends Error {
 
