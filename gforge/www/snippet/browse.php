@@ -11,7 +11,6 @@
   *
   */
 
-
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
@@ -62,9 +61,7 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-	/*
-		List packages if there are any
-	*/
+	//	List packages if there are any
 	if ($rows2 > 0) {
 		echo '
 			<tr style="background-color:#efefef"><td colspan="3"><strong>' .$Language->getText('snippet_browse','packages_of_snippets').'</strong><td';
@@ -75,16 +72,12 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			db_result($result2,$i,'snippet_package_id').'"><strong>'.
 			db_result($result2,$i,'snippet_package_id').'</strong></a></td><td><strong>'.
 			db_result($result2,$i,'name').'</td><td>'.
-			'<a href="/users/'.db_result($result2, $i, 'user_name').'/">'.db_result($result2, $i, 'realname').'</a></td></tr>';
+			$GLOBALS['HTML']->createLinkToUserHome(db_result($result2, $i, 'user_name'), db_result($result2, $i, 'realname')).'</td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result2,$i,'description'))).'</td></tr>';
 	}
 
-
-	/*
-		List snippets if there are any
-	*/
-
+	//	List snippets if there are any
 	if ($rows > 0) {
 		echo '
 			<tr style="background-color:#efefef"><td colspan="3"><strong>' .$Language->getText('snippet_browse','snippets').'</strong></td>';
@@ -95,15 +88,11 @@ if ((!$result || $rows < 1) && (!$result2 || $rows2 < 1)) {
 			db_result($result,$i,'snippet_id').'"><strong>'.
 			db_result($result,$i,'snippet_id').'</strong></a></td><td><strong><a href="/snippet/detail.php?type=snippet&amp;id='.
 			db_result($result,$i,'snippet_id').'">'.db_result($result,$i,'name').'</a></td><td>'.
-			'<a href="/users/'.db_result($result, $i, 'user_name').'/">'.db_result($result, $i, 'realname').'</a></td></tr>';
+			$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td></tr>';
 		echo '
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td colspan="2">'.util_make_links(nl2br(db_result($result,$i,'description'))).'</td></tr>';
 	}
-
 	echo $GLOBALS['HTML']->listTableBottom();
-
 }
-
 snippet_footer(array());
-
 ?>

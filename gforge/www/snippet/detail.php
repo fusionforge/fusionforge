@@ -16,20 +16,14 @@ require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
 /*
-
 	Show a detail page for either a snippet or a package
 	or a specific version of a package
-
 */
 
 if ($type=='snippet') {
 	/*
-
-
 		View a snippet and show its versions
 		Expand and show the code for the latest version
-
-
 	*/
 
 	snippet_header(array('title'=>$Language->getText('snippet_detail','title'),'pagename'=>'snippet_detail'));
@@ -65,6 +59,8 @@ if ($type=='snippet') {
 			get the newest version of this snippet, so we can display its code
 		*/
 		$newest_version=db_result($result,0,'snippet_version_id');
+	
+		echo $GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname'));
 
 		for ($i=0; $i<$rows; $i++) {
 			echo '
@@ -73,7 +69,7 @@ if ($type=='snippet') {
 				db_result($result,$i,'snippet_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'. 
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
-				'<a href="/users/'.db_result($result, $i, 'user_name').'/">'.db_result($result, $i, 'realname').'</a></td>'.
+				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
 				'<td align="center"><a href="/snippet/delete.php?type=snippet&amp;snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
@@ -164,7 +160,7 @@ if ($type=='snippet') {
 				db_result($result,$i,'snippet_package_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'.
 				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
-				'<a href="/users/'.db_result($result, $i, 'user_name').'/">'.db_result($result, $i, 'realname').'</a></td>'.
+				$GLOBALS['HTML']->createLinkToUserHome(db_result($result, $i, 'user_name'), db_result($result, $i, 'realname')).'</td>'.
 				'<td align="center"><a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').
 				'">' . html_image("ic/pencil.png","20","25",array("border"=>"0")) .
