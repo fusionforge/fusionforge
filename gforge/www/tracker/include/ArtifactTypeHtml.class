@@ -81,7 +81,7 @@ class ArtifactTypeHtml extends ArtifactType {
 	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='none') {
 		global $Language;
 		if ($text_100=='none'){
-			$text_100=$Language->getText('tracker_artifacttype','none');
+			$text_100=$Language->getText('tracker_artifacttype','nobody');
 		}
 		return html_build_select_box ($this->getTechnicians(),$name,$checked,$show_100,$text_100);
 	}
