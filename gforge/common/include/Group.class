@@ -819,6 +819,7 @@ class Group extends Error {
 	function setSCMBox($scm_box) {
 		if ( $GLOBALS['sys_scm_single_host'] == '1' ) {
 			$this->setError('Trying to change SCM_BOX when sys_scm_single_host selected');
+			return false;
 		} else {
 			db_begin();
 			$sql = "UPDATE groups SET scm_box = '$scm_box' WHERE group_id = ".$this->getID();
