@@ -1,3 +1,12 @@
+2005-02-18  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* commited [#1049] Dutch language tab-file updated for GForge-4
+	by Wim van der Hamsvoord
+	* fixed an encoding problem in Spanish.tab
+	* fixed the help label for file attachment on tracker item add page
+	* improved layout consistency and fixed localization in docman/new.php
+	* updated French translation
+
 2005-02-17  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* project admin is now Admin and Technician in tracker and pm by default
