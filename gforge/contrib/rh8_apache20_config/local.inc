@@ -145,7 +145,7 @@ $sys_require_unique_email=0;
 // The theme base directory, everything else is handled by theme_sysinit()
 $sys_themeroot=$sys_urlroot."themes/";
 // If you want an other default theme or language
-$sys_theme='dialogos3';
+$sys_theme='gforge';
 #$sys_lang='English';
 $sys_lang='Italian';
 
