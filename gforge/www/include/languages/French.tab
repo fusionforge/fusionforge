@@ -26,136 +26,139 @@
 #	* Added all Base.tab strings	
 account	title	Préférences de votre compte
 account	updated	Mis à jour
-account_change_email	desc	<P>Changer votre adresse de courrier électronique va nécessiter une confirmation de votre nouvelle adresse, afin que nous puissions nous assurer que nous enregistrons une bonne adresse. </p><p>Nous avons besoin de conserver une adresse valide pour chaque utilisateur pour nous garantir un accès au compte. Si nous avons besoin de de joindre un utilisateur à cause d'un problème en provenance d'un compte utilsateur ou d'un projet, il est important que nous puissions le faire.</p><p>En validant le formulaire ci-dessous, vous déclencherez l'envoi d'un courrier à votre nouvelle adresse, contenant une URL de confirmation. En allant sur ce lien, vous pourrez achevez la procédure de changement d'adresse.</p> 
+account_change_email	desc	<p>Modifier votre adresse e-mail nécessite une confirmation de votre nouvelle adresse, afin que nous puissions vérifier que nous enregistrons une adresse valide. </p><p>Nous avons besoin d'une adresse valide pour chaque utilisateur en raison du niveau d'accès accordé via ce compte. Si nous avons besoin de joindre un utilisateur à cause de problèmes en provenance d'un compte shell ou projet, il est important que nous puissions le faire.</p><p>Valider le formulaire déclenchera l'envoi d'une URL de confirmation à votre nouvelle adresse e-mail. Cliquer sur ce lien finalisera la modification d'adresse.</p> 
 account_change_email	invalid_email	Adresse e-mail invalide
-account_change_email	mailsent	<P>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez les instructions du courrier électronique pour terminer le changement d'adresse. <P><A href="/">[ Accueil ]</A> 
-account_change_email	message	Vous avez demandé un changement d'adresse e-mail pour votre compte sur $1.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\nl'équipe $1
+account_change_email	mailsent	<p>Un courrier électronique a été envoyé à votre nouvelle adresses. Suivez en les instructions pour compléter la modification d'adresse. </p><a href="/">[ Accueil ]</a> 
+account_change_email	message	Vous avez demandé une modification d'adresse e-mail pour votre compte sur $1.\nVeuillez visiter la page suivante pour que ce changement prenne effet :\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n-- L'équipe de  $1
 account_change_email	new_address	Nouvelle adresse e-mail :
 account_change_email	section	Préférences de votre compte
-account_change_email	send_confirmation	Envoi confirmation à la nouvelle adresse
-account_change_email	subject	$1 - vérification
+account_change_email	send_confirmation	Envoi d'une confirmation à la nouvelle adresse
+account_change_email	subject	$1 - Vérification
 account_change_email	title	Changement d'adresse e-mail
-account_change_email-complete	confirm	Bienvenue $1, votre changement d'adresse e-mail a été effectué. Votre nouvelle adresse enregistrée est <strong>$2</strong>. Les messages envoyés à $3 y désormais redirigés.
+account_change_email-complete	confirm	Bienvenue $1, votre changement d'adresse e-mail a été effectué. Votre nouvelle adresse est <strong>$2</strong>. Les messages envoyés à $3 y seront désormais redirigés.
 account_change_email-complete	title	Changement d'adresse e-mail effectué
-account_change_email_confirm	title	Confirmation de changement d'e-mail
+account_change_email_confirm	title	Confirmation de changement d'adresse e-mail
 account_change_pw	confirmation	<h2>Confirmation du changement de mot de passe $1</h2><p>Félicitations.  Vous venez de changer votre mot de passe.</p>
 account_change_pw	new_password	Nouveau mot de passe (6 caractères minimum)
-account_change_pw	new_password_repeat	Nouveau mot de passe (répéter)
-account_change_pw	not_valid_password	Vous devez donner un mot de passe valide ( 6 caractères au moins)
-account_change_pw	old_password	Ancien mot de passe.
+account_change_pw	new_password_repeat	Nouveau mot de passe (confirmez)
+account_change_pw	not_valid_password	Vous devez donner un mot de passe valide (6 caractères minimum)
+account_change_pw	old_password	Ancien mot de passe
 account_change_pw	old_password_incorrect	Ancien mot de passe incorrect
 account_change_pw	passwords_dont_match	Les nouveaux mots de passe ne concordent pas.
-account_change_pw	section	Préférences de votre compte
+account_change_pw	section	Mes Préférences
 account_change_pw	title	Changement de mot de passe
-account_change_pw	update	Mise à jour du mot de passe.
-account_change_pw_changed	return_to	Vous devriez maintenant $1 retourner aux préférences utilisateur $2.
+account_change_pw	update	Mise à jour du mot de passe
+account_change_pw_changed	return_to	Vous devriez maintenant $1 Retourner aux préférences utilisateur $2.
 account_change_pw_changed	title	Changement de mot de passe réussi.
-account_editsshkeys	section	Préférences de votre compte
+account_editsshkeys	section	Mes préférences
 account_editsshkeys	title	Édition des clefs publiques CVS/SSH
-account_first	about_blurb	Vous êtes maintenant un utilisateur enregistré dans $1, environnement de dévelopopement de logiciels libres.</p><p>.En tant qu'utilisateur enregistré, vous pouvez participer pleinement aux activités du site. Vous pouvez maintenant adresser des messages dans les forums des projets, faire remonter des bogues dans $1, vous proposer comme développeur d'un projet, et même commencer votre propre projet.</p><p>Vous devez prendre le temps de lire la <a href= »/docs/site/'><b>Documentation du site</b></a>pour tirer complètement parti de $1
-account_first	title	Bienvenue sur $1.
-account_login	cookiewarn	Les Cookies doivent être activés aprés ce point.
-account_login	deleted_account	<p>Votre compte sur $1 a été supprimé par l'équipe de $1.  Ceci peut être dû à deux raisons : 1) soit vous avez demandé à ce que votre compte soit supprimé, soit 2) une action a été commise en utilisant votre compte qui a été considérée comme très désagréable (violation des les règles d'usage de votre compte) et votre compte a été révoqué pour des raisons administratives. Si vous avez des questions ou des soucis sur ce point, vous pouvez aller <a href="/support/?group_id=1">Demander de l'aide</a>.</p><p>Merci, <br><br>L'équipe de $1</p>
-account_login	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur
+account_first	about_blurb	<p>Vous êtes maintenant un utilisateur enregistré dans $1, environnement de développement de logiciels libres.</p><p>En tant qu'utilisateur enregistré, vous pouvez participer pleinement aux activités du site. Vous pouvez maintenant adresser des messages dans les forums des projets, faire remonter des bogues dans $1, vous proposer comme développeur d'un projet, et même lancer votre propre projet.</p><p>Profitez du site et n'hésitez pas à nous faire part de vos remarques sur la manière d'améliorer $1.</p><p>-- L'équipe de $1</p>
+account_first	title	Bienvenue sur $1
+account_login	cookiewarn	Vous devez activer les cookies pour aller plus loin.
+account_login	deleted_account	<p>Votre compte sur $1 a été supprimé par l'équipe de $1. Ceci peut être dû à deux raisons : 1) soit vous avez demandé à ce que votre compte soit supprimé, soit 2) un acte considéré comme répréhensible (violation des conditions de service et d'utilisation de votre compte) a été commis en utilisant votre compte et celui-ci a été révoqué pour des raisons administratives. Si vous avez des questions ou des soucis concernant ce problème, vous pouvez remplir une <a href="/support/?group_id=1">demande de support</a>.</p><p>Merci</p><p>-- L'équipe de $1</p>
+account_login	iewarn	<h2><font color="red">Les utilisateurs d'Internet Explorer sont priés utiliser IE 5.01 ou supérieur, de préférence avec le support SSL 128 bits, ou d'utiliser Netscape 4.7 ou supérieur.</font></h2>
 account_login	login	Connexion avec SSL
-account_login	loginname	Nom de Login :
-account_login	lostpw	[ Perdu votre mot de passe ? ]
-account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
+account_login	loginname	Nom du compte :
+account_login	lostpw	[Perdu votre mot de passe ?]
+account_login	macwarn	<h2><font color="red">Internet Explorer sur Macintosh n'est pas supporté pour le moment. Utilisez Netscape 4.7 ou supérieur.</font></h2>
 account_login	newaccount	[Nouveau Compte]
-account_login	passwd	Mot de passe:
-account_login	pending_account	<p>Votre compte est en attente de confirmation.  Un e-mail vous a été envoyé
-account_login	sslnotice	<p><B><FONT COLOR="RED">Vous allez être connecté avec un serveur SSL quand vous allez soumettre ce formulaire et votre mot de passe ne sera pas visible aux autres utilisateurs.</FONT></B> <small style="font-size: x-small"> (Si vous vous demandez pourquoi cette page n'est pas chargée en SSL, prière de lire le prochain paragraphe, merci)</small> <P>Les utilisateurs d'</B>Internet Explorer</B> auront des problèmes SSL intermittents, et pourront perdre la connexion après être entré. Les utilisateurs de Netscape doivent rester en mode SSL de manière permanente pour une sécurité maximale. Allez sur "http://www.microsoft.com/">Microsoft</A> for plus d'information sur ce problème connu. <P>
+account_login	passwd	Mot de passe :
+account_login	pending_account	<p>Votre compte est en attente de confirmation. Visiter le lien qui vous a été envoyé par e-mail activera votre compte.</p><p>Si vous avez besoin qu'on vous envoie à nouveau ce courrier, merci de cliquer ci-dessous : un e-mail de confirmation sera envoyé à l'adresse que vous avez fourni lors de votre enregistrement.</p><p><a href="pending-resend.php?form_user=$1">[Envoyer à nouveau l'e-mail de confirmation]</a></p><hr />
+account_login	resend_pending	[Renvoyer l'email de confirmation à un compte en attente]
+account_login	resend_pending_directions	Saisissez un nom d'utilisateur et validez pour envoyer le courrier de confirmation
+account_login	sslnotice	<p><b><font color="red">Vous serez connecté avec un serveur SSL quand vous soumettrez ce formulaire et votre mot de passe ne sera pas visible par d'autres utilisateurs.</font></b> <small style="font-size: x-small"> (Si vous vous demandez pourquoi cette page n'est pas chargée via SSL, merci de lire le paragraphe suivant)</small> <p>Les utilisateurs d'<b>Internet Explorer</b> ont des problèmes intermittents de SSL ; il leur est conseillé de quitter le SSL une fois identifié. Les utilisateurs de Netscape doivent rester en mode SSL de manière permanente pour une sécurité maximale. Visitez <a href="http://www.microsoft.com/">le site de Microsoft</a> pour plus d'informations sur ce problème identifié.</p>
 account_login	title	Connexion
-account_login	usessl	Rester en mode SSL aprés la connexion
+account_login	usessl	Rester en mode SSL après la connexion
 account_lostlogin	invalidconfirm	Hash de confirmation invalide
 account_lostlogin	newpasswd	Nouveau mot de passe (6 caractères minimum)
-account_lostlogin	newpasswd2	Nouveau mot de passe (répété)
-account_lostlogin	notmatch	Les nouveaux mots de passe diffèrent.
-account_lostlogin	passwdchanged	<h2>Mot de passe changé</h2><p>Félicitation, vous avez réentré votre mot de passe. Vous pouvez <a href="/account/login.php">Entrer</a> maintenant dans le site.</p>
-account_lostlogin	severalconfirm	Il existe plus d'un hash de confirmation.
-account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (Au moins 6 caractères).
+account_lostlogin	newpasswd2	Nouveau mot de passe (confirmez)
+account_lostlogin	notmatch	Les nouveaux mots de passe ne concordent pas.
+account_lostlogin	passwdchanged	<h2>Mot de passe modifié</h2><p>Félicitations, vous avez modifié votre mot de passe. Vous pouvez maintenant <a href="/account/login.php">entrer</a> sur le site.</p>
+account_lostlogin	severalconfirm	Le hash de confirmation est en plusieurs exemplaires.
+account_lostlogin	sixchars	Vous devez fournir un mot de passe valide (au moins 6 caractères).
 account_lostlogin	title	Confirmation pour mot de passe perdu
-account_lostlogin	update	Valider
-account_lostlogin	welcome	<h2>Mot de passe perdu</h2><P>Bienvenue, $1. Vous pouvez maintenant changer votre mot de passe.
+account_lostlogin	update	Mettre à jour
+account_lostlogin	welcome	<h2>Mot de passe perdu</h2><p>Bienvenue, $1. Vous pouvez maintenant changer votre mot de passe.</p>
 account_lostpw	invalid_user	Utilisateur non valide
-account_lostpw	message	Quelqu'un (probablement vous) sur le site $1, a demandé un \nchangement de mot de passe l'intermédiaire d'une vérification e-mail. Si ce n'est pas vous\nignorez ce message et rien ne se passera.\n\nSi vous avez demandé cette vérificaton, allez à l'URL suivante\n pour changer votre mot de passe :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n - L'équipe de $3\n
-account_lostpw	notify	<P>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions du courrier électronique pour changer le mot de passe de votre compte. <P><A href="/">[ Page d'accueil ]</A>
-account_lostpw	sendhash	Envoyer une clé de Hachage pour mot de passe perdu
+account_lostpw	message	Quelqu'un (probablement vous) sur le site $3, a demandé un \nchangement de mot de passe l'intermédiaire d'une vérification e-mail. Si ce n'est pas vous\nignorez ce message et rien ne se passera.\n\nSi vous avez demandé cette vérification, allez à l'URL suivante\n pour changer votre mot de passe :\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n-- L'équipe de $3\n
+account_lostpw	notify	<p>Un courrier électronique a été envoyé à l'adresse enregistrée. Suivez les instructions de celui-ci pour changer le mot de passe de votre compte.</p><p><a href="/">[ Page d'accueil ]</a></p>
+account_lostpw	sendhash	Envoyer une clé de hachage pour mot de passe perdu
 account_lostpw	subject	$1 - Vérification
 account_lostpw	title	Perdu votre mot de passe ?
 account_lostpw	user_dont_exist	Cet utilisateur n'existe pas.
-account_lostpw	warn	<P>Eh... perdre son mot de passe est une chose sérieuse. Cela compromet la sécurité de votre compte, de vos projet, et de ce site.</p><p>Cliquer « Envoyer une clé de Hachage pour mot de passe perdu » ci dessous déclenchera un envoi à l'adresse que nous avons de vous d'une URL contenant une clé de confirmation de 128 bits pour votre compte. An allant à cette URL, vous pourrez changer votre mot de passe en ligne et vous connecter. </P>
-account_options	change_email_address	Changer d'adresse de courrier
-account_options	change_password	Changement de mot de passe
+account_lostpw	warn	<p>Perdre son mot de passe n'est pas sans conséquence. Cela compromet la sécurité de votre compte, de vos projets et de ce site.</p><p>Cliquer sur "Envoyer une clé de Hachage pour mot de passe perdu" ci-dessous déclenchera l'envoi d'une URL à l'adresse que vous nous avez fournie. Celle-ci contient une clé de confirmation de 128 bits pour votre compte. An allant à cette URL, vous pourrez changer votre mot de passe en ligne et vous connecter.</p>
+account_options	change_email_address	Modifier son adresse e-mail
+account_options	change_password	Modifier son mot de passe
 account_options	edit_skills_profile	Editer mon profil de compétences
 account_options	email_address	Adresse e-mail :
-account_options	language	Langue&nbsp;:
-account_options	login_name	Nom de login :
+account_options	language	Langue :
+account_options	login_name	Identifiant :
 account_options	member_since	Membre depuis le :
-account_options	real_name	Nom complet&nbsp;:
-account_options	timezone	Fuseau horaire&nbsp;:
+account_options	real_name	Nom complet :
+account_options	timezone	Fuseau horaire :
 account_options	title	Gestion de compte
-account_options	user_id	Identification Utilisateur&nbsp;:
+account_options	user_id	Identifiant utilisateur :
 account_options	view_developer_profile	Voir mon profil de développeur
 account_options	welcome	Bienvenue
 account_register	Preferences	Préférences
-account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <I>(Faible trafic.)</I>
-account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.  <p> Vous allez recevoir un courrier électronique de confirmation pour verifier votre adresse.  Suivez le lien qui vous sera envoyé pour valider votre compte.
-account_register	emailaddr	Adresse de courrier électronique :<BR><I>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Vous allez recevoir une adresse de relais sous la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse.
+account_register	communitymail	Recevoir du courrier électronique supplémentaire au sujet de la communauté. <i>(Faible trafic)</i>
+account_register	congrat	<p>Félicitations. Vous venez de vous enregistrer sur $1.</p><p>Vous allez recevoir un courrier électronique de confirmation pour vérifier votre adresse e-mail. Suivez le lien qui vous a été envoyé pour activer votre compte.</p>
+account_register	emailaddr	Adresse e-mail : <span><font color="red">*</font></span><br /><i>Cette adresse sera vérifiée avant l'activation de votre compte. Elle ne sera pas affichée sur le site. Une adresse de la forme &lt;loginname@$1&gt; qui redirigera le courrier sur votre adresse vous sera attribuée.</i>
 account_register	err_badinsert	L'insertion a échouée.
-account_register	err_email	Adresse e-mail invalide
-account_register	err_jabber	Adresse Jabber invalide
-account_register	err_mailexist	Un utilisateur a deja cette adresse - utiliser la recherche sur utilisateur pour retrouver votre login.
+account_register	err_email	Adresse e-mail non valide
+account_register	err_jabber	Adresse Jabber non valide
+account_register	err_mailexist	Un utilisateur avec cette adresse existe déjà : utilisez la recherche des utilisateurs pour retrouver votre login.
 account_register	err_passwd	Vous devez fournir un mot de passe
 account_register	err_passwd2	Les mots de passe ne concordent pas
 account_register	err_passwd3	Mot de passe non valide :
-account_register	err_realname	Vous devez entrer votre nom
-account_register	err_unixname	Nom unix invalide
-account_register	err_userexist	L'utilisateur existe déjà.
+account_register	err_realname	Vous devez entrer votre nom complet
+account_register	err_unixname	Nom unix non valide
+account_register	err_userexist	Ce nom d'utilisateur existe déjà.
 account_register	err_username	Vous devez fournir un nom d'utilisateur
-account_register	iewarn	<H2><FONT COLOR="RED">Les utilisateurs de Internet Explorer doivent utiliser IE 5.01 ou supérieur, de préférence avec une clé SSL de 128 bits ou utiliser Netscape 4.7 ou supérieur.</FONT></H2>
+account_register	iewarn	<h2><font color="red">Les utilisateurs d'Internet Explorer sont priés utiliser IE 5.01 ou supérieur, de préférence avec le support SSL 128 bits, ou d'utiliser Netscape 4.7 ou supérieur.</font></h2>
 account_register	jabberaddr	Adresse Jabber :
-account_register	jabberonly	Envoyer les notifications automatiques seulement à mon adresse Jabber
+account_register	jabberonly	N'envoyer les notifications automatiques qu'à mon adresse Jabber
 account_register	language	Langue :
-account_register	loginname	Nom de login (en minuscule) :
-account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer n'est pas supporté sur Macintosh. Utilisez Netscape 4.7 ou superieur</FONT></H2>
-account_register	mandatory	Les champs avec $1 sont obligatoires.
-account_register	message_body	Merci de vous être enregistré au site $4. \nVous avez maintenant un compte du nom de $1. \nPour terminer votre inscription suivez le lien : \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n (Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un bogue de votre client de courrier.\nUtilisez li lien ci-dessous, mais prenez garde qu'il soit entré en une lseule ligne)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- L'équipe de $4\n
-account_register	message_header	Enregistrement dans $1
-account_register	partecipate_peer_ratings	Participer au classement par les pairs. <i>(Vous permet de classer les autres développeurs en fonctions de différents critères, aussi bien que d'être évalué par les autres. Pour plus d'information, voir votre page d'utilisateur de $1 si vous avez choisi de participer aux classements)</i>.
-account_register	password	Mot de passe (6 caractères minimum) *:
-account_register	password2	Mot de passe (répété) :
+account_register	loginname	Nom du compte (ne pas utiliser de majuscules) :
+account_register	macwarn	<h2><font color="red">Internet Explorer sur Macintosh n'est pas supporté pour le moment. Utilisez Netscape 4.7 ou supérieur.</font></h2>
+account_register	mandatory	Les champs suffixés de $1 sont obligatoires.
+account_register	message_body	Merci de vous être enregistré sur le site $4. \nVous avez maintenant un compte du nom de $1. \nPour terminer votre inscription, suivez le lien : \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n (Si vous ne voyez rien ci-dessus, c'est probablement en raison d'un bogue de votre client de messagerie.\nUtilisez le lien ci-dessous en prenant garde qu'il soit entré sur une seule ligne)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nProfitez du site.\n\n-- L'équipe de $4\n
+account_register	message_header	$1 - Inscription
+account_register	partecipate_peer_ratings	Participer aux classements inter-utilisateurs. <i>(Vous permet de classer les autres développeurs en fonction de différents critères ainsi que d'être évalué par eux. Pour plus d'informations, consultez votre page utilisateur sur $1 si vous avez choisi de participer aux classements.)</i>
+account_register	password	Mot de passe (6 caractères minimum) :
+account_register	password2	Mot de passe (confirmez) :
 account_register	realname	Nom complet :
-account_register	register	S'enregistrer
-account_register	remember_me	Mémoriser la connection
-account_register	reset	Annuler les changements
-account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site<I> (Faible trafic et informations relatives à la sécurité. Fortement Recommandé.)</I>
+account_register	register	S'inscrire
+account_register	remember_me	"Mémoriser mon identité" <i>(Permet d'accéder à votre $1 page personnelle</a> sans être authentifié. Vous aurez toujours besoin de vous authentifier explicitement avant d'effectuer une modification.)</i>
+account_register	reset	Annuler les modifications
+account_register	resend_pending	[Renvoyer l'email de confirmation à un compte en attente]
+account_register	siteupdate	Recevoir du courrier électronique à propos des mises à jour du site <i>(Faible trafic et informations relatives à la sécurité. Fortement recommandé.)</i>
 account_register	timezone	Fuseau horaire :
-account_register	title	Enregistrement d'un nouvel utilisateur
+account_register	title	Nouvelle inscription
 account_register	update	Mise à jour
-account_shell	autorized_keys	Clés publiques CVS/SSH autorisées&nbsp;
-account_shell	edit_keys	Editer les clefs
-account_shell	shell_box	Interpréteur&nbsp;
-account_shell	title	Préférence Interpéteur
-account_unsubscribe	all_mailings	toutes les notifications et envois de courriers de $1
-account_unsubscribe	site_mailings	les messages de $1
-account_verify	accessdenied	Accés interdit
+account_shell	autorized_keys	Clés publiques CVS/SSH autorisées
+account_shell	edit_keys	Editer les clés
+account_shell	shell_box	Serveur shell
+account_shell	title	Informations relatives au compte shell
+account_unsubscribe	all_mailings	Toutes les notifications et envois de courriers de $1
+account_unsubscribe	site_mailings	Les messages de $1
+account_verify	accessdenied	Accès refusé
 account_verify	accountactive	Le compte est déjà activé.
 account_verify	cannotactivate	Impossible d'activer le compte
-account_verify	cannotconfirm	Ne peut confirmer l'identité du compte - clé de hâchage erronée ou login non valide
+account_verify	cannotconfirm	Ne peut confirmer l'identité du compte - clé de hâchage erronée ou nom du compte non valide
 account_verify	erroractivate	Erreur durant l'activation du compte
 account_verify	invalidcred	Les références que vous avez entré ne correspondent pas à un compte valide.
 account_verify	invalidop	Opération non valide
 account_verify	invalidparam	Paramètre non valide
 account_verify	invaliduser	Utilisateur non valide
-account_verify	login	Login
-account_verify	loginname	Nom de login :
+account_verify	login	Identification
+account_verify	loginname	Nom du compte :
 account_verify	missingparam	Paramètre manquant
 account_verify	nouser	L'utilisateur n'existe pas
 account_verify	password	Mot de passe :
-account_verify	title	Vérification de votre compte $1
+account_verify	title	$1 - Vérification de votre compte
 account_verify	usermandatory	Vous devez rentrer un nom d'utilisateur.
-account_verify	verify_blurb	<p>Pour terminer votre enregistrement, connectez-vous maintenant. Votre compte sera alors activé pour les connexions normales.</p>
+account_verify	verify_blurb	<p>Pour terminer votre inscription, identifiez-vous maintenant. Votre compte sera alors activé pour les identifications normales.</p>
 add_snippet	add_this_snippet_version_id	Ajouter cet identifiant de version d'échantillon 
 add_snippet	back_to_add_page	Retour à la page d'ajout
 add_snippet	error_doing_snippet_version_insert	ERREUR pendant l'insertion de version d'échantillon

@@ -1,3 +1,8 @@
+2003-11-24  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/languages/French.tab: Patch #604 from Guillaume Smet
+	<guillaume_ml@smet.org> fixing various strings.  Thanks!
+
 2003-11-20 Tom Copeland  <tom@infoether.com>
 
 	* www/project/admin/index.php
