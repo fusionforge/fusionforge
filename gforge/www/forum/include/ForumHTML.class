@@ -306,7 +306,7 @@ class ForumHTML extends Error {
 					$subject ='RE: '.$subject;
 				}
 			}
-
+			echo notepad_func();
 			?>
 			<div align="center">
 			<form action="/forum/forum.php?forum_id=<?php echo $this->Forum->getID(); ?>" method="post">

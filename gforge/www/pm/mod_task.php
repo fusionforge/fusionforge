@@ -24,6 +24,7 @@ $report=new Report();
 if ($report->isError()) {
 	exit_error('Error',$report->getErrorMessage());
 }
+echo notepad_func();
 
 pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'pm_modtask','group_project_id'=>$group_project_id));
 

@@ -40,29 +40,9 @@ require_once('html.php');
  * @param               int     cols
  */
 function notepad_button_raw($str, $form, $wrap, $rows, $cols) {
-        $notepad_php = '/notepad.php';
-        $notepad_url = $notepad_php . "?form=$form&wrap=$wrap&rows=$rows&cols=$cols";
-        $notepad_title = 'GForgeNotepad';
-        $notepad_height = 700;
-        $notepad_width = 580;
-        $notepad_winopt = 'scrollbars=yes,resizable=yes,toolbar=no,height='
-                        . $notepad_height . ',width=' . $notepad_width;
-        $js = 
-         '<script language="JavaScript" type="text/javascript">' 
-                 .'<!-- ' . "\n"
-         .'function notepad_window() {'
-         .'NotepadWin = window.open(\''
-         . $notepad_url
-         . '\', \''
-         . $notepad_title
-         . '\', \''
-         . $notepad_winopt . '\');'
-         . '}' . "\n"
-         . ' -->'
-         . '</script>';
-
-        $anchor = '<a href="javascript:notepad_window()">'. $str . '</a>';
-        return ($js . $anchor);
+       $anchor = '<a href="javascript:notepad_window_param(\''.$form.'\',\''.
+		 $wrap.'\',' . $rows . ',' . $cols . ')">'. $str . '</a>';
+       return $anchor;
 }
 
 function notepad_button($form) {
@@ -74,9 +54,25 @@ function notepad_anchor($str, $form) {
         return notepad_button_raw($str, $form, "SOFT", "45", "80");
 }
 
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
+function notepad_func() {
+      $js = "\n" .
+'<script language="JavaScript" type="text/javascript">'.
+"\n<!--\n".
+'function notepad_window_param(form, wrap, rows, cols) {'.
+'   notepad_php = "/notepad.php";'.
+'   notepad_url = notepad_php + "?form="+form + "&wrap=" + wrap +'.
+'                "&rows=" + rows + "&cols=" + cols;'.
+'     notepad_title = \'GForgeNotepad\';'.
+'     notepad_height = 700;'.
+'     notepad_width = 580;'.
+'     notepad_winopt = "scrollbars=yes,resizable=yes,toolbar=no,height="+'.
+'                       notepad_height + ",width=" +  notepad_width;'.
+'    NotepadWin = window.open(notepad_url, notepad_title,'.
+'                         notepad_winopt);'.
+'}'.
+"\n-->\n".
+"</script>\n";
+      return $js;
+}
 
 ?>

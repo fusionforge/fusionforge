@@ -13,6 +13,7 @@
 
 
 require_once('pre.php');
+require_once('note.php');
 require_once('www/news/news_utils.php');
 require_once('common/forum/Forum.class');
 
@@ -72,10 +73,11 @@ if (session_loggedin()) {
 	*/
 	news_header(array('title'=>'News','pagename'=>'news_submit','titlevals'=>array(group_getname($group_id))));
 
+	$jsfunc = notepad_func();
 	echo '
 		<p>
-		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS['sys_name']) .'</p>
-		<p>
+		'. $Language->getText('news_submit', 'post_blurb', $GLOBALS['sys_name']) .'</p>' . $jsfunc . 
+		'<p>
 		<form action="'.$PHP_SELF.'" method="post">
 		<input type="hidden" name="group_id" value="'.$group_id.'" />
 		<strong>'.$Language->getText('news_submit', 'forproject').': '. group_getname($group_id) .'</strong>
@@ -84,7 +86,7 @@ if (session_loggedin()) {
 		<strong>'.$Language->getText('news_submit', 'subject').':</strong>'.utils_requiredField().'<br />
 		<input type="text" name="summary" value="" size="30" maxlength="60" /></p>
 		<p>
-		<strong>'.$Language->getText('news_submit', 'details').':</strong>'.utils_requiredField().'<br />
+		<strong>'.$Language->getText('news_submit', 'details').':</strong>'.notepad_button('document.forms[1].details').utils_requiredField().'<br />
 		<textarea name="details" rows="5" cols="50" wrap="soft"></textarea><br />
 		<input type="submit" name="submit" value="'.$Language->getText('news_submit', 'submit').'" />
 		</form></p>';

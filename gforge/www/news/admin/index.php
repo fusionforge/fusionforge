@@ -13,6 +13,7 @@
 
 
 require_once('pre.php');
+require_once('note.php');
 require_once('news_admin_utils.php');
 require_once('www/news/news_utils.php');
 //common forum tools which are used during the creation/editing of news items
@@ -78,7 +79,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 		if (db_numrows($result) < 1) {
 			exit_error('Error','Error - none found');
 		}
-
+		echo notepad_func();
 		echo '
 		<h3>Approve a NewsByte For Project: '.group_getname($group_id).'</h3>
 		<p />
@@ -96,7 +97,7 @@ if ($group_id && $group_id != $sys_news_group && user_ismember($group_id,'A')) {
 
 		<strong>Subject:</strong><br />
 		<input type="text" name="summary" value="'.db_result($result,0,'summary').'" size="30" maxlength="60"><br />
-		<strong>Details:</strong><br />
+		<strong>Details:</strong>'.notepad_button('document.forms[1].details').'<br />
 		<textarea name="details" rows="5" cols="50">'.db_result($result,0,'details').'</textarea><p>
 		<strong>If this item is on the '.$GLOBALS['sys_name'].' home page and you edit it, it will be removed from the home page.</strong><br /></p>
 		<input type="submit" name="submit" value="SUBMIT">

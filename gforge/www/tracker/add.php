@@ -17,6 +17,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	/*
 		Show the free-form text submitted by the project admin
 	*/
+	echo notepad_func();
 	echo $ath->getSubmitInstructions();
 
 	echo '<p>

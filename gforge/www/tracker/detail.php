@@ -13,6 +13,8 @@
 
 echo $ath->header(array ('title'=>$Language->getText('tracker_detail','title').': '.$ah->getID(). ' '.util_unconvert_htmlspecialchars($ah->getSummary()),'pagename'=>'tracker_detail','atid'=>$ath->getID(),'sectionvals'=>array($ath->getName())));
 
+echo notepad_func();
+
 ?>
 	<h2>[ #<?php echo $ah->getID(); ?> ] <?php echo util_unconvert_htmlspecialchars($ah->getSummary()); ?></h2>
 

@@ -19,7 +19,7 @@
 require_once('note.php');
 
 pm_header(array('title'=>$Language->getText('pm_addtask','title'),'pagename'=>'pm_addtask','group_project_id'=>$group_project_id));
-
+echo notepad_func();
 ?>
 
 <form action="<?php echo "$PHP_SELF?group_id=$group_id&amp;group_project_id=$group_project_id"; ?>" method="post">

@@ -156,7 +156,7 @@ if (session_loggedin()) {
 	</td></tr>
 
 	<tr><td colspan="2">
-		<br /><strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
+		<br /><strong><?php echo $Language->getText('tracker_mod','attach_comment') ?>: <?php echo notepad_button('document.forms[1].details') ?> <a href="javascript:help_window('/help/tracker.php?helpname=comment')"><strong>(?)</strong></a></strong><br />
 		<textarea name="details" rows="7" cols="60" wrap="hard"></textarea></p>
 		<p>
 		<input type="submit" name="submit" value="<?php echo $Language->getText('general','submit') ?>"></p>
