@@ -1,3 +1,10 @@
+gforge (3.0-5+) unstable; urgency=low
+
+  * [Roland] Suppressed warning in gforge-common.postinst when the
+    sourceforge user does not exist.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 22 Aug 2003 12:42:13 +0200
+
 gforge (3.0-5) unstable; urgency=low
 
   * [Roland] Changed proftpd configuration file to comply with current

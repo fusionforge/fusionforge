@@ -28,8 +28,10 @@ set -e
 case "$1" in
     configure)
 	adduser --system --group --home /var/www/gforge gforge > /dev/null 2>&1
-	[ ! -f /var/lib/gforge/reowned ] && find /var/lib/gforge/ -user sourceforge -exec chown gforge {} \; && find /var/lib/gforge/ -group sourceforge -exec chgrp gforge {} \; && touch /var/lib/gforge/reowned
-	
+	if getent passwd sourceforge > /dev/null 2>&1 ; then
+	    [ ! -f /var/lib/gforge/reowned ] && find /var/lib/gforge/ -user sourceforge -exec chown gforge {} \; && find /var/lib/gforge/ -group sourceforge -exec chgrp gforge {} \; && touch /var/lib/gforge/reowned
+	fi
+
 	/usr/sbin/gforge-config
     ;;
 
