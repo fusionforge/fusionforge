@@ -84,7 +84,9 @@ function pm_header($params) {
 		$labels[] = $Language->getText('pm_include_grouphtml','admin');
 		$links[]  = '/pm/admin/?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;update_pg=1';
 	}
-	echo ($HTML->subMenu($labels,$links));
+	if(!empty($labels)) {
+		echo ($HTML->subMenu($labels,$links));
+	}
 
 }
 
