@@ -92,6 +92,8 @@ following:
    Foobaric.tab);
 2. Copy and paste the appropriate line (including the "handle" -- the
    first two fields) in /etc/sourceforge/languages-local/Foobaric.tab;
+   or /etc/sourceforge/languages-local/<theme_name>/Foobaric.tab 
+   (For this last one the modification will only apply on a given theme)
 3. Read it to find out about the $n variables;
 4. Replace the third field with my own customised version.
 
