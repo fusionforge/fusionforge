@@ -343,8 +343,7 @@ if ($project->enableAnonSCM()){
 			$group->SetUsesPserver(false);
  		}
 ////		if ($params['scmradio'] == 'scmcvs') {
-//// THIS IS NOT THE PLACE FOR THIS //////// TODO
-			$group->setPluginUse("scmcvs", 1) ;
+////			$group->setPluginUse("scmcvs", 1) ;
 ////			
 ////		} else {
 ////			$group->setPluginUse("scmcvs", 0) ;
