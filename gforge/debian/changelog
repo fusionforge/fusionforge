@@ -1,3 +1,11 @@
+gforge (DEAD) experimental; urgency=low
+
+  * [Roland] This CVS branch has been merged into the main development
+    trunk.  Please do not continue developing (and committing) on that
+    branch.
+
+ -- Roland Mas <lolando@debian.org>  Sat, 14 Dec 2002 20:19:03 +0100
+
 gforge (3.0-0+7+) experimental; urgency=low
 
   * [Christian] Reintroduce the possibility to define default home page in
