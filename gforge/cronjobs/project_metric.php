@@ -18,13 +18,13 @@ db_drop_table_if_exists ("project_metric_tmp");
 db_drop_table_if_exists ("project_metric_tmp1");
 
 //#create a table to put the aggregates in
-$sql="CREATE TABLE project_counts_tmp (group_id int,type text,count float(8,5))";
+$sql="CREATE TABLE project_counts_tmp (group_id int,type text,count float(8))";
 $rel = db_query($sql);
 
 
 //#forum messages
 $sql="INSERT INTO project_counts_tmp 
-SELECT forum_group_list.group_id,'forum',log(3*count(forum.msg_id)) AS count 
+SELECT forum_group_list.group_id,'forum',log(3.0*count(forum.msg_id)) AS count 
 FROM forum,forum_group_list 
 WHERE forum.group_forum_id=forum_group_list.group_forum_id 
 GROUP BY group_id";
@@ -36,7 +36,7 @@ $rel = db_query($sql);
 
 //#project manager tasks
 $sql="INSERT INTO project_counts_tmp 
-SELECT project_group_list.group_id,'tasks',log(4*count(project_task.project_task_id)) AS count 
+SELECT project_group_list.group_id,'tasks',log(4.0*count(project_task.project_task_id)) AS count 
 FROM project_task,project_group_list 
 WHERE project_task.group_project_id=project_group_list.group_project_id 
 GROUP BY group_id";
@@ -49,7 +49,7 @@ $rel = db_query($sql);
 
 //#bugs
 $sql="INSERT INTO project_counts_tmp 
-SELECT group_id,'bugs',log(3*count(*)) AS count 
+SELECT group_id,'bugs',log(3.0*count(*)) AS count 
 FROM bug 
 GROUP BY group_id";
 
@@ -60,7 +60,7 @@ $rel = db_query($sql);
 
 //#patches
 $sql="INSERT INTO project_counts_tmp 
-SELECT group_id,'patches',log(10*count(*)) AS count 
+SELECT group_id,'patches',log(10.0*count(*)) AS count 
 FROM patch 
 GROUP BY group_id";
 
@@ -72,7 +72,7 @@ $rel = db_query($sql);
 
 //#support
 $sql="INSERT INTO project_counts_tmp 
-SELECT group_id,'support',log(5*count(*)) AS count 
+SELECT group_id,'support',log(5.0*count(*)) AS count 
 FROM support 
 GROUP BY group_id";
 
@@ -84,7 +84,7 @@ $rel = db_query($sql);
 
 //#cvs commits
 $sql="INSERT INTO project_counts_tmp 
-SELECT group_id,'cvs',log(sum(cvs_commits)) AS count 
+SELECT group_id,'cvs',log(1.0*sum(1.0*cvs_commits)) AS count 
 FROM group_cvs_history 
 GROUP BY group_id";
 
@@ -95,14 +95,14 @@ $rel = db_query($sql);
 
 //#developers
 $sql="INSERT INTO project_counts_tmp 
-SELECT group_id,'developers',log(5*count(*)) AS count FROM user_group GROUP BY group_id";
+SELECT group_id,'developers',log(5.0*count(*)) AS count FROM user_group GROUP BY group_id";
 $rel = db_query($sql);
 
 
 /*
 //#file releases
 $sql="INSERT INTO project_counts_tmp 
-select group_id,'filereleases',log(5*count(*)) 
+select group_id,'filereleases',log(5.0*count(*)) 
 FROM filerelease 
 GROUP BY group_id";
 
@@ -111,7 +111,7 @@ GROUP BY group_id";
 $rel = db_query($sql);
 */
 
-
+/*
 //#file downloads
 $sql="INSERT INTO project_counts_tmp 
 SELECT group_id,'downloads',log(.3*sum(downloads)) 
@@ -121,13 +121,13 @@ GROUP BY group_id";
 //#print "\n\n".$sql;
 
 $rel = db_query($sql);
-
+*/
 
 
 //#create a new table to insert the final records into
 $sql="CREATE TABLE project_metric_tmp1 (ranking int not null primary key auto_increment,
 group_id int not null,
-value float (8,5))";
+value float (8))";
 $rel = db_query($sql);
 
 
@@ -154,7 +154,7 @@ $counts = db_result($rel,0,0);
 
 //#create a new table to insert the final records into
 $sql="CREATE TABLE project_metric_tmp (ranking int not null primary key auto_increment,
-percentile float(8,2), group_id int not null)";
+percentile float(8), group_id int not null)";
 $rel = db_query($sql);
 
 

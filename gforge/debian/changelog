@@ -1,6 +1,7 @@
 sourceforge (2.5-23+) unstable; urgency=low
 
-  * nothing yet 
+  * [Roland] Fixed a few errors (SQL syntax, queries on nonexistant
+    tables) in project_metric.php.
 
  -- Christian Bayle <bayle@aist.enst.fr>  Fri,  1 Feb 2002 23:45:56 +0100
 
