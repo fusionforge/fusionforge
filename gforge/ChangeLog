@@ -7,6 +7,7 @@
 2005-02-20  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* polished the RPM packaging for 4.1 release
+	* cleant the gateway email generation and added $sys_use_gateways
 
 2005-02-19  Guillaume Smet <guillaume-gforge@smet.org>
 
