@@ -1,3 +1,8 @@
+2003-07-11 Tom Copeland  <tom@infoether.com>
+
+	* www/themes/gforge/images/:
+	Patch [ #434 ] Gforge theme Spanish images; thx to Vicente Ruiz
+
 2003-07-10 Tom Copeland  <tom@infoether.com>
 
 	* www/stats/site_stats_utils.php, projects.php, graphs.php:
