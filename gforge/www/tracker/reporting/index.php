@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   index.php,v 1.7 2003/02/03 09:31:03 rspisser Exp
+  * @version   index.php,v 1.8 2003/11/04 20:30:49 lo-lan-do Exp
   *
   */
 
@@ -58,10 +58,11 @@ function quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2) {
 	global $bar_colors;
 	global $Language;
 
-	$group_name=array(group_getname($group_id));
-	echo site_project_header(array("title"=>$title,'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
-	reporting_header($group_id);
-	echo "\n<h1>$title</h1>";
+        $group_name=array(group_getname($group_id));
+       echo site_project_header(array("title"=>$title,'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name,
+           'toptab'=>'pm'));
+        reporting_header($group_id);
+        echo "\n<h1>$title</h1>";
 
 	reports_quick_graph($subtitle1,$sql1,$sql2,$bar_colors);
 
@@ -72,17 +73,21 @@ function quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2) {
 if ($perm->isMember()) {
 
 	include_once('www/include/HTML_Graphs.php');
-
+	
 	if ($what) {
-
+		
 		$period_clause=period2sql($period,$span,"open_date");
-
+		
 		if ($what=="aging") {
-
-			$group_name=array(group_getname($group_id));
-			site_project_header(array ("title"=>$Language->getText('tracker_reporting','aging_report'),'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
-			reporting_header($group_id);
-			echo "\n<h1>".$Language->getText('tracker_reporting','aging_report')."</h1>";
+			
+                        $group_name=array(group_getname($group_id));
+                       site_project_header(array ("title"=>$Language->getText(
+                           'tracker_reporting','aging_report'),
+                           'group'=>$group_id,
+                           'pagename'=>'tracker_reporting',
+                           'sectionvals'=>$group_name, 'toptab'=>'pm'));
+                        reporting_header($group_id);
+                        echo "\n<h1>".$Language->getText('tracker_reporting','aging_report')."</h1>";
 
 			$time_now=time();
 //			echo $time_now."<p>";
@@ -321,4 +326,9 @@ if ($perm->isMember()) {
 	exit_permission_denied();
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 ?>
