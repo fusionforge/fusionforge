@@ -1,3 +1,13 @@
+2005-02-17  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* project admin is now Admin and Technician in tracker and pm by default
+	* fixed [#1067] typo in tracker reporting
+	* updated the AUTHORS file for the next release
+	* applied [#1040] stop email notification for new release of package
+	by Florent Guilleux
+	* applied [#1041] Traditional chinese Chinese.tab about GForge 4.0.2
+	by Jimou Lee
+
 2005-02-17  Tim Perdue <tim@gforge.org>
 
 	* [#1043] Tracker / SOAP  Patch to get list of artifacts working.
@@ -39,6 +49,26 @@
 	* Full text indexing is now an option for searches. Rather than using 
 	the exact-match regex functions, we now use tsearch2 functions
 
+2005-01-28  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* removed duplicate lines from db-upgrade.pl
+	* fixed default values for RPM packaging
+	* fixed the syncmail call
+	* members of a project should have access to the CVS browser
+	* it's far better to have /cvsroot as the root of cvsweb (currently
+	it's the / of the chroot)
+	* trying to fix remaining issues on update in RPM packaging
+	* fixed localization and xhtml in request.php
+	* updated french translation
+	* we should not display a search engine if the feature is disabled
+
+2005-01-27  Thales Information Systems <guillaume.smet@openwide.fr>
+
+	* fixed bugs in the RPM packaging
+	* it is now possible to add custom stuff (index_std.php) for example in the RPM
+	* fixed the default order in docman
+	* scmcvs: fixed a typo in mbstring extension name
+
 2005-01-27  Tim Perdue <tim@gforge.org>
 
 	* FRS file reorganization - files are stored in /group_name/package_name/release_name/
@@ -73,6 +103,37 @@
 
 	* added link and page to allow a person to request membership in a project
 	* added logic to project admin page to approve/reject requests
+
+2004-12-30  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* added Allow from all in vhost config of the RPM packaging
+	
+2004-12-29  Guillaume Smet <guillaume-gforge@smet.org>
+	
+	* added the magic_quotes_gpc On as the default value for FC3 is now Off
+
+2004-12-27  Guillaume Smet <guillaume-gforge@smet.org>
+	
+	* no column status_id for artifact_status (s/status_id/id)
+	* fixed references again in Group.class (no reference at call time please)
+	* fixed $sys_user_reg_restricted commit
+	
+2004-12-25  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* it's now possible to add specific language files in the RPM
+	* ldapextauth: returns an error if the dn is empty (useful if we have to look for
+	the dn in the ldap directory)
+	* ldapextauth: made the default mapping more standart
+	
+2004-12-15  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* removed dos newlines
+	
+2004-12-13  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* added a plugin hook for search engines
+	* added plugin_hook_by_reference (we cannot pass false by reference for example
+	so I had to add a new function)
 
 2004-12-12  Guillaume Smet <guillaume-gforge@smet.org>
 
