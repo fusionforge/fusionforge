@@ -916,7 +916,7 @@ home	none_found	None Found
 home	registered_users	Registered Users
 home	sfos	$1 OnSite
 home	top_project_downloads	Top Project Downloads
-home	recently_registered	Recentely Registered Projects
+home	recently_registered	Recently Registered Projects
 include_html	no_change	No Change
 include_html	none	None
 include_html	priority_highest	Highest
@@ -1526,6 +1526,10 @@ project_admin_qrs	required_processor_type	Must select a processor type.
 project_admin_qrs	required_release_name	Must define a release name. 
 project_admin_qrs	title	Quick Release System
 project_admin_qrs	upload_new_file	Upload a new file
+project_admin_qrs       exceed_file_size        The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file.
+project_admin_qrs       partial_file    The uploaded file was only partially uploaded.
+project_admin_qrs       unknown_file_error      Unknow file uplaod error.
+project_admin_qrs       maximum_file_size       Maximum upload file size:
 project_admin_rmuser	cancel	Cancel
 project_admin_rmuser	cannot_remove_admin	You cannot remove $1 admin
 project_admin_rmuser	info	<h3>Removing Developer from $1</h3><p>You are about to remove developer from the $1. Please confirm your action:</p>
