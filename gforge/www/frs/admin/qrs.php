@@ -110,7 +110,7 @@ if( $submit ) {
 						?>
 						<p>
 						<?php echo $Language->getText('project_admin_qrs','qrs_info',
-							array('<a href="/project/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id.' "><strong>',
+							array('<a href="/frs/admin/editrelease.php?release_id='.$frsr->getID().'&amp;group_id='.$group_id.'&amp;package_id='.$package_id.' "><strong>',
 							'</strong></a>',
 							'<a href="/frs/?group_id='.$group_id.'">','</a>')) ?>
 						<?php
