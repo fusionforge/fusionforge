@@ -192,7 +192,7 @@ function login($userid, $passwd) {
 	$res = session_login_valid($userid, $passwd);
 	
 	if (!$res) {
-    		return new soapval('tns:soapVal','string',"Couldn't log in: ".$feedback);
+		return new soap_fault('1001', 'user', "Unable to log in with userid of ".$userid." and password of ".$passwd, 'No Detail');
  	}
 	
     	return new soapval('tns:soapVal','string',$session_ser);

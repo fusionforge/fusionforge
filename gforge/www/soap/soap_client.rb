@@ -3,8 +3,7 @@ require 'soap/driver'
 
 soapClient = SOAP::Driver.new( Devel::Logger.new(STDERR) , nil, 'GForgeAPI', 'http://shire/soap/SoapAPI.php' )
 soapClient = SOAP::Driver.new( nil , nil, 'GForgeAPI', 'http://shire/soap/SoapAPI.php' )
-soapClient.setWireDumpDev(STDERR)
-
+#soapClient.setWireDumpDev(STDERR)
 
 # set up session control operations
 soapClient.addMethod( 'login', 'userid', 'passwd')
