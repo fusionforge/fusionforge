@@ -57,6 +57,8 @@ computedefault(){
 	DEFAULTsys_theme=gforge
 	DEFAULTsys_default_theme_id=1
 	DEFAULTsys_lang=English
+	DEFAULTsys_default_timezone=GMT
+	DEFAULTsys_default_country_code=US
 	DEFAULTsys_use_ldap=0
 	DEFAULTsys_use_jabber=0
 	DEFAULTsys_use_auth_ldap=1

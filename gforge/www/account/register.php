@@ -51,8 +51,11 @@ $HTML->header(array('title'=>'Gforge: Register','pagename'=>'account_register'))
 if ($feedback) {
 	print "<p><FONT color=#FF0000>$feedback $register_error</FONT>";
 } 
-if ($timezone == ''){
-	$timezone='GMT';
+if (!isset($timezone) || empty($timezone)) {
+	$timezone = (isset($sys_default_timezone) ? $sys_default_timezone : 'GMT');
+}
+if (!isset($ccode) || empty($ccode)) {
+	$ccode = $sys_default_country_code;
 }
 ?>
 

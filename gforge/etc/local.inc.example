@@ -208,6 +208,8 @@ $sys_themeroot=$sys_urlroot."themes/";
 $sys_theme='gforge';
 $sys_default_theme_id=1;
 $sys_lang='English';
+$sys_default_timezone='GMT';
+$sys_default_country_code='US';
 
 // Akamization of images
 //	example: http://images.gforge.company.com

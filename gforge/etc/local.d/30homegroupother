@@ -48,6 +48,8 @@ $sys_themeroot=$sys_urlroot."themes/";
 $sys_theme='{sys_theme}';
 $sys_default_theme_id={sys_default_theme_id};
 $sys_lang='{sys_lang}';
+$sys_default_timezone='{sys_default_timezone}';
+$sys_default_country_code='{sys_default_country_code}';
 
 // Akamization of images
 //	example: http://images.gforge.company.com
