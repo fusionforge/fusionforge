@@ -138,8 +138,7 @@ class FRSFile extends Error {
 		system("/bin/mkdir $newfilelocation");
 		system("/bin/mv $file_location $newfilelocation$name");
 		if (!file_exists("$newfilelocation$name")) {
-			echo $newfilelocation.$name;
-			$this->setError($Language->getText('frs_file','error_cannot_move'));
+			$this->setError($Language->getText('frs_file','error_cannot_move').':'.$newfilelocation.$name);
 			return false;
 		}
 
