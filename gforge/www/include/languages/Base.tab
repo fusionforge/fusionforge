@@ -84,12 +84,15 @@ account_register	err_userexist	That username already exists.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
 account_register	err_badinsert	Insert Failed 
 account_register	message_header	$1 Account Registration
+account_register	partecipate_peer_ratings	Participate in peer ratings. <I>(Allows you to rate other users using several criteria as well as to be rated by others. More information is available on your $1 user page </a> if you have chosen to partecipate in ratings).
+account_register	remember_me	"Remember me". <I>(Allows to access your $1 personal page</a> without being logged in. You will still need to login explicitly before making any changes.)</I>
 account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
+account_register	update	Update
+account_register	reset	Reset Changes
 account_unsubscribe	all_mailings	all GForge mailings and notifications
 account_unsubscribe	site_mailings	GForge site mailings
 account_verify	title	GForge Account Verification
 account_verify	verify_blurb	<p>In order to complete your registration, login now. Your account will then be activated for normal logins.</p>
-account_verify	loginname	Login Name:
 account_verify	password	Password:
 account_verify	login		Login
 account_verify	missingparam	Missing paramater
@@ -104,6 +107,19 @@ account_verify	accessdenied	Access denied
 account_verify	invalidcred	Credentials you entered do not correspond to valid account.
 account_verify	cannotactivate	Could not activate account
 account_verify	erroractivate	Error while activiting account
+account_options	title		Account Maintenance
+account_options	welcome		Welcome
+account_options	member_since	Member since
+account_options	view_developer_profile	View My Developer Profile
+account_options	edit_skills_profile	Edit My Skills Profile
+account_options	user_id	User Id
+account_options	login_name	Login Name
+account_options	change_password	Change Password
+account_options	real_name	Real Name
+account_options	language	Language
+account_options	timezone	Timezone
+account_options	email_address		Email Addr:
+account_options	change_email_address	Change Email Addr
 conf	content_encoding	iso-8859-1
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	en
@@ -334,8 +350,18 @@ my	monitoredforum	Monitored Forums
 my	monitoredfile	Monitored FileModules
 my	tasks	My Tasks
 my	survey	Quick Survey
+my	survey_taken	You have taken your Developer Survey
 my	bookmarks	My Bookmarks
 my	projects	My Projects
+my	pending_projects	Pending Projects
+my	pending_projects_1	There is one pending project awaiting review
+my	pending_projects_2	There are $1 pending projects awaiting review.
+my	pending_projects_3	Click here.
+my	pending_news_bytes	Pending News Bytes
+my	pending_news_bytes_1	There is one pending project awaiting review
+my	pending_news_bytes_2	There are $1 news bytes awaiting review
+my	pending_news_bytes_3	Click here.
+
 my_bookmark_add	section	My Personal Page
 my_bookmark_add	title	Add Bookmark
 my_bookmark_delete	section	My Personal Page
@@ -481,6 +507,7 @@ snippet_submit	title	Submit Snippet
 softwaremap	title	Trove
 staff	about_blurb	<P><h2>GForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">GForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for GForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on GForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the GForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for GForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the GForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 survey	title	Surveys For $1
+survey 	survey_not_found	Survey not found
 survey_admin	section	Survey Tool
 survey_admin	title	Administration
 survey_admin_add_question	section	Survey Tool Administration
@@ -579,3 +606,4 @@ common_include_account	illegal	Illegal character in name.
 common_include_account	cvsreserved	Name is reserved for CVS.
 common_include_account	dnsreserved	Name is reserved for DNS purposes.
 common_include_account	nounderscore	Group name cannot contain underscore for DNS reasons.
+survey title Developer Survey

@@ -38,11 +38,11 @@ if (session_loggedin() || $sf_user_hash) {
 		$G_SESSION=user_get_object($user_id,$result);
 	}
 
-	echo site_user_header(array('title'=>'My Personal Page','pagename'=>'my','titlevals'=>array(user_getname())));
+	echo site_user_header(array('title'=>$Language->getText('my','title',user_getname()),'pagename'=>'my','titlevals'=>array(user_getname())));
 	?>
 
 	<P>
-    <? echo $Language->getText('my', 'about_blurb'); ?>
+    <?php echo $Language->getText('my', 'about_blurb'); ?>
 	<P>
 	<TABLE width="100%" border="0">
 	<TR><TD VALIGN="TOP" WIDTH="50%">
@@ -207,7 +207,7 @@ if (session_loggedin() || $sf_user_hash) {
 			echo '
 			<TR '. $HTML->boxGetAltRowStyle($i) .'><TD ALIGN="MIDDLE"><A HREF="/project/filemodule_monitor.php?filemodule_id='.
 			db_result($result,$i,'filemodule_id').
-			'&group_id='.db_result($result,$i,'group_id').'&stop=1"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
+			'"><IMG SRC="/images/ic/trash.png" HEIGHT="16" WIDTH="16" '.
 			'BORDER=0"></A></TD><TD WIDTH="99%"><A HREF="/project/showfiles.php?group_id='.
 			db_result($result,$i,'group_id').'">'.
 			db_result($result,$i,'name').'</A></TD></TR>';
@@ -293,7 +293,7 @@ if (session_loggedin() || $sf_user_hash) {
 		show_survey(1,1);
 	} else {
 		echo '
-		<TR><TD COLSPAN="2"><B>You have taken your developer survey</B></TD></TR>';
+		<TR><TD COLSPAN="2"><b>s'.$Language->getText('my','survey_taken').'</b></TD></TR>';
 	}
 
 	/*
@@ -307,12 +307,23 @@ if (session_loggedin() || $sf_user_hash) {
                 $result=db_query($sql);
                 $rows=db_numrows($result);
                 if ($rows) {
-                        echo $HTML->boxMiddle('Pending Projects', false, false);
-                        echo "<TR><TD COLSPAN=\"2\">There ";
-                        echo (($rows!=1)?"are ": "is "). "$rows project";
+                        echo $HTML->boxMiddle($Language->getText('my','pending_projects'), false, false);
+		       
+                        echo "<TR><TD COLSPAN=\"2\">";
+
+			if ($rows==1){
+			  echo $Language->getText('my','pending_projects_1');
+			}
+			else{
+			  echo $Language->getText('my','pending_projects_2',$rows);		
+			}
+			
+			/*    echo (($rows!=1)?"are ": "is "). "$rows project";
                         echo (($rows!=1)?"s":"");
-                        echo " awaiting <a href=\"/admin/approve-pending.php\">";
-                        echo "review</a>.</td></tr>";
+			*/
+                        echo " <a href=\"/admin/approve-pending.php\">";
+			echo $Language->getText('my','pending_projects_3');
+                        echo "</a>.</td></tr>";
                 }
 	}
 	$newsgroup = group_get_object ($GLOBALS['sys_news_group']) ;
@@ -323,12 +334,24 @@ if (session_loggedin() || $sf_user_hash) {
                 $result=db_query($sql);
                 $rows=db_numrows($result);
                 if ($rows) {
-                        echo $HTML->boxMiddle('Pending News Bytes', false, false);
-                        echo "<TR><TD COLSPAN=\"2\">There ";
-                        echo (($rows!=1)?"are ": "is "). "$rows news byte";
-                        echo (($rows!=1)?"s":"");
-                        echo " awaiting <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
-			echo "review</a>.</td></tr>";
+                        echo $HTML->boxMiddle($Language->getText('my','pending_news_bytes'), false, false);
+
+
+			if ($rows==1){
+			  echo $Language->getText('my','pending_news_bytes_1');
+			}
+			else{
+			  echo $Language->getText('my','pending_news_bytes_2',$rows);		
+			}
+			
+	
+			echo " <a href=\"/news/admin/?group_id=".$GLOBALS['sys_news_group']."\">";
+
+			echo $Language->getText('my','pending_news_bytes_3');
+                        echo "</a>.</td></tr>";
+
+
+                       
 		}
 	}		
 	/*
