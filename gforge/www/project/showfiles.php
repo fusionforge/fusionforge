@@ -46,23 +46,30 @@ $title_arr[] = 'Size';
 $title_arr[] = 'D/L';
 $title_arr[] = 'Arch.';
 $title_arr[] = 'Type';
-$title_arr[] = 'Date';
 
    // get unix group name for path
 $group_unix_name=group_getunixname($group_id);
 
-   // print the header row
-//echo $GLOBALS[HTML]->listTableTop($title_arr) . "\n";
-function col_heading($title)
-{
-  global $HTML;
-  return '<FONT COLOR="'.
-	$HTML->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title.'</B></FONT>';
-}
-
 global $HTML;
 echo '
-<table width="100%" border="0" cellspacing="1" cellpadding="1">
+<table width="100%" border="0" cellspacing="1" cellpadding="1">';
+$cell_data=array();
+$cell_data[] = array('Package','rowspan=2');
+$cell_data[] = array('Release<BR>&amp; Notes','rowspan=2');
+$cell_data[] = array('Filename','rowspan=2');
+$cell_data[] = array('Date','colspan=4');
+
+echo $GLOBALS[HTML]->multiTableRow('', $cell_data, TRUE);
+
+$cell_data=array();
+$cell_data[] = array('Size');
+$cell_data[] = array('D/L');
+$cell_data[] = array('Arch');
+$cell_data[] = array('Type');
+
+echo $GLOBALS[HTML]->multiTableRow("",$cell_data, TRUE);
+
+/*
 <tr align="middle" BGCOLOR="'. $HTML->COLOR_HTMLBOX_TITLE .'">'.
 '<td rowspan="2">'.col_heading('Package').'</td>'.
 '<td rowspan="2">'.col_heading('Release<BR>&amp; Notes').'</td>'.
@@ -76,12 +83,13 @@ echo '
 '<td>'.col_heading('Type').'</td>'.
 '</tr>
 ';
-
+*/
 $proj_stats['packages'] = $num_packages;
 
    // Iterate and show the packages
 for ( $p = 0; $p < $num_packages; $p++ ) {
 	$cur_style = $GLOBALS['HTML']->boxGetAltRowStyle($p);
+	
 	print '<TR '.$cur_style.'><TD colspan="3"><H3>'.db_result($res_package,$p,'name').'
 	<A HREF="/project/filemodule_monitor.php?filemodule_id='. db_result($res_package,$p,'package_id') .'&group_id='.db_result($res_package,$p,'group_id').'&start=1">'.
 		html_image('ic/mail16w.png','20','20',array('alt'=>'Monitor This Package')) .
@@ -100,6 +108,9 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 	} else {
 		   // iterate and show the releases of the package
 		for ( $r = 0; $r < $num_releases; $r++ ) {
+		
+			$cell_data=array();
+			
 			$package_release = db_fetch_array( $res_release );
 
 		    	// Highlight the release if one was chosen
@@ -108,11 +119,15 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 		      	} else {
 		      		$bgstyle = $cur_style;
 		      	}
-			print "\t" . '<TR '. $bgstyle .'><TD colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;<B>'
-				. '<A HREF="shownotes.php?release_id='.$package_release['release_id'].'">'
-				. $package_release['name'] .'</A></B></TD><TD COLSPAN="4" align="middle">'
-				. '<b>'.date( 'Y-m-d H:i'/*$sys_datefmt*/, $package_release['release_date'] ) .'</b></TD></TR>'."\n";
+		    $cell_data[] = array('&nbsp;<B>
+				<A HREF="shownotes.php?release_id='.$package_release['release_id'].'">'.$package_release['name'] .'</A></B>',
+				"colspan=3");
 
+		    $cell_data[] = array('&nbsp;<B>
+				'.date( 'Y-m-d H:i'/*$sys_datefmt*/, $package_release['release_date'] ) .'</b>',
+				'colspan=4 align="middle"');
+		    
+		    print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
 			   // get the files in this release....
 			$sql = "SELECT frs_file.filename AS filename,"
 				. "frs_file.file_size AS file_size,"
@@ -138,17 +153,22 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 				   // now iterate and show the files in this release....
 				for ( $f = 0; $f < $num_files; $f++ ) {
 					$file_release = db_fetch_array( $res_file );
-					print "\t\t" . '<TR ' . $bgstyle .'>'
-						. '<TD colspan=3><dd>'
-						. '<A HREF="/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
-						. $file_release['filename'] .'</A></TD>'
-						. '<TD align="right">'. $file_release['file_size'] .' </TD>'
-						. '<TD align="right">'. ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0') .' </TD>'
-						. '<TD>'. $file_release['processor'] .'</TD>'
-						. '<TD>'. $file_release['type'] .'</TD>'
-						//. '<TD>'. /*date( 'Y-m-d H:i', $file_release['release_time'] ) .*/'&nbsp;</TD>'
-						. '</TR>' . "\n";
-
+					
+					$cell_data=array();
+					
+					$cell_data[] = array('<dd>
+						<A HREF="/download.php/'.$file_release['file_id'].'/'.$file_release['filename'].'">'
+						. $file_release['filename'] .'</A>',
+						'colspan=3');
+						
+					$cell_data[] = array($file_release['file_size'],'align="right"');
+					$cell_data[] = array( ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0'),
+						'align="right"');
+					$cell_data[] = array($file_release['processor']);
+					$cell_data[] = array($file_release['type']);
+					
+					print $GLOBALS[HTML]->multiTableRow($bgstyle, $cell_data, FALSE);
+							
 					$proj_stats['size'] += $file_release['file_size'];
 					$proj_stats['downloads'] += $file_release['downloads'];
 				}	
