@@ -694,10 +694,10 @@ $s = ((session_issecure()) ? 's' : '' );
 			print ' - '.$extra_text;
 		}
 
-		print '</H2>
+		print '</H2>';
 */
 
-		<P>
+		print '<P>
 		<HR SIZE="1" NoShade>';
 
 		// Summary
