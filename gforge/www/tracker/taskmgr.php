@@ -42,7 +42,7 @@ if ($add_to_task) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
 
-	
+
 	$ptf = new ProjectTaskFactory($pg);
 	if (!$ptf || !is_object($ptf)) {
 		exit_error('Error','Could Not Get ProjectTaskFactory');
@@ -78,7 +78,7 @@ if ($add_to_task) {
 		echo '<option value="'.$pt_arr[$i]->getID().'">'.$pt_arr[$i]->getSummary().'</option>';
 	}
 	echo '</select><br />
-		<input type="submit" name="done_adding" value="'.$Language->getText('tracker_taskmgr','add_relationship')'">
+		<input type="submit" name="done_adding" value="'.$Language->getText('tracker_taskmgr','add_relationship') . '">
 		</form>';
 
 //
