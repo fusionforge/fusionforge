@@ -1,33 +1,6 @@
 diff -u gforge/deb-specific/db-upgrade.pl gforge-rpm/deb-specific/db-upgrade.pl
 --- gforge/deb-specific/db-upgrade.pl	2005-02-13 03:45:59.000000000 +0100
 +++ gforge-rpm/deb-specific/db-upgrade.pl	2005-02-20 16:34:35.001940285 +0100
-@@ -1590,7 +1590,7 @@
-     $target = "3.3.0-2+1" ;
-     if (&is_lesser ($version, $target)) {
-         &debug ("Upgrading with migrateforum.php") ;
--	system("/usr/lib/gforge/db/20040826_migrateforum.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0 
-+	system("php -q -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migrateforum.php") == 0 
- 	or die "system call of 20040826_migrateforum.php failed: $?" ;
-         &update_db_version ($target) ;
-         &debug ("Committing.") ;
-@@ -1601,7 +1601,7 @@
-     $target = "3.3.0-2+2" ;
-     if (&is_lesser ($version, $target)) {
-         &debug ("Upgrading with migraterbac.php") ;
--	system("/usr/lib/gforge/db/20040826_migraterbac.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0
-+	system("php -q -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20040826_migraterbac.php") == 0
- 	or die "system call of 20040826_migraterbac.php failed: $?" ;
-         &update_db_version ($target) ;
-         &debug ("Committing.") ;
-@@ -1873,7 +1873,7 @@
-     $target = "4.0.2-0+1" ;
-     if (&is_lesser ($version, $target)) {
-         &debug ("Upgrading with 20041211-syncmail.php") ;
--	system("/usr/lib/gforge/db/20041211-syncmail.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0 
-+	system("php -q -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include /usr/lib/gforge/db/20041211-syncmail.php") == 0 
- 	or die "system call of 20041211-syncmail.php failed: $?" ;
-         &update_db_version ($target) ;
-         &debug ("Committing.") ;
 @@ -1991,7 +1991,7 @@
  $dbh->disconnect ;
  
