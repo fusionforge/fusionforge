@@ -22,8 +22,9 @@ require_once('pre.php');
 if ($group_id) {
 
 	if (!$language_id) {
-			if (!($language_id = user_get_language())) {
-			// default to English
+		if (user_isloggedin()) {
+			$language_id = $LUSER->getLanguage();
+		} else {
 			$language_id = 1;
 		}
 	}
@@ -33,7 +34,7 @@ if ($group_id) {
 	//get a list of group numbers that this project owns
 	$query = "select * "
 		."from doc_groups "
-		."where group_id = $group_id "
+		."where group_id = '$group_id' "
 		."order by groupname";
 	$result = db_query($query); 
 
@@ -48,8 +49,8 @@ if ($group_id) {
 			$query = "select description, docid, title, doc_group "
 				."from doc_data "
 				."where doc_group = '".$row['doc_group']."' "
-				."and stateid ='1' "
-				."and language_id = ".$language_id."";
+				."and stateid='1' "
+				."and language_id='$language_id'";
 				
 				//state 1 == 'active'
 				if ($usermem == true) {

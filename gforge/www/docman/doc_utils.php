@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   $Id: doc_utils.php,v 1.70 2001/05/22 19:19:51 pfalcon Exp $
+  * @version   $Id: doc_utils.php,v 1.72 2001/07/11 00:51:18 dbellizzi Exp $
   *
   */
 
@@ -24,7 +24,7 @@ function display_groups_option($group_id=false,$checkedval='xzxz') {
 	} else {
 		$query = "select doc_group, groupname "
 		."from doc_groups "
-		."where group_id = $group_id "
+		."where group_id = '$group_id' "
 		."order by groupname";
 		$result = db_query($query);
 
@@ -71,6 +71,28 @@ function display_groups($group_id) {
 
 }
 
+/**
+ * get_group_count returns the number of document cateogries that the project has.
+ *
+ * @author Dominick Bellizzi (dbellizzi@valinux.com)
+ * @param $group_id The project group ID
+ * @return int The number of document groups for the specified project, or false on an error
+ */
+function get_group_count($group_id){
+		// show list of groups to edit.
+	$query = "select count(*) "
+		."from doc_groups "
+		."where group_id = '$group_id'";
+	$result = db_query($query);
+
+	if (list($count) = db_fetch_array($result)){
+		return $count;
+	}
+	else {
+		return false;
+	}
+}// end function get_group_count
+
 function display_docs($style,$group_id) {
 	global $sys_datefmt;
 
@@ -85,7 +107,7 @@ function display_docs($style,$group_id) {
 		
 		$query = "select name"
 			."from doc_states "
-			."where stateid = ".$style."";
+			."where stateid = '$style'";
 			$result = db_query($query);
 		$row = db_fetch_array($result);
 		echo 'No '.$row['name'].' docs available <p>';
@@ -136,7 +158,7 @@ function docman_header($title,$pagehead,$pagename,$titleval,$sectionval,$style='
 		"<a href=\"/docman/admin/index.php?mode=editgroups&group_id=".$group_id." \">Edit Document Groups</a></b>";
 
 	} 
-
+	print("<BR>");
 }
 
 function doc_droplist_count($l_group_id, $language_id) {

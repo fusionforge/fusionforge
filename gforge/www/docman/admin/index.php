@@ -120,12 +120,12 @@ function main_page($group_id) {
 	} elseif (strstr($mode,"groupdelete")) {
 		$query = "select docid "
 			."from doc_data "
-			."where doc_group = ".$doc_group."";
+			."where doc_group = '$doc_group'";
 		$result = db_query($query);
 		if (db_numrows($result) < 1) {
 			$query = "delete from doc_groups "
 				."where doc_group = '$doc_group' "
-				."and group_id = $group_id";
+				."and group_id = '$group_id'";
 			db_query($query);
 			docman_header("Group Delete","Group Delete",'docman_admin_groupdelete','admin',group_getname($group_id),'');
 			print "<p><b>Group deleted. (GroupID : ".$doc_group.")</b>";	
@@ -143,7 +143,7 @@ function main_page($group_id) {
 			$query = "select * "
 				."from doc_groups "
 				."where doc_group = '$doc_group' "
-				."and group_id=$group_id";
+				."and group_id='$group_id'";
 			$result = db_query($query);
 			$row = db_fetch_array($result);
 			echo '
@@ -174,8 +174,8 @@ function main_page($group_id) {
 		$query = "select dd.docid "
 			."from doc_data dd, doc_groups dg "
 			."where dd.doc_group = dg.doc_group "
-			."and dg.group_id = ".$group_id." "
-			."and dd.docid = '".$docid."'"; 
+			."and dg.group_id = '$group_id' "
+			."and dd.docid = '$docid'"; 
 		
 		$result = db_query($query);
 	
@@ -190,7 +190,7 @@ function main_page($group_id) {
 				."stateid = '".$stateid."', "
 				."language_id = '".$language_id."', "
 				."description = '".htmlspecialchars($description)."' "
-				."where docid = '".$docid."'"; 
+				."where docid = '$docid'"; 
 		
 			$res = db_query($query);
 			if (!$res || db_affected_rows($res)<1) {

@@ -44,6 +44,9 @@ if($group_id) {
 		}
 
 		if ($upload_instead) {
+			if (!util_check_fileupload($uploaded_data)) {
+				exit_error("Error","Invalid filename");
+			}
 		        $data = addslashes(fread( fopen($uploaded_data, 'r'), filesize($uploaded_data)));
         		if ((strlen($data) > 20) && (strlen($data) < 512000)) {
                 		//size is fine
@@ -82,11 +85,12 @@ if($group_id) {
 		docman_footer($params);
 	} else {
 		docman_header('Add documentation','Add documentation','docman_new','',group_getname($group_id));
-		if ($user == 100) {
+		if (get_group_count($group_id) > 0){
+			if ($user == 100) {
   			print "<p>You are not logged in, and will not be given credit for this.<p>";
-		}
-
-		echo '
+			}
+			
+			echo '
 			<p>
 
 			<b> Document Title: </b> Refers to the relatively brief title of the document (e.g. How to use the download server)
@@ -116,9 +120,9 @@ if($group_id) {
 			<th> Language:</th>
 			<td>';
 			
-		echo html_get_language_popup($Language,'language_id',1);
+			echo html_get_language_popup($Language,'language_id',1);
 			
-		echo	'</td>
+			echo	'</td>
 			</tr>
 
 			<tr>
@@ -130,14 +134,25 @@ if($group_id) {
 			<th>Group that document belongs in:</th>
 			<td>';
 
-		display_groups_option($group_id);
+			display_groups_option($group_id);
 
-		echo '	</td> </tr> </table>
+			echo '	</td> </tr> </table>
 
 			<input type="submit" value="Submit Information">
 
 			</form> '; 
-	
+		}	// end if (project has doc categories)
+		else {
+			echo("At least one documentation category must be defined before you can submit a document.<BR>");
+			
+			$group = new Group($group_id);
+			$perm =& $group->getPermission( session_get_user() );
+
+			// if an admin, prompt for adding a category
+			if ( $perm->isDocEditor() || $perm->isAdmin() ) {
+				echo("<a href=\"/docman/admin/index.php?mode=editgroups&group_id=" . $group_id . "\">Add a document group</a>");
+			}
+		}
 		docman_footer($params);
 	} // end else.
 

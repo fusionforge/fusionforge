@@ -22,7 +22,7 @@ require_once('pre.php');
 if ($docid) {
 	$query = "select * "
 		."from doc_data "
-		."where docid = $docid "
+		."where docid = '$docid' "
 		."and stateid = '1'";
 		// stateid = 1 == active
 	$result = db_query($query);
