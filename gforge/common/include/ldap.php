@@ -422,7 +422,7 @@ function sf_ldap_create_user_from_props($username, $cn, $crypt_pw,
 	$entry['homeDirectory'] = account_user_homedir($username);
 	$entry['loginShell']=$shell;
 	$entry['debSfCvsShell']=$cvsshell; 
-	$entry['debSfForwardEmail']=$email();
+	$entry['debSfForwardEmail']=$email;
 	$entry['uidNumber']=$uid;
 	$entry['gidNumber']=$gid;
 	$entry['shadowLastChange']=1;
