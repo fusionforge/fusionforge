@@ -55,11 +55,11 @@ case "$1" in
 
         # Patch Apache configuration files
 	/usr/lib/gforge/bin/install-apache.sh configure-files
-	for flavour in apache apache-perl apache-ssl ; do
+	for flavour in apache apache2 apache-perl apache-ssl ; do
 	    [ -e /etc/$flavour/httpd.conf ] && replace_file /etc/$flavour/httpd.conf
+	    [ -e /etc/php4/$flavour/php.ini ] && replace_file /etc/php4/$flavour/php.ini
 	done
 
-	replace_file /etc/php4/apache/php.ini
 	replace_file /etc/php4/cgi/php.ini
 
         # Setup our Apache
