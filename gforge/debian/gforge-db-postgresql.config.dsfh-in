@@ -17,7 +17,7 @@ init_debconf_from_mainconffile
 db_input low gforge/shared/admin_login || true
 db_fget gforge/shared/admin_password seen || true
 if [ "$RET" = "false" ]; then
-    if [ $(get_pw gforge/shared/admin_password high) = "not-asked" ] ; then
+    if [ "$(get_pw gforge/shared/admin_password high)" = "not-asked" ] ; then
 	db_set gforge/shared/admin_password $(gen_random_pw)
 	db_get gforge/shared/admin_password || true
 	echo "Since you asked not to see all the debconf questions, I generated a random"
