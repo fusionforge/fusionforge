@@ -25,27 +25,11 @@ set -e
 
 . /usr/share/debconf/confmodule
 
-#DSFHELPER:replace-files#
-#DSFHELPER:handle-mainconffile#
 case "$1" in
     configure)
-
-	vars="system_name domain_name server_admin db_password shell_host users_host cvs_host lists_host download_host admin_login ip_address admin_password newsadmin_groupid statsadmin_groupid skill_list db_host db_name db_user"
-        update_mainconffile $vars
-	/usr/sbin/gforge-config
-
-        # Patch DB configuration files
-	/usr/lib/gforge/bin/install-db.sh configure-files
-	propose_update_install /etc/postgresql/pg_hba.conf
-
-	# Clean debconf after ourselves
-	db_stop
-
-        # Setup our DB
-	[ -f /var/lib/gforge/sf_dump_for_gforge ] && perl -pi -e "s/\\connect - sourceforge/\\connect - gforge/" /var/lib/gforge/sf_dump_for_gforge
-	[ -f /var/lib/gforge/sf_dump_for_gforge ] && /usr/lib/gforge/bin/install-db.sh restore /var/lib/gforge/sf_dump_for_gforge && mv /var/lib/gforge/sf_dump_for_gforge /var/lib/gforge/sf_dump_for_gforge.ok 
-	[ -f /var/lib/gforge/sf_dump_for_gforge ] && mv /var/lib/gforge/sf_dump_for_gforge /var/lib/gforge/sf_dump_for_gforge.ko
-	/usr/lib/gforge/bin/install-db.sh configure
+    	[ -f /usr/lib/sourceforge/bin/install-db.sh ] && /usr/lib/sourceforge/bin/install-db.sh dump /var/lib/sourceforge/sf_dump_for_gforge
+    	[ -d /var/lib/sourceforge ] && echo "Renaming dir /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
+    	[ -h /var/lib/sourceforge ] && echo "Renaming symlink /var/lib/sourceforge to /var/lib/gforge" && mv /var/lib/sourceforge /var/lib/gforge 
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)
