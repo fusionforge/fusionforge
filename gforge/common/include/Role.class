@@ -367,7 +367,7 @@ class Role extends Error {
 							$cvs_flags=$data['scm'][0];
 							$sql="UPDATE user_group
 								SET cvs_flags=".$cvs_flags." 
-								WHERE user_id=".db_result($res,$z,'user_id');
+								WHERE user_id=".db_result($res,$z,'user_id')."AND role_id=".$this->getID();
 							//echo '<h1>'.$data['scm'][0].'::'.$sql.'</h1>';
 							$res2=db_query($sql);
 							if (!$res2) {
