@@ -266,6 +266,7 @@ admin_index	pending_status	 (pending) Status
 admin_index	private_groups	Private Groups
 admin_index	project_database_administration	Project Database Administration
 admin_index	register_new_project	Register New Project
+admin_index	recent_logins	Recent logins
 admin_index	site_mailing_maintaince	Site Mailings Maintenance
 admin_index	site_utilities	Site Utilities
 admin_index	site_wide_stats	Site-Wide Stats

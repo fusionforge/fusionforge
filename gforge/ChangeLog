@@ -1,3 +1,8 @@
+2003-06-13 Tom Copeland  <tom@infoether.com>
+
+	* www/admin/index.php:
+	Added a link to the "recent logins" page.
+	
 2003-06-13 Christian Bayle	<bayle@debian.org>
 
 	* Added Patch #307 Ronald Petty cvs browser as an alternate cvs browser
