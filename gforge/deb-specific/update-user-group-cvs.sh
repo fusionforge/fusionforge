@@ -5,7 +5,7 @@ then
 	su -c $0
 else
 	# Fill ldap tables
-	/usr/lib/sourceforge/bin/install-ldap.sh update 2>&1 > /dev/null
+	/usr/lib/sourceforge/bin/install-ldap.sh update > /dev/null 2>&1
 
 	[ -d /var/lib/sourceforge/dumps ] || \
 	mkdir /var/lib/sourceforge/dumps && \

@@ -3,4 +3,4 @@
 #
 
 # Mailing-list creation
-55 * * * * root [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl 2>&1 > /dev/null
+55 * * * * root [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl > /dev/null 2>&1

@@ -96,8 +96,8 @@ EOF
         fi
 	;;
     purge)
-	su -s /bin/sh postgres -c "dropdb sourceforge" 2>&1 > /dev/null || true
-	su -s /bin/sh postgres -c "dropuser sourceforge" 2>&1 > /dev/null || true
+	su -s /bin/sh postgres -c "dropdb sourceforge" > /dev/null 2>&1 || true
+	su -s /bin/sh postgres -c "dropuser sourceforge" > /dev/null 2>&1 || true
 	rm -f /var/lib/postgres/data/sourceforge_passwd
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	;;

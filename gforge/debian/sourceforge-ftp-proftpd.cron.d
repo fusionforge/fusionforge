@@ -3,4 +3,4 @@
 #
 
 # FTP update
-0 * * * * root [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update 2>&1 > /dev/null
+0 * * * * root [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update > /dev/null 2>&1
