@@ -1,4 +1,4 @@
-sourceforge (2.5-10+14+) unstable; urgency=low
+sourceforge (2.5-10+15) unstable; urgency=low
 
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
@@ -69,7 +69,7 @@ sourceforge (2.5-10+14+) unstable; urgency=low
     not with any other theme).
   * Deduped releases in the Quick Release System.
 
- -- Roland Mas <lolando@debian.org>  Thu, 25 Oct 2001 18:20:54 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 25 Oct 2001 19:28:24 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 
