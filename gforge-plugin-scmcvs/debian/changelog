@@ -1,11 +1,12 @@
-gforge-plugin-scmcvs (0.1-10) unstable; urgency=low
+gforge-plugin-scmcvs (0.1-12) unstable; urgency=low
 
   * Removed cvssh that collide with gforge version and is not really cvs
-    specific 
+    specific
   * Added CVS Tab using groupmenu_scm hook
   * Make that the project cvs tab is well selected
+  * Added dependency on libipc-signal-perl
 
- -- Christian Bayle <bayle@debian.org>  Fri,  9 Jul 2004 15:22:33 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 28 Jul 2004 14:11:57 +0200
 
 gforge-plugin-scmcvs (0.1-1) unstable; urgency=low
 
