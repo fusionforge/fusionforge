@@ -1,20 +1,24 @@
 <?php
+/**
+  *
+  * SourceForge Documentaion Manager
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-//
 
 /*
-	Docmentation Manager
 	by Quentin Cregan, SourceForge 06/2000
 */
 
 
-require('doc_utils.php');
-require('pre.php');
+require_once('doc_utils.php');
+require_once('pre.php');
 
 if($group_id) {
 
@@ -46,13 +50,13 @@ if($group_id) {
                 		$feedback .= ' Document Uploaded ';
         		} else {
                 		//too big or small
-                		$feedback .= ' ERROR - patch must be > 20 chars and < 512000 chars in length ';
+                		$feedback .= ' ERROR - document must be > 20 chars and < 512000 chars in length ';
                 		exit_error('Missing Info',$feedback.' - Please click back and fix the error.');
         		}
 		}
 
 		
-		docman_header('Documentation - Add Information - Processing','Documentation - New submission');
+		docman_header('Documentation - Add Information - Processing','Documentation - New submission','docman_new','',group_getname($group_id));
 
 		$query = "insert into doc_data(stateid,title,data,createdate,updatedate,created_by,doc_group,description,language_id) "
 		."values('3',"
@@ -66,14 +70,18 @@ if($group_id) {
 		."'".htmlspecialchars($description)."',"
 		."'".$language_id."')";
 	
-		db_query($query); 
+		$res = db_query($query); 
 		//PROBLEM check the query
 
-		print "<p><b>Thank You!  Your submission has been placed in the database for review before posting.</b> \n\n<p>\n <a href=\"/docman/index.php?group_id=".$group_id."\">Back</a>"; 
+		if (!$res || db_affected_rows($res)<1) {
+			print '<p><b><font color="red">Error adding new document: '.db_error().'</font></b></p>';
+		} else {
+			print "<p><b>Thank You!  Your submission has been placed in the database for review before posting.</b> \n\n<p>\n <a href=\"/docman/index.php?group_id=".$group_id."\">Back</a>"; 
+		}
 
 		docman_footer($params);
 	} else {
-		docman_header('Add documentation','Add documentation');
+		docman_header('Add documentation','Add documentation','docman_new','',group_getname($group_id));
 		if ($user == 100) {
   			print "<p>You are not logged in, and will not be given credit for this.<p>";
 		}
@@ -85,7 +93,7 @@ if($group_id) {
 			<br>
 			<b> Description: </b> A brief description to be placed just under the title.<br>
 
-			<form name="adddata" action="new.php?mode=add&group_id='.$group_id.'" method="GET" enctype="multipart/form-data">
+			<form name="adddata" action="new.php?mode=add&group_id='.$group_id.'" method="POST" enctype="multipart/form-data">
 
 			<table border="0" width="75%">
 

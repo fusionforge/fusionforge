@@ -31,6 +31,7 @@ sourceforge (2.5-10+11) unstable; urgency=low
   * [Christian] Ldap online support enabled.  Requires intensive testing
     and probably security enhancements similar to database.
   * Fixed possible infinite loop in cronjobs/calculate_user_metric.php.
+  * [Christian] backport of 2_6_1 docman for better language support 
 
  -- Roland Mas <lolando@debian.org>  Sat, 15 Sep 2001 16:35:09 +0200
 
