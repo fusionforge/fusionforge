@@ -37,13 +37,13 @@ $res = db_query("SELECT user_id FROM user_group WHERE admin_flags='A' AND group_
 
 if (!$res) {
 	//echo db_error();
-	exit();
+	exit(1);
 }
 
 if (db_numrows($res) == 0) {
 	// There are no Admins yet, aborting without failing
 	//echo "SUCCESS\n";
-	exit();
+	exit(0);
 }
 
 $id=db_result($res,0,0);
