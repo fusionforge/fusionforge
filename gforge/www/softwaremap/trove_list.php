@@ -278,7 +278,7 @@ for ($i_proj=1;$i_proj<=$querytotalcount;$i_proj++) {
 		// extra description
 		print '</TD></TR><TR valign="top"><TD><FONT face="arial, helvetica" size="3">';
 		// list all trove categories
-		trove_getcatlisting($row_grp['group_id'],1,0);
+		print trove_getcatlisting($row_grp['group_id'],1,0);
 
 		print '</TD>'."\n".'<TD align="right"><FONT face="arial, helvetica" size="3">'; // now the right side of the display
 		print 'Activity Percentile: <B>'. number_format($row_grp['percentile'],2) .'</B>';

@@ -62,7 +62,7 @@ if ($project->getDescription()) {
 
 // trove info
 print '<BR>&nbsp;<BR>';
-trove_getcatlisting($group_id,0,1);
+print trove_getcatlisting($group_id,0,1);
 
 // Get the activity percentile
 $actv = db_query("SELECT percentile FROM project_weekly_metric WHERE group_id='$group_id'");

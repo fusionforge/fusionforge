@@ -205,8 +205,9 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		AND trove_group_link.group_id='$group_id'
 		ORDER BY trove_cat.fullpath");
 
+	$return = '';
 	if (db_numrows($res_trovecat) < 1) {
-		print 'This project has not yet categorized itself in the '
+		$return .= 'This project has not yet categorized itself in the '
 			.'<A href="/softwaremap/trove_list.php">Trove '
 			.'Software Map</A>.';
 	}
@@ -214,15 +215,15 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	// first unset the vars were using here
 	$proj_discrim_used='';
 	$isfirstdiscrim = 1;
-	echo '<UL>';
+	$return .= '<UL>';
 	while ($row_trovecat = db_fetch_array($res_trovecat)) {
 		$folders = explode(" :: ",$row_trovecat['fullpath']);
 		$folders_ids = explode(" :: ",$row_trovecat['fullpath_ids']);
 		$folders_len = count($folders);
 		// if first in discrim print root category
 		if (!$proj_discrim_used[$folders_ids[0]]) {
-			if (!$isfirstdiscrim) print '<BR>';
-				print ('<LI> '.$folders[0].': ');
+			if (!$isfirstdiscrim) $return .= '<BR>';
+				$return .= ('<LI> '.$folders[0].': ');
 		}
 
 		// filter links, to add discriminators
@@ -233,31 +234,32 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 				$filterisalreadyapplied = 1;
 			}
 			// then print the stuff
-			if ($proj_discrim_used[$folders_ids[0]]) print ', ';
+			if ($proj_discrim_used[$folders_ids[0]]) $return .= ', ';
 
-			if ($a_cats) print '<A href="/softwaremap/trove_list.php?form_cat='
+			if ($a_cats) $return .= '<A href="/softwaremap/trove_list.php?form_cat='
 				.$folders_ids[$folders_len-1].$discrim_url.'">';
-			print ($folders[$folders_len-1]);
-			if ($a_cats) print '</A>';
+			$return .= ($folders[$folders_len-1]);
+			if ($a_cats) $return .= '</A>';
 
 			if ($a_filter) {
 				if ($filterisalreadyapplied) {
-					print ' <b>(Now Filtering)</b> ';
+					$return .= ' <b>(Now Filtering)</b> ';
 				} else {
-					print ' <A href="/softwaremap/trove_list.php?form_cat='
+					$return .= ' <A href="/softwaremap/trove_list.php?form_cat='
 						.$form_cat;
 					if ($discrim_url) {
-						print $discrim_url.','.$folders_ids[$folders_len-1];
+						$return .= $discrim_url.','.$folders_ids[$folders_len-1];
 					} else {
-						print '&discrim='.$folders_ids[$folders_len-1];
+						$return .= '&discrim='.$folders_ids[$folders_len-1];
 					}
-					print '">[Filter]</A> ';
+					$return .= '">[Filter]</A> ';
 				}
 			}
 		$proj_discrim_used[$folders_ids[0]] = 1;
 		$isfirstdiscrim = 0;
 	}
-	echo '</UL>';
+	$return .= '</UL>';
+	return $return;
 }
 
 /**
