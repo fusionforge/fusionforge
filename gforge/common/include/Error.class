@@ -90,7 +90,56 @@ class Error {
 	function isError() {
 		return $this->error_state;
 	}
+	
 
+	/**
+	 * setPermissionDeniedError() - sets a Permission Denied error
+	 *  retrieves the localized error string for Permission Denied and calls exit_error()
+	 *
+	 *
+	 */
+	function setPermissionDeniedError(){
+		global $Language;
+		exit_error($Language->getText('general','error'),$Language->getText('general','permdenied'));
+	}
+
+	/**
+	 * setInvalidEmailError() - sets a Invalid Email error
+	 *  retrieves the localized error string for Invalid Email and calls exit_error()
+	 *
+	 *
+	 */
+	function setInvalidEmailError(){
+		global $Language;
+		exit_error($Language->getText('general','error'),$Language->getText('general','invalid_email'));
+	}
+	
+	/**
+	 * setOnUpdateError() - sets an On Update Error
+	 *  retrieves the localized error string for On Update and calls exit_error()
+	 *
+	 * 	 * @param	string  The db result to be written.
+	 *
+	 */
+	
+	function setOnUpdateError($result=""){
+		global $Language;
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_on_update',$result));
+		
+	}
+
+	/**
+	 * setGroupIdError() - sets an Group ID Error
+	 *  retrieves the localized error string for Group ID and calls exit_error()
+	 *
+	 *
+	 */
+
+	function setGroupIdError(){
+		global $Language;
+		exit_error($Language->getText('general','error'),$Language->getText('general','error_group_id'));
+		
+	}
 }
 
 ?>
