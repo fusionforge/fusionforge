@@ -234,7 +234,7 @@ eval {
 	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
-		  debug $query ;
+		  # debug $query ;
 		  $sth = $dbh->prepare ($query) ;
 		  $sth->execute () ;
 		  $sth->finish () ;
@@ -278,11 +278,13 @@ eval {
 	      debug "Fixing the unix_box fields" ;
 
 	      $query = "update groups set unix_box = 'shell'" ;
+	      debug $query ;
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
 	      
 	      $query = "update users set unix_box = 'shell'" ;
+	      debug $query ;
 	      $sth = $dbh->prepare ($query) ;
 	      $sth->execute () ;
 	      $sth->finish () ;
