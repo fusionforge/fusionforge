@@ -1,0 +1,7 @@
+DROP INDEX plugin_cvstracker_group_artifact_id;
+
+CREATE INDEX plugincvstrackerdataartifact_groupartifactid ON plugin_cvstracker_data_artifact(group_artifact_id);
+CREATE INDEX plugincvstrackerdataartifact_projecttaskid ON plugin_cvstracker_data_artifact(project_task_id);
+
+CREATE INDEX plugincvstrackerdatamaster_holderid ON plugin_cvstracker_data_master(holder_id);
+CREATE INDEX plugincvstrackerdatamaster_cvsdate ON plugin_cvstracker_data_master(cvs_date);

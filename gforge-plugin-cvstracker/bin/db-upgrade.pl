@@ -50,52 +50,45 @@ eval {
     $version = &get_db_version ;
     $target = "0.1" ;
     if (is_lesser $version, $target) {
-	my @filelist = ( "/usr/lib/gforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
-	
-	foreach my $file (@filelist) {
-	    debug "Processing $file" ;
-	    @reqlist = @{ &parse_sql_file ($file) } ;
-	    
-	    foreach my $s (@reqlist) {
-		$query = $s ;
-		# debug $query ;
-		$sth = $dbh->prepare ($query) ;
-		$sth->execute () ;
-		$sth->finish () ;
-	    }
-	}
-	@reqlist = () ;
-	
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
+		my @filelist = ( "/usr/lib/gforge/plugins/$pluginname/lib/$pluginname-init.sql" ) ;
+		
+		foreach my $file (@filelist) {
+		    debug "Processing $file" ;
+		    @reqlist = @{ &parse_sql_file ($file) } ;
+		    
+		    foreach my $s (@reqlist) {
+				$query = $s ;
+				# debug $query ;
+				$sth = $dbh->prepare ($query) ;
+				$sth->execute () ;
+				$sth->finish () ;
+		    }
+		}
+		@reqlist = () ;
+		
+		&update_db_version ($target) ;
+		debug "Committing." ;
+		$dbh->commit () ;
     }
     
     $version = &get_db_version ;
-    $target = "0.2" ;
-    if (is_lesser $version, $target) {
-	debug "Adding local data." ;
-	
-	do "/etc/gforge/local.pl" or die "Cannot read /etc/gforge/local.pl" ;
-	
-#	my $ip_address = qx/host $domain_name | awk '{print \}'/ ;
-	
-#	@reqlist = (
-#		    "INSERT INTO plugin_".$pluginname."_sample_data (domain, ip_address) VALUES ('$domain_name', '$ip_address')",
-#		    ) ;
-	
-#	foreach my $s (@reqlist) {
-#	    $query = $s ;
-#	    # debug $query ;
-#	    $sth = $dbh->prepare ($query) ;
-#	    $sth->execute () ;
-#	    $sth->finish () ;
-#	}
-#	@reqlist = () ;
-	
-	&update_db_version ($target) ;
-	debug "Committing." ;
-	$dbh->commit () ;
+    $target = "0.3" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050305.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/plugins/$pluginname/lib/20050305.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
     }
 
     debug "It seems your database install/upgrade went well and smoothly.  That's cool." ;
