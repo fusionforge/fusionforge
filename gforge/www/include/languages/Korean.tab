@@ -38,6 +38,10 @@
 # 2002-05-19	Soon-Son Kwon	<kss@kldp.org>
 #   * Added a few more trivial message translation
 #
+# 2002-05-19	Soon-Son Kwon	<kss@kldp.org>
+#   * 도움을 기다리는 프로젝트-->멤버 구함, 
+#     Code Snippet Library-->코드 라이브러리 로 변경
+#
 about_foundries	about_blurb	Foundry는 개발자들이 한데 모여 서로의 경험과 각자의 정보를 공유하고 조언을 주고받으면서 더 좋은 소프트웨어를 더 빠르게 개발할 수 있는 공간으로 자리매김하고자 합니다. (이것이 바로 오픈소스입니다.) <br>&nbsp;<br>Foundry를 후원하거나 새로운 Foundry를 개설하거나, 제안 사항, 아이디어 등이 있다면 <a href="/contact.php" >저희에게 연락해</a> 주십시오.
 about_foundries	foundries_list	시스템의 모든 Foundry에 관한 정보입니다. 어떤 것은 다른 것에 비해 좀더 완성도가 높습니다. 만약 여러분께서 공헌하고자 하시는 Foundry가 있다면 해당 Foundry의 관리자에게 연락하시기 바랍니다.
 account	title	사용자 등록 정보
@@ -50,7 +54,7 @@ account_change_pw	section	사용자 등록 정보
 account_change_pw	title	비밀번호 변경
 account_editsshkeys	section	사용자 등록 정보
 account_editsshkeys	title	CVS/SSH 키 편집
-account_first	about_blurb	여러분은 이제 온라인 오픈소스 개발 환경인 $1의 등록 사용자입니다.<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 포럼에 글을 올릴 수도 있고, $1에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. <P>$1(이)가 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.<P>부디 좋은 시간이 되시기를 바라며 저희가 $1(을)를 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>--$1
+account_first	about_blurb	여러분은 이제 온라인 오픈소스 개발 환경인 $1의 등록 사용자입니다.<P>등록 사용자로서 여러분은 이곳의 모든 활동에 참여하실 수 있습니다. 각 프로젝트의 게시판에 글을 올릴 수도 있고, $1에 있는 소프트웨어들에 대해 버그 리포팅을 할 수도 있고, 프로젝트의 개발자로 등록하실 수도 있고, 여러분만의 프로젝트를 개설하시는 것도 가능합니다. <P>$1(이)가 제공하는 모든 서비스를 활용하시기 위해서 여러분은 약간의 시간을 내어 다음 <A href="/docs/site/"><b>사이트 관련 문서</b></A>를 찬찬히 읽어 보시기 바랍니다.<P>부디 좋은 시간이 되시기를 바라며 저희가 $1(을)를 향상시킬 수 있도록 언제든지 피드백을 보내 주시기 바랍니다.<P>--$1
 account_first	title	환영합니다!
 account_login	deleted_account	<p>여러분의 $1 계정이 관리자에 의해 삭제되었습니다. 이는 보통 두가지로 나눌 수 있는데 1) 여러분 스스로 계정을 삭제해 달라고 요청하셨거나 2) 여러분의 계정이 서비스 계약에 위배되는 행위에 이용되어 시스템 관리를 위해 관리자에 의해 계정이 삭제되는 것입니다. 만약 의문 사항이나 의심되는 점이 있다면 <a href="/support/?group_id=1">지원 요청</a>을 하시면 됩니다.</p><p>감사합니다, <br><br>$1</p>
 account_login	iewarn	<H2><FONT COLOR="RED">인터넷 익스플로러 사용자는 5.01 또는 그 이상의 버전을 사용하셔야 하며 128-bit SSL의 사용을 권장합니다. 넷스케이프 4.7 또는 그 이상의 버전을 사용하시는 것도 좋습니다.</FONT></H2>
@@ -63,8 +67,8 @@ account_login	passwd	비밀번호:
 account_login	usessl	로그인후 SSL 계속 사용
 account_login	sslnotice	<p><B><FONT COLOR="RED">아래 버튼을 누르시면 SSL기능이 구현되어 있는 웹서버로 진입하시게 되며, 입력하신 비밀번호는 다른 사람이 볼 수 없습니다.</FONT></B> <small style="font-size: x-small"> (이 페이지 자체가 SSL로 보이지 않는 이유가 궁금하시다면 다음 절을 읽어 보십시오. 감사합니다.) </small> <P> <B>인터넷 익스플로러</B>를 사용하고 계실 경우 일시적으로 SSL에 관한 문제가 있을수도 있습니다. 넷스케이프 사용자는 보안을 위해 SSL을 계속 사용하시기 바랍니다. 이 문제에 관해서는 <A HREF="http://www.microsoft.com/">Microsoft의 웹사이트</A>를 참고하십시오.<P>
 account_login	login	SSL을 통해 로그인하기
-account_login	lostpw	[비밀번호를 잊었습니까?]
-account_login	newaccount	[새로운 계정]
+account_login	lostpw	[비밀번호를 잊으셨나요?]
+account_login	newaccount	[새로운 계정 만들기(가입하기)]
 account_lostpw	message	$3 사이트의 누군가가 (아마도 본인?) 이메일을 이용한\n비밀번호 변경을 요청하였습니다. 만약 여러분이 직접 하신 것이 아니라면\n이 메시지는 그냥 무시하십시오. 그러면 아무것도 바뀌지 않습니다.\n\n만약 본인이 직접 요청하신 것이라면 다음 URL을 방문하여 비밀번호를 변경하십시오.\n\n<https://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n
 account_lostpw	subject	$1 확인
 account_lostpw	title	비밀번호를 잊으셨습니까?
@@ -116,21 +120,21 @@ docman_display_doc	title	문서 관리자: 문서 보여주기
 docman_new	section	프로젝트: $1 
 docman_new	title	문서 관리자: 새로운 문서 제출하기
 forum	section	프로젝트: $1
-forum	title	포럼
-forum	choose	<p>원하시는 포럼을 선택하십시오. 글을 읽거나, 새로운 글을 올리거나, 혹은 답글을 올리실 수도 있습니다.<p>
+forum	title	게시판
+forum	choose	<p>원하시는 게시판을 선택하십시오. 글을 읽거나, 새로운 글을 올리거나, 혹은 답글을 올리실 수도 있습니다.<p>
 forum_admin	section	프로젝트: $1 
-forum_admin	title	포럼: 관리
-forum_admin_addforum	section	포럼 관리
-forum_admin_addforum	title	포럼 추가
-forum_admin_changestatus	section	포럼 관리
-forum_admin_changestatus	title	포럼 상태 변경
-forum_admin_delete	section	포럼 관리
-forum_admin_delete	title	포럼 지우기
+forum_admin	title	게시판: 관리
+forum_admin_addforum	section	게시판 관리
+forum_admin_addforum	title	게시판 추가
+forum_admin_changestatus	section	게시판 관리
+forum_admin_changestatus	title	게시판 상태 변경
+forum_admin_delete	section	게시판 관리
+forum_admin_delete	title	게시판 지우기
 forum_forum	section	프로젝트: $1 
-forum_forum	title	포럼: 포럼 보기
-forum_forum_thread	section	포럼
+forum_forum	title	게시판: 게시판 보기
+forum_forum_thread	section	게시판
 forum_forum_thread	title	스레드 보기
-forum_message	section	포럼
+forum_message	section	게시판
 forum_message	title	메시지 보기
 foundry	section	Foundry: $1
 foundry	title	요약
@@ -155,7 +159,7 @@ group	developers	개발자
 group	long_bugs	버그 트래킹
 group	long_cvs	CVS 저장소
 group	long_docman	문서 관리자: 프로젝트 문서화
-group	long_forum	공개 포럼
+group	long_forum	공개 게시판
 group	long_foundries	Foundry
 group	long_ftp	익명 FTP 공간
 group	long_homepage	프로젝트 홈페이지
@@ -167,24 +171,24 @@ group	long_support	기술지원 관리자
 group	long_survey	설문조사
 group	project_admins	프로젝트 관리자
 group	public_area	공개 구역
-group	short_admin	관리
+group	short_admin	프로젝트 관리
 group	short_bugs	버그
 group	short_cvs	CVS
 group	short_docman	문서
-group	short_files	파일
-group	short_forum	포럼
+group	short_files	다운로드
+group	short_forum	게시판
 group	short_homepage	홈페이지
 group	short_mail	메일링 리스트
 group	short_main 	메인
 group	short_memberlist	개발자
 group	short_news	새소식
 group	short_patch	패치
-group	short_pm	임무
+group	short_pm	하위 프로젝트
 group	short_summary	요약
 group	short_support	지원
 group	short_survey	설문조사
-group	short_tracker	Tracker
-home	about_blurb	$1는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 포럼, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>$1를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
+group	short_tracker	문제점 추적
+home	about_blurb	$1는 <B><A href="http://www.opensource.org">Open Source</A> 개발자에게 제공되는 무료 서비스</B>로서, CVS, 메일링 리스트, 버그 트래킹, 공개 게시판, 임무 관리, 웹사이트 호스팅, 영구적인 파일 아카이브, 백업 서비스를 포함한 완전한 웹기반 관리 인터페이스를 제공합니다. <BR>&nbsp;<P><B>사이트에 대한 피드백 및 참여 방법</B><P>$1를 최대한으로 활용하기 위해서는 <A href="/account/register.php">사용자 등록</A>을 하시는게 좋습니다. 사용자 등록을 하시면 이곳에서 제공되는 모든 공간에 참여하실 수 있습니다. 물론 등록하지 않으셔도 사이트를 둘러보실 수는 있지만 모든 부분에 대한 접근 권한을 갖지는 못할 것입니다.<P>&nbsp;<BR><B>여러분만의 프로젝트를 구성하십시오.</B><P><A href="/account/register.php">사용자 등록</A>을 하시고, <A HREF="/account/login.php">로그인</A>하신 후, <A HREF="/register/">프로젝트 등록</A>을 하시면 됩니다. 감사합니다. 즐거운 시간 되십시오.
 home	breaking_down_barriers	Open Source 개발의 장벽을 넘어
 home	highest_ranked_users	활발한 사용자
 home	most_active_this_week	금주 가장 활발한 곳
@@ -205,11 +209,11 @@ menu	about_sourceforge	SourceForge 소개
 menu	account_maintenance	사용자 등록 정보
 menu	bookmark_page	책갈피
 menu	change_my_theme	테마 변경
-menu	code_snippet_library	Code Snippet Library
+menu	code_snippet_library	코드 라이브러리
 menu	compile_farm	Compile Farm
 menu	contact_us	$1에 연락하기
-menu	discussion_forums	Discussion 포럼
-menu	documentation	사이트 관련 문서
+menu	discussion_forums	게시판 (게시판)
+menu	documentation	참고 문서
 menu	foundry_admin	Foundry 관리
 menu	foundry_summary	Foundry 요약
 menu	login	로그인
@@ -220,7 +224,7 @@ menu	new_releases	새로운 릴리즈
 menu	new_user	사용자 등록
 menu	other_site_mirrors	기타 사이트 미러
 menu	project_admin	프로젝트 관리
-menu	project_help_wanted	도움을 기다리는 프로젝트
+menu	project_help_wanted	멤버 구함
 menu	project_summary	프로젝트 요약
 menu	search	찾기
 menu	site_status	사이트 상태
@@ -229,11 +233,11 @@ menu	top_projects	상위 프로젝트
 my	about_blurb	여러분의 개인 페이지는 여러분에게 할당된 버그나 임무들과 여러분이 참여하고 계신 그룹에 관한 정보를 보여줍니다.
 my	no_bookmarks	현재 저장된 책갈피가 없습니다.
 my	no_monitored_filemodules	<H3>모니터하고 있는 파일이 없습니다.</H3><P>만약 여러분이 파일을 모니터하시게 되면 새로운 파일이 릴리즈될 때 이곳의 다운로드 서버로 파일을 받을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>파일을 모니터하시려면 프로젝트의 &quot;요약 페이지&quot;에 가서 파일 섹션의 체크박스를 클릭하시면 됩니다.<BR>&nbsp;
-my	no_monitored_forums	<H3>모니터하고 있는 포럼이 없습니다.</H3><P>만약 여러분이 포럼을 모니터하시게 되면 새로운 글이 올라올 때 그 글을 읽을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>포럼을 모니터하시려면 아무 포럼에서나 &quot;포럼 모니터&quot;를 클릭하시면 됩니다.<BR>&nbsp;
+my	no_monitored_forums	<H3>모니터하고 있는 게시판이 없습니다.</H3><P>만약 여러분이 게시판을 모니터하시게 되면 새로운 글이 올라올 때 그 글을 읽을 수 있는 링크가 포함된 이메일을 받아보실 수 있습니다.<P>게시판을 모니터하시려면 아무 게시판에서나 &quot;게시판 모니터&quot;를 클릭하시면 됩니다.<BR>&nbsp;
 my	no_open_tasks	할당된 임무가 없습니다.
 my	no_projects	아직 어떤 프로젝트에도 소속되어 있지 않습니다.
-my	no_tracker_items_assigned	할당된 Tracker 아이템이 없습니다.
-my	no_tracker_items_submitted	제출하신 Tracker 아이템이 없습니다.
+my	no_tracker_items_assigned	할당된 문제점 추적 아이템이 없습니다.
+my	no_tracker_items_submitted	제출하신 문제점 추적 아이템이 없습니다.
 my	title	개인 페이지: $1
 my_bookmark_add	section	개인 페이지
 my_bookmark_add	title	책갈피 추가
@@ -255,7 +259,7 @@ news_submit	section	새소식
 news_submit	title	새소식 올리기: $1
 partners	about_blurb	<P>SourceForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
 people	about_blurb	<P>이곳은 비영리 목적의 자원봉사자들을 위한 공간이며 상업적인 목적으로의 활용은 금지합니다.<P>이곳에 올린 글은 2주 동안 유효하고, 만약 필요없게 되면 글쓴이가 그 전에라도 삭제할 수 있습니다. (물론 만료된 메시지를 다시 올릴 수도 있습니다.)<P>여러분의 도움을 필요로 하는 프로젝트들이 있는지 둘러 보십시오.<P>만약 여러분이 프로젝트 관리자라면 로그인하신 후 여러분이 관리하고 계시는 프로젝트로 가신 후 그곳에서 글을 올리셔야 합니다.<P>만약 새로운 Job을 제안하고 싶으시다면 기술지원 관리자 기능을 이용하여 주십시오.<P>
-people	section	도움을 기다리는 프로젝트
+people	section	멤버 구함
 people	title	도움이 필요한 프로젝트
 people_admin	section	Help Wanted
 people_admin	title	Help Wanted 관리
@@ -265,17 +269,17 @@ people_admin_people_skills	section	Help Wanted 관리
 people_admin_people_skills	title	Job 스킬 추가하기
 people_cat	section	Help Wanted
 people_cat	title	분류별 Job 나열하기
-people_createjob	section	도움을 기다리는 프로젝트
+people_createjob	section	멤버 구함
 people_createjob	title	새로운 Job 만들기
-people_editjob	section	도움을 기다리는 프로젝트
+people_editjob	section	멤버 구함
 people_editjob	title	Job 편집
-people_editprofile	section	도움을 기다리는 프로젝트
+people_editprofile	section	멤버 구함
 people_editprofile	title	나의 프로필 편집
-people_helpwanted_latest	section	도움을 기다리는 프로젝트
+people_helpwanted_latest	section	멤버 구함
 people_helpwanted_latest	title	마지막 포스팅
-people_proj	section	도움을 기다리는 프로젝트
-people_proj	title	도움을 기다리는 프로젝트: $1
-people_viewjob	section	도움을 기다리는 프로젝트
+people_proj	section	멤버 구함
+people_proj	title	멤버 구함: $1
+people_viewjob	section	멤버 구함
 people_viewjob	title	$1 이(가) $2 에 필요합니다.
 people_viewprofile	section	사용자 정보
 people_viewprofile	title	개발자 프로필 보기
@@ -345,21 +349,21 @@ register_tos	title	서비스에 관한 계약사항
 search	title	찾기
 sendmessage	about_blurb	스팸을 줄이기 위해 아래 양식을 사용합니다.<p>아래 양식을 모두 제대로 채워 주십시오. 만약 그렇지 않다면 수신인이 제대로 응답하지 못하게 될수도 있습니다.<P><FONT COLOR="RED"><B>만약 어떤 도움을 요청하는 경우라면:</B> 사이트 관련 문서를 읽어 보셨습니까? 여러분의 <B>사용자 ID</B>와 <B>이름</B>을 제대로 명시하셨는지요? 어느 특정 프로젝트에 관한 것이라면 <B>프로젝트 ID</B> (<B>그룹 ID</B>) 및 <B>프로젝트 이름</B>을 명시해 주시기 바랍니다.</FONT>
 sendmessage	title	메시지 보내기: $1
-snippet	title	Code Snippet Library
-snippet_add_snippet_to_package	section	Code Snippet Library
-snippet_add_snippet_to_package	title	패키지에 Snippet 추가
-snippet_addversion	section	Code Snippet Library
+snippet	title	코드 라이브러리
+snippet_add_snippet_to_package	section	코드 라이브러리
+snippet_add_snippet_to_package	title	패키지에 코드 추가
+snippet_addversion	section	코드 라이브러리
 snippet_addversion	title	새 버전 올리기
-snippet_browse	section	Code Snippet Library
-snippet_browse	title	Snippet 둘러보기
-snippet_delete	section	Code Snippet Library
-snippet_delete	title	Snippet 지우기
-snippet_detail	section	Code Snippet Library
-snippet_detail	title	Snippet 자세히 보기
-snippet_package	section	Code Snippet Library
-snippet_package	title	Snippet 패키지 만들기
-snippet_submit	section	Code Snippet Library
-snippet_submit	title	Snippet 제출
+snippet_browse	section	코드 라이브러리
+snippet_browse	title	코드 둘러보기
+snippet_delete	section	코드 라이브러리
+snippet_delete	title	코드 지우기
+snippet_detail	section	코드 라이브러리
+snippet_detail	title	코드 자세히 보기
+snippet_package	section	코드 라이브러리
+snippet_package	title	코드 패키지 만들기
+snippet_submit	section	코드 라이브러리
+snippet_submit	title	코드 제출
 softwaremap	title	Trove
 staff	about_blurb	<P><h2>SourceForge Staff</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern is the new Director of <A HREF="http://sourceforge.net/">SourceForge.net</A>.  We're glad to have Pat on board, as he used to run <A HREF="http://www.valinux.com/">valinux.com</A>, so he knows a thing or two about running important web sites.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan is the "Product Manager" for SourceForge. We're not sure what that means, only that he likes timelines and handles business development issues.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim is the technical lead on SourceForge and is from Iowa. Yes Iowa. Not Idaho and not Ohio. Iowa. When he's not working you can locate him fairly easy as he has the only BMW Z3 in Iowa.<P>Tim founded <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> and <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul is a developer, living in Ukraine. Yep, it's where Chernobyl is located. He *claims* he had nothing to do with what happened.  He describes himself as a "confirmed geek/workaholic type".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell is also on the SourceForge development team. He worked for another company, but they wanted to ditch Open Source and move to ASP for their web applications... Now he works for us.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah is a system administrator/developer from the frosty regions of Minnesota.  When he's not shoveling his driveway or defrosting his car you'll find him locked away in a dark room somewhere in front of a computer.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) is the Quality of Service Manager for SourceForge. He currently handles the bulk of the level two support requests, maintains the site status page, and helps to ensure everyone who logs a support request gets timely, correct service.  He works from the northeastern US.</td></tr><TR><TD COLSPAN="2"><B>Founders:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Signicant Outside Contributors:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace has contributed significant tweaks and improvements to the SourceForge core code base. We appreciate his efforts, as do the users who benefit from his contributions.</td></tr></table>
 survey	title	설문조사: $1
@@ -395,7 +399,7 @@ top	active_all_time	현재 가장 활발한 프로젝트
 top	active_weekly	금주 가장 활발한 프로젝트
 top	downloads	최다 다운로드
 top	downloads_7_days	최다 다운로드 (최근 7일동안)
-top	forum_posts	활발한 포럼
+top	forum_posts	활발한 게시판
 top	pageviews	페이지뷰가 많은 프로젝트 - $1 버튼 로고를 클릭한 횟수로 측정됨
 top	highest_ranked_users	활발한 사용자
 top	title	상위 프로젝트
@@ -404,33 +408,33 @@ top_mostactive	title	가장 활발한 프로젝트: $1
 top_toplist	section	상위 프로젝트
 top_toplist	title	상위 프로젝트 보기
 tracker	section	프로젝트: $1
-tracker	title	Trackers
+tracker	title	문제점 추적
 tracker_add	section	$1
-tracker_add	title	Tracker 아이템 제출
-tracker_admin	section	Tracker
+tracker_add	title	문제점 추적 아이템 제출
+tracker_admin	section	문제점 추적
 tracker_admin	title	관리
-tracker_admin_add_canned	section	Tracker 관리
+tracker_admin_add_canned	section	문제점 추적 관리
 tracker_admin_add_canned	title	답글 추가: $1
-tracker_admin_add_cat	section	Tracker 관리
+tracker_admin_add_cat	section	문제점 추적 관리
 tracker_admin_add_cat	title	$1 에 분류 추가
-tracker_admin_add_group	section	Tracker 관리
+tracker_admin_add_group	section	문제점 추적 관리
 tracker_admin_add_group	title	$1 에 그룹 추가
-tracker_admin_update_canned	section	Tracker 관리
+tracker_admin_update_canned	section	문제점 추적 관리
 tracker_admin_update_canned	title	답글 수정: $1
-tracker_admin_update_cat	section	Tracker 관리
+tracker_admin_update_cat	section	문제점 추적 관리
 tracker_admin_update_cat	title	분류 수정: $1
-tracker_admin_update_group	section	Tracker 관리
+tracker_admin_update_group	section	문제점 추적 관리
 tracker_admin_update_group	title	그룹 수정: $1
-tracker_admin_update_type	section	Tracker 관리
+tracker_admin_update_type	section	문제점 추적 관리
 tracker_admin_update_type	title	Update $1
-tracker_admin_update_users	section	Tracker 관리
-tracker_admin_update_users	title	Tracker 사용자 권한 추가/편집
+tracker_admin_update_users	section	문제점 추적 관리
+tracker_admin_update_users	title	문제점 추적 사용자 권한 추가/편집
 tracker_browse	section	프로젝트: $1
 tracker_browse	title	$1 보기
 tracker_detail	section	$1
-tracker_detail	title	Tracker 자세히 보기
+tracker_detail	title	문제점 추적 자세히 보기
 tracker_reporting	section	$1
-tracker_reporting	title	Tracker 리포팅
+tracker_reporting	title	문제점 추적 리포팅
 users	title	사용자 정보
 users	peerinfo1	만약 이 사용자에 대해 잘 알고 계신다면 약간의 시간을 들여 다음 기준에 따라 이 사용자를 평가해 주시기 바랍니다. 여러분의 평가 결과는 다른 모든 사용자들에게 보여진다는 것을 명심하십시오. <p> $1 Peer Rating System은 <A HREF="http://www.advogato.com">Advogato</A>에서 힌트를 얻은 것입니다. 지금 사용하고 계신 것은 그를 기반으로 확장, 재구현된 것입니다.
 users	peerinfo2	Peer Rating 박스는 각 항목에 대한 평가 결과의 평균과 레벨을 함께 나타냅니다. 이 결과는 "trusted" 사용자와 "non-trusted" 사용자의 평가가 함께 반영되어 있습니다. <ul><li>"전체 순위" 필드는 $1의 모든 사용자와 비교한 순위를 나타냅니다. <li>"종합점수"는 trusted 사용자의 응답을 기준으로 한 평균입니다. <li>"개인 중요도" 필드는 다른 개발자를 평가할 때 적용되는 가중치이며 1부터 1.5사이의 값을 가집니다. 점수가 높은 사용자는 가중치도 더 높습니다. </ul> <p> <i> Peer Rating System에 참여하고 싶지 않으시다면, (이는 다른 사람에게 평가받는 것, 다른 사람을 평가하는 것 양쪽 모두에게 영향을 미칩니다.) <a href="/account/">사용자 등록 정보</a> 페이지에서 설정하시면 됩니다. 만약 이 평가 시스템에서 탈퇴하시면 다른 사용자를 평가했던 정보들도 모두 영구적으로 삭제되고 여러분의 개인 페이지에서 'Peer Rating' 박스도 사라지게 되니다. </i></p>

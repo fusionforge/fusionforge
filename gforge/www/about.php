@@ -12,7 +12,7 @@
   */
 
 require_once('pre.php');
-$HTML->header(array(title=>"About Sourceforge"));
+$HTML->header(array(title=>"About this site"));
 
 echo $Language->getText('about', 'about_blurb');
 
