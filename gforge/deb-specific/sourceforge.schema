@@ -18,7 +18,7 @@ attributetype ( 1.1.2.2.3 NAME 'x-forward-email'
 	EQUALITY caseIgnoreIA5Match 
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
 
-attributetype ( 1.1.2.2.4 NAME 'postAddress' 
+attributetype ( 1.1.2.2.4 NAME 'listPostAddress' 
 	DESC 'The address of the mailing-list'
 	EQUALITY caseIgnoreIA5Match 
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 SINGLE-VALUE ) 
@@ -39,4 +39,4 @@ objectclass ( 1.1.2.2.1 NAME 'x-sourceforgeAccount' SUP top AUXILIARY
 
 objectclass ( 1.1.2.2.4 NAME 'x-sourceforgeMailingList' SUP top AUXILIARY
 	DESC 'Abstraction of a Sourceforge Mailing List' 
-	MAY ( x-cvsShell $ x-forward-email ) )
+	MAY ( listPostAddress $ listOwnerAddress $ listRequestAddress ) )

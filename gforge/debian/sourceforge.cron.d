@@ -41,5 +41,8 @@ web_only=true
 # DNS Update
 0 * * * * sourceforge [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/dns_conf.pl ] && /usr/lib/sourceforge/bin/dns_conf.pl && /usr/sbin/rndc reload &>/dev/null
 
+# Mailing-list creation
+55 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl
+
 # CVS/user/group update
 0 * * * * root [ $web_only != "true" ] && [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh

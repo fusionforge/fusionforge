@@ -55,43 +55,35 @@ forward_for_sourceforge:
   user = nobody
   group = nogroup
 
-#forward_for_lists:
-#  domains = $sys_lists_host
-#  driver = aliasfile
-#  file_transport = address_file
-#  pipe_transport = address_pipe
-#  query = "select \'|/usr/lib/mailman/mail/wrapper post \'||list_name
-#       from mail_group_list where list_name = \'$local_part\'"
-#  search_type = pgsql
-#  user=root
-#  group=root
-#
-#forward_for_lists_admin:
-#  domains = $sys_lists_host
-#  driver = aliasfile
-#  file_transport = address_file
-#  pipe_transport = address_pipe
-#  query = "select \'|/usr/lib/mailman/mail/wrapper mailowner \'||list_name
-#    from mail_group_list where list_name =
-#    substring(\'$local_part\' for (octet_length(\'$local_part\')-6)) and
-#    substring(\'$local_part\' from (octet_length(\'$local_part\')-5)) = \'-admin\'"
-#  search_type = pgsql
-#  user=root
-#  group=root
-#
-#forward_for_lists_request:
-#  domains = $sys_lists_host
-#  driver = aliasfile
-#  file_transport = address_file
-#  pipe_transport = address_pipe
-#  query = "select \'|/usr/lib/mailman/mail/wrapper mailcmd \'||list_name
-#    from mail_group_list where list_name =
-#    substring(\'$local_part\' for (octet_length(\'$local_part\')-8)) and
-#    substring(\'$local_part\' from (octet_length(\'$local_part\')-7)) = \'-request\'"
-#  search_type = pgsql
-#  user=root
-#  group=root
-## END SOURCEFORGE BLOCK #
+forward_for_sourceforge_lists:
+  domains = $sys_lists_host
+  driver = aliasfile
+  pipe_transport = address_pipe
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?listPostaddress\"
+  search_type = ldap
+  user = nobody
+  group = nogroup
+
+forward_for_sourceforge_lists_admin:
+  domains = $sys_lists_host
+  suffix = -owner : -admin
+  driver = aliasfile
+  pipe_transport = address_pipe
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?listOwnerAddress\"
+  search_type = ldap
+  user = nobody
+  group = nogroup
+
+forward_for_sourceforge_lists_request:
+  domains = $sys_lists_host
+  suffix = -request
+  driver = aliasfile
+  pipe_transport = address_pipe
+  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?listRequestAddress\"
+  search_type = ldap
+  user = nobody
+  group = nogroup
+# END SOURCEFORGE BLOCK #
 " ;
 
 while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };

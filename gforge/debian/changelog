@@ -1,4 +1,4 @@
-sourceforge (2.5-10+10) unstable; urgency=low
+sourceforge (2.5-10+11) unstable; urgency=low
 
   * Fixed /etc/aliases entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
@@ -22,11 +22,16 @@ sourceforge (2.5-10+10) unstable; urgency=low
     anymore, but it's better nevertheless.
   * [Christian] Added SF_robot and Replicator entry in sql2ldif script.
   * [Christian] Made ldap_add_password template var work.
-  * [Christian] Added ldap check in apache/php config
-  * [Christian] Ldap online support enabled. Require intensiv test
-    and probably security enhancement similar to database
+  * Mailing-lists should now work.  The emails should also be sent to the
+    list with the same LDAP trick we used for the email forwarding, and
+    the web part of Mailman be correctly configured.
+  * Fixed apache-ssl support (apache + libapache-mod-ssl was the only
+    combination I had previously tested).
+  * [Christian] Added ldap check in apache/php config.
+  * [Christian] Ldap online support enabled.  Requires intensive testing
+    and probably security enhancements similar to database.
 
- -- Christian Bayle <bayle@aist.enst.fr>  Wed, 12 Sep 2001 23:13:29 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 14 Sep 2001 22:30:18 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 

@@ -53,13 +53,22 @@ NameVirtualHost {ip_address}
 <VirtualHost {ip_address}>
   ServerName {lists_host}
   AddHandler cgi-script .cgi
+
   ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+
+  Alias /pipermail /var/lib/mailman/archives/public
+  <Directory /var/lib/mailman/archives/public>
+    AllowOverride Options
+    Options FollowSymLinks
+  </Directory>
+
   Alias /doc/mailman/images /usr/share/doc/mailman/images
   <Location /doc/mailman/images>
     order allow,deny
     allow from all
   </Location>
-  RedirectMatch permanent /$ http://{lists_host}/cgi-bin/mailman/listinfo
+
+  RedirectMatch permanent ^/$ http://{lists_host}/cgi-bin/mailman/listinfo
 </VirtualHost>
 
 <VirtualHost {ip_address}:443>

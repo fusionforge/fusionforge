@@ -122,6 +122,33 @@ gidNumber: $gid
 }
 
 #
+#  Dump mailing-lists entries (ou=mailingList)
+#
+
+$query = "SELECT mail_group_list.group_list_id,
+                 mail_group_list.list_name,
+                 users.user_name,
+                 mail_group_list.password,
+                 mail_group_list.description
+          FROM mail_group_list, users
+          WHERE mail_group_list.status = 3
+                AND mail_group_list.list_admin = users.user_id" ;
+$rel = $dbh->prepare($query);
+$rel->execute();
+
+while(my ($group_list_id, $listname, $user_name, $password, $description) = $rel->fetchrow()) {
+	print "dn: cn=$listname,ou=mailingList,$sys_ldap_base_dn
+objectClass: x-sourceforgeMailingList
+objectClass: top
+cn: $listname
+listPostAddress: \"|/var/lib/mailman/mail/wrapper post $listname\"
+listOwnerAddress: \"|/var/lib/mailman/mail/wrapper mailowner $listname\"
+listRequestAddress: \"|/var/lib/mailman/mail/wrapper mailcmd $listname\"
+";
+	print "\n";
+}
+
+#
 #  Dump CVS group entries (ou=cvsGroup)
 #
 
@@ -206,6 +233,13 @@ objectClass: top
 objectClass: organizationalUnit
 objectClass: domainRelatedObject
 associatedDomain: $sys_default_domain
+
+dn: ou=mailingList,$sys_ldap_base_dn
+ou: mailingList
+objectClass: top
+objectClass: organizationalUnit
+objectClass: domainRelatedObject
+associatedDomain: $sys_lists_host
 
 dn: cn=Replicator,$sys_ldap_base_dn
 cn: Replicator
