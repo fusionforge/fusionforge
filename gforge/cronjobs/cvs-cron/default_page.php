@@ -81,31 +81,31 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 		<!-- start tabs -->
 
 	<tr>
-		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/topleft.png" height="9" width="9" alt="" /></td>
-		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="30" height="1" alt="" /></td>
-		<td bgcolor="#E0E0E0"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
-		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="30" height="1" alt="" /></td>
-		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/topright.png" height="9" width="9" alt="" /></td>
+		<td align="left" bgcolor="#E0E0E0" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/topleft.png" height="9" width="9" alt="" /></td>
+		<td bgcolor="#E0E0E0" width="30"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="30" height="1" alt="" /></td>
+		<td bgcolor="#E0E0E0"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
+		<td bgcolor="#E0E0E0" width="30"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="30" height="1" alt="" /></td>
+		<td align="right" bgcolor="#E0E0E0" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/topright.png" height="9" width="9" alt="" /></td>
 	</tr>
 
 	<tr>
 
 		<!-- Outer body row -->
 
-		<td bgcolor="#E0E0E0"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="10" height="1" alt="" /></td>
+		<td bgcolor="#E0E0E0"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="10" height="1" alt="" /></td>
 		<td valign="top" width="99%" bgcolor="#E0E0E0" colspan="3">
 
 			<!-- Inner Tabs / Shell -->
 
 			<table border="0" width="100%" cellspacing="0" cellpadding="0">
 			<tr>
-				<td align="left" bgcolor="#ffffff" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
-				<td bgcolor="#ffffff"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
-				<td align="right" bgcolor="#ffffff" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/topright-inner.png" height="9" width="9" alt="" /></td>
+				<td align="left" bgcolor="#ffffff" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+				<td bgcolor="#ffffff"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" bgcolor="#ffffff" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/topright-inner.png" height="9" width="9" alt="" /></td>
 			</tr>
 
 			<tr>
-				<td bgcolor="#ffffff"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="10" height="1" alt="" /></td>
+				<td bgcolor="#ffffff"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="10" height="1" alt="" /></td>
 				<td valign="top" width="99%" bgcolor="white">
 
 	<!-- whole page table -->
@@ -148,7 +148,7 @@ while (!feof($handle)) {
 }
 fclose($handle);
 $contents=str_replace('href="/','href="http://'.$domain.'/',$contents);
-$contents=str_replace('src=/"','src="http://'.$domain.'/',$contents);
+$contents=str_replace('src="/','src="http://'.$domain.'/',$contents);
 echo $contents; } ?>
 
 					</td>
@@ -165,24 +165,24 @@ echo $contents; } ?>
 
 
 				</td>
-				<td width="10" bgcolor="#ffffff"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="2" height="1" alt="" /></td>
+				<td width="10" bgcolor="#ffffff"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-				<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
-				<td bgcolor="#ffffff"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
-				<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
+				<td align="left" bgcolor="#E0E0E0" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+				<td bgcolor="#ffffff"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" bgcolor="#E0E0E0" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
 			</tr>
 			</table>
 
 		<!-- end inner body row -->
 
 		</td>
-		<td width="10" bgcolor="#E0E0E0"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="2" height="1" alt="" /></td>
+		<td width="10" bgcolor="#E0E0E0"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="2" height="1" alt="" /></td>
 	</tr>
 	<tr>
-		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/bottomleft.png" height="9" width="9" alt="" /></td>
-		<td bgcolor="#E0E0E0" colspan="3"><img src="<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
-		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $domain; ?>/themes/gforge/images/tabs/bottomright.png" height="9" width="9" alt="" /></td>
+		<td align="left" bgcolor="#E0E0E0" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+		<td bgcolor="#E0E0E0" colspan="3"><img src="http://<?php echo $domain; ?>/themes/gforge/images/clear.png" width="1" height="1" alt="" /></td>
+		<td align="right" bgcolor="#E0E0E0" width="9"><img src="http://<?php echo $domain; ?>/themes/gforge/images/tabs/bottomright.png" height="9" width="9" alt="" /></td>
 	</tr>
 </table>
 
