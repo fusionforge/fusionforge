@@ -1,9 +1,11 @@
-sourceforge (2.5-21+) unstable; urgency=low
+sourceforge (2.5-22) unstable; urgency=low
 
   * [Roland] Replaced a call to /etc/init.d/bind9 restart by a (more
     appropriate) reload.  Used the policy-defined invoke-rc.d, too.
+  * [Roland] Fixed dependencies to correctly handle apache-ssl and
+    exim-tls (closes: #128345).
 
- --
+ -- Roland Mas <lolando@debian.org>  Fri, 11 Jan 2002 11:05:03 +0100
 
 sourceforge (2.5-21) unstable; urgency=low
 
