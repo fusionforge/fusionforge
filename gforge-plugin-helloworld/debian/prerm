@@ -19,7 +19,7 @@ set -e
 
 case "$1" in
     remove|deconfigure)
-	/usr/lib/gforge/bin/sf-unregister-plugin helloworld
+	/usr/lib/gforge/bin/unregister-plugin helloworld
 	invoke-rc.d apache reload
 	/usr/lib/gforge/plugins/helloworld/bin/db-delete.pl
         ;;
