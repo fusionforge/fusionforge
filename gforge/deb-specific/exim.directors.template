@@ -1,0 +1,54 @@
+local_domains = localhost:users.DOMAIN_NAME:lists.DOMAIN_NAME
+hide pgsql_servers = "localhost/sourceforge/some_user/some_password"
+
+#Mail director
+#------------
+
+forward_for_sourceforge:
+  domains = users.DOMAIN_NAME
+  driver = aliasfile
+  file_transport = address_file
+  query = "select email from users where user_name = '$local_part'"
+  search_type = pgsql
+  user = nobody # trust no one
+  group = nogroup # trust no one
+
+
+#ML directors
+#------------
+forward_for_lists:
+  domains = lists.DOMAIN_NAME
+  driver = aliasfile
+  file_transport = address_file
+  pipe_transport = address_pipe
+  query = "select '|/usr/lib/mailman/mail/wrapper post '||list_name
+       from mail_group_list where list_name = '$local_part'"
+  search_type = pgsql
+  user=root
+  group=root
+
+forward_for_lists_admin:
+  domains = lists.DOMAIN_NAME
+  driver = aliasfile
+  file_transport = address_file
+  pipe_transport = address_pipe
+  query = "select '|/usr/lib/mailman/mail/wrapper mailowner '||list_name
+    from mail_group_list where list_name =
+    substring('$local_part' for (octet_length('$local_part')-6)) and
+    substring('$local_part' from (octet_length('$local_part')-5)) = '-admin'"
+  search_type = pgsql
+  user=root
+  group=root
+
+forward_for_lists_request:
+  domains = lists.DOMAIN_NAME
+  driver = aliasfile
+  file_transport = address_file
+  pipe_transport = address_pipe
+  query = "select '|/usr/lib/mailman/mail/wrapper mailcmd '||list_name
+    from mail_group_list where list_name =
+    substring('$local_part' for (octet_length('$local_part')-8)) and
+    substring('$local_part' from (octet_length('$local_part')-7)) = '-request'"
+  search_type = pgsql
+  user=root
+  group=root
