@@ -136,14 +136,6 @@ forum_message	section	Foros
 forum_message	title	Ver mensaje
 forum_message	msg	A&ntilde;adir mensaje a la conversaci&oacute;n
 forum_message	thread	Comenzar una nueva conversaci&oacute;n
-foundry	section	Fundici&oacute;n: $1
-foundry	title	Resumen
-foundry_admin	section	Fundici&oacute;n: $1
-foundry_admin	title	Administraci&oacute;n de la Fundici&oacute;n
-foundry_html_admin	section	Administraci&oacute;n de la Fundici&oacute;n
-foundry_html_admin	title	Administraci&oacute;n del HTML de la Fundici&oacute;n 
-foundry_news	section	Administraci&oacute;n de la Fundici&oacute;n
-foundry_news	title	Sumario de noticias de la Fundici&oacute;n
 frs	file_download	Descargar
 frs	file_monitor	Monitor
 frs	file_notes	Notas
@@ -219,8 +211,6 @@ menu	compile_farm	Granja de compilaci&oacute;n
 menu	contact_us	Contacto con $1
 menu	discussion_forums	Foros de discusi&oacute;n
 menu	documentation	Documentos
-menu	foundry_admin	Administraci&oacute;n de Fundiciones
-menu	foundry_summary	Sumario de Fundiciones
 menu	home	P&aacute;gina principal
 menu	hosted_projects_list	Lista de proyectos
 menu	logged_in_as	Autenticado como $1

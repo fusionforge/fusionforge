@@ -148,14 +148,6 @@ forum_message	section	게시판
 forum_message	title	메시지 보기
 forum_message	msg	답글 올리기
 forum_message	thread	새글 올리기
-foundry	section	Foundry: $1
-foundry	title	요약
-foundry_admin	section	Foundry: $1
-foundry_admin	title	Foundry 관리
-foundry_html_admin	section	Foundry 관리
-foundry_html_admin	title	Foundry HTML 관리
-foundry_news	section	Foundry 관리
-foundry_news	title	Foundry 새소식 요약
 frs	file_download	다운로드
 frs	file_monitor	모니터
 frs	file_notes	노트
@@ -172,7 +164,6 @@ group	long_bugs	버그 트래킹
 group	long_cvs	CVS 저장소
 group	long_docman	문서 관리자: 프로젝트 문서화
 group	long_forum	공개 게시판
-group	long_foundries	Foundry
 group	long_ftp	익명 FTP 공간
 group	long_homepage	프로젝트 홈페이지
 group	long_mail	메일링 리스트
@@ -220,7 +211,6 @@ mail_admin_add_list	section	메일링 리스트 관리
 mail_admin_add_list	title	리스트 추가
 mail_admin_change_status	section	메일링 리스트 관리
 mail_admin_change_status	title	리스트 관리 및 갱신
-menu	about_foundries	Foundry 소개
 menu	about_sourceforge	GForge 소개
 menu	account_maintenance	사용자 등록 정보
 menu	bookmark_page	책갈피
@@ -230,8 +220,6 @@ menu	compile_farm	Compile Farm
 menu	contact_us	$1에 연락하기
 menu	discussion_forums	게시판
 menu	documentation	참고 문서
-menu	foundry_admin	Foundry 관리
-menu	foundry_summary	Foundry 요약
 menu	login	로그인
 menu	logout	로그아웃
 menu	my_personal_page	개인 페이지

@@ -216,14 +216,6 @@ forum_utils	mailmonitor	\nLisez et répondez à ce message à: \n$1\nPar: $2 \n\n $
 forum_utils	mailsent	courrier envoyé - surveillé par des utilisateurs
 forum_utils	mailnotsent	courrier non envoyé - surveillé par des utilisateurs
 forum_utils	mailnotsent2	courrier non envoyé - personne ne surveille
-foundry	section	Fonderie : $1
-foundry	title	Résumé
-foundry_admin	section	Fonderie : $1
-foundry_admin	title	Fonderie : administration
-foundry_html_admin	section	Administration d'une fonderie
-foundry_html_admin	title	Administration HTML d'une fonderie
-foundry_news	section	Administration d'une fonderie
-foundry_news	title	Résumé des nouvelles de la fonderie
 frs	file_download	Téléchargement
 frs	file_monitor	Surveillance
 frs	file_notes	Remarques
@@ -243,7 +235,6 @@ group	long_bugs	Gestion des bogues
 group	long_cvs	Référentiel CVS
 group	long_docman	Gestionnnaire de documentation
 group	long_forum	Forums de discussion
-group	long_foundries	Fonderies de développement Sourceforge
 group	long_ftp	Espace FTP anonyme
 group	long_homepage	Page d'accueil
 group	long_mail	Listes de diffusion
@@ -292,7 +283,6 @@ mail_admin_add_list	section	Administration des listes de diffusion
 mail_admin_add_list	title	Ajout d'une liste
 mail_admin_change_status	section	Administration des listes de diffusion
 mail_admin_change_status	title	Administration / modification des listes
-menu	about_foundries	À propos des fonderies
 menu	about_sourceforge	À propos de $1
 menu	account_maintenance	Gestion du compte
 menu	bookmark_page	Ajouter aux favoris
@@ -303,8 +293,6 @@ menu	contact_us	Contacter $1
 menu	diary_notes	Journal et notes
 menu	discussion_forums	Forums de discussion
 menu	documentation	Documentations sur le site
-menu	foundry_admin	Administration de la fonderie
-menu	foundry_summary	Résumé de la fonderie
 menu	login	Connexion via SSL
 menu	logout	Sortir
 menu	my_personal_page	Ma page personnelle
