@@ -99,4 +99,4 @@ ALTER TABLE groups ADD CONSTRAINT groups_license
 
 ALTER TABLE groups RENAME COLUMN cvs_box TO scm_box;
 ALTER TABLE groups RENAME COLUMN use_cvs TO use_scm;
-ALTER TABLE groups RENAME COLUMN allow_anoncvs TO allow_anonscm;
+ALTER TABLE groups RENAME COLUMN enable_anoncvs TO enable_anonscm;
