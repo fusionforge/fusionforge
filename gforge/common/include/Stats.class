@@ -79,4 +79,12 @@ class Stats extends Error {
       ." group by g.unix_group_name, g.group_name "
       ." order by items desc", 100);
 	}
+
+	function getTopPageViews() {
+		return db_query("select g.group_name, g.unix_group_name, sum(s.page_views) as items "
+			." from stats_project_months s, groups g "
+			." where s.group_id = g.group_id "
+			." group by g.group_name, g.unix_group_name "
+			." order by items desc", 100);
+	}
 }

@@ -9,39 +9,31 @@
 require "pre.php";    
 require_once "common/include/Stats.class";    
 
+$stats = new Stats();
+
 if ($GLOBALS[type] == 'downloads_week') {
-	$rankfield = 'downloads_week';
 	$title = $Language->getText('top_toplist','top_download_7_days');
 	$column1 = $Language->getText('top_toplist','download');
 }
 else if ($GLOBALS[type] == 'pageviews_proj') {
-	$rankfield = 'pageviews_proj';
+	$res_top = $stats->getTopPageViews();
 	$title = $Language->getText('top_toplist','top_weekly_pagesviews',array($GLOBALS['sys_default_domain'],$GLOBALS['sys_name']));
 	$column1 = $Language->getText('top_toplist','pageviews');
 }
 else if ($GLOBALS[type] == 'forumposts_week') {
-	$rankfield = 'msg_posted';
+	$res_top = $stats->getTopMessagesPosted();
 	$title = $Language->getText('top_toplist','top_forum_post_count');
 	$column1 = $Language->getText('top_toplist','posts');
 }
 // default to downloads
 else {
-	$rankfield = 'downloads_all';
 	$title = $Language->getText('top_toplist','top_download');
 	$column1 = $Language->getText('top_toplist','download');
 }
-
-
 $HTML->header(array('title'=>$title));
-
 print '<p><a href="/top/">['.$Language->getText('top','view_other_top_category').']</a>';
-
 $arr=array($Language->getText('top_toplist','rank'),$Language->getText('top_toplist','project_name'),"$column1");
-
 echo $HTML->listTableTop($arr);
-
-$stats = new Stats();
-$res_top = $stats->getTopMessagesPosted();
 
 echo db_error();
 

@@ -1,3 +1,9 @@
+2003-05-22 Tom Copeland <tom@infoether.com>
+
+	* common/include/Stats.class, www/top/toplist.php, www/top/mostactive.php,
+	www/top/index.php.
+	"Top pageviews" works now.
+
 2003-05-21 Christian Bayle	<bayle@debian.org>
 
 	* Applied Tony Guntharp (fusion94) patch #366. Description follow
