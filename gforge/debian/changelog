@@ -3,12 +3,12 @@ gforge (3rc2-1+) unstable; urgency=low
   * [Roland] Added db/20030513.sql, to add an "enabled" column to the
     themes table.  Fixed register-theme accordingly, and wrote a new
     unregister-theme too (which just disables the theme).
-  * [Christian] Updated French.tab contributed by Linac (Angouleme Lug) for
-    Adullact <michel.bondaz@linac.org>
+  * [Christian] Updated French.tab contributed by Linac (Angouleme Lug)
+    for Adullact <michel.bondaz@linac.org>.
   * [Roland] Applied patch #330 fixing LDAP schema.  Thanks, Alwyn
     Schoeman <alwyn@smart.com.ph>.
-  * [Christian] Moved <name> theme in gforge-theme-<name> dir where name not 
-    gforge or osx
+  * [Christian] Moved <name> theme in gforge-theme-<name> dir where name
+    not gforge or osx.
   * [Roland] Fixed cvs_dump_update.pl so that it creates the homedirs for
     the anoncvs_* users when needed.
   * [Roland] Also fixed database user creation code.
@@ -16,8 +16,12 @@ gforge (3rc2-1+) unstable; urgency=low
     relocated from /usr/sbin to /usr/bin in that version.
   * [Roland] Clean the source tree so as to be able to build a non-native
     Debian package.
+  * [Roland] Restored initial debSfMailingList (Mailman 2.0 version) to
+    the LDAP schema, and added the new debSfMailingListMM21 with OID
+    1.3.6.1.4.1.9586.1.1.1.2.3 for Mailman 2.1.  Fixed sql2ldif.pl
+    accordingly.
 
- -- Roland Mas <lolando@debian.org>  Sun, 18 May 2003 23:03:55 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 19 May 2003 16:46:54 +0200
 
 gforge (3rc2-1) unstable; urgency=low
 

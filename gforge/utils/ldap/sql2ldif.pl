@@ -138,7 +138,7 @@ $rel->execute();
 
 while(my ($group_list_id, $listname, $user_name, $password, $description) = $rel->fetchrow()) {
 	print "dn: cn=$listname,ou=mailingList,$sys_ldap_base_dn
-objectClass: debSfMailingList
+objectClass: debSfMailingListMM21
 objectClass: top
 debSfListPostAddress: \"|/var/lib/mailman/mail/mailman post $listname\"
 debSfListOwnerAddress: \"|/var/lib/mailman/mail/mailman mailowner $listname\"
