@@ -434,6 +434,7 @@ menu	mypage	Pagina&nbsp;Personale
 menu	code_snippet	Frammenti di codice
 menu	admin	Amministrazione
 menu	account_maintenance	Opzioni Utente
+menu	register_project	Registra progetto
 my	about_blurb	La tua pagina personale contiene un elenco di bug, attivita che ti sono stati assegnati, inoltre l'elenco dei progetti ai quali partecipi.
 my	no_bookmarks	Non ci sono segnalibri salvati
 my	no_monitored_filemodules	<H3>Non hai richiesto la notifica di alcun file</H3><P>Quando &egrave; attivita la notifica di un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
@@ -1551,7 +1552,7 @@ admin_massmail	type	Type
 admin_massmail	subject	Subject
 admin_massmail	date	Date
 admin_massmail	last_user_id_mailed	Last user_id mailed
-project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>can access this page and other project administration pages</dd><dt><strong>Release Technicians</strong></dt><dd>can make the file releases (any project admin also a release technician)</dd><dt><strong>Tool Technicians (T)</strong></dt><dd>can be assigned Bugs/Tasks/Patches</dd><dt><strong>Tool Admins (A)</strong></dt><dd>can make changes to Bugs/Tasks/Patches as well as use the /toolname/admin/ pages</dd><dt><strong>Tool No Permission (N/A)</strong></dt><dd>Developer doesn\'t have specific permission (currently equivalent to \'-\')</dd><dt><strong>Moderators</strong> (forums)</dt><dd>can delete messages from the project forums</dd><dt><strong>Editors</strong> (doc. manager)</dt><dd>can update/edit/remove documentation from the project.</dd></dl>
+project_admin_utils	permission_blurb	<strong>NOTA:</strong><dl><dt><strong>Amministratori del progetto (grassetto)</strong></dt><dd>possono accedere a questa pagina e altre pagine per l'amministrazione del progetto</dd><dt><strong>Tecnici per il rilascio</strong></dt><dd>possono rilasciare file (tutti gli amministratori di progetti sono tecnici del rilascio)</dd><dt><strong>Tecnici degli strumenti (T)</strong></dt><dd>a loro possono essere assegnati bug/attività/patch, etc</dd><dt><strong>Amministratori di strumenti (A)</strong></dt><dd>possono effettuare cambiamenti a bug/attività, etc e amministrare il progetto </dd><dt><strong>Nessun permesso sullo strumento(N/A)</strong></dt><dd>Lo sviluppatore non ha permessi sullo strumento </dd><dt><strong>Moderatori</strong> (forums)</dt><dd>possono cancellar i messaggi dai forum</dd><dt><strong>Editor</strong> (Gestore progetti)</dt><dd>possono aggiornare/modifica/eliminare la documentazione del progetto.</dd></dl>
 project_admin_utils	admin	Amministra
 project_admin_utils	user_permissions	Permessi utente
 project_admin_utils	edit_public_info	Modifica informazioni pubbliche
@@ -1884,6 +1885,7 @@ people_editjob	no_such	Nessuna posizione disponibile per il progetto
 people_editjob	skill_explains	<p>&Egrave; possibile cambiare l'elenco delle competenze necessarie per questa posizione. </p><p>Tutte le posizioni verranno chiuse automaticamente dopo due settimane.</p>
 people_editjob	update_description	Aggiorna descrizioni
 people_editjob	finished	Finito
+people_editjob	title	Modifica posizione
 people_editprofile	section	Progetti in ricerca d'aiuto
 people_editprofile	update_failed	Aggiornamento utente fallito
 people_editprofile	update_ok	Aggiornamento utente eseguito
@@ -1894,7 +1896,7 @@ people_editprofile	failed_to_add_skill	Aggiunta competenza fallita
 people_editprofile	skill_added_ok	Competenza aggiunta
 people_editprofile	no_skills_selected	Nessuna competenza selezionata
 people_editprofile	failed_update_skills	Aggiornamento competenze fallita
-people_editprofile	fill_all_required_fields	Competenza $1 aggiornata
+people_editprofile	fill_all_required_fields	Riempire tutti i campi obbligatori
 people_editprofile	skills_edit	Modifica comptetenze
 people_editprofile	edit_skills	Modifica posizione
 people_editprofile	change_required_fields	Change the required fields, and press "Done" at the bottom of the page
