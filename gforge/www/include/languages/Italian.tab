@@ -892,6 +892,9 @@ register_requirements	section	Registrazione nuovo progetto
 register_requirements	title	Services & Requirements
 register_tos	section	Registrazione nuovo progetto
 register_tos	title	Terms Of Service Agreement
+tracker_utils	monitor		Notifica
+tracker_utils	stop_monitoring		Fine notifica
+tracker	title	Tracker
 tracker	title	Tracker
 tracker	choose	Seleziona un tracker e puoi visualizzare/aggiungere o modificare elementi.
 tracker	item_created	Elemento creato con successo
@@ -943,9 +946,9 @@ tracker_browse	next	Avanti
 tracker_browse	check_all	Seleziona&nbsp;tutti
 tracker_browse	clear_all	Deseleziona&nbsp;tutti
 tracker_browse	admin_mass_update	<strong>Amministratore:</strong></FONT> Se vuoi fare dei cambiamenti a tutti gli elementi elencati, usa i campi sottostanti per cambiare le propriet&agrave; e seleziona "Aggiornamento multiplo".
-tracker_browse	no_change	No Change
-tracker_browse	resolution	Resolution 
-tracker_browse	canned_response	Canned Response
+tracker_browse	no_change	Nessun cambio
+tracker_browse	resolution	Risoluzione
+tracker_browse	canned_response	Risposta predefinita
 tracker_browse	mass_update	Aggiornamento multiplo
 tracker_browse	old_requests	* indica richieste pi&ugrave; di > $1 giorni
 tracker_browse	no_items	Nessun elemento trovato
