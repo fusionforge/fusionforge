@@ -349,7 +349,6 @@ menu	search	Recherche
 menu	site_status	État du site
 menu	software_map	Recherche thématique
 menu	top_projects	Meilleurs projets
-menu	admin	Gérer
 menu	submit	Proposer
 menu	home	Accueil
 menu	projectree	Arbre des projets
@@ -562,7 +561,6 @@ top	same	M√™me chose
 top	up	Monte $1
 top	down	Descend $1
 top_mostactive	section	Les meilleurs projets
-top_mostactive	title	Les projets les plus actifs : $1
 top_mostactive	title	Les projets les plus actifs: $1
 top_mostactive	rank	Ranc
 top_mostactive	project_name	Nom du projet
@@ -660,7 +658,6 @@ user_home	skills_profile	Compétences
 user_home	user_id	Identifiant d'utilisateur
 user_home	login_name	Nom de connexion
 user_home	real_name	Nom réel
-user_home	email	Adresse e-mail
 user_home	jabber_address	Addresse Jabber
 user_home	personal_information	Informations personnelles
 user_home	site_member_since	Date d'entrée
