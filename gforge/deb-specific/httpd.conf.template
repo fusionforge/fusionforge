@@ -12,6 +12,7 @@ Include /etc/gforge/httpd.common
   allow from all
   php_admin_value include_path "/usr/share/gforge:/usr/share/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
+  php_admin_value register_globals "On"
 </Directory>
 
 # HTTP
@@ -26,6 +27,7 @@ Include /etc/gforge/httpd.common
   </IfModule>
 
   php_admin_value default_charset "UTF-8"
+  php_admin_value register_globals "On"
 
   <Directory /usr/share/gforge/www>
     Include /etc/gforge/httpd.secrets
@@ -75,6 +77,7 @@ Include /etc/gforge/httpd.common
   </IfModule>
 
   php_admin_value default_charset "UTF-8"
+  php_admin_value register_globals "On"
 
   <IfModule mod_ssl.c>
     SSLEngine on
@@ -125,6 +128,7 @@ Include /etc/gforge/httpd.common
   allow from all
   php_admin_value include_path "/usr/share/gforge:/usr/share/gforge/www/include:."
   php_admin_value default_charset "UTF-8"
+  php_admin_value register_globals "On"
 </Directory>
 
 <VirtualHost {ip_address}:80>
@@ -193,7 +197,7 @@ Include /etc/gforge/httpd.common
   ServerName {lists_host}
   AddHandler cgi-script .cgi
 
-  ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+  ScriptAlias /mailman/ /usr/lib/cgi-bin/mailman/
 
   Alias /pipermail /var/lib/mailman/archives/public
   <Directory /var/lib/mailman/archives/public>
@@ -238,7 +242,7 @@ Include /etc/gforge/httpd.common
     SSLEnable
   </IfModule>
 
-  ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+  ScriptAlias /mailman/ /usr/lib/cgi-bin/mailman/
 
   Alias /pipermail /var/lib/mailman/archives/public
   <Directory /var/lib/mailman/archives/public>
