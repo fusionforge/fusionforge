@@ -80,7 +80,7 @@ EOF
 #	psql -U sourceforge -h $ip_address sourceforge -f /usr/lib/sourceforge/db/sf-2.6-complete.sql <<-FIN
 #$db_passwd
 #FIN
-	/usr/lib/sourceforge/bin/db-upgrade26.pl
+	/usr/lib/sourceforge/bin/db-upgrade26.pl 2>&1 | grep -v ^NOTICE:
 	;;
     purge)
         if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf

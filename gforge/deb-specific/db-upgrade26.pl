@@ -42,7 +42,7 @@ eval {
     # Do we have at least the basic schema?
 
     $query = "SELECT count(*) from pg_class where relname = 'groups'";
-    debug $query ;
+    # debug $query ;
     $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
     @array = $sth->fetchrow_array () ;
@@ -66,7 +66,7 @@ eval {
 	    
  	    foreach my $s (@reqlist) {
  		$query = $s ;
-		debug $query ;
+		# debug $query ;
  		$sth = $dbh->prepare ($query) ;
   		$sth->execute () ;
   		$sth->finish () ;
@@ -159,7 +159,7 @@ eval {
 
  	foreach my $s (@reqlist) {
  	    $query = $s ;
-	    debug $query ;
+	    # debug $query ;
  	    $sth = $dbh->prepare ($query) ;
  	    $sth->execute () ;
  	    $sth->finish () ;
@@ -191,7 +191,7 @@ eval {
 
  	foreach my $s (@reqlist) {
  	    $query = $s ;
-	    debug $query ;
+	    # debug $query ;
  	    $sth = $dbh->prepare ($query) ;
  	    $sth->execute () ;
  	    $sth->finish () ;
