@@ -63,6 +63,26 @@ class ArtifactType extends Error {
 	var $Group; //group object
 
 	/**
+	 * Selection boxes db resource ID.
+	 *
+	 * @var		int		$selection_boxes_res.
+	 */
+	var $selection_boxes_res;
+
+	/**
+	 * Box options  db resource ID.
+	 *
+	 * @var		int		$box_options_res.
+	 */
+	var $box_options_res;
+
+	var $options_res;
+
+	var $box;
+
+	var $choice_name_res;
+
+	/**
 	 * Categories db resource ID.
 	 *
 	 * @var		int		$categories_res.
@@ -425,11 +445,85 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	  delete - delete this tracker and all its related data.
+	 *	getSelectionBoxes - List of possible user built selection boxes set up for this artifact type.
+	 *
+	 *	@return database result set.
+	 */
+	function getSelectionBoxes() {
+		if (!isset($this->selection_boxes_res)) {
+			$sql="select id,selection_box_name
+				FROM artifact_group_selection_box_list 
+				WHERE group_artifact_id='".$this->getID() ."'
+				ORDER BY id";
+			$this->selection_boxes_res=db_query($sql);
+		}
+		return $this->selection_boxes_res;
+	}
+
+
+	/**
+	 *	getSelectionBoxOptions - List of possible admin configured selection boxes set up for this artifact type.
+	 *
+	 *	@return database result set.
+	 */
+	function getSelectionBoxOptions($box) {
+		$this->box=$box;
+		$sql="select id,box_options_name
+			FROM artifact_group_selection_box_options
+			WHERE artifact_box_id ='".$this->box."'  
+			ORDER BY box_options_name";
+		$this->box_options_res=db_query($sql);
+		return $this->box_options_res;
+	}	
+
+	/**
+	 *	getBoxOptions - List of possible admin configured selection boxes set up for this artifact type.
+	 *
+	 *	@return database result set.
+	 */
+	function getBoxOptions() {
+		$sql="select id,artifact_box_id,box_options_name
+			FROM artifact_group_selection_box_options
+			ORDER BY box_options_name";
+		$this->box_options_res=db_query($sql);
+		return $this->box_options_res;
+	
+	}
+
+	/**
+	 *	getArtifactChoices -List of choices for each admin configured boxe.
+	 *	@return databse result set.
+	 */
+	function getArtifactChoices($artifact_id){
+		$this->choice=$artifact_id;
+		$sql="select id,artifact_id,choice_id
+			FROM artifact_extra_field_data
+			WHERE artifact_id='".$this->choice."'
+			ORDER BY id";
+		$this->choice_res=db_query($sql);
+		return $this->choice_res;
+	}
+
+	/**
+	 *	getBoxOptionName - List of possible user built selection boxes set up for this artifact type.
+	 *
+	 *	@return database result set.
+	 */
+	function getBoxOptionsName($choice_id) {
+		$this->choice = $choice_id;
+		$sql="select id, box_options_name
+			FROM artifact_group_selection_box_options 
+			WHERE id = '".$this->choice."'";
+		$this->options_res=db_query($sql);
+		return $this->options_res;
+	}
+
+	/**
+	 *	delete - delete this tracker and all its related data.
 	 *
 	 *	@param	bool	I'm Sure.
 	 *	@param	bool	I'm REALLY sure.
-	 *	  @return	bool true/false;
+	 *	@return	bool true/false;
 	 */
 	function delete($sure, $really_sure) {
 		if (!$sure || !$really_sure) {

@@ -26,11 +26,11 @@ require_once('common/include/Error.class');
 require_once('common/tracker/ArtifactMessage.class');
 
 	/**
-	* Factory method which creates an Artifact from an artifact ID
+	*	Factory method which creates an Artifact from an artifact ID
 	*	
-	* @param artifact_id	the artifact ID
-	*	@param data	the DB handle, if it's passed in
-	*	@return an Artifact object
+	*	@param int	The artifact ID
+	*	@param array	The result array, if it's passed in
+	*	@return	object	Artifact object
 	*/
 	function &artifact_get_object($artifact_id,$data=false) {
 		global $ARTIFACT_OBJ;
@@ -74,6 +74,13 @@ class Artifact extends Error {
 	 * @var		array	$data_array.
 	 */
 	var $data_array;
+
+	/**
+	 * Array of artifact data for extra fields defined by Admin.
+	 *
+	 * @var		array	$data_extra_field_array.
+	 */
+	var $data_extra_field_array;
 
 	/**
 	 * Array of ArtifactFile objects.
@@ -273,7 +280,30 @@ class Artifact extends Error {
 			return $artifact_id;
 		}
 	}
+	/**
+	 *
+	 * 	createExtraFields - extend an artifact with data input in selection boxes with choices defined by ADMIN for a project
+	 *
+	 */
+	function createExtraFields($choice_id){
+		$this->choice_id=$choice_id;
+		$res=db_query("INSERT INTO artifact_extra_field_data
+			(artifact_id, choice_id)
+			VALUES
+			('".$this->getID()."',$this->choice_id)");
+					
+		if (!$res) {
+			$this->setError('Artifact: '.db_error());
+			db_rollback();
+			return false;
+		}
 
+		return $choice_id;
+	
+	}
+	
+
+	
 	/**
 	 *	fetchData - re-fetch the data for this Artifact from the database.
 	 *
@@ -353,6 +383,15 @@ class Artifact extends Error {
 	 */
 	function getCategoryID() {
 		return $this->data_array['category_id'];
+	}
+
+	/**
+	 *	getExtraFieldID - get choice_id flag.
+	 *
+	 *	@return int choice_id.
+	 */
+	function getExtraFieldID() {
+		return $this->data_extra_field_array['choice_id'];
 	}
 
 	/**
@@ -910,7 +949,58 @@ class Artifact extends Error {
 			db_rollback();
 			return false;
 		}
+	
 	}
+
+	/**
+	 * 	updateExtraFields - update an artifact with data input in selection 
+	 *	boxes with choices defined by ADMIN for a project.
+	 *
+	 */
+	function updateExtraFields($id,$choice_id){
+			
+		$res=db_query("UPDATE artifact_extra_field_data
+			SET
+			choice_id='$choice_id'
+			WHERE
+			id='$id'");
+	
+			
+		if (!$res) {
+			$this->setError('Artifact: '.db_error());
+			db_rollback();
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
+	 *
+	 * 	nullExtraFields - 0 an artifact in selection boxes with choices defined 
+	 *	by ADMIN for a project to normalize for a transfer to an new artifact type
+	 *
+	 */
+	function  nullExtraFields($artifact_id){
+			
+		$res=db_query("UPDATE artifact_extra_field_data
+			SET
+			artifact_id='0'
+			WHERE
+			artifact_id='$artifact_id'");
+	
+			
+		if (!$res) {
+			$this->setError('Artifact: '.db_error());
+			db_rollback();
+			return false;
+		}
+
+		return true;
+	}
+
+	
+
 
 	// function which returns proper marker for changed properties
 	function marker($prop_name,$changes) {

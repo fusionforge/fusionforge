@@ -18,7 +18,8 @@ require_once('common/tracker/ArtifactGroup.class');
 require_once('common/tracker/ArtifactCategory.class');
 require_once('common/tracker/ArtifactCanned.class');
 require_once('common/tracker/ArtifactResolution.class');
-
+require_once('common/tracker/ArtifactSelectionBox.class');
+require_once('common/tracker/ArtifactBoxOptions.class');
 if ($group_id && $atid) {
 //
 //
@@ -59,7 +60,42 @@ if ($group_id && $atid) {
 //		Update the database
 //
 //
-		if ($add_cat) {
+		if ($build_box) {
+
+			$ab = new ArtifactSelectionBox($ath);
+		
+			if (!$ab || !is_object($ab)) {
+				$feedback .= 'Unable to create ArtifactSelectionBox Object';
+//			} elseif ($ab->isError())
+//				$feedback .= $ab->getErrorMessage();			
+			} else {
+				if (!$ab->create($name)) {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_box').': '.$ab->getErrorMessage();
+					$ab->clearError();
+				} else {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','box_name_inserted');
+				}
+			}
+
+		}elseif ($add_opt) {
+			$ao = new ArtifactBoxOptions($ath);
+			if (!$ao || !is_object($ao)) {
+				$feedback .= 'Unable to create ArtifactBoxOptions Object';
+//			} elseif ($ao->isError())
+//				$feedback .= $ao->getErrorMessage();			
+			} else {
+				if (!$ao->create($name,$boxid)) {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$ao->getErrorMessage();
+					$ao->clearError();
+				} else {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','choice_inserted');
+				}
+				$add_opt= false;
+				$build_box= true;
+				
+			}
+
+		} elseif ($add_cat) {
 
 			$ac = new ArtifactCategory($ath);
 			if (!$ac || !is_object($ac)) {
@@ -185,6 +221,42 @@ if ($group_id && $atid) {
 					$add_canned=true;
 				}
 			}
+		} elseif ($update_box) {
+
+			$ac = new ArtifactSelectionBox($ath,$id);
+			if (!$ac || !is_object($ac)) {
+				$feedback .= 'Unable to create ArtifactSelectionBox Object';
+			} elseif ($ac->isError()) {
+				$feedback .= $ac->getErrorMessage();
+			} else {
+				if (!$ac->update($name)) {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ac->getErrorMessage();
+					$ac->clearError();
+				} else {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','box_name_updated');
+					$update_box=false;
+					$build_box=true;
+				}
+			}
+
+		} elseif ($update_opt) {
+
+			$ao = new ArtifactBoxOptions($ath,$id);
+			if (!$ao || !is_object($ao)) {
+				$feedback .= 'Unable to create ArtifactSelectionBox Object';
+			} elseif ($ao->isError()) {
+				$feedback .= $ao->getErrorMessage();
+			} else {
+				if (!$ao->update($name,$boxid,$id)) {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','error_updating').' : '.$ao->getErrorMessage();
+					$ao->clearError();
+				} else {
+					$feedback .= $Language->getText('tracker_admin_build_boxes','choice_updated');
+					$update_opt=false;
+					$build_box=true;
+				}
+			}
+
 
 		} elseif ($update_cat) {
 
@@ -253,7 +325,137 @@ if ($group_id && $atid) {
 //
 //
 //
-	if ($add_cat) {
+	if ($build_box) {  
+//
+//  FORM TO BUILD SELECTION BOXES 
+//
+		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_build_boxes','title',$ath->getName())));
+
+		echo "<h2>".$Language->getText('tracker_admin_build_boxes','title',$ath->getName())."</h2>";
+
+		/*
+			List of possible user built Selection Boxes for an ArtifactType
+		*/
+		$result=$ath->getSelectionBoxes();
+		echo "<p>&nbsp;</p>";
+		$rows=db_numrows($result);
+		if ($result && $rows > 0) {
+			$title_arr=array();
+			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_id');
+			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_title');
+			
+			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');	
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			
+			for ($i=0; $i < $rows; $i++) {
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+					  '<td>'.db_result($result, $i, 'id').'</td>'.
+					'<td><a href="'.$PHP_SELF.'?update_box=1&amp;id='.
+						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						db_result($result, $i, 'selection_box_name').'</a></td>';
+				/*
+		  			List of possible options for a user built Selection Box
+		  		*/
+				$optresult=$ath->getSelectionBoxOptions(db_result($result,$i,'id'));
+				$optrows=db_numrows($optresult);
+				if ($optresult && $optrows > 0) {
+					echo '<td>';
+					for ($j=0; $j <$optrows; $j++)
+				
+//						if (db_result($result,$i,'id') == db_result($optresult,$j,'artifact_box_id')){ 
+						echo	'<a href="'.$PHP_SELF.'?update_opt=1&amp;id='.
+						db_result($optresult, $j, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
+						db_result($result,$i,'id').'">'.
+						db_result($optresult, $j, 'box_options_name').'</a><br \>';
+//					}
+
+					} else {
+echo '<td>';
+//					echo	'<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
+//						db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">';
+//echo 'add choices ';
+				}
+			
+				echo '</td>';
+				echo '<td>';
+				echo	'<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
+					db_result($result, $i, 'id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">';
+				echo ' add choices ';
+			}
+			echo   '</tr>';
+			echo $GLOBALS['HTML']->listTableBottom();
+
+		} else { 
+			echo "\n<h3>".$Language->getText('tracker_admin_build_boxes','no_box')."</h3>";
+		}
+		?>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="build_box" value="y" />
+		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
+		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
+		<p>
+		<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_warning') ?></span></strong></p>
+		<p>
+		<input type="submit" name="post_changes" value="<?php echo$Language->getText('general','submit') ?>" /></p>
+		</form></p>
+		<?php
+
+		$ath->footer(array());
+
+	} elseif ($add_opt) {
+//
+//  FORM TO  ADD BOX CHOICES 
+//
+		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_build_boxes','title')));
+
+		echo "<h3>".$Language->getText('tracker_admin_build_boxes','opt_title',$ath->getName())."</h3>";
+		/*
+		 *	List of possible options for user  
+		 *	  Selection Boxes configured by Admin
+		 */
+		
+		$result=$ath->getBoxOptions();
+		echo "<p>&nbsp;</p>";
+		$rows=db_numrows($result);
+		if ($result && $rows > 0) {
+			$title_arr=array();
+			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_choice_id');
+			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');
+
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+			for ($i=0; $i < $rows; $i++) {
+				if ($boxid == db_result($result,$i,'artifact_box_id')) {
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>';
+				echo '<td>'.db_result($result, $i, 'id').'</td>'.
+					'<td><a href="'.$PHP_SELF.'?update_opt=1&amp;id='.
+					db_result($result,$i,'id').'&amp;boxid='.			
+					db_result($result, $i, 'artifact_box_id').'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+					db_result($result, $i, 'box_options_name').'</a></td>';
+				 }
+			}		   
+			echo $GLOBALS['HTML']->listTableBottom();
+
+		} else { 
+			echo "\n<h3>".$Language->getText('tracker_admin_build_boxes','no_box')."</h3>";
+		}
+		?>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&boxid='.$boxid.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="add_opt" value="y" />
+		<strong><?php echo $Language->getText('tracker_admin_build_boxes','opt_add_name') ?>:</strong><br />
+		<input type="text" name="name" value="" size="15" maxlength="30" /> <br \>
+		<p>
+		<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','choice_warning') ?></span></strong></p>
+		<p>
+		<input type="submit" name="post_changes" value="<?php echo$Language->getText('general','submit') ?>" /></p>
+		</form>
+		</p>
+		<?php
+
+		$ath->footer(array());
+
+	} elseif ($add_cat) {
 //
 //  FORM TO ADD CATEGORIES
 //
@@ -520,6 +722,83 @@ if ($group_id && $atid) {
 		}
 		$ath->footer(array());
 
+	} elseif ($update_box) {
+//
+//  FORM TO UPDATE POP-DOWN BOXES
+//
+		/*
+			Allow modification of a artifact Selection Box
+		*/
+		$ath->adminHeader(array('title'=>$Language->getText('tracker_admin_build_boxes','box_update_title',$ath->getName())));
+
+
+		echo '
+			<h2>'.$Language->getText('tracker_admin_build_boxes','box_update_title',$ath->getName()).'</h2>';
+
+		$ac = new ArtifactSelectionBox($ath,$id);
+		if (!$ac || !is_object($ac)) {
+			$feedback .= 'Unable to create ArtifactSelectionBox Object';
+		} elseif ($ac->isError()) {
+			$feedback .= $ac->getErrorMessage();
+		} else {
+			?>
+			<p>
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&id='.$id.'&boxid='.$box.'&atid='.$ath->getID(); ?>" method="post">
+			<input type="hidden" name="update_box" value="y" />
+			<input type="hidden" name="id" value="<?php echo $ac->getID(); ?>" />
+			<p>
+			<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
+			<input type="text" name="name" value="<?php echo $ac->getName(); ?>" /></p>
+			<p>
+			<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
+				</span></strong></p>
+			<p>
+			<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
+			</form></p>
+			<?php
+		}
+
+		$ath->footer(array());
+
+	} elseif ($update_opt) {
+//
+//  FORM TO UPDATE POP-DOWN CHOICES FOR A BOX
+//
+		/*
+			Allow modification of a Choice for a Pop-Down Box
+		*/
+		$ath->adminHeader(array('title'=>$Language->getText('tracker_admin_build_boxes','opt_update_title',$ath->getName())));
+
+		echo '
+			<h2>'.$Language->getText('tracker_admin_build_boxes','opt_update_title',$ath->getName()).'</h2>';
+
+		$ao = new ArtifactBoxOptions($ath,$id);
+		if (!$ao || !is_object($ao)) {
+			$feedback .= 'Unable to create ArtifactSelectionBox Object';
+		} elseif ($ao->isError()) {
+			$feedback .= $ao->getErrorMessage();
+		} else {
+
+			?>
+			<p>
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+			<input type="hidden" name="update_opt" value="y" />
+			<input type="hidden" name="id" value="<?php echo $ao->getID(); ?>" />
+
+			<p>
+			<strong><?php echo $Language->getText('tracker_admin_build_boxes','opt_name') ?>:</strong><br />
+			<input type="text" name="name" value="<?php echo $ao->getName(); ?>" /></p>
+			<p>
+			<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_change_warning') ?>
+				</span></strong></p>
+			<p>
+			<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
+			</form></p>
+			<?php
+		}
+
+		$ath->footer(array());
+
 	} elseif ($update_cat) {
 //
 //  FORM TO UPDATE CATEGORIES
@@ -676,7 +955,12 @@ if ($group_id && $atid) {
 //
 
 		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin','title').': '.$ath->getName(),'pagename'=>'tracker_admin','titlevals'=>array($ath->getName())));
-
+//
+//	Reference to build a selection box for a tracker like bugs, etc
+//
+		echo '<p>
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;build_box=1"><strong>'.$Language->getText('tracker_admin','build_selection_box').'</strong></a><br />
+			'.$Language->getText('tracker_admin','build_selection_box_info').'</p>';
 		echo '<p>
 			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_cat=1"><strong>'.$Language->getText('tracker_admin','add_categories').'</strong></a><br />
 			'.$Language->getText('tracker_admin','add_categories_info').'</p>';
@@ -755,7 +1039,6 @@ if ($group_id && $atid) {
 			'/tracker/?group_id='.$group_id,
 			'/tracker/reporting/?group_id='.$group_id,
 			'/tracker/admin/?group_id='.$group_id
-			
 		)
 	);
 

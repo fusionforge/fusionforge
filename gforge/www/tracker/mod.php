@@ -43,7 +43,9 @@ if (session_loggedin()) {
 <?php } ?>
 	<form action="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST" enctype="multipart/form-data">
 	<input type="hidden" name="func" value="postmod">
-	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
+	<input type="hidden" name="$result[]"> 	
+	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID();
+ ?>">
 
 	<tr>
 		<td><strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br /><?php echo $ah->getSubmittedRealName(); ?> (<tt><?php echo $ah->getSubmittedUnixName(); ?></tt>)</td>
@@ -54,7 +56,7 @@ if (session_loggedin()) {
 		$close_date = $ah->getCloseDate();
 		if ($ah->getStatusID()==2 && $close_date > 1) {
 			echo '<br /><strong>'.$Language->getText('tracker_mod','date_closed').':</strong><br />'
-				 .date($sys_datefmt, $close_date);
+				.date($sys_datefmt, $close_date);
 		}
 		?>
 		</td>
@@ -109,6 +111,39 @@ if (session_loggedin()) {
 		</td>
 	</tr>
 
+	<?php
+//
+//	build input pop-up boxes for boxes and choices configured by ADMIN
+//
+	$result=$ath->getSelectionBoxes();
+	$result1=$ath->getArtifactChoices($ah->getID());
+	$rows=db_numrows($result); 
+	echo "<p>&nbsp;</p>";
+   	$origrows=db_numrows($result1);
+	if ($result && $rows> 0) {
+		echo '<tr>';
+		for ($i=0; $i < $origrows; $i++) {
+			$newrow= is_integer($i/2);
+			echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
+			echo $ath->selectionBox(db_result($result,$i,'id'),db_result($result1,$i,'choice_id'));
+			echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;build_box=1">('.$Language->getText('tracker','admin').')</a>';
+			if (!$newrow) {
+			echo '</tr><tr>';
+			}
+		}	
+		if ($rows-$origrows > 0){
+			for ($i=$origrows; $i < $rows; $i++){
+				$newrow= is_integer($i/2);
+				echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
+				echo $ath->selectionBox(db_result($result,$i,'id'),db_result($result1,$i,'choice_id'));
+				echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;build_box=1">('.$Language->getText('tracker','admin').')</a>';
+				if (!$newrow) {
+					echo '</tr><tr>';
+				}
+			}
+		}
+	}
+	?>
 	<tr>
 		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php

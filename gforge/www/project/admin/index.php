@@ -34,6 +34,8 @@ require_once('www/project/admin/project_admin_utils.php');
 require_once('www/include/role_utils.php');
 require_once('common/include/account.php');
 
+session_require(array('group'=>$group_id,'admin_flags'=>'A'));
+
 // get current information
 $group =& group_get_object($group_id);
 if (!$group || !is_object($group)) {

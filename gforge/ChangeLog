@@ -1,3 +1,6 @@
+2004-08-26  Tony Pugliese <lpajp@pacbell.net>
+	* nice patch to add "unlimited extra fields" to tracker.
+
 2004-08-25  Tom Copeland <tom@infoether.com>
 	* common/include/utils.php - Silenced several PHP 'notice' warnings.
 

@@ -75,6 +75,15 @@ class ArtifactTypeHtml extends ArtifactType {
 		echo ' | <a href="/tracker/admin/?group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','edit_options').': '. $this->getName() .'</a></strong>';
 	}
 
+	function selectionBox ($box='option_id',$checked='xzxz',$text_100='none') {
+		global $Language;
+		$this->box=$box;
+		if ($text_100 == 'none'){
+			$text_100=$Language->getText('tracker_artifacttype','none');
+		}
+		return html_build_select_box ($this->getSelectionBoxOptions($this->box),$box,$checked,true,$text_100);
+	}
+
 	function categoryBox ($name='category_id',$checked='xzxz',$text_100='none') {
 		global $Language;
 		if ($text_100 == 'none'){

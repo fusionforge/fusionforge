@@ -77,6 +77,32 @@ if (session_loggedin()) {
 		</td>
 	</tr>
 
+	<?php
+//
+//	build input pop-up boxes for boxes and choices configured by ADMIN
+//
+   	$result=$ath->getSelectionBoxes();
+	$resultc=$ath->getArtifactChoices($ah->getID()); 
+	echo "<p>&nbsp;</p>";
+   	$rows=db_numrows($result);
+	$origrows=db_numrows($resultc);
+	if ($result &&$rows > 0) {
+		echo '<tr>';
+		for ($i=0; $i < $rows; $i++) {
+			$newrow= is_integer($i/2);
+			echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
+			$resulto = $ath->getBoxOptionsName(db_result($resultc,$i,'choice_id'));
+			if (($i < $origrows) && (db_result($resultc,$i,'choice_id') !== '100')) {
+				echo db_result($resulto,'0','box_options_name');
+			} else {
+				echo 'None';
+			}
+			if (!$newrow) {
+				echo '</tr><tr>';
+			}
+		}
+	}
+	?>
 	<tr>
 		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php
@@ -162,7 +188,7 @@ if (session_loggedin()) {
 				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>
 				<td>'. htmlspecialchars($file_list[$i]->getName()) .'</td>
 				<td>'.  htmlspecialchars($file_list[$i]->getDescription()) .'</td>
-        <td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'.$Language->getText('tracker_mod','download').'</a></td>
+				<td><a href="/tracker/download.php/'.$group_id.'/'. $ath->getID().'/'. $ah->getID() .'/'.$file_list[$i]->getID().'/'.$file_list[$i]->getName() .'">'.$Language->getText('tracker_mod','download').'</a></td>
 				</tr>';
 			}
 

@@ -18,6 +18,8 @@ if (!$ath->userCanView()) {
 	exit_permission_denied();
 }
 
+	include 'search-fields.php';
+
 $af = new ArtifactFactory($ath);
 if (!$af || !is_object($af)) {
 	exit_error('Error','Could Not Get Factory');
@@ -35,6 +37,7 @@ $_group=$af->group;
 $_changed_from=$af->changed_from;
 
 $art_arr =& $af->getArtifacts();
+
 if (!$art_arr && $af->isError()) {
 	exit_error('Error',$af->getErrorMessage());
 }
@@ -109,12 +112,11 @@ $changed_name_arr[]=$Language->getText('tracker_browse','week2');
 $changed_name_arr[]=$Language->getText('tracker_browse','month1');
 
 $changed_arr=array();
-$changed_arr[]= 0x7fffffff;     // Any
-$changed_arr[]= 3600 * 24;     // 24 hour
+$changed_arr[]= 0x7fffffff;	 // Any
+$changed_arr[]= 3600 * 24;	 // 24 hour
 $changed_arr[]= 3600 * 24 * 7; // 1 week
 $changed_arr[]= 3600 * 24 * 14;// 2 week
 $changed_arr[]= 3600 * 24 * 30;// 1 month
-
 
 //
 //	Show the new pop-up boxes to select assigned to, status, etc
@@ -130,8 +132,36 @@ echo '
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','category').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a><br />'. $ath->categoryBox ('_category',$_category,$Language->getText('tracker','category_any')) .'</span></td>'.
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','group').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a><br />'. $ath->artifactGroupBox ('_group',$_group,$Language->getText('tracker','group_any')) .'</span></td>' .
 	'<td><span style="font-size:smaller">'.$Language->getText('tracker','changed').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=changed\')"><strong>(?)</strong></a><br />'. html_build_select_box_from_arrays($changed_arr,$changed_name_arr,'_changed_from',$_changed_from,false) .'</span></td>
-	</tr>
-	<tr>
+	</tr>';
+
+/**
+ *
+ *  Build pop-up boxes for BROWSE boxes and choices configured by ADMIN
+ *
+ */
+echo '<tr>';
+	$result=$ath->getSelectionBoxes();
+	$rows=db_numrows($result);
+	$select_arr[]=array();
+	if ($result &&$rows > 0) {
+		echo '<tr>';
+		for ($i=0; $i < $rows; $i++) {
+			$newrow=is_integer(($i+1)/5);
+			echo '<td><span style="font-size:smaller">'.db_result($result,$i,'selection_box_name').'</span></br \>';
+			if ($source=='custom') {
+				$choice= $value[$i];
+			} else {
+				$choice='xzxz';
+			}
+			echo $ath->selectionBox(db_result($result,$i,'id'),$choice,$Language->getText('tracker_admin_build_boxes','status_any'));
+			echo '</td>';
+			if ($newrow) {
+				echo'</tr><tr>';
+			}
+		}
+	}
+	echo '</tr>';
+	echo '<tr>
 		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
 		'<td><span style="font-size:smaller">'. 
 		html_build_select_box_from_arrays($order_arr,$order_name_arr,'_sort_col',$_sort_col,false) .'</td>'.
@@ -139,14 +169,60 @@ echo '
 		'<td><span style="font-size:smaller"><input type="submit" name="submit" value="'.$Language->getText('general','browse').'" /></td>
 	</tr>
 	</form></table>';
-
-/*
-	Show the free-form text submitted by the project admin
-*/
+/**
+ *
+ *	Show the free-form text submitted by the project admin
+ */
 echo $ath->getBrowseInstructions();
 
 if ($art_arr && count($art_arr) > 0) {
 
+	if ($source=='custom') {
+	//
+	// validate that any admin configured extra fields meet its selection criteria
+
+		$result=$ath->getSelectionBoxes();
+		$artrows=count($art_arr);
+		$rows=db_numrows($result);
+		$matches=0;
+		if ($result &&$rows && $artrows > 0) {
+			for ($i=0; $i < $artrows; $i++){
+				$resultc = $ath->getArtifactChoices($art_arr[$i]->getID());
+				$browserows = db_numrows($resultc);
+				for ($j=0; $j < $browserows; $j++) {
+					if ((db_result($resultc,$j,'choice_id') == $value[$j])|| $value[$j]=='100'){
+						$matches=$matches+1;
+					}
+				}
+				if ($rows > $browserows && $matches == $browserows) {
+					for ($k = $browserows; $k < $rows; $k++){
+						if ((db_result($resultc,$k,'choice_id') == $value[$k]) || $value[$k] == '100') {
+							$matches = $matches+1;
+						}
+					}
+				}
+				if ($matches!==$rows){
+					$remove_arr[]=$i;
+					$matches=0;	
+				}
+				$matches=0;	
+			}
+			//
+			// remove the unselected rows from $art_arr
+			//
+			$remove_rows=count($remove_arr);
+			if ($remove_rows > 0) {
+				for ($k=0; $k < $remove_rows; $k++) {
+			
+					//   remove $art_arr entries not selected and reindex with array_values() - since unset will remove the index as a key
+					// 
+					$entry=$remove_arr[$k];
+					unset ($art_arr[$entry]);
+				}
+				$art_arr=array_values($art_arr);
+			}
+		}		
+	}
 	if ($set=='custom') {
 		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_category='.$_category.'&_group='.$_group.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
 	}
@@ -165,6 +241,8 @@ if ($art_arr && count($art_arr) > 0) {
 		<form name="artifactList" action="'. $PHP_SELF .'?group_id='.$group_id.'&atid='.$ath->getID().'" METHOD="POST">
 		<input type="hidden" name="func" value="massupdate">';
 	}
+
+
 
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
@@ -223,7 +301,6 @@ if ($art_arr && count($art_arr) > 0) {
 		}
 		echo '</td></tr>';
 	}
-
 	echo $GLOBALS['HTML']->listTableBottom();
 	/*
 		Mass Update Code
@@ -260,24 +337,43 @@ if ($art_arr && count($art_arr) > 0) {
 				</strong><br />'. $ath->categoryBox ('category_id','xzxz',$Language->getText('tracker_browse','no_change')) .'</td>
 			<td><strong>'.$Language->getText('tracker','group').': <a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a></strong>
 				<br />'. $ath->artifactGroupBox ('artifact_group_id','xzxz',$Language->getText('tracker_browse','no_change')) .'</td>
-			</tr>
+			</tr>';
 
-			<tr>
+
+		//
+		//	build input pop-up boxes for boxes and choices configured by ADMIN
+		//
+		$result=$ath->getSelectionBoxes();
+		echo "<p>&nbsp;</p>";
+		$rows=db_numrows($result);
+		if ($result &&$rows > 0) {
+			echo '<tr>';
+			for ($i=0; $i < $rows; $i++) {
+				$newrow= is_integer($i/2);
+				echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
+				echo $ath->selectionBox(db_result($result,$i,'id'),'xzxz',$Language->getText('tracker_browse','no_change'));
+		
+				if (!$newrow) {
+					echo '</tr><tr>';
+				}
+			}
+		}
+		echo   '<tr>
 			<td><strong>'.$Language->getText('tracker','priority').': <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a>
 				</strong><br />';
-			echo build_priority_select_box ('priority', '100', true);
-			echo '</td><td>';
-			if ($ath->useResolution()) {
-				echo '
+		echo build_priority_select_box ('priority', '100', true);
+		echo '</td><td>';
+		if ($ath->useResolution()) {
+			echo '
 				<strong>'.$Language->getText('tracker_browse','resolution').': <a href="javascript:help_window(\'/help/tracker.php?helpname=resolution\')"><strong>(?)</strong></a>
 					</strong><br />';
-				echo $ath->resolutionBox('resolution_id','xzxz',true,$Language->getText('tracker_browse','no_change'));
-			} else {
-				echo '&nbsp;
+			echo $ath->resolutionBox('resolution_id','xzxz',true,$Language->getText('tracker_browse','no_change'));
+		} else {
+			echo '&nbsp;
 				<input type="hidden" name="resolution_id" value="100">';
-			}
+		}
 
-			echo '</td>
+		echo '</td>
 			</tr>
 
 			<tr>

@@ -45,6 +45,7 @@ if ($group_id && $atid) {
 	//	Create the ArtifactType object
 	//
 	$ath = new ArtifactTypeHtml($group,$atid);
+
 	if (!$ath || !is_object($ath)) {
 		exit_error('Error','ArtifactType could not be created');
 	}
@@ -55,7 +56,7 @@ if ($group_id && $atid) {
 	switch ($func) {
 
 		case 'add' : {
-			include 'add.php';
+			include ('add.php');
 			break;
 		}
 		case 'postadd' : {
@@ -78,6 +79,11 @@ if ($group_id && $atid) {
 				if (!$ah->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority, $user_email)) {
 					exit_error('ERROR',$ah->getErrorMessage());
 				} else {
+					//
+					// Include extra fields configured by ADMIN
+					//
+					include ('add-fields.php');
+
 					//
 					//	Attach file to this Artifact.
 					//
@@ -115,7 +121,6 @@ if ($group_id && $atid) {
 				} else if ($ah->isError()) {
 					$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
 				} else {
-
 					$_priority=(($priority != 100) ? $priority : $ah->getPriority());
 					$_status_id=(($status_id != 100) ? $status_id : $ah->getStatusID());
 					$_category_id=(($category_id != 100) ? $category_id : $ah->getCategoryID());
@@ -128,16 +133,23 @@ if ($group_id && $atid) {
 
 					if (!$ah->update($_priority,$_status_id,$_category_id,$_artifact_group_id,$_resolution_id,$_assigned_to,$_summary,$canned_response,'',$artifact_type_id)) {
 						$was_error=true;
-						$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
 					}
 
+			include('massupdate-fields.php');
+					if (($was_error==true) && ($changect==0) && ($transferct==0)) {
+						$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
+					}else {
+						$was_error=false;
+					}
 				}
 				unset($ah);
-			}
+			
+			
 			if (!$was_error) {
 				$feedback = $Language->getText('tracker','updated_successful');
 			}
-			include 'browse.php';
+			}
+			include ('browse.php');
 			break;
 		}
 		case 'postmod' : {
@@ -217,10 +229,18 @@ if ($group_id && $atid) {
 				//
 				//	Show just one feedback entry if no errors
 				//
-				if (!$was_error) {
+				include ('update-fields.php');
+				if (!$was_error ||  $changect>0 || $transferct>0) {
 					$feedback = $Language->getText('general','update_successful');
+				if ($ath->getID()!==$new_artfact_type_id){
+					if (!$ah->nullExtraFields($artifact_id)){
+//TODO ERROR HERE???
+//
+					}
 				}
-				include 'browse.php';
+				
+				}
+				include ('browse.php');
 			}
 			break;
 		}
@@ -238,7 +258,7 @@ if ($group_id && $atid) {
 			} else {
 				if ($ah->addMessage($details,$user_email,true)) {
 					$feedback=$Language->getText('tracker','comment_added');
-					include 'browse.php';
+					include ('browse.php');
 				} else {
 					//some kind of error in creation
 					exit_error('ERROR',$feedback);
@@ -255,6 +275,7 @@ if ($group_id && $atid) {
 			} else {
 				$ah->setMonitor();
 				$feedback=$ah->getErrorMessage();
+
 				include 'browse.php';
 			}
 			break;
