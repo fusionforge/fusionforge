@@ -45,6 +45,8 @@ EOF
 
 	    /usr/lib/gforge/bin/dns_conf.pl
 	else
+            [ -f /var/lib/gforge/bind/dns.head ] && echo "Removing /var/lib/gforge/bind/dns.head" && \
+	    rm /var/lib/gforge/bind/dns.head
   	    echo "Creating /var/lib/gforge/bind/dns.zone"
   	    eval "cat /var/lib/gforge/bind/dns.simple.template $sedexpr > /var/lib/gforge/bind/dns.zone"
 	fi
