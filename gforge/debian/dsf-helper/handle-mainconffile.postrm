@@ -1,5 +1,5 @@
 ###
-# Functions to handle the main Sourceforge confguration file
+# Functions to handle the main Gforge confguration file
 ###
 mainconffile=/etc/gforge/gforge.conf
 # Delete the main configuration file

@@ -1,5 +1,5 @@
 ###
-# Functions to handle the main Sourceforge configuration file
+# Functions to handle the main Gforge configuration file
 ###
 mainconffile=/etc/gforge/gforge.conf
 # Update it for the variables received as parameters

@@ -7,7 +7,7 @@ Template: gforge/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
 Description: Do you want mail to ${noreply} to be deleted?
- Sourceforge sends plenty of e-mail from the "${noreply}" address,
+ Gforge sends plenty of e-mail from the "${noreply}" address,
  and maybe even some e-mail to that address too.
  .
  It is advised that you let the package direct e-mail to that address to a
@@ -15,7 +15,7 @@ Description: Do you want mail to ${noreply} to be deleted?
  .
  Answering "yes" here will perform that redirection.
 Description-fr_FR.UTF-8: Supprimer les e-mails pour ${noreply} ?
- Sourceforge envoie fréquemment des e-mails depuis (et vers) l'adresse
+ Gforge envoie fréquemment des e-mails depuis (et vers) l'adresse
  "${noreply}".
  .
  Il est conseillé de rediriger les e-mails vers cette adresse vers un trou

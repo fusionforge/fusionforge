@@ -27,17 +27,17 @@ Template: gforge/shared/admin_login
 Type: string
 Default: admin
 Default-fr_FR.UTF-8: admin
-Description: The Sourceforge administrator login
- This Sourceforge account will have all privileges on the Sourceforge
+Description: The Gforge administrator login
+ This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.
 Description-fr_FR.UTF-8: Le nom du compte de l'administrateur
- Ce compte Sourceforge a tous les privilèges sur le système Sourceforge.
+ Ce compte Gforge a tous les privilèges sur le système Gforge.
  Il sert entre autres à approuver la création de projets.
 
 Template: gforge/shared/admin_password
 Type: password
-Description: The Sourceforge administrator password
- This Sourceforge account will have all privileges on the Sourceforge
+Description: The Gforge administrator password
+ This Gforge account will have all privileges on the Gforge
  system.  It is needed to approve the creation of the projects.  Please
  type a password here.
 Description-fr_FR.UTF-8: Mot de passe de l'administrateur
@@ -46,7 +46,7 @@ Description-fr_FR.UTF-8: Mot de passe de l'administrateur
 
 Template: gforge/shared/admin_password_confirm
 Type: password
-Description: The Sourceforge administrator password - again
+Description: The Gforge administrator password - again
  Please re-type the password for confirmation.
 Description-fr_FR.UTF-8: Mot de passe administrateur - confirmation
  Veuillez saisir le mot de passe de nouveau, pour confirmation.
@@ -56,12 +56,12 @@ Type: string
 Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 Default-fr_FR.UTF-8: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
 Description: The initial list of skills
- Sourceforge allows users to define a list of their skills, to be chosen
+ Gforge allows users to define a list of their skills, to be chosen
  amongst those present in the database.  This list is the initial list of
  skills that will enter the database.  Please enter the skill names
  separated by semi-colons `;'.
 Description-fr_FR.UTF-8: Liste de compétences
- Les utilisateurs de Sourceforge peuvent afficher leurs niveaux de compétence
+ Les utilisateurs de Gforge peuvent afficher leurs niveaux de compétence
  dans différents domaines.  Cette liste est la liste initiale de ces domaines.
  Veuillez entrer les noms de ces domaines de compétence séparés par des
  points-virgules `;'.
@@ -86,7 +86,7 @@ Template: gforge/shared/noreply_to_bitbucket
 Type: boolean
 Default: true
 Description: Do you want mail to ${noreply} to be deleted?
- Sourceforge sends plenty of e-mail from the "${noreply}" address,
+ Gforge sends plenty of e-mail from the "${noreply}" address,
  and maybe even some e-mail to that address too.
  .
  It is advised that you let the package direct e-mail to that address to a
@@ -94,7 +94,7 @@ Description: Do you want mail to ${noreply} to be deleted?
  .
  Answering "yes" here will perform that redirection.
 Description-fr_FR.UTF-8: Supprimer les e-mails pour ${noreply} ?
- Sourceforge envoie fréquemment des e-mails depuis (et vers) l'adresse
+ Gforge envoie fréquemment des e-mails depuis (et vers) l'adresse
  "${noreply}".
  .
  Il est conseillé de rediriger les e-mails vers cette adresse vers un trou
@@ -121,7 +121,7 @@ Description-fr_FR.UTF-8: Mot de passe LDAP - confirmation
 Template: gforge/shared/mod_ssl_cert
 Type: note
 Description: Generate an SSL certificate
- You need a valid SSL/TLS certificate to run Sourceforge.
+ You need a valid SSL/TLS certificate to run Gforge.
  If you don't already have one, you'll have to run the
  "mod-ssl-makecert" command to generate one, and restart Apache
  afterwards.
@@ -129,7 +129,7 @@ Description: Generate an SSL certificate
  Please note you will not be able to start Apache if you have no
  such certificate.
 Description-fr_FR.UTF-8: N'oubliez pas de générer un certificat SSL
- Sourceforge a besoin d'un certificat de cryptographie SSL/TLS
+ Gforge a besoin d'un certificat de cryptographie SSL/TLS
  pour fonctionner.  Si vous n'en avez pas déjà un, vous devrez
  vous en fabriquer un à l'aide de la commande "mod-ssl-makecert".
  N'oubliez pas de redémarrer Apache par la suite.
@@ -139,17 +139,17 @@ Description-fr_FR.UTF-8: N'oubliez pas de générer un certificat SSL
 
 Template: gforge/shared/pam_ldap_config
 Type: note
-Description: Sourceforge requires appropriate PAM-LDAP configuration
- Sourceforge requires the libpam-ldap package to be configured
+Description: Gforge requires appropriate PAM-LDAP configuration
+ Gforge requires the libpam-ldap package to be configured
  appropriately.  You might need to "dpkg-reconfigure libpam-ldap" in
  order to fix incorrect parameters.
  .
  Known good values are: LDAP protocol version=3, make root database
  admin=yes, root login account="cn=admin,dc=<your-dc-here>", crypt to
  use for passwords=crypt.  Make sure that you type the same password
- for the libpam-ldap root password and the Sourceforge LDAP password.
-Description-fr_FR.UTF-8: Sourceforge a besoin d'une configuration PAM-LDAP correcte
- Sourceforge repose sur PAM-LDAP, et a donc besoin d'une configuration
+ for the libpam-ldap root password and the Gforge LDAP password.
+Description-fr_FR.UTF-8: Gforge a besoin d'une configuration PAM-LDAP correcte
+ Gforge repose sur PAM-LDAP, et a donc besoin d'une configuration
  appropriée de cette bibliothèque.  Il se peut que vous ayez besoin
  d'utiliser "dpkg-reconfigure libpam-ldap" pour corriger des
  paramètres incorrects.
@@ -159,7 +159,7 @@ Description-fr_FR.UTF-8: Sourceforge a besoin d'une configuration PAM-LDAP corre
  account="cn=admin,dc=<votre-dc>", crypt to use for
  passwords="crypt".  En outre, vous devrez utiliser le même mot de
  passe pour le compte administrateur de libpam-ldap et pour le mot de
- passe LDAP de Sourceforge.
+ passe LDAP de Gforge.
 
 Template: gforge/shared/simple_dns
 Type: boolean
@@ -179,7 +179,7 @@ Template: gforge/shared/replace_file_remove
 Type: boolean
 Default: false
 Description: Do you want ${file} to be updated?
- In order for Sourceforge to be fully deinstalled, some changes must
+ In order for Gforge to be fully deinstalled, some changes must
  be made to the ${file} file.
  .
  I can either do them for you (and backup the current version in
@@ -189,7 +189,7 @@ Description: Do you want ${file} to be updated?
  .
  Shall I modify the ${file} automatically?
 Description-fr_FR.UTF-8: Voulez-vous mettre à jour ${file} ?
- Pour désinstaller complètement Sourceforge, des modifications
+ Pour désinstaller complètement Gforge, des modifications
  doivent être apportées au fichier ${file}.
  .
  Je peux soit les faire automatiquement (en sauvegardant la version
@@ -202,13 +202,13 @@ Description-fr_FR.UTF-8: Voulez-vous mettre à jour ${file} ?
 Template: gforge/shared/file_changed
 Type: note
 Description: Please check ${file}
- You have chosen not to let the Sourceforge package update the
+ You have chosen not to let the Gforge package update the
  ${file} file.  Very well, I have not changed it.  Instead,
  I have written the suggested changes into ${file}.gforge-new.
  Please check this file and apply the appropriate changes
  to ${file}.
 Description-fr_FR.UTF-8: Veuillez vérifier ${file}
- Vous avez choisi de ne pas laisser le paquet Sourceforge modifier
+ Vous avez choisi de ne pas laisser le paquet Gforge modifier
  le fichier ${file}.  Conformément à ce choix, les modifications ont
  été sauvegardées dans ${file}.gforge-new.  Veuillez vérifier
  ce fichier et appliquer les changements adéquats à ${file},

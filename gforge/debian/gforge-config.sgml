@@ -10,7 +10,7 @@
   <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
   <!ENTITY dhemail     "<email>lolando@debian.org</email>">
   <!ENTITY dhusername  "Roland Mas">
-  <!ENTITY dhucpackage "<refentrytitle>Sourceforge</refentrytitle>">
+  <!ENTITY dhucpackage "<refentrytitle>Gforge</refentrytitle>">
   <!ENTITY dhpackage   "gforge-config">
 
   <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
@@ -40,7 +40,7 @@
   <refnamediv>
     <refname>&dhpackage;</refname>
 
-    <refpurpose>Reconfigure Sourceforge
+    <refpurpose>Reconfigure Gforge
     </refpurpose>
   </refnamediv>
 
@@ -80,7 +80,7 @@
   <refsect1>
     <title>SEE ALSO</title>
 
-    <para>Sourceforge package documentation (ahem).</para>
+    <para>Gforge package documentation (ahem).</para>
   </refsect1>
 
   <refsect1>

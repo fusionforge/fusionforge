@@ -20,7 +20,7 @@ set -e
 #DSFHELPER:replace-files#
 case "$1" in
     remove)
-	db_title "Unconfiguring Sourceforge"
+	db_title "Unconfiguring Gforge"
 
 	# Unpatch Postfix configuration files
 	/usr/lib/gforge/bin/install-postfix.sh purge-files

@@ -1,8 +1,8 @@
-DEBIAN SOURCEFORGE MAINTAINER HOWTO
------------------------------------
+DEBIAN GFORGE MAINTAINER HOWTO
+------------------------------
 
 Here is a short HOWTO explaining a few of the tricks that are used by
-the Debian Sourceforge packages.  
+the Debian Gforge packages.  
 
 ATTENTION TO NMUERS
 -------------------
@@ -39,15 +39,15 @@ subsystem.  The postinst then uses Debconf to ask whether the proposed
 file should be used, takes appropriate action, then lets the subsystem
 finish its configuration.  Similar things happen for prerm scripts.
 
-  The package is now split into several sourceforge-* packages.  Some
+  The package is now split into several gforge-* packages.  Some
 of them still contain some install-*.sh scripts (usually at most one).
-Each sourceforge-* package installs its corresponding subsystem, or a
+Each gforge-* package installs its corresponding subsystem, or a
 semblance thereof.  For instance, it is planned that the database can
 be hosted on a different server than the website.  But the website
 still needs to know where the database server is.  In this case, the
-database host will have to install sourceforge-db-local (or whatever
+database host will have to install gforge-db-local (or whatever
 the package is named), and the web server will have to install
-sourceforge-db-remote.  The -db-local package will still install the
+gforge-db-remote.  The -db-local package will still install the
 database (thus invoking install-db.sh), but -db-remote will only
 install what is needed by the database *clients* (basically, the host
 where the database is installed and the appropriate password).

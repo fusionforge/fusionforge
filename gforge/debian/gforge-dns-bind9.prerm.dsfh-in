@@ -21,7 +21,7 @@ set -e
 #DSFHELPER:replace-files#
 case "$1" in
     remove)
-	db_title "Unconfiguring Sourceforge"
+	db_title "Unconfiguring Gforge"
 
 	# Unpatch Bind configuration files
 	/usr/lib/gforge/bin/install-dns.sh purge-files
