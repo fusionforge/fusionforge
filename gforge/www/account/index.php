@@ -201,10 +201,11 @@ echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 <p /><input type="checkbox"  name="mail_va" value="1"<?php
 	if ($u->getMailingsPrefs('va')) print " checked=\"checked\""; ?> />
 	<?php echo $Language->getText('account_register','communitymail'); ?>
-
+<?php /*
 <p /><input type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked=\"checked\""; ?> />
-<?php echo $Language->getText('account_register','remember_me','<a href="/my/">');?>
+<?php echo $Language->getText('account_register','remember_me','<a href="/my/">');
+*/ ?>
 
 <p /><input type="checkbox"  name="use_ratings" value="1"<?php
 	if ($u->usesRatings()) print " checked=\"checked\""; ?> />
