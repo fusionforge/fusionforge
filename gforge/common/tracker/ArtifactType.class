@@ -21,13 +21,6 @@ class ArtifactType extends Error {
 	var $Group; //group object
 
 	/**
-	 * Artifact type ID.
-	 *
-	 * @var		int		$artifact_type_id.
-	 */
-	var $artifact_type_id;
-
-	/**
 	 * Categories db resource ID.
 	 *
 	 * @var		int		$categories_res.
@@ -385,7 +378,7 @@ class ArtifactType extends Error {
 		if (!isset($this->categories_res)) {
 			$sql="select id,category_name 
 				FROM artifact_category 
-				WHERE group_artifact_id='$this->artifact_type_id'";
+				WHERE group_artifact_id='". $this->getID() ."'";
 			$this->categories_res=db_query($sql);
 		}
 		return $this->categories_res;
@@ -400,7 +393,7 @@ class ArtifactType extends Error {
 		if (!isset($this->groups_res)) {
 			$sql="select id,group_name 
 				FROM artifact_group 
-				WHERE group_artifact_id='$this->artifact_type_id'";
+				WHERE group_artifact_id='". $this->getID() ."'";
 			$this->groups_res=db_query($sql);
 		}
 		return $this->groups_res;
@@ -429,7 +422,7 @@ class ArtifactType extends Error {
 		if (!isset($this->technicians_res)) {
 			$sql="SELECT user_id,user_name 
 				FROM artifactperm_user_vw
-				WHERE group_artifact_id='$this->artifact_type_id' 
+				WHERE group_artifact_id='". $this->getID() ."' 
 				AND perm_level in (1,2)";
 			$this->technicians_res = db_query($sql);
 		}
@@ -445,7 +438,7 @@ class ArtifactType extends Error {
 		if (!isset($this->cannedresponses_res)) {
 			$sql="SELECT id,title
 				FROM artifact_canned_responses 
-				WHERE group_artifact_id='$this->artifact_type_id'";
+				WHERE group_artifact_id='". $this->getID() ."'";
 			$this->cannedresponses_res = db_query($sql);
 		}
 		return $this->cannedresponses_res;
@@ -615,7 +608,7 @@ class ArtifactType extends Error {
 			if (!isset($this->current_user_perm)) {
 				$sql="select perm_level
 				FROM artifact_perm
-				WHERE group_artifact_id='$this->artifact_type_id' 
+				WHERE group_artifact_id='". $this->getID() ."'
 				AND user_id='".user_getid()."'";
 				$this->current_user_perm=db_result(db_query($sql),0,0);
 			}
