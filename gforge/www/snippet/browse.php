@@ -14,32 +14,34 @@
 require_once('pre.php');
 require_once('www/snippet/snippet_utils.php');
 
+/**
+ * createSnippetQuery - Creates the SQL query for loading data about snippets
+ *
+ * @param	string	clause - the last part of the where clause
+ */
+function createSnippetQuery($clause) {
+	return "SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name FROM snippet,users WHERE users.user_id=snippet.created_by AND ".$clause;
+}
+
+/**
+ * createPackageQuery - Creates the SQL query for loading data about packages
+ *
+ * @param	string	clause - the last part of the where clause
+ */
+function createPackageQuery($clause) {
+	return "SELECT users.realname,users.user_name,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name FROM snippet_package,users WHERE users.user_id=snippet_package.created_by AND ".$clause;
+}
+
 snippet_header(array('title'=>$Language->getText('snippet_browse','title'), 'header'=>'','pagename'=>'snippet_browse'));
 
 if ($by=='lang') {
-
-	$sql="SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name ".
-		"FROM snippet,users ".
-		"WHERE users.user_id=snippet.created_by AND snippet.language='$lang'";
-
-	$sql2="SELECT users.realname,users.user_name,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name ".
-		"FROM snippet_package,users ".
-		"WHERE users.user_id=snippet_package.created_by AND snippet_package.language='$lang'";
-
+	$sql=createSnippetQuery("snippet.language='$lang'");
+	$sql2=createPackageQuery("snippet_package.language='$lang'");
 	echo '<h2>' .$Language->getText('snippet_browse','snippets_by_language', array($SCRIPT_LANGUAGE[$lang])).'</h2>';
-
 } else if ($by=='cat') {
-
-	$sql="SELECT users.realname,users.user_name,snippet.description,snippet.snippet_id,snippet.name ".
-		"FROM snippet,users ".
-		"WHERE users.user_id=snippet.created_by AND snippet.category='$cat'";
-
-	$sql2="SELECT users.realname,users.user_name,snippet_package.description,snippet_package.snippet_package_id,snippet_package.name ".
-		"FROM snippet_package,users ".
-		"WHERE users.user_id=snippet_package.created_by AND snippet_package.category='$cat'";
-
+	$sql=createSnippetQuery("snippet.category='$cat'");
+	$sql2=createPackageQuery("snippet_package.category='$cat'");
 	echo '<h2>' .$Language->getText('snippet_browse','snippet_by_category', array($SCRIPT_CATEGORY[$cat])).'</h2>';
-
 } else {
 	exit_error($Language->getText('general','error'),$Language->getText('snippet_browse','error_bad_url'));
 }
