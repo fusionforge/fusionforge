@@ -146,7 +146,7 @@ class BaseLanguage {
 	function loadLanguage($lang) {
 		$cachePath = $this->getLocalizationCachePath($lang);
 
-		if (function_exists(plugin_manager_get_object)) {
+		if (function_exists('plugin_manager_get_object')) {
 			$pluginManager =& plugin_manager_get_object();
 			$pluginNames =& $pluginManager->getPlugins();
 		} else {
