@@ -205,9 +205,9 @@ ls etc/01* etc/10*simple etc/[2-9]* | sort | xargs cat > $LOCALINC
 rm etc/01* etc/10*simple etc/[2-9]*
 
 
-export etcgforge=`pwd`/etc
+export GFORGE_ETC_SEARCH=`pwd`/etc/httpd.conf
 if [ -f $apacheconf ] ; then
-	if ! grep -q "^Include $etcgforge/httpd.conf" $apacheconf ; then
+	if ! grep -q "^Include $GFORGE_ETC_SEARCH" $apacheconf ; then
 		utils/install-apache.sh setup
 	fi
 fi
