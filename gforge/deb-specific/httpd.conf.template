@@ -52,7 +52,7 @@ Include /etc/gforge/httpd.common
   # 404 Error document
   ErrorDocument 404 /404.php
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -106,7 +106,7 @@ Include /etc/gforge/httpd.common
   # 404 Error document
   ErrorDocument 404 /404.php
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 #
@@ -127,7 +127,7 @@ Include /etc/gforge/httpd.common
   ScriptAlias /cgi-bin/ /usr/lib/gforge/cgi-bin/
   # Alias /cvstarballs/ /var/lib/gforge/cvstarballs/
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -158,7 +158,7 @@ Include /etc/gforge/httpd.common
   ScriptAlias /cgi-bin/ /usr/lib/gforge/cgi-bin/
   # Alias /cvstarballs/ /var/lib/gforge/cvstarballs/
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -172,7 +172,7 @@ Include /etc/gforge/httpd.common
   ServerName {download_host}
   DocumentRoot /var/lib/gforge/download
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -203,7 +203,7 @@ Include /etc/gforge/httpd.common
 
   RedirectMatch permanent ^/$ http://{lists_host}/cgi-bin/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -248,7 +248,7 @@ Include /etc/gforge/httpd.common
 
   RedirectMatch permanent ^/$ https://{lists_host}/cgi-bin/mailman/listinfo
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 #
@@ -273,7 +273,7 @@ UseCanonicalName Off
 		allow from all
 	</Directory>
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
@@ -295,7 +295,7 @@ UseCanonicalName Off
                allow from all
        </Directory>
   LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
   # Ensure that we don't try to use SSL on SSL Servers
   <IfModule apache_ssl.c>
     SSLDisable
