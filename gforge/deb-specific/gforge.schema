@@ -45,7 +45,42 @@ attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.5 NAME 'debSfListRequestAddress'
 	EQUALITY caseIgnoreIA5Match 
 	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
 
-objectclass ( 1.3.6.1.4.1.9586.1.1.1.2.1 NAME 'debSfAccount' SUP top AUXILIARY
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.6 NAME 'debSfListAdminAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.7 NAME 'debSfListBouncesAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.8 NAME 'debSfListConfirmAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.9 NAME 'debSfListJoinAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.10 NAME 'debSfListLeaveAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.11 NAME 'debSfListSubscribeAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+attributetype ( 1.3.6.1.4.1.9586.1.1.1.1.12 NAME 'debSfListUnsubscribeAddress' 
+       DESC 'The address to which email is forwarded' 
+       EQUALITY caseIgnoreIA5Match 
+       SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 ) 
+
+bjectclass ( 1.3.6.1.4.1.9586.1.1.1.2.1 NAME 'debSfAccount' SUP top AUXILIARY
 	DESC 'Abstraction of a Sourceforge account' 
 	MAY ( debSfCvsShell $ debSfForwardEmail ) )
 

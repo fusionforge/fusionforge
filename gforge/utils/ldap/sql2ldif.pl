@@ -140,9 +140,16 @@ while(my ($group_list_id, $listname, $user_name, $password, $description) = $rel
 	print "dn: cn=$listname,ou=mailingList,$sys_ldap_base_dn
 objectClass: debSfMailingList
 objectClass: top
-debSfListPostAddress: \"|/var/lib/mailman/mail/wrapper post $listname\"
-debSfListOwnerAddress: \"|/var/lib/mailman/mail/wrapper mailowner $listname\"
-debSfListRequestAddress: \"|/var/lib/mailman/mail/wrapper mailcmd $listname\"
+debSfListPostAddress: \"|/var/lib/mailman/mail/mailman post $listname\"
+debSfListOwnerAddress: \"|/var/lib/mailman/mail/mailman mailowner $listname\"
+debSfListRequestAddress: \"|/var/lib/mailman/mail/mailman mailcmd $listname\"
+debSfListAdminAddress: \"|/var/lib/mailman/mail/mailman admin $listname\"
+debSfListBouncesAddress: \"|/var/lib/mailman/mail/mailman bounces $listname\"
+debSfListConfirmAddress: \"|/var/lib/mailman/mail/mailman confirm $listname\"
+debSfListJoinAddress: \"|/var/lib/mailman/mail/mailman join $listname\"
+debSfListLeaveAddress: \"|/var/lib/mailman/mail/mailman leave $listname\"
+debSfListSubscribeAddress: \"|/var/lib/mailman/mail/mailman subscribe $listname\"
+debSfListUnsubscribeAddress: \"|/var/lib/mailman/mail/mailman unsubscribe $listname\"
 ";
 	print "\n";
 }

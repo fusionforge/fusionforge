@@ -174,7 +174,7 @@ Description: Collaborative development tool - DNS management (using Bind9)
 
 Package: gforge-lists-mailman
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-ldap-openldap | gforge-ldap, gforge-mta-exim | gforge-mta, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), mailman
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-ldap-openldap | gforge-ldap, gforge-mta-exim | gforge-mta, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), mailman (>= 2.1-3)
 Replaces: sourceforge-lists-mailman (>> 2.6-0+11)
 Provides: gforge-lists
 Conflicts: sourceforge-lists

@@ -63,7 +63,6 @@ eval {
 	open CONFIG, ">>$tmp" ;
 	print CONFIG "description = '$description'\n" ;
 	print CONFIG "host_name = '$sys_lists_host'\n" ;
-	print CONFIG "web_page_url = 'http://$sys_lists_host/cgi-bin/mailman/'\n" ;
 	close CONFIG ;
 	$cmd = "/usr/lib/mailman/bin/config_list -i $tmp $listname" ;
 	#print "cmd = <$cmd>\n" ;
