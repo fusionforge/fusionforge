@@ -338,7 +338,7 @@ case "$1" in
 			| grep -v "^ou=Roaming," \
 			| grep -v "$admin_regexp"
 		}
-		get_our_entries
+		get_our_entries || true
 		get_our_entries | ldapdelete -D "cn=admin,ou=People,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
 		;;
 	reset)
