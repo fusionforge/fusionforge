@@ -106,7 +106,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 </ul>
 <ul>
 	<li><a href="/register/"><?php echo $Language->getText('admin_index','register_new_project'); ?></a></li>
-	<li><?php echo $Language->getText('admin_index','groups_with'); ?> <a href="approve-pending.php"><strong>P</strong> <?php echo $Language->getText('admin_index','pending_status'); ?></a> <em><?php echo $Language->getText('admin_index','new_project_approval'); ?></em></li>
+	<li><?php echo $Language->getText('admin_index','groups_with_status'); ?> <a href="approve-pending.php"><?php echo $Language->getText('admin_index','project_pending'); ?> <em><?php echo $Language->getText('admin_index','new_project_approval'); ?></em></a></li>
 	<li><form name="projectsearch" action="search.php">
 	<?php echo $Language->getText('admin_index','groups_with_status'); ?>
 	<select name="status">
@@ -159,9 +159,6 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<?php plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
-<p>
-<strong><?php echo $Language->getText('admin_index','global_admin_tools_mass_insert'); ?></strong>
-</p>
 <?php if($GLOBALS['sys_use_project_database'] || $GLOBALS['sys_use_project_vhost']) { ?>
 <ul>
 	<?php if($GLOBALS['sys_use_project_vhost']) { ?>
@@ -172,10 +169,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 		<li><a href="database.php"><?php echo $Language->getText('admin_index','project_database_administration'); ?></a></li>
 	<?php } ?>
 </ul>
-<?php } ?>
-<p><strong><?php echo $Language->getText('admin_index','quick_site_statistic'); ?></strong></p>
-
-<?php
+<?php }
 
 site_admin_footer(array());
 
