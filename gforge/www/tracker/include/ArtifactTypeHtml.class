@@ -39,7 +39,7 @@ class ArtifactTypeHtml extends ArtifactType {
 		$params['tabtext']=$this->getName();
 
 		site_project_header($params);
-		echo '<h3>Tracker: <a href="/tracker/?group_id='.$group_id.'&atid='.$this->getID().'">'.$this->getName().'</a></h3><p>';
+		echo '<h3>'.$Language->getText('tracker', 'pagetitle').': <a href="/tracker/?group_id='.$group_id.'&atid='.$this->getID().'">'.$this->getName().'</a></h3><p>';
 
 		echo '<strong><a href="/tracker/?func=add&group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','submit_new').'</a>';
 		echo ' | <a href="/tracker/?func=browse&group_id='.$group_id.'&atid='. $this->getID() .'">'.$Language->getText('tracker_artifacttype','browse').'</a>';

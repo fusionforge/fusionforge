@@ -127,7 +127,7 @@ if (session_loggedin()) {
 		}
 
 	} else {
-		echo '<tr><td colspan=3>'.$Language->getText('tracker_detail','no_files_attached').'</td></tr>';
+		echo '<tr '.$GLOBALS['HTML']->boxGetAltRowStyle(0).'><td colspan="3">'.$Language->getText('tracker_detail','no_files_attached').'</td></tr>';
 	}
 	
 	echo $GLOBALS['HTML']->listTableBottom();

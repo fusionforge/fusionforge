@@ -102,7 +102,7 @@ $sort_arr[]='DESC';
 //	custom changed arrays to build pop-up box
 //
 $changed_name_arr=array();
-$changed_name_arr[]='Any';
+$changed_name_arr[]=$Language->getText('tracker_browse','changed_any');
 $changed_name_arr[]=$Language->getText('tracker_browse','hour24');
 $changed_name_arr[]=$Language->getText('tracker_browse','day7');
 $changed_name_arr[]=$Language->getText('tracker_browse','week2');
@@ -256,9 +256,9 @@ if ($art_arr && count($art_arr) > 0) {
 			</td></tr>
 
 			<tr>
-			<td><strong>'.$Language->getText('tracker','category').' <a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a>
+			<td><strong>'.$Language->getText('tracker','category').': <a href="javascript:help_window(\'/help/tracker.php?helpname=category\')"><strong>(?)</strong></a>
 				</strong><br />'. $ath->categoryBox ('category_id','xzxz',$Language->getText('tracker_browse','no_change')) .'</td>
-			<td><strong>'.$Language->getText('tracker','group').' <a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a></strong>
+			<td><strong>'.$Language->getText('tracker','group').': <a href="javascript:help_window(\'/help/tracker.php?helpname=group\')"><strong>(?)</strong></a></strong>
 				<br />'. $ath->artifactGroupBox ('artifact_group_id','xzxz',$Language->getText('tracker_browse','no_change')) .'</td>
 			</tr>
 
@@ -287,7 +287,7 @@ if ($art_arr && count($art_arr) > 0) {
 				<br />'. $ath->statusBox ('status_id','xzxz',true,$Language->getText('tracker_browse','no_change')) .'</td>
 			</tr>
 
-			<tr><td colspan="2"><strong>'.$Language->getText('tracker_browse','canned_response').'
+			<tr><td colspan="2"><strong>'.$Language->getText('tracker_browse','canned_response').':
 				<a href="javascript:help_window(\'/help/tracker.php?helpname=canned_response\')"><strong>(?)</strong></a>
 				</strong><br />'. $ath->cannedResponseBox ('canned_response') .'</td></tr>
 
