@@ -23,7 +23,7 @@
  */
 
 require_once('common/include/User.class');
-require_once('/etc/gforge/plugins/ldapextauth/mapping.php') ;
+require_once('plugins/ldapextauth/mapping.php') ;
 
 class LdapextauthPlugin extends Plugin {
 	function LdapextauthPlugin () {
@@ -36,7 +36,7 @@ class LdapextauthPlugin extends Plugin {
                 $this->base_dn = "dc=mirexpress" ;
 		$this->ldap_server = $sys_ldap_server ;
 		$this->ldap_port = $sys_ldap_port ;
-		require_once('/etc/gforge/plugins/ldapextauth/config.php') ;
+		require_once('plugins/ldapextauth/config.php') ;
 		if ($base_dn) {
 			$this->base_dn = $base_dn ;
 		}
