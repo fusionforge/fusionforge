@@ -1,3 +1,9 @@
+gforge (3.1-4+) unstable; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Thu, 13 Nov 2003 23:58:37 +0100
+
 gforge (3.1-4) unstable; urgency=low
 
   * [Roland] Fixed multiline inline Perl script for gforge-mta-postfix's
