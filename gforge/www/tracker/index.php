@@ -152,7 +152,7 @@ if ($group_id && $atid) {
 					$priority=$ah->getPriority();
 					$category_id=$ah->getCategoryID();
 					$artifact_group_id=$ah->getArtifactGroupID();
-					$summary=$ah->getSummary();
+					$summary=addslashes($ah->getSummary());
 					$canned_response=100;
 					$new_artfact_type_id=$ath->getID();
 					$add_file=false;
