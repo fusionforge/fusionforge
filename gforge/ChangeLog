@@ -1,5 +1,17 @@
 2003-02-02  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/languages/Spanish.tab: many new translations.
+
+	* www/tracker/index.php: remove extra word.
+
+	* www/include/languages/Base.tab: tracker_artifacttype:nobody
+	New string.
+	tracker:resolution Add missing string.
+	tracker:date Fix spelling.
+
+	* www/tracker/include/ArtifactTypeHtml.class: none -> nobody
+	for technician.
+
 	* www/include/exit.php(exit_assert_object): declare $Language
 	as a global.
 	(exit_error): use lower-case global.
