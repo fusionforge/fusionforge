@@ -142,7 +142,6 @@ switch ($func) {
 				$summary=addslashes($ah->getSummary());
 				$canned_response=100;
 				$new_artfact_type_id=$ath->getID();
-				$add_file=false;
 				$delete_file=false;
 			}
 //echo "$priority|$status_id|$category_id|$artifact_group_id|$resolution_id|
