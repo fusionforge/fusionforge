@@ -25,7 +25,7 @@ build-stamp:
 	/usr/bin/docbook-to-man debian/gforge-config.sgml > gforge-config.1
 
 	# Uudecode binary files
-	$(CURDIR)/deb-specific/manage-uufiles.sh decode
+	sh $(CURDIR)/deb-specific/manage-uufiles.sh decode
 
 	touch build-stamp
 
@@ -35,8 +35,10 @@ clean:
 	rm -f build-stamp configure-stamp
 	rm -f cvssh.1 gforge-config.1
 
-	$(CURDIR)/deb-specific/dsf-helper.pl --clean
-	$(CURDIR)/deb-specific/manage-uufiles.sh clean
+	perl $(CURDIR)/deb-specific/dsf-helper.pl --clean
+	sh $(CURDIR)/deb-specific/manage-uufiles.sh clean
+	# Remove files in contrib, especially binaries that break dpkg-source
+	find contrib/ -name CVS -prune -not -name CVS -or -type f | xargs rm -f
 
 	dh_clean
 
@@ -47,7 +49,7 @@ install: build
 	dh_installdirs
 
 	# Preprocess files with DSF-Helper
-	$(CURDIR)/deb-specific/dsf-helper.pl
+	perl $(CURDIR)/deb-specific/dsf-helper.pl
 
 	# gforge
 	# (gforge is a meta-package and needs no files)
@@ -84,6 +86,9 @@ install: build
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www -type f -exec chmod 0644 {} \;
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/common -type d -exec chmod 0755 {} \;
 	find $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/common -type f -exec chmod 0644 {} \;
+	# Remove empty theme directories
+	for i in $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/themes/* ; do [ -d $$i ] && [ $$(find $$i -type f | wc -l) = 0 ] && rm -rf $$i ; done
+
 	install -o www-data -m 755 -d $(CURDIR)/debian/gforge-web-apache/var/cache/gforge
 	install -m 755 deb-specific/install-apache.sh $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 

@@ -14,8 +14,10 @@ gforge (3rc2-1+) unstable; urgency=low
   * [Roland] Also fixed database user creation code.
   * [Roland] Depend on cronolog (>= 1.6.2-1), since the binary was
     relocated from /usr/sbin to /usr/bin in that version.
+  * [Roland] Clean the source tree so as to be able to build a non-native
+    Debian package.
 
- -- Roland Mas <lolando@debian.org>  Sun, 18 May 2003 21:29:16 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 18 May 2003 23:03:55 +0200
 
 gforge (3rc2-1) unstable; urgency=low
 
