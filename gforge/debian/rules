@@ -119,6 +119,10 @@ install: build
 
 	install -m 644 db/20021125-debian.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 db/20021212.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021213.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021214.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021215.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+	install -m 644 db/20021216-debian.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
 	# gforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
