@@ -37,6 +37,9 @@ case "$1" in
 	# Clean debconf after ourselves
 	db_stop
 
+	# Install the chroot environment
+	/usr/lib/sourceforge/bin/install-chroot.sh configure
+	
         # Setup our LDAP
 	/usr/lib/sourceforge/bin/install-ldap.sh configure
     ;;
