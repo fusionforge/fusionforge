@@ -919,6 +919,7 @@ home	registered_users	Registered Users
 home	sfos	$1 OnSite
 home	top_project_downloads	Top Project Downloads
 home	recently_registered	Recently Registered Projects
+home	recently_registered_date_format	m/d
 include_html	no_change	No Change
 include_html	none	None
 include_html	priority_highest	Highest

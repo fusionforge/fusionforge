@@ -914,14 +914,16 @@ help_trove_cat	short_name	Nom court
 home	about_blurb	<p>$1 est un <b>service gratuit pour les développeurs <a href="http://www.opensource.org">Open Source</a></b>. $1 offre un accès aisé au meilleur de CVS, des listes de diffusion, de la gestion de bugs, de forums de discussion, de la gestion de tâches, de l'hébergement de sites, de l'archivage permanent de fichiers, de sauvegardes complètes. Tous ces outils sont administrables via une interface web.</p><p><b>Participation au site</b></p><p>Pour pouvoir utiliser $1 au mieux, il est nécessaire de <a href="/account/register.php">s'inscrire en tant qu'utilisateur</a>. Cela vous permettra de participer à tous les services que nous offrons. Vous pouvez bien entendu naviguer sur le site sans vous inscrire, mais vous n'aurez pas un accès complet et ne pourrez pas participer pleinement.</p><p><b>Créer votre propre projet</b></p><p>Commencez par <A href="/account/register.php">vous inscrire en tant qu'utilisateur</a>, puis <a href="/account/login.php">identifiez-vous</a> et enfin <a href="/register/">enregistrez votre projet.</a></p><p>Merci... et profitez du site.</p>
 home	breaking_down_barriers	Abaisser les barrières du développement open source
 home	gforge_statistics	Statistiques de $1
-home	highest_ranked_users	Les développeurs les mieux classés
+home	highest_ranked_users	Développeurs les mieux classés
 home	hosted_projects	Projets hébergés&nbsp;
-home	most_active_this_week	Les projets les plus actifs cette semaine
+home	most_active_this_week	Projets les plus actifs cette semaine
 home	no_stats_available	Pas de statististiques disponibles
 home	none_found	Rien trouvé
 home	registered_users	Utilisateurs inscrits&nbsp;
 home	sfos	$1 On-Site
 home	top_project_downloads	Projets les plus téléchargés
+home	recently_registered	Derniers projets enregistrés
+home	recently_registered_date_format	d/m
 include_html	no_change	Aucun changement
 include_html	none	Aucun(e)
 include_html	priority_highest	Maximum

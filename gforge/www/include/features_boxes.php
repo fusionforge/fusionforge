@@ -118,7 +118,7 @@ function show_sitestats() {
 function show_newest_projects() {
 	global $Language;
 	$sql =	"SELECT group_id,unix_group_name,group_name,register_time FROM groups " .
-		"WHERE is_public=1 AND status='A' AND type=1 " .
+		"WHERE is_public=1 AND status='A' AND type=1 AND register_time > 0 " .
 		"ORDER BY register_time DESC";
 	$res_newproj = db_query($sql,10);
 
@@ -128,11 +128,9 @@ function show_newest_projects() {
 		return $Language->getText('home','no_stats_available')." ".db_error();
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
-			if ( $row_newproj['register_time'] ) {
-				$return .= "<strong>(" . date("m/d",$row_newproj['register_time'])  . ")</strong> "
+			$return .= "<strong>(" . date($Language->getText('home','recently_registered_date_format'),$row_newproj['register_time'])  . ")</strong> "
 				. "<a href=\"/projects/$row_newproj[unix_group_name]/\">"
 				. "$row_newproj[group_name]</a><br />";
-			}
 		}
 	}
 	/// TODO: Add more link to show all project
@@ -150,7 +148,7 @@ function show_highest_ranked_users() {
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows<1) {
-		return  $Language->getText('home','none_found').db_error();
+		return  $Language->getText('home','no_stats_available').db_error();
 	} else {
 		$return = '';
 		for ($i=0; $i<$rows; $i++) {
