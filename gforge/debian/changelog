@@ -1,4 +1,4 @@
-gforge (3.0-0+13) unstable; urgency=low
+gforge (3.0-1) unstable; urgency=low
 
   * [Roland] The much-awaited 3.0 release!  Yay!
   * [Roland] This Debian release is dedicated to Christian and his wife,
@@ -10,8 +10,9 @@ gforge (3.0-0+13) unstable; urgency=low
     defined in common/include/ldap.php after bind
   * [Roland] Rename French versions of the fields in Debconf templates
     from *-fr_FR to *-fr (closes: #199743).
+  * [Roland] Cleanup in install-ldap.sh.
 
- -- Roland Mas <lolando@debian.org>  Thu,  3 Jul 2003 21:06:13 +0200
+ -- Roland Mas <lolando@debian.org>  Thu,  3 Jul 2003 21:09:15 +0200
 
 gforge (3rc2-4) unstable; urgency=low
 

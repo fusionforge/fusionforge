@@ -3,7 +3,9 @@
 # $Id$
 #
 # Configure LDAP for GForge
-# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
+# Christian Bayle, Roland Mas
+# Initially written for debian-sf (Sourceforge for Debian)
+# Adapted as time went by for Gforge
 
 set -e
 
@@ -22,46 +24,43 @@ fi
 PATH=$PATH:/usr/sbin
 
 setup_vars() {
-    sf_ldap_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
-    # [ "x$sf_ldap_base_dn" == "x" ] && sf_ldap_base_dn=`grep suffix /etc/ldap/slapd.conf | cut -d\" -f2`
-    sf_ldap_admin_dn="cn=admin,${sf_ldap_base_dn}"
-    sf_ldap_bind_dn="cn=SF_robot,${sf_ldap_base_dn}"
-    sf_ldap_passwd=$(grep ^ldap_web_add_password= /etc/gforge/gforge.conf | cut -d= -f2-)
-    sf_cryptedpasswd=`slappasswd -s "$sf_ldap_passwd" -h {CRYPT}`
-    sf_ldap_host=$(grep ^ldap_host= /etc/gforge/gforge.conf | cut -d= -f2-)
+    ldap_host=$(grep ^ldap_host= /etc/gforge/gforge.conf | cut -d= -f2-)
 
-    [ -f /etc/ldap.secret ] && ldap_passwd=$(cat /etc/ldap.secret) || ldap_passwd=$sf_ldap_passwd
-    cryptedpasswd=`slappasswd -s "$ldap_passwd" -h {CRYPT}`
-    ldap_suffix=$(grep ^suffix /etc/ldap/slapd.conf | cut -d\" -f2)
+    gforge_base_dn=$(grep ^ldap_base_dn= /etc/gforge/gforge.conf | cut -d= -f2-)
+    gforge_admin_dn="cn=admin,$gforge_base_dn"
+    slapd_base_dn=$(grep ^suffix /etc/ldap/slapd.conf | cut -d\" -f2)
+    slapd_admin_dn="cn=admin,$slapd_base_dn"
+    robot_dn="cn=SF_robot,$gforge_base_dn"
+
+    robot_passwd=$(grep ^ldap_web_add_password= /etc/gforge/gforge.conf | cut -d= -f2-)
+    robot_cryptedpasswd=`slappasswd -s "$robot_passwd" -h {CRYPT}`
+    # TODO: ask the user for the main (slapd) password
+    # Probably only do that when needed (when inserting the robot account)
+    [ -f /etc/ldap.secret ] && slapd_admin_passwd=$(cat /etc/ldap.secret) || slapd_admin_passwd=$robot_passwd
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
 
 show_vars () {
-    echo "sf_ldap_base_dn = '$sf_ldap_base_dn'"
-    echo "sf_ldap_admin_dn = '$sf_ldap_admin_dn'"
-    echo "sf_ldap_bind_dn = '$sf_ldap_bind_dn'"
-    echo "sf_ldap_passwd = '$sf_ldap_passwd'"
-    echo "sf_cryptedpasswd = '$sf_cryptedpasswd'"
-    echo "sf_ldap_host = '$sf_ldap_host'"
-    echo "ldap_passwd = '$ldap_passwd'"
+    echo "gforge_base_dn = '$gforge_base_dn'"
+    echo "slapd_admin_passwd = '$slapd_admin_passwd'"
     echo "cryptedpasswd = '$cryptedpasswd'"
-    echo "ldap_suffix = '$ldap_suffix'"
+    echo "slapd_base_dn = '$slapd_base_dn'"
     echo "tmpfile_pattern = '$tmpfile_pattern'"
 }
 
 check_base_dn() {
     server_base_dn=$(eval "ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts $DEVNULL2" | grep "namingContexts:" | cut -d" " -f2)
-    echo "sf_ldap_base_dn = $sf_ldap_base_dn"
+    echo "gforge_base_dn = $gforge_base_dn"
     echo "server_base_dn = $server_base_dn"
-    if echo $sf_ldap_base_dn | grep -q "$server_base_dn\$" ; then
+    if echo $gforge_base_dn | grep -q "$server_base_dn\$" ; then
 	echo Gforge base DN is under the existing server base DN -- OK
     else
 	echo Gforge base DN is *not* under the existing server base DN -- fail
 	exit 2
     fi
 
-    addon=$(echo $sf_ldap_base_dn | sed "s/$server_base_dn\$//")
+    addon=$(echo $gforge_base_dn | sed "s/$server_base_dn\$//")
     echo "addon = $addon"
     if [ -z "$addon" ] ; then
 	echo Gforge base DN is equal to server base DN -- OK
@@ -73,12 +72,28 @@ check_base_dn() {
 	echo Gforge base DN is at least two levels under the server base DN -- continuing investigations
     fi
     
-    needednc=$(echo $sf_ldap_base_dn | cut -d, -f2-)
+    needednc=$(echo $gforge_base_dn | cut -d, -f2-)
     if slapcat | grep -q "dn: $needednc" ; then
 	echo Found existing object in which to create our directory -- OK
     else
 	echo No existing object in which to create our directory -- fail
 	exit 3
+    fi
+}
+
+exists_dn() {
+    my_dn=$1
+    r=$(
+	nr=$(ldapsearch -LLL -x -b "$my_dn" -s base '' dn 2> /dev/null | grep ^dn: | wc -l)
+	echo "$nr:${PIPESTATUS[0]}"
+	exit 0
+    )
+    nr=$(echo $r | cut -d: -f1)
+    p=$(echo $r | cut -d: -f2)
+    if [ $p == 32 ] || [ $nr = 0 ] ; then
+	return 1
+    else
+	return 0
     fi
 }
 
@@ -112,7 +127,7 @@ configure_libnss_ldap(){
     if ! grep -q "^base[ 	]*$sf_ldap_dn" /etc/libnss-ldap.conf.gforge-new ; then
 	echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
 	grep "^base" /etc/libnss-ldap.conf
-	echo "Should be: base $sf_ldap_base_dn"
+	echo "Should be: base $gforge_base_dn"
     fi
     # Check bindpw
     # Should contain the secret
@@ -128,7 +143,7 @@ configure_libnss_ldap(){
     # Should be cn=admin,dc=...
     if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf.gforge-new ; then
 	echo "# Next line added by GForge install" >>/etc/libnss-ldap.conf.gforge-new
-	echo "rootbinddn cn=admin,$sf_ldap_base_dn" >>/etc/libnss-ldap.conf.gforge-new
+	echo "rootbinddn $gforge_admin_dn" >>/etc/libnss-ldap.conf.gforge-new
     fi
 }
 
@@ -178,28 +193,28 @@ configure_slapd(){
 	# Then write access for SF_robot
 	perl -pi -e "s/access to attribute=userPassword/# Next second line added by GForge install
 access to attribute=userPassword
-	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write/" /etc/ldap/slapd.conf.gforge-new
+	by dn=\"$robot_dn\" write/" /etc/ldap/slapd.conf.gforge-new
 
 	perl -pi -e "s/access to \*/# Next lines added by GForge install
-access to dn=\".*,ou=People,$sf_ldap_base_dn\"
-	by dn=\"cn=admin,$sf_ldap_base_dn\" write
-	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write
-        by dn=\"cn=admin,$ldap_suffix\" write
+access to dn=\".*,ou=People,$gforge_base_dn\"
+	by dn=\"$gforge_admin_dn\" write
+	by dn=\"$robot_dn\" write
+        by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn=\"ou=People,$sf_ldap_base_dn\"
-	by dn=\"cn=admin,$sf_ldap_base_dn\" write
-	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write
-        by dn=\"cn=admin,$ldap_suffix\" write
+access to dn=\"ou=People,$gforge_base_dn\"
+	by dn=\"$gforge_admin_dn\" write
+	by dn=\"$robot_dn\" write
+        by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn=\"ou=Group,$sf_ldap_base_dn\"
-	by dn=\"cn=admin,$sf_ldap_base_dn\" write
-	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write
-        by dn=\"cn=admin,$ldap_suffix\" write
+access to dn=\"ou=Group,$gforge_base_dn\"
+	by dn=\"$gforge_admin_dn\" write
+	by dn=\"$robot_dn\" write
+        by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn=\"ou=cvsGroup,$sf_ldap_base_dn\"
-	by dn=\"cn=admin,$sf_ldap_base_dn\" write
-	by dn=\"cn=SF_robot,$sf_ldap_base_dn\" write
-        by dn=\"cn=admin,$ldap_suffix\" write
+access to dn=\"ou=cvsGroup,$gforge_base_dn\"
+	by dn=\"$gforge_admin_dn\" write
+	by dn=\"$robot_dn\" write
+        by dn=\"$slapd_admin_dn\" write
 	by * read
 # End of gforge add
 access to */" /etc/ldap/slapd.conf.gforge-new
@@ -271,15 +286,14 @@ purge_nsswitch()
 
 # Load ldap database from gforge database
 load_ldap(){
-    if [ "x$ldap_passwd" != "x" ] ; then
+    if [ "x$slapd_admin_passwd" != "x" ] ; then
 	
 	# First, let's make sure our base DN exists
-	nr=$(ldapsearch -LLL -x -b "$sf_ldap_base_dn" -s base '' dn | grep ^dn: | wc -l)
-	if [ $nr = 0 ] ; then
+	if ! exists_dn $gforge_base_dn ; then
 	    tmpldif=$(mktemp $tmpfile_pattern)
 	    tmpldifadd=$(mktemp $tmpfile_pattern)
 	    tmpldifmod=$(mktemp $tmpfile_pattern)
-	    dc=$(echo $sf_ldap_base_dn | cut -d, -f1 | cut -d= -f2)
+	    dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
 	    echo >> $tmpldif <<EOF
 dn: $sys_ldap_base_dn
 dc: $dc
@@ -289,10 +303,10 @@ objectClass: domainRelatedObject
 associatedDomain: $sys_default_domain
 EOF
             # echo "Filling LDAP with database"
-	    if ! eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
+	    if ! eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
                 # Some entries could not be added (already there?)
                 # Therefore, we try to modify them
-		if ! eval "ldapmodify -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
+		if ! eval "ldapmodify -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
 		    echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
 		    echo "please check and report following error"
 		    echo ========================================================================================
@@ -311,19 +325,20 @@ EOF
 	    rm -f $tmpldif $tmpldifadd $tmpldifmod
 	fi
 
+# CLEANUP: should be done with the robot
         # This loads the ldap database
-        # echo "Our base DN is $sf_ldap_base_dn"
+        # echo "Our base DN is $gforge_base_dn"
         # echo "Creating ldif file from database"
 	tmpldif=$(mktemp $tmpfile_pattern)
 	tmpldifadd=$(mktemp $tmpfile_pattern)
 	tmpldifmod=$(mktemp $tmpfile_pattern)
-	dc=$(echo $sf_ldap_base_dn | cut -d, -f1 | cut -d= -f2)
+	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
 	/usr/lib/gforge/bin/sql2ldif.pl >> $tmpldif
         # echo "Filling LDAP with database"
-	if ! eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
+	if ! eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifadd 2>&1" ; then
             # Some entries could not be added (already there)
             # Therefore, we have to modify them
-	    if ! eval "ldapmodify -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
+	    if ! eval "ldapmodify -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -f $tmpldif > $tmpldifmod 2>&1" ; then
 	    	echo "WARNING WARNING WARNING Something wrong happened in ldapmodify"
 		echo "please check and report following error"
 		echo ========================================================================================
@@ -350,68 +365,86 @@ EOF
 }
 
 print_ldif_default(){
-    dc=`echo $ldap_suffix | sed 's/dc=\(.[^,]*\),.*/\1/'`
+    dc=`echo $slapd_base_dn | sed 's/dc=\(.[^,]*\),.*/\1/'`
     cat <<-FIN
-dn: $ldap_suffix
+dn: $slapd_base_dn
 objectClass: dcObject
 dc: $dc
 
-dn: cn=admin,$ldap_suffix
+dn: cn=admin,$slapd_base_dn
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
 cn: admin
 userPassword: $cryptedpasswd
 description: LDAP administrator
 
-dn: ou=People,$ldap_suffix
+dn: ou=People,$slapd_base_dn
 objectClass: organizationalUnit
 ou: People
 
-dn: ou=Roaming,$ldap_suffix
+dn: ou=Roaming,$slapd_base_dn
 objectCLass: organizationalUnit
 ou: Roaming
 FIN
 }
 
-# Setup SF_robot Passwd
+# Setup SF_robot
 setup_robot() {
     setup_vars
     
     # The first account is only used in a multiserver SF
     check_server
-    echo "Adding robot accounts"
+    if ! exists_dn $robot_dn ; then
+	echo "Adding robot accounts and sub-trees"
     
-    { eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' $DEVNULL12" || true ; } <<-FIN
-dn: cn=Replicator,$sf_ldap_base_dn
+	{ eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' $DEVNULL12" || true ; } <<-FIN
+dn: cn=Replicator,$gforge_base_dn
 description: Replicator the Robot
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
 userPassword: {CRYPT}xxxxx
 cn: Replicator
 
-dn: cn=SF_robot,$sf_ldap_base_dn
+dn: $robot_dn
 description: SF the Robot
 objectClass: organizationalRole
 objectClass: simpleSecurityObject
 userPassword: {CRYPT}xxxxx
 cn: SF_robot
 FIN
+    else
+	echo "Robot accounts already present, not adding"
+    fi
     check_server
 
-    eval "ldapmodify -v -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' $DEVNULL12" <<-FIN
-dn: cn=SF_robot,$sf_ldap_base_dn
+    eval "ldapmodify -v -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' $DEVNULL12" <<-FIN
+dn: $robot_dn
 changetype: modify
 replace: userPassword
-userPassword: $sf_cryptedpasswd
+userPassword: $robot_cryptedpasswd
 FIN
     check_server
     # echo "Testing LDAP"
+    if ! exists_dn uid=dummy,ou=People,$gforge_base_dn ; then
+	# echo "Adding dummy user"
+	eval "ldapadd -v -c -D '$robot_dn' -x -w'$robot_passwd' $DEVNULL12" <<-FIN
+dn: uid=dummy,ou=People,$gforge_base_dn
+objectClass: posixAccount
+objectClass: debGforgeAccount
+cn: Dummy User (untested)
+uid: dummy
+uidNumber: 9999
+gidNumber: 9999
+homeDirectory: /tmp
+loginShell: /bin/false
+FIN
+    fi
     # echo "Changing dummy cn using SF_robot account"
-    eval "ldapmodify -v -c -D 'cn=SF_Robot,$sf_ldap_base_dn' -x -w'$sf_ldap_passwd' $DEVNULL12" <<-FIN
-dn: uid=dummy,ou=People,$sf_ldap_base_dn
+    eval "ldapmodify -v -c -D '$robot_dn' -x -w'$robot_passwd' $DEVNULL12" <<-FIN
+dn: uid=dummy,ou=People,$gforge_base_dn
 changetype: modify
 replace: cn
-cn: Dummy User (Tested)
+cn: Dummy User (tested)
 FIN
 }
 
@@ -433,10 +466,10 @@ case "$1" in
 	sleep 5		# Sometimes it takes a bit of time to get out of bed
 	check_server
 	check_base_dn
-	# echo "Load ldap"
-	load_ldap
 	# echo "Setup SF_robot account"
 	setup_robot
+	# echo "Load ldap"
+	load_ldap
 	;;
     update)
 	setup_vars
@@ -459,12 +492,12 @@ case "$1" in
 	setup_vars
 	check_server
 	# Display what is now in the database
-	ldapsearch -x -b "$ldap_suffix" '(objectclass=*)' 
+	ldapsearch -x -b "$slapd_base_dn" '(objectclass=*)' 
 	;;
     empty)
 	setup_vars
 	check_server
-	admin_regexp=$(echo $sf_ldap_base_dn | sed 's/, */, /g')
+	admin_regexp=$(echo $gforge_base_dn | sed 's/, */, /g')
 	admin_regexp="^cn=admin, *$admin_regexp"
 	get_our_entries () {
 	    {		# List candidates...
@@ -481,11 +514,11 @@ case "$1" in
 		    | grep -v "^ou=People," \
 		    | grep -v "^ou=Roaming," \
 		    | grep -v "$admin_regexp"
-		echo cn=Replicator,$sf_ldap_base_dn
-		echo cn=SF_robot,$sf_ldap_base_dn
+		echo cn=Replicator,$gforge_base_dn
+		echo $robot_dn
 	    } | sort -u # ...then uniquify that list
 	}
-	get_our_entries | eval "ldapdelete -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -c $DEVNULL12" || true
+	get_our_entries | eval "ldapdelete -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' -c $DEVNULL12" || true
 	;;
     reset)
 	setup_vars
@@ -493,7 +526,7 @@ case "$1" in
 	rm -f /var/lib/ldap/*.dbb
 	invoke-rc.d slapd start
 	tmpldif=$(mktemp $tmpfile_pattern)
-	print_ldif_default $sf_ldap_base_dn $cryptedpasswd > $tmpldif
+	print_ldif_default $gforge_base_dn $cryptedpasswd > $tmpldif
 	slapadd -l $tmpldif
 	rm -f $tmpldif
 	;;
