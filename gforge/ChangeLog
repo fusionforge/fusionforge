@@ -1,3 +1,8 @@
+2002-12-23  Tim Perdue <tim@gforge.org>
+
+	* Committing first working version of new Task Manager.
+	Still needs more testing and coding.
+
 2002-12-14  Tim Perdue <tim@gforge.org>
 
 	* Complete rewrite of FRS using OO style and coding guidelines.

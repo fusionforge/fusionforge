@@ -1,12 +1,21 @@
 <?php
 /**
- * GForge ProjectGroups Facility
+ * GForge Project Management Facility
  *
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
  * @version   $Id$
  */
+/*
+
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
+
 
 require_once('common/include/Error.class');
 
@@ -27,6 +36,7 @@ class ProjectTask extends Error {
 	var $ProjectGroup;
 	var $dependon;
 	var $assignedto;
+	var $relatedartifacts;
 
 	/**
 	 *  Constructor.
@@ -66,12 +76,12 @@ class ProjectTask extends Error {
 		return true;
 	}
 
-//	duration - seconds (30 days * 80640, for example)
 //	start_date - unix time
+//	end_date - unix time
 //	hours	est number of hours
-	function create($summary,$details,$priority,$hours,$start_date,
-			$duration,$category_id,&$assigned_arr,&$depend_arr) {
-		if (!$summary || !$details || !$priority || !$hours || !$duration || !$category_id) {
+	function create($summary,$details,$priority,$hours,$start_date,$end_date,
+			$hours,$category_id,$percent_complete,&$assigned_arr,&$depend_arr) {
+		if (!$summary || !$details || !$priority || !$hours || !$start_date || !$end_date || !$category_id) {
 			$this->setError('Must include a summary, details, priority, hours, start date and end date.');
 			return false;
 		}
@@ -83,38 +93,42 @@ class ProjectTask extends Error {
 			return false;
 		}
 
-		//
-		//	Inserting a generic task, which will then be "updated", forcing the constraint 
-		//	Triggers to check everything out
-		//
 		db_begin();
-		$sql="INSERT INTO project_task (group_project_id,created_by,summary,
-			details,start_date,end_date,status_id,category_id) 
-			VALUES ('". $this->ProjectGroup->getID() ."', '".user_getid()."', ' ',
-			' ','$start_date','$end_date','1','$category_id'";
-
-		$result=db_query($sql);
-		if (!$result || db_affected_rows($result) < 1) {
-			$this->setError('ProjectTask::create() Posting Failed '.db_error());
+		$res=db_query("SELECT nextval('project_task_pk_seq') AS id");
+		if (!$project_task_id=db_result($res,0,'id')) {
+			$this->setError('Could Not Get Next ID');
 			db_rollback();
 			return false;
 		} else {
-			$project_task_id=db_insertid($result,'project_task','project_task_id');
-			if (!$this->fetchData($project_task_id)) {
+			$this->data_array['project_task_id']=$project_task_id;
+
+			if (!$this->setDependentOn($depend_arr)) {
 				db_rollback();
 				return false;
-			}
-			if (!$project_task_id) {
+			} elseif (!$this->setAssignedTo($assigned_arr)) {
 				db_rollback();
-				$this->setError('ProjectTask::create() Unable to get new task_id');
 				return false;
 			} else {
-				if (!$this->update($summary,$details,$priority,$hours,$start_date,$end_date,
-					1,$category_id,$assigned_arr,$depend_arr)) {
+				$sql="INSERT INTO project_task (project_task_id,group_project_id,created_by,summary,
+					details,start_date,end_date,status_id,category_id,priority,percent_complete,hours) 
+					VALUES ('$project_task_id','". $this->ProjectGroup->getID() ."', '".user_getid()."', '". htmlspecialchars($summary) ."',
+					'". htmlspecialchars($details) ."','$start_date','$end_date','1','$category_id','$priority','$percent_complete','$hours')";
+
+				$result=db_query($sql);
+				if (!$result || db_affected_rows($result) < 1) {
+					$this->setError('ProjectTask::create() Posting Failed '.db_error());
+					db_rollback();
 					return false;
+				} else {
+					if (!$this->fetchData($project_task_id)) {
+						db_rollback();
+						return false;
+					} else {
+						$this->sendNotice(1);
+						db_commit();
+						return true;
+					}
 				}
-				db_commit();
-				return true;
 			}
 		}
 	}
@@ -171,7 +185,7 @@ class ProjectTask extends Error {
 	 *	@return	string	The body/details.
 	 */
 	function getDetails() {
-		return $this->data_array['Details'];
+		return $this->data_array['details'];
 	}
 
 	/**
@@ -255,6 +269,78 @@ class ProjectTask extends Error {
 		return $this->data_array['category_name'];
 	}
 
+	/**
+	 *	getRelatedArtifacts - Return a result set of artifacts which are related to this task.
+	 *
+	 *	@returns Database result set.
+	 */
+	function getRelatedArtifacts() {
+		if (!$this->relatedartifacts) {
+			$this->relatedartifacts=
+			db_query("SELECT agl.group_id,agl.name,agl.group_artifact_id,a.artifact_id,a.open_date,a.summary 
+			FROM artifact_group_list agl, artifact a 
+			WHERE a.group_artifact_id=agl.group_artifact_id
+			AND EXISTS (SELECT artifact_id FROM project_task_artifact 
+				WHERE artifact_id=a.artifact_id
+				AND project_task_id='". $this->getID() ."')");
+		}
+		return $this->relatedartifacts;
+	}
+
+	/**
+	 *	addRelatedArtifacts - take an array of artifact_id's and build relationships
+	 *
+	 *	@param	array	An array of artifact_id's to be attached to this task.
+	 *	@return	boolean	True/false.
+	 */
+	function addRelatedArtifacts($art_array) {
+		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+//
+//	SHOULD REALLY INSTANTIATE THIS ARTIFACT OBJECT TO ENSURE PROPER SECURITY - FUTURE
+//
+//	new ArtifactFromID($id)
+//
+		for ($i=0; $i<count($art_array); $i++) {
+			$res=db_query("INSERT INTO project_task_artifact (project_task_id,artifact_id) 
+				VALUES ('".$this->getID()."','".$art_array[$i]."')");
+			if (!$res) {
+				$this->setError('Error inserting artifact relationship: '.db_error());
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
+	 *	removeRelatedArtifacts - take an array of artifact_id's and delete relationships
+	 *
+	 *	@param	array	An array of artifact_id's to be removed from this task.
+	 *	@return	boolean	True/false.
+	 */
+	function removeRelatedArtifacts($art_array) {
+		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isPMAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+
+		for ($i=0; $i<count($art_array); $i++) {
+			$res=db_query("DELETE FROM project_task_artifact
+				WHERE project_task_id='".$this->getID()."'
+				AND artifact_id='".$art_array[$i]."')");
+			if (!$res) {
+				$this->setError('Error deleting artifact relationship: '.db_error());
+				return false;
+			}
+		}
+		return true;
+	}
 /*
 	function delete() {
 
@@ -271,15 +357,35 @@ class ProjectTask extends Error {
 */
 
 	/**
-	 *  getHistory() - returns a result set of audit trail for this ProjectTask
+	 *	getOtherTasks - Return a result set of tasks in this subproject that do not equal
+	 *	the current task_id.
 	 *
-	 *  @return result set
+	 *	@returns Database result set.
+	 */
+	function getOtherTasks () {
+		//
+		//	May not yet have an ID, if we are creating a NEW task
+		//
+		if ($this->getID()) {
+			$addstr=" AND project_task_id <> '". $this->getID() ."' ";
+		}
+		$sql="SELECT project_task_id,summary 
+		FROM project_task 
+		WHERE group_project_id='". $this->ProjectGroup->getID() ."' 
+		$addstr ORDER BY project_task_id DESC";
+		return db_query($sql);
+	}
+
+	/**
+	 *  getHistory() - returns a result set of audit trail for this ProjectTask.
+	 *
+	 *  @return result set.
 	 */
 	function getHistory() {
-		$sql="SELECT * ".
-		"FROM project_history_user_vw ".
-		"WHERE project_task_id='". $this->getID() ."' ".
-		"ORDER BY entrydate DESC";
+		$sql="SELECT * 
+		FROM project_history_user_vw 
+		WHERE project_task_id='". $this->getID() ."' 
+		ORDER BY mod_date DESC";
 		return db_query($sql);
 	}
 
@@ -289,12 +395,18 @@ class ProjectTask extends Error {
 	 *  @return database result set
 	 */
 	function getMessages() {
-		$sql="select * ".
-			"FROM project_message_user_vw ".
-			"WHERE project_task_id='". $this->getID() ."' ORDER BY postdate DESC";
+		$sql="select * 
+			FROM project_message_user_vw 
+			WHERE project_task_id='". $this->getID() ."' ORDER BY postdate DESC";
 		return db_query($sql);
 	}
 
+	/**
+	 * addMessage - Handle the addition of a followup message to this task.
+	 *
+	 * @param	   string  The message.
+	 * @returns true on success/false on error.
+	 */
 	function addMessage($message) {
 		$sql="INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
 			VALUES ('". $this->getID() ."','". htmlspecialchars($message) ."','".user_getid()."','". time() ."')";
@@ -310,14 +422,13 @@ class ProjectTask extends Error {
 	/**
 	 * addHistory - Handle the insertion of history for these parameters.
 	 *
-	 * @param	   string  The field name
-	 * @param	   string  The old value
-	 * @returns true on success/false on error
-	 *
+	 * @param	   string  The field name.
+	 * @param	   string  The old value.
+	 * @returns true on success/false on error.
 	 */
 	function addHistory ($field_name,$old_value) {
-		$sql="insert into project_history(project_task_id,field_name,old_value,mod_by,date) ".
-			"VALUES ('". $this->getID() ."','$field_name','$old_value','".user_getid()."','".time()."')";
+		$sql="insert into project_history(project_task_id,field_name,old_value,mod_by,mod_date) 
+			VALUES ('". $this->getID() ."','$field_name','$old_value','".user_getid()."','".time()."')";
 		$result=db_query($sql);
 		if (!$result) {
 			$this->setError('ERROR IN AUDIT TRAIL - '.db_error());
@@ -328,13 +439,13 @@ class ProjectTask extends Error {
 	}
 
 
-	function setDependantOn(&$arr) {
+	function setDependentOn(&$arr) {
 //
 //	IMPORTANT - MUST VERIFY NO CIRCULAR DEPENDENCY!! 
 //	Simplest way is to ensure this start_date, is >= dependent_on end_date
 //
 		//get existing dependencies to diff against
-		$arr2 =& $this->getDependantOn();
+		$arr2 =& $this->getDependentOn();
 		$this->dependon =& $arr2;
 
 		if (count($arr) || count($arr2)) {
@@ -367,7 +478,10 @@ class ProjectTask extends Error {
 	 *
 	 *
 	 */
-	function &getDependantOn() {
+	function &getDependentOn() {
+		if (!$this->getID()) {
+			return array();
+		}
 		if (!$this->dependon) {
 			$this->dependon =& util_result_column_to_array(db_query("SELECT is_dependent_on_task_id 
 				FROM project_dependencies 
@@ -411,6 +525,9 @@ class ProjectTask extends Error {
 	 *
 	 */
 	function &getAssignedTo() {
+		if (!$this->getID()) {
+			return array();
+		}
 		if (!$this->assignedto) {
 			$this->assignedto =& util_result_column_to_array(db_query("SELECT assigned_to_id 
 				FROM project_assigned_to 
@@ -420,8 +537,8 @@ class ProjectTask extends Error {
 	}
 
 	function update($summary,$details,$priority,$hours,$start_date,$end_date,
-		$status_id,$category_id,&$assigned_arr,&$depend_arr,$message) {
-		if (!$summary || !$details || !$priority || !$hours || !$start_date || !$end_date 
+		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr) {
+		if (!$summary || !$priority || !$hours || !$start_date || !$end_date 
 			|| !$status_id || !$category_id) {
 			$this->setError('Must include a summary, details, priority, hours, start date, end date, status and category.');
 			return false;
@@ -433,20 +550,19 @@ class ProjectTask extends Error {
 			$this->setError('Permission Denied');
 			return false;
 		}
-//
-//
-//
-//	mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year)
-//	mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year)
+
 		db_begin();
-		if ($message) {
-			if (!$this->addMessage($message)) {
+		if ($details) {
+			if (!$this->addMessage($details)) {
 				db_rollback();
 				return false;
 			}
 		}
 		if ($this->getStatusID() != $status_id)
 			{ $this->addHistory ('status_id',$this->getStatusID());  }
+
+		if ($this->getCategoryID() != $category_id)
+			{ $this->addHistory ('category_id',$this->getCategoryID());  }
 
 		if ($this->getPriority() != $priority)
 			{ $this->addHistory ('priority',$this->getPriority());  }
@@ -466,7 +582,7 @@ class ProjectTask extends Error {
 		if ($this->getEndDate() != $end_date)
 			{ $this->addHistory ('end_date',$this->getEndDate());  }
 
-		if (!$this->setDependantOn($depend_arr)) {
+		if (!$this->setDependentOn($depend_arr)) {
 			return false;
 		} elseif (!$this->setAssignedTo($assigned_arr)) {
 			return false;
@@ -474,12 +590,12 @@ class ProjectTask extends Error {
 
 			$sql="UPDATE project_task SET
 				summary='".htmlspecialchars($summary)."',
-				details='".htmlspecialchars($details)."',
 				priority='$priority',
 				hours='$hours',
 				start_date='$start_date',
 				end_date='$end_date',
 				status_id='$status_id',
+				percent_complete='$percent_complete',
 				category_id='$category_id'
 				WHERE group_project_id='".$this->ProjectGroup->getID()."'
 				AND project_task_id='".$this->getID()."'";
@@ -490,8 +606,8 @@ class ProjectTask extends Error {
 				db_rollback();
 				return false;
 			} else {
-				if (!$this->fetchData($this->getID()) {
-
+				if (!$this->fetchData($this->getID())) {
+					return false;
 				} else {
 					$this->sendNotice();
 					db_commit();
@@ -502,7 +618,7 @@ class ProjectTask extends Error {
 
 	}
 
-	function sendNotice() {
+	function sendNotice($first=false) {
 		$ids =& $this->getAssignedTo();
 
 		//
@@ -512,38 +628,38 @@ class ProjectTask extends Error {
 			return true;
 		}
 
-        $body = "Task #". $this->getID() ." has been updated. ".
-            "\n\nProject: ". $this->ProjectGroup->Group->getPublicName() .
-            "\nSubproject: ". $this->ProjectGroup->getName() .
-            "\nSummary: ".util_unconvert_htmlspecialchars( $this->getSummary() ).
-            "\nComplete: ". $this->getPercentComplete() ."%".
-            "\nStatus: ". $this->getStatusName() .
-            "\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
+		$body = "Task #". $this->getID() ." has been updated. ".
+			"\n\nProject: ". $this->ProjectGroup->Group->getPublicName() .
+			"\nSubproject: ". $this->ProjectGroup->getName() .
+			"\nSummary: ".util_unconvert_htmlspecialchars( $this->getSummary() ).
+			"\nComplete: ". $this->getPercentComplete() ."%".
+			"\nStatus: ". $this->getStatusName() .
+			"\n\nDescription: ". util_unconvert_htmlspecialchars( $this->getDetails() );
 
-        /*
-            Now get the followups to this task
-        */
-        $result2=$this->getMessages();
+		/*
+			Now get the followups to this task
+		*/
+		$result2=$this->getMessages();
 
-        $rows=db_numrows($result2);
+		$rows=db_numrows($result2);
 
-        if ($result2 && $rows > 0) {
-            $body .= "\n\nFollow-Ups:";
-            for ($i=0; $i<$rows;$i++) {
-                $body .= "\n\n-------------------------------------------------------";
-                $body .= "\nDate: ". date($GLOBALS['sys_datefmt'],db_result($result2,$i,'postdate'));
-                $body .= "\nBy: ".db_result($result2,$i,'user_name');
-                $body .= "\n\nComment:\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body'));
-            }
-        }
-        $body .= "\n\n-------------------------------------------------------".
-            "\nFor more info, visit:".
-            "\n\nhttp://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
-                $this->getID(); ."&group_id=".
-                $this->ProjectGroup->Group->getID() ."&group_project_id=". $this->ProjectGroup->getID();
+		if ($result2 && $rows > 0) {
+			$body .= "\n\nFollow-Ups:";
+			for ($i=0; $i<$rows;$i++) {
+				$body .= "\n\n-------------------------------------------------------";
+				$body .= "\nDate: ". date($GLOBALS['sys_datefmt'],db_result($result2,$i,'postdate'));
+				$body .= "\nBy: ".db_result($result2,$i,'user_name');
+				$body .= "\n\nComment:\n".util_unconvert_htmlspecialchars(db_result($result2,$i,'body'));
+			}
+		}
+		$body .= "\n\n-------------------------------------------------------".
+			"\nFor more info, visit:".
+			"\n\nhttp://$GLOBALS[sys_default_domain]/pm/task.php?func=detailtask&project_task_id=".
+				$this->getID() ."&group_id=".
+				$this->ProjectGroup->Group->getID() ."&group_project_id=". $this->ProjectGroup->getID();
 
-        $subject="[Task #". $this->getID() .'] '.
-            util_unconvert_htmlspecialchars( $this->getID() );
+		$subject="[Task #". $this->getID() .'] '.
+			util_unconvert_htmlspecialchars( $this->getID() );
 
 		util_handle_message(array_unique($ids),$subject,$body,$this->ProjectGroup->getSendAllPostsTo());
 		return true;

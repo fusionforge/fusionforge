@@ -1,123 +1,196 @@
 <?php
 /**
-  *
-  * SourceForge Project/Task Manager (PM)
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Project Management Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+/*
 
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
 
 require_once('pre.php');
-require_once('www/pm/pm_utils.php');
-require_once('common/pm/pm_data.php');
+require_once('www/pm/include/ProjectGroupHTML.class');
+require_once('www/pm/include/ProjectTaskHTML.class');
+require_once('common/pm/ProjectGroupFactory.class');
 
-if ($group_id && $group_project_id) {
-
-	$project=&group_get_object($group_id);
-
-	if (session_loggedin()) {
-		$perm =& $project->getPermission( session_get_user() );
-	}
-
-	/*
-		Verify that this group_project_id falls under this group
-	*/
-
-	//can this person view these tasks? they may have hacked past the /pm/index.php page
-	if (session_loggedin() && $perm->isMember()) {
-		$public_flag='0,1';
-	} else {
-		$public_flag='1';
-	}
-
-	/*
-		Verify that this subproject belongs to this project
-	*/
-	$result=db_query("SELECT * FROM project_group_list ".
-		"WHERE group_project_id='$group_project_id' AND group_id='$group_id' AND is_public IN ($public_flag)");
-	if (db_numrows($result) < 1) {
-		exit_permission_denied();
-	}
-
-	if (!$func) {
-		$func='browse';
-	}
-	/*
-		Figure out which function we're dealing with here
-	*/
-
-	switch ($func) {
-
-		case 'addtask' : {
-			if (session_loggedin() && $perm->isPMAdmin()) {
-				include '../pm/add_task.php';
-			} else {
-				exit_permission_denied();
-			}
-			break;;
-		}
-
-		case 'postaddtask' : {
-			if (session_loggedin() && $perm->isPMAdmin()) {
-				if (pm_data_create_task ($group_project_id,$start_month,$start_day,$start_year,
-					$start_hour,$start_minute,$end_month,$end_day,$end_year,
-					$end_hour,$end_minute,$summary,$details,$percent_complete,
-					$priority,$hours,$assigned_to,$dependent_on)) {
-					$feedback='Task Created Successfully';
-					include '../pm/browse_task.php';
-				} else {
-					exit_error('ERROR',$feedback);
-				}
-			} else {
-				exit_permission_denied();
-			}
-			break;;
-		}
-
-		case 'postmodtask' : {
-			if (session_loggedin() && $perm->isPMAdmin()) {
-				if (pm_data_update_task ($group_project_id,$project_task_id,$start_month,$start_day,
-					$start_year,$start_hour,$start_minute,$end_month,$end_day,$end_year,$end_hour,
-					$end_minute,$summary,$details,$percent_complete,$priority,$hours,$status_id,
-					$assigned_to,$dependent_on,$new_group_project_id,$group_id)) {
-					$feedback='Task Updated Successfully';
-					include '../pm/browse_task.php';
-				} else {
-					exit_error('ERROR',$feedback);
-				}
-				break;;
-			} else {
-				exit_permission_denied();
-			}
-		}
-
-		case 'browse' : {
-			include '../pm/browse_task.php';
-			break;;
-		}
-
-		case 'detailtask' : {
-			if (session_loggedin() && $perm->isPMAdmin()) {
-				include '../pm/mod_task.php';
-			} else {
-				include '../pm/detail_task.php';
-			}
-			break;;
-		}
-
-	}
-
-} else {
-	//browse for group first message
-	if (!$group_id || !$group_project_id) {
-		exit_no_group();
-	} else {
-		exit_permission_denied();
-	}
+if (!$group_id || !$group_project_id) {
+	exit_missing_params();
 }
+
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g)) {
+	exit_no_group();
+} elseif ($g->isError()) {
+	exit_error('Error',$g->getErrorMessage());
+}
+
+$pg = new ProjectGroupHTML($g,$group_project_id);
+if (!$pg || !is_object($pg)) {
+	exit_error('Error','Could Not Get Factory');
+} elseif ($pg->isError()) {
+	exit_error('Error',$pg->getErrorMessage());
+}
+
+if (!$func) {
+	$func='browse';
+}
+
+if (session_loggedin()) {
+	$perm =& $g->getPermission( session_get_user() );
+}
+
+/*
+	Figure out which function we're dealing with here
+*/
+switch ($func) {
+
+	//
+	//	Show blank form to add new task
+	//
+	case 'addtask' : {
+		if (session_loggedin() && $perm->isPMAdmin()) {
+			$pt=new ProjectTaskHTML($pg);
+			if (!$pt || !is_object($pt)) {
+				exit_error('Error','Could Not Get ProjectTask');
+			} elseif ($pt->isError()) {
+				exit_error('Error',$pt->getErrorMessage());
+			}
+			include 'add_task.php';
+		} else {
+			exit_permission_denied();
+		}
+		break;
+	}
+
+	//
+	//	Insert the task into the database
+	//
+	case 'postaddtask' : {
+		if (session_loggedin() && $perm->isPMAdmin()) {
+			$pt = new ProjectTask($pg);
+			if (!$pt || !is_object($pt)) {
+				exit_error('Error','Could Not Get Empty ProjectTask');
+			} elseif ($pt->isError()) {
+				exit_error('Error',$pt->getErrorMessage());
+			}
+
+			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
+			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
+
+			if (!$pt->create($summary,$details,$priority,$hours,$start_date,$end_date,$hours,$category_id,$percent_complete,$assigned_to,$dependent_on)) {
+				exit_error('ERROR',$pt->getErrorMessage());
+			} else {
+				if (count($add_artifact_id) > 0) {
+					if (!$pt->addRelatedArtifacts($add_artifact_id)) {
+						exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
+					}
+				}
+				$feedback='Task Created Successfully';
+				include 'browse_task.php';
+			}
+		} else {
+			exit_permission_denied();
+		}
+		break;
+	}
+
+	//
+	//	Modify an existing task
+	//
+	case 'postmodtask' : {
+		if (session_loggedin() && $perm->isPMAdmin()) {
+			$pt = new ProjectTask($pg,$project_task_id);
+			if (!$pt || !is_object($pt)) {
+				exit_error('Error','Could Not Get ProjectTask');
+			} elseif ($pt->isError()) {
+				exit_error('Error',$pt->getErrorMessage());
+			}
+
+			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
+			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
+			if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,$percent_complete,$assigned_to,$dependent_on)) {
+				exit_error('ERROR','update():: '.$pt->getErrorMessage());
+			} else {
+				if (count($rem_artifact_id) > 0) {
+					if (!$pt->removeRelatedArtifacts($rem_artifact_id)) {
+						exit_error('ERROR','removeRelatedArtifacts():: '.$pt->getErrorMessage());
+					}
+				}
+				$feedback='Task Updated Successfully';
+				include 'browse_task.php';
+			}
+		} else {
+			exit_permission_denied();
+		}
+		break;
+	}
+
+	//
+	//	Add an artifact relationship to an existing task
+	//
+	case 'addartifact' : {
+		if (session_loggedin() && $perm->isPMAdmin()) {
+			$pt = new ProjectTask($pg,$project_task_id);
+			if (!$pt || !is_object($pt)) {
+				exit_error('Error','Could Not Get ProjectTask');
+			} elseif ($pt->isError()) {
+				exit_error('Error',$pt->getErrorMessage());
+			}
+			if (!$pt->addRelatedArtifacts($add_artifact_id)) {
+				exit_error('ERROR','addRelatedArtifacts():: '.$pt->getErrorMessage());
+			} else {
+				$feedback='Successfully Added Tracker Relationship';
+				include 'browse_task.php';
+
+			}
+		} else {
+			exit_permission_denied();
+		}
+		break;
+	}
+
+	//
+	//	Simply browse existing tasks
+	//
+	case 'browse' : {
+		include 'browse_task.php';
+		break;
+	}
+
+	//
+	//	Show a gantt chart
+	//
+	case 'ganttchart' : {
+		include 'gantt.php';
+		break;
+	}
+
+	//
+	//	View a specific existing task
+	//
+	case 'detailtask' : {
+		$pt=new ProjectTaskHTML($pg,$project_task_id);
+		if (!$pt || !is_object($pt)) {
+			exit_error('Error','Could Not Get ProjectTask');
+		} elseif ($pt->isError()) {
+			exit_error('Error',$pt->getErrorMessage());
+		}
+		if (session_loggedin() && $perm->isPMAdmin()) {
+			include 'mod_task.php';
+		} else {
+			include 'detail_task.php';
+		}
+		break;
+	}
+
+}
+
 ?>

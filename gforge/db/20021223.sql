@@ -1,4 +1,9 @@
 --
+-- rename old "date" fields to be SQL compliant
+--
+alter table project_history rename column date to mod_date;
+
+--
 --	Change project_task to delete on removal of project
 --
 ALTER TABLE project_task DROP CONSTRAINT "project_task_group_project_id_f" RESTRICT;
@@ -16,6 +21,7 @@ ALTER TABLE project_group_list ADD COLUMN send_all_posts_to text;
 --	Add category_id
 --
 ALTER TABLE project_task ADD COLUMN category_id int REFERENCES project_category(category_id);
+UPDATE project_task SET category_id=100;
 
 --
 --	Convenience view required for ProjectTask object
@@ -88,6 +94,37 @@ DROP VIEW project_dependon_vw;
 CREATE VIEW project_dependon_vw AS 
 	SELECT pd.project_task_id,pd.is_dependent_on_task_id,pt.end_date,pt.start_date
 	FROM project_task pt FULL JOIN project_dependencies pd ON (pd.is_dependent_on_task_id=pt.project_task_id);
+
+DROP VIEW project_history_user_vw;
+CREATE VIEW project_history_user_vw AS
+	SELECT users.realname,users.email,users.user_name,project_history.* 
+	FROM users,project_history 
+	WHERE project_history.mod_by=users.user_id;
+
+DROP VIEW project_message_user_vw;
+CREATE VIEW project_message_user_vw AS
+	SELECT users.realname,users.email,users.user_name,project_messages.*
+	FROM users,project_messages
+	WHERE project_messages.posted_by=users.user_id;
+--
+--	Move project messages into separate table from project_history
+--
+CREATE TABLE project_messages (
+project_message_id SERIAL,
+project_task_id INT NOT NULL REFERENCES project_task(project_task_id) ON DELETE CASCADE,
+body text,
+posted_by INT NOT NULL REFERENCES users(user_id),
+postdate int NOT NULL);
+
+BEGIN;
+INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
+	SELECT project_task_id,old_value,mod_by,date 
+	FROM project_history
+	WHERE field_name='details';
+
+DELETE FROM project_history WHERE field_name='details';
+
+COMMIT;
 
 --
 --	Remove all existing dependencies, as they may be problematic.

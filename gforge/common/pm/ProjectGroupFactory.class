@@ -1,15 +1,23 @@
 <?php
 /**
- * GForge Project Manager Facility
+ * GForge Project Management Facility
  *
  * Copyright 2002 GForge, LLC
  * http://gforge.org/
  *
  * @version   $Id$
  */
+/*
+
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
 
 require_once('common/include/Error.class');
-require_once('common/forum/ProjectGroup.class');
+require_once('common/pm/ProjectGroup.class');
 
 class ProjectGroupFactory extends Error {
 

@@ -1,14 +1,21 @@
 <?php
 /**
- * ProjectCategory.class - Class to handle artifact categories
+ * GForge Project Management Facility
  *
- * SourceForge: Breaking Down the Barriers to Open Source Development
- * Copyright 1999-2001 (c) VA Linux Systems
- * http://sourceforge.net
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
  *
  * @version   $Id$
- *
  */
+/*
+
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
+
 require_once('common/include/Error.class');
 
 class ProjectCategory extends Error {
@@ -83,15 +90,14 @@ class ProjectCategory extends Error {
 			$this->setError('ProjectCategory: name and assignee are Required');
 			return false;
 		}
-//
-//	Fix perms
-//
-		if (!$this->ProjectGroup->userIsAdmin()) {
+
+		$perm =& $this->ProjectGroup->Group->getPermission (session_get_user());
+		if (!$perm || !$perm->isPMAdmin()) {
 			$this->setError('Permission Denied');
 			return false;
 		}
-		$sql="INSERT INTO project_category (group_project_id,category_name,auto_assign_to) 
-			VALUES ('".$this->ProjectGroup->getID()."','$name','$auto_assign_to')";
+		$sql="INSERT INTO project_category (group_project_id,category_name) 
+			VALUES ('".$this->ProjectGroup->getID()."','$name')";
 
 		$result=db_query($sql);
 
@@ -164,17 +170,18 @@ class ProjectCategory extends Error {
 	 *  @return true/false
 	 */
 	function update($name) {
-		if (!$this->ProjectGroup->userIsAdmin()) {
+		$perm =& $this->ProjectGroup->Group->getPermission (session_get_user());
+		if (!$perm || !$perm->isPMAdmin()) {
 			$this->setError('Permission Denied');
 			return false;
-		}   
-		if (!$name || !$assign_to) {
+		}
+		if (!$name) {
 			$this->setError('Missing Params');
 			return false;
 		}   
 		$sql="UPDATE project_category 
 			SET category_name='$name'
-			WHERE id='". $this->getID() ."' 
+			WHERE category_id='". $this->getID() ."' 
 			AND group_project_id='".$this->ProjectGroup->getID()."'";
 		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {

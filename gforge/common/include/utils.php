@@ -227,7 +227,7 @@ function util_result_columns_to_assoc($result, $col_key=0, $col_val=1) {
  * @resturns An array
  *
  */
-function util_result_column_to_array($result, $col=0) {
+function &util_result_column_to_array($result, $col=0) {
 	/*
 		Takes a result set and turns the optional column into
 		an array
@@ -254,7 +254,7 @@ function util_result_column_to_array($result, $col=0) {
  * @deprecated
  *
  */
-function result_column_to_array($result, $col=0) {
+function &result_column_to_array($result, $col=0) {
 	/*
 		backwards compatibility
 	*/

@@ -82,7 +82,7 @@ function db_query($qstring,$limit='-1',$offset=0,$dbserver=SYS_DB_PRIMARY) {
 
 	$GLOBALS['G_DEBUGQUERY'] .= $qstring .' |<font size="-2">'.$dbserver.'</font>'. "<P>\n";
 	$res = @pg_exec($dbserver,$qstring);
-//	echo "|*| ".db_error().$qstring;
+	//echo "<BR>|*| ".db_error().$qstring;
 	return $res;
 }
 

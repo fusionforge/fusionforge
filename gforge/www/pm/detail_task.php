@@ -1,70 +1,72 @@
 <?php
 /**
-  *
-  * SourceForge Project/Task Manager (PM)
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Project Management Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+/*
 
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
 
 pm_header(array('title'=>'View A Task','pagename'=>'pm_detailtask','group_project_id'=>$group_project_id));
 
-$sql="SELECT * FROM project_task ".
-	"WHERE project_task_id='$project_task_id' AND group_project_id='$group_project_id'";
-
-$result=db_query($sql);
-
 ?>
 
-<TABLE BORDER="0" WIDTH="100%">
-	<TR>
-		<TD><B>Percent Complete:</B>
-		<BR>
-		<?php echo db_result($result,0,'percent_complete'); ?>%
-		</TD>
+<table border="0" width="100%">
+	<tr>
+		<td colspan="2">
+		<b>Category:</b><br>
+		<?php echo $pt->getCategoryName(); ?>
+		</td>
+	</tr>
 
-		<TD><B>Priority:</B>
-		<BR>
-		<?php echo db_result($result,0,'priority'); ?>
-		</TD>
-	</TR>
+	<tr>
+		<td>
+		<b>Percent Complete:</b><br>
+		<?php echo $pt->getPercentComplete(); ?>%
+		</td>
 
-  	<TR>
-		<TD COLSPAN="2"><B>Task Summary:</B>
-		<BR>
-		<?php echo db_result($result,0,'summary'); ?>
-		</TD>
-	</TR>
+		<td>
+		<b>Priority:</b><br>
+		<?php echo $pt->getPriority(); ?>
+		</td>
+	</tr>
 
-	<TR>
-		<TD COLSPAN="2">
-		<B>Original Comment:</B>
-		<P>
-		<?php echo nl2br(db_result($result,0,'details')); ?>
-		</TD>
-	</TR>
+	<tr>
+		<td>
+		<b>Start Date:</b><br>
+		<?php echo date('Y-m-d', $pt->getStartDate() ); ?>
+		</td>
+		<td>
+		<b>End Date:</b><br>
+		<?php echo date('Y-m-d', $pt->getEndDate() ); ?>
+		</td>
+	</tr>
 
-	<TR>
-    		<TD COLSPAN="2"><B>Start Date:</B>
-		<BR>
-		<?php echo date('Y-m-d', db_result($result,0,'start_date')); ?>
-		</TD>
-	</TR>
+  	<tr>
+		<td colspan="2">
+		<b>Task Summary:</b><br>
+		<?php echo $pt->getSummary(); ?>
+		</td>
+	</tr>
 
-	<TR>
-		<TD COLSPAN="2"><B>End Date:</B>
-		<BR>
-		<?php echo date('Y-m-d', db_result($result,0,'end_date')); ?>
-		</TD>
-	</TR>
+	<tr>
+		<td colspan="2">
+		<b>Original Comment:</b><br>
+		<?php echo nl2br($pt->getDetails()); ?>
+		</td>
+	</tr>
 
-	<TR>
-		<TD VALIGN="TOP">
+	<tr>
+		<td valign="top">
 		<?php
 		/*
 			Get the list of ids this is assigned to and convert to array
@@ -75,8 +77,8 @@ $result=db_query($sql);
 			"WHERE users.user_id=project_assigned_to.assigned_to_id AND project_task_id='$project_task_id'");
 		ShowResultSet($result2,'Assigned To');
 		?>
-		</TD>
-		<TD VALIGN="TOP">
+		</td>
+		<td valign="top">
 		<?php
 		/*
 			Get the list of ids this is dependent on and convert to array
@@ -86,42 +88,46 @@ $result=db_query($sql);
 			"WHERE is_dependent_on_task_id=project_task.project_task_id AND project_dependencies.project_task_id='$project_task_id'");
 		ShowResultSet($result2,'Dependent On Task');
 		?>
-		</TD>
-	</TR>
+		</td>
+	</tr>
 
-	<TR>
-		<TD>
-		<B>Hours:</B>
-		<BR>
-		<?php echo db_result($result,0,'hours'); ?>
-		</TD>
+	<tr>
+		<td>
+		<b>Hours:</b><br>
+		<?php echo $pt->getHours(); ?>
+		</td>
 
-		<TD>
-		<B>Status:</B>
-		<BR>
+		<td>
+		<b>Status:</b><br>
 		<?php
-		echo pm_data_get_status_name(db_result($result,0,'status_id'));
+		echo $pt->getStatusName();
 		?>
-		</TD>
-	</TR>
+		</td>
+	</tr>
 
-	<TR>
-		<TD COLSPAN="2">
-			<?php echo pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id); ?>
-		</TD>
-	</TR>
+	<tr>
+		<td colspan="2">
+			<?php echo $pt->showDependentTasks(); ?>
+		</td>
+	</tr>
 
-	<TR>
-		<TD COLSPAN="2">
-			<?php echo pm_show_task_details ($project_task_id); ?>
-		</TD>
-	</TR>
+	<tr>
+		<td colspan="2">
+			<?php echo $pt->showRelatedArtifacts(); ?>
+		</td>
+	</tr>
 
-	<TR>
-		<TD COLSPAN="2">
-			<?php echo pm_show_task_history ($project_task_id); ?>
-		</TD>
-	</TR>
+	<tr>
+		<td colspan="2">
+			<?php echo $pt->showMessages(); ?>
+		</td>
+	</tr>
+
+	<tr>
+		<td colspan="2">
+			<?php echo $pt->showHistory(); ?>
+		</td>
+	</tr>
 
 </table>
 <?php

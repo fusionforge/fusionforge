@@ -1,167 +1,56 @@
 <?php
 /**
-  *
-  * SourceForge Project/Task Manager (PM)
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
-
-if (!$offset || $offset < 0) {
-	$offset=0;
-}
-
-//
-//  Set up local objects
-//
-$g =& group_get_object($group_id);
-
-if (session_loggedin()) {
-	$u =& session_get_user();
-	$perm =& $g->getPermission($u);
-}
-
-//
-// Memorize order by field as a user preference if explicitly specified.
-// Automatically discard invalid field names.
-//
-if ($order) {
-	if ($order=='project_task_id' || $order=='percent_complete' || $order=='summary' || $order=='start_date' || $order=='end_date' || $order=='priority') {
-		if (session_loggedin()) {
-			$u->setPreference('pm_task_order', $order);
-		}
-	} else {
-		$order = false;
-	}
-} else {
-	if (session_loggedin()) {
-		$order = $u->getPreference('pm_task_order');
-	}
-}
-
-if ($order) {
-	//if ordering by priority, sort DESC
-	$order_by = " ORDER BY project_task.$order".(($order=='priority') ? ' DESC ':' ');
-} else {
-	$order_by = "";
-}
-
-//the default is to show 'my' tasks, not 'open' as it used to be
-if (!$set) {
-	/*
-		if no set is passed in, see if a preference was set
-		if no preference or not logged in, use open set
-	*/
-	if (session_loggedin()) {
-		$custom_pref=$u->getPreference('pm_brow_cust'.$group_id);
-		if ($custom_pref) {
-			$pref_arr=explode('|',$custom_pref);
-			$_assigned_to=$pref_arr[0];
-			$_status=$pref_arr[1];
-			$set='custom';
-		} else {
-			$set='my';
-		}
-	} else {
-		$set='open';
-		$_assigned_to=0;
-	}
-}
-
-if ($set=='my') {
-	/*
-		My tasks - backwards compat can be removed 9/10
-	*/
-	$_status=1;
-	$_assigned_to=user_getid();
-
-} else if ($set=='custom') {
-	/*
-		if this custom set is different than the stored one, reset preference
-	*/
-	$pref_=$_assigned_to.'|'.$_status;
-	if (session_loggedin() && ($pref_ != $u->getPreference('pm_brow_cust'.$group_id))) {
-		//echo 'setting pref';
-		$u->setPreference('pm_brow_cust'.$group_id,$pref_);
-	}
-} else if ($set=='closed') {
-	/*
-		Closed tasks - backwards compat can be removed 9/10
-	*/
-	$_assigned_to=0;
-	$_status='2';
-} else {
-	/*
-		Open tasks - backwards compat can be removed 9/10
-	*/
-	$_assigned_to=0;
-	$_status='1';
-}
-
+ * GForge Project Management Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
 /*
-	Display tasks based on the form post - by user or status or both
+
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
 */
 
-//if status selected, and more to where clause
-if ($_status && ($_status != 100)) {
-	//for open tasks, add status=100 to make sure we show all
-	$status_str="AND project_task.status_id IN ($_status".(($_status==1)?',100':'').")";
-} else {
-	//no status was chosen, so don't add it to where clause
-	$status_str='';
-}
-
-//if assigned to selected, and more to where clause
-if ($_assigned_to) {
-	$assigned_str="AND project_assigned_to.assigned_to_id='$_assigned_to'";
-
-	//workaround for old tasks that do not have anyone assigned to them
-	//should not be needed for tasks created/updated after may, 2000
-	$assigned_str2=',project_assigned_to';
-	$assigned_str3='project_task.project_task_id=project_assigned_to.project_task_id AND';
-	
-} else {
-	//no assigned to was chosen, so don't add it to where clause
-	$assigned_str='';
-}
-
+require_once('common/pm/ProjectTaskFactory.class');
 //build page title to make bookmarking easier
 //if a user was selected, add the user_name to the title
 //same for status
 
-if ($set == "my") {
-	$pagename = "pm_browse_my";
-} elseif ($set == "open") {
-	$pagename = "pm_browse_open";
-} else {
-	$pagename = "pm_browse_custom";
+$pagename = "pm_browse_custom";
+
+$ptf = new ProjectTaskFactory($pg);
+if (!$ptf || !is_object($ptf)) {
+	exit_error('Error','Could Not Get ProjectTaskFactory');
+} elseif ($ptf->isError()) {
+	exit_error('Error',$ptf->getErrorMessage());
 }
 
-pm_header(array('title'=>'Browse Tasks'.
-	(($_assigned_to)?' For: '.user_getname($_assigned_to):'').
-	(($_status && ($_status != 100))?' By Status: '.pm_data_get_status_name($_status):''),'pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>group_getname($group_id)));
+$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id);
+if ($ptf->isError()) {
+	exit_error('Error',$ptf->getErrorMessage());
+}
 
-$sql="SELECT project_task.priority,project_task.group_project_id,project_task.project_task_id,".
-	"project_task.start_date,project_task.end_date,project_task.percent_complete,project_task.summary ".
-	"FROM project_task $assigned_str2 ".
-	"WHERE $assigned_str3 project_task.group_project_id='$group_project_id' ".
-	" $assigned_str $status_str ".
-	$order_by; 
+$pt_arr =& $ptf->getTasks();
+if ($ptf->isError()) {
+	exit_error('Error',$ptf->getErrorMessage());
+}
 
-$message="Browsing Custom Task List";
+$_assigned_to=$ptf->assigned_to;
+$_status=$ptf->status;
+$_order=$ptf->order;
 
-$result=db_query($sql,51,$offset);
+pm_header(array('title'=>'Browse Tasks','pagename'=>$pagename,'group_project_id'=>$group_project_id,'sectionvals'=>$g->getPublicName()));
 
 /*
 		creating a custom technician box which includes "any" and "unassigned"
 */
 
-$res_tech=pm_data_get_technicians ($group_id);
+$res_tech=$pg->getTechnicians();
 
 $tech_id_arr=util_result_column_to_array($res_tech,0);
 $tech_id_arr[]='0';  //this will be the 'any' row
@@ -171,26 +60,60 @@ $tech_name_arr[]='Any';
 
 $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,'Unassigned');
 
+/*
+		creating a custom category box which includes "any" and "none"
+*/
 
+$res_cat=$pg->getCategories();
+
+$cat_id_arr=util_result_column_to_array($res_cat,0);
+$cat_id_arr[]='0';  //this will be the 'any' row
+
+$cat_name_arr=util_result_column_to_array($res_cat,1);
+$cat_name_arr[]='Any';
+
+$cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category_id',$_category_id,true,'None');
+
+/*
+	Creating a custom sort box
+*/
+$title_arr=array();
+$title_arr[]='Task ID';
+$title_arr[]='Summary';
+$title_arr[]='Start Date';
+$title_arr[]='End Date';
+$title_arr[]='Percent Complete';
+
+$order_col_arr=array();
+$order_col_arr[]='project_task_id';
+$order_col_arr[]='summary';
+$order_col_arr[]='start_date';
+$order_col_arr[]='end_date';
+$order_col_arr[]='percent_complete';
+$order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order',$_order,false);
 
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
-echo '<TABLE WIDTH="10%" BORDER="0"><FORM ACTION="'. $PHP_SELF .'" METHOD="GET">
-	<INPUT TYPE="HIDDEN" NAME="group_id" VALUE="'.$group_id.'">
-	<INPUT TYPE="HIDDEN" NAME="set" VALUE="custom">
-	<TR><TD COLSPAN="4" nowrap><b>Browse Tasks by User and/or Status:</b></TD></TR>
-	<TR><TD>'. pm_show_subprojects_box('group_project_id',$group_id,$group_project_id) .'</TD>'.
-		'<TD><FONT SIZE="-1">'. $tech_box .'</TD><TD><FONT SIZE="-1">'. pm_status_box('_status',$_status,'Any') .'</TD>'.
-		'<TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Browse"></TD></TR></FORM></TABLE>';
+echo '<table width="10%" BORDER="0">
+	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&group_project_id='.$group_project_id.'" method="post">
+	<input type="hidden" name="set" value="custom">
+	<tr>
+		<td><font size="-1">Assignee:<br>'. $tech_box .'</td>
+		<td><font size="-1">Status:<br>'. $pg->statusBox('_status',$_status,'Any') .'</td>
+		<td><font size="-1">Category:<br>'. $cat_box .'</td>
+		<td><font size="-1">Sort On:<br>'. $order_box .'</td>
+		<td><font size="-1"><input type="SUBMIT" name="SUBMIT" value="Browse"></td>
+	</tr></form></table>';
 
 
-if (db_numrows($result) < 1) {
+$rows=count($pt_arr);
+if ($rows < 1) {
 
 	echo '
-		<H1>No Matching Tasks found</H1>
-		<P>
-		<B>Add tasks using the link above</B>';
+		<h1>No Matching Tasks found</h1>
+		<p>
+		<b>Add tasks using the link above</b>';
 	echo db_error();
 } else {
 
@@ -205,12 +128,56 @@ if (db_numrows($result) < 1) {
 
 	echo '
 		<br>
-		<H3>'.$message.' In '. pm_data_get_group_name($group_project_id) .'</H3>';
-	pm_show_tasklist($result,$offset,$set);
-	echo '<P>* Denotes overdue tasks';
+		<h3>Browsing Tasks In '. $pg->getName() .'</h3>';
+
+
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+	$now=time();
+
+	for ($i=0; $i < $rows; $i++) {
+
+		echo '
+			<tr bgcolor="'.get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+			'<td><a href="/pm/task.php?func=detailtask'.
+			'&project_task_id='. $pt_arr[$i]->getID() .
+			'&group_id='.$group_id.
+			'&group_project_id='. $group_project_id .'">'.
+			$pt_arr[$i]->getID() .'</A></td>'.
+			'<td>'. $pt_arr[$i]->getSummary() .'</td>'.
+			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
+			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<b>* ':'&nbsp; ') .
+				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
+			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
+
+	}
+
+	/*
+		Show extra rows for <-- Prev / Next -->
+	*/
+	echo '<tr><td colspan="2">';
+	if ($offset > 0) {
+		echo '<a href="/pm/task.php?func=browse&group_project_id='.
+			$group_project_id.'&group_id='.$group_id.'&offset='.($offset-50).'">
+			<b><-- Previous 50</b></A>';
+	} else {
+		echo '&nbsp;';
+	}
+	echo '</td><td>&nbsp;</td><td colspan="2">';
+
+	if ($rows==50) {
+		echo '<a href="/pm/task.php?func=browse&group_project_id='.
+			$group_project_id.'&group_id='.$group_id.'&offset='.($offset+50).
+			'"><b>Next 50 --></b></A>';
+	} else {
+		echo '&nbsp;';
+	}
+	echo '</td></tr>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
+	echo '<p>* Denotes overdue tasks';
 	show_priority_colors_key();
-	$url = "/pm/task.php?group_id=$group_id&group_project_id=$group_project_id&func=browse&set=$set&order=";
-	echo '<P>Click a column heading to sort by that column, or <A HREF="'.$url.'priority">Sort by Priority</A>';
 
 }
 

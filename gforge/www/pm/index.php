@@ -1,62 +1,76 @@
 <?php
 /**
-  *
-  * SourceForge Project/Task Manager (PM)
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * GForge Project Management Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ */
+/*
 
+	Project/Task Manager
+	By Tim Perdue, Sourceforge, 11/99
+	Heavy rewrite by Tim Perdue April 2000
+
+	Total rewrite in OO and GForge coding guidelines 12/2002 by Tim Perdue
+*/
 
 require_once('pre.php');
-require_once('www/pm/pm_utils.php');
+require_once('www/pm/include/ProjectGroupHTML.class');
+require_once('common/pm/ProjectGroupFactory.class');
 
-if ($group_id) {
+if (!$group_id) {
+	exit_no_group();
+}
 
-	pm_header(array('title'=>'Projects for '.group_getname($group_id),'pagename'=>'pm','sectionvals'=>group_getname($group_id)));
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g)) {
+	exit_no_group();
+} elseif ($g->isError()) {
+	exit_error('Error',$g->getErrorMessage());
+}
 
-	if (session_loggedin() && user_ismember($group_id)) {
-		$public_flag='0,1';
-	} else {
-		$public_flag='1';
-	}
+$pgf = new ProjectGroupFactory($g);
+if (!$pgf || !is_object($pgf)) {
+    exit_error('Error','Could Not Get Factory');
+} elseif ($pgf->isError()) {
+    exit_error('Error',$pgf->getErrorMessage());
+}
 
-	$sql="SELECT * FROM project_group_list WHERE group_id='$group_id' AND is_public IN ($public_flag)";
+$pg_arr =& $pgf->getProjectGroups();
+if ($pgf->isError()) {
+	exit_error('Error',$pgf->getErrorMessage());
+}
 
-	$result = db_query ($sql);
-	$rows = db_numrows($result); 
-	if (!$result || $rows < 1) {
-		echo $Language->getText('pm', 'noprj');
-		pm_footer(array());
-		exit;
-	}
+pm_header(array('title'=>'Projects for '. $g->getPublicName(),'pagename'=>'pm','sectionvals'=>$g->getPublicName()));
 
+if (count($pg_arr) < 1) {
+	echo '<p>No Projects Defined.';
+} else {
 	echo '
-		<P>
-		Choose a Subproject and you can browse/edit/add tasks to it.
-		<P>';
+	<p>
+	Choose a Subproject and you can browse/edit/add tasks to it.
+	<p>';
 
 	/*
-		Put the result set (list of forums for this group) into a column with folders
+		Put the result set (list of projects for this group) into a column with folders
 	*/
 
-	for ($j = 0; $j < $rows; $j++) { 
+	for ($j = 0; $j < count($pg_arr); $j++) { 
+		if ($pg_arr[$j]->isError()) {
+			echo $pg_arr[$j]->getErrorMessage();
+		}
 		echo '
-		<A HREF="/pm/task.php?group_project_id='.db_result($result, $j, 'group_project_id').
+		<a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().
 		'&group_id='.$group_id.'&func=browse">' .
-		html_image("ic/index.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
-		db_result($result, $j, 'project_name').'</A><BR>'.
-		db_result($result, $j, 'description').'<P>';
+		html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . ' &nbsp;'.
+		$pg_arr[$j]->getName() .'</a><br>'.
+		$pg_arr[$j]->getDescription() .'<p>';
 	}
 
-} else {
-	pm_header(array('title'=>'Choose a Group First','pagename'=>'pm'));
-	echo '<H1>Error - choose a group first</H1>';
 }
+
 pm_footer(array()); 
 
 ?>
