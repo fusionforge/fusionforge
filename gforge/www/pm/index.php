@@ -55,9 +55,9 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 		Put the result set (list of projects for this group) into a column with folders
 	*/
 	$tablearr=array($Language->getText('pm_index','short_name'),
+	$Language->getText('pm_index','description'),
 	$Language->getText('pm_index','open'),
-	$Language->getText('pm_index','total'),
-	$Language->getText('pm_index','description'));
+	$Language->getText('pm_index','total'));
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($pg_arr); $j++) {
@@ -69,9 +69,9 @@ if (count($pg_arr) < 1 || $pg_arr == false) {
 			<td><a href="/pm/task.php?group_project_id='. $pg_arr[$j]->getID().'&amp;group_id='.$group_id.'&amp;func=browse">' .
 		html_image("ic/taskman20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
 		$pg_arr[$j]->getName() .'</a></td>
+			<td>'.$pg_arr[$j]->getDescription() .'</td>
 			<td align="center">'. (int) $pg_arr[$j]->getOpenCount().'</td>
 			<td align="center">'. (int) $pg_arr[$j]->getTotalCount().'</td>
-			<td>'.$pg_arr[$j]->getDescription() .'</td>
 		</tr>';
 	}
 	echo $HTML->listTableBottom();

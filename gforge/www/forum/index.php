@@ -23,6 +23,7 @@ require_once('www/forum/include/ForumHTML.class');
 require_once('common/forum/ForumFactory.class');
 require_once('common/forum/Forum.class');
 
+$group_id = getIntFromRequest('group_id');
 if ($group_id) {
 	$g =& group_get_object($group_id);
 	if (!$g || !is_object($g) || $g->isError()) {
@@ -30,9 +31,9 @@ if ($group_id) {
 	}
 
 	$ff=new ForumFactory($g);
-    if (!$ff || !is_object($ff) || $ff->isError()) {
-        exit_error($Language->getText('general','error'),$ff->getErrorMessage());
-    }
+	if (!$ff || !is_object($ff) || $ff->isError()) {
+		exit_error($Language->getText('general','error'),$ff->getErrorMessage());
+	}
 
 	forum_header(array('title'=>$Language->getText('forum','forums_for', array($g->getPublicName())) ,'pagename'=>'forum','sectionvals'=>array($g->getPublicName())));
 
@@ -49,7 +50,7 @@ if ($group_id) {
 
 //	echo $Language->getText('forum', 'choose');
 
-	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'));
+	$tablearr=array($Language->getText('forum_forum','forum'),$Language->getText('forum_forum','description'),$Language->getText('forum_forum','threads'),$Language->getText('forum_forum','posts'), $Language->getText('forum_forum','lastpost'));
 	echo $HTML->listTableTop($tablearr);
 
 	/*
@@ -63,7 +64,8 @@ if ($group_id) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td><a href="forum.php?forum_id='. $farr[$j]->getID() .'">'.
 				html_image("ic/forum20w.png","20","20",array("border"=>"0")) .
 				'&nbsp;' .
-				$farr[$j]->getName() .'</a><br />'.$farr[$j]->getDescription().'</td>
+				$farr[$j]->getName() .'</a></td>
+				<td>'.$farr[$j]->getDescription().'</td>
 				<td align="center">'.$farr[$j]->getThreadCount().'</td>
 				<td align="center">'. $farr[$j]->getMessageCount() .'</td>
 				<td>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</td></tr>';

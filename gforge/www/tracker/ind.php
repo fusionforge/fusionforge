@@ -40,7 +40,7 @@ if (!$at_arr || count($at_arr) < 1) {
 	/*
 		Put the result set (list of trackers for this group) into a column with folders
 	*/
-	$tablearr=array($Language->getText('group','short_tracker'),$Language->getText('general','open'),$Language->getText('general','total'),$Language->getText('tracker_admin_update_type','description'));
+	$tablearr=array($Language->getText('group','short_tracker'),$Language->getText('tracker_admin_update_type','description'),$Language->getText('general','open'),$Language->getText('general','total'));
 	echo $HTML->listTableTop($tablearr);
 
 	for ($j = 0; $j < count($at_arr); $j++) {
@@ -50,11 +50,11 @@ if (!$at_arr || count($at_arr) < 1) {
 				html_image("ic/tracker20w.png","20","20",array("border"=>"0")).' &nbsp;'.
 				$at_arr[$j]->getName() .'</a>
 			</td>
+			<td>' .  $at_arr[$j]->getDescription() .'
+			</td>
 			<td align="center">'. (int) $at_arr[$j]->getOpenCount() . '
 			</td>
 			<td align="center">'. (int) $at_arr[$j]->getTotalCount() .'
-			</td>
-			<td>' .  $at_arr[$j]->getDescription() .'
 			</td>
 		</tr>';
 	}
