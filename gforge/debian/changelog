@@ -1,11 +1,12 @@
-sourceforge (2.5-10+3) unstable; urgency=low
+sourceforge (2.5-10+4) unstable; urgency=low
 
   * Fixed /etc/alias entry for sourceforge user.  Really, this time.
   * Fixed Trove software map (closes: #108297).
   * Added sf-add-skill and sf-register-theme scripts.
   * Removed the need for chsh sourceforge in update-user-group-cvs.sh.
+  * Fixed user list and group list.
 
- -- Roland Mas <lolando@debian.org>  Tue, 14 Aug 2001 13:28:24 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 20 Aug 2001 18:59:43 +0200
 
 sourceforge (2.5-10) unstable; urgency=low
 

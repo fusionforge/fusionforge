@@ -25,8 +25,13 @@ if ($form_catroot == 1) {
 
 	if (isset($group_name_search)) {
 		print "<b>Groups that begin with $group_name_search</b>\n";
+		// [RM] LIKE is case-sensitive, and we don't want that
+		// $res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
+		// . "FROM groups WHERE group_name LIKE '$group_name_search%' "
+		// . ($form_pending?"AND WHERE status='P' ":"")
+		// . " ORDER BY group_name");
 		$res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
-			. "FROM groups WHERE group_name LIKE '$group_name_search%' "
+			. "FROM groups WHERE group_name ~* '^$group_name_search%' "
 			. ($form_pending?"AND WHERE status='P' ":"")
 			. " ORDER BY group_name");
 	} else {

@@ -81,7 +81,9 @@ if (!$group_id) {
 	print "\n<p>";
 	
 	if ($user_name_search) {
-		$result = db_query("SELECT user_name,user_id,status FROM users WHERE user_name LIKE '$user_name_search%' ORDER BY user_name");
+	  // [RM] LIKE is case-sensitive, and we don't want that
+	  //		$result = db_query("SELECT user_name,user_id,status FROM users WHERE user_name LIKE '$user_name_search%' ORDER BY user_name");
+		$result = db_query("SELECT user_name,user_id,status FROM users WHERE user_name ~* '^$user_name_search' ORDER BY user_name");
 	} else {
 		$result = db_query("SELECT user_name,user_id,status FROM users ORDER BY user_name");
 	}
