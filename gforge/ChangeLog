@@ -1,3 +1,45 @@
+2004-10-13  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* updated French translation
+	* applied [#924] cronjobs/crontab.in: Call PHP CLI with
+	Apache's php.ini by Ognyan Kulev
+
+2004-10-12  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* first part of GUS heavily based on [#833] Grand Unified Search
+	by Dominik Haas
+
+2004-10-11  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed [#927] RBAC error when changing a project to private in
+	the observer role section
+	* enable_anoncvs -> enable_anonscm in cvs-cron/usergroup.php
+
+2004-10-10  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* doc: applied [#916] Complete merge of INSTALL into Installation Guide
+	* doc: made a lot of corrections and adds on Installation Guide
+
+2004-10-09  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* updated French translation
+	* fixed [#920] Problem accessing release notes of a private package
+	* simplified www/frs/download.php
+	* second part of the massive copyright update
+	* added AUTHORS and COPYING to gforge-plugin-scmcvs
+	* commited preliminary work of gforge-plugin-scmcvs rpm packaging
+	* applied [#923] docs/docbook/INSTALL: Instructions for Debian by 
+	Ognyan Kulev
+
+2004-10-08  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* massive copyright update
+	* fixed a lot of minor errors
+
+2004-10-07  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* updated French translation
+
 2004-10-06  Tim Perdue <tim@gforge.org>
 
 	* massive cleanup/reorg/rewrite of bug tracker, including renaming
