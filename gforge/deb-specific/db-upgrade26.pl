@@ -314,23 +314,14 @@ sub parse_sql_file ( $ ) {
     STATE_SWITCH: {		# State machine step processing
 	$state = $states{INIT} && do {
 	    $par_level = 0 ;
-	    $sql = $chunk = $rest = "" ;	 
+	    $l = $sql = $chunk = $rest = "" ;	 
 	    @sql_list = () ;
 	    $copy_table = $copy_rest = "" ;
 	    @copy_data = () ;
 	    
-	    $l = <F> ;
-	    unless ($l) {
-		debug "Empty file."
-		$state = $states{DONE} ;
-		last INIT_STATE_SWITCH ;
-	    }
-	    chomp $l ;
-	    
 	    $state = $states{SCAN} ;
-	    
 	    last STATE_SWITCH ;
-	}			# End of INIT state
+	} ;			# End of INIT state
 	
 	$state = $states{SCAN} && do {
 	  SCAN_STATE_SWITCH: {
@@ -345,26 +336,27 @@ sub parse_sql_file ( $ ) {
 		  
 		  $state = $states{SCAN} ;
 		  last SCAN_STATE_SWITCH ;
-	      }
-	      
+	      } ;
+
 	      ( ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) 
 		or ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) ) && do {
 		    # Nothing to do
 		    
 		    $state = $states{START_COPY} ;
 		    last SCAN_STATE_SWITCH ;
-	      }
-
+		} ;
+	      
 	      ( 1 ) && do {
 		  $sql = "" ;
 
 		  $state = $states{SQL_SCAN} ;
 		  last SCAN_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      die "Unknown event in SCAN state" ;
 	  }			# SCAN_STATE_SWITCH
 	    last STATE_SWITCH ;
-	}			# End of SCAN state
+	} ;			# End of SCAN state
 	
 	$state = $states{SQL_SCAN} && do {
 	  SQL_SCAN_STATE_SWITCH: {
@@ -380,20 +372,20 @@ sub parse_sql_file ( $ ) {
 		  
 		  $state = $states{SQL_SCAN} ;
 		  last SQL_SCAN_STATE_SWITCH ;
-	      }
-	      
+	      } ;
+
 	      ( 1 ) && do {
 		  ($chunk, $rest) = ($l =~ /^([^()\';-]*)(.*)/) ;
 		  $sql .= $chunk ;
 		  
 		  $state = $states{IN_SQL} ;
 		  last SQL_SCAN_STATE_SWITCH ;
-	      }
+	      } ;
 	      
 	      die "Unknown event in SQL_SCAN state" ;
 	  }			# SQL_SCAN_STATE_SWITCH
 	    last STATE_SWITCH ;
-	}			# End of SQL_SCAN state
+	} ;			# End of SQL_SCAN state
 	
 	$state = $states{IN_SQL} && do {
 	  IN_SQL_STATE_SWITCH: {
@@ -404,7 +396,8 @@ sub parse_sql_file ( $ ) {
 		  $l = $rest ;
 		  
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ( ($rest =~ /^\)/) and ($par_level > 0) ) && do {
 		  $par_level -= 1 ;
 		  $sql .= ')' ;
@@ -412,57 +405,66 @@ sub parse_sql_file ( $ ) {
 		  $l = $rest ;
 		  
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest =~ /^\)/) && do {
 		  debug "Detected ')' without any matching '('." ;
 		  
 		  $state = $states{ERROR} ;
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest =~ /^--/) && do {
 		  $rest = "" ;
 		  $l = $rest ;
 		  
 		  $state = $states{SQL_SCAN} ;
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest =~ /^-[^-]/) && do {
 		  $sql .= '-' ;
 		  $rest = substr $rest, 1 ;
 		  $l = $rest ;
 		  
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ( ($rest =~ /^;/) and ($par_level == 0) ) && do {
 		  $sql .= ';' ;
 		  $rest = substr $rest, 1 ;
 		  
 		  $state = $states{END_SQL} ;
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest =~ /^;/) && do {
 		  debug "Detected ';' within a parenthesis." ;
 		  
 		  $state = $states{ERROR} ;
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest eq "") && do {
 		  $l = $rest ;
 		  $sql .= " " ;
 
 		  $state = $states{SQL_SCAN} ;
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest =~ /^\'/) && do {
 		  $sql .= '\'' ;
 		  $rest = substr $rest, 1 ;
 		  
 		  $state = $states{IN_QUOTE} ;
 		  last IN_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+	      
+	      die "Unknown event in IN_SQL state" ;
 	  }			# IN_SQL_STATE_SWITCH
 	    last STATE_SWITCH ;
-	}			# End of IN_SQL state
+	} ;			# End of IN_SQL state
 
 	$state = $states{END_SQL} && do {
 	  END_SQL_STATE_SWITCH: {
@@ -473,7 +475,8 @@ sub parse_sql_file ( $ ) {
 
 		  $state = $states{SQL_SCAN} ;
 		  last END_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ( 1 ) && do {
 		  push @sql_list ;
 		  $sql = "" ;
@@ -481,10 +484,11 @@ sub parse_sql_file ( $ ) {
 
 		  $state = $states{SQL_SCAN} ;
 		  last END_SQL_STATE_SWITCH ;
-	      }
+	      } ;
+
 	  }			# END_SQL_STATE_SWITCH
 	      last STATE_SWITCH ;
-	}			# End of END_SQL state
+	} ;			# End of END_SQL state
 
 	$state = $states{QUOTE_SCAN} && do {
 	  QUOTE_SCAN_STATE_SWITCH: {
@@ -499,18 +503,19 @@ sub parse_sql_file ( $ ) {
 		  chomp $l ;
 		  
 		  last QUOTE_SCAN_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ( 1 ) && do {
 		  ($chunk, $rest) = ($l =~ /^([^\\\']*)(.*)/) ;
 		  $sql .= $chunk ;
 		  
 		  $state = $states{IN_QUOTE} ;
 		  last QUOTE_SCAN_STATE_SWITCH ;
-	      }
-	      die "Unknown event in QUOTE_SCAN state" ;
+	      } ;
+
 	  }			# QUOTE_SCAN_STATE_SWITCH
 	    last STATE_SWITCH ;
-	}			# Enf of QUOTE_SCAN state
+	} ;			# End of QUOTE_SCAN state
 	
 	$state = $states{IN_QUOTE} && do {
 	  IN_QUOTE_STATE_SWITCH: {
@@ -520,33 +525,38 @@ sub parse_sql_file ( $ ) {
 		  
 		  $state = $states{IN_SQL} ;
 		  last IN_QUOTE_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest =~ /^\\\'/) && do {
 		  $sql .= '\\\'' ;
 		  $rest = substr $rest, 2 ;
 		  
 		  last IN_QUOTE_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest =~ /^\\[^\\]/) && do {
 		  $sql .= '\\' ;
 		  $rest = substr $rest, 1 ;
 		  
 		  last IN_QUOTE_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ($rest eq "") && do {
 		  # Nothing to do
 		  
 		  $state = $states{QUOTE_SCAN} ;
 		  last IN_QUOTE_STATE_SWITCH ;
-	      }
+	      } ;
+
 	      ( 1 ) && do {
 		  debug "Unknown event in IN_QUOTE state." ;
 		  $state = $states{ERROR} ;
 		  last IN_QUOTE_STATE_SWITCH ;
-	      }
+	      } ;
+
 	  }			# IN_QUOTE_STATE_SWITCH
 	    last STATE_SWITCH ;
-	}			# End of IN_QUOTE state
+	} ;			# End of IN_QUOTE state
 
 	$state = $states{START_COPY} && do {
 	  START_COPY_STATE_SWITCH: {
@@ -562,7 +572,7 @@ sub parse_sql_file ( $ ) {
 		  
 		  $state = $states{IN_COPY} ;
 		  last START_COPY_STATE_SWITCH ;
-	      }
+	      } ;
 
 	      ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) && do {
 		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s+from\s+stdin\s*;(.*)/i) ;
@@ -576,16 +586,17 @@ sub parse_sql_file ( $ ) {
 
 		  $state = $states{IN_COPY} ;
 		  last START_COPY_STATE_SWITCH ;
-	      }
+	      } ;
      
 	      ( 1 ) && do {
 		  debug "Unknown event in START_COPY state." ;
 		  $state = $states{ERROR} ;
 		  last START_COPY_STATE_SWITCH ;
-	      }
+	      } ;
+
 	  }			# START_COPY_STATE_SWITCH
 	    last STATE_SWITCH ;
-	}			# End of START_COPY state
+	} ;			# End of START_COPY state
 
 	$state = $states{IN_COPY} && do {
 	  IN_COPY_SWITCH: {
@@ -594,7 +605,7 @@ sub parse_sql_file ( $ ) {
 
 		  $state = $states{SCAN} ;
 		  last IN_COPY_STATE_SWITCH ;
-	      }
+	      } ;
 	      
 	      ( 1 ) && do {
 		  @copy_data = split /\t/, $l ;
@@ -613,29 +624,31 @@ sub parse_sql_file ( $ ) {
 		  chomp $l ;
 
 		  last IN_COPY_STATE_SWITCH ;
-	      }
+	      } ;
+
 	  }			# IN_COPY_SWITCH
 	    last STATE_SWITCH ;
-	}			# End of IN_COPY state
+	} ;			# End of IN_COPY state
 
 	$state = $states{DONE} && do {
 	    debug "End of file detected." ;
 
 	    last STATE_SWITCH ;
-	}			# End of DONE state
+	} ;			# End of DONE state
 
 	$state = $states{ERROR} && do {
 	    debug "Reached the ERROR state.  Dying." ;
 	    die "State machine is buggy." ;
 	    
 	    last STATE_SWITCH ;
-	}			# End of ERROR state
+	} ;			# End of ERROR state
 
 	( 1 ) && do {
 	    debug "State machine went in an unknown state...  Redirecting to ERROR." ;
 	    $state = $states{ERROR} ;
 	    last STATE_SWITCH ;
-	}
+	} ;
+
     }				# STATE_SWITCH
   }				# STATE_LOOP
 
