@@ -16,7 +16,7 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 $chroot="/var/lib/gforge/chroot";
 &db_connect;
 
-dump_header();
+# dump_header();
 
 # if (!($#ARGV+1)) {
 # 	exit;
