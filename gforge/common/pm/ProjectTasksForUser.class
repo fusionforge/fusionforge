@@ -26,30 +26,50 @@ require_once('common/pm/ProjectGroup.class');
 require_once('common/pm/ProjectTask.class');
 require_once('common/include/Group.class');
 
+/**
+*	A class that manages the project tasks for a specific user
+*/
 class ProjectTasksForUser {
+
+	/**
+	* The User to whom the tasks belong
+	*/
 	var $User;
 
+	/**
+	* Creates a new ProjectTasksForUser object
+	*
+	* @param	user	the User object
+	*/
 	function ProjectTasksForUser(&$user) {
 		$this->User =& $user;
 		return true;
 	}
 
+	/**
+	* Gets a list of tasks for this user
+	*
+	* @param the SQL query to use to fetch the tasks
+	*	@return	an array of ProjectTask objects
+	*/
 	function getTasksFromSQL ($sql) {
 		$tasks = array();
 		$result=db_query($sql);
 		$rows=db_numrows($result);
-		
 		for ($i=0; $i < $rows; $i++) {
 			$project_task_id = db_result($result,$i,'project_task_id');
 			$arr =& db_fetch_array($result);
 			$task =& projecttask_get_object($project_task_id,$arr);
 			$tasks[] =& $task;
-
 		}
 		return $tasks;
-
 	}
 
+	/**
+	*	Gets a list of tasks by group project name
+	*
+	* @return an array of ProjectTask objects
+	*/
 	function getTasksByGroupProjectName () {
 		$sql = "SELECT ptv.*,g.group_name,pgl.project_name 
 			FROM project_task_vw ptv,
@@ -62,9 +82,7 @@ class ProjectTasksForUser {
 				AND ptv.status_id=1
 				AND pat.assigned_to_id='".$this->User->getID()."'
 			ORDER BY group_name,project_name";
-
 		return $this->getTasksFromSQL($sql);
 	}
-
 }
 ?>
