@@ -116,6 +116,8 @@ install: build
 	install -m 644 deb-specific/view_bug.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/view_patch.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 
+	install -m 644 db/20021125-debian.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
+
 	# gforge-mta-exim
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/gforge-mta-exim/usr/lib/gforge/bin/
 
