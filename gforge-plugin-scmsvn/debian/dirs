@@ -25,3 +25,7 @@ var
 var/log
 var/log/gforge
 var/log/gforge/svn
+var/lib
+var/lib/gforge
+var/lib/gforge/chroot
+var/lib/gforge/chroot/svnroot

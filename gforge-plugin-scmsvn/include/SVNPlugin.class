@@ -166,7 +166,7 @@ if ($project->enableAnonSCM()) {
 	// echo $Language->getText('scm_index', 'browsetree');
 	echo "<b>Browse the Subversion Tree</b><p>Browsing the Subversion tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>" ;
 
-	echo "<p><a href=\"http://" . $this->GetGroupServer($group_id) . "/plugins/scmsvn/cgi-bin/viewcvs.cgi?root=".$project->getUnixName()."\">Browse</a> SVN tree</p>" ;
+	echo "<p><a href=\"http://" . $this->GetGroupServer($group_id) . "/plugins/scmsvn/cgi-bin/viewcvs.cgi?root=".$project->getUnixName()."\">Browse SVN tree</a></p>" ;
 
 	echo $HTML->boxBottom();
 }
@@ -213,7 +213,9 @@ if ($project->enableAnonSCM()) {
 			$this->SetGroupServer ($params['group_id'], $this->GetDefaultServer ()) ;
 		}
 	}
+*/
 
+/*
 	function display_scm_admin_page ($params) {
 		$group =& group_get_object($params['group_id']);
 ?>
@@ -222,8 +224,11 @@ if ($project->enableAnonSCM()) {
 <input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php if ($this->UsesAnonSVN($params['group_id'])) {print '"checked"';} ?>> <strong>Allow anonymous Subversion</strong><br>
 <input type="text" name="scmsvn_svn_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>Subversion server</strong><br><br>
 <?php
-															  }
 
+	}
+*/
+
+/*
 	function display_stats ($params) {
 		global $Language ;
 		$group_id = $params['group_id'] ;
@@ -242,7 +247,9 @@ if ($project->enableAnonSCM()) {
 		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
 		
 	}
+*/
 
+/*
 	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
 		
@@ -259,21 +266,27 @@ if ($project->enableAnonSCM()) {
 		}
 		return true;
 	}
+*/
 
+/*
 	function GetDefaultServer () {
 		return $this->default_svn_server ;
 	}
+*/
 
 	function GetGroupServer ($group_id) {
-		$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
+		//$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
+		$sql = "SELECT scm_host FROM groups WHERE group_id = $group_id" ;
 		$res = db_query($sql);
 		if (db_numrows($res) == 0) {
 			return $this->default_svn_server ;
 		} else {
-			return db_result($res,0,'svn_host');
+			//return db_result($res,0,'svn_host');
+			return db_result($res,0,'scm_host');
 		}
 	}
 
+/*
 	function SetGroupServer ($group_id, $server) {
 		db_begin () ;
 		$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
@@ -287,8 +300,11 @@ if ($project->enableAnonSCM()) {
 		$res = db_query($sql);
 		db_commit () ;
 	}
+*/
+
 
 	function UsesAnonSVN ($group_id) {
+		/*
 		$sql = "SELECT anon_svn FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
 		$res = db_query($sql);
 		if (db_numrows($res) == 0) {
@@ -296,9 +312,14 @@ if ($project->enableAnonSCM()) {
 		} else {
 			return db_result($res,0,'anon_svn');
 		}
+		*/
+		$project =& group_get_object($group_id);
+		return $project->enableAnonSCM();
 	}
 
+
 	function SetUsesAnonSVN ($group_id, $anon_svn) {
+		/*
 		db_begin () ;
 		$anon_svn = $anon_svn ? 1 : 0 ;
 
@@ -312,8 +333,11 @@ if ($project->enableAnonSCM()) {
 		}
 		$res = db_query($sql);
 		db_commit () ;
+		*/
+		$anon_svn = $anon_svn ? 1 : 0 ;
+		$project =& group_get_object($group_id);
+		$project->SetUsesAnonSCM($anon_svn);
 	}
-*/
 }
 
 // Local Variables:

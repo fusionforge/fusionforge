@@ -27,12 +27,23 @@ my ($plugin_id) = $c->fetchrow () ;
 $c->finish () ;
 
 if($verbose) {print ("\nGetting group list");}
+#$query = "SELECT groups.group_id, unix_group_name, status
+#          FROM groups, group_plugin, plugin_scmsvn_group_usage
+#          WHERE groups.group_id = group_plugin.group_id
+#          AND group_plugin.plugin_id = $plugin_id
+#          AND plugin_scmsvn_group_usage.group_id = groups.group_id
+#          AND plugin_scmsvn_group_usage.svn_host = '$this_server'" ;
+
+#$query = "SELECT groups.group_id, unix_group_name, status
+#          FROM groups, group_plugin
+#          WHERE groups.group_id = group_plugin.group_id
+#          AND group_plugin.plugin_id = $plugin_id
+#          AND groups.scm_host = '$this_server'" ;
+
 $query = "SELECT groups.group_id, unix_group_name, status
-          FROM groups, group_plugin, plugin_scmsvn_group_usage
+          FROM groups, group_plugin
           WHERE groups.group_id = group_plugin.group_id
-          AND group_plugin.plugin_id = $plugin_id
-          AND plugin_scmsvn_group_usage.group_id = groups.group_id
-          AND plugin_scmsvn_group_usage.svn_host = '$this_server'" ;
+          AND group_plugin.plugin_id = $plugin_id";
 
 $c = $dbh->prepare($query);
 $c->execute();
