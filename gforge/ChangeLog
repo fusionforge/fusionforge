@@ -1,3 +1,7 @@
+2003-09-17  Bo Jangeborg  <bo@softwave.se>
+
+	* www/include/languages/Swedish.tab: full translation.
+
 2003-09-17  Roland Mas  <mas@echo.fr>
 
 	* docs/debian-guide.html: A few fixes, s/debian-sf/gforge/ and
