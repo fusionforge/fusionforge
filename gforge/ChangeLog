@@ -2,6 +2,8 @@
 
 	* www/exports/rss_sfnews.php, index.html: Applied patch #831:
 	more detailed RSS feed
+	* common/include/utils.php, www/frs/index.html: Applied patch
+	#808: Human-Readable Filesizes
 
 2004-06-29  Tom Copeland <tom@infoether.com>
 

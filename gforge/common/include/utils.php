@@ -775,4 +775,48 @@ function valid_hostname ($hostname = "xyz") {
 
 }
 
+
+/**
+ * human_readable_bytes() - Translates an integer representing bytes to a human-readable format.
+ *
+ * Format file size in a human-readable way
+ * such as "xx Megabytes" or "xx Mo"
+ *
+ * @author           Andrea Paleni <andreaSPAMLESS_AT_SPAMLESScriticalbit.com>
+ * @version        1.0
+ * @param int       bytes   is the size
+ * @param bool     base10  enable base 10 representation, otherwise
+ *                 default base 2  is used  
+ * @param int       round   number of fractional digits
+ * @param array     labels  strings associated to each 2^10 or
+ *                  10^3(base10==true) multiple of base units
+ */
+function human_readable_bytes ($bytes, $base10=false, $round=0,
+				  $labels=array(' bytes',  ' KB', ' MB', ' GB')) {
+  
+  if (($bytes <= 0) ||
+      (! is_array($labels)) ||
+      (count($labels) <= 0))
+    return null;
+  
+  $step = $base10 ? 3 : 10 ;
+  $base = $base10 ? 10 : 2;
+  
+  $log = (int)(log10($bytes)/log10($base));
+  
+  krsort($labels);
+  
+  foreach ($labels as $p=>$lab) {
+    $pow = $p * $step;
+    if ($log < $pow) continue;
+    $text = round($bytes/pow($base,$pow),$round) . $lab;
+    break;
+  }
+  
+   return $text;
+}
+
+
+
+
 ?>

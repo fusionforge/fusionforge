@@ -151,7 +151,7 @@ for ( $p = 0; $p < $num_packages; $p++ ) {
 						. $file_release['filename'] .'</a>',
 						'colspan=3');
 						
-					$cell_data[] = array($file_release['file_size'],'align="right"');
+					$cell_data[] = array(human_readable_bytes($file_release['file_size']),'align="right"');
 					$cell_data[] = array( ($file_release['downloads'] ? number_format($file_release['downloads'], 0) : '0'), 'align="right"');
 					$cell_data[] = array($file_release['processor']);
 					$cell_data[] = array($file_release['type']);
@@ -172,7 +172,7 @@ if ( $proj_stats['size'] ) {
 	print '<tr><td><strong>'.$Language->getText('project_showfiles','project_totals').'</strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['releases'] . '</em></strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['files'] . '</em></strong></td>'
-		. '<td align="right"><strong><em>' . $proj_stats['size'] . '</em></strong></td>'
+		. '<td align="right"><strong><em>' . human_readable_bytes($proj_stats['size']) . '</em></strong></td>'
 		. '<td align="right"><strong><em>' . $proj_stats['downloads'] . '</em></strong></td>'
 		. '<td colspan="3">&nbsp;</td></tr>'."\n";
 }
