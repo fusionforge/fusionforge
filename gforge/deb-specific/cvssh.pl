@@ -13,7 +13,7 @@ use subs qw/ &reject / ;
 no locale ;
 
 @allowed_options = ('-c', '-e') ;
-@allowed_commands = ('cvs') ;
+@allowed_commands = ('cvs','scp') ;
 
 # Clean up our environment
 delete @ENV{qw(IFS CDPATH ENV BASH_ENV PATH)};
