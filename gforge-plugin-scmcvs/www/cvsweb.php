@@ -12,6 +12,7 @@
   */
 
 require_once('pre.php');    // Initial db and session library, opens session
+require_once('www/scm/include/scm_utils.php');
 
 if (!$sys_use_scm) {
 	exit_disabled();
@@ -53,7 +54,7 @@ if ($projectName) {
 		exit_permission_denied();
 	}
 	if (in_array($contentType, $supportedContentTypes)) {
-		site_project_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID(),'toptab'=>'scm_index','pagename'=>'scm_index','sectionvals'=>array($Group->getPublicName())));
+		scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID()));
 	} else {
 		header("Content-type: $contentType" );
 	}
@@ -73,7 +74,7 @@ if ($projectName) {
 	echo $content;
 	
 	if (in_array($contentType, $supportedContentTypes)) {
-		site_project_footer(array());
+		scm_footer(array());
 	}
 } else {
 	exit_no_group();
