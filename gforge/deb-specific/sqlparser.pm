@@ -1,7 +1,7 @@
 # $Id$
 #
 # A state machine to turn an SQL file into list of requests
-# (represented in an array of strings)
+# (represented by an array of strings)
 #
 ### AUTHOR/COPYRIGHT
 # This file is copyright 2002 Roland Mas <99.roland.mas@aist.enst.fr>.
@@ -23,17 +23,18 @@
 # * Should bugs appear, please notify me (patches are of course welcome)
 #
 ### TODO
-# * Be more permissive with quotes: 'copy table from stdin;' won't work
-#   whereas 'copy "table" from stdin;' will.  This is unfair, and should be
-#   fixed.
 # * Make sure the output of pg_dump is interpreted the way it should.
-# * Ditto for he output of mysqldump.
+# * Ditto for he output of mysqldump.  There might be a problem with
+#   the quoting style somewhere: I seem to remember PostgreSQL uses \'
+#   to quote a quote, while MySQL uses ''.  Maybe we should introduce
+#   another parameter to parse_sql_file, indicating what flavour of
+#   SQL to expect.
 
-sub sql_parser_debug ( $ ) {
-    my $v = shift ;
-    chomp $v ;
-    print STDERR "$v\n" ;
-}
+use strict ;
+use subs qw/ &parse_sql_file &sql_parser_debug / ;
+
+sub sql_parser_debug ( $ ) ;
+sub parse_sql_file ( $ ) ;
 
 sub parse_sql_file ( $ ) {
     my $f = shift ;
@@ -429,6 +430,12 @@ sub parse_sql_file ( $ ) {
 
     close F ;
     return \@sql_list ;
+}
+
+sub sql_parser_debug ( $ ) {
+    my $v = shift ;
+    chomp $v ;
+    print STDERR "$v\n" ;
 }
 
 1 ;

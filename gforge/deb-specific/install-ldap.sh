@@ -27,20 +27,20 @@ setup_vars() {
     cryptedpasswd=`slappasswd -s "$ldap_passwd" -h {CRYPT}`
     ldap_suffix=$(grep suffix /etc/ldap/slapd.conf | cut -d\" -f2)
 
-    do_config=$(grep ^do_config= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
 }
 
 show_vars () {
-    echo "=====>sf_ldap_base_dn=$sf_ldap_base_dn"
-    echo "=====>sf_ldap_admin_dn=$sf_ldap_admin_dn"
-    echo "=====>sf_ldap_bind_dn=$sf_ldap_bind_dn"
-    echo "=====>sf_ldap_passwd=$sf_ldap_passwd"
-    echo "=====>sf_ldap_host=$sf_ldap_host"
-    echo "=====>cryptedpasswd=$cryptedpasswd"
-    echo "=====>do_config=$do_config"
-    echo "=====>ldap_suffix=$ldap_suffix"
-    echo "=====>tmpfile_pattern=$tmpfile_pattern"
+    echo "sf_ldap_base_dn = '$sf_ldap_base_dn'"
+    echo "sf_ldap_admin_dn = '$sf_ldap_admin_dn'"
+    echo "sf_ldap_bind_dn = '$sf_ldap_bind_dn'"
+    echo "sf_ldap_passwd = '$sf_ldap_passwd'"
+    echo "sf_cryptedpasswd = '$sf_cryptedpasswd'"
+    echo "sf_ldap_host = '$sf_ldap_host'"
+    echo "ldap_passwd = '$ldap_passwd'"
+    echo "cryptedpasswd = '$cryptedpasswd'"
+    echo "ldap_suffix = '$ldap_suffix'"
+    echo "tmpfile_pattern = '$tmpfile_pattern'"
 }
 
 # Check Server
@@ -418,18 +418,13 @@ case "$1" in
 	slapadd -l $tmpldif
 	rm -f $tmpldif
 	;;
-    check)
+    test|check)
 	setup_vars
 	show_vars
 	check_server
 	;;
-    test)	
-	setup_vars
-	show_vars
-	setup_robot
-	;;
     *)
-	echo "Usage: $0 {configure|configure-files|update|purge|purge-files|list|empty|reset|check|test}"
+	echo "Usage: $0 {configure|configure-files|update|purge|purge-files|list|empty|reset|test}"
 	exit 1
 	;;
 esac
