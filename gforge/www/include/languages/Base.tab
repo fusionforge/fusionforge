@@ -258,7 +258,7 @@ admin_index	display_user_beginning_with	Display Users Beginning with :
 admin_index	front_page_news	Front-page news
 admin_index	get	get
 admin_index	group_maintaince	Group Maintenance
-admin_index	groups_with	Groups with
+admin_index	groups_with_status	Groups with status
 admin_index	mail_engine	Mail Engine for $1 Subscribers
 admin_index	new_project_approval	(New Project Approval)
 admin_index	news	News
@@ -1520,7 +1520,12 @@ project_admin_userpermedit	add_to_tracker	Add To Tracker
 project_admin_userpermedit	admin	Admin
 project_admin_userpermedit	admin_only	Admin Only
 project_admin_userpermedit	admin_tech	Admin & Tech
+<<<<<<< Base.tab
+project_admin_userpermedit	not_available	Not available
+project_admin_userpermedit	file_release_role	Role in File releases
+=======
 project_admin_userpermedit	no_permissions	No permissions
+>>>>>>> 1.100
 project_admin_userpermedit	developer_not_found	Developer Not Found In This Group
 project_admin_userpermedit	docman	Documentation Manager
 project_admin_userpermedit	editing_permissions	You are editing permissions for user $1 ($2)
