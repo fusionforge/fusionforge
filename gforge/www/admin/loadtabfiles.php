@@ -13,7 +13,11 @@ require_once('www/include/BaseLanguage.class');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-if ($load) {
+if ($purgeall) {
+	db_query("DROP TABLE tmp_lang;");
+}
+
+if ($loadall) {
 	db_query("DROP TABLE tmp_lang;");
 	db_query("CREATE TABLE tmp_lang (tmpid integer, language_id text, seq integer , pagename text, category text, tstring  text);");
 	//db_commit();
@@ -50,22 +54,21 @@ if ($load) {
 site_admin_header(array('title'=>"Site Admin"));
 ?>
 
-<h3>Load language tab files</h3>
-
 <form name="mload" method="post" action="<?php echo $PHP_SELF; ?>">
 
-<input type="submit" name="load" value="<? echo "Load all language files"; ?>">
+<input type="submit" name="loadall" value="<? echo "(Re)Load all language files"; ?>">
+<input type="submit" name="purgeall" value="<? echo "Purge loaded data"; ?>">
 
 </form>
 
 <p>
 
 <?
-if ($load) {
+$result=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
+if (db_numrows($result)>0) {
 ?>
 	<H3 color=red>Tables loaded:</H3>
 <?
-	$result=db_query("select language_id, count(language_id) AS count from tmp_lang where pagename!='#' group by language_id");
 	echo "<TABLE border=0>";
 	$maxtrans=0;
 	for ($i=0; $i<db_numrows($result) ; $i++) {
