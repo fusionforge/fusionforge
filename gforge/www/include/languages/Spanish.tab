@@ -372,6 +372,7 @@ general	sitename	$1
 general	submitted_successfully	$1 fue enviado con éxito.
 general	turned_off	Este proyecto no se usa $1.
 general update_successful	Actualizado con éxito.
+global	error	Error
 group	activity	Porcentaje de Actividad:&nbsp;
 group	activitystat	Ver las <a href="/project/stats/?group_id=$1">estadísticas</a> de la actividad del proyecto
 group	developer_info	Información del colaborador
@@ -586,12 +587,26 @@ pm_browse_my	section	Administrador de Tareas del proyecto $1
 pm_browse_my	title	Ojear mis tareas
 pm_browse_open	section	Administrador de Tareas
 pm_browse_open	title	Ojear las tareas abiertas
+pm_browsetask	title	Ojear tareas
+pm_browsetask	browse	Ojear
+pm_browsetask	previous	Las últimas 50
+pm_browsetask	next	Las próximas 50
+pm_browsetask	overdue_tasks	* marca las tareas atrasadas
 pm_detailtask	section	Administrador de Tareas
 pm_detailtask	title	Detalles de Tarea
 pm_modtask	section	Administrador de Tareas
 pm_modtask	title	Modificar tarea
-pm_reporting	section	Administrador de Tareas
 pm_reporting	title	Sistema de informes de tareas
+pm_reporting	tasks_by_technician	Tareas por usuario
+pm_reporting	all_tasks_by_category	Todas las tareas por categoría
+pm_reporting	by_subproject	Reportaje por grupo de tareas
+pm_reporting	open_tasks_by_category	Tareas abiertas por categoría
+pm_reporting	report_note	Favor notar que la misma tarea puede ser asignada a varios usuarios.  Tales tareas contarán para cada uno.
+pm_reporting	open_tasks_by_technician	Tareas abiartas por usuario
+pm_reporting	by_tech	Tareas por usuario
+pm_reporting	all_tasks_by_technician	Todas las tareas asignada al usuario
+pm_reporting	tasks_by_category	Tareas por categoría
+pm_reporting	aging_report	Reportaje del tiempo para cada tarea
 project_admin	section	Proyecto: $1
 project_admin	title	Resumen de Administración
 project_admin_database	section	Proyecto $1 - Administración
@@ -698,9 +713,41 @@ top_mostactive	section	Proyectos estrella
 top_mostactive	title	Proyectos más activos: $1
 top_toplist	section	Proyectos estrella
 top_toplist	title	Lista de Proyectos Estrella
-tracker	choose	Elige un registro para poder navegar/editar/añadir elementos a él.
 tracker	section	Proyecto: $1
 tracker	title	Registros
+tracker	choose	Elige un registro para poder navegar/editar/añadir elementos a él.
+tracker	item_created	Artículo creado con éxito
+tracker	updated_successful	Actualizado con éxito
+tracker	tracker_item	Artículo del registro
+tracker	file_upload_successful	Fichero enviado con éxito
+tracker	file_delete_upload	Enviar fichero
+tracker	file_delete	Borrar fichero
+tracker	file_delete_successful	Fichero borrado con éxito
+tracker	comment_added	Comentario añadido
+tracker	reporting	Reportaje
+tracker	resolution	Resolución
+tracker	admin	Admin
+tracker	category	Categoría
+tracker	item_group	Grupo
+tracker	assigned_to	Asignado a
+tracker	priority	Prioridad
+tracker	summary	Resumen
+tracker	detailed_description	Descripción
+tracker	security_note	¡NO INCLUYA contraseñas o información secreta en su mensaje!
+tracker	check_upload	Haga click aquí para enviar un fichero
+tracker	file_description	Descripción del fichero
+tracker	unassigned	No asignado
+tracker	any	Cualquier
+tracker	id	ID
+tracker	date	Fecha
+tracker	open_date	Fecha que fue enviado
+tracker	close_date	Fecha que fue resuelto
+tracker	submitter	Enviado por
+tracker	assignee	Asignado por
+tracker	submitted_by	Enviado por
+tracker	status	Estado
+tracker	group	Grupo
+tracker	followups	Comentarios
 tracker_add	section	$1
 tracker_add	title	Enviar elementos de Registro
 tracker_admin	section	Registro
@@ -723,12 +770,28 @@ tracker_admin_update_type	section	Administración del registro
 tracker_admin_update_type	title	Actualizar $1
 tracker_admin_update_users	section	Administración del registro
 tracker_admin_update_users	title	Añadir/Actualizar los Permisos de Usuarios de un Registro
+tracker_artifacttype	none	Ninguno
+tracker_artifacttype	nobody	Nadie
+tracker_artifacttype	admin	Admin
+tracker_artifacttype	reporting	Reportaje
+tracker_artifacttype	browse	Ojear
+tracker_artifacttype	submit_new	Crear Nuevo Artículo
+tracker_artifacttype	admin_functions	Funciones del administrador
+tracker_artifacttype	add_artifact_types	Crear/Ojear clases de artículos
+tracker_artifacttype	edit_options	Editar/Actualizar opciones en
 tracker_browse	section	Proyecto: $1
 tracker_browse	title	Navegar por $1
 tracker_detail	section	$1
 tracker_detail	title	Vista Detallada del Registro
 tracker_reporting	section	Proyecto: $1
 tracker_reporting	title	Informe del Registro
+tracker_taskmgr	build_relationships	Hacer relación entre artículo del registro y una tarea.
+tracker_taskmgr	add_relationship	Hacer relación con la tarea escogida.
+tracker_taskmgr	add_relation_to_task	Hacer relación con una tarea que ya existe.
+tracker_taskmgr	create_task	Crear nueva tarea.
+tracker_taskmgr	tracker_item	Artículo del registro.
+tracker_taskmgr	task_manager_project	Grupo de tareas.
+tracker_taskmgr	task	Tarea
 trove	not_categorized	Este proyecto todavía no ha sido categorizado en el
 trove	title	Mapa de Proyectos
 users	optout	Usted eligió no aparecer en el sistema de puntuación, si no podría puntuar a este usuario. Visite <a href="/account/">su página de mantenimiento</a> para más información.
