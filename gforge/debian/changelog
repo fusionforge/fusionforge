@@ -16,8 +16,10 @@ gforge (3.0-3+) unstable; urgency=low
     as these templates (closes: #193155).
   * [Christian] Added cronjobs/db_project_sums.php in postgres cron
   * [Christian] Added cronjobs/check_stale_tracker_items.php in postgres cron
+  * [Christian] Added objectClass: person in install-ldap.sh as suggested by 
+    Lars Ehrhardt in http://gforge.org/forum/message.php?msg_id=3211
 
- -- Christian Bayle <bayle@debian.org>  Fri, 25 Jul 2003 14:37:27 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 30 Jul 2003 17:50:26 +0200
 
 gforge (3.0-2) unstable; urgency=low
 
