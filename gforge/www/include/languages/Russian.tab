@@ -45,6 +45,7 @@ group	long_patch	Менеджер патчей (исправлений)
 group	long_pm	Задачи проекта
 group	long_support	Менеджер тех. поддержки
 group	long_survey	Опросы
+group	long_tracker	Унив.Трекер
 group	short_admin	Админ
 group	short_bugs	Ошибки
 group	short_cvs	CVS

@@ -236,7 +236,7 @@ print '&nbsp;'.$Language->getText('group','long_homepage').'</a>';
 if ($project->usesTracker()) {
 	print '<hr size="1" noshade="noshade" /><a href="/tracker/?group_id='.$group_id.'">';
 	print html_image('ic/tracker20g.png','20','20',array('alt'=>$Language->getText('group','short_tracker')));
-	print $Language->getText('group', 'short_tracker').'</a>';
+	print $Language->getText('group', 'long_tracker').'</a>';
 
 	$result=db_query("SELECT agl.*,aca.count,aca.open_count
 	FROM artifact_group_list agl

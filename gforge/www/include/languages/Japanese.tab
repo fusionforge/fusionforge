@@ -282,6 +282,7 @@ group	long_patch	パッチマネージャ
 group	long_pm	タスクマネージャ
 group	long_support	テクニカルサポートマネージャ
 group	long_survey	調査
+group	long_tracker	トラッカー
 group	project_admins	プロジェクト管理
 group	public_area	パブリックエリア
 group	short_admin	管理

@@ -859,6 +859,7 @@ group	long_patch	Administrador de Parches
 group	long_pm	Gestión de Tareas
 group	long_support	Administrador de Soporte Técnico
 group	long_survey	Encuestas
+group	long_tracker	Registro
 group	nodescription	Este proyecto no ha proporcionado todavía una descripción
 group	norelease	Este proyecto no ha publicado ningún fichero
 group	project_admins	Administradores del proyecto

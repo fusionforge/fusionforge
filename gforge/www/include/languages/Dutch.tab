@@ -845,6 +845,7 @@ group	long_patch		Patch Manager
 group	long_pm			Taken Manager
 #group	long_support		Tech Support Manager
 group	long_survey		Enquêtes
+#group	long_tracker		Tracker
 group	nodescription		Dit project heeft nog geen beschrijving ingediend.
 group	norelease		Dit project heeft nog geen Files gepubliseerd.
 group	project_admins		Project Administators

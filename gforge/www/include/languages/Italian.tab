@@ -397,6 +397,7 @@ group	long_mail	Mailing List
 group	long_news	Ultime News
 group	long_pm	Attivit&agrave;
 group	long_survey	Sondaggi
+group	long_tracker	Tracker
 group	project_admins	Amministratori progetto
 group	public_area	Aree pubbliche
 group	short_admin	Amministrazione

@@ -657,7 +657,6 @@ forum_admin_delete_message	title	Delete a Message
 forum_admin_delete_message	enter_message_id	Enter message identifier
 forum_admin_delete_message	warning	WARNING! You are about to permanently delete a message and all of its followups!!
 forum_admin_delete_messages	messages_deleted	$1 messages deleted
-forum_admin_delete_messages	messages_deleted	$1 messages deleted
 forum_common	error_adding_forum	Error Adding Forum
 forum_common	error_min_desc_length	Forum Description Must Be At Least 10 Characters
 forum_common	error_min_name_length	Forum Name Must Be At Least 3 Characters
@@ -852,6 +851,7 @@ group	long_patch	Patch Manager
 group	long_pm	Task Manager
 group	long_support	Tech Support Manager
 group	long_survey	Surveys
+group	long_tracker	Tracker
 group	nodescription	This project has not yet submitted a description.
 group	norelease	This Project Has Not Released Any Files
 group	project_admins	Project Admins

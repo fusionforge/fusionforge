@@ -1,6 +1,23 @@
+2003-11-30  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/project_home.php: Patch #614 from Guillaume Smet
+	adding the group/long_tracker key.
+	* www/include/languages/Base.tab, www/include/languages/Dutch.tab,
+	www/include/languages/French.tab,
+	www/include/languages/Italian.tab,
+	www/include/languages/Japanese.tab,
+	www/include/languages/Korean.tab,
+	www/include/languages/Russian.tab,
+	www/include/languages/SimplifiedChinese.tab,
+	www/include/languages/Spanish.tab,
+	www/include/languages/Swedish.tab: Ditto.
+
+	* www/include/languages/French.tab: Also in patch #614: some more
+	French localisation.
+
 2003-11-29  Michael Jennings  <mej@eterm.org>
 
-	* gforge.spec:  Change ownership/permissions so cron jobs work
+	* gforge.spec: Change ownership/permissions so cron jobs work
 	properly.
 
 2003-11-29  Roland Mas  <99.roland.mas@aist.enst.fr>

@@ -468,6 +468,7 @@ group	long_patch	补丁管理
 group	long_pm	任务管理
 group	long_support	技术支持
 group	long_survey	调查
+group	long_tracker	跟踪
 group	project_admins	项目管理员
 group	public_area	公共区域
 group	short_admin	管理

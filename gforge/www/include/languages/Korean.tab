@@ -173,6 +173,7 @@ group	long_patch	패치 관리자
 group	long_pm	임무 관리자
 group	long_support	기술지원 관리자
 group	long_survey	설문조사
+group	long_tracker	문제점 추적
 group	project_admins	프로젝트 관리자
 group	public_area	공개 구역
 group	short_admin	프로젝트 관리

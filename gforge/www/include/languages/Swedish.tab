@@ -870,6 +870,7 @@ group	long_patch	Administrera felrättelser
 group	long_pm	Projektstyrning
 group	long_support	Administrera användarsupport
 group	long_survey	Undersökningar
+group	long_tracker	Ordningslistor
 group	nodescription	Detta projekt saknar beskrivning.
 group	norelease	Detta projekt har inte släppt några filer
 group	project_admins	Projektadministratörer

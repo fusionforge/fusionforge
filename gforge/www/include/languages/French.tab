@@ -719,213 +719,214 @@ forum_forum	topicstarter	Sujet initial
 forum_forum	ultimate	Ultimate
 forum_forum_thread	section	Forums
 forum_forum_thread	title	Affichage d'une discussion
-forum_message	by	Par :
-forum_message	date	Date
+forum_message	by	PAR
+forum_message	date	DATE
 forum_message	message	Message
-forum_message	message_not_found_body	Ce message n'existe plus plus.
+forum_message	message_not_found_body	Ce message n'existe pas ou plus.
 forum_message	message_not_found_title	Message non trouvé
-forum_message	msg	Poster un message dans cette file de message:
+forum_message	msg	Poster un message dans cette discussion :
 forum_message	must_choose_message_body	Vous devez d'abord choisir un message
 forum_message	must_choose_message_title	Vous devez d'abord choisir un message
-forum_message	post_followup	Poster un message dans cette file de message:
+forum_message	post_followup	Poster une réponse dans cette discussion
 forum_message	receive_followups	Recevoir les réponses par e-mail
 forum_message	section	Forums
 forum_message	subject	Sujet
-forum_message	thread	Commencer une nouvelle file de message :
+forum_message	thread	Commencer une nouvelle discussion
 forum_message	thread_view	Voir les fils de discussion
 forum_message	title	Affichage d'un message
 forum_monitor	activated	Surveillance du forum activée
 forum_monitor	deactivated	Surveillance du forum désactivée
-forum_save	saved	Position dans le forum sauvée.  Les nouveaux messages seront mis en valeur lors de votre prochain retour
+forum_save	saved	Position dans le forum sauvée.  Les nouveaux messages seront mis en valeur lorsque vous reviendrez.
 forum_utils	added	Forum ajouté
-forum_utils	admin	Gérer
+forum_utils	admin	Administration
 forum_utils	anonymously	Anonymement
 forum_utils	author	Auteur
-forum_utils	brokenthread	Fil de message cassé
+forum_utils	brokenthread	Fil de discussion cassé
 forum_utils	by	Par :
-forum_utils	couldpostif	Vous pourriez répondre si vous étiez $1 connecté $2
+forum_utils	couldpostif	Vous pourriez répondre si vous étiez $1 identifié $2
 forum_utils	date	Date
 forum_utils	discussionforum	Forums de discussion :
-forum_utils	doublepost	Il semble que ce message soit un doublon compte tenu du fait qu'il a le même sujet et les mêmes informations de suivi qu'un précédent message.
+forum_utils	doublepost	Il semble que ce message soit un doublon car il a le même sujet et les mêmes informations de suivi qu'un précédent message.
 forum_utils	error	Erreur !
-forum_utils	erroradd	Erreur dans l'ajout du Forum
-forum_utils	errorfollowup	Essai de suivi d'un message qui n'existe pas.
-forum_utils	errorfollowup2	Pas d'identifiant de suivi
-forum_utils	errorinsert	Impossible d'obtenir «  insertid() »
+forum_utils	erroradd	Erreur lors de l'ajout du Forum
+forum_utils	errorfollowup	Tentative de réponse à un message qui n'existe pas.
+forum_utils	errorfollowup2	Pas d'identifiant de parent lors de l'ajout d'un message à un fil de discussion existant
+forum_utils	errorinsert	Impossible d'obtenir insertid()
 forum_utils	errormaster	Impossible de mettre à jour le fil maître avec l'heure courante
 forum_utils	errorparent	Impossible de mettre à jour le parent
-forum_utils	errorpost	L'envoi a échoué
+forum_utils	errorpost	L'ajout a échoué
 forum_utils	feedbacklogin	Vous pourriez répondre si vous étiez connecté
-forum_utils	htmltag	les tags HTML s'afficheront comme du texte dans votre envoi
-forum_utils	latest	Dernières Nouvelles
-forum_utils	loggedin	Authentifié
-forum_utils	mailmonitor	\nLisez et répondez à ce message à: \n$1\nPar: $2 \n\n $3\n\n______________________________________________________________________\nVous recevez ce message parce que vous surveillez ce forum.\nPour arrêter la surveillance, entrer dans $4\n et voyez $5
-forum_utils	mailnotsent	courrier non envoyé - surveillé par des utilisateurs
-forum_utils	mailnotsent2	courrier non envoyé - personne ne surveille
+forum_utils	htmltag	Les balises HTML de votre message seront affichées comme du texte.
+forum_utils	latest	Dernières annonces
+forum_utils	loggedin	Identifié
+forum_utils	mailmonitor	\nVous pouvez lire ce message et y répondre sur : \n$1\n\nDe : $2 \n\n $3\n\n______________________________________________________________________\nVous recevez ce message car vous avez choisi de surveiller ce forum.\nPour arrêter la surveillance, identifier vous sur $4\n et rendez vous sur la page $5
+forum_utils	mailnotsent	e-mail non envoyé - surveillé par des utilisateurs
+forum_utils	mailnotsent2	e-mail non envoyé - personne ne surveille
 forum_utils	mailsent	courrier envoyé - surveillé par des utilisateurs
-forum_utils	message	Message:
-forum_utils	monitor	Surveiller le forum
-forum_utils	mustinclude	Doit inclure un corps et un entête de message
-forum_utils	news	Nouvelles
-forum_utils	nextfailed	Impossible de trouver le n° du fil suivant
-forum_utils	noid	Envoi sans identifiant de forum
-forum_utils	nonewsitem	Erreur - Ce message n'a pas été trouvé
+forum_utils	message	Message :
+forum_utils	monitor	Surveiller ce forum
+forum_utils	mustinclude	Doit inclure un corps de message et un sujet
+forum_utils	news	Annonces
+forum_utils	nextfailed	Impossible de trouver le thread_id suivant
+forum_utils	noid	Tentative d'ajout sans identifiant de forum
+forum_utils	nonewsitem	Erreur - Cette annonce n'a pas été trouvée
 forum_utils	notfound	Non trouvé
-forum_utils	postanon	Vous faites un envoi anonyme car vous n'êtes pas
-forum_utils	postcomment	Envoyer un commentaire
-forum_utils	posted	Message envoyé
+forum_utils	postanon	Vous ajoutez un message anonyme car vous n'êtes pas identifié
+forum_utils	postcomment	Ajouter un commentaire
+forum_utils	posted	Message posté
 forum_utils	postedby	Posté par
 forum_utils	reply	répondre
-forum_utils	saveplace	Sauvegarder cet endroit
+forum_utils	saveplace	Sauvegarder cette position
 forum_utils	stopmonitor	Arrêter la surveillance
-forum_utils	subject	Sujet:
+forum_utils	subject	Sujet :
 forum_utils	summary	Résumé
-forum_utils	thread	File de message
+forum_utils	thread	Fil de discussion
 frs	file_download	Téléchargement
 frs	file_monitor	Surveillance
 frs	file_notes	Remarques
 frs	file_package	Paquet
 frs	file_rel_date	Date
 frs	file_version	Version
-frs	latest_file_releases	Sorties récentes
-frs_file	error_already_exists	Ce nom de fichier existe déjà dans ce projet
+frs	latest_file_releases	Derniers fichiers publiés
+frs_file	error_already_exists	Un fichier portant ce nom existe déjà dans ce projet
 frs_file	error_cannot_move	Le fichier ne peut pas être déplacé vers sa destination
-frs_file	error_invalid_file	Le fichier semble être invalide
-frs_file	error_min_name_length	Le nom de fichier doit comprendre au moins 3 caractères
+frs_file	error_invalid_file	Le fichier semble invalide
+frs_file	error_min_name_length	Le nom du fichier doit compter au moins 3 caractères
 frs_file	error_name_format	Le nom de fichier doit être dans le format suivant : gforge-3.0.tar.bz2
-frs_package	error_already_exists	Ce nom de fichier existe déjà dans ce projet
+frs_package	error_already_exists	Un fichier portant ce nom existe déjà dans ce projet
 frs_package	error_cannot_move	Le fichier ne peut pas être déplacé vers sa destination
-frs_package	error_invalid_file	Le fichier semble être invalide
-frs_package	error_min_name_length	Le nom de paquet doit comprendre au moins 3 caractères
+frs_package	error_invalid_file	Le fichier semble invalide
+frs_package	error_min_name_length	Le nom de paquet doit compter au moins 3 caractères
 frs_package	error_name_format	Le nom de paquet doit être alphanumérique
-frs_package	error_set_monitor	Vous ne pouvez pas déclencher la surveillance sans être connecté
-frs_release	email_text	\n\nProjet « $1 » ('$2') a \nmis à jour la nouvelle version du paquet '$3'\nVous recevez ce courrier parce que vous avez demandé à être prévenu lorsque les nouvelles versions du paquet seraient mises à jour. Si vous ne souhaitez plus en être averti, allez sur $5 et cliquez le lien \n $6
+frs_package	error_set_monitor	Vous ne pouvez pas activer la surveillance sans être identifié
+frs_release	email_text	\n\nLe projet "$1" ('$2') a \npublié une nouvelle version du paquet '$3'.\nVous recevez ce courrier car vous avez demandé à être prévenu lorsque de nouvelles versions du paquet seraient publiées. Si vous ne souhaitez plus être averti, allez sur $5 et cliquez sur le lien \n $6 .
 frs_release	email_title	[Révision $1] $2
-frs_release	error_already_exists	Ce nom de révision existe déjà dans ce projet
+frs_release	error_already_exists	Une révision portant ce nom existe déjà dans ce projet
 frs_release	error_cannot_move	La révision ne peut pas être déplacée vers sa destination
 frs_release	error_invalid_file	Le fichier semble être invalide
-frs_release	error_min_name_length	Le nom de révision doit comprendre au moins 3 caractères
+frs_release	error_min_name_length	Le nom de révision doit compter au moins 3 caractères
 frs_release	error_name_format	Le nom de révision doit être alphanumérique
-frs_release	error_set_monitor	Vous ne pouvez pas déclencher la surveillance sans être connecté
+frs_release	error_set_monitor	Vous ne pouvez pas activer la surveillance sans être identifié
 general	add	Ajouter
-general	browse	Afficher
+general	browse	Parcourir
 general	cancel	Annuler
 general	confirm	Confirmer
 general	create_successful	Créé avec succès
 general	delete	Supprimer
 general	deleted	Supprimé
-general	done	C'est fait !
-general	edit	Editer
+general	done	Effectué
+general	edit	Modifier
 general	error	Erreur
-general	error_creating	ERREUR pendant la création de $1
+general	error_creating	Erreur lors de la création de $1
 general	error_getting	Erreur en accédant à $1
 general	error_getting_new	Erreur en accédant à un nouvel objet $1
-general	error_group_id	L'identifiant du groupe dans la base de données ne correspond pas avec l'objet groupe.
-general	error_missing_params	Pas assez de paramètres
-general	error_no_valid_group_object	$1 Groupe d'objet non valide
-general	error_on_update	Erreur pendant la mise à jour : 
-general	footer	Vous êtes sur $1.  Pour plus d'informations (notamment de copyright)
-general	go	Ok
+general	error_group_id	L'identifiant du groupe dans la base de données ne correspond pas à l'objet groupe.
+general	error_missing_params	Il manque des paramètres
+general	error_no_valid_group_object	$1 : Pas d'objet Groupe valide
+general	error_on_update	Erreur lors de la mise à jour : 
+general	footer	Vous êtes sur $1.  Pour plus d'informations (notamment les informations de copyright), rendez vous sur <a href="/about.php">cette page</a>.
+general	go	Continuer
 general	invalid_email	Adresse de messagerie non valide
-general	language	Langue :
+general	language	Langue
 general	more	Plus...
 general	no	Non
-general	no_valid_filename	Nom de fichier invalide
-general	no_valid_group	Groupe sélectionné invalide $1
-general	no_valid_group_object	Groupe d'objet non valide $1
-general	open	Ouvert(s)
-general	permdenied	Accés Interdit.
-general	permexcuse	Vous devez obtenir l'autorisation de l'administrateur de ce projet pour voir cette page.
-general	permnotget	Accés non permis
+general	no_valid_filename	Pas de nom de fichier valide
+general	no_valid_group	Aucun groupe valide de $1 n'a été sélectionné
+general	no_valid_group_object	$1 Aucun objet groupe valide
+general	open	ouvert(s)
+general	permdenied	Accès Interdit.
+general	permexcuse	L'administrateur du projet doit vous affecter la permission de voir cette page.
+general	permnotget	Accès non permis
 general	remove	Supprimer
-general	reset	Remise à zéro
-general	return	[Retour à la page d'accueil $1]
-general	return_to	[retour à $1]
-general	sitename	
-general	submit	Envoyer
-general	submit_edit	Envoyer
+general	reset	Réinitialiser
+general	return	Retour
+general	return_to	[Retour à $1]
+general	sitename	$1
+general	submit	Valider
+general	submit_edit	Valider
 general	submitted_successfully	$1 a été envoyé avec succès
-general	total	Total
-general	turned_off	$1 : n'est pas ou plus utilisé par le projet
+general	total	total
+general	turned_off	Ce projet a désactivé le $1
 general	update	Mettre à jour
 general	update_successful	Mis à jour avec succès
 general	yes	Oui
 global	error	ERREUR
 group	activity	Taux d'activité&nbsp;:&nbsp;
-group	activitystat	<a href="/project/stats/?group_id=$1">Statistiques</a> d'activité du projet.
+group	activitystat	Voir les <a href="/project/stats/?group_id=$1">statistiques d'activité du projet</a>.
 group	developer_info	Equipe-Projet
 group	developers	Développeurs&nbsp;
-group	long_bugs	Gestion des bogues
+group	long_bugs	Gestion des bugs
 group	long_cvs	Référentiel CVS
-group	long_docman	Gestionnnaire de documentation
+group	long_docman	Gestion de documents : Documentation du projet
 group	long_forum	Forums de discussion
 group	long_ftp	Espace FTP anonyme
-group	long_homepage	Page d'accueil
+group	long_homepage	Page d'accueil du projet
 group	long_mail	Listes de diffusion
-group	long_news	Dernières Nouvelles
-group	long_patch	Gestionnnaire de corrections
-group	long_pm	Gestion de projet
+group	long_news	Dernières annonces
+group	long_patch	Gestionnaire de corrections
+group	long_pm	Gestion des tâches
 group	long_support	Support technique
 group	long_survey	Sondages
-group	nodescription	Ce project n'a pas encore soumis de description.
-group	norelease	Ce projet n'a pas réalisé de fichier
+group	long_tracker	Outils de suivi
+group	nodescription	Ce projet n'a pas encore soumis de description.
+group	norelease	Ce projet n'a pas encore publié de fichier
 group	project_admins	Administrateurs&nbsp; 
 group	public_area	Zones publiques
 group	registered	Enregistré le&nbsp;:&nbsp;
 group	short_admin	Administration
-group	short_bugs	Bogues
+group	short_bugs	Bugs
 group	short_cvs	CVS
-group	short_docman	Documentation
+group	short_docman	Documents
 group	short_files	Fichiers
 group	short_forum	Forums
 group	short_homepage	Accueil
-group	short_mail	Listes de diffusion
+group	short_mail	Listes
 group	short_main	Écran principal
 group	short_memberlist	Développeurs
-group	short_news	Nouvelles
-group	short_patch	Patches
+group	short_news	Annonces
+group	short_patch	Patchs
 group	short_pm	Tâches
-group	short_summary	Survol
+group	short_summary	En bref
 group	short_support	Support
 group	short_survey	Sondages
-group	short_tracker	Traceurs
+group	short_tracker	Suivi
 help	page_information	Page d'information
 help	title	Bienvenue sur $1
-help_tracker	assignee	Cette liste déroulante recueille l'administrateur à qui une trace est confiée.
-help_tracker	attach_file	Si vous souhaitez annexer un fichier à une trace, vous devez cocher cette case avant se soumettre les changements.
-help_tracker	canned_response	La liste déroulante de réponses pré-enregistrées recence les réponses définies par les administrateurs pour réagir à des traces.<br /><br /> Si vous es administrateur du projet, vous pouvez suivre le lien 'admin' pour définir vos propres réponses pré-enregistrées.
-help_tracker	category	Cette liste déroulante recense les catégories de traces possibles ici.<br /><br />Choisir 'tous' pour l'ensemble.
-help_tracker	close_window	Fermer la fenêtre.
-help_tracker	comment	La zone de texte 'commentaire' vous permet d'attacher un commentaire à une trace lorsqu'il n'y a pas de réponse automatique appropriée.
-help_tracker	data_type	L'option 'Tpe de données' détermine le genre de trace dont il s'agit. Comme le traceur reste dans un genre de trace, il est important de connaître son genre item.<br /><br />Cela permet en outre aux administrateurs de convertir d'un genre à l'autre (un bug en support par exemple).
-help_tracker	group	Cette liste déroulante recense les groupes de traces définis par les adminstrateurs.<br /><br />Si vous êtes administrateur du projet, vous pouvez définir vos propres groupes.
-help_tracker	monitor	Vous pouvez démarrer ou arrêter un suivi de cette trace en cliquant sur 'Suivi'. <br /><br /><strong>Note!</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires à cette trace, ou que vous l'avez soumise, ou si elle vous est confiée, vous aurez de toutes façons des courriers pour ces motifs aussi bien.
-help_tracker	priority	L'option de priorité permet à un utilisateur une priorité (de 1 à 9) pour sa trace.<br /><br />C'est particulièrement utilie pour des bugs ou des soucis pour lesquels un utilisateur peut avoir découvert un problème critique pour le projet.
-help_tracker	resolution	Aiguillage (s'il y a lieu)
-help_tracker	sort_by	L'option 'trié par' vous permet de précider le type d'affichage.<br /><br /> Vous pouveez trier par NЬ priorité, titre, date d'ouverture, date de fermeture, auteur, responsable.  Vous pouvez aussi choisir l'ordre ascendant ou descendant.
-help_tracker	status	Cette liste déroulante recense les status possible d'une trace.<br /><br />'Pending' si vous attendez une réponse de l'auteur.  Quand l'auteur aura répondu, le statut repassera à 'Ouvert'. Toutefois, si l'auteur ne répond pas en u temp défini par l'administrateur (par défaut 14 jours), alors le statut passe à 'Supprimé'.
-help_tracker	summary	Le champ titre doit contenir un résumé précis de la traca. C'est très utile lorsque l'on parcourt plusieurs éléments.
-help_tracker	unknown_help_request	Aide introuvable : 
+help_tracker	assignee	Cette liste déroulante représente l'administrateur à qui un élément à suivre est confié.
+help_tracker	attach_file	Si vous souhaitez annexer un fichier à un élément à suivre, vous devez cocher cette case avant de soumettre les changements.
+help_tracker	canned_response	La liste déroulante de réponses pré-enregistrées recense les réponses définies par les administrateurs pour réagir à des demandes de support récurrentes ou à des soumissions de bugs.<br /><br /> Si vous êtes administrateur du projet, vous pouvez suivre le lien 'Administration' pour définir vos propres réponses pré-enregistrées.
+help_tracker	category	Cette liste déroulante recense les catégories d'élements à suivre qui sont des parties particulières du projet.<br /><br />Choisir 'Tous' pour un choix plus large.
+help_tracker	close_window	Fermer la fenêtre
+help_tracker	comment	Le champ commentaire vous permet d'attacher un commentaire à un élément à suivre lorsqu'il n'y a pas de réponse pré-enregistrée appropriée.
+help_tracker	data_type	L'option 'Type de données' détermine le genre d'élément de suivi dont il s'agit. Comme l'élément se trouve dans un des gestionnaires (de bugs, de support, de patchs...), on a besoin de déterminer auquel de ces gestionnaires un élément doit appartenir. <br /><br />De plus, ceci permet à un administrateur de transformer une demande de support en bug.
+help_tracker	group	Cette liste déroulante recense les groupes d'éléments à suivre définis par les adminstrateurs.<br /><br />Si vous êtes administrateur du projet, vous pouvez définir vos propres groupes en cliquant sur (Administration).
+help_tracker	monitor	Vous pouvez activer ou arrêter la surveillance de cet élément en cliquant sur 'Surveiller'. <br /><br /><strong>Note !</strong> Cela vous occasionnera du courrier supplémentaire. Si vous ajoutez des commentaires à cet élément à suivre, que vous l'avez soumis ou s'il vous est confié, vous recevrez des messages également.
+help_tracker	priority	L'option priorité permet à un utilisateur de définir une priorité (de 1 - La plus basse à 9 - La plus haute).<br /><br />Elle est particulièrement utile pour des bugs ou des demandes de support pour lesquels un utilisateur peut avoir découvert un problème critique pour le projet.
+help_tracker	resolution	L'option résolution représente la résolution d'un élément de suivi s'il y a lieu
+help_tracker	sort_by	L'option 'Trier par' vous permet de préciser l'ordre dans lequel sont affichés les résultats.<br /><br /> Vous pouvez trier par identifiant, priorité, résumé, date d'ouverture, date de fermeture, auteur, responsable.  Vous pouvez aussi trier les résultats par ordre croissant ou décroissant.
+help_tracker	status	Cette liste déroulante recense les états possibles d'un élément à suivre.<br /><br />'En attente' si vous attendez une réponse de l'auteur. Quand l'auteur aura répondu, le statut repassera à 'Ouvert'. Toutefois, si l'auteur ne répond pas en un temps défini par l'administrateur (par défaut 14 jours), le statut passe à 'Supprimé'.
+help_tracker	summary	Le champ résumé doit contenir un résumé concis de l'élément à suivre. Utile lorsqu'on parcourt plusieurs éléments.
+help_tracker	unknown_help_request	Aide inconnue : 
 help_trove_cat	description	Description
 help_trove_cat	full_category_name	Nom détaillé de la catégorie
 help_trove_cat	no_such_category	Catégorie introuvable.
 help_trove_cat	short_name	Nom court
-home	about_blurb	<p>$1 est un <b>service gratuit pour les développeurs <A href="http://www.opensource.org">open source</A></b>. $1 offre un accès simple à des services tels que des outils de suivi de bogues et de correctifs, des outils de gestion de projet, un hébergement de fichiers, des listes de diffusion, des référentiels CVS, etc. Tous ces outils sont configurables via une interface web.<p><b>Participation au site</b></p><p>Pour pouvoir utiliser $1 au mieux, il est nécessaire de <A href="/account/register.php">s'enregister comme un utilisateur</A>. Cela vous permettra de profiter de tous ce que nous avons à vous offrir. Vous pouvez bien entendu naviguer sur le site sans vous enregistrer, mais vous n'aurez pas un accès complet qui vous permettrait de participer pleinement.</p><p><b>Créer votre propre projet</b></p><p>Commencez par <A href="/account/register.php">vous enregistrer en tant qu'utilisateur</a>, puis <a href="/account/login.php">connectez-vous</a> et enfin <a href="/register/">enregistrez votre projet.</a></p><p>Merci... et nous espérons que vous aimerez $1.</p>
+home	about_blurb	<p>$1 est un <b>service gratuit pour les développeurs <a href="http://www.opensource.org">Open Source</a></b>. $1 offre un accès aisé au meilleur de CVS, des listes de diffusion, de la gestion de bugs, de forums de discussion, de la gestion de tâches, de l'hébergement de sites, de l'archivage permanent de fichiers, de sauvegardes complètes. Tous ces outils sont administrables via une interface web.</p><p><b>Participation au site</b></p><p>Pour pouvoir utiliser $1 au mieux, il est nécessaire de <a href="/account/register.php">s'inscrire en tant qu'utilisateur</a>. Cela vous permettra de participer à tous les services que nous offrons. Vous pouvez bien entendu naviguer sur le site sans vous inscrire, mais vous n'aurez pas un accès complet et ne pourrez pas participer pleinement.</p><p><b>Créer votre propre projet</b></p><p>Commencez par <A href="/account/register.php">vous inscrire en tant qu'utilisateur</a>, puis <a href="/account/login.php">identifiez-vous</a> et enfin <a href="/register/">enregistrez votre projet.</a></p><p>Merci... et profitez du site.</p>
 home	breaking_down_barriers	Abaisser les barrières du développement open source
 home	gforge_statistics	Statistiques de $1
 home	highest_ranked_users	Les développeurs les mieux classés
-home	hosted_projects	Projets déposés&nbsp;
-home	most_active_this_week	Les projets qui bougent cette semaine
+home	hosted_projects	Projets hébergés&nbsp;
+home	most_active_this_week	Les projets les plus actifs cette semaine
 home	no_stats_available	Pas de statististiques disponibles
-home	none_found	Rien
-home	registered_users	Utilisateurs enregistrés&nbsp;
+home	none_found	Rien trouvé
+home	registered_users	Utilisateurs inscrits&nbsp;
 home	sfos	$1 On-Site
 home	top_project_downloads	Projets les plus téléchargés
 include_html	no_change	Aucun changement
 include_html	none	Aucun(e)
 include_html	priority_highest	Maximum
-include_html	priority_lowest	Minumum
-include_html	priority_medium	Medium
+include_html	priority_lowest	Minimum
+include_html	priority_medium	Moyen
 include_toolreport	all	Tout
 include_toolreport	key	Légende&nbsp;
 include_toolreport	last_days	Dernier(s) jour(s)
