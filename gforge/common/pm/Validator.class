@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * GForge Project Management Facility
+ *
+ * Copyright 2002 GForge, LLC
+ * http://gforge.org/
+ *
+ */
+
+/**
+* This class is a simple utility to validate fields
+* 
+* Sample usage:
+*
+* $v = new Validator();
+* $v->check($summary, "summary");
+* $v->check($detail, "detail");
+* if (!$v->isClean()) {
+*  print $v->formErrorMsg("The following fields were null:");
+* }
+*
+*/
+class Validator {
+ var $badfields;
+
+ /**
+ * Checks to see if a field is null; if so, the field name is added to an internal array
+ */
+ function check($field, $name) {
+  if (!$field) {
+   $this->badfields[] = $name;
+  }
+ }
+
+ /**
+ * Returns true if no null fields have been checked so far
+ */
+ function isClean() {
+  return count($this->badfields) == 0;
+ }
+
+ /**
+ * Returns an error message which contains the null field names which have been checked
+ */
+ function formErrorMsg($preamble) {
+  foreach ($this->badfields as $field) {
+   $preamble = $preamble.$field.",";
+  }
+  return substr($preamble, 0, strlen($preamble)-1);
+ }
+}
+?>

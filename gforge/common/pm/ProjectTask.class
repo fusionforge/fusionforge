@@ -18,6 +18,7 @@
 
 
 require_once('common/include/Error.class');
+require_once('common/pm/Validator.class');
 
 class ProjectTask extends Error {
 
@@ -94,10 +95,18 @@ class ProjectTask extends Error {
 	 */
 	function create($summary,$details,$priority,$hours,$start_date,$end_date,
 			$category_id,$percent_complete,&$assigned_arr,&$depend_arr) {
-		if (!$summary || !$details || !$priority || !$hours || !$start_date || !$end_date || !$category_id) {
-			$this->setError('Must include a summary, details, priority, hours, start date and end date.');
+		$v = new Validator();
+		$v->check($summary, "summary");
+		$v->check($details, "details");
+		$v->check($priority, "priority");
+		$v->check($hours, "hours");
+		$v->check($start_date, "start_date");
+		$v->check($end_date, "end_date");
+		$v->check($category_id, "category_id");
+		if (!$v->isClean()) {
+			$this->setError($v->formErrorMsg("Must include "));
 			return false;
-		}
+ 		}
 
 		$perm =& $this->ProjectGroup->Group->getPermission( session_get_user() );
 
