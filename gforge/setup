@@ -209,20 +209,20 @@ setupinout(){
 	echo "Creating $LOCALINC"
 	for i in $ETCDIR/local.d/0* $ETCDIR/local.d/10database.$database $ETCDIR/local.d/1[1-9]* $ETCDIR/local.d/[2-9]*
 	do
-		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
+		$BINDIR/fill-in-the-blanks.pl $i $CONFFILEOUTDIR/`basename $i` $CONFFILEOUT
 	done
-	ls $ETCDIR/0* $ETCDIR/10database.$database $ETCDIR/1[1-9]* $ETCDIR/[2-9]* | grep -v dpkg | sort | xargs cat > $LOCALINC
-	rm $ETCDIR/0* $ETCDIR/10database.$database $ETCDIR/1[1-9]* $ETCDIR/[2-9]*
+	ls $CONFFILEOUTDIR/0* $CONFFILEOUTDIR/10database.$database $CONFFILEOUTDIR/1[1-9]* $CONFFILEOUTDIR/[2-9]* | grep -v dpkg | sort | xargs cat > $LOCALINC
+	rm $CONFFILEOUTDIR/0* $CONFFILEOUTDIR/10database.$database $CONFFILEOUTDIR/1[1-9]* $CONFFILEOUTDIR/[2-9]*
 
 	echo "Creating other includes"
 	#for i in $ETCDIR/templates/[a-z]*
 	find $ETCDIR/templates -name '[a-z]*' -maxdepth 1 -type f | while read i 
 	do
-		$BINDIR/fill-in-the-blanks.pl $i $ETCDIR/`basename $i` $CONFFILEOUT
+		$BINDIR/fill-in-the-blanks.pl $i $CONFFILEOUTDIR/`basename $i` $CONFFILEOUT
 	done
 	chmod 600 $HTTPDSECRETS $CONFFILEIN $CONFFILEOUT
-	chmod 640 $ETCDIR/local.pl $ETCDIR/database.inc
-	chown gforge:gforge $ETCDIR/local.pl $ETCDIR/database.inc
+	chmod 640 $CONFFILEOUTDIR/local.pl $CONFFILEOUTDIR/database.inc
+	chown gforge:gforge $CONFFILEOUTDIR/local.pl $CONFFILEOUTDIR/database.inc
 }
 	
 doapache() {	
@@ -262,13 +262,14 @@ HOMEPATH=/home
 GROUPPATH=/home/groups
 SHAREDIR=`pwd`
 LIBDIR=`pwd`
+CONFFILEOUTDIR=$ETCDIR
 CONFFILEIN=$ETCDIR/gforge.conf
 CONFFILEOUT=$ETCDIR/gforge.conf
 LOCALINC=$ETCDIR/local.inc
 HTTPDCONF=$ETCDIR/httpd.conf
 HTTPDSECRETS=$ETCDIR/httpd.secrets
 SYSTEM=UNIX
-export ETCDIR BINDIR GFGDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS DOAPACHE SYSTEM
+export ETCDIR BINDIR GFGDIR CONFFILEOUTDIR CONFFILEIN CONFFILEOUT LOCALINC HTTPDCONF HTTPDSECRETS DOAPACHE SYSTEM
 interact=false
 noapache=false
 database=env
@@ -311,6 +312,7 @@ do
 			;;
 		-confdir )
 			shift
+			CONFFILEOUTDIR=$1
 			CONFFILEIN=$1/gforge.conf
 			CONFFILEOUT=$1/gforge.conf
 			LOCALINC=$1/local.inc
@@ -329,6 +331,7 @@ do
 			CHROOT=/var/lib/gforge/chroot
 			SHAREDIR=/usr/share/gforge
 			LIBDIR=/usr/lib/gforge
+			CONFFILEOUTDIR=/etc/gforge
 			CONFFILEIN=/etc/gforge/gforge.conf
 			CONFFILEOUT=/etc/gforge/gforge.conf
 			LOCALINC=/etc/gforge/local.inc
