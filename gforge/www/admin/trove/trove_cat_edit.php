@@ -55,7 +55,7 @@ if ($GLOBALS["submit"]) {
 		trove_genfullpaths($form_trove_cat_id,trove_getfullname($form_trove_cat_id),$form_trove_cat_id);
 		trove_updaterootparent($form_trove_cat_id,$form_trove_cat_id);
 	}
-	
+	db_query("update trove_group_link set trove_cat_root=(select root_parent from trove_cat where trove_cat_id=trove_group_link.trove_cat_id)");	
 
 	session_redirect("/admin/trove/trove_cat_list.php");
 } 
