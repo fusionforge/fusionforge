@@ -12,7 +12,7 @@ sourceforge (2.6-0+12+) unstable; urgency=low
   * [Roland] [From 2.5] Changed the way we empty the LDAP directory, so as
     not to kill entries that are not ours.
   * [Roland] [From 2.5] Fixed last inserted languages.
-  * [Soon-Son] added group write permission(0664) when creating the
+  * [Soon-Son] added group write permission (0664) when creating the
     val-tags file in the CVSROOT directory of each project. Old
     configuration (0644) caused an error when the user tries to tag it as
     follows:
@@ -39,13 +39,19 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     portability on Cygwin platforms.  Thanks, Chris.
   * [Roland] utils/new_parse.pl: Applied patch from Manik Surtani
     <manik.surtani@conchango.com> fixing a few paths.
-  * [Christian] Update language_code in supported_languages table
-    it's used to have a default language corresponding to browser language settings
-  * [Christian] more i18n on trove map (work in progress)
-  * [Christian] more i18n in group, French translation added too
-  * [Christian] added choice for default language and theme in debconf 
+  * [Christian] Update language_code in supported_languages table.  It's
+    used to have a default language corresponding to browser language
+    settings.
+  * [Christian] More i18n on Trove map (work in progress).
+  * [Christian] More i18n in group, French translation added too.
+  * [Christian] Added choice for default language and theme in debconf.
+  * [Roland] Made some scripts silent (including some cron jobs).  They
+    should have been silent earlier, but shell redirection is trickier
+    than I thought.
+  * [Roland] README.Themes: Added a section on theme naming to avoid name
+    conflicts.
 
- -- Christian Bayle <bayle@debian.org>  Wed, 18 Sep 2002 14:47:00 +0200
+ -- Roland Mas <lolando@debian.org>  Tue,  1 Oct 2002 20:58:52 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 
