@@ -34,9 +34,8 @@ $HTML->header(array('title'=>$title));
 print '<P><B><FONT size="+1">'.$title.'</FONT></B>
 <BR><I>(Updated Daily)</I>
 
-<P><A href="/top/">[View Other Top Categories]</A>
+<P><A href="/top/">[View Other Top Categories]</A>';
 
-<?php
 $arr=array('Rank','Project Name','Percentile');
 
 echo $HTML->listTableTop($arr);
