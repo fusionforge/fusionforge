@@ -18,6 +18,7 @@ gforge (4.0.2-5o) unstable; urgency=low
   * [Christian] Added exist_db function in postgresql the ancient method was 
     broken with non US localized distro
   * [Christian] Added myself as uploader to remove a lintian warning I had
+  * [Christian] Added conflict to gforge-cvs
 
  -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
 
