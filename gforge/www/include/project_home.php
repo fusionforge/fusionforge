@@ -31,7 +31,7 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home','p
 
 <table width="100%" border="0">
 	<tr>
-		<td width="99%" valign="top">
+		<td width="80%" valign="top">
 		<?php
 
 // ########################################## top area, not in box
@@ -94,7 +94,7 @@ plugin_hook ("project_after_description",false) ;
 
 ?>
 		</td>
-		<td nowrap="nowrap" valign="top">
+		<td nowrap="nowrap" valign="top" width="20%">
 
 <?php
 

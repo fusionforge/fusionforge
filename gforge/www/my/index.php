@@ -276,10 +276,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 			} else {
 				echo $Language->getText('my','pending_projects_2',$rows);
 			}
-
-			/*    echo (($rows!=1)?"are ": "is "). "$rows project";
-			echo (($rows!=1)?"s":"");
-			*/
+			
 			echo " <a href=\"/admin/approve-pending.php\">";
 			echo $Language->getText('my','pending_projects_3');
 			echo "</a>.";
