@@ -78,7 +78,7 @@ function addsyncmail($unix_group_name) {
 	$loginfo = $maincvsroot.$unix_group_name.'/CVSROOT/loginfo';
 
 	if (checkLoginfo($loginfo)) {
-		$pathsyncmail = $unix_group_name." ".dirname($_SERVER['_'])."/syncmail %%s ".$unix_group_name."-commits@".$sys_lists_host;
+		$pathsyncmail = "ALL ".dirname($_SERVER['_'])."/syncmail -u %1{sVv} ".$unix_group_name."-commits@".$sys_lists_host;
 		writeFile($loginfo, $pathsyncmail);
 	}
 }
