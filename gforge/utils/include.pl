@@ -12,7 +12,7 @@ $homedir_prefix =	"/var/lib/gforge/chroot/home/users/";		# What prefix to add to
 $grpdir_prefix  =	"/var/lib/gforge/chroot/home/groups/";	# What prefix to add to the user's homedir
 $file_dir	=	"/var/lib/gforge/";	# Where should we stick files we're working with
 $cvs_root       =       "/var/lib/gforge/chroot/cvsroot/";    # Where should we stick files we're working with
-$dummy_uid      =       "9999";                  # UserID of the dummy user that will own group's files
+$dummy_uid      =       getpwnam('scm-gforge');                  # UserID of the dummy user that will own group's files
 $date           =       int(time()/3600/24);    # Get the number of days since 1/1/1970 for /etc/shadow
 $ldap_prefix	=	"/usr/local/ldap/bin/";	# Where OpenLDAP tools installed
 
