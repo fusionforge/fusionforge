@@ -1018,10 +1018,10 @@ if (isset($params['group']) && $params['group']) {
 		
 		for ($i=0; $i<$count; $i++) {
 			$return .= '
-				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a> | ';
+				<a href="'.$links_arr[$i].'">'.$title_arr[$i].'</a> | ';
 		}
 		$return .= '
-				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a>';
+				<a href="'.$links_arr[$i].'">'.$title_arr[$i].'</a>';
 		return $return;
 	}
 
