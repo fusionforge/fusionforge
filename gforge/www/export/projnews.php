@@ -4,7 +4,7 @@
   * SourceForge Exports: Export project news as HTML
   *
   * Parameters:
-  *	group_id	-	gorup_id
+  *	group_id	-	group_id
   *	limit		-	number of items to export
   *	show_summaries	-	0 to show only headlines, 1 to also show
   *				summaries

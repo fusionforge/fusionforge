@@ -45,7 +45,6 @@ $res=db_query("SELECT
 
 // ## one time output
 print " <channel>\n";
-print "  <copyright>Copyright 1999-2000 VA Linux Systems, Inc.</copyright>\n";
 print "  <pubDate>".gmdate('D, d M Y g:i:s',time())." GMT</pubDate>\n";
 print "  <description>".$GLOBALS['sys_name']." New Releases</description>\n";
 print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
