@@ -1,6 +1,33 @@
 #! /bin/sh
 apacheconf=/etc/apache/httpd.conf
 
+usage() {
+	echo "$0: [-interact] [-help] [-debug]"
+}
+
+while [ $# -ne 0 ]
+do
+	case "$1" in
+		-interact )
+			interact=true
+			shift
+			;;
+		-help )
+			usage
+			exit 0
+			;;
+		-debug )
+			set -x
+			;;
+		*)
+			echo "Bad Parameter"
+			usage
+			;;
+	esac
+	echo "$#"
+	shift
+done
+
 getval(){
 	echo -n $1 \[$2\] ?
 	read $1
@@ -57,6 +84,20 @@ DEFAULTsys_ldap_auth_host=localhost
 DEFAULTsys_ldap_auth_port=389
 DEFAULTsys_ldap_auth_version=3
 DEFAULTsys_ldap_auth_dn="dc=`echo $DEFAULTdomain_name | sed 's/\./,dc=/g'`"
+DEFAULTsys_use_cvs=true
+DEFAULTsys_use_tracker=true
+DEFAULTsys_use_forum=true
+DEFAULTsys_use_pm=true
+DEFAULTsys_use_docman=true
+DEFAULTsys_use_news=true
+DEFAULTsys_use_mail=true
+DEFAULTsys_use_survey=true
+DEFAULTsys_use_file=true
+DEFAULTsys_use_ftp=true
+DEFAULTsys_use_trove=true
+DEFAULTsys_use_snippet=true
+DEFAULTsys_project_reg_restricted=true
+
 # TODO
 #usr_lib_gforge=`pwd`
 #vhost_name
@@ -91,11 +132,16 @@ else
 	readdefault etc/gforge.conf.new
 fi
 
-echo "Enter values or type enter for defaults:"
-# Here is the fun II
-# This ask for change of default
-tmpfile=$1.$$getval
-cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/getval \1 "\${DEFAULT\1}"/' > $tmpfile
+if [ "$interact" == true ]
+then
+	echo "Enter values or type enter for defaults:"
+	# Here is the fun II
+	# This ask for change of default
+	tmpfile=$1.$$getval
+	cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/getval \1 "\${DEFAULT\1}"/' > $tmpfile
+else
+	cat $0 | grep ^DEFAULT | sed 's/DEFAULT\(.[^=]*\)=.*/\1="\${DEFAULT\1}"/' > $tmpfile
+fi
 . $tmpfile
 rm -f $tmpfile
 

@@ -2,22 +2,22 @@
 //      FEATURES
 //      You can turn features on/off sitewide
 //
-$sys_use_cvs=true;
-$sys_use_tracker=true;
-$sys_use_forum=true;
-$sys_use_pm=true;
-$sys_use_docman=true;
-$sys_use_news=true;
-$sys_use_mail=true;
-$sys_use_survey=true;
-$sys_use_file=true;
-$sys_use_ftp=true;
-$sys_use_trove=true;
-$sys_use_snippet=true;
+$sys_use_cvs={sys_use_cvs};
+$sys_use_tracker={sys_use_tracker};
+$sys_use_forum={sys_use_forum};
+$sys_use_pm={sys_use_pm};
+$sys_use_docman={sys_use_docman};
+$sys_use_news={sys_use_news};
+$sys_use_mail={sys_use_mail};
+$sys_use_survey={sys_use_survey};
+$sys_use_file={sys_use_file};
+$sys_use_ftp={sys_use_ftp};
+$sys_use_trove={sys_use_trove};
+$sys_use_snippet={sys_use_snippet};
 
 //
 //      Restricted project registration
 //      If set to true, only a site admin can register projects
 //
-$sys_project_reg_restricted=true;
+$sys_project_reg_restricted={sys_project_reg_restricted};
 
