@@ -12,4 +12,3 @@ init_debconf_from_mainconffile
 #DSFHELPER:get-pw-from-debconf#
 #DSFHELPER:users-variables#
 #DSFHELPER:lists-variables#
-#DSFHELPER:ldap-variables#
