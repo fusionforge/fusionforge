@@ -31,12 +31,12 @@ $unit = 'days';
 //
 $j = 0;
 if ( $report == 'last_7' ) {
-  $sql = "
-    SELECT month,day,downloads, subdomain_views as views,site_views as views2
-    FROM stats_project_vw
-    WHERE group_id='$group_id' ORDER BY month desc, day desc limit 7
-  ";
-  $res=db_query($sql);
+	$sql = "
+		SELECT month,day,downloads, subdomain_views as views,site_views as views2
+		FROM stats_project_vw
+		WHERE group_id='$group_id' ORDER BY month desc, day desc limit 7
+	";
+	$res=db_query($sql);
 	$rows=db_numrows($res);
 	$db_error=db_error();
 	while (	$row = db_fetch_array($res) ) {
