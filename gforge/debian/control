@@ -20,7 +20,7 @@ Description: Collaborative development tool - meta-package
 
 Package: gforge-common
 Architecture: all
-Depends: debconf (>= 1.2.9)
+Depends: debconf (>= 1.0.32)
 Replaces: sourceforge-common (>> 2.6-0+11)
 Conflicts: sourceforge, sourceforge-common
 Description: Collaborative development tool - shared files
@@ -35,7 +35,7 @@ Description: Collaborative development tool - shared files
 
 Package: gforge-web-apache
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-cgi, php4-pgsql, php4-gd, php4-ldap, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.2.9), slapd (>= 2.0.23-3), cronolog
+Depends: gforge-common, gforge-db-postgresql | gforge-db, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-cgi, php4-pgsql, php4-gd, php4-ldap, perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), slapd (>= 2.0.23-3), cronolog
 Replaces: sourceforge-web-apache (>> 2.6-0+11)
 Provides: gforge-web
 Conflicts: gforge-web
@@ -51,7 +51,7 @@ Description: Collaborative development tool - web part (using Apache)
 
 Package: gforge-db-postgresql
 Architecture: all
-Depends: gforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 1.2.9), php4-cgi, php4-pgsql
+Depends: gforge-common, postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 1.0.32), php4-cgi, php4-pgsql
 Replaces: sourceforge-db-postgresql (>> 2.6-0+11)
 Provides: gforge-db
 Conflicts: gforge-db
@@ -67,7 +67,7 @@ Description: Collaborative development tool - database (using PostgreSQL)
 
 Package: gforge-mta-exim
 Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.2.9), exim | exim-tls
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32), exim | exim-tls
 Replaces: sourceforge-mta-exim (>> 2.6-0+11)
 Provides: gforge-mta
 Conflicts: gforge-mta
@@ -83,7 +83,7 @@ Description: Collaborative development tool - mail tools (using Exim)
 
 Package: gforge-mta-postfix
 Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.2.9), postfix, postfix-ldap
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32), postfix, postfix-ldap
 Replaces: sourceforge-mta-postfix (>> 2.6-0+11)
 Provides: gforge-mta
 Conflicts: sourceforge-mta
@@ -99,7 +99,7 @@ Description: Collaborative development tool - mail tools (using Postfix)
 
 Package: gforge-shell-ldap
 Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.2.9), ssh, libnss-ldap (>=184-1), libpam-ldap
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32), ssh, libnss-ldap (>=184-1), libpam-ldap
 Replaces: sourceforge-shell-ldap (>> 2.6-0+11)
 Provides: gforge-shell
 Conflicts: sourceforge-shell
@@ -115,7 +115,7 @@ Description: Collaborative development tool - shell accounts (using LDAP)
 
 Package: gforge-cvs
 Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, cvs, rcs, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 1.2.9), ssh, libnss-ldap (>=184-1), libpam-ldap
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, cvs, rcs, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 1.0.32), ssh, libnss-ldap (>=184-1), libpam-ldap
 Replaces: sourceforge-cvs (>> 2.6-0+11)
 Conflicts: sourceforge-cvs
 Description: Collaborative development tool - CVS management
@@ -129,7 +129,7 @@ Description: Collaborative development tool - CVS management
 
 Package: gforge-ftp-proftpd
 Architecture: all
-Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.2.9), libnss-ldap (>=184-1), libpam-ldap
+Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, proftpd, perl, debianutils (>= 1.7), debconf (>= 1.0.32), libnss-ldap (>=184-1), libpam-ldap
 Replaces: sourceforge-ftp-proftpd (>> 2.6-0+11)
 Provides: gforge-ftp
 Conflicts: sourceforge-ftp
@@ -144,7 +144,7 @@ Description: Collaborative development tool - FTP management (using ProFTPd)
 
 Package: gforge-ldap-openldap
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.2.9), slapd (>= 2.0.23-3), libnss-ldap (>=184-1), ldap-utils
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), slapd (>= 2.0.23-3), libnss-ldap (>=184-1), ldap-utils
 Replaces: sourceforge-ldap-openldap (>> 2.6-0+11)
 Provides: gforge-ldap,sourceforge-ldap
 Conflicts: gforge-ldap,sourceforge-ldap
@@ -159,7 +159,7 @@ Description: Collaborative development tool - LDAP directory (using OpenLDAP)
 
 Package: gforge-dns-bind9
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.2.9), bind9 
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), bind9 
 Replaces: sourceforge-dns-bind9 (>> 2.6-0+11)
 Provides: gforge-dns
 Conflicts: sourceforge-dns
@@ -174,7 +174,7 @@ Description: Collaborative development tool - DNS management (using Bind9)
 
 Package: gforge-lists-mailman
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-ldap-openldap | gforge-ldap, gforge-mta-exim | gforge-mta, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.2.9), mailman
+Depends: gforge-common, gforge-db-postgresql | gforge-db, gforge-ldap-openldap | gforge-ldap, gforge-mta-exim | gforge-mta, apache (>= 1.3.9) | apache-ssl (>= 1.3.9), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), mailman
 Replaces: sourceforge-lists-mailman (>> 2.6-0+11)
 Provides: gforge-lists
 Conflicts: sourceforge-lists
