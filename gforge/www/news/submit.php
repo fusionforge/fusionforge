@@ -47,7 +47,7 @@ if (session_loggedin()) {
 					exit_error('Error',$f->getErrorMessage());
 				}
 	   			$new_id=$f->getID();
-	   			$sql="INSERT INTO news_bytes (group_id,submitted_by,is_approved,date,forum_id,summary,details) ".
+	   			$sql="INSERT INTO news_bytes (group_id,submitted_by,is_approved,post_date,forum_id,summary,details) ".
 	   				" VALUES ('$group_id','".user_getid()."','0','".time()."','$new_id','".htmlspecialchars($summary)."','".htmlspecialchars($details)."')";
 	   			$result=db_query($sql);
 	   			if (!$result) {

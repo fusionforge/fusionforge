@@ -58,12 +58,12 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 	$sql="SELECT groups.group_name,groups.unix_group_name,
 		groups.type,users.user_name,users.realname,
-		news_bytes.forum_id,news_bytes.summary,news_bytes.date,news_bytes.details 
+		news_bytes.forum_id,news_bytes.summary,news_bytes.post_date,news_bytes.details 
 		FROM users,news_bytes,groups 
 		WHERE $wclause 
 		AND users.user_id=news_bytes.submitted_by 
 		AND news_bytes.group_id=groups.group_id 
-		ORDER BY date DESC";
+		ORDER BY post_date DESC";
 
 	$result=db_query($sql,$limit+$tail_headlines);
 	$rows=db_numrows($result);
@@ -94,7 +94,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				} else {
 					$return .= '<li><strong>'. db_result($result,$i,'summary') . '</strong>';
 				}
-				$return .= ' &nbsp; <em>'. date($sys_datefmt,db_result($result,$i,'date')).'</em><br /></li>';
+				$return .= ' &nbsp; <em>'. date($sys_datefmt,db_result($result,$i,'post_date')).'</em><br /></li>';
 			} else {
 				if ($show_forum) {
 					$return .= '
@@ -108,7 +108,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					<br />&nbsp;';
 				}
 				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'realname') .' - '.
-					date($sys_datefmt,db_result($result,$i,'date')). '</em>' .
+					date($sys_datefmt,db_result($result,$i,'post_date')). '</em>' .
 					$proj_name . $summ_txt;
 
 				$sql="SELECT total FROM forum_group_list_vw WHERE group_forum_id='" . db_result($result,$i,'forum_id') . "'";
@@ -178,14 +178,14 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 
 	$sql="SELECT groups.group_name,groups.unix_group_name,
 		users.user_name,users.realname,news_bytes.forum_id,
-		news_bytes.summary,news_bytes.date,news_bytes.details 
+		news_bytes.summary,news_bytes.post_date,news_bytes.details 
 		FROM users,news_bytes,groups,foundry_news 
 		WHERE foundry_news.foundry_id='$group_id' 
 		AND users.user_id=news_bytes.submitted_by 
 		AND foundry_news.news_id=news_bytes.id 
 		AND news_bytes.group_id=groups.group_id 
 		AND foundry_news.is_approved=1 
-		ORDER BY news_bytes.date DESC";
+		ORDER BY news_bytes.post_date DESC";
 
 	$result=db_query($sql,$limit);
 	$rows=db_numrows($result);
@@ -213,7 +213,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 			$return .= '
 				<a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>
 				<br /><em>'. db_result($result,$i,'realname') .' - '.
-					date($sys_datefmt,db_result($result,$i,'date')) . $proj_name . '</em>
+					date($sys_datefmt,db_result($result,$i,'post_date')) . $proj_name . '</em>
 				'. $summ_txt .'<hr width="100%" size="1" />';
 		}
 	}

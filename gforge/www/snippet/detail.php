@@ -39,7 +39,7 @@ if ($type=='snippet') {
 	/*
 		Get all the versions of this snippet
 	*/
-	$sql="SELECT users.user_name,snippet_version.snippet_version_id,snippet_version.version,snippet_version.date,snippet_version.changes ".
+	$sql="SELECT users.user_name,snippet_version.snippet_version_id,snippet_version.version,snippet_version.post_date,snippet_version.changes ".
 		"FROM snippet_version,users ".
 		"WHERE users.user_id=snippet_version.submitted_by AND snippet_id='$id' ".
 		"ORDER BY snippet_version.snippet_version_id DESC";
@@ -72,7 +72,7 @@ if ($type=='snippet') {
 				'</td><td><a href="/snippet/download.php?type=snippet&amp;id='.
 				db_result($result,$i,'snippet_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'. 
-				date($sys_datefmt,db_result($result,$i,'date')).'</td><td>'.
+				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				db_result($result,$i,'user_name').'</td><td align="center"><a href="/snippet/delete.php?type=snippet&amp;snippet_version_id='.
 				db_result($result,$i,'snippet_version_id').
 				'">' . html_image("ic/trash.png","16","16",array("border"=>"0")) . '</a></td></tr>';
@@ -130,7 +130,7 @@ if ($type=='snippet') {
 		Get all the versions of this package
 	*/
 	$sql="SELECT users.user_name,snippet_package_version.snippet_package_version_id,".
-		"snippet_package_version.version,snippet_package_version.date ".
+		"snippet_package_version.version,snippet_package_version.post_date ".
 		"FROM snippet_package_version,users ".
 		"WHERE users.user_id=snippet_package_version.submitted_by AND snippet_package_id='$id' ".
 		"ORDER BY snippet_package_version.snippet_package_version_id DESC";
@@ -162,7 +162,7 @@ if ($type=='snippet') {
 			<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'><td><a href="/snippet/detail.php?type=packagever&amp;id='.
 				db_result($result,$i,'snippet_package_version_id').'"><strong>'.
 				db_result($result,$i,'version').'</strong></a></td><td>'.
-				date($sys_datefmt,db_result($result,$i,'date')).'</td><td>'.
+				date($sys_datefmt,db_result($result,$i,'post_date')).'</td><td>'.
 				db_result($result,$i,'user_name').
 				'</td><td align="center"><a href="/snippet/add_snippet_to_package.php?snippet_package_version_id='.
 				db_result($result,$i,'snippet_package_version_id').

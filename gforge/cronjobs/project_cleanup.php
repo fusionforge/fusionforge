@@ -42,7 +42,7 @@ echo db_error();
 
 #30 days ago for sessions
 $then=(time()-(30*60*60*24));
-db_query("DELETE FROM session WHERE time < '$then'");
+db_query("DELETE FROM user_session WHERE time < '$then'");
 echo db_error();
 
 #one month ago for preferences

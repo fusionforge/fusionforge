@@ -1361,7 +1361,7 @@ class Group extends Error {
 	 */
 	function addHistory($field_name, $old_value) {
 		$sql="
-			INSERT INTO group_history(group_id,field_name,old_value,mod_by,date) 
+			INSERT INTO group_history(group_id,field_name,old_value,mod_by,adddate) 
 			VALUES ('". $this->getID() ."','$field_name','$old_value','". user_getid() ."','".time()."')
 		";
 		return db_query($sql);

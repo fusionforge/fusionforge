@@ -24,9 +24,9 @@ echo $Language->getText('news', 'choose');
 	Put the result set (list of forums for this group) into a column with folders
 */
 if ($group_id && ($group_id != $sys_news_group)) {
-	$sql="SELECT * FROM news_bytes WHERE group_id='$group_id' AND is_approved <> '4' ORDER BY date DESC";
+	$sql="SELECT * FROM news_bytes WHERE group_id='$group_id' AND is_approved <> '4' ORDER BY post_date DESC";
 } else {
-	$sql="SELECT * FROM news_bytes WHERE is_approved='1' ORDER BY date DESC";
+	$sql="SELECT * FROM news_bytes WHERE is_approved='1' ORDER BY post_date DESC";
 }
 
 if (!$limit || $limit>50) $limit=50;

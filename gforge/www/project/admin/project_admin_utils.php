@@ -210,10 +210,10 @@ function frs_show_package_popup ($group_id, $name='package_id', $checked_val="xz
 */
 
 function group_get_history ($group_id=false) {
-	$sql="SELECT group_history.field_name,group_history.old_value,group_history.date,users.user_name ".
+	$sql="SELECT group_history.field_name,group_history.old_value,group_history.adddate,users.user_name ".
 		 "FROM group_history,users ".
 		 "WHERE group_history.mod_by=users.user_id ".
-		 "AND group_id='$group_id' ORDER BY group_history.date DESC";
+		 "AND group_id='$group_id' ORDER BY group_history.adddate DESC";
 	return db_query($sql);
 }		   
 	
@@ -261,7 +261,7 @@ function show_grouphistory ($group_id) {
 				echo db_result($result, $i, 'old_value');
 			}			
 			echo '</td>'.
-				'<td>'.date($sys_datefmt,db_result($result, $i, 'date')).'</td>'.
+				'<td>'.date($sys_datefmt,db_result($result, $i, 'adddate')).'</td>'.
 				'<td>'.db_result($result, $i, 'user_name').'</td></tr>';
 		}		   
 

@@ -24,7 +24,7 @@ if ($group_id && (user_ismember($group_id, 'A'))) {
 		if (!$title || !$description || $category_id==100) {
 			exit_error($Language->getText('people_editjob','error_missing'),$Language->getText('people_editjob','fill_in'));
 		}
-		$sql="INSERT INTO people_job (group_id,created_by,title,description,date,status_id,category_id) ".
+		$sql="INSERT INTO people_job (group_id,created_by,title,description,post_date,status_id,category_id) ".
 			"VALUES ('$group_id','". user_getid() ."','".htmlspecialchars($title)."','".htmlspecialchars($description)."','".time()."','1','$category_id')";
 		$result=db_query($sql);
 		if (!$result || db_affected_rows($result) < 1) {

@@ -253,7 +253,7 @@ if ($forum_id) {
 		*/
 
 		$sql="SELECT f.most_recent_date,users.user_name,users.realname,users.user_id,f.msg_id,f.subject,f.thread_id,".
-			"(count(f2.thread_id)-1) AS followups,max(f2.date) AS recent ".
+			"(count(f2.thread_id)-1) AS followups,max(f2.post_date) AS recent ".
 			"FROM forum f, forum f2, users ".
 			"WHERE f.group_forum_id='$forum_id' ".
 			"AND f.is_followup_to=0 ".

@@ -359,13 +359,13 @@ function people_show_category_table() {
 	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 /*
-	$sql="SELECT pjc.category_id, pjc.name, count(*) as total ". //, max(date) AS latest ".
+	$sql="SELECT pjc.category_id, pjc.name, count(*) as total ". 
 		"FROM people_job_category pjc,people_job pj ".
 		"WHERE pjc.category_id=pj.category_id ".
 		"AND pj.status_id=1 ".
 		"GROUP BY pjc.category_id, pjc.name";
 */
-	$sql="SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total ". //, max(date) AS latest ".
+	$sql="SELECT pjc.category_id, pjc.name, COUNT(pj.category_id) AS total ". 
 		"FROM people_job_category pjc LEFT JOIN people_job pj ".
                 "ON pjc.category_id=pj.category_id ".
                 "WHERE pjc.private_flag=0 ".
@@ -390,12 +390,12 @@ function people_show_category_table() {
 
 function people_show_project_jobs($group_id) {
 	//show open jobs for this project
-	$sql="SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.date,people_job_category.name AS category_name ".
+	$sql="SELECT people_job.group_id,people_job.job_id,groups.group_name,groups.unix_group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name ".
 		"FROM people_job,people_job_category,groups ".
 		"WHERE people_job.group_id='$group_id' ".
 		"AND people_job.group_id=groups.group_id ".
 		"AND people_job.category_id=people_job_category.category_id ".
-		"AND people_job.status_id=1 ORDER BY date DESC";
+		"AND people_job.status_id=1 ORDER BY post_date DESC";
 	$result=db_query($sql);
 
 	return people_show_job_list($result);
@@ -403,12 +403,12 @@ function people_show_project_jobs($group_id) {
 
 function people_show_category_jobs($category_id) {
 	//show open jobs for this category
-	$sql="SELECT people_job.group_id,people_job.job_id,groups.unix_group_name,groups.group_name,people_job.title,people_job.date,people_job_category.name AS category_name ".
+	$sql="SELECT people_job.group_id,people_job.job_id,groups.unix_group_name,groups.group_name,people_job.title,people_job.post_date,people_job_category.name AS category_name ".
 		"FROM people_job,people_job_category,groups ".
 		"WHERE people_job.category_id='$category_id' ".
 		"AND people_job.group_id=groups.group_id ".
 		"AND people_job.category_id=people_job_category.category_id ".
-		"AND people_job.status_id=1 ORDER BY date DESC";
+		"AND people_job.status_id=1 ORDER BY post_date DESC";
 	$result=db_query($sql);
 
 	return people_show_job_list($result);
@@ -440,7 +440,7 @@ function people_show_job_list($result) {
 					db_result($result,$i,'job_id') .'">'.
 					db_result($result,$i,'title') .'</a></td><td>'.
 					db_result($result,$i,'category_name') .'</td><td>'.
-					date($sys_datefmt,db_result($result,$i,'date')) .
+					date($sys_datefmt,db_result($result,$i,'post_date')) .
 					'</td><td><a href="/projects/'.strtolower(db_result($result,$i,'unix_group_name')).'/">'.
 					db_result($result,$i,'group_name') .'</a></td></tr>';
 		}

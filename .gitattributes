@@ -59,9 +59,6 @@ gforge/www/images/msg.png -text
 gforge/www/images/sf-for-debian.png -text
 gforge/www/images/t.png -text
 gforge/www/images/t2.png -text
-gforge/www/people/people-er-diagram.sda svneol=native#unset
-gforge/www/snippet/snippet-er-diagram.sda svneol=native#unset
-gforge/www/survey/survey-er-diagram.sda svneol=native#unset
 gforge/www/themes/gforge/images/clear.png -text
 gforge/www/themes/gforge/images/ic/caret.png -text
 gforge/www/themes/gforge/images/ic/cfolder15.png -text

@@ -36,7 +36,7 @@ if (session_loggedin()) {
 				/*
 					create the snippet version
 				*/
-				$sql="INSERT INTO snippet_version (snippet_id,changes,version,submitted_by,date,code) ".
+				$sql="INSERT INTO snippet_version (snippet_id,changes,version,submitted_by,post_date,code) ".
 					"VALUES ('$snippet_id','".htmlspecialchars($changes)."','".
 						htmlspecialchars($version)."','".user_getid()."','".
 						time()."','".htmlspecialchars($code)."')";

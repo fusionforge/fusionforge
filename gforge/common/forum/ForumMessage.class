@@ -182,7 +182,7 @@ class ForumMessage extends Error {
 		}
 
 		$sql="INSERT INTO forum (group_forum_id,posted_by,subject,
-			body,date,is_followup_to,thread_id,most_recent_date) 
+			body,post_date,is_followup_to,thread_id,most_recent_date) 
 			VALUES ('". $this->Forum->getID() ."', '$user_id', '". htmlspecialchars($subject) ."', 
 			'". htmlspecialchars($body) ."', '". time() ."','$is_followup_to','$thread_id','". time() ."')";
 
@@ -303,7 +303,7 @@ class ForumMessage extends Error {
 	 *	@return	int	The post date.
 	 */
 	function getPostDate() {
-		return $this->data_array['date'];
+		return $this->data_array['post_date'];
 	}
 
 	/**

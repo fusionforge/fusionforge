@@ -351,7 +351,7 @@ function session_set_new($user_id) {
 	$session_ser=$cookie;
 
 	db_query("
-		INSERT INTO session (session_hash, ip_addr, time, user_id) 
+		INSERT INTO user_session (session_hash, ip_addr, time, user_id) 
 		VALUES (
 			'".session_get_session_cookie_hash($cookie)."', 
 			'".$GLOBALS['REMOTE_ADDR']."',

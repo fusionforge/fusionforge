@@ -30,7 +30,7 @@ function show_news_approve_form($sql_pending, $sql_rejected, $sql_approved) {
        			     .'name="news_id[]" value="'
        			     .db_result($result, $i, 'id').'" />';
        		}
-       		echo date('Y-m-d', db_result($result,$i,'date')).'</td>
+       		echo date('Y-m-d', db_result($result,$i,'post_date')).'</td>
        		<td>';
        		echo '
        		<a href="'.$PHP_SELF.'?approve=1&amp;id='.db_result($result,$i,'id').'">'.db_result($result,$i,'summary').'</a>

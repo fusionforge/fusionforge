@@ -125,7 +125,7 @@ if (session_loggedin()) {
 
 $combolistresult=db_query
 ("SELECT myname,snippet_version.snippet_version_id
-FROM ( SELECT MAX(date) AS
+FROM ( SELECT MAX(post_date) AS
 mydate,name AS myname,snippet.snippet_id AS myid
 FROM
 snippet,snippet_version
@@ -134,7 +134,7 @@ snippet.snippet_id=snippet_version.snippet_id
 GROUP BY
 name,snippet.snippet_id ) AS foo,snippet_version
 WHERE
-snippet_version.date=mydate;");
+snippet_version.post_date=mydate;");
 $combolistrows=db_numrows($combolistresult);
 for ($i=0; $i<$combolistrows; $i++)
 {

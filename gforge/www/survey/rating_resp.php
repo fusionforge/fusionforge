@@ -29,7 +29,7 @@ if (!session_loggedin()) {
 		$sql="DELETE FROM survey_rating_response WHERE user_id='".user_getid()."' AND type='$flag' AND id='$vote_on_id'";
 		$toss=db_query($sql);
 
-		$sql="INSERT INTO survey_rating_response (user_id,type,id,response,date) ".
+		$sql="INSERT INTO survey_rating_response (user_id,type,id,response,post_date) ".
 			"VALUES ('".user_getid()."','$flag','$vote_on_id','$response','".time()."')";
 		$result=db_query($sql);
 		if (!$result) {

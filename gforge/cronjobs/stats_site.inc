@@ -38,8 +38,8 @@ function site_stats_day($year,$month,$day) {
 	$sql="INSERT INTO stats_site (month,day,uniq_users,sessions,total_users,new_users,new_projects) 
 	VALUES ('$year$month',
 	'$day',
-	(SELECT COUNT(DISTINCT(user_id)) FROM session WHERE (time < '$day_end' AND time > '$day_begin')),
-	(SELECT COUNT(session_hash) FROM session WHERE (time < '$day_end' AND time > $day_begin)),
+	(SELECT COUNT(DISTINCT(user_id)) FROM user_session WHERE (time < '$day_end' AND time > '$day_begin')),
+	(SELECT COUNT(session_hash) FROM user_session WHERE (time < '$day_end' AND time > $day_begin)),
 	(SELECT COUNT(user_id) FROM users WHERE ( add_date < '$day_end' AND status='A' )),
 	(SELECT COUNT(user_id) FROM users WHERE ( add_date < '$day_end' AND add_date > '$day_begin' )),
 	(SELECT COUNT(group_id) FROM groups WHERE ( register_time < '$day_end' AND register_time > '$day_begin' )))";

@@ -77,7 +77,7 @@ for ($i=0; $i<$count; $i++) {
 
 	$val="_" . $quest_array[$i];
 
-	$sql="INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,date) ".
+	$sql="INSERT INTO survey_responses (user_id,group_id,survey_id,question_id,response,post_date) ".
 		"VALUES ('".user_getid()."','" . addslashes($group_id) . "','" . addslashes($survey_id) . "','" . addslashes($quest_array[$i]) . "','". htmlspecialchars(addslashes($$val)) . "','$now')";
 	$result=db_query($sql);
 	if (!$result) {

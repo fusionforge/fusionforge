@@ -42,7 +42,7 @@ if (session_loggedin()) {
 					create the snippet package version
 				*/
 				$sql="INSERT INTO snippet_package_version ".
-					"(snippet_package_id,changes,version,submitted_by,date) ".
+					"(snippet_package_id,changes,version,submitted_by,post_date) ".
 					"VALUES ('$snippet_package_id','".htmlspecialchars($changes)."','".
 						htmlspecialchars($version)."','".user_getid()."','".time()."')";
 				$result=db_query($sql);

@@ -24,7 +24,7 @@ if ($group_id && $job_id) {
 	//for security, include group_id
 	$sql="SELECT groups.group_name,people_job_category.name AS category_name,".
 		"people_job_status.name AS status_name,people_job.title,".
-		"people_job.description,people_job.date,users.user_name,users.user_id ".
+		"people_job.description,people_job.post_date,users.user_name,users.user_id ".
 		"FROM people_job,groups,people_job_status,people_job_category,users ".
 		"WHERE people_job_category.category_id=people_job.category_id ".
 		"AND people_job_status.status_id=people_job.status_id ".
@@ -61,7 +61,7 @@ if ($group_id && $job_id) {
 
 		<tr><td>
 			<strong>'.$Language->getText('people_viewjob','open_date').':</strong><br />
-			'. date($sys_datefmt,db_result($result,0,'date')) .'
+			'. date($sys_datefmt,db_result($result,0,'post_date')) .'
 		</td><td>
 			<strong>'.$Language->getText('people_viewjob','for_project').':<br />
 			<a href="/project/?group_id='. $group_id .'">'. db_result($result,0,'group_name') .'</a></strong>
