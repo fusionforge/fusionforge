@@ -1655,7 +1655,7 @@ project_stats	view_reports	View Reports
 project_stats_graph	date	Date
 project_stats_graph	page_view_days	Page Views (red) and Downloads (blue) for the past $1 days
 project_stats_graph	page_view_months	Page Views (red) and Downloads (blue) for the past $1 months
-project_stats_graph	statistics	$1 Statistics $1
+project_stats_graph	statistics	$1 Statistics For $2
 project_stats_graph	views	Views (red) / Downloads (blue)
 project_stats_utils	CVS	CVS
 project_stats_utils	all_tracker	All Trkr
