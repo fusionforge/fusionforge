@@ -13,7 +13,7 @@ class CVSPlugin extends SCM {
 // to be revised		$this->hooks[] = "scm_stats";
 
 		$this->hooks[] = "scm_plugin";
-		$this->hooks[] = "group_approved";
+//		$this->hooks[] = "group_approved";
 		$this->hooks[] = "cssstyle";
 
 		require_once('/etc/gforge/plugins/scmcvs/config.php') ;
@@ -42,9 +42,10 @@ class CVSPlugin extends SCM {
 		case "scm_stats":
 			$this->display_stats ($params) ;
 			break;
-		case "group_approved":
+/*		case "group_approved":
 			$this->group_approved ($params) ;
 			break;
+*/
 		case "cssstyle":
 			$this->cssstyle_scm ($params) ;
 			break;
@@ -383,6 +384,7 @@ if ($project->enableAnonSCM()){
 	}
 
 	function display_stats ($params) {
+/*
 		global $Language ;
 		$group_id = $params['group_id'] ;
 		$result = db_query("
@@ -402,7 +404,8 @@ if ($project->enableAnonSCM()){
 			echo '
 		<br /> &nbsp; -
 			<a href="'.$this->account_group_cvsweb_url($group_id).'">'.$Language->getText('plugin_scmcvs', 'browseit').'</a>';
-	        }
+        }
+*/
 	}
 
 	/**
@@ -416,6 +419,7 @@ if ($project->enableAnonSCM()){
 		return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot=cvsroot/'.$project->getUnixName();
 	}
 
+/*
 	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
 	
@@ -427,6 +431,7 @@ if ($project->enableAnonSCM()){
 			$group->setPluginUse("scmcvs", 0) ;
 		}
 	}
+*/
 }
 
 // Local Variables:
