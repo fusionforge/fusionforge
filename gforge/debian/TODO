@@ -11,13 +11,15 @@ here have been transferred onto the Savannah project, at
 
 * [CB] ViewCVS instead of CVSWEB?
 
-* [CB] Find how to use libnss-lwres.  [RM] ???
+* [CB] Find how to use libnss-lwres.  [RM] ??? [CB] It is not doing what I 
+  was thinking. It may be possible to make the dns server to use directly
+  postgres-db or ldap (Look at sdb driver)
 
 * [CB] Repair /admin/editpackages.php (Create FTP_INCOMING in
-  /var/lib/sourceforge/ftp)  [RM] Is this still current?
+  /var/lib/sourceforge/ftp)  [RM] Is this still current? [CB] You can remove
 
 * [CB] language_code is missing in language table.  [RM] Probably a
-  matter of data.  Has to wait for smooth DB upgrade.
+  matter of data.  Has to wait for smooth DB upgrade. [CB] Will be added in 2.6
 
 * [RM] Decide on whether to use a chroot or not.
 
@@ -31,9 +33,13 @@ here have been transferred onto the Savannah project, at
 * [RM] Use update-inetd(8) in install-dns.sh instead of modifying the
   inetd config file by hand.  Less error-prone, and we'll also
   probably get more portable (I'm thinking xinetd here).
+  [CB] It's now in install-cvs.sh. Unfortunatly update-inetd
+  doesn't seems to do anything for xinetd and it doesn't restore old 
+  cvs config. We should contact cvs packager for a sourceforge-friendly install
+  cvs install breaks sourceforge cvs replacement.
 
 * [RM] Split CVS-related part from install-dns.sh into an
-  install-cvs.sh script.
+  install-cvs.sh script. [CB] Done
 
 * [RM] Split DB-related part from sourceforge.postinst into an
   install-db.sh script.
