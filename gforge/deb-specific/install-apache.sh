@@ -20,7 +20,6 @@ case "$target" in
 	exit 1
 	;;
     configure)
-	db_passwd=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbpasswd\n";')
 	# Make sure Apache sees us
 	perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf
 	perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf
