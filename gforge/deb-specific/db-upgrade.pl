@@ -354,6 +354,61 @@ eval {
 	$dbh->commit () ;
     }
 
+    $query = "select value from debian_meta_data where key = 'db-version'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    $version = $array [0] ;
+
+    if (is_lesser $version, "2.5-33+") {
+	debug "Found version $version lesser than 2.5-33+, updating language codes";
+	@reqlist = (
+		    "UPDATE supported_languages SET language_code='en' where classname='English'",
+		    "UPDATE supported_languages SET language_code='ja' where classname='Japanese'",
+		    "UPDATE supported_languages SET language_code='iw' where classname='Hebrew'",
+		    "UPDATE supported_languages SET language_code='es' where classname='Spanish'",
+		    "UPDATE supported_languages SET language_code='th' where classname='Thai'",
+		    "UPDATE supported_languages SET language_code='de' where classname='German'",
+		    "UPDATE supported_languages SET language_code='it' where classname='Italian'",
+		    "UPDATE supported_languages SET language_code='no' where classname='Norwegian'",
+		    "UPDATE supported_languages SET language_code='sv' where classname='Swedish'",
+		    "UPDATE supported_languages SET language_code='zh' where classname='Chinese'",
+		    "UPDATE supported_languages SET language_code='nl' where classname='Dutch'",
+		    "UPDATE supported_languages SET language_code='eo' where classname='Esperanto'",
+		    "UPDATE supported_languages SET language_code='ca' where classname='Catalan'",
+		    "UPDATE supported_languages SET language_code='ko' where classname='Korean'",
+		    "UPDATE supported_languages SET language_code='bg' where classname='Bulgarian'",
+		    "UPDATE supported_languages SET language_code='el' where classname='Greek'",
+		    "UPDATE supported_languages SET language_code='id' where classname='Indonesian'",
+		    "UPDATE supported_languages SET language_code='pt' where classname='Portuguese (Brazillian)'",
+		    "UPDATE supported_languages SET language_code='pl' where classname='Polish'",
+		    "UPDATE supported_languages SET language_code='pt' where classname='Portuguese'",
+		    "UPDATE supported_languages SET language_code='ru' where classname='Russian'",
+		    "UPDATE supported_languages SET language_code='fr' where classname='French'",
+		    ) ;
+	
+ 	foreach my $s (@reqlist) {
+ 	    $query = $s ;
+ 	    $sth = $dbh->prepare ($query) ;
+ 	    $sth->execute () ;
+ 	    $sth->finish () ;
+ 	}
+	@reqlist = () ;
+
+ 	debug "Updating debian_meta_data table." ;
+ 	$query = "UPDATE debian_meta_data SET value = '2.5-33+' where key = 'db-version'" ;
+ 	$sth = $dbh->prepare ($query) ;
+ 	$sth->execute () ;
+ 	$sth->finish () ;
+
+ 	debug "Committing." ;
+ 	$dbh->commit () ;
+     }
+
+
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     
