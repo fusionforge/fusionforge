@@ -629,7 +629,7 @@ sub parse_sql_file ( $ ) {
 	      
 	      ( 1 ) && do {
 		  @copy_data = () ;
-		  @copy_data_tmp = split /\t+/, $l ;
+		  @copy_data_tmp = split /\t/, $l ;
 		  foreach $copy_field (@copy_data_tmp) {
 		      if ($copy_field eq '\N') {
 			  $copy_field = 'NULL' ;
