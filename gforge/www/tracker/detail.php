@@ -48,7 +48,15 @@ if (session_loggedin()) {
 		</tr>
 
 		<tr>
-			<td><strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br /><?php echo $ah->getSubmittedRealName(); ?> (<?php echo $ah->getSubmittedUnixName(); ?>)</td>
+			<td><strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br />
+			<?php
+			echo $ah->getSubmittedRealName();
+			if($ah->getSubmittedBy() != 100) {
+				$submittedUnixName = $ah->getSubmittedUnixName();
+				?>
+				(<tt><a href="/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
+			<?php } ?>
+			</td>
 			<td><strong><?php echo $Language->getText('tracker','assigned_to') ?>:</strong><br /><?php echo $ah->getAssignedRealName(); ?> (<?php echo $ah->getAssignedUnixName(); ?>)</td>
 		</tr>
 

@@ -46,7 +46,15 @@ if (session_loggedin()) {
 	<input type="hidden" name="artifact_id" value="<?php echo $ah->getID(); ?>">
 
 	<tr>
-		<td><strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br /><?php echo $ah->getSubmittedRealName(); ?> (<tt><?php echo $ah->getSubmittedUnixName(); ?></tt>)</td>
+		<td><strong><?php echo $Language->getText('tracker','submitted_by') ?>:</strong><br />
+			<?php
+			echo $ah->getSubmittedRealName();
+			if($ah->getSubmittedBy() != 100) {
+				$submittedUnixName = $ah->getSubmittedUnixName();
+				?>
+				(<tt><a href="/users/<?php echo $submittedUnixName; ?>"><?php echo $submittedUnixName; ?></a></tt>)
+			<?php } ?>
+		</td>
 		<td><strong><?php echo $Language->getText('tracker_mod','date_submitted') ?>:</strong><br />
 		<?php
 		echo date($sys_datefmt, $ah->getOpenDate() );
