@@ -91,7 +91,7 @@ $res=db_query("DELETE FROM project_sums_agg;");
 */
 $sql="INSERT INTO project_sums_agg 
 	SELECT group_id,'mail'::text AS type,count(*) AS count 
-	FROM mail_group_list
+	FROM mail_group_list WHERE is_public != 9
 	GROUP BY group_id,type;";
 
 $res=db_query($sql);

@@ -1,3 +1,9 @@
+2004-08-09  Tom Copeland <tom@infoether.com>
+
+	* cronjobs/db_project_sums.php: Fixed bug # 868: Deleted lists are
+	no longer included in the project summary aggregate.  This prevents 
+	the wrong number from appearing on the project summary page.
+
 2004-08-04  Tim Perdue <tim@gforge.org>
 
 	* DELETE trackers, subprojects in task mgr, forums, FRSPackages, FRSReleases.
