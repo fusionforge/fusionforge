@@ -118,7 +118,7 @@ class Korean extends BaseLanguage {
 	$this->GROUP_LONG_NEWS='최신 소식';	
 	$this->GROUP_LONG_CVS='CVS';
 	$this->GROUP_LONG_FTP='익명 FTP 공간';
-	$this->GROUP_LONG_FOUNDRIES='SourceForge Development Foundries';
+	$this->GROUP_LONG_FOUNDRIES='Development Foundries';
 
 
 	//
@@ -255,6 +255,16 @@ Linux는 Linus Torvalds의 등록 상표입니다. 그 외 이 사이트의 모든 상표 및
 	<P><B>비밀번호를 잊으셨습니까?</B>
 	<P>비밀번호를 분실하는 것은 사용하고 계신 계정과, 운영중인 프로젝트, 그리고 이 사이트 전체적으로 좋지않은 영향을 미칠 수 있습니다. 
 	<P>아래 "Send Lost PW Hash" 를 누르시면 여러분에게 할당되어 있는 이메일 주소로 URL을 알려 드리겠습니다. 그 URL은 여러분의 계정에 할당되어 있는 128-bit 해쉬 정보입니다. 그 URL을 방문하시면 비밀번호를 변경하시고 사이트에 다시 로그인하실 수 있습니다.';
+
+	// New strings added on 2002/06/12 by Soon-Son Kwon
+	$this->CHANGE='바꾸기';
+	$this->EDIT='편집하기';
+	$this->OLD='기존의';
+	$this->NEW='새로운';
+
+	$this->CHANGEEMAIL_desc='<P>이메일 주소를 변경하시려면, 유효한 이메일 주소임을 확인하기 위해 새 주소로부터 확인하는 절차를 밟아야 합니다. <P>제공되는 서비스의 성격상 정확한 이메일 주소를 유지할 필요가 있습니다. 쉘 계정 접속이나 프로젝트 관리 등의 중요한 이슈 사항들에 대해서 항상 사용자 여러분과 연락이 가능하도록 보장하는 것은 중요한 일입니다. <P>아래 양식을 채워 주시면 변경 확인 절차에 사용되는 URL이 해당 메일 주소로 배달되며, 그 URL을 방문하셔야 이메일 주소 변경이 완료됩니다.';
+
+	$this->FORUM_CHOOSE='<p>원하는 게시판을 선택하십시오. 글을 읽거나 내용 검색, 혹은 글을 올리실 수도 있습니다.<p>';
 
 	}
 }

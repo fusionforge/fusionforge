@@ -25,6 +25,9 @@
 
 	Soon-Son Kwon, June 12, 2002
 	*Added more strings
+
+	Soon-Son Kwon, June 13, 2002
+	*Added more strings
 */
 
 class BaseLanguage {
@@ -71,10 +74,10 @@ class BaseLanguage {
 	var $PROJECT_HELP_WANTED='Project Help Wanted';
 	var $TOP_PROJECTS='Top Projects';
 	var $COMPILE_FARM='Compile Farm';
-	var $CONTACT_US='Contact SourceForge';
+	var $CONTACT_US='Contact US';
 
         // 2000-11-24
- 	var $ABOUT_SOURCEFORGE='About SourceForge';
+ 	var $ABOUT_SOURCEFORGE='About US';
  	var $ABOUT_FOUNDRIES='About Foundries';
 
 	//tool short names as in HTML_TABS()
@@ -121,14 +124,14 @@ class BaseLanguage {
 	var $GROUP_LONG_NEWS='Latest News';	
 	var $GROUP_LONG_CVS='CVS Repository';
 	var $GROUP_LONG_FTP='Anonymous FTP Space';
-	var $GROUP_LONG_FOUNDRIES='SourceForge Development Foundries';
+	var $GROUP_LONG_FOUNDRIES='Development Foundries';
 
 
 	//
 	// New strings for home page added 10/1
 	//
 	var $BREAKING_DOWN_BARRIERS='Breaking Down the Barriers to Open Source Development';
-	var $SOURCEFORGE_STATISTICS='SourceForge Statistics';
+	var $SOURCEFORGE_STATISTICS='Statistics';
 	var $TOP_PROJECT_DOWNLOADS='Top Project Downloads';
 	var $HIGHEST_RANKED_USERS='Highest Ranked Users';
 	var $MOST_ACTIVE_THIS_WEEK='Most Active This Week';
@@ -140,7 +143,7 @@ class BaseLanguage {
 
 	var $HOME_PAGE_ABOUT_BLURB='
 
-SourceForge is a <B>free service to
+This site is a <B>free service to
 <A href="http://www.opensource.org">Open Source</A> developers</B> offering
 easy access to the best in CVS, mailing lists, bug tracking, message boards/forums,
 task management, site hosting, permanent file archival, full backups,
@@ -150,7 +153,7 @@ and total web-based administration.
 <P>
 <B>Site Feedback and Participation</B>
 <P>
-In order to get the most out of SourceForge, you\'ll need
+In order to get the most out of this site, you\'ll need
 to <A href="/account/register.php">register as a
 site user</A>. This will allow you to participate fully in all we have to
 offer. You may of course browse the site without registering, but will
@@ -183,7 +186,7 @@ Content owned by VA Linux Systems is copyright
 
 	var $IEWARN='<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>';
 	var $MACWARN='<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>';
-	var $ACCOUNTLOGIN='SourceForge Site Login';
+	var $ACCOUNTLOGIN='Site Login';
 	var $COOKIEWARN='Cookies must be enabled past this point.';
 	var $USESSL='Stay in SSL mode after login';
 	var $SSLNOTICE='<p><B><FONT COLOR="RED">You will be connected with an SSL server when you submit this form and your password will not be visible to other users.</FONT></B> <small style="font-size: x-small"> (If you wonder why very this page is not loaded via SSL, please read next paragraph. Thank you.) </small> <P> <B>Internet Explorer</B> users will have intermittent SSL problems, so they should leave SSL after login. Netscape users should stay in SSL mode permanently for maximum security.  Visit <A HREF="http://www.microsoft.com/">Microsoft</A> for more information about this known problem.  <P>';
@@ -191,11 +194,10 @@ Content owned by VA Linux Systems is copyright
 	// New strings added on 2002/06/11 by Soon-Son Kwon
 	var $FIRSTBLURB='
 <B><P>Welcome!</P></B>
-<P>You are now a registered user on Sourceforge, the online development environment for Open Source projects.
-<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software in Sourceforge, sign on as a project developer, or even start your own project.
-<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of Sourceforge.
-<P>Enjoy the site, and please provide us with feedback on ways that we can improve Sourceforge.
-<P>--the Sourceforge staff';
+<P>You are now a registered user of this site, the online development environment for Open Source projects.
+<P>As a registered user, you can participate fully in the activities on the site. You may now post messages to the project message forums, post bugs for software here, sign on as a project developer, or even start your own project.
+<P>You should take some time to read through the <A href="/docs/site/"><b>Site Documentation</b></A> so that you may take full advantage of this site.
+<P>Enjoy the site, and please provide us with feedback on ways that we can improve here. ';
 
 	var $ANONCVS='<P><B>Anonymous CVS Access</B> <P>This project\'s CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.';
 	var $ANONCVSUP='Updates from within the module\'s directory do not need the -d parameter.';
@@ -205,7 +207,7 @@ Content owned by VA Linux Systems is copyright
 	var $BROWSEIT='Browse CVS Repository';
 
 	var $ACCOUNTREGISTER_title='New Account Registration';
-	var $ACCOUNTREGISTER_congrat='<p>Congratulations. You have registered on SourceForge.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
+	var $ACCOUNTREGISTER_congrat='<p>Congratulations. You have registered on here.  <p> You are now being sent a confirmation email to verify your email address. Visiting the link sent to you in this email will activate your account.';
 	var $ACCOUNTREGISTER_loginname='Login Name (do not use uppercase letters) *:';
 	var $ACCOUNTREGISTER_password='Password (min. 6 chars) *:';
 	var $ACCOUNTREGISTER_password2='Password (repeat) *:';
@@ -218,8 +220,8 @@ Content owned by VA Linux Systems is copyright
 	var $ACCOUNTREGISTER_communitymail='Receive additional community mailings. <I>(Low traffic.)</I>';
 	var $ACCOUNTREGISTER_register='Register';
 
-	var $USERS_PEERINFO1='If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The SourceForge Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.';
-	var $USERS_PEERINFO2='The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user\'s rank compared to all ranked SourceForge users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.  </ul>';
+	var $USERS_PEERINFO1='If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.';
+	var $USERS_PEERINFO2='The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user\'s rank compared to all ranked users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user\'s responses are given more weight.  </ul>';
 
 	// New strings added on 2002/06/12 by Soon-Son Kwon
 	var $MY_about_blurb='Your personal page contains lists of bugs and tasks that you are assigned, plus a list of groups that you are a member of.';
@@ -261,6 +263,16 @@ Content owned by VA Linux Systems is copyright
 		<P><B>Lost Your Password?</B>
 		<P>Hey... losing your password is serious business. It compromises the security of your account, your projects, and this site. 
 		<P>Clicking "Send Lost PW Hash" below will email a URL to the email address we have on file for you. In this URL is a 128-bit confirmation hash for your account. Visiting the URL will allow you to change your password online and login.';
+
+	// New strings added on 2002/06/12 by Soon-Son Kwon
+	var $CHANGE='Change';
+	var $EDIT='Edit';
+	var $OLD='Old';
+	var $NEW='New';
+
+	var $CHANGEEMAIL_desc='<P>Changing your email address will require confirmation from your new email address, so that we can ensure we have a good email address on file.  <P>We need to maintain an accurate email address for each user due to the level of access we grant via this account. If we need to reach a user for issues arriving from a shell or project account, it is important that we be able to do so.  <P>Submitting the form below will mail a confirmation URL to the new email address. Visiting this link will complete the email change.';
+
+	var $FORUM_CHOOSE='<p>Choose a forum and you can browse, search, and post messages.<p>';
 
 	/*
 		returns database result

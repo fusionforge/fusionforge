@@ -9,11 +9,11 @@
 require('pre.php');
 require('../people/people_utils.php');
 
-people_header(array('title'=>'Help Wanted System'));
+people_header(array('title'=>$Language->PROJECT_HELP_WANTED));
 
 if ($group_id) {
 
-	echo '<H3>Project Help Wanted for '. group_getname($group_id) .'</H3>
+	echo '<H3>'.$Language->PROJECT_HELP_WANTED.': '. group_getname($group_id) .'</H3>
 	<P>
 	Here is a list of positions available for this project.
 	<P>';

@@ -40,24 +40,24 @@ $HTML->box1_top($Language->ACCOUNT_MAINTENANCE.": " . $user->getRealName()); ?>
 <TR valign=top>
 <TD><?php echo $Language->LOGIN_NAME; ?>: </TD>
 <TD><B><?php print strtolower($row_user['user_name']); ?></B>
-<BR><A href="change_pw.php">[Change Password]</A></TD>
+<BR><A href="change_pw.php">[<?php echo $Language->PASSWORD.' '.$Language->CHANGE; ?>]</A></TD>
 </TR>
 
 <TR valign=top>
 <TD><?php echo $Language->TIMEZONE; ?>/<?php echo $Language->LANGUAGE; ?>: </TD>
 <TD><B><?php print $row_user['timezone']; ?></B> / <B><?php echo $Language->getLanguageName($row_user['language']); ?></B>
-<BR><A href="change_timezone.php">[Change]</A></TD>
+<BR><A href="change_timezone.php">[<?php echo $Language->CHANGE; ?>]</A></TD>
 </TR>
 
 <TD><?php echo $Language->REALNAME; ?>: </TD>
 <TD><B><?php print $row_user['realname']; ?></B>
-<BR><A href="change_realname.php">[Change Real Name]</A></TD>
+<BR><A href="change_realname.php">[<?php echo $Language->CHANGE; ?>]</A></TD>
 </TR>
 
 <TR valign=top>
 <TD><?php echo $Language->EMAILADDR; ?>: </TD>
 <TD><B><?php print $row_user['email']; ?></B>
-<BR><A href="change_email.php">[Change Email Addr]</A>
+<BR><A href="change_email.php">[<?php echo $Language->CHANGE; ?>]</A>
 </TD>
 </TR>
 

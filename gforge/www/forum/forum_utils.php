@@ -18,7 +18,7 @@
 require($DOCUMENT_ROOT.'/news/news_utils.php');
 
 function forum_header($params) {
-	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$thread_id,$msg_id,$forum_id,$REQUEST_URI,$sys_datefmt,$et,$et_cookie,$sys_news_group;
+	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$thread_id,$msg_id,$forum_id,$REQUEST_URI,$sys_datefmt,$et,$et_cookie,$sys_news_group, $Language;
 
 	$params['group']=$group_id;
 	$params['toptab']='forums';
@@ -82,7 +82,7 @@ function forum_header($params) {
 		Show horizontal forum links
 	*/
 	if ($forum_id && $forum_name) {
-		echo '<P><H3>Discussion Forums: <A HREF="/forum/forum.php?forum_id='.$forum_id.'">'.$forum_name.'</A></H3>';
+		echo '<P><H3>'.$Language->DISCUSSION_FORUMS.': <A HREF="/forum/forum.php?forum_id='.$forum_id.'">'.$forum_name.'</A></H3>';
 	}
 	echo '<P><B>';
 
