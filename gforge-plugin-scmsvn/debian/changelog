@@ -1,7 +1,8 @@
-gforge-plugin-scmsvn (4.1-5h) unstable; urgency=low
+gforge-plugin-scmsvn (4.1-5j) unstable; urgency=low
 
   * New upstream 
   * [Christian] Added dependancy to php4-cli
+  * [Christian] Added cronjobs/tarballs.php
 
  -- Christian Bayle <bayle@debian.org>  Sat, 26 Feb 2005 09:13:47 +0100
 

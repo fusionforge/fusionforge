@@ -41,6 +41,7 @@ install: build
 	# Removed svnsh that should be scmsh in gforge-common package
 	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
 	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
+	cp -r cronjobs/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cronjobs/
 	cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
 	cp -r etc/* $(DESTDIR)/etc/gforge/
 	# cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/

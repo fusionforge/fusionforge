@@ -15,6 +15,7 @@ usr/lib/gforge/plugins/scmsvn/cgi-bin
 usr/lib/gforge/plugins/scmsvn/include
 usr/lib/gforge/plugins/scmsvn/include/languages
 usr/lib/gforge/plugins/scmsvn/lib
+usr/lib/gforge/plugins/scmsvn/cronjobs
 usr/lib/gforge/cgi-bin/plugins/scmsvn
 usr/share
 usr/share/gforge
