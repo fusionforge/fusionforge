@@ -15,7 +15,7 @@
 require_once('pre.php');
 require_once('bookmarks.php');
 
-site_user_header(array("title"=>"Edit Bookmark",'pagename'=>'my_bookmark_edit'));
+site_user_header(array("title"=>".$Language->getText('my_bookmark_edit','title').",'pagename'=>'my_bookmark_edit'));
 
 if ($bookmark_url && $bookmark_title) {
 	bookmark_edit($bookmark_id, $bookmark_url, $bookmark_title);
@@ -29,17 +29,17 @@ if ($result) {
 }
 ?>
 <form method="post">
-<p>Bookmark URL:<br />
+<p><?php echo $Language->getText('my_bookmark_add','bookmark_url') ?>:<br />
 <input type="text" name="bookmark_url" value="<?php echo $bookmark_url; ?>" />
 </p>
-<p>Bookmark Title:<br />
+<p><?php echo $Language->getText('my_bookmark_add','bookmark_title') ?>::<br />
 <input type="text" name="bookmark_title" value="<?php echo $bookmark_title; ?>" />
 </p>
-<p><input type="submit" value=" Submit Form "></p>
+<p><input type="submit" value=" <?php echo $Language->getText('general','submit') ?> "></p>
 </form>
 <?php
 
-print "<p><a href=\"/my/\">Return</a>";
+print "<p><a href=\"/my/\">".$Language->getText('my_bookmark','return')."</a>";
 
 site_user_footer(array());
 

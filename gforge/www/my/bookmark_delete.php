@@ -15,11 +15,11 @@
 require_once('pre.php');
 require_once('bookmarks.php');
 
-site_user_header(array("title"=>"Delete Bookmark",'pagename'=>'my_bookmark_delete'));
+site_user_header(array("title"=>$Language->getText('my_bookmark_delete','title'),'pagename'=>'my_bookmark_delete'));
 
 if ($bookmark_id) {
 	bookmark_delete ($bookmark_id);
-	print "Bookmark deleted.<p><a href=\"/my/\">Return</a></p>";
+	print $Language->getText('my_bookmark_delete','bookmark_deleted')."<p><a href=\"/my/\">".$Language->getText('my_bookmark','return')."</a></p>";
 }
 
 site_user_footer(array());

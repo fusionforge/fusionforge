@@ -374,7 +374,7 @@ if (session_loggedin() || $sf_user_hash) {
 			<img src="/images/ic/trash.png" height="16" width="16" border="0" alt="" /></a></td>
 			<td><strong><a href="'. db_result($result,$i,'bookmark_url') .'">'.
 			db_result($result,$i,'bookmark_title') .'</a></strong> &nbsp;
-			<span style="font-size:small"><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">[Edit]</a></span></td></tr>';
+			<span style="font-size:small"><a href="/my/bookmark_edit.php?bookmark_id='. db_result($result,$i,'bookmark_id') .'">['.$Language->getText('general','edit').']</a></span></td></tr>';
 		}
 	}
 

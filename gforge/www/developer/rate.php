@@ -20,9 +20,9 @@ if (session_loggedin()) {
 	$me = session_get_user();
 	if (!$me->usesRatings()) {
 		exit_error(
-			'Ratings turned off',
-			'You chose not to participate in the peer rating system'
-		);
+			$Language->getText('developer_rate','turned_off_title'),
+			$Language->getText('developer_rate','turned_off_body')
+			);
 	}
 
 	$ruser = $me->getID();
@@ -39,7 +39,7 @@ if (session_loggedin()) {
 			} else {
 				//ratings can only be between +3 and -3
 				if ($rating > 3 || $rating < -3) {
-					$feedback .= ' ERROR - invalid rating value ';
+					$feedback .= $Language->getText('developer_rate','invalid_rate_value');
 				} else {
 					if ($rating) {
 						// get rid of 0.1 thing
@@ -60,15 +60,14 @@ if (session_loggedin()) {
 		}
 	} else {
 		global $G_SESSION;
-		exit_error('ERROR','You can\'t rate yourself');
+		exit_error($Language->getText('general','error'),$Language->getText('developer_rate','cannot_rate_yourself'));
 	}
 
-	echo $HTML->header(array('title'=>'User Ratings Page'));
+	echo $HTML->header(array('title'=>$Language->getText('developer_rate','title')));
 
 	echo '
-	<h3>Ratings Recorded</h3>
-	<p>
-	You can re-rate this person by simply returning to their ratings page and re-submitting the info.</p>
+	<h3>'.$Language->getText('developer_rate','ratings_recorded').'</h3>
+	<p>'.$Language->getText('developer_rate','ratings_recorded_body').'.</p>
 	<p>&nbsp;</p>';
 
 	echo $HTML->footer(array());

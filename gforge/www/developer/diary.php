@@ -21,25 +21,25 @@ if ($diary_user) {
 		exit_error('ERROR','User could not be found: '.$user_obj->getErrorMessage());
 	}
 
-	echo $HTML->header(array('title'=>'My Diary And Notes'));
+	echo $HTML->header(array('title'=>$Language->getText('my_diary','title')));
 
 	echo '
-	<h2>Diary And Notes For: '. $user_obj->getRealName() .'</h2>
+	<h2>'.$Language->getText('developer','diary_and_notes').': '. $user_obj->getRealName() .'</h2>
 	<p>&nbsp;</p>
 
 	<p>&nbsp;</p>';
 
-	echo $HTML->boxTop('Existing Diary And Note Entries');
+	echo $HTML->boxTop($Language->getText('my_diary','existing_entries'));
 
 	if ($diary_id) {
 		$sql="SELECT * FROM user_diary WHERE user_id='$diary_user' AND id='$diary_id' AND is_public=1";
 		$res=db_query($sql);
 		if (!$res || db_numrows($res) < 1) {
-			echo '<tr><td colspan="2">Entry Not Found For This User.</td></tr>';
+			echo '<tr><td colspan="2">'.$Language->getText('developer','entry_not_found').'.</td></tr>';
 		} else {
-			echo '<tr><td colspan="2"><strong>Date:</strong> '. date($sys_datefmt, db_result($res,$i,'date_posted')) .'<br />
-			<strong>Subject:</strong> '. db_result($res,$i,'summary') .'<p>
-			<strong>Body:</strong><br />
+			echo '<tr><td colspan="2"><strong>'.$Language->getText('developer','date').':</strong> '. date($sys_datefmt, db_result($res,$i,'date_posted')) .'<br />
+			<strong>'.$Language->getText('developer','subject').':</strong> '. db_result($res,$i,'summary') .'<p>
+			<strong>'.$Language->getText('developer','body').':</strong><br />
 			'. nl2br(db_result($res,$i,'details')) .'
 			</p></td></tr>';
 		}
@@ -57,7 +57,7 @@ if ($diary_user) {
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
 		echo '
-			<tr><td colspan="2"><strong>This User Has No Diary Entries</strong></td></tr>';
+			<tr><td colspan="2"><strong>'.$Language->getText('developer','no_entries').'</strong></td></tr>';
 		echo db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
@@ -76,7 +76,7 @@ if ($diary_user) {
 
 } else {
 
-	exit_error('ERROR','No User Selected');
+	exit_error($Language->getText('general','error'),$Language->getText('developer','no_user_selected'));
 
 }
 

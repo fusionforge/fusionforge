@@ -15,24 +15,24 @@
 require_once('pre.php');
 require_once('bookmarks.php');
 
-site_user_header(array("title"=>"Add New Bookmark",'pagename'=>'my_bookmark_add'));
+site_user_header(array("title"=>$Language->getText('my_bookmark_add','section'),'pagename'=>'my_bookmark_add'));
 
 if ($bookmark_url) {
-	print "Added bookmark for <strong>'$bookmark_url'</strong> with title <strong>'$bookmark_title'</strong>.<p>&nbsp;</p>";
+	print $Language->getText('my_bookmark_add','added_bookmark', array($bookmark_url,$bookmark_title)).".<p>&nbsp;</p>";
 
 	bookmark_add ($bookmark_url, $bookmark_title);
-	print "<a href=\"$bookmark_url\">Visit the bookmarked page</a> - ";
-	print "<a href=\"/my/\">Back to your homepage</a>";
+	print "<a href=\"$bookmark_url\">".$Language->getText('my_bookmark_add','visit_page')."</a> - ";
+	print "<a href=\"/my/\">".$Language->getText('my_bookmark_add','back')."</a>";
 } else {
 	?>
 	<form method="post">
-	<p>Bookmark URL:<br />
+	<p><?php echo $Language->getText('my_bookmark_add','bookmark_url') ?>:<br />
 	<input type="text" name="bookmark_url" value="http://" />
 	</p>
-	<p>Bookmark Title:<br />
+	<p><?php echo $Language->getText('my_bookmark_add','bookmark_title') ?>:<br />
 	<input type="text" name="bookmark_title" value="My Fav Site" />
 	</p>
-	<p><input type="submit" value=" Submit Form " /></p>
+	<p><input type="submit" value="<?php echo $Language->getText('general','submit') ?>" /></p>
 	</form>
 	<?php
 }
