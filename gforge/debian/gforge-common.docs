@@ -3,4 +3,6 @@ AUTHORS
 README.Custom
 README.Themes
 README.Plugins
+debian/README.Debian
 debian/README.Maintainer
+debian/README.Multipack

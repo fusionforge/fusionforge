@@ -1,3 +1,10 @@
+gforge (3rc2-3+) unstable; urgency=low
+
+  * [Roland] Install README.Debian into all packages (Gforge bug #340),
+    and README.Multipack into gforge-common.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 25 May 2003 18:31:46 +0200
+
 gforge (3rc2-3) unstable; urgency=low
 
   * [Roland] Switched from non-US to main, so that the upload be accepted.
