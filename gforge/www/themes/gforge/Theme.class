@@ -1,0 +1,11 @@
+<?php
+
+class Theme extends Layout {
+
+    function Theme() {
+        // Parent constructor
+        $this->Layout();
+	}
+}
+
+?>
