@@ -23,28 +23,3 @@ files.
 
 WHEN YOU ARE SURE IT WORKS AS EXPECTED, you can change usergroup.php 
 FILE_EXTENSION to '' instead of '.new'
-
-
-SAMPLE CRON ENTRIES
-
-MAILTO=""
-
-#
-#	Create the /etc/* files
-#
-10 * * * * ~/gforge3/cronjobs/cvs-cron/usergroup.php
-
-#
-#	Upload the SSH key files
-#
-15 * * * * ~/gforge3/cronjobs/cvs-cron/ssh_create.php
-
-#
-#	Create the blank cvs trees
-#
-20 * * * * ~/gforge3/cronjobs/cvs-cron/cvs.php
-
-#
-#	Daily stats collection
-#
-###incomplete 20 1 * * * ~/gforge3/cronjobs/cvs-cron/history_parse.php
