@@ -1,3 +1,16 @@
+2003-02-23  Reinhard Spisser <reinhard@spisser.it>
+
+	* www/account/change_email.php, www/account/change_email-complete.php,
+	www/account/change_pw.php, www/account/first.php, www/account/lostpw.php,	
+	www/account/index.php:
+	finished i18n
+	
+	* www/include/languages/Base.tab:
+	added missing strings for /account/
+	
+	* www/include/languages/Italian.tab:
+	translation of new strings for /account/
+	
 2003-02-22  Reinhard Spisser <reinhard@spisser.it>
 
 	* www/new/index.php, www/include/languages/Base.tab:
