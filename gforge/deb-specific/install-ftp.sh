@@ -16,6 +16,20 @@ FTPROOT=/var/lib/sourceforge/chroot/ftproot
 GRPHOME=/var/lib/sourceforge/chroot/home/groups
 
 case "$1" in
+    configure-files)
+	cp -a /etc/proftpd.conf /etc/proftpd.conf.sourceforge-new
+        #
+	# This initialize FTP
+	#
+	if ! grep -q "^Include /etc/sourceforge/sf-proftpd.conf" /etc/proftpd.conf.sourceforge-new ; then
+	    perl -pi -e "s/^/#SF#/" /etc/proftpd.conf.sourceforge-new
+	    echo "### Previous lines commented by Sourceforge install" >> /etc/proftpd.conf.sourceforge-new
+	    echo "### Next lines inserted by Sourceforge install" >> /etc/proftpd.conf.sourceforge-new
+	    echo "ServerType standalone" >>/etc/proftpd.conf.sourceforge-new
+	    echo "Include /etc/sourceforge/sf-proftpd.conf" >> /etc/proftpd.conf.sourceforge-new
+	fi
+	;;
+
     configure)
 	adduser --quiet --system --group --home $FTPROOT sfftp
 	mkdir -p $FTPROOT/pub
@@ -27,16 +41,6 @@ The local time is: %T
 This is an experimental FTP server.  If have any unusual problems,
 please report them via e-mail to <root@%L>.
 FIN
-        #
-	# This initialize FTP
-	#
-	if ! grep -q "^Include /etc/sourceforge/sf-proftpd.conf" /etc/proftpd.conf ; then
-	    perl -pi -e "s/^/#SF#/" /etc/proftpd.conf
-	    echo "### Previous lines commented by Sourceforge install" >> /etc/proftpd.conf
-	    echo "### Next lines inserted by Sourceforge install" >> /etc/proftpd.conf
-	    echo "ServerType standalone" >>/etc/proftpd.conf
-	    echo "Include /etc/sourceforge/sf-proftpd.conf" >> /etc/proftpd.conf
-	fi
 	invoke-rc.d proftpd restart
 	;;
 
@@ -48,21 +52,25 @@ FIN
 	done
 	;;
     
-    purge)
-	if grep -q "### Next lines inserted by Sourceforge install" /etc/proftpd.conf ; then
-	    perl -pi -e "s/### Previous lines commented by Sourceforge install\n//"  /etc/proftpd.conf
-	    perl -pi -e "s/### Next lines inserted by Sourceforge install\n//" /etc/proftpd.conf
-	    perl -pi -e "s:^Include /etc/sourceforge/sf-proftpd.conf\n::" /etc/proftpd.conf
-	    perl -pi -e "s:^ServerType standalone\n::" /etc/proftpd.conf
-	    perl -pi -e "s/^#SF#//" /etc/proftpd.conf
+    purge-files)
+	cp -a /etc/proftpd.conf /etc/proftpd.conf.sourceforge-new
+	if grep -q "### Next lines inserted by Sourceforge install" /etc/proftpd.conf.sourceforge-new ; then
+	    perl -pi -e "s/### Previous lines commented by Sourceforge install\n//"  /etc/proftpd.conf.sourceforge-new
+	    perl -pi -e "s/### Next lines inserted by Sourceforge install\n//" /etc/proftpd.conf.sourceforge-new
+	    perl -pi -e "s:^Include /etc/sourceforge/sf-proftpd.conf\n::" /etc/proftpd.conf.sourceforge-new
+	    perl -pi -e "s:^ServerType standalone\n::" /etc/proftpd.conf.sourceforge-new
+	    perl -pi -e "s/^#SF#//" /etc/proftpd.conf.sourceforge-new
 	fi
+	;;
+
+    purge)
 	invoke-rc.d proftpd restart
 	rm -rf $FTPROOT
-	deluser sfftp || true
+	deluser --quiet sfftp || true
 	;;
 
     *)
-	echo "Usage: $0 {configure|update|purge}"
+	echo "Usage: $0 {configure|configure-files|update|purge|purge-files}"
 	exit 1
 	;;
 

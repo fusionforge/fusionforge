@@ -31,18 +31,21 @@ propose_update () {
 	# Old file and new file are identical
 	rm -f ${file}.sourceforge-new
     else
-	db_fset sourceforge/internal/replace_file_remove seen false
-	db_subst sourceforge/internal/replace_file_remove file $file
-	db_input high sourceforge/internal/replace_file_remove || true
+	db_fset sourceforge/replace_file_remove seen false
+	db_subst sourceforge/replace_file_remove file $file
+	db_input high sourceforge/replace_file_remove || true
 	db_go || true
-	db_get sourceforge/internal/replace_file_remove || true
+	db_get sourceforge/replace_file_remove || true
 	case "$RET" in
 	    "true")
 		echo >&2 "Replacing file $file with changed version"
 		replace_file $file
 		;;
 	    "false")
-		# Do nothing
+		db_fset sourceforge/file_changed seen false
+		db_subst sourceforge/file_changed file $file
+		db_input high sourceforge/file_changed || true
+		db_go || true
 		;;
 	esac
     fi
@@ -51,22 +54,35 @@ propose_update () {
 case "$1" in
     remove)
 	. /usr/share/debconf/confmodule
+	db_title "Unconfiguring Sourceforge"
 
         # Unpatch Apache configuration files
 	/usr/lib/sourceforge/bin/install-apache.sh purge-files
-
 	propose_update /etc/apache/httpd.conf
 
         # Unpatch DB configuration files
 	/usr/lib/sourceforge/bin/install-db.sh purge-files
-
 	propose_update /etc/postgresql/pg_hba.conf
 	
 	# Unpatch Bind configuration files
 	/usr/lib/sourceforge/bin/install-dns.sh purge-files
-
 	propose_update /etc/bind/named.conf
 	
+	# Unpatch Exim configuration files
+	/usr/lib/sourceforge/bin/install-exim.sh purge-files
+	propose_update /etc/aliases
+	propose_update /etc/exim/exim.conf
+	
+	# Unpatch Proftpd configuration files
+	/usr/lib/sourceforge/bin/install-ftp.sh purge-files
+	propose_update /etc/proftpd.conf
+
+        # Unpatch Slapd configuration files
+	/usr/lib/sourceforge/bin/install-ldap.sh purge-files
+	propose_update /etc/libnss-ldap.conf
+	propose_update /etc/nsswitch.conf
+	propose_update /etc/ldap/slapd.conf
+
 	# Clean debconf after ourselves
 	db_stop
 
@@ -83,7 +99,7 @@ case "$1" in
 	/usr/lib/sourceforge/bin/install-cvs.sh purge
 
         # Exim config removal
-	/usr/lib/sourceforge/bin/install-exim.sh purge # Not ready yet
+	/usr/lib/sourceforge/bin/install-exim.sh purge
 
         # SSH config removal
 	/usr/lib/sourceforge/bin/install-ssh.sh purge

@@ -13,23 +13,25 @@ if [ $(id -u) != 0 ] ; then
 fi
 
 case "$1" in
-    configure)
+    configure-files)
+	cp -a /etc/aliases /etc/aliases.sourceforge-new
 	# Redirect "noreply" mail to the bit bucket (if need be)
 	noreply_to_bitbucket=$(perl -e'require "/etc/sourceforge/local.pl"; print "$noreply_to_bitbucket\n";')
 	if [ "$noreply_to_bitbucket" = "true" ] ; then
-	    if ! grep -q "^noreply:" /etc/aliases ; then
-		echo "### Next line inserted by Sourceforge install" >> /etc/aliases
-		echo "noreply: /dev/null" >> /etc/aliases
+	    if ! grep -q "^noreply:" /etc/aliases.sourceforge-new ; then
+		echo "### Next line inserted by Sourceforge install" >> /etc/aliases.sourceforge-new
+		echo "noreply: /dev/null" >> /etc/aliases.sourceforge-new
 	    fi
 	fi
 
 	# Redirect "sourceforge" mail to the site admin
 	server_admin=$(perl -e'require "/etc/sourceforge/local.pl"; print "$server_admin\n";')
-	if ! grep -q "^sourceforge:" /etc/aliases ; then
-	    echo "### Next line inserted by Sourceforge install" >> /etc/aliases
-	    echo "sourceforge: $server_admin" >> /etc/aliases
+	if ! grep -q "^sourceforge:" /etc/aliases.sourceforge-new ; then
+	    echo "### Next line inserted by Sourceforge install" >> /etc/aliases.sourceforge-new
+	    echo "sourceforge: $server_admin" >> /etc/aliases.sourceforge-new
 	fi
-	[ -x /usr/bin/newaliases ] && newaliases
+
+	cp -a /etc/exim/exim.conf /etc/exim/exim.conf.sourceforge-new
 
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
@@ -47,7 +49,7 @@ chomp $l ;
 $l .= ":SOURCEFORGE_DOMAINS" unless ($l =~ /^[^#]*SOURCEFORGE_DOMAINS/) ;
 print "$l\n" ;
 while ($l = <>) { print $l; };
-' < /etc/exim/exim.conf > $tmp1
+' < /etc/exim/exim.conf.sourceforge-new > $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, insinuate our forwarding rules in the directors section
 	perl -e '
@@ -127,12 +129,28 @@ print @line_buf ;
 while ($l = <>) { print $l; };
 ' < $tmp1 > $tmp2
 	rm $tmp1
-	cat $tmp2 > /etc/exim/exim.conf
+	cat $tmp2 > /etc/exim/exim.conf.sourceforge-new
 	rm $tmp2
 	;;
-
-    purge)
+    
+    configure)
+	[ -x /usr/bin/newaliases ] && newaliases
+	;;
+    
+    purge-files)
 	pattern=$(basename $0).XXXXXX
+	tmp1=$(mktemp /tmp/$pattern)
+	cp -a /etc/aliases /etc/aliases.sourceforge-new
+	# Redirect "noreply" mail to the bit bucket (if need be)
+	noreply_to_bitbucket=$(perl -e'require "/etc/sourceforge/local.pl"; print "$noreply_to_bitbucket\n";')
+	if [ "$noreply_to_bitbucket" = "true" ] ; then
+	    grep -v "^noreply:" /etc/aliases.sourceforge-new > $tmp1
+	    cat $tmp1 > /etc/aliases.sourceforge-new
+	fi
+	rm -f $tmp1
+
+	cp -a /etc/exim/exim.conf /etc/exim/exim.conf.sourceforge-new
+
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, replace the list of local domains
 	perl -e '
@@ -144,7 +162,7 @@ $l =~ /^(\s*local_domains\s*=\s*)(\S+)/ ;
 $l = $1 . join (":", grep (!/SOURCEFORGE_DOMAINS/, (split ":", $2))) ;
 print "$l\n" ;
 while ($l = <>) { print $l; };
-' < /etc/exim/exim.conf > $tmp1
+' < /etc/exim/exim.conf.sourceforge-new > $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, kill our forwarding rules
 	perl -e '
@@ -164,12 +182,15 @@ print $l ;
 while ($l = <>) { print $l; };
 ' < $tmp1 > $tmp2
 	rm $tmp1
-	cat $tmp2 > /etc/exim/exim.conf
+	cat $tmp2 > /etc/exim/exim.conf.sourceforge-new
 	rm $tmp2
 	;;
 
+    purge)
+	;;
+
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|configure-files|purge|purge-files}"
 	exit 1
 	;;
 

@@ -1,9 +1,8 @@
 sourceforge (2.6-0+6+) unstable; urgency=low
 
   * [Roland] [From 2.5] Added templates to conffiles.
-  * [Roland] Added dpkg-like stuff to ask whether to replace a config file
-    before doing it.  Only for installation of /etc/apache/httpd.conf for
-    now (more will follow).
+  * [Roland] Added debconf magic to ask whether to replace a config file
+    before doing it (in the post-installation and pre-remove phases).
   * [Christian] Changed to use cvsweb 
 
  -- Christian Bayle <bayle@aist.enst.fr>  Wed, 20 Feb 2002 18:29:01 +0100

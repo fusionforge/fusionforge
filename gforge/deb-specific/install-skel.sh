@@ -13,15 +13,25 @@ set -e
 # fi
 
 case "$1" in
+    configure-files)
+	cp -a /etc/file /etc/file.sourceforge-new
+	# Patch /etc/file.sourceforge-new
+	;;
+
     configure)
 
 	# invoke-rc.d <service> <action>
+	;;
+
+    purge-files)
+	cp -a /etc/file /etc/file.sourceforge-new
+	# Patch /etc/file.sourceforge-new
 	;;
 
     purge)
 	;;
 
     *)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure|configure-files|purge|purge-files}"
 	exit 1
 esac

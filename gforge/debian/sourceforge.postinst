@@ -35,18 +35,21 @@ propose_update () {
 	# Old file and new file are identical
 	rm -f ${file}.sourceforge-new
     else
-	db_fset sourceforge/internal/replace_file_install seen false
-	db_subst sourceforge/internal/replace_file_install file $file
-	db_input high sourceforge/internal/replace_file_install || true
+	db_fset sourceforge/replace_file_install seen false
+	db_subst sourceforge/replace_file_install file $file
+	db_input high sourceforge/replace_file_install || true
 	db_go || true
-	db_get sourceforge/internal/replace_file_install || true
+	db_get sourceforge/replace_file_install || true
 	case "$RET" in
 	    "true")
 		echo >&2 "Replacing file $file with changed version"
 		replace_file $file
 		;;
 	    "false")
-		# Do nothing
+		db_fset sourceforge/file_changed seen false
+		db_subst sourceforge/file_changed file $file
+		db_input high sourceforge/file_changed || true
+		db_go || true
 		;;
 	esac
     fi
@@ -77,21 +80,33 @@ case "$1" in
     	
         # Patch Apache configuration files
 	/usr/lib/sourceforge/bin/install-apache.sh configure-files
-
 	propose_update /etc/apache/httpd.conf
 	propose_update /etc/php4/apache/php.ini
 	propose_update /etc/php4/cgi/php.ini
 
         # Patch DB configuration files
 	/usr/lib/sourceforge/bin/install-db.sh configure-files
-
 	propose_update /etc/postgresql/pg_hba.conf
 	
 	# Patch Bind configuration files
 	/usr/lib/sourceforge/bin/install-dns.sh configure-files
-
 	propose_update /etc/bind/named.conf
 	
+        # Patch Exim configuration files
+	/usr/lib/sourceforge/bin/install-exim.sh configure-files
+	propose_update /etc/aliases
+	propose_update /etc/exim/exim.conf
+
+        # Patch Proftpd configuration files
+	/usr/lib/sourceforge/bin/install-ftp.sh configure-files
+	propose_update /etc/proftpd.conf
+
+        # Patch Slapd configuration files
+	/usr/lib/sourceforge/bin/install-ldap.sh configure-files
+	propose_update /etc/libnss-ldap.conf
+	propose_update /etc/nsswitch.conf
+	propose_update /etc/ldap/slapd.conf
+
 	# Clean debconf after ourselves
 	db_stop
 

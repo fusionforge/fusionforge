@@ -20,16 +20,17 @@ modify_pam_ldap(){
 }
 
 # Check/Modify /etc/libnss-ldap.conf
-modify_libnss_ldap(){
+configure_libnss_ldap(){
+    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-new
 	dn=$1
 	# Check if DN is correct
-	if ! grep -q "^base.[ 	]*$dc=" /etc/libnss-ldap.conf ; then
+	if ! grep -q "^base.[ 	]*$dc=" /etc/libnss-ldap.conf.sourceforge-new ; then
 		echo "WARNING: Probably incorrect base line in /etc/libnss-ldap.conf"
 	fi
 	# Check bindpw
 	# Should contain the secret
 	# All users can see ldap stored gid/uid
-	chmod 644 /etc/libnss-ldap.conf
+	chmod 644 /etc/libnss-ldap.conf.sourceforge-new
 # It doesn't seem to be necessary, only rootbinddn is necessary
 #	if ! grep -q "^bindpw" /etc/libnss-ldap.conf ; then
 #		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf
@@ -38,20 +39,21 @@ modify_libnss_ldap(){
 	# Check rootbinddn
 	# This seems to be necessary to display uid/gid
 	# Should be cn=admin,ou=People,dc=...
-	if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf ; then
-		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf
-		echo "rootbinddn cn=admin,ou=People,$dn" >>/etc/libnss-ldap.conf
+	if ! grep -q "^rootbinddn" /etc/libnss-ldap.conf.sourceforge-new ; then
+		echo "# Next line added by Sourceforge install" >>/etc/libnss-ldap.conf.sourceforge-new
+		echo "rootbinddn cn=admin,ou=People,$dn" >>/etc/libnss-ldap.conf.sourceforge-new
 	fi
 }
 
 # Purge /etc/libnss-ldap.conf
 purge_libnss_ldap(){
-	perl -pi -e "s/^# Next line added by Sourceforge install\n/#SF#/g" /etc/libnss-ldap.conf
-	perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf
+    cp -a /etc/libnss-ldap.conf /etc/libnss-ldap.conf.sourceforge-new
+	perl -pi -e "s/^# Next line added by Sourceforge install\n/#SF#/g" /etc/libnss-ldap.conf.sourceforge-new
+	perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf.sourceforge-new
 }
 
 # Modify /etc/ldap/slapd.conf
-modify_slapd(){
+configure_slapd(){
 	dn=$1
 
 	if [ ! -e /etc/ldap/slapd.conf ] ; then
@@ -59,12 +61,13 @@ modify_slapd(){
 	    echo "Please make sure your slapd package is correctly configured."
 	    exit 1
 	fi
+    cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.sourceforge-new
 	
 	# Maybe should comment referral line too
 	echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
 	
 	# Debian config by default only include core schema
-	if ! grep -q "Sourceforge" /etc/ldap/slapd.conf ; then
+	if ! grep -q "Sourceforge" /etc/ldap/slapd.conf.sourceforge-new ; then
 		rm -f /etc/ldap/slapd.conf.sourceforge
 		for schema in /etc/ldap/schema/core.schema \
 			/etc/ldap/schema/cosine.schema \
@@ -72,7 +75,7 @@ modify_slapd(){
 			/etc/ldap/schema/nis.schema \
 			/etc/sourceforge/sourceforge.schema
 		do
-			if ! grep -q "^include.[ 	]*$schema" /etc/ldap/slapd.conf ; then
+			if ! grep -q "^include.[ 	]*$schema" /etc/ldap/slapd.conf.sourceforge-new ; then
 				echo "include	$schema	#Added by Sourceforge install" >>/etc/ldap/slapd.conf.sourceforge
 				echo "Adding $schema"
 			else
@@ -83,13 +86,13 @@ modify_slapd(){
 				echo "Adding $schema"
 			fi
 		done
-		cat /etc/ldap/slapd.conf >>/etc/ldap/slapd.conf.sourceforge
-		mv /etc/ldap/slapd.conf.sourceforge /etc/ldap/slapd.conf
+		cat /etc/ldap/slapd.conf.sourceforge-new >>/etc/ldap/slapd.conf.sourceforge
+		mv /etc/ldap/slapd.conf.sourceforge /etc/ldap/slapd.conf.sourceforge-new
 
 		# Then write access for SF_robot
 		perl -pi -e "s/access to attribute=userPassword/# Next second line added by Sourceforge install
 access to attribute=userPassword
-	by dn=\"cn=SF_robot,$dn\" write/" /etc/ldap/slapd.conf
+	by dn=\"cn=SF_robot,$dn\" write/" /etc/ldap/slapd.conf.sourceforge-new
 
 		perl -pi -e "s/access to \*/# Next lines added by Sourceforge install
 access to dn=\".*,ou=People,$dn\"		
@@ -109,7 +112,7 @@ access to dn=\"ou=cvsGroup,$dn\"
 	by dn=\"cn=SF_robot,$dn\" write		
 	by * read				
 # End of sourceforge add
-access to */" /etc/ldap/slapd.conf
+access to */" /etc/ldap/slapd.conf.sourceforge-new
 
 		# invoke-rc.d slapd restart
 	fi	
@@ -122,12 +125,13 @@ purge_slapd(){
 	    echo "Please make sure your slapd package is correctly configured."
 	    exit 1
 	fi
+    cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.sourceforge-new
 	
-	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
-	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
-if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf
+	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf.sourceforge-new
+	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf.sourceforge-new
+if grep -q "# Next second line added by Sourceforge install" /etc/ldap/slapd.conf.sourceforge-new
 then
-	vi -e /etc/ldap/slapd.conf <<-FIN
+	vi -e /etc/ldap/slapd.conf.sourceforge-new <<-FIN
 /# Next second line added by Sourceforge install
 :d
 /SF_robot
@@ -136,9 +140,9 @@ then
 :x
 FIN
 fi
-if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf
+if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf.sourceforge-new
 then
-	vi -e /etc/ldap/slapd.conf <<-FIN
+	vi -e /etc/ldap/slapd.conf.sourceforge-new <<-FIN
 /# Next lines added by Sourceforge install
 :ma a
 /# End of sourceforge add
@@ -152,24 +156,30 @@ fi
 }
 
 # Modify /etc/nsswitch.conf
-modify_nsswitch()
+configure_nsswitch()
 {
-	# This is sensitive file
-	if ! grep -q "Sourceforge" /etc/nsswitch.conf ; then
-		# By security i let priority to files
-		# Should maybe enhance this to take in account nis
-		# Maybe ask the order db/files/nis/ldap
-		perl -pi -e "s/^passwd/passwd	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#passwd/g" /etc/nsswitch.conf
-		perl -pi -e "s/^group/group	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#group/g" /etc/nsswitch.conf
-		perl -pi -e "s/^shadow/shadow	files ldap #Added by Sourceforge install\n#Comment by Sourceforge install#shadow/g" /etc/nsswitch.conf
-	fi
+    cp -a /etc/nsswitch.conf /etc/nsswitch.conf.sourceforge-new
+    # This is sensitive file
+    # By security i let priority to files
+    # Should maybe enhance this to take in account nis
+    # Maybe ask the order db/files/nis/ldap
+    if ! grep -q '^passwd:.*ldap' /etc/nsswitch.conf.sourceforge-new ; then
+	perl -pi -e "s/^(passwd:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf.sourceforge-new
+    fi
+    if ! grep -q '^group:.*ldap' /etc/nsswitch.conf.sourceforge-new ; then
+	perl -pi -e "s/^(group:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf.sourceforge-new
+    fi
+    if ! grep -q '^shadow:.*ldap' /etc/nsswitch.conf.sourceforge-new ; then
+	perl -pi -e "s/^(shadow:[^#\n]*)([^\n]*)/\1 ldap \2#Added by Sourceforge install\n#Comment by Sourceforge install#\1\2/gs" /etc/nsswitch.conf.sourceforge-new
+    fi
 }
 
 # Purge /etc/nsswitch.conf
 purge_nsswitch()
 {
-	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/nsswitch.conf
-	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/nsswitch.conf
+    cp -a /etc/nsswitch.conf /etc/nsswitch.conf.sourceforge-new
+    perl -pi -e "s/^([^\n]*)ldap([^\n]*)#Added by Sourceforge install\n/\1\2/" /etc/nsswitch.conf.sourceforge-new
+    perl -pi -e "s/#Comment by Sourceforge install#//" /etc/nsswitch.conf.sourceforge-new
 }
 
 # Load ldap database from sourceforge database
@@ -292,16 +302,20 @@ FIN
 
 # Main
 case "$1" in
-	configure)
+	configure-files)
 		dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
 		setup_vars
 		echo "Modifying /etc/ldap/slapd.conf"
-		purge_slapd
-		modify_slapd $dn
+		# purge_slapd
+		configure_slapd $dn
 		echo "Modifying /etc/libnss-ldap.conf"
-		modify_libnss_ldap $dn
+		configure_libnss_ldap $dn
 		echo "Modifying /etc/nsswitch.conf"
-		modify_nsswitch
+		configure_nsswitch
+		;;
+	configure)
+		dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.pl | cut -d\' -f2)
+		setup_vars
 		# Restarting ldap 
 		invoke-rc.d slapd restart
 		sleep 5		# Sometimes it takes a bit of time to get out of bed
@@ -317,13 +331,15 @@ case "$1" in
 		# [ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && load_ldap $dn $secret &>/dev/null
 		# [ -f /etc/ldap.secret ] || load_ldap $dn $secret
 		;;
-	purge)
+	purge-files)
 		echo "Purging /etc/ldap/slapd.conf"
 		purge_slapd
 		echo "Purging /etc/nsswitch.conf"
 		purge_nsswitch
 		echo "Purging /etc/libnss-ldap.conf"
 		purge_libnss_ldap
+		;;
+	purge)
 		$0 empty
 		;;
 	list)
