@@ -345,7 +345,7 @@ menu	project_admin	プロジェクト管理
 menu	project_help_wanted	プロジェクト協力者募集
 menu	project_summary	プロジェクトサマリー
 menu	register_project	新規プロジェクト登録
-menu	search	サーチ
+menu	search	検索
 menu	site_status	サイトステータス
 menu	software_map	ソフトマップ
 menu	top_projects	トッププロジェクト
@@ -395,7 +395,7 @@ my_diary	title	日記 &amp; ノート
 new	title	ニューリリース
 news	section	プロジェクト: $1
 news	title	ニュース
-news	choose	<p>ニュースアイテムを選択するとニュースの 閲覧、サーチ、投稿ができます。<p>
+news	choose	<p>ニュースアイテムを選択するとニュースの 閲覧、検索、投稿ができます。<p>
 news	nonews	ニュースが見つかりません
 news	nonewsfor	$1 のニュースは見つかりません。
 news	noitems	アイテムは見つかりません
@@ -509,7 +509,7 @@ register_requirements	section	 新規プロジェクト登録
 register_requirements	title	サービス &amp; 資格
 register_tos	section	新規プロジェクト登録
 register_tos	title	サービス規約\n
-search	title	サーチ
+search	title	検索
 sendmessage	about_blurb	スパムを減少させるため、このフォームを使ってメールを送るようにしています。<p>このフォームは正確に記入してください。そうしないと、受取人は返事ができません。<p><font color="red"><b>解決方法を待っているあなたに: </b> このサイトのドキュメントを読みましたか？<b>ユーザーID</b>と<b>ユーザー名</b>をいれましたか？ もし、あなたがプロジェクトを組んでいるのなら<b>プロジェクトID</b>と<b>プロジェクト名</b>も記入してください。
 sendmessage	title	$1 へメッセージを送信
 snippet	title	サンプルコードライブラリ
@@ -643,7 +643,7 @@ image	newaccount	newaccount.png
 searchbox	softwaregroup	ソフト/グループ
 searchbox	skill	スキル
 searchbox	people	人物
-searchbox	search	サーチ
+searchbox	search	検索
 searchbox	forum	フォーラム
 searchbox	task	タスク
 calendar	title	プロジェクト マネージメント：カレンダー
