@@ -158,16 +158,20 @@ EOF
 	fi
 	[ -x /usr/bin/newaliases ] && newaliases
 
+	# Prepare a few variables for the DNS stuff
+	db_get sourceforge/domain_name
+	domain_name=$RET
+	db_get sourceforge/ip_address
+	ip_address=$RET
+
+	# Clean debconf after ourselves
+	db_stop
 
 	# Install the chroot environment
 	/usr/lib/sourceforge/bin/install-chroot.sh
 	
 	# Create the DNS zone
-	echo "Installing Sourceforge DNS zone"
-	db_get sourceforge/domain_name
-	domain_name=$RET
-	db_get sourceforge/ip_address
-	ip_address=$RET
+	# echo "Installing Sourceforge DNS zone"
 	/usr/lib/sourceforge/bin/install-dns.sh $domain_name $ip_address
 	
         # Setup our CVS
@@ -194,9 +198,6 @@ EOF
 	# logs
 	chown root:sourceforge /var/log/sourceforge/cvs
 	chmod 775 /var/log/sourceforge/cvs
-
-	# Clean after ourselves
-	db_stop
 
 	# Restart some services
 	/etc/init.d/bind9 restart
