@@ -63,7 +63,6 @@ if ($form_catroot == 1) {
 <TD><b>Status</b></TD>
 <TD><b>Public?</b></TD>
 <TD><b>License</b></TD>
-<TD><b>Categories</b></TD>
 <TD><B>Members</B></TD>
 </TR>
 
@@ -76,11 +75,6 @@ while ($grp = db_fetch_array($res)) {
 	print "<td>$grp[is_public]</td>";
 	print "<td>$grp[license]</td>";
 	
-	// categories
-	$count = db_query("SELECT group_id FROM group_category WHERE "
-                . "group_id=$grp[group_id]");
-        print ("<td>" . db_numrows($count) . "</td>");
-
 	// members
 	$res_count = db_query("SELECT user_id FROM user_group WHERE group_id=$grp[group_id]");
 	print "<TD>" . db_numrows($res_count) . "</TD>";

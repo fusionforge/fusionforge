@@ -4,8 +4,10 @@ sourceforge (2.6-0+14+) experimental; urgency=low
   * [Christian] Added the possibility of a language by theme customization
   * [Christian] Included full Spanish translation from Vicente Ruiz.  Thanks
     again
+  * [Christian] Removed the unused categories column in
+    www/admin/grouplist.php 
 
- -- Christian Bayle <bayle@debian.org>  Tue, 26 Nov 2002 00:13:55 +0100
+ -- Christian Bayle <bayle@debian.org>  Tue, 26 Nov 2002 00:18:01 +0100
 
 sourceforge (2.6-0+14) experimental; urgency=low
 
