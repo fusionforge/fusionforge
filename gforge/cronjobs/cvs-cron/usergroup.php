@@ -8,6 +8,27 @@ the /etc/passwd /etc/shadow and /etc/group files
 It also creates blank user home directories and 
 creates a group home directory with a template in it.
 
+#
+# * hosts
+#
+<VirtualHost 192.168.1.5>
+ServerName gforge.company.com
+ServerAlias *.gforge.company.com
+VirtualDocumentRoot /home/groups/%1/htdocs
+VirtualScriptAlias /home/groups/%1/cgi-bin
+<Directory /home/groups>
+Options Indexes FollowSymlinks
+AllowOverride All
+order allow,deny
+allow from all
+</Directory>
+LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+CustomLog "|/usr/local/sbin/cronolog /home/groups/%1/logs/%Y/%m/%d/gforge.log" gforge
+# Ensure that we don't try to use SSL on SSL Servers
+ <IfModule apache_ssl.c>
+ SSLDisable
+ </IfModule>
+</VirtualHost> 
 */
 require_once('squal_pre.php');
 require ('common/include/cron_utils.php');
@@ -219,6 +240,8 @@ foreach($groups as $group) {
 
 	} else {
 		@mkdir($groupdir_prefix."/".$group);
+		@mkdir($groupdir_prefix."/".$group."/htdocs");
+		@mkdir($groupdir_prefix."/".$group."/cgi-bin");
 		$g =& group_get_object_by_name($group);
 
 		//
@@ -242,7 +265,7 @@ foreach($groups as $group) {
 		//
 		//	Write the file back out to the project home dir
 		//
-		$fw=fopen($groupdir_prefix."/".$group."/index.php",'w');
+		$fw=fopen($groupdir_prefix."/".$group."/htdocs/index.php",'w');
 		fwrite($fw,$contents);
 		fclose($fw);
 		
@@ -257,7 +280,7 @@ foreach($groups as $group) {
 		//group has no members, so cannot create dir
 	} else {
 		$user=db_result($resgroupadmin,0,'user_name');
-		system("chown $user:$group $groupdir_prefix/$group");
+		system("chown -R $user:$group $groupdir_prefix/$group");
 	}
 }
 
