@@ -204,7 +204,7 @@ configure_slapd(){
 	      # echo "Adding $schema"
 	  else
 	      # echo "Commenting $schema"
-	      perl -pi -e "s/^include[ 	]*\$schema/#Comment by GForge install#include	\$schema/g" /etc/ldap/slapd.conf.gforge-new
+	      perl -pi -e "s/^include[ 	]*$schema/#Comment by GForge install#include	\$schema/g" /etc/ldap/slapd.conf.gforge-new
 	      echo "include	$schema	#Added by GForge install" >> $tmpfile
 	      # echo "Adding $schema"
 	  fi
@@ -232,6 +232,11 @@ access to dn=\"ou=People,$gforge_base_dn\"
         by dn=\"$slapd_admin_dn\" write
 	by * read
 access to dn=\"ou=Group,$gforge_base_dn\"
+	by dn=\"$gforge_admin_dn\" write
+	by dn=\"$robot_dn\" write
+        by dn=\"$slapd_admin_dn\" write
+	by * read
+access to dn=\"ou=mailingList,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
