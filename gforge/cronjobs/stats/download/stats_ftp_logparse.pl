@@ -20,7 +20,7 @@ $|++;
 ##  CONF VARS
 
 	my $verbose = 1;
-	my $chronolog_basedir = "/home/ftplogs";
+	my $chronolog_basedir = "/var/log/sourceforge";
 
 ##
 #######################
