@@ -166,8 +166,10 @@ if (user_isloggedin()) {
 	//if you aren't logged in, check your browser settings 
 	//and see if we support that language
 	//if we don't support it, just use English as default
-	$res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
-	$classname=db_result($res,0,'classname');
+        if ($HTTP_ACCEPT_LANGUAGE) {
+               $res = language_code_to_result ($HTTP_ACCEPT_LANGUAGE);
+               $classfile=db_result($res,0,'filename');
+       }
 	if (!$classname) {
 		$classname=$sys_lang;
 	}

@@ -29,8 +29,9 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     sourceforge-web-apache.
   * [Roland] [From 2.5] Sort documents by title.
   * [Roland] Fix email delivery to users, patch from Vicente Ruiz.
+  * [Otavio] Now the browser accepted language are only read if set.
 
- -- Roland Mas <lolando@debian.org>  Thu, 17 Oct 2002 19:08:03 +0200
+ -- Roland Mas <lolando@debian.org>  Fri, 18 Oct 2002 18:59:19 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
