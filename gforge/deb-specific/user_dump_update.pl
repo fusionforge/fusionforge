@@ -80,7 +80,7 @@ sub add_user {
 	my ($uid, $gid, $username, $realname, $shell, $passwd) = @_;
 	my $skel_array = ();
 	
-	$home_dir = $homedir_prefix.$username;
+	$home_dir = $homedir_prefix."/".$username;
 
 	if($verbose){print("Making a User Account for : $username\n")};
 		

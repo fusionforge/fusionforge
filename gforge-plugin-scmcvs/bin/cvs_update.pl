@@ -165,7 +165,7 @@ while ($ln = pop(@group_array)) {
 sub add_or_update_anoncvs_user {  
 	my ($uid, $username, $gid) = @_;
 	
-	$home_dir = $homedir_prefix.$username;
+	$home_dir = $homedir_prefix."/".$username;
 	
 	if ( -d $home_dir ) {
 	    chmod 0755, $home_dir;
