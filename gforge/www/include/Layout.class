@@ -200,15 +200,11 @@ class Layout extends Error {
 
 	<TR>
 		<TD>&nbsp;</TD>
-		<TD>&nbsp;</TD>
-
-		<TD>
+		<TD COLSPAN=3>
 
 <?php echo $this->outerTabs($params); ?>
 
 		</TD>
-
-		<TD>&nbsp;</TD>
 		<TD>&nbsp;</TD>
 	</TR>
 
