@@ -4,32 +4,59 @@ require_once('www/include/squal_pre.php');
 require_once('common/mail/MailingList.class');
 require_once('common/include/Group.class');
 
-$res = db_query("SELECT group_id, group_name FROM groups ORDER BY group_id");
+$res = db_query("SELECT group_id, unix_group_name 
+	FROM groups 
+	WHERE STATUS='A' ORDER BY group_id");
 
 if (!$res) {
 	echo "FAIL\n";
 	exit();
 } else {
-	$arr = util_result_column_to_array($res);
-	for ($i=0; $i<count($arr); $i++) {
-		$group_id   = $arr[$i][0];
-		$group_name = $arr[$i][1];
+
+	for ($i=0; $i<db_numrows($res); $i++) {
+		$group_id   = db_result($res,$i,'group_id');
+		$group_name = db_result($res,$i,'unix_group_name');
 	
-		$res_aux2 = db_query("SELECT * FROM mail_group_list WHERE group_id = '".$group_id."' AND list_name = '".$group_name."-commits'");
+		$res2 = db_query("SELECT * FROM mail_group_list 
+			WHERE group_id = '".$group_id."' 
+			AND list_name = '".$group_name."-commits'");
 	
-		if (db_numrows($res_aux) > 0) {
+		if (db_numrows($res2) < 1) {
 			$group = new Group($group_id);
 	
-			$res_aux2 = db_query("SELECT user_id FROM user_group WHERE admin_flags = 'A' AND group_id = '".$group_id."'");
+			$res_aux2 = db_query("SELECT user_id FROM user_group 
+				WHERE admin_flags = 'A' 
+				AND group_id = '".$group_id."'");
 	
-			$group_admin = db_result($res,0,'user_id');
+			$group_admin = db_result($res_aux2,0,'user_id');
 	
 			echo "Will create mailing list for <b>".$group_name."-commits</b><br>\n";
 			$mailing_list = new MailingList($group);
-			$mailing_list->create($group_name.'-commits', 'cvs commits', 1,$group_admin);
-			echo $mailing_list->getErrorMessage();
+			if (!$mailing_list || !is_object($mailing_list)) {
+				$was_error=true;
+				echo "Could Not Get MailingList Object for $group_name";
+			} elseif ($mailing_list->isError()) {
+				$was_error=true;
+				echo "Could Not Get MailingList Object for $group_name: ".$mailing_list->getErrorMessage();
+			} else {
+				if (!$mailing_list->create($group_name.'-commits', 'cvs commits', 1,$group_admin)) {
+					$was_error=true;
+					echo "Could Not Create New Mailing List for $group_name: ".$mailing_list->getErrorMessage();
+				} else {
+					if ($mailing_list->isError()) {
+						$was_error=true;
+						echo $mailing_list->getErrorMessage();
+					} else {
+
+					}
+				}
+			}
 		}
 	}
-	echo "SUCCESS\n";
+	if ($was_error) {
+		echo "FAIL\n";
+	} else {
+		echo "SUCCESS\n";
+	}
 }
 ?>
