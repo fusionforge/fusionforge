@@ -28,6 +28,13 @@ setup_vars() {
     ldap_suffix=$(grep suffix /etc/ldap/slapd.conf | cut -d\" -f2)
 
     tmpfile_pattern=/tmp/$(basename $0).XXXXXX
+
+    if [ "$DEBSFDEBUG" != 1 ] ; then
+	DEVNULL12="> /dev/null 2>&1"
+	DEVNULL2="2> /dev/null"
+    else
+	set -x
+    fi
 }
 
 show_vars () {
@@ -45,10 +52,10 @@ show_vars () {
 
 # Check Server
 check_server() {
-    answer=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts 2> /dev/null | grep "namingContexts:" | cut -d" " -f2)
+    answer=$(eval "ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts $DEVNULL2" | grep "namingContexts:" | cut -d" " -f2)
     if [ "x$answer" == "x" ] ; then 
-	invoke-rc.d slapd restart > /dev/null 2>&1 && sleep 5
-	answer=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts 2> /dev/null \
+	eval "invoke-rc.d slapd restart $DEVNULL12" && sleep 5
+	answer=$(eval "ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts $DEVNULL2" \
 	    | grep "namingContexts:" \
 	    | cut -d" " -f2)
     fi
@@ -238,28 +245,12 @@ load_ldap(){
         # echo "Creating ldif file from database"
 	tmpldif=$(mktemp $tmpfile_pattern)
 	dc=$(echo $sf_ldap_base_dn | cut -d, -f1 | cut -d= -f2)
-	cat > /dev/null <<EOF
-dn: $sf_ldap_base_dn
-dc: $dc
-objectClass: top
-objectClass: domain
-objectClass: domainRelatedObject
-associatedDomain: $sf_ldap_host
-
-dn: ou=People,$sf_ldap_base_dn
-ou: People
-objectClass: top
-objectClass: organizationalUnit
-objectClass: domainRelatedObject
-associatedDomain: $sf_ldap_host
-
-EOF
 	/usr/lib/sourceforge/bin/sql2ldif.pl >> $tmpldif
         # echo "Filling LDAP with database"
-	if ! ldapadd -r -c -D "cn=admin,$ldap_suffix" -x -w"$ldap_passwd" -f $tmpldif > /dev/null 2>&1 ; then
+	if ! eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif $DEVNULL12" ; then
             # Some entries could not be added (already there)
             # Therefore, we have to modify them
-	    ldapmodify -r -c -D "cn=admin,$ldap_suffix" -x -w"$ldap_passwd" -f $tmpldif > /dev/null 2>&1
+	    eval "ldapmodify -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -f $tmpldif $DEVNULL12"
 	fi
 	rm -f $tmpldif
     else
@@ -303,7 +294,7 @@ setup_robot() {
     check_server
     echo "Adding robot accounts"
     
-    { ldapadd -r -c -D "cn=admin,$ldap_suffix" -x -w"$ldap_passwd" > /dev/null 2>&1 || true ; } <<-FIN
+    { eval "ldapadd -r -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' $DEVNULL12" || true ; } <<-FIN
 dn: cn=Replicator,$sf_ldap_base_dn
 description: Replicator the Robot
 objectClass: organizationalRole
@@ -320,7 +311,7 @@ cn: SF_robot
 FIN
     check_server
 
-    ldapmodify -v -c -D "cn=admin,$ldap_suffix" -x -w"$ldap_passwd" > /dev/null 2>&1 <<-FIN
+    eval "ldapmodify -v -c -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' $DEVNULL12" <<-FIN
 dn: cn=SF_robot,$sf_ldap_base_dn
 changetype: modify
 replace: userPassword
@@ -329,7 +320,7 @@ FIN
     check_server
     # echo "Testing LDAP"
     # echo "Changing dummy cn using SF_robot account"
-    ldapmodify -v -c -D "cn=SF_Robot,$sf_ldap_base_dn" -x -w"$sf_ldap_passwd" > /dev/null 2>&1 <<-FIN
+    eval "ldapmodify -v -c -D 'cn=SF_Robot,$sf_ldap_base_dn' -x -w'$sf_ldap_passwd' $DEVNULL12" <<-FIN
 dn: uid=dummy,ou=People,$sf_ldap_base_dn
 changetype: modify
 replace: cn
@@ -406,7 +397,7 @@ case "$1" in
 		echo cn=SF_robot,$sf_ldap_base_dn
 	    } | sort -u # ...then uniquify that list
 	}
-	get_our_entries | ldapdelete -D "cn=admin,$ldap_suffix" -x -w"$ldap_passwd" -c > /dev/null 2>&1 || true
+	get_our_entries | eval "ldapdelete -D 'cn=admin,$ldap_suffix' -x -w'$ldap_passwd' -c $DEVNULL12" || true
 	;;
     reset)
 	setup_vars

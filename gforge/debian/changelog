@@ -32,8 +32,11 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Otavio] Now the browser accepted language are only read if set.
   * [Christian] i18n for project Approval/Rejection/Submission mail
   * [Paddington] preserve release date hh:mm in "Edit Releases"
+  * [Roland] Added eval magic in install-ldap.sh to help debugging.
+    "export DEBSFDEBUG=1" will disable all the redirections, thus showing
+    the STDOUT and STDERR of all commands.
 
- -- Christian Bayle <bayle@debian.org>  Sun, 20 Oct 2002 11:04:01 +0200
+ -- Roland Mas <lolando@debian.org>  Mon, 21 Oct 2002 13:47:51 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
