@@ -25,6 +25,9 @@ define('SEARCH__PARAMETER_GROUP_PROJECT_ID', 'group_project_id');
 define('SEARCH__OUTPUT_RSS', 'rss');
 define('SEARCH__OUTPUT_HTML', 'html');
 
+define('SEARCH__MODE_OR', 'or');
+define('SEARCH__MODE_AND', 'and');
+
 /* Mailing lists */
 
 define('MAIL__MAILING_LIST_IS_PRIVATE', '0');
