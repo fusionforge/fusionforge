@@ -98,6 +98,9 @@ class ProjectGroupFactory extends Error {
 				$public_flag='=1';
 			} else {
 				$public_flag='<3';
+				$exists=' AND EXISTS (SELECT group_project_ID 
+					FROM project_perm 
+					WHERE perm_level >= 0 AND group_project_id=project_group_list.group_project_id) ';
 			}
 		} else {
 			$public_flag='=1';
@@ -106,7 +109,7 @@ class ProjectGroupFactory extends Error {
 		$sql="SELECT *
 			FROM project_group_list
 			WHERE group_id='". $this->Group->getID() ."' 
-			AND is_public $public_flag 
+			AND is_public $public_flag $exists
 			ORDER BY group_project_id;";
 
 		$result = db_query ($sql);

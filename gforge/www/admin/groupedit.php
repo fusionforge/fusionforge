@@ -1,19 +1,17 @@
 <?php
 /**
-  *
-  * Site Admin group properties editing page
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
+ * Site Admin group properties editing page
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ * @version   $Id$
+ */
 
 require_once('pre.php');
-require_once('common/include/vars.php');
+require_once('common/include/license.php');
 require_once('www/admin/admin_utils.php');
 require_once('www/project/admin/project_admin_utils.php');
 
@@ -147,17 +145,9 @@ echo '<h2>'.$group->getPublicName().'</h2>' ;?>
 <?php echo $Language->getText('admin','license'); ?>
 </td>
 <td>
-<select name="form_license">
-<option value="none"><?php echo $Language->getText('admin','na'); ?></option>
-<option value="other"><?php echo $Language->getText('admin','other'); ?></option>
 <?php
-	while (list($k,$v) = each($LICENSE)) {
-		print "<option value=\"$k\"";
-		if ($k == $group->getLicense()) print " selected=\"selected\"";
-		print ">$v</option>\n";
-	}
+	echo license_selectbox('form_license',$group->getLicense());
 ?>
-</select>
 </td>
 </tr>
 

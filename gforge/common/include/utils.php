@@ -84,7 +84,7 @@ function util_check_fileupload($filename) {
  * @param		string	The optional email sender name. Defaults to ''
  *
  */
-function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='') {
+function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='',$extra_headers='') {
 	global $Language;
 	global $sys_sendmail_path;
 
@@ -96,7 +96,13 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='') {
 	}
 
 	$charset = $Language->getText('conf','mail_charset');
-	$body = "To: $to".
+	if (!$charset) {
+		$charset = 'ISO-8859-1';
+	}
+	if ($extra_headers) {
+		$body2 = $extra_headers."\n";
+	}
+	$body2 .= "To: $to".
 		"\nFrom: ".util_encode_mailaddr($from,$sendername,$charset).
 		"\nBCC: $BCC".
 		"\nSubject: ".util_encode_mimeheader($subject, $charset).
@@ -108,7 +114,7 @@ function util_send_message($to,$subject,$body,$from='',$BCC='',$sendername='') {
 		$sys_sendmail_path="/usr/sbin/sendmail";
 	}
 
-	exec ("/bin/echo \"". util_prep_string_for_sendmail($body) .
+	exec ("/bin/echo \"". util_prep_string_for_sendmail($body2) .
 		  "\" | ".$sys_sendmail_path." -f'$from' -t -i > /dev/null 2>&1 &");
 }
 
@@ -225,8 +231,9 @@ function util_prep_string_for_sendmail($body) {
  *	@param	string	the message body
  *	@param	string	a comma-separated list of email address
  *	@param	string	a comma-separated list of jabber address
+ *	@param	string	From header
  */
-function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabbers='') {
+function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabbers='',$from='') {
 	$address=array();
 
 	if (count($id_arr) < 1) {
@@ -261,7 +268,7 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 		}
 	}
 	if ($extra_email1 || $extra_emails) {
-		util_send_message('',$subject,$body,'',$extra_email1.$extra_emails);
+		util_send_message('',$subject,$body,$from,$extra_email1.$extra_emails);
 	}
 	if ($extra_jabber1 || $extra_jabbers) {
 		util_send_jabber($extra_jabber1.$extra_jabbers,$subject,$body);

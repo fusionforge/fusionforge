@@ -47,7 +47,6 @@ function project_admin_header($params) {
 	$links = array();
 	
 	$labels[] = $Language->getText('project_admin_utils','admin');
-	$labels[] = $Language->getText('project_admin_utils','user_permissions');
 	$labels[] = $Language->getText('project_admin_utils','edit_public_info');
 	$labels[] = $Language->getText('project_admin_utils','project_history');
 	if($GLOBALS['sys_use_people']) {
@@ -66,7 +65,6 @@ function project_admin_header($params) {
 	$labels[] = $Language->getText('project_admin_utils','stats');
 	
 	$links[] = '/project/admin/?group_id='.$group_id;
-	$links[] = '/project/admin/userperms.php?group_id='.$group_id;
 	$links[] = '/project/admin/editgroupinfo.php?group_id='.$group_id;
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
 	if($GLOBALS['sys_use_people']) {

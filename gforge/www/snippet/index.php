@@ -11,7 +11,6 @@
   *
   */
 require_once('pre.php');
-require_once('common/include/vars.php');
 require_once('www/snippet/snippet_utils.php');
 
 /**

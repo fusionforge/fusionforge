@@ -1,68 +1,87 @@
 <?php
 /**
-  *
-  * Project Admin Main Page
-  *
-  * This page contains administrative information for the project as well
-  * as allows to manage it. This page should be accessible to all project
-  * members, but only admins may perform most functions.
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * Project Admin Main Page
+ *
+ * This page contains administrative information for the project as well
+ * as allows to manage it. This page should be accessible to all project
+ * members, but only admins may perform most functions.
+ *
+ * Copyright 2004 GForge, LLC
+ *
+ * @version   $Id$
+ * @author Tim Perdue tim@gforge.org
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
+require_once('www/include/role_utils.php');
 require_once('common/include/account.php');
-
-session_require(array('group'=>$group_id));
 
 // get current information
 $group =& group_get_object($group_id);
-exit_assert_object($group,'Group');
-
-$perm =& $group->getPermission( session_get_user() );
-exit_assert_object($perm,'Permission');
-
-// only site admin get access inactive projects
-if (!$group->isActive() && !$perm->isSuperUser()) {
-	exit_error('Permission denied', 'Group is inactive.');
+if (!$group || !is_object($group)) {
+	exit_error('Error','Could Not Get Group');
+} elseif ($group->isError()) {
+	exit_error('Error',$group->getErrorMessage());
 }
 
-$is_admin = $perm->isAdmin();
+$perm =& $group->getPermission( session_get_user() );
+if (!$perm || !is_object($perm)) {
+	exit_error('Error','Could Not Get Permission');
+} elseif ($perm->isError()) {
+	exit_error('Error',$perm->getErrorMessage());
+}
 
-// Only admin can make modifications via this page
-if ($is_admin && $func) {
-	/*
-		updating the database
-	*/
-	if ($func=='adduser') {
+if (!$perm->isAdmin()) {
+	exit_permission_denied();
+}
+
+if ($submit) {
+	if ($adduser) {
 		/*
 			add user to this project
 		*/
-
-		if (!$group->addUser($form_unix_name)) {
+		if (!$group->addUser($form_unix_name,$role_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_added');
 		}
-
-	} else if ($func=='rmuser') {
+	} else if ($rmuser) {
 		/*
 			remove a user from this group
 		*/
-		if (!$group->removeUser($rm_id)) {
+		if (!$group->removeUser($user_id)) {
 			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_removed');
 		}
+	} else if ($updateuser) {
+		/*
+			Adjust User Role
+		*/
+		if (!$group->updateUser($user_id,$role_id)) {
+			$feedback .= 'Foo'.$group->getErrorMessage();
+		} else {
+			$feedback = $Language->getText('project_admin','user_updated');
+		}
 	}
-
 }
 
 $group->clearError();
@@ -76,7 +95,8 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 ?>
 
 <table width="100%" cellpadding="2" cellspacing="2" border="0">
-<tr valign="top"><td width="50%">
+	<tr valign="top">
+		<td width="50%">
 
 <?php echo $HTML->boxTop($Language->getText('project_admin','project_information'));  ?>
 
@@ -90,102 +110,16 @@ project_admin_header(array('title'=>$Language->getText('project_admin','title', 
 
 <p align="center">
 <a href="/tarballs.php?group_id=<?php echo $group_id; ?>">[ <?php echo $Language->getText('project_admin','download_tarball') ?>]</a></p>
-<p>&nbsp;</p>
+</p>
 <hr />
-<p>&nbsp;</p>
-<h4><?php echo $Language->getText('project_admin','trove_categorization') ?><a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('general','edit') ?>]</a></h4>
 <p>
+<h4><?php echo $Language->getText('project_admin','trove_categorization') ?><a href="/project/admin/group_trove.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('general','edit') ?>]</a></h4>
+</p>
 <?php
-echo $HTML->boxBottom(); 
-
-echo '
-</td><td>&nbsp;</td><td width="50%">';
-
-
-echo $HTML->boxTop($Language->getText('project_admin','group_members'));
-
-/*
-
-	Show the members of this project
-
-*/
-
-$res_memb = db_query("SELECT users.realname,users.user_id,users.user_name,user_group.admin_flags ".
-		"FROM users,user_group ".
-		"WHERE users.user_id=user_group.user_id ".
-		"AND user_group.group_id='$group_id'");
-
-print '<table width="100% border="0">';
-
-while ($row_memb=db_fetch_array($res_memb)) {
-
-	if (stristr($row_memb['admin_flags'], 'A')) {
-		$img="trash-x.png";
-	} else {
-		$img="trash.png";
-	}
-	if ($is_admin) {
-		$button='<input type="image" name="DELETE" src="'.$HTML->imgroot.'/ic/'.$img.'" height="16" width="16" border="0" />';
-	} else {
-		$button='&nbsp;';
-	}
-	print '
-		<form action="rmuser.php" method="post"><input type="hidden" name="func" value="rmuser" />'.
-		'<input type="hidden" name="return_to" value="'.$REQUEST_URI.'" />'.
-		'<input type="hidden" name="rm_id" value="'.$row_memb['user_id'].'" />'.
-		'<input type="hidden" name="group_id" value="'. $group_id .'" />'.
-		'<tr><td align="center">'.$button.'</td></form>'.
-		'<td><a href="/users/'.$row_memb['user_name'].'/">'.$row_memb['realname'].'</a></td></tr>';
-}
-print '</table>';
-
-/*
-	Add member form
-*/
-
-if ($is_admin) {
-
-	// After adding user, we go to the permission page for one
-?>
-	<hr size="1" />
-	<form action="userpermedit.php?group_id=<?php echo $group->getID(); ?>" method="post">
-	<input type="hidden" name="func" value="adduser" />
-	<table width="100%" border="0">
-	<tr><td><strong><?php echo $Language->getText('project_admin','unix_name') ?>:</strong></td><td><input type="text" name="form_unix_name" size="10" value="" /></td></tr>
-	<tr><td colspan="2" align="center"><input type="submit" name="submit" value="<?php echo $Language->getText('project_admin','add_user') ?>" /></td></tr></form>
-	</table>
-
-	<hr size="1" />
-	<div align="center">
-	<a href="/project/admin/userperms.php?group_id=<?php echo $group->getID(); ?>">[<?php echo $Language->getText('project_admin','edit_member_permissions') ?>]</a>
-	</div>
-	</td></tr>
-
-<?php
-}
-?>
- 
-
-</td>
-<td width="50%">
-&nbsp;
-</td>
-<?php echo $HTML->boxBottom();?>
-</tr>
-
-<tr valign="top"><td width="50%">
-
-<?php
-
-/*
-	Tool admin pages
-*/
-
-echo $HTML->boxTop($Language->getText('project_admin','tool_admin').'');
+echo $HTML->boxMiddle($Language->getText('project_admin','tool_admin').'');
 
 ?>
 
-<br />
 <a href="/tracker/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','tracker_admin') ?></a><br />
 <a href="/docman/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','docmanager_admin') ?></a><br />
 <a href="/mail/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','mail_admin') ?></a><br />
@@ -194,40 +128,101 @@ echo $HTML->boxTop($Language->getText('project_admin','tool_admin').'');
 <a href="/forum/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','forum_admin') ?></a><br />
 <a href="/frs/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','frs_admin') ?></a><br />
 <a href="/scm/admin/?group_id=<?php echo $group->getID(); ?>"><?php echo $Language->getText('project_admin','scm_admin') ?></a><br />
+<?php
+$hook_params = array () ;
+$hook_params['group_id'] = $group_id ;
+plugin_hook ("project_admin_plugins", $hook_params) ;
 
-<?php echo $HTML->boxBottom(); ?>
 
+echo $HTML->boxBottom(); 
 
+?>
+		</td>
+		<td>&nbsp;</td>
+		<td width="50%">
 
-
-</td>
-</tr>
-
-<tr>
-<td>
 <?php
 
-if (plugin_hook_listeners ("project_admin_plugins") > 0) {
-	echo $HTML->boxTop($Language->getText('project_admin','plugins_admin'));
-	$hook_params = array () ;
-	$hook_params['group_id'] = $group_id ;
-	plugin_hook ("project_admin_plugins", $hook_params) ;
+		echo $HTML->boxTop($Language->getText('project_admin','group_members'));
 
-	echo $HTML->boxBottom();
+		/*
+
+			Show the members of this project
+
+		*/
+
+		$res_memb = db_query("SELECT users.realname,users.user_id,
+			users.user_name,user_group.admin_flags,user_group.role_id
+			FROM users,user_group 
+			WHERE users.user_id=user_group.user_id 
+			AND user_group.group_id='$group_id' ORDER BY user_id");
+
+		echo '
+		<table width="100% border="2">
+			<tr><td><strong>'.$Language->getText('project_admin','unix_name').'</strong></td>
+			<td><strong>'.$Language->getText('rbac_edit','role').'</strong></td>
+			<td><strong>'.$Language->getText('rbac_edit','update').'</strong></td>
+			<td><strong>'.$Language->getText('rbac_edit','remove').'</strong></td></tr>';
+
+while ($row_memb=db_fetch_array($res_memb)) {
+
+		echo '
+			<form action="'.$PHP_SELF.'" method="post">
+			<input type="hidden" name="submit" value="y" />
+			<input type="hidden" name="user_id" value="'.$row_memb['user_id'].'" />
+			<input type="hidden" name="group_id" value="'. $group_id .'" />
+			<td>'.$row_memb['realname'].'</td>
+			<td>'.role_box($group_id,'role_id',$row_memb['role_id']).'</td>
+			<td><input type="submit" name="updateuser" value="'.$Language->getText('rbac_edit','update').'"></td>
+			<td><input type="submit" name="rmuser" value="'.$Language->getText('rbac_edit','remove').'"></td>
+			</tr></form>';
 }
+		echo '
+			<tr><td>'.$Language->getText('rbac_edit','observerusername').'</td>
+			<td></td>
+			<form action="roleedit.php?group_id='. $group_id .'&amp;role_id=observer" method="POST">
+			<td colspan="2"><input type="submit" name="edit" value="'.$Language->getText('rbac_edit','observer').'"></td></form></tr>';
+
+/*
+	Add member form
+*/
+
 ?>
+			<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
+			<input type="hidden" name="submit" value="y" />
+			<tr><td><input type="text" name="form_unix_name" size="10" value="" /></td>
+			<td><?php echo role_box($group_id,'role_id',$row_memb['role_id']); ?></td>
+			<td colspan="2"><input type="submit" name="adduser" value="<?php echo $Language->getText('project_admin','add_user') ?>" /></td>
+			</tr></form>
+
+			<tr><td colspan="4"><a href="massadd.php?group_id=<?php echo $group_id; ?>"><?php echo $Language->getText('project_admin','addfromlist'); ?></a></td></tr>
+		</table>
+<!--	</td></tr>
 </td>
-</tr>
+<td width="50%">
+&nbsp;
+</td>-->
+<?php 
+
+//
+//	RBAC Editing Functions
+//
+echo $HTML->boxMiddle($Language->getText('rbac_edit','editroles'));
+echo '<form action="roleedit.php?group_id='. $group_id .'" method="POST">';
+echo role_box($group_id,'role_id','');
+echo '<input type="submit" name="edit" value="'.$Language->getText('rbac_edit','editrole').'"></form>';
+
+echo '<p><a href="roleedit.php?group_id='.$group_id.'">'.$Language->getText('rbac_edit','addrole').'</a>';
+
+echo $HTML->boxBottom();?>
+
+		</td>
+	</tr>
 
 </table>
 
 <?php
 
 project_admin_footer(array());
-
-// Local Variables:
-// mode: php
-// c-file-style: "bsd"
-// End:
 
 ?>

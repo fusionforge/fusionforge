@@ -150,13 +150,13 @@ class ArtifactType extends Error {
 					return false;
 				}
 			}
-			if (!$this->isPublic()) {
-	                	$perm =& $this->Group->getPermission( session_get_user() );
-			        if (!$perm || !is_object($perm) || !$perm->isMember()) {
-	                		$this->setPermissionDeniedError();
-					$this->data_array = null;
-	                		return false;
-				}
+			//
+			//  Make sure they can even access this object
+			//
+			if (!$this->userCanView()) {
+				$this->setPermissionDeniedError();
+				$this->data_array = null;
+				return false;
 			}
 		}
 	}
@@ -166,8 +166,8 @@ class ArtifactType extends Error {
 	 *
 	 *	@param	string	The type name.
 	 *	@param	string	The type description.
-	 *	@param	bool	(1) true (0) false - viewable by general public.
-	 *	@param	bool	(1) true (0) false - whether non-logged-in users can submit.
+	 *  @param  bool	(1) true (0) false - viewable by general public.
+	 *  @param  bool	(1) true (0) false - whether non-logged-in users can submit.
 	 *	@param	bool	(1) true (0) false - whether to email on all updates.
 	 *	@param	string	The address to send new entries and updates to.
 	 *	@param	int		Days before this item is considered overdue.
@@ -200,10 +200,10 @@ class ArtifactType extends Error {
 			$email_all=0;
 		}
 
-                $use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
-                $is_public = ((!$is_public) ? 0 : $is_public);
-                $allow_anon = ((!$allow_anon) ? 0 : $allow_anon);
-                $email_all = ((!$email_all) ? 0 : $email_all);
+		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution);
+		$is_public = ((!$is_public) ? 0 : $is_public);
+		$allow_anon = ((!$allow_anon) ? 0 : $allow_anon);
+		$email_all = ((!$email_all) ? 0 : $email_all);
 
 
 		$sql="INSERT INTO 
@@ -250,8 +250,13 @@ class ArtifactType extends Error {
 				db_rollback();
 				return false;
 			} else {
-				db_commit();
-				return $id;
+				if (!$this->addAllUsers()) {
+					db_rollback();
+					return false;
+				} else {
+					db_commit();
+					return $id;
+				}
 			}
 		}
 	}
@@ -420,6 +425,69 @@ class ArtifactType extends Error {
 	}
 
 	/**
+	 *	  delete - delete this tracker and all its related data.
+	 *
+	 *	@param	bool	I'm Sure.
+	 *	@param	bool	I'm REALLY sure.
+	 *	  @return	bool true/false;
+	 */
+	function delete($sure, $really_sure) {
+		if (!$sure || !$really_sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		db_begin();
+		db_query("DELETE FROM artifact_canned_responses 
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '1'.db_error();
+		db_query("DELETE FROM artifact_category
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '2'.db_error();
+		db_query("DELETE FROM artifact_perm
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '3'.db_error();
+		db_query("DELETE FROM artifact_group
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '4'.db_error();
+		db_query("DELETE FROM artifact_counts_agg
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '5'.db_error();
+		db_query("DELETE FROM artifact_file
+			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE group_artifact_id='".$this->getID()."'
+			AND artifact.artifact_id=artifact_file.artifact_id)");
+//echo '6'.db_error();
+		db_query("DELETE FROM artifact_message
+			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE group_artifact_id='".$this->getID()."'
+			AND artifact.artifact_id=artifact_message.artifact_id)");
+//echo '7'.db_error();
+		db_query("DELETE FROM artifact_history
+			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE group_artifact_id='".$this->getID()."'
+			AND artifact.artifact_id=artifact_history.artifact_id)");
+//echo '8'.db_error();
+		db_query("DELETE FROM artifact_monitor
+			WHERE EXISTS (SELECT artifact_id FROM artifact 
+			WHERE group_artifact_id='".$this->getID()."'
+			AND artifact.artifact_id=artifact_history.artifact_id)");
+//echo '9'.db_error();
+		db_query("DELETE FROM artifact
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '10'.db_error();
+		db_query("DELETE FROM artifact_group_list
+			WHERE group_artifact_id='".$this->getID()."'");
+//echo '11'.db_error();
+		
+		db_commit();
+		return true;
+	}
+
+	/**
 	 *	getCategories - List of possible categories set up for this artifact type.
 	 *
 	 *	@return database result set.
@@ -575,7 +643,34 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	addUser - add a user to this ArtifactType - depends on UNIQUE INDEX preventing duplicates.
+	 *  addAllUsers - add all users to this artifact.
+	 *
+	 *  @return boolean success.
+	 */
+	function addAllUsers() {
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level)
+			SELECT '".$this->getID()."',user_id,artifact_flags
+			FROM user_group
+			WHERE
+			group_id='".$this->Group->getID()."'
+			AND NOT EXISTS (SELECT user_id FROM artifact_perm
+			WHERE group_artifact_id='".$this->getID()."'
+			AND user_id=user_group.user_id);";
+		$res= db_query($sql);
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *	addUser - add a user to this ArtifactType.
 	 *
 	 *	@param	int		user_id of the new user.
 	 *	@return boolean	success.
@@ -589,14 +684,22 @@ class ArtifactType extends Error {
 			$this->setMissingParamsError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) 
-			VALUES ('".$this->getID()."','$id',0)";
+		$sql="SELECT * FROM artifact_perm 
+			WHERE group_artifact_id='".$this->getID()."' 
+			AND user_id='$id'";
 		$result=db_query($sql);
-		if ($result && db_affected_rows($result) > 0) {
+		if (db_numrows($result) > 0) {
 			return true;
 		} else {
-			$this->setError(db_error());
-			return false;
+			$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) 
+				VALUES ('".$this->getID()."','$id',0)";
+			$result=db_query($sql);
+			if ($result && db_affected_rows($result) > 0) {
+				return true;
+			} else {
+				$this->setError(db_error());
+				return false;
+			}
 		}
 	}
 
@@ -604,7 +707,7 @@ class ArtifactType extends Error {
 	 *	updateUser - update a user's permissions.
 	 *
 	 *	@param	int		user_id of the user to update.
-	 *	@param	int		(1) tech only, (2) admin & tech (3) admin only.
+	 *	@param	int		(0) read only, (1) tech only, (2) admin & tech (3) admin only.
 	 *	@return boolean	success.
 	 */
 	function updateUser($id,$perm_level) {
@@ -619,11 +722,21 @@ class ArtifactType extends Error {
 		$sql="UPDATE artifact_perm SET perm_level='$perm_level'
 			WHERE user_id='$id' AND group_artifact_id='".$this->getID()."'";
 		$result=db_query($sql);
-		if ($result) {
-			return true;
+		if (db_affected_rows($result) < 1) {
+			//
+			//  If not, insert it.
+			//
+			$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) VALUES
+				('".$this->getID()."','$id','$perm_level')";
+			$result=db_query($sql);
+			if (!$result) {
+				$this->setError(db_error());
+				return false;
+			} else {
+				return true;
+			}
 		} else {
-			$this->setError(db_error());
-			return false;
+			return true;
 		}
 	}
 
@@ -672,12 +785,13 @@ class ArtifactType extends Error {
 				return false;
 			} else {
 				//
-				//	For now, we let any member of a project view this ArtifactType
-				//	A future change might be to restrict to only those people with 
-				//	a corresponding entry in artifact_perm table
+				//	You must have an entry in artifact_perm if this tracker is not public
 				//
-				$perm =& $this->Group->getPermission( session_get_user() );
-				return $perm->isMember();
+				if ($this->getCurrentUserPerm() >= 1) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 	}
@@ -688,12 +802,16 @@ class ArtifactType extends Error {
 	 *	@return boolean	user_is_admin.
 	 */
 	function userIsAdmin() { 
-		$perm =& $this->Group->getPermission( session_get_user() );
-
-		if (($this->getCurrentUserPerm() >= 2) || ($perm->isArtifactAdmin())) {
-			return true;
-		} else {
+		if (!session_loggedin()) {
 			return false;
+		} else {
+			$perm =& $this->Group->getPermission( session_get_user() );
+
+			if (($this->getCurrentUserPerm() >= 2) || ($perm->isArtifactAdmin())) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -703,12 +821,16 @@ class ArtifactType extends Error {
 	 *	@return boolean	user_is_technician.
 	 */
 	function userIsTechnician() { 
-		$perm =& $this->Group->getPermission( session_get_user() );
-
-		if (($this->getCurrentUserPerm() >= 1) || ($perm->isArtifactAdmin())) {
-			return true;
-		} else {
+		if (!session_loggedin()) {
 			return false;
+		} else {
+			$perm =& $this->Group->getPermission( session_get_user() );
+
+			if (($this->getCurrentUserPerm() >= 1) || ($perm->isArtifactAdmin())) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -737,8 +859,6 @@ class ArtifactType extends Error {
 	 *
 	 *  @param	string	The item name.
 	 *  @param	string	The item description.
-	 *  @param	bool	(1) true (0) false - viewable by general public.
-	 *  @param	bool	(1) true (0) false - whether non-logged-in users can submit.
 	 *  @param	bool	(1) true (0) false - whether to email on all updates.
 	 *  @param	string	The address to send new entries and updates to.
 	 *  @param	int		Days before this item is considered overdue.
@@ -748,13 +868,12 @@ class ArtifactType extends Error {
 	 *  @param	string	Free-form string that project admins can place on the browse page.
 	 *  @return true on success, false on failure.
 	 */
-	function update($name,$description,$is_public,$allow_anon,$email_all,$email_address,
+	function update($name,$description,$email_all,$email_address,
 		$due_period, $status_timeout,$use_resolution,$submit_instructions,$browse_instructions) {
 
 		global $Language;
-		$perm =& $this->Group->getPermission(session_get_user());
 
-		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
+		if (!$this->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
@@ -778,14 +897,10 @@ class ArtifactType extends Error {
 
 		$email_all = ((!$email_all) ? 0 : $email_all); 
 		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution); 
-		$allow_anon = ((!$allow_anon) ? 0 : $allow_anon); 
-		$is_public = ((!$is_public) ? 0 : $is_public); 
 
 		$sql="UPDATE artifact_group_list SET 
 			name='". htmlspecialchars($name). "',
 			description='". htmlspecialchars($description) ."',
-			is_public='$is_public',
-			allow_anon='$allow_anon',
 			email_all_updates='$email_all',
 			email_address='$email_address',
 			due_period='". ($due_period * (60*60*24)) ."',

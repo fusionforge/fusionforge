@@ -13,10 +13,6 @@ if (!isset($no_gz_buffer) || !$no_gz_buffer) {
 	ob_start("ob_gzhandler");
 }
 
-/*
-	redirect to proper hostname to get around certificate problem on IE 5
-*/
-
 // get constants used for flags or status
 require('common/include/constants.php');
 
@@ -35,6 +31,16 @@ if (is_file($sys_localinc)) {
 	}
 }
 
+//
+//	This file contains a few variables that override the etc/local.inc vars
+//	This allows you to override such things as $sys_name, dbname, etc if you 
+//	have multiple installs on one server.
+//
+require('overrides.inc');
+
+/*
+	redirect to proper hostname to get around certificate problem on IE 5
+*/
 if ($HTTP_HOST != $GLOBALS['sys_default_domain'] && $HTTP_HOST != $GLOBALS['sys_fallback_domain']) {
 	if ($SERVER_PORT == '443') {
 		header ("Location: https://".$GLOBALS['sys_default_domain']."$REQUEST_URI");
@@ -70,6 +76,9 @@ require_once('common/include/session.php');
 
 //system library
 require_once('common/include/System.class');
+if (!$sys_account_manager_type) {
+	$sys_account_manager_type='UNIX';
+}
 require_once('common/include/system/'.$sys_account_manager_type.'.class');
 $SYS=new $sys_account_manager_type();
 

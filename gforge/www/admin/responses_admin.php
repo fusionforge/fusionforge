@@ -15,7 +15,6 @@
 
 
 require_once('pre.php');
-require_once('common/include/vars.php');
 require_once('common/include/account.php');
 require_once('www/include/proj_email.php');
 require_once('www/include/canned_responses.php');

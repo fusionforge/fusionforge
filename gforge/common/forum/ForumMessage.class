@@ -108,8 +108,8 @@ class ForumMessage extends Error {
 			$this->setError($Language->getText('forum_common_forummessage','error_required_fields'));
 			return false;
 		}
-		if (!session_loggedin() && !$this->Forum->allowAnonymous()) {
-			$this->setError($Language->getText('forum_common_forummessage','error_not_logged'));
+		if (!$this->Forum->userCanPost()) {
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		if (!session_loggedin()) {
@@ -392,28 +392,22 @@ class ForumMessage extends Error {
 			return true;
 		}
 
-		$messagelink='http://'.$GLOBALS[sys_default_domain].'/forum/message.php?msg_id='.$this->getID();
-		$messagesender=$this->getPosterName();
-		$messagebody=util_line_wrap(util_unconvert_htmlspecialchars($this->getBody()));
-		$messagesys=$GLOBALS['sys_name'];
-		$messagemonitor='http://'.$GLOBALS[sys_default_domain].'/forum/monitor.php?forum_id='.$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
-		
-//		$body = stripcslashes($Language->getText('forum_utils', 'mailmonitor', array($messagelink, $messagesender, $messagebody, $messagesys, $messagemonitor)));
-
-		$body = "\nRead and respond to this message at: ".
-		"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$this->getID().
-		"\nBy: " . $this->getPosterName() .
-		"\n\n" . util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
+		$body = util_line_wrap(util_unconvert_htmlspecialchars($this->getBody())).
 		"\n\n______________________________________________________________________".
-		"\nRead and respond to this message at: ".
-		"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$this->getID().
-		"\n\nYou are receiving this email because you elected to monitor this forum.".
+		"\nYou are receiving this email because you elected to monitor this forum.".
 		"\nTo stop monitoring this forum, login to $GLOBALS[sys_name] and visit: ".
 		"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 
+		//$extra_headers = 'Reply-to: '.$this->Forum->getUnixName().'@'.$GLOBALS['sys_default_domain'];
 
-		$subject="[" . $this->Forum->Group->getUnixName() . " - " . $this->Forum->getName() ."] ".util_unconvert_htmlspecialchars($this->getSubject());
-		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo());
+		$subject="[" . $this->Forum->getUnixName() ."][".$this->getID()."] ".util_unconvert_htmlspecialchars($this->getSubject());
+		$sql="SELECT email FROM users WHERE status='A' AND user_id IN ('".implode($ids,'\',\'')."')";
+//echo $sql;
+		$bccres = db_query($sql);
+		$BCC =& implode(util_result_column_to_array($bccres),',').','.$this->Forum->getSendAllPostsTo();
+//echo $BCC;
+		util_send_message('',$subject,$body,$this->Forum->getUnixName().'@'.$GLOBALS['sys_forum_return_domain'],$BCC,$this->getPosterRealName());
+//		util_handle_message(array_unique($ids),$subject,$body,$this->Forum->getSendAllPostsTo(),'','forumgateway@'.$GLOBALS[sys_default_domain]);
 		return true;
 	}
 

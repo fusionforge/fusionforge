@@ -189,8 +189,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 		<tr '.$GLOBALS['HTML']->boxGetAltRowStyle($i++).'>
 		<td>'.$row_cat['group_name'].'</td>
 		<td>'.$row_cat['unix_group_name'].'</td>
-		<td width="40%"><a href="/project/admin/?group_id='.$row_cat[group_id].'">['.$Language->getText('admin_useredit','project_admin').']</a>
-		<a href="/project/admin/userperms.php?group_id='.$row_cat['group_id'].'">['.$Language->getText('admin_useredit','membership_permissions').']</a></td>
+		<td width="40%"><a href="/project/admin/?group_id='.$row_cat[group_id].'">['.$Language->getText('admin_useredit','project_admin').']</a></td>
 		</tr>
 	';
 

@@ -95,7 +95,7 @@ if ($msg_id) {
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	echo "<tr><td style=\"background-color:#e3e3e3\">\n";
-	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<br />";
+	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (<a href=\"/users/".$fm->getPosterName()."/\">". $fm->getPosterName() ."</a>)<br />";
 	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
 	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
 	echo nl2br( util_make_links($fm->getBody() ));

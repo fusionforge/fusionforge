@@ -308,6 +308,8 @@ class FRSFile extends Error {
 				$this->setError("frsDeleteFile()::2 ".db_error());
 				return false;
 			} else {
+				$res=db_query("DELETE FROM frs_dlstats_file WHERE file_id='".$this->getID()."'");
+				$res=db_query("DELETE FROM frs_dlstats_filetotal_agg WHERE file_id='".$this->getID()."'");
 				return true;
 			}
 		}

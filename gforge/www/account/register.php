@@ -15,6 +15,10 @@ require_once('pre.php');
 require_once('common/include/account.php');
 require_once('common/include/timezones.php');
 
+if ($sys_user_reg_restricted) {
+	session_require(array('group'=>'1','admin_flags'=>'A'));
+}
+
 if (!$theme_id) {
 	$theme_id=$sys_default_theme_id;
 }

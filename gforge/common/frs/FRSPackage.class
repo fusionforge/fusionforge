@@ -34,6 +34,7 @@ class FRSPackage extends Error {
 	 * @var  array   $data_array.
 	 */
 	var $data_array;
+	var $package_releases;
 
 	/**
 	 * The Group object.
@@ -86,9 +87,10 @@ class FRSPackage extends Error {
 	 *	create - create a new FRSPackage in the database.
 	 *
 	 *	@param	string	The name of this package.
+	 *	@param	boolean	Whether it's public or not. 1=public 0=private.
 	 *	@return	boolean success.
 	 */
-	function create($name) {
+	function create($name,$is_public=1) {
 		global $Language;
 		if (strlen($name) < 3) {
 			$this->setError($Language->getText('frs_package','error_min_name_length'));
@@ -104,8 +106,8 @@ class FRSPackage extends Error {
 			return false;
 		}
 
-		$sql="INSERT INTO frs_package(group_id,name,status_id)
-			VALUES ('".$this->Group->getId()."','".htmlspecialchars($name)."','1')";
+		$sql="INSERT INTO frs_package(group_id,name,status_id,is_public)
+			VALUES ('".$this->Group->getId()."','".htmlspecialchars($name)."','1','$is_public')";
 
 		db_begin();
 		$result=db_query($sql);
@@ -177,6 +179,15 @@ class FRSPackage extends Error {
 	 */
 	function getStatus() {
 		return $this->data_array['status_id'];
+	}
+
+	/**
+	 *	isPublic - whether non-group-members can view.
+	 *
+	 *	@return boolean   is_public.
+	 */
+	function isPublic() {
+		return $this->data_array['is_public'];
 	}
 
 	/**
@@ -320,6 +331,52 @@ class FRSPackage extends Error {
 
 		return true;
 
+	}
+
+	/**
+	 *	getReleases - gets Release objects for all the releases in this package.
+	 *
+	 *  return  array   Array of FRSRelease Objects.
+	 */
+	function &getReleases() {
+		if (!is_array($this->package_releases) || count($this->package_releases) < 1) {
+			$this->package_releases=array();
+			$res=db_query("SELECT * FROM frs_release WHERE package_id='".$this->getID()."'");
+			while ($arr = db_fetch_array($res)) {
+				$this->package_releases[]=new FRSRelease($this,$arr['release_id'],$arr);
+			}
+		}
+		return $this->package_releases;
+	}
+
+	/**
+	 *  delete - delete this package and all its related data.
+	 *
+	 *  @param  bool	I'm Sure.
+	 *  @param  bool	I'm REALLY sure.
+	 *  @return   bool true/false;
+	 */
+	function delete($sure, $really_sure) {
+		if (!$sure || !$really_sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		$perm =& $this->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$r =& $this->getReleases();
+		for ($i=0; $i<count($r); $i++) {
+			if (!is_object($r[$i]) || $r[$i]->isError() || !$r[$i]->delete($sure, $really_sure)) {
+				$this->setError('Release Error: '.$r[$i]->getName().':'.$r[$i]->getErrorMessage());
+				return false;
+			}
+		}
+		db_query("DELETE FROM frs_package WHERE package_id='".$this->getID()."'
+			AND group_id='".$this->Group->getID()."'");
+		return true;
 	}
 
 }

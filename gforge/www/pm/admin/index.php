@@ -37,37 +37,37 @@ if (!$g || !is_object($g)) {
 }
 
 $perm =& $g->getPermission( session_get_user() );
-if (!$perm->isPMAdmin()) {
-	exit_permission_denied();
-}
 
 if ($post_changes) {
 	/*
 		Update the database
 	*/
+	$pg = new ProjectGroup($g,$group_project_id);
+	if (!$pg || !is_object($pg)) {
+		exit_error('Error','Unable to create ProjectCategory Object');
+	} elseif ($pg->isError()) {
+		exit_error('Error',$pg->getErrorMessage());
+	}
 
 	if ($addproject) {
-
-		$pg = new ProjectGroup($g,$group_project_id);
-		if (!$pg || !is_object($pg)) {
-			exit_error('Error','Unable to create ProjectCategory Object');
-		} elseif ($pg->isError()) {
-			exit_error('Error',$pg->getErrorMessage());
+		/*
+			Add new subproject
+		*/
+		if (!$perm->isPMAdmin()) {
+			exit_permission_denied();
 		}
 		if (!$pg->create($project_name,$description,$is_public,$send_all_posts_to)) {
 			exit_error('Error',$pg->getErrorMessage());
 		} else {
 			$feedback .= $Language->getText('pm_admin_projects','project_inserted');
 		}
+
 	} else if ($add_cat) {
 		/*
 			Add a project_category
 		*/
-		$pg = new ProjectGroup($g,$group_project_id);
-		if (!$pg || !is_object($pg)) {
-			exit_error('Error','Unable to create ProjectCategory Object');
-		} elseif ($pg->isError()) {
-			exit_error('Error',$pg->getErrorMessage());
+		if (!$pg->userIsAdmin()) {
+			exit_permission_denied();
 		}
 
 		$pc = new ProjectCategory($pg);
@@ -85,11 +85,8 @@ if ($post_changes) {
 		/*
 			Update a project_category
 		*/
-		$pg = new ProjectGroup($g,$group_project_id);
-		if (!$pg || !is_object($pg)) {
-			exit_error('Error','Unable to create ProjectCategory Object');
-		} elseif ($pg->isError()) {
-			exit_error('Error',$pg->getErrorMessage());
+		if (!$pg->userIsAdmin()) {
+			exit_permission_denied();
 		}
 
 		$pc = new ProjectCategory($pg,$id);
@@ -108,16 +105,33 @@ if ($post_changes) {
 		}
 
 	} else if ($update_pg) {
-		$pg = new ProjectGroup($g,$group_project_id);
-		if (!$pg || !is_object($pg)) {
-			exit_error('Error','Unable to create ProjectCategory Object');
-		} elseif ($pg->isError()) {
-			exit_error('Error',$pg->getErrorMessage());
+		/*
+			Update a subproject
+		*/
+		if (!$pg->userIsAdmin()) {
+			exit_permission_denied();
 		}
-		if (!$pg->update($project_name,$description,$is_public,$send_all_posts_to)) {
+
+		if (!$pg->update($project_name,$description,$send_all_posts_to)) {
 			exit_error('Error',$pg->getErrorMessage());
 		} else {
 			$feedback .= $Language->getText('general','update_successful');
+		}
+
+	} else if ($delete) {
+		/*
+			Delete a subproject
+		*/
+		if (!$pg->userIsAdmin()) {
+			exit_permission_denied();
+		}
+
+		if (!$pg->delete($sure,$really_sure)) {
+			exit_error('Error',$pg->getErrorMessage());
+		} else {
+			$feedback .= $Language->getText('pm_admin_projects','deleted');
+			$group_project_id=0;
+			$delete=0;
 		}
 	}
 }
@@ -134,6 +148,9 @@ if ($add_cat && $group_project_id) {
 		exit_error('Error','Unable to create ProjectCategory Object');
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
+	}
+	if (!$pg->userIsAdmin()) {
+		exit_permission_denied();
 	}
 	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories_title'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
 	echo "<h2>".$Language->getText('pm_admin_projects','add_categories_to').": ". $pg->getName() ."</h2>";
@@ -187,7 +204,7 @@ if ($add_cat && $group_project_id) {
 //  FORM TO UPDATE CATEGORIES
 //
 	/*
-		Allow modification of a artifact category
+		Allow modification of a category
 	*/
 
 	$pg = new ProjectGroup($g,$group_project_id);
@@ -195,6 +212,9 @@ if ($add_cat && $group_project_id) {
 		exit_error('Error','Unable to create ProjectCategory Object');
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
+	}
+	if (!$pg->userIsAdmin()) {
+		exit_permission_denied();
 	}
 	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_categories'),'pagename'=>'pm_admin_projects','sectionvals'=>$g->getPublicName()));
 
@@ -227,26 +247,14 @@ if ($add_cat && $group_project_id) {
 
 } elseif ($addproject) {
 	/*
-		Show categories and blank row
+		Create a new subproject
 	*/
+	if (!$perm->isPMAdmin()) {
+		exit_permission_denied();
+	}
 
 	pm_header(array ('title'=>$Language->getText('pm_admin_projects','add_subprojects_title'),'pagename'=>'pm_admin_projects','sectionvals'=>group_getname($group_id)));
 
-	/*
-		List of possible categories for this group
-	*/
-	$sql="SELECT group_project_id,project_name FROM project_group_list WHERE group_id='$group_id'";
-	$result=db_query($sql);
-	echo "<p />";
-	if ($result && db_numrows($result) > 0) {
-		$headerMapping = array(
-			'group_project_id' => $Language->getText('pm_admin_projects','col_project_id'),
-			'project_name' => $Language->getText('pm_admin_projects','col_project_name')
-		);
-		ShowResultSet($result, $Language->getText('pm_admin_projects','existing_subprojects'), false, true, $headerMapping);
-	} else {
-		echo "\n<h2>".$Language->getText('pm_admin_projects','no_subprojects')."</h2>";
-	}
 	?>
 	<p><?php echo $Language->getText('pm_admin_projects','projects_intro') ?></p>
 
@@ -283,6 +291,9 @@ if ($add_cat && $group_project_id) {
 	} elseif ($pg->isError()) {
 		exit_error('Error',$pg->getErrorMessage());
 	}
+	if (!$pg->userIsAdmin()) {
+		exit_permission_denied();
+	}
 
 	pm_header(array('title'=>$Language->getText('pm_admin_projects','change_project_title'),'pagename'=>'pm_admin_update_pg','sectionvals'=>$g->getPublicName()));
 
@@ -295,14 +306,14 @@ if ($add_cat && $group_project_id) {
 	<input type="hidden" name="update_pg" value="y" />
 	<input type="hidden" name="group_project_id" value="<?php echo $pg->getID(); ?>" />
 	<table border="0">
-	<tr>
+<!--	<tr>
 		<td>
 			<strong><?php echo $Language->getText('pm_admin_projects','is_public')?></strong><br />
 			<input type="radio" name="is_public" value="1"<?php echo (($pg->isPublic()=='1')?' checked="checked"':''); ?> /> <?php echo $Language->getText('general','yes') ?><br />
 			<input type="radio" name="is_public" value="0"<?php echo (($pg->isPublic()=='0')?' checked="checked"':''); ?> /> <?php echo $Language->getText('general','no') ?><br />
 			<input type="radio" name="is_public" value="9"<?php echo (($pg->isPublic()=='9')?' checked="checked"':''); ?> /> <?php echo $Language->getText('general','deleted')?><br />
 		</td>
-	</tr>
+	</tr> -->
 	<tr>
 		<td><strong><?php echo $Language->getText('pm_admin_projects','project_name')?>:</strong><br />
 			<input type="text" name="project_name" value="<?php echo $pg->getName() ?>" />
@@ -323,6 +334,7 @@ if ($add_cat && $group_project_id) {
 	<tr>
 		<td>
 			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&amp;add_cat=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','add_edit_categories')?></a></strong><br />
+			<strong><a href="<?php echo $PHP_SELF."?group_id=$group_id&amp;delete=1&amp;group_project_id=".$pg->getID(); ?>"><?php echo $Language->getText('pm_admin_projects','delete_info')?></a></strong><br />
 		</td>
 	</tr>
 	<tr>
@@ -336,6 +348,36 @@ if ($add_cat && $group_project_id) {
 
 	pm_footer(array());
 
+} else if ($delete && $group_project_id) {
+
+
+	$pg = new ProjectGroup($g,$group_project_id);
+	if (!$pg || !is_object($pg)) {
+		exit_error('Error','Could Not Get ProjectGroup');
+	} elseif ($pg->isError()) {
+		exit_error('Error',$pg->getErrorMessage());
+	}
+	if (!$pg->userIsAdmin()) {
+		exit_permission_denied();
+	}
+
+	pm_header(array('title'=>$Language->getText('pm_admin_projects','delete')));
+
+	?>
+	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id; ?>" method="post">
+	<input type="hidden" name="post_changes" value="y" />
+	<input type="hidden" name="delete" value="y" /><br />
+	<?php echo $Language->getText('pm_admin_projects','delete_warning'); ?>
+	<p>
+	<input type="checkbox" name="sure" value="1"><?php echo $Language->getText('pm_admin_projects','sure') ?><br />
+	<input type="checkbox" name="really_sure" value="1"><?php echo $Language->getText('pm_admin_projects','really_sure'); ?>
+	<p>
+	<input type="submit" name="post_changes" value="<?php echo $Language->getText('pm_admin_projects','delete') ?>" />
+	</form>
+	<?php
+
+	pm_footer(array());
+
 } else {
 
 	/*
@@ -343,25 +385,31 @@ if ($add_cat && $group_project_id) {
 	*/
 	pm_header(array('title'=>$Language->getText('pm_admin_projects','admin_title'),'pagename'=>'pm_admin','sectionvals'=>group_getname($group_id)));
 
-	?>
-	<p />
-	<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo $Language->getText('pm_admin_projects','add_project') ?></a><br />
-	<?php echo $Language->getText('pm_admin_projects','add_project_intro') ?>
-	<p />
-	<?php
-    $pgf = new ProjectGroupFactory($g);
-    if (!$pgf || !is_object($pgf)) {
-        exit_error('Error','Could Not Get Factory');
-    } elseif ($pgf->isError()) {
-        exit_error('Error',$pgf->getErrorMessage());
-    }
+	//
+	//	Show link to create new subproject
+	//
+	if ($perm->isPMAdmin()) {
+		?>
+		<p />
+		<a href="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>&amp;addproject=1"><?php echo $Language->getText('pm_admin_projects','add_project') ?></a><br />
+		<?php echo $Language->getText('pm_admin_projects','add_project_intro') ?>
+		<p />
+		<?php
+	}
 
-    $pg_arr =& $pgf->getProjectGroups();
+	$pgf = new ProjectGroupFactory($g);
+	if (!$pgf || !is_object($pgf)) {
+		exit_error('Error','Could Not Get Factory');
+	} elseif ($pgf->isError()) {
+		exit_error('Error',$pgf->getErrorMessage());
+	}
 
-    if (count($pg_arr) < 1 || $pg_arr == false) {
-        echo $Language->getText('pm_admin_projects','no_projects_found');
-        echo db_error();
-    } else {
+	$pg_arr =& $pgf->getProjectGroups();
+
+	if (count($pg_arr) < 1 || $pg_arr == false) {
+		echo $Language->getText('pm_admin_projects','no_projects_found');
+		echo db_error();
+	} else {
 		for ($i=0; $i<count($pg_arr); $i++) {
 			echo '<a href="'. $PHP_SELF.'?group_id='.$group_id.'&amp;group_project_id='.$pg_arr[$i]->getID().'&amp;update_pg=1">'.$Language->getText('pm_admin_projects','edit_update').': <strong>'.$pg_arr[$i]->getName().'</strong></a><p />';
 		}

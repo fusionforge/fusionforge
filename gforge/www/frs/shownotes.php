@@ -15,10 +15,25 @@
 require_once('pre.php');
 require_once('www/frs/include/frs_utils.php');
 
+//
+//  Members of projects can see all packages
+//  Non-members can only see public packages
+//
+if (session_loggedin()) {
+	if (user_ismember($group_id) || user_ismember(1,'A')) {
+		$pub_sql='';
+	} else {
+		$pub_sql=' AND frs_package.is_public=1 ';
+	}
+} else {
+	$pub_sql=' AND frs_package.is_public=1 ';
+}
+
 $result=db_query("SELECT frs_release.notes,frs_release.changes,
-		frs_release.preformatted,frs_release.name,frs_package.group_id
+		frs_release.preformatted,frs_release.name,frs_package.group_id,frs_package.is_public
 		FROM frs_release,frs_package 
 		WHERE frs_release.package_id=frs_package.package_id 
+		$pub_sql
 		AND frs_release.release_id='$release_id'");
 
 if (!$result || db_numrows($result) < 1) {

@@ -13,7 +13,6 @@
 
 
 require_once('pre.php');    
-require_once('common/include/vars.php');
 require_once('www/include/trove.php');
 
 if (!$sys_use_trove) {

@@ -23,26 +23,27 @@ if ( !$offset || $offset < 0 ) {
 // For expediancy, list only the filereleases in the past three days.
 $start_time = time() - (30 * 86400);
 
-$query	= "SELECT groups.group_name,"
-	. "groups.group_id,"
-	. "groups.unix_group_name,"
-	. "groups.short_description,"
-	. "users.user_name,"
-	. "users.user_id,"
-	. "frs_release.release_id,"
-	. "frs_release.name AS release_version,"
-	. "frs_release.release_date,"
-	. "frs_release.released_by,"
-	. "frs_package.name AS module_name, "
-	. "frs_dlstats_grouptotal_vw.downloads "
-	. "FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_vw "
-	. "WHERE ( frs_release.release_date > '$start_time' "
-	. "AND frs_release.package_id = frs_package.package_id "
-	. "AND frs_package.group_id = groups.group_id "
-	. "AND frs_release.released_by = users.user_id "
-	. "AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id "
-	. "AND frs_release.status_id=1 ) "
-	. "ORDER BY frs_release.release_date DESC";
+$query	= "SELECT groups.group_name,
+	groups.group_id,
+	groups.unix_group_name,
+	groups.short_description,
+	users.user_name,
+	users.user_id,
+	frs_release.release_id,
+	frs_release.name AS release_version,
+	frs_release.release_date,
+	frs_release.released_by,
+	frs_package.name AS module_name, 
+	frs_dlstats_grouptotal_vw.downloads 
+	FROM groups,users,frs_package,frs_release,frs_dlstats_grouptotal_vw 
+	WHERE ( frs_release.release_date > '$start_time' 
+	AND frs_release.package_id = frs_package.package_id 
+	AND frs_package.group_id = groups.group_id 
+	AND frs_release.released_by = users.user_id 
+	AND frs_package.group_id = frs_dlstats_grouptotal_vw.group_id 
+	AND frs_release.status_id=1 
+	AND frs_package.is_public=1 ) 
+	ORDER BY frs_release.release_date DESC";
 $res_new = db_query($query, 21, $offset, SYS_DB_STATS);
 
 if (!$res_new || db_numrows($res_new) < 1) {

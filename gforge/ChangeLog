@@ -1,3 +1,34 @@
+2004-08-04  Tim Perdue <tim@gforge.org>
+
+	* DELETE trackers, subprojects in task mgr, forums, FRSPackages, FRSReleases.
+	New delete() functions in objects handle all the logic for deleting 
+	related data.
+
+2004-08-04  Tim Perdue <tim@gforge.org>
+
+	* Forum email gateway. Forum names are down-cased and 
+	reformatted by db/migrateforum.php. cronjobs/mail/mailaliases.php 
+	now creates an alias for each forum so it can receive simple messages.
+	Messages are piped to cronjobs/forum_gateway.php
+
+2004-08-04  Tim Perdue <tim@gforge.org>
+
+	* MASSIVE RBAC COMMIT - all permission functions are 
+	consolidated under RBAC interface.
+	* Ability to Add / Edit / Update New Roles.
+	* Default roles for each project are Admin, Sr Dev, Jr Dev, 
+	Tech Support, Doc Writer
+	* Must install the 20040804.sql file and then run db/migraterbac.php
+	then manually go into each project and set the user's roles.
+	* Each forum has its own membership and permission list now. 
+	A project member can be restricted from entering a private forum, so 
+	each forum can be private and have a controlled access list, or public 
+	so anyone can access it.
+	* Same for Task Manager subprojects - each subproject has its own 
+	perms list
+	* New "Edit Observer" role - any non-member assumes the "observer" 
+	role and you control all their settings with this role.
+
 2004-08-04  Francisco Gimeno <kikov@kikov.org>
 	Fixes [#861]
 	* www/reporting/index.php: changed hardcoded string to 

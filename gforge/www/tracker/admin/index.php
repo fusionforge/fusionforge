@@ -33,12 +33,12 @@ if ($group_id && $atid) {
 		exit_no_group();
 	}
 
-	$perm =& $group->getPermission( session_get_user() );
+/*	$perm =& $group->getPermission( session_get_user() );
 
 	if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
 		exit_permission_denied();
 	}
-
+*/
 	//
 	//  Create the ArtifactType object
 	//
@@ -48,6 +48,9 @@ if ($group_id && $atid) {
 	}
 	if ($ath->isError()) {
 		exit_error($Language->getText('general','error').'',$ath->getErrorMessage());
+	}
+	if (!$ath->userIsAdmin()) {
+		exit_permission_denied();
 	}
 
 	if ($post_changes) {
@@ -104,6 +107,7 @@ if ($group_id && $atid) {
 				}
 			}
 
+/*
 		} elseif ($add_users) {
 
 			//
@@ -163,7 +167,7 @@ if ($group_id && $atid) {
 			} else {
 				$feedback .= $Language->getText('tracker_admin','users_deleted');
 			}
-
+*/
 		} elseif ($update_canned) {
 
 			$acr = new ArtifactCanned($ath,$id);
@@ -220,12 +224,23 @@ if ($group_id && $atid) {
 
 		} elseif ($update_type) {
 
-			if (!$ath->update($name,$description,$is_public,$allow_anon,$email_all,$email_address,
+			if (!$ath->update($name,$description,$email_all,$email_address,
 				$due_period,$status_timeout,$use_resolution,$submit_instructions,$browse_instructions)) {
 				$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ath->getErrorMessage();
 				$ath->clearError();
 			} else {
 				$feedback .= $Language->getText('tracker_admin','tracker_updated');
+			}
+
+		} elseif ($delete) {
+
+			if (!$ath->delete($sure,$really_sure)) {
+				$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ath->getErrorMessage();
+				unset($ath);
+				$delete=0;
+				$atid=0;
+			} else {
+				$feedback .= $Language->getText('tracker_admin','deleted');
 			}
 
 		}
@@ -392,8 +407,9 @@ if ($group_id && $atid) {
 		<?php
 
 		$ath->footer(array());
-
+/*
 	} elseif ($update_users) {
+
 //
 //  FORM TO ADD/UPDATE USERS
 //
@@ -471,7 +487,7 @@ if ($group_id && $atid) {
 		</div>';
 
 		$ath->footer(array());
-
+*/
 	} elseif ($update_canned) {
 //
 //	FORM TO UPDATE CANNED MESSAGES
@@ -577,6 +593,25 @@ if ($group_id && $atid) {
 
 		$ath->footer(array());
 
+	} elseif ($delete) {
+
+		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin','delete', $ath->getName())));
+
+		?>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="delete" value="y" /><br />
+		<?php echo $Language->getText('tracker_admin','delete_warning'); ?>
+		<p>
+		<input type="checkbox" name="sure" value="1"><?php echo $Language->getText('tracker_admin','sure') ?><br />
+		<input type="checkbox" name="really_sure" value="1"><?php echo $Language->getText('tracker_admin','really_sure') ?><br />
+		<p>
+		<input type="submit" name="post_changes" value="<?php echo $Language->getText('tracker_admin','delete') ?>" /></p>
+		</form></p>
+		<?php
+
+		$ath->footer(array());
+
 	} elseif ($update_type) {
 //
 //	FORM TO UPDATE ARTIFACT TYPES
@@ -608,9 +643,9 @@ if ($group_id && $atid) {
 		} 
 		?>
 		<p>
-		<input type="checkbox" name="is_public" value="1" <?php echo (($ath->isPublic())?'checked="checked"':''); ?> /> <strong><?php echo $Language->getText('tracker_admin_update_type','publicy_available') ?></strong><br />
+<!--		<input type="checkbox" name="is_public" value="1" <?php echo (($ath->isPublic())?'checked="checked"':''); ?> /> <strong><?php echo $Language->getText('tracker_admin_update_type','publicy_available') ?></strong><br />
 		<input type="checkbox" name="allow_anon" value="1" <?php echo (($ath->allowsAnon())?'checked="checked"':''); ?> /> <strong><?php echo $Language->getText('tracker_admin_update_type','allow_anonymous') ?></strong><br />
-		<input type="checkbox" name="use_resolution" value="1" <?php echo (($ath->useResolution())?'checked="checked"':''); ?> /> <strong><?php echo $Language->getText('tracker_admin_update_type','display_resolution') ?></strong></p>
+-->		<input type="checkbox" name="use_resolution" value="1" <?php echo (($ath->useResolution())?'checked="checked"':''); ?> /> <strong><?php echo $Language->getText('tracker_admin_update_type','display_resolution') ?></strong></p>
 		<p>
 		<strong><?php echo $Language->getText('tracker_admin_update_type','send_submissions') ?>:</strong><br />
 		<input type="text" name="email_address" value="<?php echo $ath->getEmailAddress(); ?>" /></p>
@@ -637,7 +672,7 @@ if ($group_id && $atid) {
 
 	} else {
 //
-//  SHOW LINKS TO FEATURES
+//  SHOW LINKS TO FUNCTIONS
 //
 
 		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin','title').': '.$ath->getName(),'pagename'=>'tracker_admin','titlevals'=>array($ath->getName())));
@@ -652,8 +687,8 @@ if ($group_id && $atid) {
 			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;add_canned=1"><strong>'.$Language->getText('tracker_admin','add_canned_responses').'</strong></a><br />
 			'.$Language->getText('tracker_admin','add_canned_responses_info').'</p>';
 		echo '<p>
-			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;update_users=1"><strong>'.$Language->getText('tracker_admin','add_permissions').'</strong></a><br />
-			'.$Language->getText('tracker_admin','add_permissions_info').'.</p>';
+			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;delete=1"><strong>'.$Language->getText('tracker_admin','delete').'</strong></a><br />
+			'.$Language->getText('tracker_admin','permanently_delete_info').'</p>';
 		echo '<p>
 			<a href="'.$PHP_SELF.'?group_id='.$group_id.'&amp;atid='.$ath->getID().'&amp;update_type=1"><strong>'.$Language->getText('tracker_admin','update_preferences').'</strong></a><br />
 			'.$Language->getText('tracker_admin','update_preferences_info').'.</p>';
@@ -673,11 +708,12 @@ if ($group_id && $atid) {
 
 	$perm =& $group->getPermission( session_get_user() );
 
-	if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
-		exit_permission_denied();
-	}
-
 	if ($post_changes) {
+
+		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
+			exit_permission_denied();
+		}
+
 		if ($add_at) {
 			$res=new ArtifactTypeHtml($group);
 			if (!$res->create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
@@ -691,6 +727,9 @@ if ($group_id && $atid) {
 	}
 
 
+	//
+	//	Display existing artifact types
+	//
 	$atf = new ArtifactTypeFactory($group);
 	if (!$group || !is_object($group) || $group->isError()) {
 		exit_error('Error','Could Not Get ArtifactTypeFactory');
@@ -748,6 +787,14 @@ if ($group_id && $atid) {
 		echo $HTML->listTableBottom();
 	}
 
+	//
+	//	Set up blank ArtifactType
+	//
+
+	if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
+		//show nothing
+	} else {
+
 	?><?php echo $Language->getText('tracker_admin','intro') ?>
 	<p>
 	<form action="<?php echo $PHP_SELF.'?group_id='.$group_id; ?>" method="post">
@@ -783,6 +830,7 @@ if ($group_id && $atid) {
 	<input type="submit" name="post_changes" value="<?php echo $Language->getText('general','submit') ?>" /></p>
 	</form></p>
 	<?php
+	}
 
 	echo site_project_footer(array());
 

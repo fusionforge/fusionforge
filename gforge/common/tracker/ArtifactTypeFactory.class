@@ -81,15 +81,6 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
-	 *	setDataType - set the data type (DAO)
-	 *
-	 * 	@param	string	the data type
-	 */	
-	function &setDataType($newDataType) {
-		$this->dataType = $newDataType;
-	}
-
-	/**
 	 *	getArtifactTypes - return an array of ArtifactType objects.
 	 *
 	 *	@return	array	The array of ArtifactType objects.
@@ -98,11 +89,24 @@ class ArtifactTypeFactory extends Error {
 		if ($this->ArtifactTypes) {
 			return $this->ArtifactTypes;
 		}
+		if (session_loggedin()) {
+			$perm =& $this->Group->getPermission( session_get_user() );
+			if (!$perm || !is_object($perm) || !$perm->isMember()) {
+				$public_flag='=1';
+			} else {
+				$public_flag='<3';
+				$exists=' AND EXISTS (SELECT group_artifact_ID
+					FROM artifact_perm
+					WHERE perm_level >= 0 AND group_artifact_id=artifact_group_list.group_artifact_id) ';
+			}
+		} else {
+			$public_flag='=1';
+		}
 
 		$sql="SELECT * FROM artifact_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."'
-			AND is_public IN (".$this->getPublicFlag().")
-			AND datatype ".$this->getDataTypeWhereClause()."
+			AND is_public $public_flag
+			$exists
 			ORDER BY group_artifact_id ASC";
 
 		$result = db_query ($sql);
@@ -121,33 +125,11 @@ class ArtifactTypeFactory extends Error {
 	}
 
 	/**
-	 * getDataTypeWhereClause - utility method to formulate the WHERE clause to include data types
-	 *
-	 * @return	string 	A segment of a WHERE clause 
-	 */
-	function &getDataTypeWhereClause() {
-		if ($this->dataType) {
-			return "='".$this->dataType."' ";
-		}
-		return " LIKE '%' ";
-	}
-
-	/**
 	 * getPublicFlag - a utility method to load up the current user's permissions
  	 *
 	 * @return 	string 	The public_flag field to plug into a SQL string
 	 */	
 	function &getPublicFlag() {
-		if (session_loggedin()) {
-			$perm =& $this->Group->getPermission( session_get_user() );
-			if (!$perm || !is_object($perm) || !$perm->isMember()) {
-				$public_flag='1';
-			} else {
-				$public_flag='0,1';
-			}
-		} else {
-			$public_flag='1';
-		}
 		return $public_flag;
 	}
 

@@ -14,7 +14,6 @@
 
 
 require_once('pre.php');
-require_once('common/include/vars.php');
 require_once('www/project/admin/project_admin_utils.php');
 
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));

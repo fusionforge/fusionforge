@@ -29,6 +29,10 @@ require_once('common/include/User.class');
 require_once('common/include/Permission.class');
 require_once('common/include/utils.php');
 require_once('common/include/Group.class');
+require_once('www/include/BaseLanguage.class');
+
+$Language=new BaseLanguage();
+$Language->loadLanguage('English');
 
 // Plugins subsystem
 require_once('common/include/Plugin.class') ;

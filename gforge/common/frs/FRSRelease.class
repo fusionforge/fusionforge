@@ -42,6 +42,7 @@ class FRSRelease extends Error {
 	 * @var  object  FRSPacakge.
 	 */
 	var $FRSPackage;
+	var $release_files;
 
 	/**
 	 *  Constructor.
@@ -239,15 +240,15 @@ class FRSRelease extends Error {
 		$date = date('Y-m-d H:i',time());
 
 		$subject = $Language->getText('frs_release','email_title',array(
-			$this->FRSPackage->Group->getUnixName(),
-			$this->FRSPackage->getName()));
+		$this->FRSPackage->Group->getUnixName(),
+		$this->FRSPackage->getName()));
 		$text = stripcslashes($Language->getText('frs_release','email_text',array(
-			$this->FRSPackage->Group->getPublicName(),
-			$this->FRSPackage->Group->getUnixName(),
-			$this->FRSPackage->getName(),
-			"<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID(),
-			$GLOBALS['sys_name'],
-			"<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
+		$this->FRSPackage->Group->getPublicName(),
+		$this->FRSPackage->Group->getUnixName(),
+		$this->FRSPackage->getName(),
+		"<http://".$GLOBALS['HTTP_HOST']."/project/showfiles.php?group_id=". $this->FRSPackage->Group->getID() ."&release_id=". $this->getID(),
+		$GLOBALS['sys_name'],
+		"<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=".$this->FRSPackage->getID()."&group_id=".$this->FRSPackage->Group->getID()."&stop=1>")));
 			
 
 		$text = util_line_wrap($text);
@@ -255,6 +256,52 @@ class FRSRelease extends Error {
 			util_handle_message(array_unique($arr),$subject,$text);
 		}
 		
+	}
+
+	/**
+	 *	getFiles - gets all the file objects for files in this release.
+	 *
+	 *	return	array	Array of FRSFile Objects.
+	 */
+	function &getFiles() {
+		if (!is_array($this->release_files) || count($this->release_files) < 1) {
+			$this->release_files=array();
+			$res=db_query("SELECT * FROM frs_file_vw WHERE release_id='".$this->getID()."'");
+			while ($arr = db_fetch_array($res)) {
+				$this->release_files[]=new FRSFile($this,$arr['release_id'],$arr);
+			}
+		}
+		return $this->release_files;
+	}
+
+    /**
+     *  delete - delete this release and all its related data.
+     *
+     *  @param  bool    I'm Sure.
+     *  @param  bool    I'm REALLY sure.
+     *  @return   bool true/false;
+     */
+    function delete($sure, $really_sure) {
+        if (!$sure || !$really_sure) {
+            $this->setMissingParamsError();
+            return false;
+        }
+		$perm =& $this->FRSPackage->Group->getPermission( session_get_user() );
+
+		if (!$perm || !is_object($perm) || !$perm->isReleaseTechnician()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$f =& $this->getFiles();
+		for ($i=0; $i<count($f); $i++) {
+			if (!is_object($f[$i]) || $f[$i]->isError() || !$f[$i]->delete()) {
+				$this->setError('File Error: '.$f[$i]->getName().':'.$f[$i]->getErrorMessage());
+				return false;
+			}
+		}
+		db_query("DELETE FROM frs_release WHERE release_id='".$this->getID()."'
+			AND package_id='".$this->FRSPackage->getID()."'");
+		return true;
 	}
 
 	/**

@@ -23,8 +23,11 @@ require_once('note.php');
 require_once('www/news/news_utils.php');
 
 function forum_header($params) {
-	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum;
+	global $DOCUMENT_ROOT,$HTML,$group_id,$forum_name,$forum_id,$sys_datefmt,$sys_news_group,$Language,$f,$sys_use_forum,$group_forum_id;
 
+	if ($group_forum_id) {
+		$forum_id=$group_forum_id;
+	}
 	if (!$sys_use_forum) {
 		exit_disabled();
 	}
@@ -115,7 +118,7 @@ function forum_header($params) {
 	if ($f && $forum_id) {
 		echo '<a href="/forum/new.php?forum_id='.$forum_id.'&amp;group_id='.$group_id.'">' .
 			html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
-			$Language->getText('forum_message','thread').'</a> | ';
+			$Language->getText('forum_message','thread').'</a>';
 	}
 }
 
@@ -279,7 +282,7 @@ class ForumHTML extends Error {
 				}
 
 				$ret_val .= $bold_begin.$msg_arr["$msg_id"][$i]->getSubject() .$bold_end.$ah_end.'</td>'.
-					'<td>'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</td>'.
+					'<td><a href="/users/'.$msg_arr["$msg_id"][$i]->getPosterName().'/">'. $msg_arr["$msg_id"][$i]->getPosterRealName() .'</a></td>'.
 					'<td>'.date($sys_datefmt, $msg_arr["$msg_id"][$i]->getPostDate() ).'</td></tr>';
 
 				if ($msg_arr["$msg_id"][$i]->hasFollowups() > 0) {
@@ -296,7 +299,7 @@ class ForumHTML extends Error {
 	function showPostForm($thread_id=0, $is_followup_to=0, $subject="") {
 		global $REQUEST_URI,$Language;
 
-		if (session_loggedin() || $this->Forum->allowAnonymous()) {
+		if ($this->Forum->userCanPost()) {
 			if ($subject) {
 				//if this is a followup, put a RE: before it if needed
 				if (!eregi('RE:',$subject,$test)) {
@@ -336,12 +339,14 @@ class ForumHTML extends Error {
 			</div>
 			<?php
 
-		} else {
+		} elseif ($this->Forum->allowAnonymous()) {
 			echo "<div align=\"center\">";
 			echo '<h3><font color="red">';
 			echo $Language->getText('forum_utils','couldpostif',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).' ">','</a>'));
 			echo '</font></h3>';
 			echo "</div>";
+		} else {
+			//do nothing
 		}
 
 	}

@@ -60,6 +60,8 @@ class Forum extends Error {
 	 */
 	var $view_types;
 
+	var $current_user_perm;
+
 	/**
 	 *  Constructor.
 	 *
@@ -94,14 +96,13 @@ class Forum extends Error {
 					return false;
 				}
 			}
-			if (!$this->isPublic()) {
-				$perm =& $this->Group->getPermission( session_get_user() );
-
-				if (!$perm || !is_object($perm) || !$perm->isMember()) {
-					$this->setPermissionDeniedError();
-					$this->data_array = null;
-					return false;
-				}
+			//
+			//	Make sure they can even access this object
+			//
+			if (!$this->userCanView()) {
+				$this->setPermissionDeniedError();
+				$this->data_array = null;
+				return false;
 			}
 		}
 		$this->view_types[]='ultimate';
@@ -132,6 +133,10 @@ class Forum extends Error {
 			$this->setError($Language->getText('forum_common','error_min_desc_length'));
 			return false;
 		}
+		if (eregi('[^_\.0-9a-z-]',$forum_name)) {
+			$this->setError($Language->getText('forum_common','error_illegal_characters'));
+			return false;
+		}
 		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
 			$this->setInvalidEmailError();
 			return false;
@@ -157,7 +162,7 @@ class Forum extends Error {
 
 		$sql="INSERT INTO forum_group_list (group_id,forum_name,is_public,description,send_all_posts_to,allow_anonymous)
 			VALUES ('".$this->Group->getId()."',
-			'". htmlspecialchars($forum_name) ."',
+			'". strtolower($forum_name) ."',
 			'$is_public',
 			'". htmlspecialchars($description) ."',
 			'$send_all_posts_to',
@@ -179,6 +184,10 @@ class Forum extends Error {
 				$this->setError($fm->getErrorMessage());
 				return false;
 			}
+		}
+		if (!$this->addAllUsers()) {
+			db_rollback();
+			return false;
 		}
 		db_commit();
 		return true;
@@ -235,6 +244,10 @@ class Forum extends Error {
 		} else {
 			return db_result($result,0,0);
 		}
+	}
+
+	function getUnixName() {
+		return $this->Group->getUnixName().'-'.$this->getName();
 	}
 
 	/**
@@ -469,7 +482,7 @@ class Forum extends Error {
 	 *	@param	int	Pass (1) if we should allow non-logged-in users to post (0) for mandatory login.
 	 *	@return	boolean	success.
 	 */
-	function update($forum_name,$description,$is_public=1,$send_all_posts_to='',$allow_anonymous=0) {
+	function update($forum_name,$description,$send_all_posts_to='') {
 		global $Language;
 		if (strlen($forum_name) < 3) {
 			$this->setError($Language->getText('forum_common','error_min_name_length'));
@@ -479,20 +492,22 @@ class Forum extends Error {
 			$this->setError($Language->getText('forum_common','error_min_desc_length'));
 			return false;
 		}
+		if (eregi('[^_\.0-9a-z-]',$forum_name)) {
+			$this->setError($Language->getText('forum_common','error_illegal_characters'));
+			return false;
+		}
 		if ($send_all_posts_to && !validate_email($send_all_posts_to)) {
 			$this->setInvalidEmailError();
 			return false;
 		}
 
-		$perm =& $this->Group->getPermission( session_get_user() );
-
-		if (!$perm || !is_object($perm) || !$perm->isForumAdmin()) {
+		if (!$this->userIsAdmin()) {
 			$this->setPermissionDeniedError();
 			return false;
 		}
 
 		$res=db_query("UPDATE forum_group_list SET
-			forum_name='". htmlspecialchars($forum_name) ."',
+			forum_name='". strtolower($forum_name) ."',
 			description='". htmlspecialchars($description) ."',
 			is_public='$is_public',
 			send_all_posts_to='$send_all_posts_to',
@@ -506,6 +521,263 @@ class Forum extends Error {
 		}
 		return true;
 	}
+
+	/**
+	 *  delete - delete this forum and all its related data.
+	 *
+	 *  @param  bool	I'm Sure.
+	 *  @param  bool	I'm REALLY sure.
+	 *  @return   bool true/false;
+	 */
+	function delete($sure, $really_sure) {
+		if (!$sure || !$really_sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		db_begin();
+		db_query("DELETE FROM forum_agg_msg_count
+			WHERE group_forum_id='".$this->getID()."'");
+//echo '1'.db_error();
+		db_query("DELETE FROM forum_monitored_forums
+			WHERE forum_id='".$this->getID()."'");
+//echo '2'.db_error();
+		db_query("DELETE FROM forum_saved_place
+			WHERE forum_id='".$this->getID()."'");
+//echo '3'.db_error();
+		db_query("DELETE FROM forum
+			WHERE group_forum_id='".$this->getID()."'");
+//echo '4'.db_error();
+		db_query("DELETE FROM forum_group_list
+			WHERE group_forum_id='".$this->getID()."'");
+//echo '5'.db_error();
+		db_commit();
+		return true;
+	}
+
+	/**
+	 *	addAllUsers - add all users to this forum.
+	 *
+	 *	@return boolean success.
+	 */
+	function addAllUsers() {
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		$sql="INSERT INTO forum_perm (group_forum_id,user_id,perm_level)
+			SELECT '".$this->getID()."',user_id,forum_flags
+			FROM user_group
+			WHERE 
+			group_id='".$this->Group->getID()."'
+			AND NOT EXISTS (SELECT user_id FROM forum_perm
+			WHERE group_forum_id='".$this->getID()."'
+			AND user_id=user_group.user_id);";
+		$res= db_query($sql);
+		if (!$res) {
+			$this->setError(db_error());
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *  addUser - add a user to this subproject.
+	 *
+	 *  @param  int  user_id of the new user.
+	 *  @return boolean success.
+	 */
+	function addUser($id) {
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		if (!$id) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		$sql="SELECT * FROM forum_perm
+			WHERE group_forum_id='".$this->getID()."'
+			AND user_id='$id'";
+		$result=db_query($sql);
+		if (db_numrows($result) > 0) {
+			return true;
+		} else {
+			$sql="INSERT INTO forum_perm (group_forum_id,user_id,perm_level)
+				VALUES ('".$this->getID()."','$id',0)";
+			$result=db_query($sql);
+			if ($result && db_affected_rows($result) > 0) {
+				return true;
+			} else {
+				$this->setError(db_error());
+				return false;
+			}
+		}
+	}
+
+	/**
+	 *  updateUser - update a user's permissions.
+	 *
+	 *  @param  int  user_id of the user to update.
+	 *  @param  int  (0) read only, (1) tech only, (2) admin & tech (3) admin only.
+	 *  @return boolean success.
+	 */
+	function updateUser($id,$perm_level) {
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		if (!$id) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		//
+		//	Update and test if it already exists
+		//
+		$sql="UPDATE forum_perm SET perm_level='$perm_level'
+			WHERE user_id='$id' AND group_forum_id='".$this->getID()."'";
+		$result=db_query($sql);
+		if (db_affected_rows($result) < 1) {
+			//
+			//	If not, insert it.
+			//
+			$sql="INSERT INTO forum_perm (group_forum_id,user_id,perm_level) VALUES 
+				('".$this->getID()."','$id','$perm_level')";
+			$result=db_query($sql);
+			if (!$result) {
+				$this->setError(db_error());
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return true;
+		}
+	}
+
+	/**
+	 *  deleteUser - delete a user's permissions.
+	 *
+	 *  @param  int  user_id of the user who's permissions to delete.
+	 *  @return boolean success.
+	 */
+	function deleteUser($id) {
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		if (!$id) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		$sql="DELETE FROM forum_perm
+			WHERE user_id='$id' AND group_forum_id='".$this->getID()."'";
+		$result=db_query($sql);
+		if ($result) {
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+	}
+
+
+	/*
+
+		USER PERMISSION FUNCTIONS
+
+	*/
+
+	/**
+	 *  userCanView - determine if the user can view this subproject.
+	 *
+	 *  @return boolean   user_can_view.
+	 */
+	function userCanView() {
+		if ($this->isPublic()) {
+			return true;
+		} else {
+			if (!session_loggedin()) {
+				return false;
+			} else {
+				//
+				//  You must have an entry in project_perm if this subproject is not public
+				//
+				if ($this->getCurrentUserPerm() >= 0) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+	}
+
+	/**
+	 *  userCanPost - see if the logged-in user's perms are >= 1 or Group ForumAdmin.
+	 *
+	 *  @return boolean user_can_post.
+	 */
+	function userCanPost() {
+		if (($this->isPublic() && $this->allowAnonymous()) || $this->userIsAdmin()) {
+			return true;
+		} elseif ($this->isPublic() && session_loggedin()) {
+			return true;
+		} else {
+			if (!session_loggedin()) {
+				return false;
+			} else {
+				if ($this->getCurrentUserPerm() >= 1) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+		}
+	}
+
+	/**
+	 *  userIsAdmin - see if the logged-in user's perms are >= 2 or Group ForumAdmin.
+	 *
+	 *  @return boolean user_is_admin.
+	 */
+	function userIsAdmin() {
+		if (!session_loggedin()) {
+				return false;
+		} else {
+			$perm =& $this->Group->getPermission( session_get_user() );
+
+			if (($this->getCurrentUserPerm() >= 2) || ($perm->isForumAdmin())) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	/**
+	 *  getCurrentUserPerm - get the logged-in user's perms from forum_perm.
+	 *
+	 *  @return int perm level for the logged-in user.
+	 */
+	function getCurrentUserPerm() {
+		if (!session_loggedin()) {
+			return -1;
+		} else {
+			if (!isset($this->current_user_perm)) {
+				$sql="select perm_level
+				FROM forum_perm
+				WHERE group_forum_id='". $this->getID() ."'
+				AND user_id='".user_getid()."'";
+				$this->current_user_perm=db_result(db_query($sql),0,0);
+			}
+			return $this->current_user_perm;
+		}
+	}
+
 
 }
 

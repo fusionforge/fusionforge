@@ -1,6 +1,5 @@
 <?php
 /**
- *
  * Project Admin: Edit Releases of Packages
  *
  * SourceForge: Breaking Down the Barriers to Open Source Development
@@ -8,7 +7,6 @@
  * Copyright 2004 (c) GForge, LLC
  *
  * @version   $Id$
- *
  */
 
 
@@ -18,6 +16,9 @@
 
 require_once('pre.php');	
 require_once('www/frs/include/frs_utils.php');
+require_once('common/frs/FRSPackage.class');
+require_once('common/frs/FRSRelease.class');
+require_once('common/frs/FRSFile.class');
 
 if (!$group_id) {
 	exit_no_group();
@@ -27,6 +28,7 @@ $project =& group_get_object($group_id);
 if (!$project || $project->isError()) {
 	exit_error('Error',$project->getErrorMessage());
 }
+
 $perm =& $project->getPermission(session_get_user());
 if (!$perm->isReleaseTechnician()) {
 	exit_permission_denied();
@@ -37,16 +39,35 @@ if (!$package_id) {
 	exit;
 }
 
+$frsp = new FRSPackage($project,$package_id);
+if (!$frsp || !is_object($frsp)) {
+	exit_error('Error','Could Not Get FRS Package');
+} elseif ($frsp->isError()) {
+	exit_error('Error',$frsp->getErrorMessage());
+}
+
+//
+//
+//
+if ($func=='delete_release' && $release_id) {
+	$frsr = new FRSRelease($frsp,$release_id);
+	if (!$frsr || !is_object($frsr)) {
+		exit_error('Error','Could Not Get FRS Release');
+	} elseif ($frsr->isError()) {
+		exit_error('Error',$frsr->getErrorMessage());
+	}
+	if (!$frsr->delete($sure,$really_sure)) {
+		exit_error('Error',$frsr->getErrorMessage());
+	} else {
+		$feedback .= $Language->getText('frs_admin','deleted');
+	}
+}
+
 /*
 	Get the releases of this package
 */
-$res=db_query("SELECT p.name AS package_name,r.* 
-	FROM frs_release r, frs_package p 
-	WHERE 
-	p.package_id=r.package_id
-	AND p.group_id='$group_id' 
-	AND p.package_id='$package_id'");
-if (!$res || db_numrows($res) < 1) {
+$rs =& $frsp->getReleases();
+if (count($rs) < 1) {
 	exit_error($Language->getText('general','error'),$Language->getText('project_admin_showreleases','no_release'));
 }
 
@@ -62,14 +83,17 @@ $title_arr[]=$Language->getText('project_admin_showreleases','date');
 
 echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
-for ($i=0; $i<db_numrows($res); $i++) {
+for ($i=0; $i<count($rs); $i++) {
 	echo '<tr '. $HTML->boxGetAltRowStyle($i) .'>
-			<td>'.db_result($res,$i,'package_name').'</td>
+			<td>'.$frsp->getName().'</td>
 			<td><a href="editrelease.php?group_id='.$group_id
 				.'&amp;package_id='.$package_id
-				.'&amp;release_id='.db_result($res,$i,'release_id').'">'. 
-				db_result($res,$i,'name').' ['.$Language->getText('general','edit').']</a></td><td>'.
-				date('Y-m-d H:i',db_result($res,$i,'release_date')).'</td></tr>';
+				.'&amp;release_id='.$rs[$i]->getID().'">'. 
+				$rs[$i]->getName().' ['.$Language->getText('general','edit').']</a>
+				<a href="deleterelease.php?group_id='.$group_id
+				.'&amp;package_id='.$package_id
+				.'&amp;release_id='.$rs[$i]->getID().'">['.$Language->getText('general','delete').']</td><td>'.
+				date('Y-m-d H:i',$rs[$i]->getReleaseDate()).'</td></tr>';
 }
 
 echo $GLOBALS['HTML']->listTableBottom();

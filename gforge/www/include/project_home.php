@@ -11,7 +11,6 @@
 */
 
 require_once('www/include/vote_function.php');
-require_once('common/include/vars.php');
 require_once('www/news/news_utils.php');
 require_once('www/include/trove.php');
 require_once('www/include/project_summary.php');
@@ -164,12 +163,27 @@ if ($project->usesFRS()) {
 		</td>
 		</tr>';
 
-		$sql="SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date ".
-			"FROM frs_package,frs_release ".
-			"WHERE frs_package.package_id=frs_release.package_id ".
-			"AND frs_package.group_id='$group_id' ".
-			"AND frs_release.status_id=1 ".
-			"ORDER BY frs_package.package_id,frs_release.release_date DESC";
+		//
+		//  Members of projects can see all packages
+		//  Non-members can only see public packages
+		//
+		if (session_loggedin()) {
+			if (user_ismember($group_id) || user_ismember(1,'A')) {
+				$pub_sql='';
+			} else {
+				$pub_sql=' AND frs_package.is_public=1 ';
+			}
+		} else {
+			$pub_sql=' AND frs_package.is_public=1 ';
+		}
+
+		$sql="SELECT frs_package.package_id,frs_package.name AS package_name,frs_release.name AS release_name,frs_release.release_id AS release_id,frs_release.release_date AS release_date 
+			FROM frs_package,frs_release 
+			WHERE frs_package.package_id=frs_release.package_id 
+			AND frs_package.group_id='$group_id' 
+			AND frs_release.status_id=1 
+			$pub_sql
+			ORDER BY frs_package.package_id,frs_release.release_date DESC";
 
 		$res_files = db_query($sql);
 		$rows_files=db_numrows($res_files);
@@ -340,7 +354,7 @@ if ($project->usesSCM()) {
 		WHERE group_id='$group_id'
 	", -1, 0, SYS_DB_STATS);
 	$cvs_commit_num = db_result($result,0,0);
-	$cvs_add_num    = db_result($result,0,1);
+	$cvs_add_num	= db_result($result,0,1);
 	if (!$cvs_commit_num) {
 		$cvs_commit_num=0;
 	}

@@ -33,6 +33,20 @@ $sys_default_domain = "gforge.company.com";
 //$sys_fallback_domain = "gforge2.company.com";
 //$sys_internal_network = '192.168.1.';
 
+// Machine that hosts CVS
+$sys_cvs_host = "cvs.gforge.company.com";
+
+//forum email return domain <forum-name@XXXXXX.XXX>
+$sys_forum_return_domain=$sys_default_domain;
+
+//plugins path
+$sys_plugins_path='/path/to/plugins';
+
+// Force the use of a single cvs host instead of cvs.project.domain.com
+// Set to 1 to use cvs.domain.com:/cvsroot/project for all projects
+// Set to 0 to use cvs.project.domain.com:/cvsroot/project
+$sys_cvs_single_host = 1;
+
 // Machine used for downloading sources/packages
 $sys_download_host = "download.gforge.company.com";
 
@@ -52,6 +66,10 @@ $sys_users_host = "users.gforge.company.com";
 // PHP makes reference to these documents in terms of relative paths that
 // are part of the GForge code tree.
 $sys_docs_host = "gfdocs.gforge.company.com";
+//if using docman with DAV and SVN, the docman PHP code
+//must connect to the dav server as a particular user
+$sys_docs_user = '';
+$sys_docs_pass = '';
 
 // Machine that hosts the GForge mailing lists (This could also be
 // the mail host if you have enough horsepower & bandwidth)
@@ -152,6 +170,10 @@ $sys_use_project_multimedia=false;
 //	If set to true, only a site admin can register projects
 //
 $sys_project_reg_restricted=true;
+//
+//	Restricted user registration - only site admins can create new accounts
+//
+$sys_user_reg_restricted=false;
 
 //
 // Groups and Homes dir prefix
@@ -208,8 +230,10 @@ $sys_default_country_code='US';
 
 // Akamization of images
 //	example: http://images.gforge.company.com
-$sys_images_url="http://gforge.company.com/";
-$sys_images_secure_url="https://gforge.company.com/";
+//	just leave blank for most installs unless 
+//	images are served from other server
+$sys_images_url="";
+$sys_images_secure_url="";
 
 // Groups
 //	The GForge permission model is based on groups

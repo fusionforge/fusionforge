@@ -100,6 +100,9 @@ class ForumFactory extends Error {
 				$public_flag='=1';
 			} else {
 				$public_flag='<3';
+				$exists=' AND EXISTS (SELECT group_forum_ID
+					FROM forum_perm
+					WHERE perm_level >= 0 AND group_forum_id=forum_group_list.group_forum_id) ';
 			}
 		} else {
 			$public_flag='=1';
@@ -109,6 +112,7 @@ class ForumFactory extends Error {
 			FROM forum_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."' 
 			AND is_public $public_flag 
+			$exists
 			ORDER BY group_forum_id;";
 
 		$result = db_query ($sql);

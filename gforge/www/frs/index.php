@@ -14,18 +14,35 @@
 require_once('pre.php');	
 require_once('www/frs/include/frs_utils.php');
 
-$sql = "SELECT *
-	FROM frs_package 
-	WHERE group_id='$group_id' AND status_id='1' 
-	ORDER BY name";
-$res_package = db_query( $sql );
-$num_packages = db_numrows( $res_package );
 $cur_group =& group_get_object($group_id);
 
 if (!$cur_group) {
 	exit_error($Language->getText('project_showfiles','no_group_title'),
 		$Language->getText('project_showfiles','no_group'));
 }
+
+//
+//	Members of projects can see all packages
+//	Non-members can only see public packages
+//
+if (session_loggedin()) {
+	if (user_ismember($group_id) || user_ismember(1,'A')) {
+		$pub_sql='';
+	} else {
+		$pub_sql=' AND is_public=1 ';
+	}
+} else {
+	$pub_sql=' AND is_public=1 ';
+}
+
+$sql = "SELECT *
+	FROM frs_package 
+	WHERE group_id='$group_id' 
+	AND status_id='1' 
+	$pub_sql
+	ORDER BY name";
+$res_package = db_query( $sql );
+$num_packages = db_numrows( $res_package );
 
 if ( $num_packages < 1) {
 	exit_error($Language->getText('project_showfiles','error_no_packages_defined_title'),$Language->getText('project_showfiles','error_no_packages_defined_text'));
