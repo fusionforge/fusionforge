@@ -344,7 +344,7 @@ eval {
 	$query = "update users set unix_uid = nextval ('unix_uid_seq')
                   where unix_status != 'N'
                     and status != 'P'
-                    and unix_uid = 0"
+                    and unix_uid = 0" ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	@array = $sth->fetchrow_array () ;
