@@ -176,7 +176,7 @@ class DocumentGroup extends Error {
 			return false;
 		}
 		if (!$name) {
-			$this->setError('Missing Params');
+			$this->setMissingParamsError();
 			return false;
 		}
 		$sql="UPDATE doc_groups

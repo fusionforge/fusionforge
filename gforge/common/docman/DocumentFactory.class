@@ -112,6 +112,7 @@ class DocumentFactory extends Error {
 	 *	@return	array	Document objects.
 	 */
 	function &getDocuments() {
+		global $Language;
 		if ($this->Documents) {
 			return $this->Documents;
 		}
@@ -157,7 +158,7 @@ class DocumentFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$this->setError('No Documents Found '.db_error());
+			$this->setError($Language->getText('docman_common'.'no_docs')..db_error());
 			return false;
 		} else {
 			while ($arr =& db_fetch_array($result)) {

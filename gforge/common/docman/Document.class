@@ -95,12 +95,13 @@ class Document extends Error {
 	 */
 	function create($filename,$filetype,$data,$doc_group,$title,$language_id,$description) {
 
+		global $Language;
 		if (strlen($title) < 5) {
-			$this->setError('Title Must Be At Least 5 Characters');
+			$this->setError($Language->getText('docman_common','error_min_title_lenght'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError('Document Description Must Be At Least 10 Characters');
+			$this->setError($Language->getText('docman_common','error_min_desc_lenght'));
 			return false;
 		}
 
@@ -344,13 +345,13 @@ class Document extends Error {
 	 *	@return	boolean	success.
 	 */
 	function update($filename,$filetype,$data,$doc_group,$title,$language_id,$description,$stateid) {
-
+		global $Language;
 		if (strlen($title) < 5) {
-			$this->setError('Title Must Be At Least 5 Characters');
+			$this->setError($Language->getText('docman_common','error_min_title_lenght'));
 			return false;
 		}
 		if (strlen($description) < 10) {
-			$this->setError('Document Description Must Be At Least 10 Characters');
+			$this->setError($Language->getText('docman_common','error_min_desc_lenght'));
 			return false;
 		}
 
