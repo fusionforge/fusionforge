@@ -189,8 +189,24 @@ if ($this->UsesAnonCVS ($group_id)) {
 			$add_num=0;
 		}
 		echo ' (CVS: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
+		if ($commit_num || $add_num) {
+			echo '
+		<br /> &nbsp; -
+			<a href="'.account_group_cvsweb_url($group_id).'">Browse CVS</a>';
+	        }
 		
 	}
+	/**
+	 *      account_group_cvsweb_url() - Returns URL for group's CVS interface WWW
+	 *
+	 *	@param  string  The group name
+	 *      @return URL to access CVS over HTTP
+	 */
+	function account_group_cvsweb_url($group_id) {
+		$project =& group_get_object($group_id);
+		return 'http://'.$GLOBALS['sys_scm_host'].'/cgi-bin/cvsweb.cgi?cvsroot='.$project->getUnixName();
+	}
+
 	function display_groupmenu_scm($params) {
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);

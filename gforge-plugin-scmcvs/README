@@ -10,8 +10,7 @@ Prerequisite:
 
 Installation:
 
-- files from etc/ go to /etc/gforge/plugins/scmcvs, apart from
-etc/httpd.conf that you should install as /etc/gforge/httpd.d/10scmcvs
+- files from etc/ go to /etc/gforge/ 
 - files from bin/ go to /usr/lib/gforge/plugins/scmcvs/bin
 - files from include/ go to /usr/lib/gforge/plugins/scmcvs/include
 - files from lib/ go to  /usr/lib/gforge/plugins/scmcvs/lib

@@ -1,4 +1,4 @@
-gforge-plugin-scmcvs (0.1-9) unstable; urgency=low
+gforge-plugin-scmcvs (0.1-10) unstable; urgency=low
 
   * Removed cvssh that collide with gforge version and is not really cvs
     specific 
