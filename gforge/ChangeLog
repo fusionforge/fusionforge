@@ -1,3 +1,12 @@
+2004-09-23  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* fixed [#905] Incorrect DB transaction handling in ArtifactType.class
+	reported by Diggie Bell
+	* fixed [#904] Possible sort order issue on My Page and 
+	[#828] Duplicate items on My Page thanks to Diggy Bell
+	* updated gforge-plugin-scmcvs to CVSWeb 3.0.2. Made author name point
+	to corresponding GForge user page
+
 2004-09-23  Francisco Gimeno <kikov@kikov.org>
 
 	Fixes [#911]:
@@ -5,6 +14,15 @@
 	www/tracker/mod.php, www/tracker/taskmgr.php: put Bug Numbers in 
 	a consistent way: ie: [#BUG] instead of [ #BUG ]. cvstracker-plugin
 	work this way.
+
+2004-09-21  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* applied [#677] add documentation comments for the plugin functions
+	in User.class and Group.class by Lars Ehrhardt
+	* applied [#899] Fixes for installation guide by Ognyan Kulev
+	* applied [#893] HTML fixes for docs/webalizer-HOWTO.html by Ognyan Kulev
+	* applied [#898] Minor corrections (export script www/export/tracker/php)
+	by Mathieu Peltier and improved the code
 
 2004-09-21  Tim Perdue <tim@gforge.org>
 
