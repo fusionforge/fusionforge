@@ -626,7 +626,7 @@ class ArtifactType extends Error {
 	function &getCategoryObjects() {
 		$res = $this->getCategories();
 		while ($arr =& db_fetch_array($res)) {
-			$cats[] =& new ArtifactCategory(&$this,$arr);
+			$cats[] =& new ArtifactCategory($this,$arr);
 		}
 		return $cats[];
 	}
@@ -654,7 +654,7 @@ class ArtifactType extends Error {
 	function &getGroupObjects() {
 		$res = $this->getGroups();
 		while ($arr =& db_fetch_array($res)) {
-			$grps[] =& new ArtifactGroup(&$this,$arr);
+			$grps[] =& new ArtifactGroup($this,$arr);
 		}
 		return $grps[];
 	}
@@ -681,7 +681,7 @@ class ArtifactType extends Error {
 	function &getResolutionObjects() {
 		$res = $this->getResolutions();
 		while ($arr =& db_fetch_array($res)) {
-			$grps[] =& new ArtifactResolutions(&$this,$arr);
+			$grps[] =& new ArtifactResolutions($this,$arr);
 		}
 		return $grps[];
 	}

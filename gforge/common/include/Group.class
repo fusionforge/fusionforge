@@ -1234,7 +1234,7 @@ class Group extends Error {
 	 *	@return	object	The Permission.
 	 */
 	function &getPermission(&$_user) {
-		return permission_get_object(&$this, &$_user);
+		return permission_get_object($this, $_user);
 	}
 
 

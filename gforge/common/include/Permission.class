@@ -40,7 +40,7 @@ $PERMISSION_OBJ=array();
  * @return a Permission or false on failure
  *
  */
-function &permission_get_object($_Group, $_User) {
+function &permission_get_object(&$_Group, &$_User) {
 	//create a common set of Permission objects
 	//saves a little wear on the database
 	
