@@ -5,8 +5,10 @@ gforge (3pre8-0+) experimental; urgency=low
   * [Roland] Also, changed version to reflect the pre8 status of the
     current code.
   * [Roland] Stricter dependency on debconf, to fix a Lintian warning.
+  * [Roland] Die on error when installing the DB.
+  * [Roland] Do not forget 20021213.sql...
 
- -- Roland Mas <lolando@debian.org>  Sun,  5 Jan 2003 15:25:58 +0100
+ -- Roland Mas <lolando@debian.org>  Sun,  5 Jan 2003 21:27:08 +0100
 
 gforge (3.0-0+8) experimental; urgency=low
 
