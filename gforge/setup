@@ -105,6 +105,7 @@ computedefault(){
 	DEFAULTsys_plugins_path=/usr/lib/gforge/plugins/
 	DEFAULTsys_sslcrt=$(findcrt)
 	DEFAULTsys_sslkey=$(findkey)
+	DEFAULTnoreply_to_bitbucket=true
 	#
 	# TODO
 	#usr_lib_gforge=$GFGDIR
