@@ -1,11 +1,16 @@
 sourceforge (2.5-14+) unstable; urgency=low
 
-  * Made ldap cleanup:
-    Added access to userPassword for SF_robot (Thanks to Justin Richer)
-    Made a clean ldap purge
-    Made install-ldap.sh more silent and backport from 2.6
+  * [Christian] LDAP cleanup: Added access to userPassword for SF_robot
+    (Thanks to Justin Richer), made a clean LDAP purge, made
+    install-ldap.sh more silent and backport from 2.6.
+  * deb-specific/sourceforge.schema, utils/sql2ldif.pl: Changed schema to
+    use assigned OIDs, a saner naming scheme and better attribute types.
+  * install-ldap.sh: Replaced calls to "/etc/init.d/slapd restart" with
+    "invoke-rc.d slapd restart" (policy).
+  * install-ldap.sh: Clean the LDAP directory on package removal (closes:
+    #118516).
 
- -- Christian Bayle <bayle@aist.enst.fr>  Thu,  8 Nov 2001 00:55:39 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  9 Nov 2001 17:31:22 +0100
 
 sourceforge (2.5-14) unstable; urgency=low
 
@@ -16,9 +21,8 @@ sourceforge (2.5-14) unstable; urgency=low
     permissions.  Cleaned new_parse.pl a bit, accordingly.
   * Changed Priority: from optional to extra to avoid overrides.
   * Various fixes and cleanups.
-  * 2.5-14+
 
- -- Christian Bayle <bayle@aist.enst.fr>  Thu,  8 Nov 2001 00:55:35 +0100
+ -- Roland Mas <lolando@debian.org>  Wed,  7 Nov 2001 19:01:59 +0100
 
 sourceforge (2.5-13) unstable; urgency=low
 
