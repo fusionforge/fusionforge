@@ -173,6 +173,36 @@ objectCLass: organizationalUnit
 FIN
 }
 
+# Setup SF_robot Passwd
+setup_robot() {
+	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+	echo "=====$sys_ldap_admin_dn"
+	sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+	echo "=====$sys_ldap_bind_dn"
+	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/local.inc | cut -d\" -f2)
+	echo "=====$sys_ldap_passwd"
+	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
+	echo "=====$cryptedpass"
+	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w$secret <<-FIN
+dn: $sys_ldap_bind_dn
+changetype: modify
+replace: userPassword
+userPassword: $cryptedpasswd
+-
+FIN
+
+# Test!
+naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w$secret <<-FIN
+dn: uid=dummy,ou=People,$naming_context
+changetype: modify
+replace: cn
+cn: toto Dummy User
+-
+FIN
+
+}
+
 # Main
 if [ $# != 1 ] 
 then 
@@ -222,6 +252,7 @@ else
 			list)
 				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 				# Display what is now in the database
+				#ldapsearch -x -b "$naming_context" '(objectclass=*)' 
 				ldapsearch -x -b "$naming_context" '(objectclass=*)' 
 				;;
 			clean)
@@ -250,22 +281,7 @@ else
 				$0 default
 				;;
 			test)	
-				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
-				[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
-				ldapmodify -v -c -D "cn=admin,ou=People,$naming_context" -x -w$secret <<-FIN
-dn: cn=SF_robot,$naming_context
-changetype: modify
-replace: userPassword
-userPassword: $cryptedpasswd
--
-FIN
-				ldapmodify -v -c -D "cn=SF_robot,$naming_context" -x -w$secret <<-FIN
-dn: uid=dummy,ou=People,$naming_context
-changetype: modify
-replace: cn
-cn: toto Dummy User
--
-FIN
+				setup_robot
 				;;
 		esac
 	fi
@@ -312,3 +328,15 @@ fi
 #access to dn=".*,ou=Group,dc=dragoninc,dc=on,dc=ca" attr=userpassword 
 #        by dn="uid=root,ou=People,dc=dragoninc,dc=on,dc=ca" write 
 #        by * none
+#
+# La mine d'or http://www.bayour.com/LDAPv3-HOWTO.html
+# http://www.ameritech.net/users/mhwood/ldap-sec-setup.html
+# A lire /usr/share/doc/openssl/README.Debian
+# /usr/share/doc/libsasl7/sysadmin.html
+# 
+# To create the certificate that OpenLDAP will use, we issue the command openssl like this:
+# openssl req -new -x509 -nodes -out server.pem -keyout server.pem -days 365
+# openssl x509 -in server.pem -text
+#
+#
+# Until this work:  ldapsearch -b "dc=g-tt,dc=rd,dc=francetelecom,dc=fr" '(objectclass=*)'
