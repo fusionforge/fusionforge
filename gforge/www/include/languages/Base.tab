@@ -2150,7 +2150,7 @@ scm_index	modulename	modulename
 scm_index	nohistory	This project has no CVS history.
 scm_index	section	Project: $1
 scm_index	title	SCM
-scm_index	admin	Administration
+scm_index	admin	Admin
 search	artifact_author	Submitted By
 search	artifact_date	Date
 search	artifact_id	#
