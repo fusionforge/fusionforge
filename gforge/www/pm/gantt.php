@@ -15,17 +15,21 @@ require_once('common/pm/ProjectTaskFactory.class');
  * @param	string		Font family
  * @param	string		Font style
  * @param	integer		Font size
- */
+ * /
 function settitlefont($graph, $sys_font_family, $sys_font_style, $sys_font_size) {
 	if ($sys_font_family != "" &&
 	    $sys_font_style != "" &&
 	    $sys_font_size != "") {
+
+eval() is a nasty security hole
+
 		eval("\$font_family=$sys_font_family;");
 		eval("\$font_style=$sys_font_style;");
 		eval("\$font_size=$sys_font_size;");
 		$graph->title->SetFont($font_family,$font_style,$font_size);
 	}
 }
+*/
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
@@ -58,8 +62,8 @@ $graph->SetMargin(10,10,25,10);
 
 // Add title and subtitle
 $graph->title-> Set($pg->getName());
-global $sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size;
-settitlefont($graph,$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
+//global $sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size;
+//settitlefont($graph,$sys_gantt_title_font_family,$sys_gantt_title_font_style,$sys_gantt_title_font_size);
 //$graph->subtitle-> Set("(Draft version)");
 
 // Show day, week and month scale
