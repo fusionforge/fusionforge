@@ -54,15 +54,15 @@ if ($submit) {
 
 site_project_header(array('title'=>$Language->getText('project_joinrequest','title'),'group'=>$group_id,'toptab'=>'summary'));
 
-echo $Language->getText('project_joinrequest', 'joining');
-
 ?>
+<p><?php echo $Language->getText('project_joinrequest', 'joining'); ?></p>
 <form action="<?php echo "$PHP_SELF?group_id=$group_id"; ?>" method="post">
 <!--<p>
 <textarea name="comments" rows="15" cols="60"></textarea>
 </p>-->
 <p>
-<input type="submit" name="submit" value="Submit">
+	<input type="submit" name="submit" value="<?php echo $Language->getText('general', 'submit'); ?>" />
+</p>
 </form>
 <?php
 
