@@ -69,7 +69,7 @@ if (db_numrows($result)>0) {
 ?>
 	<h3 style="color:red">Tables loaded:</h3>
 <?
-	echo "<table border="0">";
+	echo "<table border=\"0\">";
 	$maxtrans=0;
 	for ($i=0; $i<db_numrows($result) ; $i++) {
 		$howmany=db_result($result, $i, 'count');
