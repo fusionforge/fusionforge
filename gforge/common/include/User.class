@@ -181,38 +181,31 @@ class User extends Error {
 		$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$unix_box='shell') {
 		global $Language;
 		if (!$unix_name) {
-			//$this->setError('You must supply a username');
 			$this->setError($Language->getText('account_register','err_username'));
 			return false;
 		}
 		if (!$realname) {
-			//$this->setError('You must supply a real name');
 			$this->setError($Language->getText('account_register','err_realname'));
 			return false;
 		}
 		if (!$password1) {
-			//$this->setError('You must supply a password');
 			$this->setError($Language->getText('account_register','err_passwd'));
 			return false;
 		}
 		if ($password1 != $password2) {
-			//$this->setError('Passwords do not match');
 			$this->setError($Language->getText('account_register','err_passwd2'));
 			return false;
 		}
 		if (!account_pwvalid($password1)) {
-			//$this->setError('Password must be at least 6 characters');
 			$this->setError($Language->getText('account_register','err_passwd3'));
 			return false;
 		}
 		$unix_name=strtolower($unix_name);
 		if (!account_namevalid($unix_name)) {
-			//$this->setError('Invalid Unix Name. ');
 			$this->setError($Language->getText('account_register','err_unixname'));
 			return false;
 		}
 		if (!validate_email($email)) {
-			//$this->setError('Invalid Email Address');
 			$this->setError($Language->getText('account_register','err_email'));
 			return false;
 		}
@@ -226,13 +219,11 @@ class User extends Error {
 			$jabber_only=1;
 		}
 		if (db_numrows(db_query("SELECT user_id FROM users WHERE user_name LIKE '$unix_name'")) > 0) {
-			//$this->setError('That username already exists.');
 			$this->setError($Language->getText('account_register','err_userexist'));
 			return false;
 		}
 		if ($GLOBALS['sys_require_unique_email']) {
 			if (db_numrows(db_query("SELECT user_id FROM users WHERE email='$email'")) > 0) {
-				//$this->setError('User with this email already exists - use people search to recover your login.');
 				$this->setError($Language->getText('account_register','err_mailexist'));
 				return false;
 			}
