@@ -30,12 +30,13 @@ if ($_size==640) {
 } else {
 	$graph  = new GanttGraph (800,600, "auto");
 }
-$graph->SetShadow();
+//$graph->SetShadow();
+$graph->SetMargin(10,10,25,10);
 
 // Add title and subtitle
 $graph->title-> Set($pg->getName());
 //$graph->title-> SetFont( FF_ARIAL, FS_BOLD, 12);
-$graph->subtitle-> Set("(Draft version)");
+//$graph->subtitle-> Set("(Draft version)");
 
 // Show day, week and month scale
 if ($_resolution == 'Days') {
