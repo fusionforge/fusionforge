@@ -80,7 +80,10 @@ class Theme extends Layout {
 			print 'class=tabs ';
 		}
 		//print 'href="'. $url .'">' . $title . '</A>&nbsp;|&nbsp;';
-		print 'href="'. $url .'"><img src="/' . $this->imgroot . $icon . '">' . $title . '</A>';
+		//print 'href="'. $url .'"><img src="/' . $this->imgroot . $icon . '">' . $title . '</A>';
+		print 'href="'. $url .'">';
+		print html_image($this->imgroot . $icon,'24','24',array('alt'=>"$title",'border'=>($selected?'1':'0')));
+		print '</A>';
 	}
 }
 ?>
