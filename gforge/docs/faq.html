@@ -5,7 +5,7 @@
 <body>
 
 <h2><center>GForge 3.0 FAQ</center></h2>
-<h3><center>Updated 6/13/2003</center></h3>
+<h3><center>Updated 6/20/2003</center></h3>
 <h3><center>Suggestions are <a href="http://gforge.org/forum/forum.php?forum_id=6">welcome</a>.</center></h3>
 
 <br/><a href="#users">Users FAQ</a>
@@ -333,6 +333,18 @@ which you can then submit using the <a href="http://gforge.org/tracker/?atid=106
 <li>Run the <code>build-bootstrap.xml</code> Ant build script, i.e., <code>ant -f build-bootstrap.xml</code>
 <li>When that's done, run <code>gforge/docs/xdocs/generate_docs.sh</code>.
 <li>Now you've got a PDF file and a zip file full of HTML in the <code>gforge/docs/xdocs/</code> directory.  Yay!
+</ol>
+</li>
+
+<br></br>
+<li>
+<b>How can I get GForge to store its data in a MySQL database?</b>
+<p>You could do it, but why bother?  To quote Tim Perdue - "GForge could not be made to run on the primitive MySQL database without serious hacking, and I won't accept those kinds of changes back into the system.  For the amount of work involved in such a project, you'd be better off taking an hour to learn postgres. It's a superior database in every way, with the only point of debate being speed on simple 'hello world' type applications".
+<p>It'd be a lot of work because:
+<ol>
+<li>GForge uses Postgres stored procedures, so you'd have to convert those into PHP functions
+<li>GForge uses Postgres functions like pg_connect, so you'd have to replace those with the MySQL equivalents
+<li>GForge uses subselects, so you'd have to rewrite those to use temporary tables or whatever
 </ol>
 </li>
 
