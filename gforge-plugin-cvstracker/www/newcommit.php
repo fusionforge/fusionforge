@@ -17,7 +17,7 @@
  *
  */
 require_once('squal_pre.php');
-require_once('/etc/gforge/plugins/cvstracker/cvstracker.conf');
+require_once('plugins/cvstracker/cvstracker.conf');
 
 /**
  * Getting POST variables
