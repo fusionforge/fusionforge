@@ -19,6 +19,8 @@ else
     target=$1
 fi
 
+LC_ALL=C
+
 case "$target" in
     default)
 	echo "Usage: $0 {configure-files|configure|purge|purge-files|dump|restore}"

@@ -1,11 +1,13 @@
-gforge (3.1-17+6) unstable; urgency=low
+gforge (3.1-17+7) unstable; urgency=low
 
   * [Roland] Re-added the Debconf note about the need for an SSL
     certificate, which seems to have been lost in time at some point.
   * [Roland] Restored proper non-setgid permissions on the debian/ control
     directory (closes: #262500).
+  * [Roland] Set LC_ALL to C in scripts to fix error message detection
+    (closes: #254695).
 
- -- Roland Mas <lolando@debian.org>  Tue,  3 Aug 2004 13:03:47 +0200
+ -- Roland Mas <lolando@debian.org>  Tue,  3 Aug 2004 15:16:00 +0200
 
 gforge (3.1-17) unstable; urgency=low
 
