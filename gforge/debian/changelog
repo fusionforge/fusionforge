@@ -10,8 +10,9 @@ sourceforge (2.6-0+8+) unstable; urgency=low
     list or reverse dependencies (since 100 is the id of "None", and all
     tasks depend on this "None" by default.  Note: there seems to be no
     more dependencies in the artifact manager.
+  * [Roland] Fixed configuration of apache-ssl.
 
- -- Roland Mas <lolando@debian.org>  Fri, 22 Mar 2002 14:48:15 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 25 Mar 2002 13:22:25 +0100
 
 sourceforge (2.6-0+8) unstable; urgency=low
 

@@ -15,16 +15,30 @@ fi
 case "$1" in
     configure-files)
 	# Make sure Apache sees us
-	cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.sourceforge-new
-	perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf.sourceforge-new
-	perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf.sourceforge-new
-	perl -pi -e "s/# *LoadModule apache_ssl_module/LoadModule apache_ssl_module/gi" /etc/apache/httpd.conf.sourceforge-new
-	perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf.sourceforge-new
-	perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf.sourceforge-new
-	
-	if ! grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf.sourceforge-new ; then
-	    echo "### Next line inserted by Sourceforge install" >> /etc/apache/httpd.conf.sourceforge-new
-	    echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache/httpd.conf.sourceforge-new
+	if [ -e /etc/apache/httpd.conf ] ; then
+	    cp -a /etc/apache/httpd.conf /etc/apache/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule ssl_module/LoadModule ssl_module/gi" /etc/apache/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache/httpd.conf.sourceforge-new
+	    
+	    if ! grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache/httpd.conf.sourceforge-new ; then
+		echo "### Next line inserted by Sourceforge install" >> /etc/apache/httpd.conf.sourceforge-new
+		echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache/httpd.conf.sourceforge-new
+	    fi
+	fi
+
+	if [ -e /etc/apache-ssl/httpd.conf ] ; then
+	    cp -a /etc/apache-ssl/httpd.conf /etc/apache-ssl/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule php4_module/LoadModule php4_module/gi" /etc/apache-ssl/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule apache_ssl_module/LoadModule apache_ssl_module/gi" /etc/apache-ssl/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule env_module/LoadModule env_module/gi" /etc/apache-ssl/httpd.conf.sourceforge-new
+	    perl -pi -e "s/# *LoadModule vhost_alias_module/LoadModule vhost_alias_module/gi" /etc/apache-ssl/httpd.conf.sourceforge-new
+	    
+	    if ! grep -q "^Include /etc/sourceforge/sf-httpd.conf" /etc/apache-ssl/httpd.conf.sourceforge-new ; then
+		echo "### Next line inserted by Sourceforge install" >> /etc/apache-ssl/httpd.conf.sourceforge-new
+		echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache-ssl/httpd.conf.sourceforge-new
+	    fi
 	fi
 
 	# Make sure pgsql,ldap,gd and mcrypt are enabled in the PHP config files
