@@ -104,7 +104,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			exit;
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$cat_name',field_name='Category'
-			WHERE old_value='$catbox_id' AND field_name='category_id'");
+			WHERE old_value='$cat_id' AND field_name='category_id'");
 		if (!$res3) {
 			echo "Could Not update history category " . db_error();
 			db_rollback();
@@ -145,7 +145,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 			exit;
 		}
 		$res3=db_query("UPDATE artifact_history SET old_value='$group_name',field_name='Group'
-			WHERE old_value='$groupbox_id' AND field_name='artifact_group_id'");
+			WHERE old_value='$artgroup_id' AND field_name='artifact_group_id'");
 		if (!$res3) {
 			echo "Could Not update history artifactgroup " . db_error();
 			db_rollback();
@@ -187,7 +187,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 				exit;
 			}
 		$res3=db_query("UPDATE artifact_history SET old_value='$resolution_name',field_name='Resolution'
-			WHERE old_value='$resolutionbox_id' AND field_name='resolution_id'");
+			WHERE old_value='$resolution_id' AND field_name='resolution_id'");
 		if (!$res3) {
 			echo "Could Not update history resolution " . db_error();
 			db_rollback();

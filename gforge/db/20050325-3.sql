@@ -1,6 +1,6 @@
-DROP TABLE artifact_category;
-DROP TABLE artifact_group;
-DROP TABLE artifact_resolution;
+DROP TABLE artifact_category CASCADE;
+DROP TABLE artifact_group CASCADE;
+DROP TABLE artifact_resolution CASCADE;
 ALTER TABLE artifact DROP COLUMN artifact_group_id;
 ALTER TABLE artifact DROP COLUMN resolution_id;
 ALTER TABLE artifact DROP COLUMN category_id;
