@@ -1,3 +1,9 @@
+2003-01-26  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* common/include/utils.php(util_send_message): remove duplicated
+	code.
+	(util_handle_message): do not send messages to "Nobody".
+
 2003-01-25  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* cronjobs/mail/mailing_lists_create.php: lowercase all list names,

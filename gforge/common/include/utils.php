@@ -65,9 +65,6 @@ function util_send_message($to,$subject,$body,$from='',$BCC='') {
 	if (!$from) {
 		$from='noreply@'.$GLOBALS['sys_default_domain'];
 	}
-	if (!$to) {
-		$to='noreply@'.$GLOBALS['sys_default_domain'];
-	}
 	$body = "To: $to".
 		"\nFrom: $from".
 		"\nBCC: $BCC".
@@ -144,11 +141,15 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 	if (count($id_arr) < 1) {
 
 	} else {
-		$res=db_query("SELECT jabber_address,email,jabber_only
+		$res=db_query("SELECT user_id, jabber_address,email,jabber_only
 			FROM users WHERE user_id IN (". implode($id_arr,',') .")");
 		$rows=db_numrows($res);
 
 		for ($i=0; $i<$rows; $i++) {
+			if (db_result($res, $i, 'user_id') == 100) {
+				// Do not send messages to "Nobody"
+				continue;
+			}
 			//
 			//  Build arrays of the jabber address
 			//
