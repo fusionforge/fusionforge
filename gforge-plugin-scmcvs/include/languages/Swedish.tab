@@ -1,9 +1,9 @@
-plugin_scmcvs	anoncvs	<P><B>Anonym CVS åtkomst</B> <P>Detta projekts CVS-lager kan hämtas med anonym (pserver) CVS med följande instruktions set. Modul som du you vill hämta måste specifieras som <I>modulnamn</I>. När du tillfrågas om lösenord för <I>anonym</I>, tryck bara på returtangenten.
+plugin_scmcvs	anoncvs	<P><B>Anonym CVS åtkomst</B></P><P>Detta projekts CVS-lager kan hämtas med anonym (pserver) CVS med följande instruktions set. Modul som du you vill hämta måste specifieras som <I>modulnamn</I>. När du tillfrågas om lösenord för <I>anonym</I>, tryck bara på returtangenten.</P>
 plugin_scmcvs	anoncvsup	Uppdateringar innifrån modulens katalog behöver inte -d parametern.
 plugin_scmcvs	browseit	Bläddra i CVS-lagret
-plugin_scmcvs	browsetree	<HR><B>Bläddra i CVS-trädet</B> <P>Bläddring i CVS-trädet ger dig en bra insyn i statusen för projektets kod. Du kan också se hela historiken för valfri fil lagret.
+plugin_scmcvs	browsetree	<B>Bläddra i CVS-trädet</B><P>Bläddring i CVS-trädet ger dig en bra insyn i statusen för projektets kod. Du kan också se hela historiken för valfri fil lagret.</P>
 plugin_scmcvs	cvs_repository	CVS Lager
-plugin_scmcvs	devcvs	<P><B>Ge utvecklare CVS åtkomst via SSH</B> <P>Endast projekt utvecklare kan komma åt CVS trädet via denna metod. SSH1 måste vara installerad på din klientmaskin. Ersätt <I>modulnamn</I> och <I>utvecklarnamn</I> med rätt värden. Ange webbplatslösenord vid anmodan.
+plugin_scmcvs	devcvs	<P><B>Ge utvecklare CVS åtkomst via SSH</B></P><P>Endast projekt utvecklare kan komma åt CVS trädet via denna metod. SSH1 måste vara installerad på din klientmaskin. Ersätt <I>modulnamn</I> och <I>utvecklarnamn</I> med rätt värden. Ange webbplatslösenord vid anmodan.</P>
 plugin_scmcvs	developer_commits_adds	Utvecklare (30 dagar/Inlämningar) (30 dagar/Tillägg)
 plugin_scmcvs	developername	utvecklarnamn
 plugin_scmcvs	error_only_projects_can_use_cvs	Fel, endast projekt kan använda CVS

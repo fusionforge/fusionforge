@@ -1,9 +1,9 @@
-plugin_scmcvs	anoncvs	<P><B>Accesso anonimo a CVS </B> <P>Il repository CVS di questo progetto può essere estratto tramite il metodo pserver seguendo le istruzioni qui sotto. Il modulo che desideri estrarre deve essere inserito al posto di <I>nomemodulo</I>. Quando viene richiesta una password per l'utente <I>anonymous</I>, premere Invio.
+plugin_scmcvs	anoncvs	<P><B>Accesso anonimo a CVS </B><P>Il repository CVS di questo progetto può essere estratto tramite il metodo pserver seguendo le istruzioni qui sotto. Il modulo che desideri estrarre deve essere inserito al posto di <I>nomemodulo</I>. Quando viene richiesta una password per l'utente <I>anonymous</I>, premere Invio.</P>
 plugin_scmcvs	anoncvsup	Non è necessario utilizzare il parametro -d quando si fanno gli update da una sottodirectory.
 plugin_scmcvs	browseit	Visualizza repository CVS
-plugin_scmcvs	browsetree	<HR><B>Visualizza il repository CVS </B> <P>Visualizzare il repository CVS da' la possibilità di vedere lo stato attuale del codice sviluppato. È possibile visualizzare l'intera storia di ogni singolo file.
+plugin_scmcvs	browsetree	<B>Visualizza il repository CVS</B><P>Visualizzare il repository CVS da' la possibilità di vedere lo stato attuale del codice sviluppato. È possibile visualizzare l'intera storia di ogni singolo file.</P>
 plugin_scmcvs	cvs_repository	Repository CVS
-plugin_scmcvs	devcvs	<P><B>Accesso SSH al CVS</B> <P>Solo gli sviluppatori del progetto possono accedere al repository CVS tramite SSH. SSH1 deve essere installato sulla macchina locale. Sostituire <I>nomemodulo</I> e <I>sviluppatore</I> con i nomi appropriati. Quando viene richiesta la password, inserire la propria password di accesso.
+plugin_scmcvs	devcvs	<P><B>Accesso SSH al CVS</B></P><P>Solo gli sviluppatori del progetto possono accedere al repository CVS tramite SSH. SSH1 deve essere installato sulla macchina locale. Sostituire <I>nomemodulo</I> e <I>sviluppatore</I> con i nomi appropriati. Quando viene richiesta la password, inserire la propria password di accesso.</P>
 plugin_scmcvs	developer_commits_adds	Sviluppatore (30 giorni/commit) (30 giorni/aggiunte)
 plugin_scmcvs	developername	sviluppatore
 plugin_scmcvs	error_only_projects_can_use_cvs	Errore, solo i progetti possono utilizzare CVS
