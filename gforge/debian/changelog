@@ -10,8 +10,12 @@ sourceforge (2.6-0+11+) unstable; urgency=low
     isolates different features into different packages, and it also paves
     the road to multi-host installations (that part is not done yet).
   * [Roland] Cleaned debian/rules file a bit.
+  * [Christian] Added box1_get_alt_row_style function in Layout.class
+    that replace html_get_alt_row_color from html.php. This will help
+    to solve problems with savannah themes. I also made the necessary changes
+    in savannah styles
 
- -- Roland Mas <lolando@debian.org>  Thu,  2 May 2002 20:14:03 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon,  6 May 2002 00:09:25 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
