@@ -20,6 +20,10 @@ require_once('pre.php');
 require_once('common/include/vars.php');
 require_once('www/project/admin/project_admin_utils.php');
 
+if (!$sys_use_project_database) {
+	exit_disabled();
+}
+
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 $group =& group_get_object($group_id);

@@ -18,6 +18,10 @@ $QUOTA = 1048576;
 require_once('pre.php');
 require_once('www/project/admin/project_admin_utils.php');
 
+if (!$sys_use_project_multimedia) {
+	exit_disabled();
+}
+
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
 function check_file_size($size) {

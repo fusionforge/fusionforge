@@ -50,26 +50,38 @@ function project_admin_header($params) {
 	$labels[] = $Language->getText('project_admin_utils','user_permissions');
 	$labels[] = $Language->getText('project_admin_utils','edit_public_info');
 	$labels[] = $Language->getText('project_admin_utils','project_history');
-	$labels[] = $Language->getText('project_admin_utils','vhosts');
 	if($GLOBALS['sys_use_people']) {
 		$labels[] = $Language->getText('project_admin_utils','post_jobs');
 		$labels[] = $Language->getText('project_admin_utils','edit_jobs');
 	}
-	$labels[] = $Language->getText('project_admin_utils','multimedia_data');
-	$labels[] = $Language->getText('project_admin_utils','database_admin');
+	if($GLOBALS['sys_use_project_multimedia']) {
+		$labels[] = $Language->getText('project_admin_utils','multimedia_data');
+	}
+	if($GLOBALS['sys_use_project_vhost']) {
+		$labels[] = $Language->getText('project_admin_utils','vhosts');
+	}
+	if($GLOBALS['sys_use_project_database']) {
+		$labels[] = $Language->getText('project_admin_utils','database_admin');
+	}
 	$labels[] = $Language->getText('project_admin_utils','stats');
 	
 	$links[] = '/project/admin/?group_id='.$group_id;
 	$links[] = '/project/admin/userperms.php?group_id='.$group_id;
 	$links[] = '/project/admin/editgroupinfo.php?group_id='.$group_id;
 	$links[] = '/project/admin/history.php?group_id='.$group_id;
-	$links[] = '/project/admin/vhost.php?group_id='.$group_id;
 	if($GLOBALS['$sys_use_people']) {
 		$links[] = '/people/createjob.php?group_id='.$group_id;
 		$links[] = '/people/?group_id='.$group_id;
 	}
-	$links[] = '/project/admin/editimages.php?group_id='.$group_id;
-	$links[] = '/project/admin/database.php?group_id='.$group_id;
+	if($GLOBALS['sys_use_project_multimedia']) {
+		$links[] = '/project/admin/editimages.php?group_id='.$group_id;
+	}
+	if($GLOBALS['sys_use_project_vhost']) {
+		$links[] = '/project/admin/vhost.php?group_id='.$group_id;
+	}
+	if($GLOBALS['sys_use_project_database']) {
+		$links[] = '/project/admin/database.php?group_id='.$group_id;
+	}
 	$links[] = '/project/stats/?group_id='.$group_id;
 	
 	echo $HTML->subMenu($labels, $links);
