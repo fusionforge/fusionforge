@@ -2,7 +2,7 @@
 #
 #  Import LDIF file to LDAP database
 #  by pfalcon@users.sourceforge.net 2000-10-18
-#  $Id: ldap-import,v 1.7 2001/01/17 01:15:24 tperdue Exp $
+#  $Id$
 #
 
 require("include.pl");  # Include all the predefined functions

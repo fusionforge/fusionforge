@@ -6,7 +6,7 @@
 #  ./sql2ldif.pl	: Dump only top-level ou map
 #  ./sql2ldif.pl --full : Dump full database (ouch!)
 #
-#  $Id: sql2ldif.pl,v 1.8 2000/12/10 23:07:31 pfalcon Exp $
+#  $Id$
 # 
 
 use DBI;

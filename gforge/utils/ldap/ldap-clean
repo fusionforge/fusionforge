@@ -2,7 +2,7 @@
 #
 #  Clean LDAP database 
 #  by pfalcon@users.sourceforge.net 2000-10-18
-#  $Id: ldap-clean,v 1.5 2001/01/08 16:57:21 tperdue Exp $
+#  $Id$
 #
 
 require("include.pl");  # Include all the predefined functions
