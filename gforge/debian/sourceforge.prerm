@@ -68,6 +68,8 @@ case "$1" in
 	rm -f /etc/sourceforge/local.inc /etc/sourceforge/sf-httpd.conf \
 	    /etc/sourceforge/database.inc /etc/sourceforge/sf-httpd.secrets \
 	    /etc/sourceforge/local.pl
+        # Clean up cruft left over by past buggy versions...
+	rm -f /etc/sourceforge/exim.directors
 
 	;;
     upgrade|deconfigure|failed-upgrade)

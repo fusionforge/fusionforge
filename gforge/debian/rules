@@ -89,7 +89,6 @@ install: build
 	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
 	install -m 644 deb-specific/local.pl.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
 	install -m 644 deb-specific/database.inc.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
-	install -m 644 deb-specific/exim.directors.template $(CURDIR)/debian/sourceforge/etc/sourceforge/
 	install -m 755 deb-specific/install-chroot.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/install-exim.sh $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
 	install -m 755 deb-specific/db-upgrade.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/
