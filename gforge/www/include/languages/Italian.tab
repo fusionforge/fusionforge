@@ -91,6 +91,7 @@ account_register	partecipate_peer_ratings	Partecipa alle quotazioni. <I>(Permett
 account_register	remember_me	"Ricordami". <I>(Permette di accedere alla $1 pagina personale </a> senza essere loggato. &Egrave; comunque necessario loggarsi prima di fare qualsiasi modifica).</I>
 account_register	update	Applica Modifiche
 account_register	reset	Annulla
+account_register	Preferences	Preferenze
 account_unsubscribe	all_mailings	tutti i e-mail ed annunci di $1
 account_unsubscribe	site_mailings	tutti i e-mail di $1
 account_verify	verify_blurb	<p>Per completare la sua registrazione, fare il login adesso.  Il suo account sar&agrave; attivato.</p>
@@ -124,12 +125,6 @@ account_options	email_address		Indirizzo e-mail
 account_options	change_email_address	Cambia indirizzo e-mail
 account_options	intro	Qui puoi modificare le tue opzioni utente. Puoi anche visualizzare il tuo profile e le tue quotazioni
 common_utils	priority_colors	Colori di priorit&agrave;
-cvs	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
-cvs	anoncvsup	Updates from within the module's directory do not need the -d parameter.
-cvs	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
-cvs	history	Repository History
-cvs	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
-cvs	browseit	Browse CVS Repository
 developer	entry_not_found	Elemento non trovato per questo utente
 developer	date	Data
 developer	subject	Soggetto
@@ -465,7 +460,7 @@ my_diary	update_entry	Aggiorna un elemento
 my_diary	entry_not_found	Elemento non trovato o non &egrave; di tua pertinenza
 my_diary	item_added	Elemento aggiunto
 my_diary	no_entries	Non ci sono elementi del diario
-news	choose	<P>Seleziona una news e può visualizzare, ricercare e inviare messaggi.<P>
+news	choose	<P>Seleziona una news e puoi visualizzare, ricercare e inviare messaggi.<P>
 news	nonews	Nessuna news
 news	nonewsfor	Nessuna news per $1
 news	noitems	Non sono state trovate news
@@ -642,7 +637,6 @@ project_home	surveys	sondaggi
 project_home	tracker_open	$1 aperti/ $2 totale
 project_home	forum_messages	$1 messaggi in $2 forum
 project_home	cvs_commits	<strong>$1</strong> commit, <strong>$2</strong> aggiunte
-
 project_showfiles	error_no_packages_defined_title	Nessun package definito
 project_showfiles	error_no_packages_defined_text	Non &egrave; stato definito alcun package per questo progetto.
 project_showfiles	title	File rilasciati per il progetto
@@ -657,7 +651,8 @@ project_showfiles	downloads	D/L
 project_showfiles	architecture	Architettura
 project_showfiles	file_type	Tipo file
 project_showfiles	date	Data
-project_showfiles	project_totals	Totali progetto:
+project_showfiles	project_totals	Totali progetto
+project_showfiles	no_releases	Nessun rilascio
 project_shownotes	error_release_not_found	La release richiesta non &egrave; stata trovata.
 project_shownotes	notes	Note:
 project_shownotes	changes	Cambiamenti:
@@ -1170,3 +1165,16 @@ top_topusers	real_name	Nome reale
 top_topusers	rating	Quotazione
 top_topusers	last_rank	Ultima posizione
 top_topusers	change	Cambio
+scm_index	anoncvs	<P><B>Accesso anonimo a CVS </B> <P>&Egrave; possibile fare il checkout anonimo di questo repository tramite il metodo pserver seguendo le istruzioni. Il modulo da utilizzare deve essere inserito come <I>nomemodulo</I>. Quando viene richiesta una password per l'utente <I>anonymous</I>, premere INVIO.
+scm_index	anoncvsup	Non &egrave; necessario utilizzare il parametro -d quando si fanno gli update da una sottodirectory.
+scm_index	devcvs	<P><B>Accesso SSH al CVS</B> <P>Solo sviluppatori possono accedere al repository CVS tramite SSH. SSH1 deve essere installato sulla macchina locale. Sostituire<I>modulename</I> e<I>developername</I> con i nomi appropriati. Quando viene richiesta la password, inserire la propria password di accesso.
+scm_index	history	Storia del repository CVS
+scm_index	browsetree	<HR><B>Visualizza il repository CVS </B> <P>Visualizzare il repository CVS d&agrave; la possibilit&agrave; di vedere lo stato attuale del codice sviluppato. &Egrave; possibile visualizzare l'intera storia di ogni singolo file.
+scm_index	browseit	Visualizza repositoriy CVS
+scm_index	error_only_projects_can_use_cvs	Errore, solo progetti possono utilizzare CVS
+scm_index	error_this_project_has_turned_off	Errore, questo progetto ha disabilitato CVS
+scm_index	cvs_repository	Repository CVS
+scm_index	developer_commits_adds	Sviluppatore (30 giorni/commit) (30 giorni/aggiunte)
+scm_index	developername	nomesviluppatore
+scm_index	modulename	nomemodulo
+

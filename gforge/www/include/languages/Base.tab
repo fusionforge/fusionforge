@@ -96,6 +96,7 @@ account_register	remember_me	"Remember me". <i>(Allows to access your $1 persona
 account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to a bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
 account_register	update	Update
 account_register	reset	Reset Changes
+account_register	Preferences	Preferences
 account_unsubscribe	all_mailings	all $1 mailings and notifications
 account_unsubscribe	site_mailings	$1 site mailings
 account_verify	title	$1 Account Verification
@@ -131,14 +132,6 @@ account_options	change_email_address	Change Email Addr
 contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/sourceforge">$1 Master Project</a>.</p>
 contact	title	Contact $1
 common_utils	priority_colors	Priority Colors
-cvs	section	Project: $1
-cvs	title	CVS
-cvs	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
-cvs	anoncvsup	Updates from within the module's directory do not need the -d parameter.
-cvs	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
-cvs	history	Repository History
-cvs	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
-cvs	browseit	Browse CVS Repository
 developer	entry_not_found	Entry Not Found For This User
 developer	date	Date
 developer	subject	Subject
@@ -978,7 +971,6 @@ top_topusers	real_name	Real Name
 top_topusers	rating	Rating
 top_topusers	last_rank	Last Rank
 top_topusers	change	Change
-
 users	title	User Summary
 users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
 users	peerinfo2	The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
@@ -1000,8 +992,7 @@ user_home	email	Your Email Address
 user_home	name	Your Name
 user_home	subject	Subject
 user_home	message	Message
-user_home	send	Send Message
-user_home	send_a_message	Send a Message to
+user_home	send	Send Messageuser_home	send_a_message	Send a Message to
 user_home	peer_rating	Peer Rating
 user_home	peer_rating_disabled	User chose not to participate in peer rating
 user_home	diary_notes	Diary and Notes
@@ -1426,3 +1417,17 @@ artifact_category	required_fields	ArtifactCategory: name and assignee are Requir
 tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are Required
 tracker_artifactgroup	required_field	ArtifactGroup: name is Required
 tracker_artifacttype	required_fields	ArtifactType: Name, Description, Due Period, and Status Timeout are required
+scm_index	section	Project: $1
+scm_index	title	CVS
+scm_index	anoncvs	<P><B>Anonymous CVS Access</B> <P>This project's CVS repository can be checked out through anonymous (pserver) CVS with the following instruction set. The module you wish to check out must be specified as the <I>modulename</I>. When prompted for a password for <I>anonymous</I>, simply press the Enter key.
+scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
+scm_index	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
+scm_index	history	Repository History
+scm_index	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
+scm_index	browseit	Browse CVS Repository
+scm_index	error_only_projects_can_use_cvs	Error, Only Projects Can Use CVS
+scm_index	error_this_project_has_turned_off	Error This Project Has Turned Off CVS
+scm_index	cvs_repository	CVS Repository
+scm_index	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
+scm_index	developername	developername
+scm_index	modulename	modulename
