@@ -1,0 +1,2683 @@
+#/**
+#  *
+#  * Default message catalog (English)
+#  *
+#  * GForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  *
+#  */
+#
+#	Basque translation by FitBak S.L.L. ( http://www.fitbak.com/ )
+#
+#	file: Basque.tab v 0.5
+#
+#	Contact us in our web page in order to cooperate..
+#
+account	title	Zure kontuko lehentasunak
+account	updated	Eguneratua
+account_change_email	desc	<p>Zure posta elektronikoaren aldaketa baieztatzeko helbide berritik egin behar duzu, horrela posta berria zuzena dela ziurtatzen dugu.</p><p>Erabiltzailearen gunea sortzean eduki garrantzitsuetara atzipena ematen diogunez posta elektroniko operatiboa beharrezkoa da momentu oro. Garapenean dagoen proiektu bateko erabiltzailearekin harremanetan jartzeko premia eduki ez gero posta elektronikoa zuzena izan behar du.</p><p>Formulario hau igorri ondoren baieztatzeko lotura bidaliko zaizu helbide berrira. Lotura honetara joatean helbide aldaketa gauzatuko da.</p>
+account_change_email	invalid_email	Posta elektroniko baliogabea
+account_change_email	mailsent	<p>Posta bidali dizugu helbide berrira. Bertan azaltzen diren argibideak jarraitu helbidea aldatzeko. </p><a href="/">[ Orri Nagusia ]</a>
+account_change_email	message	Helbide elektronikoa aldatzeko eskaria egin duzu $1 -ean.\nMesedez, posta aldaketa egiteko bisita ezazu ondorengo helbidea:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- $1 -en lantaldea
+account_change_email	new_address	Posta elektroniko berria:
+account_change_email	section	Zure kontuko lehentasunak
+account_change_email	send_confirmation	Baieztapena posta berrira bidali
+account_change_email	subject	$1 Egiaztapena
+account_change_email	title	Helbide elektronikoa aldatu
+account_change_email-complete	confirm	Ongietorri, $1. Zure posta aldaketa gauzatu da. Artxibatua gelditu den helbide elektroniko berria hauxe da: <strong>$2</strong>. Orain, helbide honetara $3 bidalitako posta beste kontu honetara berbidaliko dira.
+account_change_email-complete	title	Posta aldaketa gauzatu da
+account_change_email_confirm	title	Posta elektronikoaren aldaketaren baieztapena
+account_change_pw	confirmation	<h2>$1 Pasahitzaren aldaketaren baieztapena</h2><p>Zorionak. Pasahitza aldatu duzu.</p>
+account_change_pw	new_password	Pasahitza berria (gutxienez 6 karaktere)
+account_change_pw	new_password_repeat	Pasahitza berria (errepika ezazu)
+account_change_pw	not_valid_password	Pasahitza egokia jarri behar duzu (gutxienez 6 karaktere)
+account_change_pw	old_password	Pasahitza zaharra
+account_change_pw	old_password_incorrect	Pasahitza zaharra ez da zuzena
+account_change_pw	passwords_dont_match	Pasahitza berriak ez datoz bat.
+account_change_pw	section	Zure kontuko lehentasunak
+account_change_pw	title	Pasahitza aldaketa
+account_change_pw	update	Pasahitza eguneratu
+account_change_pw_changed	return_to	Orain $1 $2 erabiltzailearen lehentasunetara itzuli behar du.
+account_change_pw_changed	title	Pasahitza ongi aldatu da
+account_editsshkeys	section	Zure kontuko lehentasunak
+account_editsshkeys	title	Partekatutako kodeak argitaratu CVS/SSH
+account_first	about_blurb	<p>Orain $1 -ean erregistratutako erabiltzailea zara, kode irekiko "on line" proiektuak garatzeko webgunekoa.</p><p>Erregistratutako erabiltzaile bezela, atari honetako ekintza guztietan parte hartzeko aukera duzu. Gainera, orain mezuak bidaltzeko baimena daukazu proiektuen eztabaida guneetara, kode akatsak bidali ditzakezu $1 -era, proiektu garatzaile bezela erregistratu, edota zure intereseko proiektua ere sustatu dezakezu. </p><p>Ondorengo lt;a href="/docs/site/"><b>dokumentazioa</b></a> irakurtzeko beta hartu behar duzu $1.</p><p> egitasmoari etekina ateratzeko. Webgune honetaz goza ezazu, eta mesedez hobekuntzak egiteko azalpenak bidali iezazkiguzu. $1.</p><p>-- $1.</p> lantaldea
+account_first	title	¡Ongietorri!
+account_login	cookiewarn	"Cookie" -ak gaituak egon behar dute puntu honetatik aurrera.
+account_login	deleted_account	<p>Zure $1 kontua $1 taldeak ezabatu du. Bi arrazoigatik izan liteke, 1) zuk eskatu duzu kontua ezabatzeko; ala 2) duda mudazko ekintza gertatu da zure kontua erabiltzen (adibidez, erabilpen baldintzak hautsi izana)ondorioz arrazoi administratiboengatik kanporatua izan zara. Gai honen inguruan galderik badezu, hutz izaguzu <a href="/support/?group_id=1">sostegun eskaera</a>.</p><p>Eskerrik asko, <br /><br />$1 taldea</p>
+account_login	login	Modu seguruan atzitzeko
+account_login	login_ssl	SSL erabiliz sartu
+account_login	loginname	Kontuaren izena:
+account_login	lostpw	[Pasahitza ahaztu al zaizu?]
+account_login	newaccount	[Kontu berria]
+account_login	passwd	Pasahitza
+account_login	pending_account	<p>Zure kontua egiaztatzeke dago, posta bidez egin zenezake. Bidali dizugun postan dagoen lotura sakatuaz aktibatuko duzu kontua.</p><p>Posta hori berbiltzea nahi baduzu, beheran sakatu mesedez eta erregistro garaian emandako helbide elektronikora baieztapen posta bidaliko zaizu.</p><p><a href="pending-resend.php?form_user=$1">[Baiztapen posta berbidali]</a><br /><hr /></p>
+account_login	resend_pending	[Aktibazioaren zai dagoen kontuaren onespen mezua berriz bidali]
+account_login	resend_pending_directions	Jarri erabiltzaile izen bat 'Bidali' sakatu onespen mezua berriz bidaltzeko
+account_login	sslnotice	<p><b><font color="red">SSL web zerbitzari sugurura konektuko zarenez zure pasahitza ez dute beste erabiltzaileek ikusiko.</font></b></p><p><small style="font-size: x-small"> (Zeure buruari galdetzen badiozu webgune hau zergatik ez den kargatzen SSL modu seguruan ondorengo testua irakur ezazu. Eskerrik asko.) </small> <p> <b>Internet Explorer</b> -en erabiltzaileek SSL arazoak izango dituztenez sarritan modu segurua utzi beharko dute. Netscape-n erabiltzaileek SSL modu seguruan egon dezakete momentu oro. Bisita ezazu <a href="http://www.microsoft.com/" target="_blank">Microsoft</a> arazo honi buruz informazio gehiago jakiteko.</p>
+account_login	title	Webgunera sarbidea
+account_login	usessl	Modu seguruan (SSL) mantendu izenpetu ondoren
+account_lostlogin	invalidconfirm	\'Hash\' Baieztapen baliogabekoa
+account_lostlogin	newpasswd	Pasahitza berria (gutxienez 6 karaktere)
+account_lostlogin	newpasswd2	Pasahitza berria (errepika ezazu)
+account_lostlogin	notmatch	Pasahitza berriak bat datoz.
+account_lostlogin	passwdchanged	<h2>Pasahitza aldatua</h2><p>Zorionak, zure kontuko pasahitza ongi aldatu duzu. Orain gure webgunera <a href="/account/login.php">sartzeko</a> baimena daukazu.</p>
+account_lostlogin	severalconfirm	\'hash\' Baieztapen hau behin baino gehiagotan gauzatzen da.
+account_lostlogin	sixchars	Pasahitza egokia eman behar duzu (gutxienez sei karakterekoa).
+account_lostlogin	title	Pasahitzaren galtzea baieztatzeko
+account_lostlogin	update	Eguneratu
+account_lostlogin	welcome	<h2>Galdutako pasahitzarekin sarbidea</h2><p>Ongietorri, $1. Orain zure pasahitza aldatu behar duzu.</p>
+account_lostpw	invalid_user	Erabiltzaile ez da baliozkoa
+account_lostpw	message	$3 webguneko norbaitek (seguraski zuk) pasahitza aldaketa eskatu du. Ez bazaude ados, posta hau alde batera utzi eta ez da ezer gertatuko.\n\nZuk eskatutako baieztapena bada, ondorengo lotura bisita ezazu pasahitza aldatzeko:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- $3\n taldea
+account_lostpw	notify	<p>Zure izenean erregistratutako helbide elektronikora posta bat bidali da. Argibideak jarrai itzazu pasahitza aldaketa bukatzeko.</p><p><a href="/">[ Home ]</a></p>
+account_lostpw	sendhash	Pasahitzaren Hash kodea bidali
+account_lostpw	subject	$1 -en baieztapena
+account_lostpw	title	Pasahitza ahaztu al zaizu?
+account_lostpw	user_dont_exist	Erabiltzaile ez da existitzen
+account_lostpw	warn	<p>Kontuz!, pasahitza galtzea arazo larria da. Honek zure kontuaren, proiektuen eta webgunearen segurtasuna konprometitzen du.</p><p> Beheran dagoen "Pasahitzaren Hash kodea bidali" sakatuz gero erregistratzean erabilitako helbide elektronikora lortura bidaliko zaizu. Lotura honetan zure kontuko 128 bits-eko hash baieztapena dago. Lotura hau bisitatzean pasahitza aldatu eta webgunera sartzeko aukera emango zaizu.</p>
+account_options	address		Helbidea:
+account_options	ccode	Herrialdea:
+account_options	change_email_address	E-mail helbidea aldatu
+account_options	change_password	Hitz gakoa aldatu
+account_options	edit_skills_profile	Nere gaitasun profila aldatu
+account_options	email_address	E-mail helbidea:
+account_options	fax		FAXa:
+account_options	firstname	Izena:
+account_options	language	Hizkuntza
+account_options	lastname	Abizena:
+account_options	login_name	Sesioa hasierako izena
+account_options	member_since	Noiztik bazkide
+account_options	phone		Telefonoa:
+account_options	real_name	Benetazko izena
+account_options	themeid	Gaia:
+account_options	timezone	Ordutegi gunea
+account_options	title	Kontuaren mantentze lanak
+account_options	title2		Kargua:
+account_options	user_id	Erabiltzailearen ID-a
+account_options	view_developer_profile	Nere garatzaile profila ikusi
+account_options	welcome	Ongietorri
+account_register	Preferences	Lehentasunak
+account_register	ccode	Herrialdea:
+account_register	communitymail	Komunitatearen posta gehigarriak jaso. <i>(Tráfiko gutxi)</i>
+account_register	congrat	<p>Zorionak.$1.</p><p>Ahora recibirá un correo de confirmación para verificar su cuenta de correo. Visitando el enlace que le hemos enviado le activará la cuenta.</p>
+account_register	emailaddr	Posta kontua *: <br /><i>Lehenik eta behin helbide elektronikoa egiaztatuko dugu kontua aktibatu aurretik. Zure posta ez da atarian erakutsiko pribatutasun arrazoiengatik. Posta kontua jasoko dezu &amp;lt;kontuaren izena@$1&amp;gt; helbide elektroniko honetara berbidaliko dena.</i>
+account_register	err_badinsert	Datu sartze okerra
+account_register	err_email	Helbide elektroniko baliogabea
+account_register	err_firstname	Izena derrigorrezkoa da
+account_register	err_jabber	Jabber helbide baliogabea
+account_register	err_lastname	Abizena derrigorrezkoa da
+account_register	err_mailexist	Badago erabiltzaile bat posta honekin - pertsonen bilatzailea erabili ezazu use el buscador sarbide berreskuratzeko.
+account_register	err_passwd	Pasahitza eman behar duzu
+account_register	err_passwd2	Pasahitzak ez datoz bat
+account_register	err_passwd3	Pasahitzak gutxienez sei karaktere izan behar ditu
+account_register	err_realname	Zure benetazko izena eman behar duzu
+account_register	err_theme	Gaia derrigorrezkoa da
+account_register	err_unixname	Unix erabiltzailearen izena baliogabea da
+account_register	err_userexist	Erabiltzailea dagoeneko existitzen da
+account_register	err_username	Erabiltzaile izen bat eman behar duzu
+account_register	firstname	Izena:
+account_register	jabberaddr	Jabber helbidea:
+account_register	jabberonly	Berri automatikoak bakarrik bidali nere Jabber helbidera
+account_register	language	Zure hizkuntza aukeratu
+account_register	lastname	Abizena:
+account_register	loginname	Kontuaren izena (ez erabili maiuskularik) *:
+account_register	mandatory	* duten erumuak derrigorrezkoak dira.
+account_register	message_body	$4 webgunean izenemateagatik eskerrik asko. $1 izeneko kontua sortu da zuretzat. Erregistroa amaitzeko bisita ezazu ondorengo helbidea: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Goran ez bada inungo URL helbiderik ikusten akatsa egongo da zure bezero postan.\nBeheran dagoen helbidea erabili, argi ibili dena lerro batetan idatzi behar da eta.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nWebgune honetaz goza ezazu.\n\n-- $4 taldea\n
+account_register	message_header	Kontu bat erregistratzeko $1 -n
+account_register	partecipate_peer_ratings	Konpartitutako ebaluaketetan parte hartzeko. <i>(Beste erabiltzaileak puntuatu ditzakezu hirizpide ezberdinak erabiltzen, baita besteek zu ebaluatzea ere. Ebaluaketetan parte hartzea erabaki baduzu informazio gehiago $1 gune pertsonalean </a> duzu)</i>.
+account_register	password	Pasahitza (gutxienez 6 karaktere) *:
+account_register	password2	Pasahitza (errepika ezazu) *:
+account_register	realname	Benetazko izena osorik *:
+account_register	register	Erregistratu hadi
+account_register	remember_me	"Gogora nazazu". <i>(Zure $1 webgune pertsonalera </a> sarbidea ahalbideratzen du sesio hasi gabe. Edozein aldaketa egin baino lehen sesioa era esplizituan hasi beharko duzu.)</i>
+account_register	resend_pending	[Aktibazioaren zai dagoen kontuaren onespen mezua berriz bidali]
+account_register	reset	Aldaketak desegin
+account_register	siteupdate	Atariaren eguneraketei buruz postak jasotzeko <i>(Trafiko gutxi. Oso gomendagarria.)</i>
+account_register	theme	Gaia
+account_register	timezone	Ordutegi gunea:
+account_register	title	Kontu berri baten erregistroa
+account_register	update	Eguneratu
+account_shell	autorized_keys	Baimendutako CVS/SSH kode partekatuak
+account_shell	edit_keys	Kodeak aldatu
+account_shell	shell_box	Shell makinara sarbidea
+account_shell	title	Shell kontuaren informazioa
+account_unsubscribe	all_mailings	$1 -en berri eta posta guztiak
+account_unsubscribe	site_mailings	$1 -en posta
+account_verify	accessdenied	Sarbidea ukatua
+account_verify	accountactive	Kontua ez dago aktibatua oraindik
+account_verify	cannotactivate	Kontua ezin da aktibatu oraindik
+account_verify	cannotconfirm	Zure kontu identitatea ezin da konfirmatu - \'hash\' baieztapen baliogabekoa (edo erabiltzaile izena)
+account_verify	erroractivate	Akatsa kontua aktibatzen zenuen bitartean
+account_verify	invalidcred	Sartu duzun ziurtagiria ez dator baliodun kontuekin bat.
+account_verify	invalidop	Eragiketa baliogabea
+account_verify	invalidparam	Parametro baliogabea
+account_verify	invaliduser	Erabiltzaile baliogabea
+account_verify	login		Sarbidea
+account_verify	loginname	Erabiltzailearen izena:
+account_verify	missingparam	Parametro bat ahaztu zaizu
+account_verify	nouser	Erabiltzailea ez da existitzen
+account_verify	password	Pasahitza:
+account_verify	title	$1 kontuaren egiaztapena
+account_verify	usermandatory	Erabiltzaile izena sartu behar duzu.
+account_verify	verify_blurb	<p>Zure izenematea bukatzeko autentifikatu zaitez orain. Horrela zure kontua aktibatuko da.</p>
+add_snippet	add_this_snippet_version_id	Ebakin bertsioaren ID hau gehitu:
+add_snippet	back_to_add_page	Atzera orri bat gehitzeko
+add_snippet	error_doing_snippet_version_insert	EBAKIN BERTSIOA SARTZEAN GERTATUTAKO AKATSA
+add_snippet	error_go_back_and_fill_all	Akatsa - Atzera joan eta informazio guztia bete
+add_snippet	error_only_creator_can_add	Akatsa - Bertsio pakete baten sortzaileak bakarrik gehitu ditzake ebakinak.
+add_snippet	error_snippet_already_added	Akatsa - Ebakin hau gehitua izan da dagoeneko.
+add_snippet	error_snippet_doesnt_exist	Akatsa - Ebakin hau ez da existitzen
+add_snippet	error_snippet_id_missing	Akatsa - snippet_package_version_id zehaztu gabea
+add_snippet	make_sure_all_info	Ziurtatu informazio guztia osorik dagoela eta zehatza dela
+add_snippet	no_snippets_in_this_package	Ebakin honetan ez daude paketeak oraindik
+add_snippet	package	Pakete:
+add_snippet	snippet_version_added_successfully	Ebakin bertsioa ongi gehitua izan da.
+add_snippet	snippets_in_this_package	Ebakinak pakete honetan
+add_snippet	submit	BIDALI
+add_snippet	title	Ebakin berri bat bidali
+add_snippet	you_can_use_this_form	Formulario hau erabili dezakezu behin eta berriz ebakinak gehitzeko zure paketera.</p><p>"Ebakin bertsioaren ID-a" identifikadore bakarra da beste bertsio espezifikoekin batera erakusten dena orrietan.
+admin	add	Gehitu
+admin	add_new	[berri gehitu]
+admin	are_you_sure_delete	Hau ezabatu nahi dezula zihur zaude
+admin	cancel	Indargabetu
+admin	delete	Ezabatu
+admin	edit	Aldatu
+admin	http_domain	HTTP domeinua:
+admin	license	Lizentzia:
+admin	license_other	Beste lizentzia:
+admin	na	Eskuragarri/Ezina (Not/Available)
+admin	other	Bestea
+admin	reject	Baztertu
+admin	site_admin_home	Webgune honen administrazioaren hasierako orria
+admin	submit_changes	Aldaketak bidali
+admin	submit_new	Berria bidali
+admin	successfully_added	Ongi gehitua
+admin	successfully_deleted	Ongi ezabatua
+admin	successfully_modified	Ongi aldatua
+admin	yes	Bai
+admin_add_language	add_new_language	Hizkuntz berria gehitu
+admin_add_language	class_filename	Class fitxero izena:
+admin_add_language	classname	Class izena:
+admin_add_language	existing_language	Badago hizkuntz hori
+admin_add_language	name	Izena:
+admin_add_language	submit	Bidali
+admin_approve_pending	add_this_custom_response	Gehitu ohiko erantzun hau grabatutako erantzunei
+admin_approve_pending	admin_approve_pending	Onartu
+admin_approve_pending	approve	Onartu
+admin_approve_pending	approve_all_on_this_page	Onartu orri honetako guztia
+admin_approve_pending	approving_group	Taldea onartu:
+admin_approve_pending	approving_pending_projects	Zintzilik dauden proiektuak onartzen
+admin_approve_pending	custom_response_title	Ohiko erantzunen izenburu eta testua
+admin_approve_pending	edit_project_details	[Proiektuen xehetasunak aldatu]
+admin_approve_pending	error_creating_group	Akatsa taldea sortzen
+admin_approve_pending	error_group_rejection	Akatsa taldetik baztertzerakoanError durante el rechazo de grupo
+admin_approve_pending	home_box	Postontzia:
+admin_approve_pending	manage_responses	(erantzunak kudeatu)
+admin_approve_pending	no_pending_projects_to_approve	Ez daude proiekturik onartzeke
+admin_approve_pending	none_found	Ez da batere aurkitu
+admin_approve_pending	other_information	Beste informazioa
+admin_approve_pending	pending_projects	Zintzilik dauden proiektuak:
+admin_approve_pending	pending_reason	Arrazoia zergatik dagoen zintzilik:
+admin_approve_pending	project_admin	Proiektuaren administrazioa
+admin_approve_pending	submitted_description	Emandako deskribapena:
+admin_approve_pending	unix_group_name	Unix taldearen izena:
+admin_approve_pending	view_edit_project_members	[Proiektuaren kideak ikusi/aldatu]
+admin_database	add_an_already_active_database	Aktibatutako datu basea gehitu
+admin_database	added_already_active_database	Dagoeneko aktibatua dagoen datu basea gehitu duzu
+admin_database	count	Kontagailua
+admin_database	display_database_type	Mota honetako datu basea erakusten:
+admin_database	error_adding_database	Datu basea gehitzen akatsak
+admin_database	group	Taldea
+admin_database	group_unix_name	Unix taldearen izena:
+admin_database	no_databases_defined	Ez dago definitutako datu baserik
+admin_database	site_admin_groups_maintance	Sistemaren administrazioa: taldeen datu baseen administrazioa
+admin_database	statistics_for_project_database	Proiektuen datu baseen estadistikak
+admin_database	type	Mota
+admin_database	unable_to_insert	Ez da posible aktibatutako datu basea gehitzea
+admin_groupedit	active	Aktibatua (A)
+admin_groupedit	deleted	Ezabatua (B)
+admin_groupedit	error	Akatsa
+admin_groupedit	error_creating_group_object	Akatsa taldea sortzerakoan
+admin_groupedit	holding	Gogoan gorde (R)
+admin_groupedit	incomplete	Bukatugabea (I)
+admin_groupedit	instruction_email_sent	Posta elektronikoa bidali zaizu argibideekin
+admin_groupedit	new_project_instruction_email	Proiektu berri baten argibideekin posta berbidali
+admin_groupedit	no	Ez
+admin_groupedit	pending	Zintzilik (P)
+admin_groupedit	project_admin	[Proiektuaren administraria]
+admin_groupedit	public	Aldatu?
+admin_groupedit	registration_application	Aplikazio erregistroa:
+admin_groupedit	status	Egoera
+admin_groupedit	title	Webgunearen administrazioa: taldearen informazioa
+admin_groupedit	unix_group_name	Unix taldearen izena:
+admin_groupedit	update	Eguneratu
+admin_groupedit	updated	Eguneratua
+admin_groupedit	yes	Bai
+admin_grouplist	group_list	Taldeen zerrenda
+admin_grouplist	group_list_for_category	Taldeen zerrenda kategorien arabera:
+admin_grouplist	group_name_click_to_edit	Taldearen izena (editatzeko sakatu)
+admin_grouplist	groups_that_begin_with	Taldeak izenaren arabera sailkatuak:
+admin_grouplist	license	Lizentzia
+admin_grouplist	members	Kideak
+admin_grouplist	public	Publikoa?
+admin_grouplist	status	Egoera
+admin_grouplist	unix_name	Unix izena
+admin_index	active_projects_count	Aktibitatedun projektuak: <strong>$1</strong>
+admin_index	active_users_count	Tokiaren erabiltzaile aktiboak: <strong>$1</strong>
+admin_index	add_delete_edit_file_types	Fitxero motak gehitu, ezabatu edo aldatu
+admin_index	add_delete_edit_laguage	Onartutako hizkuntzak gehitu, ezabatu edo aldatu
+admin_index	add_edit_delete_processors	Prozesadoreak gehitu, ezabatu edo aldatu
+admin_index	add_edit_delete_themes	Gaiak gehitu, ezabatu edo aldatu
+admin_index	add_to_trove_map	Proiektuen mapa gehitu
+admin_index	approve_reject	Onartu/Baztertu
+admin_index	cronman	Cron Kudeatzailea
+admin_index	deleted_status	Egoera (ezabatua)
+admin_index	display_full_group	Taldeen zerrenda osoa erakutsi / Taldeak aldatu
+admin_index	display_full_user_list	Erabiltzaileen zerrenda osoa erakutsi / Erabiltzaileak aldatu
+admin_index	display_groups_beginning_with	Erakutsi taldeak hasten direla:
+admin_index	display_trove_map	Proiektuen mapa erakutsi:
+admin_index	display_user_beginning_with	Erakutsi erabiltzaileak hasten direla:
+admin_index	front_page_news	Hasiera orriko berriak:
+admin_index	get	Lortu:
+admin_index	group_maintaince	Taldeen mantentze lanak
+admin_index	groups_with_status	Estatusa duten taldeak
+admin_index	mail_engine	Posta motorra $1 harpidedunentzakoMotor de Correo para subscriptores de $1
+admin_index	new_project_approval	(Proiektu berri baten onespena)
+admin_index	news	Albisteak
+admin_index	pending_projects_count	Onesteke dauden projektuak: <strong>$1</strong>
+admin_index	pending_status	Egoera (zintzilik)
+admin_index	private_groups	Talde pribatua
+admin_index	project_active	Aktiboak (A)
+admin_index	project_database_administration	Proiektuen datu baseen administrazioa
+admin_index	project_deleted	Ezabatuak (D)
+admin_index	project_hold	Geldituak (H)
+admin_index	project_pending	Onesteke (P)
+admin_index	recent_logins	Berriki izenpetutakoak
+admin_index	register_new_project	Proiektu berri bat erregistratzeko
+admin_index	registered_projects_count	Erregistratutako projektuak: <strong>$1</strong>
+admin_index	search_groups	Bilatu <em>(groupid, group unix name, full name)</em>
+admin_index	search_users	Bilatu <em>(userid, username, realname, email)</em>
+admin_index	site_mailing_maintaince	Webgune honetako korrespondentziaren mantentze lanak
+admin_index	site_utilities	Webgunearen erabilgarritasunak
+admin_index	site_wide_stats	Webgunearen estadistikak
+admin_index	stats	Estadistikak
+admin_index	title	Webgunearen administrazioa
+admin_index	translation_file_tool	Fitxeroak itzultzeko tresna
+admin_index	trove_project_tree	Proiektuen zuhaitz mapa
+admin_index	user_maintaince	Erabiltzaileen mantentze lanak
+admin_index	virtual_host_admin_tool	Virtual Host administrazioaren tresna
+admin_loadtabfile	availaible_tables	Taula erabilgarriak:
+admin_loadtabfile	edit_dont_work	[aldatu (ez dabil)]
+admin_loadtabfile	purge_loaded_data	Kargatutako datuak purgatu
+admin_loadtabfile	reload_all_language_files	(Re) Hizkuntzen fitxeroak berriz kargatu
+admin_loadtabfile	see_translations	[itzulpenak ikusi]
+admin_loadtabfile	see_untranslated	[itzuli gabea ikusi]
+admin_loadtabfile	tables_loaded	Jadanik kargatutako taulak
+admin_loadtabfile	title	Webgunearen administrazioa
+admin_massmail	active_deliveries	Bidaltze aktiboak
+admin_massmail	all_project_admins	Proiektuen administrari guztiak
+admin_massmail	all_project_developers	Proiektuen kolaboratzaile guztiak
+admin_massmail	all_users	Erabiltzaile guztiak
+admin_massmail	be_verry_carefull	Izan <span style="color:red"><strong>OSO</strong></span> arduratsua formulario honekin, erabiltzen baduzu posta ugari bidaliko dituzu aldi berean.
+admin_massmail	date	Eguna
+admin_massmail	developers_test	Kolaboratzaileak (proban dago)
+admin_massmail	error_scheduling_mailing	Posta programatzen akatsa gertatu da, ezin liteke emailen bidaltzea programatu; datu basean akatsa dago.
+admin_massmail	id	ID-a
+admin_massmail	last_user_id_mailed	Posta azken erabiltzaileari bidali zaio
+admin_massmail	mail_engine_for	Posta motorra $1 harpidedunentzako
+admin_massmail	mailing_successfully_scheduled	Postaren bidaltzea ongi programatu da
+admin_massmail	missing_parameter_empty_message	Parametro bat falta zaizu, hutsik dagoen mezua bidali nahi duzu
+admin_massmail	missing_parameter_proper_subject	Parametro bat falta zaizu, postari dagokion gaia jarri behar duzu
+admin_massmail	missing_parameter_select_target	Parametro bat falta zaizu, posta bidaliko zaion audientzia aukeratu behar duzu
+admin_massmail	schedule_for_mailing	Posta bidaltzea programatu
+admin_massmail	select	(aukeratu)
+admin_massmail	subject	Gaia
+admin_massmail	subscribers_to_additional_community	"Komunitateko korreo gehigarrien" harpidedunak
+admin_massmail	subscribers_to_site_updates	"Webguneko eguneratzeen" harpidedunak
+admin_massmail	text_of_message	Mezuaren testua
+admin_massmail	title	Posta masibo egiteko motorraren administrazioa
+admin_massmail	type	Mota
+admin_massmail	will_be_append	(izenpetugabeko informazioa gehituko zaio, aplikagarria bada)
+admin_massmail_execute	completed_successfully	ONGI BURUTUA
+admin_massmail_execute	querry_complete	Kontsulta gauzatua. Posta bidaltzea hasi da
+admin_massmail_execute	receive_post	Bidalketa jaso da. Kontsulta egiten.
+admin_massmail_execute	sending_to	Nori bidaltzen
+admin_massmail_execute	unrecognized_post	Ezagutugabeko bidalketa, ezin da exekutatu
+admin_massmail_execute	user_id	Erabiltzaile identifikadorea:
+admin_responses	add_response	Gehitutako erantzuna
+admin_responses	by_the_way	Bestalde, ez dut ezabatuko... badaezpadare...
+admin_responses	create	Sortu
+admin_responses	create_new_response	Erantzun berria sortu:
+admin_responses	deleted_resposes	Ezabatutako erantzuna
+admin_responses	edit_response	Aldatutako erantzuna
+admin_responses	edit_response_other	Erantzuna aldatu
+admin_responses	existing_responses	Jasotako erantzunak:
+admin_responses	go	&amp;nbsp;Joan&amp;nbsp;
+admin_responses	not_sure_dont_click	Ziur ez bazenden, zergatik sakatu zenuen ezabatzeko?
+admin_responses	response_text	Erantzunaren testua:
+admin_responses	response_title	Erantzunaren izenburua:
+admin_responses	title	Sistemaren administrazioa: ukatze erantzuna aldatu
+admin_responses	yes_im_sure	Bai, ziur nago
+admin_responses	you_cant	¡$1 ezin duzu "ezer"!
+admin_search	email	Posta elektronikoa
+admin_search	full_name	Izen osoa
+admin_search	group_search_criteria	Taldea bilatzeko hirizpidea
+admin_search	id	ID-a
+admin_search	index	Administrazioa. Bilaketaren erantzuna.
+admin_search	matches	Bat datoz
+admin_search	member_since	Noiztik bazkide
+admin_search	real_name	Benetazko izena
+admin_search	refusing_to_display_whole_db	Ukatu egin da datu base guztian kontsulta egitea. Ondoren datu base osoaren erantzun guztiak erakutsiko dira. Kontsulta hau egin nahi baduzu bezero baten bidez egin ezazu.
+admin_search	registered	Erregistratua
+admin_search	status	Egoera
+admin_search	unix_name	UNIX izena
+admin_search	user_search_criteria	Erabiltzaileak bilatu hirizpide hauen arabera
+admin_search	username	Erabiltzaile izena
+admin_tabfiles	delete_lang	[ezabatu]
+admin_tabfiles	edit_the_langfile	$1 hizkuntza aldatu
+admin_tabfiles	edit_the_language	Hizkuntza aldatu
+admin_tabfiles	language	Hizkuntza
+admin_tabfiles	modify_the	Beherako $1 aldatu:
+admin_table	edit_the	Hau aldatu
+admin_table	table	Taula
+admin_trove_cat_add	add	Gehitu
+admin_trove_cat_add	add_new_trove_category	Proiektuen mapara kategori berria gehitu
+admin_trove_cat_add	error_in_trove_openration	Akatsa proiektuen mapan eragiketa egitean
+admin_trove_cat_add	new_category_description	Kategoria berriaren deskribapena (255 karaktere)
+admin_trove_cat_add	new_category_full_name	Kategoria berriaren izen osoa (80 karaktere)
+admin_trove_cat_add	new_category_short_name	Kategoria berriaren izen motza (espaziorik gabe, unix erara)
+admin_trove_cat_add	parent_category	Goi kategoria
+admin_trove_cat_add	title	Webgunearen administrazioa: Proiektuen mapa - Nodoa gehitu
+admin_trove_cat_edit	cant_delete_has_subcategories	Ezin duzu ezabatu, kategoria honek azpikategoriak ditu
+admin_trove_cat_edit	delete	Ezabatu
+admin_trove_cat_edit	edit_trove_category	Proiektuen mapako kategoriak aldatu
+admin_trove_cat_edit	error_in_trove_operation	Akatsa proiektuen mapan eginiko eragiketan
+admin_trove_cat_edit	error_in_trove_operation_cant_delete	Akatsa proiektuen mapan eginiko eragiketan, ezin da fitxero lokalean .inc duen kategoria ezabatu.
+admin_trove_cat_edit	error_in_trove_operation_cant_delete_in_use	Ezin dut kategori hau ezabatu projekturen batek erreferentziatzen duelako.
+admin_trove_cat_edit	error_trove_equal_parent	Akatsa kategoria nagusia ezin du oraingoaren berdina izan
+admin_trove_cat_edit	new_category_description	Kategoria berriaren deskripzioa (255 karaktere)
+admin_trove_cat_edit	new_category_full_name	Kategoria berriaren izen osoa (80 karaktere)
+admin_trove_cat_edit	new_category_short_name	Kategoria berriaren izen motza (espaziorik gabe, unix erara)
+admin_trove_cat_edit	no_such_category	Existitzen ez den kategoria
+admin_trove_cat_edit	parent_category	Goi kategoria:
+admin_trove_cat_edit	title	Webgunearen administrazioa: Proiektuen mapa - Kategoria aldatu
+admin_trove_cat_edit	update	Eguneratu
+admin_trove_cat_list	add	Gehitu
+admin_trove_cat_list	browse_trove_tree	Proiektuen mapatik nabigatu
+admin_trove_cat_list	edit	Aldatu
+admin_trove_cat_list	title	Webgunearen administrazioa: Proiektuen mapa - Kategorien zerrenda
+admin_unsubscribe	admin_initiaded_mail	Administrariek idatzitako postak
+admin_unsubscribe	all	DENA
+admin_unsubscribe	all_site_mailing	Posta zerrenda guztiak
+admin_unsubscribe	comm_mail	Comm. posta
+admin_unsubscribe	email	Posta
+admin_unsubscribe	error_unsubscribe_user	Akatsa, ezin zaio erabiltzaileari ezizenpetu:
+admin_unsubscribe	mail	POSTA
+admin_unsubscribe	real_name	Benetazko izena
+admin_unsubscribe	show_user_matching	Errepikatuak dauden erabiltzaileak erakutsi
+admin_unsubscribe	site_mail	Web atariko posta
+admin_unsubscribe	subscription_maintance	Webgune honetako harpidetza zerrendaren mantentze lanak
+admin_unsubscribe	title	Webgune honetako posta harpidetzaren mantentze lanak
+admin_unsubscribe	unsubscribe	Ezizenemate
+admin_unsubscribe	unsubscribe_user	Erabiltzailea ezizenemateko:
+admin_unsubscribe	use_fields_bellow	Beheran dagoen eremuan erabili $1 erabiltzaile izena, benetazko izena edo posta elektronikoarekin bat datozen patroiak bilatzeko ('%' karakterea erabili daiteke komodin modura). Erabiltzailearen gainean sakatu posta zerrendatik ezizenemateko (formulario berria azalduko da).
+admin_unsubscribe	user_id	erabiltzailearen_id-a
+admin_unsubscribe	user_unsubscribed	Ezizenemandako erabiltzailea
+admin_unsubscribe	username	Erabiltzailea
+admin_unsubscribe	you_can_unsubscribe	Administrariek idatzitako posta edo edozein posta zerrendatik ezizeneman dezakezu erabiltzaile hau (administrariek idatzitako postak, posta automatikoak, forokoak eta automatikoki sortutakoak).
+admin_useredit	account_info	Kontuaren informazioa
+admin_useredit	active	Aktibatua (A)
+admin_useredit	could_not_complete_operation	Ezin izan da eragiketa gauzatu
+admin_useredit	current_confirm_bash	Egungo Hash baieztapena:
+admin_useredit	deleted	Ezabatua (D)
+admin_useredit	email	Posta elektronikoa:
+admin_useredit	group_memerbership	Taldeetan parte hartzea
+admin_useredit	membership_permissions	Kideen baimenak
+admin_useredit	name	Izena
+admin_useredit	no_unix_account	Ez duzu Unix (N) konturik
+admin_useredit	operations	Eragiketak
+admin_useredit	pending	Zintzilik (P)
+admin_useredit	project_admin	Proiektuen administrariaAdminitrador de Projectos
+admin_useredit	real_name	Benetazko izena
+admin_useredit	suspended	Suspenditua(S)
+admin_useredit	this_page_allows	Orri hauek erabiltzailearen ezaugarriak aldatzea ahalbideratzen dute. Talde bateko erabiltzailearen ezaugarriak editatzeko administrazio, dagokion taldeko administrariaren atala bisita ezazu (beheran).
+admin_useredit	title	Administrariaren gunea: erabiltzailearen informazioa
+admin_useredit	unix_account_status	Unix kontuaren egoera
+admin_useredit	unix_name	Unix izena
+admin_useredit	unix_shell	Unix Shell:
+admin_useredit	unix_status_updated_mirroring	Unix egoera eguneratua webgunea isladatzen ("mirroring") zen bitartean, bestela ondorengo balio du 'Ez du unix (N) konturik'
+admin_useredit	update	Eguneratu
+admin_useredit	updated	Eguneratua
+admin_useredit	user_id	ID erabiltzailea:
+admin_useredit	user_name	Erabiltzaile izena:
+admin_useredit	web_account_status	Web kontuaren egoera
+admin_userlist	activate	Aktibatu
+admin_userlist	active	Aktibatua
+admin_userlist	add_date	Data gehitu
+admin_userlist	all_groups	Talde guztiak
+admin_userlist	delete	Ezabatu
+admin_userlist	deleted	Ezabatua
+admin_userlist	devprofile	Kolaboratzailearen profila
+admin_userlist	key	Kodeak
+admin_userlist	login	Sartu
+admin_userlist	pending	(*)Zintzilik
+admin_userlist	submit	Bidali
+admin_userlist	suspend	Suspenditu
+admin_userlist	suspended	Suspenditua
+admin_userlist	user_list_for_group	Talde honetako erabiltzaile zerrenda:
+admin_userlist	user_updated	Erabiltzaile hau $1 egoerara eguneratu da
+admin_userlist	userlist	: Erabiltzaile Zerrenda
+admin_vhost	add_virtual_host	Virtual Host gehitu
+admin_vhost	cgi_dir	CGI direktorioak
+admin_vhost	error_adding_vhost	Akatsa VHOST gehitzen
+admin_vhost	error_updating_vhost	Akatsa VHOST sarbidea eguneratzen:
+admin_vhost	get_info	Informazioa hartu
+admin_vhost	group	Taldea
+admin_vhost	group_unix_name	Unix taldearen izena
+admin_vhost	htdocs_dir	HTML (Htdocs) direktorioa
+admin_vhost	no_such_host	VHOST hau ez da existitzen:
+admin_vhost	operations	Eragiketak
+admin_vhost	scheduled_for_creation	Taldearen sorkuntza programatu da
+admin_vhost	the_provided_group	Zehaztutako taldea ez da existitzen
+admin_vhost	title	Administrari gunea
+admin_vhost	tweak_directories	Tweak direktorioak
+admin_vhost	update	Eguneratu
+admin_vhost	update_record	Erregistro eguneratu:
+admin_vhost	vhost_id	VHOST ID-a
+admin_vhost	vhost_name	VHOST izena
+admin_vhost	virtual_host	Host birtuala
+admin_vhost	virtual_host_administration	Host birtualaren administrazioa
+admin_vhost	virtual_host_entry_updated	VHOST sarbidea eguneratu da
+admin_vhost	virtual_host_name	Host birtualaren izena
+artifact_canned	required_fields	Aurreti ezarritako erantzuna: izena eta esleipena beharrezkoak dira
+artifact_category	required_fields	Erregistro kategoria: izena eta esleipena beharrezkoak dira
+calendar	april	apirila
+calendar	august	abuztua
+calendar	comingyear	Hurrengo urtean
+calendar	currentyear	Gaur egungo urtea
+calendar	december	abendua
+calendar	february	otsaila
+calendar	fordate	Hurrengo datarako:
+calendar	friday	ostirala
+calendar	invaliddate	Data baliogabea
+calendar	invaliddateexplain	$1 data baliogabea da
+calendar	invalidday	Egun baliogabea
+calendar	invaliddayexplain	Eguna 1 eta 31 artean izan behar du.
+calendar	invalidmonth	Hilabete baliogabea
+calendar	invalidmonthexplain	Hilabetea 1 eta 12 artean izan behar du
+calendar	invalidtype	"Type" baliogabea
+calendar	invalidtypeexplain	"type" hau baliogabea da
+calendar	invalidyear	Urte baliogabea
+calendar	invalidyearexplain	Urtea 1990 eta 2020 artean izan behar du
+calendar	january	urtarrila
+calendar	july	uztaila
+calendar	june	ekaina
+calendar	march	martxoa
+calendar	may	maiatza
+calendar	monday	astelehena
+calendar	november	azaroa
+calendar	october	urria
+calendar	onemonth	Hilabete bat
+calendar	saturday	larunbata
+calendar	selecteddate	Aukeratutako data (gaurkoaren desberdina bada).
+calendar	september	iraila
+calendar	sunday	igandea
+calendar	task_begins	$1 ataza hasia
+calendar	task_ends	$1 ataza bukatua
+calendar	task_link_title	Laburpena: $1
+calendar	threemonth	Hiru hilabete
+calendar	thursday	osteguna
+calendar	title	Proiektuaren erabilera: egutegia
+calendar	todaysdate	Gaur.
+calendar	tuesday	asteartea
+calendar	update	eguneratu
+calendar	view	Erakutsi:
+calendar	wednesday	asteazkena
+classgroup	acceptedproject	Zure proiektua $7 -n onartua izan da.\n\nProiektuaren izen osoa:  $1\nUnix proiektuaren izena:  $2\nCVS-n zerbitzaria: cvs.$2.$3\nShell/Web zerbitzaria: $2.$3\n\nZure DNS domeinua aktibatzeko egun bat baino gehiago beharko du .\nZure DNS izena aktibatzen den bitartean $4 -era sartzeko ahalegina\negin zenezake eta zure CVS -a apuntatu $5 -era\n\n. Sei ordu barru zure Shell/CVS kontua ez badabil, mesedez\nlaguntza eskaera egin ezazu arazoaren jatorria jakiteko.\nGogoratu kontu guztiak itxiak daudela \'telnet\' -entzako eta bakarrik 'ssh\'-rekin\nibiliko dela.\n\n Zure webgunera sarbidea \'shell\' kontu honen bitartez bakarrik egin daiteke. \nMesedez, dokumentazio hau irakurri (beherako loturan ikusi) proposatutako erabilpena,\nzerbitzu erabilgarriak, eta zure kontuko direktorioen distribuzioari buruz.\n\nMesedez, har ezazu atari honetako proiektuen administrazioari buruzko dokumentazioa irakurtzeko beta. (http://$3/docs/site/). Zure webgunea bisitatzen baduzu\n izenpetua zauden bitartean $3 funtzio\ngehigarriak bilatuko dituzu menuan izenburu honekin:\'Proiektuen administrazioa\'.\n\nBiziki aholkatzen dizugu $3 orria bisitatzea orain eta zure proiektuaren\ndeskribapen publikoa sortzea. Hau egiteko zure proiektuko webgunea\n bisitatu izenpetua zauden bitartean, eta ezkerreko menutik \'Administrazioa\'sakatu (edo http://$3/project/admin/?group_id=$6\nizenpetu ondoren).\n\nZure proiektua ez da oraindik proiektuen mapan azalduko \n($3 -n ostatu jasotzen duten proiektuen zerrenda nagusiak nabigazio eta bilaketa \nmalgua eskeintzen du) proiektuen administrazio pantailan sailkatu arte.\n Erabiltzaileek zure proiektua bilatu dezaten hauxe egin behar duzu orain.\nIzenpetua zauden bitartean, zure proiektua bisitatu \'Administrazioa\' aukeratu menuan.\n\nGoza ezazu sistemaz eta mesedez $3 -koei abisatu iezaiezu. Esaiguzu ere\nzu laguntzeko zer egin genezake.\n\n-- $7 taldea
+classgroup	acceptedprojecttitle	$1 -ek onartutako proiektua
+classgroup	newprojectnotification	$1 -erako egitasmo berria erregistratu da\n\nEgitasmoaren izen osoa:  $2\nJasotako deskribapena: $3\nLizentzia: $4\n\nMesedez, bisita ezazu helbide hau egitasmoa onartzeko ala baztertzeko:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification_submitter	$1 -en egitasmo berri baten eskaera\n\nEgitasmoaren izen osoa: $2\nBidalitako deskribapena: $3\nLizentzia: $4\n\n$1 administratzeko taldeak zure proposamena aztertuko du orain. Erabakiaren berri emango zaizu.
+classgroup	newprojectnotificationtitle	$1 -en egitasmoa onartzeke dago.
+classgroup	rejectedproject	Zure egitasmoa $3 -n erregistratzeko egin duzun eskaera ukatu da.\n\nEgitasmoaren izen osoa:  $1\nEgitasmoaren Unix izena:  $2\n\nUkatzearen arrazoiak hauek dira:\n\n
+classgroup	rejectedprojecttitle	$1 -ek egitasmoa ukatu du
+common	login	Sartu
+common	logout	Atera
+common	myaccount	Nere kontua
+common	newaccount	Kontu berria
+common_include_account	cvsreserved	Izen hau CVS-arentzat gordea izan da.
+common_include_account	dnsreserved	Izen hau DNS-arentzat gordea izan da.
+common_include_account	illegal	Izenean galerazitako karaktere bat dago.
+common_include_account	nospace	Kontuaren izenean ez dira hutsuneak onartzen.
+common_include_account	nounderscore	Taldearen izenak ezin du azpi gidoik izan DNS-en arrazoiengatik.
+common_include_account	sixchar	Pasahitza egokia eman behar duzu (gutxienez 6 karakterekoa).
+common_include_account	toolong	Izen egokia eman behar duzu (gehienez 15 karaktere).
+common_include_account	tooshort	Izen egokia eman behar duzu (gutxienez 6 karaktere).
+common_utils	priority_colors	Prioritateen koloreak
+conf	content_encoding	UTF-8
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	eu
+conf	language_id	4
+conf	mail_charset	ISO-8859-1
+contact	about_blurb	<p>Hau <b>$1</b>-en kontaktu orria da -- Guk ostatu ematen dugun proiekturen batekin arazoak badituzu mesedez bidali iezazkiozu azalpenak eta galderak webgune horren arduradunari. Horretarako proiektuaren webgune nagusira joan eta bertan arazoa beharrezko baliabideak izango dituzu: <tt>http://$2/projects/&amp;lt;proiektuaren izena&amp;gt;</tt> eta tresna aproposan sakatuz.</p><p>Laguntza eskaera, akats txostena edota $1 proiektuko arduradunekin hitzegin nahi baduzu, mesedez ondorengo lotura bisita ezazu: <a href="/projects/sourceforge">$1 proiektuaren webgunea</a>.</p>
+contact	title	$1 -ekin harremanetan jarri
+cronman	date	Data
+cronman	job	Lana
+cronman	message	Mezua
+developer	body	Apuntatu
+developer	date	Data
+developer	diary_and_notes	Egunkaria eta Oharrak
+developer	entry_not_found	Erabiltzaile honentzako ez dago oharrik.
+developer	no_entries	Erabiltzaile honek ez ditu oharrik.
+developer	no_user_selected	Ez dago hautatutako erabiltzailerik.
+developer	subject	Laburpena.
+developer_monitor	error_inserting	User_diary_monitor eguneratzean akatsa.
+developer_monitor	monitoring_user	Orain sistemak erabiltzailea monitorizatzeko lanetan ari da.
+developer_monitor	monitoring_user_expl	<p>Erabiltzaileak egunkaria erabiltzen duenean posta bat bidaliko da.</p><p>Monitorizazioa gelditzeko, honen gainean <strong>erabiltzailea monitorizatu</strong> klik egin berriro.</p>
+developer_monitor	monitoring_user_off	Orain ez dago erabiltzailea monitorizatzen.
+developer_monitor	monitoring_user_off_expl	Orain erabiltzaileak bere egunkarian idazten duenean ez du postarik jasoko.
+developer_monitor	title	Erabiltzailea monitorizatu
+developer_monitor_choose_user	body	Akatsa - ez dago hautatutako erabiltzailerik.
+developer_monitor_choose_user	title	Ez dago hautatutako erabiltzailerik.
+developer_rate	cannot_rate_yourself	Ez dago onartua bakoitzak nor bere burua ebaluatzea.
+developer_rate	invalid_rating_value	Akatsa - ebaluaketa baliogabea.
+developer_rate	ratings_recorded	Zure ebaluaketa grabatua izan da.
+developer_rate	ratings_recorded_body	Erabiltzaile hau ber-ebaluatu daiteke bere eritzi webgunera itzultzeagatik. Horretarako, informazioa berbidali.
+developer_rate	title	Evaluación del Erabiltzailea
+developer_rate	turned_off_body	Ebaluaketa sisteman ez partehartzea erabaki duzu.
+developer_rate	turned_off_title	Ezin dituzu erabiltzaileak ebaluatu.
+docman	admin	Administrazioa
+docman	description	Deskribapena
+docman	error_invalid_file_attack	$1 fitxeroaren erasoa.
+docman	error_no_docs	Proiektu honek ez ditu dokumenturik ikusgai.
+docman	error_no_groups_defined	Ez daude dokumentuen talderik.
+docman	submit_new	Dokumentu berria aldatu.
+docman	turned_off	Proiektu honek ez du Dokumentuen kudeaketarako sistema aktibaturik.
+docman	view_doc	Dokumentuak irakurri.
+docman_admin	add_edit_docgroups	Sortu/Aldatu Dokumentuen Taldeak
+docman_admin	section	$1
+docman_admin	title	Dokumentuen kudeatzailea: Administrazioa
+docman_admin_addgroups	section	Dokumentuen kudeketarako administrazioa
+docman_admin_addgroups	title	Dokumentuen taldeak sortu
+docman_admin_docedit	section	Dokumentuen kudeatzailea
+docman_admin_docedit	title	Dokumentua aldatu
+docman_admin_editdocs	doc_contents	Dokumentuaren edukitzailea
+docman_admin_editdocs	section	Dokumentuen arduradunaren administrazioa
+docman_admin_editdocs	state	Egoera
+docman_admin_editdocs	title	Dokumentuak aldatu
+docman_admin_editdocs	upload	Aukerakoa: dokumentu berria bidali
+docman_admin_editgroups	add_group	Multzoa sortu
+docman_admin_editgroups	description	Multzoaren izena izenburu bezela erabiliko denez, izen aproposa aukera ezazu.
+docman_admin_editgroups	edit_group	Multzoa edituatu
+docman_admin_editgroups	group_id	ID
+docman_admin_editgroups	group_name	Multzoaren izena
+docman_admin_editgroups	new_group_name	Multzo berriaren izena
+docman_admin_editgroups	section	Dokumentuen arduradunaren administrazioa
+docman_admin_editgroups	title	Multzoak edita itzazu
+docman_admin_groupedit	section	Dokumentuen arduradunaren administrazioa
+docman_admin_groupedit	title	Dokumentuen multzoa ber-izenpetu
+docman_common	error_min_desc_length	Dokumentuaren deskribapenak 10 karaktere izan behar ditu derrigorrez.
+docman_common	error_min_title_length	Izenburuak gutxienez 5 karaktere izan behar ditu.
+docman_common	no_docs	Ez dira dokumentuak aurkitu
+docman_common_doc	invalid_docid	Dokumentua: docid baliogabea
+docman_common_docgroup	invalid_id	Dokumentuaren multzoa: ID dokumentu taldea baliogabea
+docman_common_docgroup	name_required	Dokumentu multzoa: izena behar da
+docman_display_doc	all_languages	Hizkuntza guztiak
+docman_display_doc	docmoved	Dokumentu hau helbide honetara mugitu da <a href="/docman/view.php/$1/$2">kokagune berria</a>
+docman_display_doc	no_document_data_text	Ez dago dokumenturik erakusteko - dokumentuaren zenbakia baliogabea edo aktibatugabea
+docman_display_doc	no_document_data_title	Ez dago daturik dokumentu honetan
+docman_display_doc	section	Proiektua: $1
+docman_display_doc	title	Dokumentu kudeatzailea: dokumentuak erakutsi
+docman_new	description	Deskribapena
+docman_new	doc_title	Dokumentuaren izenburua
+docman_new	error_blank_document	Akatsa: dokumentua hutsik dago
+docman_new	file	Fitxategia
+docman_new	group	Dokumentu honen multzoa:
+docman_new	intro	<strong>Dokumentuaren izenburua</strong>: dokumentuaren izenburu laburraz ari gatzaizu (Adibidez: nola erabili downloads zerbitzaria)<br /><strong>Deskribapena</strong>: Izenburupean egongo den deskribapena.
+docman_new	language	Hizkuntza
+docman_new	no_valid_group	Ez duzu dokumentu multzorik aukeratu
+docman_new	section	Proiektua: $1
+docman_new	state	Egoera
+docman_new	submit	Dokumentua bidali
+docman_new	submitted_successfully	Dokumentua arrakastaz bidali da.
+docman_new	title	Dokumentu kudeatzailea: dokumentu berria bidali
+docman_new	upload_file	Fitxategia bidali
+error	error_creating	Akatsa sortzean
+error	not_found	Orria ez da aurkitu
+error	title	Eskatutako orria ez da aurkitu (404 akatsa)
+exit	choose_a_group	Akatsa - Multzoa aukeratu
+exit	choose_group_body	Ez da ID multzorik aukeratu
+exit	choose_group_title	Akatsa - Ez da group_id aukeratu
+exit	disabled_body	Tokiaren administrariak baliabide hau desgaitu du.
+exit	disabled_title	Akatsa - baliabide desgaitua.
+exit	exiting_with_error	Akatsekin irtetzen
+exit	missing_parameters_body	Akatsa - derrigorrezko parametroak falta dira
+exit	missing_parameters_title	Akatsa - parametroak falta dira
+forum	check_upload	Konprobatu fitxategia Igo eta Atxekitzeko
+forum	choose	<p>Foro bat aukeratu ondoren nabigatu, bilatu eta mezuak bidali ahal izango dituzu.<p>
+forum	error_forum_not_found	Ez da fororik aurkitu
+forum	error_invalid_group_forum_id	$1:: group_forum_id baliogabaea
+forum	error_no_forums_found	$1 -erako ez dira fororik aurkitu
+forum	error_no_valid_forum_object	$1:: foroaren objektua baliogabea
+forum	error_no_valid_group_object	Forum:: taldearen objektua baliogabea
+forum	forum	Foroa
+forum	forums_for	Foroak zertarako
+forum	html	HTML ez dago baimenduta. HTML-ren tags-ak texto bezela ikusiko dira
+forum	section	Proiektua: $1
+forum	title	Foroak
+forum_admin	add_forum	Foroa gehitu
+forum_admin	delete_message	Mezua ezabatu
+forum_admin	section	Proiektua: $1
+forum_admin	title	Foroak: administrazioa
+forum_admin	update_forum	Egoera aldatu / foroari buruzko informazioa
+forum_admin_addforum	add_forum	Foro hau gehitu
+forum_admin_addforum	allow_anonymous	¿Onartzen al dira izenik gabeko mezuak?
+forum_admin_addforum	allow_attach	Fitxategi atxekiak baimendu?
+forum_admin_addforum	email_posts	Posta elektronikoz A Mezu guztiak bidali:
+forum_admin_addforum	existing_forums	Sortutako foroak
+forum_admin_addforum	forum_created	Foroa arrakastaz sortu da
+forum_admin_addforum	forum_description	Deskribapena
+forum_admin_addforum	forum_name	Foroaren izena
+forum_admin_addforum	is_public	¿Publikoa al da?
+forum_admin_addforum	section	Foroen administrazioa
+forum_admin_addforum	title	Foroa sortu
+forum_admin_changestatus	change_status	Foroaren egoera aldatu.
+forum_admin_changestatus	forum	Foroa
+forum_admin_changestatus	intro	Hemendik foroaren ezaugarriak aldatu daitezke. Kontuan izan proiektuko lankideek foro pribatuak irakurtzeko baimena dutela, erabiltzaile arruntak ez ordea.
+forum_admin_changestatus	no_forums_found	Ez dira fororik aurkitu
+forum_admin_changestatus	section	Foroaen administrazioa
+forum_admin_changestatus	status	Egoera
+forum_admin_changestatus	title	Foro baten egoera aldatu
+forum_admin_changestatus	update_successful	Arrakastaz eguneratutako foroari buruz informazioa.
+forum_admin_delete	section	Foroen administrazioa
+forum_admin_delete	title	Foroa ezabatu
+forum_admin_delete_message	enter_message_id	Mezu identifikatzailea sartu
+forum_admin_delete_message	section	Foroaren administrazioa
+forum_admin_delete_message	title	Mezua ezabatu
+forum_admin_delete_message	warning	¡ARGI! ¡Mezua bere erantzun guztiekin ezabatzera zoaz erabat!
+forum_admin_delete_messages	messages_deleted	$1 mezu ezabatu dira
+forum_common	error_adding_forum	Foroa sortzean gertatutako akatsa
+forum_common	error_min_desc_length	Foroaren deskribapenak gutxienez 10 karaktere izan behar ditu.
+forum_common	error_min_name_length	Foroaren izenak gutxienez 3 karaktere izan behar ditu.
+forum_common	error_save_when_logged_in	Zure gunea mantentzeko izenpetua egon behar duzu.
+forum_common	error_set_monitor	Monitorizatzeko izenpetua egon behar duzu.
+forum_common	error_unable_to_add_monitor	Akatsa - ezin duzu monitorizatu
+forum_common	welcome_to	Ongietorri,
+forum_common_forum	error_save_place	Forum::savePlace()
+forum_common_forummessage	error_cannot_update_master_thread	Ezin dut mezu nagusia momentuko orduarekin eguneratu
+forum_common_forummessage	error_cannot_update_parent	Ezin dut mezu nagusia eguneratu
+forum_common_forummessage	error_get_message_id	ForumMessage::create() Ezin izan da mezu berriaren id-a lortu
+forum_common_forummessage	error_getting_next_thread	Ondorengo thread_id-a lortzeko saiakerak huts egin du
+forum_common_forummessage	error_group_forum_id	Group_forum_id-ko datu basearen erantzuna ez dator bat foroaren objektuarekin
+forum_common_forummessage	error_invalid_message_id	ForumMessage::fetchData() MessageID baliogabea
+forum_common_forummessage	error_no_valid_parent_message	ForumMessage::create() ParentMessage objektua baliogabea
+forum_common_forummessage	error_not_logged	Mezuak bidaltzeko saio berria hasi behar duzu
+forum_common_forummessage	error_posting_failed	ForumMessage::create() Akatsa mezuaren argitalpenean
+forum_common_forummessage	error_required_fields	Edukia eta gaia gehitu behar zaizkio mezuari
+forum_common_forummessage	forum_message	Foroan mezua
+forum_common_forummessage	no_valid_forum_object	ForumMessage:: Foroaren objektua baliogabea
+forum_errors	error_determining_forum_id	Error Forum_id zehazten
+forum_errors	error_getting_forum	Akatsa foroa gauzatzean
+forum_forum	author	Egilea
+forum_forum	changeview	Ikusteko era aldatu
+forum_forum	date	Eguna
+forum_forum	flat	Zerrenda
+forum_forum	forum	Foroa
+forum_forum	lastpost	Azken argitalpena
+forum_forum	nested	Anidatua
+forum_forum	next_messages	Hurrengo mezuak
+forum_forum	no_forum_chosen	Ez dago aukeratutako fororik
+forum_forum	posts	Mezuak
+forum_forum	postsuccess	Mezua arrakastaz aldatu da
+forum_forum	previous_messages	Aurreko mezuak
+forum_forum	replies	Erantzunak
+forum_forum	section	Proiektua: $1
+forum_forum	show	Erakutsi
+forum_forum	thread	Elkarrizketa
+forum_forum	threaded	Elkarrizketak
+forum_forum	threads	Elkarrizketak
+forum_forum	title	Foroak: Foro bat ikusi
+forum_forum	topic	Gaia
+forum_forum	topicstarter	Nork idatzi zuen lehenengo
+forum_forum	ultimate	Azken
+forum_forum	views	Ikuspegiak
+forum_forum_thread	section	Foroak
+forum_forum_thread	title	Elkarrizketa ikusi
+forum_message	by	Nork
+forum_message	date	Data
+forum_message	message	Mezua
+forum_message	message_not_found_body	Mezu hau ez da ageri
+forum_message	message_not_found_title	Mezua ez da aurkitu
+forum_message	msg	Mezua gehitu elkarrizketari
+forum_message	must_choose_message_body	Lehenengo mezua aukeratu behar duzu
+forum_message	must_choose_message_title	Lehenengo mezua aukeratu behar duzu
+forum_message	post_followup	Mezu honi erantzun bat bidali
+forum_message	receive_followups	Erantzunak jaso posta elektroniko bidez
+forum_message	section	Foroak
+forum_message	subject	Gaia
+forum_message	thread	Elkarrizketa berria hasi
+forum_message	thread_view	Elkarrizketa ikusi
+forum_message	title	Mezua ikusi
+forum_monitor	activated	Foroaren monitorizazioa aktibatua
+forum_monitor	deactivated	Foroaren monitorizazioa aktibatugabea
+forum_save	saved	Zure egoera foroan gordea izan da. Berriro sartzean mezu berriak azpimarraturik azalduko dira.
+forum_utils	added	Foro Soruta
+forum_utils	admin	Administrazioa
+forum_utils	anonymously	Anonimoki
+forum_utils	attach	atxeki
+forum_utils	author	Egilea
+forum_utils	brokenthread	Elkarrizketa moztua
+forum_utils	by	Nork:
+forum_utils	couldpostif	$1 $2 erregistratua bazaude mezua bidali ahal izango zenuke.
+forum_utils	date	Eguna
+forum_utils	discussionforum	Eztabaidatzeko foroak:
+forum_utils	doublepost	Badirudi bidaltzen zauden mezua bikoizten ari zarela, aurreko mezuaren gai eta eduki berdina duelako.
+forum_utils	error	Akatsa!
+forum_utils	erroradd	Foroa sortzean akatsa
+forum_utils	errorfollowup	Existitzen ez den mezu bat erantzuten ari zara.
+forum_utils	errorfollowup2	Erantzuteko seinalea ez dago ikusgai, jadanik sortua dagoen elkarrizketa batetan idatzi nahi duzunean.
+forum_utils	errorinsert	Akatsa, insertid() inserzio identifikadorea gauzatzean
+forum_utils	errormaster	Ezin da elkarrizketa nagusia eguneratu egungo datarekin
+forum_utils	errorparent	Ezin da elkarrizketa nagusia eguneratu
+forum_utils	errorpost	Bidalketa ez da gauzatu
+forum_utils	feedbacklogin	Gune honetan izenpetzen bazara mezu bidali ahal dezakezu
+forum_utils	htmltag	HTML etiketak testua bezela ikusiko dira zure mezuan
+forum_utils	latest	Azken berriak
+forum_utils	loggedin	Izenpetua
+forum_utils	mailmonitor	\nMezu hau irakurri eta erantzun hemen: \n$1\nNork: $2 \n\n $3\n\n______________________________________________________________________\nMezu hau foroa monitorizatzea eskatu zenuelako jaso duzu.\nEz baduzu nahi foroa gehiago monitorizatu $4 atzitu \neta bisita ezazu: $5
+forum_utils	mailnotsent	Posta elektronikoa bidaligabea - Badago jendea foroa monitorizatzen
+forum_utils	mailnotsent2	Posta elektronikoa bidaligabea - Ez dago inor foroa monitorizatzen
+forum_utils	mailsent	Posta elektronikoa badalia - Badago jendea foroa monitoritzen
+forum_utils	message	Mezua:
+forum_utils	monitor	Foroa monitorizatu
+forum_utils	mustinclude	Mezuaren gaia eta edukia idatzi behar duzu
+forum_utils	news	Berriak
+forum_utils	nextfailed	(thread_id) elkarrizketa indentifikadore berria lortzean akatsa gertatu da
+forum_utils	noid	Foro identifikadorik gabe argitaratzen saiatu zara
+forum_utils	nonewsitem	Akatsa - ez da albisteetan elementu hori aurkitu
+forum_utils	notfound	Ez da aurkitu
+forum_utils	postanon	Izenik gabe argitaratzen ari zara, izenpetugabe zaude eta
+forum_utils	postcomment	Azalpena bidali
+forum_utils	posted	Bidalitako mezua
+forum_utils	postedby	Nork bidalia
+forum_utils	reply	Erantzun
+forum_utils	saveplace	Tokia gorde
+forum_utils	stopmonitor	Monitorizatzeaz gelditu
+forum_utils	subject	Gaia:
+forum_utils	summary	Laburpena
+forum_utils	thread	Elkarrizketa
+frs	file_download	Deskargatu
+frs	file_monitor	Monitorea
+frs	file_notes	Oharrak
+frs	file_package	Paketeak
+frs	file_rel_date	Eguna
+frs	file_version	Bertsioa
+frs	latest_file_releases	Fitxeroen azken argitalpenak
+frs_file	error_already_exists	Fitxero horren izena badago proiektu gune honetan
+frs_file	error_cannot_move	Fitxeroa ezin da mugitu betiko egoerara
+frs_file	error_invalid_file	FRSFile Baliogabea dela dirudi
+frs_file	error_min_name_length	FRSFile Izenak gutxienez 3 karaktere izan behar ditu
+frs_file	error_name_format	FRSFile Izenak adibide honen egitura jarraitu behar du: gforge-3.0.tar.bz2
+frs_package	error_already_exists	Fitxero horren izena badago proiektu gune honetan
+frs_package	error_cannot_move	Fitxeroa ezin da posizio iraunkorrera mugitu
+frs_package	error_invalid_file	FRSFile Ez dirudi ongi dagoenik
+frs_package	error_min_name_length	FRSPackage Izenak gutxienez 3 karaktere izan behar ditu
+frs_package	error_name_format	FRSPackage::Update: Paketearen izena soilik alfanumérikoa izan liteke
+frs_package	error_set_monitor	Monitorizatzeko izenpetua eta gune bertan egon behar duzu
+frs_release	email_text	\n\n "$1" ('$2') proiektuak '$3' -paketearen bertsio berria askatu du. \nDeskargatzeko lotura hau jarraitu:\n $4\n\nOharra bidali da, zuk eskatu bait zenuen pakete honetako bertsio berri bat kaleratzean \njakinaren gainean jartzeko. Etorkizunean, ez badituzu ohar hauek \njaso nahi, mesedez, $5 -ean sartu eta lotura honetan sakatu: \n $6
+frs_release	email_title	[$1 Askapena] $2
+frs_release	error_already_exists	Askatze hori dagoeneko egina dago proiektu honetako gunean
+frs_release	error_cannot_move	Askapena ezin da posizio iraunkorrera mugitu
+frs_release	error_invalid_file	FRS Badirudi askapena ez dagoela ongi
+frs_release	error_min_name_length	FRSPackage Izenak gutxienez 3 karaktere izan behar ditu
+frs_release	error_name_format	FRS Askatzera zoazen ekarpenaren izenak adibide honen formatua jarraitu behar du: gforge-3.0.tar.bz2
+frs_release	error_set_monitor	Monitorizatzeko izenpetua eta gune bertan egon behar duzu
+general	add	Gehitu
+general	browse	Nabigatu
+general	cancel	Indargabetu
+general	confirm	Baieztatu
+general	create_successful	Arrakastaz sortua
+general	delete	Ezabatu
+general	deleted	Ezabatua
+general	done	Egina
+general	edit	Aldatu
+general	error	Akatsa
+general	error_creating	Akatsa $1 sortzen
+general	error_getting	Akatsa $1 lortzean
+general	error_getting_new	$1 berria lortzean akatsa
+general	error_group_id	Group_id -ko datu basearen erantzunak ez datoz taldearen objektuarekin bat
+general	error_missing_params	Parametroak falta dira
+general	error_no_valid_group_object	$1:: Taldearen objektua baliogabea
+general	error_on_update	Akatsa eguneratzean
+general	footer	Hau $1 da. "Copyright"-i buruz informazio gehiago lortzeko, ikusi <a href="/about.php">orri hau</a>.
+general	go	&amp;nbsp;Joan&amp;nbsp;
+general	invalid_email	Posta elektronikoaren helbidea baliogabea da
+general	language	Hizkuntza
+general	more	Gehiago
+general	no	Ez
+general	no_valid_filename	Fitxeroaren izena baliogabea da
+general	no_valid_group	$1 -en taldea ez da hautatua izan
+general	no_valid_group_object	$1 Taldearen objektua baliogabea
+general	open	Irekia
+general	permdenied	Baimena ukatua
+general	permexcuse	Orri hauek ikusteko proiektu honen administrari batek baimena eman behar dizu.
+general	permnotget	Ezin duzu baimena lortu
+general	remove	Ezabatu
+general	reset	Berriz jarri
+general	return	[$1 itzuli]
+general	return_to	[$1 itzuli]
+general	sitename	$1
+general	submit	Bidali
+general	submit_edit	Aldatutakoa bidali
+general	submitted_successfully	$1 arrakastaz bidali da
+general	total	Erabatekoa
+general	turned_off	Proiektu honetan ez da $1 erabiltzen
+general	update	Eguneratu
+general	update_successful	Arrakastaz eguneratua
+general	yes	Bai
+global	error	Akatsa
+group	activity	Jarduera portzentajea:&amp;nbsp;
+group	activitystat	Proiektuaren jarduera <a href="/project/stats/?group_id=$1">estatistikak</a> ikusi
+group	developer_info	Lankidearen informazioa ikusi
+group	developers	Lankideak
+group	long_bugs	Akatsen erregistroa
+group	long_cvs	CVS errepositorioa
+group	long_docman	Dokumentuen kudeaketa: proiektuaren dokumentazioa
+group	long_forum	Foro publikoa
+group	long_ftp	FTP espazioa anonimoa
+group	long_homepage	Proiektuaren orri nagusia
+group	long_mail	Posta zerrendak
+group	long_news	Azken albisteak
+group	long_patch	Adabakien administraria
+group	long_pm	Atazen kudeaketa
+group	long_support	Sostengu teknikoaren administraria
+group	long_survey	Inkestak
+group	long_tracker	Erregistro
+group	nodescription	Proiektu honek ez du oraindik deskribapenik kaleratu
+group	norelease	Proiektu honek ez du oraindik fitxerorik argitaratu
+group	project_admins	Proiektuaren administrariak
+group	public_area	Gune publikoa
+group	registered	Erregistratua:&amp;nbsp;
+group	short_admin	Admin
+group	short_bugs	Akatsak
+group	short_cvs	CVS
+group	short_docman	Dokumentuak
+group	short_files	Fitxeroak
+group	short_forum	Foroak
+group	short_homepage	Orri nagusia
+group	short_mail	Zerrendak
+group	short_main	Nagusia
+group	short_memberlist	Lankideak
+group	short_news	Albisteak
+group	short_patch	Adabakiak
+group	short_pm	Atazak
+group	short_summary	Laburpena
+group	short_support	Sostengua
+group	short_survey	Inkestak
+group	short_tracker	Erregistroa
+help	page_information	Informazio orria
+help	title	Ongietorri $1 -era
+help_forum	attach_file	Fitxategi bat atxeki nahi diozunean jarraipen elementu bati checkbox hau sakatu behar duzu aldaketak bidali aurretik.
+help_forum	close_window	Itxi Lehioa
+help_forum	unknown_help_request	LAGUNTZA ESKE EZEZAGUNA:
+help_tracker	assignee	Lehio honetan proiektuaren administraria ageri da. Honi erregistroaren elementu bat esleitzen zaio.
+help_tracker	attach_file	Erregistro bati fitxero bat atxeki nahi diozunean laukitxoa aukeratu behar duzu aldaketak bidali baino lehen.
+help_tracker	canned_response	Bildutako edo ohiko erantzunen lehioak administradorak aukeratutako erantzunen zerrenda erakusten du. Erantzun hauek denon artean bidalitako sostengu, eskaera eta akatsak bidaltzetik jaso dira. <br /><br /> Proiektu administraria bazara (administrazioa) lotura sakatu gordetako zure ohiko erantzunak finkatzeko.
+help_tracker	category	Lehio honek erregistroko elementuen kategoriak ordezkatzen ditu, alegia proiektu baten atal bereziak sailkatzen ditu. <br /><br />Zentzu orokorrean sailkatzeko 'Edozein' aukeratu.
+help_tracker	close_window	Lehioa itxi
+help_tracker	comment	Azalpenen guneak erregistroari azalpena atxekitzea ahalbideratzen du jasotako erantzuna aproposa ez denean.
+help_tracker	data_type	Datu mota aukerak erregistro mota zehazten du. Erregistroa akatsen, adabakien, eskaeren... kudeatzaileetako batetara joango denez zehaztu egin behar duzu.
+help_tracker	group	Lehio honek erregistroen taldea erakusten du; proiektuaren administrariak definitutako aukeren zerrenda da.<br /><br />Proiektuen administraria bazara zure lantaldea sortzeko "admin" botoia sakatu.
+help_tracker	monitor	"Monitorizatu" botoia sakatuz monitorizatu ala ezmonitorizatu dezakezu. <br /><br /><strong>Oharra!</strong> honek posta gehigarriak bidaliko dizkizu. Elementu honi azalpenak gehitu, argitaratu edota atzitzen badizkiozu posta bat ere jasoko duzu.
+help_tracker	priority	Lehentasun aukerak erabiltzaileari erregistroaren lehentasuna zehaztea ahalbideratzen du (1-etik 9-ra: garrantzi gutxitik altura).<br /><br />Hau oso erabilgarria da gehienbat akatsentzako eta sostengu eskaerentzako, non erabiltzaileak arazo larria eduki lezake bere proiektuan.
+help_tracker	resolution	Ebazpen aukerak erregistro baten erabakaia ezagutarazten du (erabakirik balego).
+help_tracker	sort_by	"Nola antolatu" aukerak jasotako erantzunak nola jarri ordenean erakusten du. <br /><br /> Antolatzeko aukerak hauek dituzu: ID, Lehentasuna, Laburpena, Zabaltze data, Ixte data, Nork bidalia edo Nori esleitua. Aldi berean, alfabetikoki goranzka edo beheranzka antolatu dezakezu.
+help_tracker	status	Lehio honek erregistro baten elementuen egoera erakusten du.<br /><br /> Egoera "zintzilik" jartzen duzunean erregistroaren egilearen erantzuna itxaroten zaudela esan nahi du. Egileak egoera erantzuten duenean automatikoki "Irekia" jartzen da. Egileak ez badu definitutako denboran (14 egun defektuz) erantzuten orduan elementuari "Ezabatua" egoera jartzen zaio.
+help_tracker	summary	Laburpen laukiak erregistroa deskribatzen du motzean. Erabilgarria erregistroko elementu ugaritan nabigatzen denean.
+help_tracker	unknown_help_request	Laguntza eskaera ezezaguna:
+help_trove_cat	description	Deskribapena
+help_trove_cat	full_category_name	Kategoriaren izen osoa
+help_trove_cat	no_such_category	Ez dago proiektuaren kategoria
+help_trove_cat	short_name	Izen laburra
+home	about_blurb	$1 <b>dohako zerbitzua da <a href="http://www.opensource.org" class="rawurl">http://www.opensource.org</a> software libre garatzaileentzat</a></b> atzipen erreza eskeiniaz ondorengo zerbitzuetara: CVS, posta zerrendak, akatsak jarraitzeko zerbitzua, iragarkien ohola, fo?art?Rodr?ez, agarfu AT gulic.org; Vicente Ruiz, vjrj AT ourproject.org
+home	breaking_down_barriers	Software askea garatzeko hesiak hausten
+home	gforge_statistics	$1 -en estatistikak
+home	highest_ranked_users	Hobekine puntuatutako erabiltzaileak
+home	hosted_projects	Erregistratutako proiektuak
+home	most_active_this_week	Aste honetako aktiboenak
+home	no_stats_available	Estatistikak ez daude eskuragarri
+home	none_found	Ez da ezer aurkitu
+home	recently_registered	Duela gutxi erregistratutako projektuak
+home	registered_users	Erregistratutako erabiltzaileak
+home	sfos	$1 <span class="wikiunknown"><a href="modules.php?op=modload&amp;name=phpWiki&amp;file=index&amp;pagename=OnSite&amp;action=edit">?</a><u>OnSite</u></span>
+home	top_project_downloads	Gehien deskargatutako proiektuak
+include_html	no_change	Ez aldatu
+include_html	none	Ez
+include_html	priority_highest	Altua
+include_html	priority_lowest	Behea
+include_html	priority_medium	Ertaina
+include_toolreport	all	Denak
+include_toolreport	for	Zeinentzako
+include_toolreport	key	Hitz gakoa
+include_toolreport	last_days	Azken eguna(k)
+include_toolreport	last_months	Azken hilabetea(k)
+include_toolreport	last_weeks	Azken astea(k)
+include_toolreport	last_years	Azken urtea(k)
+include_toolreport	no_data	Ez daude daturik txostenean
+include_toolreport	open	Ireki
+include_toolreport	project_lifespan	Proiektuaren ibilbidea
+include_toolreport	show	Erakutsi
+index	welcome	Ongietorri
+mail	archives	$1 Artxiboak
+mail	choose_a_list	<p>Aukeratu zerrenda bat, aztertu, biltau eta mezuak bidaltzeko.</p>
+mail	external_administration	Harpidetu/Harpidetza desegin/Aukerak
+mail	help_to_request	Projektu administrariak admin lotura erabiltzen dute posta zerrendak eskatzeko.
+mail	mailinglists_for	Posta zerrendak $1 -entzako
+mail	no_list_found	Ez da zerrendarik topatu $1 -entzako
+mail	provided_by	<p>Posta zerrendak Gfore bertsio honek emanak <A href="http://www.list.org">GNU Mailman</A>. Mailman-i esker eta <a href="http://www.python.org">Python</a> -i bere software bikainarengatik.</p>
+mail	section	Proiektua: $1
+mail	title	Posta zerrendak
+mail	unable_to_get_lists	Ezin da zerrenda lortu
+mail_admin	add_list	Posta Zerrenda Gehitu
+mail_admin	error_getting_list	Zerrenda lortzean akats
+mail_admin	pagetitle	Posta Zerrenda Administrazioa
+mail_admin	section	Posta zerrendak
+mail_admin	title	Posta zerrenden administrazioa
+mail_admin	update_list	Kudeatu/Eguneratu Zerrenda
+mail_admin_addlist	existing_mailing_lists	Dauden Posta Zerrendak
+mail_admin_addlist	form_addlist	Zerrenda Hau Gehitu
+mail_admin_addlist	form_description	Deskribapena:
+mail_admin_addlist	form_ispublic	Publikoa da?
+mail_admin_addlist	form_name	Posta Zerrendaren Izena:
+mail_admin_addlist	list_added	Zerrenda Gehitua
+mail_admin_addlist	list_information	<p>Zerrendak era honetan izendatzen dira:<br /><strong>projektuizena-zerrendaizena@$1</strong></p><p><strong><span style="color:red">6-24 Ordu</span></strong> inguru beharko dira zure zerrenda sortzeko.</p>
+mail_admin_addlist	pagetitle	Posta Zerrenda Gehitu
+mail_admin_addlist	section	Posta Zerrenda Administraria
+mail_admin_addlist	title	Zerrenda Gehitu
+mail_admin_addlist	warning	Behin sortua, zerrenda hau zure projektuari atxekia egongo da BETIRAKO eta ezingo da ezabatu!
+mail_admin_updatelist	admin_in_mailman	[Zerrenda hau kudeatu GNU Mailman-en]
+mail_admin_updatelist	form_description	Deskribapena:
+mail_admin_updatelist	form_ispublic	Publikoa da?
+mail_admin_updatelist	form_updatelist	Eguneratu
+mail_admin_updatelist	information	Zerrendak kudeatu ditzazkezu hemendik. Mesedez, kontutan izan zerrenda pribatuak zure projektuko kideek ikus ditzazketela baina baina ez dira $1 -en ageri.
+mail_admin_updatelist	list	Zerrenda
+mail_admin_updatelist	list_updated	Zerrenda Ongi Eguneratua
+mail_admin_updatelist	no_list_found	Ez da zerrendarik topatu proiektu honentzako
+mail_admin_updatelist	section	Posta Zerrenda Administraria
+mail_admin_updatelist	status	Egoera
+mail_admin_updatelist	title	Kudeatu / Eguneratu Zerrendak
+mail_common	creation_mail_body	Posta zerrenda bat sortuko da $1 -en 6-24 ordu barru \neta zu zara zerrendaren administraria.\n\nZerrenda hau da: $3@$2 .\n\nZerrendaren informazioa hemen topa dezakezu:\n$4 .\n\nZerrenda kudeaketa hemen topa dezakezu:\n$5 .\n\nZure zerrendaren pasahitza: $6 .\nPasahitz hau lehen bait lehen aldatzea gomendatzen dizugu.\n\nEskerrak zure proiektua $1 -ekin erregistratzeagatik.\n\n-- $1 langileak\n
+mail_common	creation_mail_subject	$1 Posta Zerrenda Berriat
+mail_common	error_invalid_group_list_id	Zerrenda id -a ez du balio
+mail_common	error_invalid_name	Zerrenda izena ez du balio
+mail_common	error_list_already_exists	Zerrenda jadanik existitzen da
+mail_common	error_min_name_length	Gutxienez 4 karaktere dituen zerrenda izena erabili behar da
+mail_common	mailing_list	Posta zerrenda
+mail_common	mailing_lists	Posta zerrendak
+mail_utils	admin	Kudeaketa
+mail_utils	turned_off	Projektu honek Posta Zerrendak desgaitu ditu
+menu	about_gforge	$1 -i buruz
+menu	account_maintenance	Kontuaren mantentze lana
+menu	admin	Administrazioa
+menu	bookmark_page	Orri hau markatu
+menu	change_my_theme	Bere gaia aldatu
+menu	code_snippet	Kode adabakiak
+menu	code_snippet_library	Kode adabakien liburutegia
+menu	compile_farm	Kompilazio baserria
+menu	diary_notes	Egunkaria eta Oharrak
+menu	discussion_forums	Eztabaida foroak
+menu	documentation	Dokumentuak
+menu	home	Orri nagusia
+menu	login	Izenpetu
+menu	login_ssl	Izenpetu (SSL bidez)
+menu	logout	Irten
+menu	my_account	Nere kontua
+menu	my_personal_page	Nere orri pertsonala
+menu	mypage	Nere orria
+menu	new_project	Proiektu berria erregistratu
+menu	new_releases	Argitalpen berriak
+menu	new_user	Erabiltzaile berria (SSL bidez)
+menu	other_site_mirrors	Webgune honen beste "mirror" edo ispilu batzuk
+menu	project_admin	Proiektuaren administrazioa
+menu	project_help_wanted	Laguntza eskaerak
+menu	project_summary	Proiektuaren laburpena
+menu	projectree	Proiektuaren zuhaitza
+menu	register_project	Proiektu berria erregistratu
+menu	search	Bilatu
+menu	site_status	Atariaren egoera
+menu	software_map	Proiektuen mapa
+menu	submit	Bidali
+menu	top_projects	Proiektu nagusiak
+my	about_blurb	Zure orri pertsonalak zerrenda hauek ditu: batetik esleitu zaizkizun atazak eta akatsak, bestetik partaide zaren taldeak.
+my	assigneditems	Esleitutako nere elementuak
+my	bookmarks	Nere markak
+my	monitoredfile	Monitorizatutako fitxeroak
+my	monitoredforum	Monitorizatutako foroak
+my	no_bookmarks	Momentu honetan ez duzu inungo markarik idatzita (faboritoen zerrendarako)
+my	no_monitored_filemodules	Ez zaude inungo fitxerorik monitorizatzen
+my	no_monitored_filemodules_details	<p>Fitxeroak monitorizatzen badituzu, argitalpen berrien albisteak bidaliko dira zure posta elektronikora, non ekarpen berri hauek ikusteko lotura eskura izango duzu.</p><p>Fitxeroak monitorizatzeko proiektuaren laburpen orria bisitatu eta fitxeroen ataleko laukitxoa aukeratu.</p>
+my	no_monitored_forums	Ez zaude fororik monitorizatzen
+my	no_monitored_forums_details	<p>Foro bat monitorizatzen baduzu, argitaratutako albisteak bidaliko zaizkizu posta elektronikora, lotura batekin gehiago jakiteko ekarpen horri buruz.</p><p>Foroak monitorizatzeko sakatu &quot;foroa monitorizatu&quot; eztabaida zehatz batetan.</p>
+my	no_open_tasks	Ez duzu esleitutako ataza irekirik
+my	no_projects	Ez zara aktiboa dagoen inungo proiektukoa
+my	no_tracker_items_assigned	Ez duzu esleitutako inungo erregistratutako elementurik
+my	no_tracker_items_submitted	Ez duzu aurkeztu inungo erregistroko elementurik
+my	pending_news_bytes	Albisteak zintzilik
+my	pending_news_bytes_1	Albiste bat zintzilik dago
+my	pending_news_bytes_2	$1 albisteak zintzilik
+my	pending_news_bytes_3	Egin klik hemen
+my	pending_projects	Proiektuak zintzilik
+my	pending_projects_1	Proiektu bat zintzilik dago
+my	pending_projects_2	$1 proiektu zintzilik
+my	pending_projects_3	Egin klik hemen
+my	projects	Nere proiektuak
+my	submitteditems	Bidali ditudan elementuak
+my	survey	Inkesta azkarrak
+my	survey_taken	Programatzaileen inkesta erantzun duzu
+my	tasks	Nere atazak
+my	title	$1 -en orri pertsonala
+my_bookmark	return	Itzuli
+my_bookmark_add	added_bookmark	<strong>$1</strong> tzat sortutako marka <strong>$2</strong> izenburuarekin.
+my_bookmark_add	back	Orri pertsonalera itzuli
+my_bookmark_add	bookmark_title	Markaren izenburua
+my_bookmark_add	bookmark_url	Markaren URL-a
+my_bookmark_add	section	Nere orri pertsonala
+my_bookmark_add	title	Marka sortu
+my_bookmark_add	visit_page	Orri honetara joan
+my_bookmark_delete	bookmark_deleted	Marka ezebatua izan da
+my_bookmark_delete	section	Nere orri pertsonala
+my_bookmark_delete	title	Marka ezabatu
+my_bookmark_edit	bookmark_updated	Marka eguneratua
+my_bookmark_edit	failed_to_update_bookmark	Akatsa marka eguneratzean
+my_bookmark_edit	section	Nere orri pertsonala
+my_bookmark_edit	title	Markak argitaratu
+my_diary	add_new_entry	Apunte berria idatzi
+my_diary	details	Zehaztasunak
+my_diary	diary_updated	Arrakastaz eguneratutako egunkaria
+my_diary	entry_not_found	Ez dago horrelako apunterik edo ez da zurea
+my_diary	error_adding_item	Akatsa apuntea sortzean
+my_diary	existing_entries	Dauden apunteak
+my_diary	is_public	Publikoa
+my_diary	is_public_expl	Zure apuntea "publikoa" bezela ezarria badago, apuntea postaz bidaliko zaio zure egunkaria monitorizatzen ari denari.
+my_diary	item_added	Sortutako apuntea
+my_diary	no_entries	Ez daude apunterik zure egunkarian
+my_diary	nothing_updated	Ezer Eguneratzeke
+my_diary	section	Nere orri pertsonala
+my_diary	submit_only_once	Behin bakarrik egin klik
+my_diary	summary	Laburpena
+my_diary	title	Egunkaria eta Oharrak
+my_diary	update_entry	Apuntea eguneratu
+my_rmproject	operation_not_permitted_text	Ezin zara zu zeu proiektu honetatik ezabatu bertako administraria bait zara. Lehenik eta behin beste administrari bati zure baimenak kentzeko eskatu behar diozu. Proiektuaren administrari bakarra bazara, mesedez saia zaitez ohar baten bitartez egoera azaltzea beste administrari bat lortzeko, iragarkia jartzeko <a href="/people/">Help Wanted Board</a> eta prest egon administrazio baimenak beste bati emateko.
+my_rmproject	operation_not_permitted_title	Eragiketa hori ez dago baimendua
+my_rmproject	quitting_project	Proiektutik irtetzen
+my_rmproject	quitting_project_text	Proiektutik ezabatzekotan zaude. Horrela bada baieztatu zure asmoa mesedez:
+my_rmproject	title	Proiektutik irtetzen
+new	download	Deskargatu
+new	module	Moduloa:
+new	newer_releases	Argitalpen berriak
+new	no_new_release_found	Ez da argitalpen berririk aurkitu
+new	notes_changes	Oharrak eta Aldaketak
+new	older_releases	Argitalpen zaharrak
+new	projects_total	Guztira proiektuak:
+new	released_by	Nork argitaratua:
+new	this_project_has_not	Proiektu honek ez du deskribapenik argitaratu
+new	title	Argitalpen berria
+new	version	Bertsioa:
+news	choose	<P>Aukeratu Berri elementu bat eta aztertu, bilatu eta mezuak bidali ditzazkezus.<P>
+news	noitems	Ez dira elementurik aurkitu
+news	nonews	Ez dira berririk aurkitu
+news	nonewsfor	Ez daude albiste berriak $1 -entzat
+news	section	Proiektua: $1
+news	title	Albisteak
+news_admin	noqueued	Ez daude itsatsitako elementuak proiektu honetarako
+news_admin	permdenied	Proiektu honetan argitaratzen ari den administraria edo $1 lankidea izan behar da.
+news_admin	queued	Albiste berri hauek proiektu honetarako bidaliak izan ziren.
+news_admin	section	Albisteak
+news_admin	title	Albisteen administrazioa
+news_main	title	Albisteak
+news_submit	cannot	Proiektu baten berriak ezin dira bidali administraria ez bazara
+news_submit	cannotadmin	Albisteen taldetik berriak bidaltzea galerazita dago
+news_submit	details	Zehaztasunak
+news_submit	errorboth	Akatsa - bai gaia eta bai berriaren gorputza beharrezkoak dira
+news_submit	errorinsert	Akatsa sartzean
+news_submit	forproject	Proiektuarena
+news_submit	newsadded	Idatzitako albisteak
+news_submit	post_blurb	<p>Zure proiektuan albisteak argitaratzeko administraria izan behar duzu. Gainera laguntza eskaera oharrak argitaratu ditzakezu zure proiektuak behar baditu.</p><p>Zure proiektuko<b>berri guztiak</b>segituan azalduko dira laburpen orrian. Komunitatearentzako interes berezia duten albisteak onartuak izan behar dute albiste taldeko arduradun batengatik ondoren $1 -eko orri nagusian azaltzeko.</p>
+news_submit	section	Albisteak
+news_submit	subject	Gaia
+news_submit	submit	Bidali
+news_submit	title	$1 -entzat albisteak bidali
+news_utils	archive	Albisteen artxiboa
+news_utils	nonews	Ez da berririk aurkitu
+news_utils	readmore	Gehiago&nbsp;irakurri/Azalpenak idatzi
+news_utils	submit	Enviar Albisteak
+people	about_blurb	<p>$1 proiektuan laguntza eskaerak egiteko oharren oholak ez du helburu komertzialik, baizik bolondresei lankidetzarako aukerak eskeintzen dizkio. Erabilpen komertziala galerazita dago.</p><p>Proiektuen zerrendak bi astez kaleratzen dira edo eskatzen duenak ezabatu arte (lehen gertatzen dena). Proiektuen administrariak beti argitaratu dezakete berriro igarotako edozein eskaera.</p><p>Kategorien menuetatik nabigatu zure laguntza behar duten proiektuak aurkitzeko.</p><p>Proiektu baten administraria bazara, atzitu eta laguntza eskaera bidali zure proiektuko administrazio orritik.</p><p>Lan kategoria berriak proposatzeko, bidali eskaera gune hau sostengatzen duen arduradunari.</p>
+people	action	Akzioa
+people	add_new_skill	Trebezi berria gehitu
+people	add_skill	Trebezia gehitu
+people	added_skill	Trebezien inbentariora gehitu
+people	category	Kategoria
+people	click_job_titles	Lanen izenburuan sakatu deskribapen zehatzagoak irakurtzeko
+people	date_opened	Irekitze data
+people	error_inserting	Akatsa trebezien inbentariora sartzean
+people	error_skill_already	Akatsa - trebezi hori badago inbentarioan
+people	experience	Esperientzia
+people	here_is_list_position	Hemen proiektu honetan eskuragarri dauden posizioen zerrenda dago
+people	invalid_id	ID baliogabea
+people	last_posts	Azken ekarpenak
+people	level	Maila
+people	long_description	Deskribapen luzea
+people	more_latest_posts	Ekarpen berri gehiago
+people	must_be_loggin	Lehenengo izenpetu behar duzu
+people	must_select_a_skill	Trebezien ID-a aukeratu behar duzu
+people	no_categories_found	Ez dira kategoririk aurkitu
+people	no_skill_inventory_setup_up	Ez da trebezien inbentarioa eratu
+people	none_found	Ez dira aurkitu
+people	project	Proiektua $1
+people	section	Proiektu laguntza eskaerak
+people	short_description	Deskribapen motza
+people	skill	Trebezia
+people	status	Egoera
+people	title	Laguntza behar duten proiektuak
+people	title_array	Izenburua
+people_admin	section	Peticiones de Ayuda para Proyectos
+people_admin	title	Laguntza eskaeren administrazioa
+people_admin_people_cat	section	Laguntza eskaeren administrazioa
+people_admin_people_cat	title	Lan kategoriak sortu
+people_admin_people_skills	section	Laguntza eskaeren administrazioa
+people_admin_people_skills	title	Lan trebeziak jarri
+people_cat	section	Beharrezko laguntza
+people_cat	title	Lanen zerrenda kategorien arabera
+people_createjob	continue	Jarraitu >>
+people_createjob	explains	Beherako eremuak betetzen hasi. Jarraitu sakatzean lan honek eskatzen duen trebezia eta esperientzia maila zehazteko zerrenda erakutsiko zaizu.
+people_createjob	section	Laguntza eskaerak proiektuentzako
+people_createjob	title	Lan berria sortu
+people_editjob	error_missing	Akatsa - informazioa falta da
+people_editjob	fill_in	Derrigorrezkoak diren eremuak bete
+people_editjob	finished	Bukatua
+people_editjob	job_insert_failed	Akatsa lanari buruz informazioa sartzean
+people_editjob	job_insert_ok	Arrakastaz sartutako lana
+people_editjob	job_skill_delete_no	Akatsa lanaren trebezia ezabatzean
+people_editjob	job_skill_delete_no_wrong_id	Akatsa lanaren trebezia ezabatzean - project_id -a ez da zuzena
+people_editjob	job_skill_delete_ok	Lanaren trebezia arrakastaz ezabatu da
+people_editjob	job_skill_update_no	Akatsa lanaren trebezia eguneratzean
+people_editjob	job_skill_update_no_wrong_id	Akatsa lanaren trebeziaeguneratzean - project_id -a ez da zuzena
+people_editjob	job_skill_update_ok	Lanaren trebezia arrakastaz eguneratu da
+people_editjob	job_update_no	Akatsa lana eguneratzean
+people_editjob	job_update_no_wrong_id	Akatsa lana eguneratzean - project_id -a baliogabea
+people_editjob	job_update_ok	Arrakastaz eguneratutako lana
+people_editjob	no_such	Proiektu honetan ez dago horrelako argitalpenik
+people_editjob	posting_fetch_failed	Akatsa argitalpena lortzean
+people_editjob	section	Laguntza eskaerak proiektuentzako
+people_editjob	skill_explains	<p>Orain eskaera honekin zerikusia duten trebezien zerrendak argitaratu/aldatu ditzakezu. Horrela lankideek beren trebeziak zure beharren arabera egokitzen diren ikusi ahal izango dute.</p><p>Eskaera guztiak automatikoki ixten dira bi aste ondoren.</p>
+people_editjob	title	Lanak argitaratu
+people_editjob	update_description	Deskribapenak eguneratu
+people_editprofile	about_to_delete	$1 lanerako hurrengo trebezia ezabatzera zoaz
+people_editprofile	add_new_skill	Trebezi berri bat gehitu
+people_editprofile	add_this_skill	Trebezia hau gehitu
+people_editprofile	all_fields_required	¡Eremu guztiak derrigorrezkoak dira!
+people_editprofile	are_you_sure	¿<strong>Ziur</strong> al zaude jarraitu nahi duzula?
+people_editprofile	cancel_skills_update	Trebezien eguneratzea bertan behera gelditu da
+people_editprofile	change_required_fields	Derrigorrezko eremuak aldatu eta "Egina" sakatu orriaren bukaeran
+people_editprofile	confirm_delete	Ezabapena baieztatu
+people_editprofile	confirm_skill_delete	Trebeziaren ezabapena baieztatu
+people_editprofile	edit_delete_your_skills	Argitaratu/Ezabatu zure trebeziak
+people_editprofile	edit_public_permissions	Baimen publikoak argitaratu
+people_editprofile	edit_skills	Lanarentzako trebeziak argitaratu
+people_editprofile	edit_your_profile	Zure profila argitaratu
+people_editprofile	end_date	Bukaera data
+people_editprofile	error	Akatsa - informazioa fata da
+people_editprofile	failed_delete_skills	Akatsa trebeziak ezabatzen
+people_editprofile	failed_to_add_skill	Akatsa trebezia sartzean
+people_editprofile	failed_update_skills	Akatsa trebeziak eguneratzean
+people_editprofile	fill_all_required_fields	Derrigorrezko eremu guztiak bete
+people_editprofile	following_options	Ondorengo aukera honek zure trebeziak ikusgai egongo diren ala ez erabakitzen du. Nahiz eta beraiek ez ikusi zure trebeziak sartu ditzakezu.
+people_editprofile	from_skills_database	Trebezien datu basetik. Ekintza hau ezin da desegin.
+people_editprofile	keywords	Hitz gakoak
+people_editprofile	keywords_max_255_chars	Hitz gakoak (gehienez 255 karaktere)
+people_editprofile	no_skill_types_in_database	Ez dago trebeziarik datu basean (skills_data_types taula)
+people_editprofile	no_skill_types_in_database_inform	Ez dago trebeziarik datu basean - Sistemaren administrariari informatu
+people_editprofile	no_skills_selected	Ez da inungo trebeziarik aukeratu argitalpenerako
+people_editprofile	no_skills_selected_to_delete	Ez da trebeziarik aukeratu ezabatzeko
+people_editprofile	no_such_user	Erabiltzaile hori ez dago izenpetua
+people_editprofile	profile_title	Izenburua
+people_editprofile	publicly_viewable	Publikoki ikusgai
+people_editprofile	section	Laguntza eskaerak proiektuentzako
+people_editprofile	skill_added_ok	Trebezia arrakastaz gehitu da
+people_editprofile	skill_delete_successfully	$1 trebezia ongi ezabatua izan da
+people_editprofile	skill_deletion_cancelled	Trebezia ezabapena bertan behera gelditu da
+people_editprofile	skills_edit	Lanarentzako trebezien argitalpena
+people_editprofile	start_date	Hasiera data
+people_editprofile	title	Zure profial argitaratu
+people_editprofile	title_max_100_chars	Izenburua (gehienez 100 karaktere)
+people_editprofile	type	Idatzi
+people_editprofile	update_failed	Akatsa erabiltzailea eguneratzean
+people_editprofile	update_ok	Erabiltzailea arrakastaz eguneratu da
+people_editprofile	update_permission	Baimenak eguneratu
+people_editprofile	user_fetch_failed	Akatsa erabiltzailea lortzean
+people_editprofile	you_can_enter_new_skills	Hemen, ikasi dituzun trebeziak gehitzeko aukera duzu. Mesedez, hasiera eta amaiera datak zehazki jarri.
+people_help_wanted_latest	title	Laguntza eskaeren azken argitalpenak
+people_helpwanted_latest	section	Laguntza eskaerak proiektuentzako
+people_helpwanted_latest	title	Azken argitalpenak
+people_proj	section	Laguntza eskaerak proiektuentzako
+people_proj	title	$1 -en laguntza eskaerak proiektuentzako
+people_viewjob	contact_info	Kontaktu informazioa
+people_viewjob	fetch_failed	Akatsa argitalpena lortzen
+people_viewjob	for_project	Proiektuarentzako
+people_viewjob	no_such_posting	Ez dago argitalpen hau proiektu honetan
+people_viewjob	open_date	Irekitze data
+people_viewjob	posting_id_not_found	Ez da aurkitu argitalpen identifikadorerik
+people_viewjob	required_skills	Beharrezko trebeziak
+people_viewjob	section	Laguntza eskaerak proiektuentzako
+people_viewjob	title	$1 -ek $2 behar du
+people_viewjob	view_a_job	Lan bat ikusi
+people_viewprofile	no_such_user	Horrelako erabiltzailerik ez
+people_viewprofile	section	Erabiltzaile informazioa
+people_viewprofile	set_private	Erabiltzaile honek ez du profil pribatua
+people_viewprofile	skills_profile_for	Trebezien profila honetarako
+people_viewprofile	title	Lankidearen profila ikusi
+people_viewprofile	user_fetch_failed	Akatsa erabiltzailearen profila erakustean
+pm	admin	Administrazioa
+pm	any	Edozein
+pm	assigned_to	Nori esleitua
+pm	cat_any	Edozein
+pm	cat_none	Batere
+pm	category	Kategoria
+pm	date_note	Sistemak hasiera eta bukaera datak aldatuko dizkizu, saiatzen bazara ataza honen menpe dagoen edozein atazen hasiera data bukaera datarena baino lehenago jartzen.
+pm	dependent	Atazaren menpe dago
+pm	dependent_note	Ataza honekin hasteko, osatuak dauden atazak aukeratu behar dituzu derrigorrez.
+pm	details	Atazaren zehaztasunak
+pm	end_date	Amaiera data
+pm	hours	Aurreikusitako orduak
+pm	intro	Azpiproiektu bat aukeratu eta bertan atazak ikusi/argitaratu/gehitu ahal izango dituzu
+pm	no_tasks_found	Ez daude bat datozen atazik
+pm	no_tasks_found_text	Atazak gehitu beherako lotura erabiltzen
+pm	noprj	<h1>Ez da azpiproieturik aurkitu</h1><b><p>Ez da azpiproiekturik sustatu, edo ezin dugu ikusi.</p><p><font color="red">Proiektu honen administrariak azpiproiektuak sustatu behar ditu administrazio orria erabiliaz</font></p></b>
+pm	percent_complete	Osatutako ehunekoa
+pm	priority	Lehentasuna
+pm	section	Proiektua: $1
+pm	start_date	Hasiera data
+pm	status	Egoera
+pm	status_any	Edozein
+pm	summary	Atazaren deskribapena
+pm	task_id	Atazaren ID-a
+pm	tech_any	Edozein
+pm	title	Atazen administraria: azpiproiektuak eta atazak
+pm	unassigned	Esleitu gabea
+pm	view_calendar	Egutegia ikusi
+pm_addtask	task_added_relationship	Successfully Erregistroaren zerrenda ongi gehitu da
+pm_addtask	task_created_successfully	Ongi sortutako ataza
+pm_addtask	task_updated_successfully	Ongi eguneratutako ataza
+pm_addtask	title	Taza bat sortu
+pm_admin	title	Atazen administraria: Administrazioa
+pm_admin_change_status	section	 Atazen administrazioa
+pm_admin_change_status	title	Informazioa eguneratu
+pm_admin_projects	add_categories	Kategoriak gehitu honi
+pm_admin_projects	add_categories_title	Kategoriak gehitu
+pm_admin_projects	add_categories_to	Kategoriak gehitu honi
+pm_admin_projects	add_edit_categories	Kategoriak gehitu/argitaratu
+pm_admin_projects	add_project	Azpi proiektu bat gehitu
+pm_admin_projects	add_project_intro	Azpi proiektu bat gehitzean ataza ugari esleitu daitezke egitasmo horrentzat. Ataza  berri bat esleitzea desberdina da.
+pm_admin_projects	add_subprojects	Azpiproiektuak gehitu
+pm_admin_projects	admin_title	Azpiproiektu edota Atazen administrazioa
+pm_admin_projects	category_inserted	Sartutako kategoria
+pm_admin_projects	category_name	Kategoria berriaren izena
+pm_admin_projects	category_note	Kategoria bat sortzen baduzu ezin izango duzu ezabatu
+pm_admin_projects	category_note2	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.</font></strong>
+pm_admin_projects	category_updated	Kategoria eguneratua
+pm_admin_projects	change_project_intro	Formulario hau erabiltzen azpiproiektu bat aldatu dezakezu. Gogoratu proiektu pribatuak egitasmo horien kideak bakarrik ikusi dezaketela, eta ez publiko arruntak.<p>
+pm_admin_projects	change_project_title	Azpiproiektu/Atazaren egoera aldatu
+pm_admin_projects	col_project_id	Projektu id -a
+pm_admin_projects	col_project_name	Projektu izena
+pm_admin_projects	description	Deskribapena
+pm_admin_projects	edit_update	Argitaratu/Eguneratu azpiproiektua
+pm_admin_projects	existing_subprojects	Momentuko azpiproiektuak
+pm_admin_projects	id	Id-a
+pm_admin_projects	is_public	¿Publikoa al da?
+pm_admin_projects	modify_category	Kategoria bat aldatu hemen
+pm_admin_projects	no_categories	Zehaztugabeko kategoriak
+pm_admin_projects	no_projects_found	<h2>Ez dago azpiproiekturik</h2><p>Ez dira aurkitu talde honetan. Azpiproiektu gehiago sustatzeko goiko lotura erabili "Azpiproiektua gehitu".
+pm_admin_projects	no_subprojects	Ez daude azpiproiekturik talde honetan
+pm_admin_projects	project_inserted	Sustatutako proiektua
+pm_admin_projects	project_name	Azpiproiektuaren izen berria
+pm_admin_projects	project_title	Izenburua
+pm_admin_projects	projects_intro	Azpiproiektu berria gehitu Azpiproiektu/Atazen kudeatzaileari. <strong>Azpiproiektu bati ataza gehitzea beste gauza bat da.</strong>
+pm_admin_projects	section	Atazen administrazioa
+pm_admin_projects	send_updates	Eguneratze guztiak hona bidali
+pm_admin_projects	title	Azpiproiektu bat sortu
+pm_browse_custom	section	Atazen administraria
+pm_browse_custom	title	Atazak gainetik irakurri
+pm_browse_my	section	$1 proiektuko atazen administraria
+pm_browse_my	title	Nere atazak gainetik irakurri
+pm_browse_open	section	Atazen administraria
+pm_browse_open	title	Irekita dauen atazak gainetik irakurri
+#TO_TRANSLATE#pm_browsetask	admin_mass_update	<strong>Administraria:</strong> Aldaketa goran aukeratutako elementu guztiei eragitea nahi baduzu, erabili kontrol hauek  bere propietateak aldatzeko eta behin sakatu "Eguneratze Masiboa" -n.
+pm_browsetask	browse	Gainetik irakurri
+pm_browsetask	check_all	Txekeatu &nbsp;denak
+pm_browsetask	clear_all	Garbitu &nbsp;denak
+pm_browsetask	mass_update	Eguneratze Masiboa
+pm_browsetask	next	Hurrengo 50-ak
+pm_browsetask	no_change	Aldaketarik Gabe
+pm_browsetask	overdue_tasks	* atzeratutako atazak markatzen ditu
+pm_browsetask	previous	Azken 50-ak
+pm_browsetask	title	Atazak gainetik irakurri
+pm_detailtask	assigned_to	Nori esleitua
+pm_detailtask	category	Kategoria
+pm_detailtask	dependend_on_task	Ataza honen menpean dago
+pm_detailtask	end_date	Bukaera data
+pm_detailtask	hours	Orduak
+pm_detailtask	original_comment	Jatorrizko azalpena
+pm_detailtask	pct_complete	Osatutako ehunekoa
+pm_detailtask	priority	Lehentasuna
+pm_detailtask	section	Atazen administraria
+pm_detailtask	start_date	Hasiera data
+pm_detailtask	status	Egoera
+pm_detailtask	submitted_by	Nork bidalia
+pm_detailtask	subproject	Azpiprojektua
+pm_detailtask	task_summary	Atazaren deskribapena
+pm_detailtask	title	Atazaren zehaztasunak
+pm_ganttpage	assignee	Esleitua
+pm_ganttpage	days	Egunak
+pm_ganttpage	months	Hilabeteak
+pm_ganttpage	resolution	Erabakia
+pm_ganttpage	size	Tamaina
+pm_ganttpage	sort_on	Nola antolatu
+pm_ganttpage	weeks	Asteak
+pm_include_grouphtml	add_task	Ataza gehitu
+pm_include_grouphtml	admin	Administrazioa
+pm_include_grouphtml	browse_task	Atazak gainetik irakurri
+pm_include_grouphtml	error_disabled	Proiektu honek atazen administraria desaktibatu du
+pm_include_grouphtml	gantt_chart	Gantt diagrama
+pm_include_grouphtml	not_started	Hasigabea
+pm_include_grouphtml	project	Proiektua
+pm_include_grouphtml	reporting	Txostenak
+pm_include_taskhtml	by	Nork
+pm_include_taskhtml	comment	Azalpenak
+pm_include_taskhtml	date	Data
+pm_include_taskhtml	depend_info	Ataza honen menpean dauden atazak
+pm_include_taskhtml	field	Eremu
+pm_include_taskhtml	followups	Berbidalpenak
+pm_include_taskhtml	no_changes	Ez da aldaketik egin
+pm_include_taskhtml	no_comments	Ez da azalpenik eman
+pm_include_taskhtml	no_depend_info	Ataza honen menpean ez dago inungo atazik
+pm_include_taskhtml	no_followups	Ez dago berbidalpenik
+pm_include_taskhtml	no_tracker_items	Ez dira erlazionatuak dauden erregistroko elementurik gehitu
+pm_include_taskhtml	old_value	Aurreko balioa
+pm_include_taskhtml	open_date	Irekitze data
+pm_include_taskhtml	related_items	Erlazionatuak dauden erregistroko elementuak
+pm_include_taskhtml	remove_relation	Erlazioa ezabatu
+pm_include_taskhtml	task_history	Atazaren aldaketen historikoa
+pm_include_taskhtml	tracker	Erregistroa
+pm_modtask	add_comment	Azalpena gehitu
+pm_modtask	assignee	Esleitua
+pm_modtask	original_comment	Jatorrizko azalpena
+pm_modtask	sort_on	Nola antolatua
+pm_modtask	submitted_by	Nork bidalia
+pm_modtask	title	Ataza aldatu
+pm_projectcategory	required_fields	Proiektu kategoria: izena eta esleipena derrigorrezko eremuak dira
+pm_projectgroup	error_min_desc_length	Dokumentuaren deskribapenak gutxienez 10 karaktere izan behar ditu
+pm_projectgroup	error_min_name_length	Izenburuak gutxienez 5 karaktere izan behar ditu
+pm_projectgroup	none_found	Ez da proiektuaren taldea aurkitu
+pm_projecttask	circular_dependency	Menpekotasun zirkularra antzeman da
+pm_projecttask	mail_followups_body	\nEguna: $1\nNola: $2\n\nAzalpena:\n$3
+pm_projecttask	mail_followups_footer	Informazio gehiagorako, bisita ezazu:
+pm_projecttask	mail_followups_subject	Ataza #
+pm_projecttask	mail_followups_title	\n\nBerbidalpenak
+pm_projecttask	mail_notice	Ataza # $1 eguneratua izan da\n\nProiektua: $2\nAzpiproiektua: $3\nLaburpena: $4\nOsatua: $5\nEgoera: $6\n\nDeskribapena: $7
+pm_reporting	aging_report	Denboraren txostena ataza bakoitzarentzat
+pm_reporting	all_tasks_by_category	Ataza guztiak kategoriaren arabera
+pm_reporting	all_tasks_by_technician	Erabiltzaileari esleitutako ataza guztiak
+pm_reporting	average_duration	Atazak amaitzeko iraupenaren batazbestekoa (egunetan)
+pm_reporting	by_subproject	Txostena atazen multzoen arabera
+pm_reporting	by_tech	Atazak erabiltzailearen arabera
+pm_reporting	not_completed	Oraindik osatugabeko ataza kopurua
+pm_reporting	open_tasks_by_category	Irekitako atazak kategoriaren arabera
+pm_reporting	open_tasks_by_technician	Irekitako atazak erabiltzailearen arabera
+pm_reporting	report_note	Gogoratu ataza berdina erabiltzaile bati baino gehiagori esleitu daitekeela. Ataza horiek banan bana bezela gogoan hartzen dira.
+pm_reporting	started_tasks	Hasitako ataza kopurua
+pm_reporting	tasks_by_category	Atazak kategoriaren arabera
+pm_reporting	tasks_by_technician	Atazak erabiltzailearen arabera
+pm_reporting	title	Atazen txostenak egiteko sistema
+pm_task	create_successfully	Ongi sortutako ataza
+project_admin	add_user	Erabiltzailea gehitu
+project_admin	addfromlist	Zerrendako Erabiltzaileak Gehitut
+project_admin	addfromlist1	Txekeatu gehitu nahi duzun izen bakoitzaren hondoko kutxa. Zure aukerak gordeak izango dira beheko letretako edozein sakatuz gero. Bukatutakoan sakatu "Bukatu" gehitzen ari zaren erabiltzaileen rolak aukeratzeko.
+project_admin	addfromlist2	Aukeratu erabiltzaile bakoitzaren rola eta gero sakatu &quot;Denak Gehitu&quot;.
+project_admin	docmanager_admin	Dokumentuen administrazioa
+project_admin	download_tarball	Deskargatu zure gaueko tar-a CVS zuhaitzetik
+project_admin	edit_file_releases	Argitalpenak gehitu/argitaratu
+project_admin	edit_member_permissions	Kidearen baimenak argitaratu
+project_admin	file_releases	Fitxeroen argitalpena
+project_admin	forum_admin	Foroen administrazioa
+project_admin	frs_admin	FRS Kudeaketa
+project_admin	group_members	Taldekideak
+project_admin	homepage_link	Lotura hasierako orrira
+project_admin	mail_admin	Posta elektronikoen administraria
+project_admin	news_admin	Albisteen administraria
+project_admin	packages	Paketeak
+project_admin	project_information	Varia proiektuaren informazioa
+project_admin	section	Proiektua: $1
+project_admin	shell_server	Taldearen shell (SSH) zerbitzaria
+project_admin	shell_server_group_directory	Taldearen direktorioa Shell zerbitzarian:
+project_admin	short_description	Deskribapen laburra
+project_admin	task_manager_admin	Atazen administrazioa
+project_admin	title	Administrazioaren laburpena
+project_admin	tool_admin	Administrazio tresna
+project_admin	tracker_admin	Erregistroaren administrazioa
+project_admin	trove_categorization	Proiektu kategorizazioa:
+project_admin	unix_name	Unix izena
+project_admin	user_added	Ongi gehitutako erabiltzailea
+project_admin	user_removed	Ongi ezabatutako erabiltzaileate
+project_admin	user_updated	Erabiltzailea Ongi Eguneratua
+project_admin	userrealname	Benetazko Izena
+project_admin	www_directory	Proiektuaren WWW direktorioa Shell zerbitzarian:
+project_admin_database	add_new_database	Datu base berri bat gehitu
+project_admin_database	add_new_database_info	"Create" sakatuz datu basearen eraketa programatukok duzu. Postaz bidaliko dira zehaztasunak proiektuaren admiministrariei
+project_admin_database	cannot_add	Datu basearen sarrera ezin dut gehitu
+project_admin_database	confirm_delete	Ezabapena baieztatu
+project_admin_database	confirm_deletion	Ezabapena baieztatzeko egin klik hemen
+project_admin_database	confirm_new	Berria baieztatu
+project_admin_database	create	Sortu
+project_admin_database	current_databases	Orain dauden datu baseak
+project_admin_database	database_created	Datu basearen eraketa programatu da
+project_admin_database	database_type	Datu base mota
+project_admin_database	db_type	Datu base mota
+project_admin_database	maximum_databases_allocated	Baimendutako datu base kopurua erreserbatu da datu base mota guztietan
+project_admin_database	new_password	Pasahitza berria
+project_admin_database	no_databases	Momentu honetan ez dago datu baserik talde honek erabili duenik
+project_admin_database	operations	Eragiketak
+project_admin_database	state	Egoera
+project_admin_database	title	Datu basearen informazioa
+project_admin_database	update	Eguneratu
+project_admin_editgroupinfo	active_features	Aktibatutako funtzionaltasunak
+project_admin_editgroupinfo	enable_anonymous_cvs	CVS anonimoa gaitu
+project_admin_editgroupinfo	enable_pserver	Pserver gaitu
+project_admin_editgroupinfo	group_name	Taldearen izen esanguratsua
+project_admin_editgroupinfo	group_updated	Taldearen informazioa eguneratua
+project_admin_editgroupinfo	homepage_link	Hasiera orrira lotura:
+project_admin_editgroupinfo	new_doc	Dokumentu berrien argitalpena
+project_admin_editgroupinfo	new_doc_info	Nahi baduzu, lehentasunezko posta kontu bat eman dezakezu. Bertara edozein argitalpen berri bidaliko da.
+project_admin_editgroupinfo	send_on_all_updates	(eguneratze guztietan bidali)
+project_admin_editgroupinfo	short_description	Deskribapen laburra (gehienez 255 karaktere, HTML kodea badago deskribapenetik ihes egingo du)
+project_admin_editgroupinfo	title	Informazio publikoa argitaratu
+project_admin_editgroupinfo	use_cvs	CVS-a erabili
+project_admin_editgroupinfo	use_docman	Dokumentazio kudeatzailea erabili
+project_admin_editgroupinfo	use_forums	Foroak erabili
+project_admin_editgroupinfo	use_frs	Fitxeroak argitaratzeko sistema erabili
+project_admin_editgroupinfo	use_ftp	FTP-a erabili
+project_admin_editgroupinfo	use_mailing_lists	Posta zerrendak erabili
+project_admin_editgroupinfo	use_news	Albisteak erabili
+project_admin_editgroupinfo	use_pm	Ataza kudeatzailea erabili
+project_admin_editgroupinfo	use_stats	Estatistikaka erabili
+project_admin_editgroupinfo	use_surveys	Inkestak erabili
+project_admin_editgroupinfo	use_tracker	Erregistroa erabili
+project_admin_editimages	add_data	Multimedia datuak gehitu
+project_admin_editimages	add_file	Fitxeroa gehitu
+project_admin_editimages	del	Ezabatu
+project_admin_editimages	description	Deskribapena
+project_admin_editimages	dims	Dims
+project_admin_editimages	edit	Aldatu
+project_admin_editimages	error_length	Akatsa - Fitxero baten tamaina 20 bytes baino handiagoa eta 256000 bytes baino tamaina txikiagoa izan behar du.
+project_admin_editimages	file_deleted	Multimedia fitxeroa ezabatua izan da
+project_admin_editimages	file_description_required	Fitxeroaren deskribapena beharrezkoa da
+project_admin_editimages	file_uploaded	Multimedia fitxeroa kargatu
+project_admin_editimages	id	ID-a
+project_admin_editimages	intro	Gehiene multimedia datuetan MB $1 biltegiratu ditzakezu (bitmap eta bektoreen grafikoak, musika, 3D modeloak) datu basean. Orri hau erabili multimedia datuak gorde eta ezabatzeko.
+project_admin_editimages	local_filename	Fitxero lokala
+project_admin_editimages	mime_type	MIME mota
+project_admin_editimages	name	Izena
+project_admin_editimages	properties_updated	Multimedia fitxeroaren ezaugarriak eguneratuak
+project_admin_editimages	replace	Fitxero berri batekin ordezkatu (hautazkoa)
+project_admin_editimages	required_fields	Derrigorrezkoak dira bai izena eta bai deskribapena
+project_admin_editimages	size	Tamaina
+project_admin_editimages	title	Multimedia datuak aldatu
+project_admin_editimages	uploaded	Karga
+project_admin_editpackages	add_release	Bertsioan gehitu
+project_admin_editpackages	added_package	Paketea gehitu
+project_admin_editpackages	create_package	Paketea sortu
+project_admin_editpackages	edit_releases	Bertsioa aldatu
+project_admin_editpackages	new_package_name	Pakete berriaren izena
+project_admin_editpackages	no_packages_defined	Ez dituzu paketeak definitu
+project_admin_editpackages	no_packages_status	Egoera
+project_admin_editpackages	package_name	Paketearen izena
+project_admin_editpackages	packages_info	<h3>Paketeak</h3><p>Paketeak erabili ditzakezu fitxero bertsioa ezberdinak elkartzeko edo nahiago dituzun bezela erabili. <p><H4>Paketeen adibide bat:</h4><p><strong>Mysql-win</strong><br /><strong>Mysql-unix</strong><br /><strong>Mysql-odbc</strong><p><h4>Zure paketeak:</H4><p><ol><li>Zure paketeak definitu</li><li>Paketeen bertsio berri bat sortu</li></ol><p><h3>Paketeen bertsioak</h3><p>Pakete baten barne fitxero ugari egon daitezke.<p><H4>Bertsioen adibideak</h4><p><strong>3.22.1</strong><br /><strong>3.22.2</strong><br /><strong>3.22.3</strong><br /><p>Pakete berrien bertsioak sortu ditzakezu <strong>Bertsioak gehitu/argitaratu</strong> sakatzean paketearen izenaren ostean.<p>
+project_admin_editpackages	qrs	QRS
+project_admin_editpackages	qrs_a_file	Hemen sakatu $1 -en $2 fitxeroa eguneratzeko
+project_admin_editpackages	releases	Bertsioak
+project_admin_editpackages	title	Paketeak aldatu
+project_admin_editpackages	updated_package	Paketea eguneratu
+project_admin_editrelease	add_file	Fitxero hau gehitu
+project_admin_editrelease	add_files_note	Oharra: nabigatzaile batzuetan bidali nahi den fitxeroa aukeratu laukitxoan eta "ok" sakatu. Bi klik eginez fitxeroa aukeratzen da.</strong></span>
+project_admin_editrelease	changelog_too_small	Aldaketen informazioa laburregia da
+project_admin_editrelease	data_saved	Gordetako datuak
+project_admin_editrelease	delete_file	Fitxeroa ezabatu
+project_admin_editrelease	file_deleted	Ezabatutako fitxeroa
+project_admin_editrelease	file_list_note	Bertsio honi fitxeroak gehitutakoan, horietako bakoitza eguneratu <strong>behar</strong> duzu informazio egokiarekin. Bestela ez dira deskargako laburpen orrian aterako.
+project_admin_editrelease	file_released	Eguneratutako fitxeroa
+project_admin_editrelease	file_type	Fitxero mota
+project_admin_editrelease	file_type_update	File Type<br />Eguneratu
+project_admin_editrelease	file_updated	Eguneratutako fitxeroa
+project_admin_editrelease	filename_release	Filename<br />Bertsioa
+project_admin_editrelease	i_am_sure	Ziur nago
+project_admin_editrelease	no_files_in_release	Fitxerorik gabe bertsio honetan
+project_admin_editrelease	note	Paketearen bertsio honen oharrak eta aldaketak aldatu. Aldaketa hauek bertsio honetako fitxero guztietan ezarriko dira.<br />Ohar eta aldaketa hauek bidali ditzakezu banan bana edo beran kopiatu.
+project_admin_editrelease	paste_changelog	Aldaketen zerrenda hemen kopiatu
+project_admin_editrelease	paste_release_notes	Oharrak hemen kopiatu
+project_admin_editrelease	preserve_preformatted	Nere testu formatua mantendu
+project_admin_editrelease	processor_type	Prozesadore mota
+project_admin_editrelease	processor_update	Processor<br />Bertsioaren data
+project_admin_editrelease	release_date	Bertsioaren data
+project_admin_editrelease	release_name	Bertsioaren izena
+project_admin_editrelease	release_notes_too_small	Berrikuspenaren oharrak laburregiak dira
+project_admin_editrelease	status	Egoera
+project_admin_editrelease	step_1	1º urratsa:&nbsp;&nbsp; Bertsioa aldatu
+project_admin_editrelease	step_2	2º urratsa: Bertsio honi fitxeroak gehitu</h3><p>Sistemara bidaliko den fitxeroa aukeratu. Fitxeroaren gehinezko tamaina gunearen administrariak ezartzen du; jatorriz 2MB-ekoa da. Fitxero handiagoak bidali behar badituzu sistemaren administrariarekin harremanetan jarri.</p>
+project_admin_editrelease	step_3	3º urratsa: Bertsio honetan fitxeroak aldatu
+project_admin_editrelease	submit_refresh	Bidali/Berritu
+project_admin_editrelease	title	Bertsioa editatu
+project_admin_editrelease	update_refresh	Eguneratu/Berritu
+project_admin_editrelease	upload_change_log	Eguneratutako bertsioko aldaketen zerrenda
+project_admin_editrelease	upload_new_file	Fitxero berri bat bidali
+project_admin_editrelease	upload_release_notes	Eguneratutako bertsioaren oharrak
+project_admin_group_trove	intro	<h3>Editatu kategarizazioa</h3><p>Aukeratu hiru erro kategorirarte projektu honentzat. Projektuak hauetako kategorizazioren bat ez badu behar "Bat erez aukeratu" besterik ez duzu.</p><p> GARRANTZITSUA: Proiektua ahalik eta kategori zehatzenean kokatu behar da. Baterako kategorizazioak, bai kategori espezifiko batean eta bai bere gainetik dagoen kategorian, aintzakotzat kategori zehatzena bakarrik hartzea eragingo du.
+project_admin_group_trove	title	Proiektuen mapako informazioa
+project_admin_group_trove	update_changes	Kategorien aldaketa guztiak eguneratu
+project_admin_history	info	Erregistro honek nork eta noiz egin ziren aldaketa esanguratsuenak
+project_admin_history	title	Historia
+project_admin_newrelease	section	$1 proiektua - Administrazioa
+project_admin_newrelease	title	Argitalpen berriak sortu
+project_admin_qrs	changelog	Aldaketen erregistroa
+project_admin_qrs	create_new_package	$1 -ek $2 paketea sortzeko
+project_admin_qrs	exceed_file_size	Igotako fitxategiak onartutako gehienezko tamaina gainetsi . Tokiaren administrariarekin jarri harremanetan fitxategi handi hau igotzeko.
+project_admin_qrs	file_name	Fitxeroaren izena
+project_admin_qrs	file_released	Argitaratutako fitxeroa: orain argitaratzeko aukeratu ezazu
+project_admin_qrs	file_type	Fitxero mota
+project_admin_qrs	maximum_file_size	Igotako fitxategien gehinezeko tamaina:
+project_admin_qrs	must_choose_one	Bat Aukeratu Behar da
+project_admin_qrs	no_file_types_available	Ez dago fitxero mota erabilgarririk
+project_admin_qrs	package_id	Ident.Paketea
+project_admin_qrs	partial_file	Igotako fitxategiaren zati bat jaso da soilik.
+project_admin_qrs	preserve_text	Nere testua aurreformateatua mantendu
+project_admin_qrs	processor_type	Prozesadore mota
+project_admin_qrs	qrs_info	Orain $1, $2 argitalpenari fitxeroa gehitu edo argitalpena kaleratu.</p> <p>Mesedez, kontuan izan agian fitxeroak ez direla momentuan azalduko $3 deskarga orriko $4 -n. Ordu batzuk behar dira guztiz barreiatzeko.
+project_admin_qrs	release_date	Argitalpenaren data
+project_admin_qrs	release_file	Fitxeroa argitaratu
+project_admin_qrs	release_name	Argitalpenaren izena
+project_admin_qrs	release_note	Oharra: nabitzaile batzuetan fitxeroa kargatu dioen laukian fitxeroa aukeratu eta "ok" sakatu. Bi aldiz sakatuz gero ez da fitxeroa aukeratzen.
+project_admin_qrs	release_notes	Argitalpenaren oharrak
+project_admin_qrs	required_file	Fitxero bat aukeratu behar duzu
+project_admin_qrs	required_file_type	Fitxero mota bat aukeratu behar duzu
+project_admin_qrs	required_package	Pakete bat aukeratu
+project_admin_qrs	required_processor_type	Prozesadore mota aukeratu behar duzu
+project_admin_qrs	required_release_name	Bertsioaren izena definitu
+project_admin_qrs	title	Argitaratzeko sistema azkarra
+project_admin_qrs	unknown_file_error	Akats ezezaguna fitxategia igotzean.
+project_admin_qrs	upload_new_file	Fitxero berria kargatu
+project_admin_rmuser	cancel	Kitatu
+project_admin_rmuser	cannot_remove_admin	Ezin duzu $1 administraria ezabatu
+project_admin_rmuser	info	<h3>$1 -eko lankidea ezabatu</h3><p>$1 -eko lankidea ezabatzera zoaz. Mesedez, zure asmoa baiezta ezazu:</p>
+project_admin_rmuser	operation_not_permitted	Onartugabeko eragiketa
+project_admin_rmuser	remove	Ezabatu
+project_admin_rmuser	title	Erabiltzailea ezabatu
+project_admin_showreleases	date	Data
+project_admin_showreleases	no_release	Pakete honen bertsioak ez daude eskuragarri
+project_admin_showreleases	package_name	Paketearen izena
+project_admin_showreleases	release_name	Bertsioaren izena
+project_admin_showreleases	title	Release Fitxeroaren bertsio berria
+project_admin_userpermedit	add_to_all	Denak gehitu
+project_admin_userpermedit	add_to_tracker	Erregistroari gehitu
+project_admin_userpermedit	admin	Admin
+project_admin_userpermedit	admin_only	Administraria bakarrik
+project_admin_userpermedit	admin_tech	Administraria eta teknikoa
+project_admin_userpermedit	developer_not_found	Ez da lankidea aurkitu talde honetan
+project_admin_userpermedit	docman	Dokumentuen administrazioa
+project_admin_userpermedit	editing_permissions	$1 ($2) erabiltzailearentzako baimenak argitaratzen ari zara
+project_admin_userpermedit	editor	Argitaratzailea
+project_admin_userpermedit	file_release_role	Fitxeroen bertsioetan eginkizuna
+project_admin_userpermedit	forums	Foroak
+project_admin_userpermedit	invalid_user	Erabiltzaile baliogabea
+project_admin_userpermedit	moderator	Moderatzaile
+project_admin_userpermedit	no_permissions	Baimenik gabe
+project_admin_userpermedit	not_available	Ez dago eskuragarri
+project_admin_userpermedit	permissions_updated	Eguneratutako baimenak
+project_admin_userpermedit	pm	Proiektuen/Atazen administraria
+project_admin_userpermedit	project_admin	Proiektuaren administraria
+project_admin_userpermedit	project_role	Eginkizuna proiektuan
+project_admin_userpermedit	property	Jabetza
+project_admin_userpermedit	release_technician	Release Technician
+project_admin_userpermedit	remove	Ezabatu
+project_admin_userpermedit	reset_changes	Aldaketak ezabatu
+project_admin_userpermedit	technician	Teknikoa
+project_admin_userpermedit	title	Lankideen baimenak argitaratu
+project_admin_userpermedit	tracker_info	<h3>Erabiltzaileak gehitu erregistro honetara:</h3> <p>Erabiltzaile honek zein erregistroetan izango duen baimena aukeratu dezakezu, edo bestela erabiltzailea erregistro guztietan izenpetu "Denetan gehitu" sakatuz.</p>
+project_admin_userpermedit	tracker_manager	Erregistroaren administrazioa
+project_admin_userpermedit	undefined	Definitu gabea
+project_admin_userpermedit	update_permissions	Lankidearen baimenak eguneratu
+project_admin_userpermedit	user_added	Ongi gehitutako erabiltzailea
+project_admin_userpermedit	user_does_not_exist	Erabiltzailea ez da existitzen
+project_admin_userpermedit	value	Balioa
+project_admin_userperms	docman	Dokumentuen <br />kudeatzailea
+project_admin_userperms	editor	Editorea
+project_admin_userperms	forums	Foroak
+project_admin_userperms	general	Orokorra
+project_admin_userperms	info	Lankidearen izena sakatu beheran, bere baimenak argitaratzeko
+project_admin_userperms	moderator	Moderatzailea
+project_admin_userperms	no_developers	Ez da lankidea aurkitzen
+project_admin_userperms	rel_tech	Rel.Teknikoa
+project_admin_userperms	task_manager	Atazen <br />kudeatzailea
+project_admin_userperms	title	Erabiltzaileen baimenen zerrendak
+project_admin_userperms	tracker_manager	Erregistroen <br />kudeatzailea
+project_admin_utils	admin	Admin
+project_admin_utils	by	Nork
+project_admin_utils	change_history	Proiektuaren aldaketen historia
+project_admin_utils	database_admin	Admin. Datu Baseak
+project_admin_utils	date	Data
+project_admin_utils	edit_jobs	Lanak argitaratu
+project_admin_utils	edit_public_info	Informazio publikoa argitaratu
+project_admin_utils	edit_release_files	Fitxeroak editatu/argitaratu
+project_admin_utils	field	Eremu
+project_admin_utils	multimedia_data	Multimedia datuak argitaratu
+project_admin_utils	old_value	Aurreko balioa
+project_admin_utils	permission_blurb	<strong>Oharra:</strong><dl><dt><strong>Proiektuaren administrariek(bold)</strong></dt><dd>beste administrarie sarbidea emateko baimena dute</dd><dt><strong>Bertsioen teknikoek</strong></dt><dd>fitxeroen bertsioak sortu ditzakete (proiektuen administrariek teknikoek dituzten abantailak emateko baimena dute)</dd><dt><strong>Teknikoak (T)</strong></dt><dd>bug/ataza/adabakien erregistroetan esleituak izaten dira</dd><dt><strong>Administrazio tresnak (A)</strong></dt><dd>bug/ataza/adabaki erregistroetan aldaketak egiteko baimenak dituzte dagozkien orrietako administrazio tresnak erabiltzen.</dd><dt><strong>Baimenik gabe (N/A)</strong></dt><dd>Lankideek ez dituzte baimen zehatzik (normalki '-' -ekin baliokideak dira)</dd><dt><strong>Moderatzaileak</strong> (forums)</dt><dd>proiektuen foroko mezuak ezabatu ditzakete</dd><dt><strong>Argitaratzaileak</strong> (doc. manager)</dt><dd>proiektuaren dokumentazioa eguneratu/argitaratu/elimanitu dezake.</dd></dl>
+project_admin_utils	post_jobs	Lanak argitaratu
+project_admin_utils	project_history	Proiektuaren historia
+project_admin_utils	stats	Estatistikak
+project_admin_utils	user_permissions	Erabiltzaileen baimenak
+project_admin_utils	vhosts	VHOSTs
+project_admin_vhost	create	Sortu
+project_admin_vhost	delete	Ezabatu
+project_admin_vhost	info	<strong><span style="text-decoration:underline">Alegiazko ostatu berria gehitu</span></strong><p>Alegiazko ostatua gehitzeko <strong>Izena (CNAME)</strong> idatzi <em>su_host.org</em><strong>$1.$2</strong>-an. $3-k ez du momentu honetan posta ostaturik (hau da, ezin du MX-a izan) edo DNS-rik</strong>. <p>Sakatu "sortu"-n alegiazko ostatua itsasteko. Horrela proiektuen webguneekin sinkronizatuko da, ondorioz<em>zure_host.org</em> orriak erakutsiko ditu <em>$4.$5 -n</em>.
+project_admin_vhost	name	Alegiazko ostatu berria <em>(e.g. vhost.org)</em>
+project_admin_vhost	no_vhosts	Ez da VHOSTs definitu
+project_admin_vhost	not_valid_hostname	$1 ez da ostatu izen egokia
+project_admin_vhost	operations	Eragiketak
+project_admin_vhost	title	Alegiazko makinaren administrazioa
+project_admin_vhost	vhost	Alegiazko ostatua
+project_admin_vhost	vhost_deleted	VHOST ezabatua
+project_admin_vhost	vhost_scheduled	Alegiazko ostatua sorkuntzarako ilaran.
+project_filemodule_monitor	start_monitor_body	Monitorizazioa hasi da
+project_filemodule_monitor	start_monitor_title	Hasitako monitorizazioa
+project_filemodule_monitor	stop_monitor_body	Monitorizazioa ongi amaitu da
+project_filemodule_monitor	stop_monitor_title	Monitorizazioa amaitu da
+project_home	cvs_commits	<strong>$1</strong> bidaltzeak, <strong>$2</strong> gehituak
+project_home	forum_messages	<strong>$1</strong> mezuak <strong>$2</strong> foroetan
+project_home	forums	foroak
+project_home	help_wanted	Laguntza eskatzen da: proiektu hau bilatzen ari da
+project_home	help_wanted_multiple	$1 jendeak postu ezberdinak
+project_home	holding_note	Oharra: proiektu hau lankideen artean mantentzen da. Ez gara produktu honen gune ofiziala. Copyright-ari buruz informazio gehiago jakin nahi baduzu proiektu honen webgune nagusira joan.
+project_home	messages_in	Mezuak non
+project_home	monitor_package	Pakete hau monitorizatu
+project_home	no_subprojects	Ez dago azpiproiektu publikorik eskuragarri
+project_home	no_trackers	Ez daude "tracker" publikorik eskuragarri
+project_home	public_mailing_lists	Posta zerrenda publikoak
+project_home	release_notes	Bertsioaren oharrak
+project_home	surveys	Inkestak
+project_home	title	Proiektuaren informazioa
+project_home	tracker_open	$1 irekia /$2 erabatekoa
+project_home	view_members	Kideak ikusi
+project_home	view_project_files	Proiektuaren fitxero guztiak ikusi
+project_memberlist	developer	Garatzailea
+project_memberlist	joining	<p>Proiektu honetan lagundu nahi baduzu eta lankidea izan, proiektuaren administrari batekin harremanetan jarri, berako testuan letra lodiz ageri dira.</p><br /><br />
+project_memberlist	role	Kargu/Posizio
+project_memberlist	skills	Esperientzia
+project_memberlist	title	Proiektu kideen zerrenda
+project_memberlist	username	Erabiltzaile
+project_memberlist	view	Ikusi
+project_showfiles	architecture	Arkitektura
+project_showfiles	date	Data
+project_showfiles	downloads	Deskargak
+project_showfiles	error_no_packages_defined_text	Proiektu honetarako definitu diren paketeetan ez daude fitxerorik.
+project_showfiles	error_no_packages_defined_title	Fitxerorik gabeko paketeak
+project_showfiles	file_type	Mota
+project_showfiles	filename	Fitxeroaren izena
+project_showfiles	intro	Beran proiektuetako fitxero guztien zerrenda ikusgai daukazu.
+project_showfiles	intro2	Deskargatu baino lehen, bertsioen oharrak eta aldaketak irakurri ditzakezu (argitaratutako bertsioa sakatzen ikusgai).
+project_showfiles	monitor_package	Orri hau monitorizatu
+project_showfiles	new_release	Bertsio berri bat sortzeko egin klik hemen.
+project_showfiles	no_releases	Bertsiorik gabe
+project_showfiles	package	Pakete
+project_showfiles	project_totals	Proiektuaren erabatekoak
+project_showfiles	release_highlighted	La versión que debe elegir es la <span style="background-color:pink">sombreada</span>.
+project_showfiles	release_notes	Bertsioaren oharrak
+project_showfiles	section	Proiektua: $1
+project_showfiles	size	Tamaina
+project_showfiles	title	Fitxero zerrenda
+project_shownotes	changes	Aldaketak:
+project_shownotes	error_release_not_found	Aukeratutako bertsioa ez da aurkitzen
+project_shownotes	notes	Oharrak:
+project_shownotes	release_name	Bertsioaren izena
+project_shownotes	section	Proiektua: $1
+project_shownotes	title	Argitaratze oharrak
+project_stats	change_stats_view	Ikusteko era aldatu
+project_stats	detailed_statistics	Zehaztutako estatistika honetarako
+project_stats	last_30_days	Azken 30 egunak
+project_stats	last_7_days	Azken 7 egunak
+project_stats	monthly	Hilabetero
+project_stats	tasks	Atazak
+project_stats	title	Proiektuaren estatistikak
+project_stats	tracker	Erregistroak
+project_stats	usage_statistics	Erabiltze estatistikak
+project_stats	view_reports	Txostenak ikusi
+project_stats_graph	date	Data
+project_stats_graph	page_view_days	Azken $1 egunetan gehien ikusitako orriak (gorriz) eta deskargak (urdinez)
+project_stats_graph	page_view_months	Azken $1 hilabetean gehien ikusitako orriak (gorriz) eta deskargak (urdinez)
+project_stats_graph	statistics	$1 Estatistikak $1
+project_stats_graph	views	Ikusteko erak (gorriz) / Deskargak (urdinez)
+project_stats_utils	CVS	CVS
+project_stats_utils	all_tracker	Erregistro guztiak
+project_stats_utils	bugs	Bug-ak
+project_stats_utils	date	Data
+project_stats_utils	days	Egunak
+project_stats_utils	dl	D/l
+project_stats_utils	month	Hilabetea
+project_stats_utils	page_views	Ikusitako orriak
+project_stats_utils	patches	Adabakiak
+project_stats_utils	project_did_not_exits	Proiektu hau data honetan ez zegoen sortua
+project_stats_utils	rank	Sailkapena
+project_stats_utils	stats_all_time	Denbora guztiko estatistikak
+project_stats_utils	stats_for_days	Azken $1 egunetarako estatistikak
+project_stats_utils	stats_for_months	Azken $1 hilabeterako estatistikak
+project_stats_utils	support	Sostengua
+project_stats_utils	tasks	Atazak
+projects	section	Proiektua: $1
+projects	title	Laburpena
+rbac_edit	addrole	Rola Gehitu Role
+rbac_edit	docman	Dokumentu Kudeatzailea
+rbac_edit	editrole	Rola Aldatu
+rbac_edit	editroles	Rolak Aldatu
+rbac_edit	forum	Foroa
+rbac_edit	forumadmin	Proiektu mailako Foro Kudeaketa
+rbac_edit	forumpublic	Foru Baimenak
+rbac_edit	frs	Fitxategi Argitaratze Sistema ( FRS )
+rbac_edit	intro	Erabili orri hau zure proiektuko rolak aldatzeko.Kontutan izan partaide bakoitzak gutxienez behatzaile batek adina baimen duela. Adibidez, Behatzaileak CVS-a irakur badezaek, proiektuko edozein rolek ere egin dezake.
+rbac_edit	newrole	Rol Berria
+rbac_edit	observer	Aldatu Behatzailear
+rbac_edit	observerintro	Erabili orri hau zure proiektuko kide ez direnen baimenak aldatzeko. Web-ean erregistratu ez direnak ere talde honen partaide dira.
+rbac_edit	observerusername	Behatzailea
+rbac_edit	pgtitle	Rola Aldatu
+rbac_edit	pm	Ataza Kudeatzailea
+rbac_edit	pmadmin	Proiektuan zehar Ataza Kudeatazailea
+rbac_edit	pmpublic	Ataza Kudeatzaile Baimenak
+rbac_edit	projectadmin	Proiektuan zehar Kudeatzailea
+rbac_edit	projectpublic	Proiektu Baimenak
+rbac_edit	projectpublicnote	Oharra: proiektu osoa pribatu bezala jarrita badago, kide ez direnek ezingo dituzte beste baliabideak naiz eta zuk eskuragarri bezala markatu.
+rbac_edit	remove	Kendu
+rbac_edit	role	Rola
+rbac_edit	rolename	Rol Izena
+rbac_edit	scm	SCM - Iturburu Kode Biltegia
+rbac_edit	scmpublic	SCM Baimenak
+rbac_edit	title1	Atala
+rbac_edit	title2	Azpiatala
+rbac_edit	title3	Ezaugarriak
+rbac_edit	tracker	Jarraitzailea
+rbac_edit	trackeradmin	Proiektuan zehar Jarraipen Administraria
+rbac_edit	trackerpublic	Jarraipen Baimena
+rbac_edit	update	Aldatu
+rbac_vals	docman0	Irakurri/Mezua
+rbac_vals	docman1	Administraria
+rbac_vals	forum-1	Baimenik Ez
+rbac_vals	forum0	Irakurri
+rbac_vals	forum1	Mezua
+rbac_vals	forum2	Administraria
+rbac_vals	forumadmin0	Bat ere ez
+rbac_vals	forumadmin2	Administraria
+rbac_vals	forumanon0	Posta Izengaberik Ez
+rbac_vals	forumanon1	Baimendu Posta Izengabeak
+rbac_vals	forumpublic0	Pribatua
+rbac_vals	forumpublic1	Publikoa
+rbac_vals	frs0	Irakurri
+rbac_vals	frs1	Idatzi
+rbac_vals	pm-1	Baimenik Ez
+rbac_vals	pm0	Irakurri
+rbac_vals	pm1	Teknikoa
+rbac_vals	pm2	Administraria eta Teknikoa
+rbac_vals	pm3	Administraria Bakarrik
+rbac_vals	pmadmin0	Bat ere ez
+rbac_vals	pmadmin2	Administraria
+rbac_vals	pmpublic0	Pribatua
+rbac_vals	pmpublic1	Publikoa
+rbac_vals	projectadmin0	Bat ere ez
+rbac_vals	projectadminA	Administraria
+rbac_vals	projectpublic0	Pribatua
+rbac_vals	projectpublic1	Publikoa
+rbac_vals	scm-1	Baimenik Ez
+rbac_vals	scm0	Irakurri
+rbac_vals	scm1	Idatzi
+rbac_vals	scmpublic0	Pribatua
+rbac_vals	scmpublic1	Publikoa (PServer)
+rbac_vals	tracker-1	Baimenik Ez
+rbac_vals	tracker0	Irakurri
+rbac_vals	tracker1	Teknikoa
+rbac_vals	tracker2	Administrari eta Tekniko
+rbac_vals	tracker3	Administraria Bakarrik
+rbac_vals	trackeradmin0	Bat ere ez
+rbac_vals	trackeradmin2	Administraria
+rbac_vals	trackeranon0	Posta Izengabeturik Ez
+rbac_vals	trackeranon1	Baimendu Posta Izengabeak
+rbac_vals	trackerpublic0	Pribatua
+rbac_vals	trackerpublic1	Publikoa
+register	apply_for_registration	Proiektu bat erregistratzeko, egitasmoari buruz oinarrizko informazioa idatzi behar duzu. Mesedez, irakurri beherako deskribapenak eta sartu datu ulerterrezak zehaztasunez. Eremu guztiak derrigorrezkoak dira.
+register	comprehensive_description	Zure proiektua deskriba ezazu era ulergarriagoan.
+register	conflicting_licenses_choice	Gatazka sortzen duten lizentzien aukeraketa
+register	describe_registration	Mesedez, erregistro proposamena deskriba ezazu modu ulergarriagoan
+register	i_agree	Onartzen dut
+register	i_disagree	Ez dut onartzen
+register	invalid_full_name	Izen osoa baliogabea
+register	invalid_unix_name	Unix izena baliogabea
+register	license_type	Eremu publikoa</a><li>Webguneak bakarrik <li>Beste bat /Jabedun lizentzia</ul><p><strong>Proiektu honetarako lizentzia</strong><br/ ><strong>Zure lizentzia:</strong><br />
+register	maximum_description	Proiektua deskribatzeko gehienez 255 karaktere
+register	more_license_description	Mesedez, lizentzia deskriba ezazu modu ulergarriagoan."
+register	no_license_chosen	Ez du lizentzia mota aukeratu
+register	other_license	"Beste bat" aukeratu baduzu, idatzi lizentziaren deskribapena zehazki. Ez da onartzen beste lizentzia bat erabiltzea. Orain zure lizentzia kode irekiaren definizioarekin bateragarria den aztertuko dugu. Beraz, zure proiektua onartzeko denbora gehiago itxaron beharko duzu.
+register	project_description	<h3>4. Proiektuaren deskribapen publikoa</h3><p>Laburpen hau proiektuen orrian, bilaketen erantzunetan, eta abar azalduko da. Deskribapen honek ez luke izan behar 2º urratsean egiten den deskribapen ulergarri eta formala bezelakoa. Beraz, erabili nahi dituzun hitz gako eta zehatzak. Gehienez 255 karakterekoa izango da.
+register	project_full_name	<h3>1. Proiektuaren izen osoa</h3><p>Zure proiektuaren izan zehazten hasi. "Izen osoa" esanguratsua izan behar du eta ez ditu murrizketarik (40 karakterekoa izan behar duela ezik).</p>Izen osoa:<br/>
+register	project_information	Proiektuaren informazioa
+register	project_license	<h3>3. Lizentzia</h3> <p><strong><em>Zure proiektua webgunea bezela erabili nahi baduzu, mesedez, aukeratu "Webgunea bakarrik" beherako zerrendan.</em></strong><p>$1 kode irekiko proiektuen garapenerako sustatu da. Gauzak errazteko hona hemen kode irekiko adibide batzuk <a href="http://www.opensource.org">Open Source Initiative</a> zure lizentzia aukeratzeko. <p>Hala ere, jakinaren gainean gaude badaudela beste lizentzia batzuk agian hobeto egokitzen direnak zure beharretara. OSI Certified ez den beste lizentzia bat aukeratuz gero mesedez erabaki horren arrazoiak eman iezazkiguzu. <p> Lizentziaren hautateka erabaki garrantzitsu bat da. Mesedez har ezazu era askotako lizentzien baldintzak irakurtzeko beta erabakia hartu baino lehen. <p> Beranduago lizentzia aldatu dezakezu, betiere legeak onartzen badizu. Zure bertsio orriak aldaketa horiek adierazi behar ditu argi eta garbi. Zure sailkapen mapa orria ongi eguneratua egon behar du. <em>Mesedez gogoratu lizentzien aldaketak ez direla atzeraeraginezkoak (adibidez, ez aldatu jadanik OpenSource lizentziapean dauden bertsioak).</em> <p>$1 ez da zure lizentziarekin zerikusia duten lege desadostasunaz arduratzen.<p><strong>Lizentziak</strong>
+register	project_submitted	Zure proiektua $1 administrariei bidali zaie. 72 ordu igaro ostean oharra jasoko dezu erabakiaren eta argibideen inguruan.</p><p>Eskerrak $1 aukeratzeagatik
+register	project_unix_name	<h3>5. Proiektuaren Unix izena</h3><p>Proiektuaren izen osoaz gainera, zure proiektuko "Unix" izen laburra ere aukeratu behar duzu.</p><p> "Unix izenak" murrizketa zorrotzak ditu webgunearen toki ugaritan erabiltzen bait da. Hauek dira:<ul><li>Ezin du beste Unix izen baten berdina izan.<li>Luzeraz 3 eta 15 karaktere artean egon behar du.<li>Letrak minuskulaz egon behar dute.<li>Bakarrik karaktereak, zenbakiak eta marratxoak eduki ditzake.<li>Unix sistemak onartutako izena izan behar du.<li>Ezin du erreserbatua dagoen dominio batekin bat etorri.<li>Ezin izango da inoiz aldatu proiektu horretarako</ul><p>Unix izena garrantzitsua da arlo desberdinetan erabiltzen delako, besteak beste:<ul><li>Gune bat <tt>Unix izenarekin.$1</tt><li>CVS errepositorio baten sustraia<tt>/cvsroot/unix izena</tt> at <tt>cvs.unix izena.$1</tt><li>Shell kontu baten atzipena hala nola <tt>unix izena.$1</tt><li>Estge guneko bilaketa elementuak</ul><p>Unix izena:<br/>
+register	purpose_and_summarization	<h3>2. Proiektuaren deskribapen publikoa</h3><p><strong></strong><p><strong> Mesedez, zure proiektuaren deskribapen zehatza idatzi eta zein $1 baliabide erabili nahi dituzun. Deskribapen hau erabakiorra da zure proiektuari ostatu emateko $1 -ean, eta ondoren eskatutako zerbitzuak jaso ahal izateko. Deskribapen hau ez da deskripzio publikoa bezela erabiliko. Aholkatzen da inglesez idaztea.</strong>
+register	registration_complete	Erregistro osoa
+register	title	Proiektu berri baten erregistroa
+register	unix_group_name_already_taken	Unix izen hau hartua dago
+register_complete	section	Proiektu berri baten erregistroa
+register_complete	title	Erregistroa egina
+register_projectinfo	section	Proiektu berri baten erregistroa
+register_projectinfo	title	Proiektuaren informazioa
+register_requirements	section	Proiektu berri baten erregistroa
+register_requirements	title	Zerbitzuak eta baldintzak
+register_tos	section	Proiektu berri baten erregistroa
+register_tos	title	Zerbitzu kontratuaren zehaztapenak
+scm_index	anoncvs	<P><B>CVS-z atzipen anonimoa</B> <P>Proiektu honen CVS errepositorioa lortzeko (<I>check out</I>) CVS zerbitzari anonimo baten bitartez egiten da (pserver) hurrengo argibideak jarraitzen. Lortu nahi duzun modulua <I>modulename</I> bezela zehaztua egon behar du. <I>anonymous</I> pasahitzarengatik galdetzen dizunean Enter tekla sakatu.
+scm_index	anoncvsup	Moduluaren direktorioko eguneratzeak ez dute -d parametroa behar.
+scm_index	browseit	CVS errepositoriotik nabigatu
+scm_index	browsetree	<HR><B>CVS zuhaitzetik nabigatu</B> <P>CVS zuhatzetik nabigatuz proiektu honen kodearen egoera ikusi ahal dezakezu. Fitxero bakoitzaren historia osoa ikusi beharko zenuke repositorioan.
+scm_index	cvs_repository	CVS errepositorioa
+scm_index	devcvs	<P><B>CVS-ra atzipena lankideei SSH bidez</B> <P>Sistema hau erabiliaz bakarrik atzi dezakete proiektu baten lankideek CVS zuhaitzera. Zure bezero makinan SSH1 instalatua izan behar duzu. Ordezkatzen da <I>modulename</I> y <I>developername</I> balio egokiekin. Gune honen pasahitza sartu eskatzen zaizunean.
+scm_index	developer_commits_adds	Garatzailea (30 egun/Commits) (30 egun/Adds)
+scm_index	developername	Lankidea
+scm_index	error_only_projects_can_use_cvs	Akatsa, proiektuek bakarrik erabili dezakete CVS-a
+scm_index	error_this_project_has_turned_off	Akatsa, proiektu honek desaktibatua du CVS-a
+scm_index	history	Errepositorioaren historia
+scm_index	modulename	Modulu izena
+scm_index	nohistory	Proiektu honek ez du CVS historia
+scm_index	section	Proiektua: $1
+scm_index	title	CVS
+search	artifact_author	Zeinek bidalia
+search	artifact_date	Data
+search	artifact_id	#
+search	artifact_summary	Akats Laburpena
+search	error_criteria_not_specified	Sartu Zure Bilaketarako Hitzak Goran
+search	error_invalid_search	Akatsa - Bilaketa ez du balio
+search	error_search_minlength	Bilaketak gutxienez hiru karaktere behar ditu
+search	forum_author	Egilea
+search	forum_date	Data
+search	forum_thread	Haria
+search	group_description	Deskribapena
+search	group_name	Talde Izena
+search	next_results	Hurrengo Emaitzak
+search	no_matches_found	Ez da ezer aurkitu <em>$1</em> -entzat
+search	people_real_name	Benetazko Izena
+search	people_user_name	Erabiltzaile Izena
+search	previous_results	Aurreko Emaitzak
+search	project_search	Proiektu bilaketa
+search	search_results	Bilaketa emaitzak <em>$1</em> renttzat
+search	skill_from	Zeinek
+search	skill_keywords	Gako hitzak
+search	skill_name	Izena
+search	skill_title	Izenburua
+search	skill_to	Zeini
+search	skill_type	Mota
+search	title	Bilatu
+searchbox	forum	Foro hau
+searchbox	people	Pertsonak
+searchbox	search	Bilatu
+searchbox	skill	Trebezia
+searchbox	softwaregroup	Software/Taldeak
+searchbox	task	Ataza
+sendmessage	about_blurb	Posta spam-a murrizteko formulario hau erabiltzen dugu postak bidaltzeko.<p>Erabat bete zehaztasunez edo hartzaileak ez du erantzuteko aukerarik izango.</p><p><font color="red"><b>Laguntza eskatzeko idazten ari bazara:</b> ¿Proiektuaren dokumentazioa irakurri al dezu? ¿Zure erabiltzaile izena idatzi al duzu? Proiektu bati buruz idazten ari bazara, zure <b> proiektu identifikadorea<b> eta <b>proiektuaren izena</b> sartu.</font></p>
+sendmessage	contact	Kontaktua
+sendmessage	email	Zure posta elektronikoa
+sendmessage	email_only_to	Bakarrik helbide hauetara bidali dezakezu
+sendmessage	error_user_not_exist	Akatsa - Erabiltzaile hau ez dago
+sendmessage	error_variables	Akatsa - ez dira aldagai batzuk eman
+sendmessage	message	Mezua
+sendmessage	message_sent	Mezua ongi bidali da
+sendmessage	name	Zure izena
+sendmessage	send	Mezua bidali
+sendmessage	subject	Gaia
+sendmessage	title	Mezu bat bidali $1 -i
+session	cannotinit	Akatsa - Ezin da sesio hasi
+session	deleted	Cuenta Ezabatua
+session	invalidpasswd	Erabiltzaile izena edo pasahitza baliogabea
+session	missingpasswd	Erabiltzaile izena edo pasahitza ahaztua
+session	notactive	Jarduerarik gabeko kontua
+session	pending	Cuenta Zintzilik
+session	suspended	Kontua geldiarazia
+snippet_addversion	browse_the_library	<strong>Liburutegia gainetik irakurri</strong> gehitu nahi duzun adabakia bilatzeko eta gero gehitu ezazu goiko lehio berrian daogen lortura erabiltzen.
+snippet_addversion	changes	Aldaketak:
+snippet_addversion	error_doing_snippet_package_version_insert	¡Akatsa adabakiaren bertsioa sartzean!
+snippet_addversion	error_doing_snippet_version_insert	¡Akatsa adabakiaren bertsioa sartzean!
+snippet_addversion	error_go_back_and_fill_in_all	Akatsa - Atzera itzuli eta informazio guztia bete
+snippet_addversion	error_snippet_doesnt_exist	Akasta - Adabaki hau ez da aurkitzen
+snippet_addversion	error_snippet_package_doesnt_exist	Akatsa - adabakiaren paketea ez da aurkitzen
+snippet_addversion	error_url_or_form	Akatsa - ¿URL-a edo formularioa manipulatu duzu?
+snippet_addversion	if_new_window_opened	Lehio berri bat irekitzen bada, erabili ezazu adabaki berriak gehitzeko bere paketeari. Lehio berri bat ez bada irekitzen, lotura hau erabili ezazu zure paketeari gehitzeko orri hau utzi baino lehen.
+snippet_addversion	if_you_have_modified	Adabaki baten bertsioa dexente aldatu eta besteekin partekatu nahi baduzu, mesedez egin ezazu.
+snippet_addversion	if_you_have_modified_a_version	Adabaki baten bertsioa dexente aldatu eta besteekin partekatu nahi baduzu, mesedez egin ezazu.
+snippet_addversion	important	¡Garrantzitsua!
+snippet_addversion	link_add_snippets_to_package	Adabakiak gehitu bere paketeari
+snippet_addversion	make_sure_all_info_is_complete	Ziurta zaitez informazio guztia jarri duzula eta zehatza dela.
+snippet_addversion	paste_the_code_here	Kodea hemen itsatsi:
+snippet_addversion	snippet_package_version_added_successfully	Adabaki paketearen bertsioa ongi gehitu da.
+snippet_addversion	snippet_version_added_successfully	Adabakiaren bertsioa ongi gehitua izan da.
+snippet_addversion	submit	Bidali
+snippet_addversion	title	Bertsio berri bat bidali
+snippet_addversion	title_add_snippet_to_package	Paketeari adabakiak gehitu
+snippet_addversion	title_submit_a_new_snippet_package	Adabakien pakete berri bat bidali
+snippet_addversion	title_submit_a_new_snippet_version	Submit A New Snippet Version
+snippet_addversion	version	Bertsioa:
+snippet_browse	creator	Sortzailea
+snippet_browse	error_bad_url	Akatsa - ¿URL-a ez da zuzena?
+snippet_browse	no_snippets_found	Ez da adabakirik aurkitu
+snippet_browse	packages_of_snippets	Adabakien paketeak
+snippet_browse	snippet_by_category	Adabakiak kategorien arabera: $1
+snippet_browse	snippet_id	Adabakiaren ID-a
+snippet_browse	snippet_title	Izenburua
+snippet_browse	snippets	Adabakiak
+snippet_browse	snippets_by_language	Adabakiak hizkuntzaren arabera: $1
+snippet_browse	title	Adabakiak gainetik irakurri
+snippet_caching	browse_by_category	Kategorien arabera nabigatu
+snippet_caching	browse_by_language	Hizkuntzaren arabera nabigatu
+snippet_caching	intro	<p>Artxibo honen eginbeharra zure adabaki kodeak, script-ak eta beste funtzioak Software Askearen komunitatearekin elkarbanatzeko bitartekoak jartzea da.</p><p>"Adabaki berri" bat sortu dezakezu, eta gero adabakiaren bertsio gehigarriak argitaratu modu errez eta azkarrean.</p><p>Behin adabaki bat argitaratuta, adabakien "paketeak" argitaratzeko baimena izango duzu. Pakete honek beste adabakien bertsio zehatzak eta anitzak eduki ditzake.</p><p>&nbsp;</p><h3>Adabakietatik nabigatu</h3> <p>Adabakien liburutegitik nabiga dezakezu modu azkarrean:</p>
+snippet_delete	error_mangled_url	Error, Error - ¿URL-a manipulatu duzu?
+snippet_delete	error_only_creator_of_package_version_can_delete	Akatsa - Pakete baten bertsioa sortzaileak bakarrik ezabatu ditzake
+snippet_delete	error_only_the_creator	Akatsa - Pakete baten bertsio argitaratzaileak bakarrik ezabatu ditzake bere adabakiak.
+snippet_delete	item_removed_from	Paketetik ezabatutako elementua
+snippet_delete	package_removed	Paketea ezabatua
+snippet_delete	snippet_removed	Adabakia ezabatua
+snippet_delete	that_snippet_doesnt_exist	Akatsa - Adabaki hau ez dago paketean.
+snippet_delete	title	Adabaki bat ezabatu
+snippet_detail	author	Egilea
+snippet_detail	changes_since_last_version	Azken bertsiotik egon diren aldaketak:
+snippet_detail	date_posted	Argitalpen data
+snippet_detail	delete	Ezabatu
+snippet_detail	download_a_raw_text	Kode honen testu bertsioa deskargatzeko hemen sakatu &quot;<strong>Bertsioa deskargatu</strong>&quot;
+snippet_detail	download_version	Bertsioa deskargatu
+snippet_detail	edit_del	Argitaratu/Ezabatu
+snippet_detail	error_no_version_found	Akatsa - Ez dira bertsiorik aurkitu
+snippet_detail	error_was_the_url_mangled	Akatsa - ¿URL-a manipulatu duzu?
+snippet_detail	latest_package_version	Paketearen azken bertsioa:
+snippet_detail	latest_snippet_version	Bertsioaren azken adabakia:
+snippet_detail	package_version	Paketearen bertsioak:
+snippet_detail	snippet_id	Adabakiaren ID-a
+snippet_detail	submit_a_new_snippet	Bertsio berri bat bidali
+snippet_detail	submit_a_new_version	Bertsio berri bat bidali
+snippet_detail	title	Adabakiaren zehaztasunak ikusi
+snippet_detail	version_of_this_package	Pakete honen bertsioak:
+snippet_detail	version_of_this_snippet	Adabakiaren bertsioak:
+snippet_detail	you_can_submit_a_new	Adabaki baten bertsioa dexente aldatu eta besteekin partekatu nahi baduzu, mesedez egin ezazu.
+snippet_detail	you_can_submit_a_new_version_of_package	Pakete honen bertsio berri bat bidali dezakezu, aldaketak egin badituzu eta besteekin partekatzeko egokia dela baderitzozu.
+snippet_download	error	Akatsa
+snippet_download	nothing_in_here	Hemen ez dago ezer
+snippet_index	title	Adabakien liburutegia
+snippet_package	add_snippet_to	Paketeari adabakiak gehitu
+snippet_package	add_snippet_to_package	Paketeari adabakiak gehitu
+snippet_package	browse_the_libary	<strong>Liburutegitik nabigatu</strong> gehitu nahi duzun adabakia aurkitzeko, eta ondoren goiko lotura erabiliaz gehitu ezazu.
+snippet_package	category	Kategoria
+snippet_package	description	Deskribapena:
+snippet_package	error_doing_snippet_package_insert	¡Akatsa adabakien paketea gehitzean!
+snippet_package	error_doing_snippet_package_version	¡Akatsa adabaki paketearen bertsioa gehitzean!
+snippet_package	error_go_back_and_fill	Akatsa - Atzera itzuli eta informazio guztia bete
+snippet_package	if_a_new_window	Lehio berri bat irekitzen bada, erabili ezazu paketeari adabakiak gehitzeko. Lehi berria ez bada irekitzen, ondorengo lotura hau erabili ezazu adabaki bat gehitzeko bere paketeari orri hau utzi baino lehen .
+snippet_package	important	¡Garrantzitsua!
+snippet_package	language	Hizkuntza
+snippet_package	make_sure_all_info	Ziurta zaitez informazio guztia dagoela eta zehatza dela
+snippet_package	snippet_package_added_successfull	Adabaki paketea ongi gehitua
+snippet_package	snippet_title	Izenburua:
+snippet_package	snippet_version_added_successfull	Adabaki paketearen bertsioa ongi sartua izan da.
+snippet_package	submit	Bidali
+snippet_package	suggest_a_category	Kategoria bat iradoki
+snippet_package	suggest_a_language	Hizkuntza bat iradoki
+snippet_package	title	Adabaki pakete bat sortu
+snippet_package	title_new_snippet_package	Adabakien pakete berri bat argitaratu
+snippet_package	version	Bertsioa
+snippet_package	you_can_group	<p>Interfaz hau erabiliaz pakete batetan dauden adabakiak elkartu ditzakezu. Zure paketea sortu baino lehen, ziurtatu adabaki guztiak toki batetan dauzkazula eta adabaki identifikatiboaren zerrenda egina daukazula.</p><p><ol><li>Sortu pakete bat formulario hau erabiltzen.</li><li><strong>Orduan/strong>"Adabakiak gehitu paketeari" botoia erabili zure paketeari fitxeroak gehitzeko.</li></ol></p><p><span style="color:red"><strong>Oharra:</strong></span> Paketearen bertsio berri bat bidali dezakezu liburutegitik nabigatzen eta paketearen lotura sakatzen. Orri hau erabili pakete berri bat bidali nahi duzunean bakarrik.
+snippet_submit	category	Kategoria
+snippet_submit	description	Deskribapena
+snippet_submit	error_doing_snippet_insert	¡Akatsa adabakiaren sartzean!
+snippet_submit	error_doing_snippet_version_insert	¡Akatsa adabakiaren bertsioa sartzean!
+snippet_submit	error_go_back_and_fill	Akatsa - Atzera itzuli eta informazio guztia bete
+snippet_submit	language	Hizkuntza
+snippet_submit	license	Lizentzia
+snippet_submit	make_sure_all_info	Ziurtatu informazio guztia dagoela eta zuzena dela
+snippet_submit	paste_the_code_here	Kodea hemen itsatsi
+snippet_submit	snippet_added_successfull	Adabakia ongi gehitua
+snippet_submit	snippet_title	Izenburua
+snippet_submit	snippet_version_added_successfully	Adabakiaren bertsioa ongi gehitua izan da
+snippet_submit	submit	Bidali
+snippet_submit	submit_a_new_snippet	Adabaki berri bat bidali
+snippet_submit	suggest_a_category	Kategoria bat iradoki
+snippet_submit	suggest_a_language	Hizkuntza bat iradoki
+snippet_submit	type	Script mota
+snippet_submit	version	Bertsioa
+snippet_submit	you_can_post	Kode adabaki bat argitaratu eta mundu osoko pertsonekin parteka dezakezu. Egin behar duzun guztia informazio hau gehitzea da. <strong>Deskribapen on bat egin ezazu/strong> eta <strong>zure kodeari buruz azalpenak eman</strong> besteek irakurri eta ulertu dezaten.</p><p><span style="color:red"><strong>Oharra:</strong></span> Adabaki baten bertsio berri bat argitaratu dezakezu liburutegitik nabigatzen. Orri hau erabili erabat berria den funtzio edo script bat bidali nahi baduzu bakarrik.
+snippet_utils	auctions	Enkanteak
+snippet_utils	author	Egilea
+snippet_utils	bbs_systems	BBS sistemak
+snippet_utils	browse	Nabigatu
+snippet_utils	calendars	Egutegiak
+snippet_utils	category	Kategoria:
+snippet_utils	choose_one	Bat aukeratu
+snippet_utils	class	Klasea
+snippet_utils	create_a_package	Pakete bat sortu
+snippet_utils	database_manipulation	Datu basearen manipulazioa
+snippet_utils	description	Deskribapena:
+snippet_utils	download_version	Bertsioa deskargatu
+snippet_utils	file_management	Fitxeroen administrazioa
+snippet_utils	full_script	Script osoa
+snippet_utils	function	Funtzioak
+snippet_utils	games	Jokoak
+snippet_utils	html_manipulation	HTML manipulazioa
+snippet_utils	language	Hizkuntza:
+snippet_utils	license	Lizentzia:
+snippet_utils	math_functions	Funtzio matematikoak
+snippet_utils	no_snippets_are_in_this_package	Oraindik ez dago adabakirik pakete honetan
+snippet_utils	other	Besteak
+snippet_utils	other_language	Beste hizkuntza
+snippet_utils	readme	Irakur nazazu
+snippet_utils	sample_code	Kode hau adibide bezela (HOWTO/Nola)
+snippet_utils	searching	Bilatzen
+snippet_utils	shopping_carts	Erosketa txartelak
+snippet_utils	snippet_id	Adabakiaren ID-a
+snippet_utils	snippet_in_this_package	Adabakiak pakete honetan:
+snippet_utils	snippet_title	Izenburua
+snippet_utils	submit_a_new_snippet	Adabaki berri bat bidali
+snippet_utils	type	Mota:
+snippet_utils	unix_admin	Unix administrazioa
+snippet_utils	voting	Bozketa
+snippet_utils	website_only	Web bakarrik
+softwaremap	title	Mapa
+source	file_not_found	Fitxeroa ez da aurkitu
+source	file_not_found_text	Ez da fitxeroa aurkitzen erakusteko
+source	invalid_argument	Fitxero baliogabea
+source	invalid_argument_text	Fitxeroa baliogabea da
+source	missing_file	Buscando Fitxeroa
+source	missing_file_text	Fitxero bat zehaztu behar duzu orri honetarako
+source	show_source	Iturburua erakutsi
+source	source_of	$1 -eko iturburua
+staff	about_blurb	<P><h2>El personal de GForge</h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php\?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>\(pat\)</td><td>Patrick McGovern \(pat\) - Pat "Suena bin" McGovern <A HREF="http://sourceforge.net/">GForge.net</A>-en zuzendaria da. Zoriontsu gaude Pat gure artean dagoelako, berak <A HREF="http://www.valinux.com/">valinux.com</A> mantentzen zuenez badu eskarmentua webgune garrantzitsuak kudeatzen.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>\(dlb\)</td><td>Dan GForge productuaren arduraduna da. Ez dakigu zehazki ze lan egiten duen, baina asko gustatzen zaizkio denbora diagramak eta "handles business development issues".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>\(bigdisk\)</td><td>Tim GForge proiektuaren lider teknikoa da, Iowakoa. Ez Iowa. Ez Idaho. Ezta Ohio ere. Iowa. Lanean ez dagoenean nahiko errez ikusiko dezu, Iowa-ko BMW Z3 bakarra dauka.<P>Tim <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A>-en sortzailea da eta <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>-ena ere.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>\(pfalcon\)</td><td>Paul garatzaile bat da, Ukranian bizi da. Bai Chernobil-en. \*Deklaratzen du\* ez duela ekintza horrekin zerikusirik. Bere burua deskribatzen du "geek/lan zale baieztatua".</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>\(zelphyr\)</td><td>Darrell GForge garapen taldeko lankidea da. Beste enpresa batentzako egiten zuen lana, baina beraiek Software librea lurperatu nahi zuten eta web aplikazioak ASP-ra aldatu nahi zituzten. Orain guretzako egiten du lana.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvendo</a></td><td>\(precision\)</td><td>Uriah garatzailea eta sistemen administraria da eta Minesotan izotz zuriko eskualdean bizi da. Errepide izoztua garbitzen ez badago edo autoari izotza kentzen gela ilun batean aurkituko duzu ordenagailu baten aurrean.</td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>\(moorman\)</td><td>Jacob \(aka roguemtl\) GForge zerbitzuaren kalitateaz arduratzen da. Gaur egun bigarren mailako laguntza eskaera gehientsuenak, guneen egoera orriak mantentzen ditu eta laguntza eskaera erregistratzen duenak zerbitzu egoki eta on bat duela ziurtatzen du. Estatu Batuako ipar-ekialdetik egiten du lana.</td></tr><TR><TD COLSPAN="2"><B>Sortzaileak:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php\?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=precision_maillink_users.sourceforge.net">Uriah Bienvenido</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Kanpo ekarpen esanguratsuak:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php\?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>\(wallace\)</td><td>Wallace-k GForgeko egokitzapen garrantzitsuetan eta nukleoaren kode basean hobekuntza ugari egin ditu. Beraien ekarpena asko eskertzen dugu. Software honetaz baliatzen diren erabiltzaileei ere eskerrak eman beharrean gaude.</td></tr></table>
+stats	overview_stats	Estatistikak
+stats	project_stats	Proiektuen estatistikak
+stats	site_graphs	Gunearen grafikoak
+stats	title	$1 -en estatistikak
+stats_graph	joverview_stats	Estatistikak
+stats_graph	project_stats	Proiektuen estatistikak
+stats_graph	site_graphs	Gunearen grafikoak
+stats_graph	sitewide_statistics_graphs	Gunearen estatistika grafikoak
+stats_i18n	language	Hizkuntza
+stats_i18n	language_distribution	Distribuzioa hizkuntzaren araberas
+stats_i18n	language_text	Zerrenda honetan erabiltzaile guztien artean aukeratutako lehentasunak ageri dira ("Erabiltzaileen lehentasunak" atalekoak); cookie bidez aukeratutako hizkuntzak edo nabigatzailearen lehentasunak ez daude barne.
+stats_i18n	title	$1 -en estatistikak I18n arabera
+stats_i18n	total_non_english	Ingelesa ez den erabatekoa
+stats_i18n	users	Erabiltzaileak
+stats_index	other_statistics	Beste estatistikak:<ul><li><a href="lastlogins.php">Azken atzipenak</a></li><li><a href="i18n.php">I18N hizkuntzen estatistikak</a></li></ul>
+stats_index	overview_stats	Estatistikak
+stats_index	project_stats	Proiektuen estatistikak
+stats_index	site_graphs	Gunearen grafikoak
+stats_index	sitewide_aggregate_statistics	Gunearen pilatutako estatistikak
+stats_lastlogins	date	Data
+stats_lastlogins	last_logins	Azken atzipenak
+stats_lastlogins	most_recent_open	Azken sesio irekiak
+stats_lastlogins	no_records	Ez daude erregistroak","Akatsa datu basean: "
+stats_lastlogins	source_ip	Jatorrizko IP-a
+stats_lastlogins	username	Erabiltzaile izena
+stats_projects	project_comparision	Proiektuaren estatistika konparatuak
+stats_site_utils	adds	Adds
+stats_site_utils	all	Denak
+stats_site_utils	all_projects	Proiektu guztiak
+stats_site_utils	all_trkr	Erregistro guztiak
+stats_site_utils	bugs	Bug-ak
+stats_site_utils	cls	Cls
+stats_site_utils	comma_seperated_group_id	<strong>komaz bananduak</strong>talde(-ak)/id-a
+stats_site_utils	comms	Comm's
+stats_site_utils	cos	CO's
+stats_site_utils	current_statistic_all_time	Hasieratik pilatutako estatistikak
+stats_site_utils	cvs	CVS
+stats_site_utils	day	Eguna
+stats_site_utils	developers	Garatzaileak
+stats_site_utils	downloads	Deskargak
+stats_site_utils	generate_report	Informea sortu
+stats_site_utils	group_name	Taldearen izena
+stats_site_utils	in_trove_category	Kategoria honetako proiektuak:
+stats_site_utils	last_30	azken_30-k
+stats_site_utils	month	Hilabetea
+stats_site_utils	no_data	Data gabe
+stats_site_utils	no_valid_data	Kontsultak datu baliogabeak itzultzen ditu.
+stats_site_utils	opn	Opn
+stats_site_utils	or_special_project_list	Edo sartu proiektu berezien zerrenda:
+stats_site_utils	page_views	Ikusitako orriak
+stats_site_utils	patches	Adabakiak
+stats_site_utils	projects	Proiektuak
+stats_site_utils	report	Txostena:
+stats_site_utils	returned_no_category	Kategoria izenik gabe
+stats_site_utils	site	Gunea
+stats_site_utils	site_views	Gunea ikusteko erak
+stats_site_utils	special_project_list	Proiektuen zerrenda berezia
+stats_site_utils	statistics_for_the_past_days	$1 azken egunetarako estatistikak.
+stats_site_utils	statistics_for_the_past_months	$1 azken hilabeterako estatistikak.
+stats_site_utils	subdomain	Azpidomeinua
+stats_site_utils	subdomain_views	Azpidomeinuaren ikusteko erak
+stats_site_utils	support	Sostengu
+stats_site_utils	tasks	Atazak
+stats_site_utils	total	Orotara
+stats_site_utils	view_by	Nola ikusi:
+stats_user_graph	date	Data
+stats_user_graph	new_additions_by_day	Gehitze berriak, egunaren arabera
+stats_user_graph	new_user_projects	Erabiltzaile berria (Gorriz), Proiektu berriak (Urdinez)
+stats_user_graph	user_projects	Erabiltzaileak (Gorriz) / Proiektuak (Urdinez)
+stats_view_graph	date	Data
+stats_view_graph	page_views	Ikusitako orriak
+stats_view_graph	total_views	Ikusitako orriak orotara (Gorriz) ($1 eguna)
+stats_view_graph	views	Ikusteko erak (Gorriz)
+survey	for_some_reason	Arrazoi batengatik, taldearen ID-a edo inkestaren ID-a ez da zehaztu orri honetarako
+survey	high	Altua
+survey	low	Baxua
+survey	permission_denied	Baimena ukatua
+survey	survey_not_found	Inkesta ez da ageri
+survey	survey_privacy	Inkestaren pribatutasuna
+survey	title	$1 -en inkestak
+survey_add_question	add_this_question	Galdera hau gehitu.
+survey_add_question	error_insert_question	Akatsa galdera sartzean
+survey_add_question	question	Galdera
+survey_add_question	question_added	Gehitutako galdera
+survey_add_question	question_type	Galdera mota
+survey_add_question	show_existing_questions	Erakutsi dauden galderak.
+survey_add_question	title	Galdera bat gehitu
+survey_add_survey	add_this_survey	Inkesta hau gehitu
+survey_add_survey	error_in_insert	Akatsa inkesta sartzean
+survey_add_survey	existing_surveys	Orain arte egin diren inkestak
+survey_add_survey	is_active	¿Aktibatua al dago?
+survey_add_survey	list_questions_numbers	Galderen zenbakiak nahi dituzun ordenan eta komaz bananduak. <strong>Zure galderen zerrenda kontsulta ezazu</strong> galderen zenbakiak ikusteko. <strong>Ez</strong> idatzi tarterik edo ez amaitu zerrenda koma batez. <br />Adibidez: 1,2,3,4,5,6,7
+survey_add_survey	name_of_survey	Inkestaren izena:
+survey_add_survey	no	Ez
+survey_add_survey	show_existing_question	Erakutsi dauden galderak
+survey_add_survey	survey_inserted	Inkesta ezarria
+survey_add_survey	title	Inkesta bat gehitu
+survey_add_survey	title_is_required	Inkestaren izenburua beharrezkoa da
+survey_add_survey	yes	Bai
+#TO_TRANSLATE#survey_admin	delete	Ezabatu
+#TO_TRANSLATE#survey_admin	edit	Aldatu
+survey_admin	section	Inkesten tresna
+survey_admin	title	Administrazioa
+survey_admin_add_question	section	Inkesta tresnaren administrazioa
+survey_admin_add_question	title	Galdera sortu
+survey_admin_add_survey	section	Inkesta tresnaren administrazioa
+survey_admin_add_survey	title	Inkesta sortu
+survey_admin_edit_question	section	Inkesta tresnaren administrazioa
+survey_admin_edit_question	title	Inkesta baten galdera argitaratu
+survey_admin_edit_survey	section	Inkesta tresnaren administrazioa
+survey_admin_edit_survey	title	Inkesta bat argitaratu
+survey_admin_index	add_question	Galderak gehitu
+survey_admin_index	add_survey	Inkestak gehitu
+survey_admin_index	edir_existing_survey	Argitaratu dauden inkestak
+survey_admin_index	edit_existing_question	Argitaratu dauden galderak
+survey_admin_index	its_simple_to_create	<p>Inkesta bat sortzea erreza da.<ol><li>Galderak eta azalpenak sortu gorako formulario erabiltzen.</li><li>Inkesta bat sortu, ordenean galderak zerrendatzen (aukera itzazu <strong>zure</strong> galdera zerrendatik).</li><li>Inkestarekin bat egin ondorengo formatua erabiliaz: $1 non XX inkestaren zenbakia den
+survey_admin_index	permission_denied	Baimena ukatu da
+survey_admin_index	show_results	Inkestaren erantzunak erakutsi
+survey_admin_index	title	Inkesten administrazioa
+survey_admin_index	you_can_now_activate	Orain inkesta bat aktibatu edo desaktibatu dezakezu $1 orrian. $2 editatu dauden inkestak
+survey_admin_show_questions	section	Inkesta tresnaren administrazioa
+survey_admin_show_questions	title	Inkestaren galderak argitaratu
+survey_admin_show_results	section	Inkesta tresnaren administrazioa
+survey_admin_show_results	title	Inkesta baten erantzunak ikusi
+survey_admin_show_results_aggregate	section	Inkesta tresnaren administrazioa
+survey_admin_show_results_aggregate	title	Inkesta baten erantzunak ikusi
+survey_admin_show_results_comments	section	Inkesta tresnaren administrazioa
+survey_admin_show_results_comments	title	Inkesta baten azalpenak ikusi
+survey_admin_show_results_individual	section	Inkesta tresnaren administrazioa
+survey_admin_show_results_individual	title	Inkesta baten erantzunak banaka ikusi
+survey_admin_utils	found	$1 bilatutako inkestak
+survey_admin_utils	group_id	Taldearen ID-a
+survey_admin_utils	survey_id	Inkestaren ID-a
+survey_admin_utils	survey_questions	Inkestaren galderak
+survey_admin_utils	survey_title	Inkestaren izenburua
+survey_edit	addable_question	Galdera Gehigarriak
+survey_edit	change_after_already_response	Galdera bat aldatzen baduzu erantzunak jaso ostean, zure erantzunak okerrak izan litezke
+survey_edit	delete_failed	EZABATZEAN AKATSA
+survey_edit	delete_successful	ONGI EZABATUA
+survey_edit	existing_question	Galderak inkesta honetan
+survey_edit	existing_surveys	Dauden inkestak
+survey_edit	is_active	Aktibatua dago
+survey_edit	list_question_numbers	Galderen zenbakiak nahi dezun ordenean sartu eta komaz banandurik. <strong>Zure galderen zerrenda kontsulta ezazu </strong> galderen zenbakiak ikusteko. <strong>Ez</strong> idatzi tarterik edo ez amaitu zerrenda koma batez. <br />Adibidez: 1,2,3,4,5,6,7
+survey_edit	missing_date	Eguneratzeak akatsa izan du: datuak falta dira
+survey_edit	name_off_survey	Inkestaren izena
+survey_edit	no	Ez
+survey_edit	permission_denied	Baimena ukatu da
+survey_edit	question	Galderak
+survey_edit	show_existing_questions	Erakutsi dauden galderak
+survey_edit	submit_changes	Aldaketak bidali
+survey_edit	survey_question_required	Eguneratzeak akatsa izan du: inkestaren galderak beharrezkoak dira
+survey_edit	survey_title_required	Eguneratzeak akatsa izan du: inkestaren izenburua beharrezkoa da
+survey_edit	title	Aldatu inkesta bat
+survey_edit	update_failed	Eguneratzeak akatsa izan du
+survey_edit	update_successful	Ongi eguneratu da
+survey_edit	warning_survey_after_response	¡Kontuz! Ez da ideia ona galdera bat aldatzea jadanik erantzunak jaso baditu
+survey_edit	yes	Bai
+survey_edit_question	editing_question	Galdera argitaratzen
+survey_edit_question	error_finding_question	Akatsa galdera bilatzean
+survey_edit_question	if_you_change_after	Galdera bat aldatzen baduzu erantzunak jaso ostean, zure erantzunak okerrak izan litezke
+survey_edit_question	permission_denied	Baimena ukatu da
+survey_edit_question	question	Galdera
+survey_edit_question	question_type	Galdera mota
+survey_edit_question	show_existing_question	Erakutsi dauden galderak
+survey_edit_question	submit_changes	Aldaketak bidali
+survey_edit_question	title	Galdera bat argitaratu
+survey_edit_question	update_failed	Akatsa eguneratzean
+survey_edit_question	update_successful	Ongi eguneratua
+survey_edit_question	warning_change_after_response	¡Kontuz! Ez da ideia ona galdera bat aldatzea jadanik erantzunak jaso baditu
+survey_error	error_no_valid_group_object	Baliodun Talde Objeturik Ez
+survey_error	error_no_valid_question_object	Baliodun Galdera Objeturik Ez
+survey_error	error_no_valid_survey_object	Baliodun Inkesta Objeturik Ez
+survey_error	min_question_length	Galdera motzegia da
+survey_error	no_question_found	Ez da inkesta galderarik topatu
+survey_error	no_survey_data_filled	Inkestako datuak ez daude beteak
+survey_error	no_survey_found		Ez da inkestarik topatu
+survey_error	no_survey_response_found		Inkesta erantzunik ez da topatu
+survey_error	permission_denied	Ez duzu baimenik orri hau erabiltzeko
+survey_index	for_some_reason	Arrazoi batengatik, taldearen ID-a edo inkestaren ID-a ez da zehaztu orri honetarako
+survey_index	survey_edit	Aldatu
+survey_index	survey_id	Inkestaren ID-a
+survey_index	survey_number_questions	Galdera kopurua
+survey_index	survey_number_votes	Botu kopurua
+survey_index	survey_questions	Galderak
+survey_index	survey_result	Emaitza
+survey_index	survey_result_graph	Emaitza grafikoarekin
+survey_index	survey_title	Inkestaren izenburua
+survey_index	survey_vote	Botua
+survey_index	this_group_has	Talde honek ez ditu aktibatutako inkestarik
+survey_index	title	Inkesta
+survey_privacy	survey_privacy	Inkestaren pribatutasuna
+survey_privacy	the_privacy_information	<p>Inkesta honetan jasotako informazioa ez inoiz da hirugarren bati salduko, ezta erabiliko ere erosteko eskakizunik egiteko.</p><p>Informazio hau jasotzearen helburua, inkesta egiten zaien lankideen profila egituratzea da. Profil honi esker bisitariak gune honetako proiektu baten kalitatea jakin dezake.</p><p>Inkestak erantzuten dituzten pertsonen identifikadorea ez du proiektuaren administrariak, ez jende arruntak ez eta hirugarre batzuk ikusten.</p><p>Informazio orokorki erabiltzen da, alegia ez da erabiltzaileen edo lankideen banakako informazioa erakusten.</p><p>Politika honetan aldaketik badago, etorkizunean jasoko diren datuei bakarrik eragingo die eta erabiltzaileak informazioa ez emateko eskubide osoa izango du
+survey_privacy	the_team	$1 -en lantaldea
+survey_privacy	title	Inkesta
+survey_rating_resp	click_to_resturn	Aurreko orrira itzultzeko egin klik hemen
+survey_rating_resp	error	Akatsa
+survey_rating_resp	error_in_insert	Akatsa sartzean
+survey_rating_resp	error_missing	¡Akatsa! Parametroak falta dira
+survey_rating_resp	if_you_vote_again	Berriro bozkatzen baduzu zure aurreko botoa ezabatuko da.
+survey_rating_resp	title	Bozketa
+survey_rating_resp	vote_reg	Erregistratutako bozka
+survey_rating_resp	vote_regsitered	Vote Erregistratua
+survey_rating_resp	you_must_be_logged_in	Bozkatzeko izenpetua egon behar duzu
+survey_resp	error	Akatsa
+survey_resp	error_some_reason	Akatsa - Arrazoi batengatik taldearen ID-a edo inkestaren ID-a ez da zehaztu orri honetarako
+survey_resp	regards	Goraintziak ; )
+survey_resp	thank_you	Eskerrak une bat eskeintzeagatik inkesta hau egiteko.
+survey_resp	the_crew	$1 -en lantaldea
+survey_resp	title	Inkesta osatua
+survey_resp	unfortunately_you_have_to_be	Zoritxarrez, sesio bat hasi behar duzu inkesta baten parte hartzeko.
+survey_resp	you_nedd_to_be_logged_in	Sesio bat hasiaz izenpetu behar duzu.
+survey_show_questions	found	$1 -en aurktitutako galderak
+survey_show_questions	note_use_these_questions_id	Oharra: inkesta berri bat sortu behar duzunean inkesta identifikadore hauek erabili
+survey_show_questions	permission_denied	Baimena ukatu da
+survey_show_questions	title	Preguntas de las Inkestak
+survey_show_questions	you_may_use_any_of_these	Zure inkestetan galdera hauek erabili ditzakezu
+survey_show_result_comment	found	Aurkitua
+survey_show_result_comment	permission_denied	Baimena ukatu da
+survey_show_result_comment	question	Galdera:
+survey_show_result_comment	title	Inkestetan pilatutako erantzunak
+survey_show_results	found	Aurkitua
+survey_show_results	permission_denied	Baimena ukatua da
+survey_show_results	title	Inkestaren erantzunak
+survey_show_results	view_aggregate_responses	Gehitutako erantzunak ikusi
+survey_show_results_aggregate	average	Bataz bestekoa
+survey_show_results_aggregate	comments	Iruzkinak
+survey_show_results_aggregate	error	Akatsa
+survey_show_results_aggregate	no	Ez
+survey_show_results_aggregate	no_votes	Boturik Ez
+survey_show_results_aggregate	permission_denied	Baimena ukatua da
+survey_show_results_aggregate	responses	Erantzunak
+survey_show_results_aggregate	title	Inkestetan pilatutako erantzunak
+survey_show_results_aggregate	view_comments	Azalpenak ikusi
+survey_show_results_aggregate	yes	Bai
+survey_show_results_aggregate	yes_no	Bai / Ez
+survey_show_results_csv	permission_denied	Baimena ukatu da
+survey_show_results_individual	permission_denied	Baimena ukatu da
+survey_show_results_individual	title	Erantzunak
+survey_show_results_individual	yes_no	Bai / Ez
+survey_survey	section	Inkesta tresna
+survey_survey	title	Inkestak erakutsi
+survey_survey_resp	section	Inkesten tresna
+survey_survey_resp	title	Inkestako erantzunaren prozedura
+survey_utils	add_edit_question	Gehitu/Aldatu Galderak
+survey_utils	add_edit_survey	Gehitu/Aldatu Inkesta
+survey_utils	add_question	Galdera gehitu
+survey_utils	add_survey	Inkesta gehitu
+survey_utils	admin	Administrazioa
+survey_utils	edit_questions	Galdera argitaratu
+survey_utils	edit_survey	Inkesta argitaratu
+survey_utils	error_this_group_has_turned_off	Akatsa, talde honek inkestak desaktibatu ditu
+survey_utils	show_results	Erantzunak erakutsi
+system	datefmt	Y-m-d H:i
+system	locale	es_ES
+system	strftimefmt	%H:%M %e %B %Y
+themes	section	Kontuaren lehentasunak
+themes	title	Gaia ikusi / aldatu
+top	NA	N/D
+top	about_blurb	$1 -en proiektuen erabilpenari buruz estatistika ugari jasotzen ditugu, eta ondorioz hemen erakusten ditugu proiektu nagusiak kategoria desberdinetan.
+top	active_all_time	Proiektu aktiboena
+top	active_weekly	Asteko proiektu aktiboena
+top	down	Jetsi $1
+top	downloads	Gehien deskargatutako proiektuak
+top	downloads_7_days	Gehien deskargatutako proiektuak (azken 7 egunak)
+top	forum_posts	Gehien erabiltzen diren foroak
+top	highest_ranked_users	Hobekien puntuatutako erabiltzaileak
+top	pageviews	Gehien ikusitako proiektuak - $1 logoko botoiaren neurketen arabera
+top	same	Berdina
+top	title	Izar proiektuak
+top	top_project	$1 proiektu gorenak
+top	up	Igo $1
+top	updated_daily	Egunero gaurkotua
+top	view_other_top_category	Beste kategoria nagusiak ikusi
+top_mostactive	percentile	Portzentajea
+top_mostactive	project_name	Proiektuaren izena
+top_mostactive	rank	Sailkapena
+top_mostactive	section	Izar proiektuak
+top_mostactive	title	Proiektu aktiboenak: $1
+top_mostactive	updated_daily	Egunero gaurkotua
+top_toplist	change	Aldaketak
+top_toplist	download	Deskargak
+top_toplist	last_rank	Azken sailkapena
+top_toplist	pageviews	Ikusitako orriak
+top_toplist	posts	Azalpenak
+top_toplist	project_name	Nombre del Proyecto
+top_toplist	rank	Sailkapena
+top_toplist	section	Izar proiektuak
+top_toplist	title	Izar proiektuen zerrenda
+top_toplist	top_download	Gehien deskargatuak
+top_toplist	top_download_7_days	Azken 7 egunetan gehien deskargatuak
+top_toplist	top_forum_post_count	Azalpen gehien dituzten foroak
+top_toplist	top_weekly_pagesviews	Azken * astean gehien ikusitako orriak ($2 logoko joaldien arabera)
+top_topusers	change	Aldatu
+top_topusers	info_not_available	Informazioa ez dago eskuragarri
+top_topusers	info_not_available_more	Sailkapen honen informazioa ez dago eskuragarria
+top_topusers	last_rank	Azken sailkapena
+top_topusers	rank	Sailkapena
+top_topusers	rating	Sailkapena
+top_topusers	real_name	Benetazko izena
+top_topusers	title	Highest Erabiltzaileen sailkapena
+top_topusers	user_name	Erabiltzailearen izena
+tracker	admin	Admin
+tracker	any	Edozein
+tracker	assigned_to	Nori esleitua
+tracker	assignee	Nork esleitua
+tracker	category	Kategoria
+tracker	category_any	Edozein
+#TO_TRANSLATE#tracker	changed	Changed
+tracker	check_upload	Fitxero bat bidaltzeko egin klik hemen
+tracker	choose	Erregistro bat aukeratu bertan nabigatu/argitaratu/elementuak gehitu ahal izateko.
+tracker	close_date	Irtenbidea aurkitu zen data
+tracker	comment	Azalpena
+tracker	comment_added	Gehitutako azalpena
+tracker	comments	Azalpenak
+tracker	date	Data
+tracker	detailed_description	Deskribapena
+tracker	file_delete	Fitxeroa ezabatu
+tracker	file_delete_successful	Arrakastaz ezabatutako fitxeroa
+tracker	file_delete_upload	Fitxeroa bidali
+tracker	file_description	Fitxeroaren deskribapena
+tracker	file_upload_successful	Arrakastaz bidalitako fitxeroa
+tracker	followups	Azalpenak
+tracker	group	Taldea
+tracker	group_any	Edozein
+tracker	id	ID-a
+tracker	insert_email	<strong>Ez</strong> bazara sistemara sartu, idatzi zure posta elektronikoa hemen:
+tracker	item_created	Arrakastaz sortutako artikulua
+tracker	item_group	Talde
+tracker	no_trackers	Erregistroak ez daude ikusgai
+tracker	no_trackers_text	Ez daude erregistroak edo ez zaude baimendua horiek ikusteko.<p><FONT COLOR=RED>Proiektu honen administrariak mota honetako erregistroak sortu ditzake $1 administrazio orria erabiltzen</FONT></strong>
+tracker	open_date	Bidali zen data
+tracker	pagetitle	Jarraipena
+tracker	please_login	Mesedez $1 sartu $2 -ra
+tracker	priority	Lehentasuna
+tracker	reporting	Txostenak
+tracker	resolution	Erabakia
+tracker	security_note	¡Ez erabili pasahitzik edo informazio sekreturik zure mezuan!
+tracker	status	Egoera
+tracker	status_any	Edozein
+tracker	submitted_by	Nork bidalia
+tracker	submitter	Nork bidalia
+tracker	summary	Laburpena
+tracker	title	Erregistroak
+tracker	tracker_item	Erregistroaren artikulua
+tracker	unassigned	Esleitu gabea
+tracker	updated_successful	Arrakastaz eguneratua
+tracker_add	for_project	Proiektuarentzat
+tracker_add	submit	Bidali
+tracker_add	title	Erregistroaren elementuak bidali
+tracker_admin	add_canned_responses	Gehitu/Eguneratu aurretik jarritako erantzunak
+tracker_admin	add_canned_responses_info	Erregistro honentzako aukeratuak izan diren erantzun generikoen mezuak sortu/aldatu.
+tracker_admin	add_categories	Kategoriak gehitu/eguneratu
+tracker_admin	add_categories_info	Gehitu mota honetako kategoriak: 'postaren modulua', 'gantt graficoen modulua', 'cvs-ak', eta abar.
+tracker_admin	add_group_infos	Gehitu mota honetako taldeak, 'v1.2','ez sostengatua','ez egiaztatua', eta abar.
+tracker_admin	add_groups	Taldeak gehitu/eguneratu
+tracker_admin	add_permissions	Erabiltzaileen baimenak gehitu/eguneratu
+tracker_admin	add_permissions_info	Erregistro honen-i erabiltzaileak gehitu/ezabatu
+tracker_admin	admin	Admin
+tracker_admin	auto_assign_to	Nori auto-esleitua
+tracker_admin	canned_response_inserted	Aurretik jarritako erantzuna sartua izan da.
+tracker_admin	canned_response_updated	Aurretik jarritako erantzuna eguneratua
+tracker_admin	category_add_warning	Kategoria bat gehituz gero, ezin izango duzu ezabatu
+tracker_admin	category_inserted	Sartutako kategoria
+tracker_admin	category_name	Kategoriaren izena
+tracker_admin	category_updated	Kategoria eguneratua
+tracker_admin	choose_datatype	Datu mota bat aukeratu ezazu lehentasunak, kategoriak, taldeak, erabiltzaileak eta baimenak sartzeko
+tracker_admin	error_inserting	Akatsa sartzean
+tracker_admin	error_updating	Akatsa eguneratzean
+tracker_admin	group_inserted	Sartutako taldea
+tracker_admin	group_name	Taldearen izen berria
+tracker_admin	group_updated	Taldea eguneratua
+tracker_admin	intro	<h3>Erregistro berria sortu</h3><p>Sistema hau erabili dezakezu datu klaseak erregistratzeko, erregistro bakoitzak erabiltzaile, talde, kategoria eta baimen zerrenda desberdina bait du. Behar bada erregistroen arteko ezaugarriak errez aldatu ditzakezu.</p><p>Erregistroak "erregistro mota"-ren arabera bildu taldekatu daitezke eta datu bakarra "erregistro" bat da. Adibidez: "Bug"-ak erregistro mota bat dira, eta bug baten informea beste erregistro bat. Nahi duzun "erregistro mota" ahina sortzea daukazu. Baina gogoratu mota bakoitzeko kategoriak, taldeak eta baimenak sortu behar dituzula, eta horien mantentze lanak denbora behar duela
+tracker_admin	section	Erregistroa
+tracker_admin	title	Administrazioa
+tracker_admin	tracker_id	ID-a
+tracker_admin	tracker_title	Izenburua
+tracker_admin	tracker_updated	Erregistroa eguneratua
+tracker_admin	update_preferences	Lehentasunak eguneratu
+tracker_admin	update_preferences_info	Zure lehentasunak aukeratu: iraungitze denbora, posta elektronikoa
+tracker_admin	users_added	Erabiltzailea(k) gehitua
+tracker_admin	users_deleted	Erebiltzailea(k) ezabatua
+tracker_admin	users_updated	Erabiltzailea(k) eguneratua
+tracker_admin_add_canned	canned_response_body	Mezuaren edukia
+tracker_admin_add_canned	canned_response_info	Mezuen erantzun generikoak sortzean denbora aurrezten duzu, erregistroekin lan egiten duzu eta.
+tracker_admin_add_canned	canned_response_title	Izenburua
+tracker_admin_add_canned	existing_responses	Erregistratutako erantzunak
+tracker_admin_add_canned	no_responses	Talde honen ez daude aurretik prestatutako erantzunik
+tracker_admin_add_canned	title	Erantzunen "mota" gehitu hona: $1
+tracker_admin_add_cat	no_categories	Ez daude definitutako kategoririk
+tracker_admin_add_cat	title	Erantzunen "mota" gehitu hona: $1
+tracker_admin_add_group	group_add_warning	Talde bat gehitzen baduzu, ezin izango duzu ezabatu
+tracker_admin_add_group	no_groups_defined	Ez dago definitutako talderik
+tracker_admin_add_group	title	Taldeak gehitu hona: $1
+tracker_admin_add_users	add_all_users	Erabiltzaile guztiak gehitu
+tracker_admin_add_users	add_user_info	<h3>Erabiltzaileak gehitu:</h3><p>Erabiltzaileak aukeratu ditzakezu bere erregistroarentzat edo bestela denak aukeratu "Erabiltzaile guztiak gehitu" sakatuz.</p>
+tracker_admin_add_users	add_users	Erabiltzaileak gehitu
+tracker_admin_add_users	admin_only	Admin bakarrik
+tracker_admin_add_users	category_permission	Baimenak
+tracker_admin_add_users	delete	Ezabatu
+tracker_admin_add_users	developers_info	<p>Definitzen den erregistro bakoitzak erabiltzaile eta baimen zerranda banatuak ditu.</p><p>Ondoren erregistroei erabiltzaileak gehitu eta baimenak eguneratu.</p><p><dl><dt><strong>Tekniko bat</strong></dt><dd>erregistro bati esleitzeko aukera daukazu.</dd><dt><strong>Administrariak</strong></dt><dd>aldaketak sartu ditzakete erregistroetan.</dd></dl></p>
+tracker_admin_add_users	no_developers	Ez dago garatzailerik
+tracker_admin_add_users	tech_admin	Téc y Admin
+tracker_admin_add_users	technician	Teknikoa
+tracker_admin_add_users	title	$1 erregistroaren erabiltzaile baimenak gehitu/eguneratu
+tracker_admin_add_users	update_permissions	Garatzaile baimenak eguneratu
+tracker_admin_add_users	user_name	Erabiltzaile izena
+tracker_admin_choose	title	Erregistroaren administrazioa
+tracker_admin_update_canned	title	Erantzun "mota" aldatu non: $1
+tracker_admin_update_cat	auto_assign_to	Nori auto esleitua
+tracker_admin_update_cat	category_change_warning	Ez da aholkatzen erregistro kategoriaren izena aldatzea, beste gai batzuk bere menpean bait daude. Kategoriaren izena aldatzen baduzu, erregistro guztiei izen berria ezarriko zaie.
+tracker_admin_update_cat	category_name	Kategoriaren izena
+tracker_admin_update_cat	title	Kategoria aldatu non: $1
+tracker_admin_update_group	title	Talde bat aldatu non: $1
+tracker_admin_update_group	warning	Ez da aholkatzen erregistro kategoriaren izena aldatzea, beste gai batzuk bere menpean bait daude. Kategoriaren izena aldatzen baduzu, erregistro guztiei izen berria ezarriko zaie.
+tracker_admin_update_type	allow_anonymous	Bidalketak baimendu sartu gabe
+tracker_admin_update_type	browse_item_form_text	"Erregistroa ikusi" orrirako testua
+tracker_admin_update_type	days_overdue	Zaharkitua dagoela erabakitzeko egunak
+tracker_admin_update_type	description	Deskribapena
+tracker_admin_update_type	display_resolution	"Erabaki" desplegablea erakutsi
+tracker_admin_update_type	email_all_changes	Posta bidali aldaketa guztiekin
+tracker_admin_update_type	name	<strong>Izena:</strong> (adibideak: bilerak, test erantzunak, dokumentuak, eta abar.)
+tracker_admin_update_type	pending_timeout	Zintzilik dauden erregistroentzako denbora mugatu egunetan
+tracker_admin_update_type	publicy_available	Publikoa
+tracker_admin_update_type	send_submissions	Posta bidali helbide berria badago
+tracker_admin_update_type	submit_item_form_text	"Erregistro berria bidali" orrirako testua
+tracker_admin_update_type	title	Eguneratu $1
+tracker_admin_update_users	title	Erregistro baten erabiltzaile baimenak gehitu/eguneratu
+tracker_artifact	double_submit	Erregistro hau bi aldiz bidaltzen ari zara. Mesedez, saia zaitez behin sakatzen.
+tracker_artifact	error_admin_modify	Erregistroak: Adsministradoreek bakarrik aldatu dezakete erregistro pribatuak
+tracker_artifact	error_body_required	Erregistroak: Mezuaren edukia beharrezkoa da
+tracker_artifact	error_no_anonymous	Erregistroak: Erregistro honek ez ditu bidalketa anonimoak bidaltzen uzten. Mesedez, sisteman sar zaitez.
+tracker_artifact	error_summary_required	Erregistroak: Mezuaren laburpena beharrezkoa da
+tracker_artifact	error_valid_email_required	Monitorizatu: baliodun helbidea beharrezkoa da
+tracker_artifact	logged_in_no	Sistemaren barnean: Ez
+tracker_artifact	logged_in_yes	Sistemaren barnean: Bai
+tracker_artifact	monitoring_activated	Monitorizazio berria
+tracker_artifact	monitoring_deactivated	Moritorizazioa desaktibatua
+tracker_artifact	nothing_changed	Aldaketik ez - Eguneratzea bertan behera gelditu da.
+tracker_artifact	private_error	Erregistroa: Erregistro pribatuak taldekideak bakarrik ikusi ahal izango ditu
+tracker_artifactfile	required_fields	Erregistroaren fitxeroa: Beharrezkoa da izena, mota, tamaina eta data
+tracker_artifactgroup	required_field	Erregistro taldeak: izena beharrezkoa da
+tracker_artifacthtml	by	Noiztik
+tracker_artifacthtml	date	Data
+tracker_artifacthtml	field	Eremua
+tracker_artifacthtml	message	Mezua
+tracker_artifacthtml	no_changes	Erregistro honetan ez dago aldaketik
+tracker_artifacthtml	no_followups	Ez dira azalpenik bidali
+tracker_artifacthtml	old_value	Balio zaharra
+tracker_artifacthtml	sender	Nork bidalia
+tracker_artifacttype	add_artifact_types	Artikulu motak sortu/gainetik irakurri
+tracker_artifacttype	admin	Admin
+tracker_artifacttype	admin_functions	Administrariaren funtzioak
+tracker_artifacttype	browse	Gainetik irakurri
+tracker_artifacttype	edit_options	Aukerak argitaratu/eguneratu non
+tracker_artifacttype	nobody	Inor
+tracker_artifacttype	none	Bat ere ez
+tracker_artifacttype	reporting	Txostenak
+tracker_artifacttype	required_fields	Erregistro motak: Beharrezkoa da izena, deskribapena, erabaki denbora eta egoera.
+tracker_artifacttype	submit_new	Artikulu berria sortu
+tracker_browse	admin_mass_update	<strong>Admin:</strong></FONT> Beran erakusten diren erregistroetan aldaketak egiten badituzu, kontrolak erabili ezaugarriak aldatzeko eta "eguneratze masiboa" sakatu.
+tracker_browse	ascending	Goranzko
+tracker_browse	canned_response	Aurretik jarritako erantzuna
+tracker_browse	change_any	Edozein
+tracker_browse	check_all	Denak aukeratu
+tracker_browse	clear_all	Denak ezabatu
+tracker_browse	day7	Azken 7 egunak
+tracker_browse	descending	Beheranzko
+tracker_browse	hour24	Azken 24 orduak
+tracker_browse	mass_update	Eguneratze masiboa
+tracker_browse	month1	Azken hilabetea
+tracker_browse	next	Hurrengo 55-ak
+tracker_browse	no_change	Ez aldatu
+tracker_browse	no_items	Ez dira erregistroak aurkitzen
+tracker_browse	old_requests	* Duela $1 egun erregistratu zela esan nahi du
+tracker_browse	previous	Aurreko 50-ak
+tracker_browse	request_id	ID zenbakia
+tracker_browse	resolution	Erabakia
+tracker_browse	sort_by	Nola antolatu
+tracker_browse	title	$1-etik nabigatu
+tracker_browse	week2	Azken 2 asteak
+tracker_detail	add_comment	Azalpena gehitu
+tracker_detail	attached_files	Fitxeroak atxeki
+tracker_detail	build_task_relation	Erlazionatutako ataza sortu
+tracker_detail	changes	Aldaketak
+tracker_detail	description	Deskribapena
+tracker_detail	download	Deskargatu
+tracker_detail	name	Izena
+tracker_detail	no_files_attached	Ez dago atxiketako fitxerorik
+tracker_detail	title	Erregistroaren ikusteko era zehaztua
+tracker_mod	attach_comment	Edo azalpen bat atxeki
+tracker_mod	build_task_relation	Erlazionaturiko ataza sortu
+tracker_mod	canned_response	Aurretik jarritako erantzuna erabili
+tracker_mod	changelog	Aldaketen historia
+tracker_mod	data_type	Datu motak
+tracker_mod	date_closed	Ixte data
+tracker_mod	date_submitted	Bidaltze data
+tracker_mod	delete	Ezabatu
+tracker_mod	description	Deskribapena
+tracker_mod	download	Deskargatu
+tracker_mod	existing_files	Fitxeroak
+tracker_mod	name	Izena
+tracker_mod	no_files	Ez daude atxekitako fitxerorik
+tracker_mod	title	Aldatu
+tracker_reporting	aging_report	Historiaren txostena
+tracker_reporting	all_by_group	Erregistro guztiak erregistro taldeen arabera
+tracker_reporting	all_by_resolution	Erregistro guztiak erabakiaren arabera
+tracker_reporting	all_by_technician	Erregistro guztiak kategoriaren arabera
+tracker_reporting	all_items_by_technician	Erregistro guztiak teknikoen arabera
+tracker_reporting	artifact_type	Erregistro mota:
+tracker_reporting	average_turnaround	Itxita dauden erregistroentzako bataz besteko itxaronaldi denbora (egunetan)
+tracker_reporting	dist_by_category	Banaketa kategorien arabera
+tracker_reporting	dist_by_group	Baneketa taldeen arabera
+tracker_reporting	dist_by_resolution	Banaketa erabakien arabera
+tracker_reporting	dist_by_technician	Banaketa teknikoen arabera
+tracker_reporting	items_open	Erregistro irekien kopurua
+tracker_reporting	items_submitted	Bidalitako erregistro kopurua
+tracker_reporting	open_by_group	Irekiak erregistro taldearen arabera
+tracker_reporting	open_items_by_category	Irekitako erregistroak kategorien arabera
+tracker_reporting	open_items_by_resolution	Irekitako erregistroak erabakiaren arabera
+tracker_reporting	open_items_by_technician	Irekitako erregistroak teknikoaren arabera
+tracker_reporting	title	Erregistroaren txostena
+tracker_taskmgr	add_relation_to_task	Badagoen ataza batekin lotura egin.
+tracker_taskmgr	add_relationship	Aukeratutako atazarekin lotura egin.
+tracker_taskmgr	build_relationships	Ataza baten eta erregistroaren artikuluaren lotura egin.
+tracker_taskmgr	create_task	Ataza berria sortu.
+tracker_taskmgr	task	Ataza
+tracker_taskmgr	task_manager_project	Ataza multzoa.
+tracker_taskmgr	tracker_item	Erregistroaren artikulua.
+tracker_utils	monitor	Monitorea
+tracker_utils	stop_monitoring	Monitorizazioa gelditu
+trove	not_categorized	Proiektu hau oraindik ez da kategorizatu
+trove	title	Proiektuen mapa
+trove_list	browse_by	Nola ikusi
+trove_list	invalid_category_text	Ez dago kategoria hau
+trove_list	invalid_category_title	Kategoria baliogabea
+trove_list	limiting_view	Ez mugatu proiektuen ikusteko era hurrengo kategorietan
+trove_list	more_than	<strong>$1</strong> proiektu gehiago kategoria honetan.
+trove_list	number_of_projects	<strong>$1</strong> proiektu kategoria honetan.
+trove_list	projects	$1 proiektu
+trove_list	remove_filter	Filtro hau ezabatu
+trove_list	title	Software mapa
+user_home	contact	Kontaktatu
+user_home	diary_notes	Egunkaria eta Oharrak
+user_home	diary_notes_entries	Egunkariaren/oharren sarrerak:
+user_home	diary_notes_monitor	Egunkari hau monitorizatu
+user_home	diary_notes_view	Egunkaria eta oharrak ikusi
+user_home	email	Posta elektronikoa
+user_home	jabber_address	Helbidea <a href="http://www.jabber.org/" _target="blank">Jabber</a>
+user_home	login_name	Kontuaren izena
+user_home	member_of	Garatzaile hau ondorengo taldekidea da:
+user_home	message	Mezua
+user_home	name	Bere izena
+user_home	no_projects	Garatzaile hau ez inungo proiektuko kidea.
+user_home	peer_rating	Peer Rating
+user_home	peer_rating_disabled	Erabiltzaile honek ez du erabiltzaileen puntuaketetan parte hartzen.
+user_home	personal_information	Informazio pertsonala
+user_home	project_info	Proiektuaren informazioa
+user_home	real_name	Benetazko izena
+user_home	send	Mezua bidali
+user_home	send_a_message	Nori bidali mezuan
+user_home	send_message_if_logged	Ezin duzu mezurik bidali ez bazara gunean izenpetzen
+user_home	site_member_since	Gune honen kidea noiztik
+user_home	skills_profile	Esperientzia
+user_home	subject	Gaia
+user_home	title	Perfil del Desarrollador
+user_home	user_id	Erabiltzaile ID-a
+users	no_user_name	Ez duzu erabiltzaile izena eman
+users	optout	Zuk puntuaketa sisteman ez azaltzea erabaki zenuen, bestela erabiltzaile hau puntuatzeko baimena izango zenuke. Bisitatu <a href="/account/">zure mantentze orria</a> informazio gehiago lortzeko.
+users	peerinfo1	<p>Erabiltzaile hau ezagutzen baduzu, mesedez har ezazu une bat ondorengo hirizpideak ebaluatzeko. Gogoratu zure ebaluaketa erabiltzaile horrentzako eta besteentzako ikusgai egongo dela.</p><p>$1 -en ebaluaketa sistema ondorengo kontzeptuetan oinarritua dago <a href="http://www.advogato.com">Advogato.</a> Sistema ber-ezarria izan da eta zentzu anitzetan zabaldua.</p>
+users	peerinfo2	Ebaluaketa laukiak ebaluaketen bataz bestekoak erakusten ditu eta (erantzun mailak) hirizpide bakoitzeko. Erantzun kopuru hauetan izenpetuak eta izenpetu gabeak zenbatu dira. <ul> <li> "Sitewide Rank" eremuak erabiltzailearen jarrera gainontzeko $1 erabiltzaileekin alderatzen du.</li><li>"Aggregate Score"-ak erabiltzaile izenpetuen bataz bestekoa erakusten du.</li><li>"Personal Importance" eremuak erakusten du nola erabiltzaileak beste lankideak baloratzen dituzten (1 eta 1.5 artean) -- Balio gehiago duten erabiltzeen erantzunak pisu gehiago dute.</li></ul><p><i>Ebaluaketa sisteman ez baduzu azaldu nahi (ondorioz ezingo dituzu besteak baloratu eta alderantziz), sartu <a href="/account/">zure kontuaren mantentze orrira</a>. Aukeratzen baduzu ez partehartzea, zure puntuaketak beste erabiltzaileei buruz ezabatu egingo dira eta puntuaketen taula desagertu egingo da zure orri pertsonaletik.</i></p>
+users	title	Erabiltzailearen laburpena
+users	user_not_exist_text	Erabiltzaile baliogabea
+users	user_not_exist_title	Erabiltzaile hau ez da aurkitzen
