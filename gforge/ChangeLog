@@ -1,3 +1,9 @@
+2004-03-14  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Some HTML cleanup and bugfixes.
+	* Fixed a bug in theme selection introduced by Tom last week.
+	* Fixed bug [ #718 ] introduced by Tom last week.
+
 2004-03-12  Tom Copeland <tom@infoether.com>
 	* www/snippet/browse.php & detail.php: Replace user_name with realname,
 	added link to user's page. 
@@ -10,19 +16,45 @@
 	in Forum.class.  Modified query in project_summary.php to limit columns
 	returned to those used.
 
+2004-03-09  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Fixed CVS statistics display.
+	* Redesigned group list in admin.
+	* Display groups/users beginning with is now working correctly.
+
 2004-03-08  Tom Copeland <tom@infoether.com>
 	* SQL optimization: Replaced 'select *' occurrences in User.class
 	and BaseLanguage.class.  Replaced a 'select *' with a 'select count(*)'
 	in Group.class.
 
+2004-03-08  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Activity percentile are now truncated.
+	* Removed a space in Base.tab. Please use <tab>.
+	* Removed some unused strings in French.tab
+
 2004-03-05  Tom Copeland <tom@infoether.com>
 	* Added group_id parameter to rss_sfnews.php; did
 	some more date->post_date, too.
 
+2004-03-04  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Fixed the link to editrelease.php in qrs.php
+
+2004-03-03  Guillaume Smet <guillaume-gforge@smet.org>
+
+	* Added an INSTALL readme for new documentation tools
+	* Fixed some bugs in language_file_merger.php
+	* Translated missing French strings
+	* Don't display people admin links in project admin if disabled
+	* Corrected a typo in Base.tab
+
 2004-03-02  Guillaume Smet <guillaume-gforge@smet.org>
+
 	* Applied patch [ #706 ] to improve German localization
 	* Improved language_file_merger.php (tools module)
 	* Converted doc from Maven xdoc to XML Docbook
+	* Made png images transparent
 
 2004-03-02  Tom Copeland <tom@infoether.com>
 	* Minor cleanups to Base.tab
