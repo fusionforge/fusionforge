@@ -1,0 +1,127 @@
+<section id="ug_project_forums">
+	<title>Forums</title>
+	<para>
+		Every project can have his own discussion forums. When a new project is created, 3 forums are automatically created:
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>Open Discussion</term>
+			<listitem>
+				<para>A place where to discuss about everything.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Help</term>
+			<listitem>
+				<para>A forum where to ask for help.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Developers</term>
+			<listitem>
+				<para>A place where developers discuss about developments.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<section>
+		<title>Creating a new forum</title>
+		<para>
+			New forums can be created using the Admin section of the forum. When a new forum is created, you must insert a name of the forum, the description of the forum, select if the forum is public or private and if anonymous posts are allowed on the forum.
+		</para>
+		<para>
+			Public forums are visibile only to project members. If Anonymous posts are enabled, everybody can post messages to the forum, even users that are not logged it.
+		</para>
+		<para>
+			You can also insert an email address where all posts will be sent.
+		</para>
+	</section>
+	<section>
+		<title>Using the forum</title>
+		<para>
+			When you click on the name of the forum, you go to the detail of the forum.
+		</para>
+		<para>
+			You can select the following types of visualization for the forum lists:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Nested</term>
+				<listitem>
+					<para>Shows the messages ordered by thread. All data of the message, including the posted message itself will be visualized.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Flat</term>
+				<listitem>
+					<para>Similar to Nested, the messages will be showed in cronological order.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Threaded</term>
+				<listitem>
+					<para>Shows only title, author and date of each message. Shows the messages in threaded order. Clicking on the title of the message the entire message will be displayed.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Ultimate</term>
+				<listitem>
+					<para>Shows only the <quote>topic started</quote> messages. Topic starters are the messages that starts a new thread.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+		<para>
+			You can select the number of messages for every page: 25, 50, 75 or 100.
+		</para>
+	</section>
+	<section>
+		<title>Available options</title>
+		<para>
+			The forums of gforge have 2 very powerful options:
+		</para>
+		<variablelist>
+			<varlistentry>
+				<term>Save place</term>
+				<listitem>
+					<para>This function registers the number of messages already inserted in the forum and will highlight new messages the next time you return to the forum.</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Monitor forum</term>
+				<listitem>
+					<para>You can select to monitor the forum by clicking on the Monitor Forum button.</para>
+					<para>If this option is enabled, every post to the forum will be sent to you by email.This allows you to be informed about new messages without beeing logged on to gforge. The name of the monitored forum will appear in the users homepage in the section Monitored Forums.</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</section>
+	<section>
+		<title>Forum admin</title>
+		<para>
+			Clicking on the <guimenuitem>Forum Admin</guimenuitem> link presents you with links to <guimenuitem>Add Forum, Delete Message</guimenuitem> or <guimenuitem>Update Forum Info/Status</guimenuitem>.
+		</para>
+		<section>
+			<title>Add Forum</title>
+			<para>
+				This allows you to add a new discussion forum. You can select if it is public or private (only members of the project can see it).
+			</para>
+		</section>
+		<section>
+			<title>Delete Message</title>
+			<para>
+				This allows you to delete a message (and any followups) from a forum. You <emphasis>must</emphasis> know the message id of the message you wish to remove. This can be obtained by viewing the message in the forums web page and noting the message id of the message.
+			</para>
+		</section>
+		<section>
+			<title>Update Forum Info/Status</title>
+			<para>
+				This allows you to alter the properties of the forum such as the name and description, whether or not anonymous posts are allowed, if it's public and you can enter an address to which all messages are posted.
+			</para>
+		</section>
+	</section>
+	<section>
+		<title>Searching</title>
+		<para>
+			When using a forum, a voice <guimenuitem>Forum</guimenuitem> will appear in the search combo box. Selecting forum and inserting a text in the search box allows you to search through the text data of the forum.
+		</para>
+	</section>
+</section>

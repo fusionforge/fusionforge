@@ -1,0 +1,24 @@
+<section id="ug_project_mailing_lists">
+	<title>Mailing Lists</title>
+	<para>
+		This is where you will set up and administer the mailing lists associated with the project.
+	</para>
+	<section>
+		<title>Admin</title>
+		<para>
+			This brings you to the Mail Admin page, where the following options are available to you.
+		</para>
+	</section>
+	<section>
+		<title>Add Mailing List</title>
+		<para>
+			Clicking here will allow you to create a new mailing list. You can specify if it is to be made public (people who are not members of the project can see and/or join it) or not. You can also add a description of the list.
+		</para>
+	</section>
+	<section>
+		<title>Administrate/Update Lists</title>
+		<para>
+			This allows you to change the description of the list, the state of the list, and by clicking on <guimenuitem>Administrate this list in GNU Mailman</guimenuitem> you can add members to the mailing list, set the properties of the list, posting policies and so forth.
+		</para>
+	</section>
+</section>

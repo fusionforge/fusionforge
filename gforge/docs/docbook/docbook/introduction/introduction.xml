@@ -1,0 +1,57 @@
+<chapter id="gm_introduction">
+	<title>Introduction</title>
+	<section>
+		<title>About GForge</title>
+		<para>
+			GForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for communication between members of a development team.  The tools provided by GForge allows team members to communicate and organize their work; this allows the creation of a knowledgebase.
+		</para>
+		<para>
+			A complete configurated GForge system will give you the following features:
+		</para>
+		<orderedlist>
+			<listitem><para>A Web site for every project</para></listitem>
+			<listitem><para>Versioning via CVS</para></listitem>
+			<listitem><para>Shell access to the server for the developers</para></listitem>
+			<listitem>
+				<para>A web site for project coordination and comunication between team members:</para>
+				<orderedlist>
+					<listitem><para>Discussion Forums - For discussions between team members</para></listitem>
+					<listitem><para>Bug tracking - Allow registration and administration of bugs</para></listitem>
+					<listitem><para>Support requests, patch submissions, and enhancement requests</para></listitem>
+					<listitem><para>Comunication between project members using mailing lists</para></listitem>
+					<listitem><para>Sharing of documentation</para></listitem>
+					<listitem><para>Handling of todo lists, tasks, etc</para></listitem>
+					<listitem><para>File uploads/releases</para></listitem>
+					<listitem><para>Posting of news - Every project can have its own news items.</para></listitem>
+					<listitem><para>Code Snippets - Provides of a basic knowledgebase that can contain code fragments, HOWTOs, etc.</para></listitem>
+				</orderedlist>
+			</listitem>
+		</orderedlist>
+		<para>
+			The tasks and the tracker items (to track bugs, patches, support requests, enhancement requests) can be classified using status, priority, category.
+		</para>
+		<para>
+			The system provides also a classification system of the projects, a user profile, and a user rating system.
+		</para>
+	</section>
+	<section>
+		<title>GForge History</title>
+		<para>
+			GForge is a fork of the 2.61 SourceForge code, which was only available via anonymous CVS from VA (Research|Linux|Software). <ulink url="http://gforge.org">gforge.org</ulink> is not a project hosting platform, it is merely an implementation of the GForge code. We believe that the GForge functionality is important not only to the Open Source community, but to the wider business community.
+		</para>
+		<para>
+			Since VA has not released the source in over one year, despite their promises to the contrary, a fork was necessary to ensure a viable open source version of the codebase.
+		</para>
+		<para>
+			The GForge project was formed and is maintained by Tim Perdue, the original author of much of the original SourceForge web code.
+		</para>
+		<para>Major changes are present in the current GForge codebase:</para>
+		<itemizedlist>
+			<listitem><para>Jabber Support - System events, such as bug submissions, are optionally sent via jabber and email</para></listitem>
+			<listitem><para>Radically easier to install - By removing SF.net-specific code, like caching and image servers, many install dependencies have been eliminated.</para></listitem>
+			<listitem><para>New interface - The interface makes it easier to navigate as well as know your present location.</para></listitem>
+			<listitem><para>Code cleanup - Since GForge does not need to scale to 500,000+ users, many hacks and optimizations have been removed</para></listitem>
+			<listitem><para>Foundries and related nonsense have been removed</para></listitem>
+		</itemizedlist>
+	</section>
+</chapter>

@@ -14,6 +14,9 @@ gforge/docs/debian-install.fr/Gforge.pdf -text
 gforge/docs/debian-install.fr/Gforge.sxw -text
 gforge/docs/debian-install.fr/Install.pdf -text
 gforge/docs/debian-install.fr/Install.sxw -text
+gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
+gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
+gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
 gforge/docs/images/sflogo2-105a.png -text
 gforge/www/images/blank.png -text
 gforge/www/images/clear.png -text

@@ -1,0 +1,126 @@
+<section id="cg_howto_localization">
+	<title>Localization howto</title>
+	<section>
+		<title>Localizing Gforge</title>
+		<para>
+			This short HOWTO explains how you can customize your local installation of Gforge.
+		</para>
+	</section>
+	<section>
+		<title>Adding a new language</title>
+		<para>
+			These are the steps to add a new language:
+		</para>
+		<orderedlist>
+			<listitem>
+				<para>
+					Add a row in the <database class="table">supported_languages</database> table in the <database>gforge</database> database:
+				</para>
+<programlisting>
+INSERT INTO supported_languages
+	(language_id, name, filename, classname, language_code)
+	VALUES (NEXTVAL('"supported_langu_language_id_seq"'::text),
+		'German (Austria)',
+		'Austrian.class',
+		'Austrian',
+		'AT'
+	);
+</programlisting>
+				<note>
+					<para>
+						The language_code should follow the international language codings.
+					</para>
+				</note>
+			</listitem>
+			<listitem>
+				<para>
+					Copy the file <filename>Base.tab</filename> to <filename>Austrian.tab</filename> and place it in the <filename>www/languages/include</filename> folder.
+				</para>
+			</listitem>
+			<listitem>
+				<para>Translate the document</para>
+				<warning>
+					<para>If you are not going to translate the entire document, please just override strings you translate.</para>
+				</warning>
+			</listitem>
+			<listitem>
+				<para>Submit the translation to the gforge project</para>
+			</listitem>
+		</orderedlist>
+	</section>
+	<section>
+		<title>What is there to customize?</title>
+		<para>
+			I'm afraid there isn't much space for customisation in Gforge yet.  For now, two main areas exist:
+		</para>
+		<itemizedlist>
+			<listitem><para>look</para></listitem>
+			<listitem><para>text content</para></listitem>
+		</itemizedlist>
+		<para>
+			The look of your Gforge site is customisable via the theme system (read the README.Themes file fo more information on this).
+		</para>
+		<para>
+			The text content can be somewhat customized. The Gforge internationalisation system already provides a way to have different texts depending on user choice.
+		</para>
+	</section>
+	<section>
+		<title>How do I customize texts?</title>
+		<para>
+			First, a quick course on the internationalisation system present in Gforge.
+		</para>
+		<para>
+			The texts you can read on the web pages are not hard-coded.  Well, some of them are, but we're working on them.  Instead, they are displayed as results of a function of several parameters.  One of these parameters is the language in which you wish to display a piece of information, and another is some handle to identify the information you want to display.
+		</para>
+		<para>
+			In Gforge, this handle is made up of the <quote>page name</quote> and the <quote>category</quote> strings.  Knowing all the needed info, the function displays the appropriate text.  How appropriate is this text?  Well, that depends.  First, a basic set of texts is loaded. Historically, this set is loaded in English.  This set of texts makes the Base class, storing texts for all known <quote>handles</quote>.  This set of texts can then be partially or completely overloaded, e.g. for other languages: the handles present in the language overwrite the Base handles, and the ones not found keep their values from the Base class.
+		</para>
+		<para>
+			The language files are located in the <filename>www/include/languages</filename> directory.
+		</para>
+		<para>
+			To localize Gforge in a new language, copy <filename>Base.tab</filename> in <filename><userinput>yourlanguage</userinput>.tab</filename>. If you wish to add Foobaric language, run the following command <command>cp Base.tab Foobaric.tab</command>.
+		</para>
+	</section>
+	<section>
+		<title>Format of the *.tab files</title>
+		<para>
+			The *.tab files are in a fairly straightforward format.  Lines starting with a '#' character are ignored, other lines must be in the following format:
+		</para>
+<programlisting><![CDATA[
+,----
+| <pagename> TAB <category> TAB <data>
+`---
+]]></programlisting>
+		<para>
+			The &lt;data&gt; field can use variables in the form $1, $2, etc.  These variables are defined by the script and there's no simple way of knowing what they are apart from looking at the script itself.  To find out exactly what these variables are filled out with, search for the <methodname>getText('&lt;pagename&gt;','&lt;category'&gt;)</methodname> string in the scripts contained in the <filename>www/</filename> and <filename>common/</filename>.  This is not always easy to do.
+		</para>
+		<para>
+			Your best bet is to guess the meaning of the $1, $2, etc. variables from the non-customized text (either Base.tab or Foobaric.tab if it is defined).
+		</para>
+	</section>
+	<section>
+		<title>How to do it - really</title>
+		<para>
+			The way I usually go when I have to customize some text is simply the following:
+		</para>
+		<orderedlist>
+			<listitem><para>Find the bit of text I want to customize (in either Base.tab or Foobaric.tab);</para></listitem>
+			<listitem><para>Copy and paste the appropriate line (including the <quote>handle</quote> -- the first two fields) in Foobaric.tab;</para></listitem>
+			<listitem><para>Read it to find out about the $n variables;</para></listitem>
+			<listitem><para>Replace the third field with my own customized version.</para></listitem>
+		</orderedlist>
+	</section>
+	<section>
+		<title>Why customize</title>
+		<para>
+			There are two main reasons you would want to use the process described in this section.
+		</para>
+		<para>
+			First, local policy.  You might want to change page footers, or contact pages, or host names, or whatever you need to integrate your Gforge your target audience (company, organisation, or even your own personal GForge). This document is for you.
+		</para>
+		<para>
+			Second, localization.  This is not something completely done in Gforge yet, and you might (will?) find huge gaps in the translation of Gforge into your language.  The English language, being the original one in which Gforge was written, is obviouslycomplete. Soon-Son Kwon has provided a full Korean translation, and I strive to make the French translation complete too, but other languages are far from finished.  You might then consider translating Gforge into your language.  If you do so, please also consider submitting your translated file to us so that future releases of Gforge include your translated file by default. Please refer to <ulink url="http://gforge.org/">gforge.org</ulink> for info on how to do that.
+		</para>
+	</section>
+</section>

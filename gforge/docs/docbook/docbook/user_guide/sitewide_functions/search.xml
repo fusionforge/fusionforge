@@ -1,0 +1,35 @@
+<section id="ug_sitewide_search">
+	<title>Searching in gforge</title>
+	<para>
+		You can search in gforge for the following arguments:
+	</para>
+	<variablelist>
+		<varlistentry>
+			<term>People</term>
+			<listitem>
+				<para>You can search for login name or the complete username. The search is not case sensitive. Inserted text must be at least 3 characters.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Software/Group</term>
+			<listitem>
+				<para>You can search for software groups. Inserted text must be at least 3 characters.</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Skill</term>
+			<listitem>
+				<para>You can search for skills inserted by the users. Only public skills profiles can be searched. Inserted text must be at least 3 characters.</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<para>
+		You can search for People or Software groups by selecting the item in the combo box and inserting the search text in the text box. 
+	</para>
+	<para>
+		If the user is inside one of the Trackers, a voice Tracker appears in the combo box.
+	</para>
+	<para>
+		If the user is inside a forum, a voice Forum appears in the combo box.
+	</para>
+</section>
