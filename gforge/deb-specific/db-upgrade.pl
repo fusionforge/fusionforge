@@ -1831,8 +1831,6 @@ END;
 
     $version = &get_db_version ;
     $target = "4.0.0-0+4" ;
-    # This is an exception, I reapply a modified version of 20040729.sql since it was doing nothing
-    # the other call was deleted from this file
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041108.sql") ;
 
@@ -1853,12 +1851,81 @@ END;
 
     $version = &get_db_version ;
     $target = "4.0.2-0+0" ;
-    # This is an exception, I reapply a modified version of 20040729.sql since it was doing nothing
-    # the other call was deleted from this file
     if (&is_lesser ($version, $target)) {
         &debug ("Upgrading with 20041124.sql") ;
 
         @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041124.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.0.2-0+1" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20041211-syncmail.php") ;
+	system("/usr/lib/gforge/db/20041211-syncmail.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include") == 0 
+	or die "system call of 20041211-syncmail.php failed: $?" ;
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.0.2-0+2" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20041222-debian.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20041222-debian.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.0.2-0+3" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050115.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050115.sql") } ;
+        foreach my $s (@reqlist) {
+            $query = $s ;
+            # debug $query ;
+            $sth = $dbh->prepare ($query) ;
+            $sth->execute () ;
+            $sth->finish () ;
+        }
+        @reqlist = () ;
+
+        &update_db_version ($target) ;
+        &debug ("Committing.") ;
+        $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "4.0.2-0+5" ;
+    if (&is_lesser ($version, $target)) {
+        &debug ("Upgrading with 20050130.sql") ;
+
+        @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20050130.sql") } ;
         foreach my $s (@reqlist) {
             $query = $s ;
             # debug $query ;
