@@ -74,7 +74,7 @@ menu	project_summary	Projekt&uuml;bersicht
 group	public_area	&Ouml;ffentliche Bereiche
 menu	search	Suche
 menu	software_map	Softwarekarte
-home	gforge_statistics	GForge Statistieken
+home	gforge_statistics	GForge Statistiken
 menu	top_projects	Top-Projekte
 home	top_project_downloads	Popul&auml;rste Downloads (nach Projekten)
 conf	content_encoding	UTF-8
