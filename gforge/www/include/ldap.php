@@ -170,14 +170,15 @@ function sf_ldap_create_user_from_object(&$user) {
 	$entry['objectClass'][1]='account';
 	$entry['objectClass'][2]='posixAccount';
 	$entry['objectClass'][3]='shadowAccount';
-	$entry['objectClass'][4]='x-sourceforgeAccount';
+	$entry['objectClass'][4]='debSfAccount';
 	$entry['uid']=$user->getUnixName();
 	$entry['cn']=$user->getRealName();
 	$entry['gecos']=$user->getRealName();
 	$entry['userPassword']='{crypt}'.$user->getUnixPasswd();
 	$entry['homeDirectory']="/home/users/".$user->getUnixName();
 	$entry['loginShell']=$user->getShell();
-	$entry['x-cvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
+	$entry['debSfCvsShell']="/bin/cvssh"; // unless explicitly set otherwise, developer has write access
+	$entry['debSfForwardEmail']=$user->getEmail();
 	$entry['uidNumber']=$user->getUnixUID();
 	$entry['gidNumber']=100; // users
 	$entry['shadowLastChange']=0; // TODO FIXME
