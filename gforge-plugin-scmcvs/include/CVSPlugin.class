@@ -17,8 +17,8 @@ class CVSPlugin extends SCM {
 
                 require_once('/etc/gforge/plugins/scmcvs/config.php') ;
 		
-		$this->default_cvs_server = $default_cvs_server ;
-		$this->this_server = $this_server ;
+		//$this->default_cvs_server = $default_cvs_server ;
+		//$this->this_server = $this_server ;
 		$this->enabled_by_default = $enabled_by_default ;
 		
 		$this->register () ;
@@ -44,9 +44,9 @@ class CVSPlugin extends SCM {
 		case "group_approved":
 			$this->group_approved ($params) ;
 			break;
-		case "groupmenu_scm":
-			$this->display_groupmenu_scm ($params) ;
-			break;
+//		case "groupmenu_scm":
+//			$this->display_groupmenu_scm ($params) ;
+//			break;
 		case "cssstyle":
 			$this->cssstyle_scm ($params) ;
 			break;
@@ -281,8 +281,8 @@ class CVSPlugin extends SCM {
 	if ($project->enableAnonSCM()){
 		echo $Language->getText('plugin_scmcvs', 'anoncvs');
 		print " <p>
-		                <tt>cvs -d :pserver:anonymous@" . $this->GetGroupServer($group_id) . ":/cvsroot/".$project->getUnixName()." login</tt><br>
-		                <tt>cvs -d :pserver:anonymous@" . $this->GetGroupServer($group_id) . ":/cvsroot/".$project->getUnixName()." checkout <em>modulename</em></tt>
+		                <tt>cvs -d :pserver:anonymous@" . $project->getSCMBox() . ":/cvsroot/".$project->getUnixName()." login</tt><br>
+		                <tt>cvs -d :pserver:anonymous@" . $project->getSCMBox() . ":/cvsroot/".$project->getUnixName()." checkout <em>modulename</em></tt>
                         </p>" ;
 	 }
 
@@ -291,7 +291,7 @@ class CVSPlugin extends SCM {
 	echo $Language->getText('plugin_scmcvs', 'devcvs');
 		print "<p>
                                 <tt>export CVS_RSH=ssh</tt><br>
-		                <tt>cvs -d :ext:<em>username</em>@" . $this->GetGroupServer($group_id) . ":/cvsroot/".$project->getUnixName()." checkout <em>modulename</em></tt>
+		                <tt>cvs -d :ext:<em>username</em>@" . $project->getSCMBox() . ":/cvsroot/".$project->getUnixName()." checkout <em>modulename</em></tt>
                                 </p>" ;
 
 ?>
@@ -430,15 +430,10 @@ if ($project->enableAnonSCM()){
 	 */
 	function account_group_cvsweb_url($group_id) {
 		$project =& group_get_object($group_id);
-		if ( $GLOBALS['sys_scm_single_host'] == '1' ) {
-			$scm_server = $GLOBALS['sys_scm_host'];
-		} else {
-			$scm_server = $this->GetGroupServer($group_id);
-		}
-		//return 'http://'.$scm_server.'/cgi-bin/cvsweb?cvsroot=cvsroot/'.$project->getUnixName();
-		return 'http://'.$scm_server.'/plugins/scmcvs/cvsweb.php/?cvsroot=cvsroot/'.$project->getUnixName();
+		return 'http://'.$project->getSCMBox().'/plugins/scmcvs/cvsweb.php/?cvsroot=cvsroot/'.$project->getUnixName();
 	}
 
+/*
 	function display_groupmenu_scm($params) {
 		$group_id = $params['group_id'] ;
 		$project =& group_get_object($group_id);
@@ -454,6 +449,7 @@ if ($project->enableAnonSCM()){
 			(($params['toptab'] == $this->name) ? $params['selected']=(count($params['TITLES'])-1) : '' );
 		}
 	}
+*/
 
 	function group_approved ($params) {
 		$group_id = $params['group_id'] ;
@@ -467,6 +463,7 @@ if ($project->enableAnonSCM()){
 		}
 	}
 
+/*
 	function GetDefaultServer () {
 		return $this->default_cvs_server ;
 	}
@@ -520,6 +517,7 @@ if ($project->enableAnonSCM()){
 		$res = db_query($sql);
 		db_commit () ;
 	}
+*/
 
 }
 
