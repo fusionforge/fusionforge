@@ -78,7 +78,7 @@ if ($datatype < 5) {
 	FROM groups g, forum_group_list fgl, forum f
 	WHERE g.group_id=fgl.group_id
 	AND fgl.group_forum_id=f.group_forum_id
-	AND f.date BETWEEN '$start' AND '$end'
+	AND f.post_date BETWEEN '$start' AND '$end'
 	GROUP BY group_name
 	ORDER BY count DESC";
 
