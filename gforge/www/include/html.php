@@ -489,11 +489,14 @@ function site_user_header($params) {
 	*/
 	echo $HTML->header($params);
 	echo html_feedback_top($GLOBALS['feedback']);
-	echo ($HTML->subMenu(
-		array($Language->getText('menu','my_personal_page'),
-		$Language->getText('menu','diary_notes'),$Language->getText('menu','account_maintenance')),
-		array('/my/','/my/diary.php','/account/')));
-
+	echo ($HTML->BeginSubMenu());
+	echo ($HTML->PrintSubMenu(
+		      array($Language->getText('menu','my_personal_page'),
+			    $Language->getText('menu','diary_notes'),
+			    $Language->getText('menu','account_maintenance')),
+		      array('/my/','/my/diary.php','/account/')));
+	plugin_hook ("usermenu", false) ;
+	echo ($HTML->EndSubMenu());
 }
 
 /**

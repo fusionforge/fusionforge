@@ -1,3 +1,13 @@
+2003-01-14  Roland Mas  <lolando@debian.org>
+
+	* www/include/Layout.class: Split subMenu() into BeginSubMenu(),
+	PrintSubMenu() and EndSubMenu().  subMenu() still exists, and
+	calls these three methods in a row, giving the same net result.
+
+	* www/include/html.php: Replaced the call to subMenu() in
+	site_user_header by successive calls to the three aforementioned
+	methods, with a plugin hook in-between.
+
 2003-01-13 Reinhard Spisser (reinhard@spisser.it)
 
 	* www/docman/*: fully localized

@@ -711,15 +711,31 @@ if ($params['group']) {
 	}
 
 	/**
-	 * subMenu() - Takes two array of titles and links and build a menu
+	 * BeginSubMenu() - Opening a submenu
+	 *
+	 */
+	function BeginSubMenu ($title_arr,$links_arr) {
+		$return = '
+			<p><strong>';
+		return $return;
+	}
+
+	/**
+	 * EndSubMenu() - Closing a submenu
+	 *
+	 */
+	function EndSubMenu ($title_arr,$links_arr) {
+		$return = '</strong></p>';
+		return $return;
+	}
+
+	/**
+	 * PrintSubMenu() - Takes two array of titles and links and builds the contents of a menu
 	 *
 	 * @param	   array   The array of titles
 	 * @param	   array   The array of title links
 	 */
-	function subMenu ($title_arr,$links_arr) {
-		$return = '
-			<p><strong>';
-
+	function PrintSubMenu ($title_arr,$links_arr) {
 		$count=count($title_arr);
 		$count--;
 		for ($i=0; $i<$count; $i++) {
@@ -727,8 +743,20 @@ if ($params['group']) {
 				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a> | ';
 		}
 		$return .= '
-				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a>
-			</strong><p>';
+				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a>';
+		return $return;
+	}
+
+	/**
+	 * subMenu() - Takes two array of titles and links and build a menu
+	 *
+	 * @param	   array   The array of titles
+	 * @param	   array   The array of title links
+	 */
+	function subMenu ($title_arr,$links_arr) {
+		$return  = BeginSubMenu () ;
+		$return .= PrintSubMenu ($title_arr,$links_arr) ;
+		$return .= EndSubMenu () ;
 		return $return;
 	}
 
