@@ -80,13 +80,23 @@ function forum_header($params) {
 	}
 
 
+	echo $HTML->subMenu(
+		array(
+			$Language->getText('group','short_forum'),
+			$Language->getText('forum_utils','admin')
+		),
+		array(
+			'/forum/?group_id='.$group_id,
+			'/forum/admin/?group_id='.$group_id
+		)
+	);
+
 	/*
 		Show horizontal forum links
 	*/
 	if ($f && $forum_id) {
 		echo '<h3>'.$Language->getText('forum_utils','discussionforum').' <a href="/forum/forum.php?forum_id='.$forum_id.'">'.$f->getName().'</a></h3>';
 	}
-	echo '<p><strong>';
 
 	if (session_loggedin() ) {
 		if ($f) {
@@ -107,8 +117,6 @@ function forum_header($params) {
 			html_image('ic/write16w.png','20','20',array('alt'=>$Language->getText('forum_message','thread'))) .' '.
 			$Language->getText('forum_message','thread').'</a> | ';
 	}
-	echo '  <a href="/forum/admin/?group_id='.$group_id.'">'.$Language->getText('forum_utils','admin').'</a></strong>';
-	echo '</p>';
 }
 
 function forum_footer($params) {
