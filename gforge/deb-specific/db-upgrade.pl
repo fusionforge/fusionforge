@@ -861,7 +861,7 @@ eval {
     }
 
     $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+13" ;
+    $target = "2.6-0+checkpoint+14" ;
     if (is_lesser $version, $target) {
       debug "Upgrading with 20021213.sql" ;
 
@@ -881,7 +881,7 @@ eval {
     }
 
     $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+14" ;
+    $target = "2.6-0+checkpoint+15" ;
     if (is_lesser $version, $target) {
       debug "Transcoding documentation data fields" ;
       $query = "SELECT docid,data FROM doc_data ORDER BY docid ASC" ;
@@ -910,7 +910,7 @@ eval {
     }
 
     $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+15" ;
+    $target = "2.6-0+checkpoint+16" ;
     if (is_lesser $version, $target) {
       debug "Upgrading with 20021214.sql" ;
 
@@ -930,7 +930,7 @@ eval {
     }
 
     $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+16" ;
+    $target = "2.6-0+checkpoint+17" ;
     if (is_lesser $version, $target) {
       debug "Upgrading with 20021215.sql" ;
 
@@ -950,7 +950,7 @@ eval {
     }
 
     $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+17" ;
+    $target = "2.6-0+checkpoint+18" ;
     if (is_lesser $version, $target) {
       debug "Upgrading with 20021216.sql" ;
 
@@ -970,7 +970,7 @@ eval {
     }
 
     $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+18" ;
+    $target = "2.6-0+checkpoint+19" ;
     if (is_lesser $version, $target) {
       debug "Upgrading with 20021223.sql" ;
 
@@ -990,11 +990,31 @@ eval {
     }
 
     $version = &get_db_version ;
-    $target = "2.6-0+checkpoint+19" ;
+    $target = "2.6-0+checkpoint+20" ;
     if (is_lesser $version, $target) {
       debug "Upgrading with 20030102.sql" ;
 
       @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030102.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+21" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20030105.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030105.sql") } ;
       foreach my $s (@reqlist) {
 	  $query = $s ;
 	  # debug $query ;
@@ -1023,6 +1043,12 @@ if ($@) {
     debug "Transaction aborted because $@" ;
     debug "Last SQL query was:\n$query\n(end of query)" ;
     $dbh->rollback ;
+    my $version = &get_db_version ; 
+    if ($version) {
+	debug "Your database schema is at version $version" ;
+    } else {
+	debug "Couldn't get your database schema version." ;
+    }
     debug "Please report this bug on the Debian bug-tracking system." ;
     debug "Please include the previous messages as well to help debugging." ;
     debug "You should not worry too much about this," ;
