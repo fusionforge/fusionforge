@@ -43,6 +43,9 @@ case "$1" in
         # LDAP config removal
 	/usr/lib/sourceforge/bin/install-ldap.sh purge
 
+        # DB config removal
+	/usr/lib/sourceforge/bin/install-db.sh purge
+
         if grep -q "### Next line inserted by Sourceforge install" /etc/aliases
         then
                 perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/aliases
@@ -57,6 +60,8 @@ case "$1" in
 	    /etc/sourceforge/local.pl
         # Clean up cruft left over by past buggy versions...
 	rm -f /etc/sourceforge/exim.directors
+	rm -f /etc/sourceforge/exim.directors.template
+	rm -f /usr/lib/sourceforge/www/ldap.php
 
 	;;
     upgrade|deconfigure|failed-upgrade)
