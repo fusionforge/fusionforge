@@ -689,7 +689,9 @@ function ShowResultSet($result,$title='',$linkify=false,$displayHeaders=true,$he
 		}
 		
 		/* Display the headers */
-		echo $HTML->multiTableRow('', $headersCellData, TRUE);
+		if($displayHeaders) {
+			echo $HTML->multiTableRow('', $headersCellData, TRUE);
+		}
 
 		/*  Create the rows  */
  		for ($j = 0; $j < $rows; $j++) {
