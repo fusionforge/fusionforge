@@ -12,7 +12,15 @@
 #  * 		removed all not used entries
 #	* 2003-01-17 rspisser <reinhard@spisser.it>
 #  *		adding localization strings for forums
+#	* 2003-01-21 rspisser <reinhard@spisser.it>
+#	*		adding localization strings for my, diary, project_homepage
 #  */
+
+
+
+error	title	Requested Page not Found (Error 404)
+error	text	PAGE NOT FOUND
+error	error_creating	Errore nella creazione
 system	locale	it_IT
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	d-m-Y H:i
@@ -66,15 +74,15 @@ account_register	err_username	Campo login obbligatorio
 account_register	err_realname	You must supply a real name
 account_register	err_passwd	You must supply a password
 account_register	err_passwd2	Passwords do not match
-account_register	err_passwd3	Invalid Password:
-account_register	err_unixname	Invalid Unix Name. 
-account_register	err_email	Invalid Email Address
-account_register	err_jabber	Invalid Jabber Address
-account_register	err_userexist	That username already exists.
+account_register	err_passwd3	Password non valida:
+account_register	err_unixname	Nome utente unix non valido. 
+account_register	err_email	Indirizzo email non valido
+account_register	err_jabber	Indirizzo Jabber non valido
+account_register	err_userexist	Il nome &egrave; gi&agrave; usato da un altro utente.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
-account_register	err_badinsert	Insert Failed 
+account_register	err_badinsert	Inserimento fallito
 account_register	message_header	Registrazione Account Gforge
-account_register	message_body	Thank you for registering on the SourceForge web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
+account_register	message_body	Grazie per la tua registrazione. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<https://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttps://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the SourceForge staff\n
 account_register	partecipate_peer_ratings	Partecipa alle quotazioni. <I>(Permette di quotare altri utenti utilizzando criteri diversi ed essere quotato da altri. Se avete intenzione di partecipare alle quotazione, potete ottenere maggiori informazioni sulla vostra $1 homepage </a>).
 account_register	remember_me	"Ricordami". <I>(Permette di accedere alla $1 pagina personale </a> senza essere loggato. &Egrave; comunque necessario loggarsi prima di fare qualsiasi modifica).</I>
 account_register	update	Applica Modifiche
@@ -88,12 +96,12 @@ account_verify	login		Login
 account_verify	missingparam	Parametro mancante
 account_verify	usermandatory	Nome utente obbligatorio.
 account_verify	invaliduser	Invalid user
-account_verify	nouser	User does not exist.
+account_verify	nouser	L'utente non esiste.
 account_verify	invalidop	Invalid operation
 account_verify	accountactive	Utente gi&agrave; attivo.
 account_verify	invalidparam	Invalid parameter
 account_verify	cannotconfirm	Cannot confirm account identity - invalid confirmation hash (or login name)
-account_verify	accessdenied	Access denied
+account_verify	accessdenied	Accesso negato 
 account_verify	invalidcred	Credentials you entered do not correspond to valid account.
 account_verify	cannotactivate	Could not activate account
 account_verify	erroractivate	Error while activiting account
@@ -170,6 +178,9 @@ docman_admin_groupdelete	title	Delete Document Group
 docman_admin_groupedit	section	Document Manager Administration
 docman_admin_groupedit	title	Rename Document Group
 docman_admin_groupedit	group_name	Nome gruppo
+docman_common	error_min_title_lenght	Il titolo del documento deve essere almeno di 5 caratteri
+docman_common	error_min_desc_lenght	La descrizione del documento deve essere almeno di 10 caratteri
+docman_common	no_docs	Nessun documento trovato
 docman_display_doc	section	Progetto: $1 
 docman_display_doc	title	Document Manager: Visualizza documenti
 docman_display_doc	all_languages	Tutte
@@ -182,6 +193,12 @@ docman_new	upload_file	Invia file
 docman_new	language	Lingua
 docman_new	group	Gruppo al quale appartiene il documento:
 docman_new	submit	Invia Informazioni
+exit	exiting_with_error	Uscita con errore
+exit	choose_a_group	Error - Choose A group
+exit	choose_group_text	ERROR - No group_id was chosen.
+exit	choose_group_body	Non &egrave stato scelto nessun Id gruppo
+exit	missing_parameters_title	Error - parametri obbligatori mancanti
+exit	missing_parameters_body	Error - Mancano alcuni parametri obbligatori
 forum	title	Forum
 forum	choose	<p>Seleziona un forum e puoi scorrere, cercare e inserire messaggi.<p>
 forum	error_no_forums_found	Nessun forum trovato per 
@@ -301,6 +318,8 @@ frs	file_rel_date	Data
 frs	file_version	Versione
 frs	latest_file_releases	Ultimi rilasci
 frs	file_monitor	Monitorizza
+frs_release	email_title	[Rilascio $1 Release]: $2
+frs_release	email_text	\n\nIl progetto "$1" ('$2') ha  \nrilasciato una nuova versione del pacchetto '$3' \nPuoi scaricarlo seguendo il link::\n$4\n\nRicevi questa mail\npoich&egrave; hai richiesto di essere avvertito quando una nuova versione di questo pacchetto viene rilasciata.\nSe non vuoi pi&ugrave; essere notificato via email,\ncollegati a $5 e segui il link: \n$6
 general	return	[Ritorna  a $1]
 general	permdenied	Autorizzazione Vietata.
 general	permnotget	Could not get permission
@@ -328,6 +347,7 @@ general	cancel	Annulla
 general	submit	Invia
 general	error	Errore
 general	more	Altri
+general	browse	Visualizza
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_cvs	CVS Repository
@@ -366,6 +386,7 @@ home	no_stats_available	Statistiche non disponibili
 home	hosted_projects	Progetti ospitati
 home	registered_users	Utenti registrati
 home	none_found	Non trovato
+index	welcome	Benvenuto
 mail	provided_by	<P>Mailing lists provided via a SourceForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
 menu	bookmark_page	Bookmark Page
 menu	contact_us	Contact $1
@@ -388,7 +409,6 @@ menu	admin	Amministrazione
 menu	account_maintenance	Opzioni Utente
 my	about_blurb	La tua pagina personale contiene un elenco di bug, attivita che ti sono stati assegnati, inoltre l'elenco dei progetti ai quali partecipi.
 my	no_bookmarks	Non ci sono segnalibri salvati
-
 my	no_monitored_filemodules	<H3>Non stai monitorando nessun file</H3><P>Quando monitorizzi un file, riceverai una email ogni volta che viene rilasciato un file, con un link al server per il download. <P>Il monitoraggio di file pu&ograve; essere abilitato visualizzando il &quot;Sommario&quot; del progetto e selezionando la checkbox nella sezione file.<BR>&nbsp
 my	no_monitored_forums	<H3>Non stai monitorando nessun forum</H3><P>Quando monitorizzi un forum, riceverai un email ogni volta che qualcuno inserisce una risposta; con un link al messagio.<P> Puoi abilitare il monitoraggio di forum cliccando su &quot;Monitorizza Forum&quot;
 my	no_open_tasks	Non ci sono attivit&agrave; aperte assegnate a te.
@@ -458,6 +478,89 @@ news_utils	nonews	Nessuna news trovata
 news_utils	archive	Archivio News
 news_utils	submit	Invia per 
 news_utils	readmore	<NOBR>Leggi/Scrivi messaggio</NOBR>
+pm	title	Gestore attivit&agrave; Sottoprogetti e Task
+pm	intro	Selezionare un sottoprogetto e puoi visualizzare/modificare e aggiungere attivit&agrave.
+pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project will have to set up projects using the admin page</FONT></B>
+pm	category	Categoria
+pm	start_date	Data inizio
+pm	end_date	Data fine
+pm	percent_complete	Perc. completo
+pm	priority	Priorit&agrave;
+pm	summary	Sommario
+pm	details	Dettaglio
+pm	assigned_to	Assegnato a
+pm	dependent	Dipendente dall'attivit&agrave;
+pm	hours	Ore stimate
+pm	status	Stato
+pm	view_calendar	Visualizza calendario
+pm	date_note		La data inizio e fine dell'attivit&agrave; devono essere superiori alle date di inizio delle attivit&agrave; dalle quali dipende <br/>altrimenti il sistema modificher&agrave; automaticamente le date.
+pm	task_id	Id Task
+pm	dependent_note			Scegliere solo attivit&agrave; che devono essere completate prima che questa attivit&agrave; parte.
+pm	unassigned	Non assegn.
+pm	any	Tutti
+pm_modtask	assignee	Assegnatario
+pm_modtask	sort_on	Ordina per
+pm_addtask	title	Aggiungi un nuovo task
+pm_admin	section	$1
+pm_admin	title	Task Manager: Administration
+pm_admin_change_status	section	Task Manager Administration
+pm_admin_change_status	title	Update Information
+pm_admin_projects	section	Task Manager Administration
+pm_admin_projects	title	Add Subprojects
+pm_browse_custom	section	Task Manager
+pm_browse_custom	title	Browse Custom Tasks
+pm_browse_my	section	Project $1 Task Manager
+pm_browse_my	title	Browse My Tasks
+pm_browse_open	section	Task Manager
+pm_browse_open	title	Browse Open Tasks
+pm_browsetask	title	Scorri attivit&agrave;
+pm_browsetask	overdue_tasks	* indica attivit&agrave; scadute
+pm_browsetask	browse	Scorri
+pm_browsetask	previous	indietro
+pm_browsetask	next	avanti
+pm_detailtask	section	Task Manager
+pm_detailtask	title	Task Detail
+pm_modtask	title	Modifica attivit&agrave;
+pm_modtask	submitted_by	Inserito da
+pm_modtask	original_comment	Commento originale
+pm_modtask	add_comment	Aggiungi un commento
+pm_reporting	section	Task Manager
+pm_reporting	title	Task Reporting System
+pm_include_grouphtml	project	Progetto
+pm_include_grouphtml	add_task	Aggiungi attivit&agrave;
+pm_include_grouphtml	browse_task	Elenca attivit&agrave;
+pm_include_grouphtml	gantt_chart	Diagramma Gantt 
+pm_include_grouphtml	reporting	Reportistica
+pm_include_grouphtml	admin	Amministra
+pm_include_grouphtml	not_started	Non iniziato
+pm_include_grouphtml	error_disabled	Il progetto ha disabilitato il gestore delle attivit&agrave;
+pm_include_taskhtml	depend_info	Attivit&agrave; che dipendono da questa attivit&agrave;
+pm_include_taskhtml	no_depend_info	Nessuna attivit&agrave; dipende da questa attivit&agrave;
+pm_include_taskhtml	no_tracker_items	Nessuna relazione con elementi del tracker
+pm_include_taskhtml	no_comments	Nessun commento &egrave; stato inserito
+pm_include_taskhtml	no_changes	Non &egrave; stato effettuato alcun cambiamento
+pm_include_taskhtml	related_items	Elementi del tracker relazionati
+pm_include_taskhtml	tracker	Tracker
+pm_include_taskhtml	open_date	Data inizio
+pm_include_taskhtml	remove_relation	Rimuovi relazione
+pm_include_taskhtml	followups	Risposte
+pm_include_taskhtml	comment	Commento
+pm_include_taskhtml	date	Data
+pm_include_taskhtml	by	Da
+pm_include_taskhtml	task_history	Storia del cambiamento dell'attivit&agrave;
+pm_include_taskhtml	field	Campo
+pm_include_taskhtml	old_value	Valore precente
+pm_include_taskhtml	no_followups	Nessuna risposta
+pm_addtask	task_created_successfully	Attivit&agrave; creata con successo
+pm_addtask	task_updated_successfully	Attivit&agrave; aggiornata con successo
+pm_addtask	task_added_relationship	Aggiornata relazione con tracker
+pm_ganttpage	weeks	Settimane
+pm_ganttpage	months	Mesi
+pm_ganttpage	days	Giorni
+pm_ganttpage	sort_on	Ordina per
+pm_ganttpage	resolution	Risoluzione
+pm_ganttpage	size	Dimensioni
+pm_ganttpage	assignee	Assegnatario
 project_home	title	Informazioni progetto
 project_home	holding_note	NOTE: This project entry is maintained by the $1 staff. We are not the official site for this product. Additional copyright information may be found on this project's homepage.
 project_home	help_wanted	AIUTO RICHIESTO: Questo progetto sta cercando
@@ -467,24 +570,93 @@ project_home	view_project_files	Visualizza tutti i file
 project_home	no_trackers	Non ci sono tracker pubblici
 project_home	no_subprojects	Non ci sono sottoprogetti pubblici
 project_home	monitor_package	Monitor this package
-project_home	release_notes	Release Notes
+project_home	release_notes	Note di rilascio
 project_home	public_mailing_lists	mailing list pubbliche
 project_home	messages_in	messaggi in
 project_home	forums	forum
 project_home	surveys	sondaggi
-project_memberlist	joining	<P>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.<br><br>
+project_showfiles	error_no_packages_defined_title	Nessun package definito
+project_showfiles	error_no_packages_defined_text	Non &egrave; stato definito alcun package per questo progetto.
+project_showfiles	title	File rilasciati per il progetto
+project_showfiles	intro	Qui trovi l'elenco di tutti i file del progetto.
+project_showfiles	intro2	Prima di scaricare il file, leggi le note di rilascio e il Changelog  (accessibile cliccando sulla versione della release).
+project_showfiles	release_highlighted	La release selezionata &egrave; <span style="background-color:pink">evidenziata</span>.
+project_showfiles	package	Package
+project_showfiles	release_notes	Note <br />di rilascio 
+project_showfiles	filename	Nome file
+project_showfiles	size	Dimensione
+project_showfiles	downloads	D/L
+project_showfiles	architecture	Architettura
+project_showfiles	file_type	Tipo file
+project_showfiles	date	Data
+project_showfiles	project_totals	Totali progetto:
+project_shownotes	error_release_not_found	La release richiesta non &egrave; stata trovata.
+project_shownotes	notes	Note:
+project_shownotes	changes	Cambiamenti:
+project_shownotes	release_name	Nome Release:
+project_shownotes	title	Note e Changelog per i rilasci
+project_filemodule_monitor	stop_monitor_title	Monitorizzazione disattivata
+project_filemodule_monitor	stop_monitor_body	&Egrave; stata disattivata la monitorizzazione del package
+project_filemodule_monitor	start_monitor_title	Monitorizzazione attivata
+project_filemodule_monitor	start_monitor_body	&Egrave; stata attivata la monitorizzazione del package
+project_memberlist	joining	<P>Se vuoi partecipare a questo progetto , contatta uno degli amministratori. Gli amministratori del progetto sono segnati in grassetto..<br><br>
+project_memberlist	title	Elenci partecipanti progetto
+project_memberlist	developer	Nome utente
+project_memberlist	username	utente
+project_memberlist	role	Ruolo/Posizione
+project_memberlist	skills	Competenze
+project_memberlist	view	Visualizza
 sendmessage	about_blurb	In an attempt to reduce spam, we are using this form to send email.<p>Fill it out accurately and completely or the receiver may not be able to respond.<P><FONT COLOR="RED"><B>IF YOU ARE WRITING FOR HELP:</B> Did you read the site documentation? Did you include your <B>user_id</B> and <B>user_name?</B> If you are writing about a project, include your <B>project id</B> (<B>group_id</B>) and <B>Project Name</B>.</FONT>
-users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
+users	peerinfo1	Se conosci questo utente, prenditi un minuto per quotarlo secondo i seguenti criteri. Considera che i tuoi voti potranno essere visti dall'utente stesso e dagli altri.  <P> Il sistema di quotazioni $1 si basa su concetti di <A HREF="http://www.advogato.com">Advogato.</A> Il sistema &egrave; stato re-implementato ed espanso.
 users	peerinfo2	The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
-users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.
+users	optout	Hai selezionato di non partecipare alle quotazioni, perci&ograve; non puoi quotare questo utente. Vai a <a href="/account/">opzioni utente </a> per maggiori informazioni.
+users	user_not_exist_title	L'utente non esiste
+users	no_user_name	Nessun nome utente specificato
+users	user_not_exist_text	Utente non valido
+user_home	title	Profilo utente
+user_home	skills_profile	Profilo delle competenze
+user_home	user_id	Id Utente
+user_home	login_name	Login 
+user_home	real_name	Nome
+user_home	email	Email Addr.
+user_home	jabber_address	Jabber Address
+user_home	personal_information	Informazioni utente
+user_home	site_member_since	Registrato il:
+user_home	contact	Contatto
+user_home	email	Il tuo indirizzo email
+user_home	name	Il tuo nome
+user_home	subject	Soggetto
+user_home	message	Messaggio
+user_home	send	Invia messaggio
+user_home	send_a_message	Invia un messaggio a 
+user_home	peer_rating	Quotazioni
+user_home	peer_rating_disabled	L'utente ha selezionato di non partecipare alle quotazioni
+user_home	diary_notes	Diario e Note
+user_home	diary_notes_entries	Diary/Note entries:
+user_home	diary_notes_view	Visualizza Diario e Note
+user_home	diary_notes_monitor	Monitorizza questo diario
+user_home	project_info	Informazioni progetto
+user_home	no_projects	Questo utente non &egrave; membro di nessun progetto.
+user_home	member_of	Questo utente &egrave; membro dei seguenti progetti:
+user_home	send_message_if_logged	Puoi inviare un messaggo se sei collegato
 trove	not_categorized	Questo progetto non &agrave; ancora stato categorizzato nella
 trove	title	Mappa del software Trove
-classgroup	acceptedproject	Your project registration for $7 has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
-classgroup	rejectedproject	Your project registration for $3 has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
-classgroup	newprojectnotification	New $1 Project Submitted\n\nProject Full Name:  $2\nSubmitted Description: $3\nLicense: $4\n\nPlease visit the following URL to approve or reject this project:\nhttp://$5/admin/approve-pending.php
+classgroup	acceptedproject	Il tuo progetto $7 &egrave; stato approvato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\nServer CVS:         cvs.$2.$3\nServer Web/Shell:   $2.$3\n\nIl DNS sar&agrave; attivato fra ca. 1 giorno.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting https://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
+classgroup	rejectedproject	Il tuo progetto $3 &egrave; stato rifiutato.\n\nNome progetto:  $1\nUnix Name del progetto:  $2\n\nRagioni per il rifiuto:\n\n
+classgroup	newprojectnotification	Nuovo progetto $1 inserito\n\nNome progetto:  $2\nDescrizione: $3\nLicenza: $4\n\nCollegati all'URL \nhttp://$5/admin/approve-pending.php per approvare o rifiutare il progetto.
 classgroup	acceptedprojecttitle	Progetto $1 approvato
 classgroup	rejectedprojecttitle	Progetto $1 rifiutato
 classgroup	newprojectnotificationtitle	Nuovo progetto $1 inserito
+sendmessage	error_variables	Errore - alcuni campi non riempiti
+sendmessage	error_user_not_exist	Errore - L'utente non esiste
+sendmessage	email_only_to	Puoi inviare messaggi solo a indirizzi
+sendmessage	message_sent	Il messaggio &egrave; stato inviato
+sendmessage	contact	Contatto
+sendmessage	email	Il tuo indirizzo email
+sendmessage	name	Il tuo nome
+sendmessage	subject	Soggetto
+sendmessage	message	Messaggio
+sendmessage	send	Invia messaggio
 session	missingpasswd	Missing Password Or Users Name
 session	invalidpasswd	Invalid Password Or User Name
 session	suspended	Utente sospeso

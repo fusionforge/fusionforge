@@ -9,6 +9,9 @@
 #  * @version   $Id$
 #  *
 #  */
+error	title	Requested Page not Found (Error 404)
+error	not_found	PAGE NOT FOUND
+error	error_creating	Error creating
 system	locale	en_US
 system	strftimefmt	%Y %B %e  %H:%M
 system	datefmt	Y-m-d H:i
@@ -201,13 +204,15 @@ docman_new	submit	Submit Information
 docman_new	file	File
 docman_new	state	State
 docman_new	error_blank_document	Error getting blank document
+docman_common	error_min_title_lenght	Title Must Be At Least 5 Characters
+docman_common	error_min_desc_lenght	Document Description Must Be At Least 10 Characters
+docman_common	no_docs	No Documents Found
 exit	exiting_with_error	Exiting with error
 exit	choose_a_group	Error - Choose A group
 exit	choose_group_text	ERROR - No group_id was chosen.
 exit	choose_group_body	No group Id was chosen
 exit	missing_parameters_title	Error - missing parameters
 exit	missing_parameters_body	Error - missing required parameters
-
 forum	section	Project: $1
 forum	title	Forums
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
@@ -238,8 +243,6 @@ forum_common_forummessage	error_no_valid_parent_message ForumMessage::create() N
 forum_common_forummessage	error_getting_next_thread	Getting next thread_id failed
 forum_common_forummessage	error_cannot_update_parent	Could Not Update Parent
 forum_common_forummessage	error_cannot_update_master_thread	Couldn't Update Master Thread parent with current time
-
-
 forum_common_forum	error_save_place	Forum::savePlace() 
 forum_save	saved	Forum Position Saved. New messages will be highlighted when you return
 forum_admin	section	Project: $1 
@@ -365,6 +368,25 @@ frs	file_package	Package
 frs	file_rel_date	Date
 frs	file_version	Version
 frs	latest_file_releases	Latest File Releases
+frs_file	error_min_name_lenght	FRSFile Name Must Be At Least 3 Characters
+frs_file	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
+frs_file	error_invalid_file	FRSFile Appears to be invalid
+frs_file	error_already_exists	That filename already exists in this project space 
+frs_file	error_cannot_move	File cannot be moved to the permanent location
+frs_package	error_min_name_lenght	FRSPackage Name Must Be At Least 3 Characters
+frs_package	error_name_format	FRSPackage::Update: Package Name can only be alphanumeric
+frs_package	error_invalid_file	FRSFile Appears to be invalid
+frs_package	error_already_exists	That filename already exists in this project space 
+frs_package	error_cannot_move	File cannot be moved to the permanent location
+frs_package	error_set_monitor	You Can Only Monitor If You Are Logged In
+frs_release	error_min_name_lenght	FRSPackage Name Must Be At Least 3 Characters
+frs_release	error_name_format	FRSFile Name Should Be in This Example Format: gforge-3.0.tar.bz2
+frs_release	error_invalid_file	FRSFile Appears to be invalid
+frs_release	error_already_exists	That filename already exists in this project space 
+frs_release	error_cannot_move	File cannot be moved to the permanent location
+frs_release	error_set_monitor	You Can Only Monitor If You Are Logged In
+frs_release	email_title	[$1 Release] $2
+frs_release	email_text	\n\nProject "$1" ('$2') has  \nreleased the new version of package '$3' \nYou can download it by following this link:\n $4\n\nYou receive this email because you\nrequested to be notified when new versions of this package\nwere released. If you don't wish to be notified in the\nfuture, please login to $5 and click this link: \n $6
 general	return_to	[Return to $1]
 general	return	Return
 general	error	Error
@@ -400,6 +422,8 @@ general	error_no_valid_group_object	$1:: No Valid Group Object
 general	error_creating	Error Creating $1
 general	error_getting	Error Getting $1
 general	error_getting_new	Error Getting New $1
+general	error_missing_params	Missing Parameters
+general	browse	Browse
 group	developer_info	Developer Info
 group	developers	Developers
 group	long_bugs	Bug Tracking
@@ -449,6 +473,7 @@ home	no_stats_available	No Stats Available
 home	hosted_projects	Hosted Projects
 home	registered_users	Registered Users
 home	none_found	None Found
+index	welcome	Welcome
 mail	provided_by	<P>Mailing lists provided via a GForge version of <A href="http://www.list.org">GNU Mailman</A>.  Thanks to the Mailman and <A href="http://www.python.org">Python</A> crews for excellent software.
 mail	section	Project: $1
 mail	title	Mailing Lists
@@ -606,10 +631,27 @@ people_viewjob	title	$1 wanted for $2
 people_viewprofile	section	User Info
 people_viewprofile	title	View Developer Profile
 pm	section	Project: $1 
-pm	title	Task Manager: Subprojects And Tasks
+pm	title	Project/Task Manager: Subprojects And Tasks
+pm	intro	Choose a Subproject and you can browse/edit/add tasks to it.
 pm	noprj	<H1>No Subprojects Found</H1><P><B>No subprojects have been set up, or you cannot view them.<P><FONT COLOR=RED>The Admin for this project will have to set up projects using the admin page</FONT></B>
-pm_addtask	section	Task Manager
-pm_addtask	title	Add A Task 
+pm	category	Category
+pm	start_date	Start Date
+pm	end_date	End Date
+pm	percent_complete	Percent Complete
+pm	priority	Priority
+pm	summary	Task Summary
+pm	details	Task Details
+pm	assigned_to	Assigned To
+pm	dependent	Dependend on Task
+pm	hours	Estimated Hours
+pm	status	Status
+pm	task_id	Task Id
+pm	date_note		The system will modify your start/end dates if you attempt to create a start date earlier than the end date of any tasks you depend on.
+pm	view_calendar	View Calendar
+pm	dependent_note			You should choose only tasks which must be completed before this task can start.
+pm	unassigned	Unassigned
+pm	any	Any
+pm_addtask	title	Add a new Task
 pm_admin	section	$1
 pm_admin	title	Task Manager: Administration
 pm_admin_change_status	section	Task Manager Administration
@@ -622,12 +664,57 @@ pm_browse_my	section	Project $1 Task Manager
 pm_browse_my	title	Browse My Tasks
 pm_browse_open	section	Task Manager
 pm_browse_open	title	Browse Open Tasks
+pm_browsetask	title	Browse tasks
+pm_browsetask	browse	Browse
+pm_browsetask	previous	previous 50
+pm_browsetask	next	next 50
+pm_browsetask	overdue_tasks	* Denotes overdue tasks
 pm_detailtask	section	Task Manager
 pm_detailtask	title	Task Detail
-pm_modtask	section	Task Manager
 pm_modtask	title	Modify Task
+pm_modtask	submitted_by	Submitted By
+pm_modtask	original_comment	Original Comment
+pm_modtask	add_comment	Add A Comment
+pm_modtask	assignee	Assignee
+pm_modtask	sort_on	Sort On
 pm_reporting	section	Task Manager
 pm_reporting	title	Task Reporting System
+pm_include_grouphtml	project	Project
+pm_include_grouphtml	add_task	Add Task
+pm_include_grouphtml	browse_task	Browse Tasks
+pm_include_grouphtml	gantt_chart	Gantt Chart
+pm_include_grouphtml	reporting	Reporting
+pm_include_grouphtml	admin	Admin
+pm_include_grouphtml	not_started	Not Started
+pm_include_grouphtml	error_disabled	This Project Has Turned Off The Task Manager
+pm_include_taskhtml	depend_info	Tasks That Depend on This Task
+pm_include_taskhtml	no_depend_info	No Tasks are Dependent on This Task
+pm_include_taskhtml	no_tracker_items	No Related Tracker Items Have Been Added
+pm_include_taskhtml	no_comments	No Comments Have Been Added
+pm_include_taskhtml	no_changes	No Changes Have Been Made
+pm_include_taskhtml	related_items	Related Tracker Items
+pm_include_taskhtml	tracker	Tracker
+pm_include_taskhtml	open_date	Open Date
+pm_include_taskhtml	remove_relation	Remove Relation
+pm_include_taskhtml	followups	Folloups
+pm_include_taskhtml	comment	Comment
+pm_include_taskhtml	date	Date
+pm_include_taskhtml	by	By
+pm_include_taskhtml	task_history	Task Change History
+pm_include_taskhtml	field	Field
+pm_include_taskhtml	old_value	Old Value
+pm_include_taskhtml	no_followups	No Followups
+pm_addtask	task_created_successfully	Task Created Successfully
+pm_addtask	task_updated_successfully	Task Updated Successfully
+pm_addtask	task_added_relationship	Successfully Added Tracker Relationship
+pm_ganttpage	weeks	Weeks
+pm_ganttpage	months	Months
+pm_ganttpage	days	Days
+pm_ganttpage	sort_on	Sort On
+pm_ganttpage	resolution	Resolution
+pm_ganttpage	size	Size
+pm_ganttpage	assignee	Assignee
+pm_task	create_successfully	Task Created Successfully
 project_admin	section	Project: $1
 project_admin	title	Administration Summary
 project_admin_database	section	Project $1 - Administration
@@ -653,6 +740,12 @@ project_admin_userperms	title	User Permissions List
 project_admin_vhost	section	Project $1 - Administration
 project_admin_vhost	title	Virtual Host Management
 project_memberlist	joining	<P>If you would like to contribute to this project by becoming a developer, contact one of the project admins, designated in bold text below.<br><br>
+project_memberlist	title	Project Member List
+project_memberlist	developer	Developer
+project_memberlist	username	Username
+project_memberlist	role	Role/Position
+project_memberlist	skills	Skills
+project_memberlist	view	View
 project_showfiles	section	Project: $1
 project_showfiles	title	File List
 project_shownotes	section	Project: $1
@@ -671,6 +764,34 @@ project_home	public_mailing_lists	public mailing lists
 project_home	messages_in	messages in
 project_home	forums	forums
 project_home	surveys	surveys
+project_showfiles	error_no_packages_defined_title	No File Packages
+project_showfiles	error_no_packages_defined_text	There are no file packages defined for this project.
+project_showfiles	title	Project Filelist
+project_showfiles	package	Package
+project_showfiles	release_notes	Release <br />&amp; Notes
+project_showfiles	filename	Filename
+project_showfiles	size	Size
+project_showfiles	downloads	D/L
+project_showfiles	architecture	Arch
+project_showfiles	file_type	Type
+project_showfiles	date	Date
+project_showfiles	intro	Below is a list of all files of the project.
+project_showfiles	intro2	Before downloading, you may want to read Release Notes and ChangeLog (accessible by clicking on release version).
+project_showfiles	release_highlighted	The release you have chosen is <span style="background-color:pink">highlighted</span>.
+project_showfiles	monitor_package	Monitor this package
+project_showfiles	no_releases	No releases
+project_showfiles	project_totals	Project totals
+project_shownotes	notes	Notes:
+project_shownotes	changes	Changes:
+project_shownotes	release_name	Release Name:
+project_shownotes	title	File Release Notes and Changelog
+project_shownotes	error_release_not_found	That Release Was Not Found
+project_filemodule_monitor	stop_monitor_title	Monitoring stopped
+project_filemodule_monitor	stop_monitor_body	Monitoring Has Been Stopped
+project_filemodule_monitor	start_monitor_title	Monitoring started
+project_filemodule_monitor	start_monitor_body	Monitoring Has Been Started
+
+
 projects	section	Project: $1
 projects	title	Summary
 register	title	New Project Registration
@@ -780,6 +901,35 @@ users	title	User Summary
 users	peerinfo1	If you are familiar with this user, please take a moment to rate him/her on the following criteria. Keep in mind, that your rating will be visible to the user and others.  <P> The $1 Peer Rating system is based on concepts from <A HREF="http://www.advogato.com">Advogato.</A> The system has been re-implemented and expanded in a few ways.
 users	peerinfo2	The Peer rating box shows all rating averages (and response levels) for each individual criteria. Due to the math and processing required to do otherwise, these numbers incoporate responses from both "trusted" and "non-trusted" users.  <ul> <li> The "Sitewide Rank" field shows the user's rank compared to all ranked $1 users.  <li>The "Aggregate Score" shows an average, weighted overall score, based on trusted-responses only.  <li>The "Personal Importance" field shows the weight that users ratings of other developers will be given (between 1 and 1.5) -- higher rated user's responses are given more weight.  </ul> <p> <i> If you would like to opt-out from peer rating system (this will affect your ability to both rate and be rated), refer to <a href="/account/">your account maintenance page</a>. If you choose not to participate, your ratings of other users will be permanently deleted and the 'Peer Rating' box will disappear from your user page. </i></p>
 users	optout	You opted-out from peer rating system, otherwise you would have a chance to rate the user. Refer to <a href="/account/">your account maintenance page</a> for more information.
+users	user_not_exist_title	That user does not exist.
+users	user_not_exist_text	Invalid User
+users	no_user_name	No User Name Provided
+user_home	title	Developer Profile
+user_home	skills_profile	Skills Profile
+user_home	user_id	User Id
+user_home	login_name	Login Name
+user_home	real_name	Real Name
+user_home	email	Email Addr.
+user_home	jabber_address	Jabber Address
+user_home	personal_information	Personal Information
+user_home	site_member_since	Site Member Since
+user_home	contact	Contact
+user_home	email	Your Email Address
+user_home	name	Your Name
+user_home	subject	Subject
+user_home	message	Message
+user_home	send	Send Message
+user_home	send_a_message	Send a Message to
+user_home	peer_rating	Peer Rating
+user_home	peer_rating_disabled	User chose not to participate in peer rating
+user_home	diary_notes	Diary and Notes
+user_home	diary_notes_entries	Diary/Note entries:
+user_home	diary_notes_view	View Diary & Notes
+user_home	diary_notes_monitor	Monitor this Diary
+user_home	project_info	Project Info
+user_home	no_projects	This developer is not a member of any projects.
+user_home	member_of	This developer is a member of the following groups:
+user_home	send_message_if_logged	You Could Send a Message if you were logged in
 trove	not_categorized	This project has not yet categorized itself in the
 trove	title	Trove Software Map
 classgroup	acceptedproject	Your project registration for $7 has been approved.\n\nProject Full Name:  $1\nProject Unix Name:  $2\nCVS Server:         cvs.$2.$3\nShell/Web Server:   $2.$3\n\nYour DNS will take up to a day to become active on our site.\nWhile waiting for your DNS to resolve, you may try shelling into \n$4 and pointing CVS to $5\n\nIf after 6 hours your shell/CVS accounts still do not work, please\nopen a support ticket so that we may take a look at the problem.\nPlease note that all shell/CVS accounts are closed to telnet and only\nwork with SSH1.\n\nYour web site is accessible through your shell account. Please read\nsite documentation (see link below) about intended usage, available\nservices, and directory layout of the account.\n\nPlease take some time to read the site documentation about project\nadministration (http://$3/docs/site/). If you visit your\nown project page in $7 while logged in, you will find\nadditional menu functions to your left labeled \'Project Admin\'.\n\nWe highly suggest that you now visit $7 and create a public\ndescription for your project. This can be done by visiting your project\npage while logged in, and selecting \'Project Admin\' from the menus\non the left (or by visiting http://$3/project/admin/?group_id=$6\nafter login).\n\nYour project will also not appear in the Trove Software Map (primary\nlist of projects hosted on $7 which offers great flexibility in\nbrowsing and search) until you categorize it in the project administration\nscreens. So that people can find your project, you should do this now.\nVisit your project while logged in, and select \'Project Admin\' from the\nmenus on the left.\n\nEnjoy the system, and please tell others about $7. Let us know\nif there is anything we can do to help you.\n\n-- the $7 crew
@@ -788,6 +938,16 @@ classgroup	newprojectnotification	New $1 Project Submitted\n\nProject Full Name:
 classgroup	acceptedprojecttitle	$1 Project Approved
 classgroup	rejectedprojecttitle	$1 Project Denied
 classgroup	newprojectnotificationtitle	New $1 Project Submitted
+sendmessage	error_variables	Error - some variables were not provided
+sendmessage	error_user_not_exist	Error - That user does not exist
+sendmessage	email_only_to	You can only send to addresses 
+sendmessage	message_sent	Message has been sent
+sendmessage	contact	Contact
+sendmessage	email	Your Email Address
+sendmessage	name	Your Name
+sendmessage	subject	Subject
+sendmessage	message	Message
+sendmessage	send	Send Message
 session	missingpasswd	Missing Password Or Users Name
 session	invalidpasswd	Invalid Password Or User Name
 session	suspended	Account Suspended
