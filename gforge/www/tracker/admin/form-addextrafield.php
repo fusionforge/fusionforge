@@ -1,0 +1,73 @@
+<?php
+//
+//  FORM TO BUILD SELECTION BOXES 
+//
+		$ath->adminHeader(array ('title'=>$Language->getText('tracker_admin_build_boxes','title',$ath->getName())));
+
+		echo "<h2>".$Language->getText('tracker_admin_build_boxes','title',$ath->getName())."</h2>";
+
+		/*
+			List of possible user built Selection Boxes for an ArtifactType
+		*/
+		$efarr =& $ath->getExtraFields();
+		echo "<br />";
+		$rows=count($efarr);
+		if ($rows > 0) {
+
+			$title_arr=array();
+			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_title');
+			$title_arr[]=$Language->getText('tracker_admin_build_boxes','tracker_box_option_title');	
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
+
+			for ($i=0; $i < $rows; $i++) {
+
+				echo '<tr '. $GLOBALS['HTML']->boxGetAltRowStyle($i) .'>'.
+					'<td><a href="'.$PHP_SELF.'?update_box=1&amp;id='.
+						$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">'.
+						$efarr[$i]['field_name'].' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a></td>';
+				/*
+		  			List of possible options for a user built Selection Box
+		  		*/
+				$elearray =& $ath->getExtraFieldElements($efarr[$i]['extra_field_id']);
+				$optrows=count($elearray);
+				if ($optrows > 0) {
+					echo '<td>';
+					for ($j=0; $j <$optrows; $j++)
+				
+						echo '<a href="'.$PHP_SELF.'?update_opt=1&amp;id='.
+						$elearray[$j]['element_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;boxid='.
+						$efarr[$i]['extra_field_id'].'">'.
+						$elearray[$j]['element_name'].' ['.$Language->getText('tracker_admin_build_boxes','edit').']</a><br \>';
+
+					} else {
+						echo '<td>';
+				}
+			
+				echo '</td>';
+				echo '<td>';
+				echo '<a href="'.$PHP_SELF.'?add_opt=1&amp;boxid='.
+					$efarr[$i]['extra_field_id'].'&amp;group_id='.$group_id.'&amp;atid='. $ath->getID() .'">['.
+					$Language->getText('tracker_admin_build_boxes', 'box_add_choices').']</a>';
+			}
+			echo   '</tr>';
+			echo $GLOBALS['HTML']->listTableBottom();
+
+		} else { 
+			echo "\n<h3>".$Language->getText('tracker_admin_build_boxes','no_box')."</h3>";
+		}
+		?>
+		<p>
+		<form action="<?php echo $PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID(); ?>" method="post">
+		<input type="hidden" name="add_extrafield" value="y" />
+		<strong><?php echo $Language->getText('tracker_admin_build_boxes','box_name') ?>:</strong><br />
+		<input type="text" name="name" value="" size="15" maxlength="30" /><br />
+		<p>
+		<strong><span style="color:red"><?php echo $Language->getText('tracker_admin_build_boxes','box_warning') ?></span></strong></p>
+		<p>
+		<input type="submit" name="post_changes" value="<?php echo$Language->getText('general','submit') ?>" /></p>
+		</form></p>
+		<?php
+
+		$ath->footer(array());
+
+?>

@@ -52,23 +52,9 @@ switch ($func) {
 					exit_error('ERROR', $Language->getText('general','invalid_email'));
 				}
 			}
-			if (!$ah->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority, $user_email)) {
+			if (!$ah->create($category_id,$artifact_group_id,$summary,$details,$assigned_to,$priority,$extra_fields)) {
 				exit_error('ERROR',$ah->getErrorMessage());
 			} else {
-				//
-				// Include extra fields configured by ADMIN
-				//
-					
-				$result=$ath->getSelectionBoxes();
-				$rows=db_numrows($result);
-					
-				if ($result && $rows > 0) {
-					for ($i=0; $i < $rows; $i++) {
-					$ah->createExtraFields($extra_fields_choice[$i]);
-					}
-					unset ($extra_fields_choice);
-				}
-					
 				//
 				//	Attach file to this Artifact.
 				//
@@ -120,16 +106,14 @@ switch ($func) {
 					$was_error=true;
 				}
 
-		include('massupdate-fields.php');
-				if (($was_error==true) && ($changect==0) && ($transferct==0)) {
+				if ($was_error) {
 					$feedback .= ' ID: '.$artifact_id_list[$i].'::'.$ah->getErrorMessage();
 				}else {
 					$was_error=false;
 				}
 			}
 			unset($ah);
-			
-			
+
 		if (!$was_error) {
 			$feedback = $Language->getText('tracker','updated_successful');			}
 		}
@@ -162,7 +146,7 @@ switch ($func) {
 				$delete_file=false;
 			}
 			if (!$ah->update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
-				$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id)) {
+				$assigned_to,$summary,$canned_response,$details,$new_artfact_type_id,$extra_fields)) {
 				$feedback =$Language->getText('tracker','tracker_item'). ': '.$ah->getErrorMessage();
 				$ah->clearError();
 				$was_error=true;
@@ -214,16 +198,8 @@ switch ($func) {
 			//
 			//	Show just one feedback entry if no errors
 			//
-			include ('update-fields.php');
-			if (!$was_error ||  $changect>0 || $transferct>0) {
+			if (!$was_error) {
 				$feedback = $Language->getText('general','update_successful');
-			if ($ath->getID()!==$new_artfact_type_id){
-				if (!$ah->nullExtraFields($artifact_id)){
-//TODO ERROR HERE???
-//
-				}
-			}
-				
 			}
 			include ('browse.php');
 		}
@@ -285,9 +261,9 @@ switch ($func) {
 			exit_error('ERROR','Artifact Could Not Be Created');			} else if ($ah->isError()) {
 			exit_error('ERROR',$ah->getErrorMessage());
 		} else {
-			if ($ath->userIsAdmin() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
+			if ($ath->userIsAdmin()) {
 				include 'mod.php';
-			} elseif ($ath->userIsTechnician()) {
+			} elseif ($ath->userIsTechnician() || (session_loggedin() && ($ah->getSubmittedBy() == user_getid()))) {
 				include 'mod-limited.php';
 			} else {
 				include 'detail.php';
@@ -300,4 +276,5 @@ switch ($func) {
 		break;
 	}
 }
+
 ?>

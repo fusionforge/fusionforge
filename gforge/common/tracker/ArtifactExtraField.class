@@ -1,6 +1,6 @@
 <?php
 /**
- * ArtifactSelectionBox.class - Class to handle user defined artifacts
+ * ArtifactExtraField.class - Class to handle user defined artifacts
  *
  * Copyright 2004 (c) Anthony J. Pugliese
  *
@@ -24,7 +24,14 @@
  */
 require_once('common/include/Error.class');
 
-class ArtifactSelectionBox extends Error {
+define('ARTIFACT_EXTRAFIELDTYPE_SELECT',1);
+define('ARTIFACT_EXTRAFIELDTYPE_RADIO',3);
+define('ARTIFACT_EXTRAFIELDTYPE_TEXT',4);
+//define('ARTIFACT_EXTRAFIELDTYPE_CHECKBOX',2);
+//define('ARTIFACT_EXTRAFIELDTYPE_MULTISELECT',5);
+define('ARTIFACT_EXTRAFIELDTYPE_TEXTAREA',6);
+
+class ArtifactExtraField extends Error {
 
 	/** 
 	 * The artifact type object.
@@ -41,23 +48,23 @@ class ArtifactSelectionBox extends Error {
 	var $data_array;
 
 	/**
-	 *	ArtifactSelectionBox - Constructer
+	 *	ArtifactExtraField - Constructer
 	 *
 	 *	@param	object	ArtifactType object.
 	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database.
 	 *  @return	boolean	success.
 	 */
-	function ArtifactSelectionBox(&$ArtifactType, $data=false) {
+	function ArtifactExtraField(&$ArtifactType, $data=false) {
 		$this->Error(); 
 
 		//was ArtifactType legit?
 		if (!$ArtifactType || !is_object($ArtifactType)) {
-			$this->setError('ArtifactSelectionBox: No Valid ArtifactType');
+			$this->setError('ArtifactExtraField: No Valid ArtifactType');
 			return false;
 		}
 		//did ArtifactType have an error?
 		if ($ArtifactType->isError()) {
-			$this->setError('ArtifactSelectionBox: '.$Artifact->getErrorMessage());
+			$this->setError('ArtifactExtraField: '.$Artifact->getErrorMessage());
 			return false;
 		}
 		$this->ArtifactType =& $ArtifactType;
@@ -98,7 +105,7 @@ class ArtifactSelectionBox extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}
-		$sql="INSERT INTO artifact_group_selection_box_list (group_artifact_id,selection_box_name) 
+		$sql="INSERT INTO artifact_extra_field_list (group_artifact_id,field_name) 
 			VALUES ('".$this->ArtifactType->getID()."','".htmlspecialchars($name)."')";
 
 		$result=db_query($sql);
@@ -119,17 +126,17 @@ class ArtifactSelectionBox extends Error {
 
 	}
 	/**
-	 *	fetchData - re-fetch the data for this ArtifactSelectionBox from the database.
+	 *	fetchData - re-fetch the data for this ArtifactExtraField from the database.
 	 *
 	 *	@param	int		ID of the Box.
 	 *	@return	boolean	success.
 	 */
 	function fetchData($id) {
 		$this->id=$id;
-		$res=db_query("SELECT * FROM artifact_group_selection_box_list WHERE id='$id'");
+		$res=db_query("SELECT * FROM artifact_extra_field_list WHERE extra_field_id='$id'");
 		
 		if (!$res || db_numrows($res) < 1) {
-			$this->setError('ArtifactSelectionBox: Invalid Artifact ID');
+			$this->setError('ArtifactExtraField: Invalid ArtifactExtraField ID');
 			return false;
 		}
 		$this->data_array =& db_fetch_array($res);
@@ -138,7 +145,7 @@ class ArtifactSelectionBox extends Error {
 	}
 
 	/**
-	 *	getArtifactType - get the ArtifactType Object this ArtifactSelectionBox is associated with.
+	 *	getArtifactType - get the ArtifactType Object this ArtifactExtraField is associated with.
 	 *
 	 *	@return object	ArtifactType.
 	 */
@@ -147,12 +154,12 @@ class ArtifactSelectionBox extends Error {
 	}
 	
 	/**
-	 *	getID - get this ArtifactSelectionBox ID.
+	 *	getID - get this ArtifactExtraField ID.
 	 *
 	 *	@return	int	The id #.
 	 */
 	function getID() {
-		return $this->data_array['id'];
+		return $this->data_array['extra_field_id'];
 	}
 
 	/**
@@ -161,9 +168,8 @@ class ArtifactSelectionBox extends Error {
 	 *	@return	string	The name.
 	 */
 	function getName() {
-		return $this->data_array['selection_box_name'];
+		return $this->data_array['field_name'];
 	}
-
 
 	/**
 	 *  update - update a row in the table used to store box names 
@@ -179,9 +185,9 @@ class ArtifactSelectionBox extends Error {
 			$this->setPermissionDeniedError();
 			return false;
 		}   
-		$sql="UPDATE artifact_group_selection_box_list 
-			SET selection_box_name='".htmlspecialchars($name)."' 
-			WHERE id='". $this->getID() ."' 
+		$sql="UPDATE artifact_extra_field_list 
+			SET field_name='".htmlspecialchars($name)."' 
+			WHERE extra_field_id='". $this->getID() ."' 
 			AND group_artifact_id='".$this->ArtifactType->getID()."'";
 		$result=db_query($sql);
 		if ($result && db_affected_rows($result) > 0) {
@@ -194,4 +200,3 @@ class ArtifactSelectionBox extends Error {
 }
 
 ?>
-

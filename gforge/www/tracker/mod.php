@@ -122,38 +122,9 @@ if (session_loggedin()) {
 	</tr>
 
 	<?php
-//
-//	build input pop-up boxes for boxes and choices configured by ADMIN
-//
-	$result=$ath->getSelectionBoxes();
-	$result1=$ath->getArtifactChoices($ah->getID());
-	$rows=db_numrows($result); 
-	echo "<p>&nbsp;</p>";
-   	$origrows=db_numrows($result1);
-	if ($result && $rows> 0) {
-		echo '<tr>';
-		for ($i=0; $i < $origrows; $i++) {
-			$newrow= is_integer($i/2);
-			echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
-			echo $ath->selectionBox(db_result($result,$i,'id'),db_result($result1,$i,'choice_id'));
-			echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;build_box=1">('.$Language->getText('tracker','admin').')</a>';
-			if (!$newrow) {
-			echo '</tr><tr>';
-			}
-		}	
-		if ($rows-$origrows > 0){
-			for ($i=$origrows; $i < $rows; $i++){
-				$newrow= is_integer($i/2);
-				echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
-				echo $ath->selectionBox(db_result($result,$i,'id'),db_result($result1,$i,'choice_id'));
-				echo '&nbsp;<a href="/tracker/admin/?group_id='.$group_id.'&amp;atid='. $ath->getID() .'&amp;build_box=1">('.$Language->getText('tracker','admin').')</a>';
-				if (!$newrow) {
-					echo '</tr><tr>';
-				}
-			}
-		}
-	}
+		$ath->renderExtraFields($ah->getExtraFieldData(),true);
 	?>
+
 	<tr>
 		<td><strong><?php echo $Language->getText('tracker','assigned_to')?>: <a href="javascript:help_window('/help/tracker.php?helpname=assignee')"><strong>(?)</strong></a></strong><br />
 		<?php

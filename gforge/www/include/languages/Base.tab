@@ -2693,39 +2693,40 @@ tracker_admin_add_users	technician	Technician
 tracker_admin_add_users	title	Add/Update Tracker User Permissions to $1
 tracker_admin_add_users	update_permissions	Update Developer Permissions
 tracker_admin_add_users	user_name	User Name
-tracker_admin_build_boxes	title	 Add/Update Pop-Up Boxes and Choices
-tracker_admin_build_boxes	opt_title	Add/Update Pop-Up Box Choices in: $1
+tracker_admin_build_boxes	title	 Add/Update Extra Fields
+tracker_admin_build_boxes	edit	Edit
+tracker_admin_build_boxes	opt_title	Add/Update Extra Field Elements in: $1
 tracker_admin_build_boxes	box_add_choices	add choices
 tracker_admin_build_boxes	tracker_box_id	ID
 tracker_admin_build_boxes	tracker_choice_id	ID
-tracker_admin_build_boxes	tracker_box_title	Boxes Defined
+tracker_admin_build_boxes	tracker_box_title	Extra Fields Defined
 tracker_admin_build_boxes	tracker_box_option_add	Add/Update 
-tracker_admin_build_boxes	tracker_box_option_title	Choices Defined
-tracker_admin_build_boxes	box_name	Box Name
-tracker_admin_build_boxes	opt_add_name	Add New Choice
-tracker_admin_build_boxes	choice_warning	Once you add a new choice, it cannot be deleted
-tracker_admin_build_boxes	box_warning	Once you add a new box, it cannot be deleted
-tracker_admin_build_boxes	required_box_name	a box name is required
-tracker_admin_build_boxes	required_choice_name	a choice name is required
-tracker_admin_build_boxes	no_box	You have not defined any boxes
-tracker_admin_build_boxes	no_choice	You have not defined any choices
-tracker_admin_build_boxes	error_inserting_box	Error inserting a box name
-tracker_admin_build_boxes	error_inserting_choice	Error inserting a choice name
-tracker_admin_build_boxes	box_name_inserted	Box name inserted
-tracker_admin_build_boxes	choice_inserted	Choice inserted
-tracker_admin_build_boxes	box_update_title	Modify a Box In: $1
-tracker_admin_build_boxes	opt_update_title	Modify a Pop-Up Box Choice In: $1
-tracker_admin_build_boxes	opt_name	Choice
+tracker_admin_build_boxes	tracker_box_option_title	Elements Defined
+tracker_admin_build_boxes	box_name	Extra Field Name
+tracker_admin_build_boxes	opt_add_name	Add New Element
+tracker_admin_build_boxes	choice_warning	Once you add a new element, it cannot be deleted
+tracker_admin_build_boxes	box_warning	Once you add a new extra field, it cannot be deleted
+tracker_admin_build_boxes	required_box_name	a field name is required
+tracker_admin_build_boxes	required_choice_name	an element name is required
+tracker_admin_build_boxes	no_box	You have not defined any extra fields
+tracker_admin_build_boxes	no_choice	You have not defined any elements
+tracker_admin_build_boxes	error_inserting_box	Error inserting an extra field
+tracker_admin_build_boxes	error_inserting_choice	Error inserting an element
+tracker_admin_build_boxes	box_name_inserted	Extra field inserted
+tracker_admin_build_boxes	choice_inserted	Element inserted
+tracker_admin_build_boxes	box_update_title	Modify an extra field In: $1
+tracker_admin_build_boxes	opt_update_title	Modify an extra field element In: $1
+tracker_admin_build_boxes	opt_name	Element
 tracker_admin_build_boxes	status_any	Any
-tracker_admin_build_boxes	box_name_updated	Box name updated
-tracker_admin_build_boxes	choice_updated		Choice updated	
-tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the artifact box name because other things are dependent upon it. When you change the box name, all related items will be changed to the new name
-tracker_admin_build_boxes	choice_change_warning	It is not recommended that you change the box choice name because other things are dependent upon it. When you change the box choice name, all related items will be changed to the new name
-tracker_admin_build_boxes	error_updating	Error updating a box name
-tracker_admin_copy	copy_choices	Click here to copy these choices to other trackers
-tracker_admin_copy	choices_title	Copy Choices from Pop-Up Box $1
+tracker_admin_build_boxes	box_name_updated	Extra Field updated
+tracker_admin_build_boxes	choice_updated		Element updated	
+tracker_admin_build_boxes	box_change_warning	It is not recommended that you change the extra field name because other things are dependent upon it. When you change the extra field name, all related items will be changed to the new name
+tracker_admin_build_boxes	choice_change_warning	It is not recommended that you change the element name because other things are dependent upon it. When you change the element name, all related items will be changed to the new name
+tracker_admin_build_boxes	error_updating	Error updating an extra field name
+tracker_admin_copy	copy_choices	Click here to copy these elements to other trackers
+tracker_admin_copy	choices_title	Copy Choices from Extra Field $1
 tracker_admin_copy	from_box	Copy From 
-tracker_admin_copy	into_box	Into Trackers and Boxes
+tracker_admin_copy	into_box	Into Trackers and Extra Fields
 tracker_admin_choose	title	Tracker Admin
 tracker_admin_update_canned	title	Modify Canned Responses In: $1
 tracker_admin_update_cat	auto_assign_to	Auto-Assign To

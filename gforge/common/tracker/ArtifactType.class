@@ -63,18 +63,18 @@ class ArtifactType extends Error {
 	var $Group; //group object
 
 	/**
-	 * Selection boxes db resource ID.
+	 * extra_fields 3d array - the IDs and Names of the extra fields
 	 *
-	 * @var		int		$selection_boxes_res.
+	 * @var		array extra_fields;
 	 */
-	var $selection_boxes_res;
+	var $extra_fields;
 
 	/**
-	 * Box options  db resource ID.
+	 * extra_field[extra_field_id] array - the IDs and Names of elements on the extra fields
 	 *
-	 * @var		int		$box_options_res.
+	 * @var		array	extra_field
 	 */
-	var $box_options_res;
+	var $extra_field;
 	
 	/**
 	 * Options	db resource ID.
@@ -454,148 +454,75 @@ class ArtifactType extends Error {
 	}
 
 	/**
-	 *	getSelectionBoxes - List of possible user built selection 
-	 *	boxes set up for this artifact type.
+	 *	getExtraFields - List of possible user built extra fields
+	 *	set up for this artifact type.
 	 *
 	 *	@return database result set.
 	 */
-	function getSelectionBoxes() {
-		if (!isset($this->selection_boxes_res)) {
-			$sql="select id,selection_box_name
-				FROM artifact_group_selection_box_list 
+	function getExtraFields() {
+		if (!isset($this->extra_fields)) {
+			$sql="select *
+				FROM artifact_extra_field_list 
 				WHERE group_artifact_id='".$this->getID() ."'
-				ORDER BY id";
-			$this->selection_boxes_res=db_query($sql);
+				ORDER BY field_type ASC";
+			$res=db_query($sql);
+			$i=0;
+			while($arr =& db_fetch_array($res)) {
+				$this->extra_fields[$i++] = $arr;
+			}
 		}
-		return $this->selection_boxes_res;
+		return $this->extra_fields;
 	}
 
 	/**
-	 *	getBoxName - Get a box name using the box ID 
+	 *	getExtraFieldName - Get a box name using the box ID 
 	 *
-	 *	@param  int 	id of a box
-	 *	@return database result set.
+	 *	@param  int 	id of an extra field.
+	 *	@return string	name of extra field.
 	 */
-	function getBoxName($box_id) {
-		$this->box=$box_id;
-		if (!isset($this->selection_boxes_res)) {
-			$sql="select selection_box_name
-				FROM artifact_group_selection_box_list 
-				WHERE id='".$this->box."'
-				AND group_artifact_id='".$this->getID()."'";
-			$this->selection_boxes_res=db_query($sql);
+	function getExtraFieldName($box_id) {
+		$arr =& $this->getExtraFields();
+		return $arr['extra_field_id']['field_name'];
+	}
+
+	/**
+	 *	getExtraFieldElements - List of possible admin configured 
+	 *	extra field elements. This function is used to 
+	 *	present the boxes and choices on the main Add/Update page.
+	 *
+	 *	@param	int	id of the extra field
+	 *	@return array of elements for this extra field.
+	 */
+	function getExtraFieldElements($id) {
+//TODO validate $id
+		if (!$id) {
+			return false;
 		}
-		return $this->selection_boxes_res;
-	}
-
-
-	/**
-	 *	getBoxEntry - Get a box fields using the box ID 
-	 *
-	 *	@param  int 	id of a box
-	 *	@return database result set.
-	 */
-	function getBoxEntry($box_id) {
-		$this->box=$box_id;
-		if (!isset($this->selection_boxes_res)) {
-			$sql="SELECT *
-				FROM artifact_group_selection_box_list 
-				WHERE id='".$this->box."'
-				";
-			$this->selection_boxes_res=db_query($sql);
+		if (!isset($this->extra_field[$id])) {
+			$sql="select element_id,element_name
+				FROM artifact_extra_field_elements
+				WHERE extra_field_id ='".$id."'  
+				ORDER BY element_name";
+			$res=db_query($sql);
+			$i=0;
+			while($arr =& db_fetch_array($res)) {
+				$this->extra_field[$id][$i++] = $arr;
+			}
 		}
-		return $this->selection_boxes_res;
-	}
-
-
-	/**
-	 *	getSelectionBoxOptions - List of possible admin configured 
-	 *	choices for a selection box. This function is used to 
-	 *	present the boxes 
-	 * 	and choices on the main Add/Update page.
-	 *
-	 *	@param	int	id of the selection box
-	 *	@return database result set.
-	 */
-	function getSelectionBoxOptions($box) {
-		$this->box=$box;
-		$sql="select id,box_options_name
-			FROM artifact_group_selection_box_options
-			WHERE artifact_box_id ='".$this->box."'  
-			ORDER BY box_options_name";
-		$this->box_options_res=db_query($sql);
-		return $this->box_options_res;
-	}	
-
-	/**
-	 *	getBoxOptions - List of possible admin configured selection 
-	 *	choices for a single selection box.  This function is used
-	 *	to display choices when updating.
-	 *
-	 *	@return database result set.
-	 */
-	function getBoxOptions() {
-		$sql="select id,artifact_box_id,box_options_name
-			FROM artifact_group_selection_box_options
-			WHERE EXISTS (SELECT id FROM artifact_group_selection_box_list 
-			WHERE group_artifact_id='".$this->getID()."'
-			AND artifact_group_selection_box_list.id = artifact_group_selection_box_options.artifact_box_id)
-			ORDER BY box_options_name";
-		$this->box_options_res=db_query($sql);
-		return $this->box_options_res;
-	
-	}
-
-
-	/**
-	 *	getBoxOptionName - List the name admin configured selection 
-	 *	choices for a single selection box.  This function is used
-	 *	copying choices.
-	 *
-	 *	@return database result set.
-	 */
-	function getBoxOptionName($choiceid) {
-		$this->choiceid = $choiceid;
-		$sql="select id,artifact_box_id,box_options_name
-			FROM artifact_group_selection_box_options
-			WHERE id ='".$this->choiceid."'";
-		$this->box_options_res=db_query($sql);
-		return $this->box_options_res;
-	
+		return $this->extra_field[$id];
 	}
 
 	/**
-	 *	getArtifactChoices - This function is used to get a list the 
-	 *	fields in an artifact from the table of choices that is build 
-	 *	by submiting/updating new artifacts.
-	 *	
-	 *	@param	int	id of the artifact.
-	 *	@return 	databse result set.
-	 */
-	function getArtifactChoices($artifact_id){
-		$this->choice=$artifact_id;
-		$sql="select id,artifact_id,choice_id
-			FROM artifact_extra_field_data
-			WHERE artifact_id='".$this->choice."'
-			ORDER BY id";
-		$this->choice_res=db_query($sql);
-		return $this->choice_res;
-	}
-
-	/**
-	 *	getBoxOptionName - This function is used to get a name of 
-	 *	a choice for a box.
+	 *	getElementName - get the name of a particular element.
 	 *
-	 *	@param	int	id of the choice.
-	 *	@return 	database result set.
+	 *	@return	string	The name.
 	 */
-	function getBoxOptionsName($choice_id) {
-		$this->choice = $choice_id;
-		$sql="select id, box_options_name
-			FROM artifact_group_selection_box_options 
-			WHERE id = '".$this->choice."'";
-		$this->options_res=db_query($sql);
-		return $this->options_res;
+	function getElementName($choiceid) {
+		$sql="select element_id,extra_field_id,element_name
+			FROM artifact_extra_field_elements
+			WHERE element_id ='$choiceid'";
+		$res=db_query($sql);
+		return db_result($res,0,'element_name');
 	}
 
 	/**
@@ -619,15 +546,12 @@ class ArtifactType extends Error {
 			WHERE EXISTS (SELECT artifact_id FROM artifact 
 			WHERE group_artifact_id='".$this->getID()."'
 			AND artifact.artifact_id=artifact_extra_field_data.artifact_id)");
-			
-		db_query("DELETE FROM artifact_group_selection_box_options
-			WHERE EXISTS (SELECT id FROM artifact_group_selection_box_list 
+		db_query("DELETE FROM artifact_extra_field_elements
+			WHERE EXISTS (SELECT extra_field_id FROM artifact_extra_field_list 
 			WHERE group_artifact_id='".$this->getID()."'
-			AND artifact_group_selection_box_list.id = artifact_group_selection_box_options.artifact_box_id)");
-
-		db_query ("DELETE FROM artifact_group_selection_box_list
+			AND artifact_extra_field_list.extra_field_id = artifact_extra_field_elements.extra_field_id)");
+		db_query ("DELETE FROM artifact_extra_field_list
 			WHERE group_artifact_id='".$this->getID()."'");
-
 		db_query("DELETE FROM artifact_canned_responses 
 			WHERE group_artifact_id='".$this->getID()."'");
 //echo '1'.db_error();

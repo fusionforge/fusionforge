@@ -139,8 +139,9 @@ echo '
 /**
  *
  *  Build pop-up boxes for BROWSE boxes and choices configured by ADMIN
+BEING REBUILT BY AARON FARR
  *
- */
+ * /
 echo '<tr>';
 	$result=$ath->getSelectionBoxes();
 	$rows=db_numrows($result);
@@ -149,7 +150,7 @@ echo '<tr>';
 		echo '<tr>';
 		for ($i=0; $i < $rows; $i++) {
 			$newrow=is_integer(($i+1)/5);
-			echo '<td><span style="font-size:smaller">'.db_result($result,$i,'selection_box_name').'</span></br \>';
+			echo '<td><span style="font-size:smaller">'.db_result($result,$i,'field_name').'</span></br \>';
 			
 			$choice=$extra_fields_choice[$i];
 			echo $ath->selectionBox(db_result($result,$i,'id'),$choice,$Language->getText('tracker_admin_build_boxes','status_any'));
@@ -160,6 +161,7 @@ echo '<tr>';
 		}
 	}
 	echo '</tr>';
+*/
 	echo '<tr>
 		<td align="right"><span style="font-size:smaller">'.$Language->getText('tracker_browse','sort_by').':&nbsp;<a href="javascript:help_window(\'/help/tracker.php?helpname=sort_by\')"><strong>(?)</strong></a></span></td>'.
 		'<td><span style="font-size:smaller">'. 
@@ -176,7 +178,9 @@ echo $ath->getBrowseInstructions();
 
 if ($art_arr && count($art_arr) > 0) {
 
-	if ($set=='custom') {
+	/*if ($set=='custom') {
+//BEING REDONE BY AARON FARR
+
 	//
 	// validate that any admin configured extra fields meet its selection criteria
 
@@ -221,7 +225,8 @@ if ($art_arr && count($art_arr) > 0) {
 				$art_arr=array_values($art_arr);
 			}
 		}		
-	}
+	}*/
+
 	if ($set=='custom') {
 		$set .= '&_assigned_to='.$_assigned_to.'&_status='.$_status.'&_category='.$_category.'&_group='.$_group.'&_sort_col='.$_sort_col.'&_sort_ord='.$_sort_ord;
 	}
@@ -339,7 +344,7 @@ if ($art_arr && count($art_arr) > 0) {
 			</tr>';
 
 
-		//
+/*		//
 		//	build input pop-up boxes for boxes and choices configured by ADMIN
 		//
 		$result=$ath->getSelectionBoxes();
@@ -349,7 +354,7 @@ if ($art_arr && count($art_arr) > 0) {
 			echo '<tr>';
 			for ($i=0; $i < $rows; $i++) {
 				$newrow= is_integer($i/2);
-				echo '<td><strong>'.db_result($result,$i,'selection_box_name').'</strong><br \>';
+				echo '<td><strong>'.db_result($result,$i,'field_name').'</strong><br \>';
 				echo $ath->selectionBox(db_result($result,$i,'id'),'xzxz',$Language->getText('tracker_browse','no_change'));
 		
 				if (!$newrow) {
@@ -357,6 +362,7 @@ if ($art_arr && count($art_arr) > 0) {
 				}
 			}
 		}
+*/
 		echo   '<tr>
 			<td><strong>'.$Language->getText('tracker','priority').': <a href="javascript:help_window(\'/help/tracker.php?helpname=priority\')"><strong>(?)</strong></a>
 				</strong><br />';

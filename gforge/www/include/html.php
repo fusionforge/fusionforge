@@ -372,8 +372,7 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
 }
 
 /**
- * html_build_multiple_select_box_from_arrays() - Takes a result set, with the first column being the "id" or value
- * and the second column being the text you want displayed.
+ * html_build_multiple_select_box_from_arrays() - Takes two arrays and builds a multi-select box
  *
  * @param		array	id of the field  
  * @param		array	Text to be displayed
@@ -382,11 +381,11 @@ function html_build_multiple_select_box ($result,$name,$checked_array,$size='8',
  * @param		int		The size of this box
  * @param		bool	Whether or not to show the '100 row'
  */
-function html_build_multiple_select_box_from_arrays($result,$name,$fieldid,$field,$select,$checked_array,$size='8',$show_100=true) {
+function html_build_multiple_select_box_from_arrays($ids,$texts,$name,$checked_array,$size='8',$show_100=true) {
 	global $Language;
 	$checked_count=count($checked_array);
 	$return .='
-		<select name="'.$select.'" multiple="multiple" size="'.$size.'">';
+		<select name="'.$name.'" multiple="multiple" size="'.$size.'">';
 	if ($show_100) {
 		/*
 			Put in the default NONE box
@@ -401,21 +400,21 @@ function html_build_multiple_select_box_from_arrays($result,$name,$fieldid,$fiel
 		$return .= '>'.$Language->getText('include_html','none').'</option>';
 	}
 
-	$rows=count($result);
+	$rows=count($ids);
 	for ($i=0; $i<$rows; $i++) {
-		if (( $result[$i] != '100') || ($result[$i] == '100' && !$show_100)) {
+		if (( $ids[$i] != '100') || ($ids[$i] == '100' && !$show_100)) {
 			$return .=' 
-				<option value="'.$fieldid[$i].'"';
+				<option value="'.$ids[$i].'"';
 			/*
 				Determine if it's checked
 			*/
-			$val=$result[$i];
+			$val=$ids[$i];
 			for ($j=0; $j<$checked_count; $j++) {
 				if ($val == $checked_array[$j]) {
 					$return .= ' selected="selected"';
 				}
 			}
-			$return .= '>'.$result[$i].'-'. $name[$i].': '. $fieldid[$i].'-'.$field[$i].' </option>';
+			$return .= '>'.$ids[$i].'-'.$texts[$i].' </option>';
 		}
 	}
 	$return .= '

@@ -77,9 +77,9 @@ class Artifact extends Error {
 	/**
 	 * Array of artifact data for extra fields defined by Admin.
 	 *
-	 * @var		array	$data_extra_field_array.
+	 * @var		array	$extra_field_data.
 	 */
-	var $data_extra_field_array;
+	var $extra_field_data;
 
 	/**
 	 * Array of ArtifactFile objects.
@@ -152,10 +152,10 @@ class Artifact extends Error {
 	 *	@param	string	Details of the artifact.
 	 *	@param	int		The ID of the user to which this artifact is to be assigned.
 	 *	@param	int		The artifacts priority.
-	 *	@param	string	An email address to add to the monitoring queue.
+	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 *  @return id on success / false on failure.
 	 */
-	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=5, $monitor_email=false) {
+	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=5, $extra_fields=array()) {
 		global $Language;
 		
 		//
@@ -268,8 +268,12 @@ class Artifact extends Error {
 			if (!$this->fetchData($artifact_id)) {
 				db_rollback();
 				return false;
+			} else {
+				if (!$this->updateExtraFields($extra_fields)) {
+					db_rollback();
+					return false;
+				}
 			}
-
 			//
 			//	now send an email if appropriate
 			//
@@ -279,34 +283,6 @@ class Artifact extends Error {
 			return $artifact_id;
 		}
 	}
-	/**
-	 *
-	 * 	createExtraFields - adds a row in the table used to 
-	 *	store the id of a value for an artifact field.
-	 *	This function is only used for data that 
-	 *	applies to additional fields and boxes configured by the admin.
-	 *
-	 *	@param 	int 	id of the field that contains the data
-	 *	@return 	id on success / false on failure
-	 */
-	function createExtraFields($choice_id){
-		$this->choice_id=$choice_id;
-		$res=db_query("INSERT INTO artifact_extra_field_data
-			(artifact_id, choice_id)
-			VALUES
-			('".$this->getID()."',$this->choice_id)");
-					
-		if (!$res) {
-			$this->setError('Artifact: '.db_error());
-			db_rollback();
-			return false;
-		}
-
-		return $choice_id;
-	
-	}
-	
-
 	
 	/**
 	 *	fetchData - re-fetch the data for this Artifact from the database.
@@ -387,15 +363,6 @@ class Artifact extends Error {
 	 */
 	function getCategoryID() {
 		return $this->data_array['category_id'];
-	}
-
-	/**
-	 *	getExtraFieldID - get choice_id flag.
-	 *
-	 *	@return int choice_id.
-	 */
-	function getExtraFieldID() {
-		return $this->data_extra_field_array['choice_id'];
 	}
 
 	/**
@@ -748,10 +715,11 @@ class Artifact extends Error {
 	 *	@param	int		The canned response.
 	 *	@param	string	Attaching another comment.
 	 *	@param	int		Allows you to move an artifact to another type.
+	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 *	@return	boolean	success.
 	 */
 	function update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
-		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id) {
+		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id,$extra_fields=array()) {
 
 		global $Language;
 		if (!$this->getID() 
@@ -908,10 +876,17 @@ class Artifact extends Error {
 				return false;
 			} else {
 				$this->fetchData($this->getID());
-//error check the data fetching??
+//TODO error check the data fetching??
 			}
 		}
 
+		//extra field handling
+		$update=true;
+		if (!$this->updateExtraFields($extra_fields)) {
+//TODO - see if anything actualyl did change
+			db_rollback();
+			return false;
+		}
 		/*
 			handle canned responses
 
@@ -957,65 +932,81 @@ class Artifact extends Error {
 	}
 
 	/**
-	 * 	updateExtraFields - updates the id of a value in the 
-	 *	table used to store the id's of values for artifact fields. 
-	 *	This function is only used for data that 
-	 *	applies to additional fields and boxes configured by the admin.
+	 * 	updateExtraFields - updates the extra data elements for this artifact
+	 *	e.g. the extra fields created and defined by the admin.
 	 *
-	 *	@param 	int 	id of the artifact
-	 *	@param	int	id of the field that contains the data 
+	 *	@param	array	Array of extra fields like: array(15=>'foobar',22=>'1');
 	 *	@return true on success / false on failure
-	 *
 	 */
-	function updateExtraFields($id,$choice_id){
-			
-		$res=db_query("UPDATE artifact_extra_field_data
-			SET
-			choice_id='$choice_id'
-			WHERE
-			id='$id'");
-	
-			
-		if (!$res) {
-			$this->setError('Artifact: '.db_error());
-			db_rollback();
-			return false;
+	function updateExtraFields($extra_fields){
+		if (empty($extra_fields)) {
+			return true;
 		}
+		//get a list of extra fields for this artifact_type
+		$ef =& $this->ArtifactType->getExtraFields();
 
+		//now we'll update this artifact for each extra field
+		for ($i=0; $i<count($ef); $i++) {
+			//
+			//	First we want to get old value of this element
+			//
+			$res=db_query("SELECT field_data FROM artifact_extra_field_data
+				WHERE
+				artifact_id='".$this->getID()."'
+				AND extra_field_id='".$ef[$i]['extra_field_id']."'");
+			//	make sure we have a corresponding row in 
+			//	artifact_extra_field_data - if not we'll create one
+			if ($res && db_numrows($res) > 0) {
+
+				// if this field changed, update the db
+				if (addslashes(db_result($res,0,'field_data')) != htmlspecialchars($extra_fields[$ef[$i]['extra_field_id']])) {
+//TODO add history
+					$res=db_query("UPDATE artifact_extra_field_data
+						SET
+						field_data='".$extra_fields[$ef[$i]['extra_field_id']]."'
+						WHERE
+						artifact_id='".$this->getID()."'
+						AND extra_field_id='".$ef[$i]['extra_field_id']."'");
+					if (!$res) {
+						$this->setError('Artifact::updateExtraFields:: '.db_error());
+						return false;
+					}
+				}
+			} else {
+				//insert a fresh row since one does not exist for this extra field yet
+				$res=db_query("INSERT INTO artifact_extra_field_data (artifact_id,extra_field_id,field_data) 
+					values ('".$this->getID()."','".$ef[$i]['extra_field_id']."','".htmlspecialchars($extra_fields[$ef[$i]['extra_field_id']])."')");
+					if (!$res) {
+						$this->setError('Artifact::updateExtraFields:: '.db_error());
+						return false;
+					}
+			}
+		}
+		unset($this->extra_field_data);
 		return true;
 	}
 
 	/**
+	 *	getExtraFieldData - get an array of data for the extra fields associated with this artifact
 	 *
-	 *	nullExtraFields - deletes a row in the table used to	
-	 *	store the id's of values for artifact fields.  This function
-	 *	applies to additional fields and boxes configured by the admin.
-	 *
-	 *	@param 	int	id of the artifact
-	 *	@return 	true on success / false on failure
+	 *	@return	array	array of data
 	 */
-	function  nullExtraFields($artifact_id){
-			
-		$res=db_query("DELETE  
-			FROM
-			artifact_extra_field_data
-			WHERE
-			artifact_id='$artifact_id'");
-	
-			
-		if (!$res) {
-			$this->setError('Artifact: '.db_error());
-			db_rollback();
-			return false;
+	function &getExtraFieldData() {
+		if (!isset($this->extra_field_data)) {
+			$res=db_query("SELECT * FROM artifact_extra_field_data 
+				WHERE artifact_id='".$this->getID()."'");
+			while ($arr =& db_fetch_array($res)) {
+				$this->extra_field_data[$arr['extra_field_id']]=$arr['field_data'];
+			}
 		}
-
-		return true;
+		return $this->extra_field_data;
 	}
 
-	
-
-
-	// function which returns proper marker for changed properties
+	/**
+	 *	marker - adds the > symbol to fields that have been modified for the email message
+	 *
+	 *
+	 */
 	function marker($prop_name,$changes) {
 		if ($changes[$prop_name]) {
 			return '>';

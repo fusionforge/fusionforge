@@ -1,4 +1,9 @@
-2004-08-26  Tony Pugliese <lpajp@pacbell.net>
+2004-10-06  Tim Perdue <tim@gforge.org>
+
+	* massive cleanup/reorg/rewrite of bug tracker, including renaming
+	and rebuilding the "unlimited fields" code
+
+2004-10-05  Tony Pugliese <lpajp@pacbell.net>
 
 	* Nice Patch to clone categories in tracker.
 

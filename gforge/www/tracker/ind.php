@@ -17,28 +17,18 @@ $at_arr =& $atf->getArtifactTypes();
 //required params for site_project_header();
 $params['group']=$group_id;
 $params['toptab']='tracker';
-$params['pagename']='tracker';
-$params['sectionvals']=array($group->getPublicName());
 
 echo site_project_header($params);
 echo $HTML->subMenu(
 	array(
-		$Language->getText('group','short_tracker'),
 		$Language->getText('tracker','reporting'),
 		$Language->getText('tracker','admin')
 	),
 	array(
-		'/tracker/?group_id='.$group_id,
 		'/tracker/reporting/?group_id='.$group_id,
 		'/tracker/admin/?group_id='.$group_id
-		
 	)
 );
-/*
-echo '<strong><a href="/tracker/reporting/?group_id='.$group_id.'">'.$Language->getText('tracker','reporting').'</a> | '
-	 .'<a href="/tracker/admin/?group_id='.$group_id.'">'.$Language->getText('tracker','admin').'</a>'
-	 .'</strong><p>';
-*/
 
 if (!$at_arr || count($at_arr) < 1) {
 	echo "<h1>".$Language->getText('tracker','no_trackers')."</h1>";
