@@ -1,3 +1,10 @@
+gforge (3.0-0+8+) experimental; urgency=low
+
+  * [Roland] Reencoded this changelog into UTF-8, as per upcoming policy
+    changes (see bug #174982).
+
+ -- Roland Mas <lolando@debian.org>  Fri,  3 Jan 2003 18:07:16 +0100
+
 gforge (3.0-0+8) experimental; urgency=low
 
   * [Christian] Reintroduce the possibility to define default home page in
@@ -1025,7 +1032,7 @@ sourceforge (2.5-11) unstable; urgency=low
   * Plus a ton of other fixes and cleanups, but this changelog entry is
     already long enough.
   * Today, the 1st of November 2001, I'd like to dedicate this release to
-    Édith and Virginie.  So there.
+    Ã‰dith and Virginie.  So there.
 
  -- Roland Mas <lolando@debian.org>  Thu,  1 Nov 2001 14:31:48 +0100
 
