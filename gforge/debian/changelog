@@ -1,3 +1,11 @@
+gforge (3.0-1) unstable; urgency=low
+
+  * [Roland] The much-awaited 3.0 release!  Yay!  (No other changes.)
+  * [Roland] This Debian release is dedicated to Christian and his wife,
+    whose marriage is five years old today.
+
+ -- Roland Mas <lolando@debian.org>  Fri, 20 Jun 2003 13:42:16 +0200
+
 gforge (3rc2-4) unstable; urgency=low
 
   * [Roland] Install README.Debian into all packages (Gforge bug #340),
