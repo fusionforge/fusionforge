@@ -1,9 +1,9 @@
-sourceforge (2.5-11+1) unstable; urgency=low
+sourceforge (2.5-12) unstable; urgency=low
 
   * Fixed a PATH problem in install-ldap.sh.
   * Made the cronjobs silent.
 
- -- Roland Mas <lolando@debian.org>  Thu,  1 Nov 2001 16:20:54 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  1 Nov 2001 20:03:28 +0100
 
 sourceforge (2.5-11) unstable; urgency=low
 
