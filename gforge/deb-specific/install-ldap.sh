@@ -222,27 +222,22 @@ access to attribute=userPassword
 
 	# odd looking regex makes sure it doesnt match the comment 'access to *'
 	perl -pi -e "s/(?<!')access to \*(?!')/# Next lines added by GForge install
-access to dn=\".*,ou=People,$gforge_base_dn\"
+access to dn.children=\"ou=People,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn=\"ou=People,$gforge_base_dn\"
+access to dn.children=\"ou=Group,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn=\"ou=Group,$gforge_base_dn\"
+access to dn.children=\"ou=mailingList,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write
 	by * read
-access to dn=\"ou=mailingList,$gforge_base_dn\"
-	by dn=\"$gforge_admin_dn\" write
-	by dn=\"$robot_dn\" write
-        by dn=\"$slapd_admin_dn\" write
-	by * read
-access to dn=\"ou=cvsGroup,$gforge_base_dn\"
+access to dn.children=\"ou=cvsGroup,$gforge_base_dn\"
 	by dn=\"$gforge_admin_dn\" write
 	by dn=\"$robot_dn\" write
         by dn=\"$slapd_admin_dn\" write

@@ -1,4 +1,4 @@
-gforge (4.1-5s) unstable; urgency=low
+gforge (4.1-5u) unstable; urgency=low
 
   * [Christian] nss-pgsql1 integration
   * [Christian] System.class reorganization 
@@ -7,6 +7,7 @@ gforge (4.1-5s) unstable; urgency=low
   * [Christian] dummy user is now scm-gforge and removed from ldap
   * [Christian] Fixed a problem with OID at db upgrade (see db-upgrade.pl)
   * [Christian] Moved some gforge.conf var from include.pl to local.pl
+  * [Christian] Update to fit with last sid LDAP
 
  -- Christian Bayle <bayle@debian.org>  Sat, 19 Feb 2005 17:31:29 +0100
 

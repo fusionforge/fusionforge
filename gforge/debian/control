@@ -167,7 +167,7 @@ Description: collaborative development tool - FTP management (using ProFTPd)
 
 Package: gforge-ldap-openldap
 Architecture: all
-Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), slapd (>= 2.0.23-3), ldap-utils
+Depends: gforge-common, gforge-db-postgresql | gforge-db, perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 1.0.32), slapd (>= 2.2.23), ldap-utils
 Provides: gforge-ldap
 Conflicts: gforge-ldap
 Description: collaborative development tool - LDAP directory (using OpenLDAP)
