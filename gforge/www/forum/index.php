@@ -62,8 +62,8 @@ if ($group_id) {
 				html_image("ic/cfolder15.png","15","13",array("BORDER"=>"0")) . 
 				'&nbsp;' .
 				$farr[$j]->getName() .'</A><BR>'.$farr[$j]->getDescription().'</TD>
-				<TD>'.$farr[$j]->getThreadCount().'</TD>
-				<TD>'. $farr[$j]->getMessageCount() .'</TD>
+				<TD ALIGN=CENTER>'.$farr[$j]->getThreadCount().'</TD>
+				<TD ALIGN=CENTER>'. $farr[$j]->getMessageCount() .'</TD>
 				<TD>'.  date($sys_datefmt,$farr[$j]->getMostRecentDate()) .'</TD></TR>';
 		}
 	}

@@ -630,7 +630,7 @@ class FRS extends Error {
 //
 //
 		$sql="SELECT 
-				users.email,
+				users.user_id,
 				frs_package.name,
 				group_name,
 				unix_group_name
@@ -649,8 +649,7 @@ class FRS extends Error {
 echo db_error();
 		if ($result && db_numrows($result) > 0) {
 			//send the email
-			$array_emails=result_column_to_array($result);
-			$list=implode($array_emails,', ');
+			$monitor_ids =& util_result_column_to_array($result);
 			$package = db_result($result,0,'name');
 			$full_group = db_result($result,0,'group_name');
 			$unix_group = db_result($result,0,'unix_group_name');
@@ -685,8 +684,8 @@ echo db_error();
 				;
 
 			$text = util_line_wrap($text);
-			
-			util_send_message("noreply@$GLOBALS[sys_default_domain]",$subject,$text,"noreply@$GLOBALS[sys_default_domain]",$list);			
+
+			util_handle_message(array_unique($monitor_ids),$subject,$text);
 
 			return $result;
 		} else {

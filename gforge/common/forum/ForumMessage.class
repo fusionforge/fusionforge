@@ -347,8 +347,8 @@ class ForumMessage extends Error {
 		"\n\n______________________________________________________________________".
 		"\nRead and respond to this message at: ".
 		"\nhttp://$GLOBALS[sys_default_domain]/forum/message.php?msg_id=".$this->getID().
-		"\nYou are receiving this email because you elected to monitor this forum.".
-		"\n\nTo stop monitoring this forum, login to $GLOBALS[$sys_name] and visit: ".
+		"\n\nYou are receiving this email because you elected to monitor this forum.".
+		"\nTo stop monitoring this forum, login to $GLOBALS[$sys_name] and visit: ".
 		"\nhttp://$GLOBALS[sys_default_domain]/forum/monitor.php?forum_id=".$this->Forum->getID() .'&group_id='.$this->Forum->Group->getID().'&stop=1';
 
 		$subject="[" . $this->Forum->Group->getUnixName() . " - " . $this->Forum->getName() ."] ".
