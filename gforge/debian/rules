@@ -91,6 +91,7 @@ install: build
 	#install utils/underworld-root/db_stats_site_nightly.pl $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/bin/db_stats_site_nightly.pl
 	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/sf-for-debian.png deb-specific/sf-for-debian.png.uu
 	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/clear.gif deb-specific/clear.gif.uu
+	uudecode -o $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/www/images/debian-sf-icon.png deb-specific/debian-sf-icon.png.uu
 	install -m 644 deb-specific/sf-httpd.conf.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/
 	install -m 644 deb-specific/sf-httpd.secrets.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/
 	install -m 644 deb-specific/local.inc.template $(CURDIR)/debian/sourceforge/usr/lib/sourceforge/templates/

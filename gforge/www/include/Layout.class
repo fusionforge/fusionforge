@@ -410,7 +410,7 @@ Content owned by VA Linux Systems is copyright
 
 	?>
 
-		<link rel="SHORTCUT ICON" href="/images/favicon.ico">
+		<link rel="icon" type="image/png" href="/images/debian-sf-icon.png">
 		<style type="text/css">
 			<!--
 	OL,UL,P,BODY,TD,TR,TH,FORM { font-family: <?php echo $site_fonts; ?>; font-size:<?php echo $this->FONTSIZE; ?>; color: <?php echo $this->FONTCOLOR_CONTENT ?>; }
