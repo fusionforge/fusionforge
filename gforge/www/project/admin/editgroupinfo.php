@@ -130,6 +130,9 @@ function c($v) {
 ?>
 
 <table>
+<?php
+if($sys_use_mail) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_mail" value="1" <?php echo c($group->usesMail()); ?> ><br />
@@ -138,7 +141,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_mailing_lists') ?></strong>
 </td>
 </tr>
+<?php
+} 
 
+if($sys_use_survey) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_survey" value="1" <?php echo c($group->usesSurvey()); ?> ><br />
@@ -147,7 +154,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_surveys') ?></strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_forum) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_forum" value="1" <?php echo c($group->usesForum()); ?>  ><br />
@@ -156,7 +167,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_forums') ?></strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_pm) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_pm" value="1" <?php echo c($group->usesPM()); ?> ><br />
@@ -165,7 +180,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_pm') ?></strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_cvs) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_cvs" value="1" <?php echo c($group->usesCVS()); ?> ><br />
@@ -192,7 +211,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','enable_anonymous_cvs') ?></strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_news) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_news" value="1" <?php echo c($group->usesNews()); ?> ><br />
@@ -201,7 +224,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_news') ?> </strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_docman) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_docman" value="1" <?php echo c($group->usesDocman()); ?> >
@@ -210,7 +237,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_docman') ?></strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_ftp) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_ftp" value="1" <?php echo c($group->usesFTP()); ?> >
@@ -219,7 +250,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_ftp') ?></strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_tracker) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_tracker" value="1" <?php echo c($group->usesTracker()); ?> >
@@ -228,7 +263,11 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_tracker') ?></strong>
 </td>
 </tr>
+<?php
+}
 
+if($sys_use_file) {
+?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_frs" value="1" <?php echo c($group->usesFRS()); ?> >
@@ -237,7 +276,7 @@ function c($v) {
 <strong><?php echo $Language->getText('project_admin_editgroupinfo','use_frs') ?></strong>
 </td>
 </tr>
-
+<?php } ?>
 <tr>
 <td>
  <input type="CHECKBOX" name="use_stats" value="1" <?php echo c($group->usesStats()); ?> >
