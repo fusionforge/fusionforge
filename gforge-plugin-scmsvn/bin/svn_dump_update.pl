@@ -49,7 +49,7 @@ while(my ($group_id, $group_name, $status) = $c->fetchrow()) {
     $svn_exists = (-d "$svn_root/$group_name");
 
     # SVN repository creation
-    if ($group_exists && !$svn_exists && $status eq 'A' && !(-e "$svn_root$group_name/format")) {
+    if ($group_exists && !$svn_exists && $status eq 'A' && !(-e "$svn_root/$group_name/format")) {
 	# This for the first time
 	if (!(-d "$svn_root")) {
 	    if($verbose){print("Creating $svn_root\n");}
