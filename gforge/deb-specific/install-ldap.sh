@@ -105,6 +105,8 @@ access to */" /etc/ldap/slapd.conf
 purge_slapd(){
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
+if grep -q "Next lines added by Sourceforge install" /etc/ldap/slapd.conf
+then
 	vi -e /etc/ldap/slapd.conf <<-FIN
 /# Next lines added by Sourceforge install
 :ma a
@@ -114,6 +116,7 @@ purge_slapd(){
 :w
 :x
 FIN
+fi
 
 }
 
@@ -217,7 +220,7 @@ setup_vars() {
 setup_robot() {
     setup_vars
 
-# The first accunt is only used in a multiserver SF
+# The first account is only used in a multiserver SF
 echo "Adding robot accounts"
 ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
 dn: cn=Replicator,$sys_ldap_base_dn
@@ -284,6 +287,7 @@ else
 				# [ -f /etc/ldap.secret ] || secret=""
 
 				echo "Modifying /etc/ldap/slapd.conf"
+				purge_slapd
 				modify_slapd $dn
 				echo "Modifying /etc/libnss-ldap.conf"
 				modify_libnss_ldap $dn
@@ -293,6 +297,7 @@ else
 				load_ldap $dn "$secret"
 				# Restarting ldap 
 				/etc/init.d/slapd restart
+				sleep 5
 				echo "Setup SF_robot account"
 				setup_robot
 				;;
