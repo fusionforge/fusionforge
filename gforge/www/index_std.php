@@ -54,7 +54,7 @@ echo $HTML->boxTop('Getting GForge');
 <A HREF="http://postgresql.org/">PostgreSQL</A><BR>
 <A HREF="http://www.php.net/">PHP 4.x</A><BR>
 <A HREF="http://www.apache.org/">Apache</A><BR>
-<A HREF="http://www.gnu.org/software/mailman/">MailMan *</A><BR>
+<A HREF="http://www.gnu.org/software/mailman/">Mailman *</A><BR>
 <A HREF="http://www.python.org/">Python *</A><BR>
 <A HREF="http://jabberd.jabberstudio.org/">Jabber Server *</A><BR>
 * optional
