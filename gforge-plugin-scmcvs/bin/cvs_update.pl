@@ -13,7 +13,7 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 
 my $group_array = ();
 my $verbose = 0;
-my $cvs_file = $file_dir . "/dumps/cvs_dump";
+my $cvs_file = $file_dir . "/dumps/scmcvs.dump";
 my $anoncvs_uid_add = 50000;
 my $gid_add = 10000;
 

@@ -9,11 +9,13 @@
 use DBI;
 use Sys::Hostname;
 
+my $scm = 'scmcvs';
 require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functions
+require("/etc/gforge/plugins/$scm/config.pl"); # Include plugin config vars
 
 my $group_array = ();
 my $verbose = 0;
-my $cvs_file = $file_dir . "/dumps/cvs_dump";
+my $scm_file = $file_dir . "/dumps/$scm.dump";
 
 if($verbose) {print ("\nConnecting to database");}
 
@@ -25,10 +27,10 @@ $dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
 die "Cannot connect to database: $!" if ( ! $dbh );
 
 if($verbose) {print ("\nGetting group list");}
-# Dump the Groups Table information
-#$query = "SELECT group_id,unix_group_name,status,use_scm,enable_pserver,enable_anonscm FROM groups WHERE unix_group_name !=''";
-$query= "SELECT groups.group_id,groups.unix_group_name,groups.status,groups.use_scm,groups.enable_pserver,groups.enable_anonscm FROM groups,group_plugin,plugins WHERE groups.unix_group_name !='' AND groups.group_id=group_plugin.group_id AND group_plugin.plugin_id=plugins.plugin_id AND plugins.plugin_name='scmcvs'";
 
+# Dump the Groups Table information
+
+$query= "SELECT groups.group_id,groups.unix_group_name,groups.status,groups.use_scm,groups.enable_pserver,groups.enable_anonscm FROM groups,group_plugin,plugins WHERE groups.unix_group_name !='' AND groups.group_id=group_plugin.group_id AND group_plugin.plugin_id=plugins.plugin_id AND plugins.plugin_name='".$scm."'";
 # AND cvs_box=$hostname to be added for multi-cvs server support
 
 $c = $dbh->prepare($query);
@@ -55,4 +57,4 @@ while(my ($group_id, $group_name, $status, $use_scm, $enable_pserver, $enable_an
 
 # Now write out the files (not necessary, but can give info in case of problems)
 if($verbose) {print ("\nWriting list");}
-write_array_file($cvs_file, @group_array);
+write_array_file($scm_file, @group_array);
