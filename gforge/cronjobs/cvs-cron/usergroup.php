@@ -65,7 +65,7 @@ define('DEFAULT_SHELL','/bin/cvssh.pl'); //use /bin/grap for cvs-only
 define('USER_ID_ADD',10000);
 define('GROUP_ID_ADD',50000);
 define('USER_DEFAULT_GROUP','users');
-define('FILE_EXTENSION',''); // use .new when testing
+define('FILE_EXTENSION','.new'); // use .new when testing
 define('CVS_ROOT','/cvsroot/');
 
 if (!file_exists('/etc/passwd.org')) {

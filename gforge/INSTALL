@@ -26,9 +26,6 @@ You will need:
 	GNU MailMan ( http://www.gnu.org/software/mailman/ )
 	Python ( http://www.python.org/ )
 
-	Optional Jabber Support:
-	Jabberd ( http://jabberd.jabberstudio.org/ )
-
 	Optional Gantt Charting and Graphing Support:
 	JPGraph: ( http://www.aditus.nu/jpgraph/ )
 
@@ -49,6 +46,88 @@ directory.
 
 Install Python and MailMan as per the instructions.
 
+OVERVIEW
+--------
+
+GForge has a lot of different pieces touching a lot of different components
+in the system. Cronjobs are required to maintain the system, touching lots 
+of files on a daily and hourly basis, including /etc/* system files.
+
+The plugins that now manage the CVS and SVN functionality have made 
+installation slightly harder because even more files have to be moved into
+place during installation.
+
+The manual installation of gforge is documented below. Be sure to follow 
+each step carefully, check the forums for frequently asked questions, 
+and ask your Apache, mailman, and postgresql installation questions in the
+corresponding mailing lists rather than on the gforge forums where little
+help is available.
+
+  CVS
+  ---
+  CVS is now managed via the scmcvs plugin which is included in the 
+plugins/ directory in the tarball downloaded from gforge.org. Most 
+of the files in scmcvs are intended for auto-installation on debian 
+systems and DO NOT APPLY to the majority of users. The scmcvs plugin 
+is activated by default in the gforge.sql database and all that you 
+have to do is move the scmcvs/etc/plugins/* files to /etc/gforge/plugins/* 
+and possibly modify the files slightly. In addition, the scmcvs/www/* files
+should be placed in gforge/www/plugins/scmcvs/*
+
+  Cronjobs for CVS are included in cronjobs/crontab.in, but are commented 
+out by default for your security. cronjobs/cvs-cron/* contains the files 
+that are executed hourly to build permissions and create blank cvs trees.
+Make sure these files are executed as root, and have proper execution bits
+set.  Each of these cronjobs has configuration parameters which you may 
+have to edit manually for your specific system.
+
+  SVN
+  ---
+  SVN is also managed via plugin - the scmsvn plugin is included and 
+activated by default in gforge. As with scmcvs/ you have to move the 
+scmcvs/etc/plugins/* files to /etc/gforge/plugins/* and may have to
+make minor modifications for your specific setup.
+
+  There are two ways to manage SVN - one is to have SVN over DAV and the 
+other is to have SVN over SSH just as you do with CVS. If you choose 
+to use DAV, you will need the mod_auth_gforge library compiled and installed 
+in your apache and the appropriate VHOST settings in your httpd.conf. 
+mod_auth_gforge is available from gforge.org. The cronjobs to manage
+SVN are in cronjobs/dav-svn/ and so are sample httpd.conf VHOST settings.
+Each of these cronjobs has configuration parameters which you may have to 
+edit manually for your specific system.
+
+  PHP
+  ---
+  The cronjobs require the PHP CGI to be installed and the php.ini 
+file to be properly configured with your include_path OR edit the 
+crontab.in file to set your include path.
+
+  In addition, you may have to symlink /usr/bin/php to /usr/bin/php4, 
+which is where the cronjobs expect your PHP CGI to be located.
+
+  Mailman
+  -------
+
+  Mailman is needed to create and use mailing lists with gforge. 
+Mailman is frequently installed in /var/mailman/ and the sample 
+vhost shown below will work with this setup without any changes.
+
+  Cronjobs for mailman are located in cronjobs/mail/*
+
+  cronjobs/mail/mailing_lists_create.php is used obviously to 
+create new mailing lists. You may have to edit the file to change 
+the location of the mailman bin/ directory.
+
+  For all problems with mailman installation and use, contact 
+the mailman mailing lists for help.
+
+
+
+STARTING THE INSTALL
+--------------------
+
+
 
 BLANK DATABASE - FRESH INSTALL
 ------------------------------
@@ -61,13 +140,13 @@ Then create a postgres account for gforge:
 
 [root]# su - postgres
 
-You may need to add Pl/Pgsql as a language.  To do so:
-
-[postgres]$ createlang plpgsql template1
-
 [postgres]# createuser -A -d -E -P gforge
 
 and enter the password for the user.
+
+You may also need to add Pl/Pgsql as a language.  To do so:
+
+[postgres]$ createlang plpgsql template1
 
 [postgres]$ exit
 
@@ -76,11 +155,18 @@ and enter the password for the user.
 [gforge]# psql gforge < db/gforge.sql > import.log
 
 Be sure to watch for any errors during import and check the 
-import.log file.
+import.log file. For postgresql 7.3 users, you will have to 
+use the db/gforge-pgsql7.3.sql file, since the postgres team 
+has broken compatibility between releases yet again.
 
 Now, find your pg_hba.conf file and edit it to include this line:
 
 local    all         all                                             md5
+
+You will have to restart postgresql after changing this line so it can 
+pick up your configuration change. Usually you can restart by 
+
+[root]# /etc/init.d/postgresql restart
 
 
 UPGRADING DATABASE - EXISTING INSTALL
@@ -89,10 +175,14 @@ UPGRADING DATABASE - EXISTING INSTALL
 You will upgrade your database from a prior version by applying 
 each database schema change, in order, and applying it only once.
 Only apply the schema changes in the db/ folder that are dated 
-AFTER your existing installation.
+AFTER your currently installed version!!
+
+This process will apply your upgrades. BE SURE TO WATCH FOR ERRORS!
+
+[gforge]# psql gforge < db/XXXXXXXXXX.sql >> import.log
 
 There may also be migration scripts that have to be run. In the 
-db/ folder, looked for migrate-*.php scripts and run them.
+db/ folder, look for migrate-*.php scripts and run them.
 
 
 WEB SETUP
@@ -111,9 +201,9 @@ NameVirtualHost 192.168.1.1
 <VirtualHost 192.168.1.1>
 ServerName gforge.company.com
 ServerAdmin webmaster@gforge.company.com
-DocumentRoot /var/www/gforge3/www
+DocumentRoot /var/www/gforge/www
 ErrorDocument 404 /404.php
-php_value include_path ".:/var/www/gforge3/:/var/www/gforge3/www/include/"
+php_value include_path ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gforge/"
 <Files projects>
 SetOutputFilter PHP
 SetInputFilter PHP
@@ -197,12 +287,13 @@ PHP setup
 ---------
 
 You may also add the include_path to the php.ini, as it will be
-necessary for your php cgi to run the cron jobs. 
+necessary for your php cgi to run the cron jobs. The crontab.in 
+file also can be modified to include this path as well.
 
 register_globals = On
 magic_quotes_gpc = On
 file_uploads = On
-include_path = ".:/var/www/gforge3/:/var/www/gforge3/www/include/"
+include_path = ".:/var/www/gforge/:/var/www/gforge/www/include/:/etc/gforge/"
 
 
 FRS - File Release System
@@ -283,7 +374,9 @@ lists in mailman and creating the /etc/aliases file.
 [root]# cp /etc/group /etc/group.org
 [root]# mkdir /cvsroot
 
+**************************************************************************
 WARNING!!! the following command will blow away any existing root crontab.
+**************************************************************************
 
 [root]# crontab cronjobs/crontab.in
 
@@ -325,15 +418,3 @@ libdbi-perl and libdbd-pg-perl.
 | $sys_dbuser = 'gforge' ;
 | $sys_dbpasswd = 'p455w0rd' ;
 `----
-
-
-Jabber Support
---------------
-
-GForge supports the sending of messages to jabber accounts. To 
-accomplish this, you must have a user account setup on the jabber 
-server that gforge can connect to and send messages.
-
-Once you have that user account, server, and password set up, 
-just edit /etc/gforge/local.inc and add the information to the 
-jabber section.
