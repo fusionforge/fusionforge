@@ -309,18 +309,17 @@ class CVSPlugin extends SCM {
 
 // ############################## CVS Browsing
 
-$anonymous = 1 ;
-if (session_loggedin()) {
+$displayCvsBrowser = false;
+if(session_loggedin()) {
 	$perm =& $project->getPermission(session_get_user());
-	if (!$perm || !is_object($perm)) {
-		return false;
-	} elseif ($perm->isError()) {
-		return false;
+	if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
+		$displayCvsBrowser = true;
 	}
-	$anonymous = !$perm->isMember();
+} else {
+	$displayCvsBrowser = $project->enableAnonSCM();
 }
  
-if ($project->enableAnonSCM()){
+if ($displayCvsBrowser){
 	echo $HTML->boxTop($Language->getText('plugin_scmcvs', 'history'));
 
 	echo $Language->getText('plugin_scmcvs', 'browsetree');
