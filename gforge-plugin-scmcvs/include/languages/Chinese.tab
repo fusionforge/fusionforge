@@ -1,0 +1,36 @@
+#/**
+#  * Traditional Chinese message catalog for plugin scmcvs
+#  *
+#  * GForge
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * Copyright 2002-2004 (c) GForge Team
+#  * http://gforge.org
+#  *
+#  * @version   $Id$
+#  * @author Jimou, Lee
+#  *
+#  */
+#
+#  2005/01/21 Jimou, Lee   lijimou@pchome.com.tw
+#
+plugin_scmcvs	anoncvs	<p><b>匿名者 CVS 存取</b></p><p>這專案的CVS repository可以利用下列指令集透過<i>anonymous</i>存取 (pserver) CVS。您希望check out的module，您必須指定<i>modulename</i>。當出現密碼輸入提示時，只需要按Enter鍵。</p>
+plugin_scmcvs	anoncvsup	從module的目錄update不需要 -d 參數。
+plugin_scmcvs	browseit	瀏覽 CVS Repository
+plugin_scmcvs	browsetree	<b>瀏覽 CVS Tree</b><p>瀏覽 CVS tree 給您專案程式碼目前狀態的宏觀視野，同時您也可以檢視專案中任何程式碼的完整存取記錄。</p>
+plugin_scmcvs	cvs_repository	CVS Repository
+plugin_scmcvs	devcvs	<p><b>開發人員 CVS 存取透過SSH</b></p><p>只有專案開發人員可以經由這個方式存取CVS tree，SSH2必須安裝在您的個人電腦，替換<i>modulename</i>與<i>username</i>以適當的值，當出現密碼輸入提示時輸入您的密碼。</p>
+plugin_scmcvs	developername	developername
+plugin_scmcvs	error_only_projects_can_use_cvs	錯誤，只有專案可以使用CVS
+plugin_scmcvs	error_this_project_has_turned_off	錯誤，這個專案已經關閉CVS
+plugin_scmcvs	history	Repository 存取記錄
+plugin_scmcvs	modulename	modulename
+plugin_scmcvs	nohistory	這個專案沒有 CVS 存取記錄。
+plugin_scmcvs	section	專案：$1
+plugin_scmcvs	title	SCM
+plugin_scmcvs	admin	管理
+plugin_scmcvs	download_snapshot	下載 Nightly CVS Tree Snapshot
+plugin_scmcvs	enable_cvs	使用 CVS
+plugin_scmcvs	enable_anonymous_cvs	啟用匿名者存取
+plugin_scmcvs	enable_pserver	啟用 pserver
+plugin_scmcvs	server	伺服器：
+plugin_scmcvs	cvs_commits	<strong>$1</strong> 提交，<strong>$2</strong> 新增
