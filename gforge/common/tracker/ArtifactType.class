@@ -660,6 +660,7 @@ class ArtifactType extends Error {
 		}
 
 		$email_all = ((!$email_all) ? 0 : $email_all); 
+		$use_resolution = ((!$use_resolution) ? 0 : $use_resolution); 
 
 		$sql="UPDATE artifact_group_list SET 
 			name='$name',
