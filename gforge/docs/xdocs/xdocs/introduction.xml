@@ -13,7 +13,7 @@
       <p>
 <!--<img src="/images/logo.png"/>-->
 <p/>
-GForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for comunication between members of a development team.  The tools provided by GForge allows team members to comunicate and organize their work; this allows the creation of a  knowledgebase.
+GForge is a software for collaborative development for the software community. It provides a full configured development system with versioning, a project web site and tools for comunication between members of a development team.  The tools provided by GForge allows team members to comunicate and organize their work; this allows the creation of a knowledgebase.
 </p><p>
 A complete configurated GForge system will give you the following features:
 
@@ -30,11 +30,11 @@ A complete configurated GForge system will give you the following features:
 For discussions between team members
 </li>
 <li><b>Bug tracking</b><br/>
-Allows to register and administer the bugs of the software
+Allow registration and administration of bugs
 </li>
-<li><b>support request, patch submissions, enhancement requests</b><br/>
+<li><b>Support requests, patch submissions, and enhancement requests</b><br/>
 </li>
-<li><b>comunication between project members using mailing lists</b><br/>
+<li><b>Comunication between project members using mailing lists</b><br/>
 </li>
 <li><b>Sharing of documentation</b><br/>
 </li>
@@ -43,12 +43,10 @@ Allows to register and administer the bugs of the software
 <li><b>File uploads/releases</b><br/>
 </li>
 <li><b>Posting of news</b><br/>
-Every project can have his own news items.
+Every project can have its own news items.
 </li>
 <li><b>Code Snippets</b><br/>
-The Code Snippet library allows the creation of a basic knowledgebase. The Code Snippet Library can contain code fragments, howto, etc.
-</li>
-<li><b>Classification of projects</b><br/>
+Provides of a basic knowledgebase that can contain code fragments, HOWTOs, etc.
 </li>
 </ol>
 </li>
@@ -93,8 +91,6 @@ Major changes are present in the current GForge 3.0 codebase:
 <li><b>Foundries and related nonsense have been removed</b><br/> 
 </li>
 </ul>
-
-
 
 </p>
 
