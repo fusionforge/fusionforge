@@ -10,6 +10,13 @@ gforge (3.2.1-0+3) experimental; urgency=low
 
  -- Roland Mas <lolando@debian.org>  Sun, 15 Feb 2004 17:23:32 +0100
 
+gforge (3.1-10) unstable; urgency=low
+
+  * [Roland] This is a brown-paper-bag type of release.  I broke
+    install-ldap.sh in 3.1-9.  This should fix it.
+
+ -- Roland Mas <lolando@debian.org>  Mon, 16 Feb 2004 14:20:27 +0100
+
 gforge (3.1-9) unstable; urgency=low
 
   * [Roland] Added permissions for the robot to edit the

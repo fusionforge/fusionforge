@@ -204,7 +204,7 @@ configure_slapd(){
 	      # echo "Adding $schema"
 	  else
 	      # echo "Commenting $schema"
-	      perl -pi -e "s/^include[ 	]*$schema/#Comment by GForge install#include	\$schema/g" /etc/ldap/slapd.conf.gforge-new
+	      perl -pi -e "s(^include[ 	]*$schema)(#Comment by GForge install#include	$schema)g" /etc/ldap/slapd.conf.gforge-new
 	      echo "include	$schema	#Added by GForge install" >> $tmpfile
 	      # echo "Adding $schema"
 	  fi
