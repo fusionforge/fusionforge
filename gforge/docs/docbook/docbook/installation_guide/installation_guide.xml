@@ -347,10 +347,10 @@ tar -zxvf cvsweb-1.112.tar.gz
 			<para>Possible problems:</para>
 			<itemizedlist>
 				<listitem>
-					<para><errortext>Error: Configuration not found</errortext> - edit cvsweb.cgi and point $config to the cvsweb.conf file</para>
+					<para>Error: Configuration not found - edit cvsweb.cgi and point $config to the cvsweb.conf file</para>
 				</listitem>
 				<listitem>
-					<para><errortext>Error: Failed to spawn GNU rlog</errortext> - ensure rlog is in the directory pointed to by ENV{'PATH'}</para>
+					<para>Error: Failed to spawn GNU rlog - ensure rlog is in the directory pointed to by ENV{'PATH'}</para>
 				</listitem>
 			</itemizedlist>
 		</section>
@@ -449,7 +449,7 @@ service cvspserver
 	<section>
 		<title>Verifying the installation</title>
 		<para>
-			To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage.  If you get an error: <errortext> Could Not Connect to Database:</errortext>, check if you have followed all installation instructions for the database.  Also, you can experiment with making the settings in pg_hba.conf a bit more trusting - for example, change the last work of the second line from "md5" to "trust".
+			To verify if everything was installed correctly, use the browser and connect to GForge. You should see the GForge homepage.  If you get an Error: Could Not Connect to Database:, check if you have followed all installation instructions for the database.  Also, you can experiment with making the settings in pg_hba.conf a bit more trusting - for example, change the last work of the second line from "md5" to "trust".
 		</para>
 
 	</section>
