@@ -91,6 +91,7 @@ Search <i>(groupid, group unix name, full name)</i>:
 <LI><A HREF="edit_frs_filetype.php">Add, Delete, or Edit File Types</A>
 <LI><A HREF="edit_frs_processor.php">Add, Delete, or Edit Processors</A>
 <LI><A HREF="edit_frs_theme.php">Add, Delete, or Edit Themes</A>
+<LI><A HREF="loadtabfiles.php">Translation file tool</A>
 </UL>
 
 <P><B>Global Admin Tools / Mass Insert Tools</B>
