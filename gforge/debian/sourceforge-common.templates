@@ -1,0 +1,62 @@
+Template: sourceforge/shared/replace_file_install
+Type: boolean
+Default: false
+Description: Do you want ${file} to be updated?
+ In order for Sourceforge to fully work, some changes must be made to
+ the ${file} file.
+ .
+ I can either do them for you (and backup the current version in
+ ${file}.sourceforge-old), or write the changes to another file
+ (${file}.sourceforge-new) and let you propagate the changes to
+ ${file} yourself.
+ .
+ Shall I modify ${file} automatically?
+Description-fr: Voulez-vous mettre à jour ${file} ?
+ Pour que Sourceforge fonctionne complètement, des modifications
+ doivent être apportées au fichier ${file}.
+ .
+ Je peux soit les faire automatiquement (en sauvegardant la version
+ actuelle dans ${file}.sourceforge-old, soit écrire les modifications
+ proposées dans ${file}.sourceforge-new, et vous laisser propager
+ ces modifications vers ${file} à votre guise.
+ .
+ Dois-je modifier ${file} automatiquement ?
+
+Template: sourceforge/shared/replace_file_remove
+Type: boolean
+Default: false
+Description: Do you want ${file} to be updated?
+ In order for Sourceforge to be fully deinstalled, some changes must
+ be made to the ${file} file.
+ .
+ I can either do them for you (and backup the current version in
+ ${file}.sourceforge-old), or write the changes to another file
+ (${file}.sourceforge-new) and let you propagate the changes to
+ ${file} yourself.
+ .
+ Shall I modify the ${file} automatically?
+Description-fr: Voulez-vous mettre à jour ${file} ?
+ Pour désinstaller complètement Sourceforge, des modifications
+ doivent être apportées au fichier ${file}.
+ .
+ Je peux soit les faire automatiquement (en sauvegardant la version
+ actuelle dans ${file}.sourceforge-old, soit écrire les modifications
+ proposées dans ${file}.sourceforge-new, et vous laisser propager
+ ces modifications vers ${file} à votre guise.
+ .
+ Dois-je modifier ${file} automatiquement ?
+
+Template: sourceforge/shared/file_changed
+Type: note
+Description: Please check ${file}
+ You have chosen not to let the Sourceforge package update the
+ ${file} file.  Very well, I have not changed it.  Instead,
+ I have written the suggested changes into ${file}.sourceforge-new.
+ Please check this file and apply the appropriate changes
+ to ${file}.
+Description-fr: Veuillez vérifier ${file}
+ Vous avez choisi de ne pas laisser le paquet Sourceforge modifier
+ le fichier ${file}.  Conformément à ce choix, les modifications ont
+ été sauvegardées dans ${file}.sourceforge-new.  Veuillez vérifier
+ ce fichier et appliquer les changements adéquats à ${file},
+ le cas échéant.

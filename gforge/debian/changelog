@@ -6,8 +6,12 @@ sourceforge (2.6-0+11+) unstable; urgency=low
     changes.
   * [Roland] Applied Soon-Son's patch #281 increasing internationalisation
     and the Korean translation.
+  * [Roland] Split the package into no less than eleven subpackages.  This
+    isolates different features into different packages, and it also paves
+    the road to multi-host installations (that part is not done yet).
+  * [Roland] Cleaned debian/rules file a bit.
 
- -- Roland Mas <lolando@debian.org>  Mon, 29 Apr 2002 14:00:50 +0200
+ -- Roland Mas <lolando@debian.org>  Thu,  2 May 2002 20:14:03 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 

@@ -1,9 +1,6 @@
 #
-# Regular cron jobs for the sourceforge package
+# Regular cron jobs for the sourceforge-db-postgresql package
 #
-
-# Clean cached files older than 60 minutes
-25 * * * * root [ -d /var/cache/sourceforge ] && find /var/cache/sourceforge/ -type f -and -cmin +60 -exec /bin/rm -f "{}" \; 2>&1 > /dev/null
 
 # Grab projects from trove map and put into foundry_projects table
 15 1 * * * sourceforge [ -x /usr/lib/sourceforge/bin/populate_foundries.php ] && /usr/lib/sourceforge/bin/populate_foundries.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include 2>&1 > /dev/null
@@ -35,18 +32,3 @@
 
 # Daily aggregating of the numbers
 15 0 * * * sourceforge [ -x /usr/lib/sourceforge/bin/site_stats.php ] && /usr/lib/sourceforge/bin/site_stats.php -d include_path=/usr/lib/sourceforge/:/usr/lib/sourceforge/www/include 2>&1 > /dev/null
-
-# DNS Update
-0 * * * * root [ -x /usr/lib/sourceforge/bin/install-dns.sh ] && /usr/lib/sourceforge/bin/install-dns.sh configure 2>&1 > /dev/null
-
-# Mailing-list creation
-55 * * * * root [ -x /usr/lib/sourceforge/bin/create-mailing-lists.pl ] && /usr/lib/sourceforge/bin/create-mailing-lists.pl 2>&1 > /dev/null
-
-# FTP update
-0 * * * * root [ -x /usr/lib/sourceforge/bin/install-ftp.sh ] && /usr/lib/sourceforge/bin/install-ftp.sh update 2>&1 > /dev/null
-
-# CVS tarballs
-5 2 * * * root [ -x /usr/lib/sourceforge/bin/tarballs.sh ] && /usr/lib/sourceforge/bin/tarballs.sh 2>&1 > /dev/null
-
-# CVS/user/group update
-0 * * * * root [ -x /usr/lib/sourceforge/bin/update-user-group-cvs.sh ] && /usr/lib/sourceforge/bin/update-user-group-cvs.sh 2>&1 > /dev/null

@@ -1,0 +1,44 @@
+Template: sourceforge/lists_host
+Type: string
+Description: Your mailing-lists server
+ The hostname of the server that will host your Sourceforge mailing-lists. 
+ It should not be the same as your main SF host.
+Description-fr: Votre serveur de listes de diffusion
+ Le nom du serveur qui hébergera vos listes de diffusion de Sourceforge.
+ Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
+
+Template: sourceforge/ldap_base_dn
+Type: string
+Description: The LDAP base DN
+ The DN is used to refer to the LDAP directory unambiguously.  You could use,
+ for instance, "dc=sourceforge,dc=example,dc=com"
+Description-fr: Le nom du répertoire LDAP (DN)
+ Le nom DN est utilisé pour identifier l'annuaire LDAP de manière unique.
+ Par exemple, vous pourriez utiliser le DN "dc=sourceforge,dc=exemple,dc=com".
+
+Template: sourceforge/ldap_host
+Type: string
+Description: The LDAP host
+ The hostname of the LDAP server.
+Description-fr: Le serveur LDAP
+ Le nom d'hôte de votre serveur LDAP.
+
+Template: sourceforge/noreply_to_bitbucket
+Type: boolean
+Default: true
+Description: Do you want mail to ${noreply} to be deleted?
+ Sourceforge sends plenty of e-mail from the "${noreply}" address,
+ and maybe even some e-mail to that address too.
+ .
+ It is advised that you let the package direct e-mail to that address to a
+ black hole (/dev/null), unless you have another use for that address.
+ .
+ Answering "yes" here will perform that redirection.
+Description-fr: Supprimer les e-mails pour ${noreply} ?
+ Sourceforge envoie fréquemment des e-mails depuis (et vers) l'adresse
+ "${noreply}".
+ .
+ Il est conseillé de rediriger les e-mails vers cette adresse vers un trou
+ noir, sauf si vous avez un autre usage pour cette adresse.
+ .
+ Répondre "oui" ici mettra en place cette redirection.

@@ -7,10 +7,153 @@ Standards-Version: 3.5.6.0
 
 Package: sourceforge
 Architecture: all
-Depends: apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-pgsql, php4-gd, php4-cgi, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), postgresql (>= 7.1.2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), bind9, slapd (>= 2.0.23-3), ldap-utils, exim | exim-tls, libpam-ldap, cvs, mailman, proftpd, elvis | nvi | vim, rcs 
-Description: Integrated development project framework
- This package provides many services a development project can use,
- such as bug-tracking, task management, mailing-lists, CVS repository,
- forums, support request helper, web page / FTP hosting, release
- management, etc.  All these services are integrated into one web site.
- They are managed via a nice web interface.
+Depends: debconf (>= 0.5.00), sourceforge-web-apache | sourceforge-web, sourceforge-db-postgresql | sourceforge-db, sourceforge-mta-exim | sourceforge-mta, sourceforge-shell-ldap | sourceforge-shell, sourceforge-cvs, sourceforge-ftp-proftpd | sourceforge-ftp, sourceforge-ldap-openldap | sourceforge-ldap, sourceforge-dns-bind9 | sourceforge-dns, sourceforge-lists-mailman | sourceforge-lists
+Description: Collaborative development tool - meta-package
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This meta-package installs a complete Sourceforge site.
+
+Package: sourceforge-common
+Architecture: all
+Depends: debconf (>= 0.5.00)
+Description: Collaborative development tool - shared files
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package contains files and program used by several other
+ subpackages.
+
+Package: sourceforge-web-apache
+Architecture: all
+Depends: apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-pgsql, php4-gd, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3)
+Provides: sourceforge-web
+Conflicts: sourceforge-web
+Description: Collaborative development tool - web part (using Apache)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package contains the files needed to run the web part of
+ Sourceforge on an Apache webserver.
+
+Package: sourceforge-db-postgresql
+Architecture: all
+Depends: postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, libmime-base64-perl, libhtml-parser-perl, debianutils (>= 1.7), debconf (>= 0.5.00), php4, php4-pgsql
+Provides: sourceforge-db
+Conflicts: sourceforge-db
+Description: Collaborative development tool - database (using PostgreSQL)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package installs, configures and maintains the Sourceforge
+ database.
+
+Package: sourceforge-mta-exim
+Architecture: all
+Depends: perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), exim | exim-tls
+Provides: sourceforge-mta
+Conflicts: sourceforge-mta
+Description: Collaborative development tool - mail tools (using Exim)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package configures the Exim mail transfer agent to run
+ Sourceforge.
+
+Package: sourceforge-shell-ldap
+Architecture: all
+Depends: perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap, sourceforge-ldap-openldap | sourceforge-ldap
+Provides: sourceforge-shell
+Conflicts: sourceforge-shell
+Description: Collaborative development tool - shell accounts (using LDAP)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package provides shell accounts authenticated via LDAP to
+ Sourceforge users.
+
+Package: sourceforge-cvs
+Architecture: all
+Depends: apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, perl, debianutils (>= 1.7), debconf (>= 0.5.00), ssh, libnss-ldap (>=184-1), libpam-ldap, sourceforge-ldap-openldap | sourceforge-ldap, cvs, rcs
+Description: Collaborative development tool - CVS management
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package installs and configures CVS for Sourceforge.
+
+Package: sourceforge-ftp-proftpd
+Architecture: all
+Depends: perl, debianutils (>= 1.7), debconf (>= 0.5.00), libnss-ldap (>=184-1), libpam-ldap, sourceforge-ldap-openldap | sourceforge-ldap, proftpd
+Provides: sourceforge-ftp
+Conflicts: sourceforge-ftp
+Description: Collaborative development tool - FTP management (using ProFTPd)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package configures the ProFTPd FTP server for Sourceforge.
+
+Package: sourceforge-ldap-openldap
+Architecture: all
+Depends: postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), ldap-utils
+Provides: sourceforge-ldap
+Conflicts: sourceforge-ldap
+Description: Collaborative development tool - LDAP directory (using OpenLDAP)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package configures and maintains an LDAP directory for Sourceforge.
+
+Package: sourceforge-dns-bind9
+Architecture: all
+Depends: postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), bind9 
+Provides: sourceforge-dns
+Conflicts: sourceforge-dns
+Description: Collaborative development tool - DNS management (using Bind9)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package configures and maintains the DNS zones for Sourceforge.
+
+Package: sourceforge-lists-mailman
+Architecture: all
+Depends: apache (>= 1.3.9) | apache-ssl (>= 1.3.9), postgresql (>= 7.1.2), perl, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), mailman, sourceforge-ldap-openldap | sourceforge-ldap, sourceforge-mta-exim | sourceforge-mta
+Provides: sourceforge-lists
+Conflicts: sourceforge-lists
+Description: Collaborative development tool - mailing-lists (using Mailman)
+ Sourceforge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package controls the interaction of Sourceforge and Mailman.

@@ -1,0 +1,12 @@
+etc/sourceforge
+etc/sourceforge/templates
+usr/bin
+usr/lib/sourceforge/bin
+usr/lib/sourceforge/db
+usr/lib/sourceforge/lib
+usr/sbin
+var/lib/sourceforge
+var/lib/sourceforge/chroot
+var/lib/sourceforge/download
+var/lib/sourceforge/ftp
+var/lib/sourceforge/ftp/incoming

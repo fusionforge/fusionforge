@@ -18,8 +18,10 @@ set -e
 
 case "$1" in
     purge)
+	. /usr/lib/sourceforge/lib/common-utils.sh
+
 	rm -rf /var/lib/sourceforge
-	rm -f /etc/sourceforge/sourceforge.conf
+	delete_mainconffile
 	[ -d /etc/sourceforge ] && rmdir --ignore-fail-on-non-empty /etc/sourceforge
 	if [ -h /cvsroot ] && [ $(readlink /cvsroot) = "/var/lib/sourceforge/chroot/cvsroot" ] ; then
 	    rm /cvsroot

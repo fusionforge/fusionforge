@@ -1,0 +1,79 @@
+Template: sourceforge/db_password
+Type: password
+Description: Password used for the database
+ The connecton to the DB system requires a password.  Please choose a
+ password here.
+Description-fr: Mot de passe utilisé pour la base de données
+ La connexion à la base de données doit être authentifiée par un mot de
+ passe.  Veuillez le choisir ici.
+
+Template: sourceforge/db_password_confirm
+Type: password
+Description: Password used for the database - again
+ Please re-type the password for confirmation.
+Description-fr: Mot de passe pour la base de données - confirmation
+ Veuillez saisir le mot de passe de nouveau, pour confirmation.
+
+Template: sourceforge/admin_login
+Type: string
+Default: admin
+Default-fr: admin
+Description: The Sourceforge administrator login
+ This Sourceforge account will have all privileges on the Sourceforge
+ system.  It is needed to approve the creation of the projects.
+Description-fr: Le nom du compte de l'administrateur
+ Ce compte Sourceforge a tous les privilèges sur le système Sourceforge.
+ Il sert entre autres à approuver la création de projets.
+
+Template: sourceforge/admin_password
+Type: password
+Description: The Sourceforge administrator password
+ This Sourceforge account will have all privileges on the Sourceforge
+ system.  It is needed to approve the creation of the projects.  Please
+ type a password here.
+Description-fr: Mot de passe de l'administrateur
+ Le compte de l'administrateur a besoin d'un mot de passe.  Veuillez le
+ saisir ici.
+
+Template: sourceforge/admin_password_confirm
+Type: password
+Description: The Sourceforge administrator password - again
+ Please re-type the password for confirmation.
+Description-fr: Mot de passe administrateur - confirmation
+ Veuillez saisir le mot de passe de nouveau, pour confirmation.
+
+Template: sourceforge/newsadmin_groupid
+Type: string
+Default: 2
+Default-fr: 2
+Description: The news admin group id
+ Members of the news admin group can approve news for the Sourceforge main
+ page.  This group id MUST NOT be 1. You only need to touch this group if
+ you upgrade from a previous version and want to keep your data.
+Description-fr: Le numéro du groupe d'administration des nouvelles
+ Les membres du groupe d'administration des nouvelles peuvent approuver des
+ nouvelles pour les publier sur la page d'accueil de Sourceforge.  Le numéro
+ de ce groupe NE DOIT PAS être 1.  Cette information n'est requise que si vous
+ mettez à jour une installation précédente et voulez garder vos données.
+
+Template: sourceforge/statsadmin_groupid
+Type: string
+Default: 3
+Default-fr: 3
+Description: The stats admin group id
+Description-fr: Le numéro du groupe d'administration des statistiques
+
+Template: sourceforge/skill_list
+Type: string
+Default: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Default-fr: Ada;C;C++;HTML;LISP;Perl;PHP;Python;SQL
+Description: The initial list of skills
+ Sourceforge allows users to define a list of their skills, to be chosen
+ amongst those present in the database.  This list is the initial list of
+ skills that will enter the database.  Please enter the skill names
+ separated by semi-colons `;'.
+Description-fr: Liste de compétences
+ Les utilisateurs de Sourceforge peuvent afficher leurs niveaux de compétence
+ dans différents domaines.  Cette liste est la liste initiale de ces domaines.
+ Veuillez entrer les noms de ces domaines de compétence séparés par des
+ points-virgules `;'.

@@ -1,0 +1,8 @@
+Template: sourceforge/cvs_host
+Type: string
+Description: Your CVS server
+ The hostname of the server that will host your Sourceforge CVS
+ repositories.  It should not be the same as your main SF host.
+Description-fr: Votre serveur CVS
+ Le nom du serveur CVS de votre Sourceforge.
+ Ce nom ne devrait pas être identique au nom de votre serveur SF principal.
