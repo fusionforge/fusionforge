@@ -1,14 +1,18 @@
+2003-01-29  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* common/docman/DocumentFactory.class: fix syntax error.
+
 2003-01-28 Reinhard Spisser <reinhard@spisser.it>
 
 	* www/register/projectinfo.php, www/include/languages/Base.tab,
-	www/include/languages/Italian.tab: 
+	www/include/languages/Italian.tab:
 	Localization
 
 2003-01-28 Tom Copeland <tom@infoether.com>
 
 	* www/soap/*: Added new operations to support authentication and
 	adding/updated bugs
-	
+
 	* common/tracker/ArtifactTypeFactory.class: Added some new DAOish
 	functions.
 

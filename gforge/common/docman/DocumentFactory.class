@@ -158,7 +158,7 @@ class DocumentFactory extends Error {
 		$rows = db_numrows($result);
 
 		if (!$result || $rows < 1) {
-			$this->setError($Language->getText('docman_common'.'no_docs')..db_error());
+			$this->setError($Language->getText('docman_common','no_docs')." ".db_error());
 			return false;
 		} else {
 			while ($arr =& db_fetch_array($result)) {
