@@ -5,6 +5,7 @@
 
 set -e
 
+#DEBHELPER#
 # summary of how this script can be called:
 #        * <prerm> `remove'
 #        * <old-prerm> `upgrade' <new-version>

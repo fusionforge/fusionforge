@@ -2,8 +2,9 @@
 # prerm script for gforge-plugin-scmcvs
 #
 # see: dh_installdeb(1)
-
 set -e
+
+#DEBHELPER#
 
 # summary of how this script can be called:
 #        * <prerm> `remove'
