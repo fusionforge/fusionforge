@@ -36,7 +36,7 @@ class ExportProjectSearchQuery extends SearchQuery {
 		$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
 		$groupUnixNameCond = $this->getIlikeCondition('unix_group_name', $this->words);
 		
-		$sql = 'SELECT group_name,unix_group_name,type,groups.group_id, '
+		$sql = 'SELECT group_name,unix_group_name,type_id,groups.group_id, '
 			.'short_description,license,register_time '
 			.'FROM groups '
 			.'WHERE status IN (\'A\', \'H\') '

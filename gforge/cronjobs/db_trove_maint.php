@@ -125,7 +125,7 @@ $res=db_query("SELECT trove_cat.trove_cat_id,trove_cat.parent,count(groups.group
 	LEFT JOIN groups ON
 		groups.group_id=trove_group_link.group_id
 	WHERE (groups.status='A' OR groups.status IS NULL)
-	AND ( groups.type='1' OR groups.status IS NULL)
+	AND ( groups.type_id='1' OR groups.status IS NULL)
 	AND ( groups.is_public='1' OR groups.is_public IS NULL)
 	GROUP BY trove_cat.trove_cat_id,trove_cat.parent", -1, 0, SYS_DB_TROVE);
 

@@ -36,7 +36,7 @@ class ProjectSearchQuery extends SearchQuery {
 		$groupDescriptionCond = $this->getIlikeCondition('short_description', $this->words);
 		$groupUnixNameCond = $this->getIlikeCondition('unix_group_name', $this->words);
 		
-		$sql = 'SELECT group_name, unix_group_name, type, group_id, short_description '
+		$sql = 'SELECT group_name, unix_group_name, type_id, group_id, short_description '
 			.'FROM groups '
 			.'WHERE status IN (\'A\', \'H\') '
 			.'AND is_public=\'1\' '
