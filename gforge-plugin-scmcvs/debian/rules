@@ -40,7 +40,9 @@ install: build
 	#ln -sf /usr/lib/gforge/plugins/$(PLUGIN)/bin/cvssh $(DESTDIR)/bin/
 	cp -r include/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/
 	cp -r lib/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/
-	cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
+	#cp -r cgi-bin/* $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/
+	cp cgi-bin/cvsweb $(DESTDIR)/usr/lib/gforge/bin/
+	chmod 0755 $(DESTDIR)/usr/lib/gforge/bin/cvsweb
 	cp -r etc/* $(DESTDIR)/etc/gforge/
 	cp -r www/* $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/
 	# install -m 0644 httpd.conf $(DESTDIR)/etc/gforge/httpd.conf.d/50$(PLUGIN)
@@ -49,7 +51,7 @@ install: build
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/bin/ -type f | xargs chmod 0755
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/include/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/lib/ -type f | xargs chmod 0644
-	find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
+	#find $(DESTDIR)/usr/lib/gforge/plugins/$(PLUGIN)/cgi-bin/ -type f | xargs chmod 0755
 	# find $(DESTDIR)/etc/gforge/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	find $(DESTDIR)/usr/share/gforge/www/plugins/$(PLUGIN)/ -type f | xargs chmod 0644
 	# clean CVS dir
