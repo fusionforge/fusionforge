@@ -94,6 +94,7 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 $sys_use_ldap=1;
 $sys_ldap_host="{ldap_host}";
 $sys_ldap_port=389;
+$sys_ldap_version=3;
 // this is dn under which all information stored
 $sys_ldap_base_dn="{ldap_base_dn}";
 // and this, how we do access it (add permission required)

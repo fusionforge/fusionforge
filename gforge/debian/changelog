@@ -6,8 +6,10 @@ gforge (3rc2-4+) unstable; urgency=low
   * [Roland] Do not take the availability of mod_userdir.c for granted.
     Patch from Tomas Pospisek <tpo_deb@sourcepole.ch> (closes: #197606).
   * [Roland] Bumped Standards-Version: to 3.5.10 (no changes needed).
+  * [Christian] added sys_ldap_version variable and take it in account if
+    defined in common/include/ldap.php after bind
 
- -- Roland Mas <lolando@debian.org>  Mon, 23 Jun 2003 22:16:03 +0200
+ -- Christian Bayle <bayle@debian.org>  Sun, 29 Jun 2003 14:14:43 +0200
 
 gforge (3rc2-4) unstable; urgency=low
 

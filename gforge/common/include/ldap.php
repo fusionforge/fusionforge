@@ -124,7 +124,7 @@ function sf_ldap_reset_error_msg() {
  */
 function sf_ldap_connect() {
 	global $sys_ldap_host,$sys_ldap_port;
-	global $sys_ldap_bind_dn,$sys_ldap_passwd,$ldap_conn;
+	global $sys_ldap_bind_dn,$sys_ldap_passwd,$ldap_conn,$sys_ldap_version;
 
 	if (!$ldap_conn) {
 		sf_ldap_reset_error_msg();
@@ -134,6 +134,9 @@ function sf_ldap_connect() {
 			return false;
 		}
 		ldap_bind($ldap_conn,$sys_ldap_bind_dn,$sys_ldap_passwd);
+		if ($sys_ldap_version) {
+			ldap_set_option($ldapdatads, LDAP_OPT_PROTOCOL_VERSION, $sys_ldap_version);
+		}
 	}
 	return true;
 }
