@@ -79,7 +79,7 @@ if ($login && !$success) {
 <p>
 <font color="red"><B><?php echo $Language->getText('account_login', 'cookiewarn'); ?></B></font>
 <P>
-<form action="https://<?php echo $HTTP_HOST; ?>/account/login.php" method="post">
+<form action="<?php echo $PHP_SELF; ?>" method="post">
 <INPUT TYPE="HIDDEN" NAME="return_to" VALUE="<?php echo $return_to; ?>">
 <p>
 <?php echo $Language->getText('account_login', 'loginname'); ?>

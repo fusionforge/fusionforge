@@ -24,3 +24,4 @@ file_id int,
 month int,
 day int
 );
+insert into users (user_id,user_name) values (2,'noreply');

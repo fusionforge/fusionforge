@@ -43,6 +43,8 @@ $sys_download_host = "download.company.com";
 // in the source code, but they seem to serve the same purpose..?
 $sys_shell_host = "shell.company.com";
 $sys_users_host = "users.company.com";
+//$homedir_prefix='/home';
+//$groupdir_prefix='/home/groups';
  
 // Machine that hosts docs (such as the FAQs and the various software
 // licenses (*BSD, [L]GPL, etc.).  You REALLY want this to be the same
