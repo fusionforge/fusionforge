@@ -1,0 +1,43 @@
+gforge-plugin-scmsvn
+--------------------
+
+This is the Subversion plugin for Gforge.  It creates Subversion
+repositories and provides some functionality to manage them.
+
+Prerequisites:
+
+- install Perl, DBI and DBD::Pg as per Gforge's INSTALL file
+
+- You'll also need to install Subversion, as well as Python and the
+Subversion-Python module (for ViewSVN).  On Red Hat systems, Python is
+available natively, but you may have to fetch Subversion-Python
+packages from <http://subversion.tigris.org/project_packages.html>.
+It seems Mandrake provides the module natively.  Again, on Debian,
+apt's dependencies system will take care of it all.
+
+Installation:
+
+- files from etc/ go to /etc/gforge/plugins/scmsvn, apart from
+etc/httpd.conf that you should install as /etc/gforge/httpd.d/10scmsvn
+- files from bin/ go to /usr/lib/gforge/plugins/scmsvn/bin
+- files from include/ go to /usr/lib/gforge/plugins/scmsvn/include
+- files from lib/ go to  /usr/lib/gforge/plugins/scmsvn/lib
+
+Setup:
+
+- customise files in /etc/gforge/plugins/scmsvn to match your
+preferences (SVN server, and whether to enable SVN by default for new
+projects)
+- create a gforge_scm user, member of all the projects for which you
+want to use SVN
+- setup the crontab from debian/cron.d
+- gforge-config
+- /usr/lib/gforge/plugins/scmsvn/bin/db-upgrade.pl
+- /usr/lib/gforge/plugins/scmsvn/bin/install-svn.sh configure
+- /usr/lib/gforge/bin/register-plugin scmsvn "Subversion"
+
+ -- Roland Mas <lolando@debian.org>, Tue May 18 22:13:57 2004
+
+Local Variables:
+mode: readme-debian
+End:

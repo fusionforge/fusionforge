@@ -1,0 +1,295 @@
+<?php
+/** Subversion plugin for Gforge
+ * Copyright 2003 Roland Mas <lolando@debian.org>
+ * Copyright 2004 Roland Mas <roland@gnurandal.com> 
+ *                The Gforge Group, LLC <http://gforgegroup.com/>
+ * Based on the CVS plugin, which was derived from Gforge, which was
+ * derived from Sourceforge
+ *
+ * This file is not part of Gforge
+ *
+ * This plugin, like Gforge, is free software; you can redistribute it
+ * and/or modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2 of
+ * the License, or (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  US
+ */
+
+require_once('common/include/User.class');
+
+class SVNPlugin extends SCM {
+	function SVNPlugin () {
+		$this->SCM () ;
+		$this->name = "scmsvn";
+		$this->hooks[] = "scm_page";
+		$this->hooks[] = "scm_admin_update";
+		$this->hooks[] = "scm_admin_page";
+		$this->hooks[] = "scm_stats";
+		$this->hooks[] = "group_approved";
+
+                require_once('/etc/gforge/plugins/scmsvn/config.php') ;
+		
+		$this->default_svn_server = $default_svn_server ;
+		$this->this_server = $this_server ;
+		$this->enabled_by_default = $enabled_by_default ;
+
+		$this->register () ;
+	}
+
+	function CallHook ($hookname, $params) {
+		global $Language, $HTML ;
+		
+		switch ($hookname) {
+		case "scm_page":
+			$group_id = $params['group_id'] ;
+			$this->display_scm_page ($group_id) ;
+			break ;
+		case "scm_admin_update":
+			$this->scm_admin_update ($params) ;
+			break ;
+		case "scm_admin_page":
+			$this->display_scm_admin_page ($params) ;
+			break ;
+		case "scm_stats":
+			$this->display_stats ($params) ;
+			break;
+		case "group_approved":
+			$this->group_approved ($params) ;
+			break;
+		default:
+			// Forgot something
+		}
+	}
+
+	function display_scm_page ($group_id) {
+		global $Language, $HTML ;
+
+		$project =& group_get_object($group_id);
+		
+		if ($project->usesPlugin ("scmsvn")) {
+			
+// ************************************************
+			
+		 print '<h2>Subversion</h2>
+		                <p>Documentation for Subversion (sometimes referred to as "SVN") is available <a href="http://svnbook.red-bean.com/">here</a>.
+                                </p>' ;
+
+
+			if($this->svn_single_host) {
+				$svnrootend=$this->default_svn_host.':/svnroot/'.$project->getUnixName();
+			} else {
+				$svnrootend='svn.'.$project->getUnixName().'.'.$this->default_svn_host.':/svnroot/'.$project->getUnixName();
+			}
+// ######################## table for summary info
+
+?>
+<table width="100%">
+	<tr valign="top">
+		<td width="65%">
+<?php
+// ######################## anonymous SVN instructions
+
+	 if ($this->UsesAnonSVN ($group_id)) {
+		 // echo $Language->getText('scm_index', 'anoncvs');
+		 print "<b>Anonymous Subversion Access</b>
+		                <p>
+		                <tt>svn checkout svn://" . $this->GetGroupServer($group_id) . "/".$project->getUnixName()."</tt>
+                                </p>" ;
+	 }
+
+// ############################ developer access
+			
+	 // echo $Language->getText('scm_index', 'devcvs');
+	 echo "<b>Developer Subversion Access via SSH</b>" ;
+
+	 print "<p>
+	 <tt>svn checkout svn+ssh://<i>developername</i>@" . $this->GetGroupServer($group_id) . "/var/lib/gforge/chroot/svnroot/".$project->getUnixName()."</tt>
+</p>" ;
+
+	 echo "<b>Developer Subversion Access via DAV</b>" ;
+
+	 print "<p>
+	 <tt>svn checkout --username <i>developername</i> http://" . $this->GetGroupServer($group_id) . "/groups/".$project->getUnixName()."</tt>
+</p>" ;
+
+// ################## summary info
+
+?>
+
+		</td>
+		<td width="35%">
+
+<?php
+
+// ############################## SVN Browsing
+
+$anonymous = 1 ;
+if (session_loggedin()) {
+   $perm =& $project->getPermission(session_get_user());
+   $anonymous = !$perm->isMember();
+}
+ 
+if ($this->UsesAnonSVN ($group_id)) {
+	echo $HTML->boxTop($Language->getText('scm_index', 'history'));
+
+	// echo $Language->getText('scm_index', 'browsetree');
+	echo "<b>Browse the Subversion Tree</b><p>Browsing the Subversion tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.</p>" ;
+
+	echo "<p><a href=\"http://" . $this->GetGroupServer($group_id) . "/plugins/scmsvn/cgi-bin/viewcvs.cgi?root=".$project->getUnixName()."\">Browse</a> SVN tree</p>" ;
+
+       echo $HTML->boxBottom();
+}
+
+?>
+		</td>
+	</tr>
+</table>
+
+<?php
+
+// ************************************************
+
+
+
+		}
+
+	}
+
+	function scm_admin_update ($params) {
+		$group =& group_get_object($params['group_id']);
+
+		if ($params['scmradio'] == 'scmsvn') {
+			$group->setPluginUse("scmsvn", 1) ;
+			
+		} else {
+			$group->setPluginUse("scmsvn", 0) ;
+		}
+// 		if ($params['scmsvn_use_svn']) {
+// 			$group->setPluginUse("scmsvn", 1) ;
+			
+// 		} else {
+// 			$group->setPluginUse("scmsvn", 0) ;
+// 		}
+		if ($params['scmsvn_enable_anon_svn']) {
+			$this->SetUsesAnonSVN ($params['group_id'], true) ;
+		} else {
+			$this->SetUsesAnonSVN ($params['group_id'], false) ;
+		}
+		if ($params['scmsvn_svn_server'] && $params['scmsvn_svn_server'] != "") {
+			$this->SetGroupServer ($params['group_id'], $params['scmsvn_svn_server']) ;
+		} else {
+			$this->SetGroupServer ($params['group_id'], $this->GetDefaultServer ()) ;
+		}
+	}
+
+	function display_scm_admin_page ($params) {
+		$group =& group_get_object($params['group_id']);
+?>
+<!-- <input type="checkbox" name="scmsvn_use_svn" value="1" <?php if ($group->usesPlugin("scmsvn")) {print '"checked"';} ?>> <strong>Use Subversion</strong><br> -->
+<input type="radio" name="scmradio" value="scmsvn" <?php if ($group->usesPlugin("scmsvn")) {print '"checked"';} ?>> <strong>Use Subversion</strong><br>
+<input type="checkbox" name="scmsvn_enable_anon_svn" value="1" <?php if ($this->UsesAnonSVN($params['group_id'])) {print '"checked"';} ?>> <strong>Allow anonymous Subversion</strong><br>
+<input type="text" name="scmsvn_svn_server" value="<?php echo $this->GetGroupServer ($params['group_id']) ?>"> <strong>Subversion server</strong><br><br>
+<?php
+														      }
+
+	function display_stats ($params) {
+		global $Language ;
+		$group_id = $params['group_id'] ;
+		$result = db_query("
+			SELECT commits, adds
+			FROM plugin_scmsvn_stats
+			WHERE group_id='$group_id'");
+		$commit_num = db_result($result,0,0);
+		$add_num    = db_result($result,0,1);
+		if (!$commit_num) {
+			$commit_num=0;
+		}
+		if (!$add_num) {
+			$add_num=0;
+		}
+		echo ' (SVN: '.$Language->getText('project_home','cvs_commits',array(number_format($commit_num,0),number_format($add_num,0))).")";
+		
+	}
+	
+        function group_approved ($params) {
+                $group_id = $params['group_id'] ;
+		
+                $project =& group_get_object($group_id);
+		
+                if ($this->enabled_by_default) {
+                        $group->setPluginUse("scmsvn", 1) ;
+                } else {
+                        $group->setPluginUse("scmsvn", 0) ;
+                }
+        }
+	
+	function GetDefaultServer () {
+		return $this->default_svn_server ;
+	}
+
+	function GetGroupServer ($group_id) {
+		$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			return $this->default_svn_server ;
+		} else {
+			return db_result($res,0,'svn_host');
+		}
+	}
+
+	function SetGroupServer ($group_id, $server) {
+		db_begin () ;
+		$sql = "SELECT svn_host FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			$sql = "INSERT INTO plugin_scmsvn_group_usage (group_id, svn_host) VALUES ($group_id, '$server')" ;
+		} else {
+			$sql = "UPDATE plugin_scmsvn_group_usage SET svn_host = '$server' WHERE group_id = $group_id" ;
+			
+		}
+		$res = db_query($sql);
+		db_commit () ;
+	}
+
+	function UsesAnonSVN ($group_id) {
+		$sql = "SELECT anon_svn FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			return false ;
+		} else {
+			return db_result($res,0,'anon_svn');
+		}
+	}
+
+	function SetUsesAnonSVN ($group_id, $anon_svn) {
+		db_begin () ;
+		$anon_svn = $anon_svn ? 1 : 0 ;
+
+		$sql = "SELECT anon_svn FROM plugin_scmsvn_group_usage WHERE group_id = $group_id" ;
+		$res = db_query($sql);
+		if (db_numrows($res) == 0) {
+			$sql = "INSERT INTO plugin_scmsvn_group_usage (group_id, anon_svn) VALUES ($group_id, $anon_svn)" ;
+		} else {
+			$sql = "UPDATE plugin_scmsvn_group_usage SET anon_svn = $anon_svn WHERE group_id = $group_id" ;
+			
+		}
+		$res = db_query($sql);
+		db_commit () ;
+	}
+
+}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>
