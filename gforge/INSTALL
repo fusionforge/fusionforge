@@ -124,7 +124,7 @@ Giving the first user "Site Admin" privileges. Register a new user,
 and confirm it via the email link. Then enter the postgres command
 line and issue these commands:
 
-insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NEW ID*****,1,'A');
+insert into user_group (user_id,group_id,admin_flags) values (*****YOUR NEW NUMERIC USER ID*****,1,'A');
 
 /etc/aliases - add this line and run "newaliases"
 noreply:        /dev/null
