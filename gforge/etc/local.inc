@@ -103,11 +103,11 @@ $FTPFILES_DIR = "/nfs/garbage/sourceforge";
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
-$sys_urlroot="/alexandria/www/";
+$sys_urlroot="/usr/lib/sourceforge/www/";
  
 // Cache location -- this is needed by include/cache.php
 // This directory must be world reachable, but writable only by the web-server
-$sf_cache_dir = "/sfcache";
+$sf_cache_dir = "/var/cache/sourceforge";
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name="prodigy";
  

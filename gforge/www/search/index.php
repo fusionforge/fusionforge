@@ -81,16 +81,16 @@ if ($type_of_search == "soft") {
 		Query to find software
 	*/
 
-	// If multiple words, separate them and put LIKE in between
+	// If multiple words, separate them and put ILIKE in between
 	$array=explode(" ",$words);
-	$words1=implode($array,"%' $crit group_name LIKE '%");
-	$words2=implode($array,"%' $crit short_description LIKE '%");
-	$words3=implode($array,"%' $crit unix_group_name LIKE '%");
+	$words1=implode($array,"%' $crit group_name ILIKE '%");
+	$words2=implode($array,"%' $crit short_description ILIKE '%");
+	$words3=implode($array,"%' $crit unix_group_name ILIKE '%");
 
         if (!$rss) {
 		$sql = "SELECT group_name,unix_group_name,group_id,short_description "
 		       ."FROM groups "
-		       ."WHERE status='A' AND is_public='1' AND ((group_name LIKE '%$words1%') OR (short_description LIKE '%$words2%') OR (unix_group_name LIKE '%$words3%'))";
+		       ."WHERE status='A' AND is_public='1' AND ((group_name ILIKE '%$words1%') OR (short_description ILIKE '%$words2%') OR (unix_group_name ILIKE '%$words3%'))";
 	} else {
         	// If it's RSS export, try to infer additional information, as
 	        // shown by Freshmeat search. This means that only projects
@@ -101,7 +101,7 @@ if ($type_of_search == "soft") {
 	               ."FROM groups "
 	               ."WHERE status='A' AND is_public='1' "
 	               ."AND groups.short_description<>'' "
-	               ."AND ((group_name LIKE '%$words1%') OR (short_description LIKE '%$words2%') OR (unix_group_name LIKE '%$words3%'))";
+	               ."AND ((group_name ILIKE '%$words1%') OR (short_description ILIKE '%$words2%') OR (unix_group_name ILIKE '%$words3%'))";
 	}
 
         if ($rss) $limit=200; else $limit=26;
@@ -174,14 +174,14 @@ if ($type_of_search == "soft") {
 		Query to find users
 	*/
 
-	// If multiple words, separate them and put LIKE in between
+	// If multiple words, separate them and put ILIKE in between
 	$array=explode(" ",$words);
-	$words1=implode($array,"%' $crit user_name LIKE '%");
-	$words2=implode($array,"%' $crit realname LIKE '%");
+	$words1=implode($array,"%' $crit user_name ILIKE '%");
+	$words2=implode($array,"%' $crit realname ILIKE '%");
 
 	$sql =	"SELECT user_name,user_id,realname "
 		. "FROM users "
-		. "WHERE ((user_name LIKE '%$words1%') OR (realname LIKE '%$words2%')) AND (status='A') ORDER BY user_name";
+		. "WHERE ((user_name ILIKE '%$words1%') OR (realname ILIKE '%$words2%')) AND (status='A') ORDER BY user_name";
 	$result = db_query($sql,26,$offset);
 	$rows = $rows_returned = db_numrows($result);
 
@@ -220,13 +220,13 @@ if ($type_of_search == "soft") {
 	*/
 
 	$array=explode(" ",$words);
-	$words1=implode($array,"%' $crit forum.body LIKE '%");
-	$words2=implode($array,"%' $crit forum.subject LIKE '%");
+	$words1=implode($array,"%' $crit forum.body ILIKE '%");
+	$words2=implode($array,"%' $crit forum.subject ILIKE '%");
 
 	$sql =	"SELECT forum.msg_id,forum.subject,forum.date,users.user_name "
 		. "FROM forum,users "
-		. "WHERE users.user_id=forum.posted_by AND ((forum.body LIKE '%$words1%') "
-		. "OR (forum.subject LIKE '%$words2%')) AND forum.group_forum_id='$forum_id' "
+		. "WHERE users.user_id=forum.posted_by AND ((forum.body ILIKE '%$words1%') "
+		. "OR (forum.subject ILIKE '%$words2%')) AND forum.group_forum_id='$forum_id' "
 		. "GROUP BY msg_id,subject,date,user_name";
 	$result = db_query($sql,26,$offset);
 	$rows = $rows_returned = db_numrows($result);
@@ -270,13 +270,13 @@ if ($type_of_search == "soft") {
 	*/
 
 	$array=explode(" ",$words);
-	$words1=implode($array,"%' $crit bug.details LIKE '%");
-	$words2=implode($array,"%' $crit bug.summary LIKE '%");
+	$words1=implode($array,"%' $crit bug.details ILIKE '%");
+	$words2=implode($array,"%' $crit bug.summary ILIKE '%");
 
 	$sql =	"SELECT bug.bug_id,bug.summary,bug.date,users.user_name "
 		. "FROM bug,users "
-		. "WHERE users.user_id=bug.submitted_by AND ((bug.details LIKE '%$words1%') "
-		. "OR (bug.summary LIKE '%$words2%') OR (users.user_name LIKE '%$words2%')) AND bug.group_id='$group_id' "
+		. "WHERE users.user_id=bug.submitted_by AND ((bug.details ILIKE '%$words1%') "
+		. "OR (bug.summary ILIKE '%$words2%') OR (users.user_name ILIKE '%$words2%')) AND bug.group_id='$group_id' "
 		.  "GROUP BY bug_id,summary,date,user_name";
 	$result = db_query($sql,26,$offset);
 	$rows = $rows_returned = db_numrows($result);
