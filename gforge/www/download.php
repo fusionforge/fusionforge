@@ -24,6 +24,7 @@ $res=db_query("SELECT frs_file.filename,frs_file.file_id,groups.unix_group_name
 	AND frs_file.file_id='$file_id'");
 
 if (db_numrows($res) < 1) {
+	Header("Status: 404");
 	exit;
 }
 
@@ -37,13 +38,15 @@ if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
 	passthru($sys_upload_dir.$group_name.'/'.$filename);
 }
 */
-Header("Content-disposition: filename=".$filename);
-Header("Content-type: application/binary");
-
 if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
+	Header("Content-disposition: filename=".$filename);
+	Header("Content-type: application/binary");
+
 	readfile($sys_upload_dir.$group_name.'/'.$filename);
 	$res=db_query("INSERT INTO frs_dlstats_file (ip_address,file_id,month,day) 
 		VALUES ('$REMOTE_ADDR','$file_id','".date('m')."','".date('d')."')");
+} else {
+	Header("Status: 404");
 }
 
 ?>

@@ -82,10 +82,7 @@ function main_page($group_id) {
 
 		echo	'
 
-			<tr>
-			        <th>Document Information (in html format):</th>
-			        <td><textarea cols="60" rows="10" name="data">'.$row['data'].'</textarea></td>
-			</tr>
+//TDP	DISPLAY LINK TO DOC
 
 			<tr>
 			        <th>Group doc belongs in:</th>
@@ -183,7 +180,7 @@ function main_page($group_id) {
 			// data in DB stored in htmlspecialchars()-encoded form
 			$query = "update doc_data "
 				."set title = '".htmlspecialchars($title)."', "
-				."data = '".htmlspecialchars($data)."', "
+		//		."data = '".htmlspecialchars($data)."', "
 				."updatedate = '".time()."', "
 				."doc_group = '".$doc_group."', "
 				."stateid = '".$stateid."', "
