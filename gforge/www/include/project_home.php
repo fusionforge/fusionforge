@@ -254,7 +254,7 @@ if ($project->usesTracker()) {
 			echo '<p />
 		&nbsp;-&nbsp;<a href="/tracker/?atid='. db_result($result, $j, 'group_artifact_id') .
 		'&amp;group_id='.$group_id.'&amp;func=browse">'. db_result($result, $j, 'name') .'</a>
-		( <strong>'. db_result($result, $j, 'open_count') .' open / '. db_result($result, $j, 'count') .' total</strong> )<br />'.
+		( <strong>'.$Language->getText('project_home','tracker_open',array(db_result($result, $j, 'open_count'), db_result($result, $j, 'count'))) .'</strong> )<br />'.
 		db_result($result, $j, 'description');
 		}
 	}
@@ -266,8 +266,8 @@ if ($project->usesForum()) {
 	print '<hr size="1" noshade="noshade" /><a href="/forum/?group_id='.$group_id.'">';
 	print html_image('ic/forum20g.png','20','20',array('alt'=>$Language->getText('group','short_forum')));
 	print '&nbsp;'.$Language->getText('group','long_forum').'</a>';
-	print " ( <strong>". project_get_public_forum_message_count($group_id) ."</strong> ".$Language->getText('project_home','messages_in')." ";
-	print "<strong>". project_get_public_forum_count($group_id) ."</strong> ".$Language->getText('project_home','forums')." )\n";
+	print " ( ".$Language->getText('project_home','forum_messages',array(project_get_public_forum_message_count($group_id), project_get_public_forum_count($group_id) ))." ";
+	print ")\n";
 }
 
 // ##################### Doc Manager
@@ -339,7 +339,7 @@ if ($project->usesCVS()) {
 	if (!$cvs_add_num) {
 		$cvs_add_num=0;
 	}
-	echo ' ( <strong>' . number_format($cvs_commit_num, 0) . '</strong> commits, <strong>' . number_format($cvs_add_num, 0) . '</strong> adds )';
+	echo ' ( '.$Language->getText('project_home','cvs_commits',array(number_format($cvs_commit_num,0),number_format($cvs_add_num,0)))." )";
 	if ($cvs_commit_num || $cvs_add_num) {
 		echo '<br /> &nbsp; -
 			<a href="'.account_group_cvsweb_url($project->getUnixName()).'">
