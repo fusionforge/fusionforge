@@ -26,25 +26,32 @@
  */
 require_once('common/include/Error.class');
 
-function &artifactType_get_object($artType_id,$res=false) {
-	global $ARTIFACTTYPE_OBJ;
-	if (!isset($ARTIFACTTYPE_OBJ["_".$artType_id."_"])) {
-		if ($res) {
-			//the db result handle was passed in
-		} else {
-			$res=db_query("SELECT * FROM artifact_group_list_vw
-					WHERE group_artifact_id='$artType_id'");
+	/**
+	* Gets an ArtifactType object from the artifact type id
+	* 
+	* @param artType_id	the ArtifactType id
+	* @param res	the DB handle if passed in (optional)
+	* @return	the ArtifactType object	
+	*/
+	function &artifactType_get_object($artType_id,$res=false) {
+		global $ARTIFACTTYPE_OBJ;
+		if (!isset($ARTIFACTTYPE_OBJ["_".$artType_id."_"])) {
+			if ($res) {
+				//the db result handle was passed in
+			} else {
+				$res=db_query("SELECT * FROM artifact_group_list_vw
+						WHERE group_artifact_id='$artType_id'");
+			}
+			if (!$res || db_numrows($res) < 1 ){
+				$ARTIFACTTYPE_OBJ["_".$artType_id."_"]=false;
+			} else {
+				$data =& db_fetch_array($res);
+				$Group =& group_get_object($data["group_id"]);
+				$ARTIFACTTYPE_OBJ["_".$artType_id."_"]= new ArtifactType($Group,$data["group_artifact_id"],$data);
+			}
 		}
-												if (!$res || db_numrows($res) < 1 ){
-			$ARTIFACTTYPE_OBJ["_".$artType_id."_"]=false;
-		} else {
-			$data =& db_fetch_array($res);
-			$Group =& group_get_object($data["group_id"]);
-			$ARTIFACTTYPE_OBJ["_".$artType_id."_"]= new ArtifactType($Group,$data["group_artifact_id"],$data);
-		}
-	}
-	return $ARTIFACTTYPE_OBJ["_".$artType_id."_"];
-}	
+		return $ARTIFACTTYPE_OBJ["_".$artType_id."_"];
+	}	
 
 class ArtifactType extends Error {
 
