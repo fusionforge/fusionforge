@@ -510,6 +510,52 @@ class Artifact extends Error {
 	}
 
 	/**
+	 *  delete - delete this tracker and all its related data.
+	 *
+	 *  @param  bool	I'm Sure.
+	 *  @return bool true/false;
+	 */
+	function delete($sure) {
+		if (!$sure) {
+			$this->setMissingParamsError();
+			return false;
+		}
+		if (!$this->userIsAdmin()) {
+			$this->setPermissionDeniedError();
+			return false;
+		}
+		db_begin();
+		db_query("DELETE FROM artifact_extra_field_data
+			WHERE artifact_id='".$this->getID()."'");
+//echo '0.1'.db_error();
+		db_query("DELETE FROM artifact_file
+			WHERE artifact_id='".$this->getID()."'");
+//echo '6'.db_error();
+		db_query("DELETE FROM artifact_message
+			WHERE artifact_id='".$this->getID()."'");
+//echo '7'.db_error();
+		db_query("DELETE FROM artifact_history
+			WHERE artifact_id='".$this->getID()."'");
+//echo '8'.db_error();
+		db_query("DELETE FROM artifact_monitor
+			WHERE rtifact_id='".$this->getID()."'");
+//echo '9'.db_error();
+		db_query("DELETE FROM artifact
+			WHERE artifact_id='".$this->getID()."'");
+		if ($this->getStatusID() == 1) {
+			db_query("UPDATE artifact_counts_agg
+				SET count=count-1,open_count=open_count-1
+				WHERE group_artifact_id='".$this->getID()."'");
+		} elseif ($this->getStatusID() == 2) {
+			db_query("UPDATE artifact_counts_agg
+				SET count=count-1
+				WHERE group_artifact_id='".$this->getID()."'");
+		}
+//echo '5'.db_error();
+		db_commit();
+	}
+
+	/**
 	 *  setMonitor - user can monitor this artifact.
 	 *
 	 *  @return false - always false - always use the getErrorMessage() for feedback
