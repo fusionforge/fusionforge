@@ -1,3 +1,12 @@
+2003-02-03 Reinhard Spisser <reinhard@spisser.it>
+
+	* www/tracker/reporting/index.php,
+	www/include/languages/Base.tab,
+	www/include/languages/Italian.tab,
+	www/include/tool_reports.php,
+	www/include/html.class:
+	Localization of the tracker
+	
 2003-02-02  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/include/languages/Spanish.tab: many new translations.
@@ -44,8 +53,9 @@
 	* www/tracker/browse.php, www/tracker/add.php,
 	www/tracker/index.php, www/tracker/detail.php,
 	www/tracker/taskmgr.php, www/tracker/mod.php,
-	www/include/ArtifactHtml.class, www/include/ArtifactTypeHtml.class
-	www/admin/index.php, www/include/languages/Base.tab,
+	www/tracker/include/ArtifactHtml.class, 
+	www/tracker/include/ArtifactTypeHtml.class
+	www/tracker/admin/index.php, www/include/languages/Base.tab,
 	www/include/languages/Italian.tab
 	Localization of the tracker
 

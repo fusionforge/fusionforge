@@ -19,6 +19,7 @@
  * @param		string	The bar colors
  */
 function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
+	global $Language;
 	$result1=db_query($sql1);
 	$result2=db_query($sql2);
 	if ($result1 && $result2 && db_numrows($result2) > 0) {
@@ -50,12 +51,12 @@ function reports_quick_graph($title,$sql1,$sql2,$bar_colors) {
 		);
 		end_graph();
 		print '<p><br />';
-		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">Key:</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">Open </td>'.
-		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">All </td><td width="5%">)</td></tr></table>';
+		print '<table cellspacing="0" border="0"><tr align="center"><td width="15%">'.$Language->getText('include_toolreport','key').':</td><td width="5%">(</td><td width="35%" style="background-color:'.$bar_colors[0].'">'.$Language->getText('include_toolreport','open').'</td>'.
+		      '<td width="5%">/</td><td width="35%" style="background-color:'.$bar_colors[1].'">'.$Language->getText('include_toolreport','all').' </td><td width="5%">)</td></tr></table>';
 		print '</p>';
 //      		GraphResult($result,$title);
 	} else {
-		echo "<h2>No data found to report</h2>";
+		echo "<h2>".$Language->getText('include_toolreport','no_data')."</h2>";
 	}
 }
 

@@ -76,7 +76,7 @@ account_register	err_username	Campo login obbligatorio
 account_register	err_realname	You must supply a real name
 account_register	err_passwd	You must supply a password
 account_register	err_passwd2	Passwords do not match
-account_register	err_passwd3	Password non valida:
+account_register	err_passwd3	Password non valida
 account_register	err_unixname	Nome utente unix non valido. 
 account_register	err_email	Indirizzo email non valido
 account_register	err_jabber	Indirizzo Jabber non valido
@@ -282,7 +282,7 @@ forum_forum	show	Visualizza
 forum_forum	next_messages	Avanti
 forum_forum	previous_messages	Indietro
 forum_forum	no_forum_chosen	Nessun forum selezionato
-forum_message	thread	Inizia un nuovo argomento:
+forum_message	thread	Inizia un nuovo argomento
 forum_message	thread_view	Vista per argomenti
 forum_message	post_followup	Inserisci una risposta per il messaggio
 forum_message	receive_followups	Ricevi risposte via email
@@ -793,6 +793,10 @@ include_toolreport	last_months	Ultimi mesi
 include_toolreport	last_years	Ultimi anni
 include_toolreport	project_lifespan	Durata del progetto
 include_toolreport	show	Visualizza
+include_toolreport	no_data	Nessun dato da visualizzare
+include_toolreport	all	Tutti
+include_toolreport	key	Legenda
+include_toolreport	open	Aperti
 source	show_source	Visualizza sorgente
 source	source_of	Sorgente di  $1
 source	missing_file	Argomento di file mancante
@@ -1004,6 +1008,24 @@ tracker_admin	add_permissions	Aggiungi/modifica permessi utente
 tracker_admin	add_permissions_info	Aggiungi/rimuovi utenti a/da questo tracker
 tracker_admin	update_preferences	Aggiorna preferenze
 tracker_admin	update_preferences_info	Imposta preferenze come tempi di scadenza, indirizzi email, etc
+tracker_reporting	title	Reportistica tracker
+tracker_reporting	aging_report	Aging Report
+tracker_reporting	dist_by_technician	Distribuzione per tecnici
+tracker_reporting	dist_by_category	Distribuzione per categoria
+tracker_reporting	dist_by_group	Distribuzione per gruppo
+tracker_reporting	dist_by_resolution	Distribuzione per risoluzione
+tracker_reporting	artifact_type	Tipo dato
+tracker_reporting	average_turnaround	Tempo medio di chiusura (giorni)
+tracker_reporting	items_submitted	Numero elementi inseriti
+tracker_reporting	items_open	Numero elementi ancora aperti
+tracker_reporting	open_items_by_technician	Elementi aperti per tecnico
+tracker_reporting	all_items_by_technician	Tutti gli elementi per tecnico
+tracker_reporting	open_items_by_technician	Elementi aperti per categoria
+tracker_reporting	all_by_technician	Tutti gli elementi per categoria
+tracker_reporting	open_by_group	Elementi aperti per gruppo
+tracker_reporting	all_by_group	Tutti gli elementi per gruppo
+tracker_reporting	open_items_by_resolution	Elementi aperti per risoluzione
+tracker_reporting	all_by_resolution	Tutti gli elementi per risoluzione
 stats_graph	sitewide_statistics_graphs      Statistiche sul sito
 stats_graph	overview_stats	Sommario sulle statistiche
 stats_graph	project_stats	Statistiche del progetto

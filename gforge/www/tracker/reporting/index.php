@@ -7,7 +7,7 @@
   * Copyright 1999-2001 (c) VA Linux Systems
   * http://sourceforge.net
   *
-  * @version   index.php,v 1.6 2003/01/10 14:44:28 bigdisk Exp
+  * @version   index.php,v 1.7 2003/02/03 09:31:03 rspisser Exp
   *
   */
 
@@ -17,7 +17,7 @@ require_once('www/tracker/include/ArtifactTypeHtml.class');
 require_once('www/project/stats/project_stats_utils.php');
 require_once('tool_reports.php');
 
-$page_title="Artifact Reporting System";
+$page_title=$Language->getText('tracker_reporting','title');
 //$bar_colors=array("red","blue");
 $bar_colors=array("#F76D6D","#6D6DF7");
 
@@ -29,6 +29,7 @@ exit_assert_object($perm, 'Permission');
 
 function reporting_header($group_id) {
 	global $atid,$perm,$group_id;
+	global $Language;
     if ($perm->isAdmin()) {
         $alevel=' >= 0';
     } else {
@@ -46,8 +47,8 @@ function reporting_header($group_id) {
 	reports_header(
 		$group_id,
 		array('aging','tech','category','group','resolution'),
-		array('Aging Report','Distribution by Technician','Distribution by Category','Distribution by Group','Distribution by Resolution'),
-		'<strong>Artifact Type: </strong>'
+		array($Language->getText('tracker_reporting','aging_report'),$Language->getText('tracker_reporting','dist_by_technician'),$Language->getText('tracker_reporting','dist_by_category'),$Language->getText('tracker_reporting','dist_by_group'),$Language->getText('tracker_reporting','dist_by_resolution')),
+		'<strong>'.$Language->getText('tracker_reporting','artifact_type').': </strong>'
 		 .html_build_select_box($res,'atid',$atid,false)
 		 .'<br /><br />'
 	);
@@ -55,6 +56,7 @@ function reporting_header($group_id) {
 
 function quick_report($group_id,$title,$subtitle1,$sql1,$subtitle2,$sql2) {
 	global $bar_colors;
+	global $Language;
 
 	$group_name=array(group_getname($group_id));
 	echo site_project_header(array("title"=>$title,'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
@@ -78,9 +80,9 @@ if ($perm->isMember()) {
 		if ($what=="aging") {
 
 			$group_name=array(group_getname($group_id));
-			site_project_header(array ("title"=>"Aging Report",'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
+			site_project_header(array ("title"=>$Language->getText('tracker_reporting','aging_report'),'group'=>$group_id,'pagename'=>'tracker_reporting','sectionvals'=>$group_name));
 			reporting_header($group_id);
-			echo "\n<h1>Aging Report</h1>";
+			echo "\n<h1>".$Language->getText('tracker_reporting','aging_report')."</h1>";
 
 			$time_now=time();
 //			echo $time_now."<p>";
@@ -113,7 +115,7 @@ if ($perm->isMember()) {
 
 			GraphIt(
 				$names, $values,
-				"Average Turnaround Time For Closed Items (days)"
+				$Language->getText('tracker_reporting','average_turnaround')
 			);
 
 			echo "<p>&nbsp;</p>";
@@ -136,7 +138,7 @@ if ($perm->isMember()) {
 				$values[$counter-1]=db_result($result, 0,0);
 			}
 
-			GraphIt($names, $values, "Number of Items Submitted");
+			GraphIt($names, $values, $Language->getText('tracker_reporting','items_submitted'));
 
 			echo "<p>";
 
@@ -158,7 +160,7 @@ if ($perm->isMember()) {
 				$values[$counter-1]=db_result($result, 0,0);
 			}
 
-			GraphIt($names, $values, "Number of Items Still Open");
+			GraphIt($names, $values, $Language->getText('tracker_reporting','items_open'));
 
 			echo "<p>&nbsp;</p>";
 
@@ -191,9 +193,9 @@ if ($perm->isMember()) {
 
 			quick_report(
 				$group_id,
-				"Distribution By Category",
-				"Open Items By Category",$sql1,
-				"All Items By Category",$sql2
+				$Language->getText('tracker_reporting','dist_by_category'),
+				$Language->getText('tracker_reporting','open_items_by_technician'),$sql1,
+				$Language->getText('tracker_reporting','all_by_technician'),$sql2
 			);
 
 		} else if ($what=="tech") {
@@ -221,9 +223,9 @@ if ($perm->isMember()) {
 
 			quick_report(
 				$group_id,
-				"Distribution By Technician",
-				"Open Items By Technician",$sql1,
-				"All Items By Technician",$sql2
+				$Language->getText('tracker_reporting','dist_by_technician'),
+				$Language->getText('tracker_reporting','open_items_by_technician'),$sql1,
+				$Language->getText('tracker_reporting','all_items_by_technician'),$sql2
 			);
 
 		} else if ($what=="group") {
@@ -251,9 +253,9 @@ if ($perm->isMember()) {
 
 			quick_report(
 				$group_id,
-				"Distribution By Artifact Group",
-				"Open By Artifact Group",$sql1,
-				"All Items By Artifact Group",$sql2
+				$Language->getText('tracker_reporting','dist_by_group'),
+				$Language->getText('tracker_reporting','open_by_group'),$sql1,
+				$Language->getText('tracker_reporting','all_by_group'),$sql2
 			);
 
 		} else if ($what=="resolution") {
@@ -283,9 +285,9 @@ if ($perm->isMember()) {
 
 			quick_report(
 				$group_id,
-				"Distribution By Resolution",
-				"Open Items By Resolution",$sql1,
-				"All Items By Resolution",$sql2
+				$Language->getText('tracker_reporting','dist_by_resolution'),
+				$Language->getText('tracker_reporting','open_items_by_resolution'),$sql1,
+				$Language->getText('tracker_reporting','all_by_resolution'),$sql2
 			);
 
 		} else {

@@ -192,8 +192,11 @@ function html_build_select_box_from_array ($vals,$select_name,$checked_val='xzxz
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row' defaults to none
  */
-function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='None') {
+function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_val='xzxz',$show_100=true,$text_100='none') {
 	global $Language;
+	if ($text_100=='none'){
+		$text_100=$Language->getText('include_html','none');
+	}
 	$return .= '
 		<select name="'.$select_name.'">';
 
@@ -244,7 +247,11 @@ function html_build_select_box_from_arrays ($vals,$texts,$select_name,$checked_v
  * @param		bool	Whether or not to show the '100 row'
  * @param		string	What to call the '100 row'.  Defaults to none.
  */
-function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='None') {
+function html_build_select_box ($result, $name, $checked_val="xzxz",$show_100=true,$text_100='none') {
+	global $Language;
+	if ($text_100=='none'){
+		$text_100=$Language->getText('include_html','none');
+	}
 	return html_build_select_box_from_arrays (util_result_column_to_array($result,0),util_result_column_to_array($result,1),$name,$checked_val,$show_100,$text_100);
 }
 /**

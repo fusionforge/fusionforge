@@ -1051,6 +1051,10 @@ include_toolreport	last_months	Last month(s)
 include_toolreport	last_years	Last year(s)
 include_toolreport	project_lifespan	Project lifespan
 include_toolreport	show	Show
+include_toolreport	no_data	No data found to report
+include_toolreport	all	All 
+include_toolreport	key	Key
+include_toolreport	open	Open 
 source	show_source	Show source
 source	source_of	Source of $1
 source	missing_file	Missing File Argument
@@ -1154,10 +1158,25 @@ tracker_admin	add_permissions_info	Add/remove users to/from this tracker
 tracker_admin	update_preferences	Update preferences
 tracker_admin	update_preferences_info	Set up prefs like expiration times, email addresses
 tracker_browse	title	Browse $1
-tracker_detail	section	$1
 tracker_detail	title	Tracker Detailed View
-tracker_reporting	section	Project: $1
-tracker_reporting	title	Tracker Reporting
+tracker_reporting	title	Artifact Reporting System
+tracker_reporting	aging_report	Aging Report
+tracker_reporting	dist_by_technician	Distribution by Technician
+tracker_reporting	dist_by_category	Distribution by Category
+tracker_reporting	dist_by_group	Distribution by Group
+tracker_reporting	dist_by_resolution	Distribution by Resolution
+tracker_reporting	artifact_type	Artifact Type: 
+tracker_reporting	average_turnaround	Average Turnaround Time For Closed Items (days)
+tracker_reporting	items_submitted	Number of Items Submitted
+tracker_reporting	items_open	Number of Items Still Open
+tracker_reporting	open_items_by_technician	Open Items By Technician
+tracker_reporting	all_items_by_technician	All Items By Technician
+tracker_reporting	open_items_by_technician	Open Items By Category
+tracker_reporting	all_by_technician	All Items By Category
+tracker_reporting	open_by_group	Open By Artifact Group
+tracker_reporting	all_by_group	All Items By Artifact Group
+tracker_reporting	open_items_by_resolution	Open Items By Resolution
+tracker_reporting	all_by_resolution	All Items By Resolution
 tracker_utils	monitor		Monitor
 tracker_utils	stop_monitoring		Stop Monitoring
 tracker	title	Trackers
