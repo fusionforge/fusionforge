@@ -33,9 +33,9 @@ purge_libnss_ldap(){
 	perl -pi -e "s/^#SF#.*\n//g" /etc/libnss-ldap.conf
 }
 
-# Modify /etc/lapd/slapd.conf
+# Modify /etc/ldap/slapd.conf
 modify_slapd(){
-
+	dn=$1
 	# Maybe should comment referral line too
 	echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
 	
@@ -61,6 +61,16 @@ modify_slapd(){
 		done
 		cat /etc/ldap/slapd.conf >>/etc/ldap/slapd.conf.sourceforge
 		mv /etc/ldap/slapd.conf.sourceforge /etc/ldap/slapd.conf
+
+		# Then write access for SF_robot
+		perl -pi -e "s/access to \*/# Next lines added by Sourceforge install
+access to dn=\".*,ou=People,$dn\"		
+	by dn=\"cn=admin,ou=People,$dn\" write	
+	by dn=\"cn=SF_robot,$dn\" write		
+	by * read				
+# End of sourceforge add
+access to */" /etc/ldap/slapd.conf
+
 		/etc/init.d/slapd restart
 	fi	
 }
@@ -69,6 +79,16 @@ modify_slapd(){
 purge_slapd(){
 	perl -pi -e "s/^.*#Added by Sourceforge install\n//" /etc/ldap/slapd.conf
 	perl -pi -e "s/#Comment by Sourceforge install#//" /etc/ldap/slapd.conf
+	ex /etc/ldap/slapd.conf <<-FIN
+/# Next lines added by Sourceforge install
+:ma a
+/# End of sourceforge add
+:ma b
+:'a,'bd
+:w
+:x
+FIN
+
 }
 
 # Modify /etc/nsswitch.conf
@@ -178,7 +198,7 @@ else
 				[ -f /etc/ldap.secret ] || secret=""
 
 				echo "Modifying /etc/ldap/slapd.conf"
-				modify_slapd
+				modify_slapd $dn
 				echo "Modifying /etc/libnss-ldap.conf"
 				modify_libnss_ldap $dn
 				echo "Modifying /etc/nsswitch.conf"
@@ -229,7 +249,24 @@ else
 				/etc/init.d/slapd restart
 				$0 default
 				;;
-				
+			test)	
+				naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
+				[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) && cryptedpasswd=`slappasswd -s $secret -h {CRYPT}`
+				ldapmodify -v -c -D "cn=admin,ou=People,$naming_context" -x -w$secret <<-FIN
+dn: cn=SF_robot,$naming_context
+changetype: modify
+replace: userPassword
+userPassword: $cryptedpasswd
+-
+FIN
+				ldapmodify -v -c -D "cn=SF_robot,$naming_context" -x -w$secret <<-FIN
+dn: uid=dummy,ou=People,$naming_context
+changetype: modify
+replace: cn
+cn: toto Dummy User
+-
+FIN
+				;;
 		esac
 	fi
 fi
@@ -266,3 +303,12 @@ fi
 ##echo "============ Checking the database =========="
 ##ldapsearch -x -b "$naming_context" '(objectclass=*)'
 
+##Un ACL exemple pour la partie web
+#access to dn=".*,ou=People,dc=dragoninc,dc=on,dc=ca" 
+#attr=userpassword,ntpassword,lmpassword 
+#        by dn="uid=root,ou=People,dc=dragoninc,dc=on,dc=ca" write 
+#        by * none 
+#
+#access to dn=".*,ou=Group,dc=dragoninc,dc=on,dc=ca" attr=userpassword 
+#        by dn="uid=root,ou=People,dc=dragoninc,dc=on,dc=ca" write 
+#        by * none
