@@ -2,6 +2,49 @@
 
 	* Complete rewrite of doc mgr in GForge coding guidelines.
 
+2003-01-02  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/survey/adminedit_survey.php: sanity checks when posting
+	changes.
+	* www/themes/savannah/SavannahTheme.class: missing close quotes.
+
+2003-01-01  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/themes/savannah/menu.php: new file.
+	* www/themes/savannah/SavannahTheme.class: new file.
+	* www/themes/savannah_*/Theme.class: make these derived classes of
+	SavannahTheme.
+
+2002-12-31  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/include/Layout.class: optionally add "Show Source" link to
+	bottom of each page.
+	* www/source.php: new file.
+	* etc/local.inc: add $sys_show_source option.
+	* db/20021223.sql: Patch 97: drop project_task_vw before create.
+	* www/pm/calendar.php: change output to valid XHTML 1.0 with HTML
+	4.0 compatability.
+
+2002-12-30  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/pm/index.php, www/pm/admin/index.php: Bug 96: fix spuriours
+	errors when no subprojects are defined.
+	* common/include/User.class: Fix pg_atoi problem.
+
+2002-12-29  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	* www/pm/calendar.php: rewrite.
+	* www/include/languages/Base.tab: add translations for calendar.
+	* www/include/languages/Spanish.tab: ditto.
+	* www/include/languages/Italian.tab: ditto.
+	* www/include/languages/Japense.tab: ditto.
+	* common/forum/Forum.class: patch 69: Allow non-site-wide admins
+	to post news
+	* cronjobs/{check_stale_tracker_items.php, db_project_sums.php,
+	massmail.php,project_weekly_metric-backfill.php,
+	stats_projects-backfill.php}: Commonise magic headers to
+	'#! /usr/bin/php4 -f'
+
 2002-12-24  Tim Perdue <tim@gforge.org>
 
 	* Gantt charting added and more debugging of new Project Manager.
@@ -19,7 +62,7 @@
 2002-12-13  Tim Perdue <tim@gforge.org>
 
 	* Quick changes to doc manager to protect binary safe uploads /
-	downloads. Must run a PHP script to migrate your data from pre6 
+	downloads. Must run a PHP script to migrate your data from pre6
 	to pre7. The script is in db/doc_data-migrate.php
 
 2002-12-12  Tim Perdue <tim@gforge.org>
@@ -33,26 +76,26 @@
 
 2002-12-07  Tim Perdue <tim@gforge.org>
 
-	* Moved html_build_list_table_top() into Layout.class, and 
+	* Moved html_build_list_table_top() into Layout.class, and
 	created listTableBottom(), so they can be easily themed.
 
 2002-12-06  Tim Perdue <tim@gforge.org>
 
-	* Jabber Support working. Tracker updates and Forum Posts 
-	are now set to use the jabber system. Much more integration 
+	* Jabber Support working. Tracker updates and Forum Posts
+	are now set to use the jabber system. Much more integration
 	needs to be done.
 
 2002-11-28  Tim Perdue <tim@gforge.org>
 
-	* Cleaned up and simplied File Release System. Still needs 
-	serious OO rewrite, however it is no longer dependent on 
+	* Cleaned up and simplied File Release System. Still needs
+	serious OO rewrite, however it is no longer dependent on
 	setuid "fileforge" and "tempfileforge".
 
 2002-11-25  Tim Perdue <tim@gforge.org>
 
-	* Removed hacky "theming" system and rewrote Layout.class 
+	* Removed hacky "theming" system and rewrote Layout.class
 	with new sitewide theme. New theming system can be based on
-	extending Layout.class as they did before. Renamed several 
+	extending Layout.class as they did before. Renamed several
 	function calls in Layout.class.
 
 	* Foundries and all related code removed
@@ -114,16 +157,16 @@
 
 2001-06-22  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-	* common/include/User.class(setShell): Validate argument. 
+	* common/include/User.class(setShell): Validate argument.
 
 	* common/include/User.class: Add SQL error message for
 	DB-related errors.
 
 2001-06-22  Tim Perdue  <tim@perdue.net>
 
-        * Fixed subtle bug in tracker where you could get an artifact to 
-	display right and update 1/2 right, but not completely right, 
-	if you mangled the URL. Also added Site Admin debug code so 
+        * Fixed subtle bug in tracker where you could get an artifact to
+	display right and update 1/2 right, but not completely right,
+	if you mangled the URL. Also added Site Admin debug code so
 	logged in admins can see query strings at the bottom of the page.
 
 2001-06-19  Paul Sokolovsky  <pfalcon@sourceforge.net>
@@ -138,7 +181,7 @@
 	* updated administrative files, db/ files with header comment
 
 	* added generic terms, privacy statement
-	
+
 2001-06-18  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
 	* common/include/User.class(setStatus): Validate argument.
@@ -181,27 +224,27 @@
 	* Created TARBALL process document
 
 2001-06-08  Darrell Brogdon  <dbrogdon@valinux.com>
-	
+
 	* (including 6/6 commits) ...
-	
+
 2001-06-07  Tim Perdue  <bigdisk@sourceforge.net>
-	
+
 	* (including 6/6 commits) ...
-	
+
 2001-06-01  Darrell Brogdon  <dbrogdon@valinux.com>
-	
+
 	* ...
-	
+
 2001-05-31  Tim Perdue  <bigdisk@sourceforge.net>
 
 	* cronjobs/project_weekly_metric.php - fixed replication
-	issue that interfered with including download counts in 
+	issue that interfered with including download counts in
 	activity metric.
 
 2001-05-30  Darrell Brogdon  <dbrogdon@valinux.com>
-	
+
 	* ...
-	
+
 2001-05-30  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
 	* www/account/lostlogin.php: Typo fix.
@@ -209,20 +252,20 @@
 	* www/account/lostlogin.php: Invalidate confirm hash on
 	successful operations.
 
-	* www/include/BaseLanguage.class(loadLanguage): Remove 
+	* www/include/BaseLanguage.class(loadLanguage): Remove
 	trailing newline from strings to be returned by getText().
 
-	* common/include/User.class(setNewEmailAndHash): Add 
+	* common/include/User.class(setNewEmailAndHash): Add
 	convenient feature: if hash value is 0, then generate
 	it randomly inline.
 
 	* www/account/lostpw.php, www/include/languages/Base.tab:
 	Add code to unquote/perform substitutions on mail message
 	from message catalog.
-	
+
 2001-05-25  Paul Sokolovsky  <pfalcon@sourceforge.net>
 
-	* common/include/account.php (account_salt): Move local 
+	* common/include/account.php (account_salt): Move local
 	functions out - PHP re-defines local function each time
 	enclosing function is evaluated, so it cannot be called
 	more than once.
@@ -284,7 +327,7 @@
         was shoen instead of real one.
 
 2000-11-21  Paul Sokolovsky  <pfalcon@sourceforge.net>
-	
+
 	* include/Group.php, project/admin/userperms.php: File release
         privilege storing and UI.
 
@@ -331,7 +374,7 @@
 
 2000-10-19  Geoffrey Herteg  <gherteg@users.sourceforge.net>
 
-	* pm/pm_util.php: added mail_followup() to mail followups to 
+	* pm/pm_util.php: added mail_followup() to mail followups to
 			  task owner and assigned developers...
 
 	* pm/pm_data.php: modified pm_data_create_task() and
@@ -360,7 +403,7 @@
         * include/Group.class: make updateUser() method take
         additional argument - cvs permissions (0,1,2 for read,
         write, admin).
-	
+
 2000-10-15  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
 
 	* include/menu.php: Make docs link bold.
@@ -378,4 +421,3 @@
 	* Russian.class: File submitted by me was magically
         converted to windows-1251 encoding. Turn back to
         iso-8859-5.
-
