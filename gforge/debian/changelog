@@ -4,7 +4,9 @@ sourceforge (2.6-0+6+) unstable; urgency=low
   * [Roland] Added debconf magic to ask whether to replace a config file
     before doing it (in the post-installation and pre-remove phases).
   * [Christian] Changed to use cvsweb 
-  * [Roland] Added "-s /bin/sh" when su'ing to postgres.
+  * [Roland] [From 2.5] Added "-s /bin/sh" when su'ing to postgres.
+  * [Roland] [From 2.5] Moved templates to a Policy-compliant location
+    (/etc/sourceforge/templates).
 
  --
 
