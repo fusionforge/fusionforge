@@ -1,3 +1,11 @@
+gforge (3.0-0+7+) experimental; urgency=low
+
+  * [Christian] Reintroduce the possibility to define default home page in
+    Themes
+  * [Christian] Added subMenu in Layout 
+
+ -- Christian Bayle <bayle@debian.org>  Sat, 21 Dec 2002 02:29:43 +0100
+
 gforge (3.0-0+7) experimental; urgency=low
 
   * [Christian] Added db upgrade 20021125-debian.sql
