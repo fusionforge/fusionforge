@@ -33,7 +33,8 @@ case "$1" in
     configure)
 	adduser --quiet --system --group --home $FTPROOT sfftp
 	mkdir -p $FTPROOT/pub
-	cat >$FTPROOT/welcome.msg<<-FIN
+	if [ ! -f $FTPROOT/welcome.msg ] ; then
+		cat >$FTPROOT/welcome.msg<<-FIN
 Welcome, archive user %U@%R !
 
 The local time is: %T
@@ -41,6 +42,7 @@ The local time is: %T
 This is an experimental FTP server.  If have any unusual problems,
 please report them via e-mail to <root@%L>.
 FIN
+	fi
 	invoke-rc.d proftpd restart
 	;;
 
