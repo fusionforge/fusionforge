@@ -41,12 +41,10 @@ account_first	about_blurb	<p>You are now a registered user on $1, the online dev
 account_first	title	Welcome to $1
 account_login	cookiewarn	Cookies must be enabled past this point.
 account_login	deleted_account	<p>Your $1 account has been removed by $1 staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
-account_login	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
 account_login	login	Login
 account_login	login_ssl	Login with SSL
 account_login	loginname	Login Name:
 account_login	lostpw	[Lost your password?]
-account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>
 account_login	newaccount	[New Account]
 account_login	passwd	Password:
 account_login	pending_account	<P>Your account is currently pending your email confirmation.		Visiting the link sent to you in this email will activate your account.		<P>If you need this email resent, please click below and a confirmation		email will be sent to the email address you provided in registration.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
@@ -105,12 +103,10 @@ account_register	err_realname	You must supply a real name
 account_register	err_unixname	Invalid Unix Name. 
 account_register	err_userexist	That username already exists.
 account_register	err_username	You must supply a username
-account_register	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
 account_register	jabberaddr	Jabber Address:
 account_register	jabberonly	Send auto-generated notices only to my Jabber address
 account_register	language	Language Choice:
 account_register	loginname	Login Name (do not use uppercase letters):
-account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>
 account_register	mandatory	Fields marked with $1 are mandatory.
 account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to a bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
 account_register	message_header	$1 Account Registration
@@ -1563,7 +1559,7 @@ project_admin_editrelease	update_refresh	Update/Refresh
 project_admin_editrelease	upload_change_log	Upload Change Log
 project_admin_editrelease	upload_new_file	Upload a new file
 project_admin_editrelease	upload_release_notes	Upload Release Notes
-project_admin_group_trove	intro	<h3>Edit Trove Categorization</h3><p>Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select "None Selected".</p><p> IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simulteneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted.
+project_admin_group_trove	intro	<h3>Edit Trove Categorization</h3><p>Select up to three locations for this project in each of the Trove root categories. If the project does not require any or all of these locations, simply select "None Selected".</p><p> IMPORTANT: Projects should be categorized in the most specific locations available in the map. Simultaneous categorization in a specific category AND a parent category will result in only the more specific categorization being accepted.
 project_admin_group_trove	title	Group Trove Information
 project_admin_group_trove	update_changes	Update All Category Changes
 project_admin_history	info	This log will show who made significant changes to your project and when
@@ -2444,7 +2440,7 @@ tracker_admin_update_type	title	Update $1
 tracker_admin_update_users	title	Add/Update Tracker User Permissions
 tracker_artifact	double_submit	You Attempted To Double-submit this item. Please avoid double-clicking.
 tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
-tracker_artifact	error_body_required	Artifact: Message Body Is Required'
+tracker_artifact	error_body_required	Artifact: Message Body Is Required
 tracker_artifact	error_no_anonymous	Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.
 tracker_artifact	error_summary_required	Artifact: Message Summary Is Required
 tracker_artifact	error_valid_email_required	SetMonitor::Valid Email Address Required
@@ -2453,9 +2449,9 @@ tracker_artifact	logged_in_yes	Logged In: YES
 tracker_artifact	monitoring_activated	Now Monitoring
 tracker_artifact	monitoring_deactivated	Monitoring Deactivated
 tracker_artifact	nothing_changed	Nothing Changed - Update Cancelled
-tracker_artifact	private_error	Artifact: Only Group Members Can View Private ArtifactTypes
-tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are Required
-tracker_artifactgroup	required_field	ArtifactGroup: name is Required
+tracker_artifact	private_error	Artifact: Only group members can view private artifact types
+tracker_artifactfile	required_fields	ArtifactFile: File name, type, size, and data are required
+tracker_artifactgroup	required_field	ArtifactGroup: name is required
 tracker_artifacthtml	by	By
 tracker_artifacthtml	date	Date
 tracker_artifacthtml	field	Field
@@ -2575,7 +2571,7 @@ user_home	project_info	Project Info
 user_home	real_name	Real Name
 user_home	send	Send Message
 user_home	send_a_message	Send a Message to
-user_home	send_message_if_logged	You Could Send a Message if you were logged in
+user_home	send_message_if_logged	You could send a message if you were logged in
 user_home	site_member_since	Site Member Since
 user_home	skills_profile	Skills Profile
 user_home	subject	Subject
