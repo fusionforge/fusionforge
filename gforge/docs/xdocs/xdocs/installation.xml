@@ -466,7 +466,7 @@ should contain the domain of your server, e.g. gforge.org.
 </subsection>
 </section>
 
-<subsection name="Setting up GNU Mailman">
+<subsection name="Configuring GNU Mailman">
 <p>GNU Mailman is used to help manage the GForge mailing lists.  To install it:</p>
 <ul>
 <li>Install the 2.0.13 RPM (TODO add compilation instructions)</li>
@@ -483,8 +483,55 @@ ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
 </ul>
 </subsection>
 
-<subsection name="Setting up CVS">
-<p>TODO</p>
+<subsection name="Configuring CVS">
+<p>GForge uses CVS via pserver for anonymous read only access and ext for developers to commit to the repositories.  To set it up:</p>
+<ul>
+<li>Download and install the latest CVS RPM</li>
+<li>Ensure the following info is in <code>/etc/services</code>:
+<br/>
+<code>
+[tom@cougaarforge tom]$ cat /etc/services | grep cvspserver
+<br/>
+cvspserver      2401/tcp                        # CVS client/server operations
+<br/>
+cvspserver      2401/udp                        # CVS client/server operations
+<br/>
+[tom@cougaarforge tom]$
+</code>
+</li>
+<li>Ensure the following info is in <code>/etc/xinetd.d/cvspserver</code>:
+<br/>
+<code>
+[tom@cougaarforge xinetd.d]$ cat /etc/xinetd.d/cvspserver
+<br/>
+service cvspserver
+<br/>
+{
+<br/>
+        disable = no
+<br/>
+        socket_type  = stream
+<br/>
+        protocol  = tcp
+<br/>
+        wait   = no
+<br/>
+        user    = root
+<br/>
+        server   = /usr/bin/cvs
+<br/>
+        server_args  = -f --allow-root=/path/to/my/cvsroot pserver
+<br/>
+}
+<br/>
+[tom@cougaarforge xinetd.d]$
+<br/>
+</code>
+</li>
+<li>Now add an <code>anonymous</code> user to your system with a blank password, or one of <code>anonymous</code></li>
+<li>TODO - does the CVSROOT/readers file get added via a cronjob or something?</li>
+<li>TODO - any extra notes on setting up dev access?  i.e., uploading of public key and such?</li>
+</ul>
 </subsection>
 
 <section name="Verifying the installation">
