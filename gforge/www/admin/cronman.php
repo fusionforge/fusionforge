@@ -41,7 +41,7 @@ $sql="SELECT * FROM cron_history $sql_str ORDER BY rundate DESC";
 $res=db_query($sql);
 for ($i=0; $i<db_numrows($res); $i++) {
 
-	echo '<tr bgcolor="'. $HTML->boxGetAltRowStyle($i+1) .'">
+	echo '<tr '. $HTML->boxGetAltRowStyle($i+1) .'>
 		<td>'. date(db_result($res,$i,'rundate'), $sys_datefmt).'</td>
 		<td>'. $cron_arr[db_result($res,$i,'job')].'</td>
 		<td>'. db_result($res,$i,'output').'</td></tr>';
