@@ -56,7 +56,9 @@ if ($submit) {
 			$license_other,
 			$purpose
 		);
-		$res = $res && $group->setPluginUse($scm,true);
+		if ($sys_use_scm) {
+			$res = $res && $group->setPluginUse($scm,true);
+		}
 		if (!$res) {
 			$feedback .= $group->getErrorMessage();
 		} else {
