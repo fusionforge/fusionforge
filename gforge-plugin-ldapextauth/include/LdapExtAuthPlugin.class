@@ -1,0 +1,69 @@
+<?php
+
+require_once('common/include/User.class');
+
+class LdapextauthPlugin extends Plugin {
+	function LdapextauthPlugin () {
+		$this->Plugin() ;
+		$this->name = "ldapextauth";
+		$this->hooks[] = "session_before_login";
+		
+		$this->ldap_conn = false ;
+	}
+
+	function CallHook ($hookname, $params) {
+		global $Language, $HTML ;
+		
+		$loginname = $params['loginname'] ;
+		$passwd = $params['passwd'] ;
+		
+		switch ($hookname) {
+		case "session_before_login":
+			// Authenticate against LDAP
+			$f=fopen ('php://stderr', 'a');
+			fwrite ($f, "Login = $loginname pass = $passwd\n") ;
+			
+			break;
+		case "blah":
+			// Should not happen
+			break;
+		default:
+			// Forgot something
+		}
+	}
+
+	function AuthUser ($loginname, $passwd) {
+		if (!$this->ldap_conn) {
+			$this->ldap_conn = ldap_connect ($sys_ldap_host,$sys_ldap_port);
+		}
+		if ($sys_ldap_version) {
+			ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $sys_ldap_version);
+		}
+		$dn = "cn=".$loginname.",".$base_dn ;
+		if (ldap_bind($this->ldap_conn,$dn,$user_pass)) {
+			// User authenticated
+			// Now get her info
+			$res = ldap_search ($this->ldap_conn, $base_dn, $dn) ;
+			$info = ldap_get_entries ($this->ldap_conn,$res);
+			
+			$realname = $info[0]['gecos'][0] ;
+			$email = $info[0]['email'][0] ;
+
+			// Insert into DB
+			$u = new User () ;
+			$u->create ($loginname, $realname, $passwd, $passwd, $email,
+				    1, 1, 0, 'GMT', '', 0) ;
+			return true ;
+		} else {
+			// Do nothing
+			return false ; // Probably ignored, but just in case
+		}
+	}
+}
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
+?>
