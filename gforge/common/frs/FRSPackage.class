@@ -88,7 +88,7 @@ class FRSPackage extends Error {
 		}
 
 		$sql="INSERT INTO frs_package(group_id,name,status_id)
-			VALUES ('".$this->Group->getId()."','$name','1')";
+			VALUES ('".$this->Group->getId()."','".htmlspecialchars($name)."','1')";
 
 		db_begin();
 		$result=db_query($sql);
@@ -173,7 +173,7 @@ class FRSPackage extends Error {
 			return false;
 		}
 		$sql="SELECT * FROM filemodule_monitor
-			WHERE user_id='".user_getid()."' 
+			WHERE user_id='".user_getid()."'
 			AND filemodule_id='".$this->getID()."';";
 		$result = db_query($sql);
 
@@ -207,7 +207,7 @@ class FRSPackage extends Error {
 			return false;
 		}
 		$sql="DELETE FROM filemodule_monitor
-			WHERE user_id='".user_getid()."' 
+			WHERE user_id='".user_getid()."'
 			AND filemodule_id='".$this->getID()."';";
 		return db_query($sql);
 	}
@@ -222,7 +222,7 @@ class FRSPackage extends Error {
 			return false;
 		}
 		$sql="SELECT * FROM filemodule_monitor
-			WHERE user_id='".user_getid()."' 
+			WHERE user_id='".user_getid()."'
 			AND filemodule_id='".$this->getID()."';";
 
 		$result = db_query($sql);
@@ -240,8 +240,8 @@ class FRSPackage extends Error {
 	 *  @return	array	The array of user_id's.
 	 */
 	function &getMonitorIDs() {
-		$res=db_query("SELECT user_id 
-			FROM filemodule_monitor 
+		$res=db_query("SELECT user_id
+			FROM filemodule_monitor
 			WHERE filemodule_id='".$this->getID()."'");
 		return util_result_column_to_array($res);
 	}
@@ -272,7 +272,7 @@ class FRSPackage extends Error {
 		}
 
 		$res=db_query("UPDATE frs_package SET
-			name='$name',
+			name='".htmlspecialchars($name)."',
 			status_id='$status'
 			WHERE group_id='".$this->Group->getID()."'
 			AND package_id='".$this->getID()."'");
@@ -281,6 +281,9 @@ class FRSPackage extends Error {
 			$this->setError('FRSPackage::update() Error On Update: '.db_error());
 			return false;
 		}
+
+		$this->fetchData($this->getID());
+
 		return true;
 
 	}

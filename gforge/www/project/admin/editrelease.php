@@ -1,7 +1,7 @@
 <?php
 /**
  * Project Admin: Edit Releases of Packages
- * 
+ *
  * SourceForge: Breaking Down the Barriers to Open Source Development
  * Copyright 1999-2001 (c) VA Linux Systems
  * http://sourceforge.net
@@ -10,7 +10,7 @@
  */
 
 
-require_once('pre.php');	
+require_once('pre.php');
 require_once('common/frs/FRSPackage.class');
 require_once('common/frs/FRSRelease.class');
 require_once('common/frs/FRSFile.class');
@@ -62,11 +62,11 @@ if (!$frsr || !is_object($frsr)) {
  */
 
 // Edit release info
-if ($step1) {	
+if ($step1) {
 	$exec_changes = true;
 
 	// Check for uploaded release notes
-	if ($uploaded_notes != "none") {
+	if ($uploaded_notes != "") {
 		if (!is_uploaded_file($uploaded_notes)) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
@@ -80,7 +80,7 @@ if ($step1) {
 	}
 
 	// Check for uplaoded change logs
-	if ($uploaded_changes != "none") {
+	if ($uploaded_changes != "") {
 		if (!is_uploaded_file($uploaded_changes)) {
 			exit_error('Error','Attempted File Upload Attack');
 		}
@@ -103,10 +103,10 @@ if ($step1) {
 			$feedback .= " Data Saved ";
 		}
 	}
-} 
+}
 
 // Add file(s) to the release
-if ($step2) {	
+if ($step2) {
 	// Build a Unix time value from the supplied Y-m-d value
 	$group_unix_name=group_getunixname($group_id);
 
@@ -130,7 +130,7 @@ if ($step2) {
 }
 
 // Edit/Delete files in a release
-if ($step3) {	
+if ($step3) {
 	// If the user chose to delete the file and he's sure then delete the file
 	if( $step3 == "Delete File" && $im_sure ) {
 		$frsf = new FRSFile($frsr,$file_id);
@@ -186,8 +186,8 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 <tr>
 	<td><strong>Status:</strong></td>
 	<td>
-		<?php 
-			echo frs_show_status_popup('status_id',$frsr->getStatus()); 
+		<?php
+			echo frs_show_status_popup('status_id',$frsr->getStatus());
 		?>
 	</td>
 </tr>
@@ -209,13 +209,13 @@ project_admin_header(array('title'=>'Release New File Version','group'=>$group_i
 <tr>
 	<td colspan="2">
 		<strong>Paste The Notes In:</strong><br />
-		<textarea name="release_notes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars($frsr->getNotes()); ?></textarea>
+		<textarea name="release_notes" rows="10" cols="60" wrap="soft"><?php echo $frsr->getNotes(); ?></textarea>
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
 		<strong>Paste The Change Log In:</strong><br />
-		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo htmlspecialchars($frsr->getChanges()); ?></textarea>
+		<textarea name="release_changes" rows="10" cols="60" wrap="soft"><?php echo $frsr->getChanges(); ?></textarea>
 	</td>
 </tr>
 <tr>

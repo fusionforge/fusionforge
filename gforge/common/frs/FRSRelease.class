@@ -103,8 +103,8 @@ class FRSRelease extends Error {
 
 		$sql="INSERT INTO frs_release(package_id,notes,changes,
 				preformatted,name,release_date,released_by,status_id)
-			VALUES ('".$this->FRSPackage->getId()."','$notes','$changes',
-				'$preformatted','$name','$release_date','".user_getid()."','1')";
+			VALUES ('".$this->FRSPackage->getId()."','".htmlspecialchars($notes)."','".htmlspecialchars($changes)."',
+				'$preformatted','".htmlspecialchars($name)."','$release_date','".user_getid()."','1')";
 
 		db_begin();
 		$result=db_query($sql);
@@ -272,12 +272,18 @@ class FRSRelease extends Error {
 			return false;
 		}
 
+		if ($preformatted) {
+			$preformatted = 1;
+		} else {
+			$preformatted = 0;
+		}
+
 		$res=db_query("UPDATE frs_release
 			SET
-			name='$name',
+			name='".htmlspecialchars($name)."',
 			status_id='$status',
-			notes='$notes',
-			changes='$changes',
+			notes='".htmlspecialchars($notes)."',
+			changes='".htmlspecialchars($changes)."',
 			preformatted='$preformatted',
 			release_date='$release_date',
 			released_by='". user_getid() ."'
@@ -288,6 +294,8 @@ class FRSRelease extends Error {
 			$this->setError('FRSRelease::update() Error On Update: '.db_error());
 			return false;
 		}
+
+		$this->fetchData($this->getID());
 
 		return true;
 
