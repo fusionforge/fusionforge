@@ -95,8 +95,15 @@ database inside of a transaction
 $cat_counts=array();
 $parent_list=array();
 
-$cat_counts = array();
-$parent_list = array();
+$q = "SELECT trove_cat.trove_cat_id,trove_cat.parent
+      FROM trove_cat
+      GROUP BY trove_cat.trove_cat_id,trove_cat.parent;" ;
+$res=db_query($q);
+$rows=db_numrows($res);
+
+for ($i=0; $i<$rows; $i++) {
+  $parent_list[db_result($res,$i,'parent')][]=db_result($res,$i,'trove_cat_id');
+}
 
 $res=db_query("
 	SELECT trove_cat.trove_cat_id,trove_cat.parent,count(groups.group_id) AS count
