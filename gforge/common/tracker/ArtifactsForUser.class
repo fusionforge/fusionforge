@@ -58,9 +58,11 @@ class ArtifactsForUser extends Error {
 	         }
 	        for ($i=0; $i < $rows; $i++) {
 	       		$id  = db_result($result,$i,'artifact_id');
-	             	$afi =& new ArtifactFromID($id);
+			$arr = db_fetch_array($result);
+	             	$afi =& new ArtifactFromID($id,$arr);
 	             	if ($afi->isError()) {
 	                    	$this->setError($afi->getErrorMessage());
+				echo "Error =".$afi->getErrorMessage()."<br>";
 	             	} else {
 	                	$artifacts[] =& $afi->Artifact;
 			}
@@ -75,12 +77,15 @@ class ArtifactsForUser extends Error {
         *
         */
         function getAssignedArtifactsByGroup() {
-                $sql="SELECT a.artifact_id
-		      FROM artifact a, artifact_group_list agl
-		      WHERE a.assigned_to=".$this->User->getID()."
-	              AND a.group_artifact_id=agl.group_artifact_id
-		      AND a.status_id='1'
-		      ORDER BY agl.group_id,a.group_artifact_id,a.assigned_to,a.status_id";
+		$sql="SELECT *
+			FROM artifact_vw av
+			WHERE av.assigned_to=".$this->User->getID()."
+			AND av.status_id='1'
+			ORDER BY av.artifact_group_id,
+				av.group_artifact_id,
+				av.assigned_to,
+				av.status_id";
+
 
 		return $this->getArtifactsFromSQL($sql);
 	}
@@ -92,12 +97,12 @@ class ArtifactsForUser extends Error {
 	*
 	*/
 	function getSubmittedArtifactsByGroup() {
-	        $sql="SELECT a.artifact_id
-		      FROM artifact a, artifact_group_list agl
-		      WHERE a.group_artifact_id=agl.group_artifact_id
-		      AND a.submitted_by='".$this->User->getID()."'
-		      AND a.status_id='1'
-		      ORDER BY agl.group_id,a.group_artifact_id,a.submitted_by,a.status_id";
+		$sql="SELECT *
+			FROM artifact_vw av
+			WHERE av.submitted_by=".$this->User->getID()."
+			AND av.status_id='1'
+			ORDER BY av.artifact_group_id,av.group_artifact_id,av.assigned_to,av.status_id";
+
 
 		return $this->getArtifactsFromSQL($sql);
 	}

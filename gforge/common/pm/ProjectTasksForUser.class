@@ -40,12 +40,9 @@ class ProjectTasksForUser {
 		$rows=db_numrows($result);
 		
 		for ($i=0; $i < $rows; $i++) {
-			$group_id = db_result($result,$i,'group_id');
-			$group_project_id = db_result($result,$i,'group_project_id');
 			$project_task_id = db_result($result,$i,'project_task_id');
-			$Group =& group_get_object($group_id);
-			$ProjectGroup =& new ProjectGroup($Group,$group_project_id);
-			$task =& new ProjectTask($ProjectGroup,$project_task_id);
+			$arr =& db_fetch_array($result);
+			$task =& projecttask_get_object($project_task_id,$arr);
 			$tasks[] =& $task;
 
 		}
@@ -54,14 +51,17 @@ class ProjectTasksForUser {
 	}
 
 	function getTasksByGroupProjectName () {
-		$sql = "SELECT groups.group_name,project_group_list.project_name,project_group_list.group_id, ".
-			"project_task.group_project_id,project_task.priority,project_task.project_task_id,project_task.summary,project_task.percent_complete ".
-			"FROM groups,project_group_list,project_task,project_assigned_to ".
-			"WHERE project_task.project_task_id=project_assigned_to.project_task_id ".
-			"AND project_assigned_to.assigned_to_id='".$this->User->getID()."' AND project_task.status_id='1'  ".
-			"AND project_group_list.group_id=groups.group_id ".
-			"AND project_group_list.group_project_id=project_task.group_project_id AND groups.status = 'A'".
-			"ORDER BY group_name,project_name";
+		$sql = "SELECT ptv.*,g.group_name,pgl.project_name 
+			FROM project_task_vw ptv,
+				project_assigned_to pat,
+				groups g,
+				project_group_list pgl
+			WHERE ptv.project_task_id=pat.project_task_id
+				AND pgl.group_id=g.group_id
+				AND pgl.group_project_id=ptv.group_project_id
+				AND ptv.status_id=1
+				AND pat.assigned_to_id='".$this->User->getID()."'
+			ORDER BY group_name,project_name";
 
 		return $this->getTasksFromSQL($sql);
 	}

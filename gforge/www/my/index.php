@@ -60,7 +60,7 @@ if (session_loggedin() || $sf_user_hash) {
 	if (count($assignedArtifacts) > 0) {
 		foreach($assignedArtifacts as $art) {
 		        echo '</td></tr>';
-			if ($art->ArtifactType->Group->getID() != $last_group) {
+			if ($art->ArtifactType->getID() != $last_group) {
 				echo '
 				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&atid='.
@@ -78,7 +78,7 @@ if (session_loggedin() || $sf_user_hash) {
 			$art->getID().'</td>
 			<td>' . stripslashes($art->getSummary());
 
-			$last_group = $art->ArtifactType->Group->getID();
+			$last_group = $art->ArtifactType->getID();
 		}
 	} else {
 	                echo '
@@ -91,7 +91,7 @@ if (session_loggedin() || $sf_user_hash) {
 	if (count($submittedArtifacts) > 0) {
 		foreach ($submittedArtifacts as $art) {
 			echo '</td></tr>';
-			if ($art->ArtifactType->Group->getID() != $last_group) {
+			if ($art->ArtifactType->getID() != $last_group) {
                                 echo '
 				<tr><td colspan="2"><strong><a href="/tracker/?group_id='.
 				$art->ArtifactType->Group->getID().'&atid='.
@@ -108,7 +108,7 @@ if (session_loggedin() || $sf_user_hash) {
 			$art->getID().'</td>
 			<td>' . stripslashes($art->getSummary());
 
-			$last_group = $art->ArtifactType->Group->getID();
+			$last_group = $art->ArtifactType->getID();
 		}
 	} else {
 		echo '

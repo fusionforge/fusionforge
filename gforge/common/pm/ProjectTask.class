@@ -36,6 +36,32 @@
 require_once('common/include/Error.class');
 require_once('common/pm/Validator.class');
 
+function &projecttask_get_object($project_task_id,$data=false) {
+        global $PROJECTTASK_OBJ;
+        if (!isset($PROJECTTASK_OBJ["_".$project_task_id."_"])) {
+                if ($data) {
+                        //the db result handle was passed in
+                } else {
+			echo "NO PT data<br>";
+                        $res=db_query("SELECT * FROM project_task_vw
+			WHERE project_task_id='$project_task_id'");
+
+                        if (db_numrows($res) <1 ) {
+                                $PROJECTTASK_OBJ["_".$project_task_id."_"]=false;
+                                return false;
+                        }
+                        $data =& db_fetch_array($res);
+
+                }
+                $ProjectGroup =& projectgroup_get_object($data["group_project_id"]);
+                $PROJECTTASK_OBJ["_".$project_task_id."_"]= new ProjectTask($ProjectGroup,$project_task_id,$data);
+
+        }
+
+        return $PROJECTTASK_OBJ["_".$project_task_id."_"];
+}
+
+
 class ProjectTask extends Error {
 
 	/**
