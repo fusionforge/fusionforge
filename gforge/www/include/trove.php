@@ -41,7 +41,7 @@ function trove_genfullpaths($mynode,$myfullpath,$myfullpathids) {
 
 		while ($row_child = db_fetch_array($res_child)) {
 			trove_genfullpaths($row_child['trove_cat_id'],
-				$myfullpath.' :: '.$row_child['fullname'],
+				addslashes(quotemeta($myfullpath)) . ' :: ' . addslashes(quotemeta($row_child['fullname'])),
 				$myfullpathids.' :: '.$row_child['trove_cat_id']);
 		}
 	}
