@@ -3,6 +3,9 @@
 	* www/stats/site_stats_utils.php, projects.php, graphs.php:
 	Bug #399; project stats page works better now, removed duplicate
 	graph from site graphs page.
+
+	* www/project/admin/qrs.php:
+	Bug #344: Date/Time field was not being set properly in file releases
 	
 2003-07-02 Christian Bayle	<bayle@debian.org>
 

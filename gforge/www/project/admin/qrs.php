@@ -157,7 +157,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_qrs','titl
 			<h4><?php echo $Language->getText('project_admin_qrs','release_date') ?>:</h4>
 		</td>
 		<td>
-			<input type="text" name="release_date" value="<?php echo date('Y-m-d'); ?>" size="10" maxlength="10" />
+			<input type="text" name="release_date" value="<?php echo date('Y-m-d-G-i-s'); ?>" size="20" maxlength="20" />
 		</td>
 	</tr>
 	<tr>
