@@ -64,7 +64,9 @@ php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
 PHP setup
 ---------
 
-Your php.ini file should have "register_globals" set to on.
+Your php.ini file should have "register_globals" set to on, as well 
+as file uploads.
+
 You may also add the include_path to the php.ini, as it will be 
 necessary for your php cgi to run the cron jobs.
 
