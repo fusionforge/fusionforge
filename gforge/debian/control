@@ -11,6 +11,6 @@ Depends: apache (>= 1.3.9), php4, php4-pgsql, php4-gd, php4-cgi, php4-ldap, liba
 Description: Integrated development project framework
  This package provides many services a development project can use,
  such as bug-tracking, task management, mailing-lists, CVS repository,
- forums, support request helper, webpage / FTP hosting, release
+ forums, support request helper, web page / FTP hosting, release
  management, etc.  All these services are integrated into one web site.
  They are managed via a nice web interface.
