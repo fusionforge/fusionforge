@@ -27,10 +27,11 @@
 		<itemizedlist>
 			<listitem><para>The English language, being the original one in which GForge was written, is obviously complete.</para></listitem>
 			<listitem><para>The french translation is complete.</para></listitem>
-			<listitem><para>The Spanish (Castillan) translation is complete. The Spanish (Catalan) one is a work in progress.</para></listitem>
+			<listitem><para>The Spanish (Castillan) translation is complete.</para></listitem>
 			<listitem><para>The Korean translation used to be complete.</para></listitem>
 			<listitem><para>The Dutch, Italian, Portuguese Brazilian and Swedish translations are pretty well advanced but not regularly updated.</para></listitem>
 			<listitem><para>The German, Japanese and Simplified Chinese translations are 20-50% complete.</para></listitem>
+			<listitem><para>The Catalan translation is a work in progress.</para></listitem>
 		</itemizedlist>
 		<para>
 			You might consider translating GForge into your language. If you do so, please also consider submitting your translated file to us so that future releases of GForge include your translated file by default.
