@@ -1,4 +1,4 @@
-gforge (3.3.0-2woody7) stable; urgency=low
+gforge (3.3.0-2woody8) stable; urgency=low
 
   * [Christian] Added new sql upgrade (2004*.sql)
   * [Christian] Stable backbort
@@ -7,8 +7,9 @@ gforge (3.3.0-2woody7) stable; urgency=low
   * [Christian] Make vhost scripts work default pg_hba.conf
   * [Christian] Add missing space in update-user-group.sh (closes
   gforge upstream bug #751)
+  * [Christian] Adjust cvs_dump rights
 
- -- Christian Bayle <bayle@debian.org>  Thu,  1 Apr 2004 19:29:14 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri,  2 Apr 2004 22:48:49 +0200
 
 gforge (3.2.1-4) experimental; urgency=low
 
