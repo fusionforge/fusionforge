@@ -15,7 +15,7 @@ require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functi
 &db_connect ;
 
 if ($#ARGV < 1) {
-    debug "Usage: sf-register-plugin <plugin name> <plugin description>" ;
+    debug "Usage: register-plugin <plugin name> <plugin description>" ;
     exit 1 ;
 }
 
