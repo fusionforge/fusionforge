@@ -260,6 +260,9 @@ news_main	title	News
 news_submit	post_blurb	You can post news about your project if you are an admin on your project. You may also post "help wanted" notes if your project needs help.<P>All posts <B>for your project</B> will appear instantly on your project summary page. Posts that are of special interest to the community will have to be approved by a member of the news team before they will appear on the $1 home page.
 news_submit	section	News
 news_submit	title	Submit News for $1
+news_utils	nonews	No News Items Found
+news_utils	archive	News archive
+news_utils	submit	Submit News
 partners	about_blurb	<P>SourceForge is proud to partner with the following organizations:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com is a collaborative, reverse-auction web site enabling international consumers and developers of Open Source products to work together to fund development of innovative software solutions.</TD></TR></TABLE>
 people	about_blurb	<P>The $1 Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
 people	section	Project Help Wanted

@@ -264,6 +264,9 @@ news_main	title	Nouveautés de Sourceforge
 news_submit	post_blurb	Vous pouvez publier une nouveauté concernant votre projet si vous en êtes administrateur.  Vous pouvez également publier des annonces si votre projet a besoin d'aide.<p>Toutes les publications <b>de votre projet</b> apparaîtront immédiatement sur la page de résumé de votre projet.  Les publications d'intérêt général peuvent être sélectionnées par l'équipe de Sourceforge pour apparaître sur la page d'accueil de Sourceforge.
 news_submit	section	Nouveautés
 news_submit	title	Soumettre une nouveauté pour $1
+news_utils	nonews	<H3>Pas de nouveauté<H3>
+news_utils	archive	Archive des nouveautés
+news_utils	submit	Proposer une nouveauté
 partners	about_blurb	<p>Sourceforge est fier d'être partenaire avec <a href="http://www.cosource.com/">Cosource.com</a>.  Cosource.com est un site web collaboratif d'enchères inversées, permettant aux clients et aux développeurs de logiciels libres de travailler ensemble afin de financer les solutions logicielles innovantes.
 people	about_blurb	<p>Le système « Besoin d'aide » de Sourceforge est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus, sauf si l'émetteur décide de les fermer.  Les administrateurs de projet peuvent toujours re-proposer des postes si les propositions précédentes ont expiré.<p>Naviguez dans le menu des catégories pour trouver les projets qui ont besoin de vous.<p>Si vous êtes administrateur d'un projet, connectez-vous et proposez vos offres de postes par la page d'administration de votre projet.<p>Pour proposer de nouvelles catégories de postes, soumettez une requête par le gestionnaire de support technique.
 people	section	Besoin d'aide

@@ -45,7 +45,7 @@ function news_footer($params) {
 }
 
 function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_submit=true,$flat=false,$tail_headlines=0) {
-	global $sys_datefmt,$sys_news_group;
+	global $sys_datefmt,$sys_news_group,$Language;
 	if (!$group_id) {
 		$group_id=$sys_news_group;
 	}
@@ -70,7 +70,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 	$rows=db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		$return .= '<H3>No News Items Found</H3>';
+		$return .= $Language->getText('news_utils', 'nonews');
 		$return .= db_error();
 	} else {
 		echo '
@@ -152,19 +152,19 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 	$return .= '<div align="center">'
 	           .'<a href="http://'.$GLOBALS['sys_default_domain']
-	           .$archive_url.'">[News archive]</a></div>';
+	           .$archive_url.'">[' . $Language->getText('news_utils', 'archive') . ']</a></div>';
 
 	if ($allow_submit && $group_id != $sys_news_group) {
 		//you can only submit news from a project now
 		//you used to be able to submit general news
-		$return .= '<div align="center"><A HREF="/news/submit.php?group_id='.$group_id.'"><FONT SIZE="-1">[Submit News]</FONT></A></center>';
+		$return .= '<div align="center"><A HREF="/news/submit.php?group_id='.$group_id.'"><FONT SIZE="-1">[' . $Language->getText('news_utils', 'submit') . ']</FONT></A></center>';
 	}
 
 	return $return;
 }
 
 function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
-	global $sys_datefmt;
+	global $sys_datefmt,$Language;
 	/*
 		Show a the latest news for a portal 
 	*/
@@ -182,7 +182,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 	$rows=db_numrows($result);
 
 	if (!$result || $rows < 1) {
-		$return .= '<H3>No News Items Found</H3>';
+		$return .= '<H3>' . $Language->getText('news_utils', 'nonews') . '</H3>';
 		$return .= db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
