@@ -2,6 +2,11 @@
 
 	* Added css plugin hook to Layout.class
 
+2004-07-26  Tom Copeland <tom@infoether.com>
+
+	* www/export/rss_sfnews.php: Fixed title tag; now it
+	displays the site name.
+
 2004-07-23  Tom Copeland <tom@infoether.com>
 
 	* www/stats/i18n.php: Now it doesn't display unused

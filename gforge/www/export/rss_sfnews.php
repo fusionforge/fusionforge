@@ -53,8 +53,7 @@ $grsql = "SELECT group_name from groups where group_id='.$group_id'";
 $grres = db_query($sql,$limit);
 $grrow = db_fetch_array($grres);
 
-print "  <title>".$grrow[group_name]." Project News</title>\n";
-//print "  <title>".$GLOBALS['sys_name']." Project News</title>\n";
+print "  <title>".$GLOBALS['sys_name']." Project News</title>\n";
 print "  <link>http://$GLOBALS[sys_default_domain]</link>\n";
 print "  <description>".$GLOBALS['sys_name']." Project News Highlights</description>\n";
 // ## item outputs
