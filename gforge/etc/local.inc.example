@@ -33,14 +33,6 @@ $sys_default_domain = "gforge.company.com";
 //$sys_fallback_domain = "gforge2.company.com";
 //$sys_internal_network = '192.168.1.';
 
-// Machine that hosts CVS
-$sys_cvs_host = "cvs.gforge.company.com";
-
-// Force the use of a single cvs host instead of cvs.project.domain.com
-// Set to 1 to use cvs.domain.com:/cvsroot/project for all projects
-// Set to 0 to use cvs.project.domain.com:/cvsroot/project
-$sys_cvs_single_host = 1;
-
 // Machine used for downloading sources/packages
 $sys_download_host = "download.gforge.company.com";
 
@@ -72,6 +64,7 @@ $sys_lists_host = "lists.gforge.company.com";
 $sys_dns1_host = "ns1.gforge.company.com";
 $sys_dns2_host = "ns2.gforge.company.com";
 
+
 //Databases, html/php/other paths
 //server to use for updates and reads
 //If this is null (i.e. ""), then gforge will use Unix sockets to connect
@@ -93,7 +86,6 @@ $sys_server="pgsql";
 $sys_dbpasswd="";
 $sys_ldap_passwd="";
 $sys_jabber_pass="";
-
 //
 // Account Management
 //
@@ -117,11 +109,6 @@ $sys_ldap_bind_dn="cn=SF_robot,dc=gforge,dc=company,dc=com";
 // NOT used by web code, only by support utilities
 // note that password NOT stored here
 $sys_ldap_admin_dn="cn=admin,dc=gforge,dc=company,dc=com";
-//
-// CVS configuration
-//
-// Path to CVS tarballs directory
-$sys_cvs_tarballs_path='/path/to/cvs/tarballs';
 
 //
 // Jabber Configuration
@@ -138,7 +125,7 @@ $sys_jabber_user="noreply";
 //	FEATURES
 //	You can turn features on/off sitewide
 //
-$sys_use_cvs=true;
+$sys_use_scm=true;
 $sys_use_tracker=true;
 $sys_use_forum=true;
 $sys_use_pm=true;
@@ -237,9 +224,6 @@ $default_trove_cat=18;
 // JPGRAPH Package
 $sys_path_to_jpgraph='/path/to/jpgraph';
 
-// CVSWEB
-$sys_path_to_cvsweb='/path/to/cvsweb';
-
 // Show Source
 //	Setting this to 1 will add a "Show Source" link to the bottom of each page
 $sys_show_source=0;
@@ -274,6 +258,11 @@ $sys_localization_cache_path = '/path/to/localization/cache/';
 
 // Enable timestamp checking (if disabled, you have to remove manually cache files on update)
 $sys_localization_enable_timestamp_checking = true;
+//
+// Plugins configuration
+//
+// Path to plugins directory
+$sys_plugins_path='/usr/lib/gforge/plugins/';
 
 // End of customizations -- place nothing after the closing PHP tag!
 ?>

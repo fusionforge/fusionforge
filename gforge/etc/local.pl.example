@@ -1,7 +1,7 @@
 # PLEASE DO NOT REMOVE THIS LINE
 
 $sys_default_domain = 'gforge.company.com' ;
-$sys_cvs_host = 'cvs.gforge.company.com' ;
+$sys_scm_host = 'scm.g-tt.rd.francetelecom.fr' ;
 $sys_download_host = 'download.gforge.company.com' ;
 $sys_shell_host = 'shell.gforge.company.com' ;
 $sys_users_host = 'users.gforge.company.com' ;
