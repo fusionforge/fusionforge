@@ -107,7 +107,7 @@ function trove_setnode($group_id,$trove_cat_id,$rootnode=0) {
 	$res_topnodes = db_query("
 		SELECT trove_cat.trove_cat_id AS trove_cat_id,
 			trove_cat.fullpath_ids AS fullpath_ids
-		FROM trove_cat,trove_group_link 
+		FROM trove_cat,trove_group_link
 		WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
 		AND trove_group_link.group_id='$group_id'
 		AND trove_cat.root_parent='$rootnode'");
@@ -180,7 +180,7 @@ function trove_getrootcat($trove_cat_id) {
 function trove_getallroots() {
 	$res = db_query("
 		SELECT trove_cat_id,fullname
-		FROM trove_cat 
+		FROM trove_cat
 		WHERE parent=0
 		AND trove_cat_id!=0");
 
@@ -231,7 +231,7 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 	$res_trovecat = db_query("
 		SELECT trove_cat.fullpath AS fullpath,
 			trove_cat.fullpath_ids AS fullpath_ids,
-			trove_cat.trove_cat_id AS trove_cat_id 
+			trove_cat.trove_cat_id AS trove_cat_id
 		FROM trove_cat,trove_group_link
 		WHERE trove_cat.trove_cat_id=trove_group_link.trove_cat_id
 		AND trove_group_link.group_id='$group_id'
@@ -242,56 +242,70 @@ function trove_getcatlisting($group_id,$a_filter,$a_cats) {
 		$return .= $Language->getText('trove','not_categorized')
 			.' <a href="/softwaremap/trove_list.php">'
 			. $Language->getText('trove','title')
-			.'</a>.';
+			.'</a>.<p />';
+	} else {
+		$return .= '<ul>';
+		$need_close_ul_tag = 1;
 	}
 
 	// first unset the vars were using here
 	$proj_discrim_used='';
 	$isfirstdiscrim = 1;
-	$return .= '<ul>';
 	while ($row_trovecat = db_fetch_array($res_trovecat)) {
 		$folders = explode(" :: ",$row_trovecat['fullpath']);
 		$folders_ids = explode(" :: ",$row_trovecat['fullpath_ids']);
 		$folders_len = count($folders);
 		// if first in discrim print root category
 		if (!$proj_discrim_used[$folders_ids[0]]) {
-			if (!$isfirstdiscrim) $return .= '<br />';
-				$return .= ('<li> '.$folders[0].': </li>');
+			if (!$isfirstdiscrim) {
+				$return .= "</li>\n";
+			}
+			$return .= ('<li> '.$folders[0].': ');
 		}
 
 		// filter links, to add discriminators
 		// first check to see if filter is already applied
 		$filterisalreadyapplied = 0;
 		for ($i=0;$i<sizeof($expl_discrim);$i++) {
-			if ($folders_ids[$folders_len-1] == $expl_discrim[$i])
+			if ($folders_ids[$folders_len-1] == $expl_discrim[$i]) {
 				$filterisalreadyapplied = 1;
 			}
-			// then print the stuff
-			if ($proj_discrim_used[$folders_ids[0]]) $return .= ', ';
+		}
+		// then print the stuff
+		if ($proj_discrim_used[$folders_ids[0]]) {
+			$return .= ', ';
+		}
 
-			if ($a_cats) $return .= '<a href="/softwaremap/trove_list.php?form_cat='
-				.$folders_ids[$folders_len-1].$discrim_url.'">';
-			$return .= ($folders[$folders_len-1]);
-			if ($a_cats) $return .= '</a>';
+		if ($a_cats) {
+			$return .= '<a href="/softwaremap/trove_list.php?form_cat='
+				 .$folders_ids[$folders_len-1].$discrim_url.'">';
+		}
+		$return .= ($folders[$folders_len-1]);
+		if ($a_cats) {
+			$return .= '</a>';
+		}
 
-			if ($a_filter) {
-				if ($filterisalreadyapplied) {
-					$return .= ' <strong>(Now Filtering)</strong> ';
+		if ($a_filter) {
+			if ($filterisalreadyapplied) {
+				$return .= ' <strong>(Now Filtering)</strong> ';
+			} else {
+				$return .= ' <a href="/softwaremap/trove_list.php?form_cat='
+					 .$form_cat;
+				if ($discrim_url) {
+					$return .= $discrim_url.','.$folders_ids[$folders_len-1];
 				} else {
-					$return .= ' <a href="/softwaremap/trove_list.php?form_cat='
-						.$form_cat;
-					if ($discrim_url) {
-						$return .= $discrim_url.','.$folders_ids[$folders_len-1];
-					} else {
-						$return .= '&amp;discrim='.$folders_ids[$folders_len-1];
-					}
-					$return .= '">[Filter]</a> ';
+					$return .= '&amp;discrim='.$folders_ids[$folders_len-1];
 				}
+				$return .= '">[Filter]</a> ';
 			}
+		}
 		$proj_discrim_used[$folders_ids[0]] = 1;
 		$isfirstdiscrim = 0;
 	}
-	$return .= '</ul>';
+	if ($need_close_ul_tag)
+	{
+		$return .= '</li></ul>';
+	}
 	return $return;
 }
 
@@ -322,7 +336,7 @@ function trove_getfullpath($node) {
 	while ($currentcat > 0) {
 		$res = db_query("
 			SELECT trove_cat_id,parent,fullname
-			FROM trove_cat 
+			FROM trove_cat
 			WHERE trove_cat_id='$currentcat'");
 		$row = db_fetch_array($res);
 		$return = $row["fullname"] . ($first ? "" : " :: ") . $return;

@@ -1,5 +1,14 @@
 2003-01-10  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/news/news_utils.php: make project summary valid XHTML 1.0
+	Transitional.
+
+	* www/include/trove.php: ditto.
+
+	* www/include/Layout.class: ditto.
+
+	* www/include/project_home.php: ditto.
+
 	* www/include/html.php: make / valid XHTML 1.0 Transitional.
 
 	* www/include/Layout.class: ditto.
@@ -30,8 +39,8 @@
 
 2003-01-10  Tom Copeland <tom@infoether.com>
 
-	* www/account/register.php, 
-	www/tracker/add.php, 
+	* www/account/register.php,
+	www/tracker/add.php,
 	common/include/utils.php
 	www/forum/include/ForumHTML.class: Began work on task #63 - adding a
 	red * to all required fields.
