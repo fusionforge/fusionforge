@@ -89,6 +89,7 @@ install: build
 	install -m 755 deb-specific/update-user-group-cvs.sh $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 
 	# gforge-web-apache
+	install -m 644 $(CURDIR)/debian/gforge-web-apache.overrides $(CURDIR)/debian/gforge-web-apache/usr/share/lintian/overrides/gforge-web-apache
 	cp -r www $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/
 	install -m 644 deb-specific/index_std.php $(CURDIR)/debian/gforge-web-apache/etc/gforge/custom/
 	rm $(CURDIR)/debian/gforge-web-apache/usr/share/gforge/www/index_std.php
@@ -108,6 +109,7 @@ install: build
 	install -m 755 deb-specific/prepare-vhosts-file.pl $(CURDIR)/debian/gforge-web-apache/usr/lib/gforge/bin/
 
 	# gforge-db-postgresql
+	install -m 644 $(CURDIR)/debian/gforge-db-postgresql.overrides $(CURDIR)/debian/gforge-db-postgresql/usr/share/lintian/overrides/gforge-db-postgresql
 	install -m 644 deb-specific/sf-2.6-complete.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	install -m 644 deb-specific/sf2.5-to-sf2.6.sql $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/db/
 	#
@@ -174,6 +176,7 @@ install: build
 	install -m 644 deb-specific/gforge.schema $(CURDIR)/debian/gforge-ldap-openldap/etc/gforge/
 
 	# gforge-dns-bind9
+	install -m 644 $(CURDIR)/debian/gforge-dns-bind9.overrides $(CURDIR)/debian/gforge-dns-bind9/usr/share/lintian/overrides/gforge-dns-bind9
 	install -m 755 deb-specific/install-dns.sh $(CURDIR)/debian/gforge-dns-bind9/usr/lib/gforge/bin/
 	install -m 644 deb-specific/dns.head.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/
 	install -m 644 deb-specific/dns.simple.template $(CURDIR)/debian/gforge-dns-bind9/var/lib/gforge/bind/

@@ -16,3 +16,4 @@ var/lib/gforge/scmsnapshots
 var/lib/gforge/download
 var/lib/gforge/etc
 var/cache/gforge
+usr/share/lintian/overrides

@@ -1,4 +1,4 @@
-gforge (4.0.2-5j) unstable; urgency=low
+gforge (4.0.2-5o) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
   * [Christian] Had to add a db_stop before gforge-config in 
@@ -11,6 +11,13 @@ gforge (4.0.2-5j) unstable; urgency=low
   * [Christian] Added 20041124.sql to db-upgrade.pl
   * [Christian] Added dpatch support
   * [Christian] Added globalsoff dpatch
+  * [Christian] Added overrides file for select-with-translated-default-field
+    warning
+  * [Christian] replace_files helper now don't brake when file doesn't exist
+    by emit a warning during config and postinst
+  * [Christian] Added exist_db function in postgresql the ancient method was 
+    broken with non US localized distro
+  * [Christian] Added myself as uploader to remove a lintian warning I had
 
  -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
 
