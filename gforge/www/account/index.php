@@ -140,7 +140,7 @@ if ($sys_use_jabber) {
 <td colspan="2">
 <?php
 // ############################# Preferences
-echo $HTML->boxTop("Preferences"); ?>
+echo $HTML->boxTop($Language->getText('account_register','Preferences')); ?>
 
 <input type="checkbox" name="mail_site" value="1"<?php
 	if ($u->getMailingsPrefs('site')) print " checked=\"checked\""; ?> />
