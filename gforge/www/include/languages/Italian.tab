@@ -130,6 +130,7 @@ docman_admin	title	Document Manager: Amministrazione
 docman_admin	add_edit_docgroups	Aggiungi/Modifica gruppi di documenti
 docman_admin_docedit	section	Document Manager
 docman_admin_docedit	title	Edit Document
+docman_admin_addgroups	title	Aggiungi gruppi di documenti
 docman_admin_editdocs	section	Document Manager Administration
 docman_admin_editdocs	title	Modifica documenti
 docman_admin_editdocs	state	Stato

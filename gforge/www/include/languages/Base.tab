@@ -152,7 +152,7 @@ docman_admin_editdocs	title	Edit Docs
 docman_admin_editdocs	state	State
 docman_admin_editdocs	upload	OPTIONAL: Upload new file
 docman_admin_editdocs	doc_contents	Document Contents
-docman_admin_addgroups	title	Aggiungi gruppi di documenti
+docman_admin_addgroups	title	Add Document Groups
 docman_admin_editgroups	section	Document Manager Administration
 docman_admin_editgroups	title	Edit Groups
 docman_admin_editgroups	new_group_name	New Group Name
