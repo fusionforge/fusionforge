@@ -56,7 +56,7 @@ function show_top_downloads() {
 	// print each one
 	while ($row_topdown = db_fetch_array($res_topdown)) {
 		if ($row_topdown['downloads'] > 0)
-			$return .= "(" . number_format($row_topdown['downloads'], 1) . ") <a href=\"/projects/$row_topdown[unix_group_name]/\">"
+			$return .= "(" . number_format($row_topdown['downloads']) . ") <a href=\"/projects/$row_topdown[unix_group_name]/\">"
 			. "$row_topdown[group_name]</a><br />\n";
 	}
 	$return .= '<div align="center"><a href="/top/">[ '.$Language->getText('general','more').' ]</a></div>';
@@ -110,8 +110,8 @@ function show_sitestats() {
 	global $Language;
 	$gforge = new GForge();
 	$return = '';
-	$return .= $Language->getText('home','hosted_projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects(),1).'</strong>';
-	$return .= '<br />'.$Language->getText('home','registered_users').': <strong>'.number_format($gforge->getNumberOfActiveUsers(),1).'</strong>';
+	$return .= $Language->getText('home','hosted_projects').': <strong>'.number_format($gforge->getNumberOfHostedProjects()).'</strong>';
+	$return .= '<br />'.$Language->getText('home','registered_users').': <strong>'.number_format($gforge->getNumberOfActiveUsers()).'</strong>';
 	return $return;
 }
 
