@@ -21,82 +21,81 @@
 system	locale	es_ES
 system	strftimefmt	%H:%M %e %B %Y
 system	datefmt	H:i d-m-Y
-about	about_blurb	<h2>Sobre Sourceforge</h2>Este portal usa Debian Sourceforge, un derivado del código que usa <a href=""http://www.sourceforge.net/"">Sourceforge.net</a>.  La información mostrada en este página es solo aplicable a Debian Sourceforge, por favor consulte <a href="http://www.sourceforge.net/">Sourceforge.net</a> para más información sobre su código.<br><br><b>El equipo</b><br><a href="staff.php">El equipo</a> de Sourceforge ha trabajado duro para hacer Sourceforge una realidad, puedes contactar con la gente que hay detrás de Sourceforge.<br><br><b>Agradecimientos</b><br>Debemos dar un montón de gracias a la gente que escribió el software que usa Sourceforge. También queremos dar las gracias a la siguientes <a href="thanks.php">personas y organizaciones</a> que hicieron posible Sourceforge.<br><br><b>Más información</b><br>Si tienes más cuestiones, por favor contacta la <a href="http://mail.freesoftware.fsf.org/mailman/listinfo/debian-sf-users">Lista de usuarios de Debian Sourceforge</a>.  También puedes echar un vistazo a la <a href="http://savannah.gnu.org/projects/debian-sf/">página del proyecto</a> de Debian Sourceforge y Savannah (otro derivado de Sourceforge, alojado y usado por el projecto GNU y la FSF).<br><br><b>Copyrights</b><br>El código de Sourceforge fue originalmente desarrollado por la gente de VA Linux Systems (ahora llamada "VA Software") y liberado bajo la licencia GNU General Public License. En su mayoría los derechos son de ellos.<br>El código de este portal sin embargo es Debian Sourceforge, un derivado del código original, adaptado para sistemas Debian. Los cambios visibles son principalmente soluciones de errores, pero el mayor trabajo se ha realizado para proporcionar un paquete: Debian Sourceforge es fácil de instalar y ejecutar, solo necesitas un sistema con el sistema operativo Debian. Debian Sourceforge ha sido escrito por Christian Bayle y Roland Mas, con contribuciones variadas de gente. <br><br><br><b>Marcas y cosas relacionadas</b><br>VA Linux Systems y GForge son marcas registradas por VA Linux Systems, Inc.  Linux es una marca registrada por Linus Torvalds.  Todas las demás marcas y derechos de esta página son propiedad de sus propietarios respectivos. El contenido en propiedad de VA Linux Systems tiene el copyright 1999-2001 VA Linux Systems, Inc.  Todos los derechos reservados.<br><br>
 account	title	Preferencias de cuenta
 account_change_email	message	Ha solicitado un cambio de correo en $1.\nPor favor, visite la siguiente dirección para completar el cambio de correo:\n\n<http://$1/account/change_email-complete.php?ch=_$2>\n\n -- el equipo de $1
-account_change_email	section	Preferencias de la cuenta
+account_change_email	section	Preferencias de cuenta
 account_change_email	subject	$1 Verificación
 account_change_email	title	Cambiar dirección de correo
-account_change_email	mailsent	<p>Un correo ha sido enviado a la nueva dirección. Sigas las instrucciones indicadas en el correo para completar el cambio de correo. </p><a href="/">[ Home ]</a> 
-account_change_email	desc	<p>El cambio de su dirección de correo requiere que lo confirme desde su nueva dirección de correo, de esta forma podemos estar seguros de que su nueva dirección es correcta.</p><p>Necesitamos mantener una dirección de correo correcta de cada usuario debido al nivel de acceso que permitimos a una cuenta. En el caso de tener que contactar con un usuario debido a asuntos relacionados con una cuenta de proyecto, es importante que tengamos posibilidad de hacerlo.</p><p>Enviando el formulario siguiente le enviaremos un enlace de confirmación a la nueva dirección de correo. Visitando este enlace se completará el cambio de correo.</p>
-account_change_pw	confirmation	<h2>$1 Confirmación de cambio de contraseña</h2><p>Enhorabuena. Ha cambiado su contraseña.</p>
+account_change_email	mailsent	<p>Un correo ha sido enviado a la nueva dirección. Siga las instrucciones indicadas en el correo para completar el cambio de correo. </p><a href="/">[ Home ]</a> 
+account_change_email	desc	<p>El cambio de su dirección de correo requiere que lo confirme desde su nueva dirección de correo, de esta forma podemos estar seguros de que su nueva dirección está correcta.</p><p>Necesitamos mantener una dirección de correo correcta de cada usuario debido al nivel de acceso que permitimos a una cuenta. En el caso de tener que contactar con un usuario debido a asuntos relacionados con una cuenta de proyecto, es importante que tengamos posibilidad de hacerlo.</p><p>Enviando el formulario siguiente le enviaremos un enlace de confirmación a la nueva dirección de correo. Visitando este enlace se completará el cambio de correo.</p>
+account_change_pw	confirmation	<h2>$1 Confirmación de cambio de contraseña</h2><p>Felicidades. Ha cambiado su contraseña.</p>
 account_change_pw	section	Preferencias de cuenta
 account_change_pw	title	Cambio de contraseña
 account_editsshkeys	section	Preferencias de cuenta
 account_editsshkeys	title	Editar claves compartidas CVS/SSH
-account_first	about_blurb	<p>Ahora usted es un usuario registrado en $1, el entorno de desarrollo de proyectos de código abierto en línea.</p><p>Como un usuario registrado, puede participar totalmente en las actividades de este portal. Ahora puede enviar mensajes en los foros de mensajes de proyectos, enviar errores de código en $1, registrarse como un desarrollador de un proyecto, o incluso comenzar su propio proyecto.</p><p>Tiene que dedicar cierto tiempo a leer la <a href="/docs/site/"><b>documentación</b></a> de forma que pueda tomar partido totalmente de $1.</p><p>Disfruta de este sitio, y por favor proporcionanos comentarios de forma que podamos mejorar $1.</p><p>-- el equipo de $1.</p>
+account_first	about_blurb	<p>Ahora usted es un usuario registrado en $1, el entorno de desarrollo de proyectos de código abierto en línea.</p><p>Como un usuario registrado, puede participar totalmente en las actividades de este portal. Ahora puede enviar mensajes en los foros de mensajes de proyectos, enviar errores de código en $1, registrarse como un desarrollador de un proyecto, o incluso comenzar su propio proyecto.</p><p>Tiene que dedicar cierto tiempo para leer la <a href="/docs/site/"><b>documentación</b></a> de forma que pueda tomar partido totalmente de $1.</p><p>Disfrute de este sitio, y por favor proporcionenos comentarios de forma que podamos mejorar $1.</p><p>-- el equipo de $1.</p>
 account_first	title	¡Bienvenido!
-account_login	deleted_account	<p>Tu cuenta de $1 ha sido borrada por el equipo de $1. Esto puede suceder por dos razones, o 1) solicitaste que se borrara la cuenta; o 2) se ha realizado alguna acción cuestionable usando tu cuenta (por ejemplo, violar los términos de uso) por lo que ha sido eliminada por motivos administrativos. Si tiene preguntas referentes a este asunto, déjanos una <a href="/support/?group_id=1">petición de soporte</a>.</p><p>Gracias, <br><br>el equipo de $1</p>
-account_login	iewarn	<H2><FONT COLOR="RED">Los usuarios de Internet Explorer necesitan actualizar el IExplorer a la versión 5.01 o superior, preferiblemente con encriptación SSL de 128 bits o usar Netscape 4.7 o superior</FONT></H2>
-account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer en Macintosh no está soportado actualmente. Use Netscape 4.7 o superior</FONT></H2>
-account_login	pending_account	<P>Tu cuenta está pendiente de que tu confirmación por correo.		Si accedes al enlace que hemos enviado a tu correo, se te activará tu cuenta. 		<P>Si necesitas que se te reenvíe ese correo, por favor pulsa abajo y un correo de confirmación		se te enviará a la cuenta de correo que proporcionaste durante tu registro.		<P><A href="pending-resend.php?form_user=$1">[Resend Confirmation Email]</A>		<br><hr>		<p>
+account_login	deleted_account	<p>Su cuenta de $1 ha sido borrada por el equipo de $1. Esto puede suceder por dos razones, o 1) solicitó que se borrara la cuenta; o 2) se ha realizado alguna acción cuestionable usando su cuenta (por ejemplo, violar los términos de uso) por lo que ha sido eliminada por motivos administrativos. Si tiene preguntas referentes a este asunto, déjenos una <a href="/support/?group_id=1">petición de soporte</a>.</p><p>Gracias, <br /><br />el equipo de $1</p>
+account_login	iewarn	<h2><font color="red">Los usuarios de Internet Explorer necesitan actualizar el IExplorer a la versión 5.01 o superior, preferiblemente con encriptación SSL de 128 bits o usar Netscape 4.7 o superior</font></h2>
+account_login	macwarn	<h2><font color="red">Internet Explorer en Macintosh no está soportado actualmente. Use Netscape 4.7 o superior</font></h2>
+account_login	pending_account	<p>Su cuenta está pendiente de que su confirmación por correo. Si accede al enlace que hemos enviado a su correo, se le activará su cuenta.</p><p>Si necesita que se le reenvíe ese correo, por favor pulse abajo y un correo de confirmación se le enviará a la cuenta de correo que proporcionó durante su registro.</p><p><a href="pending-resend.php?form_user=$1">[Reenviar Correo de Confirmación]</a><br /><hr /></p>
 account_login	title	Acceso al sitio
-account_login	cookiewarn	Las "cookies" deben de estar habilitadas pasado este punto.
+account_login	cookiewarn	Los "cookies" deben de estar habilitados pasado este punto.
 account_login	loginname	Nombre de la cuenta:
 account_login	passwd	Contraseña:
 account_login	usessl	Mantenerse en modo seguro (SSL) después de autenticarse
-account_login	sslnotice	<p><B><FONT COLOR="RED">Te conectarás a un servidor Web seguro SSL cuando envíes este formulario y tu contraseña no será visible por otros usuarios.</FONT></B> <P><small style="font-size: x-small"> (Si te preguntas por que esta página no se carga de forma segura con SSL, por favor lee el próximo párrafo. Gracias.) </small> <P> Los usuarios de <B>Internet Explorer</B> tendrán problemas intermitentes de SSL, de forma que deben abandonar el modo seguro después de autenticarse. Los usuarios de Netscape pueden permanecer en modo seguro SSL permanentemente para mayor seguridad. Visite <A HREF="http://www.microsoft.com/" TARGET=_blank>Microsoft</A> para mayor información sobre este conocido problema.<P>
+account_login	sslnotice	<p><b><font color="red">Se conectará a un servidor Web seguro SSL cuando envíe este formulario y su contraseña no será visible por otros usuarios.</font></b></p><p><small style="font-size: x-small"> (Si se pregunta por que esta página no se carga de forma segura con SSL, por favor lea el próximo párrafo. Gracias.) </small> <p> Los usuarios de <b>Internet Explorer</b> tendrán problemas intermitentes de SSL, de forma que deben abandonar el modo seguro después de autenticarse. Los usuarios de Netscape pueden permanecer en modo seguro SSL permanentemente para mayor seguridad. Visite <a href="http://www.microsoft.com/" target="_blank">Microsoft</a> para más información sobre este conocido problema.</p>
 account_login	login	Acceder de forma segura
-account_login	lostpw	[¿Olvidaste tu contraseña?]
+account_login	lostpw	[¿Se le olvidó su contraseña?]
 account_login	newaccount	[Nueva cuenta]
-account_lostpw	message	Alguien (probablemente Usted) en el sitio $3 solicito un\ncambio de contraseña a través de esta verificación por correo. Si no está de acuerdo,\nignora este correo y no sucederá nada.\n\nSi ha solicitado esta verificación, visite el siguiente enlace\npara cambiar su contraseña:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- el equipo de $3\n
+account_lostpw	message	Alguién (probablemente usted) en el sitio $3 solicitó un\ncambio de contraseña a través de esta verificación por correo. Si no está de acuerdo,\nignore este correo y no sucederá nada.\n\nSi ha solicitado esta verificación, visite el siguiente enlace\npara cambiar su contraseña:\n\n<http://$1/account/lostlogin.php?ch=_$2>\n\n -- el equipo de $3\n
 account_lostpw	subject	Verificación de $1
-account_lostpw	title	¿Olvidaste tu contraseña?
+account_lostpw	title	¿Se le olvidó su contraseña?
 account_lostpw	notify	<p>Un correo ha sido enviado a la dirección con la que se registró. Siga las instrucciones del correo para completar el cambio de contraseña.</p><p><a href="/">[ Home ]</a></p>
-account_lostpw	warn	<p>Cuidado...perder su contraseña es un serio problema. Esto compromete la seguridad de su cuenta, de sus proyectos, y de este sitio.</p><p>Pulsando abajo a "Enviar la clave Hash de la contraseña" le enviará un enlace a su cuenta de correo con la que te registrasse. En este enlace está una confirmación hash de 128 bits para su cuenta. Visitando este enlace le permitirá cambiar su contraseña y acceder al sitio.</p>
+account_lostpw	warn	<p>Cuidado...perder su contraseña es un serio problema. Esto compromete la seguridad de su cuenta, de sus proyectos, y de este sitio.</p><p>Pulsando abajo a "Enviar la clave Hash de la contraseña" le enviará un enlace a su cuenta de correo con la que se registró. En este enlace está una confirmación hash de 128 bits para su cuenta. Visitando este enlace le permitirá cambiar su contraseña y acceder al sitio.</p>
 account_lostpw	sendhash	Enviar la clave Hash de la contraseña
 account_register	title	Registro de una nueva cuenta
-account_register	congrat	<p>Enhorabuena. Te has registrado en $1.  </p><p> Ahora recibirás un correo de confirmación para verificar tu cuenta de correo. Visitando el enlace que te hemos enviado te activará la cuenta.</p>
-account_register	iewarn	<H2><FONT COLOR="RED">Los usuarios de Internet Explorer necesitan actualizar el IExplorer a la versión 5.01 o superior, preferiblemente con encriptación SSL de 128 bits o usar Netscape 4.7 o superior</FONT></H2>
-account_register	macwarn	<H2><FONT COLOR="RED">Internet Explorer en Macintosh no está soportado actualmente. Use Netscape 4.7 o superior</FONT></H2>
+account_register	congrat	<p>Felicidades. Se ha registrado en $1.</p><p>Ahora recibirá un correo de confirmación para verificar su cuenta de correo. Visitando el enlace que le hemos enviado le activará la cuenta.</p>
+account_register	iewarn	<h2><font color="red">Los usuarios de Internet Explorer necesitan actualizar el IExplorer a la versión 5.01 o superior, preferiblemente con encriptación SSL de 128 bits o usar Netscape 4.7 o superior</font></h2>
+account_register	macwarn	<h2><font color="red">Internet Explorer en Macintosh no está soportado actualmente. Use Netscape 4.7 o superior</font></h2>
 account_register	loginname	Nombre de la cuenta (no use mayúsculas) *:
 account_register	password	Contraseña (min. 6 caracteres) *:
 account_register	password2	Contraseña (repítela) *:
 account_register	realname	Nombre completo real *:
-account_register	language	Selecciona tu lenguaje:
+account_register	language	Seleccione su lenguaje:
 account_register	timezone	Zona horaria:
-account_register	emailaddr	Cuenta de correo *: <br /><i>Esta cuenta de correo será verificada antes de activar la cuenta. No será mostrada en el portal por motivos de privacidad. Recivirás una cuenta de correo &lt;nombredelacuenta@$1&gt; que se redirigirá a esta dirección.</i>
+account_register	emailaddr	Cuenta de correo *: <br /><i>Esta cuenta de correo será verificada antes de activar la cuenta. No será mostrada en el portal por motivos de privacidad. Recibirá una cuenta de correo &lt;nombredelacuenta@$1&gt; que se redirigirá a esta dirección.</i>
 account_register	siteupdate	Recibir correos sobre actualizaciones del portal <i>(Tráfico muy bajo. Altamente recomendado.)</i>
 account_register	communitymail	Recibir correos adicionales de la comunidad. <i>(Bajo tráfico.)</i>
 account_register	mandatory	Campos obligatorios marcados con *.
-account_register	register	Regístrate
-account_register	err_username	Debes proporcionar un nombre de usuario
-account_register	err_realname	Debes proporcionar tu nombre real
-account_register	err_passwd	Debes proporcionar una contraseña
+account_register	register	Regístrese
+account_register	err_username	Debe proporcionar un nombre de usuario
+account_register	err_realname	Debe proporcionar su nombre real
+account_register	err_passwd	Debe proporcionar una contraseña
 account_register	err_passwd2	No coinciden las contraseñas
 account_register	err_passwd3	La contraseña debe tener por lo menos seis caracteres
 account_register	err_unixname	Nombre de usuario Unix inválido
-account_register	err_email	Dirección de correo invalida
+account_register	err_email	Dirección de correo inválida
 account_register	err_userexist	El usuario ya existe.
-account_register	err_mailexist	Existe un usuario con este correo - usa el buscador de personas para  recuperar el acceso.
+account_register	err_mailexist	Existe un usuario con este correo - use el buscador de personas para recuperar el acceso.
 account_register	err_badinsert	Inserción errónea
 account_unsubscribe	all_mailings	todas las notificaciones y correos de $1
 account_unsubscribe	site_mailings	Correos de $1
 account_verify	title	$1 Verificación de la cuenta
-account_verify	verify_blurb	<p>Para completar tu registro, autentícate ahora. De esta forma tu cuenta se activará</p>
+account_verify	verify_blurb	<p>Para completar su registro, autentíquese ahora. De esta forma su cuenta se activará</p>
 conf	content_encoding	UTF-8
 conf	default_font	verdana,arial,helvetica,sans-serif
 conf	language_code	es
 conf	language_id	4
-contact	about_blurb	<p>ésta es la página de contacto de <b>$1</b> -- si estás teniendo problemas con un proyecto que alojamos nosotros por favor mande sus preguntas/información al encargado de soporte y problemas de ese proyecto. Puedes acceder a esta funcionalidad visitando la página inicial de un proyecto en: <tt>http://$2/projects/&lt;nombre del proyecto&gt;</tt> y pulsando en la herramienta apropiada.</p><p>Si tienes una petición de soporte, un reporte de error o quiere comunicarse directamente con el equipo de $1, por favor visite <a href="/projects/sourceforge">la página del proyecto de $1</a>.</p>
+contact	about_blurb	<p>Ésta es la página de contacto de <b>$1</b> -- si está teniendo problemas con un proyecto que alojamos nosotros por favor mande sus preguntas/información al encargado de soporte y problemas de ese proyecto. Se puede acceder a esta funcionalidad visitando la página principal de un proyecto en: <tt>http://$2/projects/&lt;nombre del proyecto&gt;</tt> y pulsando en la herramienta apropiada.</p><p>Si tiene una petición de soporte, un reporte de error o quiere comunicarse directamente con el equipo de $1, por favor visite <a href="/projects/sourceforge">la página del proyecto de $1</a>.</p>
 contact	title	Contacta $1
 cvs	section	Proyecto: $1
 cvs	title	CVS
-cvs	anoncvs	<P><B>Acceso por CVS anónimo</B> <P>El repositorio CVS de este proyecto puede ser extraido a través de un CVS anónimo (pserver) con las siguientes instrucciones. El módulo que quieres sacar debe ser especificado como el <I>modulename</I> (el nombre del módulo). Cuando preguntamos por una contraseña para <I>anonymous</I>, simplemente pulsa la tecla Enter.
+cvs	anoncvs	<p><b>Acceso por CVS anónimo</b></p><p>El repositorio CVS de este proyecto puede ser extraído a través de un CVS anónimo (pserver) con las siguientes instrucciones. El módulo que quiere sacar debe ser especificado como el <i>modulename</i> (el nombre del módulo). Cuando preguntamos por una contraseña para <i>anonymous</i>, simplemente pulse la tecla Enter.</p>
 cvs	anoncvsup	Las actualizaciones en el interior de un modulo no necesita el parámetro -d.
-cvs	devcvs	<P><B>Acceso al CVS por colaboradores vía SSH</B> <P>Solo los colaboradores de proyectos pueden acceder al árbol CVS por medio de este método. SSH1 debe de instalarse en tu máquina cliente. Substituye <I>modulename</I> y <I>developername</I> con los valores adecuados. Intruduce tu password de este sitio cuando se te solicite.
+cvs	devcvs	<p><b>Acceso al CVS por colaboradores vía SSH</b></p><p>Solo los colaboradores de proyectos pueden acceder al árbol CVS por medio de este método. SSH1 debe de instalarse en su máquina cliente. Substituya <i>modulename</i> y <i>developername</i> con los valores adecuados. Intruduzca su contraseña de este sitio cuando se le solicite.
 cvs	history	Historia del repositorio
-cvs	browsetree	<HR><B>Navegue por el árbol CVS</B> <P>Navegar por el directorio CVS te porporciona una gran visión del estado actual de este proyecto. También puedes ver el historial completo de cualquier fichero del repositorio.
+cvs	browsetree	<hr /><b>Navegue por el árbol CVS</b> <p>Navegar por el directorio CVS le proporciona una gran visión del estado actual de este proyecto. También se puede ver el historial completo de cualquier fichero del repositorio.</p>
 cvs	browseit	Navegar por el repositorio CVS
 docman	submit_new	Publicar Nuevo Documento
 docman	view_doc	Leer Documentos
@@ -109,21 +108,21 @@ docman_admin	section	$1
 docman_admin	title	Administrador de documentos: Administración
 docman_admin	add_edit_docgroups	Crear/Editar Grupos de Documentos
 docman_admin_docedit	section	Administrador de documentos
-docman_admin_docedit	title	Edita documento
+docman_admin_docedit	title	Editar documento
 docman_admin_editdocs	section	Administración del encargado de documentos
-docman_admin_editdocs	title	Edita documentos
+docman_admin_editdocs	title	Editar documentos
 docman_admin_editdocs	state	Estado
 docman_admin_editdocs	upload	OPCIONAL: Enviar nuevo documento
 docman_admin_editdocs	doc_contents	Continento de documento
 docman_admin_addgroups	title	Crear Groupos de Documentos
 docman_admin_editgroups	section	Administración del encargado de documentos
-docman_admin_editgroups	title	Edita grupos
+docman_admin_editgroups	title	Edite grupos
 docman_admin_editgroups	new_group_name	Nombre del Nuevo Grupo
 docman_admin_editgroups	add_group	Crear Grupo
 docman_admin_editgroups	edit_group	Editar Grupo
 docman_admin_editgroups	description	El nombre del grupo será usado como título, entonces se necesita formatearlo así.
 docman_admin_groupdelete	section	Administración del encargado de documentos
-docman_admin_groupdelete	title	Borra grupo de documentos
+docman_admin_groupdelete	title	Borrar grupo de documentos
 docman_admin_groupedit	section	Administración del encargado de documentos
 docman_admin_groupedit	title	Renombrar grupo de documentos
 docman_admin_groupedit	group_name	Nombre del Grupo
@@ -136,7 +135,7 @@ docman_new	intro	<strong>Título del Documento</strong>: Se refiere al título b
 docman_new	doc_title	Título del Documento
 docman_new	description	Descripción
 docman_new	upload_file	Enviar Archivo
-docman_new	language	Idioma
+docman_new	language	Lenguaje
 docman_new	group	El grupo de este documento:
 docman_new	submit	Enviar Información
 docman_new	file	Archivo
@@ -144,19 +143,19 @@ docman_new	state	Estado
 docman_new	error_blank_document	Error: el documento está vacío.
 forum	section	Proyecto: $1
 forum	title	Foros
-forum	choose	<p>Elije un foro y podrás navegar, buscar y enviar mensajes.<p>
+forum	choose	<p>Elija un foro y podrá navegar, buscar y enviar mensajes.<p>
 forum	html	No está permitido HTML. Los tags HTML se visulizarán como texto
 forum_common_forum	error_save_place	Forum::savePlace()
 forum_save	saved	Su posición en el foro está guardada.  Mensajes nuevos estarán subrayados cuando regrese.
 forum_admin	section	Proyecto: $1 
 forum_admin	title	Foros: Administración 
 forum_admin_addforum	section	Administración de foros
-forum_admin_addforum	title	Añadir foro
+forum_admin_addforum	title	Crear Foro
 forum_admin_changestatus	section	Administración de foros
 forum_admin_changestatus	title	Cambiar el estado de un foro
 forum_admin_changestatus	update_successful	Información del Foro Actualizado con éxito.
 forum_admin_changestatus	no_forums_found No se encuentra ningún foro.
-forum_admin_changestatus	intro	Se puede ajustar las caracturisticas de los foros aquí.  Favor de notar que los miembros del proyecto pueden leer los foros privados, pero no el gran público.
+forum_admin_changestatus	intro	Se puede ajustar las caracteristicas de los foros aquí.  Favor de notar que los miembros del proyecto pueden leer los foros privados, pero no el gran público.
 forum_admin_changestatus	status	Estado
 forum_admin_changestatus	forum	Foro
 forum_admin_changestatus	change_status	Cambiar el estado del foro.
@@ -174,10 +173,10 @@ frs	file_notes	Notas
 frs	file_package	Paquetes
 frs	file_rel_date	Día
 frs	file_version	Versión
-frs	latest_file_releases	últimas Publicaciones de Ficheros
+frs	latest_file_releases	Últimas Publicaciones de Ficheros
 general	return	[Retornar a $1]
 general	sitename	$1
-general	footer	Esto es $1. Para mayor información incluido información de copyright, ver <a href="/about.php">esta página</a>.
+general	footer	Esto es $1. Para más información incluido información de copyright, ver <a href="/about.php">esta página</a>.
 general	error	Error
 general	turned_off	Este proyecto no se usa $1.
 general update_successful	Actualizado con éxito.
@@ -185,7 +184,7 @@ general	create_successful	Creado con éxito.
 general	no_valid_group	El grupo de $1 no fue selecionado.
 general	no_valid_filename	El nombre del archivo es invalido.
 general	submitted_successfully	$1 fue enviado con éxito.
-general	language	idioma
+general	language	Lengajue
 general	edit	Editar
 group	developer_info	Información del colaborador
 group	developers	Colaboradores
@@ -197,20 +196,20 @@ group	long_foundries	Fundiciones de desarrollo
 group	long_ftp	Espacio FTP Anónimo
 group	long_homepage	Página de inicio del Proyecto
 group	long_mail	Listas de Correo
-group	long_news	últimas notícias
+group	long_news	Últimas notícias
 group	long_patch	Administrador de Parches
 group	long_pm	Administrador de Tareas
 group	long_support	Administrador de Soporte Técnico
 group	long_survey	Encuestas
 group	project_admins	Administradores del proyecto
-group	public_area	área pública
+group	public_area	Área pública
 group	short_admin	Administración
 group	short_bugs	Errores
 group	short_cvs	CVS
 group	short_docman	Documentos
 group	short_files	Ficheros
 group	short_forum	Foros
-group	short_homepage	Página Inicial
+group	short_homepage	Página Principal
 group	short_mail	Listas
 group	short_main 	Principal
 group	short_memberlist	Colaboradores
@@ -226,27 +225,26 @@ group	activity	Porcentaje de Actividad:&nbsp;
 group	activitystat	Ver las <a href="/project/stats/?group_id=$1">estadísticas</a> de la actividad del proyecto
 group	norelease	Este proyecto no ha publicado ningún fichero
 group	nodescription	Este proyecto no ha proporcionado todavía una descripción
-home	about_blurb	$1 es un <B>servicio libre para desarrolladores de <A href="http://www.opensource.org">Código Abierto</A> </B>ofreciendo fácil acceso a los mejores CVS, listas de correo, registro de fallos, tablón y foros de mensajes, organizador de tareas, alojamiento de webs, archivo permanente de ficheros, copias de seguridad continuas, y una administración total basada en un interfaz Web.<BR>&nbsp;<P><B>Participación y comentarios sobre este sitio</B><P>Para beneficiarte al máximo de $1, necesitarás <A href="/account/register.php">registrar un usuario en este sitio</A>. Esto te permitirá participar plenamente en todo lo que podemos ofrecerte. Tú puedes por supuesto navegar por el portal sin registrarte, pero no tendrás oportunidad de participar plenamente al no tener acceso total.<P>&nbsp;<BR><B>Inicia tu propio proyecto</B><P><A href="/account/register.php">Regístrate como un usuario de este sitio</A>, después <A HREF="/account/login.php">Accede</A> y finalmente, <A HREF="/register/">Registra tu proyecto.</A> Gracias y disfruta del sitio.
 home	breaking_down_barriers	Rompiendo las Barreras del Desarrollo de Código Abierto
 home	highest_ranked_users	Usuarios con la puntuación más alta
 home	sfos	$1 OnSite
 home	most_active_this_week	Los más activos esta semana
 home	sourceforge_statistics	Estadísticas de $1
 home	top_project_downloads	Proyectos más descargados
-mail	provided_by	<P>Listas de correo proporcionadas por una versión de Gforge de <A href="http://www.list.org">GNU Mailman</A>. Gracias al de Mailman y de <A href="http://www.python.org">Python</A> por su excelente software.
+mail	provided_by	<p>Listas de correo proporcionadas por una versión de Gforge de <A href="http://www.list.org">GNU Mailman</A>. Gracias al de Mailman y de <a href="http://www.python.org">Python</a> por su excelente software.</p>
 mail	section	Proyecto: $1
 mail	title	Listas de correo
 mail_admin	section	Listas de correo
 mail_admin	title	Administración de las Listas de Correo
 mail_admin_add_list	section	Administración de las Listas de Correo
-mail_admin_add_list	title	Añade una lista
+mail_admin_add_list	title	Crear una lista
 mail_admin_change_status	section	Administración de las Listas de Correo
-mail_admin_change_status	title	Administra / Actualiza Listas
+mail_admin_change_status	title	Administre / Actualize Listas
 menu	about_foundries	Acerca de las Fundiciones
 menu	about_sourceforge	Acerca de $1
 menu	account_maintenance	Mantenimiento de la cuenta
-menu	bookmark_page	Marca esta página
-menu	change_my_theme	Cambia tu tema
+menu	bookmark_page	Marcar esta página
+menu	change_my_theme	Cambiar su tema
 menu	code_snippet_library	Librería de recortes de código
 menu	compile_farm	Granja de compilación
 menu	contact_us	Contacto con $1
@@ -271,14 +269,14 @@ menu	software_map	Mapa de proyectos
 menu	top_projects	Proyectos estrella
 menu	code_snippet	Recortes de código
 menu	admin	Admin
-my	about_blurb	Tu página personal contiene una lista de errores y tareas que tienes asignadas, y una lista de los grupos a los que perteneces.
-my	no_bookmarks	Actualmente no tienes anotado ningún marcador
-my	no_monitored_filemodules	<H3>No estás monitorizando ningún fichero</H3><P>Si monitorizas ficheros, recibirás noticias de nuevas publicaciones por correo, con un enlace del nuevo fichero en nuestro servidor de descargas.<P>Puedes monitorizar ficheros visitando la Página de Resumen de un Proyecto y seleccionando las casillas adecuadas en la sección de ficheros.<BR>&nbsp
-my	no_monitored_forums	<H3>No estás monitorizando ningún foro</H3><P>Si monitorizas un foro, se te enviará por correo las noticias publicadas, con un enlace a la nueva noticia.<P>Puedes monitorizar foros pulsando &quot;Monitorizar Foro&quot; en un determinado foro.<BR>&nbsp;
-my	no_open_tasks	No tienes tareas abiertas asignadas.
-my	no_projects	No eres miembro de ningún proyecto activo
-my	no_tracker_items_assigned	No tienes ningún elemento del registro asignado.
-my	no_tracker_items_submitted	No has presentado ningún elemento del registro.
+my	about_blurb	Su página personal contiene una lista de errores y tareas que tiene asignado, y una lista de los grupos a los que pertenece.
+my	no_bookmarks	Actualmente no tiene anotado ningún marcador
+my	no_monitored_filemodules	<h3>No está monitorizando ningún fichero</h3><p>Si monitoriza ficheros, recibirá noticias de nuevas publicaciones por correo, con un enlace del nuevo fichero en nuestro servidor de descargas.</p><p>Se puede monitorizar ficheros visitando la Página de Resumen de un Proyecto y seleccionando las casillas adecuadas en la sección de ficheros.</p>
+my	no_monitored_forums	<h3>No está monitorizando ningún foro</h3><p>Si monitoriza un foro, se le enviará por correo las noticias publicadas, con un enlace a la nueva noticia.</p><p>Se puede monitorizar foros pulsando &quot;Monitorizar Foro&quot; en un determinado foro.</p>
+my	no_open_tasks	No tiene tareas abiertas asignadas.
+my	no_projects	No es miembro de ningún proyecto activo
+my	no_tracker_items_assigned	No tiene ningún elemento del registro asignado.
+my	no_tracker_items_submitted	No ha presentado ningún elemento del registro.
 my	title	Página Personal de: $1
 my	assigneditems	Mis elementos asignados
 my	submitteditems	Elementos que he enviado
@@ -298,33 +296,32 @@ my	pending_news_bytes_1	Hay una noticia pendiente.
 my	pending_news_bytes_2	Hay $1 noticias pendientes.
 my	pending_news_bytes_3	Haga click aquí
 my_bookmark_add	section	Mi Página Personal
-my_bookmark_add	title	Añadir Marcador
+my_bookmark_add	title	Crear Marcador
 my_bookmark_delete	section	Mi Página Personal
-my_bookmark_delete	title	Borra Marcador
+my_bookmark_delete	title	Borrar Marcador
 my_bookmark_edit	section	Mi Página Personal
-my_bookmark_edit	title	Edita Marcadores
+my_bookmark_edit	title	Editar Marcadores
 my_diary	section	Mi Página Personal
 my_diary	title	Diario y Notas
 new	title	Nueva Publicación
 news	section	Proyecto: $1
 news	title	Noticias
-news	choose	<P>Selecciona un conjunto de Noticias y de esta forma podrás navegar, buscar, y publicar mensajes.<P>
+news	choose	<p>Seleccione un conjunto de Noticias y de esta forma se podrá navegar, buscar, y publicar mensajes.</p>
 news_admin	section	Noticias
 news_admin	title	Administración de noticias
 news_main	title	Noticias
-news_submit	post_blurb	Puedes publicar noticias de tu proyecto si eres administrador del proyecto. Además puedes publicar notas de petición de ayuda si tu proyecto la necesita.<P>Todas las noticias <B>de tu proyecto</B> aparecerán inmediatamente en la página de resumen de tu proyecto. Las noticias que son de interés especial para la comunidad deben de ser aprobadas por un miembro del equipo de noticias antes de que aparezcan en la página principal de $1.
+news_submit	post_blurb	<p>Se pueden publicar noticias de su proyecto si es administrador del proyecto. Además se pueden publicar notas de petición de ayuda si su proyecto la necesita.</p><p>Todas las noticias <b>de su proyecto</b> aparecerán inmediatamente en la página de resumen de su proyecto. Las noticias que son de interés especial para la comunidad deben de ser aprobadas por un miembro del equipo de noticias antes de que aparezcan en la página principal de $1.</p>
 news_submit	section	Noticias
 news_submit	title	Enviar noticias para $1
-partners	about_blurb	<P>GForge está orgullasa de tener como socias a las siguientes organizaciones:<P><TABLE width=100%><TR valign="top"><TD><A href="http://www.cosource.com/">$1</A></TD><TD><B><A href="http://www.cosource.com/">Cosource.com</A></B><BR>Cosource.com es una web colaborativa de subastas inversas que permite a los clientes internacionales y desarrolladores de productos de Código Abierto trabajar en conjunto y de esta forma patrocinar el desarrollo de innovadoras soluciones de software.</TD></TR></TABLE>
-people	about_blurb	<P>El tablón de petición de ayuda para Proyectos de $1 no tiene objetivos comerciales y proporciona a voluntarios oportunidades de colaboración en proyectos. El uso comercial está prohibido.<P>Los listados de Proyectos se mantienen durante dos semanas o hasta que es eliminado por el peticionario, lo que suceda antes. Los administradores de proyectos siempre pueden volver a publicar peticiones caducadas.<P>Navega por el menú de categorías para encontrar proyectos que necesitan de tu ayuda.<P>Si eres un administrador de un proyecto, accede y envía una petición de ayuda desde la página de administración de tu proyecto.<P>Para sugerir nuevas categorías de trabajos, envía una petición a través del encargado de soporte de este sitio.<P>
+people	about_blurb	<p>El tablón de petición de ayuda para Proyectos de $1 no tiene objetivos comerciales y proporciona a voluntarios oportunidades de colaboración en proyectos. El uso comercial está prohibido.</p><p>Los listados de Proyectos se mantienen durante dos semanas o hasta que es eliminado por el peticionario, lo que suceda antes. Los administradores de proyectos siempre pueden volver a publicar peticiones caducadas.</p><p>Navegue por el menú de categorías para encontrar proyectos que necesitan de su ayuda.</p><p>Si es un administrador de un proyecto, acceda y envíe una petición de ayuda desde la página de administración de su proyecto.</p><p>Para sugerir nuevas categorías de trabajos, envíe una petición a través del encargado de soporte de este sitio.</p>
 people	section	Peticiones de Ayuda para Proyectos
 people	title	Proyectos que necesitan ayuda
 people_admin	section	Peticiones de Ayuda para Proyectos
 people_admin	title	Administración de peticiones de ayuda
 people_admin_people_cat	section	Administración de peticiones de ayuda
-people_admin_people_cat	title	Añadir Categorias Laborales
+people_admin_people_cat	title	Crear Categorias Laborales
 people_admin_people_skills	section	Administración de peticiones de ayuda
-people_admin_people_skills	title	Añadir Conocimientos Laborales
+people_admin_people_skills	title	Crear Conocimientos Laborales
 people_cat	section	Ayuda necesitada
 people_cat	title	Listado de trabajos por categorías
 people_createjob	section	Peticiones de Ayuda para Proyectos
@@ -332,9 +329,9 @@ people_createjob	title	Crear un nuevo trabajo
 people_editjob	section	Peticiones de Ayuda para Proyectos
 people_editjob	title	Editar trabajos
 people_editprofile	section	Peticiones de Ayuda para Proyectos
-people_editprofile	title	Edita tu perfil
+people_editprofile	title	Edite su perfil
 people_helpwanted_latest	section	Peticiones de Ayuda para Proyectos
-people_helpwanted_latest	title	últimas publicaciones
+people_helpwanted_latest	title	Últimas publicaciones
 people_proj	section	Peticiones de Ayuda para Proyectos
 people_proj	title	Peticiones de Ayuda para Proyectos en $1
 people_viewjob	section	Peticiones de Ayuda para Proyectos
@@ -343,15 +340,15 @@ people_viewprofile	section	Información de usuario
 people_viewprofile	title	Ver perfil del colaborador
 pm	section	Proyecto: $1 
 pm	title	Administrador de Tareas: Subproyectos y tareas
-pm	noprj	<H1>No se encontraron subproyectos</H1><P><B>Ningún subproyecto se ha configurado, o no podemos verlo.<P><FONT COLOR=RED>El administrador de este proyecto deberá configurar subproyectos usando la página de aministración</FONT></B>
+pm	noprj	<h1>No se encontraron subproyectos</h1><b><p>Ningún subproyecto se ha configurado, o no podemos verlo.</p><p><font color="red">El administrador de este proyecto deberá configurar subproyectos usando la página de aministración</font></p></b>
 pm_addtask	section	Administrador de Tareas
-pm_addtask	title	Añadir una Tarea
+pm_addtask	title	Crear una Tarea
 pm_admin	section	$1
 pm_admin	title	Administrador de Tareas: Administración
 pm_admin_change_status	section	 Administración de Tareas
 pm_admin_change_status	title	Actualizar Información
 pm_admin_projects	section	Administración de Tareas
-pm_admin_projects	title	Añadir un subproyecto
+pm_admin_projects	title	Crear un subproyecto
 pm_browse_custom	section	Administrador de Tareas
 pm_browse_custom	title	Ojear las tareas
 pm_browse_my	section	Administrador de Tareas del proyecto $1
@@ -371,11 +368,11 @@ project_admin_database	title	Información de la Base de Datos
 project_admin_editgroupinfo	section	Proyecto $1 - Administración
 project_admin_editgroupinfo	title	Editar información pública
 project_admin_editimages	section	Proyecto $1 - Administración
-project_admin_editimages	title	Editar datos Multimedia
+project_admin_editimages	title	Editar datos multimedia
 project_admin_editpackages	section	Proyecto $1 - Administración
 project_admin_editpackages	title	Editar Paquetes
 project_admin_editreleases	section	Proyecto $1 - Administración
-project_admin_editreleases	title	Edit Publicaciones
+project_admin_editreleases	title	Editar Publicaciones
 project_admin_history	section	Proyecto $1 - Administración
 project_admin_history	title	Historial
 project_admin_newrelease	section	Proyecto $1 - Administración
@@ -388,7 +385,7 @@ project_admin_userperms	section	Proyecto $1 - Administración
 project_admin_userperms	title	Listado de permisos de los usuarios
 project_admin_vhost	section	Proyecto $1 - Administración
 project_admin_vhost	title	Administración de Máquina Virtual
-project_memberlist	joining	<P>Si quieres contribuir a este proyecto y comenzar a ser un colaborador, contacta con uno de los administradores del proyecto, están marcados en negrita en el texto inferior.<br><br>
+project_memberlist	joining	<p>Si quiere contribuir a este proyecto y comenzar a ser un colaborador, contacte con uno de los administradores del proyecto, están marcados en negrita en el texto inferior.</p><br /><br />
 project_showfiles	section	Proyecto: $1
 project_showfiles	title	Lista de ficheros
 project_shownotes	section	Proyecto: $1
@@ -399,44 +396,43 @@ register	title	Registro de un Nuevo Proyecto
 register_complete	section	Registro de un Nuevo Proyecto
 register_complete	title	Registro Completado
 register_projectinfo	section	Registro de un Nuevo Proyecto
-register_projectinfo	title	Informació del Proyecto
+register_projectinfo	title	Información del Proyecto
 register_requirements	section	Registro de un Nuevo Proyecto
 register_requirements	title	Servicios y Requisitos
 register_tos	section	Registro de un Nuevo Proyecto
 register_tos	title	Términos del Contrato de Servicio
 search	title	Buscar
-sendmessage	about_blurb	En un intento de reducir el \'spam\' de correo, estamos usando este formulario para enviar correo.<p>Rellénalo completamente con exactitud o el destinatario no tendrá posibilidad de responder.<P><FONT COLOR="RED"><B>SI ESTáS ESCRIBIENDO PARA PEDIR AYUDA:</B> ¿Leiste la documentación del proyecto? ¿Incluiste tu nombre de usuario? Si estás escribiendo acerca de un proyecto, incluye tu <B>identificador de proyecto</B> y el <B>Nombre del proyecto</B>.</FONT>
-sendmessage	title	Envía a $1 un mensaje
-snippet	title	Librería de recortes de código
-snippet_add_snippet_to_package	section	Librería de recortes de código
-snippet_add_snippet_to_package	title	Añade un recorte a un paquete
-snippet_addversion	section	Librería de recortes de código
-snippet_addversion	title	Envía una nueva versión
-snippet_browse	section	Librería de recortes de código
+sendmessage	about_blurb	En un intento de reducir el spam de correo, estamos usando este formulario para enviar correo.<p>Rellénelo completamente con exactitud o el destinatario no tendrá posibilidad de responder.</p><p><font color="red"><b>SI ESTÁ ESCRIBIENDO PARA PEDIR AYUDA:</b> ¿Leó la documentación del proyecto? ¿Incluyó su nombre de usuario? Si está escribiendo acerca de un proyecto, incluya su <b>identificador de proyecto</b> y el <b>Nombre del proyecto</b>.</font></p>
+sendmessage	title	Envíe a $1 un mensaje
+snippet	title	Biblioteca de recortes de código
+snippet_add_snippet_to_package	section	Biblioteca de recortes de código
+snippet_add_snippet_to_package	title	Añada un recorte a un paquete
+snippet_addversion	section	Biblioteca de recortes de código
+snippet_addversion	title	Envíe una nueva versión
+snippet_browse	section	Biblioteca de recortes de código
 snippet_browse	title	Ojear los Recortes
-snippet_delete	section	Librería de recortes de código
+snippet_delete	section	Biblioteca de recortes de código
 snippet_delete	title	Borrar un Recorte
-snippet_detail	section	Librería de recortes de código
+snippet_detail	section	Biblioteca de recortes de código
 snippet_detail	title	Ver Detalles del Recorte
-snippet_package	section	Librería de recortes de código
+snippet_package	section	Biblioteca de recortes de código
 snippet_package	title	Crear un Paquete de Recorte
-snippet_submit	section	Librería de recortes de código
+snippet_submit	section	Biblioteca de recortes de código
 snippet_submit	title	Enviar Recorte
 softwaremap	title	Mapa
-staff	about_blurb	<P><h2>El equipo de GForge </h2><P><table border=0 cellspacing=2 cellpadding=2 bgcolor=""><tr valign=top><td><a href="/sendmessage.php?toaddress=pat_maillink_users.sourceforge.net">Patrick McGovern</a></td><td>(pat)</td><td>Patrick McGovern (pat) - Pat "Sounds Good" McGovern es el nuevo Director de <A HREF="http://sourceforge.net/">GForge.net</A>.  Estamos contentos de tener a Pat a bordo, como está acostumbrado a llevar <A HREF="http://www.valinux.com/">valinux.com</A>, conoce algo de llevar portales importantes.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dlb_maillink_users.sourceforge.net">Dan Bressler</a></td><td>(dlb)</td><td>Dan es el "Product Manager" de GForge. No estamos seguros de lo que significa, solo que a él le gusta las planificaciones y manejar asuntos de desarrollo de negocios.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td><td>(bigdisk)</td><td>Tim es el lider técnico de GForge y es de Iowa. Sí Iowa. No de Idaho y no de Ohio. Iowa. Cuando no está trabajando puedes localizarlo fácilmente ya que tiene el único BMW Z3 de Iowa.<P>Tim fundó <A HREF="http://www.phpbuilder.com/">PHPBuilder.com</A> y <A HREF="http://www.geocrawler.com/">Geocrawler.com</A>.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=pfalcon_maillink_users.sourceforge.net">Paul Sokolovsky</a></td><td>(pfalcon)</td><td>Paul es un desarrollador que vive en Ucrania. Sí, es donde está Chernobil. El asegura que no tiene nada que ver con esto. él se considera a si mismo como "un confirmado primo/adicto al trabajo".</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=zelphyr_maillink_users.sourceforge.net">Darrell Brogdon</a></td><td>(zelphyr)</td><td>Darrell es también del equipo de desarrolladores de GForge. El trabajaba para otra compañía, pero ellos quisieron abandonar el código abierto y usar ASP para sus aplicaciones Web... Ahora trabaja con nosotros.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td><td>(precision)</td><td>Uriah es un administrador de sistemas/desarrollador de las heladas regiones de Minnesota.  Cuando no está dando palazos en su entrada o deshelando su coche, lo encontrarás encerrado en una oscura habitación en algún lugar en frente de un ordenador.</td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=moorman_maillink_users.sourceforge.net">Jacob Moorman</a></td><td>(moorman)</td><td>Jacob (aka roguemtl) es el encargado de Calidad de Servicio de GForge. El lleva actualmente el peso de las peticiones de nivel dos, mantiene la página de Estado, y permite que todo el que realizar una petición de soporte obtenga, oportunamente un correcto servicio. Trabajo desde el Noreste de los EEUU.</td></tr><TR><TD COLSPAN="2"><B>Fundadores:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=fusion94_maillink_users.sourceforge.net">Tony Guntharp</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=dtype_maillink_users.sourceforge.net">Drew Streib</a></td></tr><tr valign=top><td><a href="/sendmessage.php?toaddress=bigdisk_maillink_users.sourceforge.net">Tim Perdue</a></td></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=precision_maillink_users.sourceforge.net">Uriah Welcome</a></td></TR><TR><TD COLSPAN="2">&nbsp;<P><B>Colaboradores significativos externos:</B></TD></TR><tr valign=top><td><a href="/sendmessage.php?toaddress=wallace_maillink_users.sourceforge.net">Wallace Lee</a></td><td>(wallace)</td><td>Wallace ha contribuido significativamente con parches y mejoras del código central base de GForge . Apreciamos sus esfuerzos, como lo hacen los usuarios que se benefician de sus contribuciones.</td></tr></table>
 survey	title	Encuestas de $1
 survey_admin	section	Herramienta de Encuestas
 survey_admin	title	Administración
 survey_admin_add_question	section	Administración de la Herramienta de Encuestas
-survey_admin_add_question	title	Añadir Pregunta
+survey_admin_add_question	title	Crear Pregunta
 survey_admin_add_survey	section	Administración de la Herramienta de Encuestas
-survey_admin_add_survey	title	Añadir Encuesta
+survey_admin_add_survey	title	Crear Encuesta
 survey_admin_edit_question	section	Administración de la Herramienta de Encuestas
 survey_admin_edit_question	title	Editar una Pregunta de una Encuesta
 survey_admin_edit_survey	section	Administración de la Herramienta de Encuestas
-survey_admin_edit_survey	title	Edita una Encuesta
+survey_admin_edit_survey	title	Editar una Encuesta
 survey_admin_show_questions	section	Administración de la Herramienta de Encuestas
-survey_admin_show_questions	title	Edita las Preguntas de Encuesta
+survey_admin_show_questions	title	Editar las Preguntas de Encuesta
 survey_admin_show_results	section	Administración de la Herramienta de Encuestas
 survey_admin_show_results	title	Ver Resultados de una Encuesta
 survey_admin_show_results_aggregate	section	Administración de la Herramienta de Encuestas
@@ -449,7 +445,6 @@ survey_survey	section	Herramienta de Encuestas
 survey_survey	title	Mostrar Encuestas
 survey_survey_resp	section	Herramienta de Encuestas
 survey_survey_resp	title	Procesado de Respuesta de Encuesta
-thanks	about_blurb	<P><h2>Reconocimientos de GForge</h2>Los desarrolladores de GForge quieren agradecer a la siguiente gente por su apoyo y ánimo:<ul><li>VA Linux Systems<li>Larry Augustin<li>Brian Biles<li>John Hall<li>Steve Westmoreland<li>Chris DiBona<li>Joe Arruda<li>Jeff Ritter<li>Trae McCombs<li>Patrick Wong<li>Neil Doane<li>Rob Walker<li>Robert Flemming<li>Michael Turner<li>Dan Cox<li>Garrett LeSage<li>John Goebel<li>Kit Cosper<li>Eureka Endo<li>Kevin Collins<li>Steve Schaefer<li>Greg Pryzby<li>Adam Frey<li>James Byers<li>Lion Templin</ul>
 themes	section	Preferencias de cuenta
 themes	title	Ver/Cambiar Tema
 top	about_blurb	Nosotros registramos muchas estadísticas de uso de proyectos en $1, y mostramos aquí los proyectos estrella en diferentes categorías.
@@ -497,21 +492,21 @@ tracker_detail	title	Vista Detallada del Registro
 tracker_reporting	section	Proyecto: $1
 tracker_reporting	title	Informe del Registro
 users	title	Resumen del Usuario
-users	peerinfo1	Si conoces a este usuario, por favor tómate un rato para puntuarle en los siguientes criterios. Ten en cuenta, que tu puntuación será visible al usuario y a otros. <P> El sistema de Puntuación de $1 está basado en los conceptos de <A HREF="http://www.advogato.com">Advogato.</A> El sistema ha sido reimplementado y expandido en varias líneas.
-users	peerinfo2	El cuadro de puntuación muestra todas las medias de puntuaciones (y niveles de respuesta) para cada criterio individual. Debido a la carga que supone, estos números incluyen respuestas de tanto usuarios autenticados como no. <ul> <li> El campo "Sitewide Rank" muestra la posición del usuario en comparación con el resto de usuarios de $1.  <li>El "Aggregate Score" muestra una media basada solo en usuarios autenticados. <li>El campo "Personal Importance" muestra el valor con que los usuarios puntuan a otros colaboradores (entre 1 y 1.5) -- Las respuestas de usuarios con mayor puntuación tienen mayor peso.  </ul> <p> <i> Si no quieres aparecer en el sistema de puntuación (esto afectará tanto a tu posibilidad de puntuar como de ser puntuado), accede a <a href="/account/">tu página de mantenimiento de tu cuenta</a>. Si eliges no participar, tus puntuaciones de otros usuarios se borraran y el cuadro de puntuaciones desaparecerá de tu página personal.</i></p>
-users	optout	Tu elegiste no aparecer en el sistema de puntuación, si no podrís puntuar a este usuario. Visita <a href="/account/">tu página de mantenimiento</a> para más información.
+users	peerinfo1	<p>Si conoce a este usuario, por favor tóme un rato para puntuarle en los siguientes criterios. Tenga en cuenta, que su puntuación será visible al usuario y a otros.</p><p>El sistema de puntuación de $1 está basado en los conceptos de <a href="http://www.advogato.com">Advogato.</a> El sistema ha sido reimplementado y expandido en varias líneas.</p>
+users	peerinfo2	El cuadro de puntuación muestra todas las medias de puntuaciones (y niveles de respuesta) para cada criterio individual. Debido a la carga que supone, estos números incluyen respuestas de tanto usuarios autenticados como no. <ul> <li> El campo "Sitewide Rank" muestra la posición del usuario en comparación con el resto de usuarios de $1.</li><li>El "Aggregate Score" muestra una media basada solo en usuarios autenticados.</li><li>El campo "Personal Importance" muestra el valor con que los usuarios puntuan a otros colaboradores (entre 1 y 1.5) -- Las respuestas de usuarios con mayor puntuación tienen mayor peso.</li></ul><p><i>Si no quiere aparecer en el sistema de puntuación (esto afectará tanto a su posibilidad de puntuar como de ser puntuado), accede a <a href="/account/">su página de mantenimiento de tu cuenta</a>. Si elige no participar, sus puntuaciones de otros usuarios se borraran y el cuadro de puntuaciones desaparecerá de su página personal.</i></p>
+users	optout	Usted elegió no aparecer en el sistema de puntuación, si no podría puntuar a este usuario. Visite <a href="/account/">su página de mantenimiento</a> para más información.
 trove	not_categorized	Este proyecto todavía no ha sido categorizado en el
 trove	title	Mapa de Proyectos
-classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nMientras esperas que funcione su nombre DNS, puedes intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi después de seis horas su cuenta shell/CVS no funcionan, por favor\nabre una petición de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas están cerradas para el \'telnet\' y solo\nfuncionará con \'ssh\'.\n\nSu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lea la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribucion de directorios de la cuenta.\n\nPor favor, tómese un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia página de proyectos en $3 mientras está autenticado, encontrará\nfunciones adicionales de menú con un titulo llamado \'Administración de Proyectos\'.\n\nLe recomendamos altamente que visite ahora la página de $3 y cree una descripción\npública de tu proyecto. Esto puede hacerlo visitando su página\nde proyecto mientras está autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarse).\n\nSu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorice en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisita su proyecto, mientras está autenticado, y seleccione \'Administración\' en el\nmenú.\n\nDisfruta del sistema, y por favor, dígales a otras personas de $3. Comentanos también\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
+classgroup	acceptedproject	El registro de su proyecto en $7 ha sido aprobado.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\nServidor de CVS :         cvs.$2.$3\nServidor de Shell/Web:   $2.$3\n\nSu dominio DNS tardará más de un día en estar activo en nuestro sitio.\nMientras espera que funcione su nombre DNS, puede intentar acceder a \n$4 y apuntar su CVS a $5\n\nSi después de seis horas su cuenta shell/CVS no funcionan, por favor\nabra una petición de soporte de forma que podamos ver el origen del problema.\nTenga en cuenta que todas las cuentas están cerradas para el \'telnet\' y solo\nfuncionará con \'ssh\'.\n\nSu espacio web es accesible a través de esta cuenta de \'shell\'. Por favor, lea la\ndocumentación (ver el enlace de abajo) acerca del uso propuesto, servicios\ndisponibles, y la distribucion de directorios de la cuenta.\n\nPor favor, tómese un tiempo para leer la documentación del portal sobre la administración de proyectos (http://$3/docs/site/). Si Ud. visita su\npropia página de proyectos en $3 mientras está autenticado, encontrará\nfunciones adicionales de menú con un titulo llamado \'Administración de Proyectos\'.\n\nLe recomendamos altamente que visite ahora la página de $3 y cree una descripción\npública de su proyecto. Esto puede hacerlo visitando su página\nde proyecto mientras está autenticado, y seleccionando \'Administración\' del menú de la izquierda (o visitando http://$3/project/admin/?group_id=$6\ndespués de autenticarse).\n\nSu proyecto no aparecerá tampoco en el mapa de proyectos (lista\nprincipal de proyectos albergados en $3 que permite gran flexibilidad en la\nnavegación y búsqueda) hasta que no lo categorice en la pantalla de administración\ndel proyecto. Para que la gente pueda encontrar su proyecto debe hacer esto ahora.\nVisite su proyecto, mientras está autenticado, y seleccione \'Administración\' en el\nmenú.\n\nDisfrute del sistema, y por favor, dígales a otras personas de $3. Coméntenos también\nsi podemos hacer algo para ayudarle.\n\n-- El equipo de $7
 classgroup	rejectedproject	Su registración de su projecto en $3 ha sido negada.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\n\nLas razones para negarla:\n\n
-classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\nNombre completo del Proyecto:  $2\nDescripcion registrada: $3\nLicencia: $4\n\nPor favor, visita esta direccion para aprobar o rechazar este proyecto:\nhttp://$5/admin/approve-pending.php
+classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\nNombre completo del Proyecto:  $2\nDescripcion registrada: $3\nLicencia: $4\n\nPor favor, visite esta dirección para aprobar o rechazar este proyecto:\nhttp://$5/admin/approve-pending.php
 classgroup	acceptedprojecttitle	Proyecto Aprobado por $1
 classgroup	rejectedprojecttitle	Proyecto Denegado por $1 
 classgroup	newprojectnotificationtitle	Proyecto Sometado a $1
-common_include_account	sixchar	Debe proporcionar una contraseña valida (por lo menos seis carácteres).
+common_include_account	sixchar	Debe proporcionar una contraseña válida (por lo menos seis carácteres).
 common_include_account	nospace	No se permiten los espacios en el nombre de la cuenta.
-common_include_account	tooshort	Debe proporcionar un nombre valido (por lo menos seis carácteres).
-common_include_account	toolong	Debe proporcionar un nombre valido (por lo máximo 15 carácteres).
+common_include_account	tooshort	Debe proporcionar un nombre válido (por lo menos seis carácteres).
+common_include_account	toolong	Debe proporcionar un nombre válido (por lo máximo 15 carácteres).
 common_include_account	illegal	Hay un caráctere illegal en el nombre.
 common_include_account	nounderscore	El nombre del grupo no se puede tener el "underscore" por razones del DNS.
 common_include_account	cvsreserved	El nombre está reservado para el CVS.
@@ -519,28 +514,28 @@ common_include_account	dnsreserved	El nombre está reservado para el DNS.
 account_lostlogin	title	Confirmación de perdida de contraseña
 account_lostlogin	severalconfirm	Este \'hash\' de confirmación existe más de una vez.
 account_lostlogin	invalidconfirm	\'Hash\' de confirmación invalido
-account_lostlogin	sixchars	Debe proporcionar una contraseña valida (por lo menos seis carácteres).
+account_lostlogin	sixchars	Debe proporcionar una contraseña válida (por lo menos seis carácteres).
 account_lostlogin	notmatch	Las nuevas contraseñas no coinciden.
-account_lostlogin	passwdchanged	<h2>Contraseña cambiada</h2><p>Enhorabuena, has cambiado tu contraseña de tu cuenta. Puedes ahora <a href="/account/login.php">acceder</a> a nuestro sitio ahora.</p>
-account_lostlogin	welcome	<h2>Acceso con contraseña perdida</h2><P>Bienvenido, $1. Debes cambiar ahora tu contraseña.
-account_lostlogin	newpasswd	Nueva contraseña (min. 6 caracteres)
+account_lostlogin	passwdchanged	<h2>Contraseña cambiada</h2><p>Felicidades, ha cambiado su contraseña de su cuenta. Puede ahora <a href="/account/login.php">acceder</a> a nuestro sitio ahora.</p>
+account_lostlogin	welcome	<h2>Acceso con contraseña perdida</h2><p>Bienvenido, $1. Debe cambiar ahora su contraseña.</p>
+account_lostlogin	newpasswd	Nueva contraseña (min. 6 carácteres)
 account_lostlogin	newpasswd2	Nueva contraseña (repítala)
 account_lostlogin	update	Actualice
 account_register	message_header	Registro de una cuenta en $1
-account_register	message_body	Gracias por registrarte en el sitio Web de $4. Tienes\nuna cuenta con nombre $1 creada para ti. Para completar\ntu registro, visita la siguiente dirección: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si no ves ninguna dirección URL arriba, se debe a un error en tu cliente de correo.\nUsa la dirección de abajo, pero asegurate que lo escribes todo en una misma línea.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nDisfruta de este sitio.\n\n-- el equipo de $4\n
+account_register	message_body	Gracias por registrarse en el sitio Web de $4. Tiene\nuna cuenta con nombre $1 creada para usted. Para completar\nsu registro, visite la siguiente dirección: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(Si no se ve ninguna dirección URL arriba, se debe a un error en su cliente de correo.\nUse la dirección de abajo, pero asegúrese que lo escriba todo en una misma línea.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nDisfrute de este sitio.\n\n-- el equipo de $4\n
 account_verify	loginname	Nombre de usuario:
 account_verify	password	Contraseña:
 account_verify	login		Acceso
-account_verify	missingparam	Olvidó un parámetro
-account_verify	usermandatory	Debes introducir un nombre de usuario.
+account_verify	missingparam	Se le olvidó un parámetro
+account_verify	usermandatory	Debe introducir un nombre de usuario.
 account_verify	invaliduser	Usuario inválido
 account_verify	nouser	El usuario no existe.
 account_verify	invalidop	Operación inválida
-account_verify	accountactive	La cuenta esta activa todavía.
+account_verify	accountactive	La cuenta está activa todavía.
 account_verify	invalidparam	Parámetro inválido
-account_verify	cannotconfirm	No puedo confirmar su identidad de cuenta - \'hash\' de confirmación inválido (o nombre de usuario)
+account_verify	cannotconfirm	No se puede confirmar su identidad de cuenta - \'hash\' de confirmación inválido (o nombre de usuario)
 account_verify	accessdenied	Acceso denegado
-account_verify	invalidcred	Las credenciales que has introducido no corresponden con ninguna cuenta válida.
+account_verify	invalidcred	Las credenciales que ha introducido no corresponden con ninguna cuenta válida.
 account_verify	cannotactivate	No se puede activar la cuenta
 account_verify	erroractivate	Error mientras activaba la cuenta
 forum_forum	section	Proyecto: $1 
@@ -548,11 +543,11 @@ forum_forum	title	Forums: Ver un foro
 forum_forum	no_forum_chosen	No hay un foro escogido.
 forum_forum	forum	Foro
 forum_forum	show	Enseñar
-forum_forum	next_messages	Próximas mensajes.
+forum_forum	next_messages	Próximos mensajes.
 forum_forum	nested	Anidado
 forum_forum	flat	Lista
 forum_forum	threads	Hilos
-forum_forum	previous_messages	Anteriores mensajes.
+forum_forum	previous_messages	Mensajes anteriores.
 forum_forum	ultimate	Ultimate
 forum_forum	threaded	Hilos
 forum_forum	thread	Conversación
@@ -560,9 +555,9 @@ forum_forum	posts	Mensajes
 forum_forum	author	Autor
 forum_forum	date	Día
 forum_forum	changeview	Cambiar la vista
-forum_forum	postsuccess	El mensaje ha sido publicado correctamente
+forum_forum	postsuccess	El mensaje ha sido publicado con éxito
 forum_forum	topic	Tema
-forum_forum	topicstarter	Quien escribio 1º
+forum_forum	topicstarter	Quien escribió 1º
 forum_forum	replies	Contestaciones
 forum_forum	lastpost	Última publicación
 forum_utils	news	Noticias
@@ -571,8 +566,8 @@ forum_utils	nonewsitem	Error - este elemento de noticias no se ha encontrado
 forum_utils	latest	Últimas noticias
 forum_utils	monitor	Monitorizar Foro
 forum_utils	admin	Administración
-forum_utils	saveplace	Guardar Sitio
-forum_utils	added	Foro Añadido
+forum_utils	saveplace	Guardar Lugar
+forum_utils	added	Foro Creado
 forum_utils	notfound	No encontrado
 forum_utils	by	Por:
 forum_utils	brokenthread	Conversación rota
@@ -580,12 +575,12 @@ forum_utils	thread	Conversación
 forum_utils	author	Autor
 forum_utils	date	Día
 forum_utils	summary	Resumen
-forum_utils	erroradd	Error añadiendo Foro
+forum_utils	erroradd	Error creando Foro
 forum_utils	error	Error!
-forum_utils	errormaster	No puedo actualizar el conversación padre con la fecha actual
-forum_utils	errorparent	No puedo actualizar el padre
+forum_utils	errormaster	No se puede actualizar la conversación padre con la fecha actual
+forum_utils	errorparent	No se puede actualizar el padre
 forum_utils	errorfollowup	Intentando contestar un mensaje que no existe.
-forum_utils	errorfollowup2	No esta presente el identificador de contestación cuando intentaba publicar en una conversación existente.
+forum_utils	errorfollowup2	No está presente el identificador de contestación cuando intentaba publicar en una conversación existente.
 forum_utils	errorpost	Envío fallido
 forum_utils	errorinsert	Fallo a obtener el identificador de inserción insertid()
 forum_utils	noid	Intentando publicar sin un identificador de foro
@@ -594,33 +589,33 @@ forum_utils	doublepost	Parece que está intentando enviar por duplicado este men
 forum_utils	nextfailed	Fallo la obtención del nuevo identificador de conversación (thread_id) 
 forum_utils	postedby	Enviado por
 forum_utils	posted	Mensaje enviado
-forum_utils	feedbacklogin	Tu puedes enviar un mensaje si accedes a este sitio
+forum_utils	feedbacklogin	Usted puede enviar un mensaje si se autentica a este sitio
 forum_utils	subject	Asunto:
 forum_utils	message	Mensaje:
-forum_utils	htmltag	Las etiquetas HTML se verán en tu mensaje como texto
-forum_utils	postanon	Estas publicando anónimamente porque no te has
+forum_utils	htmltag	Las etiquetas HTML se verán en su mensaje como texto
+forum_utils	postanon	Está publicando anónimamente porque no se ha
 forum_utils	loggedin	autenticado
 forum_utils	postcomment	Enviar comentario
 forum_utils	anonymously	Anónimamente
-forum_utils	couldpostif	Podrías enviar un mensaje si estás
+forum_utils	couldpostif	Podría enviar un mensaje si está
 forum_utils	reply	responder
-forum_utils	mailmonitor	\nLee y responde a este mensaje en: \n$1\nPor: $2 \n\n $3\n\n______________________________________________________________________\nTú estás recibiendo este correo porque solicitaste monitorizar este foro.\nPara parar de monitorizar este foro, accede a $4 \ny visita: $5
+forum_utils	mailmonitor	\nLea y responda a este mensaje en: \n$1\nPor: $2 \n\n $3\n\n______________________________________________________________________\nUsted está recibiendo este correo porque solicitó monitorizar este foro.\nPara parar de monitorizar este foro, acceda a $4 \ny visite: $5
 forum_utils	mailsent	email enviado - hay gente monitorizando el foro
 forum_utils	mailnotsent	email no enviado - hay gente monitorizando el foro
 forum_utils	mailnotsent2	email no enviado - nadie está monitorizando el foro
 general	permdenied	Permiso denegado.
 general	permnotget	No puedo obtener permiso
-general	permexcuse	Un administrador de este proyecto tiene que darte permisos para ver esta página.
+general	permexcuse	Un administrador de este proyecto tiene que darle permisos para ver esta página.
 menu	diary_notes	Diario &amp; Notas
 menu	admin	Administración
 menu	submit	Enviar
-news	nonews	No se encontraron Noticias
+news	nonews	No se encontraron noticias
 news	nonewsfor	No hay nuevas noticias para $1
 news	noitems	No se encontraron elementos
-news_admin	permdenied	Debes ser un administrador del proyecto que estas editando o un miembro del equipo de noticias de $1.
+news_admin	permdenied	Hay que ser un administrador del proyecto que está editando o un miembro del equipo de noticias de $1.
 news_admin	noqueued	No hay elementos encolados para el proyecto
 news_admin	queued	Estas nuevas noticias fueron enviadas para el proyecto
-news_submit	cannot	No puedes enviar noticias de un proyecto a no ser que sea uno de los administradores del proyecto
+news_submit	cannot	No se puede enviar noticias de un proyecto a no ser que sea uno de los administradores del proyecto
 news_submit	forproject	del Proyecto
 news_submit	subject	Asunto
 news_submit	details	Detalles
@@ -646,7 +641,7 @@ calendar	april	abril
 calendar	may	mayo
 calendar	june	junio
 calendar	july	julio
-calendar	august	augosto
+calendar	august	agosto
 calendar	september	septiembre
 calendar	october	octubre
 calendar	november	noviembre
