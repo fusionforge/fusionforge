@@ -719,10 +719,12 @@ class Artifact extends Error {
 
 		// If the current status is Pending then auto-reset it to 'Open'
 		// Assumes the status ID for 'Pending' is '4'
+		/*
+		//This was unexpected behavior - best to let the admin set their own status
 		if ($status_id != '2' && $status_id != '3'  && $this->getStatusID() == '4') {
 			$status_id = '1';
 		}
-
+		*/
 		//	original submitter can always modify his/her items now
 		if (!$this->ArtifactType->userIsAdmin() && ($this->getSubmittedBy() != user_getid())) {
 			$this->setPermissionDeniedError();
@@ -831,7 +833,7 @@ class Artifact extends Error {
 		if ($status_id != 1) {
 			$now=time();
 			$sqlu .= " close_date='$now', ";
-			$this->addHistory('close_date',$this->getCloseDate());
+			$this->addHistory('close_date',$now);
 			$update = true;
 		}
 

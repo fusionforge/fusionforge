@@ -38,7 +38,7 @@ echo $HTML->boxBottom();
 echo $HTML->boxTop('Getting GForge');
 ?>
 <strong>Download:</strong><br />
-<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge3.0b1</a><br />
+<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge3.0</a><br />
 <a href="http://postgresql.org/">PostgreSQL</a><br />
 <a href="http://www.php.net/">PHP 4.x</a><br />
 <a href="http://www.apache.org/">Apache</a><br />

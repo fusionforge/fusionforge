@@ -428,7 +428,8 @@ class ArtifactType extends Error {
 		if (!isset($this->categories_res)) {
 			$sql="select id,category_name 
 				FROM artifact_category 
-				WHERE group_artifact_id='". $this->getID() ."'";
+				WHERE group_artifact_id='". $this->getID() ."'
+				ORDER BY category_name";
 			$this->categories_res=db_query($sql);
 		}
 		return $this->categories_res;
@@ -473,7 +474,8 @@ class ArtifactType extends Error {
 			$sql="SELECT user_id,realname 
 				FROM artifactperm_user_vw
 				WHERE group_artifact_id='". $this->getID() ."' 
-				AND perm_level in (1,2)";
+				AND perm_level in (1,2)
+				ORDER BY realname";
 			$this->technicians_res = db_query($sql);
 		}
 		return $this->technicians_res;

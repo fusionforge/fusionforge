@@ -74,7 +74,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 				.'&amp;package_id='.$package_id
 				.'&amp;release_id='.db_result($res,$i,'release_id').'">'. 
 				db_result($res,$i,'name').' ['.$Language->getText('general','edit').']</a></td><td>'.
-				date('Y-m-d',db_result($res,$i,'release_date')).'</td></tr>';
+				date('Y-m-d H:i',db_result($res,$i,'release_date')).'</td></tr>';
 }
 
 echo $GLOBALS['HTML']->listTableBottom();

@@ -78,12 +78,21 @@ class ArtifactTypeHtml extends ArtifactType {
 		return html_build_select_box ($this->getGroups(),$name,$checked,true,$text_100);
 	}
 
-	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='none') {
+	function technicianBox ($name='assigned_to',$checked='xzxz',$show_100=true,$text_100='none',$extra_id='',$extra_name='') {
 		global $Language;
 		if ($text_100=='none'){
 			$text_100=$Language->getText('tracker_artifacttype','nobody');
 		}
-		return html_build_select_box ($this->getTechnicians(),$name,$checked,$show_100,$text_100);
+		$result = $this->getTechnicians();
+		//	this was a bad hack to allow you to mass-update to unassigned, which is ID=100, which 
+		//	conflicted with the "No Change" ID of 100.
+		$ids =& util_result_column_to_array($result,0);
+		$names =& util_result_column_to_array($result,1);
+		if ($extra_id) {
+			$ids[]=$extra_id;
+			$names[]=$extra_name;
+		}
+		return html_build_select_box_from_arrays ($ids,$names,$name,$checked,$show_100,$text_100);
 	}
 
 	function cannedResponseBox ($name='canned_response',$checked='xzxz') {

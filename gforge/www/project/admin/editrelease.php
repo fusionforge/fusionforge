@@ -177,7 +177,7 @@ project_admin_header(array('title'=>$Language->getText('project_admin_editreleas
 <table border="0" cellpadding="1" cellspacing="1">
 <tr>
 	<td width="10%"><strong><?php echo $Language->getText('project_admin_editrelease','release_date') ?>:<strong></td>
-	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d',$frsr->getReleaseDate()) ?>" size="10" maxlength="10" /></td>
+	<td><input type="text" name="release_date" value="<?php echo date('Y-m-d H:i',$frsr->getReleaseDate()) ?>" size="16" maxlength="16" /></td>
 </tr>
 <tr>
 	<td><strong><?php echo $Language->getText('project_admin_editrelease','release_name') ?>:<strong></td>

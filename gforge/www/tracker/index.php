@@ -111,7 +111,9 @@ if ($group_id && $atid) {
 					$_category_id=(($category_id != 100) ? $category_id : $ah->getCategoryID());
 					$_artifact_group_id=(($artifact_group_id != 100) ? $artifact_group_id : $ah->getArtifactGroupID());
 					$_resolution_id=(($resolution_id != 100) ? $resolution_id : $ah->getResolutionID());
-					$_assigned_to=(($assigned_to != 100) ? $assigned_to : $ah->getAssignedTo());
+					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
+					//conflicts with the "no change" ID! Sorry for messy use of 100.1
+					$_assigned_to=(($assigned_to != '100.1') ? $assigned_to : $ah->getAssignedTo());
 					$_summary=addslashes($ah->getSummary());
 
 					if (!$ah->update($_priority,$_status_id,$_category_id,$_artifact_group_id,$_resolution_id,$_assigned_to,$_summary,$canned_response,'',$artifact_type_id)) {

@@ -151,12 +151,17 @@ if ($art_arr && count($art_arr) > 0) {
 	$then=(time()-$ath->getDuePeriod());
 	$rows=count($art_arr);
 	for ($i=0; $i < $rows; $i++) {
+/*
+	//BAD DESIGN - You don't do subqueries like this - it kills performance.
+	//The proper way is to do it in ArtifactFactory by adding a count(*) and left join to the comments table
+
 		$comment_count = db_numrows($art_arr[$i]->getMessages());
 		if ($comment_count == 0 || $comment_count > 1) {
 			$comment_msg = "$comment_count ".$Language->getText('tracker','comments');
 		} else {
 			$comment_msg = "$comment_count ".$Language->getText('tracker','comment');
 		}
+*/
 		echo '
 		<tr bgcolor="'. html_get_priority_color( $art_arr[$i]->getPriority() ) .'">'.
 		'<td NOWRAP>'.
@@ -169,7 +174,8 @@ if ($art_arr && count($art_arr) > 0) {
 			'&group_id='. $group_id .'&atid='.
 			$ath->getID().'">'.
 			$art_arr[$i]->getSummary() .
-			' ('. $comment_msg . ')</a></td>'.
+	//		' ('. $comment_msg . ')'.
+			'</a></td>'.
 		'<td>'. (($set != 'closed' && $art_arr[$i]->getOpenDate() < $then)?'* ':'&nbsp; ') .
 				date($sys_datefmt,$art_arr[$i]->getOpenDate()) .'</td>'.
 		'<td>'. $art_arr[$i]->getAssignedRealName() .'</td>'.
@@ -256,7 +262,7 @@ if ($art_arr && count($art_arr) > 0) {
 
 			<tr>
 			<td><strong>'.$Language->getText('tracker','assigned_to').': <a href="javascript:help_window(\'/help/tracker.php?helpname=assignee\')"><strong>(?)</strong></a>
-				</strong><br />'. $ath->technicianBox ('assigned_to','xzxz',true,$Language->getText('tracker_browse','no_change')) .'</td>
+				</strong><br />'. $ath->technicianBox ('assigned_to','100.1',true,$Language->getText('tracker_artifacttype','nobody'),'100.1',$Language->getText('tracker_browse','no_change')) .'</td>
 			<td><strong>'.$Language->getText('tracker','status').': <a href="javascript:help_window(\'/help/tracker.php?helpname=status\')"><strong>(?)</strong></a></strong>
 				<br />'. $ath->statusBox ('status_id','xzxz',true,$Language->getText('tracker_browse','no_change')) .'</td>
 			</tr>
