@@ -1,4 +1,4 @@
-gforge (3.1-23+4) unstable; urgency=low
+gforge (3.1-24) unstable; urgency=low
 
   * [Roland] Updated French translations for Debconf templates from
     Christian Perrier and debian-l10n-french (closes: #282676).
@@ -10,7 +10,7 @@ gforge (3.1-23+4) unstable; urgency=low
     fixed a few typos in the English templates (closes: #286283).
   * [Roland] Fixed a few Lintian errors.
 
- -- Roland Mas <lolando@debian.org>  Sun, 19 Dec 2004 14:42:38 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 19 Dec 2004 14:57:28 +0100
 
 gforge (3.1-23) unstable; urgency=low
 
