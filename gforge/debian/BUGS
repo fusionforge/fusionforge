@@ -1,9 +1,6 @@
 -Ldap empty leaves some sourceforge stuff in ldap db (Workaround:
 /usr/lib/sourceforge/install-ldap.sh reset)
 
--We don't check that mcrypt module is loaded in php4.ini (Workaround
-do-it-yourself :-)
-
 -upgrade from 2.5 miss some tables (On the way to be done)
 
 -QRS is broken (Doesn't upload)

@@ -27,7 +27,7 @@ case "$1" in
 	    echo "Include /etc/sourceforge/sf-httpd.conf" >> /etc/apache/httpd.conf.sourceforge-new
 	fi
 
-	# Make sure pgsql,ldap and gd are enabled in the PHP config files
+	# Make sure pgsql,ldap,gd and mcrypt are enabled in the PHP config files
 	cp -a /etc/php4/apache/php.ini /etc/php4/apache/php.ini.sourceforge-new
 	cp -a /etc/php4/cgi/php.ini /etc/php4/cgi/php.ini.sourceforge-new
 	if [ -f /etc/php4/apache/php.ini.sourceforge-new ]; then
@@ -42,6 +42,10 @@ case "$1" in
 	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*ldap.so" /etc/php4/apache/php.ini.sourceforge-new; then
 		echo "Enabling ldap in /etc/php4/apache/php.ini"
 		echo "extension=ldap.so" >> /etc/php4/apache/php.ini.sourceforge-new
+	    fi
+	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*mcrypt.so" /etc/php4/apache/php.ini.sourceforge-new; then
+		echo "Enabling mcrypt in /etc/php4/apache/php.ini"
+		echo "extension=mcrypt.so" >> /etc/php4/apache/php.ini.sourceforge-new
 	    fi
 	fi
 	if [ -f /etc/php4/cgi/php.ini.sourceforge-new ]; then
