@@ -63,7 +63,7 @@ EOF
             # the below could cause issues if gforge's line isnt at the top of the file, but its
 	    # the only way to allow changing of the db_name.
 	    elif grep -q "^host.*password$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		perl -pi -e "s/^host.*password$/host $db_name $db_user $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
+		perl -pi -e "s/^host.*password$/host $db_name $db_user $ip_address 255.255.255.255 password/ unless \$count++" /etc/postgresql/pg_hba.conf.gforge-new
 	    else
 		cur=$(mktemp /tmp/$pattern)
 		echo "### Next line inserted by GForge install" > $cur
