@@ -621,7 +621,7 @@ CREATE TABLE project_dependencies (
     project_depend_id integer DEFAULT nextval('project_dependencies_pk_seq'::text) NOT NULL,
     project_task_id integer DEFAULT 0 NOT NULL,
     is_dependent_on_task_id integer DEFAULT 0 NOT NULL,
-    link_type character(2) DEFAULT 'SS'::bpchar
+    link_type character(2) DEFAULT 'FS'::bpchar
 );
 
 
@@ -737,7 +737,8 @@ CREATE TABLE project_task (
     status_id integer DEFAULT 0 NOT NULL,
     category_id integer,
     duration integer DEFAULT 0,
-    parent_id integer DEFAULT 0
+    parent_id integer DEFAULT 0,
+    last_modified_date integer
 );
 
 
@@ -1151,7 +1152,7 @@ CREATE TABLE user_metric0 (
 
 CREATE TABLE user_preferences (
     user_id integer DEFAULT 0 NOT NULL,
-    preference_name character varying(20),
+    preference_name character varying(20) NOT NULL,
     dead1 character varying(20),
     set_date integer DEFAULT 0 NOT NULL,
     preference_value text
@@ -1210,7 +1211,8 @@ CREATE TABLE users (
     address2 text,
     ccode character(2) DEFAULT 'US'::bpchar,
     theme_id integer,
-    type_id integer DEFAULT 1
+    type_id integer DEFAULT 1,
+    unix_gid integer DEFAULT 0
 );
 
 
@@ -1235,7 +1237,7 @@ CREATE SEQUENCE forum_thread_seq
 
 CREATE TABLE project_sums_agg (
     group_id integer DEFAULT 0 NOT NULL,
-    "type" character(4),
+    "type" character(4) NOT NULL,
     count integer DEFAULT 0 NOT NULL
 );
 
@@ -1448,7 +1450,8 @@ CREATE TABLE artifact (
     open_date integer DEFAULT 0 NOT NULL,
     close_date integer DEFAULT 0 NOT NULL,
     summary text NOT NULL,
-    details text NOT NULL
+    details text NOT NULL,
+    last_modified_date integer
 );
 
 
@@ -1846,7 +1849,7 @@ CREATE TABLE user_metric_history (
 
 
 CREATE TABLE frs_dlstats_filetotal_agg (
-    file_id integer,
+    file_id integer NOT NULL,
     downloads integer
 );
 
@@ -2071,8 +2074,8 @@ CREATE TABLE project_category (
 
 
 CREATE TABLE project_task_artifact (
-    project_task_id integer,
-    artifact_id integer
+    project_task_id integer NOT NULL,
+    artifact_id integer NOT NULL
 );
 
 
@@ -2317,8 +2320,8 @@ CREATE SEQUENCE user_plugin_pk_seq
 
 CREATE TABLE user_plugin (
     user_plugin_id integer DEFAULT nextval('user_plugin_pk_seq'::text) NOT NULL,
-    user_id integer,
-    plugin_id integer
+    user_id integer NOT NULL,
+    plugin_id integer NOT NULL
 );
 
 
@@ -2422,11 +2425,6 @@ CREATE TABLE cron_history (
 
 
 
-CREATE VIEW artifact_vw AS
-    SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name, CASE WHEN (max(artifact_history.entrydate) IS NOT NULL) THEN max(artifact_history.entrydate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::integer END AS update_date, CASE WHEN (max(artifact_message.adddate) IS NOT NULL) THEN max(artifact_message.adddate) WHEN (artifact.open_date IS NOT NULL) THEN artifact.open_date ELSE NULL::integer END AS message_date FROM users u, users u2, artifact_status, artifact_category, artifact_group, artifact_resolution, ((artifact LEFT JOIN artifact_history ON ((artifact.artifact_id = artifact_history.artifact_id))) LEFT JOIN artifact_message ON ((artifact.artifact_id = artifact_message.artifact_id))) WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id)) GROUP BY artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name, u.realname, u.email, u2.user_name, u2.realname, u2.email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name;
-
-
-
 CREATE VIEW forum_group_list_vw AS
     SELECT forum_group_list.group_forum_id, forum_group_list.group_id, forum_group_list.forum_name, forum_group_list.is_public, forum_group_list.description, forum_group_list.allow_anonymous, forum_group_list.send_all_posts_to, forum_agg_msg_count.count AS total, (SELECT max(forum.post_date) AS recent FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id)) AS recent, (SELECT count(*) AS count FROM (SELECT forum.thread_id FROM forum WHERE (forum.group_forum_id = forum_group_list.group_forum_id) GROUP BY forum.thread_id) tmp) AS threads FROM (forum_group_list LEFT JOIN forum_agg_msg_count USING (group_forum_id));
 
@@ -2512,32 +2510,16 @@ CREATE TABLE artifact_extra_field_list (
 
 
 
-CREATE SEQUENCE artifact_group_selection_box_options_id_seq
-    INCREMENT BY 1
-    MAXVALUE 2147483647
-    NO MINVALUE
-    CACHE 1;
-
-
-
 CREATE TABLE artifact_extra_field_elements (
-    element_id integer DEFAULT nextval('"artifact_group_selection_box_options_id_seq"'::text) NOT NULL,
+    element_id integer DEFAULT nextval('artifact_extra_field_elements_element_id_seq'::text) NOT NULL,
     extra_field_id integer NOT NULL,
     element_name text NOT NULL
 );
 
 
 
-CREATE SEQUENCE artifact_extra_field_data_id_seq
-    INCREMENT BY 1
-    MAXVALUE 2147483647
-    NO MINVALUE
-    CACHE 1;
-
-
-
 CREATE TABLE artifact_extra_field_data (
-    data_id integer DEFAULT nextval('"artifact_extra_field_data_id_seq"'::text) NOT NULL,
+    data_id integer DEFAULT nextval('artifact_extra_field_data_data_id_seq'::text) NOT NULL,
     artifact_id integer NOT NULL,
     field_data text,
     extra_field_id integer DEFAULT 0
@@ -2659,31 +2641,6 @@ END;
 
 
 
-CREATE VIEW nss_passwd AS
-    (SELECT (users.unix_uid + 20000) AS uid, (users.unix_uid + 20000) AS gid, users.user_name AS login, users.unix_pw AS passwd, users.realname AS gecos, users.shell, ('/var/lib/gforge/chroot/home/users/'::text || users.user_name) AS homedir FROM users WHERE (users.status = 'A'::bpchar) UNION SELECT (groups.group_id + 50000) AS uid, (groups.group_id + 20000) AS gid, ('anoncvs_'::text || (groups.unix_group_name)::text) AS login, 'x'::bpchar AS passwd, groups.group_name AS gecos, '/bin/false' AS shell, ('/var/lib/gforge/chroot/home/groups'::text || (groups.group_name)::text) AS homedir FROM groups) UNION SELECT 9999 AS uid, 9999 AS gid, 'gforge_scm' AS login, 'x'::bpchar AS passwd, 'Gforge SCM user' AS gecos, '/bin/false' AS shell, '/var/lib/gforge/chroot/home' AS homedir;
-
-
-
-CREATE VIEW nss_shadow AS
-    SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::bpchar AS expired, 'n'::bpchar AS pwchange FROM users WHERE (users.status = 'A'::bpchar);
-
-
-
-CREATE VIEW nss_groups AS
-    SELECT (groups.group_id + 10000) AS gid, groups.unix_group_name AS name, groups.group_name AS descr, 'x'::bpchar AS passwd FROM groups UNION SELECT (users.unix_uid + 20000) AS gid, users.user_name AS name, users.lastname AS descr, 'x'::bpchar AS passwd FROM users;
-
-
-
-CREATE VIEW nss_usergroups AS
-    SELECT (user_group.group_id + 10000) AS gid, (users.unix_uid + 20000) AS uid FROM user_group, users WHERE (user_group.user_id = users.user_id) UNION SELECT (users.unix_uid + 20000) AS gid, (users.unix_uid + 20000) AS uid FROM users;
-
-
-
-CREATE VIEW project_task_vw AS
-    SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_task.duration, project_task.parent_id, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
-
-
-
 CREATE VIEW project_depend_vw AS
     SELECT pt.project_task_id, pd.is_dependent_on_task_id, pd.link_type, pt.end_date, pt.start_date FROM (project_task pt NATURAL JOIN project_dependencies pd);
 
@@ -2697,6 +2654,131 @@ CREATE VIEW project_dependon_vw AS
 CREATE TABLE project_task_external_order (
     project_task_id integer NOT NULL,
     external_id integer NOT NULL
+);
+
+
+
+CREATE TABLE group_join_request (
+    group_id integer NOT NULL,
+    user_id integer NOT NULL,
+    comments text,
+    request_date integer
+);
+
+
+
+CREATE FUNCTION update_last_modified_date() RETURNS "trigger"
+    AS '
+BEGIN
+NEW.last_modified_date = EXTRACT(EPOCH FROM now())::integer;
+RETURN NEW;
+END;
+'
+    LANGUAGE plpgsql;
+
+
+
+CREATE VIEW project_task_vw AS
+    SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_task.duration, project_task.parent_id, project_task.last_modified_date, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
+
+
+
+CREATE VIEW artifact_vw AS
+    SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name, artifact.last_modified_date FROM users u, users u2, artifact_status, artifact_category, artifact_group, artifact_resolution, artifact WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id));
+
+
+
+CREATE TABLE artifact_type_monitor (
+    group_artifact_id integer NOT NULL,
+    user_id integer NOT NULL
+);
+
+
+
+CREATE SEQUENCE artifact_extra_field_elements_element_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE SEQUENCE artifact_extra_field_data_data_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE VIEW nss_passwd AS
+    SELECT users.unix_uid AS uid, users.unix_gid AS gid, users.user_name AS login, users.unix_pw AS passwd, users.realname AS gecos, users.shell, users.user_name AS homedir, users.status FROM users WHERE (users.unix_status = 'A'::bpchar);
+
+
+
+CREATE VIEW nss_shadow AS
+    SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::bpchar AS expired, 'n'::bpchar AS pwchange FROM users WHERE (users.unix_status = 'A'::bpchar);
+
+
+
+CREATE TABLE nss_groups (
+    user_id integer,
+    group_id integer,
+    name character varying(30),
+    gid integer
+);
+
+
+
+CREATE TABLE nss_usergroups (
+    uid integer,
+    gid integer,
+    user_id integer,
+    group_id integer,
+    user_name text,
+    unix_group_name character varying
+);
+
+
+
+CREATE SEQUENCE plugin_cvstracker_artifact_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE plugin_cvstracker_data_artifact (
+    id integer DEFAULT nextval('plugin_cvstracker_artifact_seq'::text) NOT NULL,
+    kind integer DEFAULT 0 NOT NULL,
+    group_artifact_id integer,
+    project_task_id integer
+);
+
+
+
+CREATE SEQUENCE plugin_cvstracker_master_seq
+    START WITH 1
+    INCREMENT BY 1
+    MAXVALUE 2147483647
+    NO MINVALUE
+    CACHE 1;
+
+
+
+CREATE TABLE plugin_cvstracker_data_master (
+    id integer DEFAULT nextval('plugin_cvstracker_master_seq'::text) NOT NULL,
+    holder_id integer NOT NULL,
+    cvs_date date NOT NULL,
+    log_text text DEFAULT ''::text,
+    file text DEFAULT ''::text NOT NULL,
+    prev_version text DEFAULT ''::text,
+    actual_version text DEFAULT ''::text,
+    author text DEFAULT ''::text NOT NULL
 );
 
 
@@ -2935,13 +3017,12 @@ COPY project_metric_tmp1 (ranking, group_id, value) FROM stdin;
 COPY project_status (status_id, status_name) FROM stdin;
 1	Open
 2	Closed
-3	Deleted
 \.
 
 
 
-COPY project_task (project_task_id, group_project_id, summary, details, percent_complete, priority, hours, start_date, end_date, created_by, status_id, category_id, duration, parent_id) FROM stdin;
-1	1			0	0	0	0	0	100	1	100	0	0
+COPY project_task (project_task_id, group_project_id, summary, details, percent_complete, priority, hours, start_date, end_date, created_by, status_id, category_id, duration, parent_id, last_modified_date) FROM stdin;
+1	1			0	0	0	0	0	100	1	100	0	0	1108701981
 \.
 
 
@@ -3383,9 +3464,9 @@ COPY user_ratings (rated_by, user_id, rate_field, rating) FROM stdin;
 
 
 
-COPY users (user_id, user_name, email, user_pw, realname, status, shell, unix_pw, unix_status, unix_uid, unix_box, add_date, confirm_hash, mail_siteupdates, mail_va, authorized_keys, email_new, people_view_skills, people_resume, timezone, "language", block_ratings, jabber_address, jabber_only, address, phone, fax, title, firstname, lastname, address2, ccode, theme_id, type_id) FROM stdin;
-2	noreply				D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N		\N	\N	US	1	1
-100	None	noreply@sourceforge.net	*********34343	Nobody	D	/bin/bash		N	0	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N	Nobody	\N	\N	US	1	1
+COPY users (user_id, user_name, email, user_pw, realname, status, shell, unix_pw, unix_status, unix_uid, unix_box, add_date, confirm_hash, mail_siteupdates, mail_va, authorized_keys, email_new, people_view_skills, people_resume, timezone, "language", block_ratings, jabber_address, jabber_only, address, phone, fax, title, firstname, lastname, address2, ccode, theme_id, type_id, unix_gid) FROM stdin;
+2	noreply				D	/bin/bash		N	20002	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N		\N	\N	US	1	1	20002
+100	None	noreply@sourceforge.net	*********34343	Nobody	D	/bin/bash		N	20100	shell1	0	\N	0	0	\N	\N	0		GMT	1	0	\N	\N	\N	\N	\N	\N	Nobody	\N	\N	US	1	1	20100
 \.
 
 
@@ -3451,12 +3532,11 @@ COPY artifact_group (id, group_artifact_id, group_name) FROM stdin;
 COPY artifact_status (id, status_name) FROM stdin;
 1	Open
 2	Closed
-3	Deleted
 \.
 
 
 
-COPY artifact (artifact_id, group_artifact_id, status_id, category_id, artifact_group_id, resolution_id, priority, submitted_by, assigned_to, open_date, close_date, summary, details) FROM stdin;
+COPY artifact (artifact_id, group_artifact_id, status_id, category_id, artifact_group_id, resolution_id, priority, submitted_by, assigned_to, open_date, close_date, summary, details, last_modified_date) FROM stdin;
 \.
 
 
@@ -3678,6 +3758,7 @@ COPY project_messages (project_message_id, project_task_id, body, posted_by, pos
 COPY plugins (plugin_id, plugin_name, plugin_desc) FROM stdin;
 1	scmcvs	CVS Plugin
 2	scmsvn	SVN Plugin
+3	cvstracker	CVS Tracker Integration
 \.
 
 
@@ -4201,23 +4282,49 @@ COPY project_task_external_order (project_task_id, external_id) FROM stdin;
 
 
 
+COPY group_join_request (group_id, user_id, comments, request_date) FROM stdin;
+\.
+
+
+
+COPY artifact_type_monitor (group_artifact_id, user_id) FROM stdin;
+\.
+
+
+
+COPY nss_groups (user_id, group_id, name, gid) FROM stdin;
+0	2	stats	10002
+0	3	news	10003
+0	4	peerrating	10004
+0	1	gforge	10001
+0	2	scm_stats	50002
+0	3	scm_news	50003
+0	4	scm_peerrating	50004
+0	1	scm_gforge	50001
+\.
+
+
+
+COPY nss_usergroups (uid, gid, user_id, group_id, user_name, unix_group_name) FROM stdin;
+\.
+
+
+
+COPY plugin_cvstracker_data_artifact (id, kind, group_artifact_id, project_task_id) FROM stdin;
+\.
+
+
+
+COPY plugin_cvstracker_data_master (id, holder_id, cvs_date, log_text, file, prev_version, actual_version, author) FROM stdin;
+\.
+
+
+
 CREATE INDEX db_images_group ON db_images USING btree (group_id);
 
 
 
-CREATE INDEX doc_group_doc_group ON doc_data USING btree (doc_group);
-
-
-
 CREATE INDEX doc_groups_group ON doc_groups USING btree (group_id);
-
-
-
-CREATE INDEX filemodule_monitor_id ON filemodule_monitor USING btree (filemodule_id);
-
-
-
-CREATE INDEX filemodulemonitor_userid ON filemodule_monitor USING btree (user_id);
 
 
 
@@ -4242,18 +4349,6 @@ CREATE INDEX forum_forumid_isfollto_mostrece ON forum USING btree (group_forum_i
 
 
 CREATE INDEX forum_group_list_group_id ON forum_group_list USING btree (group_id);
-
-
-
-CREATE INDEX forummonitoredforums_user ON forum_monitored_forums USING btree (user_id);
-
-
-
-CREATE INDEX forum_monitor_combo_id ON forum_monitored_forums USING btree (forum_id, user_id);
-
-
-
-CREATE INDEX forum_monitor_thread_id ON forum_monitored_forums USING btree (forum_id);
 
 
 
@@ -4321,22 +4416,6 @@ CREATE INDEX people_job_group_id ON people_job USING btree (group_id);
 
 
 
-CREATE INDEX project_assigned_to_assigned_to ON project_assigned_to USING btree (assigned_to_id);
-
-
-
-CREATE INDEX project_assigned_to_task_id ON project_assigned_to USING btree (project_task_id);
-
-
-
-CREATE INDEX project_is_dependent_on_task_id ON project_dependencies USING btree (is_dependent_on_task_id);
-
-
-
-CREATE INDEX project_dependencies_task_id ON project_dependencies USING btree (project_task_id);
-
-
-
 CREATE INDEX project_group_list_group_id ON project_group_list USING btree (group_id);
 
 
@@ -4350,10 +4429,6 @@ CREATE INDEX project_metric_group ON project_metric USING btree (group_id);
 
 
 CREATE INDEX projecttask_projid_status ON project_task USING btree (group_project_id, status_id);
-
-
-
-CREATE INDEX project_task_group_project_id ON project_task USING btree (group_project_id);
 
 
 
@@ -4429,10 +4504,6 @@ CREATE INDEX survey_responses_user_survey_qu ON survey_responses USING btree (us
 
 
 
-CREATE INDEX survey_responses_user_survey ON survey_responses USING btree (user_id, survey_id);
-
-
-
 CREATE INDEX survey_responses_survey_questio ON survey_responses USING btree (survey_id, question_id);
 
 
@@ -4441,31 +4512,7 @@ CREATE INDEX surveys_group ON surveys USING btree (group_id);
 
 
 
-CREATE INDEX parent_idx ON trove_cat USING btree (parent);
-
-
-
-CREATE INDEX root_parent_idx ON trove_cat USING btree (root_parent);
-
-
-
-CREATE INDEX version_idx ON trove_cat USING btree ("version");
-
-
-
-CREATE INDEX trove_group_link_group_id ON trove_group_link USING btree (group_id);
-
-
-
-CREATE INDEX trove_group_link_cat_id ON trove_group_link USING btree (trove_cat_id);
-
-
-
 CREATE INDEX user_bookmark_user_id ON user_bookmarks USING btree (user_id);
-
-
-
-CREATE INDEX user_diary_user ON user_diary USING btree (user_id);
 
 
 
@@ -4473,51 +4520,7 @@ CREATE INDEX user_diary_user_date ON user_diary USING btree (user_id, date_poste
 
 
 
-CREATE INDEX user_diary_date ON user_diary USING btree (date_posted);
-
-
-
-CREATE INDEX user_diary_monitor_user ON user_diary_monitor USING btree (user_id);
-
-
-
-CREATE INDEX user_diary_monitor_monitored_us ON user_diary_monitor USING btree (monitored_user);
-
-
-
-CREATE INDEX user_group_group_id ON user_group USING btree (group_id);
-
-
-
-CREATE INDEX project_flags_idx ON user_group USING btree (project_flags);
-
-
-
-CREATE INDEX user_group_user_id ON user_group USING btree (user_id);
-
-
-
-CREATE INDEX admin_flags_idx ON user_group USING btree (admin_flags);
-
-
-
-CREATE INDEX forum_flags_idx ON user_group USING btree (forum_flags);
-
-
-
-CREATE UNIQUE INDEX usergroup_uniq_groupid_userid ON user_group USING btree (group_id, user_id);
-
-
-
 CREATE INDEX user_metric0_user_id ON user_metric0 USING btree (user_id);
-
-
-
-CREATE INDEX user_pref_user_id ON user_preferences USING btree (user_id);
-
-
-
-CREATE INDEX user_ratings_rated_by ON user_ratings USING btree (rated_by);
 
 
 
@@ -4530,14 +4533,6 @@ CREATE UNIQUE INDEX users_namename_uniq ON users USING btree (user_name);
 
 
 CREATE INDEX users_status ON users USING btree (status);
-
-
-
-CREATE INDEX users_user_pw ON users USING btree (user_pw);
-
-
-
-CREATE INDEX projectsumsagg_groupid ON project_sums_agg USING btree (group_id);
 
 
 
@@ -4562,10 +4557,6 @@ CREATE INDEX artgrouplist_groupid_public ON artifact_group_list USING btree (gro
 
 
 CREATE UNIQUE INDEX artperm_groupartifactid_userid ON artifact_perm USING btree (group_artifact_id, user_id);
-
-
-
-CREATE INDEX artperm_groupartifactid ON artifact_perm USING btree (group_artifact_id);
 
 
 
@@ -4605,15 +4596,7 @@ CREATE INDEX art_groupartid_artifactid ON artifact USING btree (group_artifact_i
 
 
 
-CREATE INDEX arthistory_artid ON artifact_history USING btree (artifact_id);
-
-
-
 CREATE INDEX arthistory_artid_entrydate ON artifact_history USING btree (artifact_id, entrydate);
-
-
-
-CREATE INDEX artfile_artid ON artifact_file USING btree (artifact_id);
 
 
 
@@ -4621,23 +4604,11 @@ CREATE INDEX artfile_artid_adddate ON artifact_file USING btree (artifact_id, ad
 
 
 
-CREATE INDEX artmessage_artid ON artifact_message USING btree (artifact_id);
-
-
-
 CREATE INDEX artmessage_artid_adddate ON artifact_message USING btree (artifact_id, adddate);
 
 
 
-CREATE INDEX artmonitor_artifactid ON artifact_monitor USING btree (artifact_id);
-
-
-
 CREATE INDEX artifactcannedresponses_groupid ON artifact_canned_responses USING btree (group_artifact_id);
-
-
-
-CREATE INDEX artifactcountsagg_groupartid ON artifact_counts_agg USING btree (group_artifact_id);
 
 
 
@@ -4713,14 +4684,6 @@ CREATE UNIQUE INDEX statssite_month_day ON stats_site USING btree ("month", "day
 
 
 
-CREATE INDEX user_metric_history_date_userid ON user_metric_history USING btree ("month", "day", user_id);
-
-
-
-CREATE INDEX frsdlfiletotal_fileid ON frs_dlstats_filetotal_agg USING btree (file_id);
-
-
-
 CREATE INDEX statsprojectmonths_groupid ON stats_project_months USING btree (group_id);
 
 
@@ -4733,15 +4696,7 @@ CREATE INDEX statssitemonths_month ON stats_site_months USING btree ("month");
 
 
 
-CREATE INDEX troveagg_trovecatid ON trove_agg USING btree (trove_cat_id);
-
-
-
 CREATE INDEX troveagg_trovecatid_ranking ON trove_agg USING btree (trove_cat_id, ranking);
-
-
-
-CREATE UNIQUE INDEX group_cvs_history_id_key ON group_cvs_history USING btree (id);
 
 
 
@@ -4753,23 +4708,11 @@ CREATE UNIQUE INDEX themes_theme_id_key ON themes USING btree (theme_id);
 
 
 
-CREATE UNIQUE INDEX supported_langu_language_id_key ON supported_languages USING btree (language_id);
-
-
-
 CREATE UNIQUE INDEX project_categor_category_id_key ON project_category USING btree (category_id);
 
 
 
 CREATE INDEX projectcategory_groupprojectid ON project_category USING btree (group_project_id);
-
-
-
-CREATE INDEX projecttaskartifact_projecttask ON project_task_artifact USING btree (project_task_id);
-
-
-
-CREATE INDEX projecttaskartifact_artifactid ON project_task_artifact USING btree (artifact_id);
 
 
 
@@ -4805,19 +4748,95 @@ CREATE UNIQUE INDEX role_groupidroleid ON role USING btree (group_id, role_id);
 
 
 
-CREATE UNIQUE INDEX projectperm_groupprojiduserid ON project_perm USING btree (group_project_id, user_id);
+CREATE INDEX artifactextrafldlmts_extrafieldid ON artifact_extra_field_elements USING btree (extra_field_id);
 
 
 
-CREATE UNIQUE INDEX forumperm_groupforumiduserid ON forum_perm USING btree (group_forum_id, user_id);
+CREATE INDEX artifactextrafielddata_artifactid ON artifact_extra_field_data USING btree (artifact_id);
 
 
 
-CREATE INDEX rolesetting_roleidsectionid ON role_setting USING btree (role_id, section_name);
+CREATE INDEX artifactextrafieldlist_groupartid ON artifact_extra_field_list USING btree (group_artifact_id);
 
 
 
-CREATE INDEX projecttaskexternal_projtaskid ON project_task_external_order USING btree (project_task_id, external_id);
+CREATE INDEX artmonitor_useridartid ON artifact_monitor USING btree (user_id, artifact_id);
+
+
+
+CREATE INDEX cronhist_jobrundate ON cron_history USING btree (job, rundate);
+
+
+
+CREATE INDEX filemodulemonitor_useridfilemoduleid ON filemodule_monitor USING btree (user_id, filemodule_id);
+
+
+
+CREATE INDEX forummonitoredforums_useridforumid ON forum_monitored_forums USING btree (user_id, forum_id);
+
+
+
+CREATE INDEX groupplugin_groupid ON group_plugin USING btree (group_id);
+
+
+
+CREATE INDEX prdbdbs_groupid ON prdb_dbs USING btree (group_id);
+
+
+
+CREATE INDEX prdbstates_stateid ON prdb_states USING btree (stateid);
+
+
+
+CREATE INDEX projectassigned_assignedtotaskid ON project_assigned_to USING btree (assigned_to_id, project_task_id);
+
+
+
+CREATE INDEX projectdep_isdepon_projtaskid ON project_dependencies USING btree (is_dependent_on_task_id, project_task_id);
+
+
+
+CREATE INDEX projectmsgs_projtaskidpostdate ON project_messages USING btree (project_task_id, postdate);
+
+
+
+CREATE INDEX projectperm_useridgroupprojid ON project_perm USING btree (user_id, group_project_id);
+
+
+
+CREATE INDEX projecttaskartifact_artidprojtaskid ON project_task_artifact USING btree (artifact_id, project_task_id);
+
+
+
+CREATE UNIQUE INDEX supportedlanguage_code ON supported_languages USING btree (language_code);
+
+
+
+CREATE INDEX trovecat_parentid ON trove_cat USING btree (parent);
+
+
+
+CREATE INDEX trovegrouplink_groupidcatid ON trove_group_link USING btree (group_id, trove_cat_id);
+
+
+
+CREATE INDEX userdiarymon_useridmonitoredid ON user_diary_monitor USING btree (user_id, monitored_user);
+
+
+
+CREATE INDEX usergroup_useridgroupid ON user_group USING btree (user_id, group_id);
+
+
+
+CREATE UNIQUE INDEX usermetric_userid ON user_metric USING btree (user_id);
+
+
+
+CREATE INDEX usermetrichistory_useridmonthday ON user_metric_history USING btree (user_id, "month", "day");
+
+
+
+CREATE INDEX plugin_cvstracker_group_artifact_id ON plugin_cvstracker_data_artifact USING btree (group_artifact_id);
 
 
 
@@ -4846,11 +4865,6 @@ ALTER TABLE ONLY doc_states
 
 
 
-ALTER TABLE ONLY filemodule_monitor
-    ADD CONSTRAINT filemodule_monitor_pkey PRIMARY KEY (id);
-
-
-
 ALTER TABLE ONLY forum
     ADD CONSTRAINT forum_pkey PRIMARY KEY (msg_id);
 
@@ -4863,16 +4877,6 @@ ALTER TABLE ONLY forum_agg_msg_count
 
 ALTER TABLE ONLY forum_group_list
     ADD CONSTRAINT forum_group_list_pkey PRIMARY KEY (group_forum_id);
-
-
-
-ALTER TABLE ONLY forum_monitored_forums
-    ADD CONSTRAINT forum_monitored_forums_pkey PRIMARY KEY (monitor_id);
-
-
-
-ALTER TABLE ONLY forum_saved_place
-    ADD CONSTRAINT forum_saved_place_pkey PRIMARY KEY (saved_place_id);
 
 
 
@@ -4966,16 +4970,6 @@ ALTER TABLE ONLY people_skill_year
 
 
 
-ALTER TABLE ONLY project_assigned_to
-    ADD CONSTRAINT project_assigned_to_pkey PRIMARY KEY (project_assigned_id);
-
-
-
-ALTER TABLE ONLY project_dependencies
-    ADD CONSTRAINT project_dependencies_pkey PRIMARY KEY (project_depend_id);
-
-
-
 ALTER TABLE ONLY project_group_list
     ADD CONSTRAINT project_group_list_pkey PRIMARY KEY (group_project_id);
 
@@ -5056,11 +5050,6 @@ ALTER TABLE ONLY trove_cat
 
 
 
-ALTER TABLE ONLY trove_group_link
-    ADD CONSTRAINT trove_group_link_pkey PRIMARY KEY (trove_group_id);
-
-
-
 ALTER TABLE ONLY user_bookmarks
     ADD CONSTRAINT user_bookmarks_pkey PRIMARY KEY (bookmark_id);
 
@@ -5068,16 +5057,6 @@ ALTER TABLE ONLY user_bookmarks
 
 ALTER TABLE ONLY user_diary
     ADD CONSTRAINT user_diary_pkey PRIMARY KEY (id);
-
-
-
-ALTER TABLE ONLY user_diary_monitor
-    ADD CONSTRAINT user_diary_monitor_pkey PRIMARY KEY (monitor_id);
-
-
-
-ALTER TABLE ONLY user_group
-    ADD CONSTRAINT user_group_pkey PRIMARY KEY (user_group_id);
 
 
 
@@ -5161,11 +5140,6 @@ ALTER TABLE ONLY artifact_message
 
 
 
-ALTER TABLE ONLY artifact_monitor
-    ADD CONSTRAINT artifact_monitor_pkey PRIMARY KEY (id);
-
-
-
 ALTER TABLE ONLY artifact_canned_responses
     ADD CONSTRAINT artifact_canned_responses_pkey PRIMARY KEY (id);
 
@@ -5173,11 +5147,6 @@ ALTER TABLE ONLY artifact_canned_responses
 
 ALTER TABLE ONLY massmail_queue
     ADD CONSTRAINT massmail_queue_pkey PRIMARY KEY (id);
-
-
-
-ALTER TABLE ONLY trove_treesums
-    ADD CONSTRAINT trove_treesums_pkey PRIMARY KEY (trove_treesums_id);
 
 
 
@@ -5206,18 +5175,8 @@ ALTER TABLE ONLY group_plugin
 
 
 
-ALTER TABLE ONLY user_plugin
-    ADD CONSTRAINT user_plugin_pkey PRIMARY KEY (user_plugin_id);
-
-
-
 ALTER TABLE ONLY country_code
     ADD CONSTRAINT country_code_pkey PRIMARY KEY (ccode);
-
-
-
-ALTER TABLE ONLY licenses
-    ADD CONSTRAINT licenses_license_id_key UNIQUE (license_id);
 
 
 
@@ -5226,38 +5185,163 @@ ALTER TABLE ONLY user_type
 
 
 
-ALTER TABLE ONLY role
-    ADD CONSTRAINT role_role_id_key UNIQUE (role_id);
-
-
-
-ALTER TABLE ONLY project_perm
-    ADD CONSTRAINT project_perm_id_key UNIQUE (id);
-
-
-
-ALTER TABLE ONLY forum_perm
-    ADD CONSTRAINT forum_perm_id_key UNIQUE (id);
-
-
-
-ALTER TABLE ONLY artifact_extra_field_list
-    ADD CONSTRAINT artifact_group_selection_box_list_pkey PRIMARY KEY (extra_field_id);
-
-
-
-ALTER TABLE ONLY artifact_extra_field_elements
-    ADD CONSTRAINT artifact_group_selection_box_options_pkey PRIMARY KEY (element_id);
-
-
-
 ALTER TABLE ONLY artifact_extra_field_data
     ADD CONSTRAINT artifact_extra_field_data_pkey PRIMARY KEY (data_id);
 
 
 
-ALTER TABLE ONLY groups
-    ADD CONSTRAINT groups_license FOREIGN KEY (license) REFERENCES licenses(license_id) MATCH FULL;
+ALTER TABLE ONLY group_join_request
+    ADD CONSTRAINT group_join_request_pkey PRIMARY KEY (group_id, user_id);
+
+
+
+ALTER TABLE ONLY artifact_type_monitor
+    ADD CONSTRAINT artifact_type_monitor_pkey PRIMARY KEY (group_artifact_id, user_id);
+
+
+
+ALTER TABLE ONLY artifact_counts_agg
+    ADD CONSTRAINT artifact_counts_agg_pkey PRIMARY KEY (group_artifact_id);
+
+
+
+ALTER TABLE ONLY artifact_extra_field_elements
+    ADD CONSTRAINT artifact_extra_field_elements_pkey PRIMARY KEY (element_id);
+
+
+
+ALTER TABLE ONLY artifact_extra_field_list
+    ADD CONSTRAINT artifact_extra_field_list_pkey PRIMARY KEY (extra_field_id);
+
+
+
+ALTER TABLE ONLY artifact_monitor
+    ADD CONSTRAINT artifact_monitor_pkey PRIMARY KEY (artifact_id, user_id);
+
+
+
+ALTER TABLE ONLY filemodule_monitor
+    ADD CONSTRAINT filemodule_monitor_pkey PRIMARY KEY (filemodule_id, user_id);
+
+
+
+ALTER TABLE ONLY forum_monitored_forums
+    ADD CONSTRAINT forum_monitored_forums_pkey PRIMARY KEY (forum_id, user_id);
+
+
+
+ALTER TABLE ONLY forum_perm
+    ADD CONSTRAINT forum_perm_pkey PRIMARY KEY (group_forum_id, user_id);
+
+
+
+ALTER TABLE ONLY forum_saved_place
+    ADD CONSTRAINT forum_saved_place_pkey PRIMARY KEY (user_id, forum_id);
+
+
+
+ALTER TABLE ONLY frs_dlstats_filetotal_agg
+    ADD CONSTRAINT frs_dlstats_filetotal_agg_pkey PRIMARY KEY (file_id);
+
+
+
+ALTER TABLE ONLY licenses
+    ADD CONSTRAINT licenses_pkey PRIMARY KEY (license_id);
+
+
+
+ALTER TABLE ONLY project_assigned_to
+    ADD CONSTRAINT project_assigned_to_pkey PRIMARY KEY (project_task_id, assigned_to_id);
+
+
+
+ALTER TABLE ONLY project_counts_agg
+    ADD CONSTRAINT project_counts_agg_pkey PRIMARY KEY (group_project_id);
+
+
+
+ALTER TABLE ONLY project_dependencies
+    ADD CONSTRAINT project_dependencies_pkey PRIMARY KEY (project_task_id, is_dependent_on_task_id);
+
+
+
+ALTER TABLE ONLY project_perm
+    ADD CONSTRAINT project_perm_id_key PRIMARY KEY (group_project_id, user_id);
+
+
+
+ALTER TABLE ONLY project_sums_agg
+    ADD CONSTRAINT project_sums_agg_pkey PRIMARY KEY (group_id, "type");
+
+
+
+ALTER TABLE ONLY project_task_artifact
+    ADD CONSTRAINT project_task_artifact_pkey PRIMARY KEY (project_task_id, artifact_id);
+
+
+
+ALTER TABLE ONLY project_task_external_order
+    ADD CONSTRAINT project_task_external_order_pkey PRIMARY KEY (project_task_id);
+
+
+
+ALTER TABLE ONLY role
+    ADD CONSTRAINT role_role_id_pkey PRIMARY KEY (role_id);
+
+
+
+ALTER TABLE ONLY role_setting
+    ADD CONSTRAINT role_setting_pkey PRIMARY KEY (role_id, section_name, ref_id);
+
+
+
+ALTER TABLE ONLY trove_group_link
+    ADD CONSTRAINT trove_group_link_pkey PRIMARY KEY (trove_cat_id, group_id, trove_cat_version);
+
+
+
+ALTER TABLE ONLY trove_treesums
+    ADD CONSTRAINT trove_treesums_pkey PRIMARY KEY (trove_cat_id);
+
+
+
+ALTER TABLE ONLY user_diary_monitor
+    ADD CONSTRAINT user_diary_monitor_pkey PRIMARY KEY (monitored_user, user_id);
+
+
+
+ALTER TABLE ONLY user_group
+    ADD CONSTRAINT user_group_pkey PRIMARY KEY (group_id, user_id);
+
+
+
+ALTER TABLE ONLY user_metric_history
+    ADD CONSTRAINT user_metric_history_pkey PRIMARY KEY ("month", "day", user_id);
+
+
+
+ALTER TABLE ONLY user_plugin
+    ADD CONSTRAINT user_plugin_pkey PRIMARY KEY (user_id, plugin_id);
+
+
+
+ALTER TABLE ONLY user_preferences
+    ADD CONSTRAINT user_preferences_pkey PRIMARY KEY (user_id, preference_name);
+
+
+
+ALTER TABLE ONLY user_ratings
+    ADD CONSTRAINT user_ratings_pkey PRIMARY KEY (rated_by, user_id, rate_field);
+
+
+
+ALTER TABLE ONLY plugin_cvstracker_data_artifact
+    ADD CONSTRAINT plugin_cvstracker_artifact_pkey PRIMARY KEY (id);
+
+
+
+ALTER TABLE ONLY plugin_cvstracker_data_master
+    ADD CONSTRAINT plugin_cvstracker_master_pkey PRIMARY KEY (id);
 
 
 
@@ -5291,8 +5375,28 @@ ALTER TABLE ONLY forum_perm
 
 
 
-ALTER TABLE ONLY role_setting
-    ADD CONSTRAINT "$1" FOREIGN KEY (role_id) REFERENCES role(role_id) ON DELETE CASCADE;
+ALTER TABLE ONLY project_task_external_order
+    ADD CONSTRAINT "$1" FOREIGN KEY (project_task_id) REFERENCES project_task(project_task_id) MATCH FULL ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY group_join_request
+    ADD CONSTRAINT "$1" FOREIGN KEY (group_id) REFERENCES groups(group_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY group_join_request
+    ADD CONSTRAINT "$2" FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+
+
+ALTER TABLE ONLY artifact_type_monitor
+    ADD CONSTRAINT "$1" FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY artifact_type_monitor
+    ADD CONSTRAINT "$2" FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 
 
@@ -5301,8 +5405,18 @@ ALTER TABLE ONLY user_group
 
 
 
-ALTER TABLE ONLY project_task_external_order
-    ADD CONSTRAINT "$1" FOREIGN KEY (project_task_id) REFERENCES project_task(project_task_id) MATCH FULL ON DELETE CASCADE;
+ALTER TABLE ONLY role_setting
+    ADD CONSTRAINT rolesetting_roleroleid FOREIGN KEY (role_id) REFERENCES role(role_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY plugin_cvstracker_data_master
+    ADD CONSTRAINT "$1" FOREIGN KEY (holder_id) REFERENCES plugin_cvstracker_data_artifact(id);
+
+
+
+ALTER TABLE ONLY plugin_cvstracker_data_master
+    ADD CONSTRAINT "$2" FOREIGN KEY (author) REFERENCES users(user_name);
 
 
 
@@ -7343,6 +7457,20 @@ CREATE TRIGGER projectgroup_update_trig
 
 
 
+CREATE TRIGGER artifact_update_last_modified_date
+    BEFORE INSERT OR UPDATE ON artifact
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_last_modified_date();
+
+
+
+CREATE TRIGGER project_task_update_last_modified_date
+    BEFORE INSERT OR UPDATE ON project_task
+    FOR EACH ROW
+    EXECUTE PROCEDURE update_last_modified_date();
+
+
+
 CREATE RULE forum_insert_agg AS ON INSERT TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count + 1) WHERE (forum_agg_msg_count.group_forum_id = new.group_forum_id);
 
 
@@ -7695,7 +7823,7 @@ SELECT pg_catalog.setval('project_messa_project_messa_seq', 1, false);
 
 
 
-SELECT pg_catalog.setval('plugins_pk_seq', 2, true);
+SELECT pg_catalog.setval('plugins_pk_seq', 3, true);
 
 
 
@@ -7731,11 +7859,19 @@ SELECT pg_catalog.setval('artifact_group_selection_box_list_id_seq', 100, true);
 
 
 
-SELECT pg_catalog.setval('artifact_group_selection_box_options_id_seq', 100, true);
+SELECT pg_catalog.setval('artifact_extra_field_elements_element_id_seq', 1, false);
 
 
 
-SELECT pg_catalog.setval('artifact_extra_field_data_id_seq', 100, true);
+SELECT pg_catalog.setval('artifact_extra_field_data_data_id_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('plugin_cvstracker_artifact_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('plugin_cvstracker_master_seq', 1, false);
 
 
 
