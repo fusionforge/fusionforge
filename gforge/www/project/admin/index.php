@@ -90,7 +90,7 @@ Group shell (SSH) server: <b><?php echo $group->getUnixName().'.'.$GLOBALS['sys_
 <p>
 Group directory on shell server: <b><?php echo account_group_homedir($group->getUnixName()); ?>
 <p>
-Project WWW directory on shell server <a href="/docman/display_doc.php?docid=774&group_id=1">(how to upload)</a>:
+Project WWW directory on shell server:
 <b><?php echo account_group_homedir($group->getUnixName()).'/htdocs'; ?>
 
 <P align=center>
@@ -109,8 +109,7 @@ Project WWW directory on shell server <a href="/docman/display_doc.php?docid=774
 <p>
 <font size=-1>
 If you use <?php echo $GLOBALS['sys_name']; ?> services, we ask you to display our logo
-on project homepage, as explained
-<a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/docman/display_doc.php?docid=790&group_id=1">here
+on your project homepage.
 </a>
 </font>
 </p>

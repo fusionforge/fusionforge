@@ -66,10 +66,8 @@ HTML Exports
 </h3>
 <p>
 While XML data allows for arbitrary processing and formatting, many
-projects will find ready-to-use
-<a href="http://<?php echo $GLOBALS['sys_default_domain']; ?>/docman/display_doc.php?docid=1502&group_id=1">
-HTML exports</a> suitable for
-their needs.
+projects will find ready-to-use HTML exports suitable for their needs.
+For details, check <a href="http://sourceforge.net/docman/display_doc.php?docid=1502&group_id=1">this</a> out.
 </p>
 
 

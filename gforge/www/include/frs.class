@@ -837,7 +837,7 @@ class FRS extends Error {
 				."<http://$GLOBALS[HTTP_HOST]/project/filemodule_monitor.php?filemodule_id=$package_id> "
 				."\nIf you lost your ".$GLOBALS['sys_name']." login name or password, refer to "
 				."this document: "
-				."<http://$GLOBALS[HTTP_HOST]/docman/display_doc.php?docid=760&group_id=1> "
+				."<http://$GLOBALS[HTTP_HOST]/account/lostpw.php> "
 				."\n\nNote that you may receive this message indirectly via one of "
 				."your mailing list subscriptions. Please review message headers "
 				."before reporting unsolicited mailings."
