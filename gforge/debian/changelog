@@ -2,8 +2,10 @@ gforge (3.0-2+) unstable; urgency=low
 
   * [Roland] Make sure the $gforge_base_dn and ou=People,$gforge_base_dn
     records exist before we try to insert sub-trees/records in them.
+  * [Christian] Corrected my stupid error in ldap.php that made a warning 
+    on changing ldap protocol version
 
- -- Roland Mas <lolando@debian.org>  Wed,  9 Jul 2003 16:55:25 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu, 17 Jul 2003 02:06:21 +0200
 
 gforge (3.0-2) unstable; urgency=low
 
