@@ -165,7 +165,7 @@ function show_highest_ranked_projects() {
 		return $Language->getText('home','no_stats_available')." ".db_error();
 	} else {
 		while ($row=db_fetch_array($result)) {
-			$return .= '<strong>( '.$row['percentile'].'% )</strong>'
+			$return .= '<strong>( '.substr($row['percentile'],0,5).'% )</strong>'
 				.' <a href="/projects/'.$row['unix_group_name'].
 			'/">'.$row['group_name'].'</a><br />';
 		}
