@@ -7,23 +7,28 @@
 	%define hostname localhost
 %endif
 %if %{?sitename:0}%{!?sitename:1}
-	%define sitename MyGForge
+	%define sitename MyForge
+%endif
+%{!?release:%define release 1}
+
+%if %{?dist:0}%{!?dist:1}
+	%define dist fc
 %endif
 
 %define httpduser		apache
 %define gfuser			gforge
 %define gfgroup			gforge
 
-%{!?release:%define release 1}
-
 Summary: GForge Collaborative Development Environment
 Name: gforge
-Version: 4.0.2
+Version: 4.1
 Release: %{release}
 BuildArch: noarch
 License: GPL
 Group: Development/Tools
 Source0: %{name}-%{version}.tar.bz2
+URL: http://www.gforge.org/
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
 
 Patch1000: gforge-4.0-deb_rpm.patch
 
@@ -31,10 +36,19 @@ AutoReqProv: off
 Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-DBD-Pg, perl-HTML-Parser
 Requires: httpd
-Requires: php, php-mbstring, php-pgsql
+Requires: php, php-pgsql
+
+# Distribution specific (fc = Fedora Core - rh9 = Red Hat Linux 9 - el3 = Red Hat Enterprise Linux 3 or CentOS 3)
+%if "%{dist}" == "fc" 
+Requires: php-mbstring
+%endif
+%if "%{dist}" == "el3"
+Requires: rh-postgresql, rh-postgresql-server
+	%define postgresqlservice rhdb
+%else
 Requires: postgresql, postgresql-server
-URL: http://www.gforge.org/
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
+	%define postgresqlservice postgresql
+%endif
 
 %description
 GForge is a web-based Collaborative Development Environment offering
@@ -47,6 +61,9 @@ web-based administration.
 
 # Change password for admin user
 %define changepassword() echo "UPDATE users SET user_pw='%1' WHERE user_name='admin'" | su -l postgres -s /bin/sh -c "psql %dbname" >/dev/null 2>&1
+
+# Start the postgresql service if needed
+%define startpostgresql() service %postgresqlservice status | grep '(pid' >/dev/null 2>&1 || service %postgresqlservice start
 
 %prep
 %setup
@@ -103,7 +120,7 @@ mkdir -p $GFORGE_CONF_DIR
 install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
 install -m 750 rpm-specific/scripts/refresh.sh $GFORGE_CONF_DIR/
 mkdir -p $GFORGE_CONF_DIR/languages-local
-if [ -f rpm-specific/languages/*.tab ]; then
+if [ ls rpm-specific/languages/*.tab &> /dev/null ]; then
 	cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
 fi
 cp -rp rpm-specific/custom $GFORGE_CONF_DIR
@@ -113,6 +130,15 @@ mkdir -p $CROND_DIR
 install -m 664 rpm-specific/cron.d/gforge $CROND_DIR/
 
 %pre
+%startpostgresql
+if su -l postgres -s /bin/sh -c 'psql template1 -c "SHOW tcpip_socket;"' | grep " off" &> /dev/null; then
+	echo "###"
+	echo "# You should set tcpip_socket=true in your /var/lib/pgsql/data/postgresql.conf"
+	echo "# before installing GForge and restart PostgreSQL."
+	echo "# Then you should be able to install GForge RPM."
+	echo "###"
+	exit 1
+fi
 if ! id -u %gfuser >/dev/null 2>&1; then
 	groupadd -r %{gfgroup}
 	useradd -r -g %{gfgroup} -d %{_datadir}/gforge -s /bin/bash -c "GForge User" %{gfuser}
@@ -121,7 +147,7 @@ fi
 %post
 if [ "$1" -eq "1" ]; then
 	# creating the database
-	service postgresql status | grep '(pid' >/dev/null 2>&1 || service postgresql start
+	%startpostgresql
 	su -l postgres -s /bin/sh -c "createdb -E UNICODE %{dbname} >/dev/null 2>&1"
 	su -l postgres -s /bin/sh -c "createlang plpgsql %{dbname} >/dev/null 2>&1"
 
@@ -136,11 +162,15 @@ if [ "$1" -eq "1" ]; then
 	%randstr GFORGEDATABASE_PASSWORD 8
 
 	su -l postgres -c "psql -c \"CREATE USER %{dbuser} WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
+	su -l postgres -c "psql -c \"CREATE USER gforge_nss WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
+	su -l postgres -c "psql -c \"CREATE USER gforge_mta WITH PASSWORD '$GFORGEDATABASE_PASSWORD' NOCREATEUSER\" %{dbname} >/dev/null 2>&1"
 	
 	# updating PostgreSQL configuration
 	if ! grep -i '^ *host.*%{dbname}.*' /var/lib/pgsql/data/pg_hba.conf >/dev/null 2>&1; then
 		echo 'host %{dbname} %{dbuser} 127.0.0.1 255.255.255.255 md5' >> /var/lib/pgsql/data/pg_hba.conf
-		service postgresql reload
+		echo 'local %{dbname} gforge_nss md5' >> /var/lib/pgsql/data/pg_hba.conf
+		echo 'local %{dbname} gforge_mta md5' >> /var/lib/pgsql/data/pg_hba.conf
+		service %postgresqlservice reload
 	fi
 
 	# adding "noreply" alias
@@ -187,8 +217,8 @@ fi
 
 %postun
 if [ "$1" -eq "0" ]; then
-	# dropping gforge database
-	#su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropdb %{dbname} >/dev/null 2>&1"
+	# dropping gforge users
+	su -l postgres -s /bin/sh -c "dropuser %{dbuser} >/dev/null 2>&1 ; dropuser gforge_nss >/dev/null 2>&1 ; dropuser gforge_mta >/dev/null 2>&1"
 	
 	for file in siteadmin.pass local.pl httpd.secrets local.inc httpd.conf httpd.vhosts database.inc ; do
 		rm -f %{_sysconfdir}/gforge/$file
@@ -225,8 +255,24 @@ fi
 /var/lib/gforge/scmtarballs
 
 %changelog
+* Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
+- 4.1
+- forced the vhost on port 80
+- modified the db-upgrade.pl patch to keep nss stuff
+- detects if tcpip_socket is set to true before installing the RPM
+- fixed dependencies problem for RH9 and RHEL3
+- creates gforge_nss and gforge_mta postgresql users
+- drops created postgresql users on uninstall
+- replaced -f test with ls
+* Fri Jan 28 2005 Thales Information Systems <guillaume.smet@openwide.fr>
+- fixed default values for release, sitename and hostname
+- fixed remaining issues on upgrade
 * Thu Jan 27 2005 Thales Information Systems <guillaume.smet@openwide.fr>
 - it's now possible to add custom stuff in /etc/gforge/custom/
+* Thu Dec 30 2004 Guillaume Smet <guillaume-gforge@smet.org>
+- added Allow from all in vhost config
+* Wed Dec 29 2004 Guillaume Smet <guillaume-gforge@smet.org>
+- added the magic_quotes_gpc On in vhost as the default value for FC3 is now Off
 * Sat Dec 25 2004 Guillaume Smet <guillaume-gforge@smet.org>
 - it's now possible to add specific language files in the RPM
 * Fri Dec 03 2004 Dassault Aviation <guillaume.smet@openwide.fr>
