@@ -4,6 +4,8 @@ CREATE TABLE project_counts_agg (
         open_count integer DEFAULT 0
 );
 
+CREATE VIEW project_group_list_vw AS SELECT * FROM project_group_list NATURAL JOIN project_counts_agg;
+
 INSERT INTO project_counts_agg 
 	SELECT group_project_id, 
 	(SELECT count(*) FROM project_task WHERE status_id != 3 AND 
