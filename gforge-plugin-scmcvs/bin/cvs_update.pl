@@ -14,6 +14,8 @@ require("/usr/lib/gforge/lib/include.pl");  # Include all the predefined functio
 my $group_array = ();
 my $verbose = 0;
 my $cvs_file = $file_dir . "dumps/cvs_dump";
+my $anoncvs_uid_add = 50000;
+my $gid_add = 10000;
 
 #
 # Script parse out the database dumps and create/update/delete cvs
@@ -32,8 +34,8 @@ while ($ln = pop(@group_array)) {
 	chop($ln);
 	($group_name, $status, $group_id, $use_scm, $enable_pserver, $enable_anonscm, $userlist) = split(":", $ln);
 	
-	$cvs_uid = $group_id + $anoncvs_uid_add;
-	$cvs_gid = $group_id + $gid_add;
+	# This 50000 is really dirty until I change this file completly
+	$cvs_gid = $group_id + $anoncvs_uid_add;
 	$cvs_dir = "$cvs_root$group_name";
 
 	$userlist =~ tr/A-Z/a-z/;
@@ -51,13 +53,23 @@ while ($ln = pop(@group_array)) {
 		print ("	but no $group_name home dir at $grpdir_prefix$group_name\n");
 		print ("	use_scm=$use_scm\tstatus=$status\n");
 	}
+	# This for the first time
+	if (!(-d "$cvs_root")) {
+		if($verbose){print("Creating $cvs_root\n");}
+		system("mkdir -p $cvs_root");
+	}
+	# Lock dir creation
+	if (!(-d "${cvs_root}cvs-locks/$group_name")) {
+		if($verbose){print ("Creating ${cvs_root}cvs-locks/$group_name\n");}
+		if ($cvs_exists){
+			system("mkdir -p ${cvs_root}cvs-locks/$group_name");
+			system("chown anonscm-gforge:scm_$group_name ${cvs_root}cvs-locks/$group_name");
+			system("chmod g+rws ${cvs_root}cvs-locks/$group_name");
+			system("chmod o+rw ${cvs_root}cvs-locks/$group_name");
+		}
+	}
 	# CVS repository creation
 	if ($group_exists && !$cvs_exists && $use_scm && $status eq 'A' && !(-e "$cvs_root$group_name/CVSROOT")) {
-		# This for the first time
-		if (!(-d "$cvs_root")) {
-			if($verbose){print("Creating $cvs_root\n");}
-			system("mkdir -p $cvs_root");
-		}
 		if($verbose){print("Creating a CVS Repository for: $group_name\n");}
 		# Let's create a CVS repository for this group
 
@@ -70,14 +82,31 @@ while ($ln = pop(@group_array)) {
 			mkdir $cvs_dir, 0770;
 		}
 		system("/usr/bin/cvs -d$cvs_dir init");
+
 	
 		system("echo \"\" > $cvs_dir/CVSROOT/val-tags");
 		chmod 0664, "$cvs_dir/CVSROOT/val-tags";
 
 		# set group ownership, anonymous group user
-		system("chown -R nobody:$cvs_gid $cvs_dir");
+		system("chown -R $dummy_uid:$cvs_gid $cvs_dir");
 		# s bit to have all owned by group
 		system("chmod -R g+rws $cvs_dir");
+	}
+	# Change owners
+	my $uid=$dummy_uid;
+	my $gid=$cvs_gid;
+	if (-d "$cvs_root$group_name") {
+		my $realuid=get_file_owner_uid("$cvs_root$group_name");
+		if (!($uid eq $realuid)){
+			if($verbose){print("Changing owner of $cvs_root$group_name $realuid -> $uid\n")};
+			system("chown -R $uid $cvs_root$group_name");
+		}
+		my $realgid=get_file_owner_gid("$cvs_root$group_name");
+		if (!($gid eq $realgid)){
+			if($verbose){print("Changing group of $cvs_root$group_name $realgid -> $gid\n")};
+			system("chgrp -R $gid $cvs_root$group_name");
+		}
+		system("chown anonscm-gforge $cvs_root$group_name/CVSROOT/history");
 	}
 
 	# Right management
@@ -91,6 +120,7 @@ while ($ln = pop(@group_array)) {
 			if($verbose) { print("Enable pserver for $group_name:\t$userlist in $cvs_dir/CVSROOT/writers \n"); }
 			open (CONFIG,">$cvs_dir/CVSROOT/config");
 			print CONFIG "SystemAuth=yes\n";
+			print CONFIG "LockDir=/cvsroot/cvs-locks/$group_name\n";
 			close CONFIG;
 		} else {
 			# turn off pserver writers
@@ -101,19 +131,21 @@ while ($ln = pop(@group_array)) {
 			if($verbose) { print("Disable pserver for $group_name\n"); }
 			open (CONFIG,">$cvs_dir/CVSROOT/config");
 			print CONFIG "SystemAuth=no\n";
+			print CONFIG "LockDir=/cvsroot/cvs-locks/$group_name\n";
 			close CONFIG;
 		}
 
 		if ($enable_anonscm){
 			# turn on anonymous readers
 			system("echo \"anonymous\" > $cvs_dir/CVSROOT/readers");
-			system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:anoncvs_${group_name}\" > $cvs_dir/CVSROOT/passwd");
+			#system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:scm_${group_name}\" > $cvs_dir/CVSROOT/passwd");
+			system("echo \"anonymous:\\\$1\\\$0H\\\$2/LSjjwDfsSA0gaDYY5Df/:anonscm-gforge\" > $cvs_dir/CVSROOT/passwd");
 			# This will give access to all users and cvsweb
 			chmod 02775, "$cvs_dir";
 
 			my $gid = $group_id + $gid_add ;
 			my $uid = $group_id + $anoncvs_uid_add ;
-			my $username = "anoncvs_" . $group_name ;
+			my $username = "scm_" . $group_name ;
 
 			add_or_update_anoncvs_user ($uid, $username, $gid) ;
 			
@@ -142,4 +174,21 @@ sub add_or_update_anoncvs_user {
 	}
 	
 	chown $uid, $gid, $home_dir;
+}
+
+#############################
+# Get File Owner UID
+#############################
+sub get_file_owner_uid {
+	my $filename = shift(@_);
+	my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($filename);
+	return $uid;
+}
+#############################
+# Get File Owner GID
+#############################
+sub get_file_owner_gid {
+	my $filename = shift(@_);
+	my ($dev,$ino,$mode,$nlink,$uid,$gid,$rdev,$size,$atime,$mtime,$ctime,$blksize,$blocks) = stat($filename);
+	return $gid;
 }
