@@ -208,7 +208,7 @@ echo $HTML->boxTop('Tool Admin');
 
 <TD width=50%>
 
-<?php $HTML->boxTop("File Releases"); ?>
+<?php echo $HTML->boxTop("File Releases"); ?>
 	&nbsp;<BR>
 	<CENTER>
 	<A href="editpackages.php?group_id=<?php print $group_id; ?>"><B>[Edit/Add File Releases]</B></A>
