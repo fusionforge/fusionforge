@@ -1,3 +1,9 @@
+gforge (3rc2-1) unstable; urgency=low
+
+  * [Christian] rc2 will go to unstable
+
+ -- Christian Bayle <bayle@debian.org>  Mon, 12 May 2003 22:06:12 +0200
+
 gforge (3rc1-3) experimental; urgency=low
 
   * [Christian] Fixed GForge-CVS in cvsweb.conf
