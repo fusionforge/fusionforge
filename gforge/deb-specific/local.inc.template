@@ -75,7 +75,7 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 //
 // disable ldap use altogether
 // #CB#not yet 1
-$sys_use_ldap=0;
+$sys_use_ldap=1;
 $sys_ldap_host="{ldap_host}";
 $sys_ldap_port=389;
 // this is dn under which all information stored
