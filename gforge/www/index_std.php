@@ -11,7 +11,7 @@ large teams of software engineers and/or engineers scattered among multiple loca
 <strong>Track Bugs, Patches, Feature Requests, and Support Requests</strong>
 </p>
 <p>
-<a href="/tracker/?atid=101&amp;group_id=5&amp;func=browse"><img src="/images/gforge.jpg" width="450" height="268" border="0" alt="" /></a>
+<a href="http://gforge.org/tracker/?atid=101&amp;group_id=5&amp;func=browse"><img src="/images/gforge.jpg" width="450" height="268" border="0" alt="" /></a>
 </p>
 <p>
 <strong>New Project Management Tools:</strong>
@@ -38,7 +38,7 @@ echo $HTML->boxBottom();
 echo $HTML->boxTop('Getting GForge');
 ?>
 <strong>Download:</strong><br />
-<a href="/project/showfiles.php?group_id=1">GForge3.0b1</a><br />
+<a href="http://gforge.org/project/showfiles.php?group_id=1">GForge3.0b1</a><br />
 <a href="http://postgresql.org/">PostgreSQL</a><br />
 <a href="http://www.php.net/">PHP 4.x</a><br />
 <a href="http://www.apache.org/">Apache</a><br />
