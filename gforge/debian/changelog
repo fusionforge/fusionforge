@@ -1,3 +1,9 @@
+gforge (3rc1-2) experimental; urgency=low
+
+  * [Roland] Corrected a bug in exim install script 
+
+ -- Christian Bayle <bayle@debian.org>  Tue, 18 Mar 2003 20:31:33 +0100
+
 gforge (3rc1-1) experimental; urgency=low
 
   * [Christian] Added support for content encoding in util_send_mail
