@@ -289,7 +289,7 @@ FIN
 
 	check_server
 	echo "Changing SF_robot passwd using admin account"
-	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_admin_dn" -x -w"$secret" <<-FIN
 dn: $sys_ldap_bind_dn
 changetype: modify
 replace: userPassword
@@ -299,7 +299,7 @@ FIN
 	check_server
 	echo "Testing LDAP"
 	echo "Changing dummy cn using SF_robot account"
-	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret" > /dev/null 2>&1 <<-FIN
+	ldapmodify -v -c -D "$sys_ldap_bind_dn" -x -w"$secret"  <<-FIN
 dn: uid=dummy,ou=People,$sys_ldap_base_dn
 changetype: modify
 replace: cn
@@ -352,7 +352,7 @@ case "$1" in
 	        setup_vars
 		naming_context=$(ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts | grep "namingContexts:" | cut -d" " -f2)
 		admin_regexp=$(echo $sys_ldap_base_dn | sed 's/, */, */g')
-		admin_regexp="^cn=admin, *ou=People, *$admin_regexp"
+		admin_regexp="^cn=admin, *$admin_regexp"
 		get_our_entries () {
 		    slapcat \
 			| grep "^dn:" \
@@ -369,7 +369,7 @@ case "$1" in
 			| grep -v "$admin_regexp"
 		}
 		get_our_entries || true
-		get_our_entries | ldapdelete -D "cn=admin,ou=People,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
+		get_our_entries | ldapdelete -D "cn=admin,$sys_ldap_base_dn" -x -w"$secret" > /dev/null 2>&1 || true
 		;;
 	reset)
 		setup_vars
