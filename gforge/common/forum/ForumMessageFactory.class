@@ -50,7 +50,7 @@ class ForumMessageFactory extends Error {
 	function ForumMessageFactory(&$Forum) {
 		$this->Error();
 		if (!$Forum || !is_object($Forum)) {
-			$this->setError('ForumMessage:: No Valid Forum Object');
+			$this->setError($Language->getText('forum','error_invalid_group_forum_id','ForumMessage'));
 			return false;
 		}
 		if ($Forum->isError()) {
