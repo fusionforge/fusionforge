@@ -15,7 +15,7 @@ require_once('../mail_utils.php');
 require_once('common/mail/MailingList.class');
 require_once('common/mail/MailingListFactory.class');
 
-$group_id = getIntFromGet('group_id');
+$group_id = getIntFromRequest('group_id');
 
 $feedback = '';
 
@@ -29,8 +29,8 @@ if ($group_id) {
 		exit_permission_denied();
 	}
 	
-	if (getStringFromPost('post_changes') == 'y') {
-		if (getStringFromPost('add_list') == 'y') {
+	if (getStringFromRequest('post_changes') == 'y') {
+		if (getStringFromRequest('add_list') == 'y') {
 			$mailingList = new MailingList($Group);
 			
 			if(!$mailingList || !is_object($mailingList)) {
