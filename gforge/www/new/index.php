@@ -65,11 +65,11 @@ if (!$res_new || db_numrows($res_new) < 1) {
 			print "<tr valign=\"top\">";
 			print "<td colspan=\"2\">";
 			print "<a href=\"/projects/$row_new[unix_group_name]/\"><strong>$row_new[group_name]</strong></a>"
-				. "\n</td><td nowrap=\"nowrap\"><em>".$Language->getText('new','released_by')."<a href=\"/users/$row_new[user_name]/\">"
+				. "\n</td><td nowrap=\"nowrap\"><em>".$Language->getText('new','released_by')." <a href=\"/users/$row_new[user_name]/\">"
 				. "$row_new[user_name]</a></em></td></tr>\n";
 
-			print "<tr><td>".$Language->getText('new','module').": "."$row_new[module_name]</td>\n";
-			print "<td>".$Language->getText('new','version').": "."$row_new[release_version]</td>\n";
+			print "<tr><td>".$Language->getText('new','module')." "."$row_new[module_name]</td>\n";
+			print "<td>".$Language->getText('new','version')." "."$row_new[release_version]</td>\n";
 			print "<td>" . date("M d, h:iA",$row_new[release_date]) . "</td>\n";
 			print "</tr>\n";
 
