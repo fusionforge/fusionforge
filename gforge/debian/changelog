@@ -1,4 +1,4 @@
-gforge (4.0.2-5i) unstable; urgency=low
+gforge (4.0.2-5j) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
   * [Christian] Had to add a db_stop before gforge-config in 
@@ -10,6 +10,7 @@ gforge (4.0.2-5i) unstable; urgency=low
     replaced with conffile.dpkg-new
   * [Christian] Added 20041124.sql to db-upgrade.pl
   * [Christian] Added dpatch support
+  * [Christian] Added globalsoff dpatch
 
  -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
 
