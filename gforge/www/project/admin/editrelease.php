@@ -240,16 +240,22 @@ contact your site administrator.</p>
 <span style="color:red"><strong>NOTE: In some browsers you must select the file in
 the file-upload dialog and click "OK".  Double-clicking doesn't register the file.</strong></span><br />
 Upload a new file: <input type="file" name="userfile"  size="30" />
-<p>&nbsp;</p>
+<table width="60%">
+<tr>
+<td>
 <h4>File Type:</h4>
 <?php
-	print frs_show_filetype_popup ('type_id') . "<br />";
+	print frs_show_filetype_popup ('type_id');
 ?>
-<p>&nbsp;</p>
+</td>
+<td>
 <h4>Processor Type:</h4>
 <?php
 	print frs_show_processor_popup ('processor_id');
 ?>
+</td>
+</tr>
+</table>
 <p>
 <input type="submit" name="submit" value="Add This File" /></p>
 </form></p>
