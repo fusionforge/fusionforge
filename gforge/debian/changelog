@@ -1,10 +1,10 @@
-sourceforge (2.5-16+) unstable; urgency=low
+sourceforge (2.5-17) unstable; urgency=low
 
   * [Roland] Fixed a lintian error.
   * [Roland] Fixed a bug in postinst: just having a LoadModule line in
     httpd.conf doesn't mean the module is present (closes: #122413).
 
- -- Roland Mas <lolando@debian.org>  Fri,  7 Dec 2001 11:28:40 +0100
+ -- Roland Mas <lolando@debian.org>  Fri,  7 Dec 2001 11:54:57 +0100
 
 sourceforge (2.5-16) unstable; urgency=low
 
