@@ -1,5 +1,5 @@
 #! /bin/bash
-# 
+#
 # $Id$
 #
 # Configure LDAP for GForge
@@ -71,7 +71,7 @@ check_base_dn() {
     else
 	echo Gforge base DN is at least two levels under the server base DN -- continuing investigations
     fi
-    
+
     needednc=$(echo $gforge_base_dn | cut -d, -f2-)
     if slapcat | grep -q "dn: $needednc" ; then
 	echo Found existing object in which to create our directory -- OK
@@ -100,7 +100,7 @@ exists_dn() {
 # Check Server
 check_server() {
     answer=$(eval "ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts $DEVNULL2" | grep "namingContexts:" | cut -d" " -f2)
-    if [ "x$answer" == "x" ] ; then 
+    if [ "x$answer" == "x" ] ; then
 	eval "invoke-rc.d slapd restart $DEVNULL12" && sleep 5
 	answer=$(eval "ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts $DEVNULL2" \
 	    | grep "namingContexts:" \
@@ -162,10 +162,10 @@ configure_slapd(){
 	exit 1
     fi
     cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-new
-    
+
     # Maybe should comment referral line too
     echo "WARNING: Please check referal line in /etc/ldap/slapd.conf"
-    
+
     # Debian config by default only include core schema
     if ! grep -q "GForge" /etc/ldap/slapd.conf.gforge-new ; then
 	tmpfile=$(mktemp $tmpfile_pattern)
@@ -220,7 +220,7 @@ access to dn=\"ou=cvsGroup,$gforge_base_dn\"
 access to */" /etc/ldap/slapd.conf.gforge-new
 
 	# invoke-rc.d slapd restart
-    fi	
+    fi
 }
 
 # Purge /etc/ldap/slapd.conf
@@ -231,7 +231,7 @@ purge_slapd(){
 	exit 1
     fi
     cp -a /etc/ldap/slapd.conf /etc/ldap/slapd.conf.gforge-new
-	
+
     perl -pi -e "s/^.*#Added by GForge install\n//" /etc/ldap/slapd.conf.gforge-new
     perl -pi -e "s/#Comment by GForge install#//" /etc/ldap/slapd.conf.gforge-new
     if grep -q "# Next second line added by GForge install" /etc/ldap/slapd.conf.gforge-new ; then
@@ -287,7 +287,7 @@ purge_nsswitch()
 # Load ldap database from gforge database
 load_ldap(){
     if [ "x$slapd_admin_passwd" != "x" ] ; then
-	
+
 	# First, let's make sure our base DN exists
 	if ! exists_dn $gforge_base_dn ; then
 	    tmpldif=$(mktemp $tmpfile_pattern)
@@ -391,7 +391,7 @@ FIN
 # Setup SF_robot
 setup_robot() {
     setup_vars
-    
+
     # The first account is only used in a multiserver SF
     check_server
     if ! exists_dn "$robot_dn" || ! exists_dn "ou=People,$gforge_base_dn" ; then
@@ -404,6 +404,22 @@ dc: $dc
 
 dn: ou=People,$gforge_base_dn
 ou: People
+objectClass: organizationalUnit
+
+dn: ou=Aliases,$gforge_base_dn
+ou: Aliases
+objectClass: organizationalUnit
+
+dn: ou=Group,$gforge_base_dn
+ou: Group
+objectClass: organizationalUnit
+
+dn: ou=cvsGroup,$gforge_base_dn
+ou: cvsGroup
+objectClass: organizationalUnit
+
+dn: ou=mailingList,$gforge_base_dn
+ou: mailingList
 objectClass: organizationalUnit
 
 dn: cn=Replicator,$gforge_base_dn
@@ -469,7 +485,7 @@ case "$1" in
 	;;
     configure)
 	setup_vars
-	# Restarting ldap 
+	# Restarting ldap
 	invoke-rc.d slapd restart
 	sleep 5		# Sometimes it takes a bit of time to get out of bed
 	check_server
@@ -500,7 +516,7 @@ case "$1" in
 	setup_vars
 	check_server
 	# Display what is now in the database
-	ldapsearch -x -b "$slapd_base_dn" '(objectclass=*)' 
+	ldapsearch -x -b "$slapd_base_dn" '(objectclass=*)'
 	;;
     empty)
 	setup_vars
