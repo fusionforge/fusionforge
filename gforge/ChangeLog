@@ -1,3 +1,26 @@
+2003-01-24  Reinhard Spisser   <reinhard@spisser.it>
+
+	* www/404.php, www/sendmessage.php, www/users,
+	www/include/user_home,php, www/include/exit.php,
+	common/docman/Document.class, 
+	common/docman/DocumentGroup.class,
+	common/frs/FRSFile.class, common/frs/FRSRelease.class
+	common/frs/FRSPackage.class, 
+	www/project/filemodule_monitor.php, www/project/memberlist.php
+	Localization
+	
+	* www/pm/index.php, www/pm/browse_task.php, www/pm/add_task.php,
+	www/pm/mod_task.php, www/include/ProjectGroupHTML.class,
+	www/pm/include/ProjectTaskHTML.class, www/pm/task.php, 
+	www/pm/ganttpage.php:
+	Localization
+	 
+	 
+	* www/project/showfiles.php: removed unused code, Localization
+	
+	* common/include/Error.class: new setMissingParamsError()
+	 
+	 
 2003-01-24  Michael Jennings  <mej@eterm.org>
 
 	* gforge.spec:  New spec file for GForge.  This is, of course,
@@ -12,6 +35,7 @@
 	file is uploaded seems to be browser specific (?)... catch
 	more cases.
 
+>>>>>>> 1.77
 2003-01-21  Ryan T. Sammartino  <ryants@shaw.ca>
 	    Kenia L. Sammartino  <kenia@shaw.ca>
 
@@ -36,7 +60,8 @@
 	www/developer/diary.php:
 	Localization
 
-	www/developer/monitor.php: correctly escaped strings, localization
+	
+	* www/developer/monitor.php: correctly escaped strings, localization
 
 2003-01-20  Ryan T. Sammartino  <ryants@shaw.ca>
 
