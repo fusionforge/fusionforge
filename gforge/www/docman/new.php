@@ -81,14 +81,14 @@ if ($submit){
 
 	<tr>
 		<td>
-		<strong>	<?php echo $Language->getText('docman_new','doc_title') ?></strong> <?php echo utils_requiredField(); ?> <br />
+		<strong>	<?php echo $Language->getText('docman_new','doc_title') ?></strong> <?php echo utils_requiredField(); ?> (min 5 chars) <br />
 		<input type="text" name="title" size="40" maxlength="255" />
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>	<?php echo $Language->getText('docman_new','description') ?> :</strong><?php echo utils_requiredField(); ?><br />
+		<strong>	<?php echo $Language->getText('docman_new','description') ?> :</strong><?php echo utils_requiredField(); ?> (min 10 chars) <br />
 		<input type="text" name="description" size="50" maxlength="255" />
 		</td>
 	</tr>

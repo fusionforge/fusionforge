@@ -24,7 +24,20 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 
 	<form action="'.$PHP_SELF.'?group_id='.$group_id.'&atid='.$ath->getID().'" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="func" value="postadd" />
-	<table>
+	<table>';
+	echo '
+	<tr>
+		<td valign="top">';
+	if (!session_loggedin()) {
+		echo '
+		<h3><span style="color:red">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span></h3><br />
+		'.$Language->getText('tracker','insert_email').':<p>
+		<input type="text" name="user_email" size="30" maxlength="35" /></p>
+		';
+	} 
+	echo '
+		</td>
+	</tr>
 	<tr>
 		<td valign="top"><strong>'.$Language->getText('tracker_add','for_project').':</strong><br />'.$group->getPublicName().'</td>
 		<td valign="top"><input type="submit" name="submit" value="'. $Language->getText('general','submit').'" /></td>
@@ -76,19 +89,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 
 	<tr>
 		<td colspan="2">
-	<?php 
-	if (!session_loggedin()) {
-		echo '
-		<h3><span style="color:red">'.$Language->getText('tracker','please_login',array('<a href="/account/login.php?return_to='.urlencode($REQUEST_URI).'">','</a>')).'</span></h3><br />
-		'.$Language->getText('tracker','insert_email').':<p>
-		<input type="text" name="user_email" size="30" maxlength="35" /></p>
-		';
-
-	} 
-	?>
-		<p>&nbsp;</p>
 		<h3><span style="color:red"><?php echo $Language->getText('tracker','security_note') ?></span></h3>
-		<p>&nbsp;</p>
 		</td>
 	</tr>
 

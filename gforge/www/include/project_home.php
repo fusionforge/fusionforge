@@ -30,12 +30,12 @@ site_project_header(array('title'=>$title,'group'=>$group_id,'toptab'=>'home'));
 		<?php
 
 // ########################################## top area, not in box
-$res_admin = db_query("SELECT users.user_id,users.user_name,users.realname
+$res_admin = db_query("SELECT users.user_id,users.user_name,users.realname,user_group.admin_flags
 	FROM users,user_group
 	WHERE user_group.user_id=users.user_id
 	AND user_group.group_id='$group_id'
-	AND user_group.admin_flags = 'A'
-	AND users.status='A'");
+	AND users.status='A'
+	ORDER BY admin_flags DESC,realname");
 
 if ($project->getStatus() == 'H') {
 	print "<p>".$Language->getText('project_home','holding_note',$GLOBALS['sys_name'])."</p>\n";
@@ -103,20 +103,17 @@ if (db_numrows($res_admin) > 0) {
 	<span class="develtitle"><?php echo $Language->getText('group','project_admins'); ?>:</span><br />
 	<?php
 		while ($row_admin = db_fetch_array($res_admin)) {
-			print $GLOBALS['HTML']->createLinkToUserHome($row_admin['user_name'], $row_admin['realname'])."<br />";
+			if (trim($row_admin['admin_flags']) != 'A' && !$started_developers) {
+				$started_developers=true;
+				echo '<span class="develtitle">'. $Language->getText('group','project_developers').':</span><br />';
+			}
+			echo '<a href="/users/'.$row_admin['user_name'].'/">'.$row_admin['realname'].'</a><br />';
 		}
 	?>
 	<hr width="100%" size="1" />
 	<?php
 
 }
-
-?>
-<span class="develtitle"><?php echo $Language->getText('group','developers'); ?>:</span><br />
-<?php
-//count of developers on this project
-$res_count = db_query("select count(users.user_id) from user_group, users where user_group.group_id='$group_id' and users.user_id=user_group.user_id and users.status='A'");
-print db_result($res_count,0,'count');
 
 ?>
 

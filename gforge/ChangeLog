@@ -1,3 +1,9 @@
+2005-02-15  Tim Perdue <tim@gforge.org>
+
+	* /docman/new.php - specifying the min sizes for title and description
+	* /tracker/add.php - moving the "please login" message to the top of the screen
+	* www/include/project_home.php - show both admins and developers	
+
 2005-02-15  Mathieu Peltier <mathieu.peltier@gmail.com>
 
 	* applied [#775] Patch for not able to change file to another

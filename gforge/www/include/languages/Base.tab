@@ -941,6 +941,7 @@ group	long_tracker	Tracker
 group	nodescription	This project has not yet submitted a description.
 group	norelease	This Project Has Not Released Any Files
 group	project_admins	Project Admins
+group	project_developers	Developers
 group	public_area	Public Areas
 group	registered	Registered:&nbsp;
 group	short_admin	Admin
@@ -2704,7 +2705,7 @@ tracker	followups	Followup
 tracker	group	Group
 tracker	group_any	Any
 tracker	id	ID
-tracker	insert_email	If you <strong>cannot</strong> login, then enter your email address here:
+tracker	insert_email	If you <strong>cannot</strong> login, then enter your email address here
 tracker	item_created	Item Successfully Created
 tracker	item_group	Group
 tracker	no_trackers	No Accessible Trackers Found
