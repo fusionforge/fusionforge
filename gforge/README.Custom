@@ -36,7 +36,7 @@ these parameters is the language in which you wish to display a piece
 of information, and another is some handle to identify the information
 you want to display.  In Sourceforge, this handle is made up of the
 "page name" and the "category" strings.  Knowing all the needed info,
-the function displays the appropriate text.  How appropiate is this
+the function displays the appropriate text.  How appropriate is this
 text?  Well, that depends.  First, a basic set of texts is loaded.
 Historically, this set is loaded in English.  This set of texts makes
 the Base class, storing texts for all known "handles".  This set of

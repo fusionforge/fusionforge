@@ -40,7 +40,7 @@ Create a blank database for postgres
 
 Be certain that plpgsql.so is present in your Postgres library path
 
-Import the SourceForge Database
+Import the database schema
 
 # psql alexandria < db/gforge3.sql
 
@@ -64,7 +64,7 @@ php_value include_path ".:/path/to/gforge/:/path/to/gforge/www/include/"
 PHP setup
 ---------
 
-Your php.ini file should have "register_globals" set to on, as well 
+Your php.ini file should have "register_globals=on", as well 
 as file uploads.
 
 You may also add the include_path to the php.ini, as it will be 
