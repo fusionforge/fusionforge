@@ -271,6 +271,7 @@ setup_robot() {
 	setup_vars
 
 	# The first account is only used in a multiserver SF
+	check_server
 	echo "Adding robot accounts"
 
 	{ ldapadd -r -c -D "$sys_ldap_admin_dn" -x -w"$secret" || true ; } <<-FIN
