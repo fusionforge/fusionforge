@@ -339,8 +339,7 @@ function projectcategories_to_soap($at_arr) {
 			$return[]=array(
 				'id'=>$at_arr->data_array['id'],
 				'group_project_id'=>$at_arr->data_array['group_project_id'],
-				'category_name'=>$at_arr->data_array['category_name'],
-				'auto_assign_to'=>$at_arr->data_array['auto_assign_to']
+				'category_name'=>$at_arr->data_array['category_name']
 			);
 		}
 	}
@@ -405,23 +404,23 @@ function projecttasks_to_soap($at_arr) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'project_task_id'=>$at_arr->data_array['project_task_id'],
-				'group_project_id'=>$at_arr->data_array['group_project_id'],
-				'status_id'=>$at_arr->data_array['status_id'],
-				'category_id'=>$at_arr->data_array['category_id'],
-				'artifact_group_id'=>$at_arr->data_array['artifact_group_id'],
-				'resolution_id'=>$at_arr->data_array['resolution_id'],
-				'priority'=>$at_arr->data_array['priority'],
-				'submitted_by'=>$at_arr->data_array['submitted_by'],
-				'assigned_to'=>$at_arr->data_array['assigned_to'],
-				'open_date'=>$at_arr->data_array['open_date'],
-				'close_date'=>$at_arr->data_array['close_date'],
-				'summary'=>$at_arr->data_array['summary'],
-				'details'=>$at_arr->data_array['details']
+				'project_task_id'=>$at_arr[$i]->data_array['project_task_id'],
+				'group_project_id'=>$at_arr[$i]->data_array['group_project_id'],
+				'summary'=>$at_arr[$i]->data_array['summary'],
+				'details'=>$at_arr[$i]->data_array['details'],
+				'percent_complete'=>$at_arr[$i]->data_array['percent_complete'],
+				'priority'=>$at_arr[$i]->data_array['priority'],
+				'hours'=>$at_arr[$i]->data_array['hours'],
+				'start_date'=>$at_arr[$i]->data_array['start_date'],
+				'end_date'=>$at_arr[$i]->data_array['end_date'],
+				'status_id'=>$at_arr[$i]->data_array['status_id'],
+				'category_id'=>$at_arr[$i]->data_array['category_id'],
+				'is_dependent_on_task_id'=>$at_arr[$i]->getDependentOn(),
+				'assigned_to'=>$at_arr[$i]->$at_arr[$i]->getAssignedTo()
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactFile', 'ArrayOfArtifactFile', $return);
+	return new soapval('tns:ArrayOfProjectTask', 'ArrayOfProjectTask', $return);
 }
 
 //
@@ -449,27 +448,27 @@ function &getProjectMessages($session_ser,$group_id,$group_project_id,$project_t
 	} elseif ($a->isError()) {
 		return new soap_fault ('','getProjectMessages',$a->getErrorMessage(),$a->getErrorMessage());
 	}
-	return projecttaskmessages_to_soap($a->getMessageObjects());
+	return projectmessages_to_soap($a->getMessageObjects());
 }
 
 //
-//  convert array of artifact messages to soap data structure
+//  convert array of project messages to soap data structure
 //
-function projecttaskmessages_to_soap($at_arr) {
+function projectmessages_to_soap($at_arr) {
 	for ($i=0; $i<count($at_arr); $i++) {
 		if ($at_arr[$i]->isError()) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'id'=>$at_arr->data_array['id'],
+				'project_message_id'=>$at_arr->data_array['project_message_id'],
 				'project_task_id'=>$at_arr->data_array['project_task_id'],
 				'body'=>$at_arr->data_array['body'],
-				'adddate'=>$at_arr->data_array['adddate'],
-				'user_id'=>$at_arr->data_array['user_id']
+				'postdate'=>$at_arr->data_array['postdate'],
+				'posted_by'=>$at_arr->data_array['posted_by']
 			);
 		}
 	}
-	return new soapval('tns:ArrayOfArtifactMessage', 'ArrayOfArtifactMessage', $return);
+	return new soapval('tns:ArrayOfProjectMessage', 'ArrayOfProjectMessage', $return);
 }
 
 //
