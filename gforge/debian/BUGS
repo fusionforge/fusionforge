@@ -3,6 +3,4 @@
 
 -upgrade from 2.5 miss some tables (On the way to be done)
 
--QRS is broken (Doesn't upload)
-
 -Shell account per user management seems broken
