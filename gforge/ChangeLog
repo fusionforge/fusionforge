@@ -1,3 +1,14 @@
+2003-05-21 Christian Bayle	<bayle@debian.org>
+
+	* Applied Tony Guntharp (fusion94) patch #366. Description follow
+	 when you have private groups in the gforge DB and they
+	 have had downloads then they are visible under top
+	 download in feature boxes. you still cant actually view
+	 the project w/o the proper perms.
+	 this is just a quick fix to the sql statement that
+	 checks to see if it's private or public and to only
+	 display public projects.
+
 2003-05-21 Tom Copeland <tom@infoether.com>
 
 	* common/frs/FRSRelease.class
