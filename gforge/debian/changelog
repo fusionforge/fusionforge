@@ -1,4 +1,4 @@
-sourceforge (2.6-0+9+) unstable; urgency=low
+sourceforge (2.6-0+10) unstable; urgency=low
 
   * [Christian] Added savannah converted themes and appropriate db inserts
   * [Christian] Added README.Themes
@@ -13,11 +13,11 @@ sourceforge (2.6-0+9+) unstable; urgency=low
   * [Roland] Made groups siteadmin and newsadmin public to prevent
     problems with submitting of news.  Also, changed their names for
     coherence with names inherited from the 2.5 branch.
-  * [Christian] Continuing work on theming, added a new function in 
+  * [Christian] Continuing work on theming, added a new function in
     html.php (url_html)
   * [Roland] Removed a few bashisms in maintainer scripts.
 
- -- Christian Bayle <bayle@debian.org>  Wed, 17 Apr 2002 21:10:44 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 01:02:54 +0200
 
 sourceforge (2.6-0+9) unstable; urgency=low
 
