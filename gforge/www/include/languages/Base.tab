@@ -826,6 +826,7 @@ forum_utils	postanon	You are posting anonymously because you are not
 forum_utils	postcomment	Post Comment
 forum_utils	posted	Message Posted
 forum_utils	postedby	Posted By
+forum_utils	project	Project
 forum_utils	reply	reply
 forum_utils	attach	attach
 forum_utils	saveplace	Save Place

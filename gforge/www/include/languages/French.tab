@@ -843,6 +843,7 @@ forum_utils	postanon	Vous ajoutez un message anonyme car vous n'êtes pas identi
 forum_utils	postcomment	Ajouter un commentaire
 forum_utils	posted	Message posté
 forum_utils	postedby	Posté par
+forum_utils	project	Projet
 forum_utils	reply	répondre
 forum_utils	saveplace	Sauvegarder cette position
 forum_utils	stopmonitor	Arrêter la surveillance
