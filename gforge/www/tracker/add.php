@@ -46,7 +46,7 @@ $ath->header(array ('title'=>$Language->getText('tracker_add','submit'),'pagenam
 	
 	<?php
 	
-	$ath->buildPopUpBoxes();
+	$ath->renderExtraFields();
  
 	if ($ath->userIsAdmin()) {
 		echo '<tr>
