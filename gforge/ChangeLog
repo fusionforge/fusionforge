@@ -1,3 +1,8 @@
+2003-07-02 Christian Bayle	<bayle@debian.org>
+	* common/include/account.php
+	Check if the unix user account exist with a exec(getent...) and refuse
+	to create if exists
+	
 2003-06-23 Tom Copeland  <tom@infoether.com>
 
 	* www/project/stats_graph.php:

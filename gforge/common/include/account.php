@@ -76,6 +76,10 @@ function account_namevalid($name) {
 		$GLOBALS['register_error'] = "Name is reserved.";
 		return 0;
 	}
+	if ( exec("getent passwd $name") != "" ){
+		$GLOBALS['register_error'] = $Language->getText('account_register','err_userexist');
+		return 0;
+	}
 	if (eregi("^(anoncvs_)",$name)) {
 		$GLOBALS['register_error'] = $Language->getText('common_include_account','cvsreserved');
 		return 0;
