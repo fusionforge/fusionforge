@@ -91,15 +91,15 @@ class SVNPlugin extends SCM {
 
 		if ($project->usesPlugin ($this->name)) {
 
-			// Should svn browser links to be displayed?
-			$displaySvnBrowser = false;
+			// SVN browser links must be displayed if
+			// project enables anon SVN or if logged-in
+			// user is a member of the group
+			$displaySvnBrowser = $project->enableAnonSCM();
 			if(session_loggedin()) {
 				$perm =& $project->getPermission(session_get_user());
 				if ($perm && is_object($perm) && !$perm->isError() && $perm->isMember()) {
 					$displaySvnBrowser = true;
 				}
-			} else {
-				$displaySvnBrowser = $project->enableAnonSCM();
 			}
 
 			// ######################## Table for summary info
