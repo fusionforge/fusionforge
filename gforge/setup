@@ -57,6 +57,7 @@ computedefault(){
 	DEFAULTsys_force_login=0
 	DEFAULTsys_session_key=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-32)
 	DEFAULTsys_session_expire='60 * 60 * 24 * 7'
+	DEFAULTsys_show_contact_info=1
 	DEFAULTsys_theme=gforge
 	DEFAULTsys_default_theme_id=1
 	DEFAULTsys_lang=English

@@ -38,6 +38,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=
 	<td><strong><?php print $user->getTitle() .' '. $user->getRealName(); ?></strong></td>
 </tr>
 
+<?php if(!isset($GLOBALS['sys_show_contact_info']) || $GLOBALS['sys_show_contact_info']) { ?>
 <tr valign="top">
 	<td><?php echo $Language->getText('user_home','email') ?>: </td>
 	<td>
@@ -68,6 +69,7 @@ $HTML->header(array('title'=>$Language->getText('user_home','title'),'pagename'=
 	<td><?php echo $Language->getText('account_options','fax'); ?></td>
 	<td><?php echo $user->getFax(); ?></td>
 </tr>
+<?php } ?>
 
 <tr>
 	<td>
