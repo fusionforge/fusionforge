@@ -5,6 +5,10 @@
 	* www/include/languages/Base.tab: add new strings for 
 	reporting module
 
+	Fixes [#862]
+	* common/include/reporting/report_utils.php: changed realname by
+	lastname
+
 2004-08-02  Francisco Gimeno <kikov@kikov.org>
 	Fixes [#856]
 	* www/include/languages/Base.tab: Added three expresion for being

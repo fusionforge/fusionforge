@@ -97,26 +97,26 @@ function report_months_box($Report, $name='month', $selected=false) {
 function report_useract_box($name='dev_id', $selected='1', $start_with='') {
 
 	if ($start_with) {
-		$sql2=" AND realname ILIKE '$start_with%' ";
+		$sql2=" AND lastname ILIKE '$start_with%' ";
 	}
 
 	$res=db_query("SELECT user_id,realname 
 		FROM users 
 		WHERE status='A' $sql2 
-		AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) ORDER BY realname");
+		AND (exists (SELECT user_id FROM rep_user_act_daily WHERE user_id=users.user_id)) ORDER BY lastname");
 	return html_build_select_box($res, $name, $selected, false);
 }
 
 function report_usertime_box($name='dev_id', $selected='1', $start_with='') {
 
 	if ($start_with) {
-		$sql2=" AND realname ILIKE '$start_with%' ";
+		$sql2=" AND lastname ILIKE '$start_with%' ";
 	}
 
 	$res=db_query("SELECT user_id,realname 
 		FROM users 
 		WHERE status='A' $sql2 
-		AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) ORDER BY realname");
+		AND (exists (SELECT user_id FROM rep_time_tracking WHERE user_id=users.user_id)) ORDER BY lastname");
 	return html_build_select_box($res, $name, $selected, false);
 }
 
