@@ -408,16 +408,16 @@ function artifacttype_to_soap($at_arr) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'group_artifact_id'=>$at_arr->data_array['group_artifact_id'],
-				'group_id'=>$at_arr->data_array['group_id'],
-				'name'=>$at_arr->data_array['name'],
-				'description'=>$at_arr->data_array['description'],
-				'is_public'=>$at_arr->data_array['is_public'],
-				'allow_anon'=>$at_arr->data_array['allow_anon'],
-				'due_period'=>$at_arr->data_array['due_period'],
-				'use_resolution'=>$at_arr->data_array['use_resolution'],
-				'datatype'=>$at_arr->data_array['datatype'],
-				'status_timeout'=>$at_arr->data_array['status_timeout']
+				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+				'group_id'=>$at_arr[$i]->data_array['group_id'],
+				'name'=>$at_arr[$i]->data_array['name'],
+				'description'=>$at_arr[$i]->data_array['description'],
+				'is_public'=>$at_arr[$i]->data_array['is_public'],
+				'allow_anon'=>$at_arr[$i]->data_array['allow_anon'],
+				'due_period'=>$at_arr[$i]->data_array['due_period'],
+				'use_resolution'=>$at_arr[$i]->data_array['use_resolution'],
+				'datatype'=>$at_arr[$i]->data_array['datatype'],
+				'status_timeout'=>$at_arr[$i]->data_array['status_timeout']
 			);
 		}
 	}
@@ -525,9 +525,9 @@ function artifactcategories_to_soap($at_arr) {
 		} else {
 			$return[]=array(
 				'id'=>$at_arr->data_array['id'],
-				'group_artifact_id'=>$at_arr->data_array['group_artifact_id'],
-				'category_name'=>$at_arr->data_array['category_name'],
-				'auto_assign_to'=>$at_arr->data_array['auto_assign_to']
+				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+				'category_name'=>$at_arr[$i]->data_array['category_name'],
+				'auto_assign_to'=>$at_arr[$i]->data_array['auto_assign_to']
 			);
 		}
 	}
@@ -565,9 +565,9 @@ function artifactgroups_to_soap($at_arr) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'id'=>$at_arr->data_array['id'],
-				'group_artifact_id'=>$at_arr->data_array['group_artifact_id'],
-				'group_name'=>$at_arr->data_array['group_name']
+				'id'=>$at_arr[$i]->data_array['id'],
+				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+				'group_name'=>$at_arr[$i]->data_array['group_name']
 			);
 		}
 	}
@@ -605,9 +605,9 @@ function artifactresolutions_to_soap($at_arr) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'id'=>$at_arr->data_array['id'],
-				'group_artifact_id'=>$at_arr->data_array['group_artifact_id'],
-				'resolution_name'=>$at_arr->data_array['resolution_name']
+				'id'=>$at_arr[$i]->data_array['id'],
+				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+				'resolution_name'=>$at_arr[$i]->data_array['resolution_name']
 			);
 		}
 	}
@@ -741,9 +741,9 @@ function artifactfiles_to_soap($at_arr) {
 		} else {
 //TODO FINISH
 			$return[]=array(
-				'id'=>$at_arr->data_array['id'],
-				'group_artifact_id'=>$at_arr->data_array['group_artifact_id'],
-				'resolution_name'=>$at_arr->data_array['resolution_name']
+				'id'=>$at_arr[$i]->data_array['id'],
+				'group_artifact_id'=>$at_arr[$i]->data_array['group_artifact_id'],
+				'resolution_name'=>$at_arr[$i]->data_array['resolution_name']
 			);
 		}
 	}
@@ -820,11 +820,11 @@ function artifactmessages_to_soap($at_arr) {
 			//skip if error
 		} else {
 			$return[]=array(
-				'id'=>$at_arr->data_array['id'],
-				'artifact_id'=>$at_arr->data_array['artifact_id'],
-				'body'=>$at_arr->data_array['body'],
-				'adddate'=>$at_arr->data_array['adddate'],
-				'user_id'=>$at_arr->data_array['user_id']
+				'id'=>$at_arr[$i]->data_array['id'],
+				'artifact_id'=>$at_arr[$i]->data_array['artifact_id'],
+				'body'=>$at_arr[$i]->data_array['body'],
+				'adddate'=>$at_arr[$i]->data_array['adddate'],
+				'user_id'=>$at_arr[$i]->data_array['user_id']
 			);
 		}
 	}
