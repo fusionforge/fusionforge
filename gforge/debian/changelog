@@ -1,11 +1,13 @@
 sourceforge (2.5-25+) unstable; urgency=low
 
+  * [Christian] Made big changes in install-ldap.sh to be ok with
+    slapd config.
   * [Roland] Removed unused dir /usr/lib/sourceforge/templates.
   * [Roland] Recalculated $version in db-upgrade.pl.
   * [Roland] Mentioned the .sourceforge-old backup files in the debconf
     question.
 
- -- Roland Mas <lolando@debian.org>  Sat, 23 Feb 2002 15:08:42 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Mon, 25 Feb 2002 22:21:21 +0100
 
 sourceforge (2.5-25) unstable; urgency=low
 
