@@ -26,8 +26,8 @@
  */
 
 require_once('pre.php');
-require_once($sys_path_to_jpgraph.'jpgraph.php');
-require_once($sys_path_to_jpgraph.'jpgraph_line.php');
+require_once($sys_path_to_jpgraph.'/jpgraph.php');
+require_once($sys_path_to_jpgraph.'/jpgraph_line.php');
 require_once('common/reporting/ReportGroupAdded.class');
 
 session_require( array('group'=>$sys_stats_group) );

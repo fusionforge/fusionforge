@@ -1,6 +1,6 @@
 <?php
 
-if (!file_exists($sys_path_to_jpgraph.'jpgraph.php')) {
+if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {
 	exit_error('Error', 'Package JPGraph not installed');
 }
 

@@ -1,23 +1,18 @@
 <?php
 
 require_once('pre.php');
-require_once($sys_path_to_jpgraph.'jpgraph.php');
-require_once($sys_path_to_jpgraph.'jpgraph_gantt.php');
+require_once($sys_path_to_jpgraph.'/jpgraph.php');
+require_once($sys_path_to_jpgraph.'/jpgraph_gantt.php');
 require_once('common/pm/ProjectTasksForUser.class');
 
 
-if (!file_exists($sys_path_to_jpgraph.'jpgraph.php')) {
+if (!file_exists($sys_path_to_jpgraph.'/jpgraph.php')) {
 	exit_error('Error', 'Package JPGraph not installed');
 }
 
 if (!session_loggedin()) {
-	exit_error('Error', 'You are not loged in!');
+	exit_error('Error', 'You are not logged in!');
 }
-
-if (!file_exists($sys_path_to_jpgraph.'jpgraph.php')) {
-	exit_error('Error', 'Package JPGraph not installed');
-}
-
 
 // 
 // The data for the graphs
