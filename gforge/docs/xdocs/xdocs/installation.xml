@@ -365,30 +365,22 @@ Verify the version of PHP installed on your system:
 <subsection name="Configuring cvsweb">
 <p>First download the latest cvsweb release - 1.112 - from http://stud.fh-heilbronn.de/~zeller/cgi/cvsweb.cgi/</p>
 <p>Copy the tar.gz file into a tmp directory and unzip it:</p>
-<pre>
+<source>
 tar -zxvf cvsweb-1.112.tar.gz
-</pre>
-<p>cvsweb consists of a Perl script (cvsweb.cgi), a configuration file (cvsweb.conf), and some icons (back.gif, dir.gif, etc).
+</source>
+<p>cvsweb consists of a Perl script (cvsweb.cgi), a configuration file (cvsweb.conf), and some icons (back.gif, dir.gif, etc).</p>
 <ul>
 <li>Copy the cvsweb.cgi script into Apache's cgi-bin directory</li>
 <li>Copy the cvsweb.conf file into Apache's configuration directory</li>
 <li>Edit cvsweb.conf</li>
-<ul>
 <li>change %CVSROOT hash to include your repositories</li>
 <li>change the $cvstreedefault variable to point to a default repository</li>
-</ul>
-<ul>
 <li>TODO: can we add the repositories automagically? Or should we tweak cvsweb.cgi?</li>
 <li>TODO: should we tweak cvsweb.cgi so it doesn't have a default repository?</li>
-</ul>
-<li>Edit cvsweb.cgi:
-<ul> 
+<li>Edit cvsweb.cgi</li>
 <li>Change the $config variable to point the cvsweb.conf file</li>
 <li>Change the $PATH variable to point to the directory that contains rlog</li>
 </ul>
-</li>
-</ul>
-</p>
 <p>Possible problems:
 <ul>
 <li><code>Error: Configuration not found</code> - edit cvsweb.cgi and point $config to the cvsweb.conf file</li>
@@ -461,78 +453,50 @@ should contain the domain of your server, e.g. gforge.org.
 </li>
 </ol>
 </p>
-
-
 </subsection>
-</section>
 
 <subsection name="Configuring GNU Mailman">
 <p>GNU Mailman is used to help manage the GForge mailing lists.  To install it:</p>
-<ul>
-<li>Install the 2.0.13 RPM (TODO add compilation instructions)</li>
-<li>su to root and set the mailman password</li>
-<li>Add the following to the httpd.conf
-<br/>
-<code>
+<p>Install the 2.0.13 RPM (TODO add compilation instructions)</p>
+<p>su to root and set the mailman password</p>
+<p>Add the following to the httpd.conf</p>
+<source>
 Alias /pipermail/ /usr/local/mailman/archives/public/
-<br/>
 ScriptAlias /mailman/ "/usr/local/mailman/cgi-bin/"
-</code>
-</li>
-<li>Run the script <code>gforge/cronjobs/mailing_lists_create.php</code>; this creates any lists that are already in the database.</li>
-</ul>
+</source>
+<p>Run the script <code>gforge/cronjobs/mailing_lists_create.php</code>; this creates any lists that are already in the database.</p>
 </subsection>
 
 <subsection name="Configuring CVS">
 <p>GForge uses CVS via pserver for anonymous read only access and ext for developers to commit to the repositories.  To set it up:</p>
-<ul>
-<li>Download and install the latest CVS RPM</li>
-<li>Ensure the following info is in <code>/etc/services</code>:
-<br/>
-<code>
+<p>Download and install the latest CVS RPM</p>
+<p>Ensure the following info is in <code>/etc/services</code>:</p>
+<source>
 [tom@cougaarforge tom]$ cat /etc/services | grep cvspserver
-<br/>
 cvspserver      2401/tcp                        # CVS client/server operations
-<br/>
 cvspserver      2401/udp                        # CVS client/server operations
-<br/>
 [tom@cougaarforge tom]$
-</code>
-</li>
-<li>Ensure the following info is in <code>/etc/xinetd.d/cvspserver</code>:
-<br/>
-<code>
+</source>
+<p>Ensure the following info is in <code>/etc/xinetd.d/cvspserver</code>:</p>
+<source>
 [tom@cougaarforge xinetd.d]$ cat /etc/xinetd.d/cvspserver
-<br/>
 service cvspserver
-<br/>
 {
-<br/>
         disable = no
-<br/>
         socket_type  = stream
-<br/>
         protocol  = tcp
-<br/>
         wait   = no
-<br/>
         user    = root
-<br/>
         server   = /usr/bin/cvs
-<br/>
         server_args  = -f --allow-root=/path/to/my/cvsroot pserver
-<br/>
 }
-<br/>
 [tom@cougaarforge xinetd.d]$
-<br/>
-</code>
-</li>
-<li>Now add an <code>anonymous</code> user to your system with a blank password, or one of <code>anonymous</code></li>
-<li>TODO - does the CVSROOT/readers file get added via a cronjob or something?</li>
-<li>TODO - any extra notes on setting up dev access?  i.e., uploading of public key and such?</li>
-</ul>
+</source>
+<p>Now add an <code>anonymous</code> user to your system with a blank password, or one of <code>anonymous</code></p>
+<p>TODO - does the CVSROOT/readers file get added via a cronjob or something?</p>
+<p>TODO - any extra notes on setting up dev access?  i.e., uploading of public key and such?</p>
 </subsection>
+</section>
 
 <section name="Verifying the installation">
 <p>
