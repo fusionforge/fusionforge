@@ -295,6 +295,7 @@ class User extends Error {
 	 */
 	function update($realname,$language_id,$timezone,$mail_site,$mail_va,$use_ratings,
 		$jabber_address,$jabber_only) {
+		global $Language;
 		$mail_site = $mail_site ? 1 : 0;
 		$mail_va   = $mail_va   ? 1 : 0;
 		$block_ratings = $use_ratings ? 0 : 1;
