@@ -453,6 +453,8 @@ admin_useredit	account_info	Account Information
 admin_useredit	active	Active (A)
 admin_useredit	could_not_complete_operation	Could Not Complete Operation
 admin_useredit	current_confirm_bash	Current confirm hash:
+admin_useredit	delete	Delete
+admin_useredit	delete_user_confirm	I want to delete this user
 admin_useredit	deleted	Deleted (D)
 admin_useredit	email	Email:
 admin_useredit	group_memerbership	Groups Membership

@@ -42,7 +42,19 @@ if (!$u || !is_object($u)) {
 	exit_error('Error',$u->getErrorMessage());
 }
 
-if ($action == "update_user") {
+if ($delete_user != '' && $confirm_delete == '1')
+{
+	// delete user
+	if (!$u->delete(true)) {
+		exit_error(
+			$Language->getText('admin_useredit','could_not_complete_operation'),
+			$u->getErrorMessage()
+		);
+	} else {
+		$feedback .= $Language->getText('admin_useredit','deleted').'<br />';
+	}
+
+} elseif ($action == "update_user" && $delete_user == '') {
 
 	if (!$u->setEmail($email)
 		|| !$u->setShell($shell)
@@ -109,16 +121,23 @@ site_admin_header(array('title'=>$Language->getText('admin_useredit','title')));
 <?php echo $Language->getText('admin_useredit','web_account_status'); ?>
 </td>
 <td>
-<?php echo html_build_select_box_from_arrays(
-	array('P','A','S','D'),
-	array(
-		$Language->getText('admin_useredit','pending'),
+<?php
+if ($u->getStatus() == 'D') {
+	$status_letter = array('P','A','S','D');
+	$status_text   = array($Language->getText('admin_useredit','pending'),
 		$Language->getText('admin_useredit','active'),
 		$Language->getText('admin_useredit','suspended'),
-		$Language->getText('admin_useredit','deleted')
-	),
-	'status', $u->getStatus(),false
-); ?>
+		$Language->getText('admin_useredit','deleted'));
+} else {
+	$status_letter = array('P','A','S');
+	$status_text   = array($Language->getText('admin_useredit','pending'),
+		$Language->getText('admin_useredit','active'),
+		$Language->getText('admin_useredit','suspended'));
+}
+?>
+<?php echo html_build_select_box_from_arrays(
+	$status_letter,	$status_text,'status', $u->getStatus(), false);
+?>
 </td>
 </tr>
 
@@ -159,12 +178,15 @@ site_admin_header(array('title'=>$Language->getText('admin_useredit','title')));
 <?php echo $u->getConfirmHash(); ?>
 </td>
 </tr>
-
-
+<?php if ($u->getStatus() != 'D') {	?>
+<tr>
+<td colspan="2"><input type="checkbox" name="confirm_delete" value="1"><?php echo $Language->getText('admin_useredit','delete_user_confirm'); ?>
+&nbsp;<input type="submit" name="delete_user" value="<?php echo $Language->getText('admin_useredit','delete'); ?>" /><br>&nbsp;
+</td>
+</tr>
+<?php } ?>
 </table>
-
 <input type="submit" name="submit" value="<?php echo $Language->getText('admin_useredit','update'); ?>" />
-
 <p>
 <sup>1</sup><?php echo $Language->getText('admin_useredit','this_page_allows'); ?>
 </p>

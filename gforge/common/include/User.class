@@ -356,6 +356,29 @@ class User extends Error {
 	}
 
 	/**
+	 *	delete() - remove the User from all his groups.
+	 *
+	 *	Remove the User from all his groups and set his status to D.
+	 *
+	 *  @param	boolean	Confirmation of deletion.
+	 *	@return true or false
+	 */
+	function delete($sure) {
+		if (!$sure) {
+			return false;
+		} else {
+			$groups = &$this->getGroups();
+			if (is_array($groups)) {
+				foreach ($groups as $group) {
+					$group->removeUser($this->getID());
+				}
+			}
+			$this->setStatus('D');
+		}
+		return true;
+	}
+
+	/**
 	 *	update() - update *common* properties of User object.
 	 *
 	 *	Use specific setter to change other properties.

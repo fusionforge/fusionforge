@@ -464,6 +464,8 @@ admin_useredit	account_info	Informacion de la cuenta
 admin_useredit	active	Activo (A)
 admin_useredit	could_not_complete_operation	No se pudo completar la operación
 admin_useredit	current_confirm_bash	Hash actual de confirmación:
+admin_useredit	delete	Borrar
+admin_useredit	delete_user_confirm	Quiero borrar este usuario
 admin_useredit	deleted	Borrado (D)
 admin_useredit	email	Email:
 admin_useredit	group_memerbership	Participación en Grupos
