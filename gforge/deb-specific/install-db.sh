@@ -21,7 +21,7 @@ fi
 
 case "$target" in
     default)
-	echo "Usage: $0 {configure|purge}"
+	echo "Usage: $0 {configure-files|configure|purge|purge-files|dump|restore}"
 	exit 1
 	;;
     configure-files)
