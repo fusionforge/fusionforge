@@ -766,7 +766,7 @@ forum_forum	changeview	Changer de visualisation
 forum_forum	date	Date
 forum_forum	flat	Plat
 forum_forum	forum	Forum
-forum_forum	lastpost	Dernier(s) messages(s)
+forum_forum	lastpost	Dernier messages
 forum_forum	nested	Hiérarchisé
 forum_forum	next_messages	Messages suivants
 forum_forum	no_forum_chosen	Aucun forum choisi
