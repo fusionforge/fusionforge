@@ -5,7 +5,7 @@
 #  *
 #  * Recurses through the /cvsroot directory tree and parses each projects
 #  * '~/CVSROOT/history' file, and create and fill the sql table with 
-#  * checkouts, commits, and adds to each project.
+#  * modified, and added to each project.
 #  *
 #  * @version   $Id$
 #  *
@@ -65,9 +65,9 @@ sub dump_history {
 			## Split the cvs history entry into it's 6 fields.
 			($cvstime,$user,$curdir,$module,$rev,$file) = split(/\|/, $_, 6 );
 	
-			## log commits  $type eq "M" 
-			## log adds  $type eq "A"
-			## log checkouts  $type eq "O" 
+			## log modified  $type eq "M" 
+			## log added  $type eq "A"
+			## log others  $type neq "A"  neq "M"
 			$type = substr($cvstime, 0, 1);
 			$time_parsed = hex( substr($cvstime, 1, 8) );
 			$year	= strftime("%Y", gmtime( $time_parsed ) );
@@ -103,22 +103,22 @@ sub parse_history {
 #E               Export
 	$sql = "
 	CREATE TABLE deb_cvs_group AS
-        	SELECT agg.cvsgroup,agg.year,agg.month,agg.day,agg.total AS total,c.commits AS commits,a.adds AS adds,o.others AS others
+        	SELECT agg.cvsgroup,agg.year,agg.month,agg.day,agg.total AS total,m.modified AS modified,a.added AS added,o.others AS others
         	FROM (
         		SELECT cvsgroup,year,month,day,COUNT(*) AS total
         		FROM deb_cvs_dump
         		GROUP BY year,month,day,cvsgroup
 		) agg
 		LEFT JOIN (
-        	SELECT cvsgroup,year,month,day,COUNT(*) AS commits
-        	FROM deb_cvs_dump
-		WHERE type='A'
-        	GROUP BY year,month,day,cvsgroup
-		) c USING (cvsgroup,year,month,day)
-		LEFT JOIN (
-        	SELECT cvsgroup,year,month,day,COUNT(*) AS adds
+        	SELECT cvsgroup,year,month,day,COUNT(*) AS modified
         	FROM deb_cvs_dump
 		WHERE type='M'
+        	GROUP BY year,month,day,cvsgroup
+		) m USING (cvsgroup,year,month,day)
+		LEFT JOIN (
+        	SELECT cvsgroup,year,month,day,COUNT(*) AS added
+        	FROM deb_cvs_dump
+		WHERE type='A'
         	GROUP BY year,month,day,cvsgroup
 		) a USING (cvsgroup,year,month,day)
 		LEFT JOIN (
@@ -136,9 +136,17 @@ sub print_stats {
 	$sql = "SELECT * FROM deb_cvs_group order by year, month, day";
 	$res = $dbh->prepare($sql);
 	$res->execute();
-	while ( my ($cvsgroup, $year, $month, $day, $total, $commits, $adds, $others) = $res->fetchrow()) {
-		print "$cvsgroup $year $month $day $total=$commits+$adds+$others\n";
+	while ( my ($cvsgroup, $year, $month, $day, $total, $modified, $added, $others) = $res->fetchrow()) {
+		print "$cvsgroup $year $month $day $total=$modified+$added+$others\n";
 	}
+	print "-----------------------------------------------------\n";
+	$sql = "SELECT cvsgroup, SUM(modified), SUM(added) FROM deb_cvs_group group by cvsgroup";
+	$res = $dbh->prepare($sql);
+	$res->execute();
+	while ( my ($cvsgroup, $modified, $added) = $res->fetchrow()) {
+		print "$cvsgroup $modified $added\n";
+	}
+	print "-----------------------------------------------------\n";
 }
 
 #############
