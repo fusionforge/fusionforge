@@ -10,7 +10,7 @@
   */
 
 
-$ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'pagename'=>'tracker','atid'=>$ath->getID(),'sectionvals'=>array($group->getPublicName()) ));
+$ath->header(array ('title'=>$Language->getText('tracker_mod','title').': '.$ah->getID(). ' - ' . $ah->getSummary(),'atid'=>$ath->getID() ));
 
 echo notepad_func();
 
@@ -78,7 +78,8 @@ if (session_loggedin()) {
 //  kinda messy - but works for now
 //  need to get list of data types this person can admin
 //
-	if ($ath->userIsAdmin()) {
+	$perm =& $group->getPermission(session_get_user());
+	if ($perm->isArtifactAdmin()) {
 		$alevel=' >= 0';	
 	} else {
 		$alevel=' > 1';	

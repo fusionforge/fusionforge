@@ -98,9 +98,14 @@ class ProjectGroupFactory extends Error {
 				$public_flag='=1';
 			} else {
 				$public_flag='<3';
-				$exists=' AND EXISTS (SELECT group_project_ID 
+				if ($perm->isPMAdmin()) {
+					$exists='';
+				} else {
+					$exists=" AND EXISTS (SELECT group_project_ID 
 					FROM project_perm 
-					WHERE perm_level >= 0 AND group_project_id=project_group_list.group_project_id) ';
+					WHERE perm_level >= 0 AND group_project_id=project_group_list.group_project_id
+					AND user_id='".user_getid()."') ";
+				}
 			}
 		} else {
 			$public_flag='=1';

@@ -247,9 +247,6 @@ cp gforge/cronjobs/cvs-cron/www/* cvs/
 cp gforge/cronjobs/cvs-cron/cvssh.pl /bin/
 chmod 755 /bin/cvssh.pl
 
-#copy cvsweb and make sure it's in the local.inc sys_scmweb path
-cp gforge/plugins/scmcvs/cgi-bin/cvsweb /etc/gforge/
-
 tar -xzf jpgraph-1.9.1.tar.gz
 mv jpgraph-1.9.1/src/* /var/www/jpgraph/
 
@@ -258,6 +255,9 @@ mkdir /etc/gforge
 cp gforge/etc/local.inc.example /etc/gforge/local.inc
 chown -R apache:apache /etc/gforge/
 chmod 600 /etc/gforge/local.inc
+
+#copy cvsweb and make sure it's in the local.inc sys_scmweb path
+cp gforge/plugins/scmcvs/cgi-bin/cvsweb /etc/gforge/
 
 #copy the scmcvs plugin config to /etc/gforge/
 cp -R gforge/plugins/scmcvs/etc/plugins/ /etc/gforge/
@@ -286,7 +286,7 @@ chown -R apache:apache /var/www
 The following will provide an example httpd.conf for apache:
 
 cd /var/www
-cp etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
+cp gforge/etc/gforge-httpd.conf.example /etc/gforge/httpd.conf
 
 Now edit that file to change the hostnames to match your setup.
 

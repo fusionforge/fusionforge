@@ -92,14 +92,27 @@ class ArtifactTypeFactory extends Error {
 		$permissions='';
 		if (session_loggedin()) {
 			$perm =& $this->Group->getPermission( session_get_user() );
-			if ($perm && is_object($perm) && $perm->isMember()) {
-			   $permissions="OR group_artifact_id IN (SELECT group_artifact_id FROM artifact_perm WHERE perm_level >= 0 AND group_artifact_id=artifact_group_list_vw.group_artifact_id AND user_id='".user_getid()."') ";
+			if (!$perm || !is_object($perm) || !$perm->isMember()) {
+				$public_flag='=1';
+			} else {
+				$public_flag='<3';
+				if ($perm->isArtifactAdmin()) {
+					$exists='';
+				} else {
+					$exists=" AND EXISTS (SELECT group_artifact_ID
+					FROM artifact_perm
+					WHERE perm_level >= 0 AND group_artifact_id=artifact_group_list.group_artifact_id
+					AND user_id='".user_getid()."') ";
+				}
 			}
+		} else {
+			$public_flag='=1';
 		}
 
 		$sql="SELECT * FROM artifact_group_list_vw
 			WHERE group_id='". $this->Group->getID() ."'
-			AND is_public=1 $permissions
+			AND is_public $public_flag
+			$exists
 			ORDER BY group_artifact_id ASC";
 
 		$result = db_query ($sql);
