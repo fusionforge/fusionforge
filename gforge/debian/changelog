@@ -12,9 +12,11 @@ sourceforge (2.5-10+9) unstable; urgency=low
   * Fixed User.class (closes: #108682).
   * Added the alias for the Mailman images in sf-httpd.conf.template.
   * Fixed the most important entry in the zone file (ours).
-  * Started hacking on LDAP email forwarding.  I fear this will require
-    that we depend on exim (instead of any other MTA), unless we want to
-    maintain stuff for several MTAs.
+  * Email forwarding should now work (through LDAP).  I'm afraid this has
+    required that we depend on exim specifically (instead of any other
+    MTA).  If you desperately need support for another MTA, please read
+    (and understand) deb-specific/install-exim.sh and send me the
+    appropriate install-<your-MTA-here>.sh for inclusion.
   * Fixed fill-in-the-blanks.pl to allow multiple replacements of the same
     token on the same line.  That was needed by some magic that's not here
     anymore, but it's better nevertheless.

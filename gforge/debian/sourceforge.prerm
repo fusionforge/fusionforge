@@ -45,11 +45,14 @@ case "$1" in
         # DNS config removal
 	/usr/lib/sourceforge/bin/install-dns.sh purge
 
-        # LDAP config removal
-	/usr/lib/sourceforge/bin/install-ldap.sh purge
+        # Exim config removal
+	# /usr/lib/sourceforge/bin/install-exim.sh purge # Not ready yet
 
         # SSH config removal
 	/usr/lib/sourceforge/bin/install-ssh.sh purge
+
+        # LDAP config removal
+	/usr/lib/sourceforge/bin/install-ldap.sh purge
 
         if grep -q "### Next line inserted by Sourceforge install" /etc/aliases
         then

@@ -182,6 +182,9 @@ EOF
             # Setup our SSH
 	    /usr/lib/sourceforge/bin/install-ssh.sh
 
+            # Setup our mail forwarding
+	    # /usr/lib/sourceforge/bin/install-exim.sh configure # Not ready yet
+
 	    # Setup our CVS
 	    # Making user group and cvs update from database 
 	    /usr/lib/sourceforge/bin/update-user-group-cvs.sh
