@@ -47,7 +47,7 @@ function scm_header($params) {
 	*/
 	echo '<span style="font-family:arial, helvetica">';
 	echo '<p><strong>';
-	echo '<a href="/scm/">' .$Language->getText('scm_index','title').'</a>
+	echo '<a href="/scm/?group_id='.$params['group'].'">' .$Language->getText('scm_index','title').'</a>
 		 | <a href="/scm/admin/?group_id='.$params['group'].'">' .
 		$Language->getText('project_admin','scm_admin').'</a></strong></p></span>';
 	echo '<p>&nbsp;</p>';
