@@ -6,7 +6,6 @@ alter table project_history rename column date to mod_date;
 --
 --	Change project_task to delete on removal of project
 --
-ALTER TABLE project_task DROP CONSTRAINT "project_task_group_project_id_f" RESTRICT;
 
 ALTER TABLE project_task 
 	ADD CONSTRAINT projecttask_groupprojectid_fk FOREIGN KEY (group_project_id)
@@ -21,8 +20,6 @@ ALTER TABLE project_group_list ADD COLUMN send_all_posts_to text;
 --
 --	Each task can be assigned a category
 --
-DROP TABLE project_category;
-DROP SEQUENCE project_categor_category_id_seq;
 CREATE TABLE project_category (
 category_id serial,
 group_project_id int 
@@ -41,7 +38,6 @@ UPDATE project_task SET category_id=100;
 --
 --	Convenience view required for ProjectTask object
 --
-DROP VIEW project_task_vw;
 CREATE VIEW project_task_vw AS 
 SELECT project_task.*,project_category.category_name,project_status.status_name 
 FROM project_task 
@@ -51,7 +47,6 @@ NATURAL JOIN project_status;
 --
 --	Each task can have multiple artifacts associated with it
 --
-DROP TABLE project_task_artifact;
 CREATE TABLE project_task_artifact (
 project_task_id int 
 	CONSTRAINT projtaskartifact_projtaskid_fk REFERENCES project_task(project_task_id) ON DELETE CASCADE,
@@ -63,7 +58,6 @@ CREATE INDEX projecttaskartifact_artifactid ON project_task_artifact (artifact_i
 --
 --	Relation to forums dedicated to this project
 --
-DROP TABLE project_group_forum;
 CREATE TABLE project_group_forum (
 group_project_id int 
 	CONSTRAINT projgroupforum_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
@@ -75,7 +69,6 @@ CREATE INDEX projectgroupforum_groupforumid ON project_group_forum(group_forum_i
 --
 --	Relation to a category of docs for this project
 --
-DROP TABLE project_group_doccat;
 CREATE TABLE project_group_doccat (
 group_project_id int 
 	CONSTRAINT projgroupdoccat_projgroupid_fk REFERENCES project_group_list(group_project_id) ON DELETE CASCADE,
@@ -87,17 +80,14 @@ CREATE INDEX projectgroupdoccat_groupgroupid ON project_group_doccat(doc_group_i
 --
 --
 --
-DROP VIEW project_depend_vw;
 CREATE VIEW project_depend_vw AS 
 	SELECT pt.project_task_id,pd.is_dependent_on_task_id,pt.end_date,pt.start_date
 	FROM project_task pt NATURAL JOIN project_dependencies pd;
 
-DROP VIEW project_dependon_vw;
 CREATE VIEW project_dependon_vw AS 
 	SELECT pd.project_task_id,pd.is_dependent_on_task_id,pt.end_date,pt.start_date
 	FROM project_task pt FULL JOIN project_dependencies pd ON (pd.is_dependent_on_task_id=pt.project_task_id);
 
-DROP VIEW project_history_user_vw;
 CREATE VIEW project_history_user_vw AS
 	SELECT users.realname,users.email,users.user_name,project_history.* 
 	FROM users,project_history 
@@ -123,7 +113,6 @@ DELETE FROM project_history WHERE field_name='details';
 
 --COMMIT;
 
-DROP VIEW project_message_user_vw;
 CREATE VIEW project_message_user_vw AS
 	SELECT users.realname,users.email,users.user_name,project_messages.*
 	FROM users,project_messages
@@ -198,7 +187,6 @@ END;
 ' LANGUAGE 'plpgsql';
 
 
-DROP TRIGGER projtask_update_depend_trig ON project_task;
 CREATE TRIGGER projtask_update_depend_trig AFTER UPDATE ON project_task
 	FOR EACH ROW EXECUTE PROCEDURE projtask_update_depend();
 
@@ -239,7 +227,6 @@ BEGIN
 END;
 ' LANGUAGE 'plpgsql';
 
-DROP TRIGGER projtask_insert_depend_trig ON project_task;
 CREATE TRIGGER projtask_insert_depend_trig BEFORE INSERT OR UPDATE ON project_task
 	FOR EACH ROW EXECUTE PROCEDURE projtask_insert_depend();
 

@@ -26,7 +26,6 @@ UPDATE groups SET new_doc_address='',send_all_docs='0';
 --
 --	Create a convenience view for selecting from docman
 --
-DROP VIEW docdata_vw;
 CREATE VIEW docdata_vw AS
 SELECT users.user_name,users.realname,users.email,
 	d.group_id,d.docid,d.stateid,d.title,d.updatedate,d.createdate,d.created_by,
