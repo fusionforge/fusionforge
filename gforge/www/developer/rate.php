@@ -1,28 +1,43 @@
 <?php
 /**
-  *
-  * SourceForge Developer's Page
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
-
+ * GForge rate user page
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA
+ */
 
 require_once('pre.php');
 require_once('vote_function.php');
 
 if (session_loggedin()) {
 
-	$me = session_get_user();
+	exit_not_logged_in();
+
+} else {
+
+	$me =& session_get_user();
 	if (!$me->usesRatings()) {
 		exit_error(
 			$Language->getText('developer_rate','turned_off_title'),
 			$Language->getText('developer_rate','turned_off_body')
-			);
+		);
 	}
 
 	$ruser = $me->getID();
@@ -59,7 +74,6 @@ if (session_loggedin()) {
 			}
 		}
 	} else {
-		global $G_SESSION;
 		exit_error($Language->getText('general','error'),$Language->getText('developer_rate','cannot_rate_yourself'));
 	}
 
@@ -72,8 +86,6 @@ if (session_loggedin()) {
 
 	echo $HTML->footer(array());
 
-} else {
-	exit_not_logged_in();
 }
 
 ?>

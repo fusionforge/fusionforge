@@ -75,7 +75,11 @@ if ($action=='activate') {
 } else if ($action=='delete') {
 
 	$group =& group_get_object($group_id);
-	exit_assert_object($group, 'Group');
+	if (!$group || !is_object($group)) {
+		exit_error('Error','Could Not Get Group');
+	} elseif ($group->isError()) {
+		exit_error('Error',$group->getErrorMessage());
+	}
 
 	if (!$group->setStatus(session_get_user(), 'D')) {
 		exit_error(
@@ -89,13 +93,16 @@ if ($action=='activate') {
 	// Determine whether to send a canned or custom rejection letter and send it
 	if( $response_id == 100 ) {
 
-                $group->sendRejectionEmail(0, $response_text);
+		$group->sendRejectionEmail(0, $response_text);
 
 		if( $add_to_can ) {
 			add_canned_response($response_title, $response_text);
 		}
+
 	} else {
+
 		$group->sendRejectionEmail($response_id);
+
 	}
 }
 
