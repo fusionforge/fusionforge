@@ -284,6 +284,44 @@ eval {
 	$dbh->commit () ;
     }
 
+    $query = "select value from debian_meta_data where key = 'db-version'" ;
+    $sth = $dbh->prepare ($query) ;
+    $sth->execute () ;
+    @array = $sth->fetchrow_array () ;
+    $sth->finish () ;
+    
+    $version = $array [0] ;
+    
+    if (is_lesser $version, "2.5-30") {
+	debug "Found version $version lesser than 2.5-30, adding rows to supported_languages." ;
+	@reqlist = (
+		    "INSERT INTO supported_languages VALUES (16,'Bulgarian','Bulgarian.class','Bulgarian')",
+		    "INSERT INTO supported_languages VALUES (17,'Greek','Greek.class','Greek')",
+		    "INSERT INTO supported_languages VALUES (18,'Indonesian','Indonesian.class','Indonesian')",
+		    "INSERT INTO supported_languages VALUES (19,'Portuguese (Brazillian)','PortugueseBrazillian.class','Portuguese (Brazillian)')",
+		    "INSERT INTO supported_languages VALUES (20,'Polish','Polish.class','Polish')",
+		    "INSERT INTO supported_languages VALUES (21,'Portuguese','Portuguese.class','Portuguese')",
+		    "INSERT INTO supported_languages VALUES (22,'Russian','Russian.class','Russian')"
+		    ) ;
+	
+ 	foreach my $s (@reqlist) {
+ 	    $query = $s ;
+ 	    $sth = $dbh->prepare ($query) ;
+ 	    $sth->execute () ;
+ 	    $sth->finish () ;
+ 	}
+	@reqlist = () ;
+
+ 	debug "Updating debian_meta_data table." ;
+ 	$query = "UPDATE debian_meta_data SET value = '2.5-30' where key = 'db-version'" ;
+ 	$sth = $dbh->prepare ($query) ;
+ 	$sth->execute () ;
+ 	$sth->finish () ;
+
+ 	debug "Committing." ;
+ 	$dbh->commit () ;
+     }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
     

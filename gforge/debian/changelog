@@ -22,8 +22,9 @@ sourceforge (2.5-29+) unstable; urgency=low
   * [Roland] Fixed search results page for Software/Group: the link was
     wrong in the case of foundries.
   * [Roland] Fixed POSIXness of maintainer scripts (closes: #150410).
+  * [Roland] Added missing languages (closes: #150301).
 
- -- Roland Mas <lolando@debian.org>  Thu, 20 Jun 2002 13:40:14 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 20 Jun 2002 13:53:21 +0200
 
 sourceforge (2.5-29) unstable; urgency=low
 
