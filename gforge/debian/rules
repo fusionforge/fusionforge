@@ -29,6 +29,7 @@ build-stamp:
 
 	#/usr/bin/docbook-to-man debian/sourceforge.sgml > sourceforge.1
 	/usr/bin/docbook-to-man debian/cvssh.sgml > cvssh.1
+	/usr/bin/docbook-to-man debian/sourceforge-config.sgml > sourceforge-config.1
 
 	touch build-stamp
 

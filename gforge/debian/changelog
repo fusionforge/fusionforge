@@ -5,6 +5,8 @@ sourceforge (2.6-0+7+) unstable; urgency=low
   * [Christian] Corrected wrong userid for CVS
   * [Christian] Fixed libmcryp4 dependancy
   * [Christian] Added anoncvs_ users in ldap db 
+  * [Roland] [From 2.5] Added man page for sourceforge-config (from a
+    Docbook SGML file).  This fixes a lintian error.
 
  -- Christian Bayle <bayle@aist.enst.fr>  Thu, 28 Feb 2002 21:44:15 +0100
 
@@ -17,7 +19,8 @@ sourceforge (2.6-0+7) unstable; urgency=low
   * [Roland] [From 2.5] Added "-s /bin/sh" when su'ing to postgres.
   * [Roland] [From 2.5] Moved templates to a Policy-compliant location
     (/etc/sourceforge/templates).
-  * [Christian] modify install-ldap.sh to follow slapd undocumented changes
+  * [Christian] modify install-ldap.sh to follow slapd undocumented
+    changes
   * [Christian] removed test on /etc/ldap.secret in sourceforge.config
   * [Christian] changed template in local.inc.template to remove People in
     sys_ldap_admin dn
