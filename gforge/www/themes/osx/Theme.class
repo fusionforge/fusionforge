@@ -1,4 +1,4 @@
-<?php   
+<?php
 /*
  * Mac OS X like theme.
  *
@@ -9,17 +9,17 @@
  * the above copyright notice appear in all copies and that both that
  * copyright notice and this permission notice appear in supporting
  * documentation.
- * 
+ *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
  * AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN
  * AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
- * 
+ *
  * Except as contained in this notice, the name of the author shall not be
  * used in advertising or otherwise to promote the sale, use or other dealings
  * in this Software without prior written authorization from the author.
@@ -58,7 +58,7 @@ class Theme extends Layout {
 
 		// The color to separate HTML boxes
 		$this->COLOR_HTMLBOX_SEP = '#000000';
-		
+
 		// Font Face Constants
 		// The content font
 		$this->FONT_CONTENT = 'Lucida Grande';
@@ -74,19 +74,19 @@ class Theme extends Layout {
 		$this->FONTSIZE_SMALLEST='x-small';
 		//The HTML box title font size
 		$this->FONTSIZE_HTMLBOX_TITLE = 'x-small';
-		
-// new variables introduced by this theme...		
+
+// new variables introduced by this theme...
 		// background image
 		$this->BACKGROUND= 'background.png';
-		
+
 		// height of a tab (ie the size of the background image), 23 is specified in the
 		// style guide and so the background images were drawn for that size, changing
 		// this will lead to the images being cropped or tiled, either will look bad.
 		$this->TAB_HEIGHT=23;
-				
-		
-		// the following are not used in this theme, but have been set to obnoxious 
-		// colors to help debug any new pages that make assumptions about a theme...		
+
+
+		// the following are not used in this theme, but have been set to obnoxious
+		// colors to help debug any new pages that make assumptions about a theme...
 		// The content background color
 		$this->COLOR_CONTENT_BACK= '#0000FF';
 		// The background color
@@ -109,21 +109,28 @@ class Theme extends Layout {
 		} else {
 			$params['title'] = "$sys_name: " . $params['title'];
 		}
-		?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">
 
-<html lang="<?php echo $Language->getLanguageCode(); ?>">
+		print '<?xml version="1.0" encoding="' . $Language->getEncoding(). '"?>';
+
+		?>
+
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo $Language->getLanguageCode(); ?>">
+
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>">
-	<TITLE><?php echo $params['title']; ?></TITLE>
-	<SCRIPT language="JavaScript">
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
+	<title><?php echo $params['title']; ?></title>
+	<script language="JavaScript" type="text/javascript">
 	<!--
 	function help_window(helpurl) {
 		HelpWin = window.open( '<?php echo ((session_issecure()) ? 'https://'.
 			$GLOBALS['sys_default_domain'] : 'http://'.$GLOBALS['sys_default_domain']); ?>' + helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
 	}
 	// -->
-	</SCRIPT>
+	</script>
 <?php
 
 /*
@@ -133,22 +140,30 @@ class Theme extends Layout {
 		//gets font from Language Object
 		// try and use the system font first...we'll risk I18N issues
 		$site_fonts='Lucida Grande,'.$GLOBALS['Language']->getFont();
-		
+
 	?>
 
 <style type="text/css">
 	<!--
-	OL,UL,P,BODY,TR,TD,TH,FORM { 
-		font-family: <?php echo $site_fonts; ?>; 
-		font-size:<?php echo $this->FONTSIZE; ?>; 
-		color: <?php echo $this->FONTCOLOR_CONTENT ?>; 
+	BODY {
+		margin-top: 3;
+		margin-left: 3;
+		margin-right: 3;
+		margin-bottom: 3;
+		background-image: url(<?php echo $this->imgroot.$this->BACKGROUND; ?>);
 	}
 
-/* give the rule a bit of extra space (above and below), since its being used to divide 
+	OL,UL,P,BODY,TR,TD,TH,FORM {
+		font-family: <?php echo $site_fonts; ?>;
+		font-size:<?php echo $this->FONTSIZE; ?>;
+		color: <?php echo $this->FONTCOLOR_CONTENT ?>;
+	}
+
+/* give the rule a bit of extra space (above and below), since its being used to divide
    sections on some pages (project summary) */
 	HR { margin: 5px 0px 5px 0px }
-	
-	
+
+
 	H1 { font-size: x-large; font-family: <?php echo $site_fonts; ?>; }
 	H2 { font-size: large; font-family: <?php echo $site_fonts; ?>; }
 	H3 { font-size: medium; font-family: <?php echo $site_fonts; ?>; }
@@ -165,42 +180,42 @@ class Theme extends Layout {
 
 	.titlebar { color: #000000; text-decoration: none; font-weight: bold; }
 
-	
-	A.tablink { 
-		color: #000000; 
-		text-decoration: none; 
-		font-weight: bold; 
-		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; 
+
+	A.tablink {
+		color: #000000;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
-	A.tablink:visited { 
-		color: #000000; 
-		text-decoration: none; 
-		font-weight: bold; 
-		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; 
+	A.tablink:visited {
+		color: #000000;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
-	A.tablink:hover { 
-		text-decoration: none; 
-		color: #000000; 
-		font-weight: bold; 
-		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; 
+	A.tablink:hover {
+		text-decoration: none;
+		color: #000000;
+		font-weight: bold;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
-	A.tabsellink { 
-		color: #000000; 
-		text-decoration: none; 
-		font-weight: bold; 
-		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; 
+	A.tabsellink {
+		color: #000000;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
-	A.tabsellink:visited { 
-		color: #000000; 
-		text-decoration: none; 
-		font-weight: bold; 
-		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; 
+	A.tabsellink:visited {
+		color: #000000;
+		text-decoration: none;
+		font-weight: bold;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
-	A.tabsellink:hover { 
-		text-decoration: none; 
-		color: #000000; 
-		font-weight: bold; 
-		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>; 
+	A.tabsellink:hover {
+		text-decoration: none;
+		color: #000000;
+		font-weight: bold;
+		font-size: <?php echo $this->FONTSIZE_SMALLER; ?>;
 	}
 
 	A.showsource {
@@ -221,12 +236,12 @@ class Theme extends Layout {
 	-->
 </style>
 
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
 	<!--
 		if ( document.images ) {
 			logooff=new Image();
 			logooff.src="<?php echo $this->imgroot.'logo.png'; ?>";
-			
+
 			logohover=new Image();
 			logohover.src="<?php echo $this->imgroot.'logohover.png'; ?>";
 		}
@@ -237,26 +252,24 @@ class Theme extends Layout {
 		}
 		function imgOff(imgName) {
 			if ( document.images ) {
-				document[imgName].src=eval(imgName + "off.src");					
+				document[imgName].src=eval(imgName + "off.src");
 			}
-		}	
+		}
 	//-->
-</SCRIPT>
+</script>
 </head>
 
-<BODY TOPMARGIN="3" MARGINHEIGHT="3" MARGINWIDTH="3" LEFTMARGIN="3" RIGHTMARGIN="3" 
-	BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>">
+<body>
 
-<table border=0 width="100%" cellspacing="0" cellpadding=0 
-	BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>">
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
-		<td><a href="/" 
-			onMouseOver="imgOver('logo')" 
-			onMouseOut="imgOff('logo')"><img name="logo" border=0 height=60 width=180 
-				SRC="<?php echo $this->imgroot.'logo.png'; ?>"</a></td>
+		<td><a href="/"
+			onmouseover="imgOver('logo')"
+			onmouseout="imgOff('logo')"><img name="logo" border="0" height="60" width="180"
+				src="<?php echo $this->imgroot.'logo.png'; ?>" alt="GForge Logo" /></a></td>
 		<td><?php echo $this->searchBox(); ?></td>
-		<td align="RIGHT"><?php
+		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
 				<a href="/account/logout.php">Logout</a><br />
@@ -273,26 +286,32 @@ class Theme extends Layout {
 		<td>&nbsp;&nbsp;</td>
 	</tr>
 
-</TABLE>
+</table>
 
-<table border=0 width="100%" cellspacing="0" cellpadding=0 
-	BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>">
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
-		
+		<td>&nbsp;</td>
+		<td colspan="3">
+
 <?php echo $this->outerTabs($params); ?>
+
+		</td>
+		<td>&nbsp;</td>
 
 	</tr>
 	<tr>
+		<td>&nbsp;</td>
+		<td valign="top" width="99%" colspan="3">
 			<!-- Inner Tabs / Shell -->
 
-			<table border=0 width="100%" cellspacing="0" cellpadding=0>
+			<table border="0" width="100%" cellspacing="0" cellpadding="0">
 <?php
 
 
-if ($params['group']) {
+		  if ($params['group']) {
 
-			?>
+?>
 			<tr>
 				<td>&nbsp;</td>
 				<td>
@@ -309,16 +328,15 @@ if ($params['group']) {
 }
 
 ?>
-
 			<tr>
-				<td BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
-					SRC="<?php echo $this->imgroot; ?>clear.png" width="99%" height=10></td>
+				<td><img
+					src="<?php echo $this->imgroot; ?>clear.png" width="99%" height="10" alt="" /></td>
 			</tr>
 
 			<tr>
-				<td BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
-					SRC="<?php echo $this->imgroot; ?>clear.png" width=10 height=1></td>
-				<td valign=TOP width="99%" BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"">
+				<td><img
+					src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
+				<td valign="top" width="99%">
 	<?php
 	}
 
@@ -330,30 +348,30 @@ if ($params['group']) {
 
 
 				</td>
-				<td width=10 BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
-					SRC="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+				<td width="10"><img
+					src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-				<td BACKGROUND="<?php echo $this->imgroot.$this->BACKGROUND; ?>"><img 
-					SRC="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
+				<td><img
+					src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
 			</tr>
-			</TABLE>
+			</table>
 
 		<!-- end inner body row -->
 
 		</td>
-		<td width=10 bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width=2 height=1></td>
+		<td width="10"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
 	</tr>
 	<tr>
 		<!-- some extra space to make it look nicer -->
-		<td height=100>&nbsp;</td>
+		<td height="100">&nbsp;</td>
 	</tr>
-</TABLE>
+</table>
 <?php
 	global $sys_show_source;
 	if ($sys_show_source) {
 		global $SCRIPT_NAME;
-		print '<a class=showsource href="/source.php?file=' . $SCRIPT_NAME . '">Show Source</a>';
+		print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '">Show Source</a>';
 	}
 ?>
 
@@ -374,15 +392,15 @@ if ($params['group']) {
 	function boxTop($title) {
 		return '
 		<!-- boxTop -->
-		<table cellspacing="2" cellpadding="0" width="100%" border="0" >
+		<table cellspacing="2" cellpadding="0" width="100%" border="0">
 		<tr><td>
 
 			<table cellspacing="2" cellpadding="0" width="100%" border="0" >
 				<tr>
-					<td colspan="2"><SPAN class=titlebar>'.$title.'</SPAN></td>
+					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 				</tr>
-				<tr height=1 align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<td colspan=2 height=1></td><tr align=left><td colspan=2>';
+				<tr align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+					<td colspan="2" height="1"></td></tr><tr align="left"><td colspan="2">';
 	}
 
 	/**
@@ -396,12 +414,12 @@ if ($params['group']) {
 				<!-- boxMiddle -->
 				</td>
 				</tr>
-				<tr><td height=20 colspan=2>&nbsp;</td></tr>
+				<tr><td height="20" colspan="2">&nbsp;</td></tr>
 				<tr>
-					<td colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
+					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 				</tr>
-				<tr align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<td colspan=2 height=1></td></tr><tr><td colspan=2>';
+				<tr align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+					<td colspan="2" height="1"></td></tr><tr><td colspan="2">';
 	}
 
 	/**
@@ -412,11 +430,11 @@ if ($params['group']) {
 	function boxGetAltRowStyle($i) {
 		switch ($i % 3 ) {
 			case 0:
-				return 'BGCOLOR="#FFFFFF"';
+				return 'bgcolor="#FFFFFF"';
 			case 1:
-				return 'BGCOLOR="' . $this->COLOR_LTBACK1 . '"';
+				return 'bgcolor="' . $this->COLOR_LTBACK1 . '"';
 			case 2:
-				return 'BGCOLOR="' . $this->COLOR_LTBACK2 . '"';
+				return 'bgcolor="' . $this->COLOR_LTBACK2 . '"';
 		}
 	}
 
@@ -429,12 +447,12 @@ if ($params['group']) {
 		return '<!-- boxBottom -->
 					</td>
 				</tr>
-			</TABLE>
+			</table>
 		</td></tr>
-		<tr><td height=20 colspan=2>&nbsp;</td></tr>
-		</TABLE><p>';
+		<tr><td height="20" colspan="2">&nbsp;</td></tr>
+		</table><p />';
 	}
-		
+
 	/**
 	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
 	 *
@@ -453,7 +471,7 @@ if ($params['group']) {
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align=left><a class=titlebar href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
+				<td align="left"><a class="titlebar" href="'.$links_arr[$i].'">'.$title_arr[$i].'</a></td>';
 			}
 		} else {
 			for ($i=0; $i<$count; $i++) {
@@ -463,18 +481,18 @@ if ($params['group']) {
 		}
 		$return .= '
 		</tr>
-		<tr height=1 align=left bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-			<td colspan='.$count.' height=1><img src="'.$this->imgroot.'clear.png" height=1 width=1></td>
+		<tr height="1" align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
+			<td colspan="'.$count.'" height="1"><img src="'.$this->imgroot.'clear.png" height="1" width="1" alt="" /></td>
 		</tr>';
-		return $return;			
+		return $return;
 	}
 
 	function tabGenerator($TABS_DIRS,$TABS_TITLES,$nested=false,$selected=false,$sel_tab_bgcolor='WHITE',$total_width='100%') {
 
-		$deselect_tab='BACKGROUND="'.$this->imgroot.'tabs/deselect.png"';
-		$select_tab='BACKGROUND="'.$this->imgroot.'tabs/select.png"';
-		$deselect_rule='BACKGROUND="'.$this->imgroot.'tabs/ruledeselect.png"';
-		$select_rule='BACKGROUND="'.$this->imgroot.'tabs/ruleselect.png"';
+		$deselect_tab='style="background-image: url('.$this->imgroot.'tabs/deselect.png);"';
+		$select_tab='style="background-image: url('.$this->imgroot.'tabs/select.png);"';
+		$deselect_rule='style="background-image: url('.$this->imgroot.'tabs/ruledeselect.png);"';
+		$select_rule='style="background-image: url('.$this->imgroot.'tabs/ruleselect.png);"';
 
 		$count=count($TABS_DIRS);
 		$width=intval((100/($count+1)));
@@ -483,9 +501,9 @@ if ($params['group']) {
 
 		<!-- tabGenerator -->
 
-		<table border=0 cellpadding=0 cellspacing=0 width="'.$total_width.'">
+		<table border="0" cellpadding="0" cellspacing="0" width="'.$total_width.'">
 		<tr>
-			<td><img src="'.$this->imgroot.'clear.png" height='.$this->TAB_HEIGHT.' width="'.$space.'%"></td>';
+			<td><img src="'.$this->imgroot.'clear.png" height="'.$this->TAB_HEIGHT.'" width="'.$space.'%" alt="" /></td>';
 		if ($nested) {
 			$inner='-inner';
 		} else {
@@ -496,38 +514,38 @@ if ($params['group']) {
 			$bgimg=(($selected==$i)?$select_tab:$deselect_tab);
 			$cornerimg=(($selected==$i)?'select':'deselect');
 			$return .= '
-				<td height='.$this->TAB_HEIGHT.' width=5
-					BACKGROUND="'.$this->imgroot.'tabs/left'.$cornerimg.'.png"></td>
-				<td '.$bgimg.' height='.$this->TAB_HEIGHT.' width="'.$width.'%"  align="MIDDLE">'.
-				'<A class="'. (($selected==$i)?'tabsellink':'tablink') .'" HREF="'. $TABS_DIRS[$i] .'">'. $TABS_TITLES[$i] .'</a></td>
-				<td height='.$this->TAB_HEIGHT.' width=5
-					BACKGROUND="'.$this->imgroot.'tabs/right'.$cornerimg.'.png"</td>';
+				<td height="'.$this->TAB_HEIGHT.'" width="5"
+					style="background-image: url('.$this->imgroot.'tabs/left'.$cornerimg.'.png);"></td>
+				<td '.$bgimg.' height="'.$this->TAB_HEIGHT.'" width="'.$width.'%"  align="center">'.
+				'<a class="'. (($selected==$i)?'tabsellink':'tablink') .'" href="'. $TABS_DIRS[$i] .'">'. $TABS_TITLES[$i] .'</a></td>
+				<td height="'.$this->TAB_HEIGHT.'" width="5"
+					style="background-image: url('.$this->imgroot.'tabs/right'.$cornerimg.'.png);"></td>';
 		}
 
 		$return .= '
-			<td><img src="'.$this->imgroot.'clear.png" height='.$this->TAB_HEIGHT.' width="'.$space.'%"></td>
+			<td><img src="'.$this->imgroot.'clear.png" height="'.$this->TAB_HEIGHT.'" width="'.$space.'%" alt="" /></td>
 		</tr>
 		<tr>
-		<td BACKGROUND="'.$this->imgroot.'tabs/ruleselect.png"  align="MIDDLE"><img 
-			SRC="'.$this->imgroot.'clear.png" height=8 width="'.$space.'%"></td>';
+		<td style="background-image: url('.$this->imgroot.'tabs/ruleselect.png);"  align="center"><img
+			src="'.$this->imgroot.'clear.png" height="8" width="'.$space.'%" alt="" /></td>';
 		for ($i=0; $i<$count; $i++) {
 			$bgimg=(($selected==$i)?$select_rule:$deselect_rule);
 			$blendimg=(($selected==$i)?'select':'deselect');
 			$return .= '
-				<td BACKGROUND="'.$this->imgroot.'tabs/leftblend'.$blendimg.'.png"><img 
-					SRC="'.$this->imgroot . 'clear.png" height=8 width=5></td>
-				<td '.$bgimg.' width="'.$width.'%"  align="MIDDLE"><img 
-					SRC="'.$this->imgroot . 'clear.png" height=8 width=1></td>
-				<td BACKGROUND="'.$this->imgroot.'tabs/rightblend'.$blendimg.'.png"><img 
-					SRC="'.$this->imgroot . 'clear.png" height=8 width=5></td>';
+				<td style="background-image: url('.$this->imgroot.'tabs/leftblend'.$blendimg.'.png);"><img
+					src="'.$this->imgroot . 'clear.png" height="8" width="5" alt="" /></td>
+				<td '.$bgimg.' width="'.$width.'%"  align="center"><img
+					src="'.$this->imgroot . 'clear.png" height="8" width="1" alt="" /></td>
+				<td style="background-image: url('.$this->imgroot.'tabs/rightblend'.$blendimg.'.png);"><img
+					src="'.$this->imgroot . 'clear.png" height="8" width="5" alt="" /></td>';
 		}
-		
+
 		return $return .= '
-		<td BACKGROUND="'.$this->imgroot.'tabs/ruleselect.png"  align="MIDDLE"><img 
-			SRC="'.$this->imgroot.'clear.png" height=8 width="'.$space.'%"></td>
+		<td style="background-image: url('.$this->imgroot.'tabs/ruleselect.png);"  align="center"><img
+			src="'.$this->imgroot.'clear.png" height="8" width="'.$space.'%" alt="" /></td>
 		</tr>
-		<tr><td height=10>&nbsp;</td><tr>
-		</TABLE> 
+		<tr><td height="10">&nbsp;</td></tr>
+		</table>
 		<!-- end tabGenerator -->';
 	}
 
@@ -535,8 +553,8 @@ if ($params['group']) {
 	 * multiTableRow() - create a mutlilevel row in a table
 	 *
 	 * @param	string	the row attributes
-	 * @param	array	the array of cell data, each element is an array, 
-	 *                  	the first item being the text, 
+	 * @param	array	the array of cell data, each element is an array,
+	 *                  	the first item being the text,
 	 *                      the subsequent items are attributes
 	 * @param	boolean is this row part of the title ?
 	 *
@@ -546,7 +564,7 @@ if ($params['group']) {
 		<!-- multiTableRow -->
 		<tr '.$row_attr;
 		if ( $istitle ) {
-			$return .=' align="middle" ';
+			$return .=' align="center" ';
 		}
 		$return .= '>';
 		for ( $c = 0; $c < count($cell_data); $c++ ) {
@@ -556,19 +574,19 @@ if ($params['group']) {
 			}
 			$return .= '>';
 			if ( $istitle ) {
-				$return .='<span class=titlebar>';
+				$return .='<span class="titlebar">';
 			}
 			$return .= $cell_data[$c][0];
 			if ( $istitle ) {
 				$return .='</span>';
 			}
 			$return .= '</td>';
-		
+
 		}
 		$return .= '</tr>
 		<!-- end multiTableRow -->
 		';
-		
+
 		return $return;
 	 }
 
