@@ -22,12 +22,21 @@ $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),
 if (session_loggedin()) {
 ?>
 
-            <FORM ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
+            <FORM NAME="monitorForm" ACTION="<?php echo $PHP_SELF; ?>?group_id=<?php echo $group_id; ?>&atid=<?php echo $ath->getID(); ?>" METHOD="POST">
             <INPUT TYPE="HIDDEN" NAME="func" VALUE="monitor"> 
             <INPUT TYPE="HIDDEN" NAME="artifact_id" VALUE="<?php echo $ah->getID(); ?>">
         <TR>
-            <TD COLSPAN=2">
-            <INPUT TYPE="SUBMIT" NAME="SUBMIT" VALUE="Monitor">&nbsp;<A href="javascript:help_window('/help/tracker.php?helpname=monitor')"><B>(?)</B></A>
+            <TD COLSPAN=2"><?php
+if ($ah->isMonitoring()) {
+ $img="xmail16w.png";
+ $key="stop_monitoring";
+} else {
+ $img="mail16w.png";
+ $key="monitor";
+}
+echo '<INPUT TYPE="IMAGE" NAME="SUBMIT" '.html_image('ic/'.$img.'','20','20',array()).'</INPUT>';
+echo '<A HREF="javascript:document.forms.monitorForm.submit()">'.$Language->getText('tracker_utils',$key).'</A>';
+?>&nbsp;<A href="javascript:help_window('/help/tracker.php?helpname=monitor')"><B>(?)</B></A>
             </FORM>
             </TD>
         </TR>

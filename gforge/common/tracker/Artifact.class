@@ -503,6 +503,20 @@ class Artifact extends Error {
 		}
 	}
 
+	function isMonitoring() {
+		if (!session_loggedin()) {
+			return false;
+		}
+		$sql="SELECT * FROM artifact_monitor WHERE user_id='".user_getid()."' AND artifact_id='".$this->getID()."';";
+		$result = db_query($sql);
+		if (!$result || db_numrows($result) < 1) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+
 	/**
 	 *  getMonitorIds - array of email addresses monitoring this Artifact.
 	 *
