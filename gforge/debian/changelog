@@ -1,8 +1,9 @@
-sourceforge (2.5-20+) unstable; urgency=low
+sourceforge (2.5-21) unstable; urgency=low
 
-  * 
+  * Delete temporary LDIF files created by cronjob (closes: #127636,
+    #127641).
 
- --
+ -- Roland Mas <lolando@debian.org>  Fri,  4 Jan 2002 11:44:30 +0100
 
 sourceforge (2.5-20) unstable; urgency=low
 
