@@ -1,4 +1,4 @@
-gforge (3.1-8+3) unstable; urgency=low
+gforge (3.1-9) unstable; urgency=low
 
   * [Roland] Added permissions for the robot to edit the
     ou=mailingList,dc=... entries in LDAP.
@@ -10,7 +10,7 @@ gforge (3.1-8+3) unstable; urgency=low
   * [Roland] Don't count private projects and the None user when
     displaying numbers on the front page (closes: #211086).
 
- -- Roland Mas <lolando@debian.org>  Thu, 12 Feb 2004 12:27:57 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 15 Feb 2004 17:10:11 +0100
 
 gforge (3.1-8) unstable; urgency=low
 
