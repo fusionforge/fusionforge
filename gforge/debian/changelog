@@ -1,3 +1,9 @@
+sourceforge (2.5-15+) unstable; urgency=low
+
+  * [Christian] Added proper chmod for cp -r of www
+
+ -- Christian Bayle <bayle@aist.enst.fr>  Sat, 24 Nov 2001 17:44:46 +0100
+
 sourceforge (2.5-15) unstable; urgency=medium
 
   * [Christian] LDAP cleanup: Added access to userPassword for SF_robot
