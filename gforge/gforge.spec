@@ -211,10 +211,10 @@ fi
 %attr(0640, apache, apache) %config(noreplace) %{_sysconfdir}/httpd/conf.d/gforge.conf
 %attr(0664, root, root) %config(noreplace) %{_sysconfdir}/cron.d/gforge
 %attr(0775, apache, apache) %dir /var/lib/gforge/upload
+%attr(0775, apache, apache) %dir /var/cache/gforge
 %{_datadir}/gforge
 %{_libdir}/gforge
 %{_sysconfdir}/gforge/languages-local
-/var/cache/gforge
 /var/lib/gforge/scmtarballs
 
 %changelog
