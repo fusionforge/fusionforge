@@ -350,7 +350,7 @@ eval {
 	      @reqlist = @{ &parse_sql_file ("/usr/lib/sourceforge/db/sf2.5-to-sf2.6.sql") } ;
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
-		  debug $query ;
+		  # debug $query ;
 		  $sth = $dbh->prepare ($query) ;
 		  $sth->execute () ;
 		  $sth->finish () ;
@@ -426,7 +426,7 @@ eval {
 	      
 	      foreach my $s (@reqlist) {
 		  $query = $s ;
-		  debug $query ;
+		  # debug $query ;
 		  $sth = $dbh->prepare ($query) ;
 		  $sth->execute () ;
 		  $sth->finish () ;
@@ -579,7 +579,7 @@ sub drop_table_if_exists ( $ ) {
     if ($array [0] != 0) {
 	# debug "Dropping table $tname" ;
 	$query = "DROP TABLE $tname" ;
-	debug $query ;
+	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
@@ -597,7 +597,7 @@ sub drop_sequence_if_exists ( $ ) {
     if ($array [0] != 0) {
 	# debug "Dropping sequence $sname" ;
 	$query = "DROP SEQUENCE $sname" ;
-	debug $query ;
+	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
@@ -615,7 +615,7 @@ sub drop_index_if_exists ( $ ) {
     if ($array [0] != 0) {
 	# debug "Dropping index $iname" ;
 	$query = "DROP INDEX $iname" ;
-	debug $query ;
+	# debug $query ;
 	$sth = $dbh->prepare ($query) ;
 	$sth->execute () ;
 	$sth->finish () ;
