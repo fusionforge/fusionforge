@@ -186,7 +186,7 @@ if ($project->usesFRS()) {
 		if (!$res_files || $rows_files < 1) {
 			echo db_error();
 			// No releases
-			echo '<TR BGCOLOR="'.$HTML->COLOR_LTBACK1.'"><TD COLSPAN="4"><B>'.$Language->getText('group', 'norelease').'</B></TD></TR>';
+			echo '<TR BGCOLOR="'.$HTML->COLOR_LTBACK1.'"><TD COLSPAN="5"><B>'.$Language->getText('group', 'norelease').'</B></TD></TR>';
 
 		} else {
 			/*
