@@ -465,7 +465,10 @@ class Theme extends Layout {
 					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 				</tr>
 				<tr align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<td colspan="2" height="1"></td></tr><tr align="left"><td colspan="2">';
+					<td colspan="2" height="1"></td>
+				</tr>
+				<tr align="left">
+					<td colspan="2">';
 	}
 
 	/**
@@ -484,7 +487,10 @@ class Theme extends Layout {
 					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 				</tr>
 				<tr align="left" bgcolor="'. $this->COLOR_HTMLBOX_BACK .'">
-					<td colspan="2" height="1"></td></tr><tr><td colspan="2">';
+					<td colspan="2" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="2">';
 	}
 
 	/**
