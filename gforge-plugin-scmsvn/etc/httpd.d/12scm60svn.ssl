@@ -1,0 +1,3 @@
+  # SVN begin
+  ScriptAlias /plugins/scmsvn/cgi-bin /usr/lib/gforge/plugins/scmsvn/cgi-bin
+  # SVN end
