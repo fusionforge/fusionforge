@@ -133,6 +133,13 @@ class ArtifactType extends Error {
 	var	$element_name;
 
 	/**
+	 * Array of element status so they only have to be fetched once from db.
+	 *
+	 * @var		array	$data_array.
+	 */
+	var	$element_status;
+
+	/**
 	 *	ArtifactType - constructor.
 	 *
 	 *	@param	object	The Group object.
@@ -640,7 +647,8 @@ class ArtifactType extends Error {
 			$sql="select element_id,element_name,status_id
 				FROM artifact_extra_field_elements
 				WHERE extra_field_id ='".$id."'  
-				ORDER BY element_name";
+				ORDER BY element_id ASC";
+
 			$res=db_query($sql);
 			$i=0;
 			while($arr =& db_fetch_array($res)) {
@@ -683,6 +691,37 @@ class ArtifactType extends Error {
 		}
 		return $this->element_name["$choiceid"];
 	}
+
+	/**
+	 *	getElementStatusID - get the status of a particular element.
+	 *
+	 *	@return	int		The status
+	 */
+	function getElementStatusID($choiceid) {
+		if (!$choiceid) {
+			return 0;
+		}
+		if (is_array($choiceid)) {
+			$choiceid=implode(',',$choiceid);
+		}
+		if ($choiceid == 100) {
+			return 0;
+		}
+		if (!$this->element_status["$choiceid"]) {
+			$sql="select element_id,extra_field_id,status_id
+				FROM artifact_extra_field_elements
+				WHERE element_id IN ($choiceid)";
+			$res=db_query($sql);
+			if (db_numrows($res) > 1) {
+				$arr=util_result_column_to_array($res,2);
+				$this->element_status["$choiceid"]=implode(',',$arr);
+			} else {
+				$this->element_status["$choiceid"]=db_result($res,0,'status_id');
+			}
+		}
+		return $this->element_status["$choiceid"];
+	}
+
 
 	/**
 	 *	delete - delete this tracker and all its related data.

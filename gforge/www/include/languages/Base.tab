@@ -529,6 +529,7 @@ advanced_search	select	Select
 advanced_search	headline	$1 Search Result
 advanced_search	no_matches_found	No matches found
 advanced_search	no_matches_found_no_under_section	No matches found - No sections available (check your permissions)
+advanced_search	error_search_minlength	Search must be at least three characters
 artifact_canned	required_fields	ArtifactCanned: name and assignee are Required
 artifact_category	required_fields	ArtifactCategory: name and assignee are Required
 calendar	april	April
@@ -2057,6 +2058,7 @@ rbac_edit	addrole	Add Role
 rbac_edit	update	Update
 rbac_edit	remove	Remove
 rbac_edit	role	Role
+rbac_edit	frspackage	Package Privileges
 reporting	add	Add
 reporting	administrative	Administrative
 reporting	area	Areas

@@ -143,7 +143,8 @@
 							$feedback .= $aefe->getErrorMessage();			
 						} else {
 							$name=$ath->getElementName($copyid[$k]);
-							if (!$aefe->create($name)) {
+							$status=$ath->getElementStatusID($copyid[$k]);
+							if (!$aefe->create($name,$status)) {
 								$feedback .= $Language->getText('tracker_admin_build_boxes','error_inserting_choice').': '.$aefe->getErrorMessage();
 								$aefe->clearError();
 							} else {
