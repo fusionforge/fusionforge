@@ -143,6 +143,7 @@ $abc_array = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','
 	<li><a href="loadtabfiles.php"><?php echo $Language->getText('admin_index','translation_file_tool'); ?></a></li>
 	<li><a href="/stats/lastlogins.php"><?php echo $Language->getText('admin_index','recent_logins'); ?></a></li>
 	<li><a href="cronman.php"><?php echo $Language->getText('admin_index','cronman'); ?></a></li>
+	<?php plugin_hook("site_admin_option_hook", false); ?>
 </ul>
 
 <p>

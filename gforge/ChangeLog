@@ -4,6 +4,8 @@
 	* Remove test about the presence of /etc/gforge/custom/pre.php in
 	pre.php. Customized pre.php can be loaded by adding a path in apache
 	* Manage a sys_custom_path for gforge customization
+	* Added group param to tab hoook
+	* Added site_admin_option_hook to add new features in admin page
 
 2004-04-15  Christian Bayle <bayle@debian.org>
 
