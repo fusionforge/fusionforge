@@ -88,6 +88,13 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 			return;
 		}
 	}
+	if ($unit == "license") {
+		$result = db_numrows(db_query("SELECT license FROM groups WHERE license = $id"));
+		if ($result > 0) {
+			echo "You can't delete the license ".db_result(db_query("select license_name from licenses where license_id = $id"),0,0)." since it's currently referenced in a project.<p>";
+			return;
+		}
+	}
 
 	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
 
