@@ -28,7 +28,7 @@ case "$1" in
 
 	# Make sure pgsql, ldap and gd are enabled in the PHP config files
 	cp -a /etc/php4/apache/php.ini /etc/php4/apache/php.ini.gforge-new
-	cp -a /etc/php4/cgi/php.ini /etc/php4/cgi/php.ini.gforge-new
+	cp -a /etc/php4/cli/php.ini /etc/php4/cli/php.ini.gforge-new
 	if [ -f /etc/php4/apache/php.ini.gforge-new ]; then
 	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/apache/php.ini.gforge-new; then
 		echo "Enabling pgsql in /etc/php4/apache/php.ini"
@@ -43,10 +43,10 @@ case "$1" in
 		echo "extension=ldap.so" >> /etc/php4/apache/php.ini.gforge-new
 	    fi
 	fi
-	if [ -f /etc/php4/cgi/php.ini.gforge-new ]; then
-	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/cgi/php.ini.gforge-new; then
-		echo "Enabling pgsql in /etc/php4/cgi/php.ini"
-		echo "extension=pgsql.so" >> /etc/php4/cgi/php.ini.gforge-new
+	if [ -f /etc/php4/cli/php.ini.gforge-new ]; then
+	    if ! grep -q "^[[:space:]]*extension[[:space:]]*=[[:space:]]*pgsql.so" /etc/php4/cli/php.ini.gforge-new; then
+		echo "Enabling pgsql in /etc/php4/cli/php.ini"
+		echo "extension=pgsql.so" >> /etc/php4/cli/php.ini.gforge-new
 	    fi
 	fi
 
