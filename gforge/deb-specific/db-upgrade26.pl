@@ -150,6 +150,7 @@ eval {
             "UPDATE groups SET homepage = '$domain_name/peerrating/' where group_id = '4'",
             "UPDATE users SET email = '$noreplymail' where user_id = '100'",
  	    "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
+            "SELECT setval ('\"users_pk_seq\"', 102, 'f')",
  	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
  	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 2, 'A')",
  	    "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 3, 'A')",

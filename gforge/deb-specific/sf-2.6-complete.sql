@@ -3086,16 +3086,16 @@ COPY "group_type"  FROM stdin;
 
 
 --CB COPY "groups"  FROM stdin;
---CB 1	Master Group	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
---CB 2	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
---CB 3	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
+--CB 1	Master Groupxxxx	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
+--CB 2	Stats Groupxxxxx	\N	0	A	statsxxxx	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
+--CB 3	News Groupxxxxxx	\N	0	A	newsxxxx	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
 --CB 4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	0	1	\N	1	1	1	1	1	1	1	1				1	1	0	0	0		0	1	1	\N	\N	\N
 --CB \.
 COPY "groups"  FROM stdin;
-1	Master Group	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
-2	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
-3	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1		0	1
-4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	1	\N	1	1	1	1	1	1		0	1
+1	Master Group	\N	0	A	sourceforge	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+2	News Group	\N	0	A	news	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+3	Stats Group	\N	0	A	stats	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
+4	Peer Ratings Group	\N	0	A	peerrating	shell1	\N	\N	cvs1	\N	\N	\N	0	\N	1	1	1	1	1	1	1		0	1
 \.
 --
 -- Data for TOC Entry ID 499 (OID 19996)
