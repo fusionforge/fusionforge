@@ -16,23 +16,12 @@ gforge-plugin-scmcvs/www/cvsweb/icons/minitext.gif -text
 gforge-plugin-scmcvs/www/cvsweb/icons/text.gif -text
 gforge/backend/shell/apache.sh svneol=native#unset
 gforge/contrib/cmd-line-prototype.tar.gz -text
-gforge/contrib/soap/java/lib/axis.jar -text
-gforge/contrib/soap/java/lib/commons-discovery.jar -text
-gforge/contrib/soap/java/lib/commons-logging.jar -text
-gforge/contrib/soap/java/lib/jaxrpc.jar -text
-gforge/contrib/soap/java/lib/jcommon-0.8.0.jar -text
-gforge/contrib/soap/java/lib/jfreechart-0.9.8.jar -text
-gforge/contrib/soap/java/lib/saaj.jar -text
 gforge/db/20030701-gforge-3.0 -text svneol=unset#application/octet-stream
 gforge/db/20031026-gforge-3.1 -text svneol=unset#application/octet-stream
 gforge/db/20040108-gforge-3.21 -text svneol=unset#application/octet-stream
 gforge/db/20040326-gforge-3.3 -text svneol=unset#application/octet-stream
 gforge/db/20041025-gforge-4.0 -text svneol=unset#application/octet-stream
 gforge/docs/architecture/stats/stats-process.sda svneol=native#unset
-gforge/docs/debian-install.fr/Gforge.pdf -text
-gforge/docs/debian-install.fr/Gforge.sxw -text
-gforge/docs/debian-install.fr/Install.pdf -text
-gforge/docs/debian-install.fr/Install.sxw -text
 gforge/docs/docbook/build/.keepme -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/authors.ent -text svneol=unset#application/octet-stream
 gforge/docs/docbook/docbook/entities/xinclude.ent -text svneol=unset#application/octet-stream
