@@ -50,7 +50,7 @@ echo $HTML->boxBottom();
 echo $HTML->boxTop('Getting GForge');
 ?>
 <B>Download:</B><BR>
-<A HREF="/project/showfiles.php?group_id=1">GForge3.0pre6</A><BR>
+<A HREF="/project/showfiles.php?group_id=1">GForge3.0pre7</A><BR>
 <A HREF="http://postgresql.org/">PostgreSQL</A><BR>
 <A HREF="http://www.php.net/">PHP 4.x</A><BR>
 <A HREF="http://www.apache.org/">Apache</A><BR>
@@ -59,17 +59,17 @@ echo $HTML->boxTop('Getting GForge');
 <A HREF="http://jabberd.jabberstudio.org/">Jabber Server *</A><BR>
 * optional
 <P>
-<A HREF="/projects/gforge/"><B>GForge Project Page</B></A><BR>
-<A HREF="/forum/forum.php?forum_id=6"><B>Help Board</B></A><BR>
-<A HREF="/forum/forum.php?forum_id=5"><B>Developer Board</B></A><BR>
-<A HREF="/forum/forum.php?forum_id=29"><B>Oracle Board</B></A><BR>
-<A HREF="/tracker/?atid=105&group_id=1&func=browse"><B>Bug Tracker</B></A><BR>
-<A HREF="/tracker/?func=browse&group_id=1&atid=106"><B>Patch Submissions</B></A>
+<A HREF="http://gforge.org/projects/gforge/"><B>GForge Project Page</B></A><BR>
+<A HREF="http://gforge.org/forum/forum.php?forum_id=6"><B>Help Board</B></A><BR>
+<A HREF="http://gforge.org/forum/forum.php?forum_id=5"><B>Developer Board</B></A><BR>
+<A HREF="http://gforge.org/forum/forum.php?forum_id=29"><B>Oracle Board</B></A><BR>
+<A HREF="http://gforge.org/tracker/?atid=105&group_id=1&func=browse"><B>Bug Tracker</B></A><BR>
+<A HREF="http://gforge.org/tracker/?func=browse&group_id=1&atid=106"><B>Patch Submissions</B></A>
 <P>
 <A HREF="http://www.debian.org/"><B>Debian Users</B></A> can simply add 
 "http://people.debian.org/~bayle/" to /etc/apt/sources.list and type 
 "apt-get install gforge" to 
-install a working GForge-3.0pre6 system, thanks to Christian Bayle and 
+install a working GForge-3.0pre7 system, thanks to Christian Bayle and 
 the Debian-SF project.
 <P>
 <?php
