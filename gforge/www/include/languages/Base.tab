@@ -1243,6 +1243,7 @@ project_showfiles	file_type	Type
 project_showfiles	date	Date
 project_showfiles	intro	Below is a list of all files of the project.
 project_showfiles	intro2	Before downloading, you may want to read Release Notes and ChangeLog (accessible by clicking on release version).
+project_showfiles	new_release	To create a new release click here.
 project_showfiles	release_highlighted	The release you have chosen is <span style="background-color:pink">highlighted</span>.
 project_showfiles	monitor_package	Monitor this package
 project_showfiles	no_releases	No releases

@@ -20,6 +20,12 @@ $sql = "SELECT * "
        ."ORDER BY name";
 $res_package = db_query( $sql );
 $num_packages = db_numrows( $res_package );
+$cur_group = &group_get_object($group_id);
+
+if (!$cur_group) {
+	exit_error($Language->getText('project_showfiles','no_group_title'),
+		$Language->getText('project_showfiles','no_group'));
+}
 
 if ( $num_packages < 1) {
 	exit_error($Language->getText('project_showfiles','error_no_packages_defined_title'),$Language->getText('project_showfiles','error_no_packages_defined_text'));
@@ -34,6 +40,17 @@ if ($release_id) {
 echo $Language->getText('project_showfiles','intro2').'
 </p>
 ';
+
+// check the permissions and see if this user is a release manager.
+// If so, offer the opportunity to create a release
+
+$perm =& $cur_group->getPermission(session_get_user());
+
+if ($perm->isReleaseTechnician()) {
+	echo "<p><a href=\"admin/qrs.php?package=&group_id=$group_id\">";
+	echo $Language->getText('project_showfiles','new_release');
+	echo "</a></p>";
+}
 
 // get unix group name for path
 $group_unix_name=group_getunixname($group_id);
