@@ -1,4 +1,10 @@
+2003-07-10 Tom Copeland  <tom@infoether.com>
+
+	* www/stats/site_stats_utils.php, projects.php:
+	Working on bug #399; project stats page works better now.
+	
 2003-07-02 Christian Bayle	<bayle@debian.org>
+
 	* Corrected bad colspan in www/people/people_utils.php close patch
 	#482 from Paul Gibbbs (djpaul)
 	

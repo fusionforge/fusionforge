@@ -170,6 +170,8 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 	//	Determine if we are looking at ALL projects, 
 	//	a trove category, or a specific list
 	//
+	$grp_str='';
+/*
 	if ($trove == '-2') {
 		//do a query of ALL groups
 		$grp_str='';
@@ -184,6 +186,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 				WHERE trove_cat_id ='$trove' 
 				AND g.group_id=trove_group_link.group_id) ";
 	}
+*/
 
 	if ($report == 'last_30') {
 
@@ -236,8 +239,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 		WHERE 
 			s.group_id = g.group_id
 			$grp_str
-		ORDER BY $orderby DESC ";
-
+		ORDER BY g.group_name DESC ";
 	}
 
 	return db_query( $sql, 30, 0, SYS_DB_STATS);
@@ -247,8 +249,7 @@ function stats_site_project_result( $report, $orderby, $projects, $trove ) {
 function stats_site_projects( $report, $orderby, $projects, $trove ) {
 	global $Language;
 	$res=stats_site_project_result( $report, $orderby, $projects, $trove );
-
-	   // if there are any rows, we have valid data (or close enough).
+	// if there are any rows, we have valid data (or close enough).
 	if ( db_numrows( $res ) > 1 ) {
 
 		?>

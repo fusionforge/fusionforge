@@ -37,36 +37,13 @@ $HTML->header(array('title'=>$Language->getText('stats','title',array($GLOBALS['
 </table>
 
 <hr />
-
-<?php
-
-
-if ( isset( $report ) ) {
-
-	// Print the form, passing it the params, so it can save state.
-	stats_site_projects_form( $report, $orderby, $projects, $trovecatid );
-
-	?>
 	<div align="center">
 	<br /><br />
 	<?php
-
 	stats_site_projects( $report, $orderby, $projects, $trovecatid );
-
 	?>
 	<br /><br />
 	</div>
 	<?php
-
-} else { 
-
-	stats_site_projects_form( );
-
-}
-
-//
-// END PAGE CONTENT CODE
-//
-
 $HTML->footer( array() );
 ?>
