@@ -18,7 +18,7 @@ class PortugueseBrazillian extends BaseLanguage {
 	function PortugueseBrazillian() {
 
 		//english has an ID of 1 in the database
-		$this->language_id=16;
+		$this->language_id=19;
 
 		//two letter language code
 		$this->language_code='pt';

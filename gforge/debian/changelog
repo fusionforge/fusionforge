@@ -10,8 +10,10 @@ sourceforge (2.5-33+) unstable; urgency=low
   * [Otavio] Patch to fix user deletion (closes: #162793).
   * [Roland] Sort documentations by title.
   * [Roland] Updated language codes in the database.
+  * [Roland] Otavio's patch #552: better handling of the browser language
+    preferences. 
 
- -- Roland Mas <lolando@debian.org>  Fri, 18 Oct 2002 19:11:07 +0200
+ -- Roland Mas <lolando@debian.org>  Wed, 30 Oct 2002 13:44:47 +0100
 
 sourceforge (2.5-33) unstable; urgency=low
 
