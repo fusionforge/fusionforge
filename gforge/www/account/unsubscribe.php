@@ -1,23 +1,38 @@
 <?php
 /**
-  *
-  * Disable optional site mailings for account
-  *
-  * This page is accessed via URL present in site mailings
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * Disable optional site mailings for account
+ *
+ * This page is accessed via URL present in site mailings
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('pre.php');
 require_once('common/include/account.php');
 
 if (!$confirm_hash) {
 	$confirm_hash = $ch;
+}
+if (!$confirm_hash) {
+	exit_missing_param();
 }
 
 $confirm_hash = html_clean_hash_string($confirm_hash);
@@ -32,7 +47,11 @@ if (db_numrows($res_user) < 1) {
 
 $row_user = db_fetch_array($res_user);
 $user =& user_get_object($row_user['user_id'], $res_user);
-exit_assert_object($user, 'User');
+if (!$u || !is_object($u)) {
+    exit_error('Error','Could Not Get User');
+} elseif ($u->isError()) {
+    exit_error('Error',$u->getErrorMessage());
+}
 
 $user->unsubscribeFromMailings($all);
 
@@ -57,6 +76,7 @@ and visit your Account Maintenance page.
 </p>
 
 <?php
+
 site_footer(array());
 
 ?>

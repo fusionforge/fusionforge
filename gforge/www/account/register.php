@@ -1,15 +1,27 @@
 <?php
 /**
-  *
-  * Register new acoount page
-  *
-  * SourceForge: Breaking Down the Barriers to Open Source Development
-  * Copyright 1999-2001 (c) VA Linux Systems
-  * http://sourceforge.net
-  *
-  * @version   $Id$
-  *
-  */
+ * Register new acoount page
+ *
+ * Copyright 1999-2001 (c) VA Linux Systems
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
 require_once('pre.php');    
 require_once('common/include/account.php');
@@ -35,9 +47,9 @@ if ($submit) {
 		$email,$mail_site,$mail_va,$language_id,$timezone,$jabber_address,$jabber_only,$theme_id,'',
 		$address,$address2,$phone,$fax,$title,$ccode);
 	if ($register) {
-		echo $HTML->header(array('title'=>'Register Confirmation','pagename'=>'account_register'));
+		echo $HTML->header(array('title'=>'Register Confirmation'));
 
-		echo $Language->getText('account_register','congrat', $GLOBALS[sys_name]);
+		echo $Language->getText('account_register','congrat', $sys_name);
 		echo $HTML->footer(array());
 		exit;
 	} else {
@@ -46,12 +58,8 @@ if ($submit) {
 }
 
 
-$HTML->header(array('title'=>'Gforge: Register','pagename'=>'account_register'));
+$HTML->header(array('title'=>'User Account Registration'));
 
-
-?>
-
-<?php 
 if ($feedback) {
 	print "<p><FONT color=#FF0000>$feedback $register_error</FONT>";
 } 
