@@ -44,8 +44,8 @@ case "$1" in
 	chmod 775 /var/log/gforge/cvs
 
 	# Restart some services
-	[ -d /etc/ssh ] && invoke-rc.d ssh start || true
-	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree start || true
+	[ -d /etc/ssh ] && invoke-rc.d ssh restart || true
+	[ -d /etc/ssh-nonfree ] && invoke-rc.d ssh-nonfree restart || true
 	
     ;;
 
