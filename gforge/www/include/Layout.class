@@ -539,10 +539,12 @@ if ($params['group']) {
 		}
 
 		// Artifact Tracking
-		$TABS_DIRS[]='/tracker/?group_id='.$group;
-		$TABS_TITLES[]=$Language->getText('group','short_tracker');
-		(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
+		if ($project->usesTracker()) {
+			$TABS_DIRS[]='/tracker/?group_id='.$group;
+			$TABS_TITLES[]=$Language->getText('group','short_tracker');
+			(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
 				? $selected=(count($TABS_TITLES)-1) : '' );
+		}
 
 		// Mailing Lists
 		if ($project->usesMail()) {

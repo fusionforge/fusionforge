@@ -9,8 +9,10 @@ gforge (3.0-6+3) unstable; urgency=low
     init
   * [Christian] Applied Vicente J. Ruiz Jurado patch [ #430 ] mailman +
     postfix to correct postfix setup (untested)
+  * [Christian] Applied Antoine Nivard suggestion to correct [ #505 ]
+    Disable Tracker and the "TAB" is not disable / error in Layout.class
 
- -- Christian Bayle <bayle@debian.org>  Mon, 15 Sep 2003 22:05:12 +0200
+ -- Christian Bayle <bayle@debian.org>  Mon, 15 Sep 2003 23:47:50 +0200
 
 gforge (3.0-6) unstable; urgency=low
 
