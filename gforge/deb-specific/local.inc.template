@@ -93,7 +93,7 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 // LDAP configuration
 //
 // enable ldap use altogether
-$sys_use_ldap=1;
+$sys_use_ldap=0;
 $sys_ldap_host="{ldap_host}";
 $sys_ldap_port=389;
 $sys_ldap_version=3;
