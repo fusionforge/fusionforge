@@ -136,7 +136,7 @@ account_verify	invalidcred	Credentials you entered do not correspond to valid ac
 account_verify	invalidop	Invalid operation
 account_verify	invalidparam	Invalid parameter
 account_verify	invaliduser	Invalid user
-account_verify	login		Login
+account_verify	login	Login
 account_verify	loginname	Login name:
 account_verify	missingparam	Missing paramater
 account_verify	nouser	User does not exist.
