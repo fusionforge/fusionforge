@@ -61,7 +61,7 @@ class BaseLanguage {
 	}
 
 	function loadLanguage($lang) {
-		global $sys_theme;
+		global $sys_theme, $sys_urlroot;
 		$fname = 'languages/'.$lang.'.tab' ;
 		$this->loadLanguageFile($fname) ;
 		// Site-local customizations
@@ -70,7 +70,7 @@ class BaseLanguage {
 			$this->loadLanguageFile($fname) ;
 		}
 		//Customization by theme
-		$ftname = '../themes/'.$sys_theme.'/'.$lang.'.tab' ;
+		$ftname = $sys_urlroot.'/themes/'.$sys_theme.'/'.$lang.'.tab' ;
 		if (file_exists ($ftname)) {
 			$this->loadLanguageFile($ftname) ;
 		}

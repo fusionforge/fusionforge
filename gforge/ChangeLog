@@ -1,3 +1,10 @@
+2003-02-20  Ryan T. Sammartino  <ryants@shaw.ca>
+
+	Bug #230.
+	* www/include/BaseLanguage.class(loadLanguage): use
+	$sys_urlroot to get absolute path to theme specific .tab
+	files.
+
 2003-02-20  Robert B. Hawkins.
 
 	* www/include/languages/Japanese.tab: New Japanese translations.
