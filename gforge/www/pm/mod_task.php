@@ -77,6 +77,7 @@ $result=db_query($sql);
 		echo pm_show_month_box ('start_month',date('m', db_result($result,0,'start_date')));
 		echo pm_show_day_box ('start_day',date('d', db_result($result,0,'start_date')));
 		echo pm_show_year_box ('start_year',date('Y', db_result($result,0,'start_date')));
+		echo pm_show_hour_box ('start_hour',date('G', db_result($result,0,'start_date')));
 		?>
 		<BR><a href="calendar.php">View Calendar</a>
 		</TD>
@@ -89,6 +90,7 @@ $result=db_query($sql);
 		echo pm_show_month_box ('end_month',date('m', db_result($result,0,'end_date')));
 		echo pm_show_day_box ('end_day',date('d', db_result($result,0,'end_date')));
 		echo pm_show_year_box ('end_year',date('Y', db_result($result,0,'end_date')));
+		echo pm_show_hour_box ('end_hour',date('G', db_result($result,0,'end_date')));
 		?>
 		</TD>
 	</TR>

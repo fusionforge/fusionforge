@@ -374,11 +374,13 @@ function pm_data_create_task ($group_project_id,$start_month,$start_day,$start_y
  * @param		int		The group project ID
  * @param		int		The starting month
  * @param		int		The starting day
+ * @param		int		The starting hour
  * @param		int		The ending month
  * @param		int		The ending day
  * @param		int		The ending year
- * @param		string	The task summary
- * @param		string	Details of the task
+ * @param		int 		The ending hour
+ * @param		string		The task summary
+ * @param		string		Details of the task
  * @param		int		The completed percentage of the task
  * @param		int		The task priority
  * @param		int		The number of hours exptected to complete this task
@@ -394,7 +396,8 @@ function pm_data_update_task ($group_project_id,$project_task_id,$start_month,$s
 
 	global $feedback;
 	if (!$group_project_id || !$project_task_id || !$status_id || !$start_month || !$start_day || !$start_year || 
-		!$end_month || !$end_day || !$end_year || !$summary || !$priority || !$new_group_project_id || !$group_id) {
+		!$end_month || !$end_day || !$end_year || !$summary || !$priority || !$new_group_project_id || !$group_id ||
+		!$start_hour || !$end_hour ) {
 		$feedback .= ' ERROR - Missing Parameters ';
 		return false;
 	}
@@ -410,7 +413,7 @@ function pm_data_update_task ($group_project_id,$project_task_id,$start_month,$s
 	/*
 		Enforce start date > end date
 	*/
-	if (mktime(0,0,0,$start_month,$start_day,$start_year) > mktime(0,0,0,$end_month,$end_day,$end_year)) {
+	if (mktime($start_hour,0,0,$start_month,$start_day,$start_year) > mktime($end_hour,0,0,$end_month,$end_day,$end_year)) {
 		$feedback .= ' ERROR - End Date Must Be Greater Than Start Date ';
 		return false;
 	}
@@ -452,10 +455,10 @@ function pm_data_update_task ($group_project_id,$project_task_id,$start_month,$s
 	if (db_result($result,0,'hours') != $hours)
 		{ pm_data_create_history ('hours',db_result($result,0,'hours'),$project_task_id);  }
 
-	if (db_result($result,0,'start_date') != mktime(0,0,0,$start_month,$start_day,$start_year))
+	if (db_result($result,0,'start_date') != mktime($start_hour,0,0,$start_month,$start_day,$start_year))
 		{ pm_data_create_history ('start_date',db_result($result,0,'start_date'),$project_task_id);  }
 
-	if (db_result($result,0,'end_date') != mktime(0,0,0,$end_month,$end_day,$end_year))
+	if (db_result($result,0,'end_date') != mktime($end_hour,0,0,$end_month,$end_day,$end_year))
 		{ pm_data_create_history ('end_date',db_result($result,0,'end_date'),$project_task_id);  }
 
 	/*
@@ -486,8 +489,8 @@ function pm_data_update_task ($group_project_id,$project_task_id,$start_month,$s
 	*/
 	$sql="UPDATE project_task SET status_id='$status_id', priority='$priority',".
 		"summary='".htmlspecialchars($summary)."',start_date='".
-		mktime(0,0,0,$start_month,$start_day,$start_year)."',end_date='".
-		mktime(0,0,0,$end_month,$end_day,$end_year)."',hours='$hours',".
+		mktime($start_hour,0,0,$start_month,$start_day,$start_year)."',end_date='".
+		mktime($end_hour,0,0,$end_month,$end_day,$end_year)."',hours='$hours',".
 		"percent_complete='$percent_complete', ".
 		"group_project_id='$new_group_project_id' ".
 		"WHERE project_task_id='$project_task_id' AND group_project_id='$group_project_id'";
