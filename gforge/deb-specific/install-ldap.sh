@@ -542,21 +542,31 @@ case "$1" in
 	configure_nsswitch
 	;;
     configure)
-	setup_vars
-	# Restarting ldap
-	invoke-rc.d slapd restart
-	sleep 5		# Sometimes it takes a bit of time to get out of bed
-	check_server
-	check_base_dn
-	# echo "Setup SF_robot account"
-	setup_robot
-	# echo "Load ldap"
-	load_ldap
+    	# Don't try to use ldap if config file is not changed
+    	if grep -q "GForge" /etc/ldap/slapd.conf ; then
+		setup_vars
+		# Restarting ldap
+		invoke-rc.d slapd restart
+		sleep 5		# Sometimes it takes a bit of time to get out of bed
+		check_server
+		check_base_dn
+		# echo "Setup SF_robot account"
+		setup_robot
+		# echo "Load ldap"
+		load_ldap
+	else
+		echo "Not configuring until slapd is configured"
+	fi
 	;;
     update)
-	setup_vars
-	check_server
-	load_ldap
+    	# Don't try to use ldap if config file is not changed
+    	if grep -q "GForge" /etc/ldap/slapd.conf ; then
+		setup_vars
+		check_server
+		load_ldap
+	else
+		echo "Not updating until slapd is configured"
+	fi
 	;;
     purge-files)
 	setup_vars
