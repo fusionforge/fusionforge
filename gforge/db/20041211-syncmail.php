@@ -23,31 +23,39 @@ if (!$res) {
 	
 		if (db_numrows($res2) < 1) {
 			$group = new Group($group_id);
-	
-			$res_aux2 = db_query("SELECT user_id FROM user_group 
-				WHERE admin_flags = 'A' 
-				AND group_id = '".$group_id."'");
-	
-			$group_admin = db_result($res_aux2,0,'user_id');
-	
-			echo "Will create mailing list for <b>".$group_name."-commits</b><br>\n";
-			$mailing_list = new MailingList($group);
-			if (!$mailing_list || !is_object($mailing_list)) {
+			if (!$group || !is_object($group)) {
 				$was_error=true;
-				echo "Could Not Get MailingList Object for $group_name";
-			} elseif ($mailing_list->isError()) {
+				echo "Could Not Get Group Object for $group_name";
+			} elseif ($group->isError()) {
 				$was_error=true;
-				echo "Could Not Get MailingList Object for $group_name: ".$mailing_list->getErrorMessage();
+				echo "Could Not Get Group Object for $group_name: ".$group->getErrorMessage();
 			} else {
-				if (!$mailing_list->create($group_name.'-commits', 'cvs commits', 1,$group_admin)) {
+	
+				$res_aux2 = db_query("SELECT user_id FROM user_group 
+					WHERE admin_flags = 'A' 
+					AND group_id = '".$group_id."'");
+	
+				$group_admin = db_result($res_aux2,0,'user_id');
+	
+				echo "Will create mailing list for <b>".$group_name."-commits</b><br>\n";
+				$mailing_list = new MailingList($group);
+				if (!$mailing_list || !is_object($mailing_list)) {
 					$was_error=true;
-					echo "Could Not Create New Mailing List for $group_name: ".$mailing_list->getErrorMessage();
+					echo "Could Not Get MailingList Object for $group_name";
+				} elseif ($mailing_list->isError()) {
+					$was_error=true;
+					echo "Could Not Get MailingList Object for $group_name: ".$mailing_list->getErrorMessage();
 				} else {
-					if ($mailing_list->isError()) {
+					if (!$mailing_list->create('commits', 'cvs commits', 1,$group_admin)) {
 						$was_error=true;
-						echo $mailing_list->getErrorMessage();
+						echo "Could Not Create New Mailing List for $group_name: ".$mailing_list->getErrorMessage();
 					} else {
+						if ($mailing_list->isError()) {
+							$was_error=true;
+							echo $mailing_list->getErrorMessage();
+						} else {
 
+						}
 					}
 				}
 			}
