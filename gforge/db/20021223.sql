@@ -113,7 +113,7 @@ body text,
 posted_by INT NOT NULL REFERENCES users(user_id),
 postdate int NOT NULL);
 
-BEGIN;
+--BEGIN;
 INSERT INTO project_messages (project_task_id,body,posted_by,postdate) 
 	SELECT project_task_id,old_value,mod_by,mod_date 
 	FROM project_history
@@ -121,7 +121,7 @@ INSERT INTO project_messages (project_task_id,body,posted_by,postdate)
 
 DELETE FROM project_history WHERE field_name='details';
 
-COMMIT;
+--COMMIT;
 
 DROP VIEW project_message_user_vw;
 CREATE VIEW project_message_user_vw AS

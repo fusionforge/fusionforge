@@ -19,9 +19,9 @@ ALTER TABLE doc_groups ADD CONSTRAINT docgroups_groupid
 --
 ALTER TABLE groups RENAME COLUMN new_task_address TO new_doc_address;
 ALTER TABLE groups RENAME COLUMN send_all_tasks TO send_all_docs;
-BEGIN;
+--BEGIN;
 UPDATE groups SET new_doc_address='',send_all_docs='0';
-COMMIT;
+--COMMIT;
 
 --
 --	Create a convenience view for selecting from docman

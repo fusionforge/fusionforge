@@ -969,6 +969,46 @@ eval {
       $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+18" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20021223.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20021223.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+19" ;
+    if (is_lesser $version, $target) {
+      debug "Upgrading with 20030102.sql" ;
+
+      @reqlist = @{ &parse_sql_file ("/usr/lib/gforge/db/20030102.sql") } ;
+      foreach my $s (@reqlist) {
+	  $query = $s ;
+	  # debug $query ;
+	  $sth = $dbh->prepare ($query) ;
+	  $sth->execute () ;
+	  $sth->finish () ;
+      }
+      @reqlist = () ;
+
+      &update_db_version ($target) ;
+      debug "Committing $target." ;
+      $dbh->commit () ;
+    }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Debian Sourceforge." ;
 
