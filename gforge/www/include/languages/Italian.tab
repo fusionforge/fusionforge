@@ -427,10 +427,6 @@ home	hosted_projects	Progetti ospitati
 home	registered_users	Utenti registrati
 home	none_found	Non trovato
 index	welcome	Benvenuto
-image	login	it_login.png
-image	logout	it_logout.png
-image	myaccount	it_myaccount.png
-image	newaccount	it_newaccount.png
 mail	provided_by	<P>Le mailing list sono fornite tramite una versione personalizzata di <A href="http://www.list.org">GNU Mailman</A>.  Grazie ai team di Mailman and <A href="http://www.python.org">Python</A> per il software eccezionale.
 menu	bookmark_page	Segna pagina
 menu	change_my_theme	Cambia tema
@@ -796,6 +792,10 @@ session	pending	Utente in attesa di attivazione
 session	deleted	Utente cancellato
 session	notactive	Utente non attivo
 global	error	ERROR
+common	login	Connetti
+common	logout	Scollega
+common	myaccount	Mio Account
+common	newaccount	Nuovo Account
 common_include_account	sixchar	La lunghezza della password deve essere di almeno 6 caratteri.
 common_include_account	nospace	Nel nome login non possono esserci spazi
 common_include_account	tooshort	Nome troppo corto, la lunghezza minima &egrave; di 3 caratteri.

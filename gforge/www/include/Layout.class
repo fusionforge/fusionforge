@@ -194,13 +194,13 @@ class Layout extends Error {
 		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
-				<a href="/account/logout.php"><?php echo html_image($Language->getText('image','logout'),74,14,array('border'=>'0')); ?></a><br />
-				<a href="/account/"><?php echo html_image($Language->getText('image','myaccount'),74,14,array('border'=>'0')); ?></a>
+				<a href="/account/logout.php"><?php echo $Language->getText('common','logout'); ?></a><br />
+				<a href="/account/"><?php echo $Language->getText('common','myaccount'); ?></a>
 				<?php
 			} else {
 				?>
-				<a href="/account/login.php"><?php echo html_image($Language->getText('image','login'),74,14,array('border'=>'0')); ?></a><br />
-				<a href="/account/register.php"><?php echo html_image($Language->getText('image','newaccount'),74,14,array('border'=>'0')); ?></a>
+				<a href="/account/login.php"><?php echo $Language->getText('common','login'); ?></a><br />
+				<a href="/account/register.php"><?php echo $Language->getText('common','newaccount'); ?></a>
 				<?php
 			}
 
@@ -831,5 +831,10 @@ if ($params['group']) {
 	 }
 
 }
+
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>

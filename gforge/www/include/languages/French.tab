@@ -513,6 +513,10 @@ classgroup	newprojectnotification_submitter	Un nouveau projet $1 a été soumis\
 classgroup	newprojectnotificationtitle	Projet $1 Soumis
 classgroup	rejectedproject	Votre enregistrement de projet a été rejeté.\n\nNom long du projet:  $1\nNom UNIX du projet:  $2\n\nRaison de notre refus:\n\n
 classgroup	rejectedprojecttitle	Projet $1 Refusé
+common	login	Entrer
+common	logout	Quitter
+common	myaccount	Mon compte
+common	newaccount	Créer compte
 common_include_account	cvsreserved	Nom réservé pour CVS.
 common_include_account	dnsreserved	Nom réservé pour le DNS.
 common_include_account	illegal	Caractère interdit dans le nom.
@@ -902,10 +906,6 @@ home	none_found	Rien
 home	registered_users	Utilisateurs enregistrés&nbsp;
 home	sfos	$1 On-Site
 home	top_project_downloads	Projets les plus téléchargés
-image	login	fr_login.png
-image	logout	fr_logout.png
-image	myaccount	fr_myaccount.png
-image	newaccount	fr_newaccount.png
 include_html	no_change	Aucun changement
 include_html	none	Aucun(e)
 include_html	priority_highest	Maximum

@@ -1,3 +1,12 @@
+2003-10-04  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* www/include/Layout.class: Replaced Log In/Log Out/My Account/New
+	Account images with proper text (Gforge theme).  Easier to
+	localise, easier to scale up, less ugly.
+
+	* www/include/languages/Base.tab, French.tab, Italian.tab,
+	Spanish.tab: Localised text for the change above.
+
 2003-10-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* www/include/languages/French.tab: Fixed "You could post if you

@@ -507,6 +507,10 @@ classgroup	newprojectnotification_submitter	New $1 Project Submitted\n\nProject 
 classgroup	newprojectnotificationtitle	New $1 Project Submitted
 classgroup	rejectedproject	Your project registration for $3 has been denied.\n\nProject Full Name:  $1\nProject Unix Name:  $2\n\nReasons for negative decision:\n\n
 classgroup	rejectedprojecttitle	$1 Project Denied
+common	login	Log In
+common	logout	Log Out
+common	myaccount	My Account
+common	newaccount	New Account
 common_include_account	cvsreserved	Name is reserved for CVS.
 common_include_account	dnsreserved	Name is reserved for DNS purposes.
 common_include_account	illegal	Illegal character in name.
@@ -899,10 +903,6 @@ home	none_found	None Found
 home	registered_users	Registered Users
 home	sfos	$1 OnSite
 home	top_project_downloads	Top Project Downloads
-image	login	login.png
-image	logout	logout.png
-image	myaccount	myaccount.png
-image	newaccount	newaccount.png
 include_html	no_change	No Change
 include_html	none	None
 include_html	priority_highest	Highest

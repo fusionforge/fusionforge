@@ -516,6 +516,10 @@ classgroup	newprojectnotification	Un nuevo proyecto de $1 ha sido registrado\n\n
 classgroup	newprojectnotificationtitle	Proyecto Pendiente de Aprobación en $1
 classgroup	rejectedproject	Su registración de su proyecto en $3 ha sido negada.\n\nNombre Completo del Proyecto:  $1\nNombre Unix del Proyecto:  $2\n\nLas razones para negarla:\n\n
 classgroup	rejectedprojecttitle	Proyecto Denegado por $1 
+common	login	Entrar
+common	logout	Salir
+common	myaccount	Mi cuenta
+common	newaccount	Nueva cuenta
 common_include_account	cvsreserved	El nombre está reservado para el CVS.
 common_include_account	dnsreserved	El nombre está reservado para el DNS.
 common_include_account	illegal	Hay un carácter ilegal en el nombre.
@@ -908,10 +912,6 @@ home	none_found	Ningún hallado
 home	registered_users	Usuarios registrados
 home	sfos	$1 <span class="wikiunknown"><a href="modules.php&#63;op=modload&amp;name=phpWiki&amp;file=index&amp;pagename=OnSite&amp;action=edit">&#63;</a><u>OnSite</u></span>
 home	top_project_downloads	Proyectos más descargados
-image	login	es_login.png
-image	logout	es_logout.png
-image	myaccount	es_myaccount.png
-image	newaccount	es_newaccount.png
 include_html	no_change	No Cambiar
 include_html	none	No
 include_html	priority_highest	Alta
