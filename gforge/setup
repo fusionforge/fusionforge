@@ -75,11 +75,13 @@ DEFAULTsys_use_file=true
 DEFAULTsys_use_ftp=true
 DEFAULTsys_use_trove=true
 DEFAULTsys_use_snippet=true
+DEFAULTsys_use_ssl=false
 DEFAULTsys_project_reg_restricted=true
 DEFAULTsys_localization_enable_caching=true
 DEFAULTsys_localization_cache_path=`pwd`/var/cache/gforge/
 DEFAULTsys_localization_enable_timestamp_checking=true
 DEFAULTsys_localinc=`pwd`/etc/local.inc
+DEFAULTsys_jabber_pass=$(dd if=/dev/urandom count=256 bs=1 2> /dev/null | md5sum | cut -b1-8)
 #
 # TODO
 #usr_lib_gforge=`pwd`

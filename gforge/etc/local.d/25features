@@ -15,6 +15,7 @@ $sys_use_file={sys_use_file};
 $sys_use_ftp={sys_use_ftp};
 $sys_use_trove={sys_use_trove};
 $sys_use_snippet={sys_use_snippet};
+$sys_use_ssl={sys_use_ssl};
 
 //
 //	Restricted project registration
