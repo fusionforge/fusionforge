@@ -101,7 +101,8 @@ CREATE SEQUENCE doc_groups_pk_seq
 CREATE TABLE doc_groups (
     doc_group integer DEFAULT nextval('doc_groups_pk_seq'::text) NOT NULL,
     groupname character varying(255) DEFAULT ''::character varying NOT NULL,
-    group_id integer DEFAULT 0 NOT NULL
+    group_id integer DEFAULT 0 NOT NULL,
+    parent_doc_group integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1327,11 +1328,12 @@ CREATE TABLE artifact_group_list (
     email_all_updates integer DEFAULT 0 NOT NULL,
     email_address text NOT NULL,
     due_period integer DEFAULT 2592000 NOT NULL,
-    use_resolution integer DEFAULT 0 NOT NULL,
     submit_instructions text,
     browse_instructions text,
     datatype integer DEFAULT 0 NOT NULL,
-    status_timeout integer
+    status_timeout integer,
+    custom_status_field integer DEFAULT 0 NOT NULL,
+    custom_renderer text
 );
 
 
@@ -1341,13 +1343,6 @@ CREATE SEQUENCE artifact_resolution_id_seq
     MAXVALUE 2147483647
     NO MINVALUE
     CACHE 1;
-
-
-
-CREATE TABLE artifact_resolution (
-    id integer DEFAULT nextval('"artifact_resolution_id_seq"'::text) NOT NULL,
-    resolution_name text
-);
 
 
 
@@ -1387,29 +1382,12 @@ CREATE SEQUENCE artifact_category_id_seq
 
 
 
-CREATE TABLE artifact_category (
-    id integer DEFAULT nextval('"artifact_category_id_seq"'::text) NOT NULL,
-    group_artifact_id integer NOT NULL,
-    category_name text NOT NULL,
-    auto_assign_to integer DEFAULT 100 NOT NULL
-);
-
-
-
 CREATE SEQUENCE artifact_group_id_seq
     START WITH 1
     INCREMENT BY 1
     MAXVALUE 2147483647
     NO MINVALUE
     CACHE 1;
-
-
-
-CREATE TABLE artifact_group (
-    id integer DEFAULT nextval('"artifact_group_id_seq"'::text) NOT NULL,
-    group_artifact_id integer NOT NULL,
-    group_name text NOT NULL
-);
 
 
 
@@ -1441,9 +1419,6 @@ CREATE TABLE artifact (
     artifact_id integer DEFAULT nextval('"artifact_artifact_id_seq"'::text) NOT NULL,
     group_artifact_id integer NOT NULL,
     status_id integer DEFAULT 1 NOT NULL,
-    category_id integer DEFAULT 100 NOT NULL,
-    artifact_group_id integer DEFAULT 0 NOT NULL,
-    resolution_id integer DEFAULT 100 NOT NULL,
     priority integer DEFAULT 3 NOT NULL,
     submitted_by integer DEFAULT 100 NOT NULL,
     assigned_to integer DEFAULT 100 NOT NULL,
@@ -2226,11 +2201,6 @@ CREATE VIEW docdata_vw AS
 
 
 
-CREATE VIEW artifact_group_list_vw AS
-    SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.use_resolution, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, aca.count, aca.open_count FROM (artifact_group_list agl LEFT JOIN artifact_counts_agg aca USING (group_artifact_id));
-
-
-
 CREATE FUNCTION frs_dlstats_filetotal_insert_ag() RETURNS "trigger"
     AS '
 BEGIN
@@ -2326,97 +2296,6 @@ CREATE TABLE user_plugin (
 
 
 
-CREATE FUNCTION project_sums() RETURNS "trigger"
-    AS '
-	DECLARE
-		num integer;
-		curr_group integer;
-		found integer;
-	BEGIN
-		---
-		--- Get number of things this group has now
-		---
-		IF TG_ARGV[0]=''surv'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO num count(*) FROM surveys WHERE OLD.group_id=group_id AND is_active=1;
-				curr_group := OLD.group_id;
-			ELSE
-				SELECT INTO num count(*) FROM surveys WHERE NEW.group_id=group_id AND is_active=1;
-				curr_group := NEW.group_id;
-			END IF;
-		END IF;
-		IF TG_ARGV[0]=''mail'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO num count(*) FROM mail_group_list WHERE OLD.group_id=group_id AND is_public=1;
-				curr_group := OLD.group_id;
-			ELSE
-				SELECT INTO num count(*) FROM mail_group_list WHERE NEW.group_id=group_id AND is_public=1;
-				curr_group := NEW.group_id;
-			END IF;
-		END IF;
-		IF TG_ARGV[0]=''fmsg'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO curr_group group_id FROM forum_group_list WHERE OLD.group_forum_id=group_forum_id;
-				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
-			ELSE
-				SELECT INTO curr_group group_id FROM forum_group_list WHERE NEW.group_forum_id=group_forum_id;
-				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
-			END IF;
-		END IF;
-		IF TG_ARGV[0]=''fora'' THEN
-			IF TG_OP=''DELETE'' THEN
-				SELECT INTO num count(*) FROM forum_group_list WHERE OLD.group_id=group_id AND is_public=1;
-				curr_group = OLD.group_id;
-				--- also need to update message count
-				DELETE FROM project_sums_agg WHERE group_id=OLD.group_id AND type=''fmsg'';
-				INSERT INTO project_sums_agg
-					SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
-					FROM forum, forum_group_list
-					WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
-			ELSE
-				SELECT INTO num count(*) FROM forum_group_list WHERE NEW.group_id=group_id AND is_public=1;
-				curr_group = NEW.group_id;
-				--- fora do not get deleted... they get their status set to 9
-				IF NEW.is_public=9 THEN
-					--- also need to update message count
-					DELETE FROM project_sums_agg WHERE group_id=NEW.group_id AND type=''fmsg'';
-					INSERT INTO project_sums_agg
-						SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
-						FROM forum, forum_group_list
-						WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
-				END IF;
-			END IF;
-		END IF;
-		---
-		--- See if this group already has a row in project_sums_agg for these things
-		---
-		SELECT INTO found count(group_id) FROM project_sums_agg WHERE curr_group=group_id AND type=TG_ARGV[0];
-
-		IF found=0 THEN
-			---
-			--- Create row for this group
-			---
-			INSERT INTO project_sums_agg
-				VALUES (curr_group, TG_ARGV[0], num);
-		ELSE
-			---
-			--- Update count
-			---
-			UPDATE project_sums_agg SET count=num
-			WHERE curr_group=group_id AND type=TG_ARGV[0];
-		END IF;
-
-		IF TG_OP=''DELETE'' THEN
-			RETURN OLD;
-		ELSE
-			RETURN NEW;
-		END IF;
-	END;
-'
-    LANGUAGE plpgsql;
-
-
-
 CREATE TABLE cron_history (
     rundate integer NOT NULL,
     job text,
@@ -2505,7 +2384,8 @@ CREATE TABLE artifact_extra_field_list (
     field_name text NOT NULL,
     field_type integer DEFAULT 1,
     attribute1 integer DEFAULT 0,
-    attribute2 integer DEFAULT 0
+    attribute2 integer DEFAULT 0,
+    is_required integer DEFAULT 0 NOT NULL
 );
 
 
@@ -2513,7 +2393,8 @@ CREATE TABLE artifact_extra_field_list (
 CREATE TABLE artifact_extra_field_elements (
     element_id integer DEFAULT nextval('artifact_extra_field_elements_element_id_seq'::text) NOT NULL,
     extra_field_id integer NOT NULL,
-    element_name text NOT NULL
+    element_name text NOT NULL,
+    status_id integer DEFAULT 0 NOT NULL
 );
 
 
@@ -2683,11 +2564,6 @@ CREATE VIEW project_task_vw AS
 
 
 
-CREATE VIEW artifact_vw AS
-    SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.category_id, artifact.artifact_group_id, artifact.resolution_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact_category.category_name, artifact_group.group_name, artifact_resolution.resolution_name, artifact.last_modified_date FROM users u, users u2, artifact_status, artifact_category, artifact_group, artifact_resolution, artifact WHERE ((((((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id)) AND (artifact.category_id = artifact_category.id)) AND (artifact.artifact_group_id = artifact_group.id)) AND (artifact.resolution_id = artifact_resolution.id));
-
-
-
 CREATE TABLE artifact_type_monitor (
     group_artifact_id integer NOT NULL,
     user_id integer NOT NULL
@@ -2710,36 +2586,6 @@ CREATE SEQUENCE artifact_extra_field_data_data_id_seq
     NO MAXVALUE
     NO MINVALUE
     CACHE 1;
-
-
-
-CREATE VIEW nss_passwd AS
-    SELECT users.unix_uid AS uid, users.unix_gid AS gid, users.user_name AS login, users.unix_pw AS passwd, users.realname AS gecos, users.shell, users.user_name AS homedir, users.status FROM users WHERE (users.unix_status = 'A'::bpchar);
-
-
-
-CREATE VIEW nss_shadow AS
-    SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::bpchar AS expired, 'n'::bpchar AS pwchange FROM users WHERE (users.unix_status = 'A'::bpchar);
-
-
-
-CREATE TABLE nss_groups (
-    user_id integer,
-    group_id integer,
-    name character varying(30),
-    gid integer
-);
-
-
-
-CREATE TABLE nss_usergroups (
-    uid integer,
-    gid integer,
-    user_id integer,
-    group_id integer,
-    user_name text,
-    unix_group_name character varying
-);
 
 
 
@@ -2783,6 +2629,162 @@ CREATE TABLE plugin_cvstracker_data_master (
 
 
 
+CREATE VIEW nss_passwd AS
+    SELECT users.unix_uid AS uid, users.unix_gid AS gid, users.user_name AS login, users.unix_pw AS passwd, users.realname AS gecos, users.shell, users.user_name AS homedir, users.status FROM users WHERE (users.unix_status = 'A'::bpchar);
+
+
+
+CREATE VIEW nss_shadow AS
+    SELECT users.user_name AS login, users.unix_pw AS passwd, 'n'::bpchar AS expired, 'n'::bpchar AS pwchange FROM users WHERE (users.unix_status = 'A'::bpchar);
+
+
+
+CREATE TABLE nss_groups (
+    user_id integer,
+    group_id integer,
+    name character varying(30),
+    gid integer
+);
+
+
+
+CREATE TABLE nss_usergroups (
+    uid integer,
+    gid integer,
+    user_id integer,
+    group_id integer,
+    user_name text,
+    unix_group_name character varying
+);
+
+
+
+CREATE TABLE deleted_mailing_lists (
+    mailing_list_name character varying(30),
+    delete_date integer,
+    isdeleted integer
+);
+
+
+
+CREATE TABLE deleted_groups (
+    unix_group_name character varying(30),
+    delete_date integer,
+    isdeleted integer
+);
+
+
+
+CREATE FUNCTION project_sums() RETURNS "trigger"
+    AS '
+	DECLARE
+		num integer;
+		curr_group integer;
+		found integer;
+	BEGIN
+		---
+		--- Get number of things this group has now
+		---
+		IF TG_ARGV[0]=''surv'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM surveys WHERE OLD.group_id=group_id AND is_active=1;
+				curr_group := OLD.group_id;
+			ELSE
+				SELECT INTO num count(*) FROM surveys WHERE NEW.group_id=group_id AND is_active=1;
+				curr_group := NEW.group_id;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''mail'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM mail_group_list WHERE OLD.group_id=group_id AND is_public=1;
+				curr_group := OLD.group_id;
+			ELSE
+				SELECT INTO num count(*) FROM mail_group_list WHERE NEW.group_id=group_id AND is_public=1;
+				curr_group := NEW.group_id;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''fmsg'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO curr_group group_id FROM forum_group_list WHERE OLD.group_forum_id=group_forum_id;
+				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
+			ELSE
+				SELECT INTO curr_group group_id FROM forum_group_list WHERE NEW.group_forum_id=group_forum_id;
+				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''fora'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM forum_group_list WHERE OLD.group_id=group_id AND is_public=1;
+				curr_group = OLD.group_id;
+				--- also need to update message count
+				DELETE FROM project_sums_agg WHERE group_id=OLD.group_id AND type=''fmsg'';
+				INSERT INTO project_sums_agg
+					SELECT OLD.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
+					FROM forum, forum_group_list
+					WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=OLD.group_id GROUP BY group_id,type;
+			ELSE
+				SELECT INTO num count(*) FROM forum_group_list WHERE NEW.group_id=group_id AND is_public=1;
+				curr_group = NEW.group_id;
+			END IF;
+		END IF;
+		---
+		--- See if this group already has a row in project_sums_agg for these things
+		---
+		SELECT INTO found count(group_id) FROM project_sums_agg WHERE curr_group=group_id AND type=TG_ARGV[0];
+
+		IF found=0 THEN
+			---
+			--- Create row for this group
+			---
+			INSERT INTO project_sums_agg
+				VALUES (curr_group, TG_ARGV[0], num);
+		ELSE
+			---
+			--- Update count
+			---
+			UPDATE project_sums_agg SET count=num
+			WHERE curr_group=group_id AND type=TG_ARGV[0];
+		END IF;
+
+		IF TG_OP=''DELETE'' THEN
+			RETURN OLD;
+		ELSE
+			RETURN NEW;
+		END IF;
+	END;
+'
+    LANGUAGE plpgsql;
+
+
+
+CREATE TABLE artifact_query (
+    artifact_query_id serial NOT NULL,
+    group_artifact_id integer NOT NULL,
+    user_id integer NOT NULL,
+    query_name text NOT NULL
+);
+
+
+
+CREATE TABLE artifact_query_fields (
+    artifact_query_id integer NOT NULL,
+    query_field_type text NOT NULL,
+    query_field_id integer NOT NULL,
+    query_field_values text NOT NULL
+);
+
+
+
+CREATE VIEW artifact_group_list_vw AS
+    SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, agl.custom_status_field, agl.custom_renderer, aca.count, aca.open_count FROM (artifact_group_list agl LEFT JOIN artifact_counts_agg aca USING (group_artifact_id));
+
+
+
+CREATE VIEW artifact_vw AS
+    SELECT artifact.artifact_id, artifact.group_artifact_id, artifact.status_id, artifact.priority, artifact.submitted_by, artifact.assigned_to, artifact.open_date, artifact.close_date, artifact.summary, artifact.details, u.user_name AS assigned_unixname, u.realname AS assigned_realname, u.email AS assigned_email, u2.user_name AS submitted_unixname, u2.realname AS submitted_realname, u2.email AS submitted_email, artifact_status.status_name, artifact.last_modified_date FROM users u, users u2, artifact_status, artifact WHERE (((artifact.assigned_to = u.user_id) AND (artifact.submitted_by = u2.user_id)) AND (artifact.status_id = artifact_status.id));
+
+
+
 COPY canned_responses (response_id, response_title, response_text) FROM stdin;
 \.
 
@@ -2798,7 +2800,7 @@ COPY doc_data (docid, stateid, title, data, updatedate, createdate, created_by, 
 
 
 
-COPY doc_groups (doc_group, groupname, group_id) FROM stdin;
+COPY doc_groups (doc_group, groupname, group_id, parent_doc_group) FROM stdin;
 \.
 
 
@@ -3496,35 +3498,13 @@ COPY prweb_vhost (vhostid, vhost_name, docdir, cgidir, group_id) FROM stdin;
 
 
 
-COPY artifact_group_list (group_artifact_id, group_id, name, description, is_public, allow_anon, email_all_updates, email_address, due_period, use_resolution, submit_instructions, browse_instructions, datatype, status_timeout) FROM stdin;
-100	1	Default	Default Data - Dont Edit	3	0	0		2592000	0	\N	\N	0	\N
-\.
-
-
-
-COPY artifact_resolution (id, resolution_name) FROM stdin;
-100	None
-102	Accepted
-103	Out of Date
-104	Postponed
-105	Rejected
+COPY artifact_group_list (group_artifact_id, group_id, name, description, is_public, allow_anon, email_all_updates, email_address, due_period, submit_instructions, browse_instructions, datatype, status_timeout, custom_status_field, custom_renderer) FROM stdin;
+100	1	Default	Default Data - Dont Edit	3	0	0		2592000	\N	\N	0	\N	0	\N
 \.
 
 
 
 COPY artifact_perm (id, group_artifact_id, user_id, perm_level) FROM stdin;
-\.
-
-
-
-COPY artifact_category (id, group_artifact_id, category_name, auto_assign_to) FROM stdin;
-100	100	None	100
-\.
-
-
-
-COPY artifact_group (id, group_artifact_id, group_name) FROM stdin;
-100	100	None
 \.
 
 
@@ -3536,7 +3516,7 @@ COPY artifact_status (id, status_name) FROM stdin;
 
 
 
-COPY artifact (artifact_id, group_artifact_id, status_id, category_id, artifact_group_id, resolution_id, priority, submitted_by, assigned_to, open_date, close_date, summary, details, last_modified_date) FROM stdin;
+COPY artifact (artifact_id, group_artifact_id, status_id, priority, submitted_by, assigned_to, open_date, close_date, summary, details, last_modified_date) FROM stdin;
 \.
 
 
@@ -4256,12 +4236,12 @@ COPY role_setting (role_id, section_name, ref_id, value) FROM stdin;
 
 
 
-COPY artifact_extra_field_list (extra_field_id, group_artifact_id, field_name, field_type, attribute1, attribute2) FROM stdin;
+COPY artifact_extra_field_list (extra_field_id, group_artifact_id, field_name, field_type, attribute1, attribute2, is_required) FROM stdin;
 \.
 
 
 
-COPY artifact_extra_field_elements (element_id, extra_field_id, element_name) FROM stdin;
+COPY artifact_extra_field_elements (element_id, extra_field_id, element_name, status_id) FROM stdin;
 \.
 
 
@@ -4292,6 +4272,16 @@ COPY artifact_type_monitor (group_artifact_id, user_id) FROM stdin;
 
 
 
+COPY plugin_cvstracker_data_artifact (id, kind, group_artifact_id, project_task_id) FROM stdin;
+\.
+
+
+
+COPY plugin_cvstracker_data_master (id, holder_id, cvs_date, log_text, file, prev_version, actual_version, author) FROM stdin;
+\.
+
+
+
 COPY nss_groups (user_id, group_id, name, gid) FROM stdin;
 0	2	stats	10002
 0	3	news	10003
@@ -4310,12 +4300,22 @@ COPY nss_usergroups (uid, gid, user_id, group_id, user_name, unix_group_name) FR
 
 
 
-COPY plugin_cvstracker_data_artifact (id, kind, group_artifact_id, project_task_id) FROM stdin;
+COPY deleted_mailing_lists (mailing_list_name, delete_date, isdeleted) FROM stdin;
 \.
 
 
 
-COPY plugin_cvstracker_data_master (id, holder_id, cvs_date, log_text, file, prev_version, actual_version, author) FROM stdin;
+COPY deleted_groups (unix_group_name, delete_date, isdeleted) FROM stdin;
+\.
+
+
+
+COPY artifact_query (artifact_query_id, group_artifact_id, user_id, query_name) FROM stdin;
+\.
+
+
+
+COPY artifact_query_fields (artifact_query_id, query_field_type, query_field_id, query_field_values) FROM stdin;
 \.
 
 
@@ -4557,14 +4557,6 @@ CREATE INDEX artgrouplist_groupid_public ON artifact_group_list USING btree (gro
 
 
 CREATE UNIQUE INDEX artperm_groupartifactid_userid ON artifact_perm USING btree (group_artifact_id, user_id);
-
-
-
-CREATE INDEX artcategory_groupartifactid ON artifact_category USING btree (group_artifact_id);
-
-
-
-CREATE INDEX artgroup_groupartifactid ON artifact_group USING btree (group_artifact_id);
 
 
 
@@ -4840,6 +4832,10 @@ CREATE INDEX plugin_cvstracker_group_artifact_id ON plugin_cvstracker_data_artif
 
 
 
+CREATE INDEX docgroups_parentdocgroup ON doc_groups USING btree (parent_doc_group);
+
+
+
 ALTER TABLE ONLY canned_responses
     ADD CONSTRAINT canned_responses_pkey PRIMARY KEY (response_id);
 
@@ -5095,23 +5091,8 @@ ALTER TABLE ONLY artifact_group_list
 
 
 
-ALTER TABLE ONLY artifact_resolution
-    ADD CONSTRAINT artifact_resolution_pkey PRIMARY KEY (id);
-
-
-
 ALTER TABLE ONLY artifact_perm
     ADD CONSTRAINT artifact_perm_pkey PRIMARY KEY (id);
-
-
-
-ALTER TABLE ONLY artifact_category
-    ADD CONSTRAINT artifact_category_pkey PRIMARY KEY (id);
-
-
-
-ALTER TABLE ONLY artifact_group
-    ADD CONSTRAINT artifact_group_pkey PRIMARY KEY (id);
 
 
 
@@ -5345,6 +5326,16 @@ ALTER TABLE ONLY plugin_cvstracker_data_master
 
 
 
+ALTER TABLE ONLY artifact_query
+    ADD CONSTRAINT artifact_query_pkey PRIMARY KEY (artifact_query_id);
+
+
+
+ALTER TABLE ONLY artifact_query_fields
+    ADD CONSTRAINT artifact_query_elements_pkey PRIMARY KEY (artifact_query_id, query_field_type, query_field_id);
+
+
+
 ALTER TABLE ONLY users
     ADD CONSTRAINT users_typeid FOREIGN KEY (type_id) REFERENCES user_type(type_id) MATCH FULL;
 
@@ -5417,6 +5408,16 @@ ALTER TABLE ONLY plugin_cvstracker_data_master
 
 ALTER TABLE ONLY plugin_cvstracker_data_master
     ADD CONSTRAINT "$2" FOREIGN KEY (author) REFERENCES users(user_name);
+
+
+
+ALTER TABLE ONLY artifact_query
+    ADD CONSTRAINT artquery_groupartid_fk FOREIGN KEY (group_artifact_id) REFERENCES artifact_group_list(group_artifact_id) ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY artifact_query_fields
+    ADD CONSTRAINT artqueryelmnt_artqueryid FOREIGN KEY (artifact_query_id) REFERENCES artifact_query(artifact_query_id) ON DELETE CASCADE;
 
 
 
@@ -5807,87 +5808,6 @@ CREATE CONSTRAINT TRIGGER artifactperm_groupartifactid_fk
 
 
 
-CREATE CONSTRAINT TRIGGER artifactcategory_groupartifacti
-    AFTER INSERT OR UPDATE ON artifact_category
-    FROM artifact_group_list
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactcategory_groupartifacti
-    AFTER DELETE ON artifact_group_list
-    FROM artifact_category
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactcategory_groupartifacti
-    AFTER UPDATE ON artifact_group_list
-    FROM artifact_category
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactcategory_groupartifacti', 'artifact_category', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactcategory_autoassignto_f
-    AFTER INSERT OR UPDATE ON artifact_category
-    FROM users
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactcategory_autoassignto_f
-    AFTER DELETE ON users
-    FROM artifact_category
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactcategory_autoassignto_f
-    AFTER UPDATE ON users
-    FROM artifact_category
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactcategory_autoassignto_f', 'artifact_category', 'users', 'FULL', 'auto_assign_to', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactgroup_groupartifactid_f
-    AFTER INSERT OR UPDATE ON artifact_group
-    FROM artifact_group_list
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactgroup_groupartifactid_f
-    AFTER DELETE ON artifact_group_list
-    FROM artifact_group
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifactgroup_groupartifactid_f
-    AFTER UPDATE ON artifact_group_list
-    FROM artifact_group
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifactgroup_groupartifactid_f', 'artifact_group', 'artifact_group_list', 'FULL', 'group_artifact_id', 'group_artifact_id');
-
-
-
 CREATE CONSTRAINT TRIGGER artifact_groupartifactid_fk
     AFTER INSERT OR UPDATE ON artifact
     FROM artifact_group_list
@@ -5942,60 +5862,6 @@ CREATE CONSTRAINT TRIGGER artifact_statusid_fk
 
 
 
-CREATE CONSTRAINT TRIGGER artifact_categoryid_fk
-    AFTER INSERT OR UPDATE ON artifact
-    FROM artifact_category
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_categoryid_fk
-    AFTER DELETE ON artifact_category
-    FROM artifact
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_categoryid_fk
-    AFTER UPDATE ON artifact_category
-    FROM artifact
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_categoryid_fk', 'artifact', 'artifact_category', 'FULL', 'category_id', 'id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_artifactgroupid_fk
-    AFTER INSERT OR UPDATE ON artifact
-    FROM artifact_group
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_artifactgroupid_fk
-    AFTER DELETE ON artifact_group
-    FROM artifact
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_artifactgroupid_fk
-    AFTER UPDATE ON artifact_group
-    FROM artifact
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_artifactgroupid_fk', 'artifact', 'artifact_group', 'FULL', 'artifact_group_id', 'id');
-
-
-
 CREATE CONSTRAINT TRIGGER artifact_submittedby_fk
     AFTER INSERT OR UPDATE ON artifact
     FROM users
@@ -6047,33 +5913,6 @@ CREATE CONSTRAINT TRIGGER artifact_assignedto_fk
     NOT DEFERRABLE INITIALLY IMMEDIATE
     FOR EACH ROW
     EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_assignedto_fk', 'artifact', 'users', 'FULL', 'assigned_to', 'user_id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_resolutionid_fk
-    AFTER INSERT OR UPDATE ON artifact
-    FROM artifact_resolution
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_check_ins"('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_resolutionid_fk
-    AFTER DELETE ON artifact_resolution
-    FROM artifact
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_del"('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
-
-
-
-CREATE CONSTRAINT TRIGGER artifact_resolutionid_fk
-    AFTER UPDATE ON artifact_resolution
-    FROM artifact
-    NOT DEFERRABLE INITIALLY IMMEDIATE
-    FOR EACH ROW
-    EXECUTE PROCEDURE "RI_FKey_noaction_upd"('artifact_resolutionid_fk', 'artifact', 'artifact_resolution', 'FULL', 'resolution_id', 'id');
 
 
 
@@ -7361,34 +7200,6 @@ CREATE CONSTRAINT TRIGGER user_plugin_plugin_id_fk
 
 
 
-CREATE TRIGGER surveys_agg_trig
-    AFTER INSERT OR DELETE OR UPDATE ON surveys
-    FOR EACH ROW
-    EXECUTE PROCEDURE project_sums('surv');
-
-
-
-CREATE TRIGGER mail_agg_trig
-    AFTER INSERT OR DELETE OR UPDATE ON mail_group_list
-    FOR EACH ROW
-    EXECUTE PROCEDURE project_sums('mail');
-
-
-
-CREATE TRIGGER fmsg_agg_trig
-    AFTER INSERT OR DELETE OR UPDATE ON forum
-    FOR EACH ROW
-    EXECUTE PROCEDURE project_sums('fmsg');
-
-
-
-CREATE TRIGGER fora_agg_trig
-    AFTER INSERT OR DELETE OR UPDATE ON forum_group_list
-    FOR EACH ROW
-    EXECUTE PROCEDURE project_sums('fora');
-
-
-
 CREATE CONSTRAINT TRIGGER users_themeid
     AFTER INSERT OR UPDATE ON users
     FROM themes
@@ -7471,6 +7282,34 @@ CREATE TRIGGER project_task_update_last_modified_date
 
 
 
+CREATE TRIGGER surveys_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON surveys
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('surv');
+
+
+
+CREATE TRIGGER mail_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON mail_group_list
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('mail');
+
+
+
+CREATE TRIGGER fmsg_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON forum
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('fmsg');
+
+
+
+CREATE TRIGGER fora_agg_trig
+    AFTER INSERT OR DELETE OR UPDATE ON forum_group_list
+    FOR EACH ROW
+    EXECUTE PROCEDURE project_sums('fora');
+
+
+
 CREATE RULE forum_insert_agg AS ON INSERT TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count + 1) WHERE (forum_agg_msg_count.group_forum_id = new.group_forum_id);
 
 
@@ -7488,6 +7327,14 @@ CREATE RULE frs_dlstats_file_rule AS ON INSERT TO frs_dlstats_file DO UPDATE frs
 
 
 CREATE RULE projecttask_insert_agg AS ON INSERT TO project_task DO UPDATE project_counts_agg SET count = (project_counts_agg.count + 1), open_count = (project_counts_agg.open_count + 1) WHERE (project_counts_agg.group_project_id = new.group_project_id);
+
+
+
+CREATE RULE artifact_delete_agg AS ON DELETE TO artifact DO UPDATE artifact_counts_agg SET count = (artifact_counts_agg.count - 1), open_count = CASE WHEN (old.status_id = 1) THEN (artifact_counts_agg.open_count - 1) ELSE artifact_counts_agg.open_count END WHERE (artifact_counts_agg.group_artifact_id = old.group_artifact_id);
+
+
+
+CREATE RULE projecttask_delete_agg AS ON DELETE TO project_task DO UPDATE project_counts_agg SET count = (project_counts_agg.count - 1), open_count = CASE WHEN (old.status_id = 1) THEN (project_counts_agg.open_count - 1) ELSE project_counts_agg.open_count END WHERE (project_counts_agg.group_project_id = old.group_project_id);
 
 
 
@@ -7823,7 +7670,7 @@ SELECT pg_catalog.setval('project_messa_project_messa_seq', 1, false);
 
 
 
-SELECT pg_catalog.setval('plugins_pk_seq', 3, true);
+SELECT pg_catalog.setval('plugins_pk_seq', 4, true);
 
 
 
@@ -7872,6 +7719,10 @@ SELECT pg_catalog.setval('plugin_cvstracker_artifact_seq', 1, false);
 
 
 SELECT pg_catalog.setval('plugin_cvstracker_master_seq', 1, false);
+
+
+
+SELECT pg_catalog.setval('artifact_query_artifact_query_id_seq', 1, false);
 
 
 

@@ -186,17 +186,19 @@ for ($i=0; $i<db_numrows($res); $i++) {
 				db_rollback();
 				exit(14);
 			}
-		$res3=db_query("UPDATE artifact_history SET old_value='$resolution_name',field_name='Resolution'
-			WHERE old_value='$resolution_id' AND field_name='resolution_id'");
-		if (!$res3) {
-			echo "Could Not update history resolution " . db_error();
-			db_rollback();
-			exit(15);
-		}
+			$res3=db_query("UPDATE artifact_history SET old_value='$resolution_name',field_name='Resolution'
+				WHERE old_value='$resolution_id' AND field_name='resolution_id'");
+			if (!$res3) {
+				echo "Could Not update history resolution " . db_error();
+				db_rollback();
+				exit(15);
+			}
 		}
 	}
 }
 
 db_commit();
+
+echo "SUCCESS";
 
 ?>

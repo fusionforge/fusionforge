@@ -4,7 +4,7 @@ DROP TABLE artifact_resolution CASCADE;
 ALTER TABLE artifact DROP COLUMN artifact_group_id;
 ALTER TABLE artifact DROP COLUMN resolution_id;
 ALTER TABLE artifact DROP COLUMN category_id;
-ALTER TABLE artifact_group_list DROP COLUMN use_resolution;
+ALTER TABLE artifact_group_list DROP COLUMN use_resolution CASCADE;
 
 DROP VIEW artifact_group_list_vw;
 CREATE VIEW artifact_group_list_vw AS

@@ -108,5 +108,6 @@ for ($g=0; $g<count($groups); $g++) {
 		}
 	}
 }
+echo "SUCCESS";
 
 ?>
