@@ -1,0 +1,511 @@
+<?xml version="1.0"?>
+<document>
+
+  <properties>
+    <author email="reinhard@spisser.it">Reinhard Spisser</author>
+    <author email="tom@infoether.com">Tom Copeland</author>
+    <title>Installation</title>
+  </properties>
+
+  <body>
+
+<section name="Hardware requirements">
+<p>
+Hardware Requirements are largely dependent on the number of users that will use the system. A previous version of the software, SourceForge 2.5, has been running successfully for over a year on a Linux system based on a Pentium 133Mhz, 64MB Ram and 30 registered users.
+</p>
+</section>
+<section name="Software requirements">
+<p>
+GForge should work correctly on any system configured like this:
+<ol>
+<li>Linux Operating System</li>
+<li>Postgres 7.1 or later</li>
+<li>Apache 1.3.22 or later</li>
+<li>openssl >0.9.4</li>
+<li>mod_ssl >2.4.10</li>
+<li>PHP 4.0.4 or later</li>
+</ol>
+</p>
+<p>
+Successful installations and operations have been done using the following system:
+</p>
+<p>
+RedHat Linux 8.0 with the following software configured (already bundled with RH8):
+<ol>
+<li>Postgres 7.2.2</li>
+<li>Apache 2.0.40</li>
+<li>openssl 0.9.6b</li>
+<li>mod_ssl 2.0.40</li>
+<li>PHP 4.2.2</li>
+</ol>
+</p>
+<p>
+RedHat Linux 7.3:
+<ol>
+<li>Postgres 7.2-1</li>
+<li>Apache 1.3.27</li>
+<li>openssl 0.9.6b</li>
+<li>mod_ssl 2.0.40</li>
+<li>PHP 4.1.2</li>
+</ol>
+</p>
+    </section>
+    <section name="Installation">
+<subsection name="Installing the software">
+<p>
+To install GForge, follow these steps:
+<ol>
+<li>Login as root user</li>
+<li>cd to <code>/var/www/</code></li>
+<li>Extract the content of gforge-3.0pre7.tar.bz2 to the current directory:<br/>
+<code>
+bzip2 -dc gforge-3.0pre7.tar.bz2 | tar xvf -
+<br/>
+</code>
+
+</li>
+<li>Now there's a directory /var/www/gforge-3.0pre7</li>
+</ol>
+
+</p>
+</subsection>
+
+<subsection name="Configuring the Web Server">
+<p>
+
+<ol>
+<li>Open <code> /etc/httpd/conf/httpd.conf </code>:</li>
+<li>Change the DocumentRoot to point to the <code>www</code> directory:
+<code><br/>
+<br/>
+DocumentRoot "/var/www/gforge-3.0/www"
+<br/>
+<br/></code>
+
+</li>
+<li>
+Change the Directory directive following the DocumentRoot as follows:
+
+<source><![CDATA[
+<Directory "/var/www/gforge-3.0/www">
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Order allow,deny
+    Allow from all
+    ErrorDocument 404 /404.php
+</Directory>
+]]></source>
+<p/>
+</li>
+<li>Change the ScriptAlias to <code>/var/www/gforge-3.0/cgi-bin</code>
+</li>
+<li>Change the Directory configuration following the ScriptAlias directive as follows:
+<source><![CDATA[
+<Directory "/var/www/gforge-3.0/cgi-bin">
+    AllowOverride All
+    Options None
+    Order allow,deny
+    Allow from all
+</Directory>
+]]></source>
+<p/>
+</li>
+<li>If you wish to set up a server with HTTPS, you need to configure the 
+<code>VirtualHost:443</code> section of httpd.conf.
+
+</li>
+
+<li>Add several new filenames to the <code>DirectoryIndex</code> directive:<br/>
+<code>
+DirectoryIndex index.html index.shtml index.cgi index.php
+<br/></code>
+</li>
+
+<li>Configuring PHP for Apache
+<br/>
+The configuration for the PHP module for Apache is different for Apache versions 1.3 and 2.0.
+Follow the instructions for the version installed on your system.
+<ul>
+<li>Configuring PHP for Apache 1.3
+<br/>
+<ol>
+
+<li>Open  <code> /etc/httpd/conf/httpd.conf </code>:</li>
+
+<li> Insert the following instructions after the DocumentRoot directive:
+
+<source>
+<![CDATA[
+<Location /projects>
+  ForceType application/x-httpd-php
+</Location>
+<Location /users>
+  ForceType application/x-httpd-php
+</Location> 
+]]>
+</source>
+<p/>
+Ensure the following lines are present and not commented out:
+<code><br/>
+LoadModule php_module	modules/libphp.so<br/>
+AddModule mod_php.c
+<br/></code>
+
+</li>
+</ol>
+</li>
+<li>Configuring PHP for Apache 2.0
+<br/>
+<ol>
+<li>Open <code>/etc/httpd/conf.d/php.ini</code></li>
+<li>Change the existing Files directive to:
+
+<source><![CDATA[
+<Files *.php>
+    SetOutputFilter PHP
+    SetInputFilter PHP
+    AcceptPathInfo On
+    LimitRequestBody 5524288
+</Files>
+]]></source>
+<p/>
+
+The LimitRequestBody directive allows you to limit the maximum number of bytes of a request (including uploads). The default is
+524288 (512Kb). This means that you cannot upload files with a size >512Kb.
+With this directive we set it to 5MB.
+
+<br/>
+</li>
+<li>
+Add the following lines:
+<br/>
+<source><![CDATA[
+<Files projects>
+SetOutputFilter PHP
+SetInputFilter PHP
+AcceptPathInfo on
+</Files>
+
+<Files users>
+SetOutputFilter PHP
+SetInputFilter PHP
+AcceptPathInfo on
+</Files>
+]]></source>
+
+<p/>
+</li>
+</ol>
+</li>
+
+</ul>
+</li>
+<li>Restart the Apache server: 
+<code>/etc/init.d/httpd restart</code></li>
+</ol>
+</p>
+</subsection>
+<subsection name="Configuring the database">
+<ol>
+<li>Configuring Postgres
+<p>Check if your postgres accept connections on TCP-IP sockets. On RedHat 8.0, this is by default disabled.  To verify this, type the following command:
+<br/>
+<code>
+psql -h localhost template1
+</code>
+<p/>
+
+If you get an error like this:<br/>
+<code>
+psql: could not connect to server: Connection refused<br/>
+        Is the server running on host localhost and accepting<br/>
+        TCP/IP connections on port 5432?<br/>
+</code>
+
+you need to:
+<br/>
+cd to:
+<code>
+/etc/init.d/<br/>
+vi postgresql
+</code>
+
+<p/>
+add the -i option to the pg_ctl command so that the result is:
+
+<br/>
+<code>
+ su -l postgres -s /bin/sh -c "/usr/bin/pg_ctl -o -i -D $PGDATA -p /usr/bin/postmaster start  &gt; /dev/null 2>&amp;1" &lt; /dev/null
+</code>
+<p/>
+On some systems, postgres is configured with the ident clause, allowing you only to access to the database if the username/password of you unix box is identical to the database username/password.
+
+You should either create a user called gforge on your unix box or disable this feature:
+<br/>
+<code>
+su - postgres<br/>
+</code>
+open <code>/var/lib/pgsql/data/pg_hba.conf</code>
+<br/>
+and insert the following lines:
+<br/>
+<code>
+local all              trust
+<br/>
+host all 127.0.0.1 255.255.255.255 crypt
+</code>
+
+<p/>
+and comment all other directives.
+
+</p>
+<br/>
+Restart now the postgresql server as root user:
+<br/>
+<code>/etc/init.d/postgresql restart</code>
+<br/>
+
+Create now the database user:
+<br/>
+<code>
+su - postgres<br/>
+<br>createuser gforge -W </br>
+</code>
+
+<br/>
+Answer the following two questions:
+
+<code><br/>
+Shall the new user be allowed to create databases? (y/n) y<br/>
+Shall the new user be allowed to create more new users? (y/n) n<br/>
+</code>
+and insert a password for the user to be created.
+
+<p/>
+Create now the database using the command:<br/>
+<code>
+createdb -U gforge gforge<br/>
+</code>
+
+<p/>
+
+</li>
+
+
+<li>Installing the database
+
+<br/>
+
+Now it's time to install the database. The steps are:
+
+<ol>
+
+<li>cd to <code>/var/www/gforge-3.0/db</code></li>
+<li>
+<code>
+psql -U gforge -d gforge &lt; gforge3.sql
+</code>
+<br/>
+</li>
+</ol>
+</li>
+</ol>
+
+<p>
+<b>Mandrake 9 installation notes (thanks to Francois ELIE)</b>
+<ul>
+<li>Edit /var/lib/pgsql/data/postgresql.conf:</li>
+<ul>
+<li><code>set tcpip_socket=true</code></li>
+<li><code>local all md5</code></li>
+</ul>
+<li>Edit /var/lib/pgsql/data/pg_hba.conf:</li>
+<ul>
+<li>Set for example access right to</li>
+<li><code>host     all     0.0.0.0   0 0.0.0   md5</code></li>
+</ul>
+<li>Then restart the server <code>/etc/rc.d/init.d/postgresql restart</code></li>
+</ul>
+</p>
+
+</subsection>
+
+<subsection name="Configuring PHP">
+<p>
+Verify the version of PHP installed on your system:
+<br/>
+<code>php -v</code>
+<ol>
+<li>open <code>/etc/php.ini</code></li>
+<li>if the PHP version you're using is 4.2.0 or later, enable the register_globals variable:
+<br><code>register_globals = On</code></br>
+</li>
+<li> and configure the include_path directive as follows:
+<br/><code>include_path=".:/var/www/gforge-3.0/:/var/www/gforge-3.0/common/include:<br/>
+ /var/www/gforge-3.0/www/include:/var/www/gforge-3.0/etc/</code>:
+<br/>
+
+</li>
+</ol>
+
+</p>
+</subsection>
+
+<subsection name="Configuring cvsweb">
+<p>First download the latest cvsweb release - 1.112 - from http://stud.fh-heilbronn.de/~zeller/cgi/cvsweb.cgi/</p>
+<p>Copy the tar.gz file into a tmp directory and unzip it:</p>
+<pre>
+tar -zxvf cvsweb-1.112.tar.gz
+</pre>
+<p>cvsweb consists of a Perl script (cvsweb.cgi), a configuration file (cvsweb.conf), and some icons (back.gif, dir.gif, etc).
+<ul>
+<li>Copy the cvsweb.cgi script into Apache's cgi-bin directory</li>
+<li>Copy the cvsweb.conf file into Apache's configuration directory</li>
+<li>Edit cvsweb.conf</li>
+<ul>
+<li>change %CVSROOT hash to include your repositories</li>
+<li>change the $cvstreedefault variable to point to a default repository</li>
+</ul>
+<ul>
+<li>TODO: can we add the repositories automagically? Or should we tweak cvsweb.cgi?</li>
+<li>TODO: should we tweak cvsweb.cgi so it doesn't have a default repository?</li>
+</ul>
+<li>Edit cvsweb.cgi:
+<ul> 
+<li>Change the $config variable to point the cvsweb.conf file</li>
+<li>Change the $PATH variable to point to the directory that contains rlog</li>
+</ul>
+</li>
+</ul>
+</p>
+<p>Possible problems:
+<ul>
+<li><code>Error: Configuration not found</code> - edit cvsweb.cgi and point $config to the cvsweb.conf file</li>
+<li><code>Error: Failed to spawn GNU rlog</code> - ensure rlog is in the directory pointed to by ENV{'PATH'}</li>
+</ul>
+</p>
+</subsection>
+
+
+<subsection name="Configuring GForge 3.0">
+<p>
+<ol>
+<li>login as root user</li>
+<li>create a directory gforge3-files:
+<br/>
+<code>mkdir /var/www/gforge3-files</code>
+
+<br/>
+make this directory writeable by apache<br/>
+<code>
+chown -R apache.apache /var/www/gforge3-files
+</code>
+<br/>
+This directory will contain all files/patches uploaded to your gforge site.
+<br/>
+</li>
+
+<li>Create a directory<code> /etc/gforge</code><br/></li>
+<li>Copy the file <code>local.inc</code> from <code>/var/www/gforge/etc/</code> to <code>/etc/gforge/</code> </li>
+<li>Open <code>/etc/gforge/local.inc</code>, configuring the following basic parameters:
+<ol>
+<li>
+Database configuration:
+
+<source><![CDATA[
+$sys_dbhost="localhost"
+$sys_dbname="gforge"
+$sys_dbuser="gforge"
+$sys_dbpasswd="gforge"
+$sys_server="postgres"
+      ]]></source>
+
+<p/>
+</li>
+<li>
+Change the value of the $sys_upload_dir to:
+<code>$sys_upload_dir='/var/www/gforge3-files/';</code>
+<br/>
+</li>
+<li>
+Change the value of the $sys_urlroot to:<br/>
+<code>$sys_urlroot="/var/www/gforge3/www";</code>
+<br/>
+</li>
+
+<li>
+The directives 
+<code>$sys_default_domain</code> and <code>
+$sys_fallback_domain </code>
+
+should contain the domain of your server, e.g. gforge.org.
+
+</li>
+</ol>
+
+
+</li>
+<li>Restart apache:
+<code>/etc/init.d/httpd restart</code>
+</li>
+</ol>
+</p>
+
+
+</subsection>
+</section>
+<section name="Verifying the installation">
+<p>
+To verify if everything was installed correctly, use the browser
+and connect to gforge. 
+
+
+You should see the homepage of the gforge software.
+
+If you get an error:
+
+<br/>
+<code> Could Not Connect to Database:</code>
+<br/>
+check if you have followed all installation instructions for the database.
+</p>
+
+    </section>
+<section name="Creating the admin user">
+<p>
+Connect to the gforge, and register a new account.
+<br/>
+<ol>
+<li>Insert a valid email address, it is needed for the account confirmation.</li>
+<br/>
+<li>Open your e-mail client, wait for the email from gforge site and follow the link that appears on the message.</li>
+
+
+<br/>
+<li>Verify in Account Maintenance the User Id of the user registered.</li> 
+Usually this is 102, but you can verify this by 
+running the following SQL query via the Postgres psql 
+utility:
+<br/>
+<code>
+psql -c "select user_id from users where user_name='***YOUR USER NAME***'" gforge gforge
+
+</code>
+<br/>
+<li>Now set the newly added user up to be a GForge administrator</li>
+<code>
+<br/>
+psql -U gforge -d gforge
+<br/>
+insert into user_group (user_id,group_id) values (102,1);
+<br/>
+update user_group set admin_flags='A' where group_id=1
+        AND user_id='102';
+<br/>
+</code>
+</ol>
+</p>
+
+</section>
+  </body>
+</document>
