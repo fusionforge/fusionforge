@@ -373,6 +373,17 @@ class User extends Error {
 					$group->removeUser($this->getID());
 				}
 			}
+
+			$res = db_query("DELETE FROM forum_monitored_forums WHERE user_id='".$this->getID()."' ");
+			if (!$res) {
+				$this->setError('ERROR - Could Not Delete From forum_monitored_forums: '.db_error());
+				return false;
+			}
+			$res = db_query("DELETE FROM filemodule_monitor WHERE user_id='".$this->getID()."' ");
+			if (!$res) {
+				$this->setError('ERROR - Could Not Delete From filemodule_monitor: '.db_error());
+				return false;
+			}
 			$this->setStatus('D');
 		}
 		return true;

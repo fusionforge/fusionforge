@@ -42,8 +42,7 @@ if (!$u || !is_object($u)) {
 	exit_error('Error',$u->getErrorMessage());
 }
 
-if ($delete_user != '' && $confirm_delete == '1')
-{
+if ($delete_user != '' && $confirm_delete == '1') {
 	// delete user
 	if (!$u->delete(true)) {
 		exit_error(
