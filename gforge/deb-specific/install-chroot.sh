@@ -12,7 +12,7 @@ if [ $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-CHROOTDIR=/var/lib/sourceforge/chroot
+CHROOTDIR=/var/lib/gforge/chroot
 
 case "$1" in
     configure)

@@ -26,7 +26,7 @@
 //
 // The default SourceForge domain
 // this is used where ever the "naked" form of the SourceForge domain
-// might be used.  E.g., "mailto:admin@sourceforge.net"
+// might be used.  E.g., "mailto:admin@gforge.net"
 $sys_default_domain = "{domain_name}";
  
 // Machine that hosts CVS
@@ -71,7 +71,7 @@ if (getenv ('SERVER_SOFTWARE')) { // We're on the web
 	$sys_dbpasswd=getenv('sys_dbpasswd');
 	$sys_ldap_passwd=getenv('sys_ldap_passwd');
 } else {
-	require ('/etc/sourceforge/database.inc');
+	require ('/etc/gforge/database.inc');
 }
 //whether or not to use replication
 //$sys_db_use_replication=false;
@@ -97,14 +97,14 @@ $sys_ldap_admin_dn="cn=admin,{ldap_base_dn}";
  
 // If you change something here don't forget to update fileforge
 // Where files are placed when uploaded
-$FTPINCOMING_DIR = "/var/lib/sourceforge/chroot/home/users/<USER>/incoming";
+$FTPINCOMING_DIR = "/var/lib/gforge/chroot/home/users/<USER>/incoming";
 
 // Where the released files are located
-$FTPFILES_DIR = "/var/lib/sourceforge/download/<GROUP>";
+$FTPFILES_DIR = "/var/lib/gforge/download/<GROUP>";
 
 // groups and homes dir prefix
-$homedir_prefix="/var/lib/sourceforge/chroot/home/users";
-$groupdir_prefix="/var/lib/sourceforge/chroot/home/groups";
+$homedir_prefix="/var/lib/gforge/chroot/home/users";
+$groupdir_prefix="/var/lib/gforge/chroot/home/groups";
  
 // Where the SourceForge files are placed
 // *** IMPORTANT: sys_urlroot *MUST* be an ABSOLUTE FILEYSTEM PATH NAME
@@ -112,11 +112,11 @@ $groupdir_prefix="/var/lib/sourceforge/chroot/home/groups";
 //             installation.  If you use ANY form of relative path
 //             you will break the html_image function in include/html.php
 //
-$sys_urlroot="/usr/lib/sourceforge/www/";
+$sys_urlroot="/usr/lib/gforge/www/";
  
 // Cache location -- this is needed by include/cache.php
 // This directory must be world reachable, but writable only by the web-server
-$sf_cache_dir = "/var/cache/sourceforge";
+$sf_cache_dir = "/var/cache/gforge";
 // Name of the system as a whole (needed by various utils and titles)
 $sys_name="{system_name}";
  

@@ -14,8 +14,8 @@ set -e
 
 case "$1" in
     configure-files)
-	cp -a /etc/file /etc/file.sourceforge-new
-	# Patch /etc/file.sourceforge-new
+	cp -a /etc/file /etc/file.gforge-new
+	# Patch /etc/file.gforge-new
 	;;
 
     configure)
@@ -24,8 +24,8 @@ case "$1" in
 	;;
 
     purge-files)
-	cp -a /etc/file /etc/file.sourceforge-new
-	# Patch /etc/file.sourceforge-new
+	cp -a /etc/file /etc/file.gforge-new
+	# Patch /etc/file.gforge-new
 	;;
 
     purge)

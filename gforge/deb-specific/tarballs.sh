@@ -12,8 +12,8 @@ if [  $(id -u) != 0 ] ; then
     exec su -c "$0 $1"
 fi
 
-CVSROOT=/var/lib/sourceforge/chroot/cvsroot
-CVSTARDIR=/var/lib/sourceforge/cvstarballs
+CVSROOT=/var/lib/gforge/chroot/cvsroot
+CVSTARDIR=/var/lib/gforge/cvstarballs
 
 case "$1" in
     generate)

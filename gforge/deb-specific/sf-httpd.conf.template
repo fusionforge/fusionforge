@@ -1,9 +1,9 @@
-<Directory /usr/lib/sourceforge/www>
+<Directory /usr/lib/gforge/www>
   Options Indexes FollowSymlinks
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "/usr/lib/sourceforge:/usr/lib/sourceforge/www/include:."
+  php_admin_value include_path "/usr/lib/gforge:/usr/lib/gforge/www/include:."
 </Directory>
 
 <Files .htaccess>
@@ -23,19 +23,19 @@ NameVirtualHost {ip_address}:443
   ServerName {domain_name}
   ServerAlias www.{domain_name}
   ServerAdmin {server_admin}
-  DocumentRoot /usr/lib/sourceforge/www
+  DocumentRoot /usr/lib/gforge/www
   DirectoryIndex index.html index.php
   UserDir disabled
 
-  <Directory /usr/lib/sourceforge/www>
-    Include /etc/sourceforge/sf-httpd.secrets
+  <Directory /usr/lib/gforge/www>
+    Include /etc/gforge/sf-httpd.secrets
   </Directory>
 
   # Debian Sourceforge without the DNS delegation
   # Project home pages are in a virtual /www/<group> location
-  AliasMatch ^/www/([^/]*)/(.*) /var/lib/sourceforge/chroot/home/groups/$1/htdocs/$2
-  ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /var/lib/sourceforge/chroot/home/groups/$1/cgi-bin/$2
-  <Directory /var/lib/sourceforge/chroot/home/groups>
+  AliasMatch ^/www/([^/]*)/(.*) /var/lib/gforge/chroot/home/groups/$1/htdocs/$2
+  ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /var/lib/gforge/chroot/home/groups/$1/cgi-bin/$2
+  <Directory /var/lib/gforge/chroot/home/groups>
     Options Indexes FollowSymlinks
       AllowOverride All
       order allow,deny
@@ -43,28 +43,28 @@ NameVirtualHost {ip_address}:443
     </Directory>
 
   # This for cvsweb 
-  ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
+  ScriptAlias /cgi-bin/ /usr/lib/gforge/cgi-bin/
 
   # 404 Error document
   ErrorDocument 404 /404.php
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 <VirtualHost {ip_address}>
   ServerName {cvs_host}
-  DocumentRoot /usr/lib/sourceforge/cvs
-  ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
-  Alias /cvstarballs/ /var/lib/sourceforge/cvstarballs/
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  DocumentRoot /usr/lib/gforge/cvs
+  ScriptAlias /cgi-bin/ /usr/lib/gforge/cgi-bin/
+  Alias /cvstarballs/ /var/lib/gforge/cvstarballs/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 <VirtualHost {ip_address}>
   ServerName {download_host}
-  DocumentRoot /var/lib/sourceforge/download
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  DocumentRoot /var/lib/gforge/download
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 <VirtualHost {ip_address}>
@@ -86,8 +86,8 @@ NameVirtualHost {ip_address}:443
   </Location>
 
   RedirectMatch permanent ^/$ http://{lists_host}/cgi-bin/mailman/listinfo
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 <VirtualHost {ip_address}:443>
@@ -122,15 +122,15 @@ NameVirtualHost {ip_address}:443
   </Location>
 
   RedirectMatch permanent ^/$ https://{lists_host}/cgi-bin/mailman/listinfo
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 <VirtualHost {ip_address}:443>
   ServerName {domain_name}
   ServerAlias www.{domain_name}
   ServerAdmin {server_admin}
-  DocumentRoot /usr/lib/sourceforge/www
+  DocumentRoot /usr/lib/gforge/www
   DirectoryIndex index.html index.php
   UserDir disabled
 
@@ -158,17 +158,17 @@ NameVirtualHost {ip_address}:443
     SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
   </IfModule>
 
-  <Directory /usr/lib/sourceforge/www>
-    Include /etc/sourceforge/sf-httpd.secrets
+  <Directory /usr/lib/gforge/www>
+    Include /etc/gforge/sf-httpd.secrets
   </Directory>
 
   # This for cvsweb 
-  ScriptAlias /cgi-bin/ /usr/lib/sourceforge/cgi-bin/
+  ScriptAlias /cgi-bin/ /usr/lib/gforge/cgi-bin/
 
   # 404 Error document
   ErrorDocument 404 /404.php
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 # This is magic for virtual hosting!
@@ -178,19 +178,19 @@ UseCanonicalName Off
 <VirtualHost {ip_address}>
 	ServerName cvs.{domain_name}
 	ServerAlias cvs.*.{domain_name}
-	DocumentRoot /var/lib/sourceforge/chroot/home/groups/
-	VirtualDocumentRoot /var/lib/sourceforge/chroot/home/groups/%2/htdocs
-	VirtualScriptAlias /var/lib/sourceforge/chroot/home/groups/%2/cgi-bin
-	# VirtualDocumentRoot /var/lib/sourceforge/chroot/home/groups/%2/cvs
-	# VirtualScriptAlias /var/lib/sourceforge/cgi-bin
-	<Directory /var/lib/sourceforge/chroot/home/groups>
+	DocumentRoot /var/lib/gforge/chroot/home/groups/
+	VirtualDocumentRoot /var/lib/gforge/chroot/home/groups/%2/htdocs
+	VirtualScriptAlias /var/lib/gforge/chroot/home/groups/%2/cgi-bin
+	# VirtualDocumentRoot /var/lib/gforge/chroot/home/groups/%2/cvs
+	# VirtualScriptAlias /var/lib/gforge/cgi-bin
+	<Directory /var/lib/gforge/chroot/home/groups>
 		Options Indexes FollowSymlinks
 		AllowOverride All
 		order allow,deny
 		allow from all
 	</Directory>
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 
 #This may be used 
@@ -201,14 +201,14 @@ UseCanonicalName Off
 <VirtualHost {ip_address}>
 	ServerName {domain_name}
 	ServerAlias *.{domain_name}
-	VirtualDocumentRoot /var/lib/sourceforge/chroot/home/groups/%1/htdocs
-        VirtualScriptAlias /var/lib/sourceforge/chroot/home/groups/%1/cgi-bin
-        <Directory /var/lib/sourceforge/chroot/home/groups>
+	VirtualDocumentRoot /var/lib/gforge/chroot/home/groups/%1/htdocs
+        VirtualScriptAlias /var/lib/gforge/chroot/home/groups/%1/cgi-bin
+        <Directory /var/lib/gforge/chroot/home/groups>
                Options Indexes FollowSymlinks
                AllowOverride All
                order allow,deny
                allow from all
        </Directory>
-  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" sourceforge
-  CustomLog "|/usr/sbin/cronolog /var/log/sourceforge/%Y/%m/%d/sourceforge.log" sourceforge
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/sbin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>

@@ -26,22 +26,22 @@ case "$target" in
 	;;
     configure-files)
 	# Tell PostgreSQL to let us use the database
-	db_passwd=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbpasswd\n";')
-	ip_address=$(perl -e'require "/etc/sourceforge/local.pl"; print "$sys_dbhost\n";')
+	db_passwd=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbpasswd\n";')
+	ip_address=$(perl -e'require "/etc/gforge/local.pl"; print "$sys_dbhost\n";')
 	pattern=$(basename $0).XXXXXX
-	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.sourceforge-new
-	if grep -q "^host.*sourceforge_passwd$" /etc/postgresql/pg_hba.conf.sourceforge-new ; then
-	    perl -pi -e "s/^host.*sourceforge_passwd$/host sourceforge $ip_address 255.255.255.255 password sourceforge_passwd/" /etc/postgresql/pg_hba.conf.sourceforge-new
+	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+	if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
+	    perl -pi -e "s/^host.*gforge_passwd$/host gforge $ip_address 255.255.255.255 password gforge_passwd/" /etc/postgresql/pg_hba.conf.gforge-new
 	else
 	    cur=$(mktemp /tmp/$pattern)
 	    echo "### Next line inserted by Sourceforge install" > $cur
-	    echo "host sourceforge $ip_address 255.255.255.255 password sourceforge_passwd" >> $cur
-	    cat /etc/postgresql/pg_hba.conf.sourceforge-new >> $cur
-	    cat $cur > /etc/postgresql/pg_hba.conf.sourceforge-new
+	    echo "host gforge $ip_address 255.255.255.255 password gforge_passwd" >> $cur
+	    cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
+	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
 	    rm -f $cur
 	fi
-	su -s /bin/sh postgres -c "touch /var/lib/postgres/data/sourceforge_passwd"
-	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/sourceforge_passwd > /dev/null" <<-EOF
+	su -s /bin/sh postgres -c "touch /var/lib/postgres/data/gforge_passwd"
+	su -s /bin/sh postgres -c "/usr/lib/postgresql/bin/pg_passwd /var/lib/postgres/data/gforge_passwd > /dev/null" <<-EOF
 sourceforge
 $db_passwd
 $db_passwd
@@ -85,27 +85,27 @@ EOF
 	
 	# Install/upgrade the database contents (tables and data)
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
-	/usr/lib/sourceforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE:
+	/usr/lib/gforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE:
 	;;
     purge-files)
-	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.sourceforge-new
-        if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf.sourceforge-new
+	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
+        if grep -q "### Next line inserted by Sourceforge install" /etc/postgresql/pg_hba.conf.gforge-new
         then
-                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf.sourceforge-new
-                perl -pi -e "s/^host.*sourceforge_passwd\n//" /etc/postgresql/pg_hba.conf.sourceforge-new
+                perl -pi -e "s/### Next line inserted by Sourceforge install\n//" /etc/postgresql/pg_hba.conf.gforge-new
+                perl -pi -e "s/^host.*gforge_passwd\n//" /etc/postgresql/pg_hba.conf.gforge-new
         fi
 	;;
     purge)
 	su -s /bin/sh postgres -c "dropdb sourceforge" > /dev/null 2>&1 || true
 	su -s /bin/sh postgres -c "dropuser sourceforge" > /dev/null 2>&1 || true
-	rm -f /var/lib/postgres/data/sourceforge_passwd
+	rm -f /var/lib/postgres/data/gforge_passwd
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	;;
     dump)
 	if [ "x$2" != "x" ] ;then
 		DUMPFILE=$2
 	else
-		DUMPFILE=/var/lib/sourceforge/dumps/db_dump
+		DUMPFILE=/var/lib/gforge/dumps/db_dump
 	fi
 	echo "Dumping in $DUMPFILE"
 	su -s /bin/sh sourceforge -c /usr/lib/postgresql/bin/pg_dump sourceforge > $DUMPFILE
@@ -123,7 +123,7 @@ EOF
 	if [ "x$2" != "x" ] ;then
 		RESTFILE=$2
 	else
-		RESTFILE=/var/lib/sourceforge/dumps/db_dump
+		RESTFILE=/var/lib/gforge/dumps/db_dump
 	fi
 	echo "Restoring $RESTFILE"
 	su -s /bin/sh postgres -c "dropdb sourceforge" || true

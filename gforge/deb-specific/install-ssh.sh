@@ -14,7 +14,7 @@ fi
 
 case "$1" in
     configure)
-	[ -h /cvsroot ] || ln -s /var/lib/sourceforge/chroot/cvsroot /cvsroot
+	[ -h /cvsroot ] || ln -s /var/lib/gforge/chroot/cvsroot /cvsroot
 	$0 purge
 	;;
 
@@ -22,28 +22,28 @@ case "$1" in
     	if [ -d /etc/ssh ]
 	then
 		invoke-rc.d ssh stop
-		[ -f /var/lib/sourceforge/chroot/var/run/ssh.pid ] && kill $(cat /var/lib/sourceforge/chroot/var/run/ssh.pid)
-		rm -f /var/lib/sourceforge/chroot/var/run/ssh.pid
-		if ! grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh ; then
-	    	perl -pi -e "s:start-stop-daemon:start-stop-daemon --chroot /var/lib/sourceforge/chroot:g" /etc/init.d/ssh
+		[ -f /var/lib/gforge/chroot/var/run/ssh.pid ] && kill $(cat /var/lib/gforge/chroot/var/run/ssh.pid)
+		rm -f /var/lib/gforge/chroot/var/run/ssh.pid
+		if ! grep -q "start-stop-daemon --chroot /var/lib/gforge/chroot" /etc/init.d/ssh ; then
+	    	perl -pi -e "s:start-stop-daemon:start-stop-daemon --chroot /var/lib/gforge/chroot:g" /etc/init.d/ssh
 		fi
 		rm -f /etc/ssh/sshd_not_to_be_run
 	fi
     	if [ -d /etc/ssh-nonfree ]
 	then
 		invoke-rc.d ssh-nonfree stop
-		[ -f /var/lib/sourceforge/chroot/var/run/ssh-nonfree.pid ] && kill $(cat /var/lib/sourceforge/chroot/var/run/ssh-nonfree.pid)
-		rm -f /var/lib/sourceforge/chroot/var/run/ssh-nonfree.pid
-		if ! grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh-nonfree ; then
-	    	perl -pi -e "s:start-stop-daemon:start-stop-daemon --chroot /var/lib/sourceforge/chroot:g" /etc/init.d/ssh-nonfree
+		[ -f /var/lib/gforge/chroot/var/run/ssh-nonfree.pid ] && kill $(cat /var/lib/gforge/chroot/var/run/ssh-nonfree.pid)
+		rm -f /var/lib/gforge/chroot/var/run/ssh-nonfree.pid
+		if ! grep -q "start-stop-daemon --chroot /var/lib/gforge/chroot" /etc/init.d/ssh-nonfree ; then
+	    	perl -pi -e "s:start-stop-daemon:start-stop-daemon --chroot /var/lib/gforge/chroot:g" /etc/init.d/ssh-nonfree
 		fi
 		rm -f /etc/ssh-nonfree/sshd_not_to_be_run
 	fi
 	;;
 
     purge)
-	if grep -q "start-stop-daemon --chroot /var/lib/sourceforge/chroot" /etc/init.d/ssh ; then
-	    perl -pi -e "s:start-stop-daemon --chroot /var/lib/sourceforge/chroot:start-stop-daemon:g" /etc/init.d/ssh
+	if grep -q "start-stop-daemon --chroot /var/lib/gforge/chroot" /etc/init.d/ssh ; then
+	    perl -pi -e "s:start-stop-daemon --chroot /var/lib/gforge/chroot:start-stop-daemon:g" /etc/init.d/ssh
 	    invoke-rc.d ssh restart
 	fi
 	;;
