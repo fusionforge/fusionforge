@@ -27,10 +27,11 @@ sourceforge (2.5-25+) unstable; urgency=medium
     existing unix_box entries.
   * [Roland] Various minor fixes here and there: Debconf templates,
     install-dap.sh, sourceforge-config.sgml, qrs.php.
+  * [Christian] change gid determination in install-ftp.sh update 
   * [Roland] Overall urgency set to medium, since 2.5-25 is broken with
     recent slapds and PostgreSQLs.
 
- -- Roland Mas <lolando@debian.org>  Wed,  6 Mar 2002 17:29:28 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Wed,  6 Mar 2002 19:27:23 +0100
 
 sourceforge (2.5-25) unstable; urgency=low
 
