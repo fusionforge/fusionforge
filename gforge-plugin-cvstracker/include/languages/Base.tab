@@ -16,6 +16,5 @@ plugin_cvstracker	prevVersion	Previous Version
 plugin_cvstracker	actualVersion	Actual Version
 plugin_cvstracker	log	Log Message
 plugin_cvstracker	date	Date
-plugin_cvstracker	no_commits_attached	No commits attached
 plugin_cvstracker	diffto	Diff To
 plugin_cvstracker	author	Author
