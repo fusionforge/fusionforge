@@ -3,6 +3,10 @@
 	* www/include/languages/Base.tab:
 	Fixed bug [ #500 ] http://gforge.org/docs/site/ = 404
 
+	* common/include/Group.class:
+	Fixed bug [ #481 ] Group creation does not rollback 
+	if FRSPackage not created
+
 2003-09-15 Tom Copeland  <tom@infoether.com>
 
 	* www/survey/admin/show_questions.php:
