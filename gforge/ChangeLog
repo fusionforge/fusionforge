@@ -1,3 +1,7 @@
+2004-07-07  Tom Copeland <tom@infoether.com>
+
+	* common/include/constants.php: Removed duplicate declaration.
+
 2004-06-30  Tom Copeland <tom@infoether.com>
 
 	* www/exports/rss_sfnews.php, index.html: Applied patch #831:
