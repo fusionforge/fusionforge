@@ -1,4 +1,4 @@
-gforge (3.0-6+6) unstable; urgency=low
+gforge (3.0-6+7) unstable; urgency=low
 
   * [Roland] Added 20030822.sql.
   * [Roland] Added scripts to generate a /var/lib/gforge/etc/httpd.vhosts
@@ -14,9 +14,10 @@ gforge (3.0-6+6) unstable; urgency=low
     Disable Tracker and the "TAB" is not disable / error in Layout.class
   * [Roland] Added "objectclass: domain" to the top-level LDAP object when
     it's not the same as the top-level LDAP object created by slapd, see
-    bug [ #518 ].
+    Gforge bug #518.  Also, (closes: #208849), since I believe it's the
+    same bug.
 
- -- Roland Mas <lolando@debian.org>  Thu, 18 Sep 2003 14:06:49 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 18 Sep 2003 21:50:11 +0200
 
 gforge (3.0-6) unstable; urgency=low
 
