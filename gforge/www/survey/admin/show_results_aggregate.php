@@ -90,12 +90,7 @@ for ($i=0; $i<$count; $i++) {
 
 	}
 	
-	if ($question_type == "1") {
-
-		/*
-			This is a r�dio-button question. Values 1-5.	
-		*/
-
+	if ($question_type == "1") { // This is a radio-button question. Values 1-5.	
 		// Show the 1-5 markers only if this is the first in a series
 
 		if ($question_type != $last_question_type) {
@@ -104,9 +99,7 @@ for ($i=0; $i<$count; $i++) {
 
 		}
 
-		/*
-			Select the number of responses to this question
-		*/
+		// Select the number of responses to this question
 		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND response IN ('1','2','3','4','5') AND group_id='$group_id'";
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
@@ -116,9 +109,8 @@ for ($i=0; $i<$count; $i++) {
 			$response_count = db_result($result2, 0, 'count');
 			echo "<strong>" . $response_count . "</strong>" .$Language->getText('survey_show_results_aggregate','responses')."<br />";
 		}
-		/*
-			average
-		*/
+
+		//	average
 		if ($response_count > 0){
 			$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN ('1','2','3','4','5')";
 			$result2=db_query($sql);
@@ -139,31 +131,17 @@ for ($i=0; $i<$count; $i++) {
 				GraphResult($result2,stripslashes(db_result($result, 0, "question")));
 			}
 		}// end if (responses to survey question present)
-	} else if ($question_type == "2") {
-		/*
-			This is a text-area question.
-		*/
-
+	} else if ($question_type == "2") { // This is a text-area question.
 		echo db_result($result, 0, "question")."<br />\n";
-
 		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">".$Language->getText('survey_show_results_aggregate','view_comments')."</a>";
 
-	} else if ($question_type == "3") {
-		/*
-			This is a Yes/No question.
-		*/
-
-		/*
-			Show the Yes/No only if this is the first in a series
-		*/
-
+	} else if ($question_type == "3") { // 	This is a Yes/No question.
+	  //	Show the Yes/No only if this is the first in a series
 		if ($question_type != $last_question_type) {
 			echo "<strong>".$Language->getText('survey_show_results_aggregate','yes_no')."</strong><br />\n";
 		}
 
-		/*
-			Select the count and average of responses to this question
-		*/
+		// Select the count and average of responses to this question
 		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response IN (1,5)";
 
 		$result2=db_query($sql);
@@ -171,12 +149,11 @@ for ($i=0; $i<$count; $i++) {
 			echo $Language->getText('survey_show_results_aggregate','error');
 			echo db_error();
 		} else {
-			echo "<strong>".db_result($result2, 0, 0)."</strong>".$Language->getText('survey_show_results_aggregate','responses')."<br />";
+			echo "<strong>".db_result($result2, 0, 0)."</strong> ".$Language->getText('survey_show_results_aggregate','responses')."<br />";
 		}
-		/*
-			average
-		*/
-		$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'";
+
+		// average
+		$sql="SELECT avg(response::int) AS avg FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id'  and response != ''";
 
 		$result2=db_query($sql);
 		if (!$result2 || db_numrows($result2) < 1) {
@@ -186,9 +163,7 @@ for ($i=0; $i<$count; $i++) {
 			echo "<strong>".number_format(db_result($result2, 0, 0),2)."</strong>".$Language->getText('survey_show_results_aggregate','average');
 		}
 
-		/*
-			Get the YES responses
-		*/
+		// Get the YES responses
 		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response='1'";
 
 		$result2=db_query($sql);
@@ -201,9 +176,7 @@ for ($i=0; $i<$count; $i++) {
 			$value_array[0]=db_result($result2, 0, "count");
 		}
 
-		/*
-			Get the NO responses
-		*/
+		// Get the NO responses
 		$sql="SELECT count(*) AS count FROM survey_responses WHERE survey_id='$survey_id' AND question_id='$quest_array[$i]' AND group_id='$group_id' AND response='5'";
 
 		$result2=db_query($sql);
@@ -220,19 +193,10 @@ for ($i=0; $i<$count; $i++) {
 
 	} else if ($question_type == "4") {
 
-		/*
-			This is a comment only.
-		*/
-
 		echo "&nbsp;<p><strong>".db_result($result, 0, "question")."</strong></p>\n";
 		echo "<input type=\"hidden\" name=\"_".$quest_array[$i]."\" value=\"-666\" />";
 
-	} else if ($question_type == "5") {
-
-		/*
-			This is a text-field question.
-		*/
-
+	} else if ($question_type == "5") { // This is a text-field question.
 		echo db_result($result, 0, "question")."<br />\n";
 
 		echo "<a href=\"show_results_comments.php?survey_id=$survey_id&amp;question_id=$quest_array[$i]&amp;group_id=$group_id\">".$Language->getText('survey_show_results_aggregate','view_comments')."</a>";

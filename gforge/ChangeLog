@@ -1,6 +1,7 @@
 2004-02-04  Tom Copeland <tom@infoether.com>
 	* Applied patch [ #575 ] In forum style "flat" viewing a 
 	news item generates an error
+	* Fixed bug [ #597 ] Viewing aggregate survey result contains some errors
 
 2004-02-03  Tom Copeland <tom@infoether.com>
 	* Applied patch [ #662 ] New german localization diff file
