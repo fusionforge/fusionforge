@@ -194,7 +194,7 @@ function main_page($group_id) {
 			if ($data) {
 				$datastring = "data = '". base64_encode($data) ."',";
 			}
-			if ($uploaded_data) {
+			if ($uploaded_data_name) {
 				if (!is_uploaded_file($uploaded_data)) {
 					exit_error("Error","Invalid file attack attempt $uploaded_data");
 				}
