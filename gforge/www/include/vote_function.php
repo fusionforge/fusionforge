@@ -75,7 +75,7 @@ function vote_get_rating ($id,$flag) {
  *
  * @param		int		Survey ID
  * @param		string	The rating type
- */ 
+ */
 function vote_show_release_radios ($vote_on_id,$flag) {
 	/*
 		$flag
@@ -91,7 +91,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 		$rating='2.5';
 	}
 	$rating=((16*vote_get_rating ($vote_on_id,$flag))-15);
-	
+
 	global $REQUEST_URI;
 	?>
 	<span style="font-size:smaller">
@@ -102,7 +102,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 	<div align="center">
 	<?php echo html_image("rateit.png","100","9",array()); ?>
 	<br />
-	<?php 
+	<?php
 		echo html_blankimage(1,$rating);
 		echo html_image("ic/caret.png","9","6",array());
 	?>
@@ -123,7 +123,7 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 
 /**
  * show_survey() - Select and show a specific survey from the database
- * 
+ *
  * @param		int		The group ID
  * @param		int		The survey ID
  */
@@ -278,9 +278,7 @@ if (db_numrows($result) > 0) {
 	<?php
 
 } else {
-	echo '<tr><td colspan="2">';
-	echo "<strong>".$Language->getText('survey','survey_not_found')."</strong>";
-	echo "</td></tr>";
+	echo "<strong>".$Language->getText('survey','survey_not_found')."</strong></form>";
 }
 
 }
@@ -381,8 +379,8 @@ $USER_RATING_VALUES[]='3';
 function vote_show_user_rate_box ($user_id, $by_id=0) {
 	if ($by_id) {
 		$res = db_query("
-			SELECT rate_field,rating FROM user_ratings 
-			WHERE rated_by='$by_id' 
+			SELECT rate_field,rating FROM user_ratings
+			WHERE rated_by='$by_id'
 			AND user_id='$user_id'
 		");
 		$prev_vote = util_result_columns_to_assoc($res);
@@ -392,7 +390,7 @@ function vote_show_user_rate_box ($user_id, $by_id=0) {
 			}
 		}
 	}
-	
+
 	global $USER_RATING_VALUES,$USER_RATING_QUESTIONS,$USER_RATING_POPUP1,$USER_RATING_POPUP2,$USER_RATING_POPUP3,$USER_RATING_POPUP4,$USER_RATING_POPUP5;
 	echo '
 	<table border="0">
@@ -454,13 +452,13 @@ function vote_show_user_rating($user_id) {
 
 /**
  * vote_remove_all_ratings_by() - Remove all ratings by a particular user
- * 
+ *
  * @param		int		The user ID
  */
 function vote_remove_all_ratings_by($user_id) {
 	db_query("
-		DELETE FROM user_ratings 
-		WHERE rated_by='$user_id' 
+		DELETE FROM user_ratings
+		WHERE rated_by='$user_id'
 	");
 }
 
