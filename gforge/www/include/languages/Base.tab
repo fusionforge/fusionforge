@@ -649,7 +649,9 @@ forum_admin_delete	section	Forum Administration
 forum_admin_delete	title	Delete Forum
 forum_admin_delete_message	section	Forum Administration
 forum_admin_delete_message	title	Delete a Message
+forum_admin_delete_message	enter_message_id	Enter message identifier
 forum_admin_delete_message	warning	WARNING! You are about to permanently delete a message and all of its followups!!
+forum_admin_delete_messages	messages_deleted	$1 messages deleted
 forum_admin_delete_messages	messages_deleted	$1 messages deleted
 forum_common	error_adding_forum	Error Adding Forum
 forum_common	error_min_desc_length	Forum Description Must Be At Least 10 Characters
@@ -1627,7 +1629,7 @@ project_showfiles	no_releases	No releases
 project_showfiles	package	Package
 project_showfiles	project_totals	Project totals
 project_showfiles	release_highlighted	The release you have chosen is <span style="background-color:pink">highlighted</span>.
-project_showfiles	release_notes	Release <br />&amp; Notes
+project_showfiles	release_notes	Release &amp; Notes
 project_showfiles	section	Project: $1
 project_showfiles	size	Size
 project_showfiles	title	Project Filelist
