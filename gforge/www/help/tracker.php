@@ -22,57 +22,46 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 <?php
 	switch( $helpname ) {
 		case 'assignee':
-			print('This drop-down box represents the project administrator to which a tracker item is assigned.');
+			print( $Language->getText('help_tracker','assignee'));
 			break;
 		case 'status':
-			print('This drop-down box represents the current status of a tracker item.<br /><br />
-				   You can set the status to \'Pending\' if you are waiting for a response from the tracker item author.  When
-				   the author responds the status is automatically reset to that of \'Open\'.  Otherwise, if the author doesn\'t 
-				   respond with an admin-defined amount of time (default is 14 days) then the item is given a status of \'Deleted\'.');
+			print( $Language->getText('help_tracker','status'));
 			break;
 		case 'category':
-			print('This drop-down box represents the Category of the tracker items which is a particular section of a project.<br /><br />
-				   Select \'Any\' for a broader result set.');
+			print( $Language->getText('help_tracker','category'));
 			break;
 		case 'group':
-			print('This drop-down box represents the Group of the tracker items which is a list of project admin-defined options.<br /><br />
-				   If you are a project admin you can click the \'(admin)\' link to define your own groups.');
+			print(  $Language->getText('help_tracker','group'));
 			break;
 		case 'sort_by':
-			print('The Sort By option allows you to determine how the browse results are sorted.<br /><br />  You can sort by
-				  ID, Priority, Summary, Open Date, Close Date, Submitter, or Assignee.  You can also have the 
-				  results sorted in Ascending or Descending order.');
+			print( $Language->getText('help_tracker','sort_by'));
 			break;
 		case 'data_type':
-			print('The Data Type option determines the type of tracker item this is.  Since the tracker rolls into one the 
-				   bug, patch, support, etc... managers you need to be able to determine which one of these an item should belong.
-				   <br /><br />This has the added benefit of enabling an admin to turn a support request into a bug.');
+			print( $Language->getText('help_tracker','data_type'));
 			break;
 		case 'priority':
-			print('The priority option allows a user to define a tracker item priority (ranging from 1-Lowest to 9-Highest).<br /><br />
-				   This is especially helpful for bugs and support requests where a user might find a critical problem with a project.');
+			print( $Language->getText('help_tracker','data_type'));
 			break;
 		case 'resolution':
-			print('The resolution option represents a tracker items resolution if any.');
+			print( $Language->getText('help_tracker','resolution'));
 			break;
 		case 'summary':
-			print('The summary text-box represents a short tracker item summary.  Useful when browsing through several tracker items.');
+			print( $Language->getText('help_tracker','summary'));
 			break;
 		case 'canned_response':
-			print('The canned response drop-down represents a list of project admin-defined canned responses to common support or bug 
-				   submission.<br /><br /> If you are a project admin you can click the \'(admin)\' link to define your own canned responses');
+			print( $Language->getText('help_tracker','canned_response'));
 			break;
 		case 'comment':
-			print('The comment textarea allows you to attach a comment to a tracker item when a canned response isn\'t appropriate.');
+			print( $Language->getText('help_tracker','comment'));
 			break;
 		case 'attach_file':
-			print('When you wish to attach a file to a tracker item you must check this checkbox before submitting changes.');
+			print( $Language->getText('help_tracker','attach_file'));
 			break;
 		case 'monitor':
-			print('You can monitor or un-monitor this item by clicking the "Monitor" button. <br /><br /><strong>Note!</strong> this will send you additional email. If you add comments to this item, or submitted, or are assigned this item, you will also get emails for those reasons as well!');
+			print( $Language->getText('help_tracker','monitor'));
 			break;
 		default:
-			print("UNKNOWN HELP REQUEST: $helpname");
+			print( $Language->getText('help_tracker','unknown_help_request'). $helpname);
 			break;
 	}
 ?>
@@ -82,7 +71,7 @@ help_header('Tracker Help - ' . ucwords(str_replace('_',' ',$helpname)));
 	<td align="right">
 		<br /><br />
 		<form>
-			<input type="button" value="Close Window" onClick="window.close()" />
+			<input type="button" value="<?php echo $Language->getText('help_tracker','close_window'); ?>" onClick="window.close()" />
 		</form>
 	</td>
 </tr>

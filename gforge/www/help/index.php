@@ -14,11 +14,12 @@
 
 require_once('pre.php');
 
-$HTML->header(array(title=>"Welcome to ".$GLOBALS['sys_name']));
+$HTML->header(array(title=>$Language->getText('help','title',array($GLOBALS['sys_name']))));
 
+print "<p>" .$Language->getText('help','page_information')."</p>";
+/**
 print "<p>Page Information</p>";
-print "<p>Page Information</p>";
-
+*/
 
 $HTML->footer(array());
 
