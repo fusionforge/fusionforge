@@ -1,0 +1,39 @@
+--- /var/www/gforge-4.0.2/www/account/login.php	2004-12-15 10:11:38.000000000 -0800
++++ login.php	2004-11-01 09:51:19.000000000 -0800
+@@ -60,15 +60,19 @@
+ if ($login) {
+ 	$success=session_login_valid(strtolower($form_loginname),$form_pw);
+ 	if ($success) {
+-		/*
+-			You can now optionally stay in SSL mode
+-		*/
+-		if ($return_to) {
+-			header ("Location: " . $return_to);
+-			exit;
++		if ($GLOBALS['ldap_first_login']) {
++			header ("Location: /account/");
+ 		} else {
+-			header ("Location: /my/");
+-			exit;
++			/*
++				You can now optionally stay in SSL mode
++			*/
++			if ($return_to) {
++				header ("Location: " . $return_to);
++				exit;
++			} else {
++				header ("Location: /my/");
++				exit;
++			}
+ 		}
+ 	}
+ }
+@@ -91,7 +95,7 @@
+ 	} else {
+ 		echo '<h2 style="color:red">'. $feedback .'</h2>';
+ 		if ($userstatus == "D") {
+-			echo $Language->getText('account_login', 'deleted_account', $GLOBALS['sys_name']);
++			echo $Language->getText('account_login', 'deleted_account', $GLOBALS[sys_name]);
+ 		}
+ 	} //end else
+ 
