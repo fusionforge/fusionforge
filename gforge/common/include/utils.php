@@ -31,10 +31,6 @@ function util_check_fileupload($filename) {
 	if (!is_uploaded_file($filename)) {
 		return false;
 	}
-	/* This should be enough... */
-	if (!is_uploaded_file($filename)) {
-		return false;
-	}
 	/* ... but we'd rather be paranoic */
 	if (strstr($filename, '..')) {
 		return false;

@@ -259,22 +259,14 @@ function db_fetch_array($qhandle) {
  *	@return int id of the primary key or 0 on failure.
  */
 function db_insertid($qhandle,$table_name,$pkey_field_name,$dbserver=SYS_DB_PRIMARY) {
-	$oid=@pg_getlastoid($qhandle);
-	if ($oid) {
-		//$sql="SELECT $pkey_field_name AS id FROM $table_name WHERE oid='$oid'";
-		$sql="SELECT max($pkey_field_name) AS id FROM $table_name";
-		//echo $sql;
-		$res=db_query($sql, -1, 0, $dbserver);
-		if (db_numrows($res) >0) {
-			return db_result($res,0,'id');
-		} else {
-		//	echo "No Rows Matched";
-		//	echo db_error();
-			return 0;
-		}
+	$sql="SELECT max($pkey_field_name) AS id FROM $table_name";
+	//echo $sql;
+	$res=db_query($sql, -1, 0, $dbserver);
+	if (db_numrows($res) >0) {
+		return db_result($res,0,'id');
 	} else {
-//		echo "No OID";
-//		echo db_error();
+	//	echo "No Rows Matched";
+	//	echo db_error();
 		return 0;
 	}
 }

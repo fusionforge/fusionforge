@@ -13,8 +13,8 @@
 
 
 /*
-        Docmentation Manager
-        by Quentin Cregan, SourceForge 06/2000
+		Docmentation Manager
+		by Quentin Cregan, SourceForge 06/2000
 */
 
 
@@ -56,22 +56,22 @@ function main_page($group_id) {
 
 		echo '
 	
-			<form name="editdata" action="index.php?mode=docdoedit&group_id='.$group_id.'" method="POST">
+			<form name="editdata" action="index.php?mode=docdoedit&group_id='.$group_id.'" method="POST" enctype="multipart/form-data">
 
 			<table border="0" width="75%">
 
 			<tr>
-			        <th>Document Title:</th>
-			        <td><input type="text" name="title" size="40" maxlength="255" value="'.$row['title'].'"></td>
-			        <td class="example">(e.g. How to use the download server)</td>
+					<th>Document Title:</th>
+					<td><input type="text" name="title" size="40" maxlength="255" value="'.$row['title'].'"></td>
+					<td class="example">(e.g. How to use the download server)</td>
 
 			</tr>
 			<tr>
 			</tr>
 			<tr>
-			        <th>Short Description:</td>
-			        <td><input type="text" name="description" size="20" maxlength="255" value="'.$row['description'].'"></td>
-			        <td class="example">(e.g. http://www.linux.com/)</td>
+					<th>Short Description:</td>
+					<td><input type="text" name="description" size="20" maxlength="255" value="'.$row['description'].'"></td>
+					<td class="example">(e.g. http://www.linux.com/)</td>
 
 			</tr>
 			<tr>
@@ -86,8 +86,8 @@ function main_page($group_id) {
 
 		echo	'
 			<tr>
-			        <th>Group doc belongs in:</th>
-        			<td>';
+					<th>Group doc belongs in:</th>
+					<td>';
 
 		display_groups_option($group_id,$row['doc_group']);
 
@@ -95,26 +95,30 @@ function main_page($group_id) {
 				</tr>
 
 				<tr>
-				        <th>State:</th>
-				        <td>';
+						<th>State:</th>
+						<td>';
 
 		doc_get_state_box($row['stateid']);
 
 		echo '
-       				</td>
+	   				</td>
 			</tr>';
 
 		//	if this is a text/html doc, display an edit box
 		if (strstr($row['filetype'],'ext')) {
 
-			echo    '
+			echo	'
 				<tr>
-					<th>Document Information (in html format):</th>
+					<th>Document Contents:</th>
 					<td><textarea cols="80" rows="20" name="data">'. htmlspecialchars(base64_decode($row['data'])).'</textarea></td>
 				</tr>';
 		}
 
 		echo '
+		<tr>
+			<th>OPTIONAL: Upload New File:</th>
+			<td><input type="file" name="uploaded_data" size="30"></td>
+			</tr>
 		</table>
 
 		<input type="hidden" name="docid" value="'.$row['docid'].'">
@@ -189,6 +193,15 @@ function main_page($group_id) {
 
 			if ($data) {
 				$datastring = "data = '". base64_encode($data) ."',";
+			}
+			if ($uploaded_data) {
+				if (!is_uploaded_file($uploaded_data)) {
+					exit_error("Error","Invalid file attack attempt $uploaded_data");
+				}
+				$data = fread(fopen($uploaded_data, 'r'), filesize($uploaded_data));
+				$datastring = "data = '". base64_encode($data) ."',
+					filename='$uploaded_data_name',
+					filetype='$uploaded_data_type',";
 			}
 			// data in DB stored in htmlspecialchars()-encoded form
 			$query = "update doc_data "
