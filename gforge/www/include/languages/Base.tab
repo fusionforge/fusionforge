@@ -129,6 +129,10 @@ account_options	language	Language
 account_options	timezone	Timezone
 account_options	email_address		Email Addr:
 account_options	change_email_address	Change Email Addr
+account_shell	title	Shell Account Information
+account_shell	shell_box	Shell box
+account_shell	autorized_keys	CVS/SSH Shared Authorized Keys
+account_shell	edit_keys	Edit Keys
 contact	about_blurb	<p>This is the contact page for <b>$1</b> -- if you are having a problem with a project hosted by us please send your questions/info to the support/bug manager for that project. You can access those features by visiting that project's development home page at: <tt>http://$2/projects/&lt;project name&gt;</tt> and clicking the appropiate tool.</p><p>If you have a support request, bug report or wish to communicate directly with the $1 staff, please visit the <a href="/projects/sourceforge">$1 Master Project</a>.</p>
 contact	title	Contact $1
 common_utils	priority_colors	Priority Colors
@@ -161,6 +165,7 @@ docman	error_no_docs	This project has no visible documents
 docman	error_invalid_file_attack	Invalid file attack attempt $1
 docman	error_no_groups_defined	No Document Groups defined
 docman	description	Description
+docman	turned_off	This project has turned off the Doc Manager
 docman_admin	section	Project: $1
 docman_admin	title	Document Manager: Administration
 docman_admin	add_edit_docgroups	Add/Edit Document Groups
@@ -181,7 +186,8 @@ docman_admin_editgroups	edit_group	Edit a group
 docman_admin_editgroups	description	Group name will be used as a title, so if it should be formatted correspondingly.
 docman_admin_groupedit	section	Document Manager Administration
 docman_admin_groupedit	title	Rename Document Group
-docman_admin_groupedit	group_name	Group Name
+docman_admin_editgroups	group_name	Group Name
+docman_admin_editgroups	group_id	ID
 docman_display_doc	section	Project: $1 
 docman_display_doc	title	Document Manager: Display Document
 docman_display_doc	all_languages	All Languages
@@ -197,12 +203,19 @@ docman_new	submit	Submit Information
 docman_new	file	File
 docman_new	state	State
 docman_new	error_blank_document	Error getting blank document
+docman_new	submitted_successfully	Document submitted sucessfully
+docman_new	no_valid_group	No valid Document Group was selected
+docman_display_doc	no_document_data_title	No document data
+docman_display_doc	no_document_data_text	No document to display - invalid or inactive document number
 docman_common	error_min_title_length	Title Must Be At Least 5 Characters
 docman_common	error_min_desc_length	Document Description Must Be At Least 10 Characters
 docman_common	no_docs	No Documents Found
+docman_common_docgroup	name_required	DocumentGroup: name is Required
+docman_common_docgroup	invalid_id	DocumentGroup: Invalid DocumentGroup ID
+docman_common_doc	invalid_docid	Document:: Invalid docid
 exit	exiting_with_error	Exiting with error
 exit	choose_a_group	Error - Choose A group
-exit	choose_group_text	ERROR - No group_id was chosen.
+exit	choose_group_title	ERROR - No group_id was chosen
 exit	choose_group_body	No group Id was chosen
 exit	missing_parameters_title	Error - missing parameters
 exit	missing_parameters_body	Error - missing required parameters
@@ -210,8 +223,8 @@ forum	section	Project: $1
 forum	title	Forums
 forum	choose	<p>Choose a forum and you can browse, search, and post messages.<p>
 forum	html	HTML tags will display in your post as text
-forum	error_no_forums_found	No Forums Found For
-forum	forums_for	Forums for
+forum	error_no_forums_found	No Forums Found For $1
+forum	forums_for	Forums for $1
 forum	error_no_valid_group_object	Forum:: No Valid Group Object
 forum	forum	Forum
 forum	error_no_valid_forum_object	$1:: No Valid Forum Object
@@ -223,7 +236,7 @@ forum_common	error_min_name_length	Forum Name Must Be At Least 3 Characters
 forum_common	error_min_desc_length	Forum Description Must Be At Least 10 Characters
 forum_common	error_set_monitor	You can Only Monitor If You Are Logged In
 forum_common	error_unable_to_add_monitor	Unable To Add Monitor
-forum_common	welcome_to	Welcome to
+forum_common	welcome_to	Welcome to $1
 forum_common_forummessage	no_valid_forum_object	ForumMessage:: No Valid Forum Object
 forum_common_forummessage	forum_message	Forum Message
 forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does not match Forum Object
@@ -348,7 +361,7 @@ forum_utils	postanon	You are posting anonymously because you are not
 forum_utils	loggedin	logged in
 forum_utils	postcomment	Post Comment
 forum_utils	anonymously	Anonymously
-forum_utils	couldpostif	You could post if you were
+forum_utils	couldpostif	You could post if you were $1 logged in $2
 forum_utils	reply	reply
 forum_utils	mailmonitor	\nRead and respond to this message at: \n$1\nBy: $2 \n\n $3\n\n______________________________________________________________________\nYou are receiving this email because you elected to monitor this forum.\nTo stop monitoring this forum, login to $4 \nand visit: $5
 forum_utils	mailsent	email sent - people monitoring
