@@ -1447,6 +1447,13 @@ pm_browsetask	next	next 50
 pm_browsetask	overdue_tasks	* Denotes overdue tasks
 pm_browsetask	previous	previous 50
 pm_browsetask	title	Browse tasks
+pm_deletetask	are_you_sure	Are you sure you want to delete this task?
+pm_deletetask	confirm	Yes, I want to delete this task
+pm_deletetask	delete	Delete this task
+pm_deletetask	task_delete_failed	Delete failed
+pm_deletetask	task_delete_failed_confirm	Confirmation failed. Task not deleted
+pm_deletetask	task_deleted_successfully	Task Successfully Deleted
+pm_deletetask	title	Delete a Task
 pm_detailtask	subproject	Subproject
 pm_detailtask	assigned_to	Assigned To
 pm_detailtask	category	Category
@@ -2826,6 +2833,13 @@ tracker_admin_update_type	send_submissions	Send email on new submission to addre
 tracker_admin_update_type	submit_item_form_text	Free form text for the "submit new item" page
 tracker_admin_update_type	title	Update $1
 tracker_admin_update_users	title	Add/Update Tracker User Permissions
+tracker_artifact	are_you_sure_delete	Are you sure you want to delete this artifact?
+tracker_artifact	confirm_delete	Yes, I want to delete this artifact
+tracker_artifact	delete_failed	Artifact Delete Failed
+tracker_artifact	delete_failed_confirm	Confirmation failed. Artifact not deleted
+tracker_artifact	delete_text	Delete this item
+tracker_artifact	deleted_successfully	Artifact Deleted Successfully
+tracker_artifact	deleted_title	Delete an Artifact
 tracker_artifact	double_submit	You Attempted To Double-submit this item. Please avoid double-clicking.
 tracker_artifact	error_admin_modify	Artifact: Only Artifact Admins Can Modify Private ArtifactTypes
 tracker_artifact	error_body_required	Artifact: Message Body Is Required

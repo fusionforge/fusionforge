@@ -1,4 +1,4 @@
-#/**
+﻿#/**
 #  *
 #  * Spanish message catalog
 #  *
@@ -1425,6 +1425,13 @@ pm_browsetask	no_change	Sin cambios
 pm_browsetask	overdue_tasks	* marca las tareas atrasadas
 pm_browsetask	previous	Las últimas 50
 pm_browsetask	title	Hojear tareas
+pm_deletetask	are_you_sure	¿Está seguro que desea borrar esta tarea?
+pm_deletetask	confirm	Si, deseo borrar esta tarea
+pm_deletetask	delete	Borrar esta tarea
+pm_deletetask	task_delete_failed	Falló el borrado de la tarea.
+pm_deletetask	task_delete_failed_confirm	Falló la confirmación. Tarea no borrada.
+pm_deletetask	task_deleted_successfully	Tarea borrada correctamente.
+pm_deletetask	title	Borrar Tarea
 pm_detailtask	assigned_to	Asignado A
 pm_detailtask	category	Categoria
 pm_detailtask	dependend_on_task	Depende de la Tarea
@@ -2762,6 +2769,13 @@ tracker_admin_update_type	send_submissions	Enviar correo si hay nuevo envío a l
 tracker_admin_update_type	submit_item_form_text	Texto para la página "enviar nuevo registro"
 tracker_admin_update_type	title	Actualizar $1
 tracker_admin_update_users	title	Añadir/Actualizar los Permisos de Usuarios de un Registro
+tracker_artifact	are_you_sure_delete	¿Está seguro que desea borrar este registro?
+tracker_artifact	confirm_delete	Sí, deseo borrar este registro
+tracker_artifact	delete_failed	Falló el borrado del registro
+tracker_artifact	delete_failed_confirm	Falló la confirmación. Registro no borrado.
+tracker_artifact	delete_text Borrar este registro
+tracker_artifact	deleted_successfully	Registro borrado correctamente.
+tracker_artifact	deleted_title	Borrar un Registro
 tracker_artifact	double_submit	Está intentando enviar dos veces este registro. Por favor, evite pulsar dos veces.
 tracker_artifact	error_admin_modify	Registros: Sólo los Administradores pueden modificar los Registros Privados
 tracker_artifact	error_body_required	Registros: Es necesario el Cuerpo del Mensaje'
