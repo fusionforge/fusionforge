@@ -54,7 +54,9 @@ RedHat Linux 7.3:
     <section name="Installation">
 <subsection name="Installing the software">
 <p>
-<b>Note for Debian users</b>: You can simply add <a href="http://people.debian.org/~bayle/">http://people.debian.org/~bayle</a> to /etc/apt/sources.list and type "apt-get install gforge" to install a working GForge system, thanks to Christian Bayle and the Debian-SF project.</p>
+<b>Note for Debian users</b>: You can simply add lines found at <a href="http://people.debian.org/~bayle/">http://people.debian.org/~bayle</a> or <a href="http://people.debian.org/~lolando/">http://people.debian.org/~lolando</a> to /etc/apt/sources.list and type "apt-get install gforge" to install a working GForge system, thanks to Christian Bayle and Roland Mas.</p>
+<p>Note that Gforge is now part of official Debian, and so you can find it in all debian mirrors all other the planet. From scrach install snapshot are also available for a guided installation.
+</p>
 
 <p>
 To install GForge, follow these steps:
