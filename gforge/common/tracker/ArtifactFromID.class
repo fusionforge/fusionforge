@@ -43,7 +43,7 @@ class ArtifactFromID extends Error {
 			$art_arr =& db_fetch_array($res);
 
 			$res=db_query("SELECT * FROM artifact_group_list
-            WHERE group_artifact_id='$art_arr['group_artifact_id']'");
+            WHERE group_artifact_id='".$art_arr['group_artifact_id']."'");
 
 			$typ_arr =& db_fetch_array($res);
 
