@@ -4,7 +4,9 @@
 # Replace an exsting file with the proposed one
 replace_file () {
     file=$1
-    cp $file ${file}.gforge-old
+    if [ -e $file ] ; then
+        cp $file ${file}.gforge-old
+    fi
     mv ${file}.gforge-new $file
 }
 

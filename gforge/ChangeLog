@@ -1,3 +1,10 @@
+2004-10-03  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* (Lots of files): Added new gforge-shell-pgsql package, which
+	configures NSS to use the PGSQL backend.  That's the first step in
+	getting rid of LDAP altogether (now we just have to configure
+	Exim/Postfix to do their lookups into PGSQL too).	
+
 2004-10-01  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* db/20041001.sql, deb-specific/db-upgrade.pl: Created new views

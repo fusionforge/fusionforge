@@ -157,6 +157,9 @@ install: build
 	# gforge-shell-ldap
 	cd $(CURDIR)/debian/gforge-shell-ldap/var/lib/gforge/chroot/var/lib/gforge/chroot && ln -s ../../../../home .
 
+	# gforge-shellpostgresql
+	install -m 755 deb-specific/install-nsspgsql.sh $(CURDIR)/debian/gforge-shell-postgresql/usr/lib/gforge/bin/
+
 	# gforge-ftp-proftpd
 	install -m 755 deb-specific/install-ftp.sh $(CURDIR)/debian/gforge-ftp-proftpd/usr/lib/gforge/bin/
 	install -m 644 deb-specific/sf-proftpd.conf $(CURDIR)/debian/gforge-ftp-proftpd/etc/gforge/

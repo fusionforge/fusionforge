@@ -120,7 +120,7 @@ Architecture: all
 Depends: gforge-common, gforge-ldap-openldap | gforge-ldap, perl, debianutils (>= 1.7), debconf (>= 1.0.32), ssh, libnss-ldap (>=184-1), libpam-ldap
 Replaces: sourceforge-shell-ldap (>> 2.6-0+11)
 Provides: gforge-shell
-Conflicts: sourceforge-shell
+Conflicts: sourceforge-shell, gforge-shell
 Description: Collaborative development tool - shell accounts (using LDAP)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
@@ -130,6 +130,22 @@ Description: Collaborative development tool - shell accounts (using LDAP)
  .
  This package provides shell accounts authenticated via LDAP to
  GForge users.
+
+Package: gforge-shell-postgresql
+Architecture: all
+Depends: gforge-common, gforge-db-postgresql, perl, debianutils (>= 1.7), debconf (>= 1.0.32), ssh, libnss-pgsql1
+Replaces: sourceforge-shell-ldap (>> 2.6-0+11)
+Provides: gforge-shell
+Conflicts: sourceforge-shell, gforge-shell
+Description: Collaborative development tool - shell accounts (using PostgreSQL)
+ GForge provides many tools to help collaboration in a
+ development project, such as bug-tracking, task management,
+ mailing-lists, CVS repository, forums, support request helper, web
+ page / FTP hosting, release management, etc.  All these services are
+ integrated into one web site and managed via a nice web interface.
+ .
+ This package provides shell accounts authenticated via the PostgreSQL
+ database to GForge users.
 
 Package: gforge-cvs
 Architecture: all

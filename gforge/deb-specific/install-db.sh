@@ -64,21 +64,27 @@ EOF
             # PostgreSQL configuration for versions from 7.3 on
 	    echo "Configuring for PostgreSQL 7.3"
 	    cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.gforge-new
-	    # if 7.2 formatted string, elseif 7.3 string, else no previous string
-	    if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		perl -pi -e "s/^host.*gforge_passwd$/host $db_name $db_user $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
-            # the below could cause issues if gforge's line isnt at the top of the file, but its
-	    # the only way to allow changing of the db_name.
-	    elif grep -q "^host.*password$" /etc/postgresql/pg_hba.conf.gforge-new ; then
-		perl -pi -e "s/^host.*password$/host $db_name $db_user $ip_address 255.255.255.255 password/" /etc/postgresql/pg_hba.conf.gforge-new
-	    else
+	    if ! grep -q 'BEGIN GFORGE BLOCK -- DO NOT EDIT' /etc/postgresql/pg_hba.conf.gforge-new ; then
 		cur=$(mktemp /tmp/$pattern)
-		echo "### Next line inserted by GForge install" > $cur
-		echo "host $db_name $db_user $ip_address 255.255.255.255 password" >> $cur
-		cat /etc/postgresql/pg_hba.conf.gforge-new >> $cur
-		cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
-		rm -f $cur
+		# Make sure our configuration is inside a delimited BLOCK
+		if grep -q "^host.*gforge_passwd$" /etc/postgresql/pg_hba.conf.gforge-new ; then
+		    perl -e "open F, \"/etc/postgresql/pg_hba.conf.gforge-new\" or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host.*gforge_passwd\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
+		    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		elif grep -q "^### Next line inserted by GForge install" /etc/postgresql/pg_hba.conf.gforge-new ; then
+		    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### Next line inserted by GForge install\nhost $db_name $db_user $ip_address 255.255.255.255 password/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
+		    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		else
+		    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^host $db_name $db_user.*password\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\n### END GFORGE BLOCK -- DO NOT EDIT/s; print \$l;" > $cur
+		    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+		fi
 	    fi
+	    rm -f $cur
+	    
+	    cur=$(mktemp /tmp/$pattern)
+	    perl -e "open F, '/etc/postgresql/pg_hba.conf.gforge-new' or die \$!; undef \$/; \$l=<F>; \$l=~ s/^### BEGIN GFORGE BLOCK -- DO NOT EDIT.*### END GFORGE BLOCK -- DO NOT EDIT\$/### BEGIN GFORGE BLOCK -- DO NOT EDIT\nhost $db_name $db_user $ip_address 255.255.255.255 password\nhost $db_name gforge_nss $ip_address 255.255.255.255 trust\n### END GFORGE BLOCK -- DO NOT EDIT/ms; print \$l;" > $cur
+	    cat $cur > /etc/postgresql/pg_hba.conf.gforge-new
+	    rm -f $cur
+
 	    # Remove old password file, created by 7.2, not used by 7.3
 	    if [ -e /var/lib/postgres/data/gforge_passwd ] ; then
 		rm -f /var/lib/postgres/data/gforge_passwd
@@ -116,6 +122,23 @@ EOF
 	else
 	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
 CREATE USER $db_user WITH PASSWORD '$db_passwd' ;
+EOF
+		then
+		rm -f $tmp1 $tmp2
+	    else
+		echo "Cannot create PostgreSQL user...  This shouldn't have happened."
+		echo "Maybe a problem in your PostgreSQL configuration?"
+		echo "Please report a bug to the Debian bug tracking system"
+		echo "Please include the following output:"
+		echo "CREATE USER's STDOUT:"
+		cat $tmp1
+		echo "CREATE USER's STDERR:"
+		cat $tmp2
+		rm -f $tmp1 $tmp2
+		exit 1
+	    fi
+	    if su -s /bin/sh postgres -c "/usr/bin/psql template1" &> /dev/null <<-EOF
+CREATE USER gforge_nss WITH PASSWORD '' ;
 EOF
 		then
 		rm -f $tmp1 $tmp2

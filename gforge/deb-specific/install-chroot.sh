@@ -106,13 +106,16 @@ FIN
 	    | sort -u \
 	    | cpio --quiet -pdumVLB $CHROOTDIR
 	
-	cp /etc/libnss-ldap.conf $CHROOTDIR/etc
 	#cp -r /etc/ldap $CHROOTDIR/etc
-	cp /lib/libnss_ldap* $CHROOTDIR/lib
-	cp /usr/lib/libnss_ldap* $CHROOTDIR/usr/lib
-	cp /usr/lib/libdb* $CHROOTDIR/usr/lib
-	cp /usr/lib/libssl* $CHROOTDIR/usr/lib
-	cp /usr/lib/libcrypto* $CHROOTDIR/usr/lib
+	[ -e /etc/libnss-ldap.conf ] && cp /etc/libnss-ldap.conf $CHROOTDIR/etc
+	[ -e /etc/libnss-pgsql.conf ] && cp /etc/libnss-pgsql.conf $CHROOTDIR/etc
+	[ "$(echo /lib/libnss_ldap*)" != "/lib/libnss_ldap*" ] && cp /lib/libnss_ldap* $CHROOTDIR/lib
+	[ "$(echo /usr/lib/libnss_ldap*)" != "/usr/lib/libnss_ldap*" ] && cp /usr/lib/libnss_ldap* $CHROOTDIR/usr/lib
+	[ "$(echo /lib/libnss_pgsql*)" != "/lib/libnss_pgsql*" ] && cp /lib/libnss_pgsql* $CHROOTDIR/lib
+	[ "$(echo /usr/lib/libnss_pgsql*)" != "/usr/lib/libnss_pgsql*" ] && cp /usr/lib/libnss_pgsql* $CHROOTDIR/usr/lib
+	[ "$(echo /usr/lib/libdb*)" != "/usr/lib/libdb*" ] && cp /usr/lib/libdb* $CHROOTDIR/usr/lib
+	[ "$(echo /usr/lib/libssl*)" != "/usr/lib/libssl*" ] && cp /usr/lib/libssl* $CHROOTDIR/usr/lib
+	[ "$(echo /usr/lib/libcrypto*)" != "/usr/lib/libcrypto*" ] && cp /usr/lib/libcrypto* $CHROOTDIR/usr/lib
 
 	# Libpam-ldap
 	[ -f /etc/ldap.secret ] && cp /etc/ldap.secret $CHROOTDIR/etc && chmod 600 /etc/ldap.secret
