@@ -82,6 +82,10 @@ class LdapextauthPlugin extends Plugin {
 			ldap_set_option ($this->ldap_conn, LDAP_OPT_PROTOCOL_VERSION, $GLOBALS['sys_ldap_version']);
 		}
 		$dn = plugin_ldapextauth_getdn ($this, $loginname) ;
+		if(empty($dn)) {
+			$GLOBALS['ldap_auth_failed']=true;
+			return false;
+		}
 
 		$u = user_get_object_by_name ($loginname) ;
 		if ($u) {
