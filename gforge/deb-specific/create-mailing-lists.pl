@@ -59,7 +59,9 @@ eval {
 	$tmp = mktemp ("/tmp/XXXXXX") ;
 	$cmd = "/usr/lib/mailman/bin/config_list -o $tmp $listname" ;
 	#print "cmd = <$cmd>\n" ;
-	system ($cmd) ;
+# Commented out on Matt Hope <dopey@debian.org> advice
+# To be revised by Roland Mas
+#	system ($cmd) ;
 	open CONFIG, ">>$tmp" ;
 	print CONFIG "description = \"$description\"\n" ;
 	print CONFIG "host_name = '$sys_lists_host'\n" ;
