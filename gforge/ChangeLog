@@ -1,3 +1,8 @@
+2003-03-12  Roland Mas  <lolando@debian.org>
+
+	* db/20030312.sql: New file: the start_date of a task is now
+	constrained to be <= to its end_date (instead of < previously).
+
 2003-03-10  Reinhard Spisser  <reinhard@spisser.it>
 
 
