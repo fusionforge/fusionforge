@@ -116,6 +116,7 @@ install: build
 	install -m 644 deb-specific/sqlparser.pm $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
 	install -m 755 deb-specific/sf-add-skill $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 deb-specific/register-theme $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 deb-specific/unregister-theme $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 
 	install -m 755 deb-specific/register-plugin $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/
 	install -m 755 deb-specific/unregister-plugin $(CURDIR)/debian/gforge-common/usr/lib/gforge/bin/

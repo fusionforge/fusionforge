@@ -1,3 +1,11 @@
+2003-05-13  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* db/20030513.sql: New file.  Adding an "enabled" column to the
+	themes table, defaulting to true.
+
+	* www/themes/index.php: Filter on that column when displaying the
+	list of themes.
+
 2003-05-13 Tom Copeland <tom@infoether.com>
 
 	* cronjobs/project_weekly_metric.php:

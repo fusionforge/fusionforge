@@ -1,8 +1,11 @@
 gforge (3rc2-1) unstable; urgency=low
 
   * [Christian] rc2 will go to unstable
+  * [Roland] Added db/20030513.sql, to add an "enabled" column to the
+    themes table.  Fixed register-theme accordingly, and wrote a new
+    unregister-theme too (which just disables the theme).
 
- -- Christian Bayle <bayle@debian.org>  Mon, 12 May 2003 22:06:12 +0200
+ -- Roland Mas <lolando@debian.org>  Tue, 13 May 2003 23:40:11 +0200
 
 gforge (3rc1-3) experimental; urgency=low
 

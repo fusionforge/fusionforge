@@ -33,7 +33,7 @@ You can change your theme from here.
 <form action="<?php echo $PHP_SELF; ?>" method="post">
 <?php $HTML->boxTop("New User Theme");
 
-$res=db_query("SELECT theme_id, fullname FROM themes");
+$res=db_query("SELECT theme_id, fullname FROM themes WHERE enabled=true");
 
 echo html_build_select_box($res,'new_theme_id',$u->getThemeID(),false);
 
