@@ -19,14 +19,17 @@ Header( "Cache-Control: must-revalidate");
 
 require_once('pre.php');
 
-/*
-
-if (!session_issecure()) {
+if ($sys_use_ssl && !session_issecure()) {
 	//force use of SSL for login
 	header('Location: https://'.$HTTP_HOST.'/account/login.php');
 }
 
-*/
+// Decide login button based on session.
+if (session_issecure()) {
+    $login_button = $Language->getText('account_login', 'login_ssl');
+} else {
+    $login_button = $Language->getText('account_login', 'login'); 
+}
 
 // ###### first check for valid login, if so, redirect
 
@@ -88,7 +91,7 @@ if ($login && !$success) {
 <br /><input type="password" name="form_pw" />
 </p>
 <p>
-<input type="submit" name="login" value="<?php echo $Language->getText('account_login', 'login'); ?>" />
+<input type="submit" name="login" value="<?php echo $login_button; ?>" />
 </p>
 </form>
 <p><a href="lostpw.php"><?php echo $Language->getText('account_login', 'lostpw'); ?></a></p>

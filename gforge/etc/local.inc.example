@@ -138,6 +138,7 @@ $sys_use_file=true;
 $sys_use_ftp=true;
 $sys_use_trove=true;
 $sys_use_snippet=true;
+$sys_use_ssl=false;
 
 //
 //	Restricted project registration

@@ -1,3 +1,8 @@
+2004-01-24  Sung Kim <hunkim@cs.ucsc.edu>
+
+	* Adding the sys_use_ssl option
+	* www/account/login.php: Check the sys_use_ssl variable.
+	
 2003-12-30  Tim Perdue  <tim@perdue.net>
 
 	* Adding cvs history_parse.php written by Brett N DiFrischia (orderthruchaos)

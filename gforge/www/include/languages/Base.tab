@@ -42,7 +42,8 @@ account_first	title	Welcome to $1
 account_login	cookiewarn	Cookies must be enabled past this point.
 account_login	deleted_account	<p>Your $1 account has been removed by $1 staff. This may occur for two reasons, either 1) you requested that your account be removed; or 2) some action has been performed using your account which has been seen as objectionable (i.e. you have breached the terms of service for use of your account) and your account has been revoked for administrative reasons. Should you have questions or concerns regarding this matter, please log a <a href="/support/?group_id=1">support request</a>.</p><p>Thank you, <br><br>$1 Staff</p>
 account_login	iewarn	<H2><FONT COLOR="RED">Internet Explorer users need to upgrade to IE 5.01 or higher, preferably with 128-bit SSL or use Netscape 4.7 or higher</FONT></H2>
-account_login	login	Login with SSL
+account_login	login	Login
+account_login	login_ssl	Login with SSL
 account_login	loginname	Login Name:
 account_login	lostpw	[Lost your password?]
 account_login	macwarn	<H2><FONT COLOR="RED">Internet Explorer on the Macintosh is not supported currently. Use Netscape 4.7 or higher</FONT></H2>
