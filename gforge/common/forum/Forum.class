@@ -159,7 +159,7 @@ class Forum extends Error {
 
 		if ($create_default_message) {
 			$fm=new ForumMessage($this);
-			if (!$fm->create($Language->getText('forum_common','welcome_to')." ".$forum_name,$Language->getText('forum_common','welcome_to')." ".$forum_name)) {
+			if (!$fm->create("Welcome to ".$forum_name,"Welcome to ".$forum_name)) {
 				$this->setError($fm->getErrorMessage());
 				return false;
 			}
