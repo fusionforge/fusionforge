@@ -1481,7 +1481,7 @@ class Group extends Error {
 		");
 
 		if (db_numrows($res_admins) < 1) {
-			$this->setEror("Group does not have any administrators.");
+			$this->setError("Group does not have any administrators.");
 			return false;
 		}
 
@@ -1639,5 +1639,9 @@ function &group_get_result($group_id=0) {
 	}
 }
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
 
 ?>
