@@ -1313,29 +1313,12 @@ class Group extends Error {
 				//
 				//	user was not already a member
 				//
-				//	if no unix account, give them a unix_uid
+				//	check and create if user doesn't exists
 				//
-				if ( !db_result($res_newuser,0,'unix_uid') ) {
-					$user=&user_get_object($user_id,$res_newuser);
-					if (!$user->setUpUnixUID()) {
-						$this->setError('ERROR: Cannot assign UNIX uid to the user: '.$user->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					if (!$SYS->sys_create_user($user_id)) {
-						$this->setError($SYS->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-				} else {
-					//
-					//	User already had unix account
-					//
-					if (!$SYS->sys_check_create_user($user_id)) {
-						$this->setError($SYS->getErrorMessage());
-						db_rollback();
-						return false;
-					}
+				if (!$SYS->sys_check_create_user($user_id)) {
+					$this->setError($SYS->getErrorMessage());
+					db_rollback();
+					return false;
 				}
 				//
 				//	Create this user's row in the user_group table
@@ -1414,43 +1397,35 @@ class Group extends Error {
 					db_rollback();
 					return false;
 				}
-
 			} else {
 				//
 				//  user was already a member
-				//  make sure they are set up with a unix_uid,
-				//  LDAP entry and membership
+				//  make sure they are set up 
 				//
 				$user=&user_get_object($user_id,$res_newuser);
-				if (!$user->setUpUnixUID()) {
-					$this->setError('ERROR: Cannot assign UNIX uid to the user: '.$user->getErrorMessage());
+				$user->fetchData($user->getID());
+				if (!$SYS->sys_check_create_user($user_id)) {
+					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
-				} else {
-					$user->fetchData($user->getID());
-					if (!$SYS->sys_check_create_user($user_id)) {
-						$this->setError($SYS->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					$role = new Role($this,$role_id);
-					if (!$role || !is_object($role)) {
-						$this->setError('Error Getting Role Object');
-						db_rollback();
-						return false;
-					} elseif ($role->isError()) {
-						$this->setError('addUser::roleget::'.$role->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					if (!$role->setUser($user_id)) {
-						$this->setError('addUser::role::setUser'.$role->getErrorMessage());
-						db_rollback();
-						return false;
-					}
-					db_commit();
-					return true;
 				}
+				$role = new Role($this,$role_id);
+				if (!$role || !is_object($role)) {
+					$this->setError('Error Getting Role Object');
+					db_rollback();
+					return false;
+				} elseif ($role->isError()) {
+					$this->setError('addUser::roleget::'.$role->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+				if (!$role->setUser($user_id)) {
+					$this->setError('addUser::role::setUser'.$role->getErrorMessage());
+					db_rollback();
+					return false;
+				}
+				db_commit();
+				return true;
 			}
 		} else {
 			//

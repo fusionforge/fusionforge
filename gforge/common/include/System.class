@@ -90,8 +90,9 @@ class System extends Error {
 		$user = &user_get_object($user_id);
 		if (!$user) {
 			return false;
+		} else {
+			return $user->setUpUnixUID();
 		}
-		return true;
 	}
 
 	/**
@@ -102,7 +103,7 @@ class System extends Error {
  	*
  	*/
 	function sys_check_create_user($user_id) {
-		return true;
+		return $this->sys_create_user($user_id);
 	}
 
 	/**

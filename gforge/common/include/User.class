@@ -571,10 +571,6 @@ class User extends Error {
 	function setUnixStatus($status) {
 		global $Language,$SYS;
 		db_begin();
-		if ($status != 'N') {
-			$this->setUpUnixUID () ;
-		}
-
 		$res=db_query("
 			UPDATE users 
 			SET unix_status='$status' 
