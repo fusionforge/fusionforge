@@ -1,3 +1,7 @@
+2004-03-26  Sung Kim <hunkim@cs.ucsc.edu>
+	* Added status checking and updating module for the mailing list creating cronjobs
+	* Added status checking to show if a mailing list is activated
+
 2004-03-26  Guillaume Smet <guillaume-gforge@smet.org>
 
 	* Fixed a bug in project admin interface. People admin links didn't work.

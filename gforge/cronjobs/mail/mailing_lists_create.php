@@ -6,8 +6,9 @@
 //	and, finally, create the lists in a /tmp/mailman-aliases file
 //	The /tmp/mailman-aliases file will then be read by the mailaliases.php file
 //
-
-//
+//      Status: 1 - list creating request 
+//      Status: 2 - list created
+//      
 //	DEFINE VARS FOR USING THIS SCRIPT
 //
 define('MAILMAN_DIR','/var/mailman/');
@@ -39,9 +40,12 @@ while (!feof($fp)) {
 pclose($fp);
 
 $res=db_query("SELECT users.user_name,email,mail_group_list.list_name,
-        mail_group_list.password,mail_group_list.status 
-		FROM mail_group_list,users
-        WHERE mail_group_list.list_admin=users.user_id");
+        mail_group_list.password,mail_group_list.status, 
+        mail_group_list.group_list_id 
+	FROM mail_group_list,users
+        WHERE mail_group_list.list_admin=users.user_id
+        AND mail_group_list.status = 1
+        ");
 $err .= db_error();
 
 $rows=db_numrows($res);
@@ -55,12 +59,20 @@ for ($i=0; $i<$rows; $i++) {
 	$email = db_result($res,$i,'email');
 	$listname = strtolower(db_result($res,$i,'list_name'));
 	$listpassword = db_result($res,$i,'password');
+	$grouplistid = db_result($res,$i,'group_list_id');
+
 	if (! in_array($listname,$mailing_lists)) {
 		$err .= "Creating Mailing List: $listname\n";
 		$lcreate_cmd = MAILMAN_DIR."bin/newlist -q $listname $email $listpassword";
 		$err .= "Command to be executed is $lcreate_cmd\n";
 		$fp = popen($lcreate_cmd,"r");
+
+		
 	}
+	
+	// Update status
+	db_query("UPDATE mail_group_list set status=2 where group_list_id = $grouplistid");
+
 	$list_str="$listname:       \"|/var/mailman/mail/wrapper post $listname\"
 $listname-admin: \"|/var/mailman/mail/wrapper mailowner $listname\"
 $listname-request: \"|/var/mailman/mail/wrapper mailcmd $listname\"\n";

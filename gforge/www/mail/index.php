@@ -67,6 +67,11 @@ if ($group_id) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) .'><td colspan="2">';
 			echo $currentList->getErrorMessage();
 			echo '</td></tr>';
+		} else if($currentList->getStatus()!='2') {
+		        echo '<tr '. $HTML->boxGetAltRowStyle($j) .'><td colspan="2">';
+			echo html_image('ic/cfolder15.png', '15', '13', array('border' => '0')).' &nbsp; ';
+			echo $currentList->getName(). " is not Activated yet.";
+			echo '</td></tr>';
 		} else {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '><td width="60%">'.
 				'<a href="'.$currentList->getArchivesUrl().'">' .
