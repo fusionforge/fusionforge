@@ -46,7 +46,9 @@ case "$1" in
 
 	# Making user group and svn update from database 
 	/usr/lib/gforge/bin/update-user-group-cvs.sh
-	/usr/lib/gforge/plugins/scmsvn/bin/svn_dump_update.pl
+	rm -f /var/lib/gforge/dumps/*svn*dump
+	su -s /bin/sh gforge -c /usr/lib/gforge/plugins/scmsvn/bin/svn_dump.pl
+	/usr/lib/gforge/plugins/scmsvn/bin/svn_update.pl
 
     ;;
 

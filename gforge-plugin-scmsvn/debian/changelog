@@ -1,8 +1,10 @@
-gforge-plugin-scmsvn (4.1-5j) unstable; urgency=low
+gforge-plugin-scmsvn (4.1-5l) unstable; urgency=low
 
   * New upstream 
   * [Christian] Added dependancy to php4-cli
   * [Christian] Added cronjobs/tarballs.php
+  * [Christian] Splited svn_dump_update in svn_dump and svn_update
+  svn_dump is almost identical to cvs_dump
 
  -- Christian Bayle <bayle@debian.org>  Sat, 26 Feb 2005 09:13:47 +0100
 
