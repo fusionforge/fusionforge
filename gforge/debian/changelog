@@ -19,8 +19,10 @@ gforge (3pre8-0+) experimental; urgency=low
   * [Roland] Applied patches #102 and #103 fixing stuff related with
     Apache-SSL / Apache + mod_ssl.  Thanks, Julien Goodwin
     <laptop006@users.gforge.org>.
+  * [Roland] Applied patch #104.  At last, a serious attempt at a working
+    install-postfix.sh.  Thanks again, Julien Goodwin.
 
- -- Roland Mas <lolando@debian.org>  Wed, 15 Jan 2003 17:13:10 +0100
+ -- Roland Mas <lolando@debian.org>  Wed, 15 Jan 2003 17:15:52 +0100
 
 gforge (3.0-0+8) experimental; urgency=low
 

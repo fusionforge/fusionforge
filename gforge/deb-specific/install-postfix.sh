@@ -3,7 +3,9 @@
 # $Id$
 #
 # Configure Postfix for GForge
-# Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
+# Julien Goodwin
+# Based of install-exim.sh by: Christian Bayle, Roland Mas, debian-sf (GForge for Debian)
+
 
 set -e
 
@@ -35,31 +37,32 @@ case "$1" in
 
 	pattern=$(basename $0).XXXXXX
 	tmp1=$(mktemp /tmp/$pattern)
-	# First, get the list of local domains right
+	# First, get the list of local domains right - add gforge domains to 'mydestination'
 	perl -e '
 require ("/etc/gforge/local.pl") ;
-$seen_sf_domains = 0 ;
-while (($l = <>) !~ /^\s*local_domains/) {
-  print $l;
-  $seen_sf_domains = 1 if ($l =~ /\s*SOURCEFORGE_DOMAINS=/) ;
-};
-# hide pgsql_servers = "localhost/gforge/some_user/some_password"
-print "SOURCEFORGE_DOMAINS=users.$domain_name:$sys_lists_host\n" unless $seen_sf_domains ;
-chomp $l ;
-$l .= ":SOURCEFORGE_DOMAINS" unless ($l =~ /^[^#]*SOURCEFORGE_DOMAINS/) ;
-print "$l\n" ;
+my $l;
+while (($l = <>) !~ /^\s*mydestination/) { print $l; };
+chomp $l;
+$l .= ", users.$domain_name" unless ($l =~ /^[^#]*users.$domain_name/);
+$l .= ", $sys_lists_host" unless ($l =~ /^[^#]*$sys_lists_host/);
+print "$l\n";
 while ($l = <>) { print $l; };
-' < /etc/exim/exim.conf.gforge-new > $tmp1
+' < /etc/postfix/main.cf.gforge-new > $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, insinuate our forwarding rules in the directors section
 	perl -e '
 require ("/etc/gforge/local.pl") ;
 
-$sf_block = "# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #
-# You may move this block around to accomodate your local needs as long as you
-# keep it in an appropriate position, where "appropriate" is defined by you.
+my $gf_block;
+my $l;
+my $seen_gf_block;
+my $seen_virtual_maps;
 
-ldap_gforge_users_server_host = $ldap_host
+$gf_block = "### BEGIN GFORGE BLOCK -- DO NOT EDIT ###
+#You may move this block around to accomodate your local needs as long as you
+# keep it in an appropriate position, where \"appropriate\" is defined by you.
+
+ldap_gforge_users_server_host = $sys_ldap_host
 ldap_gforge_users_server_port = 389
 ldap_gforge_users_query_filter = (uid=\%s,ou=People)
 ldap_gforge_users_result_attribute = debSfForwardEmail
@@ -67,7 +70,7 @@ ldap_gforge_users_search_base = $sys_ldap_base_dn
 ldap_gforge_users_bind = no
 ldap_gforge_users_domain = users.$domain_name
 
-ldap_gforge_lists_server_host = $ldap_host
+ldap_gforge_lists_server_host = $sys_ldap_host
 ldap_gforge_lists_server_port = 389
 ldap_gforge_lists_query_filter = (cn=\%s,ou=mailingList)
 ldap_gforge_lists_result_attribute = debSfListPostAddress
@@ -75,61 +78,56 @@ ldap_gforge_lists_search_base = $sys_ldap_base_dn
 ldap_gforge_lists_bind = no
 ldap_gforge_lists_domain = users.$domain_name
 
-virtual_maps = hash:$config_directory/virtual, ldap:ldap_gforge_users, ldap:ldap_gforge_lists
+#forward_for_gforge_lists_admin:
+# domains = $sys_lists_host
+# suffix = -owner : -admin
+# driver = aliasfile
+# pipe_transport = address_pipe
+# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListOwnerAddress\"
+# search_type = ldap
+# user = nobody
+# group = nogroup
 
-forward_for_gforge_lists_admin:
-  domains = $sys_lists_host
-  suffix = -owner : -admin
-  driver = aliasfile
-  pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListOwnerAddress\"
-  search_type = ldap
-  user = nobody
-  group = nogroup
-
-forward_for_gforge_lists_request:
-  domains = $sys_lists_host
-  suffix = -request
-  driver = aliasfile
-  pipe_transport = address_pipe
-  query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListRequestAddress\"
-  search_type = ldap
-  user = nobody
-  group = nogroup
-# END SOURCEFORGE BLOCK #
-" ;
-
-while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };
-print $l ;
-while (($l = <>) !~ /^\s*end\s*$/) { print $l ; };
-print $l ;
-$in_sf_block = 0 ;
-$sf_block_done = 0 ;
-@line_buf = () ;
-while (($l = <>) !~ /^\s*end\s*$/) {
-  if ($l =~ /^# *DIRECTORS CONFIGURATION *#/) {
-    push @line_buf, $l ;
-    while ((($l = <>) =~ /^#.*#/) and ($l !~ /^# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #/)) {
-      push @line_buf, $l ;
-    };
-    print @line_buf ;
-    @line_buf = () ;
-  };
-  if ($l =~ /^# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #/) {
-    $in_sf_block = 1 ;
-    push @line_buf, $sf_block unless $sf_block_done ;
-    $sf_block_done = 1 ;
-  };
-  push @line_buf, $l unless $in_sf_block ;
-  $in_sf_block = 0 if ($l =~ /^# END SOURCEFORGE BLOCK #/) ;
+#forward_for_gforge_lists_request:
+# domains = $sys_lists_host
+# suffix = -request
+# driver = aliasfile
+# pipe_transport = address_pipe
+# query = \"ldap:///cn=\$local_part,ou=mailingList,$sys_ldap_base_dn?debSfListRequestAddress\"
+# search_type = ldap
+# user = nobody
+# group = nogroup
+### END GFORGE BLOCK ###
+";
+$seen_gf_block = 0;
+$seen_vritual_maps = 0;
+while ($l = <>) {
+	if ($l =~ /^\s*virtual_maps/) {
+		chomp $l;
+		$l .= ", ldap:ldap_gforge_users" unless ($l =~ /^[^#]*ldap:ldap_gforge_users/);
+		$l .= ", ldap:ldap_gforge_lists" unless ($l =~ /^[^#]*ldap:ldap_gforge_lists/);
+		print "$l\n";
+		$seen_virtual_maps = 1;
+	} else {
+		if ($l =~ /^\s*\#\#\# BEGIN GFORGE BLOCK \-\- DO NOT EDIT \#\#\#/) {
+			$seen_gf_block = 1;
+		} else {
+			print $l;
+		};
+	};
 };
-push @line_buf, $l ;
-print $sf_block unless $sf_block_done ;
-print @line_buf ;
-while ($l = <>) { print $l; };
+
+if ($seen_gf_block == 0) {
+	print $gf_block;
+};
+
+if ($seen_virtual_maps == 0) {
+	print "### GFORGE ADDITION - The following line can be moved and this line removed ###\n";
+	print "virtual_maps = ldap:ldap_gforge_users, ldap:ldap_gforge_lists\n";
+};
 ' < $tmp1 > $tmp2
 	rm $tmp1
-	cat $tmp2 > /etc/exim/exim.conf.gforge-new
+	cat $tmp2 > /etc/postfix/main.cf.gforge-new
 	rm $tmp2
 	;;
     
@@ -149,7 +147,7 @@ while ($l = <>) { print $l; };
 	fi
 	rm -f $tmp1
 
-	cp -a /etc/exim/exim.conf /etc/exim/exim.conf.gforge-new
+	cp -a /etc/postfix/main.cf /etc/postfix/main.cf.gforge-new
 
 	tmp1=$(mktemp /tmp/$pattern)
 	# First, replace the list of local domains
@@ -162,7 +160,7 @@ $l =~ /^(\s*local_domains\s*=\s*)(\S+)/ ;
 $l = $1 . join (":", grep (!/SOURCEFORGE_DOMAINS/, (split ":", $2))) ;
 print "$l\n" ;
 while ($l = <>) { print $l; };
-' < /etc/exim/exim.conf.gforge-new > $tmp1
+' < /etc/postix/main.cf.gforge-new > $tmp1
 	tmp2=$(mktemp /tmp/$pattern)
 	# Second, kill our forwarding rules
 	perl -e '
@@ -182,7 +180,7 @@ print $l ;
 while ($l = <>) { print $l; };
 ' < $tmp1 > $tmp2
 	rm $tmp1
-	cat $tmp2 > /etc/exim/exim.conf.gforge-new
+	cat $tmp2 > /etc/psotfix/main.cf.gforge-new
 	rm $tmp2
 	;;
 
