@@ -1234,7 +1234,7 @@ pm_admin_projects	admin_title	Project/Task Manager Administration
 pm_admin_projects	category_inserted	Category Inserted
 pm_admin_projects	category_name	Category Name
 pm_admin_projects	category_note	Once you add a category, it cannot be deleted
-pm_admin_projects	category_note2	It is not recommended that you change the artifact category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.</font></strong>
+pm_admin_projects	category_note2	It is not recommended that you change the category name because other things are dependent upon it. When you change the category name, all related items will be changed to the new name.</font></strong>
 pm_admin_projects	category_updated	Category Updated
 pm_admin_projects	change_project_intro	You can modify an existing Project using this form. Please note that private projects can still be viewed by members of your project, but not the general public.
 pm_admin_projects	change_project_title	Change Project/Task Manager Status
@@ -1271,6 +1271,7 @@ pm_browsetask	next	next 50
 pm_browsetask	overdue_tasks	* Denotes overdue tasks
 pm_browsetask	previous	previous 50
 pm_browsetask	title	Browse tasks
+pm_detailtask	subproject	Subproject
 pm_detailtask	assigned_to	Assigned To
 pm_detailtask	category	Category
 pm_detailtask	dependend_on_task	Dependent On Task

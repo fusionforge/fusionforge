@@ -76,6 +76,13 @@ class ProjectGroupHTML extends ProjectGroup {
 		return html_build_select_box($this->getCategories(),$name,$checked,$show_100,$text_100);
 	}
 
+	function groupProjectBox($name='group_project_id',$checked='xzxz',$show_100=true,$text_100='None') {
+		$res=db_query("SELECT group_project_id,project_name 
+			FROM project_group_list 
+			WHERE group_id='".$this->Group->getID()."'");
+		return html_build_select_box($res,$name,$checked,$show_100,$text_100);
+	}
+
 	function percentCompleteBox($name='percent_complete',$selected=0) {
 		global $Language;
 		echo '

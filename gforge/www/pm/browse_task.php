@@ -233,7 +233,9 @@ if ($rows < 1) {
 				'<br />'. $pg->statusBox ('status_id','xzxz',true,$Language->getText('pm_browsetask','no_change')) .'</td>
 			</tr>
 
-			<tr><td colspan="3" align="middle"><input type="submit" name="submit" value="'.
+			<tr><td><strong>'.$Language->getText('pm_detailtask','subproject').'</strong><br />
+			'.$pg->groupProjectBox('new_group_project_id',$group_project_id,false).'</td>
+			<td align="middle"><input type="submit" name="submit" value="'.
 			$Language->getText('pm_browsetask','mass_update').'"></td></tr>
 
 			</table>

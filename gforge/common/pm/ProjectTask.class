@@ -687,10 +687,11 @@ class ProjectTask extends Error {
 	 *	@param	int	The percentage of completion in integer format of this task.
 	 *	@param	array	An array of user_id's that are assigned this task.
 	 *	@param	array	An array of project_task_id's that this task depends on.
+	 *	@param	int	The GroupProjectID of a new subproject that you want to move this Task to.
 	 *	@return	boolean success.
 	 */
 	function update($summary,$details,$priority,$hours,$start_date,$end_date,
-		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr) {
+		$status_id,$category_id,$percent_complete,&$assigned_arr,&$depend_arr,$new_group_project_id) {
 		$v = new Validator();
 		$v->check($summary, "summary");
 		$v->check($priority, "priority");
@@ -712,6 +713,37 @@ class ProjectTask extends Error {
 		}
 
 		db_begin();
+
+		//
+		//  Attempt to move this Task to a new Subproject
+		//  need to instantiate new ProjectGroup obj and test if it works
+		//
+		$group_project_id = $this->ProjectGroup->getID();
+		if ($new_group_project_id != $group_project_id) {
+			$newProjectGroup= new ProjectGroup($this->ProjectGroup->getGroup(), $new_group_project_id);
+			if (!is_object($newProjectGroup) || $newProjectGroup->isError()) {
+				$this->setError('ProjectTask: Could not move to new ProjectGroup'. $newProjectGroup->getErrorMessage());
+				db_rollback();
+				return false;
+			}
+			/*  do they have perms for new ArtifactType?
+			if (!$newArtifactType->userIsAdmin()) {
+				$this->setPermissionDeniedError();
+				db_rollback();
+				return false;
+			}*/
+			//
+			//  Now set ProjectGroup, Category, and Assigned to 100 in the new ProjectGroup
+			//
+			$status_id=1;
+			$category_id='100';
+			unset($assigned_to);
+			$assigned_to=array('100');
+			$this->ProjectGroup =& $newProjectGroup;
+			$this->addHistory ('group_project_id',$group_project_id);
+		}
+
+
 		if ($details) {
 			if (!$this->addMessage($details)) {
 				db_rollback();
@@ -772,8 +804,9 @@ class ProjectTask extends Error {
 				end_date='$end_date',
 				status_id='$status_id',
 				percent_complete='$percent_complete',
-				category_id='$category_id'
-				WHERE group_project_id='".$this->ProjectGroup->getID()."'
+				category_id='$category_id',
+				group_project_id='$new_group_project_id'
+				WHERE group_project_id='$group_project_id'
 				AND project_task_id='".$this->getID()."'";
 
 			$res=db_query($sql);

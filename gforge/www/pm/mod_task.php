@@ -29,17 +29,20 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 <table border="0" width="100%">
 
 	<tr>
-		<td><strong><?php echo $Language->getText('pm_modtask','submitted_by') ?>:</strong><br /><?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
+		<td><strong><?php echo $Language->getText('pm_modtask','submitted_by') ?>:</strong><br />
+			<?php echo $pt->getSubmittedRealName(); ?> (<?php echo $pt->getSubmittedUnixName(); ?>)</td>
+		<td><input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" /></td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
-		<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(admin)</a>
+			<strong><?php echo $Language->getText('pm','category') ?>:</strong><br />
+			<?php echo $pg->categoryBox('category_id',$pt->getCategoryID()); ?> <a href="/pm/admin/?<?php echo "group_id=$group_id&amp;add_cat=1&amp;group_project_id=$group_project_id"; ?>">(admin)</a>
 		</td>
 
 		<td>
-		<input type="submit" value="<?php echo $Language->getText('general','submit') ?>" name="submit" />
+			<strong><?php echo $Language->getText('pm_detailtask','subproject'); ?>:</strong><br />
+			<?php echo $pg->groupProjectBox('new_group_project_id',$group_project_id,false); ?>
 		</td>
 	</tr>
 
