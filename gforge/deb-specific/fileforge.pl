@@ -1,4 +1,11 @@
 #! /usr/bin/perl -Tw
+#
+# $Id$
+#
+# Secure moving of files for the Sourceforge file release system
+# Roland Mas, debian-sf (Sourceforge for Debian)
+#
+# Inspired from the fileforge.c and tmpfilemove.c files in Sourceforge 2.5
 
 use strict ;
 use vars qw/ $file $dirty_file $user $dirty_user $group $dirty_group
