@@ -80,7 +80,7 @@ if ($submit) {
 			Adjust User Role
 		*/
 		if (!$group->updateUser($user_id,$role_id)) {
-			$feedback .= 'Foo'.$group->getErrorMessage();
+			$feedback .= $group->getErrorMessage();
 		} else {
 			$feedback = $Language->getText('project_admin','user_updated');
 		}
