@@ -13,22 +13,36 @@
 
 
 require_once('pre.php');
-require_once('vote_function.php');
-require_once('www/survey/survey_utils.php');
+require_once('common/survey/Survey.class');
+require_once('www/survey/include/SurveyHTML.class');
+
+
+/* We need a group_id */ 
+if (!$group_id) {
+    exit_no_group();
+}
+
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g) || $g->isError()) {
+    exit_no_group();
+}
 
 // Check to make sure they're logged in.
 if (!session_loggedin()) {
 	exit_not_logged_in();
 }
 
-survey_header(array('title'=>$Language->getText('survey','title'),'pagename'=>'survey_survey'));
+$sh = new  SurveyHtml();
+$s = new Survey($g, $survey_id);
 
-if (!$survey_id || !$group_id) {
-	echo "<h1>".$Language->getText('survey','for_some_reason')."</h1>";
+$sh->header(array('title'=>$Language->getText('survey','title'),'pagename'=>'survey_survey'));
+
+if (!$survey_id) {
+    echo "<h1>".$Language->getText('survey','for_some_reason')."</h1>";
 } else {
-	show_survey($group_id,$survey_id);
+    echo($sh->ShowSurveyForm($s));
 }
 
-survey_footer(array());
+$sh->footer(array());
 
 ?>

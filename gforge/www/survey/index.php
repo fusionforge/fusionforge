@@ -11,49 +11,34 @@
   *
   */
 
-
 require_once('pre.php');
-require_once('vote_function.php');
-require_once('www/survey/survey_utils.php');
+require_once('common/survey/SurveyFactory.class');
+require_once('www/survey/include/SurveyHTML.class');
 
+/* We need a group_id */ 
 if (!$group_id) {
-	echo "<h1>".$Language->getText('survey_index','for_some_reason')."</h1>";
+    exit_no_group();
 }
 
-survey_header(array('title'=>$Language->getText('survey_index','title'),'pagename'=>'survey','titlevals'=>array(group_getname($group_id))));
-
-Function  ShowResultsGroupSurveys($result) {
-	global $group_id;
-	global $Language;
-	$rows  =  db_numrows($result);
-	$cols  =  db_numfields($result);
-	$title_arr=array();
-	$title_arr[]=$Language->getText('survey_index','survey_title');
-	echo $GLOBALS['HTML']->listTableTop ($title_arr);
-
-	for($j=0; $j<$rows; $j++)  {
-		echo "<tr ". $GLOBALS['HTML']->boxGetAltRowStyle($j) .">\n";
-		for ($i=1; $i<$cols; $i++)  {
-			echo "<td><a href=\"survey.php?group_id=$group_id&amp;survey_id=".db_result($result,$j,"survey_id")."\">";
-			printf("%s",db_result($result,$j,$i));
-			echo "</a></td>\n";
-		}
-		echo "</tr>";
-	}
-	echo $GLOBALS['HTML']->listTableBottom();
+$g =& group_get_object($group_id);
+if (!$g || !is_object($g) || $g->isError()) {
+    exit_no_group();
 }
 
-$sql="SELECT survey_id,survey_title FROM surveys WHERE group_id='$group_id' AND is_active='1'";
+$user_id = user_getid();
 
-$result=db_query($sql);
+/* Show header */
+$sh = new  SurveyHtml();
+$sh->header(array('title'=>$Language->getText('survey_index','title'),'pagename'=>'survey','titlevals'=>array(group_getname($group_id))));
 
-if (!$result || db_numrows($result) < 1) {
-	echo "<h2>".$Language->getText('survey_index','this_group_has')."</h2>";
-	echo db_error();
+/* Show list of Servey */
+$sf = new SurveyFactory($g);
+$ss = & $sf->getSurveys();
+if (!$ss) {
+    echo ($Language->getText('survey_error', 'no_survey_found'));
 } else {
-	ShowResultsGroupSurveys($result);
+    echo($sh->showSurveys($ss, 0, 0, 1, 1, 1, 0));
 }
 
-survey_footer(array());
-
+$sh->footer(array());
 ?>
