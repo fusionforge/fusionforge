@@ -98,7 +98,7 @@ if ($msg_id) {
 	echo $Language->getText('forum_message','by').": ". $fm->getPosterRealName() ." (". $fm->getPosterName() .")<br />";
 	echo $Language->getText('forum_message','date').": ". date($sys_datefmt, $fm->getPostDate()) ."<br />";
 	echo $Language->getText('forum_message','subject').": ". $fm->getSubject() ."<p>&nbsp;</p>";
-	echo util_make_links(nl2br( $fm->getBody() ));
+	echo nl2br( util_make_links($fm->getBody() ));
 	echo "</td></tr>";
 
 	echo $GLOBALS['HTML']->listTableBottom();
