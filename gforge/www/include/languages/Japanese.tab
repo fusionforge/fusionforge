@@ -1,0 +1,87 @@
+#/**
+#  *
+#  * Japanese message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Atsushi Kamoshida
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-09-24  Atsushi Kamoshida
+#	* Initial translation
+# 2000-10-28  Hirotaka Mizutani
+#	* Update
+#
+about_foundries	about_blurb	ファンドリーについて
+menu	about_sourceforge	SourceForgeについて
+menu	account_maintenance	アカウント管理
+menu	bookmark_page	ブックマーク
+home	breaking_down_barriers	Breaking Down the Barriers to Open Source Development
+menu	change_my_theme	テーマの変更
+menu	code_snippet_library	Code Snippet Library
+menu	compile_farm	コンパイル環境
+menu	contact_us	連絡先
+group	developers	開発者
+group	developer_info	開発者情報
+menu	discussion_forums	ディスカッションフォーラム
+menu	documentation	サイトドキュメント
+frs	file_download	ダウンロード
+frs	file_monitor	監視
+frs	file_notes	注意
+frs	file_package	パッケージ
+frs	file_version	バージョン
+group	long_bugs	バグ追跡
+group	long_cvs	CVSリポジトリ
+group	long_docman	ドキュメントマネージャ
+group	long_forum	一般向けフォーラム
+group	long_ftp	匿名 FTP スペース
+group	long_homepage	プロジェクトホームページ
+group	long_mail	メーリングリスト
+group	long_news	最新ニュース
+group	long_patch	パッチマネージャ
+group	long_pm	タスクマネージャ
+group	long_support	技術サポートマネージャ
+group	long_survey	調査
+group	short_bugs	バグ
+group	short_cvs	CVS
+group	short_docman	ドキュメント
+group	short_files	Filesgroup	short_forum	フォーラム
+group	short_homepage	ホームページ
+group	short_mail	リスト
+group	short_main 	メイン
+group	short_news	ニュース
+group	short_patch	パッチ
+group	short_pm	タスク
+group	short_summary	サマリ
+group	short_support	サポート
+group	short_survey	調査
+home	highest_ranked_users	ユーザ別ランキング
+home	about_blurb	 SourceForgeとは<a href="http://www.opensource.org/">オープンソース</A>開 発者にCVS、メーリングリスト、バグ追跡、掲示板・フォーラム、タスク管理、 ホストホスティング、永久的なファイルの保管、完全なバックアップさらにWebベース の総合的な管理への容易で最高な利用を提供する無料のサービスです。 <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ 詳細 ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>サイトへの意見と参加</B> <P> SourceForgeを最大限活用するには<a href="http://sourceforge.net/account/register.php">ユーザ登録</a>する必 要があります。そうすることによりわれわれが提供するすべてのサービスに参加 することができます。もちろん登録しなくともサイトを閲覧することはできます が、利用に制限があります。 <P> &nbsp; <BR> <B>自分のプロジェクトを作る</B> <P> まず<a href="http://sourceforge.net/account/register.php">ユーザ登録 </a>し、<a href="http://sourceforge.net/account/login.php">ログイン </a>します。そして<a href="http://sourceforge.net/register/">プロジェク トを登録</a>します。 <P> ありがとうございます。そしてこのサイトでぜひ楽しんでください。
+frs	latest_file_releases	最新の File リリース
+menu	login	SSL経由でログイン
+menu	logout	ログアウト
+home	most_active_this_week	最近一週間で活発なプロジェクト
+menu	my_personal_page	自分のページ
+menu	new_project	新規プロジェクトの登録
+menu	new_releases	新規リリース
+menu	new_user	SSL経由で新規ユーザ作成
+menu	other_site_mirrors	他のミラーサイト
+menu	project_admin	プロジェクト管理
+group	project_admins	プロジェクト管理者
+menu	project_help_wanted	プロジェクト協力者募集
+menu	project_summary	プロジェクトサマリ
+group	public_area	公開エリア
+menu	search	検索
+menu	software_map	ソフトウェアマップ
+home	sourceforge_statistics	SourceForge統計
+menu	top_projects	トッププロジェクト
+home	top_project_downloads	プロジェクトダウンロード数
+conf	content_encoding	EUC-JP
+conf	language_code	ja
+conf	language_id	2

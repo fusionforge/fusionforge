@@ -1,0 +1,136 @@
+<?php
+/**
+  *
+  * SourceForge Generic Tracker facility
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
+
+
+require_once('common/tracker/Artifact.class');
+
+class ArtifactHtml extends Artifact {
+
+	/**
+	 *  ArtifactHtml() - constructor
+	 *
+	 *  Use this constructor if you are modifying an existing artifact
+	 *
+	 *  @param $ArtifactType object
+	 *  @param $artifact_id integer (primary key from database)
+	 *  @return true/false
+	 */
+	function ArtifactHtml(&$ArtifactType,$artifact_id=false) {
+		return $this->Artifact($ArtifactType,$artifact_id);
+	}
+
+	function showMessages() {
+		global $sys_datefmt;
+		$result= $this->getMessages();
+		$rows=db_numrows($result);
+
+		if ($rows > 0) {
+			$title_arr=array();
+			$title_arr[]='Message';
+
+			echo html_build_list_table_top ($title_arr);
+
+			for ($i=0; $i < $rows; $i++) {
+				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD><PRE>
+Date: '. date($sys_datefmt,db_result($result, $i, 'adddate')) .'
+Sender: '. db_result($result,$i,'user_name') . '
+'. util_line_wrap ( db_result($result, $i, 'body'),65,"\n"). '</PRE></TD></TR>';
+			}
+			echo '</TABLE>';
+		} else {
+			echo '
+				<H3>No Followups Have Been Posted</H3>';
+		}
+	}
+
+	function showHistory() {
+		global $sys_datefmt,$artifact_cat_arr,$artifact_grp_arr,$artifact_res_arr;
+		$result=$this->getHistory();
+		$rows= db_numrows($result);
+
+		if ($rows > 0) {
+
+			$title_arr=array();
+			$title_arr[]='Field';
+			$title_arr[]='Old Value';
+			$title_arr[]='Date';
+			$title_arr[]='By';
+
+			echo html_build_list_table_top ($title_arr);
+
+			$artifactType =& $this->getArtifactType();
+
+			for ($i=0; $i < $rows; $i++) {
+				$field=db_result($result, $i, 'field_name');
+				echo '
+				<TR BGCOLOR="'. html_get_alt_row_color($i) .'"><TD>'.$field.'</TD><TD>';
+
+				if ($field == 'status_id') {
+
+					echo $artifactType->getStatusName(db_result($result, $i, 'old_value'));
+
+				} else if ($field == 'resolution_id') {
+
+					if (!$artifact_res_arr["_".db_result($result, $i, 'old_value')]) {
+						$artifact_res_arr["_".db_result($result, $i, 'old_value')] 
+							= new ArtifactResolution($artifactType,db_result($result, $i, 'old_value'));
+					}
+					echo $artifact_res_arr["_".db_result($result, $i, 'old_value')]->getName();
+
+				} else if ($field == 'category_id') {
+
+					if (!$artifact_cat_arr["_".db_result($result, $i, 'old_value')]) {
+						$artifact_cat_arr["_".db_result($result, $i, 'old_value')] 
+							= new ArtifactCategory($artifactType,db_result($result, $i, 'old_value'));
+					}
+					echo $artifact_cat_arr["_".db_result($result, $i, 'old_value')]->getName();
+
+				} else if ($field == 'artifact_group_id') {
+
+					if (!$artifact_grp_arr["_".db_result($result, $i, 'old_value')]) {
+						$artifact_grp_arr["_".db_result($result, $i, 'old_value')] 
+							= new ArtifactGroup($artifactType,db_result($result, $i, 'old_value'));
+					}
+					echo $artifact_grp_arr["_".db_result($result, $i, 'old_value')]->getName();
+
+				} else if ($field == 'assigned_to') {
+
+					echo user_getname(db_result($result, $i, 'old_value'));
+
+				} else if ($field == 'close_date') {
+
+					echo date($sys_datefmt,db_result($result, $i, 'old_value'));
+
+				} else {
+
+					echo db_result($result, $i, 'old_value');
+
+				}
+				echo '</TD>'.
+					'<TD>'. date($sys_datefmt,db_result($result, $i, 'entrydate')) .'</TD>'.
+					'<TD>'. db_result($result, $i, 'user_name'). '</TD></TR>';
+			}
+
+			echo '
+				</TABLE>';
+	
+		} else {
+			echo '
+			<H3>No Changes Have Been Made to This Item</H3>';
+		}
+
+	}
+
+}
+
+?>

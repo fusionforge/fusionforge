@@ -1,0 +1,90 @@
+#/**
+#  *
+#  * Portuguese message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Doomed <doomed@users.sourceforge.net>
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2001-02-25  Doomed  <doomed@users.sourceforge.net>
+#	* Initial translation
+# 2001-02-25  Nuno Amaral  <namaral@users.sourceforge.net>
+#	* Contributed some strings
+#
+about_foundries	about_blurb	Sobre as Foundries
+menu	about_sourceforge	Sobre a SourceForge
+menu	account_maintenance	Manutenção da Conta
+menu	bookmark_page	Página de Bookmarks
+home	breaking_down_barriers	Quebrando as Barreiras contra o Desenvolvimento do Open Source
+menu	change_my_theme	Mudar Tema
+menu	code_snippet_library	Biblioteca de Código
+menu	compile_farm	Colecção de Compiladores
+menu	contact_us	Contacte a SourceForge
+group	developers	Programadores
+group	developer_info	Informação s/ Programador
+menu	discussion_forums	Fóruns de Discussão
+menu	documentation	Documentação do Site
+frs	file_download	Download
+frs	file_monitor	Monitor
+frs	file_notes	Observações
+frs	file_package	Pacotes
+frs	file_rel_date	Data
+frs	file_version	Versão
+group	long_bugs	Procura de Bugs
+group	long_cvs	Arquivo do CVS
+group	long_docman	Gestor da Documentação do Projecto
+group	long_forum	Fóruns Públicos
+group	long_foundries	Foundries de Desenvolvimento da SourceForge
+group	long_ftp	Espaço p/ FTP Anónimo
+group	long_homepage	Home Page do Projecto
+group	long_mail	Mailing Lists
+group	long_news	Notícias Mais Recentes
+group	long_patch	Gestor dos Patches
+group	long_pm	Gestor de Tarefas
+group	long_support	Gestor do Suporte Técnico
+group	long_survey	Inquéritos
+group	short_bugs	Bugs
+group	short_cvs	CVS
+group	short_docman	Documentação
+group	short_files	Filesgroup	short_forum	Fóruns
+group	short_homepage	Página de Entrada
+group	short_mail	Listas
+group	short_main 	Principal
+group	short_memberlist	Programadores
+group	short_news	Notícias
+group	short_patch	Patches
+group	short_pm	Tarefas
+group	short_summary	Resumo
+group	short_support	Suporte
+group	short_survey	Inquéritos
+home	highest_ranked_users	Utilizadores mais Destacados
+home	about_blurb	  A SourceForge é um <B>serviço gratuito para os programadores em <A href="http://www.opensource.org">Open Source</A></B> que oferece fácil acesso ao que melhor se faz em CVS, Mailing Lists, Procura de bugs, Fóruns, Administração de Tarefas, Alojamento de Sites, Arquivo permanente de Ficheiros, Backups completos e ainda Administração dos Projectos totalmente baseada numa interface web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ mais informação ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Contacto e Participação no Site</B> <P> De forma a obter o máximo da SourceForge, vai precisar de se <A href="/account/register.php">registar como utilizador do site</A>. Isto permitirá que participe em todos os serviços que temos disponíveis. Pode obviamente visitar o site sem se registar mas não terá acesso a uma participação completa. <P> &nbsp;  <BR> <B>Crie o Seu Próprio Projecto</B> <P> <A href="/account/register.php">Registe-se como utilizador do site</A>, faça o respectivo <A HREF="/account/login.php">Login</A> e por fim, <A HREF="/register/">Registe o Seu Projecto.</A>  <P> Obrigado... e tire bom partido do site.
+frs	latest_file_releases	Lançamentos Mais Recentes
+menu	login	Login por SSL
+menu	logout	Logout
+home	most_active_this_week	O Mais Activo nesta Semana
+menu	my_personal_page	Página Pessoal
+menu	new_project	Criar um Projecto Novo
+menu	new_releases	Novos Lançamentos
+menu	new_user	Utilizador Novo por SSL
+menu	other_site_mirrors	Outros Mirrors
+menu	project_admin	Administração do Projecto
+group	project_admins	Administradores do Projecto
+menu	project_help_wanted	Projectos que Precisam de Ajuda
+menu	project_summary	Resumo do Projecto
+group	public_area	Áreas Públicas
+menu	search	Procurar
+menu	software_map	Listagem do Software
+home	sourceforge_statistics	Estatísticas da SourceForge
+menu	top_projects	Projectos Principais
+home	top_project_downloads	Projectos com mais Downloads
+conf	content_encoding	iso-8859-1
+conf	language_code	pt
+conf	language_id	18

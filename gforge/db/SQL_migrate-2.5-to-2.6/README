@@ -1,0 +1,26 @@
+
+Apologies in advance for the difficulty in converting from 2.5 to 2.6.
+
+As always, SourceForge is undergoing radical changes, rewrites, feature 
+and scalability enhancements. This means a large number of SQL and 
+database changes need to occur in sequence over time.
+
+The 2.5 codebase was a radical change because it moved from MySQL to PostgreSQL.
+2.6 is radical because it takes full advantage of Postgres' advanced features 
+and MySQL is no longer usable as it was for 2.5
+
+The process of upgrading from 2.5 to 2.6 involves running these clearly dated 
+sql diff files IN ORDER.
+
+If you encounter difficulties, please report them in the SF Offsite Discussion board:
+https://sourceforge.net/forum/forum.php?forum_id=21304
+
+Please do not submit bugs to SourceForge.net.
+
+************************************************************************************
+
+IMPORTANT!!! Read and understand EACH AND EVERY sql command before running it.
+These commands were issued on SourceForge.net and may cause problems on your system.
+
+************************************************************************************
+

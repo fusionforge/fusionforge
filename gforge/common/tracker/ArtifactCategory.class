@@ -1,0 +1,195 @@
+<?php
+/**
+ * ArtifactCategory.class - Class to handle artifact categories
+ *
+ * SourceForge: Breaking Down the Barriers to Open Source Development
+ * Copyright 1999-2001 (c) VA Linux Systems
+ * http://sourceforge.net
+ *
+ * @version   $Id$
+ *
+ */
+require_once('common/include/Error.class');
+
+class ArtifactCategory extends Error {
+
+	/** 
+	 * The artifact type object
+	 *
+	 * @var		object	$ArtifactType
+	 */
+	var $ArtifactType; //object
+
+	/**
+	 * Array of artifact data
+	 *
+	 * @var		array	$data_array
+	 */
+	var $data_array;
+
+	/**
+	 *  ArtifactCategory() - constructor
+	 *
+	 *  Use this constructor if you are modifying an existing artifact
+	 *
+	 *	@param	object	ArtifactType object
+	 *  @param	array	(all fields from artifact_file_user_vw) OR id from database
+	 *  @return true/false
+	 */
+	function ArtifactCategory(&$ArtifactType, $data=false) {
+		$this->Error(); 
+
+		//was ArtifactType legit?
+		if (!$ArtifactType || !is_object($ArtifactType)) {
+			$this->setError('ArtifactCategory: No Valid ArtifactType');
+			return false;
+		}
+		//did ArtifactType have an error?
+		if ($ArtifactType->isError()) {
+			$this->setError('ArtifactCategory: '.$Artifact->getErrorMessage());
+			return false;
+		}
+		$this->ArtifactType =& $ArtifactType;
+
+		if ($data) {
+			if (is_array($data)) {
+				$this->data_array =& $data;
+				return true;
+			} else {
+				if (!$this->fetchData($data)) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		} else {
+			$this->setError('No ID Passed');
+		}
+	}
+
+	/**
+	 *	create() - create a new item in the database
+	 *
+	 *	@param	string	Item name
+	 *	@param	int		User_id of assignee
+	 *  @return id on success / false on failure
+	 */
+	function create($name, $auto_assign_to) {
+		//
+		//	data validation
+		//
+		if (!$name || !$auto_assign_to) {
+			$this->setError('ArtifactCategory: name and assignee are Required');
+			return false;
+		}
+		if (!$this->ArtifactType->userIsAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}
+		$sql="INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to) 
+			VALUES ('".$this->ArtifactType->getID()."','$name','$auto_assign_to')";
+
+		$result=db_query($sql);
+
+		if ($result && db_affected_rows($result) > 0) {
+			$this->clearError();
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+
+/*
+			//
+			//	Now set up our internal data structures
+			//
+			if (!$this->fetchData($id)) {
+				return false;
+			}
+*/
+	}
+
+	/**
+	 *	fetchData() - re-fetch the data for this ArtifactCategory from the database
+	 *
+	 *	@param	int		ID of the category
+	 *	@return true/false
+	 */
+	function fetchData($id) {
+		$res=db_query("SELECT * FROM artifact_category WHERE id='$id'");
+		if (!$res || db_numrows($res) < 1) {
+			$this->setError('ArtifactCategory: Invalid ArtifactCategory ID');
+			return false;
+		}
+		$this->data_array =& db_fetch_array($res);
+		db_free_result($res);
+		return true;
+	}
+
+	/**
+	 *	getArtifactType() - get the ArtifactType Object this ArtifactCategory is associated with
+	 *
+	 *	@return ArtifactType
+	 */
+	function &getArtifactType() {
+		return $this->ArtifactType;
+	}
+	
+	/**
+	 *	getID() - get this ArtifactCategory's ID
+	 *
+	 *	@return the id #
+	 */
+	function getID() {
+		return $this->data_array['id'];
+	}
+
+	/**
+	 *	getName() - get the name
+	 *
+	 *	@return text name
+	 */
+	function getName() {
+		return $this->data_array['category_name'];
+	}
+
+	/**
+	 *	getAssignee() - get the user_id of the person to assign this category to
+	 *
+	 *	@return int user_id
+	 */
+	function getAssignee() {
+		return $this->data_array['auto_assign_to'];
+	}
+
+	/**
+	 *  update() - update an ArtifactCategory
+	 *
+	 *  @param	string	Name of the category
+	 *  @param	int		user_id of the person this category should auto-assign to
+	 *  @return true/false
+	 */
+	function update($name,$assign_to) {
+		if (!$this->ArtifactType->userIsAdmin()) {
+			$this->setError('Permission Denied');
+			return false;
+		}   
+		if (!$name || !$assign_to) {
+			$this->setError('Missing Params');
+			return false;
+		}   
+		$sql="UPDATE artifact_category 
+			SET category_name='$name',auto_assign_to='$assign_to' 
+			WHERE id='". $this->getID() ."' 
+			AND group_artifact_id='".$this->ArtifactType->getID()."'";
+		$result=db_query($sql);
+		if ($result && db_affected_rows($result) > 0) {
+			return true;
+		} else {
+			$this->setError(db_error());
+			return false;
+		}
+	}
+}
+
+?>

@@ -1,0 +1,10 @@
+#
+#
+#	download_filemaint.pl
+#
+#	-runs once a minute to clear out files that 
+#		admins have requested to be deleted
+#	-depends on a file called .delete_files in the incoming directory
+#		.delete_file must be owned by nobody:nobody so the web servers
+#		can write to it
+#

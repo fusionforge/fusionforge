@@ -1,0 +1,84 @@
+#/**
+#  *
+#  * Bulgarian message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Delyan Toshev
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-10-14  Delyan Toshev
+#	* Initial translation
+#
+menu	account_maintenance	Профил
+menu	bookmark_page	Отбележи страницата
+home	breaking_down_barriers	Да премахнем пречките пред разработването на софтуер с отворен код
+menu	change_my_theme	Външен вид
+menu	code_snippet_library	Софтуерна библиотека
+menu	compile_farm	Фабрика за компилиране
+menu	contact_us	Връзка с нас
+group	developers	Разработчици
+group	developer_info	Участници в проекта
+menu	discussion_forums	Дискусионни форуми
+menu	documentation	Документи
+frs	file_download	Изтегли
+frs	file_monitor	Наблюдение
+frs	file_notes	Бележки
+frs	file_package	Модул
+frs	file_version	Версия
+group	long_bugs	Проследяване на грешки
+group	long_cvs	CVS хранилище
+group	long_docman	Проектна документация
+group	long_forum	Публични форуми
+group	long_ftp	Анонимно FTP пространство
+group	long_homepage	Начална страница на проекта
+group	long_mail	Списъци с получатели
+group	long_news	Последни новини
+group	long_patch	Управляване на поправките
+group	long_pm	Управляване на задачите
+group	long_support	Управляване на поддръжката
+group	long_survey	Допитване
+group	short_bugs	Грешки
+group	short_cvs	CVS
+group	short_docman	Документи
+group	short_files	Filesgroup	short_forum	Форуми
+group	short_homepage	Начало
+group	short_mail	Получатели
+group	short_main 	Основно
+group	short_news	Новини
+group	short_patch	Поправки
+group	short_pm	Задачи
+group	short_summary	Резюме
+group	short_support	Поддръжка
+group	short_survey	Проучвания
+home	highest_ranked_users	Най-популярните потребители
+home	about_blurb	  SourceForge е <B>безплатна услуга за разработващите софтуер с  <A href="http://www.opensource.org">отворен код</A></B>,  предлагаща лесен достъп до най-доброто от CVS, дискусионни форуми,  проследяване на грешки, управление на задачи,  безплатно уеб пространство, постоянно архивиране на файловете,  пълно резервно подсигуряване на проекта,  и напълно уеб базирано администриране. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ повече ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Включване и обратна връзка</B> <P> За да може да използвате най-ефективно SourceForge, ще трябва да се  <A href="/account/register.php">регистрирате</A> като потребител.  Това ще ви позволи да участвате напълно във всичко, което предлагаме.  Разбира се, можете да разглеждате всичко и без регистриране, но така ще  се лишите от възможността за пълно включване в различните услуги. <P> &nbsp; <BR> <B>Създайте свой проект</B> <P> <A href="/account/register.php">Регистрирайте се като потребител</A>,  след което <A HREF="/account/login.php">влезте</A> в своят профил и накрая  <A HREF="/register/">регистрирайте вашият проект.</A> <P> Благодарим ви... и приятно ползване на услугите ни.
+frs	latest_file_releases	Последните излезли файлове
+menu	login	Вход (SSL защитена връзка)
+menu	logout	Изход
+home	most_active_this_week	Най-активни през тази седмица
+menu	my_personal_page	Лична страница
+menu	new_project	Регистриране на нов проект
+menu	new_releases	Новоизлезли
+menu	new_user	Нов потребител (SSL защитена връзка)
+menu	other_site_mirrors	Огледални копия
+menu	project_admin	Администриране на проект
+group	project_admins	Администратори
+menu	project_help_wanted	Проекти търсещи помощ
+menu	project_summary	Обща информация за проекта
+group	public_area	Общодостъпни места
+menu	search	Търсене
+menu	software_map	Карта на софтуера
+home	sourceforge_statistics	SourceForge статистика
+menu	top_projects	Топ проекти
+home	top_project_downloads	Най-популярните проекти
+conf	content_encoding	windows-1251
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	bg
+conf	language_id	20

@@ -1,0 +1,82 @@
+#/**
+#  *
+#  * Traditional Chinese message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Yu-Jui Lee
+#  *
+#  */
+# ChangeLog:
+#
+# 2000-10-01  Yu-Jui Lee
+#	* Initial translation
+#
+menu	account_maintenance	帳號維護
+menu	bookmark_page	書籤
+home	breaking_down_barriers	為開放源碼的發展開闢一條坦途
+menu	change_my_theme	主題變更
+menu	code_snippet_library	小片斷源碼程式庫
+menu	compile_farm	編譯主機群
+menu	contact_us	聯絡我們
+group	developers	開發者
+group	developer_info	開發者資訊
+menu	discussion_forums	論壇
+menu	documentation	文件
+frs	file_download	檔案下載
+frs	file_monitor	監看
+frs	file_notes	附註
+frs	file_package	檔案包裹
+frs	file_version	檔案版本
+group	long_bugs	臭虫追蹤
+group	long_cvs	CVS程式庫
+group	long_docman	專案文件
+group	long_forum	公共論壇
+group	long_ftp	匿名FTP空間
+group	long_homepage	專案首頁
+group	long_mail	電子郵件討論群
+group	long_news	最新消息
+group	long_patch	修補管理者
+group	long_pm	工作管理者
+group	long_support	技術支援管理者
+group	long_survey	調查
+group	short_bugs	臭虫
+group	short_cvs	CVS
+group	short_docman	文件
+group	short_files	Filesgroup	short_forum	論譠
+group	short_homepage	首頁
+group	short_mail	電子郵件
+group	short_main 	主要
+group	short_news	新聞
+group	short_patch	修補
+group	short_pm	工件
+group	short_summary	摘要
+group	short_support	支援
+group	short_survey	調查
+home	highest_ranked_users	最高評價用戶排行榜
+home	about_blurb	  SourceForge為一<B>提供免費服務給 <A href="http://www.opensource.org">開放源碼</A>發展者的網站</B> 包括了CVS, 郵件討論群, 臭虫追蹤系統, 訊息論壇, 工作管理, 網站空間, 檔案儲存, 完整的檔案備份, 且完全以web-based來管理. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ more ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>請立即加入並不吝指教</B> <P> 為充分利用SourceForge所提供的服務, <A href="/account/register.php">請立即註冊成為 本站用戶</A>. 您將能充分參與本站所提供的各項活動, 您若尚未註冊成為用戶, 仍能瀏覽本站, 但無權充份參與本站活動.  <P> &nbsp; <BR> <B>設置您自己的專案</B> <P> <A href="/account/register.php">註冊成為本站用戶</A>, 接著 <A HREF="/account/login.php">登入</A> 最後, <A HREF="/register/">註冊您的專案.</A> <P> 謝謝您... 並祝使用本站愉快.
+frs	latest_file_releases	最新檔案發表
+menu	login	經由SSL登入
+menu	logout	登出
+home	most_active_this_week	本週活動力最強排行榜
+menu	my_personal_page	我的首頁
+menu	new_project	新專案登錄
+menu	new_releases	新發表軟體
+menu	new_user	經由SSL新用戶註冊
+menu	other_site_mirrors	其它映射網站
+menu	project_admin	專案維護
+group	project_admins	專案管理者
+menu	project_help_wanted	徵求協助
+menu	project_summary	專案摘要
+group	public_area	公共區域
+menu	search	搜尋
+menu	software_map	軟體分類表
+home	sourceforge_statistics	SourceForge統計資料
+menu	top_projects	熱門專案
+home	top_project_downloads	熱門專案下載排行榜
+conf	content_encoding	BIG5
+conf	language_code	zh-TW
+conf	language_id	11

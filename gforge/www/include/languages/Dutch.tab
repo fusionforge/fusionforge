@@ -1,0 +1,83 @@
+#/**
+#  *
+#  * Dutch message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-10-01
+#	* Initial translation, based on CVS revision 1.15 of BaseLanguage.class
+#
+menu	account_maintenance	Account onderhouden
+menu	bookmark_page	Bladwijzer van deze pagina maken
+home	breaking_down_barriers	Breaking Down the Barriers to Open Source Development
+menu	change_my_theme	Mijn thema wijzigen
+menu	code_snippet_library	Code-knipsels bibliotheek
+menu	compile_farm	Compilatie boerderij
+menu	contact_us	Neem contact met ons op
+group	developers	Ontwikkelaars
+group	developer_info	Ontwikkelaar Info
+menu	discussion_forums	Discussie forums
+menu	documentation	Site documentatie
+frs	file_download	Downloaden
+frs	file_monitor	Monitor
+frs	file_notes	Notitites
+frs	file_package	Pakket
+frs	file_version	Versie
+group	long_bugs	Bug Tracking
+group	long_cvs	CVS Repository
+group	long_docman	DocManager: documentatie van project
+group	long_forum	Publieke Forums
+group	long_ftp	Anonieme FTP-ruimte
+group	long_homepage	Homepage van project
+group	long_mail	Mailing Lijsen
+group	long_news	Laatste nieuws
+group	long_patch	Patch Manager
+group	long_pm	Takenmanager
+group	long_support	Technische ondersteuningsmanager
+group	long_survey	Enquêtes
+group	short_bugs	Bugs
+group	short_cvs	CVS
+group	short_docman	Documentatie
+group	short_files	Filesgroup	short_forum	Forums
+group	short_homepage	Homepage
+group	short_mail	Lijsten
+group	short_main 	Hoofd
+group	short_news	Nieuws
+group	short_patch	Patches
+group	short_pm	Taken
+group	short_summary	Samenvatting
+group	short_support	Ondersteuning
+group	short_survey	Enquêtes
+home	highest_ranked_users	Gebruikers met de hoogste rang
+home	about_blurb	  		SourceForge is een <B>gratis service voor 		<A href="http://www.opensource.org">Open Source</A> ontwikkelaars</B> die 		gemakkelijke toegang tot het beste in CVS, mailing lijsen, bug tracking, berichtborden/forums, 		task management, site hosting, permanent file archival, full backups, 		en totale web-gebaseerde administratie geeft.  		<A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ meer ]</font></A> 		<A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> 		<BR> 		&nbsp; 		<P> 		<B>Site feedback en hoe mee te doen</B> 		<P> 		Om het meeste uit SourceForge te halen, moet u naar 		<A href="/account/register.php">registreren als een site 		gebruiker</A> gaan. Dit stelt u in staat om volledig mee te doen met alles 		wat we te bieden hebben. U kan natuurlijk de site doorkijken zonder te 		registreren, maar u kan niet volledig meedoen. 		<P> 		&nbsp; 		<BR> 		<B>Uw eigen project opzetten</B> 		<P> 		<A href="/account/register.php">Registreren als een site 		gebruiker</A>, 		dan <A HREF="/account/login.php">Inloggen</A> en uiteindelijk, 		<A HREF="/register/">Nieuw project registreren.</A> 		<P> 		Bendankt... en veel succes met de site.
+frs	latest_file_releases	Laatste bestandsuitgaven
+menu	login	Inloggen via SSL
+menu	logout	Uitloggen
+home	most_active_this_week	Meest actief deze week
+menu	my_personal_page	Mijn persoonlijke pagina
+menu	new_project	Nieuw project registreren
+menu	new_releases	Nieuwe uitgaves
+menu	new_user	Nieuwe gebruiker via SSL
+menu	other_site_mirrors	Andere site mirrors
+menu	project_admin	Projectadministratie
+group	project_admins	Project administrators
+menu	project_help_wanted	Hulp gevraagd bij projecten
+menu	project_summary	Projectsamenvatting
+group	public_area	Publieke gebieden
+menu	search	Zoeken
+menu	software_map	Software kaart
+home	sourceforge_statistics	SourceForge Statistieken
+menu	top_projects	Top Projecten
+home	top_project_downloads	Top projectendownloads
+conf	content_encoding	iso-8859-1
+conf	default_font	verdana,arial,helvetica,sans-serif
+conf	language_code	nl
+conf	language_id	12

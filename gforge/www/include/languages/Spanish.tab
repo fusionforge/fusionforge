@@ -1,0 +1,80 @@
+#/**
+#  *
+#  * Spanish message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Enric Mart­nez <exter@users.sourceforge.net> 
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-09-23  Enric Mart­nez  <exter@users.sourceforge.net>
+#	* Initial translation
+#
+menu	account_maintenance	Mantenimiento de Cuenta
+menu	bookmark_page	Marcar Página
+home	breaking_down_barriers	Derribando las Barreras al Desarrollo de Código Abierto
+menu	change_my_theme	Cambiar Mi Tema
+menu	code_snippet_library	Biblioteca de Recortes de Código
+menu	compile_farm	Granja de Compilación
+menu	contact_us	Contáctenos
+group	developers	Desarrolladores
+group	developer_info	Info sobre el Desarrollador
+menu	discussion_forums	 Foros de Discusión 
+menu	documentation	Documentación Local
+frs	file_download	Descarga
+frs	file_monitor	Monitor
+frs	file_notes	Notas
+frs	file_package	Paquete
+frs	file_version	Versión
+group	long_bugs	Seguimiento de Errores
+group	long_cvs	Repositorio CVS
+group	long_docman	Admin. de Documentación
+group	long_forum	 Foros Públicos
+group	long_ftp	Espacio de FTP Anónimo
+group	long_homepage	Página de Inicio de Proyecto
+group	long_mail	Listas de Correo
+group	long_news	Últimas Noticias
+group	long_patch	Admin. de Parches
+group	long_pm	Admin. de Tareas
+group	long_support	Admin. de Soporte Técnico
+group	long_survey	Servicios
+group	short_bugs	Fallos
+group	short_cvs	CVS
+group	short_docman	Documentos
+group	short_files	Filesgroup	short_forum	Foros
+group	short_homepage	Página de Inicio
+group	short_mail	Listas
+group	short_news	Noticias
+group	short_patch	Parches
+group	short_pm	Tareas
+group	short_summary	Resumen
+group	short_support	Soporte Técnico
+group	short_survey	Servicios
+home	highest_ranked_users	Usuarios de Más Activos
+home	about_blurb	  SourceForge es un <B>servicio gratuito para desarrolladores de <A href="http://www.opensource.org">Código Abierto</A></B> ofreciendo fácil acceso a los mejores repositorios CVS, listas de discusión, seguimiento de errores, tablones de anuncios/foros, gestión de tarifas, hospedaje de sitios web, archivado permanente de ficheros, copias de seguridad completas y administración totalmente basada en web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ más ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ PF ]</font></A> <BR> &nbsp; <P> <B>Retorno (feedback) al Sitio de Participación</B> <P> Para poder obtener el máximo de SourceForge, habrá de <A href="/account/register.php">registrarse como  usuario del sitio</A>. Esto le permitirá participar plenamente en todo lo que tenemos para ofrecerle. Podrá, por supuesto, navegar por el sitio sin registrarse, pero no tendrá la opción de participar plenamente. <P> &nbsp; <BR> <B>Monte Su Propio Proyecto</B> <P> <A href="/account/register.php">Regístrese como usuario del sitio</A>, acceda, <A HREF="/account/login.php">Acceso</A> y finalmente, <A HREF="/register/">Registre Su Proyecto.</A> <P> Muchas Gracias... y disfrute del sitio.
+frs	latest_file_releases	Últimas Versiones de Archivos
+menu	login	Acceso vía SSL
+menu	logout	Salir
+home	most_active_this_week	El Más Activo esta Semana
+menu	my_personal_page	Mi Página Personal
+menu	new_project	Registrar Proyecto Nuevo
+menu	new_releases	Nuevas Salidas
+menu	new_user	Nuevo Usuario vía SSL
+menu	project_admin	Admininstración de Proyectos
+group	project_admins	Admins de Proyecto
+menu	project_help_wanted	Petición de Ayuda para Proyecto
+menu	project_summary	Sumario de Proyectos
+group	public_area	Áreas Públicas
+menu	search	Buscar
+menu	software_map	Mapa de Software
+home	sourceforge_statistics	Estadísticas de SourceForge
+menu	top_projects	Proyectos Estrella
+home	top_project_downloads	Proyectos más descargados
+conf	language_code	es
+conf	language_id	4

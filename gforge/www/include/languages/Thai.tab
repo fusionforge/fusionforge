@@ -1,0 +1,89 @@
+#/**
+#  *
+#  * Thai message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Korakot Chaovavanich
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-09-25  Korakot Chaovavanich
+#	* Initial translation:
+#	National Electronic and Computer Technology Center.
+#	็R ม๔๚๒๚iๆ, 25 ๓ฟ๗๔๗ฟ 2543
+#	้ýฟ๗อมืฟืๅ๗่๎ๆมๅ็๎ฟๆ๋อยๅ๒๎โ?ๆ๚มÞ๎็อย์ษ๔Þๆ
+#
+#	According to Information Technology Vocabulary version of Royal Acadamy
+#	๎ๆÞ๔โ ้๓?อมืฟืๅ๗่๋๔็๋ฟม้ c๓็๔๓i+ๆÞ๗๋๔ฟ
+#	Sorry that I can't translate all of them... There seems no standard translation
+#	for Software Development Vocab. Some thai may even prefer English than translation.
+#
+menu	account_maintenance	ดูแลบัญชีผู้ใช้
+menu	bookmark_page	ใส่ที่คั่นหน้า
+home	breaking_down_barriers	ทะลายอุปสรรคสู่การพัฒนาแบบโอเพ่นซอร์ส
+menu	change_my_theme	เปลี่ยน Theme
+menu	code_snippet_library	คลังโปรแกรมเล็ก
+menu	contact_us	ติดต่อพวกเรา
+group	developers	ผู้พัฒนา
+group	developer_info	ข้อมูลผู้พัฒนา
+menu	discussion_forums	กระดานสนทนา
+menu	documentation	เอกสารคู่มือไซต์
+frs	file_download	ดาวโหลด
+frs	file_monitor	เฝ้าสังเกต
+frs	file_notes	บันทึกข้อความ
+frs	file_package	แพ็กเกจ
+frs	file_version	รุ่น
+group	long_bugs	ติดตามบั๊ก
+group	long_cvs	ที่รวม CVS
+group	long_docman	จัดการเอกสาร: คู่มือโปรเจกต์
+group	long_forum	กระดานสาธารณะ
+group	long_ftp	พื้นที่ FTP นิรนาม
+group	long_homepage	โฮมเพจโครงการ
+group	long_mail	จดหมายกลุ่ม
+group	long_news	ข่าวล่าสุด
+group	long_patch	จัดการแพตช์
+group	long_pm	จัดการภารกิจ
+group	long_support	บริการทางเทคนิก
+group	long_survey	แบบสำรวจ
+group	short_bugs	บั๊ก
+group	short_docman	เอกสาร
+group	short_files	Filesgroup	short_forum	สนทนา
+group	short_homepage	โฮมเพจ
+group	short_mail	จดหมาย
+group	short_news	ข่าว
+group	short_patch	แพตช์
+group	short_pm	ภารกิจ
+group	short_summary	สรุป
+group	short_support	บริการ
+group	short_survey	สำรวจ
+home	highest_ranked_users	คนคะแนนสูงสุด
+home	about_blurb	  SourceForge เป็น <B>บริการฟรีแก่นักพัฒนา <A href="http://opensource.thai.net">โอเพ่นซอร์ส</A></B> โดยมีบริการที่สะดวกและดีที่สุด ทั้ง ระบบ CVS, จดหมายกลุ่ม, ระบบติดตามบั๊ก, กระดานสนทนา, ระบบจัดการภารกิจ, ให้เนื้อที่เว็บไซต์,  ระบบจัดเก็บไฟล์ถาวร, มีการสำรองไฟล์ทั้งหมด, รวมทั้งให้บริหารระบบต่าง ๆ ได้ผ่านเว็บทั้งหมด. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ more ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>การมีส่วนร่วม และป้อนกลับกับไซต์</B> <P> เพื่อให้ได้รับประโยชน์จาก SourceForge สูงสุด, คุณจำเป็นต้อง <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>. คุณจะได้รับอนุญาตให้เข้ามีส่วนร่วมเต็มที่ในทุกสิ่งที่เรามีบริการ. คุณสามารถเข้าชมไซต์ไปเรื่อย ๆ โดยไม่จำเป็นต้องลงทะเบียน แต่คุณอาจไม่สามารถเข้าใช้บริการบางอย่างได้ครบทั้งหมด. <P> &nbsp; <BR> <B>ตั้งโปรเจกต์ของคุณเอง</B> <P> <A href="/account/register.php">ลงทะเบียนเป็นสมาชิกไซต์</A>, แล้ว <A HREF="/account/login.php">ลงบันทึกเข้า</A> และสุดท้ายก็ <A HREF="/register/">ตั้งโปรเจกต์ใหม่ของคุณเอง</A>. <P> ขอบคุณครับ... ขอให้สนุกกับบริการของเรา.
+frs	latest_file_releases	ไฟล์ออกใหม่ล่าสุด
+menu	login	ลงบันทึกเข้าด้วย SSL
+menu	logout	ลงบันทึกออก
+home	most_active_this_week	ตื่นตัวสูงสุดในสัปดาห์
+menu	my_personal_page	หน้าส่วนตัว
+menu	new_project	ตั้งโปรเจกต์ใหม่
+menu	new_releases	ชุดออกใหม่
+menu	new_user	สมัครสมาชิกใหม่
+menu	other_site_mirrors	Mirror ที่อื่น ๆ
+menu	project_admin	บริหารโปรเจกต์
+group	project_admins	ผู้ดูแลโปรเจกต์
+menu	project_help_wanted	ต้องการคนช่วย
+menu	project_summary	สรุปโปรเจกต์
+group	public_area	พื้นที่สาธารณะ
+menu	search	ค้นหา
+menu	software_map	แผนที่ซอฟต์แวร์
+home	sourceforge_statistics	สถิติ SourceForge
+menu	top_projects	โปรเจกต์สุดยอด
+home	top_project_downloads	โปรเจกต์ดาวโหลดสูงสุด
+conf	content_encoding	tis-620
+conf	default_font	MS Sans Serif,Thonburi,sans-serif
+conf	language_code	th
+conf	language_id	5

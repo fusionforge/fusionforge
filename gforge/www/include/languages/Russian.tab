@@ -1,0 +1,90 @@
+#/**
+#  *
+#  * Russian message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Paul Sokolovsky <pfalcon@users.sourceforge.net>
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-10-08  Paul Sokolovsky  <pfalcon@users.sourceforge.net>
+#	* Initial translation
+#
+about_foundries	about_blurb	О цехах SourceForge
+menu	about_sourceforge	О SourceForge
+menu	account_maintenance	Мои настройки
+menu	bookmark_page	Пометить тек. страницу закладкой
+home	breaking_down_barriers	Преодолевая барьеры на пути разработки с открытым исходным кодом
+menu	change_my_theme	Изменить web-тему
+menu	code_snippet_library	Бибиотека Code Snippet'ов
+menu	compile_farm	Фабрика компиляции
+menu	contact_us	Обратная связь
+group	developers	Разработчики
+group	developer_info	Участники проекта
+menu	discussion_forums	Дискуссионные форумы
+menu	documentation	Документация сайта
+frs	file_download	Скачать
+frs	file_monitor	Следить
+frs	file_notes	Информация
+frs	file_package	Модуль
+frs	file_version	Версия
+group	long_bugs	Менеджер ошибок
+group	long_cvs	CVS репозиторий
+group	long_docman	Менеджер документации
+group	long_forum	Общедоступные форумы
+group	long_ftp	Анонимный FTP проекта
+group	long_homepage	Домашняя страница проекта
+group	long_mail	Списки рассылки
+group	long_news	Новости
+group	long_patch	Менеджер патчей (исправлений)
+group	long_pm	Задачи проекта
+group	long_support	Менеджер тех. поддержки
+group	long_survey	Опросы
+group	short_admin	Админ
+group	short_bugs	Ошибки
+group	short_cvs	CVS
+group	short_docman	Документация
+group	short_files	Файлы
+group	short_forum	Форумы
+group	short_homepage	Дом.страница
+group	short_mail	Сп.рассылки
+group	short_main 	Main
+group	short_memberlist	Разработчики
+group	short_news	Новости
+group	short_patch	Патчи
+group	short_pm	Задачи
+group	short_summary	Резюме
+group	short_support	Поддержка
+group	short_survey	Опросы
+group	short_tracker	Унив.Трекер
+home	highest_ranked_users	Пользователи с высоким рейтингом
+home	about_blurb	  SourceForge - <B>свободный и бесплатный сервис для разработчиков, работающих по принципу Открытого Исходного Кода/Наполнения (<A href="http://www.opensource.org">Open Source</A>)</B> и предлагающий быстрый и легкий доступ к таким сервисам, как CVS (система управления версиями файлов), спиcки рассылки, система регистрации ошибок, доски сообщений и форумы, менеджер проектов, web-хостинг, постоянное файловое хранилище, автоматическое резервное копирование - все вместе управляемое через Web.<br> <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[&nbsp;Подробнее&nbsp;(по-английски)&nbsp;]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[&nbsp;FAQ&nbsp;]</font></A> <BR> &nbsp; <P> <B>Использование сервисов и участие в проектах</B> <P> Для того, чтобы получить доступ ко всему многообразию сервисов, предлагаемых на SourceForge, вам нужно  <A href="/account/register.php">зарегистрироваться в качестве пользователя сайта</A>. Конечно же, вы можете путешествовать по сайту без регистрации, но вы не будете иметь доступ ко многим возможностям. <P> &nbsp; <BR> <B>Создание собственного проекта</B> <P> <A href="/account/register.php">Зарегистрируйтесь как пользователь сайта</A>, <A HREF="/account/login.php">войдите в систему</A> и наконец, <A HREF="/register/">зарегистрируйте ваш проект</A>. <P> Спасибо за выбор SourceForge... И мы желаем вам приятного и полезного времяпровождения!
+frs	latest_file_releases	Последние файл-релизы
+menu	login	Логин (ч/з защищенное соединение)
+menu	logout	Выход
+home	most_active_this_week	Наиболее активные за эту неделю
+menu	my_personal_page	Моя персональная страница
+menu	new_project	Зарегистрировать проект
+menu	new_releases	Последние релизы
+menu	new_user	Новый пользователь
+menu	other_site_mirrors	Зеркала других сайтов
+menu	project_admin	Администрирование проекта
+group	project_admins	Администраторы
+menu	project_help_wanted	Проекты, нуждающиеся в помощи
+menu	project_summary	База проекта
+group	public_area	Сервисы проекта
+menu	search	Поиск
+menu	site_status	Статус Сайта
+menu	software_map	Карта проектов
+home	sourceforge_statistics	Статистика SourceForge
+menu	top_projects	Топ-проекты
+home	top_project_downloads	Наиболее загружаемые проекты
+conf	content_encoding	windows-1251
+conf	language_code	ru
+conf	language_id	17

@@ -1,0 +1,82 @@
+#/**
+#  *
+#  * Italian message catalog
+#  *
+#  * SourceForge: Breaking Down the Barriers to Open Source Development
+#  * Copyright 1999-2001 (c) VA Linux Systems
+#  * http://sourceforge.net
+#  *
+#  * @version   $Id$
+#  * @author Dakkar
+#  *
+#  */
+#
+# ChangeLog:
+#
+# 2000-09-23  Dakkar
+#	* Initial translation
+#
+menu	account_maintenance	Gestione account
+menu	bookmark_page	Segna pagina
+home	breaking_down_barriers	Abbattere le barriere allo sviluppo Open Source
+menu	change_my_theme	Cambia il tema
+menu	code_snippet_library	Raccolta frammenti di codice
+menu	compile_farm	Compile Farm
+menu	contact_us	Contattaci
+group	developers	Sviluppatori
+group	developer_info	Informazioni sugli Sviluppatori
+menu	discussion_forums	Aree di Discussione
+menu	documentation	Documentazione
+frs	file_download	Scarica
+frs	file_monitor	Controlla
+frs	file_notes	Note
+frs	file_package	Pacchetto
+frs	file_version	Versione
+group	long_bugs	Gestione Bug
+group	long_cvs	Repository CVS
+group	long_docman	Gestione Documentazione
+group	long_forum	Aree di Discussione pubbliche
+group	long_ftp	Spazio FTP anonimo
+group	long_homepage	Home Page del progetto
+group	long_mail	Mailing List
+group	long_news	Ultime notizie
+group	long_patch	Gestione Patch
+group	long_pm	Gestione attivit&agrave;
+group	long_support	Gestione supporto tecnico
+group	long_survey	Sondaggi
+group	short_bugs	Bug
+group	short_cvs	CVS
+group	short_docman	Doc.
+group	short_files	Filesgroup	short_forum	Discussioni
+group	short_homepage	Home Page
+group	short_mail	ML
+group	short_main 	Principale
+group	short_news	Notizie
+group	short_patch	Patch
+group	short_pm	Attivit&agrave;
+group	short_summary	Sommario
+group	short_support	Supporto
+group	short_survey	Sondaggi
+home	highest_ranked_users	I Migliori
+home	about_blurb	 SourceForge &egrave; un <B>servizio gratuito per gli sviluppatori <A href="http://www.opensource.org">Open Source</A></B> che offre un facile accesso ai migliori strumenti per  CVS, mailing list, gestione bug, aree di discussione, gestione attivit&agrave;, pubblicazione su web, archiviazione permanente dei file, backup completi, e amministrazione totalmente via web. <A href="/docman/display_doc.php?docid=753&group_id=1"><font size="-1">[ per saperne di pi&ugrave; ]</font></A> <A href="/docman/display_doc.php?docid=756&group_id=1"><font size="-1">[ FAQ ]</font></A> <BR> &nbsp; <P> <B>Partecipate!</B> <P> Per ottenere il massimo da SourceForge, dovete <A href="/account/register.php">registrarvi come utente </A>. Questo vi permetter&agrave; di partecipare appieno a quello che abbiamo da offrirvi. Ovviamente potete visitare il sito senza registrarvi, ma non avrete la possibilit&agrave; di partecipare. <P>  &nbsp; <BR> <B>Avviate il vostro progetto</B> <P> <A href="/account/register.php">Registratevi come utenti</A>, quindi <A HREF="/account/login.php">accedete</A> e finalmente <A HREF="/register/">registrate il vostro progetto.</A>  <P> Grazie... e divertitevi.
+frs	latest_file_releases	Ultime Release
+menu	login	Accesso via SSL
+menu	logout	Fine sessione
+home	most_active_this_week	I pi&ugrave; attivi della settimana
+menu	my_personal_page	La mia pagina personale
+menu	new_project	Registra un nuovo progetto
+menu	new_releases	Nuove Release
+menu	new_user	Nuovo utente
+menu	other_site_mirrors	Mirror di altri siti
+menu	project_admin	Amministrazione Progetto
+group	project_admins	Amministratori di Progetto
+menu	project_help_wanted	Progetti in cerca di aiuto
+menu	project_summary	Sommario del Progetto
+group	public_area	Aree Pubbliche
+menu	search	Ricerca
+menu	software_map	Mappa Programmi
+home	sourceforge_statistics	Statistiche SourceForge
+menu	top_projects	Classifica Progetti
+home	top_project_downloads	Progetti pi&ugrave; scaricati
+conf	content_encoding	iso-8859-1
+conf	language_id	8
