@@ -81,7 +81,7 @@ while ( $row =& db_fetch_array($res) ) {
 		passthru ("[ ! -d $svn/".$row["unix_group_name"]." ] &&  $svn_path/svnadmin create $repos_type $svn/".$row["unix_group_name"]);
 		svn_hooks("$svn/".$row["unix_group_name"]);
 		addsvnmail("$svn/".$row["unix_group_name"],$row["unix_group_name"]);
-		passthru("chown ".$row["unix_group_name"].":".$row["unix_group_name"]." -R $svn/".$row["unix_group_name"]."/");
+		passthru("chown nobody:".$row["unix_group_name"]." -R $svn/".$row["unix_group_name"]."/");
 	}
 }
 
