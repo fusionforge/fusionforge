@@ -39,16 +39,7 @@ function mail_header($params) {
 			)
 		);
 	} else {
-		$params['toptab'] = 'mail';
-		site_project_header($params);
-		echo $HTML->subMenu(
-			array(
-				$Language->getText('group','short_mail'),
-			),
-			array(
-				'/mail/?group_id='.$group_id,
-			)
-		);
+		exit_no_group();
 	}
 }
 

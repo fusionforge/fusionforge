@@ -18,19 +18,21 @@ $group_id = getIntFromGet('group_id');
 
 if ($group_id) {
 	$Group =& group_get_object($group_id);
-	if (!$Group || !is_object($Group) || $Group->isError()) {
+	if (!$Group || !is_object($Group)) {
+		exit_error($Language->getText('general', 'error'), 'Could Not Get Group');
+	} elseif ($Group->isError()) {
 		exit_no_group();
 	}
 	
 	$mlFactory = new MailingListFactory($Group);
-	if (!$mlFactory || !is_object($mlFactory) || $mlFactory->isError()) {
+	if (!$mlFactory || !is_object($mlFactory)) {
+		exit_error($Language->getText('general', 'error'), 'Could Not Get MailingListFactory');
+	} elseif ($mlFactory->isError()) {
 		exit_error($Language->getText('general', 'error'), $mlFactory->getErrorMessage());
 	}
 
 	mail_header(array(
-		'title' => $Language->getText('mail', 'mailinglists_for', array($Group->getPublicName())),
-		'pagename' => 'mail',
-		'sectionvals' => array($Group->getPublicName())
+		'title' => $Language->getText('mail', 'mailinglists_for', array($Group->getPublicName()))
 	));
 
 
@@ -56,7 +58,8 @@ if ($group_id) {
 	
 	$tableHeaders = array(
 		$Language->getText('mail_common', 'mailing_list'),
-		''
+		$Language->getText('mail_common', 'description'),
+		$Language->getText('mail_common', 'prefs')
 	);
 	echo $HTML->listTableTop($tableHeaders);
 
@@ -64,18 +67,18 @@ if ($group_id) {
 		$currentList =& $mlArray[$j];
 		echo '<tr '. $HTML->boxGetAltRowStyle($j) .'>';
 		if ($currentList->isError()) {
-			echo '<td colspan="2">'.$currentList->getErrorMessage().'</td></tr>';
+			echo '<td colspan="3">'.$currentList->getErrorMessage().'</td></tr>';
 		} else if($currentList->getStatus() == MAIL__MAILING_LIST_IS_REQUESTED) {
-			echo '<td width="60%">'.
-				'<strong>'.$currentList->getName().'</strong><br />'.
-				htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="40%" align="center">'.$Language->getText('mail_common', 'list_not_activated').'</td></tr>';
+			echo '<td width="33%">'.
+				'<strong>'.$currentList->getName().'</strong></td>'.
+				'<td width="33%">'.htmlspecialchars($currentList->getDescription()). '</td>'.
+				'<td width="33%" align="center">'.$Language->getText('mail_common', 'list_not_activated').'</td></tr>';
 		} else {
-			echo '<td width="60%">'.
+			echo '<td width="33%">'.
 				'<strong><a href="'.$currentList->getArchivesUrl().'">' .
-				$Language->getText('mail', 'archives', array($currentList->getName())).'</a></strong><br />'.
-				htmlspecialchars($currentList->getDescription()). '</td>'.
-				'<td width="40%" align="center"><a href="'.$currentList->getExternalInfoUrl().'">'.$Language->getText('mail', 'external_administration').'</a>'.
+				$Language->getText('mail', 'archives', array($currentList->getName())).'</a></strong></td>'.
+				'<td>'.htmlspecialchars($currentList->getDescription()). '</td>'.
+				'<td width="33%" align="center"><a href="'.$currentList->getExternalInfoUrl().'">'.$Language->getText('mail', 'external_administration').'</a>'.
 				'</td>';
 		}
 		echo '</tr>';
