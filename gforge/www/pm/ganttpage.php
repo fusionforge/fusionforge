@@ -46,6 +46,9 @@ $tech_id_arr[]='0';  //this will be the 'any' row
 $tech_name_arr=util_result_column_to_array($res_tech,1);
 $tech_name_arr[]=$Language->getText('pm','tech_any');
 
+if ( empty($_assigned_to) ) {
+	$_assigned_to='0';
+}
 $tech_box=html_build_select_box_from_arrays ($tech_id_arr,$tech_name_arr,'_assigned_to',$_assigned_to,true,$Language->getText('pm','unassigned'));
 
 /*
@@ -85,7 +88,7 @@ $dispres_title_arr[]=$Language->getText('pm_ganttpage','months');
 $dispres_title_arr[]=$Language->getText('pm_ganttpage','weeks');
 $dispres_title_arr[]=$Language->getText('pm_ganttpage','days');
 if (!$_resolution) {
-	$_resolution='Weeks';
+	$_resolution=$Language->getText('pm_ganttpage','months');
 }
 $dispres_box=html_build_select_box_from_arrays ($dispres_title_arr,$dispres_title_arr,'_resolution',$_resolution,false);
 
@@ -104,14 +107,18 @@ $size_title_arr[]='800 x 600';
 $size_title_arr[]='1024 x 768';
 $size_title_arr[]='1600 x 1200';
 if (!$_size) {
-	$_size='800';
+	$_size='1600';
 }
 $size_box=html_build_select_box_from_arrays ($size_col_arr,$size_title_arr,'_size',$_size,false);
+
+if (!$_status) {
+	$_status='100';
+}
+
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
 echo '	<form action="'. $PHP_SELF .'?group_id='.$group_id.'&amp;group_project_id='.$group_project_id.'&amp;func=ganttpage" method="post">
-	<input type="hidden" name="set" value="custom" />
 	<table width="10%" border="0">
 	<tr>
 		<td><font size="-1">'.$Language->getText('pm_ganttpage','assignee').':<br />'. $tech_box .'</font></td>
@@ -127,6 +134,7 @@ echo '<img src="'. $PHP_SELF .
 		'?func=ganttchart&amp;group_id='.$group_id.
 		'&amp;group_project_id='.$group_project_id.
 		'&amp;_assigned_to='.$_assigned_to.
+		'&amp;_status='.$_status.
 		'&amp;_order='.$_order.
 		'&amp;_resolution='.$_resolution.
 		'&amp;_category_id='.$_category_id.

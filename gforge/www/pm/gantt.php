@@ -38,7 +38,7 @@ if (!$ptf || !is_object($ptf)) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
 
-$ptf->setup($offset,$_order,$max_rows,$set,$_assigned_to,$_status,$_category_id);
+$ptf->setup($offset,$_order,$max_rows,'custom',$_assigned_to,$_status,$_category_id);
 if ($ptf->isError()) {
 	exit_error('Error',$ptf->getErrorMessage());
 }
@@ -109,7 +109,6 @@ for ($i=0; $i<$rows; $i++) {
 $todayline = new GanttVLine(date('Y-m-d',time()),"Today");
 $todayline ->SetDayOffset (0.5);
 $graph->Add( $todayline);
-
 
 // Display the Gantt chart
 $graph->Stroke();
