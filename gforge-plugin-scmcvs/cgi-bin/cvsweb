@@ -2103,8 +2103,8 @@ sub doCheckout($$)
     $h->finish();
     fatal("500 Internal Error",
           'Unexpected output from cvs co: <pre>%s</pre> ' .
-          '(expected "<code>%s</code>" but got "<code>%s</code>")',
-          $cvsheader, $where, $filename);
+          '(expected "<code>%s</code>" but got "<code>%s</code>") for %s %s -d %s co -p %s %s)',
+          $cvsheader, $where, $filename,$CMD{cvs},@cvs_options,$cr,$revopt,$where);
   }
 
   # Last checks whether we'll do markup or not.
@@ -4112,7 +4112,7 @@ sub download_url($$;$)
 {
   my ($url, $revision, $mimetype) = @_;
   my @dots = $revision =~ /\./g;
-  $revision =~ s/\b0\.(?=\d+$)// if (scalar(@dots) & 1);
+  #$revision =~ s/\b0\.(?=\d+$)// if (scalar(@dots) & 1);
 
   if (!defined($mimetype) || $mimetype !~ CVSWEBMARKUP) {
     my $path = $where;
