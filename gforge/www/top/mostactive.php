@@ -13,6 +13,7 @@ if (!$offset || $offset < 0) {
 }
 
 if ($type == 'week') {
+
 	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_weekly_metric.ranking,project_weekly_metric.percentile ".
 		"FROM groups,project_weekly_metric ".
 		"WHERE groups.group_id=project_weekly_metric.group_id AND ".
@@ -20,11 +21,11 @@ if ($type == 'week') {
 		"ORDER BY ranking ASC";
 	$title = $Language->getText('top','active_weekly');
 } else {
-	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,project_metric.ranking,project_metric.percentile ".
-		"FROM groups,project_metric ".
-		"WHERE groups.group_id=project_metric.group_id AND ".
-		"groups.is_public=1 ".
-		"ORDER BY ranking ASC";
+  	$sql="SELECT g.group_name,g.unix_group_name,g.group_id,s.group_ranking as ranking,s.group_metric as percentile ".
+	"FROM groups g,stats_project_all_vw s  ".
+	"WHERE g.group_id=s.group_id ".
+	"AND g.is_public=1 and s.group_ranking > 0 ".
+	"ORDER BY ranking ASC";
 	$title = $Language->getText('top','active_all_time');
 }
 
@@ -45,7 +46,7 @@ $rows=db_numrows($res_top);
 
 while ($row_top = db_fetch_array($res_top)) {
 	$i++;
-	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$row_top['ranking']
+	print '<tr '. $HTML->boxGetAltRowStyle($i) .'><td>&nbsp;&nbsp;'.$i
 		.'</td><td><a href="/projects/'. strtolower($row_top['unix_group_name']) .'/">'
 		.$row_top['group_name']."</a>"
 		.'</td><td align="right">'.$row_top['percentile'].'</td></tr>';

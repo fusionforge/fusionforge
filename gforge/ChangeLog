@@ -1,3 +1,8 @@
+2003-05-14 Tom Copeland <tom@infoether.com>
+
+	* www/top/most_active.php:
+	Fixed bug # 345 - "most active all time" works now.
+
 2003-05-13  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* db/20030513.sql: New file.  Adding an "enabled" column to the
@@ -8,7 +13,8 @@
 
 2003-05-13 Tom Copeland <tom@infoether.com>
 
-	* cronjobs/project_weekly_metric.php:
+	* cronjobs/project_weekly_metric.php, 
+	cronjobs/project_weekly_metric-backfill.php:
 	Cleaning up the SQL; it was doing INSERTs into a table that wasn't
 	getting created.  Thanks to Bruce Forsyth for the report.
 
