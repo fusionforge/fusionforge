@@ -71,33 +71,23 @@ if ($GLOBALS["delete"]) {
 	if ($form_trove_cat_id==$default_trove_cat){
 		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete'));
 	}
-	$sql = "select count(*) from trove_group_link where trove_cat_id='$form_trove_cat_id'";
-	$row_count = db_fetch_array(db_query($sql));
-	$res = $row_count['count'];
-	if ($res > 0) {
-		exit_error($Language->getText('admin_trove_cat_edit','error_in_trove_operation'), $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete_in_use'));
-	}
-	
-	$res = db_query("
-		SELECT trove_cat_id FROM trove_cat WHERE parent='$form_trove_cat_id'
-	");
-
+	$res=db_query("SELECT * FROM trove_cat WHERE parent='$form_trove_cat_id'");
 	if (!$res) {
 		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
 	}
 	if (db_numrows($res)>0) {
 		exit_error( $Language->getText('admin_trove_cat_edit','cant_delete_has_subcategories'), db_error());
 	} else {
-		$res=db_query(" DELETE FROM trove_treesums WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res || db_affected_rows($res)<1) {
-			 exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
-		}
-		$res=db_query(" DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
-		if (!$res || db_affected_rows($res)<1) {
+		$res=db_query("DELETE FROM trove_treesums WHERE trove_cat_id='$form_trove_cat_id'");
+		if (!$res) {
 			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
 		}
-		$res=db_query(" DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
+		$res=db_query("DELETE FROM trove_group_link WHERE trove_cat_id='$form_trove_cat_id'");
 		if (!$res) {
+			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
+		}
+		$res=db_query("DELETE FROM trove_cat WHERE trove_cat_id='$form_trove_cat_id'");
+		if (!$res || db_affected_rows($res)<1) {
 			exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation'), db_error());
 		}
 	}
