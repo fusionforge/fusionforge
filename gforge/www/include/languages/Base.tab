@@ -1548,6 +1548,7 @@ project_admin_qrs	create_new_package	Or $1 create a new package $2
 project_admin_qrs	file_name	File Name
 project_admin_qrs	file_released	File Released: You May Choose To Edit the Release Now
 project_admin_qrs	file_type	File Type
+project_admin_qrs	must_choose_one	Must Choose One
 project_admin_qrs	no_file_types_available	No File Types Available
 project_admin_qrs	package_id	Package ID
 project_admin_qrs	preserve_text	Preserve my pre-formatted text
@@ -1567,7 +1568,7 @@ project_admin_qrs	title	Quick Release System
 project_admin_qrs	upload_new_file	Upload a new file
 project_admin_qrs	exceed_file_size	The uploaded file exceeds the maximum file size. Contact to the site admin to upload this big file.
 project_admin_qrs	partial_file	The uploaded file was only partially uploaded.
-project_admin_qrs	unknown_file_error	Unknow file uplaod error.
+project_admin_qrs	unknown_file_error	Unknown file upload error.
 project_admin_qrs	maximum_file_size	Maximum upload file size:
 project_admin_rmuser	cancel	Cancel
 project_admin_rmuser	cannot_remove_admin	You cannot remove $1 admin

@@ -1122,7 +1122,7 @@ news_utils	archive	Archive des nouvelles
 news_utils	nonews	<H3>Pas de nouvelles</H3>
 news_utils	readmore	<NOBR>Lire plus/Commenter</NOBR>
 news_utils	submit	Proposer une nouvelle
-people	about_blurb	<p>Le système « Besoin d'aide » est destiné aux offres non commerciales de postes pour volontaires.  L'utilisation commerciale de ce système d'annonces est interdite.<p>Les offres restent visibles pendant deux semaines au plus
+people	about_blurb	<p>Le système « Demande d'aide » est destiné aux offres non commerciales de postes pour volontaires. Tout usage commercial de ce système d'annonces est interdit.</p><p>Les offres restent visibles pendant deux semaines ou jusqu'à ce qu'elles soient fermées par le demandeur, suivant ce qui arrive en premier. (Les administrateurs de projets peuvent toujours soumettre une nouvelle fois les offres qui ont expiré.)</p><p>Parcourez les catégories pour trouver un projet ayant besoin de votre aide.</p><p>Si vous êtes administrateur de projet, identifiez-vous et soumettez des demandes d'aide à travers l'interface d'administration de votre projet.</p><p>Pour suggérer de nouvelles catégories, soumettez votre demande via le gestionnaire de support.</p>
 people	action	Action
 people	add_new_skill	Ajouter une nouvelle competence
 people	add_skill	Ajouter une compétence
@@ -1135,7 +1135,7 @@ people	error_skill_already	Erreur - la compétence demandée est toujours dans v
 people	experience	Expérience
 people	here_is_list_position	Voici une liste de fonctions possibles dans ce projet
 people	invalid_id	Numéro d'identifiant invalide
-people	last_posts	Derniers envois
+people	last_posts	Dernières demandes
 people	level	Niveau
 people	long_description	Description longue&nbsp;
 people	more_latest_posts	Encore ...
@@ -1143,8 +1143,8 @@ people	must_be_loggin	Vous devez être logué d'abord
 people	must_select_a_skill	Vous devez choisir un NРde compétence.
 people	no_categories_found	Aucune catégorie trouvée
 people	no_skill_inventory_setup_up	Aucun référentiel de compétences n'est défini
-people	none_found	Rien trouvé
-people	project	Projet de l'$1
+people	none_found	Aucune demande trouvée
+people	project	Projet de $1
 people	section	Besoin d'aide
 people	short_description	Description courte&nbsp;
 people	skill	Compétence
@@ -1545,18 +1545,19 @@ project_admin_newrelease	section	Projet $1 -- administration
 project_admin_newrelease	title	Création d'une révision
 project_admin_qrs	changelog	Changements apportés&nbsp;
 project_admin_qrs	create_new_package	Ou $1 créer un nouveau paquet $2
-project_admin_qrs	file_name	Nom de fichier&nbsp;
-project_admin_qrs	file_released	Fichier mis à jour : vous pouvez choisir d'éditer la version maintenant.
+project_admin_qrs	file_name	Nom du fichier&nbsp;
+project_admin_qrs	file_released	Fichier mis à jour : vous pouvez maintenant choisir d'éditer la version.
 project_admin_qrs	file_type	Type de fichier&nbsp;
+project_admin_qrs	must_choose_one	Sélection obligatoire
 project_admin_qrs	no_file_types_available	Pas de types de fichiers disponibles.
-project_admin_qrs	package_id	numéro&nbsp;
+project_admin_qrs	package_id	Identifiant du paquet&nbsp;
 project_admin_qrs	preserve_text	Conserver mon texte pré-formaté
 project_admin_qrs	processor_type	Type de microprocesseur&nbsp;
 project_admin_qrs	qrs_info	$1 Vous pouvez maintenant ajouter des fichiers à cette version $2 si vous le souhaitez, ou modifier la version.</p> <p>Remarquez que le(s) fichier(s) peuvent ne pas apparaître immédiatement dans la $3 page de téléchargement $4. Prévoir plusieurs heures pour la propagation.
 project_admin_qrs	release_date	Date de la version&nbsp;
 project_admin_qrs	release_file	Publier le paquet
 project_admin_qrs	release_name	Nom de version&nbsp;
-project_admin_qrs	release_note	NOTE&nbsp;: Avec certains navigateurs, vous devez sélectionner le fichier, puis cliquer sur OK. Le double clic ne fonctionnant pas.
+project_admin_qrs	release_note	NOTE&nbsp;: Avec certains navigateurs, vous devez sélectionner le fichier, puis cliquer sur OK, le double clic ne fonctionnant pas.
 project_admin_qrs	release_notes	Notes sur la version&nbsp;
 project_admin_qrs	required_file	Vous devez sélectionner un fichier
 project_admin_qrs	required_file_type	Vous devez sélectionner un type de fichier
@@ -1565,6 +1566,10 @@ project_admin_qrs	required_processor_type	Vous devez sélectionner un type de mi
 project_admin_qrs	required_release_name	Vous devez définir un nom de version
 project_admin_qrs	title	Système de publication rapide
 project_admin_qrs	upload_new_file	Télécharger un nouveau fichier&nbsp;
+project_admin_qrs	exceed_file_size	Le fichier transmis dépasse la taille maximale. Contactez l'administrateur du site pour uploader ce gros fichier.
+project_admin_qrs	partial_file	Le fichier n'a été que partiellement transmis.
+project_admin_qrs	unknown_file_error	Erreur inconnue lors de la transmission du fichier.
+project_admin_qrs	maximum_file_size	Taille maximale du fichier :
 project_admin_rmuser	cannot_remove_admin	Vous ne pouvez pas supprimer l'adminstrateur de $1.
 project_admin_rmuser	info	<h3>Supprimer un développeur de $1</h3><p>Vous êtes sur le point de supprimer un développeur de $1. Veuillez confirmer cette action.
 project_admin_rmuser	operation_not_permitted	Opération non autorisée
@@ -1835,7 +1840,7 @@ snippet_browse	snippets_by_language	Echantillons par langage : $1
 snippet_browse	title	Bibliothèque d'échantillons
 snippet_caching	browse_by_category	Affichage par Catégorie
 snippet_caching	browse_by_language	Affichage par langage
-snippet_caching	intro	A traduire
+snippet_caching	intro	<p>L'objectif de cette archive est de vous permettre de partager des bouts de code, scripts et fonctions avec la communauté.</p><p>Vous pouvez créer un "nouvel échantillon", puis ajouter des nouvelles versions de cet échantillon rapidement et facilement.</p><p>Une fois que vous avez ajouté des échantillons, vous pouvez créer un "Paquet" d'échantillons. Ce paquet peut contenir différentes versions spécifiques d'autres échantillons.</p><p>&nbsp;</p><h3>Parcourir les échantillons</h3>	<p>Vous pouvez parcourir la bibliothèque d'échantillons :</p>
 snippet_delete	error_mangled_url	ERREUR
 snippet_delete	error_only_creator_of_package_version_can_delete	ERREUR : Seul le créateur d'une version de paquet peut l'effacer.
 snippet_delete	error_only_the_creator	ERREUR : Seul le créateur d'une version de paquet peut lui supprimer des échantillons
@@ -2359,7 +2364,7 @@ tracker_artifact	logged_in_no	non-connecté
 tracker_artifact	logged_in_yes	connecté
 tracker_artifact	monitoring_activated	Suivi activé
 tracker_artifact	monitoring_deactivated	Suivi arrêté
-tracker_artifact	nothing_changed	Aucun changement à Mise à jour annulée
+tracker_artifact	nothing_changed	Aucun changement - Mise à jour annulée
 tracker_artifact	private_error	Traces : seul un groupe de membres peut voir les traces d'un type privé.
 tracker_artifactfile	required_fields	Fichier-trace : un nom de fichier, un type, une taille, and une donnée sont requis.
 tracker_artifactgroup	required_field	Groupe de trace : il faut un nom.
