@@ -1,16 +1,15 @@
-sourceforge (2.6-0+10+) unstable; urgency=low
+sourceforge (2.6-0+11) unstable; urgency=low
 
   * [Roland] Fixed theme registration for 2.6->2.6 upgrades.  You might
     encounter problems if you registered them manually, in this case
     simply run the following SQL in the sourceforge database:
     DELETE FROM themes WHERE dirname LIKE 'savannah_%';
+  * [Christian] changed Layout.class with div align=center BUG #120 CLOSED
 
- -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 01:13:17 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 12:46:40 +0200
 
 sourceforge (2.6-0+10) unstable; urgency=low
 
-  * [Christian] Added savannah converted themes and appropriate db inserts
-  * [Christian] Added README.Themes
   * [Christian] Corrected wrong link in menu.php for lastlogin.php.
   * [Roland] *Lots* of patches from Olafur Osvaldsson <oli@isnic.is>
     applied, many thanks to him.
@@ -25,6 +24,8 @@ sourceforge (2.6-0+10) unstable; urgency=low
   * [Christian] Continuing work on theming, added a new function in
     html.php (url_html)
   * [Roland] Removed a few bashisms in maintainer scripts.
+  * [Christian] Added savannah converted themes and appropriate db inserts
+  * [Christian] Added README.Themes
 
  -- Christian Bayle <bayle@debian.org>  Thu, 25 Apr 2002 01:02:54 +0200
 
