@@ -11,7 +11,7 @@ require($DOCUMENT_ROOT.'/admin/admin_utils.php');
 
 session_require(array('group'=>'1','admin_flags'=>'A'));
 
-site_admin_header(array('title'=>"Alexandria: Group List"));
+site_admin_header(array('title'=>$GLOBALS['system_name'].": Group List"));
 
 // start from root if root not passed in
 if (!$form_catroot) {
@@ -19,14 +19,19 @@ if (!$form_catroot) {
 }
 
 print "<br><a href=\"groupedit-add.php\">[Add Group]</a>";
-print "<p>Alexandria Group List for Category: ";
+print "<p>".$GLOBALS['system_name']." Group List for Category: ";
 
 if ($form_catroot == 1) {
 
 	if (isset($group_name_search)) {
 		print "<b>Groups that begin with $group_name_search</b>\n";
+		// [RM] LIKE is case-sensitive, and we don't want that
+		// $res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
+		// . "FROM groups WHERE group_name LIKE '$group_name_search%' "
+		// . ($form_pending?"AND WHERE status='P' ":"")
+		// . " ORDER BY group_name");
 		$res = db_query("SELECT group_name,unix_group_name,group_id,is_public,status,license "
-			. "FROM groups WHERE group_name LIKE '$group_name_search%' "
+			. "FROM groups WHERE group_name ~* '^$group_name_search%' "
 			. ($form_pending?"AND WHERE status='P' ":"")
 			. " ORDER BY group_name");
 	} else {

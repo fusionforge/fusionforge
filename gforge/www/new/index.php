@@ -44,7 +44,7 @@ $query	= "SELECT groups.group_name,"
 $res_new = db_query($query,21,$offset);
 
 if (!$res_new || db_numrows($res_new) < 1) {
-	echo $query . "<BR><BR>";
+	// echo $query . "<BR><BR>";
 	echo db_error();
 	echo "<H1>No new releases found. </H1>";
 } else {
@@ -105,7 +105,7 @@ if (!$res_new || db_numrows($res_new) < 1) {
         if ($offset != 0) {
 		echo "<FONT face=\"Arial, Helvetica\" SIZE=3 STYLE=\"text-decoration: none\"><B>";
         	echo "<A HREF=\"/new/?offset=".($offset-20)."\"><B>" . 
-			html_image("images/t2.gif","15,"15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
+			html_image("images/t2.gif","15","15",array("BORDER"=>"0","ALIGN"=>"MIDDLE")) . 
 			" Newer Releases</A></B></FONT>";
         } else {
         	echo "&nbsp;";
