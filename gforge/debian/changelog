@@ -1,13 +1,14 @@
 sourceforge (2.5-21+) unstable; urgency=low
 
-  * 
+  * [Roland] Replaced a call to /etc/init.d/bind9 restart by a (more
+    appropriate) reload.  Used the policy-defined invoke-rc.d, too.
 
  --
 
 sourceforge (2.5-21) unstable; urgency=low
 
-  * Delete temporary LDIF files created by cronjob (closes: #127636,
-    #127641).
+  * [Roland] Delete temporary LDIF files created by cronjob (closes:
+    #127636, #127641).
 
  -- Roland Mas <lolando@debian.org>  Fri,  4 Jan 2002 11:44:30 +0100
 
