@@ -25,13 +25,13 @@ if (!$start) {
 	$start = $z[count($z)-1];
 }
 
-site_project_header(array('title'=>"Project statistics ".$groupname,'group'=>$group_id,'toptab'=>'home'));
+site_project_header(array('title'=>$Language->getText('reporting','project_activity_title').' '.$groupname,'group'=>$group_id,'toptab'=>'home'));
 
 //
 // BEGIN PAGE CONTENT CODE
 //
 ?>
-<h3>Project Activity</h3>
+<h3><?php echo $Language->getText('reporting','project_activity_title'); ?></h3>
 <p>
 <form action="<?php echo $PHP_SELF; ?>" method="get">
 <input type="hidden" name="group_id" value="<?php echo $group_id; ?>">
