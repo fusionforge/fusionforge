@@ -1519,7 +1519,7 @@ pm_include_taskhtml	no_changes	Aucun changement n'a été effectué
 pm_include_taskhtml	no_comments	Aucun commentaire n'a été ajouté
 pm_include_taskhtml	no_depend_info	Aucune tâche ne dépend de cette tâche
 pm_include_taskhtml	no_followups	Pas de commentaire
-pm_include_taskhtml	no_tracker_items	Aucun élément à suivre lié n'a été ajoutée
+pm_include_taskhtml	no_tracker_items	Aucun élément à suivre lié n'a été ajouté
 pm_include_taskhtml	old_value	Ancienne valeur
 pm_include_taskhtml	open_date	Date de début
 pm_include_taskhtml	related_items	éléments à suivre liés
@@ -2724,7 +2724,7 @@ tracker	followups	Commentaires
 tracker	group	Groupe
 tracker	group_any	Tous
 tracker	id	Numéro
-tracker	insert_email	Si vous ne parvenez pas à vous connecter, saisissez votre e-mail :
+tracker	insert_email	Si vous ne parvenez pas à vous connecter, saisissez votre e-mail&nbsp;
 tracker	item_created	Élément créé avec succès
 tracker	item_group	Groupe&nbsp;
 tracker	no_trackers	Aucun outil de suivi trouvé
