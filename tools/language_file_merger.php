@@ -25,8 +25,8 @@ if (!file_exists($baseFile) || !file_exists($targetFile)) {
 	exit;
 }
 
-$baseContent = getLanguageAsArray($baseFile);
-$targetContent = getLanguageAsArray($targetFile);
+$baseContent =& getLanguageAsArray($baseFile);
+$targetContent =& getLanguageAsArray($targetFile);
 
 reset($baseContent);
 $resultContent = array();
@@ -61,7 +61,7 @@ fclose($stderr);
 unset($targetContent);
 unset($baseContent);
 
-ksort($resultContent);
+arraySort($resultContent);
 reset($resultContent);
 
 foreach($resultContent AS $pageName => $page) {
@@ -84,7 +84,7 @@ Example:
 <?php
 }
 
-function getLanguageAsArray($languageFile) {
+function &getLanguageAsArray($languageFile) {
 	$content = file($languageFile);
 	reset($content);
 	$result = array();
@@ -108,4 +108,13 @@ function getLanguageAsArray($languageFile) {
 	}
 	return $result;
 }
+
+function &arraySort(& $array) {
+	$keys = array_keys($array);
+	for($i = 0, $count = count($keys); $i < $count; $i++) {
+		ksort($array[$keys[$i]]);
+	}
+	ksort($array);
+}
+
 ?>
