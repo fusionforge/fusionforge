@@ -229,42 +229,12 @@ class ProjectGroupHTML extends ProjectGroup {
 		</select>';
 	}
 
-
-	function showbrowseList($pt_arr){
-		global $Language;
-		global $group_id;
-		global $group_project_id;
-
-		$title_arr = array();
-		$title_arr[] = $Language->getText('pm','task_id');
-		$title_arr[] = $Language->getText('pm','summary');
-		$title_arr[] = $Language->getText('pm','start_date');
-		$title_arr[] = $Language->getText('pm','end_date');
-		$title_arr[] = $Language->getText('pm','percent_complete');
-
-
-		$rows=count($pt_arr);
-		echo $GLOBALS['HTML']->listTableTop ($title_arr);
-		$now=time();
-
-		for ( $i = 0; $i < $rows; $i++ ) {
-
-			echo '
-			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
-			'<td><a href="/pm/task.php?func=detailtask'.
-			'&amp;project_task_id='. $pt_arr[$i]->getID() .
-			'&amp;group_id='.$group_id.
-			'&amp;group_project_id='. $group_project_id .'">'.
-			$pt_arr[$i]->getID() .'</a></td>'.
-			'<td>'. $pt_arr[$i]->getSummary() .'</td>'.
-			'<td>'.date('Y-m-d', $pt_arr[$i]->getStartDate() ).'</td>'.
-			'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
-				date('Y-m-d',$pt_arr[$i]->getEndDate() ).'</td>'.
-			'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
-
+	function renderAssigneeList($assignee_ids) {
+		$techs =& user_get_objects($assignee_ids);
+		for ($i=0; $i<count($techs); $i++) {
+			$return .= $techs[$i]->getRealName().'<br />';
 		}
-
-		echo $GLOBALS['HTML']->listTableBottom();
+		return $return;
 	}
 
 }

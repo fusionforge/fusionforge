@@ -72,12 +72,12 @@ $cat_box=html_build_select_box_from_arrays ($cat_id_arr,$cat_name_arr,'_category
 /*
 	Creating a custom sort box
 */
-$title_arr=array();
-$title_arr[]=$Language->getText('pm','task_id');
-$title_arr[]=$Language->getText('pm','summary');
-$title_arr[]=$Language->getText('pm','start_date');
-$title_arr[]=$Language->getText('pm','end_date');
-$title_arr[]=$Language->getText('pm','percent_complete');
+$order_title_arr=array();
+$order_title_arr[]=$Language->getText('pm','task_id');
+$order_title_arr[]=$Language->getText('pm','summary');
+$order_title_arr[]=$Language->getText('pm','start_date');
+$order_title_arr[]=$Language->getText('pm','end_date');
+$order_title_arr[]=$Language->getText('pm','percent_complete');
 
 $order_col_arr=array();
 $order_col_arr[]='project_task_id';
@@ -85,7 +85,7 @@ $order_col_arr[]='summary';
 $order_col_arr[]='start_date';
 $order_col_arr[]='end_date';
 $order_col_arr[]='percent_complete';
-$order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order',$_order,false);
+$order_box=html_build_select_box_from_arrays ($order_col_arr,$order_title_arr,'_order',$_order,false);
 
 /*
 	Creating View array
@@ -93,11 +93,11 @@ $order_box=html_build_select_box_from_arrays ($order_col_arr,$title_arr,'_order'
 $view_arr=array();
 $view_arr[]=$Language->getText('pm','view_type_summary');
 $view_arr[]=$Language->getText('pm','view_type_detail');
-
 $order_col_arr=array();
 $view_col_arr[]='summary';
 $view_col_arr[]='detail';
 $view_box=html_build_select_box_from_arrays ($view_col_arr,$view_arr,'_view',$_view,false);
+
 /*
 	Show the new pop-up boxes to select assigned to and/or status
 */
@@ -140,6 +140,33 @@ if ($rows < 1) {
 		<input type="hidden" name="func" value="massupdate">';
 	}
 
+//this array can be customized to display whichever columns you want
+//it could be built by querying a table on a per-user basis as well
+	$display_col=array('summary'=>1,
+		'start_date'=>1,
+		'end_date'=>1,
+		'percent_complete'=>1,
+		'category'=>0,
+		'assigned_to'=>0,
+		'priority'=>0);
+
+	$title_arr=array();
+	$title_arr[]=$Language->getText('pm','task_id');
+	if ($display_col['summary'])
+		$title_arr[]=$Language->getText('pm','summary');
+	if ($display_col['start_date'])
+		$title_arr[]=$Language->getText('pm','start_date');
+	if ($display_col['end_date'])
+		$title_arr[]=$Language->getText('pm','end_date');
+	if ($display_col['percent_complete'])
+		$title_arr[]=$Language->getText('pm','percent_complete');
+	if ($display_col['category'])
+		$title_arr[]=$Language->getText('pm','category');
+	if ($display_col['assigned_to'])
+		$title_arr[]=$Language->getText('pm','assigned_to');
+	if ($display_col['priority'])
+		$title_arr[]=$Language->getText('pm','priority');
+
 	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$now=time();
@@ -147,22 +174,44 @@ if ($rows < 1) {
 	for ($i=0; $i < $rows; $i++) {
 		$url = "/pm/task.php?func=detailtask&amp;project_task_id=".$pt_arr[$i]->getID()."&amp;group_id=".$group_id."&amp;group_project_id=".$group_project_id;
 		
-		if (($_view == "summary")||($_view == "")) //show the summary view
-		{
+		echo '
+			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
+			'<td>'.
+			($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
+			$pt_arr[$i]->getID() .'"> ':'').
+			$pt_arr[$i]->getID() .'</td>';
+		if ($display_col['summary'])
+			echo '<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>';
+		if ($display_col['start_date']) 
+			echo '<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>';
+		if ($display_col['end_date']) 
+			echo '<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
+				date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>';
+		if ($display_col['percent_complete']) 
+			echo '<td>'. $pt_arr[$i]->getPercentComplete() .'%</td>';
+		if ($display_col['category']) 
+			echo '<td>'. $pt_arr[$i]->getCategoryName() .'</td>';
+		if ($display_col['assigned_to'])
+			echo '<td>'. $pg->renderAssigneeList($pt_arr[$i]->getAssignedTo()) .'</td>';
+		if ($display_col['priority'])
+			echo '<td>'. $pt_arr[$i]->getPriority() .'</td>';
+
+		echo '
+			</tr>';
+
+		if ($_view=="detail") {
 			echo '
-				<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
-				'<td>'.
-				($IS_ADMIN?'<input type="CHECKBOX" name="project_task_id_list[]" value="'.
-				$pt_arr[$i]->getID() .'"> ':'').
-				$pt_arr[$i]->getID() .'</td>'.
-				'<td><a href="'.$url.'">'.$pt_arr[$i]->getSummary() .'</a></td>'.
-				'<td>'.date($sys_datefmt, $pt_arr[$i]->getStartDate() ).'</td>'.
-				'<td>'. (($now>$pt_arr[$i]->getEndDate() )?'<strong>* ':'&nbsp; ') .
-					date($sys_datefmt, $pt_arr[$i]->getEndDate() ).'</strong></td>'.
-				'<td>'. $pt_arr[$i]->getPercentComplete() .'%</td></tr>';
+			<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">
+				<td>&nbsp;</td><td colspan="'.(count($title_arr)-1).'">'. nl2br( $pt_arr[$i]->getDetails() ) .'</td>
+			</tr>';
+
 		}
-		else if ($_view == "detail") //show the Detail view
-		{
+/*
+
+		//PLEASE MAKE THIS INTO A SEPARATE PAGE INSTEAD OF doing such a big hack to this one
+
+		//show detail view
+		} else if ($_view == "detail") {
 			echo '
 				<tr bgcolor="'.html_get_priority_color( $pt_arr[$i]->getPriority() ).'">'.
 				'<td>'.
@@ -216,7 +265,7 @@ if ($rows < 1) {
 				//
 				echo '</td></tr>';
 		}
-
+		*/
 	}
 
 	/*
