@@ -14,7 +14,7 @@
 
 Summary: GForge Collaborative Development Environment
 Name: gforge
-Version: 4.0.1
+Version: 4.0.2
 Release: %{release}
 BuildArch: noarch
 License: GPL
@@ -97,7 +97,9 @@ install -m 644 rpm-specific/conf/vhost.conf $HTTPD_CONF_DIR/conf.d/gforge.conf
 # configuring GForge
 mkdir -p $GFORGE_CONF_DIR
 install -m 600 rpm-specific/conf/gforge.conf $GFORGE_CONF_DIR/
-install -m 750 rpm-specific/scripts/refresh.sh $GFORGE_CONF_DIR/ 
+install -m 750 rpm-specific/scripts/refresh.sh $GFORGE_CONF_DIR/
+mkdir -p $GFORGE_CONF_DIR/languages-local
+cp rpm-specific/languages/*.tab $GFORGE_CONF_DIR/languages-local/
 
 # setting crontab
 mkdir -p $CROND_DIR
@@ -211,10 +213,13 @@ fi
 %attr(0775, apache, apache) %dir /var/lib/gforge/upload
 %{_datadir}/gforge
 %{_libdir}/gforge
+%{_sysconfdir}/gforge/languages-local
 /var/cache/gforge
 /var/lib/gforge/scmtarballs
 
 %changelog
+* Sat Dec 25 2004 Guillaume Smet <guillaume-gforge@smet.org>
+- it's now possible to add specific language files in the RPM
 * Fri Dec 03 2004 Dassault Aviation <guillaume.smet@openwide.fr>
 - fixed the vhost configuration
 - fixed the default crontab
