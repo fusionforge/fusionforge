@@ -67,7 +67,7 @@ for ($i=0; $i<$rows; $i++) {
 	// Yellow diagonal line pattern on a red background
 	$activity[$i]->SetPattern(BAND_RDIAG, "yellow");
 	$activity[$i]->SetFillColor ("red");
-	$activity[$i]->progress->Set( (( $pt_arr[$i]->getPercentComplete() ) ? (1/$pt_arr[$i]->getPercentComplete()) : 0));
+	$activity[$i]->progress->Set( (( $pt_arr[$i]->getPercentComplete() ) ? ($pt_arr[$i]->getPercentComplete()/100) : 0));
 	$activity[$i]->progress->SetPattern(BAND_RDIAG, "blue");
 	// Finally add the bar to the graph
 	$graph->Add( $activity[$i] );
