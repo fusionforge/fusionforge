@@ -24,6 +24,8 @@ delete from frs_package where group_id in (select group_id from groups where sta
 
 delete from project_task where group_project_id in (select group_project_id from project_group_list where group_id in (select group_id from groups where status = 'D'));
 
+delete from group_plugin where group_id in (select group_id from groups where status = 'D');
+
 delete from project_group_list where group_id in (select group_id from groups where status = 'D');
 
 delete from groups where status = 'D' ;
