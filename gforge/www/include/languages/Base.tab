@@ -1960,6 +1960,8 @@ reporting	administrative	Administrative
 reporting	area	Areas
 reporting	cumulative_users	Cumulative Users Weekly (graph)
 reporting	cumulative_users_title	Cumulative Users
+reporting	cumulative_groups	Cumulative Projects Weekly (graph)
+reporting	cumulative_groups_title	Cumulative Projects
 reporting	daily	Daily
 reporting	end	End
 reporting	feature_req	Feature Requests
@@ -2000,6 +2002,8 @@ reporting	user	User
 reporting	users	Users
 reporting	users_added_weekly	Users Added Weekly (graph)
 reporting	users_added_title	Users Added
+reporting	groups_added_weekly	Projects Added Weekly (graph)
+reporting	groups_added_title	Projects Added
 reporting	week	Week
 reporting	weekly	Weekly
 reporting_pie	title	Tool Pie Graphs

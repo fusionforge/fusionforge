@@ -102,6 +102,38 @@ function createTables() {
 	month int not null primary key,
 	total int not null default 0);";
 
+//added groups
+	$sql[]="DROP TABLE rep_groups_added_daily;";
+	$sql[]="CREATE TABLE rep_groups_added_daily (
+	day int not null primary key,
+	added int not null default 0);";
+
+	$sql[]="DROP TABLE rep_groups_added_weekly";
+	$sql[]="CREATE TABLE rep_groups_added_weekly (
+	week int not null primary key,
+	added int not null default 0);";
+
+	$sql[]="DROP TABLE rep_groups_added_monthly";
+	$sql[]="CREATE TABLE rep_groups_added_monthly (
+	month int not null primary key,
+	added int not null default 0);";
+
+//cumulative groups
+	$sql[]="DROP TABLE rep_groups_cum_daily";
+	$sql[]="CREATE TABLE rep_groups_cum_daily (
+	day int not null primary key,
+	total int not null default 0);";
+
+	$sql[]="DROP TABLE rep_groups_cum_weekly";
+	$sql[]="CREATE TABLE rep_groups_cum_weekly (
+	week int not null primary key,
+	total int not null default 0);";
+
+	$sql[]="DROP TABLE rep_groups_cum_monthly";
+	$sql[]="CREATE TABLE rep_groups_cum_monthly (
+	month int not null primary key,
+	total int not null default 0);";
+
 //per-user activity
 	$sql[]="DROP TABLE rep_user_act_daily";
 	$sql[]="CREATE TABLE rep_user_act_daily (
@@ -303,6 +335,24 @@ function initialData() {
 	if (!$this->backfill_users_cum_monthly()) {
 		return false;
 	}
+	if (!$this->backfill_groups_added_daily()) {
+		return false;
+	}
+	if (!$this->backfill_groups_added_weekly()) {
+		return false;
+	}
+	if (!$this->backfill_groups_added_monthly()) {
+		return false;
+	}
+	if (!$this->backfill_groups_cum_daily()) {
+		return false;
+	}
+	if (!$this->backfill_groups_cum_weekly()) {
+		return false;
+	}
+	if (!$this->backfill_groups_cum_monthly()) {
+		return false;
+	}
 	if (!$this->backfill_user_act_daily()) {
 		return false;
 	}
@@ -408,6 +458,49 @@ function backfill_users_added_daily($count=10000) {
 }
 
 /**
+ *	Add a row to the groups_added_daily report table.
+ *
+ *	@param	int	Day - the unix time of the beginning of the day.
+ *	@return	boolean	Success.
+ */
+function groups_added_daily($day) {
+	db_query("DELETE FROM rep_groups_added_daily WHERE day='$day'");
+
+	$sql="INSERT INTO rep_groups_added_daily (day,added) 
+		VALUES ('$day',(SELECT count(*) FROM groups WHERE status='A' AND register_time 
+		BETWEEN '$day' AND '". ($day + REPORT_DAY_SPAN - 1) ."' ))";
+	return db_query($sql);
+}
+
+/**
+ *	Populate the groups_added_daily report table.
+ *
+ *	@return	boolean	Success.
+ */
+function backfill_groups_added_daily($count=10000) {
+	$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
+	if (!$start_date=$this->getMinDate()) {
+		$this->setError('backfill_groups_added_daily:: Could Not Get Start Date');
+		return false;
+	}
+	while (true) {
+		$day=($today-($i*REPORT_DAY_SPAN));
+		if (!$this->groups_added_daily($day)) {
+			$this->setError('backfill_groups_added_daily:: Error adding daily row: '.db_error());
+			return false;
+		}
+		if ($day < $start_date) {
+			break;
+		}
+		$i++;
+		if ($i >= $count) {
+			break;
+		}
+	}
+	return true;
+}
+
+/**
  *  Add a row to the users_added_weekly report table.
  *
  *  @param  int Week - the unix time of the beginning of the sunday for this week.
@@ -434,6 +527,42 @@ function backfill_users_added_weekly($count=10000) {
 	for ($i=0; $i<count($arr); $i++) {
 		if (!$this->users_added_weekly($arr[$i])) {
 			$this->setError('backfill_users_added_weekly:: Error adding weekly row: '.db_error());
+			return false;
+		}
+		if ($i >= $count) {
+			break;
+		}
+	}
+	return true;
+}
+
+/**
+ *  Add a row to the groups_added_weekly report table.
+ *
+ *  @param  int Week - the unix time of the beginning of the sunday for this week.
+ *  @return boolean Success.
+ */
+function groups_added_weekly($week) {
+	db_query("DELETE FROM rep_groups_added_weekly WHERE week='$week'");
+
+	$sql="INSERT INTO rep_groups_added_weekly (week,added)
+		VALUES ('$week',(SELECT count(*) FROM groups WHERE status='A' AND register_time
+		BETWEEN '$week' AND '". ($week+REPORT_WEEK_SPAN-1) ."' ))";
+	return db_query($sql);
+}
+
+/**
+ *  Populate the users_added_weekly report table.
+ *
+ *  @return boolean Success.
+ */
+function backfill_groups_added_weekly($count=10000) {
+
+	$arr =& $this->getWeekStartArr();
+
+	for ($i=0; $i<count($arr); $i++) {
+		if (!$this->groups_added_weekly($arr[$i])) {
+			$this->setError('backfill_groups_added_weekly:: Error adding weekly row: '.db_error());
 			return false;
 		}
 		if ($i >= $count) {
@@ -472,6 +601,44 @@ function backfill_users_added_monthly($count=10000) {
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->users_added_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_users_added_monthly:: Error adding monthly row: '.db_error());
+			return false;
+		}
+		if ($i >= $count) {
+			break;
+		}
+	}
+	return true;
+}
+
+/**
+ *  Add a row to the groups_added_monthly report table.
+ *
+ *  @param  int month_start - the unix time of the beginning of the month.
+ *  @param  int month_end - the unix time of the end of the month.
+ *  @return boolean Success.
+ */
+function groups_added_monthly($month,$end) {
+	db_query("DELETE FROM rep_groups_added_monthly WHERE month='$month'");
+
+	$sql="INSERT INTO rep_groups_added_monthly (month,added)
+		VALUES ('$month',(SELECT count(*) FROM groups WHERE status='A' AND register_time
+		BETWEEN '$month' AND '$end' ))";
+	return db_query($sql);
+}
+
+/**
+ *  Populate the groups_added_monthly report table.
+ *
+ *  @return boolean Success.
+ */
+function backfill_groups_added_monthly($count=10000) {
+
+	$arr =& $this->getMonthStartArr();
+
+//skipping first one
+	for ($i=1; $i<count($arr); $i++) {
+		if (!$this->groups_added_monthly($arr[$i],($arr[$i-1]-1))) {
+			$this->setError('backfill_groups_added_monthly:: Error adding monthly row: '.db_error());
 			return false;
 		}
 		if ($i >= $count) {
@@ -529,6 +696,49 @@ function backfill_users_cum_daily($count=10000) {
 }
 
 /**
+ *	Add a row to the groups_cum_daily report table.
+ *
+ *	@param	int	Day - the unix time of the beginning of the day.
+ *	@return	boolean	Success.
+ */
+function groups_cum_daily($day) {
+	db_query("DELETE FROM rep_groups_cum_daily WHERE day='$day'");
+
+	$sql="INSERT INTO rep_groups_cum_daily (day,total) 
+		VALUES ('$day',(SELECT count(*) FROM groups WHERE status='A' AND register_time 
+		BETWEEN '0' AND '$day'))";
+	return db_query($sql);
+}
+
+/**
+ *	Populate the groups_cum_daily report table.
+ *
+ *	@return	boolean	Success.
+ */
+function backfill_groups_cum_daily($count=10000) {
+	$today=mktime(0,0,0,date('m'),date('d')-1,date('Y'));
+	if (!$start_date=$this->getMinDate()) {
+		$this->setError('backfill_groups_cum_daily:: Could Not Get Start Date');
+		return false;
+	}
+	while (true) {
+		$day=$today-($i*REPORT_DAY_SPAN);
+		if (!$this->groups_cum_daily($day)) {
+			$this->setError('backfill_groups_cum_daily:: Error adding daily row: '.db_error());
+			return false;
+		}
+		if ($day < $start_date) {
+			break;
+		}
+		$i++;
+		if ($i >= $count) {
+			break;
+		}
+	}
+	return true;
+}
+
+/**
  *  Add a row to the users_cum_weekly report table.
  *
  *  @param  int Week - the unix time of the beginning of the sunday for this week.
@@ -553,8 +763,44 @@ function backfill_users_cum_weekly($count=10000) {
 	$arr =& $this->getWeekStartArr();
 
 	for ($i=0; $i<count($arr); $i++) {
-		if (!$this->users_cum_weekly($arr[$i])) {
+		if (!$this->groups_cum_weekly($arr[$i])) {
 			$this->setError('backfill_users_cum_weekly:: Error adding weekly row: '.db_error());
+			return false;
+		}
+		if ($i >= $count) {
+			break;
+		}
+	}
+	return true;
+}
+
+/**
+ *  Add a row to the groups_cum_weekly report table.
+ *
+ *  @param  int Week - the unix time of the beginning of the sunday for this week.
+ *  @return boolean Success.
+ */
+function groups_cum_weekly($week) {
+	db_query("DELETE FROM rep_groups_cum_weekly WHERE week='$week'");
+
+	$sql="INSERT INTO rep_groups_cum_weekly (week,total)
+		VALUES ('$week',(SELECT count(*) FROM groups WHERE status='A' AND register_time
+		BETWEEN '0' AND '". ($week+REPORT_WEEK_SPAN-1 ). "'))";
+	return db_query($sql);
+}
+
+/**
+ *  Populate the groups_cum_weekly report table.
+ *
+ *  @return boolean Success.
+ */
+function backfill_groups_cum_weekly($count=10000) {
+
+	$arr =& $this->getWeekStartArr();
+
+	for ($i=0; $i<count($arr); $i++) {
+		if (!$this->users_cum_weekly($arr[$i])) {
+			$this->setError('backfill_groups_cum_weekly:: Error adding weekly row: '.db_error());
 			return false;
 		}
 		if ($i >= $count) {
@@ -593,6 +839,44 @@ function backfill_users_cum_monthly($count=10000) {
 	for ($i=1; $i<count($arr); $i++) {
 		if (!$this->users_cum_monthly($arr[$i],($arr[$i-1]-1))) {
 			$this->setError('backfill_users_cum_monthly:: Error adding monthly row: '.db_error());
+			return false;
+		}
+		if ($i >= $count) {
+			break;
+		}
+	}
+	return true;
+}
+
+/**
+ *  Add a row to the groups_cum_monthly report table.
+ *
+ *  @param  int month_start - the unix time of the beginning of the month.
+ *  @param  int month_end - the unix time of the end of the month.
+ *  @return boolean Success.
+ */
+function groups_cum_monthly($month,$end) {
+	db_query("DELETE FROM rep_groups_cum_monthly WHERE month='$month'");
+
+	$sql="INSERT INTO rep_groups_cum_monthly (month,total)
+		VALUES ('$month',(SELECT count(*) FROM groups WHERE status='A' AND register_time
+		BETWEEN '0' AND '$end'))";
+	return db_query($sql);
+}
+
+/**
+ *  Populate the groups_cum_monthly report table.
+ *
+ *  @return boolean Success.
+ */
+function backfill_groups_cum_monthly($count=10000) {
+
+	$arr =& $this->getMonthStartArr();
+
+//skip first one
+	for ($i=1; $i<count($arr); $i++) {
+		if (!$this->groups_cum_monthly($arr[$i],($arr[$i-1]-1))) {
+			$this->setError('backfill_groups_cum_monthly:: Error adding monthly row: '.db_error());
 			return false;
 		}
 		if ($i >= $count) {

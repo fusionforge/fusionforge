@@ -43,6 +43,8 @@ echo report_header('Main Page');
 <p>
 <h3><?php echo $Language->getText('reporting','projects'); ?></h3>
 <p>
+<a href="groupadded.php?SPAN=1"><?php echo $Language->getText('reporting','groups_added_weekly'); ?></a><br />
+<a href="groupcum.php?SPAN=1"><?php echo $Language->getText('reporting','cumulative_groups'); ?></a><br />
 <?php echo $Language->getText('reporting','project_specific'); ?><br />
 <a href="projectact.php"><?php echo $Language->getText('reporting','project_activity'); ?></a><br />
 <p>

@@ -1976,6 +1976,8 @@ reporting	administrative	Administration
 reporting	area	Outil
 reporting	cumulative_users	Utilisateurs cumulés (graphique)
 reporting	cumulative_users_title	Utilisateurs cumulés
+reporting	cumulative_groups	Projets cumulés (graphique)
+reporting	cumulative_groups_title	Projets cumulés
 reporting	daily	Quotidien
 reporting	end	Fin
 reporting	feature_req	Demandes de fonctionnalités
@@ -2016,6 +2018,8 @@ reporting	user_activity_title	Activité d'un utilisateur
 reporting	users	Utilisateurs
 reporting	users_added_title	Utilisateurs ajoutés
 reporting	users_added_weekly	Utilisateurs ajoutés (graphique)
+reporting	groups_added_title	Projets ajoutés
+reporting	groups_added_weekly	Projets ajoutés (graphique)
 reporting	week	Semaine
 reporting	weekly	Hebdomadaire
 reporting_pie	end	Fin
