@@ -12,6 +12,25 @@
 
 	php_admin_value default_charset "UTF-8"
 
+	<Directory {usr_share_gforge}/www>
+		Include   {gforge_etc}/httpd.secrets
+	</Directory>
+
+	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/lib/gforge/plugins/$1/cgi-bin/$2
+
+	# Projects and Users script
+	<Location /projects>
+		ForceType application/x-httpd-php
+	</Location>
+	<Location /users>
+		ForceType application/x-httpd-php
+	</Location>
+
+	# 404 Error document
+	ErrorDocument 404 /404.php
+	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+
 	<IfModule mod_ssl.c>
 		SSLEngine on
 		SSLCertificateFile /etc/apache/ssl.crt/server.crt
@@ -29,28 +48,5 @@
 		SSLEnable
 		SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
 	</IfModule>
-
-	<Directory {usr_share_gforge}/www>
-		Include   {gforge_etc}/httpd.secrets
-	</Directory>
-
-	# Projects and Users script
-	<Location /projects>
-		ForceType application/x-httpd-php
-	</Location>
-	<Location /users>
-		ForceType application/x-httpd-php
-	</Location>
-
-	# This for cgi not on vhosts
-	ScriptAlias /cgi-bin/ {cgidir}/
-
-	# For cvsweb icons and css
-	Alias /cvsweb/ /usr/share/cvsweb/
-
-	# 404 Error document
-	ErrorDocument 404 /404.php
-	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
 </VirtualHost>
 

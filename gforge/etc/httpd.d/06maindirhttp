@@ -18,7 +18,20 @@
 
 	ScriptAliasMatch ^/plugins/([^/]*)/cgi-bin/(.*) /usr/lib/gforge/plugins/$1/cgi-bin/$2
 
-	# Debian Sourceforge without the DNS delegation
+	# Projects and Users script
+	<Location /projects>
+		ForceType application/x-httpd-php
+	</Location>
+	<Location /users>
+		ForceType application/x-httpd-php
+	</Location>
+
+	# 404 Error document
+	ErrorDocument 404 /404.php
+	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
+
+	# GForge without the DNS delegation
 	# Project home pages are in a virtual /www/<group> location
 	AliasMatch ^/www/([^/]*)/(.*) {gforge_chroot}{groupdir}/$1/htdocs/$2
 	ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) {gforge_chroot}{groupdir}/$1/cgi-bin/$2
@@ -29,24 +42,6 @@
 		allow from all
 	</Directory>
 
-	# Projects and Users script
-	<Location /projects>
-		ForceType application/x-httpd-php
-	</Location>
-	<Location /users>
-		ForceType application/x-httpd-php
-	</Location>
-
-	# This for cgi not on vhosts
-	ScriptAlias /cgi-bin/ {cgidir}/
-
-	# For cvsweb icons and css
-	Alias /cvsweb/ /usr/share/cvsweb/
-
-	# 404 Error document
-	ErrorDocument 404 /404.php
-	LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
-	CustomLog "|{cronolog_path} {var_log_gforge}/%Y/%m/%d/gforge.log" gforge
 	# Ensure that we don't try to use SSL on SSL Servers
 	<IfModule apache_ssl.c>
 		SSLDisable
