@@ -16,8 +16,8 @@
  * @param		string	Error text
  */
 function exit_error($title,$text) {
-	GLOBAL $HTML,$group_id;
-	$HTML->header(array('title'=>'Exiting with Error','group'=>$group_id));
+	GLOBAL $HTML,$group_id, $Language;
+	$HTML->header(array('title'=>$Language->getText('exit','exiting_with_error'),'group'=>$group_id));
 	print '<h2><span style="color:#FF3333">'.$title.'</span></h2><p>'.$text .'</p>';
 	$HTML->footer(array());
 	exit;
@@ -48,14 +48,16 @@ function exit_not_logged_in() {
  * exit_no_group() - Exit with no group chosen error
  */
 function exit_no_group() {
-	exit_error('Error - Choose a Group','ERROR - No group_id was chosen.');
+	global $Language;
+	exit_error($Language->getText('exit','choose_group_title'),$Language->getText('exit','choose_group_body'));
 }
 
 /**
  * exit_missing_param() - Exit with missing required parameters error
  */
 function exit_missing_param() {
-	exit_error('Error - Missing parameters','ERROR - Missing required parameters.');
+	global $Language;
+	exit_error($Language->getText('exit','missing_parameters_title'),$Language->getText('exit','missing_parameters_body'));
 }
 
 /**

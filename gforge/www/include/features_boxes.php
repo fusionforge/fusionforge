@@ -24,6 +24,7 @@ function show_features_boxes() {
 
 function show_top_downloads() {
 
+	global $Language;
 	// TODO yesterday is now defined as two days ago.  Quick fix
 	//      to allow download list to be cached before nightly
 	//      aggregation is done. jbyers 2001.03.19
@@ -44,7 +45,7 @@ function show_top_downloads() {
 //	echo db_error();
 
 	if (db_numrows($res_topdown) == 0) {
-		return 'No Stats Available';
+		return $Language->getText('home','no_stats_available');
 	}
 	// print each one
 	while ($row_topdown = db_fetch_array($res_topdown)) {
@@ -52,7 +53,7 @@ function show_top_downloads() {
 			$return .= "(" . number_format($row_topdown[downloads], 0) . ") <a href=\"/projects/$row_topdown[unix_group_name]/\">"
 			. "$row_topdown[group_name]</a><br />\n";
 	}
-	$return .= '<div align="center"><a href="/top/">[ More ]</a></div>';
+	$return .= '<div align="center"><a href="/top/">[ '.$Language->getText('general','more').' ]</a></div>';
 
 	return $return;
 
@@ -120,19 +121,21 @@ function stats_downloads_total() {
 }
 
 function show_sitestats() {
-	$return .= 'Hosted Projects: <strong>'.number_format(stats_getprojects_active()).'</strong>';
-	$return .= '<br />Registered Users: <strong>'.number_format(stats_getusers()).'</strong>';
+	global $Language;
+	$return .= $Language->getText('home','hosted_projects').': <strong>'.number_format(stats_getprojects_active()).'</strong>';
+	$return .= '<br />'.$Language->getText('home','registered_users').': <strong>'.number_format(stats_getusers()).'</strong>';
 	return $return;
 }
 
 function show_newest_projects() {
+	global $Language;
 	$sql =	"SELECT group_id,unix_group_name,group_name,register_time FROM groups " .
 		"WHERE is_public=1 AND status='A' AND type=1 " .
 		"ORDER BY register_time DESC";
 	$res_newproj = db_query($sql,10);
 
 	if (!$res_newproj || db_numrows($res_newproj) < 1) {
-		return "No Stats".db_error();
+		return $Language->getText('home','no_stats_available')." ".db_error();
 	} else {
 		while ( $row_newproj = db_fetch_array($res_newproj) ) {
 			if ( $row_newproj['register_time'] ) {
@@ -146,7 +149,7 @@ function show_newest_projects() {
 }
 
 function show_highest_ranked_users() {
-
+	global $Language;
 	//select out the users information to show the top users on the site
 	$sql="SELECT users.user_name,users.realname,user_metric.metric
 		FROM user_metric,users
@@ -155,17 +158,18 @@ function show_highest_ranked_users() {
 	$res=db_query($sql);
 	$rows=db_numrows($res);
 	if (!$res || $rows<1) {
-		return 'None Found. '.db_error();
+		return  $Language->getText('home','none_found').db_error();
 	} else {
 		for ($i=0; $i<$rows; $i++) {
 			$return .= ($i+1).' - ('. number_format(db_result($res,$i,'metric'),4) .') <a href="/users/'. db_result($res,$i,'user_name') .'">'. db_result($res,$i,'realname') .'</a><br />';
 		}
 	}
-	$return .= '<div align="center"><a href="/top/topusers.php">[ More ]</a></div>';
+	$return .= '<div align="center"><a href="/top/topusers.php">[  '.$Language->getText('general','more').' ]</a></div>';
 	return $return;
 }
 
 function show_highest_ranked_projects() {
+	global $Language;
 	$sql="SELECT groups.group_name,groups.unix_group_name,groups.group_id,".
 		"project_weekly_metric.ranking,project_weekly_metric.percentile ".
 		"FROM groups,project_weekly_metric ".
@@ -175,14 +179,14 @@ function show_highest_ranked_projects() {
 		"ORDER BY ranking ASC";
 	$result=db_query($sql,20);
 	if (!$result || db_numrows($result) < 1) {
-		return "No Stats".db_error();
+		return $Language->getText('home','no_stats_available')." ".db_error();
 	} else {
 		while ($row=db_fetch_array($result)) {
 			$return .= '<strong>( '.$row['percentile'].'% )</strong>'
 				.' <a href="/projects/'.$row['unix_group_name'].
 			'/">'.$row['group_name'].'</a><br />';
 		}
-		$return .= '<div align="center"><a href="/top/mostactive.php?type=week">[ More ]</a></div>';
+		$return .= '<div align="center"><a href="/top/mostactive.php?type=week">[ '.$Language->getText('general','more').' ]</a></div>';
 	}
 	return $return;
 }
