@@ -24,7 +24,7 @@ require_once('pre.php');
 //
 if ($return_to) {
 	$tmpreturn=explode('?',$return_to);
-	if (!is_file($sys_urlroot.$tmpreturn[0]) && !is_dir($sys_urlroot.$tmpreturn[0])) {
+	if (!@is_file($sys_urlroot.$tmpreturn[0]) && !@is_dir($sys_urlroot.$tmpreturn[0]) && !(strpos($tmpreturn[0],'projects') == 1)) {
 		$return_to='';
 	}
 }
