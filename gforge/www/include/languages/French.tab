@@ -2581,8 +2581,8 @@ system	shortdatefmt	d/m/Y
 system	strftimefmt	%e %B %Y %H:%M
 themes	section	Préférences de votre compte
 themes	title	Changer de thème
-top	NA	Pas disponible
-top	about_blurb	Diverses statistiques d'utilisations sont collectées sur Sourceforge.  Les projets les mieux classés dans certaines catégories sont affichées ici.
+top	NA	Non disponible
+top	about_blurb	Diverses statistiques d'utilisations sont collectées sur $1.  Les projets les mieux classés dans certaines catégories sont affichées ici.
 top	active_all_time	Les plus actifs de tous les temps
 top	active_weekly	Les plus actifs cette semaine
 top	down	Descend $1
@@ -2606,7 +2606,7 @@ top_mostactive	updated_daily	Mis à jour quotidiennement
 top_toplist	change	Changement
 top_toplist	download	Téléchargement
 top_toplist	last_rank	Dernier rang
-top_toplist	pageviews	Nombre de page vue
+top_toplist	pageviews	Nombre de pages vues
 top_toplist	posts	Messages
 top_toplist	project_name	Nom du projet
 top_toplist	rank	Rang
