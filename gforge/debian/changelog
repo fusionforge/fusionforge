@@ -1,8 +1,9 @@
-gforge (3.1-4+) unstable; urgency=low
+gforge (3.1-4+1) unstable; urgency=low
 
-  * 
+  * [Roland] Tightened the versioned dependency on Apache so that we can
+    rely on modules-config (closes: #220872).
 
- -- Roland Mas <lolando@debian.org>  Thu, 13 Nov 2003 23:58:37 +0100
+ -- Roland Mas <lolando@debian.org>  Sat, 15 Nov 2003 17:49:12 +0100
 
 gforge (3.1-4) unstable; urgency=low
 
