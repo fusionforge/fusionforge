@@ -164,6 +164,7 @@ $sys_project_reg_restricted=true;
 //
 $homedir_prefix="/home";
 $groupdir_prefix="/home/groups";
+$sys_chroot="";
 
 //
 // File Upload Configuration
