@@ -130,12 +130,6 @@ function vote_show_release_radios ($vote_on_id,$flag) {
 function show_survey ($group_id,$survey_id) {
   global $Language;
 
-?>
-<form action="/survey/survey_resp.php" method="post">
-<input type="hidden" name="group_id" value="<?php echo $group_id; ?>" />
-<input type="hidden" name="survey_id" value="<?php echo $survey_id; ?>" />
-<?php
-
 /*
 	Select this survey from the database
 */
@@ -146,7 +140,11 @@ $result=db_query($sql);
 
 if (db_numrows($result) > 0) {
 	echo '
-		<h3>'.db_result($result, 0, 'survey_title').'</h3>';
+		<h3>'.db_result($result, 0, 'survey_title').'</h3>
+		<form action="/survey/survey_resp.php" method="post">
+		<input type="hidden" name="group_id" value="'.$group_id.'" />
+		<input type="hidden" name="survey_id" value="'.$survey_id.'" />';
+
 	/*
 		Select the questions for this survey
 	*/
@@ -278,7 +276,7 @@ if (db_numrows($result) > 0) {
 	<?php
 
 } else {
-	echo "<strong>".$Language->getText('survey','survey_not_found')."</strong></form>";
+	echo "<strong>".$Language->getText('survey','survey_not_found')."</strong>";
 }
 
 }
