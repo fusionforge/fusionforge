@@ -34,8 +34,8 @@ Package: gforge-web-apache
 Architecture: all
 Depends: gforge-common, gforge-db-postgresql | gforge-db | sourceforge-db-postgresql | sourceforge-db , apache (>= 1.3.9) | apache-ssl (>= 1.3.9), libapache-mod-ssl | apache-ssl, php4, php4-cgi, php4-pgsql, php4-gd, php4-ldap, php4-mcrypt, libmcrypt4 (>=2.4.22-2), perl, perl-suid, libdbi-perl, libdbd-pg-perl, debianutils (>= 1.7), debconf (>= 0.5.00), slapd (>= 2.0.23-3), cronolog
 Replaces: sourceforge-web-apache (>> 2.6-0+11)
-Provides: gforge-web,sourceforge-web
-Conflicts: gforge-web,sourceforge-web
+Provides: gforge-web
+Conflicts: gforge-web
 Description: Collaborative development tool - web part (using Apache)
  GForge provides many tools to help collaboration in a
  development project, such as bug-tracking, task management,
