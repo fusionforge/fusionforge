@@ -146,20 +146,21 @@ echo license_selectbox('license',$license);
 	if ($sys_use_scm) {
 		$scm_plugins=$SCMFactory->getSCMs();
 		if(count($scm_plugins)!=0) {	
-			echo $Language->getText('register','choose_scm');
+			echo $Language->getText('register','choose_scm')."\n";
 			if(count($scm_plugins)==1) {
 				echo $Language->getText('register','one_scm',$scm_plugins[0]).'<br /><br />';
-				echo '<input type=\'hidden\' name=\'scm\' value=\''. $scm_plugins[0].'\'/>';
+				echo '<input type="hidden" name="scm" value="'. $scm_plugins[0].'">';
 			} else {
 				$checked=true;
 				foreach($scm_plugins as $scm) {
 					$myPlugin= plugin_get_object($scm);
-					echo '<p><input type=\'radio\' name=\'scm\' ';
+					echo '<p><input type="radio" name="scm" ';
 					if ($checked) {
 						echo 'CHECKED ';
+						$checked=false;
 					}
-					echo 'value='.$myPlugin->name;
-					echo '>'.$myPlugin->text.'</input></p>';
+					echo 'value="'.$myPlugin->name;
+					echo '">'.$myPlugin->text.'</p>';
 					$checked=false;
 				}
 			}
