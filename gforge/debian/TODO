@@ -2,6 +2,8 @@ This is a TODO list for the packaging.  Some items that used to be
 here have been transferred onto the Savannah project, at
 <http://savannah.gnu.org/support/?group_id=259>.
 
+* [CB] Add the possibility to handle sourceforge.conf with debconf
+
 * [CB] Using ldap2dns
 
 * [CB] Make /stats/ work.  [RM] It seems the tables don't get filled
