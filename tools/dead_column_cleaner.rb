@@ -1,5 +1,15 @@
 #!/usr/local/bin/ruby
 
+# This is a utility to delete the "dead" columns
+# from various tables in GForge.  When run,
+# it queries all the tables in the database, checks
+# all their columns, and deletes the columns that 
+# start with the word "dead".  Then it runs vacuumdb
+# to reclaim the space.
+#
+# Usage: ./dead_column_cleaner.rb
+# 
+
 USER_STR = "-U gforge gforge"
 
 tables = []
