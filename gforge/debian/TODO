@@ -15,9 +15,6 @@ here have been transferred onto the Savannah project, at
   was thinking. It may be possible to make the dns server to use directly
   postgres-db or ldap (Look at sdb driver /usr/share/doc/bind9-doc/misc/sdb.gz )
 
-* [CB] Repair /admin/editpackages.php (Create FTP_INCOMING in
-  /var/lib/sourceforge/ftp)  [RM] Is this still current? [CB] You can remove
-
 * [CB] language_code is missing in language table.  [RM] Probably a
   matter of data.  Has to wait for smooth DB upgrade. [CB] Will be added in 2.6
 
@@ -38,9 +35,6 @@ here have been transferred onto the Savannah project, at
   cvs config. We should contact cvs packager for a sourceforge-friendly install
   cvs install breaks sourceforge cvs replacement.
 
-* [RM] Split CVS-related part from install-dns.sh into an
-  install-cvs.sh script. [CB] Done
-
 * [RM] Split DB-related part from sourceforge.postinst into an
   install-db.sh script.
 
@@ -50,6 +44,9 @@ here have been transferred onto the Savannah project, at
 
 * [RM] Provide a way to un-release a file, and (why not?) to modify a
   released file afterwards.  Maybe.
+
+* [RM] Fix the QRS so that it does not create a new release by the
+  same name if it already exists.
 
 # Local variables:
 # mode: indented-text
