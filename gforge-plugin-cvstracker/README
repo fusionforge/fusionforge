@@ -37,6 +37,27 @@ $ dpkg-buildpackage -us -uc -rfakeroot
 1.2 Other Packaging System
 
 At the moment we're working on doing a script to automatically install it.
+General instructions:
+
+1.2.1 Install the database
+	You'll find this file within this package. Just run it without parameters.
+        /usr/lib/gforge/plugins/cvstracker/bin/db-upgrade.pl
+
+1.2.2 Register the plugin
+	You'll find the script register-plugin with your current Gforge installation. 
+Use it in the following way.
+        /usr/lib/gforge/bin/register-plugin cvstracker "cvstracker"
+
+1.2.3 Install the cron file
+   	You should install a cron file in /etc/cron.d/gforge-plugin-cvstracker like this:
+
+   35 1 * * * root [ -x /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php ] && /usr/lib/gforge/plugins/cvstracker/bin/update_loginfo.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include
+
+1.2.4 Configure the plugin
+
+	You should fill in the cvstracker.conf.tmpl template with apropiate values and put the file in:
+	/etc/gforge/plugins/cvstracker/cvstracker.conf
+
 
 2. Description
 --------------
