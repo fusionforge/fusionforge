@@ -530,7 +530,7 @@ function sf_ldap_check_group($group_id) {
 
 	global $sys_use_ldap;
 	if (!$sys_use_ldap) {
-		return true;
+		return false;
 	}
 
 	$group = &group_get_object($group_id);
