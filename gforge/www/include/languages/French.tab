@@ -1473,7 +1473,7 @@ pm_ganttpage	resolution	précision
 pm_ganttpage	size	Taille
 pm_ganttpage	sort_on	Trier par
 pm_ganttpage	weeks	Semaines
-pm_include_grouphtml	add_task	Ajouter des tâches
+pm_include_grouphtml	add_task	Ajouter une tâche
 pm_include_grouphtml	admin	Administration
 pm_include_grouphtml	browse_task	Afficher les tâches
 pm_include_grouphtml	error_disabled	Ce projet a désactivité le gestionnaire de tâche.
