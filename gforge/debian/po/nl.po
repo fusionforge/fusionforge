@@ -14,7 +14,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
-"POT-Creation-Date: 2004-03-02 11:21+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-11-07 19:22+0100\n"
 "PO-Revision-Date: 2004-11-01 15:16+0100\n"
 "Last-Translator: Bart Cornelis <cobaco@linux.be>\n"
 "Language-Team: debian-l10n-dutch <debian-l10n-dutch@lists.debian.org>\n"
@@ -25,6 +26,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:9
 #: ../dsf-helper/shellhost-variables.templates:3
 msgid "Your shell server"
@@ -33,6 +35,7 @@ msgstr "Uw shell-server"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:9
 #: ../dsf-helper/shellhost-variables.templates:3
 msgid "The hostname of the server that will host your Gforge shell accounts"
@@ -42,6 +45,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:18
 #: ../dsf-helper/downloadhost-variables.templates:3
 msgid "Your download server"
@@ -50,6 +54,7 @@ msgstr "Uw downloadserver"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:18
 msgid ""
 "The hostname of the server that will host your Gforge packages.  It should "
@@ -61,6 +66,7 @@ msgstr ""
 #  Type: string
 #  Default
 #. Type: string
+#. Default
 #: ../gforge-db-postgresql.templates.dsfh-in:26
 #: ../gforge-dns-bind9.templates.dsfh-in:23
 msgid "admin"
@@ -69,6 +75,7 @@ msgstr "admin"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:27
 #: ../gforge-dns-bind9.templates.dsfh-in:24
 msgid "The Gforge administrator login"
@@ -77,6 +84,7 @@ msgstr "Gebruikersnaam Gforge-beheerder"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:27
 #: ../gforge-dns-bind9.templates.dsfh-in:24
 msgid ""
@@ -89,6 +97,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:33
 #: ../dsf-helper/host-variables.templates:3
 msgid "Your IP address"
@@ -97,6 +106,7 @@ msgstr "Uw IP-adres"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:33
 #: ../dsf-helper/host-variables.templates:3
 msgid ""
@@ -109,6 +119,7 @@ msgstr ""
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:39
 #: ../gforge-dns-bind9.templates.dsfh-in:30
 msgid "The Gforge administrator password"
@@ -117,6 +128,7 @@ msgstr "Wachtwoord van de Gforge-beheerder"
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:39
 #: ../gforge-dns-bind9.templates.dsfh-in:30
 msgid ""
@@ -130,6 +142,7 @@ msgstr ""
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:46
 #: ../gforge-dns-bind9.templates.dsfh-in:37
 msgid "The Gforge administrator password - again"
@@ -138,6 +151,7 @@ msgstr "Wachtwoord van de Gforge-beheerder (nogmaals)"
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:46
 #: ../gforge-dns-bind9.templates.dsfh-in:80
 #: ../dsf-helper/dbpasswd-variables.templates:9
@@ -148,6 +162,7 @@ msgstr "Ter bevestiging dient het wachtwoord nogmaals ingevoerd te worden."
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:52
 #: ../gforge-dns-bind9.templates.dsfh-in:43
 msgid "The initial list of skills"
@@ -156,6 +171,7 @@ msgstr "Initiële lijst met vaardigheden"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-db-postgresql.templates.dsfh-in:52
 #: ../gforge-dns-bind9.templates.dsfh-in:43
 msgid ""
@@ -173,6 +189,7 @@ msgstr ""
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:12
 #: ../dsf-helper/dbpasswd-variables.templates:3
 msgid "Password used for the database"
@@ -181,6 +198,7 @@ msgstr "Databasewachtwoord"
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:12
 msgid ""
 "The connection to the DB system requires a password.  Please choose a "
@@ -192,6 +210,7 @@ msgstr ""
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:18
 #: ../dsf-helper/dbpasswd-variables.templates:9
 msgid "Password used for the database - again"
@@ -200,6 +219,7 @@ msgstr "Wachtwoord voor de database (nogmaals)"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:51
 #: ../dsf-helper/ldap-variables.templates:3
 msgid "The LDAP base DN"
@@ -208,6 +228,7 @@ msgstr "De LDAP-basis DN"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:51
 #: ../dsf-helper/ldap-variables.templates:3
 msgid ""
@@ -220,6 +241,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:57
 #: ../dsf-helper/ldap-variables.templates:9
 msgid "The LDAP host"
@@ -228,6 +250,7 @@ msgstr "LDAP-computernaam"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:57
 #: ../dsf-helper/ldap-variables.templates:9
 msgid "The hostname of the LDAP server."
@@ -236,6 +259,7 @@ msgstr "De computernaam van de LDAP-server."
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
 #: ../gforge-mta-exim.templates.dsfh-in:9
 #: ../gforge-mta-postfix.templates.dsfh-in:9
@@ -245,6 +269,7 @@ msgstr "Wilt u dat e-mail voor ${noreply} verwijderd wordt?"
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
 #: ../gforge-mta-exim.templates.dsfh-in:9
 #: ../gforge-mta-postfix.templates.dsfh-in:9
@@ -258,6 +283,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
 #: ../gforge-mta-exim.templates.dsfh-in:9
 #: ../gforge-mta-postfix.templates.dsfh-in:9
@@ -271,6 +297,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:63
 #: ../gforge-mta-exim.templates.dsfh-in:9
 #: ../gforge-mta-postfix.templates.dsfh-in:9
@@ -280,6 +307,7 @@ msgstr "Deze optie aanvaarden zal die omleiding uitvoeren."
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:74
 #: ../dsf-helper/ldap-variables.templates:14
 msgid "LDAP password used to add users from the web"
@@ -288,6 +316,7 @@ msgstr "LDAP-wachtwoord om gebruikers toe te voegen via het web"
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:74
 #: ../dsf-helper/ldap-variables.templates:14
 msgid ""
@@ -300,6 +329,7 @@ msgstr ""
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:80
 #: ../dsf-helper/ldap-variables.templates:20
 msgid "LDAP password - again"
@@ -308,6 +338,7 @@ msgstr "LDAP-wachtwoord (nogmaals)"
 #  Type: note
 #  Description
 #. Type: note
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:85
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid "Gforge requires appropriate PAM-LDAP configuration"
@@ -316,6 +347,7 @@ msgstr "Gforge vereist toepasselijke PAM-LDAP-configuratie"
 #  Type: note
 #  Description
 #. Type: note
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:85
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid ""
@@ -330,6 +362,7 @@ msgstr ""
 #  Type: note
 #  Description
 #. Type: note
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:85
 #: ../gforge-shell-ldap.templates.dsfh-in:5
 msgid ""
@@ -346,6 +379,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid "Do you want a simple DNS setup?"
 msgstr "Wilt u een eenvoudige DNS-opzet?"
@@ -353,6 +387,7 @@ msgstr "Wilt u een eenvoudige DNS-opzet?"
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid ""
 "You can have a simple DNS setup wich uses wildcards to map all project web-"
@@ -364,6 +399,7 @@ msgstr "z"
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:98
 msgid ""
 "Even though you have a simple DNS setup, you can still have seperate boxes "
@@ -378,6 +414,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid "Do you want ${file} to be updated?"
@@ -386,6 +423,7 @@ msgstr "Wilt u dat e-mail voor ${noreply} verwijderd wordt?"
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid ""
@@ -398,6 +436,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid ""
@@ -413,6 +452,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:112
 #: ../dsf-helper/replace-files.templates:18
 msgid "Shall I modify the ${file} automatically?"
@@ -421,6 +461,7 @@ msgstr "Wilt u dat het bestand ${file} automatisch aangepast wordt?"
 #  Type: note
 #  Description
 #. Type: note
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:125
 #: ../dsf-helper/replace-files.templates:31
 msgid "Please check ${file}"
@@ -429,6 +470,7 @@ msgstr "Gelieve ${file} te controleren"
 #  Type: note
 #  Description
 #. Type: note
+#. Description
 #: ../gforge-dns-bind9.templates.dsfh-in:125
 #: ../dsf-helper/replace-files.templates:31
 msgid ""
@@ -445,6 +487,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/common-variables.templates:3
 msgid "Your Gforge domain or subdomain name"
 msgstr "Uw domainnaam of subdomeinnaam voor Gforge"
@@ -452,6 +495,7 @@ msgstr "Uw domainnaam of subdomeinnaam voor Gforge"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/common-variables.templates:3
 msgid ""
 "The domain that will host your Gforge installation.  Some services will be "
@@ -463,6 +507,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/common-variables.templates:9
 msgid "The Gforge admin email address."
 msgstr "Het e-mailadres van de Gforge-beheerder"
@@ -470,6 +515,7 @@ msgstr "Het e-mailadres van de Gforge-beheerder"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/common-variables.templates:9
 msgid ""
 "The email address of the Gforge administrator of your site.  Needed in case "
@@ -481,6 +527,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/common-variables.templates:16
 msgid "The Gforge system name"
 msgstr "De naam van het Gforge-systeem"
@@ -488,6 +535,7 @@ msgstr "De naam van het Gforge-systeem"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/common-variables.templates:16
 msgid "This name is used in various places throughout the system."
 msgstr "Deze naam wordt verschillende plaatsen in het systeem gebruikt."
@@ -495,6 +543,7 @@ msgstr "Deze naam wordt verschillende plaatsen in het systeem gebruikt."
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/cvshost-variables.templates:3
 msgid "Your CVS server"
 msgstr "Uw CVS-server"
@@ -502,6 +551,7 @@ msgstr "Uw CVS-server"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/cvshost-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge CVS repositories.  It "
@@ -513,6 +563,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/dbhost-variables.templates:3
 msgid "Your database server"
 msgstr "Uw databaseserver"
@@ -520,6 +571,7 @@ msgstr "Uw databaseserver"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/dbhost-variables.templates:3
 msgid ""
 "The IP address (or host name) of the server that will host your GForge "
@@ -531,6 +583,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/dbhost-variables.templates:10
 msgid "Your database name"
 msgstr "Uw databasenaam"
@@ -538,6 +591,7 @@ msgstr "Uw databasenaam"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/dbhost-variables.templates:10
 msgid ""
 "The name of the database that will host your GForge database.  This is "
@@ -549,6 +603,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/dbhost-variables.templates:17
 msgid "Your database admin username"
 msgstr "De gebruikersnaam van uw databasebeheerder"
@@ -556,6 +611,7 @@ msgstr "De gebruikersnaam van uw databasebeheerder"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/dbhost-variables.templates:17
 msgid ""
 "The admin username of the database that will host your GForge database.  "
@@ -567,6 +623,7 @@ msgstr ""
 #  Type: password
 #  Description
 #. Type: password
+#. Description
 #: ../dsf-helper/dbpasswd-variables.templates:3
 msgid ""
 "The connecton to the DB system requires a password.  Please choose a "
@@ -578,6 +635,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/downloadhost-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge packages. It should "
@@ -587,6 +645,7 @@ msgstr ""
 "is liefst niet de hoofd-Gforge-server."
 
 #. Type: string
+#. Description
 #: ../dsf-helper/groupid-variables.templates:4
 msgid "The news admin group id"
 msgstr "groep-ID van de nieuwsbeheerdersgroep"
@@ -594,6 +653,7 @@ msgstr "groep-ID van de nieuwsbeheerdersgroep"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/groupid-variables.templates:4
 msgid ""
 "Members of the news admin group can approve news for the Gforge main page.  "
@@ -607,6 +667,7 @@ msgstr ""
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/groupid-variables.templates:12
 msgid "The stats admin group id"
 msgstr "groep-ID van de stats-beheerdersgroep"
@@ -614,11 +675,13 @@ msgstr "groep-ID van de stats-beheerdersgroep"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/groupid-variables.templates:17
 msgid "The peer rating admin group id"
 msgstr "groep-ID van de 'peer rating'-beheerdersgroep"
 
 #. Type: string
+#. Description
 #: ../dsf-helper/lists-variables.templates:3
 msgid "Your mailing-lists server"
 msgstr "Uw e-maillijst-server"
@@ -626,6 +689,7 @@ msgstr "Uw e-maillijst-server"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/lists-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge mailing-lists. It "
@@ -637,6 +701,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../dsf-helper/migration.templates:4
 msgid "Migrate to Gforge?"
 msgstr "Migreren naar Gforge?"
@@ -644,6 +709,7 @@ msgstr "Migreren naar Gforge?"
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../dsf-helper/migration.templates:4
 msgid ""
 "The free software version of the Sourceforge software has been renamed to "
@@ -664,6 +730,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../dsf-helper/migration.templates:4
 msgid ""
 "You still have the option not to upgrade to Gforge yet, for instance if you "
@@ -677,6 +744,7 @@ msgstr ""
 #  Type: note
 #  Description
 #. Type: note
+#. Description
 #: ../dsf-helper/migration.templates:19
 msgid "Sourceforge is no more"
 msgstr "Sourceforge is niet meer"
@@ -684,13 +752,16 @@ msgstr "Sourceforge is niet meer"
 #  Type: note
 #  Description
 #. Type: note
+#. Description
 #: ../dsf-helper/migration.templates:19
+#, fuzzy
 msgid ""
-"Sourceforge has been renamed Gforge, and is no longer maintained as free "
-"software. This \"sourceforge\" package is only here to help you upgrade to "
-"Gforge.  Once you have installed this package and the one it depends on "
-"(gforge-sourceforge-transition), your data have been saved, and you can "
-"safely uninstall the \"sourceforge\" package and proceed to install Gforge."
+"Sourceforge has been renamed Gforge, and the software known as Sourceforge "
+"is no longer maintained as free software.  This \"sourceforge\" package is "
+"only here to help you upgrade to Gforge.  Once you have installed this "
+"package and the one it depends on (gforge-sourceforge-transition), your data "
+"have been saved, and you can safely uninstall the \"sourceforge\" package "
+"and proceed to install Gforge."
 msgstr ""
 "Sourceforge is hernoemd naar Gforge, en wordt niet langer onderhouden als "
 "'vrije software'. Dit 'sourceforge'-pakket is enkel hier om u bij het "
@@ -702,6 +773,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../dsf-helper/replace-files.templates:4
 msgid ""
 "In order for Gforge to fully work, some changes must be made to the ${file} "
@@ -713,6 +785,7 @@ msgstr ""
 #  Type: boolean
 #  Description
 #. Type: boolean
+#. Description
 #: ../dsf-helper/replace-files.templates:4
 msgid "Shall I modify ${file} automatically?"
 msgstr "Wilt u dat ${file} automatisch aangepast wordt?"
@@ -720,6 +793,7 @@ msgstr "Wilt u dat ${file} automatisch aangepast wordt?"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/users-variables.templates:3
 msgid "Your user mail redirector server"
 msgstr "Uw e-mail-doorstuur-server"
@@ -727,6 +801,7 @@ msgstr "Uw e-mail-doorstuur-server"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/users-variables.templates:3
 msgid ""
 "The hostname of the server that will host your Gforge user mail redirector. "
@@ -738,6 +813,7 @@ msgstr ""
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Bulgarian"
 msgstr "Bulgaars"
@@ -745,6 +821,7 @@ msgstr "Bulgaars"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Catalan"
 msgstr "Catalaans"
@@ -752,6 +829,7 @@ msgstr "Catalaans"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Chinese"
 msgstr "Chinees"
@@ -759,6 +837,7 @@ msgstr "Chinees"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Dutch"
 msgstr "Nederlands"
@@ -766,6 +845,7 @@ msgstr "Nederlands"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Esperanto"
 msgstr "Esperanto"
@@ -773,6 +853,7 @@ msgstr "Esperanto"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "French"
 msgstr "Frans"
@@ -780,6 +861,7 @@ msgstr "Frans"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "German"
 msgstr "Duits"
@@ -787,6 +869,7 @@ msgstr "Duits"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Greek"
 msgstr "Grieks"
@@ -794,6 +877,7 @@ msgstr "Grieks"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Hebrew"
 msgstr "Hebreeuws"
@@ -801,6 +885,7 @@ msgstr "Hebreeuws"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Indonesian"
 msgstr "Indonesisch"
@@ -808,6 +893,7 @@ msgstr "Indonesisch"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Italian"
 msgstr "Italiaans"
@@ -815,6 +901,7 @@ msgstr "Italiaans"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Japanese"
 msgstr "Japanees"
@@ -822,6 +909,7 @@ msgstr "Japanees"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Korean"
 msgstr "Koreaans"
@@ -829,6 +917,7 @@ msgstr "Koreaans"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Latin"
 msgstr "Latijns"
@@ -836,6 +925,7 @@ msgstr "Latijns"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Norwegian"
 msgstr "Noors"
@@ -843,6 +933,7 @@ msgstr "Noors"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Polish"
 msgstr "Pools"
@@ -850,6 +941,7 @@ msgstr "Pools"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "PortugueseBrazilian"
 msgstr "Brazilaans Portugees"
@@ -857,6 +949,7 @@ msgstr "Brazilaans Portugees"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Portuguese"
 msgstr "Portugees"
@@ -864,6 +957,7 @@ msgstr "Portugees"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Russian"
 msgstr "Russisch"
@@ -871,6 +965,7 @@ msgstr "Russisch"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "SimplifiedChinese"
 msgstr "Vereenvoudigd Chinees"
@@ -878,6 +973,7 @@ msgstr "Vereenvoudigd Chinees"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Spanish"
 msgstr "Spaans"
@@ -885,6 +981,7 @@ msgstr "Spaans"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Swedish"
 msgstr "Zweeds"
@@ -892,6 +989,7 @@ msgstr "Zweeds"
 #  Type: select
 #  Choices
 #. Type: select
+#. Choices
 #: ../dsf-helper/web-variables.templates:3
 msgid "Thai"
 msgstr "Thais"
@@ -899,6 +997,7 @@ msgstr "Thais"
 #  Type: select
 #  DefaultChoice
 #. Type: select
+#. DefaultChoice
 #: ../dsf-helper/web-variables.templates:4
 msgid "English"
 msgstr "Engels"
@@ -906,6 +1005,7 @@ msgstr "Engels"
 #  Type: select
 #  Description
 #. Type: select
+#. Description
 #: ../dsf-helper/web-variables.templates:5
 msgid "Default language"
 msgstr "Standaardtaal"
@@ -913,6 +1013,7 @@ msgstr "Standaardtaal"
 #  Type: select
 #  Description
 #. Type: select
+#. Description
 #: ../dsf-helper/web-variables.templates:5
 msgid "Here is the default language for web pages."
 msgstr "Dit is de standaardtaal voor webpagina's"
@@ -920,6 +1021,7 @@ msgstr "Dit is de standaardtaal voor webpagina's"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/web-variables.templates:11
 msgid "Default theme"
 msgstr "Standaardthema"
@@ -927,6 +1029,7 @@ msgstr "Standaardthema"
 #  Type: string
 #  Description
 #. Type: string
+#. Description
 #: ../dsf-helper/web-variables.templates:11
 msgid ""
 "Here is the default theme for web pages, be carreful to enter a valid name."

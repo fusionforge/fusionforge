@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gforge\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-05-31 12:46+0200\n"
+"POT-Creation-Date: 2004-11-07 19:22+0100\n"
 "PO-Revision-Date: 2004-11-07 14:57+0100\n"
 "Last-Translator: Miroslav Kure <kurem@debian.cz>\n"
 "Language-Team: Czech <provoz@debian.cz>\n"
@@ -76,8 +76,8 @@ msgid ""
 "This Gforge account will have all privileges on the Gforge system.  It is "
 "needed to approve the creation of the projects."
 msgstr ""
-"Tento úèet bude mít v¹echna práva v Gforge systému. Pou¾ívá se napøíklad "
-"pro schvalování vytváøení projektù."
+"Tento úèet bude mít v¹echna práva v Gforge systému. Pou¾ívá se napøíklad pro "
+"schvalování vytváøení projektù."
 
 #. Type: string
 #. Description
@@ -112,8 +112,8 @@ msgid ""
 "This Gforge account will have all privileges on the Gforge system.  It is "
 "needed to approve the creation of the projects.  Please type a password here."
 msgstr ""
-"Tento úèet bude mít v¹echna práva v Gforge systému. Pou¾ívá se napøíklad "
-"pro schvalování vytváøení projektù. Zadejte zde prosím heslo."
+"Tento úèet bude mít v¹echna práva v Gforge systému. Pou¾ívá se napøíklad pro "
+"schvalování vytváøení projektù. Zadejte zde prosím heslo."
 
 #. Type: password
 #. Description
@@ -262,8 +262,8 @@ msgid ""
 "In order to add users into the LDAP directory from the web, you need to "
 "provide a password."
 msgstr ""
-"Abyste mohli pøidávat u¾ivatele do LDAP adresáøe rovnou z webu, musíte "
-"zatat heslo."
+"Abyste mohli pøidávat u¾ivatele do LDAP adresáøe rovnou z webu, musíte zatat "
+"heslo."
 
 #. Type: password
 #. Description
@@ -289,8 +289,8 @@ msgid ""
 "parameters."
 msgstr ""
 "Gforge vy¾aduje, aby byl balík libpam-ldap nastaven odpovídajícím zpùsobem. "
-"Abyste opravili chybné parametry, mo¾ná budete muset spustit "
-"\"dpkg-reconfigure libpam-ldap\"."
+"Abyste opravili chybné parametry, mo¾ná budete muset spustit \"dpkg-"
+"reconfigure libpam-ldap\"."
 
 #. Type: note
 #. Description
@@ -322,10 +322,10 @@ msgid ""
 "or a complex setup wich allows you to have many servers as project web "
 "servers or CVS servers."
 msgstr ""
-"Mù¾ete mít buï jednodu¹¹í konfiguraci DNS, která pou¾ívá zástupné znaky, "
-"aby namapovala weby v¹ech projektù na jedinou IP adresu a nasmìrovala "
-"v¹echna cvs úlo¾i¹tì na jediný CVS server, nebo mù¾ete mít komplexní "
-"nastavení, je¾ vám umo¾ní pou¾ít vícero poèítaèù pro webové a CVS servery."
+"Mù¾ete mít buï jednodu¹¹í konfiguraci DNS, která pou¾ívá zástupné znaky, aby "
+"namapovala weby v¹ech projektù na jedinou IP adresu a nasmìrovala v¹echna "
+"cvs úlo¾i¹tì na jediný CVS server, nebo mù¾ete mít komplexní nastavení, je¾ "
+"vám umo¾ní pou¾ít vícero poèítaèù pro webové a CVS servery."
 
 #. Type: boolean
 #. Description
@@ -394,8 +394,8 @@ msgid ""
 "changes to ${file}."
 msgstr ""
 "Zvolili jste, aby balík Gforge neaktualizoval soubor ${file}. Dobrá, nechám "
-"jej na pokoji. Místo toho jsem zapsal navrhované zmìny do ${file}.gforge-new. "
-"Zkontrolujte prosím tento soubor a u¾iteèné zmìny pøeneste do ${file}."
+"jej na pokoji. Místo toho jsem zapsal navrhované zmìny do ${file}.gforge-"
+"new. Zkontrolujte prosím tento soubor a u¾iteèné zmìny pøeneste do ${file}."
 
 #. Type: string
 #. Description
@@ -410,8 +410,8 @@ msgid ""
 "The domain that will host your Gforge installation.  Some services will be "
 "given their own subdomain in that domain (cvs, lists, etc.)."
 msgstr ""
-"Doména, která bude hostit va¹i instalaci Gforge. Nìkteré slu¾by obdr¾í "
-"své vlastní subdomény této domény (cvs, lists, atd.)."
+"Doména, která bude hostit va¹i instalaci Gforge. Nìkteré slu¾by obdr¾í své "
+"vlastní subdomény této domény (cvs, lists, atd.)."
 
 #. Type: string
 #. Description
@@ -469,8 +469,8 @@ msgid ""
 "The IP address (or host name) of the server that will host your GForge "
 "database.  This is needed for virtually all the subpackages."
 msgstr ""
-"IP adresa (nebo jméno) serveru, který bude hostit va¹i GForge databázi. "
-"To je nezbytné pro témìø v¹echny podbalíky."
+"IP adresa (nebo jméno) serveru, který bude hostit va¹i GForge databázi. To "
+"je nezbytné pro témìø v¹echny podbalíky."
 
 #. Type: string
 #. Description
@@ -536,10 +536,9 @@ msgid ""
 "This group id MUST NOT be 1. You only need to touch this group if you "
 "upgrade from a previous version and want to keep your data."
 msgstr ""
-"Èlenové administrátorké skupiny pro novinky mohou schvalovat novinky "
-"pro hlavní stránku Gforge. Tato skupina NESMÍ mít id 1. Touto skupinou se "
-"musíte zabývat pouze pokud pøecházíte z døívìj¹í verze a chcete zachovat "
-"svá data."
+"Èlenové administrátorké skupiny pro novinky mohou schvalovat novinky pro "
+"hlavní stránku Gforge. Tato skupina NESMÍ mít id 1. Touto skupinou se musíte "
+"zabývat pouze pokud pøecházíte z døívìj¹í verze a chcete zachovat svá data."
 
 #. Type: string
 #. Description
@@ -566,8 +565,8 @@ msgid ""
 "The hostname of the server that will host your Gforge mailing-lists. It "
 "should not be the same as your main Gforge host."
 msgstr ""
-"Jméno poèítaèe, který bude hostit diskusní skupiny va¹eho Gforge. Nemìlo "
-"by být shodné s hlavním serverem Gforge."
+"Jméno poèítaèe, který bude hostit diskusní skupiny va¹eho Gforge. Nemìlo by "
+"být shodné s hlavním serverem Gforge."
 
 #. Type: boolean
 #. Description
@@ -587,11 +586,11 @@ msgid ""
 "and things should go smoothly."
 msgstr ""
 "Svobodná verze systému Sourceforge byla pøejmenována na \"Gforge\". V "
-"souladu s tím se pøejmenoval i debianí balík na \"gforge\". Pùvodní "
-"balík \"sourceforge\" ji¾ není podporován ani vyvíjen. Pøechod na Gforge "
-"by mìl být celkem bezbolestný, proto¾e vìt¹ina pøevodu  probíhá "
-"automaticky. Po úspì¹né instalaci tohoto balíku jednodu¹e nainstalujte "
-"balík \"gforge\" a v¹e probìhne hladce."
+"souladu s tím se pøejmenoval i debianí balík na \"gforge\". Pùvodní balík "
+"\"sourceforge\" ji¾ není podporován ani vyvíjen. Pøechod na Gforge by mìl "
+"být celkem bezbolestný, proto¾e vìt¹ina pøevodu  probíhá automaticky. Po "
+"úspì¹né instalaci tohoto balíku jednodu¹e nainstalujte balík \"gforge\" a "
+"v¹e probìhne hladce."
 
 #. Type: boolean
 #. Description
@@ -613,18 +612,20 @@ msgstr "Sourceforge ji¾ neexistuje"
 #. Type: note
 #. Description
 #: ../dsf-helper/migration.templates:19
+#, fuzzy
 msgid ""
-"Sourceforge has been renamed Gforge, and is no longer maintained as free "
-"software. This \"sourceforge\" package is only here to help you upgrade to "
-"Gforge.  Once you have installed this package and the one it depends on "
-"(gforge-sourceforge-transition), your data have been saved, and you can "
-"safely uninstall the \"sourceforge\" package and proceed to install Gforge."
+"Sourceforge has been renamed Gforge, and the software known as Sourceforge "
+"is no longer maintained as free software.  This \"sourceforge\" package is "
+"only here to help you upgrade to Gforge.  Once you have installed this "
+"package and the one it depends on (gforge-sourceforge-transition), your data "
+"have been saved, and you can safely uninstall the \"sourceforge\" package "
+"and proceed to install Gforge."
 msgstr ""
 "Sourceforge byl pøejmenovaný Gforge a ji¾ není vyvíjen jako svobodný "
-"software. Balík \"sourceforge\" existuje jenom z dùvodu snadného pøechodu "
-"na Gforge. Poté, co tento balík nainstalujete (a s ním "
-"gforge-sourceforge-transition), budou va¹e data ulo¾ena. Pak mù¾ete balík "
-"\"sourceforge\" odstranit a pokraèovat v instalaci Gforge."
+"software. Balík \"sourceforge\" existuje jenom z dùvodu snadného pøechodu na "
+"Gforge. Poté, co tento balík nainstalujete (a s ním gforge-sourceforge-"
+"transition), budou va¹e data ulo¾ena. Pak mù¾ete balík \"sourceforge\" "
+"odstranit a pokraèovat v instalaci Gforge."
 
 #. Type: boolean
 #. Description
