@@ -20,6 +20,9 @@
 # Daily crunching of project summary data (counts)
 42 1 * * * gforge [ -x /usr/lib/gforge/bin/db_project_sums.php ] && /usr/lib/gforge/bin/db_project_sums.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
+# Daily close pending artifacts
+43 1 * * * gforge [ -x /usr/lib/gforge/bin/check_stale_tracker_items.php ] && /usr/lib/gforge/bin/check_stale_tracker_items.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+
 # Daily project metrics
 #45 1 * * * gforge [ -x /usr/lib/gforge/bin/project_metric.php ] && /usr/lib/gforge/bin/project_metric.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 

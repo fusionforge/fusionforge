@@ -116,6 +116,7 @@ install: build
 	install -m 755 cronjobs/vacuum.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/rotate_activity.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 	install -m 755 cronjobs/db_project_sums.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
+	install -m 755 cronjobs/check_stale_tracker_items.php $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/
 #GF	install -m 755 cronjobs/stats/include/stats_site.inc $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
 #GF	install -m 755 cronjobs/stats/include/stats_projects.inc $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/lib/
 #GF	install utils/underworld-root/db_top_groups_calc.pl $(CURDIR)/debian/gforge-db-postgresql/usr/lib/gforge/bin/db_top_groups_calc.pl

@@ -14,9 +14,10 @@ gforge (3.0-3+) unstable; urgency=low
     wishes in that regard (closes: #201666).
   * [Roland] Clearly mark files generated from templates as such, as well
     as these templates (closes: #193155).
-  * [Christian] Added cronjobs/db_project_sums.php in postgres cron 
+  * [Christian] Added cronjobs/db_project_sums.php in postgres cron
+  * [Christian] Added cronjobs/check_stale_tracker_items.php in postgres cron
 
- -- Christian Bayle <bayle@debian.org>  Fri, 25 Jul 2003 14:18:08 +0200
+ -- Christian Bayle <bayle@debian.org>  Fri, 25 Jul 2003 14:37:27 +0200
 
 gforge (3.0-2) unstable; urgency=low
 
