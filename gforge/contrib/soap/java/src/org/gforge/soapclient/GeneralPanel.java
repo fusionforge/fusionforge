@@ -8,6 +8,8 @@ import javax.swing.JTree;
 import javax.swing.border.TitledBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -32,7 +34,8 @@ public class GeneralPanel extends JPanel {
                 String[] projectNames = client.getPublicProjectNames();
                 DefaultMutableTreeNode root = new DefaultMutableTreeNode(Settings.getInstance().get(ConfigurationPanel.SERVER_PROPERTY));
                 for (int i=0;i<projectNames.length; i++) {
-                    root.add(new DefaultMutableTreeNode(projectNames[i]));
+                    DefaultMutableTreeNode node = new DefaultMutableTreeNode(projectNames[i]);
+                    root.add(node);
                 }
                 projects = new DefaultTreeModel(root);
 
@@ -53,13 +56,32 @@ public class GeneralPanel extends JPanel {
 
     public GeneralPanel() {
         super();
+        setLayout(new BorderLayout());
         refresh();
     }
 
     private void refresh() {
-        this.removeAll();
-        this.repaint();
+        removeAll();
+        repaint();
+        add(createOverallStatsPanel(), BorderLayout.NORTH);
+        add(createProjectTreePanel(), BorderLayout.CENTER);
+    }
 
+    private JPanel createProjectTreePanel() {
+        JPanel projectTreePanel = new JPanel(new BorderLayout());
+        projectTreePanel.setBorder(new TitledBorder("Projects"));
+        JTree projectTree = new JTree(projects);
+        projectTree.setBackground(projectTreePanel.getBackground());
+        DefaultTreeCellRenderer r = new DefaultTreeCellRenderer();
+        r.setBackground(projectTreePanel.getBackground());
+        r.setBackgroundNonSelectionColor(projectTreePanel.getBackground());
+        r.setBackgroundSelectionColor(projectTreePanel.getBackground());
+        projectTree.setCellRenderer(r);
+        projectTreePanel.add(projectTree, BorderLayout.WEST);
+        return projectTreePanel;
+    }
+
+    private JPanel createOverallStatsPanel() {
         JPanel overallStatsPanel = new JPanel(new BorderLayout());
         overallStatsPanel.setBorder(new TitledBorder("Statistics"));
         JPanel projectsAndUsersCountPanel = new JPanel(new GridLayout(2,1));
@@ -73,15 +95,6 @@ public class GeneralPanel extends JPanel {
         JPanel refreshPanel = new JPanel();
         refreshPanel.add(refreshButton);
         overallStatsPanel.add(refreshPanel, BorderLayout.SOUTH);
-
-        JPanel projectTreePanel = new JPanel(new BorderLayout());
-        projectTreePanel.setBorder(new TitledBorder("Projects"));
-        JTree projectTree = new JTree(projects);
-        projectTree.setBackground(Color.GRAY);
-        projectTreePanel.add(projectTree, BorderLayout.WEST);
-
-        setLayout(new BorderLayout());
-        add(overallStatsPanel, BorderLayout.NORTH);
-        add(projectTreePanel, BorderLayout.CENTER);
+        return overallStatsPanel;
     }
 }
