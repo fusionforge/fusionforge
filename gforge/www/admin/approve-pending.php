@@ -46,17 +46,17 @@ function activate_group($group_id) {
 	$group =& group_get_object($group_id);
 
 	if (!$group || !is_object($group)) {
-		$feedback .= $Language->getText('admin_approve_pending','error_creating_group').'<br /> ';
+		$feedback .= $Language->getText('admin_approve_pending','error_creating_group').'<br />';
 		return false;
 	} else if ($group->isError()) {
-		$feedback .= $group->getErrorMessage();
+		$feedback .= $group->getErrorMessage().'<br />';
 		return false;
 	}
 
-	$feedback .= '<br />'. $Language->getText('admin_approve_pending','approving_group'). $group->getUnixName().' ';
+	$feedback .= $Language->getText('admin_approve_pending','approving_group'). $group->getUnixName().'<br />';
 
 	if (!$group->approve(session_get_user())) {
-		$feedback .= $group->getErrorMessage();
+		$feedback .= $group->getErrorMessage().'<br />';
 		return false;
 	}
 
