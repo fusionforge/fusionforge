@@ -1,3 +1,36 @@
+2003-02-12  Reinhard Spisser <reinhard@spisser.it>
+
+	* common/forum/Forum.class:
+	removed localization of Welcome message
+	
+	* www/forum/index.php, www/forum/message.php,
+	www/forum/include/ForumHTML.class:
+	Moved arguments to messages in the getText() function call
+	
+	* www/forum/forum.php, common/forum/ForumMessageFactory.class: 
+	Removed useless localization of some error messages
+	
+	* www/docman/view.php, www/docman/include/doc_utils.php,
+	www/common/docman/DocumentGroup.class,
+	www/common/docman/Document.class,
+	www/include/languages/Base.tab: 
+	i18n of some missing strings
+	
+	* www/include/languages/Base.tab,
+	www/include/languages/Italian.tab:
+	moving exit function choose_group_text to choose_group_title
+	
+	* www/docman/admin/index.php, www/include/languages/Base.tab:
+	Moving docman_admin_groupedit strings to docman_admin_editgroups,
+	i18n
+	
+	* www/account/index.php, www/include/languages/Base.tab: 
+	i18n account information box
+	
+	* www/include/languages/Italian.tab:
+	l10n of new strings
+	
+
 2003-02-09  Ryan T. Sammartino  <ryants@shaw.ca>
 
 	* www/docman/index.php: valid XHTML 1.0 Transitional.
