@@ -1,5 +1,8 @@
 Some explanations:
 
+-rw-rw-r--    1   276333 2002-12-24 16:43 gforge2.6.sql
+The gforge2.6 first file called formally sf-2.6-complete.sql (v1.1 in CVS)
+
 -rw-rw-r--    1   276333 2002-12-24 16:43 gforge3.sql
 The gforge3 sql initialisation file
 
@@ -17,7 +20,7 @@ choosen by user in previous sourceforge package.
 
 -rw-rw-r--    1     5273 2003-01-04 01:08 20021124-3_gforge-debian-sf-sync.sql
 This file contains update that were already done in debian package.
-So gforge3 + 20021124-3_gforge-debian-sf-sync.sql should be equivalent to debian-sf 2.6 package
+So gforge2.6.sql + 20021124-3_gforge-debian-sf-sync.sql should be equivalent to debian-sf 2.6 package
 
 
 -rw-rw-r--    1     1259 2002-12-23 14:17 20021125.sql
