@@ -26,11 +26,11 @@ case "$target" in
 	pattern=$(basename $0).XXXXXX
 	cp -a /etc/postgresql/pg_hba.conf /etc/postgresql/pg_hba.conf.sourceforge-new
 	if grep -q "^host.*sourceforge_passwd$" /etc/postgresql/pg_hba.conf.sourceforge-new ; then
-	    perl -pi -e "s/^host.*sourceforge_passwd$/host  sourceforge        $ip_address     255.255.255.255           password sourceforge_passwd/" /etc/postgresql/pg_hba.conf.sourceforge-new
+	    perl -pi -e "s/^host.*sourceforge_passwd$/host sourceforge $ip_address 255.255.255.255 password sourceforge_passwd/" /etc/postgresql/pg_hba.conf.sourceforge-new
 	else
 	    cur=$(mktemp /tmp/$pattern)
 	    echo "### Next line inserted by Sourceforge install" > $cur
-	    echo "host  sourceforge        $ip_address     255.255.255.255           password sourceforge_passwd" >> $cur
+	    echo "host sourceforge $ip_address 255.255.255.255 password sourceforge_passwd" >> $cur
 	    cat /etc/postgresql/pg_hba.conf.sourceforge-new >> $cur
 	    cat $cur > /etc/postgresql/pg_hba.conf.sourceforge-new
 	    rm -f $cur
@@ -67,7 +67,7 @@ EOF
 	if su -s /bin/sh postgres -c "createdb sourceforge" 1> $tmp1 2> $tmp2 \
 	    && [ "$(head -1 $tmp1)" = 'CREATE DATABASE' ] \
 	    || [ "$(head -1 $tmp2)" = 'ERROR:  CREATE DATABASE: database "sourceforge" already exists' ] ; then
-	    # Creation OK of database already existing -- no problem here
+	    # Creation OK or database already existing -- no problem here
 	    echo -n ""
 	else
 	    echo "Cannot create PostgreSQL database...  This shouldn't have happened."
@@ -79,10 +79,6 @@ EOF
 	rm -f $tmp1 $tmp2
 	
 	# Install/upgrade the database contents (tables and data)
-	# Dirty scripting for testing purpose
-#	psql -U sourceforge -h $ip_address sourceforge -f /usr/lib/sourceforge/db/sf-2.6-complete.sql <<-FIN
-#$db_passwd
-#FIN
 	kill -HUP $(head -1 /var/lib/postgres/data/postmaster.pid)
 	/usr/lib/sourceforge/bin/db-upgrade.pl 2>&1 | grep -v ^NOTICE:
 	;;
