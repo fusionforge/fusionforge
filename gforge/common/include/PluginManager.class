@@ -142,7 +142,7 @@ class PluginManager extends Error {
 	 * @param hookname - name of the hook
 	 * @param params - array of extra parameters
 	 */
-	function RunHooks ($hookname, $params) {
+	function RunHooks ($hookname, & $params) {
 		if (isset($this->hooks_to_plugins[$hookname])) {
 			$p_list = $this->hooks_to_plugins[$hookname];
 			foreach ($p_list as $p_name) {
@@ -209,7 +209,18 @@ function register_plugin (&$pluginobject) {
  * @param hookname - name of the hook
  * @param params - parameters for the hook
  */
-function plugin_hook ($hookname, $params=false) {
+function plugin_hook ($hookname, $params = false) {
+	$pm =& plugin_manager_get_object () ;
+	return $pm->RunHooks ($hookname, $params) ;
+}
+
+/**
+ * plugin_hook () - run a set of hooks with params passed by reference
+ *
+ * @param hookname - name of the hook
+ * @param params - parameters for the hook
+ */
+function plugin_hook_by_reference ($hookname, & $params) {
 	$pm =& plugin_manager_get_object () ;
 	return $pm->RunHooks ($hookname, $params) ;
 }
