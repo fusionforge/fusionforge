@@ -2,26 +2,28 @@
 #
 # $Id$
 #
-# Secure moving of files for the Sourceforge file release system
+# "Shell" for a restricted account, limiting the available commands
 # Roland Mas, debian-sf (Sourceforge for Debian)
 #
 # Inspired from the grap.c file in Sourceforge 2.5
 
 use strict ;
-use vars qw/ $maxstrlen $maxargs @allowed_options @allowed_commands $errmsg @cmd/ ;
+use vars qw/ @allowed_options @allowed_commands $errmsg @cmd / ;
 use subs qw/ &reject / ;
 no locale ;
 
-$maxstrlen = 256 ;
-$maxargs = 256 ;
 @allowed_options = ('-c', '-e') ;
 @allowed_commands = ('cvs') ;
 
 # Clean up our environment
 delete @ENV{qw(IFS CDPATH ENV BASH_ENV PATH)};
 
-if ($#ARGV < 1) {
-    $errmsg = "Not enough arguments." ;
+if ($#ARGV != 1) {
+    if ($#ARGV < 1) {
+	$errmsg = "Not enough arguments." ;
+    } else {
+	$errmsg = "Too many arguments." ;
+    }
     &reject ;
 }
 
@@ -40,9 +42,9 @@ if (scalar (grep { $_ eq $cmd[0] } @allowed_commands) == 0) {
 exec @cmd ;
 
 sub reject {
-    print "This is a restricted Shell Account\n" . 
+    print "This is a restricted account.\n" . 
 	"You cannot execute anything here.\n" . 
-	$errmsg . "\n" .
+	# $errmsg . "\n" .
 	"Goodbye.\n" ;
     exit 1 ;
 }
