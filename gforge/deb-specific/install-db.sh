@@ -21,6 +21,7 @@ case "$target" in
 	;;
     configure)
 	# Create the appropriate database user
+	pattern=$(basename $0)
 	tmp1=$(mktemp /tmp/$pattern)
 	tmp2=$(mktemp /tmp/$pattern)
 	if su postgres -c "createuser --no-createdb --no-adduser sourceforge" 1> $tmp1 2> $tmp2 \
