@@ -1,9 +1,10 @@
-gforge (3.1-8+1) unstable; urgency=low
+gforge (3.1-8+1+) unstable; urgency=low
 
   * [Roland] Added permissions for the robot to edit the
     ou=mailingList,dc=... entries in LDAP.
+  * [Roland] Better detection of strange conditions in cvs_dump_update.pl.
 
- -- Roland Mas <lolando@debian.org>  Sat, 17 Jan 2004 21:10:38 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 20 Jan 2004 22:45:14 +0100
 
 gforge (3.1-8) unstable; urgency=low
 
@@ -12,7 +13,7 @@ gforge (3.1-8) unstable; urgency=low
     catch up, this time removing a "Listen" directive that would turn out
     to be a duplicate one, thus preventing Apache from running.
 
- -- Roland Mas <lolando@debian.org>  Sun, 11 Jan 2004 12:15:33 +0100
+ -- Roland Mas <lolando@debian.org>  Tue, 20 Jan 2004 22:45:03 +0100
 
 gforge (3.1-7) unstable; urgency=low
 
