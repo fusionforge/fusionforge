@@ -38,9 +38,9 @@ Include /etc/gforge/httpd.common
       AllowOverride All
       order allow,deny
       allow from all
-    </Directory>
+  </Directory>
 
-  # Projects an Users script
+  # Projects and Users script
   <Location /projects>
     ForceType application/x-httpd-php
   </Location>

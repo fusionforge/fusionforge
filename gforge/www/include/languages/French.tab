@@ -2170,9 +2170,9 @@ top_topusers	title	développeurs les mieux classés
 top_topusers	user_name	Nom d'utilisateur 
 tracker	admin	Administration
 tracker	any	Tous
-tracker	assigned_to	Confié à :
+tracker	assigned_to	Confié à
 tracker	assignee	Responsable 
-tracker	category	Catégorie&nbsp;
+tracker	category	Catégorie
 tracker	category_any	Tous
 tracker	check_upload	Cochez pour pour faire remonter un fichier attaché.
 tracker	choose	Choisissez un traceur et vous pourrez le parcourir, l'éditer, lui ajouter des items.</s>
