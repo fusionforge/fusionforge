@@ -192,8 +192,11 @@ gidNumber: $gid
 #
 
 sub dump_header {
+    my $dc=$sys_ldap_base_dn ;
+    $dc =~ m/^dc=([^,]+),/ ;
+    $dc = $1 ;
 	print "dn: $sys_ldap_base_dn
-dc: sourceforge
+dc: $dc
 objectClass: top
 objectClass: domain
 objectClass: domainRelatedObject
