@@ -59,7 +59,7 @@ if ($type=='snippet') {
 		$title_arr[]='Author';
 		$title_arr[]='Delete';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		/*
 			get the newest version of this snippet, so we can display its code
@@ -83,7 +83,8 @@ if ($type=='snippet') {
 					nl2br(db_result($result,$i,'changes')).'</TD></TR>';
 				}
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
 		<P>
@@ -153,7 +154,7 @@ if ($type=='snippet') {
 		$title_arr[]='Author';
 		$title_arr[]='Edit/Del';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		/*
 			determine the newest version of this package, 
@@ -175,7 +176,8 @@ if ($type=='snippet') {
 				db_result($result,$i,'snippet_package_version_id').
 				'">' . html_image("/images/ic/trash.png","16","16",array("BORDER"=>"0")) . '</A></TD></TR>';
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
 
 		echo '
 		<P>

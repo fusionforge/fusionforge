@@ -149,13 +149,13 @@ if ($tweak) {
 		print '
 			<form name="update" method="post" action="'.$PHP_SELF.'">
 
-			'.html_build_list_table_top($title).'
+			'.$GLOBALS['HTML']->listTableTop($title).'
 			<tr><td>'.$row_vh['vhostid'].'</td>
 			<td>'.$row_vh['vhost_name'].'</td>
 			<td><a href="/projects/'.$row_vh['unix_group_name'].'">'.$row_vh['unix_group_name'].'</a></td>
 			<td><input maxlength="255" type="text" name="docdir" value="'.$row_vh['docdir'].'"></td>
 			<td><input type="text" name="cgidir" value="'.$row_vh['cgidir'].'"></td><td><input maxlength="255" type="submit" value="Update"></tr>
-			</table>
+			'.$GLOBALS['HTML']->listTableBottom().'
 
 			<input type="hidden" name="tweakcommit" value="1">
 			<input type="hidden" name="vhostid" value="'.$row_vh['vhostid'].'">

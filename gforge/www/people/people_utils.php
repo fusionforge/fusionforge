@@ -117,7 +117,7 @@ function people_show_skill_inventory($user_id) {
 	$title_arr[]='Level';
 	$title_arr[]='Experience';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -134,8 +134,8 @@ function people_show_skill_inventory($user_id) {
 
 		}
 	}
-	echo '
-		</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
 }
 
 function people_edit_skill_inventory($user_id) {
@@ -149,7 +149,7 @@ function people_edit_skill_inventory($user_id) {
 	$title_arr[]='Experience';
 	$title_arr[]='Action';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -184,8 +184,8 @@ function people_edit_skill_inventory($user_id) {
 		<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="add_to_skill_inventory" VALUE="Add Skill"></TD>
 	</TR></FORM>';
 
-	echo '
-		</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 
@@ -229,7 +229,7 @@ function people_show_job_inventory($job_id) {
 	$title_arr[]='Level';
 	$title_arr[]='Experience';
 			
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -246,8 +246,9 @@ function people_show_job_inventory($job_id) {
 
 		}
 	}
-	echo '
-		</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 function people_verify_job_group($job_id,$group_id) {
@@ -291,7 +292,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 	$title_arr[]='Experience';
 	$title_arr[]='Action';
 			
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if (!$result || $rows < 1) {
@@ -330,8 +331,7 @@ function people_edit_job_inventory($job_id,$group_id) {
 		<TD NOWRAP><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="add_to_job_inventory" VALUE="Add Skill"></TD>
 	</TR></FORM>';
 
-	echo '
-		</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
 }
 
 function people_show_category_table() {
@@ -342,7 +342,7 @@ function people_show_category_table() {
 	$title_arr=array();
 	$title_arr[]='Category';
 
-	$return .= html_build_list_table_top ($title_arr);
+	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 /*
 	$sql="SELECT pjc.category_id, pjc.name, count(*) as total ". //, max(date) AS latest ".
@@ -370,7 +370,7 @@ function people_show_category_table() {
 				db_result($result,$i,'name') .'</A> ('. db_result($result,$i,'total') .')</TD></TR>';
 		}
 	}
-	$return .= '</TABLE>';
+	$return .= $GLOBALS['HTML']->listTableBottom();
 	return $return;
 }
 
@@ -412,7 +412,7 @@ function people_show_job_list($result) {
 	$title_arr[]='Date Opened';
 	$title_arr[]='SF Project';
 
-	$return .= html_build_list_table_top ($title_arr);
+	$return .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	$rows=db_numrows($result);
 	if ($rows < 1) {
@@ -432,7 +432,7 @@ function people_show_job_list($result) {
 		}
 	}
 
-	$return .= '</TABLE>';
+	$return .= $GLOBALS['HTML']->listTableBottom();
 
 	return $return;
 }

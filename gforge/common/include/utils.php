@@ -485,7 +485,7 @@ Function GraphIt($name_string,$value_string,$title) {
 	$title_arr=array();
 	$title_arr[]=$title;
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 	echo '<TR><TD>';
 	/*
 		Create an associate array to pass in. I leave most of it blank
@@ -523,8 +523,9 @@ Function GraphIt($name_string,$value_string,$title) {
 	html_graph($name_string,$value_string,$bars,$vals);
 
 	echo '
-		</TD></TR></TABLE>
+		</TD></TR>
 		<!-- end outer graph table -->';
+	echo $GLOBALS['HTML']->listTableBottom();
 }
 
 /**

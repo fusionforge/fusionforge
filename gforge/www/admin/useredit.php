@@ -183,7 +183,7 @@ $title=array();
 $title[]='Name';
 $title[]='Unix Name';
 $title[]='Operations';
-echo html_build_list_table_top($title);
+echo $GLOBALS['HTML']->listTableTop($title);
 
 while ($row_cat = db_fetch_array($res_cat)) {
 
@@ -199,7 +199,7 @@ while ($row_cat = db_fetch_array($res_cat)) {
 
 }
 
-print "</table>";
+echo $GLOBALS['HTML']->listTableBottom();
 
 html_feedback_bottom($feedback);
 

@@ -66,7 +66,7 @@ $title_arr[]='Package Name';
 $title_arr[]='Release Name';
 $title_arr[]='Date';
 
-echo html_build_list_table_top ($title_arr);
+echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 for ($i=0; $i<db_numrows($res); $i++) {
 	echo '<TR BGOLOR="">
@@ -78,7 +78,7 @@ for ($i=0; $i<db_numrows($res); $i++) {
 				date('Y-m-d',db_result($res,$i,'release_date')).'<TD></TR>';
 }
 
-echo '</TABLE>';
+echo $GLOBALS['HTML']->listTableBottom();
 
 project_admin_footer(array());
 

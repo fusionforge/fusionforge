@@ -96,7 +96,7 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 	$title_arr[]='Name';
 	$title_arr[]='Description';
 	$title_arr[]='Download';
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	if ($count > 0) {
 
@@ -112,7 +112,8 @@ echo $ath->header(array ('title'=>'Detail: '.$ah->getID(). ' '.util_unconvert_ht
 		echo '<TR><TD COLSPAN=3>No Files Currently Attached</TD></TR>';
 	}
 	
-	echo '</TABLE>';
+	echo $GLOBALS['HTML']->listTableBottom();
+
 	?>
 	</TD></TR>
 

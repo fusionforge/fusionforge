@@ -256,7 +256,7 @@ if ($group_id && $atid) {
 			$title_arr[]='ID';
 			$title_arr[]='Title';
 			
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
 				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
@@ -265,7 +265,9 @@ if ($group_id && $atid) {
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'category_name').'</A></TD></TR>';
 			}		   
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		} else {
 			echo "\n<H1>No categories defined</H1>";
 		}
@@ -304,7 +306,7 @@ if ($group_id && $atid) {
 			$title_arr[]='ID';
 			$title_arr[]='Title';
 			
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 			
 			for ($i=0; $i < $rows; $i++) {
 				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
@@ -313,7 +315,9 @@ if ($group_id && $atid) {
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'group_name').'</A></TD></TR>';
 			}		   
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		} else {
 			echo "\n<H1>No groups defined</H1>";
 		}
@@ -356,7 +360,7 @@ if ($group_id && $atid) {
 			$title_arr[]='ID';
 			$title_arr[]='Title';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i < $rows; $i++) {
 				echo '<TR BGCOLOR="'. html_get_alt_row_color($i) .'">'.
@@ -365,7 +369,8 @@ if ($group_id && $atid) {
 						db_result($result, $i, 'id').'&group_id='.$group_id.'&atid='. $ath->getID() .'">'.
 						db_result($result, $i, 'title').'</A></TD></TR>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
 
 		} else {
 			echo "\n<H1>No responses set up in this group</H1>";
@@ -423,7 +428,7 @@ if ($group_id && $atid) {
 			$arr[]='User Name';
 			$arr[]='Permission';
 
-			echo html_build_list_table_top($arr);
+			echo $GLOBALS['HTML']->listTableTop($arr);
 
 			$i=0;
 			//
@@ -449,7 +454,9 @@ if ($group_id && $atid) {
 			}
 			echo '<TR><TD COLSPAN=3 ALIGN=MIDDLE><INPUT type="submit" name="post_changes" value="Update Developer Permissions">
 			</FORM></TD></TR>';
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 		?>
 		<P>

@@ -124,7 +124,7 @@ if (!$res || $rows < 1) {
 	$title_arr[]='Package Name';
 	$title_arr[]='Status';
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	for ($i=0; $i<$rows; $i++) {
 		echo '
@@ -151,7 +151,8 @@ if (!$res || $rows < 1) {
 			<TD><FONT SIZE="-1"><INPUT TYPE="SUBMIT" NAME="submit" VALUE="Update"></TD>
 			</TR></FORM>';
 	}
-	echo '</TABLE>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
 
 }
 

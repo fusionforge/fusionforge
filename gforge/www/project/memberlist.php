@@ -44,7 +44,7 @@ $title_arr[]='Role/Position';
 $title_arr[]='Email';
 $title_arr[]='Skills';
 
-echo html_build_list_table_top ($title_arr);
+echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 $res_memb = db_query($query);
 while ( $row_memb=db_fetch_array($res_memb) ) {
@@ -63,7 +63,8 @@ while ( $row_memb=db_fetch_array($res_memb) ) {
 		$row_memb['user_id']."\">View</a></td>\n";
 	print "\t</tr>\n";
 }
-print "\t</table>";
+
+echo $GLOBALS['HTML']->listTableBottom();
 
 site_project_footer(array());
 

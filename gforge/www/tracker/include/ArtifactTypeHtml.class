@@ -104,7 +104,7 @@ class ArtifactTypeHtml extends ArtifactType {
 			<INPUT TYPE="HIDDEN" NAME="func" VALUE="massupdate">';
 		}
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$then=(time()-$this->getDuePeriod());
 		$rows=db_numrows($result);
@@ -211,7 +211,9 @@ class ArtifactTypeHtml extends ArtifactType {
 		</FORM>
 			</TD></TR>';
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 }

@@ -83,7 +83,7 @@ if ($usersearch) {
 		$title[]='Member since';
 		$title[]='Status (Web/Unix)';
 					 
-		echo html_build_list_table_top($title);
+		echo $GLOBALS['HTML']->listTableTop($title);
 
 		while ($row = db_fetch_array($result)) {
 			print '
@@ -97,7 +97,8 @@ if ($usersearch) {
 				</tr>
 			'; 
 		}
-		print "</table>";
+
+		echo $GLOBALS['HTML']->listTableBottom();
 
 	} 
 } // end if ($usersearch)
@@ -140,7 +141,7 @@ if ($groupsearch) {
 		$title[]='Registered';
 		$title[]='Status';
 
-		echo html_build_list_table_top($title);
+		echo $GLOBALS['HTML']->listTableTop($title);
 
 		while ($row = db_fetch_array($result)) {
 
@@ -161,7 +162,7 @@ if ($groupsearch) {
 					
 		}
 		
-		print "</table>";
+		echo $GLOBALS['HTML']->listTableBottom();
 
 	} 
 

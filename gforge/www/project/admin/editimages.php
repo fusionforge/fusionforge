@@ -242,7 +242,7 @@ $arr[]='Size';
 $arr[]='Dims';
 $arr[]='Description';
 
-echo html_build_list_table_top($arr);
+echo $GLOBALS['HTML']->listTableTop($arr);
 
 $rows=db_numrows($result);
 for ($i=0; $i<$rows; $i++) {
@@ -279,7 +279,8 @@ for ($i=0; $i<$rows; $i++) {
 	.'<TD>'.stripslashes(db_result($result,$i,'description')).'</TD>'
 	.'</TR>';
 }
-echo '</TABLE>';
+
+echo $GLOBALS['HTML']->listTableBottom();
 
 project_admin_footer(array());
 

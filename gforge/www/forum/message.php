@@ -59,14 +59,15 @@ if ($msg_id) {
 	$title_arr=array();
 	$title_arr[]='Message: '.$msg_id;
 
-	echo html_build_list_table_top ($title_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 	echo "<TR><TD BGCOLOR=\"E3E3E3\">\n";
 	echo "BY: ".db_result($result,0, "user_name")."<BR>";
 	echo "DATE: ".date($sys_datefmt,db_result($result,0, "date"))."<BR>";
 	echo "SUBJECT: ". db_result($result,0, "subject")."<P>";
 	echo util_make_links(nl2br(db_result($result,0, 'body')));
-	echo "</TD></TR></TABLE>";
+	echo "</TD></TR>";
+	echo $GLOBALS['HTML']->listTableBottom();
 
 	/*
 		Show entire thread

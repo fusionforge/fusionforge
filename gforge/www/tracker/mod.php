@@ -187,7 +187,7 @@ $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),
 		$title_arr[]='Name';
 		$title_arr[]='Description';
 		$title_arr[]='Download';
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		if ($count > 0) {
 
@@ -202,8 +202,8 @@ $ath->header(array ('title'=>'Modify: '.$ah->getID(). ' - ' . $ah->getSummary(),
 			echo '<TR><TD COLSPAN=3>No Files Currently Attached</TD></TR>';
 		}
 
+		echo $GLOBALS['HTML']->listTableBottom();
 		?>
-		</TABLE>
 	</TD><TR>
 
 	<TR><TD COLSPAN="2">

@@ -284,7 +284,7 @@ function show_thread( $thread_id ) {
 		$title_arr[]=$Language->getText('forum_utils','author');
 		$title_arr[]=$Language->getText('forum_utils','date');
 
-		$ret_val .= html_build_list_table_top ($title_arr);
+		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		reset($msg_arr["0"]);
 		$thread =& $msg_arr["0"][0];
@@ -313,7 +313,8 @@ function show_thread( $thread_id ) {
 		/*
 			end table
 		*/
-		$ret_val .= '</TABLE>';
+		$ret_val .= $GLOBALS['HTML']->listTableBottom();
+
 	}
 	return $ret_val;
 }

@@ -52,7 +52,7 @@ $title_arr[] = 'Date';
 $group_unix_name=group_getunixname($group_id);
 
    // print the header row
-//echo html_build_list_table_top($title_arr) . "\n";
+//echo $GLOBALS[HTML]->listTableTop($title_arr) . "\n";
 function col_heading($title)
 {
   global $HTML;

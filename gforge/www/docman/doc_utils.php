@@ -51,7 +51,7 @@ function display_groups($group_id) {
 		$title_arr[]='Group Name';
 		$title_arr[]='Controls';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$i = 0;
 		while ($row = db_fetch_array($result)) {
@@ -64,7 +64,9 @@ function display_groups($group_id) {
 			print "$output";
 			$i++;
 		}
-		echo '</table>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 		
 	docman_footer($params);
@@ -119,7 +121,7 @@ function display_docs($style,$group_id) {
 		$title_arr[]='Name';
 		$title_arr[]='Create Date';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$i = 0;
 		while ($row = db_fetch_array($result)) {
@@ -128,8 +130,10 @@ function display_docs($style,$group_id) {
 				."<td><a href=\"index.php?docid=".$row['docid']."&mode=docedit&group_id=".$group_id."\">".$row['title']."</a></td>"
 				."<td>".date($sys_datefmt,$row['createdate'])."</td></tr>";
 			$i++;
-		}	
-		echo '</table>';
+		}
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}//end else
 
 } //end function display_docs($style)

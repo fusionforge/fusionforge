@@ -367,7 +367,7 @@ if ($params['toptab'] && $params['group']) {
 	/**
 	 * boxGetAltRowStyle() - Get an alternating row style for tables
 	 *
-	 * @param               int             Row number
+	 * @param			   int			 Row number
 	 */
 	function boxGetAltRowStyle($i) {
 		if ($i % 2 == 0) {
@@ -389,6 +389,38 @@ if ($params['toptab'] && $params['group']) {
 			</TABLE>
 		</TD></TR>
 		</TABLE><P>';
+	}
+
+	/**
+	 * listTableTop() - Takes an array of titles and builds the first row of a new table.
+	 *
+	 * @param	   array   The array of titles
+	 * @param	   array   The array of title links
+	 */
+	function listTableTop ($title_arr,$links_arr=false) {
+		$return = '
+		<TABLE WIDTH="100%" BORDER="0" CELLSPACING="1" CELLPADDING="2">
+			<TR BGCOLOR="'. $this->COLOR_HTMLBOX_TITLE .'">';
+
+		$count=count($title_arr);
+		if ($links_arr) {
+			for ($i=0; $i<$count; $i++) {
+				$return .= '
+				<TD ALIGN="MIDDLE"><a class=sortbutton href="'.$links_arr[$i].'"><FONT COLOR="'.
+				$this->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title_arr[$i].'</B></FONT></A></TD>';
+			}
+		} else {
+			for ($i=0; $i<$count; $i++) {
+				$return .= '
+				<TD ALIGN="MIDDLE"><FONT COLOR="'.
+				$this->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title_arr[$i].'</B></FONT></TD>';
+			}
+		}
+		return $return.'</TR>';
+	}
+
+	function listTableBottom() {
+		return '</TABLE>';
 	}
 
 	function outerTabs($params) {
@@ -654,9 +686,9 @@ if ($params['toptab'] && $params['group']) {
 	}
 
 	/**
-	 *      news_menu() - "theme" top of page
+	 *	  news_menu() - "theme" top of page
 	 *
-	 * @param       array   Header parameters array
+	 * @param	   array   Header parameters array
 	 */
 	function news_menu($params){
 		global $Language;
@@ -683,9 +715,9 @@ if ($params['toptab'] && $params['group']) {
 	}
 
 	/**
-	 *      user_menu() - "theme" top of page
+	 *	  user_menu() - "theme" top of page
 	 *
-	 * @param       array   Header parameters array
+	 * @param	   array   Header parameters array
 	 */
 	function user_menu($params){
 		global $Language;
@@ -699,9 +731,9 @@ if ($params['toptab'] && $params['group']) {
 	}
 
 	/**
-	 *      admin_menu() - "theme" top of page
+	 *	  admin_menu() - "theme" top of page
 	 *
-	 * @param       array   Header parameters array
+	 * @param	   array   Header parameters array
 	 */
 	function admin_menu($params){
 		$group_id=$params['group'];

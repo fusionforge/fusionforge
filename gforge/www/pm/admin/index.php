@@ -136,7 +136,7 @@ if ($group_id && user_ismember($group_id,'P2')) {
 			$title_arr[]='Name';
 			$title_arr[]='Update';
 
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 			for ($i=0; $i<$rows; $i++) {
 				echo '
@@ -165,7 +165,9 @@ if ($group_id && user_ismember($group_id,'P2')) {
 					</TD></TR>
 					</FORM>';
 			}
-			echo '</TABLE>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 
 		pm_footer(array());

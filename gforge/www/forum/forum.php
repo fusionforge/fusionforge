@@ -263,7 +263,7 @@ if ($forum_id) {
 		$title_arr[]=$Language->getText('forum_forum','author');
 		$title_arr[]=$Language->getText('forum_forum','date');
 
-		$ret_val .= html_build_list_table_top ($title_arr);
+		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		$rows=count($msg_arr[0]);
 			 
@@ -305,7 +305,7 @@ if ($forum_id) {
 			$i++;
 		}
 
-		$ret_val .= '</TABLE>';
+		$ret_val .= $GLOBALS['HTML']->listTableBottom();
 
 	} else if ($style=='flat') {
 
@@ -352,7 +352,7 @@ if ($forum_id) {
 		$title_arr[]=$Language->getText('forum_forum','replies');
 		$title_arr[]=$Language->getText('forum_forum','lastpost');
 	
-		$ret_val .= html_build_list_table_top ($title_arr);
+		$ret_val .= $GLOBALS['HTML']->listTableTop ($title_arr);
 		$i=0;
 		while (($row=db_fetch_array($result)) && ($i < $max_rows)) {
 			$ret_val .= '
@@ -376,7 +376,7 @@ if ($forum_id) {
 			$i++;
 		}
 
-		$ret_val .= '</TABLE>';
+		$ret_val .= $GLOBALS['HTML']->listTableBottom();
 
 	}
 

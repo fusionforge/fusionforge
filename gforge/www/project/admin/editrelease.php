@@ -297,7 +297,7 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 			$title_arr[]='Processor<BR>Release Date';
 			$title_arr[]='File Type<BR>Update';
 	
-			echo html_build_list_table_top ($title_arr);
+			echo $GLOBALS['HTML']->listTableTop ($title_arr);
 	
 		for($x=0; $x<$rows; $x++) {
 ?>
@@ -345,7 +345,9 @@ Upload a new file: <input type="file" name="userfile"  size="30">
 			</form>
 <?php
 			}
-			echo '</table>';
+
+			echo $GLOBALS['HTML']->listTableBottom();
+
 		}
 	} else {
 		$feedback .= $frs->getErrorMessage();

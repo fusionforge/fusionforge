@@ -270,7 +270,7 @@ function pm_show_tasklist ($result,$offset,$set='open') {
 	$links_arr[]=$url.'end_date';
 	$links_arr[]=$url.'percent_complete';
 
-	echo html_build_list_table_top ($title_arr,$links_arr);
+	echo $GLOBALS['HTML']->listTableTop ($title_arr,$links_arr);
 
 	$now=time();
 
@@ -310,7 +310,10 @@ function pm_show_tasklist ($result,$offset,$set='open') {
 	} else {
 		echo '&nbsp;';
 	}
-	echo '</TD></TR></TABLE>';
+	echo '</TD></TR>';
+
+	echo $GLOBALS['HTML']->listTableBottom();
+
 }
 
 function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) {
@@ -330,7 +333,7 @@ function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) 
 		$title_arr[]='Task ID';
 		$title_arr[]='Summary';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ($i=0; $i < $rows; $i++) {
 			echo '
@@ -342,7 +345,9 @@ function pm_show_dependent_tasks ($project_task_id,$group_id,$group_project_id) 
 				db_result($result, $i, 'project_task_id').'</TD>
 				<TD>'.db_result($result, $i, 'summary').'</TD></TR>';
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	} else {
 		echo '
 			<H3>No Tasks are Dependent on This Task</H3>';
@@ -372,7 +377,7 @@ function pm_show_task_details ($project_task_id) {
 		$title_arr[]='Date';
 		$title_arr[]='By';
 		
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ($i=0; $i < $rows; $i++) {
 			echo '
@@ -381,7 +386,9 @@ function pm_show_task_details ($project_task_id) {
 				<TD VALIGN="TOP">'.date($sys_datefmt,db_result($result, $i, 'date')).'</TD>
 				<TD VALIGN="TOP">'.db_result($result, $i, 'user_name').'</TD></TR>';
 		}
-		echo '</TABLE>';
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	} else {
 		echo '
 			<H3>No Comments Have Been Added</H3>';
@@ -414,7 +421,7 @@ function pm_show_task_history ($project_task_id) {
 		$title_arr[]='Date';
 		$title_arr[]='By';
 
-		echo html_build_list_table_top ($title_arr);
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ($i=0; $i < $rows; $i++) {
 			$field=db_result($result, $i, 'field_name');
@@ -444,9 +451,8 @@ function pm_show_task_history ($project_task_id) {
 				<TD>'.db_result($result, $i, 'user_name').'</TD></TR>';
 		}
 
-		echo '
-			</TABLE>';
-	
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	} else {
 		echo '
 			<H3>No Changes Have Been Made</H3>';

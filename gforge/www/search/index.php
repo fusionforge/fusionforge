@@ -194,9 +194,7 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'Group Name';
 		$title_arr[] = 'Description';
 
-		echo html_build_list_table_top($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			if (db_result($result, $i, 'type') == 2) {
@@ -211,7 +209,9 @@ if ($type_of_search == "soft") {
 				. highlight_target_words($array,db_result($result, $i, 'group_name'))."</A></TD>"
 				. "<TD>".highlight_target_words($array,db_result($result,$i,'short_description'))."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == "people") {
@@ -251,16 +251,16 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'User Name';
 		$title_arr[] = 'Real Name';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/users/".db_result($result, $i, 'user_name')."/\">"
 				. html_image("images/msg.png","10","12",array("BORDER"=>"0")) . db_result($result, $i, 'user_name')."</A></TD>"
 				. "<TD>".db_result($result,$i,'realname')."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == 'forums' && $forum_id && $group_id) {
@@ -297,9 +297,7 @@ if ($type_of_search == "soft") {
 		$title_arr[] = 'Author';
 		$title_arr[] = 'Date';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\"><TD><A HREF=\"/forum/message.php?msg_id="
@@ -309,7 +307,9 @@ if ($type_of_search == "soft") {
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>".date($sys_datefmt,db_result($result,$i,"date"))."</TD></TR>\n";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else if ($type_of_search == 'artifact' && $atid && $group_id) {
@@ -364,9 +364,7 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 		$title_arr[] = 'Submitted By';
 		$title_arr[] = 'Date';
 
-		echo html_build_list_table_top ($title_arr);
-
-		echo "\n";
+		echo $GLOBALS['HTML']->listTableTop ($title_arr);
 
 		for ( $i = 0; $i < $rows; $i++ ) {
 			print	"\n<TR BGCOLOR=\"". html_get_alt_row_color($i) ."\">
@@ -380,7 +378,9 @@ create index art_groupartid_artifactid on artifact (group_artifact_id,artifact_i
 				. "<TD>".db_result($result, $i, "user_name")."</TD>"
 				. "<TD>". date($sys_datefmt,db_result($result,$i,"open_date"))."</TD></TR>";
 		}
-		echo "</TABLE>\n";
+
+		echo $GLOBALS['HTML']->listTableBottom();
+
 	}
 
 } else {

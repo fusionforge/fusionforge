@@ -158,36 +158,6 @@ function html_get_timezone_popup ($title='timezone',$selected='xzxz') {
 }
 
 /**
- * html_build_list_table_top() - Takes an array of titles and builds the first row of a new table.
- *
- * @param		array	The array of titles
- * @param		array	The array of title links
- */
-function html_build_list_table_top ($title_arr,$links_arr=false) {
-	GLOBAL $HTML;
-
-	$return = '
-	<TABLE WIDTH="100%" BORDER="0" CELLSPACING="1" CELLPADDING="2">
-		<TR BGCOLOR="'. $HTML->COLOR_HTMLBOX_TITLE .'">';
-
-	$count=count($title_arr);
-	if ($links_arr) {
-		for ($i=0; $i<$count; $i++) {
-			$return .= '
-			<TD ALIGN="MIDDLE"><a class=sortbutton href="'.$links_arr[$i].'"><FONT COLOR="'.
-			$HTML->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title_arr[$i].'</B></FONT></A></TD>';
-		}
-	} else {
-		for ($i=0; $i<$count; $i++) {
-			$return .= '
-			<TD ALIGN="MIDDLE"><FONT COLOR="'.
-			$HTML->FONTCOLOR_HTMLBOX_TITLE.'"><B>'.$title_arr[$i].'</B></FONT></TD>';
-		}
-	}
-	return $return.'</TR>';
-}
-
-/**
  * html_get_alt_row_color() - Get an alternating row color for tables.
  *
  * @param		int		Row number
