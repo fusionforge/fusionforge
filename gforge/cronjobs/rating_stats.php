@@ -1,5 +1,14 @@
 #! /usr/bin/php4 -f
 <?php
+/**
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
         
 require ('squal_pre.php');
 
@@ -22,6 +31,8 @@ $rel = db_query($query);
 
 db_commit();
 
-echo "Done: ".db_error();
+if (db_error()) {
+	echo "Error: ".db_error();
+}
 
 ?>

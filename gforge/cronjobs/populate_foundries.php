@@ -1,11 +1,14 @@
 #! /usr/bin/php4 -f
 <?php
-//
-// SourceForge: Breaking Down the Barriers to Open Source Development
-// Copyright 1999-2000 (c) The SourceForge Crew
-// http://sourceforge.net
-//
-// $Id: populate_foundries.php,v 1.6 2000/12/08 21:12:54 tperdue Exp $
+/**
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id: populate_foundries.php,v 1.9 2001/06/13 18:44:09 pfalcon Exp $
+  *
+  */
 
 /*
 
@@ -36,7 +39,7 @@ function get_trove_sub_projects($cat_id) {
 	if (!$cat_id) {
 		return '';
 	}
-	echo '<P>IN SUBPROJECT'.$cat_id;
+//	echo '<P>IN SUBPROJECT'.$cat_id;
 	//return an array of trove categories under $cat_id
 	$sql="SELECT trove_cat_id FROM trove_cat WHERE parent IN ($cat_id)";
 	$result=db_query($sql);
@@ -52,7 +55,7 @@ db_begin();
 db_query("DELETE FROM foundry_projects");
 
 for ($i=0; $i<$count; $i++) {
-	echo "<BR>$i";
+//	echo "<BR>$i";
 	$trove_list=array();
 	$trove_list= get_trove_sub_projects($foundry_cats[$i]);
 	$trove_list[]=$foundry_cats[$i];
@@ -80,5 +83,7 @@ for ($i=0; $i<$count; $i++) {
 }
 
 db_commit();
-echo db_error();
+if (db_error()) {
+	echo "Done: ".db_error();
+}
 ?>

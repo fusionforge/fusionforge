@@ -1,11 +1,16 @@
 #! /usr/bin/php4 -f
 <?php
+/**
+  *
+  * SourceForge: Breaking Down the Barriers to Open Source Development
+  * Copyright 1999-2001 (c) VA Linux Systems
+  * http://sourceforge.net
+  *
+  * @version   $Id$
+  *
+  */
 
 require ('squal_pre.php');
-
-/*if (!strstr($REMOTE_ADDR,$sys_internal_network)) {
-        exit_permission_denied();
-}*/
 
 $today_formatted=date('Ymd',time());
 
@@ -14,12 +19,15 @@ db_begin();
    ## shuffle the activity log tables - we keep 3 days of data
 $sql = "DROP TABLE activity_log_old_old";
 $rel = db_query($sql);
+echo db_error();
 
 $sql = "ALTER TABLE activity_log_old RENAME TO activity_log_old_old";
 $rel = db_query($sql);
+echo db_error();
 
 $sql = "ALTER TABLE activity_log RENAME TO activity_log_old";
 $rel = db_query($sql);
+echo db_error();
 
 $sql = "CREATE TABLE activity_log (
 	day int DEFAULT '0' NOT NULL,
@@ -33,15 +41,19 @@ $sql = "CREATE TABLE activity_log (
 	type int DEFAULT '0' NOT NULL
 )";
 $rel = db_query($sql);
+echo db_error();
 
 ## Cleanup any spillover, so that the activity log always contains exactly 24 hours worth of data.
 $sql = "INSERT INTO activity_log SELECT * FROM activity_log_old WHERE day='$today_formatted'";
 $rel = db_query($sql);
+echo db_error();
 
 $sql = "DELETE FROM activity_log_old WHERE day='$today_formatted'";
 $rel = db_query($sql);
+echo db_error();
 
 db_commit();
-echo "Done: ".db_error();
+
+echo "Done: ".date('Ymd H:i').' - '.db_error();
 
 ?>
