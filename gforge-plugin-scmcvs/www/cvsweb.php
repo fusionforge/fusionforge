@@ -60,7 +60,8 @@ if ($projectName) {
 	if ((!$Group->enableAnonSCM() && !($perm && is_object($perm) && $perm->isMember())) || !isset($GLOBALS['sys_path_to_scmweb']) || !is_file($GLOBALS['sys_path_to_scmweb'].'/cvsweb')) {
 		exit_permission_denied();
 	}
-	if (in_array($contentType, $supportedContentTypes)) {
+	$isHtml = in_array($contentType, $supportedContentTypes);
+	if ($isHtml) {
 		scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$Group->getID()));
 		echo '<div id="cvsweb">';
 	} else {
@@ -72,7 +73,7 @@ if ($projectName) {
 	$content = ob_get_contents();
 	ob_end_clean();
 	
-	if(extension_loaded('mbstring')) {
+	if($isHtml && extension_loaded('mbstring')) {
 		$encoding = mb_detect_encoding($content);
 		if($encoding != 'UTF-8') {
 			$content = mb_convert_encoding($content, 'UTF-8', $encoding);
@@ -81,7 +82,7 @@ if ($projectName) {
 	
 	echo $content;
 	
-	if (in_array($contentType, $supportedContentTypes)) {
+	if ($isHtml) {
 		echo '</div>';
 		scm_footer(array());
 	}
