@@ -74,7 +74,7 @@ PRIMARY KEY (user_id)
 );
 CREATE INDEX themeprefs_userid ON theme_prefs(user_id);
 
-INSERT INTO themes (dirname, fullname) VALUES ('default', 'Default Theme');
+--INSERT INTO themes (dirname, fullname) VALUES ('default', 'Default Theme');
 --These themes have to be converted to new Layout.class
 --INSERT INTO themes (dirname, fullname) VALUES ('savannah_codex', 'Savannah CodeX');
 --INSERT INTO themes (dirname, fullname) VALUES ('savannah_forest', 'Savannah Forest');
@@ -141,13 +141,15 @@ ALTER TABLE groups ALTER COLUMN enable_anoncvs SET DEFAULT 1;
 UPDATE groups SET enable_anoncvs = 1;
 
 ALTER TABLE supported_languages RENAME TO supported_languages_old;
+DROP SEQUENCE supported_languages_pk_seq;
 CREATE TABLE supported_languages (
-	language_id integer DEFAULT nextval('supported_languages_pk_seq'::text) NOT NULL,
+	language_id SERIAL,
 	name text,
 	filename text,
 	classname text,
 	language_code character(5));
 INSERT INTO supported_languages SELECT * FROM supported_languages_old;
+SELECT SETVAL('supported_langu_language_id_seq',(select max(language_id) FROM supported_languages));
 DROP TABLE supported_languages_old;
 ALTER TABLE supported_languages ADD CONSTRAINT supported_languages_pkey PRIMARY KEY (language_id);
 ALTER TABLE users ADD CONSTRAINT users_languageid_fk

@@ -7,6 +7,10 @@
 GForge is a fork of the 2.61 SourceForge code, which was only available via anonymous 
 CVS from VA (Research|Linux|Software).
 <P>
+GForge.org is <B>not</B> a project hosting platform, it is merely an implementation of
+the GForge code, which is available for public download on the right hand side of this
+page.
+<P>
 <A HREF="/tracker/?atid=101&group_id=5&func=browse"><IMG SRC="/images/gforge.jpg" WIDTH=450 HEIGHT=268 BORDER=0></A>
 <P>
 We believe that the GForge functionality is important not only to the Open Source 
@@ -46,7 +50,7 @@ echo $HTML->boxBottom();
 echo $HTML->boxTop('Getting GForge');
 ?>
 <B>Download:</B><BR>
-<A HREF="./gforge-30-pre3.tar.bz2">GForge3.0</A><BR>
+<A HREF="/project/showfiles.php?group_id=1">GForge3.0pre5</A><BR>
 <A HREF="http://postgresql.org/">PostgreSQL</A><BR>
 <A HREF="http://www.php.net/">PHP 4.x</A><BR>
 <A HREF="http://www.apache.org/">Apache</A><BR>
