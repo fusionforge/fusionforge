@@ -1,0 +1,78 @@
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/utils/gforge-hourly-cronjobs.sh mezzanine_patched_gforge-3.0pre9/utils/gforge-hourly-cronjobs.sh
+--- gforge-3.0pre9/utils/gforge-hourly-cronjobs.sh	Wed Dec 31 19:00:00 1969
++++ mezzanine_patched_gforge-3.0pre9/utils/gforge-hourly-cronjobs.sh	Fri Jan 24 15:31:32 2003
+@@ -0,0 +1,20 @@
++#!/bin/sh
++#
++# Run all GForge hourly cronjobs in the proper order.
++# (Based on original SourceForge sample crontab.)
++#
++# 24 January 2003
++# Michael Jennings <mej@eterm.org>
++#
++
++GFORGE_ROOT="/usr/share/gforge"
++CRON_DIR="$GFORGE_ROOT/cronjobs"
++PHP="/usr/bin/php"
++RUN_AS="gforge"
++
++if [ "`id -n -u`" != "$RUN_AS" ]; then
++    exec su -l $RUN_AS -s $SHELL -c "$0"
++fi
++
++### Send pending mass-mailings, if any.
++# $PHP $CRON_DIR/massmail.php
+diff -Nur -x '*.orig' -x '*.rej' gforge-3.0pre9/utils/gforge-nightly-cronjobs.sh mezzanine_patched_gforge-3.0pre9/utils/gforge-nightly-cronjobs.sh
+--- gforge-3.0pre9/utils/gforge-nightly-cronjobs.sh	Wed Dec 31 19:00:00 1969
++++ mezzanine_patched_gforge-3.0pre9/utils/gforge-nightly-cronjobs.sh	Fri Jan 24 15:29:44 2003
+@@ -0,0 +1,50 @@
++#!/bin/sh
++#
++# Run all nightly GForge cronjobs in the proper order
++# (Based on original SourceForge sample crontab.)
++#
++# 24 January 2003
++# Michael Jennings <mej@eterm.org>
++#
++
++GFORGE_ROOT="/usr/share/gforge"
++CRON_DIR="$GFORGE_ROOT/cronjobs"
++PHP="/usr/bin/php"
++RUN_AS="gforge"
++
++if [ "`id -n -u`" != "$RUN_AS" ]; then
++    exec su -l $RUN_AS -s $SHELL -c "$0"
++fi
++
++### daily rotation of the activity_log
++$PHP $CRON_DIR/rotate_activity.php
++
++### daily aggregating of the numbers
++# $PHP $CRON_DIR/site_stats.php
++
++### recalculate user popularity metric
++# $PHP $CRON_DIR/calculate_user_metric.php
++
++### daily project_weekly_metric recalc
++# $PHP $CRON_DIR/project_weekly_metric.php
++
++### daily deletion of sessions, closing jobs, etc
++# $PHP $CRON_DIR/project_cleanup.php
++
++### daily crunching of survey data and other associated ratings
++# $PHP $CRON_DIR/rating_stats.php
++
++### daily crunching of project summary data (counts)
++# $PHP $CRON_DIR/db_project_sums.php
++
++### daily recalculate of the sums under the trove map
++# $PHP $CRON_DIR/db_trove_maint.php
++
++#	daily close pending artifacts
++# $PHP $CRON_DIR/check_stale_tracker_items.php
++
++### VACUUM should be done after ALL OTHER JOBS
++# $PHP $CRON_DIR/vacuum.php
++
++### Stats aggregation work
++# $PHP $CRON_DIR/db_stats_agg.php
