@@ -2,6 +2,10 @@
 
 	* common/include/Group.class:
 	Fixed bug [ #494 ] "Project Approved" don't send e-mail
+
+	* www/include/features_boxes.php
+	Applied patch [ #490 ] Deleted projects can appear inside 
+	the "Most Active this week" section
 	
 2003-08-22  Roland Mas  <99.roland.mas@aist.enst.fr>
 

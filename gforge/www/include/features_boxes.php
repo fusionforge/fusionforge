@@ -136,7 +136,7 @@ function show_highest_ranked_users() {
 	//select out the users information to show the top users on the site
 	$sql="SELECT users.user_name,users.realname,user_metric.metric
 		FROM user_metric,users
-		WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11
+		WHERE users.user_id=user_metric.user_id AND user_metric.ranking < 11 AND users.status != 'D'  
 		ORDER BY ranking ASC";
 	$res=db_query($sql);
 	$rows=db_numrows($res);
@@ -158,7 +158,8 @@ function show_highest_ranked_projects() {
 		"FROM groups,project_weekly_metric ".
 		"WHERE groups.group_id=project_weekly_metric.group_id ".
 		"AND groups.is_public=1 ".
-		"AND groups.type=1 ".
+		"AND groups.type=1  ".
+		"AND groups.status != 'D'  ".
 		"ORDER BY ranking ASC";
 	$result=db_query($sql,20);
 	if (!$result || db_numrows($result) < 1) {
