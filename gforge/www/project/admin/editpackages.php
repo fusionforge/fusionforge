@@ -87,11 +87,10 @@ You can use packages to group different file releases together, or use them howe
 <p>
 <h4>Your Packages:</H4>
 <p>
-Start by defining your packages, then you can upload files with FTP to the <strong>incoming</strong> directory on 
-<strong><a href=ftp://$user_unix_name@$sys_upload_host/incoming/>$sys_upload_host</a></strong>. Once you have the files uploaded, you can then <strong>create releases</strong> 
-of your packages.
-<p>
-Once you have packages defined, you can start creating new <strong>releases of packages.</strong>
+<ol>
+<li>Define your packages</li>
+<li>Create new releases of packages</li>
+</ol>
 <p>
 <h3>Releases of Packages</h3>
 <p>
