@@ -39,8 +39,9 @@ sourceforge (2.6-0+12) unstable; urgency=low
   * [Christian] install/desinstall cycle support for common, web-apache,
     db-postgress
   * [Christian] Added ssh-nonfree support
+  * [Christian] Added many Replaces: sourceforge in control files 
 
- -- Christian Bayle <bayle@debian.org>  Wed, 26 Jun 2002 14:35:22 +0200
+ -- Christian Bayle <bayle@debian.org>  Thu, 27 Jun 2002 00:13:31 +0200
 
 sourceforge (2.6-0+11) unstable; urgency=low
 
