@@ -149,4 +149,31 @@ All other themes will continue to work.
 Just proceed in the same way for other places in the code where you
 want to customize icons, and send us the appropriate patch :)
 
+
+HOW TO NAME MY THEME
+--------------------
+
+Since all themes need to be known by their "identifier", which
+corresponds to their directory name, there needs to be some sort of
+cooperation to avoid namespace conflicts.  We suggest that theme
+authors who want to release their work to the public first contact us
+to "allocate" a theme identifier.  Once this is done, you're very
+welcome to provide a sourceforge-theme-<yourthemeid> package.  If you
+are not a Debian developer yourself, we can even help you spread it to
+the community by sponsoring the package to Debian.
+
+  For reference, this is the list of currently used theme names:
+
+- classic: the "Classic" theme, from sourceforge.net;
+- forged: "Forged metal", also from sourceforge.net;
+- savannah: historical theme for Savannah, "stolen" from
+  savannah.gnu.org;
+- savannah_codex, savannah_darkslate, savannah_forest,
+  savannah_reverse, savannah_sad, savannah_savannah, savannah_slashd,
+  savannah_startrek, savannah_transparent, savannah_water,
+  savannah_www.gnu.org: lots of other themes "stolen" from Savannah;
+- ultralite: "Ultra lite" theme, from sourceforge.net;
+- querencia: theme from Querencia Livre, contributed by Otavio
+  Salvador <otavio@debian.org>.
+
   -- Christian Bayle
