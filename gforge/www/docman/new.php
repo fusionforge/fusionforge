@@ -78,21 +78,21 @@ if ($submit){
 
 	<tr>
 		<td>
-		<strong>Document Title:</strong><br />
+		<strong>Document Title:<?php echo utils_requiredField(); ?> </strong><br />
 		<input type="text" name="title" size="40" maxlength="255">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Description:</strong><br />
+		<strong>Description:<?php echo utils_requiredField(); ?></strong><br />
 		<input type="text" name="description" size="50" maxlength="255">
 		</td>
 	</tr>
 
 	<tr>
 		<td>
-		<strong>Upload File:</strong><br />
+		<strong>Upload File:<?php echo utils_requiredField(); ?></strong><br />
 		<input type="file" name="uploaded_data" size="30">
 		</td>
 	</tr>
