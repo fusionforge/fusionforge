@@ -77,7 +77,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 			'&amp;group_id='.$art->ArtifactType->Group->getID().
 			'&amp;atid='.$art->ArtifactType->getID().'">'.
 			$art->getID().'</td>
-			<td>' . stripslashes($art->getSummary());
+			<td>' . $art->getSummary();
 
 			$last_group = $art->ArtifactType->getID();
 		}
@@ -106,7 +106,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 			<td><a href="/tracker/?func=detail&amp;aid='.
       $art->getID().
       '&amp;group_id='.$art->ArtifactType->Group->getID().
-      '&amp;atid='.$art->ArtifactType->getID().'">' . stripslashes($art->getSummary()) .'</a>';
+      '&amp;atid='.$art->ArtifactType->getID().'">' . $art->getSummary() .'</a>';
 
 			$last_group = $art->ArtifactType->getID();
 		}
@@ -227,7 +227,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 			'&amp;group_id='.$group->getID().
 			'&amp;group_project_id='.$projectGroup->getID().'">'.
 			$task->getID().'</td>
-			<td>'.$style_begin.stripslashes($task->getSummary()).$style_end;
+			<td>'.$style_begin.$task->getSummary().$style_end;
 
 			$last_group = $projectGroup->getID();
 		}
