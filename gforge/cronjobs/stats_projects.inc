@@ -34,7 +34,7 @@ function project_stats_day($year,$month,$day) {
 	$day_begin=mktime(0,0,0,$month,$day,$year);
 	$day_end=($day_begin + 86400);
 
-	echo "Stats_project: $datetime::$day_begin::$day_end::".date('Ymd',$day_begin)."::".date('Ymd',$day_end)."--> $i\n";
+#	echo "Stats_project: $datetime::$day_begin::$day_end::".date('Ymd',$day_begin)."::".date('Ymd',$day_end)."--> $i\n";
 
 	db_query("DELETE FROM stats_project WHERE month='$year$month' AND day='$day'");
 
