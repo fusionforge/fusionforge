@@ -9,7 +9,7 @@
  * @author	Ronald Petty
  *
  */
-	require_once('www/include/pre.php');    // Initial db and session library, opens session
+	require_once('pre.php');    // Initial db and session library, opens session
 
 	//preferences
 	$require_login 		= false;		//true if you want users to have to login
