@@ -17,6 +17,9 @@
 # Daily crunching of survey data and other associated ratings
 40 1 * * * gforge [ -x /usr/lib/gforge/bin/rating_stats.php ] && /usr/lib/gforge/bin/rating_stats.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
+# Daily crunching of project summary data (counts)
+42 1 * * * gforge [ -x /usr/lib/gforge/bin/db_project_sums.php ] && /usr/lib/gforge/bin/db_project_sums.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
+
 # Daily project metrics
 #45 1 * * * gforge [ -x /usr/lib/gforge/bin/project_metric.php ] && /usr/lib/gforge/bin/project_metric.php -d include_path=/usr/share/gforge/:/usr/share/gforge/www/include > /dev/null 2>&1
 
