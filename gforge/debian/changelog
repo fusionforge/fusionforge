@@ -6,8 +6,14 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     return a string instead of direct printing
   * [Christian] you can choose default language in local.inc with
     e.g. $sys_lang='French';
+  * [Roland] Added the files necessary for sourceforge-mta-postfix.  Yay!
+    Our first try at flexibility!  Don't get any funny ideas though, I'm
+    pretty confident it doesn't work.  Yet.
+  * [Roland] [From 2.5] Changed the way we empty the LDAP directory, so as
+    not to kill entries that are not ours.
+  * [Roland] [From 2.5] Fixed last inserted languages.
 
- -- Christian Bayle <bayle@debian.org>  Fri, 12 Jul 2002 18:37:56 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 18 Jul 2002 10:45:35 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 
