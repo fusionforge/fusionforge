@@ -240,13 +240,12 @@ server_args = -f
 <pre>
 #!/bin/sh
 /usr/bin/cvs -f `ls -d /cvsroot/* | sed -e '1,$s/.*/--allow-root=&/'` pserver
-[root@cougaarforge tom]#
 </pre>
 </li>
 
 <li>
-<b>I set up GForge on Apache behind a Apache ProxyPass and now I'm getting infinite redirects!</b>
-<p>Try setting the ProxyPreserveHost directive to On:
+<b>I set up GForge on Apache behind a ProxyPass and now I'm getting infinite redirects!</b>
+<p>Try setting the <code>ProxyPreserveHost</code> directive to <code>On</code>:
 <pre>
 &lt;VirtualHost *&gt;
 ServerAdmin webmaster@myhost.com
@@ -281,7 +280,7 @@ to actually check out the code.  You can browse the CVS repository <a href="http
 
 <li>
 <b>Now that I've checked out the code, how do I initialize the database?</b>
-<p>First apply gforge3.sql:
+<p>First apply <code>gforge3.sql</code>:
 <pre>
 psql -U gforge -f gforge3.sql gforge < gforge3.sql
 </pre>
@@ -297,7 +296,7 @@ psql -U gforge -f gforge3.sql gforge < gforge3.sql
 <br>
 <li>
 <b>How do I use diff to create a patch?</b>
-<p>If you've checked out the code, go to the top of the CVS tree and type "cvs diff -u > mydiff.diff".  Or, if you're diffing against a release, you can go to the directory above the original code and your modified code and type "diff -uNr original-gforge-3.0pre7/ modified-GForge-3.0pre7/".  This will result in something like:
+<p>If you've checked out the code, go to the top of the CVS tree and type <code>cvs diff -u > mydiff.diff</code>.  Or, if you're diffing against a release, you can go to the directory above the original code and your modified code and type <code>diff -uNr original-gforge-3.0pre7/ modified-GForge-3.0pre7/</code>.  This will result in something like:
 <pre>
 [tom@shire foo]$ diff -Nur f1 f2
 diff -Nur f1/foo.txt f2/foo.txt
@@ -310,6 +309,7 @@ diff -Nur f1/foo.txt f2/foo.txt
 </pre>
 which you can then submit using the <a href="http://gforge.org/tracker/?atid=106&group_id=1&func=browse">patch manager</a>.
 </li>
+
 <br></br>
 <li>
 <b>Is there an IRC channel where developers hang out?</b>
@@ -319,7 +319,7 @@ which you can then submit using the <a href="http://gforge.org/tracker/?atid=106
 <br></br>
 <li>
 <b>How do I create a new theme?</b>
-<p>There's a separate HOWTO on this topic now - right <a href="http://gforge.org/docman/display_doc.php/27/gforge-themes-HOWTO.html">here</a>.
+<p>There's a separate HOWTO on this topic now - right <a href="http://gforge.org/docman/view.php/1/27/gforge-themes-HOWTO.html">here</a>.
 </li>
 
 <br></br>
@@ -329,8 +329,8 @@ which you can then submit using the <a href="http://gforge.org/tracker/?atid=106
 <ol>
 <li>Install the latest Maven release (b9 as of today).
 <li>Set up an environmental variable <code>MAVEN_HOME</code> to whereever you checked out the Maven code
-<li>Add $MAVEN_HOME/bin to your PATH
-<li>Run the build-bootstrap.xml Ant build script, i.e., <code>ant -f build-bootstrap.xml</code>
+<li>Add <code>$MAVEN_HOME/bin</code> to your PATH
+<li>Run the <code>build-bootstrap.xml</code> Ant build script, i.e., <code>ant -f build-bootstrap.xml</code>
 <li>When that's done, run <code>gforge/docs/xdocs/generate_docs.sh</code>.
 <li>Now you've got a PDF file and a zip file full of HTML in the <code>gforge/docs/xdocs/</code> directory.  Yay!
 </ol>
