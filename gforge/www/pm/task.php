@@ -39,10 +39,6 @@ if (!$pg || !is_object($pg)) {
 	exit_error('Error',$pg->getErrorMessage());
 }
 
-if (!$func) {
-	$func='browse';
-}
-
 if (session_loggedin()) {
 	$perm =& $g->getPermission( session_get_user() );
 }
@@ -116,7 +112,8 @@ switch ($func) {
 
 			$start_date=mktime($start_hour,$start_minute,0,$start_month,$start_day,$start_year);
 			$end_date=mktime($end_hour,$end_minute,0,$end_month,$end_day,$end_year);
-			if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,$status_id,$category_id,$percent_complete,$assigned_to,$dependent_on)) {
+			if (!$pt->update($summary,$details,$priority,$hours,$start_date,$end_date,
+				$status_id,$category_id,$percent_complete,$assigned_to,$dependent_on)) {
 				exit_error('ERROR','update():: '.$pt->getErrorMessage());
 			} else {
 				if (count($rem_artifact_id) > 0) {
@@ -131,6 +128,52 @@ switch ($func) {
 			exit_permission_denied();
 		}
 		break;
+	}
+
+	case 'massupdate' : {
+		$count=count($project_task_id_list);
+
+		if (session_loggedin() && $perm->isPMAdmin()) {
+
+			for ($i=0; $i < $count; $i++) {
+				$pt=new ProjectTask($pg,$project_task_id_list[$i]);
+				if (!$pt || !is_object($pt)) {
+					$feedback .= ' ID: '.$project_task_id_list[$i].'::ProjectTask Could Not Be Created';
+				} else if ($pt->isError()) {
+					$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
+				} else {
+
+					$_summary=addslashes($pt->getSummary());
+					$_details='';
+					$_priority=(($priority != 100) ? $priority : $pt->getPriority());
+					$_hours=$pt->getHours();
+					$_start_date=$pt->getStartDate();
+					$_end_date=$pt->getEndDate();
+					$_status_id=(($status_id != 100) ? $status_id : $pt->getStatusID());
+					$_category_id=(($category_id != 100) ? $category_id : $pt->getCategoryID());
+					//yikes, we want the ability to mass-update to "un-assigned", which is the ID=100, which
+					//conflicts with the "no change" ID! Sorry for messy use of 100.1
+					$_assigned_to=(($assigned_to != '100.1') ? $pt->getAssignedTo() : array('100'));
+					$_dependent_on=$pt->getDependentOn();
+
+					if (!$pt->update($_summary,$_details,$_priority,$_hours,$_start_date,$_end_date,
+							$_status_id,$_category_id,$_percent_complete,$_assigned_to,$_dependent_on)) {
+						$was_error=true;
+						$feedback .= ' ID: '.$project_task_id_list[$i].'::'.$pt->getErrorMessage();
+
+					}
+					unset($pt);
+				}
+			}
+			if (!$was_error) {
+				$feedback = $Language->getText('pm_addtask','task_updated_successfully');
+			}
+			include 'browse_task.php';
+			break;
+		} else {
+			exit_permission_denied();
+		}
+
 	}
 
 	//
@@ -154,14 +197,6 @@ switch ($func) {
 		} else {
 			exit_permission_denied();
 		}
-		break;
-	}
-
-	//
-	//	Simply browse existing tasks
-	//
-	case 'browse' : {
-		include 'browse_task.php';
 		break;
 	}
 
@@ -198,6 +233,12 @@ switch ($func) {
 		}
 		break;
 	}
+
+	default : {
+		include 'browse_task.php';
+		break;
+	}
+
 
 }
 

@@ -68,12 +68,12 @@ class ProjectGroupHTML extends ProjectGroup {
 		}
 	}
 
-	function statusBox($name='status_id',$checked='xyxy',$text_100='None') {
-		return html_build_select_box($this->getStatuses(),$name,$checked,true,$text_100);
+	function statusBox($name='status_id',$checked='xyxy',$show_100=true,$text_100='None') {
+		return html_build_select_box($this->getStatuses(),$name,$checked,$show_100,$text_100);
 	}
 
-	function categoryBox($name='category_id',$checked='xzxz') {
-		return html_build_select_box($this->getCategories(),$name,$checked);
+	function categoryBox($name='category_id',$checked='xzxz',$show_100=true,$text_100='None') {
+		return html_build_select_box($this->getCategories(),$name,$checked,$show_100,$text_100);
 	}
 
 	function percentCompleteBox($name='percent_complete',$selected=0) {

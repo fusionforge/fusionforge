@@ -135,7 +135,7 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 		<td>
 		<strong><?php echo $Language->getText('pm','status') ?>:</strong><br />
 		<?php
-		echo $pg->statusBox('status_id', $pt->getStatusID() );
+		echo $pg->statusBox('status_id', $pt->getStatusID(), false );
 		?>
 		</td>
 	</tr>
