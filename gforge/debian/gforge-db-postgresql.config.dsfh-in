@@ -37,3 +37,6 @@ fi
 db_input low gforge/shared/skill_list || true
 
 db_go || true
+
+vars="admin_login admin_password skill_list"
+update_mainconffile $vars
