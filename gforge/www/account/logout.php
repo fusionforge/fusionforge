@@ -27,6 +27,8 @@ require_once('pre.php');
 
 session_logout();
 
-Header('Location: /');
+plugin_hook('before_logout');
+
+header('Location: /');
 
 ?>
