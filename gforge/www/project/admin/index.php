@@ -132,7 +132,7 @@ while ($row_memb=db_fetch_array($res_memb)) {
 		$img="trash.png";
 	}
 	if ($is_admin) {
-		$button='<input type="image" name="DELETE" src="/images/ic/'.$img.'" height="16" width="16" border="0" />';
+		$button='<input type="image" name="DELETE" src="'.$HTML->imgroot.'/ic/'.$img.'" height="16" width="16" border="0" />';
 	} else {
 		$button='&nbsp;';
 	}
