@@ -277,7 +277,7 @@ forum_common_forummessage	error_group_forum_id	Group_forum_id in db result does 
 forum_common_forummessage	error_required_fields	Deve includere un titolo e il contenuto
 forum_common_forummessage	error_not_logged	Devi essere collegato per poter inserire messaggi
 forum_errors	error_getting_forum	Errore nel recupero del forum
-forum_errors	error_determining_forum_id Errore nel determinare il forum_id
+forum_errors	error_determining_forum_id	Errore nel determinare il forum_id
 forum_forum	section	Progetto: $1 
 forum_forum	title	Forum: Visualizza forum
 forum_forum	thread	Argomento
@@ -1139,7 +1139,7 @@ stats_site_utils	special_project_list	Special Project List
 stats_site_utils	returned_no_category	returned no category name
 stats_site_utils 	in_trove_category	Projects in trove category:
 stats_site_utils	or_special_project_list	OR enter Special Project List: 
-stats_site_utils 	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
+stats_site_utils	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
 stats_site_utils	report	Report: 
 stats_site_utils	last_30 ultimi 30
 stats_site_utils	all	tutti
@@ -1335,7 +1335,7 @@ admin_grouplist	group_list	Elenco gruppi
 admin_grouplist	group_list_for_category	Elenco gruppi per la categoria:
 admin_grouplist	groups_that_begin_with	Gruppi che iniziano per 
 admin_grouplist	group_name_click_to_edit	Nome gruppo (selezionare il nome per modificare)
-admin_grouplist unix_name	Nome unix
+admin_grouplist	unix_name	Nome unix
 admin_grouplist	status	Stato
 admin_grouplist	public	Pubblico?
 admin_grouplist	license	Licenza
@@ -1428,7 +1428,7 @@ admin_useredit	this_page_allows	Questa pagina permette di cambiare di cambiare s
 admin_useredit	unix_status_updated_mirroring	Unix status updated mirroring web status, unless it has value 'No unix account (N)'
 admin_useredit	group_memerbership	Groups Membership
 admin_useredit	name	Nome
-admin_useredit	unix_name Nome unix
+admin_useredit	unix_name	Nome unix
 admin_useredit	operations	Operations
 admin_useredit	project_admin	Amministrazione progetto
 admin_useredit	membership_permissions	Permessi dei membri
@@ -1730,7 +1730,7 @@ project_admin_editimages	del	Cancella
 project_admin_group_trove	title	Informazioni trove del progetto
 project_admin_group_trove	intro	<h3>Modifica categorie trove</h3><p>Selezionare fino a tre voci per ogni categoria. Se nel progetto non &egrave; presente alcuna voce, selezionare "None Selected".</p><p> IMPORTANTE: I progetti dovrebbero essere classificati nelle categorie pi&ugrave; dettagliate. Se si seleziona sia una categoria padre che figlio solo la categoria figlio verr&agrave; inserita.
 project_admin_group_trove	update_changes	Aggiorna tutte i cambiamenti delle categorie
-project_admin_rmuser	title Rimuovi utente
+project_admin_rmuser	title	Rimuovi utente
 project_admin_rmuser	cancel	Annulla
 project_admin_rmuser	remove	Rimuovi
 project_admin_rmuser	info	<h3>Eliminazione utente</h3><p>Si sta per eliminare l'utente dal progetto. Confermare l'azione:</p>
@@ -1802,7 +1802,7 @@ project_stats	change_stats_view	Cambia vista
 project_stats	detailed_statistics	Statistiche dettagliate per
 project_stats	tracker	Tracker
 project_stats	tasks	Attivit&agrave;
-project_stats_utils	stats_for_days Statistiche per gli ultimi $1 giorni
+project_stats_utils	stats_for_days	Statistiche per gli ultimi $1 giorni
 project_stats_utils	date	Data
 project_stats_utils	rank	Posizione
 project_stats_utils	page_views	Pagine visitate
