@@ -1,3 +1,8 @@
+2005-01-20  Christian Bayle <bayle@debian.org>
+	
+	* added 'Nice' Patch to add Detail view to Task Manager [#1025]
+	proposed by  Steel City Phantom, Thanks
+
 2005-01-16  Tim Perdue <tim@gforge.org>
 
 	* added BBC-all address to all email can be copied to a 

@@ -1387,6 +1387,9 @@ pm	tech_any	Any
 pm	title	Project/Task Manager: Subprojects And Tasks
 pm	unassigned	Unassigned
 pm	view_calendar	View Calendar
+pm	view_type	Detail View
+pm	view_type_summary	Summary
+pm	view_type_detail	Detailed
 pm_addtask	task_added_relationship	Successfully Added Tracker Relationship
 pm_addtask	task_created_successfully	Task Created Successfully
 pm_addtask	task_updated_successfully	Task Updated Successfully
