@@ -53,7 +53,8 @@ function util_check_fileupload($filename) {
 	if (!file_exists($filename)) {
 		return false;
 	}
-	if (dirname($filename) != '/tmp') {
+	if ((dirname($filename) != '/tmp') &&
+            (dirname($filename) != "/var/tmp")) {
 		return false;
 	}
 	return true;
