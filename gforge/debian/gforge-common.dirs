@@ -5,6 +5,11 @@ etc/gforge/httpd.d
 usr/bin
 usr/lib/gforge/bin
 usr/lib/gforge/lib
+usr/share
+usr/share/gforge
+usr/share/gforge/common
+usr/share/gforge/www
+usr/share/gforge/www/include
 usr/sbin
 var
 var/lib

@@ -1,7 +1,7 @@
-gforge (4.0.2-5o) unstable; urgency=low
+gforge (4.0.2-5x) unstable; urgency=low
 
   * [Christian] Let's go for 4.0
-  * [Christian] Had to add a db_stop before gforge-config in 
+  * [Christian] Had to add a db_stop before gforge-config in
   * ftp and dns postinst scripts, quite strange
   * [Christian] Now do a replace file in postinst if replace was wanted.
     during config by changing dsf-helper replace-file functions.
@@ -15,12 +15,14 @@ gforge (4.0.2-5o) unstable; urgency=low
     warning
   * [Christian] replace_files helper now don't brake when file doesn't exist
     by emit a warning during config and postinst
-  * [Christian] Added exist_db function in postgresql the ancient method was 
+  * [Christian] Added exist_db function in postgresql the ancient method was
     broken with non US localized distro
   * [Christian] Added myself as uploader to remove a lintian warning I had
   * [Christian] Added conflict to gforge-cvs
+  * [Christian] Move common dir and some files from web-apache to common
+    so postgresql can upgrade without web-apache
 
- -- Christian Bayle <bayle@debian.org>  Sun, 16 Jan 2005 13:34:05 +0100
+ -- Christian Bayle <bayle@debian.org>  Fri, 11 Feb 2005 01:19:12 +0100
 
 gforge (3.3.0-60) unstable; urgency=low
 
