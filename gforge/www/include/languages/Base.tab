@@ -83,8 +83,8 @@ account_register	err_jabber	Invalid Jabber Address
 account_register	err_userexist	That username already exists.
 account_register	err_mailexist	User with this email already exists - use people search to recover your login.
 account_register	err_badinsert	Insert Failed 
-account_register	message_header	GForge Account Registration
-account_register	message_body	Thank you for registering on the GForge web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the GForge staff\n
+account_register	message_header	$1 Account Registration
+account_register	message_body	Thank you for registering on the $4 web site. You have\naccount with username $1 created for you. In order\nto complete your registration, visit the following url: \n\n<http://$2/account/verify.php?confirm_hash=_$3>\n\n(If you don't see any URL above, it is likely due to bug in your mail client.\nUse one below, but make sure it is entered as the single line.)\n\nhttp://$2/account/verify.php?confirm_hash=_$3\n\nEnjoy the site.\n\n-- the $4 staff\n
 account_unsubscribe	all_mailings	all GForge mailings and notifications
 account_unsubscribe	site_mailings	GForge site mailings
 account_verify	title	GForge Account Verification
