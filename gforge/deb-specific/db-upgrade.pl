@@ -27,7 +27,8 @@ sub is_greater ( $$ ) ;
 sub debug ( $ ) ;
 sub parse_sql_file ( $ ) ;
 
-require ("/usr/lib/sourceforge/lib/include.pl") ; # Include all the predefined functions 
+require ("/usr/lib/sourceforge/lib/include.pl") ; # Include a few predefined functions 
+require ("/usr/lib/sourceforge/lib/sqlparser.pm") ; # Our magic SQL parser
 
 debug "You'll see some debugging info during this installation." ;
 debug "Do not worry unless told otherwise." ;
@@ -70,7 +71,7 @@ eval {
 
     } else {
 	$action = "upgrade" ;
-
+	
 	$version = &get_db_version ;
 	if (is_lesser $version, "2.5.9999") {
 	    debug "Found an old (2.5) database, will upgrade to 2.6" ;
@@ -94,7 +95,7 @@ eval {
 	    }
 	}
     }
-
+    
     $query = "SELECT count(*) from debian_meta_data where key = 'current-path'";
     # debug $query ;
     $sth = $dbh->prepare ($query) ;
@@ -149,14 +150,13 @@ eval {
 	      
 	      do "/etc/sourceforge/local.pl" or die "Cannot read /etc/sourceforge/local.pl" ;
 	      
-	      my ($login, $pwd, $md5pwd, $email, $shellbox, $noreplymail, $date) ;
+	      my ($login, $pwd, $md5pwd, $email, $noreplymail, $date) ;
 	      
 	      $login = $admin_login ;
 	      $pwd = $admin_password ;
 	      $md5pwd=qx/echo -n $pwd | md5sum/ ;
 	      chomp $md5pwd ;
 	      $email = $server_admin ;
-	      $shellbox = "shell" ;
 	      $noreplymail="noreply\@$domain_name" ;
 	      $date = time () ;
 	      
@@ -166,7 +166,7 @@ eval {
 			  "UPDATE groups SET homepage = '$domain_name/stats/' where group_id = 3",
 			  "UPDATE groups SET homepage = '$domain_name/peerrating/' where group_id = 4",
 			  "UPDATE users SET email = '$noreplymail' where user_id = 100",
-			  "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'$shellbox',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
+			  "INSERT INTO users VALUES (101,'$login','$email','$md5pwd','Sourceforge admin','A','/bin/bash','','N',2000,'shell',$date,'',1,0,NULL,NULL,0,'','GMT', 1, 0)", 
 			  "SELECT setval ('\"users_pk_seq\"', 102, 'f')",
 			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 1, 'A')",
 			  "INSERT INTO user_group (user_id, group_id, admin_flags) VALUES (101, 2, 'A')",
@@ -273,6 +273,12 @@ eval {
 	      }
 	      $sth->finish () ;
 
+	      @reqlist = () ;
+	      &update_db_version ($target) ;
+	      debug "Committing." ;
+	      $dbh->commit () ;
+	  }
+
 	  $version = &get_db_version ;
 	  $target = "2.5.9999.3+groups+inserted" ;
 	  if (is_lesser $version, $target) {
@@ -280,35 +286,31 @@ eval {
 
 	      @reqlist = (
 			  "INSERT INTO groups (group_name, homepage,
-                           is_public, status, unix_group_name, unix_box,
-                           http_domain, short_description, cvs_box, license,
-                           register_purpose, license_other, register_time,
-                           use_bugs, rand_hash, use_mail, use_survey, use_patch,
-                           use_forum, use_pm, use_cvs, use_news, use_support,
-                           new_bug_address, new_patch_address,
-                           new_support_address, type, use_docman, send_all_bugs,
-                           send_all_patches, send_all_support, new_task_address,
-                           send_all_tasks, use_bug_depend_box,
+                           is_public, status, unix_group_name,
+                           unix_box, http_domain, short_description,
+                           cvs_box, license, register_purpose,
+                           license_other, register_time, rand_hash,
+                           use_mail, use_survey, use_forum, use_pm,
+                           use_cvs, use_news, type, use_docman,
+                           new_task_address, send_all_tasks,
                            use_pm_depend_box)
        	                   VALUES ('Stats', '$domain_name/top/', 1,
-       	    	           'A', 'stats', '$shellbox', NULL, NULL, 'cvs',
-       	    	           'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0,
-       	    	           1, 1, '', '', '', 1, 1, 0, 0, 0, '', 0, 0, 0)",
+       	    	           'A', 'stats', 'shell', NULL, NULL, 'cvs',
+       	    	           'website', NULL, NULL, 0, NULL, 1, 0, 0, 0, 0,
+       	    	           1, 1, 1, '', 0, 0)",
 			  "INSERT INTO groups (group_name, homepage,
-                           is_public, status, unix_group_name, unix_box,
-                           http_domain, short_description, cvs_box, license,
-                           register_purpose, license_other, register_time,
-                           use_bugs, rand_hash, use_mail, use_survey, use_patch,
-                           use_forum, use_pm, use_cvs, use_news, use_support,
-                           new_bug_address, new_patch_address,
-                           new_support_address, type, use_docman, send_all_bugs,
-                           send_all_patches, send_all_support, new_task_address,
-                           send_all_tasks, use_bug_depend_box,
+                           is_public, status, unix_group_name,
+                           unix_box, http_domain, short_description,
+                           cvs_box, license, register_purpose,
+                           license_other, register_time, rand_hash,
+                           use_mail, use_survey, use_forum, use_pm,
+                           use_cvs, use_news, type, use_docman,
+                           new_task_address, send_all_tasks,
                            use_pm_depend_box)
                            VALUES ('Peer Ratings', '$domain_name/people/', 0,
-                           'A', 'peerrating', '$shellbox', NULL, NULL, 'cvs1',
-                           'website', NULL, NULL, 0, 0, NULL, 1, 0, 0, 0, 0, 0,
-                           1, 1, '', '', '', 1, 0, 0, 0, 0, '', 0, 0, 0)"
+                           'A', 'peerrating', 'shell', NULL, NULL, 'cvs1',
+                           'website', NULL, NULL, 0, NULL, 1, 0, 0, 0, 0,
+                           1, 1, 0, '', 0, 0)"
 			  ) ;
 	      
 	      foreach my $s (@reqlist) {
@@ -338,7 +340,7 @@ eval {
 	      debug "Committing." ;
 	      $dbh->commit () ;
 	  }
-
+	  
 	  last PATH_SWITCH ;
       } ;
   }
@@ -388,402 +390,6 @@ sub debug ( $ ) {
     my $v = shift ;
     chomp $v ;
     print STDERR "$v\n" ;
-}
-
-sub parse_sql_file ( $ ) {
-    my $f = shift ;
-    open F, $f || die "Could not open file $f: $!\n" ;
-
-    # This is a state machine to parse potentially complex SQL files
-    # into individual SQL requests/statements
-    
-    my %states = ('INIT' => 0,
-		  'SCAN' => 1,
-		  'SQL_SCAN' => 2,
-		  'IN_SQL' => 3,
-		  'END_SQL' => 4,
-		  'QUOTE_SCAN' => 5,
-		  'IN_QUOTE' => 6,
-		  'START_COPY' => 7,
-		  'IN_COPY' => 8,
-		  'ERROR' => 666,
-		  'DONE' => 999) ;
-    my ($state, $l, $par_level, $chunk, $rest, $sql, @sql_list, $copy_table, $copy_rest, @copy_data, @copy_data_tmp, $copy_field) ;
-
-    # Init the state machine
-
-    $state = $states{INIT} ;
-    
-    # my $n = 0 ;
-    
-  STATE_LOOP: while ($state != $states{DONE}) { # State machine main loop
-      # debug "STATE_LOOP: state = $state" ;
-    STATE_SWITCH: {		# State machine step processing
-	$state == $states{INIT} && do {
-	    # debug "State = INIT" ;
-	    $par_level = 0 ;
-	    $l = $sql = $chunk = $rest = "" ;	 
-	    @sql_list = () ;
-	    $copy_table = $copy_rest = "" ;
-	    @copy_data = @copy_data_tmp = () ;
-	    $copy_field = "" ;
-	    
-	    $state = $states{SCAN} ;
-	    last STATE_SWITCH ;
-	} ;			# End of INIT state
-	
-	$state == $states{SCAN} && do {
-	    # debug "State = SCAN" ;
-	  SCAN_STATE_SWITCH: {
-	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
-		  $l = <F> ;
-		  unless ($l) {
-		      $state = $states{DONE} ;
-		      last SCAN_STATE_SWITCH ;
-		  }
-		  chomp $l ;
-		  
-		  last SCAN_STATE_SWITCH ;
-	      } ;
-
-	      ( ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) 
-		or ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) ) && do {
-		    # Nothing to do
-		    
-		    $state = $states{START_COPY} ;
-		    last SCAN_STATE_SWITCH ;
-		} ;
-	      
-	      ( 1 ) && do {
-		  $sql = "" ;
-
-		  $state = $states{SQL_SCAN} ;
-		  last SCAN_STATE_SWITCH ;
-	      } ;
-
-	  }			# SCAN_STATE_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of SCAN state
-	
-	$state == $states{SQL_SCAN} && do {
-	    # debug "State = SQL_SCAN" ;
-	  SQL_SCAN_STATE_SWITCH: {
-	      ( ($l eq "") or ($l =~ /^\s*$/) or ($l =~ /^--/) ) && do {
-		  $l = <F> ;
-		  unless ($l) {
-		      debug "End of file detected during an SQL statement." ;
-		      $state = $states{ERROR} ;
-		      last SQL_SCAN_STATE_SWITCH ;
-		  }
-		  chomp $l ;
-		  
-		  $state = $states{SQL_SCAN} ;
-		  last SQL_SCAN_STATE_SWITCH ;
-	      } ;
-
-	      ( 1 ) && do {
-		  ($chunk, $rest) = ($l =~ /^([^()\';-]*)(.*)/) ;
-		  $sql .= $chunk ;
-		  
-		  $state = $states{IN_SQL} ;
-		  last SQL_SCAN_STATE_SWITCH ;
-	      } ;
-	      
-	  }			# SQL_SCAN_STATE_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of SQL_SCAN state
-	
-	$state == $states{IN_SQL} && do {
-	    # debug "State = IN_SQL" ;
-	  IN_SQL_STATE_SWITCH: {
-	      ($rest =~ /^\(/) && do {
-		  $par_level += 1 ;
-		  $sql .= '(' ;
-		  $rest = substr $rest, 1 ;
-		  $l = $rest ;
-
-		  $state = $states{SQL_SCAN} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ( ($rest =~ /^\)/) and ($par_level > 0) ) && do {
-		  $par_level -= 1 ;
-		  $sql .= ')' ;
-		  $rest = substr $rest, 1 ;
-		  $l = $rest ;
-		  
-		  $state = $states{SQL_SCAN} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^\)/) && do {
-		  debug "Detected ')' without any matching '('." ;
-		  $state = $states{ERROR} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^--/) && do {
-		  $rest = "" ;
-		  $l = $rest ;
-		  
-		  $state = $states{SQL_SCAN} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^-[^-]/) && do {
-		  $sql .= '-' ;
-		  $rest = substr $rest, 1 ;
-		  $l = $rest ;
-		  
-		  $state = $states{SQL_SCAN} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ( ($rest =~ /^;/) and ($par_level == 0) ) && do {
-		  $sql .= ';' ;
-		  $rest = substr $rest, 1 ;
-		  
-		  $state = $states{END_SQL} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^;/) && do {
-		  debug "Detected ';' within a parenthesis." ;
-		  $state = $states{ERROR} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ($rest eq "") && do {
-		  $l = $rest ;
-		  $sql .= " " ;
-
-		  $state = $states{SQL_SCAN} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^\'/) && do {
-		  $sql .= '\'' ;
-		  $rest = substr $rest, 1 ;
-		  $l = $rest ;
-		  
-		  $state = $states{IN_QUOTE} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-	      
-	      ( 1 ) && do {
-		  debug "Unknown event in IN_SQL state" ;
-		  $state = $states{ERROR} ;
-		  last IN_SQL_STATE_SWITCH ;
-	      } ;
-	  }			# IN_SQL_STATE_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of IN_SQL state
-
-	$state == $states{END_SQL} && do {
-	    # debug "State = END_SQL" ;
-	  END_SQL_STATE_SWITCH: {
-	      ($sql =~ /^\s*$/) && do {
-		  $sql = "" ;
-		  $l = $rest ;
-
-		  $state = $states{SCAN} ;
-		  last END_SQL_STATE_SWITCH ;
-	      } ;
-
-	      ( 1 ) && do {
-		  push @sql_list, $sql ;
-		  $sql = "" ;
-		  $l = $rest ;
-
-		  $state = $states{SCAN} ;
-		  last END_SQL_STATE_SWITCH ;
-	      } ;
-
-	  }			# END_SQL_STATE_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of END_SQL state
-
-	$state == $states{QUOTE_SCAN} && do {
-	    # debug "State = QUOTE_SCAN" ;
-	  QUOTE_SCAN_STATE_SWITCH: {
-	      ($rest eq "") && do {
-		  $sql .= "\n" ;
-		  $l = <F> ;
-		  unless ($l) {
-		      debug "Detected end of file inside a quoted string." ;
-		      $state = $states{ERROR} ;
-		      last QUOTE_SCAN_STATE_SWITCH ;
-		  }
-		  chomp $l ;
-		  $rest = $l ;
-		  
-		  last QUOTE_SCAN_STATE_SWITCH ;
-	      } ;
-
-	      ( 1 ) && do {
-		  ($chunk, $rest) = ($l =~ /^([^\\\']*)(.*)/) ;
-		  # debug "chunk = $chunk" ;
-		  # debug "rest = $rest" ;
-		  $sql .= $chunk ;
-		  
-		  $state = $states{IN_QUOTE} ;
-		  last QUOTE_SCAN_STATE_SWITCH ;
-	      } ;
-
-	  }			# QUOTE_SCAN_STATE_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of QUOTE_SCAN state
-	
-	$state == $states{IN_QUOTE} && do {
-	    # debug "State = IN_QUOTE" ;
-	  IN_QUOTE_STATE_SWITCH: {
-	      ($rest =~ /^\'/) && do {
-		  $sql .= '\'' ;
-		  $rest = substr $rest, 1 ;
-		  $l = $rest ;
-		  
-		  $state = $states{SQL_SCAN} ;
-		  last IN_QUOTE_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^\\\'/) && do {
-		  $sql .= '\\\'' ;
-		  $rest = substr $rest, 2 ;
-		  
-		  last IN_QUOTE_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^\\[^\\]/) && do {
-		  $sql .= '\\' ;
-		  $rest = substr $rest, 1 ;
-		  
-		  last IN_QUOTE_STATE_SWITCH ;
-	      } ;
-
-	      ($rest =~ /^\\$/) && do {
-		  $sql .= "\n" ;
-		  $rest = substr $rest, 1 ;
-		  
-		  last IN_QUOTE_STATE_SWITCH ;
-	      } ;
-
-	      ( 1 ) && do {
-		  $l = $rest ;
-		  
-		  $state = $states{QUOTE_SCAN} ;
-		  last IN_QUOTE_STATE_SWITCH ;
-	      } ;
-
-	  }			# IN_QUOTE_STATE_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of IN_QUOTE state
-
-	$state == $states{START_COPY} && do {
-	    # debug "State = START_COPY" ;
-	  START_COPY_STATE_SWITCH: {
-	      ($l =~ m/\s*copy\s+\"[\w_]+\"\s+from\s+stdin\s*;/i) && do {
-		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+\"([\w_]+)\"\s+from\s+stdin\s*;(.*)/i) ;
-		  $l = <F> ;
-		  unless ($l) {
-		      debug "Detected end of file within a COPY statement." ;
-		      $state = $states{ERROR} ;
-		      last START_COPY_STATE_SWITCH ;
-		  }
-		  chomp $l ;
-		  
-		  $state = $states{IN_COPY} ;
-		  last START_COPY_STATE_SWITCH ;
-	      } ;
-
-	      ($l =~ m/\s*copy\s+[\w_]+\s+from\s+stdin\s*;/i) && do {
-		  ($copy_table, $copy_rest) = ($l =~ /\s*copy\s+([\w_]+)\s+from\s+stdin\s*;(.*)/i) ;
-		  $l = <F> ;
-		  unless ($l) {
-		      debug "Detected end of file within a COPY statement." ;
-		      $state = $states{ERROR} ;
-		      last START_COPY_STATE_SWITCH ;
-		  }
-		  chomp $l ;
-
-		  $state = $states{IN_COPY} ;
-		  last START_COPY_STATE_SWITCH ;
-	      } ;
-	      
-	      ( 1 ) && do {
-		  debug "Unknown event in START_COPY state." ;
-		  $state = $states{ERROR} ;
-		  last START_COPY_STATE_SWITCH ;
-	      } ;
-
-	  }			# START_COPY_STATE_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of START_COPY state
-
-	$state == $states{IN_COPY} && do {
-	    # debug "State = IN_COPY" ;
-	  IN_COPY_STATE_SWITCH: {
-	      ($l =~ /^\\\.$/) && do {
-		  $l = $copy_rest ;
-
-		  $state = $states{SCAN} ;
-		  last IN_COPY_STATE_SWITCH ;
-	      } ;
-	      
-	      ( 1 ) && do {
-		  @copy_data = () ;
-		  @copy_data_tmp = split /\t/, $l ;
-		  foreach $copy_field (@copy_data_tmp) {
-		      if ($copy_field eq '\N') {
-			  $copy_field = 'NULL' ;
-		      } else {
-			  $copy_field =~ s/\'/\\\'/g ;
-			  $copy_field = "'" . $copy_field . "'" ;
-		      }
-		      push @copy_data, $copy_field ;
-		  }
-		  $sql = "INSERT INTO \"$copy_table\" VALUES (" ;
-		  $sql .= join (", ", @copy_data) ;
-		  $sql .= ")" ;
-		  push @sql_list, $sql ;
-		  $l = <F> ;
-		  unless ($l) {
-		      debug "Detected end of file within a COPY statement." ;
-		      $state = $states{ERROR} ;
-		      last IN_COPY_STATE_SWITCH ;
-		  }
-		  chomp $l ;
-
-		  last IN_COPY_STATE_SWITCH ;
-	      } ;
-
-	  }			# IN_COPY_SWITCH
-	    last STATE_SWITCH ;
-	} ;			# End of IN_COPY state
-
-	$state == $states{DONE} && do {
-	    # debug "State = DONE" ;
-	    last STATE_SWITCH ;
-	} ;			# End of DONE state
-
-	$state == $states{ERROR} && do {
-	    # debug "State = ERROR" ;
-	    debug "Reached the ERROR state.  Dying." ;
-	    die "State machine is buggy." ;
-	    
-	    last STATE_SWITCH ;
-	} ;			# End of ERROR state
-
-	( 1 ) && do {
-	    debug "State machine went in an unknown state...  Redirecting to ERROR." ;
-	    $state = $states{ERROR} ;
-	    last STATE_SWITCH ;
-	} ;
-
-    }				# STATE_SWITCH
-  }				# STATE_LOOP
-
-    close F ;
-    return \@sql_list ;
 }
 
 sub create_metadata_table ( $ ) {
