@@ -10,16 +10,16 @@ use strict ;
 use diagnostics ;
 use File::Temp qw/ :mktemp  /;
 
-use vars qw/ $dbh $sys_lists_host $domain_name / ;
+use vars qw/ $dbh $sys_lists_host $sys_dbname $domain_name / ;
 
 use vars qw// ;
 
 sub debug ( $ ) ;
 
-require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functions 
 require ("/etc/gforge/local.pl") ;
 
-&db_connect ;
+$dbh ||= DBI->connect("DBI:Pg:dbname=$sys_dbname");
+die "Cannot connect to database: $!" if ( ! $dbh );
 
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
