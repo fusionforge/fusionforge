@@ -32,17 +32,18 @@ require ('common/reporting/ReportSetup.class');
 $report = new ReportSetup();
 
 if ($report->isError()) {
-	exit_error('Error',$report->getErrorMessage());
+	$err .= $report->getErrorMessage();
 }
 
 db_begin();
 
 if (!$report->dailyData()) {
-	exit_error('Error',$report->getErrorMessage());
+	$err .= $report->getErrorMessage();
 }
 
 db_commit();
 
-echo "Done: ".date('Ymd H:i').' - '.db_error();
+$err .= "Done: ".date('Ymd H:i').' - '.db_error();
+cron_entry(20,$err);
 
 ?>
