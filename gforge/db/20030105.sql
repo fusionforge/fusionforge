@@ -19,3 +19,8 @@ drop INDEX bug_flags_idx;
 -- Change Admin user realname if it's 'Sourceforge admin'
 --
 UPDATE users SET realname='Local GForge Admin' where user_id=101 and realname='Sourceforge admin';
+
+--
+-- OSX Theme by Richard Offer
+--
+INSERT INTO themes (dirname, fullname) VALUES ('osx', 'OSX');
