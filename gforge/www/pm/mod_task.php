@@ -167,7 +167,10 @@ pm_header(array('title'=>$Language->getText('pm_modtask','title'),'pagename'=>'p
 			<?php echo $pt->showMessages(); ?>
 		</td>
 	</tr>
-
+	<?php
+		$hookParams['task_id']=$project_task_id;
+		plugin_hook("task_extra_detail",$hookParams);
+	?>
 	<tr>
 		<td colspan="2">
 			<?php echo $pt->showHistory(); ?>
