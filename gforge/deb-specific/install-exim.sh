@@ -64,11 +64,6 @@ $in_sf_block = 0 ;
 $sf_block_done = 0 ;
 @line_buf = () ;
 while (($l = <>) !~ /^\s*end\s*$/) {
-  if ($l =~ /^# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #/) {
-    $in_sf_block = 1 ;
-    push @line_buf, $sf_block unless $sf_block_done ;
-    $sf_block_done = 1 ;
-  };
   if ($l =~ /^# *DIRECTORS CONFIGURATION *#/) {
     push @line_buf, $l ;
     while ((($l = <>) =~ /^#.*#/) and ($l !~ /^# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #/)) {
@@ -76,6 +71,11 @@ while (($l = <>) !~ /^\s*end\s*$/) {
     };
     print @line_buf ;
     @line_buf = () ;
+  };
+  if ($l =~ /^# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #/) {
+    $in_sf_block = 1 ;
+    push @line_buf, $sf_block unless $sf_block_done ;
+    $sf_block_done = 1 ;
   };
   push @line_buf, $l unless $in_sf_block ;
   $in_sf_block = 0 if ($l =~ /^# END SOURCEFORGE BLOCK #/) ;
