@@ -1225,6 +1225,39 @@ END;
       $dbh->commit () ;
     }
 
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+29" ;
+    if (is_lesser $version, $target) {
+	debug "Registering KDE theme." ;
+
+	$query = "INSERT INTO themes (dirname, fullname) VALUES ('kde', 'KDE')";
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
+
+    $version = &get_db_version ;
+    $target = "2.6-0+checkpoint+30" ;
+    if (is_lesser $version, $target) {
+	debug "Registering Dark Aqua theme." ;
+
+	$query = "INSERT INTO themes (dirname, fullname) VALUES ('darkaqua', 'Dark Aqua')";
+	# debug $query ;
+	$sth = $dbh->prepare ($query) ;
+	$sth->execute () ;
+	$sth->finish () ;
+
+	&update_db_version ($target) ;
+	debug "Committing." ;
+	$dbh->commit () ;
+    }
+
     debug "It seems your database $action went well and smoothly.  That's cool." ;
     debug "Please enjoy using Gforge." ;
 

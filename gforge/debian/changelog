@@ -5,8 +5,9 @@ gforge (3rc1-3) experimental; urgency=low
   * [Christian] Added suggest on libphp-jpgraph
   * [Christian] Added unix_box and cvs_box argument to the
     create funtion in Group.class
+  * [Christian] added darkaqua theme from Patrick McFarland (diablod3) 
 
- -- Christian Bayle <bayle@debian.org>  Fri, 28 Mar 2003 11:20:44 +0100
+ -- Christian Bayle <bayle@debian.org>  Sun, 13 Apr 2003 23:19:50 +0200
 
 gforge (3rc1-2) experimental; urgency=low
 
