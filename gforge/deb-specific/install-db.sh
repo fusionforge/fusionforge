@@ -20,6 +20,7 @@ else
 fi
 
 export LC_ALL=C
+export LANG=C
 
 case "$target" in
     default)

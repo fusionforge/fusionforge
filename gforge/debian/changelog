@@ -1,9 +1,11 @@
-gforge (3.1-23+1) unstable; urgency=low
+gforge (3.1-23+2) unstable; urgency=low
 
   * [Roland] Updated French translations for Debconf templates from
     Christian Perrier and debian-l10n-french (closes: #282676).
+  * [Roland] Apparently LC_ALL is not enough, LANG must be set too for
+    install-db.sh (closes: #283849).
 
- -- Roland Mas <lolando@debian.org>  Thu, 25 Nov 2004 21:39:23 +0100
+ -- Roland Mas <lolando@debian.org>  Thu,  2 Dec 2004 16:14:10 +0100
 
 gforge (3.1-23) unstable; urgency=low
 
