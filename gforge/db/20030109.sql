@@ -2,7 +2,7 @@
 ---
 --- This function updates the project_sums_agg count for a given type.
 ---
-CREATE FUNCTION "project_sums" () RETURNS TRIGGER AS '
+CREATE FUNCTION "project_sums" () RETURNS OPAQUE AS '
 	DECLARE
 		num integer;
 		curr_group integer;
