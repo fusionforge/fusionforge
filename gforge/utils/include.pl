@@ -47,6 +47,21 @@ sub db_connect {
 	die "Cannot connect to database: $!" if ( ! $dbh );
 }
 
+sub db_drop_table_if_exists {
+    my ($sql, $res, $n, $tn) ;
+    $tn = shift ;
+    $sql = "SELECT COUNT(*) FROM pg_class WHERE relname='$tn'";
+    $res = $dbh->prepare($sql);
+    $res->execute();
+    ($n) = $res->fetchrow() ;
+    $res->finish () ;
+    if ($n != 0) {
+	$sql = "DROP TABLE $tn";
+	$res = $dbh->prepare($sql);
+	$res->finish () ;
+    }
+}
+
 ##############################
 # File open function, spews the entire file to an array.
 ##############################
