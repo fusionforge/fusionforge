@@ -1,78 +1,111 @@
 #
-# SourceForge: Breaking Down the Barriers to Open Source Development
-# Copyright 1999-2001 (c) VA Linux Systems
-# http://sourceforge.net
+# GForge
+# Copyright 2002-2004 (c) GForge
+# http://gforge.org
 #
 # $Id$
 #
 
 ----------------------------------------------------------------------------
-The SourceForge Team
+The GForge Team
 ----------------------------------------------------------------------------
 
-Dan Bressler		<db@valinux.com>
-Darrell Brogdon		<dbrogdon@valinux.com>
-James Byers		<jbyers@linux.com>
-Adam Frey		<adam@valinux.com>
-Patrick McGovern	<pmcgovern@valinux.com>
-Jacob Moorman		<moorman@sourceforge.net>
-Tim Perdue (*)		<bigdisk@sourceforge.net>
-Chad Schwartz		<coax@sourceforge.net>
-Paul Sokolovsky		<pfalcon@sourceforge.net>
-Uriah Welcome (*)	<precision@sourceforge.net>
+Tim Perdue			<tim@gforge.org>
+Roland Mas			<99.roland.mas@aist.enst.fr>
+Christian Bayle		<gforge@free.fr>
+Tom Copeland		<tom@infoether.com>
+Guillaume Smet		<guillaume-gforge@smet.org>
+Francisco Gimeno	<kikov@kikov.org>
+Sung Kim			<hunkims@gmail.com>
 
 Past Members:
-
-Quentin Cregan		<q@sourceforge.net>
-Tony Guntharp (*)	<fusion94@sourceforge.net>
-Drew Streib (*)		<dtype@sourceforge.net>
-Geoffrey Herteg		<gherteg@valinux.com>
-Matthew Snelham
-
-(*) SourceForge Founder
+Reinhard Spisser
+Ryan T. Sammartino
+Edward Ritter
+Michael Jennings
 
 ----------------------------------------------------------------------------
-We'd like to thank the following volunteers for their contribututions
+We'd like to thank the following volunteers for their contributions
 of code, documentation, ideas, and time:
 ----------------------------------------------------------------------------
 
-Eduardo Blanco		<ejbs@netlabs.com.uy>
-Loic Dachary		<loic@users.sourceforge.net>
-Sebastien Delaire	<pes@users.sourceforge.net>
-Rik Faith		<faith@precisioninsight.com>
-William K. Hardeman	<wont-i@users.sourceforge.net>
-Uwe Hermann		<uh1763@users.sourceforge.net>
-Wallace Lee		<wallace@users.sourceforge.net>
-Michael Renzmann	<otaku@users.sourceforge.net>
-Peter Schuller		<scode@users.sourceforge.net>
-Bil Simser		<bsimser@users.sourceforge.net>
-David HM Spector	<spector@zeitgeist.com>
-Lion Templin		<lion@leonine.com>
-Joe Utting		<prettypoly@users.sourceforge.net>
-
-----------------------------------------------------------------------------
-We'd like to thank the following contributors.  Without their help,
-SourceForge would never have been possible.  They have contributed
-time, code, ideas, moral support, etc.:
-----------------------------------------------------------------------------
-
-Larry Augustin 		<lma@valinux.com>
-Brian Biles		
-John Hall		<johnhall@valinux.com>
-Steve Westmoreland	<swest@valinux.com>
-
-Joe Arruda		<z@valinux.com>
-Kevin Collins		<kevin@valinux.com>
-Kit Cosper		<cosper@valinux.com>
-Chris DiBona		<chris@valinux.com>
-Neil Doane		<caine@valinux.com>
-Eureka Endo		<eendo@valinux.com>
-Robert Flemming		<flemming@valinux.com>
-John Goebel		<jgoebel@valinux.com>
-Garrett LeSage		<garrett@linux.com>
-Greg Pryzby		<gpryzby@valinux.com>
-Jeff Ritter		<jritter@valinux.com>
-Steve Schaefer
-Michael Turner
-Rob Walker
-Patrick Wong		<pwong@valinux.com>
+Darrell Brogdon
+John Maguire
+Trix Farrar
+Philippe Kiener
+Robert J. Sanford, Jr.
+François Elie
+Richard Offer
+Julien Goodwin
+Bob Lamoureux
+Olafur Osvaldsson
+Jim Nutt
+Scott Armstrong
+Eric Kerin
+Graham Batty
+Robert B. Hawkins
+Ronald Petty
+Simon Lei
+Paul Kneeland
+Patrick McFarland
+Jeff Fynboh
+Vicente J. Ruiz Jurado
+Dragos Moinescu
+Alwyn Schoeman
+Tony Guntharp
+Hidenari Miwa
+David McNicol
+Ed Hill
+Paul Gibbbs
+James Michael DuPont
+Patrick Lemmens
+Christophe Colombier
+Auke Jilderda
+Rene Klootwijk
+Antoine Nivard
+Joo-won Jung
+Justin Richer
+Franco Catrin L.
+Mathieu Peltier
+Bo Jangborg
+Ramon van Alteren
+Mitch Murphy
+Brett N DiFrischia
+Andreas Schrattenecker
+Eric Evans
+Shawn Soon-Son Kwon
+Frank Gevaerts
+Lars Ehrhardt
+Joseph Bironas
+Marco Schmidt
+Chris Ward
+Marc Kalberer
+Kenneth C. Cone, Sr.
+Hunte Swee
+David Hirst
+Fabrício Vertamatti
+Benoît Sibaud
+Lele Gaifax
+Mike Heath
+Jason Chen
+Tomas Pospisek
+Jáder Marasca
+Oliver Blume
+Vidyut Luther
+Eric Robert
+Chris Watts
+Dominik Haas
+Diggy Bell
+Jaime Diaz
+Paul Santa Maria
+Josiah Olivieri
+Andre Costa
+Konrad Wulf
+Igor Blanco
+Florent Guilleux
+Pedro Paixao
+Matt Hope
+Rob Lanphier
+Finjon Kiang
+Andrey Molchanov
+Ognyan Kulev
