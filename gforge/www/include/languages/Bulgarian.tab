@@ -32,7 +32,7 @@ frs	file_notes	Бележки
 frs	file_package	Модул
 frs	file_version	Версия
 group	long_bugs	Проследяване на грешки
-group	long_cvs	CVS хранилище
+group	long_scm	SCM хранилище
 group	long_docman	Проектна документация
 group	long_forum	Публични форуми
 group	long_ftp	Анонимно FTP пространство
@@ -44,7 +44,7 @@ group	long_pm	Управляване на задачите
 group	long_support	Управляване на поддръжката
 group	long_survey	Допитване
 group	short_bugs	Грешки
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Документи
 group	short_files	Filesgroup	short_forum	Форуми
 group	short_homepage	Начало

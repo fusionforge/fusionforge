@@ -861,7 +861,7 @@ group	activitystat	Visualizza le <a href="/project/stats/?group_id=$1">statistic
 group	developer_info	Informazioni sui membri del progetto
 group	developers	Sviluppatori
 group	long_bugs	Bug Tracking
-group	long_cvs	Repository CVS
+group	long_scm	Repository SCM
 group	long_docman	DocManager: Documentazione progetto
 group	long_forum	Forum Pubblici
 group	long_ftp	Spazio FTP anonimo
@@ -880,7 +880,7 @@ group	public_area	Aree pubbliche
 group	registered	Registrato:
 group	short_admin	Amministrazione
 group	short_bugs	Bugs
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Documentazione
 group	short_files	File
 group	short_forum	Forum
@@ -1734,7 +1734,7 @@ scm_index	anoncvs	<P><B>Accesso anonimo a CVS </B> <P>Il repository CVS di quest
 scm_index	anoncvsup	Non è necessario utilizzare il parametro -d quando si fanno gli update da una sottodirectory.
 scm_index	browseit	Visualizza repository CVS
 scm_index	browsetree	<HR><B>Visualizza il repository CVS </B> <P>Visualizzare il repository CVS da' la possibilità di vedere lo stato attuale del codice sviluppato. È possibile visualizzare l'intera storia di ogni singolo file.
-scm_index	cvs_repository	Repository CVS
+scm_index	scm_repository	Repository SCM
 scm_index	devcvs	<P><B>Accesso SSH al CVS</B> <P>Solo gli sviluppatori del progetto possono accedere al repository CVS tramite SSH. SSH1 deve essere installato sulla macchina locale. Sostituire <I>nomemodulo</I> e <I>sviluppatore</I> con i nomi appropriati. Quando viene richiesta la password, inserire la propria password di accesso.
 scm_index	developer_commits_adds	Sviluppatore (30 giorni/commit) (30 giorni/aggiunte)
 scm_index	developername	sviluppatore

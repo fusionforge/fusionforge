@@ -228,15 +228,15 @@ function project_summary($group_id,$mode,$no_table) {
 		}
 	}
 
-	// ######################### CVS 
+	// ######################### SCM 
 
-	if ($project->usesCVS()) {
+	if ($project->usesSCM()) {
 		$return .= '
 
 			<hr size="1" />';
 		$return .= '<a href="/scm/?group_id='.$group_id.'">';
-		$return .= html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"CVS"));
-		$return .= "&nbsp;CVS&nbsp;Tree</a>";
+		$return .= html_image("ic/cvs16b.png","20","20",array("border"=>"0","ALT"=>"SCM"));
+		$return .= "&nbsp;SCM&nbsp;Tree</a>";
 
 		if ($mode != 'compact') {
 			$sql = "SELECT SUM(commits) AS commits,SUM(adds) AS adds from stats_cvs_group where group_id='$group_id'";

@@ -38,10 +38,10 @@ function scm_header($params) {
 		exit_error('Error',$project->getErrorMessage());
 	}
 
-	if (!$project->usesCVS()) {
+	if (!$project->usesSCM()) {
 		exit_error('Error',$Language->getText('scm_index','error_this_project_has_turned_off'));
 	}
-	site_project_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$params['group'],'toptab'=>'scm',));
+	site_project_header(array('title'=>$Language->getText('scm_index','scm_repository'),'group'=>$params['group'],'toptab'=>'scm',));
 	/*
 		Show horizontal links
 	*/

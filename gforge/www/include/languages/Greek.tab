@@ -32,7 +32,7 @@ frs	file_notes	Σημειώσεις
 frs	file_package	Πακέτο
 frs	file_version	Έκδοση
 group	long_bugs	Παρακολούθηση Σφαλμάτων
-group	long_cvs	Αποθήκη CVS
+group	long_scm	Αποθήκη SCM
 group	long_docman	DocManager: Project Documentation
 group	long_forum	Δημόσια Βήματα
 group	long_ftp	Χώρος Ανώνυμου FTP
@@ -44,7 +44,7 @@ group	long_pm	Διαχειριστής Εργασιών
 group	long_support	Διαχειριστής Υποστήριξης Προγράμματος
 group	long_survey	Έρευνες
 group	short_bugs	Σφάλματα
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Τεκμηρίωση
 group	short_files	Filesgroup	short_forum	Βήματα
 group	short_homepage	Πρώτη Σελίδα

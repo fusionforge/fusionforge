@@ -271,7 +271,7 @@ general	go	Go
 group	developer_info	 デベロッパー情報
 group	developers	デベロッパー
 group	long_bugs	バグトラッキング
-group	long_cvs	CVSリポジトリ
+group	long_scm	SCMリポジトリ
 group	long_docman	ドキュメントマネージャ：プロジェクトドキュメント
 group	long_forum	パブリックフォーラム
 group	long_ftp	Anonymous FTP スペース
@@ -287,7 +287,7 @@ group	project_admins	プロジェクト管理
 group	public_area	パブリックエリア
 group	short_admin	管理
 group	short_bugs	バグ
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	ドキュメント
 group	short_files	ファイル
 group	short_forum	フォーラム

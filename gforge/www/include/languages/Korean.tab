@@ -866,7 +866,7 @@ group	activitystat	활동상황 <a href="/project/stats/?group_id=$1">통계 자
 group	developer_info	개발자 정보
 group	developers	개발자
 group	long_bugs	버그 트래킹
-group	long_cvs	CVS 저장소
+group	long_scm	SCM 저장소
 group	long_docman	문서 관리자: 프로젝트 문서화
 group	long_forum	공개 게시판
 group	long_ftp	익명 FTP 공간
@@ -884,7 +884,7 @@ group	public_area	공개 구역
 group	registered	등록된 날짜:&nbsp;
 group	short_admin	프로젝트 관리
 group	short_bugs	버그
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	문서
 group	short_files	다운로드
 group	short_forum	게시판
@@ -1753,7 +1753,7 @@ scm_index	anoncvs	<p><b>익명 CVS 권한</b></p><p>이 프로젝트의 CVS 저�
 scm_index	anoncvsup	모듈 디렉토리 안에서 업데이트를 받아보실 경우에는 -d 인자가 필요 없습니다.
 scm_index	browseit	CVS 저장소 둘러보기
 scm_index	browsetree	<hr><b>CVS 저장소 둘러보기</b> <p>CVS 저장소를 둘러보시면 현재 프로젝트가 어떻게 진행되고 있는지 쉽게 살펴보실 수 있습니다. 그리고 저장소 안에서 어떤 특정 파일에 대한 전체 내역도 아울러 보실 수 있습니다.
-scm_index	cvs_repository	CVS 저장소
+scm_index	scm_repository	SCM 저장소
 scm_index	devcvs	<p><b>SSH를 통한 개발자의 CVS 접근</b></p><p>프로젝트에 개발자로 등록되어 있는 사람만이 이 방법을 사용하실 수 있습니다. 클라이언트 측에 SSH1이 설치되어 있어야 합니다. <i>modulename</i>과 <i>developername</i>을 적절히 바꾸어서 넣어 주시면 됩니다. 비밀번호는 자기 자신의 비밀번호를 입력하세요.
 scm_index	developer_commits_adds	개발자 (30 일/Commits) (30 일/Adds)
 scm_index	developername	개발자이름

@@ -892,7 +892,7 @@ group	activitystat	Voir les <a href="/project/stats/?group_id=$1">statistiques d
 group	developer_info	Equipe-Projet
 group	developers	Développeurs&nbsp;
 group	long_bugs	Gestion des bugs
-group	long_cvs	Référentiel CVS
+group	long_scm	Référentiel SCM
 group	long_docman	Gestion de documents : Documentation du projet
 group	long_forum	Forums de discussion
 group	long_ftp	Espace FTP anonyme
@@ -911,7 +911,7 @@ group	public_area	Zones publiques
 group	registered	Enregistré le&nbsp;:&nbsp;
 group	short_admin	Administration
 group	short_bugs	Bugs
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Documents
 group	short_files	Fichiers
 group	short_forum	Forums
@@ -1828,7 +1828,7 @@ scm_index	anoncvs	<p><b>Accès CVS anonyme</b></p><p>Ce dépôt CVS peut-être r
 scm_index	anoncvsup	Les mises à jour (update) ne nécessite pas l'utilisation du paramètre -d quand on se trouve à l'intérieur du répertoire du module.
 scm_index	browseit	Parcourir le dépôt CVS
 scm_index	browsetree	<hr /><b>Parcourir l'arbre CVS</b><p>Parcourir l'arbre CVS vous donne une vue d'ensemble du code de ce projet. Vous pouvez également voir l'historique complet de chaque fichier du dépôt.</p>
-scm_index	cvs_repository	dépôt CVS
+scm_index	scm_repository	dépôt SCM
 scm_index	devcvs	<p><b>Accès CVS pour développeur via SSH</b></p><p>Seuls les développeurs d'un projet peuvent accéder à l'arbre CVS par cette méthode. SSH doit être installé sur votre machine cliente. Remplacez <i>modulename</i> et <i>developername</i> par les valeurs appropriées. Fournissez votre mot de passe du site lorsqu'on vous le demande.</p>
 scm_index	developer_commits_adds	Dévelopeur (30 jours/Commits) (30 jours/Adds)
 scm_index	developername	développeur

@@ -41,7 +41,7 @@ frs	file_notes	Notes
 frs	file_package	Paquet
 frs	file_version	Versió
 group	long_bugs	Seguiment d'errors
-group	long_cvs	Repositori CVS
+group	long_scm	Repositori SCM
 group	long_docman	Gestor de documents
 group	long_forum	 Fòrums públics
 group	long_ftp	Espai de FTP anònim
@@ -53,7 +53,7 @@ group	long_pm	Gestor de tasques
 group	long_support	Gestor de suport tècnic
 group	long_survey	Enquestes
 group	short_bugs	Errades
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Documents
 group	short_files	Filesgroup	short_forum	Fòrums
 group	short_homepage	Pàgina de inici

@@ -614,10 +614,9 @@ if (isset($params['group']) && $params['group']) {
 		}
 
 		// SCM systems
-		if ($project->usesCVS()) {
+		if ($project->usesSCM()) {
 			$TABS_DIRS[]='/scm/?group_id='.$group;
-			//$TABS_TITLES[]=$Language->getText('group','short_cvs');
-			$TABS_TITLES[]=$Language->getText('scm_index','title');
+			$TABS_TITLES[]=$Language->getText('group','short_scm');
 			(($toptab == 'scm') ? $selected=(count($TABS_TITLES)-1) : '' );
 		}
 

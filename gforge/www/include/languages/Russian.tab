@@ -34,7 +34,7 @@ frs	file_notes	Информация
 frs	file_package	Модуль
 frs	file_version	Версия
 group	long_bugs	Менеджер ошибок
-group	long_cvs	CVS репозиторий
+group	long_scm	SCM репозиторий
 group	long_docman	Менеджер документации
 group	long_forum	Общедоступные форумы
 group	long_ftp	Анонимный FTP проекта
@@ -48,7 +48,7 @@ group	long_survey	Опросы
 group	long_tracker	Унив.Трекер
 group	short_admin	Админ
 group	short_bugs	Ошибки
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Документация
 group	short_files	Файлы
 group	short_forum	Форумы

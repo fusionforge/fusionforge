@@ -834,7 +834,7 @@ group	activity		Activiteit Percentiel:
 group	developer_info		Ontwikkelaars Info
 group	developers		Ontwikkelaars
 #group	long_bugs		Bug Tracking
-#group	long_cvs		CVS Repository
+#group	long_scm		SCM Repository
 group	long_docman		DocManager: documentatie van project
 group	long_forum		Publieke Forums
 group	long_ftp		Anonieme FTP-ruimte
@@ -853,7 +853,7 @@ group	public_area		Publiek domein
 group	registered		Geregistreerd: 
 group	short_admin		Administratie
 group	short_bugs		Bugs
-group	short_cvs		CVS
+group	short_scm		SCM
 group	short_docman		Documentatie
 group	short_files		Files
 group	short_forum		Forums
@@ -1705,7 +1705,7 @@ register_tos	section				Registratie Nieuw Project
 #scm_index	anoncvsup	Updates from within the module's directory do not need the -d parameter.
 #scm_index	browseit	Browse CVS Repository
 #scm_index	browsetree	<HR><B>Browse the CVS Tree</B> <P>Browsing the CVS tree gives you a great view into the current status of this project's code. You may also view the complete histories of any file in the repository.
-scm_index	cvs_repository	CVS Repository
+scm_index	scm_repository	SCM Repository
 #scm_index	devcvs	<P><B>Developer CVS Access via SSH</B> <P>Only project developers can access the CVS tree via this method. SSH1 must be installed on your client machine. Substitute <I>modulename</I> and <I>developername</I> with the proper values. Enter your site password when prompted.
 #scm_index	developer_commits_adds	Developer (30 day/Commits) (30 day/Adds)
 scm_index	developername	ontwikkelaarnaam

@@ -32,7 +32,7 @@ frs	file_notes	תורעה
 frs	file_package	תוליבח
 frs	file_version	תואסרג
 group	long_bugs	תולקת רחא בקעמ
-group	long_cvs	CVS רגאמ
+group	long_scm	SCM רגאמ
 group	long_docman	םיכמסמ להנמ
 group	long_forum	םיחותפ םימורופ
 group	long_ftp	ימינונא יפיטפא תורש
@@ -44,7 +44,7 @@ group	long_pm	תומישמ להנמ
 group	long_support	תינכט הכימת להנמ
 group	long_survey	תוריקס
 group	short_bugs	תולקת
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	םיכמסמ
 group	short_files	Filesgroup	short_forum	םימורופ
 group	short_homepage	תיב רתא

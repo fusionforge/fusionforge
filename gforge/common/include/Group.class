@@ -410,7 +410,7 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function update(&$user, $group_name,$homepage,$short_description,$use_mail,$use_survey,$use_forum,
-		$use_pm,$use_pm_depend_box,$use_cvs,$use_news,$use_docman,
+		$use_pm,$use_pm_depend_box,$use_scm,$use_news,$use_docman,
 		$new_doc_address,$send_all_docs,$logo_image_id,
 		$enable_pserver,$enable_anoncvs,
 		$use_ftp,$use_tracker,$use_frs,$use_stats) {
@@ -456,8 +456,8 @@ class Group extends Error {
 		if (!$use_pm_depend) {
 			$use_pm_depend=0;
 		}
-		if (!$use_cvs) {
-			$use_cvs=0;
+		if (!$use_scm) {
+			$use_scm=0;
 		}
 		if (!$use_news) {
 			$use_news=0;
@@ -513,7 +513,7 @@ class Group extends Error {
 				use_forum='$use_forum',
 				use_pm='$use_pm',
 				use_pm_depend_box='$use_pm_depend_box',
-				use_cvs='$use_cvs',
+				use_cvs='$use_scm',
 				use_news='$use_news',
 				use_docman='$use_docman',
 				new_doc_address='$new_doc_address',
@@ -869,7 +869,7 @@ class Group extends Error {
 	 *	@return boolean enable_cvs.
 	 */
 	function enableAnonCVS() {
-		if ($this->usesCVS()) {
+		if ($this->usesSCM()) {
 			return $this->data_array['enable_anoncvs'];
 		} else {
 			return false;
@@ -882,7 +882,7 @@ class Group extends Error {
 	 *	@return boolean	enable_pserver.
 	 */
 	function enablePserver() {
-		if ($this->usesCVS()) {
+		if ($this->usesSCM()) {
 			return $this->data_array['enable_pserver'];
 		} else {
 			return false;
@@ -890,14 +890,14 @@ class Group extends Error {
 	}
 
 	/**
-	 *	usesCVS - whether or not this group has opted to use CVS.
+	 *	usesSCM - whether or not this group has opted to use SCM.
 	 *
 	 *	@return	boolean	uses_cvs.
 	 */
-	function usesCVS() {
+	function usesSCM() {
 		global $sys_use_scm;
 		if ($sys_use_scm) {
-			return $this->data_array['use_cvs'];
+			return $this->data_array['use_scm'];
 		} else {
 			return false;
 		}

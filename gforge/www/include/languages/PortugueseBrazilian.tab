@@ -787,7 +787,7 @@ group	activitystat	Visualizar atividade do projeto <a href="/project/stats/?grou
 group	developer_info	Informação do Desenvolvedor
 group	developers	Devenvolvedores
 group	long_bugs	Bug Tracking
-group	long_cvs	Repositório CVS 
+group	long_scm	Repositório SCM 
 group	long_docman	DocManager: Documentação do Projeto
 group	long_forum	Fóruns Públicos
 group	long_ftp	Espaço para FTP Anônimo
@@ -805,7 +805,7 @@ group	public_area	Área Pública
 group	registered	Registrados: 
 group	short_admin	Admin
 group	short_bugs	Bugs
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Docs
 group	short_files	Files
 group	short_forum	Fóruns
@@ -1482,7 +1482,7 @@ register_requirements	section	New Project Registration
 register_requirements	title	Services & Requirements
 register_tos	section	Registro de Novo Projeto
 register_tos	title	Termos de Aceitação do Serviço
-scm_index	cvs_repository	Repositório CVS
+scm_index	scm_repository	Repositório SCM
 scm_index	error_only_projects_can_use_cvs	Erro, Apenas Projetos Podem Usar CVS
 scm_index	error_this_project_has_turned_off	Erro, Este Projeto Desabilitou o CVS
 scm_index	section	Projeto: $1

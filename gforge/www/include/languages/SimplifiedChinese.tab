@@ -457,7 +457,7 @@ general	reset	重设
 group	developer_info	开发者信息
 group	developers	开发者
 group	long_bugs	Bug跟踪
-group	long_cvs	CVS仓库
+group	long_scm	SCM仓库
 group	long_docman	DocManager: 项目文档
 group	long_forum	公共论坛
 group	long_ftp	匿名FTP
@@ -473,7 +473,7 @@ group	project_admins	项目管理员
 group	public_area	公共区域
 group	short_admin	管理
 group	short_bugs	Bugs
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	文档
 group	short_files	文件
 group	short_forum	论坛

@@ -883,7 +883,7 @@ group	activitystat	Proiektuaren jarduera <a href="/project/stats/?group_id=$1">e
 group	developer_info	Lankidearen informazioa ikusi
 group	developers	Lankideak
 group	long_bugs	Akatsen erregistroa
-group	long_cvs	CVS errepositorioa
+group	long_scm	SCM errepositorioa
 group	long_docman	Dokumentuen kudeaketa: proiektuaren dokumentazioa
 group	long_forum	Foro publikoa
 group	long_ftp	FTP espazioa anonimoa
@@ -902,7 +902,7 @@ group	public_area	Gune publikoa
 group	registered	Erregistratua:&amp;nbsp;
 group	short_admin	Admin
 group	short_bugs	Akatsak
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Dokumentuak
 group	short_files	Fitxeroak
 group	short_forum	Foroak
@@ -1893,7 +1893,7 @@ scm_index	anoncvs	<P><B>CVS-z atzipen anonimoa</B> <P>Proiektu honen CVS errepos
 scm_index	anoncvsup	Moduluaren direktorioko eguneratzeak ez dute -d parametroa behar.
 scm_index	browseit	CVS errepositoriotik nabigatu
 scm_index	browsetree	<HR><B>CVS zuhaitzetik nabigatu</B> <P>CVS zuhatzetik nabigatuz proiektu honen kodearen egoera ikusi ahal dezakezu. Fitxero bakoitzaren historia osoa ikusi beharko zenuke repositorioan.
-scm_index	cvs_repository	CVS errepositorioa
+scm_index	scm_repository	SCM errepositorioa
 scm_index	devcvs	<P><B>CVS-ra atzipena lankideei SSH bidez</B> <P>Sistema hau erabiliaz bakarrik atzi dezakete proiektu baten lankideek CVS zuhaitzera. Zure bezero makinan SSH1 instalatua izan behar duzu. Ordezkatzen da <I>modulename</I> y <I>developername</I> balio egokiekin. Gune honen pasahitza sartu eskatzen zaizunean.
 scm_index	developer_commits_adds	Garatzailea (30 egun/Commits) (30 egun/Adds)
 scm_index	developername	Lankidea

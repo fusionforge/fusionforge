@@ -36,7 +36,7 @@ frs	file_notes	Notatki
 frs	file_package	Pakiet
 frs	file_version	Wersja
 group	long_bugs	śledzenie pluskiew
-group	long_cvs	Repozytorium CVS
+group	long_scm	Repozytorium SCM
 group	long_docman	DocManager: dokumentacja projektu
 group	long_forum	Forum publiczne
 group	long_ftp	Anonimowy FTP
@@ -48,7 +48,7 @@ group	long_pm	Centrum zadań
 group	long_support	Centrum pomocy technicznej
 group	long_survey	Sondaże
 group	short_bugs	Pluskwy
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Dokumentacja
 group	short_files	Filesgroup	short_forum	Forum
 group	short_homepage	Strona domowa

@@ -859,7 +859,7 @@ group	activitystat	Se projektaktivitet <a href="/project/stats/?group_id=$1">sta
 group	developer_info	Utvecklarinformation
 group	developers	Utvecklare
 group	long_bugs	Felrättning
-group	long_cvs	CVS-förvar
+group	long_scm	SCM-förvar
 group	long_docman	DocManager: Projektdokumentation
 group	long_forum	Öppna forum
 group	long_ftp	Anonymt FTP-utrymme
@@ -878,7 +878,7 @@ group	public_area	Öppet utrymme
 group	registered	Registrerad:
 group	short_admin	Admin
 group	short_bugs	Fel
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Dokumentation
 group	short_files	Filer
 group	short_forum	Forum
@@ -1732,7 +1732,7 @@ scm_index	anoncvs	<P><B>Anonym CVS åtkomst</B> <P>Detta projekts CVS-lager kan 
 scm_index	anoncvsup	Uppdateringar innifrån modulens katalog behöver inte -d parametern.
 scm_index	browseit	Bläddra i CVS-lagret
 scm_index	browsetree	<HR><B>Bläddra i CVS-trädet</B> <P>Bläddring i CVS-trädet ger dig en bra insyn i statusen för projektets kod. Du kan också se hela historiken för valfri fil lagret.
-scm_index	cvs_repository	CVS Lager
+scm_index	scm_repository	SCM Lager
 scm_index	devcvs	<P><B>Ge utvecklare CVS åtkomst via SSH</B> <P>Endast projekt utvecklare kan komma åt CVS trädet via denna metod. SSH1 måste vara installerad på din klientmaskin. Ersätt <I>modulnamn</I> och <I>utvecklarnamn</I> med rätt värden. Ange webbplatslösenord vid anmodan.
 scm_index	developer_commits_adds	Utvecklare (30 dagar/Inlämningar) (30 dagar/Tillägg)
 scm_index	developername	utvecklarnamn

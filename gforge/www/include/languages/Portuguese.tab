@@ -37,7 +37,7 @@ frs	file_package	Pacotes
 frs	file_rel_date	Data
 frs	file_version	Versão
 group	long_bugs	Procura de Bugs
-group	long_cvs	Arquivo do CVS
+group	long_scm	Arquivo do SCM
 group	long_docman	Gestor da Documentação do Projecto
 group	long_forum	Fóruns Públicos
 group	long_foundries	Foundries de Desenvolvimento da GForge
@@ -50,7 +50,7 @@ group	long_pm	Gestor de Tarefas
 group	long_support	Gestor do Suporte Técnico
 group	long_survey	Inquéritos
 group	short_bugs	Bugs
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Documentação
 group	short_files	Files
 group	short_forum	Fóruns

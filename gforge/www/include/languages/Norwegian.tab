@@ -32,7 +32,7 @@ frs	file_notes	Notater
 frs	file_package	Pakke
 frs	file_version	Versjon
 group	long_bugs	Feilretting
-group	long_cvs	CVS-repository
+group	long_scm	SCM-repository
 group	long_docman	Administrere prosjektdokumentsjon
 group	long_forum	&Aring;pne fora
 group	long_ftp	Anonym FTP-tilgang
@@ -44,7 +44,7 @@ group	long_pm	Prosjektstyring
 group	long_support	Administrere brukerst&oslash;tte
 group	long_survey	Sp&oslash;rreunders&oslash;kelser
 group	short_bugs	Feil
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Dokumentasjon
 group	short_files	Filesgroup	short_forum	Fora
 group	short_homepage	Hjemmeside

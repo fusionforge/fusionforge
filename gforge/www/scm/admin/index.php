@@ -31,7 +31,7 @@ require_once('www/scm/scm_utils.php');
 // Check permissions
 session_require(array('group'=>$group_id,'admin_flags'=>'A'));
 
-scm_header(array('title'=>$Language->getText('scm_index','cvs_repository'),'group'=>$group_id));
+scm_header(array('title'=>$Language->getText('scm_index','scm_repository'),'group'=>$group_id));
 
 
 

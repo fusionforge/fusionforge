@@ -34,7 +34,7 @@ frs	file_notes	บันทึกข้อความ
 frs	file_package	แพ็กเกจ
 frs	file_version	รุ่น
 group	long_bugs	ติดตามบั๊ก
-group	long_cvs	ที่รวม CVS
+group	long_scm	ที่รวม SCM
 group	long_docman	จัดการเอกสาร: คู่มือโปรเจกต์
 group	long_forum	กระดานสาธารณะ
 group	long_ftp	พื้นที่ FTP นิรนาม

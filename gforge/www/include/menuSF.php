@@ -146,9 +146,9 @@ function menu_project_info($group) {
 		if ($project->usesNews()) {
 			$HTML->menu_entry('/news/?group_id='.$group, $Language->getText('group', 'short_news'));
 		}
-		// CVS
-		if ($project->usesCVS()) {
-			$HTML->menu_entry('/scm/?group_id='.$group, $Language->getText('group', 'short_cvs'));
+		// SCM
+		if ($project->usesSCM()) {
+			$HTML->menu_entry('/scm/?group_id='.$group, $Language->getText('group', 'short_scm'));
 		}
 		// Downloads
 		$HTML->menu_entry('/project/showfiles.php?group_id='.$group, $Language->getText('group', 'short_files'));

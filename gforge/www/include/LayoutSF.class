@@ -158,7 +158,7 @@ class LayoutSF extends Layout {
 		'Docs'     => 'ic/Docs.png',
 		'Surveys'  => 'ic/Surveys.png',
 		'News'     => 'ic/News.png',
-		'CVS'      => 'ic/CVS.png',
+		'SCM'      => 'ic/CVS.png',
 		'Files'    => 'ic/Files.png'
 		);
 
@@ -813,7 +813,7 @@ $s = ((session_issecure()) ? 's' : '' );
 			case 'pm': print $Language->getText('group','short_pm'); break;
 			case 'docman': print $Language->getText('group','short_docman'); break;
 			case 'surveys': print $Language->getText('group','short_survey'); break;
-			case 'cvs': print $Language->getText('group','short_cvs'); break;
+			case 'scm': print $Language->getText('group','short_scm'); break;
 			case 'downloads': print $Language->getText('group','short_files'); break;
 			case 'news': print $Language->getText('group','short_news'); break;
 			case 'memberlist': print $Language->getText('group','short_memberlist'); break;
@@ -917,10 +917,10 @@ $s = ((session_issecure()) ? 's' : '' );
 				$Language->getText('group','short_news'), $toptab == 'news');
 		}
 
-		// CVS
-		if ($project->usesCVS()) {
-			$this->tab_entry('/cvs/?group_id='.$group, $this->icons['CVS'], 
-				$Language->getText('group','short_cvs'), $toptab == 'cvs');
+		// SCM
+		if ($project->usesSCM()) {
+			$this->tab_entry('/scm/?group_id='.$group, $this->icons['SCM'], 
+				$Language->getText('group','short_scm'), $toptab == 'scm');
 		}
 
 		// Downloads

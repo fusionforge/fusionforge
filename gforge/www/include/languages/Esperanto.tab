@@ -37,7 +37,7 @@ frs	file_notes	Notoj
 frs	file_package	Pakaĵo
 frs	file_version	Redakto
 group	long_bugs	Cimilo
-group	long_cvs	CVSejo
+group	long_scm	SCMejo
 group	long_docman	Dokumentilo
 group	long_forum	Publikaj Forumoj
 group	long_ftp	Anonima FTPejo
@@ -49,7 +49,7 @@ group	long_pm	Taskilo
 group	long_support	Subtenilo
 group	long_survey	Demandilo
 group	short_bugs	Cimoj
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Dokumentoj
 group	short_files	Filesgroup	short_forum	Forumoj
 group	short_homepage	Hejmpaĝo

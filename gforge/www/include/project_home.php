@@ -327,12 +327,12 @@ if ($project->usesSurvey()) {
 	echo ' ( <strong>'. project_get_survey_count($group_id) .'</strong> '.$Language->getText('project_home','surveys').'  )';
 }
 
-// ######################### CVS
+// ######################### SCM
 
-if ($project->usesCVS()) {
+if ($project->usesSCM()) {
 	print '<hr size="1" /><a href="/scm/?group_id='.$group_id.'">';
-	print html_image('ic/cvs16b.png','20','20',array('alt'=>$Language->getText('group','short_cvs')));
-	print " ".$Language->getText('group','long_cvs')."</a>";
+	print html_image('ic/cvs16b.png','20','20',array('alt'=>$Language->getText('group','short_scm')));
+	print " ".$Language->getText('group','long_scm')."</a>";
 
 	$result = db_query("
 		SELECT sum(commits) AS commits,sum(adds) AS adds

@@ -889,7 +889,7 @@ group	activitystat	Ver las <a href="/project/stats/?group_id=$1">estadísticas</
 group	developer_info	Información del colaborador
 group	developers	Colaboradores
 group	long_bugs	Registro de errores
-group	long_cvs	Repositorio CVS
+group	long_scm	Repositorio SCM
 group	long_docman	Gestión de doc.: Documentación del proyecto
 group	long_forum	Foros Públicos
 group	long_ftp	Espacio FTP Anónimo
@@ -908,7 +908,7 @@ group	public_area	Área pública
 group	registered	Registrado:&nbsp;
 group	short_admin	Admin
 group	short_bugs	Errores
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Documentos
 group	short_files	Ficheros
 group	short_forum	Foros
@@ -1908,7 +1908,7 @@ scm_index	anoncvs	<P><B>Acceso Anónimo por CVS</B> <P>El repositorio CVS de est
 scm_index	anoncvsup	Actualizaciones dentro del directorio del módulo no necesitan el parámetro -d.
 scm_index	browseit	Navegue por el Repositorio CVS
 scm_index	browsetree	<HR><B>Navega por el árbol CVS</B> <P>Navegando por el árbol de CVS te proporcionará una gran visión de la situación actual del código de este proyecto. Deberías ver también el histórico completo de cada fichero en el repositorio.
-scm_index	cvs_repository	Repositorio CVS
+scm_index	scm_repository	Repositorio SCM
 scm_index	devcvs	<P><B>Acceso a CVS por colaboradores vía SSH</B> <P>Sólo los colaboradores de un proyecto pueden acceder al árbol CVS por este método. Debe de tener instalado SSH1 en su máquina cliente. Substituye <I>modulename</I> y <I>developername</I> con los valores adecuados. Introduce su password de este sitio cuando se le solicite.
 scm_index	developer_commits_adds	Desarrollador (30 días/Commits) (30 días/Adds)
 scm_index	developername	colaborador

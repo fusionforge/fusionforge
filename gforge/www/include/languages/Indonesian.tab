@@ -32,7 +32,7 @@ frs	file_notes	Catatan
 frs	file_package	Paket
 frs	file_version	Versi
 group	long_bugs	Bug Tracking
-group	long_cvs	Gudang CVS
+group	long_scm	Gudang SCM
 group	long_docman	DocManager: Dokumentasi Proyek
 group	long_forum	Forum Publik
 group	long_ftp	Tempat Anonymous FTP
@@ -44,7 +44,7 @@ group	long_pm	Manajer Tugas
 group	long_support	Manajer Tech Support
 group	long_survey	Survey
 group	short_bugs	Bugs
-group	short_cvs	CVS
+group	short_scm	SCM
 group	short_docman	Dokumentasi
 group	short_files	Filesgroup	short_forum	Forum
 group	short_homepage	Home Page

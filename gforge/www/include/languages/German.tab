@@ -784,7 +784,7 @@ group	activitystat	Zeige <a href="/project/stats/?group_id=$1">Statistiken</a> Ã
 group	developer_info	Entwicklerinformationen
 group	developers	Entwickler
 group	long_bugs	Bugtracking
-group	long_cvs	CVS-Baum
+group	long_scm	SCM-Baum
 group	long_docman	DocManager: Projekt-Dokumentation
 group	long_forum	Ã–ffentliche Foren
 group	long_ftp	Anonymer FTP-Zugriff
