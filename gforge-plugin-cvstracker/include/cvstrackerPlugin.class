@@ -176,7 +176,7 @@ class cvstrackerPlugin extends Plugin {
 			echo "><br/>";
 			echo "</td>";
 			echo "<td>";
-			echo "<strong>Use ".$this->text." Plugin</strong>";
+			echo "<strong>".$this->text." Plugin</strong>";
 			echo "</td>";
 			echo "</tr>";
 		} elseif ($hookname == "groupisactivecheckboxpost") {
