@@ -186,7 +186,7 @@ class Group extends Error {
 	 *  @param	string	The full name of the user
 	 *  @param	string	The Unix name of the user
 	 *  @param	string	The new group description
-	 *  @param	int		The ID of the license to use
+	 *  @param	int	The ID of the license to use
 	 *  @param	string	The 'other' license to use if any
 	 *  @param	string	The purpose of the group
 	 */
@@ -278,6 +278,7 @@ class Group extends Error {
 
 		db_commit();
 		$this->refreshGroupData();
+		$this->sendNewProjectNotificationEmail();
 		return true;
 	}
 
@@ -1283,7 +1284,7 @@ class Group extends Error {
 	/**
 	 *	approve() - Approve pending project
 	 *
-	 *  @param	object	The User object
+	 *      @param	object	The User object
 	 *	@access public
 	 *
 	 */
@@ -1409,7 +1410,7 @@ if there is anything we can do to help you.
 	 *	This function sends out a rejection message to a user who
 	 *	registered a project.
 	 *
-	 *  @param	int		The id of the response to use
+	 *      @param	int	The id of the response to use
 	 *	@param	string	The rejection message
 	 *	@return completion status
 	 *	@access public
@@ -1452,6 +1453,63 @@ Reasons for negative decision:
 		return true;
 	}
 
+	/*
+	 *	sendNewProjectNotificationEmail() - Send new project notification email
+	 *
+	 *	This function sends out a notification email to the
+	 *	SourceForge admin user when a new project is
+	 *	submitted.
+	 *
+	 *	@return completion status
+	 *	@access public
+	 *
+	 */
+	function sendNewProjectNotificationEmail() {
+
+	  // Get the admin(s) email
+	  $admin_email='';
+	  //$res = db_query("SELECT email AS admin_email
+          //                FROM users
+          //               WHERE user_name='admin';");
+	  $res = db_query("SELECT users.email AS admin_email
+	 			FROM users,user_group
+				WHERE group_id=1 AND users.user_id=user_group.user_id;");
+
+	  if (db_numrows($res) < 1) {
+	    $this->setError("There is no administrator to send the mail.");
+	    return false;
+	  } else {
+	  	for ($i=0; $i<db_numrows($res) ; $i++) {
+			$admin_email .= db_result($res,$i,'admin_email').', ';
+	  	}
+	  }
+
+	  // Get the email of the user who wants to register the project
+	  $res = db_query("SELECT u.email AS email
+                           FROM users u, user_group ug
+                           WHERE ug.group_id='".$this->getID()."' AND u.user_id=ug.user_id;");
+
+	  if (db_numrows($res) < 1) {
+	    $this->setError("Cound not find user who has submitted the project.");
+	    return false;
+	  } else {
+	    $email = db_result($res, 0, "email");
+	  }
+	  
+	  $message =
+'New SourceForge Project Submitted
+
+Project Full Name:  '.$this->getPublicName().'
+Submitted Description: '.$this->getRegistrationPurpose().'
+License: '.$this->getLicense().'
+
+Please visit the following URL to approve or reject this project:
+http://'.$GLOBALS['sys_default_domain'].'/admin/approve-pending.php';
+
+	  util_send_mail($admin_email, "New SourceForge Project Submitted", $message, $email);
+
+	  return true;
+	}
 }
 
 ?>

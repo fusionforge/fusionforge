@@ -18,9 +18,12 @@ sourceforge (2.6-0+13+) experimental; urgency=low
   * [Christian] Added setup_onevar_mainfile function in dsf helper to add
     vars in sourceforge.conf not managed by debconf
   * [Christian] More i18n in /my and /account
-  * [Christian] Make user menu themeable 
+  * [Christian] Make user menu themeable
+  * [Christian] Applied Mathieu Peltier <Mathieu.Peltier@inrialpes.fr> to send
+    mail to admin when a project is submitted, and modified it to send the
+    mail to all members of siteadmin (id=1) group
 
- -- Christian Bayle <bayle@debian.org>  Mon, 14 Oct 2002 18:37:13 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 16 Oct 2002 17:13:14 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
