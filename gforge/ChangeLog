@@ -1,5 +1,17 @@
 2003-01-10  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/html.php: make / valid XHTML 1.0 Transitional.
+
+	* www/include/Layout.class: ditto.
+
+	* www/include/languages/Base.tab: ditto.
+
+	* common/include/utils.php: ditto.
+
+	* www/index_std.php: ditto.
+
+	* www/news/news_utils.php: ditto.
+
 	* www/my/diary.php: bug 158: pg_atoi when inserting diary entry.
 
 	* common/include/utils.php(util_make_links): exclude <> from

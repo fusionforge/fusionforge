@@ -15,7 +15,7 @@
  * @param		string	The feedback.
  */
 function html_feedback_top($feedback) {
-	if (!$feedback) 
+	if (!$feedback)
 		return '';
 	print '
 		<h3><span style="color:red">'.$feedback.'</span></h3>';
@@ -40,7 +40,7 @@ function make_user_link($username) {
  * @param		string	The feedback.
  */
 function html_feedback_bottom($feedback) {
-	if (!$feedback) 
+	if (!$feedback)
 		return '';
 	print '
 		<h3><span style="color:red">'.$feedback.'</span></h3>';
@@ -81,7 +81,7 @@ function html_dbimage($id, $args=0) {
 		"FROM db_images WHERE id='$id'";
 	$result=db_query($sql);
 	$rows=db_numrows($result);
-	
+
 	if (!$result || $rows < 1) {
 		return db_error();
 	} else {
@@ -108,7 +108,13 @@ function html_image($src,$width,$height,$args,$display=1) {
 	}
 
 	// ## insert a border tag if there isn't one
-	if (!$args['border']) $return .= (" border=\"0\"");
+	if (!isset($args['border'])) {
+		$return .= ' border="0"';
+	}
+
+	if (!isset($args['alt'])) {
+		$return .= ' alt=""';
+	}
 
 	// ## add image dimensions
 	$return .= " width=\"" . $width . "\"";
@@ -327,7 +333,7 @@ function html_build_checkbox($name, $value, $checked) {
 
 /**
  * get_priority_color() - Wrapper for html_get_priority_color().
- * 
+ *
  * @see	html_get_priority_color()
  */
 function get_priority_color ($index) {
@@ -342,14 +348,14 @@ function get_priority_color ($index) {
  */
 function html_get_priority_color ($index) {
 	global $bgpri;
-	
+
 	/* make sure that index is of appropriate type and range */
 	$index = (int)$index;
 	if ($index<1) {
 		$index=1;
 	} else if ($index>9) {
 		$index=9;
-	}   
+	}
 	//return "prior$index";
 	return $bgpri[$index];
 }
@@ -414,7 +420,7 @@ function html_buildcheckboxarray($options,$name,$checked_array) {
 	}
 }
 
-/** 
+/**
  *	site_user_header() - everything required to handle security and
  *	add navigation for user pages like /my/ and /account/
  *
@@ -441,7 +447,7 @@ function site_footer($params) {
 }
 
 /**
- *	site_project_header() - everything required to handle 
+ *	site_project_header() - everything required to handle
  *	security and state checks for a project web page
  *
  *	@param params array() must contain $toptab and $group
@@ -457,7 +463,7 @@ function site_project_header($params) {
 
 	$group_id=$params['group'];
 
-	//get the project object 
+	//get the project object
 	$project =& group_get_object($group_id);
 
 	if (!$project || !is_object($project)) {
@@ -484,8 +490,8 @@ function site_project_header($params) {
 }
 
 /**
- *	site_project_footer() - currently a simple shim 
- *	that should be on every project page,  rather than 
+ *	site_project_footer() - currently a simple shim
+ *	that should be on every project page,  rather than
  *	a direct call to site_footer() or theme_footer()
  *
  *	@param params array() empty
@@ -498,7 +504,7 @@ function site_project_footer($params) {
 }
 
 /**
- *	site_user_header() - everything required to handle security and 
+ *	site_user_header() - everything required to handle security and
  *	add navigation for user pages like /my/ and /account/
  *
  *	@param params array() must contain $user_id
@@ -519,8 +525,8 @@ function site_user_header($params) {
 
 }
 
-/** 
- *	site_user_footer() - currently a simple shim that should be on every user page, 
+/**
+ *	site_user_footer() - currently a simple shim that should be on every user page,
  *	rather than a direct call to site_footer() or theme_footer()
  *
  *	@param params array() empty
@@ -530,16 +536,16 @@ function site_user_footer($params) {
 
 	echo html_feedback_bottom($GLOBALS['feedback']);
 	echo $HTML->footer($params);
-}	   
+}
 
-/** 
+/**
  *	html_clean_hash_string() - Remove noise characters from hex hash string
- *	
+ *
  *	Thruout SourceForge, URLs with hexadecimal hash string parameters
- *	are being sent via email to request confirmation of user actions. 
+ *	are being sent via email to request confirmation of user actions.
  *	It was found that some mail clients distort this hash, so we take
  *	special steps to encode it in the way which help to preserve its
- *	recognition. This routine 
+ *	recognition. This routine
  *
  *	@param hashstr required hash parameter as received from browser
  *	@return pure hex string
@@ -549,11 +555,11 @@ function html_clean_hash_string($hashstr) {
 	if (substr($hashstr,0,1)=="_") {
 		$hashstr = substr($hashstr, 1);
 	}
-				
+
 	if (substr($hashstr, strlen($hashstr)-1, 1)==">") {
 		$hashstr = substr($hashstr, 0, strlen($hashstr)-1);
 	}
-	
+
 	return $hashstr;
 }
 

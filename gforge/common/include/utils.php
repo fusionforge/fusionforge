@@ -129,7 +129,7 @@ function util_prep_string_for_sendmail($body) {
 
 /**
  *	util_handle_message() - a convenience wrapper which sends messages
- *	to either a jabber account or email account or both, depending on 
+ *	to either a jabber account or email account or both, depending on
  *	user preferences
  *
  *	@param	array	array of user_id's from the user table
@@ -142,7 +142,7 @@ function util_handle_message($id_arr,$subject,$body,$extra_emails='',$extra_jabb
 	$address=array();
 
 	if (count($id_arr) < 1) {
-		
+
 	} else {
 		$res=db_query("SELECT jabber_address,email,jabber_only
 			FROM users WHERE user_id IN (". implode($id_arr,',') .")");
@@ -188,8 +188,8 @@ function util_unconvert_htmlspecialchars($string) {
 	if (strlen($string) < 1) {
 		return '';
 	} else {
-		//$trans = get_html_translation_table(HTMLENTITIES, ENT_QUOTES); 
-		$trans = get_html_translation_table(HTML_ENTITIES); 
+		//$trans = get_html_translation_table(HTMLENTITIES, ENT_QUOTES);
+		$trans = get_html_translation_table(HTML_ENTITIES);
 		$trans = array_flip ($trans);
 		$str = strtr ($string, $trans);
 		return $str;
@@ -274,11 +274,11 @@ function util_wrap_find_space($string,$wrap) {
 	$start=$wrap-5;
 	$try=1;
 	$found=false;
-	
+
 	while (!$found) {
 		//find the first space starting at $start
 		$pos=@strpos($string,' ',$start);
-		
+
 		//if that space is too far over, go back and start more to the left
 		if (($pos > ($wrap+5)) || !$pos) {
 			$try++;
@@ -286,13 +286,13 @@ function util_wrap_find_space($string,$wrap) {
 			//if we've gotten so far left , just truncate the line
 			if ($start<=10) {
 				return $wrap;
-			}	   
+			}
 			$found=false;
 		} else {
 			$found=true;
-		}	   
-	}	   
-	
+		}
+	}
+
 	return $pos;
 }
 
@@ -307,7 +307,7 @@ function util_wrap_find_space($string,$wrap) {
  */
 function util_line_wrap ($text, $wrap = 80, $break = "\n") {
 	$paras = explode("\n", $text);
-			
+
 	$result = array();
 	$i = 0;
 	while ($i < count($paras)) {
@@ -316,18 +316,18 @@ function util_line_wrap ($text, $wrap = 80, $break = "\n") {
 			$i++;
 		} else {
 			$pos=util_wrap_find_space($paras[$i],$wrap);
-			
+
 			$result[] = substr($paras[$i], 0, $pos);
-			
+
 			$new = trim(substr($paras[$i], $pos, strlen($paras[$i]) - $pos));
 			if ($new != '') {
 				$paras[$i] = $new;
 				$pos=util_wrap_find_space($paras[$i],$wrap);
 			} else {
 				$i++;
-			}	   
-		}	   
-	}			   
+			}
+		}
+	}
 	return implode($break, $result);
 }
 
@@ -349,7 +349,7 @@ function util_make_links ($data='') {
 		// (RFC2396; http://www.w3.org/Addressing/URL/5.1_Wrappers.html)
 		$line = str_replace('&gt;', "\1", $line);
 		$line = eregi_replace("([ \t]|^)www\."," http://www.",$line);
-		$text = eregi_replace("([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]#?/&=])", "<a href=\"\\1://\\2\\3\" target=\"_blank\" target=\"_new\">\\1://\\2\\3</a>", $line);
+		$text = eregi_replace("([[:alnum:]]+)://([^[:space:]<\1]*)([[:alnum:]#?/&=])", "<a href=\"\\1://\\2\\3\" target=\"_new\">\\1://\\2\\3</a>", $line);
 		$text = eregi_replace("([[:space:]]|^)(([a-z0-9_]|\\-|\\.)+@([^[:space:]]*)([[:alnum:]-]))", "\\1<a href=\"mailto:\\2\" target=\"_new\">\\2</a>", $text);
 		$text = str_replace("\1", '&gt;', $text);
 		$newText .= $text;
@@ -380,7 +380,7 @@ function show_priority_colors_key() {
  * @param		int		Number of options to be in the array
  * @param		string	The name of the checkboxes
  * @param		array	An array of boxes to be pre-checked
- * 
+ *
  */
 function utils_buildcheckboxarray($options,$name,$checked_array) {
 	$option_count=count($options);
@@ -404,18 +404,18 @@ function utils_buildcheckboxarray($options,$name,$checked_array) {
  * @return	a string holding the HTML to mark a required field
  */
 function utils_requiredField() {
-	return '<span><font color="red">*</font></span>'; 
+	return '<span><font color="red">*</font></span>';
 }
 
 /**
  * GraphResult() - Takes a database result set and builds a graph.
  * The first column should be the name, and the second column should be the values
  * Be sure to include HTL_Graphs.php before using this function
- * 
+ *
  * @author Tim Perdue tperdue@valinux.com
  * @param		int		The databse result set ID
  * @param		string	The title of the graph
- * 
+ *
  */
 Function GraphResult($result,$title) {
 	$rows=db_numrows($result);
@@ -442,7 +442,7 @@ Function GraphResult($result,$title) {
 
 /**
  * GraphIt() - Build a graph
- * 
+ *
  * @author Tim Perdue tperdue@valinux.com
  * @param		array	An array of names
  * @param		array	An array of values
@@ -544,7 +544,7 @@ Function GraphIt($name_string,$value_string,$title) {
  * @param		int		The result set ID
  * @param		string	The title of the result set
  * @param		bool	The option to turn URL's into links
- * 
+ *
  */
 Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 	global $group_id,$HTML;
@@ -568,7 +568,7 @@ Function  ShowResultSet($result,$title="Untitled",$linkify=false)  {
 			$cell_data[] = array(db_fieldname($result,$i));
 		}
 		echo $HTML->multiTableRow('',$cell_data, TRUE);
-		
+
 		/*  Create the rows  */
 		for ($j = 0; $j < $rows; $j++) {
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
@@ -637,7 +637,7 @@ function util_is_valid_filename ($file) {
 
 /**
  * valid_hostname() - Validates a hostname string to make sure it doesn't contain invalid characters
- * 
+ *
  * @param		string	The optional hostname string
  * @returns true on success/false on failur
  *

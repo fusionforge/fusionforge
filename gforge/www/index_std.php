@@ -3,21 +3,27 @@
 <tr><td width="65%" valign="top">
 <h2>Welcome to the GForge 3.0 Project!</h2>
 <p>
-GForge is an Open Source collaborative software development tool, which allows you to organize 
-and manage any number of software development projects. It's perfect for managing 
+GForge is an Open Source collaborative software development tool, which allows you to organize
+and manage any number of software development projects. It's perfect for managing
 large teams of software engineers and/or engineers scattered among multiple locations.
+</p>
 <p>
 <strong>Track Bugs, Patches, Feature Requests, and Support Requests</strong>
+</p>
 <p>
-<a href="/tracker/?atid=101&group_id=5&func=browse"><img src="/images/gforge.jpg" width="450" height="268" border="0"></a>
+<a href="/tracker/?atid=101&amp;group_id=5&amp;func=browse"><img src="/images/gforge.jpg" width="450" height="268" border="0" alt="" /></a>
+</p>
 <p>
 <strong>New Project Management Tools:</strong>
+</p>
 <p>
-The new Project Manager allows you to create task lists, constraints, and track the 
+The new Project Manager allows you to create task lists, constraints, and track the
 progress of your project. The data can then be plotted in a standard Gantt chart.
+</p>
 <p>
-<a href="http://dev.gforge.org/pm/task.php?group_id=5&group_project_id=2&func=ganttpage"><img src="/images/gantt.png" width="447" height="230" border="0"></a>
-<p>
+<a href="http://dev.gforge.org/pm/task.php?group_id=5&amp;group_project_id=2&amp;func=ganttpage"><img src="/images/gantt.png" width="447" height="230" border="0" alt="" /></a>
+</p>
+<p />
 
 <?php
 echo $HTML->boxTop($Language->getText('group','long_news'));
@@ -41,26 +47,26 @@ echo $HTML->boxTop('Getting GForge');
 <a href="http://www.python.org/">Python *</a><br />
 <a href="http://jabberd.jabberstudio.org/">Jabber Server *</a><br />
 * optional
-<p>
+<p />
 <strong>Get Help</strong><br />
 <a href="http://gforge.org/forum/forum.php?forum_id=6"><strong>Help Board</strong></a><br />
 <a href="http://gforge.org/docman/?group_id=1"><strong>Online Docs</strong></a><br />
-<p>
+<p />
 <strong>Contribute!</strong><br />
 <a href="http://gforge.org/projects/gforge/"><strong>GForge Project Page</strong></a><br />
 <a href="http://gforge.org/forum/forum.php?forum_id=5"><strong>Developer Board</strong></a><br />
 <a href="http://gforge.org/forum/forum.php?forum_id=29"><strong>Oracle Board</strong></a><br />
 <a href="http://gforge.org/forum/forum.php?forum_id=44"><strong>SOAP API</strong></a><br />
-<a href="http://gforge.org/tracker/?atid=105&group_id=1&func=browse"><strong>Bug Tracker</strong></a><br />
-<a href="http://gforge.org/tracker/?func=browse&group_id=1&atid=106"><strong>Patch Submissions</strong></a><br />
-<a href="http://gforge.org/tracker/?func=browse&group_id=1&atid=119"><strong>Feature Requests</strong></a>
-<p>
-<a href="http://www.debian.org/"><strong>Debian Users</strong></a> can simply add 
-"http://people.debian.org/~bayle/" to /etc/apt/sources.list and type 
-"apt-get install gforge" to 
-install a working GForge-3.0pre7 system, thanks to Christian Bayle and 
+<a href="http://gforge.org/tracker/?atid=105&amp;group_id=1&amp;func=browse"><strong>Bug Tracker</strong></a><br />
+<a href="http://gforge.org/tracker/?func=browse&amp;group_id=1&amp;atid=106"><strong>Patch Submissions</strong></a><br />
+<a href="http://gforge.org/tracker/?func=browse&amp;group_id=1&amp;atid=119"><strong>Feature Requests</strong></a>
+<p />
+<a href="http://www.debian.org/"><strong>Debian Users</strong></a> can simply add
+"http://people.debian.org/~bayle/" to /etc/apt/sources.list and type
+"apt-get install gforge" to
+install a working GForge-3.0pre7 system, thanks to Christian Bayle and
 the Debian-SF project.
-<p>
+<p />
 <?php
 echo $HTML->boxBottom();
 echo show_features_boxes();

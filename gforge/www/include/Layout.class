@@ -2,12 +2,12 @@
 /**
  * Base layout class.
  *
- * Extends the basic Error class to add HTML functions 
- * for displaying all site dependent HTML, while allowing 
+ * Extends the basic Error class to add HTML functions
+ * for displaying all site dependent HTML, while allowing
  * extendibility/overriding by themes via the Theme class.
- * 
+ *
  * Make sure browser.php is included _before_ you create an instance of this object.
- * 
+ *
  * Geoffrey Herteg, August 29, 2000
  *
  * @version   $Id$
@@ -109,19 +109,19 @@ class Layout extends Error {
 		} else {
 			$params['title'] =  $GLOBALS['sys_name'] . ":" . $params['title'];
 		}
-
+		print '<?xml version="1.0" encoding="' . $Language->getEncoding(). '"?>';
 		?>
+
 <!DOCTYPE html
 	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="<?php echo $Language->getLanguageCode(); ?>">
 
-<html lang="<?php echo $Language->getLanguageCode(); ?>">
   <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>">
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $Language->getEncoding(); ?>" />
 	<title><?php echo $params['title']; ?></title>
-	<script language="JavaScript">
+	<script language="JavaScript" type="text/javascript">
 	<!--
 	function help_window(helpurl) {
 		HelpWin = window.open( helpurl,'HelpWindow','scrollbars=yes,resizable=yes,toolbar=no,height=400,width=400');
@@ -147,6 +147,13 @@ class Layout extends Error {
 
 <style type="text/css">
 	<!--
+	BODY {
+		margin-top: 3;
+		margin-left: 3;
+		margin-right: 3;
+		margin-bottom: 3;
+		background: #01004e;
+	}
 	ol,ul,p,body,td,tr,th,form { font-family: <?php echo $site_fonts; ?>; font-size:<?php echo $this->FONTSIZE; ?>;
 		color: <?php echo $this->FONTCOLOR_CONTENT ?>; }
 
@@ -176,14 +183,14 @@ class Layout extends Error {
 
 </head>
 
-<body topmargin="3" marginheight="3" marginwidth="3" leftmargin="3" rightmargin="3" bgcolor="#01004e">
+<body>
 
-<table border=0 width="100%" cellspacing="0" cellpadding=0>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
 		<td><a href="/"><?php echo html_image('logo.png',198,52,array('border'=>'0')); ?></a></td>
 		<td><?php echo $this->searchBox(); ?></td>
-		<td align="RIGHT"><?php
+		<td align="right"><?php
 			if (session_loggedin()) {
 				?>
 				<a href="/account/logout.php"><?php echo html_image($Language->getText('image','logout'),74,14,array('border'=>'0')); ?></a><br />
@@ -202,11 +209,11 @@ class Layout extends Error {
 
 </table>
 
-<table border=0 width="100%" cellspacing="0" cellpadding=0>
+<table border="0" width="100%" cellspacing="0" cellpadding="0">
 
 	<tr>
 		<td>&nbsp;</td>
-		<td colspan=3>
+		<td colspan="3">
 
 <?php echo $this->outerTabs($params); ?>
 
@@ -215,18 +222,18 @@ class Layout extends Error {
 	</tr>
 
 	<tr>
-		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft.png" height="9" width="9"></td>
-		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width="30" height="1"></td>
-		<td bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1"></td>
-		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width=30 height=1></td>
-		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright.png" height="9" width="9"></td>
+		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft.png" height="9" width="9" alt="" /></td>
+		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
+		<td bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+		<td bgcolor="#E0E0E0" width="30"><img src="<?php echo $this->imgroot; ?>clear.png" width="30" height="1" alt="" /></td>
+		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright.png" height="9" width="9" alt="" /></td>
 	</tr>
 
 	<tr>
 
 		<!-- Outer body row -->
 
-		<td bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1"></td>
+		<td bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
 		<td valign="top" width="99%" bgcolor="#E0E0E0" colspan="3">
 
 			<!-- Inner Tabs / Shell -->
@@ -255,13 +262,13 @@ if ($params['group']) {
 
 ?>
 			<tr>
-				<td align="left" bgcolor="#ffffff" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height="9" width="9"></td>
-				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1"></td>
-				<td align="right" bgcolor="#ffffff" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright-inner.png" height="9" width="9"></td>
+				<td align="left" bgcolor="#ffffff" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topleft-inner.png" height="9" width="9" alt="" /></td>
+				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" bgcolor="#ffffff" width="9"><img src="<?php echo $this->imgroot; ?>tabs/topright-inner.png" height="9" width="9" alt="" /></td>
 			</tr>
 
 			<tr>
-				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1"></td>
+				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="10" height="1" alt="" /></td>
 				<td valign="top" width="99%" bgcolor="white">
 
 	<?php
@@ -298,31 +305,31 @@ if ($params['group']) {
 
 
 				</td>
-				<td width="10" bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1"></td>
+				<td width="10" bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
 			</tr>
 			<tr>
-				<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" height="11" width="11"></td>
-				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1"></td>
-				<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" height="11" width="11"></td>
+				<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft-inner.png" height="11" width="11" alt="" /></td>
+				<td bgcolor="#ffffff"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+				<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright-inner.png" height="11" width="11" alt="" /></td>
 			</tr>
-			</TABLE>
+			</table>
 
 		<!-- end inner body row -->
 
 		</td>
-		<td width="10" bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1"></td>
+		<td width="10" bgcolor="#E0E0E0"><img src="<?php echo $this->imgroot; ?>clear.png" width="2" height="1" alt="" /></td>
 	</tr>
 	<tr>
-		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft.png" height="9" width="9"></td>
-		<td bgcolor="#E0E0E0" colspan="3"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height=1></td>
-		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height="9" width="9"></td>
+		<td align="left" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomleft.png" height="9" width="9" alt="" /></td>
+		<td bgcolor="#E0E0E0" colspan="3"><img src="<?php echo $this->imgroot; ?>clear.png" width="1" height="1" alt="" /></td>
+		<td align="right" bgcolor="#E0E0E0" width="9"><img src="<?php echo $this->imgroot; ?>tabs/bottomright.png" height="9" width="9" alt="" /></td>
 	</tr>
 </table>
 <?php
 	global $sys_show_source;
 	if ($sys_show_source) {
 		global $SCRIPT_NAME;
-		print '<A CLASS=showsource HREF="/source.php?file=' . $SCRIPT_NAME . '"> Show Source</a>';
+		print '<a class="showsource" href="/source.php?file=' . $SCRIPT_NAME . '"> Show Source</a>';
 	}
 ?>
 
@@ -349,7 +356,7 @@ if ($params['group']) {
 		<tr><td>
 			<table cellspacing="0" cellpadding="2" width="100%" border="0" bgcolor="'. $this->COLOR_HTMLBOX_BACK.'">
 				<tr style="background-color:'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-					<td colspan="2"><span class=titlebar>'.$title.'</span></td>
+					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 				</tr>
 				<tr align="left">
 					<td colspan="2">';
@@ -366,7 +373,7 @@ if ($params['group']) {
 					</td>
 				</tr>
 				<tr style="background-color:'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-					<td colspan="2"><spn class="titlebar">'.$title.'</span></td>
+					<td colspan="2"><span class="titlebar">'.$title.'</span></td>
 				</tr>
 				<tr align="left" style="background-color:'. $this->COLOR_HTMLBOX_BACK .'">
 					<td colspan="2">';
@@ -416,7 +423,7 @@ if ($params['group']) {
 		if ($links_arr) {
 			for ($i=0; $i<$count; $i++) {
 				$return .= '
-				<td align="center"><a class=sortbutton href="'.$links_arr[$i].'"><span style="color:'.
+				<td align="center"><a class="sortbutton "href="'.$links_arr[$i].'"><span style="color:'.
 				$this->FONTCOLOR_HTMLBOX_TITLE.'"><strong>'.$title_arr[$i].'</strong></span></a></td>';
 			}
 		} else {
@@ -454,9 +461,9 @@ if ($params['group']) {
 			// get group info using the common result set
 			$project =& group_get_object($params['group']);
 			if ($project->isError()) {
-		
+
 			} elseif (!$project->isProject()) {
-			
+
 			} else {
 				$TABS_DIRS[]='/projects/'.$project->getUnixName().'/';
 				$TABS_TITLES[]=$project->getPublicName();
@@ -506,7 +513,7 @@ if ($params['group']) {
 		(($toptab == 'home') ? $selected=(count($TABS_TITLES)-1) : '' );
 
 		if (user_ismember($group,'A')) {
-			// Project Admin 
+			// Project Admin
 			$TABS_DIRS[]='/project/admin/?group_id='. $group;
 			$TABS_TITLES[]=$Language->getText('group','short_admin');
 			(($toptab == 'admin') ? $selected=(count($TABS_TITLES)-1) : '' );
@@ -526,7 +533,7 @@ if ($params['group']) {
 		// Artifact Tracking
 		$TABS_DIRS[]='/tracker/?group_id='.$group;
 		$TABS_TITLES[]=$Language->getText('group','short_tracker');
-		(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch') 
+		(($toptab == 'tracker' || $toptab == 'bugs' || $toptab == 'support' || $toptab == 'patch')
 				? $selected=(count($TABS_TITLES)-1) : '' );
 
 		// Mailing Lists
@@ -647,7 +654,7 @@ if ($params['group']) {
 		<form action="/search/" method="post"'.$new_window.'>
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr><td>
-		<div="center" style="font-size:smaller">
+		<div align="center" style="font-size:smaller">
 
 		<select name="type_of_search">';
 
@@ -657,21 +664,21 @@ if ($params['group']) {
 				$ath = new ArtifactTypeHtml($group,$atid);
 				if ($ath && is_object($ath)) {
 				print '
-				<option value="artifact"'.( $type_of_search == 'artifact' ? ' SELECTED' : '' ).'>'. $ath->getName() .'</option>';
+				<option value="artifact"'.( $type_of_search == 'artifact' ? ' selected="selected"' : '' ).'>'. $ath->getName() .'</option>';
 				}
 			}
 		} else if ($group_id && $forum_id) {
 			print '
-			<option value="forums"'.( $type_of_search == 'forums' ? ' SELECTED' : '' ).'>This Forum</option>';
+			<option value="forums"'.( $type_of_search == 'forums' ? ' selected="selected"' : '' ).'>This Forum</option>';
 		}
 		print '
-			<option value="soft"'.( $type_of_search == 'soft' ? ' SELECTED' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
+			<option value="soft"'.( $type_of_search == 'soft' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','softwaregroup').'</option>';
 		print '
-			<option value="skill"'.( $type_of_search == 'skill' ? ' SELECTED' : '' ).'>'.$Language->getText('searchbox','skill').'</option>';
+			<option value="skill"'.( $type_of_search == 'skill' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','skill').'</option>';
 		print '
-			<option value="people"'.( $type_of_search == 'people' ? ' SELECTED' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
+			<option value="people"'.( $type_of_search == 'people' ? ' selected="selected"' : '' ).'>'.$Language->getText('searchbox','people').'</option>';
 		print '
-			</select>';
+			</select></div>';
 
 //		print '<br />';
 //		print '
@@ -680,31 +687,31 @@ if ($params['group']) {
 		print '</td><td>&nbsp;</td>';
 		if ( isset($forum_id) ) {
 			print '
-			<input type="hidden" value="'.$forum_id.'" name="forum_id">';
+			<input type="hidden" value="'.$forum_id.'" name="forum_id" />';
 		}
 		if ( isset($group_id) ) {
 			print '
-			<input type="hidden" value="'.$group_id.'" name="group_id">';
+			<input type="hidden" value="'.$group_id.'" name="group_id" />';
 		}
 		if ( isset($atid) ) {
 			print '
-			<input type="hidden" value="'.$atid.'" name="atid">';
+			<input type="hidden" value="'.$atid.'" name="atid" />';
 		}
 		print '<td>';
 		print '
-		<input type="text" SIZE="12" name="words" value="'.$words.'">';
+		<input type="text" size="12" name="words" value="'.$words.'" />';
 
 		print '</td><td>&nbsp;</td><td>';
-		print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'">';
+		print '<input type="submit" name="Search" value="'.$Language->getText('searchbox','search').'" />';
 
 		print '
 		</td></tr></table>';
-		print '</form></font>';
+		print '</form>';
 
 	}
 
 	/**
-	 * subMenu() - Takes two array of titles and links and build a menu 
+	 * subMenu() - Takes two array of titles and links and build a menu
 	 *
 	 * @param	   array   The array of titles
 	 * @param	   array   The array of title links
@@ -718,7 +725,7 @@ if ($params['group']) {
 		for ($i=0; $i<$count; $i++) {
 			$return .= '
 				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a> | ';
-		} 
+		}
 		$return .= '
 				<a href='.$links_arr[$i].'>'.$title_arr[$i].'</a>
 			</strong><p>';
@@ -729,10 +736,10 @@ if ($params['group']) {
 	 * multiTableRow() - create a mutlilevel row in a table
 	 *
 	 * @param	string	the row attributes
-	 * @param	array	the array of cell data, each element is an array, 
-	 *				  	the first item being the text, 
-	 *				    the subsequent items are attributes (dont include 
-	 *					the bgcolor for the title here, that will be 
+	 * @param	array	the array of cell data, each element is an array,
+	 *				  	the first item being the text,
+	 *				    the subsequent items are attributes (dont include
+	 *					the bgcolor for the title here, that will be
 	 *					handled by $istitle
 	 * @param	boolean is this row part of the title ?
 	 *
@@ -758,14 +765,14 @@ if ($params['group']) {
 				$return .='</strong></font>';
 			}
 			$return .= '</td>';
-		
+
 		}
 		$return .= '</tr>
 		';
-		
+
 		return $return;
 	 }
-	 
+
 }
 
 ?>

@@ -399,7 +399,7 @@ news_submit	submit	SUBMIT
 news_utils	nonews	No News Items Found
 news_utils	archive	News archive
 news_utils	submit	Submit News
-news_utils	readmore	<NOBR>Read More/Comment</NOBR>
+news_utils	readmore	Read&nbsp;More/Comment
 people	about_blurb	<P>The $1 Project Help Wanted board is for non-commercial, project volunteer openings. Commercial use is prohibited.<P>Project listings remain live for two weeks, or until closed by the poster, whichever comes first. (Project administrators may always re-post expired openings.)<P>Browse through the category menu to find projects looking for your help.<P>If you're a project admin, log in and submit help wanted requests through your project administration page.<P>To suggest new job categories, submit a request via the support manager.<P>
 people	section	Project Help Wanted
 people	title	Projects Needing Help

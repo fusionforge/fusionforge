@@ -70,8 +70,6 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		$return .= $Language->getText('news_utils', 'nonews');
 		$return .= db_error();
 	} else {
-		echo '
-			<dl compact="compact">';
 		for ($i=0; $i<$rows; $i++) {
 			if ($show_summaries && $limit) {
 				//get the first paragraph of the story
@@ -82,7 +80,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				} else {
 					$summ_txt='<br />'. util_make_links( $arr[0] );
 				}
-				//show the project name 
+				//show the project name
 				if (db_result($result,$i,'type')==2) {
 					$group_type='/foundry/';
 				} else {
@@ -96,11 +94,11 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 			if (!$limit) {
 				if ($show_forum) {
-					$return .= '<li><a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a></li>';
+					$return .= '<li><a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>';
 				} else {
-					$return .= '<li><strong>'. db_result($result,$i,'summary') . '</strong></li>';
+					$return .= '<li><strong>'. db_result($result,$i,'summary') . '</strong>';
 				}
-				$return .= ' &nbsp; <em>'. date($sys_datefmt,db_result($result,$i,'date')).'</em><br />';
+				$return .= ' &nbsp; <em>'. date($sys_datefmt,db_result($result,$i,'date')).'</em><br /></li>';
 			} else {
 				if ($show_forum) {
 					$return .= '
@@ -113,10 +111,10 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$return .= '
 					<br />&nbsp;';
 				}
-				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'user_name') .' - '. 
-					date($sys_datefmt,db_result($result,$i,'date')). '</em>' . 
+				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'user_name') .' - '.
+					date($sys_datefmt,db_result($result,$i,'date')). '</em>' .
 					$proj_name . $summ_txt;
-				
+
 				$sql="SELECT total FROM forum_group_list_vw WHERE group_forum_id='" . db_result($result,$i,'forum_id') . "'";
 				$res2 = db_query($sql);
 				$num_comments = db_result($res2,0,'total');
@@ -139,10 +137,13 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 			}
 
 			if ($limit==1 && $tail_headlines) {
-				$return .= "<ul>";
+				$return .= "<ul>\n";
 			}
 			if ($limit) {
 				$limit--;
+			}
+			if (!$limit && $i==$rows-1) {
+				$return .= "</ul>\n";
 			}
 		}
 	}
@@ -155,7 +156,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 
 	if ($show_forum) {
 		if ($tail_headlines) {
-			$return .= '</ul><hr width="100%" size="1" noshade="noshade" />'."\n";
+			$return .= '<hr width="100%" size="1" noshade="noshade" />'."\n";
 		}
 
 		$return .= '<div align="center">'
@@ -176,7 +177,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 	global $sys_datefmt,$Language;
 	/*
-		Show a the latest news for a portal 
+		Show a the latest news for a portal
 	*/
 
 	$sql="SELECT groups.group_name,groups.unix_group_name,users.user_name,news_bytes.forum_id,news_bytes.summary,news_bytes.date,news_bytes.details ".
