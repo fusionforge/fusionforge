@@ -19,13 +19,16 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     vars in sourceforge.conf not managed by debconf
   * [Christian] More i18n in /my and /account
   * [Christian] Make user menu themeable
-  * [Christian] Applied Mathieu Peltier <Mathieu.Peltier@inrialpes.fr> patch to send
-    mail to admin when a project is submitted, and modified it to send the
-    mail to all members of siteadmin (id=1) group, also applied ftp patch
-    partly.
-  * [Christian] Added translation tool in admin (Visualisation only at the moment) 
+  * [Christian] Applied Mathieu Peltier <Mathieu.Peltier@inrialpes.fr>
+    patch to send mail to admin when a project is submitted, and modified
+    it to send the mail to all members of siteadmin (id=1) group, also
+    applied ftp patch partly.
+  * [Christian] Added translation tool in admin (Visualisation only at the
+    moment)
+  * [Roland] Added missing dependency on php4-cgi for package
+    sourceforge-web-apache.
 
- -- Christian Bayle <bayle@debian.org>  Thu, 17 Oct 2002 00:53:05 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 17 Oct 2002 18:50:18 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
