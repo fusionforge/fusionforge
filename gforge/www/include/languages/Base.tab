@@ -1359,7 +1359,7 @@ pm_include_taskhtml	comment	Comment
 pm_include_taskhtml	date	Date
 pm_include_taskhtml	depend_info	Tasks That Depend on This Task
 pm_include_taskhtml	field	Field
-pm_include_taskhtml	followups	Folloups
+pm_include_taskhtml	followups	Followups
 pm_include_taskhtml	no_changes	No Changes Have Been Made
 pm_include_taskhtml	no_comments	No Comments Have Been Added
 pm_include_taskhtml	no_depend_info	No Tasks are Dependent on This Task
