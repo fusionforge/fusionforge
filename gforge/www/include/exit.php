@@ -16,7 +16,7 @@
  * @param		string	Error text
  */
 function exit_error($title,$text) {
-	GLOBAL $HTML,$group_id, $Language;
+	global $HTML,$group_id, $Language;
 	$HTML->header(array('title'=>$Language->getText('exit','exiting_with_error'),'group'=>$group_id));
 	print '<h2><span style="color:#FF3333">'.$title.'</span></h2><p>'.$text .'</p>';
 	$HTML->footer(array());
@@ -67,10 +67,11 @@ function exit_missing_param() {
  *	instantiating object and before any HTML output.
  *
  *	@param		object	Object of subclass of Error class
- *	@param		string	Name of the class object should belong to 
+ *	@param		string	Name of the class object should belong to
  *	@return will not return if object is not valid
  */
 function exit_assert_object($obj, $expected_class) {
+	global $Language;
 	if (!$obj || !is_object($obj)) {
 		exit_error($Language->getText('general','error'), $Language->getText('error','error_creating').$expected_class.' object');
 	} else if ($obj->isError()) {
