@@ -6,7 +6,7 @@ use DBI ;
 use strict ;
 use diagnostics ;
 
-use vars qw/$dbh @reqlist $thdir $thname/ ;
+use vars qw/$dbh @reqlist $thdir/ ;
 
 sub debug ( $ ) ;
 
@@ -14,14 +14,13 @@ require ("/usr/lib/gforge/lib/include.pl") ; # Include all the predefined functi
 
 &db_connect ;
 
-if ($#ARGV < 1) {
+if ($#ARGV < 0) {
     debug "Usage: unregister-theme <dirname>" ;
     debug "The theme must be in /usr/share/gforge/www/themes/<dirname>/" ;
     exit 1 ;
 }
 
 $thdir = $ARGV [0] ;
-$thname = $ARGV [1] ;
 
 $dbh->{AutoCommit} = 0;
 $dbh->{RaiseError} = 1;
@@ -29,16 +28,15 @@ eval {
     my ($query, $sth, @array, $version, $action) ;
 
     $thdir = $dbh->quote ($thdir) ;
-    $thname = $dbh->quote ($thname) ;
 
-    $query = "SELECT count(*) FROM themes WHERE dirname='$thdir'" ;
-    my $sth = $dbh->prepare ($query) ;
+    $query = "SELECT count(*) FROM themes WHERE dirname=$thdir" ;
+    $sth = $dbh->prepare ($query) ;
     $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
+    @array = $sth->fetchrow_array () ;
     $sth->finish () ;
 
     if ($array [0] != 0) {
-	$query = "UPDATE themes SET enabled=false WHERE dirname='$thdir'" ;
+	$query = "UPDATE themes SET enabled=false WHERE dirname=$thdir" ;
 
 	# debug $query ;
 	

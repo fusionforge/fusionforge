@@ -40,16 +40,16 @@ eval {
     $thdir = $dbh->quote ($thdir) ;
     $thname = $dbh->quote ($thname) ;
 
-    $query = "SELECT count(*) FROM themes WHERE dirname='$thdir'" ;
-    my $sth = $dbh->prepare ($query) ;
-    $sth->execute () ;
-    my @array = $sth->fetchrow_array () ;
-    $sth->finish () ;
+    $query = "SELECT count(*) FROM themes WHERE dirname=$thdir" ;
+    $sth = $dbh->prepare($query) ;
+    $sth->execute() ;
+    @array = $sth->fetchrow_array() ;
+    $sth->finish() ;
 
     if ($array [0] != 0) {
-	$query = "UPDATE themes SET enabled=true WHERE dirname='$thdir'" ;
+	$query = "UPDATE themes SET enabled=true WHERE dirname=$thdir" ;
     } else {
-	$query = "INSERT INTO themes (dirname, fullname) VALUES ('$thdir', '$thname')" ;
+	$query = "INSERT INTO themes (dirname, fullname) VALUES ($thdir, $thname)" ;
     }
 
     # debug $query ;
