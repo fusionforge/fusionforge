@@ -24,7 +24,7 @@ class Layout extends Error {
 	 *
 	 * @var		string	$imgroot
 	 */
-	var $imgroot = '/themes/forged/images/';
+	var $imgroot = 'themes/forged/images/';
 
 	// Color Constants
 	/**
@@ -226,10 +226,10 @@ class Layout extends Error {
 		if (!$bgcolor) {
 			$bgcolor=$this->COLOR_HTMLBOX_BACK;
 		}
-		$s = ((session_issecure()) ? 's' : '' );
+		$url_image=url_image($this->imgroot . "background.png");
 		$return = '<table cellspacing="1" cellpadding="5" width="100%" border="0" bgcolor="'.$this->COLOR_HTMLBOX_BACK.'">
 			<tr bgcolor="'.$this->COLOR_HTMLBOX_TITLE.'" align="center">
-				<td background="http' . $s . ':' .$GLOBALS['sys_images_url'].$this->imgroot.'background.png" colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
+				<td background=' . $url_image . ' colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
 			</tr>';
 
 		//backwards compatibility hack
@@ -259,15 +259,14 @@ class Layout extends Error {
 			$bgcolor=$this->COLOR_HTMLBOX_BACK;
 		}
 		if (!$title_bgcolor) {
-			$s = ((session_issecure()) ? 's' : '' );
 			$title_bgcolor=$this->COLOR_HTMLBOX_BACK;
-			$title_bgimg="http$s:" . $GLOBALS['sys_images_url'] . $this->imgroot . 'background.png';
+			$title_bgimg=url_image($this->imgroot . "background.png");
 		}
 		$return = '
 				</td>
 			</tr>
 			<tr bgcolor="' . $title_bgcolor . '" align="center">
-				<td background="' . $title_bgimg . '" colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
+				<td background=' . $title_bgimg . ' colspan=2><SPAN class=titlebar>'.$title.'</SPAN></td>
 			</tr>';
 
 		//backwards compatibility hack
@@ -307,9 +306,9 @@ class Layout extends Error {
 		global $G_SESSION, $Language, $sys_name;
 
 		if (!$params['title']) {
-			$params['title'] = $GLOBALS['sys_name'];
+			$params['title'] = "SourceForge";
 		} else {
-			$params['title'] = $GLOBALS['sys_name'].": " . $params['title'];
+			$params['title'] = "SourceForge: " . $params['title'];
 		}
 		?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
@@ -347,7 +346,7 @@ class Layout extends Error {
 	 * @param	array	Footer parameters array
 	 */
 	function generic_footer($params) {
-		global $PHP_SELF, $Language, $sys_name;
+		global $PHP_SELF, $sys_name;
 		echo '<P><A HREF="/source.php?page_url='.$PHP_SELF.'"><B><FONT COLOR="WHITE">Show Source</FONT></B></A><P>';
 
 		global $IS_DEBUG,$QUERY_COUNT;
@@ -358,11 +357,21 @@ class Layout extends Error {
 		}
 
 		?>
-<P align="center">
-  <font face="arial, helvetica" size="1" color="#cccccc">
-<? echo $Language->getText('general', 'footer'); ?>
-  </font>
-</p>
+<P class="footer">
+<font face="arial, helvetica" size="1" color="#cccccc">
+VA Linux Systems and SourceForge are trademarks of VA Linux Systems, Inc.
+Linux is a registered trademark of Linus Torvalds.  All other trademarks and
+copyrights on this page are property of their respective owners.
+For information about other site Content ownership and sitewide
+terms of service, please see the
+<a href="/tos/tos.php" class="legallink">SourceForge Terms of Service</a>.
+For privacy
+policy information, please see the <a href="/tos/privacy.php" class="legallink"
+>SourceForge Privacy Policy</a>.
+Content owned by VA Linux Systems is copyright 
+1999-2001 VA Linux Systems, Inc.  All rights reserved.
+</font>
+<BR>&nbsp;
 
 <?php
 
@@ -478,20 +487,21 @@ $s = ((session_issecure()) ? 's' : '' );
 <br>
 <!-- start page body -->
 <div align="left">
+<center>
 <table cellpadding="0" cellspacing="0" border="0" width="99%">
 	<tr>
-		<td background=<?php echo url_image("tbar1.png"); ?> width="1%" height="17"><?php echo html_image($this->imgroot . "tleft1.png","17","17",array()); ?></td>
-		<td background=<?php echo url_image("tbar1.png"); ?> align="center" colspan="3" width="99%"><?php echo html_image($this->imgroot . "tbar1.png","1","17",array()); ?></td>
-		<td background=<?php echo url_image("tbar1.png"); ?> width="1%" height="17"><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
+		<td background=<?php echo url_image($this->imgroot . "tbar1.png"); ?> width="1%" height="17"><?php echo html_image($this->imgroot . "tleft1.png","17","17",array()); ?></td>
+		<td background=<?php echo url_image($this->imgroot . "tbar1.png"); ?> align="center" colspan="3" width="99%"><?php echo html_image($this->imgroot . "tbar1.png","1","17",array()); ?></td>
+		<td background=<?php echo url_image($this->imgroot . "tbar1.png"); ?> width="1%" height="17"><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
 	</tr>
 	<tr>
-		<td width="17" background=<?php echo url_image("leftbar1.png"); ?> align="left" valign="bottom"><?php echo html_image($this->imgroot . "leftbar1.png","17","25",array()); ?></td>
+		<td width="17" background=<?php echo url_image($this->imgroot . "leftbar1.png"); ?> align="left" valign="bottom"><?php echo html_image($this->imgroot . "leftbar1.png","17","25",array()); ?></td>
 		<td colspan="3" bgcolor="#ffffff">
 <!-- start main body cell -->
 
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
-			<td width="141" background=<?php echo url_image("leftmenubg.png"); ?> bgcolor="#cfd1d4" align="left" valign="top">
+			<td width="141" background=<?php echo url_image($this->imgroot . "leftmenubg.png"); ?> bgcolor="#cfd1d4" align="left" valign="top">
 
 	<?php
 	?>
@@ -508,7 +518,7 @@ $s = ((session_issecure()) ? 's' : '' );
 	<P>
 	</td>
 
-	<td width="20" background=<?php echo url_image("fade1.png"); ?> nowrap>&nbsp;</td>
+	<td width="20" background=<?php echo url_image($this->imgroot . "fade1.png"); ?> nowrap>&nbsp;</td>
 	<td valign="top" bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width="99%">
 	<BR>
 
@@ -548,15 +558,16 @@ $s = ((session_issecure()) ? 's' : '' );
 	</tr>
 	</table>
 		</td>
-		<td width="17" background=<?php echo url_image("rightbar1.png"); ?> align="right" valign="bottom"><?php echo html_image($this->imgroot . "rightbar1.png","17","17",array()); ?>
+		<td width="17" background=<?php echo url_image($this->imgroot . "rightbar1.png"); ?> align="right" valign="bottom"><?php echo html_image($this->imgroot . "rightbar1.png","17","17",array()); ?>
 </td>
 	</tr>
 	<tr>
-		<td background=<?php echo url_image("bbar1.png"); ?> height="17"><?php echo html_image($this->imgroot . "bleft1.png","17","17",array()); ?></td>
-		<td background=<?php echo url_image("bbar1.png"); ?> align="center" colspan="3"><?php echo html_image($this->imgroot . "bbar1.png","1","17",array()); ?></td>
-		<td background=<?php echo url_image("bbar1.png"); ?> bgcolor="#7c8188"><?php echo html_image($this->imgroot . "bright1.png","17","17",array()); ?></td>
+		<td background=<?php echo url_image($this->imgroot . "bbar1.png"); ?> height="17"><?php echo html_image($this->imgroot . "bleft1.png","17","17",array()); ?></td>
+		<td background=<?php echo url_image($this->imgroot . "bbar1.png"); ?> align="center" colspan="3"><?php echo html_image($this->imgroot . "bbar1.png","1","17",array()); ?></td>
+		<td background=<?php echo url_image($this->imgroot . "bbar1.png"); ?> bgcolor="#7c8188"><?php echo html_image($this->imgroot . "bright1.png","17","17",array()); ?></td>
 	</tr>
 </table>
+</center>
 </div>
 
 <!-- themed page footer -->

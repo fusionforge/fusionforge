@@ -9,8 +9,10 @@ sourceforge (2.6-0+9+) unstable; urgency=low
   * [Roland] Made groups siteadmin and newsadmin public to prevent
     problems with submitting of news.  Also, changed their names for
     coherence with names inherited from the 2.5 branch.
+  * [Christian] Continuing work on theming, added a new function in 
+    html.php (url_html)
 
- -- Christian Bayle <bayle@debian.org>  Wed, 17 Apr 2002 00:27:54 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed, 17 Apr 2002 21:10:44 +0200
 
 sourceforge (2.6-0+9) unstable; urgency=low
 

@@ -125,9 +125,8 @@ function html_image($src,$width,$height,$args,$display=1) {
  */
 function url_image($src) {
 	global $sys_images_url;
-	global $sys_theme;
 	$s = ((session_issecure()) ? 's' : '' );
-	return ('"http'. $s .':' . $sys_images_url . 'themes/' . $sys_theme . '/images/' . $src .'"');
+	return ('"http'. $s .':' . $sys_images_url . $src .'"');
 }
 
 /**
