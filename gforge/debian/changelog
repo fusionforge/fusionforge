@@ -1,4 +1,4 @@
-sourceforge (2.6-0+12+) experimental; urgency=low
+sourceforge (2.6-0+13) experimental; urgency=low
 
   * [Christian] Added a dump and restore option to install-db.sh
   * [Christian] Added themeable main page support
@@ -60,7 +60,7 @@ sourceforge (2.6-0+12+) experimental; urgency=low
     Thanks to Andreas Schrattenecker <andreas.schrattenecker@aon.at> for
     the bug report and analysis.
 
- -- Roland Mas <lolando@debian.org>  Wed,  9 Oct 2002 19:33:39 +0200
+ -- Christian Bayle <bayle@debian.org>  Wed,  9 Oct 2002 21:35:36 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 
