@@ -56,12 +56,14 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 		$wclause='news_bytes.is_approved=1';
 	}
 
-	$sql="SELECT groups.group_name,groups.unix_group_name,groups.type,users.user_name,news_bytes.forum_id,news_bytes.summary,news_bytes.date,news_bytes.details ".
-		"FROM users,news_bytes,groups ".
-		"WHERE $wclause ".
-		"AND users.user_id=news_bytes.submitted_by ".
-		"AND news_bytes.group_id=groups.group_id ".
-		"ORDER BY date DESC";
+	$sql="SELECT groups.group_name,groups.unix_group_name,
+		groups.type,users.user_name,users.realname,
+		news_bytes.forum_id,news_bytes.summary,news_bytes.date,news_bytes.details 
+		FROM users,news_bytes,groups 
+		WHERE $wclause 
+		AND users.user_id=news_bytes.submitted_by 
+		AND news_bytes.group_id=groups.group_id 
+		ORDER BY date DESC";
 
 	$result=db_query($sql,$limit+$tail_headlines);
 	$rows=db_numrows($result);
@@ -80,13 +82,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 				} else {
 					$summ_txt='<br />'. util_make_links( $arr[0] );
 				}
-				//show the project name
-				if (db_result($result,$i,'type')==2) {
-					$group_type='/foundry/';
-				} else {
-					$group_type='/projects/';
-				}
-				$proj_name=' &nbsp; - &nbsp; <a href="'.$group_type. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
+				$proj_name=' &nbsp; - &nbsp; <a href="/projects/'. strtolower(db_result($result,$i,'unix_group_name')) .'/">'. db_result($result,$i,'group_name') .'</a>';
 			} else {
 				$proj_name='';
 				$summ_txt='';
@@ -111,7 +107,7 @@ function news_show_latest($group_id='',$limit=10,$show_summaries=true,$allow_sub
 					$return .= '
 					<br />&nbsp;';
 				}
-				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'user_name') .' - '.
+				$return .= '&nbsp;&nbsp;&nbsp;<em>'. db_result($result,$i,'realname') .' - '.
 					date($sys_datefmt,db_result($result,$i,'date')). '</em>' .
 					$proj_name . $summ_txt;
 
@@ -180,14 +176,16 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 		Show a the latest news for a portal
 	*/
 
-	$sql="SELECT groups.group_name,groups.unix_group_name,users.user_name,news_bytes.forum_id,news_bytes.summary,news_bytes.date,news_bytes.details ".
-		"FROM users,news_bytes,groups,foundry_news ".
-		"WHERE foundry_news.foundry_id='$group_id' ".
-		"AND users.user_id=news_bytes.submitted_by ".
-		"AND foundry_news.news_id=news_bytes.id ".
-		"AND news_bytes.group_id=groups.group_id ".
-		"AND foundry_news.is_approved=1 ".
-		"ORDER BY news_bytes.date DESC";
+	$sql="SELECT groups.group_name,groups.unix_group_name,
+		users.user_name,users.realname,news_bytes.forum_id,
+		news_bytes.summary,news_bytes.date,news_bytes.details 
+		FROM users,news_bytes,groups,foundry_news 
+		WHERE foundry_news.foundry_id='$group_id' 
+		AND users.user_id=news_bytes.submitted_by 
+		AND foundry_news.news_id=news_bytes.id 
+		AND news_bytes.group_id=groups.group_id 
+		AND foundry_news.is_approved=1 
+		ORDER BY news_bytes.date DESC";
 
 	$result=db_query($sql,$limit);
 	$rows=db_numrows($result);
@@ -214,7 +212,7 @@ function news_foundry_latest($group_id=0,$limit=5,$show_summaries=true) {
 			}
 			$return .= '
 				<a href="/forum/forum.php?forum_id='. db_result($result,$i,'forum_id') .'"><strong>'. db_result($result,$i,'summary') . '</strong></a>
-				<br /><em>'. db_result($result,$i,'user_name') .' - '.
+				<br /><em>'. db_result($result,$i,'realname') .' - '.
 					date($sys_datefmt,db_result($result,$i,'date')) . $proj_name . '</em>
 				'. $summ_txt .'<hr width="100%" size="1" />';
 		}
