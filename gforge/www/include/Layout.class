@@ -128,20 +128,21 @@ class Layout extends Error {
 	 * @var		array	$icons
 	 */
 	var $icons = array(
-		'Summary' => '/images/ic/anvil24.png',
-		'Admin' => '/images/ic/anvil24.png',
-		'Homepage' => '/images/ic/home.png',
-		'Forums' => '/images/ic/notes.png',
-		'Bugs' => '/images/ic/bug.png',
-		'Support' => '/images/ic/support.png',
-		'Patches' => '/images/ic/patch.png',
-		'Lists' => '/images/ic/mail.png',
-		'Tasks' => '/images/ic/index.png',
-		'Docs' => '/images/ic/docman.png',
-		'Surveys' => '/images/ic/survey.png',
-		'News' => '/images/ic/news.png',
-		'CVS' => '/images/ic/convert.png',
-		'Files' => '/images/ic/save.png'
+		'Summary'  => 'ic/Summary.png',
+		'Admin'    => 'ic/Admin.png',
+		'Homepage' => 'ic/Homepage.png',
+		'Forums'   => 'ic/Forums.png',
+		'Tracker'  => 'ic/Tracker.png',
+		'Bugs'     => 'ic/Bugs.png',
+		'Support'  => 'ic/Support.png',
+		'Patches'  => 'ic/Patches.png',
+		'Lists'    => 'ic/Lists.png',
+		'Tasks'    => 'ic/Tasks.png',
+		'Docs'     => 'ic/Docs.png',
+		'Surveys'  => 'ic/Surveys.png',
+		'News'     => 'ic/News.png',
+		'CVS'      => 'ic/CVS.png',
+		'Files'    => 'ic/Files.png'
 		);
 
 	/**
@@ -480,18 +481,18 @@ osdn_print_navbar();
 <div align="center">
 <table cellpadding="0" cellspacing="0" border="0" width="99%">
 	<tr>
-		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tleft1.png","17","17",array()); ?></td>
-		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" align="center" colspan="3" width="99%"><?php echo html_image($this->imgroot . "tbar1.png","1","17",array()); ?></td>
-		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
+		<td background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tleft1.png","17","17",array()); ?></td>
+		<td background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" align="center" colspan="3" width="99%"><?php echo html_image($this->imgroot . "tbar1.png","1","17",array()); ?></td>
+		<td background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>tbar1.png" width="1%" height="17"><?php echo html_image($this->imgroot . "tright1.png","17","17",array()); ?></td>
 	</tr>
 	<tr>
-		<td width="17" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>leftbar1.png" align="left" valign="bottom"><?php echo html_image($this->imgroot . "leftbar1.png","17","25",array()); ?></td>
+		<td width="17" background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>leftbar1.png" align="left" valign="bottom"><?php echo html_image($this->imgroot . "leftbar1.png","17","25",array()); ?></td>
 		<td colspan="3" bgcolor="#ffffff">
 <!-- start main body cell -->
 
 	<table cellpadding="0" cellspacing="0" border="0" width="100%">
 		<tr>
-			<td width="141" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>steel3.jpg" bgcolor="#cfd1d4" align="left" valign="top">
+			<td width="141" background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>steel3.jpg" bgcolor="#cfd1d4" align="left" valign="top">
 
 	<?php
 	print '<IMG src="/images/clear.gif" width=140 height=1 alt="Clear"><BR>';
@@ -509,7 +510,7 @@ osdn_print_navbar();
 	<P>
 	</TD>
 
-	<td width="20" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>fade1.png" nowrap>&nbsp;</td>
+	<td width="20" background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>fade1.png" nowrap>&nbsp;</td>
 	<td valign="top" bgcolor="<?php echo $this->COLOR_CONTENT_BACK; ?>" width="99%">
 	<BR>
 
@@ -548,13 +549,13 @@ osdn_print_navbar();
 	</tr>
 	</table>
 		</td>
-		<td width="17" background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>rightbar1.png" align="right" valign="bottom"><?php echo html_image($this->imgroot . "rightbar1.png","17","17",array()); ?>
+		<td width="17" background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>rightbar1.png" align="right" valign="bottom"><?php echo html_image($this->imgroot . "rightbar1.png","17","17",array()); ?>
 </td>
 	</tr>
 	<tr>
-		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>bbar1.png" height="17"><?php echo html_image($this->imgroot . "bleft1.png","17","17",array()); ?></td>
-		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>bbar1.png" align="center" colspan="3"><?php echo html_image($this->imgroot . "bbar1.png","1","17",array()); ?></td>
-		<td background="<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>bbar1.png" bgcolor="#7c8188"><?php echo html_image($this->imgroot . "bright1.png","17","17",array()); ?></td>
+		<td background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>bbar1.png" height="17"><?php echo html_image($this->imgroot . "bleft1.png","17","17",array()); ?></td>
+		<td background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>bbar1.png" align="center" colspan="3"><?php echo html_image($this->imgroot . "bbar1.png","1","17",array()); ?></td>
+		<td background="http:<?php echo $GLOBALS['sys_images_url'] . $this->imgroot; ?>bbar1.png" bgcolor="#7c8188"><?php echo html_image($this->imgroot . "bright1.png","17","17",array()); ?></td>
 	</tr>
 </table>
 </div>

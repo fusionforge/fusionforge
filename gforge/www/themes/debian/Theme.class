@@ -370,7 +370,8 @@ osdn_print_navbar();
 		} else {
 			print 'class=tabs ';
 		}
-		print 'href="'. $url .'">' . $title . '</A>&nbsp;|&nbsp;';
+		//print 'href="'. $url .'">' . $title . '</A>&nbsp;|&nbsp;';
+		print 'href="'. $url .'"><img src="' . $this->imgroot . $icon . '">' . $title . '</A>';
 	}
 }
 ?>
