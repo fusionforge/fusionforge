@@ -402,8 +402,7 @@ function pm_data_update_task ($group_project_id,$project_task_id,$start_month,$s
 
 	global $feedback;
 	if (!$group_project_id || !$project_task_id || !$status_id || !$start_month || !$start_day || !$start_year || 
-		!$end_month || !$end_day || !$end_year || !$summary || !$priority || !$new_group_project_id || !$group_id ||
-		!$start_hour || !$start_minute || !$end_hour || !$end_minute) {
+		!$end_month || !$end_day || !$end_year || !$summary || !$priority || !$new_group_project_id || !$group_id ) {
 		$feedback .= ' ERROR - Missing Parameters: YEah! ';
 		return false;
 	}
