@@ -52,7 +52,7 @@ if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
 }
 */
 if (file_exists($sys_upload_dir.$group_name.'/'.$filename)) {
-	Header("Content-disposition: filename=".$filename);
+	Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
 	Header("Content-type: application/binary");
 	$length = filesize($sys_upload_dir.$group_name.'/'.$filename);
 	Header("Content-length: $length");

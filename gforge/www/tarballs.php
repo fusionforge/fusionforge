@@ -27,7 +27,7 @@ $group_name=$group->getUnixName();
 $filename=$group_name.'-cvsroot.tar.gz';
 
 if (file_exists($sys_cvs_tarballs_path.'/'.$filename)) {
-	Header("Content-disposition: filename=".$filename);
+	Header('Content-disposition: filename="'.str_replace('"', '', $filename).'"');
 	Header("Content-type: application/x-gzip");
 	$length = filesize($sys_cvs_tarballs_path.'/'.$filename);
 	Header("Content-length: ".$length);
