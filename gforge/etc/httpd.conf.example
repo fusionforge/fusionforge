@@ -1,0 +1,315 @@
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
+
+<IfModule mod_ssl.c>
+  Listen 80
+  Listen 443
+</IfModule>
+
+NameVirtualHost 10.GF.OR.GE:80
+NameVirtualHost 10.GF.OR.GE:443
+
+#
+# Main host
+#
+<Directory /path/to/gforge/www>
+  Options Indexes FollowSymlinks
+  AllowOverride All
+  order allow,deny
+  allow from all
+  php_admin_value include_path "/path/to/gforge:/path/to/gforge/www/include:."
+  php_admin_value default_charset "UTF-8"
+</Directory>
+
+# HTTP
+<VirtualHost 10.GF.OR.GE:80>
+  ServerName gforge.company.com
+  ServerAlias www.gforge.company.com
+  ServerAdmin webmaster@gforge.company.com
+  DocumentRoot /path/to/gforge/www
+  DirectoryIndex index.html index.php
+  <IfModule mod_userdir.c>
+    UserDir disabled
+  </IfModule>
+
+  php_admin_value default_charset "UTF-8"
+
+  <Directory /path/to/gforge/www>
+    Include   /etc/httpd.secrets
+  </Directory>
+
+  # Debian Sourceforge without the DNS delegation
+  # Project home pages are in a virtual /www/<group> location
+  AliasMatch ^/www/([^/]*)/(.*) /home/groups/$1/htdocs/$2
+  ScriptAliasMatch ^/([^/]*)/cgi-bin/(.*) /home/groups/$1/cgi-bin/$2
+  <Directory /home/groups>
+    Options Indexes FollowSymlinks
+      AllowOverride All
+      order allow,deny
+      allow from all
+  </Directory>
+
+  # Projects and Users script
+  <Location /projects>
+    ForceType application/x-httpd-php
+  </Location>
+  <Location /users>
+    ForceType application/x-httpd-php
+  </Location>
+
+  # This for cvsweb 
+  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+
+  # 404 Error document
+  ErrorDocument 404 /404.php
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+# HTTPS
+<VirtualHost 10.GF.OR.GE:443>
+  ServerName gforge.company.com
+  ServerAlias www.gforge.company.com
+  ServerAdmin webmaster@gforge.company.com
+  DocumentRoot /path/to/gforge/www
+  DirectoryIndex index.html index.php
+  <IfModule mod_userdir.c>
+    UserDir disabled
+  </IfModule>
+
+  php_admin_value default_charset "UTF-8"
+
+  <IfModule mod_ssl.c>
+    SSLEngine on
+    SSLCertificateFile /etc/apache/ssl.crt/server.crt
+    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    <Files ~ "\.(cgi|shtml)$">
+      SSLOptions +StdEnvVars
+    </Files>
+    <Directory "/usr/lib/cgi-bin">
+      SSLOptions +StdEnvVars
+    </Directory>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <IfModule apache_ssl.c>
+    SSLEnable
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <Directory /path/to/gforge/www>
+    Include   /etc/httpd.secrets
+  </Directory>
+
+  # Projects an Users script
+  <Location /projects>
+    ForceType application/x-httpd-php
+  </Location>
+  <Location /users>
+    ForceType application/x-httpd-php
+  </Location>
+
+  # This for cvsweb 
+  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+
+  # 404 Error document
+  ErrorDocument 404 /404.php
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+</VirtualHost>
+
+#
+# CVS host
+#
+<Directory /path/to/gforge/cvs>
+  Options Indexes FollowSymlinks
+  AllowOverride All
+  order allow,deny
+  allow from all
+  php_admin_value include_path "/path/to/gforge:/path/to/gforge/www/include:."
+  php_admin_value default_charset "UTF-8"
+</Directory>
+
+<VirtualHost 10.GF.OR.GE:80>
+  ServerName cvs.gforge.company.com
+  DocumentRoot /path/to/gforge/cvs
+  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+<VirtualHost 10.GF.OR.GE:443>
+  ServerName cvs.gforge.company.com
+
+  <IfModule mod_ssl.c>
+    SSLEngine on
+    SSLCertificateFile /etc/apache/ssl.crt/server.crt
+    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    <Files ~ "\.(cgi|shtml)$">
+      SSLOptions +StdEnvVars
+    </Files>
+    <Directory "/usr/lib/cgi-bin">
+      SSLOptions +StdEnvVars
+    </Directory>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <IfModule apache_ssl.c>
+    SSLEnable
+  </IfModule>
+
+  DocumentRoot /path/to/gforge/cvs
+  ScriptAlias /cgi-bin/ {usr_lib_gforge}/cgi-bin/
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+#
+# Download host
+#
+<VirtualHost 10.GF.OR.GE:80>
+  ServerName download.gforge.company.com
+  DocumentRoot /var/lib/gforge/download
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+#
+# List host
+#
+# HTTP
+<VirtualHost 10.GF.OR.GE:80>
+  ServerName lists.gforge.company.com
+  AddHandler cgi-script .cgi
+
+  ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+
+  Alias /pipermail /var/lib/mailman/archives/public
+  <Directory /var/lib/mailman/archives/public>
+    AllowOverride Options
+    Options FollowSymLinks
+  </Directory>
+
+  Alias /images/mailman /usr/share/images/mailman
+  <Location /images/mailman>
+    order allow,deny
+    allow from all
+  </Location>
+
+  RedirectMatch permanent ^/$ http://lists.gforge.company.com/mailman/listinfo
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+# HTTPS
+<VirtualHost 10.GF.OR.GE:443>
+  ServerName lists.gforge.company.com
+  AddHandler cgi-script .cgi
+
+  <IfModule mod_ssl.c>
+    SSLEngine on
+    SSLCertificateFile /etc/apache/ssl.crt/server.crt
+    SSLCertificateKeyFile /etc/apache/ssl.key/server.key
+    <Files ~ "\.(cgi|shtml)$">
+      SSLOptions +StdEnvVars
+    </Files>
+    <Directory "/usr/lib/cgi-bin">
+      SSLOptions +StdEnvVars
+    </Directory>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown
+  </IfModule>
+
+  <IfModule apache_ssl.c>
+    SSLEnable
+  </IfModule>
+
+  ScriptAlias /mailman/ /usr/lib/mailman/cgi-bin/
+
+  Alias /pipermail /var/lib/mailman/archives/public
+  <Directory /var/lib/mailman/archives/public>
+    AllowOverride Options
+    Options FollowSymLinks
+  </Directory>
+
+  Alias /images/mailman /usr/share/images/mailman
+  <Location /images/mailman>
+    order allow,deny
+    allow from all
+  </Location>
+
+  RedirectMatch permanent ^/$ https://lists.gforge.company.com/mailman/listinfo
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+</VirtualHost>
+
+#
+# cvs.* hosts
+#
+# This is magic for virtual hosting!
+UseCanonicalName Off
+# This example is so beautiful that I keep it
+# And can be used in a better way e.g. creating a cvs directory by group
+<VirtualHost 10.GF.OR.GE:80>
+	ServerName cvs.gforge.company.com
+	ServerAlias cvs.*.gforge.company.com
+	DocumentRoot /home/groups/
+	VirtualDocumentRoot /home/groups/%2/htdocs
+	VirtualScriptAlias /home/groups/%2/cgi-bin
+	<Directory /home/groups>
+		Options Indexes FollowSymlinks
+		AllowOverride All
+		order allow,deny
+		allow from all
+	</Directory>
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
+#
+# * hosts
+#
+<VirtualHost 10.GF.OR.GE:80>
+	ServerName gforge.company.com
+	ServerAlias *.gforge.company.com
+	VirtualDocumentRoot /home/groups/%1/htdocs
+        VirtualScriptAlias /home/groups/%1/cgi-bin
+        <Directory /home/groups>
+               Options Indexes FollowSymlinks
+               AllowOverride All
+               order allow,deny
+               allow from all
+       </Directory>
+  LogFormat "%h %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" gforge
+  CustomLog "|/usr/bin/cronolog /var/log/gforge/%Y/%m/%d/gforge.log" gforge
+  # Ensure that we don't try to use SSL on SSL Servers
+  <IfModule apache_ssl.c>
+    SSLDisable
+  </IfModule>
+</VirtualHost>
+
