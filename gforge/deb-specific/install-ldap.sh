@@ -220,13 +220,13 @@ FIN
 }
 
 setup_vars() {
-	sys_ldap_base_dn=$(grep sys_ldap_base_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+	sys_ldap_base_dn=$(grep ^ldap_base_dn= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
 	#echo "=====>sys_ldap_base_dn=$sys_ldap_base_dn"
-	sys_ldap_admin_dn=$(grep sys_ldap_admin_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+	sys_ldap_admin_dn="cn=admin,ou=People,${sys_ldap_base_dn}"
 	#echo "=====>sys_ldap_admin_dn=$sys_ldap_admin_dn"
-	sys_ldap_bind_dn=$(grep sys_ldap_bind_dn /etc/sourceforge/local.inc | cut -d\" -f2)
+	sys_ldap_bind_dn="cn=SF_robot,${sys_ldap_base_dn}"
 	#echo "=====>sys_ldap_bind_dn=$sys_ldap_bind_dn"
-	sys_ldap_passwd=$(grep sys_ldap_passwd /etc/sourceforge/database.inc | cut -d\" -f2)
+	sys_ldap_passwd=$(grep ^ldap_web_add_password= /etc/sourceforge/sourceforge.conf | cut -d= -f2-)
 	#echo "=====>sys_ldap_passwd=$sys_ldap_passwd"
 	[ -f /etc/ldap.secret ] && secret=$(cat /etc/ldap.secret) || secret=$sys_ldap_passwd
 	cryptedpasswd=`slappasswd -s "$secret" -h {CRYPT}`
