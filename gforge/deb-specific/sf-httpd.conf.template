@@ -3,7 +3,7 @@
   AllowOverride All
   order allow,deny
   allow from all
-  php_admin_value include_path "/usr/lib/sourceforge/www/include:."
+  php_admin_value include_path "/usr/lib/sourceforge:/usr/lib/sourceforge/www/include:."
 </Directory>
 
 <Files .htaccess>
