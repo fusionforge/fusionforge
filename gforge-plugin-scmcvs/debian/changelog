@@ -1,9 +1,10 @@
-gforge-plugin-scmcvs (4.1-5n) unstable; urgency=low
+gforge-plugin-scmcvs (4.1-5o) unstable; urgency=low
 
   * [Christian] Version taking in account nss
   * [Christian] Make cvs_dump.pl script select only groups that use
   scmcvs plugin
   * [Christian] Now uses tarball.php and removed tarball.sh
+  * [Mathieu] Link to snapshots added
 
  -- Christian Bayle <bayle@debian.org>  Sun, 20 Feb 2005 20:24:58 +0100
 
