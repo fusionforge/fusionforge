@@ -72,7 +72,8 @@ if ($GLOBALS["delete"]) {
 		exit_error( $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete'));
 	}
 	$sql = "select count(*) from trove_group_link where trove_cat_id='$form_trove_cat_id'";
-	$res = db_numrows(db_query($sql));
+	$row_count = db_fetch_array(db_query($sql));
+	$res = $row_count['count'];
 	if ($res > 0) {
 		exit_error($Language->getText('admin_trove_cat_edit','error_in_trove_operation'), $Language->getText('admin_trove_cat_edit','error_in_trove_operation_cant_delete_in_use'));
 	}

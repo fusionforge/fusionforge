@@ -1,6 +1,9 @@
 2004-04-06  Tom Copeland <tom@infoether.com>
 
 	* www/include/languages/Base.tab: Fixed stats_user_graph typo.
+	* www/admin/trove/trove_cat_edit.php: Fixed bug which prevented
+	trove categories from being deleted even if they were not
+	referenced by a project.
 
 2004-04-02  Tim Perdue  <tim@perdue.net>
 
