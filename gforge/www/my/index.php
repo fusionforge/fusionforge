@@ -342,7 +342,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 		. "groups.group_id,"
 		. "groups.unix_group_name,"
 		. "groups.status,"
-		. "groups.type,"
+		. "groups.type_id,"
 		. "user_group.admin_flags "
 		. "FROM groups,user_group "
 		. "WHERE groups.group_id=user_group.group_id "
@@ -362,7 +362,7 @@ if (session_loggedin()) { // || $sf_user_hash) {
 				$img="trash.png";
 			}
 
-			if (db_result($result, $i, 'type')==2) {
+			if (db_result($result, $i, 'type_id')==2) {
 				$type = 'foundry';
 			} else {
 				$type = 'projects';

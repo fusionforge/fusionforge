@@ -80,7 +80,7 @@ $sql="INSERT INTO trove_agg
 	LEFT JOIN project_weekly_metric USING (group_id), trove_group_link tgl 
 	WHERE tgl.group_id=g.group_id 
 	AND (g.is_public=1) 
-	AND (g.type=1) 
+	AND (g.type_id=1) 
 	AND (g.status='A') 
 	ORDER BY trove_cat_id ASC, ranking ASC)";
 
