@@ -6622,3 +6622,7 @@ SELECT setval ('"massmail_queue_id_seq"', 1, 'f');
 -- SELECT setval ('"trove_treesum_trove_treesum_seq"', 1, 'f');
 
 ---- From now on, everything comes from Debian-SF
+
+-- System projects were *not* created in 1970
+update groups set register_time = int4(abstime(now())) ;
+
