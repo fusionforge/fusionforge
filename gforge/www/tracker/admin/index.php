@@ -731,15 +731,21 @@ if ($group_id && $atid) {
 		/*
 			Put the result set (list of forums for this group) into a column with folders
 		*/
+		$tablearr=array($Language->getText('group','short_tracker'),$Language->getText('tracker_admin_update_type','description'));
+		echo $HTML->listTableTop($tablearr);
 
 		for ($j = 0; $j < count($at_arr); $j++) {
 			echo '
-			<p><a href="/tracker/admin/?atid='. $at_arr[$j]->getID() .
-			'&amp;group_id='.$group_id.'">' .
-			html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
-			$at_arr[$j]->getName() .'</a><br />'.
-			$at_arr[$j]->getDescription() .'</p>';
+			<tr '. $HTML->boxGetAltRowStyle($j) . '>
+				<td><a href="/tracker/admin/?atid='. $at_arr[$j]->getID() . '&amp;group_id='.$group_id.'">' .
+					html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
+					$at_arr[$j]->getName() .'</a>
+				</td>
+				<td>'.$at_arr[$j]->getDescription() .'
+				</td>
+			</tr>';
 		}
+		echo $HTML->listTableBottom();
 	}
 
 	?><?php echo $Language->getText('tracker_admin','intro') ?>

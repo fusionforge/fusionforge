@@ -350,16 +350,25 @@ if ($group_id && $atid) {
 		/*
 			Put the result set (list of trackers for this group) into a column with folders
 		*/
+		$tablearr=array($Language->getText('group','short_tracker'),$Language->getText('general','open'),$Language->getText('general','total'),$Language->getText('tracker_admin_update_type','description'));
+		echo $HTML->listTableTop($tablearr);
 
 		for ($j = 0; $j < count($at_arr); $j++) {
 			echo '
-			<a href="/tracker/?atid='. $at_arr[$j]->getID() .
-			'&group_id='.$group_id.'&func=browse">' .
-			html_image("ic/tracker20w.png","20","20",array("border"=>"0")) . ' &nbsp;'.
-			$at_arr[$j]->getName() .'</a>
-			( <strong>'. (int) $at_arr[$j]->getOpenCount() .'</strong> '.$Language->getText('general','open').' / <strong>'. (int) $at_arr[$j]->getTotalCount() .'</strong> '.$Language->getText('general','total').' )<br />'.
-			$at_arr[$j]->getDescription() .'<p>';
+			<tr '. $HTML->boxGetAltRowStyle($j) . '>
+				<td><a href="/tracker/?atid='.$at_arr[$j]->getID().'&group_id='.$group_id.'&func=browse">'.
+					html_image("ic/tracker20w.png","20","20",array("border"=>"0")).' &nbsp;'.
+					$at_arr[$j]->getName() .'</a>
+				</td>
+				<td align="center">'. (int) $at_arr[$j]->getOpenCount() . '
+				</td>
+				<td align="center">'. (int) $at_arr[$j]->getTotalCount() .'
+				</td>
+				<td>' .  $at_arr[$j]->getDescription() .'
+				</td>
+			</tr>';
 		}
+		echo $HTML->listTableBottom();
 	}
 
 	echo site_project_footer(array());
