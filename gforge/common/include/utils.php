@@ -171,10 +171,10 @@ function util_encode_mimeheader($str,$charset) {
  *
  */
 function util_convert_body($str,$charset) {
-	if (!function_exists('mb_convert_encoding')) {
+	if (!function_exists('mb_convert_encoding') || $charset == 'UTF-8') {
 		return $str;
 	}
-
+	
 	return mb_convert_encoding($str,$charset,"UTF-8");
 }
 
