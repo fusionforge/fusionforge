@@ -110,12 +110,12 @@ to view your developer/consultant profiles and ratings.
 $HTML->box1_top("Preferences"); ?>
 
 <INPUT type="checkbox" name="mail_site" value="1"<?php 
-	if ($u->getMailingsPrefs('site')) print " checked"; ?>> Receive Email for Site Updates
-<I>(This is very low traffic and will include security notices. Highly recommended.)</I>
+	if ($u->getMailingsPrefs('site')) print " checked"; ?>> 
+	<?php echo $Language->getText('account_register','siteupdate'); ?>
 
 <P><INPUT type="checkbox"  name="mail_va" value="1"<?php
-	if ($u->getMailingsPrefs('va')) print " checked"; ?>> Receive additional community mailings. 
-<I>(Low traffic.)</I>
+	if ($u->getMailingsPrefs('va')) print " checked"; ?>> 
+	<?php echo $Language->getText('account_register','communitymail'); ?>
 
 <P><INPUT type="checkbox"  name="remember_user" value="1"<?php
 	if ($sf_user_hash) print " checked"; ?> > "Remember me".
