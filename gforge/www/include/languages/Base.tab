@@ -851,6 +851,28 @@ project_filemodule_monitor	start_monitor_body	Monitoring Has Been Started
 projects	section	Project: $1
 projects	title	Summary
 register	title	New Project Registration
+register	invalid_full_name	Invalid full name
+register	invalid_unix_name	Invalid unix name
+register	unix_group_name_already_taken	Unix name already taken
+register	describe_registration	Please describe your Registration Purpose in a more comprehensive manner
+register	comprehensive_description	Describe in a more comprehensive manner your project.
+register	maximum_description	Maximum length for Project Description is 255 chars
+register	no_license_chosen	You do not have chosen a license
+register	conflicting_licenses_choice	Conflicting licenses choice
+register	more_license_description	Please give more comprehensive licensing description"
+register	registration_complete	Registration complete
+register	project_submitted	Your project has been submitted to the $1 administrators. Within 72 hours, you will receive notification of their decision and further instructions.</p><p>Thank you for choosing $1
+register	project_information	Project Information
+register	apply_for_registration	To apply for project registration, you should fill in basic information about it. Please read descriptions below carefully and provide complete and comprehensive data. All fields below are mandatory.
+register	project_full_name	</h3>1. Project full name</h3><p>You should start with specifying the name of your project. The "Full Name" is descriptive, and has no arbitrary restrictions (except a 40 character limit).</p>Full Name:<br/>
+register	purpose_and_summarization	2. Project Public Description</h3><p><strong></strong><p><strong> Please provide detailed, accurate description of your project and what $1 resources and in which way you plan to use. This description will be the basis for the approval or rejection of your project's hosting on $1, and later, to ensure that you are using the services in the intended way. This description will not be used as a public description of your project. It must be written in English.</strong>
+register	project_license	<h3>3. License</h3> <p><strong><em>If you are applying for a website-only project, please select "website-only" from the choices below and proceed.</em></strong><p>$1 was created to advance Open Source software development. To keep things simple, we are relying on the outstanding work of the <a href="http://www.opensource.org">Open Source Initiative</a> for our licensing choices. <p>We realize, however that there may be other licenses out there that may better fit your needs. If you wish to use a license that is not OSI Certified, please let us know why you wish to use another license.<p>Choosing a license is a serious decision. Please take some time to read the text (and our explanations) of several licenses before making a choice about your project. <p>You may change the license for your project at a later date, so long as you have a legal capability to do so, your file release clearly relates this change, and your filemap categorization is updated appropriately. <em>Please note that license changes are not retroactive (i.e. do not apply to products already released under OpenSource license).</em> <p>$1 is not responsible for legal discrepencies regarding your license.<p><strong>Licenses</strong>
+register	license_type	Public domain</a><li>Website Only <li>Other/Proprietary License</ul><p><strong>License for This Project</strong><br/ ><strong>Your License:</strong><br />
+register	other_license	If you selected "other", please provide an explanation along with a description of your license. Realize that other licenses may not be approved. Also, it may take additional time to make a decision for such project, since we will need to check that license is compatible with the OpenSource definition.
+register	project_description	<h3>4. Project Public Description</h3><p>This is the description of your project which will be shown on the Project Summary page, in search results, etc. It should not be as comprehensive and formal as Project Purpose description (step 2), so feel free to use concise and catchy wording. Maximum length is 255 chars.
+register	project_unix_name	<h3>5. Project Unix Name</h3><p>In addition to full project name, you will need to choose short,"Unix" name for your project.</p><p> The "Unix Name" has several restrictions because it is used in so many places around the site. They are:<ul><li>Cannot match the unix name of any other project<li>Must be between 3 and 15 characters in length<li>Must be in lower case<li>Can only contain characters, numbers, and dashes<li>Must be a valid unix username<li>Cannot match one of our reserved domains<li>Unix name will never change for this project</ul><p>Your unix name is important, however, because it will be used for many things, including:<ul><li>A web site at <tt>unixname.$1</tt><li>A CVS Repository root of <tt>/cvsroot/unixname</tt> at <tt>cvs.unixname.$1</tt><li>Shell access to <tt>unixname.$1</tt><li>Search engines throughout the site</ul><p>Unix Name:<br/>
+register	i_agree	I AGREE
+register	i_disagree	I DISAGREE
 register_complete	section	New Project Registration
 register_complete	title	Registration Complete
 register_projectinfo	section	New Project Registration
@@ -1078,6 +1100,66 @@ stats_lastlogins	most_recent_open	Most Recent Opened Sessions
 stats_lastlogins	date	Date
 stats_lastlogins	username	Username
 stats_lastlogins	source_ip	Source IP
+stats	overview_stats  OVERVIEW STATS
+stats	project_stats   PROJECT STATS
+stats	site_graphs     SITE GRAPHS
+stats_graph     sitewide_statistics_graphs      Sitewide Statistics Graphs
+stats_index     sitewide_aggregate_statistics   Sitewide Aggregate Statistics
+stats_index     other_statistics        Other statistics:<ul><li><a href="lastlogins.php">Most Recent Logins</a></li><li><a href="i18n.php">I18n Statistics</a></li></ul>
+stats_lastlogins        no_records      No records found","Database error: "
+stats_lastlogins        last_logins     Last Logins
+stats_lastlogins        most_recent_open        Most Recent Opened Sessions
+stats_lastlogins        date    Date
+stats_lastlogins        username        Username
+stats_lastlogins        source_ip       Source IP
+stats_projects	project_comparision	Project Statistical Comparisons
+stats_site_utils	all_projects	All Projects
+stats_site_utils	special_project_list	Special Project List
+stats_site_utils	returned_no_category	returned no category name
+stats_site_utils 	in_trove_category	Projects in trove category:
+stats_site_utils	or_special_project_list	OR enter Special Project List: 
+stats_site_utils 	comma_seperated_group_id	<strong>comma separated</strong> group_id\'s)
+stats_site_utils	report	Report: 
+stats_site_utils	last_30 last_30
+stats_site_utils	all	all
+stats_site_utils	view_by	View by: 
+stats_site_utils	generate_report	Generate Report
+stats_site_utils	group_name	Group Name
+stats_site_utils	page_views	Page Views
+stats_site_utils	downloads	Downloads
+stats_site_utils	bugs	Bugs
+stats_site_utils	support	Support
+stats_site_utils	patches	Patches
+stats_site_utils	all_trkr	All Trkr
+stats_site_utils	tasks	Tasks
+stats_site_utils	cvs	CVS
+stats_site_utils	site	Site
+stats_site_utils	subdomain	Subdomain
+stats_site_utils	total	Total
+stats_site_utils	opn	Opn
+stats_site_utils	cls	Cls
+stats_site_utils	cos	CO's
+stats_site_utils	comms	Comm's
+stats_site_utils	adds	Adds
+stats_site_utils	no_valid_data	Query returned no valid data.
+stats_site_utils	statistics_for_the_past_days	Statistics for the past $1 days.
+stats_site_utils	day	Day
+stats_site_utils	site_views	Site Views
+stats_site_utils	subdomain_views	Subdomain Views
+stats_site_utils	no_data	No Data
+stats_site_utils        statistics_for_the_past_months Statistics for the past $1 months.
+stats_site_utils	month	Month
+stats_site_utils	current_statistic_all_time	Current Aggregate Statistics for All Time
+stats_site_utils	developers	Developers
+stats_site_utils	projects	Projects
+stats_user_graph	new_additions_by_day	New Additions, by Day
+stats_user_graph	new_user_projects	New Users (RED), New Projects (BLUE
+stats_user_graph	date	Date
+stats_user_graph	user_projects	Users (RED) / Projects (BLUE)
+stats_views_graph	page_views	Gforge Page Views
+stats_views_graph	total_views	Total Page Views (RED)
+stats_views_graph	views	Views (RED)
+stats_views_graph	date	Date
 tracker	title	Trackers
 tracker	choose	Choose a tracker and you can browse/edit/add items to it.
 tracker_add	title	Submit Tracker Item
