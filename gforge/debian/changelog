@@ -1,4 +1,4 @@
-gforge (3.1-3+4) unstable; urgency=low
+gforge (3.1-4) unstable; urgency=low
 
   * [Roland] Fixed multiline inline Perl script for gforge-mta-postfix's
     configuration process (I know, I know) (closes: #219379).
@@ -12,7 +12,7 @@ gforge (3.1-3+4) unstable; urgency=low
     /etc/init.d/sysklogd', since the old advice might have break
     your syslogd, sorry for this but this is makejail advice.
 
- -- Roland Mas <lolando@debian.org>  Thu, 13 Nov 2003 23:12:37 +0100
+ -- Roland Mas <lolando@debian.org>  Thu, 13 Nov 2003 23:21:26 +0100
 
 gforge (3.1-3) unstable; urgency=low
 
