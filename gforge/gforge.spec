@@ -37,6 +37,7 @@ Requires: /bin/sh, /bin/bash
 Requires: perl, perl-DBI, perl-DBD-Pg, perl-HTML-Parser
 Requires: httpd
 Requires: php, php-pgsql
+Requires: gforge-lib-jpgraph
 
 # Distribution specific (fc = Fedora Core - rh9 = Red Hat Linux 9 - el3 = Red Hat Enterprise Linux 3 or CentOS 3)
 %if "%{dist}" == "fc" 
@@ -255,6 +256,8 @@ fi
 /var/lib/gforge/scmtarballs
 
 %changelog
+* Sun Feb 20 2005 Guillaume Smet <guillaume-gforge@smet.org>
+- added a dependency on gforge-lib-jpgraph
 * Sat Feb 19 2005 Guillaume Smet <guillaume-gforge@smet.org>
 - 4.1
 - forced the vhost on port 80
