@@ -20,7 +20,7 @@ Description: Collaborative development tool - meta-package
 
 Package: gforge-common
 Architecture: all
-Depends: debconf (>= 1.0.32)
+Depends: debconf (>= 1.0.32), cpio
 Replaces: sourceforge-common (>> 2.6-0+11)
 Conflicts: sourceforge, sourceforge-common
 Description: Collaborative development tool - shared files

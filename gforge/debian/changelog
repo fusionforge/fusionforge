@@ -1,3 +1,9 @@
+gforge (3.0-3+) unstable; urgency=low
+
+  * Added dependancy on cpio for gforge-common
+
+ -- Christian Bayle <bayle@debian.org>  Fri, 18 Jul 2003 22:08:16 +0200
+
 gforge (3.0-3) unstable; urgency=low
 
   * [Roland] Make sure the $gforge_base_dn, ou=People,$gforge_base_dn and
