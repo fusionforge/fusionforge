@@ -14,9 +14,9 @@
 
 $unit        = 'item';
 $table       = 'tmp_lang';
-$primary_key = 'tmpid';
-$whereclause = " lang1 ,tmp_lang lang2 WHERE lang1.language_id='Base' AND lang2.language_id='" . $lang . "' AND lang1.pagename=lang2.pagename AND lang1.category=lang2.category AND lang1.pagename!='#' AND lang2.pagename!='#' ORDER BY lang1.seq";
-$columns     = "lang1.tmpid, lang1.pagename, lang1.category, lang1.tstring, lang2.tstring";
+$primary_key = 'seq';
+$whereclause = " WHERE language_id='" . $lang . "' AND tmpid!='-1' ORDER BY seq";
+$columns     = "seq, pagename, category, tstring";
 
 include_once('admintabfiles.php');
 

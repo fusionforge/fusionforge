@@ -19,7 +19,7 @@
  *	@param $unit - the name of the "units" described by the table's records
  *	@param $primary_key - the primary key of the table
  */
-function admin_table_add($table, $unit, $primary_key) {
+function admin_table_add($table, $unit, $primary_key, $lang) {
 	global $PHP_SELF;
 
 	// This query may return no rows, but the field names are needed.
@@ -29,7 +29,7 @@ function admin_table_add($table, $unit, $primary_key) {
 		$cols = db_numfields($result);
 
 		echo 'Create a new '.$unit.' below:
-			<form name="add" action="'.$PHP_SELF.'?function=postadd" method="post">
+			<form name="add" action="'.$PHP_SELF.'?function=postadd&lang='.$lang.'" method="post">
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
@@ -54,7 +54,7 @@ function admin_table_add($table, $unit, $primary_key) {
  *	@param $unit - the name of the "units" described by the table's records
  *	@param $primary_key - the primary key of the table
  */
-function admin_table_postadd($table, $unit, $primary_key) {
+function admin_table_postadd($table, $unit, $primary_key, $lang) {
 	global $HTTP_POST_VARS;
 
 	$sql = "INSERT INTO $table ("
@@ -78,10 +78,10 @@ function admin_table_postadd($table, $unit, $primary_key) {
  *	@param $primary_key - the primary key of the table
  *	@param $id - the id of the record to act on
  */
-function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
+function admin_table_confirmdelete($table, $unit, $primary_key, $id, $lang) {
 	global $PHP_SELF;
 
-	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
+	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id AND language_id='".$lang."'");
 
 	if ($result) {
 		$cols = db_numfields($result);
@@ -92,7 +92,7 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 			echo '<li><strong>'.db_fieldname($result,$i).'</strong> '.db_result($result,0,$i).'</li>';
 		}
 		echo '</ul>
-			<form name="delete" action="'.$PHP_SELF.'?function=delete&amp;id='.$id.'" method="post">
+			<form name="delete" action="'.$PHP_SELF.'?function=delete&lang='.$lang.'&amp;id='.$id.'" method="post">
 			<input type="submit" value="Delete" />
 			</form>
 			<form name="cancel" action="'.$PHP_SELF.'" method="post">
@@ -111,8 +111,8 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  *	@param $primary_key - the primary key of the table
  *	@param $id - the id of the record to act on
  */
-function admin_table_delete($table, $unit, $primary_key, $id) {
-	if (db_query("DELETE FROM $table WHERE $primary_key=$id")) {
+function admin_table_delete($table, $unit, $primary_key, $id, $lang) {
+	if (db_query("DELETE FROM $table WHERE $primary_key=$id AND language_id='".$lang."'")) {
 		echo ucfirst($unit).' successfully deleted.';
 	} else {
 		echo db_error();
@@ -127,16 +127,19 @@ function admin_table_delete($table, $unit, $primary_key, $id) {
  *	@param $primary_key - the primary key of the table
  *	@param $id - the id of the record to act on
  */
-function admin_table_edit($table, $unit, $primary_key, $id) {
+function admin_table_edit($table, $unit, $primary_key, $id, $lang) {
 	global $PHP_SELF;
 
-	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
+	$query="SELECT * FROM $table WHERE $primary_key=$id AND language_id='".$lang."'";
+	//$result = db_query("SELECT * FROM $table WHERE $primary_key=$id AND language_id='".$lang."'");
+	//echo "$query<br>\n";
+	$result = db_query($query);
 
 	if ($result) {
 		$cols = db_numfields($result);
 
 		echo 'Modify the '.$unit.' below:
-			<form name="edit" action="'.$PHP_SELF.'?function=postedit&amp;id='.$id.'" method="post">
+			<form name="edit" action="'.$PHP_SELF.'?function=postedit&lang='.$lang.'&amp;id='.$id.'" method="post">
 			<table>';
 
 		for ($i = 0; $i < $cols; $i++) {
@@ -147,12 +150,14 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
 
 			if ($fieldname == $primary_key) {
 				echo "<td>$value</td></tr>";
+			} elseif ($fieldname =='tstring')  {
+				echo '<td><textarea type="text" name="'.$fieldname.'" cols="50" rows="10"/>'.stripslashes($value).'</textarea></td></tr>';
 			} else {
-				echo '<td><input type="text" name="'.$fieldname.'" value="'.$value.'" /></td></tr>';
+				echo '<td><input type="text" name="'.$fieldname.'" value="'.$value.'"/></td></tr>';
 			}
 		}
 		echo '</table><input type="submit" value="Submit Changes" /></form>
-			<form name="cancel" action="'.$PHP_SELF.'" method="post">
+			<form name="cancel" action="'.$PHP_SELF.'?function=show&lang='.$lang.'" method="post">
 			<input type="submit" value="Cancel" />
 			</form>';
 	} else {
@@ -168,7 +173,8 @@ function admin_table_edit($table, $unit, $primary_key, $id) {
  *	@param $primary_key - the primary key of the table
  *	@param $id - the id of the record to act on
  */
-function admin_table_postedit($table, $unit, $primary_key, $id) {
+//function admin_table_postedit($table, $unit, $primary_key, $id, $lang) {
+function admin_table_postedit($table, $unit, $primary_key, $whereclause, $columns, $edit, $id, $lang) {
 	global $HTTP_POST_VARS;
 
 	$sql = 'UPDATE '.$table.' SET ';
@@ -178,13 +184,18 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
 		}
 	}
 	$sql = ereg_replace(', $', ' ', $sql);
-	$sql .= "WHERE $primary_key=$id";
+	$sql .= "WHERE $primary_key=$id AND language_id='".$lang."'";
 
 	if (db_query($sql)) {
 		echo ucfirst($unit) . ' successfully modified.';
 	} else {
 		echo db_error();
 	}
+	//echo '
+	//		<form name="cancel" action="'.$PHP_SELF.'?function=show&lang='.$lang.'" method="post">
+	//		<input type="submit" value="Edit More" />
+	//		</form>';
+	echo admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit, $lang);
 }
 
 /**
@@ -194,7 +205,7 @@ function admin_table_postedit($table, $unit, $primary_key, $id) {
  *	@param $unit - the name of the "units" described by the table's records
  *	@param $primary_key - the primary key of the table
  */
-function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit) {
+function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit, $lang) {
         global $HTML, $PHP_SELF;
 
 	//CB// echo "<h1>SELECT * FROM $table $whereclause</h1>";
@@ -208,7 +219,7 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
                 echo '<table border="0" width="100%">
 		<tr bgcolor="'.$HTML->COLOR_HTMLBOX_TITLE.'">
 		<td colspan="'.($cols+1).'"><strong><span style="color:'. $HTML->FONTCOLOR_HTMLBOX_TITLE .'">'. ucwords($unit) .'s</span></strong>';
-		if ($edit) echo '<a href="'.$PHP_SELF.'?function=add">[add new]</a>';
+		if ($edit) echo '<a href="'.$PHP_SELF.'?function=add&lang='.$lang.'">[add new]</a>';
 		echo "</td></tr>\n";
 
 		if ($edit) echo '
@@ -225,10 +236,10 @@ function admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $
 			echo '<tr '. $HTML->boxGetAltRowStyle($j) . '>';
 
                         $id = db_result($result,$j,0);
-                        if ($edit) echo '<td><a href="'.$PHP_SELF.'?function=edit&amp;id='.$id.'">[edit]</a>';
-                        if ($edit) echo '<a href="'.$PHP_SELF.'?function=confirmdelete&amp;id='.$id.'">[delete]</a> </td>';
+                        if ($edit) echo '<td><a href="'.$PHP_SELF.'?function=edit&lang='.$lang.'&amp;id='.$id.'">[edit]</a>';
+                        if ($edit) echo '<a href="'.$PHP_SELF.'?function=confirmdelete&lang='.$lang.'&amp;id='.$id.'">[delete]</a> </td>';
 			for ($i = 0; $i < $cols; $i++) {
-				echo '<td>'. db_result($result, $j, $i) .'</td>';
+				echo '<td>'. stripslashes(htmlspecialchars(db_result($result, $j, $i))) .'</td>';
 			}
 			echo "</tr>\n";
 		}
@@ -250,32 +261,36 @@ echo '<h3>Edit the '. $lang .' Language ' . ucwords($unit) .'s</h3>
 
 switch ($function) {
 	case 'add' : {
-		admin_table_add($table, $unit, $primary_key);
+		admin_table_add($table, $unit, $primary_key, $lang);
 		break;
 	}
 	case 'postadd' : {
-		admin_table_postadd($table, $unit, $primary_key);
+		admin_table_postadd($table, $unit, $primary_key, $lang);
 		break;
 	}
 	case 'confirmdelete' : {
-		admin_table_confirmdelete($table, $unit, $primary_key, $id);
+		admin_table_confirmdelete($table, $unit, $primary_key, $id, $lang);
 		break;
 	}
 	case 'delete' : {
-		admin_table_delete($table, $unit, $primary_key, $id);
+		admin_table_delete($table, $unit, $primary_key, $id, $lang);
 		break;
 	}
 	case 'edit' : {
-		admin_table_edit($table, $unit, $primary_key, $id);
+		admin_table_edit($table, $unit, $primary_key, $id, $lang);
 		break;
 	}
 	case 'postedit' : {
-		admin_table_postedit($table, $unit, $primary_key, $id);
+		//admin_table_postedit($table, $unit, $primary_key, $id, $lang);
+		echo admin_table_postedit($table, $unit, $primary_key, $whereclause, $columns, $edit, $id, $lang);
+		break;
+	}
+	case 'show' : {
+		echo admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit, $lang);
 		break;
 	}
 }
 
-echo admin_table_show($table, $unit, $primary_key, $whereclause, $columns, $edit);
 
 $HTML->footer(array());
 
