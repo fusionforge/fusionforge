@@ -12,6 +12,7 @@ require_once('common/tracker/ArtifactTypeFactory.class');
 
 // requires for general site info
 require_once('common/include/GForge.class');
+require_once('common/include/Stats.class');
 
 $uri = 'http://'.$sys_default_domain;
 
@@ -55,6 +56,32 @@ $server->wsdl->addComplexType(
 	)
 );
 
+// Add the definition of a SiteStatsDataPoint object
+$server->wsdl->addComplexType(
+	'SiteStatsDataPoint',
+	'complexType',
+	'struct',
+	'',
+	'',
+	array(
+	'date' => array('name'=>'date', 'type' => 'xsd:string'), 
+	'users' => array('name'=>'users', 'type' => 'xsd:string'), 
+	'sessions' => array('name'=>'sessions', 'type' => 'xsd:string') 
+	)
+);
+
+// An array of SiteStatsDataPoint objects
+$server->wsdl->addComplexType(
+	'ArrayOfSiteStatsDataPoint',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:SiteStatsDataPoint[]')),
+	'tns:SiteStatsDataPoint'
+);
+
 // Add the definition of a Bug object
 $server->wsdl->addComplexType(
 	'Bug',
@@ -87,7 +114,9 @@ $server->wsdl->addComplexType(
 	'',
 	'SOAP-ENC:Array',
 	array(),
-	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupObject[]')), 'tns:GroupObject');
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'tns:GroupObject[]')), 
+	'tns:GroupObject');
+
 
 // TODO: Create and add a definition for a bug object
 // 3. call the register() method for each service (function) you want to expose:
@@ -95,6 +124,18 @@ $server->register(
 	'hello',
 	array('parm'=>'xsd:string'),
 	array('helloResponse'=>'xsd:string'),
+	$uri);
+
+$server->register(
+	'getSiteStats',
+	null,
+	array('siteStats'=>'tns:ArrayOfSiteStatsDataPoint'),
+	$uri);
+
+$server->register(
+	'group',
+	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
+	array('groupResponse'=>'tns:ArrayOfGroupObject'),
 	$uri);
 
 $server->register(
@@ -119,12 +160,6 @@ $server->register(
 	'user',
 	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
 	array('userResponse'=>'tns:ArrayOfstring'),
-	$uri);
-
-$server->register(
-	'group',
-	array('func'=>'xsd:string','params'=>'tns:ArrayOfstring'),
-	array('groupResponse'=>'tns:ArrayOfGroupObject'),
 	$uri);
 
 $server->register(
@@ -162,6 +197,7 @@ $server->register(
 	null,
 	array('logoutResponse'=>'xsd:string'),
 	$uri);
+
 
 $wsdl_data = $server->wsdl->serialize();
 
@@ -232,6 +268,22 @@ function logout($sessionkey) {
 function getNumberOfHostedProjects() {
 	$gforge = new GForge();
 	return new soapval('tns:soapVal', 'string', $gforge->getNumberOfHostedProjects());
+}
+
+function getSiteStats() {
+	$stats = new Stats();
+	$res = $stats->getSiteStats();
+	$rows=db_numrows($res);
+	$resultwrapper = array();
+	for ($i=0; $i<$rows; $i++) {
+		$result = array();
+		$yearmonth = db_result($res, $i, 'month');
+		$result['date']= substr($yearmonth, 0, 4)."-".substr($yearmonth, 4,5)."-".db_result($res, $i, 'day');
+		$result['users']= db_result($res, $i, 'total_users');
+		$result['sessions']= db_result($res, $i, 'sessions');
+		$resultwrapper[$i] = new soapval('tns:SiteStatsDataPoint', 'SiteStatsDataPoint', $result);
+	}
+	return new soapval('tns:ArrayOfSiteStatsDataPoint', 'ArrayOfSiteStatsDataPoint', $resultwrapper);
 }
 
 /**
@@ -458,4 +510,62 @@ $server->service($HTTP_RAW_POST_DATA);
 if(isset($log) and $log != ''){
 	harness('nusoap_r2_base_server',$server->headers['User-Agent'],$server->methodname,$server->request,$server->response,$server->result);
 }
+
+
+//////////////////////////////////////////
+// Here's some complex type example code:
+/*
+$server->wsdl->addComplexType(
+	'SOAPStruct',
+	'complexType',
+	'struct',
+	'',
+	'',
+	array(
+  'varString' => array('name'=>'varString', 'type' => 'xsd:string'),
+	)
+);
+
+$server->register(
+	'echoStruct',
+	null,
+	array('return'=>'tns:SOAPStruct'),
+	$uri);
+
+function echoStruct(){
+	$foo = array();
+	$foo['varString'] = "hello";
+  return new soapval('tns:SOAPStruct', 'SOAPStruct', $foo);
+}
+
+$server->wsdl->addComplexType(
+	'ArrayOfSOAPStruct',
+	'complexType',
+	'array',
+	'',
+	'SOAP-ENC:Array',
+	array(),
+	array(array('ref'=>'SOAP-ENC:arrayType','wsdl:arrayType'=>'SOAPStruct[]')),
+	'SOAPStruct'
+);
+
+$server->register('echoStructArray',
+	null,
+	array('ret'=>'tns:ArrayOfSOAPStruct'), 
+	$uri
+);
+
+function echoStructArray(){
+	$ss1 = array();
+	$ss1['varString'] = "hello";
+	$ss2 = array();
+	$ss2['varString'] = "world";
+
+	$ssarray = array();
+	$ssarray[0] = new soapval('tns:SOAPStruct', 'SOAPStruct', $ss1);
+	$ssarray[1] = new soapval('tns:SOAPStruct', 'SOAPStruct', $ss2);
+  return new soapval('tns:ArrayOfSOAPStruct', 'ArrayOfSOAPStruct', $ssarray);
+}
+*/
+//////////////////////////////////////////
 ?>
