@@ -17,14 +17,18 @@ sourceforge (2.6-0+12+) unstable; urgency=low
     configuration (0644) caused an error when the user tries to tag it as
     follows:
     $cvs up -r xterm-branch
-    cvs [server aborted]: cannot write /cvsroot/hanterm-xf/CVSROOT/val-tags:
+    cvs [server aborted]: cannot write /cvsroot/[...]/CVSROOT/val-tags:
     Permission denied
   * [Roland] [From 2.5] New install-ldap.sh.  Should help killing our LDAP
     problems.  Still waiting for more testing, but it seems to mostly
     work.  There's still a bug in it, but it should be fairly simple to
     fix and I'm working on it.
+  * [Roland] Various other cleanings in install-ldap.sh.
+  * [Roland] Fixed dependencies of the packages.  Not as if it were really
+    important before multi-host installations are officially supported,
+    but it's good to do it nevertheless.
 
- -- Roland Mas <lolando@debian.org>  Fri,  2 Aug 2002 21:02:16 +0200
+ -- Roland Mas <lolando@debian.org>  Fri,  2 Aug 2002 22:33:12 +0200
 
 sourceforge (2.6-0+12) unstable; urgency=low
 
