@@ -111,10 +111,10 @@ function html_image($src,$width,$height,$args,$display=1) {
 	if (!$args['border']) $return .= (" border=\"0\"");
 
 	// ## add image dimensions
-	$return .= " width=" . $width;
-	$return .= " height=" . $height;
+	$return .= " width=\"" . $width . "\"";
+	$return .= " height=\"" . $height . "\"";
 
-	$return .= ('>');
+	$return .= (' />');
 	return $return;
 }
 

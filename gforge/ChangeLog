@@ -1,5 +1,8 @@
 2003-01-10  Ryan T. Sammartino  <ryants@shaw.ca>
 
+	* www/include/html.php(html_image): XHTML compliance: <img> tag
+	fixup
+
 	* www/forum/include/ForumHTML.class: revert nl2br changes.
 
 2003-01-10  Edward Ritter
