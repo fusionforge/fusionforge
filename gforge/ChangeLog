@@ -1,8 +1,14 @@
-2004-03-02  Guillaume Smet <guillaume-gforge@smet.org>
+2004-03-05  Tom Copeland <tom@infoether.com>
+	* Added group_id parameter to rss_sfnews.php; did
+	some more date->post_date, too.
 
+2004-03-02  Guillaume Smet <guillaume-gforge@smet.org>
 	* Applied patch [ #706 ] to improve German localization
 	* Improved language_file_merger.php (tools module)
 	* Converted doc from Maven xdoc to XML Docbook
+
+2004-03-02  Tom Copeland <tom@infoether.com>
+	* Minor cleanups to Base.tab
 
 2004-02-26  Tom Copeland <tom@infoether.com>
 	* Applied patch [ #685 ] Translation to PortugueseBrasilian
