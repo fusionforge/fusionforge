@@ -71,7 +71,7 @@ while (($l = <>) !~ /^\s*end\s*$/) {
   }
   if ($l=~ /^# *DIRECTORS CONFIGURATION *#/) {
     push @line_buf, $l ;
-    while (($l = <>) =~ /^#.*#/) {
+    while ((($l = <>) =~ /^#.*#/) and ($l != /^# BEGIN SOURCEFORGE BLOCK -- DO NOT EDIT #/)) {
       push @line_buf, $l ;
     }
     print @line_buf ;
