@@ -509,9 +509,7 @@ class Forum extends Error {
 		$res=db_query("UPDATE forum_group_list SET
 			forum_name='". strtolower($forum_name) ."',
 			description='". htmlspecialchars($description) ."',
-			is_public='$is_public',
-			send_all_posts_to='$send_all_posts_to',
-			allow_anonymous='$allow_anonymous'
+			send_all_posts_to='$send_all_posts_to'
 			WHERE group_id='".$this->Group->getID()."'
 			AND group_forum_id='".$this->getID()."'");
 
