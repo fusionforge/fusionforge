@@ -81,4 +81,9 @@ if (!$d_arr || count($d_arr) < 1) {
 
 docman_footer(array());
 
+// Local Variables:
+// mode: php
+// c-file-style: "bsd"
+// End:
+
 ?>

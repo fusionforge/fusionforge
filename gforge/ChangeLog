@@ -1,7 +1,9 @@
 2004-03-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
-	* www/my/index.php: Sort a few lists by alphabetic order.
+	* www/docman/include/doc_utils.php: If the user did select "All
+	languages", then keep that choice the default selection.
 
+	* www/my/index.php: Sort a few lists by alphabetic order.
 	* common/forum/ForumsForUser.class: Ditto.
 
 2003-11-04  Roland Mas  <99.roland.mas@aist.enst.fr>
