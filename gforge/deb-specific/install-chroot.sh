@@ -67,9 +67,9 @@ case "$1" in
 	# To get uid/gid
 	# Maybe ldap later
 	cat > $CHROOTDIR/etc/nsswitch.conf <<-FIN
-passwd:         files
-group:          files
-shadow:         files
+passwd:         files ldap 
+group:          files ldap
+shadow:         files ldap
 FIN
 	# Copy miscellaneous files
 	find /etc/ssh | cpio --quiet -pdumLB $CHROOTDIR
@@ -81,6 +81,36 @@ FIN
 	cp /lib/libnss_files* $CHROOTDIR/lib
 	cp /lib/security/* $CHROOTDIR/lib/security
 	cp /etc/security/*.conf $CHROOTDIR/etc/security
+
+	# Libnss-ldap related stuffs
+	for binary in \
+	    /usr/bin/ldapsearch ; do
+	  if [ -x "$binary" ] ; then
+	      #echo "$binary"
+	      ldd $binary | cut -d" " -f3
+	  fi
+	done \
+	    | sort -u \
+	    | cpio --quiet -pdumVLB $CHROOTDIR
+	
+	cp /etc/libnss-ldap.conf $CHROOTDIR/etc
+	#cp -r /etc/ldap $CHROOTDIR/etc
+	cp /lib/libnss_ldap* $CHROOTDIR/lib
+	cp /usr/lib/libnss_ldap* $CHROOTDIR/usr/lib
+	# Now this never change
+	cat > $CHROOTDIR/etc/passwd <<-FIN
+root:x:0:0:Root:/:/bin/bash
+nobody:x:65534:65534:nobody:/:/bin/false
+FIN
+	cat > $CHROOTDIR/etc/shadow <<-FIN
+root:*:11142:0:99999:7:::
+nobody:*:11142:0:99999:7:::
+FIN
+	cat > $CHROOTDIR/etc/group <<-FIN
+root:x:0
+nogroup:x:65534:
+FIN
+
 	;;
 
     *)

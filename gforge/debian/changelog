@@ -7,8 +7,9 @@ sourceforge (2.6-0+7+) unstable; urgency=low
   * [Christian] Added anoncvs_ users in ldap db 
   * [Roland] [From 2.5] Added man page for sourceforge-config (from a
     Docbook SGML file).  This fixes a lintian error.
+  * [Christian] Added ldap support for chrooted anonymous cvs 
 
- -- Christian Bayle <bayle@aist.enst.fr>  Thu, 28 Feb 2002 21:44:15 +0100
+ -- Christian Bayle <bayle@aist.enst.fr>  Fri,  1 Mar 2002 13:55:12 +0100
 
 sourceforge (2.6-0+7) unstable; urgency=low
 
