@@ -1,3 +1,23 @@
+2003-03-14  Reinhard Spisser  <reinhard@spisser.it>
+
+	
+	* common/pm/ProjectTask.class:
+	Fix bug # 231: Assignee not registered
+
+	* www/include/languages/Italian.tab
+	Translations
+
+	* www/include/html.php
+	Added a parameter pos_100 to  html_build_select_box_from_arrays, 
+	so that you can decide if you wish to have the 'none' 
+	on the top (default) or at the bottom of the list
+	
+	* www/pm/browse_task.php:
+	Fix bug # 216: Category: missing "None"
+	
+	* www/survey/admin/show_results_aggregate.php:
+	Fix bug # 244: survey: pg_atoi_error
+	
 2003-03-12  Roland Mas  <lolando@debian.org>
 
 	* db/20030312.sql: New file: the start_date of a task is now
