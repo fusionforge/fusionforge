@@ -1,0 +1,4 @@
+if ! [ -e /etc/apache/ssl.crt/server.crt ] ; then
+    db_input high gforge/shared/mod_ssl_cert || true
+    db_go || true
+fi
