@@ -4,9 +4,10 @@ sourceforge (2.6-0+13+) experimental; urgency=low
     dpkg-source can build a .diff.gz from the .orig.tar.gz.  debian/rules
     changed accordingly to uudecode the *.uu files at build time, and to
     remove the resulting files at clean time.
-  * [Christian] Made trove cat more editable 
+  * [Christian] Made trove cat more editable
+  * [Christian] Added delete capability in trove map edit 
 
- -- Christian Bayle <bayle@debian.org>  Thu, 10 Oct 2002 21:57:12 +0200
+ -- Christian Bayle <bayle@debian.org>  Sun, 13 Oct 2002 03:30:51 +0200
 
 sourceforge (2.6-0+13) experimental; urgency=low
 
