@@ -4,43 +4,20 @@ if (!file_exists($sys_path_to_jpgraph.'jpgraph.php')) {
 	exit_error('Error', 'Package JPGraph not installed');
 }
 
-require_once($sys_path_to_jpgraph.'jpgraph.php');
-require_once($sys_path_to_jpgraph.'jpgraph_gantt.php');
+require_once($sys_path_to_jpgraph.'/jpgraph.php');
+require_once($sys_path_to_jpgraph.'/jpgraph_gantt.php');
 require_once('common/pm/ProjectTaskFactory.class');
-
-/**
- * settitlefont() - Set font setting for GanttGraph object
- *
- * @param	GanttGraph	Target GanttGraph object
- * @param	string		Font family
- * @param	string		Font style
- * @param	integer		Font size
- * /
-function settitlefont($graph, $sys_font_family, $sys_font_style, $sys_font_size) {
-	if ($sys_font_family != "" &&
-	    $sys_font_style != "" &&
-	    $sys_font_size != "") {
-
-eval() is a nasty security hole
-
-		eval("\$font_family=$sys_font_family;");
-		eval("\$font_style=$sys_font_style;");
-		eval("\$font_size=$sys_font_size;");
-		$graph->title->SetFont($font_family,$font_style,$font_size);
-	}
-}
-*/
 
 $ptf = new ProjectTaskFactory($pg);
 if (!$ptf || !is_object($ptf)) {
 	exit_error('Error','Could Not Get ProjectTaskFactory');
 } elseif ($ptf->isError()) {
-	exit_error('Error',$ptf->getErrorMessage());
+	exit_error('Error getting PTF',$ptf->getErrorMessage());
 }
 
 $ptf->setup($offset,$_order,$max_rows,'custom',$_assigned_to,$_status,$_category_id);
 if ($ptf->isError()) {
-	exit_error('Error',$ptf->getErrorMessage());
+	exit_error('Error in PTF',$ptf->getErrorMessage());
 }
 
 $pt_arr =& $ptf->getTasks();
@@ -57,6 +34,7 @@ if ($_size==640) {
 } else {
 	$graph  = new GanttGraph (800,600, "auto");
 }
+
 //$graph->SetShadow();
 $graph->SetMargin(10,10,25,10);
 
