@@ -1,8 +1,9 @@
 gforge (3.1-1+1) unstable; urgency=low
 
-  * 
+  * [Roland] Fixed install-db.sh and its "cannot create user : already
+    exists" bug.
 
- -- Roland Mas <lolando@debian.org>  Sun, 26 Oct 2003 23:19:48 +0100
+ -- Roland Mas <lolando@debian.org>  Mon, 27 Oct 2003 10:31:51 +0100
 
 gforge (3.1-1) unstable; urgency=low
 

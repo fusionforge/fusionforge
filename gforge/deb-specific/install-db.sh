@@ -91,7 +91,7 @@ EOF
 	if dpkg --compare-versions $pg_version lt 7.3 ; then
 	    if su -s /bin/sh postgres -c "createuser --no-createdb --no-adduser $db_user" 1> $tmp1 2> $tmp2 \
 		&& [ "$(head -1 $tmp1)" = 'CREATE USER' ] \
-		|| grep -q '^ERROR:  CREATE USER: user name "$db_user" already exists$' $tmp2 ; then
+		|| grep -q "^ERROR:  CREATE USER: user name \"$db_user\" already exists$" $tmp2 ; then
 	        # Creation OK or user already existing -- no problem here
 		rm -f $tmp1 $tmp2
 	    else
