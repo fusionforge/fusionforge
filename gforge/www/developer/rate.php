@@ -26,7 +26,7 @@
 require_once('pre.php');
 require_once('vote_function.php');
 
-if (session_loggedin()) {
+if (!session_loggedin()) {
 
 	exit_not_logged_in();
 
