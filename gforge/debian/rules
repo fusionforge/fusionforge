@@ -134,6 +134,7 @@ install: build
 	install -m 755 deb-specific/install-postfix.sh $(CURDIR)/debian/gforge-mta-postfix/usr/lib/gforge/bin/
 
 	# gforge-shell-ldap
+	cd $(CURDIR)/debian/gforge-shell-ldap/var/lib/gforge/chroot/var/lib/gforge/chroot && ln -s ../../../../home .
 
 	# gforge-cvs
 	install -m 755 deb-specific/stats_cvs.pl $(CURDIR)/debian/gforge-cvs/usr/lib/gforge/bin/

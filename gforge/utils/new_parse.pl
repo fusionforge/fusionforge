@@ -133,7 +133,12 @@ while ($ln = pop(@groupdump_array)) {
 		#CB# Added s bit to have all owned by group
 		#system("chmod g+rw $cvs_dir");
 		system("chmod g+rws $cvs_dir");
-
+	} 
+	
+	if ((substr($hostname,0,3) eq "cvs") && $gstatus eq 'A' && !(-e "$homedir_prefix/anoncvs_$gname")) {
+	    mkdir "$homedir_prefix./anoncvs_$gname", 0755 ;
+	    system("chown -R anoncvs_$gname:$gname $home_dir");
+	    
 	}
 	#CB# Do it all the time
 	#LDAP_NOW#push @passwd_array, "anoncvs_$gname:x:$cvs_id:$gid:Anonymous CVS User for $gname:/cvsroot/$gname:/bin/false\n";
