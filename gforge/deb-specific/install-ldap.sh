@@ -9,7 +9,9 @@
 
 set -e
 
-if [ "$DEBSFDEBUG" != 1 ] ; then
+DEBSFDEBUG=$GFORGEDEBUG
+
+if [ "$GFORGEDEBUG" != 1 ] ; then
     DEVNULL12="> /dev/null 2>&1"
     DEVNULL2="2> /dev/null"
 else
@@ -400,7 +402,7 @@ setup_robot() {
 	dc=$(echo $gforge_base_dn | cut -d, -f1 | cut -d= -f2)
 	{ eval "ldapadd -r -c -D '$slapd_admin_dn' -x -w'$slapd_admin_passwd' $DEVNULL12" || true ; } <<-FIN
 dn: $gforge_base_dn
-objectClass: dcObject
+objectClass: domain
 dc: $dc
 
 dn: ou=People,$gforge_base_dn

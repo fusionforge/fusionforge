@@ -1,4 +1,4 @@
-gforge (3.0-6+5) unstable; urgency=low
+gforge (3.0-6+6) unstable; urgency=low
 
   * [Roland] Added 20030822.sql.
   * [Roland] Added scripts to generate a /var/lib/gforge/etc/httpd.vhosts
@@ -16,7 +16,7 @@ gforge (3.0-6+5) unstable; urgency=low
     it's not the same as the top-level LDAP object created by slapd, see
     bug [ #518 ].
 
- -- Roland Mas <lolando@debian.org>  Tue, 16 Sep 2003 19:11:10 +0200
+ -- Roland Mas <lolando@debian.org>  Thu, 18 Sep 2003 14:06:49 +0200
 
 gforge (3.0-6) unstable; urgency=low
 
