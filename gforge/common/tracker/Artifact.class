@@ -989,8 +989,9 @@ class Artifact extends Error {
 		}
 
 		//now remove all duplicates from the email list
-		$BCC=implode(',',array_unique($emails));
-
+		if (count($emails) > 0) {
+			$BCC=implode(',',array_unique($emails));
+		}
 		/*
 			Send the email
 		*/
