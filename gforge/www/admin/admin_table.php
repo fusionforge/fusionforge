@@ -80,6 +80,14 @@ function admin_table_postadd($table, $unit, $primary_key) {
  */
 function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
 	global $PHP_SELF;
+	
+	if ($unit == "processor") {
+		$result = db_numrows(db_query("SELECT processor_id FROM frs_file WHERE processor_id = $id"));
+		if ($result > 0) {
+			echo "You can't delete the processor ".db_result(db_query("select name from frs_processor where processor_id = $id"),0,0)." since it's currently referenced in a file release.<p>";
+			return;
+		}
+	}
 
 	$result = db_query("SELECT * FROM $table WHERE $primary_key=$id");
 
@@ -112,7 +120,8 @@ function admin_table_confirmdelete($table, $unit, $primary_key, $id) {
  *	@param $id - the id of the record to act on
  */
 function admin_table_delete($table, $unit, $primary_key, $id) {
-	if (db_query("DELETE FROM $table WHERE $primary_key=$id")) {
+	$sql = "DELETE FROM $table WHERE $primary_key=$id";
+	if (db_query($sql)) {
 		echo ucfirst($unit).' successfully deleted.';
 	} else {
 		echo db_error();
