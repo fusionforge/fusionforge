@@ -35,14 +35,23 @@ class BaseLanguage {
 		$this->loadLanguage('Base');
 	}
 
-	function loadLanguage($lang) {
-		$ary = file('languages/'.$lang.'.tab',1);
+	function loadLanguageFile($fname) {
+		$ary = file($fname,1);
 		for( $i=0; $i<sizeof($ary); $i++) {
 			if (substr($ary[$i], 0, 1) == '#') {
 				continue;
 			}
 			$line = explode("\t", $ary[$i], 3);
 			$this->text_array[$line[0]][$line[1]] = chop($line[2]);
+		}
+	}
+
+	function loadLanguage($lang) {
+		$fname = 'languages/'.$lang.'.tab' ;
+		$this->loadLanguageFile($fname) ;
+		$fname = '/etc/sourceforge/languages-local/'.$lang.'.tab' ;
+		if (file_exists ($fname) {
+			$this->loadLanguageFile($fname) ;
 		}
 	}
 

@@ -1,0 +1,122 @@
+DEBIAN SOURCEFORGE CUSTOMISATION HOWTO
+--------------------------------------
+
+This short HOWTO explains how you can customise your local
+installation of Debian Sourceforge.
+
+It was written by Roland Mas <lolando@debian.org>.
+
+WHAT IS THERE TO CUSTOMISE?
+---------------------------
+
+  I'm afraid there isn't much space for customisation in Sourceforge
+yet.  For now, two main areas exist:
+- look;
+- text content.
+
+  The look of your Debian Sourceforge site is customisable via the
+theme system (read the README.Themes file fo more information on
+this).
+
+  The text content can be somewhat customised.  The Sourceforge
+internationalisation system already provides a way to have different
+texts depending on user choice.  Debian Sourceforge extends this by
+allowing local overloading of these texts.
+
+HOW DO I CUSTOMISE TEXTS?
+-------------------------
+
+  First, a quick course on the internationalisation system present in
+Sourceforge.
+
+  The texts you can read on the web pages are not hard-coded.  Well,
+some of them are, but we're working on them.  Instead, they are
+displayed as results of a function of several parameters.  One of
+these parameters is the language in which you wish to display a piece
+of information, and another is some handle to identify the information
+you want to display.  In Sourceforge, this handle is made up of the
+"page name" and the "category" strings.  Knowing all the needed info,
+the function displays the appropriate text.  How appropiate is this
+text?  Well, that depends.  First, a basic set of texts is loaded.
+Historically, this set is loaded in English.  This set of texts makes
+the Base class, storing texts for all known "handles".  This set of
+texts can then be partially or completely overloaded, e.g. for other
+languages: the handles present in the language overwrite the Base
+handles, and the ones not found keep their values from the Base class.
+
+  Well, customisation works the same way, except we add another layer
+of overloading.  Thus, a language class is first loaded from the Base
+class, then partially or completely overwritten by the data found in
+the language file, then partially or completely overwritten again by
+the data found in the local, customised file.
+
+  Customising your language class is then just a matter of creating a
+file containing your local data.  Debian Sourceforge will read it and
+use it to overload the standard distributed texts.
+
+  To customise a language class, say Foobaric, you just have to edit
+the /etc/sourceforge/languages-local/Foobaric.tab file, and fill it
+with your local values.  The new values might not be visible
+immediately (I suspect the old values are cached), but restarting your
+Apache server should bring them to life.
+
+FORMAT OF THE *.tab FILES
+-------------------------
+
+  The *.tab files are in a fairly straightforward format.  Lines
+starting with a '#' character are ignored, other lines must be in the
+following format:
+,----
+| <pagename> TAB <category> TAB <data>
+`---
+
+  The <data> field can use variables in the form $1, $2, etc.  These
+variables are defined by the script and there's no simple way of
+knowing what they are apart from looking at the script itself.  To
+find out exactly what these variables are filled out with, search for
+the "getText('<pagename>','<category'>" string in the scripts
+contained in the /usr/lib/sourceforge/www/ directory.  This is not
+always easy to do.
+
+  Your best bet is to guess the meaning of the $1, $2, etc. variables
+from the non-customised text (either Base.tab or Foobaric.tab if it is
+defined).
+
+HOW TO DO IT -- REALLY
+----------------------
+
+The way I usually go when I have to customise some text is simply the
+following:
+
+1. Find the bit of text I want to customise (in either Base.tab or
+   Foobaric.tab);
+2. Copy and paste the appropriate line (including the "handle" -- the
+   first two fields) in /etc/sourceforge/languages-local/Foobaric.tab;
+3. Read it to find out about the $n variables;
+4. Replace the third field with my own customised version.
+
+WHY CUSTOMISE?
+--------------
+
+There are two main reasons you would want to use the process described
+in this HOWTO.
+
+  First, local policy.  You might want to change page footers, or
+contact pages, or host names, or whatever you need to integrate your
+Debian Sourceforge into your target audience (company, organisation,
+or even your own personal Sourceforge).  This HOWTO is for you.
+
+  Second, localisation.  This is not something completely done in
+Sourceforge yet, and you might (will?) find huge gaps in the
+translation of Sourceforge into your language.  The English language,
+being the original one in which Sourceforge was written, is obviously
+complete.  Soon-Son Kwon has provided a full Korean translation, and I
+strive to make the French translation complete too, but other
+languages are far from finished.  You might then consider translating
+Sourceforge into your language.  If you do so, please also consider
+submitting your translated file to us so that future releases of
+Debian Sourceforge include your translated file by default.  Please
+refer to <http://savannah.gnu.org/projects/debian-sf/> for info on how
+to do that.
+
+  -- Roland Mas, 2002

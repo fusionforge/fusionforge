@@ -1,3 +1,10 @@
+sourceforge (2.6-0+11+) unstable; urgency=low
+
+  * [Roland] Added support for local overloading of the default
+    translation files.  See README.Custom for details.
+
+ -- Roland Mas <lolando@debian.org>  Sun, 28 Apr 2002 18:20:24 +0200
+
 sourceforge (2.6-0+11) unstable; urgency=low
 
   * [Roland] Fixed theme registration for 2.6->2.6 upgrades.  You might

@@ -1,5 +1,6 @@
 bin
 etc/sourceforge
+etc/sourceforge/languages-local
 etc/sourceforge/templates
 usr/bin
 usr/lib/sourceforge/bin
