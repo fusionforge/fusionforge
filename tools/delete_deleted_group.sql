@@ -13,6 +13,17 @@ delete from artifact_perm where group_artifact_id in (select group_artifact_id f
 delete from artifact_group where group_artifact_id in (select group_artifact_id from artifact_group_list where group_id in (select group_id from groups where status = 'D'));
 delete from artifact_category where group_artifact_id in (select group_artifact_id from artifact_group_list where group_id in (select group_id from groups where status = 'D'));
 delete from artifact_group_list where group_id in (select group_id from groups where status = 'D');
+
+
+delete from frs_file where release_id in ( select release_id from frs_release where package_id in ( select package_id from frs_package where group_id in (select group_id from groups where status = 'D')));
+
+
+delete from frs_release where package_id in ( select package_id from frs_package where group_id in (select group_id from groups where status = 'D'));
+
 delete from frs_package where group_id in (select group_id from groups where status = 'D');
+
+delete from project_task where group_project_id in (select group_project_id from project_group_list where group_id in (select group_id from groups where status = 'D'));
+
+delete from project_group_list where group_id in (select group_id from groups where status = 'D');
 
 delete from groups where status = 'D' ;
