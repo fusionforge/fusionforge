@@ -43,7 +43,7 @@ case "$1" in
 	db_stop
 
         # Setup our LDAP
-	/usr/lib/gforge/bin/install-ldap.sh configure || echo "LDAP Configuration Failed"
+	/usr/lib/gforge/bin/install-ldap.sh configure || echo "WARNING WARNING WARNING: LDAP Configuration Failed"
 	
     ;;
 
