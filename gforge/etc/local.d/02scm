@@ -3,7 +3,8 @@
 //
 
 // Machine that hosts SCM
-$sys_scm_host = "{scm_host}";
+$sys_scm_host = '{scm_host}';
+$sys_cvs_host=$sys_scm_host;
 
 // Force the use of a single scm host instead of scm.project.domain.com
 // Set to 1 to use scm.domain.com for all projects
