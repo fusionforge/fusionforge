@@ -75,6 +75,7 @@ class ArtifactFile extends Error {
 	 */
 	function create($filename, $filetype, $filesize, $bin_data, $description='None') {
 
+		global $Language;
 		// Some browsers don't supply mime type if they don't know it
 		if (!$filetype) {
 			// Let's be on safe side?
@@ -86,7 +87,7 @@ class ArtifactFile extends Error {
 		//
 		if (!$filename || !$filetype || !$filesize || !$bin_data) {
 			//echo '<P>|'.$filename.'|'.$filetype.'|'.$filesize.'|'.$bin_data.'|';
-			$this->setError('ArtifactFile: File name, type, size, and data are Required');
+			$this->setError($Language->getText('tracker_artifactfile','required_fields'));
 			return false;
 		}
 
@@ -137,7 +138,7 @@ class ArtifactFile extends Error {
 	 */
 	function delete() {
 		if (!$this->Artifact->ArtifactType->userIsAdmin()) {
-			$this->setError('ArtifactFile: Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		$res=db_query("DELETE FROM artifact_file WHERE id='". $this->getID() ."'");

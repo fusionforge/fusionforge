@@ -51,6 +51,7 @@ class Artifact extends Error {
 	 *  @return	boolean	success.
 	 */
 	function Artifact(&$ArtifactType, $data=false) {
+		global $Language;
 		$this->Error(); 
 
 		$this->ArtifactType =& $ArtifactType;
@@ -70,7 +71,7 @@ class Artifact extends Error {
 		//	make sure this person has permission to view artifacts
 		//
 		if (!$this->ArtifactType->userCanView()) {
-			$this->setError('Artifact: Only Group Members Can View Private ArtifactTypes');
+			$this->setError($Language->getText('tracker_artifact','private_error'));
 			return false;
 		}
 
@@ -108,7 +109,8 @@ class Artifact extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($category_id, $artifact_group_id, $summary, $details, $assigned_to=100, $priority=5, $monitor_email=false) {
-
+		global $Language;
+		
 		//
 		//	make sure this person has permission to add artifacts
 		//
@@ -117,7 +119,7 @@ class Artifact extends Error {
 			//	Only admins can post/modify private artifacts
 			//
 			if (!$this->ArtifactType->userIsAdmin()) {
-				$this->setError('Artifact: Only Artifact Admins Can Modify Private ArtifactTypes');
+				$this->setError($Language->getText('tracker_artifact','error_admin_modify'));
 				return false;
 			}
 		}
@@ -131,7 +133,7 @@ class Artifact extends Error {
 			if ($this->ArtifactType->allowsAnon()) {
 				$user=100;
 			} else {
-				$this->setError('Artifact: This ArtifactType Does Not Allow Anonymous Submissions. Please Login.');
+				$this->setError($Language->getText('tracker_artifact','error_no_anonymous'));
 				return false;
 			}
 		}
@@ -140,11 +142,11 @@ class Artifact extends Error {
 		//	data validation
 		//
 		if (!$summary) {
-			$this->setError('Artifact: Message Summary Is Required');
+			$this->setError($Language->getText('tracker_artifact','error_summary_required'));
 			return false;
 		}
 		if (!$details) {
-			$this->setError('Artifact: Message Body Is Required');
+			$this->setError($Language->getText('tracker_artifact','error_body_required'));
 			return false;
 		}
 		if (!$assigned_to) {
@@ -192,7 +194,7 @@ class Artifact extends Error {
 			AND submitted_by='$user'
 			AND open_date > '". (time() - 86400) ."'");
 		if ($res && db_numrows($res) > 0) {
-			$this->setError("You Attempted To Double-submit this item. Please avoid double-clicking.");
+			$this->setError($Language->getText('tracker_artifact','double_submit'));
 			db_rollback();
 			return false;
 		}
@@ -461,6 +463,7 @@ class Artifact extends Error {
 	 *  @return false - always false - always use the getErrorMessage() for feedback
 	 */
 	function setMonitor() {
+		global $Language;
 		if (session_loggedin()) {
 
 			$user_id=user_getid();
@@ -473,7 +476,7 @@ class Artifact extends Error {
 
 		} else {
 
-			$this->setError('SetMonitor::Valid Email Address Required');
+			$this->setError($Language->getText('tracker_artifact','error_valid_email_required'));
 			return false;
 
 		}
@@ -490,7 +493,7 @@ class Artifact extends Error {
 				$this->setError(db_error());
 				return false;
 			} else {
-				$this->setError('Now Monitoring');
+				$this->setError($Language->getText('tracker_artifact','monitoring_activated'));
 				return false;
 			}
 		} else {
@@ -498,7 +501,7 @@ class Artifact extends Error {
 			db_query("DELETE FROM artifact_monitor 
 				WHERE artifact_id='". $this->getID() ."' 
 				AND user_id='$user_id'");
-			$this->setError('Monitoring Deactivated');
+			$this->setError($Language->getText('tracker_artifact','monitoring_deactivated'));
 			return false;
 		}
 	}
@@ -587,8 +590,9 @@ class Artifact extends Error {
 	 *  @return	boolean	success.
 	 */
 	function addMessage($body,$by=false,$send_followup=false) {
+		global $Language;
 		if (!$body) {
-			$this->setError('ERROR - addMessage: Missing Parameters');
+			$this->setMissingParamsError();
 			return false;
 		}
 
@@ -599,16 +603,16 @@ class Artifact extends Error {
 				$this->setError('ERROR - Logged In User Bug Could Not Get User Object');
 				return false;
 			}
-			$body="Logged In: YES \nuser_id=$user_id\n\n".$body;
+			$body=$Language->getText('tracker_artifact','logged_in_yes')." \nuser_id=$user_id\n\n".$body;
 
 			//	we'll store this email even though it will likely never be used - 
 			//	since we have their correct user_id, we can join the USERS table to get email
 			$by=$user->getEmail();
 		} else {
-			$body="Logged In: NO \n\n".$body;
+			$body=$Language->getText('tracker_artifact','logged_in_no')." \n\n".$body;
 			$user_id=100;
 			if (!$by || !validate_email($by)) {
-				$this->setError('ERROR - addMessage: Missing Or Invalid Email Address');
+				$this->setMissingParamsError();
 				return false;
 			}
 		}
@@ -659,6 +663,7 @@ class Artifact extends Error {
 	function update($priority,$status_id,$category_id,$artifact_group_id,$resolution_id,
 		$assigned_to,$summary,$canned_response,$details,$new_artifact_type_id) {
 
+		global $Language;
 		if (!$this->getID() 
 			|| !$assigned_to 
 			|| !$status_id 
@@ -667,7 +672,7 @@ class Artifact extends Error {
 			|| !$resolution_id
 			|| !$canned_response 
 			|| !$new_artifact_type_id) {
-			$this->setError('Artifact: Missing required parameters to artifact::update()');
+			$this->setMissingParamsError();
 			return false;
 		}
 
@@ -679,7 +684,7 @@ class Artifact extends Error {
 
 		//	original submitter can always modify his/her items now
 		if (!$this->ArtifactType->userIsAdmin() && ($this->getSubmittedBy() != user_getid())) {
-			$this->setError('Artifact: Update Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
@@ -707,7 +712,7 @@ class Artifact extends Error {
 			}
 			//	do they have perms for new ArtifactType?
 			if (!$newArtifactType->userIsAdmin()) {
-				$this->setError('Artifact: Could not move to new ArtifactType: Permission Denied');
+				$this->setPermissionDeniedError();
 				db_rollback();
 				return false;
 			}
@@ -851,7 +856,7 @@ class Artifact extends Error {
 			return true;
 		} else {
 			//nothing changed, so cancel the transaction
-			$this->setError('Nothing Changed - Update Cancelled');
+			$this->setError($Language->getText('tracker_artifact','nothing_changed'));
 			db_rollback();
 			return false;
 		}

@@ -70,15 +70,16 @@ class ArtifactGroup extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($name) {
+		global $Language;
 		//
 		//	data validation
 		//
 		if (!$name) {
-			$this->setError('ArtifactGroup: name is Required');
+			$this->setError($Language->getText('tracker_artifactgroup','required_field'));
 			return false;
 		}
 		if (!$this->ArtifactType->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		$sql="INSERT INTO artifact_group (group_artifact_id,group_name) 
@@ -154,11 +155,11 @@ class ArtifactGroup extends Error {
 	 */
 	function update($name) {
 		if (!$this->ArtifactType->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}   
 		if (!$name) {
-			$this->setError('Missing Params');
+			$this->setMissingParamsError();
 			return false;
 		}   
 		$sql="UPDATE artifact_group

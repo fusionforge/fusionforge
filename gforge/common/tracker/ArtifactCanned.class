@@ -71,15 +71,16 @@ class ArtifactCanned extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($title, $body) {
+		global $Language;
 		//
 		//	data validation
 		//
 		if (!$title || !$body) {
-			$this->setError('ArtifactCanned: name and assignee are Required');
+			$this->setError($Language->getText('artifact_canned','required_fields'));
 			return false;
 		}
 		if (!$this->ArtifactType->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
@@ -169,11 +170,11 @@ class ArtifactCanned extends Error {
 	 */
 	function update($title,$body) {
 		if (!$this->ArtifactType->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}   
 		if (!$title || !$body) {
-			$this->setError('Missing Params');
+			$this->setMissingParamsError();
 			return false;
 		}   
 

@@ -111,7 +111,7 @@ class ArtifactType extends Error {
 			if (!$this->isPublic()) {
 	                	$perm =& $this->Group->getPermission( session_get_user() );
 			        if (!$perm || !is_object($perm) || !$perm->isMember()) {
-	                		$this->setError('Permission Denied');
+	                		$this->setPermissionDeniedError();
 					$this->data_array = null;
 	                		return false;
 				}
@@ -138,15 +138,16 @@ class ArtifactType extends Error {
 	function create($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 		$due_period,$use_resolution,$submit_instructions,$browse_instructions,$datatype=0) {
 
+		global $Language;
 		$perm =& $this->Group->getPermission( session_get_user() );
 
 		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
-			$this->setError('ArtifactType: Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
 		if (!$name || !$description || !$due_period) {
-			$this->setError('ArtifactType: Name, Description, and Due Period are required');
+			$this->setError($Language->getText('tracker_artifacttype','required_fields'));
 			return false;
 		}
 
@@ -488,11 +489,11 @@ class ArtifactType extends Error {
 	 */
 	function addUser($id) {
 		if (!$this->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		if (!$id) {
-			$this->setError('Missing Params');
+			$this->setMissingParamsError();
 			return false;
 		}
 		$sql="INSERT INTO artifact_perm (group_artifact_id,user_id,perm_level) 
@@ -515,11 +516,11 @@ class ArtifactType extends Error {
 	 */
 	function updateUser($id,$perm_level) {
 		if (!$this->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		if (!$id) {
-			$this->setError('Missing Params: '.$id.'|'.$perm_level);
+			$this->setMissingParamsError();
 			return false;
 		}
 		$sql="UPDATE artifact_perm SET perm_level='$perm_level'
@@ -541,11 +542,11 @@ class ArtifactType extends Error {
 	 */
 	function deleteUser($id) {
 		if (!$this->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		if (!$id) {
-			$this->setError('Missing Params');
+			$this->setMissingParamsError();
 			return false;
 		}
 		$sql="DELETE FROM artifact_perm
@@ -642,10 +643,11 @@ class ArtifactType extends Error {
 	function update($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 		$due_period, $status_timeout,$use_resolution,$submit_instructions,$browse_instructions) {
 
+		global $Language;
 		$perm =& $this->Group->getPermission(session_get_user());
 
 		if (!$perm || !is_object($perm) || !$perm->isArtifactAdmin()) {
-			$this->setError('ArtifactType: Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 
@@ -655,7 +657,7 @@ class ArtifactType extends Error {
 		}
 		
 		if (!$name || !$description || !$due_period || !$status_timeout) {
-			$this->setError('ArtifactType: Name, Description, Due Period, and Status Timeout are required');
+			$this->setError($Language->getText('tracker_artifacttype','required_fields'));
 			return false;
 		}
 		

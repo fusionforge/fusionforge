@@ -47,7 +47,7 @@ if ($group_id && $atid) {
 		exit_error('Error','ArtifactType could not be created');
 	}
 	if ($ath->isError()) {
-		exit_error('Error',$ath->getErrorMessage());
+		exit_error($Language->getText('general','error').'',$ath->getErrorMessage());
 	}
 
 	if ($post_changes) {
@@ -65,7 +65,7 @@ if ($group_id && $atid) {
 //				$feedback .= $ac->getErrorMessage();			
 			} else {
 				if (!$ac->create($name,$assign_to)) {
-					$feedback .= ' Error inserting: '.$ac->getErrorMessage();
+					$feedback .= $Language->getText('tracker_admin','error_inserting').': '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
 					$feedback .= $Language->getText('tracker_admin','category_inserted');
@@ -81,7 +81,7 @@ if ($group_id && $atid) {
 //				$feedback .= $ag->getErrorMessage();
 			} else {
 				if (!$ag->create($name)) {
-					$feedback .= ' Error inserting: '.$ag->getErrorMessage();
+					$feedback .= $Language->getText('tracker_admin','error_inserting').' : '.$ag->getErrorMessage();
 					$ag->clearError();
 				} else {
 					$feedback .= $Language->getText('tracker_admin','group_inserted');
@@ -97,7 +97,7 @@ if ($group_id && $atid) {
 //				$feedback .= $acr->getErrorMessage();			
 			} else { 
 				if (!$acr->create($title,$body)) {
-					$feedback .= ' Error inserting: '.$acr->getErrorMessage();
+					$feedback .= $Language->getText('tracker_admin','error_inserting').' : '.$acr->getErrorMessage();
 					$acr->clearError();
 				} else {
 					$feedback .= $Language->getText('tracker_admin','canned_response_inserted');
@@ -173,7 +173,7 @@ if ($group_id && $atid) {
 				$feedback .= $acr->getErrorMessage();
 			} else {
 				if (!$acr->update($title,$body)) {
-					$feedback .= ' Error updating: '.$acr->getErrorMessage();
+					$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$acr->getErrorMessage();
 					$acr->clearError();
 				} else {
 					$feedback .= $Language->getText('tracker_admin','canned_response_updated');
@@ -191,7 +191,7 @@ if ($group_id && $atid) {
 				$feedback .= $ac->getErrorMessage();
 			} else {
 				if (!$ac->update($name,$assign_to)) {
-					$feedback .= ' Error updating: '.$ac->getErrorMessage();
+					$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ac->getErrorMessage();
 					$ac->clearError();
 				} else {
 					$feedback .= $Language->getText('tracker_admin','category_updated');
@@ -209,7 +209,7 @@ if ($group_id && $atid) {
 				$feedback .= $ag->getErrorMessage();
 			} else {
 				if (!$ag->update($name)) {
-					$feedback .= ' Error updating: '.$ag->getErrorMessage();
+					$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ag->getErrorMessage();
 					$ag->clearError();
 				} else {
 					$feedback .= $Language->getText('tracker_admin','group_updated');
@@ -222,7 +222,7 @@ if ($group_id && $atid) {
 
 			if (!$ath->update($name,$description,$is_public,$allow_anon,$email_all,$email_address,
 				$due_period,$status_timeout,$use_resolution,$submit_instructions,$browse_instructions)) {
-				$feedback .= ' Error updating: '.$ath->getErrorMessage();
+				$feedback .= $Language->getText('tracker_admin','error_updating').' : '.$ath->getErrorMessage();
 				$ath->clearError();
 			} else {
 				$feedback .= $Language->getText('tracker_admin','tracker_updated');

@@ -71,15 +71,17 @@ class ArtifactCategory extends Error {
 	 *  @return id on success / false on failure.
 	 */
 	function create($name, $auto_assign_to) {
+		global $Language;
+		
 		//
 		//	data validation
 		//
 		if (!$name || !$auto_assign_to) {
-			$this->setError('ArtifactCategory: name and assignee are Required');
+			$this->setError($Language->getText('artifact_category','required_fields'));
 			return false;
 		}
 		if (!$this->ArtifactType->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}
 		$sql="INSERT INTO artifact_category (group_artifact_id,category_name,auto_assign_to) 
@@ -167,11 +169,11 @@ class ArtifactCategory extends Error {
 	 */
 	function update($name,$assign_to) {
 		if (!$this->ArtifactType->userIsAdmin()) {
-			$this->setError('Permission Denied');
+			$this->setPermissionDeniedError();
 			return false;
 		}   
 		if (!$name || !$assign_to) {
-			$this->setError('Missing Params');
+			$this->setMissingParamsError();
 			return false;
 		}   
 		$sql="UPDATE artifact_category 
