@@ -12,7 +12,7 @@
 #	/etc/gforge/templates/${i}.template \
 #	/etc/gforge/$i
 #done
-/usr/lib/gforge/bin/setup -fhs -noapache -dovhost
+/usr/lib/gforge/bin/setup -fhs -noapache -dovhost -system LDAP
 
 [ -f /etc/gforge/local.inc ] && chmod 644 /etc/gforge/local.inc
 [ -f /etc/gforge/httpd.conf ] && chmod 644 /etc/gforge/httpd.conf

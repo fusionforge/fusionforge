@@ -544,10 +544,16 @@ class User extends Error {
 	/**
 	 *	setUnixStatus - Sets status of activation of unix account.
 	 *
-	 *  @param	string	The unix status.
+	 *	@param	string	The unix status.
+	 *	N	no_unix_account
+	 *	A	active
+	 *	S	suspended
+	 *	D	deleted
+	 *
 	 *	@return	boolean success.
 	 */
 	function setUnixStatus($status) {
+		global $Language,$SYS;
 		db_begin();
 		if ($status != 'N') {
 			$this->setUpUnixUID () ;
@@ -565,15 +571,15 @@ class User extends Error {
 			return false;
 		} else {
 			if ($status == 'A') {
-				if (!sf_ldap_check_create_user($this->getID())) {
-					$this->setError(sf_ldap_get_error_msg());
+				if (!$SYS->sys_check_create_user($this->getID())) {
+					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}
 			} else {
-				if (sf_ldap_check_user($this->getID())) {
-					if (!sf_ldap_remove_user($this->getID())) {
-						$this->setError(sf_ldap_get_error_msg());
+				if ($SYS->sys_check_user($this->getID())) {
+					if (!$SYS->sys_remove_user($this->getID())) {
+						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
 					}
@@ -783,6 +789,7 @@ class User extends Error {
 	 *	@return boolean success.
 	 */
 	function setShell($shell) {
+		global $Language,$SYS;
 		$shells = file('/etc/shells');
 		$shells[count($shells)] = "/bin/cvssh";
 		$out_shells = array();
@@ -811,10 +818,10 @@ class User extends Error {
 		} else {
 			// Now change LDAP attribute, but only if corresponding
 			// entry exists (i.e. if user have shell access)
-			if (sf_ldap_check_user($this->getID()))
+			if ($SYS->sys_check_user($this->getID()))
 			{
-				if (!sf_ldap_user_set_attribute($this->getID(),"loginShell",$shell)) {
-					$this->setError(sf_ldap_get_error_msg());
+				if (!$SYS->sys_user_set_attribute($this->getID(),"loginShell",$shell)) {
+					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}
@@ -825,11 +832,6 @@ class User extends Error {
 		return true;
 	}
 
-	/**
-	 *	getUnixUid - this user's unix_uid.
-	 *
-	 *	@return	int	This user's unix_uid.
-	 */
 	function getUnixUID() {
 		return $this->data_array['unix_uid'];
 	}
@@ -1105,6 +1107,7 @@ class User extends Error {
 	 *	@return boolean success.
 	 */
 	function setPasswd($passwd) {
+		global $Language,$SYS;
 		if (!account_pwvalid($passwd)) {
 			$this->setError('Error: '.$GLOBALS['register_error']);
 			return false;
@@ -1127,9 +1130,9 @@ class User extends Error {
 		} else {
 			// Now change LDAP password, but only if corresponding
 			// entry exists (i.e. if user have shell access)
-			if (sf_ldap_check_user($this->getID())) {
-				if (!sf_ldap_user_set_attribute($this->getID(),"userPassword",'{crypt}'.$unix_pw)) {
-					$this->setError(sf_ldap_get_error_msg());
+			if ($SYS->sys_check_user($this->getID())) {
+				if (!$SYS->sys_user_set_attribute($this->getID(),"userPassword",'{crypt}'.$unix_pw)) {
+					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}

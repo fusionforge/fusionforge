@@ -68,8 +68,10 @@ require_once('common/include/database.php');
 //security library
 require_once('common/include/session.php');
 
-// LDAP library
-require_once('common/include/ldap.php');
+//system library
+require_once('common/include/System.class');
+require_once('common/include/system/'.$sys_account_manager_type.'.class');
+$SYS=new $sys_account_manager_type();
 
 //user functions like get_name, logged_in, etc
 require_once('common/include/User.class');

@@ -584,7 +584,7 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function setStatus(&$user, $status) {
-		global $Language;
+		global $Language,$SYS;
 
 		$perm =& $this->getPermission($user);
 
@@ -631,10 +631,10 @@ class Group extends Error {
 
 		if ($status=='A') {
 			// Activate LDAP group, if not yet
-			if (!sf_ldap_check_group($this->getID())) {
+			if (!$SYS->sys_check_group($this->getID())) {
 
-				if (!sf_ldap_create_group($this->getID())) {
-					$this->setError(sf_ldap_get_error_msg());
+				if (!$SYS->sys_create_group($this->getID())) {
+					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}
@@ -647,10 +647,10 @@ class Group extends Error {
 
 		/* Otherwise, the group is not active, and make sure that
 		   LDAP group is not active either */
-		} else if (sf_ldap_check_group($this->getID())) {
+		} else if ($SYS->sys_check_group($this->getID())) {
 
-			if (!sf_ldap_remove_group($this->getID())) {
-				$this->setError(sf_ldap_get_error_msg());
+			if (!$SYS->sys_remove_group($this->getID())) {
+				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
@@ -1163,6 +1163,7 @@ class Group extends Error {
 	 *	@access public.
 	 */
 	function addUser($user_unix_name) {
+		global $Language,$SYS;
 		/*
 			Admins can add users to groups
 		*/
@@ -1211,12 +1212,12 @@ class Group extends Error {
 				if ( !db_result($res_newuser,0,'unix_uid') ) {
 					$user=&user_get_object($form_newuid,$res_newuser);
 					if (!$user->setUpUnixUID()) {
-						$this->setError('ERROR: Cannot assign UNIX uid to the user');
+						$this->setError('ERROR: Cannot assign UNIX uid to the user: '.$user->getErrorMessage());
 						db_rollback();
 						return false;
 					}
-					if (!sf_ldap_create_user($form_newuid)) {
-						$this->setError(sf_ldap_get_error_msg());
+					if (!$SYS->sys_create_user($form_newuid)) {
+						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
 					}
@@ -1224,8 +1225,8 @@ class Group extends Error {
 					//
 					//	User already had unix account
 					//
-					if (!sf_ldap_check_create_user($form_newuid)) {
-						$this->setError(sf_ldap_get_error_msg());
+					if (!$SYS->sys_check_create_user($form_newuid)) {
+						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
 					}
@@ -1247,8 +1248,8 @@ class Group extends Error {
 				//
 				//	set up their ldap info
 				//
-				if (!sf_ldap_group_add_user($this->getID(),$form_newuid)) {
-					$this->setError(sf_ldap_get_error_msg());
+				if (!$SYS->sys_group_add_user($this->getID(),$form_newuid)) {
+					$this->setError($SYS->getErrorMessage());
 					db_rollback();
 					return false;
 				}
@@ -1261,18 +1262,18 @@ class Group extends Error {
 				//
 				$user=&user_get_object($form_newuid,$res_newuser);
 				if (!$user->setUpUnixUID()) {
-					$this->setError('ERROR: could not set up unix_uid for user: '.$user->getErrorMessage());
+					$this->setError('ERROR: Cannot assign UNIX uid to the user: '.$user->getErrorMessage());
 					db_rollback();
 					return false;
 				} else {
 					$user->fetchData($user->getID());
-					if (!sf_ldap_check_create_user($form_newuid)) {
-						$this->setError(sf_ldap_get_error_msg());
+					if (!$SYS->sys_check_create_user($form_newuid)) {
+						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
 					}
-						if (!sf_ldap_group_add_user($this->getID(),$form_newuid)) {
-						$this->setError(sf_ldap_get_error_msg());
+						if (!$SYS->sys_group_add_user($this->getID(),$form_newuid)) {
+						$this->setError($SYS->getErrorMessage());
 						db_rollback();
 						return false;
 					}
@@ -1305,6 +1306,7 @@ class Group extends Error {
 	 *	@return	boolean	success.
 	 */ 
 	function removeUser($user_id) {
+		global $Language,$SYS;
 
 		if ($user_id==user_getid()) {
 			//users can remove themselves
@@ -1343,8 +1345,8 @@ class Group extends Error {
 				WHERE group_id='".$this->getID()."') 
 				AND user_id='$user_id'");
 
-			if (!sf_ldap_group_remove_user($this->getID(),$user_id)) {
-				$this->setError(sf_ldap_get_error_msg());
+			if (!$SYS->sys_group_remove_user($this->getID(),$user_id)) {
+				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
@@ -1371,6 +1373,7 @@ class Group extends Error {
 	 *	@return	boolean	success.
 	 */	 
 	function updateUser($user_id,$admin_flags='',$forum_flags=0,$project_flags=1,$doc_flags=0,$cvs_flags=1,$release_flags=1,$member_role=100,$artifact_flags=0) {
+		global $Language,$SYS;
 
 	$perm =& $this->getPermission( session_get_user() );
 
@@ -1409,14 +1412,14 @@ class Group extends Error {
 		//	else - restricted.
 		//
 		if ($cvs_flags>1) {
-			if (!sf_ldap_user_set_attribute($user_id,"debGforgeCvsShell","/bin/bash")) {
-				$this->setError(sf_ldap_get_error_msg());
+			if (!$SYS->sys_user_set_attribute($user_id,"debGforgeCvsShell","/bin/bash")) {
+				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
 		} else {
-			if (!sf_ldap_user_set_attribute($user_id,"debGforgeCvsShell","/bin/cvssh")) {
-				$this->setError(sf_ldap_get_error_msg());
+			if (!$SYS->sys_user_set_attribute($user_id,"debGforgeCvsShell","/bin/cvssh")) {
+				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
@@ -1427,14 +1430,14 @@ class Group extends Error {
 		//	one to be promoted to CVS group, else, demoted.
 		//
 		if ($cvs_flags>0) {
-			if (!sf_ldap_group_add_user($this->getID(),$user_id,1)) {
-				$this->setError(sf_ldap_get_error_msg());
+			if (!$SYS->sys_group_add_user($this->getID(),$user_id,1)) {
+				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}
 		} else {
-			if (!sf_ldap_group_remove_user($this->getID(),$user_id,1)) {
-				$this->setError(sf_ldap_get_error_msg());
+			if (!$SYS->sys_group_remove_user($this->getID(),$user_id,1)) {
+				$this->setError($SYS->getErrorMessage());
 				db_rollback();
 				return false;
 			}

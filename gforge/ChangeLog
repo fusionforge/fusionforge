@@ -1,3 +1,28 @@
+2004-05-09  Christian Bayle <bayle@debian.org>
+
+	* Made system management OO (Work in progress)
+	created common/include/system dir that
+	contains UNIX and LDAP implementation
+	Now you have to choose your sys_account_manager_type
+	in local.inc, defaulted to UNIX
+	ldpa.php is removed, the code was moved in LDAP.class
+	sys_use_ldap will be removed shortly and replace by the 
+	use of sys_account_manager_type=LDAP
+	Side effect will be the possibility to implement easily your 
+	own system account manager do deal, e.g. with your company NIS,or 
+	already existing user accounts.
+	The default behaviour stays the same.
+	I also added sys_state columns with db/20040507.sql
+	This is not yet used but will allow faster user creation
+	sys_state will have 5 possible values
+	R=request system account creation
+	S=request system account suppression
+	C=system account created
+	D=system account deleted
+	E=system account creation error
+	F=system account deletion error
+	N=no request
+
 2004-05-07  Tom Copeland <tom@infoether.com>
 
 	* www/export/rss_sfnewreleases.php: Fixed a couple of 

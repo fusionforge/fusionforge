@@ -1,0 +1,7 @@
+//
+// Account Management
+//
+// UNIX for classic account management
+// LDAP for managing with ldap
+// NIS not implemented
+$sys_account_manager_type={sys_account_manager_type};

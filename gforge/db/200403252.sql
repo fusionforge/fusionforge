@@ -15,3 +15,4 @@ ALTER TABLE users ADD CONSTRAINT users_themeid
 ALTER TABLE users ADD CONSTRAINT users_ccode
         FOREIGN KEY (ccode) REFERENCES country_code(ccode) MATCH FULL;
 DROP TABLE theme_prefs;
+

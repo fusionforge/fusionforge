@@ -48,6 +48,7 @@ sys_lang=English
 sys_default_timezone=GMT
 sys_default_country_code=US
 sys_use_ldap=0
+sys_account_manager_type=UNIX
 sys_use_jabber=0
 sys_use_auth_ldap=1
 sys_ldap_auth_host=localhost

@@ -1,4 +1,4 @@
-gforge (3.3.0-4woody5) stable; urgency=low
+gforge (3.3.0-4woody9) stable; urgency=low
 
   * [Christian] Added new sql upgrade (2004*.sql)
   * [Christian] Stable backbort
@@ -13,8 +13,9 @@ gforge (3.3.0-4woody5) stable; urgency=low
   that fix DNS configuration problem
   * [Christian] Added default project home page generation
   * [Christian] Added get_news_notapproved cron
+  * [Christian] Made system management OO (see Changelog)
 
- -- Christian Bayle <bayle@debian.org>  Tue, 27 Apr 2004 14:45:01 +0200
+ -- Christian Bayle <bayle@debian.org>  Sun,  9 May 2004 18:50:43 +0200
 
 gforge (3.2.1-4) experimental; urgency=low
 
