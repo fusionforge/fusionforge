@@ -4,6 +4,11 @@
 	* applied [#866] Comment in generated .ssh/authorized_keys by Matt Hope
 	and adapted it for mainstream
 	* applied [#883"] sys_show_contact_info by Rob Lanphier
+	* internationalized editsshkeys.php
+	* applied [#742] Bug fix for #559 Pop-up window by Hidenari Miwa
+	* improved Error.class thanks to an idea of Hidenari Miwa (see [#742])
+	* fixed localization problems in tracker
+	* updated french translation for tracker build boxes feature
 
 2004-09-09  Francisco Gimeno <kikov@kikov.org>
 
