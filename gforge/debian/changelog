@@ -1,8 +1,8 @@
-gforge (3.0-7+1) unstable; urgency=low
+gforge (3.0-7+2) unstable; urgency=low
 
   * [Roland] Fixed redirecttion URL for Mailman.
 
- -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 19:30:14 +0200
+ -- Roland Mas <lolando@debian.org>  Sun, 21 Sep 2003 19:36:23 +0200
 
 gforge (3.0-7) unstable; urgency=low
 
