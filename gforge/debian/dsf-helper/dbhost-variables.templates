@@ -1,4 +1,4 @@
-Template: sourceforge/db/dbhost
+Template: gforge/db/dbhost
 Type: string
 Description: Your database server
  The IP address (or host name) of the server that will host your

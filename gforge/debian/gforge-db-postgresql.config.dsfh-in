@@ -1,0 +1,57 @@
+#!/bin/sh -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+#DSFHELPER:get-pw-from-debconf#
+#DSFHELPER:create-random-pw#
+#DSFHELPER:common-variables#
+# [Disabled] DSFHELPER:dbhost-variables#
+
+get_pw gforge/shared/db_password low
+db_fget gforge/shared/db_password seen || true
+if [ "$RET" = "false" ]; then
+    db_set gforge/shared/db_password $(gen_random_pw)
+    db_get gforge/shared/db_password || true
+    echo "Since you asked not to see all the debconf questions, I generated a random"
+    echo "password for the database.  Use it if you want to have a peek at the"
+    echo "database by hand.  It is '${RET}'.\n" ;
+    db_fset gforge/shared/db_password seen true
+fi
+db_input low gforge/shared/admin_login || true
+get_pw gforge/shared/admin_password critical
+
+db_fget gforge/shared/ip_address seen || true
+if [ "$RET" = "false" ] ; then
+    db_get gforge/shared/domain_name
+    db_set gforge/shared/ip_address $(hostname -i | cut -f1 -d" ")
+fi
+
+db_input medium gforge/shared/ip_address || true
+db_input medium gforge/shared/server_admin || true
+db_go || true
+
+#DSFHELPER:cvshost-variables#
+db_fget gforge/shared/shell_host seen || true
+if [ "$RET" = "false" ] ; then
+    db_get gforge/shared/domain_name
+    db_set gforge/shared/shell_host shell.$RET
+fi
+
+#DSFHELPER:users-variables#
+#DSFHELPER:lists-variables#
+
+db_fget gforge/shared/download_host seen || true
+if [ "$RET" = "false" ] ; then
+    db_get gforge/shared/domain_name
+    db_set gforge/shared/download_host download.$RET
+fi
+
+db_input low gforge/shared/shell_host || true
+db_input low gforge/shared/users_host || true
+db_go || true
+
+db_input low gforge/shared/newsadmin_groupid || true
+db_input low gforge/shared/skill_list || true
+
+db_go || true
