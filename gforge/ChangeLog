@@ -1,3 +1,12 @@
+2003-12-17  Roland Mas  <99.roland.mas@aist.enst.fr>
+
+	* README.Plugins: Mention ldapextauth in the list of known
+	plugins.
+
+	* common/include/session.php: Added session_before_login hook for
+	the ldapextauth plugin (and the forthcoming *extauth plugins, one
+	hopes :-)
+
 2003-12-03  Roland Mas  <99.roland.mas@aist.enst.fr>
 
 	* deb-specific/db-upgrade.pl: Upgrade database using 20031126.sql.

@@ -128,6 +128,11 @@ function session_login_valid($loginname, $passwd, $allowpending=0)  {
 		return false;
 	}
 
+	$hook_params = array () ;
+	$hook_params['loginname'] = $loginname ;
+	$hook_params['passwd'] = $passwd ;
+	plugin_hook ("session_before_login", $hook_params) ;
+
 	//  Try to get the users from the database using user_id and (MD5) user_pw
 	$res = db_query("
 		SELECT user_id,status,unix_pw

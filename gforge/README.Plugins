@@ -205,5 +205,7 @@ distribute their plugin do not reuse the same name.
   For reference, this is the list of currently used plugin names:
 
 - helloworld, the plugin provided as an example.
+- extldapauth, a plugin allowing on-the-fly account creation from an
+  existing LDAP directory;
 
   -- Roland Mas <lolando@debian.org>
