@@ -178,7 +178,7 @@ EOF
 	/usr/lib/sourceforge/bin/install-cvs.sh configure
 
         # Setup our LDAP
-	/usr/lib/sourceforge/bin/install-ldap.sh
+	/usr/lib/sourceforge/bin/install-ldap.sh configure
 
         # Setup our SSH
 	/usr/lib/sourceforge/bin/install-ssh.sh
