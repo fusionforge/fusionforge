@@ -1,6 +1,7 @@
 This is a TODO list for the packaging.  Some items that used to be
 here have been transferred onto the Savannah project, at
 <http://savannah.gnu.org/support/?group_id=259>.
+
 * [CB] Using ldap2dns
 
 * [CB] Make /stats/ work.  [RM] It seems the tables don't get filled
@@ -33,18 +34,6 @@ here have been transferred onto the Savannah project, at
   requires a patch in fileforge.pl.
 
 * [RM] Browse through everything and find out things to add here.
-
-* [RM] Get the Unix status to be updated (as seems to be the normal
-  case, cf. footnote 2 in /admin/useredit.php).
-
-* [RM] Drop the "deadXX" columns created on upgrade from 2.5 (in
-  tables "groups" and "user_preferences").  Either wait for ALTER
-  TABLE ... DROP COLUMN to be implemented in PostgreSQL (it's not in
-  7.2, maybe it'll be in 7.3) or do it the hard way (copy the relevant
-  fields of the table to a new table, then drop the old table and
-  rename the new one).  [RM] Done.  The hard way.  Had to, since it
-  seems to be the only way PosgreSQL provides of dropping a foreign
-  key constraint.
 
 * [RM] Search and replace "sourceforge.net" with the appropriate
   hostname in all files.  Ditto with "valinux.com".
