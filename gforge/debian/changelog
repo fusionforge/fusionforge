@@ -1,3 +1,9 @@
+sourceforge (2.5-35+) unstable; urgency=low
+
+  * 
+
+ -- Roland Mas <lolando@debian.org>  Wed, 13 Nov 2002 19:34:08 +0100
+
 sourceforge (2.5-35) unstable; urgency=low
 
   * Recompiled on unstable, to be more policy-compliant (at least one
