@@ -1215,14 +1215,6 @@ CREATE TABLE "massmail_queue" (
 );
 
 
-CREATE TABLE "frs_dlstats_file_agg" (
-	"month" integer,
-	"day" integer,
-	"file_id" integer,
-	"downloads" integer
-);
-
-
 CREATE TABLE "stats_agg_site_by_group" (
 	"month" integer,
 	"day" integer,
@@ -1371,20 +1363,6 @@ CREATE TABLE "frs_dlstats_filetotal_agg" (
 );
 
 
-CREATE TABLE "frs_dlstats_grouptotal_agg" (
-	"group_id" integer,
-	"downloads" integer
-);
-
-
-CREATE TABLE "frs_dlstats_group_agg" (
-	"group_id" integer,
-	"month" integer,
-	"day" integer,
-	"downloads" integer
-);
-
-
 CREATE TABLE "stats_project_months" (
 	"month" integer,
 	"group_id" integer,
@@ -1416,129 +1394,14 @@ CREATE TABLE "stats_project_months" (
 );
 
 
-CREATE TABLE "stats_project_all" (
-	"group_id" integer,
-	"developers" integer,
-	"group_ranking" integer,
-	"group_metric" double precision,
-	"logo_showings" integer,
-	"downloads" integer,
-	"site_views" integer,
-	"subdomain_views" integer,
-	"page_views" integer,
-	"msg_posted" integer,
-	"msg_uniq_auth" integer,
-	"bugs_opened" integer,
-	"bugs_closed" integer,
-	"support_opened" integer,
-	"support_closed" integer,
-	"patches_opened" integer,
-	"patches_closed" integer,
-	"artifacts_opened" integer,
-	"artifacts_closed" integer,
-	"tasks_opened" integer,
-	"tasks_closed" integer,
-	"help_requests" integer,
-	"cvs_checkouts" integer,
-	"cvs_commits" integer,
-	"cvs_adds" integer
-);
-
-
-CREATE TABLE "stats_project_developers_last30" (
-	"month" integer,
-	"day" integer,
-	"group_id" integer,
-	"developers" integer
-);
-
-
-CREATE TABLE "stats_project_last_30" (
-	"month" integer,
-	"day" integer,
-	"group_id" integer,
-	"developers" integer,
-	"group_ranking" integer,
-	"group_metric" double precision,
-	"logo_showings" integer,
-	"downloads" integer,
-	"site_views" integer,
-	"subdomain_views" integer,
-	"page_views" integer,
-	"filereleases" integer,
-	"msg_posted" integer,
-	"msg_uniq_auth" integer,
-	"bugs_opened" integer,
-	"bugs_closed" integer,
-	"support_opened" integer,
-	"support_closed" integer,
-	"patches_opened" integer,
-	"patches_closed" integer,
-	"artifacts_opened" integer,
-	"artifacts_closed" integer,
-	"tasks_opened" integer,
-	"tasks_closed" integer,
-	"help_requests" integer,
-	"cvs_checkouts" integer,
-	"cvs_commits" integer,
-	"cvs_adds" integer
-);
-
-
 CREATE TABLE "stats_site_pages_by_month" (
 	"month" integer,
 	"site_page_views" integer
 );
 
 
-CREATE TABLE "stats_site_last_30" (
-	"month" integer,
-	"day" integer,
-	"site_page_views" integer,
-	"downloads" integer,
-	"subdomain_views" integer,
-	"msg_posted" integer,
-	"bugs_opened" integer,
-	"bugs_closed" integer,
-	"support_opened" integer,
-	"support_closed" integer,
-	"patches_opened" integer,
-	"patches_closed" integer,
-	"artifacts_opened" integer,
-	"artifacts_closed" integer,
-	"tasks_opened" integer,
-	"tasks_closed" integer,
-	"help_requests" integer,
-	"cvs_checkouts" integer,
-	"cvs_commits" integer,
-	"cvs_adds" integer
-);
-
-
 CREATE TABLE "stats_site_months" (
 	"month" integer,
-	"site_page_views" integer,
-	"downloads" integer,
-	"subdomain_views" integer,
-	"msg_posted" integer,
-	"bugs_opened" integer,
-	"bugs_closed" integer,
-	"support_opened" integer,
-	"support_closed" integer,
-	"patches_opened" integer,
-	"patches_closed" integer,
-	"artifacts_opened" integer,
-	"artifacts_closed" integer,
-	"tasks_opened" integer,
-	"tasks_closed" integer,
-	"help_requests" integer,
-	"cvs_checkouts" integer,
-	"cvs_commits" integer,
-	"cvs_adds" integer
-);
-
-
-CREATE TABLE "stats_site_all" (
 	"site_page_views" integer,
 	"downloads" integer,
 	"subdomain_views" integer,
@@ -1687,9 +1550,6 @@ CREATE TABLE "project_category" (
 );
 
 
-CREATE VIEW "project_task_vw" as SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_category.category_name, project_status.status_name FROM ((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) NATURAL JOIN project_status);
-
-
 CREATE TABLE "project_task_artifact" (
 	"project_task_id" integer,
 	"artifact_id" integer
@@ -1828,6 +1688,158 @@ CREATE VIEW "docdata_vw" as SELECT users.user_name, users.realname, users.email,
 
 
 CREATE VIEW "artifact_group_list_vw" as SELECT agl.group_artifact_id, agl.group_id, agl.name, agl.description, agl.is_public, agl.allow_anon, agl.email_all_updates, agl.email_address, agl.due_period, agl.use_resolution, agl.submit_instructions, agl.browse_instructions, agl.datatype, agl.status_timeout, aca.count, aca.open_count FROM (artifact_group_list agl LEFT JOIN artifact_counts_agg aca USING (group_artifact_id));
+
+
+CREATE VIEW "project_task_vw" as SELECT project_task.project_task_id, project_task.group_project_id, project_task.summary, project_task.details, project_task.percent_complete, project_task.priority, project_task.hours, project_task.start_date, project_task.end_date, project_task.created_by, project_task.status_id, project_task.category_id, project_category.category_name, project_status.status_name, users.user_name, users.realname FROM (((project_task FULL JOIN project_category ON ((project_category.category_id = project_task.category_id))) FULL JOIN users ON ((users.user_id = project_task.created_by))) NATURAL JOIN project_status);
+
+
+CREATE FUNCTION "project_sums" () RETURNS opaque AS '
+	DECLARE
+		num integer;
+		curr_group integer;
+	BEGIN
+		---
+		--- Get number of things this group has now
+		---
+		IF TG_ARGV[0]=''surv'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM surveys WHERE OLD.group_id=group_id AND is_active=1;
+				curr_group := OLD.group_id;
+			ELSE
+				SELECT INTO num count(*) FROM surveys WHERE NEW.group_id=group_id AND is_active=1;
+				curr_group := NEW.group_id;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''mail'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM mail_group_list WHERE OLD.group_id=group_id AND is_public=1;
+				curr_group := OLD.group_id;
+			ELSE
+				SELECT INTO num count(*) FROM mail_group_list WHERE NEW.group_id=group_id AND is_public=1;
+				curr_group := NEW.group_id;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''fmsg'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO curr_group group_id FROM forum_group_list WHERE OLD.group_forum_id=group_forum_id;
+				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
+			ELSE
+				SELECT INTO curr_group group_id FROM forum_group_list WHERE NEW.group_forum_id=group_forum_id;
+				SELECT INTO num count(*) FROM forum, forum_group_list WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 AND forum_group_list.group_id=curr_group;
+			END IF;
+		END IF;
+		IF TG_ARGV[0]=''fora'' THEN
+			IF TG_OP=''DELETE'' THEN
+				SELECT INTO num count(*) FROM forum_group_list WHERE OLD.group_id=group_id AND is_public=1;
+				curr_group = OLD.group_id;
+				--- also need to update message count
+				DELETE FROM project_sums_agg WHERE group_id=OLD.group_id AND type=''fmsg'';
+				INSERT INTO project_sums_agg
+					SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
+					FROM forum, forum_group_list
+					WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
+			ELSE
+				SELECT INTO num count(*) FROM forum_group_list WHERE NEW.group_id=group_id AND is_public=1;
+				curr_group = NEW.group_id;
+				--- fora do not get deleted... they get their status set to 9
+				IF NEW.is_public=9 THEN
+					--- also need to update message count
+					DELETE FROM project_sums_agg WHERE group_id=NEW.group_id AND type=''fmsg'';
+					INSERT INTO project_sums_agg
+						SELECT forum_group_list.group_id,''fmsg''::text AS type, count(forum.msg_id) AS count
+						FROM forum, forum_group_list
+						WHERE forum.group_forum_id=forum_group_list.group_forum_id AND forum_group_list.is_public=1 GROUP BY group_id,type;
+				END IF;
+			END IF;
+		END IF;
+		---
+		--- See if this group already has a row in project_sums_agg for these things
+		---
+		PERFORM * FROM project_sums_agg WHERE curr_group=group_id AND type=TG_ARGV[0];
+
+		IF NOT FOUND THEN
+			---
+			--- Create row for this group
+			---
+			INSERT INTO project_sums_agg
+				VALUES (curr_group, TG_ARGV[0], num);
+		ELSE
+			---
+			--- Update count
+			---
+			UPDATE project_sums_agg SET count=num
+			WHERE curr_group=group_id AND type=TG_ARGV[0];
+		END IF;
+
+		IF TG_OP=''DELETE'' THEN
+			RETURN OLD;
+		ELSE
+			RETURN NEW;
+		END IF;
+	END;
+' LANGUAGE 'plpgsql';
+
+
+CREATE FUNCTION "frs_dlstats_filetotal_insert_ag" () RETURNS opaque AS '
+BEGIN
+	INSERT INTO frs_dlstats_filetotal_agg (file_id, downloads) VALUES (NEW.file_id, 0);
+	RETURN NEW;
+END;
+' LANGUAGE 'plpgsql';
+
+
+CREATE VIEW "frs_dlstats_file_agg_vw" as SELECT frs_dlstats_file."month", frs_dlstats_file."day", frs_dlstats_file.file_id, count(*) AS downloads FROM frs_dlstats_file GROUP BY frs_dlstats_file."month", frs_dlstats_file."day", frs_dlstats_file.file_id;
+
+
+CREATE VIEW "frs_dlstats_grouptotal_vw" as SELECT frs_package.group_id, sum(frs_dlstats_filetotal_agg.downloads) AS downloads FROM frs_package, frs_release, frs_file, frs_dlstats_filetotal_agg WHERE (((frs_package.package_id = frs_release.package_id) AND (frs_release.release_id = frs_file.release_id)) AND (frs_file.file_id = frs_dlstats_filetotal_agg.file_id)) GROUP BY frs_package.group_id;
+
+
+CREATE VIEW "frs_dlstats_group_vw" as SELECT frs_package.group_id, fdfa."month", fdfa."day", sum(fdfa.downloads) AS downloads FROM frs_package, frs_release, frs_file, frs_dlstats_file_agg_vw fdfa WHERE (((frs_package.package_id = frs_release.package_id) AND (frs_release.release_id = frs_file.release_id)) AND (frs_file.file_id = fdfa.file_id)) GROUP BY frs_package.group_id, fdfa."month", fdfa."day";
+
+
+CREATE VIEW "stats_project_vw" as SELECT spd.group_id, spd."month", spd."day", spd.developers, spm.ranking AS group_ranking, spm.percentile AS group_metric, salbg.count AS logo_showings, fdga.downloads, sasbg.count AS site_views, ssp.pages AS subdomain_views, (CASE WHEN (sasbg.count IS NOT NULL) THEN sasbg.count WHEN (0 IS NOT NULL) THEN 0 ELSE NULL::int4 END + CASE WHEN (ssp.pages IS NOT NULL) THEN ssp.pages WHEN (0 IS NOT NULL) THEN 0 ELSE NULL::int4 END) AS page_views, sp.file_releases, sp.msg_posted, sp.msg_uniq_auth, sp.bugs_opened, sp.bugs_closed, sp.support_opened, sp.support_closed, sp.patches_opened, sp.patches_closed, sp.artifacts_opened, sp.artifacts_closed, sp.tasks_opened, sp.tasks_closed, sp.help_requests, scg.checkouts AS cvs_checkouts, scg.commits AS cvs_commits, scg.adds AS cvs_adds FROM (((((((stats_project_developers spd LEFT JOIN stats_project sp USING ("month", "day", group_id)) LEFT JOIN stats_project_metric spm USING ("month", "day", group_id)) LEFT JOIN stats_cvs_group scg USING ("month", "day", group_id)) LEFT JOIN stats_agg_site_by_group sasbg USING ("month", "day", group_id)) LEFT JOIN stats_agg_logo_by_group salbg USING ("month", "day", group_id)) LEFT JOIN stats_subd_pages ssp USING ("month", "day", group_id)) LEFT JOIN frs_dlstats_group_vw fdga USING ("month", "day", group_id));
+
+
+CREATE VIEW "stats_project_all_vw" as SELECT stats_project_months.group_id, int4(avg(stats_project_months.developers)) AS developers, int4(avg(stats_project_months.group_ranking)) AS group_ranking, avg(stats_project_months.group_metric) AS group_metric, sum(stats_project_months.logo_showings) AS logo_showings, sum(stats_project_months.downloads) AS downloads, sum(stats_project_months.site_views) AS site_views, sum(stats_project_months.subdomain_views) AS subdomain_views, sum(stats_project_months.page_views) AS page_views, sum(stats_project_months.file_releases) AS file_releases, sum(stats_project_months.msg_posted) AS msg_posted, int4(avg(stats_project_months.msg_uniq_auth)) AS msg_uniq_auth, sum(stats_project_months.bugs_opened) AS bugs_opened, sum(stats_project_months.bugs_closed) AS bugs_closed, sum(stats_project_months.support_opened) AS support_opened, sum(stats_project_months.support_closed) AS support_closed, sum(stats_project_months.patches_opened) AS patches_opened, sum(stats_project_months.patches_closed) AS patches_closed, sum(stats_project_months.artifacts_opened) AS artifacts_opened, sum(stats_project_months.artifacts_closed) AS artifacts_closed, sum(stats_project_months.tasks_opened) AS tasks_opened, sum(stats_project_months.tasks_closed) AS tasks_closed, sum(stats_project_months.help_requests) AS help_requests, sum(stats_project_months.cvs_checkouts) AS cvs_checkouts, sum(stats_project_months.cvs_commits) AS cvs_commits, sum(stats_project_months.cvs_adds) AS cvs_adds FROM stats_project_months GROUP BY stats_project_months.group_id;
+
+
+CREATE VIEW "stats_site_vw" as SELECT p."month", p."day", sspbd.site_page_views, sum(p.downloads) AS downloads, sum(p.subdomain_views) AS subdomain_views, sum(p.msg_posted) AS msg_posted, sum(p.bugs_opened) AS bugs_opened, sum(p.bugs_closed) AS bugs_closed, sum(p.support_opened) AS support_opened, sum(p.support_closed) AS support_closed, sum(p.patches_opened) AS patches_opened, sum(p.patches_closed) AS patches_closed, sum(p.artifacts_opened) AS artifacts_opened, sum(p.artifacts_closed) AS artifacts_closed, sum(p.tasks_opened) AS tasks_opened, sum(p.tasks_closed) AS tasks_closed, sum(p.help_requests) AS help_requests, sum(p.cvs_checkouts) AS cvs_checkouts, sum(p.cvs_commits) AS cvs_commits, sum(p.cvs_adds) AS cvs_adds FROM stats_project_vw p, stats_site_pages_by_day sspbd WHERE ((p."month" = sspbd."month") AND (p."day" = sspbd."day")) GROUP BY p."month", p."day", sspbd.site_page_views;
+
+
+CREATE VIEW "stats_site_all_vw" as SELECT sum(stats_site_months.site_page_views) AS site_page_views, sum(stats_site_months.downloads) AS downloads, sum(stats_site_months.subdomain_views) AS subdomain_views, sum(stats_site_months.msg_posted) AS msg_posted, sum(stats_site_months.bugs_opened) AS bugs_opened, sum(stats_site_months.bugs_closed) AS bugs_closed, sum(stats_site_months.support_opened) AS support_opened, sum(stats_site_months.support_closed) AS support_closed, sum(stats_site_months.patches_opened) AS patches_opened, sum(stats_site_months.patches_closed) AS patches_closed, sum(stats_site_months.artifacts_opened) AS artifacts_opened, sum(stats_site_months.artifacts_closed) AS artifacts_closed, sum(stats_site_months.tasks_opened) AS tasks_opened, sum(stats_site_months.tasks_closed) AS tasks_closed, sum(stats_site_months.help_requests) AS help_requests, sum(stats_site_months.cvs_checkouts) AS cvs_checkouts, sum(stats_site_months.cvs_commits) AS cvs_commits, sum(stats_site_months.cvs_adds) AS cvs_adds FROM stats_site_months;
+
+
+CREATE SEQUENCE "plugins_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+
+CREATE TABLE "plugins" (
+	"plugin_id" integer DEFAULT nextval('plugins_pk_seq'::text) NOT NULL,
+	"plugin_name" character varying(32) NOT NULL,
+	"plugin_desc" text,
+	Constraint "plugins_pkey" Primary Key ("plugin_id")
+);
+
+
+CREATE SEQUENCE "group_plugin_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+
+CREATE TABLE "group_plugin" (
+	"group_plugin_id" integer DEFAULT nextval('group_plugin_pk_seq'::text) NOT NULL,
+	"group_id" integer,
+	"plugin_id" integer,
+	Constraint "group_plugin_pkey" Primary Key ("group_plugin_id")
+);
+
+
+CREATE SEQUENCE "user_plugin_pk_seq" start 1 increment 1 maxvalue 9223372036854775807 minvalue 1 cache 1;
+
+
+CREATE TABLE "user_plugin" (
+	"user_plugin_id" integer DEFAULT nextval('user_plugin_pk_seq'::text) NOT NULL,
+	"user_id" integer,
+	"plugin_id" integer,
+	Constraint "user_plugin_pkey" Primary Key ("user_plugin_id")
+);
 
 
 
@@ -2549,10 +2561,6 @@ COPY "massmail_queue" FROM stdin;
 \.
 
 
-COPY "frs_dlstats_file_agg" FROM stdin;
-\.
-
-
 COPY "stats_agg_site_by_group" FROM stdin;
 \.
 
@@ -2609,27 +2617,7 @@ COPY "frs_dlstats_filetotal_agg" FROM stdin;
 \.
 
 
-COPY "frs_dlstats_grouptotal_agg" FROM stdin;
-\.
-
-
-COPY "frs_dlstats_group_agg" FROM stdin;
-\.
-
-
 COPY "stats_project_months" FROM stdin;
-\.
-
-
-COPY "stats_project_all" FROM stdin;
-\.
-
-
-COPY "stats_project_developers_last30" FROM stdin;
-\.
-
-
-COPY "stats_project_last_30" FROM stdin;
 \.
 
 
@@ -2637,16 +2625,7 @@ COPY "stats_site_pages_by_month" FROM stdin;
 \.
 
 
-COPY "stats_site_last_30" FROM stdin;
-\.
-
-
 COPY "stats_site_months" FROM stdin;
-\.
-
-
-COPY "stats_site_all" FROM stdin;
-\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N
 \.
 
 
@@ -2668,6 +2647,7 @@ COPY "group_cvs_history" FROM stdin;
 
 COPY "themes" FROM stdin;
 1	gforge	Default Theme
+2	osx	OSX
 \.
 
 
@@ -2699,6 +2679,7 @@ COPY "supported_languages" FROM stdin;
 17	Russian	Russian.class	Russian	ru   
 7	French	French.class	French	fr   
 16	Pt. Brazilian	PortugueseBrazilian.class	PortugueseBrazilian	pt_BR
+24	Latin	Latin.class	Latin	la   
 \.
 
 
@@ -2733,6 +2714,18 @@ COPY "project_group_doccat" FROM stdin;
 
 
 COPY "project_messages" FROM stdin;
+\.
+
+
+COPY "plugins" FROM stdin;
+\.
+
+
+COPY "group_plugin" FROM stdin;
+\.
+
+
+COPY "user_plugin" FROM stdin;
 \.
 
 CREATE INDEX db_images_group ON db_images USING btree (group_id);
@@ -3071,12 +3064,6 @@ CREATE UNIQUE INDEX statssitepgsbyday_oid ON stats_site_pages_by_day USING btree
 CREATE INDEX statssitepagesbyday_month_day ON stats_site_pages_by_day USING btree ("month", "day");
 
 
-CREATE UNIQUE INDEX frsdlfileagg_oid ON frs_dlstats_file_agg USING btree (oid);
-
-
-CREATE UNIQUE INDEX frsdlfileagg_month_day_file ON frs_dlstats_file_agg USING btree ("month", "day", file_id);
-
-
 CREATE UNIQUE INDEX statsaggsitebygrp_oid ON stats_agg_site_by_group USING btree (oid);
 
 
@@ -3131,28 +3118,10 @@ CREATE INDEX user_metric_history_date_userid ON user_metric_history USING btree 
 CREATE INDEX frsdlfiletotal_fileid ON frs_dlstats_filetotal_agg USING btree (file_id);
 
 
-CREATE INDEX frsdlgrouptotal_groupid ON frs_dlstats_grouptotal_agg USING btree (group_id);
-
-
-CREATE INDEX frsdlgroup_groupid ON frs_dlstats_group_agg USING btree (group_id);
-
-
-CREATE INDEX frsdlgroup_month_day_groupid ON frs_dlstats_group_agg USING btree ("month", "day", group_id);
-
-
 CREATE INDEX statsprojectmonths_groupid ON stats_project_months USING btree (group_id);
 
 
 CREATE INDEX statsprojectmonths_groupid_mont ON stats_project_months USING btree (group_id, "month");
-
-
-CREATE INDEX statsprojectall_groupid ON stats_project_all USING btree (group_id);
-
-
-CREATE INDEX statsproject30_groupid ON stats_project_last_30 USING btree (group_id);
-
-
-CREATE INDEX statssitelast30_month_day ON stats_site_last_30 USING btree ("month", "day");
 
 
 CREATE INDEX statssitemonths_month ON stats_site_months USING btree ("month");
@@ -3204,6 +3173,9 @@ CREATE INDEX projectgroupdoccat_groupgroupid ON project_group_doccat USING btree
 
 
 CREATE UNIQUE INDEX project_messa_project_messa_key ON project_messages USING btree (project_message_id);
+
+
+CREATE UNIQUE INDEX plugins_plugin_name_key ON plugins USING btree (plugin_name);
 
 
 CREATE CONSTRAINT TRIGGER "user_group_user_id_fk" AFTER INSERT OR UPDATE ON "user_group"  NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_group_user_id_fk', 'user_group', 'users', 'FULL', 'user_id', 'user_id');
@@ -3836,11 +3808,64 @@ CREATE CONSTRAINT TRIGGER "docgroups_groupid" AFTER DELETE ON "groups"  FROM "do
 CREATE CONSTRAINT TRIGGER "docgroups_groupid" AFTER UPDATE ON "groups"  FROM "doc_groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('docgroups_groupid', 'doc_groups', 'groups', 'UNSPECIFIED', 'group_id', 'group_id');
 
 
+CREATE TRIGGER "surveys_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "surveys"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('surv');
+
+
+CREATE TRIGGER "mail_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "mail_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('mail');
+
+
+CREATE TRIGGER "fmsg_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fmsg');
+
+
+CREATE TRIGGER "fora_agg_trig" AFTER INSERT OR DELETE OR UPDATE ON "forum_group_list"  FOR EACH ROW EXECUTE PROCEDURE "project_sums" ('fora');
+
+
+CREATE TRIGGER "frs_file_insert_trig" AFTER INSERT ON "frs_file"  FOR EACH ROW EXECUTE PROCEDURE "frs_dlstats_filetotal_insert_ag" ();
+
+
+CREATE CONSTRAINT TRIGGER "group_plugin_group_id_fk" AFTER INSERT OR UPDATE ON "group_plugin"  FROM "groups" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+CREATE CONSTRAINT TRIGGER "group_plugin_group_id_fk" AFTER DELETE ON "groups"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+CREATE CONSTRAINT TRIGGER "group_plugin_group_id_fk" AFTER UPDATE ON "groups"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('group_plugin_group_id_fk', 'group_plugin', 'groups', 'FULL', 'group_id', 'group_id');
+
+
+CREATE CONSTRAINT TRIGGER "group_plugin_plugin_id_fk" AFTER INSERT OR UPDATE ON "group_plugin"  FROM "plugins" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+CREATE CONSTRAINT TRIGGER "group_plugin_plugin_id_fk" AFTER DELETE ON "plugins"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+CREATE CONSTRAINT TRIGGER "group_plugin_plugin_id_fk" AFTER UPDATE ON "plugins"  FROM "group_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('group_plugin_plugin_id_fk', 'group_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+CREATE CONSTRAINT TRIGGER "user_plugin_user_id_fk" AFTER INSERT OR UPDATE ON "user_plugin"  FROM "users" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
+
+
+CREATE CONSTRAINT TRIGGER "user_plugin_user_id_fk" AFTER DELETE ON "users"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
+
+
+CREATE CONSTRAINT TRIGGER "user_plugin_user_id_fk" AFTER UPDATE ON "users"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_plugin_user_id_fk', 'user_plugin', 'users', 'FULL', 'user_id', 'user_id');
+
+
+CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER INSERT OR UPDATE ON "user_plugin"  FROM "plugins" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_check_ins" ('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER DELETE ON "plugins"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_del" ('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
+CREATE CONSTRAINT TRIGGER "user_plugin_plugin_id_fk" AFTER UPDATE ON "plugins"  FROM "user_plugin" NOT DEFERRABLE INITIALLY IMMEDIATE FOR EACH ROW EXECUTE PROCEDURE "RI_FKey_noaction_upd" ('user_plugin_plugin_id_fk', 'user_plugin', 'plugins', 'FULL', 'plugin_id', 'plugin_id');
+
+
 CREATE RULE forum_insert_agg AS ON INSERT TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count + 1) WHERE (forum_agg_msg_count.group_forum_id = new.group_forum_id);
 
 CREATE RULE forum_delete_agg AS ON DELETE TO forum DO UPDATE forum_agg_msg_count SET count = (forum_agg_msg_count.count - 1) WHERE (forum_agg_msg_count.group_forum_id = old.group_forum_id);
 
 CREATE RULE artifact_insert_agg AS ON INSERT TO artifact DO UPDATE artifact_counts_agg SET count = (artifact_counts_agg.count + 1), open_count = (artifact_counts_agg.open_count + 1) WHERE (artifact_counts_agg.group_artifact_id = new.group_artifact_id);
+
+CREATE RULE frs_dlstats_file_rule AS ON INSERT TO frs_dlstats_file DO UPDATE frs_dlstats_filetotal_agg SET downloads = (frs_dlstats_filetotal_agg.downloads + 1) WHERE (frs_dlstats_filetotal_agg.file_id = new.file_id);
 
 SELECT setval ('"canned_responses_pk_seq"', 1, false);
 
@@ -4073,10 +4098,10 @@ SELECT setval ('"trove_treesum_trove_treesum_seq"', 1, false);
 SELECT setval ('"group_cvs_history_id_seq"', 1, false);
 
 
-SELECT setval ('"themes_theme_id_seq"', 1, false);
+SELECT setval ('"themes_theme_id_seq"', 2, true);
 
 
-SELECT setval ('"supported_langu_language_id_seq"', 23, true);
+SELECT setval ('"supported_langu_language_id_seq"', 24, true);
 
 
 SELECT setval ('"skills_data_pk_seq"', 1, false);
@@ -4089,4 +4114,13 @@ SELECT setval ('"project_categor_category_id_seq"', 100, true);
 
 
 SELECT setval ('"project_messa_project_messa_seq"', 1, false);
+
+
+SELECT setval ('"plugins_pk_seq"', 1, false);
+
+
+SELECT setval ('"group_plugin_pk_seq"', 1, false);
+
+
+SELECT setval ('"user_plugin_pk_seq"', 1, false);
 
