@@ -10,7 +10,60 @@
 
 <section name="Introduction">
 <p>
-Surveys allow you to 
+Surveys allow you to ask questions to your developer/users and view the results. Surveys are often very helpful if you
+need some feedback from the users, examples of surveys might be:
+<ol>
+<li>User feedback: ask users if they like your project</li>
+<li>Developer feedback: ask developers on new features to be implemented</li>
+</ol>
+Of course, surveys are not limited to this list. Basically, you can ask everything you want with surveys.
+</p>
+</section>
+<section name="Administering survey questions">
+<p>
+Before you can add/modify existing surveys, you need to administer the questions for your surveys. Questions are global
+for all surveys.
+
+Gforge surveys handle the following question types:
+<ol>
+<li>Radio Buttons 1-5: This type of question shows 5 radio buttons where the user can select between 1 (low) and 5 (high).
+This is useful for indicating priorities or quality feedback (e.g.: the question might be: did you like the new xxx feature. The user can select (1 (not very much), 2,3,4, 5(really)</li>
+<li>Radio Buttons Yes/No. This type of question allows only two choices: Yes or No.</li>
+<li>Comment Only</li>
+<li>Text field: This type of question allows the user to insert some text in a text field.</li>
+<li>Text area: This type of question allows the user to insert some text in a textarea</li>
+</ol>
+
+When inserting new questions or modifying existing questions, take note of the ID of the question. You'll need them when creating/modifying surveys.
+
+</p>
+</section>
+<section name="Creating a new survey">
+<p>You can create a new survey by clicking on the "Admin" link and then "Add a new survey".<br/>
+You'll be asked to insert the following data:
+<ul>
+<li><b>Survey name:</b><br/>
+The name of the survey </li>
+<li><b>Question list:</b><br/>
+Here you should insert the IDs of the questions in the order they should appear. If you wish to see question 4 first,
+then question 6, then question 1, you should insert here 4,6,1.
+<br/>
+<b>ATTENTION</b>: Don't insert spaces or any other character between the numbers</li>
+<li><b>Active</b>:
+This flag indicates if the survey is active or not.</li>
+</ul>
+</p>
+</section>
+<section name="Modifying a survey">
+<p>You can modify an existing survey, although this is not recommended if answers to the survey have already been given.
+You should know that the results of a survey ar not consistent if you modify the survey and users have already inserted answers.
+
+</p>
+</section>
+
+<section name="Viewing survey results">
+<p>
+You can view the results of the surveys cliccking on the "View Results" tab.
 </p>
 </section>
 </body>

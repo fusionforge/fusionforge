@@ -134,6 +134,9 @@ There is nothing that you can do here.
 </subsection>
 <subsection name ="VHosts">
 <p>
+This section allows you to handle the different virtual hosts needed for your project. A small interface is presented where you can add, modify or delete virtualhosts.
+<br/>
+Note that these virtualhosts are not created immedately, they are created by a backend script (be sure that the backend script is configured in your crontab).
 </p>
 </subsection>
 <subsection name ="Edit/Release Files">
@@ -208,6 +211,14 @@ This allows you to publish screenshots of your project.
 
 <subsection name="Stats">
 <p>
+This section shows you information about your project:
+
+<ol>
+<li>Usage statistics: a graph shows you for the latest 30 days the number of views/dowloads for each day.</li>
+
+<li>Lifetime statistics: this stat shows you, for the lifetime of the project, the number of visits/downloads, number of items inserted in the tracker, number of
+items in the PM/Task manager</li>
+</ol>
 </p>
 </subsection>
 </p>

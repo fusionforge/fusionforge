@@ -17,7 +17,12 @@ The sidewide functions handle data that are not relevant to a single project, as
 <p/>
 The single side-wide functions available to the users are:
 
-
+<ol>
+<li>Project help</li>
+<li>Search</li>
+<li>Snippet Library</li>
+<li>Trove map</li>
+</ol>
 
 </p>
 </section>

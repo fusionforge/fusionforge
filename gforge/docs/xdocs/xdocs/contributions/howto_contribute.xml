@@ -3,6 +3,7 @@
 
   <properties>
     <title>Gforge: How to contribute</title>
+    <author>Reinhard Spisser</author>
   </properties>
 
   <body>
@@ -10,14 +11,16 @@
 
 <section name="Contributing">
 <p>
-There are several ways to contribute to the Gforge project. The first and the easiest one is to give us a feedback about the software. 
+There are several ways to contribute to the Gforge project. 
 <br/>
 
 <ol>
-<li>If you find a bug, submit a bug to the Bug tracker at http://gforge.org. If you know how to solve the bug, you can attach a patch to the bug. </li>
+<li>the first one is to give us a feedback about the software: what you like, what you don't like, features you like to be added in new versions, comments on documentation, etc</li>
+<li>You are willing to help develop new features. Give a look at the PM/Task Manager. The three subprojects (Todo, Documentation, Localization) lists the open tasks. You can pick up one of the open tasks and start working on it </li>
+<li>If you find a bug, submit a bug to the Bug tracker at http://gforge.org/tracker/?group_id=1. If you already solved the bug and are willing to share the fix with us, please add a patch to the bug.  </li>
 <li>If you have developed some new feature, submit a patch to the patch manager of gforge. The submitted patch should follow the Coding and Templating standards described in this document. </li>
 <li>Documentation: there are some parts of Gforge that are not well documented. Refer to the Task Manager, Documentation subproject for a list of open tasks. You should write the documentation in the xdoc format as described in this section.</li>
-<li>Localization: Gforge needs to be translated in various languages. <br/>Refer to the Localization Howto document to see how to add a new language</li>
+<li>Localization: The user interface of gforge is now nearly completely localized. We need translators for the different languages. <br/>If you like to translate gforge to a new, not listed language, you can refer to the Localization Howto document to see how to add a new language</li>
 </ol>
 
 
