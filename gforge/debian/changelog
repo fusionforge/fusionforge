@@ -9,8 +9,29 @@ sourceforge (2.5-14+) unstable; urgency=low
     "invoke-rc.d slapd restart" (policy).
   * install-ldap.sh: Clean the LDAP directory on package removal (closes:
     #118516).
+  * Rewrote grap.c (cvssh) in Perl, to allow for a greater portability.
+    Switched the architecture to arch: all accordingly.
+  * Merged in patch from Justin Richer: fix the changing of a user's
+    password by the admin.
+  * Also from Justin's patch (slightly rewritten): admin now sees a list
+    of pending projects on his homepage.
+  * This was not in Justin's patch, but he inspired the idea: news admin
+    sees a list of pending news bytes on his personal page too.
+  * Still from Justin's patch (a bit rewritten): fixed "My Projects" links
+    on personal pages so that they point to the right place in case the
+    project is a foundry.
+  * Added sf_ldap_modify_if_exists() to www/include/ldap.php.  Works the
+    same as sf_ldap_modify, but returns a non-error if the LDAP entry does
+    not exist.  Patched sf_ldap_user_set_attribute to use this new
+    function, so that even users with no account (or no account yet) can
+    change their passwords and personal info.
+  * Fixed install-cvs.sh so that it no longer inserts too many lines in
+    the inetd.conf file.
+  * Slightly rewrote the template handling in postinst script, to allow
+    parsing for files not in /etc/sourceforge (not needed yet, but it
+    might come in handy).
 
- -- Roland Mas <lolando@debian.org>  Fri,  9 Nov 2001 17:31:22 +0100
+ -- Roland Mas <lolando@debian.org>  Sun, 18 Nov 2001 19:15:17 +0100
 
 sourceforge (2.5-14) unstable; urgency=low
 
