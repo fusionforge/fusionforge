@@ -1,5 +1,30 @@
 #! /usr/bin/php4 -f
 <?php
+/**
+ * GForge Cron Job
+ *
+ * The rest Copyright 2002-2005 (c) GForge Team
+ * http://gforge.org/
+ *
+ * @version   $Id$
+ *
+ * This file is part of GForge.
+ *
+ * GForge is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * GForge is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with GForge; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
+
 /*
 
 This file creates user / group permissions by editing 
@@ -36,11 +61,11 @@ require ('common/include/cron_utils.php');
 //
 //	Default values for the script
 //
-define('DEFAULT_SHELL','/bin/false'); //use /bin/grap for cvs-only
+define('DEFAULT_SHELL','/bin/cvssh.pl'); //use /bin/grap for cvs-only
 define('USER_ID_ADD',10000);
 define('GROUP_ID_ADD',50000);
 define('USER_DEFAULT_GROUP','users');
-define('FILE_EXTENSION','.new'); // use .new when testing
+define('FILE_EXTENSION',''); // use .new when testing
 define('CVS_ROOT','/cvsroot/');
 
 if (!file_exists('/etc/passwd.org')) {
